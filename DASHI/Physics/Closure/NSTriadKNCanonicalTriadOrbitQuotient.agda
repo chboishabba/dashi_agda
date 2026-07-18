@@ -259,15 +259,17 @@ orbitRepresentativesCover :
   Σ Lattice.LatticeTriad
     (λ σ → (σ ∈ orbitRepresentatives xs) ×
       Orbit.SameCanonicalTriadOrbit τ σ)
+{-# TERMINATING #-}
 orbitRepresentativesCover {[]} ()
 orbitRepresentativesCover {pivot ∷ xs} {τ} (here eq)
   rewrite eq = pivot , (here refl , sameOrbitRefl pivot)
 orbitRepresentativesCover {pivot ∷ xs} {τ} (there τ∈xs)
-  with sameOrbit? τ pivot
-... | true = pivot , (here refl , sameOrbitSound τ pivot refl)
+  with sameOrbit? τ pivot in orbitResult
+... | true = pivot , (here refl , sameOrbitSound τ pivot orbitResult)
 ... | false
   with orbitRepresentativesCover
-    (∈-filter⁺ (T? ∘ notSameOrbit? pivot) τ∈xs (tNotFromFalse refl))
+    (∈-filter⁺ (T? ∘ notSameOrbit? pivot) τ∈xs
+      (tNotFromFalse orbitResult))
 ... | σ , σ∈ , τ~σ = σ , (there σ∈ , τ~σ)
 
 laterRepresentativeNotSame :
@@ -278,7 +280,9 @@ laterRepresentativeNotSame :
 laterRepresentativeNotSame {pivot} {τ} {xs} τ∈reps =
   boolFalseFromTNot
     (proj₂ (∈-filter⁻ (T? ∘ notSameOrbit? pivot)
-      (orbitRepresentativesSubset τ∈reps)))
+      {v = τ} {xs = xs}
+      (orbitRepresentativesSubset
+        {xs = removeOrbit pivot xs} {τ = τ} τ∈reps)))
 
 orbitRepresentativesSeparate :
   {xs : List Lattice.LatticeTriad} →
@@ -291,12 +295,16 @@ orbitRepresentativesSeparate {pivot ∷ xs} (here refl) (here refl) same = refl
 orbitRepresentativesSeparate {pivot ∷ xs} {σ = σ}
   (here refl) (there σ∈later) same =
   ⊥-elim (false≢true
-    (trans (sym (laterRepresentativeNotSame σ∈later))
+    (trans
+      (sym (laterRepresentativeNotSame
+        {pivot = pivot} {τ = σ} {xs = xs} σ∈later))
       (sameOrbitComplete σ pivot (sameOrbitSym same))))
 orbitRepresentativesSeparate {pivot ∷ xs} {τ = τ}
   (there τ∈later) (here refl) same =
   ⊥-elim (false≢true
-    (trans (sym (laterRepresentativeNotSame τ∈later))
+    (trans
+      (sym (laterRepresentativeNotSame
+        {pivot = pivot} {τ = τ} {xs = xs} τ∈later))
       (sameOrbitComplete τ pivot same)))
 orbitRepresentativesSeparate {pivot ∷ xs}
   (there τ∈later) (there σ∈later) same =
@@ -322,7 +330,8 @@ attachRepresentatives :
   List Energy.ZeroSumTriad
 attachRepresentatives R [] retained = []
 attachRepresentatives R (τ ∷ τs) retained =
-  Energy.mkZeroSumTriad τ (zeroSumFromRetained (retained τ (here refl))) ∷
+  Energy.mkZeroSumTriad τ
+    (zeroSumFromRetained {R = R} {τ = τ} (retained τ (here refl))) ∷
   attachRepresentatives R τs (λ σ σ∈ → retained σ (there σ∈))
 
 canonicalZeroSumRepresentatives : Nat → List Energy.ZeroSumTriad
@@ -355,7 +364,8 @@ attachedRepresentativeForMember R [] retained τ ()
 attachedRepresentativeForMember R (pivot ∷ xs) retained τ (here eq)
   rewrite eq =
   Energy.mkZeroSumTriad pivot
-      (zeroSumFromRetained (retained pivot (here refl))) ,
+      (zeroSumFromRetained {R = R} {τ = pivot}
+        (retained pivot (here refl))) ,
     (here refl , refl)
 attachedRepresentativeForMember R (pivot ∷ xs) retained τ (there τ∈xs)
   with attachedRepresentativeForMember R xs
