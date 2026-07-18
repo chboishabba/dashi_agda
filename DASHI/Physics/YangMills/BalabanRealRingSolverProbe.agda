@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.BalabanRealRingSolverProbe where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.List.Base using ([]; _∷_)
+open import Data.List.Base using (List; []; _∷_)
 
 import Tactic.RingSolver as Solver
 
@@ -21,6 +21,9 @@ open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
   ; realSolverRing
   )
 
+emptyRealVariables : List ℝ
+emptyRealVariables = []
+
 solverRawRingProbe :
   ∀ (a b c : ℝ) →
   -R ((a +R b) *R c)
@@ -32,4 +35,4 @@ solverRawRingConstantProbe :
   -R (oneR *R oneR)
     ≡ oneR *R (-R (oneR *R oneR))
 solverRawRingConstantProbe =
-  Solver.solve [] realSolverRing
+  Solver.solve emptyRealVariables realSolverRing
