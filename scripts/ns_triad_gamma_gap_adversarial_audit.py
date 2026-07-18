@@ -35,7 +35,7 @@ from ns_triad_gamma_gap_core import (  # noqa: E402
     normalize_probability,
     parse_wavevector,
 )
-from ns_triad_gamma_gap_search import audit_problem  # noqa: E402
+from ns_triad_gamma_gap_search import audit_problem, window_rows  # noqa: E402
 
 SCHEMA_VERSION = "1.0.0"
 SCRIPT_NAME = "scripts/ns_triad_gamma_gap_adversarial_audit.py"
@@ -307,6 +307,22 @@ def main() -> int:
     counterexample_count = sum(
         int(result["target_counterexample_count"]) for result in results
     )
+    observed_rows = [
+        row
+        for result in results
+        for row in result.get("input_profile_rows", [])
+    ]
+    observed_windows = window_rows(
+        observed_rows, config.window_sizes, config.target_eta
+    )
+    interval_counterexample_count = sum(
+        1 for row in observed_windows if row["target_counterexample"]
+    )
+    worst_observed_window = max(
+        observed_windows,
+        key=lambda row: float(row["average_gamma"]),
+        default=None,
+    )
     payload = {
         "schema_version": SCHEMA_VERSION,
         "script": SCRIPT_NAME,
@@ -330,6 +346,10 @@ def main() -> int:
         "problem_count": len(results),
         "sampled_counterexample_count": counterexample_count,
         "no_counterexample_sampled": counterexample_count == 0,
+        "observed_window_count": len(observed_windows),
+        "sampled_interval_counterexample_count": interval_counterexample_count,
+        "no_interval_counterexample_sampled": interval_counterexample_count == 0,
+        "worst_observed_window": worst_observed_window,
         "results": results,
     }
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
