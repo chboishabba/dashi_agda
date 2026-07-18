@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Bool.Base using (_∧_)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
 open import Data.Integer.Properties as ℤP using (+-assoc; +-comm)
+import Data.Integer.Base as ℤ
 open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
@@ -108,3 +109,34 @@ zeroSumSwap :
   (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
   Lattice.zeroSum? (Lattice.triadSwap τ) ≡ true
 zeroSumSwap τ zeroSum rewrite zeroSumSwapInvariant τ = zeroSum
+
+------------------------------------------------------------------------
+-- Reality negation preserves the exact Boolean zero-sum predicate.
+-- Together with cycle and swap, this supplies the zero-sum component of all
+-- twelve permutation/reality actions used by the canonical triad orbit.
+------------------------------------------------------------------------
+
+isZeroNegInvariant :
+  (z : ℤ) → Lattice.isZero (ℤ.- z) ≡ Lattice.isZero z
+isZeroNegInvariant (+ zero) = refl
+isZeroNegInvariant (+ suc n) = refl
+isZeroNegInvariant -[1+ n ] = refl
+
+zeroSumNegInvariant :
+  (τ : Lattice.LatticeTriad) →
+  Lattice.zeroSum? (Lattice.triadNeg τ) ≡ Lattice.zeroSum? τ
+zeroSumNegInvariant (Lattice.mkLatticeTriad p q r)
+  rewrite sym (ℤP.neg-distrib-+ (Lattice.k₁ p) (Lattice.k₁ q))
+        | sym (ℤP.neg-distrib-+ ((Lattice.k₁ p) ℤ.+ (Lattice.k₁ q)) (Lattice.k₁ r))
+        | sym (ℤP.neg-distrib-+ (Lattice.k₂ p) (Lattice.k₂ q))
+        | sym (ℤP.neg-distrib-+ ((Lattice.k₂ p) ℤ.+ (Lattice.k₂ q)) (Lattice.k₂ r))
+        | sym (ℤP.neg-distrib-+ (Lattice.k₃ p) (Lattice.k₃ q))
+        | sym (ℤP.neg-distrib-+ ((Lattice.k₃ p) ℤ.+ (Lattice.k₃ q)) (Lattice.k₃ r))
+        | isZeroNegInvariant (((Lattice.k₁ p) ℤ.+ (Lattice.k₁ q)) ℤ.+ Lattice.k₁ r)
+        | isZeroNegInvariant (((Lattice.k₂ p) ℤ.+ (Lattice.k₂ q)) ℤ.+ Lattice.k₂ r)
+        | isZeroNegInvariant (((Lattice.k₃ p) ℤ.+ (Lattice.k₃ q)) ℤ.+ Lattice.k₃ r) = refl
+
+zeroSumNeg :
+  (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+  Lattice.zeroSum? (Lattice.triadNeg τ) ≡ true
+zeroSumNeg τ zeroSum rewrite zeroSumNegInvariant τ = zeroSum

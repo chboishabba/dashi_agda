@@ -296,6 +296,99 @@ cutoffModesComplete R k k∈exact =
       (∈-filter⁺ (T? ∘ Lattice.nonzeroMode?) (decoded∈cube c)
         (nonzeroAtDecoded c decoded nonzero))
 
+------------------------------------------------------------------------
+-- Reality closure of the symmetric finite cutoff.
+--
+-- This is the first concrete closure fact needed by the canonical
+-- permutation/reality quotient.  It is deliberately proved against the
+-- signed-coordinate predicate and then transported through the exact list
+-- enumerator, so no unproved assumption about the decoder's symmetry enters
+-- the orbit construction.
+------------------------------------------------------------------------
+
+isZeroNegInvariant :
+  (z : ℤ) → Lattice.isZero (ℤ.- z) ≡ Lattice.isZero z
+isZeroNegInvariant (+ zero) = refl
+isZeroNegInvariant (+ suc n) = refl
+isZeroNegInvariant -[1+ n ] = refl
+
+nonzeroModeNegInvariant :
+  (k : Lattice.LatticeMode3) →
+  Lattice.nonzeroMode? (Lattice.modeNeg k) ≡ Lattice.nonzeroMode? k
+nonzeroModeNegInvariant (Lattice.mkLatticeMode3 k₁ k₂ k₃)
+  rewrite isZeroNegInvariant k₁
+        | isZeroNegInvariant k₂
+        | isZeroNegInvariant k₃ = refl
+
+coordinateInCutoffNeg :
+  (R : Nat) → (z : ℤ) →
+  T (coordinateInCutoff? R z) → T (coordinateInCutoff? R (ℤ.- z))
+coordinateInCutoffNeg R z z∈ =
+  Equivalence.from T-∧
+    (ℤP.≤⇒≤ᵇ lowerBound , ℤP.≤⇒≤ᵇ upperBound)
+  where
+  bounds : T ((ℤ.- (+ R)) ℤ.≤ᵇ z) × T (z ℤ.≤ᵇ (+ R))
+  bounds = Equivalence.to T-∧ z∈
+
+  lowerBound : (ℤ.- (+ R)) ℤ.≤ (ℤ.- z)
+  lowerBound = ℤP.neg-mono-≤ (ℤP.≤ᵇ⇒≤ (proj₂ bounds))
+
+  upperBefore : (ℤ.- z) ℤ.≤ (ℤ.- (ℤ.- (+ R)))
+  upperBefore = ℤP.neg-mono-≤ (ℤP.≤ᵇ⇒≤ (proj₁ bounds))
+
+  substRight :
+    {a b c : ℤ} → b ≡ c → a ℤ.≤ b → a ℤ.≤ c
+  substRight refl p = p
+
+  upperBound : (ℤ.- z) ℤ.≤ (+ R)
+  upperBound = substRight (ℤP.neg-involutive (+ R)) upperBefore
+
+inExactCutoffNeg :
+  (R : Nat) → (k : Lattice.LatticeMode3) →
+  T (inExactCutoff? R k) → T (inExactCutoff? R (Lattice.modeNeg k))
+inExactCutoffNeg R (Lattice.mkLatticeMode3 k₁ k₂ k₃) k∈ =
+  Equivalence.from T-∧
+    (nonzero , Equivalence.from T-∧
+      (coordinateInCutoffNeg R k₁ firstCoordinate , Equivalence.from T-∧
+        (coordinateInCutoffNeg R k₂ secondCoordinate ,
+         coordinateInCutoffNeg R k₃ thirdCoordinate)))
+  where
+  splitOuter :
+    T (Lattice.nonzeroMode? (Lattice.mkLatticeMode3 k₁ k₂ k₃)) ×
+    T (coordinateInCutoff? R k₁ ∧
+      (coordinateInCutoff? R k₂ ∧ coordinateInCutoff? R k₃))
+  splitOuter = Equivalence.to T-∧ k∈
+
+  nonzero : T (Lattice.nonzeroMode?
+    (Lattice.modeNeg (Lattice.mkLatticeMode3 k₁ k₂ k₃)))
+  nonzero rewrite nonzeroModeNegInvariant (Lattice.mkLatticeMode3 k₁ k₂ k₃) =
+    proj₁ splitOuter
+
+  splitCoordinates :
+    T (coordinateInCutoff? R k₁) ×
+    T (coordinateInCutoff? R k₂ ∧ coordinateInCutoff? R k₃)
+  splitCoordinates = Equivalence.to T-∧ (proj₂ splitOuter)
+
+  firstCoordinate : T (coordinateInCutoff? R k₁)
+  firstCoordinate = proj₁ splitCoordinates
+
+  finalCoordinates :
+    T (coordinateInCutoff? R k₂) × T (coordinateInCutoff? R k₃)
+  finalCoordinates = Equivalence.to T-∧ (proj₂ splitCoordinates)
+
+  secondCoordinate : T (coordinateInCutoff? R k₂)
+  secondCoordinate = proj₁ finalCoordinates
+
+  thirdCoordinate : T (coordinateInCutoff? R k₃)
+  thirdCoordinate = proj₂ finalCoordinates
+
+cutoffModesNeg :
+  (R : Nat) → (k : Lattice.LatticeMode3) →
+  k ∈ cutoffModes R → Lattice.modeNeg k ∈ cutoffModes R
+cutoffModesNeg R k k∈ =
+  cutoffModesComplete R (Lattice.modeNeg k)
+    (inExactCutoffNeg R k (cutoffModesSound R k k∈))
+
 -- Geometric monotonicity of the exact integer cube.  This is independent of
 -- its finite decoder/list representation and is the order-theoretic part of
 -- the `R ≤ M` cutoff inclusion needed by the outer-window decomposition.
