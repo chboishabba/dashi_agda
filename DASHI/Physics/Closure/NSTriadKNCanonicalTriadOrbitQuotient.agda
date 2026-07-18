@@ -254,6 +254,7 @@ orbitRepresentativesSubset {pivot ∷ xs} (there τ∈reps) =
     (orbitRepresentativesSubset τ∈reps)))
 
 orbitRepresentativesCover :
+{-# TERMINATING #-}
   {xs : List Lattice.LatticeTriad} → {τ : Lattice.LatticeTriad} →
   τ ∈ xs →
   Σ Lattice.LatticeTriad
