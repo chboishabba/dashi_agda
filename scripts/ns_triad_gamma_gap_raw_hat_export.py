@@ -45,6 +45,8 @@ def parse_args() -> argparse.Namespace:
                         help="number of global exact transfer atoms retained while building the carrier")
     parser.add_argument("--transfer-rank-counts", default="1,8,64,512,2048,8192",
                         help="comma-separated top-atom ranks reported in the gross-activity capture curve")
+    parser.add_argument("--aggregate-only", action="store_true",
+                        help="write full transfer-rank and shell/angle receipts without a selected-triad audit carrier")
     parser.add_argument("--trajectory-id", default="N32-positive-chi-attempt1")
     parser.add_argument("--duration-c", type=float, default=None,
                         help="parabolic-window fraction per saved segment; defaults to segment_window_c")
@@ -161,6 +163,7 @@ def transfer_ranked_modes(
     max_pairs: int,
     seed_count: int,
     rank_counts: tuple[int, ...],
+    collect_seeds: bool = True,
 ) -> tuple[list[tuple[int, int, int]], dict[str, float | int]]:
     """Build a reality-closed carrier from exact full packet-transfer atoms.
 
@@ -215,16 +218,23 @@ def transfer_ranked_modes(
         p_shell = dyadic_shell(p_norm) - target_shell
         q_shell = dyadic_shell(q_norm) - target_shell
         angle_bin = np.minimum(11, np.maximum(0, ((cosine + 1.0) * 6.0).astype(np.int64)))
-        for local, value in enumerate(transfer):
-            group_key = (int(p_shell[local]), int(q_shell[local]), int(angle_bin[local]))
+        # Aggregate this output's atoms in vectorised form.  A Python update
+        # per atom makes the exact full-convolution census needlessly slow.
+        group_labels = np.column_stack((p_shell, q_shell, angle_bin))
+        unique_labels, inverse = np.unique(group_labels, axis=0, return_inverse=True)
+        signed_bins = np.bincount(inverse, weights=transfer)
+        gross_bins = np.bincount(inverse, weights=np.abs(transfer))
+        count_bins = np.bincount(inverse)
+        for local, label in enumerate(unique_labels):
+            group_key = (int(label[0]), int(label[1]), int(label[2]))
             group = coarse_groups.setdefault(group_key, {"signed_rate": 0.0, "gross_activity": 0.0, "atom_count": 0})
-            group["signed_rate"] = float(group["signed_rate"]) + float(value)
-            group["gross_activity"] = float(group["gross_activity"]) + abs(float(value))
-            group["atom_count"] = int(group["atom_count"]) + 1
+            group["signed_rate"] = float(group["signed_rate"]) + float(signed_bins[local])
+            group["gross_activity"] = float(group["gross_activity"]) + float(gross_bins[local])
+            group["atom_count"] = int(group["atom_count"]) + int(count_bins[local])
         repeated = np.all(p == q, axis=1)
         repeated_rate += float(np.sum(transfer[repeated]))
         repeated_gross += float(np.sum(np.abs(transfer[repeated])))
-        for local in np.flatnonzero(~repeated):
+        for local in np.flatnonzero(~repeated) if collect_seeds else ():
             absolute = float(abs(transfer[local]))
             if absolute == 0.0:
                 continue
@@ -237,6 +247,29 @@ def transfer_ranked_modes(
             elif absolute > heap[0][0]:
                 heapq.heapreplace(heap, entry)
 
+    coarse_receipt = [
+        {
+            "p_shell_offset": key[0], "q_shell_offset": key[1], "angle_bin": key[2],
+            "signed_rate": float(value["signed_rate"]),
+            "gross_activity": float(value["gross_activity"]),
+            "gross_activity_fraction": float(value["gross_activity"]) / full_gross if full_gross > 0.0 else 0.0,
+            "atom_count": int(value["atom_count"]),
+        }
+        for key, value in sorted(coarse_groups.items(), key=lambda item: float(item[1]["gross_activity"]), reverse=True)
+    ]
+    if not collect_seeds:
+        return [], {
+            "full_packet_signed_rate": full_rate,
+            "full_packet_gross_activity": full_gross,
+            "full_repeated_input_signed_rate": repeated_rate,
+            "full_repeated_input_gross_activity": repeated_gross,
+            "transfer_seed_count_considered": 0,
+            "transfer_seed_count_accepted": 0,
+            "accepted_seed_gross_activity": 0.0,
+            "accepted_seed_signed_rate": 0.0,
+            "top_atom_gross_capture_curve": [],
+            "coarse_shell_angle_groups": coarse_receipt,
+        }
     ordered = sorted(heap, reverse=True)
     capture_curve: list[dict[str, float | int]] = []
     running_gross = 0.0
@@ -257,16 +290,6 @@ def transfer_ranked_modes(
                 "gross_activity_fraction": running_gross / full_gross if full_gross > 0.0 else 0.0,
                 "lower_bound": True,
             })
-    coarse_receipt = [
-        {
-            "p_shell_offset": key[0], "q_shell_offset": key[1], "angle_bin": key[2],
-            "signed_rate": float(value["signed_rate"]),
-            "gross_activity": float(value["gross_activity"]),
-            "gross_activity_fraction": float(value["gross_activity"]) / full_gross if full_gross > 0.0 else 0.0,
-            "atom_count": int(value["atom_count"]),
-        }
-        for key, value in sorted(coarse_groups.items(), key=lambda item: float(item[1]["gross_activity"]), reverse=True)
-    ]
     chosen_reps: set[tuple[int, int, int]] = set()
     accepted = 0
     accepted_seed_gross = 0.0
@@ -301,7 +324,7 @@ def transfer_ranked_modes(
 def export_problem(state_path: Path, time: float, duration: float, target_shell: int,
                    max_pairs: int, target_pairs: int, selection: str,
                    transfer_seed_count: int, rank_counts: tuple[int, ...],
-                   trajectory_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
+                   trajectory_id: str, aggregate_only: bool = False) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     with np.load(state_path, allow_pickle=False) as data:
         raw = np.asarray(data["raw_hat"], dtype=np.complex128)
         nu = float(data["nu"]) if "nu" in data else 1.0e-3
@@ -314,10 +337,25 @@ def export_problem(state_path: Path, time: float, duration: float, target_shell:
     full_transfer_receipt: dict[str, float | int] = {}
     if selection == "transfer":
         selected, full_transfer_receipt = transfer_ranked_modes(
-            field, wave, norm, dealias, target_shell, max_pairs, transfer_seed_count, rank_counts
+            field, wave, norm, dealias, target_shell, max_pairs, transfer_seed_count, rank_counts,
+            collect_seeds=not aggregate_only,
         )
     else:
         selected = select_modes(field, norm, dealias, signed, target_shell, max_pairs, target_pairs)
+    if aggregate_only:
+        receipt: dict[str, Any] = {
+            "source_state": str(state_path),
+            "physical_viscosity": nu,
+            "target_shell": target_shell,
+            "selection_method": selection,
+            "aggregate_only": True,
+            "carrier_scope": "full dealiased target-packet ordered-pair enumeration; no finite audit carrier emitted",
+            "truth_authority": False,
+            "theorem_authority": False,
+            "promoted": False,
+        }
+        receipt.update(full_transfer_receipt)
+        return None, receipt
     mode_index = {mode: index for index, mode in enumerate(selected)}
     packet = packet_mask(norm, target_shell)
     amplitudes_sq = np.asarray([
@@ -448,8 +486,9 @@ def main() -> None:
         problem, receipt = export_problem(state, time, duration, args.target_shell,
                                           args.max_mode_pairs, args.target_mode_pairs,
                                           args.selection, args.transfer_seed_count, rank_counts,
-                                          args.trajectory_id)
-        problems.append(problem)
+                                          args.trajectory_id, args.aggregate_only)
+        if problem is not None:
+            problems.append(problem)
         receipts.append(receipt)
         time += duration
     payload = {

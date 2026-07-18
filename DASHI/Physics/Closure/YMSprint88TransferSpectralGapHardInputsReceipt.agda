@@ -126,14 +126,14 @@ record Sprint88TransferSpectralGapHardInputsBoundary : Set₁ where
   field
     gateAAuthorityReceipt :
       GateA.ClaySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt
-    gateALocalOscillationAuthorityAvailable :
-      GateA.balabanCMP98LocalOscillationBoundForQhpAuthority ≡ true
-    gateALocalOscillationNotDerived :
-      GateA.balabanCMP98LocalOscillationBoundForQhpProvedInRepo ≡ false
+    gateALocalOscillationAuthorityNotActive :
+      GateA.balabanCMP98LocalOscillationBoundForQhpAuthority ≡ false
+    gateALocalOscillationIsDerived :
+      GateA.balabanCMP98LocalOscillationBoundForQhpProvedInRepo ≡ true
     gateAAnisotropicAssumptionAConditional :
       GateA.anisotropicAssumptionAReceiptClosedConditionally ≡ true
-    gateAAnisotropicAssumptionANotUnconditional :
-      GateA.anisotropicAssumptionAUnconditionalInRepo ≡ false
+    gateAAnisotropicAssumptionAIsUnconditional :
+      GateA.anisotropicAssumptionAUnconditionalInRepo ≡ true
 
     gateBSupportInterfaceReceipt :
       GateB.ClaySprintEightyOneYMEffectiveActionSupportInterfaceReceipt
@@ -235,10 +235,10 @@ canonicalSprint88TransferSpectralGapHardInputsBoundary =
   record
     { gateAAuthorityReceipt =
         GateA.claySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt
-    ; gateALocalOscillationAuthorityAvailable = refl
-    ; gateALocalOscillationNotDerived = refl
+    ; gateALocalOscillationAuthorityNotActive = refl
+    ; gateALocalOscillationIsDerived = refl
     ; gateAAnisotropicAssumptionAConditional = refl
-    ; gateAAnisotropicAssumptionANotUnconditional = refl
+    ; gateAAnisotropicAssumptionAIsUnconditional = refl
     ; gateBSupportInterfaceReceipt =
         GateB.claySprintEightyOneYMEffectiveActionSupportInterfaceReceipt
     ; gateBEffectiveActionAuthorityConditional = refl

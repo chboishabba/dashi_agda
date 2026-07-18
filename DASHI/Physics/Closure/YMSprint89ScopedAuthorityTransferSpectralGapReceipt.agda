@@ -115,10 +115,10 @@ record Sprint89ScopedAuthorityBoundary : Set₁ where
     sprint88HardInputsRecorded :
       Sprint88.YMSprint88TransferSpectralGapHardInputsReceipt
 
-    gateALocalOscillationAuthorityAvailable :
-      GateA.balabanCMP98LocalOscillationBoundForQhpAuthority ≡ true
-    gateALocalOscillationNotNative :
-      GateA.balabanCMP98LocalOscillationBoundForQhpProvedInRepo ≡ false
+    gateALocalOscillationAuthorityNotActive :
+      GateA.balabanCMP98LocalOscillationBoundForQhpAuthority ≡ false
+    gateALocalOscillationIsNative :
+      GateA.balabanCMP98LocalOscillationBoundForQhpProvedInRepo ≡ true
     gateAAnisotropicAssumptionAConditional :
       GateA.anisotropicAssumptionAReceiptClosedConditionally ≡ true
 
@@ -223,8 +223,8 @@ canonicalSprint89ScopedAuthorityBoundary =
   record
     { sprint88HardInputsRecorded =
         Sprint88.canonicalYMSprint88TransferSpectralGapHardInputsReceipt
-    ; gateALocalOscillationAuthorityAvailable = refl
-    ; gateALocalOscillationNotNative = refl
+    ; gateALocalOscillationAuthorityNotActive = refl
+    ; gateALocalOscillationIsNative = refl
     ; gateAAnisotropicAssumptionAConditional = refl
     ; gateBWeakSupportStillUnproved = refl
     ; gateBWeakSupportAuthorityConditional = refl

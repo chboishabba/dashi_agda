@@ -28,7 +28,7 @@ false ∧ _ = false
 -- and period-3 window of the logistic map.
 ------------------------------------------------------------------------
 
-record ChaosBridge : Set where
+record ChaosBridge : Set₁ where
   constructor chaosBridge
   field
     traceReceipt      : Receipt.DyadicNonaryTraceReceipt
