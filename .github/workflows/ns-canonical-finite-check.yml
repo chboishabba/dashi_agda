@@ -47,6 +47,7 @@ jobs:
             "$AGDA_BIN" --version
             targets=(
               DASHI/Physics/Closure/NSTriadKNCanonicalTriadOrbitEnumerationConcrete.agda
+              DASHI/Physics/Closure/NSTriadKNCanonicalOrbitFoldEquality.agda
             )
             cd "$CHECK_ROOT"
             for target in "${targets[@]}"; do
