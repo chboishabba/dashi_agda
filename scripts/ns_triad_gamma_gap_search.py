@@ -144,9 +144,13 @@ def audit_problem(problem: Problem, config: SearchConfig) -> dict[str, Any]:
     for profile_id, probability, source, metadata in candidate_profiles(problem, config):
         normalized = normalize_probability(probability, config.zero_eps)
         key = np.round(normalized, 14).tobytes()
-        if key in seen:
-            continue
-        seen.add(key)
+        # Preserve every trajectory sample even when two times carry the same
+        # probability vector.  Deduplication is only for generated search rows;
+        # dropping repeated input states would corrupt duration-weighted windows.
+        if source != "input":
+            if key in seen:
+                continue
+            seen.add(key)
         rows.append(
             evaluate_profile(
                 problem,
@@ -221,6 +225,10 @@ def audit_problem(problem: Problem, config: SearchConfig) -> dict[str, Any]:
         ),
         "worst_window": worst_window,
         "window_count": len(windows),
+        "window_target_counterexample_count": sum(
+            1 for row in windows if row["target_counterexample"]
+        ),
+        "input_profile_rows": input_rows,
         "max_finite_identity_residual": max_identity_residual,
         "profile_samples": sorted(
             feasible_rows, key=lambda row: float(row["gamma"]), reverse=True
