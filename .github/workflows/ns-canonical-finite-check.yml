@@ -27,6 +27,12 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/dashi-agda29
+          key: ns-agda29-${{ runner.os }}-86a1179-experimental-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+
       - name: Check focused Navier-Stokes modules with Agda 2.9
         id: focused
         shell: bash
@@ -36,7 +42,7 @@ jobs:
             set -euo pipefail
             export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
-            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export DASHI_AGDA29_CACHE_ROOT="$GITHUB_WORKSPACE/.cache/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-focused-check.log"
             export AGDA_JOBS=4
             targets=(
