@@ -352,7 +352,7 @@ private
       +R (natCoefficient n +R (-R natCoefficient n))
       ≡⟨ cong
            ((natCoefficient q +R (-R natCoefficient m)) +R_)
-           (+-inverseʳ (natCoefficient n)) ⟩
+           (-‿inverseʳ (natCoefficient n)) ⟩
     (natCoefficient q +R (-R natCoefficient m)) +R zeroR
       ≡⟨ +-identityʳ
            (natCoefficient q +R (-R natCoefficient m)) ⟩
@@ -383,7 +383,9 @@ coefficientWeakEquality :
     (LegacyACR.Induced-equivalence coefficientMorphism)
 coefficientWeakEquality (coefficient p n) (coefficient q m)
   with NatP._≟_ (p Nat.+ m) (q Nat.+ n)
-... | yes cross = just (crossEqualityImpliesCoefficientEquality cross)
+... | yes cross = just
+  (crossEqualityImpliesCoefficientEquality
+    {p = p} {n = n} {q = q} {m = m} cross)
 ... | no _ = nothing
 
 module RealPolynomialSolver =
