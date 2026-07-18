@@ -133,3 +133,30 @@ def test_adversarial_search_includes_single_triad_extremizer_seed():
     assert result["worst_profile"]["profile_id"].startswith("triad-seed")
     assert result["target_counterexample_count"] >= 1
     assert result["no_counterexample_sampled"] is False
+
+
+def test_audit_preserves_repeated_equal_trajectory_states():
+    repeated = (
+        {
+            "profile_id": "t0",
+            "trajectory_id": "same",
+            "time": 0.0,
+            "duration": 1.0,
+            "cutoff": 3,
+            "probability": [0.2, 0.3, 0.5],
+        },
+        {
+            "profile_id": "t1",
+            "trajectory_id": "same",
+            "time": 1.0,
+            "duration": 2.0,
+            "cutoff": 3,
+            "probability": [0.2, 0.3, 0.5],
+        },
+    )
+    result = audit_problem(basic_problem(profiles=repeated), config())
+    assert len(result["input_profile_rows"]) == 2
+    whole = next(
+        row for row in [result["worst_window"]] if row["window_size"] == 2
+    )
+    assert np.isclose(whole["interval_length"], 3.0)
