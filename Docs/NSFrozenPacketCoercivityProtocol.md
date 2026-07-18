@@ -52,6 +52,38 @@ each checkpoint. The protocol records the first post-peak time each factor is
 at most 80% of its pre-peak maximum. The 80% threshold is fixed before panel
 comparison and is not fitted from one trajectory.
 
+## Oriented convolution-atom refinement
+
+The packet-level alignment factor sees the already-summed forcing. When the
+same fixed panel is replayed with `--triad-coherence-samples-per-output`, the
+audit additionally samples oriented finite convolution atoms
+
+\[
+N_k=\sum_p N_{k,p},\qquad q=k-p.
+\]
+
+Its sampled unsigned denominators, paired with the exact resultant forcing and
+packet pairing, distinguish inter-atom cancellation from rotation of the
+already-summed resultant:
+
+\[
+C_{\mathrm{vec}}=
+\frac{\|\sum_{k,p}N_{k,p}\|_w}{\sum_{k,p}\|N_{k,p}\|_w},
+\qquad
+C_\phi=
+\frac{|\sum_{k,p}\langle u_k,N_{k,p}\rangle_w|}
+{\sum_{k,p}|\langle u_k,N_{k,p}\rangle_w|}.
+\]
+
+The convention is ordered convolution atoms rather than canonical unordered
+triads: their finite sum reconstructs the nonlinear RHS exactly and permits
+uniform input sampling. The normal-approximation intervals cover only
+within-output Monte-Carlo sampling; they are not certified enclosures.
+
+This is a post-processing replay of the four state-anchored profiles. It does
+not select new profiles, alter the admissible slice, or turn temporal ordering
+into a causal or continuum claim.
+
 ## Interpretation boundary
 
 Radial width and angular concentration are secondary explanatory observables.

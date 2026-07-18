@@ -1,0 +1,124 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "frozen_packet_oriented_atom_coherence_comparison_nonpromoting",
+  "event_rule": "focused start, sampled frozen-packet peak, then first post-peak adjacent positive-input/viscous-loss window at most one",
+  "traces": [
+    {
+      "authority": {
+        "candidate_only": true,
+        "clay_authority": false,
+        "empirical_non_promoting": true,
+        "promoted": false,
+        "theorem_authority": false
+      },
+      "events": {
+        "focus": {
+          "coherence": {
+            "atom_convention": "ordered p,q=k-p Fourier convolution atoms; not canonical unordered triads",
+            "geometry": 0.121086131442817,
+            "packet_alignment": 0.07850601587050185,
+            "phase": 0.002798621353253631,
+            "phase_nominal_95_percent_interval": [
+              0.0026955305119808716,
+              0.0029099112061943635
+            ],
+            "positive_transfer_efficiency": 0.0027986213532534944,
+            "raw_forcing": 1238153.224852232,
+            "sign": 0.00439573544415269,
+            "sign_nominal_95_percent_interval": [
+              0.004217535986042153,
+              0.0045896578046019185
+            ],
+            "status": "available",
+            "vector": 0.00013485937496170375,
+            "vector_nominal_95_percent_interval": [
+              0.00013157939195641946,
+              0.00013830706393855728
+            ]
+          },
+          "gamma": 1.5872775641355912,
+          "packet": 1.1166098098774533,
+          "time": 1.094
+        },
+        "gamma_downcrossing_sample": {
+          "coherence": {
+            "atom_convention": "ordered p,q=k-p Fourier convolution atoms; not canonical unordered triads",
+            "geometry": 0.10853222854976875,
+            "packet_alignment": 0.05861512526295544,
+            "phase": 0.0019072431370986318,
+            "phase_nominal_95_percent_interval": [
+              0.001842210320185396,
+              0.001977035486774221
+            ],
+            "positive_transfer_efficiency": 0.0019072431370985733,
+            "raw_forcing": 1174462.5294221498,
+            "sign": 0.0030007893431381353,
+            "sign_nominal_95_percent_interval": [
+              0.0028852247819246184,
+              0.0031259978077507805
+            ],
+            "status": "available",
+            "vector": 0.00012619174765893834,
+            "vector_nominal_95_percent_interval": [
+              0.0001233216018020624,
+              0.00012919867454805838
+            ]
+          },
+          "gamma": 0.9428411709899204,
+          "packet": 1.1425317019828074,
+          "time": 1.797
+        },
+        "peak": {
+          "coherence": {
+            "atom_convention": "ordered p,q=k-p Fourier convolution atoms; not canonical unordered triads",
+            "geometry": 0.10925804497129087,
+            "packet_alignment": 0.060028216258543036,
+            "phase": 0.0019979779172820903,
+            "phase_nominal_95_percent_interval": [
+              0.0019308509344478923,
+              0.0020699404143248398
+            ],
+            "positive_transfer_efficiency": 0.001997977917282025,
+            "raw_forcing": 1210877.2156481738,
+            "sign": 0.0031247697413164135,
+            "sign_nominal_95_percent_interval": [
+              0.003008618368671304,
+              0.0032502495808971036
+            ],
+            "status": "available",
+            "vector": 0.00012348239534561704,
+            "vector_nominal_95_percent_interval": [
+              0.00012067198484902484,
+              0.00012642683437869795
+            ]
+          },
+          "gamma": 0.9806499633856764,
+          "packet": 1.1429692164429488,
+          "time": 1.738
+        }
+      },
+      "focus_to_peak_retention": {
+        "geometry": 0.9023167531195597,
+        "packet_alignment": 0.764632055173472,
+        "phase": 0.7139150549820804,
+        "positive_transfer_efficiency": 0.7139150549820918,
+        "raw_forcing": 0.9779704089473147,
+        "sign": 0.7108639227761205,
+        "vector": 0.9156382000189646
+      },
+      "postpeak_gamma_window": {
+        "end_time": 1.797,
+        "positive_coercivity_ratio": 0.9616231842412053,
+        "positive_nonlinear_input": 0.01093541537795956,
+        "start_time": 1.738,
+        "viscous_loss": 0.011371830002818042
+      },
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/baseline_parabolic.json",
+      "warning": "finite-Galerkin descriptive comparison only. Oriented atom coherence distinguishes sampled convolution-atom cancellation from rotation of the exact resultant, but it is not a causal or continuum claim."
+    }
+  ]
+}

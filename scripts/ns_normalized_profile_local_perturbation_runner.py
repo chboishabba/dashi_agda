@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -39,6 +40,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--python", default=sys.executable)
     parser.add_argument("--audit-script", type=Path, default=Path("scripts/ns_normalized_profile_quotient_audit.py"))
+    parser.add_argument("--audit-extra-arguments", default="",
+                        help=("extra fixed audit arguments applied to every selected manifest entry; use for a "
+                              "state-anchored measurement replay, never for candidate selection"))
     return parser.parse_args()
 
 
@@ -131,7 +135,10 @@ def main() -> None:
         partial_json = output_json.with_name(f".{output_json.name}.runner.partial")
         partial_stdout = stdout.with_name(f".{stdout.name}.runner.partial")
         partial_stderr = stderr.with_name(f".{stderr.name}.runner.partial")
-        command = [args.python, str(args.audit_script), *stage_arguments(entry, args.stage), "--output-json", str(partial_json)]
+        command = [
+            args.python, str(args.audit_script), *stage_arguments(entry, args.stage),
+            *shlex.split(args.audit_extra_arguments), "--output-json", str(partial_json),
+        ]
         print(f"[{ordinal}/{len(requested)}] {identity} stage={args.stage}", flush=True)
         atomic_text(status, json.dumps(execution_status(
             identity, args.stage, command, output_json, stdout, stderr, checksum_path, "running",
@@ -205,6 +212,7 @@ def main() -> None:
         "manifest": str(args.manifest),
         "stage": args.stage,
         "requested_ids": requested,
+        "audit_extra_arguments": args.audit_extra_arguments,
         "successful": sum(bool(row["receipt_promoted"]) for row in rows),
         "failed": sum(not bool(row["receipt_promoted"]) for row in rows),
         "rows": rows,
