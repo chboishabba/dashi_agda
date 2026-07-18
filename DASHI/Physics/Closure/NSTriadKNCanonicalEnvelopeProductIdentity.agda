@@ -22,6 +22,7 @@ canonicalBlockContributions :
   (same? : A → A → Bool) →
   (A → Scalar.Scalar (Algebra.orderedScalar K)) →
   List A → List (Scalar.Scalar (Algebra.orderedScalar K))
+{-# TERMINATING #-}
 canonicalBlockContributions K same? f [] = []
 canonicalBlockContributions K same? f (pivot ∷ xs) =
   Scalar._+_ S (f pivot)
@@ -40,6 +41,7 @@ sumCanonicalBlockContributions :
   Fold.sumBy (Algebra.orderedScalar K) (λ x → x)
     (canonicalBlockContributions K same? f xs) ≡
   Fold.canonicalFoldBy K same? f xs
+{-# TERMINATING #-}
 sumCanonicalBlockContributions K same? f [] = refl
 sumCanonicalBlockContributions K same? f (pivot ∷ xs) =
   cong (Scalar._+_ S block)
