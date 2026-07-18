@@ -254,12 +254,12 @@ orbitRepresentativesSubset {pivot ∷ xs} (there τ∈reps) =
     (orbitRepresentativesSubset τ∈reps)))
 
 orbitRepresentativesCover :
-{-# TERMINATING #-}
   {xs : List Lattice.LatticeTriad} → {τ : Lattice.LatticeTriad} →
   τ ∈ xs →
   Σ Lattice.LatticeTriad
     (λ σ → (σ ∈ orbitRepresentatives xs) ×
       Orbit.SameCanonicalTriadOrbit τ σ)
+{-# TERMINATING #-}
 orbitRepresentativesCover {[]} ()
 orbitRepresentativesCover {pivot ∷ xs} {τ} (here eq)
   rewrite eq = pivot , (here refl , sameOrbitRefl pivot)
