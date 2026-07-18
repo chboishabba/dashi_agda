@@ -29,6 +29,11 @@ open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   ( zeroCoefficient
   ; module RealPolynomialSolver
   )
+open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
+  ( conjugateProduct1Polynomial
+  ; conjugateProduct2Polynomial
+  ; conjugateProduct3Polynomial
+  )
 open RealPolynomialSolver using
   ( Polynomial
   ; solve
@@ -410,11 +415,7 @@ quaternionConjugateMultiply a@(quat a₀ a₁ a₂ a₃) b@(quat b₀ b₁ b₂ 
       | q1Conjugate (quat a₀ a₁ a₂ a₃)
       | q2Conjugate (quat a₀ a₁ a₂ a₃)
       | q3Conjugate (quat a₀ a₁ a₂ a₃)
-      | [-x][-y]≈xy b₂ a₃
-      | [-x][-y]≈xy b₃ a₂ =
-    Solver.solve
-      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ [])
-      realSolverRing
+      = conjugateProduct1Polynomial a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃
 
   conjugateMultiply2 :
     ∀ a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ →
@@ -436,12 +437,8 @@ quaternionConjugateMultiply a@(quat a₀ a₁ a₂ a₃) b@(quat b₀ b₁ b₂ 
       | q0Conjugate (quat a₀ a₁ a₂ a₃)
       | q1Conjugate (quat a₀ a₁ a₂ a₃)
       | q2Conjugate (quat a₀ a₁ a₂ a₃)
-      | q3Conjugate (quat a₀ a₁ a₂ a₃)
-      | [-x][-y]≈xy b₁ a₃
-      | [-x][-y]≈xy b₃ a₁ =
-    Solver.solve
-      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ [])
-      realSolverRing
+      | q3Conjugate (quat a₀ a₁ a₂ a₃) =
+    conjugateProduct2Polynomial a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃
 
   conjugateMultiply3 :
     ∀ a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ →
@@ -463,12 +460,8 @@ quaternionConjugateMultiply a@(quat a₀ a₁ a₂ a₃) b@(quat b₀ b₁ b₂ 
       | q0Conjugate (quat a₀ a₁ a₂ a₃)
       | q1Conjugate (quat a₀ a₁ a₂ a₃)
       | q2Conjugate (quat a₀ a₁ a₂ a₃)
-      | q3Conjugate (quat a₀ a₁ a₂ a₃)
-      | [-x][-y]≈xy b₁ a₂
-      | [-x][-y]≈xy b₂ a₁ =
-    Solver.solve
-      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ [])
-      realSolverRing
+      | q3Conjugate (quat a₀ a₁ a₂ a₃) =
+    conjugateProduct3Polynomial a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃
 
 adjointQuaternionMultiply :
   ∀ a b X →
@@ -481,11 +474,8 @@ adjointQuaternionMultiply a b X =
     (trans
       (cong (λ q → (a *q (b *q X)) *q q)
         (quaternionConjugateMultiply a b))
-      (trans
-        (sym (quaternionMultiplyAssociative a (b *q X)
-          (conjugateQ b *q conjugateQ a)))
-        (cong (λ q → a *q q)
-          (quaternionMultiplyAssociative b X (conjugateQ b)))))
+      (sym (quaternionMultiplyAssociative
+        (a *q (b *q X)) (conjugateQ b) (conjugateQ a))))
 
 su2AdjointMultiply :
   ∀ u v X →
