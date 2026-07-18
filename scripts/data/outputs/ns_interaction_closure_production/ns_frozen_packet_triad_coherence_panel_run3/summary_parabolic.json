@@ -1,0 +1,32 @@
+{
+  "audit_extra_arguments": "--mechanism-trace-count 24 --triad-coherence-samples-per-output 8 --triad-coherence-batch-size 512",
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "sequential_local_perturbation_stage_receipt_nonpromoting",
+  "failed": 0,
+  "manifest": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_coercivity_focus_manifest.json",
+  "requested_ids": [
+    "baseline"
+  ],
+  "rows": [
+    {
+      "chi_signed": 0.16518290321070614,
+      "frozen_integrated_nonlinear_input": 1.2537599034055527,
+      "frozen_packet_recurrence_ratio": 0.1123491209482769,
+      "id": "baseline",
+      "moving_packet_recurrence_ratio": 0.10985284416502171,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/baseline_parabolic.json",
+      "receipt_promoted": true,
+      "returncode": 0,
+      "stage": "parabolic",
+      "status": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/baseline_parabolic.status.json",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/baseline_parabolic.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/baseline_parabolic.stdout"
+    }
+  ],
+  "stage": "parabolic",
+  "successful": 1
+}

@@ -96,6 +96,11 @@ def parse_args() -> argparse.Namespace:
                         help="start fraction of the evolved window for evenly spaced mechanism telemetry")
     parser.add_argument("--mechanism-trace-end-fraction", type=float, default=1.0,
                         help="end fraction of the evolved window for evenly spaced mechanism telemetry")
+    parser.add_argument("--triad-coherence-samples-per-output", type=int, default=0,
+                        help=("when positive, estimate oriented convolution-atom coherence at every mechanism "
+                              "checkpoint using this many uniform input samples per frozen-packet output"))
+    parser.add_argument("--triad-coherence-batch-size", type=int, default=512,
+                        help="output-mode batch size for the optional triad-coherence estimator")
     parser.add_argument("--moving-packet-radius", type=int, default=1)
     parser.add_argument("--cfd-root", type=Path, default=DEFAULT_CFD_ROOT)
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
@@ -418,6 +423,154 @@ def frozen_packet_coercivity_factors(
     }
 
 
+def oriented_atom_vectors(
+    field_flat: np.ndarray, wave_flat: np.ndarray, output_flat: np.ndarray, input_flat: np.ndarray,
+) -> np.ndarray:
+    """Return oriented Fourier convolution atoms for ``N(output)``.
+
+    The atoms are indexed by an output coefficient ``k`` and one ordered input
+    coefficient ``p``; the other input is ``q = k - p`` on the FFT torus.  This
+    is deliberately an *oriented atom* decomposition rather than a canonical
+    unordered triad decomposition.  It has the exact finite identity
+
+        sum_p atom(k, p) = N_hat(k),
+
+    which makes uniform input sampling straightforward.  The associated
+    unsigned atom sums are empirical estimators, not formal triad bounds.
+    """
+    n = int(round(field_flat.shape[1] ** (1.0 / 3.0)))
+    output_coords = np.column_stack(np.unravel_index(output_flat, (n, n, n)))
+    input_coords = np.column_stack(np.unravel_index(input_flat.ravel(), (n, n, n))).reshape(
+        input_flat.shape + (3,)
+    )
+    other_coords = (output_coords[:, None, :] - input_coords) % n
+    other_flat = np.ravel_multi_index(other_coords.reshape(-1, 3).T, (n, n, n)).reshape(input_flat.shape)
+    up = field_flat[:, input_flat]
+    uq = field_flat[:, other_flat]
+    kq = wave_flat[:, other_flat]
+    atoms = -1j * np.sum(kq * up, axis=0)[None, :] * uq
+    output_wave = wave_flat[:, output_flat]
+    output_norm_sq = np.sum(output_wave * output_wave, axis=0)
+    nonzero = output_norm_sq > 0.0
+    if np.any(nonzero):
+        dot = np.sum(output_wave[:, :, None] * atoms, axis=0)
+        atoms[:, nonzero, :] -= (
+            output_wave[:, nonzero, None] * dot[None, nonzero, :] / output_norm_sq[nonzero][None, :, None]
+        )
+    return atoms
+
+
+def triad_coherence_estimate(
+    field_hat: np.ndarray, nonlinear_hat: np.ndarray, norm: np.ndarray, norm_sq: np.ndarray,
+    frozen_lower: int, frozen_upper: int, nu: float, samples_per_output: int,
+    batch_size: int, rng: np.random.Generator,
+) -> dict[str, Any]:
+    """Estimate cancellation among oriented convolution atoms in a frozen packet.
+
+    The total packet forcing and total packet pairing are computed exactly from
+    ``nonlinear_hat``.  Only the unsigned denominators are sampled.  Hence the
+    ratios below have an exact numerator and a Monte-Carlo denominator with a
+    stated normal-approximation interval.  They distinguish cancellation among
+    atoms from rotation of their already-summed resultant.
+    """
+    if samples_per_output <= 0:
+        return {"status": "disabled"}
+    n = field_hat.shape[1]
+    flat_count = n ** 3
+    flat_norm = norm.ravel()
+    flat_norm_sq = norm_sq.ravel()
+    mask = (flat_norm >= float(2 ** frozen_lower)) & (flat_norm < float(2 ** frozen_upper))
+    outputs = np.flatnonzero(mask)
+    if outputs.size == 0:
+        return {"status": "empty_frozen_packet"}
+    field_flat = field_hat.reshape(3, -1)
+    nonlinear_flat = nonlinear_hat.reshape(3, -1)
+    wave, _ = frequency_grid(n)
+    wave_flat = wave.reshape(3, -1)
+    weights = np.power(2.0, np.floor(np.log2(np.maximum(flat_norm[outputs], 1.0))))
+    exact_forcing_sq = float(np.sum(weights[None, :] * np.abs(nonlinear_flat[:, outputs]) ** 2))
+    exact_forcing_norm = math.sqrt(max(exact_forcing_sq, 0.0))
+    exact_pairing = np.sum(weights[None, :] * np.conjugate(field_flat[:, outputs]) * nonlinear_flat[:, outputs])
+    vector_sum = 0.0
+    vector_sq_error = 0.0
+    scalar_abs_sum = 0.0
+    scalar_abs_sq_error = 0.0
+    scalar_real_abs_sum = 0.0
+    scalar_real_abs_sq_error = 0.0
+    for start in range(0, outputs.size, batch_size):
+        batch = outputs[start:start + batch_size]
+        draw = rng.integers(0, flat_count, size=(batch.size, samples_per_output), dtype=np.int64)
+        atoms = oriented_atom_vectors(field_flat, wave_flat, batch, draw)
+        batch_weight = np.power(2.0, np.floor(np.log2(np.maximum(flat_norm[batch], 1.0))))
+        vector_values = np.sqrt(batch_weight[:, None] * np.sum(np.abs(atoms) ** 2, axis=0))
+        z_values = batch_weight[:, None] * np.sum(np.conjugate(field_flat[:, batch])[:, :, None] * atoms, axis=0)
+        scalar_values = np.abs(z_values)
+        scalar_real_values = np.abs(np.real(z_values))
+        population = float(flat_count)
+        vector_sum += float(population * np.sum(np.mean(vector_values, axis=1)))
+        scalar_abs_sum += float(population * np.sum(np.mean(scalar_values, axis=1)))
+        scalar_real_abs_sum += float(population * np.sum(np.mean(scalar_real_values, axis=1)))
+        if samples_per_output > 1:
+            vector_sq_error += float(np.sum(population ** 2 * np.var(vector_values, axis=1, ddof=1) / samples_per_output))
+            scalar_abs_sq_error += float(np.sum(population ** 2 * np.var(scalar_values, axis=1, ddof=1) / samples_per_output))
+            scalar_real_abs_sq_error += float(np.sum(population ** 2 * np.var(scalar_real_values, axis=1, ddof=1) / samples_per_output))
+    gradient_sq = float(np.sum(weights * flat_norm_sq[outputs] * np.sum(np.abs(field_flat[:, outputs]) ** 2, axis=0)))
+    packet_sq = float(np.sum(weights * np.sum(np.abs(field_flat[:, outputs]) ** 2, axis=0)))
+    gradient_norm = math.sqrt(max(gradient_sq, 0.0))
+    packet_norm = math.sqrt(max(packet_sq, 0.0))
+    signed_alignment = (
+        float(np.real(exact_pairing)) / (packet_norm * exact_forcing_norm)
+        if packet_norm * exact_forcing_norm > 1.0e-30 else 0.0
+    )
+    def ratio_interval(numerator: float, denominator: float, variance: float) -> list[float] | None:
+        if denominator <= 1.0e-30 or not math.isfinite(variance):
+            return None
+        error = 1.96 * math.sqrt(max(variance, 0.0))
+        lower_denominator = max(denominator - error, 1.0e-30)
+        upper_denominator = denominator + error
+        return [numerator / upper_denominator, min(1.0, numerator / lower_denominator)]
+    vector_coherence = exact_forcing_norm / vector_sum if vector_sum > 1.0e-30 else math.nan
+    phase_coherence = abs(exact_pairing) / scalar_abs_sum if scalar_abs_sum > 1.0e-30 else math.nan
+    sign_coherence = abs(float(np.real(exact_pairing))) / scalar_real_abs_sum if scalar_real_abs_sum > 1.0e-30 else math.nan
+    raw_forcing = vector_sum / (nu * gradient_norm) if gradient_norm > 1.0e-30 else math.nan
+    packet_geometry = packet_norm / gradient_norm if gradient_norm > 1.0e-30 else math.nan
+    reconstructed_gamma = raw_forcing * vector_coherence * packet_geometry * max(signed_alignment, 0.0)
+    direct_gamma = (
+        max(2.0 * float(np.real(exact_pairing)), 0.0) / (2.0 * nu * gradient_sq)
+        if gradient_sq > 1.0e-30 else math.nan
+    )
+    return {
+        "status": "sampled_oriented_convolution_atoms",
+        "atom_convention": "ordered p,q=k-p Fourier convolution atoms; not canonical unordered triads",
+        "sampled_output_mode_count": int(outputs.size),
+        "samples_per_output": int(samples_per_output),
+        "raw_triadic_forcing_to_viscous_gradient_ratio": raw_forcing,
+        "inter_triad_vector_coherence": vector_coherence,
+        "inter_triad_vector_coherence_nominal_95_percent_interval": ratio_interval(exact_forcing_norm, vector_sum, vector_sq_error),
+        "packet_direction_alignment_from_exact_resultant": max(signed_alignment, 0.0),
+        "packet_direction_alignment_signed": signed_alignment,
+        "packet_to_gradient_ratio": packet_geometry,
+        "scalar_phase_coherence": phase_coherence,
+        "scalar_phase_coherence_nominal_95_percent_interval": ratio_interval(abs(exact_pairing), scalar_abs_sum, scalar_abs_sq_error),
+        "scalar_real_sign_coherence": sign_coherence,
+        "scalar_real_sign_coherence_nominal_95_percent_interval": ratio_interval(abs(float(np.real(exact_pairing))), scalar_real_abs_sum, scalar_real_abs_sq_error),
+        "positive_transfer_efficiency": max(float(np.real(exact_pairing)), 0.0) / scalar_abs_sum if scalar_abs_sum > 1.0e-30 else math.nan,
+        "exact_resultant_forcing_norm": exact_forcing_norm,
+        "estimated_unsigned_vector_atom_sum": vector_sum,
+        "estimated_unsigned_scalar_pairing_sum": scalar_abs_sum,
+        "estimated_unsigned_real_pairing_sum": scalar_real_abs_sum,
+        "exact_packet_pairing_real": float(np.real(exact_pairing)),
+        "exact_packet_pairing_imaginary": float(np.imag(exact_pairing)),
+        "positive_coercivity_ratio_direct": direct_gamma,
+        "positive_coercivity_ratio_reconstructed": reconstructed_gamma,
+        "positive_coercivity_ratio_reconstruction_residual": reconstructed_gamma - direct_gamma,
+        "warning": (
+            "denominator intervals account only for independent uniform input sampling within each output; "
+            "they are not certified enclosures and do not imply a continuum triad-dephasing theorem"
+        ),
+    }
+
+
 def load_cfd_module(args: argparse.Namespace) -> Any:
     scripts_dir = args.cfd_root / "scripts"
     if not scripts_dir.is_dir():
@@ -457,6 +610,11 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
     frozen_factors = frozen_packet_coercivity_factors(
         field_hat, nonlinear, norm, norm_sq, frozen_lower, frozen_upper, args.nu,
     )
+    triad_coherence = triad_coherence_estimate(
+        field_hat, nonlinear, norm, norm_sq, frozen_lower, frozen_upper, args.nu,
+        args.triad_coherence_samples_per_output, args.triad_coherence_batch_size,
+        np.random.default_rng(args.seed + 1900003 + int(round(time / args.dt))),
+    )
     return {
         "time": time,
         "shell_packets": [float(value) for value in packets],
@@ -474,6 +632,7 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
         ),
         "frozen_initial_packet_viscous_rate": frozen_viscous,
         "frozen_initial_packet_coercivity_factors": frozen_factors,
+        "frozen_initial_packet_triad_coherence": triad_coherence,
         "moving_packet_if_previous_centre": float(np.sum(packets[previous_lower:previous_upper])),
         "checkpoint_recentering_jump": float(np.sum(packets[moving_lower:moving_upper]) - np.sum(packets[previous_lower:previous_upper])),
         "heat_moving_packet_exact_spectrum": heat_moving,
@@ -617,8 +776,9 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
         "mechanism_trace_start_fraction_requested": args.mechanism_trace_start_fraction,
         "mechanism_trace_end_fraction_requested": args.mechanism_trace_end_fraction,
         "mechanism_trace_contract": (
-            "fine frozen-packet rate and shape telemetry; coarse interaction sampling is retained only at the two endpoints "
-            "and must not be interpreted as a fine turnover trace"
+            "fine frozen-packet rate and shape telemetry; optional oriented convolution-atom coherence is sampled at "
+            "the same checkpoints. Coarse interaction sampling is retained only at the two endpoints and must not be "
+            "interpreted as a fine turnover trace"
         ),
         "backend": args.backend,
         "moving_packet_recurrence_ratio": endpoint["moving_packet"] / initial_row["moving_packet"],
@@ -821,7 +981,8 @@ def main() -> None:
     args = parse_args()
     if (args.n < 12 or args.nu <= 0.0 or args.critical_mass <= 0.0 or args.chi_attempts <= 0
             or args.dt <= 0.0 or args.window_c <= 0.0 or args.moving_packet_radius < 0
-            or args.mechanism_trace_count < 0):
+            or args.mechanism_trace_count < 0 or args.triad_coherence_samples_per_output < 0
+            or args.triad_coherence_batch_size <= 0):
         raise ValueError("n >= 12, nonnegative packet radius/trace count, and positive nu/mass/attempts/dt/window-c are required")
     if not (0.0 <= args.mechanism_trace_start_fraction < args.mechanism_trace_end_fraction <= 1.0):
         raise ValueError("mechanism trace fractions must satisfy 0 <= start < end <= 1")
@@ -947,6 +1108,8 @@ def main() -> None:
             "mechanism_trace_count": args.mechanism_trace_count,
             "mechanism_trace_start_fraction": args.mechanism_trace_start_fraction,
             "mechanism_trace_end_fraction": args.mechanism_trace_end_fraction,
+            "triad_coherence_samples_per_output": args.triad_coherence_samples_per_output,
+            "triad_coherence_batch_size": args.triad_coherence_batch_size,
             "selection_objective": args.selection_objective,
             "require_positive_short_input": args.require_positive_short_input,
         },
