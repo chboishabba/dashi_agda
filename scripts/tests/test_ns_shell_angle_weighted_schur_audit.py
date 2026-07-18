@@ -20,9 +20,27 @@ from ns_shell_angle_weighted_schur_audit import (  # noqa: E402
 
 def _groups() -> list[dict[str, float | int]]:
     return [
-        {"p_shell_offset": 0, "q_shell_offset": 0, "angle_bin": 0, "gross_activity_fraction": 0.50},
-        {"p_shell_offset": 1, "q_shell_offset": 0, "angle_bin": 0, "gross_activity_fraction": 0.25},
-        {"p_shell_offset": 1, "q_shell_offset": 1, "angle_bin": 1, "gross_activity_fraction": 0.25},
+        {
+            "p_shell_offset": 0,
+            "q_shell_offset": 0,
+            "angle_bin": 0,
+            "gross_activity": 0.50,
+            "gross_activity_fraction": 0.50,
+        },
+        {
+            "p_shell_offset": 1,
+            "q_shell_offset": 0,
+            "angle_bin": 0,
+            "gross_activity": 0.25,
+            "gross_activity_fraction": 0.25,
+        },
+        {
+            "p_shell_offset": 1,
+            "q_shell_offset": 1,
+            "angle_bin": 1,
+            "gross_activity": 0.25,
+            "gross_activity_fraction": 0.25,
+        },
     ]
 
 
