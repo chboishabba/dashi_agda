@@ -21,6 +21,9 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import Tactic.RingSolver as Solver
 
+open import DASHI.Foundations.RealAnalysisAxioms using (+-assoc; +-identityˡ; +-identityʳ)
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using (-‿inverseʳ)
+
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   ( zeroCoefficient
   ; module RealPolynomialSolver
@@ -114,23 +117,23 @@ lieAddAssociative
   (su2Lie x₂ y₂ z₂)
   (su2Lie x₃ y₃ z₃) =
   su2LieExt
-    (Solver.solve (x₁ ∷ x₂ ∷ x₃ ∷ []) realSolverRing)
-    (Solver.solve (y₁ ∷ y₂ ∷ y₃ ∷ []) realSolverRing)
-    (Solver.solve (z₁ ∷ z₂ ∷ z₃ ∷ []) realSolverRing)
+    (+-assoc x₁ x₂ x₃)
+    (+-assoc y₁ y₂ y₃)
+    (+-assoc z₁ z₂ z₃)
 
 lieZeroLeft : ∀ X → lieAdd lieZero X ≡ X
 lieZeroLeft (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (x ∷ []) realSolverRing)
-    (Solver.solve (y ∷ []) realSolverRing)
-    (Solver.solve (z ∷ []) realSolverRing)
+    (+-identityˡ x)
+    (+-identityˡ y)
+    (+-identityˡ z)
 
 lieZeroRight : ∀ X → lieAdd X lieZero ≡ X
 lieZeroRight (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (x ∷ []) realSolverRing)
-    (Solver.solve (y ∷ []) realSolverRing)
-    (Solver.solve (z ∷ []) realSolverRing)
+    (+-identityʳ x)
+    (+-identityʳ y)
+    (+-identityʳ z)
 
 adjointQuaternion :
   SU2Quaternion → SU2LieAlgebra → Quaternion
@@ -148,7 +151,7 @@ su2Adjoint u X = lieFromQuaternion (adjointQuaternion u X)
 adjointPureImaginaryCancellation :
   ∀ a₀ a₁ a₂ a₃ x y z →
   (((((((((((
-      -R ((a₀ *R a₁) *R x)
+      (-R ((a₀ *R a₁) *R x))
       +R (-R ((a₀ *R a₂) *R y)))
       +R (-R ((a₀ *R a₃) *R z)))
       +R ((a₁ *R a₀) *R x))
@@ -160,7 +163,7 @@ adjointPureImaginaryCancellation :
       +R ((a₃ *R a₀) *R z))
       +R ((a₃ *R a₁) *R y))
       +R (-R ((a₃ *R a₂) *R x)))
-    ≡ zeroR
+    ≡ a₀ +R (-R a₀)
 adjointPureImaginaryCancellation =
   solve 7
     (λ a₀ a₁ a₂ a₃ x y z →
@@ -177,7 +180,7 @@ adjointPureImaginaryCancellation =
         :+ ((a₃ :* a₀) :* z))
         :+ ((a₃ :* a₁) :* y))
         :+ :- ((a₃ :* a₂) :* x))
-      := con zeroCoefficient)
+      := (a₀ :+ (:- a₀)))
     refl
 
 -- The four component formulae expose the nested quaternion product.  Ring
@@ -189,7 +192,7 @@ adjointQuaternionRealPartExpanded :
       *q conjugateQ (quat a₀ a₁ a₂ a₃))
     ≡
   (((((((((((
-      -R ((a₀ *R a₁) *R x)
+      (-R ((a₀ *R a₁) *R x))
       +R (-R ((a₀ *R a₂) *R y)))
       +R (-R ((a₀ *R a₃) *R z)))
       +R ((a₁ *R a₀) *R x))
@@ -211,7 +214,9 @@ adjointQuaternionPureImaginary
   (su2Lie x y z) =
   trans
     (adjointQuaternionRealPartExpanded a₀ a₁ a₂ a₃ x y z)
-    (adjointPureImaginaryCancellation a₀ a₁ a₂ a₃ x y z)
+    (trans
+      (adjointPureImaginaryCancellation a₀ a₁ a₂ a₃ x y z)
+      (-‿inverseʳ a₀))
 
 lieQuaternionAdjoint :
   ∀ u X → lieQuaternion (su2Adjoint u X) ≡ adjointQuaternion u X

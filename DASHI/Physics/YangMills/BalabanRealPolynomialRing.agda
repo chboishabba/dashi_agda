@@ -73,6 +73,7 @@ open RealRingLaws public using
   ; *-identityʳ
   ; +-identityˡ
   ; +-identityʳ
+  ; -‿inverseʳ
   ; zeroˡ
   ; zeroʳ
   )

@@ -9,15 +9,84 @@ module DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using ([]; _∷_)
+import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
-  ( _+R_; _*R_; -R_ )
+  ( _+R_; _*R_; -R_; zeroR; -‿inverseʳ; realSolverRing )
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
-  ( module RealPolynomialSolver )
+  ( zeroCoefficient; module RealPolynomialSolver )
 open RealPolynomialSolver using
-  ( Polynomial; solve; _:=_; _:+_; _:*_; :-_ )
+  ( Polynomial; solve; con; _:=_; _:+_; _:*_; :-_ )
+
+------------------------------------------------------------------------
+-- Conjugate-product component cancellations
+------------------------------------------------------------------------
+
+-- These are deliberately presented as zero-free polynomials.  In
+-- particular, the imaginary components have zero on the right only after
+-- the quaternion scale-by-one component has been reduced by the real-ring
+-- annihilator law.
+
+rightConjugate0Polynomial :
+  ∀ a0 a1 a2 a3 →
+  (((a0 *R a0) +R (-R (a1 *R (-R a1))))
+    +R (-R (a2 *R (-R a2)))
+    +R (-R (a3 *R (-R a3))))
+  ≡
+  (((a0 *R a0) +R (a1 *R a1)) +R (a2 *R a2) +R (a3 *R a3))
+rightConjugate0Polynomial =
+  solve 4
+    (λ a0 a1 a2 a3 →
+      (((a0 :* a0) :+ (:- (a1 :* (:- a1))))
+        :+ (:- (a2 :* (:- a2)))
+        :+ (:- (a3 :* (:- a3))))
+      := (((a0 :* a0) :+ (a1 :* a1)) :+ (a2 :* a2) :+ (a3 :* a3)))
+    refl
+
+rightConjugate1Polynomial : ∀ a0 a1 a2 a3 →
+  (((a0 *R (-R a1)) +R (a1 *R a0))
+    +R (a2 *R (-R a3)) +R (-R (a3 *R (-R a2)))) ≡ a0 +R (-R a0)
+rightConjugate1Polynomial =
+  solve 4 (λ a0 a1 a2 a3 →
+    (((a0 :* (:- a1)) :+ (a1 :* a0))
+      :+ (a2 :* (:- a3)) :+ (:- (a3 :* (:- a2)))) :=
+      (a0 :+ (:- a0))) refl
+
+rightConjugate2Polynomial : ∀ a0 a1 a2 a3 →
+  (((a0 *R (-R a2)) +R (-R (a1 *R (-R a3))))
+    +R (a2 *R a0) +R (a3 *R (-R a1))) ≡ a0 +R (-R a0)
+rightConjugate2Polynomial =
+  solve 4 (λ a0 a1 a2 a3 →
+    (((a0 :* (:- a2)) :+ (:- (a1 :* (:- a3))))
+      :+ (a2 :* a0) :+ (a3 :* (:- a1))) :=
+      (a0 :+ (:- a0))) refl
+
+rightConjugate3Polynomial : ∀ a0 a1 a2 a3 →
+  (((a0 *R (-R a3)) +R (a1 *R (-R a2)))
+    +R (-R (a2 *R (-R a1))) +R (a3 *R a0)) ≡ a0 +R (-R a0)
+rightConjugate3Polynomial =
+  solve 4 (λ a0 a1 a2 a3 →
+    (((a0 :* (:- a3)) :+ (a1 :* (:- a2)))
+      :+ (:- (a2 :* (:- a1))) :+ (a3 :* a0)) :=
+      (a0 :+ (:- a0))) refl
+
+leftConjugate0Polynomial :
+  ∀ a0 a1 a2 a3 →
+  (((a0 *R a0) +R (-R ((-R a1) *R a1)))
+    +R (-R ((-R a2) *R a2)) +R (-R ((-R a3) *R a3)))
+  ≡
+  (((a0 *R a0) +R (a1 *R a1)) +R (a2 *R a2) +R (a3 *R a3))
+leftConjugate0Polynomial =
+  solve 4
+    (λ a0 a1 a2 a3 →
+      (((a0 :* a0) :+ (:- ((:- a1) :* a1)))
+        :+ (:- ((:- a2) :* a2)) :+ (:- ((:- a3) :* a3)))
+      := (((a0 :* a0) :+ (a1 :* a1)) :+ (a2 :* a2) :+ (a3 :* a3)))
+    refl
 
 q0R : ℝ → ℝ → ℝ → ℝ → ℝ → ℝ → ℝ → ℝ → ℝ
 q0R a0 a1 a2 a3 b0 b1 b2 b3 =
