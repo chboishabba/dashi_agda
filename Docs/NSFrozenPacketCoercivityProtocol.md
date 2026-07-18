@@ -84,6 +84,31 @@ This is a post-processing replay of the four state-anchored profiles. It does
 not select new profiles, alter the admissible slice, or turn temporal ordering
 into a causal or continuum claim.
 
+## Canonical reality-orbit reaggregation
+
+Ordered atoms are a computational basis, not the physical interaction unit.
+The follow-up replay therefore maps the triad behind every sampled atom to its
+unordered Fourier triple and identifies it with its reality partner. Before an
+absolute value is taken, it sums all retained packet-output legs and both
+input orders in that orbit. For a frozen packet weight this gives the finite
+orbit contribution (T^K_Delta), and the telemetry estimates
+
+\[
+C^K_{\rm triad}=
+\frac{|\sum_\Delta T^K_\Delta|}{\sum_\Delta|T^K_\Delta|},
+\qquad
+C_{\rm internal}=
+\frac{\sum_\Delta|T^K_\Delta|}
+{\sum_a|t_a|}.
+\]
+
+The first quantity is the canonical real-transfer coherence relevant to the
+packet-energy balance; the second records cancellation introduced *inside*
+the ordered-atom representation. The packet pairing in the numerator remains
+exact. Both unsigned envelopes are Monte-Carlo estimates, so this supplies a
+finite algebraic audit—not a certified inequality or a continuum triad
+dephasing theorem.
+
 ## Interpretation boundary
 
 Radial width and angular concentration are secondary explanatory observables.

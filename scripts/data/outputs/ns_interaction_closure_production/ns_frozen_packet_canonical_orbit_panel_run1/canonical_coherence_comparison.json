@@ -1,0 +1,110 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "frozen_packet_canonical_reality_orbit_coherence_comparison_nonpromoting",
+  "event_rule": "focused start, sampled frozen-packet peak, then first post-peak adjacent positive-input/viscous-loss window at most one",
+  "traces": [
+    {
+      "authority": {
+        "candidate_only": true,
+        "clay_authority": false,
+        "empirical_non_promoting": true,
+        "promoted": false,
+        "theorem_authority": false
+      },
+      "events": {
+        "focus": {
+          "canonical": {
+            "canonical_coherence": 0.04408592238596752,
+            "canonical_coherence_nominal_95_percent_interval": [
+              0.0403041631054056,
+              0.04865085592442907
+            ],
+            "estimated_regrouped_packet_pairing": 0.18370322918220372,
+            "exact_packet_pairing_real": 0.12088307755798217,
+            "internal_atom_retention": 0.09908065027851126,
+            "internal_atom_retention_nominal_95_percent_interval": [
+              0.09299852770895922,
+              0.10601398649160325
+            ],
+            "orbit_convention": "canonical unordered geometric triad modulo its reality partner; scalar packet transfer is the sum of all ordered convolution atoms for that orbit and frozen-packet output legs before absolute value",
+            "ordered_atom_envelope": 27.674305329032844,
+            "positive_efficiency": 0.04408592238596752,
+            "status": "available",
+            "unsigned_envelope": 2.741988168006644
+          },
+          "gamma": 1.5872775641355912,
+          "packet": 1.1166098098774533,
+          "time": 1.094
+        },
+        "gamma_downcrossing_sample": {
+          "canonical": {
+            "canonical_coherence": 0.03262930537229629,
+            "canonical_coherence_nominal_95_percent_interval": [
+              0.02998644798776015,
+              0.03578304629486884
+            ],
+            "estimated_regrouped_packet_pairing": 0.10964573866737942,
+            "exact_packet_pairing_real": 0.09145118904170946,
+            "internal_atom_retention": 0.09313907796360833,
+            "internal_atom_retention_nominal_95_percent_interval": [
+              0.08813304810153635,
+              0.09874804861462487
+            ],
+            "orbit_convention": "canonical unordered geometric triad modulo its reality partner; scalar packet transfer is the sum of all ordered convolution atoms for that orbit and frozen-packet output legs before absolute value",
+            "ordered_atom_envelope": 30.09189888275757,
+            "positive_efficiency": 0.03262930537229629,
+            "status": "available",
+            "unsigned_envelope": 2.8027317161141756
+          },
+          "gamma": 0.9428411709899204,
+          "packet": 1.1425317019828074,
+          "time": 1.797
+        },
+        "peak": {
+          "canonical": {
+            "canonical_coherence": 0.033204310264061676,
+            "canonical_coherence_nominal_95_percent_interval": [
+              0.030697999408377957,
+              0.03615625559059852
+            ],
+            "estimated_regrouped_packet_pairing": 0.13071832127029231,
+            "exact_packet_pairing_real": 0.09389483431353748,
+            "internal_atom_retention": 0.09424354077091697,
+            "internal_atom_retention_nominal_95_percent_interval": [
+              0.08901461713620622,
+              0.10012512099256994
+            ],
+            "orbit_convention": "canonical unordered geometric triad modulo its reality partner; scalar packet transfer is the sum of all ordered convolution atoms for that orbit and frozen-packet output legs before absolute value",
+            "ordered_atom_envelope": 30.0051389485196,
+            "positive_efficiency": 0.033204310264061676,
+            "status": "available",
+            "unsigned_envelope": 2.8277905358318356
+          },
+          "gamma": 0.9806499633856764,
+          "packet": 1.1429692164429488,
+          "time": 1.738
+        }
+      },
+      "focus_to_peak_retention": {
+        "canonical_coherence": 0.7531726335078464,
+        "internal_atom_retention": 0.9511800791173918,
+        "ordered_atom_envelope": 1.084223744436378,
+        "positive_efficiency": 0.7531726335078464,
+        "unsigned_envelope": 1.0312920270139487
+      },
+      "postpeak_gamma_window": {
+        "end_time": 1.797,
+        "positive_coercivity_ratio": 0.9616231842412053,
+        "positive_nonlinear_input": 0.01093541537795956,
+        "start_time": 1.738,
+        "viscous_loss": 0.011371830002818042
+      },
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_canonical_orbit_panel_run1/baseline.json",
+      "warning": "finite-Galerkin descriptive comparison only. Canonical orbit envelopes are sampled, and the exact packet pairing is retained separately. This is neither a certified bound nor a continuum triad-cancellation theorem."
+    }
+  ]
+}

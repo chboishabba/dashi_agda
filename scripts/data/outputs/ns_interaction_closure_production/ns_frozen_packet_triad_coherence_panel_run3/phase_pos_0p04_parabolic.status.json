@@ -1,10 +1,10 @@
 {
   "artifacts": {
-    "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.json",
-    "receipt_sha256": "4903be20449d944ab639f27a9da4b8791bd974ab4a491ab44bc7c047d29bfef3",
-    "receipt_sha256_file": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.sha256",
-    "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.stderr",
-    "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.stdout"
+    "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.json",
+    "receipt_sha256": "76d1b7b42e2144f45275f008cb62262e07a1d2ca209c83b69f2bda964ffb66d8",
+    "receipt_sha256_file": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.sha256",
+    "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.stderr",
+    "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.stdout"
   },
   "command": [
     "/usr/bin/python3",
@@ -20,11 +20,11 @@
     "--state-input",
     "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
     "--state-perturbation",
-    "radial",
+    "phase",
     "--perturb-epsilon",
-    "-0.04",
+    "0.04",
     "--perturb-seed",
-    "20284935",
+    "20265764",
     "--chi-sign",
     "positive",
     "--chi-target",
@@ -54,12 +54,12 @@
     "--triad-coherence-batch-size",
     "512",
     "--output-json",
-    "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/.radial_neg_0p04_parabolic.json.runner.partial"
+    "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/.phase_pos_0p04_parabolic.json.runner.partial"
   ],
   "contract": "durable_local_perturbation_execution_receipt_nonpromoting",
-  "id": "radial_neg_0p04",
+  "id": "phase_pos_0p04",
   "receipt_promoted": true,
-  "recorded_unix_time": 1784342679.1803946,
+  "recorded_unix_time": 1784343151.480453,
   "returncode": 0,
   "stage": "parabolic",
   "state": "promoted",
