@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalProfileUniformGammaGapReduction w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Primitive using (Set; Set₁)
+open import Agda.Primitive using (Set)
 open import Data.Product using (_×_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
