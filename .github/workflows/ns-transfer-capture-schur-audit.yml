@@ -1,0 +1,60 @@
+name: NS transfer capture and Schur audit
+
+on:
+  push:
+    paths:
+      - 'scripts/ns_triad_transfer_rank_capture_curve.py'
+      - 'scripts/ns_shell_angle_weighted_schur_audit.py'
+      - 'scripts/tests/test_ns_triad_transfer_rank_capture_curve.py'
+      - 'scripts/tests/test_ns_shell_angle_weighted_schur_audit.py'
+      - 'scripts/data/examples/ns_shell_angle_aggregate_example.json'
+      - 'docs/ns_transfer_capture_and_shell_schur_audit.md'
+      - '.github/workflows/ns-transfer-capture-schur-audit.yml'
+  pull_request:
+    paths:
+      - 'scripts/ns_triad_transfer_rank_capture_curve.py'
+      - 'scripts/ns_shell_angle_weighted_schur_audit.py'
+      - 'scripts/tests/test_ns_triad_transfer_rank_capture_curve.py'
+      - 'scripts/tests/test_ns_shell_angle_weighted_schur_audit.py'
+      - 'scripts/data/examples/ns_shell_angle_aggregate_example.json'
+      - 'docs/ns_transfer_capture_and_shell_schur_audit.md'
+      - '.github/workflows/ns-transfer-capture-schur-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  python-audits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install focused dependencies
+        run: python -m pip install --upgrade pip numpy pytest
+      - name: Run focused tests
+        run: |
+          python -m pytest -q \
+            scripts/tests/test_ns_triad_transfer_rank_capture_curve.py \
+            scripts/tests/test_ns_shell_angle_weighted_schur_audit.py
+      - name: Run shell-angle Schur example
+        run: |
+          python scripts/ns_shell_angle_weighted_schur_audit.py \
+            --input-json scripts/data/examples/ns_shell_angle_aggregate_example.json \
+            --output-json /tmp/ns-shell-angle-schur.json \
+            --source-exponents 0,0.5,1 \
+            --target-exponents 0,0.5,1 \
+            --pretty
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path('/tmp/ns-shell-angle-schur.json').read_text())
+          assert payload['authority']['theorem_authority'] is False
+          assert payload['authority']['clay_authority'] is False
+          assert payload['formal_pair_incidence_kernel_match_proved'] is False
+          assert len(payload['audits']) == 1
+          assert payload['audits'][0]['c_err_determined'] is False
+          PY
