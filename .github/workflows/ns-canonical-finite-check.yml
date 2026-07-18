@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - codex/ns-canonical-finite-closure
+      - codex/ns-canonical-profile-gamma-gap
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNCanonical*.agda'
@@ -53,6 +54,7 @@ jobs:
               DASHI/Physics/Closure/NSTriadKNCanonicalOrbitFoldEquality.agda
               DASHI/Physics/Closure/NSTriadKNExactComplexModalTransfer.agda
               DASHI/Physics/Closure/NSTriadKNCanonicalEnvelopeProductIdentity.agda
+              DASHI/Physics/Closure/NSTriadKNCanonicalProfileUniformGammaGapReduction.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-focused-check.log 2>&1
