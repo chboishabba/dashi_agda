@@ -12,78 +12,24 @@ module DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Algebra.Bundles using (CommutativeRing)
-open import Algebra.Structures using (IsCommutativeRing)
 open import Data.List.Base using ([]; _∷_)
-open import Data.Maybe.Base using (nothing)
-open import Level using (0ℓ)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import Tactic.RingSolver as Solver
-import Tactic.RingSolver.Core.AlmostCommutativeRing as ACR
 
-open import DASHI.Foundations.RealAnalysisAxioms using
-  ( ℝ
-  ; 0ℝ
-  ; 1ℝ
-  ; _+ℝ_
-  ; _*ℝ_
-  ; -ℝ_
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing public using
+  ( _+R_
+  ; _*R_
+  ; -R_
+  ; zeroR
+  ; oneR
+  ; realIsCommutativeRing
+  ; realCommutativeRing
+  ; realSolverRing
   )
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
   ( GroupStructure )
-
-------------------------------------------------------------------------
--- Real polynomial solver socket
-------------------------------------------------------------------------
-
-postulate
-  realIsCommutativeRing :
-    IsCommutativeRing _≡_ _+ℝ_ _*ℝ_ -ℝ_ 0ℝ 1ℝ
-
-realCommutativeRing : CommutativeRing 0ℓ 0ℓ
-{-# INLINE realCommutativeRing #-}
-realCommutativeRing = record
-  { Carrier = ℝ
-  ; _≈_ = _≡_
-  ; _+_ = _+ℝ_
-  ; _*_ = _*ℝ_
-  ; -_ = -ℝ_
-  ; 0# = 0ℝ
-  ; 1# = 1ℝ
-  ; isCommutativeRing = realIsCommutativeRing
-  }
-
-derivedRealSolverRing : ACR.AlmostCommutativeRing 0ℓ 0ℓ
-{-# INLINE derivedRealSolverRing #-}
-derivedRealSolverRing =
-  ACR.fromCommutativeRing realCommutativeRing (λ _ → nothing)
-
-realSolverRing : ACR.AlmostCommutativeRing 0ℓ 0ℓ
-{-# INLINE realSolverRing #-}
-realSolverRing = record
-  { Carrier = ℝ
-  ; _≈_ = _≡_
-  ; _+_ = _+ℝ_
-  ; _*_ = _*ℝ_
-  ; -_ = -ℝ_
-  ; 0# = 0ℝ
-  ; 0≟_ = λ _ → nothing
-  ; 1# = 1ℝ
-  ; isAlmostCommutativeRing =
-      ACR.AlmostCommutativeRing.isAlmostCommutativeRing
-        derivedRealSolverRing
-  }
-
-module R = ACR.AlmostCommutativeRing realSolverRing
-open R using ()
-  renaming
-    ( _+_ to _+R_
-    ; _*_ to _*R_
-    ; -_  to -R_
-    ; 0#  to zeroR
-    ; 1#  to oneR
-    )
 
 ------------------------------------------------------------------------
 -- Quaternion algebra
