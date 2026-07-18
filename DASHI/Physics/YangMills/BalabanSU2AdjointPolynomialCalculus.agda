@@ -21,6 +21,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( _*R_
   ; realSolverRing
+  ; emptyRealVariables
   )
 import Tactic.RingSolver as Solver
 
@@ -134,9 +135,9 @@ adPolynomialAdd :
         (adPolynomial coefficients Y Z)
 adPolynomialAdd [] Y X Z =
   su2LieExt
-    (Solver.solve [] realSolverRing)
-    (Solver.solve [] realSolverRing)
-    (Solver.solve [] realSolverRing)
+    (Solver.solve emptyRealVariables realSolverRing)
+    (Solver.solve emptyRealVariables realSolverRing)
+    (Solver.solve emptyRealVariables realSolverRing)
 adPolynomialAdd (coefficient ∷ coefficients) Y X Z =
   trans
     (cong
@@ -171,9 +172,9 @@ adPolynomialScale :
     ≡ lieScale scalar (adPolynomial coefficients Y X)
 adPolynomialScale [] Y scalar X =
   su2LieExt
-    (Solver.solve [] realSolverRing)
-    (Solver.solve [] realSolverRing)
-    (Solver.solve [] realSolverRing)
+    (Solver.solve emptyRealVariables realSolverRing)
+    (Solver.solve emptyRealVariables realSolverRing)
+    (Solver.solve emptyRealVariables realSolverRing)
 adPolynomialScale (coefficient ∷ coefficients) Y scalar X =
   trans
     (cong
