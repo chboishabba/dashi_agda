@@ -5,18 +5,18 @@ module DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver where
 --
 -- `Tactic.RingSolver` uses the target carrier as its coefficient carrier.
 -- That is ideal for concrete rings, but it leaves coefficients such as
--- `-(1 * 1)` opaque for DASHI's postulated real operations.  Large identities
+-- `-(1 * 1)` opaque for DASHI's postulated real operations. Large identities
 -- can then normalise to propositionally equal, but definitionally different,
 -- coefficient terms.
 --
 -- Here the legacy standard-library solver is instantiated with a separate,
--- computable coefficient carrier.  A coefficient is a formal difference of
--- two natural numbers.  Its interpretation in the real ring is
+-- computable coefficient carrier. A coefficient is a formal difference of
+-- two natural numbers. Its interpretation in the real ring is
 --
 --     positive · 1 - negative · 1.
 --
 -- Coefficient equality is decided by cross addition, while the target
--- polynomial variables still range over DASHI's canonical ℝ.  The only
+-- polynomial variables still range over DASHI's canonical ℝ. The only
 -- foundational input is the commutative-ring structure already isolated in
 -- `BalabanRealPolynomialRing`.
 ------------------------------------------------------------------------
@@ -60,16 +60,16 @@ open RealRing using
   ; +-identityʳ
   )
 open RealRingProperties using (-0#≈0#)
-open Natural using (_×_; ×-homo-0; ×-homo-1; ×-homo-+; ×1-homo-*)
+open Natural using (_×_; ×-homo-+; ×1-homo-*)
 
 natCoefficient : Nat → ℝ
 natCoefficient n = n × oneR
 
 natCoefficientZero : natCoefficient zero ≡ zeroR
-natCoefficientZero = ×-homo-0 oneR
+natCoefficientZero = refl
 
 natCoefficientOne : natCoefficient (suc zero) ≡ oneR
-natCoefficientOne = ×-homo-1 oneR
+natCoefficientOne = refl
 
 natCoefficientAdd :
   ∀ m n →
