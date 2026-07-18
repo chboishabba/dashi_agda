@@ -22,10 +22,6 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitEnumeration as Orbit
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
 import DASHI.Physics.Closure.NSTriadKNWeightedFourierEnergyIdentity as Energy
 
-------------------------------------------------------------------------
--- Exact decidable equality.
-------------------------------------------------------------------------
-
 modeExt :
   {p q : Lattice.LatticeMode3} →
   Lattice.k₁ p ≡ Lattice.k₁ q →
@@ -64,13 +60,11 @@ decToBool : {A : Set} → Dec A → Bool
 decToBool (yes _) = true
 decToBool (no _) = false
 
-decToBoolSound :
-  {A : Set} → (d : Dec A) → decToBool d ≡ true → A
+decToBoolSound : {A : Set} → (d : Dec A) → decToBool d ≡ true → A
 decToBoolSound (yes a) _ = a
 decToBoolSound (no _) ()
 
-decToBoolComplete :
-  {A : Set} → (d : Dec A) → A → decToBool d ≡ true
+decToBoolComplete : {A : Set} → (d : Dec A) → A → decToBool d ≡ true
 decToBoolComplete (yes _) _ = refl
 decToBoolComplete (no notA) a = ⊥-elim (notA a)
 
@@ -86,15 +80,10 @@ triadEqComplete :
 triadEqComplete τ σ = decToBoolComplete (triad≟ τ σ)
 
 modeNegInvolutive :
-  (p : Lattice.LatticeMode3) →
-  Lattice.modeNeg (Lattice.modeNeg p) ≡ p
+  (p : Lattice.LatticeMode3) → Lattice.modeNeg (Lattice.modeNeg p) ≡ p
 modeNegInvolutive (Lattice.mkLatticeMode3 k₁ k₂ k₃) =
   modeExt (ℤP.neg-involutive k₁)
     (ℤP.neg-involutive k₂) (ℤP.neg-involutive k₃)
-
-------------------------------------------------------------------------
--- The twelve concrete actions and their inverses.
-------------------------------------------------------------------------
 
 data TriadAction : Set where
   identity swap cycle swapCycle cycleTwice swapCycleTwice : TriadAction
@@ -166,8 +155,7 @@ actionInOrbit swap τ = there (here refl)
 actionInOrbit cycle τ = there (there (here refl))
 actionInOrbit swapCycle τ = there (there (there (here refl)))
 actionInOrbit cycleTwice τ = there (there (there (there (here refl))))
-actionInOrbit swapCycleTwice τ =
-  there (there (there (there (there (here refl)))))
+actionInOrbit swapCycleTwice τ = there (there (there (there (there (here refl)))))
 actionInOrbit negIdentity τ =
   there (there (there (there (there (there (here refl))))))
 actionInOrbit negSwap τ =
@@ -175,14 +163,11 @@ actionInOrbit negSwap τ =
 actionInOrbit negCycle τ =
   there (there (there (there (there (there (there (there (here refl))))))))
 actionInOrbit negSwapCycle τ =
-  there (there (there (there (there (there (there (there
-    (there (here refl)))))))))
+  there (there (there (there (there (there (there (there (there (here refl)))))))))
 actionInOrbit negCycleTwice τ =
-  there (there (there (there (there (there (there (there
-    (there (there (here refl))))))))))
+  there (there (there (there (there (there (there (there (there (there (here refl))))))))))
 actionInOrbit negSwapCycleTwice τ =
-  there (there (there (there (there (there (there (there
-    (there (there (there (here refl)))))))))))
+  there (there (there (there (there (there (there (there (there (there (there (here refl)))))))))))
 
 memberToAction :
   (τ σ : Lattice.LatticeTriad) →
@@ -198,24 +183,15 @@ memberToAction τ σ
 memberToAction τ σ
   (there (there (there (there (there (there (here eq))))))) = negIdentity , eq
 memberToAction τ σ
-  (there (there (there (there (there (there (there (here eq)))))))) =
-  negSwap , eq
+  (there (there (there (there (there (there (there (here eq)))))))) = negSwap , eq
 memberToAction τ σ
-  (there (there (there (there (there (there (there (there (here eq))))))))) =
-  negCycle , eq
+  (there (there (there (there (there (there (there (there (here eq))))))))) = negCycle , eq
 memberToAction τ σ
-  (there (there (there (there (there (there (there (there
-    (there (here eq)))))))))) = negSwapCycle , eq
+  (there (there (there (there (there (there (there (there (there (here eq)))))))))) = negSwapCycle , eq
 memberToAction τ σ
-  (there (there (there (there (there (there (there (there
-    (there (there (here eq))))))))))) = negCycleTwice , eq
+  (there (there (there (there (there (there (there (there (there (there (here eq))))))))))) = negCycleTwice , eq
 memberToAction τ σ
-  (there (there (there (there (there (there (there (there
-    (there (there (there (here eq)))))))))))) = negSwapCycleTwice , eq
-
-------------------------------------------------------------------------
--- Executable orbit membership and symmetry.
-------------------------------------------------------------------------
+  (there (there (there (there (there (there (there (there (there (there (there (here eq)))))))))))) = negSwapCycleTwice , eq
 
 triadMember? : Lattice.LatticeTriad → List Lattice.LatticeTriad → Bool
 triadMember? τ [] = false
@@ -235,7 +211,9 @@ triadMemberComplete :
   (τ : Lattice.LatticeTriad) → (xs : List Lattice.LatticeTriad) →
   τ ∈ xs → triadMember? τ xs ≡ true
 triadMemberComplete τ (σ ∷ σs) (here τ≡σ)
-  rewrite triadEqComplete τ σ τ≡σ = refl
+  with triadEq? τ σ | triadEqComplete τ σ τ≡σ
+... | true | _ = refl
+... | false | ()
 triadMemberComplete τ (σ ∷ σs) (there τ∈σs) with triadEq? τ σ
 ... | true = refl
 ... | false = triadMemberComplete τ σs τ∈σs
@@ -259,8 +237,7 @@ sameOrbitRefl τ = actionInOrbit identity τ
 
 sameOrbitSym :
   {τ σ : Lattice.LatticeTriad} →
-  Orbit.SameCanonicalTriadOrbit τ σ →
-  Orbit.SameCanonicalTriadOrbit σ τ
+  Orbit.SameCanonicalTriadOrbit τ σ → Orbit.SameCanonicalTriadOrbit σ τ
 sameOrbitSym {τ} {σ} same with memberToAction τ σ same
 ... | a , eq = subst
   (λ x → σ ∈ Orbit.canonicalOrbitMembers x)
@@ -270,10 +247,6 @@ sameOrbitSym {τ} {σ} same with memberToAction τ σ same
     (inverseActionLaw a σ)
     (actionInOrbit (inverseAction a) (applyAction a σ)))
 
-------------------------------------------------------------------------
--- First-occurrence quotient under the exact raw enumeration order.
-------------------------------------------------------------------------
-
 notSameOrbit? : Lattice.LatticeTriad → Lattice.LatticeTriad → Bool
 notSameOrbit? pivot candidate = not (sameOrbit? candidate pivot)
 
@@ -282,8 +255,7 @@ removeOrbit pivot = filterᵇ (notSameOrbit? pivot)
 
 orbitRepresentatives : List Lattice.LatticeTriad → List Lattice.LatticeTriad
 orbitRepresentatives [] = []
-orbitRepresentatives (τ ∷ τs) =
-  τ ∷ orbitRepresentatives (removeOrbit τ τs)
+orbitRepresentatives (τ ∷ τs) = τ ∷ orbitRepresentatives (removeOrbit τ τs)
 
 false≢true : false ≡ true → ⊥
 false≢true ()
@@ -339,8 +311,7 @@ orbitRepresentativesSeparate :
   σ ∈ orbitRepresentatives xs →
   Orbit.SameCanonicalTriadOrbit τ σ → τ ≡ σ
 orbitRepresentativesSeparate {[]} ()
-orbitRepresentativesSeparate {pivot ∷ xs}
-  (here refl) (here refl) same = refl
+orbitRepresentativesSeparate {pivot ∷ xs} (here refl) (here refl) same = refl
 orbitRepresentativesSeparate {pivot ∷ xs} {σ = σ}
   (here refl) (there σ∈later) same =
   ⊥-elim (false≢true
@@ -354,10 +325,6 @@ orbitRepresentativesSeparate {pivot ∷ xs} {τ = τ}
 orbitRepresentativesSeparate {pivot ∷ xs}
   (there τ∈later) (there σ∈later) same =
   orbitRepresentativesSeparate τ∈later σ∈later same
-
-------------------------------------------------------------------------
--- Attach exact zero-sum witnesses and inhabit the theorem record.
-------------------------------------------------------------------------
 
 representativeTriads : Nat → List Lattice.LatticeTriad
 representativeTriads R = orbitRepresentatives (Orbit.fullCutoffZeroSumTriads R)
