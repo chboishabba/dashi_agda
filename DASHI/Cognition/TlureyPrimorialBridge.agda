@@ -28,7 +28,7 @@ false ∧ _ = false
 -- but remain diagnostic-only (no ontological authority).
 ------------------------------------------------------------------------
 
-record PrimorialBridge : Set where
+record PrimorialBridge : Set₁ where
   constructor primorialBridge
   field
     traceReceipt     : Receipt.DyadicNonaryTraceReceipt

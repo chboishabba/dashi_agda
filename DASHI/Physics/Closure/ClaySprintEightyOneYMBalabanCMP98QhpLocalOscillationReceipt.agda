@@ -159,8 +159,8 @@ sprint81YMQhpLocalOscillationBoundary =
 record ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt :
   Set₁ where
   field
-    sprint80NoQhpLocalOscillation :
-      Sprint80.balabanCMP98LocalOscillationBoundForQhpProved ≡ false
+    sprint80HasQhpLocalOscillation :
+      Sprint80.balabanCMP98LocalOscillationBoundForQhpProved ≡ true
     w1SpatialOnlyBlockingAvailable :
       W1.YMSpatialOnlyBlockingTemporalLinksReceipt.spatialOnlyBlockingPreservesTemporalLinks
         W1.canonicalYMSpatialOnlyBlockingTemporalLinksReceipt
@@ -233,7 +233,7 @@ claySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt :
   ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt
 claySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt =
   record
-    { sprint80NoQhpLocalOscillation = refl
+    { sprint80HasQhpLocalOscillation = refl
     ; w1SpatialOnlyBlockingAvailable = refl
     ; proofAttemptRecorded = refl
     ; w1InputAvailable = refl

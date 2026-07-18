@@ -8,7 +8,7 @@ open import Data.List.Base using (List)
 import Data.List.Base as ListBase
 open import Data.Nat.Base using (ℕ; suc)
 
-open import DASHI.Foundations.RealAnalysisAxioms
+open import DASHI.Foundations.RealAnalysisAxioms renaming (absMul to realAbsMul)
 
 infixr 4 _,_
 
