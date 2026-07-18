@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNCanonicalEnvelopeProductIdentity where
 
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Primitive using (Set)
@@ -18,7 +19,7 @@ import DASHI.Physics.Closure.NSTriadKNWeightedFourierEnergyIdentity as Energy
 canonicalBlockContributions :
   {A : Set} →
   (K : Algebra.ExactOrderedCommutativeRing) →
-  (same? : A → A → Agda.Builtin.Bool.Bool) →
+  (same? : A → A → Bool) →
   (A → Scalar.Scalar (Algebra.orderedScalar K)) →
   List A → List (Scalar.Scalar (Algebra.orderedScalar K))
 canonicalBlockContributions K same? f [] = []
@@ -33,7 +34,7 @@ canonicalBlockContributions K same? f (pivot ∷ xs) =
 sumCanonicalBlockContributions :
   {A : Set} →
   (K : Algebra.ExactOrderedCommutativeRing) →
-  (same? : A → A → Agda.Builtin.Bool.Bool) →
+  (same? : A → A → Bool) →
   (f : A → Scalar.Scalar (Algebra.orderedScalar K)) →
   (xs : List A) →
   Fold.sumBy (Algebra.orderedScalar K) (λ x → x)
