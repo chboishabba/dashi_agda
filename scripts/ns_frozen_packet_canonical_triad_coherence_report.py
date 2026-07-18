@@ -45,12 +45,18 @@ def selected_values(row: dict[str, Any]) -> dict[str, Any]:
     coherence = row.get("frozen_initial_packet_canonical_triad_coherence")
     if not isinstance(coherence, dict) or coherence.get("status") != "sampled_canonical_reality_orbits":
         return {"status": "unavailable"}
+    exact_pairing = finite(coherence.get("exact_packet_pairing_real"))
+    estimated_pairing = finite(coherence.get("estimated_regrouped_packet_pairing"))
     values: dict[str, Any] = {
         "status": "available",
         "orbit_convention": coherence.get("orbit_convention"),
-        "exact_packet_pairing_real": finite(coherence.get("exact_packet_pairing_real")),
-        "estimated_regrouped_packet_pairing": finite(coherence.get("estimated_regrouped_packet_pairing")),
+        "exact_packet_pairing_real": exact_pairing,
+        "estimated_regrouped_packet_pairing": estimated_pairing,
     }
+    if exact_pairing is not None and estimated_pairing is not None and abs(exact_pairing) > 1.0e-30:
+        values["regrouped_packet_pairing_relative_error"] = (estimated_pairing - exact_pairing) / exact_pairing
+    else:
+        values["regrouped_packet_pairing_relative_error"] = None
     for name, key in CANONICAL_KEYS.items():
         values[name] = finite(coherence.get(key))
         interval = coherence.get(f"{key}_nominal_95_percent_interval")
@@ -64,6 +70,51 @@ def ratio(later: dict[str, Any], earlier: dict[str, Any], key: str) -> float | N
     if numerator is None or denominator is None or abs(denominator) <= 1.0e-30:
         return None
     return numerator / denominator
+
+
+def log_ratio(later: float | None, earlier: float | None) -> float | None:
+    if later is None or earlier is None or later <= 0.0 or earlier <= 0.0:
+        return None
+    return math.log(later / earlier)
+
+
+def canonical_log_attribution(focus: dict[str, Any], peak: dict[str, Any]) -> dict[str, Any]:
+    """Describe the finite focus-to-peak change without fitting a mechanism.
+
+    ``Gamma = E_+ A / V`` algebraically when the canonical envelope is exact.
+    Here ``A`` is sampled, so the returned closure residual deliberately
+    measures the Monte-Carlo/finite-window mismatch rather than hiding it.
+    """
+    focus_canonical = focus["canonical"]
+    peak_canonical = peak["canonical"]
+    log_gamma = log_ratio(finite(peak.get("gamma")), finite(focus.get("gamma")))
+    log_efficiency = log_ratio(
+        finite(peak_canonical.get("positive_efficiency")),
+        finite(focus_canonical.get("positive_efficiency")),
+    )
+    log_envelope = log_ratio(
+        finite(peak_canonical.get("unsigned_envelope")),
+        finite(focus_canonical.get("unsigned_envelope")),
+    )
+    log_viscous = log_ratio(finite(peak.get("viscous_rate")), finite(focus.get("viscous_rate")))
+    reconstructed = None
+    residual = None
+    if log_efficiency is not None and log_envelope is not None and log_viscous is not None:
+        reconstructed = log_efficiency + log_envelope - log_viscous
+        if log_gamma is not None:
+            residual = log_gamma - reconstructed
+    return {
+        "log_positive_coercivity_ratio_change": log_gamma,
+        "log_canonical_positive_efficiency_change": log_efficiency,
+        "log_unsigned_canonical_envelope_change": log_envelope,
+        "log_viscous_rate_change": log_viscous,
+        "reconstructed_log_change_from_sampled_canonical_factors": reconstructed,
+        "log_factorization_closure_residual": residual,
+        "warning": (
+            "The unsigned canonical envelope is Monte-Carlo estimated. The closure residual is therefore an "
+            "estimator diagnostic, not an algebraic defect in the exact packet balance."
+        ),
+    }
 
 
 def summarize(path: Path) -> dict[str, Any]:
@@ -94,6 +145,7 @@ def summarize(path: Path) -> dict[str, Any]:
             "time": times[index],
             "packet": packets[index],
             "gamma": finite(rows[index].get("frozen_initial_packet_positive_coercivity_ratio")),
+            "viscous_rate": finite(rows[index].get("frozen_initial_packet_viscous_rate")),
             "canonical": selected_values(rows[index]),
         }
         for name, index in event_indices.items()
@@ -105,6 +157,7 @@ def summarize(path: Path) -> dict[str, Any]:
         "events": events,
         "postpeak_gamma_window": downcrossing,
         "focus_to_peak_retention": {name: ratio(peak, focus, name) for name in CANONICAL_KEYS},
+        "focus_to_peak_log_attribution": canonical_log_attribution(events["focus"], events["peak"]),
         "warning": (
             "finite-Galerkin descriptive comparison only. Canonical orbit envelopes are sampled, and the exact packet "
             "pairing is retained separately. This is neither a certified bound nor a continuum triad-cancellation theorem."
