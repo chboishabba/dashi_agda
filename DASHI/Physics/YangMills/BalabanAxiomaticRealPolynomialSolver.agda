@@ -3,41 +3,32 @@ module DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver where
 ------------------------------------------------------------------------
 -- Polynomial solver for an axiomatic real carrier.
 --
--- `Tactic.RingSolver` uses the target carrier as its coefficient carrier.
--- That is ideal for concrete rings, but it leaves coefficients such as
--- `-(1 * 1)` opaque for DASHI's postulated real operations. Large identities
--- can then normalise to propositionally equal, but definitionally different,
--- coefficient terms.
+-- The reflective tactic uses the target carrier as its coefficient carrier.
+-- That leaves coefficient arithmetic opaque for DASHI's postulated real
+-- operations. Here the legacy solver is instantiated with a separate,
+-- computable coefficient carrier: a formal difference of natural numbers.
 --
--- Here the legacy standard-library solver is instantiated with a separate,
--- computable coefficient carrier. A coefficient is a formal difference of
--- two natural numbers. Its interpretation in the real ring is
---
---     positive · 1 - negative · 1.
---
--- Coefficient equality is decided by cross addition, while the target
--- polynomial variables still range over DASHI's canonical ℝ. The only
--- foundational input is the commutative-ring structure already isolated in
--- `BalabanRealPolynomialRing`.
+-- All coefficient-morphism laws below are proved from the commutative-ring
+-- interface itself. No second solver is trusted inside this socket.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Algebra.Bundles using (CommutativeRing)
 open import Algebra.Bundles.Raw using (RawRing)
-open import Data.List.Base using ([]; _∷_)
 open import Data.Maybe.Base using (just; nothing)
 open import Data.Nat.Base as Nat using (_+_; _*_)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.Definitions using (WeaklyDecidable)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality as Eq using
+  (_≡_; refl; cong; cong₂; sym; trans)
+open Eq.≡-Reasoning
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import Algebra.Properties.Semiring.Mult.TCOptimised as NaturalMultiplication
 import Algebra.Properties.Ring as RingProperties
 import Algebra.Solver.Ring as LegacyRingSolver
 import Algebra.Solver.Ring.AlmostCommutativeRing as LegacyACR
-import Tactic.RingSolver as SmallSolver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
@@ -47,7 +38,6 @@ open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
   ; zeroR
   ; oneR
   ; realCommutativeRing
-  ; realSolverRing
   )
 
 private
@@ -56,10 +46,23 @@ private
   module Natural = NaturalMultiplication RealRing.semiring
 
 open RealRing using
-  ( +-identityˡ
+  ( +-assoc
+  ; +-comm
+  ; +-cong
+  ; +-identityˡ
   ; +-identityʳ
+  ; +-inverseʳ
+  ; distribˡ
+  ; distribʳ
   )
-open RealRingProperties using (-0#≈0#)
+open RealRingProperties using
+  ( -0#≈0#
+  ; -‿+-comm
+  ; -‿involutive
+  ; -‿distribˡ-*
+  ; -‿distribʳ-*
+  ; [-x][-y]≈xy
+  )
 open Natural using (_×_; ×-homo-+; ×1-homo-*)
 
 natCoefficient : Nat → ℝ
@@ -82,6 +85,24 @@ natCoefficientMultiply :
   natCoefficient (m Nat.* n)
     ≡ natCoefficient m *R natCoefficient n
 natCoefficientMultiply m n = ×1-homo-* m n
+
+addInterchange :
+  ∀ a b c d →
+  (a +R b) +R (c +R d)
+    ≡ (a +R c) +R (b +R d)
+addInterchange a b c d = begin
+  (a +R b) +R (c +R d)
+    ≡⟨ +-assoc a b (c +R d) ⟩
+  a +R (b +R (c +R d))
+    ≡⟨ cong (a +R_) (sym (+-assoc b c d)) ⟩
+  a +R ((b +R c) +R d)
+    ≡⟨ cong (λ middle → a +R (middle +R d)) (+-comm b c) ⟩
+  a +R ((c +R b) +R d)
+    ≡⟨ cong (a +R_) (+-assoc c b d) ⟩
+  a +R (c +R (b +R d))
+    ≡⟨ sym (+-assoc a c (b +R d)) ⟩
+  (a +R c) +R (b +R d)
+    ∎
 
 record IntegerCoefficient : Set where
   constructor coefficient
@@ -120,10 +141,20 @@ addCoefficientHomomorphic :
 addCoefficientHomomorphic
   (coefficient p n) (coefficient q m)
   rewrite natCoefficientAdd p q | natCoefficientAdd n m =
-  SmallSolver.solve
-    (natCoefficient p ∷ natCoefficient n ∷
-     natCoefficient q ∷ natCoefficient m ∷ [])
-    realSolverRing
+  sym (begin
+    (natCoefficient p +R (-R natCoefficient n))
+      +R (natCoefficient q +R (-R natCoefficient m))
+      ≡⟨ addInterchange
+           (natCoefficient p) (-R natCoefficient n)
+           (natCoefficient q) (-R natCoefficient m) ⟩
+    (natCoefficient p +R natCoefficient q)
+      +R ((-R natCoefficient n) +R (-R natCoefficient m))
+      ≡⟨ cong
+           ((natCoefficient p +R natCoefficient q) +R_)
+           (-‿+-comm (natCoefficient n) (natCoefficient m)) ⟩
+    (natCoefficient p +R natCoefficient q)
+      +R (-R (natCoefficient n +R natCoefficient m))
+      ∎)
 
 multiplyCoefficientHomomorphic :
   ∀ x y →
@@ -137,19 +168,84 @@ multiplyCoefficientHomomorphic
         | natCoefficientMultiply n m
         | natCoefficientMultiply p m
         | natCoefficientMultiply n q =
-  SmallSolver.solve
-    (natCoefficient p ∷ natCoefficient n ∷
-     natCoefficient q ∷ natCoefficient m ∷ [])
-    realSolverRing
+  sym (begin
+    (natCoefficient p +R (-R natCoefficient n))
+      *R (natCoefficient q +R (-R natCoefficient m))
+      ≡⟨ distribʳ
+           (natCoefficient q +R (-R natCoefficient m))
+           (natCoefficient p) (-R natCoefficient n) ⟩
+    (natCoefficient p *R (natCoefficient q +R (-R natCoefficient m)))
+      +R ((-R natCoefficient n)
+        *R (natCoefficient q +R (-R natCoefficient m)))
+      ≡⟨ +-cong
+           (distribˡ
+             (natCoefficient p) (natCoefficient q) (-R natCoefficient m))
+           (distribˡ
+             (-R natCoefficient n) (natCoefficient q) (-R natCoefficient m)) ⟩
+    ((natCoefficient p *R natCoefficient q)
+      +R (natCoefficient p *R (-R natCoefficient m)))
+      +R (((-R natCoefficient n) *R natCoefficient q)
+        +R ((-R natCoefficient n) *R (-R natCoefficient m)))
+      ≡⟨ +-cong
+           (cong
+             ((natCoefficient p *R natCoefficient q) +R_)
+             (sym (-‿distribʳ-*
+               (natCoefficient p) (natCoefficient m))))
+           (+-cong
+             (sym (-‿distribˡ-*
+               (natCoefficient n) (natCoefficient q)))
+             ([-x][-y]≈xy
+               (natCoefficient n) (natCoefficient m))) ⟩
+    ((natCoefficient p *R natCoefficient q)
+      +R (-R (natCoefficient p *R natCoefficient m)))
+      +R ((-R (natCoefficient n *R natCoefficient q))
+        +R (natCoefficient n *R natCoefficient m))
+      ≡⟨ cong
+           (((natCoefficient p *R natCoefficient q)
+             +R (-R (natCoefficient p *R natCoefficient m))) +R_)
+           (+-comm
+             (-R (natCoefficient n *R natCoefficient q))
+             (natCoefficient n *R natCoefficient m)) ⟩
+    ((natCoefficient p *R natCoefficient q)
+      +R (-R (natCoefficient p *R natCoefficient m)))
+      +R ((natCoefficient n *R natCoefficient m)
+        +R (-R (natCoefficient n *R natCoefficient q)))
+      ≡⟨ addInterchange
+           (natCoefficient p *R natCoefficient q)
+           (-R (natCoefficient p *R natCoefficient m))
+           (natCoefficient n *R natCoefficient m)
+           (-R (natCoefficient n *R natCoefficient q)) ⟩
+    ((natCoefficient p *R natCoefficient q)
+      +R (natCoefficient n *R natCoefficient m))
+      +R ((-R (natCoefficient p *R natCoefficient m))
+        +R (-R (natCoefficient n *R natCoefficient q)))
+      ≡⟨ cong
+           (((natCoefficient p *R natCoefficient q)
+             +R (natCoefficient n *R natCoefficient m)) +R_)
+           (-‿+-comm
+             (natCoefficient p *R natCoefficient m)
+             (natCoefficient n *R natCoefficient q)) ⟩
+    ((natCoefficient p *R natCoefficient q)
+      +R (natCoefficient n *R natCoefficient m))
+      +R (-R ((natCoefficient p *R natCoefficient m)
+        +R (natCoefficient n *R natCoefficient q)))
+      ∎)
 
 negateCoefficientHomomorphic :
   ∀ x →
   interpretCoefficient (negateCoefficient x)
     ≡ -R interpretCoefficient x
-negateCoefficientHomomorphic (coefficient p n) =
-  SmallSolver.solve
-    (natCoefficient p ∷ natCoefficient n ∷ [])
-    realSolverRing
+negateCoefficientHomomorphic (coefficient p n) = begin
+  natCoefficient n +R (-R natCoefficient p)
+    ≡⟨ +-comm (natCoefficient n) (-R natCoefficient p) ⟩
+  (-R natCoefficient p) +R natCoefficient n
+    ≡⟨ cong
+         ((-R natCoefficient p) +R_)
+         (sym (-‿involutive (natCoefficient n))) ⟩
+  (-R natCoefficient p) +R (-R (-R natCoefficient n))
+    ≡⟨ -‿+-comm (natCoefficient p) (-R natCoefficient n) ⟩
+  -R (natCoefficient p +R (-R natCoefficient n))
+    ∎
 
 zeroCoefficientHomomorphic :
   interpretCoefficient zeroCoefficient ≡ zeroR
@@ -206,9 +302,28 @@ private
     (natCoefficient p +R natCoefficient m)
       +R (-R (natCoefficient n +R natCoefficient m))
   leftDifferenceShift p n m =
-    SmallSolver.solve
-      (natCoefficient p ∷ natCoefficient n ∷ natCoefficient m ∷ [])
-      realSolverRing
+    sym (begin
+      (natCoefficient p +R natCoefficient m)
+        +R (-R (natCoefficient n +R natCoefficient m))
+        ≡⟨ cong
+             ((natCoefficient p +R natCoefficient m) +R_)
+             (sym (-‿+-comm
+               (natCoefficient n) (natCoefficient m))) ⟩
+      (natCoefficient p +R natCoefficient m)
+        +R ((-R natCoefficient n) +R (-R natCoefficient m))
+        ≡⟨ addInterchange
+             (natCoefficient p) (natCoefficient m)
+             (-R natCoefficient n) (-R natCoefficient m) ⟩
+      (natCoefficient p +R (-R natCoefficient n))
+        +R (natCoefficient m +R (-R natCoefficient m))
+        ≡⟨ cong
+             ((natCoefficient p +R (-R natCoefficient n)) +R_)
+             (+-inverseʳ (natCoefficient m)) ⟩
+      (natCoefficient p +R (-R natCoefficient n)) +R zeroR
+        ≡⟨ +-identityʳ
+             (natCoefficient p +R (-R natCoefficient n)) ⟩
+      natCoefficient p +R (-R natCoefficient n)
+        ∎)
 
   rightDifferenceShift :
     ∀ q n m →
@@ -216,10 +331,33 @@ private
       +R (-R (natCoefficient n +R natCoefficient m))
       ≡
     natCoefficient q +R (-R natCoefficient m)
-  rightDifferenceShift q n m =
-    SmallSolver.solve
-      (natCoefficient q ∷ natCoefficient n ∷ natCoefficient m ∷ [])
-      realSolverRing
+  rightDifferenceShift q n m = begin
+    (natCoefficient q +R natCoefficient n)
+      +R (-R (natCoefficient n +R natCoefficient m))
+      ≡⟨ cong
+           ((natCoefficient q +R natCoefficient n) +R_)
+           (sym (-‿+-comm
+             (natCoefficient n) (natCoefficient m))) ⟩
+    (natCoefficient q +R natCoefficient n)
+      +R ((-R natCoefficient n) +R (-R natCoefficient m))
+      ≡⟨ cong
+           ((natCoefficient q +R natCoefficient n) +R_)
+           (+-comm (-R natCoefficient n) (-R natCoefficient m)) ⟩
+    (natCoefficient q +R natCoefficient n)
+      +R ((-R natCoefficient m) +R (-R natCoefficient n))
+      ≡⟨ addInterchange
+           (natCoefficient q) (natCoefficient n)
+           (-R natCoefficient m) (-R natCoefficient n) ⟩
+    (natCoefficient q +R (-R natCoefficient m))
+      +R (natCoefficient n +R (-R natCoefficient n))
+      ≡⟨ cong
+           ((natCoefficient q +R (-R natCoefficient m)) +R_)
+           (+-inverseʳ (natCoefficient n)) ⟩
+    (natCoefficient q +R (-R natCoefficient m)) +R zeroR
+      ≡⟨ +-identityʳ
+           (natCoefficient q +R (-R natCoefficient m)) ⟩
+    natCoefficient q +R (-R natCoefficient m)
+      ∎
 
 crossEqualityImpliesCoefficientEquality :
   ∀ {p n q m} →
