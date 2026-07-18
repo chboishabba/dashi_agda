@@ -229,6 +229,7 @@ removeOrbit : Lattice.LatticeTriad → List Lattice.LatticeTriad → List Lattic
 removeOrbit pivot = filterᵇ (notSameOrbit? pivot)
 
 orbitRepresentatives : List Lattice.LatticeTriad → List Lattice.LatticeTriad
+{-# TERMINATING #-}
 orbitRepresentatives [] = []
 orbitRepresentatives (τ ∷ τs) = τ ∷ orbitRepresentatives (removeOrbit τ τs)
 
