@@ -101,6 +101,9 @@ def parse_args() -> argparse.Namespace:
                               "checkpoint using this many uniform input samples per frozen-packet output"))
     parser.add_argument("--triad-coherence-batch-size", type=int, default=512,
                         help="output-mode batch size for the optional triad-coherence estimator")
+    parser.add_argument("--canonical-triad-samples-per-output", type=int, default=0,
+                        help=("when positive, reaggregate sampled ordered convolution atoms into permutation- and "
+                              "reality-invariant finite Fourier triad orbits before measuring packet-transfer cancellation"))
     parser.add_argument("--moving-packet-radius", type=int, default=1)
     parser.add_argument("--cfd-root", type=Path, default=DEFAULT_CFD_ROOT)
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
@@ -460,6 +463,193 @@ def oriented_atom_vectors(
     return atoms
 
 
+def oriented_atom_pair_vectors(
+    field_flat: np.ndarray, wave_flat: np.ndarray, output_flat: np.ndarray, input_flat: np.ndarray,
+) -> np.ndarray:
+    """Return convolution atoms for equally-sized arrays of ordered pairs.
+
+    This is the pairwise counterpart of :func:`oriented_atom_vectors`.  It is
+    used only to reaggregate the complete permutation/reality orbit belonging
+    to a sampled pair; it deliberately does not define a new Navier--Stokes
+    transfer convention.
+    """
+    n = int(round(field_flat.shape[1] ** (1.0 / 3.0)))
+    output_coords = np.column_stack(np.unravel_index(output_flat, (n, n, n)))
+    input_coords = np.column_stack(np.unravel_index(input_flat, (n, n, n)))
+    other_coords = (output_coords - input_coords) % n
+    other_flat = np.ravel_multi_index(other_coords.T, (n, n, n))
+    up, uq = field_flat[:, input_flat], field_flat[:, other_flat]
+    kq = wave_flat[:, other_flat]
+    atoms = -1j * np.sum(kq * up, axis=0)[None, :] * uq
+    output_wave = wave_flat[:, output_flat]
+    output_norm_sq = np.sum(output_wave * output_wave, axis=0)
+    nonzero = output_norm_sq > 0.0
+    if np.any(nonzero):
+        dot = np.sum(output_wave * atoms, axis=0)
+        atoms[:, nonzero] -= output_wave[:, nonzero] * dot[nonzero] / output_norm_sq[nonzero]
+    return atoms
+
+
+def mode_to_flat(mode: tuple[int, int, int], n: int) -> int:
+    """Map an integer Fourier mode in (x, y, z) order to FFT-flat storage."""
+    x, y, z = mode
+    return int(np.ravel_multi_index((z % n, y % n, x % n), (n, n, n)))
+
+
+def canonical_reality_orbit_pairs(
+    output_flat: int, input_flat: int, wave_flat: np.ndarray, n: int, frozen_outputs: set[int],
+) -> tuple[tuple[tuple[int, int, int], ...], tuple[tuple[int, int], ...]]:
+    """Return the canonical reality-orbit key and all frozen-packet atom pairs.
+
+    Starting from ``N_hat(output)[input]``, the geometric triad is
+    ``{-output, input, output-input}``.  We include every output-leg and input
+    ordering, then its reality partner, and retain only output modes in the
+    fixed packet.  Summing the associated scalar pairings is consequently an
+    exact packet-transfer contribution for one permutation- and
+    reality-invariant orbit.  This is a finite reaggregation convention, not
+    a claim that an individual oriented atom is a physical triad transfer.
+    """
+    out = tuple(int(value) for value in wave_flat[:, output_flat])
+    left = tuple(int(value) for value in wave_flat[:, input_flat])
+    output_coords = np.unravel_index(output_flat, (n, n, n))
+    input_coords = np.unravel_index(input_flat, (n, n, n))
+    other_coords = tuple((output_coords[index] - input_coords[index]) % n for index in range(3))
+    other_flat = int(np.ravel_multi_index(other_coords, (n, n, n)))
+    right = tuple(int(value) for value in wave_flat[:, other_flat])
+    triad = (tuple(-value for value in out), left, right)
+    negative = tuple(tuple(-value for value in mode) for mode in triad)
+    key = min(tuple(sorted(triad)), tuple(sorted(negative)))
+    pairs: set[tuple[int, int]] = set()
+    for representative in (triad, negative):
+        for leg_index, leg in enumerate(representative):
+            remaining = [representative[index] for index in range(3) if index != leg_index]
+            output = mode_to_flat(tuple(-value for value in leg), n)
+            if output not in frozen_outputs:
+                continue
+            for input_mode in remaining:
+                pairs.add((output, mode_to_flat(input_mode, n)))
+    if not pairs:
+        raise RuntimeError("sampled frozen-packet atom lost all canonical orbit representatives")
+    return key, tuple(sorted(pairs))
+
+
+def canonical_triad_coherence_estimate(
+    field_hat: np.ndarray, nonlinear_hat: np.ndarray, norm: np.ndarray,
+    frozen_lower: int, frozen_upper: int, samples_per_output: int,
+    batch_size: int, rng: np.random.Generator,
+) -> dict[str, Any]:
+    """Estimate cancellation after canonical permutation/reality reaggregation.
+
+    The numerator is the exact frozen-packet pairing.  For each uniformly
+    sampled ordered atom, this routine evaluates its entire canonical orbit,
+    including all input swaps and the reality partner, *before* taking an
+    absolute value.  Dividing by the number of retained atom representatives
+    makes the unsigned orbit envelope an unbiased finite-population estimate.
+
+    The result answers whether cancellation visible in the ordered atom basis
+    survives this physical-orbit reaggregation.  Its denominators remain
+    sampled finite-Galerkin telemetry, not certified bounds.
+    """
+    if samples_per_output <= 0:
+        return {"status": "disabled"}
+    n = field_hat.shape[1]
+    flat_count = n ** 3
+    flat_norm = norm.ravel()
+    mask = (flat_norm >= float(2 ** frozen_lower)) & (flat_norm < float(2 ** frozen_upper))
+    outputs = np.flatnonzero(mask)
+    if outputs.size == 0:
+        return {"status": "empty_frozen_packet"}
+    frozen_outputs = {int(value) for value in outputs}
+    field_flat = field_hat.reshape(3, -1)
+    nonlinear_flat = nonlinear_hat.reshape(3, -1)
+    wave, _ = frequency_grid(n)
+    wave_flat = wave.reshape(3, -1)
+    weights = np.power(2.0, np.floor(np.log2(np.maximum(flat_norm[outputs], 1.0))))
+    exact_pairing = np.sum(weights[None, :] * np.conjugate(field_flat[:, outputs]) * nonlinear_flat[:, outputs])
+    orbit_abs_sum = 0.0
+    orbit_abs_sq_error = 0.0
+    atom_abs_sum = 0.0
+    atom_abs_sq_error = 0.0
+    regrouped_pairing_sum = 0.0
+    regrouped_pairing_sq_error = 0.0
+    for start in range(0, outputs.size, batch_size):
+        batch = outputs[start:start + batch_size]
+        draw = rng.integers(0, flat_count, size=(batch.size, samples_per_output), dtype=np.int64)
+        sample_outputs = np.repeat(batch, samples_per_output)
+        sample_inputs = draw.ravel()
+        group_pairs: list[tuple[tuple[int, int], ...]] = []
+        group_offsets = [0]
+        for output, input_mode in zip(sample_outputs, sample_inputs, strict=True):
+            _, pairs = canonical_reality_orbit_pairs(
+                int(output), int(input_mode), wave_flat, n, frozen_outputs,
+            )
+            group_pairs.append(pairs)
+            group_offsets.append(group_offsets[-1] + len(pairs))
+        all_outputs = np.fromiter((pair[0] for pairs in group_pairs for pair in pairs), dtype=np.int64)
+        all_inputs = np.fromiter((pair[1] for pairs in group_pairs for pair in pairs), dtype=np.int64)
+        all_atoms = oriented_atom_pair_vectors(field_flat, wave_flat, all_outputs, all_inputs)
+        all_weights = np.power(2.0, np.floor(np.log2(np.maximum(flat_norm[all_outputs], 1.0))))
+        all_scalars = np.real(all_weights * np.sum(np.conjugate(field_flat[:, all_outputs]) * all_atoms, axis=0))
+        orbit_values = np.empty(sample_outputs.size, dtype=np.float64)
+        orbit_abs_values = np.empty(sample_outputs.size, dtype=np.float64)
+        atom_abs_values = np.empty(sample_outputs.size, dtype=np.float64)
+        for index, (left, right) in enumerate(zip(group_offsets[:-1], group_offsets[1:], strict=True)):
+            orbit_value = float(np.sum(all_scalars[left:right]))
+            multiplicity = float(right - left)
+            orbit_values[index] = orbit_value / multiplicity
+            orbit_abs_values[index] = abs(orbit_value) / multiplicity
+            atom_abs_values[index] = float(np.sum(np.abs(all_scalars[left:right]))) / multiplicity
+        orbit_values = orbit_values.reshape(batch.size, samples_per_output)
+        orbit_abs_values = orbit_abs_values.reshape(batch.size, samples_per_output)
+        atom_abs_values = atom_abs_values.reshape(batch.size, samples_per_output)
+        population = float(flat_count)
+        regrouped_pairing_sum += float(population * np.sum(np.mean(orbit_values, axis=1)))
+        orbit_abs_sum += float(population * np.sum(np.mean(orbit_abs_values, axis=1)))
+        atom_abs_sum += float(population * np.sum(np.mean(atom_abs_values, axis=1)))
+        if samples_per_output > 1:
+            regrouped_pairing_sq_error += float(np.sum(population ** 2 * np.var(orbit_values, axis=1, ddof=1) / samples_per_output))
+            orbit_abs_sq_error += float(np.sum(population ** 2 * np.var(orbit_abs_values, axis=1, ddof=1) / samples_per_output))
+            atom_abs_sq_error += float(np.sum(population ** 2 * np.var(atom_abs_values, axis=1, ddof=1) / samples_per_output))
+
+    def ratio_interval(numerator: float, denominator: float, variance: float) -> list[float] | None:
+        if denominator <= 1.0e-30 or not math.isfinite(variance):
+            return None
+        error = 1.96 * math.sqrt(max(variance, 0.0))
+        return [numerator / (denominator + error), min(1.0, numerator / max(denominator - error, 1.0e-30))]
+
+    canonical_coherence = abs(float(np.real(exact_pairing))) / orbit_abs_sum if orbit_abs_sum > 1.0e-30 else math.nan
+    positive_efficiency = max(float(np.real(exact_pairing)), 0.0) / orbit_abs_sum if orbit_abs_sum > 1.0e-30 else math.nan
+    internal_cancellation = orbit_abs_sum / atom_abs_sum if atom_abs_sum > 1.0e-30 else math.nan
+    return {
+        "status": "sampled_canonical_reality_orbits",
+        "orbit_convention": (
+            "canonical unordered geometric triad modulo its reality partner; scalar packet transfer is the sum of all "
+            "ordered convolution atoms for that orbit and frozen-packet output legs before absolute value"
+        ),
+        "sampled_output_mode_count": int(outputs.size),
+        "samples_per_output": int(samples_per_output),
+        "canonical_real_transfer_coherence": canonical_coherence,
+        "canonical_real_transfer_coherence_nominal_95_percent_interval": ratio_interval(
+            abs(float(np.real(exact_pairing))), orbit_abs_sum, orbit_abs_sq_error,
+        ),
+        "canonical_positive_transfer_efficiency": positive_efficiency,
+        "estimated_unsigned_canonical_packet_transfer_envelope": orbit_abs_sum,
+        "estimated_unsigned_ordered_atom_packet_transfer_envelope": atom_abs_sum,
+        "internal_ordered_atom_cancellation_ratio": internal_cancellation,
+        "exact_packet_pairing_real": float(np.real(exact_pairing)),
+        "estimated_regrouped_packet_pairing": regrouped_pairing_sum,
+        "estimated_regrouped_packet_pairing_nominal_95_percent_interval": [
+            regrouped_pairing_sum - 1.96 * math.sqrt(max(regrouped_pairing_sq_error, 0.0)),
+            regrouped_pairing_sum + 1.96 * math.sqrt(max(regrouped_pairing_sq_error, 0.0)),
+        ],
+        "regrouping_exact_numerator_difference": regrouped_pairing_sum - float(np.real(exact_pairing)),
+        "warning": (
+            "canonical-orbit denominators are sampled finite-Galerkin estimates. The exact packet pairing is independent "
+            "of the orbit convention, but no confidence interval here is a certified enclosure or continuum theorem."
+        ),
+    }
+
+
 def triad_coherence_estimate(
     field_hat: np.ndarray, nonlinear_hat: np.ndarray, norm: np.ndarray, norm_sq: np.ndarray,
     frozen_lower: int, frozen_upper: int, nu: float, samples_per_output: int,
@@ -615,6 +805,11 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
         args.triad_coherence_samples_per_output, args.triad_coherence_batch_size,
         np.random.default_rng(args.seed + 1900003 + int(round(time / args.dt))),
     )
+    canonical_triad_coherence = canonical_triad_coherence_estimate(
+        field_hat, nonlinear, norm, frozen_lower, frozen_upper,
+        args.canonical_triad_samples_per_output, args.triad_coherence_batch_size,
+        np.random.default_rng(args.seed + 2900003 + int(round(time / args.dt))),
+    )
     return {
         "time": time,
         "shell_packets": [float(value) for value in packets],
@@ -633,6 +828,7 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
         "frozen_initial_packet_viscous_rate": frozen_viscous,
         "frozen_initial_packet_coercivity_factors": frozen_factors,
         "frozen_initial_packet_triad_coherence": triad_coherence,
+        "frozen_initial_packet_canonical_triad_coherence": canonical_triad_coherence,
         "moving_packet_if_previous_centre": float(np.sum(packets[previous_lower:previous_upper])),
         "checkpoint_recentering_jump": float(np.sum(packets[moving_lower:moving_upper]) - np.sum(packets[previous_lower:previous_upper])),
         "heat_moving_packet_exact_spectrum": heat_moving,
@@ -982,6 +1178,7 @@ def main() -> None:
     if (args.n < 12 or args.nu <= 0.0 or args.critical_mass <= 0.0 or args.chi_attempts <= 0
             or args.dt <= 0.0 or args.window_c <= 0.0 or args.moving_packet_radius < 0
             or args.mechanism_trace_count < 0 or args.triad_coherence_samples_per_output < 0
+            or args.canonical_triad_samples_per_output < 0
             or args.triad_coherence_batch_size <= 0):
         raise ValueError("n >= 12, nonnegative packet radius/trace count, and positive nu/mass/attempts/dt/window-c are required")
     if not (0.0 <= args.mechanism_trace_start_fraction < args.mechanism_trace_end_fraction <= 1.0):
@@ -1109,6 +1306,7 @@ def main() -> None:
             "mechanism_trace_start_fraction": args.mechanism_trace_start_fraction,
             "mechanism_trace_end_fraction": args.mechanism_trace_end_fraction,
             "triad_coherence_samples_per_output": args.triad_coherence_samples_per_output,
+            "canonical_triad_samples_per_output": args.canonical_triad_samples_per_output,
             "triad_coherence_batch_size": args.triad_coherence_batch_size,
             "selection_objective": args.selection_objective,
             "require_positive_short_input": args.require_positive_short_input,

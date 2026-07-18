@@ -1,1 +1,65 @@
 [1/3] radial_neg_0p04 stage=parabolic
+[2/3] phase_pos_0p04 stage=parabolic
+[3/3] coherence_pos_0p04 stage=parabolic
+{
+  "audit_extra_arguments": "--mechanism-trace-count 24 --triad-coherence-samples-per-output 8 --triad-coherence-batch-size 512",
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "sequential_local_perturbation_stage_receipt_nonpromoting",
+  "failed": 0,
+  "manifest": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_coercivity_focus_manifest.json",
+  "requested_ids": [
+    "radial_neg_0p04",
+    "phase_pos_0p04",
+    "coherence_pos_0p04"
+  ],
+  "rows": [
+    {
+      "chi_signed": 0.16094818919563725,
+      "frozen_integrated_nonlinear_input": 1.278720059254745,
+      "frozen_packet_recurrence_ratio": 0.11357468366077848,
+      "id": "radial_neg_0p04",
+      "moving_packet_recurrence_ratio": 0.11108409046675487,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.json",
+      "receipt_promoted": true,
+      "returncode": 0,
+      "stage": "parabolic",
+      "status": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.status.json",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/radial_neg_0p04_parabolic.stdout"
+    },
+    {
+      "chi_signed": 0.16839070247632712,
+      "frozen_integrated_nonlinear_input": 1.2564041676314184,
+      "frozen_packet_recurrence_ratio": 0.11221915034501372,
+      "id": "phase_pos_0p04",
+      "moving_packet_recurrence_ratio": 0.10984686921825039,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.json",
+      "receipt_promoted": true,
+      "returncode": 0,
+      "stage": "parabolic",
+      "status": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.status.json",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/phase_pos_0p04_parabolic.stdout"
+    },
+    {
+      "chi_signed": 0.16921604356274922,
+      "frozen_integrated_nonlinear_input": 1.2578223221238707,
+      "frozen_packet_recurrence_ratio": 0.11228539237757072,
+      "id": "coherence_pos_0p04",
+      "moving_packet_recurrence_ratio": 0.10944419858104569,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/coherence_pos_0p04_parabolic.json",
+      "receipt_promoted": true,
+      "returncode": 0,
+      "stage": "parabolic",
+      "status": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/coherence_pos_0p04_parabolic.status.json",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/coherence_pos_0p04_parabolic.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_triad_coherence_panel_run3/coherence_pos_0p04_parabolic.stdout"
+    }
+  ],
+  "stage": "parabolic",
+  "successful": 3
+}
