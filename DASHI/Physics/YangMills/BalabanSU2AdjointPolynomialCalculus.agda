@@ -20,8 +20,8 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( _*R_
+  ; zeroʳ
   ; realSolverRing
-  ; emptyRealVariables
   )
 import Tactic.RingSolver as Solver
 
@@ -32,6 +32,7 @@ open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ; lieZero
   ; lieAdd
   ; lieScale
+  ; lieZeroLeft
   )
 open import DASHI.Physics.YangMills.BalabanSU2LieBracket using
   ( lieBracketAddRight
@@ -134,10 +135,7 @@ adPolynomialAdd :
         (adPolynomial coefficients Y X)
         (adPolynomial coefficients Y Z)
 adPolynomialAdd [] Y X Z =
-  su2LieExt
-    (Solver.solve emptyRealVariables realSolverRing)
-    (Solver.solve emptyRealVariables realSolverRing)
-    (Solver.solve emptyRealVariables realSolverRing)
+  sym (lieZeroLeft lieZero)
 adPolynomialAdd (coefficient ∷ coefficients) Y X Z =
   trans
     (cong
@@ -172,9 +170,9 @@ adPolynomialScale :
     ≡ lieScale scalar (adPolynomial coefficients Y X)
 adPolynomialScale [] Y scalar X =
   su2LieExt
-    (Solver.solve emptyRealVariables realSolverRing)
-    (Solver.solve emptyRealVariables realSolverRing)
-    (Solver.solve emptyRealVariables realSolverRing)
+    (sym (zeroʳ scalar))
+    (sym (zeroʳ scalar))
+    (sym (zeroʳ scalar))
 adPolynomialScale (coefficient ∷ coefficients) Y scalar X =
   trans
     (cong
