@@ -136,6 +136,12 @@ The JSON contract is:
 
 If `dissipation_weight` is omitted, `|k|^2` is used.
 
+A top-level `problems` list may be used when the signed coefficients or mode
+carrier vary with time.  Give each time slice one input profile with a shared
+`trajectory_id` and `cutoff`; the output aggregates those observed rows into
+duration-weighted windows across problem boundaries.  Repeated equal profile
+vectors at different times are deliberately preserved.
+
 ## Existing raw-frame surrogate mode
 
 The script can also reuse the current N128 phase-coherence carrier:
@@ -168,7 +174,9 @@ The key fields are:
 - `worst_profile.gamma`;
 - `observed_pointwise_eta_margin = 1 - max(gamma)`;
 - `worst_window.average_gamma`;
+- top-level `worst_observed_window.average_gamma`;
 - `target_counterexample_count`;
+- `sampled_interval_counterexample_count`;
 - `max_finite_identity_residual`;
 - `no_counterexample_sampled`.
 
