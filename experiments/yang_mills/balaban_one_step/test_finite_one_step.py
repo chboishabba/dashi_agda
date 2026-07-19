@@ -75,6 +75,7 @@ class FiniteOneStepTests(unittest.TestCase):
             average_block=2,
             local_sides=[1, 2],
             slab_thicknesses=[2],
+            ball_radii=[],
             mus=[0.0],
             radii=[0.0],
             seeds=1,
@@ -89,12 +90,13 @@ class FiniteOneStepTests(unittest.TestCase):
         self.assertIsNotNone(best)
         self.assertLess(max(best["left"], best["right"]), 1.0)
 
-    def test_background_sample_does_not_yet_close_uniformly(self) -> None:
+    def test_axis_slabs_expose_background_weighted_norm_obstruction(self) -> None:
         report = run_parametrix_search(
             L=2,
             average_block=2,
             local_sides=[1],
             slab_thicknesses=[2],
+            ball_radii=[],
             mus=[0.0],
             radii=[0.0, 0.01],
             seeds=1,
@@ -106,6 +108,32 @@ class FiniteOneStepTests(unittest.TestCase):
         self.assertTrue(by_radius[0.0]["strict_proper_local_bound"])
         self.assertFalse(by_radius[0.01]["strict_proper_local_bound"])
         self.assertTrue(report["spectral_without_weighted_norm_obstructions"])
+
+    def test_torus_balls_close_sampled_small_backgrounds(self) -> None:
+        report = run_parametrix_search(
+            L=2,
+            average_block=2,
+            local_sides=[],
+            slab_thicknesses=[],
+            ball_radii=[2, 3],
+            mus=[0.0],
+            radii=[0.0, 0.01, 0.03],
+            seeds=1,
+            relaxations=[1.0],
+        )
+        self.assertEqual(report["claim_scope"], "finite_lattice_only")
+        self.assertTrue(report["has_strict_proper_local_weighted_remainder_bound"])
+        self.assertTrue(report["all_sampled_backgrounds_have_strict_proper_local_bound"])
+        by_radius = {item["radius"]: item for item in report["background_closure"]}
+        self.assertEqual(by_radius[0.01]["best_candidate"]["patch_family"], "torus-ball-2")
+        self.assertEqual(by_radius[0.03]["best_candidate"]["patch_family"], "torus-ball-3")
+        self.assertLess(
+            max(
+                by_radius[0.03]["best_candidate"]["left"],
+                by_radius[0.03]["best_candidate"]["right"],
+            ),
+            1.0,
+        )
 
     def test_su2_ad_cubic_and_closed_dexp_inverse(self) -> None:
         y = np.array([0.07, -0.03, 0.11])
