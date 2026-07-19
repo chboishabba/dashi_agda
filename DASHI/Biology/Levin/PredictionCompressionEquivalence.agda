@@ -35,8 +35,8 @@ record CrossEntropyBoundary : Set where
 record PredictionCompressionBridge : Set where
   field
     contextualBoundary : Contextual.MessageProbabilityBoundary
-    polycomputationBoundary : Poly.PolycomputationBoundary
-    substrateBoundary : Substrate.SubstrateComputationBoundary
+    polycomputationBoundary : Poly.ObserverRelativePolycomputationBoundary
+    substrateBoundary : Substrate.SubstrateConstrainedComputationBoundary
     probabilityToCodeLengthWitness : Bool
     codeLengthToProbabilityWitness : Bool
     arithmeticCoderOrEquivalentWitness : Bool
@@ -53,6 +53,19 @@ canonicalCrossEntropyBoundary = record
   ; empiricalEstimatorSpecified = true
   ; generalizationGapTracked = true
   ; interpretation = "Cross-entropy measures expected code length under a model-relative code and separates irreducible source uncertainty from model mismatch"
+  }
+
+canonicalPredictionCompressionBridge : PredictionCompressionBridge
+canonicalPredictionCompressionBridge = record
+  { contextualBoundary = Contextual.canonicalMessageProbabilityBoundary
+  ; polycomputationBoundary = Poly.canonicalObserverRelativePolycomputationBoundary
+  ; substrateBoundary = Substrate.canonicalSubstrateConstrainedComputationBoundary
+  ; probabilityToCodeLengthWitness = false
+  ; codeLengthToProbabilityWitness = false
+  ; arithmeticCoderOrEquivalentWitness = false
+  ; finitePrecisionOverheadBound = false
+  ; expectedLogLossEqualsExpectedCodeLength = false
+  ; modelMismatchAppearsAsExcessLength = true
   }
 
 PredictionEqualsCompressionWithoutCodingModel : Bool
