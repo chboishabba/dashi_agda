@@ -4,6 +4,7 @@ import argparse,json,math,os,tempfile
 from pathlib import Path
 import numpy as np
 from ns_galerkin_coherence_core import exact_alignment_budget,fit_nonnegative_dominating_coefficients,load_raw_state
+from ns_hard_alignment_derivative import hard_simple_alignment_derivative
 FEATURES=('pressure','commutator','viscous','tail')
 
 def floats(s):
@@ -26,11 +27,12 @@ def point(cp,pos,beta,gap,allow):
         raw,nu,state_t=load_raw_state(path)
         if state_t is not None and not math.isclose(state_t,t,abs_tol=1e-12): raise ValueError('state time mismatch')
         ex=exact_alignment_budget(raw,nu,int(cp['target_shell']),soft_beta_dimensionless=beta,gap_relative_floor=gap)
+        hard=hard_simple_alignment_derivative(raw,nu,int(cp['target_shell']),gap_relative_floor=gap)
     except (FileNotFoundError,KeyError,ValueError) as e:
         if not allow: raise
-        ex=None;err=str(e)
+        ex=hard=None;err=str(e)
     else: err=None
-    row=dict(cp);row.update(exact_galerkin_alignment_budget=ex,exact_budget_available=ex is not None,exact_budget_state_error=err,truth_authority=False,theorem_authority=False,promoted=False)
+    row=dict(cp);row.update(exact_galerkin_alignment_budget=ex,hard_simple_spectrum_alignment_budget=hard,exact_budget_available=ex is not None,exact_budget_state_error=err,truth_authority=False,theorem_authority=False,promoted=False)
     if ex is None:return row,None
     tail=max(1-float(cp.get('packet_geometry',{}).get('local_shell_mass_fraction',0)),0)
     p={'trajectory_id':str(cp.get('trajectory_id','aggregate-trajectory')),'checkpoint_index':int(cp.get('checkpoint_index',pos)),'time':t,'gamma':float(cp['gamma']) if cp.get('gamma') is not None else None,'tight':bool(cp.get('packet_tight',False)),'tail':tail,'exact':ex}
@@ -78,7 +80,7 @@ def audit(payload,thresholds,kappas,*,soft_projector_beta=8,gap_relative_floor=1
     for n in sorted({p['exact']['cutoff'] for p in points}):
         s=[p for p in points if p['exact']['cutoff']==n]
         cutoffs.append({'cutoff':n,'checkpoint_count':len(s),'maximum_rhs_decomposition_residual':max(p['exact']['rhs_decomposition_max_residual'] for p in s),'maximum_component_alignment_residual':max(p['exact']['exact_total_derivatives']['component_sum_alignment_residual'] for p in s),'minimum_simple_spectrum_enstrophy_fraction':min(p['exact']['gauge_invariant_pressure']['simple_top_eigenvalue_enstrophy_fraction'] for p in s)})
-    return {'schema_version':'2.0.0','authority':{'finite_galerkin_derivative_exact_for_declared_soft_budget':True,'truth_authority':False,'theorem_authority':False,'cutoff_uniform_authority':False,'promoted':False},'definitions':{'E_K':'mean |omega_K|^2','N_K':'mean omega^T P_beta(S) omega','A_K':'N_K/E_K','P_beta':'exp(beta S)/trace(exp(beta S))','theta_emp':'integrated positive remainder / integrated local depletion'},'checkpoints':rows,'pointwise_parameter_audits':params,'interval_absorption_audits':absorb,'cutoff_summary':cutoffs,'cutoff_count':len(cutoffs),'uniform_candidate_tested_across_multiple_cutoffs':len(cutoffs)>=2}
+    return {'schema_version':'2.1.0','authority':{'finite_galerkin_derivative_exact_for_declared_soft_budget':True,'hard_budget_global_derivative_authority':False,'truth_authority':False,'theorem_authority':False,'cutoff_uniform_authority':False,'bkm_authority':False,'clay_authority':False,'promoted':False},'definitions':{'E_K':'mean |omega_K|^2','N_K':'mean omega^T P_beta(S) omega','A_K':'N_K/E_K','P_beta':'exp(beta S)/trace(exp(beta S))','hard_A1':'mean (omega.e1)^2 / E_K on simple-spectrum diagnostics','theta_emp':'integrated positive remainder / integrated local depletion'},'checkpoints':rows,'pointwise_parameter_audits':params,'interval_absorption_audits':absorb,'cutoff_summary':cutoffs,'cutoff_count':len(cutoffs),'uniform_candidate_tested_across_multiple_cutoffs':len(cutoffs)>=2}
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--residence-json',type=Path,required=True);p.add_argument('--output-json',type=Path,required=True);p.add_argument('--gamma-thresholds',default='0.5,0.9,1.0');p.add_argument('--kappa-candidates',default='0.01,0.05,0.1,0.25');p.add_argument('--soft-projector-beta',type=float,default=8);p.add_argument('--gap-relative-floor',type=float,default=1e-4);p.add_argument('--allow-missing-state',action='store_true');p.add_argument('--pretty',action='store_true');a=p.parse_args();r=audit(json.loads(a.residence_json.read_text()),floats(a.gamma_thresholds),floats(a.kappa_candidates),soft_projector_beta=a.soft_projector_beta,gap_relative_floor=a.gap_relative_floor,allow_missing_state=a.allow_missing_state);atomic(a.output_json,r,a.pretty);print(json.dumps({'output_json':str(a.output_json),'checkpoint_count':len(r['checkpoints'])},sort_keys=True))
