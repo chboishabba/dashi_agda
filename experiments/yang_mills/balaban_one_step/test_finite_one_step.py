@@ -14,6 +14,7 @@ from frontier_search import (
     hodge_poincare_diagnostic,
     run_search,
 )
+from local_parametrix_search import run_search as run_parametrix_search
 from su2_ad_functional_calculus import (
     ad_matrix,
     dexp_matrix,
@@ -67,6 +68,24 @@ class FiniteOneStepTests(unittest.TestCase):
         self.assertEqual(report["claim_scope"], "finite_lattice_only")
         self.assertTrue(report["zero_background_section"]["constraints_independent"])
         self.assertTrue(report["all_background_sections_closed"])
+
+    def test_parametrix_does_not_promote_full_volume_inverse_as_local(self) -> None:
+        report = run_parametrix_search(
+            L=2,
+            average_block=2,
+            local_sides=[1, 2],
+            mus=[0.0],
+            radii=[0.0],
+            seeds=1,
+            relaxations=[1.0],
+        )
+        self.assertTrue(report["has_strict_weighted_remainder_bound"])
+        self.assertFalse(report["has_strict_proper_local_weighted_remainder_bound"])
+        self.assertTrue(report["global_inverse_only"])
+        self.assertTrue(report["spectral_without_weighted_norm_obstructions"])
+        best = report["best_proper_local_candidate"]
+        self.assertIsNotNone(best)
+        self.assertGreaterEqual(max(best["left"], best["right"]), 1.0)
 
     def test_su2_ad_cubic_and_closed_dexp_inverse(self) -> None:
         y = np.array([0.07, -0.03, 0.11])
