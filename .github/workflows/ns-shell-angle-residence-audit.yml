@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
       - 'scripts/ns_depletion_currency_audit.py'
+      - 'scripts/ns_bounded_turnover_potential_audit.py'
       - 'scripts/ns_hard_alignment_derivative.py'
       - 'scripts/ns_generate_matched_galerkin_trajectories.py'
       - 'scripts/ns_shell_pair_transfer_audit.py'
@@ -24,16 +25,21 @@ on:
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
       - 'scripts/tests/test_ns_depletion_currency_audit.py'
+      - 'scripts/tests/test_ns_bounded_turnover_potential_audit.py'
       - 'docs/ns_exact_galerkin_coherence_audit.md'
       - 'docs/ns_exact_galerkin_coherence_baseline_results.md'
       - 'docs/ns_depletion_currency_comparison.md'
+      - 'docs/ns_bounded_turnover_potential.md'
       - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
       - 'DASHI/Physics/Closure/NSDepletionCurrencyFork.agda'
+      - 'DASHI/Physics/Closure/NSBoundedPotentialTurnoverBudget.agda'
+      - 'DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
   pull_request:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
       - 'scripts/ns_depletion_currency_audit.py'
+      - 'scripts/ns_bounded_turnover_potential_audit.py'
       - 'scripts/ns_hard_alignment_derivative.py'
       - 'scripts/ns_generate_matched_galerkin_trajectories.py'
       - 'scripts/ns_shell_pair_transfer_audit.py'
@@ -53,11 +59,15 @@ on:
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
       - 'scripts/tests/test_ns_depletion_currency_audit.py'
+      - 'scripts/tests/test_ns_bounded_turnover_potential_audit.py'
       - 'docs/ns_exact_galerkin_coherence_audit.md'
       - 'docs/ns_exact_galerkin_coherence_baseline_results.md'
       - 'docs/ns_depletion_currency_comparison.md'
+      - 'docs/ns_bounded_turnover_potential.md'
       - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
       - 'DASHI/Physics/Closure/NSDepletionCurrencyFork.agda'
+      - 'DASHI/Physics/Closure/NSBoundedPotentialTurnoverBudget.agda'
+      - 'DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
 
 concurrency:
@@ -85,7 +95,8 @@ jobs:
             scripts/tests/test_ns_packet_coherence_budget_audit.py \
             scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py \
             scripts/tests/test_ns_timeline_and_multicutoff.py \
-            scripts/tests/test_ns_depletion_currency_audit.py
+            scripts/tests/test_ns_depletion_currency_audit.py \
+            scripts/tests/test_ns_bounded_turnover_potential_audit.py
 
   matched-cutoff-baseline:
     runs-on: ubuntu-latest
@@ -105,7 +116,7 @@ jobs:
             --output-json ns-matched-baseline.json \
             --end-time 0.001 \
             --output-dt 0.001
-      - name: Require cutoff coverage and nonvacuous held-out execution
+      - name: Require complete nonvacuous proof-search receipts
         run: |
           python - <<'PY'
           import json
@@ -129,9 +140,21 @@ jobs:
           currency_validation = comparison['heldout_validation']
           assert currency_validation['matched_cutoff_set_complete'], currency_validation
           assert currency_validation['heldout_nonvacuous_excursion_coverage'], currency_validation
-          # Candidate success or failure is an empirical result. CI requires a
-          # complete non-vacuous comparison, never a preordained positive answer.
           assert 'any_candidate_currency_passes_sampled_heldout_gate' in currency_validation
+
+          bounded = data['bounded_turnover_potential']
+          signed = bounded['heldout_signed_escape_validation']
+          assert signed['matched_cutoff_set_complete'], signed
+          assert any(a['nonvacuous_excursion_test'] for a in signed['parameter_audits']), signed
+          assert 'any_signed_escape_currency_passes_heldout' in signed
+          budgets = bounded['trajectory_bounded_budgets']
+          assert budgets, bounded
+          assert all(
+              row['bounded_potential_budget_holds_with_quadrature_allowance']
+              for row in budgets
+          ), budgets
+          # Candidate success or falsification is a scientific output, not a CI
+          # assumption. CI requires complete non-vacuous accounting only.
           PY
       - name: Upload matched baseline receipt
         if: always()
@@ -154,7 +177,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: ns-exact-coherence-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-      - name: Check quotient rule, currency fork, and residence reduction with Agda 2.9
+      - name: Check quotient, currency, bounded-potential, and residence modules
         id: focused
         shell: bash
         run: |
@@ -169,6 +192,7 @@ jobs:
             targets=(
               DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda
               DASHI/Physics/Closure/NSDepletionCurrencyFork.agda
+              DASHI/Physics/Closure/NSBoundedPotentialTurnoverBudget.agda
               DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
