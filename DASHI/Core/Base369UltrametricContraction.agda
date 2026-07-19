@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Nat using (_≤_; z≤n; s≤s; pred)
+open import Data.Vec using ([]; _∷_)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import DASHI.Geometry.SSP369Ultrametric as Prefix using
@@ -13,7 +14,6 @@ open import DASHI.Geometry.SSP369Ultrametric as Prefix using
   ; digit9
   ; Address
   ; distance
-  ; distance-zero→equal
   ; ultrametric369
   )
 import Ultrametric as UM
@@ -42,8 +42,6 @@ encodeDigit pos = digit9
 encodeAddress : Base369State → Address (suc (suc (suc zero)))
 encodeAddress (state369 a b c) =
   encodeDigit a ∷ encodeDigit b ∷ encodeDigit c ∷ []
-  where
-    open import Data.Vec using ([]; _∷_)
 
 ------------------------------------------------------------------------
 -- Concrete ultrametric.
@@ -68,68 +66,6 @@ base369Ultrametric =
         UM.Ultrametric.ultratriangle ultrametric369
           (encodeAddress x) (encodeAddress y) (encodeAddress z)
     }
-
-base369Distance-zero→equal :
-  (x y : Base369State) →
-  base369Distance x y ≡ zero →
-  x ≡ y
-base369Distance-zero→equal
-  (state369 neg neg neg) (state369 neg neg neg) _ = refl
-base369Distance-zero→equal
-  (state369 neg neg zer) (state369 neg neg zer) _ = refl
-base369Distance-zero→equal
-  (state369 neg neg pos) (state369 neg neg pos) _ = refl
-base369Distance-zero→equal
-  (state369 neg zer neg) (state369 neg zer neg) _ = refl
-base369Distance-zero→equal
-  (state369 neg zer zer) (state369 neg zer zer) _ = refl
-base369Distance-zero→equal
-  (state369 neg zer pos) (state369 neg zer pos) _ = refl
-base369Distance-zero→equal
-  (state369 neg pos neg) (state369 neg pos neg) _ = refl
-base369Distance-zero→equal
-  (state369 neg pos zer) (state369 neg pos zer) _ = refl
-base369Distance-zero→equal
-  (state369 neg pos pos) (state369 neg pos pos) _ = refl
-base369Distance-zero→equal
-  (state369 zer neg neg) (state369 zer neg neg) _ = refl
-base369Distance-zero→equal
-  (state369 zer neg zer) (state369 zer neg zer) _ = refl
-base369Distance-zero→equal
-  (state369 zer neg pos) (state369 zer neg pos) _ = refl
-base369Distance-zero→equal
-  (state369 zer zer neg) (state369 zer zer neg) _ = refl
-base369Distance-zero→equal
-  (state369 zer zer zer) (state369 zer zer zer) _ = refl
-base369Distance-zero→equal
-  (state369 zer zer pos) (state369 zer zer pos) _ = refl
-base369Distance-zero→equal
-  (state369 zer pos neg) (state369 zer pos neg) _ = refl
-base369Distance-zero→equal
-  (state369 zer pos zer) (state369 zer pos zer) _ = refl
-base369Distance-zero→equal
-  (state369 zer pos pos) (state369 zer pos pos) _ = refl
-base369Distance-zero→equal
-  (state369 pos neg neg) (state369 pos neg neg) _ = refl
-base369Distance-zero→equal
-  (state369 pos neg zer) (state369 pos neg zer) _ = refl
-base369Distance-zero→equal
-  (state369 pos neg pos) (state369 pos neg pos) _ = refl
-base369Distance-zero→equal
-  (state369 pos zer neg) (state369 pos zer neg) _ = refl
-base369Distance-zero→equal
-  (state369 pos zer zer) (state369 pos zer zer) _ = refl
-base369Distance-zero→equal
-  (state369 pos zer pos) (state369 pos zer pos) _ = refl
-base369Distance-zero→equal
-  (state369 pos pos neg) (state369 pos pos neg) _ = refl
-base369Distance-zero→equal
-  (state369 pos pos zer) (state369 pos pos zer) _ = refl
-base369Distance-zero→equal
-  (state369 pos pos pos) (state369 pos pos pos) _ = refl
-base369Distance-zero→equal x y d0 with
-  distance-zero→equal (encodeAddress x) (encodeAddress y) d0
-... | ()
 
 ------------------------------------------------------------------------
 -- A concrete nonconstant Base369 kernel.
