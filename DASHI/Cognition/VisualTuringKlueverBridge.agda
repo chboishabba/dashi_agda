@@ -9,6 +9,7 @@ module DASHI.Cognition.VisualTuringKlueverBridge where
 -- from an observed form back to a unique hidden tissue state or semantic
 -- interpretation.
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Biology.TuringPatternRegimeSurface using
   ( TuringRegime
   ; stationaryFiniteWavelengthTuring
@@ -82,8 +83,6 @@ record TuringDerivativeBoundary : Set where
     firstTimeAnchor : timeRole ≡ firstOrderTimeEvolution
     secondSpaceAnchor : spatialRole ≡ secondOrderSpatialLaplacian
     higherTermsResidualOnly : residualRole ≡ higherOrderResidualJet
-
-open import Agda.Builtin.Equality using (_≡_; refl)
 
 canonicalTuringDerivativeBoundary : TuringDerivativeBoundary
 canonicalTuringDerivativeBoundary =
