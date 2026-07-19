@@ -1,37 +1,14 @@
 #!/usr/bin/env python3
-"""Audit shell/angular weighted control of the compact-Gamma off-packet derivative.
+"""Finite-Galerkin shell/angular audit for the compact-Gamma off-packet derivative.
 
-The exact differential lane localized the held-out failure of a common
-``D log E`` modulus to
+The audit tests
 
-    D m_off(u)[h],
+    |D m_off,K(u)[h]|
+      <= C E_K(u) ||h||_{Xtilde(K,sigma,eta)} + Tail_{K,R}(u,h)
 
-where ``m_off`` is the off-packet nonlinear contribution to the parabolically
-normalized derivative of the bounded compact-Gamma potential.  This script
-keeps that derivative exact at finite Galerkin cutoff and asks whether the
-failure is repaired by a declared shell/angular tangent norm plus an explicit
-far-shell tail:
-
-    |D m_off(u)[h]|
-      <= C_Schur E(u) ||h||_{X~_{K,sigma,eta}} + Tail_{K,r}(u,h).
-
-The weighted norm is
-
-    ||h||^2 = sum_k (1 + 2^(-2K)|k|^2)
-                    2^(2 sigma |j(k)-K|)
-                    (1 + eta a_K(k))^2 |h_k|^2,
-
-where ``j(k)=floor(log2 |k|)`` and ``a_K(k)`` is the projective angular defect
-relative to the target-packet Fourier second moment.  The tangent is projected
-onto the fixed target-packet-energy surface before the split.  Shell pieces
-are reality closed and their exact signed derivatives are checked to
-reconstruct the full derivative.
-
-Constants are fitted on calibration states, then applied unchanged to an
-independent held-out family and exact-seed matched N32/N48/N64 states.  This is
-finite-Galerkin proof search.  It does not prove a Schur estimate, tail
-absorption, shell/cutoff uniformity, compactness, BKM continuation, or Clay
-regularity.
+on a declared normalized packet family.  The derivative and shell partition
+are exact at the finite Galerkin cutoff.  Constants and weights are empirical
+proof-search objects only; no continuum or promotion authority is inferred.
 """
 from __future__ import annotations
 
@@ -56,7 +33,6 @@ from ns_compact_gamma_common_u_net_audit import (
 from ns_compact_gamma_differential_modulus_audit import (
     compact_second,
     dangerous_rows,
-    inner_hat,
     mechanism_fields,
     path_state_tangent,
     prepare,
@@ -74,12 +50,10 @@ from ns_compact_gamma_potential_audit import (
 )
 from ns_compact_gamma_replenishment_audit import mechanism_accounting
 
-
 OFF_MECHANISM = "off_packet_nonlinear"
 
 
 def shell_index(norm: np.ndarray) -> np.ndarray:
-    """Return the dyadic shell index, with a sentinel at the zero mode."""
     result = np.full(norm.shape, -10_000, dtype=np.int64)
     positive = norm > 0.0
     result[positive] = np.floor(np.log2(norm[positive]) + 1.0e-12).astype(np.int64)
@@ -87,13 +61,11 @@ def shell_index(norm: np.ndarray) -> np.ndarray:
 
 
 def projective_angular_bin(wave: np.ndarray) -> np.ndarray:
-    """Reality-invariant six-sector bin from the two dominant coordinate axes."""
     order = np.argsort(-np.abs(wave), axis=-1, kind="stable")
     return order[..., 0] * 3 + order[..., 1]
 
 
 def packet_orientation(values: dict[str, Any]) -> tuple[np.ndarray, np.ndarray]:
-    """Target-packet second moment and projective angular defect per mode."""
     geometry = values["geometry"]
     n = int(geometry["cutoff"])
     packet = geometry["packet"]
@@ -110,21 +82,18 @@ def packet_orientation(values: dict[str, Any]) -> tuple[np.ndarray, np.ndarray]:
         out=np.zeros_like(wave, dtype=np.float64),
         where=norm_sq[..., None] > 0.0,
     )
+    packet_unit = unit[packet]
+    packet_energy = modal_energy[packet]
     moment = np.einsum(
-        "...,...i,...j->ij",
-        modal_energy * packet,
-        unit,
-        unit,
+        "n,ni,nj->ij", packet_energy, packet_unit, packet_unit
     ) / total
     defect = 1.0 - np.einsum("...i,ij,...j->...", unit, moment, unit)
-    defect = np.clip(defect, 0.0, 1.0)
-    return moment, defect
+    return moment, np.clip(defect, 0.0, 1.0)
 
 
 def off_packet_derivative(
     values: dict[str, Any], tangent: np.ndarray, *, nu: float, shell: int
 ) -> float:
-    """Exact finite-Galerkin derivative of the signed off-packet mechanism."""
     fields = mechanism_fields(values, None, nu)
     dfields = mechanism_fields(values, tangent, nu)
     second = compact_second(values, tangent, fields[OFF_MECHANISM], nu, shell)
@@ -132,7 +101,7 @@ def off_packet_derivative(
         values, dfields[OFF_MECHANISM], nu, shell
     )["compact_gamma_potential_derivative"]
     if field_dot is None:
-        raise ValueError("off-packet field derivative hit the compact-Gamma kink")
+        raise ValueError("off-packet derivative hit compact-Gamma kink")
     return (second + float(field_dot)) / float(values["parabolic_rate"])
 
 
@@ -149,42 +118,44 @@ def weighted_norm_from_components(
 ) -> float:
     square = 0.0
     for component in shell_components:
-        offset = abs(int(component["shell_offset"]))
-        radial = float(2.0 ** (2.0 * shell_exponent * offset))
+        radial = float(
+            2.0 ** (2.0 * shell_exponent * abs(int(component["shell_offset"])))
+        )
         e0 = float(component["xk_energy"])
         e1 = float(component["xk_angular_moment_1"])
         e2 = float(component["xk_angular_moment_2"])
-        square += radial * (e0 + 2.0 * angular_eta * e1 + angular_eta * angular_eta * e2)
+        square += radial * (
+            e0 + 2.0 * angular_eta * e1 + angular_eta * angular_eta * e2
+        )
     return math.sqrt(max(square, 0.0))
 
 
 def candidate_metrics(
-    row: dict[str, Any], *, shell_exponent: float, angular_eta: float, tail_radius: int
+    response: dict[str, Any], *, shell_exponent: float, angular_eta: float,
+    tail_radius: int,
 ) -> dict[str, float]:
-    weighted_norm = weighted_norm_from_components(
-        row["shell_components"],
+    norm = weighted_norm_from_components(
+        response["shell_components"],
         shell_exponent=shell_exponent,
         angular_eta=angular_eta,
     )
-    if weighted_norm <= 1.0e-30:
-        raise ValueError("weighted tangent norm vanished")
-    escape = float(row["escape_supply"])
-    if escape <= 1.0e-30:
-        raise ValueError("escape supply vanished")
+    escape = float(response["escape_supply"])
+    if norm <= 1.0e-30 or escape <= 1.0e-30:
+        raise ValueError("candidate denominator vanished")
     near = sum(
-        abs(float(component["off_derivative_contribution"]))
-        for component in row["shell_components"]
-        if abs(int(component["shell_offset"])) <= tail_radius
+        abs(float(row["off_derivative_contribution"]))
+        for row in response["shell_components"]
+        if abs(int(row["shell_offset"])) <= tail_radius
     )
     tail = sum(
-        abs(float(component["off_derivative_contribution"]))
-        for component in row["shell_components"]
-        if abs(int(component["shell_offset"])) > tail_radius
+        abs(float(row["off_derivative_contribution"]))
+        for row in response["shell_components"]
+        if abs(int(row["shell_offset"])) > tail_radius
     )
-    full = abs(float(row["off_derivative"]))
-    denominator = escape * weighted_norm
+    full = abs(float(response["off_derivative"]))
+    denominator = escape * norm
     return {
-        "weighted_norm": weighted_norm,
+        "weighted_norm": norm,
         "near_absolute_response": near,
         "tail_absolute_response": tail,
         "full_absolute_response": full,
@@ -213,15 +184,14 @@ def off_response(
     values = {**snapshot, "geometry": _state_geometry(raw, nu, shell)}
     tangent, tangent_residual = project_energy_tangent(values, tangent)
     tangent = prepare(values, tangent)
-    base_density = xk_density(values, tangent, shell)
-    base_norm = math.sqrt(max(float(np.sum(base_density)), 0.0))
+    density = xk_density(values, tangent, shell)
+    base_norm = math.sqrt(max(float(np.sum(density)), 0.0))
     if base_norm <= 1.0e-30:
         return {
             "resolved": False,
             "reason": "zero-projected-tangent",
             "gamma": float(snapshot["gamma"]),
         }
-
     accounting = mechanism_accounting(snapshot)
     escape = float(accounting["escape_supply"])
     if escape <= 1.0e-30:
@@ -237,45 +207,48 @@ def off_response(
     retained = geometry["dealias"] & (geometry["norm_sq"] > 0.0)
     indices = shell_index(np.sqrt(geometry["norm_sq"]))
     angular_bins = projective_angular_bin(geometry["wave"])
+    active_offsets = sorted({
+        int(index - shell)
+        for index in indices[retained & (density > 1.0e-32)]
+    })
 
     shell_components: list[dict[str, Any]] = []
     angular_rows: list[dict[str, Any]] = []
-    active_offsets = sorted({
-        int(index - shell)
-        for index in indices[retained & (base_density > 1.0e-32)]
-    })
     for offset in active_offsets:
         mask = retained & (indices == shell + offset)
         component = tangent * mask[..., None]
         derivative = off_packet_derivative(values, component, nu=nu, shell=shell)
-        density = base_density * mask
+        local_density = density * mask
         shell_components.append({
             "shell_offset": offset,
             "mode_count": int(np.count_nonzero(mask)),
             "off_derivative_contribution": derivative,
-            "xk_energy": float(np.sum(density)),
-            "xk_angular_moment_1": float(np.sum(density * angular_defect)),
-            "xk_angular_moment_2": float(np.sum(density * angular_defect * angular_defect)),
+            "xk_energy": float(np.sum(local_density)),
+            "xk_angular_moment_1": float(np.sum(local_density * angular_defect)),
+            "xk_angular_moment_2": float(
+                np.sum(local_density * angular_defect * angular_defect)
+            ),
         })
         for angular_bin in sorted({int(value) for value in angular_bins[mask]}):
             local = mask & (angular_bins == angular_bin)
+            local_energy = float(np.sum(density * local))
             angular_rows.append({
                 "shell_offset": offset,
                 "angular_bin": angular_bin,
                 "mode_count": int(np.count_nonzero(local)),
-                "xk_energy": float(np.sum(base_density * local)),
+                "xk_energy": local_energy,
                 "mean_projective_angular_defect": (
-                    float(np.sum(base_density * local * angular_defect))
-                    / max(float(np.sum(base_density * local)), 1.0e-30)
+                    float(np.sum(density * local * angular_defect))
+                    / max(local_energy, 1.0e-30)
                 ),
             })
 
-    reconstruction = abs(
-        sum(float(component["off_derivative_contribution"]) for component in shell_components)
+    derivative_reconstruction = abs(
+        sum(float(row["off_derivative_contribution"]) for row in shell_components)
         - full_derivative
     )
-    density_reconstruction = abs(
-        sum(float(component["xk_energy"]) for component in shell_components)
+    energy_reconstruction = abs(
+        sum(float(row["xk_energy"]) for row in shell_components)
         - base_norm * base_norm
     )
 
@@ -283,35 +256,44 @@ def off_response(
     tangent_norm = float(np.linalg.norm(tangent))
     epsilon = min(
         1.0e-5,
-        finite_difference_relative_step * max(raw_norm, 1.0) / max(tangent_norm, 1.0e-30),
+        finite_difference_relative_step
+        * max(raw_norm, 1.0)
+        / max(tangent_norm, 1.0e-30),
     )
     plus = compact_gamma_snapshot(raw + epsilon * tangent, nu, shell)
     minus = compact_gamma_snapshot(raw - epsilon * tangent, nu, shell)
-    off_fd_residual = None
-    if all(item["positive_part_branch"] == "strict_positive_transfer" for item in (plus, minus)):
-        plus_off = float(mechanism_accounting(plus)["signed_contributions"][OFF_MECHANISM])
-        minus_off = float(mechanism_accounting(minus)["signed_contributions"][OFF_MECHANISM])
-        finite_difference = (plus_off - minus_off) / (2.0 * epsilon)
-        off_fd_residual = abs(finite_difference - full_derivative)
+    finite_residual = None
+    if all(
+        row["positive_part_branch"] == "strict_positive_transfer"
+        for row in (plus, minus)
+    ):
+        plus_off = float(
+            mechanism_accounting(plus)["signed_contributions"][OFF_MECHANISM]
+        )
+        minus_off = float(
+            mechanism_accounting(minus)["signed_contributions"][OFF_MECHANISM]
+        )
+        finite_residual = abs(
+            (plus_off - minus_off) / (2.0 * epsilon) - full_derivative
+        )
 
+    off_signed = float(accounting["signed_contributions"][OFF_MECHANISM])
     return {
         "resolved": True,
         "gamma": float(snapshot["gamma"]),
         "compact_potential": float(snapshot["compact_gamma_potential_B"]),
         "escape_supply": escape,
-        "off_signed_mechanism": float(accounting["signed_contributions"][OFF_MECHANISM]),
-        "off_mechanism_active_in_escape": bool(
-            float(accounting["signed_contributions"][OFF_MECHANISM]) < 0.0
-        ),
+        "off_signed_mechanism": off_signed,
+        "off_mechanism_active_in_escape": off_signed < 0.0,
         "off_derivative": full_derivative,
         "base_norm_XK": base_norm,
         "packet_energy_tangent_residual": tangent_residual,
         "packet_orientation_second_moment": orientation.tolist(),
         "shell_components": shell_components,
         "angular_energy_rows": angular_rows,
-        "shell_derivative_reconstruction_residual": reconstruction,
-        "shell_energy_reconstruction_residual": density_reconstruction,
-        "off_derivative_finite_difference_residual": off_fd_residual,
+        "shell_derivative_reconstruction_residual": derivative_reconstruction,
+        "shell_energy_reconstruction_residual": energy_reconstruction,
+        "off_derivative_finite_difference_residual": finite_residual,
         "mechanism_balance_residual": float(accounting["mechanism_balance_residual"]),
     }
 
@@ -327,12 +309,12 @@ def response_rows(
     times_per_profile: int,
     tangent_kinds: tuple[str, ...],
 ) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
+    output: list[dict[str, Any]] = []
     for profile in profiles:
         center, _distance = nearest_center(profile, centers)
         shell = int(profile["target_shell"])
-        for trajectory_row in dangerous_rows(profile, times_per_profile):
-            tau = float(trajectory_row["parabolic_time"])
+        for row in dangerous_rows(profile, times_per_profile):
+            tau = float(row["parabolic_time"])
             member_raw = state_at_time(trajectories[profile["profile_id"]], tau)
             center_raw = state_at_time(trajectories[center["profile_id"]], tau)
             for parameter in path_parameters:
@@ -345,12 +327,15 @@ def response_rows(
                     target_energy=target_energy,
                 )
                 geometry = _state_geometry(state, nu, shell)
-                tangents = {"path": path_tangent, "rhs": geometry["total_rhs_hat"]}
+                tangents = {
+                    "path": path_tangent,
+                    "rhs": geometry["total_rhs_hat"],
+                }
                 unknown = set(tangent_kinds) - set(tangents)
                 if unknown:
                     raise ValueError(f"unsupported tangent kinds: {sorted(unknown)}")
                 for kind in tangent_kinds:
-                    rows.append({
+                    output.append({
                         "profile_id": profile["profile_id"],
                         "center_profile_id": center["profile_id"],
                         "cutoff": int(profile["cutoff"]),
@@ -360,13 +345,10 @@ def response_rows(
                         "tangent_kind": kind,
                         "normalization_residual": normalization_residual,
                         "response": off_response(
-                            state,
-                            tangents[kind],
-                            nu=nu,
-                            shell=shell,
+                            state, tangents[kind], nu=nu, shell=shell
                         ),
                     })
-    return rows
+    return output
 
 
 def fit_candidate(
@@ -394,7 +376,6 @@ def fit_candidate(
         and all(math.isfinite(value) for item in metrics for value in item.values())
     )
     raw = max((item["near_schur_quotient"] for item in metrics), default=math.inf)
-    fitted = raw * (1.0 + slack) if finite else math.inf
     return {
         "shell_exponent": shell_exponent,
         "angular_eta": angular_eta,
@@ -406,7 +387,9 @@ def fit_candidate(
             row["response"].get("reason") for row in unresolved
         }),
         "raw_near_schur_constant": raw,
-        "fitted_near_schur_constant": fitted,
+        "fitted_near_schur_constant": (
+            raw * (1.0 + slack) if finite else math.inf
+        ),
         "maximum_calibration_tail_quotient": max(
             (item["tail_quotient"] for item in metrics), default=None
         ),
@@ -448,7 +431,11 @@ def evaluate_candidate(
             angular_eta=float(candidate["angular_eta"]),
             tail_radius=int(candidate["tail_radius"]),
         )
-        near_budget = constant * float(response["escape_supply"]) * metrics["weighted_norm"]
+        near_budget = (
+            constant
+            * float(response["escape_supply"])
+            * metrics["weighted_norm"]
+        )
         near_margin = near_budget - metrics["near_absolute_response"]
         full_margin = (
             near_budget
@@ -512,23 +499,24 @@ def exact_matched_profile(
 def select_adverse_profiles(
     profiles: list[dict[str, Any]], rows: list[dict[str, Any]], verify_count: int
 ) -> list[dict[str, Any]]:
-    score_by_profile: dict[str, float] = {}
+    scores: dict[str, float] = {}
     for row in rows:
         response = row["response"]
-        if not response["resolved"]:
-            score = math.inf
-        else:
-            score = abs(float(response["off_derivative"])) / max(
-                float(response["escape_supply"]) * float(response["base_norm_XK"]),
+        score = math.inf if not response["resolved"] else (
+            abs(float(response["off_derivative"]))
+            / max(
+                float(response["escape_supply"])
+                * float(response["base_norm_XK"]),
                 1.0e-30,
             )
-        score_by_profile[row["profile_id"]] = max(
-            score_by_profile.get(row["profile_id"], -math.inf), score
+        )
+        scores[row["profile_id"]] = max(
+            scores.get(row["profile_id"], -math.inf), score
         )
     selected: list[dict[str, Any]] = []
     for shell in sorted({int(profile["target_shell"]) for profile in profiles}):
         local = [profile for profile in profiles if int(profile["target_shell"]) == shell]
-        local.sort(key=lambda profile: -score_by_profile.get(profile["profile_id"], -math.inf))
+        local.sort(key=lambda profile: -scores.get(profile["profile_id"], -math.inf))
         selected.extend(local[:verify_count])
     return selected
 
@@ -566,6 +554,7 @@ def audit_family(
         raise ValueError("weight parameters must be nonnegative")
     if any(radius < 0 for radius in tail_radii):
         raise ValueError("tail radii must be nonnegative")
+
     centers, calibration, holdout = build_profile_sets(
         base_parameters=base_parameters,
         center_seeds=center_seeds,
@@ -599,42 +588,37 @@ def audit_family(
         profile["profile_id"]: reconstruct_trajectory(profile, **common)
         for profile in centers + calibration + holdout
     }
+    row_kwargs = dict(
+        nu=nu,
+        target_energy=target_packet_energy,
+        path_parameters=path_parameters,
+        times_per_profile=times_per_profile,
+        tangent_kinds=tangent_kinds,
+    )
     calibration_rows = response_rows(
-        calibration,
-        centers,
-        trajectories,
-        nu=nu,
-        target_energy=target_packet_energy,
-        path_parameters=path_parameters,
-        times_per_profile=times_per_profile,
-        tangent_kinds=tangent_kinds,
+        calibration, centers, trajectories, **row_kwargs
     )
-    holdout_rows = response_rows(
-        holdout,
-        centers,
-        trajectories,
-        nu=nu,
-        target_energy=target_packet_energy,
-        path_parameters=path_parameters,
-        times_per_profile=times_per_profile,
-        tangent_kinds=tangent_kinds,
-    )
+    holdout_rows = response_rows(holdout, centers, trajectories, **row_kwargs)
 
     candidates: list[dict[str, Any]] = []
-    for shell_exponent in shell_exponents:
-        for angular_eta in angular_etas:
-            for tail_radius in tail_radii:
-                fitted = fit_candidate(
+    for sigma in shell_exponents:
+        for eta in angular_etas:
+            for radius in tail_radii:
+                candidate = fit_candidate(
                     calibration_rows,
-                    shell_exponent=shell_exponent,
-                    angular_eta=angular_eta,
-                    tail_radius=tail_radius,
+                    shell_exponent=sigma,
+                    angular_eta=eta,
+                    tail_radius=radius,
                     slack=schur_slack,
                 )
-                fitted["holdout_evaluation"] = evaluate_candidate(holdout_rows, fitted)
-                candidates.append(fitted)
+                candidate["holdout_evaluation"] = evaluate_candidate(
+                    holdout_rows, candidate
+                )
+                candidates.append(candidate)
 
-    selected_profiles = select_adverse_profiles(holdout, holdout_rows, verify_count)
+    selected_profiles = select_adverse_profiles(
+        holdout, holdout_rows, verify_count
+    )
     matched_rows: list[dict[str, Any]] = []
     matched_profile_count = 0
     build_kwargs = dict(
@@ -661,50 +645,47 @@ def audit_family(
                 for profile in (member, center)
             }
             matched_rows.extend(response_rows(
-                [member],
-                [center],
-                local,
-                nu=nu,
-                target_energy=target_packet_energy,
-                path_parameters=path_parameters,
-                times_per_profile=times_per_profile,
-                tangent_kinds=tangent_kinds,
+                [member], [center], local, **row_kwargs
             ))
 
     for candidate in candidates:
-        candidate["matched_evaluation"] = evaluate_candidate(matched_rows, candidate)
-        candidate["full_chain_survives"] = bool(candidate["finite_candidate"])
-        candidate["full_chain_survives"] = candidate["full_chain_survives"] and bool(
-            candidate["holdout_evaluation"]["sampled_offpacket_schur_split_survives"]
-        ) and bool(
-            candidate["matched_evaluation"]["sampled_offpacket_schur_split_survives"]
+        candidate["matched_evaluation"] = evaluate_candidate(
+            matched_rows, candidate
+        )
+        candidate["full_chain_survives"] = (
+            bool(candidate["finite_candidate"])
+            and bool(candidate["holdout_evaluation"][
+                "sampled_offpacket_schur_split_survives"
+            ])
+            and bool(candidate["matched_evaluation"][
+                "sampled_offpacket_schur_split_survives"
+            ])
         )
 
-    survivors = [candidate for candidate in candidates if candidate["full_chain_survives"]]
-    survivors.sort(key=lambda candidate: (
-        float(candidate["holdout_evaluation"]["maximum_tail_quotient"]),
-        float(candidate["matched_evaluation"]["maximum_tail_quotient"]),
-        float(candidate["fitted_near_schur_constant"]),
-        float(candidate["shell_exponent"]),
-        float(candidate["angular_eta"]),
-        int(candidate["tail_radius"]),
+    survivors = [row for row in candidates if row["full_chain_survives"]]
+    survivors.sort(key=lambda row: (
+        float(row["holdout_evaluation"]["maximum_tail_quotient"]),
+        float(row["matched_evaluation"]["maximum_tail_quotient"]),
+        float(row["fitted_near_schur_constant"]),
+        float(row["shell_exponent"]),
+        float(row["angular_eta"]),
+        int(row["tail_radius"]),
     ))
     selected_candidate = survivors[0] if survivors else None
 
     matched_groups: list[dict[str, Any]] = []
     if selected_candidate is not None:
-        group_map: dict[tuple[int, float, float, str], list[dict[str, Any]]] = {}
+        groups: dict[tuple[int, float, float, str], list[dict[str, Any]]] = {}
         for row in selected_candidate["matched_evaluation"]["rows"]:
-            if not row["resolved"]:
-                continue
-            key = (
-                int(row["target_shell"]),
-                float(row["parabolic_time"]),
-                float(row["path_parameter"]),
-                str(row["tangent_kind"]),
-            )
-            group_map.setdefault(key, []).append(row)
-        for key, rows in sorted(group_map.items()):
+            if row["resolved"]:
+                key = (
+                    int(row["target_shell"]),
+                    float(row["parabolic_time"]),
+                    float(row["path_parameter"]),
+                    str(row["tangent_kind"]),
+                )
+                groups.setdefault(key, []).append(row)
+        for key, rows in sorted(groups.items()):
             cutoffs = sorted({int(row["cutoff"]) for row in rows})
             full = [float(row["full_quotient"]) for row in rows]
             tail = [float(row["tail_quotient"]) for row in rows]
@@ -723,26 +704,23 @@ def audit_family(
             })
 
     all_rows = calibration_rows + holdout_rows + matched_rows
-    resolved_responses = [
-        row["response"] for row in all_rows if row["response"]["resolved"]
-    ]
-    finite = lambda key: [
-        float(response[key])
-        for response in resolved_responses
-        if response.get(key) is not None
-    ]
+    resolved = [row["response"] for row in all_rows if row["response"]["resolved"]]
+    def values(key: str) -> list[float]:
+        return [
+            float(row[key]) for row in resolved if row.get(key) is not None
+        ]
+
     baseline = next((
-        candidate for candidate in candidates
-        if float(candidate["shell_exponent"]) == 0.0
-        and float(candidate["angular_eta"]) == 0.0
-        and int(candidate["tail_radius"]) == max(tail_radii)
+        row for row in candidates
+        if float(row["shell_exponent"]) == 0.0
+        and float(row["angular_eta"]) == 0.0
+        and int(row["tail_radius"]) == max(tail_radii)
     ), None)
     full_survival = (
         selected_candidate is not None
         and bool(matched_groups)
-        and all(group["matched_cutoff_complete"] for group in matched_groups)
+        and all(row["matched_cutoff_complete"] for row in matched_groups)
     )
-
     return {
         "schema_version": "1.0.0",
         "authority": {
@@ -759,11 +737,10 @@ def audit_family(
             "promoted": False,
         },
         "definitions": {
-            "off_packet_response": "exact D m_off(u)[h] on the strict positive-transfer branch",
-            "shell_partition": "reality-closed dyadic tangent shells relative to target K",
-            "angular_defect": "1-khat^T M_K khat for the target-packet Fourier second moment M_K",
-            "weighted_norm": "X_K with radial 2^(sigma |j-K|) and projective angular 1+eta*a_K weights",
-            "tail": "sum of absolute shell-response contributions with |j-K| greater than the declared radius",
+            "off_packet_response": "exact D m_off(u)[h]",
+            "shell_partition": "reality-closed dyadic tangent shells relative to K",
+            "angular_defect": "1-khat^T M_K khat",
+            "tail": "absolute shell responses outside the declared radius",
         },
         "parameters": {
             "search_cutoff": search_cutoff,
@@ -771,7 +748,7 @@ def audit_family(
             "target_shells": list(target_shells),
             "viscosity": nu,
             "target_packet_energy": target_packet_energy,
-            "base_parameters": [asdict(parameter) for parameter in base_parameters],
+            "base_parameters": [asdict(row) for row in base_parameters],
             "center_seeds": list(center_seeds),
             "calibration_seeds": list(calibration_seeds),
             "holdout_seeds": list(holdout_seeds),
@@ -800,39 +777,41 @@ def audit_family(
         "candidates": candidates,
         "matched_cutoff_groups": matched_groups,
         "maximum_shell_derivative_reconstruction_residual": max(
-            finite("shell_derivative_reconstruction_residual"), default=None
+            values("shell_derivative_reconstruction_residual"), default=None
         ),
         "maximum_shell_energy_reconstruction_residual": max(
-            finite("shell_energy_reconstruction_residual"), default=None
+            values("shell_energy_reconstruction_residual"), default=None
         ),
         "maximum_off_derivative_finite_difference_residual": max(
-            finite("off_derivative_finite_difference_residual"), default=None
+            values("off_derivative_finite_difference_residual"), default=None
         ),
         "maximum_mechanism_balance_residual": max(
-            finite("mechanism_balance_residual"), default=None
+            values("mechanism_balance_residual"), default=None
         ),
         "maximum_packet_energy_tangent_residual": max(
-            finite("packet_energy_tangent_residual"), default=None
+            values("packet_energy_tangent_residual"), default=None
         ),
         "calibration_rows": calibration_rows,
         "holdout_rows": holdout_rows,
         "matched_rows": matched_rows,
         "limitations": [
-            "the shell split tests only the selected path and Navier-Stokes RHS tangents",
-            "the angular weight is a declared projective second-moment candidate, not a derived optimal metric",
-            "the fitted near constant is empirical and not the exact pair-incidence Schur certificate",
-            "the far-shell tail is measured rather than analytically absorbed",
-            "matched N32/N48/N64 cutoffs do not establish continuum compactness",
-            "no BKM, global-regularity, or Clay promotion",
+            "only selected path and Navier-Stokes RHS tangents are sampled",
+            "the angular metric is declared rather than analytically derived",
+            "the near constant is not the exact pair-incidence Schur certificate",
+            "the far-shell tail is measured rather than absorbed",
+            "matched cutoffs do not prove continuum compactness",
+            "no BKM, global-regularity, or promotion authority",
         ],
     }
 
 
 def parse_tangent_kinds(raw: str) -> tuple[str, ...]:
-    values = tuple(dict.fromkeys(piece.strip() for piece in raw.split(",") if piece.strip()))
-    if not values:
+    result = tuple(dict.fromkeys(
+        piece.strip() for piece in raw.split(",") if piece.strip()
+    ))
+    if not result:
         raise ValueError("expected at least one tangent kind")
-    return values
+    return result
 
 
 def main() -> None:
@@ -908,10 +887,18 @@ def main() -> None:
     print(json.dumps({
         "output_json": str(args.output_json),
         "surviving_candidate_count": result["surviving_candidate_count"],
-        "selected_shell_exponent": None if selected is None else selected["shell_exponent"],
-        "selected_angular_eta": None if selected is None else selected["angular_eta"],
-        "selected_tail_radius": None if selected is None else selected["tail_radius"],
-        "selected_near_constant": None if selected is None else selected["fitted_near_schur_constant"],
+        "selected_shell_exponent": (
+            None if selected is None else selected["shell_exponent"]
+        ),
+        "selected_angular_eta": (
+            None if selected is None else selected["angular_eta"]
+        ),
+        "selected_tail_radius": (
+            None if selected is None else selected["tail_radius"]
+        ),
+        "selected_near_constant": (
+            None if selected is None else selected["fitted_near_schur_constant"]
+        ),
         "sampled_chain_survives": result["authority"][
             "sampled_weighted_schur_tail_candidate_survives"
         ],
