@@ -56,19 +56,19 @@ offPacketResponseBelowSchurPlusTail A I =
 record OffPacketTailAbsorptionInputs
     (A : AbsorptionArithmetic) : Set₁ where
   field
-    splitInputs : OffPacketSchurSplitInputs A
+    tailSplitInputs : OffPacketSchurSplitInputs A
     absorbedTailBudget : Scalar A
     fullOffPacketBudget : Scalar A
 
     farTailBelowAbsorbedBudget :
       _≤_ A
-        (farShellTail splitInputs)
+        (farShellTail tailSplitInputs)
         absorbedTailBudget
 
     schurPlusAbsorbedTailBelowFullBudget :
       _≤_ A
         (_+_ A
-          (schurWeightedBudget splitInputs)
+          (schurWeightedBudget tailSplitInputs)
           absorbedTailBudget)
         fullOffPacketBudget
 
@@ -78,11 +78,11 @@ absorbedTailBoundsOffPacketResponse :
   (A : AbsorptionArithmetic) →
   (I : OffPacketTailAbsorptionInputs A) →
   _≤_ A
-    (offPacketResponse (splitInputs I))
+    (offPacketResponse (tailSplitInputs I))
     (fullOffPacketBudget I)
 absorbedTailBoundsOffPacketResponse A I =
   ≤-trans A
-    (offPacketResponseBelowSchurPlusTail A (splitInputs I))
+    (offPacketResponseBelowSchurPlusTail A (tailSplitInputs I))
     (≤-trans A
       (additionMonotoneLeft A (farTailBelowAbsorbedBudget I))
       (schurPlusAbsorbedTailBelowFullBudget I))
@@ -97,7 +97,7 @@ absorbedTailBoundsOffPacketResponse A I =
 record OffPacketLogNumeratorInputs
     (A : AbsorptionArithmetic) : Set₁ where
   field
-    splitInputs : OffPacketSchurSplitInputs A
+    logSplitInputs : OffPacketSchurSplitInputs A
     logarithmicNumerator : Scalar A
     otherResponse : Scalar A
     totalNumeratorBudget : Scalar A
@@ -107,15 +107,15 @@ record OffPacketLogNumeratorInputs
         logarithmicNumerator
         (_+_ A
           otherResponse
-          (offPacketResponse splitInputs))
+          (offPacketResponse logSplitInputs))
 
     otherPlusSchurTailBelowTotalBudget :
       _≤_ A
         (_+_ A
           otherResponse
           (_+_ A
-            (schurWeightedBudget splitInputs)
-            (farShellTail splitInputs)))
+            (schurWeightedBudget logSplitInputs)
+            (farShellTail logSplitInputs)))
         totalNumeratorBudget
 
 open OffPacketLogNumeratorInputs public
@@ -131,5 +131,5 @@ offPacketSchurSplitBoundsLogNumerator A I =
     (logarithmicNumeratorBelowOtherPlusOffPacket I)
     (≤-trans A
       (additionMonotoneLeft A
-        (offPacketResponseBelowSchurPlusTail A (splitInputs I)))
+        (offPacketResponseBelowSchurPlusTail A (logSplitInputs I)))
       (otherPlusSchurTailBelowTotalBudget I))
