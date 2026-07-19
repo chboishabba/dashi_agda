@@ -36,8 +36,10 @@ canonicalInterpretCoefficient (coefficient zero zero) = zeroR
 canonicalInterpretCoefficient (coefficient (suc zero) zero) = oneR
 canonicalInterpretCoefficient (coefficient (suc (suc positive)) zero) =
   interpretCoefficient (coefficient (suc (suc positive)) zero)
-canonicalInterpretCoefficient (coefficient positive (suc negative)) =
-  interpretCoefficient (coefficient positive (suc negative))
+canonicalInterpretCoefficient (coefficient zero (suc negative)) =
+  interpretCoefficient (coefficient zero (suc negative))
+canonicalInterpretCoefficient (coefficient (suc positive) (suc negative)) =
+  interpretCoefficient (coefficient (suc positive) (suc negative))
 
 canonicalInterpretationCorrect :
   ∀ value → canonicalInterpretCoefficient value ≡ interpretCoefficient value
@@ -46,7 +48,8 @@ canonicalInterpretationCorrect (coefficient zero zero) =
 canonicalInterpretationCorrect (coefficient (suc zero) zero) =
   sym oneCoefficientHomomorphic
 canonicalInterpretationCorrect (coefficient (suc (suc positive)) zero) = refl
-canonicalInterpretationCorrect (coefficient positive (suc negative)) = refl
+canonicalInterpretationCorrect (coefficient zero (suc negative)) = refl
+canonicalInterpretationCorrect (coefficient (suc positive) (suc negative)) = refl
 
 canonicalAddHomomorphic :
   ∀ left right →
