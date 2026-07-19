@@ -49,22 +49,22 @@ open FiniteAbelianHiddenSubgroupProblem public
 record GeneralShorMachine
     (H : FiniteAbelianHiddenSubgroupProblem) : Set₁ where
   field
-    basis : FiniteBasis
-    register : FiniteQuantumRegister basis
-    fourierTransform : FiniteFourierTransform register
+    hspBasis : FiniteBasis
+    hspRegister : FiniteQuantumRegister hspBasis
+    hspFourierTransform : FiniteFourierTransform hspRegister
 
-    Sample : Set
-    execute : Nat → Sample
-    successful : Sample → Set
+    HSPSample : Set
+    hspExecute : Nat → HSPSample
+    hspSuccessful : HSPSample → Set
 
     RecoveredInvariant : Set
-    recover : Sample → RecoveredInvariant
+    hspRecover : HSPSample → RecoveredInvariant
     invariantCorrect : RecoveredInvariant → Set
 
-    successfulRecovery :
+    hspSuccessfulRecovery :
       ∀ seed →
-      successful (execute seed) →
-      invariantCorrect (recover (execute seed))
+      hspSuccessful (hspExecute seed) →
+      invariantCorrect (hspRecover (hspExecute seed))
 
 open GeneralShorMachine public
 
@@ -88,19 +88,19 @@ open HiddenPeriodProblem public
 
 record ShorPeriodFindingMachine (H : HiddenPeriodProblem) : Set₁ where
   field
-    basis : FiniteBasis
-    register : FiniteQuantumRegister basis
-    fourierTransform : FiniteFourierTransform register
+    periodBasis : FiniteBasis
+    periodRegister : FiniteQuantumRegister periodBasis
+    periodFourierTransform : FiniteFourierTransform periodRegister
 
-    Sample : Set
-    execute : Nat → Sample
-    successful : Sample → Set
-    recoverPeriod : Sample → Nat
+    PeriodSample : Set
+    periodExecute : Nat → PeriodSample
+    periodSuccessful : PeriodSample → Set
+    recoverPeriod : PeriodSample → Nat
 
-    successfulRecovery :
+    periodSuccessfulRecovery :
       ∀ seed →
-      successful (execute seed) →
-      recoverPeriod (execute seed) ≡ period H
+      periodSuccessful (periodExecute seed) →
+      recoverPeriod (periodExecute seed) ≡ period H
 
 open ShorPeriodFindingMachine public
 
@@ -109,7 +109,7 @@ record ShorSuccessEvidence
     (M : ShorPeriodFindingMachine H) : Set₁ where
   field
     seed : Nat
-    success : successful M (execute M seed)
+    success : periodSuccessful M (periodExecute M seed)
 
 open ShorSuccessEvidence public
 
@@ -117,8 +117,9 @@ recoveredPeriodIsExact :
   {H : HiddenPeriodProblem} →
   (M : ShorPeriodFindingMachine H) →
   (E : ShorSuccessEvidence M) →
-  recoverPeriod M (execute M (seed E)) ≡ period H
-recoveredPeriodIsExact M E = successfulRecovery M (seed E) (success E)
+  recoverPeriod M (periodExecute M (seed E)) ≡ period H
+recoveredPeriodIsExact M E =
+  periodSuccessfulRecovery M (seed E) (success E)
 
 record ShorProbabilityEvidence
     {H : HiddenPeriodProblem}
