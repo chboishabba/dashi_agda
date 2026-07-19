@@ -1,0 +1,1 @@
+module DASHI.Physics.YangMills.BalabanUniformResidualMajorant where
