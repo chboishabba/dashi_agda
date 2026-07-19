@@ -79,7 +79,8 @@ fejerIteratesPreserveSublevel :
   S state →
   S (iterate transition n state)
 fejerIteratesPreserveSublevel F zero state member = member
-fejerIteratesPreserveSublevel F (suc n) state member =
+fejerIteratesPreserveSublevel {transition = transition}
+    F (suc n) state member =
   fejerIteratesPreserveSublevel F n
-    _
+    (transition state)
     (fejerPreservesSublevel F state member)
