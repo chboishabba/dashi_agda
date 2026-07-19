@@ -1,37 +1,45 @@
-name: NS shell-angle residence and coherence budget audit
+name: NS exact Galerkin coherence audit
 
 on:
   push:
     paths:
+      - 'scripts/ns_galerkin_coherence_core.py'
       - 'scripts/ns_shell_angle_residence_audit.py'
+      - 'scripts/ns_shell_angle_residence_audit_v2.py'
       - 'scripts/ns_packet_coherence_budget_audit.py'
+      - 'scripts/ns_packet_coherence_budget_audit_v2.py'
       - 'scripts/ns_log_bmo_vorticity_direction_audit.py'
+      - 'scripts/ns_log_bmo_vorticity_direction_audit_v2.py'
+      - 'scripts/ns_attach_explicit_timeline.py'
+      - 'scripts/ns_multicutoff_coherence_validation.py'
       - 'scripts/tests/test_ns_shell_angle_residence_audit.py'
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
-      - 'docs/ns_shell_angle_residence_audit.md'
-      - 'docs/ns_packet_coherence_budget_audit.md'
-      - 'DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda'
-      - 'DASHI/Physics/Closure/NSMiddleEigenvalueDangerFork.agda'
-      - 'DASHI/Physics/Closure/NSShellAngularTransferPartition.agda'
+      - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
+      - 'docs/ns_exact_galerkin_coherence_audit.md'
+      - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
   pull_request:
     paths:
+      - 'scripts/ns_galerkin_coherence_core.py'
       - 'scripts/ns_shell_angle_residence_audit.py'
+      - 'scripts/ns_shell_angle_residence_audit_v2.py'
       - 'scripts/ns_packet_coherence_budget_audit.py'
+      - 'scripts/ns_packet_coherence_budget_audit_v2.py'
       - 'scripts/ns_log_bmo_vorticity_direction_audit.py'
+      - 'scripts/ns_log_bmo_vorticity_direction_audit_v2.py'
+      - 'scripts/ns_attach_explicit_timeline.py'
+      - 'scripts/ns_multicutoff_coherence_validation.py'
       - 'scripts/tests/test_ns_shell_angle_residence_audit.py'
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
-      - 'docs/ns_shell_angle_residence_audit.md'
-      - 'docs/ns_packet_coherence_budget_audit.md'
-      - 'DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda'
-      - 'DASHI/Physics/Closure/NSMiddleEigenvalueDangerFork.agda'
-      - 'DASHI/Physics/Closure/NSShellAngularTransferPartition.agda'
+      - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
+      - 'docs/ns_exact_galerkin_coherence_audit.md'
+      - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
 
 concurrency:
-  group: ns-coherence-budget-${{ github.ref }}
+  group: ns-exact-coherence-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -53,7 +61,8 @@ jobs:
           python -m pytest -q \
             scripts/tests/test_ns_shell_angle_residence_audit.py \
             scripts/tests/test_ns_packet_coherence_budget_audit.py \
-            scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py
+            scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py \
+            scripts/tests/test_ns_timeline_and_multicutoff.py
 
   focused-agda:
     runs-on: ubuntu-latest
@@ -63,14 +72,12 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/dashi-agda29
-          key: ns-coherence-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-
-      - name: Check coherence-budget modules with Agda 2.9
+          key: ns-exact-coherence-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check exact quotient-rule module with Agda 2.9
         id: focused
         shell: bash
         run: |
@@ -80,28 +87,25 @@ jobs:
             export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
-            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-coherence-check.log"
-            export AGDA_JOBS=3
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-exact-coherence-check.log"
+            export AGDA_JOBS=2
             targets=(
-              DASHI/Physics/Closure/NSShellAngularTransferPartition.agda
-              DASHI/Physics/Closure/NSMiddleEigenvalueDangerFork.agda
+              DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda
               DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
-          ) > agda-coherence-check.log 2>&1
+          ) > agda-exact-coherence-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 180 agda-coherence-check.log
+          tail -n 180 agda-exact-coherence-check.log
           exit 0
-
       - name: Upload focused Agda log
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ns-coherence-budget-agda-log
-          path: agda-coherence-check.log
+          name: ns-exact-coherence-agda-log
+          path: agda-exact-coherence-check.log
           if-no-files-found: error
-
       - name: Fail on Agda error
         if: steps.focused.outputs.status != '0'
         run: exit 1
