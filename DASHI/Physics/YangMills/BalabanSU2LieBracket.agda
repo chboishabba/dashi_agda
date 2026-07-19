@@ -9,7 +9,7 @@ open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
 open RealPolynomialSolver using
   ( Polynomial; con; _:=_; _:+_; _:*_; :-_ )
 open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
-  ( q0P; q1P; q2P; q3P )
+  ( q0R; q1R; q2R; q3R; q0P; q1P; q2P; q3P )
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( _+R_; _*R_; -R_; zeroR; oneR; _+q_; negQ; _*q_; quaternionExt )
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
@@ -54,39 +54,32 @@ lieBracket (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) =
   su2Lie (bracket1R y₁ z₁ y₂ z₂) (bracket2R z₁ x₁ z₂ x₂) (bracket3R x₁ y₁ x₂ y₂)
 
 comm0Polynomial : ∀ x₁ y₁ z₁ x₂ y₂ z₂ →
-  zeroR ≡ q0RHS x₁ y₁ z₁ x₂ y₂ z₂
-  where
-  q0RHS : ℝ → ℝ → ℝ → ℝ → ℝ → ℝ → ℝ
-  q0RHS a b c d e f =
-    ((((zeroR *R zeroR) +R (-R (a *R d))) +R (-R (b *R e))) +R (-R (c *R f)))
-      +R (-R ((((zeroR *R zeroR) +R (-R (d *R a))) +R (-R (e *R b))) +R (-R (f *R c))))
+  zeroR ≡ q0R zeroR x₁ y₁ z₁ zeroR x₂ y₂ z₂ +R
+    (-R (q0R zeroR x₂ y₂ z₂ zeroR x₁ y₁ z₁))
 comm0Polynomial = solveComputed 6
   (λ x₁ y₁ z₁ x₂ y₂ z₂ →
     zeroP := q0P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂ :+ (:- (q0P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
   computed
 
 comm1Polynomial : ∀ x₁ y₁ z₁ x₂ y₂ z₂ →
-  bracket1R y₁ z₁ y₂ z₂ ≡
-  ((((zeroR *R x₂) +R (x₁ *R zeroR)) +R (y₁ *R z₂)) +R (-R (z₁ *R y₂)))
-    +R (-R ((((zeroR *R x₁) +R (x₂ *R zeroR)) +R (y₂ *R z₁)) +R (-R (z₂ *R y₁))))
+  bracket1R y₁ z₁ y₂ z₂ ≡ q1R zeroR x₁ y₁ z₁ zeroR x₂ y₂ z₂ +R
+    (-R (q1R zeroR x₂ y₂ z₂ zeroR x₁ y₁ z₁))
 comm1Polynomial = solveComputed 6
   (λ x₁ y₁ z₁ x₂ y₂ z₂ →
     bracket1P y₁ z₁ y₂ z₂ := q1P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂ :+ (:- (q1P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
   computed
 
 comm2Polynomial : ∀ x₁ y₁ z₁ x₂ y₂ z₂ →
-  bracket2R z₁ x₁ z₂ x₂ ≡
-  ((((zeroR *R y₂) +R (-R (x₁ *R z₂))) +R (y₁ *R zeroR)) +R (z₁ *R x₂))
-    +R (-R ((((zeroR *R y₁) +R (-R (x₂ *R z₁))) +R (y₂ *R zeroR)) +R (z₂ *R x₁)))
+  bracket2R z₁ x₁ z₂ x₂ ≡ q2R zeroR x₁ y₁ z₁ zeroR x₂ y₂ z₂ +R
+    (-R (q2R zeroR x₂ y₂ z₂ zeroR x₁ y₁ z₁))
 comm2Polynomial = solveComputed 6
   (λ x₁ y₁ z₁ x₂ y₂ z₂ →
     bracket2P z₁ x₁ z₂ x₂ := q2P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂ :+ (:- (q2P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
   computed
 
 comm3Polynomial : ∀ x₁ y₁ z₁ x₂ y₂ z₂ →
-  bracket3R x₁ y₁ x₂ y₂ ≡
-  ((((zeroR *R z₂) +R (x₁ *R y₂)) +R (-R (y₁ *R x₂))) +R (z₁ *R zeroR))
-    +R (-R ((((zeroR *R z₁) +R (x₂ *R y₁)) +R (-R (y₂ *R x₁))) +R (z₂ *R zeroR)))
+  bracket3R x₁ y₁ x₂ y₂ ≡ q3R zeroR x₁ y₁ z₁ zeroR x₂ y₂ z₂ +R
+    (-R (q3R zeroR x₂ y₂ z₂ zeroR x₁ y₁ z₁))
 comm3Polynomial = solveComputed 6
   (λ x₁ y₁ z₁ x₂ y₂ z₂ →
     bracket3P x₁ y₁ x₂ y₂ := q3P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂ :+ (:- (q3P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
