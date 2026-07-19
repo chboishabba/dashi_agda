@@ -1,1 +1,0 @@
-module DASHI.Physics.YangMills.BalabanWeightedGreenKernelDecay where
