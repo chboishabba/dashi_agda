@@ -55,12 +55,35 @@ record ContactPromotionWitness (core : GovernedContactCore) : Set where
 
 open ContactPromotionWitness public
 
+-- A promoted contact cannot be constructed from a status Bool alone.  It must
+-- carry the closed authority, bridge, and replay witnesses.
+record PromotedContact (core : GovernedContactCore) : Set where
+  constructor promotedContact
+  field
+    promotionWitness : ContactPromotionWitness core
+
+open PromotedContact public
+
 promotionRequiresClosedGate :
   (core : GovernedContactCore) →
-  ContactPromotionWitness core →
+  PromotedContact core →
   Gate.authorityGateClosed (gate core) ≡ true
-promotionRequiresClosedGate core witness =
-  authorityClosed witness
+promotionRequiresClosedGate core promoted =
+  authorityClosed (promotionWitness promoted)
+
+promotionRequiresClosedBridge :
+  (core : GovernedContactCore) →
+  PromotedContact core →
+  Gate.bridgeRequirementClosed (gate core) ≡ true
+promotionRequiresClosedBridge core promoted =
+  bridgeClosed (promotionWitness promoted)
+
+promotionRequiresLiveReplay :
+  (core : GovernedContactCore) →
+  PromotedContact core →
+  Replay.replayable (replay core) ≡ true
+promotionRequiresLiveReplay core promoted =
+  replayLive (promotionWitness promoted)
 
 record ContactDependencyNode : Set where
   constructor contactDependencyNode
