@@ -39,23 +39,18 @@ record Receipt
   (State Policy Evidence Hash Warning Blocker : Set) : Set where
   constructor receipt
   field
-    envelope  : CandidateEnvelope State Policy Evidence Hash
-    severity  : DiagnosticSeverity
-    warnings  : List Warning
-    blockers  : List Blocker
-    decision  : Decision
-    policyHash  : Hash
+    envelope   : CandidateEnvelope State Policy Evidence Hash
+    severity   : DiagnosticSeverity
+    warnings   : List Warning
+    blockers   : List Blocker
+    decision   : Decision
+    policyHash : Hash
     receiptHash : Hash
 
 open Receipt public
 
 ------------------------------------------------------------------------
 -- The only constructors that select a resulting canonical state.
---
--- promoteSelected must prove that the result is the candidate.
--- abstainSelected and rejectSelected must prove that the result is the
--- pre-existing canonical state.  There is no constructor that combines
--- abstention or rejection with candidate selection.
 
 
 data SelectionWitness {State : Set}
@@ -124,14 +119,12 @@ record EvidenceAxes (Warning : Set) : Set where
 
 open EvidenceAxes public
 
--- This witness records the intentional possibility that warning evidence is
--- present while authorization still promotes.  Warnings are monotone evidence,
--- not a universal veto.
 record WarningCompatiblePromotion (Warning : Set) : Set where
   constructor warningCompatiblePromotion
   field
     retainedWarning        : Warning
-    promotedDespiteWarning : Decision ≡ promote
+    warningDecision        : Decision
+    promotedDespiteWarning : warningDecision ≡ promote
 
 ------------------------------------------------------------------------
 -- Hash-linked receipt composition.
@@ -161,7 +154,8 @@ record ConsumerAuthorization (Consumer : Set) : Set₁ where
   constructor consumerAuthorization
   field
     consumer        : Consumer
-    carrierPromoted : Decision ≡ promote
+    carrierDecision : Decision
+    carrierPromoted : carrierDecision ≡ promote
     notBlocked      : Set
 
 open ConsumerAuthorization public
@@ -172,13 +166,13 @@ open ConsumerAuthorization public
 record BoundedSearchPolicy (Hash : Set) : Set where
   constructor boundedSearchPolicy
   field
-    generatorHash          : Hash
-    backendSetHash         : Hash
-    effectivePolicyHash    : Hash
-    maximumDepth           : Nat
-    beamWidth              : Nat
-    deduplicationRuleHash  : Hash
-    tieBreakerHash         : Hash
+    generatorHash         : Hash
+    backendSetHash        : Hash
+    effectivePolicyHash   : Hash
+    maximumDepth          : Nat
+    beamWidth             : Nat
+    deduplicationRuleHash : Hash
+    tieBreakerHash        : Hash
 
 open BoundedSearchPolicy public
 
@@ -188,7 +182,7 @@ record SearchTransition
   field
     parentState        : State
     operator           : Operator
-    materializedChild : State
+    materializedChild  : State
     recomputedEvidence : Evidence
     parentStateHash    : Hash
     childStateHash     : Hash
@@ -197,8 +191,6 @@ record SearchTransition
 
 open SearchTransition public
 
--- The conclusion is intentionally indexed by the finite policy that was run.
--- It cannot be used as a global basis-exhaustion theorem.
 record BoundedNoPromotion
   (Hash : Set)
   (policy : BoundedSearchPolicy Hash) : Set₁ where
