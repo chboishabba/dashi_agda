@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Search for proof constants in the finite SU(2) one-step problem.
 
-Every result is indexed by the finite lattice/background used.  A failed
+Every result is indexed by the finite lattice/background used. A failed
 inequality is retained as a counterexample candidate rather than promoted.
 """
 from __future__ import annotations
@@ -21,10 +21,11 @@ from common import (
     lie_field_to_links,
     write_receipt,
 )
+from frontier_geometry import literal_block_lift_section, right_inverse_residual
 
 
 def canonical_section(Q: np.ndarray, *, rtol: float = 1e-12) -> tuple[np.ndarray, float]:
-    """Construct S=Q^T(QQ^T)^-1 and return ||QS-I||_2."""
+    """Construct the minimum-norm section Q^T(QQ^T)^-1."""
     middle = Q @ Q.T
     smallest = float(np.linalg.eigvalsh(0.5 * (middle + middle.T))[0])
     if smallest <= rtol:
@@ -39,7 +40,7 @@ def canonical_section(Q: np.ndarray, *, rtol: float = 1e-12) -> tuple[np.ndarray
 def corrected_background_section(
     Q0: np.ndarray, QB: np.ndarray, S0: np.ndarray, *, rtol: float = 1e-12
 ) -> dict[str, Any]:
-    """Implement S_B=S_0(I+(Q_B-Q_0)S_0)^-1 exactly at matrix level."""
+    """Implement S_B=S_0(I+(Q_B-Q_0)S_0)^-1 at matrix level."""
     perturbation = QB - Q0
     ES0 = perturbation @ S0
     radius = float(np.linalg.norm(ES0, ord=2))
@@ -112,9 +113,14 @@ def run_search(
     *, L: int, block: int, radii: list[float], seeds: int
 ) -> dict[str, Any]:
     lat = PeriodicLattice(L)
-    _, Q0 = block_average_matrix(lat, block, identity_links(lat))
-    S0, section_residual = canonical_section(Q0)
+    coarse, Q0 = block_average_matrix(lat, block, identity_links(lat))
+    lifted_coarse, literalS0 = literal_block_lift_section(lat, block)
+    if lifted_coarse != coarse:
+        raise AssertionError("literal section coarse geometry mismatch")
+    literal_residual = right_inverse_residual(Q0, literalS0)
+    minimumS0, minimum_residual = canonical_section(Q0)
     H0 = gauge_fixed_hessian(lat, background=identity_links(lat), average=Q0)
+    h0_smallest = float(np.linalg.eigvalsh(0.5 * (H0 + H0.T))[0])
 
     backgrounds: list[dict[str, Any]] = []
     for radius in radii:
@@ -122,7 +128,7 @@ def run_search(
             background = random_background(lat, radius, seed)
             _, QB = block_average_matrix(lat, block, background)
             HB = gauge_fixed_hessian(lat, background=background, average=QB)
-            section = corrected_background_section(Q0, QB, S0)
+            section = corrected_background_section(Q0, QB, literalS0)
             eig = np.linalg.eigvalsh(0.5 * (HB + HB.T))
             backgrounds.append(
                 {
@@ -130,9 +136,7 @@ def run_search(
                     "seed": seed,
                     **section,
                     "background_smallest_eigenvalue": float(eig[0]),
-                    "coercivity_loss": float(
-                        np.linalg.eigvalsh(0.5 * (H0 + H0.T))[0] - eig[0]
-                    ),
+                    "coercivity_loss": float(h0_smallest - eig[0]),
                 }
             )
 
@@ -143,9 +147,14 @@ def run_search(
         "fine_dimension": int(Q0.shape[1]),
         "coarse_dimension": int(Q0.shape[0]),
         "zero_background_section": {
-            "right_inverse_residual": section_residual,
-            "section_norm": float(np.linalg.norm(S0, ord=2)),
-            "constraints_independent": bool(section_residual < 1e-10),
+            "construction": "literal_constant_on_block_lift",
+            "right_inverse_residual": literal_residual,
+            "section_norm": float(np.linalg.norm(literalS0, ord=2)),
+            "constraints_independent": bool(literal_residual < 1e-10),
+            "minimum_norm_section_residual": minimum_residual,
+            "distance_to_minimum_norm_section": float(
+                np.linalg.norm(literalS0 - minimumS0, ord=2)
+            ),
         },
         "zero_background_hodge": hodge_poincare_diagnostic(H0),
         "diagonal_parametrix": diagonal_parametrix_diagnostic(H0),
@@ -171,9 +180,7 @@ def main() -> None:
     parser.add_argument("--block", type=int, default=2)
     parser.add_argument("--radii", default="0,0.01,0.03,0.05")
     parser.add_argument("--seeds", type=int, default=2)
-    parser.add_argument(
-        "--out", default="operator_analysis/frontier_search.json"
-    )
+    parser.add_argument("--out", default="operator_analysis/frontier_search.json")
     args = parser.parse_args()
     radii = [float(value) for value in args.radii.split(",") if value.strip()]
     result = run_search(L=args.L, block=args.block, radii=radii, seeds=args.seeds)
