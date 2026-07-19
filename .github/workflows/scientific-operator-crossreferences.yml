@@ -8,6 +8,7 @@ on:
       - 'DASHI/Analysis/StoichiometricConservation.agda'
       - 'DASHI/Analysis/StoichiometricConservationRegression.agda'
       - 'DASHI/Analysis/DissipationPathMonotonicity.agda'
+      - 'DASHI/Analysis/FejerSublevelInvariant.agda'
       - 'DASHI/Analysis/StrictContractionUniqueness.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferencesTests.agda'
@@ -28,6 +29,7 @@ on:
       - 'DASHI/Analysis/StoichiometricConservation.agda'
       - 'DASHI/Analysis/StoichiometricConservationRegression.agda'
       - 'DASHI/Analysis/DissipationPathMonotonicity.agda'
+      - 'DASHI/Analysis/FejerSublevelInvariant.agda'
       - 'DASHI/Analysis/StrictContractionUniqueness.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferencesTests.agda'
@@ -76,6 +78,7 @@ jobs:
               DASHI/Analysis/StoichiometricConservation.agda \
               DASHI/Analysis/StoichiometricConservationRegression.agda \
               DASHI/Analysis/DissipationPathMonotonicity.agda \
+              DASHI/Analysis/FejerSublevelInvariant.agda \
               DASHI/Analysis/StrictContractionUniqueness.agda \
               DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda \
               DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda \
