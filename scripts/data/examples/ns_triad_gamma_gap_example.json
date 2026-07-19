@@ -1,0 +1,46 @@
+{
+  "problem_id": "canonical-gamma-gap-example",
+  "viscosity": 1.0,
+  "convention": "left_plus_right_equals_out",
+  "coefficient_semantics": "synthetic_signed_transfer_coefficient_for_regression_only",
+  "modes": [
+    {"wavevector": [1, 0, 0]},
+    {"wavevector": [0, 1, 0]},
+    {"wavevector": [1, 1, 0]},
+    {"wavevector": [0, 0, 1]},
+    {"wavevector": [1, 0, 1]},
+    {"wavevector": [0, 1, 1]}
+  ],
+  "triads": [
+    {"left": 0, "right": 1, "out": 2, "coefficient": 1.0},
+    {"left": 1, "right": 0, "out": 2, "coefficient": -0.4},
+    {"left": 0, "right": 3, "out": 4, "coefficient": -0.7},
+    {"left": 1, "right": 3, "out": 5, "coefficient": 0.3}
+  ],
+  "profiles": [
+    {
+      "profile_id": "t0",
+      "trajectory_id": "synthetic-trajectory",
+      "time": 0.0,
+      "duration": 1.0,
+      "cutoff": 2,
+      "probability": [0.22, 0.22, 0.22, 0.12, 0.11, 0.11]
+    },
+    {
+      "profile_id": "t1",
+      "trajectory_id": "synthetic-trajectory",
+      "time": 1.0,
+      "duration": 1.0,
+      "cutoff": 2,
+      "probability": [0.28, 0.22, 0.24, 0.08, 0.10, 0.08]
+    },
+    {
+      "profile_id": "t2",
+      "trajectory_id": "synthetic-trajectory",
+      "time": 2.0,
+      "duration": 2.0,
+      "cutoff": 2,
+      "probability": [0.30, 0.24, 0.26, 0.06, 0.08, 0.06]
+    }
+  ]
+}
