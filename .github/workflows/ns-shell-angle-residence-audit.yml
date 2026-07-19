@@ -5,8 +5,10 @@ on:
     paths:
       - 'scripts/ns_shell_angle_residence_audit.py'
       - 'scripts/ns_packet_coherence_budget_audit.py'
+      - 'scripts/ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_shell_angle_residence_audit.py'
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
+      - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'docs/ns_shell_angle_residence_audit.md'
       - 'docs/ns_packet_coherence_budget_audit.md'
       - 'DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda'
@@ -17,8 +19,10 @@ on:
     paths:
       - 'scripts/ns_shell_angle_residence_audit.py'
       - 'scripts/ns_packet_coherence_budget_audit.py'
+      - 'scripts/ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_shell_angle_residence_audit.py'
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
+      - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'docs/ns_shell_angle_residence_audit.md'
       - 'docs/ns_packet_coherence_budget_audit.md'
       - 'DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda'
@@ -48,7 +52,8 @@ jobs:
         run: |
           python -m pytest -q \
             scripts/tests/test_ns_shell_angle_residence_audit.py \
-            scripts/tests/test_ns_packet_coherence_budget_audit.py
+            scripts/tests/test_ns_packet_coherence_budget_audit.py \
+            scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py
 
   focused-agda:
     runs-on: ubuntu-latest
