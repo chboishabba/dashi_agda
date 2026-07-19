@@ -72,6 +72,20 @@ weightedOperatorProduct :
 weightedOperatorProduct L =
   _⊗_ L (rowConstant L) (columnConstant L)
 
+------------------------------------------------------------------------
+-- Keep the exact bracketing supplied by `weightedSchurEstimate`.
+--
+-- No associativity law is part of `WeightedSchurLaws`, so the expression
+--
+--   rowConstant ⊗ (columnConstant ⊗ inputEnergy)
+--
+-- cannot definitionally be replaced by
+--
+--   (rowConstant ⊗ columnConstant) ⊗ inputEnergy.
+--
+-- Concrete semiring instances may prove that reassociation separately.
+------------------------------------------------------------------------
+
 weightedKernelBound :
   ∀ {r c s}
     {Row : Set r}
@@ -83,7 +97,9 @@ weightedKernelBound :
     (input : VectorIn L) →
   _≤_ L
     (outputEnergy L (applyKernel L input))
-    (_⊗_ L (weightedOperatorProduct L) (inputEnergy L input))
+    (_⊗_ L
+      (rowConstant L)
+      (_⊗_ L (columnConstant L) (inputEnergy L input)))
 weightedKernelBound K L C =
   weightedSchurEstimate L (rowBound C) (columnBound C)
 
