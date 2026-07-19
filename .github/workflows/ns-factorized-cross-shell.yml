@@ -4,18 +4,20 @@ on:
   pull_request:
     paths:
       - 'DASHI/Analysis/ThreeStageBoundComposition.agda'
+      - 'DASHI/Analysis/WeightedKernelSchurTest.agda'
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellBound.agda'
+      - 'DASHI/Physics/Closure/NSWeightedShellTransferBridge.agda'
       - 'DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda'
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
-      - 'docs/ns_factorized_cross_shell_bound.md'
       - '.github/workflows/ns-factorized-cross-shell.yml'
   push:
     paths:
       - 'DASHI/Analysis/ThreeStageBoundComposition.agda'
+      - 'DASHI/Analysis/WeightedKernelSchurTest.agda'
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellBound.agda'
+      - 'DASHI/Physics/Closure/NSWeightedShellTransferBridge.agda'
       - 'DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda'
       - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
-      - 'docs/ns_factorized_cross_shell_bound.md'
       - '.github/workflows/ns-factorized-cross-shell.yml'
 
 concurrency:
@@ -48,13 +50,15 @@ jobs:
             export AGDA_JOBS=1
             scripts/run_agda29_parallel_check.sh \
               DASHI/Analysis/ThreeStageBoundComposition.agda \
+              DASHI/Analysis/WeightedKernelSchurTest.agda \
               DASHI/Physics/Closure/NSFactorizedCrossShellBound.agda \
+              DASHI/Physics/Closure/NSWeightedShellTransferBridge.agda \
               DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda \
               DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda
           ) > agda-ns-factorized-cross-shell.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 200 agda-ns-factorized-cross-shell.log
+          tail -n 220 agda-ns-factorized-cross-shell.log
           exit 0
       - name: Upload focused Agda log
         if: always()
