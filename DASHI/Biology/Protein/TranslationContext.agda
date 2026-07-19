@@ -4,13 +4,13 @@ open import Agda.Builtin.List using (List)
 
 -- RNA alphabet used by the translation surface.  DNA-to-RNA transcription is a
 -- separate bridge; translation consumes codons in a selected biological code.
-data RNA.base : Set where
-  A C G U : RNA.base
+data RNABase : Set where
+  A C G U : RNABase
 
 record Codon : Set where
   constructor codon
   field
-    first second third : RNA.base
+    first second third : RNABase
 
 open Codon public
 
