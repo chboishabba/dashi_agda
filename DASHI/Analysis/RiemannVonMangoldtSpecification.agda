@@ -6,7 +6,7 @@ module DASHI.Analysis.RiemannVonMangoldtSpecification where
 -- otherwise.  The definition is relational so no unproved decision procedure
 -- for primality or prime-power recognition is smuggled into the function.
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Empty using (⊥)
 open import DASHI.Analysis.WeilTestSpace
@@ -77,6 +77,26 @@ record VonMangoldtFunction
       VonMangoldtAt space arithmetic n x →
       VonMangoldtAt space arithmetic n y →
       x ≡ y
+
+lambdaAtPrimePower :
+  (space : WeilTestSpace) →
+  (arithmetic : AllPrimeArithmetic space) →
+  (mangoldt : VonMangoldtFunction space arithmetic) →
+  (p : AllPrimeArithmetic.Prime arithmetic) →
+  (exponentIndex : Nat) →
+  VonMangoldtFunction.lambda mangoldt
+    (primePowerNat space arithmetic p exponentIndex)
+  ≡
+  AllPrimeArithmetic.logPrimeWeight arithmetic p
+lambdaAtPrimePower space arithmetic mangoldt p exponentIndex =
+  VonMangoldtFunction.specificationSingleValued mangoldt
+    (primePowerNat space arithmetic p exponentIndex)
+    (VonMangoldtFunction.lambda mangoldt
+      (primePowerNat space arithmetic p exponentIndex))
+    (AllPrimeArithmetic.logPrimeWeight arithmetic p)
+    (VonMangoldtFunction.lambdaSpecified mangoldt
+      (primePowerNat space arithmetic p exponentIndex))
+    (atPrimePower p exponentIndex refl)
 
 vonMangoldtSampleTerm :
   (space : WeilTestSpace) →
