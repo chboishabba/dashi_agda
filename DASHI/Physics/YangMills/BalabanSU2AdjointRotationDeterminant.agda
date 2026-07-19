@@ -20,13 +20,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( Quaternion
   ; quat
-  ; q0
-  ; q1
-  ; q2
-  ; q3
-  ; _+R_
   ; _*R_
-  ; -R_
   ; oneR
   ; *-identityˡ
   ; normSquaredQ
@@ -49,24 +43,21 @@ open import DASHI.Physics.YangMills.BalabanSU2AdjointMatrixDeterminant using
   ; applyMatrix3
   ; determinantMatrix3
   )
-
-twoR : ℝ
-twoR = oneR +R oneR
+open import DASHI.Physics.YangMills.BalabanSU2AdjointRotationCoordinates using
+  ( row00; row01; row02
+  ; row10; row11; row12
+  ; row20; row21; row22
+  ; adjointXCoordinate
+  ; adjointYCoordinate
+  ; adjointZCoordinate
+  )
 
 su2AdjointMatrix : SU2Quaternion → Matrix3
 su2AdjointMatrix (su2q (quat a b c d) unit) =
   matrix3
-    ((((a *R a) +R (b *R b)) +R (-R (c *R c))) +R (-R (d *R d)))
-    (twoR *R ((b *R c) +R (-R (a *R d))))
-    (twoR *R ((b *R d) +R (a *R c)))
-
-    (twoR *R ((b *R c) +R (a *R d)))
-    ((((a *R a) +R (-R (b *R b))) +R (c *R c)) +R (-R (d *R d)))
-    (twoR *R ((c *R d) +R (-R (a *R b))))
-
-    (twoR *R ((b *R d) +R (-R (a *R c))))
-    (twoR *R ((c *R d) +R (a *R b)))
-    ((((a *R a) +R (-R (b *R b))) +R (-R (c *R c))) +R (d *R d))
+    (row00 a b c d) (row01 a b c d) (row02 a b c d)
+    (row10 a b c d) (row11 a b c d) (row12 a b c d)
+    (row20 a b c d) (row21 a b c d) (row22 a b c d)
 
 applySU2AdjointMatrix :
   ∀ u X →
@@ -75,12 +66,9 @@ applySU2AdjointMatrix
   (su2q (quat a b c d) unit)
   (su2Lie x y z) =
   su2LieExt
-    (Solver.solve
-      (a ∷ b ∷ c ∷ d ∷ x ∷ y ∷ z ∷ []) realSolverRing)
-    (Solver.solve
-      (a ∷ b ∷ c ∷ d ∷ x ∷ y ∷ z ∷ []) realSolverRing)
-    (Solver.solve
-      (a ∷ b ∷ c ∷ d ∷ x ∷ y ∷ z ∷ []) realSolverRing)
+    (adjointXCoordinate a b c d x y z)
+    (adjointYCoordinate a b c d x y z)
+    (adjointZCoordinate a b c d x y z)
 
 su2AdjointMatrixDeterminantNormCube :
   ∀ u →
