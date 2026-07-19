@@ -1,7 +1,9 @@
 module DASHI.Promotion.AICategoricalAll where
 
 ----------------------------------------------------------------------
--- Focused aggregate for the grammar-generated categorical AI stack.
+-- Focused aggregate for the verified grammar-generated categorical AI
+-- stack. Domain companions can import this aggregate and add their own
+-- authority/homology layers without depending on DASHI.Everything.
 ----------------------------------------------------------------------
 
 import DASHI.Core.ProjectionCategory
@@ -21,6 +23,3 @@ import DASHI.Promotion.TFLCategoricalAuthorityHomology
 
 import DASHI.Promotion.Prot2PropCategoricalLoom
 import DASHI.Promotion.TranslationContextCategoricalLoom
-import DASHI.Promotion.MoonshineCategoricalLoom
-import DASHI.Promotion.HeckeCategoricalLoom
-import DASHI.Core.LogicTlureyCategoricalBridge
