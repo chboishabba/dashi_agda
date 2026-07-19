@@ -52,8 +52,8 @@ asMultiplicativeBoundLaws :
     {O : SchurOrderLaws Scalar} →
   SchurMultiplicativeLaws Scalar O →
   MultiplicativeBoundLaws Scalar
-asMultiplicativeBoundLaws M = record
-  { _≤_ = _≤_ _
+asMultiplicativeBoundLaws {O = O} M = record
+  { _≤_ = _≤_ O
   ; _⊗_ = _⊗_ M
   ; ≤-trans = ≤-trans M
   ; multiplyMonotoneLeft = multiplyMonotoneLeft M
