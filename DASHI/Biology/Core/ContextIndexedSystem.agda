@@ -1,5 +1,7 @@
 module DASHI.Biology.Core.ContextIndexedSystem where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 -- Shared substrate-neutral interfaces for the biology recovery tower.
 -- Context is explicit because biological observables and functions are not
 -- generally determined by a microscopic carrier in isolation.
@@ -62,9 +64,3 @@ record OpenSystemBudget : Set₁ where
 
     LocallyMaintained : Environment → State → Set
     ExportsEntropy     : Environment → State → Set
-
--- Equality is local to this foundational module so downstream biology files do
--- not depend on a particular standard-library equality facade.
-infix 4 _≡_
-data _≡_ {A : Set} (x : A) : A → Set where
-  refl : x ≡ x
