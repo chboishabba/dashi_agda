@@ -42,7 +42,7 @@ quantumRecoveredOrder :
 quantumRecoveredOrder P R =
   recoverPeriod
     (machine (orderFindingRun R))
-    (execute
+    (periodExecute
       (machine (orderFindingRun R))
       (seed (successEvidence (orderFindingRun R))))
 
