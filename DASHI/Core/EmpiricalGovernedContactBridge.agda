@@ -1,5 +1,6 @@
 module DASHI.Core.EmpiricalGovernedContactBridge where
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Core.ContactGateCore as Gate
@@ -22,9 +23,9 @@ empiricalReceiptGivesGovernedContact :
   ({left right : Geometry.Observable (Empirical.contactGeometry receipt)} →
     Geometry.Residual (Empirical.contactGeometry receipt) left right →
     Hamiltonian.Residual (Empirical.contactHamiltonian receipt)) →
-  Replay.replayable (Empirical.replay receipt) ≡ Agda.Builtin.Bool.true →
-  Replay.replayPromotesTruth (Empirical.replay receipt) ≡ Agda.Builtin.Bool.false →
-  Gate.promotesTruth (Empirical.contactGateCore receipt) ≡ Agda.Builtin.Bool.false →
+  Replay.replayable (Empirical.replay receipt) ≡ true →
+  Replay.replayPromotesTruth (Empirical.replay receipt) ≡ false →
+  Gate.promotesTruth (Empirical.contactGateCore receipt) ≡ false →
   Governed.GovernedContactCore
 empiricalReceiptGivesGovernedContact receipt residualEncode replayLive replayNonPromoting gateClosed =
   Governed.governedContactCore
