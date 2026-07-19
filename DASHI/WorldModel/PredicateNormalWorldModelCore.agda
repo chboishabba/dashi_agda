@@ -1,17 +1,10 @@
 module DASHI.WorldModel.PredicateNormalWorldModelCore where
 
-open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 
 import DASHI.Core.ContactGateCore as Gate
-
-------------------------------------------------------------------------
--- Predicate-normal world-model surface.
---
--- PNF, Phi, and Psi are proposal/addressing surfaces.  They make candidate
--- futures inspectable but do not supply truth, authority, or promotion.
-------------------------------------------------------------------------
 
 record PredicateNormalWorldModelCore : Set₁ where
   constructor predicateNormalWorldModelCore
@@ -35,8 +28,8 @@ record PredicateNormalWorldModelCore : Set₁ where
     pressure      : Trajectory → Pressure
     actionGate    : List Action → Gate.ContactGateCore
 
-    phiPromotesTruth : false ≡ false
-    psiPromotesTruth : false ≡ false
+    phiPromotesTruth : Bool
+    psiPromotesTruth : Bool
 
 open PredicateNormalWorldModelCore public
 
@@ -61,15 +54,14 @@ candidateTrajectory model observation =
     (candidateActions model observation)
 
 record PredicateNormalProposalBoundary
-  (model : PredicateNormalWorldModelCore) : Set where
+  (model : PredicateNormalWorldModelCore)
+  (observation : Observation model) : Set where
   constructor predicateNormalProposalBoundary
   field
-    phiIsProposalOnly : false ≡ false
-    psiIsProposalOnly : false ≡ false
-    candidateGateDoesNotAutoClose :
+    phiIsProposalOnly : phiPromotesTruth model ≡ false
+    psiIsProposalOnly : psiPromotesTruth model ≡ false
+    candidateGateDoesNotAutoPromote :
       Gate.promotesTruth
-        (actionGate model (candidateActions model
-          -- The boundary is model-wide; no privileged observation is assumed.
-          -- The caller supplies an observation in domain instances.
-          -- This field therefore remains intentionally absent here.
-          )) ≡ false
+        (actionGate model (candidateActions model observation)) ≡ false
+
+open PredicateNormalProposalBoundary public
