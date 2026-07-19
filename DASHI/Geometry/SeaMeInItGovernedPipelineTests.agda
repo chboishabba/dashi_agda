@@ -3,10 +3,11 @@ module DASHI.Geometry.SeaMeInItGovernedPipelineTests where
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Unit using (⊤)
 
 open import DASHI.Governance.GovernedArtifactCore
 open import DASHI.Geometry.SeaMeInItGovernedPipeline
+open import DASHI.Geometry.SeaMeInItAuthorityInvariants
 
 ------------------------------------------------------------------------
 -- Gate 0 finite witness: a warning causes local refinement abstention, the raw
@@ -60,20 +61,10 @@ finalEvidenceWitness =
 bodyReceipt : BodyCarrierReceiptV2
 bodyReceipt =
   bodyCarrierReceiptV2
-    h0
-    h8
-    abstain
-    h6
-    h7
-    h6
-    h9
-    rawImageSource
-    refl
-    rawImageFit
-    refl
-    rawTopologyWitness
-    refinedTopologyWitness
-    finalEvidenceWitness
+    h0 h8 abstain h6 h7 h6 h9
+    rawImageSource refl
+    rawImageFit refl
+    rawTopologyWitness refinedTopologyWitness finalEvidenceWitness
     warn
     (lowViewDiversity ∷ [])
     []
@@ -89,6 +80,19 @@ bodyReceiptPromotesIndependently = refl
 
 warningStillRetained : retainedWarnings bodyReceipt ≡ lowViewDiversity ∷ []
 warningStillRetained = refl
+
+bodyLineageWitness : BodyCarrierLineageInvariant bodyReceipt
+bodyLineageWitness = bodyCarrierLineageInvariant refl
+
+finalBodyAuthorization : FinalArtifactAuthorization finalEvidenceWitness promote
+finalBodyAuthorization = authorizeFinal refl refl refl refl
+
+authorizedBodyReceipt : AuthorizedBodyCarrier bodyReceipt
+authorizedBodyReceipt =
+  authorizedBodyCarrier bodyLineageWitness finalBodyAuthorization
+
+undersuitMayConsume : CanConsumeBody bodyReceipt undersuit
+undersuitMayConsume = consumePromotedBody refl
 
 ------------------------------------------------------------------------
 -- Gate 6 finite witness: A then B is linked through the materialized child.
@@ -115,6 +119,18 @@ orderedABLinksActualChild :
   parentStateHash transitionB ≡ childStateHash transitionA
 orderedABLinksActualChild = refl
 
+materializedA : MaterializedPanelTransition transitionA
+materializedA = materializedPanelTransition refl refl refl refl refl refl
+
+materializedB : MaterializedPanelTransition transitionB
+materializedB = materializedPanelTransition refl refl refl refl refl refl
+
+orderedABAuthority : SequentialPairAuthority orderedAB
+orderedABAuthority = sequentialPairAuthority materializedA materializedB refl refl
+
+firstTransitionIsOnlyBeamAdmitted : BeamAdmissionWithoutPromotion transitionA
+firstTransitionIsOnlyBeamAdmitted = beamAdmissionWithoutPromotion refl refl
+
 searchPolicyWitness : BoundedSearchPolicy Hash
 searchPolicyWitness = boundedSearchPolicy h0 h1 h2 2 8 h3 h4
 
@@ -125,6 +141,12 @@ boundedFailureHasWitness :
   noPromotedStateWithinDeclaredSearch boundedFailureWitness ≡ ⊤
 boundedFailureHasWitness = refl
 
+bt369Indication : BT369SerializerIndication
+bt369Indication = bt369SerializerIndication true true true true true
+
+bt369WarrantWitness : BT369Warrant bt369Indication
+bt369WarrantWitness = bt369Warrant refl refl refl refl refl
+
 v1NotSequential : gate6V1IsSequential ≡ false
 v1NotSequential = refl
 
@@ -133,6 +155,10 @@ v1NotGlobalExhaustion = refl
 
 automaticBT369RemainsClosed : automaticBT369Promotion ≡ false
 automaticBT369RemainsClosed = refl
+
+boundedFailureAloneDoesNotWarrantBT369 :
+  boundedSearchFailureAloneWarrantsBT369 ≡ false
+boundedFailureAloneDoesNotWarrantBT369 = refl
 
 automaticCandidateAuthorityRemainsClosed :
   automaticCandidateMutationAuthority ≡ false
