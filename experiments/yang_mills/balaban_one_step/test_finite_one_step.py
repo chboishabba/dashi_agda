@@ -14,6 +14,12 @@ from frontier_search import (
     hodge_poincare_diagnostic,
     run_search,
 )
+from su2_ad_functional_calculus import (
+    ad_matrix,
+    dexp_matrix,
+    inverse_dexp_matrix,
+    run as run_ad_calculus,
+)
 
 
 class FiniteOneStepTests(unittest.TestCase):
@@ -61,6 +67,21 @@ class FiniteOneStepTests(unittest.TestCase):
         self.assertEqual(report["claim_scope"], "finite_lattice_only")
         self.assertTrue(report["zero_background_section"]["constraints_independent"])
         self.assertTrue(report["all_background_sections_closed"])
+
+    def test_su2_ad_cubic_and_closed_dexp_inverse(self) -> None:
+        y = np.array([0.07, -0.03, 0.11])
+        A = ad_matrix(y)
+        self.assertLess(
+            np.linalg.norm(A@A@A + 4.0*float(y@y)*A, ord=2),
+            1e-12,
+        )
+        D = dexp_matrix(y)
+        Di = inverse_dexp_matrix(y)
+        self.assertLess(np.linalg.norm(Di@D-np.eye(3), ord=2), 1e-12)
+        self.assertLess(np.linalg.norm(D@Di-np.eye(3), ord=2), 1e-12)
+        report = run_ad_calculus(radius=0.2, samples=16, seed=0)
+        self.assertLess(report["inverse_left_residual_max"], 1e-12)
+        self.assertLess(report["inverse_right_residual_max"], 1e-12)
 
 
 if __name__ == '__main__':
