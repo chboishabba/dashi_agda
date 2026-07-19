@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanSU2CMP98LinearizedAverage
 import DASHI.Physics.YangMills.BalabanSU2CMP98LiteralLinearization
 import DASHI.Physics.YangMills.BalabanSU2CMP98Remainder
 import DASHI.Physics.YangMills.BalabanSU2AveragingSection
+import DASHI.Physics.YangMills.BalabanSU2QGQStarLowerBound
 import DASHI.Physics.YangMills.BalabanSU2ConstraintMatrix
 import DASHI.Physics.YangMills.BalabanSU2GaugeFixedConstraintSpace
 import DASHI.Physics.YangMills.BalabanSU2ConstraintTangentSpace
