@@ -8,6 +8,7 @@ module DASHI.Cognition.EndogenousPhospheneObservationBridge where
 -- still project observable geometry.  No particular cause is inferred from a
 -- reported phosphene or form constant.
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Biology.CoupledElectrochemicalPatternCarrier using
   ( CoupledElectrochemicalCarrier
   ; PatternSelectionInput
@@ -57,5 +58,3 @@ record PhospheneProjectionWitness : Set₁ where
     noUniqueEtiologyRecovery : Set
     noClinicalDiagnosis : Set
     noSemanticAuthority : Set
-
-open import Agda.Builtin.Equality using (_≡_)
