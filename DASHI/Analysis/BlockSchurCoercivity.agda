@@ -1,7 +1,7 @@
 module DASHI.Analysis.BlockSchurCoercivity where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Relation.Binary.PropositionalEquality using (_≡_; subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 ------------------------------------------------------------------------
 -- Domain-neutral quantitative Schur-complement theorem.
@@ -84,15 +84,11 @@ schurCoercive O Q x =
       _≤_ O
         (_⊖_ O (highGap Q) (crossBudget Q))
         value)
-    (symmetry (schurQuadraticIdentity Q x))
+    (sym (schurQuadraticIdentity Q x))
     (subtractLowerBound O
       (highBlockCoercive Q x)
       (crossCorrectionBounded Q x)
       (crossBelowHighGap Q))
-  where
-  symmetry : ∀ {A : Set} {left right : A} → left ≡ right → right ≡ left
-  symmetry Relation.Binary.PropositionalEquality.refl =
-    Relation.Binary.PropositionalEquality.refl
 
 record StrictSchurGap
     {v s : Level}
