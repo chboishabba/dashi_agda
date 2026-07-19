@@ -8,18 +8,43 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data MovementValue : Set where
-  precision regionality biodiversity restraint novelty hospitality
-  antiIndustrialPractice scientificExplanation seasonality luxury
-  reproducibility craftTransmission : MovementValue
+  precision              : MovementValue
+  regionality            : MovementValue
+  biodiversity           : MovementValue
+  restraint              : MovementValue
+  novelty                : MovementValue
+  hospitality            : MovementValue
+  antiIndustrialPractice : MovementValue
+  scientificExplanation  : MovementValue
+  seasonality            : MovementValue
+  luxury                 : MovementValue
+  reproducibility        : MovementValue
+  craftTransmission      : MovementValue
 
 data TechniqueFamily : Set where
-  classicalReduction fermentation liveFire lowTemperatureCooking
-  hydrocolloidTransformation spherification foaming deconstruction
-  preservation noseToTail wholePlant : TechniqueFamily
+  classicalReduction         : TechniqueFamily
+  fermentation              : TechniqueFamily
+  liveFire                  : TechniqueFamily
+  lowTemperatureCooking     : TechniqueFamily
+  hydrocolloidTransformation : TechniqueFamily
+  spherification            : TechniqueFamily
+  foaming                   : TechniqueFamily
+  deconstruction            : TechniqueFamily
+  preservation              : TechniqueFamily
+  noseToTail                : TechniqueFamily
+  wholePlant                : TechniqueFamily
 
 data AestheticPriority : Set where
-  clarity abundance minimalism surprise naturalism theatricality
-  rusticity refinement contrast continuity : AestheticPriority
+  clarity       : AestheticPriority
+  abundance     : AestheticPriority
+  minimalism    : AestheticPriority
+  surprise      : AestheticPriority
+  naturalism    : AestheticPriority
+  theatricality : AestheticPriority
+  rusticity     : AestheticPriority
+  refinement    : AestheticPriority
+  contrast      : AestheticPriority
+  continuity    : AestheticPriority
 
 record MovementRegime : Set where
   field
@@ -33,7 +58,11 @@ record MovementRegime : Set where
 open MovementRegime public
 
 data MovementProjectionKind : Set where
-  aligned influencedBy criticalResponse hybridizedWith externallyLabelled : MovementProjectionKind
+  aligned            : MovementProjectionKind
+  influencedBy       : MovementProjectionKind
+  criticalResponse   : MovementProjectionKind
+  hybridizedWith     : MovementProjectionKind
+  externallyLabelled : MovementProjectionKind
 
 record DishMovementProjection : Set where
   field
@@ -46,9 +75,9 @@ record DishMovementProjection : Set where
 open DishMovementProjection public
 
 data MovementIdentityBoundary : Set where
-  movementProjectionDoesNotFixDishIdentity : MovementIdentityBoundary
-  sharedTechniqueDoesNotFixMovement : MovementIdentityBoundary
-  movementLabelDoesNotPromoteHistoricalAuthority : MovementIdentityBoundary
+  movementProjectionDoesNotFixDishIdentity        : MovementIdentityBoundary
+  sharedTechniqueDoesNotFixMovement               : MovementIdentityBoundary
+  movementLabelDoesNotPromoteHistoricalAuthority  : MovementIdentityBoundary
 
 modernistCandidateRegime : MovementRegime
 modernistCandidateRegime = record
