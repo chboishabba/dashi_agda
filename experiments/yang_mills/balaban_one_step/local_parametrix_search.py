@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 """Search physically local parametrix constants for the finite SU(2) Hessian.
 
-For each localization side M, invert the Hessian restricted to bonds whose
-origins lie in each M^4 cube, glue the local inverses with the exact diagonal
-partition-of-unity coverage, and evaluate A G*=I-R in exponentially weighted
-kernel norms.
+Local Hessian inverses are glued with a symmetric diagonal partition of unity,
+and A G*=I-R is tested in exponentially weighted row norms.  Two patch families
+are compared:
 
-The report deliberately distinguishes a *proper-local* parametrix (M < L) from
-the full-volume choice M = L.  The latter is an exact finite inverse diagnostic,
-not evidence for a random-walk/locality theorem.  Relaxation factors are also
-searched because spectral convergence of I-omega A G* can hold even when the
-weighted operator norm required by the proof does not.  Such cases are retained
-as explicit norm-obstruction witnesses rather than promoted.
+* isotropic M^4 cubes;
+* the union of all axis-oriented rectangular slabs of fixed thickness.
+
+The slab family is still finite range: for thickness two every local inverse is
+supported on a 2x1x1x1 patch (up to axis permutation), independently of total
+volume.  On the smallest 2^4 torus this family is already enough to distinguish a
+genuine proper-local candidate from the trivial full-volume inverse.
+
+A finite candidate is promoted only when both left and right weighted norms are
+strictly below one.  Spectral radius below one without the required weighted norm
+is retained as an obstruction.  Closure is reported separately for every sampled
+background, so success at B=0 cannot masquerade as a uniform small-field theorem.
 """
 from __future__ import annotations
 
@@ -19,7 +24,7 @@ import argparse
 import json
 import math
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Sequence
 
 import numpy as np
 
@@ -51,15 +56,22 @@ def dof_positions(lat: PeriodicLattice) -> list[tuple[int, ...]]:
     return positions
 
 
-def cubes(lat: PeriodicLattice, side: int) -> Iterable[tuple[tuple[int, ...], list[tuple[int, ...]]]]:
-    if side <= 0 or lat.L % side:
-        raise ValueError("local side must be a positive divisor of L")
-    coarse = lat.L // side
-    for anchor_coarse in np.ndindex(*(coarse,) * lat.dim):
-        anchor = tuple(side * coordinate for coordinate in anchor_coarse)
-        sites = []
-        for offset in np.ndindex(*(side,) * lat.dim):
-            sites.append(tuple((anchor[axis] + offset[axis]) % lat.L for axis in range(lat.dim)))
+def rectangular_patches(
+    lat: PeriodicLattice,
+    shape: Sequence[int],
+) -> Iterable[tuple[tuple[int, ...], list[tuple[int, ...]]]]:
+    shape = tuple(int(side) for side in shape)
+    if len(shape) != lat.dim:
+        raise ValueError(f"patch shape must have {lat.dim} entries")
+    if any(side <= 0 or lat.L % side for side in shape):
+        raise ValueError("every rectangular patch side must be a positive divisor of L")
+    coarse_shape = tuple(lat.L // side for side in shape)
+    for anchor_coarse in np.ndindex(*coarse_shape):
+        anchor = tuple(shape[axis] * anchor_coarse[axis] for axis in range(lat.dim))
+        sites = [
+            tuple((anchor[axis] + offset[axis]) % lat.L for axis in range(lat.dim))
+            for offset in np.ndindex(*shape)
+        ]
         yield anchor, sites
 
 
@@ -72,42 +84,72 @@ def local_dofs(lat: PeriodicLattice, sites: list[tuple[int, ...]]) -> np.ndarray
     return np.asarray(indices, dtype=int)
 
 
-def glued_local_parametrix(H: np.ndarray, lat: PeriodicLattice, side: int) -> tuple[np.ndarray, dict[str, Any]]:
+def glued_patch_parametrix(
+    H: np.ndarray,
+    lat: PeriodicLattice,
+    shapes: Sequence[Sequence[int]],
+) -> tuple[np.ndarray, dict[str, Any]]:
+    unique_shapes = list(dict.fromkeys(tuple(int(side) for side in shape) for shape in shapes))
+    if not unique_shapes:
+        raise ValueError("a patch family must contain at least one shape")
+
     dimension = H.shape[0]
     Gstar = np.zeros_like(H)
     coverage = np.zeros(dimension, dtype=float)
     local_minima: list[float] = []
     local_dimensions: list[int] = []
-    for _, sites in cubes(lat, side):
-        indices = local_dofs(lat, sites)
-        block = 0.5 * (H[np.ix_(indices, indices)] + H[np.ix_(indices, indices)].T)
-        eigenvalues = np.linalg.eigvalsh(block)
-        local_minima.append(float(eigenvalues[0]))
-        local_dimensions.append(int(len(indices)))
-        if eigenvalues[0] <= 1e-12:
-            return Gstar, {
-                "defined": False,
-                "reason": "nonpositive local Hessian block",
-                "local_lambda_min": float(eigenvalues[0]),
-            }
-        inverse = np.linalg.inv(block)
-        Gstar[np.ix_(indices, indices)] += inverse
-        coverage[indices] += 1.0
+    local_site_counts: list[int] = []
+    patch_count = 0
+
+    for shape in unique_shapes:
+        for _, sites in rectangular_patches(lat, shape):
+            patch_count += 1
+            indices = local_dofs(lat, sites)
+            block = 0.5 * (H[np.ix_(indices, indices)] + H[np.ix_(indices, indices)].T)
+            eigenvalues = np.linalg.eigvalsh(block)
+            local_minima.append(float(eigenvalues[0]))
+            local_dimensions.append(int(len(indices)))
+            local_site_counts.append(len(sites))
+            if eigenvalues[0] <= 1e-12:
+                return Gstar, {
+                    "defined": False,
+                    "reason": "nonpositive local Hessian block",
+                    "local_lambda_min": float(eigenvalues[0]),
+                    "patch_shapes": [list(shape) for shape in unique_shapes],
+                }
+            inverse = np.linalg.inv(block)
+            Gstar[np.ix_(indices, indices)] += inverse
+            coverage[indices] += 1.0
+
     if np.any(coverage == 0):
-        return Gstar, {"defined": False, "reason": "uncovered degree of freedom"}
+        return Gstar, {
+            "defined": False,
+            "reason": "uncovered degree of freedom",
+            "patch_shapes": [list(shape) for shape in unique_shapes],
+        }
+
     # Symmetric partition of unity: W^{-1/2} (sum G_i) W^{-1/2}.
     weights = 1.0 / np.sqrt(coverage)
     Gstar = weights[:, None] * Gstar * weights[None, :]
     return Gstar, {
         "defined": True,
+        "patch_shapes": [list(shape) for shape in unique_shapes],
+        "patch_count": patch_count,
         "local_lambda_min": min(local_minima),
         "local_dimension_max": max(local_dimensions),
+        "local_site_count_max": max(local_site_counts),
+        "proper_local": max(local_site_counts) < lat.n_sites,
         "coverage_min": float(np.min(coverage)),
         "coverage_max": float(np.max(coverage)),
     }
 
 
-def weighted_infinity_norm(matrix: np.ndarray, positions: list[tuple[int, ...]], L: int, mu: float) -> float:
+def weighted_infinity_norm(
+    matrix: np.ndarray,
+    positions: list[tuple[int, ...]],
+    L: int,
+    mu: float,
+) -> float:
     weighted_rows = []
     for i, left in enumerate(positions):
         row = 0.0
@@ -130,6 +172,31 @@ def _candidate_key(candidate: dict[str, Any]) -> tuple[float, float, float]:
     return worst, float(candidate["mu"]), abs(1.0 - float(candidate["relaxation"]))
 
 
+def _family_specs(
+    dim: int,
+    local_sides: list[int],
+    slab_thicknesses: list[int],
+) -> list[dict[str, Any]]:
+    families: list[dict[str, Any]] = []
+    for side in local_sides:
+        families.append({
+            "patch_family": f"cube-{side}",
+            "local_side": side,
+            "shapes": [(side,) * dim],
+        })
+    for thickness in slab_thicknesses:
+        shapes = [
+            tuple(thickness if axis == orientation else 1 for axis in range(dim))
+            for orientation in range(dim)
+        ]
+        families.append({
+            "patch_family": f"axis-slabs-{thickness}",
+            "slab_thickness": thickness,
+            "shapes": shapes,
+        })
+    return families
+
+
 def run_search(
     *,
     L: int,
@@ -139,28 +206,32 @@ def run_search(
     radii: list[float],
     seeds: int,
     relaxations: list[float] | None = None,
+    slab_thicknesses: list[int] | None = None,
 ) -> dict[str, Any]:
     if relaxations is None:
         relaxations = [1.0]
+    if slab_thicknesses is None:
+        slab_thicknesses = []
     if not relaxations or any(value <= 0.0 for value in relaxations):
         raise ValueError("relaxations must be a nonempty list of positive values")
 
     lat = PeriodicLattice(L)
     positions = dof_positions(lat)
+    families = _family_specs(lat.dim, local_sides, slab_thicknesses)
     trials: list[dict[str, Any]] = []
+
     for radius in radii:
         for seed in range(seeds):
             background = identity_links(lat) if radius == 0 else random_background(lat, radius, seed)
             _, Q = block_average_matrix(lat, average_block, background)
             H = gauge_fixed_hessian(lat, background=background, average=Q)
-            for side in local_sides:
-                Gstar, local = glued_local_parametrix(H, lat, side)
-                proper_local = side < L
+            for family in families:
+                Gstar, local = glued_patch_parametrix(H, lat, family["shapes"])
+                family_metadata = {key: value for key, value in family.items() if key != "shapes"}
                 trial: dict[str, Any] = {
                     "radius": radius,
                     "seed": seed,
-                    "local_side": side,
-                    "proper_local": proper_local,
+                    **family_metadata,
                     **local,
                 }
                 if local.get("defined"):
@@ -208,10 +279,15 @@ def run_search(
             base = {
                 "radius": trial["radius"],
                 "seed": trial["seed"],
-                "local_side": trial["local_side"],
+                "patch_family": trial["patch_family"],
+                "patch_shapes": trial["patch_shapes"],
                 "proper_local": trial["proper_local"],
                 "relaxation": relaxed["relaxation"],
             }
+            if "local_side" in trial:
+                base["local_side"] = trial["local_side"]
+            if "slab_thickness" in trial:
+                base["slab_thickness"] = trial["slab_thickness"]
             if relaxed["weighted_norm_obstruction"]:
                 spectral_obstructions.append({
                     **base,
@@ -232,6 +308,20 @@ def run_search(
     proper_weighted = [item for item in all_weighted_candidates if item["proper_local"]]
     best_proper = min(proper_weighted, key=_candidate_key) if proper_weighted else None
 
+    background_closure = []
+    for radius in radii:
+        for seed in range(seeds):
+            candidates = [
+                item for item in proper_convergent
+                if item["radius"] == radius and item["seed"] == seed
+            ]
+            background_closure.append({
+                "radius": radius,
+                "seed": seed,
+                "strict_proper_local_bound": bool(candidates),
+                "best_candidate": min(candidates, key=_candidate_key) if candidates else None,
+            })
+
     return {
         "claim_scope": "finite_lattice_only",
         "lattice_extent": L,
@@ -241,8 +331,13 @@ def run_search(
         "proper_local_convergent_candidates": proper_convergent,
         "spectral_without_weighted_norm_obstructions": spectral_obstructions,
         "best_proper_local_candidate": best_proper,
+        "background_closure": background_closure,
         "has_strict_weighted_remainder_bound": bool(convergent),
         "has_strict_proper_local_weighted_remainder_bound": bool(proper_convergent),
+        "all_sampled_backgrounds_have_strict_proper_local_bound": (
+            bool(background_closure)
+            and all(item["strict_proper_local_bound"] for item in background_closure)
+        ),
         "global_inverse_only": bool(convergent) and not bool(proper_convergent),
     }
 
@@ -252,6 +347,7 @@ def main() -> None:
     parser.add_argument("--L", type=int, default=2)
     parser.add_argument("--average-block", type=int, default=2)
     parser.add_argument("--local-sides", default="1,2")
+    parser.add_argument("--slab-thicknesses", default="2")
     parser.add_argument("--mus", default="0,0.05,0.1")
     parser.add_argument("--radii", default="0,0.01,0.03")
     parser.add_argument("--relaxations", default="0.25,0.5,0.75,1")
@@ -262,6 +358,7 @@ def main() -> None:
         L=args.L,
         average_block=args.average_block,
         local_sides=[int(value) for value in args.local_sides.split(",") if value],
+        slab_thicknesses=[int(value) for value in args.slab_thicknesses.split(",") if value],
         mus=[float(value) for value in args.mus.split(",") if value],
         radii=[float(value) for value in args.radii.split(",") if value],
         seeds=args.seeds,
