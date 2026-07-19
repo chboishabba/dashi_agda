@@ -7,6 +7,7 @@ on:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/StoichiometricConservation.agda'
       - 'DASHI/Analysis/StoichiometricConservationRegression.agda'
+      - 'DASHI/Analysis/OpenSystemBalance.agda'
       - 'DASHI/Analysis/DissipationPathMonotonicity.agda'
       - 'DASHI/Analysis/FejerSublevelInvariant.agda'
       - 'DASHI/Analysis/StrictContractionUniqueness.agda'
@@ -16,6 +17,7 @@ on:
       - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
       - 'DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda'
+      - 'DASHI/Biology/Cell/MetabolicOpenSystemBalance.agda'
       - 'DASHI/Biology/Cell/MetabolicDissipationBridge.agda'
       - 'DASHI/Biology/Cell/CellFejerAttractorBridge.agda'
       - 'DASHI/Biology/Protein/ProteinFejerBasinBridge.agda'
@@ -29,6 +31,7 @@ on:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/StoichiometricConservation.agda'
       - 'DASHI/Analysis/StoichiometricConservationRegression.agda'
+      - 'DASHI/Analysis/OpenSystemBalance.agda'
       - 'DASHI/Analysis/DissipationPathMonotonicity.agda'
       - 'DASHI/Analysis/FejerSublevelInvariant.agda'
       - 'DASHI/Analysis/StrictContractionUniqueness.agda'
@@ -38,6 +41,7 @@ on:
       - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
       - 'DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda'
+      - 'DASHI/Biology/Cell/MetabolicOpenSystemBalance.agda'
       - 'DASHI/Biology/Cell/MetabolicDissipationBridge.agda'
       - 'DASHI/Biology/Cell/CellFejerAttractorBridge.agda'
       - 'DASHI/Biology/Protein/ProteinFejerBasinBridge.agda'
@@ -79,6 +83,7 @@ jobs:
               DASHI/Analysis/FiniteOperatorReductionCore.agda \
               DASHI/Analysis/StoichiometricConservation.agda \
               DASHI/Analysis/StoichiometricConservationRegression.agda \
+              DASHI/Analysis/OpenSystemBalance.agda \
               DASHI/Analysis/DissipationPathMonotonicity.agda \
               DASHI/Analysis/FejerSublevelInvariant.agda \
               DASHI/Analysis/StrictContractionUniqueness.agda \
@@ -86,6 +91,7 @@ jobs:
               DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda \
               DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda \
               DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda \
+              DASHI/Biology/Cell/MetabolicOpenSystemBalance.agda \
               DASHI/Biology/Cell/MetabolicDissipationBridge.agda \
               DASHI/Biology/Cell/CellFejerAttractorBridge.agda \
               DASHI/Biology/Protein/ProteinFejerBasinBridge.agda \
