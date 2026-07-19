@@ -66,7 +66,7 @@ orderFindingRecoversExactOrder :
   (R : CertifiedOrderFindingRun P) →
   recoverPeriod
     (machine R)
-    (execute (machine R) (seed (successEvidence R)))
+    (periodExecute (machine R) (seed (successEvidence R)))
   ≡ r
 orderFindingRecoversExactOrder P R =
   recoveredPeriodIsExact (machine R) (successEvidence R)
