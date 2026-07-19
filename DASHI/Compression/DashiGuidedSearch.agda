@@ -2,7 +2,7 @@ module DASHI.Compression.DashiGuidedSearch where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
@@ -33,6 +33,14 @@ record DashiStringEmbedding (M : StringMDLSystem) : Set₁ where
 open DashiStringEmbedding public
 
 ------------------------------------------------------------------------
+-- Constructive membership for heuristic proposal lists.
+------------------------------------------------------------------------
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here  : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
+
+------------------------------------------------------------------------
 -- Exact gate.  The guide supplies a candidate; the MDL witness authorizes it.
 ------------------------------------------------------------------------
 
@@ -43,10 +51,10 @@ record GuidedExactStep
   : Set where
   field
     candidate : Move M
-    proposed  : Set
+    proposed  : candidate ∈ propose E s
 
     -- Acceptance remains entirely in the exact MDL layer.
-    exact : ExactImprovement M s
+    exact    : ExactImprovement M s
     sameMove : candidate ≡ move exact
 
 open GuidedExactStep public
