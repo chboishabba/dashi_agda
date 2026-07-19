@@ -8,6 +8,8 @@ import DASHI.Biology.Levin.MicrobiomeHostAppetiteBoundary as Appetite
 import DASHI.Biology.Levin.CravingCausalCompetition as Craving
 import DASHI.Biology.Levin.EndosymbioticOrganelleAgencyBoundary as Organelle
 import DASHI.Biology.Levin.FungalNetworkAgencyBoundary as Fungal
+import DASHI.Biology.Levin.ComponentCausalRoleBoundary as CausalRole
+import DASHI.Biology.Levin.HostMicrobeCellCountBoundary as CellCount
 import DASHI.Biology.Levin.PolycomputationBiologyAdapter as Poly
 import DASHI.Biology.Levin.ConstitutiveInteractiveAutonomy as Autonomy
 
@@ -21,6 +23,17 @@ record SiphonophoreAnalogyBoundary : Set where
     analogyNotTaxonomicIdentity : Bool
     analogyNotProofOfEqualComponentAgency : Bool
 
+canonicalSiphonophoreAnalogyBoundary : SiphonophoreAnalogyBoundary
+canonicalSiphonophoreAnalogyBoundary = record
+  { multipleSemiAutonomousComponents = true
+  ; divisionOfLabourAcrossComponents = true
+  ; collectiveBoundaryMaintained = true
+  ; reproductiveBottleneckDiffers = true
+  ; developmentalIntegrationDiffers = true
+  ; analogyNotTaxonomicIdentity = true
+  ; analogyNotProofOfEqualComponentAgency = true
+  }
+
 record MultikingdomEmbodiedAgentCore : Set where
   field
     consortiumBoundary : Consortium.ElectrochemicalBodyConsortiumBoundary
@@ -28,6 +41,9 @@ record MultikingdomEmbodiedAgentCore : Set where
     cravingBoundary : Craving.CravingCausalCompetitionBoundary
     organelleBoundary : Organelle.EndosymbioticOrganelleAgencyBoundary
     fungalBoundary : Fungal.FungalNetworkAgencyBoundary
+    causalRoleBoundary : CausalRole.ComponentCausalRoleBoundary
+    cellCountBoundary : CellCount.HostMicrobeCellCountBoundary
+    siphonophoreAnalogyBoundary : SiphonophoreAnalogyBoundary
     polycomputationAdapter : Poly.PolycomputationBiologyAdapter
     autonomyBoundary : Autonomy.ConstitutiveInteractiveAutonomyBoundary
     organismIsNestedCoalition : Bool
@@ -45,6 +61,9 @@ canonicalMultikingdomEmbodiedAgentCore = record
   ; cravingBoundary = Craving.canonicalCravingCausalCompetitionBoundary
   ; organelleBoundary = Organelle.canonicalEndosymbioticOrganelleAgencyBoundary
   ; fungalBoundary = Fungal.canonicalFungalNetworkAgencyBoundary
+  ; causalRoleBoundary = CausalRole.canonicalComponentCausalRoleBoundary
+  ; cellCountBoundary = CellCount.canonicalHostMicrobeCellCountBoundary
+  ; siphonophoreAnalogyBoundary = canonicalSiphonophoreAnalogyBoundary
   ; polycomputationAdapter = Poly.canonicalPolycomputationBiologyAdapter
   ; autonomyBoundary = Autonomy.canonicalConstitutiveInteractiveAutonomyBoundary
   ; organismIsNestedCoalition = true
