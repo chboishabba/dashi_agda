@@ -1,6 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 import sys
+import numpy as np
 import pytest
 
 SCRIPTS=Path(__file__).resolve().parents[1]
@@ -9,6 +10,7 @@ from ns_adaptive_checkpoint_plan import plan
 from ns_attach_explicit_timeline import attach,parse_times
 from ns_generate_matched_galerkin_trajectories import generate
 from ns_multicutoff_coherence_validation import validate
+from ns_shell_pair_transfer_audit import shell_pair_metrics
 
 def test_attach_timeline_requires_count_and_strict_order():
     payload={'export_receipts':[{'source_state':'a'},{'source_state':'b'}]}
@@ -22,10 +24,12 @@ def test_adaptive_plan_refines_crossing_and_terminal_excursion():
     crossing=result['requests'][0];assert crossing['requested_times']==[.25,.5,.75]
     assert result['requests'][1]['requested_times']==[1.25]
 
-def test_matched_trajectory_generator_writes_explicit_physical_times(tmp_path):
+def test_matched_trajectory_and_shell_pair_audit(tmp_path):
     result=generate((8,),tmp_path,nu=.02,shell=0,end_time=.001,base_wave=1,amplitude=.2,cfl=.2,nominal_output_dt=.001,threshold=.5,near_band=.1,dense_factor=2)
     run=result['runs'][0];assert run['state_count']>=2
     times=[row['time'] for row in run['states']];assert times[0]==0;assert times[-1]==pytest.approx(.001);assert all(b>a for a,b in zip(times,times[1:]))
+    with np.load(run['states'][0]['source_state'],allow_pickle=False) as data:raw=np.asarray(data['raw_hat']);nu=float(data['nu'])
+    shell=shell_pair_metrics(raw,nu,0,1);assert shell['forcing_pair_sum_max_residual']<1e-8;assert shell['signed_pair_sum_residual']<1e-8;assert shell['atomwise_gross_equivalence'] is False
 
 def exact_checkpoint(trajectory,index,cutoff,gamma=.8):
     return {'trajectory_id':trajectory,'checkpoint_index':index,'gamma':gamma,'packet_tight':True,'packet_geometry':{'local_shell_mass_fraction':.99},'exact_galerkin_alignment_budget':{'cutoff':cutoff,'exact_total_derivatives':{'parabolic_normalized_alignment_derivative':.1},'candidate_absorption':{'pressure_positive_remainder':1.,'commutator_positive_remainder':0.,'viscous_positive_remainder':0.,'local_geometric_depletion':.2}}}
