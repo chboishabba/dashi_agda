@@ -3,8 +3,8 @@ module DASHI.Biology.Origins.AutocatalyticCompartmentBoundary where
 -- Origins-of-life claims are staged so that energy harvesting, autocatalysis,
 -- compartmentalisation, heredity, and closed-loop agency are not conflated.
 data OriginStage : Set where
-  gradientHarvesting     : OriginStage
-  autocatalyticClosure   : OriginStage
+  gradientHarvesting      : OriginStage
+  autocatalyticClosure    : OriginStage
   compartmentalisedCycle : OriginStage
   hereditaryPersistence  : OriginStage
   viabilityControl       : OriginStage
@@ -50,13 +50,13 @@ record ProtoAgencyExtension
     Defect      : State → Set
 
     observe : State → Observation
-    policy  : Observation → Defect → Action
+    policy  : (x : State) → Observation → Defect x → Action
     act     : Action → State → State
 
     Corrective : State → Action → Set
     correctionWitness :
-      (x : State) → Defect x →
-      Corrective x (policy (observe x) (Defect x))
+      (x : State) → (d : Defect x) →
+      Corrective x (policy x (observe x) d)
 
 -- Heredity and evolution require later rewrite/population witnesses.  Chemical
 -- recurrence alone is not silently promoted to Darwinian evolution.
