@@ -65,9 +65,9 @@ record TritPartition (L : Set) : Set₁ where
     NeutralRegion  : L → Set
     PositiveRegion : L → Set
 
-    negativeExact : (ℓ : L) → classify ℓ ≡ neg ↔ NegativeRegion ℓ
-    neutralExact  : (ℓ : L) → classify ℓ ≡ zer ↔ NeutralRegion ℓ
-    positiveExact : (ℓ : L) → classify ℓ ≡ pos ↔ PositiveRegion ℓ
+    negativeExact : (ℓ : L) → (classify ℓ ≡ neg) ↔ NegativeRegion ℓ
+    neutralExact  : (ℓ : L) → (classify ℓ ≡ zer) ↔ NeutralRegion ℓ
+    positiveExact : (ℓ : L) → (classify ℓ ≡ pos) ↔ PositiveRegion ℓ
 
 record ThresholdKernel (X L : Set) : Set₁ where
   field
@@ -98,14 +98,11 @@ TransitionDefect K s x = ¬ (s x ≡ applyKernel K s x)
 
 ------------------------------------------------------------------------
 -- Exact nonlinear sparsification theorem
---
--- Projection creates an exact neutral support: a projected atom is zero
--- exactly when its local field lies in the declared neutral region.
 ------------------------------------------------------------------------
 
 nonlinearSparsityExact :
   {X L : Set} (K : ThresholdKernel X L) (s : State X) (x : X) →
-  applyKernel K s x ≡ zer ↔
+  (applyKernel K s x ≡ zer) ↔
   TritPartition.NeutralRegion (ThresholdKernel.partition K)
     (ThresholdKernel.localField K s x)
 nonlinearSparsityExact K s x =
@@ -114,7 +111,7 @@ nonlinearSparsityExact K s x =
 
 nonlinearPositiveExact :
   {X L : Set} (K : ThresholdKernel X L) (s : State X) (x : X) →
-  applyKernel K s x ≡ pos ↔
+  (applyKernel K s x ≡ pos) ↔
   TritPartition.PositiveRegion (ThresholdKernel.partition K)
     (ThresholdKernel.localField K s x)
 nonlinearPositiveExact K s x =
@@ -123,7 +120,7 @@ nonlinearPositiveExact K s x =
 
 nonlinearNegativeExact :
   {X L : Set} (K : ThresholdKernel X L) (s : State X) (x : X) →
-  applyKernel K s x ≡ neg ↔
+  (applyKernel K s x ≡ neg) ↔
   TritPartition.NegativeRegion (ThresholdKernel.partition K)
     (ThresholdKernel.localField K s x)
 nonlinearNegativeExact K s x =
@@ -166,9 +163,6 @@ closedNegativeHasNegativeMargin K s closed x sx=- =
 
 ------------------------------------------------------------------------
 -- Conditional localization of defects to a sparse/low-margin carrier
---
--- Sparse defect support is not a theorem of arbitrary threshold systems.
--- It follows from an explicit stability law outside a chosen low-margin set.
 ------------------------------------------------------------------------
 
 record MarginControl
@@ -288,15 +282,17 @@ nonCoordinateWitnessRulesOutCoordinateRepresentation witness representation =
 
 ------------------------------------------------------------------------
 -- Exact exploded/CSP reading
---
--- ActiveAtom is the sparse support carrier.  KernelDefect is the set of
--- violated local threshold clauses.  No claim that defects are minimal
--- unsatisfiable cores is made without an additional minimality theorem.
 ------------------------------------------------------------------------
 
-ExplodedConstraintGeometry :
-  {X L : Set} → ThresholdKernel X L → State X → Set₁
-ExplodedConstraintGeometry {X} K s =
-  ActiveAtom s ×
-  (NeutralAtom s ×
-   ((x : X) → KernelDefect K s x → Set))
+record ExplodedConstraintGeometry
+  {X L : Set}
+  (K : ThresholdKernel X L)
+  (s : State X) : Set₁ where
+  field
+    activeCarrier  : Set
+    neutralCarrier : Set
+    defectCarrier  : Set
+
+    activeExact  : activeCarrier ≡ ActiveAtom s
+    neutralExact : neutralCarrier ≡ NeutralAtom s
+    defectExact  : defectCarrier ≡ Σ X (λ x → KernelDefect K s x)
