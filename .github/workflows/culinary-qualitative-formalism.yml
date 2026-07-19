@@ -1,11 +1,6 @@
 name: Culinary qualitative formalism
 
 on:
-  push:
-    paths:
-      - 'DASHI/Culture/Cuisine/**'
-      - '.github/workflows/culinary-qualitative-formalism.yml'
-      - 'scripts/run_agda29_parallel_check.sh'
   pull_request:
     paths:
       - 'DASHI/Culture/Cuisine/**'
@@ -13,7 +8,7 @@ on:
       - 'scripts/run_agda29_parallel_check.sh'
 
 concurrency:
-  group: culinary-qualitative-${{ github.ref }}
+  group: culinary-qualitative-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 permissions:
@@ -33,6 +28,10 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: culinary-qualitative-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+          restore-keys: |
+            ns-exact-coherence-agda29-${{ runner.os }}-86a1179-
+            ns-coherence-agda29-${{ runner.os }}-86a1179-
+            agda29-${{ runner.os }}-86a1179-
       - name: Check focused cuisine aggregate with pinned Agda 2.9
         id: focused
         shell: bash
