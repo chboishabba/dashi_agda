@@ -6,6 +6,7 @@ on:
       - 'scripts/ns_compact_gamma_offpacket_schur_audit.py'
       - 'scripts/tests/test_ns_compact_gamma_offpacket_schur_audit.py'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
       - 'docs/ns_compact_gamma_offpacket_schur_audit.md'
       - '.github/workflows/ns-compact-gamma-offpacket-schur.yml'
 
@@ -173,7 +174,8 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-offpacket-schur.log"
             export AGDA_JOBS=1
             scripts/run_agda29_parallel_check.sh \
-              DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda
+              DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda \
+              DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda
           ) > agda-compact-offpacket-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
