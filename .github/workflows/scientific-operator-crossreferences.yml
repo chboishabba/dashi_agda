@@ -17,6 +17,7 @@ on:
       - 'DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicDissipationBridge.agda'
+      - 'DASHI/Biology/Cell/CellFejerAttractorBridge.agda'
       - 'DASHI/Biology/Protein/ProteinFejerBasinBridge.agda'
       - 'DASHI/Biology/Protein/ProteinContractiveBasinBridge.agda'
       - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
@@ -38,6 +39,7 @@ on:
       - 'DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicDissipationBridge.agda'
+      - 'DASHI/Biology/Cell/CellFejerAttractorBridge.agda'
       - 'DASHI/Biology/Protein/ProteinFejerBasinBridge.agda'
       - 'DASHI/Biology/Protein/ProteinContractiveBasinBridge.agda'
       - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
@@ -85,6 +87,7 @@ jobs:
               DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda \
               DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda \
               DASHI/Biology/Cell/MetabolicDissipationBridge.agda \
+              DASHI/Biology/Cell/CellFejerAttractorBridge.agda \
               DASHI/Biology/Protein/ProteinFejerBasinBridge.agda \
               DASHI/Biology/Protein/ProteinContractiveBasinBridge.agda \
               DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda \
