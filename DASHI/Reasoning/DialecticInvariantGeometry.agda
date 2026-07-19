@@ -71,7 +71,6 @@ antithesis F = observe F antithesisSide
 common : ∀ {X} → DialecticField X → Predicate X
 common F = thesis F ∩ antithesis F
 
--- Swapping thesis and antithesis leaves the common part unchanged.
 swap : ∀ {X} → DialecticField X → DialecticField X
 observe (swap F) s = observe F (mirrorStance s)
 
@@ -84,11 +83,9 @@ common-swap-invariant F x = ∧-comm (antithesis F x) (thesis F x)
 -- Traversable corridors and boundary semantics
 ------------------------------------------------------------------------
 
--- A corridor is admitted by at least one stance but is not common to both.
 corridor : ∀ {X} → DialecticField X → Predicate X
 corridor F x = (thesis F x ∨ antithesis F x) ∧ ¬ common F x
 
--- Disagreement is the Boolean symmetric difference.
 disagreement : ∀ {X} → DialecticField X → Predicate X
 disagreement F x =
   (thesis F x ∧ ¬ antithesis F x) ∨
@@ -115,9 +112,6 @@ record ProjectionAlgebra (X : Set) : Set₁ where
       ∀ (F : DialecticField X) (x : X) →
       common F x ≡ true → project F x ≡ true
 
--- Signed-distance blending is represented as an ordered soft overlap carrier.
--- The concrete Python renderer supplies the score and threshold realization;
--- Agda records the laws needed before it may be treated as common structure.
 record SoftOverlap (X Score : Set) : Set₁ where
   constructor softOverlap
   field
@@ -145,7 +139,7 @@ record TernaryQuantizer (X : Set) : Set₁ where
 record DialecticToMotif (X : Set) : Set₁ where
   constructor dialecticToMotif
   field
-    field : DialecticField X
+    dialectic : DialecticField X
     quantizer : TernaryQuantizer X
     pastField nowField futureField : DialecticField X
 
