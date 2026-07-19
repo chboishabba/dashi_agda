@@ -4,11 +4,13 @@ on:
   push:
     paths:
       - 'DASHI/Biology/**/*.agda'
+      - 'DASHI/Physics/Laws/**/*.agda'
       - 'DASHI/Physics/Chemistry/*.agda'
       - '.github/workflows/biology-recovery-tower.yml'
   pull_request:
     paths:
       - 'DASHI/Biology/**/*.agda'
+      - 'DASHI/Physics/Laws/**/*.agda'
       - 'DASHI/Physics/Chemistry/*.agda'
       - '.github/workflows/biology-recovery-tower.yml'
 
@@ -51,7 +53,7 @@ jobs:
           ) > agda-biology-recovery-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 260 agda-biology-recovery-check.log
+          tail -n 300 agda-biology-recovery-check.log
           exit 0
 
       - name: Upload focused Agda log

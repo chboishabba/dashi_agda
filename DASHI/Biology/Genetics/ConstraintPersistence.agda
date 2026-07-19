@@ -1,19 +1,19 @@
 module DASHI.Biology.Genetics.ConstraintPersistence where
 
 -- Heredity is defined abstractly as persistence of organisation-generating
--- constraints under reproduction and rewrite.  DNA/RNA is one concrete carrier,
--- not the definition of heredity itself.
+-- constraints under reproduction and transformation.  DNA/RNA is one concrete
+-- carrier, not the definition of heredity itself.
 record HereditaryRewriteSystem : Set₁ where
   field
-    Carrier     : Set
-    Constraint  : Set
-    Rewrite     : Set
-    Environment : Set
+    Carrier        : Set
+    Constraint     : Set
+    Transformation : Set
+    Environment    : Set
 
-    apply       : Environment → Rewrite → Carrier → Carrier
+    apply       : Environment → Transformation → Carrier → Carrier
     Satisfies   : Carrier → Constraint → Set
     Replicates  : Carrier → Carrier → Set
-    Mutates     : Rewrite → Set
+    Mutates     : Transformation → Set
 
 record ConstraintPersistenceWitness
   (H : HereditaryRewriteSystem) : Set₁ where
@@ -22,7 +22,7 @@ record ConstraintPersistenceWitness
     parent child : Carrier
     constraint   : Constraint
     environment  : Environment
-    rewrite      : Rewrite
+    transformation : Transformation
 
     parentSatisfies : Satisfies parent constraint
     reproduction    : Replicates parent child
@@ -34,10 +34,10 @@ record HeritableVariationWitness
   field
     ancestor descendant : Carrier
     environment : Environment
-    rewrite     : Rewrite
+    transformation : Transformation
     ancestralConstraint derivedConstraint : Constraint
 
-    mutation : Mutates rewrite
+    mutation : Mutates transformation
     ancestorSatisfies : Satisfies ancestor ancestralConstraint
     descendantSatisfies : Satisfies descendant derivedConstraint
 
