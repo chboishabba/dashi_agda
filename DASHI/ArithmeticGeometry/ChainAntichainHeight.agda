@@ -1,9 +1,10 @@
 module DASHI.ArithmeticGeometry.ChainAntichainHeight where
 
-open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_; _*_; _≤_)
+open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Sigma    using (Σ; _,_)
 open import Agda.Builtin.Unit     using (⊤; tt)
+open import Data.Nat              using (_≤_)
 
 ------------------------------------------------------------------------
 -- DASHI height is not identified with canonical arithmetic height.
@@ -92,7 +93,7 @@ record FiniteHeightFibre (Point : Set)
 record HeightLiftPolicy : Set where
   constructor heightPolicy
   field
-    searchThreshold : Nat
+    searchThreshold  : Nat
     descentThreshold : Nat
 
 withinSearchBudget : HeightLiftPolicy → OrderProfile → HeightWeights → Set
