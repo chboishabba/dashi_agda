@@ -75,11 +75,13 @@ PNFEvidence =
     { EvidenceFor = λ r payload → PNFEvidenceToken
     }
 
+-- This first policy checks only structural admissibility.  Truth, legal
+-- authority, and promotion remain separate downstream obligations.
 PNFPolicy : ReceiptPolicy pnfDomain PNFEvidence
 PNFPolicy =
   record
     { ResidualFor = λ r payload → List PNFResidual
-    ; Gate = λ r payload evidence residuals → Set
+    ; Gate = λ r payload evidence residuals → ⊤
     }
 
 -- Explicit non-promotion boundary: a source-local receipt is evidence of
