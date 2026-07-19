@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSPairIncidenceSchurBridge where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums
 open import DASHI.Analysis.WeightedKernelSchurTest
@@ -8,7 +9,7 @@ open import DASHI.Physics.Closure.NSPairIncidenceKernel
 
 ------------------------------------------------------------------------
 -- Transport exact finite row/column sums into the existing weighted operator
--- theorem.  The analytic Schur-test realization remains explicit.
+-- theorem. The analytic Schur-test realization remains explicit.
 ------------------------------------------------------------------------
 
 asWeightedKernelData :
@@ -35,12 +36,12 @@ record PairIncidenceSchurRealization
     finite : PairIncidenceWeightedCertificate P
 
     rowConstantMatches :
-      rowConstant L ≡
+      WeightedSchurLaws.rowConstant L ≡
       FiniteWeightedSchurCertificate.rowConstant
         (finiteCertificate finite)
 
     columnConstantMatches :
-      columnConstant L ≡
+      WeightedSchurLaws.columnConstant L ≡
       FiniteWeightedSchurCertificate.columnConstant
         (finiteCertificate finite)
 
@@ -64,7 +65,6 @@ record PairIncidenceSchurRealization
             (colWeight P col))) →
       columnWeightedBound L
 
-open import Relation.Binary.PropositionalEquality using (_≡_)
 open PairIncidenceSchurRealization public
 
 pairIncidenceWeightedCertificate :
