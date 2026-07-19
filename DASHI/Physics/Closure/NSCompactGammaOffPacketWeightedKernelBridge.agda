@@ -10,27 +10,27 @@ open import DASHI.Physics.Closure.NSCompactGammaOffPacketSchurSplit
 -- Adapter from an exact weighted finite-kernel certificate to the near-shell
 -- input expected by the compact-Gamma off-packet Schur-tail composition.
 --
--- The representation field is deliberately explicit: an empirical coarse
--- shell matrix cannot discharge this bridge unless the concrete near response
--- is proved to be bounded by the output energy of the exact certified kernel.
+-- The kernel scalar is definitionally the scalar of the absorption arithmetic.
+-- The representation field remains explicit: an empirical coarse shell matrix
+-- cannot discharge this bridge unless the concrete near response is proved to
+-- be bounded by the output energy of the exact certified kernel.
 ------------------------------------------------------------------------
 
 record OffPacketWeightedKernelEvidence
-    {r c s : Level}
+    {r c : Level}
     {Row : Set r}
     {Col : Set c}
-    {Scalar : Set s}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col Scalar)
+    (K : WeightedKernelData Row Col (Scalar A))
     (L : WeightedSchurLaws K) :
-    Set (lsuc (r ⊔ c ⊔ s)) where
+    Set (lsuc (r ⊔ c)) where
   field
     certificate : WeightedKernelSchurCertificate K L
     kernelInput : VectorIn L
 
-    offPacketResponse : Scalar
-    nearShellResponse : Scalar
-    farShellTail : Scalar
+    offPacketResponse : Scalar A
+    nearShellResponse : Scalar A
+    farShellTail : Scalar A
 
     offPacketBelowNearPlusTail :
       _≤_ A offPacketResponse
@@ -42,19 +42,18 @@ record OffPacketWeightedKernelEvidence
         (outputEnergy L (applyKernel L kernelInput))
 
     schurOrderTransport :
-      {left right : Scalar} →
+      {left right : Scalar A} →
       _≤_ L left right →
       _≤_ A left right
 
 open OffPacketWeightedKernelEvidence public
 
 weightedKernelEvidenceToOffPacketSplit :
-  ∀ {r c s}
+  ∀ {r c}
     {Row : Set r}
     {Col : Set c}
-    {Scalar : Set s}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col Scalar)
+    (K : WeightedKernelData Row Col (Scalar A))
     (L : WeightedSchurLaws K) →
   OffPacketWeightedKernelEvidence A K L →
   OffPacketSchurSplitInputs A
@@ -67,7 +66,7 @@ weightedKernelEvidenceToOffPacketSplit A K L E = record
   ; nearShellBelowSchurBudget = nearBelowCertifiedBudget
   }
   where
-  certifiedBudget : Scalar
+  certifiedBudget : Scalar A
   certifiedBudget =
     _⊗_ L
       (rowConstant L)
