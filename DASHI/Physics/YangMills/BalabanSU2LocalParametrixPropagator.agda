@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 infixr 9 _∘_
+infix 4 _≈_
 _∘_ : ∀ {a b c} {A : Set a} {B : Set b} {C : Set c} → (B → C) → (A → B) → A → C
 (f ∘ g) x = f (g x)
 
