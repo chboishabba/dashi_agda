@@ -4,9 +4,14 @@
 For each localization side M, invert the Hessian restricted to bonds whose
 origins lie in each M^4 cube, glue the local inverses with the exact diagonal
 partition-of-unity coverage, and evaluate A G*=I-R in exponentially weighted
-kernel norms.  A result with ||R||_mu<1 is a finite convergence certificate
-candidate for the random-walk proof lane; failure is retained as a counterexample
-to that localization choice.
+kernel norms.
+
+The report deliberately distinguishes a *proper-local* parametrix (M < L) from
+the full-volume choice M = L.  The latter is an exact finite inverse diagnostic,
+not evidence for a random-walk/locality theorem.  Relaxation factors are also
+searched because spectral convergence of I-omega A G* can hold even when the
+weighted operator norm required by the proof does not.  Such cases are retained
+as explicit norm-obstruction witnesses rather than promoted.
 """
 from __future__ import annotations
 
@@ -120,9 +125,26 @@ def random_background(lat: PeriodicLattice, radius: float, seed: int) -> np.ndar
     return lie_field_to_links(field)
 
 
+def _candidate_key(candidate: dict[str, Any]) -> tuple[float, float, float]:
+    worst = max(float(candidate["left"]), float(candidate["right"]))
+    return worst, float(candidate["mu"]), abs(1.0 - float(candidate["relaxation"]))
+
+
 def run_search(
-    *, L: int, average_block: int, local_sides: list[int], mus: list[float], radii: list[float], seeds: int
+    *,
+    L: int,
+    average_block: int,
+    local_sides: list[int],
+    mus: list[float],
+    radii: list[float],
+    seeds: int,
+    relaxations: list[float] | None = None,
 ) -> dict[str, Any]:
+    if relaxations is None:
+        relaxations = [1.0]
+    if not relaxations or any(value <= 0.0 for value in relaxations):
+        raise ValueError("relaxations must be a nonempty list of positive values")
+
     lat = PeriodicLattice(L)
     positions = dof_positions(lat)
     trials: list[dict[str, Any]] = []
@@ -133,40 +155,95 @@ def run_search(
             H = gauge_fixed_hessian(lat, background=background, average=Q)
             for side in local_sides:
                 Gstar, local = glued_local_parametrix(H, lat, side)
-                trial: dict[str, Any] = {"radius": radius, "seed": seed, "local_side": side, **local}
+                proper_local = side < L
+                trial: dict[str, Any] = {
+                    "radius": radius,
+                    "seed": seed,
+                    "local_side": side,
+                    "proper_local": proper_local,
+                    **local,
+                }
                 if local.get("defined"):
-                    right_residual = np.eye(H.shape[0]) - H @ Gstar
-                    left_residual = np.eye(H.shape[0]) - Gstar @ H
-                    trial["spectral_radius_right"] = float(
-                        np.max(np.abs(np.linalg.eigvals(right_residual)))
-                    )
-                    trial["spectral_radius_left"] = float(
-                        np.max(np.abs(np.linalg.eigvals(left_residual)))
-                    )
-                    trial["weighted_norms"] = [
-                        {
-                            "mu": mu,
-                            "right": weighted_infinity_norm(right_residual, positions, L, mu),
-                            "left": weighted_infinity_norm(left_residual, positions, L, mu),
-                        }
-                        for mu in mus
-                    ]
-                    trial["convergent_candidates"] = [
-                        item for item in trial["weighted_norms"]
-                        if item["right"] < 1.0 and item["left"] < 1.0
-                    ]
+                    trial["relaxation_trials"] = []
+                    for relaxation in relaxations:
+                        relaxed = relaxation * Gstar
+                        right_residual = np.eye(H.shape[0]) - H @ relaxed
+                        left_residual = np.eye(H.shape[0]) - relaxed @ H
+                        spectral_radius_right = float(np.max(np.abs(np.linalg.eigvals(right_residual))))
+                        spectral_radius_left = float(np.max(np.abs(np.linalg.eigvals(left_residual))))
+                        weighted_norms = [
+                            {
+                                "mu": mu,
+                                "right": weighted_infinity_norm(right_residual, positions, L, mu),
+                                "left": weighted_infinity_norm(left_residual, positions, L, mu),
+                            }
+                            for mu in mus
+                        ]
+                        strict_weighted = [
+                            item for item in weighted_norms
+                            if item["right"] < 1.0 and item["left"] < 1.0
+                        ]
+                        trial["relaxation_trials"].append({
+                            "relaxation": relaxation,
+                            "spectral_radius_right": spectral_radius_right,
+                            "spectral_radius_left": spectral_radius_left,
+                            "spectrally_contractive": (
+                                spectral_radius_right < 1.0 and spectral_radius_left < 1.0
+                            ),
+                            "weighted_norms": weighted_norms,
+                            "convergent_candidates": strict_weighted,
+                            "weighted_norm_obstruction": (
+                                spectral_radius_right < 1.0
+                                and spectral_radius_left < 1.0
+                                and not strict_weighted
+                            ),
+                        })
                 trials.append(trial)
-    convergent = [
-        {"radius": t["radius"], "seed": t["seed"], "local_side": t["local_side"], **entry}
-        for t in trials for entry in t.get("convergent_candidates", [])
-    ]
+
+    convergent: list[dict[str, Any]] = []
+    spectral_obstructions: list[dict[str, Any]] = []
+    all_weighted_candidates: list[dict[str, Any]] = []
+    for trial in trials:
+        for relaxed in trial.get("relaxation_trials", []):
+            base = {
+                "radius": trial["radius"],
+                "seed": trial["seed"],
+                "local_side": trial["local_side"],
+                "proper_local": trial["proper_local"],
+                "relaxation": relaxed["relaxation"],
+            }
+            if relaxed["weighted_norm_obstruction"]:
+                spectral_obstructions.append({
+                    **base,
+                    "spectral_radius_right": relaxed["spectral_radius_right"],
+                    "spectral_radius_left": relaxed["spectral_radius_left"],
+                    "best_weighted_norm": min(
+                        max(item["left"], item["right"])
+                        for item in relaxed["weighted_norms"]
+                    ),
+                })
+            for item in relaxed["weighted_norms"]:
+                candidate = {**base, **item}
+                all_weighted_candidates.append(candidate)
+                if item["right"] < 1.0 and item["left"] < 1.0:
+                    convergent.append(candidate)
+
+    proper_convergent = [item for item in convergent if item["proper_local"]]
+    proper_weighted = [item for item in all_weighted_candidates if item["proper_local"]]
+    best_proper = min(proper_weighted, key=_candidate_key) if proper_weighted else None
+
     return {
         "claim_scope": "finite_lattice_only",
         "lattice_extent": L,
         "average_block": average_block,
         "trials": trials,
         "convergent_candidates": convergent,
+        "proper_local_convergent_candidates": proper_convergent,
+        "spectral_without_weighted_norm_obstructions": spectral_obstructions,
+        "best_proper_local_candidate": best_proper,
         "has_strict_weighted_remainder_bound": bool(convergent),
+        "has_strict_proper_local_weighted_remainder_bound": bool(proper_convergent),
+        "global_inverse_only": bool(convergent) and not bool(proper_convergent),
     }
 
 
@@ -177,6 +254,7 @@ def main() -> None:
     parser.add_argument("--local-sides", default="1,2")
     parser.add_argument("--mus", default="0,0.05,0.1")
     parser.add_argument("--radii", default="0,0.01,0.03")
+    parser.add_argument("--relaxations", default="0.25,0.5,0.75,1")
     parser.add_argument("--seeds", type=int, default=1)
     parser.add_argument("--out", default="operator_analysis/local-parametrix-search.json")
     args = parser.parse_args()
@@ -187,6 +265,7 @@ def main() -> None:
         mus=[float(value) for value in args.mus.split(",") if value],
         radii=[float(value) for value in args.radii.split(",") if value],
         seeds=args.seeds,
+        relaxations=[float(value) for value in args.relaxations.split(",") if value],
     )
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     write_receipt(args.out, {"operator": "local_parametrix_search", **report})
