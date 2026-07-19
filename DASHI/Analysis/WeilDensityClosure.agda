@@ -8,20 +8,10 @@ module DASHI.Analysis.WeilDensityClosure where
 -- concrete obligations into the generic completion bridge.
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import DASHI.Analysis.WeilTestSpace
 open import DASHI.Analysis.RiemannExplicitFormula
 open import DASHI.Analysis.WeilPositivityCore
-
-record SequentialApproximation
-  (space : WeilTestSpace)
-  (formula : RiemannExplicitFormula space)
-  (bridge : DashiWeilQuadraticLike space formula)
-  (target : WeilTestSpace.Test space) : Set₁ where
-  open DashiWeilQuadraticLike bridge
-  field
-    sequence : Nat → DashiTest
-    convergesToTarget : Set
-    spectralFormConverges : Set
 
 record SequentialDashiDensity
   (space : WeilTestSpace)
@@ -31,19 +21,22 @@ record SequentialDashiDensity
   open RiemannExplicitFormula formula
   open DashiWeilQuadraticLike bridge
   field
-    approximation :
-      (f : Test) → admissible f →
-      SequentialApproximation space formula bridge f
+    sequence :
+      (f : Test) → admissible f → Nat → DashiTest
+
+    convergesToTarget :
+      (f : Test) → (admissibleF : admissible f) → Set
+
+    spectralFormConverges :
+      (f : Test) → (admissibleF : admissible f) → Set
 
     limitPreservesNonnegative :
       (f : Test) →
       (admissibleF : admissible f) →
-      (approx : SequentialApproximation space formula bridge f) →
       ((n : Nat) →
         nonnegative
           (spectralZeroForm
-            (embed
-              (SequentialApproximation.sequence approx n)))) →
+            (embed (sequence f admissibleF n)))) →
       nonnegative (spectralZeroForm f)
 
 sequentialDensityToExtension :
@@ -53,17 +46,10 @@ sequentialDensityToExtension :
   SequentialDashiDensity space formula bridge →
   DensePositivityExtension space formula bridge
 sequentialDensityToExtension space formula bridge density = record
-  { Approximation =
-      SequentialApproximation space formula bridge
-  ; denseRange = SequentialDashiDensity.approximation density
-  ; spectralContinuous =
-      (f : WeilTestSpace.Test space) →
-      WeilTestSpace.admissible space f →
-      Set
-  ; nonnegativeClosed =
-      (f : WeilTestSpace.Test space) →
-      WeilTestSpace.admissible space f →
-      Set
+  { Approximation = λ f → ⊤
+  ; denseRange = λ f admissibleF → tt
+  ; spectralContinuous = ⊤
+  ; nonnegativeClosed = ⊤
   ; extendPositive = extend
   }
   where
@@ -77,9 +63,7 @@ sequentialDensityToExtension space formula bridge density = record
     WeilTestSpace.nonnegative space
       (RiemannExplicitFormula.spectralZeroForm formula f)
   extend embeddedPositive f admissibleF =
-    let approx = SequentialDashiDensity.approximation density f admissibleF
-    in
     SequentialDashiDensity.limitPreservesNonnegative density
-      f admissibleF approx
+      f admissibleF
       (λ n → embeddedPositive
-        (SequentialApproximation.sequence approx n))
+        (SequentialDashiDensity.sequence density f admissibleF n))
