@@ -1,23 +1,8 @@
 module DASHI.Physics.YangMills.BalabanSU2CMP98Equation124 where
 
-------------------------------------------------------------------------
--- Literal term structure of Bałaban's linearized averaging formula (Eq. 124
--- in Averaging Operations for Lattice Gauge Theories).
---
--- The source formula contains five separately auditable contributions:
---   1. transported bond average;
---   2. minus-block face correction;
---   3. minus-block bond correction;
---   4. signed plus-block face correction;
---   5. coarse-bond correction.
---
--- Keeping them separate prevents a generic `correction` term from being called
--- source-exact before each source summand has been matched.
-------------------------------------------------------------------------
-
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   (SU2LieAlgebra; lieAdd)
@@ -59,8 +44,6 @@ cmp98LinearizationSourceExact :
 cmp98LinearizationSourceExact transcription =
   implementationTermDecomposition transcription
 
--- A source audit may establish each named term against an independently entered
--- source term and then obtain equality of the complete expression by congruence.
 record Equation124TermwiseAudit
   {i : Level}
   (Input : Set i)
@@ -82,3 +65,19 @@ record Equation124TermwiseAudit
       coarseBondCorrection (left input)
         ≡ coarseBondCorrection (right input)
 open Equation124TermwiseAudit public
+
+termwiseAuditClosesEquation124 :
+  ∀ {i} {Input : Set i}
+  {left right : Input → CMP98Equation124Terms} →
+  Equation124TermwiseAudit Input left right →
+  ∀ input → cmp98Equation124 (left input) ≡ cmp98Equation124 (right input)
+termwiseAuditClosesEquation124 audit input =
+  cong₂ lieAdd
+    (transportedBondAverageExact audit input)
+    (cong₂ lieAdd
+      (minusBlockFaceCorrectionExact audit input)
+      (cong₂ lieAdd
+        (minusBlockBondCorrectionExact audit input)
+        (cong₂ lieAdd
+          (signedPlusBlockFaceCorrectionExact audit input)
+          (coarseBondCorrectionExact audit input))))
