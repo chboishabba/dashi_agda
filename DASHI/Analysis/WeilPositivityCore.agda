@@ -10,6 +10,16 @@ open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Analysis.WeilTestSpace
 open import DASHI.Analysis.RiemannExplicitFormula
 
+-- Minimal interface used by the dense extension, separated from the exact
+-- identification module to avoid a dependency cycle.
+record DashiWeilQuadraticLike
+  (space : WeilTestSpace)
+  (formula : RiemannExplicitFormula space) : Set₁ where
+  open WeilTestSpace space
+  field
+    DashiTest : Set
+    embed : DashiTest → Test
+
 record WeilPositiveDecomposition
   (space : WeilTestSpace)
   (formula : RiemannExplicitFormula space) : Set₁ where
@@ -64,13 +74,3 @@ record DensePositivityExtension
     extendPositive :
       ((x : DashiTest) → nonnegative (spectralZeroForm (embed x))) →
       (f : Test) → admissible f → nonnegative (spectralZeroForm f)
-
--- Minimal interface used by the dense extension, separated from the exact
--- identification module to avoid a dependency cycle.
-record DashiWeilQuadraticLike
-  (space : WeilTestSpace)
-  (formula : RiemannExplicitFormula space) : Set₁ where
-  open WeilTestSpace space
-  field
-    DashiTest : Set
-    embed : DashiTest → Test
