@@ -61,6 +61,22 @@ This closes the `forwardInvariant` field of `ConformationalAttractorWitness` and
 
 The declared contraction carrier may be a local region or subtype. No global uniqueness of the ambient conformational landscape is claimed.
 
+### 6. Dissipation identity -> metabolic path monotonicity
+
+`DASHI.Analysis.DissipationPathMonotonicity` proves that an exact balance
+
+`F(x) = F(step(i,x)) + D(i,x)`
+
+with nonnegative dissipation implies
+
+`F(step(i,x)) <= F(x)`
+
+and, by transitivity, monotonicity along every finite input path.
+
+`MetabolicDissipationBridge` identifies the generic transition with the internal reaction step of an `OpenMetabolicNetwork`, yielding reaction-level and path-level energy descent.
+
+The energy carrier is intentionally abstract. Thermodynamic free energy, relative entropy, or another Lyapunov quantity must be supplied by a domain theorem. The bridge does not identify physical free energy with MDL, and it does not claim detailed balance merely from monotonicity.
+
 ## Domain-neutral namespaces
 
 `DASHI.Analysis.FiniteOperatorReductionCore` re-exports the generic kernels currently housed in the Bałaban implementation namespace:
@@ -73,6 +89,8 @@ The declared contraction carrier may be a local region or subtype. No global uni
 
 `DASHI.Analysis.StoichiometricConservation` owns the reaction-path left-kernel theorem independently of any chemistry or biology namespace.
 
+`DASHI.Analysis.DissipationPathMonotonicity` owns the exact dissipation-to-descent theorem independently of a thermodynamic interpretation.
+
 `DASHI.Analysis.StrictContractionUniqueness` owns the irreflexive-distance uniqueness theorem independently of the protein interpretation.
 
 No definitions are copied.
@@ -80,7 +98,7 @@ No definitions are copied.
 ## Highest-alpha next joins
 
 1. **Open-system stoichiometric balance.** Extend the exact internal invariant to `Q(x_final) = Q(x_initial) + sources - sinks`, indexed by external flux events and compartment boundaries.
-2. **Detailed-balance free-energy descent.** Connect reversible reaction networks and Markov generators to a relative-entropy/free-energy dissipation identity without identifying thermodynamic free energy with MDL.
+2. **Detailed-balance discharge.** Build concrete reversible mass-action or finite Markov instances that derive the dissipation identity from forward/reverse flux symmetry and a relative-entropy functional.
 3. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
 4. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
 5. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
