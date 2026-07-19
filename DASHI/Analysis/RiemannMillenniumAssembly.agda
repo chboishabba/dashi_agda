@@ -6,9 +6,8 @@ module DASHI.Analysis.RiemannMillenniumAssembly where
 -- the open mathematical inputs: the analytic substrate, exact explicit
 -- formula, termwise DASHI identification, dense extension, or Weil criterion.
 
-open import DASHI.Analysis.RiemannZetaProgramBoundary
-  using (RiemannHypothesisWitness)
 open import DASHI.Analysis.RiemannAnalyticSubstrate
+open import DASHI.Analysis.RiemannFormulaAnalyticCompatibility
 open import DASHI.Analysis.WeilTestSpace
 open import DASHI.Analysis.RiemannExplicitFormula
 open import DASHI.Analysis.DashiWeilExactIdentification
@@ -17,6 +16,7 @@ open import DASHI.Analysis.WeilPositivityCore
 open import DASHI.Analysis.WeilDensityClosure
 
 record WeilRiemannCriterion
+  (analytic : AnalyticSubstrate)
   (space : WeilTestSpace)
   (formula : RiemannExplicitFormula space) : Set₁ where
   open WeilTestSpace space
@@ -24,13 +24,11 @@ record WeilRiemannCriterion
   field
     positivityImpliesRH :
       ((f : Test) → admissible f → nonnegative (spectralZeroForm f)) →
-      RiemannHypothesisWitness
+      RiemannHypothesisFor analytic
 
     rhImpliesPositivity :
-      RiemannHypothesisWitness →
+      RiemannHypothesisFor analytic →
       (f : Test) → admissible f → nonnegative (spectralZeroForm f)
-
-    criterionMatchesCompletedZeta : Set
 
 exactAsLike :
   (space : WeilTestSpace) →
@@ -47,17 +45,19 @@ record DashiRiemannAssembly : Set₁ where
     analytic : AnalyticSubstrate
     space : WeilTestSpace
     formula : RiemannExplicitFormula space
-    formulaMatchesAnalytic : Set
+    compatibility :
+      RiemannFormulaAnalyticCompatibility analytic space formula
     dashi : DashiWeilQuadratic space formula
     completion :
       DensePositivityExtension space formula
         (exactAsLike space formula dashi)
-    criterion : WeilRiemannCriterion space formula
+    criterion : WeilRiemannCriterion analytic space formula
 
 -- Every arrow in this theorem is explicit:
 -- DASHI coercivity -> embedded spectral positivity -> dense extension -> RH.
 dashiAssemblyImpliesRH :
-  DashiRiemannAssembly → RiemannHypothesisWitness
+  (assembly : DashiRiemannAssembly) →
+  RiemannHypothesisFor (DashiRiemannAssembly.analytic assembly)
 dashiAssemblyImpliesRH assembly =
   let space = DashiRiemannAssembly.space assembly
       formula = DashiRiemannAssembly.formula assembly
@@ -76,15 +76,18 @@ record SequentialDashiRiemannAssembly : Set₁ where
     analytic : AnalyticSubstrate
     space : WeilTestSpace
     formula : RiemannExplicitFormula space
-    formulaMatchesAnalytic : Set
+    compatibility :
+      RiemannFormulaAnalyticCompatibility analytic space formula
     dashi : DashiWeilQuadratic space formula
     density :
       SequentialDashiDensity space formula
         (exactAsLike space formula dashi)
-    criterion : WeilRiemannCriterion space formula
+    criterion : WeilRiemannCriterion analytic space formula
 
 sequentialDashiAssemblyImpliesRH :
-  SequentialDashiRiemannAssembly → RiemannHypothesisWitness
+  (assembly : SequentialDashiRiemannAssembly) →
+  RiemannHypothesisFor
+    (SequentialDashiRiemannAssembly.analytic assembly)
 sequentialDashiAssemblyImpliesRH assembly =
   let space = SequentialDashiRiemannAssembly.space assembly
       formula = SequentialDashiRiemannAssembly.formula assembly
@@ -98,8 +101,8 @@ sequentialDashiAssemblyImpliesRH assembly =
         { analytic = SequentialDashiRiemannAssembly.analytic assembly
         ; space = space
         ; formula = formula
-        ; formulaMatchesAnalytic =
-            SequentialDashiRiemannAssembly.formulaMatchesAnalytic assembly
+        ; compatibility =
+            SequentialDashiRiemannAssembly.compatibility assembly
         ; dashi = dashi
         ; completion = completion
         ; criterion = SequentialDashiRiemannAssembly.criterion assembly
@@ -112,16 +115,19 @@ record TermwiseSequentialDashiRiemannAssembly : Set₁ where
     analytic : AnalyticSubstrate
     space : WeilTestSpace
     formula : RiemannExplicitFormula space
-    formulaMatchesAnalytic : Set
+    compatibility :
+      RiemannFormulaAnalyticCompatibility analytic space formula
     termwise : DashiWeilTermwiseBridge space formula
     density :
       SequentialDashiDensity space formula
         (exactAsLike space formula
           (termwiseToExactIdentification space formula termwise))
-    criterion : WeilRiemannCriterion space formula
+    criterion : WeilRiemannCriterion analytic space formula
 
 termwiseSequentialAssemblyImpliesRH :
-  TermwiseSequentialDashiRiemannAssembly → RiemannHypothesisWitness
+  (assembly : TermwiseSequentialDashiRiemannAssembly) →
+  RiemannHypothesisFor
+    (TermwiseSequentialDashiRiemannAssembly.analytic assembly)
 termwiseSequentialAssemblyImpliesRH assembly =
   let space = TermwiseSequentialDashiRiemannAssembly.space assembly
       formula = TermwiseSequentialDashiRiemannAssembly.formula assembly
@@ -130,14 +136,16 @@ termwiseSequentialAssemblyImpliesRH assembly =
       density = TermwiseSequentialDashiRiemannAssembly.density assembly
       sequential : SequentialDashiRiemannAssembly
       sequential = record
-        { analytic = TermwiseSequentialDashiRiemannAssembly.analytic assembly
+        { analytic =
+            TermwiseSequentialDashiRiemannAssembly.analytic assembly
         ; space = space
         ; formula = formula
-        ; formulaMatchesAnalytic =
-            TermwiseSequentialDashiRiemannAssembly.formulaMatchesAnalytic assembly
+        ; compatibility =
+            TermwiseSequentialDashiRiemannAssembly.compatibility assembly
         ; dashi = exact
         ; density = density
-        ; criterion = TermwiseSequentialDashiRiemannAssembly.criterion assembly
+        ; criterion =
+            TermwiseSequentialDashiRiemannAssembly.criterion assembly
         }
   in
   sequentialDashiAssemblyImpliesRH sequential
@@ -147,14 +155,17 @@ record PositiveDecompositionAssembly : Set₁ where
     analytic : AnalyticSubstrate
     space : WeilTestSpace
     formula : RiemannExplicitFormula space
-    formulaMatchesAnalytic : Set
+    compatibility :
+      RiemannFormulaAnalyticCompatibility analytic space formula
     decomposition : WeilPositiveDecomposition space formula
-    criterion : WeilRiemannCriterion space formula
+    criterion : WeilRiemannCriterion analytic space formula
 
 -- Alternative terminal route: an exact global positive decomposition bypasses
 -- the separate density step because it already covers every admissible test.
 positiveDecompositionImpliesRH :
-  PositiveDecompositionAssembly → RiemannHypothesisWitness
+  (assembly : PositiveDecompositionAssembly) →
+  RiemannHypothesisFor
+    (PositiveDecompositionAssembly.analytic assembly)
 positiveDecompositionImpliesRH assembly =
   let space = PositiveDecompositionAssembly.space assembly
       formula = PositiveDecompositionAssembly.formula assembly
