@@ -1,6 +1,8 @@
 module DASHI.Physics.Closure.QuantumDecoherenceAdmissibilityConcentration where
 
+open import Agda.Builtin.Nat using (suc)
 open import Data.Empty using (⊥)
+open import Data.Nat using (_≤_)
 open import Data.Product using (_×_; _,_; Σ)
 
 import Ultrametric as UMetric
@@ -173,7 +175,7 @@ decoherence-orbit-distance-monotone :
   UMetric.Ultrametric.d
     (microUltrametric D)
     (fixedPoint (concentrationKernel D))
-    (iterate (environmentKernel D) (Agda.Builtin.Nat.suc n) x)
+    (iterate (environmentKernel D) (suc n) x)
   ≤
   UMetric.Ultrametric.d
     (microUltrametric D)
