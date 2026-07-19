@@ -8,6 +8,7 @@ import DASHI.Physics.YangMills.BalabanSU2CMP98PathFamily
 import DASHI.Physics.YangMills.BalabanSU2CMP98AveragingWeights
 import DASHI.Physics.YangMills.BalabanSU2CMP98LinearizedAverage
 import DASHI.Physics.YangMills.BalabanSU2CMP98LiteralLinearization
+import DASHI.Physics.YangMills.BalabanSU2CMP98Equation124
 import DASHI.Physics.YangMills.BalabanSU2CMP98Remainder
 import DASHI.Physics.YangMills.BalabanSU2AveragingSection
 import DASHI.Physics.YangMills.BalabanSU2QGQStarLowerBound
