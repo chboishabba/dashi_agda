@@ -1,0 +1,6 @@
+module DASHI.Physics.StandardModel.Everything where
+
+import DASHI.Physics.StandardModel.FiniteRealStarAlgebraCandidates
+import DASHI.Physics.StandardModel.FiniteInternalAlgebraPruning
+import DASHI.Physics.StandardModel.FiniteInternalAlgebraClassificationTarget
+import DASHI.Physics.Closure.CliffordToFiniteInternalAlgebraBridge
