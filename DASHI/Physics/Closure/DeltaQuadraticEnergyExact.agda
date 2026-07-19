@@ -112,14 +112,14 @@ record WeightedDeltaQuadraticBoundary : Set₁ where
     weightedArithmeticEnergy : DeltaCarrier → Nat
     weightedArithmeticEnergyIsCurrent :
       weightedArithmeticEnergy ≡ WVE.weightedQuadraticEnergy
-    weightedToCanonicalRequiresNewGeometry : Set
+    WeightedGeometryCarrier : Set
+    weightedGeometryMap : DeltaCarrier → WeightedGeometryCarrier
 
 canonicalWeightedDeltaQuadraticBoundary : WeightedDeltaQuadraticBoundary
 canonicalWeightedDeltaQuadraticBoundary =
   record
     { weightedArithmeticEnergy = WVE.weightedQuadraticEnergy
     ; weightedArithmeticEnergyIsCurrent = refl
-    ; weightedToCanonicalRequiresNewGeometry =
-        ∀ n →
-          ℤ
+    ; WeightedGeometryCarrier = DeltaCarrier
+    ; weightedGeometryMap = λ n → n
     }
