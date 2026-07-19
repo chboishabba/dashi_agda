@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.YangMills.BalabanSU2GeometryQ0Bundle
+
 open import DASHI.Geometry.Gauge.SUNPrimitives
 open import DASHI.Geometry.Gauge.SUNLane
 open import DASHI.Physics.YangMills.YMMassGapTarget

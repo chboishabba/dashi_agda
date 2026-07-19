@@ -10,6 +10,13 @@ module DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver where
 --
 -- All coefficient-morphism laws below are proved from the commutative-ring
 -- interface itself. No second solver is trusted inside this socket.
+--
+-- The exported solver uses a canonical interpretation for formal 0 and 1.
+-- Those two coefficients map definitionally to zeroR and oneR; every other
+-- coefficient is transported through the original proved interpretation.  This
+-- keeps every caller on one Polynomial type and removes the elaboration-only
+-- mismatch that previously appeared when helper syntax and solveComputed used
+-- different solver modules.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -388,9 +395,98 @@ coefficientWeakEquality (coefficient p n) (coefficient q m)
     {p = p} {n = n} {q = q} {m = m} cross)
 ... | no _ = nothing
 
+------------------------------------------------------------------------
+-- Canonical interpretation used by the exported solver.
+------------------------------------------------------------------------
+
+canonicalInterpretCoefficient : IntegerCoefficient → ℝ
+canonicalInterpretCoefficient (coefficient zero zero) = zeroR
+canonicalInterpretCoefficient (coefficient zero (suc negative)) =
+  interpretCoefficient (coefficient zero (suc negative))
+canonicalInterpretCoefficient (coefficient (suc zero) zero) = oneR
+canonicalInterpretCoefficient (coefficient (suc zero) (suc negative)) =
+  interpretCoefficient (coefficient (suc zero) (suc negative))
+canonicalInterpretCoefficient (coefficient (suc (suc positive)) zero) =
+  interpretCoefficient (coefficient (suc (suc positive)) zero)
+canonicalInterpretCoefficient
+  (coefficient (suc (suc positive)) (suc negative)) =
+  interpretCoefficient
+    (coefficient (suc (suc positive)) (suc negative))
+
+canonicalInterpretationCorrect :
+  ∀ value → canonicalInterpretCoefficient value ≡ interpretCoefficient value
+canonicalInterpretationCorrect (coefficient zero zero) =
+  sym zeroCoefficientHomomorphic
+canonicalInterpretationCorrect (coefficient zero (suc negative)) = refl
+canonicalInterpretationCorrect (coefficient (suc zero) zero) =
+  sym oneCoefficientHomomorphic
+canonicalInterpretationCorrect (coefficient (suc zero) (suc negative)) = refl
+canonicalInterpretationCorrect (coefficient (suc (suc positive)) zero) = refl
+canonicalInterpretationCorrect
+  (coefficient (suc (suc positive)) (suc negative)) = refl
+
+canonicalAddHomomorphic :
+  ∀ left right →
+  canonicalInterpretCoefficient (addCoefficient left right)
+    ≡ canonicalInterpretCoefficient left +R canonicalInterpretCoefficient right
+canonicalAddHomomorphic left right =
+  trans
+    (canonicalInterpretationCorrect (addCoefficient left right))
+    (trans
+      (addCoefficientHomomorphic left right)
+      (cong₂ _+R_
+        (sym (canonicalInterpretationCorrect left))
+        (sym (canonicalInterpretationCorrect right))))
+
+canonicalMultiplyHomomorphic :
+  ∀ left right →
+  canonicalInterpretCoefficient (multiplyCoefficient left right)
+    ≡ canonicalInterpretCoefficient left *R canonicalInterpretCoefficient right
+canonicalMultiplyHomomorphic left right =
+  trans
+    (canonicalInterpretationCorrect (multiplyCoefficient left right))
+    (trans
+      (multiplyCoefficientHomomorphic left right)
+      (cong₂ _*R_
+        (sym (canonicalInterpretationCorrect left))
+        (sym (canonicalInterpretationCorrect right))))
+
+canonicalNegateHomomorphic :
+  ∀ value →
+  canonicalInterpretCoefficient (negateCoefficient value)
+    ≡ -R canonicalInterpretCoefficient value
+canonicalNegateHomomorphic value =
+  trans
+    (canonicalInterpretationCorrect (negateCoefficient value))
+    (trans
+      (negateCoefficientHomomorphic value)
+      (cong -R_ (sym (canonicalInterpretationCorrect value))))
+
+canonicalCoefficientMorphism :
+  coefficientRawRing LegacyACR.-Raw-AlmostCommutative⟶ realLegacyRing
+canonicalCoefficientMorphism = record
+  { ⟦_⟧ = canonicalInterpretCoefficient
+  ; +-homo = canonicalAddHomomorphic
+  ; *-homo = canonicalMultiplyHomomorphic
+  ; -‿homo = canonicalNegateHomomorphic
+  ; 0-homo = refl
+  ; 1-homo = refl
+  }
+
+canonicalCoefficientWeakEquality :
+  WeaklyDecidable
+    (LegacyACR.Induced-equivalence canonicalCoefficientMorphism)
+canonicalCoefficientWeakEquality left right
+  with coefficientWeakEquality left right
+... | just proof = just
+  (trans
+    (canonicalInterpretationCorrect left)
+    (trans proof (sym (canonicalInterpretationCorrect right))))
+... | nothing = nothing
+
 module RealPolynomialSolver =
   LegacyRingSolver
     coefficientRawRing
     realLegacyRing
-    coefficientMorphism
-    coefficientWeakEquality
+    canonicalCoefficientMorphism
+    canonicalCoefficientWeakEquality
