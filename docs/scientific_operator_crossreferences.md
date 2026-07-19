@@ -45,9 +45,23 @@ Two adapters consume this theorem:
 - `MolecularStoichiometricConservation` turns equality of the conserved quantity into the existing contextual molecular `conserved` relation;
 - `MetabolicStoichiometricConservation` proves exact conservation for internal reaction paths in a fixed environment.
 
-The metabolic theorem deliberately excludes external flux. An open system requires a later balance law with explicit source and sink terms rather than a false closed-system invariant.
+### 5. Ordered open-system balance -> metabolic source/sink accounting
 
-### 5. Fejer monotonicity and contraction -> certified biological attractors
+`DASHI.Analysis.OpenSystemBalance` proves the pathwise identity
+
+`Q(final) = Q(initial) + accumulatedIncrement(path, initial)`
+
+from an exact one-event update law. Increments are evaluated in event order and may depend on the evolving state.
+
+`MetabolicOpenSystemBalance` combines internal reactions and environmental exchange events on one typed path:
+
+- internal reaction increments are inherited from the stoichiometric system and proved equal to zero by its left-kernel certificate;
+- exchange events carry explicit state-dependent transitions and source/sink increments;
+- the generic theorem gives the exact final balance.
+
+This replaces the false choice between treating metabolism as closed and abandoning exact conservation. Closed stoichiometric invariance is recovered as the zero-exchange case.
+
+### 6. Fejer monotonicity and contraction -> certified biological attractors
 
 `DASHI.Analysis.FejerSublevelInvariant` owns the generic theorem:
 
@@ -67,7 +81,7 @@ The declared contraction carrier may be a local region or subtype. No global uni
 
 `CellFejerAttractorBridge` uses the same generic theorem at family level. An environment- and attractor-indexed family of Fejer sublevels constructs the complete existing `CellStateAttractor` record, including its universal `forwardInvariant` field. This keeps genome, chromatin, RNA, proteome, metabolism, membrane state, environment, and history inside the existing coupled cell carrier rather than reducing cell type to any one component.
 
-### 6. Dissipation identity -> metabolic path monotonicity
+### 7. Dissipation identity -> metabolic path monotonicity
 
 `DASHI.Analysis.DissipationPathMonotonicity` proves that an exact balance
 
@@ -95,6 +109,8 @@ The energy carrier is intentionally abstract. Thermodynamic free energy, relativ
 
 `DASHI.Analysis.StoichiometricConservation` owns the reaction-path left-kernel theorem independently of any chemistry or biology namespace.
 
+`DASHI.Analysis.OpenSystemBalance` owns the ordered source/sink path identity independently of metabolism.
+
 `DASHI.Analysis.DissipationPathMonotonicity` owns the exact dissipation-to-descent theorem independently of a thermodynamic interpretation.
 
 `DASHI.Analysis.FejerSublevelInvariant` owns the sublevel-set invariance theorem independently of proteins, cells, or another domain interpretation.
@@ -105,12 +121,12 @@ No definitions are copied.
 
 ## Highest-alpha next joins
 
-1. **Open-system stoichiometric balance.** Extend the exact internal invariant to `Q(x_final) = Q(x_initial) + sources - sinks`, indexed by external flux events and compartment boundaries.
-2. **Detailed-balance discharge.** Build concrete reversible mass-action or finite Markov instances that derive the dissipation identity from forward/reverse flux symmetry and a relative-entropy functional.
-3. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
-4. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
-5. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
-6. **Metastability and transition paths.** Add barrier and transition-state certificates so multiple protein or molecular minima can coexist without being collapsed by the local contraction theorem.
-7. **Cell phenotype quotient compatibility.** Connect Fejer-invariant cell basins to the existing phenotype quotient with an explicit theorem that basin evolution preserves the selected phenotype class under declared observational equivalence.
+1. **Detailed-balance discharge.** Build concrete reversible mass-action or finite Markov instances that derive the dissipation identity from forward/reverse flux symmetry and a relative-entropy functional.
+2. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
+3. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
+4. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
+5. **Metastability and transition paths.** Add barrier and transition-state certificates so multiple protein or molecular minima can coexist without being collapsed by the local contraction theorem.
+6. **Cell phenotype quotient compatibility.** Connect Fejer-invariant cell basins to the existing phenotype quotient with an explicit theorem that basin evolution preserves the selected phenotype class under declared observational equivalence.
+7. **Compartment boundary composition.** Relate open-system exchange increments to selective membrane transport and prove that nested compartment balances compose without double counting internal boundary fluxes.
 
 These are preferred over further broad “physics/chemistry/biology share a pattern” records because each produces a reusable theorem and a narrower empirical or analytic frontier.
