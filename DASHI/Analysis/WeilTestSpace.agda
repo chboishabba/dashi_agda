@@ -28,7 +28,9 @@ record WeilTestSpace : Set₁ where
     admissible : Test → Set
     involution : Test → Test
     transform : Test → TransformValue
-    transformDefined : (f : Test) → admissible f → Set
+    TransformDefined : Test → Set
+    transformDefined :
+      (f : Test) → admissible f → TransformDefined f
     involutionAdmissible :
       (f : Test) → admissible f → admissible (involution f)
 
