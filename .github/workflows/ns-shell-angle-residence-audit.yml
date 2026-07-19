@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
+      - 'scripts/ns_depletion_currency_audit.py'
       - 'scripts/ns_hard_alignment_derivative.py'
       - 'scripts/ns_generate_matched_galerkin_trajectories.py'
       - 'scripts/ns_shell_pair_transfer_audit.py'
@@ -22,13 +23,17 @@ on:
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
+      - 'scripts/tests/test_ns_depletion_currency_audit.py'
       - 'docs/ns_exact_galerkin_coherence_audit.md'
       - 'docs/ns_exact_galerkin_coherence_baseline_results.md'
+      - 'docs/ns_depletion_currency_comparison.md'
       - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
+      - 'DASHI/Physics/Closure/NSDepletionCurrencyFork.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
   pull_request:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
+      - 'scripts/ns_depletion_currency_audit.py'
       - 'scripts/ns_hard_alignment_derivative.py'
       - 'scripts/ns_generate_matched_galerkin_trajectories.py'
       - 'scripts/ns_shell_pair_transfer_audit.py'
@@ -47,9 +52,12 @@ on:
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
+      - 'scripts/tests/test_ns_depletion_currency_audit.py'
       - 'docs/ns_exact_galerkin_coherence_audit.md'
       - 'docs/ns_exact_galerkin_coherence_baseline_results.md'
+      - 'docs/ns_depletion_currency_comparison.md'
       - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
+      - 'DASHI/Physics/Closure/NSDepletionCurrencyFork.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
 
 concurrency:
@@ -76,7 +84,8 @@ jobs:
             scripts/tests/test_ns_shell_angle_residence_audit.py \
             scripts/tests/test_ns_packet_coherence_budget_audit.py \
             scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py \
-            scripts/tests/test_ns_timeline_and_multicutoff.py
+            scripts/tests/test_ns_timeline_and_multicutoff.py \
+            scripts/tests/test_ns_depletion_currency_audit.py
 
   matched-cutoff-baseline:
     runs-on: ubuntu-latest
@@ -107,9 +116,22 @@ jobs:
           audits = validation['parameter_audits']
           assert any(a['nonvacuous_excursion_test'] for a in audits), validation
           assert validation['any_budget_coefficient_set_survives_holdout'], validation
-          # The full danger=>depletion gate is a scientific result, not a CI
-          # assumption. It may pass or be falsified; the receipt must record it.
           assert 'any_nonvacuous_parameter_set_survives_holdout' in validation
+
+          comparison = data['depletion_currency_comparison']
+          expected = {
+              'direction_turnover',
+              'spectral_projector_turnover',
+              'cross_shell_coherence_activity',
+              'middle_simple_spectrum_alignment',
+          }
+          assert set(comparison['currency_names']) == expected, comparison
+          currency_validation = comparison['heldout_validation']
+          assert currency_validation['matched_cutoff_set_complete'], currency_validation
+          assert currency_validation['heldout_nonvacuous_excursion_coverage'], currency_validation
+          # Candidate success or failure is an empirical result. CI requires a
+          # complete non-vacuous comparison, never a preordained positive answer.
+          assert 'any_candidate_currency_passes_sampled_heldout_gate' in currency_validation
           PY
       - name: Upload matched baseline receipt
         if: always()
@@ -132,7 +154,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: ns-exact-coherence-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-      - name: Check exact quotient-rule module with Agda 2.9
+      - name: Check quotient rule, currency fork, and residence reduction with Agda 2.9
         id: focused
         shell: bash
         run: |
@@ -146,6 +168,7 @@ jobs:
             export AGDA_JOBS=2
             targets=(
               DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda
+              DASHI/Physics/Closure/NSDepletionCurrencyFork.agda
               DASHI/Physics/Closure/NSCoherenceBudgetResidenceReduction.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
