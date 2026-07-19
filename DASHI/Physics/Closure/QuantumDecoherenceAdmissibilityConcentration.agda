@@ -1,9 +1,9 @@
 module DASHI.Physics.Closure.QuantumDecoherenceAdmissibilityConcentration where
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; Σ)
+
+import Ultrametric as UMetric
 
 open import DASHI.Foundations.BidirectionalAdmissibilityGalois
 open import DASHI.Foundations.UltrametricAdmissibilityConcentration
@@ -21,9 +21,6 @@ open import DASHI.Foundations.UltrametricAdmissibilityConcentration
 -- It does not derive the Born rule, Hilbert-space linearity, unitary quantum
 -- dynamics, or a measurement-collapse theorem.  Concrete quantum models must
 -- provide the realization relation, weights/amplitudes, and contraction data.
-
-_≢_ : ∀ {A : Set} → A → A → Set
-x ≢ y = x ≡ y → ⊥
 
 ------------------------------------------------------------------------
 -- Superposition as unresolved multiplicity in a projection fibre.
@@ -138,8 +135,8 @@ stableBranch-backward :
 stableBranch-backward _ = macroKernel-reductive
 
 ------------------------------------------------------------------------
--- Decoherence bridge: concentration on a micro carrier plus a stable macro
--- branch under the realization relation.
+-- Decoherence bridge: an explicit ultrametric concentration kernel on the
+-- micro carrier plus a stable macro branch under the realization relation.
 
 record DecoherenceAsAdmissibilityConcentration : Set₃ where
   field
@@ -147,18 +144,16 @@ record DecoherenceAsAdmissibilityConcentration : Set₃ where
     Macro : Set
 
     realization : Rel Micro Macro
-    MicroMetric : Set
 
-    -- The quantitative ultrametric carrier is kept abstract at this bridge.
-    -- Concrete instances should instantiate
-    -- AdmissibilityConcentrationKernel in the foundations module.
-    ConcentrationReceipt : Set
+    microUltrametric : UMetric.Ultrametric Micro
+    environmentKernel : Micro → Micro
+    concentrationKernel :
+      AdmissibilityConcentrationKernel
+        microUltrametric
+        environmentKernel
 
     survivingBranch : Pred Macro
     branchStable : GaloisStableBranch realization survivingBranch
-
-    decoherenceReading :
-      GaloisStableBranch realization survivingBranch
 
 open DecoherenceAsAdmissibilityConcentration public
 
@@ -171,3 +166,18 @@ branch-is-bidirectionally-closed D =
   stableBranch-forward (branchStable D)
   ,
   stableBranch-backward (branchStable D)
+
+decoherence-orbit-distance-monotone :
+  (D : DecoherenceAsAdmissibilityConcentration) →
+  ∀ n x →
+  UMetric.Ultrametric.d
+    (microUltrametric D)
+    (fixedPoint (concentrationKernel D))
+    (iterate (environmentKernel D) (Agda.Builtin.Nat.suc n) x)
+  ≤
+  UMetric.Ultrametric.d
+    (microUltrametric D)
+    (fixedPoint (concentrationKernel D))
+    (iterate (environmentKernel D) n x)
+decoherence-orbit-distance-monotone D =
+  iterate-step-distance-monotone (concentrationKernel D)
