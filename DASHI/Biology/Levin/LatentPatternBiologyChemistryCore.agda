@@ -18,7 +18,7 @@ import DASHI.Biology.Levin.LatentPatternInterfaceBoundary as Interface
 
 record LatentPatternBiologyChemistryCore : Set where
   field
-    patternMemoryLane        : Memory.PatternMemorySystem
+    patternMemoryLane        : Memory.PatternMemoryBoundary
     syntheticAgentBoundary   : Synthetic.SyntheticLivingAgentBoundary
     cellPhysicalLane         : CellPhysical.CellPhysicalOrganisationCore
     chemistryWaveLane        : Chemistry.BioelectricChemistryWaveAdapter
