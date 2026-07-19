@@ -3,6 +3,7 @@ module DASHI.Vision.Surfel.CoreExpansion where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Vision.Surfel.PromotionOrder
 
@@ -49,6 +50,9 @@ data CoreExpandedSelection (C : SurfelCarrier) : Surfel C → Set where
        × mergeAdmissible C anchor s) →
     CoreExpandedSelection C s
 
+ascended≢plateau : ascended ≡ plateau → ⊥
+ascended≢plateau ()
+
 ------------------------------------------------------------------------
 -- Every selected non-core surfel carries an explicit ascended anchor.
 
@@ -61,8 +65,8 @@ plateauSelectionHasAscendedAnchor :
     state C anchor ≡ ascended
     × sameCluster C anchor s
     × mergeAdmissible C anchor s
-plateauSelectionHasAscendedAnchor (selectedCore core) plateauEq with core
-... | ()
+plateauSelectionHasAscendedAnchor (selectedCore core) plateauEq =
+  Data.Empty.⊥-elim (ascended≢plateau (trans (sym core) plateauEq))
 plateauSelectionHasAscendedAnchor (selectedPlateau _ anchored) _ = anchored
 
 ------------------------------------------------------------------------
