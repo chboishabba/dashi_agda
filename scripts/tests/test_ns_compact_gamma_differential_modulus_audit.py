@@ -26,9 +26,8 @@ def _resolved_row(gamma_value: float, log_value: float) -> dict:
         "tangent_kind": "path",
         "differential": {
             "resolved": True,
-            "abs_gamma_directional_derivative_per_unit_XK": gamma_value,
-            "abs_log_escape_directional_derivative_per_unit_XK": log_value,
-            "minimum_mechanism_sign_distance": 0.25,
+            "abs_gamma_derivative": gamma_value,
+            "abs_log_escape_derivative": log_value,
         },
     }
 
@@ -72,14 +71,14 @@ def test_rational_compact_second_matches_scalar_finite_difference() -> None:
 def test_fit_and_holdout_differential_constants() -> None:
     calibration = [_resolved_row(2.0, 1.0), _resolved_row(1.5, 0.5)]
     fitted = fit_constants(calibration, slack=0.25)
-    assert math.isclose(fitted["fitted_gamma_differential_constant"], 2.5)
-    assert math.isclose(fitted["fitted_log_escape_differential_constant"], 1.25)
+    assert math.isclose(fitted["fitted_gamma_constant"], 2.5)
+    assert math.isclose(fitted["fitted_log_escape_constant"], 1.25)
 
     heldout = [_resolved_row(2.4, 1.2)]
     result = evaluate_rows(
         heldout,
-        gamma_constant=fitted["fitted_gamma_differential_constant"],
-        log_constant=fitted["fitted_log_escape_differential_constant"],
+        gamma_constant=fitted["fitted_gamma_constant"],
+        log_constant=fitted["fitted_log_escape_constant"],
     )
     assert result["sampled_differential_modulus_survives"] is True
     assert result["minimum_gamma_margin"] > 0.0
@@ -94,7 +93,7 @@ def test_unresolved_differential_fails_closed() -> None:
     }
     fitted = fit_constants([row], slack=0.1)
     assert fitted["finite_candidate"] is False
-    assert math.isinf(fitted["fitted_gamma_differential_constant"])
+    assert math.isinf(fitted["fitted_gamma_constant"])
     result = evaluate_rows([row], gamma_constant=1.0, log_constant=1.0)
     assert result["unresolved_row_count"] == 1
     assert result["sampled_differential_modulus_survives"] is False
