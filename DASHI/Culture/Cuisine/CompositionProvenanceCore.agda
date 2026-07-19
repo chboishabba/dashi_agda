@@ -11,8 +11,20 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data Nutrient : Set where
-  energy protein totalFat saturatedFat carbohydrate sugar fibre sodium
-  calcium iron potassium vitaminA vitaminC vitaminB12 : Nutrient
+  energy       : Nutrient
+  protein      : Nutrient
+  totalFat     : Nutrient
+  saturatedFat : Nutrient
+  carbohydrate : Nutrient
+  sugar        : Nutrient
+  fibre        : Nutrient
+  sodium       : Nutrient
+  calcium      : Nutrient
+  iron         : Nutrient
+  potassium    : Nutrient
+  vitaminA     : Nutrient
+  vitaminC     : Nutrient
+  vitaminB12   : Nutrient
 
 record NutritionVector : Set where
   field
@@ -23,7 +35,13 @@ record NutritionVector : Set where
 open NutritionVector public
 
 data ProcessEffectKind : Set where
-  retained lost added concentrated diluted transformed unknownEffect : ProcessEffectKind
+  retained      : ProcessEffectKind
+  lost          : ProcessEffectKind
+  added         : ProcessEffectKind
+  concentrated  : ProcessEffectKind
+  diluted       : ProcessEffectKind
+  transformed   : ProcessEffectKind
+  unknownEffect : ProcessEffectKind
 
 record NutrientProcessEffect : Set where
   field
@@ -45,11 +63,27 @@ record NutritionTransition : Set where
 open NutritionTransition public
 
 data ProductionPractice : Set where
-  conventional organic regenerative agroecological wildHarvested
-  intensiveAnimal extensiveAnimal indoorCultivation unknownPractice : ProductionPractice
+  conventional      : ProductionPractice
+  organic           : ProductionPractice
+  regenerative      : ProductionPractice
+  agroecological    : ProductionPractice
+  wildHarvested     : ProductionPractice
+  intensiveAnimal   : ProductionPractice
+  extensiveAnimal   : ProductionPractice
+  indoorCultivation : ProductionPractice
+  unknownPractice   : ProductionPractice
 
 data ProcessingStep : Set where
-  harvested milled fermented cured aged smoked dried frozen canned transported : ProcessingStep
+  harvested   : ProcessingStep
+  milled      : ProcessingStep
+  fermented   : ProcessingStep
+  cured       : ProcessingStep
+  aged        : ProcessingStep
+  smoked      : ProcessingStep
+  dried       : ProcessingStep
+  frozen      : ProcessingStep
+  canned      : ProcessingStep
+  transported : ProcessingStep
 
 record IngredientProvenance : Set where
   field
@@ -67,24 +101,24 @@ open IngredientProvenance public
 
 record IngredientGenealogy : Set where
   field
-    ancestralCarrier        : String
+    ancestralCarrier         : String
     domesticationOrSelection : String
-    historicalRegions       : List String
-    transformations         : List ProcessingStep
-    currentForm             : String
-    sourceLocators          : List String
+    historicalRegions        : List String
+    transformations          : List ProcessingStep
+    currentForm              : String
+    sourceLocators           : List String
 
 open IngredientGenealogy public
 
-record RecipeTransition (State : Set) : Set₁ where
+record RecipeTransition (State : Set) : Set where
   field
-    beforeState          : State
-    afterState           : State
-    operation            : String
-    tool                 : String
-    timeCoordinate       : Nat
+    beforeState           : State
+    afterState            : State
+    operation             : String
+    tool                  : String
+    timeCoordinate        : Nat
     temperatureCoordinate : Nat
-    targetDescription    : String
+    targetDescription     : String
 
 open RecipeTransition public
 
@@ -103,8 +137,10 @@ data Route (State : Set) : State → State → Set where
 
 record TwoIngredientNutrientTotal : Set where
   field
-    firstAmount secondAmount totalAmount : Nat
-    totalLaw : totalAmount ≡ firstAmount + secondAmount
+    firstAmount  : Nat
+    secondAmount : Nat
+    totalAmount  : Nat
+    totalLaw     : totalAmount ≡ firstAmount + secondAmount
 
 open TwoIngredientNutrientTotal public
 
