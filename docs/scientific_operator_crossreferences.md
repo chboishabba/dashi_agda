@@ -47,11 +47,15 @@ Two adapters consume this theorem:
 
 The metabolic theorem deliberately excludes external flux. An open system requires a later balance law with explicit source and sink terms rather than a false closed-system invariant.
 
-### 5. Fejer monotonicity and contraction -> certified protein attractors
+### 5. Fejer monotonicity and contraction -> certified biological attractors
 
-`ProteinFejerBasinBridge` identifies a protein attractor basin with a certified distance sublevel set around a basin centre. The existing generic Fejer theorem then proves that the folding update remains inside the basin.
+`DASHI.Analysis.FejerSublevelInvariant` owns the generic theorem:
 
-This closes the `forwardInvariant` field of `ConformationalAttractorWitness` and proves invariance for every finite iterate. It does not claim a global folding funnel or convergence outside the certified region.
+- represent an admissible basin or region as a distance sublevel around a target;
+- provide Fejer monotonicity of the transition toward that target;
+- obtain one-step and finite-iterate forward invariance.
+
+`ProteinFejerBasinBridge` instantiates that theorem for one sequence-, environment-, and attractor-indexed protein basin. It closes the `forwardInvariant` field of `ConformationalAttractorWitness` and proves invariance for every finite iterate.
 
 `DASHI.Analysis.StrictContractionUniqueness` separately proves that an existing finite strict-contraction certificate has a unique fixed point whenever the declared strict-distance relation is irreflexive. `ProteinContractiveBasinBridge` composes the two certificates:
 
@@ -60,6 +64,8 @@ This closes the `forwardInvariant` field of `ConformationalAttractorWitness` and
 - the existing protein admissibility witness establishes chemical admissibility of that fixed conformation.
 
 The declared contraction carrier may be a local region or subtype. No global uniqueness of the ambient conformational landscape is claimed.
+
+`CellFejerAttractorBridge` uses the same generic theorem at family level. An environment- and attractor-indexed family of Fejer sublevels constructs the complete existing `CellStateAttractor` record, including its universal `forwardInvariant` field. This keeps genome, chromatin, RNA, proteome, metabolism, membrane state, environment, and history inside the existing coupled cell carrier rather than reducing cell type to any one component.
 
 ### 6. Dissipation identity -> metabolic path monotonicity
 
@@ -91,6 +97,8 @@ The energy carrier is intentionally abstract. Thermodynamic free energy, relativ
 
 `DASHI.Analysis.DissipationPathMonotonicity` owns the exact dissipation-to-descent theorem independently of a thermodynamic interpretation.
 
+`DASHI.Analysis.FejerSublevelInvariant` owns the sublevel-set invariance theorem independently of proteins, cells, or another domain interpretation.
+
 `DASHI.Analysis.StrictContractionUniqueness` owns the irreflexive-distance uniqueness theorem independently of the protein interpretation.
 
 No definitions are copied.
@@ -103,5 +111,6 @@ No definitions are copied.
 4. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
 5. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
 6. **Metastability and transition paths.** Add barrier and transition-state certificates so multiple protein or molecular minima can coexist without being collapsed by the local contraction theorem.
+7. **Cell phenotype quotient compatibility.** Connect Fejer-invariant cell basins to the existing phenotype quotient with an explicit theorem that basin evolution preserves the selected phenotype class under declared observational equivalence.
 
 These are preferred over further broad “physics/chemistry/biology share a pattern” records because each produces a reusable theorem and a narrower empirical or analytic frontier.
