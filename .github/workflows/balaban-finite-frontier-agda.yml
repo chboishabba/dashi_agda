@@ -1,0 +1,41 @@
+name: Balaban finite one-step Agda check
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanFiniteOneStep*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2CMP98*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2ConstraintMatrix.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2GaugeFixedConstraintSpace.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2ConstrainedMinimizer.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2KernelProjection.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2Wilson*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2GaugeFixedHessian.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2RestrictedWilsonHessian.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteMatrixInverse.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2ConditionalCovarianceConcrete.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2SchurComplement.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2BlockCholeskyConcrete.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2GaussianNormalization.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2FiniteEffectiveAction.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2Polarization*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2BetaCoefficientExtraction.agda'
+      - 'DASHI/Physics/YangMills/BalabanRandomWalk*.agda'
+      - 'DASHI/Physics/YangMills/BalabanGreenKernelDecayFinite.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2NonlinearCriticalPointMap.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2FiniteContractionRegion.agda'
+      - 'DASHI/Physics/YangMills/BalabanBetaUniformityConjecture.agda'
+      - 'DASHI/Physics/YangMills/BalabanDashenGrossConventionMap.agda'
+      - 'DASHI/Physics/YangMills/BalabanBetaNormalizationCalibration.agda'
+      - '.github/workflows/balaban-finite-frontier-agda.yml'
+
+jobs:
+  finite-frontier-agda:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Check finite one-step frontier with Agda 2.9
+        run: |
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda
