@@ -1,0 +1,110 @@
+name: Musical symmetry dynamics
+
+on:
+  push:
+    paths:
+      - 'DASHI/Music/**'
+      - 'scripts/musical_symmetry_basin_diagnostic.py'
+      - 'scripts/tests/test_musical_symmetry_basin_diagnostic.py'
+      - 'docs/musical_symmetry_dynamics.md'
+      - '.github/workflows/musical-symmetry-dynamics.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Music/**'
+      - 'scripts/musical_symmetry_basin_diagnostic.py'
+      - 'scripts/tests/test_musical_symmetry_basin_diagnostic.py'
+      - 'docs/musical_symmetry_dynamics.md'
+      - '.github/workflows/musical-symmetry-dynamics.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  python-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run focused unit tests
+        run: |
+          python -m unittest discover \
+            -s scripts/tests \
+            -p 'test_musical_symmetry_basin_diagnostic.py' \
+            -v
+      - name: Run null and compression diagnostic
+        run: |
+          python scripts/musical_symmetry_basin_diagnostic.py \
+            --samples 500 \
+            --trials 3 \
+            --output-json musical-symmetry-report.json \
+            --output-svg musical-symmetry-report.svg
+      - name: Enforce fail-closed interpretation
+        run: |
+          python - <<'PY'
+          import json
+          with open('musical-symmetry-report.json', encoding='utf-8') as handle:
+              report = json.load(handle)
+          witness = report['exact_finite_witness']
+          boundary = report['claim_boundary']
+          assert witness['basin_volumes'] == {'00': 2, '11': 2}, witness
+          assert witness['repair_is_idempotent'], witness
+          assert boundary['algebraic_dynamical_extension_demonstrated'], boundary
+          assert not boundary['direct_asymmetry_reward_used'], boundary
+          assert boundary['compression_prior_assumed'], boundary
+          assert not boundary['human_perception_data_present'], boundary
+          assert not boundary['cognitive_explanation_promoted'], boundary
+          PY
+      - name: Upload diagnostic artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: musical-symmetry-diagnostic
+          path: |
+            musical-symmetry-report.json
+            musical-symmetry-report.svg
+          if-no-files-found: error
+
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: musical-symmetry-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check musical symmetry tranche with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-musical-symmetry-check.log"
+            export AGDA_JOBS=2
+            scripts/run_agda29_parallel_check.sh DASHI/Music/Everything.agda
+          ) > agda-musical-symmetry-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 180 agda-musical-symmetry-check.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: musical-symmetry-agda-log
+          path: agda-musical-symmetry-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
