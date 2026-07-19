@@ -1,25 +1,25 @@
 module DASHI.Crypto.FiniteFactorArithmetic where
 
 open import DASHI.Core.Prelude
-open import DASHI.Foundations.Base369Nat using (NonZero; nonZero)
+import DASHI.Foundations.Base369Nat as B369
 open import DASHI.Crypto.RSAArithmeticCore using (powMod)
 
 ------------------------------------------------------------------------
 -- Finite arithmetic certificates used by Shor factor extraction.
 ------------------------------------------------------------------------
 
-Positive : Nat → Set
-Positive n = Σ Nat (λ k → n ≡ suc k)
+NatPositive : Nat → Set
+NatPositive n = Σ Nat (λ k → n ≡ suc k)
 
-AtLeastTwo : Nat → Set
-AtLeastTwo n = Σ Nat (λ k → n ≡ suc (suc k))
+NatAtLeastTwo : Nat → Set
+NatAtLeastTwo n = Σ Nat (λ k → n ≡ suc (suc k))
 
 record FactorCertificate (N d : Nat) : Set where
   constructor mkFactorCertificate
   field
     cofactor : Nat
-    factorAtLeastTwo : AtLeastTwo d
-    cofactorAtLeastTwo : AtLeastTwo cofactor
+    factorAtLeastTwo : NatAtLeastTwo d
+    cofactorAtLeastTwo : NatAtLeastTwo cofactor
     factorization : d * cofactor ≡ N
 
 open FactorCertificate public
@@ -51,8 +51,8 @@ open EvenCertificate public
 record PeriodCertificate (N a r : Nat) : Set where
   constructor mkPeriodCertificate
   field
-    modulusNonZero : NonZero N
-    positivePeriod : Positive r
+    modulusNonZero : B369.NonZero N
+    positivePeriod : NatPositive r
     periodLaw : powMod a r N {{modulusNonZero}} ≡ 1
 
 open PeriodCertificate public
@@ -63,7 +63,7 @@ record ExactOrderCertificate (N a r : Nat) : Set where
     periodCertificate : PeriodCertificate N a r
     earlierNonperiod :
       ∀ k →
-      Positive k →
+      NatPositive k →
       k < r →
       ¬ (powMod a k N {{modulusNonZero periodCertificate}} ≡ 1)
 
@@ -110,7 +110,7 @@ common3Of3Modulo15 = record
 
 period2Mod15Four : PeriodCertificate 15 2 4
 period2Mod15Four = record
-  { modulusNonZero = nonZero
+  { modulusNonZero = B369.nonZero
   ; positivePeriod = 3 , refl
   ; periodLaw = refl
   }
@@ -148,7 +148,7 @@ common7Of7Modulo21 = record
 
 period2Mod21Six : PeriodCertificate 21 2 6
 period2Mod21Six = record
-  { modulusNonZero = nonZero
+  { modulusNonZero = B369.nonZero
   ; positivePeriod = 5 , refl
   ; periodLaw = refl
   }
