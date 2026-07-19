@@ -68,8 +68,6 @@ record DensePositivityExtension
   field
     Approximation : Test → Set
     denseRange : (f : Test) → admissible f → Approximation f
-    spectralContinuous : Set
-    nonnegativeClosed : Set
 
     extendPositive :
       ((x : DashiTest) → nonnegative (spectralZeroForm (embed x))) →
