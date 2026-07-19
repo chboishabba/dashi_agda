@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1500" height="900" viewBox="0 0 1500 900">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061222"/><stop offset="1" stop-color="#10102A"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <style>text{font-family:Inter,Arial,sans-serif}.title{fill:#F4FAFF;font-weight:700}.sub{fill:#9CBBD8}.source{fill:#7399B9;font-family:monospace}.strand{fill:none;stroke-linecap:round;stroke-width:10;opacity:.82}.under{fill:none;stroke:#091425;stroke-width:18;stroke-linecap:round}.cell{fill:#0C213B;stroke:#3475A7;stroke-width:2}.digit{fill:#0A1830;stroke:#48D6FF;stroke-width:2}.surface{fill:#211739;stroke:#F76FAE;stroke-width:2}.residue{stroke-dasharray:9 8}@keyframes weave{to{stroke-dashoffset:-42}}.moving{stroke-dasharray:12 9;animation:weave 7s linear infinite}</style>
+</defs><rect width="100%" height="100%" fill="url(#bg)"/>
+<text x="70" y="58" class="title" font-size="38">DASHI 369 SUPERVOXEL HYPERFABRIC</text>
+<text x="70" y="88" class="sub" font-size="17">Generated from canonical Agda constructors: prefix transport forms the trunk; body/residue fields force the split.</text>
+<path id="path-refine-1-0" d="M 120,340 C 245,305 245,375 370,340" fill="none" stroke="none"/><path d="M 120,340 C 245,305 245,375 370,340" class="under"/><path d="M 120,340 C 245,305 245,375 370,340" class="strand moving" stroke="#48D6FF"/>
+<path id="path-refine-2-0" d="M 370,340 C 495,305 495,375 620,340" fill="none" stroke="none"/><path d="M 370,340 C 495,305 495,375 620,340" class="under"/><path d="M 370,340 C 495,305 495,375 620,340" class="strand moving" stroke="#48D6FF"/>
+<path id="path-refine-3-0" d="M 620,340 C 745,305 745,375 870,340" fill="none" stroke="none"/><path d="M 620,340 C 745,305 745,375 870,340" class="under"/><path d="M 620,340 C 745,305 745,375 870,340" class="strand moving" stroke="#48D6FF"/>
+<path id="path-focus-root-0" d="M 120,130 C 240,95 240,165 360,130" fill="none" stroke="none"/><path d="M 120,130 C 240,95 240,165 360,130" class="under"/><path d="M 120,130 C 240,95 240,165 360,130" class="strand moving" stroke="#7C8CFF"/>
+<path id="path-focus-depth3-0" d="M 870,130 C 950,130 1000,340 1080,340" fill="none" stroke="none"/><path d="M 870,130 C 950,130 1000,340 1080,340" class="under"/><path d="M 870,130 C 950,130 1000,340 1080,340" class="strand moving" stroke="#7C8CFF"/>
+<path id="path-address-focus-0" d="M 870,340 C 975,305 975,375 1080,340" fill="none" stroke="none"/><path d="M 870,340 C 975,305 975,375 1080,340" class="under"/><path d="M 870,340 C 975,305 975,375 1080,340" class="strand moving" stroke="#FFD166"/>
+<path id="path-body-residue-split-0" d="M 1080,340 C 1150,340 1190,220 1260,220" fill="none" stroke="none"/><path d="M 1080,340 C 1150,340 1190,220 1260,220" class="under"/><path d="M 1080,340 C 1150,340 1190,220 1260,220" class="strand moving" stroke="#F76FAE"/>
+<path id="path-body-residue-split-1" d="M 1080,340 C 1150,340 1190,500 1260,500" fill="none" stroke="none"/><path d="M 1080,340 C 1150,340 1190,500 1260,500" class="under"/><path d="M 1080,340 C 1150,340 1190,500 1260,500" class="strand moving residue" stroke="#F76FAE"/>
+<circle r="6" fill="#48D6FF" filter="url(#glow)"><animateMotion dur="4.8s" begin="0s" repeatCount="indefinite"><mpath href="#path-refine-1-0" xlink:href="#path-refine-1-0"/></animateMotion></circle>
+<circle r="6" fill="#48D6FF" filter="url(#glow)"><animateMotion dur="5.8s" begin=".45s" repeatCount="indefinite"><mpath href="#path-refine-2-0" xlink:href="#path-refine-2-0"/></animateMotion></circle>
+<circle r="6" fill="#48D6FF" filter="url(#glow)"><animateMotion dur="6.8s" begin=".9s" repeatCount="indefinite"><mpath href="#path-refine-3-0" xlink:href="#path-refine-3-0"/></animateMotion></circle>
+<circle r="6" fill="#7C8CFF" filter="url(#glow)"><animateMotion dur="4.8s" begin="1.35s" repeatCount="indefinite"><mpath href="#path-focus-root-0" xlink:href="#path-focus-root-0"/></animateMotion></circle>
+<circle r="6" fill="#7C8CFF" filter="url(#glow)"><animateMotion dur="5.8s" begin="1.8s" repeatCount="indefinite"><mpath href="#path-focus-depth3-0" xlink:href="#path-focus-depth3-0"/></animateMotion></circle>
+<circle r="6" fill="#FFD166" filter="url(#glow)"><animateMotion dur="6.8s" begin="2.25s" repeatCount="indefinite"><mpath href="#path-address-focus-0" xlink:href="#path-address-focus-0"/></animateMotion></circle>
+<circle r="6" fill="#F76FAE" filter="url(#glow)"><animateMotion dur="4.8s" begin="2.7s" repeatCount="indefinite"><mpath href="#path-body-residue-split-0" xlink:href="#path-body-residue-split-0"/></animateMotion></circle>
+<circle r="6" fill="#F76FAE" filter="url(#glow)"><animateMotion dur="5.8s" begin="3.15s" repeatCount="indefinite"><mpath href="#path-body-residue-split-1" xlink:href="#path-body-residue-split-1"/></animateMotion></circle>
+<circle class="digit" cx="120" cy="340" r="42"/><text x="120" y="348" text-anchor="middle" class="title" font-size="22">root</text>
+<circle class="digit" cx="370" cy="340" r="42"/><text x="370" y="348" text-anchor="middle" class="title" font-size="22">3</text>
+<circle class="digit" cx="620" cy="340" r="42"/><text x="620" y="348" text-anchor="middle" class="title" font-size="22">6</text>
+<circle class="digit" cx="870" cy="340" r="42"/><text x="870" y="348" text-anchor="middle" class="title" font-size="22">9</text>
+<rect class="cell" x="32" y="88" width="176" height="84" rx="18"/><text x="120" y="125" text-anchor="middle" class="title" font-size="16">rootField</text><text x="120" y="149" text-anchor="middle" class="sub" font-size="12">body/residue forests · depth 0</text>
+<rect class="cell" x="272" y="88" width="176" height="84" rx="18"/><text x="360" y="125" text-anchor="middle" class="title" font-size="16">rootP3Supervoxel</text><text x="360" y="149" text-anchor="middle" class="sub" font-size="12">p3 · evenParity</text>
+<rect class="cell" x="782" y="88" width="176" height="84" rx="18"/><text x="870" y="125" text-anchor="middle" class="title" font-size="16">depth3Field</text><text x="870" y="149" text-anchor="middle" class="sub" font-size="12">focus = depth3P7Supervoxel</text>
+<rect class="cell" x="992" y="298" width="176" height="84" rx="18"/><text x="1080" y="335" text-anchor="middle" class="title" font-size="16">depth3P7Supervoxel</text><text x="1080" y="359" text-anchor="middle" class="sub" font-size="12">p7 · oddParity · [3,6,9]</text>
+<rect class="surface" x="1172" y="178" width="176" height="84" rx="18"/><text x="1260" y="215" text-anchor="middle" class="title" font-size="16">bodySurface</text><text x="1260" y="239" text-anchor="middle" class="sub" font-size="12">canonicalExampleFifteenSSPSurface</text>
+<rect class="surface residue" x="1172" y="458" width="176" height="84" rx="18"/><text x="1260" y="495" text-anchor="middle" class="title" font-size="16">residueSurface</text><text x="1260" y="519" text-anchor="middle" class="sub" font-size="12">canonicalNegativeFifteenSSPSurface</text>
+<text x="760" y="305" class="sub" font-size="13">shared prefix trunk from canonicalThreeSixNineDigits</text>
+<text x="1170" y="375" class="sub" font-size="13">constructor-forced body/residue decomposition</text>
+<text x="70" y="805" class="source" font-size="12">Sources: DASHI/Foundations/SSPPrimeLane369Refinement.agda · DASHI/Core/SuperSSP369Field.agda</text>
+<text x="70" y="832" class="sub" font-size="13">No domain nodes or transport edges are supplied by a visual spec. SVG positions are an embedding of the extracted IR only.</text>
+<text x="70" y="858" class="sub" font-size="13">Animation follows refinement, focus, coordinate transport, and body/residue decomposition events.</text>
+</svg>

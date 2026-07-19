@@ -1,0 +1,30 @@
+{
+  "schema": "dashi-lane-hyperfabric-v1",
+  "title": "DASHI NAVIER–STOKES GATEWAY HYPERFABRIC",
+  "slug": "dashi-navier-stokes-lane-hyperfabric",
+  "scan_root": "DASHI",
+  "claim_boundary": "The gateway is recorded fail-closed: the directional Riesz sign condition and H¹ᐟ² backwards-uniqueness alternative remain open, and fullClayNSPromoted remains false.",
+  "authority_rules": {
+    "source_imported_module_patterns": [],
+    "open_declaration_patterns": ["Condition$", "Uniqueness$", "Promoted$"],
+    "conditional_input_type_patterns": []
+  },
+  "external_reference_labels": {
+    "S159.sprint159FullClayExternalAuthorityBoundaryLedgerClosed": "Chain A · external-authority boundary",
+    "S162.sprint162CriticalResidualBoundaryLedgerClosed": "Chain B · critical residual boundary",
+    "S164.sprint164MicrolocalTopologicalBridgeBoundaryLedgerClosed": "Chain C · microlocal/topological boundary",
+    "GW1.dnsSignClassificationStillOpen": "Gateway-1 DNS sign classification"
+  },
+  "carriers": [
+    {"id":"chain-a","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.chainAAnchor","title":"Chain A anchor","lane":"gateway inputs"},
+    {"id":"chain-b","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.chainBAnchor","title":"Chain B anchor","lane":"gateway inputs"},
+    {"id":"chain-c","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.chainCAnchor","title":"Chain C anchor","lane":"gateway inputs"},
+    {"id":"signed-tb-route","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.gateway1SignedTbDiagnosticRouteRecorded","title":"Signed T_b diagnostic route","lane":"diagnostic route","dependencies":["chain-a","chain-b","chain-c"]},
+    {"id":"dns-required","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.gateway1NumericalDNSRequiredBeforePromotion","title":"Numerical DNS required","lane":"empirical gate","dependencies":["signed-tb-route"]},
+    {"id":"dns-open","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.gateway1DNSSignClassificationStillOpen","title":"DNS sign classification open","lane":"empirical gate","dependencies":["dns-required"]},
+    {"id":"riesz-sign","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.nonlinearRieszSignCondition","title":"Directional Riesz sign condition","lane":"gateway alternative","dependencies":["dns-open"]},
+    {"id":"backwards-uniqueness","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.hHalfBackwardsUniqueness","title":"H¹ᐟ² backwards uniqueness","lane":"gateway alternative","dependencies":["chain-b","chain-c"]},
+    {"id":"clay-promotion","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.fullClayNSPromoted","title":"Full Clay NS promotion","lane":"fail-closed endpoint","dependencies":["riesz-sign","backwards-uniqueness"]},
+    {"id":"gateway-receipt","declaration":"DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.canonicalNSFullClayGatewayTheoremBoundaryReceipt","title":"Canonical gateway boundary receipt","lane":"assembly","dependencies":["chain-a","chain-b","chain-c","signed-tb-route","dns-required","dns-open","riesz-sign","backwards-uniqueness","clay-promotion"]}
+  ]
+}
