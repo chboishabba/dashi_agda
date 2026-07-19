@@ -14,6 +14,6 @@ open RandomWalkTerm public
 
 walkWeight :
   ∀ {Step Scalar} → RandomWalkTerm Step Scalar → Walk Step → Scalar
-walkWeight data emptyWalk = one data
-walkWeight data (step then rest) =
-  multiply data (stepWeight data step) (walkWeight data rest)
+walkWeight bundle emptyWalk = one bundle
+walkWeight bundle (step then rest) =
+  multiply bundle (stepWeight bundle step) (walkWeight bundle rest)
