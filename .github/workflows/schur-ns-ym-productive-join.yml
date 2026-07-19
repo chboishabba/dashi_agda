@@ -1,0 +1,79 @@
+name: Schur NS YM productive join
+
+on:
+  push:
+    paths:
+      - 'DASHI/Analysis/BlockSchurStructure.agda'
+      - 'DASHI/Analysis/BlockSchurCoercivity.agda'
+      - 'DASHI/Physics/YangMills/BalabanSchurGenericInstance.agda'
+      - 'DASHI/Physics/Closure/NSShellSchurInstance.agda'
+      - 'DASHI/Physics/Closure/NSCrossShellSchurBound.agda'
+      - 'DASHI/Physics/SchurNSYMProductiveJoin.agda'
+      - 'docs/schur_ns_ym_productive_join.md'
+      - '.github/workflows/schur-ns-ym-productive-join.yml'
+      - 'scripts/run_agda29_parallel_check.sh'
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/BlockSchurStructure.agda'
+      - 'DASHI/Analysis/BlockSchurCoercivity.agda'
+      - 'DASHI/Physics/YangMills/BalabanSchurGenericInstance.agda'
+      - 'DASHI/Physics/Closure/NSShellSchurInstance.agda'
+      - 'DASHI/Physics/Closure/NSCrossShellSchurBound.agda'
+      - 'DASHI/Physics/SchurNSYMProductiveJoin.agda'
+      - 'docs/schur_ns_ym_productive_join.md'
+      - '.github/workflows/schur-ns-ym-productive-join.yml'
+      - 'scripts/run_agda29_parallel_check.sh'
+
+concurrency:
+  group: schur-ns-ym-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: schur-ns-ym-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check generic Schur theorem and both instances
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-schur-ns-ym.log"
+            export AGDA_JOBS=2
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Analysis/BlockSchurCoercivity.agda \
+              DASHI/Physics/YangMills/BalabanSchurGenericInstance.agda \
+              DASHI/Physics/Closure/NSCrossShellSchurBound.agda \
+              DASHI/Physics/SchurNSYMProductiveJoin.agda
+          ) > agda-schur-ns-ym.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 220 agda-schur-ns-ym.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: schur-ns-ym-agda-log
+          path: agda-schur-ns-ym.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
