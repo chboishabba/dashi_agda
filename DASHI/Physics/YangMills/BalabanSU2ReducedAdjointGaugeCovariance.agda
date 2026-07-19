@@ -24,6 +24,7 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ; _*R_
   ; -R_
   ; oneR
+  ; *-identityˡ
   ; normSquaredQ
   ; realSolverRing
   ; su2q
@@ -64,9 +65,9 @@ lieScaleOne :
   ∀ X → lieScale oneR X ≡ X
 lieScaleOne (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (x ∷ []) realSolverRing)
-    (Solver.solve (y ∷ []) realSolverRing)
-    (Solver.solve (z ∷ []) realSolverRing)
+    (*-identityˡ x)
+    (*-identityˡ y)
+    (*-identityˡ z)
 
 su2AdjointBracketNormFactor :
   ∀ u Y X →
