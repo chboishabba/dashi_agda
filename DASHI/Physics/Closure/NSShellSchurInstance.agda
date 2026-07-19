@@ -16,12 +16,12 @@ open import DASHI.Analysis.BlockSchurCoercivity
 --   D = I - K11
 --   S = D - C A⁻¹ B.
 --
--- This module proves the Wall-1 frame-gap reduction once the diagonal high
--- gap and cross-shell correction budget are supplied.  It does not assume the
--- still-open Biot--Savart cross-shell estimate.
+-- This record contains only the block structure and the exact quadratic
+-- identity.  The diagonal and cross-shell estimates are separate theorem
+-- inputs, so the live analytic frontier cannot be hidden inside the model.
 ------------------------------------------------------------------------
 
-record NSShellSchurInputs
+record NSShellSchurStructure
     {v s : Level}
     (ShellVector : Set v)
     (Scalar : Set s)
@@ -67,25 +67,38 @@ record NSShellSchurInputs
         (inner x (highBlock x))
         (inner x (crossCorrection x))
 
+open NSShellSchurStructure public
+
+record NSShellSchurBounds
+    {v s : Level}
+    {ShellVector : Set v}
+    {Scalar : Set s}
+    {O : SchurOrderLaws Scalar}
+    (I : NSShellSchurStructure ShellVector Scalar O) : Set (v ⊔ s) where
+  field
     highShellGap :
-      ∀ x → _≤_ O highGap (inner x (highBlock x))
+      ∀ x → _≤_ O (highGap I) (inner I x (highBlock I x))
 
     crossShellBound :
-      ∀ x → _≤_ O (inner x (crossCorrection x)) crossBudget
+      ∀ x →
+      _≤_ O
+        (inner I x (crossCorrection I x))
+        (crossBudget I)
 
     crossBudgetBelowGap :
-      _≤_ O crossBudget highGap
+      _≤_ O (crossBudget I) (highGap I)
 
-open NSShellSchurInputs public
+open NSShellSchurBounds public
 
 nsQuantitativeSchur :
   ∀ {v s}
     {ShellVector : Set v}
     {Scalar : Set s}
-    (O : SchurOrderLaws Scalar) →
-  NSShellSchurInputs ShellVector Scalar O →
+    (O : SchurOrderLaws Scalar)
+    (I : NSShellSchurStructure ShellVector Scalar O) →
+  NSShellSchurBounds I →
   QuantitativeBlockSchur ShellVector Scalar O
-nsQuantitativeSchur O I = record
+nsQuantitativeSchur O I B = record
   { dBlock = highBlock I
   ; crossCorrection = crossCorrection I
   ; schurComplement = schurComplement I
@@ -93,9 +106,9 @@ nsQuantitativeSchur O I = record
   ; highGap = highGap I
   ; crossBudget = crossBudget I
   ; schurQuadraticIdentity = schurQuadraticIdentity I
-  ; highBlockCoercive = highShellGap I
-  ; crossCorrectionBounded = crossShellBound I
-  ; crossBelowHighGap = crossBudgetBelowGap I
+  ; highBlockCoercive = highShellGap B
+  ; crossCorrectionBounded = crossShellBound B
+  ; crossBelowHighGap = crossBudgetBelowGap B
   }
 
 nsShellSchurCoercive :
@@ -103,19 +116,21 @@ nsShellSchurCoercive :
     {ShellVector : Set v}
     {Scalar : Set s}
     (O : SchurOrderLaws Scalar)
-    (I : NSShellSchurInputs ShellVector Scalar O)
+    (I : NSShellSchurStructure ShellVector Scalar O)
+    (B : NSShellSchurBounds I)
     (x : ShellVector) →
   _≤_ O
     (_⊖_ O (highGap I) (crossBudget I))
     (inner I x (schurComplement I x))
-nsShellSchurCoercive O I = schurCoercive O (nsQuantitativeSchur O I)
+nsShellSchurCoercive O I B =
+  schurCoercive O (nsQuantitativeSchur O I B)
 
 record NSStrictFrameGap
     {v s : Level}
     {ShellVector : Set v}
     {Scalar : Set s}
     (O : SchurOrderLaws Scalar)
-    (I : NSShellSchurInputs ShellVector Scalar O) : Set (v ⊔ s) where
+    (I : NSShellSchurStructure ShellVector Scalar O) : Set (v ⊔ s) where
   field
     StrictlyPositive : Scalar → Set s
     residualPositive :
@@ -128,11 +143,12 @@ nsStrictFrameGapCertificate :
     {ShellVector : Set v}
     {Scalar : Set s}
     (O : SchurOrderLaws Scalar)
-    (I : NSShellSchurInputs ShellVector Scalar O) →
+    (I : NSShellSchurStructure ShellVector Scalar O)
+    (B : NSShellSchurBounds I) →
   NSStrictFrameGap O I →
-  QuantitativeSchurCertificate O (nsQuantitativeSchur O I)
-nsStrictFrameGapCertificate O I G =
-  certifyQuantitativeSchur O (nsQuantitativeSchur O I) record
+  QuantitativeSchurCertificate O (nsQuantitativeSchur O I B)
+nsStrictFrameGapCertificate O I B G =
+  certifyQuantitativeSchur O (nsQuantitativeSchur O I B) record
     { StrictlyPositive = StrictlyPositive G
     ; residualGapPositive = residualPositive G
     }
