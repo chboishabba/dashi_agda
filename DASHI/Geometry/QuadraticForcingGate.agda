@@ -2,7 +2,7 @@
 
 module DASHI.Geometry.QuadraticForcingGate where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Geometry.UniversalCanonicalQuotient
 open import DASHI.Geometry.HilbertLorentzForcing
@@ -68,14 +68,13 @@ quadraticForcingGate :
 quadraticForcingGate P A = record
   { invariantQuadratic =
       UniqueInvariantQuadraticRay.distinguished (invariantRay A)
-  ; invariantQuadratic-is-distinguished =
-      Agda.Builtin.Equality.refl
+  ; invariantQuadratic-is-distinguished = refl
   ; invariantQuadraticUniqueUpToScale = invariantRay A
   ; lorentzSignature =
       isotropy-finiteSpeed-forces-lorentz
         (isotropyNormalForm A)
         (finiteSpeed A)
-  ; lorentzSignature-forced = Agda.Builtin.Equality.refl
+  ; lorentzSignature-forced = refl
   ; signature31-forced =
       orientation-selects-31
         (isotropyNormalForm A)
