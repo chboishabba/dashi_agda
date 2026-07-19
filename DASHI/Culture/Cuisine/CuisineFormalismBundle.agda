@@ -31,13 +31,20 @@ record CuisineFormalismBundle (policy : F.PromotionPolicy) : Set₁ where
 open CuisineFormalismBundle public
 
 data CuisineSurface : Set where
-  sensorySurface safetySurface popularitySurface canonSurface
-  nutritionSurface identitySurface provenanceSurface flavourSurface
-  historicalSurface universalReadingSurface : CuisineSurface
+  sensorySurface         : CuisineSurface
+  safetySurface          : CuisineSurface
+  popularitySurface      : CuisineSurface
+  canonSurface           : CuisineSurface
+  nutritionSurface       : CuisineSurface
+  identitySurface        : CuisineSurface
+  provenanceSurface      : CuisineSurface
+  flavourSurface         : CuisineSurface
+  historicalSurface      : CuisineSurface
+  universalReadingSurface : CuisineSurface
 
 data SurfaceDistinction : CuisineSurface → CuisineSurface → Set where
-  sensorySafetyDistinct    : SurfaceDistinction sensorySurface safetySurface
-  popularityCanonDistinct  : SurfaceDistinction popularitySurface canonSurface
+  sensorySafetyDistinct     : SurfaceDistinction sensorySurface safetySurface
+  popularityCanonDistinct   : SurfaceDistinction popularitySurface canonSurface
   nutritionIdentityDistinct : SurfaceDistinction nutritionSurface identitySurface
   provenanceFlavourDistinct : SurfaceDistinction provenanceSurface flavourSurface
   historicalReceiptDistinct : SurfaceDistinction historicalSurface canonSurface

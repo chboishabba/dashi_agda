@@ -12,20 +12,60 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data TasteDimension : Set where
-  sweet salty sour bitter umami : TasteDimension
+  sweet  : TasteDimension
+  salty  : TasteDimension
+  sour   : TasteDimension
+  bitter : TasteDimension
+  umami  : TasteDimension
 
 data AromaFamily : Set where
-  floral fruity citrus herbal green roasted nutty caramel smoky earthy
-  fungal sulfurous marine animalic fermented ammoniaLike oxidative : AromaFamily
+  floral      : AromaFamily
+  fruity      : AromaFamily
+  citrus      : AromaFamily
+  herbal      : AromaFamily
+  green       : AromaFamily
+  roasted     : AromaFamily
+  nutty       : AromaFamily
+  caramel     : AromaFamily
+  smoky       : AromaFamily
+  earthy      : AromaFamily
+  fungal      : AromaFamily
+  sulfurous   : AromaFamily
+  marine      : AromaFamily
+  animalic    : AromaFamily
+  fermented   : AromaFamily
+  ammoniaLike : AromaFamily
+  oxidative   : AromaFamily
 
 data MouthfeelDimension : Set where
-  crisp tender chewy creamy fatty silky grainy slimy gelatinous dry astringent : MouthfeelDimension
+  crisp      : MouthfeelDimension
+  tender     : MouthfeelDimension
+  chewy      : MouthfeelDimension
+  creamy     : MouthfeelDimension
+  fatty      : MouthfeelDimension
+  silky      : MouthfeelDimension
+  grainy     : MouthfeelDimension
+  slimy      : MouthfeelDimension
+  gelatinous : MouthfeelDimension
+  dry        : MouthfeelDimension
+  astringent : MouthfeelDimension
 
 data ChemestheticDimension : Set where
-  warming burning cooling tingling numbing nasalSharpness carbonation : ChemestheticDimension
+  warming        : ChemestheticDimension
+  burning        : ChemestheticDimension
+  cooling        : ChemestheticDimension
+  tingling       : ChemestheticDimension
+  numbing        : ChemestheticDimension
+  nasalSharpness : ChemestheticDimension
+  carbonation    : ChemestheticDimension
 
 data TemporalPhase : Set where
-  aromaBeforeBite attack midPalate finish aftertaste retronasalReturn : TemporalPhase
+  aromaBeforeBite  : TemporalPhase
+  attack           : TemporalPhase
+  midPalate        : TemporalPhase
+  finish           : TemporalPhase
+  aftertaste       : TemporalPhase
+  retronasalReturn : TemporalPhase
 
 record SensoryProfile : Set where
   field
@@ -38,14 +78,26 @@ record SensoryProfile : Set where
 open SensoryProfile public
 
 data Valence : Set where
-  attractive neutral aversive ambivalent : Valence
+  attractive : Valence
+  neutral    : Valence
+  aversive   : Valence
+  ambivalent : Valence
 
 data Familiarity : Set where
-  familiar learned unfamiliar estranged : Familiarity
+  familiar   : Familiarity
+  learned    : Familiarity
+  unfamiliar : Familiarity
+  estranged  : Familiarity
 
 data InterpretationFrame : Set where
-  comfortFrame celebrationFrame prestigeFrame medicinalFrame
-  spoilageFrame challengeFrame homeFrame noveltyFrame : InterpretationFrame
+  comfortFrame     : InterpretationFrame
+  celebrationFrame : InterpretationFrame
+  prestigeFrame    : InterpretationFrame
+  medicinalFrame   : InterpretationFrame
+  spoilageFrame    : InterpretationFrame
+  challengeFrame   : InterpretationFrame
+  homeFrame        : InterpretationFrame
+  noveltyFrame     : InterpretationFrame
 
 record ObserverContext : Set where
   field
@@ -123,19 +175,38 @@ kombuKatsuobushiCombinedIsEleven = refl
 ------------------------------------------------------------------------
 
 data StrangenessCue : Set where
-  sulfurCue animalicCue ammoniaCue fungalCue marineCue fermentationCue
-  slimeCue bitterCue oxidativeCue medicinalCue : StrangenessCue
+  sulfurCue      : StrangenessCue
+  animalicCue    : StrangenessCue
+  ammoniaCue     : StrangenessCue
+  fungalCue      : StrangenessCue
+  marineCue      : StrangenessCue
+  fermentationCue : StrangenessCue
+  slimeCue       : StrangenessCue
+  bitterCue      : StrangenessCue
+  oxidativeCue   : StrangenessCue
+  medicinalCue   : StrangenessCue
 
 data RewardCue : Set where
-  fatReward umamiReward sweetnessReward aromaticComplexity
-  texturalContrast warmingReward memoryReward prestigeReward : RewardCue
+  fatReward          : RewardCue
+  umamiReward        : RewardCue
+  sweetnessReward    : RewardCue
+  aromaticComplexity : RewardCue
+  texturalContrast   : RewardCue
+  warmingReward      : RewardCue
+  memoryReward       : RewardCue
+  prestigeReward     : RewardCue
 
 data ProcessAssurance : Set where
-  validatedFermentation controlledAging controlledCuring
-  verifiedFreshPreparation unknownProcess : ProcessAssurance
+  validatedFermentation    : ProcessAssurance
+  controlledAging          : ProcessAssurance
+  controlledCuring         : ProcessAssurance
+  verifiedFreshPreparation : ProcessAssurance
+  unknownProcess           : ProcessAssurance
 
 data SafetyEvidence : Set where
-  safetyVerified safetyUnknown safetyRejected : SafetyEvidence
+  safetyVerified : SafetyEvidence
+  safetyUnknown  : SafetyEvidence
+  safetyRejected : SafetyEvidence
 
 record ControlledStrangeness : Set where
   field
@@ -366,6 +437,8 @@ record SameCueDifferentSafety : Set where
   field
     firstBoundary  : StinkSafetyBoundary
     secondBoundary : StinkSafetyBoundary
+
+open SameCueDifferentSafety public
 
 sameFunkCueDifferentSafety : SameCueDifferentSafety
 sameFunkCueDifferentSafety = record
