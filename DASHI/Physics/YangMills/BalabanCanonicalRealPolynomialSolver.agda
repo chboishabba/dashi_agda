@@ -1,20 +1,5 @@
 module DASHI.Physics.YangMills.BalabanCanonicalRealPolynomialSolver where
 
-------------------------------------------------------------------------
--- Canonical coefficient interpretation for the computed polynomial socket.
---
--- The original integer-coefficient morphism is mathematically correct, but its
--- interpretations of 0 and 1 are only propositionally equal to DASHI's zeroR
--- and oneR. The legacy solver exposes those interpretations in the type of a
--- generated proof, so large identities fail at the final definitional boundary.
---
--- This module changes only the coefficient interpretation: formal 0 and 1 map
--- definitionally to zeroR and oneR, while every other coefficient uses the
--- already proved interpretation. A pointwise equivalence transports all ring
--- morphism laws and the weak coefficient decision procedure. Thus this is a
--- proof-preserving normalization adapter, not another trusted solver.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Maybe.Base using (just; nothing)
@@ -49,7 +34,10 @@ open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver as Base
 canonicalInterpretCoefficient : IntegerCoefficient → ℝ
 canonicalInterpretCoefficient (coefficient zero zero) = zeroR
 canonicalInterpretCoefficient (coefficient (suc zero) zero) = oneR
-canonicalInterpretCoefficient value = interpretCoefficient value
+canonicalInterpretCoefficient (coefficient (suc (suc positive)) zero) =
+  interpretCoefficient (coefficient (suc (suc positive)) zero)
+canonicalInterpretCoefficient (coefficient positive (suc negative)) =
+  interpretCoefficient (coefficient positive (suc negative))
 
 canonicalInterpretationCorrect :
   ∀ value → canonicalInterpretCoefficient value ≡ interpretCoefficient value
