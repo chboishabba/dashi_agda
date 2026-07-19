@@ -19,12 +19,14 @@ open import DASHI.Analysis.PrimeCountingFunction public
     ( PrimePredicate
     ; primeIndicator
     ; primeCountLE
+    ; primeCountLT
     ; primeCountStep
     ; primeCountAtPrime
     ; primeCountAtNonprime
     ; primesUpTo
     ; primeListCountExact
     ; primeCountSymmetricTwice
+    ; primeCountSymmetricTwiceDefinition
     ; PrimeCountingFiniteBoundary
     ; primeCountingFiniteBoundary
     )
