@@ -4,15 +4,21 @@ on:
   push:
     paths:
       - 'scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/ns_compact_gamma_retained_danger_modulus_audit.py'
       - 'scripts/tests/test_ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_retained_danger_modulus_audit.py'
       - 'DASHI/Physics/Closure/NSCompactGammaBufferedDangerExpenditure.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaRetainedDangerExpenditure.agda'
       - 'docs/ns_compact_gamma_danger_expenditure_modulus_audit.md'
       - '.github/workflows/ns-compact-gamma-danger-modulus.yml'
   pull_request:
     paths:
       - 'scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/ns_compact_gamma_retained_danger_modulus_audit.py'
       - 'scripts/tests/test_ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_retained_danger_modulus_audit.py'
       - 'DASHI/Physics/Closure/NSCompactGammaBufferedDangerExpenditure.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaRetainedDangerExpenditure.agda'
       - 'docs/ns_compact_gamma_danger_expenditure_modulus_audit.md'
       - '.github/workflows/ns-compact-gamma-danger-modulus.yml'
 
@@ -38,13 +44,14 @@ jobs:
         run: >-
           python -m pytest -q
           scripts/tests/test_ns_compact_gamma_danger_expenditure_modulus_audit.py
-      - name: Run buffered danger modulus audit
+          scripts/tests/test_ns_compact_gamma_retained_danger_modulus_audit.py
+      - name: Run retained danger modulus audit
         id: audit
         shell: bash
         run: |
           set +e
-          python scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py \
-            --output-json ns-compact-gamma-danger-modulus.json \
+          python scripts/ns_compact_gamma_retained_danger_modulus_audit.py \
+            --output-json ns-compact-gamma-retained-danger.json \
             --search-cutoff 24 \
             --verify-cutoffs 32,48,64 \
             --target-shells 2,3 \
@@ -68,10 +75,10 @@ jobs:
             --end-parabolic-time 0.004 \
             --output-count 3 \
             --verify-count 1 \
-            --pretty > ns-compact-gamma-danger-modulus.log 2>&1
+            --pretty > ns-compact-gamma-retained-danger.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 180 ns-compact-gamma-danger-modulus.log
+          tail -n 180 ns-compact-gamma-retained-danger.log
           exit 0
       - name: Require successful audit execution
         if: steps.audit.outputs.status != '0'
@@ -83,7 +90,7 @@ jobs:
           import json
           from pathlib import Path
 
-          data = json.loads(Path('ns-compact-gamma-danger-modulus.json').read_text())
+          data = json.loads(Path('ns-compact-gamma-retained-danger.json').read_text())
           assert data['center_profile_count'] == 8
           assert data['calibration_profile_count'] == 32
           assert data['holdout_profile_count'] == 32
@@ -91,17 +98,17 @@ jobs:
           assert data['holdout_pair_count'] == 96
           assert len(data['candidate_moduli']) == 4
           assert data['selected_holdout_evaluation']['dangerous_pair_count'] > 0
-          assert data['selected_holdout_evaluation']['center_lower_receipt']['eligible_center_row_count'] > 0
-          assert data['selected_member_profile_count'] == 2
+          assert data['selected_holdout_evaluation']['candidate_member_lower'] > 0
           assert data['matched_profile_pair_count'] == 6
           assert data['matched_pair_row_count'] == 18
           assert data['matched_evaluation']['dangerous_pair_count'] > 0
+          assert data['matched_evaluation']['candidate_member_lower'] > 0
           assert all(group['matched_cutoff_complete'] for group in data['matched_cutoff_groups'])
           assert data['maximum_relative_divergence_residual'] < 1e-10
           assert data['maximum_mechanism_balance_residual'] < 1e-8
           assert data['maximum_finite_difference_residual'] < 1e-5
           assert data['authority']['analytic_gamma_modulus_proved'] is False
-          assert data['authority']['analytic_escape_modulus_proved'] is False
+          assert data['authority']['analytic_log_escape_modulus_proved'] is False
           assert data['authority']['cutoff_shell_uniform_authority'] is False
           assert data['authority']['continuum_compactness_authority'] is False
           assert data['authority']['theorem_authority'] is False
@@ -112,18 +119,19 @@ jobs:
               'surviving_candidates': data['surviving_candidate_count'],
               'selected_exponent': data['selected_candidate']['exponent'],
               'candidate_member_lower': data['selected_holdout_evaluation']['candidate_member_lower'],
-              'holdout_survives': data['authority']['sampled_modulus_survives_holdout'],
-              'matched_survives': data['authority']['sampled_modulus_survives_matched_cutoffs'],
+              'minimum_retention_factor': data['selected_holdout_evaluation']['minimum_retention_factor'],
+              'holdout_survives': data['authority']['sampled_retained_modulus_survives_holdout'],
+              'matched_survives': data['authority']['sampled_retained_modulus_survives_matched_cutoffs'],
           })
           PY
-      - name: Upload danger modulus receipt
+      - name: Upload retained danger receipt
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ns-compact-gamma-danger-modulus
+          name: ns-compact-gamma-retained-danger
           path: |
-            ns-compact-gamma-danger-modulus.json
-            ns-compact-gamma-danger-modulus.log
+            ns-compact-gamma-retained-danger.json
+            ns-compact-gamma-retained-danger.log
           if-no-files-found: warn
 
   focused-agda:
@@ -139,7 +147,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: ns-compact-danger-modulus-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-      - name: Check buffered danger expenditure theorem
+      - name: Check danger expenditure theorems
         id: focused
         shell: bash
         run: |
@@ -149,10 +157,13 @@ jobs:
             export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
-            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-danger-modulus.log"
             export AGDA_JOBS=1
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-danger-modulus.log"
             scripts/run_agda29_parallel_check.sh \
               DASHI/Physics/Closure/NSCompactGammaBufferedDangerExpenditure.agda
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-retained-danger.log"
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Physics/Closure/NSCompactGammaRetainedDangerExpenditure.agda
           ) > agda-compact-danger-modulus.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
