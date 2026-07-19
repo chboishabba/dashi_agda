@@ -9,6 +9,7 @@ module DASHI.Analysis.EisensteinTuringModeAnalogyBoundary where
 --   * symmetry-orbit summation in a modular/lattice carrier.
 -- No mathematical identity between those mechanisms is asserted.
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Biology.TuringPatternRegimeSurface using
   ( TuringPatternFamily )
 open import DASHI.Cognition.ModeGeometrySurface using
@@ -56,5 +57,3 @@ record EisensteinTuringAnalogyBoundary : Set₁ where
     distinctGenerationMechanisms : Set
     noSeriesEqualsReactionDiffusionClaim : Set
     noArithmeticDeterminesPerceptClaim : Set
-
-open import Agda.Builtin.Equality using (_≡_)
