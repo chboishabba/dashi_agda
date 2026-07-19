@@ -20,12 +20,26 @@ record RiemannExplicitFormula (space : WeilTestSpace) : Set₁ where
     arithmeticForm : Test → Scalar
     spectralZeroForm : Test → Scalar
 
-    primePowerTermDefined : (f : Test) → admissible f → Set
-    archimedeanGammaTermDefined : (f : Test) → admissible f → Set
-    poleTermDefined : (f : Test) → admissible f → Set
-    trivialZeroTermDefined : (f : Test) → admissible f → Set
-    spectralZeroSumDefined : (f : Test) → admissible f → Set
-    sumIntegralInterchangesJustified : (f : Test) → admissible f → Set
+    PrimePowerTermDefined : Test → Set
+    ArchimedeanGammaTermDefined : Test → Set
+    PoleTermDefined : Test → Set
+    TrivialZeroTermDefined : Test → Set
+    SpectralZeroSumDefined : Test → Set
+    SumIntegralInterchangesJustified : Test → Set
+
+    primePowerTermDefined :
+      (f : Test) → admissible f → PrimePowerTermDefined f
+    archimedeanGammaTermDefined :
+      (f : Test) → admissible f → ArchimedeanGammaTermDefined f
+    poleTermDefined :
+      (f : Test) → admissible f → PoleTermDefined f
+    trivialZeroTermDefined :
+      (f : Test) → admissible f → TrivialZeroTermDefined f
+    spectralZeroSumDefined :
+      (f : Test) → admissible f → SpectralZeroSumDefined f
+    sumIntegralInterchangesJustified :
+      (f : Test) → admissible f →
+      SumIntegralInterchangesJustified f
 
     arithmeticDecomposition :
       (f : Test) → admissible f →
