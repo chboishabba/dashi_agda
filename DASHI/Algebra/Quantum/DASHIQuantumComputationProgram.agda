@@ -6,14 +6,16 @@ open import DASHI.Algebra.Quantum.DASHIQuantumBridge public
 open import DASHI.Algebra.Quantum.DASHIHybridExecution public
 open import DASHI.Algebra.Quantum.DASHIStructuredStateCompression public
 open import DASHI.Algebra.Quantum.DASHIQuantumNormalForm public
-open import DASHI.Algebra.Quantum.FiniteQuantumRegister public
-open import DASHI.Algebra.Quantum.QuantumFourierTransformFinite public
-open import DASHI.Algebra.Quantum.GeneralShor public
+
+import DASHI.Algebra.Quantum.FiniteQuantumRegister
+import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
+import DASHI.Algebra.Quantum.GeneralShor
 
 ------------------------------------------------------------------------
 -- Four original research lanes, matching the DASHI quantum-computation
--- programme. The finite-register/QFT/general-Shor surfaces are exported above
--- without changing the existing programme record or its downstream instances.
+-- programme. The finite-register/QFT/general-Shor modules are integrated as
+-- qualified dependencies without changing the existing programme record or
+-- re-exporting projections that collide with the wave bridge.
 ------------------------------------------------------------------------
 
 data QuantumResearchLane : Set where
