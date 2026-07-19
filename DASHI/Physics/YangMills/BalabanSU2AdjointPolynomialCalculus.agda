@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.BalabanSU2AdjointPolynomialCalculus where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Algebra.Bundles using (CommutativeRing)
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -22,8 +23,14 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( _*R_
   ; zeroʳ
   ; realSolverRing
+  ; realCommutativeRing
   )
 import Tactic.RingSolver as Solver
+
+private
+  module RealRing = CommutativeRing realCommutativeRing
+
+open RealRing using (distribˡ)
 
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ( SU2LieAlgebra
@@ -48,9 +55,9 @@ lieScaleAdd scalar
   (su2Lie x₁ y₁ z₁)
   (su2Lie x₂ y₂ z₂) =
   su2LieExt
-    (Solver.solve (scalar ∷ x₁ ∷ x₂ ∷ []) realSolverRing)
-    (Solver.solve (scalar ∷ y₁ ∷ y₂ ∷ []) realSolverRing)
-    (Solver.solve (scalar ∷ z₁ ∷ z₂ ∷ []) realSolverRing)
+    (distribˡ scalar x₁ x₂)
+    (distribˡ scalar y₁ y₂)
+    (distribˡ scalar z₁ z₂)
 
 lieScaleCompose :
   ∀ a b X →
