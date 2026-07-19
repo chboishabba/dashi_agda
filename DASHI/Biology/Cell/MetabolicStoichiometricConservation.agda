@@ -86,10 +86,10 @@ metabolicReactionPathConserves :
     (runMetabolicReactionPath B reactions state)
     ≡ SC.quantity (stoichiometry B) state
 metabolicReactionPathConserves B [] state = refl
-metabolicReactionPathConserves B (reaction ∷ reactions) state =
+metabolicReactionPathConserves {N} B (reaction ∷ reactions) state =
   trans
     (metabolicReactionPathConserves B reactions
-      (OMN.OpenMetabolicNetwork.step _ (environment B) reaction state))
+      (OMN.OpenMetabolicNetwork.step N (environment B) reaction state))
     (metabolicReactionConserves B reaction state)
 
 record MetabolicStoichiometricCertificate
