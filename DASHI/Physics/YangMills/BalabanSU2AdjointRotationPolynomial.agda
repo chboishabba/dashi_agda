@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanSU2AdjointRotationPolynomial where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   (module RealPolynomialSolver; oneCoefficient)
