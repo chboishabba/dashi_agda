@@ -2,7 +2,7 @@ module DASHI.Geometry.SeaMeInItGovernedPipeline where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Governance.GovernedArtifactCore
@@ -67,10 +67,10 @@ open MultiViewObservation public
 record JointImageCandidate : Set where
   constructor jointImageCandidate
   field
-    observation       : MultiViewObservation
-    imageBetaHash     : Hash
-    reprojectionHash  : Hash
-    candidateBody     : BodyState
+    observation      : MultiViewObservation
+    imageBetaHash    : Hash
+    reprojectionHash : Hash
+    candidateBody    : BodyState
 
 open JointImageCandidate public
 
@@ -101,17 +101,17 @@ open RefinementPolicy public
 record RefinementEvidence : Set where
   constructor refinementEvidence
   field
-    anchorBetaHash        : Hash
-    candidateBetaHash     : Hash
-    anchorResidual        : Nat
-    candidateResidual     : Nat
-    residualDelta         : Nat
-    betaShift             : Nat
-    priorCost             : Nat
-    anchorCost            : Nat
-    activeBoundCount      : Nat
-    boundedOutputFinite   : Bool
-    topologyFinite        : Bool
+    anchorBetaHash      : Hash
+    candidateBetaHash   : Hash
+    anchorResidual      : Nat
+    candidateResidual   : Nat
+    residualDelta       : Nat
+    betaShift           : Nat
+    priorCost           : Nat
+    anchorCost          : Nat
+    activeBoundCount    : Nat
+    boundedOutputFinite : Bool
+    topologyFinite      : Bool
 
 open RefinementEvidence public
 
@@ -129,12 +129,10 @@ selectedPreRepairFor promote = refinedCandidate
 selectedPreRepairFor abstain = rawImageFit
 selectedPreRepairFor reject  = rawImageFit
 
-abstainedRefinementKeepsRaw :
-  selectedPreRepairFor abstain ≡ rawImageFit
+abstainedRefinementKeepsRaw : selectedPreRepairFor abstain ≡ rawImageFit
 abstainedRefinementKeepsRaw = refl
 
-rejectedRefinementKeepsRaw :
-  selectedPreRepairFor reject ≡ rawImageFit
+rejectedRefinementKeepsRaw : selectedPreRepairFor reject ≡ rawImageFit
 rejectedRefinementKeepsRaw = refl
 
 promotedRefinementSelectsCandidate :
@@ -159,42 +157,43 @@ open TopologyEvidence public
 record FinalExportEvidence : Set where
   constructor finalExportEvidence
   field
-    topology             : TopologyEvidence
-    skullResidual        : Nat
-    landmarkResidual     : Nat
+    topology              : TopologyEvidence
+    skullResidual         : Nat
+    landmarkResidual      : Nat
     repairRmsDisplacement : Nat
     repairMaxDisplacement : Nat
-    bodyFitConfidence    : Nat
+    bodyFitConfidence     : Nat
 
 open FinalExportEvidence public
 
 record BodyCarrierReceiptV2 : Set where
   constructor bodyCarrierReceiptV2
   field
-    sourceHash                  : Hash
-    refinementReceiptHash       : Hash
-    refinementDecision          : Decision
-    rawReprojectionHash         : Hash
-    refinedPreRepairHash        : Hash
-    selectedPreRepairHash       : Hash
-    repairedExportHash          : Hash
-    canonicalSource             : CanonicalSource
-    canonicalSourceCorrect      : canonicalSource ≡ canonicalSourceFor refinementDecision
-    selectedCheckpoint          : BodyState
-    selectedCheckpointCorrect   : selectedCheckpoint ≡ selectedPreRepairFor refinementDecision
-    rawTopology                 : TopologyEvidence
-    refinedPreRepairTopology    : TopologyEvidence
-    finalExportEvidence         : FinalExportEvidence
-    diagnosticSeverity          : DiagnosticSeverity
-    retainedWarnings            : List GateWarning
-    bodyBlockers                : List GateBlocker
-    bodyDecision                : Decision
-    blockedConsumers            : List Consumer
-    receiptHash                 : Hash
+    sourceHash                : Hash
+    refinementReceiptHash     : Hash
+    refinementDecision        : Decision
+    rawReprojectionHash       : Hash
+    refinedPreRepairHash      : Hash
+    selectedPreRepairHash     : Hash
+    repairedExportHash        : Hash
+    canonicalSource           : CanonicalSource
+    canonicalSourceCorrect    :
+      canonicalSource ≡ canonicalSourceFor refinementDecision
+    selectedCheckpoint        : BodyState
+    selectedCheckpointCorrect :
+      selectedCheckpoint ≡ selectedPreRepairFor refinementDecision
+    rawTopology               : TopologyEvidence
+    refinedPreRepairTopology  : TopologyEvidence
+    finalExportEvidence       : FinalExportEvidence
+    diagnosticSeverity        : DiagnosticSeverity
+    retainedWarnings          : List GateWarning
+    bodyBlockers              : List GateBlocker
+    bodyDecision              : Decision
+    blockedConsumers          : List Consumer
+    bodyCarrierReceiptHash    : Hash
 
 open BodyCarrierReceiptV2 public
 
--- Refinement and body authorization are independent axes.
 record IndependentGate0Decisions : Set where
   constructor independentGate0Decisions
   field
@@ -236,20 +235,20 @@ data PipelineStage : Set where
 record StageArtifact : Set where
   constructor stageArtifact
   field
-    stage        : PipelineStage
-    artifactHash : Hash
-    receiptHash  : Hash
+    stage             : PipelineStage
+    stageArtifactHash : Hash
+    stageReceiptHash  : Hash
 
 open StageArtifact public
 
 record StageEdge : Set where
   constructor stageEdge
   field
-    parent : StageArtifact
-    child  : StageArtifact
+    parent                    : StageArtifact
+    child                     : StageArtifact
+    parentReceiptHash         : Hash
     childConsumesParentReceipt :
-      receiptHash parent ≡ parentReceiptHash
-    parentReceiptHash : Hash
+      stageReceiptHash parent ≡ parentReceiptHash
 
 open StageEdge public
 
@@ -259,12 +258,12 @@ open StageEdge public
 record DiagnosticDeltaComposition : Set where
   constructor diagnosticDeltaComposition
   field
-    originalMetricHash : Hash
-    firstOperatorDeltaHash : Hash
+    originalMetricHash      : Hash
+    firstOperatorDeltaHash  : Hash
     secondOperatorDeltaHash : Hash
     sequentiallyMaterialized : Bool
-    orderedSearch             : Bool
-    sameFamilyRepetition      : Bool
+    orderedSearch            : Bool
+    sameFamilyRepetition     : Bool
 
 open DiagnosticDeltaComposition public
 
@@ -295,10 +294,10 @@ data PanelOperator : Set where
 record PanelState : Set where
   constructor panelState
   field
-    geometryHash     : Hash
-    topologyHash     : Hash
-    seamHash         : Hash
-    uvHash           : Hash
+    geometryHash      : Hash
+    topologyHash      : Hash
+    seamHash          : Hash
+    uvHash            : Hash
     residualFieldHash : Hash
     backendMetricHash : Hash
 
@@ -307,15 +306,15 @@ open PanelState public
 record PanelEvidence : Set where
   constructor panelEvidence
   field
-    faceConservation      : Bool
-    topologyValid         : Bool
-    geometryFinite        : Bool
-    backendRerun          : Bool
-    residualsRecomputed   : Bool
+    faceConservation             : Bool
+    topologyValid                : Bool
+    geometryFinite               : Bool
+    backendRerun                 : Bool
+    residualsRecomputed          : Bool
     admissibleOperatorsRecomputed : Bool
-    foldoverCount         : Nat
-    worstDistortion       : Nat
-    chartCount            : Nat
+    foldoverCount                : Nat
+    worstDistortion              : Nat
+    chartCount                   : Nat
 
 open PanelEvidence public
 
@@ -329,7 +328,7 @@ record OrderedMaterializedPair : Set where
     secondTransition : PanelTransition
     secondConsumesFirstChild :
       parentStateHash secondTransition ≡ childStateHash firstTransition
-    firstActuallyMaterialized : Bool
+    firstActuallyMaterialized  : Bool
     secondActuallyMaterialized : Bool
 
 open OrderedMaterializedPair public
@@ -341,7 +340,7 @@ record Gate6SearchReceiptV2 : Set₁ where
     initialPanelState : PanelState
     transitions       : List PanelTransition
     boundedConclusion : BoundedNoPromotion Hash searchPolicy
-    receiptHash       : Hash
+    gate6ReceiptHash  : Hash
 
 open Gate6SearchReceiptV2 public
 
@@ -359,8 +358,8 @@ data FailureClass : Set where
 record FailureDiagnosis : Set where
   constructor failureDiagnosis
   field
-    classifications : List FailureClass
-    evidenceHash    : Hash
+    classifications      : List FailureClass
+    evidenceHash         : Hash
     diagnosisReceiptHash : Hash
 
 open FailureDiagnosis public
@@ -376,7 +375,6 @@ record BT369SerializerIndication : Set where
 
 open BT369SerializerIndication public
 
--- BT369 is not automatically selected by a failed bounded search.
 automaticBT369Promotion : Bool
 automaticBT369Promotion = false
 
