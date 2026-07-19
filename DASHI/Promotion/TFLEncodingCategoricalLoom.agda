@@ -5,78 +5,33 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Core.ProjectionCategory as PC
-import DASHI.Core.ProjectionHomology as PH
 import DASHI.Core.GrammarGeneratedCategory as GGC
 import DASHI.Core.ProjectionConstructor as PCON
+import DASHI.Core.ProjectionFibre as PF
+import DASHI.Core.LoomEncoding as LE
 
 ----------------------------------------------------------------------
--- TensorFlow Lattice: grammar-generated projection category.
+-- TensorFlow Lattice: grammar-generated constrained projection category.
 --
--- Grammar Γ_TFL generates the admissible constrained predictor class.
--- Training selects a morphism inside the category, not the category
--- itself.
---
---   Γ_TFL = lattice/constraint grammar:
---     { feature calibrators
---     , calibration knots
---     , lattice graph / lattice resolution
---     , interpolation rule
---     , monotonicity constraints
---     , convexity constraints
---     , trust constraints
---     , interaction constraints
---     , regularisers
---     , ensemble wiring
---     , output calibration
---     }
---
--- Objects of 𝓟_TFL:
---   RawFeatureCarrier       : the input feature space
---   CalibratedFeatureSurface: per-feature calibrated space
---   LatticeCellSurface      : the lattice interpolation space
---   InterpolatedSurface     : the continuous interpolated space
---   PredictionSurface       : the raw prediction space
---   OutputCalibratedSurface : the final calibrated output space
---
--- Morphisms (one per pipeline stage):
---   calibrate          : RawFeatureCarrier → CalibratedFeatureSurface
---   latticeInterpolate : CalibratedFeatureSurface → LatticeCellSurface
---   constrainedPredict : LatticeCellSurface → PredictionSurface
---   outputCalibrate    : PredictionSurface → OutputCalibratedSurface
---
--- Learned predictor f = outputCalibrate ∘ constrainedPredict
---                       ∘ latticeInterpolate ∘ calibrate.
---   f : RawFeatureCarrier → OutputCalibratedSurface
---   Γ_TFL ⊢ f admissible
---     meaning f respects monotonicity, calibration, trust, etc.
---
--- Fibre: f⁻¹(y) = { x | f(x) = y }
---   TFL loom = weave encoding of fibres, and how they deform
---   under lattice refinement, calibration changes, or constraint
---   changes.
---
--- Homology: which prediction/fibre structures persist across
---   admissible grammar changes?
+-- Γ_TFL generates the admissible constrained predictor class. Training
+-- selects a morphism inside that category.  The fibre and loom are
+-- concrete dependent structures over the learned composite predictor.
 ----------------------------------------------------------------------
-
--- Objects of the TFL projection category
 
 data TFLObj : Set where
-  rawFeature          : TFLObj
-  calibratedFeature   : TFLObj
-  latticeCell         : TFLObj
-  interpolated        : TFLObj
-  prediction          : TFLObj
-  outputCalibrated    : TFLObj
-
--- The feature and prediction carriers are abstract sets
+  rawFeature        : TFLObj
+  calibratedFeature : TFLObj
+  latticeCell       : TFLObj
+  interpolated      : TFLObj
+  prediction        : TFLObj
+  outputCalibrated  : TFLObj
 
 postulate
-  FeatureCarrier        : Set
-  CalibratedCarrier     : Set
-  LatticeCellCarrier    : Set
-  InterpolatedCarrier   : Set
-  PredictionCarrier     : Set
+  FeatureCarrier          : Set
+  CalibratedCarrier       : Set
+  LatticeCellCarrier      : Set
+  InterpolatedCarrier     : Set
+  PredictionCarrier       : Set
   OutputCalibratedCarrier : Set
 
 Underlying : TFLObj → Set
@@ -87,41 +42,36 @@ Underlying interpolated      = InterpolatedCarrier
 Underlying prediction        = PredictionCarrier
 Underlying outputCalibrated  = OutputCalibratedCarrier
 
--- The TFL constraint grammar (Γ_TFL)
-
 record TFLGrammar : Set where
   field
-    calibratorCount        : ⊤
-    knotCount              : ⊤
-    latticeResolution      : ⊤
-    interpolationRule      : ⊤
+    calibratorCount         : ⊤
+    knotCount               : ⊤
+    latticeResolution       : ⊤
+    interpolationRule       : ⊤
     monotonicityConstraints : ⊤
-    convexityConstraints   : ⊤
-    trustConstraints       : ⊤
-    interactionConstraints : ⊤
-    regulariserWeights     : ⊤
-    ensembleWiring         : ⊤
-    outputCalibrationSpec  : ⊤
-    grammarReading         : String
+    convexityConstraints    : ⊤
+    trustConstraints        : ⊤
+    interactionConstraints  : ⊤
+    regulariserWeights      : ⊤
+    ensembleWiring          : ⊤
+    outputCalibrationSpec   : ⊤
+    grammarReading          : String
 
 canonicalTFLGrammar : TFLGrammar
 canonicalTFLGrammar = record
-  { calibratorCount        = tt
-  ; knotCount              = tt
-  ; latticeResolution      = tt
-  ; interpolationRule      = tt
+  { calibratorCount         = tt
+  ; knotCount               = tt
+  ; latticeResolution       = tt
+  ; interpolationRule       = tt
   ; monotonicityConstraints = tt
-  ; convexityConstraints   = tt
-  ; trustConstraints       = tt
-  ; interactionConstraints = tt
-  ; regulariserWeights     = tt
-  ; ensembleWiring         = tt
-  ; outputCalibrationSpec  = tt
-  ; grammarReading         = "Gamma_TFL (canonical lattice grammar)"
+  ; convexityConstraints    = tt
+  ; trustConstraints        = tt
+  ; interactionConstraints  = tt
+  ; regulariserWeights      = tt
+  ; ensembleWiring          = tt
+  ; outputCalibrationSpec   = tt
+  ; grammarReading          = "Gamma_TFL (canonical lattice grammar)"
   }
-
--- The projection category: objects are TFL pipeline stages,
--- morphisms are admissible constrained maps between carriers
 
 tflProjectionCategory : PC.ProjectionCategory
 tflProjectionCategory = record
@@ -135,10 +85,6 @@ tflProjectionCategory = record
   ; categoryReading = "Pi_TFL(admissible constrained predictors)"
   }
 
--- Grammar-generated category: Γ_TFL ↦ 𝓟_TFL.
--- Each grammar instance generates the same category structure;
--- the grammar selects which morphisms are admissible.
-
 tflGrammarCategory : GGC.GrammarGeneratedCategory
 tflGrammarCategory = record
   { Grammar        = TFLGrammar
@@ -146,32 +92,14 @@ tflGrammarCategory = record
   ; grammarReading = "Gamma_TFL = lattice/constraint grammar"
   }
 
-----------------------------------------------------------------------
--- The four pipeline morphisms (postulated, selected by grammar)
-----------------------------------------------------------------------
-
 postulate
   calibrate          : (Γ : TFLGrammar) → FeatureCarrier → CalibratedCarrier
   latticeInterpolate : (Γ : TFLGrammar) → CalibratedCarrier → LatticeCellCarrier
   constrainedPredict : (Γ : TFLGrammar) → LatticeCellCarrier → PredictionCarrier
   outputCalibrate    : (Γ : TFLGrammar) → PredictionCarrier → OutputCalibratedCarrier
 
--- Composite predictor: f = outputCalibrate ∘ constrainedPredict
---                       ∘ latticeInterpolate ∘ calibrate
-
 fPredict : (Γ : TFLGrammar) → FeatureCarrier → OutputCalibratedCarrier
 fPredict Γ x = outputCalibrate Γ (constrainedPredict Γ (latticeInterpolate Γ (calibrate Γ x)))
-
-----------------------------------------------------------------------
--- Fibre of a TFL predictor: f⁻¹(y) = { x | f(x) = y }
-----------------------------------------------------------------------
-
-fibreOverPrediction : (Γ : TFLGrammar) (y : OutputCalibratedCarrier) → Set
-fibreOverPrediction Γ y = ⊤
-
-----------------------------------------------------------------------
--- Default carrier values for unused morphism branches
-----------------------------------------------------------------------
 
 postulate
   defaultFeature          : FeatureCarrier
@@ -190,23 +118,61 @@ defaultUnderlying prediction        = defaultPrediction
 defaultUnderlying outputCalibrated  = defaultOutputCalibrated
 
 ----------------------------------------------------------------------
--- Constructor: TFL training selects a predictor morphism inside the
--- category
+-- Concrete dependent prediction fibre.
 ----------------------------------------------------------------------
 
-constructTFL : {A B : TFLObj} (Γ : TFLGrammar)
-            → (Underlying A → Underlying B)
-constructTFL {rawFeature} {calibratedFeature} Γ = calibrate Γ
-constructTFL {rawFeature} {latticeCell} Γ       = λ x → latticeInterpolate Γ (calibrate Γ x)
-constructTFL {rawFeature} {prediction} Γ        = λ x → constrainedPredict Γ (latticeInterpolate Γ (calibrate Γ x))
-constructTFL {rawFeature} {outputCalibrated} Γ  = fPredict Γ
-constructTFL {calibratedFeature} {latticeCell} Γ  = latticeInterpolate Γ
-constructTFL {calibratedFeature} {prediction} Γ   = λ x → constrainedPredict Γ (latticeInterpolate Γ x)
-constructTFL {calibratedFeature} {outputCalibrated} Γ = λ x → outputCalibrate Γ (constrainedPredict Γ (latticeInterpolate Γ x))
-constructTFL {latticeCell} {prediction} Γ          = constrainedPredict Γ
-constructTFL {latticeCell} {outputCalibrated} Γ    = λ x → outputCalibrate Γ (constrainedPredict Γ x)
-constructTFL {prediction} {outputCalibrated} Γ     = outputCalibrate Γ
-constructTFL {A} {B} Γ = λ _ → defaultUnderlying B
+tflProjectionFibre : (Γ : TFLGrammar) → PF.ProjectionFibre tflProjectionCategory
+tflProjectionFibre Γ = record
+  { Underlying   = Underlying
+  ; Carrier      = rawFeature
+  ; Observable   = outputCalibrated
+  ; π            = fPredict Γ
+  ; apply        = λ f x → f x
+  ; fibreReading = "TFL prediction fibre: dependent preimage of the constrained predictor"
+  }
+
+fibreOverPrediction : (Γ : TFLGrammar) (y : OutputCalibratedCarrier) → Set
+fibreOverPrediction Γ y = PF.Fibre (tflProjectionFibre Γ) y
+
+----------------------------------------------------------------------
+-- Concrete TFL loom.
+--
+-- Strands are feature vectors.  Weaves are feature transformations.  A
+-- closed residual means two feature transformations remain equivalent
+-- after the complete constrained/calibrated predictor.
+----------------------------------------------------------------------
+
+tflLoomEncoding : (Γ : TFLGrammar) →
+  LE.LoomEncoding tflProjectionCategory (tflProjectionFibre Γ)
+tflLoomEncoding Γ = record
+  { Strand            = FeatureCarrier
+  ; Weave             = FeatureCarrier → FeatureCarrier
+  ; weaveId           = λ x _ → x
+  ; weaveSeq          = λ g f x → g (f x)
+  ; ProjectionSurface = OutputCalibratedCarrier
+  ; project           = fPredict Γ
+  ; fibreEquivalent   = λ x y → fPredict Γ x ≡ fPredict Γ y
+  ; residual          = λ f g → ∀ x → fPredict Γ (f x) ≡ fPredict Γ (g x)
+  ; closed            = λ f g → ∀ x → fPredict Γ (f x) ≡ fPredict Γ (g x)
+  ; loomReading       = "TFL loom: feature transformations compared by constrained prediction-fibre preservation"
+  }
+
+----------------------------------------------------------------------
+-- Constructor: TFL training selects an admissible predictor morphism.
+----------------------------------------------------------------------
+
+constructTFL : {A B : TFLObj} (Γ : TFLGrammar) → Underlying A → Underlying B
+constructTFL {rawFeature} {calibratedFeature} Γ       = calibrate Γ
+constructTFL {rawFeature} {latticeCell} Γ             = λ x → latticeInterpolate Γ (calibrate Γ x)
+constructTFL {rawFeature} {prediction} Γ              = λ x → constrainedPredict Γ (latticeInterpolate Γ (calibrate Γ x))
+constructTFL {rawFeature} {outputCalibrated} Γ         = fPredict Γ
+constructTFL {calibratedFeature} {latticeCell} Γ       = latticeInterpolate Γ
+constructTFL {calibratedFeature} {prediction} Γ        = λ x → constrainedPredict Γ (latticeInterpolate Γ x)
+constructTFL {calibratedFeature} {outputCalibrated} Γ  = λ x → outputCalibrate Γ (constrainedPredict Γ (latticeInterpolate Γ x))
+constructTFL {latticeCell} {prediction} Γ              = constrainedPredict Γ
+constructTFL {latticeCell} {outputCalibrated} Γ        = λ x → outputCalibrate Γ (constrainedPredict Γ x)
+constructTFL {prediction} {outputCalibrated} Γ         = outputCalibrate Γ
+constructTFL {A} {B} Γ                                 = λ _ → defaultUnderlying B
 
 tflConstructor : PCON.ProjectionConstructor tflProjectionCategory
 tflConstructor = record
