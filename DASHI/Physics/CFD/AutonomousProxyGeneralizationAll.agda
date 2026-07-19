@@ -1,0 +1,4 @@
+module DASHI.Physics.CFD.AutonomousProxyGeneralizationAll where
+
+import DASHI.Physics.CFD.AutonomousProxyGeneralization
+import DASHI.Physics.CFD.AutonomousProxyGeneralizationInstance
