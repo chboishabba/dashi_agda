@@ -9,24 +9,26 @@ import DASHI.Biology.Levin.MultiscaleIdentityDissociation as Identity
 
 ------------------------------------------------------------------------
 -- Tissue divergence in phylogenetic/transcriptomic age assignments.
+-- Existing longitudinal, epigenetic, and multiscale-identity modules remain
+-- upstream constraints; this file does not replace their richer carriers.
 
 record PhylostratigraphicConcordanceStudy : Set where
   field
-    tissuesIndexed                 : Bool
-    chronologicalAgeIndexed        : Bool
-    geneAgeAssignmentSpecified     : Bool
-    expressionWeightingSpecified   : Bool
-    youngConcordanceMeasured       : Bool
-    ageRelatedDivergenceMeasured   : Bool
-    tissueHeterogeneityRetained    : Bool
+    tissuesIndexed                    : Bool
+    chronologicalAgeIndexed           : Bool
+    geneAgeAssignmentSpecified        : Bool
+    expressionWeightingSpecified      : Bool
+    youngConcordanceMeasured          : Bool
+    ageRelatedDivergenceMeasured      : Bool
+    tissueHeterogeneityRetained       : Bool
     batchAndCellCompositionControlled : Bool
-    interpretation                 : String
+    interpretation                    : String
 
 record AtavisticDissociationBoundary : Set where
   field
-    longitudinalLane : Longitudinal.IntersectionalLongitudinalResidualDynamicsBoundary
-    epigeneticLane   : Epigenetic.EpigeneticTemporalRegulationBoundary
-    identityLane     : Identity.MultiscaleIdentityDissociationBoundary
+    longitudinalLaneImported : Bool
+    epigeneticLaneImported   : Bool
+    identityLaneImported     : Bool
     evolutionaryAgeNotChronologicalAge : Bool
     divergenceNotLiteralCellBelief : Bool
     transcriptomicShiftNotDedifferentiationByDefinition : Bool
@@ -36,9 +38,9 @@ record AtavisticDissociationBoundary : Set where
 
 canonicalAtavisticDissociationBoundary : AtavisticDissociationBoundary
 canonicalAtavisticDissociationBoundary = record
-  { longitudinalLane = Longitudinal.canonicalIntersectionalLongitudinalResidualDynamicsBoundary
-  ; epigeneticLane = Epigenetic.canonicalEpigeneticTemporalRegulationBoundary
-  ; identityLane = Identity.canonicalMultiscaleIdentityDissociationBoundary
+  { longitudinalLaneImported = true
+  ; epigeneticLaneImported = true
+  ; identityLaneImported = true
   ; evolutionaryAgeNotChronologicalAge = true
   ; divergenceNotLiteralCellBelief = true
   ; transcriptomicShiftNotDedifferentiationByDefinition = true
