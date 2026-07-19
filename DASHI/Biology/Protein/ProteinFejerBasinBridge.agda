@@ -105,9 +105,9 @@ proteinStepStaysInBasin :
       (sequence B)
       (environment B)
       x)
-proteinStepStaysInBasin B x inBasin =
+proteinStepStaysInBasin {P = P} B x inBasin =
   subst
-    (PCA.ProteinConformationSystem.InBasin _ (attractor B))
+    (PCA.ProteinConformationSystem.InBasin P (attractor B))
     (transitionMatchesProteinStep B x)
     (fejerTransitionStaysInBasin B x inBasin)
 
@@ -133,9 +133,9 @@ proteinIteratesStayInBasin :
     (attractor B)
     (iterateProteinStep P (sequence B) (environment B) n x)
 proteinIteratesStayInBasin B zero x inBasin = inBasin
-proteinIteratesStayInBasin B (suc n) x inBasin =
+proteinIteratesStayInBasin {P = P} B (suc n) x inBasin =
   proteinIteratesStayInBasin B n
-    (PCA.ProteinConformationSystem.step _ (sequence B) (environment B) x)
+    (PCA.ProteinConformationSystem.step P (sequence B) (environment B) x)
     (proteinStepStaysInBasin B x inBasin)
 
 proteinFejerAttractorWitness :
