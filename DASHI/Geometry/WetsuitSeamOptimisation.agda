@@ -1,0 +1,4 @@
+module DASHI.Geometry.WetsuitSeamOptimisation where
+
+import DASHI.Geometry.WetsuitSeamOptimisationBoundary
+import DASHI.Geometry.WetsuitSeamOptimisationRegression
