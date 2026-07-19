@@ -1,20 +1,20 @@
 module DASHI.Biology.Protein.ProteinRecoveryBoundary where
 
-open import DASHI.Biology.Protein.TranslationContext
-open import DASHI.Biology.Protein.ProteinConformationAttractor
-open import DASHI.Biology.Protein.ProteinDiameterLocalityControl
-open import DASHI.Biology.Protein.ProteinFunctionProjection
-open import DASHI.Biology.Protein.PrionAmyloidIntegrationBoundary
+import DASHI.Biology.Protein.TranslationContext as Translation
+import DASHI.Biology.Protein.ProteinConformationAttractor as Conformation
+import DASHI.Biology.Protein.ProteinDiameterLocalityControl as Geometry
+import DASHI.Biology.Protein.ProteinFunctionProjection as Function
+import DASHI.Biology.Protein.PrionAmyloidIntegrationBoundary as Prion
 
 record ProteinRecoveryBoundary : Set₁ where
   field
-    translationContext : TranslationContext
-    translationSystem  : TranslationSystem translationContext
-    conformationSystem : ProteinConformationSystem
-    profileGeometry    : ProteinProfileGeometry
-    localityControl    : ProteinLocalityControl profileGeometry
-    functionSystem     : ProteinFunctionSystem
-    prionBoundary      : PrionAmyloidIntegrationBoundary
+    translationContext : Translation.TranslationContext
+    translationSystem  : Translation.TranslationSystem translationContext
+    conformationSystem : Conformation.ProteinConformationSystem
+    profileGeometry    : Geometry.ProteinProfileGeometry
+    localityControl    : Geometry.ProteinLocalityControl profileGeometry
+    functionSystem     : Function.ProteinFunctionSystem
+    prionBoundary      : Prion.PrionAmyloidIntegrationBoundary
 
     MolecularToSequence : Set
     SequenceToConformationalEnsemble : Set
