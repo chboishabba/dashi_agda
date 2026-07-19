@@ -22,7 +22,7 @@ record AppetiteSignalRoute : Set where
 record MicrobiomeHostAppetiteBoundary : Set where
   field
     problemSpaceBoundary : Problem.ProblemSpaceAgencyBoundary
-    autonomyBoundary : Autonomy.AutonomyBoundary
+    autonomyBoundary : Autonomy.ConstitutiveInteractiveAutonomyBoundary
     consortiumBoundary : Consortium.ElectrochemicalBodyConsortiumBoundary
     signallingIsBidirectional : Bool
     microbialMetabolitesMayAlterAppetite : Bool
@@ -35,7 +35,7 @@ record MicrobiomeHostAppetiteBoundary : Set where
 canonicalMicrobiomeHostAppetiteBoundary : MicrobiomeHostAppetiteBoundary
 canonicalMicrobiomeHostAppetiteBoundary = record
   { problemSpaceBoundary = Problem.canonicalProblemSpaceAgencyBoundary
-  ; autonomyBoundary = Autonomy.canonicalAutonomyBoundary
+  ; autonomyBoundary = Autonomy.canonicalConstitutiveInteractiveAutonomyBoundary
   ; consortiumBoundary = Consortium.canonicalElectrochemicalBodyConsortiumBoundary
   ; signallingIsBidirectional = true
   ; microbialMetabolitesMayAlterAppetite = true
