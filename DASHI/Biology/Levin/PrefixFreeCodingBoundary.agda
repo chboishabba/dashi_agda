@@ -11,7 +11,7 @@ open import Agda.Builtin.String using (String)
 -- The Kraft surface is represented as an explicit witness rather than
 -- silently assumed.  This module does not claim an optimal code constructor.
 
-record BinaryCode {ℓ : Set} : Set₁ where
+record BinaryCode : Set₁ where
   field
     Symbol : Set
     codeLength : Symbol → Nat
