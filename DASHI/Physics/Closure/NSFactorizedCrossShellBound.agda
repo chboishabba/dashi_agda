@@ -122,7 +122,7 @@ factorizedEvidenceDischargesCrossShell :
     (E : NSFactorizedCrossShellEvidence M I) →
   NSFactorizedBudgetDischarge M I E →
   NSCrossShellCorrectionBound I
-factorizedEvidenceDischargesCrossShell M I E D = record
+factorizedEvidenceDischargesCrossShell {O = O} M I E D = record
   { correctionBound = λ x →
       subst
         (λ budget → _≤_ O (inner I x (crossCorrection I x)) budget)
