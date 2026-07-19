@@ -33,7 +33,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: culinary-qualitative-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-      - name: Check culinary formalism with pinned Agda 2.9
+      - name: Check focused cuisine aggregate with pinned Agda 2.9
         id: focused
         shell: bash
         run: |
@@ -43,18 +43,9 @@ jobs:
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-culinary-formalism.log"
-            export AGDA_JOBS=3
-            targets=(
-              DASHI/Culture/Cuisine/QualitativeSensoryCore.agda
-              DASHI/Culture/Cuisine/DishIdentityLineageCore.agda
-              DASHI/Culture/Cuisine/CompositionProvenanceCore.agda
-              DASHI/Culture/Cuisine/CuisineDataFlowCore.agda
-              DASHI/Culture/Cuisine/CulinaryMovementCore.agda
-              DASHI/Culture/Cuisine/CuisineFormalismBundle.agda
-              DASHI/Culture/Cuisine/CuisineFormalismTests.agda
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
               DASHI/Culture/Cuisine/Everything.agda
-            )
-            scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-culinary-formalism.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
