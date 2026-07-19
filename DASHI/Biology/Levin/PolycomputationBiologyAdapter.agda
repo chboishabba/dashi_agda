@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.Levin.LevinBioelectricAgencyCore as Levin
-import DASHI.Biology.ExistingBiologyPhysicalStateAdapter as Existing
+import DASHI.Biology.Levin.ExistingBiologyPhysicalStateAdapter as Existing
 
 record PhysicalComputationInterpretation : Set where
   field
