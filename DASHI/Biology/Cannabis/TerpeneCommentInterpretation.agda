@@ -1,53 +1,78 @@
 module DASHI.Biology.Cannabis.TerpeneCommentInterpretation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import DASHI.Biology.Cannabis.TerpeneClusterPromotionBoundary
 
--- The comments raise useful objections, but they occupy different evidential
--- roles.  This module records those roles without promoting the comments
--- themselves into biological or clinical facts.
-data CommentRole : Set where
-  label-critique
+-- The discussion contains several distinct claims.  They must not be merged
+-- into one undifferentiated pro- or anti-terpene position.
+data CommentClaim : Set where
+  historical-taxonomy-claim
+  genomic-similarity-claim
+  label-predictiveness-critique
   correlation-warning
-  causal-question
-  unsupported-overstatement : CommentRole
+  terpene-causality-denial
+  medicinal-effect-question : CommentClaim
+
+data SourceObligation : Set where
+  historical-source-required
+  genomic-study-required
+  classification-study-required
+  methodological-guard-only
+  mechanistic-experiment-required
+  controlled-outcome-study-required : SourceObligation
+
+obligation : CommentClaim → SourceObligation
+obligation historical-taxonomy-claim      = historical-source-required
+obligation genomic-similarity-claim       = genomic-study-required
+obligation label-predictiveness-critique  = classification-study-required
+obligation correlation-warning            = methodological-guard-only
+obligation terpene-causality-denial        = mechanistic-experiment-required
+obligation medicinal-effect-question      = controlled-outcome-study-required
 
 data ClaimAuthority : Set where
   framing-only
-  observational-candidate
+  source-bound-candidate
   experiment-required
-  blocked : ClaimAuthority
+  blocked-without-source : ClaimAuthority
 
-authority : CommentRole → ClaimAuthority
-authority label-critique             = framing-only
-authority correlation-warning        = framing-only
-authority causal-question            = experiment-required
-authority unsupported-overstatement  = blocked
+authority : CommentClaim → ClaimAuthority
+authority historical-taxonomy-claim      = source-bound-candidate
+authority genomic-similarity-claim       = source-bound-candidate
+authority label-predictiveness-critique  = source-bound-candidate
+authority correlation-warning            = framing-only
+authority terpene-causality-denial        = experiment-required
+authority medicinal-effect-question      = experiment-required
 
-label-comment-is-not-genomic-proof :
-  authority label-critique ≡ framing-only
-label-comment-is-not-genomic-proof = refl
-
-correlation-comment-is-a-guard :
+correlation-warning-is-guard-not-proof :
   authority correlation-warning ≡ framing-only
-correlation-comment-is-a-guard = refl
+correlation-warning-is-guard-not-proof = refl
 
-clinical-question-needs-experiment :
-  authority causal-question ≡ experiment-required
-clinical-question-needs-experiment = refl
+genomic-comment-needs-genomic-source :
+  obligation genomic-similarity-claim ≡ genomic-study-required
+genomic-comment-needs-genomic-source = refl
 
--- The strongest scientifically useful synthesis of the post and comments.
+causality-denial-is-itself-causal :
+  obligation terpene-causality-denial ≡ mechanistic-experiment-required
+causality-denial-is-itself-causal = refl
+
+medicinal-question-needs-controlled-outcomes :
+  obligation medicinal-effect-question ≡ controlled-outcome-study-required
+medicinal-question-needs-controlled-outcomes = refl
+
 record TerpeneDiscussionBoundary : Set where
   field
-    paperSurface            : CommentRole
-    labelDispute            : CommentRole
-    associationDispute      : CommentRole
-    medicinalEffectQuestion : CommentRole
+    historicalDispute      : CommentClaim
+    genomicAssertion       : CommentClaim
+    labelCritique          : CommentClaim
+    correlationGuard       : CommentClaim
+    steeringWheelAssertion : CommentClaim
+    medicinalQuestion      : CommentClaim
 
 canonicalDiscussionBoundary : TerpeneDiscussionBoundary
 canonicalDiscussionBoundary = record
-  { paperSurface            = label-critique
-  ; labelDispute            = label-critique
-  ; associationDispute      = correlation-warning
-  ; medicinalEffectQuestion = causal-question
+  { historicalDispute      = historical-taxonomy-claim
+  ; genomicAssertion       = genomic-similarity-claim
+  ; labelCritique          = label-predictiveness-critique
+  ; correlationGuard       = correlation-warning
+  ; steeringWheelAssertion = terpene-causality-denial
+  ; medicinalQuestion      = medicinal-effect-question
   }
