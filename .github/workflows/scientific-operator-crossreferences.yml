@@ -1,0 +1,75 @@
+name: Scientific operator cross-references
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
+      - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
+      - 'DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda'
+      - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
+      - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'docs/scientific_operator_crossreferences.md'
+      - '.github/workflows/scientific-operator-crossreferences.yml'
+  push:
+    paths:
+      - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
+      - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
+      - 'DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda'
+      - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
+      - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'docs/scientific_operator_crossreferences.md'
+      - '.github/workflows/scientific-operator-crossreferences.yml'
+
+concurrency:
+  group: scientific-operator-crossreferences-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check scientific operator bridges
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-scientific-operator-crossreferences.log"
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Analysis/FiniteOperatorReductionCore.agda \
+              DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda \
+              DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda \
+              DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda \
+              DASHI/Analysis/ScientificOperatorCrossreferences.agda \
+              DASHI/Biology/Everything.agda
+          ) > agda-scientific-operator-crossreferences.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 200 agda-scientific-operator-crossreferences.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scientific-operator-crossreferences-agda-log
+          path: agda-scientific-operator-crossreferences.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
