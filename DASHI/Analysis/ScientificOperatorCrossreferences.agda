@@ -2,11 +2,13 @@ module DASHI.Analysis.ScientificOperatorCrossreferences where
 
 open import DASHI.Analysis.FiniteOperatorReductionCore public
 open import DASHI.Analysis.StoichiometricConservation public
+open import DASHI.Analysis.StrictContractionUniqueness public
 open import DASHI.Physics.Chemistry.AtomicClosedShellSchurBridge public
 open import DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge public
 open import DASHI.Biology.Molecular.MolecularStoichiometricConservation public
 open import DASHI.Biology.Cell.MetabolicStoichiometricConservation public
 open import DASHI.Biology.Protein.ProteinFejerBasinBridge public
+open import DASHI.Biology.Protein.ProteinContractiveBasinBridge public
 open import DASHI.Biology.Morphogenesis.ReactionDiffusionHodgeBridge public
 
 import DASHI.Analysis.StoichiometricConservationRegression
