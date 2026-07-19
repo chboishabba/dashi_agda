@@ -8,55 +8,30 @@ open import DASHI.Analysis.ThreeStageBoundComposition
 open import DASHI.Physics.Closure.NSShellSchurInstance
 open import DASHI.Physics.Closure.NSCrossShellSchurBound
 
-------------------------------------------------------------------------
--- Factorized non-adversarial cross-shell estimate.
---
--- The Schur correction is
---
---   K10 (I - K00)^-1 K01.
---
--- Instead of asking for this composite estimate as one opaque theorem, split
--- it into three independently auditable uniform constants:
---
---   C01 : high-to-low shell injection,
---   R0  : low-shell resolvent,
---   C10 : low-to-high shell return.
---
--- Their exact budget is C10 * (R0 * C01).  This module proves that these three
--- estimates discharge the cross-shell Schur obligation.
-------------------------------------------------------------------------
-
 record SchurMultiplicativeLaws
     {s : Level}
     (Scalar : Set s)
     (O : SchurOrderLaws Scalar) : Set (lsuc s) where
   field
-    _⊗_ : Scalar → Scalar → Scalar
-
-    ≤-trans :
-      ∀ {a b c} →
-      _≤_ O a b →
-      _≤_ O b c →
-      _≤_ O a c
-
-    multiplyMonotoneLeft :
+    schurMultiply : Scalar → Scalar → Scalar
+    schur≤-trans :
+      ∀ {a b c} → _≤_ O a b → _≤_ O b c → _≤_ O a c
+    schurMultiplyMonotoneLeft :
       ∀ left {a b} →
       _≤_ O a b →
-      _≤_ O (_⊗_ left a) (_⊗_ left b)
+      _≤_ O (schurMultiply left a) (schurMultiply left b)
 
 open SchurMultiplicativeLaws public
 
 asMultiplicativeBoundLaws :
-  ∀ {s}
-    {Scalar : Set s}
-    {O : SchurOrderLaws Scalar} →
+  ∀ {s} {Scalar : Set s} {O : SchurOrderLaws Scalar} →
   SchurMultiplicativeLaws Scalar O →
   MultiplicativeBoundLaws Scalar
 asMultiplicativeBoundLaws {O = O} M = record
   { _≤_ = _≤_ O
-  ; _⊗_ = _⊗_ M
-  ; ≤-trans = ≤-trans M
-  ; multiplyMonotoneLeft = multiplyMonotoneLeft M
+  ; _⊗_ = schurMultiply M
+  ; ≤-trans = schur≤-trans M
+  ; multiplyMonotoneLeft = schurMultiplyMonotoneLeft M
   }
 
 record NSFactorizedCrossShellEvidence
@@ -70,38 +45,20 @@ record NSFactorizedCrossShellEvidence
     afterK01 : ShellVector → Scalar
     afterLowResolvent : ShellVector → Scalar
     afterK10 : ShellVector → Scalar
-
-    c01 : Scalar
-    r0 : Scalar
-    c10 : Scalar
-
+    c01 r0 c10 : Scalar
     correctionControlledByReturn :
-      ∀ x →
-      _≤_ O
-        (inner I x (crossCorrection I x))
-        (afterK10 x)
-
+      ∀ x → _≤_ O (inner I x (crossCorrection I x)) (afterK10 x)
     k10Bound :
-      ∀ x →
-      _≤_ O
-        (afterK10 x)
-        (_⊗_ M c10 (afterLowResolvent x))
-
+      ∀ x → _≤_ O (afterK10 x) (schurMultiply M c10 (afterLowResolvent x))
     lowResolventBound :
-      ∀ x →
-      _≤_ O
-        (afterLowResolvent x)
-        (_⊗_ M r0 (afterK01 x))
-
+      ∀ x → _≤_ O (afterLowResolvent x) (schurMultiply M r0 (afterK01 x))
     k01Bound :
       ∀ x → _≤_ O (afterK01 x) c01
 
 open NSFactorizedCrossShellEvidence public
 
 factorizedComposition :
-  ∀ {v s}
-    {ShellVector : Set v}
-    {Scalar : Set s}
+  ∀ {v s} {ShellVector : Set v} {Scalar : Set s}
     {O : SchurOrderLaws Scalar}
     (M : SchurMultiplicativeLaws Scalar O)
     (I : NSShellSchurStructure ShellVector Scalar O) →
@@ -122,29 +79,22 @@ factorizedComposition M I E = record
   }
 
 factorizedCrossBudget :
-  ∀ {v s}
-    {ShellVector : Set v}
-    {Scalar : Set s}
+  ∀ {v s} {ShellVector : Set v} {Scalar : Set s}
     {O : SchurOrderLaws Scalar}
     {M : SchurMultiplicativeLaws Scalar O}
     {I : NSShellSchurStructure ShellVector Scalar O} →
-  NSFactorizedCrossShellEvidence M I →
-  Scalar
+  NSFactorizedCrossShellEvidence M I → Scalar
 factorizedCrossBudget {M = M} E =
-  _⊗_ M (c10 E) (_⊗_ M (r0 E) (c01 E))
+  schurMultiply M (c10 E) (schurMultiply M (r0 E) (c01 E))
 
 factorizedEvidenceBoundsCorrection :
-  ∀ {v s}
-    {ShellVector : Set v}
-    {Scalar : Set s}
+  ∀ {v s} {ShellVector : Set v} {Scalar : Set s}
     {O : SchurOrderLaws Scalar}
     (M : SchurMultiplicativeLaws Scalar O)
     (I : NSShellSchurStructure ShellVector Scalar O)
     (E : NSFactorizedCrossShellEvidence M I)
     (x : ShellVector) →
-  _≤_ O
-    (inner I x (crossCorrection I x))
-    (factorizedCrossBudget E)
+  _≤_ O (inner I x (crossCorrection I x)) (factorizedCrossBudget E)
 factorizedEvidenceBoundsCorrection M I E =
   threeStageBoundComposes
     (asMultiplicativeBoundLaws M)
@@ -159,18 +109,13 @@ record NSFactorizedBudgetDischarge
     (I : NSShellSchurStructure ShellVector Scalar O)
     (E : NSFactorizedCrossShellEvidence M I) : Set s where
   field
-    structureBudgetIsFactorized :
-      crossBudget I ≡ factorizedCrossBudget E
-
-    factorizedBudgetBelowGap :
-      _≤_ O (factorizedCrossBudget E) (highGap I)
+    structureBudgetIsFactorized : crossBudget I ≡ factorizedCrossBudget E
+    factorizedBudgetBelowGap : _≤_ O (factorizedCrossBudget E) (highGap I)
 
 open NSFactorizedBudgetDischarge public
 
 factorizedEvidenceDischargesCrossShell :
-  ∀ {v s}
-    {ShellVector : Set v}
-    {Scalar : Set s}
+  ∀ {v s} {ShellVector : Set v} {Scalar : Set s}
     {O : SchurOrderLaws Scalar}
     (M : SchurMultiplicativeLaws Scalar O)
     (I : NSShellSchurStructure ShellVector Scalar O)
