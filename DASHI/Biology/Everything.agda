@@ -26,6 +26,7 @@ import DASHI.Biology.Cell.MetabolicStoichiometricConservation
 import DASHI.Biology.Cell.MetabolicDissipationBridge
 import DASHI.Biology.Cell.CellViabilityKernel
 import DASHI.Biology.Cell.CellStateAttractor
+import DASHI.Biology.Cell.CellFejerAttractorBridge
 import DASHI.Biology.Cell.BioelectricNetwork
 import DASHI.Biology.Cell.CellRecoveryBoundary
 
