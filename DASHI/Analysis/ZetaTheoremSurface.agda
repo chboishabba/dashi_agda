@@ -28,6 +28,27 @@ open import DASHI.Analysis.RiemannMillenniumAssembly public
 open import DASHI.Analysis.RiemannSeparatorAssembly public
 open import DASHI.Analysis.RiemannWeilSquareAssembly public
   using (WeilSquareMillenniumAssembly; weilSquareAssemblyImpliesRH)
+open import DASHI.Analysis.DashiWeilSquareBridge public
+  using
+    ( DashiWeilSquareEncoding
+    ; DashiWeilSquareMillenniumAssembly
+    ; dashiCoercivityImpliesSquarePositivity
+    ; dashiWeilSquareAssemblyImpliesRH
+    )
+open import DASHI.Analysis.DashiWeightedValuationWeilCandidate public
+  using
+    ( WeightedValuationWeilBridge
+    ; WeightedValuationSquareMillenniumAssembly
+    ; weightedValuationDashiQuadratic
+    ; weightedValuationSquareAssemblyImpliesRH
+    )
+open import DASHI.Analysis.DashiWeightedValuationSquareCoercivity public
+  using
+    ( WeightedValuationSquareCoercivity
+    ; WeightedValuationCoercivityMillenniumAssembly
+    ; weightedValuationToArithmeticSquareDecomposition
+    ; weightedValuationCoercivityImpliesRH
+    )
 
 -- Detailed arithmetic, test-space, square-coercivity, and regression modules
 -- stay qualified here to avoid exporting their local helper combinators.
