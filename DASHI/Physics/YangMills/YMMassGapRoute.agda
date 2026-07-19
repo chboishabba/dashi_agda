@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.YangMills.BalabanSU2GeometryQ0Bundle
+import DASHI.Physics.YangMills.BalabanFiniteOneStepFrontierBundle
 
 open import DASHI.Geometry.Gauge.SUNPrimitives
 open import DASHI.Geometry.Gauge.SUNLane
