@@ -4,13 +4,15 @@ on:
   push:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
+      - 'scripts/ns_triad_gamma_gap_raw_hat_export_timed.py'
+      - 'scripts/ns_attach_explicit_timeline.py'
+      - 'scripts/ns_adaptive_checkpoint_plan.py'
       - 'scripts/ns_shell_angle_residence_audit.py'
       - 'scripts/ns_shell_angle_residence_audit_v2.py'
       - 'scripts/ns_packet_coherence_budget_audit.py'
       - 'scripts/ns_packet_coherence_budget_audit_v2.py'
       - 'scripts/ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/ns_log_bmo_vorticity_direction_audit_v2.py'
-      - 'scripts/ns_attach_explicit_timeline.py'
       - 'scripts/ns_multicutoff_coherence_validation.py'
       - 'scripts/tests/test_ns_shell_angle_residence_audit.py'
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
@@ -22,13 +24,15 @@ on:
   pull_request:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
+      - 'scripts/ns_triad_gamma_gap_raw_hat_export_timed.py'
+      - 'scripts/ns_attach_explicit_timeline.py'
+      - 'scripts/ns_adaptive_checkpoint_plan.py'
       - 'scripts/ns_shell_angle_residence_audit.py'
       - 'scripts/ns_shell_angle_residence_audit_v2.py'
       - 'scripts/ns_packet_coherence_budget_audit.py'
       - 'scripts/ns_packet_coherence_budget_audit_v2.py'
       - 'scripts/ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/ns_log_bmo_vorticity_direction_audit_v2.py'
-      - 'scripts/ns_attach_explicit_timeline.py'
       - 'scripts/ns_multicutoff_coherence_validation.py'
       - 'scripts/tests/test_ns_shell_angle_residence_audit.py'
       - 'scripts/tests/test_ns_packet_coherence_budget_audit.py'
