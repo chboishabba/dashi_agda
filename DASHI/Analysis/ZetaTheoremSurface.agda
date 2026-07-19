@@ -61,6 +61,16 @@ open import DASHI.Analysis.RiemannPrimePowerCounting public
     ; RiemannPrimePowerCountingBoundary
     ; riemannPrimePowerCountingBoundary
     )
+open import DASHI.Analysis.RiemannPrimePowerMangoldtIdentity public
+  using
+    ( MangoldtLogQuotientKernel
+    ; mangoldtLogQuotientTerm
+    ; mangoldtLogQuotientSumLE
+    ; mangoldtPrimePowerCount0
+    ; RiemannPrimePowerMangoldtIdentity
+    ; RiemannPrimePowerMangoldtBoundary
+    ; riemannPrimePowerMangoldtBoundary
+    )
 
 open import DASHI.Analysis.RiemannPrimePowerArithmetic public
 open import DASHI.Analysis.RiemannFiniteExplicitFormulaBoundary public
