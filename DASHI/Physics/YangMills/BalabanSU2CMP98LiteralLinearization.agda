@@ -18,21 +18,18 @@ open import DASHI.Physics.YangMills.BalabanSU2LinearizedAverage public
     ; linearAverageRegularBackgroundPerturbation to linearAverageBackgroundPerturbation
     )
 
-cmp98SourceFormula :
+-- This name denotes the current executable coordinate-order formula only.  The
+-- independent five-term source transcription and its audit theorem live in
+-- BalabanSU2CMP98Equation124; no definitional self-equality is advertised as a
+-- source audit.
+cmp98ImplementationFormula :
   ∀ {M L : Nat} {{_ : NonZero (M * suc L)}} →
   ℝ → ℝ → RadialReducedOperator → RadialReducedOperator →
   SU2LieField4 (M * suc L) → SU2DirectedGaugeField4 (M * suc L) →
   SU2AdjointBondField4 (M * suc L) → Cube4 M → Axis4 → SU2LieAlgebra
-cmp98SourceFormula = linearizedAverage
+cmp98ImplementationFormula = linearizedAverage
 
-cmp98Implementation :
-  ∀ {M L : Nat} {{_ : NonZero (M * suc L)}} →
-  ℝ → ℝ → RadialReducedOperator → RadialReducedOperator →
-  SU2LieField4 (M * suc L) → SU2DirectedGaugeField4 (M * suc L) →
-  SU2AdjointBondField4 (M * suc L) → Cube4 M → Axis4 → SU2LieAlgebra
-cmp98Implementation = linearizedAverage
-
-cmp98LinearizationSourceExact :
+cmp98ImplementationDefinitionExact :
   ∀ {M L : Nat} {{_ : NonZero (M * suc L)}}
   (mainWeight correctionWeight : ℝ)
   (rootOp junctionOp : RadialReducedOperator)
@@ -40,8 +37,10 @@ cmp98LinearizationSourceExact :
   (U : SU2DirectedGaugeField4 (M * suc L))
   (A : SU2AdjointBondField4 (M * suc L))
   (coarse : Cube4 M) (axis : Axis4) →
-  cmp98Implementation mainWeight correctionWeight rootOp junctionOp Y U A coarse axis
+  cmp98ImplementationFormula
+    mainWeight correctionWeight rootOp junctionOp Y U A coarse axis
     ≡
-  cmp98SourceFormula mainWeight correctionWeight rootOp junctionOp Y U A coarse axis
-cmp98LinearizationSourceExact
+  linearizedAverage
+    mainWeight correctionWeight rootOp junctionOp Y U A coarse axis
+cmp98ImplementationDefinitionExact
   mainWeight correctionWeight rootOp junctionOp Y U A coarse axis = refl
