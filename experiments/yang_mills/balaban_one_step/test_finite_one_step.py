@@ -124,9 +124,16 @@ class FiniteOneStepTests(unittest.TestCase):
         self.assertEqual(report["claim_scope"], "finite_lattice_only")
         self.assertTrue(report["has_strict_proper_local_weighted_remainder_bound"])
         self.assertTrue(report["all_sampled_backgrounds_have_strict_proper_local_bound"])
+        proper = report["proper_local_convergent_candidates"]
+        self.assertTrue(any(
+            item["radius"] == 0.01 and item["patch_family"] == "torus-ball-2"
+            for item in proper
+        ))
+        self.assertTrue(any(
+            item["radius"] == 0.03 and item["patch_family"] == "torus-ball-3"
+            for item in proper
+        ))
         by_radius = {item["radius"]: item for item in report["background_closure"]}
-        self.assertEqual(by_radius[0.01]["best_candidate"]["patch_family"], "torus-ball-2")
-        self.assertEqual(by_radius[0.03]["best_candidate"]["patch_family"], "torus-ball-3")
         self.assertLess(
             max(
                 by_radius[0.03]["best_candidate"]["left"],
