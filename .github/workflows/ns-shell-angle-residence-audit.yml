@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
+      - 'scripts/ns_hard_alignment_derivative.py'
+      - 'scripts/ns_generate_matched_galerkin_trajectories.py'
       - 'scripts/ns_triad_gamma_gap_raw_hat_export_timed.py'
       - 'scripts/ns_attach_explicit_timeline.py'
       - 'scripts/ns_adaptive_checkpoint_plan.py'
@@ -24,6 +26,8 @@ on:
   pull_request:
     paths:
       - 'scripts/ns_galerkin_coherence_core.py'
+      - 'scripts/ns_hard_alignment_derivative.py'
+      - 'scripts/ns_generate_matched_galerkin_trajectories.py'
       - 'scripts/ns_triad_gamma_gap_raw_hat_export_timed.py'
       - 'scripts/ns_attach_explicit_timeline.py'
       - 'scripts/ns_adaptive_checkpoint_plan.py'
