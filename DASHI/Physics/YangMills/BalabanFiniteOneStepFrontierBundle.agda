@@ -30,6 +30,7 @@ import DASHI.Physics.YangMills.BalabanSU2SchurComplement
 import DASHI.Physics.YangMills.BalabanSU2BlockCholeskyConcrete
 import DASHI.Physics.YangMills.BalabanSU2GaussianNormalization
 import DASHI.Physics.YangMills.BalabanSU2AxisSlabPatchCover
+import DASHI.Physics.YangMills.BalabanSU2TorusBallPatchGeometry
 import DASHI.Physics.YangMills.BalabanSU2LocalParametrixPropagator
 import DASHI.Physics.YangMills.BalabanSU2FiniteEffectiveAction
 import DASHI.Physics.YangMills.BalabanSU2PolarizationSecondVariation
