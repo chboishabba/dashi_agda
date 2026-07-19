@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanSU2CMP98Remainder
 import DASHI.Physics.YangMills.BalabanSU2AveragingSection
 import DASHI.Physics.YangMills.BalabanSU2ConstraintMatrix
 import DASHI.Physics.YangMills.BalabanSU2GaugeFixedConstraintSpace
+import DASHI.Physics.YangMills.BalabanSU2ConstraintTangentSpace
 import DASHI.Physics.YangMills.BalabanSU2ConstrainedMinimizer
 import DASHI.Physics.YangMills.BalabanSU2KernelProjection
 import DASHI.Physics.YangMills.BalabanSU2WilsonAction
