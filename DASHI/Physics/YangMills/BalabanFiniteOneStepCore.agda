@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanFiniteOneStepCore where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc) renaming (zero to natZero)
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Data.Product.Base using (_×_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -214,7 +214,7 @@ data Walk {a : Level} (Step : Set a) : Set a where
   _then_ : Step → Walk Step → Walk Step
 
 walkLength : ∀ {a} {Step : Set a} → Walk Step → Nat
-walkLength emptyWalk = zero
+walkLength emptyWalk = natZero
 walkLength (_ then rest) = suc (walkLength rest)
 
 record RandomWalkExpansion {t s : Level} (Term : Set t) (Scalar : Set s) : Set (lsuc (t ⊔ s)) where
