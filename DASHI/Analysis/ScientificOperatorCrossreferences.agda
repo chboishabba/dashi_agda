@@ -4,3 +4,5 @@ open import DASHI.Analysis.FiniteOperatorReductionCore public
 open import DASHI.Physics.Chemistry.AtomicClosedShellSchurBridge public
 open import DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge public
 open import DASHI.Biology.Morphogenesis.ReactionDiffusionHodgeBridge public
+
+import DASHI.Analysis.ScientificOperatorCrossreferencesTests
