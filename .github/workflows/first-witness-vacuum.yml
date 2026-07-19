@@ -1,0 +1,79 @@
+name: First-witness vacuum Agda check
+
+on:
+  push:
+    paths:
+      - 'DASHI/Foundations/TernaryTensorPower.agda'
+      - 'DASHI/Foundations/FirstWitnessConstraintAlgebra.agda'
+      - 'DASHI/Physics/Vacuum/FirstWitnessVacuumBridge.agda'
+      - 'DASHI/Physics/Vacuum/FirstWitnessVacuumAll.agda'
+      - 'Docs/FirstWitnessVacuumBridge.md'
+      - '.github/workflows/first-witness-vacuum.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Foundations/TernaryTensorPower.agda'
+      - 'DASHI/Foundations/FirstWitnessConstraintAlgebra.agda'
+      - 'DASHI/Physics/Vacuum/FirstWitnessVacuumBridge.agda'
+      - 'DASHI/Physics/Vacuum/FirstWitnessVacuumAll.agda'
+      - 'Docs/FirstWitnessVacuumBridge.md'
+      - '.github/workflows/first-witness-vacuum.yml'
+
+concurrency:
+  group: first-witness-vacuum-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: first-witness-vacuum-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+
+      - name: Check focused modules with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-first-witness-vacuum-check.log"
+            export AGDA_JOBS=3
+            targets=(
+              DASHI/Foundations/TernaryTensorPower.agda
+              DASHI/Foundations/FirstWitnessConstraintAlgebra.agda
+              DASHI/Physics/Vacuum/FirstWitnessVacuumBridge.agda
+              DASHI/Physics/Vacuum/FirstWitnessVacuumAll.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-first-witness-vacuum-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 220 agda-first-witness-vacuum-check.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-witness-vacuum-agda-log
+          path: agda-first-witness-vacuum-check.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
