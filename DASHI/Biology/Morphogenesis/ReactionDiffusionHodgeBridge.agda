@@ -37,8 +37,7 @@ record ReactionDiffusionHodgeIdentification
     linearizedEnergyMatchesHodge :
       (mode : RDM.ReactionDiffusionModeSystem.Mode R) →
       linearizedModeEnergy mode ≡
-      FOR.GaugeFixedBlockHodgePoincare.constantWeightedEnergy hodge
-        (encodeMode mode)
+      FOR.hodgeWeightedEnergy hodge (encodeMode mode)
 
 open ReactionDiffusionHodgeIdentification public
 
@@ -50,15 +49,12 @@ reactionDiffusionModeNormControlled :
     {order : FOR.OrderedEnergy Scalar} →
   (B : ReactionDiffusionHodgeIdentification R Vector Scalar order) →
   (mode : RDM.ReactionDiffusionModeSystem.Mode R) →
-  FOR.OrderedEnergy._≤_ order
-    (FOR.GaugeFixedBlockHodgePoincare.normSquared (hodge B)
-      (encodeMode B mode))
+  FOR.orderedEnergyLeq order
+    (FOR.hodgeNormSquared (hodge B) (encodeMode B mode))
     (linearizedModeEnergy B mode)
 reactionDiffusionModeNormControlled B mode
   rewrite linearizedEnergyMatchesHodge B mode =
-  FOR.GaugeFixedBlockHodgePoincare.hodgePoincare
-    (hodge B)
-    (encodeMode B mode)
+  FOR.hodgeControlsNorm (hodge B) (encodeMode B mode)
 
 reactionDiffusionZeroBackgroundCoercivity :
   ∀ {v s}
@@ -69,8 +65,7 @@ reactionDiffusionZeroBackgroundCoercivity :
   (B : ReactionDiffusionHodgeIdentification R Vector Scalar order) →
   (hessianEnergy : Vector → Scalar) →
   ((vector : Vector) →
-    hessianEnergy vector ≡
-    FOR.GaugeFixedBlockHodgePoincare.constantWeightedEnergy (hodge B) vector) →
+    hessianEnergy vector ≡ FOR.hodgeWeightedEnergy (hodge B) vector) →
   FOR.ZeroBackgroundCoercivity Vector Scalar order
 reactionDiffusionZeroBackgroundCoercivity {order = order} B =
   FOR.hodgePoincareGivesZeroBackgroundCoercivity order (hodge B)
@@ -88,8 +83,8 @@ record HodgeControlledTuringSelection
       RDM.TuringModeSelectionWitness R
 
     selectedModeNormControlled :
-      FOR.OrderedEnergy._≤_ order
-        (FOR.GaugeFixedBlockHodgePoincare.normSquared (hodge B)
+      FOR.orderedEnergyLeq order
+        (FOR.hodgeNormSquared (hodge B)
           (encodeMode B
             (RDM.TuringModeSelectionWitness.mode selection)))
         (linearizedModeEnergy B
