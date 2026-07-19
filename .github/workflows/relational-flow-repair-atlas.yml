@@ -1,0 +1,107 @@
+name: Relational flow repair atlas Agda check
+
+on:
+  push:
+    paths:
+      - 'DASHI/RelationalFlowRepairAtlas.agda'
+      - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/CompiledInversePlusOneCore.agda'
+      - 'DASHI/Core/RelationalFlowResidualComposition.agda'
+      - 'DASHI/Core/RelationalHypervoxelBraidCore.agda'
+      - 'DASHI/Education/RelationalEducationGateAlgebra.agda'
+      - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
+      - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
+      - 'DASHI/Culture/PatternMindReciprocityLoveBridge.agda'
+      - 'DASHI/Culture/SemioticPhallicLackAmalekBridge.agda'
+      - 'DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda'
+      - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
+      - 'DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda'
+      - 'DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda'
+      - '.github/workflows/relational-flow-repair-atlas.yml'
+  pull_request:
+    paths:
+      - 'DASHI/RelationalFlowRepairAtlas.agda'
+      - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/CompiledInversePlusOneCore.agda'
+      - 'DASHI/Core/RelationalFlowResidualComposition.agda'
+      - 'DASHI/Core/RelationalHypervoxelBraidCore.agda'
+      - 'DASHI/Education/RelationalEducationGateAlgebra.agda'
+      - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
+      - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
+      - 'DASHI/Culture/PatternMindReciprocityLoveBridge.agda'
+      - 'DASHI/Culture/SemioticPhallicLackAmalekBridge.agda'
+      - 'DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda'
+      - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
+      - 'DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda'
+      - 'DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda'
+      - '.github/workflows/relational-flow-repair-atlas.yml'
+
+concurrency:
+  group: relational-flow-repair-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: relational-flow-repair-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+
+      - name: Check relational flow repair atlas with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-relational-flow-repair-check.log"
+            export AGDA_JOBS=3
+            targets=(
+              DASHI/Core/CompiledInversePlusOneCore.agda
+              DASHI/Core/RelationalFlowResidualComposition.agda
+              DASHI/Core/RelationalHypervoxelBraidCore.agda
+              DASHI/Education/RelationalEducationGateAlgebra.agda
+              DASHI/Governance/RelationalFlowGateAlgebra.agda
+              DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda
+              DASHI/Culture/PatternMindReciprocityLoveBridge.agda
+              DASHI/Culture/SemioticPhallicLackAmalekBridge.agda
+              DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda
+              DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda
+              DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda
+              DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda
+              DASHI/FullRelationalFlowRepairHyperfabric.agda
+              DASHI/RelationalFlowRepairAtlas.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-relational-flow-repair-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 220 agda-relational-flow-repair-check.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relational-flow-repair-agda-log
+          path: agda-relational-flow-repair-check.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
