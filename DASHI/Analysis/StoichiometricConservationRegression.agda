@@ -1,7 +1,7 @@
 module DASHI.Analysis.StoichiometricConservationRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Unit using (⊤; tt)
 
 open import DASHI.Analysis.StoichiometricConservation
@@ -30,8 +30,7 @@ unitLeftKernel = record
   { annihilatesStoichiometry = λ _ → refl
   }
 
-unitTwoReactionPath :
-  Agda.Builtin.List.List ⊤
+unitTwoReactionPath : List ⊤
 unitTwoReactionPath = tt ∷ tt ∷ []
 
 unitStepConserves :
