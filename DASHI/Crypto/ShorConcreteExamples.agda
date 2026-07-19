@@ -1,7 +1,7 @@
 module DASHI.Crypto.ShorConcreteExamples where
 
 open import DASHI.Core.Prelude
-open import DASHI.Foundations.Base369Nat using (nonZero)
+import DASHI.Foundations.Base369Nat as B369
 open import DASHI.Crypto.RSAArithmeticCore
 open import DASHI.Crypto.FiniteFactorArithmetic
 open import DASHI.Crypto.ShorFactoring
@@ -26,7 +26,7 @@ rsa15PublicState : RSAPublicState
 rsa15PublicState =
   mkRSAPublicState
     15
-    nonZero
+    B369.nonZero
     3
     false
     refl
