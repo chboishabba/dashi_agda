@@ -10,6 +10,15 @@ module DASHI.Biology.TuringPatternRegimeSurface where
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 ------------------------------------------------------------------------
+-- Tiny local truth types, to keep this surface independent of stdlib
+-- propositions beyond equality.
+
+data ⊤ : Set where
+  tt : ⊤
+
+data ⊥ : Set where
+
+------------------------------------------------------------------------
 -- Regimes.
 
 data TuringRegime : Set where
@@ -24,15 +33,6 @@ data TuringRegime : Set where
 isTuringPatternRegime : TuringRegime → Set
 isTuringPatternRegime stationaryFiniteWavelengthTuring = ⊤
 isTuringPatternRegime _ = ⊥
-
-------------------------------------------------------------------------
--- Tiny local truth types, to keep this surface independent of stdlib
--- propositions beyond equality.
-
-data ⊤ : Set where
-  tt : ⊤
-
-data ⊥ : Set where
 
 ------------------------------------------------------------------------
 -- Variables and derivative role.
