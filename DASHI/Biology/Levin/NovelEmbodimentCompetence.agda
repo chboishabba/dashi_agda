@@ -32,8 +32,8 @@ record NovelCompetenceWitness : Set where
 record NovelEmbodimentBiologyAdapter : Set where
   field
     syntheticBoundary : Synthetic.SyntheticLivingAgentBoundary
-    problemSpace      : ProblemSpace.ProblemSpaceAgency
-    agencyBoundary    : Agency.SubstrateIndependentAgency
+    problemSpace      : ProblemSpace.ProblemSpaceAgencyBoundary
+    agencyBoundary    : Agency.SubstrateIndependentAgencyBoundary
     competenceNeedsExperiment : Bool
     noveltyNeedsHistoricalAudit : Bool
     welfareStatusRemainsSeparate : Bool
