@@ -3,23 +3,31 @@ module DASHI.Physics.YangMills.BalabanSU2ReducedAdjointDeterminantProduct where
 ------------------------------------------------------------------------
 -- Determinant product law in the reduced su(2) adjoint algebra.
 --
--- The reflective solver must receive variables, not a composite expression.
--- We therefore prove the polynomial identity for an explicit scalar k and only
--- then instantiate k with the concrete cubic coefficient of ad(Y).
+-- The determinant and reduced composition are exposed below as explicit
+-- polynomial syntax.  This keeps the concrete coefficient k as a genuine
+-- solver variable and avoids treating local helper applications as opaque
+-- constants in the reflective ring tactic.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.List.Base using ([]; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
-import Tactic.RingSolver as Solver
-
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
+  ( module RealPolynomialSolver )
+open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
+  ( solveComputed; computed )
+open RealPolynomialSolver using
+  ( Polynomial
+  ; _:=_
+  ; _:+_
+  ; _:*_
+  ; :-_
+  )
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( _+R_
   ; _*R_
   ; -R_
-  ; realSolverRing
   )
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ( SU2LieAlgebra )
@@ -32,6 +40,9 @@ open import DASHI.Physics.YangMills.BalabanSU2ReducedAdjointCalculus using
   ; linearCoefficient
   ; quadraticCoefficient
   ; composeReducedAdjoint
+  ; composeAP
+  ; composeBP
+  ; composeCP
   )
 open import DASHI.Physics.YangMills.BalabanSU2AdjointMatrixDeterminant using
   ( determinantMatrix3
@@ -60,6 +71,14 @@ composeReducedAdjointAt k (reducedAd a b c) (reducedAd d e f) =
     (((a *R e) +R (b *R d)) +R (k *R ((b *R f) +R (c *R e))))
     ((((a *R f) +R (b *R e)) +R (c *R d)) +R (k *R (c *R f)))
 
+reducedAdjointDeterminantValueP :
+  ∀ {n} →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n → Polynomial n
+reducedAdjointDeterminantValueP k a b c =
+  a :*
+    (((a :+ (c :* k)) :* (a :+ (c :* k)))
+      :+ (:- (k :* (b :* b))))
+
 reducedAdjointDeterminantValue :
   SU2LieAlgebra → ReducedAdjointOperator → ℝ
 reducedAdjointDeterminantValue Y =
@@ -81,9 +100,16 @@ reducedAdjointDeterminantMultiplicativeAt :
   reducedAdjointDeterminantValueAt k (reducedAd a b c)
     *R reducedAdjointDeterminantValueAt k (reducedAd d e f)
 reducedAdjointDeterminantMultiplicativeAt k a b c d e f =
-  Solver.solve
-    (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ k ∷ [])
-    realSolverRing
+  solveComputed 7
+    (λ a b c d e f k →
+      reducedAdjointDeterminantValueP k
+        (composeAP a d)
+        (composeBP k a b c d e f)
+        (composeCP k a b c d e f)
+      :=
+      (reducedAdjointDeterminantValueP k a b c
+        :* reducedAdjointDeterminantValueP k d e f))
+    computed a b c d e f k
 
 reducedAdjointDeterminantMultiplicative :
   ∀ Y left right →
