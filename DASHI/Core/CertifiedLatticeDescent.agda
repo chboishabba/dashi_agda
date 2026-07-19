@@ -10,7 +10,7 @@ open import Agda.Builtin.String using (String)
 --
 -- This module formalises the DASHI analogue of constrained argmin.
 -- It does not provide gradients, real-valued optimisation, convergence,
--- uniqueness, or empirical authority.  A minimum is supplied together
+-- uniqueness, or empirical authority. A minimum is supplied together
 -- with proofs that it is admissible and no more pressured than every
 -- admissible competitor in the declared search fibre.
 
@@ -74,18 +74,26 @@ record DescentState (Carrier : Set) : Set where
 open DescentState public
 
 ------------------------------------------------------------------------
--- Lawful refinements are positive witnesses.  A consumer must prove the
--- preservation laws rather than rely on a Boolean optimiser predicate.
+-- Lawful refinements are positive witnesses. Each preservation statement
+-- is carried as a Boolean together with a proof that it is true.
 
 record AdmissibleRefinement
   {Carrier : Set}
   (from to : DescentState Carrier) : Set where
   constructor admissibleRefinement
   field
-    receiptsPreserved : Set
-    contradictionsPreserved : Set
-    authorityBoundaryPreserved : Set
-    promotionGatePreserved : Set
+    receiptsPreserved : Bool
+    receiptsPreservedIsTrue : receiptsPreserved ≡ true
+
+    contradictionsPreserved : Bool
+    contradictionsPreservedIsTrue : contradictionsPreserved ≡ true
+
+    authorityBoundaryPreserved : Bool
+    authorityBoundaryPreservedIsTrue :
+      authorityBoundaryPreserved ≡ true
+
+    promotionGatePreserved : Bool
+    promotionGatePreservedIsTrue : promotionGatePreserved ≡ true
 
 open AdmissibleRefinement public
 
@@ -101,7 +109,7 @@ record RefinementWitness
 open RefinementWitness public
 
 ------------------------------------------------------------------------
--- Projection is rejection-aware.  An invalid proposal is not silently
+-- Projection is rejection-aware. An invalid proposal is not silently
 -- repaired into a different claim; it remains explicitly rejected.
 
 data ProjectionResult
@@ -180,12 +188,15 @@ record CertifiedDescentReceipt
   field
     label : String
     argminCertificate : CertifiedArgmin source SearchFibre
+
     numericOptimizerImplemented : Bool
     numericOptimizerImplementedIsFalse :
       numericOptimizerImplemented ≡ false
+
     globalOptimalityClaimed : Bool
     globalOptimalityClaimedIsFalse :
       globalOptimalityClaimed ≡ false
+
     promotionAuthority : Bool
     promotionAuthorityIsFalse :
       promotionAuthority ≡ false
