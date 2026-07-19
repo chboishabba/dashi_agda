@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanSU2ConditionalCovarianceConcrete where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.BalabanFiniteOneStepCore using
   (FiniteHessianCertificate; FiniteCovarianceCertificate; hessian;
    covariance; covarianceLeft; covarianceRight)
