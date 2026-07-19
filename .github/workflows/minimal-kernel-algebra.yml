@@ -5,12 +5,16 @@ on:
     paths:
       - 'DASHI/Core/MinimalKernelAlgebra.agda'
       - 'DASHI/Core/MinimalKernelAlgebraTests.agda'
+      - 'DASHI/Core/Base369UltrametricContraction.agda'
+      - 'DASHI/Geometry/SSP369Ultrametric.agda'
       - 'Docs/MinimalKernelAlgebra.md'
       - '.github/workflows/minimal-kernel-algebra.yml'
   pull_request:
     paths:
       - 'DASHI/Core/MinimalKernelAlgebra.agda'
       - 'DASHI/Core/MinimalKernelAlgebraTests.agda'
+      - 'DASHI/Core/Base369UltrametricContraction.agda'
+      - 'DASHI/Geometry/SSP369Ultrametric.agda'
       - 'Docs/MinimalKernelAlgebra.md'
       - '.github/workflows/minimal-kernel-algebra.yml'
 
@@ -52,6 +56,7 @@ jobs:
             targets=(
               DASHI/Core/MinimalKernelAlgebra.agda
               DASHI/Core/MinimalKernelAlgebraTests.agda
+              DASHI/Core/Base369UltrametricContraction.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-minimal-kernel-algebra-check.log 2>&1
