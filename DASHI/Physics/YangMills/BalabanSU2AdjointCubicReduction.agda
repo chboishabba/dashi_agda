@@ -25,6 +25,9 @@ open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ; su2Lie
   ; su2LieExt
   ; lieScale
+  ; xComponent
+  ; yComponent
+  ; zComponent
   )
 open import DASHI.Physics.YangMills.BalabanSU2AdjointInnerProduct using
   ( su2Dot )
@@ -90,35 +93,20 @@ adSquare3P y₁ y₂ y₃ x₁ x₂ x₃ =
     (ad1P y₁ y₂ y₃ x₁ x₂ x₃)
     (ad2P y₁ y₂ y₃ x₁ x₂ x₃)
 
-squareVectorP : ∀ {n} →
-  Polynomial n →
-  Polynomial n → Polynomial n → Polynomial n →
-  Polynomial n → Polynomial n → Polynomial n → Polynomial n
-squareVectorP component y₁ y₂ y₃ x₁ x₂ x₃ =
-  fourP :*
-    ((dotP y₁ y₂ y₃ x₁ x₂ x₃ :* component)
-      :+ (:- (dotP y₁ y₂ y₃ y₁ y₂ y₃ :*
-        (ifComponent component x₁ x₂ x₃))))
-  where
-  -- The caller passes one of y₁/y₂/y₃.  This helper is not used directly in
-  -- proofs because selecting the matching x component is clearer there.
-  ifComponent : ∀ {m} → Polynomial m → Polynomial m → Polynomial m → Polynomial m → Polynomial m
-  ifComponent c a b d = a
-
 adSquareVectorIdentity :
   ∀ Y X →
   adOperator Y (adOperator Y X)
   ≡
   su2Lie
     (fourR *R
-      ((su2Dot Y X *R DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.xComponent Y)
-        +R (-R (su2Dot Y Y *R DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.xComponent X))))
+      ((su2Dot Y X *R xComponent Y)
+        +R (-R (su2Dot Y Y *R xComponent X))))
     (fourR *R
-      ((su2Dot Y X *R DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.yComponent Y)
-        +R (-R (su2Dot Y Y *R DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.yComponent X))))
+      ((su2Dot Y X *R yComponent Y)
+        +R (-R (su2Dot Y Y *R yComponent X))))
     (fourR *R
-      ((su2Dot Y X *R DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.zComponent Y)
-        +R (-R (su2Dot Y Y *R DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.zComponent X))))
+      ((su2Dot Y X *R zComponent Y)
+        +R (-R (su2Dot Y Y *R zComponent X))))
 adSquareVectorIdentity
   (su2Lie y₁ y₂ y₃)
   (su2Lie x₁ x₂ x₃) =
@@ -156,7 +144,7 @@ adCubicReduction
           (adSquare2P y₁ y₂ y₃ x₁ x₂ x₃)
           (adSquare3P y₁ y₂ y₃ x₁ x₂ x₃)
         :=
-        (:- (fourP :* dotP y₁ y₂ y₃ y₁ y₂ y₃)) :*
+        (:- (fourP :* (dotP y₁ y₂ y₃ y₁ y₂ y₃))) :*
           ad1P y₁ y₂ y₃ x₁ x₂ x₃)
       computed)
     (solveComputed 6
@@ -165,7 +153,7 @@ adCubicReduction
           (adSquare3P y₁ y₂ y₃ x₁ x₂ x₃)
           (adSquare1P y₁ y₂ y₃ x₁ x₂ x₃)
         :=
-        (:- (fourP :* dotP y₁ y₂ y₃ y₁ y₂ y₃)) :*
+        (:- (fourP :* (dotP y₁ y₂ y₃ y₁ y₂ y₃))) :*
           ad2P y₁ y₂ y₃ x₁ x₂ x₃)
       computed)
     (solveComputed 6
@@ -174,7 +162,7 @@ adCubicReduction
           (adSquare1P y₁ y₂ y₃ x₁ x₂ x₃)
           (adSquare2P y₁ y₂ y₃ x₁ x₂ x₃)
         :=
-        (:- (fourP :* dotP y₁ y₂ y₃ y₁ y₂ y₃)) :*
+        (:- (fourP :* (dotP y₁ y₂ y₃ y₁ y₂ y₃))) :*
           ad3P y₁ y₂ y₃ x₁ x₂ x₃)
       computed)
 
