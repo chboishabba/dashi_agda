@@ -1,8 +1,8 @@
 module DASHI.Physics.Closure.NSIntegerFourierLattice where
 
-open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Int using (Int; _+_; -_)
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Exact Fourier lattice Z^3.
@@ -25,11 +25,11 @@ addMode p q = mode
   (kz p + kz q)
 
 negateMode : FourierMode → FourierMode
-negateMode p = mode (- kx p) (- ky p) (- kz p)
+negateMode p = mode (- (kx p)) (- (ky p)) (- (kz p))
 
 record NonZeroMode (k : FourierMode) : Set where
   field
-    notZero : k ≡ zeroMode → Set
+    notZero : k ≡ zeroMode → ⊥
 
 record Resonance (p q k : FourierMode) : Set where
   field
@@ -44,7 +44,7 @@ open ShellPredicate public
 record ShellSeparated
     (low high : ShellPredicate) : Set₁ where
   field
-    disjoint : ∀ k → InShell low k → InShell high k → Set
+    disjoint : ∀ k → InShell low k → InShell high k → ⊥
 
 record ExactModeEquality : Set₁ where
   field
