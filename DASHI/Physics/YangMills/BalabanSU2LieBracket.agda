@@ -114,25 +114,25 @@ lieBracketQuaternionCommutator
       (λ x₁ y₁ z₁ x₂ y₂ z₂ →
         zeroP :=
         q0P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂
-          :+ (:- q0P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁))
+          :+ (:- (q0P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
       computed)
     (solveComputed 6
       (λ x₁ y₁ z₁ x₂ y₂ z₂ →
         bracket1P y₁ z₁ y₂ z₂ :=
         q1P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂
-          :+ (:- q1P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁))
+          :+ (:- (q1P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
       computed)
     (solveComputed 6
       (λ x₁ y₁ z₁ x₂ y₂ z₂ →
         bracket2P z₁ x₁ z₂ x₂ :=
         q2P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂
-          :+ (:- q2P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁))
+          :+ (:- (q2P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
       computed)
     (solveComputed 6
       (λ x₁ y₁ z₁ x₂ y₂ z₂ →
         bracket3P x₁ y₁ x₂ y₂ :=
         q3P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂
-          :+ (:- q3P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁))
+          :+ (:- (q3P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
       computed)
 
 lieBracketAntisymmetric :
@@ -143,15 +143,15 @@ lieBracketAntisymmetric
   su2LieExt
     (solveComputed 6
       (λ x₁ y₁ z₁ x₂ y₂ z₂ →
-        bracket1P y₁ z₁ y₂ z₂ := :- bracket1P y₂ z₂ y₁ z₁)
+        bracket1P y₁ z₁ y₂ z₂ := :- (bracket1P y₂ z₂ y₁ z₁))
       computed)
     (solveComputed 6
       (λ x₁ y₁ z₁ x₂ y₂ z₂ →
-        bracket2P z₁ x₁ z₂ x₂ := :- bracket2P z₂ x₂ z₁ x₁)
+        bracket2P z₁ x₁ z₂ x₂ := :- (bracket2P z₂ x₂ z₁ x₁))
       computed)
     (solveComputed 6
       (λ x₁ y₁ z₁ x₂ y₂ z₂ →
-        bracket3P x₁ y₁ x₂ y₂ := :- bracket3P x₂ y₂ x₁ y₁)
+        bracket3P x₁ y₁ x₂ y₂ := :- (bracket3P x₂ y₂ x₁ y₁))
       computed)
 
 lieBracketAddLeft :
@@ -310,10 +310,10 @@ lieBracketSkewAdjoint
         (bracket3P x₀ y₀ x₁ y₁)
         x₂ y₂ z₂
       :=
-      :- dotP x₁ y₁ z₁
+      :- (dotP x₁ y₁ z₁
         (bracket1P y₀ z₀ y₂ z₂)
         (bracket2P z₀ x₀ z₂ x₂)
-        (bracket3P x₀ y₀ x₂ y₂))
+        (bracket3P x₀ y₀ x₂ y₂)))
     computed
 
 adOperator : SU2LieAlgebra → SU2LieAlgebra → SU2LieAlgebra
