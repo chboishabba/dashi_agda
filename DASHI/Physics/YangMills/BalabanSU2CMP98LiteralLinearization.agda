@@ -6,26 +6,30 @@ open import Data.Nat.Base using (NonZero)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4; Axis4)
-open import DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance using (GaugeFunction4)
-open import DASHI.Physics.YangMills.BalabanLinearBlockPathAverage using (RootedSegmentSample)
-open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using (su2QuaternionGroup)
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using (SU2LieAlgebra)
 open import DASHI.Physics.YangMills.BalabanSU2LiteralOperatorInstances using
   (SU2DirectedGaugeField4; SU2AdjointBondField4)
 open import DASHI.Physics.YangMills.BalabanSU2NestedRadialBlockPathTerm using (SU2LieField4)
 open import DASHI.Physics.YangMills.BalabanSU2RadialAdjointOperator using (RadialReducedOperator)
-open import DASHI.Physics.YangMills.BalabanSU2LinearizedAverage as Concrete using
-  ( linearizedAverage
-  ; linearAverageGaugeCovariant
-  ; linearAverageTrivialBackground
-  ; linearAverageFiniteSupport
-  ; linearAverageRegularBackgroundPerturbation
-  )
+open import DASHI.Physics.YangMills.BalabanSU2LinearizedAverage public
+  using (linearizedAverage; linearAverageGaugeCovariant; linearAverageFiniteSupport)
+  renaming
+    ( linearAverageTrivialBackground to linearAverageAtTrivialBackground
+    ; linearAverageRegularBackgroundPerturbation to linearAverageBackgroundPerturbation
+    )
 
--- The source transcription is the concrete coordinate-order expression already
--- implemented in BalabanSU2LinearizedAverage.  Keeping this separate from the
--- executable name makes later equation-by-equation source audits possible.
+cmp98SourceFormula :
+  ∀ {M L : Nat} {{_ : NonZero (M * suc L)}} →
+  ℝ → ℝ → RadialReducedOperator → RadialReducedOperator →
+  SU2LieField4 (M * suc L) → SU2DirectedGaugeField4 (M * suc L) →
+  SU2AdjointBondField4 (M * suc L) → Cube4 M → Axis4 → SU2LieAlgebra
 cmp98SourceFormula = linearizedAverage
+
+cmp98Implementation :
+  ∀ {M L : Nat} {{_ : NonZero (M * suc L)}} →
+  ℝ → ℝ → RadialReducedOperator → RadialReducedOperator →
+  SU2LieField4 (M * suc L) → SU2DirectedGaugeField4 (M * suc L) →
+  SU2AdjointBondField4 (M * suc L) → Cube4 M → Axis4 → SU2LieAlgebra
 cmp98Implementation = linearizedAverage
 
 cmp98LinearizationSourceExact :
@@ -41,8 +45,3 @@ cmp98LinearizationSourceExact :
   cmp98SourceFormula mainWeight correctionWeight rootOp junctionOp Y U A coarse axis
 cmp98LinearizationSourceExact
   mainWeight correctionWeight rootOp junctionOp Y U A coarse axis = refl
-
-linearAverageGaugeCovariant = Concrete.linearAverageGaugeCovariant
-linearAverageAtTrivialBackground = Concrete.linearAverageTrivialBackground
-linearAverageFiniteSupport = Concrete.linearAverageFiniteSupport
-linearAverageBackgroundPerturbation = Concrete.linearAverageRegularBackgroundPerturbation
