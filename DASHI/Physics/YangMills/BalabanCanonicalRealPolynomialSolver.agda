@@ -33,23 +33,29 @@ open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver as Base
 
 canonicalInterpretCoefficient : IntegerCoefficient → ℝ
 canonicalInterpretCoefficient (coefficient zero zero) = zeroR
-canonicalInterpretCoefficient (coefficient (suc zero) zero) = oneR
-canonicalInterpretCoefficient (coefficient (suc (suc positive)) zero) =
-  interpretCoefficient (coefficient (suc (suc positive)) zero)
 canonicalInterpretCoefficient (coefficient zero (suc negative)) =
   interpretCoefficient (coefficient zero (suc negative))
-canonicalInterpretCoefficient (coefficient (suc positive) (suc negative)) =
-  interpretCoefficient (coefficient (suc positive) (suc negative))
+canonicalInterpretCoefficient (coefficient (suc zero) zero) = oneR
+canonicalInterpretCoefficient (coefficient (suc zero) (suc negative)) =
+  interpretCoefficient (coefficient (suc zero) (suc negative))
+canonicalInterpretCoefficient (coefficient (suc (suc positive)) zero) =
+  interpretCoefficient (coefficient (suc (suc positive)) zero)
+canonicalInterpretCoefficient
+  (coefficient (suc (suc positive)) (suc negative)) =
+  interpretCoefficient
+    (coefficient (suc (suc positive)) (suc negative))
 
 canonicalInterpretationCorrect :
   ∀ value → canonicalInterpretCoefficient value ≡ interpretCoefficient value
 canonicalInterpretationCorrect (coefficient zero zero) =
   sym zeroCoefficientHomomorphic
+canonicalInterpretationCorrect (coefficient zero (suc negative)) = refl
 canonicalInterpretationCorrect (coefficient (suc zero) zero) =
   sym oneCoefficientHomomorphic
+canonicalInterpretationCorrect (coefficient (suc zero) (suc negative)) = refl
 canonicalInterpretationCorrect (coefficient (suc (suc positive)) zero) = refl
-canonicalInterpretationCorrect (coefficient zero (suc negative)) = refl
-canonicalInterpretationCorrect (coefficient (suc positive) (suc negative)) = refl
+canonicalInterpretationCorrect
+  (coefficient (suc (suc positive)) (suc negative)) = refl
 
 canonicalAddHomomorphic :
   ∀ left right →
