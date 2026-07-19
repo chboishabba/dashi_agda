@@ -19,28 +19,44 @@ record ComplexAnalyticCarrier : Set₁ where
     Holomorphic : Function → Set
     Entire : Function → Set
     Meromorphic : Function → Set
+    SimplePoleAt : Function → Complex → Set
 
 record GammaMellinLayer (carrier : ComplexAnalyticCarrier) : Set₁ where
   open ComplexAnalyticCarrier carrier
   field
     Test : Set
+    MellinDomain : Test → Set
+    MellinInversionLaw : Test → Set
+
     gamma : Function
     mellin : Test → Function
+
     gammaMeromorphic : Meromorphic gamma
-    mellinHolomorphicOnDomain : (f : Test) → Set
-    mellinInversion : (f : Test) → Set
+    mellinHolomorphicOnDomain :
+      (f : Test) → MellinDomain f → Holomorphic (mellin f)
+    mellinInversion :
+      (f : Test) → MellinDomain f → MellinInversionLaw f
 
 record ZetaHalfPlaneLayer (carrier : ComplexAnalyticCarrier) : Set₁ where
   open ComplexAnalyticCarrier carrier
   field
     zetaHalfPlane : Function
     realPartGreaterThanOne : Complex → Set
+
+    DirichletSeriesConverges : Complex → Set
+    EulerProductConverges : Complex → Set
+
     dirichletSeriesConverges :
-      (s : Complex) → realPartGreaterThanOne s → Set
+      (s : Complex) → realPartGreaterThanOne s →
+      DirichletSeriesConverges s
+
     zetaEqualsDirichletSeries :
       (s : Complex) → realPartGreaterThanOne s → Set
+
     eulerProductConverges :
-      (s : Complex) → realPartGreaterThanOne s → Set
+      (s : Complex) → realPartGreaterThanOne s →
+      EulerProductConverges s
+
     zetaEqualsEulerProduct :
       (s : Complex) → realPartGreaterThanOne s → Set
 
@@ -60,15 +76,20 @@ record CompletedRiemannZeta
       apply zeta s ≡
       apply (ZetaHalfPlaneLayer.zetaHalfPlane halfPlane) s
 
+    CompletedDefinition : Complex → Set
+    NontrivialZetaZerosMatchXiZeros : Set
+
     zetaMeromorphic : Meromorphic zeta
-    simplePoleAtOne : Set
+    simplePoleAtOne : SimplePoleAt zeta oneC
     xiEntire : Entire xi
-    completedDefinition : (s : Complex) → Set
+    completedDefinition :
+      (s : Complex) → CompletedDefinition s
     functionalEquation :
       (s : Complex) → apply xi s ≡ apply xi (oneMinus s)
     conjugationLaw :
       (s : Complex) → apply xi (conjC s) ≡ conjC (apply xi s)
-    nontrivialZetaZerosMatchXiZeros : Set
+    nontrivialZetaZerosMatchXiZeros :
+      NontrivialZetaZerosMatchXiZeros
 
 record AnalyticSubstrate : Set₁ where
   field
