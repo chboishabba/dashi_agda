@@ -64,28 +64,33 @@ termSumAgreement :
   (formula : RiemannExplicitFormula space) →
   (bridge : DashiWeilTermwiseBridge space formula) →
   (x : DashiWeilTermwiseBridge.DashiTest bridge) →
-  let open WeilTestSpace space
-      open RiemannExplicitFormula formula
-      open DashiWeilTermwiseBridge bridge
-  in
-  (dashiPrimePowerTerm x +S
-   (dashiArchimedeanTerm x +S
-    (dashiPoleTerm x +S dashiTrivialZeroTerm x)))
+  WeilTestSpace._+S_ space
+    (DashiWeilTermwiseBridge.dashiPrimePowerTerm bridge x)
+    (WeilTestSpace._+S_ space
+      (DashiWeilTermwiseBridge.dashiArchimedeanTerm bridge x)
+      (WeilTestSpace._+S_ space
+        (DashiWeilTermwiseBridge.dashiPoleTerm bridge x)
+        (DashiWeilTermwiseBridge.dashiTrivialZeroTerm bridge x)))
   ≡
-  (primePowerTerm (embed x) +S
-   (archimedeanGammaTerm (embed x) +S
-    (poleTerm (embed x) +S trivialZeroTerm (embed x))))
+  WeilTestSpace._+S_ space
+    (RiemannExplicitFormula.primePowerTerm formula
+      (DashiWeilTermwiseBridge.embed bridge x))
+    (WeilTestSpace._+S_ space
+      (RiemannExplicitFormula.archimedeanGammaTerm formula
+        (DashiWeilTermwiseBridge.embed bridge x))
+      (WeilTestSpace._+S_ space
+        (RiemannExplicitFormula.poleTerm formula
+          (DashiWeilTermwiseBridge.embed bridge x))
+        (RiemannExplicitFormula.trivialZeroTerm formula
+          (DashiWeilTermwiseBridge.embed bridge x))))
 termSumAgreement space formula bridge x =
-  let open WeilTestSpace space
-      open DashiWeilTermwiseBridge bridge
-  in
-  cong₂ _+S_
-    (primePowerAgreement x)
-    (cong₂ _+S_
-      (archimedeanAgreement x)
-      (cong₂ _+S_
-        (poleAgreement x)
-        (trivialZeroAgreement x)))
+  cong₂ (WeilTestSpace._+S_ space)
+    (DashiWeilTermwiseBridge.primePowerAgreement bridge x)
+    (cong₂ (WeilTestSpace._+S_ space)
+      (DashiWeilTermwiseBridge.archimedeanAgreement bridge x)
+      (cong₂ (WeilTestSpace._+S_ space)
+        (DashiWeilTermwiseBridge.poleAgreement bridge x)
+        (DashiWeilTermwiseBridge.trivialZeroAgreement bridge x)))
 
 termwiseArithmeticAgreement :
   (space : WeilTestSpace) →
