@@ -13,8 +13,6 @@ module DASHI.Physics.YangMills.BalabanSU2AdjointInnerProduct where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
-import Tactic.RingSolver as Solver
-
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanCovariantPathIntegral using
   ( AdjointLinearModule )
@@ -22,6 +20,8 @@ open import DASHI.Physics.YangMills.BalabanLinearBlockPathAverage using
   ( ScalarAdjointLinearModule )
 open import DASHI.Physics.YangMills.BalabanFiniteAdjointQuadraticForms using
   ( AdjointInnerProductModule )
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
+  ( *-identityˡ )
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   ( module RealPolynomialSolver )
 open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
@@ -44,7 +44,6 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ; oneR
   ; normSquaredQ
   ; normSquaredExpand
-  ; realSolverRing
   ; _*q_
   ; conjugateQ
   ; q1Multiply
@@ -234,11 +233,9 @@ su2DotAdjointInvariant u X Y =
       (cong
         (λ norm → (norm *R norm) *R su2Dot X Y)
         (unitNormSquared u))
-      (Solver.solve
-        (su2Dot X Y ∷ [])
-        realSolverRing))
-  where
-  open import Data.List.Base using ([]; _∷_)
+      (trans
+        (cong (λ factor → factor *R su2Dot X Y) (*-identityˡ oneR))
+        (*-identityˡ (su2Dot X Y))))
 
 su2ScaleActionCommutes :
   ∀ u scalar X →
