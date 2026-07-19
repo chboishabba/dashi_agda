@@ -21,9 +21,9 @@ su2WilsonActionData :
   ∀ {Plaquette} →
   SU2FinitePlaquetteData Plaquette →
   FiniteWilsonActionData Plaquette SU2Quaternion ℝ
-su2WilsonActionData data = record
-  { plaquettes = SU2FinitePlaquetteData.plaquettes data
-  ; plaquetteHolonomy = SU2FinitePlaquetteData.plaquetteHolonomy data
+su2WilsonActionData bundle = record
+  { plaquettes = SU2FinitePlaquetteData.plaquettes bundle
+  ; plaquetteHolonomy = SU2FinitePlaquetteData.plaquetteHolonomy bundle
   ; normalizedRealTrace = λ link → q0 (quaternion link)
   ; scalarZero = zeroR
   ; scalarOne = oneR
@@ -33,4 +33,4 @@ su2WilsonActionData data = record
 
 su2FiniteWilsonAction :
   ∀ {Plaquette} → SU2FinitePlaquetteData Plaquette → ℝ
-su2FiniteWilsonAction data = finiteWilsonAction (su2WilsonActionData data)
+su2FiniteWilsonAction bundle = finiteWilsonAction (su2WilsonActionData bundle)
