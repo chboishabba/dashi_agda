@@ -21,7 +21,7 @@ open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin; zero; suc)
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Builtin.Sigma using (Σ) renaming (_,_ to _,Σ_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using
@@ -125,12 +125,12 @@ radiusTwoExcludesAntipode center membership =
 radiusThreeProperWitness :
   ∀ center → Σ (Cube4 2) (λ point → InRadiusThree center point → ⊥)
 radiusThreeProperWitness center =
-  antipode2 center , radiusThreeExcludesAntipode center
+  antipode2 center ,Σ radiusThreeExcludesAntipode center
 
 radiusTwoProperWitness :
   ∀ center → Σ (Cube4 2) (λ point → InRadiusTwo center point → ⊥)
 radiusTwoProperWitness center =
-  antipode2 center , radiusTwoExcludesAntipode center
+  antipode2 center ,Σ radiusTwoExcludesAntipode center
 
 ------------------------------------------------------------------------
 -- Translated cover: every point is covered by the ball centred at that point.
@@ -139,9 +139,9 @@ radiusTwoProperWitness center =
 radiusThreeTranslatedCover :
   ∀ point → Σ (Cube4 2) (λ center → InRadiusThree center point)
 radiusThreeTranslatedCover point =
-  point , radiusThreeContainsCenter point
+  point ,Σ radiusThreeContainsCenter point
 
 radiusTwoTranslatedCover :
   ∀ point → Σ (Cube4 2) (λ center → InRadiusTwo center point)
 radiusTwoTranslatedCover point =
-  point , radiusTwoContainsCenter point
+  point ,Σ radiusTwoContainsCenter point
