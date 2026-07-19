@@ -40,6 +40,11 @@ jobs:
         shell: bash
         run: |
           set +e
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export AGDA_LOG_PATH="$GITHUB_WORKSPACE/balaban-finite-frontier.log"
+          export AGDA_JOBS=4
           scripts/run_agda29_parallel_check.sh \
             DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda \
             > /tmp/balaban-finite-frontier.log 2>&1
