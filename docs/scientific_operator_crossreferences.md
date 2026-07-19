@@ -47,11 +47,19 @@ Two adapters consume this theorem:
 
 The metabolic theorem deliberately excludes external flux. An open system requires a later balance law with explicit source and sink terms rather than a false closed-system invariant.
 
-### 5. Fejer monotonicity -> protein basin invariance
+### 5. Fejer monotonicity and contraction -> certified protein attractors
 
 `ProteinFejerBasinBridge` identifies a protein attractor basin with a certified distance sublevel set around a basin centre. The existing generic Fejer theorem then proves that the folding update remains inside the basin.
 
-This closes the `forwardInvariant` field of `ConformationalAttractorWitness` and proves invariance for every finite iterate. It does not claim a global folding funnel, unique native state, or convergence outside the certified region.
+This closes the `forwardInvariant` field of `ConformationalAttractorWitness` and proves invariance for every finite iterate. It does not claim a global folding funnel or convergence outside the certified region.
+
+`DASHI.Analysis.StrictContractionUniqueness` separately proves that an existing finite strict-contraction certificate has a unique fixed point whenever the declared strict-distance relation is irreflexive. `ProteinContractiveBasinBridge` composes the two certificates:
+
+- the Fejer certificate supplies local basin invariance;
+- the contraction certificate supplies a unique fixed conformation on the declared carrier;
+- the existing protein admissibility witness establishes chemical admissibility of that fixed conformation.
+
+The declared contraction carrier may be a local region or subtype. No global uniqueness of the ambient conformational landscape is claimed.
 
 ## Domain-neutral namespaces
 
@@ -65,15 +73,17 @@ This closes the `forwardInvariant` field of `ConformationalAttractorWitness` and
 
 `DASHI.Analysis.StoichiometricConservation` owns the reaction-path left-kernel theorem independently of any chemistry or biology namespace.
 
+`DASHI.Analysis.StrictContractionUniqueness` owns the irreflexive-distance uniqueness theorem independently of the protein interpretation.
+
 No definitions are copied.
 
 ## Highest-alpha next joins
 
 1. **Open-system stoichiometric balance.** Extend the exact internal invariant to `Q(x_final) = Q(x_initial) + sources - sinks`, indexed by external flux events and compartment boundaries.
 2. **Detailed-balance free-energy descent.** Connect reversible reaction networks and Markov generators to a relative-entropy/free-energy dissipation identity without identifying thermodynamic free energy with MDL.
-3. **Protein local uniqueness from contraction.** Add the irreflexive-distance theorem showing that a certified strict contraction has a unique fixed conformation in its declared region, then connect it to folding and chaperone lanes.
-4. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
-5. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
-6. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
+3. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
+4. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
+5. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
+6. **Metastability and transition paths.** Add barrier and transition-state certificates so multiple protein or molecular minima can coexist without being collapsed by the local contraction theorem.
 
 These are preferred over further broad “physics/chemistry/biology share a pattern” records because each produces a reusable theorem and a narrower empirical or analytic frontier.
