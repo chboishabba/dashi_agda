@@ -11,7 +11,6 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat using (_∸_)
 open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
 
 record PrimePredicate : Set₁ where
@@ -32,6 +31,11 @@ primeCountLE arithmetic (suc zero) = zero
 primeCountLE arithmetic (suc (suc n)) =
   primeIndicator arithmetic (suc (suc n))
   + primeCountLE arithmetic (suc n)
+
+-- Number of primes strictly less than n.
+primeCountLT : PrimePredicate → Nat → Nat
+primeCountLT arithmetic zero = zero
+primeCountLT arithmetic (suc n) = primeCountLE arithmetic n
 
 primeCountStep :
   (arithmetic : PrimePredicate) →
@@ -105,21 +109,29 @@ primeListCountExact arithmetic (suc (suc n))
 -- Symmetric endpoint convention π₀(n)
 ------------------------------------------------------------------------
 
--- Twice the symmetric count avoids introducing rationals:
+-- Twice the symmetric count avoids introducing rationals and directly matches
+-- the left/right-limit definition:
 --
---   2 π₀(n) = 2 π(n) - 1    when n is prime,
---           = 2 π(n)        otherwise.
+--   2 π₀(n) = π(n⁻) + π(n).
 --
--- Thus odd values encode a half jump at the endpoint.
+-- At a prime endpoint the value is odd, encoding the half jump.
 primeCountSymmetricTwice : PrimePredicate → Nat → Nat
 primeCountSymmetricTwice arithmetic n =
-  (primeCountLE arithmetic n + primeCountLE arithmetic n)
-  ∸ primeIndicator arithmetic n
+  primeCountLT arithmetic n + primeCountLE arithmetic n
+
+primeCountSymmetricTwiceDefinition :
+  (arithmetic : PrimePredicate) →
+  (n : Nat) →
+  primeCountSymmetricTwice arithmetic n
+  ≡
+  (primeCountLT arithmetic n + primeCountLE arithmetic n)
+primeCountSymmetricTwiceDefinition arithmetic n = refl
 
 record PrimeCountingFiniteBoundary : Set where
   field
     exactNatCountOnly : ⊤
     symmetricEndpointEncodedByDoubling : ⊤
+    symmetricValueUsesLeftRightCounts : ⊤
     noRealArgumentExtension : ⊤
     noPrimeNumberTheoremClaim : ⊤
     noRiemannExplicitFormulaClaim : ⊤
@@ -129,6 +141,7 @@ primeCountingFiniteBoundary : PrimeCountingFiniteBoundary
 primeCountingFiniteBoundary = record
   { exactNatCountOnly = tt
   ; symmetricEndpointEncodedByDoubling = tt
+  ; symmetricValueUsesLeftRightCounts = tt
   ; noRealArgumentExtension = tt
   ; noPrimeNumberTheoremClaim = tt
   ; noRiemannExplicitFormulaClaim = tt
