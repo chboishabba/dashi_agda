@@ -13,21 +13,21 @@ open FiniteEffectiveAction public
 effectiveAction :
   ∀ {Background Scalar} →
   FiniteEffectiveAction Background Scalar → Background → Scalar
-effectiveAction data background =
-  add data (gaussianDeterminant data background)
-    (add data (interactionCumulant data background)
-      (add data (constraintJacobian data background)
-        (add data (gaugeFixingNormalization data background)
-          (irrelevantRemainder data background))))
+effectiveAction bundle background =
+  add bundle (gaussianDeterminant bundle background)
+    (add bundle (interactionCumulant bundle background)
+      (add bundle (constraintJacobian bundle background)
+        (add bundle (gaugeFixingNormalization bundle background)
+          (irrelevantRemainder bundle background))))
 
 effectiveActionDecomposition :
   ∀ {Background Scalar}
-  (data : FiniteEffectiveAction Background Scalar) →
+  (bundle : FiniteEffectiveAction Background Scalar) →
   ∀ background →
-  effectiveAction data background ≡
-  add data (gaussianDeterminant data background)
-    (add data (interactionCumulant data background)
-      (add data (constraintJacobian data background)
-        (add data (gaugeFixingNormalization data background)
-          (irrelevantRemainder data background))))
-effectiveActionDecomposition data background = refl
+  effectiveAction bundle background ≡
+  add bundle (gaussianDeterminant bundle background)
+    (add bundle (interactionCumulant bundle background)
+      (add bundle (constraintJacobian bundle background)
+        (add bundle (gaugeFixingNormalization bundle background)
+          (irrelevantRemainder bundle background))))
+effectiveActionDecomposition bundle background = refl
