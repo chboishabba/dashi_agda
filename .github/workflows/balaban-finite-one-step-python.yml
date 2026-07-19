@@ -33,6 +33,11 @@ jobs:
           python build_wilson_hessian.py --L 2 --Q /tmp/balaban-one-step/Q.npy --out /tmp/balaban-one-step/H.npy
           python constrained_covariance.py --H /tmp/balaban-one-step/H.npy --Q /tmp/balaban-one-step/Q.npy --out-prefix /tmp/balaban-one-step/c
           python finite_logdet.py --H /tmp/balaban-one-step/H.npy --Q /tmp/balaban-one-step/Q.npy --out /tmp/balaban-one-step/logdet.json
+      - name: Search frontier proof constants
+        working-directory: experiments/yang_mills/balaban_one_step
+        run: |
+          python frontier_search.py --L 2 --block 2 --radii 0,0.01,0.03 --seeds 2 --out /tmp/balaban-one-step/frontier-search.json
+          python su2_ad_functional_calculus.py --radius 0.25 --samples 64 --out /tmp/balaban-one-step/ad-functional-calculus.json
       - name: Run exact finite certificates
         working-directory: experiments/yang_mills/balaban_one_step
         run: |
@@ -44,3 +49,8 @@ jobs:
           JSON
           python rational_ldlt_certificate.py --matrix /tmp/balaban-one-step/rational.json --out /tmp/balaban-one-step/rational-certificate.json
           python interval_ldlt_certificate.py --matrix /tmp/balaban-one-step/interval.json --out /tmp/balaban-one-step/interval-certificate.json
+      - name: Upload finite frontier receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: balaban-finite-frontier-receipts
+          path: /tmp/balaban-one-step/*.json
