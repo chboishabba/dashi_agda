@@ -19,6 +19,7 @@ open import DASHI.Analysis.DashiWeilExactIdentification public
 open import DASHI.Analysis.DashiWeilTermwiseBridge public
 open import DASHI.Analysis.WeilPositivityCore public
 open import DASHI.Analysis.WeilDensityClosure public
+open import DASHI.Analysis.RiemannArithmeticCoercivity public
 open import DASHI.Analysis.RiemannMillenniumAssembly public
 
 -- Retained for direct qualified imports by older callers, but not opened here:
