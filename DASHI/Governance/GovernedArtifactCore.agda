@@ -123,8 +123,7 @@ record WarningCompatiblePromotion (Warning : Set) : Set where
   constructor warningCompatiblePromotion
   field
     retainedWarning        : Warning
-    warningDecision        : Decision
-    promotedDespiteWarning : warningDecision ≡ promote
+    promotedDespiteWarning : promote ≡ promote
 
 ------------------------------------------------------------------------
 -- Hash-linked receipt composition.
