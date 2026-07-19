@@ -58,26 +58,3 @@ uniformCompactGammaResidenceBound A F cutoff shell state =
     (absorbedCompactGammaReplenishmentBoundsResidence A
       (member F cutoff shell state))
     (memberUpperBound F cutoff shell state)
-
-------------------------------------------------------------------------
--- A reusable theorem socket matching the empirical audit vocabulary.
---
--- `sampledTheta` and `sampledCLambda` are deliberately not fields here:
--- numerical extrema do not construct analytic inequalities.  A future proof
--- must first package its actual danger-to-margin and replenishment estimates
--- into `CompactGammaAbsorbedResidenceInputs`, and then prove one common upper
--- bound through `memberUpperBound`.
-------------------------------------------------------------------------
-
-record CompactGammaUniformityReceipt
-    (A : AbsorptionArithmetic) : Set₁ where
-  field
-    family : CompactGammaCutoffShellFamily A
-
-    finiteGalerkinEvidenceOnly : Set
-    cutoffUniformEstimateProved : Set
-    continuumCompactnessProved : Set
-    bkmBridgeProved : Set
-    clayPromotionProved : Set
-
-open CompactGammaUniformityReceipt public
