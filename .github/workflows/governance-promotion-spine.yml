@@ -1,0 +1,71 @@
+name: Governance promotion spine Agda check
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Governance/PromotionSpine.agda"
+      - "DASHI/Governance/ArtifactAuthorityPromotionBridge.agda"
+      - "DASHI/Governance/PromotionSpineTests.agda"
+      - "DASHI/Governance/Everything.agda"
+      - ".github/workflows/governance-promotion-spine.yml"
+  push:
+    paths:
+      - "DASHI/Governance/PromotionSpine.agda"
+      - "DASHI/Governance/ArtifactAuthorityPromotionBridge.agda"
+      - "DASHI/Governance/PromotionSpineTests.agda"
+      - "DASHI/Governance/Everything.agda"
+      - ".github/workflows/governance-promotion-spine.yml"
+
+concurrency:
+  group: governance-promotion-spine-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check governance promotion spine
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-governance-promotion-spine.log"
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Governance/PromotionSpine.agda \
+              DASHI/Governance/ArtifactAuthorityPromotionBridge.agda \
+              DASHI/Governance/PromotionSpineTests.agda \
+              DASHI/Governance/Everything.agda
+          ) > agda-governance-promotion-spine.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 200 agda-governance-promotion-spine.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-promotion-spine-agda-log
+          path: agda-governance-promotion-spine.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
