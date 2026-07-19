@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSPairIncidenceKernelProgram where
 open import DASHI.Analysis.WeightedKernelSchurTest public
 open import DASHI.Analysis.FiniteWeightedKernelSums public
 open import DASHI.Physics.Closure.NSIntegerFourierLattice public
+open import DASHI.Physics.Closure.NSWall1CanonicalModePacket public
 open import DASHI.Physics.Closure.NSDivergenceFreePolarizationBasis public
 open import DASHI.Physics.Closure.NSPairIncidenceKernel public
 open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel public
