@@ -13,76 +13,25 @@ module DASHI.Analysis.FiniteOperatorReductionCore where
 
 open import DASHI.Physics.YangMills.BalabanFiniteOneStepCore public using
   ( ConstrainedMinimizerData
-  ; covariance
-  ; average
-  ; averageStar
-  ; middleInverse
-  ; middleInverseLeft
   ; constrainedMinimizer
   ; constrainedMinimizerHasAverage
   ; KernelProjectionData
-  ; minimizerData
-  ; fineSubtract
-  ; coarseSubtract
-  ; coarseZero
-  ; averageSubtract
-  ; coarseSubtractSelf
   ; kernelProjection
   ; kernelProjectionHasZeroAverage
   ; FiniteHessianCertificate
-  ; hessian
-  ; inner
-  ; symmetric
-  ; Positive
-  ; positive
   ; FiniteCovarianceCertificate
-  ; covarianceLeft
-  ; covarianceRight
   ; BlockSchurData
-  ; aBlock
-  ; bBlock
-  ; cBlock
-  ; dBlock
-  ; aInverse
-  ; add
-  ; subtract
-  ; compose
-  ; schurComplement
-  ; schurDefinition
-  ; determinant
-  ; scalarMultiply
-  ; determinantFactorization
   ; FiniteContractionCertificate
-  ; step
-  ; distance
-  ; StrictlySmaller
-  ; fixedPoint
-  ; fixed
-  ; contractive
   )
 
 open import DASHI.Analysis.BlockSchurCoercivity public
 
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedBlockHodgePoincare public using
   ( OrderedEnergy
-  ; _≤_
-  ; add
-  ; reflexive
-  ; transitive
-  ; addMonotoneRight
   ; gaugeFixedEnergy
   ; blockHodgePoincareFromLocal
   ; GaugeFixedBlockHodgePoincare
-  ; normSquared
-  ; curlEnergy
-  ; divergenceEnergy
-  ; averageEnergy
-  ; constantWeightedEnergy
-  ; weightedEnergyDefinition
-  ; hodgePoincare
   ; ZeroBackgroundCoercivity
-  ; hessianEnergy
-  ; coercive
   ; hodgePoincareGivesZeroBackgroundCoercivity
   ; backgroundCoercivityFromPerturbation
   )
