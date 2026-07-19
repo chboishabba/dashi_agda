@@ -1,13 +1,6 @@
 name: NS compact Gamma off-packet Schur tail
 
 on:
-  push:
-    paths:
-      - 'scripts/ns_compact_gamma_offpacket_schur_audit.py'
-      - 'scripts/tests/test_ns_compact_gamma_offpacket_schur_audit.py'
-      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda'
-      - 'docs/ns_compact_gamma_offpacket_schur_audit.md'
-      - '.github/workflows/ns-compact-gamma-offpacket-schur.yml'
   pull_request:
     paths:
       - 'scripts/ns_compact_gamma_offpacket_schur_audit.py'
