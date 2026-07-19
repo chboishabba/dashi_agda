@@ -1,9 +1,10 @@
 module DASHI.Physics.YangMills.BalabanSU2LieBracket where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
-  ( module RealPolynomialSolver; zeroCoefficient; oneCoefficient )
+  ( module RealPolynomialSolver; zeroCoefficient; oneCoefficient; zeroCoefficientHomomorphic )
 open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
   ( solveComputed; computed )
 open RealPolynomialSolver using
@@ -56,10 +57,12 @@ lieBracket (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) =
 comm0Polynomial : ∀ x₁ y₁ z₁ x₂ y₂ z₂ →
   zeroR ≡ q0R zeroR x₁ y₁ z₁ zeroR x₂ y₂ z₂ +R
     (-R (q0R zeroR x₂ y₂ z₂ zeroR x₁ y₁ z₁))
-comm0Polynomial = solveComputed 6
-  (λ x₁ y₁ z₁ x₂ y₂ z₂ →
-    zeroP := q0P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂ :+ (:- (q0P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
-  computed
+comm0Polynomial x₁ y₁ z₁ x₂ y₂ z₂ =
+  trans (sym zeroCoefficientHomomorphic)
+    (solveComputed 6
+      (λ x₁ y₁ z₁ x₂ y₂ z₂ →
+        zeroP := q0P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂ :+ (:- (q0P zeroP x₂ y₂ z₂ zeroP x₁ y₁ z₁)))
+      computed x₁ y₁ z₁ x₂ y₂ z₂)
 
 comm1Polynomial : ∀ x₁ y₁ z₁ x₂ y₂ z₂ →
   bracket1R y₁ z₁ y₂ z₂ ≡ q1R zeroR x₁ y₁ z₁ zeroR x₂ y₂ z₂ +R
@@ -160,17 +163,26 @@ jacobi1 : ∀ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ →
   bracket1R y₁ z₁ (bracket2R z₂ x₂ z₃ x₃) (bracket3R x₂ y₂ x₃ y₃) +R
   (bracket1R y₂ z₂ (bracket2R z₃ x₃ z₁ x₁) (bracket3R x₃ y₃ x₁ y₁) +R
    bracket1R y₃ z₃ (bracket2R z₁ x₁ z₂ x₂) (bracket3R x₁ y₁ x₂ y₂)) ≡ zeroR
-jacobi1 = solveComputed 9 (λ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ → bracket1P y₁ z₁ (bracket2P z₂ x₂ z₃ x₃) (bracket3P x₂ y₂ x₃ y₃) :+ (bracket1P y₂ z₂ (bracket2P z₃ x₃ z₁ x₁) (bracket3P x₃ y₃ x₁ y₁) :+ bracket1P y₃ z₃ (bracket2P z₁ x₁ z₂ x₂) (bracket3P x₁ y₁ x₂ y₂)) := zeroP) computed
+jacobi1 x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ =
+  trans
+    (solveComputed 9 (λ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ → bracket1P y₁ z₁ (bracket2P z₂ x₂ z₃ x₃) (bracket3P x₂ y₂ x₃ y₃) :+ (bracket1P y₂ z₂ (bracket2P z₃ x₃ z₁ x₁) (bracket3P x₃ y₃ x₁ y₁) :+ bracket1P y₃ z₃ (bracket2P z₁ x₁ z₂ x₂) (bracket3P x₁ y₁ x₂ y₂)) := zeroP) computed x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃)
+    zeroCoefficientHomomorphic
 jacobi2 : ∀ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ →
   bracket2R z₁ x₁ (bracket3R x₂ y₂ x₃ y₃) (bracket1R y₂ z₂ y₃ z₃) +R
   (bracket2R z₂ x₂ (bracket3R x₃ y₃ x₁ y₁) (bracket1R y₃ z₃ y₁ z₁) +R
    bracket2R z₃ x₃ (bracket3R x₁ y₁ x₂ y₂) (bracket1R y₁ z₁ y₂ z₂)) ≡ zeroR
-jacobi2 = solveComputed 9 (λ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ → bracket2P z₁ x₁ (bracket3P x₂ y₂ x₃ y₃) (bracket1P y₂ z₂ y₃ z₃) :+ (bracket2P z₂ x₂ (bracket3P x₃ y₃ x₁ y₁) (bracket1P y₃ z₃ y₁ z₁) :+ bracket2P z₃ x₃ (bracket3P x₁ y₁ x₂ y₂) (bracket1P y₁ z₁ y₂ z₂)) := zeroP) computed
+jacobi2 x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ =
+  trans
+    (solveComputed 9 (λ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ → bracket2P z₁ x₁ (bracket3P x₂ y₂ x₃ y₃) (bracket1P y₂ z₂ y₃ z₃) :+ (bracket2P z₂ x₂ (bracket3P x₃ y₃ x₁ y₁) (bracket1P y₃ z₃ y₁ z₁) :+ bracket2P z₃ x₃ (bracket3P x₁ y₁ x₂ y₂) (bracket1P y₁ z₁ y₂ z₂)) := zeroP) computed x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃)
+    zeroCoefficientHomomorphic
 jacobi3 : ∀ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ →
   bracket3R x₁ y₁ (bracket1R y₂ z₂ y₃ z₃) (bracket2R z₂ x₂ z₃ x₃) +R
   (bracket3R x₂ y₂ (bracket1R y₃ z₃ y₁ z₁) (bracket2R z₃ x₃ z₁ x₁) +R
    bracket3R x₃ y₃ (bracket1R y₁ z₁ y₂ z₂) (bracket2R z₁ x₁ z₂ x₂)) ≡ zeroR
-jacobi3 = solveComputed 9 (λ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ → bracket3P x₁ y₁ (bracket1P y₂ z₂ y₃ z₃) (bracket2P z₂ x₂ z₃ x₃) :+ (bracket3P x₂ y₂ (bracket1P y₃ z₃ y₁ z₁) (bracket2P z₃ x₃ z₁ x₁) :+ bracket3P x₃ y₃ (bracket1P y₁ z₁ y₂ z₂) (bracket2P z₁ x₁ z₂ x₂)) := zeroP) computed
+jacobi3 x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ =
+  trans
+    (solveComputed 9 (λ x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃ → bracket3P x₁ y₁ (bracket1P y₂ z₂ y₃ z₃) (bracket2P z₂ x₂ z₃ x₃) :+ (bracket3P x₂ y₂ (bracket1P y₃ z₃ y₁ z₁) (bracket2P z₃ x₃ z₁ x₁) :+ bracket3P x₃ y₃ (bracket1P y₁ z₁ y₂ z₂) (bracket2P z₁ x₁ z₂ x₂)) := zeroP) computed x₁ y₁ z₁ x₂ y₂ z₂ x₃ y₃ z₃)
+    zeroCoefficientHomomorphic
 
 lieBracketJacobi : ∀ X Y Z → lieAdd (lieBracket X (lieBracket Y Z)) (lieAdd (lieBracket Y (lieBracket Z X)) (lieBracket Z (lieBracket X Y))) ≡ su2Lie zeroR zeroR zeroR
 lieBracketJacobi (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) (su2Lie x₃ y₃ z₃) =
