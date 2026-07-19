@@ -2,6 +2,7 @@
 module DASHI.AnimalCommunication.DogVideoSystem where
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_≤_)
 open import Data.Product using (Σ)
 
 open import DASHI.AnimalCommunication.PoseMDL
