@@ -31,8 +31,6 @@ record WeightedSchurLaws
 
     _≤_ : Scalar → Scalar → Set s
     _⊗_ : Scalar → Scalar → Scalar
-    multiplyAssociative :
-      ∀ a b c → _⊗_ (_⊗_ a b) c ≡ _⊗_ a (_⊗_ b c)
 
     rowConstant : Scalar
     columnConstant : Scalar
@@ -85,15 +83,47 @@ weightedKernelBound :
     (input : VectorIn L) →
   _≤_ L
     (outputEnergy L (applyKernel L input))
+    (_⊗_ L
+      (rowConstant L)
+      (_⊗_ L (columnConstant L) (inputEnergy L input)))
+weightedKernelBound K L C =
+  weightedSchurEstimate L (rowBound C) (columnBound C)
+
+record WeightedProductAssociativity
+    {r c s : Level}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    {K : WeightedKernelData Row Col Scalar}
+    (L : WeightedSchurLaws K) : Set s where
+  field
+    multiplyAssociative :
+      ∀ a b c →
+      _⊗_ L (_⊗_ L a b) c ≡ _⊗_ L a (_⊗_ L b c)
+
+open WeightedProductAssociativity public
+
+weightedKernelProductBound :
+  ∀ {r c s}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    (K : WeightedKernelData Row Col Scalar)
+    (L : WeightedSchurLaws K)
+    (A : WeightedProductAssociativity L)
+    (C : WeightedKernelSchurCertificate K L)
+    (input : VectorIn L) →
+  _≤_ L
+    (outputEnergy L (applyKernel L input))
     (_⊗_ L (weightedOperatorProduct L) (inputEnergy L input))
-weightedKernelBound K L C input =
+weightedKernelProductBound K L A C input =
   subst
     (λ bound → _≤_ L (outputEnergy L (applyKernel L input)) bound)
-    (sym (multiplyAssociative L
+    (sym (multiplyAssociative A
       (rowConstant L)
       (columnConstant L)
       (inputEnergy L input)))
-    (weightedSchurEstimate L (rowBound C) (columnBound C) input)
+    (weightedKernelBound K L C input)
 
 record KernelIdentityMatch
     {r c s : Level}
