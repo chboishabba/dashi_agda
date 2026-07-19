@@ -1,0 +1,77 @@
+name: NS gamma-gap adversarial audit
+
+on:
+  push:
+    paths:
+      - 'scripts/ns_triad_gamma_gap_adversarial_audit.py'
+      - 'scripts/ns_triad_gamma_gap_core.py'
+      - 'scripts/ns_triad_gamma_gap_search.py'
+      - 'scripts/ns_triad_gamma_gap_transfer_carrier_refine.py'
+      - 'scripts/tests/test_ns_triad_gamma_gap_adversarial_audit.py'
+      - 'scripts/tests/test_ns_triad_gamma_gap_transfer_carrier_refine.py'
+      - 'scripts/data/examples/ns_triad_gamma_gap_example.json'
+      - 'docs/ns_triad_gamma_gap_adversarial_audit.md'
+      - '.github/workflows/ns-gamma-gap-adversarial-audit.yml'
+  pull_request:
+    paths:
+      - 'scripts/ns_triad_gamma_gap_adversarial_audit.py'
+      - 'scripts/ns_triad_gamma_gap_core.py'
+      - 'scripts/ns_triad_gamma_gap_search.py'
+      - 'scripts/ns_triad_gamma_gap_transfer_carrier_refine.py'
+      - 'scripts/tests/test_ns_triad_gamma_gap_adversarial_audit.py'
+      - 'scripts/tests/test_ns_triad_gamma_gap_transfer_carrier_refine.py'
+      - 'scripts/data/examples/ns_triad_gamma_gap_example.json'
+      - 'docs/ns_triad_gamma_gap_adversarial_audit.md'
+      - '.github/workflows/ns-gamma-gap-adversarial-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  python-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install focused dependencies
+        run: python -m pip install --upgrade pip numpy pytest
+      - name: Run focused tests
+        run: |
+          python -m pytest -q \
+            scripts/tests/test_ns_triad_gamma_gap_adversarial_audit.py \
+            scripts/tests/test_ns_triad_gamma_gap_transfer_carrier_refine.py
+      - name: Run transfer-closed refinement and audit
+        run: |
+          python scripts/ns_triad_gamma_gap_transfer_carrier_refine.py \
+            --input-json scripts/data/examples/ns_triad_gamma_gap_example.json \
+            --output-json /tmp/ns-triad-gamma-gap-refined.json \
+            --transfer-capture 0.90 \
+            --pretty
+          python scripts/ns_triad_gamma_gap_adversarial_audit.py \
+            --input-json /tmp/ns-triad-gamma-gap-refined.json \
+            --output-json /tmp/ns-triad-gamma-gap-audit.json \
+            --target-eta 0.05 \
+            --random-samples 32 \
+            --local-steps 16 \
+            --seed 0 \
+            --pretty
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          refined = json.loads(Path('/tmp/ns-triad-gamma-gap-refined.json').read_text())
+          receipt = refined['carrier_refinement']
+          assert receipt['closure_converged'] is True
+          assert receipt['transfer_capture_fraction'] >= 0.90
+          assert receipt['theorem_authority'] is False
+          assert receipt['clay_authority'] is False
+
+          payload = json.loads(Path('/tmp/ns-triad-gamma-gap-audit.json').read_text())
+          assert payload['authority']['theorem_authority'] is False
+          assert payload['authority']['clay_authority'] is False
+          assert payload['problem_count'] == 1
+          assert payload['results'][0]['max_finite_identity_residual'] < 1e-12
+          PY
