@@ -31,6 +31,49 @@ Further frontier probes include:
 - `rational_ldlt_certificate.py`: exact rational LDLT positivity and determinant certificate;
 - `DashenGrossSU2OneLoopOracle.py`: convention calibration only.
 
+## Local-parametrix search
+
+`local_parametrix_search.py` constructs and compares finite-range approximate
+inverses made from local Hessian restrictions. The available patch families are:
+
+- isotropic cubes;
+- unions of axis-oriented slabs;
+- translated torus L1 balls of fixed radius.
+
+The glued operator uses a symmetric diagonal partition of unity. A candidate is
+reported as convergent only when both residuals satisfy
+
+```text
+||I - A G*||_mu < 1
+||I - G* A||_mu < 1
+```
+
+in the requested exponentially weighted row norm. Spectral radius below one
+without these norm inequalities is retained as an obstruction, not promoted.
+The full-volume patch is reported separately and never counted as proper-local.
+
+For the current `2^4`, block-two finite example, the search found:
+
+- axis slabs close the trivial-background remainder but not the sampled
+  nontrivial-background weighted norm;
+- radius-two and radius-three torus balls are proper finite patches and close the
+  sampled small backgrounds through radius `0.03` in the current test set.
+
+Run the full finite search with:
+
+```bash
+python local_parametrix_search.py \
+  --L 2 --average-block 2 \
+  --local-sides 1,2 --slab-thicknesses 2 --ball-radii 2,3 \
+  --mus 0,0.05,0.1 --radii 0,0.01,0.03 \
+  --relaxations 0.25,0.5,0.75,1 --seeds 1 \
+  --out out/local-parametrix-search.json
+```
+
+This is theorem-discovery evidence for the shape of a local random-walk proof.
+It does not prove that one fixed patch radius, weight, or remainder constant
+works uniformly in total volume, RG scale, or every admissible background.
+
 The canonical path and averaging convention is explicit in `common.py`. It is a
 reference convention that must be compared term-by-term with the target CMP98
 formula before being called source-exact.
