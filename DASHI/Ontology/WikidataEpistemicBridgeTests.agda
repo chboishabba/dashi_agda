@@ -2,6 +2,7 @@ module DASHI.Ontology.WikidataEpistemicBridgeTests where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([])
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import DASHI.Ontology.EpistemicTrit
 open import DASHI.Ontology.ContextualClaimComposition
 open import DASHI.Ontology.WikidataEpistemicBridge
