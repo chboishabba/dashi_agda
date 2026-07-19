@@ -36,20 +36,29 @@ data ActionabilityBand : Set where
 -- The order is the control-relevant quotient of an underlying [0,1]-valued
 -- actionability functional.  It is unsigned and monotone.
 data _≤band_ : ActionabilityBand → ActionabilityBand → Set where
-  low≤    : ∀ {a} → low ≤band a
-  middle≤ : ∀ {a} → middle ≤band a → high ≤band a
-  high≤   : high ≤band high
+  low≤low       : low ≤band low
+  low≤middle    : low ≤band middle
+  low≤high      : low ≤band high
+  middle≤middle : middle ≤band middle
+  middle≤high   : middle ≤band high
+  high≤high     : high ≤band high
 
 bandRefl : (a : ActionabilityBand) → a ≤band a
-bandRefl low = low≤
-bandRefl middle = middle≤ high≤
-bandRefl high = high≤
+bandRefl low = low≤low
+bandRefl middle = middle≤middle
+bandRefl high = high≤high
 
 bandTrans : ∀ {a b c} → a ≤band b → b ≤band c → a ≤band c
-bandTrans low≤ _ = low≤
-bandTrans (middle≤ high≤) (middle≤ high≤) = middle≤ high≤
-bandTrans (middle≤ high≤) high≤ = middle≤ high≤
-bandTrans high≤ high≤ = high≤
+bandTrans low≤low low≤low = low≤low
+bandTrans low≤low low≤middle = low≤middle
+bandTrans low≤low low≤high = low≤high
+bandTrans low≤middle middle≤middle = low≤middle
+bandTrans low≤middle middle≤high = low≤high
+bandTrans low≤high high≤high = low≤high
+bandTrans middle≤middle middle≤middle = middle≤middle
+bandTrans middle≤middle middle≤high = middle≤high
+bandTrans middle≤high high≤high = middle≤high
+bandTrans high≤high high≤high = high≤high
 
 minBand : ActionabilityBand → ActionabilityBand → ActionabilityBand
 minBand low _ = low
@@ -101,13 +110,13 @@ OrderField : Set → Set
 OrderField X = X → PQN
 
 P-mask : {X : Set} → OrderField X → X → Bool
-P-mask field x = P (field x)
+P-mask f x = P (f x)
 
 Q-mask : {X : Set} → OrderField X → X → Bool
-Q-mask field x = Q (field x)
+Q-mask f x = Q (f x)
 
 N-mask : {X : Set} → OrderField X → X → Bool
-N-mask field x = N (field x)
+N-mask f x = N (f x)
 
 ------------------------------------------------------------------------
 -- Stage 6 -> 9: memoryful control closure.
