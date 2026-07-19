@@ -5,13 +5,13 @@ module DASHI.Physics.YangMills.BalabanCanonicalRealPolynomialSolver where
 --
 -- The original integer-coefficient morphism is mathematically correct, but its
 -- interpretations of 0 and 1 are only propositionally equal to DASHI's zeroR
--- and oneR.  The legacy solver exposes those interpretations in the type of a
+-- and oneR. The legacy solver exposes those interpretations in the type of a
 -- generated proof, so large identities fail at the final definitional boundary.
 --
 -- This module changes only the coefficient interpretation: formal 0 and 1 map
 -- definitionally to zeroR and oneR, while every other coefficient uses the
--- already proved interpretation.  A pointwise equivalence transports all ring
--- morphism laws and the weak coefficient decision procedure.  Thus this is a
+-- already proved interpretation. A pointwise equivalence transports all ring
+-- morphism laws and the weak coefficient decision procedure. Thus this is a
 -- proof-preserving normalization adapter, not another trusted solver.
 ------------------------------------------------------------------------
 
@@ -24,6 +24,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 import Algebra.Solver.Ring as LegacyRingSolver
 import Algebra.Solver.Ring.AlmostCommutativeRing as LegacyACR
 
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
   (_+R_; _*R_; -R_; zeroR; oneR)
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver as Base using
@@ -45,7 +46,7 @@ open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver as Base
   ; coefficientWeakEquality
   )
 
-canonicalInterpretCoefficient : IntegerCoefficient → _
+canonicalInterpretCoefficient : IntegerCoefficient → ℝ
 canonicalInterpretCoefficient (coefficient zero zero) = zeroR
 canonicalInterpretCoefficient (coefficient (suc zero) zero) = oneR
 canonicalInterpretCoefficient value = interpretCoefficient value
