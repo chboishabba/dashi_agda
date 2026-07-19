@@ -2,6 +2,7 @@ module DASHI.Core.NonlinearExplodedSparsityTests where
 
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
+open import DASHI.Core.MinimalKernelAlgebra using (decodeSupportSign)
 open import DASHI.Core.NonlinearExplodedSparsity
 
 identityPartition : TritPartition Trit
@@ -50,9 +51,13 @@ sampleSatisfiesCSP = kernelClosed→CSP identityKernelClosed
 -- by any coordinate-only threshold/ReLU-like rule.
 ------------------------------------------------------------------------
 
+swapField : State Bool → Bool → Trit
+swapField s false = s true
+swapField s true = s false
+
 swapKernel : ThresholdKernel Bool Trit
 swapKernel = record
-  { localField = λ s x → if x then s false else s true
+  { localField = swapField
   ; partition = identityPartition
   }
 
