@@ -2,6 +2,8 @@
 
 This tranche cross-references mathematics already proved in the repository with chemistry and biology surfaces that previously carried parallel `Set`-valued obligations.
 
+The selection rule is strict: a cross-reference should reuse an actual theorem or prove a new domain-neutral theorem. Similar terminology or visual resemblance is not enough.
+
 ## Implemented joins
 
 ### 1. Feshbach/Schur reduction -> atomic shell locking
@@ -30,7 +32,28 @@ The generic theorem closes exact constraint satisfaction. Bonding, geometry, ste
 
 The shared mathematics is coercivity of a finite differential operator after constant/constraint modes are controlled. The biological and gauge mechanisms remain distinct.
 
-## Domain-neutral namespace
+### 4. Stoichiometric left kernels -> exact reaction-path conservation
+
+`DASHI.Analysis.StoichiometricConservation` proves the finite-path theorem once. A reaction has a stoichiometric displacement `nu_r`; a declared conservation covector `ell` satisfies
+
+`ell(nu_r) = 0`
+
+for every reaction. If the state quantity updates by adding `ell(nu_r)`, then that quantity is preserved by each reaction and by every finite reaction path.
+
+Two adapters consume this theorem:
+
+- `MolecularStoichiometricConservation` turns equality of the conserved quantity into the existing contextual molecular `conserved` relation;
+- `MetabolicStoichiometricConservation` proves exact conservation for internal reaction paths in a fixed environment.
+
+The metabolic theorem deliberately excludes external flux. An open system requires a later balance law with explicit source and sink terms rather than a false closed-system invariant.
+
+### 5. Fejer monotonicity -> protein basin invariance
+
+`ProteinFejerBasinBridge` identifies a protein attractor basin with a certified distance sublevel set around a basin centre. The existing generic Fejer theorem then proves that the folding update remains inside the basin.
+
+This closes the `forwardInvariant` field of `ConformationalAttractorWitness` and proves invariance for every finite iterate. It does not claim a global folding funnel, unique native state, or convergence outside the certified region.
+
+## Domain-neutral namespaces
 
 `DASHI.Analysis.FiniteOperatorReductionCore` re-exports the generic kernels currently housed in the Bałaban implementation namespace:
 
@@ -40,14 +63,17 @@ The shared mathematics is coercivity of a finite differential operator after con
 - finite contraction certificates;
 - finite Hodge–Poincaré coercivity.
 
+`DASHI.Analysis.StoichiometricConservation` owns the reaction-path left-kernel theorem independently of any chemistry or biology namespace.
+
 No definitions are copied.
 
 ## Highest-alpha next joins
 
-1. **Stoichiometric left-kernel theorem.** Formalize species-by-reaction incidence, prove that every left-null vector is conserved along arbitrary reaction paths, and instantiate molecular and metabolic `conserved` fields.
-2. **Detailed-balance free-energy descent.** Connect reversible reaction networks and Markov generators to relative-entropy Lyapunov descent without identifying thermodynamic free energy with MDL.
-3. **Protein folding contraction/Fejér bridge.** Replace attractor-only fields with a conditional theorem from an environment-indexed contraction or Fejér certificate to basin invariance and uniqueness within the certified region.
-4. **Atomic representation bridge.** Connect fermionic shell occupation to the existing Clifford/spin and SU(2)/SU(3) representation lanes, while keeping nuclear and electronic representations distinct.
-5. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the resulting effective generator with the full network under a quantified timescale gap.
+1. **Open-system stoichiometric balance.** Extend the exact internal invariant to `Q(x_final) = Q(x_initial) + sources - sinks`, indexed by external flux events and compartment boundaries.
+2. **Detailed-balance free-energy descent.** Connect reversible reaction networks and Markov generators to a relative-entropy/free-energy dissipation identity without identifying thermodynamic free energy with MDL.
+3. **Protein local uniqueness from contraction.** Add the irreflexive-distance theorem showing that a certified strict contraction has a unique fixed conformation in its declared region, then connect it to folding and chaperone lanes.
+4. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
+5. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
+6. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
 
 These are preferred over further broad “physics/chemistry/biology share a pattern” records because each produces a reusable theorem and a narrower empirical or analytic frontier.
