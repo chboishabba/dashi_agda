@@ -1,9 +1,22 @@
 module DASHI.Vision.Surfel.CoreExpansion where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Data.Empty using (⊥)
 
 open import DASHI.Vision.Surfel.PromotionOrder
+
+------------------------------------------------------------------------
+-- Local product, kept here to avoid importing a large product surface.
+
+infixr 4 _×_
+record _×_ (A B : Set) : Set where
+  constructor _,×_
+  field
+    fst : A
+    snd : B
+
+open _×_ public
 
 ------------------------------------------------------------------------
 -- Abstract surfel carrier and cluster membership.
@@ -35,18 +48,6 @@ data CoreExpandedSelection (C : SurfelCarrier) : Surfel C → Set where
        × sameCluster C anchor s
        × mergeAdmissible C anchor s) →
     CoreExpandedSelection C s
-
-------------------------------------------------------------------------
--- Local product, kept here to avoid importing a large product surface.
-
-infixr 4 _×_
-record _×_ (A B : Set) : Set where
-  constructor _,×_
-  field
-    fst : A
-    snd : B
-
-open _×_ public
 
 ------------------------------------------------------------------------
 -- Every selected non-core surfel carries an explicit ascended anchor.
@@ -94,5 +95,5 @@ data PlateauOnlyPromotionAuthority : Set where
 
 plateauOnlyPromotionImpossible :
   PlateauOnlyPromotionAuthority →
-  Data.Empty.⊥
+  ⊥
 plateauOnlyPromotionImpossible ()
