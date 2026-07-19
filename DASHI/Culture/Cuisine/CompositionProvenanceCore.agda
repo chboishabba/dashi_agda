@@ -63,15 +63,15 @@ record NutritionTransition : Set where
 open NutritionTransition public
 
 data ProductionPractice : Set where
-  conventional     : ProductionPractice
-  organic          : ProductionPractice
-  regenerative     : ProductionPractice
-  agroecological   : ProductionPractice
-  wildHarvested    : ProductionPractice
-  intensiveAnimal  : ProductionPractice
-  extensiveAnimal  : ProductionPractice
+  conventional      : ProductionPractice
+  organic           : ProductionPractice
+  regenerative      : ProductionPractice
+  agroecological    : ProductionPractice
+  wildHarvested     : ProductionPractice
+  intensiveAnimal   : ProductionPractice
+  extensiveAnimal   : ProductionPractice
   indoorCultivation : ProductionPractice
-  unknownPractice  : ProductionPractice
+  unknownPractice   : ProductionPractice
 
 data ProcessingStep : Set where
   harvested   : ProcessingStep
@@ -110,7 +110,7 @@ record IngredientGenealogy : Set where
 
 open IngredientGenealogy public
 
-record RecipeTransition (State : Set) : Set₁ where
+record RecipeTransition (State : Set) : Set where
   field
     beforeState           : State
     afterState            : State
