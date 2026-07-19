@@ -24,8 +24,10 @@ open import DASHI.Physics.YangMills.BalabanFiniteAdjointQuadraticForms using
   ( AdjointInnerProductModule )
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   ( module RealPolynomialSolver )
+open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
+  ( solveComputed; computed )
 open RealPolynomialSolver using
-  ( Polynomial; solve; _:=_; _:+_; _:*_; :-_ )
+  ( Polynomial; _:=_; _:+_; _:*_; :-_ )
 open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
   ( q1R; q2R; q3R; q1P; q2P; q3P )
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
@@ -183,7 +185,7 @@ adjointDotNormFactorPolynomial :
     *R ((((a₀ *R a₀) +R (a₁ *R a₁)) +R (a₂ *R a₂)) +R (a₃ *R a₃)))
     *R (((x₁ *R x₂) +R (y₁ *R y₂)) +R (z₁ *R z₂))
 adjointDotNormFactorPolynomial =
-  solve 10
+  solveComputed 10
     (λ a₀ a₁ a₂ a₃ x₁ y₁ z₁ x₂ y₂ z₂ →
       (((adj1P a₀ a₁ a₂ a₃ x₁ y₁ z₁ :* adj1P a₀ a₁ a₂ a₃ x₂ y₂ z₂)
         :+ (adj2P a₀ a₁ a₂ a₃ x₁ y₁ z₁ :* adj2P a₀ a₁ a₂ a₃ x₂ y₂ z₂))
@@ -192,7 +194,7 @@ adjointDotNormFactorPolynomial =
       (((((a₀ :* a₀) :+ (a₁ :* a₁)) :+ (a₂ :* a₂)) :+ (a₃ :* a₃))
         :* ((((a₀ :* a₀) :+ (a₁ :* a₁)) :+ (a₂ :* a₂)) :+ (a₃ :* a₃)))
         :* (((x₁ :* x₂) :+ (y₁ :* y₂)) :+ (z₁ :* z₂)))
-    refl
+    computed
 
 adjointDotNormFactor :
   ∀ u X Y →
