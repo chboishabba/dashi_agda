@@ -18,18 +18,18 @@ open import Agda.Builtin.Unit using (⊤; tt)
 ----------------------------------------------------------------------
 
 data ComparisonResult : Set where
-  agrees             : ComparisonResult
-  leftAddsObligation : ComparisonResult
+  agrees              : ComparisonResult
+  leftAddsObligation  : ComparisonResult
   rightAddsObligation : ComparisonResult
-  incompatible       : ComparisonResult
-  unresolved         : ComparisonResult
+  incompatible        : ComparisonResult
+  unresolved          : ComparisonResult
 
 data Compatibility : Set where
-  compatible   : Compatibility
-  blocks       : Compatibility
-  supersedes   : Compatibility
-  requires     : Compatibility
-  unknown      : Compatibility
+  compatible : Compatibility
+  blocks     : Compatibility
+  supersedes : Compatibility
+  requires   : Compatibility
+  unknown    : Compatibility
 
 record Jurisdiction : Set where
   field
@@ -49,11 +49,9 @@ record RegulatoryProjection : Set₁ where
     obligations  : ObservableSurface → List Obligation
 
     -- Governance guards: these are proof obligations, not status flags.
-    authorityIsNotTruth : ⊤
+    authorityIsNotTruth    : ⊤
     noHiddenReconstruction : ObservableSurface → Maybe HiddenActivity
-    noHiddenReconstruction = λ _ → nothing
-
-    projectionReading : String
+    projectionReading      : String
 
 open RegulatoryProjection public
 
@@ -86,14 +84,14 @@ record RegulatoryResidual
     -- A residual records non-coincidence; it is not itself a claim that
     -- either authority is false.
     residualIsNotRefutation : ⊤
-    residualReading : String
+    residualReading         : String
 
 open RegulatoryResidual public
 
 record RegulatoryConflictGraph : Set₁ where
   field
-    Node : Set
-    relation : Node → Node → Compatibility
+    Node         : Set
+    relation     : Node → Node → Compatibility
     graphReading : String
 
 open RegulatoryConflictGraph public
@@ -119,7 +117,7 @@ record ComplianceEvidence (P : RegulatoryProjection) : Set₁ where
       Promoted candidate
 
     documentationIsNotCompliance : ⊤
-    promotionReading : String
+    promotionReading              : String
 
 open ComplianceEvidence public
 
