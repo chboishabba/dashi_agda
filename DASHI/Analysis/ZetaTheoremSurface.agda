@@ -14,6 +14,7 @@ open import DASHI.Analysis.RiemannZetaProgramBoundary public
 open import DASHI.Analysis.RiemannAnalyticSubstrate public
 open import DASHI.Analysis.WeilTestSpace public
 open import DASHI.Analysis.RiemannExplicitFormula public
+open import DASHI.Analysis.RiemannFormulaAnalyticCompatibility public
 open import DASHI.Analysis.DashiWeilExactIdentification public
 open import DASHI.Analysis.DashiWeilTermwiseBridge public
 open import DASHI.Analysis.WeilPositivityCore public
