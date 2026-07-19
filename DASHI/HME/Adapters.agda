@@ -1,5 +1,6 @@
 module DASHI.HME.Adapters where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List using (List)
 
