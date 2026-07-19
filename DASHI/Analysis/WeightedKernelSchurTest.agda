@@ -1,7 +1,7 @@
 module DASHI.Analysis.WeightedKernelSchurTest where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 record WeightedKernelData
     {r c s : Level}
@@ -31,6 +31,8 @@ record WeightedSchurLaws
 
     _≤_ : Scalar → Scalar → Set s
     _⊗_ : Scalar → Scalar → Scalar
+    multiplyAssociative :
+      ∀ a b c → _⊗_ (_⊗_ a b) c ≡ _⊗_ a (_⊗_ b c)
 
     rowConstant : Scalar
     columnConstant : Scalar
@@ -84,8 +86,14 @@ weightedKernelBound :
   _≤_ L
     (outputEnergy L (applyKernel L input))
     (_⊗_ L (weightedOperatorProduct L) (inputEnergy L input))
-weightedKernelBound K L C =
-  weightedSchurEstimate L (rowBound C) (columnBound C)
+weightedKernelBound K L C input =
+  subst
+    (λ bound → _≤_ L (outputEnergy L (applyKernel L input)) bound)
+    (sym (multiplyAssociative L
+      (rowConstant L)
+      (columnConstant L)
+      (inputEnergy L input)))
+    (weightedSchurEstimate L (rowBound C) (columnBound C) input)
 
 record KernelIdentityMatch
     {r c s : Level}
