@@ -2,10 +2,9 @@ module DASHI.Cognition.DogWalkDecisionCube where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
-open import DASHI.Core.TernaryDecisionCube using (Cube3; cube3; allCube3; length)
+open import DASHI.Core.TernaryDecisionCube using (Cube3; cube3; length)
 
 ------------------------------------------------------------------------
 -- The three axes isolated in the conversation.
@@ -67,11 +66,7 @@ allDogWalkStates =
   dogWalk zer pos neg ∷ dogWalk zer zer neg ∷ dogWalk zer neg neg ∷
   dogWalk neg pos neg ∷ dogWalk neg zer neg ∷ dogWalk neg neg neg ∷ []
 
-allDogWalkStates-has-27-states :
-  length allDogWalkStates ≡
-  suc (suc (suc (suc (suc (suc (suc (suc (suc
-  (suc (suc (suc (suc (suc (suc (suc (suc (suc
-  (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))))
+allDogWalkStates-has-27-states : length allDogWalkStates ≡ 27
 allDogWalkStates-has-27-states = refl
 
 ------------------------------------------------------------------------
