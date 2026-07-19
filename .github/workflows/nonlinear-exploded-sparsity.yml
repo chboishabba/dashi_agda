@@ -1,0 +1,101 @@
+name: Nonlinear exploded sparsity Agda check
+
+on:
+  push:
+    paths:
+      - 'DASHI/Core/MinimalKernelAlgebra.agda'
+      - 'DASHI/Core/NonlinearExplodedSparsity.agda'
+      - 'DASHI/Core/NonlinearExplodedSparsityTests.agda'
+      - 'DASHI/Core/FiniteWeightedThresholdGraph.agda'
+      - 'DASHI/Core/QuantitativeNonlinearSparsity.agda'
+      - 'DASHI/Core/ExplodedGraphGeometry.agda'
+      - 'DASHI/Core/ThresholdKernelRenormalisation.agda'
+      - 'DASHI/Core/L1Separation.agda'
+      - 'DASHI/Core/ThresholdCSPCores.agda'
+      - 'DASHI/Core/BiologicalEvidenceBridge.agda'
+      - 'DASHI/Core/HemibrainRunCertificates.agda'
+      - 'Docs/NonlinearExplodedSparsity.md'
+      - 'Docs/HemibrainNonlinearSparsityBridge.md'
+      - '.github/workflows/nonlinear-exploded-sparsity.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Core/MinimalKernelAlgebra.agda'
+      - 'DASHI/Core/NonlinearExplodedSparsity.agda'
+      - 'DASHI/Core/NonlinearExplodedSparsityTests.agda'
+      - 'DASHI/Core/FiniteWeightedThresholdGraph.agda'
+      - 'DASHI/Core/QuantitativeNonlinearSparsity.agda'
+      - 'DASHI/Core/ExplodedGraphGeometry.agda'
+      - 'DASHI/Core/ThresholdKernelRenormalisation.agda'
+      - 'DASHI/Core/L1Separation.agda'
+      - 'DASHI/Core/ThresholdCSPCores.agda'
+      - 'DASHI/Core/BiologicalEvidenceBridge.agda'
+      - 'DASHI/Core/HemibrainRunCertificates.agda'
+      - 'Docs/NonlinearExplodedSparsity.md'
+      - 'Docs/HemibrainNonlinearSparsityBridge.md'
+      - '.github/workflows/nonlinear-exploded-sparsity.yml'
+
+concurrency:
+  group: nonlinear-exploded-sparsity-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: nonlinear-exploded-sparsity-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+
+      - name: Check nonlinear exploded sparsity with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-nonlinear-exploded-sparsity-check.log"
+            export AGDA_JOBS=2
+            targets=(
+              DASHI/Core/NonlinearExplodedSparsity.agda
+              DASHI/Core/NonlinearExplodedSparsityTests.agda
+              DASHI/Core/FiniteWeightedThresholdGraph.agda
+              DASHI/Core/QuantitativeNonlinearSparsity.agda
+              DASHI/Core/ExplodedGraphGeometry.agda
+              DASHI/Core/ThresholdKernelRenormalisation.agda
+              DASHI/Core/L1Separation.agda
+              DASHI/Core/ThresholdCSPCores.agda
+              DASHI/Core/BiologicalEvidenceBridge.agda
+              DASHI/Core/HemibrainRunCertificates.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-nonlinear-exploded-sparsity-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 260 agda-nonlinear-exploded-sparsity-check.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nonlinear-exploded-sparsity-agda-log
+          path: agda-nonlinear-exploded-sparsity-check.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
