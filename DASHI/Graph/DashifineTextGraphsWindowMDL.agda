@@ -103,7 +103,7 @@ record WindowAwareSelection : Set₁ where
     winner : GraphVariant
     winnerMinimal :
       (candidate : GraphVariant) →
-      score winner noWorseThan score candidate
+      (score winner) noWorseThan (score candidate)
 
 open WindowAwareSelection public
 
