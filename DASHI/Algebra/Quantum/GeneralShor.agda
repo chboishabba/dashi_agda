@@ -3,7 +3,7 @@ module DASHI.Algebra.Quantum.GeneralShor where
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Quantum.FiniteQuantumRegister
 open import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
-open import DASHI.Crypto.FiniteFactorArithmetic using (Positive)
+open import DASHI.Crypto.FiniteFactorArithmetic using (NatPositive)
 
 ------------------------------------------------------------------------
 -- General Shor surface: finite abelian hidden-subgroup / period finding.
@@ -38,11 +38,11 @@ record FiniteAbelianHiddenSubgroupProblem : Set₁ where
     hiddenClosed : ∀ {x y} → Hidden x → Hidden y → Hidden (x ∙ y)
     hiddenInverse : ∀ {x} → Hidden x → Hidden (inverse x)
 
-    oracle : Element → Observation
+    hspOracle : Element → Observation
     sameCoset : Element → Element → Set
     sameCosetLaw :
       ∀ x y →
-      (oracle x ≡ oracle y) ↔ sameCoset x y
+      (hspOracle x ≡ hspOracle y) ↔ sameCoset x y
 
 open FiniteAbelianHiddenSubgroupProblem public
 
@@ -73,14 +73,14 @@ record HiddenPeriodProblem : Set₁ where
     Value : Set
     oracle : Nat → Value
     period : Nat
-    periodPositive : Positive period
+    periodPositive : NatPositive period
 
     periodic :
       ∀ x → oracle (x + period) ≡ oracle x
 
     exactPeriod :
       ∀ k →
-      Positive k →
+      NatPositive k →
       k < period →
       ¬ (∀ x → oracle (x + k) ≡ oracle x)
 
