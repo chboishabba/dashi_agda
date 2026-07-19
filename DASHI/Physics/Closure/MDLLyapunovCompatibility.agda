@@ -13,7 +13,7 @@ open import DASHI.Physics.Closure.ShiftObservableSignatureReceiptInstance as SRI
 -- Compatibility-only generic Lyapunov witness for older interfaces that still
 -- quantify over arbitrary transition systems.
 --
--- The theorem-facing surface below is the current canonical shift bridge.
+-- The theorem-facing surfaces below expose the complete live execution chain.
 abstract
   mdlLyapTrivial : ∀ {S : Set} (T : S → S) → OldMDL.Lyapunov T
   mdlLyapTrivial T =
@@ -22,20 +22,42 @@ abstract
       ; descent = λ _ → z≤n
       }
 
--- Current live bridge: the shift-side Lyapunov witness is exposed directly on
--- the execution-contract surface and paired with the concrete execution receipt
--- that already certifies the live shift step.
+private
+  shiftSourceLyapunov :
+    OldMDL.Lyapunov (EC.sourceStep SRI.shiftExecutionContract)
+  shiftSourceLyapunov =
+    MDLL.lyapunovShift
+      {m = suc zero}
+      {k = suc (suc (suc zero))}
+
 currentShiftLyapunovReceipt :
   ECL.ExecutionContractLyapunovReceipt
     SRI.shiftExecutionContract
     SRI.shiftReceiptStart
     SRI.shiftReceiptNext
 currentShiftLyapunovReceipt = record
-  { sourceLyapunov =
-      MDLL.lyapunovShift
-        {m = suc zero}
-        {k = suc (suc (suc zero))}
+  { sourceLyapunov = shiftSourceLyapunov
   ; receipt = SRI.shiftExecutionReceipt
+  }
+
+currentShiftLyapunovReceiptNextMiddle :
+  ECL.ExecutionContractLyapunovReceipt
+    SRI.shiftExecutionContract
+    SRI.shiftReceiptNext
+    SRI.shiftReceiptMiddle
+currentShiftLyapunovReceiptNextMiddle = record
+  { sourceLyapunov = shiftSourceLyapunov
+  ; receipt = SRI.shiftExecutionReceiptNextMiddle
+  }
+
+currentShiftLyapunovReceiptMiddleHeld :
+  ECL.ExecutionContractLyapunovReceipt
+    SRI.shiftExecutionContract
+    SRI.shiftReceiptMiddle
+    SRI.shiftReceiptHeld
+currentShiftLyapunovReceiptMiddleHeld = record
+  { sourceLyapunov = shiftSourceLyapunov
+  ; receipt = SRI.shiftExecutionReceiptMiddleHeld
   }
 
 currentShiftLyapunovAdmissible :
@@ -46,6 +68,22 @@ currentShiftLyapunovAdmissible :
 currentShiftLyapunovAdmissible =
   ECL.bridge→admissible currentShiftLyapunovReceipt
 
+currentShiftLyapunovAdmissibleNextMiddle :
+  EC.AdmissibleStep
+    SRI.shiftExecutionContract
+    SRI.shiftReceiptNext
+    SRI.shiftReceiptMiddle
+currentShiftLyapunovAdmissibleNextMiddle =
+  ECL.bridge→admissible currentShiftLyapunovReceiptNextMiddle
+
+currentShiftLyapunovAdmissibleMiddleHeld :
+  EC.AdmissibleStep
+    SRI.shiftExecutionContract
+    SRI.shiftReceiptMiddle
+    SRI.shiftReceiptHeld
+currentShiftLyapunovAdmissibleMiddleHeld =
+  ECL.bridge→admissible currentShiftLyapunovReceiptMiddleHeld
+
 currentShiftLyapunovDescent :
   EC.MDLAdmissible
     SRI.shiftExecutionContract
@@ -53,3 +91,19 @@ currentShiftLyapunovDescent :
     SRI.shiftReceiptNext
 currentShiftLyapunovDescent =
   ECL.bridge→mdl currentShiftLyapunovReceipt
+
+currentShiftLyapunovDescentNextMiddle :
+  EC.MDLAdmissible
+    SRI.shiftExecutionContract
+    SRI.shiftReceiptNext
+    SRI.shiftReceiptMiddle
+currentShiftLyapunovDescentNextMiddle =
+  ECL.bridge→mdl currentShiftLyapunovReceiptNextMiddle
+
+currentShiftLyapunovDescentMiddleHeld :
+  EC.MDLAdmissible
+    SRI.shiftExecutionContract
+    SRI.shiftReceiptMiddle
+    SRI.shiftReceiptHeld
+currentShiftLyapunovDescentMiddleHeld =
+  ECL.bridge→mdl currentShiftLyapunovReceiptMiddleHeld
