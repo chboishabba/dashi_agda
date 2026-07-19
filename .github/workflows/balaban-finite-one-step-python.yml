@@ -33,3 +33,14 @@ jobs:
           python build_wilson_hessian.py --L 2 --Q /tmp/balaban-one-step/Q.npy --out /tmp/balaban-one-step/H.npy
           python constrained_covariance.py --H /tmp/balaban-one-step/H.npy --Q /tmp/balaban-one-step/Q.npy --out-prefix /tmp/balaban-one-step/c
           python finite_logdet.py --H /tmp/balaban-one-step/H.npy --Q /tmp/balaban-one-step/Q.npy --out /tmp/balaban-one-step/logdet.json
+      - name: Run exact finite certificates
+        working-directory: experiments/yang_mills/balaban_one_step
+        run: |
+          cat > /tmp/balaban-one-step/rational.json <<'JSON'
+          {"matrix": [["2", "1/2"], ["1/2", "3"]]}
+          JSON
+          cat > /tmp/balaban-one-step/interval.json <<'JSON'
+          {"matrix": [[["2", "21/10"], ["49/100", "51/100"]], [["49/100", "51/100"], ["3", "31/10"]]]}
+          JSON
+          python rational_ldlt_certificate.py --matrix /tmp/balaban-one-step/rational.json --out /tmp/balaban-one-step/rational-certificate.json
+          python interval_ldlt_certificate.py --matrix /tmp/balaban-one-step/interval.json --out /tmp/balaban-one-step/interval-certificate.json
