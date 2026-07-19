@@ -73,9 +73,44 @@ Thus:
 - diagnostic inconsistency may be measured without a descent theorem
 - action/MDL is monotone only when `kernelNonIncreasing` is supplied
 
+## Base369 ultrametric stability boundary
+
+`DASHI.Core.Base369UltrametricContraction` closes the smallest concrete version of the stability reality check.
+
+The actual carrier is a three-role balanced-ternary state:
+
+- coarse trit
+- relational trit
+- fine trit
+
+It is embedded into the already proved prefix geometry in `DASHI.Geometry.SSP369Ultrametric`. The resulting discrete ultrametric has distance:
+
+- `3` when the coarse coordinates first disagree
+- `2` when the coarse coordinates agree and the relational coordinates first disagree
+- `1` when only the fine coordinates disagree
+- `0` on equality
+
+The concrete nonconstant kernel is:
+
+```text
+K(a , b , c) = (zer , zer , a)
+```
+
+It preserves the previous coarse trit as a fine residue while neutralising the two exposed coordinates. The Agda theorem proves:
+
+```text
+d(K x, K y) <= pred(d(x, y))
+```
+
+for every pair of Base369 states. This is strict one-level prefix contraction for every positive distance. The file also supplies explicit negative and positive examples showing that the kernel changes states, remains nonconstant, and contracts a real distinction.
+
+This theorem certifies this concrete kernel only. It does **not** infer contraction for another production kernel from its name, symmetry, quotient compatibility, MDL intent, or physics interpretation. Any other kernel must inhabit `Base369ContractionCertificate K` with its own proof.
+
 ## Files
 
 - `DASHI/Core/MinimalKernelAlgebra.agda`
 - `DASHI/Core/MinimalKernelAlgebraTests.agda`
+- `DASHI/Core/Base369UltrametricContraction.agda`
+- `DASHI/Geometry/SSP369Ultrametric.agda`
 
-The test module instantiates the structure on `Trit` with a trivial symmetry action and identity kernel, checks the exact support/sign round trips, evaluates a generated operator word, discharges quotient compatibility, constructs an exact RG square, and supplies an explicit action-descent witness.
+The test module instantiates the minimal algebra on `Trit` with a trivial symmetry action and identity kernel, checks the exact support/sign round trips, evaluates a generated operator word, discharges quotient compatibility, constructs an exact RG square, and supplies an explicit action-descent witness. The focused workflow also checks the Base369 ultrametric contraction module with Agda 2.9.
