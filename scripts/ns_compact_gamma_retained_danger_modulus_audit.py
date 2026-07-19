@@ -1,23 +1,17 @@
 #!/usr/bin/env python3
 """Test a buffered Gamma modulus with multiplicative escape retention.
 
-An additive escape allowance can destroy positivity when a finite-net radius is
-large even though all sampled member escape supplies remain positive.  This
-companion audit uses the logarithmic loss
+For positive escape supply E, fit the one-sided logarithmic loss
 
-    max(log E_center - log E_member, 0)
+    max(log E_center - log E_member, 0) <= L_escape d^alpha.
 
-and fits
-
-    log(E_center/E_member)_+ <= L_escape d^alpha.
-
-Hence
+This gives the positive retention estimate
 
     E_member >= exp(-L_escape d^alpha) E_center.
 
 The Gamma buffer remains additive. Candidate Holder exponents are fitted on
 calibration profiles, evaluated on held-out profiles, and rechecked on matched
-N32/N48/N64 center/member pairs. The output is finite-Galerkin evidence only.
+N32/N48/N64 center/member pairs. Results are finite-Galerkin evidence only.
 """
 from __future__ import annotations
 
@@ -31,6 +25,7 @@ from typing import Any
 from ns_compact_gamma_common_u_net_audit import (
     PacketParameters,
     atomic_json,
+    packet_parameter_grid,
     parse_float_tuple,
     parse_int_tuple,
     strip_profile,
@@ -53,7 +48,9 @@ def add_log_escape_loss(pairs: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if center <= 0.0 or member <= 0.0:
             raise ValueError("multiplicative retention requires positive escape supplies")
         row = dict(pair)
-        row["positive_log_escape_loss"] = max(math.log(center) - math.log(member), 0.0)
+        row["positive_log_escape_loss"] = max(
+            math.log(center) - math.log(member), 0.0
+        )
         enriched.append(row)
     return enriched
 
@@ -66,46 +63,52 @@ def evaluate_retained_candidate(
     gamma_threshold: float,
     member_pairs: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    dangerous = [pair for pair in member_pairs if pair["member_dangerous"]]
     rows: list[dict[str, Any]] = []
-    for pair in dangerous:
+    for pair in member_pairs:
+        if not pair["member_dangerous"]:
+            continue
         distance_power = float(pair["distance"]) ** exponent
         gamma_allowance = gamma_constant * distance_power
-        log_escape_allowance = log_escape_constant * distance_power
-        retention_factor = math.exp(-log_escape_allowance)
-        local_buffered_threshold = max(gamma_threshold - gamma_allowance, 0.0)
-        local_member_lower = retention_factor * float(pair["center_escape"])
+        log_allowance = log_escape_constant * distance_power
+        retention = math.exp(-log_allowance)
+        buffered_threshold = max(gamma_threshold - gamma_allowance, 0.0)
+        lower = retention * float(pair["center_escape"])
         gamma_margin = (
             float(pair["center_gamma"])
             + gamma_allowance
             - float(pair["member_gamma"])
         )
-        retained_escape_margin = float(pair["member_escape"]) - local_member_lower
-        buffered_center_margin = float(pair["center_gamma"]) - local_buffered_threshold
+        escape_margin = float(pair["member_escape"]) - lower
+        center_margin = float(pair["center_gamma"]) - buffered_threshold
         rows.append(
             {
                 **pair,
                 "local_gamma_allowance": gamma_allowance,
-                "local_log_escape_allowance": log_escape_allowance,
-                "local_retention_factor": retention_factor,
-                "local_buffered_threshold": local_buffered_threshold,
-                "local_candidate_member_lower": local_member_lower,
+                "local_log_escape_allowance": log_allowance,
+                "local_retention_factor": retention,
+                "local_buffered_threshold": buffered_threshold,
+                "local_candidate_member_lower": lower,
                 "gamma_modulus_margin": gamma_margin,
-                "retained_escape_margin": retained_escape_margin,
-                "buffered_center_margin": buffered_center_margin,
+                "retained_escape_margin": escape_margin,
+                "buffered_center_margin": center_margin,
                 "gamma_modulus_holds": gamma_margin >= -1.0e-10,
-                "retained_escape_holds": retained_escape_margin >= -1.0e-10,
-                "danger_transfers_to_buffered_center": buffered_center_margin >= -1.0e-10,
+                "retained_escape_holds": escape_margin >= -1.0e-10,
+                "danger_transfers_to_buffered_center": center_margin >= -1.0e-10,
             }
         )
     family_lower = min(
         (row["local_candidate_member_lower"] for row in rows), default=None
     )
-    survives = bool(rows) and family_lower is not None and family_lower > 0.0 and all(
-        row["gamma_modulus_holds"]
-        and row["retained_escape_holds"]
-        and row["danger_transfers_to_buffered_center"]
-        for row in rows
+    survives = (
+        bool(rows)
+        and family_lower is not None
+        and family_lower > 0.0
+        and all(
+            row["gamma_modulus_holds"]
+            and row["retained_escape_holds"]
+            and row["danger_transfers_to_buffered_center"]
+            for row in rows
+        )
     )
     return {
         "exponent": exponent,
@@ -129,6 +132,71 @@ def evaluate_retained_candidate(
         "sampled_retained_danger_modulus_survives": survives,
         "rows": rows,
     }
+
+
+def build_search_profiles(
+    *,
+    base_parameters: tuple[PacketParameters, ...],
+    center_seeds: tuple[int, ...],
+    calibration_seeds: tuple[int, ...],
+    holdout_seeds: tuple[int, ...],
+    samples_per_base: int,
+    calibration_jitter_scale: float,
+    holdout_jitter_scale: float,
+    phase_jitter: float,
+    log_ratio_jitter: float,
+    log_satellite_jitter: float,
+    cutoff: int,
+    target_shells: tuple[int, ...],
+    nu: float,
+    input_amplitude: float,
+    target_packet_energy: float,
+    gamma_threshold: float,
+    end_parabolic_time: float,
+    output_count: int,
+    cfl: float,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    common = {
+        "base_parameters": base_parameters,
+        "samples_per_base": samples_per_base,
+        "cutoff": cutoff,
+        "target_shells": target_shells,
+        "nu": nu,
+        "input_amplitude": input_amplitude,
+        "target_packet_energy": target_packet_energy,
+        "gamma_threshold": gamma_threshold,
+        "end_parabolic_time": end_parabolic_time,
+        "output_count": output_count,
+        "cfl": cfl,
+    }
+    centers = build_split_profiles(
+        split="center",
+        seeds=center_seeds,
+        perturb=False,
+        phase_jitter=0.0,
+        log_ratio_jitter=0.0,
+        log_satellite_jitter=0.0,
+        **common,
+    )
+    calibration = build_split_profiles(
+        split="calibration",
+        seeds=calibration_seeds,
+        perturb=True,
+        phase_jitter=calibration_jitter_scale * phase_jitter,
+        log_ratio_jitter=calibration_jitter_scale * log_ratio_jitter,
+        log_satellite_jitter=calibration_jitter_scale * log_satellite_jitter,
+        **common,
+    )
+    holdout = build_split_profiles(
+        split="holdout",
+        seeds=holdout_seeds,
+        perturb=True,
+        phase_jitter=holdout_jitter_scale * phase_jitter,
+        log_ratio_jitter=holdout_jitter_scale * log_ratio_jitter,
+        log_satellite_jitter=holdout_jitter_scale * log_satellite_jitter,
+        **common,
+    )
+    return centers, calibration, holdout
 
 
 def audit_family(
@@ -161,52 +229,26 @@ def audit_family(
     if len(all_seeds) != len(set(all_seeds)):
         raise ValueError("center, calibration, and holdout seeds must be disjoint")
 
-    common = {
-        "base_parameters": base_parameters,
-        "samples_per_base": samples_per_base,
-        "phase_jitter": phase_jitter,
-        "log_ratio_jitter": log_ratio_jitter,
-        "log_satellite_jitter": log_satellite_jitter,
-        "cutoff": search_cutoff,
-        "target_shells": target_shells,
-        "nu": nu,
-        "input_amplitude": input_amplitude,
-        "target_packet_energy": target_packet_energy,
-        "gamma_threshold": gamma_threshold,
-        "end_parabolic_time": end_parabolic_time,
-        "output_count": output_count,
-        "cfl": cfl,
-    }
-    centers = build_split_profiles(
-        split="center",
-        seeds=center_seeds,
-        perturb=False,
-        phase_jitter=0.0,
-        log_ratio_jitter=0.0,
-        log_satellite_jitter=0.0,
-        **common,
-    )
-    calibration = build_split_profiles(
-        split="calibration",
-        seeds=calibration_seeds,
-        perturb=True,
-        phase_jitter=calibration_jitter_scale * phase_jitter,
-        log_ratio_jitter=calibration_jitter_scale * log_ratio_jitter,
-        log_satellite_jitter=calibration_jitter_scale * log_satellite_jitter,
-        **{key: value for key, value in common.items() if key not in {
-            "phase_jitter", "log_ratio_jitter", "log_satellite_jitter"
-        }},
-    )
-    holdout = build_split_profiles(
-        split="holdout",
-        seeds=holdout_seeds,
-        perturb=True,
-        phase_jitter=holdout_jitter_scale * phase_jitter,
-        log_ratio_jitter=holdout_jitter_scale * log_ratio_jitter,
-        log_satellite_jitter=holdout_jitter_scale * log_satellite_jitter,
-        **{key: value for key, value in common.items() if key not in {
-            "phase_jitter", "log_ratio_jitter", "log_satellite_jitter"
-        }},
+    centers, calibration, holdout = build_search_profiles(
+        base_parameters=base_parameters,
+        center_seeds=center_seeds,
+        calibration_seeds=calibration_seeds,
+        holdout_seeds=holdout_seeds,
+        samples_per_base=samples_per_base,
+        calibration_jitter_scale=calibration_jitter_scale,
+        holdout_jitter_scale=holdout_jitter_scale,
+        phase_jitter=phase_jitter,
+        log_ratio_jitter=log_ratio_jitter,
+        log_satellite_jitter=log_satellite_jitter,
+        cutoff=search_cutoff,
+        target_shells=target_shells,
+        nu=nu,
+        input_amplitude=input_amplitude,
+        target_packet_energy=target_packet_energy,
+        gamma_threshold=gamma_threshold,
+        end_parabolic_time=end_parabolic_time,
+        output_count=output_count,
+        cfl=cfl,
     )
 
     calibration_pairs = add_log_escape_loss(profile_center_pairs(calibration, centers))
@@ -219,7 +261,7 @@ def audit_family(
             field="positive_gamma_loss",
             slack=modulus_slack,
         )
-        log_escape_fit = fit_holder_constant(
+        log_fit = fit_holder_constant(
             calibration_pairs,
             exponent=exponent,
             field="positive_log_escape_loss",
@@ -228,7 +270,7 @@ def audit_family(
         evaluation = evaluate_retained_candidate(
             exponent=exponent,
             gamma_constant=float(gamma_fit["fitted_constant"]),
-            log_escape_constant=float(log_escape_fit["fitted_constant"]),
+            log_escape_constant=float(log_fit["fitted_constant"]),
             gamma_threshold=gamma_threshold,
             member_pairs=holdout_pairs,
         )
@@ -236,23 +278,20 @@ def audit_family(
             {
                 "exponent": exponent,
                 "gamma_fit": gamma_fit,
-                "log_escape_fit": log_escape_fit,
+                "log_escape_fit": log_fit,
                 "holdout_evaluation": evaluation,
             }
         )
-
     surviving = [
         candidate
         for candidate in candidates
-        if candidate["holdout_evaluation"][
-            "sampled_retained_danger_modulus_survives"
-        ]
+        if candidate["holdout_evaluation"]["sampled_retained_danger_modulus_survives"]
     ]
     selected = surviving[0] if surviving else candidates[-1]
 
-    adverse_members = select_adverse_members(holdout, verify_count)
+    adverse = select_adverse_members(holdout, verify_count)
     matched_profiles = build_matched_pair_profiles(
-        selected_members=adverse_members,
+        selected_members=adverse,
         centers=centers,
         verify_cutoffs=verify_cutoffs,
         nu=nu,
@@ -272,13 +311,13 @@ def audit_family(
         member_pairs=matched_pair_rows,
     )
 
-    group_map: dict[tuple[int, float], list[dict[str, Any]]] = {}
+    groups: dict[tuple[int, float], list[dict[str, Any]]] = {}
     for row in matched_evaluation["rows"]:
-        group_map.setdefault(
+        groups.setdefault(
             (int(row["target_shell"]), float(row["parabolic_time"])), []
         ).append(row)
     matched_groups: list[dict[str, Any]] = []
-    for (shell, time), rows in sorted(group_map.items()):
+    for (shell, time), rows in sorted(groups.items()):
         cutoffs = sorted({int(row["cutoff"]) for row in rows})
         lowers = [float(row["local_candidate_member_lower"]) for row in rows]
         escapes = [float(row["member_escape"]) for row in rows]
@@ -323,7 +362,7 @@ def audit_family(
         matched_evaluation["sampled_retained_danger_modulus_survives"]
     ) and all(group["matched_cutoff_complete"] for group in matched_groups)
     return {
-        "schema_version": "1.0.0",
+        "schema_version": "1.0.1",
         "authority": {
             "finite_galerkin_retained_danger_audit": True,
             "sampled_retained_modulus_survives_holdout": holdout_survives,
@@ -425,9 +464,6 @@ def main() -> None:
     parser.add_argument("--pretty", action="store_true")
     args = parser.parse_args()
 
-    base_parameters = PacketParameters
-    from ns_compact_gamma_common_u_net_audit import packet_parameter_grid
-
     grid = packet_parameter_grid(
         parse_int_tuple(args.triad_counts),
         parse_float_tuple(args.phase_spreads),
@@ -460,14 +496,25 @@ def main() -> None:
         verify_count=args.verify_count,
     )
     atomic_json(args.output_json, result, args.pretty)
-    print(json.dumps({
-        "output_json": str(args.output_json),
-        "surviving_candidate_count": result["surviving_candidate_count"],
-        "selected_exponent": result["selected_candidate"]["exponent"],
-        "candidate_member_lower": result["selected_holdout_evaluation"]["candidate_member_lower"],
-        "holdout_survives": result["authority"]["sampled_retained_modulus_survives_holdout"],
-        "matched_survives": result["authority"]["sampled_retained_modulus_survives_matched_cutoffs"],
-    }, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "output_json": str(args.output_json),
+                "surviving_candidate_count": result["surviving_candidate_count"],
+                "selected_exponent": result["selected_candidate"]["exponent"],
+                "candidate_member_lower": result["selected_holdout_evaluation"][
+                    "candidate_member_lower"
+                ],
+                "holdout_survives": result["authority"][
+                    "sampled_retained_modulus_survives_holdout"
+                ],
+                "matched_survives": result["authority"][
+                    "sampled_retained_modulus_survives_matched_cutoffs"
+                ],
+            },
+            sort_keys=True,
+        )
+    )
 
 
 if __name__ == "__main__":
