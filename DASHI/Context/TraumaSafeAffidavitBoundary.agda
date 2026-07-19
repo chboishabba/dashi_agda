@@ -20,7 +20,7 @@ data ClaimKind : Set where
   observed : ClaimKind
   reported : ClaimKind
   inferred : ClaimKind
-  unknown : ClaimKind
+  unknownClaim : ClaimKind
 
 
 data DetailDisposition : Set where
