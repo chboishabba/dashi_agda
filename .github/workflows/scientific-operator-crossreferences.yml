@@ -7,6 +7,7 @@ on:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/StoichiometricConservation.agda'
       - 'DASHI/Analysis/StoichiometricConservationRegression.agda'
+      - 'DASHI/Analysis/DissipationPathMonotonicity.agda'
       - 'DASHI/Analysis/StrictContractionUniqueness.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferencesTests.agda'
@@ -14,6 +15,7 @@ on:
       - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
       - 'DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda'
+      - 'DASHI/Biology/Cell/MetabolicDissipationBridge.agda'
       - 'DASHI/Biology/Protein/ProteinFejerBasinBridge.agda'
       - 'DASHI/Biology/Protein/ProteinContractiveBasinBridge.agda'
       - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
@@ -25,6 +27,7 @@ on:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/StoichiometricConservation.agda'
       - 'DASHI/Analysis/StoichiometricConservationRegression.agda'
+      - 'DASHI/Analysis/DissipationPathMonotonicity.agda'
       - 'DASHI/Analysis/StrictContractionUniqueness.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferencesTests.agda'
@@ -32,6 +35,7 @@ on:
       - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
       - 'DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda'
       - 'DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda'
+      - 'DASHI/Biology/Cell/MetabolicDissipationBridge.agda'
       - 'DASHI/Biology/Protein/ProteinFejerBasinBridge.agda'
       - 'DASHI/Biology/Protein/ProteinContractiveBasinBridge.agda'
       - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
@@ -71,11 +75,13 @@ jobs:
               DASHI/Analysis/FiniteOperatorReductionCore.agda \
               DASHI/Analysis/StoichiometricConservation.agda \
               DASHI/Analysis/StoichiometricConservationRegression.agda \
+              DASHI/Analysis/DissipationPathMonotonicity.agda \
               DASHI/Analysis/StrictContractionUniqueness.agda \
               DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda \
               DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda \
               DASHI/Biology/Molecular/MolecularStoichiometricConservation.agda \
               DASHI/Biology/Cell/MetabolicStoichiometricConservation.agda \
+              DASHI/Biology/Cell/MetabolicDissipationBridge.agda \
               DASHI/Biology/Protein/ProteinFejerBasinBridge.agda \
               DASHI/Biology/Protein/ProteinContractiveBasinBridge.agda \
               DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda \
