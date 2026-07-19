@@ -130,7 +130,7 @@ record NSStrictFrameGap
     {ShellVector : Set v}
     {Scalar : Set s}
     (O : SchurOrderLaws Scalar)
-    (I : NSShellSchurStructure ShellVector Scalar O) : Set (v ⊔ s) where
+    (I : NSShellSchurStructure ShellVector Scalar O) : Set (lsuc (v ⊔ s)) where
   field
     StrictlyPositive : Scalar → Set s
     residualPositive :
