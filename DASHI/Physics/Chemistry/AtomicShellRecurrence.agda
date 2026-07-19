@@ -1,5 +1,10 @@
 module DASHI.Physics.Chemistry.AtomicShellRecurrence where
 
+infix 4 _≡_
+
+data _≡_ {A : Set} (x : A) : A → Set where
+  refl : x ≡ x
+
 -- Periodicity is represented as recurrence of valence classes across
 -- shell-completion events.  It is not asserted to be one global fixed-period
 -- translation symmetry.
@@ -32,11 +37,11 @@ record ClosedShellProjectionLock
   (S : AtomicShellRecurrence) : Set₁ where
   open AtomicShellRecurrence S
   field
-    Perturbation      : Set
-    OccupiedProjector : AtomicState → Set
-    GapWitness        : AtomicState → Set
+    Perturbation       : Set
+    OccupiedProjector  : AtomicState → Set
+    GapWitness         : AtomicState → Set
     SmallRelativeToGap : Perturbation → AtomicState → Set
-    PerturbedState    : Perturbation → AtomicState → AtomicState
+    PerturbedState     : Perturbation → AtomicState → AtomicState
 
     rankStable :
       ∀ {δ x} → shellClosed x → GapWitness x →
@@ -46,8 +51,3 @@ record ClosedShellProjectionLock
       ∀ {δ x} → shellClosed x → GapWitness x →
       SmallRelativeToGap δ x →
       valenceOf (PerturbedState δ x) ≡ valenceOf x
-
-infix 4 _≡_
-
-data _≡_ {A : Set} (x : A) : A → Set where
-  refl : x ≡ x
