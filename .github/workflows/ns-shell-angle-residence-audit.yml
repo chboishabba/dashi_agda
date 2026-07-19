@@ -23,6 +23,7 @@ on:
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
       - 'docs/ns_exact_galerkin_coherence_audit.md'
+      - 'docs/ns_exact_galerkin_coherence_baseline_results.md'
       - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
   pull_request:
@@ -47,6 +48,7 @@ on:
       - 'scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py'
       - 'scripts/tests/test_ns_timeline_and_multicutoff.py'
       - 'docs/ns_exact_galerkin_coherence_audit.md'
+      - 'docs/ns_exact_galerkin_coherence_baseline_results.md'
       - 'DASHI/Physics/Closure/NSNormalizedAlignmentBudgetDerivative.agda'
       - '.github/workflows/ns-shell-angle-residence-audit.yml'
 
@@ -94,7 +96,7 @@ jobs:
             --output-json ns-matched-baseline.json \
             --end-time 0.001 \
             --output-dt 0.001
-      - name: Require cutoff coverage and held-out coefficient survival
+      - name: Require cutoff coverage and nonvacuous held-out execution
         run: |
           python - <<'PY'
           import json
@@ -102,7 +104,12 @@ jobs:
               data = json.load(handle)
           validation = data['heldout_validation']
           assert validation['matched_cutoff_set_complete'], validation
-          assert validation['any_parameter_set_survives_holdout'], validation
+          audits = validation['parameter_audits']
+          assert any(a['nonvacuous_excursion_test'] for a in audits), validation
+          assert validation['any_budget_coefficient_set_survives_holdout'], validation
+          # The full danger=>depletion gate is a scientific result, not a CI
+          # assumption. It may pass or be falsified; the receipt must record it.
+          assert 'any_nonvacuous_parameter_set_survives_holdout' in validation
           PY
       - name: Upload matched baseline receipt
         if: always()
