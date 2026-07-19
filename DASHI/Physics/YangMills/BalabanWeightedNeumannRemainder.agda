@@ -24,7 +24,7 @@ open import Data.Product.Base using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.BalabanFiniteNeumannParametrix
-open import DASHI.Physics.YangMills.BalabanRandomWalkRemainderBound
+import DASHI.Physics.YangMills.BalabanRandomWalkRemainderBound as Remainder
 
 record WeightedResidualContraction
   (Carrier Bound : Set)
@@ -127,7 +127,7 @@ weightedRandomWalkRemainderBound :
   ∀ {Carrier Bound} {bundle : AdditiveParametrixData Carrier} →
   WeightedResidualContraction Carrier Bound bundle →
   Carrier →
-  RandomWalkRemainderBound Carrier Bound
+  Remainder.RandomWalkRemainderBound Carrier Bound
 weightedRandomWalkRemainderBound {bundle = bundle} control value =
   record
     { remainder = λ depth → residualPower bundle depth value
