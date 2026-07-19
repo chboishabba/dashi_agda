@@ -5,6 +5,10 @@ on:
     paths:
       - 'DASHI/Physics/Laws/*.agda'
       - '.github/workflows/physical-law-surface-smoke.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Laws/*.agda'
+      - '.github/workflows/physical-law-surface-smoke.yml'
 
 permissions:
   contents: read
