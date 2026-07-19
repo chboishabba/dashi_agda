@@ -1,18 +1,18 @@
 module DASHI.Biology.Cell.CellRecoveryBoundary where
 
-open import DASHI.Biology.Cell.SelectiveMembraneBoundary
-open import DASHI.Biology.Cell.OpenMetabolicNetwork
-open import DASHI.Biology.Cell.CellViabilityKernel
-open import DASHI.Biology.Cell.CellStateAttractor
-open import DASHI.Biology.Cell.BioelectricNetwork
+import DASHI.Biology.Cell.SelectiveMembraneBoundary as Membrane
+import DASHI.Biology.Cell.OpenMetabolicNetwork as Metabolism
+import DASHI.Biology.Cell.CellViabilityKernel as Viability
+import DASHI.Biology.Cell.CellStateAttractor as CellState
+import DASHI.Biology.Cell.BioelectricNetwork as Bioelectric
 
 record CellRecoveryBoundary : Set₁ where
   field
-    membraneSystem   : SelectiveMembraneSystem
-    metabolicNetwork : OpenMetabolicNetwork
-    viabilitySystem  : CellViabilitySystem
-    cellState        : CoupledCellState
-    bioelectric      : BioelectricNetwork
+    membraneSystem   : Membrane.SelectiveMembraneSystem
+    metabolicNetwork : Metabolism.OpenMetabolicNetwork
+    viabilitySystem  : Viability.CellViabilitySystem
+    cellState        : CellState.CoupledCellState
+    bioelectric      : Bioelectric.BioelectricNetwork
 
     ProteinToReactionNetwork : Set
     ReactionNetworkToOpenMetabolism : Set
