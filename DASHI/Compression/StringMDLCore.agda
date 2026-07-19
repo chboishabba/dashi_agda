@@ -1,11 +1,10 @@
 module DASHI.Compression.StringMDLCore where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base using (_<_ ; _≤_)
+open import Data.Nat.Base using (_<_; _≤_)
 
 ------------------------------------------------------------------------
 -- Exact string-corpus MDL substrate.
@@ -102,8 +101,8 @@ accepted-strictly-descends M s i = strictMDL i
 
 record CandidateFamily (M : StringMDLSystem) : Set₁ where
   field
-    Candidate : Set
-    realize   : Candidate → State M
+    Candidate  : Set
+    realize    : Candidate → State M
     familyCost : Candidate → CodeLength
 
 open CandidateFamily public
@@ -124,20 +123,20 @@ open FamilyMinimum public
 
 record StringMDLBoundary : Set where
   field
-    compressionOnly             : Bool
-    compressionOnlyIsTrue       : compressionOnly ≡ true
-    semanticCanonicalization    : Bool
+    compressionOnly               : Bool
+    compressionOnlyIsTrue         : compressionOnly ≡ true
+    semanticCanonicalization      : Bool
     semanticCanonicalizationFalse : semanticCanonicalization ≡ false
-    unboundedGlobalOptimumClaim : Bool
-    unboundedGlobalOptimumFalse : unboundedGlobalOptimumClaim ≡ false
+    unboundedGlobalOptimumClaim   : Bool
+    unboundedGlobalOptimumFalse   : unboundedGlobalOptimumClaim ≡ false
 
 canonicalStringMDLBoundary : StringMDLBoundary
 canonicalStringMDLBoundary =
   record
     { compressionOnly = true
-    ; compressionOnlyIsTrue = Agda.Builtin.Equality.refl
+    ; compressionOnlyIsTrue = refl
     ; semanticCanonicalization = false
-    ; semanticCanonicalizationFalse = Agda.Builtin.Equality.refl
+    ; semanticCanonicalizationFalse = refl
     ; unboundedGlobalOptimumClaim = false
-    ; unboundedGlobalOptimumFalse = Agda.Builtin.Equality.refl
+    ; unboundedGlobalOptimumFalse = refl
     }
