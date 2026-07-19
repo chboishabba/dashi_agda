@@ -1,5 +1,16 @@
 module DASHI.Physics.YangMills.BalabanFiniteOneStepFrontierBundle where
 
+------------------------------------------------------------------------
+-- Focused finite one-step frontier.
+--
+-- Imports below assemble actual proof terms and explicit uninhabited theorem
+-- targets.  The finite patch geometry proves cover/properness only; floating
+-- residual searches remain indexed finite evidence and do not inhabit the
+-- volume-, scale-, or background-uniform random-walk theorem.  Likewise the
+-- quantitative one-step RG record remains a target until its analytic fields
+-- are supplied.
+------------------------------------------------------------------------
+
 import DASHI.Physics.YangMills.BalabanEvidenceStatus
 import DASHI.Physics.YangMills.BalabanIndexedFiniteEvidence
 import DASHI.Physics.YangMills.BalabanFiniteOneStepCore
