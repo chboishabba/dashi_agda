@@ -5,21 +5,35 @@ on:
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
       - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/CompiledInversePlusOneCore.agda'
       - 'DASHI/Core/RelationalFlowResidualComposition.agda'
+      - 'DASHI/Core/RelationalHypervoxelBraidCore.agda'
+      - 'DASHI/Education/RelationalEducationGateAlgebra.agda'
       - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
       - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
+      - 'DASHI/Culture/PatternMindReciprocityLoveBridge.agda'
       - 'DASHI/Culture/SemioticPhallicLackAmalekBridge.agda'
+      - 'DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda'
       - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
+      - 'DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda'
+      - 'DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda'
       - '.github/workflows/relational-flow-repair-atlas.yml'
   pull_request:
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
       - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/CompiledInversePlusOneCore.agda'
       - 'DASHI/Core/RelationalFlowResidualComposition.agda'
+      - 'DASHI/Core/RelationalHypervoxelBraidCore.agda'
+      - 'DASHI/Education/RelationalEducationGateAlgebra.agda'
       - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
       - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
+      - 'DASHI/Culture/PatternMindReciprocityLoveBridge.agda'
       - 'DASHI/Culture/SemioticPhallicLackAmalekBridge.agda'
+      - 'DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda'
       - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
+      - 'DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda'
+      - 'DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda'
       - '.github/workflows/relational-flow-repair-atlas.yml'
 
 concurrency:
@@ -56,13 +70,20 @@ jobs:
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-relational-flow-repair-check.log"
-            export AGDA_JOBS=2
+            export AGDA_JOBS=3
             targets=(
+              DASHI/Core/CompiledInversePlusOneCore.agda
               DASHI/Core/RelationalFlowResidualComposition.agda
+              DASHI/Core/RelationalHypervoxelBraidCore.agda
+              DASHI/Education/RelationalEducationGateAlgebra.agda
               DASHI/Governance/RelationalFlowGateAlgebra.agda
               DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda
+              DASHI/Culture/PatternMindReciprocityLoveBridge.agda
               DASHI/Culture/SemioticPhallicLackAmalekBridge.agda
+              DASHI/Culture/IntersectionalPowerValueFolkModelBoundary.agda
               DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda
+              DASHI/Governance/InstitutionalContinuityRepairArithmetic.agda
+              DASHI/Governance/MedicalCannabisPresenceImpairmentBoundary.agda
               DASHI/FullRelationalFlowRepairHyperfabric.agda
               DASHI/RelationalFlowRepairAtlas.agda
             )
@@ -70,7 +91,7 @@ jobs:
           ) > agda-relational-flow-repair-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 180 agda-relational-flow-repair-check.log
+          tail -n 220 agda-relational-flow-repair-check.log
           exit 0
 
       - name: Upload focused Agda log
