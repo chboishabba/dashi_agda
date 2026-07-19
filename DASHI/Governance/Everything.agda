@@ -1,4 +1,5 @@
 module DASHI.Governance.Everything where
 
+import DASHI.Governance.GovernedArtifactCore
 import DASHI.Governance.PermacultureEvolution
 import DASHI.Governance.PermacultureEvolutionTests
