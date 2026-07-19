@@ -43,7 +43,7 @@ data VenueKind : Set where
 
 
 data Opacity : Set where
-  open : Opacity
+  openDetail : Opacity
   redacted : Opacity
   sealed : Opacity
 
@@ -140,7 +140,7 @@ canonicalPublicConversationEnvelope =
         ∷ "comedic framing may be active"
         ∷ "later reuse must retain original audience and venue"
         ∷ []
-    ; opacity = open
+    ; opacity = openDetail
     ; contextRequired = true
     ; contextRequiredIsTrue = refl
     ; noForcedNarrative = true
