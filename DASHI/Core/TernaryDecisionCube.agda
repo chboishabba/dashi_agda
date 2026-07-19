@@ -73,11 +73,7 @@ length : ∀ {A : Set} → List A → Nat
 length [] = zero
 length (_ ∷ xs) = suc (length xs)
 
-allCube3-has-27-states :
-  length allCube3 ≡
-  suc (suc (suc (suc (suc (suc (suc (suc (suc
-  (suc (suc (suc (suc (suc (suc (suc (suc (suc
-  (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))))
+allCube3-has-27-states : length allCube3 ≡ 27
 allCube3-has-27-states = refl
 
 ------------------------------------------------------------------------
