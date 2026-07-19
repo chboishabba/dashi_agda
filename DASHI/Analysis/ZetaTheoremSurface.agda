@@ -3,9 +3,9 @@ module DASHI.Analysis.ZetaTheoremSurface where
 -- Canonical public surface for the current zeta lane.
 --
 -- Exact rational samples and visualisation receipts are exported together
--- with the 3-adic geometric-series distinction, the fail-closed analytic
--- promotion gate, the concrete prime-power/von-Mangoldt arithmetic lane, and
--- the modular Millennium-level DASHI-to-Weil-square theorem ladder.
+-- with the 3-adic geometric-series distinction, finite prime-counting and
+-- prime-power arithmetic, the fail-closed analytic promotion gate, and the
+-- modular Millennium-level DASHI-to-Weil-square theorem ladder.
 
 open import DASHI.Analysis.AbelZeta public
 open import DASHI.Analysis.ZetaVisualization public
@@ -13,6 +13,67 @@ open import DASHI.Analysis.ThreeAdicGeometricSeries public
 open import DASHI.Analysis.RiemannZetaProgramBoundary public
 open import DASHI.Analysis.RiemannAnalyticSubstrate public
 open import DASHI.Analysis.WeilTestSpace public
+
+open import DASHI.Analysis.PrimeCountingFunction public
+  using
+    ( PrimePredicate
+    ; primeIndicator
+    ; primeCountLE
+    ; primeCountLT
+    ; primeCountStep
+    ; primeCountAtPrime
+    ; primeCountAtNonprime
+    ; primesUpTo
+    ; primeListCountExact
+    ; primeCountSymmetricTwice
+    ; primeCountSymmetricTwiceDefinition
+    ; PrimeCountingFiniteBoundary
+    ; primeCountingFiniteBoundary
+    )
+open import DASHI.Analysis.NatPrimeCountingInstance public
+  using
+    ( natPrimePredicate
+    ; natPrimeIndicator
+    ; natPrimeCountLE
+    ; natPrimesUpTo
+    ; natPrimeCountSymmetricTwice
+    ; natPrimeEnumerationCountExact
+    )
+open import DASHI.Analysis.ChebyshevPrimeCounting public
+  using
+    ( PrimeLogWeightKernel
+    ; chebyshevThetaLE
+    ; chebyshevPsiLE
+    ; ChebyshevPrimeOwnership
+    ; IntegerRootFloor
+    ; ChebyshevPrimePowerIdentity
+    ; ChebyshevFiniteBoundary
+    ; chebyshevFiniteBoundary
+    )
+open import DASHI.Analysis.RiemannPrimePowerCounting public
+  using
+    ( PrimePowerOccurrence
+    ; PrimePowerCountingScalar
+    ; SymmetricPrimePowerEnumeration
+    ; PrimePowerEnumerationFamily
+    ; riemannPrimePowerCount0
+    ; RiemannPrimePowerCountIdentity
+    ; MobiusScalarKernel
+    ; MobiusPrimeCountInversion
+    ; RiemannPrimePowerCountingBoundary
+    ; riemannPrimePowerCountingBoundary
+    )
+open import DASHI.Analysis.RiemannPrimePowerMangoldtIdentity public
+  using
+    ( MangoldtLogQuotientKernel
+    ; mangoldtLogQuotientTerm
+    ; mangoldtLogQuotientSumLE
+    ; mangoldtPrimePowerCount0
+    ; RiemannPrimePowerMangoldtIdentity
+    ; RiemannPrimePowerMangoldtBoundary
+    ; riemannPrimePowerMangoldtBoundary
+    )
+
 open import DASHI.Analysis.RiemannPrimePowerArithmetic public
 open import DASHI.Analysis.RiemannFiniteExplicitFormulaBoundary public
 open import DASHI.Analysis.WeightedValuationVonMangoldtBoundary public
@@ -41,12 +102,18 @@ open import DASHI.Analysis.DashiWeightedValuationSquareCoercivity public
     ; weightedValuationCoercivityImpliesRH
     )
 
--- Detailed arithmetic, test-space, square-coercivity, and regression modules
--- stay qualified here to avoid exporting their local helper combinators.
+-- Detailed arithmetic, algorithmic, analytic, transform, square-coercivity,
+-- and regression modules stay qualified here to avoid exporting local helper
+-- combinators and overlapping projection names.
+import DASHI.Analysis.NatPrimeCountingExamples
 import DASHI.Analysis.RiemannVonMangoldtSpecification
 import DASHI.Analysis.RiemannVonMangoldtPrimeSide
 import DASHI.Analysis.RiemannTrackedToVonMangoldtBridge
 import DASHI.Analysis.RiemannPrimeExhaustion
+import DASHI.Analysis.PrimeCountingAlgorithms
+import DASHI.Analysis.PrimeCountingAnalyticBridge
+import DASHI.Analysis.PrimeCountingTransforms
+import DASHI.Analysis.PrimeCountingEstimateContracts
 import DASHI.Analysis.WeilConvolutionSquare
 import DASHI.Analysis.BombieriWeilTestBridge
 import DASHI.Analysis.RiemannExplicitFormulaComponents
