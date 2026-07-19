@@ -23,6 +23,7 @@ import DASHI.Biology.Protein.ProteinRecoveryBoundary
 import DASHI.Biology.Cell.SelectiveMembraneBoundary
 import DASHI.Biology.Cell.OpenMetabolicNetwork
 import DASHI.Biology.Cell.MetabolicStoichiometricConservation
+import DASHI.Biology.Cell.MetabolicDissipationBridge
 import DASHI.Biology.Cell.CellViabilityKernel
 import DASHI.Biology.Cell.CellStateAttractor
 import DASHI.Biology.Cell.BioelectricNetwork
