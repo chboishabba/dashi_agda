@@ -1,6 +1,6 @@
 module DASHI.Governance.HealthcareAccessDistortion where
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; _⊔_)
 open import DASHI.Governance.HealthcareEqualityInvariant
 
 ------------------------------------------------------------------------
