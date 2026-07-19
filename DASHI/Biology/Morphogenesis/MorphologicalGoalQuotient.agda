@@ -1,5 +1,6 @@
 module DASHI.Biology.Morphogenesis.MorphologicalGoalQuotient where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Biology.Core.ContextIndexedSystem
 
 -- Morphological targets live in a coarse quotient: many distinct cellular and
