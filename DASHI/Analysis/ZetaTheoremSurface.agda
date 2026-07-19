@@ -15,6 +15,7 @@ open import DASHI.Analysis.RiemannAnalyticSubstrate public
 open import DASHI.Analysis.WeilTestSpace public
 open import DASHI.Analysis.RiemannExplicitFormula public
 open import DASHI.Analysis.DashiWeilExactIdentification public
+open import DASHI.Analysis.DashiWeilTermwiseBridge public
 open import DASHI.Analysis.WeilPositivityCore public
 open import DASHI.Analysis.RiemannMillenniumAssembly public
 
