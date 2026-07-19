@@ -2,21 +2,23 @@
 """Search physically local parametrix constants for the finite SU(2) Hessian.
 
 Local Hessian inverses are glued with a symmetric diagonal partition of unity,
-and A G*=I-R is tested in exponentially weighted row norms.  Two patch families
-are compared:
+and A G*=I-R is tested in exponentially weighted row norms.  The search now
+compares three genuinely finite-range patch geometries:
 
-* isotropic M^4 cubes;
-* the union of all axis-oriented rectangular slabs of fixed thickness.
+* isotropic rectangular cubes;
+* unions of axis-oriented slabs;
+* translated torus L1 balls of fixed radius.
 
-The slab family is still finite range: for thickness two every local inverse is
-supported on a 2x1x1x1 patch (up to axis permutation), independently of total
-volume.  On the smallest 2^4 torus this family is already enough to distinguish a
-genuine proper-local candidate from the trivial full-volume inverse.
+The ball family is motivated by the actual coupling geometry of the gauge-fixed
+Hessian.  On the 2^4 torus, radius-two balls contain 11 of 16 sites and radius-three
+balls contain 15 of 16 sites, so both remain proper finite patches.  On larger
+lattices the same fixed radii stay local rather than growing with total volume.
 
-A finite candidate is promoted only when both left and right weighted norms are
+A finite candidate is accepted only when both left and right weighted norms are
 strictly below one.  Spectral radius below one without the required weighted norm
 is retained as an obstruction.  Closure is reported separately for every sampled
-background, so success at B=0 cannot masquerade as a uniform small-field theorem.
+background, so finite searches never become a uniform small-field theorem by
+aggregation.
 """
 from __future__ import annotations
 
@@ -75,6 +77,18 @@ def rectangular_patches(
         yield anchor, sites
 
 
+def torus_ball_patches(
+    lat: PeriodicLattice,
+    radius: int,
+) -> Iterable[tuple[tuple[int, ...], list[tuple[int, ...]]]]:
+    if radius < 0:
+        raise ValueError("ball radius must be nonnegative")
+    all_sites = [tuple(site) for site in lat.sites()]
+    for center in all_sites:
+        sites = [site for site in all_sites if torus_l1(center, site, lat.L) <= radius]
+        yield center, sites
+
+
 def local_dofs(lat: PeriodicLattice, sites: list[tuple[int, ...]]) -> np.ndarray:
     indices: list[int] = []
     for site in sites:
@@ -84,14 +98,14 @@ def local_dofs(lat: PeriodicLattice, sites: list[tuple[int, ...]]) -> np.ndarray
     return np.asarray(indices, dtype=int)
 
 
-def glued_patch_parametrix(
+def glued_site_patch_parametrix(
     H: np.ndarray,
     lat: PeriodicLattice,
-    shapes: Sequence[Sequence[int]],
+    site_patches: Sequence[list[tuple[int, ...]]],
+    metadata: dict[str, Any],
 ) -> tuple[np.ndarray, dict[str, Any]]:
-    unique_shapes = list(dict.fromkeys(tuple(int(side) for side in shape) for shape in shapes))
-    if not unique_shapes:
-        raise ValueError("a patch family must contain at least one shape")
+    if not site_patches:
+        raise ValueError("a patch family must contain at least one patch")
 
     dimension = H.shape[0]
     Gstar = np.zeros_like(H)
@@ -99,33 +113,30 @@ def glued_patch_parametrix(
     local_minima: list[float] = []
     local_dimensions: list[int] = []
     local_site_counts: list[int] = []
-    patch_count = 0
 
-    for shape in unique_shapes:
-        for _, sites in rectangular_patches(lat, shape):
-            patch_count += 1
-            indices = local_dofs(lat, sites)
-            block = 0.5 * (H[np.ix_(indices, indices)] + H[np.ix_(indices, indices)].T)
-            eigenvalues = np.linalg.eigvalsh(block)
-            local_minima.append(float(eigenvalues[0]))
-            local_dimensions.append(int(len(indices)))
-            local_site_counts.append(len(sites))
-            if eigenvalues[0] <= 1e-12:
-                return Gstar, {
-                    "defined": False,
-                    "reason": "nonpositive local Hessian block",
-                    "local_lambda_min": float(eigenvalues[0]),
-                    "patch_shapes": [list(shape) for shape in unique_shapes],
-                }
-            inverse = np.linalg.inv(block)
-            Gstar[np.ix_(indices, indices)] += inverse
-            coverage[indices] += 1.0
+    for sites in site_patches:
+        indices = local_dofs(lat, sites)
+        block = 0.5 * (H[np.ix_(indices, indices)] + H[np.ix_(indices, indices)].T)
+        eigenvalues = np.linalg.eigvalsh(block)
+        local_minima.append(float(eigenvalues[0]))
+        local_dimensions.append(int(len(indices)))
+        local_site_counts.append(len(sites))
+        if eigenvalues[0] <= 1e-12:
+            return Gstar, {
+                "defined": False,
+                "reason": "nonpositive local Hessian block",
+                "local_lambda_min": float(eigenvalues[0]),
+                **metadata,
+            }
+        inverse = np.linalg.inv(block)
+        Gstar[np.ix_(indices, indices)] += inverse
+        coverage[indices] += 1.0
 
     if np.any(coverage == 0):
         return Gstar, {
             "defined": False,
             "reason": "uncovered degree of freedom",
-            "patch_shapes": [list(shape) for shape in unique_shapes],
+            **metadata,
         }
 
     # Symmetric partition of unity: W^{-1/2} (sum G_i) W^{-1/2}.
@@ -133,14 +144,15 @@ def glued_patch_parametrix(
     Gstar = weights[:, None] * Gstar * weights[None, :]
     return Gstar, {
         "defined": True,
-        "patch_shapes": [list(shape) for shape in unique_shapes],
-        "patch_count": patch_count,
+        "patch_count": len(site_patches),
         "local_lambda_min": min(local_minima),
         "local_dimension_max": max(local_dimensions),
+        "local_site_count_min": min(local_site_counts),
         "local_site_count_max": max(local_site_counts),
         "proper_local": max(local_site_counts) < lat.n_sites,
         "coverage_min": float(np.min(coverage)),
         "coverage_max": float(np.max(coverage)),
+        **metadata,
     }
 
 
@@ -167,20 +179,23 @@ def random_background(lat: PeriodicLattice, radius: float, seed: int) -> np.ndar
     return lie_field_to_links(field)
 
 
-def _candidate_key(candidate: dict[str, Any]) -> tuple[float, float, float]:
+def _candidate_key(candidate: dict[str, Any]) -> tuple[float, float, float, int]:
     worst = max(float(candidate["left"]), float(candidate["right"]))
-    return worst, float(candidate["mu"]), abs(1.0 - float(candidate["relaxation"]))
+    local_size = int(candidate.get("local_site_count_max", 10**9))
+    return worst, float(candidate["mu"]), abs(1.0 - float(candidate["relaxation"])), local_size
 
 
 def _family_specs(
     dim: int,
     local_sides: list[int],
     slab_thicknesses: list[int],
+    ball_radii: list[int],
 ) -> list[dict[str, Any]]:
     families: list[dict[str, Any]] = []
     for side in local_sides:
         families.append({
             "patch_family": f"cube-{side}",
+            "family_kind": "rectangles",
             "local_side": side,
             "shapes": [(side,) * dim],
         })
@@ -191,10 +206,42 @@ def _family_specs(
         ]
         families.append({
             "patch_family": f"axis-slabs-{thickness}",
+            "family_kind": "rectangles",
             "slab_thickness": thickness,
             "shapes": shapes,
         })
+    for radius in ball_radii:
+        families.append({
+            "patch_family": f"torus-ball-{radius}",
+            "family_kind": "torus-ball",
+            "ball_radius": radius,
+        })
     return families
+
+
+def _instantiate_family(
+    lat: PeriodicLattice,
+    family: dict[str, Any],
+) -> tuple[list[list[tuple[int, ...]]], dict[str, Any]]:
+    kind = family["family_kind"]
+    metadata = {
+        key: value
+        for key, value in family.items()
+        if key not in {"shapes", "family_kind"}
+    }
+    if kind == "rectangles":
+        unique_shapes = list(dict.fromkeys(tuple(shape) for shape in family["shapes"]))
+        patches = [
+            sites
+            for shape in unique_shapes
+            for _, sites in rectangular_patches(lat, shape)
+        ]
+        metadata["patch_shapes"] = [list(shape) for shape in unique_shapes]
+        return patches, metadata
+    if kind == "torus-ball":
+        patches = [sites for _, sites in torus_ball_patches(lat, int(family["ball_radius"]))]
+        return patches, metadata
+    raise ValueError(f"unknown patch family kind: {kind}")
 
 
 def run_search(
@@ -207,17 +254,20 @@ def run_search(
     seeds: int,
     relaxations: list[float] | None = None,
     slab_thicknesses: list[int] | None = None,
+    ball_radii: list[int] | None = None,
 ) -> dict[str, Any]:
     if relaxations is None:
         relaxations = [1.0]
     if slab_thicknesses is None:
         slab_thicknesses = []
+    if ball_radii is None:
+        ball_radii = []
     if not relaxations or any(value <= 0.0 for value in relaxations):
         raise ValueError("relaxations must be a nonempty list of positive values")
 
     lat = PeriodicLattice(L)
     positions = dof_positions(lat)
-    families = _family_specs(lat.dim, local_sides, slab_thicknesses)
+    families = _family_specs(lat.dim, local_sides, slab_thicknesses, ball_radii)
     trials: list[dict[str, Any]] = []
 
     for radius in radii:
@@ -226,12 +276,11 @@ def run_search(
             _, Q = block_average_matrix(lat, average_block, background)
             H = gauge_fixed_hessian(lat, background=background, average=Q)
             for family in families:
-                Gstar, local = glued_patch_parametrix(H, lat, family["shapes"])
-                family_metadata = {key: value for key, value in family.items() if key != "shapes"}
+                patches, metadata = _instantiate_family(lat, family)
+                Gstar, local = glued_site_patch_parametrix(H, lat, patches, metadata)
                 trial: dict[str, Any] = {
                     "radius": radius,
                     "seed": seed,
-                    **family_metadata,
                     **local,
                 }
                 if local.get("defined"):
@@ -274,20 +323,26 @@ def run_search(
     convergent: list[dict[str, Any]] = []
     spectral_obstructions: list[dict[str, Any]] = []
     all_weighted_candidates: list[dict[str, Any]] = []
+    metadata_keys = (
+        "patch_family",
+        "patch_shapes",
+        "local_side",
+        "slab_thickness",
+        "ball_radius",
+        "local_site_count_min",
+        "local_site_count_max",
+    )
     for trial in trials:
         for relaxed in trial.get("relaxation_trials", []):
             base = {
                 "radius": trial["radius"],
                 "seed": trial["seed"],
-                "patch_family": trial["patch_family"],
-                "patch_shapes": trial["patch_shapes"],
                 "proper_local": trial["proper_local"],
                 "relaxation": relaxed["relaxation"],
             }
-            if "local_side" in trial:
-                base["local_side"] = trial["local_side"]
-            if "slab_thickness" in trial:
-                base["slab_thickness"] = trial["slab_thickness"]
+            for key in metadata_keys:
+                if key in trial:
+                    base[key] = trial[key]
             if relaxed["weighted_norm_obstruction"]:
                 spectral_obstructions.append({
                     **base,
@@ -348,6 +403,7 @@ def main() -> None:
     parser.add_argument("--average-block", type=int, default=2)
     parser.add_argument("--local-sides", default="1,2")
     parser.add_argument("--slab-thicknesses", default="2")
+    parser.add_argument("--ball-radii", default="2,3")
     parser.add_argument("--mus", default="0,0.05,0.1")
     parser.add_argument("--radii", default="0,0.01,0.03")
     parser.add_argument("--relaxations", default="0.25,0.5,0.75,1")
@@ -359,6 +415,7 @@ def main() -> None:
         average_block=args.average_block,
         local_sides=[int(value) for value in args.local_sides.split(",") if value],
         slab_thicknesses=[int(value) for value in args.slab_thicknesses.split(",") if value],
+        ball_radii=[int(value) for value in args.ball_radii.split(",") if value],
         mus=[float(value) for value in args.mus.split(",") if value],
         radii=[float(value) for value in args.radii.split(",") if value],
         seeds=args.seeds,
