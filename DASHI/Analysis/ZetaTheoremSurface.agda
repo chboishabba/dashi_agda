@@ -28,6 +28,15 @@ open import DASHI.Analysis.PrimeCountingFunction public
     ; PrimeCountingFiniteBoundary
     ; primeCountingFiniteBoundary
     )
+open import DASHI.Analysis.NatPrimeCountingInstance public
+  using
+    ( natPrimePredicate
+    ; natPrimeIndicator
+    ; natPrimeCountLE
+    ; natPrimesUpTo
+    ; natPrimeCountSymmetricTwice
+    ; natPrimeEnumerationCountExact
+    )
 open import DASHI.Analysis.ChebyshevPrimeCounting public
   using
     ( PrimeLogWeightKernel
