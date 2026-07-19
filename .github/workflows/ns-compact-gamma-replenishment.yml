@@ -64,7 +64,6 @@ jobs:
           assert data['maximum_mechanism_balance_residual'] < 1e-9, data
           assert data['maximum_finite_difference_residual'] < 1e-6, data
           assert 'sampled_strict_absorption_falsified' in data['authority']
-          # Survival or falsification is an experimental output.
           PY
       - name: Upload replenishment receipt
         if: always()
@@ -86,7 +85,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/dashi-agda29
-          key: ns-compact-replenishment-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+          key: ns-exact-coherence-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
       - name: Check replenishment absorption theorem
         id: focused
         shell: bash
