@@ -3,6 +3,7 @@ module DASHI.Biology.Everything where
 import DASHI.Biology.Core.ContextIndexedSystem
 
 import DASHI.Biology.Molecular.MolecularAssemblyBoundary
+import DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge
 
 import DASHI.Biology.Origins.AutocatalyticCompartmentBoundary
 
@@ -29,6 +30,7 @@ import DASHI.Biology.Morphogenesis.MorphologicalGoalQuotient
 import DASHI.Biology.Morphogenesis.LocalToGlobalControlBridge
 import DASHI.Biology.Morphogenesis.RegenerativeRepairBoundary
 import DASHI.Biology.Morphogenesis.ReactionDiffusionModeSelection
+import DASHI.Biology.Morphogenesis.ReactionDiffusionHodgeBridge
 import DASHI.Biology.Morphogenesis.MorphogenesisRecoveryBoundary
 
 import DASHI.Biology.Agency.ScaleIndexedAgency
