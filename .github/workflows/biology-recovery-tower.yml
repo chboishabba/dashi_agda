@@ -1,0 +1,67 @@
+name: Biology recovery tower Agda check
+
+on:
+  push:
+    paths:
+      - 'DASHI/Biology/**/*.agda'
+      - 'DASHI/Physics/Chemistry/*.agda'
+      - '.github/workflows/biology-recovery-tower.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/**/*.agda'
+      - 'DASHI/Physics/Chemistry/*.agda'
+      - '.github/workflows/biology-recovery-tower.yml'
+
+concurrency:
+  group: biology-recovery-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: biology-recovery-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+
+      - name: Check biology recovery aggregate with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-biology-recovery-check.log"
+            export AGDA_JOBS=2
+            scripts/run_agda29_parallel_check.sh DASHI/Biology/Everything.agda
+          ) > agda-biology-recovery-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 260 agda-biology-recovery-check.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: biology-recovery-agda-log
+          path: agda-biology-recovery-check.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
