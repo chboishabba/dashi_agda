@@ -1,6 +1,6 @@
 module DASHI.Regulation.RegulatoryAuthorityBundle where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
@@ -118,6 +118,6 @@ canonicalEffectiveSurface :
   EffectiveObligationSurface canonicalAuthorityBundle
 canonicalEffectiveSurface = record
   { normalize = λ x → x
-  ; normalizationStable = λ _ → Agda.Builtin.Equality.refl
+  ; normalizationStable = λ _ → refl
   ; effectiveReading = "Canonical derived effective obligation surface."
   }
