@@ -2,6 +2,7 @@ module DASHI.Analysis.FiniteWeightedKernelSums where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (_≡_)
 
 ------------------------------------------------------------------------
 -- Exact finite row/column sums for a weighted rectangular kernel.
@@ -97,5 +98,4 @@ record FiniteKernelIdentityMatch
     rowWeightsMatch : rowWeight concrete ≡ rowWeight candidate
     colWeightsMatch : colWeight concrete ≡ colWeight candidate
 
-open import Relation.Binary.PropositionalEquality using (_≡_)
 open FiniteKernelIdentityMatch public
