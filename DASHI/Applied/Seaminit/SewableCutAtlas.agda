@@ -33,10 +33,10 @@ record CutAtlas (M : SurfaceMesh) : Set₁ where
 
     -- Every solver edge is an edge of the surface mesh.  This excludes the
     -- historical ROM/index-graph teleport and spiderweb failure.
-    seamEndpoints : Seam → M.Vertex → M.Vertex
+    seamFrom        : Seam → M.Vertex
+    seamTo          : Seam → M.Vertex
     seamIsMeshLocal : ∀ s →
-      let uv = seamEndpoints s in
-      M.meshAdjacent (uv M.Vertex) (uv M.Vertex) ≡ true
+      M.meshAdjacent (seamFrom s) (seamTo s) ≡ true
 
     -- Topological form is explicit rather than inferred from visual output.
     OpenBoundary   : Set
@@ -44,9 +44,9 @@ record CutAtlas (M : SurfaceMesh) : Set₁ where
     openBoundary   : OpenBoundary → Set
     closedBoundary : ClosedBoundary → Set
 
-    panelCount     : Nat
-    seamCount      : Nat
-    boundaryCount  : Nat
+    panelCount    : Nat
+    seamCount     : Nat
+    boundaryCount : Nat
 
 ------------------------------------------------------------------------
 -- Flattening and fabric response
@@ -97,16 +97,17 @@ record CurvatureAllocation (Panel : Set) : Set₁ where
 -- unbounded porcupine of tiny jagged cuts.  Complexity is bounded explicitly,
 -- while the placement of admissible seams remains unconstrained by anatomy.
 
-record ComplexityBudget : Set₁ where
+record ComplexityBudget : Set where
   field
-    maxPanels            : Nat
-    maxSeams             : Nat
+    maxPanels             : Nat
+    maxSeams              : Nat
     maxBoundaryComponents : Nat
-    maxSingularities     : Nat
+    maxSingularities      : Nat
 
-record BoundedBy (actual limit : Nat) : Set where
+record BoundedBy (actual limit : Nat) : Set₁ where
   field
-    witness : Set
+    Witness : Set
+    witness : Witness
 
 record AntiStarburst
   {M : SurfaceMesh}
@@ -138,10 +139,10 @@ record SewableAtlas
     module A = CutAtlas A
 
   field
-    fabric       : FabricResponse
-    flattening   : PanelFlattening A.Panel
-    allocation  : CurvatureAllocation A.Panel
-    budget       : ComplexityBudget
+    fabric        : FabricResponse
+    flattening    : PanelFlattening A.Panel
+    allocation    : CurvatureAllocation A.Panel
+    budget        : ComplexityBudget
     antiStarburst : AntiStarburst A budget
 
     allPanelsFlattenable : A.Panel → Bool
@@ -168,9 +169,7 @@ record SewableCutAtlasTheorem : Set₂ where
     module X = AntiStarburst S.antiStarburst
 
   noIndexGraphTeleport : ∀ s →
-    let uv = A.seamEndpoints s in
-    SurfaceMesh.meshAdjacent mesh (uv (SurfaceMesh.Vertex mesh))
-                                  (uv (SurfaceMesh.Vertex mesh)) ≡ true
+    SurfaceMesh.meshAdjacent mesh (A.seamFrom s) (A.seamTo s) ≡ true
   noIndexGraphTeleport = A.seamIsMeshLocal
 
   noPorcupineDischarge :
