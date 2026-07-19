@@ -1,0 +1,181 @@
+name: NS compact Gamma danger expenditure modulus
+
+on:
+  push:
+    paths:
+      - 'scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/ns_compact_gamma_retained_danger_modulus_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_retained_danger_modulus_audit.py'
+      - 'DASHI/Physics/Closure/NSCompactGammaBufferedDangerExpenditure.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaRetainedDangerExpenditure.agda'
+      - 'docs/ns_compact_gamma_danger_expenditure_modulus_audit.md'
+      - '.github/workflows/ns-compact-gamma-danger-modulus.yml'
+  pull_request:
+    paths:
+      - 'scripts/ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/ns_compact_gamma_retained_danger_modulus_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_danger_expenditure_modulus_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_retained_danger_modulus_audit.py'
+      - 'DASHI/Physics/Closure/NSCompactGammaBufferedDangerExpenditure.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaRetainedDangerExpenditure.agda'
+      - 'docs/ns_compact_gamma_danger_expenditure_modulus_audit.md'
+      - '.github/workflows/ns-compact-gamma-danger-modulus.yml'
+
+concurrency:
+  group: ns-compact-gamma-danger-modulus-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  danger-modulus-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip numpy pytest
+      - name: Run focused tests
+        run: >-
+          python -m pytest -q
+          scripts/tests/test_ns_compact_gamma_danger_expenditure_modulus_audit.py
+          scripts/tests/test_ns_compact_gamma_retained_danger_modulus_audit.py
+      - name: Run retained danger modulus audit
+        id: audit
+        shell: bash
+        run: |
+          set +e
+          python scripts/ns_compact_gamma_retained_danger_modulus_audit.py \
+            --output-json ns-compact-gamma-retained-danger.json \
+            --search-cutoff 24 \
+            --verify-cutoffs 32,48,64 \
+            --target-shells 2,3 \
+            --target-packet-energy 0.86 \
+            --triad-counts 4 \
+            --phase-spreads 0.0,0.5 \
+            --target-ratios 1.25,2.5 \
+            --satellite-fractions 0.55 \
+            --center-seeds 1 \
+            --calibration-seeds 2 \
+            --holdout-seeds 3 \
+            --samples-per-base 4 \
+            --calibration-jitter-scale 1.0 \
+            --holdout-jitter-scale 1.0 \
+            --phase-jitter 0.8 \
+            --log-ratio-jitter 0.5 \
+            --log-satellite-jitter 0.35 \
+            --gamma-threshold 0.5 \
+            --holder-exponents 1.0,0.75,0.5,0.25 \
+            --modulus-slack 0.15 \
+            --end-parabolic-time 0.004 \
+            --output-count 3 \
+            --verify-count 1 \
+            --pretty > ns-compact-gamma-retained-danger.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 180 ns-compact-gamma-retained-danger.log
+          exit 0
+      - name: Require successful audit execution
+        if: steps.audit.outputs.status != '0'
+        run: exit 1
+      - name: Validate receipt integrity
+        if: steps.audit.outputs.status == '0'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path('ns-compact-gamma-retained-danger.json').read_text())
+          assert data['center_profile_count'] == 8
+          assert data['calibration_profile_count'] == 32
+          assert data['holdout_profile_count'] == 32
+          assert data['calibration_pair_count'] == 96
+          assert data['holdout_pair_count'] == 96
+          assert len(data['candidate_moduli']) == 4
+          assert data['selected_holdout_evaluation']['dangerous_pair_count'] > 0
+          assert data['selected_holdout_evaluation']['candidate_member_lower'] > 0
+          assert data['matched_profile_pair_count'] == 6
+          assert data['matched_pair_row_count'] == 18
+          assert data['matched_evaluation']['dangerous_pair_count'] > 0
+          assert data['matched_evaluation']['candidate_member_lower'] > 0
+          assert all(group['matched_cutoff_complete'] for group in data['matched_cutoff_groups'])
+          assert data['maximum_relative_divergence_residual'] < 1e-10
+          assert data['maximum_mechanism_balance_residual'] < 1e-8
+          assert data['maximum_finite_difference_residual'] < 1e-5
+          assert data['authority']['analytic_gamma_modulus_proved'] is False
+          assert data['authority']['analytic_log_escape_modulus_proved'] is False
+          assert data['authority']['cutoff_shell_uniform_authority'] is False
+          assert data['authority']['continuum_compactness_authority'] is False
+          assert data['authority']['theorem_authority'] is False
+          assert data['authority']['bkm_authority'] is False
+          assert data['authority']['clay_authority'] is False
+          assert data['authority']['promoted'] is False
+          print({
+              'surviving_candidates': data['surviving_candidate_count'],
+              'selected_exponent': data['selected_candidate']['exponent'],
+              'candidate_member_lower': data['selected_holdout_evaluation']['candidate_member_lower'],
+              'minimum_retention_factor': data['selected_holdout_evaluation']['minimum_retention_factor'],
+              'holdout_survives': data['authority']['sampled_retained_modulus_survives_holdout'],
+              'matched_survives': data['authority']['sampled_retained_modulus_survives_matched_cutoffs'],
+          })
+          PY
+      - name: Upload retained danger receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-gamma-retained-danger
+          path: |
+            ns-compact-gamma-retained-danger.json
+            ns-compact-gamma-retained-danger.log
+          if-no-files-found: warn
+
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ns-compact-danger-modulus-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check danger expenditure theorems
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_JOBS=1
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-danger-modulus.log"
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Physics/Closure/NSCompactGammaBufferedDangerExpenditure.agda
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-retained-danger.log"
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Physics/Closure/NSCompactGammaRetainedDangerExpenditure.agda
+          ) > agda-compact-danger-modulus.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 180 agda-compact-danger-modulus.log
+          exit 0
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-danger-modulus-agda-log
+          path: agda-compact-danger-modulus.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
