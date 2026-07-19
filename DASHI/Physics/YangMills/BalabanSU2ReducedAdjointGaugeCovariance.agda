@@ -9,7 +9,7 @@ module DASHI.Physics.YangMills.BalabanSU2ReducedAdjointGaugeCovariance where
 -- the already proved quaternion representation of the concrete su(2) bracket.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using
   ( cong; cong₂; sym; trans )
 
@@ -72,6 +72,9 @@ open import DASHI.Physics.YangMills.BalabanSU2AdjointMatrixDeterminant using
 open import DASHI.Physics.YangMills.BalabanSU2ReducedAdjointDeterminantProduct using
   ( reducedAdjointDeterminantValue )
 
+rightMultiply : Quaternion → Quaternion → Quaternion
+rightMultiply right value = value *q right
+
 conjugateBy : SU2Quaternion → Quaternion → Quaternion
 conjugateBy u value =
   (quaternion u *q value) *q conjugateQ (quaternion u)
@@ -93,7 +96,7 @@ unitConjugateMiddle u value =
       (quaternion u *q value)
       (conjugateQ (quaternion u))))
     (trans
-      (cong (_*q conjugateQ (quaternion u))
+      (cong (rightMultiply (conjugateQ (quaternion u)))
         (sym (quaternionMultiplyAssociative
           (conjugateQ (quaternion u))
           (quaternion u)
@@ -102,7 +105,7 @@ unitConjugateMiddle u value =
         (cong
           (λ head → (head *q value) *q conjugateQ (quaternion u))
           (inverseQuaternionLeft u))
-        (cong (_*q conjugateQ (quaternion u))
+        (cong (rightMultiply (conjugateQ (quaternion u)))
           (quaternionOneLeft value))))
 
 conjugateByProduct :
@@ -123,7 +126,7 @@ conjugateByProduct u left right =
           (quaternion u *q left)
           right
           (conjugateQ (quaternion u))))
-        (cong (_*q conjugateQ (quaternion u))
+        (cong (rightMultiply (conjugateQ (quaternion u)))
           (quaternionMultiplyAssociative
             (quaternion u) left right))))
 
@@ -133,7 +136,7 @@ conjugateByAdd :
   ≡ conjugateBy u left +q conjugateBy u right
 conjugateByAdd u left right =
   trans
-    (cong (_*q conjugateQ (quaternion u))
+    (cong (rightMultiply (conjugateQ (quaternion u)))
       (quaternionMultiplyAddLeft (quaternion u) left right))
     (quaternionMultiplyAddRight
       (quaternion u *q left)
@@ -146,7 +149,7 @@ conjugateByNegate :
   ≡ quaternionNegate (conjugateBy u value)
 conjugateByNegate u value =
   trans
-    (cong (_*q conjugateQ (quaternion u))
+    (cong (rightMultiply (conjugateQ (quaternion u)))
       (quaternionMultiplyNegateRight (quaternion u) value))
     (quaternionMultiplyNegateLeft
       (quaternion u *q value)
@@ -305,7 +308,7 @@ reducedAdjointDeterminantGaugeInvariant :
   ≡ reducedAdjointDeterminantValue Y operator
 reducedAdjointDeterminantGaugeInvariant
   u Y (reducedAd a b c)
-  rewrite adCubicCoefficientGaugeInvariant u Y = _≡_.refl
+  rewrite adCubicCoefficientGaugeInvariant u Y = refl
 
 reducedAdjointMatrixDeterminantGaugeInvariant :
   ∀ u Y operator →
