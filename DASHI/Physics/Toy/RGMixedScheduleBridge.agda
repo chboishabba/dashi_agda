@@ -1,39 +1,41 @@
 module DASHI.Physics.Toy.RGMixedScheduleBridge where
 
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Nat using (_≤_)
 open import Data.Nat.Properties as NatP using (≤-trans)
 
 import DASHI.Physics.Toy.ScalarContinuum as SC
 open import DASHI.Physics.Toy.RGUniversality
 
 -- Spatial decimation at one shell boundary.
-rgCoarse : ∀ n → RGState (Nat.suc n) → RGState n
+rgCoarse : ∀ n → RGState (suc n) → RGState n
 rgCoarse n (mkRGState r i) = mkRGState r (SC.dropLast i)
 
 -- The Wilsonian mixed step: decimate, then evolve the retained shell.
-rgRenormalizeStep : ∀ n → RGState (Nat.suc n) → RGState n
+rgRenormalizeStep : ∀ n → RGState (suc n) → RGState n
 rgRenormalizeStep n x = rgShellStep n (rgCoarse n x)
 
 -- The competing schedule: evolve the fine shell, then decimate.
-rgEvolveThenCoarse : ∀ n → RGState (Nat.suc n) → RGState n
-rgEvolveThenCoarse n x = rgCoarse n (rgShellStep (Nat.suc n) x)
+rgEvolveThenCoarse : ∀ n → RGState (suc n) → RGState n
+rgEvolveThenCoarse n x = rgCoarse n (rgShellStep (suc n) x)
 
-rgBasinLabel : ∀ {n} → RGState n → Agda.Builtin.Bool.Bool
+rgBasinLabel : ∀ {n} → RGState n → Bool
 rgBasinLabel = relevantMode
 
 -- Strict state commutation is not claimed.  The relevant/macroscopic basin is
 -- exactly schedule invariant because neither shell relaxation nor decimation
 -- changes the relevant coordinate.
 rgMixedScheduleBasinInvariant :
-  ∀ n (x : RGState (Nat.suc n)) →
+  ∀ n (x : RGState (suc n)) →
   rgBasinLabel (rgRenormalizeStep n x) ≡
   rgBasinLabel (rgEvolveThenCoarse n x)
 rgMixedScheduleBasinInvariant n (mkRGState r i) = refl
 
 -- The irrelevant defect contracts under the Wilsonian mixed step.
 rgRenormalizeDefectContracts :
-  ∀ n (x : RGState (Nat.suc n)) →
+  ∀ n (x : RGState (suc n)) →
   SC.countNonZero (irrelevantMode (rgRenormalizeStep n x)) ≤
   SC.countNonZero (irrelevantMode x)
 rgRenormalizeDefectContracts n (mkRGState r i) =
