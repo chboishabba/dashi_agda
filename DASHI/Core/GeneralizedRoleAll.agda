@@ -1,0 +1,16 @@
+module DASHI.Core.GeneralizedRoleAll where
+
+import DASHI.Core.FormalRole
+import DASHI.Core.FormalStructureKind
+import DASHI.Core.ProofLens
+import DASHI.Core.IndexedRoleEvidence
+import DASHI.Core.RoleComparisonTransport
+import DASHI.Core.GeneralizedDomainTheory
+import DASHI.Core.GeneralizedRoleExamples
+import DASHI.Core.GeneralizedRoleFormalLensBridge
+import DASHI.Core.GeneralizedRoleQiAdapter
+import DASHI.Core.GeneralizedRoleConcreteLenses
+import DASHI.Core.GeneralizedRolePNFDomain
+import DASHI.Core.GeneralizedRoleColourDomain
+import DASHI.Core.GeneralizedRoleUnifiedDomains
+import DASHI.Core.GeneralizedRoleGovernanceGuards
