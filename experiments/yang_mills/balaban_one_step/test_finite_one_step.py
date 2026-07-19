@@ -8,6 +8,12 @@ from common import (
     conditional_covariance, constrained_hessian, gauge_fixed_hessian,
     identity_links, qmul, qconj, wilson_action,
 )
+from frontier_search import (
+    canonical_section,
+    corrected_background_section,
+    hodge_poincare_diagnostic,
+    run_search,
+)
 
 
 class FiniteOneStepTests(unittest.TestCase):
@@ -31,6 +37,30 @@ class FiniteOneStepTests(unittest.TestCase):
         _, CK, C = conditional_covariance(H, Q)
         self.assertLess(np.linalg.norm(CK@HK-np.eye(HK.shape[0]), ord=np.inf), 1e-10)
         self.assertLess(np.linalg.norm(Q@C, ord=np.inf), 1e-10)
+
+    def test_constructed_zero_background_section(self) -> None:
+        lat = PeriodicLattice(2)
+        _, Q0 = block_average_matrix(lat, 2)
+        S0, residual = canonical_section(Q0)
+        self.assertLess(residual, 1e-10)
+        corrected = corrected_background_section(Q0, Q0, S0)
+        self.assertTrue(corrected["corrected_section_exists"])
+        self.assertLess(corrected["corrected_section_residual"], 1e-10)
+        self.assertAlmostEqual(corrected["perturbation_section_norm"], 0.0)
+
+    def test_zero_background_hodge_diagnostic(self) -> None:
+        lat = PeriodicLattice(2)
+        _, Q0 = block_average_matrix(lat, 2)
+        H0 = gauge_fixed_hessian(lat, average=Q0)
+        report = hodge_poincare_diagnostic(H0)
+        self.assertTrue(report["coercive_on_full_finite_space"])
+        self.assertGreater(report["smallest_eigenvalue"], 0.0)
+
+    def test_frontier_search_keeps_finite_scope(self) -> None:
+        report = run_search(L=2, block=2, radii=[0.0, 0.01], seeds=1)
+        self.assertEqual(report["claim_scope"], "finite_lattice_only")
+        self.assertTrue(report["zero_background_section"]["constraints_independent"])
+        self.assertTrue(report["all_background_sections_closed"])
 
 
 if __name__ == '__main__':
