@@ -25,7 +25,7 @@ def test_adaptive_plan_refines_crossing_and_terminal_excursion():
     assert result['requests'][1]['requested_times']==[1.25]
 
 def test_matched_trajectory_and_shell_pair_audit(tmp_path):
-    result=generate((8,),tmp_path,nu=.02,shell=0,end_time=.001,base_wave=1,amplitude=.2,cfl=.2,nominal_output_dt=.001,threshold=.5,near_band=.1,dense_factor=2)
+    result=generate((8,),tmp_path,nu=.02,shell=0,end_time=.001,base_wave=1,amplitude=.2,cfl=.2,nominal_output_dt=.001,threshold=.5,near_band=.1,dense_factor=2,initial_condition='taylor-green',target_amplitude=.25)
     run=result['runs'][0];assert run['state_count']>=2
     times=[row['time'] for row in run['states']];assert times[0]==0;assert times[-1]==pytest.approx(.001);assert all(b>a for a,b in zip(times,times[1:]))
     with np.load(run['states'][0]['source_state'],allow_pickle=False) as data:raw=np.asarray(data['raw_hat']);nu=float(data['nu'])
