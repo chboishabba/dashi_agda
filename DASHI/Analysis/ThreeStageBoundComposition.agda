@@ -79,7 +79,8 @@ threeStageProduct :
     {L : MultiplicativeBoundLaws Scalar} →
   ThreeStageBound Input Scalar L →
   Scalar
-threeStageProduct B = _⊗_ _ (c10 B) (_⊗_ _ (r0 B) (c01 B))
+threeStageProduct {L = L} B =
+  _⊗_ L (c10 B) (_⊗_ L (r0 B) (c01 B))
 
 threeStageBoundComposes :
   ∀ {x s}
