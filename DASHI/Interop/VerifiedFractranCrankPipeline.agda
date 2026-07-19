@@ -4,11 +4,12 @@ module DASHI.Interop.VerifiedFractranCrankPipeline where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Maybe using (Maybe; just; nothing)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Builtin.Maybe using (Maybe; just)
+open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Sigma using (Σ)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base using (_≤_; _<_)
+open import Data.Empty using (⊥)
+open import Data.Product using (_×_)
 
 ------------------------------------------------------------------------
 -- 1. Source and target transition semantics
@@ -67,9 +68,9 @@ open FractionVector public
 
 record FractranMachine : Set₁ where
   field
-    Lane        : Set
-    State       : Set
-    Program     : Set
+    Lane    : Set
+    State   : Set
+    Program : Set
 
     exponent    : State → Lane → Nat
     instruction : Program → Nat → Maybe (FractionVector Lane)
@@ -95,7 +96,7 @@ record FractranMachine : Set₁ where
 open FractranMachine public
 
 ------------------------------------------------------------------------
--- 3. Micro-operation normalization
+-- 3. Architecture normalization through a small micro-operation IR
 ------------------------------------------------------------------------
 
 data MicroOp : Set where
@@ -110,8 +111,8 @@ open ArchitectureLowering public
 
 record MicroOpToFractran (F : FractranMachine) : Set₁ where
   field
-    compileMicroOps : List MicroOp → Program F
-    microSemantics  : TransitionSystem
+    compileMicroOps  : List MicroOp → Program F
+    microSemantics   : TransitionSystem
     fractranSemantics : Program F → TransitionSystem
 
     compilerCorrect :
@@ -166,9 +167,11 @@ record CrankCandidate : Set₁ where
     proofCheckerAccepted    : Bool
     receiptReplayAccepted   : Bool
 
-    physicalCost : CostVector
+    physicalCost    : CostVector
     descriptionCost : MDLVector
-    identity : ArtifactIdentity
+
+    sourceIdentity    : ArtifactIdentity
+    candidateIdentity : ArtifactIdentity
 
 open CrankCandidate public
 
@@ -191,7 +194,7 @@ open VerifiedCrank public
 
 record CrankProposalEngine : Set₁ where
   field
-    Candidate : Set
+    Candidate  : Set
     Population : Set
 
     seedPopulation : Population
@@ -205,10 +208,10 @@ open CrankProposalEngine public
 
 record ProposalAuthorityBoundary : Set where
   field
-    proposalsMayComeFromGA            : Bool
+    proposalsMayComeFromGA             : Bool
     proposalsMayComeFromArtificialLife : Bool
-    proposalsMayComeFromAnnealing     : Bool
-    proposalsMayComeFromLLM           : Bool
+    proposalsMayComeFromAnnealing      : Bool
+    proposalsMayComeFromLLM            : Bool
 
     proposalsEstablishCorrectness : Bool
     proposalsEstablishCorrectnessIsFalse :
@@ -226,30 +229,34 @@ canonicalProposalAuthorityBoundary =
     }
 
 ------------------------------------------------------------------------
--- 6. Corpus-relative post-entropy scoring
+-- 6. Corpus-relative MDL and post-entropy accounting
 ------------------------------------------------------------------------
 
 record PostEntropyScore : Set where
   field
     corpusBefore corpusAfter : MDLVector
-    deltaModel deltaResidual deltaProof : Nat
+    deltaModel deltaResidual deltaProof deltaDecoder : Nat
 
     additiveAccounting :
-      total corpusAfter + total corpusBefore
-        ≡ total corpusBefore + total corpusAfter
+      total corpusBefore
+        + (deltaModel + deltaResidual + deltaProof + deltaDecoder)
+        ≡ total corpusAfter
 
 open PostEntropyScore public
 
 record CandidateOrdering (Candidate : Set) : Set₁ where
   field
-    verified : Candidate → Set
-    strongerScope : Candidate → Candidate → Set
-    lowerMDL : Candidate → Candidate → Set
+    verified          : Candidate → Set
+    rejected          : Candidate → Set
+    strongerScope     : Candidate → Candidate → Set
+    equalScope        : Candidate → Candidate → Set
+    lowerMDL          : Candidate → Candidate → Set
+    equalMDL          : Candidate → Candidate → Set
     lowerPhysicalCost : Candidate → Candidate → Set
-    preferred : Candidate → Candidate → Set
+    preferred         : Candidate → Candidate → Set
 
-    verified-first :
-      ∀ {x y} → verified x → preferred x y
+    verified-before-rejected :
+      ∀ {x y} → verified x → rejected y → preferred x y
 
     scope-before-compression :
       ∀ {x y} →
@@ -257,11 +264,14 @@ record CandidateOrdering (Candidate : Set) : Set₁ where
 
     compression-before-runtime :
       ∀ {x y} →
-      verified x → verified y → lowerMDL x y → preferred x y
+      verified x → verified y →
+      equalScope x y → lowerMDL x y → preferred x y
 
     runtime-tiebreak :
       ∀ {x y} →
-      verified x → verified y → lowerPhysicalCost x y → preferred x y
+      verified x → verified y →
+      equalScope x y → equalMDL x y →
+      lowerPhysicalCost x y → preferred x y
 
 open CandidateOrdering public
 
@@ -301,8 +311,8 @@ open ZKCrankStatement public
 
 record ZKCrankWitness : Set₁ where
   field
-    Candidate : CrankCandidate
-    verification : VerifiedCrank Candidate
+    candidate    : CrankCandidate
+    verification : VerifiedCrank candidate
 
 open ZKCrankWitness public
 
@@ -313,12 +323,20 @@ record ZKCrankRelation : Set₁ where
     bindsSourceArtifact :
       ∀ statement witness →
       proves statement witness →
-      sourceCid statement ≡ cid (identity (Candidate witness))
+      sourceCid statement
+        ≡ cid (sourceIdentity (candidate witness))
 
     bindsCandidateArtifact :
       ∀ statement witness →
       proves statement witness →
-      candidateCid statement ≡ cid (identity (Candidate witness))
+      candidateCid statement
+        ≡ cid (candidateIdentity (candidate witness))
+
+    bindsTrace :
+      ∀ statement witness →
+      proves statement witness →
+      traceHash statement
+        ≡ payloadHash (candidateIdentity (candidate witness))
 
 open ZKCrankRelation public
 
@@ -331,14 +349,13 @@ record VerifiedFractranCrankPipeline : Set₂ where
     Source Target : TransitionSystem
     compiler : CompilerSimulation Source Target
 
-    crank : CrankCandidate
+    crank         : CrankCandidate
     crankVerified : VerifiedCrank crank
 
     postEntropy : PostEntropyScore
-    artifact : ArtifactIdentity
 
     boundedOptimality : BoundedSearchCertificate
-    zkRelation : ZKCrankRelation
+    zkRelation        : ZKCrankRelation
 
 open VerifiedFractranCrankPipeline public
 
