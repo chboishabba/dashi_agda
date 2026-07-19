@@ -119,14 +119,23 @@ The energy carrier is intentionally abstract. Thermodynamic free energy, relativ
 
 No definitions are copied.
 
+## Research constraints on the next tranche
+
+- Complex-balanced mass-action networks already admit a strict pseudo-Helmholtz-type Lyapunov route on stoichiometric compatibility classes; detailed balance is stronger and adds a cycle-balance condition. The next formalization should therefore separate complex balance, cycle balance, and detailed balance rather than use one undifferentiated flag.
+- Open chemostatted reaction networks require explicit work, energy, entropy, and exchange terms. The ordered open-balance carrier is the right substrate, but a thermodynamic instance must identify the chemostat work and entropy-production increments.
+- Quasi-steady-state reduction is not justified by block invertibility alone. The chemical bridge must carry a Tikhonov–Fenichel or normal-hyperbolicity witness and a quantitative approximation-error term.
+- Finite-network Turing instability should diagonalize the spatial Laplacian and test the reaction–diffusion linearization mode by mode, rather than promote Hodge coercivity itself to instability.
+- Feshbach–Schur perturbation theory can provide explicit eigenvalue/eigenvector estimates; the atomic bridge still needs the concrete electronic Hamiltonian, projection, and norm-bound instance.
+
 ## Highest-alpha next joins
 
-1. **Detailed-balance discharge.** Build concrete reversible mass-action or finite Markov instances that derive the dissipation identity from forward/reverse flux symmetry and a relative-entropy functional.
-2. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
-3. **Fast-intermediate elimination.** Reuse Schur reduction for quasi-steady-state elimination in reaction networks and compare the effective slow generator with the full network under a quantified timescale gap.
-4. **Reaction–diffusion instability criterion.** Combine spatial coercivity with the reaction Jacobian and diffusion spectrum to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
-5. **Metastability and transition paths.** Add barrier and transition-state certificates so multiple protein or molecular minima can coexist without being collapsed by the local contraction theorem.
-6. **Cell phenotype quotient compatibility.** Connect Fejer-invariant cell basins to the existing phenotype quotient with an explicit theorem that basin evolution preserves the selected phenotype class under declared observational equivalence.
-7. **Compartment boundary composition.** Relate open-system exchange increments to selective membrane transport and prove that nested compartment balances compose without double counting internal boundary fluxes.
+1. **Complex-balance dissipation instance.** Define reaction complexes, the stoichiometric map, a balanced complex-graph Laplacian, stoichiometric compatibility classes, and the pseudo-Helmholtz functional; derive the generic dissipation identity. Add cycle balance separately to obtain detailed balance.
+2. **Chemostatted thermodynamic balance.** Instantiate ordered exchange increments with chemical work and entropy-flow terms for open reaction networks.
+3. **Atomic representation bridge.** Connect central-field eigenspaces, orbital angular momentum, spin, antisymmetric exterior powers, and Pauli occupation to shell capacities and term structure. Keep nuclear and electronic representations distinct.
+4. **Fast-intermediate elimination.** Reuse Schur reduction only after a normal-hyperbolicity/timescale certificate is supplied, and carry an explicit reduction-error bound.
+5. **Reaction–diffusion instability criterion.** Combine the reaction Jacobian with each spatial Laplacian eigenvalue to derive a genuine finite Turing instability witness rather than assuming `FiniteWavelengthUnstable`.
+6. **Metastability and transition paths.** Add barrier and transition-state certificates so multiple protein or molecular minima can coexist without being collapsed by the local contraction theorem.
+7. **Cell phenotype quotient compatibility.** Connect Fejer-invariant cell basins to the existing phenotype quotient with an explicit theorem that basin evolution preserves the selected phenotype class under declared observational equivalence.
+8. **Compartment boundary composition.** Relate open-system exchange increments to selective membrane transport and prove that nested compartment balances compose without double counting internal boundary fluxes.
 
 These are preferred over further broad “physics/chemistry/biology share a pattern” records because each produces a reusable theorem and a narrower empirical or analytic frontier.
