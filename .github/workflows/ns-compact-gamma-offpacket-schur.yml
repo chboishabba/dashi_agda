@@ -35,9 +35,27 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade pip numpy pytest
       - name: Run focused tests
-        run: >-
-          python -m pytest -q
-          scripts/tests/test_ns_compact_gamma_offpacket_schur_audit.py
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -q \
+            scripts/tests/test_ns_compact_gamma_offpacket_schur_audit.py \
+            > ns-compact-gamma-offpacket-schur-tests.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          cat ns-compact-gamma-offpacket-schur-tests.log
+          exit 0
+      - name: Upload focused test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-offpacket-schur-test-log
+          path: ns-compact-gamma-offpacket-schur-tests.log
+          if-no-files-found: error
+      - name: Fail on focused test error
+        if: steps.tests.outputs.status != '0'
+        run: exit 1
       - name: Run exact off-packet Schur-tail audit
         id: audit
         shell: bash
@@ -84,7 +102,6 @@ jobs:
         run: |
           python - <<'PY'
           import json
-          import math
           from pathlib import Path
 
           data = json.loads(Path('ns-compact-gamma-offpacket-schur.json').read_text())
