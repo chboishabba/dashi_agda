@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Primitive using (Set)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 ------------------------------------------------------------------------
 -- Integrated compact-Gamma replenishment absorption.
@@ -165,14 +165,9 @@ absorbedReplenishmentBoundsEscapeMargin A I =
       (thetaEscape I)
   upperReassociation =
     trans
-      (subst
-        (λ middle →
-          _+_ A (initialPotential I) middle ≡
-          _+_ A
-            (initialPotential I)
-            (_+_ A (remainderConstant I) (thetaEscape I)))
-        (addCommutative A (thetaEscape I) (remainderConstant I))
-        (Agda.Builtin.Equality.refl))
+      (cong
+        (λ middle → _+_ A (initialPotential I) middle)
+        (addCommutative A (thetaEscape I) (remainderConstant I)))
       (sym (addAssociative A
         (initialPotential I)
         (remainderConstant I)
