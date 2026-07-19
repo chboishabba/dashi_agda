@@ -46,15 +46,15 @@ transportAcrossDomains :
     {r₁ r₂ : FormalRole} →
   DomainRoleBridge D₁ D₂ r₁ r₂ →
   (Evidence₁ → Evidence₂) →
-  TypedTerm Evidence₁ →
-  RoleType D₂ r₁ →
+  Evidence₁ →
+  RoleType D₁ r₁ →
   TypedTerm Evidence₂
-transportAcrossDomains {D₂ = D₂} {r₂ = r₂} bridge evidenceMap t fallback =
+transportAcrossDomains {D₂ = D₂} {r₂ = r₂} bridge evidenceMap e x =
   record
     { domain   = D₂
     ; role     = r₂
-    ; evidence = evidenceMap (evidence t)
-    ; payload  = payloadMap bridge fallback
+    ; evidence = evidenceMap e
+    ; payload  = payloadMap bridge x
     }
 
 -- Lens comparison is evidence about witnesses, not equality of lenses or
