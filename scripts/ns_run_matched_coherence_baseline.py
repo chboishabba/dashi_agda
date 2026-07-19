@@ -2,10 +2,9 @@
 """End-to-end matched-cutoff Galerkin coherence baseline.
 
 The default triad-excursion state has positive target-packet Gamma at N32,
-N48, and N64, preventing held-out validation from passing without an excursion
-in both training and holdout data. The baseline compares four unsigned turnover
-currencies and then tests whether that motion produces signed escape from the
-bounded soft-alignment potential.
+N48, and N64. The baseline now compares unsigned turnover, signed escape from
+the soft-alignment potential, and a bounded compact-Gamma potential tied
+directly to packet transfer danger.
 """
 from __future__ import annotations
 import argparse,json,os,tempfile
@@ -13,6 +12,7 @@ from pathlib import Path
 from typing import Any
 import numpy as np
 from ns_bounded_turnover_potential_audit import audit as bounded_potential_audit
+from ns_compact_gamma_potential_audit import audit as compact_gamma_audit
 from ns_depletion_currency_audit import audit as currency_audit
 from ns_generate_matched_galerkin_trajectories import generate,ints
 from ns_multicutoff_coherence_validation import validate
@@ -40,9 +40,10 @@ def run(cutoffs:tuple[int,...],workdir:Path,*,nu:float,shell:int,end_time:float,
     validation=validate([budget],gamma_thresholds,kappas,cutoffs,holdout)
     currencies=currency_audit(budget,gamma_thresholds,kappas,cutoffs,holdout,soft_beta_dimensionless=8,gap_relative_floor=1e-4)
     bounded=bounded_potential_audit(currencies,gamma_thresholds,kappas,cutoffs,holdout,soft_beta_dimensionless=8)
-    return {'schema_version':'1.3.0','authority':{'finite_matched_baseline':True,'nonvacuous_excursion_validation_required':True,'candidate_currency_comparison_executed':True,'bounded_potential_accounting_executed':True,'cutoff_uniform_authority':False,'truth_authority':False,'theorem_authority':False,'bkm_authority':False,'clay_authority':False,'promoted':False},'trajectory_manifest':manifest,'residence_input':residence,'exact_budget':budget,'heldout_validation':validation,'depletion_currency_comparison':currencies,'bounded_turnover_potential':bounded,'holdout_trajectories':list(holdout)}
+    compact=compact_gamma_audit(residence,gamma_thresholds,kappas,cutoffs,holdout,positive_part_relative_floor=1e-10)
+    return {'schema_version':'1.4.0','authority':{'finite_matched_baseline':True,'nonvacuous_excursion_validation_required':True,'candidate_currency_comparison_executed':True,'bounded_potential_accounting_executed':True,'compact_gamma_potential_executed':True,'cutoff_uniform_authority':False,'truth_authority':False,'theorem_authority':False,'bkm_authority':False,'clay_authority':False,'promoted':False},'trajectory_manifest':manifest,'residence_input':residence,'exact_budget':budget,'heldout_validation':validation,'depletion_currency_comparison':currencies,'bounded_turnover_potential':bounded,'compact_gamma_potential':compact,'holdout_trajectories':list(holdout)}
 
 def main()->None:
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--cutoffs',default='32,48,64');p.add_argument('--workdir',type=Path,required=True);p.add_argument('--output-json',type=Path,required=True);p.add_argument('--viscosity',type=float,default=.01);p.add_argument('--target-shell',type=int,default=2);p.add_argument('--end-time',type=float,default=.01);p.add_argument('--base-wave',type=int,default=3);p.add_argument('--amplitude',type=float,default=.1);p.add_argument('--cfl',type=float,default=.2);p.add_argument('--output-dt',type=float,default=.005);p.add_argument('--gamma-thresholds',default='.5,.9,1.0');p.add_argument('--kappa-candidates',default='.01,.05,.1,.25');p.add_argument('--minimum-tightness',type=float,default=.8);p.add_argument('--tightness-radius',type=int,default=1);a=p.parse_args()
-    result=run(ints(a.cutoffs),a.workdir,nu=a.viscosity,shell=a.target_shell,end_time=a.end_time,base_wave=a.base_wave,amplitude=a.amplitude,cfl=a.cfl,output_dt=a.output_dt,gamma_thresholds=floats(a.gamma_thresholds),kappas=floats(a.kappa_candidates),minimum_tightness=a.minimum_tightness,radius=a.tightness_radius);atomic(a.output_json,result);print(json.dumps({'output_json':str(a.output_json),'matched_cutoffs':result['trajectory_manifest']['matched_cutoffs'],'nonvacuous_validation_survives':result['heldout_validation']['any_nonvacuous_parameter_set_survives_holdout'],'unsigned_currency_gate_survives':result['depletion_currency_comparison']['heldout_validation']['any_candidate_currency_passes_sampled_heldout_gate'],'signed_escape_gate_survives':result['bounded_turnover_potential']['heldout_signed_escape_validation']['any_signed_escape_currency_passes_heldout']},sort_keys=True))
+    result=run(ints(a.cutoffs),a.workdir,nu=a.viscosity,shell=a.target_shell,end_time=a.end_time,base_wave=a.base_wave,amplitude=a.amplitude,cfl=a.cfl,output_dt=a.output_dt,gamma_thresholds=floats(a.gamma_thresholds),kappas=floats(a.kappa_candidates),minimum_tightness=a.minimum_tightness,radius=a.tightness_radius);atomic(a.output_json,result);print(json.dumps({'output_json':str(a.output_json),'matched_cutoffs':result['trajectory_manifest']['matched_cutoffs'],'nonvacuous_validation_survives':result['heldout_validation']['any_nonvacuous_parameter_set_survives_holdout'],'unsigned_currency_gate_survives':result['depletion_currency_comparison']['heldout_validation']['any_candidate_currency_passes_sampled_heldout_gate'],'alignment_signed_escape_gate_survives':result['bounded_turnover_potential']['heldout_signed_escape_validation']['any_signed_escape_currency_passes_heldout'],'compact_gamma_escape_gate_survives':result['compact_gamma_potential']['heldout_compact_escape_validation']['any_compact_escape_currency_passes_heldout']},sort_keys=True))
 if __name__=='__main__':main()
