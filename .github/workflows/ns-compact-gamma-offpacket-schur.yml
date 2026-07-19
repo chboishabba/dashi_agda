@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'scripts/ns_compact_gamma_offpacket_schur_audit.py'
+      - 'scripts/ns_compact_gamma_offpacket_schur_driver.py'
       - 'scripts/tests/test_ns_compact_gamma_offpacket_schur_audit.py'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
@@ -55,7 +56,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python scripts/ns_compact_gamma_offpacket_schur_audit.py \
+          python scripts/ns_compact_gamma_offpacket_schur_driver.py \
             --output-json ns-compact-gamma-offpacket-schur.json \
             --search-cutoff 24 \
             --verify-cutoffs 32,48,64 \
@@ -74,7 +75,7 @@ jobs:
             --log-satellite-jitter 0.35 \
             --gamma-threshold 0.5 \
             --path-parameters 0.5 \
-            --tangent-kinds path,rhs \
+            --tangent-kinds path,rhs,far-low \
             --times-per-profile 1 \
             --shell-exponents 0,0.25,0.5,1 \
             --angular-etas 0,0.5,1,2 \
@@ -86,7 +87,7 @@ jobs:
             --pretty > ns-compact-gamma-offpacket-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 220 ns-compact-gamma-offpacket-schur.log
+          tail -n 240 ns-compact-gamma-offpacket-schur.log
           exit 0
       - name: Require successful audit execution
         if: steps.audit.outputs.status != '0'
@@ -124,18 +125,39 @@ jobs:
           assert authority['bkm_authority'] is False
           assert authority['clay_authority'] is False
           assert authority['promoted'] is False
+          probe = data['far_low_probe_authority']
+          assert probe['deterministic_reality_closed_probe'] is True
+          assert probe['probe_shell_offset'] == -2
+          assert probe['all_tangent_directions_controlled'] is False
+          assert probe['promoted'] is False
+          probe_rows = [
+              row for key in ('calibration_rows', 'holdout_rows', 'matched_rows')
+              for row in data[key]
+              if row['tangent_kind'] == 'far-low'
+          ]
+          assert probe_rows
+          assert all(row['probe_metadata']['shell_offset'] == -2 for row in probe_rows)
+          assert max(row['probe_metadata']['divergence_residual'] for row in probe_rows) < 1e-8
+          assert max(row['probe_metadata']['reality_residual'] for row in probe_rows) < 1e-10
           selected = data['selected_candidate']
           if selected is not None:
               assert selected['full_chain_survives'] is True
               assert data['matched_cutoff_groups']
               assert all(group['matched_cutoff_complete'] for group in data['matched_cutoff_groups'])
+          explicit = data['explicit_tail_candidate']
+          if explicit is not None:
+              assert explicit['tail_radius'] == 1
+              assert explicit['full_chain_survives'] is True
+              assert explicit['holdout_evaluation']['maximum_tail_quotient'] > 0.0
+              assert explicit['matched_evaluation']['maximum_tail_quotient'] > 0.0
           print({
               'surviving_candidate_count': data['surviving_candidate_count'],
               'selected_shell_exponent': None if selected is None else selected['shell_exponent'],
               'selected_angular_eta': None if selected is None else selected['angular_eta'],
               'selected_tail_radius': None if selected is None else selected['tail_radius'],
               'selected_constant': None if selected is None else selected['fitted_near_schur_constant'],
-              'baseline_holdout_full': data['baseline_candidate']['holdout_evaluation']['maximum_full_quotient'],
+              'explicit_tail_constant': None if explicit is None else explicit['fitted_near_schur_constant'],
+              'explicit_holdout_tail': None if explicit is None else explicit['holdout_evaluation']['maximum_tail_quotient'],
           })
           PY
       - name: Upload off-packet Schur receipt
@@ -179,7 +201,7 @@ jobs:
           ) > agda-compact-offpacket-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 200 agda-compact-offpacket-schur.log
+          tail -n 220 agda-compact-offpacket-schur.log
           exit 0
       - name: Upload Agda log
         if: always()
