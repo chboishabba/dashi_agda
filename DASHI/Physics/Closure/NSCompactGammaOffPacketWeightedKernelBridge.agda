@@ -62,20 +62,23 @@ weightedKernelEvidenceToOffPacketSplit A K L E = record
   { offPacketResponse = offPacketResponse E
   ; nearShellResponse = nearShellResponse E
   ; farShellTail = farShellTail E
-  ; schurWeightedBudget =
-      _⊗_ L
-        (weightedOperatorProduct L)
-        (inputEnergy L (kernelInput E))
+  ; schurWeightedBudget = certifiedBudget
   ; offPacketBelowNearPlusTail = offPacketBelowNearPlusTail E
   ; nearShellBelowSchurBudget = nearBelowCertifiedBudget
   }
   where
+  certifiedBudget : Scalar
+  certifiedBudget =
+    _⊗_ L
+      (rowConstant L)
+      (_⊗_ L
+        (columnConstant L)
+        (inputEnergy L (kernelInput E)))
+
   kernelOutputBelowCertifiedBudget :
     _≤_ A
       (outputEnergy L (applyKernel L (kernelInput E)))
-      (_⊗_ L
-        (weightedOperatorProduct L)
-        (inputEnergy L (kernelInput E)))
+      certifiedBudget
   kernelOutputBelowCertifiedBudget =
     schurOrderTransport E
       (weightedKernelBound K L (certificate E) (kernelInput E))
@@ -83,9 +86,7 @@ weightedKernelEvidenceToOffPacketSplit A K L E = record
   nearBelowCertifiedBudget :
     _≤_ A
       (nearShellResponse E)
-      (_⊗_ L
-        (weightedOperatorProduct L)
-        (inputEnergy L (kernelInput E)))
+      certifiedBudget
   nearBelowCertifiedBudget =
     ≤-trans A
       (concreteNearResponseRepresentedByKernel E)
