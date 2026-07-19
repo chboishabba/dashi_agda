@@ -10,9 +10,9 @@ module DASHI.Physics.YangMills.BalabanComputedPolynomialSolver where
 -- interpretations are not definitionally identical. This wrapper computes the
 -- normal-form comparison and transports the returned proof through the solver.
 --
--- The canonical coefficient adapter maps formal 0 and 1 definitionally to
--- DASHI's zeroR and oneR.  This removes the last elaboration-only mismatch while
--- preserving the original coefficient-ring proof.
+-- Formal 0 and 1 are canonicalized in the shared axiomatic-real solver socket.
+-- Keeping the syntax and computed wrapper on that one module prevents helper
+-- polynomials from acquiring an incompatible interpretation index.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -29,7 +29,7 @@ open import Data.Vec.N-ary using
   ; Eq-to-Eqʰ
   )
 
-open import DASHI.Physics.YangMills.BalabanCanonicalRealPolynomialSolver using
+open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   (module RealPolynomialSolver)
 open RealPolynomialSolver using
   ( Polynomial
