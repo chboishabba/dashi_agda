@@ -1,0 +1,47 @@
+name: DASHI zeta Agda check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "DASHI/Analysis/**Zeta*.agda"
+      - "DASHI/Analysis/**Riemann*.agda"
+      - "DASHI/Analysis/**Weil*.agda"
+      - "DASHI/Analysis/BombieriWeilTestBridge.agda"
+      - "DASHI/Analysis/DashiWeightedValuation*.agda"
+      - "DASHI/Analysis/DashiWeilSquareBridge.agda"
+      - "DASHI/Analysis/WeightedValuationVonMangoldtBoundary.agda"
+      - ".github/workflows/zeta-agda-check.yml"
+
+jobs:
+  zeta-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Typecheck zeta theorem surface directly
+        run: |
+          nix develop -c agda \
+            -i . \
+            -l standard-library \
+            DASHI/Analysis/ZetaTheoremSurface.agda \
+            2>&1 | tee zeta-surface-check.log
+
+      - name: Run authoritative aggregate Agda check
+        run: nix build .#check -L --out-link result-zeta
+
+      - name: Upload Agda check logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zeta-agda-check-log
+          path: |
+            zeta-surface-check.log
+            result-zeta/check.log
+          if-no-files-found: ignore
