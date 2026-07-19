@@ -1,40 +1,37 @@
 module DASHI.WorldModel.ActionRolloutPullbackCore where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.DependencyPullbackCore as Pullback
 
 ------------------------------------------------------------------------
 -- Pullback wiring for action-conditioned rollouts.
---
--- When a mechanism, source, calibration, or replay dependency is invalidated,
--- every downstream rollout that imports it moves to pulledBack.  This is a
--- status theorem only; it does not claim that the world mechanism is recovered.
 ------------------------------------------------------------------------
 
-record RolloutNode : Set where
-  constructor rolloutNode
-
-record DependencyNode : Set where
-  constructor dependencyNode
+data WorldModelNode : Set where
+  rolloutNode    : WorldModelNode
+  dependencyNode : WorldModelNode
 
 record RolloutDependency : Set where
   constructor rolloutDependency
   field
-    rollout    : RolloutNode
-    dependency : DependencyNode
+    rollout    : WorldModelNode
+    dependency : WorldModelNode
 
 open RolloutDependency public
 
-asDependencyEdge : RolloutDependency → Pullback.DependencyEdge RolloutNode
+asDependencyEdge :
+  RolloutDependency → Pullback.DependencyEdge WorldModelNode
 asDependencyEdge relation =
-  Pullback.dependencyEdge (rollout relation) (rollout relation)
+  Pullback.dependencyEdge
+    (rollout relation)
+    (dependency relation)
 
 record RolloutPullbackReceipt : Set where
   constructor rolloutPullbackReceipt
   field
     relation : RolloutDependency
-    witness  : Pullback.PullbackWitness RolloutNode
+    witness  : Pullback.PullbackWitness WorldModelNode
 
 open RolloutPullbackReceipt public
 
@@ -50,4 +47,4 @@ invalidDependencyPullsBackRollout :
 invalidDependencyPullsBackRollout relation =
   Pullback.pulledBackBlocksPromotion
     (witness (canonicalRolloutPullback relation))
-    Agda.Builtin.Equality.refl
+    refl
