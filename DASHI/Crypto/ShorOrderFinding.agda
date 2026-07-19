@@ -23,7 +23,7 @@ record ModularOrderProblem (N a r : Nat) : Set₁ where
 
     exactTransport :
       ∀ k →
-      Positive k →
+      NatPositive k →
       k < r →
       ¬
         (∀ x →
