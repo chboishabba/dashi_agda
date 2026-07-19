@@ -39,7 +39,7 @@ jobs:
           python frontier_search.py --L 2 --block 2 --radii 0,0.01,0.03 --seeds 2 --out /tmp/balaban-one-step/frontier-search.json
           python su2_ad_functional_calculus.py --radius 0.25 --samples 64 --out /tmp/balaban-one-step/ad-functional-calculus.json
           python hodge_spectrum.py --L 2 --block 2 --out /tmp/balaban-one-step/hodge-spectrum.json
-          python local_parametrix_search.py --L 2 --average-block 2 --local-sides 1,2 --mus 0,0.05,0.1 --radii 0,0.01 --relaxations 0.25,0.5,0.75,1 --seeds 1 --out /tmp/balaban-one-step/local-parametrix-search.json
+          python local_parametrix_search.py --L 2 --average-block 2 --local-sides 1,2 --slab-thicknesses 2 --ball-radii 2,3 --mus 0,0.05,0.1 --radii 0,0.01,0.03 --relaxations 0.25,0.5,0.75,1 --seeds 1 --out /tmp/balaban-one-step/local-parametrix-search.json
       - name: Run exact finite certificates
         working-directory: experiments/yang_mills/balaban_one_step
         run: |
