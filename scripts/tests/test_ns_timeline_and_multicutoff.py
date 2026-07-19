@@ -8,7 +8,7 @@ SCRIPTS=Path(__file__).resolve().parents[1]
 if str(SCRIPTS) not in sys.path:sys.path.insert(0,str(SCRIPTS))
 from ns_adaptive_checkpoint_plan import plan
 from ns_attach_explicit_timeline import attach,parse_times
-from ns_generate_matched_galerkin_trajectories import generate
+from ns_generate_matched_galerkin_trajectories import generate,packet_gamma,triad_excursion_initial_hat
 from ns_multicutoff_coherence_validation import validate
 from ns_shell_pair_transfer_audit import shell_pair_metrics
 
@@ -24,6 +24,10 @@ def test_adaptive_plan_refines_crossing_and_terminal_excursion():
     crossing=result['requests'][0];assert crossing['requested_times']==[.25,.5,.75]
     assert result['requests'][1]['requested_times']==[1.25]
 
+def test_triad_initial_condition_exercises_positive_gamma():
+    raw=triad_excursion_initial_hat(16,.1,.25);gamma=packet_gamma(raw,.01,2)
+    assert gamma is not None and gamma>.5
+
 def test_matched_trajectory_and_shell_pair_audit(tmp_path):
     result=generate((8,),tmp_path,nu=.02,shell=0,end_time=.001,base_wave=1,amplitude=.2,cfl=.2,nominal_output_dt=.001,threshold=.5,near_band=.1,dense_factor=2,initial_condition='taylor-green',target_amplitude=.25)
     run=result['runs'][0];assert run['state_count']>=2
@@ -38,7 +42,7 @@ def test_one_coefficient_set_is_applied_unchanged_to_holdout_and_cutoffs():
     payload={'checkpoints':[exact_checkpoint('train',0,32),exact_checkpoint('train',1,48),exact_checkpoint('holdout',2,64)]}
     result=validate([payload],(.5,),(.01,),(32,48,64),('holdout',))
     assert result['matched_cutoff_set_complete'] is True
-    audit=result['parameter_audits'][0];assert audit['holdout_budget_passes'] is True;assert audit['one_coefficient_set_survives_holdout'] is True
+    audit=result['parameter_audits'][0];assert audit['nonvacuous_excursion_test'] is True;assert audit['holdout_budget_passes'] is True;assert audit['one_coefficient_set_survives_holdout'] is True
 
 def test_missing_required_cutoff_is_reported_not_promoted():
     payload={'checkpoints':[exact_checkpoint('train',0,32),exact_checkpoint('holdout',1,48)]}
