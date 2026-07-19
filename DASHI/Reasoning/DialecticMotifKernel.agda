@@ -57,9 +57,6 @@ zeroState = state9 T.zer T.zer T.zer T.zer T.zer T.zer T.zer T.zer T.zer
     (T.inv (mirror-future s))
 
 ι²-id : ∀ s → ι (ι s) ≡ s
-ι²-id (state9 T.neg T.neg T.neg T.neg T.neg T.neg T.neg T.neg T.neg) = refl
-ι²-id (state9 T.neg T.neg T.neg T.neg T.neg T.neg T.neg T.neg T.zer) = refl
-ι²-id (state9 T.neg T.neg T.neg T.neg T.neg T.neg T.neg T.neg T.pos) = refl
 ι²-id (state9 a b c d e f g h i)
   rewrite T.inv-invol a
         | T.inv-invol b
@@ -85,10 +82,6 @@ tritEq T.zer T.pos = false
 tritEq T.pos T.neg = false
 tritEq T.pos T.zer = false
 tritEq T.pos T.pos = true
-
-not : Bool → Bool
-not true = false
-not false = true
 
 _&&_ : Bool → Bool → Bool
 true && b = b
@@ -131,10 +124,11 @@ tensionMass s = positiveMass s * negativeMass s
 σ : State9 → Nat
 σ s = σ-lens s self + σ-lens s norm + σ-lens s mirror
 
--- Mirror agreement is the explicit thesis/antithesis involution relation:
--- mirror(t) should equal inv(self(t)).
+-- Mirror soundness is agreement after changing perspective, not automatic
+-- sign negation. The involution acts on the complete proposition/state; the
+-- mirror lens asks whether the reversed perspective preserves the valuation.
 mirrorMismatch : State9 → Time → Nat
-mirrorMismatch s t with tritEq (at s mirror t) (T.inv (at s self t))
+mirrorMismatch s t with tritEq (at s mirror t) (at s self t)
 ... | true = zero
 ... | false = suc zero
 
@@ -243,24 +237,15 @@ policy M8 = programOnly
 policy M9 = prohibit
 policy M10 = lift
 
+isZeroNat : Nat → Bool
+isZeroNat zero = true
+isZeroNat (suc _) = false
+
 atLeast3 : Nat → Bool
 atLeast3 zero = false
 atLeast3 (suc zero) = false
 atLeast3 (suc (suc zero)) = false
-atLeast3 (suc (suc (suc n))) = true
-
-over9 : Nat → Bool
-over9 zero = false
-over9 (suc zero) = false
-over9 (suc (suc zero)) = false
-over9 (suc (suc (suc zero))) = false
-over9 (suc (suc (suc (suc zero)))) = false
-over9 (suc (suc (suc (suc (suc zero))))) = false
-over9 (suc (suc (suc (suc (suc (suc zero)))))) = false
-over9 (suc (suc (suc (suc (suc (suc (suc zero))))))) = false
-over9 (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))) = false
-over9 (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))) = false
-over9 (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc n)))))))))) = true
+atLeast3 (suc (suc (suc _))) = true
 
 sparsePositive : Nat → Bool
 sparsePositive zero = true
@@ -273,16 +258,21 @@ atLeast5 (suc zero) = false
 atLeast5 (suc (suc zero)) = false
 atLeast5 (suc (suc (suc zero))) = false
 atLeast5 (suc (suc (suc (suc zero)))) = false
-atLeast5 (suc (suc (suc (suc (suc n))))) = true
+atLeast5 (suc (suc (suc (suc (suc _))))) = true
 
-classifyCore : State9 → Motif
-classifyCore s with presentBackbone s
+stableAndMirrorSound : State9 → Bool
+stableAndMirrorSound s = isZeroNat (σ s) && isZeroNat (Δm s)
+
+classifyLocal : State9 → Motif
+classifyLocal s with presentBackbone s
 ... | backbone T.neg T.neg T.neg = M9
 ... | backbone T.pos T.pos T.pos with at s mirror future
 ...   | T.neg = M2
-...   | _ with atLeast3 (σ s)
-...     | true = M7
-...     | false = M1
+...   | _ with stableAndMirrorSound s
+...     | true = M1
+...     | false with atLeast3 (σ s)
+...       | true = M7
+...       | false = M5
 ... | backbone T.pos T.neg T.pos = M3
 ... | backbone T.pos T.pos T.neg = M5
 ... | backbone T.neg T.pos T.pos = M4
@@ -291,7 +281,7 @@ classifyCore s with presentBackbone s
 ... | backbone T.zer T.zer T.pos = M4
 ... | backbone T.neg T.pos T.zer = M4
 ... | backbone T.zer T.pos T.zer = M4
-... | backbone a b c with atLeast3 (σ s)
+... | backbone _ _ _ with atLeast3 (σ s)
 ...   | true = M7
 ...   | false with sparsePositive (positiveMass s) && atLeast5 (negativeMass s)
 ...     | true = M8
@@ -301,17 +291,20 @@ classifyCore s with presentBackbone s
 ...         | T.pos = M6
 ...         | _ = M5
 
--- M10 is a containing-voxel transition, evaluated before local motif selection.
-classify : State9 → Motif
-classify s with over9 (neutralLoad s + tensionMass s)
-... | true = M10
-... | false = classifyCore s
+-- Overflow is an explicit supervisor result. It is not inferred from the
+-- local tensor by an arbitrary numeric threshold.
+data Overflow : Set where
+  withinVoxel carryVoxel : Overflow
 
-result : State9 → Policy
-result s = policy (classify s)
+supervise : Overflow → State9 → Motif
+supervise withinVoxel s = classifyLocal s
+supervise carryVoxel _ = M10
+
+result : Overflow → State9 → Policy
+result o s = policy (supervise o s)
 
 ------------------------------------------------------------------------
--- Closed examples / executable reduction receipts
+-- Closed executable reductions
 ------------------------------------------------------------------------
 
 allGreen : State9
@@ -326,18 +319,20 @@ roleSplit = state9 T.pos T.pos T.pos T.neg T.neg T.neg T.pos T.pos T.pos
 mirrorSplit : State9
 mirrorSplit = state9 T.pos T.pos T.pos T.pos T.pos T.pos T.neg T.neg T.neg
 
-allGreen-classifies : classify allGreen ≡ M10
+allGreen-classifies : supervise withinVoxel allGreen ≡ M1
 allGreen-classifies = refl
 
--- The current overflow rule deliberately treats high mixed/tension loads as a lift.
-allRed-classifies : classify allRed ≡ M9
+allRed-classifies : supervise withinVoxel allRed ≡ M9
 allRed-classifies = refl
 
-roleSplit-classifies : classify roleSplit ≡ M10
+roleSplit-classifies : supervise withinVoxel roleSplit ≡ M3
 roleSplit-classifies = refl
 
-mirrorSplit-classifies : classify mirrorSplit ≡ M10
+mirrorSplit-classifies : supervise withinVoxel mirrorSplit ≡ M5
 mirrorSplit-classifies = refl
 
-zero-classifies : classify zeroState ≡ M5
+carry-classifies : supervise carryVoxel allGreen ≡ M10
+carry-classifies = refl
+
+zero-classifies : supervise withinVoxel zeroState ≡ M5
 zero-classifies = refl
