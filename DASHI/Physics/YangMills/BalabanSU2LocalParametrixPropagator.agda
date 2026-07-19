@@ -54,3 +54,44 @@ leftRightInverseUnique :
   left ≈ right
 leftRightInverseUnique operator left right leftLaw rightLaw x =
   trans (sym (cong left (rightLaw x))) (leftLaw (right x))
+
+propagatorTwoSidedInverse :
+  ∀ {a} {A : Set a}
+  (operator local : A → A)
+  (rightResidual rightResidualInverse : A → A)
+  (leftResidual leftResidualInverse : A → A) →
+  (∀ x → operator (local x) ≡ rightResidual x) →
+  RightInverse rightResidual rightResidualInverse →
+  (∀ x → local (operator x) ≡ leftResidual x) →
+  LeftInverse leftResidual leftResidualInverse →
+  TwoSidedInverse A operator
+propagatorTwoSidedInverse
+  operator local rightResidual rightResidualInverse
+  leftResidual leftResidualInverse
+  rightEquation rightLaw leftEquation leftLaw =
+  twoSidedInverse rightCandidate rightCandidateLeft rightCandidateRight
+  where
+    rightCandidate : _
+    rightCandidate = local ∘ rightResidualInverse
+
+    leftCandidate : _
+    leftCandidate = leftResidualInverse ∘ local
+
+    rightCandidateRight : RightInverse operator rightCandidate
+    rightCandidateRight =
+      parametrixRightInverse
+        operator local rightResidual rightResidualInverse rightEquation rightLaw
+
+    leftCandidateLeft : LeftInverse operator leftCandidate
+    leftCandidateLeft =
+      parametrixLeftInverse
+        operator local leftResidual leftResidualInverse leftEquation leftLaw
+
+    candidatesEqual : leftCandidate ≈ rightCandidate
+    candidatesEqual =
+      leftRightInverseUnique
+        operator leftCandidate rightCandidate leftCandidateLeft rightCandidateRight
+
+    rightCandidateLeft : LeftInverse operator rightCandidate
+    rightCandidateLeft x =
+      trans (sym (candidatesEqual (operator x))) (leftCandidateLeft x)
