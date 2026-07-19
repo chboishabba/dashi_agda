@@ -5,6 +5,7 @@ on:
     branches:
       - codex/balaban-su2-quaternion-carrier
       - codex/balaban-su2-quaternion-carrier-clean
+      - codex/balaban-su2-radial-inverse-family
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda'
@@ -57,6 +58,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanSU2RadialAdjointOperator.agda \
               DASHI/Physics/YangMills/BalabanSU2RadialAdjointComposition.agda \
               DASHI/Physics/YangMills/BalabanSU2RadialAdjointInverse.agda \
+              DASHI/Physics/YangMills/BalabanSU2RadialInverseFamily.agda \
               DASHI/Physics/YangMills/BalabanSU2NestedRadialBlockPathTerm.agda
           ) > su2-carrier-check.log 2>&1
           status=$?
