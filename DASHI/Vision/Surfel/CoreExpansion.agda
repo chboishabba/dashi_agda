@@ -2,13 +2,10 @@ module DASHI.Vision.Surfel.CoreExpansion where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Vision.Surfel.PromotionOrder
-
-------------------------------------------------------------------------
--- Local product, kept here to avoid importing a large product surface.
 
 infixr 4 _×_
 record _×_ (A B : Set) : Set where
@@ -19,9 +16,6 @@ record _×_ (A B : Set) : Set where
 
 open _×_ public
 
-------------------------------------------------------------------------
--- Abstract surfel carrier and cluster membership.
-
 record SurfelCarrier : Set₁ where
   field
     Surfel : Set
@@ -30,10 +24,6 @@ record SurfelCarrier : Set₁ where
     mergeAdmissible : Surfel → Surfel → Set
 
 open SurfelCarrier public
-
-------------------------------------------------------------------------
--- Selection is core-first.  Plateau surfels may enter only through an
--- ascended anchor in the same admissible cluster.
 
 data CoreExpandedSelection (C : SurfelCarrier) : Surfel C → Set where
   selectedCore :
@@ -53,9 +43,6 @@ data CoreExpandedSelection (C : SurfelCarrier) : Surfel C → Set where
 ascended≢plateau : ascended ≡ plateau → ⊥
 ascended≢plateau ()
 
-------------------------------------------------------------------------
--- Every selected non-core surfel carries an explicit ascended anchor.
-
 plateauSelectionHasAscendedAnchor :
   {C : SurfelCarrier} →
   {s : Surfel C} →
@@ -66,11 +53,8 @@ plateauSelectionHasAscendedAnchor :
     × sameCluster C anchor s
     × mergeAdmissible C anchor s
 plateauSelectionHasAscendedAnchor (selectedCore core) plateauEq =
-  Data.Empty.⊥-elim (ascended≢plateau (trans (sym core) plateauEq))
+  ⊥-elim (ascended≢plateau (trans (sym core) plateauEq))
 plateauSelectionHasAscendedAnchor (selectedPlateau _ anchored) _ = anchored
-
-------------------------------------------------------------------------
--- Cluster promotion therefore requires at least one ascended member.
 
 record PromotedCluster (C : SurfelCarrier) : Set₁ where
   field
@@ -91,9 +75,6 @@ promotedClusterHasAscendedMember :
   Σ (Surfel C) λ s →
     Member cluster s × state C s ≡ ascended
 promotedClusterHasAscendedMember cluster = ascendedAnchor cluster
-
-------------------------------------------------------------------------
--- No raw plateau-only cluster can be promoted through this interface.
 
 data PlateauOnlyPromotionAuthority : Set where
 
