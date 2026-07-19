@@ -18,6 +18,7 @@ open import DASHI.Arithmetic.ArithmeticIntegerEmbedding using
   ; betaAt
   ; gammaAt
   ; deltaAt
+  ; delta15
   ; embed-primeContribution
   )
 open import DASHI.Arithmetic.NatBoolEquality using
@@ -46,16 +47,17 @@ open import DASHI.Arithmetic.PrimeIndexedPressure using
   )
 open import DASHI.Statistics.PrimeProfileStats using
   ( PrimeProfileStats
+  ; primeProfileStats
   ; primeProfileWeights
   )
 
 ------------------------------------------------------------------------
 -- Bridge profile
 --
--- This is the first thin arithmetic-to-prime-profile surface.
--- It keeps the local valuation hooks, the tracked Vec15 carrier, and the
--- prime-profile stats object together without claiming more semantics than
--- the current repo can justify.
+-- The arithmetic pressure carrier is depth-valued, while PrimeProfileStats
+-- deliberately exposes binary support-mask diagnostics.  These are distinct
+-- observables once local p-adic depth can exceed one, so the bridge records
+-- them separately rather than postulating that they coincide.
 
 record ArithmeticPrimeProfileBridgeProfile : Set₁ where
   field
@@ -63,17 +65,24 @@ record ArithmeticPrimeProfileBridgeProfile : Set₁ where
     rhs : Int
     embeddedState : NormalizeAddState
     primeProfile : PrimeProfileStats
+
+    -- Binary support diagnostics derived by PrimeProfileStats.
     weights : PrimeContributionVec
+
+    -- Depth-valued arithmetic cancellation pressure.
     carrierProjection : PrimeContributionVec
+
     vpa : SSP → Int → Int → Nat
     vpb : SSP → Int → Int → Nat
     vpc : SSP → Int → Int → Nat
     wallBit : SSP → Int → Int → Bool
     localContribution : SSP → Int → Int → Nat
+
     weightsMatchProfile :
       primeProfileWeights primeProfile ≡ weights
+
     carrierProjectionMatches :
-      carrierProjection ≡ weights
+      carrierProjection ≡ primeIndexedPressureAt embeddedState
 
 open ArithmeticPrimeProfileBridgeProfile public
 
@@ -92,18 +101,18 @@ vpcBridge = gammaAt
 localContributionBridge : SSP → Int → Int → Nat
 localContributionBridge = deltaAt
 
-------------------------------------------------------------------------
--- Missing semantics are isolated here.
-
-postulate
-  bridgePrimeProfile : Int → Int → PrimeProfileStats
-  bridgePrimeProfileWeights :
-    ∀ x y →
-    primeProfileWeights (bridgePrimeProfile x y) ≡
-    primeIndexedPressureAt (embed x y)
-
 wallBitBridge : SSP → Int → Int → Bool
 wallBitBridge p x y = natEq (vpaBridge p x y) (vpbBridge p x y)
+
+------------------------------------------------------------------------
+-- Concrete arithmetic-origin statistics profile.
+--
+-- The FactorVec carrier is the actual tracked delta-depth vector.  The stats
+-- projection intentionally binarizes this carrier through supportMask; the
+-- full depth vector remains available separately as carrierProjection.
+
+bridgePrimeProfile : Int → Int → PrimeProfileStats
+bridgePrimeProfile x y = primeProfileStats (delta15 x y)
 
 ------------------------------------------------------------------------
 -- A canonical bridge profile for a pair of embedded arithmetic states.
@@ -114,14 +123,14 @@ bridgeProfile x y = record
   ; rhs = y
   ; embeddedState = embed x y
   ; primeProfile = bridgePrimeProfile x y
-  ; weights = primeIndexedPressureAt (embed x y)
+  ; weights = primeProfileWeights (bridgePrimeProfile x y)
   ; carrierProjection = primeIndexedPressureAt (embed x y)
   ; vpa = vpaBridge
   ; vpb = vpbBridge
   ; vpc = vpcBridge
   ; wallBit = wallBitBridge
   ; localContribution = localContributionBridge
-  ; weightsMatchProfile = bridgePrimeProfileWeights x y
+  ; weightsMatchProfile = refl
   ; carrierProjectionMatches = refl
   }
 
@@ -171,10 +180,9 @@ embeddedProfileScore x y = sum15 (embeddedProfileCarrier x y)
 ------------------------------------------------------------------------
 -- Minimal concrete package for the embedded prime-profile lane.
 --
--- This is intentionally weaker than any quadratic/theorem-side bridge:
--- it records the embedded profile carrier, the induced scalar score, and
--- the one-step support bound, without identifying that score with a
--- theorem-side quadratic.
+-- This records the depth-valued embedded carrier and its scalar score.  The
+-- separate PrimeProfileStats value above remains a support diagnostic and is
+-- not identified with the depth magnitude.
 
 record EmbeddedPrimeProfileMeasurement : Set₁ where
   field
