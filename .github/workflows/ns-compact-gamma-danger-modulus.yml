@@ -50,14 +50,14 @@ jobs:
             --target-shells 2,3 \
             --target-packet-energy 0.86 \
             --triad-counts 4 \
-            --phase-spreads 0.0 \
-            --target-ratios 2.5 \
+            --phase-spreads 0.0,0.5 \
+            --target-ratios 1.25,2.5 \
             --satellite-fractions 0.55 \
             --center-seeds 1 \
             --calibration-seeds 2 \
             --holdout-seeds 3 \
             --samples-per-base 4 \
-            --calibration-jitter-scale 0.7 \
+            --calibration-jitter-scale 1.0 \
             --holdout-jitter-scale 1.0 \
             --phase-jitter 0.8 \
             --log-ratio-jitter 0.5 \
@@ -84,11 +84,11 @@ jobs:
           from pathlib import Path
 
           data = json.loads(Path('ns-compact-gamma-danger-modulus.json').read_text())
-          assert data['center_profile_count'] == 2
-          assert data['calibration_profile_count'] == 8
-          assert data['holdout_profile_count'] == 8
-          assert data['calibration_pair_count'] == 24
-          assert data['holdout_pair_count'] == 24
+          assert data['center_profile_count'] == 8
+          assert data['calibration_profile_count'] == 32
+          assert data['holdout_profile_count'] == 32
+          assert data['calibration_pair_count'] == 96
+          assert data['holdout_pair_count'] == 96
           assert len(data['candidate_moduli']) == 4
           assert data['selected_holdout_evaluation']['dangerous_pair_count'] > 0
           assert data['selected_holdout_evaluation']['center_lower_receipt']['eligible_center_row_count'] > 0
