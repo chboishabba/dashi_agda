@@ -31,8 +31,8 @@ record AllPrimeArithmetic (space : WeilTestSpace) : Set₁ where
 
 primePowerNat :
   (space : WeilTestSpace) →
-  AllPrimeArithmetic space →
-  AllPrimeArithmetic.Prime →
+  (arithmetic : AllPrimeArithmetic space) →
+  AllPrimeArithmetic.Prime arithmetic →
   Nat →
   Nat
 primePowerNat space arithmetic p exponentIndex =
