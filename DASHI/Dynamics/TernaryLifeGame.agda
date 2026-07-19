@@ -2,7 +2,7 @@ module DASHI.Dynamics.TernaryLifeGame where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_) renaming (zero to zeroᴺ)
 open import DASHI.Algebra.BalancedTernary using (Trit; neg; zero; pos)
 
 ------------------------------------------------------------------------
@@ -26,22 +26,22 @@ activeNeighbours o = positiveNeighbours o + negativeNeighbours o
 ------------------------------------------------------------------------
 
 isThree : Nat → Bool
-isThree (suc (suc (suc zero))) = true
+isThree (suc (suc (suc zeroᴺ))) = true
 isThree _ = false
 
 isFour : Nat → Bool
-isFour (suc (suc (suc (suc zero)))) = true
+isFour (suc (suc (suc (suc zeroᴺ)))) = true
 isFour _ = false
 
 isTwoThree : Nat → Bool
-isTwoThree (suc (suc zero)) = true
-isTwoThree (suc (suc (suc zero))) = true
+isTwoThree (suc (suc zeroᴺ)) = true
+isTwoThree (suc (suc (suc zeroᴺ))) = true
 isTwoThree _ = false
 
 isTwoThreeFour : Nat → Bool
-isTwoThreeFour (suc (suc zero)) = true
-isTwoThreeFour (suc (suc (suc zero))) = true
-isTwoThreeFour (suc (suc (suc (suc zero)))) = true
+isTwoThreeFour (suc (suc zeroᴺ)) = true
+isTwoThreeFour (suc (suc (suc zeroᴺ))) = true
+isTwoThreeFour (suc (suc (suc (suc zeroᴺ)))) = true
 isTwoThreeFour _ = false
 
 _or_ : Bool → Bool → Bool
@@ -57,11 +57,11 @@ if false then _ else y = y
 ------------------------------------------------------------------------
 
 -- Cancelling one positive and one negative neighbour exposes the local
--- majority.  Equal populations return the rule's explicit tie strategy.
+-- majority. Equal populations return the rule's explicit tie strategy.
 majorityWith : Trit → Nat → Nat → Trit
-majorityWith tie zero zero = tie
-majorityWith tie (suc p) zero = pos
-majorityWith tie zero (suc n) = neg
+majorityWith tie zeroᴺ zeroᴺ = tie
+majorityWith tie (suc p) zeroᴺ = pos
+majorityWith tie zeroᴺ (suc n) = neg
 majorityWith tie (suc p) (suc n) = majorityWith tie p n
 
 ------------------------------------------------------------------------
@@ -77,13 +77,13 @@ record Rule : Set₁ where
 
 open Rule public
 
--- Exact ternary lift of Conway B3/S23.  Because three is odd, a genuine
+-- Exact ternary lift of Conway B3/S23. Because three is odd, a genuine
 -- positive/negative tie cannot occur at birth; zero remains the neutral
 -- total definition for malformed or abstract observations.
 classicRule : Rule
 classicRule = rule isThree isTwoThree zero
 
--- A deliberately richer B34/S234 regime.  Birth at four admits a 2/2
+-- A deliberately richer B34/S234 regime. Birth at four admits a 2/2
 -- strategic tie, so HOLD or a symmetry-breaking tie policy becomes active.
 evolvingRule : Trit → Rule
 evolvingRule tie = rule (λ n → isThree n or isFour n) isTwoThreeFour tie
@@ -149,23 +149,23 @@ selfPayoff r o with transitionWith r o
 ------------------------------------------------------------------------
 
 classicPositiveBirth :
-  classicTransition (observe zero (suc (suc zero)) (suc zero)) ≡ pos
+  classicTransition (observe zero (suc (suc zeroᴺ)) (suc zeroᴺ)) ≡ pos
 classicPositiveBirth = refl
 
 classicNegativeBirth :
-  classicTransition (observe zero (suc zero) (suc (suc zero))) ≡ neg
+  classicTransition (observe zero (suc zeroᴺ) (suc (suc zeroᴺ))) ≡ neg
 classicNegativeBirth = refl
 
 classicUnderpopulationDies :
-  classicTransition (observe pos (suc zero) zero) ≡ zero
+  classicTransition (observe pos (suc zeroᴺ) zeroᴺ) ≡ zero
 classicUnderpopulationDies = refl
 
 holdResolvesEvenTie :
   transitionWith (evolvingRule zero)
-    (observe zero (suc (suc zero)) (suc (suc zero))) ≡ zero
+    (observe zero (suc (suc zeroᴺ)) (suc (suc zeroᴺ))) ≡ zero
 holdResolvesEvenTie = refl
 
 positiveTieBreakEnters :
   transitionWith (evolvingRule pos)
-    (observe zero (suc (suc zero)) (suc (suc zero))) ≡ pos
+    (observe zero (suc (suc zeroᴺ)) (suc (suc zeroᴺ))) ≡ pos
 positiveTieBreakEnters = refl
