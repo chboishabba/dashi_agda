@@ -1,25 +1,29 @@
 module DASHI.Governance.CaseyITIRNixBridge where
 
-open import Agda.Primitive using (Level; _⊔_)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+cong :
+  ∀ {a b : Level} {A : Set a} {B : Set b} →
+  (f : A → B) →
+  ∀ {x y} →
+  x ≡ y →
+  f x ≡ f y
+cong f refl = refl
 
 ------------------------------------------------------------------------
 -- Casey / ITIR / SensibLaw / StatiBaker / Nix bridge.
 --
--- This file separates four authorities:
+-- Four authorities are separated:
 --
 --   * Casey candidate state grows monotonically by semilattice join;
---   * governance emits resolution receipts rather than deleting history;
---   * an active view is derived from state plus receipts;
+--   * governance emits receipts rather than deleting candidate history;
+--   * policy derives an active view from state plus receipts;
 --   * Nix-like materialization consumes only a frozen BuildView.
 --
--- The development is generic: concrete file versions, paths, receipts,
--- hashes, gap values, and artifacts are supplied by an implementation.
--- No claim that every governance process is contractive is made.  A
--- contraction witness is an explicit obligation of a concrete instance.
-
-------------------------------------------------------------------------
--- Replicated candidate substrate.
+-- Concrete file versions, paths, hashes, gap values, and artifacts are
+-- supplied by an implementation.  Contractivity is an explicit obligation,
+-- not a broad claim about every governance process.
 
 record JoinSemilattice
   {ℓ : Level}
@@ -44,7 +48,7 @@ open JoinSemilattice public
 
 record CaseySubstrate
   {sℓ : Level}
-  : Set (Level.suc sℓ) where
+  : Set (lsuc sℓ) where
   field
     State : Set sℓ
     stateJoin : JoinSemilattice State
@@ -78,15 +82,11 @@ module Replication
 
 ------------------------------------------------------------------------
 -- Receipt-based governance.
---
--- A resolution does not destructively replace the candidate graph.  It is
--- appended as a receipt, and policy derives an active workspace view from
--- the monotone state plus the monotone receipt state.
 
 record GovernanceLayer
   {sℓ rℓ vℓ pℓ : Level}
   (K : CaseySubstrate {sℓ})
-  : Set (Level.suc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ)) where
+  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ)) where
   field
     ReceiptState : Set rℓ
     receiptJoin : JoinSemilattice ReceiptState
@@ -107,7 +107,7 @@ record BuildBoundary
   {sℓ rℓ vℓ pℓ bℓ aℓ : Level}
   (K : CaseySubstrate {sℓ})
   (G : GovernanceLayer {rℓ = rℓ} {vℓ = vℓ} {pℓ = pℓ} K)
-  : Set (Level.suc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ bℓ ⊔ aℓ)) where
+  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ bℓ ⊔ aℓ)) where
   field
     BuildView : Set bℓ
     Artifact : Set aℓ
@@ -118,8 +118,8 @@ record BuildBoundary
       ActiveView G →
       BuildView
 
-    -- Nix belongs here: after selection has been frozen, never on the
-    -- unresolved candidate state directly.
+    -- Nix belongs here: after the active selection has been frozen, never
+    -- directly on an unresolved candidate state.
     nixMaterialize : BuildView → Artifact
 
 open BuildBoundary public
@@ -146,16 +146,15 @@ module Materialization
   same-build-view-same-artifact = cong (nixMaterialize B)
 
 ------------------------------------------------------------------------
--- The O, R, C, S, L, P, G, F institutional schema.
+-- O, R, C, S, L, P, G, F.
 --
--- L is represented here by the join-semilattice structure carried by S,
--- rather than by an unstructured ontology label.  C computes proposals;
--- G emits adjudication receipts and derives the effective view; F measures
--- unresolved divergence or another implementation-selected gap.
+-- L is the join-semilattice law carried by S.  C computes proposals; G
+-- appends adjudication receipts and derives the effective view; F measures
+-- unresolved multiplicity, policy debt, failed builds, or another chosen gap.
 
 record InstitutionalModel
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
-  : Set (Level.suc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ ⊔ bℓ ⊔ aℓ)) where
+  : Set (lsuc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ ⊔ bℓ ⊔ aℓ)) where
   field
     O-Organization : Set oℓ
     R-Requirement : Set qℓ
@@ -166,16 +165,12 @@ record InstitutionalModel
     buildBoundary :
       BuildBoundary {bℓ = bℓ} {aℓ = aℓ} casey governance
 
-    -- C: requirement-indexed proposal computation.
     C-Code :
       O-Organization →
       R-Requirement →
       State casey →
       Proposal governance
 
-    -- F: gap carrier and comparison relation.  No numeric authority is
-    -- assumed; concrete systems may use candidate multiplicity, entropy,
-    -- policy debt, failed builds, or a product of these.
     Gap : Set fℓ
     _≤F_ : Gap → Gap → Set fℓ
     F-Gap :
@@ -223,19 +218,17 @@ open GovernanceCycle public
 ------------------------------------------------------------------------
 -- Explicit contraction obligation.
 --
--- This record is deliberately stronger than mere non-increase.  A concrete
--- metric/ultrametric implementation supplies StrictlyBelow and proves that
--- every admissible unresolved cycle strictly reduces its gap.  Fixed-point
--- or Banach-style conclusions require additional completeness and metric
--- hypotheses and are therefore not asserted by this bridge alone.
+-- Fixed-point or Banach conclusions additionally require a concrete metric
+-- or ultrametric, completeness, and a quantitative contraction law.  This
+-- bridge records the strict gap-decrease boundary without inventing them.
 
 record ContractionWitness
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
   (M : InstitutionalModel
     {oℓ} {qℓ} {sℓ} {rℓ} {vℓ} {pℓ} {fℓ} {bℓ} {aℓ})
-  : Set (Level.suc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ)) where
+  : Set (lsuc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ)) where
   field
-    Resolved :
+    Unresolved :
       State (casey M) →
       ReceiptState (governance M) →
       Set fℓ
@@ -244,25 +237,21 @@ record ContractionWitness
 
     admissible-cycle-contracts :
       (cycle : GovernanceCycle M) →
-      Resolved cycle.stateBefore cycle.receiptsBefore →
+      Unresolved (stateBefore cycle) (receiptsBefore cycle) →
       StrictlyBelow
-        (F-Gap M cycle.stateBefore cycle.receiptsAfter)
-        (F-Gap M cycle.stateBefore cycle.receiptsBefore)
+        (F-Gap M (stateBefore cycle) (receiptsAfter cycle))
+        (F-Gap M (stateBefore cycle) (receiptsBefore cycle))
 
 open ContractionWitness public
 
 ------------------------------------------------------------------------
--- StatiBaker-style observer boundary.
---
--- The observer receives immutable references/receipts, not mutable Casey
--- candidate authority.  This prevents the provenance ledger from silently
--- becoming the canonical superposition store.
+-- StatiBaker observer boundary.
 
 record ObserverBoundary
   {sℓ rℓ vℓ pℓ refℓ : Level}
   (K : CaseySubstrate {sℓ})
   (G : GovernanceLayer {rℓ = rℓ} {vℓ = vℓ} {pℓ = pℓ} K)
-  : Set (Level.suc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ refℓ)) where
+  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ refℓ)) where
   field
     ImmutableReference : Set refℓ
 
