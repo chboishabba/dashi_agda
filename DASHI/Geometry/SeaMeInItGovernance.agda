@@ -2,5 +2,6 @@ module DASHI.Geometry.SeaMeInItGovernance where
 
 import DASHI.Governance.GovernedArtifactCore
 import DASHI.Geometry.SeaMeInItGovernedPipeline
+import DASHI.Geometry.SeaMeInItAuthorityInvariants
 import DASHI.Geometry.SeaMeInItGovernedPipelineTests
 import DASHI.Geometry.WetsuitSeamOptimisation
