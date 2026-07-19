@@ -69,23 +69,43 @@ class FiniteOneStepTests(unittest.TestCase):
         self.assertTrue(report["zero_background_section"]["constraints_independent"])
         self.assertTrue(report["all_background_sections_closed"])
 
-    def test_parametrix_does_not_promote_full_volume_inverse_as_local(self) -> None:
+    def test_axis_slabs_close_trivial_background_parametrix(self) -> None:
         report = run_parametrix_search(
             L=2,
             average_block=2,
             local_sides=[1, 2],
+            slab_thicknesses=[2],
             mus=[0.0],
             radii=[0.0],
             seeds=1,
             relaxations=[1.0],
         )
         self.assertTrue(report["has_strict_weighted_remainder_bound"])
-        self.assertFalse(report["has_strict_proper_local_weighted_remainder_bound"])
-        self.assertTrue(report["global_inverse_only"])
-        self.assertTrue(report["spectral_without_weighted_norm_obstructions"])
+        self.assertTrue(report["has_strict_proper_local_weighted_remainder_bound"])
+        self.assertFalse(report["global_inverse_only"])
+        proper = report["proper_local_convergent_candidates"]
+        self.assertTrue(any(item["patch_family"] == "axis-slabs-2" for item in proper))
         best = report["best_proper_local_candidate"]
         self.assertIsNotNone(best)
-        self.assertGreaterEqual(max(best["left"], best["right"]), 1.0)
+        self.assertLess(max(best["left"], best["right"]), 1.0)
+
+    def test_background_sample_does_not_yet_close_uniformly(self) -> None:
+        report = run_parametrix_search(
+            L=2,
+            average_block=2,
+            local_sides=[1],
+            slab_thicknesses=[2],
+            mus=[0.0],
+            radii=[0.0, 0.01],
+            seeds=1,
+            relaxations=[0.25, 0.5, 0.75, 1.0],
+        )
+        self.assertTrue(report["has_strict_proper_local_weighted_remainder_bound"])
+        self.assertFalse(report["all_sampled_backgrounds_have_strict_proper_local_bound"])
+        by_radius = {item["radius"]: item for item in report["background_closure"]}
+        self.assertTrue(by_radius[0.0]["strict_proper_local_bound"])
+        self.assertFalse(by_radius[0.01]["strict_proper_local_bound"])
+        self.assertTrue(report["spectral_without_weighted_norm_obstructions"])
 
     def test_su2_ad_cubic_and_closed_dexp_inverse(self) -> None:
         y = np.array([0.07, -0.03, 0.11])
