@@ -22,11 +22,14 @@ midLift1 = refl
 highLift2 : nonaryToTri (liftTriToNonary tri-high lift-2) ≡ tri-high
 highLift2 = refl
 
-nonaryExamples :
-  liftTriToNonary tri-low lift-0 ≡ non-0
-  × liftTriToNonary tri-mid lift-1 ≡ non-4
-  × liftTriToNonary tri-high lift-2 ≡ non-8
-nonaryExamples = refl , refl , refl
+lowLiftValue : liftTriToNonary tri-low lift-0 ≡ non-0
+lowLiftValue = refl
+
+midLiftValue : liftTriToNonary tri-mid lift-1 ≡ non-4
+midLiftValue = refl
+
+highLiftValue : liftTriToNonary tri-high lift-2 ≡ non-8
+highLiftValue = refl
 
 ------------------------------------------------------------------------
 -- The six-lane carrier reconstructs exactly from parity × ternary data.
