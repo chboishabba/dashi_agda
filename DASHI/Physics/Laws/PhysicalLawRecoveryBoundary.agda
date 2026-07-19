@@ -1,5 +1,6 @@
 module DASHI.Physics.Laws.PhysicalLawRecoveryBoundary where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.List using (List)
 
 import DASHI.Physics.Laws.PhysicalLawCore as Core
