@@ -44,21 +44,25 @@ record ZetaHalfPlaneLayer (carrier : ComplexAnalyticCarrier) : Set₁ where
     realPartGreaterThanOne : Complex → Set
 
     DirichletSeriesConverges : Complex → Set
+    ZetaEqualsDirichletSeries : Complex → Set
     EulerProductConverges : Complex → Set
+    ZetaEqualsEulerProduct : Complex → Set
 
     dirichletSeriesConverges :
       (s : Complex) → realPartGreaterThanOne s →
       DirichletSeriesConverges s
 
     zetaEqualsDirichletSeries :
-      (s : Complex) → realPartGreaterThanOne s → Set
+      (s : Complex) → realPartGreaterThanOne s →
+      ZetaEqualsDirichletSeries s
 
     eulerProductConverges :
       (s : Complex) → realPartGreaterThanOne s →
       EulerProductConverges s
 
     zetaEqualsEulerProduct :
-      (s : Complex) → realPartGreaterThanOne s → Set
+      (s : Complex) → realPartGreaterThanOne s →
+      ZetaEqualsEulerProduct s
 
 record CompletedRiemannZeta
   (carrier : ComplexAnalyticCarrier)
