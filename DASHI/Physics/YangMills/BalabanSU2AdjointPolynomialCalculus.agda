@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.BalabanSU2AdjointPolynomialCalculus where
 -- Finite polynomial functional calculus for the concrete su(2) adjoint map.
 --
 -- CMP 98 (32)--(35), (124) applies analytic functions g and g^{-1} to
--- `ad_y`.  Before introducing convergence or complex-analytic normalization,
+-- `ad_y`. Before introducing convergence or complex-analytic normalization,
 -- the exact finite algebra is the polynomial calculus constructed here.
 -- Coefficients are listed in ascending order and evaluated by Horner recursion.
 --
@@ -21,16 +21,17 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( _*R_
+  ; zeroR
   ; zeroʳ
-  ; realSolverRing
   ; realCommutativeRing
   )
-import Tactic.RingSolver as Solver
+open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
+  (addInterchange)
 
 private
   module RealRing = CommutativeRing realCommutativeRing
 
-open RealRing using (distribˡ)
+open RealRing using (distribˡ; *-assoc; *-comm)
 
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ( SU2LieAlgebra
@@ -39,7 +40,9 @@ open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ; lieZero
   ; lieAdd
   ; lieScale
+  ; lieScaleZero
   ; lieZeroLeft
+  ; lieZeroRight
   )
 open import DASHI.Physics.YangMills.BalabanSU2LieBracket using
   ( lieBracketAddRight
@@ -65,9 +68,18 @@ lieScaleCompose :
     ≡ lieScale (a *R b) X
 lieScaleCompose a b (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (a ∷ b ∷ x ∷ []) realSolverRing)
-    (Solver.solve (a ∷ b ∷ y ∷ []) realSolverRing)
-    (Solver.solve (a ∷ b ∷ z ∷ []) realSolverRing)
+    (sym (*-assoc a b x))
+    (sym (*-assoc a b y))
+    (sym (*-assoc a b z))
+
+scalarScaleCommute :
+  ∀ a b x → a *R (b *R x) ≡ b *R (a *R x)
+scalarScaleCommute a b x =
+  trans
+    (sym (*-assoc a b x))
+    (trans
+      (cong (λ product → product *R x) (*-comm a b))
+      (*-assoc b a x))
 
 lieScaleCommute :
   ∀ a b X →
@@ -75,9 +87,9 @@ lieScaleCommute :
     ≡ lieScale b (lieScale a X)
 lieScaleCommute a b (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (a ∷ b ∷ x ∷ []) realSolverRing)
-    (Solver.solve (a ∷ b ∷ y ∷ []) realSolverRing)
-    (Solver.solve (a ∷ b ∷ z ∷ []) realSolverRing)
+    (scalarScaleCommute a b x)
+    (scalarScaleCommute a b y)
+    (scalarScaleCommute a b z)
 
 lieAddInterchange :
   ∀ A B C D →
@@ -89,9 +101,9 @@ lieAddInterchange
   (su2Lie c₁ c₂ c₃)
   (su2Lie d₁ d₂ d₃) =
   su2LieExt
-    (Solver.solve (a₁ ∷ b₁ ∷ c₁ ∷ d₁ ∷ []) realSolverRing)
-    (Solver.solve (a₂ ∷ b₂ ∷ c₂ ∷ d₂ ∷ []) realSolverRing)
-    (Solver.solve (a₃ ∷ b₃ ∷ c₃ ∷ d₃ ∷ []) realSolverRing)
+    (addInterchange a₁ b₁ c₁ d₁)
+    (addInterchange a₂ b₂ c₂ d₂)
+    (addInterchange a₃ b₃ c₃ d₃)
 
 adPower : Nat → SU2LieAlgebra → SU2LieAlgebra → SU2LieAlgebra
 adPower zero Y X = X
@@ -125,15 +137,22 @@ adPolynomial (coefficient ∷ coefficients) Y X =
     (lieScale coefficient X)
     (adOperator Y (adPolynomial coefficients Y X))
 
+adOperatorZeroRight : ∀ Y → adOperator Y lieZero ≡ lieZero
+adOperatorZeroRight Y =
+  trans
+    (cong (adOperator Y) (sym (lieScaleZero lieZero)))
+    (trans
+      (lieBracketScaleRight zeroR Y lieZero)
+      (lieScaleZero (adOperator Y lieZero)))
+
 adPolynomialConstant :
   ∀ coefficient Y X →
   adPolynomial (coefficient ∷ []) Y X
     ≡ lieScale coefficient X
-adPolynomialConstant coefficient Y (su2Lie x y z) =
-  su2LieExt
-    (Solver.solve (coefficient ∷ x ∷ []) realSolverRing)
-    (Solver.solve (coefficient ∷ y ∷ []) realSolverRing)
-    (Solver.solve (coefficient ∷ z ∷ []) realSolverRing)
+adPolynomialConstant coefficient Y X =
+  trans
+    (cong (lieAdd (lieScale coefficient X)) (adOperatorZeroRight Y))
+    (lieZeroRight (lieScale coefficient X))
 
 adPolynomialAdd :
   ∀ coefficients Y X Z →
