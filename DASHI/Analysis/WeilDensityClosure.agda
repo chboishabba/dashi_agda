@@ -24,15 +24,27 @@ record SequentialDashiDensity
     sequence :
       (f : Test) → admissible f → Nat → DashiTest
 
+    ConvergesToTarget :
+      (f : Test) → admissible f → Set
+
+    SpectralFormConverges :
+      (f : Test) → admissible f → Set
+
     convergesToTarget :
-      (f : Test) → (admissibleF : admissible f) → Set
+      (f : Test) →
+      (admissibleF : admissible f) →
+      ConvergesToTarget f admissibleF
 
     spectralFormConverges :
-      (f : Test) → (admissibleF : admissible f) → Set
+      (f : Test) →
+      (admissibleF : admissible f) →
+      SpectralFormConverges f admissibleF
 
     limitPreservesNonnegative :
       (f : Test) →
       (admissibleF : admissible f) →
+      ConvergesToTarget f admissibleF →
+      SpectralFormConverges f admissibleF →
       ((n : Nat) →
         nonnegative
           (spectralZeroForm
@@ -48,8 +60,6 @@ sequentialDensityToExtension :
 sequentialDensityToExtension space formula bridge density = record
   { Approximation = λ f → ⊤
   ; denseRange = λ f admissibleF → tt
-  ; spectralContinuous = ⊤
-  ; nonnegativeClosed = ⊤
   ; extendPositive = extend
   }
   where
@@ -65,5 +75,7 @@ sequentialDensityToExtension space formula bridge density = record
   extend embeddedPositive f admissibleF =
     SequentialDashiDensity.limitPreservesNonnegative density
       f admissibleF
+      (SequentialDashiDensity.convergesToTarget density f admissibleF)
+      (SequentialDashiDensity.spectralFormConverges density f admissibleF)
       (λ n → embeddedPositive
         (SequentialDashiDensity.sequence density f admissibleF n))
