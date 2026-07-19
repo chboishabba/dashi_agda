@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
+      - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/RelationalFlowResidualComposition.agda'
+      - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
       - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
       - 'DASHI/Culture/SemioticPhallicLackAmalekBridge.agda'
       - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
@@ -11,6 +14,9 @@ on:
   pull_request:
     paths:
       - 'DASHI/RelationalFlowRepairAtlas.agda'
+      - 'DASHI/FullRelationalFlowRepairHyperfabric.agda'
+      - 'DASHI/Core/RelationalFlowResidualComposition.agda'
+      - 'DASHI/Governance/RelationalFlowGateAlgebra.agda'
       - 'DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda'
       - 'DASHI/Culture/SemioticPhallicLackAmalekBridge.agda'
       - 'DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda'
@@ -52,9 +58,12 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-relational-flow-repair-check.log"
             export AGDA_JOBS=2
             targets=(
+              DASHI/Core/RelationalFlowResidualComposition.agda
+              DASHI/Governance/RelationalFlowGateAlgebra.agda
               DASHI/Biology/PredictiveMetastabilityTraumaBridge.agda
               DASHI/Culture/SemioticPhallicLackAmalekBridge.agda
               DASHI/Governance/CyberneticClinicalInstitutionalRepairBridge.agda
+              DASHI/FullRelationalFlowRepairHyperfabric.agda
               DASHI/RelationalFlowRepairAtlas.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
