@@ -6,6 +6,8 @@ on:
       - 'scripts/ns_galerkin_coherence_core.py'
       - 'scripts/ns_hard_alignment_derivative.py'
       - 'scripts/ns_generate_matched_galerkin_trajectories.py'
+      - 'scripts/ns_shell_pair_transfer_audit.py'
+      - 'scripts/ns_run_matched_coherence_baseline.py'
       - 'scripts/ns_triad_gamma_gap_raw_hat_export_timed.py'
       - 'scripts/ns_attach_explicit_timeline.py'
       - 'scripts/ns_adaptive_checkpoint_plan.py'
@@ -28,6 +30,8 @@ on:
       - 'scripts/ns_galerkin_coherence_core.py'
       - 'scripts/ns_hard_alignment_derivative.py'
       - 'scripts/ns_generate_matched_galerkin_trajectories.py'
+      - 'scripts/ns_shell_pair_transfer_audit.py'
+      - 'scripts/ns_run_matched_coherence_baseline.py'
       - 'scripts/ns_triad_gamma_gap_raw_hat_export_timed.py'
       - 'scripts/ns_attach_explicit_timeline.py'
       - 'scripts/ns_adaptive_checkpoint_plan.py'
@@ -71,6 +75,42 @@ jobs:
             scripts/tests/test_ns_packet_coherence_budget_audit.py \
             scripts/tests/test_ns_log_bmo_vorticity_direction_audit.py \
             scripts/tests/test_ns_timeline_and_multicutoff.py
+
+  matched-cutoff-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependency
+        run: python -m pip install --upgrade pip numpy
+      - name: Run matched N32 N48 N64 Galerkin baseline
+        run: |
+          python scripts/ns_run_matched_coherence_baseline.py \
+            --cutoffs 32,48,64 \
+            --workdir "$RUNNER_TEMP/ns-matched-baseline" \
+            --output-json ns-matched-baseline.json \
+            --end-time 0.001 \
+            --output-dt 0.001
+      - name: Require cutoff coverage and held-out coefficient survival
+        run: |
+          python - <<'PY'
+          import json
+          with open('ns-matched-baseline.json', encoding='utf-8') as handle:
+              data = json.load(handle)
+          validation = data['heldout_validation']
+          assert validation['matched_cutoff_set_complete'], validation
+          assert validation['any_parameter_set_survives_holdout'], validation
+          PY
+      - name: Upload matched baseline receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-matched-N32-N48-N64-baseline
+          path: ns-matched-baseline.json
+          if-no-files-found: error
 
   focused-agda:
     runs-on: ubuntu-latest
