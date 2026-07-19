@@ -13,6 +13,7 @@ module DASHI.Cognition.VisualPatternFullFormalismBundle where
 --
 -- together with the separate Eisenstein/Turing structural-analogy boundary.
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Biology.CoupledElectrochemicalPatternCarrier using
   ( CoupledCarrierBoundary )
 open import DASHI.Biology.TuringPatternRegimeSurface using
@@ -26,7 +27,7 @@ open import DASHI.Cognition.EndogenousPhospheneObservationBridge using
 open import DASHI.Cognition.VisualTuringKlueverBridge using
   ( EndogenousVisualTuringProjection )
 open import DASHI.Cognition.ModeSelectionToProjectionLaw using
-  ( ManyToOneProjectionWitness
+  ( ManyToOneLatticeWitness
   ; NonTotalProjectionWitness
   )
 open import DASHI.Analysis.EisensteinTuringModeAnalogyBoundary using
@@ -42,7 +43,7 @@ record VisualPatternFullFormalismBundle : Set₁ where
     phospheneObservation : PhospheneProjectionWitness
     turingKlueverBoundary : EndogenousVisualTuringProjection
 
-    manyToOneWitness : ManyToOneProjectionWitness
+    manyToOneWitness : ManyToOneLatticeWitness
     nonTotalWitness : NonTotalProjectionWitness
     eisensteinAnalogyBoundary : EisensteinTuringAnalogyBoundary
 
@@ -76,5 +77,3 @@ record VisualPatternPromotionBoundary : Set₁ where
     structuralAnchor : structuralStatus ≡ structuralCandidateOnly
     analyticAnchor : analyticStatus ≡ analyticBridgeOutstanding
     empiricalAnchor : empiricalStatus ≡ empiricalCalibrationOutstanding
-
-open import Agda.Builtin.Equality using (_≡_)
