@@ -1,0 +1,28 @@
+{
+  "canonical_address": [3, 6, 9],
+  "carriers": [
+    {"address": [], "id": "address-root", "kind": "address", "source": {"declaration": "canonicalThreeSixNineDigits", "line": 148, "path": "DASHI/Foundations/SSPPrimeLane369Refinement.agda"}},
+    {"address": [3], "id": "address-3", "kind": "address", "source": {"declaration": "canonicalThreeSixNineDigits", "line": 148, "path": "DASHI/Foundations/SSPPrimeLane369Refinement.agda"}},
+    {"address": [3, 6], "id": "address-3-6", "kind": "address", "source": {"declaration": "canonicalThreeSixNineDigits", "line": 148, "path": "DASHI/Foundations/SSPPrimeLane369Refinement.agda"}},
+    {"address": [3, 6, 9], "id": "address-3-6-9", "kind": "address", "source": {"declaration": "canonicalThreeSixNineDigits", "line": 148, "path": "DASHI/Foundations/SSPPrimeLane369Refinement.agda"}},
+    {"address": [], "body_surface": "canonicalZeroFifteenSSPSurface", "depth": 0, "id": "rootP3Supervoxel", "kind": "supervoxel", "parity": "evenParity", "prime_lane": "p3", "residue_surface": "canonicalExampleFifteenSSPSurface", "source": {"declaration": "rootP3Supervoxel", "line": 112, "path": "DASHI/Core/SuperSSP369Field.agda"}},
+    {"address": [3, 6, 9], "body_surface": "canonicalExampleFifteenSSPSurface", "depth": 3, "id": "depth3P7Supervoxel", "kind": "supervoxel", "parity": "oddParity", "prime_lane": "p7", "residue_surface": "canonicalNegativeFifteenSSPSurface", "source": {"declaration": "depth3P7Supervoxel", "line": 126, "path": "DASHI/Core/SuperSSP369Field.agda"}},
+    {"body_forest_surface": "canonicalZeroFifteenSSPSurface", "depth": 0, "focus": "rootP3Supervoxel", "id": "rootField", "kind": "field", "residue_forest_surface": "canonicalExampleFifteenSSPSurface", "source": {"declaration": "rootField", "line": 140, "path": "DASHI/Core/SuperSSP369Field.agda"}},
+    {"body_forest_surface": "canonicalExampleFifteenSSPSurface", "depth": 3, "focus": "depth3P7Supervoxel", "id": "depth3Field", "kind": "field", "residue_forest_surface": "canonicalNegativeFifteenSSPSurface", "source": {"declaration": "depth3Field", "line": 149, "path": "DASHI/Core/SuperSSP369Field.agda"}},
+    {"id": "depth3-body", "kind": "surface", "source": {"declaration": "depth3P7Supervoxel", "line": 126, "path": "DASHI/Core/SuperSSP369Field.agda"}, "surface": "canonicalExampleFifteenSSPSurface"},
+    {"id": "depth3-residue", "kind": "surface", "source": {"declaration": "depth3P7Supervoxel", "line": 126, "path": "DASHI/Core/SuperSSP369Field.agda"}, "surface": "canonicalNegativeFifteenSSPSurface"}
+  ],
+  "events": [
+    {"id": "refine-1", "kind": "refinement", "operator": "refine digit-3", "source": "address-root", "source_ref": {"declaration": "canonicalThreeSixNineDigits", "line": 148, "path": "DASHI/Foundations/SSPPrimeLane369Refinement.agda"}, "targets": ["address-3"]},
+    {"id": "refine-2", "kind": "refinement", "operator": "refine digit-6", "source": "address-3", "source_ref": {"declaration": "canonicalThreeSixNineDigits", "line": 148, "path": "DASHI/Foundations/SSPPrimeLane369Refinement.agda"}, "targets": ["address-3-6"]},
+    {"id": "refine-3", "kind": "refinement", "operator": "refine digit-9", "source": "address-3-6", "source_ref": {"declaration": "canonicalThreeSixNineDigits", "line": 148, "path": "DASHI/Foundations/SSPPrimeLane369Refinement.agda"}, "targets": ["address-3-6-9"]},
+    {"id": "focus-root", "kind": "focus", "operator": "focus", "source": "rootField", "source_ref": {"declaration": "rootField", "line": 140, "path": "DASHI/Core/SuperSSP369Field.agda"}, "targets": ["rootP3Supervoxel"]},
+    {"id": "focus-depth3", "kind": "focus", "operator": "focus", "source": "depth3Field", "source_ref": {"declaration": "depth3Field", "line": 149, "path": "DASHI/Core/SuperSSP369Field.agda"}, "targets": ["depth3P7Supervoxel"]},
+    {"id": "address-focus", "kind": "coordinate-transport", "operator": "refinement address", "source": "address-3-6-9", "source_ref": {"declaration": "depth3P7Supervoxel", "line": 126, "path": "DASHI/Core/SuperSSP369Field.agda"}, "targets": ["depth3P7Supervoxel"]},
+    {"id": "body-residue-split", "kind": "decomposition", "operator": "bodySurface / residueSurface", "source": "depth3P7Supervoxel", "source_ref": {"declaration": "depth3P7Supervoxel", "line": 126, "path": "DASHI/Core/SuperSSP369Field.agda"}, "targets": ["depth3-body", "depth3-residue"]}
+  ],
+  "invariants": {"hand_authored_domain_nodes": false, "split_derived_from_constructor_fields": true, "topology_source_backed": true, "ultrametric_trunk_derived_from_canonical_address": true},
+  "schema": "dashi-hyperfabric-ir-v1",
+  "source_roots": ["DASHI/Foundations/SSPPrimeLane369Refinement.agda", "DASHI/Core/SuperSSP369Field.agda"],
+  "title": "DASHI 369 Supervoxel Hyperfabric"
+}

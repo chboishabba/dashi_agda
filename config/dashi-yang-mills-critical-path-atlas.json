@@ -1,0 +1,21 @@
+{
+  "schema": "dashi-theory-atlas-v1",
+  "title": "DASHI Yang–Mills Critical Path Atlas",
+  "scan_root": "DASHI",
+  "authority_rules": {
+    "source_imported_module_patterns": ["^DASHI\\.Physics\\.YangMills\\.SourceImports\\."],
+    "open_declaration_patterns": ["Open$", "Unproved$", "Obligation$"],
+    "conditional_input_type_patterns": ["EndpointDeterminantPrefixData", "InverseSquareBudgetArithmetic", "InverseSquareBudgetOrderBridge", "InverseSquareThresholdControlsCoupling", "BalabanBetaPrefixBound", "BalabanBareCouplingSchedule"]
+  },
+  "cards": [
+    {"id":"beta-prefix-sum","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.betaPrefixSum","title":"Cumulative beta correction","formula":"B_k = Σ_{j≤k} β_j","lane":"beta lane","source_anchors":["CMP 109 I (0.18), (0.20)"],"source_relation":"DASHI defines the finite prefix coordinate"},
+    {"id":"inverse-square-telescope","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.inverseSquareTelescoping","title":"Inverse-square telescope","formula":"g_k⁻² = g_0⁻² - B_k","lane":"coupling budget","dependencies":["beta-prefix-sum"],"source_anchors":["CMP 109 I (0.18), (0.20)"],"source_relation":"DASHI-owned algebraic composition"},
+    {"id":"total-beta-split","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.sumShellsTotalBeta","title":"Gaussian and interaction split","formula":"Σ β_j = Σ G_j + Σ I_j","lane":"endpoint bridge","source_anchors":["CMP 109 (1.4), (4.22)"],"source_relation":"DASHI composes named shell inputs"},
+    {"id":"gaussian-telescope","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.gaussianPrefixTelescopes","title":"Endpoint shell telescope","formula":"Σ G_j = D_k - D_0 + Σ C_j","lane":"endpoint bridge","dependencies":["total-beta-split"],"source_anchors":["CMP 109 (4.35), (5.42)"],"source_relation":"DASHI-owned telescope from shell decomposition"},
+    {"id":"beta-sum-identity","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.betaSumEquality","title":"Endpoint beta identity","formula":"B_k = (D_k-D_0) + Σ C_j + Σ I_j","lane":"beta prefix bridge","dependencies":["beta-prefix-sum","total-beta-split","gaussian-telescope"],"source_anchors":["CMP 109 (1.4), (4.22), (4.35), (5.42)"],"source_relation":"DASHI composes source-shaped inputs"},
+    {"id":"endpoint-to-prefix","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.endpointDeterminantToBetaPrefix","title":"Endpoint determinant to beta prefix","formula":"endpoint + correction + interaction bounds ⇒ beta prefix bound","lane":"beta prefix bridge","dependencies":["beta-sum-identity"],"source_anchors":["CMP 109 (1.4), (4.22), (4.35), (5.42)"],"source_relation":"DASHI-owned algebraic composition"},
+    {"id":"threshold-lower-bound","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.inverseSquareAboveGammaThreshold′","title":"Inverse-square threshold","formula":"gamma⁻² ≤ g_k⁻²","lane":"coupling budget","dependencies":["inverse-square-telescope","endpoint-to-prefix"],"source_anchors":["CMP 122 finite-cutoff small-coupling premise"],"source_relation":"DASHI-owned ordered-field composition"},
+    {"id":"bounded-coupling-trajectory","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.couplingTrajectoryBoundedByGamma","title":"Finite-cutoff coupling trajectory","formula":"gamma⁻² ≤ g_k⁻² ⇒ 0 < g_k ≤ gamma","lane":"coupling trajectory","dependencies":["threshold-lower-bound"],"source_anchors":["CMP 122 finite-cutoff premise"],"source_relation":"DASHI consumes the named semantic threshold bridge"},
+    {"id":"scheduled-trajectory","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.scheduleTrajectoryBoundedByGamma","title":"Cutoff-indexed tuned trajectory","formula":"beta budget at every K ⇒ bounded trajectory at every K","lane":"coupling trajectory","dependencies":["bounded-coupling-trajectory"],"source_anchors":["CMP 109 → CMP 122 interface"],"source_relation":"DASHI assembles a cutoff-indexed family"}
+  ]
+}
