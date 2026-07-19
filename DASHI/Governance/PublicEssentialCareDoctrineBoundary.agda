@@ -1,17 +1,12 @@
 module DASHI.Governance.PublicEssentialCareDoctrineBoundary where
 
-open import Agda.Primitive using (Level; _⊔_)
 open import DASHI.Governance.HealthcareEqualityInvariant
 open import DASHI.Governance.HealthcareAccessDistortion
 
 ------------------------------------------------------------------------
 -- Public funding and essential-service dependence create a public-power
--- surface.  Religious or ideological ownership does not erase the access
+-- surface. Religious or ideological ownership does not erase the access
 -- divergence produced when doctrine removes lawful clinically indicated care.
-
-private
-  variable
-    ℓp ℓn ℓc ℓe : Level
 
 data FundingSurface : Set where
   whollyPublic : FundingSurface
@@ -32,7 +27,7 @@ data DependencySurface : Set where
   clinicallyCaptive : DependencySurface
   institutionallyTraumatised : DependencySurface
 
-record PublicEssentialCareProvider : Set where
+record PublicEssentialCareProvider : Set₁ where
   field
     funding : FundingSurface
     criticality : ServiceCriticality
@@ -42,11 +37,9 @@ record PublicEssentialCareProvider : Set where
 open PublicEssentialCareProvider public
 
 record PublicDoctrineAccessFailure
-  {Patient : Set ℓp}
-  {Need : Set ℓn}
-  {Care : Set ℓc}
+  {Patient Need Care : Set}
   (system : HealthcareSystem Patient Need Care)
-  : Set (ℓp ⊔ ℓe) where
+  : Set₁ where
   field
     provider : PublicEssentialCareProvider
     publicOrSubsidised : Set
@@ -56,9 +49,7 @@ record PublicDoctrineAccessFailure
 open PublicDoctrineAccessFailure public
 
 publicDoctrineAccessFailureDestroysEquality :
-  {Patient : Set ℓp} →
-  {Need : Set ℓn} →
-  {Care : Set ℓc} →
+  {Patient Need Care : Set} →
   {system : HealthcareSystem Patient Need Care} →
   PublicDoctrineAccessFailure system →
   HealthcareEquality system →
@@ -67,11 +58,9 @@ publicDoctrineAccessFailureDestroysEquality failure =
   doctrinalFilterDestroysEquality (doctrineFilter failure)
 
 record SurvivorForcedExposureFailure
-  {Patient : Set ℓp}
-  {Need : Set ℓn}
-  {Care : Set ℓc}
+  {Patient Need Care : Set}
   (system : HealthcareSystem Patient Need Care)
-  : Set (ℓp ⊔ ℓe) where
+  : Set₁ where
   field
     provider : PublicEssentialCareProvider
     abuseResidueDivergence : AccessDivergence system
@@ -79,9 +68,7 @@ record SurvivorForcedExposureFailure
 open SurvivorForcedExposureFailure public
 
 survivorForcedExposureDestroysEquality :
-  {Patient : Set ℓp} →
-  {Need : Set ℓn} →
-  {Care : Set ℓc} →
+  {Patient Need Care : Set} →
   {system : HealthcareSystem Patient Need Care} →
   SurvivorForcedExposureFailure system →
   HealthcareEquality system →
@@ -90,7 +77,7 @@ survivorForcedExposureDestroysEquality failure =
   accessDivergenceDestroysEquality (abuseResidueDivergence failure)
 
 ------------------------------------------------------------------------
--- The formal conclusion is intentionally strict:
+-- The conclusion is intentionally strict:
 --
 -- * referral is not equality when it changes accessible care;
 -- * delay is not equality;
@@ -100,9 +87,7 @@ survivorForcedExposureDestroysEquality failure =
 -- * the predicate cannot be reconstructed while a divergence witness remains.
 
 publiclyFundedDoctrineCannotCoexistWithEquality :
-  {Patient : Set ℓp} →
-  {Need : Set ℓn} →
-  {Care : Set ℓc} →
+  {Patient Need Care : Set} →
   {system : HealthcareSystem Patient Need Care} →
   PublicDoctrineAccessFailure system →
   EqualityRepair system →
