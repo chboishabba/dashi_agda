@@ -39,9 +39,20 @@ record MaxwellFieldLaw : Set₁ where
     currentForm    : ChargeCurrent → ThreeForm
     lorentzForce   : TwoForm → ChargeCurrent → Velocity → Force
 
-    homogeneousEquation : exteriorD (fieldStrength potential) → Set
-    inhomogeneousEquation : Metric → Orientation → ChargeCurrent → Set
-    currentConservation : ChargeCurrent → Set
+    HomogeneousEquation : ThreeForm → Set
+    InhomogeneousEquation : ThreeForm → ThreeForm → Set
+    ConservedCurrent : ThreeForm → Set
+
+    homogeneousEquation :
+      HomogeneousEquation (exteriorD (fieldStrength potential))
+    inhomogeneousEquation :
+      (metric : Metric) (orientation : Orientation)
+      (current : ChargeCurrent) →
+      InhomogeneousEquation
+        (exteriorD (hodgeStar metric orientation (fieldStrength potential)))
+        (currentForm current)
+    currentConservation :
+      (current : ChargeCurrent) → ConservedCurrent (currentForm current)
 
 record YangMillsFieldLaw : Set₁ where
   field
