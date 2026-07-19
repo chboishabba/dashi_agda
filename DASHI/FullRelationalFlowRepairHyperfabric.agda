@@ -126,7 +126,6 @@ canonicalFullRelationalFlowRepairHyperfabric =
     false refl
     false refl
     false refl
-    false refl
     "Proof-carrying candidate atlas: compiled inverse/+1, predictive trauma/metastability, PatternMind/reciprocity/love, education gates and overlap overflow, semiotic phallus/lack/Amalek, intersectional philosophical audits and folk-model boundaries, cybernetic clinical governance, institutional repair continuity, and medical-cannabis presence/impairment separation are assembled without clinical, legal, impairment, liability, domination, essence, ranking, or mission-shield promotion."
 
 canonicalAggregateDiagnosisPromotedFalse :
