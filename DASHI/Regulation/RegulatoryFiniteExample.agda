@@ -1,11 +1,8 @@
 module DASHI.Regulation.RegulatoryFiniteExample where
 
-open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Unit using (⊤; tt)
 
 open import DASHI.Regulation.RegulatoryProjectionCore
 open import DASHI.Regulation.RegulatoryAuthorityBundle
@@ -61,15 +58,6 @@ euProjection = record
   ; projectionReading = "Finite EU-shaped structural example; not a statement of EU law."
   }
 
-noSectionConstant :
-  (P : RegulatoryProjection) →
-  project P process ≡ recorded →
-  project P transfer ≡ recorded →
-  ((o : ObservableSurface P) → project P (process) ≡ o) → ⊥
-noSectionConstant P p q all with all (project P transfer)
-... | equality = λ ()
-
--- Direct no-section proofs: the observable value `unrecorded` has no preimage.
 auNoSection : NoSection auProjection
 auNoSection (recover , section) with recover unrecorded | section unrecorded
 ... | process  | ()
@@ -125,8 +113,7 @@ exampleEffectiveSurface = record
   ; effectiveReading = "Effective obligations are derived and retain authority provenance."
   }
 
-exampleRelation :
-  ObligationRelation exampleBundle exampleEffectiveSurface
+exampleRelation : ObligationRelation exampleBundle exampleEffectiveSurface
 exampleRelation = record
   { relation = λ { (au , disclose) (eu , prohibitTransfer) → blocks
                  ; _ _ → compatible }
@@ -139,7 +126,7 @@ exampleConflict = record
   { leftObligation = au , disclose
   ; rightObligation = eu , prohibitTransfer
   ; conflictProof = refl
-  ; conflictReading = "A conflict witness must prove that the indexed relation is blocks."
+  ; conflictReading = "A conflict witness proves the indexed relation is blocks."
   }
 
 exampleGraph : RegulatoryConflictGraph
