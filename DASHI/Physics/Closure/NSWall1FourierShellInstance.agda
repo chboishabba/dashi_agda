@@ -4,7 +4,14 @@ open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Equality using (_≡_)
 
-open import DASHI.Physics.Closure.NSIntegerFourierLattice
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Lattice
+open Lattice using
+  ( FourierMode
+  ; ShellPredicate
+  ; ShellSeparated
+  ; InShell
+  )
+open import DASHI.Physics.Closure.NSPairIncidenceKernel using (PairIncidenceData)
 open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel
 
 ------------------------------------------------------------------------
@@ -71,8 +78,8 @@ record Wall1FourierShellData
       List
         (ResonantFourierTriad
           FourierMode
-          addMode
-          NSIntegerFourierLattice.NonZeroMode)
+          Lattice.addMode
+          Lattice.NonZeroMode)
 
     targetModes sourceModes : List FourierMode
 
@@ -88,8 +95,8 @@ wall1TransferData :
   FourierBiotSavartTransferData FourierMode Vector Scalar
 wall1TransferData W = record
   { laws = laws W
-  ; addMode = addMode
-  ; NonZeroMode = NSIntegerFourierLattice.NonZeroMode
+  ; addMode = Lattice.addMode
+  ; NonZeroMode = Lattice.NonZeroMode
   ; triads = triads W
   ; targetModes = targetModes W
   ; sourceModes = sourceModes W
@@ -109,8 +116,8 @@ wall1PairIncidenceData :
   PairIncidenceData
     (ResonantFourierTriad
       FourierMode
-      addMode
-      NSIntegerFourierLattice.NonZeroMode)
+      Lattice.addMode
+      Lattice.NonZeroMode)
     FourierMode FourierMode Scalar
 wall1PairIncidenceData W =
   fourierPairIncidenceData (wall1TransferData W)
