@@ -4,8 +4,8 @@ module DASHI.Analysis.ZetaTheoremSurface where
 --
 -- Exact rational samples and visualisation receipts are exported together
 -- with the 3-adic geometric-series distinction, the fail-closed analytic
--- promotion gate, the concrete tracked prime-power arithmetic lane, and the
--- modular Millennium-level DASHI-to-Weil theorem ladder.
+-- promotion gate, the concrete prime-power/von-Mangoldt arithmetic lane, and
+-- the modular Millennium-level DASHI-to-Weil-square theorem ladder.
 
 open import DASHI.Analysis.AbelZeta public
 open import DASHI.Analysis.ZetaVisualization public
@@ -26,6 +26,21 @@ open import DASHI.Analysis.RiemannArithmeticCoercivity public
 open import DASHI.Analysis.RiemannWeilSeparatorCriterion public
 open import DASHI.Analysis.RiemannMillenniumAssembly public
 open import DASHI.Analysis.RiemannSeparatorAssembly public
+open import DASHI.Analysis.RiemannWeilSquareAssembly public
+  using (WeilSquareMillenniumAssembly; weilSquareAssemblyImpliesRH)
+
+-- Detailed arithmetic, test-space, square-coercivity, and regression modules
+-- stay qualified here to avoid exporting their local helper combinators.
+import DASHI.Analysis.RiemannVonMangoldtSpecification
+import DASHI.Analysis.RiemannVonMangoldtPrimeSide
+import DASHI.Analysis.RiemannTrackedToVonMangoldtBridge
+import DASHI.Analysis.RiemannPrimeExhaustion
+import DASHI.Analysis.WeilConvolutionSquare
+import DASHI.Analysis.BombieriWeilTestBridge
+import DASHI.Analysis.RiemannExplicitFormulaComponents
+import DASHI.Analysis.RiemannWeilSquareCriterion
+import DASHI.Analysis.RiemannWeilSquareCoercivity
+import DASHI.Analysis.ZetaModularRegression
 
 -- Retained for direct qualified imports by older callers, but not opened here:
 -- its monolithic projections overlap names from the modular theorem ladder.
