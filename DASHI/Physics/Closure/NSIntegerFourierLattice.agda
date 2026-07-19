@@ -1,8 +1,8 @@
 module DASHI.Physics.Closure.NSIntegerFourierLattice where
 
-open import Agda.Builtin.Int using (Int; _+_; -_)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
+open import Data.Integer.Base using (ℤ; _+_; -_)
 
 ------------------------------------------------------------------------
 -- Exact Fourier lattice Z^3.
@@ -11,7 +11,7 @@ open import Data.Empty using (⊥)
 record FourierMode : Set where
   constructor mode
   field
-    kx ky kz : Int
+    kx ky kz : ℤ
 
 open FourierMode public
 
