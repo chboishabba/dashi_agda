@@ -9,9 +9,17 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data EvidenceLane : Set where
-  cookbookLane archiveLane oralHistoryLane practitionerLane communityLane
-  sensoryPanelLane instrumentalLane nutritionDatabaseLane agriculturalLane
-  scholarlyLane dinerMemoryLane : EvidenceLane
+  cookbookLane          : EvidenceLane
+  archiveLane           : EvidenceLane
+  oralHistoryLane       : EvidenceLane
+  practitionerLane      : EvidenceLane
+  communityLane         : EvidenceLane
+  sensoryPanelLane      : EvidenceLane
+  instrumentalLane      : EvidenceLane
+  nutritionDatabaseLane : EvidenceLane
+  agriculturalLane      : EvidenceLane
+  scholarlyLane         : EvidenceLane
+  dinerMemoryLane       : EvidenceLane
 
 record SourceReceipt : Set where
   field
@@ -32,8 +40,16 @@ record ExtractedSpan (receipt : SourceReceipt) : Set where
 open ExtractedSpan public
 
 data PredicateRole : Set where
-  containsRole excludesRole derivesFromRole transformsRole evokesRole
-  hasProfileRole hasNutrientRole sourcedFromRole variantOfRole belongsToMovementRole : PredicateRole
+  containsRole          : PredicateRole
+  excludesRole          : PredicateRole
+  derivesFromRole       : PredicateRole
+  transformsRole        : PredicateRole
+  evokesRole            : PredicateRole
+  hasProfileRole        : PredicateRole
+  hasNutrientRole       : PredicateRole
+  sourcedFromRole       : PredicateRole
+  variantOfRole         : PredicateRole
+  belongsToMovementRole : PredicateRole
 
 record PredicateAtom : Set where
   field
@@ -54,9 +70,17 @@ record NormalizedAtom : Set where
 open NormalizedAtom public
 
 data SurfaceKind : Set where
-  identitySurface techniqueSurface recipeRouteSurface lineageSurface
-  nutritionSurface provenanceSurface qualitativeSurface movementSurface
-  safetySurface authoritySurface variantSurface : SurfaceKind
+  identitySurface    : SurfaceKind
+  techniqueSurface   : SurfaceKind
+  recipeRouteSurface : SurfaceKind
+  lineageSurface     : SurfaceKind
+  nutritionSurface   : SurfaceKind
+  provenanceSurface  : SurfaceKind
+  qualitativeSurface : SurfaceKind
+  movementSurface    : SurfaceKind
+  safetySurface      : SurfaceKind
+  authoritySurface   : SurfaceKind
+  variantSurface     : SurfaceKind
 
 record SurfaceClaim : Set where
   field
@@ -67,7 +91,11 @@ record SurfaceClaim : Set where
 open SurfaceClaim public
 
 data RelationBetweenClaims : Set where
-  agrees refines contextualizes conflicts unresolvedRelation : RelationBetweenClaims
+  agrees             : RelationBetweenClaims
+  refines            : RelationBetweenClaims
+  contextualizes     : RelationBetweenClaims
+  conflicts          : RelationBetweenClaims
+  unresolvedRelation : RelationBetweenClaims
 
 record ClaimRelation : Set where
   field
@@ -88,7 +116,7 @@ open PromotionPolicy public
 
 record PromotionEvidence
     (policy : PromotionPolicy)
-    (claim : SurfaceClaim) : Set where
+    (claim : SurfaceClaim) : Set₁ where
   field
     sourceReceipt         : SourceReceipt
     relatedClaims         : List ClaimRelation
@@ -98,7 +126,7 @@ record PromotionEvidence
 
 open PromotionEvidence public
 
-record PromotedClaim (policy : PromotionPolicy) : Set where
+record PromotedClaim (policy : PromotionPolicy) : Set₁ where
   constructor promoteClaim
   field
     promotedSurfaceClaim : SurfaceClaim
