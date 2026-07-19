@@ -1,12 +1,12 @@
 module DASHI.Crypto.ShorProgram where
 
-open import DASHI.Algebra.Quantum.FiniteQuantumRegister public
-open import DASHI.Algebra.Quantum.QuantumFourierTransformFinite public
-open import DASHI.Algebra.Quantum.GeneralShor public
-open import DASHI.Crypto.FiniteFactorArithmetic public
-open import DASHI.Crypto.ShorOrderFinding public
-open import DASHI.Crypto.ShorFactoring public
-open import DASHI.Crypto.ShorDiscreteLog public
-open import DASHI.Crypto.RSAShorVulnerabilityBridge public
-open import DASHI.Crypto.ShorConcreteExamples public
-open import DASHI.Algebra.Quantum.DASHIShorProductiveJoin public
+import DASHI.Algebra.Quantum.FiniteQuantumRegister
+import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
+import DASHI.Algebra.Quantum.GeneralShor
+import DASHI.Crypto.FiniteFactorArithmetic
+import DASHI.Crypto.ShorOrderFinding
+import DASHI.Crypto.ShorFactoring
+import DASHI.Crypto.ShorDiscreteLog
+import DASHI.Crypto.RSAShorVulnerabilityBridge
+import DASHI.Crypto.ShorConcreteExamples
+import DASHI.Algebra.Quantum.DASHIShorProductiveJoin
