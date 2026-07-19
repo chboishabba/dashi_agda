@@ -13,8 +13,8 @@ open import DASHI.Analysis.RiemannAnalyticSubstrate
 open import DASHI.Analysis.WeilTestSpace
 open import DASHI.Analysis.RiemannExplicitFormula
 
-Not : Set → Set
-Not proposition = proposition → ⊥
+Neg : Set → Set
+Neg proposition = proposition → ⊥
 
 record WeilOffLineSeparator
   (analytic : AnalyticSubstrate)
@@ -22,26 +22,30 @@ record WeilOffLineSeparator
   (formula : RiemannExplicitFormula space) : Set₁ where
   open WeilTestSpace space
   open RiemannExplicitFormula formula
-
-  carrier = AnalyticSubstrate.carrier analytic
-  completed = AnalyticSubstrate.completed analytic
-  Complex = ComplexAnalyticCarrier.Complex carrier
-
   field
     criticalLineStable :
-      (s : Complex) →
-      Not (Not (CompletedRiemannZeta.criticalLine completed s)) →
-      CompletedRiemannZeta.criticalLine completed s
+      (s : ComplexAnalyticCarrier.Complex
+        (AnalyticSubstrate.carrier analytic)) →
+      Neg
+        (Neg
+          (CompletedRiemannZeta.criticalLine
+            (AnalyticSubstrate.completed analytic) s)) →
+      CompletedRiemannZeta.criticalLine
+        (AnalyticSubstrate.completed analytic) s
 
     separateOffLineZero :
-      (s : Complex) →
-      CompletedRiemannZeta.nontrivialZero completed s →
-      Not (CompletedRiemannZeta.criticalLine completed s) →
+      (s : ComplexAnalyticCarrier.Complex
+        (AnalyticSubstrate.carrier analytic)) →
+      CompletedRiemannZeta.nontrivialZero
+        (AnalyticSubstrate.completed analytic) s →
+      Neg
+        (CompletedRiemannZeta.criticalLine
+          (AnalyticSubstrate.completed analytic) s) →
       Σ Test
         (λ f →
           admissible f
           ×
-          Not (nonnegative (spectralZeroForm f)))
+          Neg (nonnegative (spectralZeroForm f)))
 
 universalWeilPositivityImpliesRH :
   (analytic : AnalyticSubstrate) →
