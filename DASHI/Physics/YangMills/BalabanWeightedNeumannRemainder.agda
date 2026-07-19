@@ -12,10 +12,10 @@ module DASHI.Physics.YangMills.BalabanWeightedNeumannRemainder where
 --       implies
 --   ||R^n x||_mu <= rho^n ||x||_mu.
 --
--- No completeness or infinite-series convergence is asserted here.  The field
--- contractionStrict records the genuine analytic frontier rho < 1, while the
--- theorem below only uses the ordered-monoid laws required for the finite
--- power estimate.
+-- No completeness or infinite-series convergence is asserted here.  The
+-- contractionStrict witness records the genuine analytic frontier rho < 1,
+-- while the theorem below only uses the ordered-monoid laws required for the
+-- finite power estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
