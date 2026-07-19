@@ -7,6 +7,7 @@ import pytest
 SCRIPTS=Path(__file__).resolve().parents[1]
 if str(SCRIPTS) not in sys.path:sys.path.insert(0,str(SCRIPTS))
 from ns_galerkin_coherence_core import exact_alignment_budget,fit_nonnegative_dominating_coefficients
+from ns_hard_alignment_derivative import hard_component_density
 from ns_packet_coherence_budget_audit import audit
 
 def taylor_green(n=8):
@@ -25,6 +26,15 @@ def test_exact_galerkin_rhs_and_quotient_identities():
     fractions=pressure['simple_top_eigenvalue_enstrophy_fraction']+pressure['top_pair_degenerate_enstrophy_fraction']+pressure['triple_degenerate_enstrophy_fraction']
     assert fractions==pytest.approx(1,abs=1e-10)
 
+def test_hard_pressure_alignment_density_is_eigenvector_sign_invariant():
+    values=np.array([[[[3.,1.,-4.]]]]);vectors=np.broadcast_to(np.eye(3),(1,1,1,3,3)).copy();omega=np.array([[[[1.,2.,3.]]]]);omega_dot=np.array([[[[.2,-.1,.3]]]])
+    sdot=np.array([[[[[.4,.5,.2],[.5,-.2,.1],[.2,.1,-.2]]]]])
+    reference,_=hard_component_density(values,vectors,omega,omega_dot,sdot,1e-6)
+    flip1=vectors.copy();flip1[..., :,0]*=-1
+    flip2=vectors.copy();flip2[..., :,1]*=-1
+    assert hard_component_density(values,flip1,omega,omega_dot,sdot,1e-6)[0]==pytest.approx(reference)
+    assert hard_component_density(values,flip2,omega,omega_dot,sdot,1e-6)[0]==pytest.approx(reference)
+
 def test_nonnegative_dominating_coefficient_fit():
     x=np.array([[1.,0.,0.,0.],[0.,2.,0.,0.],[1.,1.,0.,0.]])
     y=np.array([2.,2.,3.]);fit=fit_nonnegative_dominating_coefficients(x,y,('p','c','v','t'))
@@ -38,6 +48,7 @@ def test_exact_audit_pointwise_tests_terminal_excursion(tmp_path):
     assert parameter['excursion_checkpoint_indices']==[1]
     assert parameter['terminal_excursion_is_pointwise_tested'] is True
     assert result['checkpoints'][0]['exact_budget_available'] is True
+    assert result['checkpoints'][0]['hard_simple_spectrum_alignment_budget']['gauge_invariant_under_independent_eigenvector_signs'] is True
     assert result['interval_absorption_audits'][0]['intervals'][0]['parabolic_duration']>0
     assert result['authority']['cutoff_uniform_authority'] is False
 
