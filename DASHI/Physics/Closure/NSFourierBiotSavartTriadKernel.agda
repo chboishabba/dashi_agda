@@ -9,24 +9,17 @@ open import DASHI.Physics.Closure.NSPairIncidenceKernel
 ------------------------------------------------------------------------
 -- Exact Fourier-vorticity convention for the finite NS transfer kernel.
 --
--- For vorticity omega at a nonzero Fourier mode p, the Biot--Savart velocity
--- carrier is
---
---   u_p = |p|^-2 (p x omega_p).
---
--- For p + q = k, the vorticity interaction convention used here is
+--   u_p = |p|^-2 (p x omega_p)
 --
 --   T(p,q; omega_p, omega_q)
 --     = (omega_p . q) u_q - (u_p . q) omega_q.
 --
--- The linearized transfer about a background bar-omega is the sum
+-- Linearization about background bar-omega uses
 --
 --   T(p,q; bar-omega_p, eta_q)
 --   + T(q,p; eta_q, bar-omega_p).
 --
--- The rectangular Schur kernel is the declared nonnegative majorant of this
--- vector, inserted only at the matching target/source entry (k,q).  Phase and
--- sign cancellation are not used by this majorant lane.
+-- The weighted Schur lane consumes a nonnegative majorant of this vector.
 ------------------------------------------------------------------------
 
 record FourierVectorLaws
@@ -162,11 +155,9 @@ fourierPairContribution F triad target source =
 fourierPairIncidenceData :
   ∀ {m v s}
     {Mode : Set m} {Vector : Set v} {Scalar : Set s} →
-  FourierBiotSavartTransferData Mode Vector Scalar →
+  (F : FourierBiotSavartTransferData Mode Vector Scalar) →
   PairIncidenceData
-    (ResonantFourierTriad Mode
-      (addMode _)
-      (NonZeroMode _))
+    (ResonantFourierTriad Mode (addMode F) (NonZeroMode F))
     Mode Mode Scalar
 fourierPairIncidenceData F = record
   { pairs = triads F
