@@ -14,16 +14,16 @@ open GaugeFixedHessianData public
 gaugePenalty :
   ∀ {Fine Gauge Coarse} →
   GaugeFixedHessianData Fine Gauge Coarse → Fine → Fine
-gaugePenalty data fine = divergenceStar data (divergence data fine)
+gaugePenalty bundle fine = divergenceStar bundle (divergence bundle fine)
 
 averagePenalty :
   ∀ {Fine Gauge Coarse} →
   GaugeFixedHessianData Fine Gauge Coarse → Fine → Fine
-averagePenalty data fine = averageStar data (average data fine)
+averagePenalty bundle fine = averageStar bundle (average bundle fine)
 
 gaugeFixedHessian :
   ∀ {Fine Gauge Coarse} →
   GaugeFixedHessianData Fine Gauge Coarse → Fine → Fine
-gaugeFixedHessian data fine =
-  addFine data (wilsonHessian data fine)
-    (addFine data (gaugePenalty data fine) (averagePenalty data fine))
+gaugeFixedHessian bundle fine =
+  addFine bundle (wilsonHessian bundle fine)
+    (addFine bundle (gaugePenalty bundle fine) (averagePenalty bundle fine))
