@@ -6,7 +6,7 @@ import pytest
 
 SCRIPTS=Path(__file__).resolve().parents[1]
 if str(SCRIPTS) not in sys.path:sys.path.insert(0,str(SCRIPTS))
-from ns_galerkin_coherence_core import exact_alignment_budget,fit_nonnegative_dominating_coefficients
+from ns_galerkin_coherence_core import exact_alignment_budget,fit_nonnegative_dominating_coefficients,galerkin_packet_rhs_components
 from ns_hard_alignment_derivative import hard_component_density
 from ns_packet_coherence_budget_audit import audit
 
@@ -25,6 +25,12 @@ def test_exact_galerkin_rhs_and_quotient_identities():
     pressure=result['gauge_invariant_pressure'];assert pressure['raw_signed_mix_positive_part_used'] is False
     fractions=pressure['simple_top_eigenvalue_enstrophy_fraction']+pressure['top_pair_degenerate_enstrophy_fraction']+pressure['triple_degenerate_enstrophy_fraction']
     assert fractions==pytest.approx(1,abs=1e-10)
+
+def test_soft_alignment_derivative_matches_central_difference():
+    raw=taylor_green();nu=.02;base=exact_alignment_budget(raw,nu,0);rhs=galerkin_packet_rhs_components(raw,nu,0)['total_rhs_hat'];eps=1e-6
+    plus=exact_alignment_budget(raw+eps*rhs,nu,0)['soft_alignment_A'];minus=exact_alignment_budget(raw-eps*rhs,nu,0)['soft_alignment_A'];finite=(plus-minus)/(2*eps)
+    exact=base['exact_total_derivatives']['normalized_alignment_derivative']
+    assert finite==pytest.approx(exact,rel=2e-4,abs=2e-7)
 
 def test_hard_pressure_alignment_density_is_eigenvector_sign_invariant():
     values=np.array([[[[3.,1.,-4.]]]]);vectors=np.broadcast_to(np.eye(3),(1,1,1,3,3)).copy();omega=np.array([[[[1.,2.,3.]]]]);omega_dot=np.array([[[[.2,-.1,.3]]]])
