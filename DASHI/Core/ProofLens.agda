@@ -27,32 +27,30 @@ open LensFamily public
 
 record RoleLensReceipt (Evidence : Set) : Set₁ where
   field
-    domain      : RoleFamily
-    lenses      : LensFamily domain
-    role        : FormalRole
-    payload     : RoleType domain role
-    lens        : ProofLens
-    witness     : LensWitness lenses lens role payload
-    evidence    : Evidence
-    Residual    : Set
-    residual    : Residual
-    Admissible  : Set
-    admissible  : Admissible
+    receiptDomain     : RoleFamily
+    receiptLenses     : LensFamily receiptDomain
+    receiptRole       : FormalRole
+    receiptPayload    : RoleType receiptDomain receiptRole
+    receiptLens       : ProofLens
+    receiptWitness    :
+      LensWitness receiptLenses receiptLens receiptRole receiptPayload
+    receiptEvidence   : Evidence
+    Residual           : Set
+    receiptResidual   : Residual
+    Admissible         : Set
+    receiptAdmissible : Admissible
 
 open RoleLensReceipt public
 
--- A receipt preserves the selected domain, role, and lens definitionally.
+-- A receipt preserves its selected domain, role, and lens definitionally.
 receipt-domain :
-  ∀ {Evidence : Set} (r : RoleLensReceipt Evidence) →
-  RoleFamily
-receipt-domain = domain
+  ∀ {Evidence : Set} → RoleLensReceipt Evidence → RoleFamily
+receipt-domain = receiptDomain
 
 receipt-role :
-  ∀ {Evidence : Set} (r : RoleLensReceipt Evidence) →
-  FormalRole
-receipt-role = role
+  ∀ {Evidence : Set} → RoleLensReceipt Evidence → FormalRole
+receipt-role = receiptRole
 
 receipt-lens :
-  ∀ {Evidence : Set} (r : RoleLensReceipt Evidence) →
-  ProofLens
-receipt-lens = lens
+  ∀ {Evidence : Set} → RoleLensReceipt Evidence → ProofLens
+receipt-lens = receiptLens
