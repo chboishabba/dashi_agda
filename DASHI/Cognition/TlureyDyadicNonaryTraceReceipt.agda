@@ -9,10 +9,7 @@ open import Data.String using (_++_)
 
 import DASHI.Cognition.ResidualPhaseEmpiricalContact as Contact
 import DASHI.Cognition.ResidualPhaseGeometry as Geometry
-
-------------------------------------------------------------------------
--- Bool conjunction
-------------------------------------------------------------------------
+import DASHI.Core.InterconnectionWorldModelIntegrationBundle
 
 infixr 6 _∧_
 
@@ -20,69 +17,41 @@ _∧_ : Bool → Bool → Bool
 true  ∧ b = b
 false ∧ _ = false
 
-------------------------------------------------------------------------
--- Dyadic-nonary trace receipt.
---
--- Closes the uploaded DeepSeek trace as a branch/phase formalism.
--- The trace is admitted only as a noisy generative source; its
--- structural content (recursive dyadic branching) is promotable,
--- while its symbolic/numerological content (369, 666, primorial,
--- chaos) is candidate-only and requires MDL/ZKP gates.
-------------------------------------------------------------------------
-
 record DyadicNonaryTraceReceipt : Set₁ where
   constructor dyadicNonaryTraceReceipt
   field
-    -------------------------------------------------------
-    -- Source admission
-    -------------------------------------------------------
     generalTheory : Geometry.ResidualPhaseGeometryReceipt
     empiricalContact : Contact.EmpiricalContactReceipt
     traceObserved : Bool
 
-    -------------------------------------------------------
-    -- Promotable structural layer
-    -------------------------------------------------------
     dyadicSurfaceDetected      : Bool
-    recursiveBranchingDetected  : Bool
+    recursiveBranchingDetected : Bool
     hiddenResidualNonempty     : Bool
     branchFormalismPromotable  : Bool
 
-    -------------------------------------------------------
-    -- Candidate organising layer
-    -------------------------------------------------------
     triadicLiftAvailable       : Bool
     hexadicRefinementAvailable : Bool
     nonarySheetAvailable       : Bool
     triadicNonaryCandidateOnly : Bool
 
-    -------------------------------------------------------
-    -- Required diagnostic gates
-    -------------------------------------------------------
-    mdlGateRequired            : Bool
-    zkpGateRequired            : Bool
+    mdlGateRequired : Bool
+    zkpGateRequired : Bool
 
-    -------------------------------------------------------
-    -- Authority blockers
-    -------------------------------------------------------
-    numerologyAuthorityBlocked        : Bool
-    mythicCertaintyBlocked            : Bool
-    intoxicationAuthorityBlocked      : Bool
-    paranoidAuthorityBlocked          : Bool
-    clinicalAuthorityBlocked          : Bool
-    ethnicReligiousAuthorityBlocked   : Bool
-    politicalProphecyBlocked          : Bool
-    privateLanguageBoundary           : Bool
+    numerologyAuthorityBlocked      : Bool
+    mythicCertaintyBlocked          : Bool
+    intoxicationAuthorityBlocked    : Bool
+    paranoidAuthorityBlocked        : Bool
+    clinicalAuthorityBlocked        : Bool
+    ethnicReligiousAuthorityBlocked : Bool
+    politicalProphecyBlocked        : Bool
+    privateLanguageBoundary         : Bool
 
   allGatesClosed : Bool
   allGatesClosed =
     Geometry.ResidualPhaseGeometryReceipt.allClosed generalTheory
-    ∧
-    Contact.EmpiricalContactReceipt.observableContactClosed empiricalContact
-    ∧
-    Contact.EmpiricalContactReceipt.nonPromotionBoundaryClosed empiricalContact
-    ∧
-    traceObserved
+    ∧ Contact.EmpiricalContactReceipt.observableContactClosed empiricalContact
+    ∧ Contact.EmpiricalContactReceipt.nonPromotionBoundaryClosed empiricalContact
+    ∧ traceObserved
     ∧ dyadicSurfaceDetected
     ∧ recursiveBranchingDetected
     ∧ hiddenResidualNonempty
@@ -115,34 +84,30 @@ record DyadicNonaryTraceReceipt : Set₁ where
     ++ "paranoid certainty; clinical inference; ethnic/religious essentialism; "
     ++ "political prophecy. The bridge is additive, diagnostic, and fail-closed."
 
-------------------------------------------------------------------------
--- Canonical receipt: all gates closed
-------------------------------------------------------------------------
-
 canonicalTraceReceipt : DyadicNonaryTraceReceipt
 canonicalTraceReceipt =
   record
-    { generalTheory                  = Geometry.canonicalResidualPhaseGeometryReceipt
-    ; empiricalContact               = Contact.canonicalEmpiricalContactReceipt
-    ; traceObserved                  = true
-    ; dyadicSurfaceDetected          = true
-    ; recursiveBranchingDetected     = true
-    ; hiddenResidualNonempty         = true
-    ; branchFormalismPromotable      = true
-    ; triadicLiftAvailable           = true
-    ; hexadicRefinementAvailable     = true
-    ; nonarySheetAvailable           = true
-    ; triadicNonaryCandidateOnly     = true
-    ; mdlGateRequired                = true
-    ; zkpGateRequired                = true
-    ; numerologyAuthorityBlocked     = true
-    ; mythicCertaintyBlocked         = true
-    ; intoxicationAuthorityBlocked   = true
-    ; paranoidAuthorityBlocked       = true
-    ; clinicalAuthorityBlocked       = true
+    { generalTheory                   = Geometry.canonicalResidualPhaseGeometryReceipt
+    ; empiricalContact                = Contact.canonicalEmpiricalContactReceipt
+    ; traceObserved                   = true
+    ; dyadicSurfaceDetected           = true
+    ; recursiveBranchingDetected      = true
+    ; hiddenResidualNonempty          = true
+    ; branchFormalismPromotable       = true
+    ; triadicLiftAvailable            = true
+    ; hexadicRefinementAvailable      = true
+    ; nonarySheetAvailable            = true
+    ; triadicNonaryCandidateOnly      = true
+    ; mdlGateRequired                 = true
+    ; zkpGateRequired                 = true
+    ; numerologyAuthorityBlocked      = true
+    ; mythicCertaintyBlocked          = true
+    ; intoxicationAuthorityBlocked    = true
+    ; paranoidAuthorityBlocked        = true
+    ; clinicalAuthorityBlocked        = true
     ; ethnicReligiousAuthorityBlocked = true
-    ; politicalProphecyBlocked       = true
-    ; privateLanguageBoundary        = true
+    ; politicalProphecyBlocked        = true
+    ; privateLanguageBoundary         = true
     }
 
 allGatesClosedProof :
