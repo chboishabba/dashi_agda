@@ -6,6 +6,7 @@ on:
     paths:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
+      - 'DASHI/Analysis/ScientificOperatorCrossreferencesTests.agda'
       - 'DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda'
       - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
       - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
@@ -16,6 +17,7 @@ on:
     paths:
       - 'DASHI/Analysis/FiniteOperatorReductionCore.agda'
       - 'DASHI/Analysis/ScientificOperatorCrossreferences.agda'
+      - 'DASHI/Analysis/ScientificOperatorCrossreferencesTests.agda'
       - 'DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda'
       - 'DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda'
       - 'DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda'
@@ -56,6 +58,7 @@ jobs:
               DASHI/Physics/Chemistry/AtomicClosedShellSchurBridge.agda \
               DASHI/Biology/Molecular/MolecularConstrainedMinimizerBridge.agda \
               DASHI/Biology/Morphogenesis/ReactionDiffusionHodgeBridge.agda \
+              DASHI/Analysis/ScientificOperatorCrossreferencesTests.agda \
               DASHI/Analysis/ScientificOperatorCrossreferences.agda \
               DASHI/Biology/Everything.agda
           ) > agda-scientific-operator-crossreferences.log 2>&1
