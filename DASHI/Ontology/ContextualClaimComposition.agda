@@ -79,10 +79,10 @@ extendAxis :
   ScopedClaim Axis →
   (Extra → EpistemicTrit) →
   ScopedClaim (Axis ⊎ Extra)
-extendAxis claim extraState =
+extendAxis {Axis} {Extra} claim extraState =
   scopedClaim extended (references claim)
   where
-    extended : _
+    extended : Axis ⊎ Extra → EpistemicTrit
     extended (inj₁ axis) = stateAt claim axis
     extended (inj₂ extra) = extraState extra
 
