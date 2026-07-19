@@ -1,0 +1,122 @@
+name: RSA 15SSP fibre admissibility
+
+on:
+  push:
+    paths:
+      - 'scripts/rsa_ssp_fibre_separation_benchmark.py'
+      - 'scripts/tests/test_rsa_ssp_fibre_separation.py'
+      - 'docs/rsa_ssp_fibre_admissibility.md'
+      - 'DASHI/Crypto/RSAFactorFibreCompatibilityCore.agda'
+      - 'DASHI/Crypto/RSA15SSPFibreAdmissibilityBoundary.agda'
+      - 'DASHI/Crypto/RSA15SSPFibreAdmissibilityRegression.agda'
+      - '.github/workflows/rsa-ssp-fibre-admissibility.yml'
+  pull_request:
+    paths:
+      - 'scripts/rsa_ssp_fibre_separation_benchmark.py'
+      - 'scripts/tests/test_rsa_ssp_fibre_separation.py'
+      - 'docs/rsa_ssp_fibre_admissibility.md'
+      - 'DASHI/Crypto/RSAFactorFibreCompatibilityCore.agda'
+      - 'DASHI/Crypto/RSA15SSPFibreAdmissibilityBoundary.agda'
+      - 'DASHI/Crypto/RSA15SSPFibreAdmissibilityRegression.agda'
+      - '.github/workflows/rsa-ssp-fibre-admissibility.yml'
+
+concurrency:
+  group: rsa-15ssp-fibre-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  python-benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install focused test dependency
+        run: python -m pip install --upgrade pip pytest
+      - name: Run focused tests
+        run: python -m pytest -q scripts/tests/test_rsa_ssp_fibre_separation.py
+      - name: Generate deterministic benchmark receipt
+        run: |
+          python scripts/rsa_ssp_fibre_separation_benchmark.py \
+            --bits 32,36,40,44,48 \
+            --trials 10 \
+            --distractors 150 \
+            --seed 20260518 \
+            --csv rsa-ssp-fibre-results.csv \
+            --json rsa-ssp-fibre-summary.json
+      - name: Require fail-closed classification
+        run: |
+          python - <<'PY'
+          import json
+          with open('rsa-ssp-fibre-summary.json', encoding='utf-8') as handle:
+              receipt = json.load(handle)
+          decision = receipt['decision']
+          assert decision['unbiased_product_compatibility_is_chance'], decision
+          assert not decision['unbiased_factor_signal_observed'], decision
+          assert not decision['general_rsa_break_promoted'], decision
+          assert decision['verdict'] in {
+              'structured-source-detector-only',
+              'baseline-equivalent',
+          }, decision
+          PY
+      - name: Upload deterministic receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rsa-15ssp-fibre-admissibility-receipt
+          path: |
+            rsa-ssp-fibre-results.csv
+            rsa-ssp-fibre-summary.json
+          if-no-files-found: error
+
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: rsa-15ssp-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check factor-fibre compatibility and fail-closed boundary
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-rsa-15ssp-check.log"
+            export AGDA_JOBS=2
+            targets=(
+              DASHI/Crypto/RSAFactorFibreCompatibilityCore.agda
+              DASHI/Crypto/RSA15SSPFibreAdmissibilityBoundary.agda
+              DASHI/Crypto/RSA15SSPFibreAdmissibilityRegression.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-rsa-15ssp-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 180 agda-rsa-15ssp-check.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rsa-15ssp-agda-log
+          path: agda-rsa-15ssp-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
