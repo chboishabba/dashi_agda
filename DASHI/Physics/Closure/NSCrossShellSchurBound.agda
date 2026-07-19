@@ -18,7 +18,7 @@ record NSDiagonalShellGap
     {ShellVector : Set v}
     {Scalar : Set s}
     {O : SchurOrderLaws Scalar}
-    (I : NSShellSchurInputs ShellVector Scalar O) : Set (v ⊔ s) where
+    (I : NSShellSchurStructure ShellVector Scalar O) : Set (v ⊔ s) where
   field
     diagonalGap :
       ∀ x → _≤_ O (highGap I) (inner I x (highBlock I x))
@@ -30,7 +30,7 @@ record NSCrossShellCorrectionBound
     {ShellVector : Set v}
     {Scalar : Set s}
     {O : SchurOrderLaws Scalar}
-    (I : NSShellSchurInputs ShellVector Scalar O) : Set (v ⊔ s) where
+    (I : NSShellSchurStructure ShellVector Scalar O) : Set (v ⊔ s) where
   field
     correctionBound :
       ∀ x →
@@ -48,35 +48,37 @@ record NSSchurFrontierDischarge
     {ShellVector : Set v}
     {Scalar : Set s}
     (O : SchurOrderLaws Scalar)
-    (I : NSShellSchurInputs ShellVector Scalar O) : Set (lsuc (v ⊔ s)) where
+    (I : NSShellSchurStructure ShellVector Scalar O) : Set (lsuc (v ⊔ s)) where
   field
     diagonal : NSDiagonalShellGap I
     crossShell : NSCrossShellCorrectionBound I
 
 open NSSchurFrontierDischarge public
 
+frontierBounds :
+  ∀ {v s}
+    {ShellVector : Set v}
+    {Scalar : Set s}
+    {O : SchurOrderLaws Scalar}
+    {I : NSShellSchurStructure ShellVector Scalar O} →
+  NSSchurFrontierDischarge O I →
+  NSShellSchurBounds I
+frontierBounds F = record
+  { highShellGap = diagonalGap (diagonal F)
+  ; crossShellBound = correctionBound (crossShell F)
+  ; crossBudgetBelowGap = budgetBelowDiagonalGap (crossShell F)
+  }
+
 frontierDischargeImpliesFrameGap :
   ∀ {v s}
     {ShellVector : Set v}
     {Scalar : Set s}
     (O : SchurOrderLaws Scalar)
-    (I : NSShellSchurInputs ShellVector Scalar O)
+    (I : NSShellSchurStructure ShellVector Scalar O)
     (F : NSSchurFrontierDischarge O I)
     (x : ShellVector) →
   _≤_ O
     (_⊖_ O (highGap I) (crossBudget I))
     (inner I x (schurComplement I x))
-frontierDischargeImpliesFrameGap O I F x =
-  subtractLowerBound O
-    (diagonalGap (diagonal F) x)
-    (correctionBound (crossShell F) x)
-    (budgetBelowDiagonalGap (crossShell F))
-  where
-  -- The target is definitionally the Schur quadratic form after rewriting by
-  -- the identity already carried by NSShellSchurInputs.
-  -- Reuse the canonical theorem to perform that rewrite.
-  canonical :
-    _≤_ O
-      (_⊖_ O (highGap I) (crossBudget I))
-      (inner I x (schurComplement I x))
-  canonical = nsShellSchurCoercive O I x
+frontierDischargeImpliesFrameGap O I F =
+  nsShellSchurCoercive O I (frontierBounds F)
