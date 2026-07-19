@@ -1,20 +1,20 @@
 module DASHI.Biology.Morphogenesis.MorphogenesisRecoveryBoundary where
 
-open import DASHI.Biology.Morphogenesis.MorphologicalGoalQuotient
-open import DASHI.Biology.Morphogenesis.LocalToGlobalControlBridge
-open import DASHI.Biology.Morphogenesis.RegenerativeRepairBoundary
-open import DASHI.Biology.Morphogenesis.ReactionDiffusionModeSelection
-open import DASHI.Biology.Development.DevelopmentalGenomicInverseAdapter
-open import DASHI.Biology.Agency.ScaleIndexedAgency
+import DASHI.Biology.Morphogenesis.MorphologicalGoalQuotient as Goal
+import DASHI.Biology.Morphogenesis.LocalToGlobalControlBridge as LocalGlobal
+import DASHI.Biology.Morphogenesis.RegenerativeRepairBoundary as Repair
+import DASHI.Biology.Morphogenesis.ReactionDiffusionModeSelection as Modes
+import DASHI.Biology.Development.DevelopmentalGenomicInverseAdapter as Development
+import DASHI.Biology.Agency.ScaleIndexedAgency as Agency
 
 record MorphogenesisRecoveryBoundary : Set₁ where
   field
-    goalSystem        : MorphologicalGoalSystem
-    localGlobal       : LocalToGlobalMorphogenesis
-    repairSystem      : RegenerativeRepairSystem
-    modeSystem        : ReactionDiffusionModeSystem
-    developmentalAdapter : DevelopmentalGenomicInverseAdapter
-    agencySystem      : ScaleIndexedAgencySystem
+    goalSystem        : Goal.MorphologicalGoalSystem
+    localGlobal       : LocalGlobal.LocalToGlobalMorphogenesis
+    repairSystem      : Repair.RegenerativeRepairSystem
+    modeSystem        : Modes.ReactionDiffusionModeSystem
+    developmentalAdapter : Development.DevelopmentalGenomicInverseAdapter
+    agencySystem      : Agency.ScaleIndexedAgencySystem
 
     CellStateToTissueGeometry : Set
     ReactionDiffusionToPattern : Set
