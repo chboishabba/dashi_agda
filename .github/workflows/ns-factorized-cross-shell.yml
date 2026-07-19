@@ -1,0 +1,68 @@
+name: NS factorized cross-shell bound
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/ThreeStageBoundComposition.agda'
+      - 'DASHI/Physics/Closure/NSFactorizedCrossShellBound.agda'
+      - 'DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda'
+      - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
+      - 'docs/ns_factorized_cross_shell_bound.md'
+      - '.github/workflows/ns-factorized-cross-shell.yml'
+  push:
+    paths:
+      - 'DASHI/Analysis/ThreeStageBoundComposition.agda'
+      - 'DASHI/Physics/Closure/NSFactorizedCrossShellBound.agda'
+      - 'DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda'
+      - 'DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda'
+      - 'docs/ns_factorized_cross_shell_bound.md'
+      - '.github/workflows/ns-factorized-cross-shell.yml'
+
+concurrency:
+  group: ns-factorized-cross-shell-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check factorized cross-shell theorem
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-ns-factorized-cross-shell.log"
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Analysis/ThreeStageBoundComposition.agda \
+              DASHI/Physics/Closure/NSFactorizedCrossShellBound.agda \
+              DASHI/Physics/Closure/NSFactorizedSchurFrameGap.agda \
+              DASHI/Physics/Closure/NSFactorizedCrossShellProgram.agda
+          ) > agda-ns-factorized-cross-shell.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 200 agda-ns-factorized-cross-shell.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-factorized-cross-shell-agda-log
+          path: agda-ns-factorized-cross-shell.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
