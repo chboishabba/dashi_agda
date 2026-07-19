@@ -1,0 +1,4 @@
+module DASHI.Economics.SystemicCrisisSignalAll where
+
+import DASHI.Economics.SystemicCrisisSignalKernel
+import DASHI.Economics.SystemicCrisisSignalKernelTests
