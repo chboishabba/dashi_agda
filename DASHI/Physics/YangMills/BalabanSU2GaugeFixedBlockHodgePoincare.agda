@@ -1,18 +1,18 @@
 module DASHI.Physics.YangMills.BalabanSU2GaugeFixedBlockHodgePoincare where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 record OrderedEnergy {s : Level} (Scalar : Set s) : Set (lsuc s) where
   field
     _≤_ : Scalar → Scalar → Set s
     add : Scalar → Scalar → Scalar
+    reflexive : ∀ value → value ≤ value
     transitive : ∀ {a b c} → a ≤ b → b ≤ c → a ≤ c
     addMonotoneRight : ∀ fixed {a b} → a ≤ b → add fixed a ≤ add fixed b
 open OrderedEnergy public
 
--- The exact gauge-fixed energy appearing at trivial background.
 gaugeFixedEnergy :
   ∀ {s} {Scalar : Set s} →
   OrderedEnergy Scalar →
@@ -20,9 +20,6 @@ gaugeFixedEnergy :
 gaugeFixedEnergy order curlEnergy divergenceEnergy averageEnergy =
   add order curlEnergy (add order divergenceEnergy averageEnergy)
 
--- Local oscillation control plus block-mean control yields the global
--- block Hodge--Poincare inequality.  This is the geometric proof attack in its
--- minimal exact form; the two premises are the concrete lattice lemmas to solve.
 blockHodgePoincareFromLocal :
   ∀ {s} {Scalar : Set s}
   (order : OrderedEnergy Scalar)
@@ -91,11 +88,8 @@ hodgePoincareGivesZeroBackgroundCoercivity order hodge hessianEnergy energyIdent
         (hessianEnergy vector)
     rewriteRight vector
       rewrite energyIdentity vector =
-      hodgePoincare hodge vector
+      reflexive order (constantWeightedEnergy hodge vector)
 
--- A perturbative background proof should produce the two explicit comparison
--- inequalities below.  Their composition is the uniform small-field coercivity
--- theorem; no background positivity is assumed as a record field.
 backgroundCoercivityFromPerturbation :
   ∀ {s} {Scalar : Set s}
   (order : OrderedEnergy Scalar)
