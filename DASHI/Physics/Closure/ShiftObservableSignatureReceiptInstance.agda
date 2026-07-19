@@ -11,16 +11,23 @@ import DASHI.Physics.Closure.Basin as Basin
 import DASHI.Physics.Closure.DeltaToQuadraticBridgeTheorem as DQ
 import DASHI.Physics.Closure.ExecutionContract as EC
 import DASHI.Physics.Closure.ExecutionContractLaws as ECL
+import DASHI.Physics.Closure.ShiftContractAnchoredTrajectoryFamily as SATF
+import DASHI.Physics.Closure.ShiftContractTriadicFamily as STF
 import DASHI.Physics.Closure.ShiftObservableSignaturePressureTestInstance as SPTI
 import DASHI.Physics.Closure.Projection as Projection
 import DASHI.Physics.Closure.ReceiptFromObservableSignature as RFOS
 
 ------------------------------------------------------------------------
--- Live shift execution receipt for the inhabited observable/signature path.
+-- Live shift execution receipts for the inhabited observable/signature path.
 --
--- This replaces the identity-step receipt surface with one concrete live
--- shift step from the existing anchored trajectory.  The observable/signature
--- promotion point now lives on the same non-singleton shift pressure carrier.
+-- The execution carrier has the exact chain
+--
+--   start -> next -> middle -> held.
+--
+-- The pressure-flow carrier coarsens the last two execution steps into its
+-- single next -> held step.  Keeping all three execution receipts explicit is
+-- therefore necessary before any whole-chain MDL compatibility statement can
+-- be made honestly.
 
 private
   ShiftC : Exec.Contract
@@ -81,9 +88,41 @@ shiftReceiptNext :
   EC.State shiftExecutionContract
 shiftReceiptNext = SPTI.shiftPressureNext
 
+shiftReceiptMiddle :
+  EC.State shiftExecutionContract
+shiftReceiptMiddle = SATF.trajectoryGen STF.i2
+
+shiftReceiptHeld :
+  EC.State shiftExecutionContract
+shiftReceiptHeld = SPTI.shiftPressureHeldExit
+
 shiftReceiptStartInBasin :
   Exec.Contract.InBasin ShiftC (Exec.Contract.π ShiftC shiftReceiptStart)
 shiftReceiptStartInBasin = refl
+
+shiftReceiptNextInBasin :
+  Exec.Contract.InBasin ShiftC (Exec.Contract.π ShiftC shiftReceiptNext)
+shiftReceiptNextInBasin =
+  Exec.Contract.ExecutionAdmissible.basin-preserved
+    ShiftA
+    shiftReceiptStart
+    shiftReceiptStartInBasin
+
+shiftReceiptMiddleInBasin :
+  Exec.Contract.InBasin ShiftC (Exec.Contract.π ShiftC shiftReceiptMiddle)
+shiftReceiptMiddleInBasin =
+  Exec.Contract.ExecutionAdmissible.basin-preserved
+    ShiftA
+    shiftReceiptNext
+    shiftReceiptNextInBasin
+
+shiftReceiptHeldInBasin :
+  Exec.Contract.InBasin ShiftC (Exec.Contract.π ShiftC shiftReceiptHeld)
+shiftReceiptHeldInBasin =
+  Exec.Contract.ExecutionAdmissible.basin-preserved
+    ShiftA
+    shiftReceiptMiddle
+    shiftReceiptMiddleInBasin
 
 shiftExecutionReceipt :
   ECL.ExecutionContractReceipt
@@ -94,14 +133,34 @@ shiftExecutionReceipt = record
   { arrowOK = Exec.Contract.ExecutionAdmissible.arrow-monotone ShiftA shiftReceiptStart
   ; coneOK = Exec.Contract.ExecutionAdmissible.cone-delta ShiftA shiftReceiptStart
   ; mdlOK = Exec.Contract.ExecutionAdmissible.mdl-descent ShiftA shiftReceiptStart
-  ; basinOK =
-      shiftReceiptStartInBasin
-      ,
-      Exec.Contract.ExecutionAdmissible.basin-preserved
-        ShiftA
-        shiftReceiptStart
-        shiftReceiptStartInBasin
+  ; basinOK = shiftReceiptStartInBasin , shiftReceiptNextInBasin
   ; eigenOK = Exec.Contract.ExecutionAdmissible.eigen-overlap ShiftA shiftReceiptStart
+  }
+
+shiftExecutionReceiptNextMiddle :
+  ECL.ExecutionContractReceipt
+    shiftExecutionContract
+    shiftReceiptNext
+    shiftReceiptMiddle
+shiftExecutionReceiptNextMiddle = record
+  { arrowOK = Exec.Contract.ExecutionAdmissible.arrow-monotone ShiftA shiftReceiptNext
+  ; coneOK = Exec.Contract.ExecutionAdmissible.cone-delta ShiftA shiftReceiptNext
+  ; mdlOK = Exec.Contract.ExecutionAdmissible.mdl-descent ShiftA shiftReceiptNext
+  ; basinOK = shiftReceiptNextInBasin , shiftReceiptMiddleInBasin
+  ; eigenOK = Exec.Contract.ExecutionAdmissible.eigen-overlap ShiftA shiftReceiptNext
+  }
+
+shiftExecutionReceiptMiddleHeld :
+  ECL.ExecutionContractReceipt
+    shiftExecutionContract
+    shiftReceiptMiddle
+    shiftReceiptHeld
+shiftExecutionReceiptMiddleHeld = record
+  { arrowOK = Exec.Contract.ExecutionAdmissible.arrow-monotone ShiftA shiftReceiptMiddle
+  ; coneOK = Exec.Contract.ExecutionAdmissible.cone-delta ShiftA shiftReceiptMiddle
+  ; mdlOK = Exec.Contract.ExecutionAdmissible.mdl-descent ShiftA shiftReceiptMiddle
+  ; basinOK = shiftReceiptMiddleInBasin , shiftReceiptHeldInBasin
+  ; eigenOK = Exec.Contract.ExecutionAdmissible.eigen-overlap ShiftA shiftReceiptMiddle
   }
 
 shiftReceiptPair :
