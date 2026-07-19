@@ -1,6 +1,5 @@
 module DASHI.Physics.Laws.PhysicalLawCore where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
 
@@ -151,8 +150,8 @@ record EmpiricalAuthorityBoundary
     Validation   : Set
 
     calibrates   : Calibration → PhysicalLawSurface.Parameter L → Set
-    predicts     : L PhysicalLawSurface.Context →
-                   L PhysicalLawSurface.State → Measurement
+    predicts     : PhysicalLawSurface.Context L →
+                   PhysicalLawSurface.State L → Measurement
     validatedBy  : Validation → Dataset → Set
 
 -- Equality of labels or equations is not enough to identify physical laws:
