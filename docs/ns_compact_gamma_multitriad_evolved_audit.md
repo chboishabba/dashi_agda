@@ -161,7 +161,7 @@ python scripts/ns_compact_gamma_multitriad_evolved_audit.py \
   --triad-counts 2,4 \
   --phase-spreads 0.0,0.35 \
   --target-ratios 2.5 \
-  --seeds 0,1 \
+  --seeds 1,2 \
   --gamma-threshold 0.5 \
   --minimum-angular-participation 1.3 \
   --verify-count 1 \
@@ -169,6 +169,9 @@ python scripts/ns_compact_gamma_multitriad_evolved_audit.py \
   --output-count 2 \
   --pretty
 ```
+
+The current parser treats seeds as positive deterministic identifiers. The
+workflow therefore uses `1,2`; this has no stochastic-authority significance.
 
 ## Authority boundary
 
