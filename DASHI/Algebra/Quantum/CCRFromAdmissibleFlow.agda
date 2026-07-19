@@ -1,5 +1,6 @@
 module DASHI.Algebra.Quantum.CCRFromAdmissibleFlow where
 
+open import Data.Nat using (_≤_)
 open import DASHI.Execution.DeltaConeMDLContract
 open import DASHI.Algebra.Quantum.CCRFromProjection
 
@@ -27,5 +28,5 @@ ccr-from-admissible-flow B = stone-vn (projection-weyl B)
 flow-mdl-descent :
   ∀ {X} {G : ExecutionGeometry X} {D : CCRData} →
   (B : AdmissibleFlowCCRBridge G D) →
-  ∀ x → mdl G (step G x) Data.Nat.≤ mdl G x
+  ∀ x → mdl G (step G x) ≤ mdl G x
 flow-mdl-descent B = execution-descends-mdl (flow-admissible B)
