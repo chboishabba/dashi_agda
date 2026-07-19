@@ -1,0 +1,118 @@
+name: NS compact Gamma replenishment absorption
+
+on:
+  push:
+    paths:
+      - 'scripts/ns_compact_gamma_replenishment_audit.py'
+      - 'scripts/ns_compact_gamma_adversarial_sweep.py'
+      - 'scripts/ns_compact_gamma_potential_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_replenishment_audit.py'
+      - 'DASHI/Physics/Closure/NSCompactGammaReplenishmentAbsorption.agda'
+      - 'docs/ns_compact_gamma_replenishment_absorption.md'
+      - '.github/workflows/ns-compact-gamma-replenishment.yml'
+  pull_request:
+    paths:
+      - 'scripts/ns_compact_gamma_replenishment_audit.py'
+      - 'scripts/ns_compact_gamma_adversarial_sweep.py'
+      - 'scripts/ns_compact_gamma_potential_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_replenishment_audit.py'
+      - 'DASHI/Physics/Closure/NSCompactGammaReplenishmentAbsorption.agda'
+      - 'docs/ns_compact_gamma_replenishment_absorption.md'
+      - '.github/workflows/ns-compact-gamma-replenishment.yml'
+
+concurrency:
+  group: ns-compact-gamma-replenishment-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  replenishment-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip numpy pytest
+      - name: Run focused tests
+        run: python -m pytest -q scripts/tests/test_ns_compact_gamma_replenishment_audit.py
+      - name: Audit phase and amplitude family
+        run: |
+          python scripts/ns_compact_gamma_replenishment_audit.py \
+            --output-json ns-compact-gamma-replenishment.json \
+            --search-cutoff 16 \
+            --verify-cutoffs 32,48,64 \
+            --input-ratios 0.5,1.0,2.0 \
+            --target-amplitudes 0.1,0.25,0.5 \
+            --phase-count 12 \
+            --gamma-threshold 0.5 \
+            --verify-count 3 \
+            --pretty
+      - name: Require complete absorption receipt
+        run: |
+          python - <<'PY'
+          import json
+          with open('ns-compact-gamma-replenishment.json', encoding='utf-8') as handle:
+              data = json.load(handle)
+          assert data['search_row_count'] == 108, data
+          assert data['dangerous_row_count'] > 0, data
+          assert data['matched_adverse_candidates'], data
+          assert data['maximum_mechanism_balance_residual'] < 1e-9, data
+          assert data['maximum_finite_difference_residual'] < 1e-6, data
+          assert 'sampled_strict_absorption_falsified' in data['authority']
+          # Survival or falsification is an experimental output.
+          PY
+      - name: Upload replenishment receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-gamma-replenishment
+          path: ns-compact-gamma-replenishment.json
+          if-no-files-found: error
+
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ns-compact-replenishment-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check replenishment absorption theorem
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-replenishment.log"
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Physics/Closure/NSCompactGammaReplenishmentAbsorption.agda
+          ) > agda-compact-replenishment.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 180 agda-compact-replenishment.log
+          exit 0
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-replenishment-agda-log
+          path: agda-compact-replenishment.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
