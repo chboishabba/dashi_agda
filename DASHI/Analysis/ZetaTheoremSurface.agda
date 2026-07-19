@@ -17,4 +17,7 @@ open import DASHI.Analysis.RiemannExplicitFormula public
 open import DASHI.Analysis.DashiWeilExactIdentification public
 open import DASHI.Analysis.WeilPositivityCore public
 open import DASHI.Analysis.RiemannMillenniumAssembly public
-open import DASHI.Analysis.DashiWeilRiemannBridge public
+
+-- Retained for direct qualified imports by older callers, but not opened here:
+-- its monolithic projections overlap names from the modular theorem ladder.
+import DASHI.Analysis.DashiWeilRiemannBridge
