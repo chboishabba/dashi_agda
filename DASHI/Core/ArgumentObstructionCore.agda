@@ -24,7 +24,7 @@ data FallacyAxis : Set where
   causal
   statistical
   relevance
-  redHerring
+  relevanceDiversion
   semantic
   scopeProjection
   modal
@@ -57,15 +57,15 @@ record ArgumentCore : Set₁ where
     Cause       : Set
     Modality    : Set
 
-    premiseProposition  : Premise → Proposition
-    conclusion          : Proposition
-    applies             : Rule → Premise → Proposition → Set
-    supportedBy         : Receipt → Premise → Set
-    relevantIn          : Context → Premise → Proposition → Set
+    premiseProposition   : Premise → Proposition
+    conclusion           : Proposition
+    applies              : Rule → Premise → Proposition → Set
+    supportedBy          : Receipt → Premise → Set
+    relevantIn           : Context → Premise → Proposition → Set
     temporallyAdmissible : Time → Premise → Proposition → Set
-    semanticallyStable  : Meaning → Premise → Proposition → Set
-    causallyAdmissible  : Cause → Premise → Proposition → Set
-    modallyAdmissible   : Modality → Premise → Proposition → Set
+    semanticallyStable   : Meaning → Premise → Proposition → Set
+    causallyAdmissible   : Cause → Premise → Proposition → Set
+    modallyAdmissible    : Modality → Premise → Proposition → Set
 
 open ArgumentCore public
 
