@@ -3,17 +3,35 @@ name: Nonlinear exploded sparsity Agda check
 on:
   push:
     paths:
+      - 'DASHI/Core/MinimalKernelAlgebra.agda'
       - 'DASHI/Core/NonlinearExplodedSparsity.agda'
       - 'DASHI/Core/NonlinearExplodedSparsityTests.agda'
-      - 'DASHI/Core/MinimalKernelAlgebra.agda'
+      - 'DASHI/Core/FiniteWeightedThresholdGraph.agda'
+      - 'DASHI/Core/QuantitativeNonlinearSparsity.agda'
+      - 'DASHI/Core/ExplodedGraphGeometry.agda'
+      - 'DASHI/Core/ThresholdKernelRenormalisation.agda'
+      - 'DASHI/Core/L1Separation.agda'
+      - 'DASHI/Core/ThresholdCSPCores.agda'
+      - 'DASHI/Core/BiologicalEvidenceBridge.agda'
+      - 'DASHI/Core/HemibrainRunCertificates.agda'
       - 'Docs/NonlinearExplodedSparsity.md'
+      - 'Docs/HemibrainNonlinearSparsityBridge.md'
       - '.github/workflows/nonlinear-exploded-sparsity.yml'
   pull_request:
     paths:
+      - 'DASHI/Core/MinimalKernelAlgebra.agda'
       - 'DASHI/Core/NonlinearExplodedSparsity.agda'
       - 'DASHI/Core/NonlinearExplodedSparsityTests.agda'
-      - 'DASHI/Core/MinimalKernelAlgebra.agda'
+      - 'DASHI/Core/FiniteWeightedThresholdGraph.agda'
+      - 'DASHI/Core/QuantitativeNonlinearSparsity.agda'
+      - 'DASHI/Core/ExplodedGraphGeometry.agda'
+      - 'DASHI/Core/ThresholdKernelRenormalisation.agda'
+      - 'DASHI/Core/L1Separation.agda'
+      - 'DASHI/Core/ThresholdCSPCores.agda'
+      - 'DASHI/Core/BiologicalEvidenceBridge.agda'
+      - 'DASHI/Core/HemibrainRunCertificates.agda'
       - 'Docs/NonlinearExplodedSparsity.md'
+      - 'Docs/HemibrainNonlinearSparsityBridge.md'
       - '.github/workflows/nonlinear-exploded-sparsity.yml'
 
 concurrency:
@@ -54,12 +72,20 @@ jobs:
             targets=(
               DASHI/Core/NonlinearExplodedSparsity.agda
               DASHI/Core/NonlinearExplodedSparsityTests.agda
+              DASHI/Core/FiniteWeightedThresholdGraph.agda
+              DASHI/Core/QuantitativeNonlinearSparsity.agda
+              DASHI/Core/ExplodedGraphGeometry.agda
+              DASHI/Core/ThresholdKernelRenormalisation.agda
+              DASHI/Core/L1Separation.agda
+              DASHI/Core/ThresholdCSPCores.agda
+              DASHI/Core/BiologicalEvidenceBridge.agda
+              DASHI/Core/HemibrainRunCertificates.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-nonlinear-exploded-sparsity-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 220 agda-nonlinear-exploded-sparsity-check.log
+          tail -n 260 agda-nonlinear-exploded-sparsity-check.log
           exit 0
 
       - name: Upload focused Agda log
