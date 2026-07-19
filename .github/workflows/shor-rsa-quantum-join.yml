@@ -1,0 +1,133 @@
+name: Shor RSA quantum join
+
+on:
+  push:
+    paths:
+      - 'DASHI/Algebra/Quantum/FiniteQuantumRegister.agda'
+      - 'DASHI/Algebra/Quantum/QuantumFourierTransformFinite.agda'
+      - 'DASHI/Algebra/Quantum/GeneralShor.agda'
+      - 'DASHI/Algebra/Quantum/DASHIShorProductiveJoin.agda'
+      - 'DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda'
+      - 'DASHI/Crypto/FiniteFactorArithmetic.agda'
+      - 'DASHI/Crypto/ShorOrderFinding.agda'
+      - 'DASHI/Crypto/ShorFactoring.agda'
+      - 'DASHI/Crypto/ShorDiscreteLog.agda'
+      - 'DASHI/Crypto/RSAShorVulnerabilityBridge.agda'
+      - 'DASHI/Crypto/ShorConcreteExamples.agda'
+      - 'DASHI/Crypto/ShorProgram.agda'
+      - 'scripts/shor_order_finding_audit.py'
+      - 'scripts/tests/test_shor_order_finding_audit.py'
+      - 'docs/shor_rsa_quantum_join.md'
+      - '.github/workflows/shor-rsa-quantum-join.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Algebra/Quantum/FiniteQuantumRegister.agda'
+      - 'DASHI/Algebra/Quantum/QuantumFourierTransformFinite.agda'
+      - 'DASHI/Algebra/Quantum/GeneralShor.agda'
+      - 'DASHI/Algebra/Quantum/DASHIShorProductiveJoin.agda'
+      - 'DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda'
+      - 'DASHI/Crypto/FiniteFactorArithmetic.agda'
+      - 'DASHI/Crypto/ShorOrderFinding.agda'
+      - 'DASHI/Crypto/ShorFactoring.agda'
+      - 'DASHI/Crypto/ShorDiscreteLog.agda'
+      - 'DASHI/Crypto/RSAShorVulnerabilityBridge.agda'
+      - 'DASHI/Crypto/ShorConcreteExamples.agda'
+      - 'DASHI/Crypto/ShorProgram.agda'
+      - 'scripts/shor_order_finding_audit.py'
+      - 'scripts/tests/test_shor_order_finding_audit.py'
+      - 'docs/shor_rsa_quantum_join.md'
+      - '.github/workflows/shor-rsa-quantum-join.yml'
+
+concurrency:
+  group: shor-rsa-quantum-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  arithmetic-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pytest
+        run: python -m pip install --upgrade pip pytest
+      - name: Run finite arithmetic tests
+        run: python -m pytest -q scripts/tests/test_shor_order_finding_audit.py
+      - name: Emit audit receipt
+        run: >-
+          python scripts/shor_order_finding_audit.py
+          --pretty
+          --output-json shor-order-finding-audit.json
+      - name: Validate authority boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path('shor-order-finding-audit.json').read_text())
+          assert data['all_concrete_witnesses_succeed'] is True
+          assert data['concrete_witnesses']['N15_a2']['order'] == 4
+          assert data['concrete_witnesses']['N15_a2']['minus_factor'] == 3
+          assert data['concrete_witnesses']['N21_a2']['order'] == 6
+          assert data['concrete_witnesses']['N21_a2']['minus_factor'] == 7
+          authority = data['authority']
+          assert authority['finite_arithmetic_checked'] is True
+          assert authority['quantum_sampling_distribution_proved'] is False
+          assert authority['continued_fraction_probability_bound_proved'] is False
+          assert authority['physical_quantum_hardware_claimed'] is False
+          PY
+      - name: Upload arithmetic receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: shor-order-finding-audit
+          path: shor-order-finding-audit.json
+          if-no-files-found: error
+
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: shor-rsa-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check Shor aggregate
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-shor-rsa.log"
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Crypto/ShorProgram.agda \
+              DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda
+          ) > agda-shor-rsa.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 220 agda-shor-rsa.log
+          exit 0
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shor-rsa-agda-log
+          path: agda-shor-rsa.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
