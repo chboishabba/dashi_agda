@@ -93,6 +93,7 @@ open import DASHI.Analysis.DashiWeightedValuationSquareCoercivity public
 -- Detailed arithmetic, algorithmic, analytic, transform, square-coercivity,
 -- and regression modules stay qualified here to avoid exporting local helper
 -- combinators and overlapping projection names.
+import DASHI.Analysis.NatPrimeCountingExamples
 import DASHI.Analysis.RiemannVonMangoldtSpecification
 import DASHI.Analysis.RiemannVonMangoldtPrimeSide
 import DASHI.Analysis.RiemannTrackedToVonMangoldtBridge
