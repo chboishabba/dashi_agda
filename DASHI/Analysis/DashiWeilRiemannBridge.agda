@@ -55,7 +55,6 @@ record CompletedZetaOwner : Set₁ where
 ------------------------------------------------------------------------
 
 record WeilExplicitFormula (owner : CompletedZetaOwner) : Set₁ where
-  open CompletedZetaOwner owner
   field
     Test : Set
     Scalar : Set
@@ -159,64 +158,31 @@ record MillenniumBridge : Set₁ where
     identification : DashiWeilIdentification owner formula
     completion : DashiWeilCompletion owner formula identification
 
+    -- Equality and order transport is a required witness, not a postulate.
+    -- A constructor must derive this from dashiArithmeticAgreement,
+    -- explicitFormula, dashiCoercive, and compatibility of nonnegative with
+    -- equality on the chosen scalar carrier.
+    embeddedSpectralPositive :
+      (x : DashiWeilIdentification.DashiTest identification) →
+      WeilExplicitFormula.nonnegative formula
+        (WeilExplicitFormula.spectralForm formula
+          (DashiWeilIdentification.embed identification x))
+
     noFiniteZeroSearchPromotion : ⊤
     noThreeAdicToComplexInference : ⊤
     noSpecialValueToRHInference : ⊤
 
-embeddedSpectralPositive :
-  (bridge : MillenniumBridge) →
-  let owner = MillenniumBridge.owner bridge
-      formula = MillenniumBridge.formula bridge
-      identification = MillenniumBridge.identification bridge
-  in
-  (x : DashiWeilIdentification.DashiTest identification) →
-  WeilExplicitFormula.nonnegative formula
-    (WeilExplicitFormula.spectralForm formula
-      (DashiWeilIdentification.embed identification x))
-embeddedSpectralPositive bridge x =
-  let formula = MillenniumBridge.formula bridge
-      identification = MillenniumBridge.identification bridge
-      admissibleX =
-        DashiWeilIdentification.embeddedAdmissible identification x
-      arithmeticEqualsSpectral =
-        WeilExplicitFormula.explicitFormula formula
-          (DashiWeilIdentification.embed identification x)
-          admissibleX
-      dashiEqualsArithmetic =
-        DashiWeilIdentification.dashiArithmeticAgreement identification x
-  in
-  -- The equality transport required here is intentionally owned by the final
-  -- bridge theorem below rather than hidden behind a numerical comparison.
-  MillenniumBridgeTransport.embeddedPositive
-    (millenniumTransport bridge)
-    x
-
--- Equality transport and order compatibility are isolated explicitly.  DASHI's
--- current generic rational carrier is not yet a real/complex ordered field, so
--- this cannot honestly be reduced to refl.
-record MillenniumBridgeTransport (bridge : MillenniumBridge) : Set₁ where
-  open MillenniumBridge bridge
-  open WeilExplicitFormula formula
-  open DashiWeilIdentification identification
-  field
-    embeddedPositive :
-      (x : DashiTest) → nonnegative (spectralForm (embed x))
-
-postulate
-  millenniumTransport :
-    (bridge : MillenniumBridge) → MillenniumBridgeTransport bridge
-
--- The terminal implication is constructive once all bridge components,
--- including equality/order transport, have genuinely been supplied.
+-- The terminal implication is constructive once every bridge component has
+-- genuinely been supplied.  No RH witness exists in this module independently
+-- of a MillenniumBridge inhabitant.
 dashiWeilBridgeImpliesRH :
   MillenniumBridge → RiemannHypothesisWitness
 dashiWeilBridgeImpliesRH bridge =
-  let owner = MillenniumBridge.owner bridge
-      formula = MillenniumBridge.formula bridge
+  let formula = MillenniumBridge.formula bridge
       criterion = MillenniumBridge.criterion bridge
-      identification = MillenniumBridge.identification bridge
       completion = MillenniumBridge.completion bridge
-      allEmbeddedPositive = embeddedSpectralPositive bridge
+      allEmbeddedPositive =
+        MillenniumBridge.embeddedSpectralPositive bridge
       allWeilPositive =
         DashiWeilCompletion.extendEmbeddedPositivity completion
           allEmbeddedPositive
