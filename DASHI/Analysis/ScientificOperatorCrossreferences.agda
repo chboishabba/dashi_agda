@@ -10,6 +10,7 @@ open import DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge public
 open import DASHI.Biology.Molecular.MolecularStoichiometricConservation public
 open import DASHI.Biology.Cell.MetabolicStoichiometricConservation public
 open import DASHI.Biology.Cell.MetabolicDissipationBridge public
+open import DASHI.Biology.Cell.CellFejerAttractorBridge public
 open import DASHI.Biology.Protein.ProteinFejerBasinBridge public
 open import DASHI.Biology.Protein.ProteinContractiveBasinBridge public
 open import DASHI.Biology.Morphogenesis.ReactionDiffusionHodgeBridge public
