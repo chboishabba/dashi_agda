@@ -1,0 +1,4 @@
+module DASHI.Reasoning.DialecticMotifEverything where
+
+import DASHI.Reasoning.DialecticMotifKernel
+import DASHI.Reasoning.DialecticInvariantGeometry
