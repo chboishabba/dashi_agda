@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSWall1CanonicalAmplitudeProfile where
 
 open import Agda.Primitive using (Level; lsuc)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.Closure.NSIntegerFourierLattice
 open import DASHI.Physics.Closure.NSWall1CanonicalModePacket
@@ -58,5 +59,4 @@ record CanonicalAmplitudeSupportLaws
     delta001At100 : modeDelta E p100 p001 ≡ zero A
     delta001At010 : modeDelta E p010 p001 ≡ zero A
 
-open import Agda.Builtin.Equality using (_≡_)
 open CanonicalAmplitudeSupportLaws public
