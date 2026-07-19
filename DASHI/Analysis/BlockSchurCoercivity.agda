@@ -95,7 +95,7 @@ record StrictSchurGap
     {Vector : Set v}
     {Scalar : Set s}
     (O : SchurOrderLaws Scalar)
-    (Q : QuantitativeBlockSchur Vector Scalar O) : Set (v ⊔ s) where
+    (Q : QuantitativeBlockSchur Vector Scalar O) : Set (lsuc (v ⊔ s)) where
   field
     StrictlyPositive : Scalar → Set s
     residualGapPositive :
