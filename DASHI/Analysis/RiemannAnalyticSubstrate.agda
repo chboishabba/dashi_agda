@@ -74,6 +74,10 @@ record CompletedRiemannZeta
     xi : Function
     oneMinus : Complex → Complex
 
+    isZero : Function → Complex → Set
+    nontrivialZero : Complex → Set
+    criticalLine : Complex → Set
+
     agreesWithHalfPlane :
       (s : Complex) →
       ZetaHalfPlaneLayer.realPartGreaterThanOne halfPlane s →
@@ -81,7 +85,6 @@ record CompletedRiemannZeta
       apply (ZetaHalfPlaneLayer.zetaHalfPlane halfPlane) s
 
     CompletedDefinition : Complex → Set
-    NontrivialZetaZerosMatchXiZeros : Set
 
     zetaMeromorphic : Meromorphic zeta
     simplePoleAtOne : SimplePoleAt zeta oneC
@@ -92,8 +95,13 @@ record CompletedRiemannZeta
       (s : Complex) → apply xi s ≡ apply xi (oneMinus s)
     conjugationLaw :
       (s : Complex) → apply xi (conjC s) ≡ conjC (apply xi s)
-    nontrivialZetaZerosMatchXiZeros :
-      NontrivialZetaZerosMatchXiZeros
+
+    nontrivialZeroIsZetaZero :
+      (s : Complex) → nontrivialZero s → isZero zeta s
+    nontrivialZeroIsXiZero :
+      (s : Complex) → nontrivialZero s → isZero xi s
+    xiZeroIsNontrivialZetaZero :
+      (s : Complex) → isZero xi s → nontrivialZero s
 
 record AnalyticSubstrate : Set₁ where
   field
@@ -101,3 +109,12 @@ record AnalyticSubstrate : Set₁ where
     gammaMellin : GammaMellinLayer carrier
     halfPlane : ZetaHalfPlaneLayer carrier
     completed : CompletedRiemannZeta carrier gammaMellin halfPlane
+
+RiemannHypothesisFor : AnalyticSubstrate → Set
+RiemannHypothesisFor analytic =
+  (s : ComplexAnalyticCarrier.Complex
+    (AnalyticSubstrate.carrier analytic)) →
+  CompletedRiemannZeta.nontrivialZero
+    (AnalyticSubstrate.completed analytic) s →
+  CompletedRiemannZeta.criticalLine
+    (AnalyticSubstrate.completed analytic) s
