@@ -1,7 +1,7 @@
 module DASHI.Perception.SchrodingerColorGeometry where
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Level using (Level; _⊔_; suc)
 
 open import DASHI.Perception.ColorMetricCore
@@ -41,6 +41,7 @@ record IntrinsicColourCoordinates
       ∀ (a : MetricAutomorphism M) x →
       lightness (forward a x) ≡ lightness x
 
+    -- Downstream coordinate models supply the actual zero-saturation value.
     neutral-saturation-law :
       ∀ x → Neutral N x → Set ℓs
 
@@ -80,7 +81,7 @@ coordinates-invariant C a x
   rewrite hue-metric-invariant C a x
         | saturation-metric-invariant C a x
         | lightness-metric-invariant C a x
-  = Agda.Builtin.Equality.refl
+  = refl
 
 ------------------------------------------------------------------------
 -- Non-Riemannian correction surface.
