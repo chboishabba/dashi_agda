@@ -39,7 +39,10 @@ jobs:
           python -m pytest -q
           scripts/tests/test_ns_compact_gamma_multitriad_evolved_audit.py
       - name: Run evolved shell and cutoff audit
+        id: audit
+        shell: bash
         run: |
+          set +e
           python scripts/ns_compact_gamma_multitriad_evolved_audit.py \
             --output-json ns-compact-gamma-multitriad.json \
             --search-cutoff 24 \
@@ -55,8 +58,16 @@ jobs:
             --verify-count 1 \
             --end-parabolic-time 0.002 \
             --output-count 2 \
-            --pretty
+            --pretty > ns-compact-gamma-multitriad.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 120 ns-compact-gamma-multitriad.log
+          exit 0
+      - name: Require successful audit execution
+        if: steps.audit.outputs.status != '0'
+        run: exit 1
       - name: Require complete non-vacuous receipt
+        if: steps.audit.outputs.status == '0'
         run: |
           python - <<'PY'
           import json
@@ -78,13 +89,15 @@ jobs:
           assert data['authority']['clay_authority'] is False
           assert data['authority']['promoted'] is False
           PY
-      - name: Upload multi-triad receipt
+      - name: Upload multi-triad outputs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ns-compact-gamma-multitriad
-          path: ns-compact-gamma-multitriad.json
-          if-no-files-found: error
+          path: |
+            ns-compact-gamma-multitriad.json
+            ns-compact-gamma-multitriad.log
+          if-no-files-found: warn
 
   focused-agda:
     runs-on: ubuntu-latest
