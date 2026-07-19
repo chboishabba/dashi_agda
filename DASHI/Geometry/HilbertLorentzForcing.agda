@@ -20,6 +20,7 @@ record HilbertLift : Set₁ where
     zero : Vector
     _+_ : Vector → Vector → Vector
     _·_ : Scalar → Vector → Vector
+    _∗_ : Scalar → Scalar → Scalar
     ⟪_,_⟫ : Vector → Vector → Scalar
 
 open HilbertLift public
@@ -56,7 +57,7 @@ record UniqueInvariantQuadraticRay
     unique-up-to-scale :
       ∀ (Q : Quadratic H) →
       InvariantQuadratic A Q →
-      ∀ x → Q x ≡ scale Q · distinguished x
+      ∀ x → Q x ≡ HilbertLift._∗_ H (scale Q) (distinguished x)
 
 open UniqueInvariantQuadraticRay public
 
