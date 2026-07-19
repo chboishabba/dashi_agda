@@ -2,6 +2,7 @@ module DASHI.Foundations.UltrametricAdmissibilityConcentration where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Empty using (⊥)
 open import Data.Nat using (_≤_; _<_; _≤?_)
 open import Data.Nat.Properties as NatP
 open import Relation.Nullary using (Dec)
@@ -19,6 +20,9 @@ import Ultrametric as UMetric
 -- It does not assert that every physical RG, decoherence, or vacuum-selection
 -- process instantiates this record.  Concrete physics lanes must supply the
 -- contraction fields.
+
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
 
 iterate : ∀ {S : Set} → (S → S) → Nat → S → S
 iterate K zero x = x
@@ -58,11 +62,11 @@ record AdmissibilityConcentrationKernel
       ∀ x →
       d fixedPoint (K x) ≤ d fixedPoint x
 
-    -- Outside the fixed point the distance strictly decreases.
+    -- Concrete lanes may additionally prove strict contraction away from the
+    -- fixed point.  The monotone theorems below do not assume strictness.
     strictlyContractsOffFixed :
       ∀ x →
-      fixedPoint ≡ x →
-      d fixedPoint x < suc (d fixedPoint (K x)) →
+      fixedPoint ≢ x →
       d fixedPoint (K x) < d fixedPoint x
 
 open AdmissibilityConcentrationKernel public
