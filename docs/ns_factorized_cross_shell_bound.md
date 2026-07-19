@@ -53,26 +53,41 @@ and converts the product estimate into the existing `NSCrossShellCorrectionBound
 
 `NSFactorizedSchurFrameGap.agda` then combines it with the diagonal high-shell gap and reuses the generic Schur theorem to obtain the conditional frame gap.
 
+## Weighted-kernel certificate layer
+
+`WeightedKernelSchurTest.agda` adds a proof-relevant weighted Schur-test surface indexed by:
+
+- the exact finite kernel;
+- its source and target weights;
+- row and column constants;
+- the corresponding weighted row and column proof objects.
+
+The resulting operator estimate uses the product of the row and column constants. A `KernelIdentityMatch` records literal agreement of the kernel and both weight functions. This prevents a certificate for a coarse projection from being silently transported to the concrete pair-incidence operator.
+
+`NSWeightedShellTransferBridge.agda` consumes separate concrete weighted certificates for `K01` and `K10`, plus the low-shell resolvent estimate, and constructs `NSFactorizedCrossShellEvidence`. The bridge therefore joins finite weighted-kernel analysis to the already-proved factorized Schur chain.
+
 ## Exact remaining analytic obligations
 
 The block algebra and constant composition are now discharged. The remaining NS-specific work is to prove uniform versions of:
 
-1. a weighted `K01` estimate with constant `C01`;
+1. a weighted `K01` certificate for the concrete pair-incidence kernel;
 2. low-shell resolvent control with constant `R0`;
-3. a weighted `K10` estimate with constant `C10`;
-4. the strict budget inequality
+3. a weighted `K10` certificate for the concrete pair-incidence kernel;
+4. proof that those concrete kernels represent the `K01` and `K10` operators in the shell decomposition;
+5. the strict budget inequality
 
    \[
    C_{10}R_0C_{01} < \delta_{11}.
    \]
 
-The existing coarse shell-angle weighted Schur audit may suggest candidate weights and constants, but it does not supply any of these proof terms. In particular, empirical gross transfer mass is not identified with the concrete Biot–Savart pair-incidence kernel.
+The existing coarse shell-angle weighted Schur audit may suggest candidate weights and constants, but it does not supply these proof terms. In particular, empirical gross transfer mass is not identified with the concrete Biot–Savart pair-incidence kernel.
 
 ## Promotion boundary
 
 This tranche does not claim:
 
 - a proved Biot–Savart cross-shell estimate;
+- a kernel-identity theorem for the coarse audit;
 - scale-uniform numerical constants;
 - a positive residual gap on the full admissible shell family;
 - full Navier–Stokes regularity or Clay promotion.
