@@ -76,7 +76,7 @@ molecularMinimizerHasTargetConstraint :
     {Fine : Set f}
     {Constraint : Set c} →
   (B : MolecularConstrainedMinimizerBridge M Fine Constraint) →
-  FOR.ConstrainedMinimizerData.average (reduction B)
+  FOR.constraintAverage (reduction B)
     (FOR.constrainedMinimizer (reduction B) (targetConstraint B))
     ≡ targetConstraint B
 molecularMinimizerHasTargetConstraint B =
