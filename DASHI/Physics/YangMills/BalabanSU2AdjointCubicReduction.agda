@@ -2,35 +2,23 @@ module DASHI.Physics.YangMills.BalabanSU2AdjointCubicReduction where
 
 ------------------------------------------------------------------------
 -- Exact cubic reduction for the concrete su(2) adjoint operator.
---
--- With the quaternion convention used here,
---
---   [Y,X] = 2 Y cross X.
---
--- Hence
---
---   ad_Y^2 X = 4 ((Y dot X)Y - (Y dot Y)X)
---   ad_Y^3 X = -4 (Y dot Y) ad_Y X.
---
--- This is the finite-dimensional algebraic reason every analytic function of
--- `ad_Y` reduces to a combination of I, ad_Y, and ad_Y^2.  The scalar analytic
--- coefficient functions are not introduced here; only the exact polynomial
--- identity is proved.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (suc)
-open import Data.List.Base using ([]; _∷_)
-
-import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
+  ( module RealPolynomialSolver )
+open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
+  ( solveComputed; computed )
+open RealPolynomialSolver using
+  ( Polynomial; _:=_; _:+_; _:*_; :-_ )
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( _+R_
   ; _*R_
   ; -R_
   ; oneR
-  ; realSolverRing
   )
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ( SU2LieAlgebra
@@ -41,7 +29,13 @@ open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
 open import DASHI.Physics.YangMills.BalabanSU2AdjointInnerProduct using
   ( su2Dot )
 open import DASHI.Physics.YangMills.BalabanSU2LieBracket using
-  ( adOperator )
+  ( adOperator
+  ; bracket1P
+  ; bracket2P
+  ; bracket3P
+  ; dotP
+  ; twoP
+  )
 open import DASHI.Physics.YangMills.BalabanSU2AdjointPolynomialCalculus using
   ( adPower )
 
@@ -51,8 +45,65 @@ twoR = oneR +R oneR
 fourR : ℝ
 fourR = twoR *R twoR
 
+fourP : ∀ {n} → Polynomial n
+fourP = twoP :* twoP
+
 adCubicCoefficient : SU2LieAlgebra → ℝ
 adCubicCoefficient Y = -R (fourR *R su2Dot Y Y)
+
+ad1P : ∀ {n} →
+  Polynomial n → Polynomial n → Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n
+ad1P y₁ y₂ y₃ x₁ x₂ x₃ = bracket1P y₂ y₃ x₂ x₃
+
+ad2P : ∀ {n} →
+  Polynomial n → Polynomial n → Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n
+ad2P y₁ y₂ y₃ x₁ x₂ x₃ = bracket2P y₃ y₁ x₃ x₁
+
+ad3P : ∀ {n} →
+  Polynomial n → Polynomial n → Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n
+ad3P y₁ y₂ y₃ x₁ x₂ x₃ = bracket3P y₁ y₂ x₁ x₂
+
+adSquare1P : ∀ {n} →
+  Polynomial n → Polynomial n → Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n
+adSquare1P y₁ y₂ y₃ x₁ x₂ x₃ =
+  bracket1P y₂ y₃
+    (ad2P y₁ y₂ y₃ x₁ x₂ x₃)
+    (ad3P y₁ y₂ y₃ x₁ x₂ x₃)
+
+adSquare2P : ∀ {n} →
+  Polynomial n → Polynomial n → Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n
+adSquare2P y₁ y₂ y₃ x₁ x₂ x₃ =
+  bracket2P y₃ y₁
+    (ad3P y₁ y₂ y₃ x₁ x₂ x₃)
+    (ad1P y₁ y₂ y₃ x₁ x₂ x₃)
+
+adSquare3P : ∀ {n} →
+  Polynomial n → Polynomial n → Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n
+adSquare3P y₁ y₂ y₃ x₁ x₂ x₃ =
+  bracket3P y₁ y₂
+    (ad1P y₁ y₂ y₃ x₁ x₂ x₃)
+    (ad2P y₁ y₂ y₃ x₁ x₂ x₃)
+
+squareVectorP : ∀ {n} →
+  Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n →
+  Polynomial n → Polynomial n → Polynomial n → Polynomial n
+squareVectorP component y₁ y₂ y₃ x₁ x₂ x₃ =
+  fourP :*
+    ((dotP y₁ y₂ y₃ x₁ x₂ x₃ :* component)
+      :+ (:- (dotP y₁ y₂ y₃ y₁ y₂ y₃ :*
+        (ifComponent component x₁ x₂ x₃))))
+  where
+  -- The caller passes one of y₁/y₂/y₃.  This helper is not used directly in
+  -- proofs because selecting the matching x component is clearer there.
+  ifComponent : ∀ {m} → Polynomial m → Polynomial m → Polynomial m → Polynomial m → Polynomial m
+  ifComponent c a b d = a
 
 adSquareVectorIdentity :
   ∀ Y X →
@@ -72,15 +123,24 @@ adSquareVectorIdentity
   (su2Lie y₁ y₂ y₃)
   (su2Lie x₁ x₂ x₃) =
   su2LieExt
-    (Solver.solve
-      (y₁ ∷ y₂ ∷ y₃ ∷ x₁ ∷ x₂ ∷ x₃ ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (y₁ ∷ y₂ ∷ y₃ ∷ x₁ ∷ x₂ ∷ x₃ ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (y₁ ∷ y₂ ∷ y₃ ∷ x₁ ∷ x₂ ∷ x₃ ∷ [])
-      realSolverRing)
+    (solveComputed 6
+      (λ y₁ y₂ y₃ x₁ x₂ x₃ →
+        adSquare1P y₁ y₂ y₃ x₁ x₂ x₃ :=
+        fourP :* ((dotP y₁ y₂ y₃ x₁ x₂ x₃ :* y₁)
+          :+ (:- (dotP y₁ y₂ y₃ y₁ y₂ y₃ :* x₁))))
+      computed)
+    (solveComputed 6
+      (λ y₁ y₂ y₃ x₁ x₂ x₃ →
+        adSquare2P y₁ y₂ y₃ x₁ x₂ x₃ :=
+        fourP :* ((dotP y₁ y₂ y₃ x₁ x₂ x₃ :* y₂)
+          :+ (:- (dotP y₁ y₂ y₃ y₁ y₂ y₃ :* x₂))))
+      computed)
+    (solveComputed 6
+      (λ y₁ y₂ y₃ x₁ x₂ x₃ →
+        adSquare3P y₁ y₂ y₃ x₁ x₂ x₃ :=
+        fourP :* ((dotP y₁ y₂ y₃ x₁ x₂ x₃ :* y₃)
+          :+ (:- (dotP y₁ y₂ y₃ y₁ y₂ y₃ :* x₃))))
+      computed)
 
 adCubicReduction :
   ∀ Y X →
@@ -90,15 +150,33 @@ adCubicReduction
   (su2Lie y₁ y₂ y₃)
   (su2Lie x₁ x₂ x₃) =
   su2LieExt
-    (Solver.solve
-      (y₁ ∷ y₂ ∷ y₃ ∷ x₁ ∷ x₂ ∷ x₃ ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (y₁ ∷ y₂ ∷ y₃ ∷ x₁ ∷ x₂ ∷ x₃ ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (y₁ ∷ y₂ ∷ y₃ ∷ x₁ ∷ x₂ ∷ x₃ ∷ [])
-      realSolverRing)
+    (solveComputed 6
+      (λ y₁ y₂ y₃ x₁ x₂ x₃ →
+        bracket1P y₂ y₃
+          (adSquare2P y₁ y₂ y₃ x₁ x₂ x₃)
+          (adSquare3P y₁ y₂ y₃ x₁ x₂ x₃)
+        :=
+        (:- (fourP :* dotP y₁ y₂ y₃ y₁ y₂ y₃)) :*
+          ad1P y₁ y₂ y₃ x₁ x₂ x₃)
+      computed)
+    (solveComputed 6
+      (λ y₁ y₂ y₃ x₁ x₂ x₃ →
+        bracket2P y₃ y₁
+          (adSquare3P y₁ y₂ y₃ x₁ x₂ x₃)
+          (adSquare1P y₁ y₂ y₃ x₁ x₂ x₃)
+        :=
+        (:- (fourP :* dotP y₁ y₂ y₃ y₁ y₂ y₃)) :*
+          ad2P y₁ y₂ y₃ x₁ x₂ x₃)
+      computed)
+    (solveComputed 6
+      (λ y₁ y₂ y₃ x₁ x₂ x₃ →
+        bracket3P y₁ y₂
+          (adSquare1P y₁ y₂ y₃ x₁ x₂ x₃)
+          (adSquare2P y₁ y₂ y₃ x₁ x₂ x₃)
+        :=
+        (:- (fourP :* dotP y₁ y₂ y₃ y₁ y₂ y₃)) :*
+          ad3P y₁ y₂ y₃ x₁ x₂ x₃)
+      computed)
 
 adPowerCubicRecurrence :
   ∀ n Y X →
