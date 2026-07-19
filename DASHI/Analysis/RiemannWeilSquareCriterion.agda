@@ -11,8 +11,8 @@ open import DASHI.Analysis.WeilTestSpace
 open import DASHI.Analysis.RiemannExplicitFormula
 open import DASHI.Analysis.WeilConvolutionSquare
 
-Not : Set → Set
-Not proposition = proposition → ⊥
+SquareNeg : Set → Set
+SquareNeg proposition = proposition → ⊥
 
 record WeilSquareOffLineSeparator
   (analytic : AnalyticSubstrate)
@@ -21,24 +21,28 @@ record WeilSquareOffLineSeparator
   (algebra : WeilConvolutionAlgebra space) : Set₁ where
   open WeilTestSpace space
   open RiemannExplicitFormula formula
-
-  carrier = AnalyticSubstrate.carrier analytic
-  completed = AnalyticSubstrate.completed analytic
-  Complex = ComplexAnalyticCarrier.Complex carrier
-
   field
     criticalLineStable :
-      (s : Complex) →
-      Not (Not (CompletedRiemannZeta.criticalLine completed s)) →
-      CompletedRiemannZeta.criticalLine completed s
+      (s : ComplexAnalyticCarrier.Complex
+        (AnalyticSubstrate.carrier analytic)) →
+      SquareNeg
+        (SquareNeg
+          (CompletedRiemannZeta.criticalLine
+            (AnalyticSubstrate.completed analytic) s)) →
+      CompletedRiemannZeta.criticalLine
+        (AnalyticSubstrate.completed analytic) s
 
     separateOffLineZero :
-      (s : Complex) →
-      CompletedRiemannZeta.nontrivialZero completed s →
-      Not (CompletedRiemannZeta.criticalLine completed s) →
+      (s : ComplexAnalyticCarrier.Complex
+        (AnalyticSubstrate.carrier analytic)) →
+      CompletedRiemannZeta.nontrivialZero
+        (AnalyticSubstrate.completed analytic) s →
+      SquareNeg
+        (CompletedRiemannZeta.criticalLine
+          (AnalyticSubstrate.completed analytic) s) →
       Σ (WeilConvolutionAlgebra.Generator algebra)
         (λ g →
-          Not
+          SquareNeg
             (nonnegative
               (spectralZeroForm
                 (WeilConvolutionAlgebra.convolutionSquare algebra g))))
