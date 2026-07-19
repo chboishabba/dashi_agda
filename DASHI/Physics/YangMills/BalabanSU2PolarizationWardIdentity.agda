@@ -6,12 +6,12 @@ open import DASHI.Physics.YangMills.BalabanFiniteOneStepCore using
 
 polarizationWardLeft :
   ∀ {Background Direction Scalar}
-  (data : FinitePolarizationData Background Direction Scalar) →
-  ∀ left right → polarization data (divergence data left) right ≡ scalarZero data
+  (bundle : FinitePolarizationData Background Direction Scalar) →
+  ∀ left right → polarization bundle (divergence bundle left) right ≡ scalarZero bundle
 polarizationWardLeft = wardLeft
 
 polarizationWardRight :
   ∀ {Background Direction Scalar}
-  (data : FinitePolarizationData Background Direction Scalar) →
-  ∀ left right → polarization data left (divergence data right) ≡ scalarZero data
+  (bundle : FinitePolarizationData Background Direction Scalar) →
+  ∀ left right → polarization bundle left (divergence bundle right) ≡ scalarZero bundle
 polarizationWardRight = wardRight
