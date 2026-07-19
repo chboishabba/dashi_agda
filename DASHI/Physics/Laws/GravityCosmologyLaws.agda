@@ -22,14 +22,13 @@ record EinsteinGravityLaw : Set₁ where
     ContractedBianchi : EinsteinTensor → Set
     StressEnergyConserved : StressEnergy → Set
     ConstraintSatisfied : Metric → Set
+    FieldEquationSatisfied : EinsteinTensor → StressEnergy → Set
 
     bianchiImpliesSourceConservation :
       (tensor : EinsteinTensor) (source : StressEnergy) →
       ContractedBianchi tensor →
-      fieldEquationPlaceholder tensor source →
+      FieldEquationSatisfied tensor source →
       StressEnergyConserved source
-
-    fieldEquationPlaceholder : EinsteinTensor → StressEnergy → Set
 
 record GravityInitialValueProblem
   (G : EinsteinGravityLaw) : Set₁ where
