@@ -18,19 +18,19 @@ data FiniteEvidenceKind : Set where
 record FiniteCertificate
   {b c : Level}
   {Background : Set b}
-  (instance : FiniteInstance Background)
+  (finiteCase : FiniteInstance Background)
   (Claim : FiniteInstance Background → Set c) : Set (lsuc (b ⊔ c)) where
   constructor finiteCertificate
   field
     kind : FiniteEvidenceKind
-    witness : Claim instance
+    witness : Claim finiteCase
 open FiniteCertificate public
 
 certificateClaim :
   ∀ {b c} {Background : Set b}
-  {instance : FiniteInstance Background}
+  {finiteCase : FiniteInstance Background}
   {Claim : FiniteInstance Background → Set c} →
-  FiniteCertificate instance Claim → Claim instance
+  FiniteCertificate finiteCase Claim → Claim finiteCase
 certificateClaim = witness
 
 record UniversalCertificate
@@ -40,12 +40,12 @@ record UniversalCertificate
   (Claim : FiniteInstance Background → Set c) : Set (lsuc (b ⊔ c)) where
   constructor universalCertificate
   field
-    provesEveryAdmissible : ∀ instance → Admissible instance → Claim instance
+    provesEveryAdmissible : ∀ finiteCase → Admissible finiteCase → Claim finiteCase
 open UniversalCertificate public
 
 promoteUniversal :
   ∀ {b c} {Background : Set b}
   {Admissible Claim : FiniteInstance Background → Set c} →
-  (∀ instance → Admissible instance → Claim instance) →
+  (∀ finiteCase → Admissible finiteCase → Claim finiteCase) →
   UniversalCertificate Admissible Claim
 promoteUniversal proof = universalCertificate proof
