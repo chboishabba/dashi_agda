@@ -14,6 +14,7 @@ import DASHI.Biology.Genetics.BiologicalConstraintLanguage
 import DASHI.Biology.Protein.TranslationContext
 import DASHI.Biology.Protein.ProteinConformationAttractor
 import DASHI.Biology.Protein.ProteinFejerBasinBridge
+import DASHI.Biology.Protein.ProteinContractiveBasinBridge
 import DASHI.Biology.Protein.ProteinDiameterLocalityControl
 import DASHI.Biology.Protein.ProteinFunctionProjection
 import DASHI.Biology.Protein.PrionAmyloidIntegrationBoundary
