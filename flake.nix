@@ -124,6 +124,28 @@
           touch "$out/passed"
         '';
 
+        zetaCheck = pkgs.runCommand "dashi-agda-zeta-check" {
+          buildInputs = [ agdaWithDashiDeps pkgs.glibcLocales ];
+          src = ./.;
+        } ''
+          mkdir -p "$out"
+          workdir="$TMPDIR/dashi-agda-zeta"
+          cp -R "$src" "$workdir"
+          chmod -R u+w "$workdir"
+          export HOME="$TMPDIR/home"
+          mkdir -p "$HOME"
+          export LOCALE_ARCHIVE="${pkgs.glibcLocales}/lib/locale/locale-archive"
+          export LANG="C.UTF-8"
+          export LC_ALL="C.UTF-8"
+          cp -R ${dchottSrc}/. "$workdir/DCHoTT-Agda"
+          cp -R ${cubicalSrc}/. "$workdir/cubical"
+          cd "$workdir"
+          rm -f dchott-agda.agda-lib
+          agda ${agdaArgs} DASHI/Analysis/ZetaTheoremSurface.agda \
+            > "$out/check.log" 2>&1
+          touch "$out/passed"
+        '';
+
         mergeSmokeCheck = pkgs.runCommand "dashi-agda-merge-smoke" {
           buildInputs = [ agdaWithDashiDeps pkgs.bash pkgs.glibcLocales ];
           src = ./.;
@@ -216,6 +238,7 @@
       in {
         checks = {
           authoritative = authoritativeCheck;
+          zeta = zetaCheck;
           merge-smoke = mergeSmokeCheck;
         };
 
@@ -226,6 +249,7 @@
           cubical = cubicalLocal;
           agda-with-dashi-deps = agdaWithDashiDeps;
           check = authoritativeCheck;
+          zeta-check = zetaCheck;
           merge-smoke = mergeSmokeCheck;
           inherit agdaRecord agdaRecordAll;
         };
@@ -243,6 +267,7 @@
           shellHook = ''
             echo "dashi_agda dev shell"
             echo "  nix build .#check        # authoritative DASHI/Everything check"
+            echo "  nix build .#zeta-check   # focused zeta theorem-surface check"
             echo "  nix build .#merge-smoke  # recursive merge-prep smoke check"
             echo "  agda-record <file.agda>"
             echo "  agda-record-all [outdir]"
