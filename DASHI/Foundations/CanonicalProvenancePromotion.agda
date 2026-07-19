@@ -15,13 +15,13 @@ open import Agda.Builtin.String using (String)
 -- signature, CID, parser success, or compression score is promoted to truth.
 
 record Codec : Set where
-  constructor codec
+  constructor mkCodec
   field
     name : String
     code : Nat
 
 record Digest : Set where
-  constructor digest
+  constructor mkDigest
   field
     algorithm : String
     bytes : String
@@ -30,8 +30,8 @@ record CID : Set where
   constructor cidv1
   field
     version : Nat
-    codec : Codec
-    digest : Digest
+    contentCodec : Codec
+    contentDigest : Digest
 
 record CanonicalObject {ℓ : Level} (A : Set ℓ) : Set (lsuc ℓ) where
   constructor canonicalObject
