@@ -1,0 +1,165 @@
+name: NS compact Gamma common-U net audit
+
+on:
+  push:
+    paths:
+      - 'scripts/ns_compact_gamma_common_u_net_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_common_u_net_audit.py'
+      - 'DASHI/Physics/Closure/NSCompactGammaFiniteNetCommonUpper.agda'
+      - 'docs/ns_compact_gamma_common_u_net_audit.md'
+      - '.github/workflows/ns-compact-gamma-common-u-net.yml'
+  pull_request:
+    paths:
+      - 'scripts/ns_compact_gamma_common_u_net_audit.py'
+      - 'scripts/tests/test_ns_compact_gamma_common_u_net_audit.py'
+      - 'DASHI/Physics/Closure/NSCompactGammaFiniteNetCommonUpper.agda'
+      - 'docs/ns_compact_gamma_common_u_net_audit.md'
+      - '.github/workflows/ns-compact-gamma-common-u-net.yml'
+
+concurrency:
+  group: ns-compact-gamma-common-u-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  common-u-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip numpy pytest
+      - name: Run focused tests
+        run: >-
+          python -m pytest -q
+          scripts/tests/test_ns_compact_gamma_common_u_net_audit.py
+      - name: Run normalized packet common-U audit
+        id: audit
+        shell: bash
+        run: |
+          set +e
+          python scripts/ns_compact_gamma_common_u_net_audit.py \
+            --output-json ns-compact-gamma-common-u.json \
+            --search-cutoff 24 \
+            --verify-cutoffs 32,48,64 \
+            --target-shells 2,3 \
+            --target-packet-energy 0.86 \
+            --triad-counts 2,4 \
+            --phase-spreads 0.0,0.35 \
+            --target-ratios 2.5 \
+            --satellite-fractions 0.55 \
+            --center-seeds 1 \
+            --calibration-seeds 2 \
+            --holdout-seeds 3 \
+            --gamma-threshold 0.5 \
+            --theta-slack 0.02 \
+            --c-lambda-slack 0.05 \
+            --slope-slack 0.10 \
+            --end-parabolic-time 0.001 \
+            --output-count 2 \
+            --verify-count 1 \
+            --pretty > ns-compact-gamma-common-u.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 160 ns-compact-gamma-common-u.log
+          exit 0
+      - name: Require successful audit execution
+        if: steps.audit.outputs.status != '0'
+        run: exit 1
+      - name: Validate finite receipt integrity
+        if: steps.audit.outputs.status == '0'
+        run: |
+          python - <<'PY'
+          import json
+          import math
+          from pathlib import Path
+
+          data = json.loads(Path('ns-compact-gamma-common-u.json').read_text())
+          assert data['profile_count'] == 24, data['profile_count']
+          assert data['center_profile_count'] == 8
+          assert data['calibration_profile_count'] == 8
+          assert data['holdout_profile_count'] == 8
+          assert data['matched_profile_count'] == 6
+          for split in ('center', 'calibration', 'holdout'):
+              assert data['split_danger_constant_checks'][split]['dangerous_row_count'] > 0
+          assert data['matched_danger_constant_checks']['dangerous_row_count'] > 0
+          assert data['fitted_danger_constants']['positive_c_lambda'] is True
+          assert data['maximum_normalization_residual'] < 1e-10
+          assert data['maximum_relative_divergence_residual'] < 1e-10
+          assert data['maximum_mechanism_balance_residual'] < 1e-8
+          assert data['maximum_finite_difference_residual'] < 1e-5
+          assert data['matched_upper_violation_count'] >= 0
+          assert all(group['matched_cutoff_complete'] for group in data['matched_cutoff_groups'])
+          assert data['authority']['analytic_local_oscillation_bound_proved'] is False
+          assert data['authority']['cutoff_shell_uniform_authority'] is False
+          assert data['authority']['continuum_compactness_authority'] is False
+          assert data['authority']['theorem_authority'] is False
+          assert data['authority']['bkm_authority'] is False
+          assert data['authority']['clay_authority'] is False
+          assert data['authority']['promoted'] is False
+          print({
+              'sampled_full_chain_survives': data['authority']['sampled_full_chain_survives'],
+              'fitted_theta': data['fitted_danger_constants']['fitted_theta'],
+              'fitted_c_lambda': data['fitted_danger_constants']['fitted_c_lambda'],
+              'common_member_upper': data['sampled_common_member_upper'],
+              'holdout_net_violations': data['finite_net_remainder_envelope']['holdout_violation_count'],
+              'matched_upper_violations': data['matched_upper_violation_count'],
+          })
+          PY
+      - name: Upload common-U receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-gamma-common-u-net
+          path: |
+            ns-compact-gamma-common-u.json
+            ns-compact-gamma-common-u.log
+          if-no-files-found: warn
+
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ns-compact-common-u-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check finite-net common upper reduction
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-common-u.log"
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Physics/Closure/NSCompactGammaFiniteNetCommonUpper.agda
+          ) > agda-compact-common-u.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 180 agda-compact-common-u.log
+          exit 0
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-common-u-agda-log
+          path: agda-compact-common-u.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
