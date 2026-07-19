@@ -1,8 +1,8 @@
 module DASHI.Governance.GovernedArtifactCore where
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
@@ -26,12 +26,12 @@ record CandidateEnvelope
   (State Policy Evidence Hash : Set) : Set where
   constructor candidateEnvelope
   field
-    inputState    : State
-    candidateState : State
-    effectivePolicy : Policy
+    inputState        : State
+    candidateState    : State
+    effectivePolicy   : Policy
     candidateEvidence : Evidence
-    inputHash     : Hash
-    candidateHash : Hash
+    inputHash         : Hash
+    candidateHash     : Hash
 
 open CandidateEnvelope public
 
@@ -39,12 +39,12 @@ record Receipt
   (State Policy Evidence Hash Warning Blocker : Set) : Set where
   constructor receipt
   field
-    envelope : CandidateEnvelope State Policy Evidence Hash
-    severity : DiagnosticSeverity
-    warnings : List Warning
-    blockers : List Blocker
-    decision : Decision
-    policyHash : Hash
+    envelope  : CandidateEnvelope State Policy Evidence Hash
+    severity  : DiagnosticSeverity
+    warnings  : List Warning
+    blockers  : List Blocker
+    decision  : Decision
+    policyHash  : Hash
     receiptHash : Hash
 
 open Receipt public
@@ -70,8 +70,8 @@ record GovernedOutcome
   constructor governedOutcome
   field
     candidateReceipt : Receipt State Policy Evidence Hash Warning Blocker
-    resultState : State
-    selection : SelectionWitness current candidate resultState
+    resultState      : State
+    selection        : SelectionWitness current candidate resultState
       (Receipt.decision candidateReceipt)
 
 open GovernedOutcome public
@@ -130,7 +130,7 @@ open EvidenceAxes public
 record WarningCompatiblePromotion (Warning : Set) : Set where
   constructor warningCompatiblePromotion
   field
-    retainedWarning : Warning
+    retainedWarning        : Warning
     promotedDespiteWarning : Decision ≡ promote
 
 ------------------------------------------------------------------------
@@ -139,7 +139,7 @@ record WarningCompatiblePromotion (Warning : Set) : Set where
 record ReceiptLink (Hash : Set) : Set where
   constructor receiptLink
   field
-    parentReceiptHash : Hash
+    parentReceiptHash    : Hash
     consumedArtifactHash : Hash
     producedArtifactHash : Hash
 
@@ -150,19 +150,19 @@ record HashLinkedTransition
   constructor hashLinkedTransition
   field
     transitionReceipt : Receipt State Policy Evidence Hash Warning Blocker
-    lineage : ReceiptLink Hash
+    lineage           : ReceiptLink Hash
 
 open HashLinkedTransition public
 
 ------------------------------------------------------------------------
 -- Consumer authority is proof-relevant and fail-closed.
 
-record ConsumerAuthorization (Consumer : Set) : Set where
+record ConsumerAuthorization (Consumer : Set) : Set₁ where
   constructor consumerAuthorization
   field
-    consumer : Consumer
+    consumer        : Consumer
     carrierPromoted : Decision ≡ promote
-    notBlocked : Set
+    notBlocked      : Set
 
 open ConsumerAuthorization public
 
@@ -172,13 +172,13 @@ open ConsumerAuthorization public
 record BoundedSearchPolicy (Hash : Set) : Set where
   constructor boundedSearchPolicy
   field
-    generatorHash : Hash
-    backendSetHash : Hash
-    effectivePolicyHash : Hash
-    maximumDepth : Nat
-    beamWidth : Nat
-    deduplicationRuleHash : Hash
-    tieBreakerHash : Hash
+    generatorHash          : Hash
+    backendSetHash         : Hash
+    effectivePolicyHash    : Hash
+    maximumDepth           : Nat
+    beamWidth              : Nat
+    deduplicationRuleHash  : Hash
+    tieBreakerHash         : Hash
 
 open BoundedSearchPolicy public
 
@@ -186,13 +186,13 @@ record SearchTransition
   (State Operator Evidence Hash : Set) : Set where
   constructor searchTransition
   field
-    parentState : State
-    operator : Operator
+    parentState        : State
+    operator           : Operator
     materializedChild : State
     recomputedEvidence : Evidence
-    parentStateHash : Hash
-    childStateHash : Hash
-    searchDecision : SearchDecision
+    parentStateHash    : Hash
+    childStateHash     : Hash
+    searchDecision     : SearchDecision
     productionDecision : Decision
 
 open SearchTransition public
@@ -201,7 +201,7 @@ open SearchTransition public
 -- It cannot be used as a global basis-exhaustion theorem.
 record BoundedNoPromotion
   (Hash : Set)
-  (policy : BoundedSearchPolicy Hash) : Set where
+  (policy : BoundedSearchPolicy Hash) : Set₁ where
   constructor boundedNoPromotion
   field
     initialStateHash : Hash
