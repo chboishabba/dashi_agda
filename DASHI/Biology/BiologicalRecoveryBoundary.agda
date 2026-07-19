@@ -1,5 +1,8 @@
 module DASHI.Biology.BiologicalRecoveryBoundary where
 
+open import Agda.Primitive using (Setω)
+
+import DASHI.Physics.Laws.PhysicalLawRecoveryBoundary as Physical
 import DASHI.Physics.Chemistry.AtomicPeriodicTableRecoveryBoundary as Atomic
 import DASHI.Biology.Molecular.MolecularAssemblyBoundary as Molecular
 import DASHI.Biology.Origins.AutocatalyticCompartmentBoundary as Origins
@@ -14,9 +17,11 @@ import DASHI.Biology.Evolution.EvolutionaryPopulationDynamics as Evolution
 import DASHI.Biology.Ecology.EcologicalInteractionDynamics as Ecology
 
 -- Full recovery tower.  Every scale transition is a separately witnessed bridge;
--- the record does not promote atomic chemistry directly into life or agency.
-record BiologicalRecoveryBoundary : Set₁ where
+-- the record does not promote physical law structure directly into life or
+-- agency, nor atomic chemistry directly into cellular organisation.
+record BiologicalRecoveryBoundary : Setω where
   field
+    physicalLaws : Physical.PhysicalLawRecoveryBoundary
     atomicChemistry : Atomic.AtomicPeriodicTableRecoveryBoundary
     molecularChemistry : Molecular.MolecularAssemblySystem
     prebioticChemistry : Origins.PrebioticChemicalSystem
@@ -30,6 +35,7 @@ record BiologicalRecoveryBoundary : Set₁ where
     evolutionSystem : Evolution.EvolutionarySystem
     ecologicalSystem : Ecology.EcologicalSystem
 
+    PhysicalLawsToAtomicChemistry : Set
     AtomicToMolecular : Set
     ChemistryToDissipativeCycles : Set
     CyclesToHereditaryConstraints : Set
@@ -41,6 +47,7 @@ record BiologicalRecoveryBoundary : Set₁ where
     OrganismsToPopulationEvolution : Set
     PopulationsToEcologicalDynamics : Set
 
+    physicalAtomicWitness : PhysicalLawsToAtomicChemistry
     atomicMolecularWitness : AtomicToMolecular
     dissipativeCycleWitness : ChemistryToDissipativeCycles
     hereditaryConstraintWitness : CyclesToHereditaryConstraints
@@ -65,8 +72,9 @@ record BiologicalRecoveryBoundary : Set₁ where
     levinCoreWitness : LevinBioelectricCoreIntegrated
 
 record BiologicalRecoveryWitness
-  (B : BiologicalRecoveryBoundary) : Set₁ where
+  (B : BiologicalRecoveryBoundary) : Setω where
   field
+    PhysicalLawTowerRecovered : Set
     MolecularAssemblyRecovered : Set
     ProteinSequenceAndConformationRecovered : Set
     ContextualProteinFunctionRecovered : Set
@@ -76,6 +84,7 @@ record BiologicalRecoveryWitness
     EvolutionaryDynamicsRecovered : Set
     EcologicalDynamicsRecovered : Set
 
+    physicalLawWitness : PhysicalLawTowerRecovered
     molecularWitness : MolecularAssemblyRecovered
     proteinWitness : ProteinSequenceAndConformationRecovered
     functionWitness : ContextualProteinFunctionRecovered
@@ -86,8 +95,9 @@ record BiologicalRecoveryWitness
     ecologyWitness : EcologicalDynamicsRecovered
 
 record BiologicalOpenObligations
-  (B : BiologicalRecoveryBoundary) : Set₁ where
+  (B : BiologicalRecoveryBoundary) : Setω where
   field
+    physicalLawTheoremLimitAndCalibrationClosure : Set
     atomicManyBodyChemistry : Set
     molecularReactionAndStereochemistry : Set
     originOfLifeCycleExistenceAndRobustness : Set
