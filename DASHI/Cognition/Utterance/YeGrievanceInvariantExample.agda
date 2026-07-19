@@ -43,15 +43,15 @@ rawEnumeration =
       ∷ [])
 
 ye : TypedReferent
-ye = typedReferent "Ye" "Q36153" "Q5" liveHuman "self"
+ye = typedReferent "Ye" "Q15935" "Q5" liveHuman "self"
   (collaboratorRupture ∷ industryRupture ∷ [])
 
 kim : TypedReferent
-kim = typedReferent "Kim Kardashian" "Q1863044" "Q5" liveHuman
+kim = typedReferent "Kim Kardashian" "Q186304" "Q5" liveHuman
   "former spouse" (familyRupture ∷ [])
 
 north : TypedReferent
-north = typedReferent "North West" "Q16237278" "Q5" minorHuman
+north = typedReferent "North West" "Q125958143" "Q5" minorHuman
   "child" (familyRupture ∷ [])
 
 diddy : TypedReferent
@@ -59,7 +59,7 @@ diddy = typedReferent "Diddy" "Q193138" "Q5" liveHuman
   "music-industry peer" (industryRupture ∷ [])
 
 tyDollar : TypedReferent
-tyDollar = typedReferent "Ty$" "Q15258596" "Q5" liveHuman
+tyDollar = typedReferent "Ty$" "Q7859785" "Q5" liveHuman
   "collaborator" (collaboratorRupture ∷ [])
 
 harriet : TypedReferent
@@ -67,11 +67,11 @@ harriet = typedReferent "Harriet Tubman" "Q102049" "Q5" historicalPersonDeceased
   "no direct relation encoded" (racialHistoricalRupture ∷ [])
 
 curiousGeorge : TypedReferent
-curiousGeorge = typedReferent "Curious George" "candidate-only" "Q15773347"
+curiousGeorge = typedReferent "Curious George" "Q1105407" "Q15773347"
   fictionalCharacter "no direct relation" (childhoodSymbolRupture ∷ memeRupture ∷ [])
 
 patrickStar : TypedReferent
-patrickStar = typedReferent "Patrick Star" "Q170363" "Q15773347"
+patrickStar = typedReferent "Patrick Star" "Q1077456" "Q15773347"
   fictionalCharacter "no direct relation" (absurdityRupture ∷ memeRupture ∷ [])
 
 painCandidate : DerivedCandidate postSurface
