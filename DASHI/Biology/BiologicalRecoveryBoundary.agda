@@ -1,34 +1,34 @@
 module DASHI.Biology.BiologicalRecoveryBoundary where
 
-open import DASHI.Physics.Chemistry.AtomicPeriodicTableRecoveryBoundary
-open import DASHI.Biology.Molecular.MolecularAssemblyBoundary
-open import DASHI.Biology.Origins.AutocatalyticCompartmentBoundary
-open import DASHI.Biology.Genetics.ConstraintPersistence
-open import DASHI.Biology.Genetics.BiologicalConstraintLanguage
-open import DASHI.Biology.Protein.ProteinRecoveryBoundary
-open import DASHI.Biology.Cell.CellRecoveryBoundary
-open import DASHI.Biology.Morphogenesis.MorphogenesisRecoveryBoundary
-open import DASHI.Biology.Agency.ScaleIndexedAgency
-open import DASHI.Biology.Organism.OrganismHomeostasis
-open import DASHI.Biology.Evolution.EvolutionaryPopulationDynamics
-open import DASHI.Biology.Ecology.EcologicalInteractionDynamics
+import DASHI.Physics.Chemistry.AtomicPeriodicTableRecoveryBoundary as Atomic
+import DASHI.Biology.Molecular.MolecularAssemblyBoundary as Molecular
+import DASHI.Biology.Origins.AutocatalyticCompartmentBoundary as Origins
+import DASHI.Biology.Genetics.ConstraintPersistence as Heredity
+import DASHI.Biology.Genetics.BiologicalConstraintLanguage as Language
+import DASHI.Biology.Protein.ProteinRecoveryBoundary as Protein
+import DASHI.Biology.Cell.CellRecoveryBoundary as Cell
+import DASHI.Biology.Morphogenesis.MorphogenesisRecoveryBoundary as Morphogenesis
+import DASHI.Biology.Agency.ScaleIndexedAgency as Agency
+import DASHI.Biology.Organism.OrganismHomeostasis as Organism
+import DASHI.Biology.Evolution.EvolutionaryPopulationDynamics as Evolution
+import DASHI.Biology.Ecology.EcologicalInteractionDynamics as Ecology
 
 -- Full recovery tower.  Every scale transition is a separately witnessed bridge;
 -- the record does not promote atomic chemistry directly into life or agency.
 record BiologicalRecoveryBoundary : Set₁ where
   field
-    atomicChemistry : AtomicPeriodicTableRecoveryBoundary
-    molecularChemistry : MolecularAssemblySystem
-    prebioticChemistry : PrebioticChemicalSystem
-    hereditySystem : HereditaryRewriteSystem
-    biologicalLanguage : BiologicalPushdownSystem
-    proteinSystem : ProteinRecoveryBoundary
-    cellSystem : CellRecoveryBoundary
-    morphogenesisSystem : MorphogenesisRecoveryBoundary
-    agencySystem : ScaleIndexedAgencySystem
-    organismSystem : OrganismControlSystem
-    evolutionSystem : EvolutionarySystem
-    ecologicalSystem : EcologicalSystem
+    atomicChemistry : Atomic.AtomicPeriodicTableRecoveryBoundary
+    molecularChemistry : Molecular.MolecularAssemblySystem
+    prebioticChemistry : Origins.PrebioticChemicalSystem
+    hereditySystem : Heredity.HereditaryRewriteSystem
+    biologicalLanguage : Language.BiologicalPushdownSystem
+    proteinSystem : Protein.ProteinRecoveryBoundary
+    cellSystem : Cell.CellRecoveryBoundary
+    morphogenesisSystem : Morphogenesis.MorphogenesisRecoveryBoundary
+    agencySystem : Agency.ScaleIndexedAgencySystem
+    organismSystem : Organism.OrganismControlSystem
+    evolutionSystem : Evolution.EvolutionarySystem
+    ecologicalSystem : Ecology.EcologicalSystem
 
     AtomicToMolecular : Set
     ChemistryToDissipativeCycles : Set
