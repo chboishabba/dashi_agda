@@ -1,6 +1,6 @@
 module DASHI.Core.FallacyPromotionBoundary where
 
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([])
 open import DASHI.Core.ArgumentObstructionCore
@@ -58,6 +58,6 @@ catalogueNameIsNotDetection = primaryAxis
 blockedRouteLeavesConclusionOpen :
   {core : ArgumentCore} →
   DetectedFallacy core →
-  Agda.Builtin.Bool.Bool
+  Bool
 blockedRouteLeavesConclusionOpen d =
   conclusionMayStillBeTrue (obstructionWitness d)
