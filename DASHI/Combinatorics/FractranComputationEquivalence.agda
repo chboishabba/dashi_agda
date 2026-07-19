@@ -1,10 +1,10 @@
 module DASHI.Combinatorics.FractranComputationEquivalence where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans; cong)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; cong)
 
 open import DASHI.Combinatorics.FractranCOL using (EV5; step; run)
 
