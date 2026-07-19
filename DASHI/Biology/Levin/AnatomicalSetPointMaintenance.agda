@@ -24,7 +24,7 @@ record AnatomicalMaintenanceWitness : Set where
 record AnatomicalSetPointBoundary : Set where
   field
     memoryBoundary       : Memory.PatternMemoryBoundary
-    hierarchyBoundary    : Hierarchy.HierarchicalGoalMemoryBoundary
+    hierarchyBoundary    : Hierarchy.HierarchicalGoalBoundary
     problemSpaceBoundary : ProblemSpace.ProblemSpaceAgencyBoundary
     setPointNotPresentShape : Bool
     successfulRepairNotProofOfRepresentation : Bool
@@ -47,7 +47,7 @@ canonicalAnatomicalMaintenanceWitness = record
 canonicalAnatomicalSetPointBoundary : AnatomicalSetPointBoundary
 canonicalAnatomicalSetPointBoundary = record
   { memoryBoundary = Memory.canonicalPatternMemoryBoundary
-  ; hierarchyBoundary = Hierarchy.canonicalHierarchicalGoalMemoryBoundary
+  ; hierarchyBoundary = Hierarchy.canonicalHierarchicalGoalBoundary
   ; problemSpaceBoundary = ProblemSpace.canonicalProblemSpaceAgencyBoundary
   ; setPointNotPresentShape = true
   ; successfulRepairNotProofOfRepresentation = true
