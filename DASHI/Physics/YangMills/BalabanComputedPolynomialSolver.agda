@@ -4,11 +4,15 @@ module DASHI.Physics.YangMills.BalabanComputedPolynomialSolver where
 -- Close the final gap in the axiomatic-real polynomial socket.
 --
 -- `Algebra.Solver.Ring.solve` traditionally expects the normal forms to be
--- definitionally equal, so callers usually finish with `refl`.  With DASHI's
+-- definitionally equal, so callers usually finish with `refl`. With DASHI's
 -- computable formal-difference coefficients two normal forms can instead be
 -- propositionally equal through the coefficient decision procedure while their
--- interpretations are not definitionally identical.  This wrapper computes the
+-- interpretations are not definitionally identical. This wrapper computes the
 -- normal-form comparison and transports the returned proof through the solver.
+--
+-- The canonical coefficient adapter maps formal 0 and 1 definitionally to
+-- DASHI's zeroR and oneR.  This removes the last elaboration-only mismatch while
+-- preserving the original coefficient-ring proof.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -25,18 +29,13 @@ open import Data.Vec.N-ary using
   ; Eq-to-Eqʰ
   )
 
-open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
-  ( module RealPolynomialSolver )
+open import DASHI.Physics.YangMills.BalabanCanonicalRealPolynomialSolver using
+  (module RealPolynomialSolver)
 open RealPolynomialSolver using
   ( Polynomial
   ; normalise
   ; var
   )
-
-------------------------------------------------------------------------
--- A proof-relevant, indexed `isJust` witness.  Supplying `computed` forces
--- Agda to normalize the coefficient comparison at compile time.
-------------------------------------------------------------------------
 
 data IsJust {A : Set} : Maybe A → Set where
   computed : ∀ {x} → IsJust (just x)
