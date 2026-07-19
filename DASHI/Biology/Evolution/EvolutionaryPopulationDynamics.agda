@@ -1,5 +1,7 @@
 module DASHI.Biology.Evolution.EvolutionaryPopulationDynamics where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 -- Evolution is a population-level process coupling inheritance, variation,
 -- selection, drift, development, and ecological feedback.  It is not identified
 -- with development or goal-directed repair inside one organism.
@@ -75,7 +77,3 @@ record EvolutionAuthorityBoundary : Set₁ where
     genotypeIsNotPhenotypeBlueprint : Set
     selectionIsNotMoralProgress : Set
     evolutionaryModelIsNotHistoricalProof : Set
-
-infix 4 _≡_
-data _≡_ {A : Set} (x : A) : A → Set where
-  refl : x ≡ x
