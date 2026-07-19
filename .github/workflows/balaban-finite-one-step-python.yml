@@ -38,6 +38,7 @@ jobs:
         run: |
           python frontier_search.py --L 2 --block 2 --radii 0,0.01,0.03 --seeds 2 --out /tmp/balaban-one-step/frontier-search.json
           python su2_ad_functional_calculus.py --radius 0.25 --samples 64 --out /tmp/balaban-one-step/ad-functional-calculus.json
+          python hodge_spectrum.py --L 2 --block 2 --out /tmp/balaban-one-step/hodge-spectrum.json
       - name: Run exact finite certificates
         working-directory: experiments/yang_mills/balaban_one_step
         run: |
