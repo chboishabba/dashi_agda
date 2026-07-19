@@ -14,6 +14,7 @@ open import DASHI.Analysis.DashiWeilExactIdentification
 open import DASHI.Analysis.DashiWeilTermwiseBridge
 open import DASHI.Analysis.WeilPositivityCore
 open import DASHI.Analysis.WeilDensityClosure
+open import DASHI.Analysis.RiemannArithmeticCoercivity
 
 record WeilRiemannCriterion
   (analytic : AnalyticSubstrate)
@@ -173,5 +174,36 @@ positiveDecompositionImpliesRH assembly =
       criterion = PositiveDecompositionAssembly.criterion assembly
       universalPositive =
         decompositionImpliesWeilPositivity space formula decomposition
+  in
+  WeilRiemannCriterion.positivityImpliesRH criterion universalPositive
+
+record ArithmeticCoercivityAssembly : Set₁ where
+  field
+    analytic : AnalyticSubstrate
+    space : WeilTestSpace
+    formula : RiemannExplicitFormula space
+    compatibility :
+      RiemannFormulaAnalyticCompatibility analytic space formula
+    arithmeticCoercivity :
+      ArithmeticPositiveDecomposition space formula
+    criterion : WeilRiemannCriterion analytic space formula
+
+-- This is the most direct prize-facing route currently exposed by the repo:
+-- an exact nonnegative decomposition of the arithmetic explicit-formula side
+-- is transferred to the spectral side, then Weil positivity yields RH for the
+-- same completed-zeta substrate.
+arithmeticCoercivityImpliesRH :
+  (assembly : ArithmeticCoercivityAssembly) →
+  RiemannHypothesisFor
+    (ArithmeticCoercivityAssembly.analytic assembly)
+arithmeticCoercivityImpliesRH assembly =
+  let space = ArithmeticCoercivityAssembly.space assembly
+      formula = ArithmeticCoercivityAssembly.formula assembly
+      arithmetic =
+        ArithmeticCoercivityAssembly.arithmeticCoercivity assembly
+      criterion = ArithmeticCoercivityAssembly.criterion assembly
+      universalPositive =
+        arithmeticCoercivityImpliesWeilPositivity
+          space formula arithmetic
   in
   WeilRiemannCriterion.positivityImpliesRH criterion universalPositive
