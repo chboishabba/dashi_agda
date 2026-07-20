@@ -1,10 +1,7 @@
 module DASHI.Physics.YangMills.BalabanExplicitContractionBudget where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-
-------------------------------------------------------------------------
--- Final scalar producer for B7.
-------------------------------------------------------------------------
 
 record ExplicitContractionBudget (Bound : Set) : Set₁ where
   field
@@ -16,16 +13,13 @@ record ExplicitContractionBudget (Bound : Set) : Set₁ where
     multiplyMonotone : ∀ {left left′ right right′} →
       LessEqual left left′ → LessEqual right right′ →
       LessEqual (multiply left right) (multiply left′ right′)
-
     greenUpper : Bound
     greenUpperDefinition :
       greenUpper ≡ multiply referenceGreenUpper correctionUpper
-
     producedProductBelowRho :
       LessEqual (multiply
         (multiply referenceGreenUpper correctionUpper)
         nonlinearUpper) rhoG
-
     rhoStrict : StrictlyBelow rhoG one
 
 open ExplicitContractionBudget public
@@ -59,6 +53,5 @@ assembleContractionWitness budget = record
 
 explicitContractionBudgetAssemblyLevel : ProofLevel
 explicitContractionBudgetAssemblyLevel = machineChecked
-
 explicitNumericalSmallnessInputsLevel : ProofLevel
 explicitNumericalSmallnessInputsLevel = conditional
