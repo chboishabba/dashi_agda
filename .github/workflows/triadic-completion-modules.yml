@@ -1,0 +1,60 @@
+name: Triadic completion modules
+
+on:
+  push:
+    branches:
+      - agent/triadic-spectral-completion
+    paths:
+      - "DASHI/Algebra/TriadicFiniteArithmeticLaws.agda"
+      - "DASHI/Algebra/TriadicDepthTwoDFTGroupBridge.agda"
+      - "DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda"
+      - "DASHI/Geometry/TriadicSpectralGenusOneCurve.agda"
+      - "DASHI/Physics/Closure/TriadicConcreteAnalyticInstances.agda"
+      - "DASHI/Physics/Closure/TriadicKraftMDLConsistency.agda"
+      - "scripts/generate_triadic_arithmetic_laws.py"
+      - "scripts/generate_triadic_depth_two_dft.py"
+      - ".github/workflows/triadic-completion-modules.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: triadic-completion-modules
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: arithmetic
+            file: DASHI/Algebra/TriadicFiniteArithmeticLaws.agda
+          - name: dft9
+            file: DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda
+          - name: dft9-group
+            file: DASHI/Algebra/TriadicDepthTwoDFTGroupBridge.agda
+          - name: modular
+            file: DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda
+          - name: elliptic
+            file: DASHI/Geometry/TriadicSpectralGenusOneCurve.agda
+          - name: analytic
+            file: DASHI/Physics/Closure/TriadicConcreteAnalyticInstances.agda
+          - name: mdl
+            file: DASHI/Physics/Closure/TriadicKraftMDLConsistency.agda
+    name: typecheck-${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate finite proof sources
+        run: |
+          python scripts/generate_triadic_arithmetic_laws.py
+          python scripts/generate_triadic_depth_two_dft.py
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: "2.6.4.3"
+          agda-stdlib-version: "2.1"
+      - name: Typecheck ${{ matrix.file }}
+        run: agda -i . -l standard-library "${{ matrix.file }}"
