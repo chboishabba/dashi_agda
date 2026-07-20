@@ -5,6 +5,7 @@ open import Data.Integer.Base using (+≤+)
 open import Data.Nat.Base using (z≤n; s≤s)
 open import Data.Rational.Base as ℚ
   using (ℚ; 0ℚ; 1ℚ; *≤*)
+import Data.Rational.Properties as ℚP
 
 open import DASHI.Analysis.FiniteWeightedKernelSums
 
@@ -77,7 +78,7 @@ canonicalK10Finite = record
   }
 
 rational≤refl : ∀ q → ℚ._≤_ q q
-rational≤refl q = *≤* (+≤+ (s≤s z≤n))
+rational≤refl q = ℚP.≤-refl
 
 zero≤two : ℚ._≤_ 0ℚ two
 zero≤two = *≤* (+≤+ z≤n)
