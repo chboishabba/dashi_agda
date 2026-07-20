@@ -5,12 +5,19 @@ on:
     paths:
       - 'DASHI/Analysis/WeightedKernelSchurTest.agda'
       - 'DASHI/Analysis/FiniteWeightedKernelSums.agda'
+      - 'DASHI/Analysis/FiniteWeightedKernelTransport.agda'
       - 'DASHI/Physics/Closure/NSIntegerFourierLattice.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalModePacket.agda'
       - 'DASHI/Physics/Closure/NSWall1ExactEvaluationCarrier.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalScalarInstance.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalPolarizationProofs.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalPairIncidenceSchur.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
       - 'DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernel.agda'
       - 'DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda'
@@ -23,6 +30,7 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWall1PairIncidenceBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
       - 'docs/ns_pair_incidence_kernel_schur.md'
       - 'docs/ns_compact_gamma_offpacket_schur_audit.md'
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
@@ -30,12 +38,19 @@ on:
     paths:
       - 'DASHI/Analysis/WeightedKernelSchurTest.agda'
       - 'DASHI/Analysis/FiniteWeightedKernelSums.agda'
+      - 'DASHI/Analysis/FiniteWeightedKernelTransport.agda'
       - 'DASHI/Physics/Closure/NSIntegerFourierLattice.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalModePacket.agda'
       - 'DASHI/Physics/Closure/NSWall1ExactEvaluationCarrier.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalScalarInstance.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalPolarizationProofs.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalPairIncidenceSchur.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
       - 'DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernel.agda'
       - 'DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda'
@@ -48,6 +63,7 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWall1PairIncidenceBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
       - 'docs/ns_pair_incidence_kernel_schur.md'
       - 'docs/ns_compact_gamma_offpacket_schur_audit.md'
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
@@ -88,12 +104,19 @@ jobs:
             scripts/run_agda29_parallel_check.sh \
               DASHI/Analysis/WeightedKernelSchurTest.agda \
               DASHI/Analysis/FiniteWeightedKernelSums.agda \
+              DASHI/Analysis/FiniteWeightedKernelTransport.agda \
               DASHI/Physics/Closure/NSIntegerFourierLattice.agda \
               DASHI/Physics/Closure/NSWall1CanonicalModePacket.agda \
               DASHI/Physics/Closure/NSWall1ExactEvaluationCarrier.agda \
               DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda \
               DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda \
               DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda \
+              DASHI/Physics/Closure/NSWall1RationalScalarInstance.agda \
+              DASHI/Physics/Closure/NSWall1RationalPolarizationProofs.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalPairIncidenceSchur.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda \
               DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda \
               DASHI/Physics/Closure/NSPairIncidenceKernel.agda \
               DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda \
@@ -105,11 +128,12 @@ jobs:
               DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketWall1PairIncidenceBridge.agda \
+              DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda \
               DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda
           ) > agda-ns-pair-incidence-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 340 agda-ns-pair-incidence-schur.log
+          tail -n 420 agda-ns-pair-incidence-schur.log
           exit 0
       - name: Upload focused Agda log
         if: always()
