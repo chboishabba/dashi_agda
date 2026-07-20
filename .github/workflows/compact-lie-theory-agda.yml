@@ -24,10 +24,19 @@ on:
       - 'DASHI/Physics/YangMills/BalabanGeometricNeumannClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteVolumeBackgroundLane.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2FiniteBackgroundAssembly.agda'
+      - 'DASHI/Physics/YangMills/BalabanUniformGreenNonlinearProduct.agda'
+      - 'DASHI/Physics/YangMills/BalabanSeparatedUniformGreenNonlinearBounds.agda'
+      - 'DASHI/Physics/YangMills/BalabanOneStepPolymerEstimate.agda'
+      - 'DASHI/Physics/YangMills/BalabanConcreteOneStepRG.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepRGClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanConcreteStepVSuppression.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVKPClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanQuantitativeAllScaleInvariant.agda'
       - 'DASHI/Physics/YangMills/BalabanAllScaleRGClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanContinuumOSLimit.agda'
       - 'DASHI/Physics/YangMills/BalabanOSMassGapClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanMassGapSurvival.agda'
+      - 'DASHI/Physics/YangMills/BalabanUniformToMassGapChain.agda'
       - 'DASHI/Physics/YangMills/BalabanDashenGrossCalibration.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda'
       - 'scripts/audit_constructive_yang_mills_levels.py'
@@ -81,7 +90,7 @@ jobs:
           ) > agda-compact-lie-theory.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 320 agda-compact-lie-theory.log
+          tail -n 360 agda-compact-lie-theory.log
           exit 0
 
       - name: Upload Agda log

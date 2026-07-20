@@ -69,48 +69,53 @@ Finite complex-matrix algebra, determinant identities, compactness, connectednes
 
 ## Constructive analytic stack
 
-`ConstructiveYangMillsNextSurface.agda` compiles the next proof chain in the order in which the mathematics must close:
+`ConstructiveYangMillsNextSurface.agda` compiles the proof chain in the order in which the mathematics must close:
 
 1. `BalabanFiniteInverseConsequences.agda` derives injectivity and uniqueness from the finite Hessian/Green inverse certificate;
 2. `BalabanFiniteCoerciveGreen.agda` isolates the standard finite-dimensional coercivity-to-inverse theorem and checks its conversion into the repository's Green and inverse certificates;
-3. `BalabanUniformNeumannAsymptoticResidual.agda` restores the missing uniform residual-tail theorem, separating finite Neumann control from geometric-power vanishing;
+3. `BalabanUniformNeumannAsymptoticResidual.agda` separates finite Neumann control from geometric-power vanishing;
 4. `BalabanGeometricNeumannClosure.agda` composes ordered multiplication, strict contraction, and Archimedean power coverage into uniform unit-ball residual decay;
 5. `BalabanFiniteVolumeBackgroundLane.agda` factors the critical-map estimate into patchwise Green constants, nonlinear Lipschitz constants, local factors, and a strict common factor;
 6. `BalabanSU2FiniteBackgroundAssembly.agda` derives fixed-point existence, criticality, uniqueness on the gauge slice, minimization, and membership of every critical orbit in the canonical background orbit;
-7. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
+7. `BalabanOneStepRGClosure.agda` exposes fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and the irrelevant polymer remainder;
 8. `BalabanStepVKPClosure.agda` separates polymer activity, entropy, suppression, and the final Kotecký–Preiss comparison;
 9. `BalabanAllScaleRGClosure.agda` proves the exact induction from one-step invariant-domain preservation to admissibility at every finite scale;
 10. `FiniteReflectionPositivity.agda`, `SUNWilsonReflectionPositivity.agda`, and `ReflectionPositiveBlocking.agda` provide the finite Wilson OS positivity and compatible-blocking lane;
 11. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
-12. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
+12. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit.
 
-These modules prove the logical bridges and keep the analytic antecedents explicit. No large-field, all-scale, OS, or mass-gap premise is silently manufactured.
+## Quantitative frontier closure
+
+The latest layer replaces the remaining opaque arrows with exact quantified theorem interfaces:
+
+- `BalabanUniformGreenNonlinearProduct.agda` represents
+  `sup_{Λ,k,U₀,P} C_G L_N ≤ ρ_G < 1` by its exact order-theoretic content: one common strict factor bounds every indexed product. It derives the uniform residual-contraction target;
+- `BalabanOneStepPolymerEstimate.agda` splits the one-step remainder into background, Jacobian, determinant, BCH, and localization contributions and proves their additive budget estimate;
+- `BalabanConcreteOneStepRG.agda` feeds that estimate into the existing one-step RG certificate rather than assuming a bounded output polymer wholesale;
+- `BalabanConcreteStepVSuppression.agda` uses the explicit entropy × large-field × transfer-cut majorant and derives the Kotecký–Preiss certificate;
+- `BalabanQuantitativeAllScaleInvariant.agda` splits admissibility into coupling, field-radius, polymer, analyticity, gauge-fixing, and locality components, then proves the all-scale induction from componentwise preservation;
+- `BalabanContinuumOSLimit.agda` separates cutoff OS0–OS5, convergence, and closure of each axiom under the chosen limit topology, then assembles the continuum Schwinger system;
+- `BalabanMassGapSurvival.agda` separates finite-cutoff spectral gaps, a common positive lower bound, and spectral convergence, then derives the surviving continuum gap;
+- `BalabanUniformToMassGapChain.agda` assembles all resulting certificates in dependency order without constructing any unresolved analytic input.
+
+The bridge theorems are `machineChecked`. The existence of the four-dimensional uniform Green/nonlinear constants, concrete Step V suppression, all-scale invariant data, continuum convergence, and a cutoff-uniform positive gap remains `conjectural`. The standard closure theorems for OS limits and spectral convergence remain `standardImported` authority boundaries.
 
 ## Proof-level audit
 
 `scripts/audit_constructive_yang_mills_levels.py` runs before the focused Agda check. It verifies that the locally checked assembly modules contain no `postulate`, authority boundaries retain `standardImported`, frontier fields retain `conditional` or `conjectural`, and the Clay promotion flag remains explicitly false.
 
-## Conditional and conjectural frontier
+## Remaining analytic frontier
 
-Conditional inputs:
+The new modules no longer leave the theorem chain structurally unspecified. They leave the following mathematical witnesses unresolved:
 
-- concrete all-patch weighted Green estimates;
-- nonlinear residual Lipschitz constants;
-- constrained Hessian coercivity;
-- nonlinear gauge-fixing contraction;
-- the fully instantiated background-field closure;
-- one-step fluctuation, determinant, Ward, localization, and polymer estimates;
-- reflection-positive compatibility of the concrete multiscale blocking and effective measures.
+- one strict `ρ_G < 1` and one product estimate uniform in volume, scale, admissible background, and patch regime;
+- the five concrete one-step polymer component estimates;
+- four-dimensional entropy-versus-suppression and transfer-cut estimates strong enough for KP summability;
+- componentwise preservation of the quantitative RG invariant domain with summable errors;
+- tightness/convergence of the cutoff Schwinger family and closure hypotheses for OS0–OS5;
+- a positive cutoff-uniform inverse correlation length or transfer-matrix gap and the hypotheses of the continuum spectral-transfer theorem.
 
-Conjectural targets:
-
-- one strict residual factor `ρ_G < 1` uniform in scale, volume, admissible background, and patch regime;
-- four-dimensional large-field / Step V polymer suppression;
-- an all-scale four-dimensional RG invariant domain with summable errors;
-- continuum Schwinger functions satisfying OS0–OS5;
-- an OS-reconstructed Hamiltonian with a positive physical spectral gap.
-
-The final mass-gap target has no constructor here and cannot self-promote.
+The final mass-gap target has no unconditional constructor and cannot self-promote.
 
 ## Quantifier discipline
 

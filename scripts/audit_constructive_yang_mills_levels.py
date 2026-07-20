@@ -34,10 +34,19 @@ POSTULATE_FREE = [
     YM / "BalabanGeometricNeumannClosure.agda",
     YM / "BalabanFiniteVolumeBackgroundLane.agda",
     YM / "BalabanSU2FiniteBackgroundAssembly.agda",
+    YM / "BalabanUniformGreenNonlinearProduct.agda",
+    YM / "BalabanSeparatedUniformGreenNonlinearBounds.agda",
+    YM / "BalabanOneStepPolymerEstimate.agda",
+    YM / "BalabanConcreteOneStepRG.agda",
     YM / "BalabanOneStepRGClosure.agda",
+    YM / "BalabanConcreteStepVSuppression.agda",
     YM / "BalabanStepVKPClosure.agda",
+    YM / "BalabanQuantitativeAllScaleInvariant.agda",
     YM / "BalabanAllScaleRGClosure.agda",
+    YM / "BalabanContinuumOSLimit.agda",
     YM / "BalabanOSMassGapClosure.agda",
+    YM / "BalabanMassGapSurvival.agda",
+    YM / "BalabanUniformToMassGapChain.agda",
     YM / "BalabanDashenGrossCalibration.agda",
 ]
 
@@ -104,23 +113,61 @@ EXPECTED_ASSIGNMENTS = {
         "su2FiniteBackgroundAssemblyLevel": "machineChecked",
         "su2FiniteBackgroundAnalyticInputsLevel": "conditional",
     },
+    YM / "BalabanUniformGreenNonlinearProduct.agda": {
+        "uniformGreenNonlinearBridgeLevel": "machineChecked",
+        "uniformGreenNonlinearAnalyticInputsLevel": "conjectural",
+    },
+    YM / "BalabanSeparatedUniformGreenNonlinearBounds.agda": {
+        "separatedUniformBoundsBridgeLevel": "machineChecked",
+        "separatedGreenAndNonlinearInputsLevel": "conjectural",
+    },
+    YM / "BalabanOneStepPolymerEstimate.agda": {
+        "oneStepPolymerEstimateBridgeLevel": "machineChecked",
+        "oneStepPolymerComponentInputsLevel": "conditional",
+    },
+    YM / "BalabanConcreteOneStepRG.agda": {
+        "concreteOneStepRGAssemblyLevel": "machineChecked",
+        "concreteOneStepRGAnalyticStructureLevel": "conditional",
+    },
     YM / "BalabanOneStepRGClosure.agda": {
         "oneStepRGAssemblyLevel": "machineChecked",
         "oneStepRGAnalyticInputsLevel": "conditional",
+    },
+    YM / "BalabanConcreteStepVSuppression.agda": {
+        "concreteStepVBridgeLevel": "machineChecked",
+        "concreteStepVAnalyticInputsLevel": "conjectural",
     },
     YM / "BalabanStepVKPClosure.agda": {
         "stepVKPBridgeLevel": "machineChecked",
         "stepVSpatialInputsLevel": "conjectural",
     },
+    YM / "BalabanQuantitativeAllScaleInvariant.agda": {
+        "quantitativeInvariantAssemblyLevel": "machineChecked",
+        "quantitativeOneStepPreservationInputsLevel": "conjectural",
+    },
     YM / "BalabanAllScaleRGClosure.agda": {
         "allScaleInductionLevel": "machineChecked",
         "allScaleOneStepPreservationLevel": "conjectural",
+    },
+    YM / "BalabanContinuumOSLimit.agda": {
+        "continuumOSLimitAssemblyLevel": "machineChecked",
+        "osAxiomLimitClosureAuthorityLevel": "standardImported",
+        "continuumSchwingerConvergenceInputsLevel": "conjectural",
     },
     YM / "BalabanOSMassGapClosure.agda": {
         "osReconstructionLevel": "standardImported",
         "continuumOSAxiomsLevel": "conjectural",
         "clusteringToGapTransferLevel": "standardImported",
         "physicalMassGapInputLevel": "conjectural",
+    },
+    YM / "BalabanMassGapSurvival.agda": {
+        "massGapSurvivalAssemblyLevel": "machineChecked",
+        "spectralGapTransferAuthorityLevel": "standardImported",
+        "uniformPositiveCutoffGapInputsLevel": "conjectural",
+    },
+    YM / "BalabanUniformToMassGapChain.agda": {
+        "uniformToMassGapAssemblyLevel": "machineChecked",
+        "uniformToMassGapAnalyticInputsLevel": "conjectural",
     },
     YM / "BalabanDashenGrossCalibration.agda": {
         "dashenGrossCalibrationAssemblyLevel": "machineChecked",
