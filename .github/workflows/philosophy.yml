@@ -35,6 +35,8 @@ jobs:
         run: agda $AGDA_FLAGS DASHI/Philosophy/PhilosophyRegression.agda
       - name: Typecheck closure-law regression
         run: agda $AGDA_FLAGS DASHI/Philosophy/CompletionRegression.agda
+      - name: Typecheck hard-closure regression
+        run: agda $AGDA_FLAGS DASHI/Philosophy/HardClosureRegression.agda
       - name: Typecheck stable philosophy core
         run: agda $AGDA_FLAGS DASHI/Philosophy/StableCore.agda
       - name: Typecheck gated applications
