@@ -3,7 +3,7 @@ module DASHI.Codec.DNAFirstFormalismRegression where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Nat using (zero; suc; _+_)
 
 open import DASHI.Algebra.Trit using (neg; zer; pos; inv)
 open import DASHI.Codec.BalancedTritBitFibre
