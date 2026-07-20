@@ -1,5 +1,6 @@
 module DASHI.Unified.GRQuantumContinuumAuthorities where
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.Unit using (⊤; tt)
 
 open import DASHI.Unified.GRQuantumProofTerms
@@ -8,11 +9,6 @@ import DASHI.Empirical.GRQuantumCorrespondenceBoundary as Empirical
 
 ------------------------------------------------------------------------
 -- Minimal strict authority cutset for terminal assembly.
---
--- Every field is an actual theorem payload or closure witness.  This record is
--- the exact common target for imported standard mathematics, DASHI-specific
--- continuum limits, and empirical validation.  No canonical inhabitant is
--- supplied in this repository tranche.
 
 record GRQuantumContinuumAuthorityCutset : Set₁ where
   field
@@ -24,8 +20,10 @@ record GRQuantumContinuumAuthorityCutset : Set₁ where
 
     cliffordUniversalCompletion : CliffordUniversalProof
     strictCliffordUniversalCompletion : StrictCliffordUniversalProof
-    cliffordSurfacesCoherent : Set
-    cliffordSurfacesCoherentProof : cliffordSurfacesCoherent
+    cliffordSurfaceCoherence :
+      CliffordSurfaceCoherence
+        cliffordUniversalCompletion
+        strictCliffordUniversalCompletion
 
     strictSpinDoubleCover : StrictSpinDoubleCoverProof
 
@@ -48,11 +46,8 @@ open GRQuantumContinuumAuthorityCutset public
 
 ------------------------------------------------------------------------
 -- Compatibility-level proposition terminal assembled from the strict cutset.
---
--- The older generic recovery fields live in `Set`, so they cannot directly hold
--- the `Set₁` shared-substrate and empirical records.  They are retained only as
--- compatibility tokens; the actual typed evidence is carried by the strict
--- terminal object below.
+-- The older generic recovery fields remain compatibility tokens; actual typed
+-- recovery and empirical evidence live in the strict terminal object.
 
 propositionTerminalFromAuthorityCutset :
   GRQuantumContinuumAuthorityCutset → TerminalGRQuantumProof
@@ -88,14 +83,15 @@ strictTerminalFromAuthorityCutset authority =
   record
     { propositionTerminal = propositionTerminalFromAuthorityCutset authority
     ; strictClifford = strictCliffordUniversalCompletion authority
+    ; cliffordCoherence = cliffordSurfaceCoherence authority
     ; strictSpinCover = strictSpinDoubleCover authority
+    ; spinCoverAgreement = refl
     ; sharedSubstrate = sharedSubstrateRecovery authority
     ; empiricalCorrespondence = physicalCorrespondence authority
     }
 
 ------------------------------------------------------------------------
--- The finite/model bundle does not manufacture this cutset.  This function is
--- intentionally only the identity once an authority producer supplies it.
+-- The finite/model bundle does not manufacture this cutset.
 
 continuumAuthorityRequired :
   GRQuantumContinuumAuthorityCutset → GRQuantumContinuumAuthorityCutset
