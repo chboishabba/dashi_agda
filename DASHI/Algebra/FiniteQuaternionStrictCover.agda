@@ -1,5 +1,7 @@
 module DASHI.Algebra.FiniteQuaternionStrictCover where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 import DASHI.Algebra.FiniteQuaternionDoubleCover as Q8
 open import DASHI.Unified.GRQuantumProofTerms
 open import DASHI.Unified.GRQuantumStrictProofTerms
