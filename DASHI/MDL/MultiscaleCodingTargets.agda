@@ -3,6 +3,7 @@ module DASHI.MDL.MultiscaleCodingTargets where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_)
+open import Data.Nat using (_≤_)
 
 open import DASHI.Core.MultiscaleMDL
 open import DASHI.MDL.MDLLyapunov
@@ -24,13 +25,6 @@ multiscaleMDLFunctional {tower} {codec} cost j =
     ; mdl = stepDescriptionLength cost
     ; mdl≡ = λ _ → refl
     }
-
-------------------------------------------------------------------------
--- Coding-theorem obligations.
---
--- Natural-number code accounting is already exact.  Entropy and
--- rate-distortion claims require a source distribution, decodability/Kraft
--- hypotheses, and a distortion model.  Those are proof-bearing fields here.
 
 record SourceCodingModel (Symbol : Set) : Set₁ where
   field
@@ -75,9 +69,6 @@ record MultiscaleCodingTheoremTarget
     finitePrecisionCoderCorrect : Set
     rateDistortionTheorem : Set
 open MultiscaleCodingTheoremTarget public
-
--- The exact decoder field is inhabited directly by every ResidualCodec; the
--- entropy and rate claims remain deliberately separate.
 
 exact-decoder-from-codec :
   ∀ {tower : MultiscaleCarrier}
