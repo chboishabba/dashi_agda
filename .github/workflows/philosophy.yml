@@ -5,13 +5,17 @@ on:
     paths:
       - "DASHI/Philosophy/**"
       - "DASHI/EverythingPhilosophy.agda"
+      - "DASHI/EverythingPhilosophyClosure.agda"
       - "Docs/PhilosophyReflexiveRelationalFormalism.md"
+      - "Docs/PhilosophyClosureLawsAndInstances.md"
       - ".github/workflows/philosophy.yml"
   pull_request:
     paths:
       - "DASHI/Philosophy/**"
       - "DASHI/EverythingPhilosophy.agda"
+      - "DASHI/EverythingPhilosophyClosure.agda"
       - "Docs/PhilosophyReflexiveRelationalFormalism.md"
+      - "Docs/PhilosophyClosureLawsAndInstances.md"
       - ".github/workflows/philosophy.yml"
 
 jobs:
@@ -27,9 +31,17 @@ jobs:
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
           cp -a /usr/share/agda-stdlib .agda-stdlib
           agda --version
-      - name: Typecheck philosophy regression
+      - name: Typecheck original philosophy regression
         run: agda $AGDA_FLAGS DASHI/Philosophy/PhilosophyRegression.agda
+      - name: Typecheck closure-law regression
+        run: agda $AGDA_FLAGS DASHI/Philosophy/CompletionRegression.agda
+      - name: Typecheck stable philosophy core
+        run: agda $AGDA_FLAGS DASHI/Philosophy/StableCore.agda
+      - name: Typecheck gated applications
+        run: agda $AGDA_FLAGS DASHI/Philosophy/Applications.agda
       - name: Typecheck philosophy aggregate
         run: agda $AGDA_FLAGS DASHI/Philosophy/Everything.agda
       - name: Typecheck repository plus philosophy aggregate
         run: agda $AGDA_FLAGS DASHI/EverythingPhilosophy.agda
+      - name: Typecheck repository plus closure aggregate
+        run: agda $AGDA_FLAGS DASHI/EverythingPhilosophyClosure.agda
