@@ -2,7 +2,7 @@
 module DASHI.Core.KernelOrbit where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans)
 open import Data.Nat using (_+_)
 
 open import DASHI.Core.KernelSystem
