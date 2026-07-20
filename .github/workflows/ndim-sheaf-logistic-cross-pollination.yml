@@ -7,10 +7,13 @@ on:
       - "DASHI/Sheaf/*.agda"
       - "DASHI/Dynamics/*.agda"
       - "DASHI/Foundations/*Padic*.agda"
-      - "DASHI/Promotion/SystemicDistressReframingBoundary.agda"
+      - "DASHI/Foundations/*Observer*.agda"
+      - "DASHI/Promotion/*.agda"
       - "DASHI/Culture/RelationalTeachingCampaignBoundary.agda"
+      - "DASHI/Unified/FrameBearingRelationalInterventionBoundary.agda"
       - "DASHI/Unified/NDimSheafLogisticCrossPollinationRegression.agda"
       - "Docs/support/reference/NDimSheafLogisticCrossPollination.md"
+      - "Docs/support/reference/FrameBearingRelationalIntervention.md"
       - ".github/workflows/ndim-sheaf-logistic-cross-pollination.yml"
   push:
     branches: [master]
@@ -19,10 +22,13 @@ on:
       - "DASHI/Sheaf/*.agda"
       - "DASHI/Dynamics/*.agda"
       - "DASHI/Foundations/*Padic*.agda"
-      - "DASHI/Promotion/SystemicDistressReframingBoundary.agda"
+      - "DASHI/Foundations/*Observer*.agda"
+      - "DASHI/Promotion/*.agda"
       - "DASHI/Culture/RelationalTeachingCampaignBoundary.agda"
+      - "DASHI/Unified/FrameBearingRelationalInterventionBoundary.agda"
       - "DASHI/Unified/NDimSheafLogisticCrossPollinationRegression.agda"
       - "Docs/support/reference/NDimSheafLogisticCrossPollination.md"
+      - "Docs/support/reference/FrameBearingRelationalIntervention.md"
       - ".github/workflows/ndim-sheaf-logistic-cross-pollination.yml"
 
 jobs:
