@@ -19,6 +19,9 @@ on:
       - 'DASHI/Physics/Closure/NSWall1UniformWeightedSchur.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceSchurBridge.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda'
       - 'docs/ns_pair_incidence_kernel_schur.md'
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
   push:
@@ -39,6 +42,9 @@ on:
       - 'DASHI/Physics/Closure/NSWall1UniformWeightedSchur.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceSchurBridge.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda'
       - 'docs/ns_pair_incidence_kernel_schur.md'
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
 
@@ -86,7 +92,10 @@ jobs:
               DASHI/Physics/Closure/NSWall1PolarizationInstantiation.agda \
               DASHI/Physics/Closure/NSWall1UniformWeightedSchur.agda \
               DASHI/Physics/Closure/NSPairIncidenceSchurBridge.agda \
-              DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda
+              DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda \
+              DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda \
+              DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda \
+              DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda
           ) > agda-ns-pair-incidence-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
