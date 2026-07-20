@@ -5,9 +5,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 
-------------------------------------------------------------------------
--- Bounded executable primorial-base lane.
-
 pow : Nat → Nat → Nat
 pow b zero = 1
 pow b (suc n) = b * pow b n
@@ -55,12 +52,6 @@ example35Decode = refl
 
 example35Product : primeExponentProduct4 example35Digits ≡ 126
 example35Product = refl
-
-------------------------------------------------------------------------
--- Source-backed executable prefixes.
---
--- A276086 begins at offset 0.  The fallback is deliberately zero outside the
--- checked prefix and therefore is not advertised as the general sequence.
 
 a276086Prefix : Nat → Nat
 a276086Prefix 0 = 1
@@ -129,7 +120,7 @@ record GeneralPrimorialAlgorithmAuthority : Set₁ where
     mdlComparisonEvidence : Set
 
 record PrimorialFactorAddressConcreteReceipt : Set where
-  constructor primorialFactorAddressConcreteReceipt
+  constructor mkPrimorialFactorAddressConcreteReceipt
   field
     boundedDigitDecodeChecked : Bool
     boundedPrimeProductChecked : Bool
@@ -150,7 +141,7 @@ record PrimorialFactorAddressConcreteReceipt : Set where
 primorialFactorAddressConcreteReceipt :
   PrimorialFactorAddressConcreteReceipt
 primorialFactorAddressConcreteReceipt =
-  primorialFactorAddressConcreteReceipt
+  mkPrimorialFactorAddressConcreteReceipt
     true true true true true
     false refl false refl false refl
     "OEIS A276086 and A276087"
