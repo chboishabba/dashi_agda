@@ -25,6 +25,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanFiniteVolumeBackgroundLane.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2FiniteBackgroundAssembly.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformGreenNonlinearProduct.agda'
+      - 'DASHI/Physics/YangMills/BalabanSeparatedUniformGreenNonlinearBounds.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepPolymerEstimate.agda'
       - 'DASHI/Physics/YangMills/BalabanConcreteOneStepRG.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepRGClosure.agda'
