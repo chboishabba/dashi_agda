@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Trading.PermissionKernel where
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_+_; _≤_)
 open import Data.Nat.Properties using (≤-refl)
