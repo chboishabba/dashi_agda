@@ -12,7 +12,9 @@ import DASHI.Algebra.CliffordQuotientUniversalTheorem as Clifford
 import DASHI.Algebra.ContinuousSpin31LorentzCover as Spin
 import DASHI.Algebra.Quantum.TreeHeisenbergScalingLimit as Heisenberg
 import DASHI.Physics.Closure.ContinuumCurvatureSourceSpinTwo as GeometryDynamics
+import DASHI.Physics.Closure.ContinuumEinsteinMatterSolutionBoundary as EinsteinMatter
 import DASHI.Physics.Closure.ConstraintRenormalizationLowEnergy as QuantumDynamics
+import DASHI.Empirical.GRQuantumEmpiricalValidationProgramme as Empirical
 
 ------------------------------------------------------------------------
 -- Compact compile/import and theorem-composition regression surface.
@@ -49,27 +51,25 @@ researchTerminalAssembly = Research.researchTerminalFromAuthority
 
 nonzeroSourceConservationAvailable :
   (authority : GeometryDynamics.BianchiNoetherNonzeroSourceAuthority) →
-  (p :
-    GeometryDynamics.EinsteinMatter.Point
-      (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.system authority)) →
-  (b :
-    GeometryDynamics.EinsteinMatter.Index
-      (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.system authority)) →
-  GeometryDynamics.EinsteinMatter.DivergenceStress
+  (p : EinsteinMatter.Point
+    (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.system authority)) →
+  (b : EinsteinMatter.Index
+    (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.system authority)) →
+  EinsteinMatter.DivergenceStress
     (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.system authority)
-    (GeometryDynamics.EinsteinMatter.matter
+    (EinsteinMatter.matter
       (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.solution authority))
-    (GeometryDynamics.EinsteinMatter.metric
+    (EinsteinMatter.metric
       (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.solution authority))
     p b
-  ≡ GeometryDynamics.EinsteinMatter.zero
+  ≡ EinsteinMatter.zero
       (GeometryDynamics.BianchiNoetherNonzeroSourceAuthority.system authority)
 nonzeroSourceConservationAvailable =
   GeometryDynamics.nonzeroSourceIsCovariantlyConserved
 
 physicalLowEnergyCarriesEmpirics :
   QuantumDynamics.PhysicalLowEnergyGRQFTRecoveryAuthority →
-  QuantumDynamics.Empirical.StrictPhysicalGRQuantumCorrespondence
+  Empirical.StrictPhysicalGRQuantumCorrespondence
 physicalLowEnergyCarriesEmpirics =
   QuantumDynamics.lowEnergyEmpiricalAuthority
 
