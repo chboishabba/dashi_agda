@@ -9,7 +9,7 @@ import DASHI.Dynamics.EvidenceGatedRechartBoundary as Rechart
 import DASHI.Dynamics.MaterialFeedbackInterventionReceipt as Intervention
 import DASHI.Foundations.ObserverExtensionBoundary as Observer
 import DASHI.Promotion.MetacognitiveFrameBearingState as Meta
-import DASHI.Promotion.PluralSituatedHypothesisBoundary as Hypothesis
+import DASHI.Promotion.PluralSituatedHypothesisBoundary as Hypotheses
 import DASHI.Sheaf.RelationalCompressionReceipt as Compression
 
 ------------------------------------------------------------------------
@@ -44,14 +44,16 @@ observationMovesToRevision = refl
 
 record FrameBearingRelationalMachine : Set₁ where
   field
-    Experience Frame Provenance Residual Hypothesis Action Outcome : Set
+    Experience Frame Provenance Residual HypothesisCarrier Action Outcome : Set
     currentExperience : Experience
     observeFrame : Experience → Frame
     frameProvenance : Experience → Provenance
     initialResidual : Experience → Residual
-    generateHypotheses : Experience → Frame → Residual → List Hypothesis
-    compressRelations : Experience → Frame → List Hypothesis → Residual
-    candidateAction : List Hypothesis → Residual → Action
+    generateHypotheses :
+      Experience → Frame → Residual → List HypothesisCarrier
+    compressRelations :
+      Experience → Frame → List HypothesisCarrier → Residual
+    candidateAction : List HypothesisCarrier → Residual → Action
     validateAction : Action → Set
     applyAction : Experience → Action → Outcome
     observeResidual : Outcome → Residual
@@ -63,7 +65,7 @@ record IntegratedFrameBoundary : Set where
   constructor integratedFrameBoundary
   field
     metacognitiveBoundary : Meta.MetacognitivePowerUpBoundary
-    pluralHypothesisBoundary : Hypothesis.PluralHypothesisBoundary
+    pluralHypothesisBoundary : Hypotheses.PluralHypothesisBoundary
     relationalCompressionBoundary : Compression.RelationalCompressionBoundary
     materialInterventionBoundary : Intervention.MaterialInterventionBoundary
     observerBoundary : Observer.ObserverExtensionBoundary
@@ -84,7 +86,7 @@ canonicalIntegratedFrameBoundary : IntegratedFrameBoundary
 canonicalIntegratedFrameBoundary =
   integratedFrameBoundary
     Meta.canonicalMetacognitivePowerUpBoundary
-    Hypothesis.canonicalPluralHypothesisBoundary
+    Hypotheses.canonicalPluralHypothesisBoundary
     Compression.canonicalRelationalCompressionBoundary
     Intervention.canonicalMaterialInterventionBoundary
     Observer.canonicalObserverExtensionBoundary
