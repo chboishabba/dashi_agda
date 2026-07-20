@@ -25,11 +25,12 @@ record SUNInvariantMetricAuthority
 
     traceInnerSymmetric : ∀ X Y → traceInner X Y ≡ traceInner Y X
     traceNormNonnegative : ∀ X → _≤S_ S (zeroS S) (traceNorm X)
-    adjointTraceIsometry : ∀ group X → traceNorm (Ad K group X) ≡ traceNorm X
-    distanceLeftInvariant : ∀ x y z →
+    adjointTraceIsometry : ∀ groupElement X →
+      traceNorm (Ad K groupElement X) ≡ traceNorm X
+    leftDistanceLaw : ∀ x y z →
       biInvariantDistance (multiply (group K) x y) (multiply (group K) x z) ≡
       biInvariantDistance y z
-    distanceRightInvariant : ∀ x y z →
+    rightDistanceLaw : ∀ x y z →
       biInvariantDistance (multiply (group K) y x) (multiply (group K) z x) ≡
       biInvariantDistance y z
 
@@ -47,8 +48,8 @@ sunInvariantLieMetric authority = record
   ; innerSymmetric = traceInnerSymmetric authority
   ; normNonnegative = traceNormNonnegative authority
   ; adjointIsometry = adjointTraceIsometry authority
-  ; distanceLeftInvariant = distanceLeftInvariant authority
-  ; distanceRightInvariant = distanceRightInvariant authority
+  ; distanceLeftInvariant = leftDistanceLaw authority
+  ; distanceRightInvariant = rightDistanceLaw authority
   }
 
 record SUNLocalChartAuthority
@@ -68,7 +69,7 @@ record SUNLocalChartAuthority
     localExpLog : ∀ x → GroupSmall x → exp K (log K x) ≡ x
 
     dexpConstant inverseDexpConstant : Scalar
-    commutatorConstant adjointLipschitzConstant : Scalar
+    commutatorConstant adjointLipschitzC : Scalar
 
     DexpEstimate : Set (a ⊔ s)
     InverseDexpEstimate : Set (a ⊔ s)
@@ -99,7 +100,7 @@ sunUniformLieChart authority = record
   ; dexpNormBound = dexpConstant authority
   ; inverseDexpNormBound = inverseDexpConstant authority
   ; bracketNormConstant = commutatorConstant authority
-  ; adjointLipschitzConstant = adjointLipschitzConstant authority
+  ; adjointLipschitzConstant = adjointLipschitzC authority
   ; DexpBound = DexpEstimate authority
   ; InverseDexpBound = InverseDexpEstimate authority
   ; BracketBound = CommutatorEstimate authority
