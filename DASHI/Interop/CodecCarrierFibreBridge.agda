@@ -3,7 +3,6 @@ module DASHI.Interop.CodecCarrierFibreBridge where
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import Base369 using (TriTruth)
-open import DASHI.Algebra.Trit using (Trit)
 open import DASHI.Codec.BalancedTritBitFibre using
   ( Sign
   ; positiveSign
@@ -11,8 +10,9 @@ open import DASHI.Codec.BalancedTritBitFibre using
   ; TritFibre
   ; encodeFibre
   ; decodeFibre
+  ; decode-encode
+  ; encode-decode
   ; invertSign
-  ; invertFibre
   )
 open import DASHI.Foundations.Base369MobiusTransport using
   ( OrientationPolarity
@@ -24,6 +24,8 @@ open import DASHI.Foundations.SSPTritCarrier using
   ( SSPTrit
   ; toTrit
   ; fromTrit
+  ; toTrit-fromTrit
+  ; fromTrit-toTrit
   ; toTriTruth
   )
 
@@ -39,13 +41,13 @@ fibreToSSP f = fromTrit (decodeFibre f)
 
 fibreToSSP-sspToFibre : ∀ s → fibreToSSP (sspToFibre s) ≡ s
 fibreToSSP-sspToFibre s
-  rewrite DASHI.Codec.BalancedTritBitFibre.decode-encode (toTrit s)
-        | DASHI.Foundations.SSPTritCarrier.fromTrit-toTrit s = refl
+  rewrite decode-encode (toTrit s)
+        | fromTrit-toTrit s = refl
 
 sspToFibre-fibreToSSP : ∀ f → sspToFibre (fibreToSSP f) ≡ f
 sspToFibre-fibreToSSP f
-  rewrite DASHI.Foundations.SSPTritCarrier.toTrit-fromTrit (decodeFibre f)
-        | DASHI.Codec.BalancedTritBitFibre.encode-decode f = refl
+  rewrite toTrit-fromTrit (decodeFibre f)
+        | encode-decode f = refl
 
 sspTriPhase : SSPTrit → TriTruth
 sspTriPhase = toTriTruth
@@ -82,17 +84,9 @@ signToPolarity-commutes-flip positiveSign = refl
 signToPolarity-commutes-flip negativeSign = refl
 
 ------------------------------------------------------------------------
--- The bridge intentionally leaves the zero fibre separate. Polarity exists
--- only after support has selected a non-zero trit, preserving the exact
--- support/sign quotient rather than assigning an arbitrary sign to zero.
+-- Zero remains outside OrientationPolarity. A polarity value is requested
+-- only after the support quotient has selected a signed fibre; no arbitrary
+-- sign is assigned to the neutral trit.
 
-signedPolarity : TritFibre → Set
-signedPolarity f = SignedWitness f
-  where
-  data SignedWitness : TritFibre → Set where
-    positiveWitness : SignedWitness (encodeFibre (decodeFibre (encodeFibre (decodeFibre f))))
-
--- A direct executable readout for consumers that already know they are on a
--- signed fibre.
 signedFibrePolarity : Sign → SignPolarity
 signedFibrePolarity = signToPolarity
