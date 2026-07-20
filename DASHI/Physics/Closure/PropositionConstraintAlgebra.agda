@@ -4,14 +4,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.String using (String)
 
-open import DASHI.Unified.GRQuantumProofTerms
+open import DASHI.Unified.GRQuantumProofTerms using
+  (ConstraintAlgebraProof; ConstraintAlgebraClosed)
 
 ------------------------------------------------------------------------
 -- Full proposition-level hypersurface-deformation algebra.
---
--- The three closure equations and the metric-dependent structure map are
--- explicit equalities.  Quantum anomaly freedom is separate from classical
--- closure, and decimation/relabeling equivariance is an explicit premise.
 
 record HypersurfaceDeformationAlgebra : Set₁ where
   field
@@ -45,14 +42,14 @@ record HypersurfaceDeformationAlgebra : Set₁ where
       (left right : Lapse) →
       bracket (Hamiltonian left) (Hamiltonian right)
       ≡ Momentum (metricStructureShift spatialMetric left right)
-open HypersurfaceDeformationAlgebra public
 
 record QuantumConstraintRepresentation
   (classical : HypersurfaceDeformationAlgebra) : Set₁ where
-  open HypersurfaceDeformationAlgebra classical
   field
     HilbertState : Set
-    represent : Operator → HilbertState → HilbertState
+    represent :
+      HypersurfaceDeformationAlgebra.Operator classical →
+      HilbertState → HilbertState
     physicalState : HilbertState → Set
 
     representationRespectsMomentumMomentum : Set
@@ -70,11 +67,9 @@ record QuantumConstraintRepresentation
     noCentralAnomalyProof : noCentralAnomaly
     decimationCommutesWithCausalRelabellingProof :
       decimationCommutesWithCausalRelabelling
-open QuantumConstraintRepresentation public
 
 ------------------------------------------------------------------------
--- Exact trivial/flat producer.  This proves algebraic consistency and
--- inhabitation only; it is not the nontrivial GR hypersurface algebra.
+-- Exact trivial/flat producer.
 
 flatHDA : HypersurfaceDeformationAlgebra
 flatHDA =
