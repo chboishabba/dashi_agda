@@ -1,9 +1,8 @@
 module DASHI.Physics.WaveAlgorithmLiftRegression where
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer using (ℤ; +_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer using (+_)
 
-open import DASHI.Physics.ShiftDiscreteWaveStep as SDWS
 open import DASHI.Physics.WaveAlgorithmLift as WAL
 
 ------------------------------------------------------------------------
@@ -19,7 +18,7 @@ positivePhaseOpposesNegative = WAL.encodeInvolutionAsPhaseOpposition WAL.neg
 
 neutralAmplitudeIsZero :
   WAL.encodeTritWave WAL.zero ≡ WAL.zeroWave
-neutralAmplitudeIsZero = Agda.Builtin.Equality.refl
+neutralAmplitudeIsZero = refl
 
 supportNormProfile :
   WAL.encodedTritNormSq WAL.neg ≡ + 1
