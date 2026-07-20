@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
+import DASHI.Analysis.FiniteWeightedKernelSums as Sums
 import DASHI.Physics.Closure.NSPairIncidenceKernel as PairKernel
 import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization as Major
 import DASHI.Physics.Closure.NSCompactGammaDifferentiatedTriadInstantiation as Triads
@@ -57,7 +58,7 @@ record TriadFullShellCoherence
       ∀ K N →
       Triads.concreteNearResponse (triadsAt K N) ≡
       Major.sumScalars A
-        (DASHI.Analysis.FiniteWeightedKernelSums.map
+        (Sums.map
           (FullShell.localFourierResponse shell K N)
           (PairKernel.pairs (FullShell.pairDataAt shell K N)))
 
@@ -65,7 +66,7 @@ record TriadFullShellCoherence
       ∀ K N →
       Triads.majorantActionOutput (triadsAt K N) ≡
       Major.sumScalars A
-        (DASHI.Analysis.FiniteWeightedKernelSums.map
+        (Sums.map
           (FullShell.localFourierMajorant shell K N)
           (PairKernel.pairs (FullShell.pairDataAt shell K N)))
 
@@ -89,5 +90,5 @@ coherentLocalMajorization :
   _≤_ A
     (Triads.signedTriadMagnitude (triadsAt K N) pair)
     (Triads.triadMajorant (triadsAt K N) pair)
-coherentLocalMajorization C K N pair =
-  Triads.localTriadMajorizationFromAnalyticLeaf _ pair
+coherentLocalMajorization {triadsAt = triadsAt} C K N pair =
+  Triads.localTriadMajorizationFromAnalyticLeaf (triadsAt K N) pair
