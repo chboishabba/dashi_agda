@@ -2,16 +2,13 @@ module DASHI.Environment.SurrogateCalibration where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat using (_≤_)
 
 import DASHI.Environment.LatentDepthFormalism as Latent
 import DASHI.Environment.QuantitiesConservation as Q
-
-------------------------------------------------------------------------
--- Authoritative-model identity and declared support.
 
 record ModelIdentity : Set where
   constructor mkModelIdentity
@@ -56,9 +53,6 @@ record OutputContract : Set where
     missingValuePolicy : String
 open OutputContract public
 
-------------------------------------------------------------------------
--- Learned latent/surrogate boundary.
-
 record LatentModelContract : Set₁ where
   constructor mkLatentModelContract
   field
@@ -98,9 +92,6 @@ record CalibrationReceipt : Set₁ where
     escalationPolicy : String
     provenance : List String
 open CalibrationReceipt public
-
-------------------------------------------------------------------------
--- Runtime assessment and fail-closed escalation.
 
 record SurrogateAssessment : Set where
   constructor mkSurrogateAssessment
