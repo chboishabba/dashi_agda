@@ -44,9 +44,9 @@ open OrderedAdditiveCompletionLaws public
 --
 --   D Phi + c_Gamma E_Gamma = dissipationRate + forcingRate.
 --
--- `integratePointwiseBalance` is the ordinary fundamental-theorem and integral
--- linearity/monotonicity package for the selected time/value carrier.  It is
--- deliberately independent of all continuation data.
+-- `integratePointwiseBalance` owns the fundamental theorem, integral
+-- linearity, and insertion of the fixed data remainder.  It is deliberately
+-- independent of all continuation data.
 ------------------------------------------------------------------------
 
 record PointwiseCompactGammaExpenditure
@@ -65,6 +65,12 @@ record PointwiseCompactGammaExpenditure
     coerciveEnvelopeIntegral : Scalar A
     dissipationIntegral : Scalar A
     forcingTimeIntegral : Scalar A
+    dataRemainder : Scalar A
+    forcingAndDataRemainder : Scalar A
+
+    forcingAndDataMeaning :
+      forcingAndDataRemainder ≡
+      _+_ A forcingTimeIntegral dataRemainder
 
     pointwisePotentialBalance :
       ∀ τ →
@@ -77,7 +83,7 @@ record PointwiseCompactGammaExpenditure
         _+_ A (dissipationRate τ) (forcingRate τ)) →
       _+_ A
         (potential initialTime)
-        (_+_ A dissipationIntegral forcingTimeIntegral)
+        (_+_ A dissipationIntegral forcingAndDataRemainder)
       ≡
       _+_ A
         (potential finalTime)
@@ -90,7 +96,7 @@ integrated-compactGamma-potential-balance :
   (P : PointwiseCompactGammaExpenditure A Time) →
   _+_ A
     (potential P (initialTime P))
-    (_+_ A (dissipationIntegral P) (forcingTimeIntegral P))
+    (_+_ A (dissipationIntegral P) (forcingAndDataRemainder P))
   ≡
   _+_ A
     (potential P (finalTime P))
@@ -146,7 +152,7 @@ compactGamma-final-potential-nonnegative {A = A} L {P = P} N =
       (ratioPotentialFinalNonnegative N))
 
 ------------------------------------------------------------------------
--- Fixed forcing/data remainder and endpoint transport.
+-- Energy budget audit and endpoint transport.
 ------------------------------------------------------------------------
 
 record ConcreteExpenditureTransport
@@ -159,15 +165,10 @@ record ConcreteExpenditureTransport
   field
     potentialNonnegativity : CompactGammaPotentialNonnegativity A L P
 
-    dataRemainder : Scalar A
-    forcingAndDataRemainder : Scalar A
-    forcingAndDataMeaning :
-      forcingAndDataRemainder ≡
-      _+_ A (forcingTimeIntegral P) dataRemainder
-
-    -- The energy inequality has already bounded the selected dissipation
-    -- integral.  The bound is retained explicitly for audit and may be used by
-    -- concrete scalar instantiations when evaluating the remainder.
+    -- The energy inequality has bounded the selected dissipation integral.
+    -- This witness is retained explicitly for dependency auditing.  The
+    -- cancellation theorem below uses the exact same integral on both sides,
+    -- so no subtraction or division is required in the generic carrier.
     energyDissipationBudget : Scalar A
     dissipationIntegralBelowEnergyBudget :
       _≤_ A (dissipationIntegral P) energyDissipationBudget
@@ -183,7 +184,9 @@ record ConcreteExpenditureTransport
     Continuation : Set l
     invokeBKMFromVorticityBound :
       _≤_ A vorticityExpenditure
-        (_+_ A (potential P (initialTime P)) forcingAndDataRemainder) →
+        (_+_ A
+          (potential P (initialTime P))
+          (forcingAndDataRemainder P)) →
       Continuation
 
 open ConcreteExpenditureTransport public
@@ -207,29 +210,17 @@ pointwiseProducer-to-highestAlpha {A = A} L P T = record
   ; totalEscape =
       _+_ A (coerciveEnvelopeIntegral P) (dissipationIntegral P)
   ; replenishment =
-      _+_ A (dissipationIntegral P) (forcingAndDataRemainder T)
-  ; forcingAndTimeRemainder = forcingAndDataRemainder T
+      _+_ A (dissipationIntegral P) (forcingAndDataRemainder P)
+  ; forcingAndTimeRemainder = forcingAndDataRemainder P
   ; potentialFinalNonnegative =
       compactGamma-final-potential-nonnegative L
         (potentialNonnegativity T)
   ; integratedPotentialBalance =
-      subst
-        (λ forcing →
-          _+_ A
-            (potential P (initialTime P))
-            (_+_ A (dissipationIntegral P) forcing)
-          ≡
-          _+_ A
-            (potential P (finalTime P))
-            (_+_ A
-              (coerciveEnvelopeIntegral P)
-              (dissipationIntegral P)))
-        (sym (forcingAndDataMeaning T))
-        (integrated-compactGamma-potential-balance P)
+      integrated-compactGamma-potential-balance P
   ; totalEscapeSplits = refl
   ; replenishmentAbsorbedByDissipation =
       ≤-refl L
-        (_+_ A (dissipationIntegral P) (forcingAndDataRemainder T))
+        (_+_ A (dissipationIntegral P) (forcingAndDataRemainder P))
   ; weightedShellExpenditure = weightedShellExpenditure T
   ; vorticityExpenditure = vorticityExpenditure T
   ; weightedShellBelowEnvelope = weightedShellBelowCoerciveEnvelope T
@@ -237,6 +228,39 @@ pointwiseProducer-to-highestAlpha {A = A} L P T = record
   ; Continuation = Continuation T
   ; invokeBKMFromBound = invokeBKMFromVorticityBound T
   }
+
+------------------------------------------------------------------------
+-- Named forms of all four producer conclusions.
+------------------------------------------------------------------------
+
+producer-final-potential-nonnegative :
+  ∀ {t l} {A : AbsorptionArithmetic}
+    (L : OrderedAdditiveCompletionLaws A)
+    {Time : Set t}
+    (P : PointwiseCompactGammaExpenditure A Time)
+    (T : ConcreteExpenditureTransport {l = l} A L P) →
+  _≤_ A (zero A) (potential P (finalTime P))
+producer-final-potential-nonnegative L P T =
+  compactGamma-final-potential-nonnegative L (potentialNonnegativity T)
+
+producer-total-escape-split :
+  ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
+    (P : PointwiseCompactGammaExpenditure A Time) →
+  _+_ A (coerciveEnvelopeIntegral P) (dissipationIntegral P) ≡
+  _+_ A (coerciveEnvelopeIntegral P) (dissipationIntegral P)
+producer-total-escape-split P = refl
+
+producer-replenishment-absorption :
+  ∀ {t} {A : AbsorptionArithmetic}
+    (L : OrderedAdditiveCompletionLaws A)
+    {Time : Set t}
+    (P : PointwiseCompactGammaExpenditure A Time) →
+  _≤_ A
+    (_+_ A (dissipationIntegral P) (forcingAndDataRemainder P))
+    (_+_ A (dissipationIntegral P) (forcingAndDataRemainder P))
+producer-replenishment-absorption L P =
+  ≤-refl L
+    (_+_ A (dissipationIntegral P) (forcingAndDataRemainder P))
 
 ------------------------------------------------------------------------
 -- End-to-end highest-alpha conclusions from the pointwise differential theorem.
@@ -252,9 +276,24 @@ pointwise-compactGamma-finite-envelope-expenditure :
     (coerciveEnvelopeIntegral P)
     (_+_ A
       (potential P (initialTime P))
-      (forcingAndDataRemainder T))
+      (forcingAndDataRemainder P))
 pointwise-compactGamma-finite-envelope-expenditure L P T =
   finite-coercive-envelope-expenditure
+    (pointwiseProducer-to-highestAlpha L P T)
+
+pointwise-compactGamma-finite-weighted-shell-expenditure :
+  ∀ {t l} {A : AbsorptionArithmetic}
+    (L : OrderedAdditiveCompletionLaws A)
+    {Time : Set t}
+    (P : PointwiseCompactGammaExpenditure A Time)
+    (T : ConcreteExpenditureTransport {l = l} A L P) →
+  _≤_ A
+    (weightedShellExpenditure T)
+    (_+_ A
+      (potential P (initialTime P))
+      (forcingAndDataRemainder P))
+pointwise-compactGamma-finite-weighted-shell-expenditure L P T =
+  finite-weighted-shell-expenditure
     (pointwiseProducer-to-highestAlpha L P T)
 
 pointwise-compactGamma-finite-vorticity-expenditure :
@@ -267,7 +306,7 @@ pointwise-compactGamma-finite-vorticity-expenditure :
     (vorticityExpenditure T)
     (_+_ A
       (potential P (initialTime P))
-      (forcingAndDataRemainder T))
+      (forcingAndDataRemainder P))
 pointwise-compactGamma-finite-vorticity-expenditure L P T =
   finite-vorticity-time-expenditure
     (pointwiseProducer-to-highestAlpha L P T)
