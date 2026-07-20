@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 data _⊎_ (X Y : Set) : Set where
-  inj₁ : X → X ⊎ Y
+  inj₁ : X → X ⊎ B
   inj₂ : Y → X ⊎ Y
 
 data Competitor : Set where
@@ -88,7 +88,7 @@ classifySelectionOrbit BB = fixedB
 
 selectionReachesRepresentative :
   (p : PopulationProfile) →
-  select p ≡ AB ⊎ select p ≡ BB
+  (select p ≡ AB) ⊎ (select p ≡ BB)
 selectionReachesRepresentative AA = inj₁ refl
 selectionReachesRepresentative AB = inj₁ refl
 selectionReachesRepresentative BA = inj₂ refl
