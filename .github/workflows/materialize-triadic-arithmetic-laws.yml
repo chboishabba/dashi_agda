@@ -1,0 +1,45 @@
+name: Materialize generated triadic proofs
+
+on:
+  push:
+    branches:
+      - agent/triadic-spectral-completion
+    paths:
+      - scripts/generate_triadic_arithmetic_laws.py
+      - scripts/generate_triadic_depth_two_dft.py
+      - .github/workflows/materialize-triadic-arithmetic-laws.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/triadic-spectral-completion
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate complete Agda proof sources
+        run: |
+          python scripts/generate_triadic_arithmetic_laws.py
+          python scripts/generate_triadic_depth_two_dft.py
+      - name: Commit generated sources when changed
+        run: |
+          paths=(
+            DASHI/Algebra/TriadicFiniteArithmeticLaws.agda
+            DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda
+          )
+          if git diff --quiet -- "${paths[@]}"; then
+            echo "Generated sources already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${paths[@]}"
+          git commit -m "Generate complete triadic arithmetic and DFT proofs"
+          git push origin HEAD:agent/triadic-spectral-completion
