@@ -4,9 +4,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Integer using (ℤ; 0ℤ; 1ℤ; _+_; _-_; _*_; -_)
-open import Data.Integer.Tactic.RingSolver using (solve)
-open import Data.List.Base using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Data.Integer.Solver using (module +-*-Solver)
+open +-*-Solver
+import Data.Integer.Properties as ℤP
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.TriadicSectorQSeries as QS
 import DASHI.Physics.Closure.TriadicModularAutomorphicGate as Modular
@@ -77,22 +78,36 @@ inverseForward (sl2z a b c d determinant) (lattice-point m n) =
   firstPolynomial :
     (m * a + n * c) * d - (m * b + n * d) * c
     ≡ m * (a * d - b * c)
-  firstPolynomial = solve (m ∷ n ∷ a ∷ b ∷ c ∷ d ∷ [])
+  firstPolynomial =
+    solve 6
+      (λ m n a b c d →
+        ((m :* a :+ n :* c) :* d
+          :- ((m :* b :+ n :* d) :* c))
+        := m :* (a :* d :- b :* c))
+      refl m n a b c d
 
   firstCoordinate :
     (m * a + n * c) * d - (m * b + n * d) * c ≡ m
   firstCoordinate =
-    trans firstPolynomial (trans (cong (m *_) determinant) (solve (m ∷ [])))
+    trans firstPolynomial
+      (trans (cong (m *_) determinant) (ℤP.*-identityʳ m))
 
   secondPolynomial :
     (- (m * a + n * c)) * b + (m * b + n * d) * a
     ≡ n * (a * d - b * c)
-  secondPolynomial = solve (m ∷ n ∷ a ∷ b ∷ c ∷ d ∷ [])
+  secondPolynomial =
+    solve 6
+      (λ m n a b c d →
+        ((:- (m :* a :+ n :* c)) :* b
+          :+ ((m :* b :+ n :* d) :* a))
+        := n :* (a :* d :- b :* c))
+      refl m n a b c d
 
   secondCoordinate :
     (- (m * a + n * c)) * b + (m * b + n * d) * a ≡ n
   secondCoordinate =
-    trans secondPolynomial (trans (cong (n *_) determinant) (solve (n ∷ [])))
+    trans secondPolynomial
+      (trans (cong (n *_) determinant) (ℤP.*-identityʳ n))
 
 forwardInverse :
   (g : SL2Z) →
@@ -104,22 +119,36 @@ forwardInverse (sl2z a b c d determinant) (lattice-point m n) =
   firstPolynomial :
     (m * d - n * c) * a + ((- m) * b + n * a) * c
     ≡ m * (a * d - b * c)
-  firstPolynomial = solve (m ∷ n ∷ a ∷ b ∷ c ∷ d ∷ [])
+  firstPolynomial =
+    solve 6
+      (λ m n a b c d →
+        ((m :* d :- n :* c) :* a
+          :+ (((:- m) :* b :+ n :* a) :* c))
+        := m :* (a :* d :- b :* c))
+      refl m n a b c d
 
   firstCoordinate :
     (m * d - n * c) * a + ((- m) * b + n * a) * c ≡ m
   firstCoordinate =
-    trans firstPolynomial (trans (cong (m *_) determinant) (solve (m ∷ [])))
+    trans firstPolynomial
+      (trans (cong (m *_) determinant) (ℤP.*-identityʳ m))
 
   secondPolynomial :
     (m * d - n * c) * b + ((- m) * b + n * a) * d
     ≡ n * (a * d - b * c)
-  secondPolynomial = solve (m ∷ n ∷ a ∷ b ∷ c ∷ d ∷ [])
+  secondPolynomial =
+    solve 6
+      (λ m n a b c d →
+        ((m :* d :- n :* c) :* b
+          :+ (((:- m) :* b :+ n :* a) :* d))
+        := n :* (a :* d :- b :* c))
+      refl m n a b c d
 
   secondCoordinate :
     (m * d - n * c) * b + ((- m) * b + n * a) * d ≡ n
   secondCoordinate =
-    trans secondPolynomial (trans (cong (n *_) determinant) (solve (n ∷ [])))
+    trans secondPolynomial
+      (trans (cong (n *_) determinant) (ℤP.*-identityʳ n))
 
 record LatticeBijection (g : SL2Z) : Set where
   constructor lattice-bijection
