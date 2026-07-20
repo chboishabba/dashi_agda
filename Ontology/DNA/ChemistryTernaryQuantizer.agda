@@ -5,8 +5,7 @@ open import Agda.Builtin.Nat using (Nat; zero)
 open import Data.Vec using (Vec; map)
 
 open import Ontology.DNA.ChemistrySheetHamiltonian using
-  (Signed; neg; zer; pos; SheetCoordinates; sheetCoordinates;
-   sheetBandEnergy; crossBandEnergy)
+  (Signed; neg; zer; pos; SheetCoordinates; sheetCoordinates)
 
 ------------------------------------------------------------------------
 -- The current signed chemistry coordinates already have the balanced ternary
@@ -32,13 +31,19 @@ signed-roundtrip neg = refl
 signed-roundtrip zer = refl
 signed-roundtrip pos = refl
 
-quantizeSheet : ∀ {n} → SheetCoordinates n → Vec Trit n × Vec Trit n
-quantizeSheet (sheetCoordinates u v) = map quantizeSigned u , map quantizeSigned v
-  where
-  open import Agda.Builtin.Sigma using (_,_)
+record TernarySheet (n : Nat) : Set where
+  constructor ternarySheet
+  field
+    uTrits : Vec Trit n
+    vTrits : Vec Trit n
 
-reconstructSheet : ∀ {n} → Vec Trit n → Vec Trit n → SheetCoordinates n
-reconstructSheet u v = sheetCoordinates (map reconstructSigned u) (map reconstructSigned v)
+quantizeSheet : ∀ {n} → SheetCoordinates n → TernarySheet n
+quantizeSheet (sheetCoordinates u v) =
+  ternarySheet (map quantizeSigned u) (map quantizeSigned v)
+
+reconstructSheet : ∀ {n} → TernarySheet n → SheetCoordinates n
+reconstructSheet (ternarySheet u v) =
+  sheetCoordinates (map reconstructSigned u) (map reconstructSigned v)
 
 record QuantizerDistortionCertificate (Coefficient : Set) : Set₁ where
   field
@@ -62,7 +67,6 @@ record ConditionalTernaryMinimality : Set₁ where
     twoSymbolsInsufficient : Set
     ternarySufficient : Set
 
--- Exact signed-coordinate quantisation incurs zero declared distortion.
 record ExactSignedTernaryReceipt : Set where
   field
     distortion : Nat
