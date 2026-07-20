@@ -2,7 +2,6 @@ module DASHI.Analysis.WeightedKernelSchurTest where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 record WeightedKernelData
     {r c s : Level}
@@ -199,11 +198,12 @@ exactKernelActionTransport :
   applyKernel L input ≡
   evaluateEntries A candidateEntries input
 exactKernelActionTransport A candidateEntries entriesMatch input =
-  trans
+  subst
+    (λ entries →
+      applyKernel L input ≡
+      evaluateEntries A entries input)
+    entriesMatch
     (applyKernelMatchesEntries A input)
-    (cong
-      (λ entries → evaluateEntries A entries input)
-      entriesMatch)
 
 exactKernelActionTransportByIdentity :
   ∀ {r c s}
