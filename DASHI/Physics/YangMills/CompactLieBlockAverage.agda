@@ -20,14 +20,14 @@ record CovariantBlockAverageData
     coarseGaugeAction : CoarseGauge → CoarseField → CoarseField
     algebraGaugeAction : CoarseGauge → Algebra → Algebra
 
-    blockAverageDefinition : ∀ block field →
-      blockAverage block field
-      ≡ reconstruct (transportedLogAverage block field)
+    blockAverageDefinition : ∀ block input →
+      blockAverage block input
+      ≡ reconstruct (transportedLogAverage block input)
 
-    transportedLogCovariant : ∀ block gauge field →
-      transportedLogAverage block (gaugeAction gauge field)
+    transportedLogCovariant : ∀ block gauge input →
+      transportedLogAverage block (gaugeAction gauge input)
       ≡ algebraGaugeAction (restrictGauge gauge)
-          (transportedLogAverage block field)
+          (transportedLogAverage block input)
 
     reconstructionCovariant : ∀ coarseGauge algebra →
       reconstruct (algebraGaugeAction coarseGauge algebra)
@@ -37,34 +37,34 @@ open CovariantBlockAverageData public
 
 blockAverageEquivariant :
   ∀ {Field Gauge Block CoarseField CoarseGauge Algebra : Set} →
-  (data : CovariantBlockAverageData
+  (bundle : CovariantBlockAverageData
     Field Gauge Block CoarseField CoarseGauge Algebra) →
-  ∀ block gauge field →
-  blockAverage data block (gaugeAction data gauge field)
+  ∀ block gauge input →
+  blockAverage bundle block (gaugeAction bundle gauge input)
   ≡
-  coarseGaugeAction data (restrictGauge data gauge)
-    (blockAverage data block field)
-blockAverageEquivariant data block gauge field =
+  coarseGaugeAction bundle (restrictGauge bundle gauge)
+    (blockAverage bundle block input)
+blockAverageEquivariant bundle block gauge input =
   trans
-    (blockAverageDefinition data block (gaugeAction data gauge field))
+    (blockAverageDefinition bundle block (gaugeAction bundle gauge input))
     (trans
       (congReconstruct
-        (transportedLogCovariant data block gauge field))
+        (transportedLogCovariant bundle block gauge input))
       (trans
-        (reconstructionCovariant data
-          (restrictGauge data gauge)
-          (transportedLogAverage data block field))
+        (reconstructionCovariant bundle
+          (restrictGauge bundle gauge)
+          (transportedLogAverage bundle block input))
         (congCoarse symDefinition)))
   where
-    congReconstruct : ∀ {x y} → x ≡ y → reconstruct data x ≡ reconstruct data y
+    congReconstruct : ∀ {x y} → x ≡ y → reconstruct bundle x ≡ reconstruct bundle y
     congReconstruct refl = refl
 
     congCoarse : ∀ {x y} → x ≡ y →
-      coarseGaugeAction data (restrictGauge data gauge) x
-      ≡ coarseGaugeAction data (restrictGauge data gauge) y
+      coarseGaugeAction bundle (restrictGauge bundle gauge) x
+      ≡ coarseGaugeAction bundle (restrictGauge bundle gauge) y
     congCoarse refl = refl
 
     symDefinition :
-      reconstruct data (transportedLogAverage data block field)
-      ≡ blockAverage data block field
-    symDefinition = sym (blockAverageDefinition data block field)
+      reconstruct bundle (transportedLogAverage bundle block input)
+      ≡ blockAverage bundle block input
+    symDefinition = sym (blockAverageDefinition bundle block input)
