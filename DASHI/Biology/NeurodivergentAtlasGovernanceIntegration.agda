@@ -3,6 +3,7 @@ module DASHI.Biology.NeurodivergentAtlasGovernanceIntegration where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Unit using (tt)
 
 import DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge as Atlas
 import DASHI.Biology.FMRIConnectomeProxyGovernance as FMRI
@@ -34,8 +35,7 @@ canonicalNeurodivergentAtlasGovernanceIntegration : NeurodivergentAtlasGovernanc
 canonicalNeurodivergentAtlasGovernanceIntegration =
   mkNeurodivergentAtlasGovernanceIntegration
     "neurodivergent atlas governance integration"
-    Atlas.candidateOnlyRoute
-    Agda.Builtin.Unit.tt
+    Atlas.candidateOnlyRoute tt
     FMRI.canonicalFMRIConnectomeProxyGovernance
     Trauma.canonicalTraumaClinicalGovernanceBoundary
     Consent.canonicalConsentAgencyGovernance
