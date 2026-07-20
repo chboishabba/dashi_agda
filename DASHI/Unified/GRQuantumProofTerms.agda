@@ -75,7 +75,6 @@ record ChainAntichainLorentzProof : Set₁ where
     timeDimension : Nat
     timeDimensionIsOne : timeDimension ≡ 1
     signatureUnique : Set
-open ChainAntichainLorentzProof public
 
 record ChainAntichainLorentzClosed
   (surface : ChainAntichainLorentzProof) : Set where
