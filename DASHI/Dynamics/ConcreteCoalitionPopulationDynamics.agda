@@ -88,7 +88,7 @@ classifySelectionOrbit BB = fixedB
 
 selectionReachesRepresentative :
   (p : PopulationProfile) →
-  select p ≡ AB ⊎ select p ≡ BB
+  (select p ≡ AB) ⊎ (select p ≡ BB)
 selectionReachesRepresentative AA = inj₁ refl
 selectionReachesRepresentative AB = inj₁ refl
 selectionReachesRepresentative BA = inj₂ refl
