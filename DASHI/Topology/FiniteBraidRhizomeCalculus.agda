@@ -6,13 +6,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
--- Local sum, kept here to avoid importing a larger surface.
 data _⊎_ (A B : Set) : Set where
   inj₁ : A → A ⊎ B
   inj₂ : B → A ⊎ B
-
-------------------------------------------------------------------------
--- Exact two-strand braid group B₂ reduced to crossing parity.
 
 data Strand : Set where
   leftStrand rightStrand : Strand
@@ -74,9 +70,6 @@ collisionFree :
 collisionFree straight = strandDistinct
 collisionFree swap ()
 
-------------------------------------------------------------------------
--- Finite isotopy classification and flexibility budget.
-
 data IsotopyClass2 : Set where
   evenCrossing oddCrossing : IsotopyClass2
 
@@ -101,10 +94,7 @@ data CanRealise : FlexBudget → Braid2 → Set where
 data TranslationOutcome : Set where
   translatedExactly translationNeedsRefinement : TranslationOutcome
 
-translateWithBudget :
-  (budget : FlexBudget) →
-  (braid : Braid2) →
-  TranslationOutcome
+translateWithBudget : FlexBudget → Braid2 → TranslationOutcome
 translateWithBudget rigid straight = translatedExactly
 translateWithBudget rigid swap = translationNeedsRefinement
 translateWithBudget flexible straight = translatedExactly
@@ -117,9 +107,6 @@ realisationImpliesTranslation :
 realisationImpliesTranslation realiseStraightRigid = refl
 realisationImpliesTranslation realiseStraightFlexible = refl
 realisationImpliesTranslation realiseSwapFlexible = refl
-
-------------------------------------------------------------------------
--- Pants/rhizome interaction: split and merge transport strand identities.
 
 data Tube : Set where
   trunk leftBranch rightBranch : Tube
@@ -152,7 +139,7 @@ reverseRoute reconnectLR = reconnectRL
 reverseRoute reconnectRL = reconnectLR
 
 record FiniteBraidRhizomeReceipt : Set where
-  constructor finiteBraidRhizomeReceipt
+  constructor mkFiniteBraidRhizomeReceipt
   field
     braidIdentityChecked : Bool
     braidAssociativityChecked : Bool
@@ -170,7 +157,7 @@ record FiniteBraidRhizomeReceipt : Set where
 
 finiteBraidRhizomeReceipt : FiniteBraidRhizomeReceipt
 finiteBraidRhizomeReceipt =
-  finiteBraidRhizomeReceipt
+  mkFiniteBraidRhizomeReceipt
     true true true true true true true
     false refl false refl
     "the exact two-strand parity braid, collision avoidance, flexibility-gated translation, and reversible split/merge routes are checked; higher braid groups, isotopy spaces and arbitrary recursively glued pants bundles remain explicit extensions"
