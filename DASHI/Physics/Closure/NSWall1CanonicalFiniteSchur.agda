@@ -4,7 +4,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+≤+)
 open import Data.Nat.Base using (z≤n; s≤s)
 open import Data.Rational.Base as ℚ
-  using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; *≤*)
+  using (ℚ; 0ℚ; 1ℚ; *≤*)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums
 
@@ -32,8 +32,8 @@ highModes : List HighMode
 highModes = high110 ∷ high101 ∷ high011 ∷ []
 
 two four : ℚ
-two = 1ℚ + 1ℚ
-four = two + two
+two = ℚ._+_ 1ℚ 1ℚ
+four = ℚ._+_ two two
 
 oneWeightLow : LowMode → ℚ
 oneWeightLow _ = 1ℚ
@@ -55,9 +55,9 @@ canonicalK01Finite = record
   { rows = highModes
   ; columns = lowModes
   ; zero = 0ℚ
-  ; add = _+_
-  ; multiply = _*_
-  ; _≤_ = _≤_
+  ; add = ℚ._+_
+  ; multiply = ℚ._*_
+  ; _≤_ = ℚ._≤_
   ; kernel = canonicalK01
   ; rowWeight = oneWeightHigh
   ; colWeight = oneWeightLow
@@ -68,36 +68,40 @@ canonicalK10Finite = record
   { rows = lowModes
   ; columns = highModes
   ; zero = 0ℚ
-  ; add = _+_
-  ; multiply = _*_
-  ; _≤_ = _≤_
+  ; add = ℚ._+_
+  ; multiply = ℚ._*_
+  ; _≤_ = ℚ._≤_
   ; kernel = canonicalK10
   ; rowWeight = oneWeightLow
   ; colWeight = oneWeightHigh
   }
 
-rational≤refl : ∀ q → q ≤ q
+rational≤refl : ∀ q → ℚ._≤_ q q
 rational≤refl q = *≤* (+≤+ (s≤s z≤n))
 
-zero≤two : 0ℚ ≤ two
+zero≤two : ℚ._≤_ 0ℚ two
 zero≤two = *≤* (+≤+ z≤n)
 
-two≤four : two ≤ four
+two≤four : ℚ._≤_ two four
 two≤four = *≤* (+≤+ (s≤s (s≤s z≤n)))
 
-zero≤four : 0ℚ ≤ four
+zero≤four : ℚ._≤_ 0ℚ four
 zero≤four = *≤* (+≤+ z≤n)
 
 k01RowBound :
   ∀ row →
-  rowWeightedSum canonicalK01Finite row ≤ two * oneWeightHigh row
+  ℚ._≤_
+    (rowWeightedSum canonicalK01Finite row)
+    (ℚ._*_ two (oneWeightHigh row))
 k01RowBound high110 = rational≤refl two
 k01RowBound high101 = rational≤refl two
 k01RowBound high011 = rational≤refl two
 
 k01ColumnBound :
   ∀ col →
-  columnWeightedSum canonicalK01Finite col ≤ four * oneWeightLow col
+  ℚ._≤_
+    (columnWeightedSum canonicalK01Finite col)
+    (ℚ._*_ four (oneWeightLow col))
 k01ColumnBound low100 = zero≤four
 k01ColumnBound low010 = two≤four
 k01ColumnBound low001 = rational≤refl four
@@ -113,14 +117,18 @@ canonicalK01Certificate = record
 
 k10RowBound :
   ∀ row →
-  rowWeightedSum canonicalK10Finite row ≤ four * oneWeightLow row
+  ℚ._≤_
+    (rowWeightedSum canonicalK10Finite row)
+    (ℚ._*_ four (oneWeightLow row))
 k10RowBound low100 = zero≤four
 k10RowBound low010 = two≤four
 k10RowBound low001 = rational≤refl four
 
 k10ColumnBound :
   ∀ col →
-  columnWeightedSum canonicalK10Finite col ≤ two * oneWeightHigh col
+  ℚ._≤_
+    (columnWeightedSum canonicalK10Finite col)
+    (ℚ._*_ two (oneWeightHigh col))
 k10ColumnBound high110 = rational≤refl two
 k10ColumnBound high101 = rational≤refl two
 k10ColumnBound high011 = rational≤refl two
