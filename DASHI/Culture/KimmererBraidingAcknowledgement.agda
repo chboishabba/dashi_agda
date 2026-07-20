@@ -13,19 +13,24 @@ import DASHI.Culture.CulturalProvenanceBoundaryCore as Provenance
 -- DASHI's recurring use of braid, dialectical braid, reciprocal knowledge,
 -- provenance-preserving conjunction, and obligation-bearing knowing was
 -- materially inspired by Robin Wall Kimmerer's writing, especially Braiding
--- Sweetgrass.  This acknowledgement does not claim that DASHI formalises,
--- owns, represents, or substitutes for Indigenous knowledge or living
--- Indigenous practice.
+-- Sweetgrass. "Dialectical braid" is DASHI's own extension and is not
+-- attributed to Kimmerer as her terminology.
+--
+-- This acknowledgement does not claim that DASHI formalises, owns,
+-- represents, or substitutes for Indigenous knowledge, Anishinaabe knowledge,
+-- Potawatomi knowledge, or living Indigenous practice.
 
 record KimmererBraidingAcknowledgement : Set where
   constructor mkKimmererBraidingAcknowledgement
   field
     author : String
+    nationAndProvenance : String
     work : String
     contribution : String
     affectedFormalism : List String
     provenanceBoundary : Provenance.CulturalProvenanceBoundary
     inspirationExplicit : Bool
+    dialecticalBraidIsDashiExtension : Bool
     indigenousKnowledgeFormalisedClaim : Bool
     livingPracticeSubstitutedClaim : Bool
     permissionOrCulturalAuthorityClaim : Bool
@@ -39,13 +44,22 @@ canonicalKimmererBraidingAcknowledgement : KimmererBraidingAcknowledgement
 canonicalKimmererBraidingAcknowledgement =
   mkKimmererBraidingAcknowledgement
     "Robin Wall Kimmerer"
+    "Citizen Potawatomi Nation; writings situated in particular scientific, literary, relational, and Indigenous contexts"
     "Braiding Sweetgrass"
-    "inspiration for braided, dialectical, reciprocal, provenance-preserving and obligation-bearing knowledge formalisms"
-    ( "dialectical braids"
-    ∷ "knowledge strands held together without fusion"
+    "material inspiration for braided, reciprocal, provenance-preserving and obligation-bearing knowledge formalisms"
+    ( "braids of distinct knowledge strands"
+    ∷ "DASHI dialectical braids as a later extension"
+    ∷ "knowledge strands held together without forced fusion"
     ∷ "reciprocity and obligation"
     ∷ "distinct warrants and provenance"
-    ∷ "relation among person community land and practice"
+    ∷ "relation among person community land history and practice"
     ∷ [] )
     Provenance.canonicalCulturalProvenanceBoundary
-    true false false false true true refl
+    true
+    true
+    false
+    false
+    false
+    true
+    true
+    refl
