@@ -5,13 +5,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Unit using (⊤; tt)
-open import Data.Vec using ([]; _∷_)
+open import Agda.Builtin.Unit using (⊤)
+open import Data.Vec using () renaming ([] to []ᵥ; _∷_ to _∷ᵥ_)
 
 open import DASHI.Foundations.SSPTritCarrier using
   (SSPTrit; sspNegOne; sspZero; sspPosOne)
 open import DASHI.Geometry.SSP369Ultrametric using
-  (Address; Digit369; digit3; digit6; digit9; distance; distance-self-zero)
+  (Address; digit3; digit6; digit9; distance; distance-self-zero)
 open import DASHI.Algebra.LieGaugeTheoryParity using
   (GaugeTheoryFeature; lieAlgebraFeature; representationFeature;
    connectionFeature; curvatureFeature; ObligationKind;
@@ -111,9 +111,9 @@ BandAddress : Set
 BandAddress = Address 1
 
 bandAddress : ScaleBand → BandAddress
-bandAddress lowBand = digit3 ∷ []
-bandAddress midBand = digit6 ∷ []
-bandAddress highBand = digit9 ∷ []
+bandAddress lowBand = digit3 ∷ᵥ []ᵥ
+bandAddress midBand = digit6 ∷ᵥ []ᵥ
+bandAddress highBand = digit9 ∷ᵥ []ᵥ
 
 bandAddressSelfDistanceZero :
   ∀ b → distance (bandAddress b) (bandAddress b) ≡ 0
