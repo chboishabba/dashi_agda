@@ -2,7 +2,7 @@ module DASHI.Codec.DNACarrierFibre where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Core.Prelude using (_×_; _,_; sym; cong)
+open import DASHI.Core.Prelude using (_×_; _,_)
 open import DASHI.Codec.DNAFirstFormalism using
   ( Base
   ; A
@@ -94,6 +94,19 @@ chemicalPair-complement-invariant T = refl
 
 encodeBaseFibre-injective :
   ∀ {x y} → encodeBaseFibre x ≡ encodeBaseFibre y → x ≡ y
-encodeBaseFibre-injective {x} {y} eq
-  rewrite sym (decode-encode-base x)
-        | sym (decode-encode-base y) = cong decodeBaseFibre eq
+encodeBaseFibre-injective {A} {A} refl = refl
+encodeBaseFibre-injective {A} {C} ()
+encodeBaseFibre-injective {A} {G} ()
+encodeBaseFibre-injective {A} {T} ()
+encodeBaseFibre-injective {C} {A} ()
+encodeBaseFibre-injective {C} {C} refl = refl
+encodeBaseFibre-injective {C} {G} ()
+encodeBaseFibre-injective {C} {T} ()
+encodeBaseFibre-injective {G} {A} ()
+encodeBaseFibre-injective {G} {C} ()
+encodeBaseFibre-injective {G} {G} refl = refl
+encodeBaseFibre-injective {G} {T} ()
+encodeBaseFibre-injective {T} {A} ()
+encodeBaseFibre-injective {T} {C} ()
+encodeBaseFibre-injective {T} {G} ()
+encodeBaseFibre-injective {T} {T} refl = refl
