@@ -4,3 +4,5 @@ import DASHI.Economics.SystemicCrisisSignalKernel
 import DASHI.Economics.SystemicCrisisSignalKernelTests
 import DASHI.Economics.SystemicCrisisCompressionBridge
 import DASHI.Economics.SystemicCrisisCompressionBridgeTests
+import DASHI.Interop.TechSystemicStressCompressionBridge
+import DASHI.Interop.TechSystemicStressCompressionBridgeRegression
