@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanOneStepRGClosure where
 
 ------------------------------------------------------------------------
--- Complete one-step RG proof surface.  Every analytic ingredient is explicit;
+-- Complete one-step RG proof surface. Every analytic ingredient is explicit;
 -- the assembly theorem itself is checked and does not manufacture any bound.
 ------------------------------------------------------------------------
 
@@ -37,8 +37,8 @@ record OneStepRGInputs
     couplingRenormalized : CouplingRenormalized
 
     LessEqual : Bound → Bound → Set
-    irrelevantRemainderBound : ∀ field →
-      LessEqual (polymerNorm (irrelevantRemainder field)) outputBound
+    irrelevantRemainderBound : ∀ configuration →
+      LessEqual (polymerNorm (irrelevantRemainder configuration)) outputBound
 
 open OneStepRGInputs public
 
@@ -48,13 +48,13 @@ record OneStepRGCertificate
     inputs : OneStepRGInputs Field EffectiveAction Polymer Bound
     outputAction : Field → EffectiveAction
     outputPolymer : Field → Polymer
-    outputActionIsEffectiveAction : ∀ field →
-      outputAction field ≡ effectiveAction inputs field
-    outputPolymerIsRemainder : ∀ field →
-      outputPolymer field ≡ irrelevantRemainder inputs field
-    outputPolymerBounded : ∀ field →
+    outputActionIsEffectiveAction : ∀ configuration →
+      outputAction configuration ≡ effectiveAction inputs configuration
+    outputPolymerIsRemainder : ∀ configuration →
+      outputPolymer configuration ≡ irrelevantRemainder inputs configuration
+    outputPolymerBounded : ∀ configuration →
       LessEqual inputs
-        (polymerNorm inputs (outputPolymer field))
+        (polymerNorm inputs (outputPolymer configuration))
         (outputBound inputs)
 
 open OneStepRGCertificate public
