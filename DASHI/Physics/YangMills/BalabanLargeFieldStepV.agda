@@ -34,7 +34,7 @@ record LargeFieldStepVEstimates
     polymerCount : Site → Bound → Bound → Bound
     entropyEnvelope : Bound → Bound → Bound
 
-    entropyRate sizeRate diameterRate : Bound
+    entropyRate diameterEntropyRate sizeRate diameterRate : Bound
 
     weightedSumAt : Site → Bound
     entropyFactor : Site → Bound
@@ -62,7 +62,7 @@ record LargeFieldStepVEstimates
     -- V4: both suppression exponents strictly beat their entropy exponents.
     sizeSuppressionBeatsEntropy : StrictlyGreater sizeRate entropyRate
     diameterSuppressionBeatsEntropy :
-      StrictlyGreater diameterRate diameterRate
+      StrictlyGreater diameterRate diameterEntropyRate
 
     -- V5: the anisotropic norm controls the geometric polymer diameter.
     anisotropicDiameterEstimate : ∀ X →
@@ -149,7 +149,7 @@ suppressionBeatsDiameterEntropy :
     (estimates : LargeFieldStepVEstimates Site Polymer Configuration Bound) →
   LargeFieldStepVEstimates.StrictlyGreater estimates
     (LargeFieldStepVEstimates.diameterRate estimates)
-    (LargeFieldStepVEstimates.diameterRate estimates)
+    (LargeFieldStepVEstimates.diameterEntropyRate estimates)
 suppressionBeatsDiameterEntropy estimates =
   LargeFieldStepVEstimates.diameterSuppressionBeatsEntropy estimates
 
