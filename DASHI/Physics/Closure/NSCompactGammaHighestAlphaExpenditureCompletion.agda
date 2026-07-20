@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSCompactGammaHighestAlphaExpenditureCompletion where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; lsuc)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 
