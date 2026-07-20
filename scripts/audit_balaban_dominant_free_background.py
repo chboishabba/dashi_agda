@@ -15,13 +15,25 @@ EXPECTED = {
         "referenceHodgeCoercivityAssemblyLevel": "machineChecked",
         "referenceHodgePoincareInputsLevel": "conditional",
     },
+    "BalabanPatchRegimeHodgeUniformity.agda": {
+        "patchRegimeHodgeAssemblyLevel": "machineChecked",
+        "patchRegimeHodgeEstimateInputsLevel": "conditional",
+    },
     "BalabanBackgroundPerturbationBudget.agda": {
         "backgroundPerturbationAssemblyLevel": "machineChecked",
         "backgroundPerturbationComponentInputsLevel": "conditional",
     },
+    "BalabanRadiusPerturbationSmallness.agda": {
+        "radiusPerturbationAssemblyLevel": "machineChecked",
+        "radiusPerturbationCoefficientInputsLevel": "conditional",
+    },
     "BalabanCorrectionNeumannBound.agda": {
         "correctionNeumannAssemblyLevel": "machineChecked",
         "strictResidualAndGeometricSumInputsLevel": "conditional",
+    },
+    "BalabanPatchResidualSmallness.agda": {
+        "patchResidualAssemblyLevel": "machineChecked",
+        "patchResidualEstimateInputsLevel": "conditional",
     },
     "BalabanSmallFieldNonlinearConstants.agda": {
         "smallFieldNonlinearConstantsAssemblyLevel": "machineChecked",
@@ -30,6 +42,14 @@ EXPECTED = {
     "BalabanExplicitContractionBudget.agda": {
         "explicitContractionBudgetAssemblyLevel": "machineChecked",
         "explicitNumericalSmallnessInputsLevel": "conditional",
+    },
+    "BalabanCommonSmallFieldRadius.agda": {
+        "commonSmallFieldRadiusAssemblyLevel": "machineChecked",
+        "commonSmallFieldRadiusExistenceLevel": "conditional",
+    },
+    "BalabanUniformAnalyticSmallnessClosure.agda": {
+        "uniformAnalyticSmallnessAssemblyLevel": "machineChecked",
+        "uniformAnalyticSmallnessProducerInputsLevel": "conditional",
     },
     "BalabanAnalyticProducerFrontier.agda": {
         "analyticProducerAssemblyLevel": "machineChecked",
