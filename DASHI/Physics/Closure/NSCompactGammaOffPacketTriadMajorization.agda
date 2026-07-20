@@ -8,6 +8,7 @@ open import DASHI.Analysis.FiniteWeightedKernelSums using (fold; map)
 open import DASHI.Analysis.WeightedKernelSchurTest
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSWall1FourierShellInstance
+open import DASHI.Physics.Closure.NSPairIncidenceSchurBridge using (asWeightedKernelData)
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketWall1PairIncidenceBridge
 
 ------------------------------------------------------------------------
