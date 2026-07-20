@@ -1,0 +1,54 @@
+{
+  "status": "diagnostic-only",
+  "parameters": {
+    "length": 288,
+    "regime_block": 24
+  },
+  "claim_boundary": "Synthetic representation comparison; no general physical, economic, learning, or compression superiority claim.",
+  "results": [
+    {
+      "model": "ordinary",
+      "samples": 288,
+      "rho0": 0.4861111111111111,
+      "rho1": 0.0,
+      "side_bits": 0,
+      "residual_bits": 576,
+      "total_bits": 576,
+      "absolute_error": 140,
+      "operation_proxy": 288
+    },
+    {
+      "model": "involution-quotient",
+      "samples": 288,
+      "rho0": 0.4861111111111111,
+      "rho1": 0.0,
+      "side_bits": 0,
+      "residual_bits": 428,
+      "total_bits": 428,
+      "absolute_error": 140,
+      "operation_proxy": 576
+    },
+    {
+      "model": "multiscale-coarse3",
+      "samples": 96,
+      "rho0": 0.5833333333333334,
+      "rho1": 0.0,
+      "side_bits": 0,
+      "residual_bits": 152,
+      "total_bits": 152,
+      "absolute_error": 56,
+      "operation_proxy": 384
+    },
+    {
+      "model": "mdl-zero-or-persistence",
+      "samples": 288,
+      "rho0": 0.13194444444444445,
+      "rho1": 0.003472222222222222,
+      "side_bits": 12,
+      "residual_bits": 327,
+      "total_bits": 339,
+      "absolute_error": 39,
+      "operation_proxy": 864
+    }
+  ]
+}
