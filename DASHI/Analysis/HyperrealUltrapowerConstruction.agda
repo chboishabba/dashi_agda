@@ -5,16 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-
--- Local product, avoiding a dependency on a larger product API.
-record _×_ (A B : Set) : Set where
-  constructor _,_
-  field
-    first : A
-    second : B
-
-------------------------------------------------------------------------
--- Concrete sequence algebra and a principal-ultrapower regression.
+open import Data.Product using (_×_; _,_)
 
 NatSequence : Set
 NatSequence = Nat → Nat
@@ -51,9 +42,6 @@ principalMulCongruent :
   PrincipalEquivalent (pointwiseMul f g) (pointwiseMul f' g')
 principalMulCongruent (equalAtZero refl) (equalAtZero refl) = equalAtZero refl
 
-------------------------------------------------------------------------
--- Symbolic rational sequences used by a genuine free-ultrafilter quotient.
-
 record RationalCode : Set where
   constructor rationalCode
   field
@@ -70,13 +58,6 @@ infinitesimalRepresentative n = rationalCode 1 (suc n)
 
 infiniteRepresentative : RationalSequence
 infiniteRepresentative n = rationalCode (suc n) 1
-
-------------------------------------------------------------------------
--- Free-ultrafilter-parametric ultrapower.
---
--- The quotient is not silently manufactured.  A producer must supply a free
--- ultrafilter, the equivalence quotient, field operations, order, transfer,
--- and standard-part authority.
 
 Predicate : Set₁
 Predicate = Nat → Set
@@ -107,7 +88,7 @@ record UltrapowerQuotientAuthority
     Hyperreal : Set
     classOf : RationalSequence → Hyperreal
     Equivalent : RationalSequence → RationalSequence → Set
-    equivalentIffLargeAgreement :
+    equivalentImpliesLargeAgreement :
       ∀ f g →
       Equivalent f g →
       FreeUltrafilterAuthority.Large U (λ n → f n ≡ g n)
@@ -116,9 +97,7 @@ record UltrapowerQuotientAuthority
       Equivalent f g →
       classOf f ≡ classOf g
 
-record TransferFragment
-    {Hyperreal : Set}
-    : Set₁ where
+record TransferFragment : Set₁ where
   field
     transferEquality : Set
     transferAddition : Set
