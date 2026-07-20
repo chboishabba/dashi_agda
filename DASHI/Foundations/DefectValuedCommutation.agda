@@ -1,17 +1,10 @@
 module DASHI.Foundations.DefectValuedCommutation where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_; z≤n)
 
 import DASHI.Foundations.InvolutiveTernaryRenormalisation as R
-
-------------------------------------------------------------------------
--- Approximate commuting squares.
---
--- Exact commutation remains available in LiftedInvolutiveDynamics.  This
--- record permits an application to measure the mismatch between coarse-after-
--- step and step-after-coarse and to prove a scale-dependent bound.
 
 record DefectValuedCommutation
   (T : R.InvolutiveScaleTower)
@@ -19,25 +12,20 @@ record DefectValuedCommutation
   field
     distance : ∀ j → R.Carrier T j → R.Carrier T j → Nat
     distance-self : ∀ j x → distance j x x ≡ zero
-
     tolerance : Nat → Nat
 
     defect : ∀ j (s : R.Carrier T j) (u : R.Control D j) → Nat
     defect-is-distance : ∀ j s u →
       defect j s u ≡
-      distance (Agda.Builtin.Nat.suc j)
+      distance (suc j)
         (R.coarse T j (R.step D j s u))
-        (R.step D (Agda.Builtin.Nat.suc j)
+        (R.step D (suc j)
           (R.coarse T j s)
           (R.liftControl D j u))
 
     defect-bounded : ∀ j s u → defect j s u ≤ tolerance j
 
 open DefectValuedCommutation public
-
-------------------------------------------------------------------------
--- Any exactly commuting lifted dynamics has zero defect for every reflexive
--- Nat-valued distance.
 
 exactDefect : ∀
   (T : R.InvolutiveScaleTower)
@@ -48,9 +36,9 @@ exactDefect : ∀
   (s : R.Carrier T j)
   (u : R.Control D j) → Nat
 exactDefect T D distance distance-self j s u =
-  distance (Agda.Builtin.Nat.suc j)
+  distance (suc j)
     (R.coarse T j (R.step D j s u))
-    (R.step D (Agda.Builtin.Nat.suc j)
+    (R.step D (suc j)
       (R.coarse T j s)
       (R.liftControl D j u))
 
@@ -58,8 +46,8 @@ exactDefect-zero : ∀ T D distance distance-self j s u →
   exactDefect T D distance distance-self j s u ≡ zero
 exactDefect-zero T D distance distance-self j s u
   rewrite R.coarse-step-commutes D j s u =
-  distance-self (Agda.Builtin.Nat.suc j)
-    (R.step D (Agda.Builtin.Nat.suc j)
+  distance-self (suc j)
+    (R.step D (suc j)
       (R.coarse T j s)
       (R.liftControl D j u))
 
