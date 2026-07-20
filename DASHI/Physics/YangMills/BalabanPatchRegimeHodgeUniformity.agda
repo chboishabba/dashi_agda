@@ -49,7 +49,7 @@ record PatchRegimeHodgeData (Index State Bound : Set) : Set₁ where
     cornerHodge : ∀ index state → regime index ≡ corner →
       LessEqual (scale cornerConstant (normSq index state)) (energy index state)
     nestedHodge : ∀ index state → regime index ≡ nestedRestriction →
-      LessEqual (scale nestedConstant (normSq index state)) (energy index index state)
+      LessEqual (scale nestedConstant (normSq index state)) (energy index state)
 
     regimeComplete : ∀ index →
       (regime index ≡ bulk) ⊎
