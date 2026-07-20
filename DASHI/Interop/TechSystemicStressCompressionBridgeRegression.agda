@@ -3,6 +3,7 @@ module DASHI.Interop.TechSystemicStressCompressionBridgeRegression where
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (neg; zer; pos)
 
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Promotion.TechSystemicStressScenarioBoundary as Tech
 import DASHI.Economics.SystemicCrisisSignalKernel as Crisis
 import DASHI.Economics.SystemicCrisisCompressionBridge as Compression
@@ -13,7 +14,7 @@ import DASHI.Interop.TechSystemicStressCompressionBridge as Bridge
 ------------------------------------------------------------------------
 
 negativeScenarioTritAgrees :
-  Bridge.scenarioTrit Tech.Trit.sspNegOne ≡ neg
+  Bridge.scenarioTrit SSP.sspNegOne ≡ neg
 negativeScenarioTritAgrees = refl
 
 unresolvedPhaseDoesNotInventMechanism :
