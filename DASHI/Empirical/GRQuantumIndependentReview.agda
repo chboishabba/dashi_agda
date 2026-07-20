@@ -32,9 +32,15 @@ record IndependenceDeclaration : Set where
   field
     reviewer : ReviewerIdentity
     noRepositoryAuthorship : Bool
+    noRepositoryAuthorshipIsTrue : noRepositoryAuthorship ≡ true
     noRecentDirectCollaboration : Bool
+    noRecentDirectCollaborationIsTrue :
+      noRecentDirectCollaboration ≡ true
     noUndisclosedFinancialConflict : Bool
+    noUndisclosedFinancialConflictIsTrue :
+      noUndisclosedFinancialConflict ≡ true
     noSupervisoryDependency : Bool
+    noSupervisoryDependencyIsTrue : noSupervisoryDependency ≡ true
     conflictsAndRelationships : List String
     signedDeclarationReference : String
 open IndependenceDeclaration public
