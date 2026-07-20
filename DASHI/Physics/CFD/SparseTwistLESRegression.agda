@@ -7,6 +7,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Nat.Base using (z≤n)
 
 import DASHI.Algebra.Trit as Trit
+import DASHI.Foundations.InvolutiveTernaryDynamics as Ternary
 import DASHI.Learning.GrokkingOperatorContract as Learning
 open import DASHI.Physics.CFD.SparseTwistLESOperator
 open import DASHI.Physics.CFD.SparseTwistLESBridge
@@ -82,7 +83,7 @@ identityTwistBridge = record
 singleSiteStructure : Trit.Trit → SignedSparseField ⊤
 singleSiteStructure x = record
   { value = λ _ → x
-  ; support = λ _ → DASHI.Foundations.InvolutiveTernaryDynamics.support x
+  ; support = λ _ → Ternary.support x
   ; support-is-derived = λ _ → refl
   }
 
