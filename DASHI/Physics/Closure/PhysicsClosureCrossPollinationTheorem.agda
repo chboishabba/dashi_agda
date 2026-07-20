@@ -14,8 +14,8 @@ module DASHI.Physics.Closure.PhysicsClosureCrossPollinationTheorem where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Unit using (⊤; tt)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Unit using (⊤)
 
 open import DASHI.Geometry.FiberContraction as FC
 open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
@@ -127,12 +127,13 @@ explicitLorentz31Uniqueness hypotheses =
   record
     { hypotheses = hypotheses
     ; selected = OSD.sig31
-    ; selectedIs31 = OSD.SignatureFromMeasuredProfileUnique
-        OSD.sig31
-        (ExplicitLorentz31Hypotheses.admissibleHasMeasuredProfile
-          hypotheses
+    ; selectedIs31 =
+        CAFSI.shiftSignatureForced31
           OSD.sig31
-          (ExplicitLorentz31Hypotheses.sig31Admissible hypotheses))
+          (ExplicitLorentz31Hypotheses.admissibleHasMeasuredProfile
+            hypotheses
+            OSD.sig31
+            (ExplicitLorentz31Hypotheses.sig31Admissible hypotheses))
     ; uniqueAmongAdmissible = λ s admissible →
         CAFSI.shiftSignatureForced31
           s
@@ -203,7 +204,7 @@ canonicalCrossPollinatedPhysicsAdvance =
 -- Proof-level honesty remains inherited from the Yang--Mills frontier ledger.
 continuumOSRemainsConjectural :
   YMF.claimLocallyPromotable YMF.continuumOSAxioms ≡ false
-continuumOSRemainsConjectural = YMF.massGapDoesNotSelfPromote
+continuumOSRemainsConjectural = refl
 
 physicalMassGapRemainsConjectural :
   YMF.claimLocallyPromotable YMF.positivePhysicalMassGap ≡ false
