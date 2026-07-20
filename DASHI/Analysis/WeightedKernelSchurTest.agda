@@ -204,7 +204,7 @@ exactKernelActionTransport :
   ∀ input →
   applyKernel L input ≡
   evaluateEntries A candidateEntries input
-exactKernelActionTransport A candidateEntries entriesMatch input =
+exactKernelActionTransport {L = L} A candidateEntries entriesMatch input =
   subst
     (λ entries →
       applyKernel L input ≡
