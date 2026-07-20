@@ -1,0 +1,69 @@
+name: GR quantum empirical validation
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Empirical/GRQuantum*.agda'
+      - 'DASHI/Unified/GRQuantumStrictProofTerms.agda'
+      - 'DASHI/Unified/GRQuantumContinuumAuthorities.agda'
+      - 'DASHI/Unified/GRQuantumProofTermAtlas.agda'
+      - 'scripts/validate_gr_quantum_empirical_receipt.py'
+      - 'tests/test_gr_quantum_empirical_receipt.py'
+      - 'Docs/papers/GRQuantumEmpiricalValidationProgramme.md'
+      - '.github/workflows/gr-quantum-empirical-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  receipt-validator:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Python surfaces
+        run: |
+          python -m pip install --quiet --upgrade pip pytest
+          python -m py_compile scripts/validate_gr_quantum_empirical_receipt.py
+          pytest -q tests/test_gr_quantum_empirical_receipt.py
+
+  agda-empirical-atlas:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install \
+            --yes --quiet agda-bin agda-stdlib >/tmp/agda-install.log
+          cp -a /usr/share/agda-stdlib /tmp/agda-stdlib
+          chmod -R u+w /tmp/agda-stdlib
+          agda --version
+      - name: Type-check GR quantum proof and empirical atlas
+        run: |
+          set +e
+          agda \
+            --no-libraries \
+            -i . \
+            -i /tmp/agda-stdlib \
+            DASHI/Unified/GRQuantumProofTermAtlas.agda \
+            >/tmp/gr-quantum-empirical-agda.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            echo '--- Agda diagnostic tail ---'
+            tail -n 160 /tmp/gr-quantum-empirical-agda.log
+            exit "$status"
+          fi
+          cat /tmp/gr-quantum-empirical-agda.log
+      - name: Upload Agda diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gr-quantum-empirical-agda-diagnostic
+          path: /tmp/gr-quantum-empirical-agda.log
+          if-no-files-found: ignore

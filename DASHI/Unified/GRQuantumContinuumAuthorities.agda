@@ -5,7 +5,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 open import DASHI.Unified.GRQuantumProofTerms
 open import DASHI.Unified.GRQuantumStrictProofTerms
-import DASHI.Empirical.GRQuantumCorrespondenceBoundary as Empirical
+import DASHI.Empirical.GRQuantumEmpiricalValidationProgramme as Empirical
 
 ------------------------------------------------------------------------
 -- Minimal strict authority cutset for terminal assembly.
@@ -41,7 +41,8 @@ record GRQuantumContinuumAuthorityCutset : Set₁ where
     continuumUVSpectrumClosed : UVSpectralClosed continuumUVSpectrum
 
     sharedSubstrateRecovery : SharedSubstrateRecovery
-    physicalCorrespondence : Empirical.PhysicalGRQuantumCorrespondence
+    physicalCorrespondence :
+      Empirical.StrictPhysicalGRQuantumCorrespondence
 open GRQuantumContinuumAuthorityCutset public
 
 ------------------------------------------------------------------------

@@ -44,28 +44,30 @@ open CausalPoset public
 
 record ChainAntichainGeometry {ℓ : Level} (P : CausalPoset {ℓ}) :
   Set (lsuc ℓ) where
-  open CausalPoset P
   field
     Chain :
-      Event → Event → Set ℓ
+      CausalPoset.Event P → CausalPoset.Event P → Set ℓ
 
     Antichain :
       Set ℓ
 
     separates :
-      Antichain → Event → Event → Set ℓ
+      Antichain →
+      CausalPoset.Event P →
+      CausalPoset.Event P →
+      Set ℓ
 
     chainDepth :
-      Event → Event → Nat
+      CausalPoset.Event P → CausalPoset.Event P → Nat
 
     antichainWidth :
-      Event → Event → Nat
+      CausalPoset.Event P → CausalPoset.Event P → Nat
 
     chainDepthCountsMaximalCausalLength :
-      Event → Event → Bool
+      CausalPoset.Event P → CausalPoset.Event P → Bool
 
     antichainWidthCountsMinimalSeparator :
-      Event → Event → Bool
+      CausalPoset.Event P → CausalPoset.Event P → Bool
 
 open ChainAntichainGeometry public
 
@@ -105,7 +107,6 @@ open ContractiveDecimation public
 
 record OrthogonalMultiscaleQuadraticClosure {ℓ : Level}
   (D : ContractiveDecimation {ℓ}) : Set (lsuc ℓ) where
-  open ContractiveDecimation D
   field
     Scalar :
       Set ℓ
@@ -114,13 +115,13 @@ record OrthogonalMultiscaleQuadraticClosure {ℓ : Level}
       Set ℓ
 
     coarse :
-      State → State
+      ContractiveDecimation.State D → ContractiveDecimation.State D
 
     detail :
-      State → Detail
+      ContractiveDecimation.State D → Detail
 
     defect :
-      State → Scalar
+      ContractiveDecimation.State D → Scalar
 
     detailDefect :
       Detail → Scalar
@@ -129,10 +130,10 @@ record OrthogonalMultiscaleQuadraticClosure {ℓ : Level}
       Scalar → Scalar → Scalar
 
     recognisableSplit :
-      State → Bool
+      ContractiveDecimation.State D → Bool
 
     projectionAnnihilatesDetail :
-      State → Bool
+      ContractiveDecimation.State D → Bool
 
     pythagoreanAdditivity :
       ∀ s → defect s ≡ add (defect (coarse s)) (detailDefect (detail s))
@@ -144,7 +145,7 @@ record OrthogonalMultiscaleQuadraticClosure {ℓ : Level}
       Bool
 
     decimationMonotone :
-      State → Bool
+      ContractiveDecimation.State D → Bool
 
 open OrthogonalMultiscaleQuadraticClosure public
 
@@ -182,20 +183,18 @@ open LorentzSignature31 public
 record IntervalSurface {ℓ : Level}
   (P : CausalPoset {ℓ})
   (G : ChainAntichainGeometry P) : Set (lsuc ℓ) where
-  open CausalPoset P
-  open ChainAntichainGeometry G
   field
     Interval :
-      Event → Event → Set ℓ
+      CausalPoset.Event P → CausalPoset.Event P → Set ℓ
 
     lightCone :
-      Event → Event → Bool
+      CausalPoset.Event P → CausalPoset.Event P → Bool
 
     intervalUsesChainDepthAndAntichainWidth :
-      Event → Event → Bool
+      CausalPoset.Event P → CausalPoset.Event P → Bool
 
     nullExactlyFiniteSpeedBoundary :
-      Event → Event → Bool
+      CausalPoset.Event P → CausalPoset.Event P → Bool
 
     intervalUniqueUnderClosureAxioms :
       Bool

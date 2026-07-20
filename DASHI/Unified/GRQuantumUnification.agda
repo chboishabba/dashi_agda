@@ -64,22 +64,23 @@ open WaveLift public
 
 record CanonicalCommutationClosure {ℓ : Level}
   (W : WaveLift {ℓ}) : Set (lsuc ℓ) where
-  open WaveLift W
   field
     configuration :
-      Operator
+      WaveLift.Operator W
 
     momentum :
-      Operator
+      WaveLift.Operator W
 
     identity :
-      Operator
+      WaveLift.Operator W
 
     actionGrain :
-      Scalar
+      WaveLift.Scalar W
 
     commutator :
-      Operator → Operator → Operator
+      WaveLift.Operator W →
+      WaveLift.Operator W →
+      WaveLift.Operator W
 
     ccr :
       Bool
@@ -173,13 +174,12 @@ open MetricCurvatureClosure public
 
 record StressEnergyClosure {ℓ : Level}
   (M : MetricCurvatureClosure {ℓ}) : Set (lsuc ℓ) where
-  open MetricCurvatureClosure M
   field
     MatterState :
       Set ℓ
 
     stressEnergy :
-      MatterState → SymmetricTwoTensor
+      MatterState → MetricCurvatureClosure.SymmetricTwoTensor M
 
     covariantlyConserved :
       MatterState → Bool
@@ -198,14 +198,14 @@ open StressEnergyClosure public
 record EinsteinEquationClosure {ℓ : Level}
   (M : MetricCurvatureClosure {ℓ})
   (T : StressEnergyClosure M) : Set (lsuc ℓ) where
-  open MetricCurvatureClosure M
-  open StressEnergyClosure T
   field
     gravitationalConstant :
-      Scalar
+      MetricCurvatureClosure.Scalar M
 
     fieldEquation :
-      Metric → MatterState → Bool
+      MetricCurvatureClosure.Metric M →
+      StressEnergyClosure.MatterState T →
+      Bool
 
     equationIsEinsteinTensorEqualsUniversalStressEnergy :
       Bool
@@ -223,7 +223,6 @@ open EinsteinEquationClosure public
 
 record ConstraintAlgebraClosure {ℓ : Level}
   (W : WaveLift {ℓ}) : Set (lsuc ℓ) where
-  open WaveLift W
   field
     Lapse :
       Set ℓ
@@ -232,13 +231,15 @@ record ConstraintAlgebraClosure {ℓ : Level}
       Set ℓ
 
     HamiltonianConstraint :
-      Lapse → Operator
+      Lapse → WaveLift.Operator W
 
     MomentumConstraint :
-      Shift → Operator
+      Shift → WaveLift.Operator W
 
     bracket :
-      Operator → Operator → Operator
+      WaveLift.Operator W →
+      WaveLift.Operator W →
+      WaveLift.Operator W
 
     hamiltonianHamiltonianClosesIntoMomentum :
       Bool
@@ -265,7 +266,6 @@ open ConstraintAlgebraClosure public
 
 record UVFinitenessClosure {ℓ : Level}
   (W : WaveLift {ℓ}) : Set (lsuc ℓ) where
-  open WaveLift W
   field
     Region :
       Set ℓ
@@ -308,23 +308,21 @@ open UVFinitenessClosure public
 record SpinTwoQuantumGeometry {ℓ : Level}
   (W : WaveLift {ℓ})
   (M : MetricCurvatureClosure {ℓ}) : Set (lsuc ℓ) where
-  open WaveLift W
-  open MetricCurvatureClosure M
   field
     MetricQuantum :
       Set ℓ
 
     metricOperator :
-      Operator
+      WaveLift.Operator W
 
     gravitonState :
       Set ℓ
 
     metricQuantumToHilbertState :
-      MetricQuantum → HilbertState
+      MetricQuantum → WaveLift.HilbertState W
 
     gravitonToHilbertState :
-      gravitonState → HilbertState
+      gravitonState → WaveLift.HilbertState W
 
     gravitonIsMasslessSpinTwo :
       Bool
@@ -398,13 +396,18 @@ record TerminalUnificationWitness : Setω where
       GRQuantumUnificationClosure
 
     causalLorentzClosed :
-      allClosureTheoremsDischarged (causalLorentz closure) ≡ true
+      CausalOrderLorentzClosure.allClosureTheoremsDischarged
+        (GRQuantumUnificationClosure.causalLorentz closure)
+      ≡ true
 
     cliffordSpinClosed :
-      allCliffordSpinTheoremsDischarged (cliffordSpin closure) ≡ true
+      CliffordSpinClosure.allCliffordSpinTheoremsDischarged
+        (GRQuantumUnificationClosure.cliffordSpin closure)
+      ≡ true
 
     terminalTheoremsClosed :
-      allTerminalTheoremsDischarged closure ≡ true
+      GRQuantumUnificationClosure.allTerminalTheoremsDischarged closure
+      ≡ true
 
 open TerminalUnificationWitness public
 

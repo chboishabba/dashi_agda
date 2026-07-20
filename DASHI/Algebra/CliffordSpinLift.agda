@@ -23,7 +23,7 @@ open import DASHI.Foundations.CausalOrderLorentzClosure
 -- Support projection is not presented as the origin of Spin.  It is only a
 -- quotient/readout after the quadratic and Clifford structures are supplied.
 
-record QuadraticSpace {ℓ : Level} : Set (lsuc ℓ) where
+record QuadraticSpace {ℓ : Level} : Setω where
   field
     Scalar :
       Set ℓ
@@ -89,20 +89,20 @@ record AssociativeUnitalAlgebra {ℓ : Level} : Set (lsuc ℓ) where
 open AssociativeUnitalAlgebra public
 
 record CliffordAlgebra {ℓ : Level} (V : QuadraticSpace {ℓ}) :
-  Set (lsuc ℓ) where
-  open QuadraticSpace V
+  Setω where
   field
     algebra :
       AssociativeUnitalAlgebra {ℓ}
 
     injectVector :
-      Vector → AssociativeUnitalAlgebra.Carrier algebra
+      QuadraticSpace.Vector V →
+      AssociativeUnitalAlgebra.Carrier algebra
 
     cliffordRelation :
-      Vector → Bool
+      QuadraticSpace.Vector V → Bool
 
     polarizedCliffordRelation :
-      Vector → Vector → Bool
+      QuadraticSpace.Vector V → QuadraticSpace.Vector V → Bool
 
     universalTarget :
       AssociativeUnitalAlgebra {ℓ} → Set ℓ
@@ -123,7 +123,7 @@ open CliffordAlgebra public
 
 record PinSpinUnits {ℓ : Level}
   (V : QuadraticSpace {ℓ})
-  (Cl : CliffordAlgebra V) : Set (lsuc ℓ) where
+  (Cl : CliffordAlgebra V) : Setω where
   field
     UnitVector :
       Set ℓ
@@ -154,15 +154,13 @@ open PinSpinUnits public
 record OrthogonalDoubleCover {ℓ : Level}
   (V : QuadraticSpace {ℓ})
   (Cl : CliffordAlgebra V)
-  (U : PinSpinUnits V Cl) : Set (lsuc ℓ) where
-  open QuadraticSpace V
-  open PinSpinUnits U
+  (U : PinSpinUnits V Cl) : Setω where
   field
     SO :
       Set ℓ
 
     rho :
-      Spin → SO
+      PinSpinUnits.Spin U → SO
 
     rhoHomomorphism :
       Bool
@@ -171,10 +169,10 @@ record OrthogonalDoubleCover {ℓ : Level}
       Bool
 
     kernelElementPositive :
-      Spin
+      PinSpinUnits.Spin U
 
     kernelElementNegative :
-      Spin
+      PinSpinUnits.Spin U
 
     kernelExactlyPlusMinusOne :
       Bool
