@@ -1,7 +1,7 @@
 # Concrete flat GR / quantum model tranche
 
 This tranche advances the conditional closure ladder from Boolean/prose obligations
-to small proposition-level models.  It proves that the interfaces are jointly
+to small proposition-level models. It proves that the interfaces are jointly
 inhabitable and makes the forbidden shortcuts visible in the types.
 
 It does **not** derive physical spacetime, non-flat gravity, interacting quantum
@@ -23,8 +23,23 @@ everything.
 - torsion-free, flat-metric-compatible, and pointwise-zero uniqueness receipts.
 
 This is a finite flat model and a producer for the existing conditional
-`LorentzianMetricReceipt` / `LeviCivitaReceipt` interfaces.  It does not select a
+`LorentzianMetricReceipt` / `LeviCivitaReceipt` interfaces. It does not select a
 metric from valuation or construct a smooth manifold.
+
+### 1.1 Valuation/conformal underdetermination
+
+`DASHI.Geometry.ValuationConformalMetricCandidate` makes the missing metric
+selection step constructive rather than merely verbal:
+
+- a valuation profile supplies a positive conformal-depth tag only after a
+  reference metric table is supplied;
+- one uniform saturated valuation profile is consumed by two distinct `1 + 3`
+  reference tables;
+- the two candidates disagree on the time-axis diagonal entry while sharing the
+  same valuation profile.
+
+Therefore a scalar valuation profile does not by itself select causal direction or
+a Lorentzian reference metric. Extra admissibility/representation data is required.
 
 ## 2. Symbolic Einstein--Hilbert normal form
 
@@ -60,7 +75,7 @@ defect energy -> T_mu_nu
 ```
 
 The concrete vacuum model supplies zero stress, symmetry, and a flat zero-source
-Bianchi/conservation receipt.  Exact-once first-witness attribution is retained as
+Bianchi/conservation receipt. Exact-once first-witness attribution is retained as
 bookkeeping, but it is not promoted into stress-energy.
 
 ## 4. Mass separation
@@ -74,7 +89,7 @@ The module defines separate types for:
 
 Extraction of any mass from a defect requires a `MassIdentificationWitness`
 carrying a unit convention, equality receipts, an equivalence-principle witness,
-and a Newtonian-limit witness.  The only canonical inhabitant is the zero-vacuum
+and a Newtonian-limit witness. The only canonical inhabitant is the zero-vacuum
 normalization.
 
 Consequently, ionization/MDL-style residue energy remains unidentified with
@@ -90,9 +105,9 @@ history model:
 - an amplitude map using the existing `TriTruth` composition law;
 - reflexive gauge equivalence.
 
-It packages this with the flat Einstein-vacuum and zero-source receipts.  This
+It packages this with the flat Einstein-vacuum and zero-source receipts. This
 proves joint inhabitation of the interfaces, not quantization of the gravitational
-field.  Unification and theory-of-everything promotion remain false.
+field. Unification and theory-of-everything promotion remain false.
 
 ## 6. Regression surface
 
@@ -101,6 +116,7 @@ for:
 
 - `1 + 3` signature and unique time direction;
 - diagonal nondegeneracy;
+- valuation/metric underdetermination;
 - torsion freedom and flat compatibility;
 - Einstein--Hilbert symbolic variation;
 - flat vacuum Einstein tensor;
@@ -114,7 +130,8 @@ for:
 The next nontrivial producers must address, without substituting labels for proofs:
 
 1. a smooth or controlled continuum construction from the kernel/lift tower;
-2. selection of a Lorentzian metric from valuation and admissibility data;
+2. a physically justified selector that augments valuation enough to determine a
+   Lorentzian metric and causal structure;
 3. a general Levi-Civita existence/uniqueness development;
 4. internal Lovelock classification or a precisely imported theorem boundary;
 5. actual metric variation and boundary calculus;
