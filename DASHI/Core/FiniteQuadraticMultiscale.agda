@@ -8,12 +8,6 @@ open import DASHI.Unified.GRQuantumProofTerms
 
 ------------------------------------------------------------------------
 -- A small exact proof pattern for multiscale energy uniqueness.
---
--- The carrier has one coarse basis contribution, one orthogonal detail
--- contribution, and their combined state.  Normalisation fixes each unit basis
--- energy to one; no-leakage fixes the combined energy to their sum.  On this
--- finite carrier those laws uniquely determine the canonical quadratic table.
-
 
 data FiniteMultiscaleState : Set where
   zeroState : FiniteMultiscaleState
@@ -53,7 +47,7 @@ finiteQuadraticEnergyUnique :
   SatisfiesFiniteMultiscaleLaws energy →
   energy ≡ canonicalQuadraticEnergy
 finiteQuadraticEnergyUnique
-  (energy-table zero coarse detail combined)
+  (energy-table zeroValue coarseValue detailValue combinedValue)
   (finite-multiscale-laws zero-is-zero coarse-is-one detail-is-one no-leakage)
   rewrite zero-is-zero
         | coarse-is-one
