@@ -1,22 +1,19 @@
 module DASHI.Physics.YangMills.BalabanSU2CriticalMapContraction where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
-_≢_ : ∀ {a} {A : Set a} → A → A → Set a
+_≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
 
 record FiniteCriticalContraction
-  {s d : Level}
-  (State : Set s)
-  (Distance : Set d) : Set (s ⊔ lsuc d) where
+  (State Distance : Set) : Set₁ where
   field
     step : State → State
     distance : State → State → Distance
-    StrictlySmaller : Distance → Distance → Set d
+    StrictlySmaller : Distance → Distance → Set
     strictIrreflexive : ∀ value → StrictlySmaller value value → ⊥
     distinctOrEqual : ∀ left right → left ≡ right ⊎ left ≢ right
     fixedPoint : State
@@ -30,7 +27,7 @@ record FiniteCriticalContraction
 open FiniteCriticalContraction public
 
 fixedPointUnique :
-  ∀ {s d} {State : Set s} {Distance : Set d}
+  ∀ {State Distance : Set}
   (bundle : FiniteCriticalContraction State Distance) →
   ∀ state → step bundle state ≡ state → state ≡ fixedPoint bundle
 fixedPointUnique bundle state stateFixed
@@ -52,7 +49,7 @@ fixedPointUnique bundle state stateFixed
     ⊥-elim ()
 
     substSmaller :
-      ∀ {s d} {State : Set s} {Distance : Set d}
+      ∀ {State Distance : Set}
       (dataSet : FiniteCriticalContraction State Distance) →
       ∀ {left right target} →
       left ≡ target →
