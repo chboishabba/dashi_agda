@@ -6,6 +6,13 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+-- Local product, avoiding a dependency on a larger product API.
+record _×_ (A B : Set) : Set where
+  constructor _,_
+  field
+    first : A
+    second : B
+
 ------------------------------------------------------------------------
 -- Concrete sequence algebra and a principal-ultrapower regression.
 
@@ -92,13 +99,6 @@ record FreeUltrafilterAuthority : Set₂ where
       (n : Nat) →
       Large (λ m → m ≡ n) →
       ⊥
-
--- Local product, avoiding a dependency on a larger product API.
-record _×_ (A B : Set) : Set where
-  constructor _,_
-  field
-    first : A
-    second : B
 
 record UltrapowerQuotientAuthority
     (U : FreeUltrafilterAuthority)
