@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.ContinuumEinsteinMatterSolutionBoundary where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 ------------------------------------------------------------------------
 -- Continuum Einstein--matter solution boundary.
@@ -58,7 +59,7 @@ matterConservationFromEinsteinAndBianchi :
   (p : Point S) → (b : Index S) →
   DivergenceStress S (matter solution) (metric solution) p b ≡ zero S
 matterConservationFromEinsteinAndBianchi S solution p b =
-  Agda.Builtin.Equality.trans
+  trans
     (divergenceRespectsEinsteinEquality solution p b)
     (contractedBianchi solution p b)
 
