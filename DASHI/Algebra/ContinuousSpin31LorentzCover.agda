@@ -2,6 +2,7 @@ module DASHI.Algebra.ContinuousSpin31LorentzCover where
 
 open import Agda.Builtin.Equality using (_≡_)
 
+import DASHI.Unified.GRQuantumProofTerms as Legacy
 import DASHI.Unified.GRQuantumStrictProofTerms as Strict
 
 ------------------------------------------------------------------------
@@ -98,11 +99,11 @@ record ContinuousSpin31LorentzCover : Set₁ where
 
     algebraicSurface : Strict.StrictSpinDoubleCoverProof
     spinCarrierAgreement :
-      Strict.SpinDoubleCoverProof.Spin
+      Legacy.SpinDoubleCoverProof.Spin
         (Strict.StrictSpinDoubleCoverProof.base algebraicSurface)
       ≡ Carrier Spin31
     lorentzCarrierAgreement :
-      Strict.SpinDoubleCoverProof.SO
+      Legacy.SpinDoubleCoverProof.SO
         (Strict.StrictSpinDoubleCoverProof.base algebraicSurface)
       ≡ Carrier SOPlus31
     algebraicAndContinuousMapsAgree : Set
