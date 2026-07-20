@@ -17,11 +17,13 @@ data Path {Vertex : Set}
 
 infixr 25 _▷_
 
+-- Endpoints are explicit.  This keeps arbitrary dependent edge families from
+-- leaving endpoint metavariables when a field is transported or composed.
 GaugeField :
   ∀ {Vertex G : Set} →
   (Edge : Vertex → Vertex → Set) → Set
-GaugeField {G = G} Edge =
-  ∀ {x y} → Edge x y → G
+GaugeField {Vertex = Vertex} {G = G} Edge =
+  ∀ x y → Edge x y → G
 
 GaugeTransformation : Set → Set → Set
 GaugeTransformation Vertex G = Vertex → G
@@ -33,9 +35,9 @@ gaugeAction :
   GaugeTransformation Vertex G →
   GaugeField Edge →
   GaugeField Edge
-gaugeAction H gamma U {x} {y} edge =
+gaugeAction H gamma U x y edge =
   multiply H
-    (multiply H (gamma x) (U edge))
+    (multiply H (gamma x) (U x y edge))
     (inverse H (gamma y))
 
 holonomy :
@@ -47,8 +49,8 @@ holonomy :
   Path Edge x y →
   G
 holonomy H U empty = identity H
-holonomy H U (edge ▷ rest) =
-  multiply H (U edge) (holonomy H U rest)
+holonomy H U (_▷_ {x = x} {y = y} edge rest) =
+  multiply H (U x y edge) (holonomy H U rest)
 
 ------------------------------------------------------------------------
 -- Gauge covariance is proved by exact cancellation at each internal vertex.
@@ -74,14 +76,14 @@ holonomyGaugeCovariant {x = x} H gamma U empty =
         (identityRight H (gamma x)))
       (inverseRight H (gamma x)))
 holonomyGaugeCovariant {x = x} {y = z} H gamma U
-  (_▷_ {y = y} edge rest) =
+  (_▷_ {x = x} {y = y} {z = z} edge rest) =
   trans
     (cong
-      (multiply H (gaugeAction H gamma U edge))
+      (multiply H (gaugeAction H gamma U x y edge))
       (holonomyGaugeCovariant H gamma U rest))
     (gaugeTelescope H
       (gamma x) (gamma y) (gamma z)
-      (U edge) (holonomy H U rest))
+      (U x y edge) (holonomy H U rest))
 
 ------------------------------------------------------------------------
 -- Class functions therefore give gauge-invariant closed-loop observables.
@@ -121,10 +123,10 @@ loopObservableGaugeInvariant :
   loopObservable H value (gaugeAction H gamma U) path
   ≡
   loopObservable H value U path
-loopObservableGaugeInvariant H value classValue gamma U path =
+loopObservableGaugeInvariant {x = x} H value classValue gamma U path =
   trans
     (cong value (holonomyGaugeCovariant H gamma U path))
-    (conjugationInvariant classValue _ _)
+    (conjugationInvariant classValue (gamma x) (holonomy H U path))
 
 ------------------------------------------------------------------------
 -- A Wilson plaquette term is precisely a class-function loop observable.
