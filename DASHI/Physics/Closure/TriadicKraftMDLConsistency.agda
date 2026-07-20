@@ -9,7 +9,6 @@ open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat using (_≤_; _<_; _+_; z≤n; s≤s)
 open import Data.Nat.Properties using (<⇒≱)
 open import Data.Rational using (ℚ; 1ℚ; _+_; _/_)
-open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Unit using (⊤; tt)
 open import Relation.Binary.PropositionalEquality using (cong; _≢_)
 open import Relation.Nullary using (Dec; yes; no)
@@ -117,7 +116,7 @@ kraftSum =
   + kraftWeight MDL.ellipticModuli)))
 
 kraftEquality : kraftSum ≡ 1ℚ
-kraftEquality = solve []
+kraftEquality = refl
 
 PrefixFreeCode : Set
 PrefixFreeCode =
