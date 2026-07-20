@@ -2,6 +2,7 @@
 module DASHI.Core.KernelEigenMDLBridgeRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (suc)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
 open import DASHI.Algebra.TritSupportSignFactor
