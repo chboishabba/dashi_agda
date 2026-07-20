@@ -2,7 +2,6 @@ module DASHI.Physics.Closure.NSPairIncidenceKernelProgram where
 
 open import DASHI.Analysis.WeightedKernelSchurTest public
 open import DASHI.Analysis.FiniteWeightedKernelSums public
-open import DASHI.Analysis.FiniteWeightedKernelTransport public
 open import DASHI.Physics.Closure.NSIntegerFourierLattice public
 open import DASHI.Physics.Closure.NSWall1CanonicalModePacket public
 open import DASHI.Physics.Closure.NSWall1ExactEvaluationCarrier public
@@ -12,9 +11,6 @@ open import DASHI.Physics.Closure.NSWall1CanonicalPolarizations public
 open import DASHI.Physics.Closure.NSWall1RationalScalarInstance public
 open import DASHI.Physics.Closure.NSWall1RationalPolarizationProofs public
 open import DASHI.Physics.Closure.NSWall1CanonicalFiniteSchur public
-open import DASHI.Physics.Closure.NSWall1CanonicalPairIncidenceSchur public
-open import DASHI.Physics.Closure.NSWall1CanonicalFourierRestriction public
-open import DASHI.Physics.Closure.NSWall1CanonicalUniformRestrictionSchur public
 open import DASHI.Physics.Closure.NSWall1CanonicalResolventGap public
 open import DASHI.Physics.Closure.NSDivergenceFreePolarizationBasis public
 open import DASHI.Physics.Closure.NSPairIncidenceKernel public
@@ -25,9 +21,3 @@ open import DASHI.Physics.Closure.NSWall1UniformWeightedSchur public
 open import DASHI.Physics.Closure.NSPairIncidenceSchurBridge public
 open import DASHI.Physics.Closure.NSWeightedShellTransferBridge public
 open import DASHI.Physics.Closure.NSFactorizedSchurFrameGap public
-open import DASHI.Physics.Closure.NSCompactGammaOffPacketWall1PairIncidenceBridge public
-open import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization public
-open import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge public
-open import DASHI.Physics.Closure.NSCompactGammaOffPacketDifferentialModulusBridge public
-open import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge public
-open import DASHI.Physics.Closure.NSCompactGammaTimeIntegrabilityBridge public
