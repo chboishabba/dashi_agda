@@ -6,6 +6,10 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 ------------------------------------------------------------------------
 -- Proposition-level replacement for the earlier Boolean closure manifest.
+--
+-- Major theorem-record projections intentionally remain qualified.  Concrete
+-- models may therefore define natural names such as Event, Metric, Operator,
+-- rho, plusOne, or spinIdentity without colliding with generic interfaces.
 
 infixr 4 _⊎_
 data _⊎_ (A B : Set) : Set where
@@ -38,7 +42,6 @@ record QuadraticUniquenessProof : Set₁ where
       (energy : EnergyFunctional) →
       SatisfiesMultiscaleLaws energy →
       energy ≡ canonicalQuadraticDefect
-open QuadraticUniquenessProof public
 
 ------------------------------------------------------------------------
 -- 2. Causal order / chain-antichain / Lorentz closure.
@@ -88,7 +91,6 @@ record ChainAntichainLorentzClosed
         surface a b nullReceipt
     signatureUniqueProof :
       ChainAntichainLorentzProof.signatureUnique surface
-open ChainAntichainLorentzClosed public
 
 ------------------------------------------------------------------------
 -- 3. Constructive Clifford algebra and Spin double cover.
@@ -120,7 +122,6 @@ record CliffordUniversalProof : Set₁ where
       (generator : AdmissibleGeneratorMap target) →
       (left right : FactorMap target) →
       left ≡ right
-open CliffordUniversalProof public
 
 record TwoElementFiber {A B : Set} (map : A → B) (target : B) : Set where
   field
@@ -132,7 +133,6 @@ record TwoElementFiber {A B : Set} (map : A → B) (target : B) : Set where
       (candidate : A) →
       map candidate ≡ target →
       (candidate ≡ first) ⊎ (candidate ≡ second)
-open TwoElementFiber public
 
 record SpinDoubleCoverProof : Set₁ where
   field
@@ -159,7 +159,6 @@ record SpinDoubleCoverProof : Set₁ where
 
     fiberIsTwoElement :
       (rotation : SO) → TwoElementFiber rho rotation
-open SpinDoubleCoverProof public
 
 ------------------------------------------------------------------------
 -- 4. Wave lift, finite tree algebra, continuum CCR, and Born measure.
@@ -191,7 +190,6 @@ record WaveLiftCCRProof : Set₁ where
       (state : HilbertState) →
       bornMeasure state ≡ normSquared state
     pythagoreanProbabilityAdditivity : OrthogonalFamily → Set
-open WaveLiftCCRProof public
 
 record WaveLiftCCRClosed (surface : WaveLiftCCRProof) : Set where
   field
@@ -204,7 +202,6 @@ record WaveLiftCCRClosed (surface : WaveLiftCCRProof) : Set where
     pythagoreanProbabilityAdditivityProof :
       (family : WaveLiftCCRProof.OrthogonalFamily surface) →
       WaveLiftCCRProof.pythagoreanProbabilityAdditivity surface family
-open WaveLiftCCRClosed public
 
 ------------------------------------------------------------------------
 -- 5. Full tensorial GR bridge.
@@ -234,7 +231,6 @@ record EinsteinTensorProof : Set₁ where
     variationalSourceEquation : Set
     universalSpinTwoSelfCoupling : Set
     backgroundIndependence : Set
-open EinsteinTensorProof public
 
 record EinsteinTensorClosed (surface : EinsteinTensorProof) : Set where
   field
@@ -250,7 +246,6 @@ record EinsteinTensorClosed (surface : EinsteinTensorProof) : Set where
       EinsteinTensorProof.universalSpinTwoSelfCoupling surface
     backgroundIndependenceProof :
       EinsteinTensorProof.backgroundIndependence surface
-open EinsteinTensorClosed public
 
 ------------------------------------------------------------------------
 -- 6. Hypersurface-deformation / Dirac constraint algebra.
@@ -270,7 +265,6 @@ record ConstraintAlgebraProof : Set₁ where
     metricDependentStructureFunctions : Set
     decimationRelabellingEquivariance : Set
     anomalyFreeQuantumRepresentation : Set
-open ConstraintAlgebraProof public
 
 record ConstraintAlgebraClosed (surface : ConstraintAlgebraProof) : Set where
   field
@@ -286,7 +280,6 @@ record ConstraintAlgebraClosed (surface : ConstraintAlgebraProof) : Set where
       ConstraintAlgebraProof.decimationRelabellingEquivariance surface
     anomalyFreeQuantumRepresentationProof :
       ConstraintAlgebraProof.anomalyFreeQuantumRepresentation surface
-open ConstraintAlgebraClosed public
 
 ------------------------------------------------------------------------
 -- 7. UV spectral finiteness and low-energy recovery.
@@ -305,7 +298,6 @@ record UVSpectralProof : Set₁ where
     renormalizationPreservesBound : Set
     lowEnergyLimitExists : Set
     lowEnergyLimitMatchesRequiredPhysics : Set
-open UVSpectralProof public
 
 record UVSpectralClosed (surface : UVSpectralProof) : Set where
   field
@@ -326,7 +318,6 @@ record UVSpectralClosed (surface : UVSpectralProof) : Set where
       UVSpectralProof.lowEnergyLimitExists surface
     lowEnergyLimitMatchesRequiredPhysicsProof :
       UVSpectralProof.lowEnergyLimitMatchesRequiredPhysics surface
-open UVSpectralClosed public
 
 ------------------------------------------------------------------------
 -- Terminal proof bundle.  No canonical inhabitant is defined here.
@@ -362,7 +353,6 @@ record TerminalGRQuantumProof : Set₁ where
       generalRelativisticReadingRecovered
     empiricalCorrespondenceSupplied : Set
     empiricalCorrespondenceSuppliedProof : empiricalCorrespondenceSupplied
-open TerminalGRQuantumProof public
 
 terminalProofHasNoDefault : TerminalGRQuantumProof → ⊤
 terminalProofHasNoDefault _ = tt
