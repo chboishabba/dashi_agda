@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketWall1PairIncidenceBridge where
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lzero; _⊔_; lsuc)
 
 open import DASHI.Analysis.WeightedKernelSchurTest
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -13,13 +13,6 @@ open import DASHI.Physics.Closure.NSCompactGammaOffPacketPairIncidenceKernelBrid
 
 ------------------------------------------------------------------------
 -- Wall-1 specialization of the compact-Gamma pair-incidence bridge.
---
--- The generic bridge asks for a concrete-majorant-kernel/pair-incidence match.
--- For the repository's Wall-1 Fourier carrier this obligation is already
--- discharged definitionally by `fourierKernelIsPairIncidence`.  The remaining
--- compact-Gamma-specific representation leaf is the analytic inequality that
--- majorizes the concrete near derivative by the output energy of the Wall-1
--- Biot--Savart pair kernel.
 ------------------------------------------------------------------------
 
 wall1ConcreteKernelMatch :
@@ -40,7 +33,7 @@ record Wall1NearMajorizationInputs
     (W : Wall1FourierShellData Vector (Scalar A))
     (L : WeightedSchurLaws
       (asWeightedKernelData (wall1PairIncidenceData W))) :
-    Set (lsuc v) where
+    Set (lsuc (v ⊔ lsuc lzero)) where
   field
     wall1ExactKernelAction :
       ExactKernelAction
@@ -80,9 +73,9 @@ wall1NearPairIncidenceMajorization A W L I = record
   }
 
 ------------------------------------------------------------------------
--- Full Wall-1 evidence bundle.  The finite/uniform Schur realization remains
--- explicit because its row/column inequalities are the next analytic theorem
--- leaf; the Fourier pair-incidence identity itself is no longer an obligation.
+-- Full Wall-1 evidence bundle.  `Scalar A : Set₁`, so a Schur realization over
+-- it lives in Set₂ even when the vector carrier itself is level zero.  The old
+-- `Set (lsuc v)` annotation hid that level and failed under the pinned checker.
 ------------------------------------------------------------------------
 
 record Wall1OffPacketPairIncidenceEvidence
@@ -92,7 +85,7 @@ record Wall1OffPacketPairIncidenceEvidence
     (W : Wall1FourierShellData Vector (Scalar A))
     (L : WeightedSchurLaws
       (asWeightedKernelData (wall1PairIncidenceData W))) :
-    Set (lsuc v) where
+    Set (lsuc (v ⊔ lsuc lzero)) where
   field
     wall1SchurRealization :
       PairIncidenceSchurRealization
