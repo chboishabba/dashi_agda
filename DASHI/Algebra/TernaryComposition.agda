@@ -1,7 +1,6 @@
 module DASHI.Algebra.TernaryComposition where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Sigma using (Σ; _,_)
 
 import DASHI.Algebra.Trit as T
 
@@ -70,16 +69,14 @@ opposites-cancel T.pos = refl
 self-subtracts : ∀ x → x ⊖ x ≡ T.zer
 self-subtracts = opposites-cancel
 
--- Saturation is not associative.  This witness keeps the local thresholded
--- operation distinct from exact balanced arithmetic with carry.
-nonAssociativeWitness :
-  (T.neg ⊕ T.neg) ⊕ T.pos ≡ T.zer ×
-  T.neg ⊕ (T.neg ⊕ T.pos) ≡ T.neg
-nonAssociativeWitness = refl , refl
-  where
-    infixr 4 _,_
-    data _×_ (A B : Set) : Set where
-      _,_ : A → B → A × B
+record NonAssociativeWitness : Set where
+  constructor witness
+  field
+    leftValue : (T.neg ⊕ T.neg) ⊕ T.pos ≡ T.zer
+    rightValue : T.neg ⊕ (T.neg ⊕ T.pos) ≡ T.neg
+
+nonAssociativeWitness : NonAssociativeWitness
+nonAssociativeWitness = witness refl refl
 
 ------------------------------------------------------------------------
 -- Exact balanced one-column addition with a carry trit.
