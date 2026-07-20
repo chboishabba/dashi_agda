@@ -22,7 +22,7 @@ record GaugeFixingContraction
     transform : Gauge → Field → Field
     GaugeCondition : Field → Set
 
-    field : Field
+    inputField : Field
     solver : Gauge → Gauge
     contraction : FiniteCriticalContraction Gauge Distance
 
@@ -30,18 +30,19 @@ record GaugeFixingContraction
       FiniteCriticalContraction.step contraction gauge ≡ solver gauge
 
     fixedGaugeIsNormalized : normalizedGauge (fixedPoint contraction)
-    fixedGaugeFixesField : GaugeCondition (transform (fixedPoint contraction) field)
+    fixedGaugeFixesField :
+      GaugeCondition (transform (fixedPoint contraction) inputField)
 
 open GaugeFixingContraction public
 
 gaugeFixingGaugeUnique :
   ∀ {Field Gauge Distance : Set} →
-  (data : GaugeFixingContraction Field Gauge Distance) →
+  (bundle : GaugeFixingContraction Field Gauge Distance) →
   ∀ gauge →
-  solver data gauge ≡ gauge →
-  gauge ≡ fixedPoint (contraction data)
-gaugeFixingGaugeUnique data gauge solverFixed =
+  solver bundle gauge ≡ gauge →
+  gauge ≡ fixedPoint (contraction bundle)
+gaugeFixingGaugeUnique bundle gauge solverFixed =
   fixedPointUnique
-    (contraction data)
+    (contraction bundle)
     gauge
-    (trans (solverAgrees data gauge) solverFixed)
+    (trans (solverAgrees bundle gauge) solverFixed)
