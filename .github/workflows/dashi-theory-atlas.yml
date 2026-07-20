@@ -19,6 +19,7 @@ on:
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
       - "tests/test_materialize_dashi_agda_termflow.py"
       - "tests/test_materialize_dashi_phase_visualisations.py"
+      - ".github/workflows/dashi-theory-atlas.yml"
   push:
     branches: [master]
     paths:
@@ -38,8 +39,46 @@ on:
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
       - "tests/test_materialize_dashi_agda_termflow.py"
       - "tests/test_materialize_dashi_phase_visualisations.py"
+      - ".github/workflows/dashi-theory-atlas.yml"
 
 jobs:
+  typecheck-triadic-spectral:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: "2.6.4.3"
+          agda-stdlib-version: "2.1"
+      - name: Typecheck focused regression root
+        run: |
+          set -o pipefail
+          agda -i . -l standard-library DASHI/Physics/Closure/TriadicArithmeticSpectralRegression.agda 2>&1 | tee triadic-typecheck.log
+      - name: Upload focused typecheck log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: triadic-typecheck-log
+          path: triadic-typecheck.log
+
+  typecheck-everything:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Typecheck canonical root through pinned flake
+        run: |
+          set -o pipefail
+          nix build .#check --print-build-logs 2>&1 | tee nix-typecheck.log
+      - name: Upload typecheck log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nix-typecheck-log
+          path: nix-typecheck.log
+
   validate-atlas:
     runs-on: ubuntu-latest
     steps:

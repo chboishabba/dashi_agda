@@ -7,6 +7,12 @@ open import DASHI.Physics.FiniteAlgebraCandidates using (MatrixAlg; M2C)
 open import DASHI.Physics.Closure.ShiftContractTriadicFamily as STF
   using (TriadicIndex; i0; i1; i2; triadicNext; triadicCycle)
 
+-- Canonical compiler route for the exact quotient / character / modular-gate
+-- tranche. DASHI.Everything already imports this triadic root, so the regression
+-- below is included in the authoritative `nix build .#check` typecheck without
+-- duplicating a new top-level import lane.
+import DASHI.Physics.Closure.TriadicArithmeticSpectralRegression
+
 ------------------------------------------------------------------------
 -- Inhabited 3-6-9 matrix-generation bridge.
 --
