@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.DiscreteWarpedEinsteinMatterModel where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
@@ -12,15 +12,13 @@ import DASHI.Physics.Closure.StressEnergyBianchiConditional as Boundary
 ------------------------------------------------------------------------
 -- Finite nonzero Einstein/source model over the computed warped geometry.
 --
--- The model uses the constant positive curvature computed from the nonconstant
--- spatial log-scale profile.  A reduced FLRW/de-Sitter-like contraction maps
--- that curvature to positive energy density and equal negative pressure.
--- A discrete matter action is varied by a total function to produce the same
--- tensor.  Conservation is computed through the finite continuity/Bianchi
--- residual.
+-- Positive curvature is mapped by a reduced FLRW/de-Sitter-like contraction to
+-- positive energy density and equal negative pressure.  A total matter-action
+-- variation computes the same tensor.  The finite continuity/Bianchi residual
+-- is then reduced by computation.
 --
--- This is an exact finite model.  It is not the continuum Einstein equation,
--- the general differential Bianchi theorem, or an empirical cosmology.
+-- This is an exact finite model, not the continuum Einstein equation or the
+-- general differential Bianchi theorem.
 
 
 data SourceCoefficient : Set where
@@ -278,12 +276,12 @@ computedNonconstantEinsteinMatterReceipt =
 record NonconstantModelPromotionBoundary : Set where
   constructor mkNonconstantModelPromotionBoundary
   field
-    finiteModelComputed : Nat
-    generalLeviCivitaTheoremProved : Nat
-    generalDifferentialBianchiProved : Nat
-    continuumEinsteinMatterSolutionProved : Nat
-    empiricalCosmologyClaimed : Nat
-    quantumGravityClaimed : Nat
+    finiteModelComputed : Bool
+    generalLeviCivitaTheoremProved : Bool
+    generalDifferentialBianchiProved : Bool
+    continuumEinsteinMatterSolutionProved : Bool
+    empiricalCosmologyClaimed : Bool
+    quantumGravityClaimed : Bool
     boundaryStatement : String
 
 open NonconstantModelPromotionBoundary public
@@ -292,18 +290,13 @@ open NonconstantModelPromotionBoundary public
 nonconstantModelPromotionBoundary : NonconstantModelPromotionBoundary
 nonconstantModelPromotionBoundary =
   mkNonconstantModelPromotionBoundary
-    (suc zero)
-    zero
-    zero
-    zero
-    zero
-    zero
+    true false false false false false
     "one exact finite model is computed; general continuum, empirical, and quantum-gravity promotions remain blocked"
 
 
 existingResidueEnergyMassShortcutStillBlocked :
   Boundary.ionizationStyleEnergyIdentifiedWithMass
     Boundary.canonicalMassIdentificationBoundary
-  ≡ Agda.Builtin.Bool.false
+  ≡ false
 existingResidueEnergyMassShortcutStillBlocked =
   Boundary.canonicalResidueEnergyNotMass
