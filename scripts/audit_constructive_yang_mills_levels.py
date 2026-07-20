@@ -29,6 +29,7 @@ POSTULATE_FREE = [
     YM / "BalabanStepVKPClosure.agda",
     YM / "BalabanAllScaleRGClosure.agda",
     YM / "BalabanOSMassGapClosure.agda",
+    YM / "BalabanDashenGrossCalibration.agda",
 ]
 
 EXPECTED_ASSIGNMENTS = {
@@ -75,6 +76,10 @@ EXPECTED_ASSIGNMENTS = {
         "continuumOSAxiomsLevel": "conjectural",
         "clusteringToGapTransferLevel": "standardImported",
         "physicalMassGapInputLevel": "conjectural",
+    },
+    YM / "BalabanDashenGrossCalibration.agda": {
+        "dashenGrossCalibrationAssemblyLevel": "machineChecked",
+        "dashenGrossNumericalConstantsLevel": "standardImported",
     },
 }
 
