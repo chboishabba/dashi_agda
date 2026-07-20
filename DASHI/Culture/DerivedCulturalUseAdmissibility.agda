@@ -2,6 +2,8 @@ module DASHI.Culture.DerivedCulturalUseAdmissibility where
 
 open import Agda.Builtin.String using (String)
 
+import DASHI.Culture.CulturalProvenanceBoundaryCore as Existing
+
 ------------------------------------------------------------------------
 -- Cultural use requires provenance, accountable authority, and consent.
 
@@ -97,3 +99,6 @@ kimmererProvenance =
 kimmererAnalogyAdmissible :
   AdmissibleCulturalUse formalAnalogyMaterial limitedFormalAnalogyUse
 kimmererAnalogyAdmissible = formalAnalogyAdmissible kimmererProvenance
+
+existingCulturalBoundary : Existing.CulturalProvenanceBoundary
+existingCulturalBoundary = Existing.canonicalCulturalProvenanceBoundary
