@@ -9,9 +9,6 @@ open import DASHI.Algebra.Trit using (neg; zer; pos; inv)
 open import DASHI.Codec.BalancedTritBitFibre
 open import DASHI.Codec.DNAFirstFormalism
 
-------------------------------------------------------------------------
--- Executable carrier/involution witnesses.
-
 complement-A-roundtrip : complement (complement A) ≡ A
 complement-A-roundtrip = refl
 
@@ -44,10 +41,6 @@ zero-is-fixed-by-mirror :
   encodeFibre (inv zer) ≡ invertFibre (encodeFibre zer)
 zero-is-fixed-by-mirror = refl
 
-------------------------------------------------------------------------
--- The word [negative, zero, positive] emits three support bits plus two
--- sign bits. This is the exact n + k law, not a two-bits-per-trit claim.
-
 three-trit-cost :
   wordBitCost (neg ∷ zer ∷ pos ∷ []) ≡ suc (suc (suc (suc (suc zero))))
 three-trit-cost = refl
@@ -56,11 +49,8 @@ three-trit-support-plus-sign :
   wordBitCost (neg ∷ zer ∷ pos ∷ []) ≡
   length (neg ∷ zer ∷ pos ∷ []) +
   nonZeroCount (neg ∷ zer ∷ pos ∷ [])
-three-trit-support-plus-sign = wordBitCost-support-plus-sign _
-
-------------------------------------------------------------------------
--- Empty DNA traces are generable for every constraint machine. Non-empty
--- traces require an admissibility witness at every emitted base.
+three-trit-support-plus-sign =
+  wordBitCost-support-plus-sign (neg ∷ zer ∷ pos ∷ [])
 
 empty-is-generable :
   ∀ M → Generable M []
