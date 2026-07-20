@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.BalabanFiniteOneStepFrontierBundle where
 -- Focused finite one-step frontier.
 --
 -- Imports below assemble actual proof terms and explicit uninhabited theorem
--- targets.  The finite patch geometry proves cover/properness only; floating
+-- targets.  Finite patch geometry proves cover/properness only; floating
 -- residual searches remain indexed finite evidence and do not inhabit the
 -- volume-, scale-, or background-uniform random-walk theorem.  Likewise the
 -- quantitative one-step RG record remains a target until its analytic fields
@@ -47,6 +47,11 @@ import DASHI.Physics.YangMills.BalabanFiniteNeumannParametrix
 import DASHI.Physics.YangMills.BalabanWeightedNeumannRemainder
 import DASHI.Physics.YangMills.BalabanUniformWeightedNeumannFamily
 import DASHI.Physics.YangMills.BalabanUniformNeumannAsymptoticResidual
+import DASHI.Physics.YangMills.BalabanGeometricPowerVanishing
+import DASHI.Physics.YangMills.BalabanUniformResidualMajorant
+import DASHI.Physics.YangMills.BalabanWeightedGreenKernelDecay
+import DASHI.Physics.YangMills.BalabanCriticalMapLipschitzContraction
+import DASHI.Physics.YangMills.BalabanBackgroundFieldClosure
 import DASHI.Physics.YangMills.BalabanSU2FiniteEffectiveAction
 import DASHI.Physics.YangMills.BalabanSU2PolarizationSecondVariation
 import DASHI.Physics.YangMills.BalabanSU2PolarizationWardIdentity
@@ -65,3 +70,7 @@ import DASHI.Physics.YangMills.BalabanBetaUniformityConjecture
 import DASHI.Physics.YangMills.BalabanSU2OneStepRGTheorem
 import DASHI.Physics.YangMills.BalabanDashenGrossConventionMap
 import DASHI.Physics.YangMills.BalabanBetaNormalizationCalibration
+
+-- Group-generic algebraic instance and honest frontier ledger.
+import DASHI.Physics.YangMills.CompactLieExactSurface
+import DASHI.Physics.YangMills.CompactLieYangMillsFrontier

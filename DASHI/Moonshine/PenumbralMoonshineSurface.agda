@@ -6,11 +6,17 @@ module DASHI.Moonshine.PenumbralMoonshineSurface where
 
 open import DASHI.Moonshine.PenumbralLambency public
 open import DASHI.Moonshine.PenumbralVectorValuedForm public
+open import DASHI.Moonshine.PenumbralThetaComponentBridge public
 open import DASHI.Moonshine.PenumbralMoonshineModule public
 open import DASHI.Moonshine.SingularThetaBorcherdsBridge public
+open import DASHI.Moonshine.PenumbralSingularThetaIntegral public
+open import DASHI.Moonshine.PenumbralBorcherdsExponentLedger public
 open import DASHI.Moonshine.PenumbralSQModuleLift public
+open import DASHI.Moonshine.PenumbralSuperFockFactor public
 open import DASHI.Moonshine.TraceOfSingularModuliBridge public
 open import DASHI.Moonshine.PenumbralWeightTranslationClosure public
 open import DASHI.Moonshine.ThompsonFourAvatarBridge public
 open import DASHI.Moonshine.PenumbralDiscriminantProperty public
+open import DASHI.Moonshine.PenumbralTheoremStatusLedger public
+open import DASHI.Moonshine.UmbralPenumbralComparisonBoundary public
 open import DASHI.Moonshine.ThompsonPenumbralSpecialization public
