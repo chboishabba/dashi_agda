@@ -11,13 +11,23 @@ module DASHI.Codec.TriadicPAdicCodec369Bridge where
 -- This gives the residual-kernel lane the repo's existing prefix ultrametric
 -- without claiming an analytic 3-adic norm.
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat using (_≤_)
 open import Data.Vec using ([]; _∷_)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
-import DASHI.Codec.TriadicPAdicCodec as Codec
+open import DASHI.Codec.TriadicPAdicCodec
+  using
+    ( Kernel
+    ; Sheet9
+    ; []ᵥ
+    ; _∷ᵥ_
+    ; invertKernel
+    ; lift9
+    ; MDLChartSelection
+    )
 import DASHI.Geometry.SSP369Ultrametric as Geo
 import DASHI.MDL.MDLLyapunov as MDL
 
@@ -44,10 +54,10 @@ trit→369-inversion pos = refl
 
 kernel→369 :
   {d : Nat} →
-  Codec.Kernel d →
+  Kernel d →
   Geo.Address d
-kernel→369 Codec.[]ᵥ = []
-kernel→369 (x Codec.∷ᵥ xs) = trit→369 x ∷ kernel→369 xs
+kernel→369 []ᵥ = []
+kernel→369 (x ∷ᵥ xs) = trit→369 x ∷ kernel→369 xs
 
 map369 :
   {d : Nat} →
@@ -59,24 +69,24 @@ map369 f (x ∷ xs) = f x ∷ map369 f xs
 
 kernel→369-inversion-compatible :
   {d : Nat} →
-  (u : Codec.Kernel d) →
-  kernel→369 (Codec.invertKernel u)
+  (u : Kernel d) →
+  kernel→369 (invertKernel u)
   ≡
   map369 invert369 (kernel→369 u)
-kernel→369-inversion-compatible Codec.[]ᵥ = refl
-kernel→369-inversion-compatible (x Codec.∷ᵥ xs)
+kernel→369-inversion-compatible []ᵥ = refl
+kernel→369-inversion-compatible (x ∷ᵥ xs)
   rewrite trit→369-inversion x
         | kernel→369-inversion-compatible xs = refl
 
 kernel369-self-prefix :
   {d : Nat} →
-  (u : Codec.Kernel d) →
+  (u : Kernel d) →
   Geo.PrefixMatch d (kernel→369 u) (kernel→369 u)
 kernel369-self-prefix u = Geo.prefixMatch-refl (kernel→369 u)
 
 kernel369-self-distance-zero :
   {d : Nat} →
-  (u : Codec.Kernel d) →
+  (u : Kernel d) →
   Geo.distance (kernel→369 u) (kernel→369 u) ≡ zero
 kernel369-self-distance-zero u = Geo.distance-self-zero (kernel→369 u)
 
@@ -85,9 +95,9 @@ kernel369-self-distance-zero u = Geo.distance-self-zero (kernel→369 u)
 ------------------------------------------------------------------------
 
 sheet→369-prefix :
-  Codec.Sheet9 →
+  Sheet9 →
   Geo.Address (suc (suc zero))
-sheet→369-prefix (a Codec.∷ᵥ b Codec.∷ᵥ Codec.[]ᵥ) =
+sheet→369-prefix (a ∷ᵥ b ∷ᵥ []ᵥ) =
   trit→369 a ∷ trit→369 b ∷ []
 
 prefixSheet369 :
@@ -99,14 +109,14 @@ prefixSheet369 (a ∷ b ∷ []) tail = a ∷ b ∷ tail
 
 lift9→369-compatible :
   {d : Nat} →
-  (s : Codec.Sheet9) →
-  (u : Codec.Kernel d) →
-  kernel→369 (Codec.lift9 s u)
+  (s : Sheet9) →
+  (u : Kernel d) →
+  kernel→369 (lift9 s u)
   ≡
   prefixSheet369 (sheet→369-prefix s) (kernel→369 u)
-lift9→369-compatible (a Codec.∷ᵥ b Codec.∷ᵥ Codec.[]ᵥ) u = refl
+lift9→369-compatible (a ∷ᵥ b ∷ᵥ []ᵥ) u = refl
 
-record Codec369UltrametricReceipt {d : Nat} (u : Codec.Kernel d) : Set where
+record Codec369UltrametricReceipt {d : Nat} (u : Kernel d) : Set where
   field
     address : Geo.Address d
     addressIsKernelImage : address ≡ kernel→369 u
@@ -115,7 +125,7 @@ record Codec369UltrametricReceipt {d : Nat} (u : Codec.Kernel d) : Set where
 
 canonicalCodec369UltrametricReceipt :
   {d : Nat} →
-  (u : Codec.Kernel d) →
+  (u : Kernel d) →
   Codec369UltrametricReceipt u
 canonicalCodec369UltrametricReceipt u =
   record
@@ -156,7 +166,7 @@ record NatMDLSelectionAdapter : Set₁ where
   functional : MDL.MDLFunctional Chart
   functional = codecMDLFunctional modelBits residualBits
 
-  codecSelection : Codec.MDLChartSelection
+  codecSelection : MDLChartSelection
   codecSelection =
     record
       { Chart = Chart
@@ -174,23 +184,23 @@ record NatMDLSelectionAdapter : Set₁ where
 record Codec369CrossPollinationBoundary : Set where
   constructor boundary
   field
-    tritKernelTo369AddressChecked : Agda.Builtin.Bool.Bool
-    inversionAs369PolarityChecked : Agda.Builtin.Bool.Bool
-    lift9AsTwoDigitPrefixChecked : Agda.Builtin.Bool.Bool
-    prefixUltrametricReused : Agda.Builtin.Bool.Bool
-    canonicalMDLFunctionalReused : Agda.Builtin.Bool.Bool
-    analyticThreeAdicNormProvedHere : Agda.Builtin.Bool.Bool
-    entropyRateTheoremProvedHere : Agda.Builtin.Bool.Bool
-    physicalSpeedupProvedHere : Agda.Builtin.Bool.Bool
+    tritKernelTo369AddressChecked : Bool
+    inversionAs369PolarityChecked : Bool
+    lift9AsTwoDigitPrefixChecked : Bool
+    prefixUltrametricReused : Bool
+    canonicalMDLFunctionalReused : Bool
+    analyticThreeAdicNormProvedHere : Bool
+    entropyRateTheoremProvedHere : Bool
+    physicalSpeedupProvedHere : Bool
 
 canonicalCrossPollinationBoundary : Codec369CrossPollinationBoundary
 canonicalCrossPollinationBoundary =
   boundary
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+    false
