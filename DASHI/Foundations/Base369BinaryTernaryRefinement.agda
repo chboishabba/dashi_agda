@@ -66,7 +66,7 @@ refinementAxesCommute :
 refinementAxesCommute binaryAxis binaryAxis r = refl
 refinementAxesCommute binaryAxis ternaryAxis r =
   binary-ternary-refinement-commutes r
-refinementAxesCommute ternaryAxis binaryAxis r =
+refinementAxesCommute ternaryAxis binaryAxis (resolution23 a b) =
   refl
 refinementAxesCommute ternaryAxis ternaryAxis r = refl
 
