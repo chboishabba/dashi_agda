@@ -14,6 +14,23 @@ open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope
     )
 
 ------------------------------------------------------------------------
+-- Small equality helpers kept local to avoid importing a broad prelude.
+
+cong :
+  ∀ {A B : Set} {x y : A} →
+  (f : A → B) →
+  x ≡ y →
+  f x ≡ f y
+cong f refl = refl
+
+trans :
+  ∀ {A : Set} {x y z : A} →
+  x ≡ y →
+  y ≡ z →
+  x ≡ z
+trans refl yz = yz
+
+------------------------------------------------------------------------
 -- Exact finite carrier for Z / 3^n Z in balanced-ternary coordinates.
 --
 -- The carrier is represented canonically by the first n balanced trits.
@@ -146,7 +163,9 @@ applyCompatibleKernel K x =
   triadic-limit-point
     (λ n → kernel K n (coordinate x n))
     (λ n →
-      reductionCommutes K n (coordinate x (suc n)))
+      trans
+        (reductionCommutes K n (coordinate x (suc n)))
+        (cong (kernel K n) (compatible x n)))
 
 ------------------------------------------------------------------------
 -- Explicit claim boundary.
