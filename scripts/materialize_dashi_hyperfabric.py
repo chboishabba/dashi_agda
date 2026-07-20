@@ -81,6 +81,27 @@ def declaration_block(text: str, name: str) -> tuple[str, int]:
     return "\n".join(lines[eq:end]), start + 1
 
 
+def signature_and_definition_block(text: str, name: str) -> tuple[str, int]:
+    """Return exactly one declaration's signature through its definition line.
+
+    The previous address extractor used a fixed eight-line window.  When the
+    following declaration was close enough, that window also captured its
+    `digit-3` / `digit-6` terms and turned the canonical `(3, 6, 9)` address
+    into `(3, 6, 9, 3, 6)`.  This helper is declaration-delimited instead.
+    """
+
+    lines = text.splitlines()
+    sig = re.compile(rf"^{re.escape(name)}\s*:")
+    definition = re.compile(rf"^{re.escape(name)}\s*=")
+    start = next((i for i, line in enumerate(lines) if sig.match(line)), None)
+    if start is None:
+        raise ExtractError(f"declaration not found: {name}")
+    eq = next((i for i in range(start + 1, len(lines)) if definition.match(lines[i])), None)
+    if eq is None:
+        raise ExtractError(f"definition not found: {name}")
+    return "\n".join(lines[start : eq + 1]), start + 1
+
+
 def constructor_args(block: str, constructor: str) -> list[str]:
     lines = block.splitlines()
     idx = next((i for i, line in enumerate(lines) if constructor in line), None)
@@ -98,12 +119,10 @@ def constructor_args(block: str, constructor: str) -> list[str]:
 
 
 def extract_address(refinement_text: str, path: str) -> tuple[tuple[int, ...], SourceRef]:
-    lines = refinement_text.splitlines()
-    start = next((i for i, value in enumerate(lines) if value.startswith("canonicalThreeSixNineDigits")), None)
-    if start is None:
-        raise ExtractError("declaration not found: canonicalThreeSixNineDigits")
-    block = "\n".join(lines[start : start + 8])
-    line = start + 1
+    block, line = signature_and_definition_block(
+        refinement_text,
+        "canonicalThreeSixNineDigits",
+    )
     digits = tuple(int(x) for x in re.findall(r"digit-(3|6|9)", block))
     if digits != (3, 6, 9):
         raise ExtractError(f"expected canonical address 3,6,9; got {digits}")

@@ -79,8 +79,9 @@ prefixAgreement→takeEquality :
   PrefixAgreement n x y →
   take n x ≡ take n y
 prefixAgreement→takeEquality prefix-zero = refl
-prefixAgreement→takeEquality (prefix-suc refl rest)
-  rewrite prefixAgreement→takeEquality rest = refl
+prefixAgreement→takeEquality (prefix-suc head-equality rest)
+  rewrite head-equality
+        | prefixAgreement→takeEquality rest = refl
 
 ------------------------------------------------------------------------
 -- A syntax-level finite envelope.
