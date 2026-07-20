@@ -68,6 +68,7 @@ jobs:
         run: |
           set +e
           agda \
+            --no-libraries \
             -i . \
             -i /usr/share/agda-stdlib \
             DASHI/Unified/GRQuantumProofTermAtlas.agda \
