@@ -4,30 +4,30 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Unified.GRQuantumUnification as Legacy
-open import DASHI.Unified.GRQuantumProofTerms
+open import DASHI.Unified.GRQuantumStrictProofTerms
 
 ------------------------------------------------------------------------
 -- Hardened promotion seam for the merged Boolean-era facade.
 --
 -- `Legacy.TerminalUnificationWitness` remains available for compatibility, but
--- this module defines the promotion object that should be consumed by new code:
--- it requires both the legacy dependency-graph witness and the proposition-level
--- `TerminalGRQuantumProof`.
+-- new promotion requires the strict proposition-level object, including exact
+-- Clifford/Spin refinements, typed common-substrate recovery, and the concrete
+-- empirical-correspondence receipt.
 
 record HardenedTerminalUnificationWitness : Setω where
   constructor hardened-terminal-unification-witness
   field
     legacyWitness : Legacy.TerminalUnificationWitness
-    proofTermWitness : TerminalGRQuantumProof
+    proofTermWitness : StrictTerminalGRQuantumProof
 open HardenedTerminalUnificationWitness public
 
 hardenedReading : HardenedTerminalUnificationWitness → Legacy.UnifiedReading
 hardenedReading witness = Legacy.readingFromWitness (legacyWitness witness)
 
 hardenedProofTerms :
-  HardenedTerminalUnificationWitness → TerminalGRQuantumProof
+  HardenedTerminalUnificationWitness → StrictTerminalGRQuantumProof
 hardenedProofTerms = proofTermWitness
 
 legacyPromotionBoundaryText : String
 legacyPromotionBoundaryText =
-  "New consumers must use HardenedTerminalUnificationWitness.  Boolean equality receipts in the legacy facade are retained for compatibility but are not sufficient for proposition-level or physical promotion."
+  "New consumers must use HardenedTerminalUnificationWitness.  Boolean equality receipts in the legacy facade are retained for compatibility but are insufficient without StrictTerminalGRQuantumProof, shared-substrate recovery, and physical correspondence."
