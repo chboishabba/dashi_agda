@@ -1,12 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Core.KernelRenormalization where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_≤_)
-
-------------------------------------------------------------------------
--- Three deliberately distinct renormalisation contracts.
 
 record StrictRenormalizationSquare
   {Fine Coarse : Set}
@@ -60,6 +57,5 @@ strict⇒quotient :
     fineKernel coarseKernel renormalize quotient
 strict⇒quotient quotient strict = record
   { commutes-after-quotient = λ s →
-      Agda.Builtin.Equality.cong quotient
-        (StrictRenormalizationSquare.commutes strict s)
+      cong quotient (StrictRenormalizationSquare.commutes strict s)
   }
