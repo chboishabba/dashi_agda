@@ -2,6 +2,7 @@ module DASHI.Unified.GRQuantumProofAdapters where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (suc)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Unified.GRQuantumProofTerms
@@ -24,7 +25,7 @@ residualReconstructionAdapter :
   ∀ {tower : MDL.MultiscaleCarrier}
     (codec : MDL.ResidualCodec tower)
     {j}
-    (state : MDL.Carrier tower (Agda.Builtin.Nat.suc j)) →
+    (state : MDL.Carrier tower (suc j)) →
   MDL.join codec (MDL.split codec state) ≡ state
 residualReconstructionAdapter = MDL.join-split
 
