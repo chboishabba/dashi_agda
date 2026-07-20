@@ -8,7 +8,7 @@ module DASHI.Physics.Closure.ScheduleRepresentationCoherence where
 -- states the exact obligations needed to combine that axis with DASHI carrier
 -- compatibility.
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Primitive using (Level; lsuc)
 
 import DASHI.Physics.Closure.RepresentationKernelCompatibility as RKC
@@ -67,8 +67,8 @@ scheduledIterate :
   (Schedule → State → State) →
   ScheduleTrace Schedule →
   Nat → State → State
-scheduledIterate step trace 0 x = x
-scheduledIterate step trace (Nat.suc n) x =
+scheduledIterate step trace zero x = x
+scheduledIterate step trace (suc n) x =
   step (trace n) (scheduledIterate step trace n x)
 
 record ScheduledTrajectoryCoherence {ℓ : Level}
