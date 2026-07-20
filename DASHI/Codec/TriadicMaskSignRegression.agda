@@ -2,7 +2,7 @@ module DASHI.Codec.TriadicMaskSignRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Algebra.Trit using (neg; zer; pos)
+open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import DASHI.Codec.TriadicMaskSignFactorization
 open import DASHI.Codec.TriadicMaskSignEntropyContract
 open import DASHI.Codec.TriadicMaskSignSSPBridge
@@ -21,7 +21,7 @@ zeroDigitRoundtrip = refl
 positiveDigitRoundtrip : decodeTrit (encodeTrit pos) ≡ pos
 positiveDigitRoundtrip = refl
 
-sparseTriple : Triple _
+sparseTriple : Triple Trit
 sparseTriple = triple neg zer pos
 
 sparseTripleMask : maskOf (encodeTriple sparseTriple) ≡ mask101
