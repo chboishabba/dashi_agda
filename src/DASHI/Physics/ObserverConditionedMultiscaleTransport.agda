@@ -3,7 +3,7 @@ module DASHI.Physics.ObserverConditionedMultiscaleTransport where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
@@ -34,7 +34,7 @@ record MultiscaleObserverSystem
       State system
 
     projectionPreservesObservation :
-      ∀ {j} (fine : Carrier tower (Agda.Builtin.Nat.suc j)) →
+      ∀ {j} (fine : Carrier tower (suc j)) →
       observe system observer (realise (project tower fine)) ≡
       observe system observer (realise fine)
 
@@ -48,7 +48,7 @@ projection-is-observer-equivalent :
   {system : TransportSystem} →
   {observer : Observer system} →
   (multiscale : MultiscaleObserverSystem system observer) →
-  ∀ {j} (fine : Carrier (tower multiscale) (Agda.Builtin.Nat.suc j)) →
+  ∀ {j} (fine : Carrier (tower multiscale) (suc j)) →
   realise multiscale (project (tower multiscale) fine)
     ≈[ observer ]
   realise multiscale fine
@@ -85,7 +85,7 @@ observerStepDescriptionLength :
   {multiscale : MultiscaleObserverSystem system observer} →
   (mdl : ObserverConditionedResidualMDL multiscale) →
   ∀ {j} →
-  Carrier (tower multiscale) (Agda.Builtin.Nat.suc j) →
+  Carrier (tower multiscale) (suc j) →
   Nat
 observerStepDescriptionLength mdl =
   stepDescriptionLength (cost mdl)
@@ -96,7 +96,7 @@ observer-step-description-is-coarse-plus-residual :
   {multiscale : MultiscaleObserverSystem system observer} →
   (mdl : ObserverConditionedResidualMDL multiscale) →
   ∀ {j}
-  (fine : Carrier (tower multiscale) (Agda.Builtin.Nat.suc j)) →
+  (fine : Carrier (tower multiscale) (suc j)) →
   observerStepDescriptionLength mdl fine ≡
   coarseCost (cost mdl) (project (tower multiscale) fine) +
   residualCost (cost mdl) (residual (codec mdl) fine)
@@ -200,7 +200,7 @@ canonicalObserverWaveRoute =
 ------------------------------------------------------------------------
 -- Cross-domain readings.  These are interpretation routes, not theorems.
 
- data CrossPollinatedReading : Set where
+data CrossPollinatedReading : Set where
   microphoneWaveTubeReading : CrossPollinatedReading
   pixelTransportManifoldReading : CrossPollinatedReading
   stationaryPathResidualReading : CrossPollinatedReading
