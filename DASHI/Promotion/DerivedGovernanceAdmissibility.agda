@@ -3,6 +3,8 @@ module DASHI.Promotion.DerivedGovernanceAdmissibility where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Promotion.MeasurementProxyBoundaryCore as Existing
+
 ------------------------------------------------------------------------
 -- Proposition-level measurement, inference, and authority governance.
 
@@ -94,3 +96,6 @@ interventionNeedsEvidence (interventionWithEvidence evidence) = evidence
 safeProxyWitness :
   AdmissibleInterpretation processedProxy proxyInterpretation
 safeProxyWitness = proxyMayRemainProxy
+
+existingMeasurementBoundary : Existing.MeasurementProxyBoundary
+existingMeasurementBoundary = Existing.canonicalMeasurementProxyBoundary
