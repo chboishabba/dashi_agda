@@ -1,6 +1,6 @@
 module Ontology.DNA.SantaLucia1998SI where
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Int using (negsuc)
 open import Agda.Builtin.Nat using (Nat; _*_)
@@ -14,7 +14,7 @@ open import DASHI.Physics.Units.SI using
 open import Ontology.DNA.SantaLucia1998Thermodynamics using
   ( SignedScaled; scaled
   ; ThermodynamicTriple; thermo
-  ; WatsonCrickStack; unified1998
+  ; WatsonCrickStack; AA-TT; GC-CG; unified1998
   )
 
 ------------------------------------------------------------------------
@@ -66,15 +66,12 @@ unified1998SI stack with unified1998 stack
     joulePerMoleKelvin
     joulePerMole
 
-------------------------------------------------------------------------
--- Regression witnesses for exact conversion factors.
-
 AA-TT-H-SI :
-  SIThermodynamicTriple.deltaH (unified1998SI Ontology.DNA.SantaLucia1998Thermodynamics.AA-TT)
+  SIThermodynamicTriple.deltaH (unified1998SI AA-TT)
     ≡ quantity true (79 * 4184)
 AA-TT-H-SI = refl
 
 GC-CG-G-SI :
-  SIThermodynamicTriple.deltaG37 (unified1998SI Ontology.DNA.SantaLucia1998Thermodynamics.GC-CG)
+  SIThermodynamicTriple.deltaG37 (unified1998SI GC-CG)
     ≡ quantity true (224 * 4184)
 GC-CG-G-SI = refl
