@@ -5,7 +5,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Sigma using (Σ)
-open import Data.Nat using (_≤_)
+open import Data.Nat renaming (_≤_ to _≤ⁿ_)
 open import Relation.Nullary using (¬_)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums public
@@ -200,7 +200,7 @@ record FullShellCombinatorics
 
     shellCountingBound :
       ∀ K j ell k →
-      shellIntersectionCount K j ell k ≤ shellCountingBudget K j ell
+      shellIntersectionCount K j ell k ≤ⁿ shellCountingBudget K j ell
 
     WeightedRadialSummability : Nat → Set i
     weightedRadialSummability :
@@ -219,7 +219,7 @@ record FullShellCombinatorics
 
     CutoffExtension : Nat → Nat → Nat → Set i
     cutoffMonotone :
-      ∀ K N N′ → N ≤ N′ → CutoffExtension K N N′
+      ∀ K N N′ → N ≤ⁿ N′ → CutoffExtension K N N′
 
     CutoffUniformConstants : Set i
     cutoffUniformConstants : CutoffUniformConstants
