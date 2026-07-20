@@ -15,11 +15,11 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
 --   B = sign bit, present only on the non-zero fibre.
 -- It is not a claim that Trit is primitively binary.
 
- data Sign : Set where
+data Sign : Set where
   positiveSign : Sign
   negativeSign : Sign
 
- data TritFibre : Set where
+data TritFibre : Set where
   zeroFibre : TritFibre
   signedFibre : Sign → TritFibre
 
@@ -50,7 +50,7 @@ supportBit : TritFibre → Bool
 supportBit zeroFibre = false
 supportBit (signedFibre _) = true
 
- data OptionalSignBit : Set where
+data OptionalSignBit : Set where
   noSignBit : OptionalSignBit
   someSignBit : Bool → OptionalSignBit
 
