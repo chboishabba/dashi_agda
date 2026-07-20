@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.MDL.MultiscaleCodingTargets where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -7,10 +6,6 @@ open import Data.Nat using (_≤_)
 
 open import DASHI.Core.MultiscaleMDL
 open import DASHI.MDL.MDLLyapunov
-
-------------------------------------------------------------------------
--- Exact adapter: one selected multiscale level yields the repository's
--- canonical MDLFunctional.  This removes a parallel-MDL seam.
 
 multiscaleMDLFunctional :
   ∀ {tower : MultiscaleCarrier}
