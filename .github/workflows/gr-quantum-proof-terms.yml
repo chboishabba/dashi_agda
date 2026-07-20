@@ -57,11 +57,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Agda and standard library
+      - name: Install Agda and writable standard library
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install \
             --yes --quiet agda-bin agda-stdlib >/tmp/agda-install.log
+          cp -a /usr/share/agda-stdlib /tmp/agda-stdlib
+          chmod -R u+w /tmp/agda-stdlib
           agda --version
 
       - name: Type-check proposition-level GR quantum atlas
@@ -70,7 +72,7 @@ jobs:
           agda \
             --no-libraries \
             -i . \
-            -i /usr/share/agda-stdlib \
+            -i /tmp/agda-stdlib \
             DASHI/Unified/GRQuantumProofTermAtlas.agda \
             >/tmp/gr-quantum-agda.log 2>&1
           status=$?
