@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Nat using (z≤n; s≤s)
+open import Data.Nat using (_≤_; z≤n; s≤s)
 
 import DASHI.Environment.FunctionalEcology as Eco
 import DASHI.Environment.InversePlanning as Planning
@@ -164,7 +164,7 @@ zeroConservation =
     (Q.exactZeroBalance "pond carbon fixture")
     (Q.exactZeroBalance "pond sediment fixture") true true
 
-one≤two : one Data.Nat.≤ two
+one≤two : one ≤ two
 one≤two = s≤s z≤n
 
 policyAssessment : Surrogate.SurrogateAssessment
