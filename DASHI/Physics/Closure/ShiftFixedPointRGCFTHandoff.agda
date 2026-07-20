@@ -10,27 +10,34 @@ open import Data.List.Base using (List; _∷_; [])
 open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Envelope
 open import DASHI.Physics.Closure.FixedPointAnalyticRGTargets as Analytic
 open import DASHI.Physics.Closure.FixedPointCFTBoundary as Boundary
+open import DASHI.Physics.Closure.ShiftAnalyticRGCFTRouteReference as Reference
 open import DASHI.Physics.Closure.ShiftFiniteLocalOPECrossing as OPE
 open import DASHI.Physics.Closure.ShiftFiniteNormedTangent as Normed
 open import DASHI.Physics.Closure.ShiftFiniteScalingFusionWard as Finite
 open import DASHI.Physics.Closure.ShiftFiniteTangentSemigroup as Tangent
 
 ------------------------------------------------------------------------
--- Integrated finite RG/CFT precursor handoff.
+-- Integrated fixed-point RG/CFT handoff.
 --
--- The current branch now closes stronger finite algebraic versions of the
--- tangent, norm, semigroup, scaling, OPE, crossing, correlation, and Ward
--- lanes.  The actual analytic/continuum theorem remains represented by the
--- explicit FixedPointAnalyticRGCFTRoute target below.
+-- The lane now contains both:
+--
+--   * the exact finite shift algebra on the original perturbation carrier; and
+--   * an inhabited heterogeneous reference route covering Banach/Frechet,
+--     scaling, position-dependent OPE, depth-envelope/RG, and stress/Ward
+--     surfaces.
+--
+-- The remaining gates are no longer absence-of-formalism gates. They are the
+-- stronger requirement that one physical R/C continuum model validates and
+-- unifies those reference surfaces.
 
 data ShiftRGCFTRemainingGate : Set where
-  vectorSpaceAndBanachTangentRequired : ShiftRGCFTRemainingGate
-  frechetDerivativeAndAnalyticGeneratorRequired : ShiftRGCFTRemainingGate
-  physicalScalingDimensionsRequired : ShiftRGCFTRemainingGate
-  analyticLocalOPECoefficientsRequired : ShiftRGCFTRemainingGate
-  inhabitedContinuousDepthEnvelopeRequired : ShiftRGCFTRemainingGate
-  renormalizationCompatibilityAcrossDepthRequired : ShiftRGCFTRemainingGate
-  stressTensorAndConformalWardRequired : ShiftRGCFTRemainingGate
+  physicalRealOrComplexBanachTangentRequired : ShiftRGCFTRemainingGate
+  realTimeAnalyticGeneratorRequired : ShiftRGCFTRemainingGate
+  measuredPhysicalAnomalousDimensionsRequired : ShiftRGCFTRemainingGate
+  singularContinuumOPEAndConformalBlocksRequired : ShiftRGCFTRemainingGate
+  realAnalyticContinuousDepthEnvelopeRequired : ShiftRGCFTRemainingGate
+  continuumRGUniversalityAcrossDepthRequired : ShiftRGCFTRemainingGate
+  nontrivialStressTensorCentralChargeWardRequired : ShiftRGCFTRemainingGate
 
 data ShiftRGCFTRemainingPromotion : Set where
 
@@ -46,6 +53,7 @@ record ShiftFixedPointRGCFTHandoff : Setω where
     finiteNormedTangent : Normed.ShiftFiniteNormedTangent
     scalingFusionWard : Finite.ShiftFiniteScalingFusionWard
     finiteLocalOPECrossing : OPE.ShiftFiniteLocalOPECrossing
+    inhabitedReferenceRoute : Reference.ShiftAnalyticRGCFTRouteReference
 
     finiteTangentCarrierConstructed : Bool
     finiteTangentCarrierConstructedIsTrue :
@@ -79,6 +87,34 @@ record ShiftFixedPointRGCFTHandoff : Setω where
     finiteCorrelationWardConstructedIsTrue :
       finiteCorrelationWardConstructed ≡ true
 
+    nonArchimedeanBanachReferenceConstructed : Bool
+    nonArchimedeanBanachReferenceConstructedIsTrue :
+      nonArchimedeanBanachReferenceConstructed ≡ true
+
+    exactFrechetGeneratorReferenceConstructed : Bool
+    exactFrechetGeneratorReferenceConstructedIsTrue :
+      exactFrechetGeneratorReferenceConstructed ≡ true
+
+    scalingAnomalousReferenceConstructed : Bool
+    scalingAnomalousReferenceConstructedIsTrue :
+      scalingAnomalousReferenceConstructed ≡ true
+
+    positionDependentOPEReferenceConstructed : Bool
+    positionDependentOPEReferenceConstructedIsTrue :
+      positionDependentOPEReferenceConstructed ≡ true
+
+    symbolicContinuousEnvelopeInhabited : Bool
+    symbolicContinuousEnvelopeInhabitedIsTrue :
+      symbolicContinuousEnvelopeInhabited ≡ true
+
+    rgDepthCompatibilityReferenceConstructed : Bool
+    rgDepthCompatibilityReferenceConstructedIsTrue :
+      rgDepthCompatibilityReferenceConstructed ≡ true
+
+    finiteStressTensorWardReferenceConstructed : Bool
+    finiteStressTensorWardReferenceConstructedIsTrue :
+      finiteStressTensorWardReferenceConstructed ≡ true
+
     analyticRouteTarget : Setω
     analyticRouteTargetIsCanonical :
       analyticRouteTarget ≡ Analytic.FixedPointAnalyticRGCFTRoute
@@ -87,38 +123,16 @@ record ShiftFixedPointRGCFTHandoff : Setω where
     depthKernelModelTargetIsCanonical :
       depthKernelModelTarget ≡ Envelope.DepthKernelModel
 
-    continuousEnvelopeTarget :
-      Envelope.DepthKernelModel →
-      Set₁
-    continuousEnvelopeTargetIsCanonical :
-      continuousEnvelopeTarget ≡ Envelope.ContinuousDepthEnvelope
+    physicalRealOrComplexUnifiedModelConstructed : Bool
+    physicalRealOrComplexUnifiedModelConstructedIsFalse :
+      physicalRealOrComplexUnifiedModelConstructed ≡ false
 
-    continuousEnvelopeInhabitedHere : Bool
-    continuousEnvelopeInhabitedHereIsFalse :
-      continuousEnvelopeInhabitedHere ≡ false
+    measuredPhysicalScalingAuthorityValidated : Bool
+    measuredPhysicalScalingAuthorityValidatedIsFalse :
+      measuredPhysicalScalingAuthorityValidated ≡ false
 
-    analyticFrechetGeneratorConstructed : Bool
-    analyticFrechetGeneratorConstructedIsFalse :
-      analyticFrechetGeneratorConstructed ≡ false
-
-    physicalScalingSpectrumConstructed : Bool
-    physicalScalingSpectrumConstructedIsFalse :
-      physicalScalingSpectrumConstructed ≡ false
-
-    analyticLocalOPEConstructed : Bool
-    analyticLocalOPEConstructedIsFalse :
-      analyticLocalOPEConstructed ≡ false
-
-    continuumRGControlConstructed : Bool
-    continuumRGControlConstructedIsFalse :
-      continuumRGControlConstructed ≡ false
-
-    continuumConformalWardConstructed : Bool
-    continuumConformalWardConstructedIsFalse :
-      continuumConformalWardConstructed ≡ false
-
-    cftPromoted : Bool
-    cftPromotedIsFalse : cftPromoted ≡ false
+    continuumCFTPromoted : Bool
+    continuumCFTPromotedIsFalse : continuumCFTPromoted ≡ false
 
     remainingGates : List ShiftRGCFTRemainingGate
     promotions : List ShiftRGCFTRemainingPromotion
@@ -132,13 +146,13 @@ open ShiftFixedPointRGCFTHandoff public
 canonicalShiftRGCFTRemainingGates :
   List ShiftRGCFTRemainingGate
 canonicalShiftRGCFTRemainingGates =
-  vectorSpaceAndBanachTangentRequired
-  ∷ frechetDerivativeAndAnalyticGeneratorRequired
-  ∷ physicalScalingDimensionsRequired
-  ∷ analyticLocalOPECoefficientsRequired
-  ∷ inhabitedContinuousDepthEnvelopeRequired
-  ∷ renormalizationCompatibilityAcrossDepthRequired
-  ∷ stressTensorAndConformalWardRequired
+  physicalRealOrComplexBanachTangentRequired
+  ∷ realTimeAnalyticGeneratorRequired
+  ∷ measuredPhysicalAnomalousDimensionsRequired
+  ∷ singularContinuumOPEAndConformalBlocksRequired
+  ∷ realAnalyticContinuousDepthEnvelopeRequired
+  ∷ continuumRGUniversalityAcrossDepthRequired
+  ∷ nontrivialStressTensorCentralChargeWardRequired
   ∷ []
 
 canonicalShiftFixedPointRGCFTHandoff :
@@ -150,6 +164,8 @@ canonicalShiftFixedPointRGCFTHandoff =
     ; finiteNormedTangent = Normed.canonicalShiftFiniteNormedTangent
     ; scalingFusionWard = Finite.canonicalShiftFiniteScalingFusionWard
     ; finiteLocalOPECrossing = OPE.canonicalShiftFiniteLocalOPECrossing
+    ; inhabitedReferenceRoute =
+        Reference.canonicalShiftAnalyticRGCFTRouteReference
     ; finiteTangentCarrierConstructed = true
     ; finiteTangentCarrierConstructedIsTrue = refl
     ; finiteDerivativeSemigroupConstructed = true
@@ -166,40 +182,43 @@ canonicalShiftFixedPointRGCFTHandoff =
     ; finiteCrossingConstructedIsTrue = refl
     ; finiteCorrelationWardConstructed = true
     ; finiteCorrelationWardConstructedIsTrue = refl
+    ; nonArchimedeanBanachReferenceConstructed = true
+    ; nonArchimedeanBanachReferenceConstructedIsTrue = refl
+    ; exactFrechetGeneratorReferenceConstructed = true
+    ; exactFrechetGeneratorReferenceConstructedIsTrue = refl
+    ; scalingAnomalousReferenceConstructed = true
+    ; scalingAnomalousReferenceConstructedIsTrue = refl
+    ; positionDependentOPEReferenceConstructed = true
+    ; positionDependentOPEReferenceConstructedIsTrue = refl
+    ; symbolicContinuousEnvelopeInhabited = true
+    ; symbolicContinuousEnvelopeInhabitedIsTrue = refl
+    ; rgDepthCompatibilityReferenceConstructed = true
+    ; rgDepthCompatibilityReferenceConstructedIsTrue = refl
+    ; finiteStressTensorWardReferenceConstructed = true
+    ; finiteStressTensorWardReferenceConstructedIsTrue = refl
     ; analyticRouteTarget = Analytic.FixedPointAnalyticRGCFTRoute
     ; analyticRouteTargetIsCanonical = refl
     ; depthKernelModelTarget = Envelope.DepthKernelModel
     ; depthKernelModelTargetIsCanonical = refl
-    ; continuousEnvelopeTarget = Envelope.ContinuousDepthEnvelope
-    ; continuousEnvelopeTargetIsCanonical = refl
-    ; continuousEnvelopeInhabitedHere = false
-    ; continuousEnvelopeInhabitedHereIsFalse = refl
-    ; analyticFrechetGeneratorConstructed = false
-    ; analyticFrechetGeneratorConstructedIsFalse = refl
-    ; physicalScalingSpectrumConstructed = false
-    ; physicalScalingSpectrumConstructedIsFalse = refl
-    ; analyticLocalOPEConstructed = false
-    ; analyticLocalOPEConstructedIsFalse = refl
-    ; continuumRGControlConstructed = false
-    ; continuumRGControlConstructedIsFalse = refl
-    ; continuumConformalWardConstructed = false
-    ; continuumConformalWardConstructedIsFalse = refl
-    ; cftPromoted = false
-    ; cftPromotedIsFalse = refl
+    ; physicalRealOrComplexUnifiedModelConstructed = false
+    ; physicalRealOrComplexUnifiedModelConstructedIsFalse = refl
+    ; measuredPhysicalScalingAuthorityValidated = false
+    ; measuredPhysicalScalingAuthorityValidatedIsFalse = refl
+    ; continuumCFTPromoted = false
+    ; continuumCFTPromotedIsFalse = refl
     ; remainingGates = canonicalShiftRGCFTRemainingGates
     ; promotions = []
     ; promotionsAreEmpty = refl
     ; noPromotionPossibleHere = shiftRGCFTPromotionImpossibleHere
     ; boundary =
-        "The finite shift lane now has a pointed perturbation semigroup and an exact normed idempotent additive algebra"
-        ∷ "the finite derivative preserves addition and is norm non-increasing"
-        ∷ "the finite 2,1,0 spectrum is inherited from the established held-potential/collapse-depth rank"
-        ∷ "the finite operator algebra now has proof-relevant OPE coefficients, exchange locality, and associative crossing"
-        ∷ "the finite correlation and held-insertion Ward analogues remain attached"
-        ∷ "FixedPointAnalyticRGCFTRoute names the exact stronger analytic objects still required"
-        ∷ "the current additive tangent is not a vector/Banach space and the finite derivative is not a Frechet derivative"
-        ∷ "the finite OPE has no singular position dependence, analytic coefficient functions, or conformal blocks"
-        ∷ "an inhabited analytic envelope, RG-depth compatibility, physical dimensions, analytic OPE, stress tensor, and conformal Ward identities remain open"
-        ∷ "No continuum RG fixed point or CFT is promoted"
+        "The original finite shift lane retains its exact tangent, norm, semigroup, scaling, OPE, crossing, correlation, and Ward surfaces"
+        ∷ "an inhabited heterogeneous reference route now covers every requested stronger formal lane"
+        ∷ "the Banach/Frechet reference is a complete GF(2) valued-field model with exact zero remainder and Nat time"
+        ∷ "the scaling reference has exact 2,1,0 engineering dimensions and zero reference anomalous correction"
+        ∷ "the OPE reference has explicit non-constant position coefficients, exchange locality, and crossing"
+        ∷ "the stream-valued envelope is injective and non-singleton and exactly intertwines tail RG with the finite perturbation step"
+        ∷ "the stress reference proves finite translation, dilation, and special-conformal Ward identities"
+        ∷ "the remaining deficit is one physical R/C continuum model with measured normalization, singular analytic OPE data, nontrivial stress correlations, and universality"
+        ∷ "No physical continuum RG fixed point or CFT is promoted"
         ∷ []
     }
