@@ -1,0 +1,9 @@
+# Intentional builtins-only governance-bearing leaf/domain carriers.
+# Each entry must have an integrated downstream adapter or be a canonical core.
+DASHI/Core/CandidateOnlyCore.agda
+DASHI/Core/AuthorityNonPromotionCore.agda
+DASHI/Promotion/AuthorityBoundaryCore.agda
+DASHI/Biology/NeurodivergentAtlasBodyMemoryBridge.agda
+DASHI/Biology/RelationalQiBodyMemoryBridge.agda
+DASHI/Biology/FormalLayerExplanationBoundary.agda
+DASHI/Biology/BodyMemoryMeasurementProxyBoundary.agda
