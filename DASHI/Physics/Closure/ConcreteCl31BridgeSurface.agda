@@ -1,12 +1,11 @@
 module DASHI.Physics.Closure.ConcreteCl31BridgeSurface where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Algebra.Clifford.ConcreteCl31Basis as Cl31
 import DASHI.Algebra.Clifford.UniversalProperty as CUP
-import DASHI.Geometry.CliffordGate as Gate
 import DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem as QCB
 
 ------------------------------------------------------------------------
@@ -71,15 +70,15 @@ concreteCl31BridgeFromLinearExtension extension =
     { abstractQuadraticBridge = QCB.canonicalQuadraticToCliffordBridgeTheorem
     ; concreteBasis = Cl31.canonicalConcreteCl31Basis
     ; basisDimension = Cl31.bladeCount
-    ; basisDimensionIs16 = Agda.Builtin.Equality.refl
+    ; basisDimensionIs16 = refl
     ; timeGenerator = Cl31.e0
     ; spaceGenerator1 = Cl31.e1
     ; spaceGenerator2 = Cl31.e2
     ; spaceGenerator3 = Cl31.e3
-    ; timeGeneratorIsE0 = Agda.Builtin.Equality.refl
-    ; spaceGenerator1IsE1 = Agda.Builtin.Equality.refl
-    ; spaceGenerator2IsE2 = Agda.Builtin.Equality.refl
-    ; spaceGenerator3IsE3 = Agda.Builtin.Equality.refl
+    ; timeGeneratorIsE0 = refl
+    ; spaceGenerator1IsE1 = refl
+    ; spaceGenerator2IsE2 = refl
+    ; spaceGenerator3IsE3 = refl
     ; timeSquareNegative = Cl31.generatorSquare Cl31.e0
     ; space1SquarePositive = Cl31.generatorSquare Cl31.e1
     ; space2SquarePositive = Cl31.generatorSquare Cl31.e2
@@ -98,5 +97,4 @@ record ConcreteCl31UniversalAdapter
     universalProperty : CUP.CliffordUP cliffordData
     basisEmbedsNontrivially : Set
     multiplicationAgreesWithBasisAction : Set
-    abstractGatePresentation :
-      Set
+    abstractGatePresentation : Set
