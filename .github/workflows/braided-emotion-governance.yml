@@ -1,0 +1,65 @@
+name: Braided emotion governance
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Biology/BraidedEmotion*.agda"
+      - "DASHI/Biology/*Governance*.agda"
+      - "DASHI/Culture/KimmererBraidingAcknowledgement.agda"
+      - "DASHI/Culture/CulturalProvenanceBoundaryCore.agda"
+      - "DASHI/Promotion/*BoundaryCore.agda"
+      - "DASHI/Unified/BraidedEmotionGovernanceRegression.agda"
+      - "scripts/audit_governance_builtins_only.py"
+      - "scripts/governance_builtins_allowlist.txt"
+      - ".github/workflows/braided-emotion-governance.yml"
+  push:
+    branches: [master]
+    paths:
+      - "DASHI/Biology/BraidedEmotion*.agda"
+      - "DASHI/Biology/*Governance*.agda"
+      - "DASHI/Culture/KimmererBraidingAcknowledgement.agda"
+      - "DASHI/Culture/CulturalProvenanceBoundaryCore.agda"
+      - "DASHI/Promotion/*BoundaryCore.agda"
+      - "DASHI/Unified/BraidedEmotionGovernanceRegression.agda"
+      - "scripts/audit_governance_builtins_only.py"
+      - "scripts/governance_builtins_allowlist.txt"
+      - ".github/workflows/braided-emotion-governance.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Agda
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda-bin
+          agda --version
+
+      - name: Typecheck canonical governance facade
+        run: |
+          agda -i . DASHI/Unified/BraidedEmotionGovernanceRegression.agda
+          agda -i . DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
+          agda -i . DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
+          agda -i . DASHI/Culture/KimmererBraidingAcknowledgement.agda
+
+      - name: Reject new unapproved governance islands
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+          python3 scripts/audit_governance_builtins_only.py . \
+            --changed-from "$BASE_SHA" \
+            --fail
+
+      - name: Report all legacy governance islands
+        run: python3 scripts/audit_governance_builtins_only.py .
