@@ -15,6 +15,9 @@ It reuses the existing `Base369` carriers `TriTruth`, `HexTruth`, and
 `NonaryTruth`, plus the role-separation discipline from
 `DASHI.Foundations.NumberRoleBoundary`.
 
+The implemented polyphase/spectral/engineering follow-on is documented in
+`Docs/support/reference/Base369TeslaPolyphase.md`.
+
 ## 1. Generated expressions, not a basis
 
 The syntax
@@ -140,18 +143,31 @@ A_n = πr² / n.
 
 The present Agda module records this as `SectorUnrollingBoundary` rather than
 pretending that the finite `Nat` carriers prove a theorem of real integration.
-A future analytic module may discharge the integral after selecting the
-repository's canonical real-analysis interface.
+The follow-on module `DASHI.Geometry.Base369SectorUnrollingFinite` now checks
+exact finite radial arc profiles and accumulated area units, while leaving the
+continuum limit behind the same analytic boundary.
 
-## 5. Extension path
+## 5. Implemented follow-on
 
-The next mathematically meaningful extensions are:
+The next finite tranche is now implemented:
 
-1. a generic finite cyclic carrier `C n` with rotation and group laws;
-2. refinement maps induced by divisibility proofs `n | m`;
-3. common refinements expressed by `lcm` and coarse intersections by `gcd`;
-4. characters/Fourier modes on the finite phase grids;
-5. an MDL cost on `Expr369`, selecting minimum-cost representatives modulo a
-   chosen circle resolution;
-6. a real-analysis sector-unrolling theorem kept separate from historical or
-   physical interpretation.
+1. `DASHI.Foundations.Base369BinaryTernaryRefinement` gives the
+   `C_(2^a 3^b)` resolution coordinates and commuting binary/ternary refinement;
+2. `DASHI.Foundations.Base369TriadicPhaseTower` checks a concrete
+   `C3 -> C9 -> C27` lift/project fragment;
+3. `DASHI.Foundations.Base369PolyphaseCharacters` checks the symbolic `C3`
+   character-exponent sectors corresponding to zero, positive, and negative
+   phase sequence;
+4. `DASHI.Physics.Closure.Base369PolyphaseKernelBoundary` checks finite shift
+   equivariance and symbolic one-step mode response;
+5. `DASHI.Foundations.Base369EngineeringMDL` separates winding, switching,
+   components, switching complexity, harmonic synthesis, and control-program
+   costs and combines them with model/residual description length;
+6. `DASHI.Physics.Closure.Base369AutomorphicSpectralGate` keeps trace/theta,
+   modular-law, Eisenstein, elliptic-curve, and `j` promotion dependency-gated;
+7. `DASHI.Physics.Closure.TeslaPolyphaseHistoricalBoundary` keeps engineering
+   motivation separate from unsupported historical attribution.
+
+The remaining theorem path is generic `C n`, divisibility-indexed maps, full
+finite Fourier inversion over an explicit scalar carrier, quotient-compatible
+kernel families, calibrated engineering costs, and the real sector-area limit.
