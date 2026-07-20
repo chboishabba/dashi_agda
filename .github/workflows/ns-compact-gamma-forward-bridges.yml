@@ -12,12 +12,21 @@ on:
       - 'DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalUniformRestrictionSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
+      - 'DASHI/Physics/Closure/NSDifferentiatedTriadAnalyticLeaf.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaDifferentiatedTriadInstantiation.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaFullShellSchur.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaTriadFullShellCoherence.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketDifferentialModulusBridge.agda'
+      - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaGalerkinLimitBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservation.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaTimeIntegrabilityBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaBKMTimeIntegrability.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaAnalyticClosureProgram.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
+      - 'Docs/NSCompactGammaAnalyticSynthesis.md'
       - '.github/workflows/ns-compact-gamma-forward-bridges.yml'
   push:
     paths:
@@ -30,12 +39,21 @@ on:
       - 'DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalUniformRestrictionSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
+      - 'DASHI/Physics/Closure/NSDifferentiatedTriadAnalyticLeaf.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaDifferentiatedTriadInstantiation.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaFullShellSchur.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaTriadFullShellCoherence.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketDifferentialModulusBridge.agda'
+      - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaGalerkinLimitBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservation.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaTimeIntegrabilityBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaBKMTimeIntegrability.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaAnalyticClosureProgram.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
+      - 'Docs/NSCompactGammaAnalyticSynthesis.md'
       - '.github/workflows/ns-compact-gamma-forward-bridges.yml'
 
 concurrency:
@@ -81,16 +99,24 @@ jobs:
               DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda \
               DASHI/Physics/Closure/NSWall1CanonicalUniformRestrictionSchur.agda \
               DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda \
+              DASHI/Physics/Closure/NSDifferentiatedTriadAnalyticLeaf.agda \
+              DASHI/Physics/Closure/NSCompactGammaDifferentiatedTriadInstantiation.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda \
+              DASHI/Physics/Closure/NSCompactGammaFullShellSchur.agda \
+              DASHI/Physics/Closure/NSCompactGammaTriadFullShellCoherence.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketDifferentialModulusBridge.agda \
+              DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda \
               DASHI/Physics/Closure/NSCompactGammaGalerkinLimitBridge.agda \
+              DASHI/Physics/Closure/NSCompactGammaAdmissiblePreservation.agda \
               DASHI/Physics/Closure/NSCompactGammaTimeIntegrabilityBridge.agda \
+              DASHI/Physics/Closure/NSCompactGammaBKMTimeIntegrability.agda \
+              DASHI/Physics/Closure/NSCompactGammaAnalyticClosureProgram.agda \
               DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda
           ) > agda-ns-compact-gamma-forward.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 420 agda-ns-compact-gamma-forward.log
+          tail -n 520 agda-ns-compact-gamma-forward.log
           exit 0
       - name: Upload focused Agda log
         if: always()
