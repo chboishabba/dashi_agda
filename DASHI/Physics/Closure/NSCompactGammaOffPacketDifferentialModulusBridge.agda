@@ -1,7 +1,5 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketDifferentialModulusBridge where
 
-open import Agda.Primitive using (Set₁)
-
 import DASHI.Physics.Closure.NSCompactGammaDifferentialModulus as Differential
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketSchurSplit
