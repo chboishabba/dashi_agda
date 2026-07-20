@@ -7,6 +7,7 @@ module DASHI.Physics.YangMills.ConstructiveYangMillsNextSurface where
 import DASHI.Physics.YangMills.SUNMatrixCarrier
 import DASHI.Physics.YangMills.SUNMatrixLieAlgebra
 import DASHI.Physics.YangMills.SUNMatrixLieGroup
+import DASHI.Physics.YangMills.SUNMatrixGeometry
 import DASHI.Physics.YangMills.SU3MatrixInstance
 
 import DASHI.Physics.YangMills.BalabanFiniteInverseConsequences
