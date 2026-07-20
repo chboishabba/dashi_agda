@@ -144,7 +144,7 @@ c9ToC27Step =
     phase27ToNonarySector
     nonaryTo27-section
 
-record TriadicPhaseTowerFragmentReceipt : Set where
+record TriadicPhaseTowerFragmentReceipt : Set₁ where
   constructor triadicPhaseTowerFragmentReceipt
   field
     level3 : Set
