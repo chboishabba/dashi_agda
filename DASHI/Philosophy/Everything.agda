@@ -1,7 +1,11 @@
 module DASHI.Philosophy.Everything where
 
+import DASHI.Philosophy.ActionDominationCost
 import DASHI.Philosophy.AgonisticRelationalPluralism
+import DASHI.Philosophy.BreadthProfile
+import DASHI.Philosophy.ContextTopology
 import DASHI.Philosophy.ContextValuation
+import DASHI.Philosophy.DeterritorialisationReceipt
 import DASHI.Philosophy.ExistingFormalismBridge
 import DASHI.Philosophy.InhumanRelationalFork
 import DASHI.Philosophy.InterpretationStrata
@@ -11,10 +15,14 @@ import DASHI.Philosophy.MarkedRelationalExtension
 import DASHI.Philosophy.MaterialFeedbackIntervention
 import DASHI.Philosophy.PatternPreservingTeaching
 import DASHI.Philosophy.PhilosophicalPromotionBoundary
+import DASHI.Philosophy.PolyphonicRelation
+import DASHI.Philosophy.PowerAndGrammar
 import DASHI.Philosophy.ProcessOntology
 import DASHI.Philosophy.ReflexivePowerUp
 import DASHI.Philosophy.RelationalAtlas
 import DASHI.Philosophy.RelationalEncounter
 import DASHI.Philosophy.RelationalProtocol
+import DASHI.Philosophy.RepresentationReadingBoundary
+import DASHI.Philosophy.RetroactiveMeaning
 import DASHI.Philosophy.SituatedState
 import DASHI.Philosophy.TopologyChangeBoundary
