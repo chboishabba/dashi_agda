@@ -2,13 +2,9 @@ module DASHI.Foundations.FiniteInvolutiveTrajectory where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 
 import DASHI.Foundations.InvolutiveTernaryDynamics as ITD
-
-------------------------------------------------------------------------
--- Proof-carrying finite paths.  Every constructor records a genuine dynamics
--- step, so closure of an orbit is a theorem in the type rather than a loose
--- field of type Set.
 
 data FinitePath (D : ITD.InvolutiveDynamics) :
   Nat → ITD.State D → ITD.State D → Set where
@@ -29,10 +25,6 @@ mirrorPath : ∀ {D n s z} →
 mirrorPath {D} stop = stop
 mirrorPath {D} (advance u p) rewrite ITD.step-equivariant D _ u =
   advance (ITD.controlι D u) (mirrorPath p)
-
-------------------------------------------------------------------------
--- Trajectory action is derived from the actual path.  We count the action of
--- each visited source state and the terminal state.
 
 pathAction : ∀ {D n s z} →
   ITD.EvenAction D → FinitePath D n s z → Nat
