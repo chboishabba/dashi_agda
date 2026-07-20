@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSWall1RationalPolarizationProofs where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ)
 
+open import DASHI.Physics.Closure.NSWall1CanonicalModePacket
 open import DASHI.Physics.Closure.NSWall1ExactEvaluationCarrier
 open import DASHI.Physics.Closure.NSWall1CanonicalPolarizations
 open import DASHI.Physics.Closure.NSWall1RationalScalarInstance
