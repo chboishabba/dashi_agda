@@ -34,7 +34,8 @@ The exact surface proves or assembles:
 - a concrete generic adjoint representation, with exact identity, product, linearity, and bracket-automorphism laws proved from quaternion multiplication;
 - weighted-column estimate to pointwise exponential kernel decay;
 - `C_G L_N ≤ ρ` plus the local critical-map estimate to a contraction estimate at `ρ`;
-- assembly of fixed-point/critical-point, minimizer, gauge-orbit, and analytic-dependence interfaces into the background-field package.
+- assembly of fixed-point/critical-point, minimizer, gauge-orbit, and analytic-dependence interfaces into the background-field package;
+- finite reflection positivity from an explicit sum-of-squares factorization and preservation under compatible blocking pullback.
 
 The quaternion rotation polynomials therefore become a concrete implementation of generic `Ad`, rather than a dependency of the generic theory.
 
@@ -49,9 +50,10 @@ The next surface adds a finite-matrix presentation that is independent of quater
 - `SUNMatrixGeometry.agda` assembles the invariant trace metric, bi-invariant distance, quantitative local exponential chart, and group-dependent bracket/adjoint constants;
 - `SU3MatrixInstance.agda` fixes `N = 3` and computes `dim su(3) = 8`;
 - `SUNWilsonClassFunction.agda` turns normalized real trace into a checked class function and instantiates closed-loop gauge invariance;
-- `SUNWilsonAction.agda` defines the finite plaquette sum and proves gauge invariance of the full Wilson action by induction over plaquettes.
+- `SUNWilsonAction.agda` defines the finite plaquette sum and proves gauge invariance of the full Wilson action by induction over plaquettes;
+- `SUNWilsonReflectionPositivity.agda` converts the standard Peter–Weyl/Haar interface factorization into a finite OS-positive Wilson form.
 
-Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, exponential-chart facts, and cyclicity of trace are `standardImported`. The subtype construction and all group/Lie/metric/chart/Wilson record assembly are `machineChecked`.
+Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, exponential-chart facts, cyclicity of trace, and the Peter–Weyl interface factorization are `standardImported`. The subtype construction and all group/Lie/metric/chart/Wilson/OS record assembly are `machineChecked`.
 
 ## Standard imported layer
 
@@ -78,8 +80,9 @@ Finite complex-matrix algebra, determinant identities, compactness, connectednes
 7. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
 8. `BalabanStepVKPClosure.agda` separates polymer activity, entropy, suppression, and the final Kotecký–Preiss comparison;
 9. `BalabanAllScaleRGClosure.agda` proves the exact induction from one-step invariant-domain preservation to admissibility at every finite scale;
-10. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
-11. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
+10. `FiniteReflectionPositivity.agda`, `SUNWilsonReflectionPositivity.agda`, and `ReflectionPositiveBlocking.agda` provide the finite Wilson OS positivity and compatible-blocking lane;
+11. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
+12. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
 
 These modules prove the logical bridges and keep the analytic antecedents explicit. No large-field, all-scale, OS, or mass-gap premise is silently manufactured.
 
@@ -96,7 +99,8 @@ Conditional inputs:
 - constrained Hessian coercivity;
 - nonlinear gauge-fixing contraction;
 - the fully instantiated background-field closure;
-- one-step fluctuation, determinant, Ward, localization, and polymer estimates.
+- one-step fluctuation, determinant, Ward, localization, and polymer estimates;
+- reflection-positive compatibility of the concrete multiscale blocking and effective measures.
 
 Conjectural targets:
 
