@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Core.KernelRenormalization where
 
-open import Agda.Builtin.Equality using (_≡_; cong)
+open import Relation.Binary.PropositionalEquality using (_≡_; cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_≤_)
 
