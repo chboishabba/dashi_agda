@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.BalabanConcreteStepVSuppression where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanStepVKPClosure as StepV
+import DASHI.Physics.YangMills.CompactLieYangMillsFrontier as Frontier
 
 record ConcreteStepVSuppressionData
     (Site Polymer Bound : Set) : Set₁ where
@@ -108,6 +109,22 @@ concreteStepVCertificate :
   StepV.StepVSpatialCertificate Site Polymer Bound
 concreteStepVCertificate dataSet =
   StepV.assembleStepVSpatial (toStepVSpatialInputs dataSet)
+
+toLargeFieldStepVTarget :
+  ∀ {Site Polymer Bound : Set} →
+  (dataSet : ConcreteStepVSuppressionData Site Polymer Bound) →
+  Frontier.LargeFieldStepVTarget Polymer Bound
+toLargeFieldStepVTarget dataSet = record
+  { activity = activityWeight dataSet
+  ; DiameterEntropyControlled = DiameterEntropyControlled dataSet
+  ; LargeFieldSuppressed = LargeFieldSuppressed dataSet
+  ; KoteckyPreissSummable = ∀ site →
+      LessEqual dataSet (weightedSumAt dataSet site) (kpThreshold dataSet)
+  ; diameterEntropyControlled = diameterEntropyControlled dataSet
+  ; largeFieldSuppressed = largeFieldSuppressed dataSet
+  ; koteckyPreissSummable =
+      StepV.kpAtEverySite (concreteStepVCertificate dataSet)
+  }
 
 concreteStepVBridgeLevel : ProofLevel
 concreteStepVBridgeLevel = machineChecked
