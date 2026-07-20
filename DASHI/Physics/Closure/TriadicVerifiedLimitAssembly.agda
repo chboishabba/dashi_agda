@@ -1,8 +1,8 @@
 module DASHI.Physics.Closure.TriadicVerifiedLimitAssembly where
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Env
@@ -13,11 +13,11 @@ import DASHI.Physics.Closure.TriadicModularAutomorphicGate as Modular
 import DASHI.Geometry.TriadicEllipticModuliGate as Elliptic
 
 ------------------------------------------------------------------------
--- Optional gated lanes.
+-- Optional gated lanes at Set₁.
 
-data Optional (A : Set) : Set where
-  absent : Optional A
-  present : A → Optional A
+data Optional₁ (A : Set₁) : Set₁ where
+  absent₁ : Optional₁ A
+  present₁ : A → Optional₁ A
 
 ------------------------------------------------------------------------
 -- Exact finite approximant plus certified tail.
@@ -46,7 +46,7 @@ record ModeStabilizationCertificate : Set₁ where
     liftSector :
       (n : Nat) →
       SectorAtDepth n →
-      SectorAtDepth (Agda.Builtin.Nat.suc n)
+      SectorAtDepth (suc n)
 
     Observable : Set
     sectorObservable :
@@ -119,14 +119,14 @@ record TriadicVerifiedLimitAssembly : Set₁ where
     sectorTraceTower : QS.SectorTraceTower qSeriesCarrier
 
     modularTransformation :
-      Optional
+      Optional₁
         (Modular.ModularTransformationGate
           qSeriesCarrier
           sectorTraceTower)
 
     ellipticCoefficientRing : Elliptic.EllipticCoefficientRing
     ellipticOrigin :
-      Optional
+      Optional₁
         (Elliptic.EllipticOriginGate ellipticCoefficientRing)
 
     pAdicAnalyticLane : PAdicAnalyticLane
