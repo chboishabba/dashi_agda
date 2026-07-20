@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.SUNMatrixLieAlgebra
 import DASHI.Physics.YangMills.SUNMatrixLieGroup
 import DASHI.Physics.YangMills.SU3MatrixInstance
 
+import DASHI.Physics.YangMills.BalabanFiniteInverseConsequences
 import DASHI.Physics.YangMills.BalabanFiniteVolumeBackgroundLane
 import DASHI.Physics.YangMills.BalabanOneStepRGClosure
 import DASHI.Physics.YangMills.BalabanStepVKPClosure
