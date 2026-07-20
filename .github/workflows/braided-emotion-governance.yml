@@ -32,7 +32,7 @@ jobs:
   typecheck-and-audit:
     runs-on: ubuntu-latest
     env:
-      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i /usr/share/agda-stdlib"
+      AGDA_FLAGS: "--no-libraries --no-default-libraries --no-write-interfaces -i . -i /usr/share/agda-stdlib"
     steps:
       - uses: actions/checkout@v4
         with:
