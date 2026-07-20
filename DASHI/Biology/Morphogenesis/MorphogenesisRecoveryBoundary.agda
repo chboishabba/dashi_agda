@@ -1,5 +1,7 @@
 module DASHI.Biology.Morphogenesis.MorphogenesisRecoveryBoundary where
 
+open import Agda.Primitive using (Setω)
+
 import DASHI.Biology.Morphogenesis.MorphologicalGoalQuotient as Goal
 import DASHI.Biology.Morphogenesis.LocalToGlobalControlBridge as LocalGlobal
 import DASHI.Biology.Morphogenesis.RegenerativeRepairBoundary as Repair
@@ -7,7 +9,7 @@ import DASHI.Biology.Morphogenesis.ReactionDiffusionModeSelection as Modes
 import DASHI.Biology.Development.DevelopmentalGenomicInverseAdapter as Development
 import DASHI.Biology.Agency.ScaleIndexedAgency as Agency
 
-record MorphogenesisRecoveryBoundary : Set₁ where
+record MorphogenesisRecoveryBoundary : Setω where
   field
     goalSystem        : Goal.MorphologicalGoalSystem
     localGlobal       : LocalGlobal.LocalToGlobalMorphogenesis
@@ -31,7 +33,7 @@ record MorphogenesisRecoveryBoundary : Set₁ where
     competencyCompositionWitness : ScaleIndexedCompetencyComposition
 
 record MorphogenesisRecoveryWitness
-  (M : MorphogenesisRecoveryBoundary) : Set₁ where
+  (M : MorphogenesisRecoveryBoundary) : Setω where
   field
     MorphologicalGoalRecovered : Set
     PatternSelectionRecovered  : Set
@@ -46,7 +48,7 @@ record MorphogenesisRecoveryWitness
     developmentalWitness : DevelopmentalInverseIntegrated
 
 record MorphogenesisOpenObligations
-  (M : MorphogenesisRecoveryBoundary) : Set₁ where
+  (M : MorphogenesisRecoveryBoundary) : Setω where
   field
     calibratedCellTissueDynamics : Set
     coupledChemicalMechanicalBioelectricControl : Set
