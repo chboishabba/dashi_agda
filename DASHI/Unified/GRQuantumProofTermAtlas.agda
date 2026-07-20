@@ -22,6 +22,13 @@ import DASHI.Physics.Closure.PropositionConstraintAlgebra
 import DASHI.Physics.Closure.FiniteRegionalSpectrum
 import DASHI.Physics.Closure.FiniteRegionalSpectrumBoundary
 import DASHI.Empirical.GRQuantumCorrespondenceBoundary
+import DASHI.Empirical.GRQuantumObservableCalibration
+import DASHI.Empirical.GRQuantumKnownLimitRecovery
+import DASHI.Empirical.GRQuantumBenchmarkProtocol
+import DASHI.Empirical.GRQuantumPredictionProtocol
+import DASHI.Empirical.GRQuantumIndependentReview
+import DASHI.Empirical.GRQuantumEmpiricalValidationProgramme
+import DASHI.Empirical.GRQuantumEmpiricalValidationRegression
 import DASHI.Unified.GRQuantumFiniteDiagnosticReceipt
 import DASHI.Unified.GRQuantumProofAdapters
 import DASHI.Unified.GRQuantumUnificationProofTermBridge
