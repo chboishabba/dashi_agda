@@ -3,31 +3,19 @@ module DASHI.Physics.Closure.TriadicKraftMDLConsistency where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Integer using (+_)
+open import Data.List.Base using (List; []; _∷_)
+open import Data.Nat using (_≤_; _<_; _+_; z≤n; s≤s)
+open import Data.Nat.Properties using (<⇒≱)
 open import Data.Rational using (ℚ; 1ℚ; _+_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Data.List.Base using ([]; _∷_)
-open import Data.Nat using (_≤_; _<_)
-open import Data.Nat.Properties using (<⇒≱)
+open import Data.Unit using (⊤; tt)
+open import Relation.Binary.PropositionalEquality using (cong; _≢_)
 open import Relation.Nullary using (Dec; yes; no)
 
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Physics.Closure.TriadicRepresentationMDL as MDL
-
-------------------------------------------------------------------------
--- Logical helpers.
-
-data ⊥ : Set where
-
-⊥-elim : ∀ {A : Set} → ⊥ → A
-⊥-elim ()
-
-_≢_ : ∀ {A : Set} → A → A → Set
-x ≢ y = x ≡ y → ⊥
-
-data ⊤ : Set where
-  tt : ⊤
 
 ------------------------------------------------------------------------
 -- Concrete prefix code for the five representation classes.
@@ -48,6 +36,27 @@ encodeDescription MDL.ellipticModuli = bit1 ∷ bit1 ∷ bit1 ∷ []
 wordLength : Codeword → Nat
 wordLength [] = zero
 wordLength (_ ∷ xs) = suc (wordLength xs)
+
+rawLengthExact : wordLength (encodeDescription MDL.rawTrits) ≡ suc (suc zero)
+rawLengthExact = refl
+
+finiteLengthExact :
+  wordLength (encodeDescription MDL.finiteQuotient) ≡ suc (suc zero)
+finiteLengthExact = refl
+
+irrepLengthExact :
+  wordLength (encodeDescription MDL.irrepBlocks) ≡ suc (suc zero)
+irrepLengthExact = refl
+
+modularLengthExact :
+  wordLength (encodeDescription MDL.modularCoordinates)
+  ≡ suc (suc (suc zero))
+modularLengthExact = refl
+
+ellipticLengthExact :
+  wordLength (encodeDescription MDL.ellipticModuli)
+  ≡ suc (suc (suc zero))
+ellipticLengthExact = refl
 
 data Prefix : Codeword → Codeword → Set where
   emptyPrefix : ∀ {ys : Codeword} → Prefix [] ys
@@ -108,7 +117,7 @@ kraftSum =
   + kraftWeight MDL.ellipticModuli)))
 
 kraftEquality : kraftSum ≡ 1ℚ
-kraftEquality = solve ([])
+kraftEquality = solve []
 
 PrefixFreeCode : Set
 PrefixFreeCode =
@@ -142,7 +151,7 @@ concreteKraftReceipt =
     }
 
 ------------------------------------------------------------------------
--- Evidence-carrying asymptotic consistency assumptions.
+-- Evidence-carrying eventuality and statistical assumptions.
 
 record Eventually (P : Nat → Set) : Set where
   constructor eventually
@@ -187,27 +196,29 @@ record StatisticalMDLAssumptions : Set₁ where
       candidate ≢ trueCandidate →
       populationRisk trueCandidate < populationRisk candidate
 
-    concentrationOrErgodicity : Set
-    modelClassGrowthControlled : Set
+    ConcentrationOrErgodicity : Set
+    concentrationOrErgodicity : ConcentrationOrErgodicity
 
-    -- This is the exact statistical consequence consumed by the theorem.
-    -- In applications it is proved from the preceding risk gap together with
-    -- uniform concentration/ergodicity and the class-growth bound.
+    ModelClassGrowthControlled : Set
+    modelClassGrowthControlled : ModelClassGrowthControlled
+
+    -- This is the exact consequence applications prove from the risk gap,
+    -- concentration/ergodicity evidence, and controlled class growth.
     eventualStrictOracleSeparation :
-      Eventually λ sampleSize →
+      Eventually (λ sampleSize →
         (candidate : Candidate) →
         candidate ≢ trueCandidate →
         objective sampleSize trueCandidate
-        < objective sampleSize candidate
+        < objective sampleSize candidate)
 
 open StatisticalMDLAssumptions public
 
 ------------------------------------------------------------------------
--- Selection consistency theorem.
+-- Selection and risk consistency theorem.
 
 eventualSelectionConsistency :
   (A : StatisticalMDLAssumptions) →
-  Eventually λ sampleSize → selected A sampleSize ≡ trueCandidate A
+  Eventually (λ sampleSize → selected A sampleSize ≡ trueCandidate A)
 eventualSelectionConsistency A =
   eventually
     (threshold separation)
@@ -232,9 +243,9 @@ eventualSelectionConsistency A =
 
 riskConsistencyFromSelection :
   (A : StatisticalMDLAssumptions) →
-  Eventually λ sampleSize →
+  Eventually (λ sampleSize →
     populationRisk A (selected A sampleSize)
-    ≡ populationRisk A (trueCandidate A)
+    ≡ populationRisk A (trueCandidate A))
 riskConsistencyFromSelection A =
   eventually
     (threshold selectedEventually)
@@ -286,25 +297,26 @@ oracleMinimal :
   (candidate : OracleCandidate) →
   oracleObjective sampleSize (oracleSelected sampleSize)
   ≤ oracleObjective sampleSize candidate
-oracleMinimal sampleSize oracleModel = Data.Nat.z≤n
-oracleMinimal sampleSize alternativeModel = Data.Nat.z≤n
+oracleMinimal sampleSize oracleModel = z≤n
+oracleMinimal sampleSize alternativeModel = z≤n
 
 oracleIdentifiable :
   (candidate : OracleCandidate) →
   candidate ≢ oracleModel →
   oracleRisk oracleModel < oracleRisk candidate
 oracleIdentifiable oracleModel notEqual = ⊥-elim (notEqual refl)
-oracleIdentifiable alternativeModel notEqual = Data.Nat.s≤s Data.Nat.z≤n
+oracleIdentifiable alternativeModel notEqual = s≤s z≤n
 
 oracleSeparation :
-  Eventually λ sampleSize →
+  Eventually (λ sampleSize →
     (candidate : OracleCandidate) →
     candidate ≢ oracleModel →
     oracleObjective sampleSize oracleModel
-    < oracleObjective sampleSize candidate
+    < oracleObjective sampleSize candidate)
 oracleSeparation =
-  eventually zero λ sampleSize largeEnough candidate notEqual →
-    oracleIdentifiable candidate notEqual
+  eventually zero
+    (λ sampleSize largeEnough candidate notEqual →
+      oracleIdentifiable candidate notEqual)
 
 noiselessTriadicAssumptions : StatisticalMDLAssumptions
 noiselessTriadicAssumptions =
@@ -321,20 +333,21 @@ noiselessTriadicAssumptions =
     ; selectedIsMinimal = oracleMinimal
     ; kraftReceipt = concreteKraftReceipt
     ; identifiableOracle = oracleIdentifiable
-    ; concentrationOrErgodicity = ⊤
-    ; modelClassGrowthControlled = ⊤
+    ; ConcentrationOrErgodicity = ⊤
+    ; concentrationOrErgodicity = tt
+    ; ModelClassGrowthControlled = ⊤
+    ; modelClassGrowthControlled = tt
     ; eventualStrictOracleSeparation = oracleSeparation
     }
 
 noiselessSelectionConsistent :
-  Eventually λ sampleSize →
-    oracleSelected sampleSize ≡ oracleModel
+  Eventually (λ sampleSize → oracleSelected sampleSize ≡ oracleModel)
 noiselessSelectionConsistent =
   eventualSelectionConsistency noiselessTriadicAssumptions
 
 noiselessRiskConsistent :
-  Eventually λ sampleSize →
-    oracleRisk (oracleSelected sampleSize) ≡ oracleRisk oracleModel
+  Eventually (λ sampleSize →
+    oracleRisk (oracleSelected sampleSize) ≡ oracleRisk oracleModel)
 noiselessRiskConsistent =
   riskConsistencyFromSelection noiselessTriadicAssumptions
 
@@ -368,15 +381,15 @@ record ConcreteRepresentationConsistencyReceipt : Set₁ where
     kraft : ConcreteKraftReceipt
     statisticalAssumptions : StatisticalMDLAssumptions
     selectionConsistency :
-      Eventually λ sampleSize →
+      Eventually (λ sampleSize →
         selected statisticalAssumptions sampleSize
-        ≡ trueCandidate statisticalAssumptions
+        ≡ trueCandidate statisticalAssumptions)
     riskConsistency :
-      Eventually λ sampleSize →
+      Eventually (λ sampleSize →
         populationRisk statisticalAssumptions
           (selected statisticalAssumptions sampleSize)
         ≡ populationRisk statisticalAssumptions
-          (trueCandidate statisticalAssumptions)
+          (trueCandidate statisticalAssumptions))
     representationAlwaysRecovered :
       (sampleSize : Nat) →
       selectedRepresentationAtSample sampleSize ≡ trueRepresentation
@@ -400,4 +413,4 @@ concreteRepresentationConsistency =
 
 kraftMDLStatement : String
 kraftMDLStatement =
-  "The five representation classes use the prefix code 00,01,10,110,111 with exact Kraft sum 1. Under decidable candidates, selector minimality, identifiability, controlled class growth, and eventual strict oracle separation supplied by concentration or ergodicity, the MDL selector is eventually equal to the true candidate and therefore risk-consistent."
+  "The five representation classes use the prefix code 00,01,10,110,111 with exact Kraft sum 1. Under decidable candidates, selector minimality, identifiability, concrete concentration or ergodicity evidence, controlled class growth, and their eventual strict-oracle consequence, the MDL selector is eventually equal to the true candidate and therefore risk-consistent."
