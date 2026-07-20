@@ -88,6 +88,7 @@ def _review(role: str, reviewer_id: str, commit: str) -> dict[str, object]:
         "no_repository_authorship": True,
         "no_recent_direct_collaboration": True,
         "no_undisclosed_financial_conflict": True,
+        "no_supervisory_dependency": True,
         "all_blocking_findings_resolved": True,
         "negative_cases_checked": True,
     }
@@ -185,3 +186,10 @@ def test_duplicate_reviewers_and_equal_prediction_fail() -> None:
     errors = MODULE.validate(receipt)
     assert any("reviewer_id values must be distinct" in error for error in errors)
     assert "prediction central values must differ" in errors
+
+
+def test_supervisory_dependency_fails_independence_gate() -> None:
+    receipt = valid_receipt()
+    receipt["reviews"]["mathematics"]["no_supervisory_dependency"] = False
+    errors = MODULE.validate(receipt)
+    assert "reviews.mathematics.no_supervisory_dependency must be true" in errors
