@@ -4,9 +4,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Integer using (+_)
-open import Data.List.Base using ([]; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)
-open import Data.Rational.Tactic.RingSolver using (solve)
+open import Data.Rational.Solver using (module +-*-Solver)
+open +-*-Solver
 
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Env
 import DASHI.Physics.Closure.TriadicAnalyticCertificates as Certificates
@@ -68,14 +68,22 @@ nextTailBudgetIdentity :
   ≡ quarterTailRadius n
 nextTailBudgetIdentity n
   rewrite quarterPowerStep n =
-  solve (quarterPower n ∷ [])
+  solve 1
+    (λ x →
+      (x :+ (con fourThirds :* (x :* con quarter)))
+      := (con fourThirds :* x))
+    refl (quarterPower n)
 
 radiusQuarterStep :
   (n : Nat) →
   four * quarterTailRadius (suc n) ≡ quarterTailRadius n
 radiusQuarterStep n
   rewrite quarterPowerStep n =
-  solve (quarterPower n ∷ [])
+  solve 1
+    (λ x →
+      (con four :* (con fourThirds :* (x :* con quarter)))
+      := (con fourThirds :* x))
+    refl (quarterPower n)
 
 firstDifferenceBudgetIdentity :
   (n : Nat) →
@@ -83,7 +91,12 @@ firstDifferenceBudgetIdentity :
   ≡ quarterPower n
 firstDifferenceBudgetIdentity n
   rewrite quarterPowerStep n =
-  solve (quarterPower n ∷ [])
+  solve 1
+    (λ x →
+      ((con two :* (con fourThirds :* (x :* con quarter)))
+        :+ (con oneThird :* x))
+      := x)
+    refl (quarterPower n)
 
 record QuarterRealCode : Set where
   constructor quarter-real-code
