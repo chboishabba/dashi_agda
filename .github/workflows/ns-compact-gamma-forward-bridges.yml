@@ -16,6 +16,7 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaDifferentiatedTriadInstantiation.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFullShellSchur.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaTriadFullShellCoherence.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketDifferentialModulusBridge.agda'
       - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
@@ -42,6 +43,7 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaDifferentiatedTriadInstantiation.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFullShellSchur.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaTriadFullShellCoherence.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketDifferentialModulusBridge.agda'
       - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
@@ -101,6 +103,7 @@ jobs:
               DASHI/Physics/Closure/NSCompactGammaDifferentiatedTriadInstantiation.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda \
               DASHI/Physics/Closure/NSCompactGammaFullShellSchur.agda \
+              DASHI/Physics/Closure/NSCompactGammaTriadFullShellCoherence.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketDifferentialModulusBridge.agda \
               DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda \
