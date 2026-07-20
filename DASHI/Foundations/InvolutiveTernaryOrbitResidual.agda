@@ -1,8 +1,9 @@
 module DASHI.Foundations.InvolutiveTernaryOrbitResidual where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using (List)
 
 import DASHI.Foundations.InvolutiveTernaryDynamics as ITD
 
@@ -13,7 +14,7 @@ import DASHI.Foundations.InvolutiveTernaryDynamics as ITD
 -- This record exposes finite controlled cycles without assuming that every
 -- application has a canonical period or a globally minimising orbit.
 
-record ControlledOrbit (D : ITD.InvolutiveDynamics) : Set where
+record ControlledOrbit (D : ITD.InvolutiveDynamics) : Set₁ where
   constructor orbit
   field
     states : List (ITD.State D)
@@ -24,7 +25,7 @@ open ControlledOrbit public
 
 record LowActionOrbit
   (D : ITD.InvolutiveDynamics)
-  (A : ITD.EvenAction D) : Set where
+  (A : ITD.EvenAction D) : Set₁ where
   constructor lowActionOrbit
   field
     carrierOrbit : ControlledOrbit D
@@ -78,10 +79,10 @@ open ResidualBaseline public
 record OrbitResidualBoundary : Set where
   constructor boundary
   field
-    fixedPointIsPeriodOneReading : Set
-    orbitMinimalityRequiresInstantiation : Set
-    residualOperationRequiresInstantiation : Set
-    physicalInterpretationPromoted : Set
+    fixedPointIsPeriodOneReading : Bool
+    orbitMinimalityRequiresInstantiation : Bool
+    residualOperationRequiresInstantiation : Bool
+    physicalInterpretationPromoted : Bool
 
 canonicalBoundary : OrbitResidualBoundary
-canonicalBoundary = boundary Set Set Set Set
+canonicalBoundary = boundary true true true false
