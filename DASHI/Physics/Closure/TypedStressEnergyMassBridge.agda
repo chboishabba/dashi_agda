@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.TypedStressEnergyMassBridge where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
@@ -241,5 +242,5 @@ inertialMassFromDefectRequiresWitness energy witness = inertial witness
 residueEnergyNotMass :
   Conditional.ionizationStyleEnergyIdentifiedWithMass
     Conditional.canonicalMassIdentificationBoundary
-  ≡ Agda.Builtin.Bool.false
+  ≡ false
 residueEnergyNotMass = Conditional.canonicalResidueEnergyNotMass
