@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.BalabanUniformToMassGapChain where
 -- End-to-end constructive Yang--Mills dependency chain.
 --
 -- Every derived certificate below is a checked consequence of the named input
--- package.  The package deliberately retains the unresolved analytic data; it
+-- package. The package deliberately retains the unresolved analytic data; it
 -- is not a constructor for those data and cannot promote the Clay target.
 ------------------------------------------------------------------------
 
@@ -79,6 +79,10 @@ record UniformToMassGapCertificates
   stepV : StepV.StepVSpatialCertificate Site Polymer Bound
   stepV = StepVConcrete.concreteStepVCertificate (stepVSuppression inputs)
 
+  largeFieldTarget : Frontier.LargeFieldStepVTarget Polymer Bound
+  largeFieldTarget =
+    StepVConcrete.toLargeFieldStepVTarget (stepVSuppression inputs)
+
   allScales : AllScale.AllScaleRGCertificate State ErrorBound
   allScales =
     AllScaleConcrete.quantitativeAllScaleCertificate (allScaleInputs inputs)
@@ -87,9 +91,19 @@ record UniformToMassGapCertificates
   continuumOS =
     OSLimit.continuumOSFromLimit (osLimitProblem inputs) (osLimitClosure inputs)
 
+  continuumOSTarget :
+    Frontier.ContinuumOSTarget (Observable → Point → Point → Scalar)
+  continuumOSTarget =
+    OSLimit.toContinuumOSTarget (osLimitProblem inputs) (osLimitClosure inputs)
+
   physicalMassGap : OSGap.PhysicalMassGapCertificate Hamiltonian Bound
   physicalMassGap =
     GapSurvival.survivingPhysicalMassGap
+      (uniformCutoffGap inputs) (gapSurvival inputs)
+
+  physicalMassGapTarget : Frontier.PhysicalMassGapTarget Hamiltonian Bound
+  physicalMassGapTarget =
+    GapSurvival.toPhysicalMassGapTarget
       (uniformCutoffGap inputs) (gapSurvival inputs)
 
 open UniformToMassGapCertificates public
