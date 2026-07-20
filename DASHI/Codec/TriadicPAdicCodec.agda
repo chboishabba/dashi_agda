@@ -17,7 +17,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Agda.Primitive using (Level; Setω; lsuc; _⊔_)
+open import Agda.Primitive using (Level; Setω)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv; inv-invol)
 import DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding as BalancedEmbedding
@@ -157,10 +157,13 @@ encode5 x =
   + 3 * (tritCode (t3 x)
   + 3 * tritCode (t4 x))))
 
-record Pack5Contract : Set where
+record Pack5Contract : Set₁ where
   field
-    decode5 : Nat → FiveTrits
-    decodeEncode5 : (x : FiveTrits) → decode5 (encode5 x) ≡ x
+    Byte : Set
+    encodeByte : FiveTrits → Byte
+    decodeByte : Byte → FiveTrits
+    decodeEncode5 : (x : FiveTrits) → decodeByte (encodeByte x) ≡ x
+    byteCodeAgreesWithEncode5 : FiveTrits → Set
     encodedRangeLt243 : FiveTrits → Set
 
 -- The mathematical cardinality fact is 3^5 = 243 <= 256.  The executable
@@ -174,9 +177,11 @@ record Pack5Contract : Set where
 record BalancedDigitSystem : Set₁ where
   field
     Integer : Set
+    DigitCount : Set
     digit : Nat → Integer → Trit
     truncate : Nat → Integer → Integer
-    reconstructFinite : Nat → Vec Trit Nat.zero → Integer
+    finiteDigits : DigitCount → Set
+    reconstructFinite : (count : DigitCount) → finiteDigits count → Integer
 
 -- The repo's existing checked balanced-trit embedding is imported above as
 -- BalancedEmbedding.  This codec interface keeps integer residual expansion
@@ -341,17 +346,28 @@ record ExistingFormalismCrossReference : Setω where
   field
     tritCarrier : Set
     tritCarrierIsCanonical : tritCarrier ≡ Trit
-    balancedEmbeddingSurface : Set
+
+    balancedEmbeddingSurface : Set₁
     balancedEmbeddingSurfaceIsExisting :
       balancedEmbeddingSurface
       ≡
       BalancedEmbedding.BalancedTernaryEmbeddingShapeReceipt
-    mdlFunctionalSurface : Setω
-    mdlFunctionalSurfaceIsExisting :
-      mdlFunctionalSurface ≡ ExistingMDL.MDLFunctional
-    w9TerminationRouteSurface : Setω
-    w9TerminationRouteSurfaceIsExisting :
-      w9TerminationRouteSurface ≡ W9MDL.MDLTerminationSeamWitness
+
+    mdlFunctionalIdentity :
+      {S : Set} →
+      ExistingMDL.MDLFunctional S →
+      ExistingMDL.MDLFunctional S
+    mdlFunctionalIdentityIsIdentity :
+      {S : Set} →
+      (M : ExistingMDL.MDLFunctional S) →
+      mdlFunctionalIdentity M ≡ M
+
+    w9TerminationRouteIdentity :
+      W9MDL.MDLTerminationSeamWitness →
+      W9MDL.MDLTerminationSeamWitness
+    w9TerminationRouteIdentityIsIdentity :
+      (w : W9MDL.MDLTerminationSeamWitness) →
+      w9TerminationRouteIdentity w ≡ w
 
 canonicalCrossReference : ExistingFormalismCrossReference
 canonicalCrossReference =
@@ -361,8 +377,8 @@ canonicalCrossReference =
     ; balancedEmbeddingSurface =
         BalancedEmbedding.BalancedTernaryEmbeddingShapeReceipt
     ; balancedEmbeddingSurfaceIsExisting = refl
-    ; mdlFunctionalSurface = ExistingMDL.MDLFunctional
-    ; mdlFunctionalSurfaceIsExisting = refl
-    ; w9TerminationRouteSurface = W9MDL.MDLTerminationSeamWitness
-    ; w9TerminationRouteSurfaceIsExisting = refl
+    ; mdlFunctionalIdentity = λ M → M
+    ; mdlFunctionalIdentityIsIdentity = λ M → refl
+    ; w9TerminationRouteIdentity = λ w → w
+    ; w9TerminationRouteIdentityIsIdentity = λ w → refl
     }
