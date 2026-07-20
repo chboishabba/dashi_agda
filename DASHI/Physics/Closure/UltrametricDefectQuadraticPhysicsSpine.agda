@@ -109,3 +109,8 @@ canonicalSpinDiracFromForcedSignature :
 canonicalSpinDiracFromForcedSignature =
   CanonicalPhysicsClosureSpine.contractionSignatureToSpinDirac
     canonicalPhysicsClosureSpine
+
+-- Keep the actual-shift/operator, explicit Lorentz-uniqueness,
+-- constraint-transport, and constructive-continuum frontier in the same
+-- focused compilation surface.
+import DASHI.Physics.Closure.PhysicsClosureCrossPollinationTheorem
