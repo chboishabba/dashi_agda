@@ -1,236 +1,387 @@
 module DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; lzero; Setω)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
-open import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization
-open import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge
-open import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge
-open import DASHI.Physics.Closure.NSCompactGammaTimeIntegrabilityBridge
+import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization as Major
+import DASHI.Physics.Closure.NSCompactGammaDifferentiatedTriadInstantiation as Triads
+import DASHI.Physics.Closure.NSCompactGammaFullShellSchur as FullShell
+import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge as Tail
+import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge as Galerkin
+import DASHI.Physics.Closure.NSCompactGammaAdmissiblePreservation as Admissible
+import DASHI.Physics.Closure.NSCompactGammaBKMTimeIntegrability as BKM
 
 ------------------------------------------------------------------------
--- Final analytic closure surface for the compact-Gamma lane.
+-- Cross-pollinated compact-Gamma analytic closure.
 --
--- This module deliberately does not replace any analytic theorem by a Boolean
--- receipt.  It names the five concrete witnesses required by the program and
--- proves that, once they are supplied for one carrier, every downstream result
--- is obtained without another hidden seam.
+-- The earlier version of this module carried five opaque records, including an
+-- arbitrary scalar-valued "full shell row bound", an undifferentiated Galerkin
+-- convergence premise, wholesale path admissibility, and a free integrability
+-- envelope.  The repository now has stronger owners for every one of those
+-- seams.  This module composes those owners without weakening them.
 ------------------------------------------------------------------------
 
-record FullShellUniformMajorization
-    {m : Level}
-    (Mode : Set m)
-    (A : AbsorptionArithmetic) : Set (lsuc m) where
+record AdmissibleInvariantRegionCertificate
+    (Time State Shell : Set)
+    (O : Admissible.OrderedScalar lzero)
+    (S : Admissible.CompactGammaSystem O State Shell)
+    (B : Admissible.CompactGammaThresholds O)
+    (selection : Admissible.ShellSelection Shell)
+    (path : Admissible.Path Time State)
+    (continuityStructure : Admissible.ContinuityStructure Time O) : Setω where
   field
-    shell : Nat → Mode → Set
-    incidence : Nat → Mode → Mode → Set
+    continuity :
+      ∀ K → Admissible.UsedShell selection K →
+      Admissible.CompactGammaPathContinuity
+        continuityStructure S path K
 
-    localFourierResponse : Nat → Mode → Mode → Scalar A
-    localFourierMajorant : Nat → Mode → Mode → Scalar A
+    boundaryEstimate :
+      ∀ K → Admissible.UsedShell selection K →
+      Admissible.BoundaryDerivativeEstimate {O = O} Time
 
-    everyLocalFourierMajorization :
-      (cutoff : Nat) →
-      (target source : Mode) →
-      incidence cutoff target source →
-      _≤_ A
-        (localFourierResponse cutoff target source)
-        (localFourierMajorant cutoff target source)
+    logarithmicEnergyControl :
+      ∀ K → Admissible.UsedShell selection K →
+      Admissible.LogarithmicModulusIntegration {O = O} Time
 
-    rowBudget columnBudget : Scalar A
+    packetEnergyPositivity :
+      ∀ K → Admissible.UsedShell selection K →
+      Admissible.PacketEnergyPositivity S path K
 
-    fullShellRowBound :
-      (cutoff : Nat) →
-      (target : Mode) →
-      shell cutoff target →
-      Scalar A
+    -- The no-first-exit input is produced from the four analytic leaves above;
+    -- it is not accepted independently.
+    deriveNoFirstExit :
+      ∀ K (used : Admissible.UsedShell selection K) →
+      Admissible.CompactGammaPathContinuity
+        continuityStructure S path K →
+      Admissible.BoundaryDerivativeEstimate {O = O} Time →
+      Admissible.LogarithmicModulusIntegration {O = O} Time →
+      Admissible.PacketEnergyPositivity S path K →
+      Admissible.NoFirstExitInputs {S = S} {B = B} path K
 
-    fullShellColumnBound :
-      (cutoff : Nat) →
-      (source : Mode) →
-      shell cutoff source →
-      Scalar A
+    firstExitCompleteness :
+      ∀ K → Admissible.UsedShell selection K →
+      Admissible.FirstExitCompleteness S B path K
 
-    rowBoundUniform :
-      (cutoff : Nat) →
-      (target : Mode) →
-      (inside : shell cutoff target) →
-      _≤_ A (fullShellRowBound cutoff target inside) rowBudget
+open AdmissibleInvariantRegionCertificate public
 
-    columnBoundUniform :
-      (cutoff : Nat) →
-      (source : Mode) →
-      (inside : shell cutoff source) →
-      _≤_ A (fullShellColumnBound cutoff source inside) columnBudget
+noFirstExitInputsFromAnalyticLeaves :
+  ∀ {Time State Shell : Set}
+    {O : Admissible.OrderedScalar lzero}
+    {S : Admissible.CompactGammaSystem O State Shell}
+    {B : Admissible.CompactGammaThresholds O}
+    {selection : Admissible.ShellSelection Shell}
+    {path : Admissible.Path Time State}
+    {continuityStructure : Admissible.ContinuityStructure Time O} →
+  (I : AdmissibleInvariantRegionCertificate
+    Time State Shell O S B selection path continuityStructure) →
+  ∀ K (used : Admissible.UsedShell selection K) →
+  Admissible.NoFirstExitInputs {S = S} {B = B} path K
+noFirstExitInputsFromAnalyticLeaves I K used =
+  deriveNoFirstExit I K used
+    (continuity I K used)
+    (boundaryEstimate I K used)
+    (logarithmicEnergyControl I K used)
+    (packetEnergyPositivity I K used)
 
-open FullShellUniformMajorization public
+admissibilityPreservedAtEveryUsedShell :
+  ∀ {Time State Shell : Set}
+    {O : Admissible.OrderedScalar lzero}
+    {S : Admissible.CompactGammaSystem O State Shell}
+    {B : Admissible.CompactGammaThresholds O}
+    {selection : Admissible.ShellSelection Shell}
+    {path : Admissible.Path Time State}
+    {continuityStructure : Admissible.ContinuityStructure Time O} →
+  (I : AdmissibleInvariantRegionCertificate
+    Time State Shell O S B selection path continuityStructure) →
+  ∀ time →
+  Admissible.ShellFamilyAdmissible S B selection
+    (Admissible.at path time)
+admissibilityPreservedAtEveryUsedShell I =
+  Admissible.simultaneousShellPreservation
+    (firstExitCompleteness I)
+    (noFirstExitInputsFromAnalyticLeaves I)
 
-record AnalyticTailDecay
-    {r : Level}
-    {Radius : Set r}
-    (A : AbsorptionArithmetic)
-    (F : RadiusIndexedOffPacketSplit Radius A) : Set (lsuc r) where
+------------------------------------------------------------------------
+-- Uniform Galerkin preservation and closed compactness-limit passage.
+------------------------------------------------------------------------
+
+record GalerkinAdmissibilityLimitCertificate
+    (Cutoff Time State Shell : Set)
+    (O : Admissible.OrderedScalar lzero)
+    (S : Admissible.CompactGammaSystem O State Shell)
+    (B : Admissible.CompactGammaThresholds O)
+    (selection : Admissible.ShellSelection Shell)
+    (family : Admissible.GalerkinFamily Cutoff Time State)
+    (limitPath : Admissible.Path Time State) : Setω where
   field
-    vanishingTail : OrderVanishingTail A F
+    uniformPreservation :
+      Admissible.UniformGalerkinPreservation S B selection family
 
-open AnalyticTailDecay public
+    compactnessLimit :
+      Admissible.GalerkinCompactnessLimit family limitPath
 
-record GalerkinCompactnessWitnesses
-    (A : AbsorptionArithmetic)
-    (C : SequentialOrderClosure A) : Set₁ where
+    closedAdmissibleLimit :
+      Admissible.ClosedAdmissibleInequalities
+        S B selection family limitPath compactnessLimit
+
+open GalerkinAdmissibilityLimitCertificate public
+
+galerkinAdmissibilityPassesToContinuum :
+  ∀ {Cutoff Time State Shell : Set}
+    {O : Admissible.OrderedScalar lzero}
+    {S : Admissible.CompactGammaSystem O State Shell}
+    {B : Admissible.CompactGammaThresholds O}
+    {selection : Admissible.ShellSelection Shell}
+    {family : Admissible.GalerkinFamily Cutoff Time State}
+    {limitPath : Admissible.Path Time State} →
+  GalerkinAdmissibilityLimitCertificate
+    Cutoff Time State Shell O S B selection family limitPath →
+  ∀ time →
+  Admissible.ShellFamilyAdmissible S B selection
+    (Admissible.at limitPath time)
+galerkinAdmissibilityPassesToContinuum I =
+  Admissible.galerkinPreservationPassesToLimit
+    (uniformPreservation I)
+    (closedAdmissibleLimit I)
+
+------------------------------------------------------------------------
+-- Coherence of the BKM path with the invariant-region path.  The BKM module is
+-- intentionally self-contained, so the adapter records the exact carrier map
+-- and path commuting square rather than identifying the two paths by prose.
+------------------------------------------------------------------------
+
+record CompactGammaBKMCoherence
+    (Time State : Set)
+    (path : Admissible.Path Time State)
+    (A : AbsorptionArithmetic) : Setω where
   field
-    compactnessAndIdentification : UniformLogModulusGalerkinFamily A C
+    bkmData :
+      BKM.CompactGammaBKMData
+        {lzero} {lzero} {lzero} {lzero} {lzero}
 
-open GalerkinCompactnessWitnesses public
+    mapTime : BKM.Time bkmData → Time
+    mapState : BKM.State bkmData → State
 
-record AdmissibleSolutionPath
-    {t s : Level}
-    (Time : Set t)
-    (State : Set s) : Set (lsuc (t ⊔ s)) where
+    pathCommutes :
+      ∀ time →
+      mapState (BKM.path bkmData time) ≡
+      Admissible.at path (mapTime time)
+
+    ValueCoherent : BKM.Value bkmData → Scalar A → Set
+    envelopeCoherent : Set
+    envelopeCoherence : envelopeCoherent
+
+open CompactGammaBKMCoherence public
+
+------------------------------------------------------------------------
+-- Final proof-relevant package.  Every field is now owned by the strongest
+-- repository module available for that lane.
+------------------------------------------------------------------------
+
+record CompactGammaAnalyticClosure : Setω where
   field
-    stateAt : Time → State
-    CompactGammaAdmissible : State → Set
+    PairAtom Mode Vector Radius : Set
 
-    initialTime : Time
-    initialAdmissible : CompactGammaAdmissible (stateAt initialTime)
+    arithmetic : AbsorptionArithmetic
+    finiteMajorantArithmetic :
+      Major.FiniteMajorantArithmetic arithmetic
 
-    admissibilityPreserved :
-      (time : Time) →
-      CompactGammaAdmissible (stateAt time)
+    differentiatedTriads :
+      Triads.DifferentiatedTriadAtomFamily
+        PairAtom Mode Vector arithmetic finiteMajorantArithmetic
 
-open AdmissibleSolutionPath public
+    fullShellFamily :
+      FullShell.FullShellFourierFamily
+        {i = lzero} Mode (Scalar arithmetic)
 
-record CompactGammaAnalyticClosure
-    {p m r t s : Level}
-    (PairAtom : Set p)
-    (Mode : Set m)
-    (Radius : Set r)
-    (Time : Set t)
-    (State : Set s)
-    (A : AbsorptionArithmetic)
-    (M : FiniteMajorantArithmetic A)
-    (F : RadiusIndexedOffPacketSplit Radius A)
-    (C : SequentialOrderClosure A)
-    (J : MonotoneTimeIntegral Time A) :
-    Set (lsuc (p ⊔ m ⊔ r ⊔ t ⊔ s)) where
-  field
-    differentiatedTriads : TriadMajorizationInputs PairAtom A M
-    fullShell : FullShellUniformMajorization Mode A
-    tailDecay : AnalyticTailDecay A F
-    galerkinLimit : GalerkinCompactnessWitnesses A C
-    solutionPath : AdmissibleSolutionPath Time State
-    timeIntegrability : BKMEnvelopeInputs A J
+    fullShellProgram :
+      FullShell.FullShellSchurProgram fullShellFamily
+
+    tailProductArithmetic : Tail.TailProductArithmetic arithmetic
+    radiusSplits : Tail.RadiusIndexedOffPacketSplit Radius arithmetic
+
+    quantitativeTailDecay :
+      Tail.UniformAnalyticTailDecay
+        arithmetic tailProductArithmetic radiusSplits
+
+    sequentialOrderClosure :
+      Galerkin.SequentialOrderClosure arithmetic
+
+    galerkinCompactnessAndIdentification :
+      Galerkin.ActualGalerkinCompactGammaFamily
+        arithmetic sequentialOrderClosure
+
+    Time State Shell Cutoff : Set
+    orderedScalar : Admissible.OrderedScalar lzero
+    gammaSystem :
+      Admissible.CompactGammaSystem orderedScalar State Shell
+    thresholds : Admissible.CompactGammaThresholds orderedScalar
+    shellSelection : Admissible.ShellSelection Shell
+    solutionPath : Admissible.Path Time State
+    continuityStructure :
+      Admissible.ContinuityStructure Time orderedScalar
+
+    invariantRegion :
+      AdmissibleInvariantRegionCertificate
+        Time State Shell orderedScalar gammaSystem thresholds
+        shellSelection solutionPath continuityStructure
+
+    galerkinPaths : Admissible.GalerkinFamily Cutoff Time State
+    limitPath : Admissible.Path Time State
+
+    admissibleGalerkinLimit :
+      GalerkinAdmissibilityLimitCertificate
+        Cutoff Time State Shell orderedScalar gammaSystem thresholds
+        shellSelection galerkinPaths limitPath
+
+    limitPathMatchesSolutionPath :
+      ∀ time →
+      Admissible.at limitPath time ≡ Admissible.at solutionPath time
+
+    bkmCoherence :
+      CompactGammaBKMCoherence Time State solutionPath arithmetic
 
 open CompactGammaAnalyticClosure public
 
 ------------------------------------------------------------------------
--- Exported consequences.
+-- Exported consequences: local majorization, exact full-shell Schur sums,
+-- quantitative tail decay, actual Galerkin passage, invariant-region closure,
+-- and final BKM continuation.
 ------------------------------------------------------------------------
 
 closureNearResponseMajorized :
-  ∀ {p m r t s}
-    {PairAtom : Set p}
-    {Mode : Set m}
-    {Radius : Set r}
-    {Time : Set t}
-    {State : Set s}
-    (A : AbsorptionArithmetic)
-    (M : FiniteMajorantArithmetic A)
-    {F : RadiusIndexedOffPacketSplit Radius A}
-    {C : SequentialOrderClosure A}
-    {J : MonotoneTimeIntegral Time A} →
-  (P : CompactGammaAnalyticClosure
-    PairAtom Mode Radius Time State A M F C J) →
-  _≤_ A
-    (concreteNearResponse (differentiatedTriads P))
-    (majorantActionOutput (differentiatedTriads P))
-closureNearResponseMajorized A M P =
-  triadMajorization A M (differentiatedTriads P)
+  (P : CompactGammaAnalyticClosure) →
+  _≤_ (arithmetic P)
+    (Triads.concreteNearResponse (differentiatedTriads P))
+    (Triads.majorantActionOutput (differentiatedTriads P))
+closureNearResponseMajorized P =
+  Triads.analyticTriadsMajorizeNearResponse
+    (arithmetic P)
+    (finiteMajorantArithmetic P)
+    (differentiatedTriads P)
 
-closureTailEventuallyAbsorbable :
-  ∀ {p m r t s}
-    {PairAtom : Set p}
-    {Mode : Set m}
-    {Radius : Set r}
-    {Time : Set t}
-    {State : Set s}
-    (A : AbsorptionArithmetic)
-    (M : FiniteMajorantArithmetic A)
-    (F : RadiusIndexedOffPacketSplit Radius A)
-    {C : SequentialOrderClosure A}
-    {J : MonotoneTimeIntegral Time A} →
-  (P : CompactGammaAnalyticClosure
-    PairAtom Mode Radius Time State A M F C J) →
-  (budget : Scalar A) →
-  AdmissibleTailBudget (vanishingTail (tailDecay P)) budget →
-  Σ Radius
-    (λ radius →
-      _≤_ A
-        (farShellTail (splitAt F radius))
-        budget)
-closureTailEventuallyAbsorbable A M F P =
-  tailEventuallyBelow (vanishingTail (tailDecay P))
+closureFullShellRowEstimate :
+  (P : CompactGammaAnalyticClosure) →
+  (K N : Nat) →
+  (target : Mode P) →
+  _≤_ (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+    (FullShell.rowWeightedSum
+      (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+      target)
+    (FullShell.multiply
+      (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+      (FullShell.rowConstant
+        (FullShell.certificateAt
+          (FullShell.uniformSchur (fullShellProgram P)) K N))
+      (FullShell.rowWeight
+        (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+        target))
+closureFullShellRowEstimate P =
+  FullShell.fullShellRowEstimate
+    (FullShell.uniformSchur (fullShellProgram P))
+
+closureFullShellColumnEstimate :
+  (P : CompactGammaAnalyticClosure) →
+  (K N : Nat) →
+  (source : Mode P) →
+  _≤_ (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+    (FullShell.columnWeightedSum
+      (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+      source)
+    (FullShell.multiply
+      (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+      (FullShell.columnConstant
+        (FullShell.certificateAt
+          (FullShell.uniformSchur (fullShellProgram P)) K N))
+      (FullShell.colWeight
+        (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+        source))
+closureFullShellColumnEstimate P =
+  FullShell.fullShellColumnEstimate
+    (FullShell.uniformSchur (fullShellProgram P))
+
+closureQuantitativeTailBound :
+  (P : CompactGammaAnalyticClosure) →
+  (radius : Radius P) →
+  _≤_ (arithmetic P)
+    (Tail.farShellTail
+      (Tail.splitAt (radiusSplits P) radius))
+    (Tail._·_ (tailProductArithmetic P)
+      (Tail.epsilon
+        (Tail.rate (Tail.scale (quantitativeTailDecay P))) radius)
+      (Tail._·_ (tailProductArithmetic P)
+        (Tail.shellEnergy
+          (Tail.scale (quantitativeTailDecay P)))
+        (Tail.tangentNorm
+          (Tail.scale (quantitativeTailDecay P)))))
+closureQuantitativeTailBound P =
+  Tail.quantitativeTailBound (quantitativeTailDecay P)
+
+closureTailVanishesInOrder :
+  (P : CompactGammaAnalyticClosure) →
+  Tail.OrderVanishingTail (arithmetic P) (radiusSplits P)
+closureTailVanishesInOrder P =
+  Tail.quantitativeDecayToOrderVanishingTail
+    (arithmetic P)
+    (tailProductArithmetic P)
+    (radiusSplits P)
+    (quantitativeTailDecay P)
 
 closureLogModulusPassesToContinuum :
-  ∀ {p m r t s}
-    {PairAtom : Set p}
-    {Mode : Set m}
-    {Radius : Set r}
-    {Time : Set t}
-    {State : Set s}
-    (A : AbsorptionArithmetic)
-    (M : FiniteMajorantArithmetic A)
-    {F : RadiusIndexedOffPacketSplit Radius A}
-    (C : SequentialOrderClosure A)
-    {J : MonotoneTimeIntegral Time A} →
-  (P : CompactGammaAnalyticClosure
-    PairAtom Mode Radius Time State A M F C J) →
-  _≤_ A
-    (continuumAbsoluteLogDerivative
-      (compactnessAndIdentification (galerkinLimit P)))
-    (continuumLogModulusBudget
-      (compactnessAndIdentification (galerkinLimit P)))
-closureLogModulusPassesToContinuum A M C P =
-  uniformLogModulusPassesToContinuum A C
-    (compactnessAndIdentification (galerkinLimit P))
+  (P : CompactGammaAnalyticClosure) →
+  _≤_ (arithmetic P)
+    (Galerkin.absoluteLogDerivative
+      (Galerkin.setting (galerkinCompactnessAndIdentification P))
+      (Galerkin.continuumSolution
+        (Galerkin.setting (galerkinCompactnessAndIdentification P))
+        (Galerkin.evaluationTime
+          (Galerkin.compactGammaLimit
+            (galerkinCompactnessAndIdentification P))))
+      (Galerkin.tangent
+        (Galerkin.compactGammaLimit
+          (galerkinCompactnessAndIdentification P))))
+    (Galerkin.modulusBudget
+      (Galerkin.setting (galerkinCompactnessAndIdentification P))
+      (Galerkin.continuumSolution
+        (Galerkin.setting (galerkinCompactnessAndIdentification P))
+        (Galerkin.evaluationTime
+          (Galerkin.compactGammaLimit
+            (galerkinCompactnessAndIdentification P))))
+      (Galerkin.tangent
+        (Galerkin.compactGammaLimit
+          (galerkinCompactnessAndIdentification P))))
+closureLogModulusPassesToContinuum P =
+  Galerkin.actualGalerkinLogModulusPassesToContinuum
+    (arithmetic P)
+    (sequentialOrderClosure P)
+    (galerkinCompactnessAndIdentification P)
 
 closureAdmissibilityPreserved :
-  ∀ {p m r t s}
-    {PairAtom : Set p}
-    {Mode : Set m}
-    {Radius : Set r}
-    {Time : Set t}
-    {State : Set s}
-    {A : AbsorptionArithmetic}
-    {M : FiniteMajorantArithmetic A}
-    {F : RadiusIndexedOffPacketSplit Radius A}
-    {C : SequentialOrderClosure A}
-    {J : MonotoneTimeIntegral Time A} →
-  (P : CompactGammaAnalyticClosure
-    PairAtom Mode Radius Time State A M F C J) →
-  (time : Time) →
-  CompactGammaAdmissible (solutionPath P)
-    (stateAt (solutionPath P) time)
+  (P : CompactGammaAnalyticClosure) →
+  ∀ time →
+  Admissible.ShellFamilyAdmissible
+    (gammaSystem P)
+    (thresholds P)
+    (shellSelection P)
+    (Admissible.at (solutionPath P) time)
 closureAdmissibilityPreserved P =
-  admissibilityPreserved (solutionPath P)
+  admissibilityPreservedAtEveryUsedShell (invariantRegion P)
 
-closureBKMTimeIntegralFinite :
-  ∀ {p m r t s}
-    {PairAtom : Set p}
-    {Mode : Set m}
-    {Radius : Set r}
-    {Time : Set t}
-    {State : Set s}
-    (A : AbsorptionArithmetic)
-    (M : FiniteMajorantArithmetic A)
-    {F : RadiusIndexedOffPacketSplit Radius A}
-    {C : SequentialOrderClosure A}
-    (J : MonotoneTimeIntegral Time A) →
-  (P : CompactGammaAnalyticClosure
-    PairAtom Mode Radius Time State A M F C J) →
-  _≤_ A
-    (integrate J (vorticityNorm (timeIntegrability P)))
-    (bkmBudget (timeIntegrability P))
-closureBKMTimeIntegralFinite A M J P =
-  compactGammaEnvelopeBoundsBKMIntegral A J (timeIntegrability P)
+closureGalerkinAdmissibilityPassesToLimit :
+  (P : CompactGammaAnalyticClosure) →
+  ∀ time →
+  Admissible.ShellFamilyAdmissible
+    (gammaSystem P)
+    (thresholds P)
+    (shellSelection P)
+    (Admissible.at (limitPath P) time)
+closureGalerkinAdmissibilityPassesToLimit P =
+  galerkinAdmissibilityPassesToContinuum (admissibleGalerkinLimit P)
+
+closureBKMContinuation :
+  (P : CompactGammaAnalyticClosure) →
+  BKM.Continuation (bkmData (bkmCoherence P))
+closureBKMContinuation P =
+  BKM.compactGammaBKMContinuation (bkmData (bkmCoherence P))
