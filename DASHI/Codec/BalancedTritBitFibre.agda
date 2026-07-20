@@ -7,14 +7,6 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
 
-------------------------------------------------------------------------
--- Exact support/sign factorisation of balanced ternary.
---
--- This is the typed form of the two-stream reading:
---   A = support/magnitude bit;
---   B = sign bit, present only on the non-zero fibre.
--- It is not a claim that Trit is primitively binary.
-
 data Sign : Set where
   positiveSign : Sign
   negativeSign : Sign
@@ -43,9 +35,6 @@ encode-decode zeroFibre = refl
 encode-decode (signedFibre positiveSign) = refl
 encode-decode (signedFibre negativeSign) = refl
 
-------------------------------------------------------------------------
--- Explicit stream projections.
-
 supportBit : TritFibre → Bool
 supportBit zeroFibre = false
 supportBit (signedFibre _) = true
@@ -68,9 +57,6 @@ record BitStreamView : Set where
 bitStreamView : Trit → BitStreamView
 bitStreamView t = bits (supportBit (encodeFibre t)) (signBit (encodeFibre t))
 
-------------------------------------------------------------------------
--- Involution acts only in the signed fibre; zero remains fixed.
-
 invertSign : Sign → Sign
 invertSign positiveSign = negativeSign
 invertSign negativeSign = positiveSign
@@ -89,10 +75,6 @@ encode-commutes-involution :
 encode-commutes-involution neg = refl
 encode-commutes-involution zer = refl
 encode-commutes-involution pos = refl
-
-------------------------------------------------------------------------
--- Exact emitted bit count: one support bit per trit and one additional
--- sign bit precisely for each non-zero trit.
 
 tritBitCost : Trit → Nat
 tritBitCost neg = suc (suc zero)
@@ -113,12 +95,18 @@ length : ∀ {A : Set} → List A → Nat
 length [] = zero
 length (_ ∷ xs) = suc (length xs)
 
++-suc : ∀ m n → m + suc n ≡ suc (m + n)
++-suc zero n = refl
++-suc (suc m) n rewrite +-suc m n = refl
+
 wordBitCost-support-plus-sign :
   ∀ ts → wordBitCost ts ≡ length ts + nonZeroCount ts
 wordBitCost-support-plus-sign [] = refl
 wordBitCost-support-plus-sign (neg ∷ ts)
-  rewrite wordBitCost-support-plus-sign ts = refl
+  rewrite wordBitCost-support-plus-sign ts
+        | +-suc (length ts) (nonZeroCount ts) = refl
 wordBitCost-support-plus-sign (zer ∷ ts)
   rewrite wordBitCost-support-plus-sign ts = refl
 wordBitCost-support-plus-sign (pos ∷ ts)
-  rewrite wordBitCost-support-plus-sign ts = refl
+  rewrite wordBitCost-support-plus-sign ts
+        | +-suc (length ts) (nonZeroCount ts) = refl
