@@ -1,0 +1,64 @@
+name: GR quantum proof terms
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Unified/GRQuantum*.agda'
+      - 'DASHI/Core/FiniteQuadraticMultiscale.agda'
+      - 'DASHI/Geometry/FiniteCausalDiamond*.agda'
+      - 'DASHI/Algebra/ConstructiveClifford.agda'
+      - 'DASHI/Algebra/FiniteQuaternion*.agda'
+      - 'DASHI/Algebra/Quantum/Finite*.agda'
+      - 'DASHI/Physics/Closure/Proposition*.agda'
+      - 'DASHI/Physics/Closure/FiniteRegionalSpectrum*.agda'
+      - 'DASHI/Empirical/GRQuantumCorrespondenceBoundary.agda'
+      - 'scripts/run_gr_quantum_finite_model_diagnostic.py'
+      - 'tests/test_gr_quantum_finite_model_diagnostic.py'
+      - '.github/workflows/gr-quantum-proof-terms.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck-and-diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes agda-bin agda-stdlib
+          agda --version
+
+      - name: Type-check proposition-level GR quantum atlas
+        run: |
+          agda \
+            -i . \
+            -i /usr/share/agda-stdlib \
+            DASHI/Unified/GRQuantumProofTermAtlas.agda
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run finite model diagnostic tests
+        run: |
+          python -m pip install --upgrade pip pytest
+          pytest -q tests/test_gr_quantum_finite_model_diagnostic.py
+
+      - name: Materialise finite model receipts
+        run: |
+          python scripts/run_gr_quantum_finite_model_diagnostic.py \
+            --output-dir /tmp/gr-quantum-finite-model
+          test -s /tmp/gr-quantum-finite-model/gr_quantum_finite_model_diagnostic.json
+          test -s /tmp/gr-quantum-finite-model/gr_quantum_finite_model_diagnostic.md
+
+      - name: Upload finite model receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gr-quantum-finite-model-receipts
+          path: /tmp/gr-quantum-finite-model
