@@ -18,13 +18,16 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y agda agda-stdlib
-      - name: Locate standard library
+      - name: Prepare writable standard library
         id: stdlib
         shell: bash
         run: |
           file="$(dpkg -L agda-stdlib | grep '/Data/Product.agda$' | head -n 1)"
           test -n "$file"
-          echo "path=${file%/Data/Product.agda}" >> "$GITHUB_OUTPUT"
+          source_path="${file%/Data/Product.agda}"
+          target_path="$RUNNER_TEMP/agda-stdlib"
+          cp -a "$source_path" "$target_path"
+          echo "path=$target_path" >> "$GITHUB_OUTPUT"
       - name: Typecheck aggregate codec target
         id: typecheck
         shell: bash
