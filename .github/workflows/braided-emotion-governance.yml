@@ -5,10 +5,12 @@ on:
     paths:
       - "DASHI/Biology/BraidedEmotion*.agda"
       - "DASHI/Biology/*Governance*.agda"
+      - "DASHI/Culture/*Cultural*Admissibility.agda"
       - "DASHI/Culture/KimmererBraidingAcknowledgement.agda"
       - "DASHI/Culture/CulturalProvenanceBoundaryCore.agda"
+      - "DASHI/Promotion/*Governance*.agda"
       - "DASHI/Promotion/*BoundaryCore.agda"
-      - "DASHI/Unified/BraidedEmotionGovernanceRegression.agda"
+      - "DASHI/Unified/BraidedEmotion*Regression.agda"
       - "scripts/audit_governance_builtins_only.py"
       - "scripts/governance_builtins_allowlist.txt"
       - ".github/workflows/braided-emotion-governance.yml"
@@ -17,10 +19,12 @@ on:
     paths:
       - "DASHI/Biology/BraidedEmotion*.agda"
       - "DASHI/Biology/*Governance*.agda"
+      - "DASHI/Culture/*Cultural*Admissibility.agda"
       - "DASHI/Culture/KimmererBraidingAcknowledgement.agda"
       - "DASHI/Culture/CulturalProvenanceBoundaryCore.agda"
+      - "DASHI/Promotion/*Governance*.agda"
       - "DASHI/Promotion/*BoundaryCore.agda"
-      - "DASHI/Unified/BraidedEmotionGovernanceRegression.agda"
+      - "DASHI/Unified/BraidedEmotion*Regression.agda"
       - "scripts/audit_governance_builtins_only.py"
       - "scripts/governance_builtins_allowlist.txt"
       - ".github/workflows/braided-emotion-governance.yml"
@@ -32,61 +36,43 @@ jobs:
   typecheck-and-audit:
     runs-on: ubuntu-latest
     env:
-      AGDA_FLAGS: "--no-libraries --no-default-libraries --no-write-interfaces -i . -i /usr/share/agda-stdlib"
+      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i .agda-stdlib"
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
           show-progress: false
-
-      - name: Install Agda and standard library
+      - name: Install Agda and writable standard library
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
           agda --version
-          test -d /usr/share/agda-stdlib
-
+          cp -a /usr/share/agda-stdlib .agda-stdlib
       - name: Typecheck unified governance facade
         run: |
           mkdir -p ci-logs
-          agda $AGDA_FLAGS \
-            DASHI/Unified/BraidedEmotionGovernanceRegression.agda \
-            >ci-logs/unified-governance.log 2>&1 || {
-              tail -n 120 ci-logs/unified-governance.log
-              exit 1
-            }
-
-      - name: Upload unified typecheck log
+          agda $AGDA_FLAGS DASHI/Unified/BraidedEmotionGovernanceRegression.agda >ci-logs/unified-governance.log 2>&1 || { tail -n 120 ci-logs/unified-governance.log; exit 1; }
+      - name: Typecheck derived governance semantics
+        run: |
+          agda $AGDA_FLAGS DASHI/Unified/BraidedEmotionDerivedGovernanceRegression.agda >ci-logs/derived-governance.log 2>&1 || { tail -n 160 ci-logs/derived-governance.log; exit 1; }
+      - name: Upload governance typecheck logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: braided-emotion-agda-log
-          path: ci-logs/unified-governance.log
+          path: ci-logs/*.log
           if-no-files-found: warn
-
       - name: Typecheck braided emotion regression
         run: agda $AGDA_FLAGS DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
-
       - name: Typecheck body-memory governance regression
         run: agda $AGDA_FLAGS DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
-
       - name: Typecheck Kimmerer acknowledgement
         run: agda $AGDA_FLAGS DASHI/Culture/KimmererBraidingAcknowledgement.agda
-
       - name: Reject new unapproved governance islands
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            BASE_SHA="${{ github.event.pull_request.base.sha }}"
-          else
-            BASE_SHA="${{ github.event.before }}"
-          fi
-          if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
-            git fetch --quiet --depth=1 origin "$BASE_SHA"
-          fi
-          python3 scripts/audit_governance_builtins_only.py . \
-            --changed-from "$BASE_SHA" \
-            --fail
-
-      - name: Report all legacy governance islands
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then BASE_SHA="${{ github.event.pull_request.base.sha }}"; else BASE_SHA="${{ github.event.before }}"; fi
+          if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then git fetch --quiet --depth=1 origin "$BASE_SHA"; fi
+          python3 scripts/audit_governance_builtins_only.py . --changed-from "$BASE_SHA" --fail
+      - name: Report all legacy governance islands by domain
         run: python3 scripts/audit_governance_builtins_only.py .
