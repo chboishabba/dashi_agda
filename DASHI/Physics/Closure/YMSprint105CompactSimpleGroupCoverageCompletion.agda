@@ -2,6 +2,8 @@ module DASHI.Physics.Closure.YMSprint105CompactSimpleGroupCoverageCompletion whe
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Sigma using (Σ)
 
 import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable as Sprint105
 open import DASHI.Physics.Closure.YMCompactSimpleGroupParametricCoverage
@@ -71,8 +73,8 @@ compactSimpleCoverageTheorem = compactSimpleHasQuantitativePackage
 
 compactSimpleLatticeUniformityTheorem :
   (G : CompactSimpleGlobalForm) →
-  Agda.Builtin.Sigma.Σ Agda.Builtin.Nat.Nat
+  Σ Nat
     (λ λG →
-      (Λ k U₀ P : Agda.Builtin.Nat.Nat) →
+      (Λ k U₀ P : Nat) →
       LocalLieConstants G (latticeDatum Λ k U₀ P) ≡ λG)
 compactSimpleLatticeUniformityTheorem = groupConstantsIndependentOfLattice
