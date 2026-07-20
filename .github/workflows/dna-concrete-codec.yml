@@ -1,0 +1,30 @@
+name: DNA concrete codec
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Codec/**'
+      - 'DASHI/Interop/Codec**'
+      - 'DASHI/Foundations/InvolutiveFibrePresentation.agda'
+      - '.github/workflows/dna-concrete-codec.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda agda-stdlib
+      - name: Locate standard library
+        id: stdlib
+        shell: bash
+        run: |
+          file="$(dpkg -L agda-stdlib | grep '/Data/Product.agda$' | head -n 1)"
+          test -n "$file"
+          echo "path=${file%/Data/Product.agda}" >> "$GITHUB_OUTPUT"
+      - name: Typecheck aggregate codec target
+        run: |
+          agda -i . -i '${{ steps.stdlib.outputs.path }}' DASHI/Codec/DNAConcreteValidation.agda
