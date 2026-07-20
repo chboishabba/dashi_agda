@@ -11,6 +11,7 @@ import DASHI.Core.FiniteQuadraticMultiscale as Quadratic
 import DASHI.Geometry.FiniteCausalDiamond as Diamond
 import DASHI.Geometry.FiniteCausalDiamondClosed as DiamondClosed
 import DASHI.Algebra.ConstructiveClifford as Clifford
+import DASHI.Algebra.FiniteQuaternionDoubleCover as QuaternionCover
 import DASHI.Algebra.Quantum.FiniteTreeWeyl as Tree
 import DASHI.Physics.Closure.PropositionEinsteinBridge as Einstein
 import DASHI.Physics.Closure.PropositionConstraintAlgebra as Constraints
@@ -82,6 +83,7 @@ record ExactFiniteGRQuantumBundle : Set₁ where
     causalDiamond : ChainAntichainLorentzProof
     causalDiamondClosed : ChainAntichainLorentzClosed causalDiamond
     cliffordSyntax : Set
+    finiteSpinDoubleCover : SpinDoubleCoverProof
     treeShift : Tree.TreeShiftReceipt
     finiteBorn : Tree.FiniteBornReceipt
     flatEinstein : Einstein.ExactFlatEinsteinProducer
@@ -101,6 +103,7 @@ canonicalExactFiniteGRQuantumBundle =
     Diamond.finiteCausalDiamondProof
     DiamondClosed.finiteCausalDiamondClosed
     Clifford.constructiveCliffordScope
+    QuaternionCover.finiteQuaternionSpinCover
     Tree.canonicalTreeShiftReceipt
     Tree.canonicalFiniteBornReceipt
     Einstein.canonicalExactFlatEinsteinProducer
@@ -110,7 +113,7 @@ canonicalExactFiniteGRQuantumBundle =
     UV.canonicalRegulatedUVPartialClosure
     FlatQGR.flatQuantumGRInterfaceReceipt
     Observer.canonicalObserverWaveRoute
-    "exact finite/model tranche only; no terminal continuum or empirical promotion"
+    "exact finite/model tranche only; Q8 -> V4 is the finite Spin subgroup cover, not the full continuum cover"
 
 ------------------------------------------------------------------------
 -- The exact assembly function for a terminal proof.  Every continuum and
@@ -176,7 +179,7 @@ remainingAuthority quadraticGate =
 remainingAuthority chainAntichainGate =
   "Prove continuum/large-poset dimensional uniqueness rather than only the exact five-event 1+3 diamond."
 remainingAuthority cliffordSpinGate =
-  "Form the Clifford quotient/setoid and supply the universal property, twisted-adjoint metric preservation, Spin kernel, and surjectivity proof."
+  "Lift the exact Q8 -> V4 subgroup cover to the Clifford quotient universal theorem, twisted-adjoint metric preservation, and continuous Spin(3,1) -> SO+(3,1) cover."
 remainingAuthority waveCCRAndBornGate =
   "Supply Hilbert completion, operator topology, tree scaling limit, central commutator, and general Born additivity."
 remainingAuthority tensorEinsteinGate =
