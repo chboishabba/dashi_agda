@@ -5,6 +5,7 @@ module DASHI.Physics.YangMills.BalabanOneStepRGClosure where
 -- the assembly theorem itself is checked and does not manufacture any bound.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record OneStepRGInputs
