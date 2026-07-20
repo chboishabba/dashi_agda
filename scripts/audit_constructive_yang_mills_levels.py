@@ -23,6 +23,8 @@ POSTULATE_FREE = [
     YM / "SUNMatrixLieGroup.agda",
     YM / "SUNMatrixGeometry.agda",
     YM / "SU3MatrixInstance.agda",
+    YM / "SUNWilsonClassFunction.agda",
+    YM / "SUNWilsonAction.agda",
     YM / "BalabanFiniteInverseConsequences.agda",
     YM / "BalabanFiniteVolumeBackgroundLane.agda",
     YM / "BalabanOneStepRGClosure.agda",
@@ -53,6 +55,14 @@ EXPECTED_ASSIGNMENTS = {
         "su3DimensionLevel": "computed",
         "su3MatrixAssemblyLevel": "machineChecked",
         "su3FiniteMatrixAuthorityLevel": "standardImported",
+    },
+    YM / "SUNWilsonClassFunction.agda": {
+        "sunWilsonGaugeInvarianceLevel": "machineChecked",
+        "sunTraceConjugationAuthorityLevel": "standardImported",
+    },
+    YM / "SUNWilsonAction.agda": {
+        "sunWilsonActionGaugeInvarianceLevel": "machineChecked",
+        "sunWilsonTraceAuthorityLevel": "standardImported",
     },
     YM / "BalabanFiniteVolumeBackgroundLane.agda": {
         "finiteVolumeContractionBridgeLevel": "machineChecked",
