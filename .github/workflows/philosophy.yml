@@ -1,0 +1,35 @@
+name: Philosophy formalism
+
+on:
+  push:
+    paths:
+      - "DASHI/Philosophy/**"
+      - "DASHI/EverythingPhilosophy.agda"
+      - "Docs/PhilosophyReflexiveRelationalFormalism.md"
+      - ".github/workflows/philosophy.yml"
+  pull_request:
+    paths:
+      - "DASHI/Philosophy/**"
+      - "DASHI/EverythingPhilosophy.agda"
+      - "Docs/PhilosophyReflexiveRelationalFormalism.md"
+      - ".github/workflows/philosophy.yml"
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i .agda-stdlib"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck philosophy regression
+        run: agda $AGDA_FLAGS DASHI/Philosophy/PhilosophyRegression.agda
+      - name: Typecheck philosophy aggregate
+        run: agda $AGDA_FLAGS DASHI/Philosophy/Everything.agda
+      - name: Typecheck repository plus philosophy aggregate
+        run: agda $AGDA_FLAGS DASHI/EverythingPhilosophy.agda
