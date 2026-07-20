@@ -4,9 +4,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 
-import DASHI.Physics.Closure.NSIntegerFourierLattice as Lattice
-open Lattice using (FourierMode; mode)
-open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel
+open import DASHI.Physics.Closure.NSIntegerFourierLattice
+open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel hiding (NonZeroMode)
 
 ------------------------------------------------------------------------
 -- A minimal exact Wall-1 Fourier packet.
@@ -42,15 +41,15 @@ canonicalHighModes = p110 ∷ p101 ∷ p011 ∷ []
 
 record CanonicalModeWitnesses : Set₁ where
   field
-    p100NonZero : Lattice.NonZeroMode p100
-    p010NonZero : Lattice.NonZeroMode p010
-    p001NonZero : Lattice.NonZeroMode p001
+    p100NonZero : NonZeroMode p100
+    p010NonZero : NonZeroMode p010
+    p001NonZero : NonZeroMode p001
 
 open CanonicalModeWitnesses public
 
 triad100010110 :
   CanonicalModeWitnesses →
-  ResonantFourierTriad FourierMode Lattice.addMode Lattice.NonZeroMode
+  ResonantFourierTriad FourierMode addMode NonZeroMode
 triad100010110 W = record
   { pMode = p100
   ; qMode = p010
@@ -62,7 +61,7 @@ triad100010110 W = record
 
 triad100001101 :
   CanonicalModeWitnesses →
-  ResonantFourierTriad FourierMode Lattice.addMode Lattice.NonZeroMode
+  ResonantFourierTriad FourierMode addMode NonZeroMode
 triad100001101 W = record
   { pMode = p100
   ; qMode = p001
@@ -74,7 +73,7 @@ triad100001101 W = record
 
 triad010001011 :
   CanonicalModeWitnesses →
-  ResonantFourierTriad FourierMode Lattice.addMode Lattice.NonZeroMode
+  ResonantFourierTriad FourierMode addMode NonZeroMode
 triad010001011 W = record
   { pMode = p010
   ; qMode = p001
@@ -86,18 +85,18 @@ triad010001011 W = record
 
 canonicalTriads :
   CanonicalModeWitnesses →
-  List (ResonantFourierTriad FourierMode Lattice.addMode Lattice.NonZeroMode)
+  List (ResonantFourierTriad FourierMode addMode NonZeroMode)
 canonicalTriads W =
   triad100010110 W
   ∷ triad100001101 W
   ∷ triad010001011 W
   ∷ []
 
-canonicalResonance100010 : Lattice.addMode p100 p010 ≡ p110
+canonicalResonance100010 : addMode p100 p010 ≡ p110
 canonicalResonance100010 = refl
 
-canonicalResonance100001 : Lattice.addMode p100 p001 ≡ p101
+canonicalResonance100001 : addMode p100 p001 ≡ p101
 canonicalResonance100001 = refl
 
-canonicalResonance010001 : Lattice.addMode p010 p001 ≡ p011
+canonicalResonance010001 : addMode p010 p001 ≡ p011
 canonicalResonance010001 = refl
