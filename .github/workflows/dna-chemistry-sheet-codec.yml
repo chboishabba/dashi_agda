@@ -1,0 +1,24 @@
+name: DNA chemistry sheet codec
+
+on:
+  pull_request:
+    paths:
+      - 'Ontology/DNA/**'
+      - '.github/workflows/dna-chemistry-sheet-codec.yml'
+  push:
+    branches: [ master ]
+    paths:
+      - 'Ontology/DNA/**'
+      - '.github/workflows/dna-chemistry-sheet-codec.yml'
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Typecheck focused surface
+        run: |
+          nix develop --command agda -i . -l standard-library Ontology/DNA/ChemistrySheetCodecRegression.agda
+          nix develop --command agda -i . -l standard-library Ontology/DNA/ChemistrySheetCodecSurface.agda
