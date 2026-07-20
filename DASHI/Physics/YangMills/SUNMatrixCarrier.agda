@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.SUNMatrixCarrier where
 
 ------------------------------------------------------------------------
 -- A concrete matrix presentation of SU(N), separated from any particular
--- implementation of finite complex matrices.  The finite-matrix laws are
+-- implementation of finite complex matrices. The finite-matrix laws are
 -- standard imported mathematics; once supplied, the SU(N) group laws below
 -- are ordinary machine-checked record assembly.
 ------------------------------------------------------------------------
@@ -67,7 +67,7 @@ open CertifiedSUNMatrixTheory public
 record SUNMatrixElement
     {m c : Level} {N : Nat}
     {Matrix : Set m} {Complex : Set c}
-    (theory : CertifiedSUNMatrixTheory N Matrix Complex) : Set m where
+    (theory : CertifiedSUNMatrixTheory N Matrix Complex) : Set (m ⊔ c) where
   constructor sunMatrix
   field
     matrix : Matrix
