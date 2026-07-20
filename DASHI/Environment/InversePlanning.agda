@@ -44,15 +44,18 @@ record Explanation : Set where
     source : SourceHypothesis
     target : Observation
     predictedDirection : SSP.SSPTrit
-    residualCost : Nat
-    transportCost : Nat
-    complexityCost : Nat
-    lane : Latent.ModelLane
+    explanationResidualCost : Nat
+    explanationTransportCost : Nat
+    explanationComplexityCost : Nat
+    explanationLane : Latent.ModelLane
     supportingEvidence : List String
 open Explanation public
 
 explanationCost : Explanation → Nat
-explanationCost e = residualCost e + transportCost e + complexityCost e
+explanationCost e =
+  explanationResidualCost e
+  + explanationTransportCost e
+  + explanationComplexityCost e
 
 record RankedExplanation (chosen : Explanation)
                          (alternatives : List Explanation) : Set where
@@ -113,8 +116,8 @@ record Plan : Set where
     interventions : List Eco.Intervention
     objectives : List Objective
     constraints : List Constraint
-    lane : Latent.ModelLane
-    residualCost : Nat
+    planLane : Latent.ModelLane
+    planResidualCost : Nat
     interventionCost : Nat
     modelComplexityCost : Nat
     uncertaintyCost : Nat
@@ -122,7 +125,7 @@ open Plan public
 
 planCost : Plan → Nat
 planCost p =
-  residualCost p
+  planResidualCost p
   + interventionCost p
   + modelComplexityCost p
   + uncertaintyCost p
