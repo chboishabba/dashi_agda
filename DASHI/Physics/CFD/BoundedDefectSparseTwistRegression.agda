@@ -1,7 +1,8 @@
 module DASHI.Physics.CFD.BoundedDefectSparseTwistRegression where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Nat.Base using (z≤n)
 
 import DASHI.Algebra.Trit as Trit
@@ -57,5 +58,5 @@ zero-defect-rollout =
     identityBoundedOperator
 
 boundary-keeps-clay-closed :
-  clayPromotionAvailable canonicalBoundedDefectBoundary ≡ Agda.Builtin.Bool.false
+  clayPromotionAvailable canonicalBoundedDefectBoundary ≡ false
 boundary-keeps-clay-closed = refl
