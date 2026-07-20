@@ -93,6 +93,44 @@ transportTrajectoryCommutes x n =
   RKC.trajectoryCommutes canonicalTransportRepresentationLaw tt n
 
 ------------------------------------------------------------------------
+-- Exact compatibility viewed as a zero-defect approximate theorem.
+
+transportApproxRepresentationLaw :
+  RKC.ApproxRepresentationKernelCompatibility
+transportApproxRepresentationLaw =
+  record
+    { FineState = FineTransportState
+    ; CoarseState = CoarseTransportState
+    ; Observable = Nat
+    ; fineStep = fineTransportStep
+    ; coarseStep = coarseTransportStep
+    ; project = projectTransport
+    ; fineAdmissible = fineTransportAdmissible
+    ; coarseAdmissible = coarseTransportAdmissible
+    ; sameCoarsePhysics = _≡_
+    ; sameObservable = _≡_
+    ; fineObserve = fineTransportObservable
+    ; coarseObserve = coarseTransportObservable
+    ; projectPreservesAdmissibility = λ _ → tt
+    ; observableTransport = transportObservablePreserved
+    ; kernelCommutesUpToPhysics = transportProjectionCommutes
+    ; trajectoryDefect = λ _ _ → 0
+    ; defectBudget = λ _ → 0
+    ; trajectoryDefectBound = λ _ _ → ≤-refl
+    }
+
+transportMDLRepresentativeSelection :
+  RKC.MDLRepresentativeSelection transportApproxRepresentationLaw
+transportMDLRepresentativeSelection =
+  record
+    { cost = λ total → total
+    ; canonicalRepresentative = λ total → total
+    ; representativePreservesPhysics = λ _ → refl
+    ; representativeDoesNotIncreaseCost = λ _ → ≤-refl
+    ; canonicalRepresentativeIdempotent = λ _ → refl
+    }
+
+------------------------------------------------------------------------
 -- The same carrier packaged through the existing PhysicalTheory interface.
 
 fineTransportTheory : PT.PhysicalTheory _
