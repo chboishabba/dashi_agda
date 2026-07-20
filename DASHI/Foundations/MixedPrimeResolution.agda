@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Foundations.Base369BinaryTernaryRefinement using
-  (Resolution23; resolution23; binaryDepth; ternaryDepth; pow; sectorCount)
+  (Resolution23; binaryDepth; ternaryDepth; pow)
 
 ------------------------------------------------------------------------
 -- A third independent factor axis: 2^a 3^b q^c.
@@ -96,12 +96,11 @@ resolution9-count = refl
 resolution27-count : mixedSectorCount resolution27 ≡ 27
 resolution27-count = refl
 
--- 27 = 3^3 is the next triadic depth after 9 = 3^2.
 resolution9-third-triadic-step : ternaryRefineQ resolution9 ≡ resolution27
 resolution9-third-triadic-step = refl
 
 record MixedPrimeResolutionBoundary : Set where
-  constructor mixedPrimeResolutionBoundary
+  constructor mkMixedPrimeResolutionBoundary
   field
     coordinateCarrier : Set
     interpretation : String
@@ -114,7 +113,7 @@ record MixedPrimeResolutionBoundary : Set where
 
 mixedPrimeResolutionBoundary : MixedPrimeResolutionBoundary
 mixedPrimeResolutionBoundary =
-  mixedPrimeResolutionBoundary
+  mkMixedPrimeResolutionBoundary
     Resolution23Q
     "2^a 3^b q^c is a factor-depth coordinate; CRT decomposition requires explicit pairwise-coprime witnesses and q-primality is a separate gate"
     false
