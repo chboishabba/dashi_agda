@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Nat using (_+_; _≤_)
 open import Data.Vec using (Vec; []; _∷_)
 
@@ -71,9 +72,6 @@ canonicalCylinderWitness x y =
 ------------------------------------------------------------------------
 -- Coarse-to-fine execution lanes.
 
--- Path A: deterministic screening and cheap invariant checks.
--- Path B: latent/surrogate exploration learned from authoritative runs.
--- Path C: finite mechanistic or otherwise authoritative analysis.
 data ModelLane : Set where
   pathA-screening : ModelLane
   pathB-latent : ModelLane
@@ -169,9 +167,6 @@ record EnvelopeContract : Set₁ where
     embedDepthState : ∀ {d : Nat} → DepthState d → Latent
     predictsFrom : Latent → Latent
     residualObservable : Latent → Effect
-
-    -- Evidence supplied by the numerical or statistical implementation.
-    -- These are fields rather than claimed theorems here.
     depthWeighted : Set
     firstDifferenceControlsDistance : Set
     injectiveInDeclaredRegime : Set
