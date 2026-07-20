@@ -2,6 +2,7 @@ module DASHI.Biology.DNAChemistryFormalismRegression where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (zero; suc)
 
 import DASHI.Biology.DNAChemistryCarrier as Carrier
 import DASHI.Biology.DNAChemistryCrossPollinationBridge as Cross
@@ -58,7 +59,7 @@ tritMarginRegression = TritBridge.margin-roundtrip TritBridge.positiveMargin
 
 prefixAgreementRegression :
   DNAUltra.agreementDepth DNAUltra.canonicalDNAAddress4 DNAUltra.canonicalDNAAddress4
-  ≡ Agda.Builtin.Nat.suc (Agda.Builtin.Nat.suc (Agda.Builtin.Nat.suc (Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero)))
+  ≡ suc (suc (suc (suc zero)))
 prefixAgreementRegression = DNAUltra.canonicalDNAAddress4SelfAgreement
 
 record DNAChemistryFormalismRegressionReceipt : Set where
