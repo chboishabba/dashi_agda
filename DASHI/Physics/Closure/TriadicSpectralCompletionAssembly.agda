@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Algebra.TriadicFiniteArithmeticLaws as ArithmeticLaws
 import DASHI.Algebra.TriadicDepthTwoCyclotomicDFT as DFT9
+import DASHI.Algebra.TriadicDepthTwoDFTGroupBridge as DFT9Group
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstein
 import DASHI.Geometry.TriadicSpectralGenusOneCurve as SpectralCurve
 import DASHI.Physics.Closure.TriadicConcreteAnalyticInstances as Analytic
@@ -20,6 +21,7 @@ record CompletionStatus : Set where
     arbitraryDepthAssociativityProved : Bool
     arbitraryDepthCommutativityProved : Bool
     higherDepthCyclotomicDFTProved : Bool
+    z9GroupLabellingProved : Bool
     characterOrthogonalityProved : Bool
     inverseTransformProved : Bool
     parsevalIdentityProved : Bool
@@ -54,6 +56,7 @@ currentCompletionStatus =
     true
     true
     true
+    true
     false
 
 arbitraryDepthArithmeticClosed :
@@ -63,6 +66,10 @@ arbitraryDepthArithmeticClosed = refl
 higherDepthDFTClosed :
   higherDepthCyclotomicDFTProved currentCompletionStatus ≡ true
 higherDepthDFTClosed = refl
+
+z9GroupLabellingClosed :
+  z9GroupLabellingProved currentCompletionStatus ≡ true
+z9GroupLabellingClosed = refl
 
 modularTransformationClosed :
   eisensteinTransformationProved currentCompletionStatus ≡ true
@@ -82,7 +89,7 @@ realSmoothZ3StillNotPromoted = refl
 
 completionRoute : String
 completionRoute =
-  "carry-balance proof at every depth -> exact Q(zeta_9) DFT on Z/9Z -> orthogonality/inverse/Parseval -> SL2(Z) lattice reindexing -> Eisenstein transformation gate -> smooth F5 spectral plane cubic -> discriminant and j -> quarter-scale real Cauchy code plus native 3-adic atlas -> exact Kraft code and eventual MDL oracle theorem"
+  "carry-balance proof at every depth -> exact Q(zeta_9) DFT -> additive isomorphism with balanced-ternary Z/9Z -> orthogonality/inverse/Parseval -> SL2(Z) lattice reindexing -> Eisenstein transformation gate -> smooth F5 spectral plane cubic -> discriminant and j -> quarter-scale real Cauchy code plus native 3-adic atlas -> exact Kraft code and eventual MDL oracle theorem"
 
 completionBoundary : String
 completionBoundary =
