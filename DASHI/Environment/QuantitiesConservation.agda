@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Nat using (_+_; _≤_)
+open import Data.Nat using (_+_; _≤_; z≤n)
 
 ------------------------------------------------------------------------
 -- Unit-tagged quantities.
@@ -145,6 +145,6 @@ exactZeroBalance {u} model =
     zeroQuantity
     refl
     zeroQuantity
-    (Data.Nat.z≤n)
+    z≤n
     model
     []
