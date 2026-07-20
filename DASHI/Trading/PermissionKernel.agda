@@ -2,11 +2,12 @@
 module DASHI.Trading.PermissionKernel where
 
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat using (_+_; _≤_)
 open import Data.Nat.Properties using (≤-refl)
 
 open import DASHI.Core.KernelSystem
+open import DASHI.Core.KernelOrbit
 
 record Unit : Set where
   constructor unit
@@ -85,6 +86,15 @@ permissionKernel s = marketState
   (riskPenalty s)
   (authorize (quotient s))
 
+permissionKernel-idempotent :
+  ∀ s → permissionKernel (permissionKernel s) ≡ permissionKernel s
+permissionKernel-idempotent s = refl
+
+permissionKernel-fixed-after-one :
+  ∀ s → FixedPoint permissionKernel (permissionKernel s)
+permissionKernel-fixed-after-one s = record
+  { fixed = permissionKernel-idempotent s }
+
 stateInvolution : MarketWindowState → MarketWindowState
 stateInvolution s = s
 
@@ -154,6 +164,16 @@ tradingReadoutComplete :
     tradingQuotientReadout
 tradingReadoutComplete = record
   { relation⇒same-readout = λ related → related }
+
+permissionKernel-quotient-stable :
+  ∀ s → QuotientStable quotient permissionKernel s
+permissionKernel-quotient-stable s = record
+  { stableClass = refl }
+
+permissionKernel-orbit-collapse :
+  ∀ s → OrbitClassCollapse quotient permissionKernel s
+permissionKernel-orbit-collapse s =
+  quotientStable-everywhere⇒orbitCollapse permissionKernel-quotient-stable
 
 tradingAction : MarketWindowState → Nat
 tradingAction s = modelCost s + residualCost s + riskPenalty s
