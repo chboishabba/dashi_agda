@@ -54,8 +54,7 @@ blockAverageEquivariant data block gauge field =
         (reconstructionCovariant data
           (restrictGauge data gauge)
           (transportedLogAverage data block field))
-        (congCoarse
-          (symDefinition data block field))))
+        (congCoarse symDefinition)))
   where
     congReconstruct : ∀ {x y} → x ≡ y → reconstruct data x ≡ reconstruct data y
     congReconstruct refl = refl
@@ -66,8 +65,6 @@ blockAverageEquivariant data block gauge field =
     congCoarse refl = refl
 
     symDefinition :
-      ∀ data block field →
       reconstruct data (transportedLogAverage data block field)
       ≡ blockAverage data block field
-    symDefinition data block field =
-      sym (blockAverageDefinition data block field)
+    symDefinition = sym (blockAverageDefinition data block field)
