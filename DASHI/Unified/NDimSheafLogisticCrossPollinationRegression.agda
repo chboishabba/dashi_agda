@@ -7,13 +7,17 @@ import DASHI.Topology.TetrationalGateField as Gates
 import DASHI.Topology.ClopenNDimFibreBoundary as Clopen
 import DASHI.Topology.WormSoilPantsSheafBoundary as Worm
 import DASHI.Sheaf.TemporalNoodleSheafBridge as Sheaf
+import DASHI.Analysis.HyperrealThresholdProcessBoundary as Hyperreal
 import DASHI.Foundations.AllOnesPadicThresholdBoundary as Prefix
 import DASHI.Foundations.DecimalSymbolPadicChartBoundary as Charts
+import DASHI.Foundations.ReflectionChartPolymorphism as Reflection
+import DASHI.Foundations.PrimorialFactorAddressBoundary as Primorial
 import DASHI.Foundations.JChartSuccessorBoundary as JCharts
 import DASHI.Dynamics.LogisticPolyphaseSelectionBoundary as Logistic
 import DASHI.Dynamics.TriadicResidualRechartDynamics as Dynamics
 import DASHI.Promotion.SystemicDistressReframingBoundary as Distress
 import DASHI.Culture.RelationalTeachingCampaignBoundary as Culture
+import DASHI.Culture.RelationalProcessProtocolBoundary as Protocol
 
 ------------------------------------------------------------------------
 -- Focused exact regressions.  This aggregate is the compiler root for the
@@ -37,6 +41,9 @@ phaseNineRegression = Logistic.phase9-check
 centredFiveRegression : Charts.centreAtFive 5 ≡ Charts.zeroCrossing
 centredFiveRegression = Charts.fiveIsCentredZero
 
+modNineThreeSixRegression : Reflection.reflect9 Reflection.p3 ≡ Reflection.p6
+modNineThreeSixRegression = Reflection.threeReflectsToSix
+
 starSuccessorRegression :
   Charts.starSuccessorChart ≡
   JCharts.chart 11
@@ -54,12 +61,16 @@ record NDimSheafLogisticCrossPollinationReceipt : Set where
     clopenBoundary : Clopen.ClopenNDimBoundary
     wormBoundary : Worm.WormSoilPantsBoundary
     qitBoundary : Sheaf.QITSheafificationApplicationBoundary
+    hyperrealBoundary : Hyperreal.HyperrealPadicSeparationBoundary
     padicBoundary : Prefix.AllOnesPadicBoundary
     chartBoundary : Charts.DecimalSymbolPadicBoundary
+    reflectionBoundary : Reflection.ReflectionPolymorphismBoundary
+    primorialBoundary : Primorial.PrimorialFactorAddressBoundary
     logisticBoundary : Logistic.LogisticPolyphaseBoundary
     residualBoundary : Dynamics.ResidualDynamicsBoundary
     distressBoundary : Distress.SystemicDistressBoundary
     culturalBoundary : Culture.RelationalCaseBoundary
+    protocolBoundary : Protocol.RelationalProcessBoundary
     tlureyBoundary : Culture.TlureyEtymologyBoundary
 
 canonicalNDimSheafLogisticCrossPollinationReceipt :
@@ -70,12 +81,16 @@ canonicalNDimSheafLogisticCrossPollinationReceipt =
     ; clopenBoundary = Clopen.canonicalClopenNDimBoundary
     ; wormBoundary = Worm.canonicalWormSoilPantsBoundary
     ; qitBoundary = Sheaf.canonicalQITSheafificationApplicationBoundary
+    ; hyperrealBoundary = Hyperreal.canonicalHyperrealPadicSeparationBoundary
     ; padicBoundary = Prefix.canonicalAllOnesPadicBoundary
     ; chartBoundary = Charts.canonicalDecimalSymbolPadicBoundary
+    ; reflectionBoundary = Reflection.canonicalReflectionPolymorphismBoundary
+    ; primorialBoundary = Primorial.canonicalPrimorialFactorAddressBoundary
     ; logisticBoundary = Logistic.canonicalLogisticPolyphaseBoundary
     ; residualBoundary = Dynamics.canonicalResidualDynamicsBoundary
     ; distressBoundary = Distress.canonicalSystemicDistressBoundary
     ; culturalBoundary = Culture.canonicalRelationalCaseBoundary
+    ; protocolBoundary = Protocol.canonicalRelationalProcessBoundary
     ; tlureyBoundary = Culture.canonicalTlureyEtymologyBoundary
     }
 
