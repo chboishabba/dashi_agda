@@ -53,8 +53,12 @@ finiteQuadraticEnergyUnique :
   SatisfiesFiniteMultiscaleLaws energy →
   energy ≡ canonicalQuadraticEnergy
 finiteQuadraticEnergyUnique
-  (energy-table .0 .1 .1 .2)
-  (finite-multiscale-laws refl refl refl refl) = refl
+  (energy-table zero coarse detail combined)
+  (finite-multiscale-laws zero-is-zero coarse-is-one detail-is-one no-leakage)
+  rewrite zero-is-zero
+        | coarse-is-one
+        | detail-is-one
+        | no-leakage = refl
 
 finiteQuadraticUniquenessProof : QuadraticUniquenessProof
 finiteQuadraticUniquenessProof =
