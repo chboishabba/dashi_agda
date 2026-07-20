@@ -4,13 +4,14 @@ module DASHI.Physics.YangMills.BalabanContinuumOSLimit where
 -- Continuum Osterwalder--Schrader limit.
 --
 -- The cutoff family, convergence topology, and closure of OS0--OS5 are kept
--- distinct.  Once the cutoff axioms and the corresponding closure theorems are
+-- distinct. Once the cutoff axioms and corresponding closure theorems are
 -- supplied, the continuum Schwinger system is assembled without importing the
--- desired conclusion as a single field.
+-- desired conclusion as one field.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap
+import DASHI.Physics.YangMills.CompactLieYangMillsFrontier as Frontier
 
 record SchwingerLimitProblem
     (Cutoff Observable Point Scalar : Set) : Set₁ where
@@ -76,6 +77,33 @@ continuumOSFromLimit problem closure = record
   ; OS3PermutationSymmetry = OS3AtLimit problem
   ; OS4Clustering = OS4AtLimit problem
   ; OS5GrowthControl = OS5AtLimit problem
+  ; os0 = os0Closed closure
+      (convergesToContinuum problem) (cutoffOS0 problem)
+  ; os1 = os1Closed closure
+      (convergesToContinuum problem) (cutoffOS1 problem)
+  ; os2 = os2Closed closure
+      (convergesToContinuum problem) (cutoffOS2 problem)
+  ; os3 = os3Closed closure
+      (convergesToContinuum problem) (cutoffOS3 problem)
+  ; os4 = os4Closed closure
+      (convergesToContinuum problem) (cutoffOS4 problem)
+  ; os5 = os5Closed closure
+      (convergesToContinuum problem) (cutoffOS5 problem)
+  }
+
+toContinuumOSTarget :
+  ∀ {Cutoff Observable Point Scalar : Set} →
+  (problem : SchwingerLimitProblem Cutoff Observable Point Scalar) →
+  (closure : OSAxiomsClosedUnderLimit problem) →
+  Frontier.ContinuumOSTarget (Observable → Point → Point → Scalar)
+toContinuumOSTarget problem closure = record
+  { continuumSchwingerFunctions = continuumSchwinger problem
+  ; OS0 = λ _ → OS0AtLimit problem
+  ; OS1 = λ _ → OS1AtLimit problem
+  ; OS2 = λ _ → OS2AtLimit problem
+  ; OS3 = λ _ → OS3AtLimit problem
+  ; OS4 = λ _ → OS4AtLimit problem
+  ; OS5 = λ _ → OS5AtLimit problem
   ; os0 = os0Closed closure
       (convergesToContinuum problem) (cutoffOS0 problem)
   ; os1 = os1Closed closure
