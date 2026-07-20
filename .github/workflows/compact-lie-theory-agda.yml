@@ -14,12 +14,14 @@ on:
       - 'DASHI/Physics/YangMills/BalabanWeightedGreenKernelDecay.agda'
       - 'DASHI/Physics/YangMills/BalabanCriticalMapLipschitzContraction.agda'
       - 'DASHI/Physics/YangMills/BalabanBackgroundFieldClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteInverseConsequences.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteVolumeBackgroundLane.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepRGClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVKPClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanAllScaleRGClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanOSMassGapClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda'
+      - 'scripts/audit_constructive_yang_mills_levels.py'
       - 'Docs/CompactLieYangMills.md'
       - '.github/workflows/compact-lie-theory-agda.yml'
 
@@ -32,6 +34,10 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+
+      - name: Audit proof-level boundaries
+        run: python scripts/audit_constructive_yang_mills_levels.py
+
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
