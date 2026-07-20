@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.TriadicArithmeticSpectralRegression where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
@@ -12,6 +13,12 @@ import DASHI.Algebra.TriadicFiniteIrrep as Irrep
 import DASHI.Physics.Closure.TriadicSectorQSeries as QS
 import DASHI.Physics.Closure.TriadicRepresentationMDL as MDL
 import DASHI.Physics.Closure.TriadicArithmeticSpectralAssembly as Assembly
+
+open QS.QSeriesCarrier using (Coeff; zeroᶜ; oneᶜ; _+ᶜ_; _*ᶜ_)
+open QS.SectorTraceTower using (Sector; traceCoefficient)
+open QS using (Vec) renaming ([] to []q; _∷_ to _∷q_)
+
+infixr 5 _∷q_
 
 ------------------------------------------------------------------------
 -- Canonical [-1, 0, +1] stream.
@@ -100,25 +107,23 @@ data Unit : Set where
 natQSeriesCarrier : QS.QSeriesCarrier
 natQSeriesCarrier =
   record
-    { QS.Coeff = Nat
-    ; QS.zeroᶜ = zero
-    ; QS.oneᶜ = Q.one
-    ; QS._+ᶜ_ = Q._+ⁿ_
-    ; QS._*ᶜ_ = Q._*ⁿ_
+    { Coeff = Nat
+    ; zeroᶜ = zero
+    ; oneᶜ = Q.one
+    ; _+ᶜ_ = Q._+ⁿ_
+    ; _*ᶜ_ = Q._*ⁿ_
     }
 
 natTraceTower : QS.SectorTraceTower natQSeriesCarrier
 natTraceTower =
   record
-    { QS.Sector = Unit
-    ; QS.traceCoefficient = λ n sector → n
+    { Sector = Unit
+    ; traceCoefficient = λ n sector → n
     }
 
-expectedNatPrefixThree : QS.Vec Nat Q.three
+expectedNatPrefixThree : Vec Nat Q.three
 expectedNatPrefixThree =
-  QS._∷_ zero
-    (QS._∷_ Q.one
-      (QS._∷_ Q.two QS.[]))
+  zero ∷q Q.one ∷q Q.two ∷q []q
 
 qSeriesPrefixThreeExact :
   QS.qSeriesPrefix
@@ -142,6 +147,6 @@ depthTwoValueExact = refl
 
 realSmoothPromotionRemainsFalse :
   Assembly.realSmoothZ3Promoted Assembly.currentLayerStatus
-  ≡ Agda.Builtin.Bool.false
+  ≡ false
 realSmoothPromotionRemainsFalse =
   Assembly.realSmoothZ3StillNotPromoted
