@@ -41,6 +41,18 @@ arityOf (x ∷ y ∷ z ∷ w ∷ xs) = arity4
 branchArity : ProductionState → Arity
 branchArity s = arityOf (legalBases s)
 
+data NonEmpty {X : Set} : List X → Set where
+  nonEmpty : ∀ {x xs} → NonEmpty (x ∷ xs)
+
+data OperationalArity : Set where
+  operational1 operational2 operational3 operational4 : OperationalArity
+
+operationalArity : ∀ {xs : List Base} → NonEmpty xs → OperationalArity
+operationalArity {x ∷ []} nonEmpty = operational1
+operationalArity {x ∷ y ∷ []} nonEmpty = operational2
+operationalArity {x ∷ y ∷ z ∷ []} nonEmpty = operational3
+operationalArity {x ∷ y ∷ z ∷ w ∷ xs} nonEmpty = operational4
+
 data Maybe (X : Set) : Set where
   nothing : Maybe X
   just : X → Maybe X
@@ -89,9 +101,6 @@ record RankUnrankReceipt : Set₁ where
       ∀ (s : ProductionState) (b : Base) (n : Nat) →
       rank s b ≡ just n → unrank s n ≡ just b
 
-------------------------------------------------------------------------
--- Exact horizon-indexed completion object, indexed by the emitted word.
-
 data Completion : Nat → ProductionState → List Base → Set where
   horizon0 : ∀ {s} → Completion zero s []
   extend :
@@ -121,6 +130,7 @@ record VariableChoiceReceipt : Set where
     count : ProductionState → Nat
     countIsLength : ∀ s → count s ≡ length (choices s)
     arity : ProductionState → Arity
+    operational : ∀ s → NonEmpty (choices s) → OperationalArity
 
 variableChoiceReceipt : VariableChoiceReceipt
 variableChoiceReceipt = record
@@ -128,4 +138,5 @@ variableChoiceReceipt = record
   ; count = branchCount
   ; countIsLength = λ s → refl
   ; arity = branchArity
+  ; operational = λ s witness → operationalArity witness
   }
