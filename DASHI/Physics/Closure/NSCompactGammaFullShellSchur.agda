@@ -1,146 +1,141 @@
 module DASHI.Physics.Closure.NSCompactGammaFullShellSchur where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _≤_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Relation.Nullary using (¬_)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums public
+import DASHI.Physics.Closure.NSPairIncidenceKernel as PairKernel
 
 ------------------------------------------------------------------------
 -- Exact full-shell Fourier carrier.
 --
--- Unlike the earlier six-mode restriction, this owner makes the finite row and
--- column lists, the incidence relation, the actual local majorant, and the
--- weighted kernel entry part of one object.  Consequently the Schur sums below
--- are definitionally the sums over the declared full shell; an unrelated scalar
--- cannot be supplied as a "row bound".
+-- The existing `PairIncidenceData` is the canonical owner of a finite kernel
+-- assembled as the fold of every resonant pair contribution.  This module lifts
+-- that owner to a shell/cutoff family and records enumeration and incidence
+-- completeness.  The Schur sums below are therefore definitionally the sums of
+-- the exact pair-incidence kernel; an unrelated scalar cannot be supplied as a
+-- row or column value.
 ------------------------------------------------------------------------
 
 record FullShellFourierFamily
-    {m s i : Level}
+    {p m s i : Level}
+    (Pair : Set p)
     (Mode : Set m)
-    (Scalar : Set s) : Set (lsuc (m ⊔ s ⊔ i)) where
+    (Scalar : Set s) : Set (lsuc (p ⊔ m ⊔ s ⊔ i)) where
   field
     TargetShell : Nat → Nat → Mode → Set i
     SourceNearShell : Nat → Nat → Mode → Set i
-    Resonant : Mode → Mode → Set i
-    Incidence : Nat → Nat → Mode → Mode → Set i
 
-    Occurs : List Mode → Mode → Set i
-    NoDuplicates : List Mode → Set i
+    OccursMode : List Mode → Mode → Set i
+    OccursPair : List Pair → Pair → Set i
+    NoModeDuplicates : List Mode → Set i
+    NoPairDuplicates : List Pair → Set i
 
-    targetModes : Nat → Nat → List Mode
-    sourceModes : Nat → Nat → List Mode
+    pairDataAt :
+      Nat → Nat → PairKernel.PairIncidenceData Pair Mode Mode Scalar
 
     targetEnumerationSound :
-      ∀ K N k → Occurs (targetModes K N) k → TargetShell K N k
-
-    targetEnumerationComplete :
-      ∀ K N k → TargetShell K N k → Occurs (targetModes K N) k
-
-    sourceEnumerationSound :
-      ∀ K N p → Occurs (sourceModes K N) p → SourceNearShell K N p
-
-    sourceEnumerationComplete :
-      ∀ K N p → SourceNearShell K N p → Occurs (sourceModes K N) p
-
-    targetEnumerationNoDuplicates :
-      ∀ K N → NoDuplicates (targetModes K N)
-
-    sourceEnumerationNoDuplicates :
-      ∀ K N → NoDuplicates (sourceModes K N)
-
-    incidenceComplete :
-      ∀ K N k p →
-      TargetShell K N k →
-      SourceNearShell K N p →
-      Resonant k p →
-      Incidence K N k p
-
-    incidenceSound :
-      ∀ K N k p →
-      Incidence K N k p →
+      ∀ K N k →
+      OccursMode (PairKernel.rows (pairDataAt K N)) k →
       TargetShell K N k
 
-    incidenceSourceSound :
-      ∀ K N k p →
-      Incidence K N k p →
+    targetEnumerationComplete :
+      ∀ K N k →
+      TargetShell K N k →
+      OccursMode (PairKernel.rows (pairDataAt K N)) k
+
+    sourceEnumerationSound :
+      ∀ K N p →
+      OccursMode (PairKernel.columns (pairDataAt K N)) p →
       SourceNearShell K N p
 
-    incidenceResonant :
-      ∀ K N k p →
-      Incidence K N k p →
-      Resonant k p
+    sourceEnumerationComplete :
+      ∀ K N p →
+      SourceNearShell K N p →
+      OccursMode (PairKernel.columns (pairDataAt K N)) p
+
+    targetEnumerationNoDuplicates :
+      ∀ K N → NoModeDuplicates (PairKernel.rows (pairDataAt K N))
+
+    sourceEnumerationNoDuplicates :
+      ∀ K N → NoModeDuplicates (PairKernel.columns (pairDataAt K N))
+
+    pairEnumerationNoDuplicates :
+      ∀ K N → NoPairDuplicates (PairKernel.pairs (pairDataAt K N))
+
+    Incidence : Nat → Nat → Pair → Mode → Mode → Set i
+
+    incidenceComplete :
+      ∀ K N pair →
+      OccursPair (PairKernel.pairs (pairDataAt K N)) pair →
+      Σ Mode (λ target →
+        Σ Mode (λ source → Incidence K N pair target source))
+
+    incidenceTargetSound :
+      ∀ K N pair target source →
+      Incidence K N pair target source →
+      TargetShell K N target
+
+    incidenceSourceSound :
+      ∀ K N pair target source →
+      Incidence K N pair target source →
+      SourceNearShell K N source
 
     incidenceProofUnique :
-      ∀ K N k p →
-      (left right : Incidence K N k p) →
+      ∀ K N pair target source →
+      (left right : Incidence K N pair target source) →
       left ≡ right
 
-    zero : Scalar
-    add : Scalar → Scalar → Scalar
-    multiply : Scalar → Scalar → Scalar
-    _≤_ : Scalar → Scalar → Set s
-
-    localFourierResponse : Nat → Nat → Mode → Mode → Scalar
-    localFourierMajorant : Nat → Nat → Mode → Mode → Scalar
+    localFourierResponse : Nat → Nat → Pair → Scalar
+    localFourierMajorant : Nat → Nat → Pair → Scalar
 
     everyLocalFourierMajorization :
-      ∀ K N k p →
-      Incidence K N k p →
-      _≤_
-        (localFourierResponse K N k p)
-        (localFourierMajorant K N k p)
+      ∀ K N pair →
+      OccursPair (PairKernel.pairs (pairDataAt K N)) pair →
+      PairKernel._≤_ (pairDataAt K N)
+        (localFourierResponse K N pair)
+        (localFourierMajorant K N pair)
 
-    rowWeight : Nat → Mode → Scalar
-    columnWeight : Nat → Mode → Scalar
+    pairContributionIsLocalMajorant :
+      ∀ K N pair target source →
+      Incidence K N pair target source →
+      PairKernel.pairContribution (pairDataAt K N) pair target source ≡
+      localFourierMajorant K N pair
 
-    kernelEntry : Nat → Nat → Mode → Mode → Scalar
-
-    kernelEntryIsLocalMajorant :
-      ∀ K N k p →
-      Incidence K N k p →
-      kernelEntry K N k p ≡ localFourierMajorant K N k p
-
-    kernelZeroOffIncidence :
-      ∀ K N k p →
-      ¬ Incidence K N k p →
-      kernelEntry K N k p ≡ zero
+    pairContributionZeroOffIncidence :
+      ∀ K N pair target source →
+      ¬ Incidence K N pair target source →
+      PairKernel.pairContribution (pairDataAt K N) pair target source ≡
+      PairKernel.zero (pairDataAt K N)
 
 open FullShellFourierFamily public
 
 fullShellKernelAt :
-  ∀ {m s i}
+  ∀ {p m s i}
+    {Pair : Set p}
     {Mode : Set m}
     {Scalar : Set s} →
-  FullShellFourierFamily {i = i} Mode Scalar →
+  FullShellFourierFamily {i = i} Pair Mode Scalar →
   Nat → Nat →
   FiniteWeightedKernel Mode Mode Scalar
-fullShellKernelAt F K N = record
-  { rows = targetModes F K N
-  ; columns = sourceModes F K N
-  ; zero = zero F
-  ; add = add F
-  ; multiply = multiply F
-  ; _≤_ = _≤_ F
-  ; kernel = kernelEntry F K N
-  ; rowWeight = rowWeight F K
-  ; colWeight = columnWeight F K
-  }
+fullShellKernelAt F K N =
+  PairKernel.asFiniteWeightedKernel (pairDataAt F K N)
 
 ------------------------------------------------------------------------
--- The row and column estimates are now certificates for the exact finite sums
--- computed by `rowWeightedSum` and `columnWeightedSum` on `fullShellKernelAt`.
+-- Uniform Schur estimates for the exact pair-incidence fold.
 ------------------------------------------------------------------------
 
 record FullShellUniformSchur
-    {m s i : Level}
+    {p m s i : Level}
+    {Pair : Set p}
     {Mode : Set m}
     {Scalar : Set s}
-    (F : FullShellFourierFamily {i = i} Mode Scalar) :
-    Set (lsuc (m ⊔ s ⊔ i)) where
+    (F : FullShellFourierFamily {i = i} Pair Mode Scalar) :
+    Set (lsuc (p ⊔ m ⊔ s ⊔ i)) where
   field
     rowBudget : Scalar
     columnBudget : Scalar
@@ -160,10 +155,11 @@ record FullShellUniformSchur
 open FullShellUniformSchur public
 
 fullShellRowEstimate :
-  ∀ {m s i}
+  ∀ {p m s i}
+    {Pair : Set p}
     {Mode : Set m}
     {Scalar : Set s}
-    {F : FullShellFourierFamily {i = i} Mode Scalar} →
+    {F : FullShellFourierFamily {i = i} Pair Mode Scalar} →
   (S : FullShellUniformSchur F) →
   (K N : Nat) →
   (target : Mode) →
@@ -175,10 +171,11 @@ fullShellRowEstimate :
 fullShellRowEstimate S K N = rowBound (certificateAt S K N)
 
 fullShellColumnEstimate :
-  ∀ {m s i}
+  ∀ {p m s i}
+    {Pair : Set p}
     {Mode : Set m}
     {Scalar : Set s}
-    {F : FullShellFourierFamily {i = i} Mode Scalar} →
+    {F : FullShellFourierFamily {i = i} Pair Mode Scalar} →
   (S : FullShellUniformSchur F) →
   (K N : Nat) →
   (source : Mode) →
@@ -190,44 +187,43 @@ fullShellColumnEstimate :
 fullShellColumnEstimate S K N = columnBound (certificateAt S K N)
 
 ------------------------------------------------------------------------
--- Named combinatorial/analytic leaves needed to construct the uniform
--- certificate for the integer Fourier shell.  These are intentionally separate
--- from the certificate itself so that enumeration, counting, radial summation,
--- angular control, zero-mode exclusion, and cutoff stability cannot be hidden in
--- one opaque premise.
+-- Named combinatorial/analytic leaves used to construct the uniform
+-- certificate for the integer Fourier shell.
 ------------------------------------------------------------------------
 
 record FullShellCombinatorics
-    {m s i : Level}
+    {p m s i : Level}
+    {Pair : Set p}
     {Mode : Set m}
     {Scalar : Set s}
-    (F : FullShellFourierFamily {i = i} Mode Scalar) :
-    Set (lsuc (m ⊔ s ⊔ i)) where
+    (F : FullShellFourierFamily {i = i} Pair Mode Scalar) :
+    Set (lsuc (p ⊔ m ⊔ s ⊔ i)) where
   field
     shellIntersectionCount : Nat → Nat → Nat → Mode → Nat
     shellCountingBudget : Nat → Nat → Nat → Nat
 
-    ShellCountingBound : Nat → Nat → Nat → Mode → Set i
     shellCountingBound :
-      ∀ K j ell k → ShellCountingBound K j ell k
+      ∀ K j ell k →
+      shellIntersectionCount K j ell k ≤ shellCountingBudget K j ell
 
     WeightedRadialSummability : Nat → Set i
     weightedRadialSummability :
       ∀ K → WeightedRadialSummability K
 
-    AngularPolarizationBound : Nat → Nat → Mode → Mode → Set i
+    AngularPolarizationBound : Nat → Nat → Pair → Set i
     angularPolarizationBound :
-      ∀ K N k p →
-      Incidence F K N k p →
-      AngularPolarizationBound K N k p
+      ∀ K N pair →
+      OccursPair F (PairKernel.pairs (pairDataAt F K N)) pair →
+      AngularPolarizationBound K N pair
 
-    ZeroModeExcluded : Nat → Nat → Set i
+    zeroMode : Mode
     zeroModeExcluded :
-      ∀ K N → ZeroModeExcluded K N
+      ∀ K N →
+      ¬ OccursMode F (PairKernel.columns (pairDataAt F K N)) zeroMode
 
-    CutoffMonotone : Nat → Nat → Nat → Set i
+    CutoffExtension : Nat → Nat → Nat → Set i
     cutoffMonotone :
-      ∀ K N N′ → CutoffMonotone K N N′
+      ∀ K N N′ → N ≤ N′ → CutoffExtension K N N′
 
     CutoffUniformConstants : Set i
     cutoffUniformConstants : CutoffUniformConstants
@@ -235,11 +231,12 @@ record FullShellCombinatorics
 open FullShellCombinatorics public
 
 record FullShellSchurProgram
-    {m s i : Level}
+    {p m s i : Level}
+    {Pair : Set p}
     {Mode : Set m}
     {Scalar : Set s}
-    (F : FullShellFourierFamily {i = i} Mode Scalar) :
-    Set (lsuc (m ⊔ s ⊔ i)) where
+    (F : FullShellFourierFamily {i = i} Pair Mode Scalar) :
+    Set (lsuc (p ⊔ m ⊔ s ⊔ i)) where
   field
     combinatorics : FullShellCombinatorics F
     uniformSchur : FullShellUniformSchur F
