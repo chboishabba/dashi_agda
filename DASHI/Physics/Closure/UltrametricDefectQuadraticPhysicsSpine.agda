@@ -27,6 +27,14 @@ open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem a
 open import DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem as CCTCB
 open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 
+-- Focused follow-on theorem surfaces.  Importing them here makes the canonical
+-- spine compile-check the actual shift/additive transport, intrinsic orbit
+-- profile, geometric constraint reconstruction, and cross-pollination lanes.
+import DASHI.Physics.Closure.PhysicsClosureCrossPollinationTheorem
+import DASHI.Physics.Closure.ShiftOperatorProjectionDefectTransportTheorem
+import DASHI.Physics.Closure.IntrinsicOrbitProfileLorentzTheorem
+import DASHI.Physics.Closure.GeometricConstraintReconstructionTheorem
+
 record CanonicalPhysicsClosureSpine : Setω where
   field
     strengthenedContraction : CFQS.ContractionForcesQuadraticStrong
@@ -109,8 +117,3 @@ canonicalSpinDiracFromForcedSignature :
 canonicalSpinDiracFromForcedSignature =
   CanonicalPhysicsClosureSpine.contractionSignatureToSpinDirac
     canonicalPhysicsClosureSpine
-
--- Keep the actual-shift/operator, explicit Lorentz-uniqueness,
--- constraint-transport, and constructive-continuum frontier in the same
--- focused compilation surface.
-import DASHI.Physics.Closure.PhysicsClosureCrossPollinationTheorem
