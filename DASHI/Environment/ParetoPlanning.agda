@@ -1,16 +1,14 @@
 module DASHI.Environment.ParetoPlanning where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.Nat using (_≤_; _<_; z≤n; s≤s)
+open import Data.Nat using (_≤_; _<_)
 
 import DASHI.Environment.InversePlanning as Planning
-
-------------------------------------------------------------------------
--- Objective vectors and dominance.
 
 data Direction : Set where
   minimise : Direction
@@ -105,9 +103,6 @@ record FiniteParetoResult : Set where
     tradeoffReport : List String
     noClaimOfUniqueOptimum : Bool
 open FiniteParetoResult public
-
-------------------------------------------------------------------------
--- Keep MDL and Pareto selection explicitly separate.
 
 record SelectionSeparationBoundary : Set where
   constructor mkSelectionSeparationBoundary
