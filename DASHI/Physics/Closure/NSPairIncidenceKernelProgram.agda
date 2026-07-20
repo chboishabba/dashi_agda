@@ -18,6 +18,7 @@ open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel public
 open import DASHI.Physics.Closure.NSWall1FourierShellInstance public
 open import DASHI.Physics.Closure.NSWall1PolarizationInstantiation public
 open import DASHI.Physics.Closure.NSWall1UniformWeightedSchur public
+open import DASHI.Physics.Closure.NSFullShellWeightedSchur public
 open import DASHI.Physics.Closure.NSPairIncidenceSchurBridge public
 open import DASHI.Physics.Closure.NSWeightedShellTransferBridge public
 open import DASHI.Physics.Closure.NSFactorizedSchurFrameGap public
