@@ -46,11 +46,21 @@ open SectorTraceTower public
 
 coefficientSequence :
   (C : QSeriesCarrier) →
-  SectorTraceTower C →
-  Sector (SectorTraceTower C) →
+  (T : SectorTraceTower C) →
+  Sector T →
   Nat →
   Coeff C
 coefficientSequence C T s n = traceCoefficient T n s
+
+shiftTraceTower :
+  (C : QSeriesCarrier) →
+  SectorTraceTower C →
+  SectorTraceTower C
+shiftTraceTower C T =
+  record
+    { Sector = Sector T
+    ; traceCoefficient = λ k sector → traceCoefficient T (suc k) sector
+    }
 
 qSeriesPrefix :
   (C : QSeriesCarrier) →
@@ -62,16 +72,6 @@ qSeriesPrefix C T s zero = []
 qSeriesPrefix C T s (suc n) =
   traceCoefficient T zero s
   ∷ qSeriesPrefix C (shiftTraceTower C T) s n
-  where
-    shiftTraceTower :
-      (C : QSeriesCarrier) →
-      SectorTraceTower C →
-      SectorTraceTower C
-    shiftTraceTower C T =
-      record
-        { Sector = Sector T
-        ; traceCoefficient = λ k sector → traceCoefficient T (suc k) sector
-        }
 
 ------------------------------------------------------------------------
 -- Exact finite reconstruction of a coefficient prefix.
