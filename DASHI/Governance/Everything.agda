@@ -1,6 +1,9 @@
 module DASHI.Governance.Everything where
 
 import DASHI.Governance.GovernedArtifactCore
+import DASHI.Governance.PromotionSpine
+import DASHI.Governance.ArtifactAuthorityPromotionBridge
+import DASHI.Governance.PromotionSpineTests
 import DASHI.Governance.PermacultureEvolution
 import DASHI.Governance.PermacultureEvolutionTests
 import DASHI.Governance.CaseyITIRNixBridge
