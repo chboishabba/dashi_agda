@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.SU3MatrixInstance where
 -- Named N = 3 specialization of the certified SU(N) matrix stack.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_*_; _∸_)
@@ -22,7 +22,7 @@ su3DimensionCorrect : SU3Dimension ≡ (3 * 3) ∸ 1
 su3DimensionCorrect = refl
 
 SU3MatrixTheory :
-  ∀ {m c} (Matrix : Set m) (Complex : Set c) → Set (Level.suc (m Level.⊔ c))
+  ∀ {m c} (Matrix : Set m) (Complex : Set c) → Set (lsuc (m ⊔ c))
 SU3MatrixTheory Matrix Complex = CertifiedSUNMatrixTheory 3 Matrix Complex
 
 su3MatrixGroup :
