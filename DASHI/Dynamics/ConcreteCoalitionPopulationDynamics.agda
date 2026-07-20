@@ -5,6 +5,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
+-- Local sum.
+data _⊎_ (X Y : Set) : Set where
+  inj₁ : X → X ⊎ Y
+  inj₂ : Y → X ⊎ Y
+
 ------------------------------------------------------------------------
 -- Two competitors crossed with a binary partner/coalition coordinate.
 
@@ -98,11 +103,6 @@ selectionReachesRepresentative AA = inj₁ refl
 selectionReachesRepresentative AB = inj₁ refl
 selectionReachesRepresentative BA = inj₂ refl
 selectionReachesRepresentative BB = inj₂ refl
-
--- Local sum.
-data _⊎_ (X Y : Set) : Set where
-  inj₁ : X → X ⊎ Y
-  inj₂ : Y → X ⊎ Y
 
 ------------------------------------------------------------------------
 -- Symbolic triadic observation of a four-state population carrier.
