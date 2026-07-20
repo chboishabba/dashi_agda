@@ -1,0 +1,36 @@
+name: Calabi-Yau geometry
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Geometry/ComplexManifold.agda"
+      - "DASHI/Geometry/Kahler.agda"
+      - "DASHI/Geometry/CalabiYau.agda"
+      - "DASHI/Geometry/CalabiYauRegression.agda"
+      - "Docs/support/reference/CalabiYauGeometry.md"
+      - ".github/workflows/calabi-yau-geometry.yml"
+  push:
+    branches: [master]
+    paths:
+      - "DASHI/Geometry/ComplexManifold.agda"
+      - "DASHI/Geometry/Kahler.agda"
+      - "DASHI/Geometry/CalabiYau.agda"
+      - "DASHI/Geometry/CalabiYauRegression.agda"
+      - "Docs/support/reference/CalabiYauGeometry.md"
+      - ".github/workflows/calabi-yau-geometry.yml"
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck Calabi-Yau regression
+        run: |
+          agda --no-libraries --no-default-libraries -i . -i .agda-stdlib \
+            DASHI/Geometry/CalabiYauRegression.agda
