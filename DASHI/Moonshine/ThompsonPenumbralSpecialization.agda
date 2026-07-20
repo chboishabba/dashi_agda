@@ -6,6 +6,7 @@ module DASHI.Moonshine.ThompsonPenumbralSpecialization where
 -- product/trace correspondences without identifying the avatars.
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import DASHI.Moonshine.PenumbralLambency
 open import DASHI.Moonshine.PenumbralVectorValuedForm
