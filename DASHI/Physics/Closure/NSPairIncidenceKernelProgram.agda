@@ -43,4 +43,5 @@ open import DASHI.Physics.Closure.NSCompactGammaHighestAlphaExpenditureCompletio
 open import DASHI.Physics.Closure.NSCompactGammaDifferentialExpenditureProducer public
 open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialInstantiation public
 open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialCompletion public
+open import DASHI.Physics.Closure.NSCompactGammaAnalyticLeafCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
