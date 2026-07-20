@@ -16,7 +16,8 @@ import DASHI.Promotion.SystemicDistressReframingBoundary as Distress
 import DASHI.Culture.RelationalTeachingCampaignBoundary as Culture
 
 ------------------------------------------------------------------------
--- Focused exact regressions.
+-- Focused exact regressions.  This aggregate is the compiler root for the
+-- complete cross-pollinated tranche.
 
 triadicTetrationRegression : Gates.TowerDimension 3 2 ≡ 27
 triadicTetrationRegression = Gates.triadicTowerHeight2
