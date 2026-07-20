@@ -2,6 +2,18 @@ name: Agda CI
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - "DASHI/Foundations/TriadicFiniteQuotient.agda"
+      - "DASHI/Algebra/TriadicFiniteArithmetic.agda"
+      - "DASHI/Algebra/TriadicFiniteIrrep.agda"
+      - "DASHI/Algebra/TriadicDepthOneCharacters.agda"
+      - "DASHI/Algebra/TriadicFiniteAffineAction.agda"
+      - "DASHI/Geometry/TriadicEllipticModuliGate.agda"
+      - "DASHI/Physics/Closure/Triadic*.agda"
+      - "DASHI/Physics/Closure/TriadicMatrixGenerationTheorem.agda"
+      - "DASHI/Physics/Closure/BalancedTernaryContinuousEnvelope.agda"
+      - ".github/workflows/ci.yml"
 
 jobs:
   typecheck:
