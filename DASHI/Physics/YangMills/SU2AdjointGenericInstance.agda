@@ -6,8 +6,9 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 
 import Tactic.RingSolver as Solver
 
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
-  (_+R_; -R_; zeroR; realSolverRing)
+  (_+R_; _*R_; -R_; zeroR; oneR; realSolverRing)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( Quaternion
   ; quat
@@ -51,8 +52,7 @@ open import DASHI.Physics.YangMills.SU2CompactLieAlgebraInstance
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- Quaternion identities exposing the existing SU(2) carrier as the generic
--- adjoint Lie-algebra action.
+-- Quaternion identities needed to expose the generic adjoint action.
 ------------------------------------------------------------------------
 
 conjugateOneQ : conjugateQ oneQ ≡ oneQ
@@ -117,6 +117,17 @@ adjointQAdd u p q =
       (quaternion u *q q)
       (conjugateQ (quaternion u)))
 
+adjointQNegate :
+  ∀ u q →
+  adjointQ u (quaternionNegate q) ≡ quaternionNegate (adjointQ u q)
+adjointQNegate u q =
+  trans
+    (cong (λ value → value *q conjugateQ (quaternion u))
+      (quaternionMultiplyNegateRight (quaternion u) q))
+    (quaternionMultiplyNegateLeft
+      (quaternion u *q q)
+      (conjugateQ (quaternion u)))
+
 adjointQScale :
   ∀ scalar u q →
   adjointQ u (quaternionScale scalar q)
@@ -178,10 +189,9 @@ adjointQCommutator u p q =
     (trans
       (cong₂ _+q_
         (adjointQMultiply u p q)
-        (trans
-          (cong (adjointQ u) (quaternionMultiplyNegateLeft (q *q p) oneQ))
-          (cong quaternionNegate (adjointQMultiply u q p))))
-      refl)
+        (adjointQNegate u (q *q p)))
+      (cong (λ value → (adjointQ u p *q adjointQ u q) +q quaternionNegate value)
+        (adjointQMultiply u q p)))
 
 ------------------------------------------------------------------------
 -- The coordinate bracket is exactly the pure-imaginary quaternion commutator.
