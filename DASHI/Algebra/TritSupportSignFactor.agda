@@ -11,10 +11,11 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 -- A trit is either inactive (zero) or active with one of two signs.
 -- The sign is therefore gated by support rather than supplied for zero.
 
+record ⊤ : Set where
+  constructor tt
 
 data Support : Set where
   inactive active : Support
-
 
 data Sign : Set where
   negative positive : Sign
@@ -22,9 +23,6 @@ data Sign : Set where
 GatedSign : Support → Set
 GatedSign inactive = ⊤
 GatedSign active = Sign
-
-record ⊤ : Set where
-  constructor tt
 
 SupportSign : Set
 SupportSign = Σ Support GatedSign
