@@ -30,7 +30,10 @@ jobs:
         shell: bash
         run: |
           set +e
-          agda -i . -i '${{ steps.stdlib.outputs.path }}' DASHI/Codec/DNAConcreteValidation.agda 2>&1 | tee agda-typecheck.log
+          agda --no-libraries --no-default-libraries \
+            -i . -i '${{ steps.stdlib.outputs.path }}' \
+            DASHI/Codec/DNAConcreteValidation.agda \
+            2>&1 | tee agda-typecheck.log
           status=${PIPESTATUS[0]}
           echo "status=$status" >> "$GITHUB_OUTPUT"
           exit "$status"
