@@ -4,12 +4,13 @@ module DASHI.Physics.YangMills.BalabanMassGapSurvival where
 -- Survival of a positive cutoff gap in the continuum limit.
 --
 -- The finite-cutoff spectral statements, one common positive lower bound, and
--- the spectral-convergence theorem are separate inputs.  The final physical
+-- the spectral-convergence theorem are separate inputs. The final physical
 -- mass-gap certificate is assembled only after all three are present.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap
+import DASHI.Physics.YangMills.CompactLieYangMillsFrontier as Frontier
 
 record UniformCutoffGapData
     (Cutoff Hamiltonian Bound : Set) : Set₁ where
@@ -58,6 +59,23 @@ survivingPhysicalMassGap dataSet authority = record
       SpectrumSeparatedBy dataSet
         (continuumHamiltonian authority) (lowerGap dataSet)
   ; spectrumAboveVacuumGap =
+      uniformGapTransfer authority
+        (lowerBoundUniform dataSet)
+        (cutoffSpectrumSeparated dataSet)
+  }
+
+toPhysicalMassGapTarget :
+  ∀ {Cutoff Hamiltonian Bound : Set} →
+  (dataSet : UniformCutoffGapData Cutoff Hamiltonian Bound) →
+  (authority : GapSurvivesContinuumAuthority dataSet) →
+  Frontier.PhysicalMassGapTarget Hamiltonian Bound
+toPhysicalMassGapTarget dataSet authority = record
+  { reconstructedHamiltonian = continuumHamiltonian authority
+  ; gap = lowerGap dataSet
+  ; Positive = Positive dataSet
+  ; SpectrumSeparatedBy = SpectrumSeparatedBy dataSet
+  ; positiveGap = positiveLowerGap dataSet
+  ; spectrumSeparated =
       uniformGapTransfer authority
         (lowerBoundUniform dataSet)
         (cutoffSpectrumSeparated dataSet)
