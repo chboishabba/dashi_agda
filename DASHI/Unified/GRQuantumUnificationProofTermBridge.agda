@@ -1,5 +1,6 @@
 module DASHI.Unified.GRQuantumUnificationProofTermBridge where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Unified.GRQuantumUnification as Legacy
@@ -13,7 +14,7 @@ open import DASHI.Unified.GRQuantumProofTerms
 -- it requires both the legacy dependency-graph witness and the proposition-level
 -- `TerminalGRQuantumProof`.
 
-record HardenedTerminalUnificationWitness : Set₁ where
+record HardenedTerminalUnificationWitness : Setω where
   constructor hardened-terminal-unification-witness
   field
     legacyWitness : Legacy.TerminalUnificationWitness
