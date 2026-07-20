@@ -30,10 +30,7 @@ record TriadAnalyticLaws
     lerayProject : Mode → Vector → Vector
 
     ≤-trans : ∀ {x y z} → x ≤ y → y ≤ z → x ≤ z
-    +-mono : ∀ {a b c d} → x ≤ y → c ≤ d → (a + c) ≤ (b + d)
-      where
-      x = a
-      y = b
+    +-mono : ∀ {a b c d} → a ≤ b → c ≤ d → (a + c) ≤ (b + d)
 
     norm-vectorAdd :
       ∀ x y → norm (vectorAdd fourier x y) ≤ (norm x + norm y)
@@ -56,7 +53,9 @@ biot-savart-bound :
     (p : Mode) (a : Vector) →
   _≤_ A
     (norm A (biotSavartVelocity (fourier A) p a))
-    (inverseNormSquared (fourier A) p * modeNorm A p * norm A a)
+    (_*_ A
+      (inverseNormSquared (fourier A) p)
+      (_*_ A (modeNorm A p) (norm A a)))
 biot-savart-bound A = inverse-square-cross-bound A
 
 projectedInteraction :
