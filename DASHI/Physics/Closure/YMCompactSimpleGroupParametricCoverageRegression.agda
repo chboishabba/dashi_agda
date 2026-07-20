@@ -1,10 +1,14 @@
 module DASHI.Physics.Closure.YMCompactSimpleGroupParametricCoverageRegression where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Sigma using (Σ)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Physics.Closure.YMCompactSimpleGroupParametricCoverage
+
+infixr 4 _×_
+_×_ : Set → Set → Set
+A × B = Σ A (λ _ → B)
 
 su3GlobalForm : CompactSimpleGlobalForm
 su3GlobalForm = globalForm (SU 3) 1
@@ -52,10 +56,6 @@ allClassicalFamiliesCovered =
   compactSimpleHasQuantitativePackage (globalForm (SOodd 3) 1) ,
   compactSimpleHasQuantitativePackage (globalForm (SOeven 4) 2) ,
   compactSimpleHasQuantitativePackage (globalForm (Sp 3) 1)
-  where
-    infixr 4 _×_
-    _×_ : Set → Set → Set
-    A × B = Σ A (λ _ → B)
 
 allExceptionalFamiliesCovered :
   QuantitativeCompactLiePackage (globalForm G2 1)
@@ -69,7 +69,3 @@ allExceptionalFamiliesCovered =
   compactSimpleHasQuantitativePackage (globalForm E6 1) ,
   compactSimpleHasQuantitativePackage (globalForm E7 1) ,
   compactSimpleHasQuantitativePackage (globalForm E8 1)
-  where
-    infixr 4 _×_
-    _×_ : Set → Set → Set
-    A × B = Σ A (λ _ → B)
