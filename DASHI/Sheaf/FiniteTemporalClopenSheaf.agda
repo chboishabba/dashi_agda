@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Product using (Σ; _,_)
+open import Data.Product using (Σ; _,_; proj₁)
 
 ------------------------------------------------------------------------
 -- A nontrivial two-chart temporal/clopen site.
@@ -82,13 +82,13 @@ glue (compatible p o f) = globalSection p o f , glued p o f
 glueRestrictsU :
   ∀ {l r} →
   (c : Compatible l r) →
-  restrictU (Data.Product.proj₁ (glue c)) ≡ l
+  restrictU (proj₁ (glue c)) ≡ l
 glueRestrictsU (compatible p o f) = refl
 
 glueRestrictsV :
   ∀ {l r} →
   (c : Compatible l r) →
-  restrictV (Data.Product.proj₁ (glue c)) ≡ r
+  restrictV (proj₁ (glue c)) ≡ r
 glueRestrictsV (compatible p o f) = refl
 
 glueUnique :
@@ -148,7 +148,7 @@ canonicalFiniteTemporalCover =
     "U and V form a nontrivial finite temporal cover with one shared clopen overlap"
 
 record FiniteTemporalClopenSheafReceipt : Set where
-  constructor finiteTemporalClopenSheafReceipt
+  constructor mkFiniteTemporalClopenSheafReceipt
   field
     explicitCoverChecked : Bool
     restrictionMapsChecked : Bool
@@ -163,6 +163,6 @@ record FiniteTemporalClopenSheafReceipt : Set where
 
 finiteTemporalClopenSheafReceipt : FiniteTemporalClopenSheafReceipt
 finiteTemporalClopenSheafReceipt =
-  finiteTemporalClopenSheafReceipt
+  mkFiniteTemporalClopenSheafReceipt
     true true true true true true false refl
     "a genuine non-singleton two-chart temporal sheaf is checked; promotion to every DASHI temporal or spacetime site still requires the selected covers, restrictions, PNF semantics and metrics"
