@@ -2,7 +2,7 @@ module DASHI.Codec.DNACarrierFibre where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Core.Prelude using (_×_; _,_)
+open import DASHI.Core.Prelude using (_×_; _,_; sym; cong)
 open import DASHI.Codec.DNAFirstFormalism using
   ( Base
   ; A
@@ -12,16 +12,9 @@ open import DASHI.Codec.DNAFirstFormalism using
   ; complement
   )
 
-------------------------------------------------------------------------
--- Exact quotient/fibre presentation of the four-base DNA carrier.
--- The quotient records A/T versus C/G chemistry; the fibre records position
--- inside the complement orbit. Complement preserves chemistry and flips phase.
-
-
 data ChemicalPair : Set where
   atPair : ChemicalPair
   cgPair : ChemicalPair
-
 
 data ComplementPhase : Set where
   primaryPhase : ComplementPhase
@@ -104,9 +97,3 @@ encodeBaseFibre-injective :
 encodeBaseFibre-injective {x} {y} eq
   rewrite sym (decode-encode-base x)
         | sym (decode-encode-base y) = cong decodeBaseFibre eq
-  where
-  sym : ∀ {X : Set} {a b : X} → a ≡ b → b ≡ a
-  sym refl = refl
-
-  cong : ∀ {X Y : Set} (f : X → Y) {a b} → a ≡ b → f a ≡ f b
-  cong f refl = refl
