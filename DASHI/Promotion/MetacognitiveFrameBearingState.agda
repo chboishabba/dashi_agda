@@ -12,7 +12,7 @@ import DASHI.Promotion.SystemicDistressReframingBoundary as Distress
 -- The 1.0 -> 1.1 move is a second-order change of position, not a literal
 -- ten-percent increase in facts or a guaranteed therapeutic effect.
 
- data ReflexiveStance : Set where
+data ReflexiveStance : Set where
   immersedInFrame : ReflexiveStance
   observingFrame : ReflexiveStance
 
