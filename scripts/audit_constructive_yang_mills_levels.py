@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Static honesty audit for the constructive Yang--Mills proof-level stack.
 
-This does not prove mathematics.  It prevents accidental promotion by checking
+This does not prove mathematics. It prevents accidental promotion by checking
 that locally checked assembly modules contain no postulates, imported theorem
 sockets remain non-promotable, frontier inputs retain conditional/conjectural
 levels, and the repository Clay promotion flag is not set to true.
@@ -21,6 +21,7 @@ POSTULATE_FREE = [
     YM / "SUNMatrixCarrier.agda",
     YM / "SUNMatrixLieAlgebra.agda",
     YM / "SUNMatrixLieGroup.agda",
+    YM / "SUNMatrixGeometry.agda",
     YM / "SU3MatrixInstance.agda",
     YM / "BalabanFiniteInverseConsequences.agda",
     YM / "BalabanFiniteVolumeBackgroundLane.agda",
@@ -42,6 +43,10 @@ EXPECTED_ASSIGNMENTS = {
     YM / "SUNMatrixLieGroup.agda": {
         "sunMatrixLieGroupAssemblyLevel": "machineChecked",
         "sunTopologyAndExponentialAuthorityLevel": "standardImported",
+    },
+    YM / "SUNMatrixGeometry.agda": {
+        "sunMetricAndChartAssemblyLevel": "machineChecked",
+        "sunMetricAndChartAuthorityLevel": "standardImported",
     },
     YM / "SU3MatrixInstance.agda": {
         "su3DimensionLevel": "computed",
