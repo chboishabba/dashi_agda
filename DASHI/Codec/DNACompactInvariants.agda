@@ -8,12 +8,6 @@ open import DASHI.Codec.DNAFirstFormalism using
   ; Line3
   )
 
-------------------------------------------------------------------------
--- Four-symbol repetition code. The compact invariant is the two-bit base tag;
--- each encoded 3-mer has minimum Hamming distance three from every other
--- encoded codeword. This is a deterministic bound, not a probabilistic CRC
--- claim for arbitrary DNA words.
-
 codeword : Base → Line3
 codeword b axis0 = b
 codeword b axis1 = b
@@ -51,26 +45,19 @@ compactTag-injective refl = refl
 
 record CompactDistanceReceipt : Set where
   field
-    Symbol : Set
-    tag : Symbol → Base
-    encoded : Symbol → Line3
+    tag : Base → Base
+    encoded : Base → Line3
     collisionFree : ∀ {x y} → tag x ≡ tag y → x ≡ y
     minimumDistanceThree :
       ∀ {x y} → DifferentBase x y → Hamming3 (encoded x) (encoded y)
 
 compactDistanceReceipt : CompactDistanceReceipt
 compactDistanceReceipt = record
-  { Symbol = Base
-  ; tag = compactTag
+  { tag = compactTag
   ; encoded = codeword
   ; collisionFree = compactTag-injective
   ; minimumDistanceThree = codeword-distance3
   }
-
-------------------------------------------------------------------------
--- Explicit probabilistic-bound surface for compact word checks. Consumers
--- must supply the randomness/ideal-hash assumptions; the denominator is not
--- silently promoted into an unconditional theorem.
 
 record CollisionBoundAssumption : Set₁ where
   field
