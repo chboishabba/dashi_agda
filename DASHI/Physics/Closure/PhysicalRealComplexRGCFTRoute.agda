@@ -1,10 +1,11 @@
 module DASHI.Physics.Closure.PhysicalRealComplexRGCFTRoute where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; zero; _+_)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Builtin.String using (String)
-open import Data.List.Base using (List)
+open import Data.List.Base using (List; map)
 
 open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Envelope
 
@@ -28,17 +29,42 @@ record RealComplexScalar (Scalar : Set) : Set₁ where
     scalarKind : ScalarKind
 
     zero one : Scalar
-    _+_ _*_ : Scalar → Scalar → Scalar
+    _+S_ _*S_ : Scalar → Scalar → Scalar
     negate conjugate absoluteValue : Scalar → Scalar
 
     AtMost LessThan : Scalar → Scalar → Set
     Nonzero : Scalar → Set
 
-    additiveFieldLaws : Set
-    multiplicativeFieldLaws : Set
-    conjugationLaws : Set
-    absoluteValueLaws : Set
-    orderOrModulusCompatibility : Set
+    addLeftUnit : (x : Scalar) → zero +S x ≡ x
+    addRightUnit : (x : Scalar) → x +S zero ≡ x
+    addAssociative :
+      (x y z : Scalar) → (x +S y) +S z ≡ x +S (y +S z)
+    addCommutative : (x y : Scalar) → x +S y ≡ y +S x
+    additiveInverse : (x : Scalar) → x +S negate x ≡ zero
+
+    multiplyLeftUnit : (x : Scalar) → one *S x ≡ x
+    multiplyRightUnit : (x : Scalar) → x *S one ≡ x
+    multiplyAssociative :
+      (x y z : Scalar) → (x *S y) *S z ≡ x *S (y *S z)
+    multiplyCommutative : (x y : Scalar) → x *S y ≡ y *S x
+    distributes :
+      (x y z : Scalar) → x *S (y +S z) ≡ (x *S y) +S (x *S z)
+
+    conjugateInvolutive : (x : Scalar) → conjugate (conjugate x) ≡ x
+    conjugateAdditive :
+      (x y : Scalar) → conjugate (x +S y) ≡ conjugate x +S conjugate y
+    conjugateMultiplicative :
+      (x y : Scalar) → conjugate (x *S y) ≡ conjugate x *S conjugate y
+
+    absoluteZero : absoluteValue zero ≡ zero
+    absoluteMultiplicative :
+      (x y : Scalar) →
+      absoluteValue (x *S y) ≡ absoluteValue x *S absoluteValue y
+    absoluteTriangle :
+      (x y : Scalar) →
+      AtMost (absoluteValue (x +S y))
+        (absoluteValue x +S absoluteValue y)
+
     archimedeanOrComplexAuthority : Set
 
 open RealComplexScalar public
@@ -58,22 +84,51 @@ record PhysicalBanachTangent
 
     norm distance : Vector → Scalar
 
-    vectorSpaceLaws : Set
-    normDefinite : Set
-    normHomogeneous : Set
-    triangleInequality : Set
-    distanceInducedByNorm : Set
+    vectorAddLeftUnit : (x : Vector) → zeroVector +V x ≡ x
+    vectorAddRightUnit : (x : Vector) → x +V zeroVector ≡ x
+    vectorAddAssociative :
+      (x y z : Vector) → (x +V y) +V z ≡ x +V (y +V z)
+    vectorAddCommutative : (x y : Vector) → x +V y ≡ y +V x
+    vectorAddInverse : (x : Vector) → x +V negateV x ≡ zeroVector
+
+    scalarUnit : (x : Vector) → RealComplexScalar.one S ·V x ≡ x
+    scalarAssociative :
+      (a b : Scalar) (x : Vector) →
+      (RealComplexScalar._*S_ S a b) ·V x ≡ a ·V (b ·V x)
+    scalarDistributesOverVectors :
+      (a : Scalar) (x y : Vector) → a ·V (x +V y) ≡ (a ·V x) +V (a ·V y)
+    vectorDistributesOverScalars :
+      (a b : Scalar) (x : Vector) →
+      (RealComplexScalar._+S_ S a b) ·V x ≡ (a ·V x) +V (b ·V x)
+
+    normZero : norm zeroVector ≡ RealComplexScalar.zero S
+    normSeparates :
+      (x : Vector) → norm x ≡ RealComplexScalar.zero S → x ≡ zeroVector
+    normHomogeneous :
+      (a : Scalar) (x : Vector) →
+      norm (a ·V x) ≡ RealComplexScalar._*S_ S (RealComplexScalar.absoluteValue S a) (norm x)
+    triangleInequality :
+      (x y : Vector) →
+      RealComplexScalar.AtMost S
+        (norm (x +V y))
+        (RealComplexScalar._+S_ S (norm x) (norm y))
+    distanceInducedByNorm :
+      (x y : Vector) → distance x y ≡ norm (x +V negateV y)
 
     Cauchy : (Nat → Vector) → Set
     ConvergesTo : (Nat → Vector) → Vector → Set
     complete :
       (sequence : Nat → Vector) →
       Cauchy sequence →
-      Set
+      Σ Vector (λ limit → ConvergesTo sequence limit)
 
-    finiteShiftEmbedding : Set
-    finiteEmbeddingPreservesZero : Set
-    finiteEmbeddingControlsNorm : Set
+    FinitePerturbation : Set
+    finiteZero : FinitePerturbation
+    finiteNorm : FinitePerturbation → Scalar
+    embedFinite : FinitePerturbation → Vector
+    finiteEmbeddingPreservesZero : embedFinite finiteZero ≡ zeroVector
+    finiteEmbeddingControlsNorm :
+      (p : FinitePerturbation) → norm (embedFinite p) ≡ finiteNorm p
 
 open PhysicalBanachTangent public
 
@@ -95,24 +150,61 @@ record RealTimeAnalyticGenerator
     frechetDerivative : Vector → Vector
     generator : Vector → Vector
 
-    identityAtZero : Set
-    nonlinearSemigroupLaw : Set
-    linearizedSemigroupLaw : Set
-    strongContinuityAtZero : Set
+    nonlinearIdentityAtZero :
+      (x : Vector) → nonlinearFlow zeroTime x ≡ x
+    linearizedIdentityAtZero :
+      (x : Vector) → linearizedFlow zeroTime x ≡ x
+    nonlinearSemigroupLaw :
+      (s t : Time) (x : Vector) →
+      nonlinearFlow (s +Time t) x ≡ nonlinearFlow t (nonlinearFlow s x)
+    linearizedSemigroupLaw :
+      (s t : Time) (x : Vector) →
+      linearizedFlow (s +Time t) x ≡ linearizedFlow t (linearizedFlow s x)
 
-    derivativeLinear : Set
-    frechetRemainderEstimate : Set
-    generatorStrongLimit : Set
+    derivativeAdditive :
+      (x y : Vector) →
+      frechetDerivative (PhysicalBanachTangent._+V_ B x y)
+        ≡
+      PhysicalBanachTangent._+V_ B
+        (frechetDerivative x) (frechetDerivative y)
+    derivativeHomogeneous :
+      (a : Scalar) (x : Vector) →
+      frechetDerivative (PhysicalBanachTangent._·V_ B a x)
+        ≡
+      PhysicalBanachTangent._·V_ B a (frechetDerivative x)
+
+    FrechetRemainderControlled : Vector → Set
+    frechetRemainderControlled :
+      (x : Vector) → FrechetRemainderControlled x
+
+    GeneratorLimitExists : Vector → Set
+    generatorLimitExists : (x : Vector) → GeneratorLimitExists x
+
+    StronglyContinuousAtZero : Vector → Set
+    stronglyContinuousAtZero : (x : Vector) → StronglyContinuousAtZero x
 
     growthBound : Scalar
-    exponentialSemigroupEstimate : Set
-    dissipativeEstimate : Set
+    SemigroupEstimate : Time → Vector → Set
+    exponentialSemigroupEstimate :
+      (t : Time) (x : Vector) → SemigroupEstimate t x
+
+    DissipativeAt : Vector → Set
+    dissipativeEstimate : (x : Vector) → DissipativeAt x
 
     ResolventPoint : Scalar → Set
     resolvent : Scalar → Vector → Vector
-    resolventEquation : Set
-    sectorialResolventEstimate : Set
-    analyticTimeExtension : Set
+    ResolventEquationAt : Scalar → Vector → Set
+    resolventEquation :
+      (lambda : Scalar) → ResolventPoint lambda →
+      (x : Vector) → ResolventEquationAt lambda x
+
+    SectorialEstimateAt : Scalar → Set
+    sectorialResolventEstimate :
+      (lambda : Scalar) → ResolventPoint lambda → SectorialEstimateAt lambda
+
+    AnalyticTimeExtensionAt : Time → Set
+    analyticTimeExtension :
+      (t : Time) → NonnegativeTime t → AnalyticTimeExtensionAt t
 
     finiteShiftLinearizationCompatibility : Set
 
@@ -146,8 +238,22 @@ record MeasuredAnomalousDimensions
     anomalousDimension : Operator → Scalar
     totalDimension : Operator → Scalar
 
-    totalSplitsEngineeringPlusAnomaly : Set
-    measurementMatchesTotalWithinUncertainty : Set
+    totalSplitsEngineeringPlusAnomaly :
+      (operator : Operator) →
+      totalDimension operator
+        ≡
+      RealComplexScalar._+S_ S
+        (engineeringDimension operator)
+        (anomalousDimension operator)
+
+    WithinUncertainty : Scalar → Scalar → Scalar → Set
+    measurementMatchesTotalWithinUncertainty :
+      (measurement : ScalingMeasurement Scalar Operator) →
+      WithinUncertainty
+        (ScalingMeasurement.measuredTotalDimension measurement)
+        (totalDimension (ScalingMeasurement.operator measurement))
+        (ScalingMeasurement.uncertainty measurement)
+
     covarianceOrErrorModelValid : Set
     renormalizationSchemeDeclared : Set
     scaleDependenceControlled : Set
@@ -184,15 +290,50 @@ record SingularContinuumOPE
       Operator → Operator → Operator → Operator →
       Position → Position → Position → Position → Scalar
 
-    singularKernelLaw : Set
-    coefficientAnalyticAwayFromCoincidence : Set
-    localOPEConverges : Set
-    conformalBlockExpansionConverges : Set
-    exchangeLocality : Set
-    crossingSymmetry : Set
-    commonDomainAssociativity : Set
-    reflectionPositivityOrDeclaredReplacement : Set
+    SingularAtCoincidence : Operator → Operator → Operator → Set
+    singularKernelLaw :
+      (p q r : Operator) → SingularAtCoincidence p q r
 
+    AnalyticAwayFromCoincidence :
+      Operator → Operator → Operator → Position → Position → Set
+    coefficientAnalyticAwayFromCoincidence :
+      (p q r : Operator) (x y : Position) →
+      Distinct x y → AnalyticAwayFromCoincidence p q r x y
+
+    OPEConvergesAt : Operator → Operator → Position → Position → Set
+    localOPEConverges :
+      (p q : Operator) (x y : Position) →
+      Distinct x y → OPEConvergesAt p q x y
+
+    BlockExpansionConvergesAt :
+      Operator → Operator → Operator → Operator →
+      Position → Position → Position → Position → Set
+    conformalBlockExpansionConverges :
+      (p q r s : Operator) (x y z w : Position) →
+      BlockExpansionConvergesAt p q r s x y z w
+
+    coefficientExchange :
+      (p q r : Operator) (x y : Position) →
+      coefficient p q r x y ≡ coefficient q p r y x
+    productExchange :
+      (p q : Operator) (x y : Position) →
+      operatorProduct p q x y ≡ operatorProduct q p y x
+
+    CrossingEquation :
+      Operator → Operator → Operator → Operator →
+      Position → Position → Position → Position → Set
+    crossingSymmetry :
+      (p q r s : Operator) (x y z w : Position) →
+      CrossingEquation p q r s x y z w
+
+    CommonDomainAssociativity :
+      Operator → Operator → Operator →
+      Position → Position → Position → Set
+    commonDomainAssociativity :
+      (p q r : Operator) (x y z : Position) →
+      CommonDomainAssociativity p q r x y z
+
+    reflectionPositivityOrDeclaredReplacement : Set
     finiteOPERecovery : Set
 
 open SingularContinuumOPE public
@@ -212,11 +353,38 @@ record RealComplexDepthConvergence
     physicalEmbed : Envelope.Stream → Scalar
     physicalDepthMetric : Envelope.Stream → Envelope.Stream → Scalar
 
-    scalarizationMatchesEmbed : Set
-    finiteApproximantsConvergeAnalytically : Set
-    depthMetricComplete : Set
-    cylinderContinuityEstimate : Set
-    firstDifferenceTwoSidedEstimate : Set
+    scalarizationMatchesEmbed :
+      (d : Envelope.Stream) →
+      scalarize (Envelope.embed continuousEnvelope d) ≡ physicalEmbed d
+
+    ScalarConverges : (Nat → Scalar) → Scalar → Set
+    finiteApproximantsConvergeAnalytically :
+      (d : Envelope.Stream) →
+      ScalarConverges
+        (λ n → scalarize (Envelope.finiteEvaluation depthModel n d))
+        (physicalEmbed d)
+
+    MetricCauchy : (Nat → Envelope.Stream) → Set
+    MetricConvergesTo :
+      (Nat → Envelope.Stream) → Envelope.Stream → Set
+    depthMetricComplete :
+      (sequence : Nat → Envelope.Stream) →
+      MetricCauchy sequence →
+      Σ Envelope.Stream (λ limit → MetricConvergesTo sequence limit)
+
+    CylinderEstimate :
+      Nat → Envelope.Stream → Envelope.Stream → Scalar → Set
+    cylinderContinuityEstimate :
+      (n : Nat) (x y : Envelope.Stream) →
+      Envelope.PrefixAgreement n x y →
+      CylinderEstimate n x y (physicalDepthMetric x y)
+
+    FirstDifferenceTwoSided : Nat → Scalar → Set
+    firstDifferenceTwoSidedEstimate :
+      (n : Nat) (x y : Envelope.Stream) →
+      Envelope.FirstDifferenceAt n x y →
+      FirstDifferenceTwoSided n (physicalDepthMetric x y)
+
     dominatedOrAbsoluteSummability : Set
     nontrivialImage : Set
 
@@ -232,16 +400,40 @@ record RGUniversalityAcrossDepth
     fixedStream : Envelope.Stream
     rgFlow : Nat → Envelope.Stream → Envelope.Stream
 
-    fixedPointLaw : Set
-    semigroupAcrossDepth : Set
+    rgZero : (d : Envelope.Stream) → rgFlow zero d ≡ d
+    fixedPointLaw : coarseGrain fixedStream ≡ fixedStream
+    semigroupAcrossDepth :
+      (m n : Nat) (d : Envelope.Stream) →
+      rgFlow (m + n) d ≡ rgFlow n (rgFlow m d)
+
     envelopeIntertwinesRG : Set
-    finiteShiftIntertwiner : Set
-    convergenceToFixedPoint : Set
+
+    FinitePerturbation : Set
+    finiteStep : FinitePerturbation → FinitePerturbation
+    encodeFinite : FinitePerturbation → Envelope.Stream
+    finiteShiftIntertwiner :
+      (p : FinitePerturbation) →
+      coarseGrain (encodeFinite p) ≡ encodeFinite (finiteStep p)
+
+    ConvergesToFixedPoint : Envelope.Stream → Set
+    convergenceToFixedPoint :
+      (d : Envelope.Stream) → ConvergesToFixedPoint d
 
     Basin : Envelope.Stream → Set
-    universalScalingData : Set
-    regulatorIndependence : Set
-    schemeChangeEquivalence : Set
+    UniversalScalingDataFor : Envelope.Stream → Set
+    universalScalingData :
+      (d : Envelope.Stream) → Basin d → UniversalScalingDataFor d
+
+    RegulatorEquivalent : Envelope.Stream → Envelope.Stream → Set
+    regulatorIndependence :
+      (x y : Envelope.Stream) →
+      Basin x → Basin y → RegulatorEquivalent x y
+
+    SchemeEquivalent : Envelope.Stream → Envelope.Stream → Set
+    schemeChangeEquivalence :
+      (x y : Envelope.Stream) →
+      Basin x → Basin y → SchemeEquivalent x y
+
     irrelevantDirectionsContract : Set
     relevantAndMarginalDirectionsClassified : Set
     universalityAcrossDeclaredBasin : Set
@@ -261,15 +453,48 @@ record PhysicalStressTensorConformalWard
     correlation : List Operator → List Position → Scalar
 
     centralCharge : Scalar
-    centralChargeNonzero : Nonzero S centralCharge
-    stressTwoPointNontrivial : Set
+    centralChargeNonzero : RealComplexScalar.Nonzero S centralCharge
 
-    distributionalConservation : Set
-    traceIdentityOrAnomaly : Set
-    translationWard : Set
-    rotationWard : Set
-    dilationWard : Set
-    specialConformalWard : Set
+    nontrivialStressTensor : StressTensor
+    nontrivialStressX nontrivialStressY : Position
+    stressTwoPointNontrivial :
+      RealComplexScalar.Nonzero S
+        (stressTwoPoint
+          nontrivialStressTensor
+          nontrivialStressTensor
+          nontrivialStressX
+          nontrivialStressY)
+
+    DivergenceFree : StressTensor → Set
+    divergenceFree : (T : StressTensor) → DivergenceFree T
+
+    TraceIdentityOrAnomaly : StressTensor → Set
+    traceIdentityOrAnomaly :
+      (T : StressTensor) → TraceIdentityOrAnomaly T
+
+    translate rotate dilate specialConformal : Position → Position
+
+    translationWard :
+      (operators : List Operator) (positions : List Position) →
+      correlation operators (map translate positions)
+        ≡
+      correlation operators positions
+    rotationWard :
+      (operators : List Operator) (positions : List Position) →
+      correlation operators (map rotate positions)
+        ≡
+      correlation operators positions
+    dilationWard :
+      (operators : List Operator) (positions : List Position) →
+      correlation operators (map dilate positions)
+        ≡
+      correlation operators positions
+    specialConformalWard :
+      (operators : List Operator) (positions : List Position) →
+      correlation operators (map specialConformal positions)
+        ≡
+      correlation operators positions
+
     wardCompatibleWithOPE : Set
     centralTermMatchesStressOPE : Set
     anomalyAndSchemeAccounting : Set
