@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 data _⊎_ (X Y : Set) : Set where
-  inj₁ : X → X ⊎ B
+  inj₁ : X → X ⊎ Y
   inj₂ : Y → X ⊎ Y
 
 data Competitor : Set where
