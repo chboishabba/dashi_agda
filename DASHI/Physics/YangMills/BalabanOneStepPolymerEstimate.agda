@@ -9,6 +9,7 @@ module DASHI.Physics.YangMills.BalabanOneStepPolymerEstimate where
 -- remain explicit inputs.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record OrderedAdditiveBudget (Bound : Set) : Set₁ where
@@ -76,26 +77,26 @@ record OneStepPolymerEstimateData
     bchBudget : Bound
     localizationBudget : Bound
 
-    outputBelowComponents : ∀ field →
+    outputBelowComponents : ∀ configuration →
       LessEqual order
-        (polymerNorm (outputPolymer field))
+        (polymerNorm (outputPolymer configuration))
         (componentTotal order
-          (backgroundContribution field)
-          (jacobianContribution field)
-          (determinantContribution field)
-          (bchContribution field)
-          (localizationContribution field))
+          (backgroundContribution configuration)
+          (jacobianContribution configuration)
+          (determinantContribution configuration)
+          (bchContribution configuration)
+          (localizationContribution configuration))
 
-    backgroundControlled : ∀ field →
-      LessEqual order (backgroundContribution field) backgroundBudget
-    jacobianControlled : ∀ field →
-      LessEqual order (jacobianContribution field) jacobianBudget
-    determinantControlled : ∀ field →
-      LessEqual order (determinantContribution field) determinantBudget
-    bchControlled : ∀ field →
-      LessEqual order (bchContribution field) bchBudget
-    localizationControlled : ∀ field →
-      LessEqual order (localizationContribution field) localizationBudget
+    backgroundControlled : ∀ configuration →
+      LessEqual order (backgroundContribution configuration) backgroundBudget
+    jacobianControlled : ∀ configuration →
+      LessEqual order (jacobianContribution configuration) jacobianBudget
+    determinantControlled : ∀ configuration →
+      LessEqual order (determinantContribution configuration) determinantBudget
+    bchControlled : ∀ configuration →
+      LessEqual order (bchContribution configuration) bchBudget
+    localizationControlled : ∀ configuration →
+      LessEqual order (localizationContribution configuration) localizationBudget
 
 open OneStepPolymerEstimateData public
 
@@ -113,19 +114,19 @@ oneStepPolymerBudget dataSet =
 oneStepPolymerEstimate :
   ∀ {Field Polymer Bound : Set} →
   (dataSet : OneStepPolymerEstimateData Field Polymer Bound) →
-  ∀ field →
+  ∀ configuration →
   LessEqual (order dataSet)
-    (polymerNorm dataSet (outputPolymer dataSet field))
+    (polymerNorm dataSet (outputPolymer dataSet configuration))
     (oneStepPolymerBudget dataSet)
-oneStepPolymerEstimate dataSet field =
+oneStepPolymerEstimate dataSet configuration =
   transitive (order dataSet)
-    (outputBelowComponents dataSet field)
+    (outputBelowComponents dataSet configuration)
     (componentsBelowBudget (order dataSet)
-      (backgroundControlled dataSet field)
-      (jacobianControlled dataSet field)
-      (determinantControlled dataSet field)
-      (bchControlled dataSet field)
-      (localizationControlled dataSet field))
+      (backgroundControlled dataSet configuration)
+      (jacobianControlled dataSet configuration)
+      (determinantControlled dataSet configuration)
+      (bchControlled dataSet configuration)
+      (localizationControlled dataSet configuration))
 
 record OneStepPolymerEstimateCertificate
     (Field Polymer Bound : Set) : Set₁ where
@@ -133,11 +134,9 @@ record OneStepPolymerEstimateCertificate
     dataSet : OneStepPolymerEstimateData Field Polymer Bound
     bound : Bound
     boundIsComponentBudget : bound ≡ oneStepPolymerBudget dataSet
-    outputBounded : ∀ field →
+    outputBounded : ∀ configuration →
       LessEqual (order dataSet)
-        (polymerNorm dataSet (outputPolymer dataSet field)) bound
-
-open import Agda.Builtin.Equality using (_≡_; refl)
+        (polymerNorm dataSet (outputPolymer dataSet configuration)) bound
 
 assembleOneStepPolymerEstimate :
   ∀ {Field Polymer Bound : Set} →
