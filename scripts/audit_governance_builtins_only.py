@@ -1,39 +1,102 @@
 #!/usr/bin/env python3
-"""Flag Agda modules that use governance vocabulary but import only built-ins.
+"""Audit governance-bearing Agda modules that import only built-ins.
 
-This is a heuristic architecture audit, not a proof or CI typecheck. Intentional
-leaf/domain carriers are recorded in scripts/governance_builtins_allowlist.txt.
-CI can restrict failure to files changed from a base revision so legacy islands
-remain visible without blocking unrelated work.
+This remains a heuristic architecture audit, not a proof. It scans across
+cultural, legal, medical/biological, physics, AI/latent, trading, educational,
+and general promotion surfaces. Intentional leaf/domain carriers must be
+explicitly allow-listed and should have a downstream integrated adapter.
 """
 
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from pathlib import Path
 import re
 import subprocess
 import sys
 
 KEYWORDS = {
+    # General promotion and proof status.
     "candidateOnly",
+    "promoted",
+    "theoremAuthority",
+    "truthAuthority",
+    "supportAuthority",
+    "admissibilityAuthority",
+    "notProof",
+    "guideOnly",
+    "referenceOnly",
+    # Clinical, medical, and biological authority.
     "clinicalAuthority",
     "diagnosisAuthority",
+    "diagnosticAuthority",
     "treatmentAuthority",
-    "legalAuthority",
-    "culturalAuthority",
-    "empiricalValidationAuthority",
+    "interventionAuthority",
+    "pathologyPromotion",
+    "cureFraming",
     "mindReading",
     "forcedNormalization",
     "forcedNormalisation",
+    # Cultural and educational authority.
+    "culturalAuthority",
+    "educationalAuthority",
     "noExtraction",
+    "extractionBlocked",
     "noUniversalization",
     "noUniversalisation",
-    "notProof",
-    "guideOnly",
+    "livingPractice",
+    "provenanceRequired",
+    # Legal, political, trading, and runtime authority.
+    "legalAuthority",
+    "politicalAuthority",
+    "tradingAuthority",
+    "runtimeAuthority",
+    # Empirical, causal, physics, and latent inference authority.
+    "empiricalValidationAuthority",
+    "empiricalAuthority",
+    "scientificAuthority",
+    "physicsAuthority",
+    "causalAuthority",
+    "causalInference",
+    "reverseInference",
+    "latentInference",
+    "proxyIsNotCause",
+    "measurementIsNotDiagnosis",
+    "hiddenChart",
+    "connectomeOverclaim",
+    "boldOverclaim",
 }
 
+DOMAIN_PREFIXES = (
+    ("DASHI/Culture/", "culture"),
+    ("DASHI/Legal/", "legal"),
+    ("DASHI/Biology/", "biology-medical"),
+    ("DASHI/Physics/", "physics"),
+    ("DASHI/AI/", "ai-latent"),
+    ("DASHI/ML/", "ai-latent"),
+    ("DASHI/Trading/", "trading"),
+    ("DASHI/Education/", "education"),
+    ("DASHI/Promotion/", "promotion-core"),
+)
+
 IMPORT_RE = re.compile(r"^\s*(?:open\s+)?import\s+([A-Za-z0-9_.]+)", re.MULTILINE)
+
+
+def classify_domain(relative_path: str) -> str:
+    for prefix, domain in DOMAIN_PREFIXES:
+        if relative_path.startswith(prefix):
+            return domain
+    lowered = relative_path.lower()
+    if "legal" in lowered or "court" in lowered:
+        return "legal"
+    if "trading" in lowered or "market" in lowered:
+        return "trading"
+    if "education" in lowered or "pedagog" in lowered:
+        return "education"
+    if "latent" in lowered or "neural" in lowered or "ai" in lowered:
+        return "ai-latent"
+    return "other"
 
 
 def load_allowlist(root: Path, allowlist_path: Path) -> set[str]:
@@ -69,8 +132,8 @@ def audit(
     root: Path,
     allowlist: set[str],
     changed_only: set[str] | None,
-) -> list[tuple[Path, list[str]]]:
-    findings: list[tuple[Path, list[str]]] = []
+) -> list[tuple[Path, str, list[str]]]:
+    findings: list[tuple[Path, str, list[str]]] = []
     for path in sorted(root.rglob("*.agda")):
         rel = path.relative_to(root).as_posix()
         if rel in allowlist:
@@ -84,7 +147,7 @@ def audit(
         imports = IMPORT_RE.findall(text)
         non_builtin = [name for name in imports if not name.startswith("Agda.")]
         if not non_builtin:
-            findings.append((path.relative_to(root), matched))
+            findings.append((path.relative_to(root), classify_domain(rel), matched))
     return findings
 
 
@@ -108,9 +171,16 @@ def main() -> int:
     changed_only = changed_agda_files(root, args.changed_from)
     findings = audit(root, allowlist, changed_only)
 
-    for path, keywords in findings:
-        print(f"{path}: builtins-only governance vocabulary: {', '.join(keywords)}")
-    print(f"allowlisted={len(allowlist)} findings={len(findings)}")
+    domain_counts: Counter[str] = Counter()
+    for path, domain, keywords in findings:
+        domain_counts[domain] += 1
+        print(
+            f"{path}: domain={domain} builtins-only governance vocabulary: "
+            f"{', '.join(keywords)}"
+        )
+
+    summary = " ".join(f"{domain}={count}" for domain, count in sorted(domain_counts.items()))
+    print(f"allowlisted={len(allowlist)} findings={len(findings)} {summary}".rstrip())
     return 1 if args.fail and findings else 0
 
 
