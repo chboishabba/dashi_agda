@@ -8,6 +8,11 @@ open import DASHI.Physics.IndefiniteMaskQuadratic public using
   (Sign; plus; minus; signℤ; toℤTrit; sqℤ; Qσ; dotσ; B2σ; B2σ≡2dotσ)
 open import DASHI.Physics.SignatureFromMask public
 open import DASHI.Physics.MaskedQuadraticRenormalization public
+open import DASHI.Physics.MaskedCanonicalizationInvariant public
+open import DASHI.Physics.MaskedBlockOrthogonality public
+open import DASHI.Physics.MaskedOperatorInvariants public
+open import DASHI.Physics.MaskedCone public
+open import DASHI.Physics.LorentzianCoreClosure public
 open import DASHI.Physics.MaskedConeStructure public
 open import DASHI.Physics.RealConeStructureInstance public
 open import DASHI.Physics.RealCausalStructureInstance public
