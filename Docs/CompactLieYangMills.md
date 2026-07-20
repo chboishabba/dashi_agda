@@ -1,45 +1,95 @@
-# Generic compact Lie-group layer for Yang–Mills
+# Compact Lie groups in the DASHI Yang–Mills route
 
-The existing SU(2) development remains the concrete proof-development carrier.  This tranche adds the abstraction boundary required before any Yang–Mills theorem can be stated for every compact simple gauge group.
+This surface separates three obligations that were previously easy to conflate:
 
-## Layering
+1. exact algebra and lattice identities that Agda can check locally;
+2. standard finite-dimensional compact-Lie-group theorems imported through an explicit authority socket;
+3. conditional and conjectural analytic targets required by the four-dimensional Balaban/Clay route.
 
-`CompactLieGroupCore.agda` defines:
+## Proof levels
 
-- groups and Lie algebras;
-- exponential/logarithm and adjoint action;
-- adjoint functoriality and bracket preservation;
-- explicit compactness, connectedness, and Lie-algebra simplicity witnesses;
-- group and Lie-algebra homomorphisms.
+`CompactLieProofLevel.agda` defines five levels:
 
-`CompactLieGroupGeometry.agda` owns the quantitative local geometry:
+| Level | Meaning | Locally promotable |
+|---|---|---|
+| `computed` | definitional or normalized computation | yes |
+| `machineChecked` | theorem proved from repository inputs | yes |
+| `standardImported` | established external theorem, isolated at an authority boundary | no |
+| `conditional` | theorem proved after named hypotheses are supplied | no |
+| `conjectural` | exact target type with no witness yet | no |
 
-- an invariant inner product, norm, and bi-invariant distance;
-- a uniform exponential chart and inverse chart;
-- dexp, inverse-dexp, bracket, and adjoint-Lipschitz bounds;
-- the distinction between group-dependent constants and scale/volume/background-uniform estimates.
+A conjectural record is executable theorem **shape**, not evidence that the theorem holds.
 
-`CompactLieRepresentationData.agda` owns finite-dimensional representation data:
+## Machine-checked layer
 
-- rank, dimension, roots, bases, and structure constants;
-- bounded root and structure-constant data;
-- normalized left/right invariant Haar measure and Weyl integration;
-- character bounds, spectral gaps away from the center, and tensor-product control.
+The exact surface proves or assembles:
 
-`CompactLieYangMillsBridge.agda` collects the analytic obligations needed by the Balaban lane:
+- ordinary consequences of the group axioms, including cancellation, inverse involution, conjugation, and internal-vertex cancellation;
+- path-holonomy gauge covariance for an arbitrary group and arbitrary directed lattice;
+- gauge invariance of every closed-loop class-function observable;
+- structural covariance of transported-log block averaging;
+- repeated-commutator majorants from a single bracket constant;
+- the Cartan-family rank, dimension, and dual-Coxeter formulas as total computations;
+- a concrete `SU(2)` Lie algebra over the existing imaginary-quaternion carrier, including bilinearity and Jacobi;
+- a concrete generic adjoint representation, with exact identity, product, linearity, and bracket-automorphism laws proved from quaternion multiplication;
+- weighted-column estimate to pointwise exponential kernel decay;
+- `C_G L_N ≤ ρ` plus the local critical-map estimate to a contraction estimate at `ρ`;
+- assembly of fixed-point/critical-point, minimizer, gauge-orbit, and analytic-dependence interfaces into the background-field package.
 
-- generic gauge actions and gauge fixing;
-- Faddeev–Popov coercivity;
-- equivariant block averaging;
-- small-field chart compatibility;
-- large-field suppression and polymer diameter entropy;
-- reflection positivity and cluster decomposition;
-- one-step and iterated RG, infinite-volume limit, exponential clustering, and a positive mass gap.
+The quaternion rotation polynomials therefore become a concrete implementation of generic `Ad`, rather than a dependency of the generic theory.
 
-## SU(2) relationship
+## Standard imported layer
 
-The quaternion and rotation-polynomial modules are not discarded.  They should instantiate the generic records for `G = SU(2)` and prove that their concrete adjoint action agrees with generic `Ad`.  Quaternion polynomial identities then prove the SU(2) instance only; they cannot inhabit the generic theorem without a separate uniform compact-Lie-group argument.
+`CompactLieAnalyticPackage.agda` states the actual theorem interfaces for:
 
-## Claim boundary
+- an invariant positive metric and bi-invariant group distance;
+- a quantitative local exponential/logarithm chart;
+- BCH with a cubic remainder bound;
+- normalized Haar integration;
+- Peter–Weyl orthogonality, completeness, Weyl integration, and character bounds.
 
-This tranche supplies typed interfaces and promotion boundaries.  It does not prove the generic analytic estimates, construct Haar measure, classify root systems, establish a uniform RG iteration, or prove the four-dimensional Yang–Mills mass gap.  Those remain explicit fields rather than postulates hidden inside the SU(2) implementation.
+`CompactLieStandardAuthority.agda` is the sole imported theorem socket for these classical facts. It also provides the explicitly named imported `SU(2)` analytic package. These witnesses are deliberately not marked locally promotable.
+
+## Conditional and conjectural frontier
+
+`CompactLieYangMillsFrontier.agda` records the current status without erasing theorem shape.
+
+Conditional inputs:
+
+- concrete all-patch weighted Green estimates;
+- nonlinear residual Lipschitz constants;
+- constrained Hessian coercivity;
+- nonlinear gauge-fixing contraction;
+- the fully instantiated background-field closure.
+
+Conjectural targets:
+
+- one strict residual factor `ρ_G < 1` uniform in scale, volume, admissible background, and patch regime;
+- four-dimensional large-field / Step V polymer suppression;
+- an all-scale four-dimensional RG invariant domain with summable errors;
+- continuum Schwinger functions satisfying OS0–OS5;
+- an OS-reconstructed Hamiltonian with a positive physical spectral gap.
+
+The final mass-gap target has no constructor here and cannot self-promote.
+
+## Quantifier discipline
+
+The intended theorem is group-parametric:
+
+```text
+for every compact simple G
+there exist group constants ε_G, μ_G, ρ_G, C_G
+such that the estimates are uniform in lattice scale, volume,
+background, and patch regime.
+```
+
+It does **not** demand a single numerical constant uniform over all compact simple groups.
+
+## Canonical surfaces
+
+- `CompactLieExactSurface.agda`: exact locally checked mathematics.
+- `CompactLieAnalyticPackage.agda` and `CompactLieStandardAuthority.agda`: standard imported analysis.
+- `CompactLieYangMillsFrontier.agda`: conditional/conjectural theorem ledger.
+- `CompactLieTheorySurface.agda`: aggregate compilation surface.
+
+No module in this stack sets the repository’s Clay Yang–Mills promotion flag.
