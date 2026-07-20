@@ -1,7 +1,9 @@
 module DASHI.Learning.GrokkingRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Learning.GrokkingOperatorContract
+open import DASHI.Learning.GrokkingCOLBridge
 open import DASHI.Learning.Mod97WeightDecayReceipt
 open import DASHI.Learning.Mod97GrokkingBoundary
 
@@ -27,3 +29,14 @@ wd1000-seed2-regression = refl
 
 boundary-regression : Horizon15000Boundary
 boundary-regression = mod97-boundary-15000
+
+------------------------------------------------------------------------
+-- Cross-lane smoke surface: any concrete level-indexed learning bundle can be
+-- consumed by the existing COL architecture through `asCOL`.
+------------------------------------------------------------------------
+
+postulate
+  LevelState : Nat -> Set
+  learning-col-bundle : LearningCOLBundle LevelState
+
+col-adapter-regression = asCOL learning-col-bundle
