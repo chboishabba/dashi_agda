@@ -1,0 +1,32 @@
+name: Step V large-field suppression
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Physics/YangMills/BalabanLargeFieldStepV.agda"
+      - "DASHI/Physics/YangMills/BalabanConcreteStepVSuppression.agda"
+      - "DASHI/Physics/YangMills/BalabanStepVKPClosure.agda"
+      - ".github/workflows/step-v-large-field.yml"
+  push:
+    branches: [master]
+    paths:
+      - "DASHI/Physics/YangMills/BalabanLargeFieldStepV.agda"
+      - "DASHI/Physics/YangMills/BalabanConcreteStepVSuppression.agda"
+      - "DASHI/Physics/YangMills/BalabanStepVKPClosure.agda"
+      - ".github/workflows/step-v-large-field.yml"
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck Step V large-field surface
+        run: |
+          agda --no-libraries --no-default-libraries -i . -i .agda-stdlib \
+            DASHI/Physics/YangMills/BalabanLargeFieldStepV.agda
