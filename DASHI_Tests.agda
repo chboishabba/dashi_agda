@@ -15,9 +15,12 @@ open import ActionMonotonicity
 -- broader public closure namespace cannot shadow the legacy smoke tests.
 import DASHI.Physics.MaskedCanonicalizationInvariant
 import DASHI.Physics.MaskedBlockOrthogonality
+import DASHI.Physics.MaskedNoLeakageBridge
 import DASHI.Physics.MaskedOperatorInvariants
 import DASHI.Physics.MaskedCone
 import DASHI.Physics.LorentzianCoreClosure
+import DASHI.Physics.MaskedSignature31Bridge
+import DASHI.Physics.DefectLorentzBridge
 import DASHI.Physics.ClosureOnAssumption
 
 ------------------------------------------------------------------------
