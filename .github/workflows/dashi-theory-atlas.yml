@@ -19,6 +19,7 @@ on:
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
       - "tests/test_materialize_dashi_agda_termflow.py"
       - "tests/test_materialize_dashi_phase_visualisations.py"
+      - ".github/workflows/dashi-theory-atlas.yml"
   push:
     branches: [master]
     paths:
@@ -38,8 +39,29 @@ on:
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
       - "tests/test_materialize_dashi_agda_termflow.py"
       - "tests/test_materialize_dashi_phase_visualisations.py"
+      - ".github/workflows/dashi-theory-atlas.yml"
 
 jobs:
+  typecheck-everything:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: "2.6.4.3"
+          agda-stdlib-version: "2.1"
+      - name: Typecheck canonical root
+        run: |
+          set -euxo pipefail
+          agda -i . -l standard-library DASHI/Everything.agda | tee agda-typecheck.log
+      - name: Upload typecheck log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agda-typecheck-log
+          path: agda-typecheck.log
+
   validate-atlas:
     runs-on: ubuntu-latest
     steps:
