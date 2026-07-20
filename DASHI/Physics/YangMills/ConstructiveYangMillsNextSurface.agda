@@ -1,9 +1,5 @@
 module DASHI.Physics.YangMills.ConstructiveYangMillsNextSurface where
 
-------------------------------------------------------------------------
--- Canonical compilation surface for the next constructive Yang--Mills stack.
-------------------------------------------------------------------------
-
 import DASHI.Physics.YangMills.SUNMatrixCarrier
 import DASHI.Physics.YangMills.SUNMatrixLieAlgebra
 import DASHI.Physics.YangMills.SUNMatrixLieGroup
@@ -23,6 +19,12 @@ import DASHI.Physics.YangMills.BalabanFiniteVolumeBackgroundLane
 import DASHI.Physics.YangMills.BalabanSU2FiniteBackgroundAssembly
 import DASHI.Physics.YangMills.BalabanUniformGreenNonlinearProduct
 import DASHI.Physics.YangMills.BalabanSeparatedUniformGreenNonlinearBounds
+import DASHI.Physics.YangMills.BalabanReferenceHodgeCoercivity
+import DASHI.Physics.YangMills.BalabanBackgroundPerturbationBudget
+import DASHI.Physics.YangMills.BalabanCorrectionNeumannBound
+import DASHI.Physics.YangMills.BalabanSmallFieldNonlinearConstants
+import DASHI.Physics.YangMills.BalabanExplicitContractionBudget
+import DASHI.Physics.YangMills.BalabanAnalyticProducerFrontier
 import DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity
 import DASHI.Physics.YangMills.BalabanReferenceGreenPerturbation
 import DASHI.Physics.YangMills.BalabanNonlinearComponentLipschitz
