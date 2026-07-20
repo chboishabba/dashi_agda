@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.CompactLieGaugeFixing where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.BalabanSU2CriticalMapContraction using
   (FiniteCriticalContraction; fixedPoint; fixedPointUnique)
@@ -44,4 +44,4 @@ gaugeFixingGaugeUnique data gauge solverFixed =
   fixedPointUnique
     (contraction data)
     gauge
-    (trans (sym (solverAgrees data gauge)) solverFixed)
+    (trans (solverAgrees data gauge) solverFixed)
