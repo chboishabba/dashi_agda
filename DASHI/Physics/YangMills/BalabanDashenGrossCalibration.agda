@@ -14,48 +14,47 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record DashenGrossCalibrationData (Scalar : Set) : Set₁ where
   field
-    multiply : Scalar → Scalar → Scalar
-    balabanCoupling dashenGrossCoupling : Scalar
-    generatorNormalization : Scalar
-    latticeSpacingNormalization : Scalar
-    determinantMultiplicity : Scalar
+    multiplyFactor : Scalar → Scalar → Scalar
+    sourceCoupling targetCoupling : Scalar
+    generatorFactor : Scalar
+    latticeFactor : Scalar
+    determinantFactor : Scalar
 
-    conventionMap : Scalar → Scalar
-    conventionDefinition : ∀ coupling →
-      conventionMap coupling ≡
-      multiply generatorNormalization
-        (multiply latticeSpacingNormalization
-          (multiply determinantMultiplicity coupling))
+    mapCoupling : Scalar → Scalar
+    mapDefinition : ∀ coupling →
+      mapCoupling coupling ≡
+      multiplyFactor generatorFactor
+        (multiplyFactor latticeFactor
+          (multiplyFactor determinantFactor coupling))
 
     calibratedProduct :
-      multiply generatorNormalization
-        (multiply latticeSpacingNormalization
-          (multiply determinantMultiplicity balabanCoupling))
-      ≡ dashenGrossCoupling
+      multiplyFactor generatorFactor
+        (multiplyFactor latticeFactor
+          (multiplyFactor determinantFactor sourceCoupling))
+      ≡ targetCoupling
 
 open DashenGrossCalibrationData public
 
 calibratedConvention :
   ∀ {Scalar : Set} →
   (dataSet : DashenGrossCalibrationData Scalar) →
-  conventionMap dataSet (balabanCoupling dataSet) ≡
-  dashenGrossCoupling dataSet
+  mapCoupling dataSet (sourceCoupling dataSet) ≡ targetCoupling dataSet
 calibratedConvention dataSet =
   trans
-    (conventionDefinition dataSet (balabanCoupling dataSet))
+    (mapDefinition dataSet (sourceCoupling dataSet))
     (calibratedProduct dataSet)
 
 toDashenGrossConventionMap :
   ∀ {Scalar : Set} →
   DashenGrossCalibrationData Scalar → DashenGrossConventionMap Scalar
 toDashenGrossConventionMap dataSet = record
-  { balabanCoupling = balabanCoupling dataSet
-  ; dashenGrossCoupling = dashenGrossCoupling dataSet
-  ; generatorNormalization = generatorNormalization dataSet
-  ; latticeSpacingNormalization = latticeSpacingNormalization dataSet
-  ; determinantMultiplicity = determinantMultiplicity dataSet
-  ; combine = multiply dataSet
-  ; conventionMap = conventionMap dataSet
+  { balabanCoupling = sourceCoupling dataSet
+  ; dashenGrossCoupling = targetCoupling dataSet
+  ; generatorNormalization = generatorFactor dataSet
+  ; latticeSpacingNormalization = latticeFactor dataSet
+  ; determinantMultiplicity = determinantFactor dataSet
+  ; combine = multiplyFactor dataSet
+  ; conventionMap = mapCoupling dataSet
   ; calibrated = calibratedConvention dataSet
   }
 
