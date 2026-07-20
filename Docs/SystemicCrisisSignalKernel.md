@@ -1,61 +1,71 @@
 # Systemic Crisis Signal Kernel
 
-This module formalises a mechanism-first, triadic state machine for systemic-risk monitoring.
+This family formalises a mechanism-first, signed-triadic state machine for systemic-risk monitoring and connects it to the repository's existing quotient-residual and MDL/action formalism.
 
-It does **not** encode a deterministic crash countdown, nor does it promote a single-stock drawdown into a sovereign-crisis claim. A narrative is deliberately separated from the observable mechanism state.
+It does **not** encode a deterministic crash countdown, nor promote a single-stock drawdown, technology hype cycle, or valuation story into a sovereign-crisis claim.
 
-## Triadic observables
+## Existing DASHI foundations reused
 
-Each signal is represented by `Trit`:
+The implementation is an application bridge rather than a parallel algebra. It imports:
 
-- `neg`: absent, normalising, or relieving;
-- `zer`: unresolved or insufficient evidence;
-- `pos`: stressed or present.
+- `DASHI.Algebra.Trit` for the primitive carrier `{-1,0,+1}`;
+- `DASHI.Core.MinimalKernelAlgebra` for symmetry actions, exact support/sign factorisation, quotient compatibility, RG/coarse-graining squares, and the rule that MDL/action descent is an additional proved law;
+- `DASHI.Cognition.QuotientResidualDynamics` for the general quotient-residual theorem surface.
 
-The observable record contains:
+## Plumbing state machine
 
-- funding stress;
-- liquidity impairment;
-- cross-asset contagion;
-- safe-haven failure;
-- forced selling;
-- policy backstop;
-- mechanical exhaustion.
+`CrisisObservation` records funding stress, liquidity impairment, cross-asset contagion, safe-haven failure, forced selling, policy backstop, and mechanical exhaustion.
 
-## Evidence gates
+The gates are:
 
-The state machine promotes only through explicit conjunctions:
+- latent fragility: at least two of funding, liquidity, and contagion are positive;
+- trigger proximity: funding stress, contagion, and safe-haven failure are positive;
+- active dysfunction: funding stress, liquidity impairment, and forced selling are positive;
+- mechanical recovery: policy backstop and exhaustion are positive while funding and liquidity are no longer positive.
 
-- **latent fragility**: at least two of funding, liquidity, and contagion are positive;
-- **trigger proximity**: funding stress, contagion, and safe-haven failure are positive;
-- **active market-function break**: funding stress, liquidity impairment, and forced selling are positive;
-- **mechanical recovery**: policy backstop and exhaustion are positive while funding and liquidity are no longer positive.
+`stepPhase` supplies hysteresis across `normalPhase`, `fragilityPhase`, `proximityPhase`, `activePhase`, and `abatingPhase`.
 
-## Phases
+## Compression Stability bridge
 
-The phases are:
+`SystemicCrisisCompressionBridge` adds a residual-depth profile:
 
-1. `normalPhase`
-2. `fragilityPhase`
-3. `proximityPhase`
-4. `activePhase`
-5. `abatingPhase`
+- shallow, middle, and deep activation;
+- side-information growth;
+- quotient failure;
+- model mismatch.
 
-`stepPhase` supplies hysteresis. In particular, an active phase does not disappear merely because one observation weakens; it remains active until a mechanical-recovery receipt is present.
+A compression fracture requires deep activation, side-information growth, and quotient failure together. This formalises the Economic Compression Stability idea: a selected chart/model becomes structurally suspect when surprise migrates into deeper triadic scales while its quotient needs increasing side information and stops collapsing variation.
 
-## Narrative boundary
+Residual energy remains diagnostic, not a Lyapunov function. Promotion requires a separate `ModelSelectionReceipt` covering deterministic decode, train/test separation, out-of-sample validation, side-information accounting, MDL improvement, and comparison against competitors.
 
-`PublicNarrative` records claims such as a single-asset drawdown, deterministic timeline, or sovereign-crisis story. `classifyWithNarrative` ignores those claims and classifies only the plumbing observations. The theorem `narrativeIrrelevance` proves that changing the story cannot change the mechanism phase.
+## Explicit transmission chain
 
-`noPlumbingNoCrisis` proves that, with funding, liquidity, and contagion all normal, the instantaneous classifier remains normal regardless of the remaining narrative-adjacent fields.
+`TransmissionChain` separates:
 
-## Operational interpretation
+```text
+trigger asset shock
+→ balance-sheet loss
+→ margin tightening
+→ synchronous deleveraging
+→ Treasury liquidation
+→ market-function failure
+→ sovereign-funding stress
+```
 
-The diagnostic posture is intentionally modest:
+A trigger alone cannot activate the cascade. Sovereign transmission additionally requires the final sovereign-funding link; Treasury dysfunction does not silently promote itself into a sovereign crisis.
 
-- normal / fragility: monitor;
-- proximity: reduce risk;
-- active: preserve liquidity;
-- abating: re-engage cautiously.
+## Promotion ladder
 
-These are formal control labels, not investment advice, price forecasts, or a claim that a sovereign crisis follows from an equity drawdown.
+`promotionLevel` distinguishes unsupported, diagnostic, observed-mechanism, and validated-model claims. An observed active mechanism therefore need not pretend that its forecasting model has passed MDL and out-of-sample gates.
+
+## Gartner-style expectation boundary
+
+`TechnologyExpectationObservation` records an expectation/adoption cycle separately from plumbing. `expectationCycleCannotPromotePlumbing` proves that expectation-cycle classification alone cannot establish funding, liquidity, liquidation, or sovereign transmission. Such frameworks may inform a technology-expectation prior, but are not market-plumbing models.
+
+## Peak boundary
+
+`peakMechanicsObserved` requires mechanical recovery plus normalisation of deep activation, side-information growth, and quotient failure. This means the forced-selling mechanism is abating; it does not claim the final price bottom.
+
+## Verification
+
+The focused Agda 2.9 lane checks the kernel, bridge, exact witness modules, and aggregate. Witnesses cover compression fracture, MDL promotion boundaries, trigger/cascade separation, Treasury/sovereign separation, expectation-cycle non-promotion, and mechanical-abatement versus price-bottom separation.
