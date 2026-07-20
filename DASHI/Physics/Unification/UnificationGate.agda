@@ -2,7 +2,9 @@ module DASHI.Physics.Unification.UnificationGate where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; zero)
 
+open import DASHI.Physics.PhysicalTheory as PT
 open import DASHI.Physics.CandidateFieldTheory as CFT
 open import DASHI.Physics.Refinement as Ref
 open import DASHI.Physics.QuantumHistory as QH
@@ -20,20 +22,18 @@ record DiscretizationCorrect {ℓ : Level}
     tower : Ref.RefinementTower ℓ
 
     classical-at-base :
-      Ref.RefinementTower.TheoryAt tower Agda.Builtin.Nat.zero ≡
+      Ref.RefinementTower.TheoryAt tower zero ≡
       CFT.CandidateFieldTheory.classical C
 
     ContinuumState Grid Error ScaleLaw : Set ℓ
     interpolate :
-      (n : Agda.Builtin.Nat.Nat) →
-      DASHI.Physics.PhysicalTheory.State
-        (Ref.RefinementTower.TheoryAt tower n) →
+      (n : Nat) →
+      PT.State (Ref.RefinementTower.TheoryAt tower n) →
       ContinuumState
 
     errorAt :
-      (n : Agda.Builtin.Nat.Nat) →
-      DASHI.Physics.PhysicalTheory.State
-        (Ref.RefinementTower.TheoryAt tower n) →
+      (n : Nat) →
+      PT.State (Ref.RefinementTower.TheoryAt tower n) →
       Error
 
     controlled-limit : Set ℓ
