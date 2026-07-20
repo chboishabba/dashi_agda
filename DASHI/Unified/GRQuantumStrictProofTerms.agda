@@ -3,7 +3,7 @@ module DASHI.Unified.GRQuantumStrictProofTerms where
 open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Unified.GRQuantumProofTerms
-import DASHI.Empirical.GRQuantumCorrespondenceBoundary as Empirical
+import DASHI.Empirical.GRQuantumEmpiricalValidationProgramme as Empirical
 
 ------------------------------------------------------------------------
 -- Strict refinements of the proposition-level terminal contract.
@@ -128,7 +128,8 @@ record StrictTerminalGRQuantumProof : Set₁ where
       StrictSpinDoubleCoverProof.base strictSpinCover
       ≡ TerminalGRQuantumProof.spinCover propositionTerminal
     sharedSubstrate : SharedSubstrateRecovery
-    empiricalCorrespondence : Empirical.PhysicalGRQuantumCorrespondence
+    empiricalCorrespondence :
+      Empirical.StrictPhysicalGRQuantumCorrespondence
 open StrictTerminalGRQuantumProof public
 
 assembleStrictTerminalGRQuantumProof :
@@ -141,7 +142,7 @@ assembleStrictTerminalGRQuantumProof :
   StrictSpinDoubleCoverProof.base spin
     ≡ TerminalGRQuantumProof.spinCover terminal →
   SharedSubstrateRecovery →
-  Empirical.PhysicalGRQuantumCorrespondence →
+  Empirical.StrictPhysicalGRQuantumCorrespondence →
   StrictTerminalGRQuantumProof
 assembleStrictTerminalGRQuantumProof
   terminal clifford coherence spin spinAgreement substrate empirical =
