@@ -7,7 +7,7 @@ module DASHI.Physics.YangMills.BalabanUniformNeumannAsymptoticResidual where
 --   * the checked finite Neumann telescope and uniform residual-power bound;
 --   * eventual vanishing of the common geometric bound power.
 --
--- No Archimedean/geometric-convergence fact is assumed here.  It is supplied
+-- No Archimedean/geometric-convergence fact is assumed here. It is supplied
 -- by BalabanGeometricPowerVanishing.
 ------------------------------------------------------------------------
 
@@ -17,6 +17,7 @@ open import Data.Product.Base using (Σ; _,_)
 
 import DASHI.Physics.YangMills.BalabanFiniteNeumannParametrix as Finite
 open import DASHI.Physics.YangMills.BalabanUniformWeightedNeumannFamily
+open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record UniformBoundPowerVanishing
   {Index Bound : Set}
@@ -89,3 +90,9 @@ neumannResidualEventuallyBelow :
 neumannResidualEventuallyBelow family asymptotic =
   uniformUnitBallResidualEventuallyBelow
     family (powerVanishing asymptotic)
+
+uniformNeumannAsymptoticResidualLevel : ProofLevel
+uniformNeumannAsymptoticResidualLevel = machineChecked
+
+uniformPowerVanishingInputLevel : ProofLevel
+uniformPowerVanishingInputLevel = conditional
