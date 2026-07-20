@@ -30,7 +30,7 @@ sumTerms :
   ∀ {Index Scalar : Set} →
   PositiveAdditiveScalar Scalar →
   (Index → Scalar) → List Index → Scalar
-sumTerms scalar [] terms = zero scalar
+sumTerms scalar term [] = zero scalar
 sumTerms scalar term (index ∷ rest) =
   add scalar (term index) (sumTerms scalar term rest)
 
