@@ -7,9 +7,10 @@ open import Agda.Builtin.Unit using (⊤; tt)
 ------------------------------------------------------------------------
 -- Proposition-level replacement for the earlier Boolean closure manifest.
 --
--- Every named proposition below has a corresponding inhabitant.  A consumer
--- cannot promote a closure merely by choosing the proposition type; it must
--- supply the proof term as well.
+-- Each theorem surface is separated from an inhabited `Closed` record.  This
+-- lets finite or conditional models state their proposition language without
+-- pretending that merely naming a `Set` proves it.  Terminal promotion requires
+-- both the surface and the corresponding closure witness.
 
 infixr 4 _⊎_
 data _⊎_ (A B : Set) : Set where
@@ -23,7 +24,6 @@ record _↔_ (A B : Set) : Set where
     backward : B → A
 open _↔_ public
 
--- Local empty type, kept builtin-only so this module has no stdlib dependency.
 data ⊥ : Set where
 
 _≢_ : {A : Set} → A → A → Set
@@ -31,6 +31,7 @@ x ≢ y = x ≡ y → ⊥
 
 ------------------------------------------------------------------------
 -- 1. Orthogonal multiscale closure -> unique quadratic functional.
+-- This record already contains the proof terms directly.
 
 record QuadraticUniquenessProof : Set₁ where
   field
@@ -74,21 +75,29 @@ record ChainAntichainLorentzProof : Set₁ where
     Null : Interval → Set
     finiteSpeedCone :
       (a b : Event) → Null (interval a b) → Set
-    finiteSpeedConeProof :
-      (a b : Event) →
-      (nullReceipt : Null (interval a b)) →
-      finiteSpeedCone a b nullReceipt
 
     spatialDimension : Nat
     spatialDimensionIsThree : spatialDimension ≡ 3
     timeDimension : Nat
     timeDimensionIsOne : timeDimension ≡ 1
     signatureUnique : Set
-    signatureUniqueProof : signatureUnique
 open ChainAntichainLorentzProof public
+
+record ChainAntichainLorentzClosed
+  (surface : ChainAntichainLorentzProof) : Set where
+  open ChainAntichainLorentzProof surface
+  field
+    finiteSpeedConeProof :
+      (a b : Event) →
+      (nullReceipt : Null (interval a b)) →
+      finiteSpeedCone a b nullReceipt
+    signatureUniqueProof : signatureUnique
+open ChainAntichainLorentzClosed public
 
 ------------------------------------------------------------------------
 -- 3. Constructive Clifford algebra and Spin double cover.
+-- These records already carry equations and witnesses rather than proposition
+-- names alone.
 
 record CliffordUniversalProof : Set₁ where
   field
@@ -175,15 +184,12 @@ record WaveLiftCCRProof : Set₁ where
     actionGrain : Scalar
 
     finiteTreeShiftLaw : Set
-    finiteTreeShiftLawProof : finiteTreeShiftLaw
     continuumLimit : Set
-    continuumLimitProof : continuumLimit
     canonicalCommutationRelation : Set
     continuumLimitYieldsCCR :
       finiteTreeShiftLaw →
       continuumLimit →
       canonicalCommutationRelation
-    canonicalCommutationRelationProof : canonicalCommutationRelation
 
     OrthogonalFamily : Set
     bornMeasure : HilbertState → Scalar
@@ -191,10 +197,18 @@ record WaveLiftCCRProof : Set₁ where
       (state : HilbertState) →
       bornMeasure state ≡ normSquared state
     pythagoreanProbabilityAdditivity : OrthogonalFamily → Set
+open WaveLiftCCRProof public
+
+record WaveLiftCCRClosed (surface : WaveLiftCCRProof) : Set where
+  open WaveLiftCCRProof surface
+  field
+    finiteTreeShiftLawProof : finiteTreeShiftLaw
+    continuumLimitProof : continuumLimit
+    canonicalCommutationRelationProof : canonicalCommutationRelation
     pythagoreanProbabilityAdditivityProof :
       (family : OrthogonalFamily) →
       pythagoreanProbabilityAdditivity family
-open WaveLiftCCRProof public
+open WaveLiftCCRClosed public
 
 ------------------------------------------------------------------------
 -- 5. Full tensorial GR bridge.
@@ -219,18 +233,23 @@ record EinsteinTensorProof : Set₁ where
     stressEnergy : DiscreteValuation → StressEnergy
 
     discreteToContinuumConvergence : Set
-    discreteToContinuumConvergenceProof : discreteToContinuumConvergence
     contractedBianchiIdentity : Set
-    contractedBianchiIdentityProof : contractedBianchiIdentity
     stressEnergyConservation : Set
-    stressEnergyConservationProof : stressEnergyConservation
     variationalSourceEquation : Set
-    variationalSourceEquationProof : variationalSourceEquation
     universalSpinTwoSelfCoupling : Set
-    universalSpinTwoSelfCouplingProof : universalSpinTwoSelfCoupling
     backgroundIndependence : Set
-    backgroundIndependenceProof : backgroundIndependence
 open EinsteinTensorProof public
+
+record EinsteinTensorClosed (surface : EinsteinTensorProof) : Set where
+  open EinsteinTensorProof surface
+  field
+    discreteToContinuumConvergenceProof : discreteToContinuumConvergence
+    contractedBianchiIdentityProof : contractedBianchiIdentity
+    stressEnergyConservationProof : stressEnergyConservation
+    variationalSourceEquationProof : variationalSourceEquation
+    universalSpinTwoSelfCouplingProof : universalSpinTwoSelfCoupling
+    backgroundIndependenceProof : backgroundIndependence
+open EinsteinTensorClosed public
 
 ------------------------------------------------------------------------
 -- 6. Hypersurface-deformation / Dirac constraint algebra.
@@ -245,18 +264,23 @@ record ConstraintAlgebraProof : Set₁ where
     bracket : Operator → Operator → Operator
 
     momentumMomentumClosure : Set
-    momentumMomentumClosureProof : momentumMomentumClosure
     momentumHamiltonianClosure : Set
-    momentumHamiltonianClosureProof : momentumHamiltonianClosure
     hamiltonianHamiltonianClosure : Set
-    hamiltonianHamiltonianClosureProof : hamiltonianHamiltonianClosure
     metricDependentStructureFunctions : Set
-    metricDependentStructureFunctionsProof : metricDependentStructureFunctions
     decimationRelabellingEquivariance : Set
-    decimationRelabellingEquivarianceProof : decimationRelabellingEquivariance
     anomalyFreeQuantumRepresentation : Set
-    anomalyFreeQuantumRepresentationProof : anomalyFreeQuantumRepresentation
 open ConstraintAlgebraProof public
+
+record ConstraintAlgebraClosed (surface : ConstraintAlgebraProof) : Set where
+  open ConstraintAlgebraProof surface
+  field
+    momentumMomentumClosureProof : momentumMomentumClosure
+    momentumHamiltonianClosureProof : momentumHamiltonianClosure
+    hamiltonianHamiltonianClosureProof : hamiltonianHamiltonianClosure
+    metricDependentStructureFunctionsProof : metricDependentStructureFunctions
+    decimationRelabellingEquivarianceProof : decimationRelabellingEquivariance
+    anomalyFreeQuantumRepresentationProof : anomalyFreeQuantumRepresentation
+open ConstraintAlgebraClosed public
 
 ------------------------------------------------------------------------
 -- 7. UV spectral finiteness and low-energy recovery.
@@ -269,24 +293,29 @@ record UVSpectralProof : Set₁ where
     Spectrum : Operator → Set
 
     finiteResolvableDepth : (region : Region) → Set
+    regionalHilbertDimensionBound : (region : Region) → Set
+    regulatedSpectrumFinite : (operator : Operator) → Set
+    amplitudesConverge : Set
+    renormalizationPreservesBound : Set
+    lowEnergyLimitExists : Set
+    lowEnergyLimitMatchesRequiredPhysics : Set
+open UVSpectralProof public
+
+record UVSpectralClosed (surface : UVSpectralProof) : Set where
+  open UVSpectralProof surface
+  field
     finiteResolvableDepthProof :
       (region : Region) → finiteResolvableDepth region
-    regionalHilbertDimensionBound : (region : Region) → Set
     regionalHilbertDimensionBoundProof :
       (region : Region) → regionalHilbertDimensionBound region
-    regulatedSpectrumFinite : (operator : Operator) → Set
     regulatedSpectrumFiniteProof :
       (operator : Operator) → regulatedSpectrumFinite operator
-    amplitudesConverge : Set
     amplitudesConvergeProof : amplitudesConverge
-    renormalizationPreservesBound : Set
     renormalizationPreservesBoundProof : renormalizationPreservesBound
-    lowEnergyLimitExists : Set
     lowEnergyLimitExistsProof : lowEnergyLimitExists
-    lowEnergyLimitMatchesRequiredPhysics : Set
     lowEnergyLimitMatchesRequiredPhysicsProof :
       lowEnergyLimitMatchesRequiredPhysics
-open UVSpectralProof public
+open UVSpectralClosed public
 
 ------------------------------------------------------------------------
 -- Terminal proof bundle.  No canonical inhabitant is defined here.
@@ -294,13 +323,24 @@ open UVSpectralProof public
 record TerminalGRQuantumProof : Set₁ where
   field
     quadratic : QuadraticUniquenessProof
+
     causalLorentz : ChainAntichainLorentzProof
+    causalLorentzClosed : ChainAntichainLorentzClosed causalLorentz
+
     clifford : CliffordUniversalProof
     spinCover : SpinDoubleCoverProof
+
     waveCCR : WaveLiftCCRProof
+    waveCCRClosed : WaveLiftCCRClosed waveCCR
+
     einstein : EinsteinTensorProof
+    einsteinClosed : EinsteinTensorClosed einstein
+
     constraints : ConstraintAlgebraProof
+    constraintsClosed : ConstraintAlgebraClosed constraints
+
     uvSpectrum : UVSpectralProof
+    uvSpectrumClosed : UVSpectralClosed uvSpectrum
 
     oneUnderlyingSubstrate : Set
     oneUnderlyingSubstrateProof : oneUnderlyingSubstrate
