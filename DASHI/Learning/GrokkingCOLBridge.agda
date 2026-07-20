@@ -1,7 +1,7 @@
 module DASHI.Learning.GrokkingCOLBridge where
 
 open import DASHI.Core.Prelude
-open import DASHI.Geometry.COL using (COL; E-monotone-iter)
+open import DASHI.Geometry.COL using (COL; iterate; E-monotone-iter)
 open import DASHI.Learning.GrokkingOperatorContract
 
 ------------------------------------------------------------------------
@@ -54,8 +54,7 @@ learning-MDL-monotone-iter :
   forall {S : Nat -> Set} (B : LearningCOLBundle S) ->
   (n : Nat) (k : Nat) (x : S n) ->
   LearningOperator.totalMDL (learner B n)
-    (DASHI.Geometry.COL.iterate
-      (LearningOperator.step (learner B n)) k x)
+    (iterate (LearningOperator.step (learner B n)) k x)
   ≤ LearningOperator.totalMDL (learner B n) x
 learning-MDL-monotone-iter B = E-monotone-iter (asCOL B)
 
