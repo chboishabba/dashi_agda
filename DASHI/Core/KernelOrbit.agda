@@ -3,6 +3,7 @@ module DASHI.Core.KernelOrbit where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
+open import Data.Nat using (_+_)
 
 open import DASHI.Core.KernelSystem
 
@@ -12,15 +13,7 @@ iterate :
   (S → S) →
   S → S
 iterate zero K s = s
-iterate (suc n) K s = iterate n K (K s)
-
-iterate-suc-front :
-  ∀ {S : Set}
-    (n : Nat)
-    (K : S → S)
-    (s : S) →
-  iterate (suc n) K s ≡ iterate n K (K s)
-iterate-suc-front n K s = refl
+iterate (suc n) K s = K (iterate n K s)
 
 record FixedPoint {S : Set} (K : S → S) (s : S) : Set where
   field
@@ -75,12 +68,8 @@ quotientStable-everywhere⇒orbitCollapse {K = K} {q = q} {s = s} allStable =
   collapse zero = refl
   collapse (suc n) =
     trans
-      (collapse-from-step n)
+      (allStable (iterate n K s))
       (collapse n)
-
-  collapse-from-step : ∀ n → q (iterate (suc n) K s) ≡ q (iterate n K s)
-  collapse-from-step zero = allStable s
-  collapse-from-step (suc n) = collapse-from-step n
 
 periodicOrbit⇒quotientClosure :
   ∀ {S Q : Set}
