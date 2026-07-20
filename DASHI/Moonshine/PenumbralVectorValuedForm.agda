@@ -5,7 +5,6 @@ module DASHI.Moonshine.PenumbralVectorValuedForm where
 -- ambiguity, and integral Fourier coefficients are all explicit witnesses.
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import DASHI.Moonshine.PenumbralLambency
@@ -34,7 +33,10 @@ record PenumbralSupport
   open VectorValuedModularCarrier carrier
   field
     residueModulus : Nat
-    residueModulusIsTwiceLevel : Set
+    ResidueModulusIsTwiceLevel : Nat → Nat → Set
+    residueModulusCorrect :
+      ResidueModulusIsTwiceLevel residueModulus
+        (Lambency.level (PenumbralLambdency.lambency lambda))
 
     DiscriminantIndex : Set
     residue : DiscriminantIndex → Nat
