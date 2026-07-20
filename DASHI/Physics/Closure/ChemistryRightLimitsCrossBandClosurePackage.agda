@@ -13,14 +13,16 @@ import DASHI.Physics.Closure.ChemistryRightLimitsQuotientCrossBandCouplingRequir
 import DASHI.Physics.Closure.ChemistryRightLimitsQuotientCrossBandCandidate256Witness as Witness
 
 ------------------------------------------------------------------------
--- The current chemistry-right-limits theorem owner.
+-- Current chemistry-right-limits theorem owner.
 --
--- This package is stronger than the earlier interpretation/adapter bundle:
--- it contains the concrete quotient-visible 256-slot witness that holds the
--- defect/promoted pair fixed while both the quotient observable and the
--- chemistry-facing cross-band coupling separate.
+-- The earlier interpretation contract, adapter, first observable, promoted
+-- pair, and quotient observable are consumed here by the concrete 256-slot
+-- cross-band witness.  The witness holds the defect/promoted pair fixed while
+-- both the quotient observable and a chemistry-facing cross-band quantity
+-- separate.  This is the non-vacuous pre-spectral law requested by the board.
 --
--- It remains pre-spectral and pre-scale-setting.
+-- Spectra, scale setting, bonding, and empirical chemistry remain outside the
+-- theorem.
 
 record ChemistryRightLimitsCrossBandClosurePackage : Setω where
   field
@@ -58,15 +60,15 @@ canonicalChemistryRightLimitsCrossBandClosurePackage :
 canonicalChemistryRightLimitsCrossBandClosurePackage =
   record
     { interpretationContract =
-        Contract.chemistryRightLimitsInterpretationContract
+        Contract.canonicalChemistryRightLimitsInterpretationContract
     ; rightLimitsAdapter =
-        Adapter.atomicChemistryRightLimitsAdapter
+        Adapter.canonicalAtomicChemistryRightLimitsAdapter
     ; observableLaw =
-        Observable.chemistryRightLimitsObservableLaw
+        Observable.canonicalChemistryRightLimitsObservableLaw
     ; promotedObservableCoupling =
-        Promoted.chemistryRightLimitsPromotedObservableCouplingLaw
+        Promoted.canonicalChemistryRightLimitsPromotedObservableCouplingLaw
     ; quotientObservableCoupling =
-        Quotient.chemistryRightLimitsQuotientObservableCouplingLaw
+        Quotient.canonicalChemistryRightLimitsQuotientObservableCouplingLaw
     ; concreteCrossBandRequirement =
         Witness.canonicalQuotientCrossBandCouplingRequirementWitness
     ; concreteCrossBandTheorem =
@@ -77,7 +79,8 @@ canonicalChemistryRightLimitsCrossBandClosurePackage =
         Witness.canonicalCandidate256QuotientCrossBandLaw
     ; claimBoundary =
         "The quotient-visible chemistry blocker is discharged on the concrete 256-slot witness"
-        ∷ "The defect/promoted pair is held fixed while quotient and cross-band quantities separate"
-        ∷ "No spectrum, energy-scale, bonding, periodic-table, or wet-lab theorem is claimed"
+        ∷ "The defect/promoted pair is fixed while quotient and cross-band quantities separate"
+        ∷ "The theorem remains pre-spectral and pre-scale-setting"
+        ∷ "No bonding, periodic-table, wet-lab, or empirical-validation theorem is claimed"
         ∷ []
     }
