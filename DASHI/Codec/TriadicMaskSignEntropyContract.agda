@@ -1,42 +1,40 @@
 module DASHI.Codec.TriadicMaskSignEntropyContract where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-
-open import DASHI.Codec.TriadicMaskSignFactorization
-  using (Mask3; Sign)
 
 ------------------------------------------------------------------------
 -- Typed specification boundary for source probabilities and ideal lengths.
 --
 -- The exact support/sign bijection is proved in
--- TriadicMaskSignFactorization.  Shannon entropy and finite-precision rANS
--- correctness require a probability/real-analysis and machine-arithmetic
--- development that is not currently canonical in this repository.  Those
+-- TriadicMaskSignFactorization. Shannon entropy and finite-precision rANS
+-- correctness require probability/real-analysis and machine-arithmetic
+-- developments that are not currently canonical in this repository. Those
 -- obligations are therefore explicit fields here, not promoted theorems.
 
-record EntropyModel : Set₁ where
+record EntropyRateContract : Set₁ where
   field
     Rate : Set
-    zeroRate : Rate
     _+R_ : Rate → Rate → Rate
     _*R_ : Rate → Rate → Rate
 
-    maskEntropy : Mask3 → Rate
-    signEntropy : Sign → Rate
+    maskEntropy : Rate
     activityDensity : Rate
+    conditionalSignEntropy : Rate
 
-    conditionalSignRate : Rate
-    conditionalSignRate-law :
-      conditionalSignRate ≡ activityDensity *R signEntropy positive
+    gatedSignRate : Rate
+    gatedSignRate-law :
+      gatedSignRate ≡ activityDensity *R conditionalSignEntropy
 
     planeRate : Rate
     planeRate-law :
-      planeRate ≡ maskEntropy mask000 +R conditionalSignRate
+      planeRate ≡ maskEntropy +R gatedSignRate
 
-open EntropyModel public
+    sourceModelClaimBoundary : String
+
+open EntropyRateContract public
 
 ------------------------------------------------------------------------
 -- Production rANS interface contract.
@@ -44,10 +42,6 @@ open EntropyModel public
 data AlphabetKind : Set where
   maskAlphabet : AlphabetKind
   signAlphabet : AlphabetKind
-
-data StreamKind : Set where
-  maskStream : StreamKind
-  gatedSignStream : StreamKind
 
 record RANSTableContract : Set where
   field
