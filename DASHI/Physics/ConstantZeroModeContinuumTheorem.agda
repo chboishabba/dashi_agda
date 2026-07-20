@@ -3,6 +3,7 @@ module DASHI.Physics.ConstantZeroModeContinuumTheorem where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_; _,_)
 
 open import DASHI.Physics.DiscreteContinuumKernelTargets
 
@@ -113,7 +114,3 @@ constantZeroModeTheoremWitnesses =
   constantZeroMode ,
   refl ,
   zeroModeConvergence
-  where
-  infixr 4 _×_
-  _×_ : Set → Set → Set
-  A × B = Agda.Builtin.Sigma.Σ A (λ _ → B)
