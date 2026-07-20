@@ -9,8 +9,10 @@ import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Env
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteIrrep as Irrep
 import DASHI.Physics.Closure.TriadicSectorQSeries as QS
+import DASHI.Physics.Closure.TriadicIrrepTraceBridge as Trace
 import DASHI.Physics.Closure.TriadicModularAutomorphicGate as Modular
 import DASHI.Geometry.TriadicEllipticModuliGate as Elliptic
+import DASHI.Physics.Closure.TriadicAnalyticCertificates as Analytic
 
 ------------------------------------------------------------------------
 -- Optional gated lanes at Set₁.
@@ -60,35 +62,6 @@ record ModeStabilizationCertificate : Set₁ where
 open ModeStabilizationCertificate public
 
 ------------------------------------------------------------------------
--- Finite-support energies plus a separate limit theorem.
-
-record WeightedEnergyLimitCertificate : Set₁ where
-  field
-    Energy : Set
-    finiteEnergy : Nat → Energy
-    Distance : Energy → Energy → Set
-
-    cauchyLaw : (requestedDepth : Nat) → Set
-    dominatingBound : Set
-    limitExists : Set
-
-open WeightedEnergyLimitCertificate public
-
-------------------------------------------------------------------------
--- Native p-adic analytic lane remains separate from the Euclidean envelope.
-
-record PAdicAnalyticLane : Set₁ where
-  field
-    BaseField : Set
-    ChartDomain : Set
-    chartDimension : Nat
-    locallyModelledOnBaseField : Set
-    analyticTransitionMaps : Set
-    chartDomainRepresentsZ3 : Set
-
-open PAdicAnalyticLane public
-
-------------------------------------------------------------------------
 -- Unified verified assembly.
 
 record TriadicVerifiedLimitAssembly : Set₁ where
@@ -108,15 +81,38 @@ record TriadicVerifiedLimitAssembly : Set₁ where
       Nat →
       CertifiedDepthTail depthKernelModel
 
+    uniformGeometricTail :
+      Analytic.UniformGeometricTailCertificate
+        depthKernelModel
+        continuousEnvelope
+
+    quantitativeEmbedding :
+      Analytic.QuantitativeEmbeddingCertificate
+        depthKernelModel
+        continuousEnvelope
+
+    weightedAxisSummability :
+      Analytic.WeightedAxisSummabilityCertificate
+        depthKernelModel
+        continuousEnvelope
+
+    qSeriesCarrier : QS.QSeriesCarrier
+    irrepTraceBridge : Trace.IrrepTraceBridge qSeriesCarrier
+
     finiteCharacterTransform :
       (n : Nat) →
       Irrep.FiniteCharacterTransform n
 
-    modeStabilization : ModeStabilizationCertificate
-    weightedEnergyLimit : WeightedEnergyLimitCertificate
+    traceTransformAgreement :
+      (n : Nat) →
+      finiteCharacterTransform n
+      ≡ Trace.transformAtDepth irrepTraceBridge n
 
-    qSeriesCarrier : QS.QSeriesCarrier
     sectorTraceTower : QS.SectorTraceTower qSeriesCarrier
+    sectorTraceTowerMatchesBridge :
+      sectorTraceTower ≡ Trace.traceTower irrepTraceBridge
+
+    modeStabilization : ModeStabilizationCertificate
 
     modularTransformation :
       Optional₁
@@ -129,7 +125,8 @@ record TriadicVerifiedLimitAssembly : Set₁ where
       Optional₁
         (Elliptic.EllipticOriginGate ellipticCoefficientRing)
 
-    pAdicAnalyticLane : PAdicAnalyticLane
+    pAdicAnalyticManifold :
+      Analytic.PAdicAnalyticManifoldCertificate
 
     realSmoothZ3Required : Bool
     realSmoothZ3RequiredIsFalse : realSmoothZ3Required ≡ false
@@ -150,8 +147,8 @@ canonicalRealSmoothRequirementIsFalse A =
 
 verifiedLimitStatement : String
 verifiedLimitStatement =
-  "The solution is an inverse-system assembly: exact residues and compatible kernels at every depth, exact finite character transforms, trace q-series, proof-carrying tails, mode stabilization, and weighted-energy limits. Modular and elliptic lanes remain optional gated refinements."
+  "The solution is an inverse-system assembly: exact residues and compatible kernels at every depth, finite character transforms linked to block traces, trace q-series, geometric tails, quantitative embedding, weighted-l2 limits, and a native p-adic analytic-manifold certificate. Modular and elliptic lanes remain optional gated refinements."
 
 verifiedLimitBoundary : String
 verifiedLimitBoundary =
-  "Finite verification does not imply an infinite theorem without the supplied tail, stabilization, Cauchy, or domination certificates. A real smooth structure on native Z_3 is neither required nor promoted."
+  "Finite verification does not imply an infinite theorem without the supplied tail, stabilization, Cauchy, domination, or topology certificates. A real smooth structure on native Z_3 is neither required nor promoted."
