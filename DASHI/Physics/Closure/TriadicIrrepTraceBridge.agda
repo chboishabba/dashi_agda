@@ -43,9 +43,7 @@ record IrrepTraceBridge
       QS.Coeff C
 
     traceTower : QS.SectorTraceTower C
-
-    stableSectorMatchesTraceSector :
-      StableSector ≡ QS.Sector traceTower
+    traceSector : StableSector → QS.Sector traceTower
 
     traceCoefficientAgreement :
       (n : Nat) →
@@ -53,14 +51,11 @@ record IrrepTraceBridge
       QS.traceCoefficient
         traceTower
         n
-        (transportSector s)
+        (traceSector s)
       ≡ traceBlock
           n
           (sectorAtDepth s n)
           (operatorAtDepth n s)
-      where
-        transportSector : StableSector → QS.Sector traceTower
-        transportSector s rewrite stableSectorMatchesTraceSector = s
 
     reductionPreservesTrackedSector : (n : Nat) → Set
     traceCompatibleAcrossDepth : (n : Nat) → Set
