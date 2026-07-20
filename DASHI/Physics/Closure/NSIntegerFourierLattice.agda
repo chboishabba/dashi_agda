@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSIntegerFourierLattice where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
-open import Data.Integer.Base using (ℤ; _+_; -_)
+open import Data.Integer.Base using (ℤ; +_; _+_; -_)
 
 ------------------------------------------------------------------------
 -- Exact Fourier lattice Z^3.
