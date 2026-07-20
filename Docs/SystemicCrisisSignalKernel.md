@@ -1,8 +1,8 @@
 # Systemic Crisis Signal Kernel
 
-This family formalises a mechanism-first, signed-triadic state machine for systemic-risk monitoring and connects it to the repository's existing quotient-residual and MDL/action formalism.
+This family formalises a mechanism-first, signed-triadic state machine for systemic-risk monitoring and connects it to the repository's existing quotient-residual, MDL/action, PNF trading-boundary, and empirical-basin formalism.
 
-It does **not** encode a deterministic crash countdown, nor promote a single-stock drawdown, technology hype cycle, or valuation story into a sovereign-crisis claim.
+It does **not** encode a deterministic crash countdown, nor promote a single-stock drawdown, technology hype cycle, valuation story, BAD-window alignment, or scenario label into a sovereign-crisis claim.
 
 ## Existing DASHI foundations reused
 
@@ -10,7 +10,9 @@ The implementation is an application bridge rather than a parallel algebra. It i
 
 - `DASHI.Algebra.Trit` for the primitive carrier `{-1,0,+1}`;
 - `DASHI.Core.MinimalKernelAlgebra` for symmetry actions, exact support/sign factorisation, quotient compatibility, RG/coarse-graining squares, and the rule that MDL/action descent is an additional proved law;
-- `DASHI.Cognition.QuotientResidualDynamics` for the general quotient-residual theorem surface.
+- `DASHI.Cognition.QuotientResidualDynamics` for the general quotient-residual theorem surface;
+- `DASHI.Foundations.SSPTritCarrier` for the PNF signed structural-regime carrier;
+- `DASHI.Promotion.TechSystemicStressScenarioBoundary` for source-bound stress axes, empirical-basin links, adverse interarrival windows, scenario attribution, capital posture, and fail-closed execution governance.
 
 ## Plumbing state machine
 
@@ -54,6 +56,48 @@ trigger asset shock
 
 A trigger alone cannot activate the cascade. Sovereign transmission additionally requires the final sovereign-funding link; Treasury dysfunction does not silently promote itself into a sovereign crisis.
 
+## Crosswalk with the tech/systemic scenario tranche
+
+`SystemicCrisisScenarioCrosswalk` integrates PR #157's scenario vocabulary without collapsing distinct layers.
+
+### Exact carrier reuse
+
+The module proves an exact round-trip isomorphism between `SSPTritCarrier.SSPTrit` and `DASHI.Algebra.Trit.Trit`. This permits shared signed-triadic structure while preserving the existing rule that adverse/favorable structural sign is not price direction.
+
+### Partial phase map
+
+The phase correspondence is:
+
+```text
+latent fragility    ↦ fragility
+trigger proximity   ↦ proximity
+active dysfunction  ↦ active
+stabilization       ↦ abating
+unresolved          ↦ no mechanism phase
+```
+
+The final case is deliberately partial: insufficient evidence is not silently mapped to `normalPhase`.
+
+### Axis projection
+
+Funding, liquidity, correlation/contagion, Treasury functioning, and credit transmission have direct mechanism projections. Narrative instability, execution churn, technology concentration, capex revisions, hardware resale, and power/cooling constraints remain candidate explanatory axes until a separate transmission receipt links them to funding, liquidity, contagion, or forced selling.
+
+Thus the AI-capex fixture can identify a coherent candidate scenario, but it cannot by itself establish Treasury dysfunction or sovereign transmission.
+
+### BAD-window temporal geometry
+
+`AdverseInterarrivalWindow` is retained as temporal geometry: the interval between adverse onsets may support replay, persistence, and hazard studies. A `WindowBridgeReceipt` still requires replay closure, calendar coverage, no causal promotion, and no execution promotion. Post-hoc Greece-style alignment remains evidence for replay alignment only.
+
+### Posture and execution separation
+
+The crosswalk preserves:
+
+```text
+observation → classification → capital posture → execution
+```
+
+`monitoringPosture` is derived from mechanism phase and compression fracture; `CapitalPosture` remains the separately governed scenario-layer output. Neither creates production-trading authority. Adverse state is not an automatic short signal, and arbitrary sign inversion remains rejected.
+
 ## Promotion ladder
 
 `promotionLevel` distinguishes unsupported, diagnostic, observed-mechanism, and validated-model claims. An observed active mechanism therefore need not pretend that its forecasting model has passed MDL and out-of-sample gates.
@@ -68,4 +112,4 @@ A trigger alone cannot activate the cascade. Sovereign transmission additionally
 
 ## Verification
 
-The focused Agda 2.9 lane checks the kernel, bridge, exact witness modules, and aggregate. Witnesses cover compression fracture, MDL promotion boundaries, trigger/cascade separation, Treasury/sovereign separation, expectation-cycle non-promotion, and mechanical-abatement versus price-bottom separation.
+The focused Agda 2.9 lane checks the kernel, quotient/MDL bridge, PR #157 crosswalk, exact witness modules, and aggregate. Witnesses cover carrier round trips, partial phase mapping, compression fracture, MDL promotion boundaries, trigger/cascade separation, Treasury/sovereign separation, candidate-axis non-promotion, unresolved-state handling, expectation-cycle non-promotion, execution governance, and mechanical-abatement versus price-bottom separation.
