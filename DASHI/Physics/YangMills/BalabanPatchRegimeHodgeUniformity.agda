@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPatchRegimeHodgeUniformity where
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -47,7 +49,7 @@ record PatchRegimeHodgeData (Index State Bound : Set) : Set₁ where
     cornerHodge : ∀ index state → regime index ≡ corner →
       LessEqual (scale cornerConstant (normSq index state)) (energy index state)
     nestedHodge : ∀ index state → regime index ≡ nestedRestriction →
-      LessEqual (scale nestedConstant (normSq index state)) (energy index state)
+      LessEqual (scale nestedConstant (normSq index state)) (energy index index state)
 
     regimeComplete : ∀ index →
       (regime index ≡ bulk) ⊎
