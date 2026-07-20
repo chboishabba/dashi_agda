@@ -11,6 +11,10 @@ on:
       - 'DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalScalarInstance.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalPolarizationProofs.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
       - 'DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernel.agda'
       - 'DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda'
@@ -31,6 +35,10 @@ on:
       - 'DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalScalarInstance.agda'
+      - 'DASHI/Physics/Closure/NSWall1RationalPolarizationProofs.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
       - 'DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernel.agda'
       - 'DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda'
@@ -79,6 +87,10 @@ jobs:
               DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda \
               DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda \
               DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda \
+              DASHI/Physics/Closure/NSWall1RationalScalarInstance.agda \
+              DASHI/Physics/Closure/NSWall1RationalPolarizationProofs.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda \
               DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda \
               DASHI/Physics/Closure/NSPairIncidenceKernel.agda \
               DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda \
@@ -90,7 +102,7 @@ jobs:
           ) > agda-ns-pair-incidence-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 340 agda-ns-pair-incidence-schur.log
+          tail -n 380 agda-ns-pair-incidence-schur.log
           exit 0
       - name: Upload focused Agda log
         if: always()
