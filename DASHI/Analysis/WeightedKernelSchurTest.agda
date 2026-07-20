@@ -160,8 +160,8 @@ open KernelIdentityMatch public
 -- bare existence of `applyKernel` does not by itself prove that the action is
 -- assembled from `kernel K`.  This companion record closes that authority seam
 -- without breaking existing Schur instances: a concrete vector model supplies
--- one evaluator for matrix entries and proves that `applyKernel` is exactly that
--- evaluator applied to the declared kernel.
+-- one evaluator for matrix entries, proves pointwise extensionality of that
+-- evaluator, and proves that `applyKernel` is exactly the declared kernel action.
 ------------------------------------------------------------------------
 
 record ExactKernelAction
@@ -176,6 +176,13 @@ record ExactKernelAction
       (Row → Col → Scalar) →
       VectorIn L →
       VectorOut L
+
+    evaluateEntriesPointwise :
+      (left right : Row → Col → Scalar) →
+      (∀ row col → left row col ≡ right row col) →
+      ∀ input →
+      evaluateEntries left input ≡
+      evaluateEntries right input
 
     applyKernelMatchesEntries :
       ∀ input →
@@ -204,6 +211,22 @@ exactKernelActionTransport A candidateEntries entriesMatch input =
       evaluateEntries A entries input)
     entriesMatch
     (applyKernelMatchesEntries A input)
+
+exactKernelActionPointwiseTransport :
+  ∀ {r c s}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    {K : WeightedKernelData Row Col Scalar}
+    {L : WeightedSchurLaws K}
+    (A : ExactKernelAction K L)
+    (left right : Row → Col → Scalar) →
+  (∀ row col → left row col ≡ right row col) →
+  ∀ input →
+  evaluateEntries A left input ≡
+  evaluateEntries A right input
+exactKernelActionPointwiseTransport A =
+  evaluateEntriesPointwise A
 
 exactKernelActionTransportByIdentity :
   ∀ {r c s}
