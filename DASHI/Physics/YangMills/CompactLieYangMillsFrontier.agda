@@ -20,6 +20,13 @@ data CompactLieYMClaim : Set where
   weightedColumnImpliesDecay       : CompactLieYMClaim
   localLipschitzImpliesContraction : CompactLieYMClaim
 
+  uniformProductBridge             : CompactLieYMClaim
+  oneStepPolymerBudgetBridge       : CompactLieYMClaim
+  concreteStepVBridge              : CompactLieYMClaim
+  quantitativeAllScaleBridge       : CompactLieYMClaim
+  continuumOSLimitBridge           : CompactLieYMClaim
+  uniformGapSurvivalBridge         : CompactLieYMClaim
+
   compactInvariantMetric          : CompactLieYMClaim
   localExponentialChart           : CompactLieYMClaim
   quantitativeBCH                 : CompactLieYMClaim
@@ -49,6 +56,13 @@ claimLevel blockAverageStructuralCovariance = machineChecked
 claimLevel weightedColumnImpliesDecay = machineChecked
 claimLevel localLipschitzImpliesContraction = machineChecked
 
+claimLevel uniformProductBridge = machineChecked
+claimLevel oneStepPolymerBudgetBridge = machineChecked
+claimLevel concreteStepVBridge = machineChecked
+claimLevel quantitativeAllScaleBridge = machineChecked
+claimLevel continuumOSLimitBridge = machineChecked
+claimLevel uniformGapSurvivalBridge = machineChecked
+
 claimLevel compactInvariantMetric = standardImported
 claimLevel localExponentialChart = standardImported
 claimLevel quantitativeBCH = standardImported
@@ -74,6 +88,10 @@ claimLocallyPromotable claim = promotable (claimLevel claim)
 massGapDoesNotSelfPromote :
   claimLocallyPromotable positivePhysicalMassGap ≡ false
 massGapDoesNotSelfPromote = refl
+
+uniformGapBridgeDoesPromote :
+  claimLocallyPromotable uniformGapSurvivalBridge ≡ true
+uniformGapBridgeDoesPromote = refl
 
 su2AdjointIsLocallyPromotable :
   claimLocallyPromotable su2AdjointRealizesGenericAd ≡ true
