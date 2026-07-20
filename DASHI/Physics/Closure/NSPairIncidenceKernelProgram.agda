@@ -40,4 +40,5 @@ open import DASHI.Physics.Closure.NSCompactGammaAdmissiblePreservation public
 open import DASHI.Physics.Closure.NSCompactGammaTimeIntegrabilityBridge public
 open import DASHI.Physics.Closure.NSCompactGammaBKMTimeIntegrability public
 open import DASHI.Physics.Closure.NSCompactGammaHighestAlphaExpenditureCompletion public
+open import DASHI.Physics.Closure.NSCompactGammaDifferentialExpenditureProducer public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
