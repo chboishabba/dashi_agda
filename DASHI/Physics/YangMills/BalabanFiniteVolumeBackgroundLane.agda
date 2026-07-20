@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.BalabanFiniteVolumeBackgroundLane where
 -- local-Green + nonlinear-Lipschitz + common-factor implication.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanUniformResidualMajorant
@@ -20,6 +20,8 @@ record FiniteVolumeBackgroundProblem
     product : AssociativeOrderedProduct Bound
     criticalMap : Patch → State → State
     distance : State → State → Bound
+
+    lessEqualReflexive : ∀ value → LessEqual (order product) value value
 
     greenBound : Patch → Bound
     nonlinearLipschitz : Patch → Bound
@@ -69,17 +71,7 @@ patchContractionEstimate problem patch =
   where
     equalImpliesLess : ∀ {a b} → a ≡ b →
       LessEqual (order (product problem)) a b
-    equalImpliesLess refl =
-      reflexive problem _
-
-    reflexive :
-      FiniteVolumeBackgroundProblem Patch State Bound →
-      ∀ value → LessEqual (order (product problem)) value value
-    reflexive _ value = localBelowReflexive value
-
-    postulate
-      localBelowReflexive : ∀ value →
-        LessEqual (order (product problem)) value value
+    equalImpliesLess refl = lessEqualReflexive problem _
 
 record FiniteVolumeBackgroundConclusion
     (Patch State : Set) : Set₁ where
