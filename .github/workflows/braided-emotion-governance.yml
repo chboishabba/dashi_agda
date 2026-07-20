@@ -44,7 +44,21 @@ jobs:
           agda --version
 
       - name: Typecheck unified governance facade
-        run: agda -i . DASHI/Unified/BraidedEmotionGovernanceRegression.agda
+        run: |
+          mkdir -p ci-logs
+          agda -i . DASHI/Unified/BraidedEmotionGovernanceRegression.agda \
+            >ci-logs/unified-governance.log 2>&1 || {
+              tail -n 120 ci-logs/unified-governance.log
+              exit 1
+            }
+
+      - name: Upload unified typecheck log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: braided-emotion-agda-log
+          path: ci-logs/unified-governance.log
+          if-no-files-found: warn
 
       - name: Typecheck braided emotion regression
         run: agda -i . DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
