@@ -99,21 +99,19 @@ open PrefixRefinementReceipt public
 
 agreement-preservation-implies-isometry :
   ∀ {d : Nat} →
-  (r : PrefixRefinementReceipt d) →
+  PrefixRefinementReceipt d →
   AddressIsometryReceipt d
-agreement-preservation-implies-isometry {d} r =
+agreement-preservation-implies-isometry r =
   record
     { addressWarp = fineWarp r
-    ; preservesDistance = λ x y →
-        let open PrefixRefinementReceipt r in
-        cong (λ k → d Agda.Builtin.Nat.- k) (preservesAgreementDepth x y)
+    ; preservesDistance = preserves
     }
   where
-    cong :
-      ∀ {A B : Set} →
-      (f : A → B) →
-      ∀ {x y} → x ≡ y → f x ≡ f y
-    cong f refl = refl
+    preserves :
+      ∀ x y →
+      U369.distance (fineWarp r x) (fineWarp r y)
+      ≡ U369.distance x y
+    preserves x y rewrite preservesAgreementDepth r x y = refl
 
 ------------------------------------------------------------------------
 -- Combined geometric/MDL consumer surface.
@@ -132,8 +130,8 @@ record CrossPollinatedGeometricChart
 
     -- A chart which claims coarse/fine compatibility must supply the actual
     -- scale map; this adapter does not manufacture one from metric data alone.
-    FineSystem : Tower.ScaleSystem
-    CoarseSystem : Tower.ScaleSystem
+    FineSystem : Tower.ScaleSystem {ℓG} {ℓC} {ℓG}
+    CoarseSystem : Tower.ScaleSystem {ℓG} {ℓC} {ℓG}
     scaleCompatibility : Tower.ScaleMap FineSystem CoarseSystem
 
     -- The repository's current accepted W9 route is retained as provenance.
