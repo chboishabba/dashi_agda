@@ -25,6 +25,9 @@ POSTULATE_FREE = [
     YM / "SU3MatrixInstance.agda",
     YM / "SUNWilsonClassFunction.agda",
     YM / "SUNWilsonAction.agda",
+    YM / "FiniteReflectionPositivity.agda",
+    YM / "ReflectionPositiveBlocking.agda",
+    YM / "SUNWilsonReflectionPositivity.agda",
     YM / "BalabanFiniteInverseConsequences.agda",
     YM / "BalabanFiniteCoerciveGreen.agda",
     YM / "BalabanUniformNeumannAsymptoticResidual.agda",
@@ -67,6 +70,18 @@ EXPECTED_ASSIGNMENTS = {
     YM / "SUNWilsonAction.agda": {
         "sunWilsonActionGaugeInvarianceLevel": "machineChecked",
         "sunWilsonTraceAuthorityLevel": "standardImported",
+    },
+    YM / "FiniteReflectionPositivity.agda": {
+        "finiteReflectionPositivityLevel": "machineChecked",
+        "reflectionSquareFactorizationInputLevel": "standardImported",
+    },
+    YM / "ReflectionPositiveBlocking.agda": {
+        "reflectionPositiveBlockingLevel": "machineChecked",
+        "reflectionPositivePullbackInputLevel": "conditional",
+    },
+    YM / "SUNWilsonReflectionPositivity.agda": {
+        "sunWilsonReflectionPositivityLevel": "machineChecked",
+        "sunWilsonPeterWeylFactorizationLevel": "standardImported",
     },
     YM / "BalabanFiniteCoerciveGreen.agda": {
         "finiteCoerciveGreenAssemblyLevel": "machineChecked",
