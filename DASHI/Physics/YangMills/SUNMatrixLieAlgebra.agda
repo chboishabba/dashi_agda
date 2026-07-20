@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.SUNMatrixLieAlgebra where
 
 ------------------------------------------------------------------------
--- Traceless anti-Hermitian matrices with the commutator bracket.  Raw finite
+-- Traceless anti-Hermitian matrices with the commutator bracket. Raw finite
 -- matrix identities are isolated in a certified theory record; closure and the
 -- Lie-algebra carrier are then assembled without SU(2)-specific coordinates.
 ------------------------------------------------------------------------
@@ -103,7 +103,7 @@ record SUNMatrixLieElement
     {m c : Level} {N : Nat}
     {Matrix : Set m} {Complex : Set c}
     {groupTheory : CertifiedSUNMatrixTheory N Matrix Complex}
-    (lieTheory : CertifiedSUNMatrixLieTheory N groupTheory) : Set m where
+    (lieTheory : CertifiedSUNMatrixLieTheory N groupTheory) : Set (m ⊔ c) where
   constructor sunLieMatrix
   field
     lieMatrix : Matrix
