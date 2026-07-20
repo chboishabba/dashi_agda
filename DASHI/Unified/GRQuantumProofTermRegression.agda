@@ -5,10 +5,13 @@ open import Agda.Builtin.List using ([])
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Unified.GRQuantumProofTerms
+open import DASHI.Unified.GRQuantumStrictProofTerms using
+  (StrictSpinDoubleCoverProof; Preimage)
 import DASHI.Core.FiniteQuadraticMultiscale as Quadratic
 import DASHI.Geometry.FiniteCausalDiamond as Diamond
 import DASHI.Geometry.FiniteCausalDiamondClosed as DiamondClosed
 import DASHI.Algebra.FiniteQuaternionDoubleCover as QuaternionCover
+import DASHI.Algebra.FiniteQuaternionStrictCover as QuaternionStrict
 import DASHI.Algebra.Quantum.FiniteTreeWeyl as Tree
 import DASHI.Physics.Closure.PropositionEinsteinBridge as Einstein
 import DASHI.Physics.Closure.PropositionConstraintAlgebra as Constraints
@@ -44,6 +47,14 @@ finiteSpinXRotationFiber :
 finiteSpinXRotationFiber =
   QuaternionCover.rhoFiberIsTwoElement QuaternionCover.halfTurnX
 
+strictFiniteSpinCoverExists : StrictSpinDoubleCoverProof
+strictFiniteSpinCoverExists = QuaternionStrict.finiteQuaternionStrictSpinCover
+
+strictFiniteSpinZPreimage :
+  Preimage QuaternionCover.rho QuaternionCover.halfTurnZ
+strictFiniteSpinZPreimage =
+  QuaternionStrict.exactPreimage QuaternionCover.halfTurnZ
+
 treeProjectRefineEmpty : Tree.project (Tree.refine []) ≡ []
 treeProjectRefineEmpty = refl
 
@@ -76,4 +87,4 @@ exactFiniteBundleExists = Adapters.canonicalExactFiniteGRQuantumBundle
 
 terminalBoundaryText : String
 terminalBoundaryText =
-  "Regression proves the finite/model bundle composes.  No TerminalGRQuantumProof is synthesized without continuum, anomaly, low-energy, and empirical proof inhabitants."
+  "Regression proves the finite/model bundle composes.  No StrictTerminalGRQuantumProof is synthesized without continuum, anomaly, shared-substrate, low-energy, and empirical proof inhabitants."
