@@ -1,0 +1,82 @@
+name: DASHI multiscale theorem-depth check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Core/BasinFiniteDescent.agda'
+      - 'DASHI/Core/ApproximateMultiscaleNaturality.agda'
+      - 'DASHI/Core/ReversibleDissipativeKernelSplit.agda'
+      - 'DASHI/Core/TritCPRMultiscaleInstance.agda'
+      - 'DASHI/Core/CanonicalSpineRegistry.agda'
+      - 'DASHI/Core/MultiscaleTheoremDepthRegression.agda'
+      - 'DASHI/MDL/MultiscaleCodingTargets.agda'
+      - 'DASHI/Physics/DiscreteContinuumKernelTargets.agda'
+      - 'scripts/validate_multiscale_flagship_receipt.py'
+      - 'Docs/formal/MultiscaleTheoremDepthRoadmap.md'
+      - '.github/workflows/multiscale-theorem-depth-agda.yml'
+
+concurrency:
+  group: multiscale-depth-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check flagship validator syntax
+        run: python -m py_compile scripts/validate_multiscale_flagship_receipt.py
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: multiscale-theorem-depth-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+
+      - name: Check theorem-depth aggregate
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-multiscale-theorem-depth.log"
+            export AGDA_JOBS=4
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Core/BasinFiniteDescent.agda \
+              DASHI/Core/ApproximateMultiscaleNaturality.agda \
+              DASHI/Core/ReversibleDissipativeKernelSplit.agda \
+              DASHI/Core/TritCPRMultiscaleInstance.agda \
+              DASHI/MDL/MultiscaleCodingTargets.agda \
+              DASHI/Physics/DiscreteContinuumKernelTargets.agda \
+              DASHI/Core/MultiscaleTheoremDepthRegression.agda
+          ) > agda-multiscale-theorem-depth.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 320 agda-multiscale-theorem-depth.log
+          exit 0
+
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: multiscale-theorem-depth-agda-log
+          path: agda-multiscale-theorem-depth.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
