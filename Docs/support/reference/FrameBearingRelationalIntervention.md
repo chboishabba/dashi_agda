@@ -167,6 +167,18 @@ This ensures that lived experience is preserved, the frame becomes inspectable,
 causal explanations remain plural until tested, and outcomes feed back into the
 next model rather than being retrofitted as proof of the initial theory.
 
+## Validation root
+
+The focused compiler root remains:
+
+```text
+DASHI.Unified.NDimSheafLogisticCrossPollinationRegression
+```
+
+It now checks experience preservation, retained relational residuals, `9+1=10`,
+`9*2=18`, the material apply/observe cycle, evidence-gated `10 -> 11`, and the
+exact `196883+1=196884` arithmetic.
+
 ## Added modules
 
 - `DASHI.Promotion.MetacognitiveFrameBearingState`
