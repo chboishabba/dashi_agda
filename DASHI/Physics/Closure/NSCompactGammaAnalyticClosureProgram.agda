@@ -1,13 +1,16 @@
 module DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram where
 
-open import Agda.Primitive using (Level; lzero; Setω)
+open import Agda.Primitive using (lzero; Setω)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
+import DASHI.Analysis.FiniteWeightedKernelSums as Sums
+import DASHI.Physics.Closure.NSCompactGammaOffPacketSchurSplit as Split
 import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization as Major
 import DASHI.Physics.Closure.NSCompactGammaDifferentiatedTriadInstantiation as Triads
 import DASHI.Physics.Closure.NSCompactGammaFullShellSchur as FullShell
+import DASHI.Physics.Closure.NSCompactGammaTriadFullShellCoherence as Coherence
 import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge as Tail
 import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge as Galerkin
 import DASHI.Physics.Closure.NSCompactGammaAdmissiblePreservation as Admissible
@@ -16,11 +19,10 @@ import DASHI.Physics.Closure.NSCompactGammaBKMTimeIntegrability as BKM
 ------------------------------------------------------------------------
 -- Cross-pollinated compact-Gamma analytic closure.
 --
--- The earlier version of this module carried five opaque records, including an
--- arbitrary scalar-valued "full shell row bound", an undifferentiated Galerkin
--- convergence premise, wholesale path admissibility, and a free integrability
--- envelope.  The repository now has stronger owners for every one of those
--- seams.  This module composes those owners without weakening them.
+-- The earlier aggregate carried five opaque records.  The repository now has
+-- stronger owners for every seam.  This module composes those owners without
+-- weakening them and ties the cutoff-indexed differentiated atom lists to the
+-- exact pair-incidence folds used by the full-shell Schur certificates.
 ------------------------------------------------------------------------
 
 record AdmissibleInvariantRegionCertificate
@@ -49,8 +51,6 @@ record AdmissibleInvariantRegionCertificate
       ∀ K → Admissible.UsedShell selection K →
       Admissible.PacketEnergyPositivity S path K
 
-    -- The no-first-exit input is produced from the four analytic leaves above;
-    -- it is not accepted independently.
     deriveNoFirstExit :
       ∀ K (used : Admissible.UsedShell selection K) →
       Admissible.CompactGammaPathContinuity
@@ -147,9 +147,7 @@ galerkinAdmissibilityPassesToContinuum I =
     (closedAdmissibleLimit I)
 
 ------------------------------------------------------------------------
--- Coherence of the BKM path with the invariant-region path.  The BKM module is
--- intentionally self-contained, so the adapter records the exact carrier map
--- and path commuting square rather than identifying the two paths by prose.
+-- Coherence of the BKM path with the invariant-region path.
 ------------------------------------------------------------------------
 
 record CompactGammaBKMCoherence
@@ -169,32 +167,43 @@ record CompactGammaBKMCoherence
       mapState (BKM.path bkmData time) ≡
       Admissible.at path (mapTime time)
 
+    compactGammaEnvelopeOnState : State → Scalar A
     ValueCoherent : BKM.Value bkmData → Scalar A → Set
-    envelopeCoherent : Set
-    envelopeCoherence : envelopeCoherent
+
+    envelopeCoherence :
+      ∀ time →
+      ValueCoherent
+        (BKM.compactGammaEnvelope bkmData (BKM.path bkmData time))
+        (compactGammaEnvelopeOnState
+          (Admissible.at path (mapTime time)))
 
 open CompactGammaBKMCoherence public
 
 ------------------------------------------------------------------------
--- Final proof-relevant package.  Every field is now owned by the strongest
--- repository module available for that lane.
+-- Final proof-relevant package.
 ------------------------------------------------------------------------
 
 record CompactGammaAnalyticClosure : Setω where
   field
-    PairAtom Mode Vector Radius : Set
+    Pair Mode Vector Radius : Set
 
     arithmetic : AbsorptionArithmetic
     finiteMajorantArithmetic :
       Major.FiniteMajorantArithmetic arithmetic
 
-    differentiatedTriads :
+    differentiatedTriadsAt :
+      Nat → Nat →
       Triads.DifferentiatedTriadAtomFamily
-        PairAtom Mode Vector arithmetic finiteMajorantArithmetic
+        Pair Mode Vector arithmetic finiteMajorantArithmetic
 
     fullShellFamily :
       FullShell.FullShellFourierFamily
-        {i = lzero} Mode (Scalar arithmetic)
+        {i = lzero} Pair Mode (Scalar arithmetic)
+
+    triadFullShellCoherence :
+      Coherence.TriadFullShellCoherence
+        arithmetic finiteMajorantArithmetic
+        differentiatedTriadsAt fullShellFamily
 
     fullShellProgram :
       FullShell.FullShellSchurProgram fullShellFamily
@@ -246,36 +255,35 @@ record CompactGammaAnalyticClosure : Setω where
 open CompactGammaAnalyticClosure public
 
 ------------------------------------------------------------------------
--- Exported consequences: local majorization, exact full-shell Schur sums,
--- quantitative tail decay, actual Galerkin passage, invariant-region closure,
--- and final BKM continuation.
+-- Exported consequences.
 ------------------------------------------------------------------------
 
 closureNearResponseMajorized :
   (P : CompactGammaAnalyticClosure) →
+  (K N : Nat) →
   _≤_ (arithmetic P)
-    (Triads.concreteNearResponse (differentiatedTriads P))
-    (Triads.majorantActionOutput (differentiatedTriads P))
-closureNearResponseMajorized P =
+    (Triads.concreteNearResponse (differentiatedTriadsAt P K N))
+    (Triads.majorantActionOutput (differentiatedTriadsAt P K N))
+closureNearResponseMajorized P K N =
   Triads.analyticTriadsMajorizeNearResponse
     (arithmetic P)
     (finiteMajorantArithmetic P)
-    (differentiatedTriads P)
+    (differentiatedTriadsAt P K N)
 
 closureFullShellRowEstimate :
   (P : CompactGammaAnalyticClosure) →
   (K N : Nat) →
   (target : Mode P) →
-  _≤_ (FullShell.fullShellKernelAt (fullShellFamily P) K N)
-    (FullShell.rowWeightedSum
+  Sums._≤_ (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+    (Sums.rowWeightedSum
       (FullShell.fullShellKernelAt (fullShellFamily P) K N)
       target)
-    (FullShell.multiply
+    (Sums.multiply
       (FullShell.fullShellKernelAt (fullShellFamily P) K N)
-      (FullShell.rowConstant
+      (Sums.rowConstant
         (FullShell.certificateAt
           (FullShell.uniformSchur (fullShellProgram P)) K N))
-      (FullShell.rowWeight
+      (Sums.rowWeight
         (FullShell.fullShellKernelAt (fullShellFamily P) K N)
         target))
 closureFullShellRowEstimate P =
@@ -286,16 +294,16 @@ closureFullShellColumnEstimate :
   (P : CompactGammaAnalyticClosure) →
   (K N : Nat) →
   (source : Mode P) →
-  _≤_ (FullShell.fullShellKernelAt (fullShellFamily P) K N)
-    (FullShell.columnWeightedSum
+  Sums._≤_ (FullShell.fullShellKernelAt (fullShellFamily P) K N)
+    (Sums.columnWeightedSum
       (FullShell.fullShellKernelAt (fullShellFamily P) K N)
       source)
-    (FullShell.multiply
+    (Sums.multiply
       (FullShell.fullShellKernelAt (fullShellFamily P) K N)
-      (FullShell.columnConstant
+      (Sums.columnConstant
         (FullShell.certificateAt
           (FullShell.uniformSchur (fullShellProgram P)) K N))
-      (FullShell.colWeight
+      (Sums.colWeight
         (FullShell.fullShellKernelAt (fullShellFamily P) K N)
         source))
 closureFullShellColumnEstimate P =
@@ -306,7 +314,7 @@ closureQuantitativeTailBound :
   (P : CompactGammaAnalyticClosure) →
   (radius : Radius P) →
   _≤_ (arithmetic P)
-    (Tail.farShellTail
+    (Split.farShellTail
       (Tail.splitAt (radiusSplits P) radius))
     (Tail._·_ (tailProductArithmetic P)
       (Tail.epsilon
