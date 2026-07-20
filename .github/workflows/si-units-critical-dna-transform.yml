@@ -1,0 +1,24 @@
+name: SI units and critical DNA transform
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Units/**'
+      - 'Ontology/DNA/SantaLucia1998SI.agda'
+      - 'Ontology/DNA/CriticallySampledDNA4Transform.agda'
+      - 'Ontology/DNA/SIAndCriticalTransformRegression.agda'
+      - '.github/workflows/si-units-critical-dna-transform.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v27
+      - name: Typecheck canonical surfaces
+        run: |
+          nix develop --command agda -i . -l standard-library DASHI/Physics/Units/Everything.agda
+          nix develop --command agda -i . -l standard-library Ontology/DNA/CriticallySampledDNA4Transform.agda
+          nix develop --command agda -i . -l standard-library Ontology/DNA/SIAndCriticalTransformRegression.agda
