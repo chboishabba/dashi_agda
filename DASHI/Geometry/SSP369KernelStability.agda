@@ -76,7 +76,7 @@ identityPrefixKernel : ∀ {d} → PrefixMonotoneKernel d
 identityPrefixKernel =
   prefix-monotone-kernel
     (λ x → x)
-    (λ x y → NatP.≤-refl)
+    (λ x y → NatP.≤-reflexive refl)
 
 identity-distance-stable :
   ∀ {d} (x y : Address d) →
