@@ -36,18 +36,18 @@ jobs:
   typecheck-and-audit:
     runs-on: ubuntu-latest
     env:
-      AGDA_FLAGS: "--no-libraries --no-default-libraries --no-write-interfaces -i . -i /usr/share/agda-stdlib"
+      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i .agda-stdlib"
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
           show-progress: false
-      - name: Install Agda and standard library
+      - name: Install Agda and writable standard library
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
           agda --version
-          test -d /usr/share/agda-stdlib
+          cp -a /usr/share/agda-stdlib .agda-stdlib
       - name: Typecheck unified governance facade
         run: |
           mkdir -p ci-logs
