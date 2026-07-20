@@ -39,20 +39,33 @@ record PenumbralDiscriminantProperty
         D residue level
 
     groupElement : G
-    orderIsQuadraticDiscriminantMagnitude : Set
+    ElementOrder : G → Nat → Set
+    orderIsQuadraticDiscriminantMagnitude :
+      ElementOrder groupElement
+        (DiscriminantPropertyArithmetic.absoluteOrder arithmetic D1)
 
     gradedModule : Module
     irreducibleConstituent : Constituent
-    constituentOccurs : Set
-    constituentIrreducible : Set
+    OccursIn : Constituent → Module → Set
+    Irreducible : Constituent → Set
+    constituentOccurs : OccursIn irreducibleConstituent gradedModule
+    constituentIrreducible : Irreducible irreducibleConstituent
 
     traceValue : TraceValue
-    traceIsConstituentTrace : Set
+    TraceOf : G → Constituent → TraceValue → Set
+    traceIsConstituentTrace :
+      TraceOf groupElement irreducibleConstituent traceValue
 
     quadraticField : QuadraticField
-    fieldIsD1QuadraticField : Set
-    traceLiesInQuadraticField : Set
-    traceIsIrrational : Set
+    QuadraticFieldFor :
+      DiscriminantPropertyArithmetic.Discriminant arithmetic →
+      QuadraticField → Set
+    LiesIn : TraceValue → QuadraticField → Set
+    Irrational : TraceValue → Set
+
+    fieldIsD1QuadraticField : QuadraticFieldFor D1 quadraticField
+    traceLiesInQuadraticField : LiesIn traceValue quadraticField
+    traceIsIrrational : Irrational traceValue
 
 record DiscriminantPropertyStatus : Set where
   field
