@@ -11,10 +11,6 @@ import DASHI.Environment.QuantitiesConservation as Q
 import DASHI.Environment.SpatialTransport as Spatial
 import DASHI.Environment.SurrogateCalibration as Surrogate
 
-------------------------------------------------------------------------
--- The formal repository owns contracts and promotion gates.  The LES runtime
--- owns raster/vector ingestion, numerical models, optimisation, and exports.
-
 data RuntimeArtifactKind : Set where
   rasterLayer : RuntimeArtifactKind
   vectorLayer : RuntimeArtifactKind
@@ -62,7 +58,7 @@ record ModelAdapterReceipt : Set where
     runManifest : RuntimeArtifact
 open ModelAdapterReceipt public
 
-record PlanningRuntimeReceipt : Set where
+record PlanningRuntimeReceipt : Set₁ where
   constructor mkPlanningRuntimeReceipt
   field
     gisIngestion : GISIngestionReceipt
