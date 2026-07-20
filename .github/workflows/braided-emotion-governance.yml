@@ -5,10 +5,12 @@ on:
     paths:
       - "DASHI/Biology/BraidedEmotion*.agda"
       - "DASHI/Biology/*Governance*.agda"
+      - "DASHI/Culture/*Cultural*Admissibility.agda"
       - "DASHI/Culture/KimmererBraidingAcknowledgement.agda"
       - "DASHI/Culture/CulturalProvenanceBoundaryCore.agda"
+      - "DASHI/Promotion/*Governance*.agda"
       - "DASHI/Promotion/*BoundaryCore.agda"
-      - "DASHI/Unified/BraidedEmotionGovernanceRegression.agda"
+      - "DASHI/Unified/BraidedEmotion*Regression.agda"
       - "scripts/audit_governance_builtins_only.py"
       - "scripts/governance_builtins_allowlist.txt"
       - ".github/workflows/braided-emotion-governance.yml"
@@ -17,10 +19,12 @@ on:
     paths:
       - "DASHI/Biology/BraidedEmotion*.agda"
       - "DASHI/Biology/*Governance*.agda"
+      - "DASHI/Culture/*Cultural*Admissibility.agda"
       - "DASHI/Culture/KimmererBraidingAcknowledgement.agda"
       - "DASHI/Culture/CulturalProvenanceBoundaryCore.agda"
+      - "DASHI/Promotion/*Governance*.agda"
       - "DASHI/Promotion/*BoundaryCore.agda"
-      - "DASHI/Unified/BraidedEmotionGovernanceRegression.agda"
+      - "DASHI/Unified/BraidedEmotion*Regression.agda"
       - "scripts/audit_governance_builtins_only.py"
       - "scripts/governance_builtins_allowlist.txt"
       - ".github/workflows/braided-emotion-governance.yml"
@@ -56,12 +60,21 @@ jobs:
               exit 1
             }
 
-      - name: Upload unified typecheck log
+      - name: Typecheck derived governance semantics
+        run: |
+          agda $AGDA_FLAGS \
+            DASHI/Unified/BraidedEmotionDerivedGovernanceRegression.agda \
+            >ci-logs/derived-governance.log 2>&1 || {
+              tail -n 160 ci-logs/derived-governance.log
+              exit 1
+            }
+
+      - name: Upload governance typecheck logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: braided-emotion-agda-log
-          path: ci-logs/unified-governance.log
+          path: ci-logs/*.log
           if-no-files-found: warn
 
       - name: Typecheck braided emotion regression
@@ -88,5 +101,5 @@ jobs:
             --changed-from "$BASE_SHA" \
             --fail
 
-      - name: Report all legacy governance islands
+      - name: Report all legacy governance islands by domain
         run: python3 scripts/audit_governance_builtins_only.py .
