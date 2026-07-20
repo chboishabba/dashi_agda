@@ -2,3 +2,5 @@ module DASHI.Economics.SystemicCrisisSignalAll where
 
 import DASHI.Economics.SystemicCrisisSignalKernel
 import DASHI.Economics.SystemicCrisisSignalKernelTests
+import DASHI.Economics.SystemicCrisisCompressionBridge
+import DASHI.Economics.SystemicCrisisCompressionBridgeTests
