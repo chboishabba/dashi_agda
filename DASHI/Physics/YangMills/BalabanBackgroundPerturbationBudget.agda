@@ -1,14 +1,7 @@
 module DASHI.Physics.YangMills.BalabanBackgroundPerturbationBudget where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-
-------------------------------------------------------------------------
--- Producer for the relative Hessian perturbation constant delta.
---
--- Each geometric source of the background perturbation is bounded separately
--- on one common admissible small-field domain.  Their ordered sum is the delta
--- consumed by BalabanRelativeHessianCoercivity.
-------------------------------------------------------------------------
 
 record BackgroundPerturbationComponents
     (Index State Bound : Set) : Set₁ where
@@ -23,16 +16,13 @@ record BackgroundPerturbationComponents
     addMonotone : ∀ {left left′ right right′} →
       LessEqual left left′ → LessEqual right right′ →
       LessEqual (add left right) (add left′ right′)
-
     curvatureUpper transportUpper chartUpper gaugeUpper constraintUpper : Bound
-
     perturbationBelowComponents : ∀ index state →
       LessEqual (perturbationEnergy index state)
         (add (curvaturePart index state)
           (add (transportPart index state)
             (add (chartPart index state)
               (add (gaugePart index state) (constraintPart index state)))))
-
     curvatureBound : ∀ index state →
       LessEqual (curvaturePart index state)
         (scale curvatureUpper (normSq index state))
@@ -48,7 +38,6 @@ record BackgroundPerturbationComponents
     constraintBound : ∀ index state →
       LessEqual (constraintPart index state)
         (scale constraintUpper (normSq index state))
-
     combineScaled : ∀ radius →
       add (scale curvatureUpper radius)
         (add (scale transportUpper radius)
@@ -95,6 +84,5 @@ backgroundPerturbationBound dataSet index state
 
 backgroundPerturbationAssemblyLevel : ProofLevel
 backgroundPerturbationAssemblyLevel = machineChecked
-
 backgroundPerturbationComponentInputsLevel : ProofLevel
 backgroundPerturbationComponentInputsLevel = conditional
