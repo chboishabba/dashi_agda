@@ -1,7 +1,5 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketSchurSplit where
 
-open import Agda.Primitive using (Set₁)
-
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 
 ------------------------------------------------------------------------
