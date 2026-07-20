@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Biology.BraidedEmotionProcessBoundary as Emotion
 import DASHI.Biology.BraidedEmotionTheoryContention as Contention
 
 data EvidenceStatus : Set where
@@ -21,7 +22,7 @@ record EmotionEvidenceRow : Set where
   constructor mkEmotionEvidenceRow
   field
     claimLabel : String
-    theory : Contention.EmotionTheory
+    theory : Emotion.EmotionTheory
     scale : Contention.ExplanationScale
     status : EvidenceStatus
     populationOrContext : String
