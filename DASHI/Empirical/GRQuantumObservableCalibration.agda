@@ -3,7 +3,7 @@ module DASHI.Empirical.GRQuantumObservableCalibration where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Nat using (_≤_)
 
@@ -21,6 +21,12 @@ data PhysicalDimension : Set where
   energyDimension actionDimension frequencyDimension : PhysicalDimension
   velocityDimension curvatureDimension stressEnergyDimension : PhysicalDimension
 
+data PositiveNat : Set where
+  positive : Nat → PositiveNat
+
+positiveValue : PositiveNat → Nat
+positiveValue (positive predecessor) = suc predecessor
+
 record PhysicalUnit : Set where
   constructor physical-unit
   field
@@ -28,7 +34,7 @@ record PhysicalUnit : Set where
     symbol : String
     dimension : PhysicalDimension
     scaleNumerator : Nat
-    scaleDenominator : Nat
+    scaleDenominator : PositiveNat
     convention : String
     traceabilityReference : String
 open PhysicalUnit public
