@@ -59,7 +59,7 @@ hex4FactorRoundTrip = hexTruthToFactor-decodingRoundTrip hex-4
 ------------------------------------------------------------------------
 -- Compact aggregate receipt.
 
-record Base369TeslaPolyphaseReceipt : Set where
+record Base369TeslaPolyphaseReceipt : Set₁ where
   field
     refinementReceipt : BinaryTernaryRefinementReceipt
     characterReceipt : C3CharacterReceipt
