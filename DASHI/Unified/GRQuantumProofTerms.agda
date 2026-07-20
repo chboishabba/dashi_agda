@@ -2,14 +2,14 @@ module DASHI.Unified.GRQuantumProofTerms where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Unit using (⊤)
+open import Agda.Builtin.Unit using (⊤; tt)
 
 ------------------------------------------------------------------------
 -- Proposition-level replacement for the earlier Boolean closure manifest.
 --
--- A field of type Bool can name a desired result.  A field of type Set must be
--- inhabited by a proof term.  The records below are the common proof payloads
--- used by the constructive finite models and by conditional continuum lanes.
+-- Every named proposition below has a corresponding inhabitant.  A consumer
+-- cannot promote a closure merely by choosing the proposition type; it must
+-- supply the proof term as well.
 
 infixr 4 _⊎_
 data _⊎_ (A B : Set) : Set where
@@ -23,11 +23,11 @@ record _↔_ (A B : Set) : Set where
     backward : B → A
 open _↔_ public
 
-_≢_ : {A : Set} → A → A → Set
-x ≢ y = x ≡ y → ⊥
-
 -- Local empty type, kept builtin-only so this module has no stdlib dependency.
 data ⊥ : Set where
+
+_≢_ : {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
 
 ------------------------------------------------------------------------
 -- 1. Orthogonal multiscale closure -> unique quadratic functional.
@@ -74,12 +74,17 @@ record ChainAntichainLorentzProof : Set₁ where
     Null : Interval → Set
     finiteSpeedCone :
       (a b : Event) → Null (interval a b) → Set
+    finiteSpeedConeProof :
+      (a b : Event) →
+      (nullReceipt : Null (interval a b)) →
+      finiteSpeedCone a b nullReceipt
 
     spatialDimension : Nat
     spatialDimensionIsThree : spatialDimension ≡ 3
     timeDimension : Nat
     timeDimensionIsOne : timeDimension ≡ 1
     signatureUnique : Set
+    signatureUniqueProof : signatureUnique
 open ChainAntichainLorentzProof public
 
 ------------------------------------------------------------------------
@@ -170,12 +175,15 @@ record WaveLiftCCRProof : Set₁ where
     actionGrain : Scalar
 
     finiteTreeShiftLaw : Set
+    finiteTreeShiftLawProof : finiteTreeShiftLaw
     continuumLimit : Set
+    continuumLimitProof : continuumLimit
     canonicalCommutationRelation : Set
     continuumLimitYieldsCCR :
       finiteTreeShiftLaw →
       continuumLimit →
       canonicalCommutationRelation
+    canonicalCommutationRelationProof : canonicalCommutationRelation
 
     OrthogonalFamily : Set
     bornMeasure : HilbertState → Scalar
@@ -183,6 +191,9 @@ record WaveLiftCCRProof : Set₁ where
       (state : HilbertState) →
       bornMeasure state ≡ normSquared state
     pythagoreanProbabilityAdditivity : OrthogonalFamily → Set
+    pythagoreanProbabilityAdditivityProof :
+      (family : OrthogonalFamily) →
+      pythagoreanProbabilityAdditivity family
 open WaveLiftCCRProof public
 
 ------------------------------------------------------------------------
@@ -208,11 +219,17 @@ record EinsteinTensorProof : Set₁ where
     stressEnergy : DiscreteValuation → StressEnergy
 
     discreteToContinuumConvergence : Set
+    discreteToContinuumConvergenceProof : discreteToContinuumConvergence
     contractedBianchiIdentity : Set
+    contractedBianchiIdentityProof : contractedBianchiIdentity
     stressEnergyConservation : Set
+    stressEnergyConservationProof : stressEnergyConservation
     variationalSourceEquation : Set
+    variationalSourceEquationProof : variationalSourceEquation
     universalSpinTwoSelfCoupling : Set
+    universalSpinTwoSelfCouplingProof : universalSpinTwoSelfCoupling
     backgroundIndependence : Set
+    backgroundIndependenceProof : backgroundIndependence
 open EinsteinTensorProof public
 
 ------------------------------------------------------------------------
@@ -228,11 +245,17 @@ record ConstraintAlgebraProof : Set₁ where
     bracket : Operator → Operator → Operator
 
     momentumMomentumClosure : Set
+    momentumMomentumClosureProof : momentumMomentumClosure
     momentumHamiltonianClosure : Set
+    momentumHamiltonianClosureProof : momentumHamiltonianClosure
     hamiltonianHamiltonianClosure : Set
+    hamiltonianHamiltonianClosureProof : hamiltonianHamiltonianClosure
     metricDependentStructureFunctions : Set
+    metricDependentStructureFunctionsProof : metricDependentStructureFunctions
     decimationRelabellingEquivariance : Set
+    decimationRelabellingEquivarianceProof : decimationRelabellingEquivariance
     anomalyFreeQuantumRepresentation : Set
+    anomalyFreeQuantumRepresentationProof : anomalyFreeQuantumRepresentation
 open ConstraintAlgebraProof public
 
 ------------------------------------------------------------------------
@@ -246,12 +269,23 @@ record UVSpectralProof : Set₁ where
     Spectrum : Operator → Set
 
     finiteResolvableDepth : (region : Region) → Set
+    finiteResolvableDepthProof :
+      (region : Region) → finiteResolvableDepth region
     regionalHilbertDimensionBound : (region : Region) → Set
+    regionalHilbertDimensionBoundProof :
+      (region : Region) → regionalHilbertDimensionBound region
     regulatedSpectrumFinite : (operator : Operator) → Set
+    regulatedSpectrumFiniteProof :
+      (operator : Operator) → regulatedSpectrumFinite operator
     amplitudesConverge : Set
+    amplitudesConvergeProof : amplitudesConverge
     renormalizationPreservesBound : Set
+    renormalizationPreservesBoundProof : renormalizationPreservesBound
     lowEnergyLimitExists : Set
+    lowEnergyLimitExistsProof : lowEnergyLimitExists
     lowEnergyLimitMatchesRequiredPhysics : Set
+    lowEnergyLimitMatchesRequiredPhysicsProof :
+      lowEnergyLimitMatchesRequiredPhysics
 open UVSpectralProof public
 
 ------------------------------------------------------------------------
@@ -269,10 +303,15 @@ record TerminalGRQuantumProof : Set₁ where
     uvSpectrum : UVSpectralProof
 
     oneUnderlyingSubstrate : Set
+    oneUnderlyingSubstrateProof : oneUnderlyingSubstrate
     quantumReadingRecovered : Set
+    quantumReadingRecoveredProof : quantumReadingRecovered
     generalRelativisticReadingRecovered : Set
+    generalRelativisticReadingRecoveredProof :
+      generalRelativisticReadingRecovered
     empiricalCorrespondenceSupplied : Set
+    empiricalCorrespondenceSuppliedProof : empiricalCorrespondenceSupplied
 open TerminalGRQuantumProof public
 
 terminalProofHasNoDefault : TerminalGRQuantumProof → ⊤
-terminalProofHasNoDefault _ = Agda.Builtin.Unit.tt
+terminalProofHasNoDefault _ = tt
