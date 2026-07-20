@@ -31,22 +31,25 @@ permissions:
 jobs:
   typecheck-and-audit:
     runs-on: ubuntu-latest
+    env:
+      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i /usr/share/agda-stdlib"
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
           show-progress: false
 
-      - name: Install Agda
+      - name: Install Agda and standard library
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin >/dev/null
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
           agda --version
+          test -d /usr/share/agda-stdlib
 
       - name: Typecheck unified governance facade
         run: |
           mkdir -p ci-logs
-          agda --no-libraries --no-default-libraries -i . \
+          agda $AGDA_FLAGS \
             DASHI/Unified/BraidedEmotionGovernanceRegression.agda \
             >ci-logs/unified-governance.log 2>&1 || {
               tail -n 120 ci-logs/unified-governance.log
@@ -62,13 +65,13 @@ jobs:
           if-no-files-found: warn
 
       - name: Typecheck braided emotion regression
-        run: agda --no-libraries --no-default-libraries -i . DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
+        run: agda $AGDA_FLAGS DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
 
       - name: Typecheck body-memory governance regression
-        run: agda --no-libraries --no-default-libraries -i . DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
+        run: agda $AGDA_FLAGS DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
 
       - name: Typecheck Kimmerer acknowledgement
-        run: agda --no-libraries --no-default-libraries -i . DASHI/Culture/KimmererBraidingAcknowledgement.agda
+        run: agda $AGDA_FLAGS DASHI/Culture/KimmererBraidingAcknowledgement.agda
 
       - name: Reject new unapproved governance islands
         shell: bash
