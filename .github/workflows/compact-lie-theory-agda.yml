@@ -27,6 +27,10 @@ on:
       - 'Docs/CompactLieYangMills.md'
       - '.github/workflows/compact-lie-theory-agda.yml'
 
+concurrency:
+  group: compact-lie-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
