@@ -1,0 +1,59 @@
+name: GR quantum research authority
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/CompleteCarrierQuadraticUniqueness.agda'
+      - 'DASHI/Geometry/LargePosetContinuumLorentz31.agda'
+      - 'DASHI/Algebra/CliffordQuotientUniversalTheorem.agda'
+      - 'DASHI/Algebra/ContinuousSpin31LorentzCover.agda'
+      - 'DASHI/Algebra/Quantum/TreeHeisenbergScalingLimit.agda'
+      - 'DASHI/Physics/Closure/ContinuumCurvatureSourceSpinTwo.agda'
+      - 'DASHI/Physics/Closure/ConstraintRenormalizationLowEnergy.agda'
+      - 'DASHI/Unified/GRQuantumResearchAuthorityCutset.agda'
+      - 'DASHI/Unified/GRQuantumResearchAuthorityRegression.agda'
+      - 'DASHI/Unified/GRQuantumProofTermAtlas.agda'
+      - 'Docs/papers/GRQuantumResearchAuthorityCutset.md'
+      - '.github/workflows/gr-quantum-research-authority.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda-research-authority:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install \
+            --yes --quiet agda-bin agda-stdlib >/tmp/agda-install.log
+          cp -a /usr/share/agda-stdlib /tmp/agda-stdlib
+          chmod -R u+w /tmp/agda-stdlib
+          agda --version
+      - name: Type-check research authority atlas
+        run: |
+          set +e
+          agda \
+            --no-libraries \
+            -i . \
+            -i /tmp/agda-stdlib \
+            DASHI/Unified/GRQuantumProofTermAtlas.agda \
+            >/tmp/gr-quantum-research-authority.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            echo '--- Agda diagnostic tail ---'
+            tail -n 200 /tmp/gr-quantum-research-authority.log
+            exit "$status"
+          fi
+          cat /tmp/gr-quantum-research-authority.log
+      - name: Upload Agda diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gr-quantum-research-authority-diagnostic
+          path: /tmp/gr-quantum-research-authority.log
+          if-no-files-found: ignore
