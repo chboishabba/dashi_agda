@@ -74,3 +74,4 @@ import DASHI.Physics.YangMills.BalabanBetaNormalizationCalibration
 -- Group-generic algebraic instance and honest frontier ledger.
 import DASHI.Physics.YangMills.CompactLieExactSurface
 import DASHI.Physics.YangMills.CompactLieYangMillsFrontier
+import DASHI.Physics.YangMills.ConstructiveYangMillsNextSurface

@@ -8,12 +8,33 @@ on:
       - 'DASHI/Physics/YangMills/CompactSimpleClassification.agda'
       - 'DASHI/Physics/YangMills/SU2CompactLieAlgebraInstance.agda'
       - 'DASHI/Physics/YangMills/SU2AdjointGenericInstance.agda'
+      - 'DASHI/Physics/YangMills/SUNMatrix*.agda'
+      - 'DASHI/Physics/YangMills/SUNWilson*.agda'
+      - 'DASHI/Physics/YangMills/SU3MatrixInstance.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'DASHI/Physics/YangMills/BalabanWeightedGreenKernelDecay.agda'
       - 'DASHI/Physics/YangMills/BalabanCriticalMapLipschitzContraction.agda'
       - 'DASHI/Physics/YangMills/BalabanBackgroundFieldClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteInverseConsequences.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteCoerciveGreen.agda'
+      - 'DASHI/Physics/YangMills/BalabanUniformNeumannAsymptoticResidual.agda'
+      - 'DASHI/Physics/YangMills/BalabanGeometricPowerVanishing.agda'
+      - 'DASHI/Physics/YangMills/BalabanGeometricNeumannClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteVolumeBackgroundLane.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2FiniteBackgroundAssembly.agda'
+      - 'DASHI/Physics/YangMills/BalabanOneStepRGClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanStepVKPClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanAllScaleRGClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanOSMassGapClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanDashenGrossCalibration.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda'
+      - 'scripts/audit_constructive_yang_mills_levels.py'
       - 'Docs/CompactLieYangMills.md'
       - '.github/workflows/compact-lie-theory-agda.yml'
+
+concurrency:
+  group: compact-lie-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -24,6 +45,10 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+
+      - name: Audit proof-level boundaries
+        run: python scripts/audit_constructive_yang_mills_levels.py
+
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,12 +73,13 @@ jobs:
             export AGDA_JOBS=4
             scripts/run_agda29_parallel_check.sh \
               DASHI/Physics/YangMills/CompactLieExactSurface.agda \
+              DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda \
               DASHI/Physics/YangMills/CompactLieTheorySurface.agda \
               DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda
           ) > agda-compact-lie-theory.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 260 agda-compact-lie-theory.log
+          tail -n 320 agda-compact-lie-theory.log
           exit 0
 
       - name: Upload Agda log
