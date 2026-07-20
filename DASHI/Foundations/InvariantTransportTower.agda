@@ -1,17 +1,9 @@
 module DASHI.Foundations.InvariantTransportTower where
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (suc)
 
 import DASHI.Foundations.InvolutiveTernaryRenormalisation as R
-
-------------------------------------------------------------------------
--- Adjacent-scale invariant transport.
---
--- The transition invariant at each level is supplied by InvariantTower.  This
--- extension states that coarse graining transports its reading through an
--- explicit quotient/aggregation map rather than silently recomputing an
--- unrelated check at the next level.
 
 record TransportedInvariantTower
   (T : R.InvolutiveScaleTower)
@@ -38,5 +30,4 @@ transportedTransitionInvariant : ∀
   quotientValue J j
     (R.read (invariantTower J) j s)
 transportedTransitionInvariant J j s u
-  rewrite R.transition-invariant (invariantTower J) j s u =
-  Agda.Builtin.Equality.refl
+  rewrite R.transition-invariant (invariantTower J) j s u = refl
