@@ -132,9 +132,10 @@ criticalOrbitContainsBackground :
   GaugeEquivalent orbit fluctuation
     (backgroundFluctuation inputs background coarse)
 criticalOrbitContainsBackground inputs orbit background coarse fluctuation critical
-  rewrite backgroundUniqueOnGaugeSlice inputs background coarse
-    (gaugeFix orbit background coarse fluctuation)
-    (gaugeFixPreservesCritical orbit background coarse fluctuation critical) =
+  rewrite sym
+    (backgroundUniqueOnGaugeSlice inputs background coarse
+      (gaugeFix orbit background coarse fluctuation)
+      (gaugeFixPreservesCritical orbit background coarse fluctuation critical)) =
   gaugeFixEquivalent orbit background coarse fluctuation
 
 su2FiniteBackgroundAssemblyLevel : ProofLevel
