@@ -5,15 +5,10 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 open import DASHI.Geometry.FlatLorentzianModel using
   (Axis4; timeAxis; xAxis; yAxis; zAxis)
-open import DASHI.Unified.GRQuantumProofTerms
+import DASHI.Unified.GRQuantumProofTerms as ProofTerms
 
 ------------------------------------------------------------------------
 -- Concrete syntax and relations for Cl(3,1).
---
--- The quotient itself is represented by the generated congruence below rather
--- than postulated as an opaque carrier.  A later quotient/setoid backend may
--- form equivalence classes.  The finite 16-blade basis, grading, reversion sign,
--- Pin words, and even Spin words are explicit and executable.
 
 
 data ScalarSign : Set where
@@ -198,8 +193,7 @@ spinTZRotorWord : SpinElement
 spinTZRotorWord = spin-element (pin-element (unitT ∷ unitZ ∷ [])) refl
 
 ------------------------------------------------------------------------
--- The quotient universal property and global Spin -> SO theorem are explicit
--- authority payloads.  They are no longer represented by Boolean flags.
+-- Quotient and global cover authority payloads.
 
 record CliffordQuotientCompletion : Set₁ where
   field
@@ -207,13 +201,13 @@ record CliffordQuotientCompletion : Set₁ where
     quotientMap : CliffordWord → quotientCarrier
     relationSound :
       ∀ {left right} → left ≈Cl right → quotientMap left ≡ quotientMap right
-    universalProperty : CliffordUniversalProof
+    universalProperty : ProofTerms.CliffordUniversalProof
 open CliffordQuotientCompletion public
 
 record ConstructiveSpinCompletion : Set₁ where
   field
     cliffordQuotient : CliffordQuotientCompletion
-    spinDoubleCover : SpinDoubleCoverProof
+    spinDoubleCover : ProofTerms.SpinDoubleCoverProof
     twistedAdjointPreservesMetric : Set
     evenSubalgebraClosedUnderProduct : Set
     reversionSuppliesInverseOnSpin : Set
