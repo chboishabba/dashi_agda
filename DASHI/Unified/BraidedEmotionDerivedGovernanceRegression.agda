@@ -1,6 +1,6 @@
 module DASHI.Unified.BraidedEmotionDerivedGovernanceRegression where
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Promotion.DerivedGovernanceAdmissibility as Measurement
@@ -24,21 +24,27 @@ labelFeedbackBranches : Dynamics.BranchingWitness
 labelFeedbackBranches = Dynamics.labelFeedbackDoesNotDetermineNextState
 
 worldResistanceRevises :
-  Dynamics.labelledState
-  Dynamics.-[ Dynamics.resistantWorldObservation / Dynamics.reviseInterpretationAction ]→
-  Dynamics.reappraisedState
+  Dynamics._-[_/_]→_
+    Dynamics.labelledState
+    Dynamics.resistantWorldObservation
+    Dynamics.reviseInterpretationAction
+    Dynamics.reappraisedState
 worldResistanceRevises = Dynamics.worldResistanceCanRevisePrediction
 
 coRegulationRetainsAgency :
-  Dynamics.reappraisedState
-  Dynamics.-[ Dynamics.relationalObservation / Dynamics.seekCoRegulationAction ]→
-  Dynamics.coRegulatedState
+  Dynamics._-[_/_]→_
+    Dynamics.reappraisedState
+    Dynamics.relationalObservation
+    Dynamics.seekCoRegulationAction
+    Dynamics.coRegulatedState
 coRegulationRetainsAgency = Dynamics.coRegulationPreservesAgency
 
 actionChangesObservationField :
-  Dynamics.recurrentState
-  Dynamics.-[ Dynamics.changedWorldObservation / Dynamics.worldChangingAction ]→
-  Dynamics.changedWorldState
+  Dynamics._-[_/_]→_
+    Dynamics.recurrentState
+    Dynamics.changedWorldObservation
+    Dynamics.worldChangingAction
+    Dynamics.changedWorldState
 actionChangesObservationField = Dynamics.actionChangesFutureObservation
 
 projectionInsufficiency : Dynamics.ProjectionCollision
