@@ -35,6 +35,7 @@ POSTULATE_FREE = [
     YM / "BalabanFiniteVolumeBackgroundLane.agda",
     YM / "BalabanSU2FiniteBackgroundAssembly.agda",
     YM / "BalabanUniformGreenNonlinearProduct.agda",
+    YM / "BalabanSeparatedUniformGreenNonlinearBounds.agda",
     YM / "BalabanOneStepPolymerEstimate.agda",
     YM / "BalabanConcreteOneStepRG.agda",
     YM / "BalabanOneStepRGClosure.agda",
@@ -115,6 +116,10 @@ EXPECTED_ASSIGNMENTS = {
     YM / "BalabanUniformGreenNonlinearProduct.agda": {
         "uniformGreenNonlinearBridgeLevel": "machineChecked",
         "uniformGreenNonlinearAnalyticInputsLevel": "conjectural",
+    },
+    YM / "BalabanSeparatedUniformGreenNonlinearBounds.agda": {
+        "separatedUniformBoundsBridgeLevel": "machineChecked",
+        "separatedGreenAndNonlinearInputsLevel": "conjectural",
     },
     YM / "BalabanOneStepPolymerEstimate.agda": {
         "oneStepPolymerEstimateBridgeLevel": "machineChecked",
