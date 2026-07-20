@@ -26,5 +26,18 @@ jobs:
           test -n "$file"
           echo "path=${file%/Data/Product.agda}" >> "$GITHUB_OUTPUT"
       - name: Typecheck aggregate codec target
+        id: typecheck
+        shell: bash
         run: |
-          agda -i . -i '${{ steps.stdlib.outputs.path }}' DASHI/Codec/DNAConcreteValidation.agda
+          set +e
+          agda -i . -i '${{ steps.stdlib.outputs.path }}' DASHI/Codec/DNAConcreteValidation.agda 2>&1 | tee agda-typecheck.log
+          status=${PIPESTATUS[0]}
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit "$status"
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dna-concrete-agda-log
+          path: agda-typecheck.log
+          if-no-files-found: error
