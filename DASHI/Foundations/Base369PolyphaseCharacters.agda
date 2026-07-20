@@ -1,6 +1,6 @@
 module DASHI.Foundations.Base369PolyphaseCharacters where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
@@ -151,7 +151,7 @@ polyphaseCharacterAnalyticBoundary :
   PolyphaseCharacterAnalyticBoundary
 polyphaseCharacterAnalyticBoundary =
   mkPolyphaseCharacterAnalyticBoundary
-    false
+    true
     false
     refl
     false
