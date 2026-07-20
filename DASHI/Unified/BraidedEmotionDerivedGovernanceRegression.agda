@@ -1,0 +1,75 @@
+module DASHI.Unified.BraidedEmotionDerivedGovernanceRegression where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Promotion.DerivedGovernanceAdmissibility as Measurement
+import DASHI.Culture.DerivedCulturalUseAdmissibility as Culture
+import DASHI.Biology.BraidedEmotionOperationalSemantics as Dynamics
+import DASHI.Biology.BraidedEmotionEvidenceProvenance as Evidence
+
+proxyInterpretationRemainsAdmissible :
+  Measurement.AdmissibleInterpretation
+    Measurement.processedProxy
+    Measurement.proxyInterpretation
+proxyInterpretationRemainsAdmissible = Measurement.safeProxyWitness
+
+kimmererUseRemainsLimitedAnalogy :
+  Culture.AdmissibleCulturalUse
+    Culture.formalAnalogyMaterial
+    Culture.limitedFormalAnalogyUse
+kimmererUseRemainsLimitedAnalogy = Culture.kimmererAnalogyAdmissible
+
+labelFeedbackBranches : Dynamics.BranchingWitness
+labelFeedbackBranches = Dynamics.labelFeedbackDoesNotDetermineNextState
+
+worldResistanceRevises :
+  Dynamics.labelledState
+  Dynamics.-[ Dynamics.resistantWorldObservation / Dynamics.reviseInterpretationAction ]→
+  Dynamics.reappraisedState
+worldResistanceRevises = Dynamics.worldResistanceCanRevisePrediction
+
+coRegulationRetainsAgency :
+  Dynamics.reappraisedState
+  Dynamics.-[ Dynamics.relationalObservation / Dynamics.seekCoRegulationAction ]→
+  Dynamics.coRegulatedState
+coRegulationRetainsAgency = Dynamics.coRegulationPreservesAgency
+
+actionChangesObservationField :
+  Dynamics.recurrentState
+  Dynamics.-[ Dynamics.changedWorldObservation / Dynamics.worldChangingAction ]→
+  Dynamics.changedWorldState
+actionChangesObservationField = Dynamics.actionChangesFutureObservation
+
+projectionInsufficiency : Dynamics.ProjectionCollision
+projectionInsufficiency = Dynamics.noSingleProjectionReconstructsCompleteState
+
+structuredEvidenceReceipts :
+  Evidence.DialecticalEvidenceBraid.receipts
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ Evidence.canonicalEvidenceReceipts
+structuredEvidenceReceipts = Evidence.canonicalReceiptsAreStructured
+
+supportAndQualificationCoexist :
+  Evidence.DialecticalEvidenceBraid.supportingAndQualifyingReceiptsCoexist
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
+supportAndQualificationCoexist = refl
+
+disagreementIsPreserved :
+  Evidence.DialecticalEvidenceBraid.disagreementPreserved
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
+disagreementIsPreserved = refl
+
+noGlobalWinnerIsInferred :
+  Evidence.DialecticalEvidenceBraid.noGlobalWinnerInferred
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
+noGlobalWinnerIsInferred = refl
+
+noClinicalPromotionFromEvidence :
+  Evidence.DialecticalEvidenceBraid.noClinicalPromotion
+    Evidence.canonicalDialecticalEvidenceBraid
+  ≡ true
+noClinicalPromotionFromEvidence = refl
