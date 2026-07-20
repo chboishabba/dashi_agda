@@ -5,13 +5,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
--- Local sum.
 data _⊎_ (X Y : Set) : Set where
   inj₁ : X → X ⊎ Y
   inj₂ : Y → X ⊎ Y
-
-------------------------------------------------------------------------
--- Two competitors crossed with a binary partner/coalition coordinate.
 
 data Competitor : Set where
   A B : Competitor
@@ -32,9 +28,6 @@ AA = profile A unpaired
 AB = profile A paired
 BA = profile B unpaired
 BB = profile B paired
-
-------------------------------------------------------------------------
--- Exact finite selection, mutation and coalition laws.
 
 fitness : PopulationProfile → Nat
 fitness AA = 1
@@ -84,9 +77,6 @@ competitorMutationInvolutive AB = refl
 competitorMutationInvolutive BA = refl
 competitorMutationInvolutive BB = refl
 
-------------------------------------------------------------------------
--- Exact orbit classification for the selected finite reference process.
-
 data OrbitClass : Set where
   fixedA fixedB : OrbitClass
 
@@ -103,9 +93,6 @@ selectionReachesRepresentative AA = inj₁ refl
 selectionReachesRepresentative AB = inj₁ refl
 selectionReachesRepresentative BA = inj₂ refl
 selectionReachesRepresentative BB = inj₂ refl
-
-------------------------------------------------------------------------
--- Symbolic triadic observation of a four-state population carrier.
 
 data SelectionTrit : Set where
   negative neutral positive : SelectionTrit
@@ -127,7 +114,7 @@ record LogisticComparisonAuthority : Set₁ where
     finitePopulationComparison : Set
 
 record CoalitionPopulationReceipt : Set where
-  constructor coalitionPopulationReceipt
+  constructor mkCoalitionPopulationReceipt
   field
     fourProfilesChecked : Bool
     explicitFitnessChecked : Bool
@@ -145,6 +132,6 @@ record CoalitionPopulationReceipt : Set where
 
 coalitionPopulationReceipt : CoalitionPopulationReceipt
 coalitionPopulationReceipt =
-  coalitionPopulationReceipt
+  mkCoalitionPopulationReceipt
     true true true true true true false refl false refl
     "the C2 by C2 population/partner carrier has executable selection, mutation, payoff and orbit laws; comparison with the real logistic map requires an explicit analytic authority and symbolic-itinerary proof"
