@@ -1,0 +1,40 @@
+name: DASHI phase visualisation Agda
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Visualization/PhaseResidualProjection.agda"
+      - ".github/workflows/dashi-phase-visualisation-agda.yml"
+  push:
+    branches: [master]
+    paths:
+      - "DASHI/Visualization/PhaseResidualProjection.agda"
+      - ".github/workflows/dashi-phase-visualisation-agda.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: phase-visualisation-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh', 'DASHI/Visualization/PhaseResidualProjection.agda') }}
+      - name: Check phase residual and projection kernel
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export AGDA_JOBS=1
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Visualization/PhaseResidualProjection.agda
