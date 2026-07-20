@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.TriadicRepresentationMDL where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
