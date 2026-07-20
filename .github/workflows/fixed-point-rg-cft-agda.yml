@@ -70,7 +70,8 @@ jobs:
               DASHI/Physics/Closure/PhysicalRealComplexRGCFTRoute.agda \
               DASHI/Physics/Closure/PhysicalRGCFTEmpiricalAuthority.agda \
               DASHI/Physics/Closure/PhysicalRGCFTFullPhysicsBridge.agda \
-              DASHI/Physics/Closure/ShiftPhysicalRGCFTHandoff.agda
+              DASHI/Physics/Closure/ShiftPhysicalRGCFTHandoff.agda \
+              DASHI/Physics/Closure/PhysicalRGCFTRouteSurface.agda
           ) > agda-fixed-point-rg-cft.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
