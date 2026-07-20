@@ -1,10 +1,13 @@
 module DASHI.Combinatorics.SSP15FractranCompression where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Nat using (_≤_)
 open import Data.Product using (_×_; _,_)
+open import Data.Sum using (_⊎_)
 
 open import DASHI.Combinatorics.FractranCOL using (EV5; step; run)
 open import DASHI.Combinatorics.FractranComputationEquivalence
@@ -15,8 +18,8 @@ open import MonsterOntos using (SSP)
 ------------------------------------------------------------------------
 -- Fifteen SSP labels as a quotient/compression alphabet.
 --
--- A bare SSP label cannot losslessly encode every EV5 exponent vector.  It can
--- nevertheless serve as:
+-- A bare SSP label cannot be treated as a lossless encoding of every EV5
+-- exponent vector without an additional theorem. It can nevertheless serve as:
 --
 --   1. an outcome-preserving quotient key;
 --   2. the model/index part of a lossless label-plus-residual codec;
@@ -92,7 +95,7 @@ codec-roundtrip C = decode-encode C
 -- 3. Compression of transitions.
 --
 -- A state quotient induces a deterministic compressed transition only when
--- states sharing one SSP label also have the same next compressed label.  This
+-- states sharing one SSP label also have the same next compressed label. This
 -- is the exact congruence obligation that prevents an arbitrary hash from being
 -- mistaken for a dynamics-preserving quotient.
 ------------------------------------------------------------------------
@@ -174,9 +177,8 @@ record SSP15CompressionReceipt
       SSP15OutcomeQuotient ⊎ SSP15ResidualCodec
     transitionAuthority : SSP15TransitionCompression
     mdlNonWorse : totalBits compressed ≤ totalBits literal
-  where
-  open import Data.Sum using (_⊎_)
-  open import Data.Nat using (_≤_)
+
+open SSP15CompressionReceipt public
 
 ------------------------------------------------------------------------
 -- 6. Promotion boundary.
@@ -184,15 +186,37 @@ record SSP15CompressionReceipt
 
 record SSP15CompressionBoundary : Set₁ where
   field
-    bareLabelIsLosslessForAllEV5 : Set
-    outcomeQuotientTarget        : Set₁
-    residualCodecTarget          : Set₁
-    transitionCongruenceTarget   : Set₁
-    runCompressionTarget         : Set₁
+    bareLabelLosslessnessProved : Bool
+    bareLabelLosslessnessProvedIsFalse :
+      bareLabelLosslessnessProved ≡ false
+
+    outcomeQuotientSupported : Bool
+    outcomeQuotientSupportedIsTrue :
+      outcomeQuotientSupported ≡ true
+
+    residualCodecRequiredForLosslessness : Bool
+    residualCodecRequiredForLosslessnessIsTrue :
+      residualCodecRequiredForLosslessness ≡ true
+
+    transitionCongruenceRequired : Bool
+    transitionCongruenceRequiredIsTrue :
+      transitionCongruenceRequired ≡ true
+
+    outcomeQuotientTarget      : Set₁
+    residualCodecTarget        : Set₁
+    transitionCongruenceTarget : Set₁
+    runCompressionTarget       : Set₁
 
 canonicalSSP15CompressionBoundary : SSP15CompressionBoundary
 canonicalSSP15CompressionBoundary = record
-  { bareLabelIsLosslessForAllEV5 = ∀ state → Σ SSP (λ _ → EV5)
+  { bareLabelLosslessnessProved = false
+  ; bareLabelLosslessnessProvedIsFalse = refl
+  ; outcomeQuotientSupported = true
+  ; outcomeQuotientSupportedIsTrue = refl
+  ; residualCodecRequiredForLosslessness = true
+  ; residualCodecRequiredForLosslessnessIsTrue = refl
+  ; transitionCongruenceRequired = true
+  ; transitionCongruenceRequiredIsTrue = refl
   ; outcomeQuotientTarget = SSP15OutcomeQuotient
   ; residualCodecTarget = SSP15ResidualCodec
   ; transitionCongruenceTarget =
