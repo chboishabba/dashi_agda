@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Core.ApproximateMultiscaleNaturality where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -7,11 +6,6 @@ open import Data.Nat using (_≤_)
 open import Data.Nat.Properties as NatP
 
 open import DASHI.Core.MultiscaleMDL
-
-------------------------------------------------------------------------
--- A scale-indexed Nat-valued metric.  The existing 369 ultrametric is one
--- instance; analytic applications may supply norms or calibrated hybrid
--- distances separately.
 
 record TowerMetric (tower : MultiscaleCarrier) : Set₁ where
   field
@@ -36,9 +30,6 @@ record ApproximateKernelTower
       ≤ commutationError x
 open ApproximateKernelTower public
 
-------------------------------------------------------------------------
--- Exact naturality embeds into approximate naturality with zero error.
-
 exact-as-approximate :
   ∀ {tower} →
   (metric : TowerMetric tower) →
@@ -59,11 +50,6 @@ exact-as-approximate {tower} metric K =
       ≤ 0
     bound {j} x rewrite project-kernel K x =
       NatP.≤-reflexive (self-zero metric j (kernel K j (project tower x)))
-
-------------------------------------------------------------------------
--- Generic two-leg accumulation.  Repeated multiscale error control is built
--- by iterating this lemma; summability or vanishing of the resulting bound is
--- a separate analytic obligation.
 
 accumulate-two-errors :
   ∀ {tower}
@@ -91,6 +77,3 @@ record ControlledErrorFamily
     tendsToZero : Set
     summable : Set
 open ControlledErrorFamily public
-
--- `tendsToZero` and `summable` are proposition slots because their meaningful
--- definitions depend on the selected analytic number system and limit theory.
