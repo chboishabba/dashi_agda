@@ -1,23 +1,11 @@
 module DASHI.Geometry.TriadicExplodedTransformTheorems where
 
--- Constructive theorem tranche for the triadic exploded-transform lane.
---
--- This module proves the algebraic and finite/metric statements that do not
--- require continuum or empirical assumptions:
---
--- * affine-style warp identity, composition and inverse pullback laws;
--- * commutation of atomic transforms under strong support noninterference;
--- * a total codec partition-address <-> SSP369 address isomorphism;
--- * componentwise chart-cost bounds imply MDL nonincrease;
--- * local metric approximation on partition leaves assembles into a global
---   piecewise approximation with the same pointwise tolerance.
-
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat using (_≤_; z≤n; s≤s)
+open import Data.Nat using (_≤_)
 open import Data.Nat.Properties as NatP
 open import Data.Vec using (Vec; []; _∷_)
 
@@ -40,12 +28,13 @@ trans :
   x ≡ y → y ≡ z → x ≡ z
 trans refl yz = yz
 
+sym :
+  ∀ {ℓ} {A : Set ℓ} {x y : A} →
+  x ≡ y → y ≡ x
+sym refl = refl
+
 ------------------------------------------------------------------------
--- 1. Affine-style warp algebra.
---
--- Affineness is represented extensionally here: a consumer supplies a map,
--- an inverse map, and the two inverse laws.  Concrete matrix/vector affine
--- carriers can instantiate this record without changing the pullback proofs.
+-- Affine identity, composition and inverse laws.
 
 record AffineWarp (G : Set ℓG) : Set ℓG where
   field
@@ -107,12 +96,7 @@ pullback-inverse-right a s g c =
   cong (λ x → s x c) (rightInverse a g)
 
 ------------------------------------------------------------------------
--- 2. Disjoint atomic-support commutation.
---
--- Pointwise disjoint output supports alone are insufficient: the local warp
--- of one atom could sample inside the other atom's support.  The exact theorem
--- therefore uses strong noninterference, recording both output exclusivity and
--- source noninterference.
+-- Disjoint-support commutation with source noninterference.
 
 record StronglyNoninterfering
   (a b : Tower.AtomicTransform G) : Set ℓG where
@@ -151,8 +135,7 @@ atomic-commutes-under-noninterference a b ni s g c
 ... | true | true = ⊥-elim (exclusive ni g refl refl)
 
 ------------------------------------------------------------------------
--- 3. Codec partition-address <-> SSP369 address bridge.
-
+-- Codec partition-address <-> SSP369 address bridge.
 
 data CodecPartitionDigit : Set where
   branch3 : CodecPartitionDigit
@@ -193,13 +176,15 @@ fromSSPAddress (x ∷ xs) = fromSSPDigit x ∷ fromSSPAddress xs
 toSSP-fromSSP-address :
   ∀ {d} (a : U369.Address d) → toSSPAddress (fromSSPAddress a) ≡ a
 toSSP-fromSSP-address [] = refl
-toSSP-fromSSP-address (x ∷ xs) =
+toSSP-fromSSP-address (x ∷ xs)
+  rewrite toSSPDigit-fromSSPDigit x =
   cong (λ tail → x ∷ tail) (toSSP-fromSSP-address xs)
 
 fromSSP-toSSP-address :
   ∀ {d} (a : CodecPartitionAddress d) → fromSSPAddress (toSSPAddress a) ≡ a
 fromSSP-toSSP-address [] = refl
-fromSSP-toSSP-address (x ∷ xs) =
+fromSSP-toSSP-address (x ∷ xs)
+  rewrite fromSSPDigit-toSSPDigit x =
   cong (λ tail → x ∷ tail) (fromSSP-toSSP-address xs)
 
 codecAgreementDepth :
@@ -220,11 +205,13 @@ addressBridge-reflects-equality :
   toSSPAddress x ≡ toSSPAddress y → x ≡ y
 addressBridge-reflects-equality {x = x} {y = y} eq =
   trans
-    (cong fromSSPAddress eq)
-    (fromSSP-toSSP-address y)
+    (sym (fromSSP-toSSP-address x))
+    (trans
+      (cong fromSSPAddress eq)
+      (fromSSP-toSSP-address y))
 
 ------------------------------------------------------------------------
--- 4. Chart-specific MDL descent.
+-- Chart-specific MDL descent.
 
 record ChartCost : Set where
   constructor chartCost
@@ -253,21 +240,13 @@ chart-refinement-implies-mdl-nonincreasing bound =
     (sideNonincrease bound)
     (residualNonincrease bound)
 
--- A strict descent claim is intentionally explicit: at least one component
--- must provide a strict receipt.  This avoids treating every geometric split
--- as beneficial merely because it is admissible.
 record StrictChartMDLDescent (before after : ChartCost) : Set where
   field
     nonincrease : chartDescriptionLength after ≤ chartDescriptionLength before
     strictWitness : chartDescriptionLength after ≡ chartDescriptionLength before → ⊥
 
 ------------------------------------------------------------------------
--- 5. Metric-qualified piecewise-affine approximation.
---
--- This is the exact local-to-global theorem available without assuming a
--- particular continuum.  A consumer supplies a metric-like distance carrier,
--- a tolerance relation, a partition selector, and one local affine candidate
--- per leaf.  The assembled piecewise map inherits the local pointwise bound.
+-- Metric-qualified local-to-piecewise affine approximation.
 
 record MetricQualifiedApproximation
   (X : Set ℓX)
