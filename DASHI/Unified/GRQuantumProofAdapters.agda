@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (suc)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Unified.GRQuantumProofTerms
+open import DASHI.Unified.GRQuantumStrictProofTerms using (StrictSpinDoubleCoverProof)
 import DASHI.Core.MultiscaleMDL as MDL
 import DASHI.Core.FiniteQuadraticMultiscale as Quadratic
 import DASHI.Geometry.FiniteCausalDiamond as Diamond
@@ -13,6 +14,7 @@ import DASHI.Geometry.FiniteCausalDiamondClosed as DiamondClosed
 import DASHI.Geometry.FiniteCausalDiamondMinimality as DiamondMinimality
 import DASHI.Algebra.ConstructiveClifford as Clifford
 import DASHI.Algebra.FiniteQuaternionDoubleCover as QuaternionCover
+import DASHI.Algebra.FiniteQuaternionStrictCover as QuaternionStrict
 import DASHI.Algebra.FiniteQuaternionGroupReceipts as QuaternionUnits
 import DASHI.Algebra.Quantum.FiniteTreeWeyl as Tree
 import DASHI.Algebra.Quantum.FiniteQutritBornAdditivity as BornAdditivity
@@ -89,6 +91,7 @@ record ExactFiniteGRQuantumBundle : Set₁ where
     causalMinimality : DiamondMinimality.FiniteChainAntichainMinimalityReceipt
     cliffordSyntax : Set
     finiteSpinDoubleCover : SpinDoubleCoverProof
+    strictFiniteSpinDoubleCover : StrictSpinDoubleCoverProof
     quaternionUnitLaws : QuaternionUnits.FiniteQuaternionUnitReceipt
     treeShift : Tree.TreeShiftReceipt
     finiteBorn : Tree.FiniteBornReceipt
@@ -113,6 +116,7 @@ canonicalExactFiniteGRQuantumBundle =
     DiamondMinimality.canonicalFiniteChainAntichainMinimalityReceipt
     Clifford.constructiveCliffordScope
     QuaternionCover.finiteQuaternionSpinCover
+    QuaternionStrict.finiteQuaternionStrictSpinCover
     QuaternionUnits.canonicalFiniteQuaternionUnitReceipt
     Tree.canonicalTreeShiftReceipt
     Tree.canonicalFiniteBornReceipt
@@ -125,12 +129,11 @@ canonicalExactFiniteGRQuantumBundle =
     FlatQGR.flatQuantumGRInterfaceReceipt
     Observer.canonicalObserverWaveRoute
     Diagnostic.canonicalGRQuantumFiniteDiagnosticReceipt
-    "exact finite/model tranche only; Q8 -> V4 is the finite Spin subgroup cover, not the full continuum cover"
+    "exact finite/model tranche only; strict Q8 -> V4 is the finite Spin subgroup cover, not the full continuum cover"
 
 ------------------------------------------------------------------------
--- The exact assembly function for a terminal proof.  Every continuum and
--- empirical item is an explicit argument, so no module can synthesize a
--- TerminalGRQuantumProof from the finite bundle alone.
+-- The exact assembly function for the compatibility-level proposition terminal.
+-- Strict physical promotion additionally requires `StrictTerminalGRQuantumProof`.
 
 assembleTerminalGRQuantumProof :
   (quadratic : QuadraticUniquenessProof) →
@@ -191,7 +194,7 @@ remainingAuthority quadraticGate =
 remainingAuthority chainAntichainGate =
   "Prove continuum/large-poset dimensional uniqueness rather than only the exact five-event 1+3 diamond."
 remainingAuthority cliffordSpinGate =
-  "Lift the exact Q8 -> V4 subgroup cover to the Clifford quotient universal theorem, twisted-adjoint metric preservation, and continuous Spin(3,1) -> SO+(3,1) cover."
+  "Lift the exact strict Q8 -> V4 subgroup cover to the Clifford quotient universal theorem, twisted-adjoint metric preservation, and continuous Spin(3,1) -> SO+(3,1) cover."
 remainingAuthority waveCCRAndBornGate =
   "Supply Hilbert completion, operator topology, tree scaling limit, central commutator, and general Born additivity."
 remainingAuthority tensorEinsteinGate =
