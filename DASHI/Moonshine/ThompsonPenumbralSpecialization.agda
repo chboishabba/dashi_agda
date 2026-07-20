@@ -52,8 +52,17 @@ record ThompsonPenumbralClosure
 
     fourAvatars : ThompsonFourAvatarClosure
 
-    realizationUsesThompsonGroup : Set
-    identitySeriesIsThompsonSeries : Set
+    RealizationUsesThompsonGroup :
+      PenumbralMoonshineRealization formCarrier arithmetic
+        (ThompsonPenumbralDatum.lambda datum) support identityForm → Set
+    realizationUsesThompsonGroup :
+      RealizationUsesThompsonGroup moduleRealization
+
+    IdentitySeriesIsThompsonSeries :
+      VectorValuedModularCarrier.Vector formCarrier → Set
+    identitySeriesIsThompsonSeries :
+      IdentitySeriesIsThompsonSeries
+        (PenumbralForm.form identityForm)
 
 record ThompsonPenumbralBoundary : Set where
   field
