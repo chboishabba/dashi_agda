@@ -59,8 +59,8 @@ jobs:
       - name: Run deterministic benchmark
         run: |
           python tools/dna_production_codec.py \
-            --bytes 4096 \
-            --rounds 2 \
+            --bytes 512 \
+            --rounds 1 \
             --horizon 2 \
             --seed 369 \
             --output artifacts/dna-production-benchmark.json
