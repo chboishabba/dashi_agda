@@ -48,9 +48,9 @@ record IntrinsicConstraintGeneratorDerivation
   (geometry : CQSB.ContractionQuadraticToSignatureBridgeTheorem) : Setω where
   field
     reconstructed : GeometryConstraintReconstruction geometry
-    HamiltonianGeneratedFromGeometry : Set
-    MomentumGeneratedFromGeometry : Set
-    bracketsGeneratedFromGeometry : Set
-    hamiltonianGeneratedFromGeometry : HamiltonianGeneratedFromGeometry
-    momentumGeneratedFromGeometry : MomentumGeneratedFromGeometry
-    bracketsGeneratedFromGeometry : bracketsGeneratedFromGeometry
+    HamiltonianGeneration : Set
+    MomentumGeneration : Set
+    BracketGeneration : Set
+    hamiltonianGeneratedFromGeometry : HamiltonianGeneration
+    momentumGeneratedFromGeometry : MomentumGeneration
+    bracketsGeneratedFromGeometry : BracketGeneration
