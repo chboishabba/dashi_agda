@@ -38,16 +38,21 @@ jobs:
 
       - name: Install Agda
         run: |
-          sudo apt-get update
-          sudo apt-get install -y agda-bin
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin >/dev/null
           agda --version
 
-      - name: Typecheck canonical governance facade
-        run: |
-          agda -i . DASHI/Unified/BraidedEmotionGovernanceRegression.agda
-          agda -i . DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
-          agda -i . DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
-          agda -i . DASHI/Culture/KimmererBraidingAcknowledgement.agda
+      - name: Typecheck unified governance facade
+        run: agda -i . DASHI/Unified/BraidedEmotionGovernanceRegression.agda
+
+      - name: Typecheck braided emotion regression
+        run: agda -i . DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
+
+      - name: Typecheck body-memory governance regression
+        run: agda -i . DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
+
+      - name: Typecheck Kimmerer acknowledgement
+        run: agda -i . DASHI/Culture/KimmererBraidingAcknowledgement.agda
 
       - name: Reject new unapproved governance islands
         shell: bash
