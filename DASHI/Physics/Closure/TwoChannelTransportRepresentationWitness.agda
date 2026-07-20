@@ -12,6 +12,7 @@ module DASHI.Physics.Closure.TwoChannelTransportRepresentationWitness where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Primitive using (lzero)
 open import Data.Nat using (_+_; _≤_)
 open import Data.Nat.Properties using (+-comm; ≤-refl)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
@@ -133,7 +134,7 @@ transportMDLRepresentativeSelection =
 ------------------------------------------------------------------------
 -- The same carrier packaged through the existing PhysicalTheory interface.
 
-fineTransportTheory : PT.PhysicalTheory _
+fineTransportTheory : PT.PhysicalTheory lzero
 fineTransportTheory =
   record
     { State = FineTransportState
@@ -147,7 +148,7 @@ fineTransportTheory =
     ; recoveredLaw = λ x → projectTransport (fineTransportStep x) ≡ projectTransport x
     }
 
-coarseTransportTheory : PT.PhysicalTheory _
+coarseTransportTheory : PT.PhysicalTheory lzero
 coarseTransportTheory =
   record
     { State = CoarseTransportState
