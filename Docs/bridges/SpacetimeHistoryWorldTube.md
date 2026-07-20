@@ -2,7 +2,7 @@
 
 ## Status
 
-Candidate-only geometry and empirical bridge. This tranche does not claim exact location recovery, a complete reconstruction of lived experience, or surveillance authority.
+Candidate-only geometry and empirical bridge. This tranche does not claim exact location recovery, a complete reconstruction of lived experience, exact 3D reconstruction, identity inference, or surveillance authority.
 
 ## Formal carrier
 
@@ -37,6 +37,39 @@ carrier. That existing carrier keeps body × time × place × relation × instit
 
 The accuracy radius becomes world-tube thickness rather than false coordinate precision. Vendor activity labels remain provenance-bearing inferences rather than ground truth. Missing rows are acknowledged at dataset level.
 
+## Stereo4D measurement and reconstruction layer
+
+The dynamic visual reconstruction extension explicitly credits:
+
+> Linyi Jin, Richard Tucker, Zhengqi Li, David Fouhey, Noah Snavely, and Aleksander Holynski. **Stereo4D: Learning How Things Move in 3D from Internet Stereo Videos.** arXiv:2412.09621v1, 2024.
+
+The formal modules are:
+
+- `DASHI.Vision.Stereo4DDynamicReconstructionBridge`
+- `DASHI.Vision.Stereo4DDynamicReconstructionRegression`
+
+Stereo4D contributes a measurement-and-reconstruction layer rather than another display projection. Its pipeline combines VR180 stereo frames, shot segmentation, camera-pose estimation, stereo calibration, disparity/depth estimation, long-range 2D tracks, world-frame lifting, ray-wise temporal correction, consistency filtering, and dynamic point-cloud construction.
+
+The bridge types the paper's main distinctions:
+
+- `StereoFrameReceipt` preserves the left/right frames, camera pose, rig calibration, and disparity provenance;
+- `DynamicPointObservation` separates image coordinates from pseudo-metric world coordinates and carries depth, tracking, visibility, and confidence fields;
+- `RayCorrectionReceipt` records correction along the camera ray together with static-consistency, dynamic-acceleration, and disparity-faithfulness terms;
+- `ReconstructionFilterReceipt` records stereo, cycle, overlap, semantic-drift, cross-fade, and synthetic-overlay checks;
+- `DynamicReconstruction` assembles a candidate-only pseudo-metric reconstruction;
+- `QueryTimeMotionPrediction` types DynaDUSt3R-style pointmap and motion-map predictions at an intermediate query time;
+- `HistoryEnrichmentReceipt` is the narrow seam into the personal world-tube carrier.
+
+The integration is intentionally asymmetric. A Google Timeline observation supplies a coarse subject-level mobility trace. A Stereo4D-style reconstruction supplies local camera-relative and world-frame scene trajectories within a visual episode. The latter may enrich the former with local geometry or motion evidence, but cannot silently replace it.
+
+In particular, the formalism keeps three roles distinct:
+
+1. **camera-rig motion** — movement of the observing coordinate system;
+2. **scene-point motion** — static or dynamic motion reconstructed in the world frame;
+3. **candidate subject motion** — a separately justified association between a reconstructed track and the person whose longitudinal history is being represented.
+
+This prevents the common category error in which every moving image feature is treated as movement of the timeline subject, or camera movement is mistaken for scene movement.
+
 ## Projection family
 
 The formal projection family distinguishes:
@@ -49,6 +82,13 @@ The formal projection family distinguishes:
 
 This gives a typed version of the dimensional analogy: an observer ordinarily encounters a present section, while the accumulated archive can be rendered as a single worm-like or braided history object.
 
+Stereo4D-derived dynamic tracks can be rendered inside one or more such sections, producing a nested structure:
+
+- the personal world-tube records where the subject may have been over long time scales;
+- each visual episode may contain a local dynamic 3D scene;
+- each scene contains multiple point trajectories and confidence-bearing motion roles;
+- the final display remains a projection of these carriers, not the carriers themselves.
+
 ## Fail-closed boundaries
 
 The tranche rejects by construction:
@@ -57,8 +97,14 @@ The tranche rejects by construction:
 - complete-life recovery from mobility data;
 - identifying any projection with the underlying history;
 - treating vendor inference as experience;
+- treating pseudo-metric reconstruction as exact metric ground truth;
+- claiming that an image pair uniquely determines the real 3D world;
+- identifying a reconstructed scene-point track with lived personal history;
+- inferring identity or authority from a visual track;
 - promoting a personal archive into surveillance authority.
 
-## Regression surface
+## Regression surfaces
 
 `DASHI.Geometry.SpacetimeHistoryWorldTubeRegression` provides canonical witnesses that the candidate-only, uncertainty, missingness, non-completeness, present-slice, and non-authority flags reduce to their intended values.
+
+`DASHI.Vision.Stereo4DDynamicReconstructionRegression` adds canonical witnesses for pseudo-metric/non-exact reconstruction, learned-prior/non-exact query-time motion, explicit camera/scene/subject role separation, and the rule that visual enrichment does not replace the longitudinal timeline.
