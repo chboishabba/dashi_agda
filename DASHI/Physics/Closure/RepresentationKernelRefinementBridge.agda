@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.RepresentationKernelRefinementBridge where
 -- Consolidates the new canonical compatibility interface with the pre-existing
 -- DASHI.Physics.Refinement commuting-square spine.
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Primitive using (Level; lsuc)
 
 import DASHI.Physics.PhysicalTheory as PT
@@ -30,7 +31,7 @@ refinementToRepresentationKernelCompatibility :
     {coarse fine : PT.PhysicalTheory ℓ}
     {refinement : Refinement.RefinementStep coarse fine} →
   ObservableRefinementBridge coarse fine refinement →
-  RKC.RepresentationKernelCompatibility
+  RKC.RepresentationKernelCompatibility {ℓ}
 refinementToRepresentationKernelCompatibility
   {coarse = coarse}
   {fine = fine}
