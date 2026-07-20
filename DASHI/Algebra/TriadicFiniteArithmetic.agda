@@ -116,7 +116,31 @@ leftInverse (zer ∷ xs) rewrite leftInverse xs = refl
 leftInverse (pos ∷ xs) rewrite leftInverse xs = refl
 
 ------------------------------------------------------------------------
--- Remaining carry-locality laws.
+-- Carry addition is local with respect to quotient reduction.
+
+reduce-addWithCarry :
+  ∀ {n : Nat} →
+  (carry : Trit) →
+  (x y : Q.Residue3Pow (suc n)) →
+  Q.reduce (addWithCarry carry x y)
+  ≡ addWithCarry carry (Q.reduce x) (Q.reduce y)
+reduce-addWithCarry {zero} carry (x ∷ []) (y ∷ [])
+  with fullAdd carry x y
+... | output , nextCarry = refl
+reduce-addWithCarry {suc n} carry (x ∷ xs) (y ∷ ys)
+  with fullAdd carry x y
+... | output , nextCarry
+  rewrite reduce-addWithCarry nextCarry xs ys = refl
+
+reduce-addResidue :
+  ∀ {n : Nat} →
+  (x y : Q.Residue3Pow (suc n)) →
+  Q.reduce (addResidue x y)
+  ≡ addResidue (Q.reduce x) (Q.reduce y)
+reduce-addResidue = reduce-addWithCarry zer
+
+------------------------------------------------------------------------
+-- Remaining finite-group laws.
 
 record TriadicArithmeticLawReceipt (n : Nat) : Set where
   field
@@ -128,11 +152,6 @@ record TriadicArithmeticLawReceipt (n : Nat) : Set where
     commutative :
       (x y : Q.Residue3Pow n) →
       addResidue x y ≡ addResidue y x
-
-    reductionCompatibility :
-      (x y : Q.Residue3Pow (suc n)) →
-      Q.reduce (addResidue x y)
-      ≡ addResidue (Q.reduce x) (Q.reduce y)
 
 open TriadicArithmeticLawReceipt public
 
@@ -156,8 +175,8 @@ finiteAdditiveGroup n laws =
 
 arithmeticStatement : String
 arithmeticStatement =
-  "Balanced-ternary addition modulo 3^n is implemented by a carry full-adder with overflow discarded at depth n; zero identity and digitwise additive inverse are checked."
+  "Balanced-ternary addition modulo 3^n is implemented by a carry full-adder with overflow discarded at depth n; zero identity, digitwise additive inverse, and compatibility with quotient reduction are checked."
 
 arithmeticBoundary : String
 arithmeticBoundary =
-  "Associativity, commutativity, and reduction/addition compatibility remain named TriadicArithmeticLawReceipt obligations until their carry-locality inductions are discharged in the active Agda toolchain."
+  "Associativity and commutativity remain named TriadicArithmeticLawReceipt obligations until their carry-locality proofs are discharged in the active Agda toolchain."
