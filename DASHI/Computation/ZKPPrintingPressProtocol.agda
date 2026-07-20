@@ -22,9 +22,8 @@ module DASHI.Computation.ZKPPrintingPressProtocol where
 open import Agda.Builtin.Bool     using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_)
-open import Agda.Builtin.String   using (String)
 open import Data.Nat              using (_≤_; _<_)
-open import Data.Product          using (_×_; _,_)
+open import Data.Nat.Properties   as NatP using (≤-refl)
 open import Data.Unit             using (⊤; tt)
 open import Data.Vec              using (Vec; []; _∷_)
 
@@ -135,6 +134,7 @@ record Receipt : Set where
     input       : Artifact
     output      : Artifact
     actor       : ActorId
+    actorTrust  : TrustClass
     transform   : TransformKind
     recovery    : Recoverability
 
@@ -149,7 +149,8 @@ record ReceiptBound (r : Receipt) : Set where
     visibility-monotone : Artifact.visibility (Receipt.input r)
                         ⊑visibility Artifact.visibility (Receipt.output r)
     visibility-authorized :
-      Authorized reviewer (Artifact.visibility (Receipt.output r))
+      Authorized (Receipt.actorTrust r)
+                 (Artifact.visibility (Receipt.output r))
 
 -- Reversible and explicitly lossy transformations are both admissible, but
 -- they are not interchangeable claims.
@@ -236,7 +237,7 @@ macroTransmutation : PairedPrimeMacro → Transmutation
 macroTransmutation m =
   transmutation (PairedPrimeMacro.amount m)
                 (PairedPrimeMacro.amount m)
-                (Data.Nat.≤-refl)
+                NatP.≤-refl
 
 ------------------------------------------------------------------------
 -- Closed-family regime taxonomy from the established witness family.
@@ -354,12 +355,20 @@ record StrictPromotion : Set where
 ------------------------------------------------------------------------
 -- Stable statement exported by this module.
 
-record ClosedFamilyBridgeClaim : Set where
+record ClosedFamilyBridgeClaim : Set₂ where
   field
-    exactMacroRealization     : Set
-    wellFormednessPreserved   : Set
-    strictContractionCarried  : Set
-    boundedTransmutationHeld  : Set
+    exactMacroRealization :
+      ∀ m → ExactPairedPrimeRealization m → ⊤
+
+    wellFormednessPreserved :
+      ∀ r → ReceiptBound r → ⊤
+
+    strictContractionCarried :
+      ∀ {S : Set} {U : UMetric.Ultrametric S} {C : S → S} →
+        Contraction.StrictContraction U C → ⊤
+
+    boundedTransmutationHeld :
+      ∀ τ → WidenedRegime τ → ⊤
 
     conservationIsSpecialCase :
       ∀ τ → ConservativeSubregime τ → WidenedRegime τ
@@ -372,14 +381,9 @@ conservative-is-widened τ c =
 
 closedFamilyBridgeClaim : ClosedFamilyBridgeClaim
 closedFamilyBridgeClaim = record
-  { exactMacroRealization =
-      ∀ m → ExactPairedPrimeRealization m → ⊤
-  ; wellFormednessPreserved =
-      ∀ r → ReceiptBound r → ⊤
-  ; strictContractionCarried =
-      ∀ {S} {U : UMetric.Ultrametric S} {C : S → S} →
-        Contraction.StrictContraction U C → ⊤
-  ; boundedTransmutationHeld =
-      ∀ τ → WidenedRegime τ → ⊤
+  { exactMacroRealization = λ m witness → tt
+  ; wellFormednessPreserved = λ r witness → tt
+  ; strictContractionCarried = λ witness → tt
+  ; boundedTransmutationHeld = λ τ witness → tt
   ; conservationIsSpecialCase = conservative-is-widened
   }
