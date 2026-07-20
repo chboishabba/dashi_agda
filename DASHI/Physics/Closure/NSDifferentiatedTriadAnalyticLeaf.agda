@@ -30,7 +30,10 @@ record TriadAnalyticLaws
     lerayProject : Mode → Vector → Vector
 
     ≤-trans : ∀ {x y z} → x ≤ y → y ≤ z → x ≤ z
-    +-mono : ∀ {a b c d} → a ≤ b → c ≤ d → (a + c) ≤ (b + d)
+    +-mono : ∀ {a b c d} → x ≤ y → c ≤ d → (a + c) ≤ (b + d)
+      where
+      x = a
+      y = b
 
     norm-vectorAdd :
       ∀ x y → norm (vectorAdd fourier x y) ≤ (norm x + norm y)
@@ -51,8 +54,9 @@ biot-savart-bound :
     {Mode : Set m} {Vector : Set v} {Scalar : Set s}
     (A : TriadAnalyticLaws Mode Vector Scalar)
     (p : Mode) (a : Vector) →
-  norm A (biotSavartVelocity (fourier A) p a)
-    ≤ (inverseNormSquared (fourier A) p * (modeNorm A p * norm A a))
+  _≤_ A
+    (norm A (biotSavartVelocity (fourier A) p a))
+    (inverseNormSquared (fourier A) p * modeNorm A p * norm A a)
 biot-savart-bound A = inverse-square-cross-bound A
 
 projectedInteraction :
@@ -74,8 +78,13 @@ interactionMajorant :
   TriadAnalyticLaws Mode Vector Scalar →
   Mode → Mode → Vector → Vector → Scalar
 interactionMajorant A p q a b =
-  (inverseNormSquared (fourier A) p * modeNorm A p)
-  * (modeNorm A q * (norm A a * norm A b))
+  _*_ A
+    (_*_ A
+      (inverseNormSquared (fourier A) p)
+      (modeNorm A p))
+    (_*_ A
+      (modeNorm A q)
+      (_*_ A (norm A a) (norm A b)))
 
 record ProjectedInteractionBound
     {m v s : Level}
@@ -84,8 +93,9 @@ record ProjectedInteractionBound
   field
     projected-interaction-bound :
       ∀ k p q a b →
-      norm A (projectedInteraction A k p q a b)
-        ≤ interactionMajorant A p q a b
+      _≤_ A
+        (norm A (projectedInteraction A k p q a b))
+        (interactionMajorant A p q a b)
 
 open ProjectedInteractionBound public
 
@@ -95,8 +105,9 @@ projected-interaction-bound-theorem :
     (A : TriadAnalyticLaws Mode Vector Scalar)
     (P : ProjectedInteractionBound A)
     (k p q : Mode) (a b : Vector) →
-  norm A (projectedInteraction A k p q a b)
-    ≤ interactionMajorant A p q a b
+  _≤_ A
+    (norm A (projectedInteraction A k p q a b))
+    (interactionMajorant A p q a b)
 projected-interaction-bound-theorem A P = projected-interaction-bound P
 
 ------------------------------------------------------------------------
@@ -121,8 +132,9 @@ differentiatedTriadMajorant :
   Mode → Mode →
   Vector → Vector → Vector → Vector → Scalar
 differentiatedTriadMajorant A p q uP uQ hP hQ =
-  interactionMajorant A p q hP uQ
-  + interactionMajorant A p q uP hQ
+  _+_ A
+    (interactionMajorant A p q hP uQ)
+    (interactionMajorant A p q uP hQ)
 
 differentiated-product-bound :
   ∀ {m v s}
@@ -131,8 +143,9 @@ differentiated-product-bound :
     (P : ProjectedInteractionBound A)
     (k p q : Mode)
     (uP uQ hP hQ : Vector) →
-  norm A (differentiatedProjectedTriad A k p q uP uQ hP hQ)
-    ≤ differentiatedTriadMajorant A p q uP uQ hP hQ
+  _≤_ A
+    (norm A (differentiatedProjectedTriad A k p q uP uQ hP hQ))
+    (differentiatedTriadMajorant A p q uP uQ hP hQ)
 differentiated-product-bound A P k p q uP uQ hP hQ =
   ≤-trans A
     (norm-vectorAdd A
@@ -210,8 +223,9 @@ record TargetEnergyTangentProjection
 
     tangent-norm-bound :
       ∀ k u h →
-      norm A (projectTangent k u h)
-        ≤ (correctionConstant * norm A h)
+      _≤_ A
+        (norm A (projectTangent k u h))
+        (_*_ A correctionConstant (norm A h))
 
 open TargetEnergyTangentProjection public
 
@@ -245,8 +259,9 @@ record CompactGammaNearResponse
 
     compact-gamma-absolute-bound :
       ∀ k dTriad →
-      absolute A (numeratorDerivative k dTriad)
-        ≤ (absolute A (compactGammaCoefficient k) * norm A dTriad)
+      _≤_ A
+        (absolute A (numeratorDerivative k dTriad))
+        (_*_ A (absolute A (compactGammaCoefficient k)) (norm A dTriad))
 
 open CompactGammaNearResponse public
 
@@ -256,8 +271,11 @@ record CompactGammaCoefficientMonotonicity
     (A : TriadAnalyticLaws Mode Vector Scalar) : Set (m ⊔ v ⊔ s) where
   field
     coefficient-multiplies-bound :
-      ∀ c x y → x ≤ y →
-      (absolute A c * x) ≤ (absolute A c * y)
+      ∀ c x y →
+      _≤_ A x y →
+      _≤_ A
+        (_*_ A (absolute A c) x)
+        (_*_ A (absolute A c) y)
 
 open CompactGammaCoefficientMonotonicity public
 
@@ -269,8 +287,9 @@ compactGammaDifferentiatedTriadMajorant :
   Mode → Mode → Mode →
   Vector → Vector → Vector → Vector → Scalar
 compactGammaDifferentiatedTriadMajorant A G k p q uP uQ hP hQ =
-  absolute A (compactGammaCoefficient G k)
-  * differentiatedTriadMajorant A p q uP uQ hP hQ
+  _*_ A
+    (absolute A (compactGammaCoefficient G k))
+    (differentiatedTriadMajorant A p q uP uQ hP hQ)
 
 concrete-differentiated-triad-bound :
   ∀ {m v s}
@@ -281,11 +300,12 @@ concrete-differentiated-triad-bound :
     (C : CompactGammaCoefficientMonotonicity A)
     (k p q : Mode)
     (uP uQ hP hQ : Vector) →
-  absolute A
-    (numeratorDerivative G k
-      (differentiatedProjectedTriad A k p q uP uQ hP hQ))
-  ≤ compactGammaDifferentiatedTriadMajorant
-      A G k p q uP uQ hP hQ
+  _≤_ A
+    (absolute A
+      (numeratorDerivative G k
+        (differentiatedProjectedTriad A k p q uP uQ hP hQ)))
+    (compactGammaDifferentiatedTriadMajorant
+      A G k p q uP uQ hP hQ)
 concrete-differentiated-triad-bound A P G C k p q uP uQ hP hQ =
   ≤-trans A
     (compact-gamma-absolute-bound G k
