@@ -6,6 +6,7 @@ on:
     paths:
       - "DASHI/Moonshine/Penumbral*.agda"
       - "DASHI/Moonshine/SingularThetaBorcherdsBridge.agda"
+      - "DASHI/Moonshine/TraceOfSingularModuliBridge.agda"
       - "DASHI/Moonshine/ThompsonFourAvatarBridge.agda"
       - "DASHI/Moonshine/ThompsonPenumbralSpecialization.agda"
       - ".github/workflows/penumbral-agda-check.yml"
