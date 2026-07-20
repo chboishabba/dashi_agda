@@ -5,13 +5,19 @@ module DASHI.Philosophy.StableCore where
 -- Empirical and cultural applications remain separately gated.
 
 import DASHI.Philosophy.AtlasCompatibilityLaws
+import DASHI.Philosophy.ClosureInteractionLaws
 import DASHI.Philosophy.ClosureKinds
 import DASHI.Philosophy.JustifiedRefusal
 import DASHI.Philosophy.LocalChartLaws
 import DASHI.Philosophy.MaterialLeverageClosure
+import DASHI.Philosophy.PartialChartCategory
 import DASHI.Philosophy.ProcessCompositionLaws
+import DASHI.Philosophy.ProcessHistoryEquivalence
+import DASHI.Philosophy.RepairAdmissibility
 import DASHI.Philosophy.RepairCalculus
+import DASHI.Philosophy.ResidualCompositionOrder
 import DASHI.Philosophy.ResidualStatus
+import DASHI.Philosophy.TopologyChangeCriteria
 
 import DASHI.Philosophy.InterpretationStrata
 import DASHI.Philosophy.InterpretiveResidual
