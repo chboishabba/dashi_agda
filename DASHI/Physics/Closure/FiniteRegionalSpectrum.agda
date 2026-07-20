@@ -1,19 +1,15 @@
 module DASHI.Physics.Closure.FiniteRegionalSpectrum where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Fin using (Fin)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Fin.Base using (Fin)
 
-open import DASHI.Unified.GRQuantumProofTerms
+open import DASHI.Unified.GRQuantumProofTerms using (UVSpectralProof)
 
 ------------------------------------------------------------------------
 -- Exact finite regional spectrum.
---
--- This proves finiteness for a regulated bounded region by exhibiting an
--- explicit finite enumeration.  It does not infer a continuum interacting UV
--- completion or low-energy empirical matching from finite ternary carriers.
 
 record FiniteEnumeration (Carrier : Set) : Set where
   constructor finite-enumeration
