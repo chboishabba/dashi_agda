@@ -7,13 +7,6 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat using (_+_; _≤_; z≤n)
 
-------------------------------------------------------------------------
--- Unit-tagged quantities.
---
--- Magnitudes are natural-number ticks at an explicitly declared scale.  This
--- avoids silently adding unlike quantities while leaving runtime adapters free
--- to use decimal, rational, interval, or floating-point representations.
-
 data Unit : Set where
   audCents : Unit
   labourMinutes : Unit
@@ -37,6 +30,8 @@ record Quantity (u : Unit) : Set where
     magnitude : Nat
 open Quantity public
 
+infixl 6 _⊕_
+
 _⊕_ : ∀ {u} → Quantity u → Quantity u → Quantity u
 qty x ⊕ qty y = qty (x + y)
 
@@ -45,9 +40,6 @@ zeroQuantity = qty zero
 
 quantityMonotone : ∀ {u} → Quantity u → Quantity u → Set
 quantityMonotone (qty x) (qty y) = x ≤ y
-
-------------------------------------------------------------------------
--- Typed operational and economic ledgers.
 
 record ResourceLedger : Set where
   constructor mkResourceLedger
@@ -62,9 +54,6 @@ record ResourceLedger : Set where
     priceScenario : String
     costProvenance : List String
 open ResourceLedger public
-
-------------------------------------------------------------------------
--- Conservation receipts.
 
 record BalanceReceipt (u : Unit) : Set where
   constructor mkBalanceReceipt
@@ -101,9 +90,6 @@ CarbonBalance = BalanceReceipt carbonGrams
 SedimentBalance : Set
 SedimentBalance = BalanceReceipt sedimentGrams
 
-------------------------------------------------------------------------
--- A scenario is conservation-admissible only through actual receipts.
-
 record ConservationBundle : Set where
   constructor mkConservationBundle
   field
@@ -130,9 +116,6 @@ open QuantityBoundary public
 canonicalQuantityBoundary : QuantityBoundary
 canonicalQuantityBoundary =
   mkQuantityBoundary true true true true true true
-
-------------------------------------------------------------------------
--- Canonical exact-zero witness used by regression fixtures.
 
 exactZeroBalance : ∀ {u} → String → BalanceReceipt u
 exactZeroBalance {u} model =
