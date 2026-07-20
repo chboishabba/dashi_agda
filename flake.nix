@@ -77,6 +77,10 @@
         agdaArgs = "-i . -i DCHoTT-Agda -i cubical -l standard-library";
         perf = pkgs.perf;
         zkperfParse = zkperf.packages.${system}.default;
+        generateTriadicProofs = ''
+          ${pkgs.python3}/bin/python scripts/generate_triadic_arithmetic_laws.py
+          ${pkgs.python3}/bin/python scripts/generate_triadic_depth_two_dft.py
+        '';
 
         dashiAgda = pkgs.agdaPackages.mkDerivation {
           pname = "dashi-agda";
@@ -91,19 +95,21 @@
             pkgs.agdaPackages.standard-library
             dchottAgda
             cubicalLocal
+            pkgs.python3
           ];
           buildPhase = ''
             runHook preBuild
             cp -R ${dchottSrc}/. DCHoTT-Agda
             cp -R ${cubicalSrc}/. cubical
             rm -f dchott-agda.agda-lib
+            ${generateTriadicProofs}
             agda ${agdaArgs} DASHI/Everything.agda
             runHook postBuild
           '';
         };
 
         authoritativeCheck = pkgs.runCommand "dashi-agda-authoritative-check" {
-          buildInputs = [ agdaWithDashiDeps pkgs.glibcLocales ];
+          buildInputs = [ agdaWithDashiDeps pkgs.glibcLocales pkgs.python3 ];
           src = ./.;
         } ''
           mkdir -p "$out"
@@ -119,13 +125,14 @@
           cp -R ${cubicalSrc}/. "$workdir/cubical"
           cd "$workdir"
           rm -f dchott-agda.agda-lib
+          ${generateTriadicProofs}
           agda ${agdaArgs} DASHI/Everything.agda \
             > "$out/check.log" 2>&1
           touch "$out/passed"
         '';
 
         mergeSmokeCheck = pkgs.runCommand "dashi-agda-merge-smoke" {
-          buildInputs = [ agdaWithDashiDeps pkgs.bash pkgs.glibcLocales ];
+          buildInputs = [ agdaWithDashiDeps pkgs.bash pkgs.glibcLocales pkgs.python3 ];
           src = ./.;
         } ''
           mkdir -p "$out"
@@ -138,6 +145,7 @@
           export LANG="C.UTF-8"
           export LC_ALL="C.UTF-8"
           cd "$workdir"
+          ${generateTriadicProofs}
           AGDA_BIN="${agdaWithDashiDeps}/bin/agda" \
           AGDA_ARGS="${agdaArgs}" \
             ${pkgs.bash}/bin/bash scripts/run_agda_merge_smoke.sh \
