@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketPairIncidenceKernelBridge where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; cong; subst; sym; trans)
 
 open import DASHI.Analysis.WeightedKernelSchurTest
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
