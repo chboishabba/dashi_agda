@@ -15,10 +15,8 @@ data InterventionAction : Set where
   applyIntervention observeResponse rollbackIntervention : InterventionAction
 
 feedbackStep : FeedbackState → InterventionAction → FeedbackState
-feedbackStep baselineState applyIntervention = interventionApplied
+feedbackStep state applyIntervention = interventionApplied
 feedbackStep interventionApplied observeResponse = responseObserved
-feedbackStep responseObserved rollbackIntervention = rollbackApplied
-feedbackStep rollbackApplied applyIntervention = interventionApplied
 feedbackStep state observeResponse = state
 feedbackStep state rollbackIntervention = rollbackApplied
 
