@@ -21,25 +21,12 @@ permissions:
   contents: read
 
 jobs:
-  typecheck-and-diagnose:
+  finite-diagnostic:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Agda and standard library
-        run: |
-          sudo apt-get update
-          sudo apt-get install --yes agda-bin agda-stdlib
-          agda --version
-
-      - name: Type-check proposition-level GR quantum atlas
-        run: |
-          agda \
-            -i . \
-            -i /usr/share/agda-stdlib \
-            DASHI/Unified/GRQuantumProofTermAtlas.agda
 
       - uses: actions/setup-python@v5
         with:
@@ -47,7 +34,7 @@ jobs:
 
       - name: Run finite model diagnostic tests
         run: |
-          python -m pip install --upgrade pip pytest
+          python -m pip install --quiet --upgrade pip pytest
           pytest -q tests/test_gr_quantum_finite_model_diagnostic.py
 
       - name: Materialise finite model receipts
@@ -62,3 +49,41 @@ jobs:
         with:
           name: gr-quantum-finite-model-receipts
           path: /tmp/gr-quantum-finite-model
+
+  agda-typecheck:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install \
+            --yes --quiet agda-bin agda-stdlib >/tmp/agda-install.log
+          agda --version
+
+      - name: Type-check proposition-level GR quantum atlas
+        run: |
+          set +e
+          agda \
+            -i . \
+            -i /usr/share/agda-stdlib \
+            DASHI/Unified/GRQuantumProofTermAtlas.agda \
+            >/tmp/gr-quantum-agda.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            echo '--- Agda diagnostic tail ---'
+            tail -n 120 /tmp/gr-quantum-agda.log
+            exit "$status"
+          fi
+          cat /tmp/gr-quantum-agda.log
+
+      - name: Upload Agda diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gr-quantum-agda-diagnostic
+          path: /tmp/gr-quantum-agda.log
+          if-no-files-found: ignore
