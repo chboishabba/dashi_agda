@@ -22,7 +22,6 @@ import DASHI.Physics.Closure.PropositionEinsteinBridge as Einstein
 import DASHI.Physics.Closure.PropositionConstraintAlgebra as Constraints
 import DASHI.Physics.Closure.FiniteRegionalSpectrum as UV
 import DASHI.Physics.Closure.FiniteQuantumGRFlatModel as FlatQGR
-import DASHI.Physics.ObserverConditionedMultiscaleTransport as Observer
 import DASHI.Unified.GRQuantumFiniteDiagnosticReceipt as Diagnostic
 
 ------------------------------------------------------------------------
@@ -102,7 +101,6 @@ record ExactFiniteGRQuantumBundle : Set₁ where
     regulatedUV : UV.RegulatedUVReceipt
     regulatedUVPartial : UV.RegulatedUVPartialClosure
     flatQuantumGR : FlatQGR.FlatQuantumGRInterfaceReceipt
-    observerWaveBoundary : Observer.ObserverWaveRoute
     executableDiagnostic : Diagnostic.GRQuantumFiniteDiagnosticReceipt
     scope : String
 open ExactFiniteGRQuantumBundle public
@@ -127,13 +125,11 @@ canonicalExactFiniteGRQuantumBundle =
     UV.canonicalRegulatedUVReceipt
     UV.canonicalRegulatedUVPartialClosure
     FlatQGR.flatQuantumGRInterfaceReceipt
-    Observer.canonicalObserverWaveRoute
     Diagnostic.canonicalGRQuantumFiniteDiagnosticReceipt
     "exact finite/model tranche only; strict Q8 -> V4 is the finite Spin subgroup cover, not the full continuum cover"
 
 ------------------------------------------------------------------------
--- The exact assembly function for the compatibility-level proposition terminal.
--- Strict physical promotion additionally requires `StrictTerminalGRQuantumProof`.
+-- Compatibility-level terminal assembly.
 
 assembleTerminalGRQuantumProof :
   (quadratic : QuadraticUniquenessProof) →
