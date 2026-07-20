@@ -42,6 +42,26 @@ on:
       - ".github/workflows/dashi-theory-atlas.yml"
 
 jobs:
+  typecheck-triadic-spectral:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: "2.6.4.3"
+          agda-stdlib-version: "2.1"
+      - name: Typecheck focused regression root
+        run: |
+          set -o pipefail
+          agda -i . -l standard-library DASHI/Physics/Closure/TriadicArithmeticSpectralRegression.agda 2>&1 | tee triadic-typecheck.log
+      - name: Upload focused typecheck log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: triadic-typecheck-log
+          path: triadic-typecheck.log
+
   typecheck-everything:
     runs-on: ubuntu-latest
     steps:
