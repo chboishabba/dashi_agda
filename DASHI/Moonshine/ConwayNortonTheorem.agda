@@ -1,12 +1,9 @@
 module DASHI.Moonshine.ConwayNortonTheorem where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Moonshine.GradedRepresentation as GR
 import DASHI.Moonshine.JCoefficientCharacterBridge as JCB
-import DASHI.Moonshine.MoonshineGroupBase as MGB
-import DASHI.Moonshine.MonsterMcKayThompsonClosure as MMC
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
 import DASHI.Moonshine.TwistedModuleModularity as TM
@@ -22,7 +19,7 @@ import DASHI.Moonshine.TwistedModuleModularity as TM
 --     group.
 --
 -- Existing exact finite-series/group closure remains owned by
--- `MonsterMcKayThompsonClosure`.  This file adds the missing VOA realization,
+-- `MonsterMcKayThompsonClosure`. This file adds the missing VOA realization,
 -- twisted modularity, and theorem-level promotion package.
 
 record MonsterVOAAction
@@ -89,27 +86,23 @@ open HauptmodulGenusZeroPackage public
 
 record ConwayNortonTheorem
   (Monster K FuchsianGroup ExactLaurentSeries : Set)
-  (monsterGroup : GR.Group Monster)
+  (monsterGroupInv : TM.GroupWithInverse Monster)
   (construction : VN.VNaturalConstruction)
-  (monsterAction : MonsterVOAAction Monster K monsterGroup construction)
+  (monsterAction :
+    MonsterVOAAction
+      Monster K (TM.GroupWithInverse.group monsterGroupInv) construction)
   (realization :
     McKayThompsonRealization
-      Monster ExactLaurentSeries K monsterGroup construction monsterAction)
+      Monster
+      ExactLaurentSeries
+      K
+      (TM.GroupWithInverse.group monsterGroupInv)
+      construction
+      monsterAction)
   (ClassGroup : Monster → FuchsianGroup) : Setω where
   field
     twistedModularityInput :
-      TM.VNaturalModularityPackage
-        (record
-          { group = monsterGroup
-          ; inverse = λ g → g
-          ; leftInverse = λ g →
-              let open GR.Group monsterGroup in
-              leftIdentity g
-          ; rightInverse = λ g →
-              let open GR.Group monsterGroup in
-              leftIdentity g
-          })
-        construction
+      TM.VNaturalModularityPackage monsterGroupInv construction
     replicability :
       ReplicabilityPackage
         Monster
@@ -126,23 +119,17 @@ record ConwayNortonTheorem
     realizationForEveryMonsterClass : Set
     normalizedHauptmodulForEveryClass : Set
 
-  gradedTraceRealization :
-    Monster → ExactLaurentSeries
+  gradedTraceRealization : Monster → ExactLaurentSeries
   gradedTraceRealization =
     McKayThompsonRealization.gradedTraceSeries realization
 
   conwayNortonStatement : Set
-  conwayNortonStatement =
-    realizationForEveryMonsterClass
+  conwayNortonStatement = realizationForEveryMonsterClass
 
 open ConwayNortonTheorem public
 
 ------------------------------------------------------------------------
 -- Dependency-correct promotion boundary.
---
--- A value of this record is the complete theorem package.  The repo must not
--- promote from character tables, coefficient coincidences, or modular data
--- alone; all four construction layers are required.
 
 record MoonshineTheoremPromotionBoundary : Setω where
   field
