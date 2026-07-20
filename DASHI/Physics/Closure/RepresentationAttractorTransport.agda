@@ -8,7 +8,8 @@ module DASHI.Physics.Closure.RepresentationAttractorTransport where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Primitive using (Level; lsuc)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Nat using (_≤_)
+open import Data.Product using (_×_)
 
 import DASHI.Physics.Closure.RepresentationKernelCompatibility as RKC
 
@@ -46,7 +47,7 @@ record RepresentationAttractorCompatibility {ℓ : Level}
     projectionNonexpansive :
       ∀ x y →
       ConvergenceStructure.distance coarseConvergence (project x) (project y)
-      RKC._≤_
+      ≤
       ConvergenceStructure.distance fineConvergence x y
 
     projectionPreservesConvergence :
