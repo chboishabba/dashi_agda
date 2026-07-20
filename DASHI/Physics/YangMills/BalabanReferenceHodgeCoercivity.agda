@@ -2,16 +2,22 @@ module DASHI.Physics.YangMills.BalabanReferenceHodgeCoercivity where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+------------------------------------------------------------------------
+-- Reference coercivity from the gauge-fixed Hodge--Poincare estimate.
+------------------------------------------------------------------------
+
 record ReferenceHodgeCoercivityData
     (Index State Bound : Set) : Set₁ where
   field
-    derivativeEnergy gaugeEnergy blockEnergy referenceEnergy normSq : Index → State → Bound
+    derivativeEnergy gaugeEnergy blockEnergy referenceEnergy normSq :
+      Index → State → Bound
     add scale : Bound → Bound → Bound
     LessEqual : Bound → Bound → Set
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
 
     hodgeConstant c0 : Bound
+
     referenceEnergyDefinition : ∀ index state →
       referenceEnergy index state ≡
       add (derivativeEnergy index state)
@@ -19,8 +25,7 @@ record ReferenceHodgeCoercivityData
 
     uniformHodgePoincare : ∀ index state →
       LessEqual (scale hodgeConstant (normSq index state))
-        (add (derivativeEnergy index state)
-          (add (gaugeEnergy index state) (blockEnergy index state)))
+        (referenceEnergy index state)
 
     c0BelowHodge : ∀ index state →
       LessEqual (scale c0 (normSq index state))
@@ -28,6 +33,13 @@ record ReferenceHodgeCoercivityData
 
     Positive : Bound → Set
     c0Positive : Positive c0
+
+    GaugeZeroModesRemoved BlockAverageModesRemoved ResidualModesRemoved
+      BoundaryModesRemoved : Index → Set
+    gaugeZeroModesRemoved : ∀ index → GaugeZeroModesRemoved index
+    blockAverageModesRemoved : ∀ index → BlockAverageModesRemoved index
+    residualModesRemoved : ∀ index → ResidualModesRemoved index
+    boundaryModesRemoved : ∀ index → BoundaryModesRemoved index
 
 open ReferenceHodgeCoercivityData public
 
@@ -41,11 +53,7 @@ referenceHessianCoercive :
 referenceHessianCoercive dataSet index state =
   transitive dataSet
     (c0BelowHodge dataSet index state)
-    (transitive dataSet
-      (uniformHodgePoincare dataSet index state)
-      (rewrite referenceEnergyDefinition dataSet index state in
-       let open ReferenceHodgeCoercivityData dataSet in
-       uniformHodgePoincare dataSet index state))
+    (uniformHodgePoincare dataSet index state)
 
 referenceHodgeCoercivityAssemblyLevel : ProofLevel
 referenceHodgeCoercivityAssemblyLevel = machineChecked
