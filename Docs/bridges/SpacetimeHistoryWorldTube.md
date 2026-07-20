@@ -2,7 +2,7 @@
 
 ## Status
 
-Candidate-only geometry and empirical bridge. This tranche does not claim exact location recovery, a complete reconstruction of lived experience, exact 3D reconstruction, identity inference, or surveillance authority.
+Candidate-only geometry and empirical bridge. This tranche does not claim exact location recovery, a complete reconstruction of lived experience, exact 3D reconstruction, lossless video recovery, identity inference, or surveillance authority.
 
 ## Formal carrier
 
@@ -70,6 +70,50 @@ In particular, the formalism keeps three roles distinct:
 
 This prevents the common category error in which every moving image feature is treated as movement of the timeline subject, or camera movement is mistaken for scene movement.
 
+## GaussianVideo representation and compression layer
+
+The efficient video-carrier extension explicitly credits:
+
+> Inseo Lee, Youngyoon Choi, and Joonseok Lee. **GaussianVideo: Efficient Video Representation and Compression by Gaussian Splatting.** arXiv:2503.04333v1, 2025.
+
+The formal modules are:
+
+- `DASHI.Vision.GaussianVideoCompressionBridge`
+- `DASHI.Vision.GaussianVideoCompressionRegression`
+
+GaussianVideo contributes a representation/compression layer, not a world-space reconstruction layer. A shared set of 2D Gaussian seeds is deformed as a function of frame time. Each deformation may alter image-plane mean, colour, rotation, scale, and covariance-related appearance. The formal bridge represents this schematically as:
+
+```text
+G_i(t) = G_i + ΔG_i(t)
+```
+
+The time-conditioned deformation is produced from a factorised multi-plane feature carrier. For image coordinates `(x,y)` and time `t`, the paper uses spatial and spatiotemporal planes corresponding to `xy`, `xt`, and `yt`; their sampled features are combined by a Hadamard product before lightweight decoding:
+
+```text
+f(x,y,t) = F_xy(x,y) ⊙ F_xt(x,t) ⊙ F_yt(y,t)
+```
+
+The bridge types:
+
+- `Gaussian2DSeed` for shared image-plane Gaussian parameters;
+- `TimeConditionedDeformation` for predicted per-time attribute changes;
+- `MultiPlaneFeatureReceipt` for `xy`, `xt`, and `yt` factorisation and multi-resolution sampling;
+- `TemporalGradientReceipt` for cumulative adjacent-frame variation;
+- `GaussianAllocationReceipt` for allocating more representational capacity to temporally variable regions;
+- `GaussianVideoLossReceipt` for reconstruction and total-variation optimization terms;
+- `GaussianVideoModelReceipt` for the candidate-only lossy compressed carrier;
+- `GaussianVideoEpisodeBridge` for associating the video carrier with a longitudinal history and a separately typed Stereo4D reconstruction.
+
+The integration keeps three levels distinct:
+
+1. **source video** — the observed image sequence;
+2. **GaussianVideo carrier** — a compressed model that renders approximations to frames;
+3. **Stereo4D/world-tube carriers** — separately justified geometric and longitudinal interpretations.
+
+Motion of a 2D Gaussian mean is therefore not automatically motion of an object in 3D, and neither is automatically movement of the timeline subject. GaussianVideo is useful here because it can make visual episodes compact and rapidly replayable while preserving an explicit boundary between efficient representation and geometric inference.
+
+The paper reports strong efficiency gains relative to the compared NeRV-family baselines, including substantially faster training/rendering and lower memory use, while acknowledging a quality-efficiency tradeoff and per-video choices for plane resolution and multi-scale configuration. These are paper-reported empirical results, not theorems or reproduced DASHI benchmarks.
+
 ## Projection family
 
 The formal projection family distinguishes:
@@ -82,11 +126,12 @@ The formal projection family distinguishes:
 
 This gives a typed version of the dimensional analogy: an observer ordinarily encounters a present section, while the accumulated archive can be rendered as a single worm-like or braided history object.
 
-Stereo4D-derived dynamic tracks can be rendered inside one or more such sections, producing a nested structure:
+Stereo4D-derived dynamic tracks and GaussianVideo-rendered episodes can be displayed inside one or more such sections, producing a nested structure:
 
 - the personal world-tube records where the subject may have been over long time scales;
-- each visual episode may contain a local dynamic 3D scene;
-- each scene contains multiple point trajectories and confidence-bearing motion roles;
+- each visual episode may have a compact GaussianVideo render carrier;
+- a separately justified Stereo4D layer may contain a local dynamic 3D scene;
+- each reconstructed scene contains point trajectories and confidence-bearing motion roles;
 - the final display remains a projection of these carriers, not the carriers themselves.
 
 ## Fail-closed boundaries
@@ -100,7 +145,9 @@ The tranche rejects by construction:
 - treating pseudo-metric reconstruction as exact metric ground truth;
 - claiming that an image pair uniquely determines the real 3D world;
 - identifying a reconstructed scene-point track with lived personal history;
-- inferring identity or authority from a visual track;
+- treating a compressed GaussianVideo model as a lossless source archive;
+- treating image-plane Gaussian deformation as recovered 3D object motion;
+- inferring identity or authority from a visual track or render carrier;
 - promoting a personal archive into surveillance authority.
 
 ## Regression surfaces
@@ -108,3 +155,5 @@ The tranche rejects by construction:
 `DASHI.Geometry.SpacetimeHistoryWorldTubeRegression` provides canonical witnesses that the candidate-only, uncertainty, missingness, non-completeness, present-slice, and non-authority flags reduce to their intended values.
 
 `DASHI.Vision.Stereo4DDynamicReconstructionRegression` adds canonical witnesses for pseudo-metric/non-exact reconstruction, learned-prior/non-exact query-time motion, explicit camera/scene/subject role separation, and the rule that visual enrichment does not replace the longitudinal timeline.
+
+`DASHI.Vision.GaussianVideoCompressionRegression` adds canonical witnesses for candidate-only and lossy status, non-recovery of geometry, multi-plane aggregation, temporal-gradient allocation, predicted deformation, and optimization-proxy loss status.
