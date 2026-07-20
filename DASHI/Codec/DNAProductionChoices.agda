@@ -53,6 +53,9 @@ operationalArity {x ∷ y ∷ []} nonEmpty = operational2
 operationalArity {x ∷ y ∷ z ∷ []} nonEmpty = operational3
 operationalArity {x ∷ y ∷ z ∷ w ∷ xs} nonEmpty = operational4
 
+------------------------------------------------------------------------
+-- Executable base-valued rank/unrank.
+
 data Maybe (X : Set) : Set where
   nothing : Maybe X
   just : X → Maybe X
@@ -92,14 +95,62 @@ rank-head {C} = refl
 rank-head {G} = refl
 rank-head {T} = refl
 
-record RankUnrankReceipt : Set₁ where
+------------------------------------------------------------------------
+-- Proof-carrying canonical positions. This removes duplicate-value ambiguity
+-- from the theorem layer: a Choice is a position in the derived alphabet.
+
+data Choice : List Base → Set where
+  firstChoice : ∀ {x xs} → Choice (x ∷ xs)
+  nextChoice : ∀ {x xs} → Choice xs → Choice (x ∷ xs)
+
+choiceRank : ∀ {xs} → Choice xs → Nat
+choiceRank firstChoice = zero
+choiceRank (nextChoice p) = suc (choiceRank p)
+
+choiceBase : ∀ {xs} → Choice xs → Base
+choiceBase {x ∷ xs} firstChoice = x
+choiceBase {x ∷ xs} (nextChoice p) = choiceBase p
+
+congSuc : ∀ {m n} → m ≡ n → suc m ≡ suc n
+congSuc refl = refl
+
+data UnrankResult (n : Nat) (xs : List Base) : Set where
+  noChoice : UnrankResult n xs
+  foundChoice : (p : Choice xs) → choiceRank p ≡ n → UnrankResult n xs
+
+unrankCertified : (n : Nat) → (xs : List Base) → UnrankResult n xs
+unrankCertified n [] = noChoice
+unrankCertified zero (x ∷ xs) = foundChoice firstChoice refl
+unrankCertified (suc n) (x ∷ xs) with unrankCertified n xs
+... | noChoice = noChoice
+... | foundChoice p proof = foundChoice (nextChoice p) (congSuc proof)
+
+unrank-rank-choice :
+  ∀ {xs} (p : Choice xs) →
+  unrankCertified (choiceRank p) xs ≡ foundChoice p refl
+unrank-rank-choice firstChoice = refl
+unrank-rank-choice (nextChoice p)
+  rewrite unrank-rank-choice p = refl
+
+record CertifiedChoiceReceipt : Set₁ where
   field
-    rankUnrank :
-      ∀ (s : ProductionState) (n : Nat) (b : Base) →
-      unrank s n ≡ just b → rank s b ≡ just n
-    unrankRank :
-      ∀ (s : ProductionState) (b : Base) (n : Nat) →
-      rank s b ≡ just n → unrank s n ≡ just b
+    rankedChoice : (xs : List Base) → Set
+    rankOf : ∀ {xs} → rankedChoice xs → Nat
+    unrankAt : (n : Nat) → (xs : List Base) → UnrankResult n xs
+    unrankAfterRank :
+      ∀ {xs} (p : Choice xs) →
+      unrankAt (choiceRank p) xs ≡ foundChoice p refl
+
+certifiedChoiceReceipt : CertifiedChoiceReceipt
+certifiedChoiceReceipt = record
+  { rankedChoice = Choice
+  ; rankOf = choiceRank
+  ; unrankAt = unrankCertified
+  ; unrankAfterRank = unrank-rank-choice
+  }
+
+------------------------------------------------------------------------
+-- Exact horizon-indexed completion object, indexed by the emitted word.
 
 data Completion : Nat → ProductionState → List Base → Set where
   horizon0 : ∀ {s} → Completion zero s []
