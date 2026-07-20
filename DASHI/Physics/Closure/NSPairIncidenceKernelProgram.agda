@@ -31,3 +31,4 @@ open import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketDifferentialModulusBridge public
 open import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge public
 open import DASHI.Physics.Closure.NSCompactGammaTimeIntegrabilityBridge public
+open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
