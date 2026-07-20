@@ -56,28 +56,6 @@ record RepresentationCostModel : Set₁ where
 
 open RepresentationCostModel public
 
-totalCost :
-  RepresentationCostModel →
-  DescriptionClass →
-  Nat →
-  RepresentationCostModel.Cost
-    (λ where) 
-totalCost = λ where
-
-------------------------------------------------------------------------
--- A helper record avoids relying on implicit projection inference for Cost.
-
-record CostedDescription
-  (M : RepresentationCostModel) : Set where
-  constructor costed-description
-  field
-    class : DescriptionClass
-    depth : Nat
-    cost : Cost M
-    costMatchesObjective : Set
-
-open CostedDescription public
-
 objective :
   (M : RepresentationCostModel) →
   DescriptionClass →
@@ -87,6 +65,20 @@ objective M c n =
   _+ᶜ_ M
     (representationCost M c n)
     (residualCost M c n)
+
+------------------------------------------------------------------------
+-- A helper record carries a checked cost evaluation.
+
+record CostedDescription
+  (M : RepresentationCostModel) : Set where
+  constructor costed-description
+  field
+    class : DescriptionClass
+    depth : Nat
+    cost : Cost M
+    costMatchesObjective : cost ≡ objective M class depth
+
+open CostedDescription public
 
 ------------------------------------------------------------------------
 -- Exact bounded minimizer receipt.
