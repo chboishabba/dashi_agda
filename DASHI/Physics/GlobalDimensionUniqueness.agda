@@ -23,15 +23,13 @@ record TargetFingerprint (m : Nat) : Set where
 
 record GlobalOrbitClassification : Set₁ where
   field
-    fingerprint : Nat → DBA.ShellOrbitProfile
+    fingerprint : (m : Nat) → DBA.ShellOrbitProfile m
 
-    -- Soundness: a target fingerprint really is the computed profile at m.
-    soundTarget : ∀ {m} → TargetFingerprint m →
-      TargetFingerprint.profile (TargetFingerprint m)
-        ≡ fingerprint m
+    soundTarget : ∀ {m} (t : TargetFingerprint m) →
+      TargetFingerprint.profile t ≡ fingerprint m
 
     -- Completeness/exclusion outside the enumerated range is concentrated
-    -- here.  A constructive implementation may use a recurrence, generating
+    -- here. A constructive implementation may use a recurrence, generating
     -- function, or orbit-stabilizer formula.
     targetUniqueDimension : ∀ {m} → TargetFingerprint m → m ≡ 4
 
