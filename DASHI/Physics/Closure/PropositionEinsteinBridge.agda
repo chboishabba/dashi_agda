@@ -1,6 +1,5 @@
 module DASHI.Physics.Closure.PropositionEinsteinBridge where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
@@ -11,15 +10,10 @@ import DASHI.Physics.Closure.SymbolicEinsteinHilbertModel as EH
 import DASHI.Physics.Closure.TypedStressEnergyMassBridge as Source
 import DASHI.Physics.Closure.FiniteQuantumGRFlatModel as FlatQGR
 
-open import DASHI.Unified.GRQuantumProofTerms
+open import DASHI.Unified.GRQuantumProofTerms using (EinsteinTensorProof)
 
 ------------------------------------------------------------------------
 -- Proposition-level discrete valuation -> Einstein pipeline.
---
--- The finite flat producer below is fully inhabited by existing exact receipts.
--- The general pipeline is a theorem contract whose analytic, variational, and
--- continuum fields must be supplied as proof terms.  No Boolean flag promotes
--- the scalar congestion proxy into a tensor equation.
 
 record ValuationMetricSelection : Set₁ where
   field
@@ -29,18 +23,20 @@ record ValuationMetricSelection : Set₁ where
     selectionRespectsGauge : Set
     selectedMetricNondegenerate : Set
     selectedMetricLorentzian13 : Set
-open ValuationMetricSelection public
 
 record DiscreteCurvaturePipeline
   (selection : ValuationMetricSelection) : Set₁ where
-  open ValuationMetricSelection selection
   field
     Connection Riemann Ricci ScalarCurvature EinsteinTensor : Set
-    leviCivita : Metric → Connection
+    leviCivita :
+      ValuationMetricSelection.Metric selection → Connection
     riemann : Connection → Riemann
     ricci : Riemann → Ricci
-    scalarCurvature : Metric → Ricci → ScalarCurvature
-    einsteinTensor : Metric → Ricci → ScalarCurvature → EinsteinTensor
+    scalarCurvature :
+      ValuationMetricSelection.Metric selection → Ricci → ScalarCurvature
+    einsteinTensor :
+      ValuationMetricSelection.Metric selection →
+      Ricci → ScalarCurvature → EinsteinTensor
 
     leviCivitaExistence : Set
     leviCivitaUniqueness : Set
@@ -49,13 +45,10 @@ record DiscreteCurvaturePipeline
     discreteRicciConverges : Set
     scalarProxyIsTraceLimit : Set
     contractedBianchiIdentity : Set
-open DiscreteCurvaturePipeline public
 
 record VariationalEinsteinSource
   (selection : ValuationMetricSelection)
   (curvature : DiscreteCurvaturePipeline selection) : Set₁ where
-  open ValuationMetricSelection selection
-  open DiscreteCurvaturePipeline curvature
   field
     MatterState StressEnergy Action : Set
     matterAction : MatterState → Action
@@ -70,7 +63,6 @@ record VariationalEinsteinSource
     spinTwoSelfCouplingBootstrap : Set
     sourceEquationFromOneVariationPrinciple : Set
     backgroundIndependent : Set
-open VariationalEinsteinSource public
 
 record GeneralValuationEinsteinClosure : Set₁ where
   field
@@ -79,7 +71,6 @@ record GeneralValuationEinsteinClosure : Set₁ where
     variationalSource :
       VariationalEinsteinSource metricSelection curvaturePipeline
     terminalEinsteinProof : EinsteinTensorProof
-open GeneralValuationEinsteinClosure public
 
 ------------------------------------------------------------------------
 -- Existing exact finite producer.
