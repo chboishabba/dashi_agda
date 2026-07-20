@@ -143,7 +143,7 @@ step-description-is-coarse-plus-residual cost x = refl
 ------------------------------------------------------------------------
 -- Claim boundary.
 
-record MDLClaimBoundary : Set where
+record MDLClaimBoundary : Set₁ where
   constructor mdl-claim-boundary
   field
     exactResidualReconstructionProved : Set
