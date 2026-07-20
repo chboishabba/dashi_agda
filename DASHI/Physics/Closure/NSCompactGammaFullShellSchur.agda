@@ -6,7 +6,7 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Nullary using (¬_)
 
-open import DASHI.Analysis.FiniteWeightedKernelSums
+open import DASHI.Analysis.FiniteWeightedKernelSums public
 
 ------------------------------------------------------------------------
 -- Exact full-shell Fourier carrier.
