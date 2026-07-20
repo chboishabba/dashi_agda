@@ -1,14 +1,12 @@
 module DASHI.Environment.EcologicalEvidenceGates where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Environment.FunctionalEcology as Eco
-
-------------------------------------------------------------------------
--- Evidence-bearing ecological recommendation gates.
 
 record EvidenceSource : Set where
   constructor mkEvidenceSource
@@ -80,7 +78,7 @@ open InoculantProvenanceWitness public
 record RegulatoryWitness : Set where
   constructor mkRegulatoryWitness
   field
-    jurisdiction : String
+    regulatoryJurisdiction : String
     permitOrRule : String
     authorityReference : String
     currentlyValid : Bool
@@ -114,6 +112,22 @@ record MycorrhizalRecommendationEvidence : Set where
     allEvidenceReviewed : Bool
 open MycorrhizalRecommendationEvidence public
 
+record MycorrhizalRecommendationGate
+       (evidenceBundle : MycorrhizalRecommendationEvidence) : Set where
+  constructor mkMycorrhizalRecommendationGate
+  field
+    evidenceReviewed : allEvidenceReviewed evidenceBundle ≡ true
+    phWithinRange : withinDeclaredRange (soilPH evidenceBundle) ≡ true
+    moistureWithinRange : withinDeclaredRange (soilMoisture evidenceBundle) ≡ true
+    pathogenRiskAccepted :
+      riskAcceptedByAuthority (pathogenRisk evidenceBundle) ≡ true
+    provenanceAudited :
+      provenanceAuditable (provenance evidenceBundle) ≡ true
+    regulationCurrent : currentlyValid (regulation evidenceBundle) ≡ true
+    geographicTransferAccepted :
+      transferAccepted (transfer evidenceBundle) ≡ true
+open MycorrhizalRecommendationGate public
+
 record SpeciesPlanningEvidence : Set where
   constructor mkSpeciesPlanningEvidence
   field
@@ -126,6 +140,14 @@ record SpeciesPlanningEvidence : Set where
     localExpertReview : Bool
     communityOrCustodianReview : Bool
 open SpeciesPlanningEvidence public
+
+record SpeciesPlanningGate (evidenceBundle : SpeciesPlanningEvidence) : Set where
+  constructor mkSpeciesPlanningGate
+  field
+    expertReviewRecorded : localExpertReview evidenceBundle ≡ true
+    custodianReviewRecorded :
+      communityOrCustodianReview evidenceBundle ≡ true
+open SpeciesPlanningGate public
 
 record EvidenceGateBoundary : Set where
   constructor mkEvidenceGateBoundary
