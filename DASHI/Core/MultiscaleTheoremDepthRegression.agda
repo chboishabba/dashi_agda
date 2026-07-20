@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Product using (_,_)
 
 open import DASHI.Algebra.Trit using (neg; pos)
+open import DASHI.Core.MultiscaleMDL using (join; split)
 open import DASHI.Core.BasinFiniteDescent
 open import DASHI.Core.ApproximateMultiscaleNaturality
 open import DASHI.Core.ReversibleDissipativeKernelSplit
@@ -13,9 +14,6 @@ open import DASHI.Core.TritCPRMultiscaleInstance
 open import DASHI.Core.CanonicalSpineRegistry
 open import DASHI.MDL.MultiscaleCodingTargets
 open import DASHI.Physics.DiscreteContinuumKernelTargets
-
-------------------------------------------------------------------------
--- Concrete C/P/R reconstruction.
 
 canonicalFineState : TritTower (suc zero)
 canonicalFineState = pos , neg
@@ -34,9 +32,6 @@ canonicalResidual = refl
 canonicalInvolution :
   invertTower (invertTower canonicalFineState) ≡ canonicalFineState
 canonicalInvolution = invertTower-invol canonicalFineState
-
-------------------------------------------------------------------------
--- Basin descent and reversible/dissipative boundaries.
 
 countdownAtZeroFixed : countdown zero ≡ zero
 countdownAtZeroFixed = refl
