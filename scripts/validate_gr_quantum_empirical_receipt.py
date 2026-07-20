@@ -271,6 +271,7 @@ def _validate_reviews(receipt: dict[str, Any], errors: list[str]) -> None:
             "no_repository_authorship",
             "no_recent_direct_collaboration",
             "no_undisclosed_financial_conflict",
+            "no_supervisory_dependency",
             "all_blocking_findings_resolved",
             "negative_cases_checked",
         ):
