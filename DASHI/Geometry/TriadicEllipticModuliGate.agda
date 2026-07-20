@@ -132,7 +132,7 @@ open CoordinateChangeInvariantGate public
 
 record JOrbitReceipt
   (R : EllipticCoefficientRing)
-  (E E′ : WeierstrassDatum R) : Set where
+  (E E′ : WeierstrassDatum R) : Set₁ where
   field
     firstJ : JInvariantCertificate R E
     secondJ : JInvariantCertificate R E′
