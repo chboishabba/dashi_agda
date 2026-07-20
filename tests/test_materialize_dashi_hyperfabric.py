@@ -11,10 +11,15 @@ sys.modules[spec.name] = hf
 spec.loader.exec_module(hf)
 
 REFINE = '''module DASHI.Foundations.SSPPrimeLane369Refinement where
-canonicalThreeSixNineDigits : Set
-canonicalThreeSixNineDigits =
+canonicalThreeSixNineDigits :
   addressDigits canonicalThreeSixNineAddress
   ≡ digit-3 ∷ digit-6 ∷ digit-9 ∷ []
+canonicalThreeSixNineDigits = refl
+
+canonicalThreeSixNinePrefixDigits :
+  prefixDigits canonicalThreeSixNineAddress
+  ≡ digit-3 ∷ digit-6 ∷ []
+canonicalThreeSixNinePrefixDigits = refl
 '''
 FIELD = '''module DASHI.Core.SuperSSP369Field where
 rootP3Supervoxel : Set
@@ -75,7 +80,7 @@ class HyperfabricTests(unittest.TestCase):
         (root / hf.FIELD_PATH).write_text(FIELD)
         return temp_dir, root
 
-    def test_extracts_actual_canonical_address(self):
+    def test_extracts_actual_canonical_address_without_next_declaration(self):
         temp_dir, root = self.fixture()
         with temp_dir:
             self.assertEqual(hf.build_ir(root)["canonical_address"], [3, 6, 9])
