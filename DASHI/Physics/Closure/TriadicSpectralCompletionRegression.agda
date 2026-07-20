@@ -1,8 +1,10 @@
 module DASHI.Physics.Closure.TriadicSpectralCompletionRegression where
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Integer using (0ℤ; 1ℤ)
+open import Data.Rational using (1ℚ; _+_; _*_)
 
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
@@ -88,7 +90,7 @@ spectralJRegression = refl
 
 quarterTailRegression :
   Analytic.quarterPower Q.two
-  + Analytic.quarterTailRadius (Agda.Builtin.Nat.suc Q.two)
+  + Analytic.quarterTailRadius (suc Q.two)
   ≡ Analytic.quarterTailRadius Q.two
 quarterTailRegression = Analytic.nextTailBudgetIdentity Q.two
 
@@ -97,5 +99,5 @@ kraftRegression = KraftMDL.kraftEquality
 
 completionStatusRegression :
   Assembly.higherDepthCyclotomicDFTProved Assembly.currentCompletionStatus
-  ≡ Agda.Builtin.Bool.true
+  ≡ true
 completionStatusRegression = refl
