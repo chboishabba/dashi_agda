@@ -1,7 +1,7 @@
 module DASHI.Analysis.WeightedKernelSchurTest where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; cong; trans)
 
 record WeightedKernelData
     {r c s : Level}
@@ -116,3 +116,69 @@ record KernelIdentityMatch
     colWeightsMatch : colWeight concrete ≡ colWeight candidate
 
 open KernelIdentityMatch public
+
+------------------------------------------------------------------------
+-- Exact action semantics.
+--
+-- `WeightedSchurLaws` deliberately leaves vectors abstract.  Consequently the
+-- bare existence of `applyKernel` does not by itself prove that the action is
+-- assembled from `kernel K`.  This companion record closes that authority seam
+-- without breaking existing Schur instances: a concrete vector model supplies
+-- one evaluator for matrix entries and proves that `applyKernel` is exactly that
+-- evaluator applied to the declared kernel.
+------------------------------------------------------------------------
+
+record ExactKernelAction
+    {r c s : Level}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    (K : WeightedKernelData Row Col Scalar)
+    (L : WeightedSchurLaws K) : Set (lsuc (r ⊔ c ⊔ s)) where
+  field
+    evaluateEntries :
+      (Row → Col → Scalar) →
+      VectorIn L →
+      VectorOut L
+
+    applyKernelMatchesEntries :
+      ∀ input →
+      applyKernel L input ≡
+      evaluateEntries (kernel K) input
+
+open ExactKernelAction public
+
+exactKernelActionTransport :
+  ∀ {r c s}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    {K : WeightedKernelData Row Col Scalar}
+    {L : WeightedSchurLaws K}
+    (A : ExactKernelAction K L)
+    (candidateEntries : Row → Col → Scalar) →
+  kernel K ≡ candidateEntries →
+  ∀ input →
+  applyKernel L input ≡
+  evaluateEntries A candidateEntries input
+exactKernelActionTransport A candidateEntries entriesMatch input =
+  trans
+    (applyKernelMatchesEntries A input)
+    (cong
+      (λ entries → evaluateEntries A entries input)
+      entriesMatch)
+
+exactKernelActionTransportByIdentity :
+  ∀ {r c s}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    {K candidate : WeightedKernelData Row Col Scalar}
+    {L : WeightedSchurLaws K} →
+  (A : ExactKernelAction K L) →
+  KernelIdentityMatch K candidate →
+  ∀ input →
+  applyKernel L input ≡
+  evaluateEntries A (kernel candidate) input
+exactKernelActionTransportByIdentity {candidate = candidate} A M =
+  exactKernelActionTransport A (kernel candidate) (kernelMatches M)
