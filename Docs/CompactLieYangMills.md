@@ -70,12 +70,16 @@ Finite complex-matrix algebra, determinant identities, compactness, connectednes
 `ConstructiveYangMillsNextSurface.agda` compiles the next proof chain in the order in which the mathematics must close:
 
 1. `BalabanFiniteInverseConsequences.agda` derives injectivity and uniqueness from the finite Hessian/Green inverse certificate;
-2. `BalabanFiniteVolumeBackgroundLane.agda` factors the critical-map estimate into patchwise Green constants, nonlinear Lipschitz constants, local factors, and a strict common factor;
-3. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
-4. `BalabanStepVKPClosure.agda` separates polymer activity, entropy, suppression, and the final Kotecký–Preiss comparison;
-5. `BalabanAllScaleRGClosure.agda` proves the exact induction from one-step invariant-domain preservation to admissibility at every finite scale;
-6. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
-7. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
+2. `BalabanFiniteCoerciveGreen.agda` isolates the standard finite-dimensional coercivity-to-inverse theorem and checks its conversion into the repository's Green and inverse certificates;
+3. `BalabanUniformNeumannAsymptoticResidual.agda` restores the missing uniform residual-tail theorem, separating finite Neumann control from geometric-power vanishing;
+4. `BalabanGeometricNeumannClosure.agda` composes ordered multiplication, strict contraction, and Archimedean power coverage into uniform unit-ball residual decay;
+5. `BalabanFiniteVolumeBackgroundLane.agda` factors the critical-map estimate into patchwise Green constants, nonlinear Lipschitz constants, local factors, and a strict common factor;
+6. `BalabanSU2FiniteBackgroundAssembly.agda` derives fixed-point existence, criticality, uniqueness on the gauge slice, minimization, and membership of every critical orbit in the canonical background orbit;
+7. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
+8. `BalabanStepVKPClosure.agda` separates polymer activity, entropy, suppression, and the final Kotecký–Preiss comparison;
+9. `BalabanAllScaleRGClosure.agda` proves the exact induction from one-step invariant-domain preservation to admissibility at every finite scale;
+10. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
+11. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
 
 These modules prove the logical bridges and keep the analytic antecedents explicit. No large-field, all-scale, OS, or mass-gap premise is silently manufactured.
 
