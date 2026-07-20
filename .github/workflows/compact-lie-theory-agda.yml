@@ -45,7 +45,7 @@ jobs:
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-lie-theory.log"
-            export AGDA_JOBS=1
+            export AGDA_JOBS=4
             scripts/run_agda29_parallel_check.sh \
               DASHI/Physics/YangMills/CompactLieExactSurface.agda \
               DASHI/Physics/YangMills/CompactLieTheorySurface.agda \
