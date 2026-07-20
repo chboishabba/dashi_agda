@@ -1,7 +1,7 @@
 module DASHI.Physics.SpinDoubleCoverCompletion where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Product using (Σ; _,_)
+open import Data.Sum using (_⊎_)
 
 open import DASHI.Physics.SpinAssumptions as SA
 open import DASHI.Physics.CliffordRepresentationCompletion as CRC
@@ -24,8 +24,6 @@ record TwoPointKernel {A B : Set}
     minusOne≢one : Set
     kernelClassifies : ∀ x → f x ≡ SA.Group.e GB →
       (x ≡ e) ⊎ (x ≡ minusOne)
-  where
-    open import Data.Sum using (_⊎_)
 
 record SpinDoubleCoverRealization : Set₁ where
   field
