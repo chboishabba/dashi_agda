@@ -46,7 +46,8 @@ jobs:
       - name: Typecheck unified governance facade
         run: |
           mkdir -p ci-logs
-          agda -i . DASHI/Unified/BraidedEmotionGovernanceRegression.agda \
+          agda --no-default-libraries -i . \
+            DASHI/Unified/BraidedEmotionGovernanceRegression.agda \
             >ci-logs/unified-governance.log 2>&1 || {
               tail -n 120 ci-logs/unified-governance.log
               exit 1
@@ -61,13 +62,13 @@ jobs:
           if-no-files-found: warn
 
       - name: Typecheck braided emotion regression
-        run: agda -i . DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
+        run: agda --no-default-libraries -i . DASHI/Biology/BraidedEmotionCanonicalIntegrationRegression.agda
 
       - name: Typecheck body-memory governance regression
-        run: agda -i . DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
+        run: agda --no-default-libraries -i . DASHI/Biology/BodyMemoryGovernanceCanonicalRegression.agda
 
       - name: Typecheck Kimmerer acknowledgement
-        run: agda -i . DASHI/Culture/KimmererBraidingAcknowledgement.agda
+        run: agda --no-default-libraries -i . DASHI/Culture/KimmererBraidingAcknowledgement.agda
 
       - name: Reject new unapproved governance islands
         shell: bash
