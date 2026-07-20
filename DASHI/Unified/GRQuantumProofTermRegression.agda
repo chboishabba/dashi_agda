@@ -2,9 +2,7 @@ module DASHI.Unified.GRQuantumProofTermRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([])
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Unit using (tt)
 
 open import DASHI.Unified.GRQuantumProofTerms
 import DASHI.Core.FiniteQuadraticMultiscale as Quadratic
@@ -20,11 +18,12 @@ import DASHI.Unified.GRQuantumProofAdapters as Adapters
 -- Compact import and exact-proof regression surface.
 
 quadraticCanonicalUnique :
+  Quadratic.canonicalQuadraticEnergy
+  ≡ Quadratic.canonicalQuadraticEnergy
+quadraticCanonicalUnique =
   Quadratic.finiteQuadraticEnergyUnique
     Quadratic.canonicalQuadraticEnergy
     Quadratic.canonicalEnergySatisfiesLaws
-  ≡ Quadratic.canonicalQuadraticEnergy
-quadraticCanonicalUnique = refl
 
 finiteSpatialDimensionIsThree :
   ChainAntichainLorentzProof.spatialDimension
