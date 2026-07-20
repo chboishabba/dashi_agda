@@ -1,0 +1,65 @@
+name: Thread completion frontier
+
+on:
+  push:
+    paths:
+      - "DASHI/Sheaf/FiniteTemporalClopenSheaf.agda"
+      - "DASHI/Topology/FiniteBraidRhizomeCalculus.agda"
+      - "DASHI/Analysis/HyperrealUltrapowerConstruction.agda"
+      - "DASHI/Foundations/OperationalQ3GeometricSeries.agda"
+      - "DASHI/Dynamics/ConcreteCoalitionPopulationDynamics.agda"
+      - "DASHI/Foundations/PrimorialFactorAddressConcrete.agda"
+      - "DASHI/Geometry/CalabiYauAnalysisAndPhysicalUseBoundary.agda"
+      - "DASHI/Applications/ThreadEmpiricalValidationProgramme.agda"
+      - "DASHI/Unified/ThreadCompletionFrontier.agda"
+      - "DASHI/EverythingThreadCompletion.agda"
+      - "Docs/ThreadCompletionFrontier.md"
+      - ".github/workflows/thread-completion-frontier.yml"
+  pull_request:
+    paths:
+      - "DASHI/Sheaf/FiniteTemporalClopenSheaf.agda"
+      - "DASHI/Topology/FiniteBraidRhizomeCalculus.agda"
+      - "DASHI/Analysis/HyperrealUltrapowerConstruction.agda"
+      - "DASHI/Foundations/OperationalQ3GeometricSeries.agda"
+      - "DASHI/Dynamics/ConcreteCoalitionPopulationDynamics.agda"
+      - "DASHI/Foundations/PrimorialFactorAddressConcrete.agda"
+      - "DASHI/Geometry/CalabiYauAnalysisAndPhysicalUseBoundary.agda"
+      - "DASHI/Applications/ThreadEmpiricalValidationProgramme.agda"
+      - "DASHI/Unified/ThreadCompletionFrontier.agda"
+      - "DASHI/EverythingThreadCompletion.agda"
+      - "Docs/ThreadCompletionFrontier.md"
+      - ".github/workflows/thread-completion-frontier.yml"
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i .agda-stdlib"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck finite temporal sheaf
+        run: agda $AGDA_FLAGS DASHI/Sheaf/FiniteTemporalClopenSheaf.agda
+      - name: Typecheck braid and rhizome calculus
+        run: agda $AGDA_FLAGS DASHI/Topology/FiniteBraidRhizomeCalculus.agda
+      - name: Typecheck hyperreal construction boundary
+        run: agda $AGDA_FLAGS DASHI/Analysis/HyperrealUltrapowerConstruction.agda
+      - name: Typecheck operational Q3 geometric series
+        run: agda $AGDA_FLAGS DASHI/Foundations/OperationalQ3GeometricSeries.agda
+      - name: Typecheck population dynamics
+        run: agda $AGDA_FLAGS DASHI/Dynamics/ConcreteCoalitionPopulationDynamics.agda
+      - name: Typecheck primorial factor address
+        run: agda $AGDA_FLAGS DASHI/Foundations/PrimorialFactorAddressConcrete.agda
+      - name: Typecheck Calabi-Yau downstream cutset
+        run: agda $AGDA_FLAGS DASHI/Geometry/CalabiYauAnalysisAndPhysicalUseBoundary.agda
+      - name: Typecheck empirical application programme
+        run: agda $AGDA_FLAGS DASHI/Applications/ThreadEmpiricalValidationProgramme.agda
+      - name: Typecheck completion frontier aggregate
+        run: agda $AGDA_FLAGS DASHI/Unified/ThreadCompletionFrontier.agda
+      - name: Typecheck repository plus thread completion
+        run: agda $AGDA_FLAGS DASHI/EverythingThreadCompletion.agda
