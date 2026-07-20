@@ -5,12 +5,14 @@ module DASHI.Unified.GRQuantumProofTermAtlas where
 -- tranche.  Imports stay namespaced to avoid flattening finite-model carriers.
 
 import DASHI.Unified.GRQuantumProofTerms
+import DASHI.Unified.GRQuantumStrictProofTerms
 import DASHI.Core.FiniteQuadraticMultiscale
 import DASHI.Geometry.FiniteCausalDiamond
 import DASHI.Geometry.FiniteCausalDiamondClosed
 import DASHI.Geometry.FiniteCausalDiamondMinimality
 import DASHI.Algebra.ConstructiveClifford
 import DASHI.Algebra.FiniteQuaternionDoubleCover
+import DASHI.Algebra.FiniteQuaternionStrictCover
 import DASHI.Algebra.FiniteQuaternionGroupReceipts
 import DASHI.Algebra.Quantum.FiniteTreeWeyl
 import DASHI.Algebra.Quantum.FiniteQutritBornAdditivity
