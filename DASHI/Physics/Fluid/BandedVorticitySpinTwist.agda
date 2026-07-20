@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
 
 open import DASHI.Foundations.SSPTritCarrier using
   (SSPTrit; sspNegOne; sspZero; sspPosOne)
@@ -41,9 +42,8 @@ record PeriodicSite : Set where
     column : Nat
 open PeriodicSite public
 
--- The periodic contract is explicit because FFT differentiation and wrapped
--- neighbourhood operators live on a torus.  A non-periodic smoother must not
--- be silently substituted into this lane.
+-- FFT differentiation and wrapped neighbourhood operators live on a torus.
+-- A non-periodic smoother must not be silently substituted into this lane.
 record PeriodicBoundaryContract : Set where
   constructor periodicBoundary
   field
@@ -79,8 +79,8 @@ record BandedSpinTwistSample : Set where
 open BandedSpinTwistSample public
 
 -- A sparse vortex/skeleton atom is a supported signed sample with a core scale
--- and circulation proxy.  Geometry is deliberately represented rather than
--- regenerated from random phase.
+-- and circulation proxy. Geometry is represented rather than regenerated from
+-- random phase.
 record VortexAtom : Set where
   constructor vortexAtom
   field
@@ -115,7 +115,7 @@ record FaithfulResidualState : Set where
     faithfulAtoms : List VortexAtom
 open FaithfulResidualState public
 
--- Both modes retain the same low-band carrier.  The difference is only how
+-- Both modes retain the same low-band carrier. The difference is only how
 -- unresolved mid/high structure is represented.
 record LowBandCarrier : Set where
   constructor lowCarrier
@@ -142,9 +142,8 @@ record VortexFaithfulSolverState : Set where
     faithfulResidual : FaithfulResidualState
 open VortexFaithfulSolverState public
 
--- Forgetting vortex placement is an explicit quotient.  It preserves the
--- aggregate summaries while discarding the atom list and assigning a texture
--- seed supplied by the caller.
+-- Forgetting vortex placement is an explicit quotient. It preserves aggregate
+-- summaries while discarding the atom list and assigning a texture seed.
 eraseFaithfulResidual : Nat → FaithfulResidualState → FastResidualState
 eraseFaithfulResidual seed r =
   fastResidual
@@ -172,8 +171,8 @@ erasurePreservesSupportFraction :
   faithfulSupportFraction r
 erasurePreservesSupportFraction seed r = refl
 
--- Capability is made explicit: aggregate correctness is available in both
--- modes, while trajectory-level vortex identity requires the atom carrier.
+-- Aggregate correctness is available in both modes; trajectory-level vortex
+-- identity requires the atom carrier.
 data SolverCapability : SolverMode → Set where
   aggregateBandStatistics : SolverCapability fastMode
   aggregateBandStatisticsFaithful : SolverCapability vortexFaithfulMode
@@ -186,8 +185,8 @@ fastModeHasAggregateCapability = aggregateBandStatistics
 faithfulModeHasVortexCapability : SolverCapability vortexFaithfulMode
 faithfulModeHasVortexCapability = spatialVortexIdentity
 
--- Promotion boundary: neither a random-phase texture nor a ternary mask alone
--- is identified with a faithful vortex reconstruction.
+-- Neither a random-phase texture nor a ternary mask alone is identified with a
+-- faithful vortex reconstruction.
 data ReconstructionClaim : Set where
   aggregateResidualTexture : ReconstructionClaim
   spatiallyPlacedSignedVortices : ReconstructionClaim
@@ -195,24 +194,22 @@ data ReconstructionClaim : Set where
 
 ClaimAvailable : SolverMode → ReconstructionClaim → Set
 ClaimAvailable fastMode aggregateResidualTexture = ⊤
-ClaimAvailable fastMode spatiallyPlacedSignedVortices = Never
-ClaimAvailable fastMode exactContinuumVorticity = Never
+ClaimAvailable fastMode spatiallyPlacedSignedVortices = ⊥
+ClaimAvailable fastMode exactContinuumVorticity = ⊥
 ClaimAvailable vortexFaithfulMode aggregateResidualTexture = ⊤
 ClaimAvailable vortexFaithfulMode spatiallyPlacedSignedVortices = ⊤
-ClaimAvailable vortexFaithfulMode exactContinuumVorticity = Never
-
-data Never : Set where
+ClaimAvailable vortexFaithfulMode exactContinuumVorticity = ⊥
 
 fastSpatialVortexPromotionRejected :
-  ClaimAvailable fastMode spatiallyPlacedSignedVortices → Never
+  ClaimAvailable fastMode spatiallyPlacedSignedVortices → ⊥
 fastSpatialVortexPromotionRejected impossible = impossible
 
 fastExactContinuumPromotionRejected :
-  ClaimAvailable fastMode exactContinuumVorticity → Never
+  ClaimAvailable fastMode exactContinuumVorticity → ⊥
 fastExactContinuumPromotionRejected impossible = impossible
 
 faithfulExactContinuumPromotionRejected :
-  ClaimAvailable vortexFaithfulMode exactContinuumVorticity → Never
+  ClaimAvailable vortexFaithfulMode exactContinuumVorticity → ⊥
 faithfulExactContinuumPromotionRejected impossible = impossible
 
 canonicalInterpretationNotes : List String
