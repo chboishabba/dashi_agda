@@ -1,0 +1,69 @@
+{
+  "schema": "dashi.dna-production-benchmark.v1",
+  "provenance": {
+    "repository": "chboishabba/dashi_agda",
+    "branch": "agent/dna-production-codec",
+    "commit": "f7a60383761413a80503db85295d18530271c67e",
+    "workflow_run": 29740255278,
+    "artifact": "dna-production-benchmark",
+    "measured_at": "2026-07-20T11:57:38Z",
+    "policy": {
+      "horizon": 2,
+      "max_homopolymer_run": 3,
+      "gc_debt_bound": 2,
+      "forbidden_motifs": ["GATC", "CTAG"],
+      "hairpin_stem": 3,
+      "hairpin_loop": 4
+    }
+  },
+  "payload_bytes": 4096,
+  "payload_bits": 32768,
+  "dna_bases": 19291,
+  "payload_bits_per_base": 1.6986159348919185,
+  "arithmetic_bits": 32769,
+  "arithmetic_bits_per_base": 1.6986677725364159,
+  "roundtrip": true,
+  "horizon": 2,
+  "completion_cache": {
+    "currsize": 196757,
+    "hits": 448678,
+    "maxsize": null,
+    "misses": 196757
+  },
+  "branch_arity_histogram": {
+    "1": 318,
+    "2": 4465,
+    "3": 1717,
+    "4": 12791
+  },
+  "debt_histogram": {
+    "-2": 2500,
+    "-1": 4997,
+    "0": 4872,
+    "1": 4649,
+    "2": 2273
+  },
+  "max_homopolymer_run": 3,
+  "forbidden_motifs_present": [],
+  "bounded_hairpins_present": 0,
+  "macro3_count": 6430,
+  "macro3_source_bits": 38580,
+  "macro3_summary_bits": 25720,
+  "arithmetic_encoder_renormalizations": 32767,
+  "arithmetic_decoder_renormalizations": 32767,
+  "single_substitution_samples": 4096,
+  "crc16_detected": 4096,
+  "sha256_64_detected": 4096,
+  "crc16_collision_bound_per_random_error": "<= 1/65536 under uniform syndrome assumption",
+  "sha256_64_collision_bound_per_random_error": "<= 1/2^64 under ideal-hash assumption",
+  "encode_seconds": 2.085269683000007,
+  "decode_seconds": 0.8524369839999792,
+  "encode_payload_mib_per_second": 0.0037465178071166413,
+  "decode_payload_mib_per_second": 0.009164900334732768,
+  "dna_invariant": {
+    "crc16": 54742,
+    "length": 19291,
+    "sha256_64": "06cba378afa374ca"
+  },
+  "python": "3.12.13 (main, Jun 16 2026, 22:05:08) [GCC 13.3.0]"
+}
