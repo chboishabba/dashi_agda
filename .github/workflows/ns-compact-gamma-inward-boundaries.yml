@@ -1,0 +1,62 @@
+name: NS compact Gamma inward boundaries
+
+on:
+  push:
+    paths:
+      - 'DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimates.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimatesTest.agda'
+      - 'docs/ns_compact_gamma_inward_boundary_estimates.md'
+      - '.github/workflows/ns-compact-gamma-inward-boundaries.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimates.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimatesTest.agda'
+      - 'docs/ns_compact_gamma_inward_boundary_estimates.md'
+      - '.github/workflows/ns-compact-gamma-inward-boundaries.yml'
+
+concurrency:
+  group: ns-compact-gamma-inward-boundaries-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check inward compact-Gamma boundary estimates
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-ns-compact-gamma-inward-boundaries.log"
+            export AGDA_JOBS=1
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimates.agda \
+              DASHI/Physics/Closure/NSCompactGammaInwardBoundaryEstimatesTest.agda
+          ) > agda-ns-compact-gamma-inward-boundaries.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 240 agda-ns-compact-gamma-inward-boundaries.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-compact-gamma-inward-boundaries-agda-log
+          path: agda-ns-compact-gamma-inward-boundaries.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
