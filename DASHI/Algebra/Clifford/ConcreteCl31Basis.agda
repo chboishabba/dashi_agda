@@ -11,9 +11,9 @@ open import Data.Product using (_×_; _,_)
 --   e0² = -1
 --   e1² = e2² = e3² = +1
 --
--- This module replaces the unit-carrier placeholder at the basis level.  It
+-- This module replaces the unit-carrier placeholder at the basis level. It
 -- gives a genuinely nontrivial finite carrier and an exact left action of the
--- four Clifford generators on all sixteen blades.  Linear extension to full
+-- four Clifford generators on all sixteen blades. Linear extension to full
 -- multivectors and the universal-property adapter remain separate layers.
 
 data Sign : Set where
@@ -134,10 +134,7 @@ generatorSquare e1 = refl
 generatorSquare e2 = refl
 generatorSquare e3 = refl
 
-data Distinct : Generator → Generator → Set where
-  e0e1 e0e2 e0e3 : Distinct e0 e1 ⊎ Distinct e0 e2 ⊎ Distinct e0 e3
-
--- Explicit ordered inequality witness, avoiding an equality decision layer.
+-- Explicit ordered inequality witness, avoiding a decision-procedure layer.
 data Apart : Generator → Generator → Set where
   a01 : Apart e0 e1
   a02 : Apart e0 e2
