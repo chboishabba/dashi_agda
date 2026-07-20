@@ -83,19 +83,21 @@ open GrokkingDecomposition public
 ------------------------------------------------------------------------
 -- Horizon-aware observations
 --
--- `notObserved` means right-censored at the stated training horizon.  It does
--- not mean that grokking is impossible at all later epochs.
+-- `rightCensored` means the threshold was not reached by the stated training
+-- horizon.  `notRecorded` means the experiment output did not include that
+-- statistic.  Neither constructor asserts impossibility.
 ------------------------------------------------------------------------
 
 data FirstPassage : Set where
-  notObserved : FirstPassage
-  observedAt  : Nat → FirstPassage
+  notRecorded  : FirstPassage
+  rightCensored : FirstPassage
+  observedAt   : Nat → FirstPassage
 
 record GrokkingObservation : Set where
   field
-    horizon          : Nat
-    fit99             : FirstPassage
-    test95            : FirstPassage
+    horizon           : Nat
+    fit99              : FirstPassage
+    test95             : FirstPassage
     finalTrainPermille : Nat
     finalTestPermille  : Nat
 
