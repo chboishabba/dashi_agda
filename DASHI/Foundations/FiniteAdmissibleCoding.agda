@@ -1,16 +1,10 @@
 module DASHI.Foundations.FiniteAdmissibleCoding where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_)
-open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
-open import Data.List.Base using (List; []; _∷_)
+open import Agda.Builtin.Sigma using (Σ; fst; snd)
 
 import DASHI.Foundations.InvolutiveTernaryDynamics as ITD
-
-------------------------------------------------------------------------
--- The selectable controls at a state are controls paired with proofs of
--- admissibility.  A finite code is an explicit rank/unrank equivalence with
--- this proof-carrying set; it does not merely assert that one branch exists.
 
 SelectedControl : ∀ {D} →
   ITD.AdmissibleControls D → ITD.State D → Set
@@ -33,9 +27,9 @@ record FiniteAdmissibleCode
 
 open FiniteAdmissibleCode public
 
-selectedControl : ∀ {D A s} →
-  FiniteAdmissibleCode D A s → Code (FiniteAdmissibleCode D A s) →
-  ITD.Control D
+selectedControl : ∀ {D A s}
+  (C : FiniteAdmissibleCode D A s) →
+  Code C → ITD.Control D
 selectedControl C code = fst (decode C code)
 
 selectedIsAdmissible : ∀ {D A s}
@@ -49,11 +43,6 @@ losslessControlRoundtrip : ∀ {D A s}
   (choice : SelectedControl A s) →
   decode C (encode C choice) ≡ choice
 losslessControlRoundtrip C = decode-encode C
-
-------------------------------------------------------------------------
--- A branch stream accumulates the exact code costs selected at successive
--- states.  Its capacity/cost is derived from the codes, not from a primitive
--- binary alphabet.
 
 data EncodedTrajectory
   (D : ITD.InvolutiveDynamics)
