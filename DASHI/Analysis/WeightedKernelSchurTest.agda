@@ -1,7 +1,7 @@
 module DASHI.Analysis.WeightedKernelSchurTest where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 record WeightedKernelData
     {r c s : Level}
@@ -83,9 +83,47 @@ weightedKernelBound :
     (input : VectorIn L) →
   _≤_ L
     (outputEnergy L (applyKernel L input))
-    (_⊗_ L (weightedOperatorProduct L) (inputEnergy L input))
+    (_⊗_ L
+      (rowConstant L)
+      (_⊗_ L (columnConstant L) (inputEnergy L input)))
 weightedKernelBound K L C =
   weightedSchurEstimate L (rowBound C) (columnBound C)
+
+record WeightedProductAssociativity
+    {r c s : Level}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    {K : WeightedKernelData Row Col Scalar}
+    (L : WeightedSchurLaws K) : Set s where
+  field
+    multiplyAssociative :
+      ∀ a b c →
+      _⊗_ L (_⊗_ L a b) c ≡ _⊗_ L a (_⊗_ L b c)
+
+open WeightedProductAssociativity public
+
+weightedKernelProductBound :
+  ∀ {r c s}
+    {Row : Set r}
+    {Col : Set c}
+    {Scalar : Set s}
+    (K : WeightedKernelData Row Col Scalar)
+    (L : WeightedSchurLaws K)
+    (A : WeightedProductAssociativity L)
+    (C : WeightedKernelSchurCertificate K L)
+    (input : VectorIn L) →
+  _≤_ L
+    (outputEnergy L (applyKernel L input))
+    (_⊗_ L (weightedOperatorProduct L) (inputEnergy L input))
+weightedKernelProductBound K L A C input =
+  subst
+    (λ bound → _≤_ L (outputEnergy L (applyKernel L input)) bound)
+    (sym (multiplyAssociative A
+      (rowConstant L)
+      (columnConstant L)
+      (inputEnergy L input)))
+    (weightedKernelBound K L C input)
 
 record KernelIdentityMatch
     {r c s : Level}
