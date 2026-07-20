@@ -17,3 +17,4 @@ open import DASHI.Physics.Closure.NSWall1UniformWeightedSchur public
 open import DASHI.Physics.Closure.NSPairIncidenceSchurBridge public
 open import DASHI.Physics.Closure.NSWeightedShellTransferBridge public
 open import DASHI.Physics.Closure.NSFactorizedSchurFrameGap public
+open import DASHI.Physics.Closure.NSCompactGammaOffPacketWall1PairIncidenceBridge public
