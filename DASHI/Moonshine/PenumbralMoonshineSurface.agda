@@ -16,4 +16,5 @@ open import DASHI.Moonshine.PenumbralWeightTranslationClosure public
 open import DASHI.Moonshine.ThompsonFourAvatarBridge public
 open import DASHI.Moonshine.PenumbralDiscriminantProperty public
 open import DASHI.Moonshine.PenumbralTheoremStatusLedger public
+open import DASHI.Moonshine.UmbralPenumbralComparisonBoundary public
 open import DASHI.Moonshine.ThompsonPenumbralSpecialization public
