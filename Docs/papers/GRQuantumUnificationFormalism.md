@@ -7,6 +7,7 @@ This document records the complete typed dependency graph implemented by:
 - `DASHI.Foundations.CausalOrderLorentzClosure`
 - `DASHI.Algebra.CliffordSpinLift`
 - `DASHI.Unified.GRQuantumUnification`
+- `DASHI.Unified.GRQuantumCrossPollinationBridge`
 - `DASHI.Unified.GRQuantumUnificationRegression`
 
 It is designed to compose with the repository's existing physics parity surfaces:
@@ -15,7 +16,7 @@ It is designed to compose with the repository's existing physics parity surfaces
 - `DASHI.Algebra.Quantum.QFTParitySurface`
 - `DASHI.Physics.Closure.GRPDEParityBoundary`
 
-The new facade does **not** silently convert an interface, bridge, candidate, or external-authority slot into a theorem.  Instead, it makes terminal unification evidence-indexed: the final readout requires a `TerminalUnificationWitness` carrying every discharged theorem.
+The new facade does **not** silently convert an interface, bridge, candidate, or external-authority slot into a theorem. Instead, it makes terminal unification evidence-indexed: the final readout requires a `TerminalUnificationWitness` carrying every discharged theorem.
 
 ## One substrate, two limits
 
@@ -32,7 +33,7 @@ The two physical readings are:
 1. **Quantum reading:** the unitary wave completion of finite-depth cylinder states.
 2. **General-relativistic reading:** the infrared valuation geometry of the same decimation substrate.
 
-The intended unification statement is therefore not “quantize an independently given classical metric.”  It is:
+The intended unification statement is therefore not “quantize an independently given classical metric.” It is:
 
 > Quantum amplitudes and classical spacetime curvature are two representations of the same contractive causal multiscale system.
 
@@ -61,7 +62,7 @@ A recognisable multiscale split
 s_\ell = \widetilde s_{\ell+1} + d_\ell
 \]
 
-with projection-annihilated detail and no scale leakage yields Pythagorean additivity.  The parallelogram law then fixes an inner-product quadratic defect.  In the typed surface this is represented by `OrthogonalMultiscaleQuadraticClosure`.
+with projection-annihilated detail and no scale leakage yields Pythagorean additivity. The parallelogram law then fixes an inner-product quadratic defect. In the typed surface this is represented by `OrthogonalMultiscaleQuadraticClosure`.
 
 ### 3. Lorentzian `3+1` closure
 
@@ -101,7 +102,7 @@ uv + vu = 2B(u,v)1.
 
 its homomorphism law, surjectivity, kernel `{+1,-1}`, and two-to-one property.
 
-The support projection is not treated as the source of Spin.  It is a quotient/readout after the universal quadratic lift has already been established.
+The support projection is not treated as the source of Spin. It is a quotient/readout after the universal quadratic lift has already been established.
 
 For the qutrit lane, `Spin3SU2Representation` records both:
 
@@ -110,9 +111,9 @@ For the qutrit lane, `Spin3SU2Representation` records both:
 
 ### 5. Wave lift, Born rule, and canonical commutation
 
-Finite-depth cylinders lift into a Hilbert carrier.  The same quadratic non-leakage law that controls the multiscale defect becomes norm-squared additivity, yielding the Born measure.
+Finite-depth cylinders lift into a Hilbert carrier. The same quadratic non-leakage law that controls the multiscale defect becomes norm-squared additivity, yielding the Born measure.
 
-The depth/refinement tree-shift algebra supplies configuration and momentum generators.  Its continuum limit is recorded by `CanonicalCommutationClosure`:
+The depth/refinement tree-shift algebra supplies configuration and momentum generators. Its continuum limit is recorded by `CanonicalCommutationClosure`:
 
 \[
 [X_i,P_j] = i\hbar\delta_{ij},
@@ -128,7 +129,7 @@ The scalar congestion proxy
 R_{\mathrm{proxy}} = -\Delta \log \rho
 \]
 
-is retained only as the trace-facing entry point.  `MetricCurvatureClosure` requires the full lift:
+is retained only as the trace-facing entry point. `MetricCurvatureClosure` requires the full lift:
 
 - valuation-to-metric map;
 - Levi-Civita connection;
@@ -139,7 +140,7 @@ is retained only as the trace-facing entry point.  `MetricCurvatureClosure` requ
 - contracted Bianchi identity;
 - uniqueness as the local divergence-free tensor completion.
 
-`StressEnergyClosure` adds covariant conservation, universal coupling, gravitational self-energy, and the massless spin-two bootstrap.  `EinsteinEquationClosure` then records
+`StressEnergyClosure` adds covariant conservation, universal coupling, gravitational self-energy, and the massless spin-two bootstrap. `EinsteinEquationClosure` then records
 
 \[
 G_{\mu\nu} = 8\pi G T_{\mu\nu}
@@ -177,6 +178,44 @@ It requires the complete hypersurface-deformation algebra, correct structure fun
 - finite loop and mode sums;
 - an existing renormalization flow;
 - UV completeness.
+
+## Cross-pollination with the existing DASHI corpus
+
+`DASHI.Unified.GRQuantumCrossPollinationBridge` makes the integration points explicit rather than leaving the new facade beside the older modules as an isolated theory island.
+
+The strongest seams are:
+
+| Existing lane | Contribution to the unified stack |
+| --- | --- |
+| `SSPTritCarrier` | Balanced ternary and involution supply the signed discrete carrier. Support remains a quotient and is not misidentified as the source of Spin. |
+| `SSPBase369Bridge` | Concrete quotient/canonicalization examples feed the `C ∘ P ∘ R` interpretation. |
+| `SSP369Ultrametric` | Prefix agreement supplies the finite geometric model of resolution depth, nested balls, and contraction. |
+| `SSPPrimeLane369DepthPhaseBridge` | Depth-indexed phase transport supplies a finite precursor of the depth/refinement wave algebra. |
+| `SSP369SymmetryIsometry` | Finite automorphisms and isometries provide concrete actions to be lifted into quadratic-form-preserving Lorentz/Spin actions. |
+| `DifferentialGeometryParity` | Charts, connections, exterior calculus, and curvature provide the continuum target vocabulary. |
+| `LieGaugeTheoryParity` | Representations, equivariance, gauge curvature, and Bianchi obligations align with the Clifford/Spin and constraint lanes. |
+| `QFTParitySurface` | Hilbert, operator, CCR/CAR, spectral, and QFT interfaces receive the wave-lift proof terms. |
+| `GRPDEParityBoundary` | Koszul, curvature, Einstein, contracted-Bianchi, weak-form, and PDE slots receive the valuation-geometry proof terms. |
+
+This produces a clearer geometric intuition ladder:
+
+\[
+\text{ternary signed distinctions}
+\to \text{prefix depth}
+\to \text{nested ultrametric geometry}
+\to \text{stable coarse-graining}
+\to \text{orthogonal detail sheets}
+\to \text{quadratic energy}
+\to \text{Lorentz cone}
+\to \text{Clifford/Spin frame transport}
+\to
+\begin{cases}
+\text{wave/Hilbert reading} & \text{(quantum)}\\
+\text{valuation-curvature reading} & \text{(GR)}
+\end{cases}
+\]
+
+The cross-pollination module deliberately records `terminalPromotionByThisSeam = false` for every seam. Integration provides the route by which existing proof terms can discharge the unified fields; it does not substitute naming, analogy, or interface compatibility for proof.
 
 ## Terminal theorem
 
