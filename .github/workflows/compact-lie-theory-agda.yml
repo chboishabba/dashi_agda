@@ -20,6 +20,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanStepVKPClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanAllScaleRGClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanOSMassGapClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanDashenGrossCalibration.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda'
       - 'scripts/audit_constructive_yang_mills_levels.py'
       - 'Docs/CompactLieYangMills.md'
