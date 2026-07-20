@@ -22,7 +22,9 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWall1PairIncidenceBridge.agda'
       - 'docs/ns_pair_incidence_kernel_schur.md'
+      - 'docs/ns_compact_gamma_offpacket_schur_audit.md'
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
   push:
     paths:
@@ -45,7 +47,9 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOffPacketWall1PairIncidenceBridge.agda'
       - 'docs/ns_pair_incidence_kernel_schur.md'
+      - 'docs/ns_compact_gamma_offpacket_schur_audit.md'
       - '.github/workflows/ns-pair-incidence-kernel-schur.yml'
 
 concurrency:
@@ -64,6 +68,11 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ns-pair-incidence-schur-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
       - name: Check pair-incidence Schur chain
         id: focused
         shell: bash
@@ -92,10 +101,11 @@ jobs:
               DASHI/Physics/Closure/NSWall1PolarizationInstantiation.agda \
               DASHI/Physics/Closure/NSWall1UniformWeightedSchur.agda \
               DASHI/Physics/Closure/NSPairIncidenceSchurBridge.agda \
-              DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketSchurSplit.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketWeightedKernelBridge.agda \
-              DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda
+              DASHI/Physics/Closure/NSCompactGammaOffPacketPairIncidenceKernelBridge.agda \
+              DASHI/Physics/Closure/NSCompactGammaOffPacketWall1PairIncidenceBridge.agda \
+              DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda
           ) > agda-ns-pair-incidence-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
