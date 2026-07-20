@@ -4,19 +4,159 @@
 The scalar module uses the basis 1,z,...,z^5 with z^6+z^3+1=0.
 All proofs are exact rational ring-normalisation proofs; no floating point or
 analytic trigonometric assumptions enter this finite theorem.
+
+The emitted proofs target the standard-library 2.1 `Data.Rational.Solver`
+interface used by the repository's focused Agda gate.  The Python side expands
+only the finite polynomial syntax supplied to that trusted solver.
 """
 from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from typing import TypeAlias
 
 OUTPUT = Path("DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda")
-I = [f"i{k}" for k in range(9)]
+
+Expr: TypeAlias = tuple
+C9Expr: TypeAlias = tuple[Expr, Expr, Expr, Expr, Expr, Expr]
+SignalExpr: TypeAlias = list[C9Expr]
 
 
-def nested(name: str, args: list[str]) -> str:
-    assert len(args) == 9
-    return f"{name}\n    " + "\n    ".join(args)
+def variable(name: str) -> Expr:
+    return ("var", name)
+
+
+def constant(name: str) -> Expr:
+    return ("con", name)
+
+
+def plus(left: Expr, right: Expr) -> Expr:
+    return ("plus", left, right)
+
+
+def times(left: Expr, right: Expr) -> Expr:
+    return ("times", left, right)
+
+
+def negative(value: Expr) -> Expr:
+    return ("neg", value)
+
+
+def render(expression: Expr) -> str:
+    tag = expression[0]
+    if tag == "var":
+        return expression[1]
+    if tag == "con":
+        return f"con {expression[1]}"
+    if tag == "plus":
+        return f"({render(expression[1])} :+ {render(expression[2])})"
+    if tag == "times":
+        return f"({render(expression[1])} :* {render(expression[2])})"
+    if tag == "neg":
+        return f"(:- {render(expression[1])})"
+    raise ValueError(f"unknown expression: {expression!r}")
+
+
+def solve_term(variables: list[str], left: Expr, right: Expr) -> str:
+    binders = " ".join(variables)
+    arguments = " ".join(variables)
+    return (
+        f"(solve {len(variables)} "
+        f"(λ {binders} → {render(left)} := {render(right)}) "
+        f"refl {arguments})"
+    )
+
+
+def c9_variables(prefix: str) -> C9Expr:
+    return tuple(variable(f"{prefix}{coordinate}") for coordinate in range(6))  # type: ignore[return-value]
+
+
+def zero_c9_expr() -> C9Expr:
+    zero = constant("0ℚ")
+    return zero, zero, zero, zero, zero, zero
+
+
+def add_c9(left: C9Expr, right: C9Expr) -> C9Expr:
+    return tuple(plus(a, b) for a, b in zip(left, right))  # type: ignore[return-value]
+
+
+def scale_c9(scalar_name: str, value: C9Expr) -> C9Expr:
+    scalar = constant(scalar_name)
+    return tuple(times(scalar, coordinate) for coordinate in value)  # type: ignore[return-value]
+
+
+def zeta_mul_expr(value: C9Expr) -> C9Expr:
+    a0, a1, a2, a3, a4, a5 = value
+    return (
+        negative(a5),
+        a0,
+        a1,
+        plus(a2, negative(a5)),
+        a3,
+        a4,
+    )
+
+
+def phase_expr(power: int, value: C9Expr) -> C9Expr:
+    result = value
+    for _ in range(power % 9):
+        result = zeta_mul_expr(result)
+    return result
+
+
+def sum_c9(values: list[C9Expr]) -> C9Expr:
+    assert values
+    result = values[-1]
+    for value in reversed(values[:-1]):
+        result = add_c9(value, result)
+    return result
+
+
+def dot_c9(left: C9Expr, right: C9Expr) -> Expr:
+    products = [times(a, b) for a, b in zip(left, right)]
+    result = products[-1]
+    for product in reversed(products[:-1]):
+        result = plus(product, result)
+    return result
+
+
+def sum_q(values: list[Expr]) -> Expr:
+    assert values
+    result = values[-1]
+    for value in reversed(values[:-1]):
+        result = plus(value, result)
+    return result
+
+
+def invariant_pair_expr(left: C9Expr, right: C9Expr) -> Expr:
+    return sum_q(
+        [dot_c9(phase_expr(k, left), phase_expr(k, right)) for k in range(9)]
+    )
+
+
+def analyze_expr(signal: SignalExpr) -> SignalExpr:
+    return [
+        sum_c9(
+            [phase_expr((-m * x) % 9, signal[x]) for x in range(9)]
+        )
+        for m in range(9)
+    ]
+
+
+def synthesize_expr(spectrum: SignalExpr) -> SignalExpr:
+    return [
+        scale_c9(
+            "oneNinth",
+            sum_c9(
+                [phase_expr((m * x) % 9, spectrum[m]) for m in range(9)]
+            ),
+        )
+        for x in range(9)
+    ]
+
+
+def signal_energy_expr(signal: SignalExpr) -> Expr:
+    return sum_q([invariant_pair_expr(value, value) for value in signal])
 
 
 def vars_for(prefixes: list[str]) -> list[str]:
@@ -25,14 +165,6 @@ def vars_for(prefixes: list[str]) -> list[str]:
 
 def c9_pattern(prefix: str) -> str:
     return "(c9 " + " ".join(f"{prefix}{k}" for k in range(6)) + ")"
-
-
-def signal_expression(prefixes: list[str]) -> str:
-    return "signal9\n    " + "\n    ".join(c9_pattern(prefix) for prefix in prefixes)
-
-
-def solve_list(variables: list[str]) -> str:
-    return " ∷ ".join(variables) + " ∷ []"
 
 
 def generate() -> str:
@@ -45,7 +177,8 @@ def generate() -> str:
         "open import Data.Integer using (+_)",
         "open import Data.List.Base using ([]; _∷_)",
         "open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)",
-        "open import Data.Rational.Tactic.RingSolver using (solve)",
+        "open import Data.Rational.Solver using (module +-*-Solver)",
+        "open +-*-Solver",
         "",
         "open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope",
         "  using (neg; zer; pos; []; _∷_)",
@@ -63,14 +196,15 @@ def generate() -> str:
     ]
     for a in range(9):
         for b in range(9):
-            lines.append(f"addIndex i{a} i{b} = i{(a+b)%9}")
+            lines.append(f"addIndex i{a} i{b} = i{(a + b) % 9}")
     lines.extend(["", "mulIndex : Index9 → Index9 → Index9"])
     for a in range(9):
         for b in range(9):
-            lines.append(f"mulIndex i{a} i{b} = i{(a*b)%9}")
+            lines.append(f"mulIndex i{a} i{b} = i{(a * b) % 9}")
     lines.extend(["", "negIndex : Index9 → Index9"])
     for a in range(9):
-        lines.append(f"negIndex i{a} = i{(-a)%9}")
+        lines.append(f"negIndex i{a} = i{(-a) % 9}")
+
     lines.extend(
         [
             "",
@@ -83,6 +217,7 @@ def generate() -> str:
         for b in range(9):
             for c in range(9):
                 lines.append(f"addIndexAssociative i{a} i{b} i{c} = refl")
+
     lines.extend(
         [
             "",
@@ -93,6 +228,7 @@ def generate() -> str:
     for a in range(9):
         for b in range(9):
             lines.append(f"addIndexCommutative i{a} i{b} = refl")
+
     lines.extend(
         [
             "",
@@ -154,8 +290,13 @@ def generate() -> str:
         ]
     )
     for k in range(1, 9):
-        lines.append(f"phaseMul i{k} a = zetaMul (phaseMul i{k-1} a)")
+        nested = "a"
+        for _ in range(k):
+            nested = f"zetaMul ({nested})"
+        lines.append(f"phaseMul i{k} a = {nested}")
 
+    phase_names = [f"a{k}" for k in range(6)]
+    phase_value = c9_variables("a")
     lines.extend(
         [
             "",
@@ -165,31 +306,39 @@ def generate() -> str:
             "  phaseMul (addIndex a b) x ≡ phaseMul a (phaseMul b x)",
         ]
     )
-    phase_vars = [f"a{k}" for k in range(6)]
-    phase_list = solve_list(phase_vars)
     for a in range(9):
         for b in range(9):
+            left = phase_expr((a + b) % 9, phase_value)
+            right = phase_expr(a, phase_expr(b, phase_value))
             lines.extend(
                 [
-                    f"phaseActionLaw i{a} i{b} (c9 {' '.join(phase_vars)}) =",
+                    f"phaseActionLaw i{a} i{b} (c9 {' '.join(phase_names)}) =",
                     "  c9-ext",
                 ]
             )
-            for _ in range(6):
-                lines.append(f"    (solve ({phase_list}))")
+            for left_coordinate, right_coordinate in zip(left, right):
+                lines.append(
+                    f"    {solve_term(phase_names, left_coordinate, right_coordinate)}"
+                )
 
+    cyclotomic_left = add_c9(
+        phase_expr(6, phase_value),
+        add_c9(phase_expr(3, phase_value), phase_value),
+    )
     lines.extend(
         [
             "",
             "cyclotomicRelation :",
             "  (x : C9) →",
             "  addC9 (phaseMul i6 x) (addC9 (phaseMul i3 x) x) ≡ zeroC9",
-            f"cyclotomicRelation (c9 {' '.join(phase_vars)}) =",
+            f"cyclotomicRelation (c9 {' '.join(phase_names)}) =",
             "  c9-ext",
         ]
     )
-    for _ in range(6):
-        lines.append(f"    (solve ({phase_list}))")
+    for coordinate in cyclotomic_left:
+        lines.append(
+            f"    {solve_term(phase_names, coordinate, constant('0ℚ'))}"
+        )
 
     lines.extend(
         [
@@ -328,7 +477,8 @@ def generate() -> str:
 
     prefixes = [f"a{k}" for k in range(9)]
     variables = vars_for(prefixes)
-    var_list = solve_list(variables)
+    symbolic_signal = [c9_variables(prefix) for prefix in prefixes]
+    reconstructed = synthesize_expr(analyze_expr(symbolic_signal))
     pattern = "signal9\n    " + "\n    ".join(c9_pattern(prefix) for prefix in prefixes)
     lines.extend(
         [
@@ -346,8 +496,12 @@ def generate() -> str:
                 "  c9-ext",
             ]
         )
-        for _ in range(6):
-            lines.append(f"    (solve ({var_list}))")
+        for left_coordinate, right_coordinate in zip(
+            reconstructed[x], symbolic_signal[x]
+        ):
+            lines.append(
+                f"    {solve_term(variables, left_coordinate, right_coordinate)}"
+            )
 
     lines.extend(
         [
@@ -380,15 +534,21 @@ def generate() -> str:
             "  characterSum difference a ≡ orthogonalityTarget difference a",
         ]
     )
-    for d in range(9):
+    for difference in range(9):
+        left = sum_c9(
+            [phase_expr((m * difference) % 9, phase_value) for m in range(9)]
+        )
+        right = scale_c9("nineQ", phase_value) if difference == 0 else zero_c9_expr()
         lines.extend(
             [
-                f"characterOrthogonality9 i{d} (c9 {' '.join(phase_vars)}) =",
+                f"characterOrthogonality9 i{difference} (c9 {' '.join(phase_names)}) =",
                 "  c9-ext",
             ]
         )
-        for _ in range(6):
-            lines.append(f"    (solve ({phase_list}))")
+        for left_coordinate, right_coordinate in zip(left, right):
+            lines.append(
+                f"    {solve_term(phase_names, left_coordinate, right_coordinate)}"
+            )
 
     lines.extend(
         [
@@ -417,13 +577,17 @@ def generate() -> str:
     )
     for k in range(9):
         lines.append(f"    (invariantPair (atSignal f i{k}) (atSignal f i{k}))")
+
+    parseval_left = signal_energy_expr(analyze_expr(symbolic_signal))
+    parseval_right = times(constant("nineQ"), signal_energy_expr(symbolic_signal))
     lines.extend(
         [
             "",
             "parseval9 :",
             "  (f : Signal9) →",
             "  signalEnergy (analyze9 f) ≡ nineQ * signalEnergy f",
-            f"parseval9 ({pattern}) = solve ({var_list})",
+            f"parseval9 ({pattern}) =",
+            f"  {solve_term(variables, parseval_left, parseval_right)}",
             "",
             "------------------------------------------------------------------------",
             "-- Existing exact-codec integration at depth two.",
