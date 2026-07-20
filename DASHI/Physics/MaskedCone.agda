@@ -4,21 +4,24 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 open import Data.Vec using (Vec; []; _∷_)
-open import Data.Integer using (ℤ; _<_; +_; -[1+_])
+open import Data.Integer using (ℤ; +_; -[1+_])
 
-open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
+open import DASHI.Algebra.Trit using (Trit; zer; pos)
 open import DASHI.Physics.IndefiniteMaskQuadratic as IMQ
 open import DASHI.Physics.SignatureFromMask as SFM
 
 ------------------------------------------------------------------------
 -- Cone classification induced by a masked quadratic.
 --
--- The sign convention is explicit rather than hidden in the names:
--- negative, null, and positive sectors are all first-class predicates.
+-- Integer order is kept as an explicit assumption seam so this module does
+-- not depend on stdlib-version-specific order constructor names.
+
+postulate
+  _<ℤ_ : ℤ → ℤ → Set
 
 Negative :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Set
-Negative σ x = IMQ.Qσ σ x < + 0
+Negative σ x = IMQ.Qσ σ x <ℤ + 0
 
 Null :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Set
@@ -26,7 +29,7 @@ Null σ x = IMQ.Qσ σ x ≡ + 0
 
 Positive :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Set
-Positive σ x = + 0 < IMQ.Qσ σ x
+Positive σ x = + 0 <ℤ IMQ.Qσ σ x
 
 Orthogonal :
   ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Vec Trit m → Set
@@ -105,11 +108,8 @@ record IndefiniteWitness {m : Nat} (σ : Vec IMQ.Sign m) : Set where
     positiveValue  : Positive σ positiveVector
 
 postulate
-  -- Integer-order witnesses are isolated here because the exact constructor
-  -- names vary across stdlib releases. The quadratic values above are fully
-  -- computed; only their conversion to the order predicates is assumed.
-  minusOne<zero : -[1+ 0 ] < + 0
-  zero<plusOne : + 0 < + 1
+  minusOne<zero : -[1+ 0 ] <ℤ + 0
+  zero<plusOne : + 0 <ℤ + 1
 
 lorentzIndefinite : IndefiniteWitness lorentzMask
 lorentzIndefinite =
