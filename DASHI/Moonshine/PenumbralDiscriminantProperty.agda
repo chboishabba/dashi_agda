@@ -6,6 +6,7 @@ module DASHI.Moonshine.PenumbralDiscriminantProperty where
 -- of the virtual graded modules.
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
 
