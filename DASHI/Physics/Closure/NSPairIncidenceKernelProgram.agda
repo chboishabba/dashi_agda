@@ -41,4 +41,6 @@ open import DASHI.Physics.Closure.NSCompactGammaTimeIntegrabilityBridge public
 open import DASHI.Physics.Closure.NSCompactGammaBKMTimeIntegrability public
 open import DASHI.Physics.Closure.NSCompactGammaHighestAlphaExpenditureCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaDifferentialExpenditureProducer public
+open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialInstantiation public
+open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
