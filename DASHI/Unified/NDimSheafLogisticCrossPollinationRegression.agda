@@ -78,3 +78,5 @@ canonicalNDimSheafLogisticCrossPollinationReceipt =
     ; culturalBoundary = Culture.canonicalRelationalCaseBoundary
     ; tlureyBoundary = Culture.canonicalTlureyEtymologyBoundary
     }
+
+-- Keep this file as the single focused compiler surface for the tranche.
