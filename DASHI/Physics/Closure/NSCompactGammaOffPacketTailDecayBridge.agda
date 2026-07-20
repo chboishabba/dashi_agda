@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -57,19 +57,19 @@ record TailAbsorptionTarget
     (F : RadiusIndexedOffPacketSplit Radius A)
     (V : OrderVanishingTail A F) : Set (lsuc r) where
   field
-    absorbedTailBudget : Scalar A
-    fullOffPacketBudget : Scalar A
+    targetTailBudget : Scalar A
+    targetFullOffPacketBudget : Scalar A
 
-    absorbedBudgetAdmissible :
-      AdmissibleTailBudget V absorbedTailBudget
+    targetBudgetAdmissible :
+      AdmissibleTailBudget V targetTailBudget
 
-    schurPlusAbsorbedTailBelowFullBudget :
+    targetSchurPlusTailBelowFull :
       (radius : Radius) →
       _≤_ A
         (_+_ A
           (schurWeightedBudget (splitAt F radius))
-          absorbedTailBudget)
-        fullOffPacketBudget
+          targetTailBudget)
+        targetFullOffPacketBudget
 
 open TailAbsorptionTarget public
 
@@ -84,16 +84,16 @@ selectRadiusAndAssembleTailAbsorption :
     (λ radius → OffPacketTailAbsorptionInputs A)
 selectRadiusAndAssembleTailAbsorption A F V T
   with tailEventuallyBelow V
-    (absorbedTailBudget T)
-    (absorbedBudgetAdmissible T)
+    (targetTailBudget T)
+    (targetBudgetAdmissible T)
 ... | radius , tailBound =
   radius , record
     { tailSplitInputs = splitAt F radius
-    ; absorbedTailBudget = absorbedTailBudget T
-    ; fullOffPacketBudget = fullOffPacketBudget T
+    ; absorbedTailBudget = targetTailBudget T
+    ; fullOffPacketBudget = targetFullOffPacketBudget T
     ; farTailBelowAbsorbedBudget = tailBound
     ; schurPlusAbsorbedTailBelowFullBudget =
-        schurPlusAbsorbedTailBelowFullBudget T radius
+        targetSchurPlusTailBelowFull T radius
     }
 
 selectedRadiusBoundsOffPacketResponse :
@@ -107,7 +107,7 @@ selectedRadiusBoundsOffPacketResponse :
     (λ radius →
       _≤_ A
         (offPacketResponse (splitAt F radius))
-        (fullOffPacketBudget T))
+        (targetFullOffPacketBudget T))
 selectedRadiusBoundsOffPacketResponse A F V T
   with selectRadiusAndAssembleTailAbsorption A F V T
 ... | radius , inputs =
