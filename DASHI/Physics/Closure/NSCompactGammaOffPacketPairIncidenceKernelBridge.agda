@@ -1,187 +1,139 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketPairIncidenceKernelBridge where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc; Set₁)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Analysis.WeightedKernelSchurTest
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketSchurSplit
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketWeightedKernelBridge
+open import DASHI.Physics.Closure.NSPairIncidenceKernel
+open import DASHI.Physics.Closure.NSPairIncidenceSchurBridge
 
 ------------------------------------------------------------------------
--- Exact finite pair-incidence kernel.
+-- Compact-Gamma adapter for the repository's exact Fourier pair-incidence
+-- program.
 --
--- The list `pairs` is the finite Galerkin incidence enumeration.  Each pair is
--- attached to one row and one column, and its entry vanishes away from that
--- incidence.  `incidenceKernel` is not a fitted shell matrix: it is the exact
--- finite sum of the declared pair entries at every row/column coordinate.
-------------------------------------------------------------------------
-
-_≢_ : ∀ {a} {X : Set a} → X → X → Set a
-x ≢ y = x ≡ y → ⊥
-
-record PairIncidenceKernel
-    {r c : Level}
-    (A : AbsorptionArithmetic)
-    (Row : Set r)
-    (Col : Set c) : Set (lsuc (r ⊔ c)) where
-  field
-    Pair : Set (r ⊔ c)
-    pairs : List Pair
-
-    pairRow : Pair → Row
-    pairCol : Pair → Col
-    pairCoefficient : Pair → Scalar A
-    pairEntry : Pair → Row → Col → Scalar A
-
-    entryAtIncidence :
-      ∀ pair →
-      pairEntry pair (pairRow pair) (pairCol pair) ≡
-      pairCoefficient pair
-
-    rowMismatchVanishes :
-      ∀ pair row col →
-      row ≢ pairRow pair →
-      pairEntry pair row col ≡ zero A
-
-    columnMismatchVanishes :
-      ∀ pair row col →
-      col ≢ pairCol pair →
-      pairEntry pair row col ≡ zero A
-
-open PairIncidenceKernel public
-
-sumPairEntries :
-  ∀ {r c}
-    {Row : Set r}
-    {Col : Set c}
-    (A : AbsorptionArithmetic)
-    (P : PairIncidenceKernel A Row Col) →
-  List (Pair P) →
-  Row →
-  Col →
-  Scalar A
-sumPairEntries A P [] row col = zero A
-sumPairEntries A P (pair ∷ rest) row col =
-  _+_ A
-    (pairEntry P pair row col)
-    (sumPairEntries A P rest row col)
-
-incidenceKernel :
-  ∀ {r c}
-    {Row : Set r}
-    {Col : Set c}
-    (A : AbsorptionArithmetic) →
-  PairIncidenceKernel A Row Col →
-  Row →
-  Col →
-  Scalar A
-incidenceKernel A P =
-  sumPairEntries A P (pairs P)
-
-pairIncidenceWeightedKernel :
-  ∀ {r c}
-    {Row : Set r}
-    {Col : Set c}
-    (A : AbsorptionArithmetic)
-    (P : PairIncidenceKernel A Row Col)
-    (K : WeightedKernelData Row Col (Scalar A)) →
-  WeightedKernelData Row Col (Scalar A)
-pairIncidenceWeightedKernel A P K = record
-  { kernel = incidenceKernel A P
-  ; rowWeight = rowWeight K
-  ; colWeight = colWeight K
-  }
-
-pairIncidenceKernelIdentity :
-  ∀ {r c}
-    {Row : Set r}
-    {Col : Set c}
-    (A : AbsorptionArithmetic)
-    (P : PairIncidenceKernel A Row Col)
-    (K : WeightedKernelData Row Col (Scalar A)) →
-  kernel K ≡ incidenceKernel A P →
-  KernelIdentityMatch K (pairIncidenceWeightedKernel A P K)
-pairIncidenceKernelIdentity A P K entriesMatch = record
-  { kernelMatches = entriesMatch
-  ; rowWeightsMatch = refl
-  ; colWeightsMatch = refl
-  }
-
-------------------------------------------------------------------------
--- Exact concrete-near representation.
+-- `NSPairIncidenceKernel` already supplies the exact finite fold of pair
+-- contributions, and `NSPairIncidenceSchurBridge` transports its finite row and
+-- column sums into `WeightedKernelSchurCertificate`.  This module adds the
+-- missing response-identification layer specific to the compact-Gamma
+-- off-packet derivative.
 --
--- Besides entrywise identity, this record requires exact action semantics for
--- the abstract Schur vector model.  The concrete near derivative must equal the
--- output energy of the pair-incidence action itself.  These two equalities are
--- enough to transport the response to the kernel output used by the certified
--- Schur estimate; no empirical comparison inequality is inserted here.
+-- Three separate facts are required:
+--
+--   1. the concrete Fourier kernel agrees pointwise with the pair-incidence
+--      fold;
+--   2. the abstract Schur action is exactly the action of its declared kernel;
+--   3. the concrete near derivative is exactly the output energy of the
+--      concrete Fourier-kernel action.
+--
+-- Only their composition may discharge
+-- `concreteNearResponseRepresentedByKernel` in the off-packet weighted-kernel
+-- bridge.  A coarse empirical shell matrix cannot inhabit this adapter.
 ------------------------------------------------------------------------
 
 record ExactNearPairIncidenceRepresentation
-    {r c : Level}
+    {p r c : Level}
+    {Pair : Set p}
     {Row : Set r}
     {Col : Set c}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col (Scalar A))
-    (L : WeightedSchurLaws K) : Set (lsuc (r ⊔ c)) where
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P)) :
+    Set (lsuc (p ⊔ r ⊔ c)) where
   field
-    exactPairKernel : PairIncidenceKernel A Row Col
-    exactKernelAction : ExactKernelAction K L
+    exactKernelAction :
+      ExactKernelAction (asWeightedKernelData P) L
+
     exactKernelInput : VectorIn L
+
+    concreteKernel : Row → Col → Scalar A
+    concreteKernelMatch :
+      ConcreteBiotSavartKernelMatch P concreteKernel
+
     concreteNearResponse : Scalar A
 
-    exactPairKernelIdentity :
-      KernelIdentityMatch K
-        (pairIncidenceWeightedKernel A exactPairKernel K)
-
-    concreteNearResponseIsPairAction :
+    concreteNearResponseIsConcreteAction :
       concreteNearResponse ≡
       outputEnergy L
         (evaluateEntries exactKernelAction
-          (kernel (pairIncidenceWeightedKernel A exactPairKernel K))
+          concreteKernel
           exactKernelInput)
 
 open ExactNearPairIncidenceRepresentation public
 
-certifiedKernelActionEqualsPairAction :
-  ∀ {r c}
+concreteKernelActionEqualsPairAction :
+  ∀ {p r c}
+    {Pair : Set p}
     {Row : Set r}
     {Col : Set c}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col (Scalar A))
-    (L : WeightedSchurLaws K)
-    (R : ExactNearPairIncidenceRepresentation A K L) →
-  applyKernel L (exactKernelInput R) ≡
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P))
+    (R : ExactNearPairIncidenceRepresentation A P L) →
   evaluateEntries (exactKernelAction R)
-    (kernel (pairIncidenceWeightedKernel A (exactPairKernel R) K))
+    (concreteKernel R)
     (exactKernelInput R)
-certifiedKernelActionEqualsPairAction A K L R =
-  exactKernelActionTransportByIdentity
+  ≡
+  evaluateEntries (exactKernelAction R)
+    (pairKernelEntry P)
+    (exactKernelInput R)
+concreteKernelActionEqualsPairAction A P L R =
+  exactKernelActionPointwiseTransport
     (exactKernelAction R)
-    (exactPairKernelIdentity R)
+    (concreteKernel R)
+    (pairKernelEntry P)
+    (pointwiseKernelMatch (concreteKernelMatch R))
     (exactKernelInput R)
 
-concreteNearResponseEqualsCertifiedKernelOutput :
-  ∀ {r c}
+pairActionEqualsCertifiedKernelAction :
+  ∀ {p r c}
+    {Pair : Set p}
     {Row : Set r}
     {Col : Set c}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col (Scalar A))
-    (L : WeightedSchurLaws K)
-    (R : ExactNearPairIncidenceRepresentation A K L) →
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P))
+    (R : ExactNearPairIncidenceRepresentation A P L) →
+  evaluateEntries (exactKernelAction R)
+    (pairKernelEntry P)
+    (exactKernelInput R)
+  ≡
+  applyKernel L (exactKernelInput R)
+pairActionEqualsCertifiedKernelAction A P L R =
+  sym (applyKernelMatchesEntries
+    (exactKernelAction R)
+    (exactKernelInput R))
+
+concreteNearResponseEqualsCertifiedKernelOutput :
+  ∀ {p r c}
+    {Pair : Set p}
+    {Row : Set r}
+    {Col : Set c}
+    (A : AbsorptionArithmetic)
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P))
+    (R : ExactNearPairIncidenceRepresentation A P L) →
   concreteNearResponse R ≡
   outputEnergy L (applyKernel L (exactKernelInput R))
-concreteNearResponseEqualsCertifiedKernelOutput A K L R =
+concreteNearResponseEqualsCertifiedKernelOutput A P L R =
   trans
-    (concreteNearResponseIsPairAction R)
-    (sym
+    (concreteNearResponseIsConcreteAction R)
+    (trans
       (cong
         (outputEnergy L)
-        (certifiedKernelActionEqualsPairAction A K L R)))
+        (concreteKernelActionEqualsPairAction A P L R))
+      (cong
+        (outputEnergy L)
+        (pairActionEqualsCertifiedKernelAction A P L R)))
+
+------------------------------------------------------------------------
+-- The absorption arithmetic used by the off-packet split only assumed
+-- transitivity.  Equality-to-order conversion additionally needs reflexivity,
+-- kept as an explicit local law rather than silently strengthening the shared
+-- arithmetic record.
+------------------------------------------------------------------------
 
 record ReflexiveAbsorptionOrder
     (A : AbsorptionArithmetic) : Set₁ where
@@ -192,41 +144,50 @@ record ReflexiveAbsorptionOrder
 open ReflexiveAbsorptionOrder public
 
 concreteNearResponseBelowCertifiedKernelOutput :
-  ∀ {r c}
+  ∀ {p r c}
+    {Pair : Set p}
     {Row : Set r}
     {Col : Set c}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col (Scalar A))
-    (L : WeightedSchurLaws K) →
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P)) →
   ReflexiveAbsorptionOrder A →
-  (R : ExactNearPairIncidenceRepresentation A K L) →
+  (R : ExactNearPairIncidenceRepresentation A P L) →
   _≤_ A
     (concreteNearResponse R)
     (outputEnergy L (applyKernel L (exactKernelInput R)))
-concreteNearResponseBelowCertifiedKernelOutput A K L O R =
+concreteNearResponseBelowCertifiedKernelOutput A P L O R =
   subst
     (λ left →
       _≤_ A left
         (outputEnergy L (applyKernel L (exactKernelInput R))))
-    (sym (concreteNearResponseEqualsCertifiedKernelOutput A K L R))
+    (sym (concreteNearResponseEqualsCertifiedKernelOutput A P L R))
     (≤-refl O
       (outputEnergy L (applyKernel L (exactKernelInput R))))
 
 ------------------------------------------------------------------------
--- Adapter into the existing Schur-tail chain.
+-- Full adapter: exact pair incidences + finite/uniform Schur realization +
+-- exact compact-Gamma response identity feed the existing near/tail chain.
 ------------------------------------------------------------------------
 
 record OffPacketPairIncidenceEvidence
-    {r c : Level}
+    {p r c : Level}
+    {Pair : Set p}
     {Row : Set r}
     {Col : Set c}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col (Scalar A))
-    (L : WeightedSchurLaws K) : Set (lsuc (r ⊔ c)) where
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P)) :
+    Set (lsuc (p ⊔ r ⊔ c)) where
   field
-    pairCertificate : WeightedKernelSchurCertificate K L
-    pairOrderReflexive : ReflexiveAbsorptionOrder A
-    pairNearRepresentation : ExactNearPairIncidenceRepresentation A K L
+    schurRealization :
+      PairIncidenceSchurRealization P L
+
+    pairOrderReflexive :
+      ReflexiveAbsorptionOrder A
+
+    pairNearRepresentation :
+      ExactNearPairIncidenceRepresentation A P L
 
     pairOffPacketResponse : Scalar A
     pairFarShellTail : Scalar A
@@ -245,38 +206,48 @@ record OffPacketPairIncidenceEvidence
 open OffPacketPairIncidenceEvidence public
 
 pairIncidenceEvidenceToWeightedKernelEvidence :
-  ∀ {r c}
+  ∀ {p r c}
+    {Pair : Set p}
     {Row : Set r}
     {Col : Set c}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col (Scalar A))
-    (L : WeightedSchurLaws K) →
-  OffPacketPairIncidenceEvidence A K L →
-  OffPacketWeightedKernelEvidence A K L
-pairIncidenceEvidenceToWeightedKernelEvidence A K L E = record
-  { certificate = pairCertificate E
-  ; kernelInput = exactKernelInput (pairNearRepresentation E)
-  ; offPacketResponse = pairOffPacketResponse E
-  ; nearShellResponse = concreteNearResponse (pairNearRepresentation E)
-  ; farShellTail = pairFarShellTail E
-  ; offPacketBelowNearPlusTail = pairOffPacketBelowNearPlusTail E
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P)) →
+  OffPacketPairIncidenceEvidence A P L →
+  OffPacketWeightedKernelEvidence A (asWeightedKernelData P) L
+pairIncidenceEvidenceToWeightedKernelEvidence A P L E = record
+  { certificate =
+      pairIncidenceWeightedCertificate (schurRealization E)
+  ; kernelInput =
+      exactKernelInput (pairNearRepresentation E)
+  ; offPacketResponse =
+      pairOffPacketResponse E
+  ; nearShellResponse =
+      concreteNearResponse (pairNearRepresentation E)
+  ; farShellTail =
+      pairFarShellTail E
+  ; offPacketBelowNearPlusTail =
+      pairOffPacketBelowNearPlusTail E
   ; concreteNearResponseRepresentedByKernel =
       concreteNearResponseBelowCertifiedKernelOutput
-        A K L
+        A P L
         (pairOrderReflexive E)
         (pairNearRepresentation E)
-  ; schurOrderTransport = pairSchurOrderTransport E
+  ; schurOrderTransport =
+      pairSchurOrderTransport E
   }
 
 pairIncidenceEvidenceToOffPacketSplit :
-  ∀ {r c}
+  ∀ {p r c}
+    {Pair : Set p}
     {Row : Set r}
     {Col : Set c}
     (A : AbsorptionArithmetic)
-    (K : WeightedKernelData Row Col (Scalar A))
-    (L : WeightedSchurLaws K) →
-  OffPacketPairIncidenceEvidence A K L →
+    (P : PairIncidenceData Pair Row Col (Scalar A))
+    (L : WeightedSchurLaws (asWeightedKernelData P)) →
+  OffPacketPairIncidenceEvidence A P L →
   OffPacketSchurSplitInputs A
-pairIncidenceEvidenceToOffPacketSplit A K L E =
-  weightedKernelEvidenceToOffPacketSplit A K L
-    (pairIncidenceEvidenceToWeightedKernelEvidence A K L E)
+pairIncidenceEvidenceToOffPacketSplit A P L E =
+  weightedKernelEvidenceToOffPacketSplit
+    A (asWeightedKernelData P) L
+    (pairIncidenceEvidenceToWeightedKernelEvidence A P L E)
