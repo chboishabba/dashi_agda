@@ -7,7 +7,15 @@ open import Agda.Builtin.Nat using (zero; suc; _+_)
 
 open import DASHI.Algebra.Trit using (neg; zer; pos; inv)
 open import DASHI.Codec.BalancedTritBitFibre
+open import DASHI.Codec.DNACarrierFibre
 open import DASHI.Codec.DNAFirstFormalism
+open import DASHI.Foundations.Base369MobiusTransport using (positive; negative)
+open import DASHI.Foundations.SSPTritCarrier using
+  ( sspNegOne
+  ; sspZero
+  ; sspPosOne
+  )
+open import DASHI.Interop.CodecCarrierFibreBridge
 
 ------------------------------------------------------------------------
 -- Executable carrier/involution witnesses.
@@ -57,6 +65,50 @@ three-trit-support-plus-sign :
   length (neg ∷ zer ∷ pos ∷ []) +
   nonZeroCount (neg ∷ zer ∷ pos ∷ [])
 three-trit-support-plus-sign = wordBitCost-support-plus-sign _
+
+------------------------------------------------------------------------
+-- DNA quotient/fibre witnesses. Chemistry class is complement-invariant;
+-- complement flips only the orbit phase.
+
+A-base-fibre-roundtrip : decodeBaseFibre (encodeBaseFibre A) ≡ A
+A-base-fibre-roundtrip = refl
+
+G-base-fibre-roundtrip : decodeBaseFibre (encodeBaseFibre G) ≡ G
+G-base-fibre-roundtrip = refl
+
+A-complement-fibre-equivariant :
+  encodeBaseFibre (complement A) ≡ complementFibre (encodeBaseFibre A)
+A-complement-fibre-equivariant = refl
+
+C-complement-fibre-equivariant :
+  encodeBaseFibre (complement C) ≡ complementFibre (encodeBaseFibre C)
+C-complement-fibre-equivariant = refl
+
+AT-chemistry-preserved-by-complement :
+  chemicalPair (complement A) ≡ chemicalPair A
+AT-chemistry-preserved-by-complement = refl
+
+CG-chemistry-preserved-by-complement :
+  chemicalPair (complement C) ≡ chemicalPair C
+CG-chemistry-preserved-by-complement = refl
+
+------------------------------------------------------------------------
+-- Existing SSP/Base369 surfaces consume the same trit and polarity fibres.
+
+negative-ssp-fibre-roundtrip : fibreToSSP (sspToFibre sspNegOne) ≡ sspNegOne
+negative-ssp-fibre-roundtrip = fibreToSSP-sspToFibre _
+
+zero-ssp-fibre-roundtrip : fibreToSSP (sspToFibre sspZero) ≡ sspZero
+zero-ssp-fibre-roundtrip = fibreToSSP-sspToFibre _
+
+positive-ssp-fibre-roundtrip : fibreToSSP (sspToFibre sspPosOne) ≡ sspPosOne
+positive-ssp-fibre-roundtrip = fibreToSSP-sspToFibre _
+
+positive-sign-is-existing-positive-polarity : signToPolarity positiveSign ≡ positive
+positive-sign-is-existing-positive-polarity = refl
+
+negative-sign-is-existing-negative-polarity : signToPolarity negativeSign ≡ negative
+negative-sign-is-existing-negative-polarity = refl
 
 ------------------------------------------------------------------------
 -- Empty DNA traces are generable for every constraint machine. Non-empty
