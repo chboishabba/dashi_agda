@@ -62,6 +62,7 @@ record GalerkinAnalyticSetting
     compactGammaTangentNumerator : State → Tangent → Scalar A
     absoluteLogDerivative : State → Tangent → Scalar A
     modulusBudget : State → Tangent → Scalar A
+    PositiveScalar : Scalar A → Set
 
     UniformlyBounded : (Nat → Scalar A) → Set
     StrictlyIncreasingSubsequence : (Nat → Nat) → Set
@@ -172,12 +173,13 @@ open NavierStokesNonlinearLimit public
 
 data DenominatorAlternative
     (A : AbsorptionArithmetic)
+    (Positive : Scalar A → Set)
     (Continuation : Set)
     (energy : Scalar A) : Set where
-  positiveDenominator : Positive A energy →
-                        DenominatorAlternative A Continuation energy
+  positiveDenominator : Positive energy →
+                        DenominatorAlternative A Positive Continuation energy
   divisionFreeBranch : Continuation →
-                       DenominatorAlternative A Continuation energy
+                       DenominatorAlternative A Positive Continuation energy
 
 ------------------------------------------------------------------------
 -- 4. Packet, numerator, tangent-response, and differentiated Gamma limits.
@@ -234,6 +236,7 @@ record CompactGammaFunctionalLimit
     denominatorAlternative :
       (time : Time S) →
       DenominatorAlternative A
+        (PositiveScalar S)
         (DivisionFreeContinuation S time)
         (packetEnergy S (continuumSolution S time))
 
