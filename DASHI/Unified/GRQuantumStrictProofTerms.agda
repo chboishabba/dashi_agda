@@ -18,16 +18,15 @@ open Preimage public
 record StrictSpinDoubleCoverProof : Set₁ where
   field
     base : SpinDoubleCoverProof
-
-  open SpinDoubleCoverProof base public
-
-  field
     exactSurjectivity :
-      (rotation : SO) → Preimage rho rotation
-
+      (rotation : SpinDoubleCoverProof.SO base) →
+      Preimage (SpinDoubleCoverProof.rho base) rotation
     fiberProofAgreesWithSurjectivity :
-      (rotation : SO) →
-      rho (TwoElementFiber.first (fiberIsTwoElement rotation)) ≡ rotation
+      (rotation : SpinDoubleCoverProof.SO base) →
+      SpinDoubleCoverProof.rho base
+        (TwoElementFiber.first
+          (SpinDoubleCoverProof.fiberIsTwoElement base rotation))
+      ≡ rotation
 open StrictSpinDoubleCoverProof public
 
 record StrictCliffordUniversalProof : Set₁ where
