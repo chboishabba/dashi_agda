@@ -39,20 +39,20 @@ record GalerkinAnalyticSetting
     (A : AbsorptionArithmetic)
     (C : SequentialOrderClosure A) : Set₁ where
   field
-    Time State GradientState NonlinearTerm Distribution Tangent : Set
+    Time State GradientState NonlinearTerm Tangent : Set
     InitialDatum : Set
 
     galerkinSolution : Nat → Time → State
     continuumSolution : Time → State
     gradient : State → GradientState
-    nonlinearTerm : State → NonlinearTerm
-    projectedNonlinearTerm : Nat → NonlinearTerm → NonlinearTerm
+    nonlinearPathTerm : (Time → State) → NonlinearTerm
+    projectedNonlinearPathTerm : Nat → NonlinearTerm → NonlinearTerm
 
     initialDatum : InitialDatum
     initialTrace : (Time → State) → InitialDatum
 
-    energyAt : State → Scalar A
-    integratedDissipation : Nat → Scalar A
+    combinedEnergyDissipation : Nat → Scalar A
+    continuumIntegratedDissipation : Scalar A
     initialEnergy : Scalar A
     viscosity : Scalar A
     timeDerivativeSize : Nat → Scalar A
@@ -64,6 +64,7 @@ record GalerkinAnalyticSetting
     modulusBudget : State → Tangent → Scalar A
 
     UniformlyBounded : (Nat → Scalar A) → Set
+    StrictlyIncreasingSubsequence : (Nat → Nat) → Set
     StrongL2Converges : (Nat → Nat) → Set
     WeakGradientConverges : (Nat → Nat) → Set
     DistributionallyConverges :
@@ -92,12 +93,12 @@ record GalerkinUniformBounds
     energyDissipationEstimate :
       (cutoff : Nat) →
       _≤_ A
-        (integratedDissipation S cutoff)
+        (combinedEnergyDissipation S cutoff)
         (initialEnergy S)
 
     uniformEnergyControl :
       UniformlyBounded S
-        (λ cutoff → integratedDissipation S cutoff)
+        (combinedEnergyDissipation S)
 
     uniformTimeDerivativeControl :
       UniformlyBounded S
@@ -118,7 +119,7 @@ record GalerkinSubsequenceCompactness
     subsequence : Nat → Nat
 
     subsequenceStrictlyIncreasing :
-      (index : Nat) → Set
+      StrictlyIncreasingSubsequence S subsequence
 
     aubinLionsStrongL2 :
       StrongL2Converges S subsequence
@@ -142,11 +143,11 @@ record NavierStokesNonlinearLimit
     nonlinearLimitIdentification :
       DistributionallyConverges S
         (λ index →
-          projectedNonlinearTerm S
+          projectedNonlinearPathTerm S
             (subsequence K index)
-            (nonlinearTerm S
+            (nonlinearPathTerm S
               (galerkinSolution S (subsequence K index))))
-        (nonlinearTerm S (continuumSolution S))
+        (nonlinearPathTerm S (continuumSolution S))
 
     initialDataIdentification :
       initialTrace S (continuumSolution S) ≡ initialDatum S
@@ -254,8 +255,8 @@ record BudgetLowerSemicontinuity
     gradientNormLowerSemicontinuity :
       LiminfBound S
         (λ index →
-          integratedDissipation S (subsequence K index))
-        (integratedDissipation S 0)
+          combinedEnergyDissipation S (subsequence K index))
+        (continuumIntegratedDissipation S)
 
     modulusBudgetConvergence :
       Converges C
