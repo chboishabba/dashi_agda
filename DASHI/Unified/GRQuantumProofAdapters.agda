@@ -10,14 +10,18 @@ import DASHI.Core.MultiscaleMDL as MDL
 import DASHI.Core.FiniteQuadraticMultiscale as Quadratic
 import DASHI.Geometry.FiniteCausalDiamond as Diamond
 import DASHI.Geometry.FiniteCausalDiamondClosed as DiamondClosed
+import DASHI.Geometry.FiniteCausalDiamondMinimality as DiamondMinimality
 import DASHI.Algebra.ConstructiveClifford as Clifford
 import DASHI.Algebra.FiniteQuaternionDoubleCover as QuaternionCover
+import DASHI.Algebra.FiniteQuaternionGroupReceipts as QuaternionUnits
 import DASHI.Algebra.Quantum.FiniteTreeWeyl as Tree
+import DASHI.Algebra.Quantum.FiniteQutritBornAdditivity as BornAdditivity
 import DASHI.Physics.Closure.PropositionEinsteinBridge as Einstein
 import DASHI.Physics.Closure.PropositionConstraintAlgebra as Constraints
 import DASHI.Physics.Closure.FiniteRegionalSpectrum as UV
 import DASHI.Physics.Closure.FiniteQuantumGRFlatModel as FlatQGR
 import DASHI.Physics.ObserverConditionedMultiscaleTransport as Observer
+import DASHI.Unified.GRQuantumFiniteDiagnosticReceipt as Diagnostic
 
 ------------------------------------------------------------------------
 -- Exact adapter from the existing multiscale residual theorem.
@@ -82,10 +86,13 @@ record ExactFiniteGRQuantumBundle : Set₁ where
     quadraticUniqueness : QuadraticUniquenessProof
     causalDiamond : ChainAntichainLorentzProof
     causalDiamondClosed : ChainAntichainLorentzClosed causalDiamond
+    causalMinimality : DiamondMinimality.FiniteChainAntichainMinimalityReceipt
     cliffordSyntax : Set
     finiteSpinDoubleCover : SpinDoubleCoverProof
+    quaternionUnitLaws : QuaternionUnits.FiniteQuaternionUnitReceipt
     treeShift : Tree.TreeShiftReceipt
     finiteBorn : Tree.FiniteBornReceipt
+    finiteBornAdditivity : BornAdditivity.FiniteQutritBornAdditivityReceipt
     flatEinstein : Einstein.ExactFlatEinsteinProducer
     flatConstraints : ConstraintAlgebraProof
     flatConstraintsClosed : ConstraintAlgebraClosed flatConstraints
@@ -93,6 +100,7 @@ record ExactFiniteGRQuantumBundle : Set₁ where
     regulatedUVPartial : UV.RegulatedUVPartialClosure
     flatQuantumGR : FlatQGR.FlatQuantumGRInterfaceReceipt
     observerWaveBoundary : Observer.ObserverWaveRoute
+    executableDiagnostic : Diagnostic.GRQuantumFiniteDiagnosticReceipt
     scope : String
 open ExactFiniteGRQuantumBundle public
 
@@ -102,10 +110,13 @@ canonicalExactFiniteGRQuantumBundle =
     Quadratic.finiteQuadraticUniquenessProof
     Diamond.finiteCausalDiamondProof
     DiamondClosed.finiteCausalDiamondClosed
+    DiamondMinimality.canonicalFiniteChainAntichainMinimalityReceipt
     Clifford.constructiveCliffordScope
     QuaternionCover.finiteQuaternionSpinCover
+    QuaternionUnits.canonicalFiniteQuaternionUnitReceipt
     Tree.canonicalTreeShiftReceipt
     Tree.canonicalFiniteBornReceipt
+    BornAdditivity.canonicalFiniteQutritBornAdditivityReceipt
     Einstein.canonicalExactFlatEinsteinProducer
     Constraints.flatConstraintSurface
     Constraints.flatConstraintClosed
@@ -113,6 +124,7 @@ canonicalExactFiniteGRQuantumBundle =
     UV.canonicalRegulatedUVPartialClosure
     FlatQGR.flatQuantumGRInterfaceReceipt
     Observer.canonicalObserverWaveRoute
+    Diagnostic.canonicalGRQuantumFiniteDiagnosticReceipt
     "exact finite/model tranche only; Q8 -> V4 is the finite Spin subgroup cover, not the full continuum cover"
 
 ------------------------------------------------------------------------
