@@ -47,9 +47,11 @@ The next surface adds a finite-matrix presentation that is independent of quater
 - `SUNMatrixLieAlgebra.agda` defines traceless anti-Hermitian matrices and the commutator bracket, then assembles the Lie algebra;
 - `SUNMatrixLieGroup.agda` defines matrix conjugation as `Ad`, and assembles the compact-simple Lie-group interface from explicit topology/exponential authority;
 - `SUNMatrixGeometry.agda` assembles the invariant trace metric, bi-invariant distance, quantitative local exponential chart, and group-dependent bracket/adjoint constants;
-- `SU3MatrixInstance.agda` fixes `N = 3` and computes `dim su(3) = 8`.
+- `SU3MatrixInstance.agda` fixes `N = 3` and computes `dim su(3) = 8`;
+- `SUNWilsonClassFunction.agda` turns normalized real trace into a checked class function and instantiates closed-loop gauge invariance;
+- `SUNWilsonAction.agda` defines the finite plaquette sum and proves gauge invariance of the full Wilson action by induction over plaquettes.
 
-Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, and exponential-chart facts are `standardImported`. The subtype construction and all group/Lie/metric/chart record assembly are `machineChecked`.
+Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, exponential-chart facts, and cyclicity of trace are `standardImported`. The subtype construction and all group/Lie/metric/chart/Wilson record assembly are `machineChecked`.
 
 ## Standard imported layer
 
