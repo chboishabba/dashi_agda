@@ -100,7 +100,7 @@ finiteAbsorbsFromTwo (suc n) p
 record ShiftFiniteTangentSemigroup : Setω where
   field
     Perturbation : Set
-    zero : Perturbation
+    zeroPoint : Perturbation
     stateOf : Perturbation → SPTI.ShiftPressurePoint
     derivativeStep : Perturbation → Perturbation
     timeAction : Nat → Perturbation → Perturbation
@@ -122,12 +122,12 @@ record ShiftFiniteTangentSemigroup : Setω where
         ≡
       timeAction n (timeAction m p)
 
-    zeroStable : derivativeStep zero ≡ zero
+    zeroStable : derivativeStep zeroPoint ≡ zeroPoint
 
     absorbedFromTwo :
       (n : Nat) →
       (p : Perturbation) →
-      timeAction (suc (suc n)) p ≡ zero
+      timeAction (suc (suc n)) p ≡ zeroPoint
 
     nonClaimBoundary : List String
 
@@ -138,7 +138,7 @@ canonicalShiftFiniteTangentSemigroup :
 canonicalShiftFiniteTangentSemigroup =
   record
     { Perturbation = ShiftFinitePerturbation
-    ; zero = zeroPerturbation
+    ; zeroPoint = zeroPerturbation
     ; stateOf = perturbationState
     ; derivativeStep = finiteDerivativeStep
     ; timeAction = finiteTimeAction
