@@ -52,97 +52,90 @@ labeling. They do **not** establish:
 Those stronger claims are collected in `MonsterInterpretationObligation`; the
 record deliberately has no inhabitant in this module.
 
-## 3. Indexing on the existing FRACTRAN carrier
+## 3. Correct Monster → SSP15 → FRACTRAN hierarchy
 
-`DASHI/Combinatorics/TriadFiveFractranIndex.agda` connects the new finite carrier
-to the repo's existing concrete FRACTRAN state instead of inventing a parallel
-15-register machine.
-
-The existing `FractranCOL.EV5` is a five-lane prime-exponent vector. Therefore the
-structure-preserving index is:
+`DASHI/Combinatorics/MonsterSSPFractranProjection.agda` records the stronger and
+more faithful interpretation:
 
 ```text
-TriadFractranState = EV5(sector0) × EV5(sector1) × EV5(sector2)
+Monster-side object / representation / orbit data
+  -> project to multiplicities on the fifteen supersingular primes
+  -> SSP15 exponent state
+  -> FRACTRAN execution over that selected prime basis
 ```
 
-and one `TriadFiveCoordinate` is read as:
+Thus SSP15 is the compressed Monster-facing basis, while FRACTRAN is the
+prime-exponent transition language. The core state is:
 
 ```text
-sector     -> choose the EV5 bank
-localClass -> choose lane 0..4 inside that existing EV5
+SSP15ExponentState = SSP -> Nat
 ```
 
-This preserves the proposed `3 × 5` structure explicitly. It also provides an
-`SSP`-labelled view through the reversible coordinate map, with the theorem
-`coordinateExponent-via-ssp` showing that reading by SSP label is exactly reading
-by the underlying triad-five coordinate.
+A `MonsterSSPCompression` must identify exactly which Monster-side equivalence is
+captured by equal SSP15 projections. A `MonsterSSPResidualCodec` adds the missing
+non-SSP detail when exact reconstruction is required.
 
-The module additionally states two stronger boundaries:
-
-- `TriadFiveFractranCatalogueIndex` requires an outcome-sound classifier and
-  representative under the existing `FractranCOL.run` semantics;
-- `TriadFiveFractranDynamicBridge` requires an actual lifted transition law,
-  preservation of the promoted Hecke invariant, and an MDL promotion receipt.
-
-Neither is inhabited automatically. A coordinate label is not yet a proof that two
-FRACTRAN computations are equivalent, and three EV5 banks are not yet a derived
-15-coordinate FRACTRAN dynamics.
-
-## 4. SSP15 as compression, not only indexing
-
-`DASHI/Combinatorics/SSP15FractranCompression.agda` strengthens the adapter from a
-coordinate view to an explicit compression contract.
-
-It separates:
-
-1. an outcome-preserving lossy quotient `EV5 -> SSP`;
-2. a lossless label-plus-residual codec `EV5 <-> SSP × Residual`;
-3. a dynamics-preserving compressed transition `SSP -> Maybe SSP`.
-
-The transition layer requires the SSP classifier to be a congruence for the
-existing `FractranCOL.step`: states assigned the same SSP label must have the same
-next compressed label, including halting. Whole-run compression further requires
-that compressed execution commute with `FractranCOL.run`.
-
-An `SSP15CompressionReceipt` charges model, label, residual, and transition bits.
-The compression is promoted only when this total is no worse than the literal
-FRACTRAN representation and the semantic/transition proof obligations are present.
-See `Docs/SSP15FractranCompression.md` for the focused boundary.
-
-## 5. Why these bridges belong together
-
-The directed correlation surface supplies a candidate separator. MDL determines
-whether that separator earns promotion. The `TriadFiveCoordinate` carrier gives a
-finite coordinate system in which a later representation-theoretic action could
-be stated. The FRACTRAN adapter indexes those coordinates on existing
-prime-exponent state machinery, while the SSP15 compression layer determines
-whether the labels are merely coordinates, an outcome quotient, or a genuine
-label-plus-residual codec. The flow is therefore:
+The actual dynamic bridge is a commuting-square obligation:
 
 ```text
-computed sector data
-  -> directed invariant candidate
-  -> MDL/promotion receipt
-  -> finite 3×5 coordinate carrier
-  -> three-bank EV5 FRACTRAN index
-  -> SSP15 quotient or residual codec
-  -> transition/run congruence
-  -> optional group-action obligations
+project (monsterStep object)
+  = fractranStep (project object)
 ```
 
-This keeps the Monster-facing layer downstream of the measured and promoted
-Hecke invariant rather than using Monster numerology to choose the invariant in
-advance. It also keeps FRACTRAN semantics downstream of explicit encoding and
-simulation obligations rather than treating a shared prime label as computational
-identity.
+This is packaged by `MonsterSSPFractranSimulation`. It is not derived merely from
+the fact that both sides mention primes.
 
-## 6. Immediate discharge order
+## 4. Relation to the existing EV5 FRACTRAN toy
 
-1. Focus-check the MDL-promotion, triad-five, FRACTRAN-index, and SSP15 compression modules.
-2. Compute the three predicted current pairs sector-by-sector.
-3. If local histograms collapse, compute the symmetric and then directed correlations.
-4. Construct a `PromotionReceipt` only for a level that separates and pays its MDL cost.
-5. Define candidate `EV5 -> SSP` classifiers from terminal outcome, orbit basin, and transition signature.
-6. Test the SSP step-congruence obligation; refine labels or add residual transition state when it fails.
-7. Construct an `SSP15CompressionReceipt` only after outcome/lossless authority and measured MDL savings exist.
-8. Test whether the resulting separated fibres admit a natural five-class quotient. Only then attempt to inhabit `MonsterInterpretationObligation`.
+`DASHI/Combinatorics/TriadFiveFractranIndex.agda` remains a useful finite adapter to
+the repo's existing concrete `FractranCOL.EV5` machine. It should now be read as a
+toy/indexing lane, not as the primary Monster compression theorem.
+
+The primary structure is fifteen SSP prime lanes. The existing five-lane machine is
+only one bounded executable fragment. Three EV5 banks can model a `3 × 5` table,
+but this does not itself prove that the Monster projection factors into those three
+banks.
+
+## 5. Generic SSP15 quotient codec
+
+`DASHI/Combinatorics/SSP15FractranCompression.agda` remains useful as a generic
+codec contract. It separates:
+
+1. an outcome-preserving quotient,
+2. a lossless label-plus-residual codec,
+3. a dynamics-preserving compressed transition.
+
+However, an arbitrary `EV5 -> SSP` classifier is not the canonical Monster story.
+For the Monster-facing lane, the encoder should arise by first projecting Monster
+structure onto the fifteen SSP multiplicities and only then executing or compressing
+that exponent state.
+
+## 6. Combined flow
+
+```text
+computed Hecke sector data
+  -> promoted invariant
+  -> candidate Monster-side structural interpretation
+  -> fifteen-SSP multiplicity projection
+  -> SSP15 prime-exponent state
+  -> FRACTRAN transition system
+  -> optional residual outside SSP15
+  -> outcome / transition / run receipts
+```
+
+The Monster-facing compression is therefore upstream of FRACTRAN execution, not a
+post-hoc relabeling of arbitrary FRACTRAN states.
+
+## 7. Immediate discharge order
+
+1. Focus-check the MDL, triad-five, SSP projection, and FRACTRAN modules.
+2. Specify the actual Monster-side carrier being compressed.
+3. Define the fifteen SSP multiplicity/invariant projection.
+4. Prove projection soundness and completeness for the declared Monster-side
+   equivalence.
+5. Define FRACTRAN instructions over `SSP15ExponentState`.
+6. Prove the Monster step / FRACTRAN step commuting square.
+7. Add a residual channel for structure outside the SSP projection when exact
+   reconstruction is required.
+8. Charge the model, projected state, transition program, and residual using MDL.
+9. Only after those steps attempt a representation or moonshine interpretation.
