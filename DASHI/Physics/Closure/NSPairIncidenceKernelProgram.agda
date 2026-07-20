@@ -15,6 +15,7 @@ open import DASHI.Physics.Closure.NSWall1CanonicalResolventGap public
 open import DASHI.Physics.Closure.NSDivergenceFreePolarizationBasis public
 open import DASHI.Physics.Closure.NSPairIncidenceKernel public
 open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel public
+open import DASHI.Physics.Closure.NSDifferentiatedTriadAnalyticLeaf public
 open import DASHI.Physics.Closure.NSWall1FourierShellInstance public
 open import DASHI.Physics.Closure.NSWall1PolarizationInstantiation public
 open import DASHI.Physics.Closure.NSWall1UniformWeightedSchur public
