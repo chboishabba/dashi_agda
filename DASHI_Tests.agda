@@ -21,6 +21,15 @@ import DASHI.Physics.MaskedCone
 import DASHI.Physics.LorentzianCoreClosure
 import DASHI.Physics.MaskedSignature31Bridge
 import DASHI.Physics.DefectLorentzBridge
+import DASHI.Physics.GlobalDimensionUniqueness
+import DASHI.Physics.FiniteToContinuumGeometry
+import DASHI.Physics.BianchiLovelockCompletion
+import DASHI.Physics.CliffordRepresentationCompletion
+import DASHI.Physics.SpinDoubleCoverCompletion
+import DASHI.Physics.CCRContinuumCompletion
+import DASHI.Physics.UnitaryCompletion
+import DASHI.Physics.StandardModelUniqueness
+import DASHI.Physics.FullPhysicsClosure
 import DASHI.Physics.ClosureOnAssumption
 
 ------------------------------------------------------------------------
