@@ -7,9 +7,6 @@ import DASHI.Empirical.GRQuantumCorrespondenceBoundary as Empirical
 
 ------------------------------------------------------------------------
 -- Strict refinements of the proposition-level terminal contract.
---
--- These records remove remaining opportunities to satisfy an interface with an
--- arbitrary inhabited proposition unrelated to the intended mathematical map.
 
 record Preimage {A B : Set} (map : A → B) (target : B) : Set where
   constructor preimage
@@ -67,6 +64,24 @@ record StrictCliffordUniversalProof : Set₁ where
       left ≡ right
 open StrictCliffordUniversalProof public
 
+record CliffordSurfaceCoherence
+  (basic : CliffordUniversalProof)
+  (strict : StrictCliffordUniversalProof) : Set₁ where
+  field
+    vectorCarrierAgreement :
+      CliffordUniversalProof.Vector basic
+      ≡ StrictCliffordUniversalProof.Vector strict
+    scalarCarrierAgreement :
+      CliffordUniversalProof.Scalar basic
+      ≡ StrictCliffordUniversalProof.Scalar strict
+    cliffordCarrierAgreement :
+      CliffordUniversalProof.Clifford basic
+      ≡ StrictCliffordUniversalProof.Clifford strict
+    generatorAndRelationCompatibility : Set
+    generatorAndRelationCompatibilityProof :
+      generatorAndRelationCompatibility
+open CliffordSurfaceCoherence public
+
 record SharedSubstrateRecovery : Set₁ where
   field
     Substrate : Set
@@ -105,26 +120,38 @@ record StrictTerminalGRQuantumProof : Set₁ where
   field
     propositionTerminal : TerminalGRQuantumProof
     strictClifford : StrictCliffordUniversalProof
+    cliffordCoherence :
+      CliffordSurfaceCoherence
+        (TerminalGRQuantumProof.clifford propositionTerminal)
+        strictClifford
     strictSpinCover : StrictSpinDoubleCoverProof
+    spinCoverAgreement :
+      StrictSpinDoubleCoverProof.base strictSpinCover
+      ≡ TerminalGRQuantumProof.spinCover propositionTerminal
     sharedSubstrate : SharedSubstrateRecovery
     empiricalCorrespondence : Empirical.PhysicalGRQuantumCorrespondence
 open StrictTerminalGRQuantumProof public
 
-------------------------------------------------------------------------
--- Strict terminal assembly.  No canonical inhabitant is defined.
-
 assembleStrictTerminalGRQuantumProof :
-  TerminalGRQuantumProof →
-  StrictCliffordUniversalProof →
-  StrictSpinDoubleCoverProof →
+  (terminal : TerminalGRQuantumProof) →
+  (clifford : StrictCliffordUniversalProof) →
+  CliffordSurfaceCoherence
+    (TerminalGRQuantumProof.clifford terminal)
+    clifford →
+  (spin : StrictSpinDoubleCoverProof) →
+  StrictSpinDoubleCoverProof.base spin
+    ≡ TerminalGRQuantumProof.spinCover terminal →
   SharedSubstrateRecovery →
   Empirical.PhysicalGRQuantumCorrespondence →
   StrictTerminalGRQuantumProof
-assembleStrictTerminalGRQuantumProof terminal clifford spin substrate empirical =
+assembleStrictTerminalGRQuantumProof
+  terminal clifford coherence spin spinAgreement substrate empirical =
   record
     { propositionTerminal = terminal
     ; strictClifford = clifford
+    ; cliffordCoherence = coherence
     ; strictSpinCover = spin
+    ; spinCoverAgreement = spinAgreement
     ; sharedSubstrate = substrate
     ; empiricalCorrespondence = empirical
     }
