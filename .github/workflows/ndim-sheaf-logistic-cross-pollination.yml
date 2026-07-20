@@ -1,0 +1,42 @@
+name: N-dimensional sheaf logistic cross-pollination
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Topology/*.agda"
+      - "DASHI/Sheaf/*.agda"
+      - "DASHI/Dynamics/*.agda"
+      - "DASHI/Foundations/*Padic*.agda"
+      - "DASHI/Promotion/SystemicDistressReframingBoundary.agda"
+      - "DASHI/Culture/RelationalTeachingCampaignBoundary.agda"
+      - "DASHI/Unified/NDimSheafLogisticCrossPollinationRegression.agda"
+      - "Docs/support/reference/NDimSheafLogisticCrossPollination.md"
+      - ".github/workflows/ndim-sheaf-logistic-cross-pollination.yml"
+  push:
+    branches: [master]
+    paths:
+      - "DASHI/Topology/*.agda"
+      - "DASHI/Sheaf/*.agda"
+      - "DASHI/Dynamics/*.agda"
+      - "DASHI/Foundations/*Padic*.agda"
+      - "DASHI/Promotion/SystemicDistressReframingBoundary.agda"
+      - "DASHI/Culture/RelationalTeachingCampaignBoundary.agda"
+      - "DASHI/Unified/NDimSheafLogisticCrossPollinationRegression.agda"
+      - "Docs/support/reference/NDimSheafLogisticCrossPollination.md"
+      - ".github/workflows/ndim-sheaf-logistic-cross-pollination.yml"
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck aggregate regression
+        run: |
+          agda --no-libraries --no-default-libraries -i . -i .agda-stdlib \
+            DASHI/Unified/NDimSheafLogisticCrossPollinationRegression.agda
