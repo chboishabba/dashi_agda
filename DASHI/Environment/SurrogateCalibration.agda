@@ -1,7 +1,7 @@
 module DASHI.Environment.SurrogateCalibration where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
@@ -87,8 +87,8 @@ record CalibrationReceipt : Set₁ where
     latentContract : LatentModelContract
     heldOut : HeldOutValidation
     conservation : Q.ConservationBundle
-    uncertaintyThreshold : Nat
-    residualThreshold : Nat
+    declaredUncertaintyThreshold : Nat
+    declaredResidualThreshold : Nat
     escalationPolicy : String
     provenance : List String
 open CalibrationReceipt public
