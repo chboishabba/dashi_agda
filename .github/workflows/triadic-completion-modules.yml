@@ -1,6 +1,17 @@
 name: Triadic completion modules
 
 on:
+  pull_request:
+    paths:
+      - "DASHI/Algebra/TriadicFiniteArithmeticLaws.agda"
+      - "DASHI/Algebra/TriadicDepthTwoDFTGroupBridge.agda"
+      - "DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda"
+      - "DASHI/Geometry/TriadicSpectralGenusOneCurve.agda"
+      - "DASHI/Physics/Closure/TriadicConcreteAnalyticInstances.agda"
+      - "DASHI/Physics/Closure/TriadicKraftMDLConsistency.agda"
+      - "scripts/generate_triadic_arithmetic_laws.py"
+      - "scripts/generate_triadic_depth_two_dft.py"
+      - ".github/workflows/triadic-completion-modules.yml"
   push:
     branches:
       - agent/triadic-spectral-completion
@@ -17,7 +28,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: triadic-completion-modules
+  group: triadic-completion-modules-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -57,4 +68,12 @@ jobs:
           agda-version: "2.6.4.3"
           agda-stdlib-version: "2.1"
       - name: Typecheck ${{ matrix.file }}
-        run: agda -i . -l standard-library "${{ matrix.file }}"
+        run: |
+          set -o pipefail
+          agda -i . -l standard-library "${{ matrix.file }}" 2>&1 | tee "${{ matrix.name }}.log"
+      - name: Upload ${{ matrix.name }} log
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: triadic-${{ matrix.name }}-log
+          path: "${{ matrix.name }}.log"
