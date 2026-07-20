@@ -3,7 +3,7 @@ module DASHI.Physics.Units.SI where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Int using (Int; pos; negsuc)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
@@ -84,8 +84,8 @@ unitScale  = tenTo zeroI
 deciScale  = tenTo minusOne
 centiScale = tenTo minusTwo
 milliScale = tenTo minusThree
-microScale = tenTo (negsuc (pos 3))
-nanoScale  = tenTo (negsuc (pos 8))
+microScale = tenTo (negsuc 5)
+nanoScale  = tenTo (negsuc 8)
 
 record Quantity (d : Dimension) (s : DecimalScale) : Set where
   constructor quantity
