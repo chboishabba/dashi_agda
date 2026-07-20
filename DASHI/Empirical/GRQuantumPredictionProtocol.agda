@@ -24,7 +24,7 @@ record ScaledQuantity : Set where
   constructor scaled-quantity
   field
     numerator : Nat
-    denominator : Nat
+    denominator : Observable.PositiveNat
     decimalExponent : Nat
     unit : Observable.PhysicalUnit
 open ScaledQuantity public
