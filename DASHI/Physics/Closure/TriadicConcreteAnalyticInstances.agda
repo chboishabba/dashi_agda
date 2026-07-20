@@ -13,21 +13,15 @@ import DASHI.Physics.Closure.TriadicAnalyticCertificates as Certificates
 import DASHI.Foundations.TriadicFiniteQuotient as Quotient
 
 ------------------------------------------------------------------------
--- Logical carriers.
-
-data ⊤ : Set where
-  tt : ⊤
-
-record _×_ (A B : Set) : Set where
-  constructor _,_
-  field
-    first : A
-    second : B
-
-open _×_ public
-
-------------------------------------------------------------------------
 -- Concrete quarter-scale rational approximants.
+--
+-- A stream d is represented by the nested rational intervals centred at
+--
+--   s_n(d) = Σ_{k<n} d_k 4^{-k}
+--
+-- with radius (4/3)4^{-n}.  The exact one-step budget identity below is the
+-- constructive Cauchy argument; the first-difference identity is the strict
+-- separation margin supplied by λ=1/4<1/3.
 
 quarter : ℚ
 quarter = + 1 / 4
@@ -40,6 +34,9 @@ fourThirds = + 4 / 3
 
 two : ℚ
 two = + 2 / 1
+
+four : ℚ
+four = + 4 / 1
 
 quarterPower : Nat → ℚ
 quarterPower zero = 1ℚ
@@ -73,6 +70,13 @@ nextTailBudgetIdentity n
   rewrite quarterPowerStep n =
   solve (quarterPower n ∷ [])
 
+radiusQuarterStep :
+  (n : Nat) →
+  four * quarterTailRadius (suc n) ≡ quarterTailRadius n
+radiusQuarterStep n
+  rewrite quarterPowerStep n =
+  solve (quarterPower n ∷ [])
+
 firstDifferenceBudgetIdentity :
   (n : Nat) →
   two * quarterTailRadius (suc n) + quarterSeparationMargin n
@@ -93,6 +97,8 @@ record QuarterRealCode : Set where
       (n : Nat) → radius n ≡ quarterTailRadius n
     nestedBudgetExact :
       (n : Nat) → quarterPower n + radius (suc n) ≡ radius n
+    radiusScalesByQuarter :
+      (n : Nat) → four * radius (suc n) ≡ radius n
     separationBudgetExact :
       (n : Nat) →
       two * radius (suc n) + quarterSeparationMargin n
@@ -109,201 +115,52 @@ quarterReal d =
     quarterTailRadius
     (λ n → refl)
     nextTailBudgetIdentity
+    radiusQuarterStep
     firstDifferenceBudgetIdentity
 
-------------------------------------------------------------------------
--- A concrete term model implementing the existing envelope interface.
---
--- QuarterScalar is an exact proof-relevant presentation.  QuarterRealCode above
--- supplies the rational Cauchy/interval interpretation of embedded streams.
-
-data QuarterScalar : Set where
-  zeroˢ : QuarterScalar
-  oneˢ : QuarterScalar
-  thirdˢ : QuarterScalar
-  lambdaˢ : QuarterScalar
-  tritˢ : Env.Trit → QuarterScalar
-  addˢ : QuarterScalar → QuarterScalar → QuarterScalar
-  multiplyˢ : QuarterScalar → QuarterScalar → QuarterScalar
-  negateˢ : QuarterScalar → QuarterScalar
-  digitDistanceˢ : Env.Trit → Env.Trit → QuarterScalar
-  embeddedˢ : Env.Stream → QuarterScalar
-  metricˢ : Env.Stream → Env.Stream → QuarterScalar
-
-quarterPowerTerm : Nat → QuarterScalar
-quarterPowerTerm zero = oneˢ
-quarterPowerTerm (suc n) = multiplyˢ (quarterPowerTerm n) lambdaˢ
-
-quarterFiniteEvaluation : Nat → Env.Stream → QuarterScalar
-quarterFiniteEvaluation zero d = zeroˢ
-quarterFiniteEvaluation (suc n) d =
-  addˢ
-    (quarterFiniteEvaluation n d)
-    (multiplyˢ (tritˢ (d n)) (quarterPowerTerm n))
-
-data QuarterPositive : QuarterScalar → Set where
-  quarter-positive : QuarterPositive lambdaˢ
-
-data QuarterLessThan : QuarterScalar → QuarterScalar → Set where
-  quarter-below-one : QuarterLessThan lambdaˢ oneˢ
-  quarter-below-third : QuarterLessThan lambdaˢ thirdˢ
-
-data QuarterAtMost : QuarterScalar → QuarterScalar → Set where
-  quarter-at-most-refl :
-    ∀ {x : QuarterScalar} → QuarterAtMost x x
-
-record QuarterConverges
-  (sequence : Nat → QuarterScalar)
-  (limit : QuarterScalar) : Set where
-  constructor quarter-converges
+record ConcreteQuarterRealAnalyticInstance : Set₁ where
   field
-    convergentSource : Env.Stream
-    approximantExact :
-      (n : Nat) → sequence n ≡ quarterFiniteEvaluation n convergentSource
-    limitExact : limit ≡ embeddedˢ convergentSource
-
-open QuarterConverges public
-
-data QuarterWeightedDigitMetric :
-  Env.Stream → Env.Stream → QuarterScalar → Set where
-  quarter-weighted-metric :
-    ∀ {x y : Env.Stream} →
-    QuarterWeightedDigitMetric x y (metricˢ x y)
-
-data QuarterCylinderControlled :
-  Nat → Env.Stream → Env.Stream → QuarterScalar → QuarterScalar → Set where
-  quarter-cylinder-controlled :
-    ∀ {n : Nat} {x y : Env.Stream} →
-    Env.PrefixAgreement n x y →
-    QuarterCylinderControlled n x y (embeddedˢ x) (embeddedˢ y)
-
-data QuarterFirstDifferenceBound : Nat → QuarterScalar → Set where
-  quarter-first-difference-bound :
-    ∀ {n : Nat} {x y : Env.Stream} →
-    Env.FirstDifferenceAt n x y →
-    QuarterFirstDifferenceBound n (metricˢ x y)
-
-data QuarterMetricRecoversCylinder :
-  Nat → Env.Stream → Env.Stream → QuarterScalar → Set where
-  quarter-metric-recovers-cylinder :
-    ∀ {n : Nat} {x y : Env.Stream} →
-    QuarterMetricRecoversCylinder n x y (metricˢ x y)
-
-record QuarterWeightedSummable
-  {Axis : Set}
-  (weight value : Axis → QuarterScalar) : Set where
-  constructor quarter-weighted-summable
-  field
-    summabilityEvidence : ⊤
-
-quarterDepthKernelModel : Env.DepthKernelModel
-quarterDepthKernelModel =
-  record
-    { Scalar = QuarterScalar
-    ; zeroˢ = zeroˢ
-    ; oneˢ = oneˢ
-    ; thirdˢ = thirdˢ
-    ; lambda = lambdaˢ
-    ; _+ˢ_ = addˢ
-    ; _*ˢ_ = multiplyˢ
-    ; negateˢ = negateˢ
-    ; tritValue = tritˢ
-    ; lambdaPower = quarterPowerTerm
-    ; tritDistance = digitDistanceˢ
-    ; Positive = QuarterPositive
-    ; LessThan = QuarterLessThan
-    ; AtMost = QuarterAtMost
-    ; Converges = QuarterConverges
-    ; IsWeightedDigitMetric = QuarterWeightedDigitMetric
-    ; CylinderControlled = QuarterCylinderControlled
-    ; FirstDifferenceBound = QuarterFirstDifferenceBound
-    ; MetricRecoversCylinder = QuarterMetricRecoversCylinder
-    ; WeightedL2Summable = QuarterWeightedSummable
-    ; powerZero = refl
-    ; powerStep = λ n → refl
-    ; negativeTritValue = refl
-    ; zeroTritValue = refl
-    ; positiveTritValue = refl
-    }
-
-finiteEvaluationIsQuarterEvaluation :
-  (n : Nat) →
-  (d : Env.Stream) →
-  Env.finiteEvaluation quarterDepthKernelModel n d
-  ≡ quarterFiniteEvaluation n d
-finiteEvaluationIsQuarterEvaluation zero d = refl
-finiteEvaluationIsQuarterEvaluation (suc n) d
-  rewrite finiteEvaluationIsQuarterEvaluation n d = refl
-
-quarterContinuousEnvelope :
-  Env.ContinuousDepthEnvelope quarterDepthKernelModel
-quarterContinuousEnvelope =
-  record
-    { embed = embeddedˢ
-    ; depthMetric = metricˢ
-    ; lambdaPositive = quarter-positive
-    ; lambdaBelowOne = quarter-below-one
-    ; lambdaBelowThird = quarter-below-third
-    ; finiteApproximantsConvergeToEmbed = λ d →
-        quarter-converges
-          d
-          (finiteEvaluationIsQuarterEvaluation · d)
-          refl
-    ; depthMetricIsWeightedDigitSum = λ x y → quarter-weighted-metric
-    ; cylinderContinuity = λ n x y agreement →
-        quarter-cylinder-controlled agreement
-    ; firstDifferenceControlsMetric = λ n x y difference →
-        quarter-first-difference-bound difference
-    ; injectiveBelowThird = λ x y equality → embeddedInjective equality
-    ; metricCylinderRecovery = λ n x y → quarter-metric-recovers-cylinder
-    }
-  where
-  _·_ :
-    ((n : Nat) → Env.finiteEvaluation quarterDepthKernelModel n _
-      ≡ quarterFiniteEvaluation n _) →
-    Env.Stream →
-    (n : Nat) →
-    Env.finiteEvaluation quarterDepthKernelModel n _
-      ≡ quarterFiniteEvaluation n _
-  proof · d = λ n → finiteEvaluationIsQuarterEvaluation n d
-
-  embeddedInjective :
-    ∀ {x y : Env.Stream} → embeddedˢ x ≡ embeddedˢ y → x ≡ y
-  embeddedInjective refl = refl
-
-------------------------------------------------------------------------
--- Evidence-carrying concrete real receipt.
-
-record ConcreteQuarterRealReceipt : Set₁ where
-  field
-    code : Env.Stream → QuarterRealCode
-    model : Env.DepthKernelModel
-    envelope : Env.ContinuousDepthEnvelope model
-    lambdaIsQuarter : ℚ
-    exactTailIdentity :
+    ScalarApproximation : Set
+    scalarApproximationIsRational : ScalarApproximation ≡ ℚ
+    embed : Env.Stream → QuarterRealCode
+    contractionScale : ℚ
+    scaleIsQuarter : contractionScale ≡ quarter
+    exactGeometricTail :
       (n : Nat) →
       quarterPower n + quarterTailRadius (suc n)
       ≡ quarterTailRadius n
-    exactSeparationIdentity :
+    exactRadiusContraction :
+      (n : Nat) →
+      four * quarterTailRadius (suc n) ≡ quarterTailRadius n
+    exactFirstDifferenceMargin :
       (n : Nat) →
       two * quarterTailRadius (suc n) + quarterSeparationMargin n
       ≡ quarterPower n
 
-open ConcreteQuarterRealReceipt public
+open ConcreteQuarterRealAnalyticInstance public
 
-concreteQuarterRealReceipt : ConcreteQuarterRealReceipt
-concreteQuarterRealReceipt =
+concreteQuarterRealAnalyticInstance :
+  ConcreteQuarterRealAnalyticInstance
+concreteQuarterRealAnalyticInstance =
   record
-    { code = quarterReal
-    ; model = quarterDepthKernelModel
-    ; envelope = quarterContinuousEnvelope
-    ; lambdaIsQuarter = quarter
-    ; exactTailIdentity = nextTailBudgetIdentity
-    ; exactSeparationIdentity = firstDifferenceBudgetIdentity
+    { ScalarApproximation = ℚ
+    ; scalarApproximationIsRational = refl
+    ; embed = quarterReal
+    ; contractionScale = quarter
+    ; scaleIsQuarter = refl
+    ; exactGeometricTail = nextTailBudgetIdentity
+    ; exactRadiusContraction = radiusQuarterStep
+    ; exactFirstDifferenceMargin = firstDifferenceBudgetIdentity
     }
 
 ------------------------------------------------------------------------
 -- Native 3-adic global chart.
+--
+-- The carrier is the already-checked inverse limit of Z/3^nZ.  The global
+-- chart is the identity embedding into a distinguished Q3 ambient code.  A
+-- one-chart atlas has identity transition map, hence its transition theorem is
+-- definitional; compatibility with every finite quotient is the inverse-limit
+-- compatibility proof itself.
 
 data GlobalTriadicChart : Set where
   globalTriadicChart : GlobalTriadicChart
@@ -317,13 +174,56 @@ chartMap :
   Q3AmbientCode
 chartMap globalTriadicChart point = embeddedInteger point
 
-chartTransition : GlobalTriadicChart → GlobalTriadicChart → Q3AmbientCode → Q3AmbientCode
+chartTransition :
+  GlobalTriadicChart →
+  GlobalTriadicChart →
+  Q3AmbientCode →
+  Q3AmbientCode
 chartTransition globalTriadicChart globalTriadicChart value = value
 
 chartTransitionIdentity :
   (value : Q3AmbientCode) →
   chartTransition globalTriadicChart globalTriadicChart value ≡ value
 chartTransitionIdentity value = refl
+
+record ConcretePAdicAtlasReceipt : Set₁ where
+  field
+    coordinateMap :
+      GlobalTriadicChart →
+      Quotient.TriadicInverseLimitPoint →
+      Q3AmbientCode
+    transitionMap :
+      GlobalTriadicChart →
+      GlobalTriadicChart →
+      Q3AmbientCode →
+      Q3AmbientCode
+    transitionIsIdentity :
+      (value : Q3AmbientCode) →
+      transitionMap globalTriadicChart globalTriadicChart value ≡ value
+    finiteCoordinate :
+      Quotient.TriadicInverseLimitPoint →
+      (n : Nat) →
+      Quotient.Residue3Pow n
+    finiteCoordinatesCompatible :
+      (point : Quotient.TriadicInverseLimitPoint) →
+      (n : Nat) →
+      Quotient.reduce (finiteCoordinate point (suc n))
+      ≡ finiteCoordinate point n
+
+open ConcretePAdicAtlasReceipt public
+
+concretePAdicAtlas : ConcretePAdicAtlasReceipt
+concretePAdicAtlas =
+  record
+    { coordinateMap = chartMap
+    ; transitionMap = chartTransition
+    ; transitionIsIdentity = chartTransitionIdentity
+    ; finiteCoordinate = Quotient.coordinate
+    ; finiteCoordinatesCompatible = Quotient.compatible
+    }
+
+------------------------------------------------------------------------
+-- Adapter into the earlier fail-closed analytic certificate surface.
 
 data IsTriadicIntegerDomain : Set where
   triadicIntegerDomain : IsTriadicIntegerDomain
@@ -355,41 +255,9 @@ concretePAdicAnalyticCertificate =
     ; compatibleWithFiniteQuotientTower = CompatibleWithQuotientTower
     }
 
-record ConcretePAdicAtlasReceipt : Set₁ where
-  field
-    carrier : Set
-    ambient : Set
-    chart : Set
-    coordinateMap : chart → carrier → ambient
-    transitionMap : chart → chart → ambient → ambient
-    transitionIsIdentity :
-      (value : ambient) →
-      transitionMap globalTriadicChart globalTriadicChart value ≡ value
-    finiteCoordinate : carrier → (n : Nat) → Quotient.Residue3Pow n
-    finiteCoordinatesCompatible :
-      (point : carrier) →
-      (n : Nat) →
-      Quotient.reduce (finiteCoordinate point (suc n))
-      ≡ finiteCoordinate point n
-
-open ConcretePAdicAtlasReceipt public
-
-concretePAdicAtlas : ConcretePAdicAtlasReceipt
-concretePAdicAtlas =
-  record
-    { carrier = Quotient.TriadicInverseLimitPoint
-    ; ambient = Q3AmbientCode
-    ; chart = GlobalTriadicChart
-    ; coordinateMap = chartMap
-    ; transitionMap = chartTransition
-    ; transitionIsIdentity = chartTransitionIdentity
-    ; finiteCoordinate = Quotient.coordinate
-    ; finiteCoordinatesCompatible = Quotient.compatible
-    }
-
 analyticInstancesStatement : String
 analyticInstancesStatement =
-  "The real lane is a concrete quarter-scale rational Cauchy/interval presentation with exact geometric tail and first-difference separation identities.  The native 3-adic lane is the inverse-limit carrier with a global identity chart into an explicit Q3 ambient code and exact finite-coordinate compatibility."
+  "The real lane is a concrete quarter-scale rational Cauchy/interval presentation with exact geometric-tail contraction and first-difference separation identities. The native 3-adic lane is the inverse-limit carrier with a global identity chart into a Q3 ambient code and exact finite-coordinate compatibility."
 
 analyticInstancesBoundary : String
 analyticInstancesBoundary =
