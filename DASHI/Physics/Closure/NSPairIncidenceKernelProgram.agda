@@ -31,6 +31,7 @@ open import DASHI.Physics.Closure.NSCompactGammaOffPacketWall1PairIncidenceBridg
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization public
 open import DASHI.Physics.Closure.NSCompactGammaFullShellSchur public
 open import DASHI.Physics.Closure.NSCutoffUniformIntegerShellSchur public
+open import DASHI.Physics.Closure.NSFullShellWeightedSchurClosure public
 open import DASHI.Physics.Closure.NSCompactGammaTriadFullShellCoherence public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketDifferentialModulusBridge public
