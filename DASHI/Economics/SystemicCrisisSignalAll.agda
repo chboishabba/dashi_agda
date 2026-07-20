@@ -8,3 +8,5 @@ import DASHI.Interop.TechSystemicStressCompressionBridge
 import DASHI.Interop.TechSystemicStressCompressionBridgeRegression
 import DASHI.Interop.PNFTechSystemicStressBridge
 import DASHI.Interop.PNFTechSystemicStressBridgeRegression
+import DASHI.Economics.SystemicCrisisScenarioCrosswalk
+import DASHI.Economics.SystemicCrisisScenarioCrosswalkTests
