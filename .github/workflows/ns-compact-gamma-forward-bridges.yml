@@ -10,6 +10,7 @@ on:
       - 'DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPairIncidenceSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalUniformRestrictionSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda'
@@ -27,6 +28,7 @@ on:
       - 'DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalPairIncidenceSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalUniformRestrictionSchur.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda'
@@ -76,6 +78,7 @@ jobs:
               DASHI/Physics/Closure/NSWall1CanonicalFiniteSchur.agda \
               DASHI/Physics/Closure/NSWall1CanonicalPairIncidenceSchur.agda \
               DASHI/Physics/Closure/NSWall1CanonicalFourierRestriction.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalUniformRestrictionSchur.agda \
               DASHI/Physics/Closure/NSWall1CanonicalResolventGap.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketTriadMajorization.agda \
               DASHI/Physics/Closure/NSCompactGammaOffPacketTailDecayBridge.agda \
@@ -86,7 +89,7 @@ jobs:
           ) > agda-ns-compact-gamma-forward.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 400 agda-ns-compact-gamma-forward.log
+          tail -n 420 agda-ns-compact-gamma-forward.log
           exit 0
       - name: Upload focused Agda log
         if: always()
