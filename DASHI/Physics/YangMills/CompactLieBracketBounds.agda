@@ -40,9 +40,9 @@ iteratedAd :
   List 𝔤 →
   𝔤 →
   𝔤
-iteratedAd data [] Y = Y
-iteratedAd data (X ∷ rest) Y =
-  bracket data X (iteratedAd data rest Y)
+iteratedAd bundle [] Y = Y
+iteratedAd bundle (X ∷ rest) Y =
+  bracket bundle X (iteratedAd bundle rest Y)
 
 adMajorant :
   ∀ {𝔤 : Set} →
@@ -50,25 +50,25 @@ adMajorant :
   List 𝔤 →
   𝔤 →
   ℝ
-adMajorant data [] Y = norm data Y
-adMajorant data (X ∷ rest) Y =
-  (bracketConstant data *ℝ norm data X) *ℝ
-  adMajorant data rest Y
+adMajorant bundle [] Y = norm bundle Y
+adMajorant bundle (X ∷ rest) Y =
+  (bracketConstant bundle *ℝ norm bundle X) *ℝ
+  adMajorant bundle rest Y
 
 iteratedAdBound :
   ∀ {𝔤 : Set} →
-  (data : NormedLieBracket 𝔤) →
+  (bundle : NormedLieBracket 𝔤) →
   (inputs : List 𝔤) →
   (Y : 𝔤) →
-  norm data (iteratedAd data inputs Y)
+  norm bundle (iteratedAd bundle inputs Y)
   ≤ℝ
-  adMajorant data inputs Y
-iteratedAdBound data [] Y = ≤ℝ-refl
-iteratedAdBound data (X ∷ rest) Y =
+  adMajorant bundle inputs Y
+iteratedAdBound bundle [] Y = ≤ℝ-refl
+iteratedAdBound bundle (X ∷ rest) Y =
   ≤ℝ-trans
-    (bracketBound data X (iteratedAd data rest Y))
+    (bracketBound bundle X (iteratedAd bundle rest Y))
     (mulMonotoneNonnegative
-      (bracketFactorNonnegative data X)
+      (bracketFactorNonnegative bundle X)
       ≤ℝ-refl
-      (normNonnegative data (iteratedAd data rest Y))
-      (iteratedAdBound data rest Y))
+      (normNonnegative bundle (iteratedAd bundle rest Y))
+      (iteratedAdBound bundle rest Y))
