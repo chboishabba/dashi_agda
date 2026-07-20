@@ -7,12 +7,16 @@ This tranche is a typed specification and executable algebraic core. It does **n
 The canonical modules are:
 
 - `DASHI.Codec.BalancedTritBitFibre`
+- `DASHI.Codec.DNACarrierFibre`
 - `DASHI.Codec.DNAFirstFormalism`
+- `DASHI.Interop.CodecCarrierFibreBridge`
 - `DASHI.Codec.DNAFirstFormalismRegression`
 
 ## Existing spine reused
 
-The implementation deliberately reuses `DASHI.Algebra.Trit` rather than introducing another ternary carrier. Its `neg`, `zer`, `pos`, and `inv` objects remain canonical. This is compatible with `DASHI.Foundations.SSPTritCarrier`, which already bridges the same carrier into `SSPTrit` and `Base369.TriTruth`.
+The implementation deliberately reuses `DASHI.Algebra.Trit` rather than introducing another ternary carrier. Its `neg`, `zer`, `pos`, and `inv` objects remain canonical. `DASHI.Interop.CodecCarrierFibreBridge` connects the resulting support/sign fibre directly to `DASHI.Foundations.SSPTritCarrier`, which already bridges that carrier into `SSPTrit` and `Base369.TriTruth`.
+
+The two-point sign fibre is also identified with the existing `OrientationPolarity` used by `DASHI.Foundations.HexTruthPolarityFactor`. Sign inversion commutes with the existing polarity flip. This reuses the repository's established `HexTruth ≅ TriTruth × Polarity` orientation fibre without claiming that a three-state trit is itself a six-state `HexTruth` object.
 
 ## Exact bit ↔ balanced-trit factorisation
 
@@ -25,6 +29,27 @@ The implementation deliberately reuses `DASHI.Algebra.Trit` rather than introduc
 - a word of length `n` with `k` non-zero trits emits exactly `n + k` bits.
 
 This is a structural binary carrier for balanced ternary, not a claim that ternary is primitively binary. The module intentionally proves the exact finite-word cost law and leaves distribution-dependent average-rate statements outside the theorem surface.
+
+## DNA quotient/fibre factorisation
+
+`DNACarrierFibre` gives the four-base carrier an exact chemistry/orbit presentation:
+
+- `ChemicalPair` distinguishes the A/T and C/G complement orbits;
+- `ComplementPhase` identifies the member within each orbit;
+- encoding and decoding are mutually inverse;
+- complement preserves the chemical pair and flips only complement phase.
+
+This is the DNA analogue of quotient-plus-fibre structure. It is not a claim that DNA bases are primitively two bits. The chemistry quotient can feed GC-debt and admissibility logic, while the complement phase remains available to reverse-complement, mirror, eigen-orbit, and invariant surfaces.
+
+The analogy with balanced ternary is structural rather than cardinal:
+
+| carrier | quotient/base coordinate | involutive fibre |
+|---|---|---|
+| balanced trit | zero versus non-zero support | positive versus negative sign |
+| DNA base | A/T versus C/G chemical pair | member of the complement orbit |
+| Base369 `HexTruth` | `TriTruth` phase | orientation polarity |
+
+These presentations share the rule that the involution acts in the fibre while preserving the quotient coordinate. They are not identified as the same carrier.
 
 ## DNA carrier and generability
 
@@ -59,6 +84,17 @@ A bounded-lookahead or cached implementation may later prove soundness into this
 
 `StreamingChoiceSurface` exposes the legal state-dependent branch count and a coder selection surface. It records the object needed by arithmetic coding or ANS without assigning a fixed trit or bit budget to a 27-base cube.
 
+## Cross-pollination boundaries
+
+The shared quotient/fibre grammar can now be consumed by codec, Base369, SSP, p-adic-address, and multiscale-invariant lanes. Safe reuse means transporting typed involution, roundtrip, and equivariance laws. It does **not** mean that chemistry classes, support masks, p-adic digits, `TriTruth`, and physical observables become interchangeable.
+
+In particular:
+
+- DNA complement phase may feed mirrored invariants, but does not by itself define a balanced-trit residual;
+- SSP trits may use the exact bit fibre, but this does not prove a source distribution or compression ratio;
+- Base369 polarity supplies the canonical two-point orientation fibre, but no direct `TritFibre ≅ HexTruth` claim is made;
+- recognisable lifts may carry these fibres across scale only after concrete recognisability and equivariance witnesses are supplied.
+
 A future concrete tranche should instantiate:
 
 1. a finite suffix/motif automaton;
@@ -68,4 +104,5 @@ A future concrete tranche should instantiate:
 5. recognisable line/voxel/cube lifts;
 6. a sound completion cache;
 7. an invertible arithmetic/ANS coder;
-8. quantitative rate and error-detection receipts.
+8. quotient/fibre equivariance through concrete lift maps;
+9. quantitative rate and error-detection receipts.
