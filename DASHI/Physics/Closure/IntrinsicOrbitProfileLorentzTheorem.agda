@@ -9,8 +9,8 @@ module DASHI.Physics.Closure.IntrinsicOrbitProfileLorentzTheorem where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List using (List; _∷_; []; _++_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.List using (_∷_; []; _++_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Physics.OrbitProfileData as OPD
@@ -70,7 +70,7 @@ intrinsicSignatureUnique31 :
 intrinsicSignatureUnique31 {data} enumeration s profileOfS =
   OSD.SignatureFromMeasuredProfileUnique s
     (trans
-      (intrinsicProfileIsCanonical31 enumeration)
+      (sym (intrinsicProfileIsCanonical31 enumeration))
       profileOfS)
 
 record IntrinsicLorentz31Theorem : Setω where
