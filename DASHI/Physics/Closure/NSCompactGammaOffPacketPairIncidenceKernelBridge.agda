@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketPairIncidenceKernelBridge where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc; Set₁)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Analysis.WeightedKernelSchurTest
@@ -14,26 +14,26 @@ open import DASHI.Physics.Closure.NSPairIncidenceSchurBridge
 -- Compact-Gamma adapter for the repository's exact Fourier pair-incidence
 -- program.
 --
--- `NSPairIncidenceKernel` already supplies the exact finite fold of pair
--- contributions, and `NSPairIncidenceSchurBridge` transports its finite row and
+-- `NSPairIncidenceKernel` supplies the exact finite fold of nonnegative pair
+-- majorants, and `NSPairIncidenceSchurBridge` transports its finite row and
 -- column sums into `WeightedKernelSchurCertificate`.  This module adds the
--- missing response-identification layer specific to the compact-Gamma
+-- missing response-majorization layer specific to the compact-Gamma
 -- off-packet derivative.
 --
 -- Three separate facts are required:
 --
---   1. the concrete Fourier kernel agrees pointwise with the pair-incidence
---      fold;
+--   1. the concrete Fourier majorant kernel agrees pointwise with the exact
+--      pair-incidence fold;
 --   2. the abstract Schur action is exactly the action of its declared kernel;
---   3. the concrete near derivative is exactly the output energy of the
---      concrete Fourier-kernel action.
+--   3. the concrete near derivative is bounded by the output energy of the
+--      concrete majorant-kernel action.
 --
--- Only their composition may discharge
--- `concreteNearResponseRepresentedByKernel` in the off-packet weighted-kernel
--- bridge.  A coarse empirical shell matrix cannot inhabit this adapter.
+-- The third fact is intentionally an inequality, not an equality: the
+-- pair-incidence kernel records absolute/vector majorants and does not claim to
+-- reproduce the signed compact-Gamma derivative entry by entry.
 ------------------------------------------------------------------------
 
-record ExactNearPairIncidenceRepresentation
+record NearPairIncidenceMajorization
     {p r c : Level}
     {Pair : Set p}
     {Row : Set r}
@@ -48,20 +48,20 @@ record ExactNearPairIncidenceRepresentation
 
     exactKernelInput : VectorIn L
 
-    concreteKernel : Row → Col → Scalar A
-    concreteKernelMatch :
-      ConcreteBiotSavartKernelMatch P concreteKernel
+    concreteMajorantKernel : Row → Col → Scalar A
+    concreteMajorantKernelMatch :
+      ConcreteBiotSavartKernelMatch P concreteMajorantKernel
 
     concreteNearResponse : Scalar A
 
-    concreteNearResponseIsConcreteAction :
-      concreteNearResponse ≡
-      outputEnergy L
-        (evaluateEntries exactKernelAction
-          concreteKernel
-          exactKernelInput)
+    concreteNearResponseBelowMajorantAction :
+      _≤_ A concreteNearResponse
+        (outputEnergy L
+          (evaluateEntries exactKernelAction
+            concreteMajorantKernel
+            exactKernelInput))
 
-open ExactNearPairIncidenceRepresentation public
+open NearPairIncidenceMajorization public
 
 concreteKernelActionEqualsPairAction :
   ∀ {p r c}
@@ -71,9 +71,9 @@ concreteKernelActionEqualsPairAction :
     (A : AbsorptionArithmetic)
     (P : PairIncidenceData Pair Row Col (Scalar A))
     (L : WeightedSchurLaws (asWeightedKernelData P))
-    (R : ExactNearPairIncidenceRepresentation A P L) →
+    (R : NearPairIncidenceMajorization A P L) →
   evaluateEntries (exactKernelAction R)
-    (concreteKernel R)
+    (concreteMajorantKernel R)
     (exactKernelInput R)
   ≡
   evaluateEntries (exactKernelAction R)
@@ -82,9 +82,9 @@ concreteKernelActionEqualsPairAction :
 concreteKernelActionEqualsPairAction A P L R =
   exactKernelActionPointwiseTransport
     (exactKernelAction R)
-    (concreteKernel R)
+    (concreteMajorantKernel R)
     (pairKernelEntry P)
-    (pointwiseKernelMatch (concreteKernelMatch R))
+    (pointwiseKernelMatch (concreteMajorantKernelMatch R))
     (exactKernelInput R)
 
 pairActionEqualsCertifiedKernelAction :
@@ -95,7 +95,7 @@ pairActionEqualsCertifiedKernelAction :
     (A : AbsorptionArithmetic)
     (P : PairIncidenceData Pair Row Col (Scalar A))
     (L : WeightedSchurLaws (asWeightedKernelData P))
-    (R : ExactNearPairIncidenceRepresentation A P L) →
+    (R : NearPairIncidenceMajorization A P L) →
   evaluateEntries (exactKernelAction R)
     (pairKernelEntry P)
     (exactKernelInput R)
@@ -106,7 +106,7 @@ pairActionEqualsCertifiedKernelAction A P L R =
     (exactKernelAction R)
     (exactKernelInput R))
 
-concreteNearResponseEqualsCertifiedKernelOutput :
+concreteMajorantOutputEqualsCertifiedKernelOutput :
   ∀ {p r c}
     {Pair : Set p}
     {Row : Set r}
@@ -114,34 +114,21 @@ concreteNearResponseEqualsCertifiedKernelOutput :
     (A : AbsorptionArithmetic)
     (P : PairIncidenceData Pair Row Col (Scalar A))
     (L : WeightedSchurLaws (asWeightedKernelData P))
-    (R : ExactNearPairIncidenceRepresentation A P L) →
-  concreteNearResponse R ≡
+    (R : NearPairIncidenceMajorization A P L) →
+  outputEnergy L
+    (evaluateEntries (exactKernelAction R)
+      (concreteMajorantKernel R)
+      (exactKernelInput R))
+  ≡
   outputEnergy L (applyKernel L (exactKernelInput R))
-concreteNearResponseEqualsCertifiedKernelOutput A P L R =
+concreteMajorantOutputEqualsCertifiedKernelOutput A P L R =
   trans
-    (concreteNearResponseIsConcreteAction R)
-    (trans
-      (cong
-        (outputEnergy L)
-        (concreteKernelActionEqualsPairAction A P L R))
-      (cong
-        (outputEnergy L)
-        (pairActionEqualsCertifiedKernelAction A P L R)))
-
-------------------------------------------------------------------------
--- The absorption arithmetic used by the off-packet split only assumed
--- transitivity.  Equality-to-order conversion additionally needs reflexivity,
--- kept as an explicit local law rather than silently strengthening the shared
--- arithmetic record.
-------------------------------------------------------------------------
-
-record ReflexiveAbsorptionOrder
-    (A : AbsorptionArithmetic) : Set₁ where
-  field
-    ≤-refl :
-      ∀ value → _≤_ A value value
-
-open ReflexiveAbsorptionOrder public
+    (cong
+      (outputEnergy L)
+      (concreteKernelActionEqualsPairAction A P L R))
+    (cong
+      (outputEnergy L)
+      (pairActionEqualsCertifiedKernelAction A P L R))
 
 concreteNearResponseBelowCertifiedKernelOutput :
   ∀ {p r c}
@@ -151,23 +138,19 @@ concreteNearResponseBelowCertifiedKernelOutput :
     (A : AbsorptionArithmetic)
     (P : PairIncidenceData Pair Row Col (Scalar A))
     (L : WeightedSchurLaws (asWeightedKernelData P)) →
-  ReflexiveAbsorptionOrder A →
-  (R : ExactNearPairIncidenceRepresentation A P L) →
+  (R : NearPairIncidenceMajorization A P L) →
   _≤_ A
     (concreteNearResponse R)
     (outputEnergy L (applyKernel L (exactKernelInput R)))
-concreteNearResponseBelowCertifiedKernelOutput A P L O R =
+concreteNearResponseBelowCertifiedKernelOutput A P L R =
   subst
-    (λ left →
-      _≤_ A left
-        (outputEnergy L (applyKernel L (exactKernelInput R))))
-    (sym (concreteNearResponseEqualsCertifiedKernelOutput A P L R))
-    (≤-refl O
-      (outputEnergy L (applyKernel L (exactKernelInput R))))
+    (λ right → _≤_ A (concreteNearResponse R) right)
+    (concreteMajorantOutputEqualsCertifiedKernelOutput A P L R)
+    (concreteNearResponseBelowMajorantAction R)
 
 ------------------------------------------------------------------------
 -- Full adapter: exact pair incidences + finite/uniform Schur realization +
--- exact compact-Gamma response identity feed the existing near/tail chain.
+-- concrete near-response majorization feed the existing near/tail chain.
 ------------------------------------------------------------------------
 
 record OffPacketPairIncidenceEvidence
@@ -183,11 +166,8 @@ record OffPacketPairIncidenceEvidence
     schurRealization :
       PairIncidenceSchurRealization P L
 
-    pairOrderReflexive :
-      ReflexiveAbsorptionOrder A
-
-    pairNearRepresentation :
-      ExactNearPairIncidenceRepresentation A P L
+    pairNearMajorization :
+      NearPairIncidenceMajorization A P L
 
     pairOffPacketResponse : Scalar A
     pairFarShellTail : Scalar A
@@ -195,7 +175,7 @@ record OffPacketPairIncidenceEvidence
     pairOffPacketBelowNearPlusTail :
       _≤_ A pairOffPacketResponse
         (_+_ A
-          (concreteNearResponse pairNearRepresentation)
+          (concreteNearResponse pairNearMajorization)
           pairFarShellTail)
 
     pairSchurOrderTransport :
@@ -219,20 +199,18 @@ pairIncidenceEvidenceToWeightedKernelEvidence A P L E = record
   { certificate =
       pairIncidenceWeightedCertificate (schurRealization E)
   ; kernelInput =
-      exactKernelInput (pairNearRepresentation E)
+      exactKernelInput (pairNearMajorization E)
   ; offPacketResponse =
       pairOffPacketResponse E
   ; nearShellResponse =
-      concreteNearResponse (pairNearRepresentation E)
+      concreteNearResponse (pairNearMajorization E)
   ; farShellTail =
       pairFarShellTail E
   ; offPacketBelowNearPlusTail =
       pairOffPacketBelowNearPlusTail E
   ; concreteNearResponseRepresentedByKernel =
       concreteNearResponseBelowCertifiedKernelOutput
-        A P L
-        (pairOrderReflexive E)
-        (pairNearRepresentation E)
+        A P L (pairNearMajorization E)
   ; schurOrderTransport =
       pairSchurOrderTransport E
   }
