@@ -1,7 +1,7 @@
 module DASHI.Environment.LatentEcologyRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using ([]; _∷_)
 open import Data.Vec using ([]; _∷_)
 
@@ -10,13 +10,13 @@ import DASHI.Environment.InversePlanning as Plan
 import DASHI.Environment.LatentDepthFormalism as Latent
 import DASHI.Foundations.SSPTritCarrier as SSP
 
-one : Agda.Builtin.Nat.Nat
+one : Nat
 one = suc zero
 
-two : Agda.Builtin.Nat.Nat
+two : Nat
 two = suc one
 
-three : Agda.Builtin.Nat.Nat
+three : Nat
 three = suc two
 
 sampleDepthState : Latent.DepthState three
