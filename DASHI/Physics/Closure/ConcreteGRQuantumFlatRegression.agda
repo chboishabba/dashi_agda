@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (zero)
 
 import Base369 as B369
 import DASHI.Geometry.FlatLorentzianModel as Flat
+import DASHI.Geometry.ValuationConformalMetricCandidate as ValuationMetric
 import DASHI.Physics.Closure.FiniteQuantumGRFlatModel as Quantum
 import DASHI.Physics.Closure.QuantumGRActionCompatibilityBoundary as Boundary
 import DASHI.Physics.Closure.SymbolicEinsteinHilbertModel as EH
@@ -32,6 +33,11 @@ flatMetricNondegeneracyRegression :
   (a : Flat.Axis4) →
   Flat.NonZeroMetricEntry (Flat.flatMetricEntry a a)
 flatMetricNondegeneracyRegression = Flat.diagonalEntryNonzero
+
+valuationMetricUnderdeterminationRegression :
+  ValuationMetric.ValuationMetricUnderdeterminationReceipt
+valuationMetricUnderdeterminationRegression =
+  ValuationMetric.valuationMetricUnderdeterminationReceipt
 
 flatConnectionTorsionRegression :
   Flat.TorsionFree Flat.flatConnection
