@@ -38,13 +38,62 @@ The canonical spine exposes concrete inhabitants for:
 - normalization of the derived quadratic to `Q̂core`;
 - the canonical signature equality with `sig31`.
 
-## What remains open
+## Cross-pollinated theorem surface
 
-The spine does not by itself prove that every ultrametric contraction forces a quadratic form, nor that the full continuum Einstein or interacting quantum-field equations follow from the discrete hierarchy. The strongest remaining advances are theorem-bearing bridges that:
+`DASHI.Physics.Closure.PhysicsClosureCrossPollinationTheorem` now puts four previously separated lanes on one compilation surface.
 
-- connect the actual nontrivial operator's defect monotonicity and hierarchy consistency to the projection-defect/parallelogram hypotheses;
-- strengthen signature selection from the current canonical bridge to the desired uniqueness theorem under explicit cone, arrow, isotropy, and finite-speed hypotheses;
-- discharge the existing constructive Yang–Mills, Osterwalder–Schrader, and continuum-limit frontier obligations;
-- derive or transport the canonical constraint algebra from the forced geometry without adding independent closure assumptions.
+### Actual shift operator
 
-The new module exists to make those remaining obligations visible against one stable proof spine, rather than duplicating the already implemented Clifford or spin/Dirac layers.
+For the nontrivial ternary shift stack it packages the already proved facts that:
+
+- canonicalization is nonexpansive;
+- refinement is nonexpansive;
+- projection is nonexpansive;
+- projection is strictly contractive on fixed coarse fibres;
+- projection is idempotent.
+
+It places these beside the existing `Q̂core` projection-defect/parallelogram package. This is useful cross-pollination, but it does **not** identify the concrete ternary projection with the current additive `PDzero` model. That comparison remains the exact operator-to-quadratic theorem still required.
+
+### Lorentz uniqueness
+
+The new `ExplicitLorentz31Hypotheses` and `ExplicitLorentz31Uniqueness` records strengthen the result from merely returning `(3,1)` to a conditional uniqueness statement:
+
+```text
+finite-speed compatibility
++ admissibility under cone / arrow / isotropy conditions
++ equality with the computed shift orbit profile
+=> every admissible signature is (3,1).
+```
+
+The finite orbit-profile exclusion is derived from the existing computed signature discriminant. The remaining mathematical work is to derive the profile-equality premise intrinsically from the cone, arrow, isotropy, and finite-speed laws rather than supplying it as an admissibility hypothesis.
+
+### Constraint closure
+
+`ForcedGeometryConstraintClosure` packages the canonical contraction/quadratic/signature bridge with `ConstraintClosureFromCanonicalPathTheorem`. This is a tightly transported closure law: the canonical geometry route is fixed first, and the canonical gauge/constraint package then supplies the concrete closure law.
+
+This is stronger than an unrelated bundled closure witness, but it is still transport rather than a derivation of the hypersurface-deformation algebra solely from the quadratic and causal geometry.
+
+### Constructive Yang–Mills and continuum frontier
+
+`ConstructiveYangMillsContinuumObligations` collects the remaining analytic inhabitants in one exact type:
+
+- uniform residual contraction;
+- four-dimensional large-field / Kotecký–Preiss control;
+- all-scale invariant-domain RG;
+- the continuum Osterwalder–Schrader axioms;
+- a positive physical spectral gap.
+
+There is intentionally no canonical inhabitant. The current repository proves many finite-dimensional, algebraic, local-contraction, and transport consequences, but the continuum OS and physical-gap claims remain marked conjectural by the existing proof-level ledger.
+
+The more advanced constructive SU(N)/Balaban implementation currently lives on draft PR #153. Once that stack lands on `master`, this closure spine should be specialized from the generic frontier records to its concrete one-step RG, Step V, all-scale RG, OS-reconstruction, clustering, and mass-gap transfer surfaces.
+
+## Exact next obligations
+
+The remaining work is now narrower and explicit:
+
+1. **Operator comparison:** derive the additive projection-defect and parallelogram package from the actual ternary `C/P/R` hierarchy rather than pairing it with `PDzero`.
+2. **Intrinsic profile forcing:** prove the computed shift orbit profile from cone preservation, time orientation, isotropy, and finite-speed compatibility.
+3. **Geometric constraint derivation:** replace canonical package transport with a theorem deriving or reconstructing the constraint algebra from the forced Lorentzian geometry and dynamics.
+4. **Constructive continuum closure:** inhabit the uniform contraction, Step V, all-scale RG, OS2/OS4, continuum-limit, and positive-gap targets without changing their quantifier order or proof-level honesty.
+
+The purpose of the spine is to prevent already completed Clifford, spin/Dirac, and finite-profile work from being repeatedly rebuilt while these genuinely analytic seams remain open.
