@@ -33,3 +33,14 @@ import DASHI.Unified.GRQuantumFiniteDiagnosticReceipt
 import DASHI.Unified.GRQuantumProofAdapters
 import DASHI.Unified.GRQuantumUnificationProofTermBridge
 import DASHI.Unified.GRQuantumProofTermRegression
+
+-- Deep mathematical/physical authority cutset.
+import DASHI.Analysis.CompleteCarrierQuadraticUniqueness
+import DASHI.Geometry.LargePosetContinuumLorentz31
+import DASHI.Algebra.CliffordQuotientUniversalTheorem
+import DASHI.Algebra.ContinuousSpin31LorentzCover
+import DASHI.Algebra.Quantum.TreeHeisenbergScalingLimit
+import DASHI.Physics.Closure.ContinuumCurvatureSourceSpinTwo
+import DASHI.Physics.Closure.ConstraintRenormalizationLowEnergy
+import DASHI.Unified.GRQuantumResearchAuthorityCutset
+import DASHI.Unified.GRQuantumResearchAuthorityRegression
