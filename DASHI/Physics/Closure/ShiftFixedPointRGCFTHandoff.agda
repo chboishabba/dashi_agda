@@ -8,23 +8,26 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Envelope
+open import DASHI.Physics.Closure.FixedPointAnalyticRGTargets as Analytic
 open import DASHI.Physics.Closure.FixedPointCFTBoundary as Boundary
+open import DASHI.Physics.Closure.ShiftFiniteLocalOPECrossing as OPE
+open import DASHI.Physics.Closure.ShiftFiniteNormedTangent as Normed
 open import DASHI.Physics.Closure.ShiftFiniteScalingFusionWard as Finite
 open import DASHI.Physics.Closure.ShiftFiniteTangentSemigroup as Tangent
 
 ------------------------------------------------------------------------
 -- Integrated finite RG/CFT precursor handoff.
 --
--- This module closes the *finite* versions of all six requested lanes and
--- routes the continuum part through the existing balanced-ternary analytic
--- envelope interface.  It deliberately keeps the genuine continuum/CFT
--- promotion empty.
+-- The current branch now closes stronger finite algebraic versions of the
+-- tangent, norm, semigroup, scaling, OPE, crossing, correlation, and Ward
+-- lanes.  The actual analytic/continuum theorem remains represented by the
+-- explicit FixedPointAnalyticRGCFTRoute target below.
 
 data ShiftRGCFTRemainingGate : Set where
-  additiveOrNormedTangentStructureRequired : ShiftRGCFTRemainingGate
-  analyticDerivativeGeneratorRequired : ShiftRGCFTRemainingGate
+  vectorSpaceAndBanachTangentRequired : ShiftRGCFTRemainingGate
+  frechetDerivativeAndAnalyticGeneratorRequired : ShiftRGCFTRemainingGate
   physicalScalingDimensionsRequired : ShiftRGCFTRemainingGate
-  localOPECoefficientsAndCrossingRequired : ShiftRGCFTRemainingGate
+  analyticLocalOPECoefficientsRequired : ShiftRGCFTRemainingGate
   inhabitedContinuousDepthEnvelopeRequired : ShiftRGCFTRemainingGate
   renormalizationCompatibilityAcrossDepthRequired : ShiftRGCFTRemainingGate
   stressTensorAndConformalWardRequired : ShiftRGCFTRemainingGate
@@ -40,7 +43,9 @@ record ShiftFixedPointRGCFTHandoff : Setω where
   field
     priorBoundary : Boundary.FixedPointCFTBoundary
     tangentSemigroup : Tangent.ShiftFiniteTangentSemigroup
+    finiteNormedTangent : Normed.ShiftFiniteNormedTangent
     scalingFusionWard : Finite.ShiftFiniteScalingFusionWard
+    finiteLocalOPECrossing : OPE.ShiftFiniteLocalOPECrossing
 
     finiteTangentCarrierConstructed : Bool
     finiteTangentCarrierConstructedIsTrue :
@@ -50,6 +55,10 @@ record ShiftFixedPointRGCFTHandoff : Setω where
     finiteDerivativeSemigroupConstructedIsTrue :
       finiteDerivativeSemigroupConstructed ≡ true
 
+    finiteAdditiveNormedStructureConstructed : Bool
+    finiteAdditiveNormedStructureConstructedIsTrue :
+      finiteAdditiveNormedStructureConstructed ≡ true
+
     finiteScalingSpectrumConstructed : Bool
     finiteScalingSpectrumConstructedIsTrue :
       finiteScalingSpectrumConstructed ≡ true
@@ -58,9 +67,21 @@ record ShiftFixedPointRGCFTHandoff : Setω where
     finiteFusionLawConstructedIsTrue :
       finiteFusionLawConstructed ≡ true
 
+    finiteLocalOPECoefficientsConstructed : Bool
+    finiteLocalOPECoefficientsConstructedIsTrue :
+      finiteLocalOPECoefficientsConstructed ≡ true
+
+    finiteCrossingConstructed : Bool
+    finiteCrossingConstructedIsTrue :
+      finiteCrossingConstructed ≡ true
+
     finiteCorrelationWardConstructed : Bool
     finiteCorrelationWardConstructedIsTrue :
       finiteCorrelationWardConstructed ≡ true
+
+    analyticRouteTarget : Setω
+    analyticRouteTargetIsCanonical :
+      analyticRouteTarget ≡ Analytic.FixedPointAnalyticRGCFTRoute
 
     depthKernelModelTarget : Set₁
     depthKernelModelTargetIsCanonical :
@@ -75,6 +96,18 @@ record ShiftFixedPointRGCFTHandoff : Setω where
     continuousEnvelopeInhabitedHere : Bool
     continuousEnvelopeInhabitedHereIsFalse :
       continuousEnvelopeInhabitedHere ≡ false
+
+    analyticFrechetGeneratorConstructed : Bool
+    analyticFrechetGeneratorConstructedIsFalse :
+      analyticFrechetGeneratorConstructed ≡ false
+
+    physicalScalingSpectrumConstructed : Bool
+    physicalScalingSpectrumConstructedIsFalse :
+      physicalScalingSpectrumConstructed ≡ false
+
+    analyticLocalOPEConstructed : Bool
+    analyticLocalOPEConstructedIsFalse :
+      analyticLocalOPEConstructed ≡ false
 
     continuumRGControlConstructed : Bool
     continuumRGControlConstructedIsFalse :
@@ -99,10 +132,10 @@ open ShiftFixedPointRGCFTHandoff public
 canonicalShiftRGCFTRemainingGates :
   List ShiftRGCFTRemainingGate
 canonicalShiftRGCFTRemainingGates =
-  additiveOrNormedTangentStructureRequired
-  ∷ analyticDerivativeGeneratorRequired
+  vectorSpaceAndBanachTangentRequired
+  ∷ frechetDerivativeAndAnalyticGeneratorRequired
   ∷ physicalScalingDimensionsRequired
-  ∷ localOPECoefficientsAndCrossingRequired
+  ∷ analyticLocalOPECoefficientsRequired
   ∷ inhabitedContinuousDepthEnvelopeRequired
   ∷ renormalizationCompatibilityAcrossDepthRequired
   ∷ stressTensorAndConformalWardRequired
@@ -114,23 +147,39 @@ canonicalShiftFixedPointRGCFTHandoff =
   record
     { priorBoundary = Boundary.canonicalFixedPointCFTBoundary
     ; tangentSemigroup = Tangent.canonicalShiftFiniteTangentSemigroup
+    ; finiteNormedTangent = Normed.canonicalShiftFiniteNormedTangent
     ; scalingFusionWard = Finite.canonicalShiftFiniteScalingFusionWard
+    ; finiteLocalOPECrossing = OPE.canonicalShiftFiniteLocalOPECrossing
     ; finiteTangentCarrierConstructed = true
     ; finiteTangentCarrierConstructedIsTrue = refl
     ; finiteDerivativeSemigroupConstructed = true
     ; finiteDerivativeSemigroupConstructedIsTrue = refl
+    ; finiteAdditiveNormedStructureConstructed = true
+    ; finiteAdditiveNormedStructureConstructedIsTrue = refl
     ; finiteScalingSpectrumConstructed = true
     ; finiteScalingSpectrumConstructedIsTrue = refl
     ; finiteFusionLawConstructed = true
     ; finiteFusionLawConstructedIsTrue = refl
+    ; finiteLocalOPECoefficientsConstructed = true
+    ; finiteLocalOPECoefficientsConstructedIsTrue = refl
+    ; finiteCrossingConstructed = true
+    ; finiteCrossingConstructedIsTrue = refl
     ; finiteCorrelationWardConstructed = true
     ; finiteCorrelationWardConstructedIsTrue = refl
+    ; analyticRouteTarget = Analytic.FixedPointAnalyticRGCFTRoute
+    ; analyticRouteTargetIsCanonical = refl
     ; depthKernelModelTarget = Envelope.DepthKernelModel
     ; depthKernelModelTargetIsCanonical = refl
     ; continuousEnvelopeTarget = Envelope.ContinuousDepthEnvelope
     ; continuousEnvelopeTargetIsCanonical = refl
     ; continuousEnvelopeInhabitedHere = false
     ; continuousEnvelopeInhabitedHereIsFalse = refl
+    ; analyticFrechetGeneratorConstructed = false
+    ; analyticFrechetGeneratorConstructedIsFalse = refl
+    ; physicalScalingSpectrumConstructed = false
+    ; physicalScalingSpectrumConstructedIsFalse = refl
+    ; analyticLocalOPEConstructed = false
+    ; analyticLocalOPEConstructedIsFalse = refl
     ; continuumRGControlConstructed = false
     ; continuumRGControlConstructedIsFalse = refl
     ; continuumConformalWardConstructed = false
@@ -142,14 +191,15 @@ canonicalShiftFixedPointRGCFTHandoff =
     ; promotionsAreEmpty = refl
     ; noPromotionPossibleHere = shiftRGCFTPromotionImpossibleHere
     ; boundary =
-        "All six requested lanes now have exact finite precursor surfaces on the live shift carrier"
-        ∷ "the tangent carrier is pointed and finite; the derivative is the exact induced step"
-        ∷ "the Nat-indexed action satisfies an exact iteration composition law and absorbs from time two"
-        ∷ "the finite scaling spectrum is 2,1,0 and is inherited from the existing held-potential/collapse-depth rank"
-        ∷ "the finite fusion table is associative and pointed but is not a local OPE"
-        ∷ "the held-insertion correlation identities are finite Ward analogues only"
-        ∷ "continuum control is routed through BalancedTernaryContinuousEnvelope rather than invented locally"
-        ∷ "an inhabited analytic envelope plus RG compatibility, physical dimensions, OPE data, stress tensor, and conformal Ward identities remain open"
+        "The finite shift lane now has a pointed perturbation semigroup and an exact normed idempotent additive algebra"
+        ∷ "the finite derivative preserves addition and is norm non-increasing"
+        ∷ "the finite 2,1,0 spectrum is inherited from the established held-potential/collapse-depth rank"
+        ∷ "the finite operator algebra now has proof-relevant OPE coefficients, exchange locality, and associative crossing"
+        ∷ "the finite correlation and held-insertion Ward analogues remain attached"
+        ∷ "FixedPointAnalyticRGCFTRoute names the exact stronger analytic objects still required"
+        ∷ "the current additive tangent is not a vector/Banach space and the finite derivative is not a Frechet derivative"
+        ∷ "the finite OPE has no singular position dependence, analytic coefficient functions, or conformal blocks"
+        ∷ "an inhabited analytic envelope, RG-depth compatibility, physical dimensions, analytic OPE, stress tensor, and conformal Ward identities remain open"
         ∷ "No continuum RG fixed point or CFT is promoted"
         ∷ []
     }
