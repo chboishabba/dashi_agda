@@ -49,8 +49,8 @@ fixedPoint⇒quotientStable :
     {s : S} →
   FixedPoint K s →
   QuotientStable quotient K s
-fixedPoint⇒quotientStable fp = record
-  { stableClass = cong _ (fixed fp) }
+fixedPoint⇒quotientStable {quotient = quotient} fp = record
+  { stableClass = cong quotient (fixed fp) }
 
 periodicOrbit⇒quotientClosure :
   ∀ {S Q : Set}
@@ -59,7 +59,8 @@ periodicOrbit⇒quotientClosure :
     {s : S} →
   (orbit : PeriodicOrbit K s) →
   quotient (iterate (suc (predecessorPeriod orbit)) K s) ≡ quotient s
-periodicOrbit⇒quotientClosure orbit = cong _ (closes orbit)
+periodicOrbit⇒quotientClosure {quotient = quotient} orbit =
+  cong quotient (closes orbit)
 
 ------------------------------------------------------------------------
 -- Existing MDL cross-pollination.
