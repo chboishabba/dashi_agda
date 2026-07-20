@@ -19,6 +19,7 @@ record LambdaRingModuleCarrier
   field
     VirtualModule : Set
     zeroVirtual : VirtualModule
+    tensorUnit : VirtualModule
     addVirtual : VirtualModule → VirtualModule → VirtualModule
     negateVirtual : VirtualModule → VirtualModule
     tensorVirtual : VirtualModule → VirtualModule → VirtualModule
@@ -32,6 +33,7 @@ record LambdaRingModuleCarrier
     TraceMultiplicative : G → VirtualModule → VirtualModule → Set
     ExteriorPowerTraceLaw : G → Nat → VirtualModule → Set
     SymmetricPowerTraceLaw : G → Nat → VirtualModule → Set
+    TensorUnitLaw : VirtualModule → Set
 
     traceAdditive :
       (g : G) →
@@ -54,6 +56,9 @@ record LambdaRingModuleCarrier
       (n : Nat) →
       (u : VirtualModule) →
       SymmetricPowerTraceLaw g n u
+
+    tensorUnitLaw :
+      (u : VirtualModule) → TensorUnitLaw u
 
 record HalfWeightModuleInput
   (G Scalar : Set)
@@ -113,9 +118,9 @@ record CompletedFockProduct
     finiteTensorProduct :
       Nat → LambdaRingModuleCarrier.VirtualModule modules
 
-    finiteProductStartsAtOne :
+    finiteProductStartsAtTensorUnit :
       finiteTensorProduct 0 ≡
-      LambdaRingModuleCarrier.zeroVirtual modules
+      LambdaRingModuleCarrier.tensorUnit modules
 
     FiniteProductCorrect : Nat → Set
     finiteProductCorrect :
@@ -131,12 +136,13 @@ record CompletedFockProduct
     gradePiece :
       Nat → LambdaRingModuleCarrier.VirtualModule modules
 
-    coefficientwiseStabilises :
+    stabilisationCutoff : Nat → Nat
+    CoefficientwiseStabilises :
       (grade cutoff : Nat) → Set
 
     stabilisationWitness :
       (grade : Nat) →
-      coefficientwiseStabilises grade grade
+      CoefficientwiseStabilises grade (stabilisationCutoff grade)
 
     completedGradeCorrect :
       (grade : Nat) →
@@ -199,6 +205,7 @@ record SQModuleLift
 record SQModuleLiftBoundary : Set where
   field
     formalInfiniteTensorNeedsCoefficientwiseStabilisation : ⊤
+    emptyTensorProductUsesTensorUnit : ⊤
     exteriorAndSymmetricPowerTraceLawsRequired : ⊤
     productIdentityDoesNotConstructCompletionAutomatically : ⊤
     uniquenessIsUpToChosenModuleEquivalence : ⊤
@@ -207,6 +214,7 @@ record SQModuleLiftBoundary : Set where
 sqModuleLiftBoundary : SQModuleLiftBoundary
 sqModuleLiftBoundary = record
   { formalInfiniteTensorNeedsCoefficientwiseStabilisation = tt
+  ; emptyTensorProductUsesTensorUnit = tt
   ; exteriorAndSymmetricPowerTraceLawsRequired = tt
   ; productIdentityDoesNotConstructCompletionAutomatically = tt
   ; uniquenessIsUpToChosenModuleEquivalence = tt
