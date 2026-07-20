@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Core.TritCPRMultiscaleInstance where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -7,13 +6,6 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv; inv-invol)
 open import DASHI.Core.MultiscaleMDL
-
-------------------------------------------------------------------------
--- Concrete nested ternary C/P/R hierarchy.
---
--- A successor state stores one new fine trit beside the entire previous-scale
--- state.  Projection forgets exactly that new trit, lift inserts the neutral
--- trit, residual records the forgotten trit, and reconstruction is exact.
 
 TritTower : Nat → Set
 TritTower zero = Trit
@@ -61,9 +53,6 @@ trit-join-split :
   ∀ {j} (x : TritTower (suc j)) →
   join tritResidualCodec (split tritResidualCodec x) ≡ x
 trit-join-split x = join-split tritResidualCodec x
-
-------------------------------------------------------------------------
--- Concrete inversion action at every rank.
 
 invertTower : ∀ {j} → TritTower j → TritTower j
 invertTower {zero} t = inv t
