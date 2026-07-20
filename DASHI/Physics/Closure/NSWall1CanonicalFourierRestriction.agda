@@ -134,10 +134,10 @@ wall1CanonicalRestrictedK01Certificate :
   Wall1CanonicalFourierRestriction Vector W01 W10 →
   FiniteWeightedSchurCertificate
     (restrictedK01Finite (wall1BiotSavartKernel W01))
-wall1CanonicalRestrictedK01Certificate R =
+wall1CanonicalRestrictedK01Certificate {W01 = W01} {W10 = W10} R =
   canonicalCertificateControlsRestrictedK01
-    (wall1BiotSavartKernel _)
-    (wall1BiotSavartKernel _)
+    (wall1BiotSavartKernel W01)
+    (wall1BiotSavartKernel W10)
     (restrictionMatch R)
 
 wall1CanonicalRestrictedK10Certificate :
@@ -147,8 +147,8 @@ wall1CanonicalRestrictedK10Certificate :
   Wall1CanonicalFourierRestriction Vector W01 W10 →
   FiniteWeightedSchurCertificate
     (restrictedK10Finite (wall1BiotSavartKernel W10))
-wall1CanonicalRestrictedK10Certificate R =
+wall1CanonicalRestrictedK10Certificate {W01 = W01} {W10 = W10} R =
   canonicalCertificateControlsRestrictedK10
-    (wall1BiotSavartKernel _)
-    (wall1BiotSavartKernel _)
+    (wall1BiotSavartKernel W01)
+    (wall1BiotSavartKernel W10)
     (restrictionMatch R)
