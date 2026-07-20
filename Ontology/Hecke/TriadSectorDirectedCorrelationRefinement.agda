@@ -1,7 +1,7 @@
 module Ontology.Hecke.TriadSectorDirectedCorrelationRefinement where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
 open import Ontology.Hecke.CurrentSaturatedForcedStableCollapse
   using (CurrentSaturatedGenerator)
@@ -106,8 +106,6 @@ open SymmetricCorrelationProjection public
 interactionDiagonal : DirectedHistogramInteraction → Nat
 interactionDiagonal i =
   stableStable i + illegalIllegal i + otherOther i
-  where
-  open import Agda.Builtin.Nat using (_+_)
 
 forgetDirection :
   DirectedTriadCorrelationSummary → SymmetricCorrelationProjection
