@@ -10,9 +10,12 @@ open import DASHI.Physics.SignatureFromMask public
 open import DASHI.Physics.MaskedQuadraticRenormalization public
 open import DASHI.Physics.MaskedCanonicalizationInvariant public
 open import DASHI.Physics.MaskedBlockOrthogonality public
+open import DASHI.Physics.MaskedNoLeakageBridge public
 open import DASHI.Physics.MaskedOperatorInvariants public
 open import DASHI.Physics.MaskedCone public
 open import DASHI.Physics.LorentzianCoreClosure public
+open import DASHI.Physics.MaskedSignature31Bridge public
+open import DASHI.Physics.DefectLorentzBridge public
 open import DASHI.Physics.MaskedConeStructure public
 open import DASHI.Physics.RealConeStructureInstance public
 open import DASHI.Physics.RealCausalStructureInstance public
