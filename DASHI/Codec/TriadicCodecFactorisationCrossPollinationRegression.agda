@@ -2,7 +2,7 @@ module DASHI.Codec.TriadicCodecFactorisationCrossPollinationRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Algebra.Trit using (neg; zer; pos)
+open import DASHI.Algebra.Trit using (neg; zer; pos; inv)
 import DASHI.Algebra.TritSupportSignFactor as Canonical
 import DASHI.Codec.TriadicMaskSignFactorization as MaskSign
 import DASHI.Codec.TriadicPAdicCodec as PAdic
@@ -25,5 +25,5 @@ maskSignSparseTripleCost :
 maskSignSparseTripleCost = refl
 
 negativeSupportSurvivesInversion :
-  PAdic.support (DASHI.Algebra.Trit.inv neg) ≡ PAdic.support neg
+  PAdic.support (inv neg) ≡ PAdic.support neg
 negativeSupportSurvivesInversion = refl
