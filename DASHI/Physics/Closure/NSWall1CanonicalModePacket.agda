@@ -5,7 +5,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 
 open import DASHI.Physics.Closure.NSIntegerFourierLattice
-open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel
+open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel hiding (NonZeroMode)
 
 ------------------------------------------------------------------------
 -- A minimal exact Wall-1 Fourier packet.
