@@ -122,7 +122,7 @@ circlePhaseRefinementDiamond :
   nonaryTo18 (triToNonary t)
 circlePhaseRefinementDiamond = tri-common-refinement-commutes
 
-record BinaryTernaryRefinementReceipt : Set where
+record BinaryTernaryRefinementReceipt : Set₁ where
   constructor mkBinaryTernaryRefinementReceipt
   field
     coarseCarrier : Set
