@@ -20,6 +20,7 @@ open import DASHI.Physics.Closure.NSDivergenceFreePolarizationBasis public
 open import DASHI.Physics.Closure.NSPairIncidenceKernel public
 open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel public
 open import DASHI.Physics.Closure.NSDifferentiatedTriadAnalyticLeaf public
+open import DASHI.Physics.Closure.NSCompactGammaDifferentiatedTriadInstantiation public
 open import DASHI.Physics.Closure.NSWall1FourierShellInstance public
 open import DASHI.Physics.Closure.NSWall1PolarizationInstantiation public
 open import DASHI.Physics.Closure.NSWall1UniformWeightedSchur public
@@ -28,8 +29,13 @@ open import DASHI.Physics.Closure.NSWeightedShellTransferBridge public
 open import DASHI.Physics.Closure.NSFactorizedSchurFrameGap public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketWall1PairIncidenceBridge public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization public
+open import DASHI.Physics.Closure.NSCompactGammaFullShellSchur public
+open import DASHI.Physics.Closure.NSCompactGammaTriadFullShellCoherence public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketDifferentialModulusBridge public
+open import DASHI.Physics.Closure.NSGalerkinCompactnessLimit public
 open import DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge public
+open import DASHI.Physics.Closure.NSCompactGammaAdmissiblePreservation public
 open import DASHI.Physics.Closure.NSCompactGammaTimeIntegrabilityBridge public
+open import DASHI.Physics.Closure.NSCompactGammaBKMTimeIntegrability public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public

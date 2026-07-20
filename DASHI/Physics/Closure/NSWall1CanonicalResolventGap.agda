@@ -1,11 +1,12 @@
 module DASHI.Physics.Closure.NSWall1CanonicalResolventGap where
 
 open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Equality using (_≡_; refl; subst; sym)
-open import Data.Integer.Base using (+_; +≤+; +<+)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Integer.Base using (+_; +<+)
 open import Data.Nat.Properties as ℕ using (≤-refl)
 open import Data.Rational.Base as ℚ
-  using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; *≤*; *<*; _/_)
+  using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; *<*; _/_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.Closure.NSWall1ExactEvaluationCarrier
@@ -42,7 +43,7 @@ canonicalResolventEquation :
 canonicalResolventEquation x = refl
 
 rational≤refl : ∀ q → q ≤ q
-rational≤refl q = *≤* (+≤+ ℕ.≤-refl)
+rational≤refl q = ℚP.≤-refl
 
 canonicalLowResolventBoundUnit :
   ∀ x → lowEnergy (canonicalLowResolvent x) ≤ lowEnergy x
