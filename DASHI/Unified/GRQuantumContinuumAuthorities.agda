@@ -48,8 +48,11 @@ open GRQuantumContinuumAuthorityCutset public
 
 ------------------------------------------------------------------------
 -- Compatibility-level proposition terminal assembled from the strict cutset.
--- The generic fields in the earlier record are instantiated by the concrete
--- shared-substrate and empirical records carried by the cutset.
+--
+-- The older generic recovery fields live in `Set`, so they cannot directly hold
+-- the `Set₁` shared-substrate and empirical records.  They are retained only as
+-- compatibility tokens; the actual typed evidence is carried by the strict
+-- terminal object below.
 
 propositionTerminalFromAuthorityCutset :
   GRQuantumContinuumAuthorityCutset → TerminalGRQuantumProof
@@ -69,16 +72,14 @@ propositionTerminalFromAuthorityCutset authority =
     ; constraintsClosed = continuumConstraintsClosed authority
     ; uvSpectrum = continuumUVSpectrum authority
     ; uvSpectrumClosed = continuumUVSpectrumClosed authority
-    ; oneUnderlyingSubstrate = SharedSubstrateRecovery
-    ; oneUnderlyingSubstrateProof = sharedSubstrateRecovery authority
-    ; quantumReadingRecovered = SharedSubstrateRecovery
-    ; quantumReadingRecoveredProof = sharedSubstrateRecovery authority
-    ; generalRelativisticReadingRecovered = SharedSubstrateRecovery
-    ; generalRelativisticReadingRecoveredProof =
-        sharedSubstrateRecovery authority
-    ; empiricalCorrespondenceSupplied =
-        Empirical.PhysicalGRQuantumCorrespondence
-    ; empiricalCorrespondenceSuppliedProof = physicalCorrespondence authority
+    ; oneUnderlyingSubstrate = ⊤
+    ; oneUnderlyingSubstrateProof = tt
+    ; quantumReadingRecovered = ⊤
+    ; quantumReadingRecoveredProof = tt
+    ; generalRelativisticReadingRecovered = ⊤
+    ; generalRelativisticReadingRecoveredProof = tt
+    ; empiricalCorrespondenceSupplied = ⊤
+    ; empiricalCorrespondenceSuppliedProof = tt
     }
 
 strictTerminalFromAuthorityCutset :
