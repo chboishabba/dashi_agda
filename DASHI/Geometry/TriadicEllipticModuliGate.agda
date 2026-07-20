@@ -124,28 +124,11 @@ record CoordinateChangeInvariantGate
       (g : Change) →
       (E : WeierstrassDatum R) →
       admissibleChange g →
-      JInvariantCertificate R E →
-      JInvariantCertificate R (actOnCurve g E) →
-      jCoordinate
-        (recordJAfter g E)
-      ≡ jCoordinate
-          (recordJBefore g E)
-      where
-        recordJBefore :
-          (g : Change) →
-          (E : WeierstrassDatum R) →
-          JInvariantCertificate R E
-        recordJBefore g E = λ where
+      (before : JInvariantCertificate R E) →
+      (after : JInvariantCertificate R (actOnCurve g E)) →
+      jCoordinate before ≡ jCoordinate after
 
-        recordJAfter :
-          (g : Change) →
-          (E : WeierstrassDatum R) →
-          JInvariantCertificate R (actOnCurve g E)
-        recordJAfter g E = λ where
-
-------------------------------------------------------------------------
--- The previous fully generic invariance statement cannot manufacture the two
--- certificates it compares.  This explicit receipt is the usable form.
+open CoordinateChangeInvariantGate public
 
 record JOrbitReceipt
   (R : EllipticCoefficientRing)
