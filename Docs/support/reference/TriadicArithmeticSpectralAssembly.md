@@ -8,7 +8,7 @@ This tranche implements the layered route
 balanced-trit filtration
   -> exact finite quotients
   -> carry arithmetic and finite symmetries
-  -> character / irrep codecs
+  -> exact depth-one characters / gated higher-depth irreps
   -> sector traces and finite q-series prefixes
   -> gated modular / Eisenstein / Hecke coordinates
   -> gated elliptic j-moduli coordinates
@@ -67,15 +67,15 @@ Checked now:
 - digitwise additive inverse;
 - left identity;
 - left inverse;
-- canonical arithmetic examples such as `1 + 1 = -1 mod 3` and `4 + 4 = -1 mod 9`.
+- quotient reduction commutes with addition, including the generalized incoming-carry theorem;
+- canonical examples such as `1 + 1 = -1 mod 3` and `4 + 4 = -1 mod 9`.
 
-Explicit remaining arithmetic law receipt:
+The remaining general finite-group receipt contains only:
 
 - associativity;
-- commutativity;
-- compatibility of reduction with addition.
+- commutativity.
 
-These are isolated in `TriadicArithmeticLawReceipt`, rather than assumed silently.
+These remain isolated in `TriadicArithmeticLawReceipt`, rather than assumed silently. At depth one both laws are discharged by exact finite exhaustion in `DASHI.Algebra.TriadicDepthOneCharacters`.
 
 ## 3. Additive characters, irreps, unit actions, and affine symmetry
 
@@ -90,7 +90,18 @@ These are isolated in `TriadicArithmeticLawReceipt`, rather than assumed silentl
 - block decomposition, block preservation, Parseval, and spectral-tail proof slots;
 - the full finite character-transform bundle.
 
-It includes an exact identity codec and a trivial phase character as checked baselines. They validate the reconstruction and character-law interfaces, but are not presented as a cyclotomic DFT.
+It includes an exact identity codec and a trivial phase character as checked baselines. They validate the reconstruction and character-law interfaces, but are not presented as a higher-depth cyclotomic DFT.
+
+`DASHI.Algebra.TriadicDepthOneCharacters` additionally implements the complete character family of `Z/3Z`:
+
+- all three residue elements;
+- checked depth-one associativity and commutativity;
+- a symbolic third-root phase ring `C3Phase`;
+- all three additive characters;
+- the character homomorphism law by finite exhaustion;
+- the exact three-by-three character table in residue order `(-1, 0, +1)`.
+
+This is a genuine finite character theorem at depth one. It does not yet include the higher-depth DFT, orthogonality sum, inverse transform, Parseval theorem, or uniform spectral limit.
 
 `DASHI.Algebra.TriadicFiniteAffineAction` adds:
 
@@ -100,7 +111,7 @@ It includes an exact identity codec and a trivial phase character as checked bas
 - affine action on residues;
 - affine kernel-equivariance receipts.
 
-Thus the symmetry lane covers the three intended levels:
+Thus the symmetry lane covers:
 
 ```text
 additive translations
@@ -188,7 +199,7 @@ It does not real-smoothify native `Z_3`.
 - weighted infinite-axis summability;
 - native p-adic analytic-manifold structure.
 
-The intended Euclidean tail is the familiar bound
+The intended Euclidean tail is
 
 ```text
 |Phi(d) - Phi_n(d)| <= lambda^n / (1 - lambda),  0 < lambda < 1.
@@ -267,9 +278,12 @@ representation cost + residual cost.
 | Reduction and inverse-limit point | implemented |
 | Concrete carry addition modulo `3^n` | implemented |
 | Zero identity and additive inverse | checked |
-| Associativity, commutativity, reduction/addition law | explicit receipt |
+| Reduction/addition compatibility | checked |
+| Associativity and commutativity at depth one | checked |
+| Associativity and commutativity at arbitrary depth | explicit receipt |
+| Exact `Z/3Z` character family and character table | checked |
 | Exact finite spectral codec interface | implemented |
-| Genuine cyclotomic DFT and orthogonality | gated |
+| Higher-depth cyclotomic DFT and orthogonality | gated |
 | Unit and affine actions | implemented interfaces |
 | Block traces to q-series coefficients | explicit bridge |
 | Finite q-series prefixes | implemented |
@@ -288,8 +302,8 @@ representation cost + residual cost.
 
 ## Recommended proof order
 
-1. Discharge `TriadicArithmeticLawReceipt` by carry-locality induction.
-2. Instantiate the exact cyclotomic phase ring and additive character table at finite depth.
+1. Generalize the checked depth-one associativity/commutativity proof to arbitrary depth by carry-locality induction.
+2. Instantiate exact higher-depth cyclotomic phase rings and character tables.
 3. Prove character orthogonality, completeness, and exact DFT reconstruction.
 4. Instantiate a translation-invariant kernel and prove block diagonalization plus Parseval.
 5. Bind stable block traces to a concrete q-series and test recurrence/congruence laws.
