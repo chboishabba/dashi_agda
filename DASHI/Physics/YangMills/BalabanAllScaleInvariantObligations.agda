@@ -1,11 +1,10 @@
 module DASHI.Physics.YangMills.BalabanAllScaleInvariantObligations where
 
 ------------------------------------------------------------------------
--- Exact quantitative obligations for preservation of the all-scale RG
--- domain.  The hard analytic inequalities remain explicit inputs; this
--- module proves that those inputs discharge the six fields of
--- QuantitativeRGStep and the accumulated-error field used by the existing
--- all-scale induction.
+-- Quantitative obligations for preservation of the all-scale RG domain.
+-- The analytic inequalities are explicit inputs; the eliminators below
+-- discharge the six fields of QuantitativeRGStep and the accumulated-error
+-- field consumed by the existing all-scale induction.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -15,28 +14,28 @@ import DASHI.Physics.YangMills.BalabanAllScaleRGClosure as RG
 import DASHI.Physics.YangMills.BalabanQuantitativeAllScaleInvariant as AllScale
 
 ------------------------------------------------------------------------
--- A1. Running coupling.
+-- A1. Running coupling:
+-- g[k+1] = g[k] - beta0 g[k]^3 + r[k], |r[k]| <= C_G g[k]^5.
 ------------------------------------------------------------------------
 
 record RunningCouplingPreservation
     {State Scalar : Set}
     (profile : AllScale.RGAdmissibilityProfile State)
-    (renormalize : Nat → State → State) : Set₁ where
+    (step : Nat → State → State) : Set₁ where
   field
     coupling : Nat → State → Scalar
     betaZero groupConstant : Scalar
     remainder : Nat → State → Scalar
-
-    subtract multiply : Scalar → Scalar → Scalar
+    subtract add multiply : Scalar → Scalar → Scalar
     cube fifthPower absoluteValue : Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
 
     couplingRecursion : ∀ scale state →
-      coupling (suc scale) (renormalize scale state) ≡
-      subtract (coupling scale state)
-        (subtract
-          (multiply betaZero (cube (coupling scale state)))
-          (remainder scale state))
+      coupling (suc scale) (step scale state) ≡
+      add
+        (subtract (coupling scale state)
+          (multiply betaZero (cube (coupling scale state))))
+        (remainder scale state)
 
     remainderBound : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
@@ -46,20 +45,18 @@ record RunningCouplingPreservation
 
     allowedIntervalPreserved : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
-      AllScale.CouplingAdmissible profile (suc scale)
-        (renormalize scale state)
+      AllScale.CouplingAdmissible profile (suc scale) (step scale state)
 
 open RunningCouplingPreservation public
 
 couplingPreserved :
   ∀ {State Scalar : Set}
     {profile : AllScale.RGAdmissibilityProfile State}
-    {renormalize : Nat → State → State} →
-  RunningCouplingPreservation profile renormalize →
+    {step : Nat → State → State} →
+  RunningCouplingPreservation {Scalar = Scalar} profile step →
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
-  AllScale.CouplingAdmissible profile (suc scale)
-    (renormalize scale state)
+  AllScale.CouplingAdmissible profile (suc scale) (step scale state)
 couplingPreserved data = allowedIntervalPreserved data
 
 ------------------------------------------------------------------------
@@ -69,20 +66,16 @@ couplingPreserved data = allowedIntervalPreserved data
 record FieldRadiusPreservation
     {State Radius : Set}
     (profile : AllScale.RGAdmissibilityProfile State)
-    (renormalize : Nat → State → State) : Set₁ where
+    (step : Nat → State → State) : Set₁ where
   field
     fieldSize : Nat → State → Radius
     allowedRadius : Nat → Radius
     LessEqual : Radius → Radius → Set
 
-    inputWithinRadius : ∀ scale state →
-      AllScale.AdmissibleAt profile scale state →
-      LessEqual (fieldSize scale state) (allowedRadius scale)
-
     radiusTransport : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
       LessEqual
-        (fieldSize (suc scale) (renormalize scale state))
+        (fieldSize (suc scale) (step scale state))
         (allowedRadius (suc scale))
 
     radiusBoundImpliesAdmissible : ∀ scale state →
@@ -94,15 +87,13 @@ open FieldRadiusPreservation public
 fieldRadiusPreserved :
   ∀ {State Radius : Set}
     {profile : AllScale.RGAdmissibilityProfile State}
-    {renormalize : Nat → State → State} →
-  FieldRadiusPreservation profile renormalize →
+    {step : Nat → State → State} →
+  FieldRadiusPreservation {Radius = Radius} profile step →
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
-  AllScale.FieldRadiusAdmissible profile (suc scale)
-    (renormalize scale state)
+  AllScale.FieldRadiusAdmissible profile (suc scale) (step scale state)
 fieldRadiusPreserved data scale state admissible =
-  radiusBoundImpliesAdmissible data (suc scale)
-    (renormalize _ scale state)
+  radiusBoundImpliesAdmissible data (suc scale) (step scale state)
     (radiusTransport data scale state admissible)
 
 ------------------------------------------------------------------------
@@ -112,7 +103,7 @@ fieldRadiusPreserved data scale state admissible =
 record PolymerNormPreservation
     {State Bound : Set}
     (profile : AllScale.RGAdmissibilityProfile State)
-    (renormalize : Nat → State → State) : Set₁ where
+    (step : Nat → State → State) : Set₁ where
   field
     smallFieldContribution stepVContribution outputPolymerNorm :
       Nat → State → Bound
@@ -132,14 +123,14 @@ record PolymerNormPreservation
 
     outputDecompositionBound : ∀ scale state →
       LessEqual
-        (outputPolymerNorm (suc scale) (renormalize scale state))
+        (outputPolymerNorm (suc scale) (step scale state))
         (add (smallFieldContribution scale state)
              (stepVContribution scale state))
 
     combinedBudgetBound : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
       LessEqual
-        (outputPolymerNorm (suc scale) (renormalize scale state))
+        (outputPolymerNorm (suc scale) (step scale state))
         (nextPolymerBudget (suc scale))
 
     polymerBoundImpliesAdmissible : ∀ scale state →
@@ -151,31 +142,27 @@ open PolymerNormPreservation public
 polymerPreserved :
   ∀ {State Bound : Set}
     {profile : AllScale.RGAdmissibilityProfile State}
-    {renormalize : Nat → State → State} →
-  PolymerNormPreservation profile renormalize →
+    {step : Nat → State → State} →
+  PolymerNormPreservation {Bound = Bound} profile step →
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
-  AllScale.PolymerAdmissible profile (suc scale)
-    (renormalize scale state)
+  AllScale.PolymerAdmissible profile (suc scale) (step scale state)
 polymerPreserved data scale state admissible =
-  polymerBoundImpliesAdmissible data (suc scale)
-    (renormalize _ scale state)
+  polymerBoundImpliesAdmissible data (suc scale) (step scale state)
     (combinedBudgetBound data scale state admissible)
 
 ------------------------------------------------------------------------
--- A4. Analyticity radius under every nonlinear operation in the step.
+-- A4. Analyticity radius after composition, BCH, determinants, localization.
 ------------------------------------------------------------------------
 
 record AnalyticityRadiusPreservation
     {State Radius : Set}
     (profile : AllScale.RGAdmissibilityProfile State)
-    (renormalize : Nat → State → State) : Set₁ where
+    (step : Nat → State → State) : Set₁ where
   field
     inputRadius outputRadius requiredRadius : Nat → State → Radius
-    compositionLoss bchLoss determinantLoss localizationLoss :
-      Nat → State → Radius
-    remainingRadius : Radius → Radius → Radius
-    combineLosses : Radius → Radius → Radius
+    compositionLoss bchLoss determinantLoss localizationLoss : Nat → State → Radius
+    remainingRadius combineLosses : Radius → Radius → Radius
     LessEqual : Radius → Radius → Set
 
     totalLossControlled : ∀ scale state →
@@ -188,7 +175,7 @@ record AnalyticityRadiusPreservation
         (inputRadius scale state)
 
     outputRadiusAfterLoss : ∀ scale state →
-      outputRadius (suc scale) (renormalize scale state) ≡
+      outputRadius (suc scale) (step scale state) ≡
       remainingRadius (inputRadius scale state)
         (combineLosses (compositionLoss scale state)
           (combineLosses (bchLoss scale state)
@@ -197,8 +184,9 @@ record AnalyticityRadiusPreservation
 
     nextRadiusRetained : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
-      LessEqual (requiredRadius (suc scale) (renormalize scale state))
-        (outputRadius (suc scale) (renormalize scale state))
+      LessEqual
+        (requiredRadius (suc scale) (step scale state))
+        (outputRadius (suc scale) (step scale state))
 
     retainedRadiusImpliesAdmissible : ∀ scale state →
       LessEqual (requiredRadius scale state) (outputRadius scale state) →
@@ -209,15 +197,13 @@ open AnalyticityRadiusPreservation public
 analyticityPreserved :
   ∀ {State Radius : Set}
     {profile : AllScale.RGAdmissibilityProfile State}
-    {renormalize : Nat → State → State} →
-  AnalyticityRadiusPreservation profile renormalize →
+    {step : Nat → State → State} →
+  AnalyticityRadiusPreservation {Radius = Radius} profile step →
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
-  AllScale.AnalyticityAdmissible profile (suc scale)
-    (renormalize scale state)
+  AllScale.AnalyticityAdmissible profile (suc scale) (step scale state)
 analyticityPreserved data scale state admissible =
-  retainedRadiusImpliesAdmissible data (suc scale)
-    (renormalize _ scale state)
+  retainedRadiusImpliesAdmissible data (suc scale) (step scale state)
     (nextRadiusRetained data scale state admissible)
 
 ------------------------------------------------------------------------
@@ -227,18 +213,17 @@ analyticityPreserved data scale state admissible =
 record GaugeFixingDomainPreservation
     {State : Set}
     (profile : AllScale.RGAdmissibilityProfile State)
-    (renormalize : Nat → State → State) : Set₁ where
+    (step : Nat → State → State) : Set₁ where
   field
-    WithinGaugeChart : Nat → State → Set
-    FaddeevPopovInvertible : Nat → State → Set
+    WithinGaugeChart FaddeevPopovInvertible : Nat → State → Set
 
     nextBackgroundWithinChart : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
-      WithinGaugeChart (suc scale) (renormalize scale state)
+      WithinGaugeChart (suc scale) (step scale state)
 
     nextFaddeevPopovInvertible : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
-      FaddeevPopovInvertible (suc scale) (renormalize scale state)
+      FaddeevPopovInvertible (suc scale) (step scale state)
 
     chartAndInvertibilityImplyAdmissible : ∀ scale state →
       WithinGaugeChart scale state →
@@ -250,15 +235,13 @@ open GaugeFixingDomainPreservation public
 gaugeFixingPreserved :
   ∀ {State : Set}
     {profile : AllScale.RGAdmissibilityProfile State}
-    {renormalize : Nat → State → State} →
-  GaugeFixingDomainPreservation profile renormalize →
+    {step : Nat → State → State} →
+  GaugeFixingDomainPreservation profile step →
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
-  AllScale.GaugeFixingAdmissible profile (suc scale)
-    (renormalize scale state)
+  AllScale.GaugeFixingAdmissible profile (suc scale) (step scale state)
 gaugeFixingPreserved data scale state admissible =
-  chartAndInvertibilityImplyAdmissible data (suc scale)
-    (renormalize _ scale state)
+  chartAndInvertibilityImplyAdmissible data (suc scale) (step scale state)
     (nextBackgroundWithinChart data scale state admissible)
     (nextFaddeevPopovInvertible data scale state admissible)
 
@@ -269,7 +252,7 @@ gaugeFixingPreserved data scale state admissible =
 record LocalityPreservation
     {State Decay : Set}
     (profile : AllScale.RGAdmissibilityProfile State)
-    (renormalize : Nat → State → State) : Set₁ where
+    (step : Nat → State → State) : Set₁ where
   field
     outputDecayRate requiredDecayRate : Nat → State → Decay
     LessEqual : Decay → Decay → Set
@@ -277,8 +260,8 @@ record LocalityPreservation
     exponentialPolymerDecayRetained : ∀ scale state →
       AllScale.AdmissibleAt profile scale state →
       LessEqual
-        (requiredDecayRate (suc scale) (renormalize scale state))
-        (outputDecayRate (suc scale) (renormalize scale state))
+        (requiredDecayRate (suc scale) (step scale state))
+        (outputDecayRate (suc scale) (step scale state))
 
     decayRateImpliesAdmissible : ∀ scale state →
       LessEqual (requiredDecayRate scale state) (outputDecayRate scale state) →
@@ -289,32 +272,31 @@ open LocalityPreservation public
 localityPreserved :
   ∀ {State Decay : Set}
     {profile : AllScale.RGAdmissibilityProfile State}
-    {renormalize : Nat → State → State} →
-  LocalityPreservation profile renormalize →
+    {step : Nat → State → State} →
+  LocalityPreservation {Decay = Decay} profile step →
   ∀ scale state →
   AllScale.AdmissibleAt profile scale state →
-  AllScale.LocalityAdmissible profile (suc scale)
-    (renormalize scale state)
+  AllScale.LocalityAdmissible profile (suc scale) (step scale state)
 localityPreserved data scale state admissible =
-  decayRateImpliesAdmissible data (suc scale)
-    (renormalize _ scale state)
+  decayRateImpliesAdmissible data (suc scale) (step scale state)
     (exponentialPolymerDecayRetained data scale state admissible)
 
 ------------------------------------------------------------------------
--- Assemble A1--A6 into the pre-existing QuantitativeRGStep.
+-- A1--A6 assembled into the existing QuantitativeRGStep.
 ------------------------------------------------------------------------
 
 record QuantitativeInvariantObligations
     (State CouplingScalar Radius PolymerBound Decay : Set) : Set₁ where
   field
     profile : AllScale.RGAdmissibilityProfile State
-    renormalize : Nat → State → State
-    runningCoupling : RunningCouplingPreservation profile renormalize
-    fieldRadius : FieldRadiusPreservation profile renormalize
-    polymerNorm : PolymerNormPreservation profile renormalize
-    analyticityRadius : AnalyticityRadiusPreservation profile renormalize
-    gaugeFixingDomain : GaugeFixingDomainPreservation profile renormalize
-    localityDecay : LocalityPreservation profile renormalize
+    step : Nat → State → State
+    runningCoupling : RunningCouplingPreservation
+      {Scalar = CouplingScalar} profile step
+    fieldRadius : FieldRadiusPreservation {Radius = Radius} profile step
+    polymerNorm : PolymerNormPreservation {Bound = PolymerBound} profile step
+    analyticityRadius : AnalyticityRadiusPreservation {Radius = Radius} profile step
+    gaugeFixingDomain : GaugeFixingDomainPreservation profile step
+    localityDecay : LocalityPreservation {Decay = Decay} profile step
 
 open QuantitativeInvariantObligations public
 
@@ -324,7 +306,7 @@ quantitativeRGStep :
   AllScale.QuantitativeRGStep State
 quantitativeRGStep obligations = record
   { profile = profile obligations
-  ; renormalize = renormalize obligations
+  ; renormalize = step obligations
   ; couplingPreserved = couplingPreserved (runningCoupling obligations)
   ; fieldRadiusPreserved = fieldRadiusPreserved (fieldRadius obligations)
   ; polymerPreserved = polymerPreserved (polymerNorm obligations)
@@ -334,7 +316,7 @@ quantitativeRGStep obligations = record
   }
 
 ------------------------------------------------------------------------
--- A7. Summability of accumulated RG errors.
+-- A7. Uniform bound on all partial sums of accumulated RG errors.
 ------------------------------------------------------------------------
 
 record RGErrorSummability (ErrorBound : Set) : Set₁ where
