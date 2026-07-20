@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.DeltaQuadraticEnergyExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
-open import Data.Integer using (ℤ)
+open import Data.Integer using (ℤ; +_)
 open import Data.Vec using (Vec)
 
 import DASHI.Arithmetic.ArithmeticIntegerEmbedding as AIE
@@ -12,15 +12,15 @@ open import DASHI.Geometry.QuadraticForm as QF
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.QuadraticPolarization as QP
 open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
+open import DASHI.Physics.Closure.PrimeWeightedQuadraticForm as PWQ
 
 ------------------------------------------------------------------------
 -- Exact Delta-side quadratic energy.
 --
--- The arithmetic valuation profile is an amplitude vector.  Its exact
--- quadratic energy is therefore the already-canonical sum-of-squares form
--- evaluated on that vector.  This deliberately does not identify the older
--- linear cancellation pressure with a quadratic energy, and it does not
--- introduce square-root prime weights over the integer carrier.
+-- The arithmetic valuation profile is an amplitude vector. Its exact
+-- unweighted quadratic energy is therefore the already-canonical
+-- sum-of-squares form evaluated on that vector. This deliberately does not
+-- identify the older linear cancellation pressure with a quadratic energy.
 
 DeltaCarrier : Set
 DeltaCarrier = AIE.Int
@@ -58,11 +58,6 @@ canonicalExactDeltaQuadraticEnergySurface =
 
 ------------------------------------------------------------------------
 -- Reduction to the existing admissibility/normalization theorem.
---
--- Once a candidate quadratic is admissible for the theorem-side dynamics,
--- admissibleForNormalization already proves that it is Q-hat-core.  Hence the
--- exact Delta energy agrees with that candidate on every transported
--- valuation amplitude without any new postulate.
 
 exactDeltaAgreesWithAdmissibleQuadratic :
   (dynamicsMap :
@@ -98,28 +93,81 @@ exactDeltaDeterminesAdmissibleQuadraticsOnImage dynamicsMap q₁ q₂ admissible
       (CFQS.admissibleForNormalization admissible₂ (DeltaAmplitude n)))
 
 ------------------------------------------------------------------------
--- Honest boundary for the weighted route.
+-- Exact tracked-prime weighted quadratic geometry.
 --
--- WVE.weightedQuadraticEnergy is retained as a separate arithmetic
--- measurement.  Over the present integer carrier it is not definitionally
--- Q-hat-core of weightedQuadraticVecZ: that latter expression would square the
--- already weighted coordinates again.  Any weighted-to-canonical theorem must
--- therefore provide a genuine weighted quadratic form or a scalar-extension
--- transport, rather than reusing the unweighted normalization by assertion.
+-- The earlier boundary is now sharpened constructively. The finite exact
+-- tracked-prime weighting is represented by the genuine diagonal form
+--
+--   Q_p(v) = Σ_i p_i v_i²
+--
+-- on Vec ℤ 15. This avoids the incorrect operation of squaring coordinates
+-- that have already been multiplied by p_i. A logarithmic weighting remains a
+-- later scalar-extension refinement because log p_i is not an integer scalar.
 
-record WeightedDeltaQuadraticBoundary : Set₁ where
+QDeltaWeighted : DeltaCarrier → ℤ
+QDeltaWeighted n =
+  QF.QuadraticForm.Q PWQ.primeWeightedQuadraticForm (DeltaAmplitude n)
+
+QDeltaWeightedFormCorrect :
+  ∀ n →
+    QDeltaWeighted n
+    ≡
+    PWQ.weightedQ PWQ.primeWeightsℤ (WVE.valuationVecℤ n)
+QDeltaWeightedFormCorrect n = refl
+
+QDeltaWeightedMatchesArithmeticEnergy :
+  ∀ n →
+    QDeltaWeighted n ≡ + (WVE.weightedQuadraticEnergy n)
+QDeltaWeightedMatchesArithmeticEnergy n = refl
+
+record WeightedDeltaQuadraticSurface : Set₁ where
   field
-    weightedArithmeticEnergy : DeltaCarrier → Nat
-    weightedArithmeticEnergyIsCurrent :
-      weightedArithmeticEnergy ≡ WVE.weightedQuadraticEnergy
-    WeightedGeometryCarrier : Set
-    weightedGeometryMap : DeltaCarrier → WeightedGeometryCarrier
+    Carrier : Set
+    amplitude : Carrier → Vec ℤ 15
+    weightedForm :
+      QF.QuadraticForm (QES.AdditiveVecℤ {15}) QES.ScalarFieldℤ
+    weightedEnergy : Carrier → ℤ
+    weightedEnergyIsFormEvaluation :
+      ∀ x →
+      weightedEnergy x
+      ≡
+      QF.QuadraticForm.Q weightedForm (amplitude x)
+    weightedEnergyMatchesArithmetic :
+      ∀ x →
+      weightedEnergy x ≡ + (WVE.weightedQuadraticEnergy x)
 
-canonicalWeightedDeltaQuadraticBoundary : WeightedDeltaQuadraticBoundary
-canonicalWeightedDeltaQuadraticBoundary =
+open WeightedDeltaQuadraticSurface public
+
+canonicalWeightedDeltaQuadraticSurface :
+  WeightedDeltaQuadraticSurface
+canonicalWeightedDeltaQuadraticSurface =
   record
-    { weightedArithmeticEnergy = WVE.weightedQuadraticEnergy
-    ; weightedArithmeticEnergyIsCurrent = refl
-    ; WeightedGeometryCarrier = DeltaCarrier
-    ; weightedGeometryMap = λ n → n
+    { Carrier = DeltaCarrier
+    ; amplitude = DeltaAmplitude
+    ; weightedForm = PWQ.primeWeightedQuadraticForm
+    ; weightedEnergy = QDeltaWeighted
+    ; weightedEnergyIsFormEvaluation = λ _ → refl
+    ; weightedEnergyMatchesArithmetic = QDeltaWeightedMatchesArithmeticEnergy
     }
+
+------------------------------------------------------------------------
+-- Honest normalization boundary.
+--
+-- The weighted form is a real quadratic form, but it is not silently equal to
+-- the unweighted Q-hat-core. A weighted-to-canonical promotion must inhabit
+-- the existing `AdmissibleFor` normalization seam explicitly.
+
+record WeightedToCanonicalBoundary : Set₁ where
+  field
+    dynamicsMap :
+      PD.Additive.Carrier (QES.AdditiveVecℤ {15}) →
+      PD.Additive.Carrier (QES.AdditiveVecℤ {15})
+    weightedAdmissible :
+      CFQS.AdmissibleFor 15 dynamicsMap PWQ.primeWeightedQuadraticForm
+
+  weightedNormalizesToQ̂core :
+    ∀ x →
+    QF.QuadraticForm.Q PWQ.primeWeightedQuadraticForm x
+    ≡ QP.Q̂core x
+  weightedNormalizesToQ̂core =
+    CFQS.admissibleForNormalization weightedAdmissible
