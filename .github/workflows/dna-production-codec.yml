@@ -1,0 +1,87 @@
+name: DNA production codec
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Codec/DNAProduction**'
+      - 'DASHI/Codec/DNACompressiveMacros.agda'
+      - 'DASHI/Codec/DNACompactInvariants.agda'
+      - 'tools/dna_production_codec.py'
+      - '.github/workflows/dna-production-codec.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda agda-stdlib
+      - name: Prepare writable standard library
+        id: stdlib
+        shell: bash
+        run: |
+          file="$(dpkg -L agda-stdlib | grep '/Data/Product.agda$' | head -n 1)"
+          test -n "$file"
+          source_path="${file%/Data/Product.agda}"
+          target_path="$RUNNER_TEMP/agda-stdlib"
+          cp -a "$source_path" "$target_path"
+          echo "path=$target_path" >> "$GITHUB_OUTPUT"
+      - name: Typecheck production target
+        shell: bash
+        run: |
+          set +e
+          agda --no-libraries --no-default-libraries \
+            -i . -i '${{ steps.stdlib.outputs.path }}' \
+            DASHI/Codec/DNAProductionValidation.agda \
+            2>&1 | tee agda-production.log
+          status=${PIPESTATUS[0]}
+          exit "$status"
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dna-production-agda-log
+          path: agda-production.log
+          if-no-files-found: error
+
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile Python reference
+        run: python -m py_compile tools/dna_production_codec.py
+      - name: Run deterministic benchmark
+        run: |
+          python tools/dna_production_codec.py \
+            --bytes 4096 \
+            --rounds 3 \
+            --horizon 8 \
+            --seed 369 \
+            --output artifacts/dna-production-benchmark.json
+      - name: Validate receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('artifacts/dna-production-benchmark.json')
+          r = json.loads(p.read_text())
+          assert r['roundtrip'] is True
+          assert r['forbidden_motifs_present'] == []
+          assert r['bounded_hairpins_present'] == 0
+          assert r['max_homopolymer_run'] <= 3
+          assert set(map(int, r['branch_arity_histogram'])) <= {1, 2, 3, 4}
+          assert r['arithmetic_encoder_renormalizations'] >= 0
+          assert r['arithmetic_decoder_renormalizations'] >= 0
+          PY
+      - name: Upload empirical receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: dna-production-benchmark
+          path: artifacts/dna-production-benchmark.json
+          if-no-files-found: error
