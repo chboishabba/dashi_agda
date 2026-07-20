@@ -18,9 +18,12 @@ import DASHI.Physics.Closure.SSPPrimeLane369PAdicUltrametricBridge
 import DASHI.Foundations.TriadicFiniteQuotient as Quotient
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 import DASHI.Algebra.TriadicFiniteIrrep as Irrep
+import DASHI.Algebra.TriadicFiniteAffineAction as Affine
+import DASHI.Physics.Closure.TriadicIrrepTraceBridge as Trace
 import DASHI.Physics.Closure.TriadicSectorQSeries as QSeries
 import DASHI.Physics.Closure.TriadicModularAutomorphicGate as Modular
 import DASHI.Geometry.TriadicEllipticModuliGate as Elliptic
+import DASHI.Physics.Closure.TriadicAnalyticCertificates as Analytic
 import DASHI.Physics.Closure.TriadicVerifiedLimitAssembly as Limit
 import DASHI.Physics.Closure.TriadicRepresentationMDL as MDL
 
@@ -44,12 +47,16 @@ record LayerStatus : Set where
     inverseLimitImplemented : Bool
     characterInterfaceImplemented : Bool
     exactSpectralCodecImplemented : Bool
+    unitAffineActionImplemented : Bool
+    irrepTraceBridgeImplemented : Bool
     qSeriesPrefixImplemented : Bool
     modularGateImplemented : Bool
     eisensteinGateImplemented : Bool
     heckeGateImplemented : Bool
     ellipticOriginGateImplemented : Bool
     jInvariantGateImplemented : Bool
+    analyticCertificatesImplemented : Bool
+    pAdicAnalyticManifoldGateImplemented : Bool
     verifiedLimitBundleImplemented : Bool
     jointRepresentationDepthMDLImplemented : Bool
 
@@ -63,25 +70,30 @@ open LayerStatus public
 
 currentLayerStatus : LayerStatus
 currentLayerStatus =
-  layer-status
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    false
+  record
+    { finiteCarrierImplemented = true
+    ; carryArithmeticImplemented = true
+    ; inverseLimitImplemented = true
+    ; characterInterfaceImplemented = true
+    ; exactSpectralCodecImplemented = true
+    ; unitAffineActionImplemented = true
+    ; irrepTraceBridgeImplemented = true
+    ; qSeriesPrefixImplemented = true
+    ; modularGateImplemented = true
+    ; eisensteinGateImplemented = true
+    ; heckeGateImplemented = true
+    ; ellipticOriginGateImplemented = true
+    ; jInvariantGateImplemented = true
+    ; analyticCertificatesImplemented = true
+    ; pAdicAnalyticManifoldGateImplemented = true
+    ; verifiedLimitBundleImplemented = true
+    ; jointRepresentationDepthMDLImplemented = true
+    ; genuineCyclotomicDFTProved = false
+    ; modularTransformationLawProved = false
+    ; canonicalEllipticOriginProved = false
+    ; asymptoticMDLConsistencyProved = false
+    ; realSmoothZ3Promoted = false
+    }
 
 realSmoothZ3StillNotPromoted :
   realSmoothZ3Promoted currentLayerStatus ≡ false
@@ -100,7 +112,7 @@ ellipticOriginStillGated = refl
 
 canonicalRoute : String
 canonicalRoute =
-  "balanced trit filtration -> exact T^n / mod-3^n quotient -> carry arithmetic -> finite character or irrep blocks -> sector traces and q-series -> gated Eisenstein/Hecke coordinates -> gated elliptic j quotient -> certified inverse limits -> joint representation/depth MDL"
+  "balanced trit filtration -> exact T^n / mod-3^n quotient -> carry arithmetic -> additive/unit/affine symmetry -> finite character or irrep blocks -> block traces and q-series -> gated Eisenstein/Hecke coordinates -> gated elliptic j quotient -> certified inverse limits -> joint representation/depth MDL"
 
 existingSpineIntegration : String
 existingSpineIntegration =
