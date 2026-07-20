@@ -1,21 +1,19 @@
 module DASHI.Physics.Closure.NSFullShellWeightedSchur where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List; _∷_)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums
-open import DASHI.Physics.Closure.NSPairIncidenceKernel
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Lattice
 
 ------------------------------------------------------------------------
 -- Full-shell Wall-1 carrier.
 --
--- The critical design invariant is that kernel entries and Schur sums are
--- definitions obtained by finite folds over enumerated incidences.  A theorem
--- cannot substitute unrelated row/column scalars: it must bound these exact
--- expressions.
+-- Kernel entries and Schur sums are definitions obtained by finite folds over
+-- enumerated incidences.  A theorem therefore cannot substitute unrelated
+-- row/column scalars: it must bound these exact expressions.
 ------------------------------------------------------------------------
 
 infix 4 _∈_
@@ -69,8 +67,8 @@ record FullShellTriadIncidence
     backgroundCutoff : InCutoffCube G N background
     sourceNonZero : Lattice.NonZeroMode source
 
-    symmetryRepresentative : Set
-    representativeChosen : symmetryRepresentative
+    SymmetryRepresentative : Set
+    representativeChosen : SymmetryRepresentative
 
 open FullShellTriadIncidence public
 
@@ -91,14 +89,14 @@ record FullShellIncidenceEnumeration
       (K : Scale G) → (N : Cutoff G) →
       (target source : Lattice.FourierMode) → Set
 
-    incidenceComplete :
+    enumerateCompleteIncidences :
       ∀ K N target source →
       CompleteIncidence K N target source →
       List (FullShellTriadIncidence G K N target source)
 
     completenessMatchesEnumeration :
       ∀ K N target source complete →
-      incidenceComplete K N target source complete ≡
+      enumerateCompleteIncidences K N target source complete ≡
       incidences K N target source
 
     NoDuplicateModuloSymmetry :
@@ -136,11 +134,11 @@ fullShellKernelEntry :
   FullShellKernelData Scalar G E →
   (K : Scale G) → (N : Cutoff G) →
   Lattice.FourierMode → Lattice.FourierMode → Scalar
-fullShellKernelEntry D K N target source =
+fullShellKernelEntry {E = E} D K N target source =
   fold (add D) (zero D)
     (map
       (localFourierMajorant D K N target source)
-      (incidences _ K N target source))
+      (incidences E K N target source))
 
 fullShellRowSum :
   ∀ {s} {Scalar : Set s}
@@ -191,6 +189,13 @@ record FullShellConcreteBiotSavartMatch
 
 open FullShellConcreteBiotSavartMatch public
 
+------------------------------------------------------------------------
+-- Quantitative wall.  Every field is tied either to an actual incidence,
+-- contribution, or exact full-shell fold.  These are the genuine obligations:
+-- angular control, zero-mode exclusion, cutoff monotonicity, lattice counting
+-- plus radial summability, and cutoff-independent constants.
+------------------------------------------------------------------------
+
 record FullShellQuantitativeEvidence
     {s : Level}
     {Scalar : Set s}
@@ -198,18 +203,45 @@ record FullShellQuantitativeEvidence
     {E : FullShellIncidenceEnumeration G}
     (D : FullShellKernelData Scalar G E) : Set (lsuc s) where
   field
-    shellIntersectionCounting : Set
-    weightedRadialSummability : Set
-    angularPolarizationMajorant : Set
-    zeroModeExcluded : Set
+    angularConstant : Scalar
+    angularPolarizationMajorant :
+      ∀ K N target source incidence →
+      _≤_ D
+        (localFourierMajorant D K N target source incidence)
+        angularConstant
+
+    zeroModeExcluded :
+      ∀ K N target source incidence →
+      source incidence ≡ Lattice.zeroMode → ⊥
 
     cutoffIncidenceEmbedding :
       ∀ K N N′ → _≤cutoff_ G N N′ →
-      (target source : Lattice.FourierMode) → Set
+      (target source : Lattice.FourierMode) →
+      FullShellTriadIncidence G K N target source →
+      FullShellTriadIncidence G K N′ target source
 
     cutoffContributionPreserved :
-      ∀ K N N′ le target source →
-      cutoffIncidenceEmbedding K N N′ le target source
+      ∀ K N N′ le target source incidence →
+      localFourierMajorant D K N target source incidence ≡
+      localFourierMajorant D K N′ target source
+        (cutoffIncidenceEmbedding K N N′ le target source incidence)
+
+    shellCountingRadialRowConstant : Scalar
+    shellCountingRadialColumnConstant : Scalar
+
+    shellCountingAndRadialRowBound :
+      ∀ K N target → InTargetShell G K N target →
+      _≤_ D
+        (fullShellRowSum D K N target)
+        (multiply D shellCountingRadialRowConstant
+          (shellWeight D K target))
+
+    shellCountingAndRadialColumnBound :
+      ∀ K N sourceMode → InNearShell G K N sourceMode →
+      _≤_ D
+        (fullShellColumnSum D K N sourceMode)
+        (multiply D shellCountingRadialColumnConstant
+          (shellWeight D K sourceMode))
 
 open FullShellQuantitativeEvidence public
 
@@ -223,6 +255,10 @@ record FullShellWeightedSchurCertificate
     quantitativeEvidence : FullShellQuantitativeEvidence D
 
     rowConstant columnConstant : Scalar
+    rowConstantIdentified :
+      rowConstant ≡ shellCountingRadialRowConstant quantitativeEvidence
+    columnConstantIdentified :
+      columnConstant ≡ shellCountingRadialColumnConstant quantitativeEvidence
 
     fullShellRowBound :
       ∀ K N target → InTargetShell G K N target →
@@ -231,19 +267,12 @@ record FullShellWeightedSchurCertificate
         (multiply D rowConstant (shellWeight D K target))
 
     fullShellColumnBound :
-      ∀ K N source → InNearShell G K N source →
+      ∀ K N sourceMode → InNearShell G K N sourceMode →
       _≤_ D
-        (fullShellColumnSum D K N source)
-        (multiply D columnConstant (shellWeight D K source))
+        (fullShellColumnSum D K N sourceMode)
+        (multiply D columnConstant (shellWeight D K sourceMode))
 
 open FullShellWeightedSchurCertificate public
-
-------------------------------------------------------------------------
--- Promotion is deliberately one-way: the completed certificate exposes the
--- exact incidence-derived row and column estimates.  No final certificate is
--- provided here; it must be inhabited by the genuine counting and analytic
--- estimates above.
-------------------------------------------------------------------------
 
 record FullShellSchurEndpoint
     {s : Level}
@@ -253,6 +282,5 @@ record FullShellSchurEndpoint
     (D : FullShellKernelData Scalar G E) : Set (lsuc s) where
   field
     certificate : FullShellWeightedSchurCertificate D
-    fullIntegerShellClosed : Set
 
 open FullShellSchurEndpoint public
