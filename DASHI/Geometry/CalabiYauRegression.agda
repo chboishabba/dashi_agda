@@ -27,13 +27,19 @@ oneCharts =
   record
     { ChartIndex = One
     ; Domain = oneDomain
+    ; OpenPointSubset = λ _ → Truth
+    ; domainOpen = λ _ → truth
     ; cover = λ _ → mkChartCover one truth
     ; coordinate = λ _ _ _ → one
     ; Image = λ _ _ → Truth
+    ; OpenCoordinateSubset = λ _ → Truth
+    ; imageOpen = λ _ → truth
     ; inverseCoordinate = λ _ _ → one
     ; inverseInDomain = λ _ → truth
     ; chartLeftInverse = λ _ one _ → refl
     ; chartRightInverse = λ _ one _ → refl
+    ; IsChartHomeomorphism = λ _ → Truth
+    ; chartHomeomorphism = λ _ → truth
     ; Overlap = λ _ _ _ → Truth
     ; overlapReflexive = λ _ _ _ → truth
     ; overlapSymmetric = λ _ → truth
@@ -57,6 +63,8 @@ oneComplexManifold : ComplexManifoldAuthority One One
 oneComplexManifold =
   record
     { complexDimension = zero
+    ; coordinateDimension = λ _ → zero
+    ; coordinateDimensionMatches = λ _ → refl
     ; complexCharts = oneCharts
     ; holomorphicTransitions = oneHolomorphicTransitionLaws
     }
@@ -138,6 +146,11 @@ canonicalPointCalabiYau =
 canonicalPointDimensionIsZero :
   complexDimension (complexManifold canonicalPointCalabiYau) ≡ zero
 canonicalPointDimensionIsZero = refl
+
+canonicalPointCoordinateDimensionIsZero :
+  coordinateDimension (complexManifold canonicalPointCalabiYau) one ≡ zero
+canonicalPointCoordinateDimensionIsZero =
+  coordinateDimensionMatches (complexManifold canonicalPointCalabiYau) one
 
 canonicalPointFirstChernClassVanishes :
   firstChernClass (firstChernClassCertificate canonicalPointCalabiYau)
