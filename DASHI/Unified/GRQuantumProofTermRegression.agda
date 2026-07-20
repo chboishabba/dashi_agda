@@ -8,10 +8,12 @@ open import DASHI.Unified.GRQuantumProofTerms
 import DASHI.Core.FiniteQuadraticMultiscale as Quadratic
 import DASHI.Geometry.FiniteCausalDiamond as Diamond
 import DASHI.Geometry.FiniteCausalDiamondClosed as DiamondClosed
+import DASHI.Algebra.FiniteQuaternionDoubleCover as QuaternionCover
 import DASHI.Algebra.Quantum.FiniteTreeWeyl as Tree
 import DASHI.Physics.Closure.PropositionEinsteinBridge as Einstein
 import DASHI.Physics.Closure.PropositionConstraintAlgebra as Constraints
 import DASHI.Physics.Closure.FiniteRegionalSpectrum as UV
+import DASHI.Physics.Closure.FiniteRegionalSpectrumBoundary as UVBoundary
 import DASHI.Unified.GRQuantumProofAdapters as Adapters
 
 ------------------------------------------------------------------------
@@ -37,6 +39,11 @@ finiteCausalClosureExists :
   ChainAntichainLorentzClosed Diamond.finiteCausalDiamondProof
 finiteCausalClosureExists = DiamondClosed.finiteCausalDiamondClosed
 
+finiteSpinXRotationFiber :
+  TwoElementFiber QuaternionCover.rho QuaternionCover.halfTurnX
+finiteSpinXRotationFiber =
+  QuaternionCover.rhoFiberIsTwoElement QuaternionCover.halfTurnX
+
 treeProjectRefineEmpty : Tree.project (Tree.refine []) ≡ []
 treeProjectRefineEmpty = refl
 
@@ -55,6 +62,11 @@ regulatedHamiltonianSpectrumEnumeration :
     (UV.regulatedSpectrum UV.regulatedHamiltonian)
 regulatedHamiltonianSpectrumEnumeration =
   UV.regulatedSpectrumFinite UV.regulatedHamiltonian
+
+regulatedUVCannotCloseWithoutPhysicalMatch :
+  UVSpectralClosed UV.regulatedUVSurface → ⊥
+regulatedUVCannotCloseWithoutPhysicalMatch =
+  UVBoundary.regulatedUVClosedImpossible
 
 exactFlatEinsteinProducerExists : Einstein.ExactFlatEinsteinProducer
 exactFlatEinsteinProducerExists = Einstein.canonicalExactFlatEinsteinProducer
