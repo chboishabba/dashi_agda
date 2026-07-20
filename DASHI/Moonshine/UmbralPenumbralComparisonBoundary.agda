@@ -7,6 +7,14 @@ module DASHI.Moonshine.UmbralPenumbralComparisonBoundary where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
+
+Not : Set → Set
+Not proposition = proposition → ⊥
+
+data OptionalComparison (Proposition : Set) : Set where
+  comparisonUnproved : OptionalComparison Proposition
+  comparisonProved : Proposition → OptionalComparison Proposition
 
 record HarmonicMaassCarrier : Set₁ where
   field
@@ -40,7 +48,7 @@ record MockWeakHolomorphicSeparation
       (form : HarmonicMaassCarrier.HolomorphicPart carrier) →
       NonzeroShadow
         (HarmonicMaassCarrier.shadow carrier (completion form)) →
-      (HarmonicMaassCarrier.WeaklyHolomorphic carrier form → Set)
+      Not (HarmonicMaassCarrier.WeaklyHolomorphic carrier form)
 
 record UmbralPenumbralStructuralComparison : Setω where
   field
@@ -59,10 +67,10 @@ record UmbralPenumbralStructuralComparison : Setω where
     UmbralIncludedInPenumbral : Set
     PenumbralIncludedInUmbral : Set
 
-    noUmbralInclusionProof :
-      UmbralIncludedInPenumbral → Set
-    noPenumbralInclusionProof :
-      PenumbralIncludedInUmbral → Set
+    umbralInclusionStatus :
+      OptionalComparison UmbralIncludedInPenumbral
+    penumbralInclusionStatus :
+      OptionalComparison PenumbralIncludedInUmbral
 
 record UmbralPenumbralBoundary : Set where
   field
