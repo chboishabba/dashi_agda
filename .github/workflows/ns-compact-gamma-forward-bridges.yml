@@ -25,6 +25,8 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaTimeIntegrabilityBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaBernsteinWeightedExpenditure.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaBKMTimeIntegrability.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaHighestAlphaExpenditureCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaDifferentialExpenditureProducer.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaAnalyticClosureProgram.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'Docs/NSCompactGammaAnalyticSynthesis.md'
@@ -53,6 +55,8 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaTimeIntegrabilityBridge.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaBernsteinWeightedExpenditure.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaBKMTimeIntegrability.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaHighestAlphaExpenditureCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaDifferentialExpenditureProducer.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaAnalyticClosureProgram.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'Docs/NSCompactGammaAnalyticSynthesis.md'
@@ -114,6 +118,8 @@ jobs:
               DASHI/Physics/Closure/NSCompactGammaTimeIntegrabilityBridge.agda \
               DASHI/Physics/Closure/NSCompactGammaBernsteinWeightedExpenditure.agda \
               DASHI/Physics/Closure/NSCompactGammaBKMTimeIntegrability.agda \
+              DASHI/Physics/Closure/NSCompactGammaHighestAlphaExpenditureCompletion.agda \
+              DASHI/Physics/Closure/NSCompactGammaDifferentialExpenditureProducer.agda \
               DASHI/Physics/Closure/NSCompactGammaAnalyticClosureProgram.agda \
               DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda
           ) > agda-ns-compact-gamma-forward.log 2>&1
