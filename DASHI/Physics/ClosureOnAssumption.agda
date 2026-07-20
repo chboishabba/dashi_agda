@@ -23,6 +23,16 @@ open import DASHI.Physics.MaskedClosureKit public
 open import DASHI.Physics.TernaryRealInstanceShift
 open import DASHI.Physics.DimensionBoundAssumptions public
 
+open import DASHI.Physics.GlobalDimensionUniqueness public
+open import DASHI.Physics.FiniteToContinuumGeometry public
+open import DASHI.Physics.BianchiLovelockCompletion public
+open import DASHI.Physics.CliffordRepresentationCompletion public
+open import DASHI.Physics.SpinDoubleCoverCompletion public
+open import DASHI.Physics.CCRContinuumCompletion public
+open import DASHI.Physics.UnitaryCompletion public
+open import DASHI.Physics.StandardModelUniqueness public
+open import DASHI.Physics.FullPhysicsClosure public
+
 open import DASHI.Physics.BianchiEinsteinAssumptions public
 open import DASHI.Physics.CliffordAssumptions public
 open import DASHI.Physics.SpinAssumptions public
