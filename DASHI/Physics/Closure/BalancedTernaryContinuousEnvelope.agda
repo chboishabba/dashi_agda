@@ -1,6 +1,5 @@
 module DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
@@ -14,9 +13,9 @@ open import Agda.Builtin.String using (String)
 --       Φ(d) = Σ dₖ λᵏ
 --     as a continuous Euclidean envelope.
 --
--- It therefore extends the existing finite p-adic carrier and prefix
--- ultrametric bridges without claiming that the repository has constructed
--- ℝ, an analytic p-adic field, an infinite sum, or a smooth manifold.
+-- It extends the existing finite p-adic carrier and prefix-ultrametric bridges
+-- without claiming that the repository has constructed ℝ, an analytic p-adic
+-- field, an infinite sum, or a smooth manifold.
 
 ------------------------------------------------------------------------
 -- Primitive balanced ternary carrier
@@ -86,8 +85,8 @@ prefixAgreement→takeEquality (prefix-suc refl rest)
 ------------------------------------------------------------------------
 -- A syntax-level finite envelope.
 --
--- digit-at t k denotes the finite term t · λᵏ.  No analytic Scalar is
--- selected here, so this layer is exact and does not smuggle in convergence.
+-- digit-at t k denotes the finite term t · λᵏ. No analytic scalar is selected
+-- here, so this layer is exact and does not smuggle in convergence.
 
 data EnvelopeTerm : Set where
   envelope-zero : EnvelopeTerm
@@ -114,7 +113,7 @@ finiteEnvelope-step n d = refl
 ------------------------------------------------------------------------
 -- First-difference witness.
 --
--- This is the finite combinatorial datum shared by the p-adic norm and the
+-- This finite combinatorial datum is shared by the p-adic norm and the
 -- depth-weighted metric: streams agree through n digits and differ at n.
 
 data ⊥ : Set where
@@ -133,10 +132,10 @@ open FirstDifferenceAt public
 ------------------------------------------------------------------------
 -- Analytic carrier interface.
 --
--- A model supplies the Euclidean/scalar operations and order predicates that
--- the repository currently does not construct canonically.  This keeps the
--- λ < 1/3 separation condition explicit and prevents continuity, injectivity,
--- or metric equivalence from being promoted merely by naming them.
+-- A model supplies scalar operations plus the exact propositions used to
+-- state convergence, metric representation, cylinder control, first-difference
+-- bounds, topology recovery, and weighted summability. This keeps λ < 1/3
+-- explicit and prevents any analytic result from being promoted by naming it.
 
 record DepthKernelModel : Set₁ where
   field
@@ -158,6 +157,18 @@ record DepthKernelModel : Set₁ where
     Positive : Scalar → Set
     LessThan : Scalar → Scalar → Set
     AtMost : Scalar → Scalar → Set
+
+    Converges : (Nat → Scalar) → Scalar → Set
+    IsWeightedDigitMetric : Stream → Stream → Scalar → Set
+    CylinderControlled :
+      Nat → Stream → Stream → Scalar → Scalar → Set
+    FirstDifferenceBound : Nat → Scalar → Set
+    MetricRecoversCylinder : Nat → Stream → Stream → Scalar → Set
+    WeightedL2Summable :
+      {Axis : Set} →
+      (Axis → Scalar) →
+      (Axis → Scalar) →
+      Set
 
     powerZero : lambdaPower zero ≡ oneˢ
     powerStep :
@@ -194,16 +205,15 @@ finiteEvaluation-step M n d = refl
 ------------------------------------------------------------------------
 -- Paper-safe continuous-envelope receipt.
 --
--- The fields correspond exactly to the claims used in the informal
--- formalisation:
+-- The fields correspond to:
 --   Φ(d) = Σ dₖ λᵏ,
 --   dλ(x,y) = Σ |xₖ-yₖ| λᵏ,
 --   cylinder continuity,
 --   first-difference control,
 --   injectivity under λ < 1/3,
---   and agreement of the metric and prefix/cylinder topology.
+--   and agreement of metric and prefix/cylinder nearness.
 --
--- They are obligations of an analytic instance, not postulated global facts.
+-- They are proofs required from an analytic instance, not global postulates.
 
 record ContinuousDepthEnvelope
   (M : DepthKernelModel) : Set₁ where
@@ -216,22 +226,26 @@ record ContinuousDepthEnvelope
     lambdaBelowThird : LessThan M (lambda M) (thirdˢ M)
 
     finiteApproximantsConvergeToEmbed :
-      (d : Stream) → Set
+      (d : Stream) →
+      Converges M
+        (λ n → finiteEvaluation M n d)
+        (embed d)
 
     depthMetricIsWeightedDigitSum :
-      (x y : Stream) → Set
+      (x y : Stream) →
+      IsWeightedDigitMetric M x y (depthMetric x y)
 
     cylinderContinuity :
       (n : Nat) →
       (x y : Stream) →
       PrefixAgreement n x y →
-      Set
+      CylinderControlled M n x y (embed x) (embed y)
 
     firstDifferenceControlsMetric :
       (n : Nat) →
       (x y : Stream) →
       FirstDifferenceAt n x y →
-      Set
+      FirstDifferenceBound M n (depthMetric x y)
 
     injectiveBelowThird :
       (x y : Stream) →
@@ -241,14 +255,14 @@ record ContinuousDepthEnvelope
     metricCylinderRecovery :
       (n : Nat) →
       (x y : Stream) →
-      Set
+      MetricRecoversCylinder M n x y (depthMetric x y)
 
 open ContinuousDepthEnvelope public
 
 ------------------------------------------------------------------------
 -- Multi-axis / weighted signal boundary.
 --
--- For an infinite axis Ω, summability belongs to the analytic instance.  The
+-- For an infinite axis Ω, summability belongs to the analytic instance. The
 -- finite depth truncation remains constructive coordinate-by-coordinate.
 
 record WeightedSignalEnvelope
@@ -264,14 +278,15 @@ record WeightedSignalEnvelope
       (ω : Axis) →
       coordinateEnvelope ω ≡ embed E (signal ω)
 
-    weightedL2Summable : Set
+    weightedL2Summable :
+      WeightedL2Summable M axisWeight coordinateEnvelope
 
 open WeightedSignalEnvelope public
 
 ------------------------------------------------------------------------
 -- Depth-prior / MDL boundary.
 --
--- Model class n sees exactly the first n trits.  The selected-depth receipt
+-- Model class n sees exactly the first n trits. The selected-depth receipt
 -- states that fit plus complexity is minimal under the supplied cost model.
 -- This is the robust connection to MDL; no smooth-norm claim is needed.
 
@@ -310,7 +325,7 @@ open MinimalEffectiveDepth public
 
 formalStatus : String
 formalStatus =
-  "finite balanced-ternary stream, prefix, truncation, involution, and finite depth-evaluation spine checked; analytic completion supplied only through typed obligations"
+  "finite balanced-ternary stream, prefix, truncation, involution, and finite depth-evaluation spine checked; analytic completion supplied only through typed proof obligations"
 
 continuousEnvelopeStatement : String
 continuousEnvelopeStatement =
