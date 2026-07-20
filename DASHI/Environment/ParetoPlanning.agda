@@ -1,9 +1,10 @@
 module DASHI.Environment.ParetoPlanning where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Nat using (_≤_; _<_)
@@ -28,15 +29,15 @@ scoreNoWorse : ObjectiveScore → ObjectiveScore → Set
 scoreNoWorse a b with direction a | direction b
 ... | minimise | minimise = value a ≤ value b
 ... | maximise | maximise = value b ≤ value a
-... | minimise | maximise = Bool
-... | maximise | minimise = Bool
+... | minimise | maximise = ⊥
+... | maximise | minimise = ⊥
 
 scoreStrictlyBetter : ObjectiveScore → ObjectiveScore → Set
 scoreStrictlyBetter a b with direction a | direction b
 ... | minimise | minimise = value a < value b
 ... | maximise | maximise = value b < value a
-... | minimise | maximise = Bool
-... | maximise | minimise = Bool
+... | minimise | maximise = ⊥
+... | maximise | minimise = ⊥
 
 data VectorNoWorse : List ObjectiveScore → List ObjectiveScore → Set where
   vector-empty : VectorNoWorse [] []
@@ -90,7 +91,7 @@ record NonDominatedIn
       ∀ other →
       other ∈ population →
       Dominates other candidate →
-      false ≡ true
+      ⊥
 open NonDominatedIn public
 
 record FiniteParetoResult : Set where
