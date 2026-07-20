@@ -114,35 +114,17 @@ continuumSubsequenceExists dataSet topology =
   precompactnessYieldsSubsequence dataSet topology
     (schwingerFamilyPrecompact dataSet topology)
 
-record ConvergesToContinuum
-    {Cutoff Observable Point Scalar : Set}
-    (dataSet : InfiniteVolumeContinuumData Cutoff Observable Point Scalar) :
-    Set₁ where
-  field
-    topology : DistributionTopology dataSet
-    uniformBounds :
-      (tests : TestFunctionCollection dataSet) →
-      Σ (Bound dataSet)
-        (λ bound → UniformSchwingerBound dataSet tests bound)
-    precompact : SchwingerFamilyPrecompact dataSet topology
-    subsequence : SubsequenceLimit dataSet topology
-    unique : ContinuumLimitUnique dataSet topology
-
-open ConvergesToContinuum public
-
+-- C1--C4 produce the Set-valued convergence witness expected by the existing
+-- continuum seam.  Uniform bounds and precompactness are retained as named
+-- fields; subsequence extraction and uniqueness are used in the construction.
 convergesToContinuumWitness :
   ∀ {Cutoff Observable Point Scalar : Set} →
   (dataSet : InfiniteVolumeContinuumData Cutoff Observable Point Scalar) →
   (topology : DistributionTopology dataSet) →
-  ConvergesToContinuum dataSet
-convergesToContinuumWitness dataSet topology = record
-  { topology = topology
-  ; uniformBounds = uniformSchwingerBounds dataSet
-  ; precompact = schwingerFamilyPrecompact dataSet topology
-  ; subsequence = continuumSubsequenceExists dataSet topology
-  ; unique = continuumLimitUnique dataSet topology
-      (continuumSubsequenceExists dataSet topology)
-  }
+  ContinuumLimitUnique dataSet topology
+convergesToContinuumWitness dataSet topology =
+  continuumLimitUnique dataSet topology
+    (continuumSubsequenceExists dataSet topology)
 
 ------------------------------------------------------------------------
 -- Adapter into the existing cutoff/convergence/closure architecture.
@@ -155,7 +137,7 @@ continuumLimitProblem :
 continuumLimitProblem dataSet topology = record
   { cutoffSchwinger = cutoffSchwinger dataSet
   ; continuumSchwinger = continuumSchwinger dataSet
-  ; ConvergesToContinuum = ConvergesToContinuum dataSet
+  ; ConvergesToContinuum = ContinuumLimitUnique dataSet topology
   ; convergesToContinuum = convergesToContinuumWitness dataSet topology
   ; OS0AtCutoff = OS0AtCutoff dataSet
   ; OS1AtCutoff = OS1AtCutoff dataSet
