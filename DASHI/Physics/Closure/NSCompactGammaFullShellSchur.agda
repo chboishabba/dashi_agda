@@ -1,10 +1,11 @@
 module DASHI.Physics.Closure.NSCompactGammaFullShellSchur where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Agda.Builtin.Nat using (Nat; _≤_)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Builtin.Sigma using (Σ)
+open import Data.Nat using (_≤_)
 open import Relation.Nullary using (¬_)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums public
@@ -13,12 +14,10 @@ import DASHI.Physics.Closure.NSPairIncidenceKernel as PairKernel
 ------------------------------------------------------------------------
 -- Exact full-shell Fourier carrier.
 --
--- The existing `PairIncidenceData` is the canonical owner of a finite kernel
--- assembled as the fold of every resonant pair contribution.  This module lifts
--- that owner to a shell/cutoff family and records enumeration and incidence
--- completeness.  The Schur sums below are therefore definitionally the sums of
--- the exact pair-incidence kernel; an unrelated scalar cannot be supplied as a
--- row or column value.
+-- `PairIncidenceData` owns the finite kernel assembled as the fold of every
+-- resonant pair contribution.  This module lifts it to a shell/cutoff family,
+-- makes enumeration and incidence completeness explicit, and requires local
+-- Fourier majorization for every pair in the fold.
 ------------------------------------------------------------------------
 
 record FullShellFourierFamily
@@ -49,14 +48,14 @@ record FullShellFourierFamily
       OccursMode (PairKernel.rows (pairDataAt K N)) k
 
     sourceEnumerationSound :
-      ∀ K N p →
-      OccursMode (PairKernel.columns (pairDataAt K N)) p →
-      SourceNearShell K N p
+      ∀ K N source →
+      OccursMode (PairKernel.columns (pairDataAt K N)) source →
+      SourceNearShell K N source
 
     sourceEnumerationComplete :
-      ∀ K N p →
-      SourceNearShell K N p →
-      OccursMode (PairKernel.columns (pairDataAt K N)) p
+      ∀ K N source →
+      SourceNearShell K N source →
+      OccursMode (PairKernel.columns (pairDataAt K N)) source
 
     targetEnumerationNoDuplicates :
       ∀ K N → NoModeDuplicates (PairKernel.rows (pairDataAt K N))
@@ -145,12 +144,10 @@ record FullShellUniformSchur
       FiniteWeightedSchurCertificate (fullShellKernelAt F K N)
 
     rowConstantUniform :
-      ∀ K N →
-      rowConstant (certificateAt K N) ≡ rowBudget
+      ∀ K N → rowConstant (certificateAt K N) ≡ rowBudget
 
     columnConstantUniform :
-      ∀ K N →
-      columnConstant (certificateAt K N) ≡ columnBudget
+      ∀ K N → columnConstant (certificateAt K N) ≡ columnBudget
 
 open FullShellUniformSchur public
 
@@ -187,8 +184,7 @@ fullShellColumnEstimate :
 fullShellColumnEstimate S K N = columnBound (certificateAt S K N)
 
 ------------------------------------------------------------------------
--- Named combinatorial/analytic leaves used to construct the uniform
--- certificate for the integer Fourier shell.
+-- Named combinatorial/analytic leaves used to construct the certificate.
 ------------------------------------------------------------------------
 
 record FullShellCombinatorics
