@@ -28,17 +28,17 @@ canonicalBackgroundAmplitude :
     (E : ExactFourierEvaluation Scalar A) →
   CanonicalAmplitudeCoefficients Scalar →
   FourierMode → Scalar
-canonicalBackgroundAmplitude A E C mode =
+canonicalBackgroundAmplitude A E C k =
   add A
     (multiply A
-      (modeDelta E mode p100)
+      (modeDelta E k p100)
       (amplitude100 C))
     (add A
       (multiply A
-        (modeDelta E mode p010)
+        (modeDelta E k p010)
         (amplitude010 C))
       (multiply A
-        (modeDelta E mode p001)
+        (modeDelta E k p001)
         (amplitude001 C)))
 
 record CanonicalAmplitudeSupportLaws
