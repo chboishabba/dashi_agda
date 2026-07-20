@@ -15,7 +15,7 @@ open import Agda.Builtin.String using (String)
 data ReviewRole : Set where
   mathematicalReviewer : ReviewRole
   physicsReviewer : ReviewRole
-  replicationLead : ReviewRole
+  replicationReviewerRole : ReviewRole
 
 record ReviewerIdentity : Set where
   constructor reviewer-identity
