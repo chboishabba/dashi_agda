@@ -3,10 +3,10 @@ module DASHI.Physics.YangMills.SUNMatrixLieGroup where
 ------------------------------------------------------------------------
 -- Group-parametric SU(N) adjoint action and compact-simple Lie-group assembly.
 -- Global topology, matrix exponential and local logarithm are standard imported
--- authority fields.  The resulting carrier and all record wiring are checked.
+-- authority fields. The resulting carrier and all record wiring are checked.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
@@ -29,7 +29,7 @@ record CertifiedSUNMatrixLieGroupAuthority
     {Matrix : Set m} {Complex : Set c}
     (groupTheory : CertifiedSUNMatrixTheory N Matrix Complex)
     (lieTheory : CertifiedSUNMatrixLieTheory N groupTheory) :
-    Set (lsuc m) where
+    Set (lsuc (m ⊔ c)) where
   field
     exponentialRaw : Matrix → Matrix
     logarithmRaw : Matrix → Matrix
@@ -55,11 +55,11 @@ record CertifiedSUNMatrixLieGroupAuthority
       commutator (lieOperations lieTheory)
         (rawAdjoint U X) (rawAdjoint U Y)
 
-    ConjugatesExponentials : Set m
+    ConjugatesExponentials : Set (m ⊔ c)
     conjugatesExponentials : ConjugatesExponentials
-    Compact : Set m
-    Connected : Set m
-    SimpleLieAlgebra : Set m
+    Compact : Set (m ⊔ c)
+    Connected : Set (m ⊔ c)
+    SimpleLieAlgebra : Set (m ⊔ c)
     compact : Compact
     connected : Connected
     simpleLieAlgebra : SimpleLieAlgebra
