@@ -3,13 +3,14 @@ module DASHI.Codec.DNAFirstFormalism where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product using (_×_; _,_; proj₁)
 
 ------------------------------------------------------------------------
 -- CAGT carrier and canonical involutions.
 
- data Base : Set where
+data Base : Set where
   A C G T : Base
 
 complement : Base → Base
@@ -41,7 +42,7 @@ reverseComplement xs = map complement (reverse xs)
 ------------------------------------------------------------------------
 -- Geometry: line, sheet/voxel, six-sheet slab, and 27-cube.
 
- data Axis3 : Set where
+data Axis3 : Set where
   axis0 axis1 axis2 : Axis3
 
 Line3 : Set
@@ -75,7 +76,7 @@ record ConstraintMachine : Set₁ where
 
 open ConstraintMachine public
 
- data Trace (M : ConstraintMachine) : State M → List Base → Set where
+data Trace (M : ConstraintMachine) : State M → List Base → Set where
   emptyTrace :
     ∀ {s} → Trace M s []
 
@@ -209,7 +210,4 @@ record StreamingChoiceSurface : Set₁ where
     CoderState : Set
     select : CoderState → State → Base × CoderState
     selectionIsLegal :
-      ∀ c s → legal s (fst (select c s)) ≡ true
-  where
-  fst : ∀ {X Y : Set} → X × Y → X
-  fst (x , y) = x
+      ∀ c s → legal s (proj₁ (select c s)) ≡ true
