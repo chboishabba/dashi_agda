@@ -10,6 +10,16 @@ import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 import DASHI.Algebra.TriadicFiniteIrrep as Irrep
 
+open Arithmetic.TriadicArithmeticLawReceipt
+  using (associativity; commutative)
+open Irrep.PhaseRing
+  using
+    ( Phase; oneᵖ; _∙ᵖ_; conjugateᵖ
+    ; oneMultiplyOne; phaseAssociative
+    )
+open Irrep.AdditiveCharacter
+  using (frequency; evaluate; evaluateZero; additiveLaw)
+
 ------------------------------------------------------------------------
 -- The three residues modulo 3.
 
@@ -69,8 +79,8 @@ associativeDepthOne (pos ∷ []) (pos ∷ []) (pos ∷ []) = refl
 depthOneArithmeticLaws : Arithmetic.TriadicArithmeticLawReceipt Q.one
 depthOneArithmeticLaws =
   record
-    { Arithmetic.associativity = associativeDepthOne
-    ; Arithmetic.commutative = commutativeDepthOne
+    { associativity = associativeDepthOne
+    ; commutative = commutativeDepthOne
     }
 
 depthOneAdditiveGroup : Irrep.FiniteAdditiveGroup Q.one
@@ -99,35 +109,35 @@ conjugatePhase phase0 = phase0
 conjugatePhase phase1 = phase2
 conjugatePhase phase2 = phase1
 
-phaseAssociative :
+c3PhaseAssociative :
   (a b c : C3Phase) →
   multiplyPhase (multiplyPhase a b) c
   ≡ multiplyPhase a (multiplyPhase b c)
-phaseAssociative phase0 b c = refl
-phaseAssociative phase1 phase0 c = refl
-phaseAssociative phase1 phase1 phase0 = refl
-phaseAssociative phase1 phase1 phase1 = refl
-phaseAssociative phase1 phase1 phase2 = refl
-phaseAssociative phase1 phase2 phase0 = refl
-phaseAssociative phase1 phase2 phase1 = refl
-phaseAssociative phase1 phase2 phase2 = refl
-phaseAssociative phase2 phase0 c = refl
-phaseAssociative phase2 phase1 phase0 = refl
-phaseAssociative phase2 phase1 phase1 = refl
-phaseAssociative phase2 phase1 phase2 = refl
-phaseAssociative phase2 phase2 phase0 = refl
-phaseAssociative phase2 phase2 phase1 = refl
-phaseAssociative phase2 phase2 phase2 = refl
+c3PhaseAssociative phase0 b c = refl
+c3PhaseAssociative phase1 phase0 c = refl
+c3PhaseAssociative phase1 phase1 phase0 = refl
+c3PhaseAssociative phase1 phase1 phase1 = refl
+c3PhaseAssociative phase1 phase1 phase2 = refl
+c3PhaseAssociative phase1 phase2 phase0 = refl
+c3PhaseAssociative phase1 phase2 phase1 = refl
+c3PhaseAssociative phase1 phase2 phase2 = refl
+c3PhaseAssociative phase2 phase0 c = refl
+c3PhaseAssociative phase2 phase1 phase0 = refl
+c3PhaseAssociative phase2 phase1 phase1 = refl
+c3PhaseAssociative phase2 phase1 phase2 = refl
+c3PhaseAssociative phase2 phase2 phase0 = refl
+c3PhaseAssociative phase2 phase2 phase1 = refl
+c3PhaseAssociative phase2 phase2 phase2 = refl
 
 c3PhaseRing : Irrep.PhaseRing
 c3PhaseRing =
   record
-    { Irrep.Phase = C3Phase
-    ; Irrep.oneᵖ = phase0
-    ; Irrep._∙ᵖ_ = multiplyPhase
-    ; Irrep.conjugateᵖ = conjugatePhase
-    ; Irrep.oneMultiplyOne = refl
-    ; Irrep.phaseAssociative = phaseAssociative
+    { Phase = C3Phase
+    ; oneᵖ = phase0
+    ; _∙ᵖ_ = multiplyPhase
+    ; conjugateᵖ = conjugatePhase
+    ; oneMultiplyOne = refl
+    ; phaseAssociative = c3PhaseAssociative
     }
 
 ------------------------------------------------------------------------
@@ -181,15 +191,15 @@ depthOneCharacter :
   Irrep.AdditiveCharacter depthOneAdditiveGroup c3PhaseRing
 depthOneCharacter m =
   record
-    { Irrep.frequency = m
-    ; Irrep.evaluate = characterValue m
-    ; Irrep.evaluateZero = characterAtZero m
-    ; Irrep.additiveLaw = characterAdditive m
+    { frequency = m
+    ; evaluate = characterValue m
+    ; evaluateZero = characterAtZero m
+    ; additiveLaw = characterAdditive m
     }
 
 characterFrequencyExact :
   (m : Q.Residue3Pow Q.one) →
-  Irrep.frequency (depthOneCharacter m) ≡ m
+  frequency (depthOneCharacter m) ≡ m
 characterFrequencyExact m = refl
 
 ------------------------------------------------------------------------
