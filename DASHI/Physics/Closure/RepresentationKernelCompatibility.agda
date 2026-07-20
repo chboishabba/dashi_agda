@@ -25,6 +25,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Level; lsuc; Setω)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Nat using (_≤_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 ------------------------------------------------------------------------
@@ -137,7 +138,7 @@ record MDLRepresentativeSelection {ℓ : Level}
       ∀ x → sameCoarsePhysics (canonicalRepresentative x) x
 
     representativeDoesNotIncreaseCost :
-      ∀ x → Set
+      ∀ x → cost (canonicalRepresentative x) ≤ cost x
 
     canonicalRepresentativeIdempotent :
       ∀ x →
