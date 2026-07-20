@@ -1,10 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Core.KernelSystem where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
-
-------------------------------------------------------------------------
--- Equivalence relation used for quotient semantics.
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 record Equivalence {S : Set} (_≈_ : S → S → Set) : Set₁ where
   field
@@ -12,12 +9,6 @@ record Equivalence {S : Set} (_≈_ : S → S → Set) : Set₁ where
     symmetric : ∀ {x y} → x ≈ y → y ≈ x
     transitive : ∀ {x y z} → x ≈ y → y ≈ z → x ≈ z
 open Equivalence public
-
-------------------------------------------------------------------------
--- Canonical kernel object.
---
--- Geometry, neighbourhood data, channel structure, and weights are carried as
--- typed parameters instead of being silently baked into an endofunction.
 
 record KernelSystem : Set₂ where
   field
@@ -40,12 +31,6 @@ record KernelSystem : Set₂ where
       ∀ s → kernel (involution s) ≡ involution (kernel s)
 open KernelSystem public
 
-------------------------------------------------------------------------
--- Synchronous and scheduled implementations.
---
--- `kernel` is the canonical synchronous transition.  Every scheduled variant
--- is explicit and no convergence property is transferred automatically.
-
 record ScheduledKernel (K : KernelSystem) : Set₁ where
   open KernelSystem K
   field
@@ -55,9 +40,6 @@ record ScheduledKernel (K : KernelSystem) : Set₁ where
     canonical-is-synchronous :
       ∀ s → scheduled canonicalSchedule s ≡ kernel s
 open ScheduledKernel public
-
-------------------------------------------------------------------------
--- Quotient-respecting kernels.
 
 record QuotientKernel (K : KernelSystem) : Set₁ where
   open KernelSystem K
