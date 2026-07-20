@@ -1,6 +1,7 @@
 module DASHI.Foundations.Base369TeslaPolyphaseRegression where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import DASHI.Core.Prelude using (proj₁; proj₂)
 
 open import Base369 using
   ( TriTruth
@@ -50,8 +51,8 @@ triadicTowerHighSection = triTo27-section tri-high
 
 hex4FactorRoundTrip :
   hexFactorToTruth
-    (DASHI.Core.Prelude.proj₁ (hexTruthToFactor hex-4))
-    (DASHI.Core.Prelude.proj₂ (hexTruthToFactor hex-4))
+    (proj₁ (hexTruthToFactor hex-4))
+    (proj₂ (hexTruthToFactor hex-4))
   ≡ hex-4
 hex4FactorRoundTrip = hexTruthToFactor-decodingRoundTrip hex-4
 
