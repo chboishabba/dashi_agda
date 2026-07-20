@@ -6,9 +6,9 @@ open import Agda.Builtin.Nat using (Nat)
 ------------------------------------------------------------------------
 -- Complex-manifold charts and holomorphic transition laws.
 --
--- This is a producer interface: a concrete manifold must supply chart
--- coverage, chart/image inverses, overlap transport, the cocycle laws, and
--- holomorphicity witnesses.  No analytic theorem is postulated here.
+-- This is a producer interface: a concrete manifold must supply open chart
+-- domains and images, chart homeomorphisms, overlap transport, cocycle laws,
+-- and holomorphicity witnesses.  No analytic theorem is postulated here.
 
 record ChartCover
     {Point : Set}
@@ -29,6 +29,11 @@ record ComplexManifoldCharts (Point Coordinate : Set) : Set₁ where
     ChartIndex : Set
     Domain : ChartIndex → Point → Set
 
+    OpenPointSubset : (Point → Set) → Set
+    domainOpen :
+      (i : ChartIndex) →
+      OpenPointSubset (Domain i)
+
     cover : (x : Point) → ChartCover ChartIndex Domain x
 
     coordinate :
@@ -38,6 +43,11 @@ record ComplexManifoldCharts (Point Coordinate : Set) : Set₁ where
       Coordinate
 
     Image : ChartIndex → Coordinate → Set
+
+    OpenCoordinateSubset : (Coordinate → Set) → Set
+    imageOpen :
+      (i : ChartIndex) →
+      OpenCoordinateSubset (Image i)
 
     inverseCoordinate :
       ChartIndex →
@@ -60,6 +70,11 @@ record ComplexManifoldCharts (Point Coordinate : Set) : Set₁ where
       (z : Coordinate) →
       (image : Image i z) →
       coordinate i (inverseCoordinate i z) (inverseInDomain image) ≡ z
+
+    IsChartHomeomorphism : ChartIndex → Set
+    chartHomeomorphism :
+      (i : ChartIndex) →
+      IsChartHomeomorphism i
 
     Overlap : ChartIndex → ChartIndex → Point → Set
 
@@ -137,6 +152,10 @@ record ComplexManifoldAuthority (Point Coordinate : Set) : Set₁ where
   constructor mkComplexManifoldAuthority
   field
     complexDimension : Nat
+    coordinateDimension : Coordinate → Nat
+    coordinateDimensionMatches :
+      (z : Coordinate) →
+      coordinateDimension z ≡ complexDimension
     complexCharts : ComplexManifoldCharts Point Coordinate
     holomorphicTransitions : HolomorphicTransitionLaws complexCharts
 
