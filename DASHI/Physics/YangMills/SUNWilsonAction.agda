@@ -67,11 +67,12 @@ sunWilsonActionFrom :
     {Edge : Vertex → Vertex → Set} →
   (dataSet : SUNWilsonActionData {Scalar = Scalar} theory Edge) →
   List (Plaquette dataSet) → GaugeField {G = SUNMatrixElement theory} Edge → Scalar
-sunWilsonActionFrom dataSet [] U = zeroS (scalarOperations dataSet)
-sunWilsonActionFrom dataSet (plaquette ∷ rest) U =
+sunWilsonActionFrom {theory = theory} dataSet [] U =
+  zeroS (scalarOperations dataSet)
+sunWilsonActionFrom {theory = theory} dataSet (plaquette ∷ rest) U =
   addS (scalarOperations dataSet)
     (loopObservable
-      (sunMatrixGroup _)
+      (sunMatrixGroup theory)
       (wilsonPlaquetteValue
         (scalarOperations dataSet)
         (traceAuthority dataSet))
@@ -98,12 +99,12 @@ sunWilsonActionFromGaugeInvariant :
   sunWilsonActionFrom dataSet selected
     (gaugeAction (sunMatrixGroup theory) gamma U)
   ≡ sunWilsonActionFrom dataSet selected U
-sunWilsonActionFromGaugeInvariant dataSet [] gamma U = refl
-sunWilsonActionFromGaugeInvariant dataSet (plaquette ∷ rest) gamma U =
+sunWilsonActionFromGaugeInvariant {theory = theory} dataSet [] gamma U = refl
+sunWilsonActionFromGaugeInvariant {theory = theory} dataSet (plaquette ∷ rest) gamma U =
   cong₂
     (addS (scalarOperations dataSet))
     (loopObservableGaugeInvariant
-      (sunMatrixGroup _)
+      (sunMatrixGroup theory)
       (wilsonPlaquetteValue
         (scalarOperations dataSet)
         (traceAuthority dataSet))
