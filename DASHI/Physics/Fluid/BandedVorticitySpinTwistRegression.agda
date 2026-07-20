@@ -1,7 +1,7 @@
 module DASHI.Physics.Fluid.BandedVorticitySpinTwistRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 open import DASHI.Foundations.SSPTritCarrier using
   (sspNegOne; sspPosOne)
@@ -18,7 +18,7 @@ positiveHighAtom : VortexAtom
 positiveHighAtom =
   vortexAtom highBand (site 31 9) sspPosOne refl 1 4
 
-canonicalEnergy : BandEnergySummary ∷ BandEnergySummary ∷ []
+canonicalEnergy : List BandEnergySummary
 canonicalEnergy = bandEnergy midBand 11 ∷ bandEnergy highBand 5 ∷ []
 
 canonicalLowCarrier : LowBandCarrier
