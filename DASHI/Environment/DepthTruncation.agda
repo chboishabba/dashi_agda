@@ -8,15 +8,6 @@ open import Data.Nat using (_+_; _≤_; z≤n; s≤s)
 
 import DASHI.Environment.LatentDepthFormalism as Latent
 
-------------------------------------------------------------------------
--- Finite truncation of a depth stream.
---
--- The existing LatentDepthFormalism uses vectors when the total depth is
--- statically known.  Planning and learned-model boundaries also need a
--- variable-depth view, so this module records the corresponding exact list
--- truncation.  It does not claim that truncation preserves an external
--- real-valued embedding; that remains evidence supplied by an envelope.
-
 EffectStream : Set
 EffectStream = List Latent.Effect
 
@@ -24,9 +15,6 @@ truncate : Nat → EffectStream → EffectStream
 truncate zero xs = []
 truncate (suc k) [] = []
 truncate (suc k) (x ∷ xs) = x ∷ truncate k xs
-
-------------------------------------------------------------------------
--- Prefix/cylinder relation.
 
 data Prefix : EffectStream → EffectStream → Set where
   prefix-empty : ∀ {ys} → Prefix [] ys
@@ -53,9 +41,6 @@ shallowerPrefixOfDeeper (suc k) n [] = prefix-empty
 shallowerPrefixOfDeeper (suc k) n (x ∷ xs) =
   prefix-cons (shallowerPrefixOfDeeper k n xs)
 
-------------------------------------------------------------------------
--- Agreement with a finite observation is exactly membership in a cylinder.
-
 record CylinderAt (k : Nat) (centre candidate : EffectStream) : Set where
   constructor mkCylinderAt
   field
@@ -66,13 +51,10 @@ selfInCylinder : ∀ k xs → CylinderAt k xs xs
 selfInCylinder k xs = mkCylinderAt refl
 
 prefixAgreementGivesCylinder :
-  ∀ {k centre candidate} →
+  ∀ {k : Nat} {centre candidate : EffectStream} →
   truncate k centre ≡ truncate k candidate →
   CylinderAt k centre candidate
 prefixAgreementGivesCylinder eq = mkCylinderAt eq
-
-------------------------------------------------------------------------
--- Activated-depth and residual-escalation receipts.
 
 record DepthRefinement (shallow deep : Nat) : Set where
   constructor mkDepthRefinement
@@ -94,13 +76,11 @@ record ResidualDepthDecision : Set where
     complexityBudgetAllows : Bool
     policyOrConservationForcesAuthority : Bool
     refinementWitness : DepthRefinement currentDepth proposedDepth
-    -- Improvement is evidence for considering a deeper model, not an
-    -- unconditional theorem that deeper is always preferable.
     deeperAnalysisIsCandidateNotMandate : Bool
 open ResidualDepthDecision public
 
 canonicalNoMandateBoundary :
-  ∀ {k n} →
+  ∀ {k n : Nat} →
   ResidualDepthDecision
 canonicalNoMandateBoundary {k} {n} =
   mkResidualDepthDecision
