@@ -1,6 +1,9 @@
 module DASHI.Unified.ThreadCompletionFrontier where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer using (+_)
+open import Data.Product using (proj₁)
+open import Data.Rational using (_/_)
 
 import DASHI.Analysis.HyperrealUltrapowerConstruction as Hyperreal
 import DASHI.Applications.ThreadEmpiricalValidationProgramme as Empirical
@@ -11,12 +14,9 @@ import DASHI.Geometry.CalabiYauAnalysisAndPhysicalUseBoundary as Calabi
 import DASHI.Sheaf.FiniteTemporalClopenSheaf as Sheaf
 import DASHI.Topology.FiniteBraidRhizomeCalculus as Braid
 
-------------------------------------------------------------------------
--- Exact regression witnesses.
-
 finiteSheafGlueRegression :
   Sheaf.restrictU
-    (Data.Product.proj₁
+    (proj₁
       (Sheaf.glue
         (Sheaf.compatible
           Sheaf.absent
@@ -38,7 +38,7 @@ principalSequenceAdditionRegression :
 principalSequenceAdditionRegression = refl
 
 q3PartialDepth3Regression :
-  Q3.geometricPartial 3 ≡ Data.Rational._/_ (Data.Integer.+ 13) 1
+  Q3.geometricPartial 3 ≡ + 13 / 1
 q3PartialDepth3Regression = Q3.precision3
 
 populationSelectionRegression :
@@ -49,10 +49,7 @@ primorial24Regression :
   Primorial.primeExponentProduct4 Primorial.example24Digits ≡ 625
 primorial24Regression = Primorial.example24Product
 
-------------------------------------------------------------------------
--- Aggregate receipt.
-
-record ThreadCompletionFrontierReceipt : Set₃ where
+record ThreadCompletionFrontierReceipt : Set where
   field
     finiteTemporalSheaf : Sheaf.FiniteTemporalClopenSheafReceipt
     finiteBraidRhizome : Braid.FiniteBraidRhizomeReceipt
