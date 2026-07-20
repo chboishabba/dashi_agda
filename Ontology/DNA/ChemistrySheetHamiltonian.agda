@@ -13,9 +13,14 @@ open import Ontology.DNA.ChemistryConcrete using
   (countStrong; countComplementSpan2; countHairpin6; countRCPal4)
 
 ------------------------------------------------------------------------
--- Chemistry Hamiltonian in sheet space.
--- U and V are turned into signed sheet coordinates, and chemistry energy is
--- packaged as a cross-band functional over those multiscale coordinates.
+-- Chemistry energy on base-indexed signed U/V coordinates.
+--
+-- Historical note: this module originally called these vectors "sheet
+-- coordinates".  The record name is retained for compatibility, but the
+-- implemented object has no scale index, projection, expansion, detail
+-- residual, or reconstruction theorem.  It is therefore not yet the general
+-- multiscale or tetrational DASHI sheet tower.  See
+-- Ontology.DNA.ChemistrySheetTowerBoundary for the explicit distinction.
 
 data Signed : Set where
   neg zer pos : Signed
