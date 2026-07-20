@@ -79,7 +79,7 @@ classify swap = oddCrossing
 
 classificationComplete :
   (b : Braid2) →
-  classify b ≡ evenCrossing ⊎ classify b ≡ oddCrossing
+  (classify b ≡ evenCrossing) ⊎ (classify b ≡ oddCrossing)
 classificationComplete straight = inj₁ refl
 classificationComplete swap = inj₂ refl
 
