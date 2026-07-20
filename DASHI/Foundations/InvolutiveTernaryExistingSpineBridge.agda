@@ -55,15 +55,16 @@ sspSupport-invariant SSP.sspNegOne = refl
 sspSupport-invariant SSP.sspZero = refl
 sspSupport-invariant SSP.sspPosOne = refl
 
+notBool : Bool → Bool
+notBool true = false
+notBool false = true
+
 -- The existing SSP neutrality classifier and the generic support quotient are
 -- complementary views of the same carrier: neutral maps to inactive, while
 -- both polarities map to active.
 
 supportAgreesWithSSPNeutrality : ∀ s →
-  sspSupport s ≡
-  (case SSP.sspTritIsNeutral s of λ where
-    true → false
-    false → true)
+  sspSupport s ≡ notBool (SSP.sspTritIsNeutral s)
 supportAgreesWithSSPNeutrality SSP.sspNegOne = refl
 supportAgreesWithSSPNeutrality SSP.sspZero = refl
 supportAgreesWithSSPNeutrality SSP.sspPosOne = refl
@@ -82,6 +83,8 @@ record ExistingSpineBridgeReceipt : Set where
     sspCarrierIsGenericInvolutive : ITD.InvolutiveCarrier
     neutralIsFixed : sspι SSP.sspZero ≡ SSP.sspZero
     supportIsMirrorInvariant : ∀ s → sspSupport (sspι s) ≡ sspSupport s
+    supportMatchesExistingNeutrality : ∀ s →
+      sspSupport s ≡ notBool (SSP.sspTritIsNeutral s)
     transportedInversion : ∀ s → SSP.toTrit (sspι s) ≡ Trit.inv (SSP.toTrit s)
 
 existingSpineBridgeReceipt : ExistingSpineBridgeReceipt
@@ -90,4 +93,5 @@ existingSpineBridgeReceipt =
     sspInvolutiveCarrier
     sspι-zero
     sspSupport-invariant
+    supportAgreesWithSSPNeutrality
     sspι-toTrit
