@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.SSPPrimeLane369PAdicUltrametricBridge
 import DASHI.Foundations.TriadicFiniteQuotient as Quotient
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 import DASHI.Algebra.TriadicFiniteIrrep as Irrep
+import DASHI.Algebra.TriadicDepthOneCharacters as DepthOneCharacters
 import DASHI.Algebra.TriadicFiniteAffineAction as Affine
 import DASHI.Physics.Closure.TriadicIrrepTraceBridge as Trace
 import DASHI.Physics.Closure.TriadicSectorQSeries as QSeries
@@ -46,6 +47,7 @@ record LayerStatus : Set where
     carryArithmeticImplemented : Bool
     inverseLimitImplemented : Bool
     characterInterfaceImplemented : Bool
+    depthOneCharacterTableProved : Bool
     exactSpectralCodecImplemented : Bool
     unitAffineActionImplemented : Bool
     irrepTraceBridgeImplemented : Bool
@@ -60,7 +62,7 @@ record LayerStatus : Set where
     verifiedLimitBundleImplemented : Bool
     jointRepresentationDepthMDLImplemented : Bool
 
-    genuineCyclotomicDFTProved : Bool
+    genuineHigherDepthCyclotomicDFTProved : Bool
     modularTransformationLawProved : Bool
     canonicalEllipticOriginProved : Bool
     asymptoticMDLConsistencyProved : Bool
@@ -75,6 +77,7 @@ currentLayerStatus =
     ; carryArithmeticImplemented = true
     ; inverseLimitImplemented = true
     ; characterInterfaceImplemented = true
+    ; depthOneCharacterTableProved = true
     ; exactSpectralCodecImplemented = true
     ; unitAffineActionImplemented = true
     ; irrepTraceBridgeImplemented = true
@@ -88,7 +91,7 @@ currentLayerStatus =
     ; pAdicAnalyticManifoldGateImplemented = true
     ; verifiedLimitBundleImplemented = true
     ; jointRepresentationDepthMDLImplemented = true
-    ; genuineCyclotomicDFTProved = false
+    ; genuineHigherDepthCyclotomicDFTProved = false
     ; modularTransformationLawProved = false
     ; canonicalEllipticOriginProved = false
     ; asymptoticMDLConsistencyProved = false
@@ -112,7 +115,7 @@ ellipticOriginStillGated = refl
 
 canonicalRoute : String
 canonicalRoute =
-  "balanced trit filtration -> exact T^n / mod-3^n quotient -> carry arithmetic -> additive/unit/affine symmetry -> finite character or irrep blocks -> block traces and q-series -> gated Eisenstein/Hecke coordinates -> gated elliptic j quotient -> certified inverse limits -> joint representation/depth MDL"
+  "balanced trit filtration -> exact T^n / mod-3^n quotient -> carry arithmetic -> exact C3 characters and gated higher-depth irreps -> additive/unit/affine symmetry -> block traces and q-series -> gated Eisenstein/Hecke coordinates -> gated elliptic j quotient -> certified inverse limits -> joint representation/depth MDL"
 
 existingSpineIntegration : String
 existingSpineIntegration =
@@ -120,4 +123,4 @@ existingSpineIntegration =
 
 promotionBoundary : String
 promotionBoundary =
-  "Implemented means the typed carrier, operation, codec, or proof gate exists. It does not mean the genuine cyclotomic Fourier theorem, modular transformation law, Eisenstein identification, canonical elliptic spectral curve, p-adic interpolation theorem, or asymptotic MDL consistency theorem has been discharged."
+  "The exact Z/3Z character family is checked. Implemented gates do not imply the higher-depth cyclotomic Fourier theorem, modular transformation law, Eisenstein identification, canonical elliptic spectral curve, p-adic interpolation theorem, or asymptotic MDL consistency theorem."
