@@ -88,13 +88,36 @@ Neither is inhabited automatically. A coordinate label is not yet a proof that t
 FRACTRAN computations are equivalent, and three EV5 banks are not yet a derived
 15-coordinate FRACTRAN dynamics.
 
-## 4. Why these bridges belong together
+## 4. SSP15 as compression, not only indexing
+
+`DASHI/Combinatorics/SSP15FractranCompression.agda` strengthens the adapter from a
+coordinate view to an explicit compression contract.
+
+It separates:
+
+1. an outcome-preserving lossy quotient `EV5 -> SSP`;
+2. a lossless label-plus-residual codec `EV5 <-> SSP × Residual`;
+3. a dynamics-preserving compressed transition `SSP -> Maybe SSP`.
+
+The transition layer requires the SSP classifier to be a congruence for the
+existing `FractranCOL.step`: states assigned the same SSP label must have the same
+next compressed label, including halting. Whole-run compression further requires
+that compressed execution commute with `FractranCOL.run`.
+
+An `SSP15CompressionReceipt` charges model, label, residual, and transition bits.
+The compression is promoted only when this total is no worse than the literal
+FRACTRAN representation and the semantic/transition proof obligations are present.
+See `Docs/SSP15FractranCompression.md` for the focused boundary.
+
+## 5. Why these bridges belong together
 
 The directed correlation surface supplies a candidate separator. MDL determines
 whether that separator earns promotion. The `TriadFiveCoordinate` carrier gives a
 finite coordinate system in which a later representation-theoretic action could
-be stated. The FRACTRAN adapter then indexes those coordinates on existing
-prime-exponent state machinery. The flow is therefore:
+be stated. The FRACTRAN adapter indexes those coordinates on existing
+prime-exponent state machinery, while the SSP15 compression layer determines
+whether the labels are merely coordinates, an outcome quotient, or a genuine
+label-plus-residual codec. The flow is therefore:
 
 ```text
 computed sector data
@@ -102,7 +125,8 @@ computed sector data
   -> MDL/promotion receipt
   -> finite 3×5 coordinate carrier
   -> three-bank EV5 FRACTRAN index
-  -> outcome-sound catalogue / dynamic bridge obligations
+  -> SSP15 quotient or residual codec
+  -> transition/run congruence
   -> optional group-action obligations
 ```
 
@@ -112,17 +136,13 @@ advance. It also keeps FRACTRAN semantics downstream of explicit encoding and
 simulation obligations rather than treating a shared prime label as computational
 identity.
 
-## 5. Immediate discharge order
+## 6. Immediate discharge order
 
-1. Focus-check the MDL-promotion, triad-five, and FRACTRAN-index modules.
+1. Focus-check the MDL-promotion, triad-five, FRACTRAN-index, and SSP15 compression modules.
 2. Compute the three predicted current pairs sector-by-sector.
-3. If local histograms collapse, compute the symmetric and then directed
-   correlations.
-4. Construct a `PromotionReceipt` only for a level that separates and pays its
-   MDL cost.
-5. Populate `TriadFractranState` from the promoted invariant and state the actual
-   lifted transition law.
-6. Construct a `TriadFiveFractranCatalogueIndex` only when representative
-   soundness and key completeness are proved under `FractranCOL.run`.
-7. Test whether the resulting separated fibres admit a natural five-class
-   quotient. Only then attempt to inhabit `MonsterInterpretationObligation`.
+3. If local histograms collapse, compute the symmetric and then directed correlations.
+4. Construct a `PromotionReceipt` only for a level that separates and pays its MDL cost.
+5. Define candidate `EV5 -> SSP` classifiers from terminal outcome, orbit basin, and transition signature.
+6. Test the SSP step-congruence obligation; refine labels or add residual transition state when it fails.
+7. Construct an `SSP15CompressionReceipt` only after outcome/lossless authority and measured MDL savings exist.
+8. Test whether the resulting separated fibres admit a natural five-class quotient. Only then attempt to inhabit `MonsterInterpretationObligation`.
