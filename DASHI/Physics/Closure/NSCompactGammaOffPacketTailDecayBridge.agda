@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge where
 
 open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -21,12 +21,7 @@ record RadiusIndexedOffPacketSplit
 open RadiusIndexedOffPacketSplit public
 
 ------------------------------------------------------------------------
--- Multiplicative arithmetic used by quantitative tail estimates.
---
--- The base absorption arithmetic deliberately knows only addition and order.
--- A bound of the form epsilon(R) E_K(u) ||h||_X additionally needs a
--- monotone scalar product.  Keeping this extension separate preserves every
--- existing additive bridge.
+-- Multiplicative arithmetic for epsilon(R) E_K(u) ||h||_X.
 ------------------------------------------------------------------------
 
 record TailProductArithmetic
@@ -48,10 +43,6 @@ open TailProductArithmetic public
 
 ------------------------------------------------------------------------
 -- Exact analytic leaves for the two far-frequency regions.
---
--- These records do not replace the Fourier estimates.  They state their
--- concrete proof obligations without permitting naive absolute-value counting
--- to masquerade as the far-low argument.
 ------------------------------------------------------------------------
 
 record FarShellFrequencySplit
@@ -119,9 +110,8 @@ record LowHighCommutatorCancellation
     cancelledLowHighResponse : Scalar A
     commonLowDecayBudget : Scalar A
 
-    -- This is the decisive analytic leaf.  It must be proved from the
-    -- divergence-free identity or an equivalent commutator formula before
-    -- absolute values are taken.
+    -- This is the decisive far-low leaf.  It must arise from divergence-free
+    -- or commutator cancellation before absolute values are taken.
     lowHighCommutatorCancellation :
       _≤_ A farLowResponse cancelledLowHighResponse
 
@@ -193,12 +183,11 @@ record TailNormDomination
 open TailNormDomination public
 
 ------------------------------------------------------------------------
--- Quantitative geometric decay.
+-- Quantitative geometric rate, including epsilon(R) = C 2^(-alpha R).
 --
--- `epsilon radius` is the common coefficient after high and low estimates.
--- `dyadicCoefficient radius` is the concrete C 2^(-alpha R) evaluator.  The
--- equality keeps the theorem quantitative while leaving the scalar model free
--- to instantiate exact rationals, constructive reals, or an ordered field.
+-- `dyadicCoefficient` is the scalar model's concrete evaluator of the displayed
+-- expression.  This avoids baking a particular real-number construction into
+-- the Fourier bridge while retaining the exact coefficient identity.
 ------------------------------------------------------------------------
 
 record DyadicGeometricRate
@@ -225,6 +214,17 @@ record DyadicGeometricRate
 
 open DyadicGeometricRate public
 
+record UniformTailScale
+    {r : Level}
+    {Radius : Set r}
+    (A : AbsorptionArithmetic) : Set (lsuc r) where
+  field
+    rate : DyadicGeometricRate {Radius = Radius} A
+    shellEnergy : Scalar A
+    tangentNorm : Scalar A
+
+open UniformTailScale public
+
 record UniformAnalyticTailDecay
     {r : Level}
     {Radius : Set r}
@@ -232,23 +232,20 @@ record UniformAnalyticTailDecay
     (M : TailProductArithmetic A)
     (F : RadiusIndexedOffPacketSplit Radius A) : Set (lsuc r) where
   field
-    rate : DyadicGeometricRate {Radius = Radius} A
-
-    shellEnergy : Scalar A
-    tangentNorm : Scalar A
+    scale : UniformTailScale {Radius = Radius} A
 
     quantitativeTailBound :
       (radius : Radius) →
       _≤_ A
         (farShellTail (splitAt F radius))
         (_·_ M
-          (epsilon rate radius)
-          (_·_ M shellEnergy tangentNorm))
+          (epsilon (rate scale) radius)
+          (_·_ M (shellEnergy scale) (tangentNorm scale)))
 
 open UniformAnalyticTailDecay public
 
 ------------------------------------------------------------------------
--- Assembly theorem from the high/high, high/low, and cancelled low/high lanes.
+-- Assembly from high-high, high-low, and cancelled low-high estimates.
 ------------------------------------------------------------------------
 
 record UniformFourierTailAssembly
@@ -257,7 +254,7 @@ record UniformFourierTailAssembly
     (A : AbsorptionArithmetic)
     (M : TailProductArithmetic A)
     (F : RadiusIndexedOffPacketSplit Radius A)
-    (Q : UniformAnalyticTailDecay A M F) : Set (lsuc r) where
+    (S : UniformTailScale {Radius = Radius} A) : Set (lsuc r) where
   field
     frequencySplit : Radius → FarShellFrequencySplit A
     highEstimate : Radius → HighFrequencyParaproductEstimate A
@@ -265,10 +262,10 @@ record UniformFourierTailAssembly
     latticeConvolution : Radius → DyadicConvolutionLemmaZ3 A
     normDomination : Radius → TailNormDomination A
 
-    splitMatchesMeasuredTail :
+    measuredTailMatchesSplit :
       (radius : Radius) →
-      fullFarTail (frequencySplit radius) ≡
-      farShellTail (splitAt F radius)
+      farShellTail (splitAt F radius) ≡
+      fullFarTail (frequencySplit radius)
 
     splitHighMatchesEstimate :
       (radius : Radius) →
@@ -280,8 +277,8 @@ record UniformFourierTailAssembly
       farLowTail (frequencySplit radius) ≡
       farLowResponse (lowCancellation radius)
 
-    -- Common dyadic endpoint after inserting the Z^3 convolution comparison
-    -- and tail-norm domination into both paraproduct bounds.
+    -- This endpoint is where the uniform Z^3 convolution comparison and the
+    -- chosen tangent-norm domination are inserted into the two estimates.
     highPlusLowBelowGeometricBudget :
       (radius : Radius) →
       _≤_ A
@@ -289,8 +286,8 @@ record UniformFourierTailAssembly
           (commonHighDecayBudget (highEstimate radius))
           (commonLowDecayBudget (lowCancellation radius)))
         (_·_ M
-          (epsilon (rate Q) radius)
-          (_·_ M (shellEnergy Q) (tangentNorm Q)))
+          (epsilon (rate S) radius)
+          (_·_ M (shellEnergy S) (tangentNorm S)))
 
 open UniformFourierTailAssembly public
 
@@ -300,44 +297,60 @@ assembledFourierTailDecay :
     (A : AbsorptionArithmetic)
     (M : TailProductArithmetic A)
     (F : RadiusIndexedOffPacketSplit Radius A)
-    (Q : UniformAnalyticTailDecay A M F) →
-  (S : UniformFourierTailAssembly A M F Q) →
+    (S : UniformTailScale {Radius = Radius} A) →
+  (I : UniformFourierTailAssembly A M F S) →
   (radius : Radius) →
   _≤_ A
     (farShellTail (splitAt F radius))
     (_·_ M
-      (epsilon (rate Q) radius)
-      (_·_ M (shellEnergy Q) (tangentNorm Q)))
-assembledFourierTailDecay A M F Q S radius =
+      (epsilon (rate S) radius)
+      (_·_ M (shellEnergy S) (tangentNorm S)))
+assembledFourierTailDecay A M F S I radius =
   ≤-trans A tailToSplitSum
     (≤-trans A splitSumToDecayBudgets
-      (highPlusLowBelowGeometricBudget S radius))
+      (highPlusLowBelowGeometricBudget I radius))
   where
   tailToSplitSum :
     _≤_ A
       (farShellTail (splitAt F radius))
       (_+_ A
-        (farHighTail (frequencySplit S radius))
-        (farLowTail (frequencySplit S radius)))
-  tailToSplitSum rewrite splitMatchesMeasuredTail S radius =
-    fullFarTailBelowHighPlusLow (frequencySplit S radius)
+        (farHighTail (frequencySplit I radius))
+        (farLowTail (frequencySplit I radius)))
+  tailToSplitSum
+    rewrite measuredTailMatchesSplit I radius =
+    fullFarTailBelowHighPlusLow (frequencySplit I radius)
 
   splitSumToDecayBudgets :
     _≤_ A
       (_+_ A
-        (farHighTail (frequencySplit S radius))
-        (farLowTail (frequencySplit S radius)))
+        (farHighTail (frequencySplit I radius))
+        (farLowTail (frequencySplit I radius)))
       (_+_ A
-        (commonHighDecayBudget (highEstimate S radius))
-        (commonLowDecayBudget (lowCancellation S radius)))
+        (commonHighDecayBudget (highEstimate I radius))
+        (commonLowDecayBudget (lowCancellation I radius)))
   splitSumToDecayBudgets
-    rewrite splitHighMatchesEstimate S radius
-          | splitLowMatchesCancellation S radius =
+    rewrite splitHighMatchesEstimate I radius
+          | splitLowMatchesCancellation I radius =
     ≤-trans A
       (additionMonotoneRight A
-        (highFrequencyParaproductsDecay A (highEstimate S radius)))
+        (highFrequencyParaproductsDecay A (highEstimate I radius)))
       (additionMonotoneLeft A
-        (lowHighCancellationDecays A (lowCancellation S radius)))
+        (lowHighCancellationDecays A (lowCancellation I radius)))
+
+assembleUniformAnalyticTailDecay :
+  ∀ {r}
+    {Radius : Set r}
+    (A : AbsorptionArithmetic)
+    (M : TailProductArithmetic A)
+    (F : RadiusIndexedOffPacketSplit Radius A)
+    (S : UniformTailScale {Radius = Radius} A) →
+  UniformFourierTailAssembly A M F S →
+  UniformAnalyticTailDecay A M F
+assembleUniformAnalyticTailDecay A M F S I =
+  record
+    { scale = S
+    ; quantitativeTailBound = assembledFourierTailDecay A M F S I
+    }
 
 ------------------------------------------------------------------------
 -- Order-theoretic consequence used by tail absorption.
@@ -374,13 +387,16 @@ record QuantitativeTailBudgetWitness
     coefficientBudget : Scalar A
 
     coefficientBudgetAdmissible :
-      AdmissibleCoefficientBudget (rate Q) coefficientBudget
+      AdmissibleCoefficientBudget
+        (rate (scale Q)) coefficientBudget
 
     scaledCoefficientBelowTailBudget :
       _≤_ A
         (_·_ M
           coefficientBudget
-          (_·_ M (shellEnergy Q) (tangentNorm Q)))
+          (_·_ M
+            (shellEnergy (scale Q))
+            (tangentNorm (scale Q))))
         tailBudget
 
 open QuantitativeTailBudgetWitness public
@@ -408,7 +424,7 @@ quantitativeDecayToOrderVanishingTail A M F Q =
           (farShellTail (splitAt F radius))
           budget)
   select budget W
-    with geometricEventuallyBelow (rate Q)
+    with geometricEventuallyBelow (rate (scale Q))
       (coefficientBudget W)
       (coefficientBudgetAdmissible W)
   ... | radius , coefficientBound =
