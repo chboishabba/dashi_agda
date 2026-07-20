@@ -17,6 +17,12 @@ on:
       - 'DASHI/Physics/YangMills/BalabanWeightedGreenKernelDecay.agda'
       - 'DASHI/Physics/YangMills/BalabanCriticalMapLipschitzContraction.agda'
       - 'DASHI/Physics/YangMills/BalabanBackgroundFieldClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanReferenceHodgeCoercivity.agda'
+      - 'DASHI/Physics/YangMills/BalabanBackgroundPerturbationBudget.agda'
+      - 'DASHI/Physics/YangMills/BalabanCorrectionNeumannBound.agda'
+      - 'DASHI/Physics/YangMills/BalabanSmallFieldNonlinearConstants.agda'
+      - 'DASHI/Physics/YangMills/BalabanExplicitContractionBudget.agda'
+      - 'DASHI/Physics/YangMills/BalabanAnalyticProducerFrontier.agda'
       - 'DASHI/Physics/YangMills/BalabanRelativeHessianCoercivity.agda'
       - 'DASHI/Physics/YangMills/BalabanReferenceGreenPerturbation.agda'
       - 'DASHI/Physics/YangMills/BalabanNonlinearComponentLipschitz.agda'
@@ -94,6 +100,7 @@ jobs:
               DASHI/Physics/YangMills/CompactLieExactSurface.agda \
               DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda \
               DASHI/Physics/YangMills/CompactLieTheorySurface.agda \
+              DASHI/Physics/YangMills/BalabanAnalyticProducerFrontier.agda \
               DASHI/Physics/YangMills/BalabanDominantFreeBackgroundClosure.agda \
               DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda
           ) > agda-compact-lie-theory.log 2>&1
