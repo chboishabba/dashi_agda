@@ -13,10 +13,10 @@ import DASHI.Sheaf.TemporalNoodleSheafBridge as Temporal
 
 record RelationalCompressionSurface : Set₁ where
   field
-    Context Model Provenance Residual Global : Set
+    Context Model ProvenanceCarrier ResidualCarrier Global : Set
     compress : Context → Model
-    source : Context → Provenance
-    remainder : Context → Residual
+    source : Context → ProvenanceCarrier
+    remainder : Context → ResidualCarrier
     Compatible : Context → Context → Set
     Glues : Global → Context → Context → Set
     glue :
@@ -33,11 +33,11 @@ data LocalContext : Set where
 data CompressedModel : Set where
   relationalTeachingModel : CompressedModel
 
-data Provenance : Set where
-  suppliedSensoryProvenance suppliedEcologicalProvenance : Provenance
+data ExampleProvenance : Set where
+  suppliedSensoryProvenance suppliedEcologicalProvenance : ExampleProvenance
 
-data Residual : Set where
-  sensoryOmission ecologicalOmission : Residual
+data ExampleResidual : Set where
+  sensoryOmission ecologicalOmission : ExampleResidual
 
 data GlobalAccount : Set where
   joinedRelationalAccount : GlobalAccount
@@ -46,11 +46,11 @@ compressLocal : LocalContext → CompressedModel
 compressLocal sensoryContext = relationalTeachingModel
 compressLocal ecologicalContext = relationalTeachingModel
 
-sourceLocal : LocalContext → Provenance
+sourceLocal : LocalContext → ExampleProvenance
 sourceLocal sensoryContext = suppliedSensoryProvenance
 sourceLocal ecologicalContext = suppliedEcologicalProvenance
 
-remainderLocal : LocalContext → Residual
+remainderLocal : LocalContext → ExampleResidual
 remainderLocal sensoryContext = sensoryOmission
 remainderLocal ecologicalContext = ecologicalOmission
 
@@ -84,8 +84,8 @@ canonicalRelationalCompressionSurface =
   record
     { Context = LocalContext
     ; Model = CompressedModel
-    ; Provenance = Provenance
-    ; Residual = Residual
+    ; ProvenanceCarrier = ExampleProvenance
+    ; ResidualCarrier = ExampleResidual
     ; Global = GlobalAccount
     ; compress = compressLocal
     ; source = sourceLocal
