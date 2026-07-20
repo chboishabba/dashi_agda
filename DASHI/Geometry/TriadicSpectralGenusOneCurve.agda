@@ -261,47 +261,6 @@ spectralJCertificate =
     ; jRelation = refl
     }
 
-data IdentityCurveChange : Set where
-  identityCurveChange : IdentityCurveChange
-
-identityCoordinateChangeGate :
-  Elliptic.CoordinateChangeInvariantGate f5CoefficientRing
-identityCoordinateChangeGate =
-  record
-    { Change = IdentityCurveChange
-    ; actOnCurve = λ _ curve → curve
-    ; admissibleChange = λ _ → ⊤
-    ; jIsInvariant = λ _ _ _ before after →
-        jCertificateUniqueness before after
-    }
-  where
-  jCertificateUniqueness :
-    (before after : Elliptic.JInvariantCertificate f5CoefficientRing spectralCurve) →
-    Elliptic.jCoordinate before ≡ Elliptic.jCoordinate after
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f0 ; jRelation = () }) after
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f1 ; jRelation = () }) after
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f2 ; jRelation = refl })
-    (record { nonSingular = nonzero1 ; jCoordinate = f0 ; jRelation = () })
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f2 ; jRelation = refl })
-    (record { nonSingular = nonzero1 ; jCoordinate = f1 ; jRelation = () })
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f2 ; jRelation = refl })
-    (record { nonSingular = nonzero1 ; jCoordinate = f2 ; jRelation = refl }) = refl
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f2 ; jRelation = refl })
-    (record { nonSingular = nonzero1 ; jCoordinate = f3 ; jRelation = () })
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f2 ; jRelation = refl })
-    (record { nonSingular = nonzero1 ; jCoordinate = f4 ; jRelation = () })
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f3 ; jRelation = () }) after
-  jCertificateUniqueness
-    (record { nonSingular = nonzero1 ; jCoordinate = f4 ; jRelation = () }) after
-
 spectralEllipticCompression :
   Elliptic.EllipticModuliCompression f5CoefficientRing spectralEllipticOrigin
 spectralEllipticCompression =
