@@ -13,7 +13,7 @@ open import DASHI.Foundations.SSPTritCarrier
 -- Scope.
 --
 -- This module records the formal boundary needed by the compression
--- experiments discussed in the sibling runtime repository.  It proves the
+-- experiments discussed in the sibling runtime repository. It proves the
 -- exact support/sign factorisation of a ternary symbol and separates:
 --
 --   * a ternary source model,
@@ -109,9 +109,45 @@ data EvidenceClass : Set where
   triadicRepresentationEvidence : EvidenceClass
   triadicContextCodecEvidence : EvidenceClass
 
+classifyTernaryPipeline : ContextKind → EntropyBackend → EvidenceClass
+classifyTernaryPipeline noContext backend = triadicRepresentationEvidence
+classifyTernaryPipeline previousTritContext zlibBackend =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritContext lzmaBackend =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritContext zlibRANSShim =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritContext realRangeCoder =
+  triadicContextCodecEvidence
+classifyTernaryPipeline previousTritContext realRANS =
+  triadicContextCodecEvidence
+classifyTernaryPipeline previousTritAndBadBinContext zlibBackend =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritAndBadBinContext lzmaBackend =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritAndBadBinContext zlibRANSShim =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritAndBadBinContext realRangeCoder =
+  triadicContextCodecEvidence
+classifyTernaryPipeline previousTritAndBadBinContext realRANS =
+  triadicContextCodecEvidence
+classifyTernaryPipeline previousTritBadBinRunLengthContext zlibBackend =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritBadBinRunLengthContext lzmaBackend =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritBadBinRunLengthContext zlibRANSShim =
+  triadicRepresentationEvidence
+classifyTernaryPipeline previousTritBadBinRunLengthContext realRangeCoder =
+  triadicContextCodecEvidence
+classifyTernaryPipeline previousTritBadBinRunLengthContext realRANS =
+  triadicContextCodecEvidence
+
 classifyConfiguration : CodecConfiguration → EvidenceClass
 classifyConfiguration
   (codecConfiguration grayscaleBytes identityTransform noContext backend) =
+  genericCompressionEvidence
+classifyConfiguration
+  (codecConfiguration grayscaleBytes identityTransform context backend) =
   genericCompressionEvidence
 classifyConfiguration
   (codecConfiguration grayscaleBytes temporalByteResidual context backend) =
@@ -123,41 +159,11 @@ classifyConfiguration
   (codecConfiguration grayscaleBytes orbitCanonicalResidual context backend) =
   temporalModelEvidence
 classifyConfiguration
-  (codecConfiguration ternaryActions transform noContext backend) =
-  triadicRepresentationEvidence
+  (codecConfiguration ternaryActions transform context backend) =
+  classifyTernaryPipeline context backend
 classifyConfiguration
-  (codecConfiguration ternaryCellDeltas transform noContext backend) =
-  triadicRepresentationEvidence
-classifyConfiguration
-  (codecConfiguration ternaryActions transform previousTritContext zlibBackend) =
-  triadicRepresentationEvidence
-classifyConfiguration
-  (codecConfiguration ternaryActions transform previousTritContext lzmaBackend) =
-  triadicRepresentationEvidence
-classifyConfiguration
-  (codecConfiguration ternaryActions transform previousTritContext zlibRANSShim) =
-  triadicRepresentationEvidence
-classifyConfiguration
-  (codecConfiguration ternaryCellDeltas transform previousTritContext zlibBackend) =
-  triadicRepresentationEvidence
-classifyConfiguration
-  (codecConfiguration ternaryCellDeltas transform previousTritContext lzmaBackend) =
-  triadicRepresentationEvidence
-classifyConfiguration
-  (codecConfiguration ternaryCellDeltas transform previousTritContext zlibRANSShim) =
-  triadicRepresentationEvidence
-classifyConfiguration
-  (codecConfiguration ternaryActions transform context realRangeCoder) =
-  triadicContextCodecEvidence
-classifyConfiguration
-  (codecConfiguration ternaryActions transform context realRANS) =
-  triadicContextCodecEvidence
-classifyConfiguration
-  (codecConfiguration ternaryCellDeltas transform context realRangeCoder) =
-  triadicContextCodecEvidence
-classifyConfiguration
-  (codecConfiguration ternaryCellDeltas transform context realRANS) =
-  triadicContextCodecEvidence
+  (codecConfiguration ternaryCellDeltas transform context backend) =
+  classifyTernaryPipeline context backend
 
 ------------------------------------------------------------------------
 -- Canonical interpretation of the 600-frame result from the thread.
