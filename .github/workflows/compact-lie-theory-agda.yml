@@ -17,6 +17,11 @@ on:
       - 'DASHI/Physics/YangMills/BalabanWeightedGreenKernelDecay.agda'
       - 'DASHI/Physics/YangMills/BalabanCriticalMapLipschitzContraction.agda'
       - 'DASHI/Physics/YangMills/BalabanBackgroundFieldClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanRelativeHessianCoercivity.agda'
+      - 'DASHI/Physics/YangMills/BalabanReferenceGreenPerturbation.agda'
+      - 'DASHI/Physics/YangMills/BalabanNonlinearComponentLipschitz.agda'
+      - 'DASHI/Physics/YangMills/BalabanCriticalBallSelfMap.agda'
+      - 'DASHI/Physics/YangMills/BalabanDominantFreeBackgroundClosure.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteInverseConsequences.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteCoerciveGreen.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformNeumannAsymptoticResidual.agda'
@@ -40,6 +45,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanDashenGrossCalibration.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda'
       - 'scripts/audit_constructive_yang_mills_levels.py'
+      - 'scripts/audit_balaban_dominant_free_background.py'
       - 'Docs/CompactLieYangMills.md'
       - '.github/workflows/compact-lie-theory-agda.yml'
 
@@ -58,7 +64,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Audit proof-level boundaries
-        run: python scripts/audit_constructive_yang_mills_levels.py
+        run: |
+          python scripts/audit_constructive_yang_mills_levels.py
+          python scripts/audit_balaban_dominant_free_background.py
 
       - uses: cachix/install-nix-action@v31
         with:
@@ -86,11 +94,12 @@ jobs:
               DASHI/Physics/YangMills/CompactLieExactSurface.agda \
               DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda \
               DASHI/Physics/YangMills/CompactLieTheorySurface.agda \
+              DASHI/Physics/YangMills/BalabanDominantFreeBackgroundClosure.agda \
               DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda
           ) > agda-compact-lie-theory.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 360 agda-compact-lie-theory.log
+          tail -n 420 agda-compact-lie-theory.log
           exit 0
 
       - name: Upload Agda log
