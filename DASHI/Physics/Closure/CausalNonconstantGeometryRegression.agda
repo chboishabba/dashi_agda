@@ -1,8 +1,9 @@
 module DASHI.Physics.Closure.CausalNonconstantGeometryRegression where
 
 open import Agda.Builtin.Bool using (false)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 
+import Base369 as B369
 import DASHI.Geometry.CausalRelationalMetricSelector as Selector
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Geometry.NonconstantWarpedLorentzianModel as Geometry
@@ -18,7 +19,7 @@ selectedTimeMetricRegression :
     Selector.canonicalMetricSelectionData
     Flat.timeAxis
     Flat.timeAxis
-  ≡ Base369.tri-low
+  ≡ B369.tri-low
 selectedTimeMetricRegression = Selector.canonicalTimeSelectedTimelike
 
 
