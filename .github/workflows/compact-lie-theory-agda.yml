@@ -5,6 +5,13 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/CompactLie*.agda'
+      - 'DASHI/Physics/YangMills/CompactSimpleClassification.agda'
+      - 'DASHI/Physics/YangMills/SU2CompactLieAlgebraInstance.agda'
+      - 'DASHI/Physics/YangMills/SU2AdjointGenericInstance.agda'
+      - 'DASHI/Physics/YangMills/BalabanWeightedGreenKernelDecay.agda'
+      - 'DASHI/Physics/YangMills/BalabanCriticalMapLipschitzContraction.agda'
+      - 'DASHI/Physics/YangMills/BalabanBackgroundFieldClosure.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda'
       - 'Docs/CompactLieYangMills.md'
       - '.github/workflows/compact-lie-theory-agda.yml'
 
@@ -14,7 +21,7 @@ permissions:
 jobs:
   focused-agda:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
@@ -27,7 +34,7 @@ jobs:
           path: ${{ runner.temp }}/dashi-agda29
           key: compact-lie-theory-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
 
-      - name: Check compact Lie theory surface
+      - name: Check compact Lie exact and aggregate surfaces
         id: focused
         shell: bash
         run: |
@@ -38,13 +45,15 @@ jobs:
             export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
             export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-compact-lie-theory.log"
-            export AGDA_JOBS=1
+            export AGDA_JOBS=4
             scripts/run_agda29_parallel_check.sh \
-              DASHI/Physics/YangMills/CompactLieTheorySurface.agda
+              DASHI/Physics/YangMills/CompactLieExactSurface.agda \
+              DASHI/Physics/YangMills/CompactLieTheorySurface.agda \
+              DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda
           ) > agda-compact-lie-theory.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 220 agda-compact-lie-theory.log
+          tail -n 260 agda-compact-lie-theory.log
           exit 0
 
       - name: Upload Agda log
