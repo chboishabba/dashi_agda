@@ -11,6 +11,30 @@ ROOT = Path(__file__).resolve().parents[1]
 YM = ROOT / "DASHI" / "Physics" / "YangMills"
 
 EXPECTED = {
+    "BalabanReferenceHodgeCoercivity.agda": {
+        "referenceHodgeCoercivityAssemblyLevel": "machineChecked",
+        "referenceHodgePoincareInputsLevel": "conditional",
+    },
+    "BalabanBackgroundPerturbationBudget.agda": {
+        "backgroundPerturbationAssemblyLevel": "machineChecked",
+        "backgroundPerturbationComponentInputsLevel": "conditional",
+    },
+    "BalabanCorrectionNeumannBound.agda": {
+        "correctionNeumannAssemblyLevel": "machineChecked",
+        "strictResidualAndGeometricSumInputsLevel": "conditional",
+    },
+    "BalabanSmallFieldNonlinearConstants.agda": {
+        "smallFieldNonlinearConstantsAssemblyLevel": "machineChecked",
+        "smallFieldCoefficientInputsLevel": "conditional",
+    },
+    "BalabanExplicitContractionBudget.agda": {
+        "explicitContractionBudgetAssemblyLevel": "machineChecked",
+        "explicitNumericalSmallnessInputsLevel": "conditional",
+    },
+    "BalabanAnalyticProducerFrontier.agda": {
+        "analyticProducerAssemblyLevel": "machineChecked",
+        "analyticProducerEstimateInputsLevel": "conditional",
+    },
     "BalabanRelativeHessianCoercivity.agda": {
         "relativeHessianCoercivityBridgeLevel": "machineChecked",
         "referenceCoercivityAndPerturbationInputsLevel": "conditional",
