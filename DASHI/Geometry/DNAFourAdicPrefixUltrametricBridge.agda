@@ -2,7 +2,6 @@ module DASHI.Geometry.DNAFourAdicPrefixUltrametricBridge where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Vec using (Vec; []; _∷_)
