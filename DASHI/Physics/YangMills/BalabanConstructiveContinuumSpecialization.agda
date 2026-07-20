@@ -102,34 +102,22 @@ record BalabanSpecializedFrontier
         Index State Bound Polymer Scale EffectiveTheory
         SchwingerFamily Hamiltonian Gap
 
-  fullFrontier :
-    Frontier.FullCompactLieYangMillsClosure
-      Set State Set Index Bound Polymer Scale EffectiveTheory
-      SchwingerFamily Hamiltonian Gap
-      (λ x → x) (λ _ → Set)
-  fullFrontier =
-    record
-      { background = record
-          { backgroundField = λ _ → _
-          ; gaugeTransform = λ _ x → x
-          ; criticalMap = λ x → x
-          ; CriticalMinimizer = λ _ → Set
-          ; backgroundSolvesCriticalPoint = λ _ → Set
-          ; criticalPointUniqueOnSlice = λ _ _ → Set
-          ; backgroundMinimizes = λ _ → Set
-          ; minimizerUniqueUpToGauge = λ _ _ → Set
-          }
-      ; residualContraction =
-          BalabanContinuumFrontierInputs.uniformResidualContraction inputs
-      ; largeFieldStepV =
-          BalabanContinuumFrontierInputs.fourDimensionalStepV inputs
-      ; allScaleRG =
-          BalabanContinuumFrontierInputs.allScaleRG inputs
-      ; continuumOS =
-          BalabanContinuumFrontierInputs.continuumOS inputs
-      ; physicalMassGap =
-          BalabanContinuumFrontierInputs.positivePhysicalGap inputs
-      }
+  residualContraction :
+    Frontier.UniformResidualContractionTarget Index State Bound
+  residualContraction =
+    BalabanContinuumFrontierInputs.uniformResidualContraction inputs
+
+  stepV : Frontier.LargeFieldStepVTarget Polymer Bound
+  stepV = BalabanContinuumFrontierInputs.fourDimensionalStepV inputs
+
+  rgAtAllScales : Frontier.AllScaleRGTarget Scale EffectiveTheory
+  rgAtAllScales = BalabanContinuumFrontierInputs.allScaleRG inputs
+
+  os0ThroughOS5 : Frontier.ContinuumOSTarget SchwingerFamily
+  os0ThroughOS5 = BalabanContinuumFrontierInputs.continuumOS inputs
+
+  physicalGap : Frontier.PhysicalMassGapTarget Hamiltonian Gap
+  physicalGap = BalabanContinuumFrontierInputs.positivePhysicalGap inputs
 
 finiteAssemblyLevel : ProofLevel
 finiteAssemblyLevel = machineChecked
