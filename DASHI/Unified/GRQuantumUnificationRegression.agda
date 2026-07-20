@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Foundations.CausalOrderLorentzClosure
 open import DASHI.Algebra.CliffordSpinLift
 open import DASHI.Unified.GRQuantumUnification
+open import DASHI.Unified.GRQuantumCrossPollinationBridge
 
 ------------------------------------------------------------------------
 -- Import/regression surface for the unification theorem stack.
@@ -53,6 +54,30 @@ spin3SU2RepresentationReceiptIsPresent :
   ≡ true
 spin3SU2RepresentationReceiptIsPresent = refl
 
+crossPollinatedChainIntuitionIsPresent :
+  GeometricIntuitionSynthesis.chainIsCausalDepth
+    canonicalGeometricIntuitionSynthesis
+  ≡ true
+crossPollinatedChainIntuitionIsPresent = refl
+
+crossPollinatedUltrametricIntuitionIsPresent :
+  GeometricIntuitionSynthesis.ultrametricDepthIsResolution
+    canonicalGeometricIntuitionSynthesis
+  ≡ true
+crossPollinatedUltrametricIntuitionIsPresent = refl
+
+crossPollinatedSpinIntuitionIsPresent :
+  GeometricIntuitionSynthesis.spinIsEvenLiftOfFrameSymmetry
+    canonicalGeometricIntuitionSynthesis
+  ≡ true
+crossPollinatedSpinIntuitionIsPresent = refl
+
+crossPollinatedSharedSubstrateIsPresent :
+  GeometricIntuitionSynthesis.bothReadingsShareOneSubstrate
+    canonicalGeometricIntuitionSynthesis
+  ≡ true
+crossPollinatedSharedSubstrateIsPresent = refl
+
 unificationTheoremStackText : String
 unificationTheoremStackText =
-  "Causal order -> chain/antichain geometry -> contractive orthogonal closure -> Lorentz 3+1 -> Clifford/Spin -> wave lift/CCR -> tensor curvature/Einstein -> constraint closure -> finite UV spectrum -> one GR/quantum substrate."
+  "Causal order -> chain/antichain geometry -> contractive orthogonal closure -> Lorentz 3+1 -> Clifford/Spin -> wave lift/CCR -> tensor curvature/Einstein -> constraint closure -> finite UV spectrum -> one GR/quantum substrate; existing SSP/Base369, ultrametric, phase-depth, symmetry, Lie/QFT, and GR/PDE lanes feed this stack through explicit proof-transport seams."
