@@ -103,7 +103,7 @@ localTriadMajorizationFromAnalyticLeaf :
   (F : DifferentiatedTriadAtomFamily PairAtom Mode Vector A M) →
   (atom : PairAtom) →
   _≤_ A (signedTriadMagnitude F atom) (triadMajorant F atom)
-localTriadMajorizationFromAnalyticLeaf F atom
+localTriadMajorizationFromAnalyticLeaf {A = A} F atom
   rewrite signedMagnitudeIsAnalyticLeaf F atom
         | majorantIsAnalyticLeaf F atom =
   subst
@@ -122,7 +122,7 @@ localTriadMajorizationFromAnalyticLeaf F atom
       (tangentLeft F atom)
       (tangentRight F atom))
   where
-  analyticLeft : Scalar _
+  analyticLeft : Scalar A
   analyticLeft =
     Analytic.absolute (laws F)
       (Analytic.numeratorDerivative (nearResponse F) (targetMode F atom)
@@ -135,7 +135,7 @@ localTriadMajorizationFromAnalyticLeaf F atom
           (tangentLeft F atom)
           (tangentRight F atom)))
 
-  analyticRight : Scalar _
+  analyticRight : Scalar A
   analyticRight =
     Analytic.compactGammaDifferentiatedTriadMajorant
       (laws F) (nearResponse F)
