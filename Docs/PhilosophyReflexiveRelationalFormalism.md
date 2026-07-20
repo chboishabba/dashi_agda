@@ -58,9 +58,17 @@ The formal surface records:
 - Tlurey as a trust-, care-, challenge-, and repair-indexed relation;
 - Respect -> Connect -> Reflect -> Direct as a typed protocol;
 - multiple context valuations without arbitrary equivalence;
+- clopen context cells and pants composition as distinct structures;
+- search, processing, communication, tolerance, legitimacy, and accessibility as distinct breadth axes;
 - distress as a non-unique situated mismatch signal;
 - teaching as pattern-preserving participation rather than total cultural representation;
 - material politics as intervention in reproduction feedback;
+- retroactive reinterpretation without backward causation;
+- deterritorialisation paired with a receipt for reterritorialisation and possible recapture;
+- power as second-order control over grammar, quotient, evidence legibility, and promotion;
+- polyphony without forced final synthesis;
+- domination cost indexed by voice, relation, option, history, repair, authority, consent, reversibility, and receipt;
+- structural reading separated from symbolic association;
 - plural attachment without false equality of history, power, injury, responsibility, or political status;
 - decentring the sovereign individual without granting impersonal systems moral sovereignty.
 
@@ -81,6 +89,7 @@ Actual topology change requires organisation, resources, access or authority, sa
 
 ## Aggregates
 
-- `DASHI.Philosophy.Everything` imports the philosophy hierarchy.
-- `DASHI.Philosophy.PhilosophyRegression` checks the principal boundaries.
+- `DASHI.Philosophy.Everything` imports the full philosophy hierarchy.
+- `DASHI.Philosophy.PhilosophyRegression` checks the principal non-promotion and distinction boundaries.
 - `DASHI.EverythingPhilosophy` imports both the repository-wide aggregate and the philosophy aggregate.
+- `.github/workflows/philosophy.yml` provides focused Agda checks for the regression and aggregate surfaces.
