@@ -46,9 +46,10 @@ The next surface adds a finite-matrix presentation that is independent of quater
   `U†U = I`, `UU† = I`, and `det U = 1`, then assembles the group structure;
 - `SUNMatrixLieAlgebra.agda` defines traceless anti-Hermitian matrices and the commutator bracket, then assembles the Lie algebra;
 - `SUNMatrixLieGroup.agda` defines matrix conjugation as `Ad`, and assembles the compact-simple Lie-group interface from explicit topology/exponential authority;
+- `SUNMatrixGeometry.agda` assembles the invariant trace metric, bi-invariant distance, quantitative local exponential chart, and group-dependent bracket/adjoint constants;
 - `SU3MatrixInstance.agda` fixes `N = 3` and computes `dim su(3) = 8`.
 
-Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, and exponential-chart facts are `standardImported`. The subtype construction and all group/Lie record assembly are `machineChecked`.
+Finite complex-matrix algebra, determinant identities, compactness, connectedness, simplicity, and exponential-chart facts are `standardImported`. The subtype construction and all group/Lie/metric/chart record assembly are `machineChecked`.
 
 ## Standard imported layer
 
@@ -66,13 +67,19 @@ Finite complex-matrix algebra, determinant identities, compactness, connectednes
 
 `ConstructiveYangMillsNextSurface.agda` compiles the next proof chain in the order in which the mathematics must close:
 
-1. `BalabanFiniteVolumeBackgroundLane.agda` factors the critical-map estimate into patchwise Green constants, nonlinear Lipschitz constants, local factors, and a strict common factor;
-2. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
-3. `BalabanStepVKPClosure.agda` separates polymer activity, entropy, suppression, and the final Kotecký–Preiss comparison;
-4. `BalabanAllScaleRGClosure.agda` proves the exact induction from one-step invariant-domain preservation to admissibility at every finite scale;
-5. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer.
+1. `BalabanFiniteInverseConsequences.agda` derives injectivity and uniqueness from the finite Hessian/Green inverse certificate;
+2. `BalabanFiniteVolumeBackgroundLane.agda` factors the critical-map estimate into patchwise Green constants, nonlinear Lipschitz constants, local factors, and a strict common factor;
+3. `BalabanOneStepRGClosure.agda` requires fluctuation coordinates, Jacobian/determinant control, BCH control, Ward identities, localization, vacuum-energy and coupling renormalization, and a bounded irrelevant polymer remainder;
+4. `BalabanStepVKPClosure.agda` separates polymer activity, entropy, suppression, and the final Kotecký–Preiss comparison;
+5. `BalabanAllScaleRGClosure.agda` proves the exact induction from one-step invariant-domain preservation to admissibility at every finite scale;
+6. `BalabanOSMassGapClosure.agda` separates continuum OS axioms, standard OS reconstruction, uniform clustering, and the physical spectral-gap transfer;
+7. `BalabanDashenGrossCalibration.agda` makes the generator, lattice-spacing, determinant, and coupling-scheme normalization factors explicit and proves the final convention map from their calibrated product.
 
 These modules prove the logical bridges and keep the analytic antecedents explicit. No large-field, all-scale, OS, or mass-gap premise is silently manufactured.
+
+## Proof-level audit
+
+`scripts/audit_constructive_yang_mills_levels.py` runs before the focused Agda check. It verifies that the locally checked assembly modules contain no `postulate`, authority boundaries retain `standardImported`, frontier fields retain `conditional` or `conjectural`, and the Clay promotion flag remains explicitly false.
 
 ## Conditional and conjectural frontier
 
