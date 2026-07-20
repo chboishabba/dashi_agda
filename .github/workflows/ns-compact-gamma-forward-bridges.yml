@@ -55,7 +55,8 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore Agda 2.9 shadow cache
-        uses: actions/cache@v4
+        id: agda-cache
+        uses: actions/cache/restore@v4
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: ns-compact-gamma-forward-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
@@ -98,6 +99,12 @@ jobs:
           name: ns-compact-gamma-forward-agda-log
           path: agda-ns-compact-gamma-forward.log
           if-no-files-found: error
+      - name: Save Agda 2.9 shadow cache
+        if: always() && steps.agda-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ns-compact-gamma-forward-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
       - name: Fail on Agda error
         if: steps.focused.outputs.status != '0'
         run: exit 1
