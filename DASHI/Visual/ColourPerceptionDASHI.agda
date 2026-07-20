@@ -57,18 +57,18 @@ record OpponentResidue : Set where
 
 record RGBA : Set where
   field
-    red   : Nat
-    green : Nat
-    blue  : Nat
-    alpha : Nat
+    rgbaRed   : Nat
+    rgbaGreen : Nat
+    rgbaBlue  : Nat
+    rgbaAlpha : Nat
 
 record CMYKA : Set where
   field
-    cyan    : Nat
-    magenta : Nat
-    yellow  : Nat
-    key     : Nat
-    alpha   : Nat
+    cmykaCyan    : Nat
+    cmykaMagenta : Nat
+    cmykaYellow  : Nat
+    cmykaKey     : Nat
+    cmykaAlpha   : Nat
 
 data Hue24 : Set where
   h00 h01 h02 h03 h04 h05 h06 h07 : Hue24
@@ -331,11 +331,11 @@ canonicalPCCS =
 
 canonicalRGBA : RGBA
 canonicalRGBA =
-  record { red = 0 ; green = 0 ; blue = 0 ; alpha = 0 }
+  record { rgbaRed = 0 ; rgbaGreen = 0 ; rgbaBlue = 0 ; rgbaAlpha = 0 }
 
 canonicalCMYKA : CMYKA
 canonicalCMYKA =
-  record { cyan = 0 ; magenta = 0 ; yellow = 0 ; key = 0 ; alpha = 0 }
+  record { cmykaCyan = 0 ; cmykaMagenta = 0 ; cmykaYellow = 0 ; cmykaKey = 0 ; cmykaAlpha = 0 }
 
 canonicalColourPerceptionTransport : ColourPerceptionTransport
 canonicalColourPerceptionTransport =
