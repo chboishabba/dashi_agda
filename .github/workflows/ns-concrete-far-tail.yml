@@ -1,0 +1,27 @@
+name: NS concrete far-tail
+
+on:
+  push:
+    paths:
+      - "DASHI/Physics/Closure/NSCompactGammaConcreteFarTail*.agda"
+      - ".github/workflows/ns-concrete-far-tail.yml"
+  pull_request:
+    paths:
+      - "DASHI/Physics/Closure/NSCompactGammaConcreteFarTail*.agda"
+      - ".github/workflows/ns-concrete-far-tail.yml"
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck concrete far-tail regression
+        run: |
+          agda --no-libraries --no-default-libraries -i . -i .agda-stdlib \
+            DASHI/Physics/Closure/NSCompactGammaConcreteFarTailRegression.agda
