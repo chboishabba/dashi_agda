@@ -6,6 +6,7 @@ module DASHI.Unified.GRQuantumProofTermAtlas where
 
 import DASHI.Unified.GRQuantumProofTerms
 import DASHI.Unified.GRQuantumStrictProofTerms
+import DASHI.Unified.GRQuantumContinuumAuthorities
 import DASHI.Core.FiniteQuadraticMultiscale
 import DASHI.Geometry.FiniteCausalDiamond
 import DASHI.Geometry.FiniteCausalDiamondClosed
