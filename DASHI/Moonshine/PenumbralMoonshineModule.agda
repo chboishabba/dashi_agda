@@ -7,6 +7,7 @@ module DASHI.Moonshine.PenumbralMoonshineModule where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Sum.Base using (_⊎_)
 import DASHI.Moonshine.GradedRepresentation as GR
 open import DASHI.Moonshine.PenumbralLambency
 open import DASHI.Moonshine.PenumbralVectorValuedForm
