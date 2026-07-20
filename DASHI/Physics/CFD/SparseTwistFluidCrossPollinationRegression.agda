@@ -2,7 +2,7 @@ module DASHI.Physics.CFD.SparseTwistFluidCrossPollinationRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 open import Base369 using (tri-low; tri-mid; tri-high)
 
@@ -58,10 +58,7 @@ negativeAtom =
 
 embeddedNegativeAtom :
   Sparse.SparseTwistAtom
-    Fluid.PeriodicSite
-    Agda.Builtin.Nat.Nat
-    Fluid.ScaleBand
-    SSP.SSPTrit
+    Fluid.PeriodicSite Nat Fluid.ScaleBand SSP.SSPTrit
 embeddedNegativeAtom = Cross.bandedAtomToSparseAtom negativeAtom
 
 embedded-negative-sign :
@@ -77,14 +74,12 @@ embedded-circulation-strength = refl
 ------------------------------------------------------------------------
 
 accepted-positive-increments-lifetime :
-  FilamentAdmissibilityAdapter.accept
+  Cross.FilamentAdmissibilityAdapter.accept
     Cross.canonicalFilamentAdmissibilityAdapter
     true
     (Filament.filamentCell tri-mid zero)
   ≡ Filament.filamentCell tri-mid (suc zero)
 accepted-positive-increments-lifetime = refl
-  where
-  open Cross using (FilamentAdmissibilityAdapter)
 
 rejected-negative-is-annihilated :
   Cross.FilamentAdmissibilityAdapter.accept
