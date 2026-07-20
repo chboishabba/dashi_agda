@@ -6,11 +6,6 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 ------------------------------------------------------------------------
 -- Proposition-level replacement for the earlier Boolean closure manifest.
---
--- Each theorem surface is separated from an inhabited `Closed` record.  This
--- lets finite or conditional models state their proposition language without
--- pretending that merely naming a `Set` proves it.  Terminal promotion requires
--- both the surface and the corresponding closure witness.
 
 infixr 4 _⊎_
 data _⊎_ (A B : Set) : Set where
@@ -31,7 +26,6 @@ x ≢ y = x ≡ y → ⊥
 
 ------------------------------------------------------------------------
 -- 1. Orthogonal multiscale closure -> unique quadratic functional.
--- This record already contains the proof terms directly.
 
 record QuadraticUniquenessProof : Set₁ where
   field
@@ -85,19 +79,20 @@ open ChainAntichainLorentzProof public
 
 record ChainAntichainLorentzClosed
   (surface : ChainAntichainLorentzProof) : Set where
-  open ChainAntichainLorentzProof surface
   field
     finiteSpeedConeProof :
-      (a b : Event) →
-      (nullReceipt : Null (interval a b)) →
-      finiteSpeedCone a b nullReceipt
-    signatureUniqueProof : signatureUnique
+      (a b : ChainAntichainLorentzProof.Event surface) →
+      (nullReceipt :
+        ChainAntichainLorentzProof.Null surface
+          (ChainAntichainLorentzProof.interval surface a b)) →
+      ChainAntichainLorentzProof.finiteSpeedCone
+        surface a b nullReceipt
+    signatureUniqueProof :
+      ChainAntichainLorentzProof.signatureUnique surface
 open ChainAntichainLorentzClosed public
 
 ------------------------------------------------------------------------
 -- 3. Constructive Clifford algebra and Spin double cover.
--- These records already carry equations and witnesses rather than proposition
--- names alone.
 
 record CliffordUniversalProof : Set₁ where
   field
@@ -200,14 +195,16 @@ record WaveLiftCCRProof : Set₁ where
 open WaveLiftCCRProof public
 
 record WaveLiftCCRClosed (surface : WaveLiftCCRProof) : Set where
-  open WaveLiftCCRProof surface
   field
-    finiteTreeShiftLawProof : finiteTreeShiftLaw
-    continuumLimitProof : continuumLimit
-    canonicalCommutationRelationProof : canonicalCommutationRelation
+    finiteTreeShiftLawProof :
+      WaveLiftCCRProof.finiteTreeShiftLaw surface
+    continuumLimitProof :
+      WaveLiftCCRProof.continuumLimit surface
+    canonicalCommutationRelationProof :
+      WaveLiftCCRProof.canonicalCommutationRelation surface
     pythagoreanProbabilityAdditivityProof :
-      (family : OrthogonalFamily) →
-      pythagoreanProbabilityAdditivity family
+      (family : WaveLiftCCRProof.OrthogonalFamily surface) →
+      WaveLiftCCRProof.pythagoreanProbabilityAdditivity surface family
 open WaveLiftCCRClosed public
 
 ------------------------------------------------------------------------
@@ -241,14 +238,19 @@ record EinsteinTensorProof : Set₁ where
 open EinsteinTensorProof public
 
 record EinsteinTensorClosed (surface : EinsteinTensorProof) : Set where
-  open EinsteinTensorProof surface
   field
-    discreteToContinuumConvergenceProof : discreteToContinuumConvergence
-    contractedBianchiIdentityProof : contractedBianchiIdentity
-    stressEnergyConservationProof : stressEnergyConservation
-    variationalSourceEquationProof : variationalSourceEquation
-    universalSpinTwoSelfCouplingProof : universalSpinTwoSelfCoupling
-    backgroundIndependenceProof : backgroundIndependence
+    discreteToContinuumConvergenceProof :
+      EinsteinTensorProof.discreteToContinuumConvergence surface
+    contractedBianchiIdentityProof :
+      EinsteinTensorProof.contractedBianchiIdentity surface
+    stressEnergyConservationProof :
+      EinsteinTensorProof.stressEnergyConservation surface
+    variationalSourceEquationProof :
+      EinsteinTensorProof.variationalSourceEquation surface
+    universalSpinTwoSelfCouplingProof :
+      EinsteinTensorProof.universalSpinTwoSelfCoupling surface
+    backgroundIndependenceProof :
+      EinsteinTensorProof.backgroundIndependence surface
 open EinsteinTensorClosed public
 
 ------------------------------------------------------------------------
@@ -272,14 +274,19 @@ record ConstraintAlgebraProof : Set₁ where
 open ConstraintAlgebraProof public
 
 record ConstraintAlgebraClosed (surface : ConstraintAlgebraProof) : Set where
-  open ConstraintAlgebraProof surface
   field
-    momentumMomentumClosureProof : momentumMomentumClosure
-    momentumHamiltonianClosureProof : momentumHamiltonianClosure
-    hamiltonianHamiltonianClosureProof : hamiltonianHamiltonianClosure
-    metricDependentStructureFunctionsProof : metricDependentStructureFunctions
-    decimationRelabellingEquivarianceProof : decimationRelabellingEquivariance
-    anomalyFreeQuantumRepresentationProof : anomalyFreeQuantumRepresentation
+    momentumMomentumClosureProof :
+      ConstraintAlgebraProof.momentumMomentumClosure surface
+    momentumHamiltonianClosureProof :
+      ConstraintAlgebraProof.momentumHamiltonianClosure surface
+    hamiltonianHamiltonianClosureProof :
+      ConstraintAlgebraProof.hamiltonianHamiltonianClosure surface
+    metricDependentStructureFunctionsProof :
+      ConstraintAlgebraProof.metricDependentStructureFunctions surface
+    decimationRelabellingEquivarianceProof :
+      ConstraintAlgebraProof.decimationRelabellingEquivariance surface
+    anomalyFreeQuantumRepresentationProof :
+      ConstraintAlgebraProof.anomalyFreeQuantumRepresentation surface
 open ConstraintAlgebraClosed public
 
 ------------------------------------------------------------------------
@@ -302,19 +309,24 @@ record UVSpectralProof : Set₁ where
 open UVSpectralProof public
 
 record UVSpectralClosed (surface : UVSpectralProof) : Set where
-  open UVSpectralProof surface
   field
     finiteResolvableDepthProof :
-      (region : Region) → finiteResolvableDepth region
+      (region : UVSpectralProof.Region surface) →
+      UVSpectralProof.finiteResolvableDepth surface region
     regionalHilbertDimensionBoundProof :
-      (region : Region) → regionalHilbertDimensionBound region
+      (region : UVSpectralProof.Region surface) →
+      UVSpectralProof.regionalHilbertDimensionBound surface region
     regulatedSpectrumFiniteProof :
-      (operator : Operator) → regulatedSpectrumFinite operator
-    amplitudesConvergeProof : amplitudesConverge
-    renormalizationPreservesBoundProof : renormalizationPreservesBound
-    lowEnergyLimitExistsProof : lowEnergyLimitExists
+      (operator : UVSpectralProof.Operator surface) →
+      UVSpectralProof.regulatedSpectrumFinite surface operator
+    amplitudesConvergeProof :
+      UVSpectralProof.amplitudesConverge surface
+    renormalizationPreservesBoundProof :
+      UVSpectralProof.renormalizationPreservesBound surface
+    lowEnergyLimitExistsProof :
+      UVSpectralProof.lowEnergyLimitExists surface
     lowEnergyLimitMatchesRequiredPhysicsProof :
-      lowEnergyLimitMatchesRequiredPhysics
+      UVSpectralProof.lowEnergyLimitMatchesRequiredPhysics surface
 open UVSpectralClosed public
 
 ------------------------------------------------------------------------
