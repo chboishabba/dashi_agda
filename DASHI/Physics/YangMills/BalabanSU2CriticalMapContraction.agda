@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanSU2CriticalMapContraction where
 
-open import Agda.Primitive using (Level; _⊔_)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -12,7 +12,7 @@ x ≢ y = x ≡ y → ⊥
 record FiniteCriticalContraction
   {s d : Level}
   (State : Set s)
-  (Distance : Set d) : Set (s ⊔ d) where
+  (Distance : Set d) : Set (s ⊔ lsuc d) where
   field
     step : State → State
     distance : State → State → Distance
