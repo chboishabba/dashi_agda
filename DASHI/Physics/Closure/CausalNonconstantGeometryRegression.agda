@@ -7,6 +7,7 @@ import Base369 as B369
 import DASHI.Geometry.CausalRelationalMetricSelector as Selector
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Geometry.NonconstantWarpedLorentzianModel as Geometry
+import DASHI.Geometry.NonconstantWarpedMetricCompatibility as Compatibility
 import DASHI.Physics.Closure.DiscreteWarpedEinsteinMatterModel as Matter
 import DASHI.Physics.Closure.StressEnergyBianchiConditional as Boundary
 
@@ -55,6 +56,15 @@ computedTorsionFreeRegression :
   Geometry.leviCivitaCoefficient edge upper lower₁ lower₂
   ≡ Geometry.leviCivitaCoefficient edge upper lower₂ lower₁
 computedTorsionFreeRegression = Geometry.leviCivitaLowerSymmetric
+
+
+computedMetricCompatibilityRegression :
+  (edge : Geometry.TimeEdge) →
+  (spatial : Compatibility.SpatialAxis) →
+  Compatibility.metricCompatibilityResidual edge spatial
+  ≡ Geometry.zeroUnit
+computedMetricCompatibilityRegression =
+  Compatibility.computedMetricCompatibility
 
 
 computedCurvatureRegression :
