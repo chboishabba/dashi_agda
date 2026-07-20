@@ -2,25 +2,35 @@
 
 ## Scope
 
-This tranche cross-pollinates the existing bounded shift dynamics with the
-repo's balanced-ternary continuous-envelope lane. It now closes stronger finite
-algebraic versions of the tangent, norm, semigroup, scaling, OPE, crossing,
-correlation, and Ward lanes while keeping continuum/CFT promotion fail-closed.
+This lane cross-pollinates the bounded shift dynamics, finite perturbation
+classification, quadratic/MDL descent, finite operator algebra, and the
+balanced-ternary continuous-depth interface.
+
+The repo now contains two distinct layers:
 
 ```text
-finite fixed-point classification
-  -> finite pointed perturbation carrier
-  -> exact induced derivative step
+A. exact shift-native finite layer
+
+fixed point
+  -> three-state perturbation carrier
   -> Nat-indexed semigroup
-  -> finite normed idempotent additive tangent algebra
-  -> finite 2,1,0 scaling spectrum
-  -> proof-relevant finite OPE coefficients
-  -> finite exchange locality and crossing
-  -> finite correlation/Ward analogues
-  -> explicit analytic RG/CFT target records
-  -> balanced-ternary continuous-envelope target
-  -> still-open analytic instances
+  -> finite normed idempotent additive algebra
+  -> 2,1,0 scaling rank
+  -> finite OPE/fusion/crossing
+  -> finite correlation and held Ward analogues
+
+B. inhabited heterogeneous reference layer
+
+complete GF(2) valued-field tangent
+  -> exact zero-remainder derivative and discrete generator
+  -> engineering/anomalous-dimension reference
+  -> non-constant position-dependent finite OPE
+  -> non-singleton injective stream-valued depth envelope
+  -> exact tail/finite-step RG intertwining
+  -> finite stress insertion and conformal-site Ward identities
 ```
+
+Neither layer is promoted as a physical continuum CFT.
 
 ## Reused theorem surfaces
 
@@ -30,120 +40,152 @@ The implementation reuses rather than duplicates:
   strict held-potential descent;
 - `ShiftFixedPointPerturbationClassification` for the finite
   relevant/marginal/irrelevant classification;
-- `ShiftPotentialQuadraticEnergy` and the collapse-depth/MDL chain for the
-  existing descent evidence;
-- `BalancedTernaryContinuousEnvelope` for the typed analytic interface needed
-  by any later continuum depth/RG interpretation.
+- `ShiftPotentialQuadraticEnergy` and the collapse-depth/MDL receipt chain for
+  the existing descent evidence;
+- `ShiftFiniteTangentSemigroup`, `ShiftFiniteScalingFusionWard`,
+  `ShiftFiniteNormedTangent`, and `ShiftFiniteLocalOPECrossing` for the exact
+  finite algebra;
+- `BalancedTernaryContinuousEnvelope` for the typed continuous-depth target.
 
-## New finite results
+## Exact finite shift layer
 
-### Pointed tangent and semigroup
+### Perturbation semigroup
 
-`ShiftFiniteTangentSemigroup.agda` introduces the three-element perturbation
-carrier
+The exact induced step is
 
 ```text
 startPerturbation -> nextPerturbation -> zeroPerturbation -> zeroPerturbation
 ```
 
-and proves the exact Nat-indexed composition law. Every orbit is absorbed at
-zero from time two onward.
+and its Nat-indexed iteration satisfies the semigroup composition law. Every
+finite perturbation is absorbed at zero from time two onward.
 
-### Additive/normed tangent algebra
+### Additive/normed algebra
 
-`ShiftFiniteNormedTangent.agda` promotes the existing fusion/join operation into
-an exact idempotent commutative additive monoid on perturbations.
+The existing fusion/join is an idempotent commutative additive monoid. The
+existing `2,1,0` rank is a norm-like scalar with triangle inequality, and the
+finite derivative preserves addition and is norm non-expansive.
 
-It proves:
+This carrier is not a vector space because the idempotent addition has no
+additive inverses.
 
-- left and right zero laws;
-- associativity and commutativity;
-- idempotence;
-- a triangle inequality for the existing finite rank norm;
-- derivative preservation of addition;
-- derivative non-expansiveness.
+### Finite OPE and crossing
 
-This is an actual finite normed additive structure, but not a vector or Banach
-space: there are no additive inverses, scalar field, homogeneity theorem,
-completeness theorem, or Fréchet derivative.
+The finite OPE coefficient is proof-relevant equality with the finite fusion
+output. Exchange locality follows from commutativity and crossing follows from
+associativity.
 
-### Scaling spectrum
+## Inhabited reference route
 
-The finite scaling rank is inherited from the established held potential and
-collapse depth:
+### Complete vector/Banach reference
+
+`ShiftGF2BanachTangentReference.agda` supplies a one-dimensional vector model
+over the finite complete valued field GF(2):
+
+- additive inverses;
+- scalar multiplication;
+- distributivity and scalar associativity;
+- a discrete norm and distance;
+- norm separation and homogeneity;
+- constructive completeness for the discrete eventual-constancy Cauchy
+  presentation.
+
+This is a mathematically legitimate finite non-Archimedean complete reference,
+not an R- or C-valued physical tangent space.
+
+### Fréchet derivative and generator reference
+
+`ShiftGF2FrechetGeneratorReference.agda` uses the absorbing map `F(x)=0`.
+Its derivative is the zero linear map and the Fréchet remainder vanishes
+exactly. The Nat-indexed flow is identity at time zero and zero afterwards,
+with an exact semigroup law and discrete generator equation.
+
+This is not a real-time `C0` semigroup or sectorial analytic generator.
+
+### Scaling and anomalous-dimension reference
+
+`ShiftScalingDimensionReference.agda` retains the exact engineering spectrum
 
 ```text
 start : 2
 next  : 1
-held  : 0
+zero  : 0
 ```
 
-These are exact finite ranks, not physical or anomalous scaling dimensions.
+and supplies zero anomalous correction. The finite RG transform obeys the
+existing non-expansive eigen/order equation.
 
-### Finite local OPE and crossing
+External physical normalization and measured anomalous-dimension authority
+remain explicitly false.
 
-`ShiftFiniteLocalOPECrossing.agda` adds explicit insertion sites and a
-proof-relevant coefficient type
+### Position-dependent OPE
+
+`ShiftPositionDependentOPEReference.agda` adds three explicit insertion
+positions and the non-constant coefficient
 
 ```text
-OPECoefficient p q r = fusion p q == r
+C(p,q;r;x,y)
+  = positionWeight(x,y) * selection(fusion(p,q),r).
 ```
 
-with a canonical `0/1` selection table. It proves:
+Coincident positions have weight `2`; separated positions have weight `1`.
+Exchange locality follows from coefficient-kernel symmetry and fusion
+commutativity. Channel crossing follows from fusion associativity.
 
-- exchange locality from commutativity;
-- crossing/associativity from the existing fusion theorem;
-- exact equality of the two finite fusion channels.
+This is genuine finite position dependence, but not a singular analytic OPE,
+conformal-block expansion, or continuum locality theorem.
 
-This is a real finite algebraic OPE/crossing surface. It is not yet a continuum
-field-theoretic OPE: there is no singular position dependence, analytic
-coefficient function, convergence domain, conformal-block expansion, or QFT
-reconstruction.
+### Inhabited depth envelope and RG compatibility
 
-### Correlation / Ward analogues
+`ShiftInhabitedDepthEnvelopeRG.agda` supplies a non-singleton stream-valued
+instance of `ContinuousDepthEnvelope`:
 
-The existing finite two-point correlation and held-insertion identities remain
-attached. They are fixed-insertion finite identities, not stress-tensor or
-conformal Ward theorems.
+- scalar carrier is the balanced-ternary stream carrier;
+- embedding is identity and therefore injective;
+- all-negative and all-positive streams give an explicit non-vacuity witness;
+- coarse graining is stream tail;
+- finite perturbations are encoded as depth-two, depth-one, and zero streams;
+- tail exactly intertwines the finite derivative step pointwise;
+- every encoded perturbation reaches the zero stream after two tail steps;
+- the `2,1,0` scale rank is non-increasing across depth.
 
-## Analytic target architecture
+The analytic predicates in this reference model are symbolic proof tokens. This
+inhabits the interface and closes exact combinatorial RG compatibility; it does
+not establish real-number convergence or continuum universality.
 
-`FixedPointAnalyticRGTargets.agda` now names the exact stronger objects rather
-than leaving them as prose:
+### Stress tensor and Ward reference
 
-- `AdditiveNormedTangent`;
-- `FrechetLinearizedSemigroup`;
-- `PhysicalScalingSpectrum`;
-- `LocalOPECrossing`;
-- `ContinuumRGControl`;
-- `StressTensorConformalWard`;
-- the integrated `FixedPointAnalyticRGCFTRoute`.
+`ShiftStressTensorConformalWardReference.agda` supplies:
 
-These are theorem-facing interfaces. No analytic instance is fabricated from
-the three-point carrier.
+- one finite stress insertion represented by the zero perturbation;
+- exact finite divergence-free and trace-zero identities;
+- explicit translation, dilation, and special-conformal permutations of the
+  three insertion positions;
+- invariant normalized correlation under those maps;
+- compatibility with the position-dependent finite OPE.
 
-## Continuum RG control
+The normalized correlation is identically zero. There is no nontrivial stress
+correlator, central charge, anomaly calculation, or continuum tensor field.
 
-`ShiftFixedPointRGCFTHandoff.agda` routes the continuum obligation through the
-existing `BalancedTernaryContinuousEnvelope` interface. That interface already
-separates exact finite stream/truncation data from supplied analytic proofs of
-convergence, weighted metric structure, cylinder continuity, first-difference
-control, and injectivity.
+## Integrated route
 
-The current tranche does not yet inhabit an analytic depth-kernel model or
-prove that the finite semigroup intertwines a continuum renormalization flow.
+`ShiftAnalyticRGCFTRouteReference.agda` packages all inhabited references.
+`ShiftFixedPointRGCFTHandoff.agda` records them as constructed and narrows the
+remaining frontier to one unified physical continuum model.
 
-## Remaining gates
+## Remaining physical gates
 
-The remaining work is now narrower:
+The unresolved claims are now specific:
 
-1. upgrade the finite idempotent monoid to a vector/Banach tangent model;
-2. inhabit Fréchet remainder, strong continuity, and generator-limit fields;
-3. supply physically normalized and anomalous scaling dimensions;
-4. supply analytic position-dependent OPE coefficients and conformal blocks;
-5. inhabit the continuous-depth envelope with non-vacuous analytic predicates;
-6. prove finite-to-depth RG intertwining and convergence;
-7. construct a stress tensor and prove conformal Ward identities.
+1. one R- or C-valued Banach tangent identified with the physical shift limit;
+2. a real-time strongly continuous/analytic semigroup and generator estimates;
+3. externally normalized measured physical and anomalous scaling dimensions;
+4. singular analytic OPE coefficients, convergence regions, and conformal
+   blocks;
+5. a real/complex analytic instance of the continuous-depth envelope;
+6. continuum RG universality and finite-to-continuum convergence across depth;
+7. a nontrivial stress tensor, central charge/anomaly data, and physical
+   conformal Ward identities.
 
-No continuum RG fixed point, conformal symmetry, or CFT is promoted by this
-work.
+No physical continuum RG fixed point, conformal symmetry, or CFT is promoted by
+this work.
