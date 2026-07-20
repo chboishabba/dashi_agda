@@ -26,7 +26,9 @@ POSTULATE_FREE = [
     YM / "SUNWilsonClassFunction.agda",
     YM / "SUNWilsonAction.agda",
     YM / "BalabanFiniteInverseConsequences.agda",
+    YM / "BalabanFiniteCoerciveGreen.agda",
     YM / "BalabanUniformNeumannAsymptoticResidual.agda",
+    YM / "BalabanGeometricNeumannClosure.agda",
     YM / "BalabanFiniteVolumeBackgroundLane.agda",
     YM / "BalabanSU2FiniteBackgroundAssembly.agda",
     YM / "BalabanOneStepRGClosure.agda",
@@ -66,9 +68,17 @@ EXPECTED_ASSIGNMENTS = {
         "sunWilsonActionGaugeInvarianceLevel": "machineChecked",
         "sunWilsonTraceAuthorityLevel": "standardImported",
     },
+    YM / "BalabanFiniteCoerciveGreen.agda": {
+        "finiteCoerciveGreenAssemblyLevel": "machineChecked",
+        "finiteCoerciveInverseAuthorityLevel": "standardImported",
+    },
     YM / "BalabanUniformNeumannAsymptoticResidual.agda": {
         "uniformNeumannAsymptoticResidualLevel": "machineChecked",
         "uniformPowerVanishingInputLevel": "conditional",
+    },
+    YM / "BalabanGeometricNeumannClosure.agda": {
+        "geometricNeumannClosureLevel": "machineChecked",
+        "archimedeanPowerCoverageLevel": "standardImported",
     },
     YM / "BalabanFiniteVolumeBackgroundLane.agda": {
         "finiteVolumeContractionBridgeLevel": "machineChecked",
