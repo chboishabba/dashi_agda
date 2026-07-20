@@ -22,6 +22,8 @@ on:
       - 'DASHI/Physics/YangMills/BalabanSU2BetaCoefficientExtraction.agda'
       - 'DASHI/Physics/YangMills/BalabanRandomWalk*.agda'
       - 'DASHI/Physics/YangMills/BalabanGreenKernelDecayFinite.agda'
+      - 'DASHI/Physics/YangMills/BalabanUniform*.agda'
+      - 'DASHI/Physics/YangMills/BalabanGeometricPowerVanishing.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2NonlinearCriticalPointMap.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2FiniteContractionRegion.agda'
       - 'DASHI/Physics/YangMills/BalabanBetaUniformityConjecture.agda'
@@ -47,9 +49,11 @@ jobs:
           export AGDA_JOBS=4
           scripts/run_agda29_parallel_check.sh \
             DASHI/Physics/YangMills/BalabanFiniteOneStepFrontierBundle.agda \
+            DASHI/Physics/YangMills/BalabanGeometricPowerVanishing.agda \
+            DASHI/Physics/YangMills/BalabanUniformResidualMajorant.agda \
             > /tmp/balaban-finite-frontier.log 2>&1
           status=$?
-          tail -n 120 /tmp/balaban-finite-frontier.log
+          tail -n 160 /tmp/balaban-finite-frontier.log
           echo "status=$status" >> "$GITHUB_OUTPUT"
           exit 0
       - name: Upload focused Agda log

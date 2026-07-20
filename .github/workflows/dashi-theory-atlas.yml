@@ -7,15 +7,18 @@ on:
       - "config/dashi-*-atlas.json"
       - "config/dashi-*-lane-hyperfabric.json"
       - "config/dashi-*-termflow.json"
+      - "config/dashi-euler-phase-visualisations.json"
       - "scripts/materialize_dashi_theory_atlas.py"
       - "scripts/materialize_dashi_hyperfabric.py"
       - "scripts/materialize_dashi_lane_hyperfabric.py"
       - "scripts/materialize_dashi_agda_termflow.py"
+      - "scripts/materialize_dashi_phase_visualisations.py"
       - "scripts/dashi_visualize_agda.py"
       - "tests/test_materialize_dashi_theory_atlas.py"
       - "tests/test_materialize_dashi_hyperfabric.py"
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
       - "tests/test_materialize_dashi_agda_termflow.py"
+      - "tests/test_materialize_dashi_phase_visualisations.py"
   push:
     branches: [master]
     paths:
@@ -23,15 +26,18 @@ on:
       - "config/dashi-*-atlas.json"
       - "config/dashi-*-lane-hyperfabric.json"
       - "config/dashi-*-termflow.json"
+      - "config/dashi-euler-phase-visualisations.json"
       - "scripts/materialize_dashi_theory_atlas.py"
       - "scripts/materialize_dashi_hyperfabric.py"
       - "scripts/materialize_dashi_lane_hyperfabric.py"
       - "scripts/materialize_dashi_agda_termflow.py"
+      - "scripts/materialize_dashi_phase_visualisations.py"
       - "scripts/dashi_visualize_agda.py"
       - "tests/test_materialize_dashi_theory_atlas.py"
       - "tests/test_materialize_dashi_hyperfabric.py"
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
       - "tests/test_materialize_dashi_agda_termflow.py"
+      - "tests/test_materialize_dashi_phase_visualisations.py"
 
 jobs:
   validate-atlas:
@@ -122,3 +128,28 @@ jobs:
             artifacts/dashi-yang-mills-termflow.svg
             artifacts/dashi-navier-stokes-termflow.json
             artifacts/dashi-navier-stokes-termflow.svg
+
+  validate-phase-visualisations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install pytest
+      - name: Compile phase visualisation materialiser
+        run: python -m py_compile scripts/materialize_dashi_phase_visualisations.py
+      - name: Run phase visualisation regression tests
+        run: python -m pytest -q tests/test_materialize_dashi_phase_visualisations.py
+      - name: Validate source-backed Euler phase battery
+        run: python scripts/materialize_dashi_phase_visualisations.py --config config/dashi-euler-phase-visualisations.json --check
+      - name: Materialise Euler phase battery
+        run: python scripts/materialize_dashi_phase_visualisations.py --config config/dashi-euler-phase-visualisations.json
+      - name: Upload Euler phase visual artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-euler-phase-visualisation-battery
+          path: |
+            artifacts/dashi-euler-phase-battery.json
+            artifacts/dashi-euler-phase-battery.svg

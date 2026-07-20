@@ -1,0 +1,15 @@
+{
+  "schema": "dashi-agda-phase-visualisation-v1",
+  "title": "DASHI Euler phase visualisation battery",
+  "source": "DASHI/Visualization/PhaseResidualProjection.agda",
+  "scenes": [
+    "eulerComplex2D",
+    "eulerHelix3D",
+    "eulerAmbient4D",
+    "eulerAmbient5D",
+    "eulerAmbient12D",
+    "eulerAmbient32D"
+  ],
+  "output_json": "artifacts/dashi-euler-phase-battery.json",
+  "output_svg": "artifacts/dashi-euler-phase-battery.svg"
+}
