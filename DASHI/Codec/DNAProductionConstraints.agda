@@ -7,10 +7,6 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import DASHI.Codec.DNAFirstFormalism using
   ( Base; A; C; G; T; complement; ConstraintMachine )
 
-------------------------------------------------------------------------
--- Small Boolean algebra kept local so the executable policy is independent
--- of a particular standard-library decision procedure.
-
 infixr 6 _&&_
 _&&_ : Bool → Bool → Bool
 true && b = b
@@ -31,9 +27,6 @@ isGC : Base → Bool
 isGC C = true
 isGC G = true
 isGC _ = false
-
-------------------------------------------------------------------------
--- Homopolymer state. A fourth equal base is rejected.
 
 data Last : Set where
   noLast : Last
@@ -60,10 +53,6 @@ nextRun (last x) run3 b with baseEq x b
 ... | false = run1
 nextRun (last x) run0 b = run1
 
-------------------------------------------------------------------------
--- Bounded GC debt. The state tracks GC minus AT in a five-point window.
--- At the two boundaries only a correcting symbol is legal.
-
 data Debt : Set where
   debtM2 debtM1 debt0 debtP1 debtP2 : Debt
 
@@ -89,10 +78,6 @@ nextDebt debtP2 b with isGC b
 ... | true = debtP2
 ... | false = debtP1
 
-------------------------------------------------------------------------
--- Bounded history for forbidden motifs and reverse-complement hairpins.
--- h0 is oldest; h8 is newest.
-
 data MaybeBase : Set where
   none : MaybeBase
   some : Base → MaybeBase
@@ -115,8 +100,6 @@ matches : MaybeBase → Base → Bool
 matches none b = false
 matches (some x) b = baseEq x b
 
--- Two representative restriction-site motifs are blocked at emission time.
--- They are examples of a finite forbidden-motif table, not universal biology.
 forbidden4 : History9 → Base → Bool
 forbidden4 h b =
   (matches (h6 h) G && matches (h7 h) A && matches (h8 h) T && baseEq b C)
@@ -128,9 +111,6 @@ forbidden4 h b =
   true || q = true
   false || q = q
 
--- Bounded stem detector. Once nine prior bases are present, reject a new base
--- when h7,h8,b is the reverse complement of h0,h1,h2. The intervening h3..h6
--- form a four-base loop. This is a finite local hairpin guard.
 hairpin3x4 : History9 → Base → Bool
 hairpin3x4 h b =
   matchComplement (h2 h) (h7 h) &&
@@ -141,9 +121,6 @@ hairpin3x4 h b =
   matchComplement none y = false
   matchComplement x none = false
   matchComplement (some x) (some y) = baseEq (complement x) y
-
-------------------------------------------------------------------------
--- Combined finite production state and decidable admissibility.
 
 record ProductionState : Set where
   constructor productionState
@@ -172,8 +149,8 @@ step s b =
     (nextDebt (debt s) b)
     (shiftHistory (history s) b)
 
-data IsTrue : Bool → Set where
-  trueWitness : IsTrue true
+IsTrue : Bool → Set
+IsTrue b = b ≡ true
 
 productionMachine : ConstraintMachine
 productionMachine = record
@@ -183,10 +160,8 @@ productionMachine = record
   ; step = step
   }
 
--- The executable decision function and the proposition are definitionally
--- aligned: no separate post-generation validator is introduced.
 legal-witness-sound : ∀ {s b} → IsTrue (legal? s b) → legal? s b ≡ true
-legal-witness-sound trueWitness = refl
+legal-witness-sound proof = proof
 
 record ProductionConstraintReceipt : Set where
   field
