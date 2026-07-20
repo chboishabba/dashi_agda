@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.NSWall1CanonicalPairIncidenceSchur where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ
-  using (ℚ; 0ℚ; _+_; _*_; _≤_)
+  using (ℚ; 0ℚ)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums
 open import DASHI.Physics.Closure.NSPairIncidenceKernel
@@ -39,9 +39,9 @@ canonicalPair01Data = record
   ; rows = highModes
   ; columns = lowModes
   ; zero = 0ℚ
-  ; add = _+_
-  ; multiply = _*_
-  ; _≤_ = _≤_
+  ; add = ℚ._+_
+  ; multiply = ℚ._*_
+  ; _≤_ = ℚ._≤_
   ; pairContribution = pair01Contribution
   ; rowWeight = oneWeightHigh
   ; colWeight = oneWeightLow
@@ -62,7 +62,8 @@ pair01KernelMatchesCanonical high011 low001 = refl
 
 pair01RowBound :
   ∀ row →
-  _≤_ (asFiniteWeightedKernel canonicalPair01Data)
+  FiniteWeightedKernel._≤_
+    (asFiniteWeightedKernel canonicalPair01Data)
     (rowWeightedSum (asFiniteWeightedKernel canonicalPair01Data) row)
     (multiply (asFiniteWeightedKernel canonicalPair01Data)
       two
@@ -73,7 +74,8 @@ pair01RowBound high011 = rational≤refl two
 
 pair01ColumnBound :
   ∀ col →
-  _≤_ (asFiniteWeightedKernel canonicalPair01Data)
+  FiniteWeightedKernel._≤_
+    (asFiniteWeightedKernel canonicalPair01Data)
     (columnWeightedSum (asFiniteWeightedKernel canonicalPair01Data) col)
     (multiply (asFiniteWeightedKernel canonicalPair01Data)
       four
@@ -117,9 +119,9 @@ canonicalPair10Data = record
   ; rows = lowModes
   ; columns = highModes
   ; zero = 0ℚ
-  ; add = _+_
-  ; multiply = _*_
-  ; _≤_ = _≤_
+  ; add = ℚ._+_
+  ; multiply = ℚ._*_
+  ; _≤_ = ℚ._≤_
   ; pairContribution = pair10Contribution
   ; rowWeight = oneWeightLow
   ; colWeight = oneWeightHigh
@@ -140,7 +142,8 @@ pair10KernelMatchesCanonical low001 high011 = refl
 
 pair10RowBound :
   ∀ row →
-  _≤_ (asFiniteWeightedKernel canonicalPair10Data)
+  FiniteWeightedKernel._≤_
+    (asFiniteWeightedKernel canonicalPair10Data)
     (rowWeightedSum (asFiniteWeightedKernel canonicalPair10Data) row)
     (multiply (asFiniteWeightedKernel canonicalPair10Data)
       four
@@ -151,7 +154,8 @@ pair10RowBound low001 = rational≤refl four
 
 pair10ColumnBound :
   ∀ col →
-  _≤_ (asFiniteWeightedKernel canonicalPair10Data)
+  FiniteWeightedKernel._≤_
+    (asFiniteWeightedKernel canonicalPair10Data)
     (columnWeightedSum (asFiniteWeightedKernel canonicalPair10Data) col)
     (multiply (asFiniteWeightedKernel canonicalPair10Data)
       two
