@@ -54,9 +54,9 @@ sunWilsonLoopGaugeInvariant :
     (sunMatrixGroup theory)
     (normalizedRealTrace authority)
     U path
-sunWilsonLoopGaugeInvariant authority =
+sunWilsonLoopGaugeInvariant {theory = theory} authority =
   loopObservableGaugeInvariant
-    (sunMatrixGroup _)
+    (sunMatrixGroup theory)
     (normalizedRealTrace authority)
     (sunWilsonClassFunction authority)
 
