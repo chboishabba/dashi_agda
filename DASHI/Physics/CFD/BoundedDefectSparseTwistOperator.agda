@@ -11,30 +11,12 @@ import DASHI.Physics.CFD.SparseTwistLESOperator as Exact
 
 ------------------------------------------------------------------------
 -- Bounded-defect replacement for the exact commuting square.
---
--- The exact sparse/twist interface requires
---
---   decode (proxyStep p) ≡ fullStep (decode p).
---
--- A numerical atom codec normally supplies only a measured or proved defect.
--- This module therefore exposes an abstract error relation `Within e x y`.
--- It is deliberately relation-valued rather than tied to a particular norm,
--- so concrete runtimes may instantiate it with a quantised L2 error, a signed
--- support discrepancy, a spectral defect, or a product receipt.
 ------------------------------------------------------------------------
 
 record ErrorGeometry (State : Set) : Set₁ where
   field
     Within : Nat → State → State → Set
-
     within-refl : ∀ x → Within zero x x
-
-    within-weaken :
-      ∀ {e f x y} →
-      e ≡ f →
-      Within e x y →
-      Within f x y
-
     within-compose :
       ∀ {e f x y z} →
       Within e x y →
@@ -47,7 +29,7 @@ open ErrorGeometry public
 -- Approximate learned proxy operator.
 --
 -- `oneStepDefect` is the concrete commutation-defect obligation.
--- `fullStepStable` is the stability/Lipschitz obligation needed to propagate
+-- `fullStepStable` is the Lipschitz/stability obligation needed to propagate
 -- that defect.  Neither field is inferred from a runtime plot.
 ------------------------------------------------------------------------
 
@@ -79,10 +61,6 @@ open BoundedDefectProxyOperator public
 --
 -- Bound(0) = 0
 -- Bound(n+1) = epsilon + L * Bound(n)
---
--- This is the exact discrete Gronwall shape required by the CFD thread.  A
--- closed geometric-series expression can be added by an arithmetic adapter;
--- the recursive form avoids assuming division or an ordered field here.
 ------------------------------------------------------------------------
 
 rolloutBound : Nat → Nat → Nat → Nat
@@ -111,18 +89,9 @@ bounded-encoded-rollout :
   Within G (rolloutBound (oneStepError O) (stabilityFactor O) n)
     (Exact.decode C (Exact.iterate n (proxyStep O) (Exact.encode C x)))
     (Exact.iterate n (fullStep O) x)
-bounded-encoded-rollout C G O n x =
-  within-weaken G refl
-    (subst-right
-      (Exact.decode-encode C x)
-      (bounded-proxy-rollout C G O n (Exact.encode C x)))
-  where
-    subst-right :
-      ∀ {A : Set} {e : Nat} {a b c : A} →
-      b ≡ c →
-      Within G e a b →
-      Within G e a c
-    subst-right refl witness = witness
+bounded-encoded-rollout C G O n x
+  rewrite Exact.decode-encode C x =
+  bounded-proxy-rollout C G O n (Exact.encode C x)
 
 ------------------------------------------------------------------------
 -- Runtime-facing atom receipt.
