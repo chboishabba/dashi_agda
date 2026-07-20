@@ -1,6 +1,5 @@
 module DASHI.Physics.Closure.NSCompactGammaGalerkinLimitBridge where
 
-open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
