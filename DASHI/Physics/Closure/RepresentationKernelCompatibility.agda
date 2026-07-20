@@ -111,12 +111,12 @@ trajectoryObservablePreserved :
   ≡
   fineObserve law
     (iterate (fineStep law) n x)
-trajectoryObservablePreserved law admissible n =
+trajectoryObservablePreserved law {x} admissible n =
   trans
     (cong (coarseObserve law)
       (sym (trajectoryCommutes law admissible n)))
     (projectPreservesObservable law
-      (iterate (fineStep law) n _))
+      (iterate (fineStep law) n x))
 
 ------------------------------------------------------------------------
 -- Dynamical shapes preserved by exact compatibility.
@@ -161,7 +161,9 @@ projectedEventuallyReaches law admissible (n , reaches) =
     (cong (project law) reaches)
 
 ------------------------------------------------------------------------
--- Explicit approximate/quotient physics.
+-- Explicit same-physics data.  Equality of numerical values alone is not the
+-- definition: admissibility, selected observables, invariants, and causal
+-- support are named separately.
 
 record SamePhysicsStructure {ℓ : Level}
   (State Observable Invariant Support : Set ℓ) : Set (lsuc ℓ) where
@@ -175,14 +177,20 @@ record SamePhysicsStructure {ℓ : Level}
     sameInvariant : Invariant → Invariant → Set ℓ
     sameSupport : Support → Support → Set ℓ
 
-  SamePhysics : State → State → Set ℓ
-  SamePhysics x y =
-    admissible x →
-    admissible y →
-    sameObservable (observe x) (observe y) →
-    sameInvariant (invariant x) (invariant y) →
-    sameSupport (causalSupport x) (causalSupport y) →
-    Set ℓ
+record SamePhysicsWitness {ℓ : Level}
+  {State Observable Invariant Support : Set ℓ}
+  (structure : SamePhysicsStructure State Observable Invariant Support)
+  (x y : State) : Set ℓ where
+  open SamePhysicsStructure structure
+  field
+    leftAdmissible : admissible x
+    rightAdmissible : admissible y
+    observableAgrees : sameObservable (observe x) (observe y)
+    invariantAgrees : sameInvariant (invariant x) (invariant y)
+    causalSupportAgrees : sameSupport (causalSupport x) (causalSupport y)
+
+------------------------------------------------------------------------
+-- Approximate/quotient compatibility with an explicit n-step defect budget.
 
 record ApproxRepresentationKernelCompatibility {ℓ : Level} : Set (lsuc ℓ) where
   field
