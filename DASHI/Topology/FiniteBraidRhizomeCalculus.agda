@@ -6,6 +6,11 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+-- Local sum, kept here to avoid importing a larger surface.
+data _⊎_ (A B : Set) : Set where
+  inj₁ : A → A ⊎ B
+  inj₂ : B → A ⊎ B
+
 ------------------------------------------------------------------------
 -- Exact two-strand braid group B₂ reduced to crossing parity.
 
@@ -84,11 +89,6 @@ classificationComplete :
   classify b ≡ evenCrossing ⊎ classify b ≡ oddCrossing
 classificationComplete straight = inj₁ refl
 classificationComplete swap = inj₂ refl
-
--- Local sum, kept here to avoid importing a larger surface.
-data _⊎_ (A B : Set) : Set where
-  inj₁ : A → A ⊎ B
-  inj₂ : B → A ⊎ B
 
 data FlexBudget : Set where
   rigid flexible : FlexBudget
