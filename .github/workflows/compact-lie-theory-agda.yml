@@ -11,6 +11,8 @@ on:
       - 'DASHI/Physics/YangMills/SUNMatrix*.agda'
       - 'DASHI/Physics/YangMills/SUNWilson*.agda'
       - 'DASHI/Physics/YangMills/SU3MatrixInstance.agda'
+      - 'DASHI/Physics/YangMills/FiniteReflectionPositivity.agda'
+      - 'DASHI/Physics/YangMills/ReflectionPositiveBlocking.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'DASHI/Physics/YangMills/BalabanWeightedGreenKernelDecay.agda'
       - 'DASHI/Physics/YangMills/BalabanCriticalMapLipschitzContraction.agda'
