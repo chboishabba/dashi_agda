@@ -9,7 +9,9 @@ open import Data.Rational using (1ℚ; _+_; _*_)
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 import DASHI.Algebra.TriadicFiniteArithmeticLaws as ArithmeticLaws
+import DASHI.Algebra.TriadicFiniteIrrep as Irrep
 import DASHI.Algebra.TriadicDepthTwoCyclotomicDFT as DFT9
+import DASHI.Algebra.TriadicDepthTwoDFTGroupBridge as DFT9Group
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstein
 import DASHI.Geometry.TriadicSpectralGenusOneCurve as SpectralCurve
 import DASHI.Geometry.TriadicEllipticModuliGate as Elliptic
@@ -52,6 +54,17 @@ zeroParseval :
   DFT9.signalEnergy (DFT9.analyze9 zeroSignal9)
   ≡ DFT9.nineQ * DFT9.signalEnergy zeroSignal9
 zeroParseval = DFT9.parseval9 zeroSignal9
+
+z9AdditionRegression :
+  Arithmetic.addResidue
+    (DFT9Group.indexToResidue DFT9.i2)
+    (DFT9Group.indexToResidue DFT9.i8)
+  ≡ DFT9Group.indexToResidue (DFT9.addIndex DFT9.i2 DFT9.i8)
+z9AdditionRegression =
+  DFT9Group.indexAdditionMatchesResidue DFT9.i2 DFT9.i8
+
+genuineDepthTwoCodec : Irrep.ExactSpectralCodec Q.two
+genuineDepthTwoCodec = DFT9Group.groupAlignedDepthTwoCodec
 
 ------------------------------------------------------------------------
 -- SL₂(Z) lattice reindexing witness.
