@@ -8,7 +8,9 @@ on:
       - 'DASHI/Physics/Closure/NSIntegerFourierLattice.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalModePacket.agda'
       - 'DASHI/Physics/Closure/NSWall1ExactEvaluationCarrier.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda'
       - 'DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernel.agda'
       - 'DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda'
@@ -26,7 +28,9 @@ on:
       - 'DASHI/Physics/Closure/NSIntegerFourierLattice.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalModePacket.agda'
       - 'DASHI/Physics/Closure/NSWall1ExactEvaluationCarrier.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda'
       - 'DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda'
+      - 'DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda'
       - 'DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda'
       - 'DASHI/Physics/Closure/NSPairIncidenceKernel.agda'
       - 'DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda'
@@ -72,7 +76,9 @@ jobs:
               DASHI/Physics/Closure/NSIntegerFourierLattice.agda \
               DASHI/Physics/Closure/NSWall1CanonicalModePacket.agda \
               DASHI/Physics/Closure/NSWall1ExactEvaluationCarrier.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalPacketEvaluation.agda \
               DASHI/Physics/Closure/NSWall1CanonicalAmplitudeProfile.agda \
+              DASHI/Physics/Closure/NSWall1CanonicalPolarizations.agda \
               DASHI/Physics/Closure/NSDivergenceFreePolarizationBasis.agda \
               DASHI/Physics/Closure/NSPairIncidenceKernel.agda \
               DASHI/Physics/Closure/NSFourierBiotSavartTriadKernel.agda \
@@ -84,7 +90,7 @@ jobs:
           ) > agda-ns-pair-incidence-schur.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 320 agda-ns-pair-incidence-schur.log
+          tail -n 340 agda-ns-pair-incidence-schur.log
           exit 0
       - name: Upload focused Agda log
         if: always()
