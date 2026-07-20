@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Nat using (_+_; _≤_)
 
 import DASHI.Environment.FunctionalEcology as Eco
