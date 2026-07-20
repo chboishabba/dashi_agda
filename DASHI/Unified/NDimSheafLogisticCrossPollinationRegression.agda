@@ -15,6 +15,8 @@ import DASHI.Foundations.PrimorialFactorAddressBoundary as Primorial
 import DASHI.Foundations.JChartSuccessorBoundary as JCharts
 import DASHI.Dynamics.LogisticPolyphaseSelectionBoundary as Logistic
 import DASHI.Dynamics.TriadicResidualRechartDynamics as Dynamics
+import DASHI.Dynamics.RecursiveArithmeticSpectralMachineBoundary as Machine
+import DASHI.Geometry.HigherGeometryPromotionBoundary as HigherGeometry
 import DASHI.Promotion.SystemicDistressReframingBoundary as Distress
 import DASHI.Culture.RelationalTeachingCampaignBoundary as Culture
 import DASHI.Culture.RelationalProcessProtocolBoundary as Protocol
@@ -68,6 +70,8 @@ record NDimSheafLogisticCrossPollinationReceipt : Set where
     primorialBoundary : Primorial.PrimorialFactorAddressBoundary
     logisticBoundary : Logistic.LogisticPolyphaseBoundary
     residualBoundary : Dynamics.ResidualDynamicsBoundary
+    machineBoundary : Machine.RecursiveMachineBoundary
+    higherGeometryBoundary : HigherGeometry.HigherGeometryPromotionBoundary
     distressBoundary : Distress.SystemicDistressBoundary
     culturalBoundary : Culture.RelationalCaseBoundary
     protocolBoundary : Protocol.RelationalProcessBoundary
@@ -88,6 +92,8 @@ canonicalNDimSheafLogisticCrossPollinationReceipt =
     ; primorialBoundary = Primorial.canonicalPrimorialFactorAddressBoundary
     ; logisticBoundary = Logistic.canonicalLogisticPolyphaseBoundary
     ; residualBoundary = Dynamics.canonicalResidualDynamicsBoundary
+    ; machineBoundary = Machine.canonicalRecursiveMachineBoundary
+    ; higherGeometryBoundary = HigherGeometry.canonicalHigherGeometryPromotionBoundary
     ; distressBoundary = Distress.canonicalSystemicDistressBoundary
     ; culturalBoundary = Culture.canonicalRelationalCaseBoundary
     ; protocolBoundary = Protocol.canonicalRelationalProcessBoundary
