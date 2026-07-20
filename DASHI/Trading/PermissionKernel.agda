@@ -4,11 +4,9 @@ module DASHI.Trading.PermissionKernel where
 open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat using (_+_; _≤_)
+open import Data.Nat.Properties using (≤-refl)
 
 open import DASHI.Core.KernelSystem
-
-------------------------------------------------------------------------
--- Trading is permission classification, not price prediction.
 
 record Unit : Set where
   constructor unit
@@ -107,9 +105,6 @@ tradingKernelSystem = record
   ; kernel-involution-equivariant = λ s → refl
   }
 
-------------------------------------------------------------------------
--- Canonical synchronous execution and explicit implementation schedules.
-
 data TradingSchedule : Set where
   synchronous snapshotSequential : TradingSchedule
 
@@ -124,9 +119,6 @@ tradingScheduledKernel = record
   ; scheduled = scheduledPermissionKernel
   ; canonical-is-synchronous = λ s → refl
   }
-
-------------------------------------------------------------------------
--- Quotient relation: equality of the invariant readout.
 
 _≈market_ : MarketWindowState → MarketWindowState → Set
 x ≈market y = quotient x ≡ quotient y
@@ -163,9 +155,6 @@ tradingReadoutComplete :
 tradingReadoutComplete = record
   { relation⇒same-readout = λ related → related }
 
-------------------------------------------------------------------------
--- Action and governance boundary.
-
 tradingAction : MarketWindowState → Nat
 tradingAction s = modelCost s + residualCost s + riskPenalty s
 
@@ -176,7 +165,7 @@ open TradingActionReceipt public
 
 tradingActionReceipt : ∀ s → TradingActionReceipt s
 tradingActionReceipt s = record
-  { action-does-not-increase = Data.Nat.Properties.≤-refl }
+  { action-does-not-increase = ≤-refl }
 
 record LearnerReadout : Set where
   constructor learnerReadout
