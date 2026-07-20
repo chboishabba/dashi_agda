@@ -31,9 +31,19 @@ canonicalWorldResistancePreserved :
   Dynamics.worldResistancePreserved Dynamics.canonicalBraidedEmotionDynamicsBoundary ≡ true
 canonicalWorldResistancePreserved = refl
 
+canonicalTransitionsInstantiated :
+  Dynamics.transitions Dynamics.canonicalBraidedEmotionDynamicsBoundary ≡
+  Dynamics.canonicalEpisodeTransitions
+canonicalTransitionsInstantiated = Dynamics.canonicalTransitionsAreInstantiated
+
 canonicalTechnicalVocabularyIsNotEvidence :
   Evidence.technicalVocabularyIsNotEvidence Evidence.canonicalEmotionEvidenceBoundary ≡ true
 canonicalTechnicalVocabularyIsNotEvidence = refl
+
+canonicalEvidenceRowsInstantiated :
+  Evidence.rows Evidence.canonicalEmotionEvidenceBoundary ≡
+  Evidence.canonicalEmotionEvidenceRows
+canonicalEvidenceRowsInstantiated = Evidence.canonicalEvidenceRowsAreInstantiated
 
 canonicalAtypicalReportIsNotAbsentAffect :
   Neurodivergent.atypicalReportIsNotAbsentAffect Neurodivergent.canonicalNeurodivergentAtlasGovernanceIntegration ≡ true
@@ -50,6 +60,10 @@ canonicalNoExtractionInherited = refl
 canonicalKimmererInspirationExplicit :
   Kimmerer.inspirationExplicit Kimmerer.canonicalKimmererBraidingAcknowledgement ≡ true
 canonicalKimmererInspirationExplicit = refl
+
+canonicalDialecticalBraidIsDashiExtension :
+  Kimmerer.dialecticalBraidIsDashiExtension Kimmerer.canonicalKimmererBraidingAcknowledgement ≡ true
+canonicalDialecticalBraidIsDashiExtension = refl
 
 canonicalKimmererNoFormalisationClaim :
   Kimmerer.indigenousKnowledgeFormalisedClaim Kimmerer.canonicalKimmererBraidingAcknowledgement ≡ false
