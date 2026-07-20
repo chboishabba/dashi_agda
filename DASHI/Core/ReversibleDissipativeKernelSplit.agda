@@ -2,12 +2,8 @@
 module DASHI.Core.ReversibleDissipativeKernelSplit where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
-
-------------------------------------------------------------------------
--- Reversible evolution and observation/selection are separate operators.
--- This prevents contraction, pruning, or measurement from being silently
--- identified with unitary/Hamiltonian evolution.
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 record ReversibleKernel (S : Set) : Set₁ where
   field
@@ -32,11 +28,8 @@ reversible-injective :
   evolve U x ≡ evolve U y → x ≡ y
 reversible-injective U {x} {y} exy =
   trans
-    (symmetry (reverse-evolve U x))
+    (sym (reverse-evolve U x))
     (trans (cong (reverse U) exy) (reverse-evolve U y))
-  where
-    symmetry : ∀ {A : Set} {a b : A} → a ≡ b → b ≡ a
-    symmetry refl = refl
 
 record ReversibleDissipativeSplit (S : Set) : Set₁ where
   constructor reversible-dissipative-split
