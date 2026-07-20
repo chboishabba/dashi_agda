@@ -1,9 +1,10 @@
 module DASHI.Geometry.NonconstantWarpedLorentzianModel where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Base369 using (TriTruth; tri-mid)
+open import Base369 using (TriTruth)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Geometry.CausalRelationalMetricSelector as Selector
 import DASHI.Geometry.FlatLorentzianModel as Flat
@@ -11,13 +12,12 @@ import DASHI.Geometry.FlatLorentzianModel as Flat
 ------------------------------------------------------------------------
 -- Finite nonconstant FLRW-like local metric.
 --
--- Three ordered time slices carry spatial log-scale depths 0, 1, 2.  The
--- oriented causal frame is selected by CausalRelationalMetricSelector.  Metric
--- gradients, normalized Christoffel coefficients, and a positive curvature
--- component are then computed from that profile.
+-- Three ordered slices carry spatial log-scale depths 0, 1, 2.  Metric signs
+-- are selected by the typed causal/relational frame.  First differences,
+-- normalized Christoffel coefficients, and curvature are computed from the
+-- changing metric profile.
 --
--- This is an exact finite symbolic/local model, not the smooth continuum FLRW
--- manifold and not a general Levi-Civita development.
+-- This is an exact finite symbolic model, not a smooth continuum FLRW theorem.
 
 
 data TimeSlice : Set where
@@ -75,8 +75,7 @@ record LocalMetricEntry : Set where
 open LocalMetricEntry public
 
 
-localMetricEntry :
-  TimeSlice → Flat.Axis4 → Flat.Axis4 → LocalMetricEntry
+localMetricEntry : TimeSlice → Flat.Axis4 → Flat.Axis4 → LocalMetricEntry
 localMetricEntry slice a b =
   mkLocalMetricEntry
     (Selector.selectedMetricEntry Selector.canonicalMetricSelectionData a b)
@@ -106,7 +105,7 @@ presentFutureMetricChanges :
 presentFutureMetricChanges = oneToTwo
 
 ------------------------------------------------------------------------
--- Signed unit coefficients and metric-derived first differences.
+-- Metric-derived first differences.
 
 
 data UnitCoefficient : Set where
@@ -218,8 +217,7 @@ lowerPairSymmetric Flat.zAxis Flat.yAxis = refl
 lowerPairSymmetric Flat.zAxis Flat.zAxis = refl
 
 
-gammaFromPair :
-  TimeEdge → Flat.Axis4 → LowerPairClass → UnitCoefficient
+gammaFromPair : TimeEdge → Flat.Axis4 → LowerPairClass → UnitCoefficient
 gammaFromPair edge Flat.timeAxis xxPair = hubbleCoefficient edge
 gammaFromPair edge Flat.timeAxis yyPair = hubbleCoefficient edge
 gammaFromPair edge Flat.timeAxis zzPair = hubbleCoefficient edge
@@ -245,31 +243,19 @@ leviCivitaLowerSymmetric edge upper lower₁ lower₂ =
 
 
 computedGammaTimeXX :
-  leviCivitaCoefficient
-    pastToPresent
-    Flat.timeAxis
-    Flat.xAxis
-    Flat.xAxis
+  leviCivitaCoefficient pastToPresent Flat.timeAxis Flat.xAxis Flat.xAxis
   ≡ hubbleCoefficient pastToPresent
 computedGammaTimeXX = refl
 
 
 computedGammaXTimeX :
-  leviCivitaCoefficient
-    presentToFuture
-    Flat.xAxis
-    Flat.timeAxis
-    Flat.xAxis
+  leviCivitaCoefficient presentToFuture Flat.xAxis Flat.timeAxis Flat.xAxis
   ≡ hubbleCoefficient presentToFuture
 computedGammaXTimeX = refl
 
 
 computedConnectionNonzero :
-  leviCivitaCoefficient
-    pastToPresent
-    Flat.timeAxis
-    Flat.xAxis
-    Flat.xAxis
+  leviCivitaCoefficient pastToPresent Flat.timeAxis Flat.xAxis Flat.xAxis
   ≡ positiveUnit
 computedConnectionNonzero = refl
 
@@ -278,12 +264,10 @@ record ComputedWarpedLeviCivitaReceipt : Set where
   constructor mkComputedWarpedLeviCivitaReceipt
   field
     coefficientSourcePast :
-      leviCivitaCoefficient
-        pastToPresent Flat.timeAxis Flat.xAxis Flat.xAxis
+      leviCivitaCoefficient pastToPresent Flat.timeAxis Flat.xAxis Flat.xAxis
       ≡ hubbleCoefficient pastToPresent
     coefficientSourceFuture :
-      leviCivitaCoefficient
-        presentToFuture Flat.xAxis Flat.timeAxis Flat.xAxis
+      leviCivitaCoefficient presentToFuture Flat.xAxis Flat.timeAxis Flat.xAxis
       ≡ hubbleCoefficient presentToFuture
     torsionFreeLowerIndices :
       (edge : TimeEdge) →
@@ -291,8 +275,7 @@ record ComputedWarpedLeviCivitaReceipt : Set where
       leviCivitaCoefficient edge upper lower₁ lower₂
       ≡ leviCivitaCoefficient edge upper lower₂ lower₁
     nonzeroCoefficient :
-      leviCivitaCoefficient
-        pastToPresent Flat.timeAxis Flat.xAxis Flat.xAxis
+      leviCivitaCoefficient pastToPresent Flat.timeAxis Flat.xAxis Flat.xAxis
       ≡ positiveUnit
     receiptScope : String
 
@@ -306,7 +289,7 @@ computedWarpedLeviCivitaReceipt =
     computedGammaXTimeX
     leviCivitaLowerSymmetric
     computedConnectionNonzero
-    "normalized finite FLRW-like coefficient table computed from spatial log-scale differences"
+    "normalized finite FLRW-like coefficients computed from spatial log-scale differences"
 
 ------------------------------------------------------------------------
 -- Curvature computed from H-dot and H squared.
@@ -327,8 +310,7 @@ warpedSectionalCurvature : CurvatureCoefficient
 warpedSectionalCurvature = squareUnit (hubbleCoefficient pastToPresent)
 
 
-computedPositiveCurvature :
-  warpedSectionalCurvature ≡ positiveCurvature
+computedPositiveCurvature : warpedSectionalCurvature ≡ positiveCurvature
 computedPositiveCurvature = refl
 
 
