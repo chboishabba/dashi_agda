@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSWall1CanonicalPacketEvaluation where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Sum.Base using (_⊎_)
 
 open import DASHI.Physics.Closure.NSIntegerFourierLattice
 open import DASHI.Physics.Closure.NSWall1CanonicalModePacket
@@ -66,5 +67,4 @@ record CanonicalPacketEvaluation
       ((high ≡ p110) ⊎ (high ≡ p101) ⊎ (high ≡ p011)) →
       modeDelta E low high ≡ zero A
 
-open import Data.Sum.Base using (_⊎_)
 open CanonicalPacketEvaluation public
