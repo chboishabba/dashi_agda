@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSCompactGammaDifferentiatedTriadInstantiation wher
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.List using (List)
-open import Relation.Binary.PropositionalEquality using (_≡_; subst)
+open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Analysis.FiniteWeightedKernelSums using (map)
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -12,11 +12,6 @@ import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization as Major
 ------------------------------------------------------------------------
 -- Adapter from the pointwise differentiated Fourier theorem to the exact finite
 -- triad-summation owner used by the compact-Gamma Schur bridge.
---
--- The pair list and the near/action reconstruction are still supplied by the
--- concrete Fourier carrier, but the local inequality is no longer an unrelated
--- field: it is derived from `concrete-differentiated-triad-bound` after exact
--- identification of each atom's signed response and majorant.
 ------------------------------------------------------------------------
 
 record DifferentiatedTriadAtomFamily
@@ -34,10 +29,13 @@ record DifferentiatedTriadAtomFamily
     coefficientMonotonicity :
       Analytic.CompactGammaCoefficientMonotonicity laws
 
-    -- The analytic leaf and the absorption arithmetic must use the same order.
-    orderAgrees :
-      (x y : Scalar A) →
-      Analytic._≤_ laws x y ≡ _≤_ A x y
+    -- Proof-relevant conversion from the normed analytic order to the order used
+    -- by the absorption/Schur arithmetic.  This is safer than an equality of
+    -- proposition-valued functions and is exactly what the local theorem needs.
+    analyticOrderToAbsorption :
+      ∀ {x y : Scalar A} →
+      Analytic._≤_ laws x y →
+      _≤_ A x y
 
     pairAtoms : List PairAtom
 
@@ -103,12 +101,10 @@ localTriadMajorizationFromAnalyticLeaf :
   (F : DifferentiatedTriadAtomFamily PairAtom Mode Vector A M) →
   (atom : PairAtom) →
   _≤_ A (signedTriadMagnitude F atom) (triadMajorant F atom)
-localTriadMajorizationFromAnalyticLeaf {A = A} F atom
+localTriadMajorizationFromAnalyticLeaf F atom
   rewrite signedMagnitudeIsAnalyticLeaf F atom
         | majorantIsAnalyticLeaf F atom =
-  subst
-    (λ relation → relation)
-    (orderAgrees F analyticLeft analyticRight)
+  analyticOrderToAbsorption F
     (Analytic.concrete-differentiated-triad-bound
       (laws F)
       (projectedBound F)
@@ -121,31 +117,6 @@ localTriadMajorizationFromAnalyticLeaf {A = A} F atom
       (baseRight F atom)
       (tangentLeft F atom)
       (tangentRight F atom))
-  where
-  analyticLeft : Scalar A
-  analyticLeft =
-    Analytic.absolute (laws F)
-      (Analytic.numeratorDerivative (nearResponse F) (targetMode F atom)
-        (Analytic.differentiatedProjectedTriad (laws F)
-          (targetMode F atom)
-          (leftMode F atom)
-          (rightMode F atom)
-          (baseLeft F atom)
-          (baseRight F atom)
-          (tangentLeft F atom)
-          (tangentRight F atom)))
-
-  analyticRight : Scalar A
-  analyticRight =
-    Analytic.compactGammaDifferentiatedTriadMajorant
-      (laws F) (nearResponse F)
-      (targetMode F atom)
-      (leftMode F atom)
-      (rightMode F atom)
-      (baseLeft F atom)
-      (baseRight F atom)
-      (tangentLeft F atom)
-      (tangentRight F atom)
 
 asTriadMajorizationInputs :
   ∀ {p m v}
