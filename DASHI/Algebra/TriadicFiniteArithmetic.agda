@@ -9,6 +9,11 @@ open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope
 
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteIrrep as Irrep
+open Irrep using
+  ( FiniteAdditiveGroup
+  ; zeroᵍ; _+ᵍ_; negateᵍ
+  ; leftIdentityᵍ; associativityᵍ; leftInverseᵍ; commutativeᵍ
+  )
 
 ------------------------------------------------------------------------
 -- Pair carrier.
@@ -45,13 +50,17 @@ mergeCarry pos neg = zer
 mergeCarry pos zer = pos
 mergeCarry pos pos = pos
 
+finishFullAdd : Trit → Pair Trit Trit → Pair Trit Trit
+finishFullAdd carry₁ (output , carry₂) =
+  output , mergeCarry carry₁ carry₂
+
 ------------------------------------------------------------------------
 -- Full adder with incoming carry.
 
 fullAdd : Trit → Trit → Trit → Pair Trit Trit
 fullAdd carry x y with addPair x y
-... | digit , carry₁ with addPair digit carry
-...   | output , carry₂ = output , mergeCarry carry₁ carry₂
+... | digit , carry₁ =
+  finishFullAdd carry₁ (addPair digit carry)
 
 ------------------------------------------------------------------------
 -- Addition modulo 3^n. Overflow beyond the highest retained trit is dropped.
@@ -107,9 +116,7 @@ leftInverse (zer ∷ xs) rewrite leftInverse xs = refl
 leftInverse (pos ∷ xs) rewrite leftInverse xs = refl
 
 ------------------------------------------------------------------------
--- Projection compatibility of finite addition is the exact inverse-system law.
--- This remains an explicit receipt because its proof requires a carry-locality
--- induction across the dropped highest digit.
+-- Remaining carry-locality laws.
 
 record TriadicArithmeticLawReceipt (n : Nat) : Set where
   field
@@ -122,21 +129,26 @@ record TriadicArithmeticLawReceipt (n : Nat) : Set where
       (x y : Q.Residue3Pow n) →
       addResidue x y ≡ addResidue y x
 
+    reductionCompatibility :
+      (x y : Q.Residue3Pow (suc n)) →
+      Q.reduce (addResidue x y)
+      ≡ addResidue (Q.reduce x) (Q.reduce y)
+
 open TriadicArithmeticLawReceipt public
 
 finiteAdditiveGroup :
   (n : Nat) →
   TriadicArithmeticLawReceipt n →
-  Irrep.FiniteAdditiveGroup n
+  FiniteAdditiveGroup n
 finiteAdditiveGroup n laws =
   record
-    { Irrep.zeroᵍ = zeroResidue n
-    ; Irrep._+ᵍ_ = addResidue
-    ; Irrep.negateᵍ = negateResidue
-    ; Irrep.leftIdentityᵍ = leftIdentity
-    ; Irrep.associativityᵍ = associativity laws
-    ; Irrep.leftInverseᵍ = leftInverse
-    ; Irrep.commutativeᵍ = commutative laws
+    { zeroᵍ = zeroResidue n
+    ; _+ᵍ_ = addResidue
+    ; negateᵍ = negateResidue
+    ; leftIdentityᵍ = leftIdentity
+    ; associativityᵍ = associativity laws
+    ; leftInverseᵍ = leftInverse
+    ; commutativeᵍ = commutative laws
     }
 
 ------------------------------------------------------------------------
