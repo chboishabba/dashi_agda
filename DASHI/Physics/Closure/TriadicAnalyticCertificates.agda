@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.TriadicAnalyticCertificates where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
@@ -74,7 +75,7 @@ record WeightedAxisSummabilityCertificate
     coordinateValue : Axis → Env.Scalar M
     coordinateMatchesEnvelope :
       (ω : Axis) →
-      Set
+      coordinateValue ω ≡ Env.embed E (signal ω)
 
     finiteWeightMassOrSignalDominatingBound : Set
     finiteSupportEnergy : Nat → Env.Scalar M
