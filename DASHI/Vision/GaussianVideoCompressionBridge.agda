@@ -5,10 +5,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Unit using (⊤)
 
 open import DASHI.Geometry.SpacetimeHistoryWorldTube
+  using (SpacetimeHistory)
 open import DASHI.Vision.Stereo4DDynamicReconstructionBridge
+  using (DynamicReconstruction)
 
 ------------------------------------------------------------------------
 -- Candidate-only GaussianVideo representation/compression bridge.
@@ -32,7 +34,7 @@ paperAuthors =
   "Inseo Lee" ∷ "Youngyoon Choi" ∷ "Joonseok Lee" ∷ []
 
 paperReference : String
-paperReference = "arXiv:2503.04333v1"
+paperReference = "arXiv:2503.04333v1 (2025)"
 
 data Never : Set where
 
@@ -95,7 +97,7 @@ record VideoFrameReceipt : Set where
     frameWidth : Nat
     frameHeight : Nat
     frameSource : String
-    frameIsGroundTruth : Bool
+    frameIsSourceFrame : Bool
 open VideoFrameReceipt public
 
 record Gaussian2DSeed : Set where
@@ -171,8 +173,8 @@ record GaussianVideoLossReceipt : Set where
     reconstructionTerm : Nat
     totalVariationTerm : Nat
     totalLoss : Nat
-    lossIsMetricProxy : Bool
-    lossIsMetricProxyIsTrue : lossIsMetricProxy ≡ true
+    lossIsOptimizationProxy : Bool
+    lossIsOptimizationProxyIsTrue : lossIsOptimizationProxy ≡ true
 open GaussianVideoLossReceipt public
 
 record GaussianVideoModelReceipt : Set where
@@ -200,7 +202,7 @@ record GaussianVideoEpisodeBridge : Set where
   constructor mkGaussianVideoEpisodeBridge
   field
     episodeHistory : SpacetimeHistory
-    episodeStereo4D : Stereo4DEpisodeReceipt
+    episodeDynamicReconstruction : DynamicReconstruction
     episodeVideoModel : GaussianVideoModelReceipt
     episodeLocalTimeStart : Nat
     episodeLocalTimeEnd : Nat
