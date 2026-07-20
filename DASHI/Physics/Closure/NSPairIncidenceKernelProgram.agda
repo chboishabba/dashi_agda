@@ -11,6 +11,7 @@ open import DASHI.Physics.Closure.NSWall1CanonicalPolarizations public
 open import DASHI.Physics.Closure.NSWall1RationalScalarInstance public
 open import DASHI.Physics.Closure.NSWall1RationalPolarizationProofs public
 open import DASHI.Physics.Closure.NSWall1CanonicalFiniteSchur public
+open import DASHI.Physics.Closure.NSWall1CanonicalPairIncidenceSchur public
 open import DASHI.Physics.Closure.NSWall1CanonicalResolventGap public
 open import DASHI.Physics.Closure.NSDivergenceFreePolarizationBasis public
 open import DASHI.Physics.Closure.NSPairIncidenceKernel public
