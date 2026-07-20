@@ -4,12 +4,16 @@ on:
   push:
     paths:
       - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
+      - 'DASHI/Physics/Closure/NSConcreteAubinLionsNonlinearLimitWitnesses.agda'
       - 'docs/ns_galerkin_compactness_limit.md'
+      - 'docs/ns_concrete_aubin_lions_nonlinear_limit.md'
       - '.github/workflows/ns-galerkin-compactness-limit.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda'
+      - 'DASHI/Physics/Closure/NSConcreteAubinLionsNonlinearLimitWitnesses.agda'
       - 'docs/ns_galerkin_compactness_limit.md'
+      - 'docs/ns_concrete_aubin_lions_nonlinear_limit.md'
       - '.github/workflows/ns-galerkin-compactness-limit.yml'
 
 concurrency:
@@ -33,7 +37,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: ns-galerkin-compactness-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-      - name: Check Galerkin compactness limit interface
+      - name: Check Galerkin compactness witness chain
         id: focused
         shell: bash
         run: |
@@ -46,7 +50,8 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-galerkin-compactness.log"
             export AGDA_JOBS=1
             scripts/run_agda29_parallel_check.sh \
-              DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda
+              DASHI/Physics/Closure/NSGalerkinCompactnessLimit.agda \
+              DASHI/Physics/Closure/NSConcreteAubinLionsNonlinearLimitWitnesses.agda
           ) > agda-galerkin-compactness.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
