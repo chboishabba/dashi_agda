@@ -13,7 +13,7 @@ open import DASHI.Geometry.Kahler using (KahlerAuthority)
 --
 -- We use the noncompact-compatible structural definition requested by the
 -- geometry promotion boundary: a complex manifold with holomorphic chart
--- transitions, Kähler data, c₁(T¹⁰M) = 0, and a nowhere-vanishing
+-- transitions, Kähler data, c₁(T^(1,0) M) = 0, and a nowhere-vanishing
 -- holomorphic top form.  Compactness, Ricci-flatness, and Yau's existence
 -- theorem are separate possible refinements and are not manufactured here.
 
