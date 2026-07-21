@@ -5,6 +5,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanConcreteFiniteBackgroundCutset
 import DASHI.Physics.YangMills.BalabanPatchTransferAnalyticReduction
+import DASHI.Physics.YangMills.BalabanClayAnalyticConcreteDefinitions
 import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanOneStepAllScaleAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanThermodynamicContinuumOSAnalyticInhabitation
