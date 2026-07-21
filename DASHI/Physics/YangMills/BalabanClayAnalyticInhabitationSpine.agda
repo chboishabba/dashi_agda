@@ -9,6 +9,11 @@ import DASHI.Physics.YangMills.BalabanExactPatchTransferCalculus
 import DASHI.Physics.YangMills.BalabanClayAnalyticConcreteDefinitions
 import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanFiniteFourierHodgeReduction
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Fourier
+import DASHI.Physics.YangMills.BalabanPeriodicDifferenceSymbols
+import DASHI.Physics.YangMills.BalabanPeriodicBlockSymbolGap
+import DASHI.Physics.YangMills.BalabanPeriodicFiniteFourierHodgeCertificate
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
 import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremAuthorities
@@ -25,6 +30,30 @@ import DASHI.Physics.YangMills.BalabanUnconditionalSolutionCertificate
 
 bulkFiniteBackgroundAssemblyLevel : ProofLevel
 bulkFiniteBackgroundAssemblyLevel = machineChecked
+
+periodicTorus4CarrierLevel : ProofLevel
+periodicTorus4CarrierLevel = machineChecked
+
+periodicFiniteFourierDefinitionLevel : ProofLevel
+periodicFiniteFourierDefinitionLevel = machineChecked
+
+periodicFiniteAbelianFourierAuthorityLevel : ProofLevel
+periodicFiniteAbelianFourierAuthorityLevel = standardImported
+
+periodicDifferenceDefinitionLevel : ProofLevel
+periodicDifferenceDefinitionLevel = machineChecked
+
+periodicDifferenceFourierAuthorityLevel : ProofLevel
+periodicDifferenceFourierAuthorityLevel = standardImported
+
+periodicConstraintRemovalAssemblyLevel : ProofLevel
+periodicConstraintRemovalAssemblyLevel = machineChecked
+
+periodicLocalBlockGapInputLevel : ProofLevel
+periodicLocalBlockGapInputLevel = conditional
+
+periodicFiniteFourierHodgeAdapterLevel : ProofLevel
+periodicFiniteFourierHodgeAdapterLevel = machineChecked
 
 finiteFourierHodgeReductionLevel : ProofLevel
 finiteFourierHodgeReductionLevel = machineChecked
