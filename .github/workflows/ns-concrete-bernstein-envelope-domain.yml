@@ -90,19 +90,24 @@ jobs:
           python scripts/ns_radius8_far_high_scan.py --output-json "$phase/far_high.json"
           python scripts/ns_near_triad_budget_scan.py --output-json "$phase/near.json"
           python scripts/ns_five_halves_falsification.py --output-json "$phase/five.json"
+          python scripts/ns_five_halves_galerkin_trajectory.py --output-json "$phase/trajectory.json"
           python scripts/ns_boundary_face_search.py --output-json "$phase/boundary.json"
+          python scripts/ns_boundary_face_galerkin_search.py --output-json "$phase/boundary_galerkin.json"
           python scripts/ns_adaptive_chart_coverage_scan.py --output-json "$phase/coverage.json"
           python scripts/check_ns_periodic_phase_receipts.py \
-            --inputs "$phase/boundary.json" "$phase/coverage.json" \
-              "$phase/far_high.json" "$phase/far_low.json" \
-              "$phase/full_operator.json" "$phase/five.json" "$phase/near.json" \
+            --inputs "$phase/boundary.json" "$phase/boundary_galerkin.json" \
+              "$phase/coverage.json" "$phase/far_high.json" "$phase/far_low.json" \
+              "$phase/full_operator.json" "$phase/five.json" \
+              "$phase/trajectory.json" "$phase/near.json" \
             --output-json "$phase/check.json"
           diff -u scripts/data/outputs/ns_radius8_far_low_exhaustive.json "$phase/far_low.json"
           diff -u scripts/data/outputs/ns_radius8_full_operator.json "$phase/full_operator.json"
           diff -u scripts/data/outputs/ns_radius8_far_high_scan.json "$phase/far_high.json"
           diff -u scripts/data/outputs/ns_near_triad_budget_scan.json "$phase/near.json"
           diff -u scripts/data/outputs/ns_five_halves_falsification.json "$phase/five.json"
+          diff -u scripts/data/outputs/ns_five_halves_galerkin_trajectory.json "$phase/trajectory.json"
           diff -u scripts/data/outputs/ns_boundary_face_search.json "$phase/boundary.json"
+          diff -u scripts/data/outputs/ns_boundary_face_galerkin_search.json "$phase/boundary_galerkin.json"
           diff -u scripts/data/outputs/ns_adaptive_chart_coverage_scan.json "$phase/coverage.json"
           diff -u scripts/data/outputs/check_ns_periodic_phase_receipts.json "$phase/check.json"
 
