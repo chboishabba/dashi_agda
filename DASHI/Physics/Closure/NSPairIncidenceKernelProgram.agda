@@ -55,4 +55,5 @@ open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
 -- flooding the existing public surface with overlapping projection names.
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision
 import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction
+import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction
 import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset
