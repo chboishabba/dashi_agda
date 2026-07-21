@@ -139,7 +139,7 @@ adaptiveChartOrDirectBKMMechanism :
   ∀ {i} {S : OfficialInitialDataSetting i} →
   AdaptiveChartOrDirectBKM S →
   UniversalReplacementMechanism S
-adaptiveChartOrDirectBKMMechanism C = record
+adaptiveChartOrDirectBKMMechanism {S = S} C = record
   { allOfficialDataHaveUniversalMechanism = close }
   where
   close : ∀ u₀ →
