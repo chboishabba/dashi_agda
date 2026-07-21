@@ -80,7 +80,7 @@ exactGammaCoerciveEndpoint :
   _≤_ A
     (_+_ A
       (gammaPotentialDerivative (gammaNearTail C) q τ)
-      (cStar (gammaNearTail C)))
+      (survivingMargin (gammaNearTail C) q τ))
     (_+_ A
       (gammaDissipation (gammaNearTail C) q τ)
       (gammaForcing (gammaNearTail C) q τ))
