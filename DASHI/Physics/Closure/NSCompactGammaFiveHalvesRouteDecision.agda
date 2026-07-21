@@ -20,13 +20,13 @@ record GeometricRemainderControl
     theta remainderConstant : Scalar A
     thetaStrict : StrictlyBelow M theta (one M)
 
-    compactGammaEnvelope : Index D → Time D → Scalar A
+    remainderEnvelope : Index D → Time D → Scalar A
     geometricMajorant : Index D → Time D → Nat → Scalar A
 
     geometricMajorantMeaning : ∀ q τ n →
       geometricMajorant q τ n ≡
       _*_ M remainderConstant
-        (_*_ M (power M theta n) (compactGammaEnvelope q τ))
+        (_*_ M (power M theta n) (remainderEnvelope q τ))
 
     highRemainderGeometric : ∀ q τ n →
       _≤_ A
@@ -144,12 +144,12 @@ record DirectWeightedFiveHalvesControl
     Index Time State Shell : Set
     selectedState : Index → Time → State
     weightedFiveHalvesShell : Shell → State → Scalar A
-    weightedShellSum compactGammaEnvelope : Index → Time → Scalar A
+    weightedShellSum directCompactGammaEnvelope : Index → Time → Scalar A
 
     periodicCompactGammaControlsFiveHalvesSum : ∀ q τ →
       _≤_ A
         (weightedShellSum q τ)
-        (compactGammaEnvelope q τ)
+        (directCompactGammaEnvelope q τ)
 
 open DirectWeightedFiveHalvesControl public
 
