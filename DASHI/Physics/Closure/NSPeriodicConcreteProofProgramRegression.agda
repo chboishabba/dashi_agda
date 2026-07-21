@@ -7,6 +7,7 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteDyadicPartition public
 open import DASHI.Physics.Closure.NSPeriodicConcreteNorms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma public
 open import DASHI.Physics.Closure.NSPeriodicConcreteTriadForms public
+open import DASHI.Physics.Closure.NSPeriodicConcreteRationalCertificate public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification public
 open import DASHI.Physics.Closure.NSPeriodicConcreteBoundaryBalance public
 open import DASHI.Physics.Closure.NSPeriodicConcreteAdaptiveChart public
@@ -29,6 +30,9 @@ highBudgetRegression = refl
 
 nearBudgetRegression : optimizedNearResidualCoefficient ≡ 64
 nearBudgetRegression = refl
+
+combinedTailRegression : combinedTailAtEight128 ≡ 9
+combinedTailRegression = refl
 
 fiveHalvesCounterexampleRegression :
   counterexampleAdjacentWeightedRatioSquared ≡ 33554432
