@@ -16,6 +16,7 @@ open import DASHI.Physics.Closure.NSCompactGammaAbstractAdmissibilityObstruction
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision as FiveHalves
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision as Absorption
+import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as RadiusEight
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
 import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas as Frontier
 
@@ -43,9 +44,11 @@ record ExactCompactGammaMathematicalCutset
     -- an explicit positive non-cubic source for the weighted rate.
     gammaRoute : Absorption.AbsorbedGammaRoute A Index
 
-    -- C/D: the actual normalized Fourier low/high constants must fit the exact
-    -- one-eighth budgets.  The arithmetic certificate alone is not sufficient.
-    radiusEightAnalyticBounds : RadiusEightAnalyticBounds
+    -- C/D: one coherent radius-eight Fourier owner supplies the multiplier,
+    -- commutator, Sobolev, geometric-series, paraproduct and normalized dyadic
+    -- bounds.  The finite arithmetic certificate is obtained from this owner.
+    radiusEightFourierReduction :
+      RadiusEight.RadiusEightFourierReduction A Index
 
     parameterNumerals : CanonicalParameterNumerals {i} A
     parameterInequalities :
@@ -152,16 +155,47 @@ exactBaseWeightedCoefficientDyadicMeaning :
 exactBaseWeightedCoefficientDyadicMeaning C =
   Absorption.baseWeightedCoefficientHasCertifiedDyadicMeaning (gammaRoute C)
 
+exactPeriodicFarLowCommutatorBound :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
+  ∀ q τ →
+  _≤_ A
+    (RadiusEight.farLowTail (radiusEightFourierReduction C) q τ)
+    (RadiusEight.farLowDisplayedBudget
+      (radiusEightFourierReduction C) q τ)
+exactPeriodicFarLowCommutatorBound C =
+  RadiusEight.periodicFarLowCommutatorBound
+    (radiusEightFourierReduction C)
+
+exactPeriodicFarHighTailBound :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
+  ∀ q τ →
+  _≤_ A
+    (RadiusEight.farHighTail (radiusEightFourierReduction C) q τ)
+    (RadiusEight.farHighDisplayedBudget
+      (radiusEightFourierReduction C) q τ)
+exactPeriodicFarHighTailBound C =
+  RadiusEight.periodicFarHighTailBound
+    (radiusEightFourierReduction C)
+
 exactRadiusEightLowTailFits :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
     {Index : Set i} {Official : OfficialInitialDataSetting i}
     {Time : Set t}
     {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
-  normalizedLowTailAtEight (radiusEightAnalyticBounds C)
+  RadiusEight.normalizedFarLowAtEight (radiusEightFourierReduction C)
     ≤ᴺ epsilonLowAtEight
 exactRadiusEightLowTailFits C =
-  low-fits-certified-budget (radiusEightAnalyticBounds C)
+  RadiusEight.normalizedFarLowAtEightFits
+    (radiusEightFourierReduction C)
 
 exactRadiusEightHighTailFits :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
@@ -169,10 +203,22 @@ exactRadiusEightHighTailFits :
     {Time : Set t}
     {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
-  normalizedHighTailAtEight (radiusEightAnalyticBounds C)
+  RadiusEight.normalizedFarHighAtEight (radiusEightFourierReduction C)
     ≤ᴺ epsilonHighAtEight
 exactRadiusEightHighTailFits C =
-  high-fits-certified-budget (radiusEightAnalyticBounds C)
+  RadiusEight.normalizedFarHighAtEightFits
+    (radiusEightFourierReduction C)
+
+exactRadiusEightAnalyticBounds :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  ExactCompactGammaMathematicalCutset A Index Official Time G →
+  RadiusEightAnalyticBounds
+exactRadiusEightAnalyticBounds C =
+  RadiusEight.periodicRadiusEightAnalyticBounds
+    (radiusEightFourierReduction C)
 
 exactCanonicalTupleFeasible :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
