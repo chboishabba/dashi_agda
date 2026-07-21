@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Fail-closed audit for the constructive Yang-Mills submission spine.
 
-This script checks repository integrity only.  It does not certify any analytic
-estimate.  Its purpose is to prevent a missing theorem name, proof escape, or
+This script checks repository integrity only. It does not certify any analytic
+estimate. Its purpose is to prevent a missing theorem name, proof escape, or
 manual Boolean promotion from silently presenting the current conditional spine
 as an unconditional solution.
 """
@@ -54,7 +54,12 @@ SOURCE_AUTHORITY_FILES = (
     YM / "BalabanPublishedSourceToDashi.agda",
 )
 
-AUDITED_NEW_FILES = SOURCE_AUTHORITY_FILES + (
+REDUCTION_AND_REGRESSION_FILES = (
+    YM / "BalabanFiniteFourierHodgeReduction.agda",
+    YM / "BalabanExactPublishedCarrierMatchingRegression.agda",
+)
+
+AUDITED_NEW_FILES = SOURCE_AUTHORITY_FILES + REDUCTION_AND_REGRESSION_FILES + (
     GATE,
     SPINE,
 )
@@ -93,6 +98,7 @@ def main() -> None:
         fail("manual true submission promotion detected")
 
     required_open_levels = {
+        "finiteFourierAndSymbolGapInputLevel": "conditional",
         "bulkFiniteBackgroundInputLevel": "conditional",
         "publishedCarrierMatchingLevel": "conditional",
         "patchTransferInputLevel": "conditional",
@@ -133,9 +139,21 @@ def main() -> None:
         if "ProofLevel" not in text:
             fail(f"missing proof-level boundary in {path.relative_to(ROOT)}")
 
+    regression = read(
+        YM / "BalabanExactPublishedCarrierMatchingRegression.agda"
+    )
+    for name in (
+        "propagatorBoundRegression",
+        "backgroundCriticalRegression",
+        "smallFieldRGRegression",
+    ):
+        if name not in regression:
+            fail(f"exact matching regression missing `{name}`")
+
     print("YM unconditional gate: PASS")
     print(f"  audited files: {len(AUDITED_NEW_FILES)}")
     print(f"  load-bearing theorem names present: {len(REQUIRED_THEOREMS)}")
+    print("  exact published-carrier regression present")
     print("  repository submission promotion remains false")
     print("  unresolved analytic levels remain explicit")
 
