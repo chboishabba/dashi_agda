@@ -1,0 +1,28 @@
+name: YM Clay analytic inhabitation
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - '.github/workflows/ym-clay-analytic-inhabitation.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Typecheck focused Yang-Mills aggregate
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda
+          '
