@@ -25,7 +25,6 @@ FORBIDDEN = {
     "non-terminating escape": re.compile(r"\{-#\s*NON_TERMINATING\s*#-\}"),
 }
 
-# Load-bearing endpoints from the shortest unconditional dependency chain.
 REQUIRED_THEOREMS = (
     "bulkGaugeFixedHodgePoincare",
     "uniformConstrainedHessianCoercive",
@@ -56,6 +55,7 @@ SOURCE_AUTHORITY_FILES = (
 
 REDUCTION_AND_REGRESSION_FILES = (
     YM / "BalabanFiniteFourierHodgeReduction.agda",
+    YM / "BalabanFiniteFourierHodgeReductionRegression.agda",
     YM / "BalabanExactPublishedCarrierMatchingRegression.agda",
 )
 
@@ -139,7 +139,7 @@ def main() -> None:
         if "ProofLevel" not in text:
             fail(f"missing proof-level boundary in {path.relative_to(ROOT)}")
 
-    regression = read(
+    matching_regression = read(
         YM / "BalabanExactPublishedCarrierMatchingRegression.agda"
     )
     for name in (
@@ -147,13 +147,21 @@ def main() -> None:
         "backgroundCriticalRegression",
         "smallFieldRGRegression",
     ):
-        if name not in regression:
+        if name not in matching_regression:
             fail(f"exact matching regression missing `{name}`")
+
+    hodge_regression = read(
+        YM / "BalabanFiniteFourierHodgeReductionRegression.agda"
+    )
+    for name in ("bulkHodgeRegression", "uniformHodgeRegression"):
+        if name not in hodge_regression:
+            fail(f"finite Fourier Hodge regression missing `{name}`")
 
     print("YM unconditional gate: PASS")
     print(f"  audited files: {len(AUDITED_NEW_FILES)}")
     print(f"  load-bearing theorem names present: {len(REQUIRED_THEOREMS)}")
     print("  exact published-carrier regression present")
+    print("  finite Fourier Hodge regression present")
     print("  repository submission promotion remains false")
     print("  unresolved analytic levels remain explicit")
 
