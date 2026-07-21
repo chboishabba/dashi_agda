@@ -124,6 +124,17 @@ exactBaseWeightedCoefficientProducesRate :
 exactBaseWeightedCoefficientProducesRate C =
   Absorption.baseWeightedCoefficientProducesRateExact (gammaRoute C)
 
+exactBaseWeightedCoefficientDyadicMeaning :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
+  Absorption.baseWeightedCoefficient (gammaRoute C) ≡
+  Absorption.interpretDyadic (gammaRoute C) baseWeightedCoefficient
+exactBaseWeightedCoefficientDyadicMeaning C =
+  Absorption.baseWeightedCoefficientHasCertifiedDyadicMeaning (gammaRoute C)
+
 exactRadiusEightLowTailFits :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
     {Index : Set i} {Official : OfficialInitialDataSetting i}
