@@ -1,16 +1,16 @@
 module DASHI.Physics.YangMills.BalabanPatchTransferAnalyticReduction where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPatchRegimeHodgeUniformity using
-  (PatchRegime; bulk; boundary; scaleInterface; corner; nestedRestriction)
+  (PatchRegime; boundary; scaleInterface; corner; nestedRestriction)
 
 ------------------------------------------------------------------------
--- A coherent reduction of the five finite-background patch regimes.
+-- Coherent bulk-to-patch reduction for the finite-background analytic lane.
 --
--- The analytic input is one bulk estimate together with bounded transfer
--- comparisons for the four non-bulk constructions.  The assembly below is
--- purely order-theoretic and contains no local postulates.
+-- Every patch index carries both a bulk reference quantity and its transferred
+-- patch quantity.  Thus the bulk theorem applies at the same index; the regime
+-- equality is needed only to select the appropriate transfer comparison.
 ------------------------------------------------------------------------
 
 record PatchTransferAnalyticInputs
@@ -23,11 +23,9 @@ record PatchTransferAnalyticInputs
       LessEqual left middle → LessEqual middle right → LessEqual left right
 
     scale : Bound → Bound → Bound
-    normSq : Index → State → Bound
-    inputNorm : Index → State → Bound
+    normSq inputNorm : Index → State → Bound
 
     bulkEnergy patchEnergy : Index → State → Bound
-
     bulkGreenNorm patchGreenNorm : Index → State → Bound
     bulkGradientGreenNorm patchGradientGreenNorm : Index → State → Bound
     bulkSecondGradientGreenNorm patchSecondGradientGreenNorm : Index → State → Bound
@@ -39,13 +37,8 @@ record PatchTransferAnalyticInputs
     CSecondBulk CSecondBoundary CSecondInterface CSecondCorner CSecondNested : Bound
     qBulk qBoundary qInterface qCorner qNested qCommon one : Bound
 
-    bulkCoercive : ∀ index state → regime index ≡ bulk →
+    bulkCoercive : ∀ index state →
       LessEqual (scale cBulk (normSq index state)) (bulkEnergy index state)
-
-    boundaryConstantBelowBulk : LessEqual cBoundary cBulk
-    interfaceConstantBelowBulk : LessEqual cInterface cBulk
-    cornerConstantBelowBulk : LessEqual cCorner cBulk
-    nestedConstantBelowBulk : LessEqual cNested cBulk
 
     boundaryScaledConstantBelowBulk : ∀ index state →
       LessEqual (scale cBoundary (normSq index state))
@@ -146,19 +139,12 @@ record PatchTransferAnalyticInputs
       LessEqual (scale qBulk (inputNorm index state))
                 (scale qNested (inputNorm index state))
 
-    eachResidualBelowCommon :
-      LessEqual qBulk qCommon ×
-      LessEqual qBoundary qCommon ×
-      LessEqual qInterface qCommon ×
-      LessEqual qCorner qCommon ×
-      LessEqual qNested qCommon
+    qBulkBelowCommon : LessEqual qBulk qCommon
+    qBoundaryBelowCommon : LessEqual qBoundary qCommon
+    qInterfaceBelowCommon : LessEqual qInterface qCommon
+    qCornerBelowCommon : LessEqual qCorner qCommon
+    qNestedBelowCommon : LessEqual qNested qCommon
     qCommonStrict : StrictLess qCommon one
-
-  infixr 4 _×_
-  record _×_ (A B : Set) : Set where
-    constructor _,_
-    field fst : A
-          snd : B
 
 open PatchTransferAnalyticInputs public
 
@@ -169,12 +155,10 @@ private
       {index state c} →
       LessEqual d (scale d c (normSq d index state))
                   (scale d (cBulk d) (normSq d index state)) →
-      LessEqual d (scale d (cBulk d) (normSq d index state))
-                  (bulkEnergy d index state) →
       LessEqual d (bulkEnergy d index state) (patchEnergy d index state) →
       LessEqual d (scale d c (normSq d index state)) (patchEnergy d index state)
-  hodgeChain d c≤bulk bulk≤energy energy≤patch =
-    transitive d c≤bulk (transitive d bulk≤energy energy≤patch)
+  hodgeChain d c≤bulk energy≤patch =
+    transitive d c≤bulk (transitive d (bulkCoercive d _ _) energy≤patch)
 
   operatorChain :
     ∀ {Index State Bound}
@@ -193,108 +177,192 @@ boundaryHodgeFromBulk :
     index state → regime d index ≡ boundary →
   LessEqual d (scale d (cBoundary d) (normSq d index state))
               (patchEnergy d index state)
-boundaryHodgeFromBulk d index state patch =
-  hodgeChain d
-    (boundaryScaledConstantBelowBulk d index state)
-    (bulkCoercive d index state refl)
-    (boundaryEnergyComparedToBulk d index state patch)
+boundaryHodgeFromBulk d index state patch = hodgeChain d
+  (boundaryScaledConstantBelowBulk d index state)
+  (boundaryEnergyComparedToBulk d index state patch)
 
 interfaceHodgeFromBulk :
   ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
     index state → regime d index ≡ scaleInterface →
   LessEqual d (scale d (cInterface d) (normSq d index state))
               (patchEnergy d index state)
-interfaceHodgeFromBulk d index state patch =
-  hodgeChain d
-    (interfaceScaledConstantBelowBulk d index state)
-    (bulkCoercive d index state refl)
-    (interfaceEnergyComparedToBulk d index state patch)
+interfaceHodgeFromBulk d index state patch = hodgeChain d
+  (interfaceScaledConstantBelowBulk d index state)
+  (interfaceEnergyComparedToBulk d index state patch)
 
 cornerHodgeFromBulk :
   ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
     index state → regime d index ≡ corner →
   LessEqual d (scale d (cCorner d) (normSq d index state))
               (patchEnergy d index state)
-cornerHodgeFromBulk d index state patch =
-  hodgeChain d
-    (cornerScaledConstantBelowBulk d index state)
-    (bulkCoercive d index state refl)
-    (cornerEnergyComparedToBulk d index state patch)
+cornerHodgeFromBulk d index state patch = hodgeChain d
+  (cornerScaledConstantBelowBulk d index state)
+  (cornerEnergyComparedToBulk d index state patch)
 
 nestedHodgeFromBulk :
   ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
     index state → regime d index ≡ nestedRestriction →
   LessEqual d (scale d (cNested d) (normSq d index state))
               (patchEnergy d index state)
-nestedHodgeFromBulk d index state patch =
-  hodgeChain d
-    (nestedScaledConstantBelowBulk d index state)
-    (bulkCoercive d index state refl)
-    (nestedEnergyComparedToBulk d index state patch)
+nestedHodgeFromBulk d index state patch = hodgeChain d
+  (nestedScaledConstantBelowBulk d index state)
+  (nestedEnergyComparedToBulk d index state patch)
 
+boundaryGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGreenNorm d index state)
+              (scale d (CGBoundary d) (inputNorm d index state))
 boundaryGreenFromBulk d index state = operatorChain d
   (patchGreenControlledByBulk d index state)
   (bulkWeightedGreenBound d index state)
   (bulkGreenConstantBelowBoundary d index state)
+
+interfaceGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGreenNorm d index state)
+              (scale d (CGInterface d) (inputNorm d index state))
 interfaceGreenFromBulk d index state = operatorChain d
   (patchGreenControlledByBulk d index state)
   (bulkWeightedGreenBound d index state)
   (bulkGreenConstantBelowInterface d index state)
+
+cornerGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGreenNorm d index state)
+              (scale d (CGCorner d) (inputNorm d index state))
 cornerGreenFromBulk d index state = operatorChain d
   (patchGreenControlledByBulk d index state)
   (bulkWeightedGreenBound d index state)
   (bulkGreenConstantBelowCorner d index state)
+
+nestedGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGreenNorm d index state)
+              (scale d (CGNested d) (inputNorm d index state))
 nestedGreenFromBulk d index state = operatorChain d
   (patchGreenControlledByBulk d index state)
   (bulkWeightedGreenBound d index state)
   (bulkGreenConstantBelowNested d index state)
 
+boundaryGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGradientGreenNorm d index state)
+              (scale d (CGradBoundary d) (inputNorm d index state))
 boundaryGradientGreenFromBulk d index state = operatorChain d
   (patchGradientGreenControlledByBulk d index state)
   (bulkWeightedGradientGreenBound d index state)
   (bulkGradientConstantBelowBoundary d index state)
+
+interfaceGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGradientGreenNorm d index state)
+              (scale d (CGradInterface d) (inputNorm d index state))
 interfaceGradientGreenFromBulk d index state = operatorChain d
   (patchGradientGreenControlledByBulk d index state)
   (bulkWeightedGradientGreenBound d index state)
   (bulkGradientConstantBelowInterface d index state)
+
+cornerGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGradientGreenNorm d index state)
+              (scale d (CGradCorner d) (inputNorm d index state))
 cornerGradientGreenFromBulk d index state = operatorChain d
   (patchGradientGreenControlledByBulk d index state)
   (bulkWeightedGradientGreenBound d index state)
   (bulkGradientConstantBelowCorner d index state)
+
+nestedGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchGradientGreenNorm d index state)
+              (scale d (CGradNested d) (inputNorm d index state))
 nestedGradientGreenFromBulk d index state = operatorChain d
   (patchGradientGreenControlledByBulk d index state)
   (bulkWeightedGradientGreenBound d index state)
   (bulkGradientConstantBelowNested d index state)
 
+boundarySecondGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchSecondGradientGreenNorm d index state)
+              (scale d (CSecondBoundary d) (inputNorm d index state))
 boundarySecondGradientGreenFromBulk d index state = operatorChain d
   (patchSecondGradientGreenControlledByBulk d index state)
   (bulkWeightedSecondGradientGreenBound d index state)
   (bulkSecondConstantBelowBoundary d index state)
+
+interfaceSecondGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchSecondGradientGreenNorm d index state)
+              (scale d (CSecondInterface d) (inputNorm d index state))
 interfaceSecondGradientGreenFromBulk d index state = operatorChain d
   (patchSecondGradientGreenControlledByBulk d index state)
   (bulkWeightedSecondGradientGreenBound d index state)
   (bulkSecondConstantBelowInterface d index state)
+
+cornerSecondGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchSecondGradientGreenNorm d index state)
+              (scale d (CSecondCorner d) (inputNorm d index state))
 cornerSecondGradientGreenFromBulk d index state = operatorChain d
   (patchSecondGradientGreenControlledByBulk d index state)
   (bulkWeightedSecondGradientGreenBound d index state)
   (bulkSecondConstantBelowCorner d index state)
+
+nestedSecondGradientGreenFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchSecondGradientGreenNorm d index state)
+              (scale d (CSecondNested d) (inputNorm d index state))
 nestedSecondGradientGreenFromBulk d index state = operatorChain d
   (patchSecondGradientGreenControlledByBulk d index state)
   (bulkWeightedSecondGradientGreenBound d index state)
   (bulkSecondConstantBelowNested d index state)
 
+boundaryResidualFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchResidualNorm d index state)
+              (scale d (qBoundary d) (inputNorm d index state))
 boundaryResidualFromBulk d index state = operatorChain d
   (patchResidualControlledByBulk d index state)
   (bulkWeightedResidualBound d index state)
   (bulkResidualConstantBelowBoundary d index state)
+
+interfaceResidualFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchResidualNorm d index state)
+              (scale d (qInterface d) (inputNorm d index state))
 interfaceResidualFromBulk d index state = operatorChain d
   (patchResidualControlledByBulk d index state)
   (bulkWeightedResidualBound d index state)
   (bulkResidualConstantBelowInterface d index state)
+
+cornerResidualFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchResidualNorm d index state)
+              (scale d (qCorner d) (inputNorm d index state))
 cornerResidualFromBulk d index state = operatorChain d
   (patchResidualControlledByBulk d index state)
   (bulkWeightedResidualBound d index state)
   (bulkResidualConstantBelowCorner d index state)
+
+nestedResidualFromBulk :
+  ∀ {Index State Bound} (d : PatchTransferAnalyticInputs Index State Bound)
+    index state →
+  LessEqual d (patchResidualNorm d index state)
+              (scale d (qNested d) (inputNorm d index state))
 nestedResidualFromBulk d index state = operatorChain d
   (patchResidualControlledByBulk d index state)
   (bulkWeightedResidualBound d index state)
