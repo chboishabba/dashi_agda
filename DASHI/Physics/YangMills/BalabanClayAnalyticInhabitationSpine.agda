@@ -10,9 +10,11 @@ import DASHI.Physics.YangMills.BalabanClayAnalyticConcreteDefinitions
 import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
+import DASHI.Physics.YangMills.BalabanExactPublishedCarrierMatching
 import DASHI.Physics.YangMills.BalabanOneStepAllScaleAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanThermodynamicContinuumOSAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanUniformPhysicalMassGapAnalyticInhabitation
+import DASHI.Physics.YangMills.BalabanUnconditionalSolutionCertificate
 
 ------------------------------------------------------------------------
 -- One fail-closed status ledger for the complete attached mathematical cutset.
@@ -29,6 +31,9 @@ publishedPropagatorAndVariationalTheoremsLevel = standardImported
 
 publishedCarrierAdapterLevel : ProofLevel
 publishedCarrierAdapterLevel = machineChecked
+
+exactPublishedCarrierAdapterLevel : ProofLevel
+exactPublishedCarrierAdapterLevel = machineChecked
 
 publishedCarrierMatchingLevel : ProofLevel
 publishedCarrierMatchingLevel = conditional
@@ -63,5 +68,14 @@ physicalMassGapAssemblyLevel = machineChecked
 physicalMassGapInputLevel : ProofLevel
 physicalMassGapInputLevel = conjectural
 
+unconditionalSolutionGateLevel : ProofLevel
+unconditionalSolutionGateLevel = machineChecked
+
+unconditionalSolutionInhabitationLevel : ProofLevel
+unconditionalSolutionInhabitationLevel = conjectural
+
+-- The nullary repository status remains false.  The separate proof-relevant
+-- `clayYangMillsSubmissionPromotion` function can return true only after an
+-- `UnconditionalYangMillsSolution` value has actually been constructed.
 clayYangMillsSubmissionPromoted : Bool
 clayYangMillsSubmissionPromoted = false
