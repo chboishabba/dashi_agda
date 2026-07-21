@@ -12,8 +12,9 @@ import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as Radius
 import DASHI.Physics.Closure.NSCompactGammaFiveHalvesSummationReduction as Summation
 import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization as Young
 import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction as Tail
-import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction as Coverage
 import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction as Dini
+import DASHI.Physics.Closure.NSPeriodicContinuationAuthorityAdapter as Continuation
+import DASHI.Physics.Closure.NSCompactGammaCoverageFromContinuationAuthority as Coverage
 
 ------------------------------------------------------------------------
 -- One owner for the six universal packages after the finite certificate.
@@ -24,11 +25,8 @@ import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction as Dini
 --   2. cutoff-uniform Fourier product bounds plus one generic Young law;
 --   3/4. primitive far-low/far-high chains;
 --   5. semantic real-carrier parameter interpretation plus concrete Dini data;
---   6. adaptive-chart-or-direct-BKM official coverage.
---
--- All algebraic, summation, transitivity, Young-composition, no-first-exit and
--- coverage-case assembly is proved below.  Supplying the fields in the concrete
--- periodic carrier remains the genuine PDE work.
+--   6. standard zero/small/diffuse continuation plus the novel exhaustive
+--      Gamma-depletion/adaptive-chart classification.
 ------------------------------------------------------------------------
 
 record IndexedFiveHalvesUniversal
@@ -119,7 +117,11 @@ record UniversalPeriodicFourierTailInputs
     realCarrier :
       RealCarrierInwardCoercivePackage A Index radiusEight
 
-    officialCoverage : Coverage.AdaptiveChartOrDirectBKM S
+    continuationAuthority :
+      Continuation.SelectedPeriodicContinuationAuthority S
+
+    novelCoverage :
+      Coverage.NovelCoverageInputs S continuationAuthority
 
 open UniversalPeriodicFourierTailInputs public
 
@@ -195,9 +197,9 @@ universalOfficialCoverageEndpoint :
   UniversalPeriodicFourierTailInputs A Index S →
   UniversalReplacementMechanism S
 universalOfficialCoverageEndpoint U =
-  Coverage.adaptiveChartOrDirectBKMMechanism (officialCoverage U)
+  Coverage.coverageFromStandardContinuationAndNovelInputs
+    (novelCoverage U)
 
--- The owner and its projection theorems do not provide a concrete inhabitant.
 universalTailInputsInhabitedInOfficialPeriodicCarrier : Bool
 universalTailInputsInhabitedInOfficialPeriodicCarrier = false
 
