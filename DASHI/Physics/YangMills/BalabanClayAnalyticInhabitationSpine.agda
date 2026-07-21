@@ -10,7 +10,9 @@ import DASHI.Physics.YangMills.BalabanClayAnalyticConcreteDefinitions
 import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
+import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremAuthorities
 import DASHI.Physics.YangMills.BalabanExactPublishedCarrierMatching
+import DASHI.Physics.YangMills.BalabanPublishedSourceToDashi
 import DASHI.Physics.YangMills.BalabanOneStepAllScaleAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanThermodynamicContinuumOSAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanUniformPhysicalMassGapAnalyticInhabitation
@@ -29,11 +31,20 @@ bulkFiniteBackgroundInputLevel = conditional
 publishedPropagatorAndVariationalTheoremsLevel : ProofLevel
 publishedPropagatorAndVariationalTheoremsLevel = standardImported
 
+publishedSourceTheoremStatementLevel : ProofLevel
+publishedSourceTheoremStatementLevel = standardImported
+
+publishedSourceAuthorityConversionLevel : ProofLevel
+publishedSourceAuthorityConversionLevel = machineChecked
+
 publishedCarrierAdapterLevel : ProofLevel
 publishedCarrierAdapterLevel = machineChecked
 
 exactPublishedCarrierAdapterLevel : ProofLevel
 exactPublishedCarrierAdapterLevel = machineChecked
+
+publishedSourceToDashiAdapterLevel : ProofLevel
+publishedSourceToDashiAdapterLevel = machineChecked
 
 publishedCarrierMatchingLevel : ProofLevel
 publishedCarrierMatchingLevel = conditional
@@ -74,7 +85,7 @@ unconditionalSolutionGateLevel = machineChecked
 unconditionalSolutionInhabitationLevel : ProofLevel
 unconditionalSolutionInhabitationLevel = conjectural
 
--- The nullary repository status remains false.  The separate proof-relevant
+-- The nullary repository status remains false. The separate proof-relevant
 -- `clayYangMillsSubmissionPromotion` function can return true only after an
 -- `UnconditionalYangMillsSolution` value has actually been constructed.
 clayYangMillsSubmissionPromoted : Bool
