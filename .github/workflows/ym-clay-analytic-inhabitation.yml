@@ -10,7 +10,9 @@ on:
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
@@ -25,7 +27,9 @@ on:
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
@@ -42,12 +46,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
+      - name: Typecheck source-faithful published theorem boundary
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda
+          '
       - name: Typecheck exact published carrier matching
         run: |
           nix develop --accept-flake-config --command bash -lc '
             set -euo pipefail
             agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
               DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda
+          '
+      - name: Typecheck source-to-DASHI composition
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda
           '
       - name: Typecheck unconditional solution gate
         run: |
