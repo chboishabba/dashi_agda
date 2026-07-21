@@ -46,6 +46,31 @@ record ReflexiveOrderExtension (A : AbsorptionArithmetic) : Set₁ where
 open ReflexiveOrderExtension public
 
 ------------------------------------------------------------------------
+-- Explicit finite geometric convolution
+--
+--   r(n-1) + rho r(n-2) + ... + rho^(n-1) r(0).
+------------------------------------------------------------------------
+
+weightedGeometricRemainder :
+  ∀ {A : AbsorptionArithmetic} →
+  OrderedSemiringExtension A →
+  Scalar A → (Nat → Scalar A) → Nat → Scalar A
+weightedGeometricRemainder {A} M rho r zero = zero A
+weightedGeometricRemainder {A} M rho r (suc n) =
+  _+_ A
+    (_*_ M rho (weightedGeometricRemainder M rho r n))
+    (r n)
+
+geometricClosedForm :
+  ∀ {A : AbsorptionArithmetic} →
+  (M : OrderedSemiringExtension A) →
+  Scalar A → Scalar A → (Nat → Scalar A) → Nat → Scalar A
+geometricClosedForm {A} M rho envelope r n =
+  _+_ A
+    (_*_ M (power M rho n) envelope)
+    (weightedGeometricRemainder M rho r n)
+
+------------------------------------------------------------------------
 -- SD5. Exact multiplicative iteration.
 ------------------------------------------------------------------------
 
@@ -69,6 +94,12 @@ record GeometricRecurrence
     closedStep : ∀ n →
       closedBound (suc n) ≡
       _+_ A (_*_ M rho (closedBound n)) (remainder n)
+
+    -- The concrete scalar instance proves that the recurrence above is exactly
+    -- the usual rho^n initial term plus the finite weighted remainder sum.
+    closedFormIdentity : ∀ n →
+      closedBound n ≡
+      geometricClosedForm M rho envelope remainder n
 
 open GeometricRecurrence public
 
@@ -96,6 +127,21 @@ iterateAdjacentGeometricDecay {A} {M} O R (suc n) =
         (multiplicationMonotoneLeft M (rho R)
           (iterateAdjacentGeometricDecay O R n))
         (reflexive O (remainder R n))))
+
+iterateAdjacentGeometricDecayExplicit :
+  ∀ {A : AbsorptionArithmetic}
+    {M : OrderedSemiringExtension A} →
+  ReflexiveOrderExtension A →
+  (R : GeometricRecurrence A M) →
+  ∀ n →
+  _≤_ A
+    (value R n)
+    (geometricClosedForm M (rho R) (envelope R) (remainder R) n)
+iterateAdjacentGeometricDecayExplicit {A} {M} O R n =
+  subst
+    (λ upper → _≤_ A (value R n) upper)
+    (closedFormIdentity R n)
+    (iterateAdjacentGeometricDecay O R n)
 
 ------------------------------------------------------------------------
 -- SD1--SD4: exact Fourier-shell producer obligations.
