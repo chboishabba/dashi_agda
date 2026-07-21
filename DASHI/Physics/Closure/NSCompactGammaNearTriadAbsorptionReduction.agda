@@ -2,9 +2,11 @@ module DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision as Route
+import DASHI.Physics.Closure.NSCompactGammaConcreteDyadicScalarCertificate as Dyadic
 
 ------------------------------------------------------------------------
 -- Exact reduction of the viable near-triad target
@@ -162,4 +164,58 @@ paraproductReductionToDissipativeAbsorption P S = record
   ; farTailPayment = farTailPayment S
   ; nearTriadAbsorptionEstimate = youngAbsorbsNearTriad P
   ; rawAbsorbedNearTailInequality = rawAbsorbedNearTailInequality S
+  }
+
+------------------------------------------------------------------------
+-- Coherent official owner: paraproduct leaves, Route-B skeleton, positive base
+-- coefficient and exact dyadic interpretation are selected together.
+------------------------------------------------------------------------
+
+record ConcreteAbsorbedGammaRoute
+    {i : Level}
+    (A : AbsorptionArithmetic)
+    (Index : Set i) : Set (lsuc i) where
+  field
+    paraproduct : NearTriadParaproductReduction A Index
+    skeleton : NearTriadRouteSkeleton A Index paraproduct
+
+    _·_ : Scalar A → Scalar A → Scalar A
+    interpretDyadic : Nat → Scalar A
+    baseWeightedCoefficient : Scalar A
+    Positive : Scalar A → Set i
+    positiveDissipativeTerm :
+      Index → Time paraproduct → Scalar A
+
+    baseWeightedCoefficientMeaning :
+      baseWeightedCoefficient ≡
+      interpretDyadic Dyadic.baseWeightedCoefficient
+
+    baseWeightedCoefficientPositive :
+      Positive baseWeightedCoefficient
+
+    baseWeightedCoefficientProducesRate : ∀ q τ →
+      _≤_ A
+        (_·_ baseWeightedCoefficient
+          (weightedFiveHalvesRate skeleton q τ))
+        (positiveDissipativeTerm q τ)
+
+open ConcreteAbsorbedGammaRoute public
+
+concreteAbsorbedGammaRoute :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
+  ConcreteAbsorbedGammaRoute A Index →
+  Route.AbsorbedGammaRoute A Index
+concreteAbsorbedGammaRoute C = record
+  { absorption =
+      paraproductReductionToDissipativeAbsorption
+        (paraproduct C) (skeleton C)
+  ; _·_ = _·_ C
+  ; interpretDyadic = interpretDyadic C
+  ; baseWeightedCoefficient = baseWeightedCoefficient C
+  ; Positive = Positive C
+  ; positiveDissipativeTerm = positiveDissipativeTerm C
+  ; baseWeightedCoefficientMeaning = baseWeightedCoefficientMeaning C
+  ; baseWeightedCoefficientPositive = baseWeightedCoefficientPositive C
+  ; baseWeightedCoefficientProducesRate =
+      baseWeightedCoefficientProducesRate C
   }
