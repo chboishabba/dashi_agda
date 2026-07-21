@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "all_four_not_promoted": true,
+    "boundary_digest": true,
+    "boundary_promotions_false": true,
+    "gamma_sample_inward": true,
+    "off_packet_sample_inward": true,
+    "packet_floor_refuted_on_all_samples": true,
+    "size_sample_inward": true,
+    "trajectory_digest": true,
+    "trajectory_energy_decay": true,
+    "trajectory_integrals_finite": true,
+    "trajectory_promotions_false": true
+  },
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "schema": "check_ns_galerkin_falsifications.v1"
+}
