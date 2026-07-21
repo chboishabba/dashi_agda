@@ -8,6 +8,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
@@ -26,6 +27,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
@@ -50,6 +52,13 @@ jobs:
       - name: Audit fail-closed theorem and status surface
         run: python3 scripts/check_ym_unconditional_gate.py
       - uses: DeterminateSystems/nix-installer-action@main
+      - name: Typecheck finite Fourier Hodge reduction
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda
+          '
       - name: Typecheck source-faithful published theorem boundary
         run: |
           nix develop --accept-flake-config --command bash -lc '
