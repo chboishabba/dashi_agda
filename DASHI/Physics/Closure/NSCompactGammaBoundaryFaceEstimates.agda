@@ -128,8 +128,10 @@ ledgerDerivativeStrictlyPositive :
     {StrictlyPositive : Scalar → Set} {value : Scalar} →
   BoundarySourceLossLedger A StrictlyPositive value →
   StrictlyPositive value
-ledgerDerivativeStrictlyPositive L =
-  subst _ (sym (derivativeIsSourceMinusLosses L)) (strictRemainder L)
+ledgerDerivativeStrictlyPositive {StrictlyPositive = StrictlyPositive} L =
+  subst StrictlyPositive
+    (sym (derivativeIsSourceMinusLosses L))
+    (strictRemainder L)
 
 record ConcreteBoundaryLedgerBundle
     {Time Scalar : Set}
