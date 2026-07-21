@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Finite constrained Galerkin search on all four compact-Gamma faces."""
+"""Finite constrained Galerkin searches on original and normalized faces."""
 from __future__ import annotations
 
 import argparse
@@ -22,7 +22,7 @@ from ns_periodic_galerkin_core import (
     rhs,
 )
 
-SCHEMA = "ns_boundary_face_galerkin_search.v1"
+SCHEMA = "ns_boundary_face_galerkin_search.v2"
 
 
 def digest(payload: Any) -> str:
@@ -73,6 +73,16 @@ def face_state(g, seed: int, face: str) -> np.ndarray:
     if face == "packet_energy_floor":
         packet = packet_metrics(g, u, K)["packet"]
         return rescale_mask(g, u, all_mask, np.sqrt(0.5 / packet))
+    if face == "packet_fraction_floor":
+        return bisect_factor(
+            g,
+            u,
+            outside_mask,
+            lambda x: packet_metrics(g, x, K)["packet"]
+            / packet_metrics(g, x, K)["total"],
+            0.75,
+            increasing=False,
+        )
     if face == "off_packet_ceiling":
         return bisect_factor(
             g,
@@ -95,6 +105,13 @@ def inward_derivative(g, u: np.ndarray, face: str) -> tuple[float, dict[str, flo
         value = metrics["gamma_derivative"]
     elif face == "packet_energy_floor":
         value = metrics["packet_derivative"]
+    elif face == "packet_fraction_floor":
+        total = metrics["total"]
+        packet = metrics["packet"]
+        value = (
+            metrics["packet_derivative"] * total
+            - packet * metrics["total_derivative"]
+        ) / (total * total)
     elif face == "off_packet_ceiling":
         value = -metrics["off_derivative"]
     elif face == "size_ceiling":
@@ -106,8 +123,15 @@ def inward_derivative(g, u: np.ndarray, face: str) -> tuple[float, dict[str, flo
 
 def build(samples: int = 16) -> dict[str, Any]:
     g = make_geometry(3, max_shell=2)
+    face_names = (
+        "gamma_floor",
+        "packet_energy_floor",
+        "packet_fraction_floor",
+        "off_packet_ceiling",
+        "size_ceiling",
+    )
     faces: dict[str, Any] = {}
-    for face in ("gamma_floor", "packet_energy_floor", "off_packet_ceiling", "size_ceiling"):
+    for face in face_names:
         values: list[float] = []
         witnesses: list[dict[str, Any]] = []
         for n in range(samples):
@@ -121,6 +145,7 @@ def build(samples: int = 16) -> dict[str, Any]:
                     "inward_derivative": fmt(inward),
                     "gamma": fmt(metrics["gamma"]),
                     "packet": fmt(metrics["packet"]),
+                    "packet_fraction": fmt(metrics["packet"] / metrics["total"]),
                     "off": fmt(metrics["off"]),
                     "total": fmt(metrics["total"]),
                     "h1_squared": fmt(h1_squared(g, u)),
@@ -136,6 +161,12 @@ def build(samples: int = 16) -> dict[str, Any]:
             "worst_witness": witnesses[worst_index],
         }
 
+    corrected = (
+        faces["gamma_floor"],
+        faces["packet_fraction_floor"],
+        faces["off_packet_ceiling"],
+        faces["size_ceiling"],
+    )
     payload: dict[str, Any] = {
         "schema": SCHEMA,
         "authority": "finite_deterministic_constrained_Galerkin_face_search_only",
@@ -144,11 +175,18 @@ def build(samples: int = 16) -> dict[str, Any]:
         "targets": {
             "gamma_floor": fmt(0.5),
             "packet_energy_floor": fmt(0.5),
+            "packet_fraction_floor": fmt(0.75),
             "off_packet_ceiling": fmt(0.25),
             "size_squared_ceiling": fmt(10.0),
         },
         "faces": faces,
-        "all_four_strict_on_sample": all(face["strict_inward_on_sample"] for face in faces.values()),
+        "original_absolute_floor_route_strict_on_sample": all(
+            faces[name]["strict_inward_on_sample"]
+            for name in ("gamma_floor", "packet_energy_floor", "off_packet_ceiling", "size_ceiling")
+        ),
+        "corrected_normalized_route_strict_on_sample": all(
+            face["strict_inward_on_sample"] for face in corrected
+        ),
         "promotion": {
             "finite_search_is_proof": False,
             "strict_Dini_inwardness": False,
