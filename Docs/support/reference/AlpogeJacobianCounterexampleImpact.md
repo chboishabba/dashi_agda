@@ -8,116 +8,225 @@ for asking about the problem and **Fable** for producing the example. DASHI
 attributes the public mathematical announcement to Alpöge and makes no claim of
 discovery priority.
 
+`DASHI.Provenance.AIAssistedMathematicsProvenance` separates the roles of
+question source, prompting agent, generation system, public announcer,
+executable verifier, independent verifier, kernel formaliser, and downstream
+consequence author. These roles must not be collapsed into a single discovery
+label.
+
 ## Checked content
 
-The executable exact-arithmetic diagnostic
+The independent executable exact-arithmetic diagnostic
 `scripts/check_jacobian_noninjective_example.py` verifies:
 
 1. the displayed map is polynomial in three variables;
 2. its Jacobian determinant is identically `-2`;
 3. three distinct rational points map to `(-1/4, 0, 0)`.
 
-`Verification/JacobianNoninjectiveRegression.agda` now kernel-checks the general
-logical step that an unequal pair with equal image refutes injectivity. The
-large polynomial expansion is still performed by the exact executable checker,
-not by an Agda polynomial normaliser.
+`Verification.JacobianCounterexampleKernel` now supplies a second, Agda-kernel
+lane:
+
+- an exact three-variable polynomial syntax;
+- recursive symbolic differentiation;
+- an exact `3 x 3` determinant expression;
+- rational ring normalization of `det DF = -2`;
+- exact rational definitions of all three source points and their common image;
+- the generic theorem that a collision of unequal inputs refutes injectivity;
+- an explicit `KellerMap3` package;
+- a refutation of the dimension-three statement formulated over that package;
+- identity-coordinate padding over an arbitrary finite tail.
+
+The Python regression and the Agda proof are deliberately retained as separate
+verification paths.
 
 ## Mathematical consequence
 
-Taken together, the checks give a non-injective polynomial map
-`C^3 -> C^3` with nonzero constant Jacobian determinant. This refutes the
-general Jacobian conjecture in dimension 3. Appending untouched coordinates
-gives the corresponding consequence in every dimension at least 3.
+The checked map is a non-injective polynomial map `C^3 -> C^3` with nonzero
+constant Jacobian determinant. It refutes the general Jacobian conjecture in
+dimension 3. Appending untouched coordinates transports the counterexample to
+every dimension at least 3.
 
-This does **not** settle the dimension-2 case.
+The three-variable construction does **not** settle the separate dimension-2
+case. Historical status metadata is source-dated and is not used as a kernel
+proof object.
 
-## Effect on DASHI
+## Evidence-gated promotion
 
-The result changes the status of content that treats the unrestricted Jacobian
-conjecture in dimensions at least 3 as an open target, plausible global
-principle, or safe inverse-function heuristic. Such content must instead use
-one of the following narrower statements:
+This example is the reference case for the governance sequence
 
-- local invertibility from a nonzero Jacobian determinant;
-- a dimension-2-specific conjectural statement;
-- a globally injective/proper/birational hypothesis stated independently;
-- a restricted polynomial class for which global invertibility is separately
-  proved.
+```text
+proposal
+  -> independent exact executable check
+  -> provenance record
+  -> kernel polynomial theorem
+  -> kernel logical consequence
+  -> promoted mathematical status
+```
 
-The counterexample does not automatically alter unrelated DASHI results in
-analysis, Navier--Stokes, Yang--Mills, topology, arithmetic, biology, empirical
-work, or runtime systems. It matters only where those lanes rely on the invalid
-global implication
+Fail-closed review is an initial staging discipline, not a permanent embargo on
+surprising results. `DASHI.Governance.EvidenceGatedTheoremPromotion` requires a
+fixed formula, exact regression, provenance, kernel collision proof, kernel
+Jacobian proof, and kernel logical consequence before promotion.
 
-`constant nonzero Jacobian => polynomial automorphism`
+## Local versus global inversion
 
-without extra hypotheses.
+The counterexample separates several properties that must never be silently
+identified:
 
-## Dependency audit
+```text
+nonzero local Jacobian
+!= properness at infinity
+!= global injectivity
+!= generic fibre degree
+!= monodromy classification
+!= existence of one global inverse
+```
 
-The current authoritative import surface and the most plausible inverse-labelled
-consumers were reviewed for dependence on that implication.
+`DASHI.Topology.LocalGlobalMapDiagnostics` checks everywhere local
+nonsingularity and the displayed three-point fibre while leaving properness,
+generic degree, monodromy, and boundary escape behind explicit authorities.
 
-### Result
+`DASHI.Algebra.LocalInverseVsGlobalInverse` distinguishes neighbourhood-local
+inverse charts from the repository's two-sided `Invertible` record. The exact
+collision kernel-refutes any global inverse. Applying the complex inverse
+function theorem is separately represented by an authority rather than
+manufactured from the name “Jacobian.”
 
-No existing theorem module was found that derives global invertibility of a
-polynomial map from a nonzero constant Jacobian determinant. Accordingly, no
-pre-existing mathematical theorem needs to be weakened by this change.
+## Global ambiguity beside `MereViol`
 
-The inverse-related modules inspected use materially different hypotheses:
+`MereViol` remains a local overlap conflict: two local sections assert
+incompatible exclusive values and therefore cannot carry a compatibility/glue
+witness.
 
-- `DASHI.Core.OperatorTypes.Invertible` stores an inverse function together with
-  explicit left- and right-inverse laws. Invertibility is evidence carried by
-  the record, not inferred from a derivative or determinant.
-- `DASHI.Algebra.ProjectionVsInvertible` assumes that explicit `Invertible`
-  witness and proves that an idempotent invertible operator is the identity.
-- `DASHI.Culture.InverseBidirectionalCultureOperators` defines concrete inverse
-  operations and checks the relevant round-trip equalities directly.
-- `DASHI.Biology.BodyMemoryCompiledInverseBridge` is a candidate-only semantic
-  bridge whose “inverse” terminology is chart-local and explicitly
-  non-authoritative; it does not state a polynomial global-inverse theorem.
+`GlobalAmbiguity` is different:
 
-The only directly affected repository surfaces are therefore the newly added
-Jacobian diagnostic, its verification receipt, and documentation describing the
-status of the conjecture.
+```text
+local sections are valid
++ compatible families glue
++ each fixed compatible family has a unique glue
++ a later observation maps distinct global sections to one visible value
+```
 
-### Review classification
+`DASHI.Sheaf.GlobalAmbiguityBoundary` contains two exact instances:
 
-- **Direct invalid dependency:** none found.
-- **Inverse records with explicit two-sided laws:** unaffected.
-- **Concrete involutions or round-trip witnesses:** unaffected.
-- **Chart-local, metaphorical, or candidate-only inverse language:** unaffected,
-  provided it is not later promoted into a polynomial global-invertibility
-  theorem.
-- **Local inverse-function uses:** unaffected when they conclude only local
-  invertibility.
-- **Future dimension-2 statements:** must be dimension-indexed and remain
-  conjectural unless separately proved.
+1. two different temporal global sections with the same overlap-only
+   observation;
+2. the two distinct polynomial source points with the same image under `F`.
 
-### Ongoing guard
+This does not contradict sheaf uniqueness. Sheaf uniqueness says that one fixed
+compatible local family has at most one global glue. It does not say that every
+observation of all global sections is injective.
 
-Future review should flag a module when all of the following are present:
+The failure taxonomy is therefore:
 
-1. the carrier is a polynomial self-map of affine space;
-2. the ambient dimension is at least 3 or left unrestricted;
-3. the only global hypothesis is a nonzero constant Jacobian determinant;
-4. the conclusion supplies injectivity, surjectivity, a polynomial inverse, or
-   an automorphism.
+- `MereViol`: incompatible local data;
+- gluing failure: no global section for a local family;
+- non-unique gluing: multiple global sections for the same compatible family;
+- global ambiguity: different valid global states share a coarser observation.
 
-A module is not affected merely because it contains the words `inverse`,
-`invertible`, `Jacobian`, or `determinant`; the proof dependency must match the
-four-part pattern above.
+## Computational reductionism boundary
 
-## Audit rule
+Global ambiguity captures a central *representational reductionist* move, but
+not computation in general.
 
-Future modules should not use `JacobianConjecture` as an undifferentiated name.
-They should distinguish at least:
+The problematic promotion is:
 
-- `JacobianConjectureDimension2` -- unresolved;
-- `GeneralJacobianConjectureDimensionAtLeast3` -- refuted by the Alpöge example;
+```text
+selected computable observation
+  => complete, context-free, globally lossless identity code
+```
+
+Formally, this is the assumption that the observation map is injective.
+`DASHI.Philosophy.ComputationalReductionismBoundary` proves that a
+`GlobalAmbiguity` witness refutes that observational-completeness claim and any
+larger closure record carrying it.
+
+This does **not** imply that all computation is reductionist or all computable
+models are noninjective. Injective encodings, context-bearing models, residual
+channels, relational representations, and fibre/sheet-aware computations remain
+available. The distinction is:
+
+```text
+computation != reductionism
+reductionism = treating one selected projection as exhaustive of the world
+```
+
+## Exact triadic sheet label
+
+The displayed fibre has source points whose first coordinates are `-1`, `0`,
+and `+1`. `DASHI.Foundations.JacobianThreeSheetTriadicBridge` therefore permits
+a balanced-ternary sheet label after the fibre has been proved.
+
+The direction is intentionally one-way:
+
+```text
+exact three-point fibre -> optional {-1,0,+1} labelling
+```
+
+The labels do not prove the fibre's existence, and the exceptional three-point
+fibre does not by itself establish the generic fibre degree.
+
+## MDL and source identity
+
+`DASHI.MDL.SheetAwareAmbiguityPenalty` separates:
+
+- model description cost;
+- reconstruction residual cost;
+- unresolved sheet/source-identity cost.
+
+Its finite worked comparison shows that a visibly simpler one-sheet model need
+not be preferred when it destroys source identity. The numerical costs are a
+reference example, not a universal coding scale.
+
+## Effect on existing DASHI results
+
+The result changes content only when it uses the invalid global implication
+
+```text
+constant nonzero Jacobian => polynomial automorphism
+```
+
+without extra hypotheses in dimension at least 3.
+
+No pre-existing DASHI theorem module was found with that four-part dependency.
+The inverse-related modules inspected are unaffected:
+
+- `DASHI.Core.OperatorTypes.Invertible` carries an explicit inverse and both
+  round-trip laws;
+- `DASHI.Algebra.ProjectionVsInvertible` assumes that evidence;
+- `DASHI.Culture.InverseBidirectionalCultureOperators` proves its concrete
+  round trips directly;
+- `DASHI.Biology.BodyMemoryCompiledInverseBridge` is chart-local and
+  candidate-only, with stronger authority blocked.
+
+Unrelated physics, analysis, biology, runtime, empirical, and cultural lanes do
+not change merely because they mention an inverse, determinant, or Jacobian.
+
+## Ongoing review guard
+
+A future module should be flagged only when all four conditions hold:
+
+1. it concerns a polynomial self-map of affine space;
+2. the ambient dimension is at least 3 or unrestricted;
+3. its only global hypothesis is a nonzero constant Jacobian determinant;
+4. it concludes injectivity, surjectivity, polynomial inverse, or automorphism.
+
+Future modules should distinguish:
+
+- `JacobianConjectureDimension2` — separate and not settled here;
+- dimension-three and padded dimension-at-least-three refutations;
 - restricted invertibility theorems with their exact additional hypotheses.
 
-The example should also remain a provenance lesson: computational discovery,
-public announcement, exact executable verification, kernel-checked logical
-consequence, and broader mathematical interpretation are separate layers and
-should be attributed and typed separately.
+## Remaining global analyses
+
+The kernel theorem does not automatically supply:
+
+- properness or failure-of-properness classification;
+- generic fibre degree;
+- monodromy;
+- topology at infinity;
+- a full complex-analytic formalisation of the inverse function theorem;
+- a classification of larger counterexample families.
+
+Those are downstream mathematical projects rather than prerequisites for the
+explicit counterexample.
