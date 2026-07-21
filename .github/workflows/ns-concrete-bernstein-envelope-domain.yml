@@ -3,6 +3,7 @@ name: NS exact compact-Gamma mathematical cutset
 on:
   pull_request:
     paths:
+      - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomain.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteInequalitySynthesis.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteAnalyticCutset.agda'
@@ -19,6 +20,7 @@ on:
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
   push:
     paths:
+      - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomain.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteInequalitySynthesis.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteAnalyticCutset.agda'
