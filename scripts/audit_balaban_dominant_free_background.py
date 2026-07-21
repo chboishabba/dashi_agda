@@ -51,6 +51,10 @@ EXPECTED = {
         "explicitSmallnessWindowAssemblyLevel": "machineChecked",
         "explicitSmallnessThresholdInputsLevel": "conditional",
     },
+    "BalabanCriticalMapDisplacementWindow.agda": {
+        "criticalMapDisplacementWindowAssemblyLevel": "machineChecked",
+        "criticalMapDisplacementThresholdInputsLevel": "conditional",
+    },
     "BalabanCommonSmallFieldRadius.agda": {
         "commonSmallFieldRadiusAssemblyLevel": "machineChecked",
         "commonSmallFieldRadiusExistenceLevel": "conditional",
@@ -58,6 +62,10 @@ EXPECTED = {
     "BalabanUniformAnalyticSmallnessClosure.agda": {
         "uniformAnalyticSmallnessAssemblyLevel": "machineChecked",
         "uniformAnalyticSmallnessProducerInputsLevel": "conditional",
+    },
+    "BalabanUniformFiniteBackgroundEndpoint.agda": {
+        "uniformFiniteBackgroundEndpointAssemblyLevel": "machineChecked",
+        "uniformFiniteBackgroundRegimeInputsLevel": "conditional",
     },
     "BalabanAnalyticProducerFrontier.agda": {
         "analyticProducerAssemblyLevel": "machineChecked",
