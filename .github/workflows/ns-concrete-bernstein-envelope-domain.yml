@@ -87,8 +87,10 @@ jobs:
           mkdir -p "$phase"
           python scripts/ns_radius8_far_low_exhaustive.py --output-json "$phase/far_low.json"
           python scripts/ns_radius8_full_operator.py --output-json "$phase/full_operator.json" --K 2 --R 2
+          python scripts/ns_radius8_multiplier_scaling.py --output-json "$phase/multiplier.json"
           python scripts/ns_radius8_far_high_scan.py --output-json "$phase/far_high.json"
           python scripts/ns_near_triad_budget_scan.py --output-json "$phase/near.json"
+          python scripts/ns_near_triad_full_factor_scan.py --output-json "$phase/near_full.json"
           python scripts/ns_five_halves_falsification.py --output-json "$phase/five.json"
           python scripts/ns_five_halves_galerkin_trajectory.py --output-json "$phase/trajectory.json"
           python scripts/ns_boundary_face_search.py --output-json "$phase/boundary.json"
@@ -97,8 +99,9 @@ jobs:
           python scripts/check_ns_periodic_phase_receipts.py \
             --inputs "$phase/boundary.json" "$phase/boundary_galerkin.json" \
               "$phase/coverage.json" "$phase/far_high.json" "$phase/far_low.json" \
-              "$phase/full_operator.json" "$phase/five.json" \
-              "$phase/trajectory.json" "$phase/near.json" \
+              "$phase/full_operator.json" "$phase/multiplier.json" \
+              "$phase/five.json" "$phase/trajectory.json" \
+              "$phase/near.json" "$phase/near_full.json" \
             --output-json "$phase/check.json"
           python scripts/check_ns_galerkin_falsifications.py \
             --trajectory-json "$phase/trajectory.json" \
@@ -106,8 +109,10 @@ jobs:
             --output-json "$phase/galerkin-check.json"
           diff -u scripts/data/outputs/ns_radius8_far_low_exhaustive.json "$phase/far_low.json"
           diff -u scripts/data/outputs/ns_radius8_full_operator.json "$phase/full_operator.json"
+          diff -u scripts/data/outputs/ns_radius8_multiplier_scaling.json "$phase/multiplier.json"
           diff -u scripts/data/outputs/ns_radius8_far_high_scan.json "$phase/far_high.json"
           diff -u scripts/data/outputs/ns_near_triad_budget_scan.json "$phase/near.json"
+          diff -u scripts/data/outputs/ns_near_triad_full_factor_scan.json "$phase/near_full.json"
           diff -u scripts/data/outputs/ns_five_halves_falsification.json "$phase/five.json"
           diff -u scripts/data/outputs/ns_five_halves_galerkin_trajectory.json "$phase/trajectory.json"
           diff -u scripts/data/outputs/ns_boundary_face_search.json "$phase/boundary.json"
