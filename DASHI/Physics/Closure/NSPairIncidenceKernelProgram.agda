@@ -33,6 +33,7 @@ open import DASHI.Physics.Closure.NSCompactGammaFullShellSchur public
 open import DASHI.Physics.Closure.NSCutoffUniformIntegerShellSchur public
 open import DASHI.Physics.Closure.NSZ3CutoffUniformIntegerShellSchur public
 open import DASHI.Physics.Closure.NSZ3QuantitativeSchurWitnesses public
+open import DASHI.Physics.Closure.NSZ3LiteralIntegerCubeSchurClosure public
 open import DASHI.Physics.Closure.NSFullShellWeightedSchurClosure public
 open import DASHI.Physics.Closure.NSCompactGammaTriadFullShellCoherence public
 open import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge public
