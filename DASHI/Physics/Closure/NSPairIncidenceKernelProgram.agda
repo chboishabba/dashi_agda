@@ -76,4 +76,5 @@ import DASHI.Physics.Closure.NSCompactGammaCoverageFromContinuationAuthority
 import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction
 import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion
 import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailRegression
+import DASHI.Physics.Closure.NSPeriodicConcreteProofProgramRegression
 import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset
