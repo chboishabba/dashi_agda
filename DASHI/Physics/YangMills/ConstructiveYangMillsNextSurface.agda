@@ -39,6 +39,8 @@ import DASHI.Physics.YangMills.BalabanDominantFreeBackgroundClosure
 import DASHI.Physics.YangMills.BalabanOneStepPolymerEstimate
 import DASHI.Physics.YangMills.BalabanConcreteOneStepRG
 import DASHI.Physics.YangMills.BalabanOneStepRGClosure
+import DASHI.Physics.YangMills.BalabanCriticalMapOneStepRGClosure
+import DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion
 import DASHI.Physics.YangMills.BalabanConcreteStepVSuppression
 import DASHI.Physics.YangMills.BalabanStepVKPClosure
 import DASHI.Physics.YangMills.BalabanExplicitStepVLargeField
