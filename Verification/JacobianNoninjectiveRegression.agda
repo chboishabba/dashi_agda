@@ -1,9 +1,12 @@
 module Verification.JacobianNoninjectiveRegression where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+
+open import Verification.JacobianCounterexampleKernel as Kernel
+open import DASHI.Provenance.AIAssistedMathematicsProvenance as Provenance
 
 -- Public attribution
 -- ------------------
@@ -12,52 +15,38 @@ open import Agda.Builtin.String using (String)
 -- problem and Fable for producing the example.  DASHI attributes the public
 -- mathematical announcement to Alpöge and does not claim discovery priority.
 --
--- Exact polynomial expansion and rational witness evaluation are executed by
--- scripts/check_jacobian_noninjective_example.py.  The small logical theorem
--- below is kernel-checked: two unequal inputs with equal outputs refute
--- injectivity.  The polynomial-ring computation itself remains an executable
--- exact-arithmetic receipt rather than an Agda-normalised polynomial proof.
-
-data ⊥ : Set where
-
-¬_ : Set → Set
-¬ A = A → ⊥
-
-Injective : ∀ {A B : Set} → (A → B) → Set
-Injective f = ∀ {x y} → f x ≡ f y → x ≡ y
-
-record NonInjectiveWitness {A B : Set} (f : A → B) : Set where
-  constructor nonInjectiveWitness
-  field
-    left right : A
-    distinct   : ¬ (left ≡ right)
-    collision  : f left ≡ f right
-
-witnessRefutesInjectivity :
-  ∀ {A B : Set} {f : A → B} →
-  NonInjectiveWitness f →
-  ¬ Injective f
-witnessRefutesInjectivity w injective =
-  NonInjectiveWitness.distinct w
-    (injective (NonInjectiveWitness.collision w))
+-- scripts/check_jacobian_noninjective_example.py remains an independent exact
+-- executable regression.  Verification.JacobianCounterexampleKernel now also
+-- defines the polynomial syntax, differentiates it, normalises the determinant
+-- with Agda's rational ring tactic, checks the rational fibre, proves
+-- noninjectivity, packages a Keller map, refutes the dimension-three statement,
+-- and pads the counterexample by untouched coordinates.
 
 record ExactJacobianCounterexampleReceipt : Set where
   constructor receipt
   field
-    publicAnnouncer                : String
-    announcementDate              : String
-    creditedQuestioner            : String
-    creditedSystem                : String
-    ambientDimension              : Nat
-    determinantConstant           : String
-    determinantIdentityOK         : Bool
-    distinctWitnessCount          : Nat
-    commonImage                   : String
-    fibreWitnessesOK              : Bool
-    noninjectivityImplicationProved : Bool
-    polynomialIdentityKernelProved  : Bool
-    generalDimensionThreeRefuted    : Bool
-    dimensionTwoAffected            : Bool
+    publicAnnouncer : String
+    announcementDate : String
+    creditedQuestioner : String
+    creditedSystem : String
+    ambientDimension : Nat
+    determinantConstant : String
+    externalExactRegressionChecked : Bool
+    kernelPolynomialSyntaxChecked : Bool
+    kernelSymbolicDifferentiationChecked : Bool
+    kernelJacobianIdentityChecked : Bool
+    distinctWitnessCount : Nat
+    commonImage : String
+    kernelFibreWitnessesChecked : Bool
+    kernelCollisionProofChecked : Bool
+    kernelNoninjectivityChecked : Bool
+    jacobianConjectureDimension3Refuted : Bool
+    identityPaddingAllDimensionsAtLeast3Checked : Bool
+    dimensionTwoAffected : Bool
+    dimensionTwoAffectedIsFalse : dimensionTwoAffected ≡ false
+    propernessOrMonodromyClaimed : Bool
+    propernessOrMonodromyClaimedIsFalse :
+      propernessOrMonodromyClaimed ≡ false
 
 alpogeJacobianCounterexampleReceipt : ExactJacobianCounterexampleReceipt
 alpogeJacobianCounterexampleReceipt =
@@ -69,20 +58,43 @@ alpogeJacobianCounterexampleReceipt =
     3
     "-2"
     true
+    true
+    true
+    true
     3
     "(-1/4,0,0)"
     true
     true
-    false
+    true
+    true
     true
     false
+    refl
+    false
+    refl
+
+-- Kernel-level consequence exports.
+
+alpogeMapNotInjective : Kernel.¬ Kernel.Injective Kernel.F
+alpogeMapNotInjective = Kernel.F-notInjective
+
+jacobianConjectureDimension3Refutation :
+  Kernel.¬ Kernel.JacobianConjectureDimension3
+jacobianConjectureDimension3Refutation =
+  Kernel.jacobianConjectureDimension3False
+
+paddedRefutation :
+  (extraCoordinates : Nat) →
+  Kernel.¬ (Kernel.JacobianConjectureDimensionThreePlus extraCoordinates)
+paddedRefutation = Kernel.jacobianConjectureDimensionThreePlusFalse
+
+provenance : Provenance.DiscoveryProvenance
+provenance = Provenance.alpogeFableProvenance
 
 -- Interpretation boundary
 -- -----------------------
--- The checked exact computation establishes a constant nonzero Jacobian and a
--- three-point fibre for the displayed polynomial map.  Together with the
--- kernel theorem witnessRefutesInjectivity, this is a counterexample to the
--- general Jacobian conjecture in dimension 3.  Adding untouched coordinates
--- transports the counterexample to every dimension n ≥ 3.  Nothing in this
--- receipt settles the dimension-2 case, and nothing here changes unrelated
--- analytic, physical, or empirical DASHI claims.
+-- The counterexample itself is now kernel-checked at the polynomial,
+-- differentiation, determinant, collision and logical-consequence levels.
+-- Properness, generic fibre degree, monodromy and topology at infinity are
+-- separate global analyses.  The three-variable construction and its identity
+-- padding do not settle the independent dimension-two problem.
