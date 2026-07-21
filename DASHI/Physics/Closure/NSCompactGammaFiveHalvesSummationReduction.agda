@@ -12,7 +12,7 @@ import DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay as Geometric
 --
 -- The shellwise estimate is multiplicative:
 --
---   A_j <= c_{j,K} * E_Gamma(K,u),
+--   A_j <= E_Gamma(K,u) * c_{j,K},
 --
 -- and the coefficient family is summable uniformly in K.  This avoids summing a
 -- full unweighted envelope once for every shell.  Countable monotonicity and the
@@ -31,9 +31,9 @@ record CountableNonnegativeShellSummation
       (∀ j → _≤_ A (f j) (g j)) →
       _≤_ A (sum f) (sum g)
 
-    factorConstantRight : ∀ coefficient envelope →
-      sum (λ j → Geometric._*_ M (coefficient j) envelope) ≡
-      Geometric._*_ M (sum coefficient) envelope
+    factorConstantLeft : ∀ envelope coefficient →
+      sum (λ j → Geometric._*_ M envelope (coefficient j)) ≡
+      Geometric._*_ M envelope (sum coefficient)
 
 open CountableNonnegativeShellSummation public
 
@@ -61,27 +61,27 @@ record FiveHalvesPointwiseSummationInputs
       _≤_ A
         (weightedFiveHalvesShell j (selectedState q τ))
         (Geometric._*_ multiplicativeOrder
-          (shellCoefficient q j)
-          (rawCompactGammaEnvelope q τ))
+          (rawCompactGammaEnvelope q τ)
+          (shellCoefficient q j))
 
     shellCoefficientSummable : ∀ q τ →
       _≤_ A
         (sum summation (shellCoefficient q))
         (coefficientSumBound q τ)
 
-    normalizedCoefficientTimesEnvelopeFits : ∀ q τ →
+    normalizedEnvelopeTimesCoefficientFits : ∀ q τ →
       _≤_ A
         (Geometric._*_ multiplicativeOrder
-          (coefficientSumBound q τ)
-          (rawCompactGammaEnvelope q τ))
+          (rawCompactGammaEnvelope q τ)
+          (coefficientSumBound q τ))
         (displayedCompactGammaEnvelope q τ)
 
 open FiveHalvesPointwiseSummationInputs public
 
 weightedFiveHalvesSum :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
-  FiveHalvesPointwiseSummationInputs A Index →
-  Index → FiveHalvesPointwiseSummationInputs.Time → Scalar A
+  (P : FiveHalvesPointwiseSummationInputs A Index) →
+  Index → Time P → Scalar A
 weightedFiveHalvesSum P q τ =
   sum (summation P)
     (λ j → weightedFiveHalvesShell P j (selectedState P q τ))
@@ -92,15 +92,15 @@ pointwiseDecaySumsToRawEnvelope :
   _≤_ A
     (weightedFiveHalvesSum P q τ)
     (Geometric._*_ (multiplicativeOrder P)
-      (sum (summation P) (shellCoefficient P q))
-      (rawCompactGammaEnvelope P q τ))
+      (rawCompactGammaEnvelope P q τ)
+      (sum (summation P) (shellCoefficient P q)))
 pointwiseDecaySumsToRawEnvelope {A = A} P q τ =
   subst
     (λ upper → _≤_ A (weightedFiveHalvesSum P q τ) upper)
-    (factorConstantRight
+    (factorConstantLeft
       (summation P)
-      (shellCoefficient P q)
-      (rawCompactGammaEnvelope P q τ))
+      (rawCompactGammaEnvelope P q τ)
+      (shellCoefficient P q))
     (sumMonotone (summation P)
       (λ j → pointwiseFiveHalvesDecay P q j τ))
 
@@ -118,4 +118,4 @@ fiveHalvesSumBelowDisplayedEnvelope {A = A} P q τ =
         (multiplicativeOrder P)
         (rawCompactGammaEnvelope P q τ)
         (shellCoefficientSummable P q τ))
-      (normalizedCoefficientTimesEnvelopeFits P q τ))
+      (normalizedEnvelopeTimesCoefficientFits P q τ))
