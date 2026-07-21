@@ -8,6 +8,8 @@ open import Verification.JacobianCounterexampleKernel as Kernel
   using
     ( KernelCounterexampleReceipt
     ; kernelCounterexampleReceipt
+    ; ¬_
+    ; JacobianConjectureDimension3
     ; jacobianConjectureDimension3False
     )
 
@@ -51,13 +53,13 @@ alpogeEligible :
 alpogeEligible = refl
 
 record PromotionReceipt : Set where
-  constructor promotionReceipt
+  constructor mkPromotionReceipt
   field
     initialFailClosedBoundaryRetained : Bool
     explicitPromotionPathProvided : Bool
     externalCheckDistinguishedFromKernelProof : Bool
     kernelCounterexampleReceiptIncluded : KernelCounterexampleReceipt
-    dimensionThreeRefutationAvailable : Set
+    dimensionThreeRefutationAvailable : ¬ JacobianConjectureDimension3
     surprisingResultPermanentlyBlocked : Bool
     surprisingResultPermanentlyBlockedIsFalse :
       surprisingResultPermanentlyBlocked ≡ false
@@ -65,12 +67,12 @@ record PromotionReceipt : Set where
 
 promotionReceipt : PromotionReceipt
 promotionReceipt =
-  promotionReceipt
+  mkPromotionReceipt
     true
     true
     true
     kernelCounterexampleReceipt
-    (Kernel.¬ Kernel.JacobianConjectureDimension3)
+    jacobianConjectureDimension3False
     false
     refl
     "claims begin fail-closed, but a fixed formula, exact regression, provenance, kernel algebra and kernel logical consequence provide an explicit route to promotion"
