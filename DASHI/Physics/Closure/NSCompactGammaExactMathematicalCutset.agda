@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (Bool; false)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
