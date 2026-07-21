@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "receipts": [
+    {
+      "digest": true,
+      "file": "boundary.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "coverage.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "far_high.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "far_low.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "five.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "near.json",
+      "promotion_false": true
+    }
+  ],
+  "schema": "check_ns_periodic_phase_receipts.v1"
+}
