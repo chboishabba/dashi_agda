@@ -1,7 +1,7 @@
 module DASHI.Foundations.ElementarySingleOperator where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
 -- The source language is deliberately the exact exp/log/sub/1 kernel.
@@ -147,8 +147,8 @@ open ElementaryFrontEnd public
 
 compileElementary :
   ∀ {M : ExpLogSubModel} →
-  ElementaryFrontEnd M →
-  Syntax _ →
+  (F : ElementaryFrontEnd M) →
+  Syntax F →
   EMLExpr
 compileElementary F t = compileEML (lower F t)
 
