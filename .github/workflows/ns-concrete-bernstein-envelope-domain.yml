@@ -1,4 +1,4 @@
-name: NS concrete Bernstein envelope domain
+name: NS exact compact-Gamma mathematical cutset
 
 on:
   pull_request:
@@ -9,6 +9,11 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaFourCriticalObligations.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFrontierAttackLemmas.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaCriticalObligationCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGeometricShellDecay.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGammaNearTailCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaParameterCoverageCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaStandardAnalysisCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaExactMathematicalCutset.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomainTest.agda'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
@@ -20,12 +25,17 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGammaFourCriticalObligations.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFrontierAttackLemmas.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaCriticalObligationCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGeometricShellDecay.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGammaNearTailCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaParameterCoverageCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaStandardAnalysisCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaExactMathematicalCutset.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomainTest.agda'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
 
 concurrency:
-  group: ns-concrete-bernstein-envelope-domain-${{ github.ref }}
+  group: ns-exact-compact-gamma-cutset-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -40,7 +50,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check concrete Bernstein envelope domain
+      - name: Check exact compact-Gamma mathematical cutset
         shell: bash
         run: |
           set -euo pipefail
