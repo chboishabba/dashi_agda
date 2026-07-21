@@ -97,11 +97,11 @@ record PublishedPeriodicContinuationAuthority
     VorticityTimeIntegralFinite : Solution → Time → Set i
     ContinuesBeyond : InitialDatum → Time → Set i
 
-    zeroSolutionGlobal : ∀ u₀ →
-      ZeroDatum u₀ → ContinuesBeyond u₀
+    zeroSolutionGlobal : ∀ u₀ T →
+      ZeroDatum u₀ → ContinuesBeyond u₀ T
 
-    smallDataGlobal : ∀ u₀ →
-      SmallDatum u₀ → ContinuesBeyond u₀
+    smallDataGlobal : ∀ u₀ T →
+      SmallDatum u₀ → ContinuesBeyond u₀ T
 
     bkmContinuation : ∀ u₀ u T →
       SmoothDivergenceFreeFiniteEnergy u₀ →
