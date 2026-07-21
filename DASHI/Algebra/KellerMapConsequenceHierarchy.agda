@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Core.OperatorTypes using (Invertible)
+open Invertible
 open import Verification.JacobianCounterexampleKernel as J
   using
     ( ¬_
