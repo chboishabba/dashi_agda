@@ -3,6 +3,7 @@ module DASHI.Philosophy.ComputationalReductionismBoundary where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
 open import DASHI.Sheaf.GlobalAmbiguityBoundary
@@ -41,6 +42,9 @@ record ComputationalReductionistClosure
     contextCanBeDiscarded : Set
     residualCanAlwaysBeEliminated : Set
 
+Not₁ : Set₁ → Set₁
+Not₁ A = A → ⊥
+
 record SituatedComputationalModel
     (World Code Context Residual : Set)
     : Set₁ where
@@ -63,7 +67,7 @@ ambiguityRefutesReductionistClosure :
   ∀ {World Code : Set}
     (representation : ComputationalRepresentation World Code) →
   GlobalAmbiguity (encode representation) →
-  ¬ ComputationalReductionistClosure representation
+  Not₁ (ComputationalReductionistClosure representation)
 ambiguityRefutesReductionistClosure representation ambiguity closure =
   ambiguityRefutesObservationalCompleteness representation ambiguity
     (ComputationalReductionistClosure.codeEqualityDeterminesWorldEquality closure)
