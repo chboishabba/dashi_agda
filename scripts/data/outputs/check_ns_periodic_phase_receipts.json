@@ -8,6 +8,11 @@
     },
     {
       "digest": true,
+      "file": "boundary_galerkin.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
       "file": "coverage.json",
       "promotion_false": true
     },
@@ -29,6 +34,11 @@
     {
       "digest": true,
       "file": "five.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "trajectory.json",
       "promotion_false": true
     },
     {
