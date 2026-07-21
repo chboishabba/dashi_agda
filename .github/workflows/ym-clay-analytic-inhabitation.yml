@@ -1,6 +1,19 @@
 name: YM Clay analytic inhabitation
 
 on:
+  push:
+    branches:
+      - 'agent/ym-analytic-proof-reduction'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
+      - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
