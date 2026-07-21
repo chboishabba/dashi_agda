@@ -87,67 +87,73 @@ packetAtlasCoverageYieldsGlobalSmoothness C = atlasMechanismCloses C
 ------------------------------------------------------------------------
 -- Complete route D: packet-chart or direct-BKM dichotomy.
 --
--- This is the exact global route requested by the analytic audit.  It keeps the
--- spectral concentration/depletion alternatives, chart switching estimates and
--- final continuation mechanism in one owner, so a shell-selection witness from
--- one model cannot be combined with switching or BKM witnesses from another.
+-- Every local predicate is indexed by the repository's actual `Solution S` and
+-- `Time S`.  This prevents a disconnected abstract state space from carrying
+-- the local dichotomies while an unrelated official solution supplies the final
+-- continuation mechanism.
 ------------------------------------------------------------------------
 
 record ChartOrDirectBKMCoverage
     {i : Level}
     (S : OfficialInitialDataSetting i) : Set (lsuc i) where
   field
-    State Chart : Set i
+    Chart : Set i
 
-    NonzeroState : State → Set i
-    PacketConcentrated : Chart → State → Set i
-    DiffuseSpectrumBKMControl : State → Set i
-    GammaAboveFloor : Chart → State → Set i
-    StretchingDepleted : State → Set i
-    LocalBKMContinuation : State → Set i
-    CompactGammaAdmissibleInChart : Chart → State → Set i
+    NonzeroState : Solution S → Time S → Set i
+    PacketConcentrated : Chart → Solution S → Time S → Set i
+    DiffuseSpectrumBKMControl : Solution S → Time S → Set i
+    GammaAboveFloor : Chart → Solution S → Time S → Set i
+    StretchingDepleted : Solution S → Time S → Set i
+    LocalBKMContinuation : Solution S → Time S → Set i
+    CompactGammaAdmissibleInChart :
+      Chart → Solution S → Time S → Set i
 
-    spectralPacketOrDiffuseRegularity : ∀ state →
-      NonzeroState state →
-      (Σ Chart (λ chart → PacketConcentrated chart state))
-      ⊎ DiffuseSpectrumBKMControl state
+    spectralPacketOrDiffuseRegularity : ∀ u τ →
+      NonzeroState u τ →
+      (Σ Chart (λ chart → PacketConcentrated chart u τ))
+      ⊎ DiffuseSpectrumBKMControl u τ
 
-    gammaChartOrDepletion : ∀ chart state →
-      PacketConcentrated chart state →
-      GammaAboveFloor chart state ⊎ StretchingDepleted state
+    gammaChartOrDepletion : ∀ chart u τ →
+      PacketConcentrated chart u τ →
+      GammaAboveFloor chart u τ ⊎ StretchingDepleted u τ
 
-    stretchingDepletionGivesBKM : ∀ state →
-      StretchingDepleted state → LocalBKMContinuation state
+    stretchingDepletionGivesBKM : ∀ u τ →
+      StretchingDepleted u τ → LocalBKMContinuation u τ
 
-    diffuseSpectrumGivesBKM : ∀ state →
-      DiffuseSpectrumBKMControl state → LocalBKMContinuation state
+    diffuseSpectrumGivesBKM : ∀ u τ →
+      DiffuseSpectrumBKMControl u τ → LocalBKMContinuation u τ
 
-    selectedChartAdmissible : ∀ chart state →
-      PacketConcentrated chart state →
-      GammaAboveFloor chart state →
-      CompactGammaAdmissibleInChart chart state
+    selectedChartAdmissible : ∀ chart u τ →
+      PacketConcentrated chart u τ →
+      GammaAboveFloor chart u τ →
+      CompactGammaAdmissibleInChart chart u τ
 
-    selectedChart : State → Chart
-    selectedChartPiecewiseConstant : State → Set i
-    chartSwitchTimesLocallyFinite : State → Set i
-    chartSwitchPotentialJumpControlled : State → Set i
-    chartSwitchCostsSummable : State → Set i
-    compactGammaPreservedBetweenSwitches : State → Set i
+    selectedChart : Solution S → Time S → Chart
+    selectedChartPiecewiseConstant : Solution S → Set i
+    chartSwitchTimesLocallyFinite : Solution S → Set i
+    chartSwitchPotentialJumpControlled : Solution S → Set i
+    chartSwitchCostsSummable : Solution S → Set i
+    compactGammaPreservedBetweenSwitches : Solution S → Set i
 
     -- The substantive global leaf.  It must be derived from the preceding
     -- dichotomies and switching estimates in the selected periodic carrier.
-    chartOrDirectBKMSuppliesUniversalMechanism : ∀ u₀ →
+    chartOrDirectBKMSuppliesUniversalMechanism : ∀ u₀ u →
       SmoothDivergenceFreeFiniteEnergy S u₀ →
+      SolvesFrom S u₀ u →
       UniversalContinuationMechanism S u₀
 
 open ChartOrDirectBKMCoverage public
 
 chartOrDirectBKMToUniversalReplacement :
   ∀ {i} {S : OfficialInitialDataSetting i} →
-  ChartOrDirectBKMCoverage S → UniversalReplacementMechanism S
-chartOrDirectBKMToUniversalReplacement C = record
-  { allOfficialDataHaveUniversalMechanism =
+  (C : ChartOrDirectBKMCoverage S) →
+  (solutionFor : InitialDatum S → Solution S) →
+  (solutionForSolves : ∀ u₀ → SolvesFrom S u₀ (solutionFor u₀)) →
+  UniversalReplacementMechanism S
+chartOrDirectBKMToUniversalReplacement C solutionFor solutionForSolves = record
+  { allOfficialDataHaveUniversalMechanism = λ u₀ official →
       chartOrDirectBKMSuppliesUniversalMechanism C
+        u₀ (solutionFor u₀) official (solutionForSolves u₀)
   }
 
 record CompleteChartOrDirectBKMCoverage
@@ -155,6 +161,9 @@ record CompleteChartOrDirectBKMCoverage
     (S : OfficialInitialDataSetting i) : Set (lsuc i) where
   field
     route : ChartOrDirectBKMCoverage S
+    solutionFor : InitialDatum S → Solution S
+    solutionForSolves : ∀ u₀ → SolvesFrom S u₀ (solutionFor u₀)
+
     GlobalSmoothSolution : InitialDatum S → Set i
     universalMechanismCloses : ∀ u₀ →
       UniversalContinuationMechanism S u₀ →
@@ -171,7 +180,9 @@ chartOrDirectBKMCoverageYieldsGlobalSmoothness :
 chartOrDirectBKMCoverageYieldsGlobalSmoothness C u₀ official =
   universalMechanismCloses C u₀
     (chartOrDirectBKMSuppliesUniversalMechanism
-      (route C) u₀ official)
+      (route C)
+      u₀ (solutionFor C u₀)
+      official (solutionForSolves C u₀))
 
 ------------------------------------------------------------------------
 -- One proof-side resolution.  The obstruction route is deliberately not
