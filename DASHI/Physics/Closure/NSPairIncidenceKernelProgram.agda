@@ -54,6 +54,7 @@ open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
 -- Focused namespace imports: compile the exact absorbed route and universal tail
 -- reductions without flooding the existing public surface with projections.
 import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision
+import DASHI.Physics.Closure.NSCompactGammaFiveHalvesSummationReduction
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision
 import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction
@@ -67,6 +68,7 @@ import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction
 import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction
 import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction
 import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary
+import DASHI.Physics.Closure.NSPeriodicFourierAuthorityAdapters
 import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction
 import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion
 import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset
