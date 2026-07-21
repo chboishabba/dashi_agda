@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Data.Sum.Base using (_⊎_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
@@ -9,6 +10,7 @@ open import DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay public
 open import DASHI.Physics.Closure.NSCompactGammaGammaNearTailCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaOfficialDataObstruction public
+open import DASHI.Physics.Closure.NSCompactGammaOfficialCoverageCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
 import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas as Frontier
@@ -44,7 +46,10 @@ record ExactCompactGammaMathematicalCutset
     parameterInequalities :
       CanonicalParameterInequalities A Index parameterNumerals
 
-    officialCoverage : OfficialCoverageResolution Official
+    -- One fully closing proof route, or a rigorous obstruction to all routes.
+    officialCoverage :
+      OfficialCoverageProof Official
+      ⊎ FullCompactGammaUniversalityObstruction Official
 
     realIntegration : ConcreteRealIntegrationCompletion A Time
 
