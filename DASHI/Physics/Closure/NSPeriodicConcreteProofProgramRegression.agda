@@ -7,6 +7,7 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteDyadicPartition public
 open import DASHI.Physics.Closure.NSPeriodicConcreteNorms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma public
 open import DASHI.Physics.Closure.NSPeriodicConcreteTriadForms public
+open import DASHI.Physics.Closure.NSPeriodicConcreteNearTriadDecomposition public
 open import DASHI.Physics.Closure.NSPeriodicConcreteRationalCertificate public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFullOperatorReceipt public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification public
