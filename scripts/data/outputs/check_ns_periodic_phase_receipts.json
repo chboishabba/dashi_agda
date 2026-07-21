@@ -33,6 +33,11 @@
     },
     {
       "digest": true,
+      "file": "multiplier.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
       "file": "five.json",
       "promotion_false": true
     },
