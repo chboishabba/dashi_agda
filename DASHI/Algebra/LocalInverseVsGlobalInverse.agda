@@ -4,7 +4,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
 open import Data.Rational using (ℚ)
 
 open import DASHI.Core.OperatorTypes using (Invertible)
@@ -12,7 +11,8 @@ open import Verification.JacobianCounterexampleKernel as J
   using
     ( Point3
     ; F
-    ; Injective
+    ; _≢_
+    ; zeroQ
     ; invertibleImpliesInjective
     ; F-notInjective
     ; jacobianDeterminantAt
@@ -59,7 +59,7 @@ record ComplexInverseFunctionAuthority : Set₁ where
     locallyInvertibleFromNonzeroJacobian :
       (f : Point3 → Point3) →
       (determinantAt : Point3 → ℚ) →
-      ((p : Point3) → determinantAt p J.≢ J.zeroQ) →
+      ((p : Point3) → determinantAt p ≢ zeroQ) →
       (p : Point3) →
       LocalInverseAt f p
 
@@ -101,7 +101,7 @@ sheetedCentral = sheetedSource pZero centralSheet
 sheetedPositive = sheetedSource pPositive positiveSheet
 
 record LocalGlobalInverseReceipt : Set where
-  constructor localGlobalInverseReceipt
+  constructor mkLocalGlobalInverseReceipt
   field
     globalInverseRefutedByCollision : Bool
     localInverseTheoremFabricatedInCore : Bool
@@ -116,7 +116,7 @@ record LocalGlobalInverseReceipt : Set where
 
 localGlobalInverseReceipt : LocalGlobalInverseReceipt
 localGlobalInverseReceipt =
-  localGlobalInverseReceipt
+  mkLocalGlobalInverseReceipt
     true
     false refl
     true true
