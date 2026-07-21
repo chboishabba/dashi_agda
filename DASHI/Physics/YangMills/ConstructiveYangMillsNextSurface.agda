@@ -67,6 +67,7 @@ import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
 import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremAuthorities
+import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremRegression
 import DASHI.Physics.YangMills.BalabanExactPublishedCarrierMatching
 import DASHI.Physics.YangMills.BalabanExactPublishedCarrierMatchingRegression
 import DASHI.Physics.YangMills.BalabanPublishedSourceToDashi
