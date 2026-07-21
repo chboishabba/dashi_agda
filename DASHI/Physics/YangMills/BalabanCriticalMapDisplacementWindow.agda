@@ -5,17 +5,20 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 -- Correct B6 displacement-at-zero transport.
 --
--- This is deliberately separated from the strict contraction window.  To move
---   d(r₀) + rho(r₀) r₀ <= r₀
--- from a threshold radius to a smaller selected radius, mere monotonicity of d
--- is not enough.  The complete budget itself must be monotone, or an explicit
--- comparison witness must be supplied.  This module makes that requirement
--- proof relevant and avoids the invalid direction used by the earlier draft.
+-- A self-map inequality at one threshold radius does not in general descend to
+-- every smaller radius.  The valid producer is a scale-relative estimate:
+--
+--   displacementBudget(r) <= sigma * r,
+--
+-- on the whole selected window, together with sigma * r <= r at the chosen
+-- radius.  This is exactly the quantitative input needed by the critical-ball
+-- theorem and avoids the invalid monotonicity argument of the earlier draft.
 ------------------------------------------------------------------------
 
 record CriticalMapDisplacementWindow (Bound : Set) : Set₁ where
   field
-    selected threshold : Bound
+    selected threshold sigma : Bound
+    scale : Bound → Bound → Bound
     LessEqual : Bound → Bound → Set
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
@@ -23,11 +26,13 @@ record CriticalMapDisplacementWindow (Bound : Set) : Set₁ where
     displacementBudget : Bound → Bound
 
     selectedBelowThreshold : LessEqual selected threshold
-    budgetMonotone : ∀ {left right} →
-      LessEqual left right →
-      LessEqual (displacementBudget left) (displacementBudget right)
 
-    thresholdSelfMap : LessEqual (displacementBudget threshold) threshold
+    budgetBelowScaledRadius : ∀ radius →
+      LessEqual radius threshold →
+      LessEqual (displacementBudget radius) (scale sigma radius)
+
+    scaledSelectedBelowSelected :
+      LessEqual (scale sigma selected) selected
 
 open CriticalMapDisplacementWindow public
 
@@ -39,10 +44,10 @@ selectedSelfMap :
     (selected window)
 selectedSelfMap window =
   transitive window
-    (budgetMonotone window (selectedBelowThreshold window))
-    (transitive window
-      (thresholdSelfMap window)
+    (budgetBelowScaledRadius window
+      (selected window)
       (selectedBelowThreshold window))
+    (scaledSelectedBelowSelected window)
 
 record DisplacementWindowCertificate {Bound : Set}
     (window : CriticalMapDisplacementWindow Bound) : Set₁ where
