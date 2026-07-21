@@ -6,6 +6,16 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 open import Verification.JacobianCounterexampleKernel as Kernel
+  using
+    ( ¬_
+    ; Injective
+    ; F
+    ; F-notInjective
+    ; JacobianConjectureDimension3
+    ; jacobianConjectureDimension3False
+    ; JacobianConjectureDimensionThreePlus
+    ; jacobianConjectureDimensionThreePlusFalse
+    )
 open import DASHI.Provenance.AIAssistedMathematicsProvenance as Provenance
 
 -- Public attribution
@@ -75,18 +85,18 @@ alpogeJacobianCounterexampleReceipt =
 
 -- Kernel-level consequence exports.
 
-alpogeMapNotInjective : Kernel.¬ Kernel.Injective Kernel.F
-alpogeMapNotInjective = Kernel.F-notInjective
+alpogeMapNotInjective : ¬ Injective F
+alpogeMapNotInjective = F-notInjective
 
 jacobianConjectureDimension3Refutation :
-  Kernel.¬ Kernel.JacobianConjectureDimension3
+  ¬ JacobianConjectureDimension3
 jacobianConjectureDimension3Refutation =
-  Kernel.jacobianConjectureDimension3False
+  jacobianConjectureDimension3False
 
 paddedRefutation :
   (extraCoordinates : Nat) →
-  Kernel.¬ (Kernel.JacobianConjectureDimensionThreePlus extraCoordinates)
-paddedRefutation = Kernel.jacobianConjectureDimensionThreePlusFalse
+  ¬ (JacobianConjectureDimensionThreePlus extraCoordinates)
+paddedRefutation = jacobianConjectureDimensionThreePlusFalse
 
 provenance : Provenance.DiscoveryProvenance
 provenance = Provenance.alpogeFableProvenance
