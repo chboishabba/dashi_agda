@@ -15,12 +15,17 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 record PublishedPeriodicHarmonicAnalysisAuthority
-    {i b : Level}
-    (Index Shell Time State Bound : Set i)
-    (LessEqual : Bound → Bound → Set b) :
-    Set (lsuc (i ⊔ b)) where
+    {ℓIndex ℓShell ℓTime ℓState ℓBound ℓOrder ℓProp : Level}
+    (Index : Set ℓIndex)
+    (Shell : Set ℓShell)
+    (Time : Set ℓTime)
+    (State : Set ℓState)
+    (Bound : Set ℓBound)
+    (LessEqual : Bound → Bound → Set ℓOrder) :
+    Set (lsuc
+      (ℓIndex ⊔ ℓShell ⊔ ℓTime ⊔ ℓState ⊔ ℓBound ⊔ ℓOrder ⊔ ℓProp)) where
   field
-    Admissible : Index → Time → State → Set i
+    Admissible : Index → Time → State → Set ℓProp
 
     shellVelocityL2 shellGradientL2 shellVorticityLInfinity :
       Shell → State → Bound
@@ -40,7 +45,6 @@ record PublishedPeriodicHarmonicAnalysisAuthority
     farHighLeft farHighRight farHighSobolevMajorant :
       Index → Time → State → Bound
 
-    -- Bernstein and curl on every periodic dyadic shell.
     shellCurlEstimate : ∀ shell state →
       LessEqual (shellGradientL2 shell state)
         (shellVelocityL2 shell state)
@@ -49,7 +53,6 @@ record PublishedPeriodicHarmonicAnalysisAuthority
       LessEqual (shellVorticityLInfinity shell state)
         (shellGradientL2 shell state)
 
-    -- Bony decomposition estimates, uniform in shell and Galerkin cutoff.
     bonyLowHighEstimate : ∀ q τ u →
       Admissible q τ u →
       LessEqual (nearLowHigh q τ u) (nearLowHighProduct q τ u)
@@ -62,7 +65,6 @@ record PublishedPeriodicHarmonicAnalysisAuthority
       Admissible q τ u →
       LessEqual (nearHighHigh q τ u) (nearHighHighProduct q τ u)
 
-    -- Smooth multiplier mean-value theorem after exact divergence cancellation.
     multiplierMeanValueEstimate : ∀ q τ u →
       Admissible q τ u →
       LessEqual (multiplierDifference q τ u) (meanValueMajorant q τ u)
@@ -71,7 +73,6 @@ record PublishedPeriodicHarmonicAnalysisAuthority
       Admissible q τ u →
       LessEqual (farLowCommutator q τ u) (multiplierDifference q τ u)
 
-    -- H^s high-tail theorem for s > 5/2 and both paraproduct placements.
     highSobolevTailEstimate : ∀ q τ u →
       Admissible q τ u →
       LessEqual (highFiveHalvesTail q τ u) (hSobolevNorm q τ u)
