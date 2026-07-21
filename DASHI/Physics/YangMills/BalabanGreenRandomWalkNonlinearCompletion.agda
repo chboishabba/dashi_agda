@@ -9,10 +9,9 @@ open import DASHI.Physics.YangMills.BalabanPatchRegimeHodgeUniformity using
 ------------------------------------------------------------------------
 -- D. Green operator and random-walk estimates.
 --
--- The analytic estimates remain proof-relevant leaves at the geometry and
--- real-analysis boundary.  The important structural correction is enforced:
--- fullGreen is the limit of the finite random-walk partial sums, rather than
--- being equated with every finite partial sum.
+-- Analytic estimates remain proof-relevant leaves.  The structural correction
+-- is exact: fullGreen is the limit of finite random-walk partial sums, not every
+-- finite partial sum.
 ------------------------------------------------------------------------
 
 record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
@@ -36,11 +35,10 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
     CG-bulk CG-boundary CG-interface CG-corner CG-nested CG0 : Bound
     C∇G-bulk C∇G-boundary C∇G-interface C∇G-corner C∇G-nested C∇G0 : Bound
     C∇²G-bulk C∇²G-boundary C∇²G-interface C∇²G-corner C∇²G-nested C∇²G0 : Bound
-
     qBulk qBoundary qInterface qCorner qNested q : Bound
     CG-tail Ccorr geometricCorrectionBound : Bound
 
-    -- D1--D5: regimewise reference Green bounds.
+    -- D1--D5.
     bulkGreenBound : ∀ index f → regime index ≡ bulk →
       LessEqual (weightedNorm (referenceGreen index f))
         (multiply CG-bulk (weightedNorm f))
@@ -57,7 +55,7 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
       LessEqual (weightedNorm (referenceGreen index f))
         (multiply CG-nested (weightedNorm f))
 
-    -- D6--D10: regimewise first-derivative bounds.
+    -- D6--D10.
     bulkGradientGreenBound : ∀ index f → regime index ≡ bulk →
       LessEqual (weightedNorm (gradientGreen index f))
         (multiply C∇G-bulk (weightedNorm f))
@@ -74,7 +72,7 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
       LessEqual (weightedNorm (gradientGreen index f))
         (multiply C∇G-nested (weightedNorm f))
 
-    -- D11--D15: regimewise second-derivative bounds.
+    -- D11--D15.
     bulkSecondGradientGreenBound : ∀ index f → regime index ≡ bulk →
       LessEqual (weightedNorm (secondGradientGreen index f))
         (multiply C∇²G-bulk (weightedNorm f))
@@ -91,20 +89,30 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
       LessEqual (weightedNorm (secondGradientGreen index f))
         (multiply C∇²G-nested (weightedNorm f))
 
-    -- D16: common constants.  The regime-indexed selectors below prevent the
-    -- common bounds from drifting away from the five concrete constants.
-    regimeGreenConstantsHaveCommonUpper :
-      (r : PatchRegime) → LessEqual (greenConstant r) CG0
-    regimeGradientConstantsHaveCommonUpper :
-      (r : PatchRegime) → LessEqual (gradientConstant r) C∇G0
-    regimeSecondGradientConstantsHaveCommonUpper :
-      (r : PatchRegime) → LessEqual (secondGradientConstant r) C∇²G0
+    -- D16 leaves, assembled into regime-indexed theorems below.
+    bulkGreenBelowCommon : LessEqual CG-bulk CG0
+    boundaryGreenBelowCommon : LessEqual CG-boundary CG0
+    interfaceGreenBelowCommon : LessEqual CG-interface CG0
+    cornerGreenBelowCommon : LessEqual CG-corner CG0
+    nestedGreenBelowCommon : LessEqual CG-nested CG0
 
-    -- D17: exact local-parametrix residual equation.
+    bulkGradientBelowCommon : LessEqual C∇G-bulk C∇G0
+    boundaryGradientBelowCommon : LessEqual C∇G-boundary C∇G0
+    interfaceGradientBelowCommon : LessEqual C∇G-interface C∇G0
+    cornerGradientBelowCommon : LessEqual C∇G-corner C∇G0
+    nestedGradientBelowCommon : LessEqual C∇G-nested C∇G0
+
+    bulkSecondGradientBelowCommon : LessEqual C∇²G-bulk C∇²G0
+    boundarySecondGradientBelowCommon : LessEqual C∇²G-boundary C∇²G0
+    interfaceSecondGradientBelowCommon : LessEqual C∇²G-interface C∇²G0
+    cornerSecondGradientBelowCommon : LessEqual C∇²G-corner C∇²G0
+    nestedSecondGradientBelowCommon : LessEqual C∇²G-nested C∇²G0
+
+    -- D17.
     localParametrixResidualEquation : ∀ index f →
       H index (localGreen index f) ≡ difference f (residual index f)
 
-    -- D18--D22: regimewise weighted residual bounds.
+    -- D18--D22.
     bulkResidualBound : ∀ index f → regime index ≡ bulk →
       LessEqual (weightedNorm (residual index f))
         (multiply qBulk (weightedNorm f))
@@ -121,8 +129,8 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
       LessEqual (weightedNorm (residual index f))
         (multiply qNested (weightedNorm f))
 
-    -- D23: selected safe aggregate.  A future disjoint-patch theorem may
-    -- replace this sum by a maximum without changing the downstream surface.
+    -- D23.  The current safe aggregate is the sum; a disjoint-patch producer
+    -- may later replace this by a maximum without changing D24--D29.
     patchResidualSumBelowQ :
       LessEqual
         (add qBulk (add qBoundary (add qInterface (add qCorner qNested))))
@@ -137,7 +145,7 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
       LessEqual (weightedNorm (tail index n f))
         (multiply (multiply CG-tail (pow q n)) (weightedNorm f))
 
-    -- D26: mathematically correct Neumann representation.
+    -- D26.
     neumannSeriesRepresentsGreen : ∀ index f →
       fullGreen index f ≡ limit (λ n → partialRandomWalk index n f)
 
@@ -149,17 +157,16 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
       LessEqual Ccorr geometricCorrectionBound
     geometricCorrectionBoundIsOneOverOneMinusQ : Set
 
-    -- D28: pointwise form of operator factorization.
+    -- D28, pointwise operator equality.
     fullGreenFactorization : ∀ index f →
       fullGreen index f ≡ referenceGreen index (correctionInverse index f)
     gradientFullGreenFactorization : ∀ index f →
-      gradientFullGreen index f ≡
-      gradientGreen index (correctionInverse index f)
+      gradientFullGreen index f ≡ gradientGreen index (correctionInverse index f)
     secondGradientFullGreenFactorization : ∀ index f →
       secondGradientFullGreen index f ≡
       secondGradientGreen index (correctionInverse index f)
 
-    -- D29: final full Green estimates with the product constants fixed here.
+    -- D29, with constants CG0*Ccorr, C∇G0*Ccorr and C∇²G0*Ccorr.
     uniformWeightedGreenBound : ∀ index f →
       LessEqual (weightedNorm (fullGreen index f))
         (multiply (multiply CG0 Ccorr) (weightedNorm f))
@@ -170,35 +177,67 @@ record GreenRandomWalkCompletion (Index State Bound : Set) : Set₁ where
       LessEqual (weightedNorm (secondGradientFullGreen index f))
         (multiply (multiply C∇²G0 Ccorr) (weightedNorm f))
 
-  greenConstant : PatchRegime → Bound
-  greenConstant bulk = CG-bulk
-  greenConstant boundary = CG-boundary
-  greenConstant scaleInterface = CG-interface
-  greenConstant corner = CG-corner
-  greenConstant nestedRestriction = CG-nested
-
-  gradientConstant : PatchRegime → Bound
-  gradientConstant bulk = C∇G-bulk
-  gradientConstant boundary = C∇G-boundary
-  gradientConstant scaleInterface = C∇G-interface
-  gradientConstant corner = C∇G-corner
-  gradientConstant nestedRestriction = C∇G-nested
-
-  secondGradientConstant : PatchRegime → Bound
-  secondGradientConstant bulk = C∇²G-bulk
-  secondGradientConstant boundary = C∇²G-boundary
-  secondGradientConstant scaleInterface = C∇²G-interface
-  secondGradientConstant corner = C∇²G-corner
-  secondGradientConstant nestedRestriction = C∇²G-nested
-
 open GreenRandomWalkCompletion public
 
+greenConstant :
+  ∀ {Index State Bound} →
+  GreenRandomWalkCompletion Index State Bound → PatchRegime → Bound
+greenConstant D bulk = CG-bulk D
+greenConstant D boundary = CG-boundary D
+greenConstant D scaleInterface = CG-interface D
+greenConstant D corner = CG-corner D
+greenConstant D nestedRestriction = CG-nested D
+
+gradientConstant :
+  ∀ {Index State Bound} →
+  GreenRandomWalkCompletion Index State Bound → PatchRegime → Bound
+gradientConstant D bulk = C∇G-bulk D
+gradientConstant D boundary = C∇G-boundary D
+gradientConstant D scaleInterface = C∇G-interface D
+gradientConstant D corner = C∇G-corner D
+gradientConstant D nestedRestriction = C∇G-nested D
+
+secondGradientConstant :
+  ∀ {Index State Bound} →
+  GreenRandomWalkCompletion Index State Bound → PatchRegime → Bound
+secondGradientConstant D bulk = C∇²G-bulk D
+secondGradientConstant D boundary = C∇²G-boundary D
+secondGradientConstant D scaleInterface = C∇²G-interface D
+secondGradientConstant D corner = C∇²G-corner D
+secondGradientConstant D nestedRestriction = C∇²G-nested D
+
+regimeGreenConstantsHaveCommonUpper :
+  ∀ {Index State Bound}
+    (D : GreenRandomWalkCompletion Index State Bound) (r : PatchRegime) →
+  LessEqual D (greenConstant D r) (CG0 D)
+regimeGreenConstantsHaveCommonUpper D bulk = bulkGreenBelowCommon D
+regimeGreenConstantsHaveCommonUpper D boundary = boundaryGreenBelowCommon D
+regimeGreenConstantsHaveCommonUpper D scaleInterface = interfaceGreenBelowCommon D
+regimeGreenConstantsHaveCommonUpper D corner = cornerGreenBelowCommon D
+regimeGreenConstantsHaveCommonUpper D nestedRestriction = nestedGreenBelowCommon D
+
+regimeGradientConstantsHaveCommonUpper :
+  ∀ {Index State Bound}
+    (D : GreenRandomWalkCompletion Index State Bound) (r : PatchRegime) →
+  LessEqual D (gradientConstant D r) (C∇G0 D)
+regimeGradientConstantsHaveCommonUpper D bulk = bulkGradientBelowCommon D
+regimeGradientConstantsHaveCommonUpper D boundary = boundaryGradientBelowCommon D
+regimeGradientConstantsHaveCommonUpper D scaleInterface = interfaceGradientBelowCommon D
+regimeGradientConstantsHaveCommonUpper D corner = cornerGradientBelowCommon D
+regimeGradientConstantsHaveCommonUpper D nestedRestriction = nestedGradientBelowCommon D
+
+regimeSecondGradientConstantsHaveCommonUpper :
+  ∀ {Index State Bound}
+    (D : GreenRandomWalkCompletion Index State Bound) (r : PatchRegime) →
+  LessEqual D (secondGradientConstant D r) (C∇²G0 D)
+regimeSecondGradientConstantsHaveCommonUpper D bulk = bulkSecondGradientBelowCommon D
+regimeSecondGradientConstantsHaveCommonUpper D boundary = boundarySecondGradientBelowCommon D
+regimeSecondGradientConstantsHaveCommonUpper D scaleInterface = interfaceSecondGradientBelowCommon D
+regimeSecondGradientConstantsHaveCommonUpper D corner = cornerSecondGradientBelowCommon D
+regimeSecondGradientConstantsHaveCommonUpper D nestedRestriction = nestedSecondGradientBelowCommon D
+
 ------------------------------------------------------------------------
--- E. Nonlinear remainder estimates.
---
--- The seven component constants depend on the selected radius.  E11 is retained
--- as the assembled endpoint of E1--E10 because the generic Bound carrier does
--- not assume the ordered-semiring laws needed to reconstruct it silently.
+-- E. Seven radius-dependent nonlinear mechanisms.
 ------------------------------------------------------------------------
 
 record SevenNonlinearRemainderCompletion
@@ -217,18 +256,15 @@ record SevenNonlinearRemainderCompletion
     LBCH Lcomm Ltransport LbackgroundDerivative Lgauge Lconstraint Lchart LN :
       Bound → Bound
 
-    -- Concrete lower analytic inputs for E1 and E2.
     bchThirdOrderRemainderBound : Index → Set
     bchDerivativeDifferenceBound : Index → Set
     compactLieBracketInequality : Index → Set
 
-    -- E1.
+    -- E1--E2.
     bchHigherLipschitz : ∀ index h h′ →
       InCriticalBall index h → InCriticalBall index h′ →
       LessEqual (norm (subtract (NBCH index h) (NBCH index h′)))
         (multiply (LBCH radius) (norm (subtract h h′)))
-
-    -- E2.
     commutatorRemainderLipschitz : ∀ index h h′ →
       InCriticalBall index h → InCriticalBall index h′ →
       LessEqual (norm (subtract (Ncomm index h) (Ncomm index h′)))
@@ -258,7 +294,7 @@ record SevenNonlinearRemainderCompletion
       LessEqual (norm (subtract (Nchart index h) (Nchart index h′)))
         (multiply (Lchart radius) (norm (subtract h h′)))
 
-    -- E8: exact seven-part majorization of the nonlinear difference.
+    -- E8.
     nonlinearDifferenceBelowSevenParts : ∀ index h h′ →
       InCriticalBall index h → InCriticalBall index h′ →
       LessEqual
@@ -279,7 +315,7 @@ record SevenNonlinearRemainderCompletion
                       (Nconstraint index h′)))
                     (norm (subtract (Nchart index h) (Nchart index h′)))))))))
 
-    -- E9.
+    -- E9--E10.
     sevenComponentConstantBound :
       LessEqual
         (add (LBCH radius)
@@ -289,12 +325,10 @@ record SevenNonlinearRemainderCompletion
                 (add (Lgauge radius)
                   (add (Lconstraint radius) (Lchart radius)))))))
         (LN radius)
-
-    -- E10.
     nonlinearUpperMonotone : ∀ {r r′} →
       LessEqual r r′ → LessEqual (LN r) (LN r′)
 
-    -- E11: assembled endpoint consumed by the contraction theorem.
+    -- E11.  This is the exact assembled endpoint consumed by contraction.
     uniformNonlinearRemainderLipschitz : ∀ index h h′ →
       InCriticalBall index h → InCriticalBall index h′ →
       LessEqual
@@ -302,11 +336,6 @@ record SevenNonlinearRemainderCompletion
         (multiply (LN radius) (norm (subtract h h′)))
 
 open SevenNonlinearRemainderCompletion public
-
-------------------------------------------------------------------------
--- One coherent package prevents Green constants, residual data, and nonlinear
--- constants from being mixed across unrelated patch families or radii.
-------------------------------------------------------------------------
 
 record GreenNonlinearAnalyticCompletion
     (Index State Bound : Set) : Set₁ where
