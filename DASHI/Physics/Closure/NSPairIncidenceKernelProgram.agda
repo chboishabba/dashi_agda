@@ -47,4 +47,5 @@ open import DASHI.Physics.Closure.NSCompactGammaDifferentialExpenditureProducer 
 open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialInstantiation public
 open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticLeafCompletion public
+open import DASHI.Physics.Closure.NSCompactGammaExactPotentialAndPacketBalance public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
