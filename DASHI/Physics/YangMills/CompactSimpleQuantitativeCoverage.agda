@@ -1,7 +1,9 @@
 module DASHI.Physics.YangMills.CompactSimpleQuantitativeCoverage where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product using (_×_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -22,10 +24,6 @@ data CompactSimpleLieGroup : Set where
 
 ------------------------------------------------------------------------
 -- Uniform local analytic package.
---
--- Scalar operations and estimates are supplied by the ambient analytic model.
--- The five named fields are exactly the estimates consumed by the local
--- exp/log, BCH, adjoint, and Haar-density parts of the RG construction.
 ------------------------------------------------------------------------
 
 record QuantitativeCompactLiePackage
@@ -80,11 +78,6 @@ open QuantitativeCompactLiePackage public
 
 ------------------------------------------------------------------------
 -- Standard compact-Lie analytic authority.
---
--- This is the sole imported boundary.  Once an authority is supplied, every
--- family theorem and the classification eliminator below are ordinary Agda
--- terms.  In particular, exceptional groups are not left as unrelated frontier
--- predicates.
 ------------------------------------------------------------------------
 
 record CompactSimpleQuantitativeAuthority
