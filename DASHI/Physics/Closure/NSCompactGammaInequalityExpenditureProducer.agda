@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSCompactGammaInequalityExpenditureProducer where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 
@@ -154,8 +154,8 @@ inequalityAbsorptionBoundsEscapeMargin A I =
       (_+_ A (initialPotential I) (remainderConstant I))
       (thetaEscape I)
   upperReassociation =
-    Agda.Builtin.Equality.trans
-      (Agda.Builtin.Equality.cong
+    trans
+      (cong
         (λ middle → _+_ A (initialPotential I) middle)
         (addCommutative A (thetaEscape I) (remainderConstant I)))
       (sym (addAssociative A
