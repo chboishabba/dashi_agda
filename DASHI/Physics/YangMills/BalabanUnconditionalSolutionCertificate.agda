@@ -7,56 +7,118 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 -- Terminal fail-closed certificate for the constructive Yang--Mills chain.
 --
--- This record contains proof objects, not status flags.  A value can only be
--- constructed after the finite-volume, thermodynamic, continuum OS,
--- interaction and mass-gap theorems have all been proved for one coherent
--- family.  No global inhabitant is supplied here.
+-- Every theorem below is indexed by the same selected gauge group, cutoff
+-- family, finite-volume measures, Schwinger family, infinite-volume limit,
+-- continuum limit and reconstructed Hamiltonian.  This prevents a terminal
+-- certificate from mixing witnesses belonging to unrelated constructions.
+-- No global inhabitant is supplied here.
 ------------------------------------------------------------------------
 
-record UnconditionalYangMillsSolution : Set₁ where
+record UnconditionalYangMillsSolution
+    (GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
+      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
+      HilbertSpace Hamiltonian Mass : Set) : Set₁ where
   field
-    FiniteVolumeConstruction : Set
-    finiteVolumeConstruction : FiniteVolumeConstruction
+    selectedGaugeGroup : GaugeGroup
+    selectedCutoffFamily : CutoffFamily
+    selectedMeasureFamily : MeasureFamily
+    selectedSchwingerFamily : SchwingerFamily
+    selectedInfiniteVolumeTheory : InfiniteVolumeTheory
+    selectedContinuumTheory : ContinuumTheory
+    selectedPhysicalObservableAlgebra : PhysicalObservableAlgebra
+    selectedHilbertSpace : HilbertSpace
+    selectedHamiltonian : Hamiltonian
+    selectedMassGap : Mass
 
-    UniformRenormalizedSchwingerBounds : Set
-    uniformRenormalizedSchwingerBounds : UniformRenormalizedSchwingerBounds
+    CompactSimpleGaugeGroup : GaugeGroup → Set
+    compactSimpleGaugeGroup : CompactSimpleGaugeGroup selectedGaugeGroup
 
-    ThermodynamicLimitExists : Set
-    thermodynamicLimitExists : ThermodynamicLimitExists
+    FiniteVolumeConstruction :
+      GaugeGroup → CutoffFamily → MeasureFamily → Set
+    finiteVolumeConstruction :
+      FiniteVolumeConstruction
+        selectedGaugeGroup selectedCutoffFamily selectedMeasureFamily
 
-    ThermodynamicLimitUnique : Set
-    thermodynamicLimitUnique : ThermodynamicLimitUnique
+    SchwingerFamilyGeneratedByMeasures :
+      MeasureFamily → SchwingerFamily → Set
+    schwingerFamilyGeneratedByMeasures :
+      SchwingerFamilyGeneratedByMeasures
+        selectedMeasureFamily selectedSchwingerFamily
 
-    BoundaryConditionIndependent : Set
-    boundaryConditionIndependent : BoundaryConditionIndependent
+    UniformRenormalizedSchwingerBounds :
+      CutoffFamily → SchwingerFamily → Set
+    uniformRenormalizedSchwingerBounds :
+      UniformRenormalizedSchwingerBounds
+        selectedCutoffFamily selectedSchwingerFamily
 
-    ContinuumLimitExists : Set
-    continuumLimitExists : ContinuumLimitExists
+    ThermodynamicLimitOf :
+      SchwingerFamily → InfiniteVolumeTheory → Set
+    thermodynamicLimitExists :
+      ThermodynamicLimitOf
+        selectedSchwingerFamily selectedInfiniteVolumeTheory
 
-    ContinuumLimitUnique : Set
-    continuumLimitUnique : ContinuumLimitUnique
+    ThermodynamicLimitUnique :
+      SchwingerFamily → InfiniteVolumeTheory → Set
+    thermodynamicLimitUnique :
+      ThermodynamicLimitUnique
+        selectedSchwingerFamily selectedInfiniteVolumeTheory
 
-    ContinuumOSAxioms : Set
-    continuumOSAxioms : ContinuumOSAxioms
+    BoundaryConditionIndependent : InfiniteVolumeTheory → Set
+    boundaryConditionIndependent :
+      BoundaryConditionIndependent selectedInfiniteVolumeTheory
 
-    GaugeFixingIndependentPhysicalAlgebra : Set
+    ContinuumLimitOf : InfiniteVolumeTheory → ContinuumTheory → Set
+    continuumLimitExists :
+      ContinuumLimitOf selectedInfiniteVolumeTheory selectedContinuumTheory
+
+    ContinuumLimitUnique : InfiniteVolumeTheory → ContinuumTheory → Set
+    continuumLimitUnique :
+      ContinuumLimitUnique selectedInfiniteVolumeTheory selectedContinuumTheory
+
+    ContinuumOSAxioms : ContinuumTheory → Set
+    continuumOSAxioms : ContinuumOSAxioms selectedContinuumTheory
+
+    PhysicalAlgebraOf :
+      ContinuumTheory → PhysicalObservableAlgebra → Set
+    physicalAlgebraOf :
+      PhysicalAlgebraOf
+        selectedContinuumTheory selectedPhysicalObservableAlgebra
+
+    GaugeFixingIndependentPhysicalAlgebra :
+      ContinuumTheory → PhysicalObservableAlgebra → Set
     gaugeFixingIndependentPhysicalAlgebra :
       GaugeFixingIndependentPhysicalAlgebra
+        selectedContinuumTheory selectedPhysicalObservableAlgebra
 
-    ContinuumTheoryNonzero : Set
-    continuumTheoryNonzero : ContinuumTheoryNonzero
+    ContinuumTheoryNonzero : ContinuumTheory → Set
+    continuumTheoryNonzero : ContinuumTheoryNonzero selectedContinuumTheory
 
-    ContinuumTheoryNonGaussian : Set
-    continuumTheoryNonGaussian : ContinuumTheoryNonGaussian
+    ContinuumTheoryNonGaussian : ContinuumTheory → Set
+    continuumTheoryNonGaussian :
+      ContinuumTheoryNonGaussian selectedContinuumTheory
 
-    UniformConnectedCorrelationDecay : Set
-    uniformConnectedCorrelationDecay : UniformConnectedCorrelationDecay
+    UniformConnectedCorrelationDecay :
+      SchwingerFamily → Mass → Set
+    uniformConnectedCorrelationDecay :
+      UniformConnectedCorrelationDecay
+        selectedSchwingerFamily selectedMassGap
 
-    PositiveClusteringRate : Set
-    positiveClusteringRate : PositiveClusteringRate
+    Positive : Mass → Set
+    positiveClusteringRate : Positive selectedMassGap
 
-    PhysicalHamiltonianMassGap : Set
-    physicalHamiltonianMassGap : PhysicalHamiltonianMassGap
+    OSReconstructionProduces :
+      ContinuumTheory → PhysicalObservableAlgebra →
+      HilbertSpace → Hamiltonian → Set
+    osReconstructionProduces :
+      OSReconstructionProduces
+        selectedContinuumTheory
+        selectedPhysicalObservableAlgebra
+        selectedHilbertSpace
+        selectedHamiltonian
+
+    PhysicalHamiltonianMassGap : Hamiltonian → Mass → Set
+    physicalHamiltonianMassGap :
+      PhysicalHamiltonianMassGap selectedHamiltonian selectedMassGap
 
     FocusedAggregateTypechecks : Set
     focusedAggregateTypechecks : FocusedAggregateTypechecks
@@ -70,26 +132,56 @@ record UnconditionalYangMillsSolution : Set₁ where
     NoUnsolvedMetavariables : Set
     noUnsolvedMetavariables : NoUnsolvedMetavariables
 
-    NoConditionalLeafOnFinalPath : Set
-    noConditionalLeafOnFinalPath : NoConditionalLeafOnFinalPath
+    NoConditionalLeafOnFinalPath :
+      GaugeGroup → CutoffFamily → MeasureFamily → SchwingerFamily →
+      InfiniteVolumeTheory → ContinuumTheory → Hamiltonian → Set
+    noConditionalLeafOnFinalPath :
+      NoConditionalLeafOnFinalPath
+        selectedGaugeGroup selectedCutoffFamily selectedMeasureFamily
+        selectedSchwingerFamily selectedInfiniteVolumeTheory
+        selectedContinuumTheory selectedHamiltonian
 
-    NoConjecturalLeafOnFinalPath : Set
-    noConjecturalLeafOnFinalPath : NoConjecturalLeafOnFinalPath
+    NoConjecturalLeafOnFinalPath :
+      GaugeGroup → CutoffFamily → MeasureFamily → SchwingerFamily →
+      InfiniteVolumeTheory → ContinuumTheory → Hamiltonian → Set
+    noConjecturalLeafOnFinalPath :
+      NoConjecturalLeafOnFinalPath
+        selectedGaugeGroup selectedCutoffFamily selectedMeasureFamily
+        selectedSchwingerFamily selectedInfiniteVolumeTheory
+        selectedContinuumTheory selectedHamiltonian
 
-    ImportedAuthoritiesHypothesesMatch : Set
-    importedAuthoritiesHypothesesMatch : ImportedAuthoritiesHypothesesMatch
+    ImportedAuthoritiesHypothesesMatch :
+      GaugeGroup → CutoffFamily → MeasureFamily → SchwingerFamily → Set
+    importedAuthoritiesHypothesesMatch :
+      ImportedAuthoritiesHypothesesMatch
+        selectedGaugeGroup selectedCutoffFamily
+        selectedMeasureFamily selectedSchwingerFamily
 
 open UnconditionalYangMillsSolution public
 
--- Promotion is derived from a complete certificate.  There is deliberately no
--- nullary `true` declaration: until a certificate is constructed, the existing
--- aggregate remains fail-closed.
+-- Promotion is derived from a coherent complete certificate. There is
+-- deliberately no nullary `true` declaration: until such a certificate is
+-- constructed, the aggregate repository status remains fail-closed.
 clayYangMillsSubmissionPromotion :
-  UnconditionalYangMillsSolution → Bool
+  ∀ {GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
+      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
+      HilbertSpace Hamiltonian Mass} →
+  UnconditionalYangMillsSolution
+    GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
+    InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
+    HilbertSpace Hamiltonian Mass →
+  Bool
 clayYangMillsSubmissionPromotion solution = true
 
 certificatePromotesSubmission :
-  ∀ solution → clayYangMillsSubmissionPromotion solution ≡ true
+  ∀ {GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
+      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
+      HilbertSpace Hamiltonian Mass}
+    (solution : UnconditionalYangMillsSolution
+      GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
+      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
+      HilbertSpace Hamiltonian Mass) →
+  clayYangMillsSubmissionPromotion solution ≡ true
 certificatePromotesSubmission solution = refl
 
 unconditionalSolutionGateAssemblyLevel : ProofLevel
