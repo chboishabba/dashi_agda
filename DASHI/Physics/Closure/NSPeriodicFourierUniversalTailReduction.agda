@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as Radius
 import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization as Young
 import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction as Tail
 import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction as Coverage
+import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction as Dini
 
 ------------------------------------------------------------------------
 -- One owner for the six universal packages after the finite certificate.
@@ -21,7 +22,7 @@ import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction as Coverag
 --   1. a universal five-halves theorem;
 --   2. cutoff-uniform Fourier product bounds plus one generic Young law;
 --   3/4. primitive far-low/far-high chains;
---   5. semantic real-carrier parameter interpretation plus first-exit reduction;
+--   5. semantic real-carrier parameter interpretation plus concrete Dini data;
 --   6. adaptive-chart-or-direct-BKM official coverage.
 --
 -- All algebraic, transitivity, Young-composition, no-first-exit and coverage-case
@@ -58,7 +59,8 @@ record RealCarrierInwardCoercivePackage
       ParameterBridge.CanonicalParameterSemanticBridge
         A Index parameterNumerals
 
-    firstExitBoundary : Coverage.FirstExitBoundaryReduction i
+    diniOrder : Dini.DiniBoundaryOrder i
+    diniFirstExit : Dini.FourFaceDiniFirstExitReduction diniOrder
 
 open RealCarrierInwardCoercivePackage public
 
@@ -79,10 +81,10 @@ realCarrierFirstExitImpossible :
     {R8 : Tail.RadiusEightPrimitiveInputs A Index} →
   (R : RealCarrierInwardCoercivePackage A Index R8) →
   ∀ τ u →
-  Coverage.FirstExit (firstExitBoundary R) τ u →
+  Dini.FirstExit (diniFirstExit R) τ u →
   ⊥
 realCarrierFirstExitImpossible R =
-  Coverage.compactGammaFirstExitImpossible (firstExitBoundary R)
+  Dini.diniFirstExitImpossible (diniFirstExit R)
 
 record UniversalPeriodicFourierTailInputs
     {i : Level}
