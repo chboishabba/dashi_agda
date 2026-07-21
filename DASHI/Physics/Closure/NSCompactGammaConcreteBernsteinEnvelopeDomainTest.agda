@@ -32,6 +32,7 @@ open import DASHI.Physics.Closure.NSPeriodicContinuationAuthorityAdapter public
 open import DASHI.Physics.Closure.NSCompactGammaCoverageFromContinuationAuthority public
 open import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction public
 open import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion public
+open import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailRegression public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset public
 open import DASHI.Physics.Closure.NSCompactGammaCriticalObligationCompletion public
