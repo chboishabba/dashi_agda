@@ -23,6 +23,10 @@ EXPECTED = {
         "patchRegimeGreenAssemblyLevel": "machineChecked",
         "patchRegimeGreenEstimateInputsLevel": "conditional",
     },
+    "BalabanPatchTransferAnalyticReduction.agda": {
+        "patchTransferAnalyticReductionAssemblyLevel": "machineChecked",
+        "bulkAndTransferEstimateInputsLevel": "conditional",
+    },
     "BalabanBackgroundPerturbationBudget.agda": {
         "backgroundPerturbationAssemblyLevel": "machineChecked",
         "backgroundPerturbationComponentInputsLevel": "conditional",
