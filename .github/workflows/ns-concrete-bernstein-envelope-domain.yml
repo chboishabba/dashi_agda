@@ -107,6 +107,11 @@ jobs:
             --trajectory-json "$phase/trajectory.json" \
             --boundary-json "$phase/boundary_galerkin.json" \
             --output-json "$phase/galerkin-check.json"
+          python scripts/check_ns_harmonic_phase_results.py \
+            --multiplier-json "$phase/multiplier.json" \
+            --full-operator-json "$phase/full_operator.json" \
+            --near-json "$phase/near_full.json" \
+            --output-json "$phase/harmonic-check.json"
           diff -u scripts/data/outputs/ns_radius8_far_low_exhaustive.json "$phase/far_low.json"
           diff -u scripts/data/outputs/ns_radius8_full_operator.json "$phase/full_operator.json"
           diff -u scripts/data/outputs/ns_radius8_multiplier_scaling.json "$phase/multiplier.json"
@@ -120,6 +125,7 @@ jobs:
           diff -u scripts/data/outputs/ns_adaptive_chart_coverage_scan.json "$phase/coverage.json"
           diff -u scripts/data/outputs/check_ns_periodic_phase_receipts.json "$phase/check.json"
           diff -u scripts/data/outputs/check_ns_galerkin_falsifications.json "$phase/galerkin-check.json"
+          diff -u scripts/data/outputs/check_ns_harmonic_phase_results.json "$phase/harmonic-check.json"
 
   focused-agda:
     needs: finite-audit
