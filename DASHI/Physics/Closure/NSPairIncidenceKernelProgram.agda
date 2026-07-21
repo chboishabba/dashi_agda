@@ -59,4 +59,5 @@ import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction
 import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge
 import DASHI.Physics.Closure.NSCompactGammaFixedFloorScalingObstruction
+import DASHI.Physics.Closure.NSCompactGammaGeneratedCertificateBridge
 import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset
