@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPatchRegimeHodgeUniformity where
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
