@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision as FiveHalves
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision as Absorption
 import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction as NearReduction
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as RadiusEight
+import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge as ParameterBridge
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
 import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas as Frontier
 
@@ -51,9 +52,13 @@ record ExactCompactGammaMathematicalCutset
     radiusEightFourierReduction :
       RadiusEight.RadiusEightFourierReduction A Index
 
+    -- The tuple's semantic real-carrier comparisons are derived from the exact
+    -- dyadic certificate and the radius-eight Fourier owner, rather than being
+    -- accepted as a disconnected `CanonicalParameterInequalities` witness.
     parameterNumerals : CanonicalParameterNumerals {i} A
-    parameterInequalities :
-      CanonicalParameterInequalities A Index parameterNumerals
+    parameterBridge :
+      ParameterBridge.CanonicalParameterSemanticBridge
+        A Index parameterNumerals
 
     -- E: a proof-side route is required for the official completion owner.
     -- Obstructions remain exported as diagnostics, but cannot inhabit this
@@ -251,6 +256,18 @@ exactRadiusEightAnalyticBounds C =
   RadiusEight.periodicRadiusEightAnalyticBounds
     (radiusEightFourierReduction C)
 
+exactParameterInequalities :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
+  CanonicalParameterInequalities A Index (parameterNumerals C)
+exactParameterInequalities C =
+  ParameterBridge.canonicalParameterInequalitiesFromBridge
+    (parameterBridge C)
+    (exactRadiusEightAnalyticBounds C)
+
 exactCanonicalTupleFeasible :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
     {Index : Set i} {Official : OfficialInitialDataSetting i}
@@ -260,7 +277,9 @@ exactCanonicalTupleFeasible :
   Frontier.SharedParameterFeasibility
     A Index (canonicalSevenParameterTuple (parameterNumerals C))
 exactCanonicalTupleFeasible C =
-  canonicalTupleFeasible (parameterNumerals C) (parameterInequalities C)
+  canonicalTupleFeasible
+    (parameterNumerals C)
+    (exactParameterInequalities C)
 
 -- Repository status remains fail-closed: defining the exact owner is not an
 -- inhabitant for the official periodic three-dimensional Navier--Stokes model.
