@@ -116,12 +116,14 @@ def main() -> None:
 
     gate = read(GATE)
     required_gate_fields = (
+        "solutionForEveryCompactSimpleGaugeGroup",
         "finiteVolumeConstruction",
         "uniformRenormalizedSchwingerBounds",
         "thermodynamicLimitExists",
         "thermodynamicLimitUnique",
         "continuumLimitExists",
         "continuumLimitUnique",
+        "quantumYangMillsTheoryOnR4",
         "continuumOSAxioms",
         "continuumTheoryNonGaussian",
         "uniformConnectedCorrelationDecay",
@@ -130,6 +132,7 @@ def main() -> None:
         "noConditionalLeafOnFinalPath",
         "noConjecturalLeafOnFinalPath",
         "importedAuthoritiesHypothesesMatch",
+        "officialJaffeWittenStatementMatched",
     )
     missing_gate = [name for name in required_gate_fields if name not in gate]
     if missing_gate:
@@ -172,6 +175,7 @@ def main() -> None:
     print("YM unconditional gate: PASS")
     print(f"  audited files: {len(AUDITED_NEW_FILES)}")
     print(f"  load-bearing theorem names present: {len(REQUIRED_THEOREMS)}")
+    print("  official all-compact-simple-groups quantifier present")
     print("  source theorem conversion regression present")
     print("  exact published-carrier regression present")
     print("  finite Fourier Hodge regression present")
