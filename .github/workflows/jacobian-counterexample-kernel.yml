@@ -4,8 +4,10 @@ on:
   push:
     paths:
       - "Verification/JacobianCounterexampleKernel.agda"
+      - "Verification/JacobianCounterexampleScalarExtension.agda"
       - "Verification/JacobianNoninjectiveRegression.agda"
       - "Verification/JacobianCounterexampleEverything.agda"
+      - "DASHI/Algebra/KellerMapConsequenceHierarchy.agda"
       - "DASHI/Algebra/LocalInverseVsGlobalInverse.agda"
       - "DASHI/Foundations/JacobianThreeSheetTriadicBridge.agda"
       - "DASHI/Governance/EvidenceGatedTheoremPromotion.agda"
@@ -20,8 +22,10 @@ on:
   pull_request:
     paths:
       - "Verification/JacobianCounterexampleKernel.agda"
+      - "Verification/JacobianCounterexampleScalarExtension.agda"
       - "Verification/JacobianNoninjectiveRegression.agda"
       - "Verification/JacobianCounterexampleEverything.agda"
+      - "DASHI/Algebra/KellerMapConsequenceHierarchy.agda"
       - "DASHI/Algebra/LocalInverseVsGlobalInverse.agda"
       - "DASHI/Foundations/JacobianThreeSheetTriadicBridge.agda"
       - "DASHI/Governance/EvidenceGatedTheoremPromotion.agda"
@@ -51,9 +55,13 @@ jobs:
           agda --version
       - name: Typecheck kernel polynomial theorem
         run: agda $AGDA_FLAGS Verification/JacobianCounterexampleKernel.agda
+      - name: Typecheck scalar-extension bridge
+        run: agda $AGDA_FLAGS Verification/JacobianCounterexampleScalarExtension.agda
       - name: Typecheck noninjectivity regression
         run: agda $AGDA_FLAGS Verification/JacobianNoninjectiveRegression.agda
       - name: Typecheck global ambiguity boundary
         run: agda $AGDA_FLAGS DASHI/Sheaf/GlobalAmbiguityBoundary.agda
+      - name: Typecheck Keller consequence hierarchy
+        run: agda $AGDA_FLAGS DASHI/Algebra/KellerMapConsequenceHierarchy.agda
       - name: Typecheck full Jacobian consequence aggregate
         run: agda $AGDA_FLAGS Verification/JacobianCounterexampleEverything.agda
