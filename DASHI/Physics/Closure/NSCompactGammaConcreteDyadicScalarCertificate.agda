@@ -2,7 +2,6 @@ module DASHI.Physics.Closure.NSCompactGammaConcreteDyadicScalarCertificate where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Agda.Builtin.Sigma using (Σ; _,_)
 
 ------------------------------------------------------------------------
 -- Exact nonnegative dyadic arithmetic at denominator eight.
@@ -52,10 +51,6 @@ halfStrictBarrierᴰ =
 
 ------------------------------------------------------------------------
 -- Literal R = 8 tail budget.
---
--- The analytic PDE layer must prove that its normalized constants are no
--- larger than these two eighth-units.  Once it does, the scalar comparison
--- itself is definitionally finite and kernel checked here.
 ------------------------------------------------------------------------
 
 canonicalRadius : Nat
@@ -84,7 +79,7 @@ radiusEightControlsTailᴰ = s≤s (s≤s z≤n)
 packetGain gammaGain offPacketGain : Nat
 packetGain = fourᴺ
 gammaGain = fourᴺ
-offPacketGain = twoᴺ
+offPacketGain = fourᴺ
 
 packetLoss gammaLoss offPacketLoss : Nat
 packetLoss = eightᴺ
@@ -98,7 +93,7 @@ gammaWeightTwoAbsorbsᴰ : gammaLoss ≤ᴺ twoᴺ * gammaGain
 gammaWeightTwoAbsorbsᴰ = ≤ᴺ-refl gammaLoss
 
 offPacketWeightOneAbsorbsᴰ : offPacketLoss ≤ᴺ offPacketGain
-offPacketWeightOneAbsorbsᴰ = ≤ᴺ-refl offPacketLoss
+offPacketWeightOneAbsorbsᴰ = s≤s (s≤s z≤n)
 
 canonicalTotalGain canonicalTotalLoss canonicalCoerciveRemainder : Nat
 canonicalTotalGain =
@@ -138,10 +133,8 @@ canonicalScalarCertificate = record
   }
 
 ------------------------------------------------------------------------
--- The exact remaining bridge.  It is deliberately a quantitative bound,
--- not a generic 'feasibility : Set' socket: the Fourier analysis must show
--- that its normalized low/high constants fit the certified eighth-unit
--- budgets above.
+-- Exact remaining quantitative bridge.  The Fourier layer must prove that
+-- its normalized low/high constants fit the certified eighth-unit budgets.
 ------------------------------------------------------------------------
 
 record RadiusEightAnalyticBounds : Set where
