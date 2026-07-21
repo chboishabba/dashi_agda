@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanFiniteOneStepCore where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc) renaming (zero to natZero)
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Data.Product.Base using (_×_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -68,8 +68,8 @@ matrixCompose socket multiply A B i k = sumWith socket (λ j → multiply (A i j
 record FiniteInverseCertificate {a : Level} (A : Set a) : Set (lsuc a) where
   field
     operator inverse : A → A
-    inverseLeft : inverse ∘ operator ≈ id
-    inverseRight : operator ∘ inverse ≈ id
+    inverseLeft : (inverse ∘ operator) ≈ (λ x → x)
+    inverseRight : (operator ∘ inverse) ≈ (λ x → x)
 open FiniteInverseCertificate public
 
 record ConstrainedMinimizerData {f c : Level} (Fine : Set f) (Coarse : Set c) : Set (lsuc (f ⊔ c)) where
@@ -179,8 +179,8 @@ record FiniteCovarianceCertificate {v s : Level} {Vector : Set v} {Scalar : Set 
   (hessianData : FiniteHessianCertificate Vector Scalar) : Set (lsuc (v ⊔ s)) where
   field
     covariance : Vector → Vector
-    covarianceLeft : covariance ∘ hessian hessianData ≈ id
-    covarianceRight : hessian hessianData ∘ covariance ≈ id
+    covarianceLeft : (covariance ∘ hessian hessianData) ≈ (λ x → x)
+    covarianceRight : (hessian hessianData ∘ covariance) ≈ (λ x → x)
 open FiniteCovarianceCertificate public
 
 record BlockSchurData {a s : Level} (A : Set a) (Scalar : Set s) : Set (lsuc (a ⊔ s)) where
@@ -214,7 +214,7 @@ data Walk {a : Level} (Step : Set a) : Set a where
   _then_ : Step → Walk Step → Walk Step
 
 walkLength : ∀ {a} {Step : Set a} → Walk Step → Nat
-walkLength emptyWalk = zero
+walkLength emptyWalk = natZero
 walkLength (_ then rest) = suc (walkLength rest)
 
 record RandomWalkExpansion {t s : Level} (Term : Set t) (Scalar : Set s) : Set (lsuc (t ⊔ s)) where
