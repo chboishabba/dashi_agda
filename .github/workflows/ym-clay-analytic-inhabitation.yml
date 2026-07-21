@@ -3,16 +3,18 @@ name: YM Clay analytic inhabitation
 on:
   push:
     branches:
-      - 'agent/ym-analytic-proof-reduction'
+      - 'agent/ym-unconditional-solution-spine'
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
@@ -23,9 +25,11 @@ on:
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
@@ -38,6 +42,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
+      - name: Typecheck exact published carrier matching
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda
+          '
+      - name: Typecheck unconditional solution gate
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda
+          '
       - name: Typecheck focused Yang-Mills aggregate
         run: |
           nix develop --accept-flake-config --command bash -lc '
