@@ -3,11 +3,11 @@ module DASHI.Physics.Closure.NSPeriodicObservableDerivativeAlgebra where
 open import Agda.Builtin.Equality using (_≡_)
 
 ------------------------------------------------------------------------
--- Exact symbolic differential-field laws used by all four boundary observables.
+-- Exact symbolic differential-field laws used by all compact-Gamma observables.
 --
 -- This is a theorem interface for ordinary real calculus, not a Navier--Stokes
--- estimate.  The subsequent modules derive the packet, Gamma, quotient and size
--- formulas from these laws rather than accepting four unrelated derivative facts.
+-- estimate.  The derivative modules derive packet, Gamma, off-packet and size
+-- formulas from this one law owner rather than accepting unrelated identities.
 ------------------------------------------------------------------------
 
 record ObservableDerivativeAlgebra (Time Scalar : Set) : Set₁ where
@@ -18,6 +18,26 @@ record ObservableDerivativeAlgebra (Time Scalar : Set) : Set₁ where
 
     Differentiable : (Time → Scalar) → Time → Set
     Nonzero : (Time → Scalar) → Time → Set
+
+    differentiableAdd : ∀ f g τ →
+      Differentiable f τ → Differentiable g τ →
+      Differentiable (λ t → _+_ (f t) (g t)) τ
+
+    differentiableSubtract : ∀ f g τ →
+      Differentiable f τ → Differentiable g τ →
+      Differentiable (λ t → _-_ (f t) (g t)) τ
+
+    differentiableMultiply : ∀ f g τ →
+      Differentiable f τ → Differentiable g τ →
+      Differentiable (λ t → _*_ (f t) (g t)) τ
+
+    differentiableDivide : ∀ f g τ →
+      Differentiable f τ → Differentiable g τ → Nonzero g τ →
+      Differentiable (λ t → _/_ (f t) (g t)) τ
+
+    differentiableNegativeLog : ∀ f τ →
+      Differentiable f τ → Nonzero f τ →
+      Differentiable (λ t → negativeLog (f t)) τ
 
     derivativeAdd : ∀ f g τ →
       Differentiable f τ → Differentiable g τ →
