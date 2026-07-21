@@ -1,33 +1,23 @@
 module DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
-open import DASHI.Physics.Closure.NSCompactGammaInequalityExpenditureProducer
 open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
 
 ------------------------------------------------------------------------
 -- Frontier attack owner.
 --
--- This module advances the four critical obligations by proving the algebraic
--- and logical reductions that should not remain hidden inside analytic records.
--- It does not fabricate the genuinely harmonic-analytic estimates.  Instead it
--- identifies the smallest concrete statements whose inhabitants would close the
--- route, and the smallest counterexamples that would refute it.
+-- This file proves the algebraic and logical reductions surrounding the four
+-- remaining critical obligations.  The genuinely harmonic-analytic estimates
+-- remain visible as named leaves, alongside precise finite counterexample forms.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
--- 1. Five-halves shell envelope: recurrence-to-envelope reduction.
---
--- The hard analytic question can be attacked through a two-sided shell
--- recurrence.  Once a concrete Fourier proof supplies iteration of that
--- recurrence away from the target shell, the desired pointwise decay and its
--- uniformity are theorem outputs.
+-- 1. Five-halves shell envelope.
 ------------------------------------------------------------------------
 
 record TwoSidedShellDecayAttack
@@ -36,7 +26,6 @@ record TwoSidedShellDecayAttack
     (Index : Set i) : Set (lsuc i) where
   field
     Shell Time State Cutoff : Set i
-
     selectedState : Index → Time → State
     targetShell : Index → Shell
     cutoff : Index → Cutoff
@@ -45,15 +34,12 @@ record TwoSidedShellDecayAttack
     compactGammaEnvelope : Index → Time → Scalar A
     geometricCoefficient : Shell → Shell → Scalar A
 
-    -- Target-shell normalization.
     targetShellBound : ∀ q τ →
       _≤_ A
         (weightedFiveHalvesShell (targetShell q) (selectedState q τ))
         (compactGammaEnvelope q τ)
 
-    -- The Fourier argument must prove that the adjacent-shell contraction can
-    -- be iterated in both directions.  This is the exact analytic leaf; the
-    -- final pointwise estimate is no longer duplicated elsewhere.
+    -- Exact analytic leaf: iterate adjacent-shell decay in both directions.
     iteratedTwoSidedDecay : ∀ q j τ →
       _≤_ A
         (weightedFiveHalvesShell j (selectedState q τ))
@@ -66,8 +52,6 @@ record TwoSidedShellDecayAttack
       _≤_ A (coefficientSum K) (uniformCoefficientBound K)
 
     weightedShellSum : Index → Time → Scalar A
-
-    -- Tonelli/shell summation using the same coefficient family.
     sumPointwiseDecay :
       (∀ q j τ →
         _≤_ A
@@ -76,9 +60,7 @@ record TwoSidedShellDecayAttack
             (geometricCoefficient j (targetShell q))
             (compactGammaEnvelope q τ))) →
       ∀ q τ →
-      _≤_ A
-        (weightedShellSum q τ)
-        (compactGammaEnvelope q τ)
+      _≤_ A (weightedShellSum q τ) (compactGammaEnvelope q τ)
 
     cutoffIndependence : ∀ q j τ → Set i
 
@@ -97,9 +79,7 @@ five-halves-pointwise-from-two-sided-decay D = iteratedTwoSidedDecay D
 five-halves-summed-envelope-from-two-sided-decay :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
   (D : TwoSidedShellDecayAttack A Index) → ∀ q τ →
-  _≤_ A
-    (weightedShellSum D q τ)
-    (compactGammaEnvelope D q τ)
+  _≤_ A (weightedShellSum D q τ) (compactGammaEnvelope D q τ)
 five-halves-summed-envelope-from-two-sided-decay D =
   sumPointwiseDecay D (five-halves-pointwise-from-two-sided-decay D)
 
@@ -112,10 +92,8 @@ record FiveHalvesEnvelopeCounterexample
     q : Index
     j : Shell D
     τ : Time D
-
     Violates : Scalar A → Scalar A → Set i
-
-    violatesProposedEnvelope :
+    witness :
       Violates
         (weightedFiveHalvesShell D j (selectedState D q τ))
         (_+_ A
@@ -125,15 +103,7 @@ record FiveHalvesEnvelopeCounterexample
 open FiveHalvesEnvelopeCounterexample public
 
 ------------------------------------------------------------------------
--- 2. Gamma numerator coercivity: exact tail cancellation.
---
--- The near/far analysis should produce the raw inequality
---
---   D Phi + margin + tail <= D + F + tail.
---
--- The theorem below performs all reassociation and cancellation.  Thus the
--- analytic owner need only prove the raw signed estimate and positivity of the
--- surviving margin; it need not restate the final Gamma inequality.
+-- 2. Gamma near/tail coercivity.
 ------------------------------------------------------------------------
 
 record RawGammaNearTailInequality
@@ -142,19 +112,16 @@ record RawGammaNearTailInequality
     (Index : Set i) : Set (lsuc i) where
   field
     Time : Set i
-
     gammaPotentialDerivative gammaDissipation gammaForcing :
       Index → Time → Scalar A
     survivingMargin farTailPayment weightedFiveHalvesRate :
       Index → Time → Scalar A
 
     survivingMarginPositive : Set i
-
     weightedRateBelowMargin : ∀ q τ →
       _≤_ A (weightedFiveHalvesRate q τ) (survivingMargin q τ)
 
-    -- Raw near/tail estimate, written so the identical tail payment appears on
-    -- both sides and can be cancelled in the ordered additive carrier.
+    -- Raw signed estimate with the identical tail payment on both sides.
     rawNearTailInequality : ∀ q τ →
       _≤_ A
         (_+_ A
@@ -170,21 +137,15 @@ gamma-near-tail-cancellation :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
   (G : RawGammaNearTailInequality A Index) → ∀ q τ →
   _≤_ A
-    (_+_ A
-      (gammaPotentialDerivative G q τ)
-      (survivingMargin G q τ))
-    (_+_ A
-      (gammaDissipation G q τ)
-      (gammaForcing G q τ))
+    (_+_ A (gammaPotentialDerivative G q τ) (survivingMargin G q τ))
+    (_+_ A (gammaDissipation G q τ) (gammaForcing G q τ))
 gamma-near-tail-cancellation {A = A} G q τ =
   additionCancelRight A (rawNearTailInequality G q τ)
 
 gamma-surviving-margin-dominates-five-halves :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
   (G : RawGammaNearTailInequality A Index) → ∀ q τ →
-  _≤_ A
-    (weightedFiveHalvesRate G q τ)
-    (survivingMargin G q τ)
+  _≤_ A (weightedFiveHalvesRate G q τ) (survivingMargin G q τ)
 gamma-surviving-margin-dominates-five-halves G = weightedRateBelowMargin G
 
 record GammaCoercivityCounterexample
@@ -196,7 +157,7 @@ record GammaCoercivityCounterexample
     q : Index
     τ : Time G
     StrictlyExceeds : Scalar A → Scalar A → Set i
-    tailDestroysNearMargin :
+    tailDestroysMargin :
       StrictlyExceeds
         (farTailPayment G q τ)
         (survivingMargin G q τ)
@@ -204,7 +165,7 @@ record GammaCoercivityCounterexample
 open GammaCoercivityCounterexample public
 
 ------------------------------------------------------------------------
--- 3. Shared parameters: feasibility region and one-witness constructor.
+-- 3. One shared parameter tuple.
 ------------------------------------------------------------------------
 
 record CompactGammaParameterTuple
@@ -222,26 +183,18 @@ record SharedParameterFeasibility
     (Index : Set i)
     (P : CompactGammaParameterTuple {i} A) : Set (lsuc i) where
   field
-    radiusAdmissible : Set i
-    gammaFloorPositive : Set i
-    energyFloorPositive : Set i
+    radiusAdmissible gammaFloorPositive energyFloorPositive : Set i
     offPacketCeilingPositive : Set i
-    alphaEnergyPositive : Set i
-    alphaGammaPositive : Set i
-    alphaOffPacketPositive : Set i
+    alphaEnergyPositive alphaGammaPositive alphaOffPacketPositive : Set i
 
-    tailAbsorption : Index → Set i
-    gammaInwardness : Index → Set i
-    packetPositivity : Index → Set i
-    offPacketInwardness : Index → Set i
-    expenditureCoercivity : Index → Set i
+    tailAbsorption gammaInwardness packetPositivity : Index → Set i
+    offPacketInwardness expenditureCoercivity : Index → Set i
 
     simultaneousWitness : ∀ q →
       Σ (tailAbsorption q) (λ _ →
       Σ (gammaInwardness q) (λ _ →
       Σ (packetPositivity q) (λ _ →
-      Σ (offPacketInwardness q) (λ _ →
-          expenditureCoercivity q))))
+      Σ (offPacketInwardness q) (λ _ → expenditureCoercivity q))))
 
 open SharedParameterFeasibility public
 
@@ -280,13 +233,19 @@ feasibleTuple-to-simultaneousClosure :
 feasibleTuple-to-simultaneousClosure P F = record
   { allFiveConditionsHold = simultaneousWitness F }
 
+record ParameterFeasibilityCounterexample
+    {i : Level}
+    (A : AbsorptionArithmetic)
+    (Index : Set i) : Set (lsuc i) where
+  field
+    attemptedTuple : CompactGammaParameterTuple {i} A
+    FailedCondition : Set i
+    failureWitness : FailedCondition
+
+open ParameterFeasibilityCounterexample public
+
 ------------------------------------------------------------------------
--- 4. Official-data coverage: constructive refutation gates.
---
--- These lemmas are important for a frontier proof attempt: a single explicit
--- smooth datum outside the initial admissible class refutes route 1; a single
--- solution that cannot enter before its candidate singular time refutes route 2;
--- and a datum without the replacement mechanism refutes route 3.
+-- 4. Official-data coverage: proof and refutation gates.
 ------------------------------------------------------------------------
 
 record InitialAdmissibilityObstruction
@@ -299,8 +258,7 @@ record InitialAdmissibilityObstruction
     official : SmoothDivergenceFreeFiniteEnergy S u₀
     solves : SolvesFrom S u₀ u
     Not : Set i → Set i
-    notInitiallyAdmissible :
-      Not (CompactGammaAdmissible S u initialTime)
+    notInitiallyAdmissible : Not (CompactGammaAdmissible S u initialTime)
     contradiction :
       CompactGammaAdmissible S u initialTime →
       Not (CompactGammaAdmissible S u initialTime) → ⊥
@@ -309,8 +267,8 @@ open InitialAdmissibilityObstruction public
 
 initial-obstruction-refutes-all-data-initially-admissible :
   ∀ {i} {S : OfficialInitialDataSetting i} →
-  (O : InitialAdmissibilityObstruction S) →
-  (A₀ : AllDataInitiallyAdmissible S) → ⊥
+  InitialAdmissibilityObstruction S →
+  AllDataInitiallyAdmissible S → ⊥
 initial-obstruction-refutes-all-data-initially-admissible O A₀ =
   contradiction O
     (everyOfficialDatumStartsAdmissible A₀
@@ -325,34 +283,30 @@ record EntryBeforeSingularityObstruction
     u : Solution S
     official : SmoothDivergenceFreeFiniteEnergy S u₀
     solves : SolvesFrom S u₀ u
-
     NotEntry : Time S → Set i
-    noAdmissibleEntryBeforeSingularity : ∀ τ →
-      Σ (BeforeAnySingularity S u τ) (λ _ →
-          CompactGammaAdmissible S u τ) →
-      NotEntry τ
+    noEntry : ∀ τ →
+      Σ (BeforeAnySingularity S u τ)
+        (λ _ → CompactGammaAdmissible S u τ) → NotEntry τ
     contradiction : ∀ τ →
       NotEntry τ →
-      Σ (BeforeAnySingularity S u τ) (λ _ →
-          CompactGammaAdmissible S u τ) → ⊥
+      Σ (BeforeAnySingularity S u τ)
+        (λ _ → CompactGammaAdmissible S u τ) → ⊥
 
 open EntryBeforeSingularityObstruction public
 
 entry-obstruction-refutes-universal-entry :
   ∀ {i} {S : OfficialInitialDataSetting i} →
-  (O : EntryBeforeSingularityObstruction S) →
+  EntryBeforeSingularityObstruction S →
   EverySolutionEntersBeforeSingularity S → ⊥
-entry-obstruction-refutes-universal-entry O E =
-  contradiction O τ
-    (noAdmissibleEntryBeforeSingularity O τ witness)
-    witness
+entry-obstruction-refutes-universal-entry {S = S} O E =
+  contradiction O τ (noEntry O τ witness) witness
   where
-  τ : Time _
+  τ : Time S
   τ = entryTime E (u₀ O) (u O)
 
   witness :
-    Σ (BeforeAnySingularity _ (u O) τ) (λ _ →
-        CompactGammaAdmissible _ (u O) τ)
+    Σ (BeforeAnySingularity S (u O) τ)
+      (λ _ → CompactGammaAdmissible S (u O) τ)
   witness = everyOfficialSolutionEnters E
     (u₀ O) (u O) (official O) (solves O)
 
@@ -363,8 +317,7 @@ record UniversalMechanismObstruction
     u₀ : InitialDatum S
     official : SmoothDivergenceFreeFiniteEnergy S u₀
     Not : Set i → Set i
-    noUniversalMechanism :
-      Not (UniversalContinuationMechanism S u₀)
+    noMechanism : Not (UniversalContinuationMechanism S u₀)
     contradiction :
       UniversalContinuationMechanism S u₀ →
       Not (UniversalContinuationMechanism S u₀) → ⊥
@@ -373,12 +326,12 @@ open UniversalMechanismObstruction public
 
 mechanism-obstruction-refutes-universal-replacement :
   ∀ {i} {S : OfficialInitialDataSetting i} →
-  (O : UniversalMechanismObstruction S) →
+  UniversalMechanismObstruction S →
   UniversalReplacementMechanism S → ⊥
 mechanism-obstruction-refutes-universal-replacement O U =
   contradiction O
     (allOfficialDataHaveUniversalMechanism U (u₀ O) (official O))
-    (noUniversalMechanism O)
+    (noMechanism O)
 
 record AllCoverageRoutesObstructed
     {i : Level}
@@ -392,16 +345,13 @@ open AllCoverageRoutesObstructed public
 
 all-obstructions-refute-official-data-coverage :
   ∀ {i} {S : OfficialInitialDataSetting i} →
-  AllCoverageRoutesObstructed S →
-  OfficialDataCoverage S → ⊥
+  AllCoverageRoutesObstructed S → OfficialDataCoverage S → ⊥
 all-obstructions-refute-official-data-coverage O (inj₁ starts) =
-  initial-obstruction-refutes-all-data-initially-admissible
-    (initial O) starts
+  initial-obstruction-refutes-all-data-initially-admissible (initial O) starts
 all-obstructions-refute-official-data-coverage O (inj₂ (inj₁ enters)) =
   entry-obstruction-refutes-universal-entry (entry O) enters
 all-obstructions-refute-official-data-coverage O (inj₂ (inj₂ universal)) =
-  mechanism-obstruction-refutes-universal-replacement
-    (replacement O) universal
+  mechanism-obstruction-refutes-universal-replacement (replacement O) universal
 
 ------------------------------------------------------------------------
 -- Proof-or-refutation frontier package.
@@ -416,20 +366,19 @@ record FrontierResolution
     fiveHalvesResolved :
       UniformFiveHalvesShellEnvelope A Index
       ⊎ Σ (TwoSidedShellDecayAttack A Index)
-          (FiveHalvesEnvelopeCounterexample A Index)
+          (λ D → FiveHalvesEnvelopeCounterexample A Index D)
 
     gammaResolved :
       GammaNumeratorCoercivity A Index
       ⊎ Σ (RawGammaNearTailInequality A Index)
-          (GammaCoercivityCounterexample A Index)
+          (λ G → GammaCoercivityCounterexample A Index G)
 
     parametersResolved :
       Σ (CompactGammaParameterTuple {i} A)
-        (SharedParameterFeasibility A Index)
-      ⊎ Set i
+        (λ P → SharedParameterFeasibility A Index P)
+      ⊎ ParameterFeasibilityCounterexample A Index
 
     officialCoverageResolved :
-      OfficialDataCoverage S
-      ⊎ AllCoverageRoutesObstructed S
+      OfficialDataCoverage S ⊎ AllCoverageRoutesObstructed S
 
 open FrontierResolution public
