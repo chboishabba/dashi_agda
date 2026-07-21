@@ -1,3 +1,4 @@
 module DASHI.Physics.Closure.NSCompactGammaConcreteBernsteinEnvelopeDomainTest where
 
 open import DASHI.Physics.Closure.NSCompactGammaConcreteBernsteinEnvelopeDomain public
+open import DASHI.Physics.Closure.NSCompactGammaConcreteInequalitySynthesis public
