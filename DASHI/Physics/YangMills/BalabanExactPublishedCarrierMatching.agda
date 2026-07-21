@@ -213,6 +213,10 @@ record ExactVariationalCarrierMatch
       Critical authority index coarse fluctuation →
       RepositoryCritical index coarse fluctuation
 
+    repositoryCriticalImpliesPublishedCritical : ∀ index coarse fluctuation →
+      RepositoryCritical index coarse fluctuation →
+      Critical authority index coarse fluctuation
+
     publishedMinimizerImpliesRepositoryMinimizer : ∀ index coarse fluctuation →
       Minimizer authority index coarse fluctuation →
       RepositoryMinimizer index coarse fluctuation
@@ -308,43 +312,8 @@ publishedVariationalBackgroundAppliesToDashi authority RepositoryAdmissible
         fluctuation (backgroundFluctuation authority index coarse)
         (theorem1BackgroundUniqueModuloGauge authority index coarse fluctuation
           (dashiAdmissibleImpliesBalabanAdmissible match index coarse admissible)
-          (repositoryCriticalImpliesPublished index coarse fluctuation
-            repositoryCritical))
-
-    -- Uniqueness requires the repository critical predicate to imply the exact
-    -- published critical equation as well as the forward transport used above.
-    -- This converse is intentionally exposed as the sole additional obligation
-    -- of the uniqueness lane.
-    repositoryCriticalImpliesPublished : ∀ index coarse fluctuation →
-      RepositoryCritical index coarse fluctuation →
-      Critical authority index coarse fluctuation
-    repositoryCriticalImpliesPublished =
-      repositoryCriticalImpliesPublishedCritical match
-
-------------------------------------------------------------------------
--- The converse critical-equation match is split out so the main record remains
--- usable for existence/minimization even when uniqueness is not yet transported.
-------------------------------------------------------------------------
-
-record ExactVariationalCriticalConverse
-    {Index Coarse Fluctuation Bound BackgroundMap RGCoordinates : Set}
-    {authority : PublishedVariationalBackgroundAuthority
-      Index Coarse Fluctuation Bound}
-    {RepositoryAdmissible : Index → Coarse → Set}
-    {RepositoryCritical RepositoryMinimizer :
-      Index → Coarse → Fluctuation → Set}
-    {RepositoryGaugeEquivalent : Fluctuation → Fluctuation → Set}
-    (match : ExactVariationalCarrierMatch
-      {BackgroundMap = BackgroundMap}
-      {RGCoordinates = RGCoordinates}
-      authority RepositoryAdmissible RepositoryCritical RepositoryMinimizer
-        RepositoryGaugeEquivalent) : Set₁ where
-  field
-    repositoryCriticalImpliesPublishedCritical : ∀ index coarse fluctuation →
-      RepositoryCritical index coarse fluctuation →
-      Critical authority index coarse fluctuation
-
-open ExactVariationalCriticalConverse public
+          (repositoryCriticalImpliesPublishedCritical match index coarse
+            fluctuation repositoryCritical))
 
 ------------------------------------------------------------------------
 -- Exact small-field RG matching.
@@ -374,13 +343,13 @@ publishedSmallFieldRGAppliesToDashi :
   ∀ {Scale Coupling EffectiveAction Bound RGCoordinates}
   (authority : PublishedSmallFieldRGAuthority
     Scale Coupling EffectiveAction Bound)
-  (RepositorySmallFieldControl : Scale → EffectiveAction → Set) →
-  ExactSmallFieldRGCarrierMatch
+  (RepositorySmallFieldControl : Scale → EffectiveAction → Set)
+  (match : ExactSmallFieldRGCarrierMatch
     {RGCoordinates = RGCoordinates}
-    authority RepositorySmallFieldControl →
+    authority RepositorySmallFieldControl) →
   ∀ scale →
   RepositorySmallFieldControl scale
-    (repositoryEffectiveAction _)
+    (repositoryEffectiveAction match scale)
 publishedSmallFieldRGAppliesToDashi authority RepositorySmallFieldControl
     match scale
   rewrite repositoryEffectiveActionMatchesPublished match scale =
