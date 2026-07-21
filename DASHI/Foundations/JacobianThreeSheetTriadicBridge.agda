@@ -54,7 +54,7 @@ allDisplayedSheetsMapToTarget zeroTrit = pZeroImage
 allDisplayedSheetsMapToTarget positiveTrit = pPositiveImage
 
 record ThreeSheetTriadicReceipt : Set where
-  constructor threeSheetTriadicReceipt
+  constructor mkThreeSheetTriadicReceipt
   field
     exactThreePointFibreUsed : Bool
     negativeZeroPositiveCoordinatesChecked : Bool
@@ -69,7 +69,7 @@ record ThreeSheetTriadicReceipt : Set where
 
 threeSheetTriadicReceipt : ThreeSheetTriadicReceipt
 threeSheetTriadicReceipt =
-  threeSheetTriadicReceipt
+  mkThreeSheetTriadicReceipt
     true true true
     false refl
     false refl
