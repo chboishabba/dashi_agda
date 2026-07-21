@@ -50,3 +50,8 @@ open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialCompletion publ
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticLeafCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaExactPotentialAndPacketBalance public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
+
+-- Focused namespace import: the exact cutset is compiled by the canonical NS
+-- aggregate without flooding the existing public surface with overlapping
+-- projection names.
+import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset
