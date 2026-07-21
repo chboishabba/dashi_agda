@@ -112,6 +112,25 @@ updateChart H (activeChart oldShell oldScore) energy with selectShell energy
 ... | true = activeChart (shell best) (score best)
 ... | false = activeChart oldShell oldScore
 
+shellChanged : Nat → Nat → Nat
+shellChanged zero zero = zero
+shellChanged zero (suc n) = 1
+shellChanged (suc m) zero = 1
+shellChanged (suc m) (suc n) = shellChanged m n
+
+chartSwitchIndicator : ChartState → ChartState → Nat
+chartSwitchIndicator noChart next = zero
+chartSwitchIndicator current noChart = zero
+chartSwitchIndicator (activeChart oldShell oldScore)
+  (activeChart newShell newScore) = shellChanged oldShell newShell
+
+hysteresisSwitchCount :
+  HysteresisThreshold → ChartState → List (List Nat) → Nat
+hysteresisSwitchCount H state [] = zero
+hysteresisSwitchCount H state (energy ∷ trace) =
+  chartSwitchIndicator state (updateChart H state energy)
+  + hysteresisSwitchCount H (updateChart H state energy) trace
+
 switchExampleEnergy : List Nat
 switchExampleEnergy = 0 ∷ 0 ∷ 5 ∷ 7 ∷ []
 
@@ -120,8 +139,17 @@ canonicalHysteresisSwitchesFiveToSeven :
   ≡ activeChart 3 7
 canonicalHysteresisSwitchesFiveToSeven = refl
 
+hysteresisExampleTrace : List (List Nat)
+hysteresisExampleTrace =
+  (0 ∷ 0 ∷ 5 ∷ 5 ∷ [])
+  ∷ switchExampleEnergy
+  ∷ (0 ∷ 0 ∷ 4 ∷ 8 ∷ [])
+  ∷ []
+
 finiteTraceSwitchCount : Nat
-finiteTraceSwitchCount = 1
+finiteTraceSwitchCount =
+  hysteresisSwitchCount canonicalHysteresis
+    (activeChart 2 5) hysteresisExampleTrace
 
 finiteTraceSwitchCountRegression : finiteTraceSwitchCount ≡ 1
 finiteTraceSwitchCountRegression = refl
