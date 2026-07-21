@@ -12,5 +12,6 @@ open import DASHI.Physics.YangMills.CompactLieYangMillsBridge public
 import DASHI.Physics.YangMills.CompactLieExactSurface
 import DASHI.Physics.YangMills.CompactLieAnalyticPackage
 import DASHI.Physics.YangMills.CompactLieStandardAuthority
+import DASHI.Physics.YangMills.CompactSimpleQuantitativeCoverage
 import DASHI.Physics.YangMills.CompactLieYangMillsFrontier
 import DASHI.Physics.YangMills.ConstructiveYangMillsNextSurface
