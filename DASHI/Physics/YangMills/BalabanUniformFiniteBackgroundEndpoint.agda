@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanUniformFiniteBackgroundEndpoint where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanPatchRegimeGreenUniformity as Green
