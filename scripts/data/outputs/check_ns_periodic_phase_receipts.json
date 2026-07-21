@@ -50,6 +50,11 @@
       "digest": true,
       "file": "near.json",
       "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "near_full.json",
+      "promotion_false": true
     }
   ],
   "schema": "check_ns_periodic_phase_receipts.v1"
