@@ -1,0 +1,58 @@
+{
+  "adjacent_shell": {
+    "max_adjacent_ratio": 4315248.492832363,
+    "ratios_above_one": 1122,
+    "sample_count": 300,
+    "unconditional_adjacent_contraction_empirically_refuted": true
+  },
+  "authority": "finite_computational_audit_only",
+  "clay_promoted": false,
+  "coverage_scaling": {
+    "below_fixed_floor": true,
+    "finite_fixed_absolute_floor_route_refuted_for_scaling_class": true,
+    "fixed_floor": "1/4",
+    "scaled_energy": "1/16",
+    "scaled_nonzero": true,
+    "selected_scale": "1/4"
+  },
+  "far_high": {
+    "R": 8,
+    "alpha": 1.5,
+    "closed_form": 0.00037766556657178397,
+    "fits_one_eighth_budget": true,
+    "partial_series": 0.00037766556657178397,
+    "relative_error": 0.0,
+    "s": 4.0
+  },
+  "far_low": {
+    "R": 8,
+    "fits_one_eighth_budget": true,
+    "max_mean_value_constant_observed": 0.073434730977531,
+    "max_multiplier_difference_over_2^-R": 0.073434730977531,
+    "sample_count": 200
+  },
+  "full_ns_promoted": false,
+  "near_triad": {
+    "absorption_empirically_satisfied_with_reported_C_delta": true,
+    "delta": "1/4",
+    "max_required_C_delta": 0.0,
+    "max_sign_reversal_residual": 0.0,
+    "negative_count": 100,
+    "positive_count": 100,
+    "sample_count": 200,
+    "signed_coercivity_empirically_refuted": true
+  },
+  "ok": true,
+  "scalar_certificate": {
+    "epsilon_high": "1/8",
+    "epsilon_low": "1/8",
+    "epsilon_total": "1/4",
+    "remainder": "1/4",
+    "remainder_positive": true,
+    "total_gain": "5/2",
+    "total_loss": "9/4",
+    "tuple": ["8", "1/4", "1/4", "1/2", "2", "2", "1"]
+  },
+  "schema": "ns_compact_gamma_exact_cutset_audit.v1",
+  "theorem_promoted": false
+}
