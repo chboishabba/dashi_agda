@@ -8,10 +8,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Source-faithful authority boundary for the periodic Fourier lane.
 --
 -- Standard Littlewood--Paley, Bernstein, Bony, smooth-multiplier commutator,
--- Sobolev-tail and BKM/small-data theorems may be imported only through an exact
--- carrier match.  The compact-Gamma profile, inward boundary and all-data chart
--- coverage conclusions are not standard consequences of those theorems and stay
--- outside this imported boundary.
+-- Sobolev-tail, nonnegative countable summation and BKM/small-data theorems may
+-- be imported only through an exact carrier match.  The compact-Gamma profile,
+-- inward boundary estimates and all-data chart coverage are not standard
+-- consequences of those theorems and stay outside this imported boundary.
 ------------------------------------------------------------------------
 
 record PublishedPeriodicHarmonicAnalysisAuthority
@@ -132,6 +132,9 @@ periodicSmoothMultiplierCommutatorLevel = standardImported
 periodicSobolevHighTailLevel : ProofLevel
 periodicSobolevHighTailLevel = standardImported
 
+periodicNonnegativeSummationLevel : ProofLevel
+periodicNonnegativeSummationLevel = standardImported
+
 periodicBKMAndSmallDataLevel : ProofLevel
 periodicBKMAndSmallDataLevel = standardImported
 
@@ -141,11 +144,17 @@ exactDivergenceCancellationAdapterLevel = machineChecked
 nearYoungAssemblyLevel : ProofLevel
 nearYoungAssemblyLevel = machineChecked
 
+fiveHalvesSummationAssemblyLevel : ProofLevel
+fiveHalvesSummationAssemblyLevel = machineChecked
+
 radiusEightTransitivityAssemblyLevel : ProofLevel
 radiusEightTransitivityAssemblyLevel = machineChecked
 
-compactGammaFiveHalvesProfileLevel : ProofLevel
-compactGammaFiveHalvesProfileLevel = conjectural
+diniFirstExitAssemblyLevel : ProofLevel
+diniFirstExitAssemblyLevel = machineChecked
+
+compactGammaPointwiseFiveHalvesProfileLevel : ProofLevel
+compactGammaPointwiseFiveHalvesProfileLevel = conjectural
 
 compactGammaBoundaryInwardnessLevel : ProofLevel
 compactGammaBoundaryInwardnessLevel = conditional
