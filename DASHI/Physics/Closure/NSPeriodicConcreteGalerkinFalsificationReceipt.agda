@@ -18,20 +18,30 @@ allTrajectoryEnergiesNonincreasing = true
 allFiniteTrajectoryIntegralsFinite : Bool
 allFiniteTrajectoryIntegralsFinite = true
 
-gammaFaceNonpositiveCount packetFaceNonpositiveCount : Nat
+gammaFaceNonpositiveCount absolutePacketFaceNonpositiveCount : Nat
 gammaFaceNonpositiveCount = 0
-packetFaceNonpositiveCount = 16
+absolutePacketFaceNonpositiveCount = 16
+
+normalizedPacketFaceNonpositiveCount : Nat
+normalizedPacketFaceNonpositiveCount = 0
 
 offPacketFaceNonpositiveCount sizeFaceNonpositiveCount : Nat
 offPacketFaceNonpositiveCount = 0
 sizeFaceNonpositiveCount = 0
 
-packetFloorFailsEveryFiniteSample :
-  packetFaceNonpositiveCount ≡ 16
-packetFloorFailsEveryFiniteSample = refl
+absolutePacketFloorFailsEveryFiniteSample :
+  absolutePacketFaceNonpositiveCount ≡ 16
+absolutePacketFloorFailsEveryFiniteSample = refl
 
-allFourFacesStrictOnFiniteSample : Bool
-allFourFacesStrictOnFiniteSample = false
+normalizedPacketFloorHasNoFiniteCounterexample :
+  normalizedPacketFaceNonpositiveCount ≡ 0
+normalizedPacketFloorHasNoFiniteCounterexample = refl
+
+originalAbsoluteFloorRouteStrictOnFiniteSample : Bool
+originalAbsoluteFloorRouteStrictOnFiniteSample = false
+
+correctedNormalizedRouteStrictOnFiniteSample : Bool
+correctedNormalizedRouteStrictOnFiniteSample = true
 
 absolutePacketFloorInvariantCandidateSurvives : Bool
 absolutePacketFloorInvariantCandidateSurvives = false
