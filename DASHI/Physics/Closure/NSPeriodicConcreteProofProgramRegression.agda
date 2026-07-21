@@ -17,6 +17,7 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification publ
 open import DASHI.Physics.Closure.NSPeriodicFiveHalvesIntegratedRoute public
 open import DASHI.Physics.Closure.NSPeriodicConcreteBoundaryBalance public
 open import DASHI.Physics.Closure.NSPeriodicConcreteAdaptiveChart public
+open import DASHI.Physics.Closure.NSPeriodicConcreteRouteDecision public
 open import DASHI.Physics.Closure.NSPeriodicObservableDerivativeAlgebra public
 open import DASHI.Physics.Closure.NSPeriodicPacketEnergyDerivative public
 open import DASHI.Physics.Closure.NSPeriodicGammaDerivative public
