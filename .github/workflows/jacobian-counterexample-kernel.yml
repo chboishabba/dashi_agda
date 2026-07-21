@@ -1,0 +1,59 @@
+name: Jacobian counterexample kernel
+
+on:
+  push:
+    paths:
+      - "Verification/JacobianCounterexampleKernel.agda"
+      - "Verification/JacobianNoninjectiveRegression.agda"
+      - "Verification/JacobianCounterexampleEverything.agda"
+      - "DASHI/Algebra/LocalInverseVsGlobalInverse.agda"
+      - "DASHI/Foundations/JacobianThreeSheetTriadicBridge.agda"
+      - "DASHI/Governance/EvidenceGatedTheoremPromotion.agda"
+      - "DASHI/MDL/SheetAwareAmbiguityPenalty.agda"
+      - "DASHI/Philosophy/ComputationalReductionismBoundary.agda"
+      - "DASHI/Provenance/AIAssistedMathematicsProvenance.agda"
+      - "DASHI/Sheaf/GlobalAmbiguityBoundary.agda"
+      - "DASHI/Topology/LocalGlobalMapDiagnostics.agda"
+      - "scripts/check_jacobian_noninjective_example.py"
+      - "Docs/support/reference/AlpogeJacobianCounterexampleImpact.md"
+      - ".github/workflows/jacobian-counterexample-kernel.yml"
+  pull_request:
+    paths:
+      - "Verification/JacobianCounterexampleKernel.agda"
+      - "Verification/JacobianNoninjectiveRegression.agda"
+      - "Verification/JacobianCounterexampleEverything.agda"
+      - "DASHI/Algebra/LocalInverseVsGlobalInverse.agda"
+      - "DASHI/Foundations/JacobianThreeSheetTriadicBridge.agda"
+      - "DASHI/Governance/EvidenceGatedTheoremPromotion.agda"
+      - "DASHI/MDL/SheetAwareAmbiguityPenalty.agda"
+      - "DASHI/Philosophy/ComputationalReductionismBoundary.agda"
+      - "DASHI/Provenance/AIAssistedMathematicsProvenance.agda"
+      - "DASHI/Sheaf/GlobalAmbiguityBoundary.agda"
+      - "DASHI/Topology/LocalGlobalMapDiagnostics.agda"
+      - "scripts/check_jacobian_noninjective_example.py"
+      - "Docs/support/reference/AlpogeJacobianCounterexampleImpact.md"
+      - ".github/workflows/jacobian-counterexample-kernel.yml"
+
+jobs:
+  exact-and-kernel:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i .agda-stdlib"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run independent exact polynomial diagnostic
+        run: python3 scripts/check_jacobian_noninjective_example.py
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck kernel polynomial theorem
+        run: agda $AGDA_FLAGS Verification/JacobianCounterexampleKernel.agda
+      - name: Typecheck noninjectivity regression
+        run: agda $AGDA_FLAGS Verification/JacobianNoninjectiveRegression.agda
+      - name: Typecheck global ambiguity boundary
+        run: agda $AGDA_FLAGS DASHI/Sheaf/GlobalAmbiguityBoundary.agda
+      - name: Typecheck full Jacobian consequence aggregate
+        run: agda $AGDA_FLAGS Verification/JacobianCounterexampleEverything.agda
