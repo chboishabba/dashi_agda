@@ -1,7 +1,9 @@
 module Verification.JacobianCounterexampleEverything where
 
 import Verification.JacobianCounterexampleKernel
+import Verification.JacobianCounterexampleScalarExtension
 import Verification.JacobianNoninjectiveRegression
+import DASHI.Algebra.KellerMapConsequenceHierarchy
 import DASHI.Algebra.LocalInverseVsGlobalInverse
 import DASHI.Foundations.JacobianThreeSheetTriadicBridge
 import DASHI.Governance.EvidenceGatedTheoremPromotion
