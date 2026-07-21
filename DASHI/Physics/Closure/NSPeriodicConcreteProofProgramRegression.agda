@@ -10,6 +10,7 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteNorms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma public
 open import DASHI.Physics.Closure.NSPeriodicConcreteTriadForms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteNearTriadDecomposition public
+open import DASHI.Physics.Closure.NSPeriodicConcreteNearTriadScanReceipt public
 open import DASHI.Physics.Closure.NSPeriodicConcreteRationalCertificate public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFullOperatorReceipt public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification public
@@ -45,6 +46,9 @@ highBudgetRegression = refl
 
 nearBudgetRegression : optimizedNearResidualCoefficient ≡ 64
 nearBudgetRegression = refl
+
+nearFullScanRegression : nearHighHighIntegerCandidate ≡ 1
+nearFullScanRegression = refl
 
 combinedTailRegression : combinedTailAtEight128 ≡ 9
 combinedTailRegression = refl
