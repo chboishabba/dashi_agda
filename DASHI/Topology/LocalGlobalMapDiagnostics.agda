@@ -21,7 +21,6 @@ open import Verification.JacobianCounterexampleKernel as J
     ; pNegative
     ; target
     ; pZeroNotPositive
-    ; pZeroPositiveCollision
     ; F-notInjective
     )
 
@@ -77,7 +76,7 @@ record LocalWithoutGlobalInjectivity : Set₁ where
     map : X → Y
     determinantAt : X → ℚ
     localNonsingularity : LocallyNonsingular determinantAt
-    notGloballyInjective : (Injective map → ⊥)
+    notGloballyInjective : Injective map → ⊥
 
 alpogeLocalNonsingularity :
   LocallyNonsingular
@@ -109,7 +108,7 @@ localNonsingularityDoesNotImplyGlobalInjectivity =
     F-notInjective
 
 record LocalGlobalDiagnosticsReceipt : Set where
-  constructor localGlobalDiagnosticsReceipt
+  constructor mkLocalGlobalDiagnosticsReceipt
   field
     localNonsingularityChecked : Bool
     displayedThreePointFibreChecked : Bool
@@ -127,7 +126,7 @@ record LocalGlobalDiagnosticsReceipt : Set where
 
 localGlobalDiagnosticsReceipt : LocalGlobalDiagnosticsReceipt
 localGlobalDiagnosticsReceipt =
-  localGlobalDiagnosticsReceipt
+  mkLocalGlobalDiagnosticsReceipt
     true true true
     false refl
     false refl
