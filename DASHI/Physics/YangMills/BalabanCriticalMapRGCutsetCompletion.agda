@@ -114,8 +114,10 @@ record CriticalMapCutset
 
 open CriticalMapCutset public
 
-substRight : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
-substRight P refl px = px
+transportRight :
+  ∀ {A : Set} {R : A → A → Set} {a b c : A} →
+  R a b → b ≡ c → R a c
+transportRight Rab refl = Rab
 
 criticalMapContraction :
   ∀ {Index State Force Bound CoarseField Background NatLike}
@@ -131,15 +133,11 @@ criticalMapContraction D index h h′
   lessEqualTransitive D
     (greenOperatorBound D index
       (subtractForce D (nonlinear D index h) (nonlinear D index h′)))
-    (lessEqualTransitive D
+    (transportRight
       (multiplyMonotoneLeft D (CG D)
         (nonlinearDifferenceBound D index h h′))
-      (substRight
-        (LessEqual D
-          (multiply D (CG D)
-            (multiply D (LN D) (norm D (subtract D h h′)))))
-        (multiplyAssociative D (CG D) (LN D)
-          (norm D (subtract D h h′)))))
+      (multiplyAssociative D (CG D) (LN D)
+        (norm D (subtract D h h′))))
 
 record FiniteBackgroundCriticalMapCompletion
     (Index State Force Bound CoarseField Background NatLike : Set) : Set₁ where
@@ -281,10 +279,25 @@ record OneStepRGCutset
       LessEqual (absCoupling couplingRemainder)
         (absCoupling (multiplyCoupling Cβ (fifth g)))
 
+    jacobianContribution determinantContribution backgroundContribution
+      bchContribution localizationContribution wardContribution : Region → Bound
     jacobianBudget determinantBudget backgroundBudget bchBudget
       localizationBudget wardBudget : Region → Bound
-    jacobianBudgetBound determinantBudgetBound backgroundBudgetBound
-      bchBudgetBound localizationBudgetBound wardBudgetBound : ∀ A →
+
+    jacobianBudgetBound : ∀ A →
+      LessEqual (jacobianContribution A) (jacobianBudget A)
+    determinantBudgetBound : ∀ A →
+      LessEqual (determinantContribution A) (determinantBudget A)
+    backgroundBudgetBound : ∀ A →
+      LessEqual (backgroundContribution A) (backgroundBudget A)
+    bchBudgetBound : ∀ A →
+      LessEqual (bchContribution A) (bchBudget A)
+    localizationBudgetBound : ∀ A →
+      LessEqual (localizationContribution A) (localizationBudget A)
+    wardBudgetBound : ∀ A →
+      LessEqual (wardContribution A) (wardBudget A)
+
+    componentBudgetsBelowTotal : ∀ A →
       LessEqual
         (addBound (jacobianBudget A)
           (addBound (determinantBudget A)
