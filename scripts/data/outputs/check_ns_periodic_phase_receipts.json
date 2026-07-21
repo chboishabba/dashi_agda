@@ -23,6 +23,11 @@
     },
     {
       "digest": true,
+      "file": "full_operator.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
       "file": "five.json",
       "promotion_false": true
     },
