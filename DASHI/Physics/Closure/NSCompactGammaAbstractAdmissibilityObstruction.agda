@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.NSCompactGammaAbstractAdmissibilityObstruction where
 
+open import Agda.Primitive using (lzero)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Unit using (⊤; tt)
 open import Relation.Nullary using (¬_)
@@ -32,7 +33,7 @@ nat≤-trans : ∀ {a b c} → a ℕ.≤ b → b ℕ.≤ c → a ℕ.≤ c
 nat≤-trans ℕ.z≤n q = ℕ.z≤n
 nat≤-trans (ℕ.s≤s p) (ℕ.s≤s q) = ℕ.s≤s (nat≤-trans p q)
 
-natOrderedScalar : OrderedScalar _
+natOrderedScalar : OrderedScalar lzero
 natOrderedScalar = record
   { Scalar = Nat
   ; _≤_ = ℕ._≤_
