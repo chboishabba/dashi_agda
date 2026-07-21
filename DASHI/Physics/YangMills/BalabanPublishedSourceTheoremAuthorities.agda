@@ -52,11 +52,11 @@ record PublishedPropagatorTheorems31And33
     hypothesesContainBetaRange : ∀ index →
       ExactPropagatorHypotheses index → BetaInAdmissibleRange index
 
-    -- Operators and norms.  `greenPrime` is Theorem 3.1; `green` is Theorem
-    -- 3.3.  The repository completion lane consumes the latter.
+    -- Operators and norms. `greenPrime` is Theorem 3.1; `green` is Theorem
+    -- 3.3. The repository completion lane consumes the latter.
     greenPrime green gradientGreen secondGradientGreen :
       Index → Source → State
-    sourceNorm stateNorm : Source → Bound
+    sourceNorm : Source → Bound
     propagatedStateNorm : State → Bound
     multiply : Bound → Bound → Bound
     CG CGradG CSecondG : Bound
@@ -110,7 +110,7 @@ propagatorTheorems31And33ToAuthority :
   ∀ {Index Source State Bound Kernel} →
   PublishedPropagatorTheorems31And33 Index Source State Bound Kernel →
   PublishedBackgroundPropagatorAuthority Index Source State Bound
-propagatorTheorems31And33ToAuthority source = record
+propagatorTheorems31And33ToAuthority {Kernel = Kernel} source = record
   { RegularBackground = ExactPropagatorHypotheses source
   ; green = green source
   ; gradientGreen = gradientGreen source
@@ -125,7 +125,7 @@ propagatorTheorems31And33ToAuthority source = record
   ; theorem31GreenBound = theorem33GreenBound source
   ; theorem31GradientGreenBound = theorem33GradientGreenBound source
   ; theorem31SecondGradientGreenBound = theorem33SecondGradientGreenBound source
-  ; Kernel = _
+  ; Kernel = Kernel
   ; greenKernel = greenKernel source
   ; gradientKernel = gradientKernel source
   ; secondGradientKernel = secondGradientKernel source
@@ -157,6 +157,9 @@ record PublishedVariationalTheorem1Exact
     Epsilon1BelowA1 : Set
     B3Epsilon1BelowEpsilon0 : Set
     Epsilon0BelowA0 : Set
+    epsilon1BelowA1 : Epsilon1BelowA1
+    b3Epsilon1BelowEpsilon0 : B3Epsilon1BelowEpsilon0
+    epsilon0BelowA0 : Epsilon0BelowA0
 
     ExactVariationalHypotheses : Index → Coarse → Set
     hypothesesContainNestedGeometry : ∀ index coarse →
@@ -240,8 +243,15 @@ record PublishedSmallFieldTheorems1And3Exact
     GaugeGroupCompactSemisimpleSubgroupOfUnitary : Set
     RenormalizationTransformationsAreSmallField : Set
     EffectiveCouplingsInZeroGamma : Set
+    dimensionIsFour : DimensionIsFour
+    gaugeGroupCompactSemisimpleSubgroupOfUnitary :
+      GaugeGroupCompactSemisimpleSubgroupOfUnitary
+    renormalizationTransformationsAreSmallField :
+      RenormalizationTransformationsAreSmallField
+    effectiveCouplingsInZeroGamma : EffectiveCouplingsInZeroGamma
 
-    couplingPositive : ∀ scale → Set
+    CouplingPositive : Scale → Set
+    couplingPositive : ∀ scale → CouplingPositive scale
     couplingBelowGamma : ∀ scale →
       LessEqual (absCoupling (coupling scale)) gamma
 
@@ -264,7 +274,7 @@ smallFieldTheorems1And3ToAuthority source = record
   ; absCoupling = absCoupling source
   ; LessEqual = LessEqual source
   ; RunningCouplingsRemainSmall = EffectiveCouplingsInZeroGamma source
-  ; runningCouplingsRemainSmall = EffectiveCouplingsInZeroGamma source
+  ; runningCouplingsRemainSmall = effectiveCouplingsInZeroGamma source
   ; couplingBelowThreshold = couplingBelowGamma source
   ; effectiveAction = effectiveAction source
   ; SmallFieldEffectiveActionControlled =
