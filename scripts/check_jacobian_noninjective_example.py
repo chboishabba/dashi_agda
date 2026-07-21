@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Exact regression for a constant-Jacobian, non-injective polynomial map.
+"""Exact regression for the Alpöge Jacobian counterexample.
 
-This is an empirical/algebraic diagnostic, not a kernel-level Agda proof.  It
-uses exact rational coefficients and a tiny sparse-polynomial implementation,
-so it has no third-party dependencies.
+The displayed polynomial map was publicly announced by Levent Alpöge on
+20 July 2026.  His announcement credited Akhil Mathew for asking about the
+problem and Fable for producing the example.  This repository attributes the
+public announcement to Alpöge and does not claim discovery priority.
+
+The diagnostic uses exact rational coefficients and a tiny sparse-polynomial
+implementation with no third-party dependencies.  It verifies the complete
+Jacobian determinant identity and the three-point fibre exactly.
 """
 
 from fractions import Fraction
@@ -99,9 +104,30 @@ def determinant(matrix):
 
 x, y, z = var(0), var(1), var(2)
 one_plus_xy = add(const(1), mul(x, y))
-f1 = add(mul(power(one_plus_xy, 3), z), mul(mul(power(y, 2), one_plus_xy), add(const(4), scale(3, mul(x, y)))))
-f2 = add(y, add(scale(3, mul(mul(x, power(one_plus_xy, 2)), z)), scale(3, mul(mul(x, power(y, 2)), add(const(4), scale(3, mul(x, y)))))))
-f3 = sub(sub(scale(2, x), scale(3, mul(power(x, 2), y))), mul(power(x, 3), z))
+f1 = add(
+    mul(power(one_plus_xy, 3), z),
+    mul(
+        mul(power(y, 2), one_plus_xy),
+        add(const(4), scale(3, mul(x, y))),
+    ),
+)
+f2 = add(
+    y,
+    add(
+        scale(3, mul(mul(x, power(one_plus_xy, 2)), z)),
+        scale(
+            3,
+            mul(
+                mul(x, power(y, 2)),
+                add(const(4), scale(3, mul(x, y))),
+            ),
+        ),
+    ),
+)
+f3 = sub(
+    sub(scale(2, x), scale(3, mul(power(x, 2), y))),
+    mul(power(x, 3), z),
+)
 F = (f1, f2, f3)
 J = [[diff(fi, j) for j in range(N)] for fi in F]
 DET = determinant(J)
@@ -121,5 +147,6 @@ for point in witnesses:
     image = tuple(evaluate(fi, point) for fi in F)
     assert image == target, f"F{point} = {image}, expected {target}"
 
-print("PASS: det DF = -2 identically")
+print("PASS: Alpöge example has det DF = -2 identically")
 print("PASS: three distinct exact preimages map to (-1/4, 0, 0)")
+print("CONSEQUENCE: the displayed map is not injective")
