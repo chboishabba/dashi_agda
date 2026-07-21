@@ -3,6 +3,8 @@ name: YM Clay analytic inhabitation
 on:
   pull_request:
     paths:
+      - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
