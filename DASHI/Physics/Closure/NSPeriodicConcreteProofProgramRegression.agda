@@ -7,6 +7,9 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteDyadicPartition public
 open import DASHI.Physics.Closure.NSPeriodicConcreteNorms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma public
 open import DASHI.Physics.Closure.NSPeriodicConcreteTriadForms public
+open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification public
+open import DASHI.Physics.Closure.NSPeriodicConcreteBoundaryBalance public
+open import DASHI.Physics.Closure.NSPeriodicConcreteAdaptiveChart public
 open import DASHI.Physics.Closure.NSPeriodicConcreteProofProgramStatus public
 
 carrierRadiusRegression : separationRadius periodicConcreteCarrier ≡ 8
@@ -26,3 +29,13 @@ highBudgetRegression = refl
 
 nearBudgetRegression : optimizedNearResidualCoefficient ≡ 64
 nearBudgetRegression = refl
+
+fiveHalvesCounterexampleRegression :
+  counterexampleAdjacentWeightedRatioSquared ≡ 33554432
+fiveHalvesCounterexampleRegression = refl
+
+sizeBoundaryRegression : sizeMargin ≡ 0
+sizeBoundaryRegression = refl
+
+adaptiveChartRegression : finiteTraceSwitchCount ≡ 1
+adaptiveChartRegression = refl
