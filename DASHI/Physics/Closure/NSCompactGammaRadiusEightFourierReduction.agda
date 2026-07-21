@@ -10,10 +10,9 @@ import DASHI.Physics.Closure.NSCompactGammaConcreteDyadicScalarCertificate as Dy
 -- Exact radius-eight Fourier reduction.
 --
 -- The finite dyadic certificate fixes two one-eighth budgets.  This module ties
--- those codes to the concrete analytic chain: multiplier mean-value gain and
+-- those codes to the complete analytic chain: multiplier mean-value gain and
 -- far-low commutator control on one side, Sobolev/geometric/paraproduct decay on
--- the other.  It proves the final low/high inequalities from the named leaves
--- and constructs the certificate consumed by the exact cutset.
+-- the other.  Every named leaf occurs in the final transitivity proof.
 ------------------------------------------------------------------------
 
 additionMonotoneBothR8 :
@@ -36,7 +35,7 @@ record RadiusEightFourierReduction
     multiplierDifference meanValueBudget radiusEightMultiplierBudget :
       Index → Time → Scalar A
 
-    farLowTail farLowRawBudget farLowDisplayedBudget :
+    farLowTail farLowCommutatorBudget farLowDisplayedBudget :
       Index → Time → Scalar A
 
     highShellTail highSobolevBudget highGeometricBudget :
@@ -47,25 +46,25 @@ record RadiusEightFourierReduction
     farHighTail farHighDisplayedBudget : Index → Time → Scalar A
 
     -- C1/C2: exact smooth multiplier and R = 8 separation gain.
+    farLowTailBelowCommutatorBudget : ∀ q τ →
+      _≤_ A (farLowTail q τ) (farLowCommutatorBudget q τ)
+
+    commutatorBudgetBelowMultiplierDifference : ∀ q τ →
+      _≤_ A (farLowCommutatorBudget q τ) (multiplierDifference q τ)
+
     periodicMultiplierMeanValueBound : ∀ q τ →
       _≤_ A (multiplierDifference q τ) (meanValueBudget q τ)
 
     radiusEightMultiplierGain : ∀ q τ →
       _≤_ A (meanValueBudget q τ) (radiusEightMultiplierBudget q τ)
 
-    farLowCommutatorFromMultiplier : ∀ q τ →
-      _≤_ A (farLowTail q τ) (farLowRawBudget q τ)
-
     radiusEightMultiplierProducesFarLowBudget : ∀ q τ →
-      _≤_ A (farLowRawBudget q τ) (farLowDisplayedBudget q τ)
+      _≤_ A
+        (radiusEightMultiplierBudget q τ)
+        (farLowDisplayedBudget q τ)
 
-    -- D1/D2: high-shell Sobolev decay and its geometric-series sum.
-    highShellSobolevDecay : ∀ q τ →
-      _≤_ A (highShellTail q τ) (highSobolevBudget q τ)
-
-    farHighGeometricSeries : ∀ q τ →
-      _≤_ A (highSobolevBudget q τ) (highGeometricBudget q τ)
-
+    -- D1/D2: both high placements are reduced to one high-shell quantity,
+    -- which is then controlled by Sobolev decay and the geometric tail sum.
     farHighTailBelowPlacements : ∀ q τ →
       _≤_ A
         (farHighTail q τ)
@@ -77,10 +76,19 @@ record RadiusEightFourierReduction
     farHighRightParaproductBound : ∀ q τ →
       _≤_ A (farHighRight q τ) (farHighRightBudget q τ)
 
-    highPlacementsFitDisplayedBudget : ∀ q τ →
+    highPlacementsControlledByHighShell : ∀ q τ →
       _≤_ A
         (_+_ A (farHighLeftBudget q τ) (farHighRightBudget q τ))
-        (farHighDisplayedBudget q τ)
+        (highShellTail q τ)
+
+    highShellSobolevDecay : ∀ q τ →
+      _≤_ A (highShellTail q τ) (highSobolevBudget q τ)
+
+    farHighGeometricSeries : ∀ q τ →
+      _≤_ A (highSobolevBudget q τ) (highGeometricBudget q τ)
+
+    highGeometricFitsDisplayedBudget : ∀ q τ →
+      _≤_ A (highGeometricBudget q τ) (farHighDisplayedBudget q τ)
 
     normalizedFarLowAtEight normalizedFarHighAtEight : Nat
 
@@ -98,8 +106,14 @@ periodicFarLowCommutatorBound :
   _≤_ A (farLowTail R q τ) (farLowDisplayedBudget R q τ)
 periodicFarLowCommutatorBound {A = A} R q τ =
   ≤-trans A
-    (farLowCommutatorFromMultiplier R q τ)
-    (radiusEightMultiplierProducesFarLowBudget R q τ)
+    (farLowTailBelowCommutatorBudget R q τ)
+    (≤-trans A
+      (commutatorBudgetBelowMultiplierDifference R q τ)
+      (≤-trans A
+        (periodicMultiplierMeanValueBound R q τ)
+        (≤-trans A
+          (radiusEightMultiplierGain R q τ)
+          (radiusEightMultiplierProducesFarLowBudget R q τ))))
 
 periodicFarHighTailBound :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
@@ -112,7 +126,13 @@ periodicFarHighTailBound {A = A} R q τ =
       (additionMonotoneBothR8 A
         (farHighLeftParaproductBound R q τ)
         (farHighRightParaproductBound R q τ))
-      (highPlacementsFitDisplayedBudget R q τ))
+      (≤-trans A
+        (highPlacementsControlledByHighShell R q τ)
+        (≤-trans A
+          (highShellSobolevDecay R q τ)
+          (≤-trans A
+            (farHighGeometricSeries R q τ)
+            (highGeometricFitsDisplayedBudget R q τ)))))
 
 periodicRadiusEightAnalyticBounds :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
