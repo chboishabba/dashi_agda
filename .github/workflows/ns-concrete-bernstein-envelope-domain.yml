@@ -11,10 +11,14 @@ on:
       - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
       - 'scripts/ns_compact_gamma_certificate_generator.py'
       - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
+      - 'scripts/ns_periodic_concrete_proof_program.py'
+      - 'scripts/check_ns_periodic_concrete_proof_program.py'
       - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
       - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
       - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
       - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
+      - 'scripts/data/outputs/ns_periodic_concrete_proof_program.json'
+      - 'scripts/data/outputs/check_ns_periodic_concrete_proof_program.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
   push:
     paths:
@@ -26,10 +30,14 @@ on:
       - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
       - 'scripts/ns_compact_gamma_certificate_generator.py'
       - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
+      - 'scripts/ns_periodic_concrete_proof_program.py'
+      - 'scripts/check_ns_periodic_concrete_proof_program.py'
       - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
       - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
       - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
       - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
+      - 'scripts/data/outputs/ns_periodic_concrete_proof_program.json'
+      - 'scripts/data/outputs/check_ns_periodic_concrete_proof_program.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
 
 concurrency:
@@ -42,7 +50,7 @@ permissions:
 jobs:
   finite-audit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -76,6 +84,18 @@ jobs:
             "$RUNNER_TEMP/ns-compact-gamma-audit/certificate.json"
           diff -u scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json \
             "$RUNNER_TEMP/ns-compact-gamma-audit/certificate-check.json"
+      - name: Reproduce concrete carrier proof-and-falsification program
+        run: |
+          set -euo pipefail
+          python scripts/ns_periodic_concrete_proof_program.py \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program.json"
+          python scripts/check_ns_periodic_concrete_proof_program.py \
+            --source-json "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program.json" \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program-check.json"
+          diff -u scripts/data/outputs/ns_periodic_concrete_proof_program.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program.json"
+          diff -u scripts/data/outputs/check_ns_periodic_concrete_proof_program.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program-check.json"
 
   focused-agda:
     needs: finite-audit
@@ -86,7 +106,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check universal periodic-Fourier reductions
+      - name: Check universal periodic-Fourier reductions and concrete program
         shell: bash
         run: |
           set -euo pipefail
