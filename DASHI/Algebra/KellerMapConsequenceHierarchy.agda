@@ -19,8 +19,6 @@ open import Verification.JacobianCounterexampleKernel as J
     ; alpogeKellerMap
     ; F-notInjective
     ; PaddedKellerMap
-    ; PaddedPoint
-    ; paddedMap
     ; alpogePaddedKellerMap
     ; paddedF-notInjective
     )
@@ -108,7 +106,7 @@ kellerPolynomialAutomorphismPrinciple3False principle =
 PaddedInjectivityPrinciple : Nat → Set
 PaddedInjectivityPrinciple n =
   (K : PaddedKellerMap n) →
-  Injective (paddedMap K)
+  Injective (J.PaddedKellerMap.paddedMap K)
 
 paddedInjectivityPrincipleFalse :
   (n : Nat) →
