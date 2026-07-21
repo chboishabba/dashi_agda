@@ -51,8 +51,8 @@ open import DASHI.Physics.Closure.NSCompactGammaAnalyticLeafCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaExactPotentialAndPacketBalance public
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
 
--- Focused namespace imports: compile the exact absorbed route and cutset without
--- flooding the existing public surface with overlapping projection names.
+-- Focused namespace imports: compile the exact absorbed route and universal tail
+-- reductions without flooding the existing public surface with projections.
 import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision
 import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction
@@ -60,4 +60,11 @@ import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction
 import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge
 import DASHI.Physics.Closure.NSCompactGammaFixedFloorScalingObstruction
 import DASHI.Physics.Closure.NSCompactGammaGeneratedCertificateBridge
+import DASHI.Physics.Closure.NSPeriodicFourierCancellationAlgebra
+import DASHI.Physics.Closure.NSPeriodicFourierNearTriadPreYoung
+import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction
+import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction
+import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary
+import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction
+import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion
 import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset
