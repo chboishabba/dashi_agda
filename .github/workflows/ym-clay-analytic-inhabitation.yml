@@ -13,6 +13,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremRegression.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatchingRegression.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda'
@@ -34,6 +35,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremRegression.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatchingRegression.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda'
@@ -76,6 +78,13 @@ jobs:
             set -euo pipefail
             agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
               DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda
+          '
+      - name: Typecheck published source theorem regression
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPublishedSourceTheoremRegression.agda
           '
       - name: Typecheck exact published carrier matching
         run: |
