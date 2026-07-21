@@ -9,6 +9,7 @@ open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
 import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion as Parameters
 import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge as ParameterBridge
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as RadiusEight
+import DASHI.Physics.Closure.NSCompactGammaFiveHalvesSummationReduction as Summation
 import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization as Young
 import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction as Tail
 import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction as Coverage
@@ -19,15 +20,15 @@ import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction as Dini
 --
 -- The fields are deliberately the earliest honest analytic inputs:
 --
---   1. a universal five-halves theorem;
+--   1. pointwise five-halves decay plus countable coefficient summation;
 --   2. cutoff-uniform Fourier product bounds plus one generic Young law;
 --   3/4. primitive far-low/far-high chains;
 --   5. semantic real-carrier parameter interpretation plus concrete Dini data;
 --   6. adaptive-chart-or-direct-BKM official coverage.
 --
--- All algebraic, transitivity, Young-composition, no-first-exit and coverage-case
--- assembly is proved below.  Supplying the fields in the concrete periodic
--- carrier remains the genuine PDE work.
+-- All algebraic, summation, transitivity, Young-composition, no-first-exit and
+-- coverage-case assembly is proved below.  Supplying the fields in the concrete
+-- periodic carrier remains the genuine PDE work.
 ------------------------------------------------------------------------
 
 record IndexedFiveHalvesUniversal
@@ -46,6 +47,20 @@ record IndexedFiveHalvesUniversal
         (compactGammaEnvelope q τ)
 
 open IndexedFiveHalvesUniversal public
+
+pointwiseSummationToIndexedFiveHalves :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
+  (P : Summation.FiveHalvesPointwiseSummationInputs A Index) →
+  IndexedFiveHalvesUniversal A Index
+pointwiseSummationToIndexedFiveHalves P = record
+  { Time = Summation.Time P
+  ; State = Summation.State P
+  ; selectedState = Summation.selectedState P
+  ; weightedFiveHalvesSum = Summation.weightedFiveHalvesSum P
+  ; compactGammaEnvelope = Summation.displayedCompactGammaEnvelope P
+  ; compactGammaControlsFiveHalvesUniversally =
+      Summation.fiveHalvesSumBelowDisplayedEnvelope P
+  }
 
 record RealCarrierInwardCoercivePackage
     {i : Level}
@@ -92,7 +107,8 @@ record UniversalPeriodicFourierTailInputs
     (Index : Set i)
     (S : OfficialInitialDataSetting i) : Set (lsuc i) where
   field
-    fiveHalves : IndexedFiveHalvesUniversal A Index
+    fiveHalvesPointwise :
+      Summation.FiveHalvesPointwiseSummationInputs A Index
 
     youngLaw : Young.OrderedYoungLaw A
     nearTriad :
@@ -106,6 +122,14 @@ record UniversalPeriodicFourierTailInputs
     officialCoverage : Coverage.AdaptiveChartOrDirectBKM S
 
 open UniversalPeriodicFourierTailInputs public
+
+fiveHalves :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i}
+    {S : OfficialInitialDataSetting i} →
+  UniversalPeriodicFourierTailInputs A Index S →
+  IndexedFiveHalvesUniversal A Index
+fiveHalves U =
+  pointwiseSummationToIndexedFiveHalves (fiveHalvesPointwise U)
 
 universalFiveHalvesEndpoint :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i}
