@@ -65,13 +65,13 @@ official-coverage-must-use-entry-or-replacement :
   OfficialCoverageAfterInitialObstruction S →
   EverySolutionEntersBeforeSingularity S
   ⊎ UniversalReplacementMechanism S
-official-coverage-must-use-entry-or-replacement C with coverage C
+official-coverage-must-use-entry-or-replacement {S = S} C with coverage C
 ... | inj₁ starts = absurd
   (zero-datum-refutes-all-data-initial-admissibility
     (zeroObstruction C) starts)
   where
   absurd : ⊥ →
-    EverySolutionEntersBeforeSingularity _
-    ⊎ UniversalReplacementMechanism _
+    EverySolutionEntersBeforeSingularity S
+    ⊎ UniversalReplacementMechanism S
   absurd ()
 ... | inj₂ surviving = surviving
