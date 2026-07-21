@@ -9,6 +9,8 @@ open import DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay public
 open import DASHI.Physics.Closure.NSCompactGammaGammaNearTailCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
+import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
+import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas as Frontier
 
 ------------------------------------------------------------------------
 -- One fail-closed owner for the exact mathematical cutset listed in the
@@ -19,11 +21,13 @@ open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion publi
 ------------------------------------------------------------------------
 
 record ExactCompactGammaMathematicalCutset
-    {i t : Level}
+    {i t ℓState ℓProp : Level}
     (A : AbsorptionArithmetic)
     (Index : Set i)
     (Official : OfficialInitialDataSetting i)
-    (Time : Set t) : Set (lsuc (i ⊔ t)) where
+    (Time : Set t)
+    (galerkinSetting : Galerkin.ConcreteGalerkinSetting ℓState ℓProp)
+    : Set (lsuc (i ⊔ t ⊔ ℓState ⊔ ℓProp)) where
   field
     multiplicativeOrder : OrderedSemiringExtension A
     reflexiveOrder : ReflexiveOrderExtension A
@@ -43,23 +47,19 @@ record ExactCompactGammaMathematicalCutset
 
     realIntegration : ConcreteRealIntegrationCompletion A Time
 
-    GalerkinStateLevel GalerkinPropertyLevel : Level
-    galerkinSetting :
-      DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses.ConcreteGalerkinSetting
-        GalerkinStateLevel GalerkinPropertyLevel
     galerkinLimit :
-      DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses.ConcreteAubinLionsNonlinearLimitCertificate
-        galerkinSetting
+      Galerkin.ConcreteAubinLionsNonlinearLimitCertificate galerkinSetting
 
     offPacket : OffPacketAnalyticCompletion A Time
 
 open ExactCompactGammaMathematicalCutset public
 
 exactShellDecayEndpoint :
-  ∀ {i t} {A : AbsorptionArithmetic}
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
     {Index : Set i} {Official : OfficialInitialDataSetting i}
-    {Time : Set t} →
-  (C : ExactCompactGammaMathematicalCutset A Index Official Time) →
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
   ∀ q j τ →
   _≤_ A
     (weightedFiveHalvesShell (shellDynamics C) j
@@ -71,10 +71,11 @@ exactShellDecayEndpoint C =
   iteratedTwoSidedFiveHalvesDecay (twoSidedShellDecay C)
 
 exactGammaCoerciveEndpoint :
-  ∀ {i t} {A : AbsorptionArithmetic}
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
     {Index : Set i} {Official : OfficialInitialDataSetting i}
-    {Time : Set t} →
-  (C : ExactCompactGammaMathematicalCutset A Index Official Time) →
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
   ∀ q τ →
   _≤_ A
     (_+_ A
@@ -87,11 +88,12 @@ exactGammaCoerciveEndpoint C =
   gammaCoerciveDifferentialInequality (gammaNearTail C)
 
 exactCanonicalTupleFeasible :
-  ∀ {i t} {A : AbsorptionArithmetic}
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
     {Index : Set i} {Official : OfficialInitialDataSetting i}
-    {Time : Set t} →
-  (C : ExactCompactGammaMathematicalCutset A Index Official Time) →
-  DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas.SharedParameterFeasibility
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
+  Frontier.SharedParameterFeasibility
     A Index (canonicalSevenParameterTuple (parameterNumerals C))
 exactCanonicalTupleFeasible C =
   canonicalTupleFeasible (parameterNumerals C) (parameterInequalities C)
