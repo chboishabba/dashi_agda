@@ -14,6 +14,7 @@ open import DASHI.Physics.Closure.NSCompactGammaOfficialDataObstruction public
 open import DASHI.Physics.Closure.NSCompactGammaOfficialCoverageCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaAbstractAdmissibilityObstruction public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
+import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision as FiveHalves
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision as Absorption
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
 import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas as Frontier
@@ -33,15 +34,10 @@ record ExactCompactGammaMathematicalCutset
     (galerkinSetting : Galerkin.ConcreteGalerkinSetting ℓState ℓProp)
     : Set (lsuc (i ⊔ t ⊔ ℓState ⊔ ℓProp)) where
   field
-    multiplicativeOrder : OrderedSemiringExtension A
-    reflexiveOrder : ReflexiveOrderExtension A
-
-    -- A1: the selected implementation route is the concrete adjacent-shell
-    -- recurrence and its two-sided geometric assembly.
-    shellDynamics : FourierShellDynamics A multiplicativeOrder
-    twoSidedShellDecay :
-      TwoSidedGeometricShellDecay
-        A multiplicativeOrder reflexiveOrder shellDynamics
+    -- A1: the selected implementation route is the adjacent-shell recurrence
+    -- and its two-sided geometric assembly.  The direct weighted-sum route is
+    -- retained separately as an alternative theorem owner.
+    fiveHalvesRoute : FiveHalves.AdjacentRecurrenceFiveHalvesControl A
 
     -- B: the viable near-triad route is dissipative absorption, together with
     -- an explicit positive non-cubic source for the weighted rate.
@@ -77,13 +73,33 @@ exactShellDecayEndpoint :
   (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
   ∀ q j τ →
   _≤_ A
-    (weightedFiveHalvesShell (shellDynamics C) j
-      (selectedState (shellDynamics C) q τ))
+    (weightedFiveHalvesShell
+      (FiveHalves.dynamics (fiveHalvesRoute C)) j
+      (selectedState
+        (FiveHalves.dynamics (fiveHalvesRoute C)) q τ))
     (_+_ A
-      (decayCoefficient (twoSidedShellDecay C) q j)
-      (compactGammaEnvelope (twoSidedShellDecay C) q τ))
+      (decayCoefficient
+        (FiveHalves.decay (fiveHalvesRoute C)) q j)
+      (compactGammaEnvelope
+        (FiveHalves.decay (fiveHalvesRoute C)) q τ))
 exactShellDecayEndpoint C =
-  iteratedTwoSidedFiveHalvesDecay (twoSidedShellDecay C)
+  FiveHalves.periodicTwoSidedShellDecay (fiveHalvesRoute C)
+
+exactFiveHalvesSumEndpoint :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
+  ∀ q τ →
+  _≤_ A
+    (weightedShellSum
+      (FiveHalves.decay (fiveHalvesRoute C)) q τ)
+    (compactGammaEnvelope
+      (FiveHalves.decay (fiveHalvesRoute C)) q τ)
+exactFiveHalvesSumEndpoint C =
+  FiveHalves.periodicAdjacentRouteControlsFiveHalvesSum
+    (fiveHalvesRoute C)
 
 exactAbsorbedGammaEndpoint :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
