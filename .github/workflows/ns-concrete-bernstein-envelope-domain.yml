@@ -1,38 +1,126 @@
-name: NS concrete Bernstein envelope domain
+name: NS exact compact-Gamma mathematical cutset
 
 on:
   pull_request:
     paths:
+      - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomain.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteInequalitySynthesis.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteAnalyticCutset.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFourCriticalObligations.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFrontierAttackLemmas.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaCriticalObligationCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGeometricShellDecay.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaFiveHalvesRouteDecision.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGammaNearTailCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaNearTriadRouteDecision.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaNearTriadAbsorptionReduction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaRadiusEightFourierReduction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaConcreteDyadicScalarCertificate.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaParameterCoverageCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaCanonicalParameterBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOfficialDataObstruction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOfficialCoverageCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaFixedFloorScalingObstruction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGeneratedCertificateBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaAbstractAdmissibilityObstruction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaStandardAnalysisCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaExactMathematicalCutset.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomainTest.agda'
+      - 'scripts/ns_compact_gamma_exact_cutset_audit.py'
+      - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
+      - 'scripts/ns_compact_gamma_certificate_generator.py'
+      - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
+      - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
+      - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
+      - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
+      - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
   push:
     paths:
+      - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomain.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteInequalitySynthesis.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteAnalyticCutset.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFourCriticalObligations.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaFrontierAttackLemmas.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaCriticalObligationCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGeometricShellDecay.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaFiveHalvesRouteDecision.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGammaNearTailCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaNearTriadRouteDecision.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaNearTriadAbsorptionReduction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaRadiusEightFourierReduction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaConcreteDyadicScalarCertificate.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaParameterCoverageCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaCanonicalParameterBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOfficialDataObstruction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaOfficialCoverageCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaFixedFloorScalingObstruction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaGeneratedCertificateBridge.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaAbstractAdmissibilityObstruction.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaStandardAnalysisCompletion.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaExactMathematicalCutset.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomainTest.agda'
+      - 'scripts/ns_compact_gamma_exact_cutset_audit.py'
+      - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
+      - 'scripts/ns_compact_gamma_certificate_generator.py'
+      - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
+      - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
+      - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
+      - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
+      - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
 
 concurrency:
-  group: ns-concrete-bernstein-envelope-domain-${{ github.ref }}
+  group: ns-exact-compact-gamma-cutset-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
+  finite-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependency
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Reproduce finite falsification audit
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ns-compact-gamma-audit"
+          python scripts/ns_compact_gamma_exact_cutset_audit.py \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/audit.json" --pretty
+          python scripts/check_ns_compact_gamma_exact_cutset_audit.py \
+            --source-json "$RUNNER_TEMP/ns-compact-gamma-audit/audit.json" \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/check.json"
+          diff -u scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/audit.json"
+          diff -u scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/check.json"
+      - name: Reproduce exact finite-core certificate and tail obligations
+        run: |
+          set -euo pipefail
+          python scripts/ns_compact_gamma_certificate_generator.py \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/certificate.json" \
+            --radius 4 --R 8 --pretty
+          python scripts/check_ns_compact_gamma_certificate_bundle.py \
+            --source-json "$RUNNER_TEMP/ns-compact-gamma-audit/certificate.json" \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/certificate-check.json"
+          diff -u scripts/data/outputs/ns_compact_gamma_certificate_bundle.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/certificate.json"
+          diff -u scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/certificate-check.json"
+
   focused-agda:
+    needs: finite-audit
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -40,7 +128,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check concrete Bernstein envelope domain
+      - name: Check exact compact-Gamma mathematical cutset
         shell: bash
         run: |
           set -euo pipefail
