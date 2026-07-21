@@ -2,10 +2,10 @@ module DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
-import DASHI.Physics.Closure.NSCompactGammaConcreteDyadicScalarCertificate as Dyadic
 import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion as Parameters
 import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge as ParameterBridge
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as RadiusEight
@@ -80,7 +80,7 @@ realCarrierFirstExitImpossible :
   (R : RealCarrierInwardCoercivePackage A Index R8) →
   ∀ τ u →
   Coverage.FirstExit (firstExitBoundary R) τ u →
-  Data.Empty.⊥
+  ⊥
 realCarrierFirstExitImpossible R =
   Coverage.compactGammaFirstExitImpossible (firstExitBoundary R)
 
@@ -107,10 +107,13 @@ universalFiveHalvesEndpoint :
   (U : UniversalPeriodicFourierTailInputs A Index S) →
   ∀ q τ →
   _≤_ A
-    (weightedFiveHalvesSum (fiveHalves U) q τ)
-    (compactGammaEnvelope (fiveHalves U) q τ)
+    (IndexedFiveHalvesUniversal.weightedFiveHalvesSum
+      (fiveHalves U) q τ)
+    (IndexedFiveHalvesUniversal.compactGammaEnvelope
+      (fiveHalves U) q τ)
 universalFiveHalvesEndpoint U =
-  compactGammaControlsFiveHalvesUniversally (fiveHalves U)
+  IndexedFiveHalvesUniversal.compactGammaControlsFiveHalvesUniversally
+    (fiveHalves U)
 
 universalNearTriadEndpoint :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i}
