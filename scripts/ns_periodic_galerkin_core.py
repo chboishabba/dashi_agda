@@ -27,10 +27,14 @@ def canonical_positive(k: Mode) -> bool:
 
 
 def hat_weight(shell: int, k: Mode) -> float:
-    if shell < 1:
-        raise ValueError("shell must be >= 1")
+    """Raw max-norm dyadic hat, including the low-frequency shell zero."""
+    if shell < 0:
+        raise ValueError("shell must be nonnegative")
     r = max(abs(x) for x in k)
-    lo, mid, hi = 2 ** (shell - 1), 2**shell, 2 ** (shell + 1)
+    if shell == 0:
+        lo, mid, hi = 0, 1, 2
+    else:
+        lo, mid, hi = 2 ** (shell - 1), 2**shell, 2 ** (shell + 1)
     if r < lo or r > hi:
         return 0.0
     if r <= mid:
@@ -92,10 +96,17 @@ def make_geometry(cutoff: int, max_shell: int | None = None) -> GalerkinGeometry
 
     if max_shell is None:
         max_shell = max(1, cutoff.bit_length())
-    shell_weights = {
-        shell: np.asarray([hat_weight(shell, k) for k in modes], dtype=np.float64)
-        for shell in range(1, max_shell + 1)
-    }
+    shell_ids = tuple(range(0, max_shell + 1))
+    raw = np.asarray(
+        [[hat_weight(shell, k) for k in modes] for shell in shell_ids],
+        dtype=np.float64,
+    )
+    normalization = np.sqrt(np.sum(raw * raw, axis=0))
+    if np.any(normalization == 0):
+        raise ValueError("dyadic shell family does not cover the Galerkin cube")
+    normalized = raw / normalization[None, :]
+    shell_weights = {shell: normalized[i] for i, shell in enumerate(shell_ids)}
+
     return GalerkinGeometry(
         cutoff=cutoff,
         modes=modes,
