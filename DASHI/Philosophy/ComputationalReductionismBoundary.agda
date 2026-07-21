@@ -3,7 +3,6 @@ module DASHI.Philosophy.ComputationalReductionismBoundary where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
 open import DASHI.Sheaf.GlobalAmbiguityBoundary
@@ -83,7 +82,7 @@ record FibreAwareRepresentation
     enrichedCodeInjective : Injective (λ world → visibleCode world , sheetLabel world)
 
 record ReductionismBoundaryReceipt : Set where
-  constructor reductionismBoundaryReceipt
+  constructor mkReductionismBoundaryReceipt
   field
     computationEquatedWithReductionism : Bool
     computationEquatedWithReductionismIsFalse :
@@ -98,7 +97,7 @@ record ReductionismBoundaryReceipt : Set where
 
 reductionismBoundaryReceipt : ReductionismBoundaryReceipt
 reductionismBoundaryReceipt =
-  reductionismBoundaryReceipt
+  mkReductionismBoundaryReceipt
     false refl
     true true true
     false refl
