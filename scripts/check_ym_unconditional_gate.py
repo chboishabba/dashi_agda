@@ -56,6 +56,7 @@ SOURCE_AUTHORITY_FILES = (
 REDUCTION_AND_REGRESSION_FILES = (
     YM / "BalabanFiniteFourierHodgeReduction.agda",
     YM / "BalabanFiniteFourierHodgeReductionRegression.agda",
+    YM / "BalabanPublishedSourceTheoremRegression.agda",
     YM / "BalabanExactPublishedCarrierMatchingRegression.agda",
 )
 
@@ -139,6 +140,17 @@ def main() -> None:
         if "ProofLevel" not in text:
             fail(f"missing proof-level boundary in {path.relative_to(ROOT)}")
 
+    source_regression = read(
+        YM / "BalabanPublishedSourceTheoremRegression.agda"
+    )
+    for name in (
+        "propagatorSourceConversionRegression",
+        "variationalSourceConversionRegression",
+        "smallFieldSourceConversionRegression",
+    ):
+        if name not in source_regression:
+            fail(f"source theorem regression missing `{name}`")
+
     matching_regression = read(
         YM / "BalabanExactPublishedCarrierMatchingRegression.agda"
     )
@@ -160,6 +172,7 @@ def main() -> None:
     print("YM unconditional gate: PASS")
     print(f"  audited files: {len(AUDITED_NEW_FILES)}")
     print(f"  load-bearing theorem names present: {len(REQUIRED_THEOREMS)}")
+    print("  source theorem conversion regression present")
     print("  exact published-carrier regression present")
     print("  finite Fourier Hodge regression present")
     print("  repository submission promotion remains false")
