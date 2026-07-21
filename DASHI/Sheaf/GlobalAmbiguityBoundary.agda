@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Sheaf.FiniteTemporalClopenSheaf as Temporal
 open import Verification.JacobianCounterexampleKernel as Jacobian
@@ -143,7 +143,7 @@ data FailureMode : Set where
   distinctGlobalsSameObservation : FailureMode
 
 record GlobalAmbiguityReceipt : Set where
-  constructor globalAmbiguityReceipt
+  constructor mkGlobalAmbiguityReceipt
   field
     mereViolStillMeansLocalConflict : Bool
     compatibleFamiliesStillGlue : Bool
@@ -157,7 +157,7 @@ record GlobalAmbiguityReceipt : Set where
 
 globalAmbiguityReceipt : GlobalAmbiguityReceipt
 globalAmbiguityReceipt =
-  globalAmbiguityReceipt
+  mkGlobalAmbiguityReceipt
     true true true true true
     false refl
     "MereViol is local incompatibility, while GlobalAmbiguity records loss of global identity under a noninjective observation; unique gluing for a fixed compatible family does not make every later projection injective"
