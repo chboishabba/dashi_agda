@@ -22,6 +22,7 @@ open import DASHI.Physics.Closure.NSPeriodicFourierNearTriadPreYoung public
 open import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization public
 open import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction public
 open import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction public
+open import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction public
 open import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary public
 open import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction public
 open import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion public
