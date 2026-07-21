@@ -8,6 +8,7 @@ import DASHI.Physics.Closure.NSCompactGammaConcretePotentialInstantiation as Pot
 import DASHI.Physics.Closure.NSCompactGammaAnalyticLeafCompletion as Leaves
 import DASHI.Physics.Closure.NSCompactGammaRealAnalysisGalerkinCompletion as Real
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
+import DASHI.Physics.Closure.NSGalerkinCompactnessLimit as GLimit
 import DASHI.Physics.Closure.NSCompactGammaReserveDifferentialIdentities as Reserve
 import DASHI.Physics.Closure.NSCompactGammaConcreteBernsteinEnvelopeDomain as Bernstein
 
@@ -169,7 +170,7 @@ uniformGalerkinEnergyBound :
   ∀ {ℓState ℓProp}
     {S : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : Galerkin.ConcreteAubinLionsNonlinearLimitCertificate S) →
-  Galerkin.UniformEnergyEstimate (Galerkin.analytic S)
+  GLimit.UniformEnergyEstimate (Galerkin.analytic S)
 uniformGalerkinEnergyBound C =
   Galerkin.uniformEnergyEstimate (Galerkin.g2 C)
 
@@ -177,7 +178,7 @@ uniformGalerkinTimeDerivativeBound :
   ∀ {ℓState ℓProp}
     {S : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : Galerkin.ConcreteAubinLionsNonlinearLimitCertificate S) →
-  Galerkin.UniformTimeDerivativeBound (Galerkin.analytic S)
+  GLimit.UniformTimeDerivativeBound (Galerkin.analytic S)
 uniformGalerkinTimeDerivativeBound C =
   Galerkin.repositoryBound (Galerkin.g4 C)
 
@@ -185,10 +186,10 @@ aubinLionsStrongL2Extraction :
   ∀ {ℓState ℓProp}
     {S : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : Galerkin.ConcreteAubinLionsNonlinearLimitCertificate S) →
-  Galerkin.StrongL2TimeSpaceConvergence
+  GLimit.StrongL2TimeSpaceConvergence
     (Galerkin.analytic S)
     (Galerkin.subsequence (Galerkin.g5 C))
-    (Galerkin.LimitState (Galerkin.analytic S))
+    (GLimit.LimitState (Galerkin.analytic S))
 aubinLionsStrongL2Extraction C =
   Galerkin.repositoryStrongL2 (Galerkin.g5 C)
 
@@ -196,10 +197,10 @@ galerkinNonlinearityConverges :
   ∀ {ℓState ℓProp}
     {S : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : Galerkin.ConcreteAubinLionsNonlinearLimitCertificate S) →
-  Galerkin.NonlinearDistributionalConvergence
+  GLimit.NonlinearDistributionalConvergence
     (Galerkin.analytic S)
     (Galerkin.subsequence (Galerkin.g5 C))
-    (Galerkin.LimitNonlinearity (Galerkin.analytic S))
+    (GLimit.LimitNonlinearity (Galerkin.analytic S))
 galerkinNonlinearityConverges C =
   Galerkin.convectionDistribution (Galerkin.g9 C)
 
@@ -207,7 +208,7 @@ limitSolvesNavierStokes :
   ∀ {ℓState ℓProp}
     {S : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : Galerkin.ConcreteAubinLionsNonlinearLimitCertificate S) →
-  Galerkin.LerayHopfSolution
+  GLimit.LerayHopfSolution
     (Galerkin.analytic S)
     (Galerkin.solution (Galerkin.g12 C))
 limitSolvesNavierStokes C =
@@ -217,7 +218,7 @@ lowerSemicontinuityOfDissipation :
   ∀ {ℓState ℓProp}
     {S : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : Galerkin.ConcreteAubinLionsNonlinearLimitCertificate S) →
-  Galerkin.DissipationLowerSemicontinuity
+  GLimit.DissipationLowerSemicontinuity
     (Galerkin.analytic S)
     (Galerkin.subsequence (Galerkin.g5 C))
 lowerSemicontinuityOfDissipation C =
@@ -230,11 +231,11 @@ record CompactGammaFunctionalConvergencePair
     : Set (ℓState ⊔ ℓProp) where
   field
     numerator :
-      Galerkin.GammaNumeratorConvergence
+      GLimit.GammaNumeratorConvergence
         (Galerkin.analytic S)
         (Galerkin.subsequence (Galerkin.g5 C))
     differentiatedNumerator :
-      Galerkin.GammaTangentResponseConvergence
+      GLimit.GammaTangentResponseConvergence
         (Galerkin.analytic S)
         (Galerkin.subsequence (Galerkin.g5 C))
 
@@ -331,6 +332,28 @@ offPacketBoundaryFluxIdentity C =
 ------------------------------------------------------------------------
 -- BE1--BE8: audit-friendly aliases for the existing concrete Bernstein chain.
 ------------------------------------------------------------------------
+
+shellCurlEstimate :
+  ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
+    {C : Potential.ThreeWayAdditiveCalculus A}
+    {R : Leaves.ConcreteReserveLeaves A Time}
+    {F : Leaves.RealFundamentalTheoremRealization A C R} →
+  (B : Bernstein.ConcreteBernsteinEnvelopeLeaves A C R F) → ∀ j τ →
+  _≤_ A
+    (Bernstein.shellVorticityL2 B j (Bernstein.shellState B τ))
+    (Bernstein.curlWeightedShell B j (Bernstein.shellState B τ))
+shellCurlEstimate = Bernstein.BE1-shell-curl
+
+shellBernsteinEstimate :
+  ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
+    {C : Potential.ThreeWayAdditiveCalculus A}
+    {R : Leaves.ConcreteReserveLeaves A Time}
+    {F : Leaves.RealFundamentalTheoremRealization A C R} →
+  (B : Bernstein.ConcreteBernsteinEnvelopeLeaves A C R F) → ∀ j τ →
+  _≤_ A
+    (Bernstein.shellVorticityLInfinity B j (Bernstein.shellState B τ))
+    (Bernstein.curlWeightedShell B j (Bernstein.shellState B τ))
+shellBernsteinEstimate = Bernstein.BE2-shell-Bernstein-five-halves
 
 fiveHalvesShellEstimate :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
