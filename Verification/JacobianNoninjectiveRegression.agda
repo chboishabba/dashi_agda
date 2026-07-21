@@ -1,24 +1,31 @@
 module Verification.JacobianNoninjectiveRegression where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
--- This module is deliberately a boundary/receipt surface.  The exact sparse-
--- polynomial expansion is executed by
--- scripts/check_jacobian_noninjective_example.py.  No kernel-level theorem
--- about the Jacobian conjecture is claimed here.
+-- The exact sparse-polynomial expansion and rational evaluations are executed
+-- by scripts/check_jacobian_noninjective_example.py.  The logical implication
+-- collision => noninjective is now proved separately in
+-- DASHI.Algebra.Jacobian.CollisionImpliesNonInjective.
 
 record ExactJacobianDiagnosticReceipt : Set where
   constructor receipt
   field
-    ambientDimension       : Nat
-    determinantConstant    : String
-    determinantIdentityOK  : Bool
-    distinctWitnessCount   : Nat
-    commonImage            : String
-    fibreWitnessesOK       : Bool
-    kernelProofClaimed      : Bool
+    ambientDimension : Nat
+    determinantConstant : String
+    determinantIdentityOK : Bool
+    distinctWitnessCount : Nat
+    commonImage : String
+    fibreWitnessesOK : Bool
+    sparsePolynomialKernelChecked : Bool
+    exactEvaluationKernelChecked : Bool
+    collisionImplicationKernelProved : Bool
+    counterexamplePromotionRecorded : Bool
+    dimensionTwoResolved : Bool
+
+open ExactJacobianDiagnosticReceipt public
 
 jacobianNoninjectiveExampleReceipt : ExactJacobianDiagnosticReceipt
 jacobianNoninjectiveExampleReceipt =
@@ -30,8 +37,19 @@ jacobianNoninjectiveExampleReceipt =
     "(-1/4,0,0)"
     true
     false
+    false
+    true
+    true
+    false
 
--- Fail-closed interpretation boundary: this receipt records a checked exact
--- computation only.  It must not be promoted to a kernel proof or to a claim
--- resolving the complex Jacobian conjecture without reconciling the map's
--- stated hypotheses and provenance.
+kernelLogicalPromotionIsTrue :
+  collisionImplicationKernelProved jacobianNoninjectiveExampleReceipt ≡ true
+kernelLogicalPromotionIsTrue = refl
+
+sparseExpansionRemainsExternal :
+  sparsePolynomialKernelChecked jacobianNoninjectiveExampleReceipt ≡ false
+sparseExpansionRemainsExternal = refl
+
+dimensionTwoRemainsOpen :
+  dimensionTwoResolved jacobianNoninjectiveExampleReceipt ≡ false
+dimensionTwoRemainsOpen = refl
