@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -27,6 +28,9 @@ import DASHI.Physics.Closure.NSCompactGammaCoverageFromContinuationAuthority as 
 --   5. semantic real-carrier parameter interpretation plus concrete Dini data;
 --   6. standard zero/small/diffuse continuation plus the novel exhaustive
 --      Gamma-depletion/adaptive-chart classification.
+--
+-- Carrier-equality fields prevent witnesses proved for different time/state
+-- models from being combined into one purported completion package.
 ------------------------------------------------------------------------
 
 record IndexedFiveHalvesUniversal
@@ -105,6 +109,8 @@ record UniversalPeriodicFourierTailInputs
     (Index : Set i)
     (S : OfficialInitialDataSetting i) : Set (lsuc i) where
   field
+    SharedTime SharedState : Set i
+
     fiveHalvesPointwise :
       Summation.FiveHalvesPointwiseSummationInputs A Index
 
@@ -122,6 +128,23 @@ record UniversalPeriodicFourierTailInputs
 
     novelCoverage :
       Coverage.NovelCoverageInputs S continuationAuthority
+
+    fiveHalvesTimeCoherent :
+      Summation.Time fiveHalvesPointwise ≡ SharedTime
+    fiveHalvesStateCoherent :
+      Summation.State fiveHalvesPointwise ≡ SharedState
+    nearTriadTimeCoherent :
+      Young.Time nearTriad ≡ SharedTime
+    radiusEightTimeCoherent :
+      Tail.Time radiusEight ≡ SharedTime
+    diniTimeCoherent :
+      Dini.Time (diniFirstExit realCarrier) ≡ SharedTime
+    diniStateCoherent :
+      Dini.State (diniFirstExit realCarrier) ≡ SharedState
+    officialTimeCoherent :
+      Time S ≡ SharedTime
+    officialSolutionCoherent :
+      Solution S ≡ SharedState
 
 open UniversalPeriodicFourierTailInputs public
 
