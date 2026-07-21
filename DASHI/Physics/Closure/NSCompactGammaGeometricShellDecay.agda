@@ -2,7 +2,6 @@ module DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -40,8 +39,14 @@ record OrderedSemiringExtension (A : AbsorptionArithmetic) : Set₁ where
 
 open OrderedSemiringExtension public
 
+record ReflexiveOrderExtension (A : AbsorptionArithmetic) : Set₁ where
+  field
+    reflexive : ∀ x → _≤_ A x x
+
+open ReflexiveOrderExtension public
+
 ------------------------------------------------------------------------
--- Exact multiplicative iteration.
+-- SD5. Exact multiplicative iteration.
 ------------------------------------------------------------------------
 
 record GeometricRecurrence
@@ -70,57 +75,15 @@ open GeometricRecurrence public
 iterateAdjacentGeometricDecay :
   ∀ {A : AbsorptionArithmetic}
     {M : OrderedSemiringExtension A} →
-  (R : GeometricRecurrence A M) →
-  ∀ n → _≤_ A (value R n) (closedBound R n)
-iterateAdjacentGeometricDecay {A} {M} R zero =
-  subst
-    (λ upper → _≤_ A (value R zero) upper)
-    (sym (closedZero R))
-    (initialBound R)
-iterateAdjacentGeometricDecay {A} {M} R (suc n) =
-  ≤-trans A
-    (oneStepBound R n)
-    (subst
-      (λ upper →
-        _≤_ A
-          (_+_ A (_*_ M (rho R) (value R n)) (remainder R n))
-          upper)
-      (sym (closedStep R n))
-      (additionMonotoneBoth M
-        (multiplicationMonotoneLeft M (rho R)
-          (iterateAdjacentGeometricDecay R n))
-        (let open AbsorptionArithmetic A in
-          ≤-trans (additionMonotoneLeft (≤-trans
-            (additionMonotoneRight (initialBound R))
-            (additionMonotoneRight (initialBound R))))
-            (additionMonotoneLeft (≤-trans
-              (additionMonotoneRight (initialBound R))
-              (additionMonotoneRight (initialBound R)))))))
-
-------------------------------------------------------------------------
--- The previous proof only needs reflexivity for the unchanged remainder.
--- Keeping that law separate avoids smuggling a total order into the weak
--- additive carrier.
-------------------------------------------------------------------------
-
-record ReflexiveOrderExtension (A : AbsorptionArithmetic) : Set₁ where
-  field
-    reflexive : ∀ x → _≤_ A x x
-
-open ReflexiveOrderExtension public
-
-iterateAdjacentGeometricDecayWithReflexivity :
-  ∀ {A : AbsorptionArithmetic}
-    {M : OrderedSemiringExtension A} →
   ReflexiveOrderExtension A →
   (R : GeometricRecurrence A M) →
   ∀ n → _≤_ A (value R n) (closedBound R n)
-iterateAdjacentGeometricDecayWithReflexivity {A} {M} O R zero =
+iterateAdjacentGeometricDecay {A} {M} O R zero =
   subst
     (λ upper → _≤_ A (value R zero) upper)
     (sym (closedZero R))
     (initialBound R)
-iterateAdjacentGeometricDecayWithReflexivity {A} {M} O R (suc n) =
+iterateAdjacentGeometricDecay {A} {M} O R (suc n) =
   ≤-trans A
     (oneStepBound R n)
     (subst
@@ -131,7 +94,7 @@ iterateAdjacentGeometricDecayWithReflexivity {A} {M} O R (suc n) =
       (sym (closedStep R n))
       (additionMonotoneBoth M
         (multiplicationMonotoneLeft M (rho R)
-          (iterateAdjacentGeometricDecayWithReflexivity O R n))
+          (iterateAdjacentGeometricDecay O R n))
         (reflexive O (remainder R n))))
 
 ------------------------------------------------------------------------
@@ -191,7 +154,7 @@ record FourierShellDynamics
 open FourierShellDynamics public
 
 ------------------------------------------------------------------------
--- SD5--SD7: two-sided geometric assembly.
+-- SD6--SD7: two-sided geometric assembly.
 ------------------------------------------------------------------------
 
 record TwoSidedGeometricShellDecay
@@ -276,7 +239,7 @@ leftShellGeometricDecay {A} {M} {O} {D} T q j τ side =
           (value (leftRecurrence T q τ) (distanceFromTarget T q j))
           upper)
       (leftClosedIdentifiesCoefficientEnvelope T q j τ side)
-      (iterateAdjacentGeometricDecayWithReflexivity O
+      (iterateAdjacentGeometricDecay O
         (leftRecurrence T q τ) (distanceFromTarget T q j)))
 
 rightShellGeometricDecay :
@@ -301,7 +264,7 @@ rightShellGeometricDecay {A} {M} {O} {D} T q j τ side =
           (value (rightRecurrence T q τ) (distanceFromTarget T q j))
           upper)
       (rightClosedIdentifiesCoefficientEnvelope T q j τ side)
-      (iterateAdjacentGeometricDecayWithReflexivity O
+      (iterateAdjacentGeometricDecay O
         (rightRecurrence T q τ) (distanceFromTarget T q j)))
 
 iteratedTwoSidedFiveHalvesDecay :
