@@ -2,20 +2,17 @@ module DASHI.Physics.YangMills.BalabanExactPatchTransferCalculus where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPatchRegimeHodgeUniformity using
-  (PatchRegime; boundary; scaleInterface; corner; nestedRestriction)
 
 ------------------------------------------------------------------------
 -- Exact patch-transfer calculus.
 --
--- This module removes duplicated regimewise assembly obligations.  A patch is
--- represented as a genuine retract of the bulk carrier.  Green transfer is an
--- exact identity with an explicit correction operator; setting that correction
--- equal to zero recovers exact reflection/intertwining constructions.
+-- A patch is a genuine retract of a bulk carrier.  The module proves the
+-- repeated boundary/interface/corner/nested algebra once and derives the
+-- patch Green estimate from the exact intertwining identity, extension and
+-- restriction stability, the bulk estimate, and one scalar constant transport.
 ------------------------------------------------------------------------
 
-record PatchRetract
-    (Patch Bulk Bound : Set) : Set₁ where
+record PatchRetract (Patch Bulk Bound : Set) : Set₁ where
   field
     extension : Patch → Bulk
     restriction : Bulk → Patch
@@ -45,48 +42,23 @@ record ConstraintPreservingPatchRetract
 
 open ConstraintPreservingPatchRetract public
 
-boundaryRestrictionAfterExtension :
+boundaryRestrictionAfterExtension interfaceRestrictionAfterExtension
+  cornerRestrictionAfterExtension nestedRestrictionAfterExtension :
   ∀ {Patch Bulk Bound} (d : PatchRetract Patch Bulk Bound) h →
   restriction d (extension d h) ≡ h
 boundaryRestrictionAfterExtension d = restrictionAfterExtension d
-
-interfaceRestrictionAfterExtension :
-  ∀ {Patch Bulk Bound} (d : PatchRetract Patch Bulk Bound) h →
-  restriction d (extension d h) ≡ h
 interfaceRestrictionAfterExtension d = restrictionAfterExtension d
-
-cornerRestrictionAfterExtension :
-  ∀ {Patch Bulk Bound} (d : PatchRetract Patch Bulk Bound) h →
-  restriction d (extension d h) ≡ h
 cornerRestrictionAfterExtension d = restrictionAfterExtension d
-
-nestedRestrictionAfterExtension :
-  ∀ {Patch Bulk Bound} (d : PatchRetract Patch Bulk Bound) h →
-  restriction d (extension d h) ≡ h
 nestedRestrictionAfterExtension d = restrictionAfterExtension d
 
-boundaryExtensionPreservesConstraints :
+boundaryExtensionPreservesConstraints interfaceExtensionPreservesConstraints
+  cornerExtensionPreservesConstraints nestedExtensionPreservesConstraints :
   ∀ {Patch Bulk Bound}
     (d : ConstraintPreservingPatchRetract Patch Bulk Bound) h →
   PatchConstraint d h → BulkConstraint d (extension (retract d) h)
 boundaryExtensionPreservesConstraints d = extensionPreservesConstraints d
-
-interfaceExtensionPreservesConstraints :
-  ∀ {Patch Bulk Bound}
-    (d : ConstraintPreservingPatchRetract Patch Bulk Bound) h →
-  PatchConstraint d h → BulkConstraint d (extension (retract d) h)
 interfaceExtensionPreservesConstraints d = extensionPreservesConstraints d
-
-cornerExtensionPreservesConstraints :
-  ∀ {Patch Bulk Bound}
-    (d : ConstraintPreservingPatchRetract Patch Bulk Bound) h →
-  PatchConstraint d h → BulkConstraint d (extension (retract d) h)
 cornerExtensionPreservesConstraints d = extensionPreservesConstraints d
-
-nestedExtensionPreservesConstraints :
-  ∀ {Patch Bulk Bound}
-    (d : ConstraintPreservingPatchRetract Patch Bulk Bound) h →
-  PatchConstraint d h → BulkConstraint d (extension (retract d) h)
 nestedExtensionPreservesConstraints d = extensionPreservesConstraints d
 
 boundaryExtensionNormBound interfaceExtensionNormBound
@@ -113,8 +85,7 @@ nestedRestrictionNormBound d = restrictionNormBound d
 -- Energy transport.
 ------------------------------------------------------------------------
 
-record PatchEnergyTransfer
-    (Patch Bulk Bound : Set) : Set₁ where
+record PatchEnergyTransfer (Patch Bulk Bound : Set) : Set₁ where
   field
     retract : PatchRetract Patch Bulk Bound
     patchEnergy : Patch → Bound
@@ -135,59 +106,52 @@ cornerEnergyComparedToBulk d = energyComparedToBulk d
 nestedEnergyComparedToBulk d = energyComparedToBulk d
 
 ------------------------------------------------------------------------
--- Exact Green transfer with controlled correction.
+-- Exact Green transfer.  A nonzero correction belongs in a separate
+-- perturbative record; this owner is deliberately the K = 0 reflection lane.
 ------------------------------------------------------------------------
 
-record ExactGreenPatchTransfer
-    (Patch Bulk Bound : Set) : Set₁ where
+record ExactGreenPatchTransfer (Patch Bulk Bound : Set) : Set₁ where
   field
     retract : PatchRetract Patch Bulk Bound
-
     bulkGreen : Bulk → Bulk
-    patchGreen correction : Patch → Patch
-    addPatch zeroPatch : Patch → Patch → Patch
-
+    patchGreen : Patch → Patch
     greenTransferIdentity : ∀ f →
       patchGreen f ≡
-      addPatch (restriction retract (bulkGreen (extension retract f)))
-               (correction f)
-
-    correctionZero : ∀ f → correction f ≡ zeroPatch f f
-    addZeroRight : ∀ f → addPatch f (zeroPatch f f) ≡ f
+      restriction retract (bulkGreen (extension retract f))
 
 open ExactGreenPatchTransfer public
-
-exactGreenIntertwining :
-  ∀ {Patch Bulk Bound} (d : ExactGreenPatchTransfer Patch Bulk Bound) f →
-  patchGreen d f ≡
-  restriction (retract d) (bulkGreen d (extension (retract d) f))
-exactGreenIntertwining d f rewrite greenTransferIdentity d f
-  | correctionZero d f
-  | addZeroRight d (restriction (retract d)
-      (bulkGreen d (extension (retract d) f))) = refl
 
 boundaryGreenTransferIdentity interfaceGreenTransferIdentity
   cornerGreenTransferIdentity nestedGreenTransferIdentity :
   ∀ {Patch Bulk Bound} (d : ExactGreenPatchTransfer Patch Bulk Bound) f →
   patchGreen d f ≡
   restriction (retract d) (bulkGreen d (extension (retract d) f))
-boundaryGreenTransferIdentity d = exactGreenIntertwining d
-interfaceGreenTransferIdentity d = exactGreenIntertwining d
-cornerGreenTransferIdentity d = exactGreenIntertwining d
-nestedGreenTransferIdentity d = exactGreenIntertwining d
+boundaryGreenTransferIdentity d = greenTransferIdentity d
+interfaceGreenTransferIdentity d = greenTransferIdentity d
+cornerGreenTransferIdentity d = greenTransferIdentity d
+nestedGreenTransferIdentity d = greenTransferIdentity d
 
 ------------------------------------------------------------------------
--- Norm-bound transport through the exact intertwining identity.
+-- Norm transport through exact intertwining.
 ------------------------------------------------------------------------
 
-record GreenPatchBoundTransport
-    (Patch Bulk Bound : Set) : Set₁ where
+record GreenPatchBoundTransport (Patch Bulk Bound : Set) : Set₁ where
   field
     transfer : ExactGreenPatchTransfer Patch Bulk Bound
     transitive : ∀ {a b c} →
       LessEqual (retract transfer) a b →
       LessEqual (retract transfer) b c →
       LessEqual (retract transfer) a c
+    reflexive : ∀ a → LessEqual (retract transfer) a a
+    equalityRight : ∀ {a b c} → b ≡ c →
+      LessEqual (retract transfer) a b → LessEqual (retract transfer) a c
+    equalityLeft : ∀ {a b c} → a ≡ b →
+      LessEqual (retract transfer) b c → LessEqual (retract transfer) a c
+    multiplyMonotoneLeft : ∀ c {a b} →
+      LessEqual (retract transfer) a b →
+      LessEqual (retract transfer)
+        (multiply (retract transfer) c a)
+        (multiply (retract transfer) c b)
 
     Cbulk Cpatch : Bound
     bulkGreenBound : ∀ f →
@@ -196,7 +160,7 @@ record GreenPatchBoundTransport
         (multiply (retract transfer) Cbulk
           (bulkNorm (retract transfer) f))
 
-    restrictionExtensionConstantTransport : ∀ f →
+    constantTransport : ∀ f →
       LessEqual (retract transfer)
         (multiply (retract transfer) (CR (retract transfer))
           (multiply (retract transfer) Cbulk
@@ -204,17 +168,6 @@ record GreenPatchBoundTransport
               (patchNorm (retract transfer) f))))
         (multiply (retract transfer) Cpatch
           (patchNorm (retract transfer) f))
-
-    equalitySubstitution : ∀ {x y : Patch} → x ≡ y →
-      LessEqual (retract transfer)
-        (patchNorm (retract transfer) x)
-        (patchNorm (retract transfer) y)
-
-    multiplyMonotoneLeft : ∀ c {a b} →
-      LessEqual (retract transfer) a b →
-      LessEqual (retract transfer)
-        (multiply (retract transfer) c a)
-        (multiply (retract transfer) c b)
 
 open GreenPatchBoundTransport public
 
@@ -225,8 +178,8 @@ patchGreenControlledByBulk :
     (multiply (retract (transfer d)) (CR (retract (transfer d)))
       (bulkNorm (retract (transfer d))
         (bulkGreen (transfer d) (extension (retract (transfer d)) f))))
-patchGreenControlledByBulk d f = transitive d
-  (equalitySubstitution d (exactGreenIntertwining (transfer d) f))
+patchGreenControlledByBulk d f = equalityLeft d
+  (greenTransferIdentity (transfer d) f)
   (restrictionNormBound (retract (transfer d))
     (bulkGreen (transfer d) (extension (retract (transfer d)) f)))
 
@@ -245,7 +198,7 @@ patchGreenBound d f = transitive d
       (multiplyMonotoneLeft d (CR (retract (transfer d)))
         (multiplyMonotoneLeft d (Cbulk d)
           (extensionNormBound (retract (transfer d)) f)))
-      (restrictionExtensionConstantTransport d f)))
+      (constantTransport d f)))
 
 boundaryGreenControlledByBulk interfaceGreenControlledByBulk
   cornerGreenControlledByBulk nestedGreenControlledByBulk :
@@ -260,7 +213,9 @@ cornerGreenControlledByBulk d = patchGreenBound d
 nestedGreenControlledByBulk d = patchGreenBound d
 
 ------------------------------------------------------------------------
--- One coherent regime-indexed package prevents witness mixing.
+-- The identical calculus applies to G, ∇G, ∇²G and the residual by choosing
+-- the corresponding bulk and patch operators.  Keeping one family record
+-- prevents accidental mixing of witnesses from different geometries.
 ------------------------------------------------------------------------
 
 record FourPatchTransferFamily
