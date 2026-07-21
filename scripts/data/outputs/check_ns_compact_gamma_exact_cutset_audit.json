@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "adjacent_unconditional_refuted": true,
+    "coverage_obstruction": true,
+    "far_high_budget": true,
+    "far_low_budget": true,
+    "finite_authority": true,
+    "near_reversal_exact": true,
+    "near_signed_refuted": true,
+    "no_promotions": true,
+    "scalar_positive": true,
+    "schema": true
+  },
+  "error_count": 0,
+  "ok": true,
+  "schema": "check_ns_compact_gamma_exact_cutset_audit.v1"
+}
