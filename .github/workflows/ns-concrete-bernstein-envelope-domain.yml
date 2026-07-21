@@ -7,18 +7,10 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGamma*.agda'
       - 'DASHI/Physics/Closure/NSPeriodic*.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
-      - 'scripts/ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/ns_compact_gamma_certificate_generator.py'
-      - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
-      - 'scripts/ns_periodic_concrete_proof_program.py'
-      - 'scripts/check_ns_periodic_concrete_proof_program.py'
-      - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
-      - 'scripts/data/outputs/ns_periodic_concrete_proof_program.json'
-      - 'scripts/data/outputs/check_ns_periodic_concrete_proof_program.json'
+      - 'scripts/ns_*.py'
+      - 'scripts/check_ns_*.py'
+      - 'scripts/data/outputs/ns_*.json'
+      - 'scripts/data/outputs/check_ns_*.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
   push:
     paths:
@@ -26,18 +18,10 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGamma*.agda'
       - 'DASHI/Physics/Closure/NSPeriodic*.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
-      - 'scripts/ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/ns_compact_gamma_certificate_generator.py'
-      - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
-      - 'scripts/ns_periodic_concrete_proof_program.py'
-      - 'scripts/check_ns_periodic_concrete_proof_program.py'
-      - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
-      - 'scripts/data/outputs/ns_periodic_concrete_proof_program.json'
-      - 'scripts/data/outputs/check_ns_periodic_concrete_proof_program.json'
+      - 'scripts/ns_*.py'
+      - 'scripts/check_ns_*.py'
+      - 'scripts/data/outputs/ns_*.json'
+      - 'scripts/data/outputs/check_ns_*.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
 
 concurrency:
@@ -96,6 +80,29 @@ jobs:
             "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program.json"
           diff -u scripts/data/outputs/check_ns_periodic_concrete_proof_program.json \
             "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program-check.json"
+      - name: Reproduce independent phase receipts
+        run: |
+          set -euo pipefail
+          phase="$RUNNER_TEMP/ns-compact-gamma-audit/phases"
+          mkdir -p "$phase"
+          python scripts/ns_radius8_far_low_exhaustive.py --output-json "$phase/far_low.json"
+          python scripts/ns_radius8_far_high_scan.py --output-json "$phase/far_high.json"
+          python scripts/ns_near_triad_budget_scan.py --output-json "$phase/near.json"
+          python scripts/ns_five_halves_falsification.py --output-json "$phase/five.json"
+          python scripts/ns_boundary_face_search.py --output-json "$phase/boundary.json"
+          python scripts/ns_adaptive_chart_coverage_scan.py --output-json "$phase/coverage.json"
+          python scripts/check_ns_periodic_phase_receipts.py \
+            --inputs "$phase/boundary.json" "$phase/coverage.json" \
+              "$phase/far_high.json" "$phase/far_low.json" \
+              "$phase/five.json" "$phase/near.json" \
+            --output-json "$phase/check.json"
+          diff -u scripts/data/outputs/ns_radius8_far_low_exhaustive.json "$phase/far_low.json"
+          diff -u scripts/data/outputs/ns_radius8_far_high_scan.json "$phase/far_high.json"
+          diff -u scripts/data/outputs/ns_near_triad_budget_scan.json "$phase/near.json"
+          diff -u scripts/data/outputs/ns_five_halves_falsification.json "$phase/five.json"
+          diff -u scripts/data/outputs/ns_boundary_face_search.json "$phase/boundary.json"
+          diff -u scripts/data/outputs/ns_adaptive_chart_coverage_scan.json "$phase/coverage.json"
+          diff -u scripts/data/outputs/check_ns_periodic_phase_receipts.json "$phase/check.json"
 
   focused-agda:
     needs: finite-audit
