@@ -85,10 +85,10 @@ record RadiusEightFourierReduction
     normalizedFarLowAtEight normalizedFarHighAtEight : Nat
 
     normalizedFarLowAtEightFits :
-      normalizedFarLowAtEight Dyadic.≤ᴺ Dyadic.epsilonLowAtEight
+      Dyadic._≤ᴺ_ normalizedFarLowAtEight Dyadic.epsilonLowAtEight
 
     normalizedFarHighAtEightFits :
-      normalizedFarHighAtEight Dyadic.≤ᴺ Dyadic.epsilonHighAtEight
+      Dyadic._≤ᴺ_ normalizedFarHighAtEight Dyadic.epsilonHighAtEight
 
 open RadiusEightFourierReduction public
 
