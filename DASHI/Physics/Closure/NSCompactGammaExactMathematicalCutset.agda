@@ -16,6 +16,7 @@ open import DASHI.Physics.Closure.NSCompactGammaAbstractAdmissibilityObstruction
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision as FiveHalves
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision as Absorption
+import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction as NearReduction
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as RadiusEight
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
 import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas as Frontier
@@ -40,9 +41,9 @@ record ExactCompactGammaMathematicalCutset
     -- retained separately as an alternative theorem owner.
     fiveHalvesRoute : FiveHalves.AdjacentRecurrenceFiveHalvesControl A
 
-    -- B: the viable near-triad route is dissipative absorption, together with
-    -- an explicit positive non-cubic source for the weighted rate.
-    gammaRoute : Absorption.AbsorbedGammaRoute A Index
+    -- B: literal Fourier expansion, paraproduct split, three Young estimates,
+    -- Route-B balance and the positive non-cubic base rate are one owner.
+    nearTriadReduction : NearReduction.ConcreteAbsorbedGammaRoute A Index
 
     -- C/D: one coherent radius-eight Fourier owner supplies the multiplier,
     -- commutator, Sobolev, geometric-series, paraproduct and normalized dyadic
@@ -67,6 +68,16 @@ record ExactCompactGammaMathematicalCutset
     offPacket : OffPacketAnalyticCompletion A Time
 
 open ExactCompactGammaMathematicalCutset public
+
+exactGammaRoute :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  ExactCompactGammaMathematicalCutset A Index Official Time G →
+  Absorption.AbsorbedGammaRoute A Index
+exactGammaRoute C =
+  NearReduction.concreteAbsorbedGammaRoute (nearTriadReduction C)
 
 exactShellDecayEndpoint :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
@@ -104,6 +115,25 @@ exactFiveHalvesSumEndpoint C =
   FiveHalves.periodicAdjacentRouteControlsFiveHalvesSum
     (fiveHalvesRoute C)
 
+exactNearTriadAbsorption :
+  ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
+    {Index : Set i} {Official : OfficialInitialDataSetting i}
+    {Time : Set t}
+    {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
+  (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
+  ∀ q τ →
+  _≤_ A
+    (NearReduction.nearTriadMagnitude
+      (NearReduction.paraproduct (nearTriadReduction C)) q τ)
+    (_+_ A
+      (NearReduction.deltaDissipation
+        (NearReduction.paraproduct (nearTriadReduction C)) q τ)
+      (NearReduction.residualEnvelope
+        (NearReduction.paraproduct (nearTriadReduction C)) q τ))
+exactNearTriadAbsorption C =
+  NearReduction.youngAbsorbsNearTriad
+    (NearReduction.paraproduct (nearTriadReduction C))
+
 exactAbsorbedGammaEndpoint :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
     {Index : Set i} {Official : OfficialInitialDataSetting i}
@@ -114,19 +144,19 @@ exactAbsorbedGammaEndpoint :
   _≤_ A
     (_+_ A
       (Absorption.gammaPotentialDerivative
-        (Absorption.absorption (gammaRoute C)) q τ)
+        (Absorption.absorption (exactGammaRoute C)) q τ)
       (Absorption.weightedFiveHalvesRate
-        (Absorption.absorption (gammaRoute C)) q τ))
+        (Absorption.absorption (exactGammaRoute C)) q τ))
     (_+_ A
       (_+_ A
         (Absorption.gammaDissipation
-          (Absorption.absorption (gammaRoute C)) q τ)
+          (Absorption.absorption (exactGammaRoute C)) q τ)
         (Absorption.gammaForcing
-          (Absorption.absorption (gammaRoute C)) q τ))
+          (Absorption.absorption (exactGammaRoute C)) q τ))
       (Absorption.residualEnvelope
-        (Absorption.absorption (gammaRoute C)) q τ))
+        (Absorption.absorption (exactGammaRoute C)) q τ))
 exactAbsorbedGammaEndpoint C =
-  Absorption.absorbedGammaRouteDifferentialInequality (gammaRoute C)
+  Absorption.absorbedGammaRouteDifferentialInequality (exactGammaRoute C)
 
 exactBaseWeightedCoefficientProducesRate :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
@@ -136,13 +166,13 @@ exactBaseWeightedCoefficientProducesRate :
   (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
   ∀ q τ →
   _≤_ A
-    (Absorption._·_ (gammaRoute C)
-      (Absorption.baseWeightedCoefficient (gammaRoute C))
+    (Absorption._·_ (exactGammaRoute C)
+      (Absorption.baseWeightedCoefficient (exactGammaRoute C))
       (Absorption.weightedFiveHalvesRate
-        (Absorption.absorption (gammaRoute C)) q τ))
-    (Absorption.positiveDissipativeTerm (gammaRoute C) q τ)
+        (Absorption.absorption (exactGammaRoute C)) q τ))
+    (Absorption.positiveDissipativeTerm (exactGammaRoute C) q τ)
 exactBaseWeightedCoefficientProducesRate C =
-  Absorption.baseWeightedCoefficientProducesRateExact (gammaRoute C)
+  Absorption.baseWeightedCoefficientProducesRateExact (exactGammaRoute C)
 
 exactBaseWeightedCoefficientDyadicMeaning :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
@@ -150,10 +180,11 @@ exactBaseWeightedCoefficientDyadicMeaning :
     {Time : Set t}
     {G : Galerkin.ConcreteGalerkinSetting ℓState ℓProp} →
   (C : ExactCompactGammaMathematicalCutset A Index Official Time G) →
-  Absorption.baseWeightedCoefficient (gammaRoute C) ≡
-  Absorption.interpretDyadic (gammaRoute C) baseWeightedCoefficient
+  Absorption.baseWeightedCoefficient (exactGammaRoute C) ≡
+  Absorption.interpretDyadic (exactGammaRoute C) baseWeightedCoefficient
 exactBaseWeightedCoefficientDyadicMeaning C =
-  Absorption.baseWeightedCoefficientHasCertifiedDyadicMeaning (gammaRoute C)
+  Absorption.baseWeightedCoefficientHasCertifiedDyadicMeaning
+    (exactGammaRoute C)
 
 exactPeriodicFarLowCommutatorBound :
   ∀ {i t ℓState ℓProp} {A : AbsorptionArithmetic}
