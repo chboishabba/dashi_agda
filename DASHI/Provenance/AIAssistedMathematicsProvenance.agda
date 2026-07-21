@@ -54,7 +54,7 @@ alpogeFableProvenance =
     refl
 
 record ProvenanceStageBoundary : Set where
-  constructor provenanceStageBoundary
+  constructor mkProvenanceStageBoundary
   field
     generatedCandidateIsKernelProof : Bool
     generatedCandidateIsKernelProofIsFalse :
@@ -70,7 +70,7 @@ record ProvenanceStageBoundary : Set where
 
 provenanceStageBoundary : ProvenanceStageBoundary
 provenanceStageBoundary =
-  provenanceStageBoundary
+  mkProvenanceStageBoundary
     false refl
     false refl
     false refl
