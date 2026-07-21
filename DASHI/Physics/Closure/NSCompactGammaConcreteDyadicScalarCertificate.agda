@@ -51,6 +51,10 @@ halfStrictBarrierᴰ =
 
 ------------------------------------------------------------------------
 -- Literal R = 8 tail budget.
+--
+-- `baseWeightedCoefficient` is deliberately not called `cNear`: the cubic
+-- near-triad term has no universal positive sign.  This coefficient belongs to
+-- the positive dissipative/reserve term exposed by `AbsorbedGammaRoute`.
 ------------------------------------------------------------------------
 
 canonicalRadius : Nat
@@ -61,15 +65,16 @@ epsilonLowAtEight = oneᴺ
 epsilonHighAtEight = oneᴺ
 epsilonTailAtEight = epsilonLowAtEight + epsilonHighAtEight
 
-cNear halfNearGain : Nat
-cNear = eightᴺ
-halfNearGain = fourᴺ
+baseWeightedCoefficient halfBaseWeightedCoefficient : Nat
+baseWeightedCoefficient = eightᴺ
+halfBaseWeightedCoefficient = fourᴺ
 
 epsilonTailMeaningAtEight :
   epsilonTailAtEight ≡ epsilonLowAtEight + epsilonHighAtEight
 epsilonTailMeaningAtEight = refl
 
-radiusEightControlsTailᴰ : epsilonTailAtEight ≤ᴺ halfNearGain
+radiusEightControlsTailᴰ :
+  epsilonTailAtEight ≤ᴺ halfBaseWeightedCoefficient
 radiusEightControlsTailᴰ = s≤s (s≤s z≤n)
 
 ------------------------------------------------------------------------
@@ -114,7 +119,8 @@ record ConcreteCanonicalScalarCertificate : Set where
     quarter-positive : suc zero ≤ᴺ quarterᴰ
     half-positive : suc zero ≤ᴺ halfᴰ
     half-strict-barrier : suc halfᴰ ≤ᴺ oneᴰ
-    radius-eight-tail-absorption : epsilonTailAtEight ≤ᴺ halfNearGain
+    radius-eight-tail-absorption :
+      epsilonTailAtEight ≤ᴺ halfBaseWeightedCoefficient
     packet-weight-two-absorbs : packetLoss ≤ᴺ twoᴺ * packetGain
     gamma-weight-two-absorbs : gammaLoss ≤ᴺ twoᴺ * gammaGain
     off-packet-weight-one-absorbs : offPacketLoss ≤ᴺ offPacketGain
@@ -148,7 +154,8 @@ open RadiusEightAnalyticBounds public
 
 analyticBoundsGiveRadiusEightAbsorption :
   (B : RadiusEightAnalyticBounds) →
-  normalizedLowTailAtEight B + normalizedHighTailAtEight B ≤ᴺ halfNearGain
+  normalizedLowTailAtEight B + normalizedHighTailAtEight B
+    ≤ᴺ halfBaseWeightedCoefficient
 analyticBoundsGiveRadiusEightAbsorption B =
   ≤ᴺ-+-combine
     (low-fits-certified-budget B)
