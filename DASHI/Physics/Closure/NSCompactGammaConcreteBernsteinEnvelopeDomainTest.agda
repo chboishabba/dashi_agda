@@ -17,6 +17,13 @@ open import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge public
 open import DASHI.Physics.Closure.NSCompactGammaOfficialCoverageCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaFixedFloorScalingObstruction public
 open import DASHI.Physics.Closure.NSCompactGammaGeneratedCertificateBridge public
+open import DASHI.Physics.Closure.NSPeriodicFourierCancellationAlgebra public
+open import DASHI.Physics.Closure.NSPeriodicFourierNearTriadPreYoung public
+open import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction public
+open import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction public
+open import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary public
+open import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction public
+open import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset public
 open import DASHI.Physics.Closure.NSCompactGammaCriticalObligationCompletion public
