@@ -2,7 +2,6 @@ module DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 import DASHI.Physics.Closure.NSCompactGammaConcretePotentialInstantiation as Potential
@@ -29,6 +28,8 @@ record ConcreteRealIntegrationCompletion
         A calculus reserveLeaves realAnalysis
 
     Measurable : (Time → Scalar A) → Set
+    AlmostEverywhereLessEqual :
+      (Time → Scalar A) → (Time → Scalar A) → Set
 
     reservePotentialMeasurable :
       Measurable
@@ -45,14 +46,43 @@ record ConcreteRealIntegrationCompletion
         (Potential.totalForcingRate
           (Leaves.reserveLeavesToConcretePotential reserveLeaves))
 
-    pointwiseInequalityAlmostEverywhere : Set
+    pointwiseInequalityAlmostEverywhere :
+      AlmostEverywhereLessEqual
+        (λ τ →
+          _+_ A
+            (Potential.totalPotentialDerivative
+              (Leaves.reserveLeavesToConcretePotential reserveLeaves) τ)
+            (Potential.totalCoerciveRate
+              (Leaves.reserveLeavesToConcretePotential reserveLeaves) τ))
+        (λ τ →
+          _+_ A
+            (Potential.totalDissipationRate
+              (Leaves.reserveLeavesToConcretePotential reserveLeaves) τ)
+            (Potential.totalForcingRate
+              (Leaves.reserveLeavesToConcretePotential reserveLeaves) τ))
 
     integralMonotonicity :
       ∀ {f g} →
       Measurable f → Measurable g →
-      Set
+      AlmostEverywhereLessEqual f g →
+      _≤_ A
+        (Real.Integral realAnalysis f)
+        (Real.Integral realAnalysis g)
 
-    endpointExpenditureInequality : Set
+    endpointExpenditureInequality :
+      _≤_ A
+        (Real.Integral realAnalysis
+          (Potential.totalCoerciveRate
+            (Leaves.reserveLeavesToConcretePotential reserveLeaves)))
+        (_+_ A
+          (Potential.totalPotential
+            (Leaves.reserveLeavesToConcretePotential reserveLeaves)
+            (Leaves.initialTime reserveLeaves))
+          (_+_ A
+            (Real.Integral realAnalysis
+              (Potential.totalForcingRate
+                (Leaves.reserveLeavesToConcretePotential reserveLeaves)))
+            (Real.dataRemainder fundamentalLeaves)))
 
 open ConcreteRealIntegrationCompletion public
 
@@ -85,9 +115,24 @@ forcingRateIntegrable C =
 
 fundamentalTheoremForReservePotential :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t} →
-  (C : ConcreteRealIntegrationCompletion A Time) → Scalar A
+  (C : ConcreteRealIntegrationCompletion A Time) →
+  _+_ A
+    (Potential.totalPotential
+      (Leaves.reserveLeavesToConcretePotential (reserveLeaves C))
+      (Leaves.initialTime (reserveLeaves C)))
+    (Real.Integral (realAnalysis C)
+      (Potential.totalDissipationRate
+        (Leaves.reserveLeavesToConcretePotential (reserveLeaves C))))
+  ≡
+  _+_ A
+    (Potential.totalPotential
+      (Leaves.reserveLeavesToConcretePotential (reserveLeaves C))
+      (Leaves.finalTime (reserveLeaves C)))
+    (Real.Integral (realAnalysis C)
+      (Potential.totalCoerciveRate
+        (Leaves.reserveLeavesToConcretePotential (reserveLeaves C))))
 fundamentalTheoremForReservePotential C =
-  Real.potentialFundamentalTheorem (fundamentalLeaves C)
+  Real.integratedPointwiseIdentity (fundamentalLeaves C)
 
 integralAddition :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t} →
@@ -103,7 +148,7 @@ integralAddition C = Real.integralAdditive (realAnalysis C)
 realFundamentalTheoremRealization :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t} →
   (C : ConcreteRealIntegrationCompletion A Time) →
-  Potential.RealFundamentalTheoremRealization
+  Leaves.RealFundamentalTheoremRealization
     A (calculus C) (reserveLeaves C)
 realFundamentalTheoremRealization C =
   Real.realLeavesToFundamentalTheoremRealization
@@ -291,7 +336,7 @@ fiveHalvesShellEstimate :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
     {C : Potential.ThreeWayAdditiveCalculus A}
     {R : Leaves.ConcreteReserveLeaves A Time}
-    {F : Potential.RealFundamentalTheoremRealization A C R} →
+    {F : Leaves.RealFundamentalTheoremRealization A C R} →
   (B : Bernstein.ConcreteBernsteinEnvelopeLeaves A C R F) → ∀ j τ →
   _≤_ A
     (Bernstein.shellVorticityLInfinity B j (Bernstein.shellState B τ))
@@ -302,7 +347,7 @@ vorticityLittlewoodPaleyReconstruction :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
     {C : Potential.ThreeWayAdditiveCalculus A}
     {R : Leaves.ConcreteReserveLeaves A Time}
-    {F : Potential.RealFundamentalTheoremRealization A C R} →
+    {F : Leaves.RealFundamentalTheoremRealization A C R} →
   (B : Bernstein.ConcreteBernsteinEnvelopeLeaves A C R F) → ∀ τ →
   _≤_ A
     (Bernstein.vorticityLInfinity B (Bernstein.shellState B τ))
@@ -314,7 +359,7 @@ weightedShellSeriesTonelli :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
     {C : Potential.ThreeWayAdditiveCalculus A}
     {R : Leaves.ConcreteReserveLeaves A Time}
-    {F : Potential.RealFundamentalTheoremRealization A C R} →
+    {F : Leaves.RealFundamentalTheoremRealization A C R} →
   (B : Bernstein.ConcreteBernsteinEnvelopeLeaves A C R F) →
   _≤_ A (Bernstein.vorticityIntegral B) (Bernstein.weightedShellIntegral B)
 weightedShellSeriesTonelli =
@@ -324,7 +369,7 @@ uniformGeometricCoefficientSum :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
     {C : Potential.ThreeWayAdditiveCalculus A}
     {R : Leaves.ConcreteReserveLeaves A Time}
-    {F : Potential.RealFundamentalTheoremRealization A C R} →
+    {F : Leaves.RealFundamentalTheoremRealization A C R} →
   (B : Bernstein.ConcreteBernsteinEnvelopeLeaves A C R F) → ∀ τ →
   _≤_ A
     (Bernstein.weightedShellSum B (Bernstein.shellState B τ))
@@ -336,8 +381,8 @@ weightedShellIntegralBelowGammaEnvelope :
   ∀ {t} {A : AbsorptionArithmetic} {Time : Set t}
     {C : Potential.ThreeWayAdditiveCalculus A}
     {R : Leaves.ConcreteReserveLeaves A Time}
-    {F : Potential.RealFundamentalTheoremRealization A C R} →
+    {F : Leaves.RealFundamentalTheoremRealization A C R} →
   (B : Bernstein.ConcreteBernsteinEnvelopeLeaves A C R F) →
-  _≤_ A (Bernstein.weightedShellIntegral B) (Potential.coerciveIntegral F)
+  _≤_ A (Bernstein.weightedShellIntegral B) (Leaves.coerciveIntegral F)
 weightedShellIntegralBelowGammaEnvelope =
   Bernstein.BE7-weighted-shell-below-coercive-envelope
