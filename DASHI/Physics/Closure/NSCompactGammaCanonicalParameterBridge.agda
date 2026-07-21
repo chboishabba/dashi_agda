@@ -138,9 +138,9 @@ canonicalParameterInequalitiesFromBridge B R8 = record
         Dyadic.canonicalTotalCoerciveCoefficientPositiveᴰ
   ; allCanonicalConditionsHold = λ q →
       tailAbsorptionFromRadiusEight B R8 q ,
-      gammaInwardAtCanonicalTuple B q ,
-      packetEnergyPositiveAtCanonicalTuple B q ,
-      offPacketInwardAtCanonicalTuple B q ,
-      totalCoerciveFromCertificate B
-        Dyadic.canonicalTotalCoerciveCoefficientPositiveᴰ q
+      (gammaInwardAtCanonicalTuple B q ,
+      (packetEnergyPositiveAtCanonicalTuple B q ,
+      (offPacketInwardAtCanonicalTuple B q ,
+       totalCoerciveFromCertificate B
+         Dyadic.canonicalTotalCoerciveCoefficientPositiveᴰ q)))
   }
