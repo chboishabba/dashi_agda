@@ -8,6 +8,7 @@ open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
 open import DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay public
 open import DASHI.Physics.Closure.NSCompactGammaGammaNearTailCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion public
+open import DASHI.Physics.Closure.NSCompactGammaOfficialDataObstruction public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 import DASHI.Physics.Closure.NSConcreteAubinLionsNonlinearLimitWitnesses as Galerkin
 import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas as Frontier
