@@ -8,11 +8,16 @@ import DASHI.Physics.YangMills.BalabanPatchTransferAnalyticReduction
 import DASHI.Physics.YangMills.BalabanExactPatchTransferCalculus
 import DASHI.Physics.YangMills.BalabanClayAnalyticConcreteDefinitions
 import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation
+import DASHI.Physics.YangMills.BalabanFiniteFourierHodgeReduction
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
+import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremAuthorities
+import DASHI.Physics.YangMills.BalabanExactPublishedCarrierMatching
+import DASHI.Physics.YangMills.BalabanPublishedSourceToDashi
 import DASHI.Physics.YangMills.BalabanOneStepAllScaleAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanThermodynamicContinuumOSAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanUniformPhysicalMassGapAnalyticInhabitation
+import DASHI.Physics.YangMills.BalabanUnconditionalSolutionCertificate
 
 ------------------------------------------------------------------------
 -- One fail-closed status ledger for the complete attached mathematical cutset.
@@ -21,14 +26,32 @@ import DASHI.Physics.YangMills.BalabanUniformPhysicalMassGapAnalyticInhabitation
 bulkFiniteBackgroundAssemblyLevel : ProofLevel
 bulkFiniteBackgroundAssemblyLevel = machineChecked
 
+finiteFourierHodgeReductionLevel : ProofLevel
+finiteFourierHodgeReductionLevel = machineChecked
+
+finiteFourierAndSymbolGapInputLevel : ProofLevel
+finiteFourierAndSymbolGapInputLevel = conditional
+
 bulkFiniteBackgroundInputLevel : ProofLevel
 bulkFiniteBackgroundInputLevel = conditional
 
 publishedPropagatorAndVariationalTheoremsLevel : ProofLevel
 publishedPropagatorAndVariationalTheoremsLevel = standardImported
 
+publishedSourceTheoremStatementLevel : ProofLevel
+publishedSourceTheoremStatementLevel = standardImported
+
+publishedSourceAuthorityConversionLevel : ProofLevel
+publishedSourceAuthorityConversionLevel = machineChecked
+
 publishedCarrierAdapterLevel : ProofLevel
 publishedCarrierAdapterLevel = machineChecked
+
+exactPublishedCarrierAdapterLevel : ProofLevel
+exactPublishedCarrierAdapterLevel = machineChecked
+
+publishedSourceToDashiAdapterLevel : ProofLevel
+publishedSourceToDashiAdapterLevel = machineChecked
 
 publishedCarrierMatchingLevel : ProofLevel
 publishedCarrierMatchingLevel = conditional
@@ -63,5 +86,14 @@ physicalMassGapAssemblyLevel = machineChecked
 physicalMassGapInputLevel : ProofLevel
 physicalMassGapInputLevel = conjectural
 
+unconditionalSolutionGateLevel : ProofLevel
+unconditionalSolutionGateLevel = machineChecked
+
+unconditionalSolutionInhabitationLevel : ProofLevel
+unconditionalSolutionInhabitationLevel = conjectural
+
+-- The nullary repository status remains false. The separate proof-relevant
+-- `clayYangMillsSubmissionPromotion` function can return true only after an
+-- `UnconditionalYangMillsSolution` value has actually been constructed.
 clayYangMillsSubmissionPromoted : Bool
 clayYangMillsSubmissionPromoted = false

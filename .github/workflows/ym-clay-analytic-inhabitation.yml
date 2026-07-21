@@ -3,31 +3,49 @@ name: YM Clay analytic inhabitation
 on:
   push:
     branches:
-      - 'agent/ym-analytic-proof-reduction'
+      - 'agent/ym-unconditional-solution-spine'
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReductionRegression.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremRegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatchingRegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_unconditional_gate.py'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReductionRegression.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremRegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda'
+      - 'DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatchingRegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda'
       - 'DASHI/Physics/YangMills/BalabanOneStepAllScaleAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanThermodynamicContinuumOSAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanUniformPhysicalMassGapAnalyticInhabitation.agda'
+      - 'DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_unconditional_gate.py'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   workflow_dispatch:
 
@@ -37,7 +55,65 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
+      - name: Audit fail-closed theorem and status surface
+        run: python3 scripts/check_ym_unconditional_gate.py
       - uses: DeterminateSystems/nix-installer-action@main
+      - name: Typecheck finite Fourier Hodge reduction
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda
+          '
+      - name: Typecheck finite Fourier Hodge regression
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReductionRegression.agda
+          '
+      - name: Typecheck source-faithful published theorem boundary
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda
+          '
+      - name: Typecheck published source theorem regression
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPublishedSourceTheoremRegression.agda
+          '
+      - name: Typecheck exact published carrier matching
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatching.agda
+          '
+      - name: Typecheck exact matching regression
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanExactPublishedCarrierMatchingRegression.agda
+          '
+      - name: Typecheck source-to-DASHI composition
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPublishedSourceToDashi.agda
+          '
+      - name: Typecheck unconditional solution gate
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda
+          '
       - name: Typecheck focused Yang-Mills aggregate
         run: |
           nix develop --accept-flake-config --command bash -lc '
