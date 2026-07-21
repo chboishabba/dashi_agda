@@ -22,6 +22,7 @@ import DASHI.Physics.YangMills.BalabanSeparatedUniformGreenNonlinearBounds
 import DASHI.Physics.YangMills.BalabanReferenceHodgeCoercivity
 import DASHI.Physics.YangMills.BalabanPatchRegimeHodgeUniformity
 import DASHI.Physics.YangMills.BalabanPatchRegimeGreenUniformity
+import DASHI.Physics.YangMills.BalabanPatchTransferAnalyticReduction
 import DASHI.Physics.YangMills.BalabanBackgroundPerturbationBudget
 import DASHI.Physics.YangMills.BalabanRadiusPerturbationSmallness
 import DASHI.Physics.YangMills.BalabanCorrectionNeumannBound
