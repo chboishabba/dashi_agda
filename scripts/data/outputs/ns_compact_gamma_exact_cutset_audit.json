@@ -51,7 +51,15 @@
     "remainder_positive": true,
     "total_gain": "5/2",
     "total_loss": "9/4",
-    "tuple": ["8", "1/4", "1/4", "1/2", "2", "2", "1"]
+    "tuple": [
+      "8",
+      "1/4",
+      "1/4",
+      "1/2",
+      "2",
+      "2",
+      "1"
+    ]
   },
   "schema": "ns_compact_gamma_exact_cutset_audit.v1",
   "theorem_promoted": false
