@@ -19,6 +19,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_unconditional_gate.py'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   pull_request:
     paths:
@@ -36,6 +37,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanUnconditionalSolutionCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_unconditional_gate.py'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   workflow_dispatch:
 
@@ -45,6 +47,8 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
+      - name: Audit fail-closed theorem and status surface
+        run: python3 scripts/check_ym_unconditional_gate.py
       - uses: DeterminateSystems/nix-installer-action@main
       - name: Typecheck source-faithful published theorem boundary
         run: |
