@@ -3,20 +3,14 @@ module DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanCriticalMapOneStepRGClosure
-  using (_×_; _,_; first; second; Σ; _,Σ_; witness; proof; Unique)
+  using (_×_; _,_; Σ; witness; Unique)
 
 ------------------------------------------------------------------------
--- G. Finite-background critical map: exact dependency-normalized cutset.
---
--- This module does not duplicate the older F1--F15 record.  It records the
--- actual analytic leaves once and derives the named completion surface from
--- them.  In particular the same selected radius occurs in every smallness
--- certificate, and the same contraction factor occurs in the self-map and
--- fixed-point packages.
+-- G. Finite-background critical map.
 ------------------------------------------------------------------------
 
 record CriticalMapCutset
-    (Index State Force Bound CoarseField Background : Set) : Set₁ where
+    (Index State Force Bound CoarseField Background NatLike : Set) : Set₁ where
   field
     zero : State
     negative : State → State
@@ -34,13 +28,11 @@ record CriticalMapCutset
       nonlinearRadius CG LN rhoG sigma : Bound
     LessEqual StrictlyBelow : Bound → Bound → Set
 
-    -- Ordered-algebra transport used by the assembled estimates.
     lessEqualTransitive : ∀ {a b c} →
       LessEqual a b → LessEqual b c → LessEqual a c
     multiplyMonotoneLeft : ∀ a {b c} →
       LessEqual b c → LessEqual (multiply a b) (multiply a c)
 
-    -- Exact map definition and the algebraic cancellation identity.
     criticalMapDefinition : ∀ index h →
       Φ index h ≡
         negative (fullGreen index (addForce (nonlinear index h) (source index)))
@@ -51,7 +43,6 @@ record CriticalMapCutset
           (fullGreen index
             (subtractForce (nonlinear index h) (nonlinear index h′)))
 
-    -- The two genuinely analytic Lipschitz estimates.
     greenOperatorBound : ∀ index f →
       LessEqual (norm (fullGreen index f)) (multiply CG (norm f))
 
@@ -69,7 +60,6 @@ record CriticalMapCutset
     multiplyAssociative : ∀ a b c →
       multiply a (multiply b c) ≡ multiply (multiply a b) c
 
-    -- One common radius; these are not allowed to come from unrelated data.
     commonRadiusPositive : StrictlyBelow zeroBound radius
     selectedRadiusInsideExpLogChart : LessEqual radius chartRadius
     selectedRadiusSatisfiesHessianGap : LessEqual radius hessianRadius
@@ -88,9 +78,8 @@ record CriticalMapCutset
     criticalMapPreservesBall : ∀ index h →
       InCriticalBall index h → InCriticalBall index (Φ index h)
 
-    -- Completeness and Banach are stated for the actual closed critical ball.
-    CriticalBallCauchy CriticalBallConverges : Index → (NatLike → State) → Set
-    NatLike : Set
+    CriticalBallCauchy CriticalBallConverges :
+      Index → (NatLike → State) → Set
     criticalBallComplete : ∀ index sequence →
       CriticalBallCauchy index sequence → CriticalBallConverges index sequence
 
@@ -117,7 +106,6 @@ record CriticalMapCutset
     UniformlyLocal : (CoarseField → Background) → Set
     DerivativeKernel : CoarseField → Background
     ExponentiallyDecaying : Background → Set
-
     backgroundFieldAnalyticInCoarseField : ∀ coarse →
       AnalyticAt backgroundField coarse
     backgroundFieldUniformlyLocal : UniformlyLocal backgroundField
@@ -126,9 +114,13 @@ record CriticalMapCutset
 
 open CriticalMapCutset public
 
+substRight : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
+substRight P refl px = px
+
 criticalMapContraction :
-  ∀ {Index State Force Bound CoarseField Background}
-    (D : CriticalMapCutset Index State Force Bound CoarseField Background)
+  ∀ {Index State Force Bound CoarseField Background NatLike}
+    (D : CriticalMapCutset
+      Index State Force Bound CoarseField Background NatLike)
     index h h′ →
   LessEqual D
     (norm D (subtract D (Φ D index h) (Φ D index h′)))
@@ -148,14 +140,12 @@ criticalMapContraction D index h h′
             (multiply D (LN D) (norm D (subtract D h h′)))))
         (multiplyAssociative D (CG D) (LN D)
           (norm D (subtract D h h′)))))
-  where
-    substRight : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
-    substRight P refl px = px
 
 record FiniteBackgroundCriticalMapCompletion
-    (Index State Force Bound CoarseField Background : Set) : Set₁ where
+    (Index State Force Bound CoarseField Background NatLike : Set) : Set₁ where
   field
-    cutset : CriticalMapCutset Index State Force Bound CoarseField Background
+    cutset : CriticalMapCutset
+      Index State Force Bound CoarseField Background NatLike
     contraction : ∀ index h h′ →
       LessEqual cutset
         (norm cutset (subtract cutset (Φ cutset index h) (Φ cutset index h′)))
@@ -164,22 +154,23 @@ record FiniteBackgroundCriticalMapCompletion
 open FiniteBackgroundCriticalMapCompletion public
 
 assembleFiniteBackgroundCriticalMapCompletion :
-  ∀ {Index State Force Bound CoarseField Background}
-  (D : CriticalMapCutset Index State Force Bound CoarseField Background) →
+  ∀ {Index State Force Bound CoarseField Background NatLike}
+  (D : CriticalMapCutset
+    Index State Force Bound CoarseField Background NatLike) →
   FiniteBackgroundCriticalMapCompletion
-    Index State Force Bound CoarseField Background
+    Index State Force Bound CoarseField Background NatLike
 assembleFiniteBackgroundCriticalMapCompletion D = record
   { cutset = D
   ; contraction = criticalMapContraction D
   }
 
 ------------------------------------------------------------------------
--- H. One-step constructive RG: exact theorem surface and budget assembly.
+-- H. One-step constructive RG.
 ------------------------------------------------------------------------
 
 record OneStepRGCutset
-    (Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound
-      Density : Set) : Set₁ where
+    (Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
+      Bound Density : Set) : Set₁ where
   field
     SmallFieldConfiguration : Configuration → Set
     SmallFieldCoordinates : Background → Fluctuation → Set
@@ -197,8 +188,7 @@ record OneStepRGCutset
       Background → Fluctuation → Set
     fluctuationCoordinatesUnique : ∀ {U Ubg Z Ubg′ Z′} →
       SmallFieldConfiguration U →
-      SmallFieldCoordinates Ubg Z →
-      SmallFieldCoordinates Ubg′ Z′ →
+      SmallFieldCoordinates Ubg Z → SmallFieldCoordinates Ubg′ Z′ →
       U ≡ multiplyConfiguration Ubg (exp Z) →
       U ≡ multiplyConfiguration Ubg′ (exp Z′) →
       SameCoordinates Ubg Z Ubg′ Z′
@@ -215,38 +205,19 @@ record OneStepRGCutset
     fluctuationCoordinatesRespectGaugeOrbits :
       Configuration → GaugeOrbit → Set
     fluctuationCoordinatesPreserveSmallFieldDomain : ∀ U →
-      SmallFieldConfiguration U → SmallFieldConfiguration (encodeCoordinates (decodeCoordinates U))
+      SmallFieldConfiguration U →
+      SmallFieldConfiguration (encodeCoordinates (decodeCoordinates U))
 
     JacobianFormula : Background → Fluctuation → Density → Set
     fluctuationCoordinateJacobianFormula : ∀ Ubg Z →
       Σ Density (λ density → JacobianFormula Ubg Z density)
-
-    JacobianLocalDensityExpansion : Density → Set
-    JacobianPolymerLocalization : Density → Set
+    JacobianLocalDensityExpansion JacobianPolymerLocalization : Density → Set
     jacobianLocalDensityExpansion : ∀ Ubg Z →
       JacobianLocalDensityExpansion
         (witness (fluctuationCoordinateJacobianFormula Ubg Z))
     jacobianPolymerLocalization : ∀ Ubg Z →
       JacobianPolymerLocalization
         (witness (fluctuationCoordinateJacobianFormula Ubg Z))
-
-    contribution budget : Region → Bound
-    jacobianContribution determinantContribution backgroundContribution
-      bchContribution localizationContribution wardContribution : Region → Bound
-    jacobianBudget determinantBudget backgroundBudget bchBudget
-      localizationBudget wardBudget : Region → Bound
-
-    addBound multiplyBound : Bound → Bound → Bound
-    zeroBound oneBound lambdaPolymer perturbativeError : Bound
-    LessEqual StrictlyBelow : Bound → Bound → Set
-    lessEqualTransitive : ∀ {a b c} →
-      LessEqual a b → LessEqual b c → LessEqual a c
-    addBoundMonotone : ∀ {a b c d} →
-      LessEqual a b → LessEqual c d →
-      LessEqual (addBound a c) (addBound b d)
-
-    jacobianContributionBound : ∀ A →
-      LessEqual (jacobianContribution A) (jacobianBudget A)
 
     LogDetLocalExpansion LogDetPolymerDecay LogDetRemainderBound : Set
     logDetLocalExpansion : LogDetLocalExpansion
@@ -295,23 +266,35 @@ record OneStepRGCutset
       gNext ≡ addCoupling
         (addCoupling g (negateCoupling (multiplyCoupling beta0 (cube g))))
         couplingRemainder
+
+    addBound multiplyBound : Bound → Bound → Bound
+    oneBound lambdaPolymer perturbativeError totalComponentBudget : Bound
+    LessEqual StrictlyBelow : Bound → Bound → Set
+    lessEqualReflexive : ∀ a → LessEqual a a
+    lessEqualTransitive : ∀ {a b c} →
+      LessEqual a b → LessEqual b c → LessEqual a c
+    addBoundMonotone : ∀ {a b c d} →
+      LessEqual a b → LessEqual c d →
+      LessEqual (addBound a c) (addBound b d)
+
     couplingRemainderBound :
       LessEqual (absCoupling couplingRemainder)
         (absCoupling (multiplyCoupling Cβ (fifth g)))
 
+    jacobianBudget determinantBudget backgroundBudget bchBudget
+      localizationBudget wardBudget : Region → Bound
     jacobianBudgetBound determinantBudgetBound backgroundBudgetBound
       bchBudgetBound localizationBudgetBound wardBudgetBound : ∀ A →
       LessEqual
-        (contribution A)
         (addBound (jacobianBudget A)
           (addBound (determinantBudget A)
             (addBound (backgroundBudget A)
               (addBound (bchBudget A)
                 (addBound (localizationBudget A) (wardBudget A))))))
+        totalComponentBudget
 
     E E-next : Polymer
     polymerNorm : Polymer → Bound
-    totalComponentBudget : Bound
     oneStepRawPolymerEstimate :
       LessEqual (polymerNorm E-next)
         (addBound (multiplyBound lambdaPolymer (polymerNorm E)) totalComponentBudget)
@@ -322,7 +305,8 @@ record OneStepRGCutset
 open OneStepRGCutset public
 
 fluctuationCoordinatesBijective :
-  ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
+  ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
+      Bound Density}
     (D : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
       Region Coupling Bound Density) →
   (∀ U → SmallFieldConfiguration D U →
@@ -334,7 +318,8 @@ fluctuationCoordinatesBijective D =
   coordinateRoundTripConfiguration D , coordinateRoundTripPair D
 
 oneStepPolymerContraction :
-  ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
+  ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
+      Bound Density}
     (D : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
       Region Coupling Bound Density) →
   LessEqual D (polymerNorm D (E-next D))
@@ -345,60 +330,9 @@ oneStepPolymerContraction D =
   lessEqualTransitive D
     (oneStepRawPolymerEstimate D)
     (addBoundMonotone D
-      (reflexiveLeft
+      (lessEqualReflexive D
         (multiplyBound D (lambdaPolymer D) (polymerNorm D (E D))))
       (componentBudgetBelowPerturbativeError D))
-  where
-    reflexiveLeft : ∀ b → LessEqual D b b
-    reflexiveLeft b =
-      reflexiveBound D b
-
-    -- Reflexivity is isolated as an ordered-carrier law, not an estimate.
-    reflexiveBound :
-      ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
-        (X : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
-          Region Coupling Bound Density) b → LessEqual X b b
-    reflexiveBound X b = lessEqualReflexive X b
-
-    lessEqualReflexive :
-      ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
-        (X : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
-          Region Coupling Bound Density) b → LessEqual X b b
-    lessEqualReflexive X b = reflexivity X b
-
-    reflexivity :
-      ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
-        (X : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
-          Region Coupling Bound Density) b → LessEqual X b b
-    reflexivity X b = orderedReflexivity X b
-
-    orderedReflexivity :
-      ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
-        (X : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
-          Region Coupling Bound Density) b → LessEqual X b b
-    orderedReflexivity X b = orderReflexive X b
-
-    orderReflexive :
-      ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
-        (X : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
-          Region Coupling Bound Density) b → LessEqual X b b
-    orderReflexive X b = orderReflexivityLeaf X b
-
-    orderReflexivityLeaf :
-      ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
-        (X : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
-          Region Coupling Bound Density) b → LessEqual X b b
-    orderReflexivityLeaf X b = primitiveOrderReflexivity X b
-
-    primitiveOrderReflexivity :
-      ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling Bound Density}
-        (X : OneStepRGCutset Configuration Background Fluctuation GaugeOrbit Polymer
-          Region Coupling Bound Density) b → LessEqual X b b
-    primitiveOrderReflexivity X b = {!!}
-
-------------------------------------------------------------------------
--- Proof-status ledger.
-------------------------------------------------------------------------
 
 criticalMapCutsetAssemblyLevel : ProofLevel
 criticalMapCutsetAssemblyLevel = machineChecked
