@@ -9,7 +9,7 @@ open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
 import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion as Parameters
 import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge as ParameterBridge
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as RadiusEight
-import DASHI.Physics.Closure.NSPeriodicFourierNearTriadPreYoung as Near
+import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization as Young
 import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction as Tail
 import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction as Coverage
 
@@ -19,7 +19,7 @@ import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction as Coverag
 -- The fields are deliberately the earliest honest analytic inputs:
 --
 --   1. a universal five-halves theorem;
---   2. cutoff-uniform Fourier product bounds before Young;
+--   2. cutoff-uniform Fourier product bounds plus one generic Young law;
 --   3/4. primitive far-low/far-high chains;
 --   5. semantic real-carrier parameter interpretation plus first-exit reduction;
 --   6. adaptive-chart-or-direct-BKM official coverage.
@@ -91,7 +91,11 @@ record UniversalPeriodicFourierTailInputs
     (S : OfficialInitialDataSetting i) : Set (lsuc i) where
   field
     fiveHalves : IndexedFiveHalvesUniversal A Index
-    nearTriad : Near.NearTriadPreYoungInputs A Index
+
+    youngLaw : Young.OrderedYoungLaw A
+    nearTriad :
+      Young.FactorizedNearTriadInputs A Index youngLaw
+
     radiusEight : Tail.RadiusEightPrimitiveInputs A Index
 
     realCarrier :
@@ -121,12 +125,12 @@ universalNearTriadEndpoint :
   (U : UniversalPeriodicFourierTailInputs A Index S) →
   ∀ q τ →
   _≤_ A
-    (Near.nearTriadMagnitude (nearTriad U) q τ)
+    (Young.nearTriadMagnitude (nearTriad U) q τ)
     (_+_ A
-      (Near.deltaDissipation (nearTriad U) q τ)
-      (Near.residualEnvelope (nearTriad U) q τ))
+      (Young.deltaDissipation (nearTriad U) q τ)
+      (Young.residualEnvelope (nearTriad U) q τ))
 universalNearTriadEndpoint U =
-  Near.nearTriadAbsorptionFromPreYoung (nearTriad U)
+  Young.nearTriadAbsorptionFromFactorizedYoung (nearTriad U)
 
 universalRadiusEightFarLowEndpoint :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i}
