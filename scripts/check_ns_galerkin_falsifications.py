@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the finite Galerkin trajectory and boundary falsification receipts."""
+"""Validate finite Galerkin trajectory and boundary-route receipts."""
 from __future__ import annotations
 
 import argparse
@@ -37,14 +37,16 @@ def main() -> None:
         "trajectory_promotions_false": all(value is False for value in trajectory["promotion"].values()),
         "boundary_promotions_false": all(value is False for value in boundary["promotion"].values()),
         "gamma_sample_inward": faces["gamma_floor"]["strict_inward_on_sample"] is True,
+        "normalized_packet_sample_inward": faces["packet_fraction_floor"]["strict_inward_on_sample"] is True,
         "off_packet_sample_inward": faces["off_packet_ceiling"]["strict_inward_on_sample"] is True,
         "size_sample_inward": faces["size_ceiling"]["strict_inward_on_sample"] is True,
-        "packet_floor_refuted_on_all_samples": faces["packet_energy_floor"]["nonpositive_count"] == 16,
-        "all_four_not_promoted": boundary["all_four_strict_on_sample"] is False,
+        "absolute_packet_floor_refuted_on_all_samples": faces["packet_energy_floor"]["nonpositive_count"] == 16,
+        "original_route_rejected": boundary["original_absolute_floor_route_strict_on_sample"] is False,
+        "normalized_route_survives_finite_search": boundary["corrected_normalized_route_strict_on_sample"] is True,
     }
     errors = [name for name, ok in checks.items() if not ok]
     out = {
-        "schema": "check_ns_galerkin_falsifications.v1",
+        "schema": "check_ns_galerkin_falsifications.v2",
         "checks": checks,
         "error_count": len(errors),
         "errors": errors,
