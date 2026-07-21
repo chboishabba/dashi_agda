@@ -10,6 +10,7 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteTriadForms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteRationalCertificate public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFullOperatorReceipt public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification public
+open import DASHI.Physics.Closure.NSPeriodicFiveHalvesIntegratedRoute public
 open import DASHI.Physics.Closure.NSPeriodicConcreteBoundaryBalance public
 open import DASHI.Physics.Closure.NSPeriodicConcreteAdaptiveChart public
 open import DASHI.Physics.Closure.NSPeriodicObservableDerivativeAlgebra public
