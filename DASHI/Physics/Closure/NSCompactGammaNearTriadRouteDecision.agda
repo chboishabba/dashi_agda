@@ -1,9 +1,12 @@
 module DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision where
 
 open import Agda.Primitive using (Level; lsuc)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
+import DASHI.Physics.Closure.NSCompactGammaConcreteDyadicScalarCertificate as Dyadic
 
 ------------------------------------------------------------------------
 -- The near-triad term is cubic in the Fourier amplitudes.  A global positive
@@ -127,9 +130,9 @@ absorbedNearTailDifferentialInequality {A = A} D q τ =
 
 ------------------------------------------------------------------------
 -- The official replacement owner.  Besides the absorption inequality, it
--- names the positive non-cubic term which produces the weighted rate.  This
--- prevents the old `cNear` name from being reused after signed cubic coercivity
--- has been refuted.
+-- names the positive non-cubic term which produces the weighted rate.  It also
+-- identifies that scalar with the exact dyadic coefficient used by the finite
+-- radius-eight certificate.
 ------------------------------------------------------------------------
 
 record AbsorbedGammaRoute
@@ -140,10 +143,15 @@ record AbsorbedGammaRoute
     absorption : NearTriadDissipativeAbsorption A Index
 
     _·_ : Scalar A → Scalar A → Scalar A
+    interpretDyadic : Nat → Scalar A
     baseWeightedCoefficient : Scalar A
     Positive : Scalar A → Set i
     positiveDissipativeTerm :
       Index → Time absorption → Scalar A
+
+    baseWeightedCoefficientMeaning :
+      baseWeightedCoefficient ≡
+      interpretDyadic Dyadic.baseWeightedCoefficient
 
     baseWeightedCoefficientPositive :
       Positive baseWeightedCoefficient
@@ -180,6 +188,14 @@ baseWeightedCoefficientProducesRateExact :
     (positiveDissipativeTerm R q τ)
 baseWeightedCoefficientProducesRateExact =
   baseWeightedCoefficientProducesRate
+
+baseWeightedCoefficientHasCertifiedDyadicMeaning :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
+  (R : AbsorbedGammaRoute A Index) →
+  baseWeightedCoefficient R ≡
+  interpretDyadic R Dyadic.baseWeightedCoefficient
+baseWeightedCoefficientHasCertifiedDyadicMeaning =
+  baseWeightedCoefficientMeaning
 
 -- Audit aliases matching the mathematical review.
 nearTriadFormCannotBeGloballyCoerciveUnderSignReversal :
