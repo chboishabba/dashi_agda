@@ -1,0 +1,116 @@
+{
+  "authority": "exact_finite_core_plus_unproved_analytic_tail_obligations",
+  "certificate_sha256": "993cc856a0db56eda965695ca62f046643c315de1ba934f1ae4a15bcdd25a979",
+  "finite_arithmetic": "fractions.Fraction",
+  "finite_core_exhaustive": true,
+  "leaves": {
+    "adjacent_shell": {
+      "checked_pairs": 49,
+      "domain": {
+        "amplitude_grid": [
+          "1/8",
+          "1/4",
+          "1/2",
+          "1",
+          "2",
+          "4",
+          "8"
+        ],
+        "radius": 4
+      },
+      "max_ratio": "64",
+      "required_tail_obligation": {
+        "name": "adjacent_recurrence_with_geometric_remainder",
+        "quantifiers": [
+          "every shell K",
+          "every distance n",
+          "every admissible periodic Fourier state u"
+        ],
+        "statement": "A(K,n+1) <= rho*A(K,n) + r(K,n), rho < 1, r(K,n) <= Cr*theta^n*Envelope(K,u), theta < 1"
+      },
+      "unconditional_contraction_refuted": true
+    },
+    "far_high": {
+      "R": 8,
+      "alpha": "3/2",
+      "exact_rational_majorant_ratio": "1/2",
+      "fits_one_eighth_budget": true,
+      "geometric_tail_majorant": "1/128",
+      "required_tail_obligation": {
+        "name": "periodic_far_high_sobolev_paraproduct_tail",
+        "quantifiers": [
+          "every shell K",
+          "every cutoff N",
+          "every u in H^s with s>5/2"
+        ],
+        "statement": "sum_{j>=K+R} 2^(5j/2)||P_j u||_2 <= Cs*2^{-(s-5/2)R}||u||_{H^s}, with the full paraproduct constant <=1/8 at R=8"
+      }
+    },
+    "far_low": {
+      "checked_configurations": 72,
+      "domain": {
+        "R": 8,
+        "q_grid_radius": 4
+      },
+      "fits_one_eighth_budget": true,
+      "mean_value_constant": "129/64",
+      "normalized_radius_gain": "129/16384",
+      "required_tail_obligation": {
+        "name": "periodic_far_low_commutator_tail",
+        "quantifiers": [
+          "every shell K",
+          "every cutoff N",
+          "every low mode p with |p|<=2^(K-R)"
+        ],
+        "statement": "|m_K(k)-m_K(q)| <= Cm*2^-K*|p| and the induced commutator constant at R=8 is <=1/8"
+      }
+    },
+    "near_triad": {
+      "candidate_C_delta": "52/49",
+      "checked_configurations": 728,
+      "delta": "1/4",
+      "domain": {
+        "integer_amplitude_radius": 4
+      },
+      "finite_core_absorption_verified": true,
+      "negative_count": 256,
+      "oddness_exact": true,
+      "positive_count": 256,
+      "required_tail_obligation": {
+        "candidate_constants": {
+          "C_delta": "52/49",
+          "delta": "1/4"
+        },
+        "name": "near_triad_uniform_tail_majorant",
+        "quantifiers": [
+          "every shell K",
+          "every Galerkin cutoff N",
+          "every admissible u and tangent h"
+        ],
+        "statement": "abs(Qnear(K,N,u,h)) <= delta*D(K,h) + Cdelta*E(K,u,h)"
+      },
+      "signed_coercivity_refuted_on_core": true
+    },
+    "official_coverage": {
+      "allowed_routes": [
+        "normalized_packet_energy",
+        "adaptive_packet_floor",
+        "direct_small_or_diffuse_BKM_branch"
+      ],
+      "fixed_absolute_floor_route_rejected": true,
+      "required_tail_obligation": {
+        "name": "official_data_coverage",
+        "quantifiers": [
+          "every smooth divergence-free finite-energy initial datum"
+        ],
+        "statement": "zero data are globally smooth; every nonzero trajectory either enters a normalized/adaptive compact-Gamma chart with controlled switching or satisfies a direct BKM continuation criterion"
+      }
+    }
+  },
+  "promotion": {
+    "agda_inhabitant": false,
+    "clay": false,
+    "full_ns": false
+  },
+  "schema": "ns_compact_gamma_certificate_bundle.v1"
+}
