@@ -11,6 +11,12 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteRationalCertificate public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification public
 open import DASHI.Physics.Closure.NSPeriodicConcreteBoundaryBalance public
 open import DASHI.Physics.Closure.NSPeriodicConcreteAdaptiveChart public
+open import DASHI.Physics.Closure.NSPeriodicObservableDerivativeAlgebra public
+open import DASHI.Physics.Closure.NSPeriodicPacketEnergyDerivative public
+open import DASHI.Physics.Closure.NSPeriodicGammaDerivative public
+open import DASHI.Physics.Closure.NSPeriodicOffPacketRatioDerivative public
+open import DASHI.Physics.Closure.NSPeriodicSizeFunctionalDerivative public
+open import DASHI.Physics.Closure.NSCompactGammaBoundaryFaceEstimates public
 open import DASHI.Physics.Closure.NSPeriodicConcreteProofProgramStatus public
 
 carrierRadiusRegression : separationRadius periodicConcreteCarrier ≡ 8
