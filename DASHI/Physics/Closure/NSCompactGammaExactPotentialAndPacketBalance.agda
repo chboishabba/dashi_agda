@@ -1,22 +1,20 @@
 module DASHI.Physics.Closure.NSCompactGammaExactPotentialAndPacketBalance where
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
-open import DASHI.Physics.Closure.NSCompactGammaConcretePotentialInstantiation
 open import DASHI.Physics.Closure.NSCompactGammaAnalyticLeafCompletion
 
 ------------------------------------------------------------------------
--- Exact selected reserve formulas.
+-- P0.1--P0.4: exact selected reserve formulas.
 --
--- We choose the linear off-packet reserve
+-- The selected off-packet reserve is linear:
 --
---   Φoff = αR · R K R (u t)
+--   Φoff(t) = αR R K R (u(t)).
 --
--- rather than the logarithmic ratio barrier.  The packet and Gamma reserves
--- are the logarithmic floor barriers requested in the analytic programme.
+-- Packet energy and Gamma use logarithmic floor barriers.
 ------------------------------------------------------------------------
 
 record ExactPotentialArithmetic
@@ -37,7 +35,6 @@ record CompactGammaPotentialData
     K R : Scalar A
     αE αΓ αR : Scalar A
     eFloor gammaFloor : Scalar A
-
     packetEnergy gammaFunctional offPacketRatio : Time → Scalar A
 
 open CompactGammaPotentialData public
@@ -113,10 +110,8 @@ totalPotentialMeaning P τ = refl
 ------------------------------------------------------------------------
 -- PE1--PE4: finite-shell differentiation and Galerkin substitution.
 --
--- The carrier is deliberately proof-relevant.  It records the actual finite
--- Fourier shell, retained-mode equation, viscous sum, and canonical-triad
--- identification.  In particular, nonlinearTransferIsCanonicalTriadFold is
--- not replaced by a second definition of transfer.
+-- `nonlinearPacketIdentity` explicitly identifies the Fourier nonlinear sum
+-- with the repository's canonical triad fold; it is not a second definition.
 ------------------------------------------------------------------------
 
 record PacketFourierCalculus
@@ -135,7 +130,8 @@ record PacketFourierCalculus
       Mode → Time → Scalar A
 
     viscousPacketSum nonlinearPacketSum : Time → Scalar A
-    packetCoerciveRate canonicalTriadTransfer : Time → Scalar A
+    negativePacketRate packetCoerciveRate canonicalTriadTransfer :
+      Time → Scalar A
 
     -- PE1
     differentiatePacketEnergy : ∀ τ →
@@ -152,7 +148,7 @@ record PacketFourierCalculus
     viscousPacketIdentity : ∀ τ →
       viscousPacketSum τ ≡ negativePacketRate τ
 
-    -- PE4, first the Fourier sum and then the repository's canonical fold.
+    -- PE4
     nonlinearPacketIdentity : ∀ τ →
       nonlinearPacketSum τ ≡ canonicalTriadTransfer τ
 
@@ -160,34 +156,18 @@ record PacketFourierCalculus
       packetEnergyDerivative τ ≡
       _+_ A (viscousPacketSum τ) (nonlinearPacketSum τ)
 
-    negativePacketRate : Time → Scalar A
+    -- The equality obtained by rewriting the preceding three facts.
+    differentiatedEnergyNormalized : ∀ τ →
+      packetEnergyDerivative τ ≡
+      _+_ A (negativePacketRate τ) (canonicalTriadTransfer τ)
 
 open PacketFourierCalculus public
 
-packetNavierStokesFunctionalBalance :
-  ∀ {t m} {A : AbsorptionArithmetic}
-    {Time : Set t} {Mode : Set m} →
-  (P : PacketFourierCalculus A Time Mode) → ∀ τ →
-  _+_ A (packetEnergyDerivative P τ) (packetCoerciveRate P τ) ≡
-  _+_ A (canonicalTriadTransfer P τ) (zero A) →
-  _+_ A (packetEnergyDerivative P τ) (packetCoerciveRate P τ) ≡
-  _+_ A (canonicalTriadTransfer P τ) (zero A)
-packetNavierStokesFunctionalBalance P τ exactBalance = exactBalance
-
 ------------------------------------------------------------------------
--- A normalized PE5 producer.
+-- PE5: exact packet balance.
 --
--- The algebra needed to rewrite
---
---   E-dot = (-C) + T
---
--- into
---
---   E-dot + C = T + 0
---
--- is isolated here.  This prevents the module from pretending that the weak
--- AbsorptionArithmetic interface already contains additive inverses and ring
--- normalization.
+-- Ring normalization is explicit because AbsorptionArithmetic intentionally
+-- does not itself provide additive inverses or cancellation.
 ------------------------------------------------------------------------
 
 record PacketBalanceNormalization
@@ -204,29 +184,15 @@ record PacketBalanceNormalization
 
 open PacketBalanceNormalization public
 
-exactPacketBalance :
+packetNavierStokesFunctionalBalance :
   ∀ {t m} {A : AbsorptionArithmetic}
     {Time : Set t} {Mode : Set m}
     (P : PacketFourierCalculus A Time Mode) →
   PacketBalanceNormalization A P → ∀ τ →
-  packetCoerciveRate P τ ≡ packetCoerciveRate P τ →
   _+_ A (packetEnergyDerivative P τ) (packetCoerciveRate P τ) ≡
     _+_ A (canonicalTriadTransfer P τ) (zero A)
-exactPacketBalance {A = A} P N τ coerciveRefl =
-  normalizePacketBalance N τ
-    (trans
-      (differentiatedEnergySplits P τ)
-      (subst
-        (λ viscous →
-          _+_ A (viscousPacketSum P τ) (nonlinearPacketSum P τ) ≡
-          _+_ A viscous (canonicalTriadTransfer P τ))
-        (sym (viscousPacketIdentity P τ))
-        (subst
-          (λ nonlinear →
-            _+_ A (viscousPacketSum P τ) (nonlinearPacketSum P τ) ≡
-            _+_ A (negativePacketRate P τ) nonlinear)
-          (sym (nonlinearPacketIdentity P τ))
-          refl)))
+packetNavierStokesFunctionalBalance P N τ =
+  normalizePacketBalance N τ (differentiatedEnergyNormalized P τ)
 
 ------------------------------------------------------------------------
 -- PE6: logarithmic packet-barrier chain rule.
@@ -242,7 +208,6 @@ record PacketLogBarrierChainRule
     packetEnergy packetEnergyDerivative : Time → Scalar A
     packetEnergyPositive : Time → Set
     packetEnergyDifferentiable : Time → Set
-
     packetReserveDerivative : Time → Scalar A
 
     realNegativeLogChainRule : ∀ τ →
@@ -269,11 +234,10 @@ packetReserveChainRule B τ positive differentiable =
   realNegativeLogChainRule B τ positive differentiable
 
 ------------------------------------------------------------------------
--- PE7: exact packet reserve differential identity.
+-- PE7: packet-reserve differential identity.
 --
--- The rate decomposition is not guessed here.  A selected scaling law maps the
--- normalized packet-energy balance through -αE / E.  Once supplied, the
--- existing reserve-differential theorem performs the final equality transport.
+-- A selected scaling lemma maps PE5 through -αE / E.  The existing generic
+-- reserve theorem then performs only the final equality transport.
 ------------------------------------------------------------------------
 
 record PacketReserveRateDecomposition
@@ -285,7 +249,6 @@ record PacketReserveRateDecomposition
   field
     packetCoerciveRate packetDissipationRate packetForcingRate :
       Time → Scalar A
-
     scaledPacketFunctionalDerivative : Time → Scalar A
 
     scaledDerivativeMeaning : ∀ τ →
@@ -313,7 +276,7 @@ packetReserveLeaf :
     (∀ τ → packetEnergyPositive B τ) →
     (∀ τ → packetEnergyDifferentiable B τ) →
   ReserveDifferentialLeaf A Time
-packetReserveLeaf B D positive differentiable = record
+packetReserveLeaf {X = X} B D positive differentiable = record
   { reserve = λ τ →
       _*_ X (αE B)
         (negativeLog X (_/_ X (packetEnergy B τ) (eFloor B)))
