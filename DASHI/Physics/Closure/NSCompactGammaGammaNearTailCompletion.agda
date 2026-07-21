@@ -6,7 +6,6 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas
-import DASHI.Physics.Closure.NSCompactGammaConcreteFarTail as FarTail
 import DASHI.Physics.Closure.NSCompactGammaOffPacketTailDecayBridge as Tail
 
 ------------------------------------------------------------------------
@@ -25,6 +24,7 @@ record GammaNearTailDynamics
     (Index : Set i) : Set (lsuc i) where
   field
     Time : Set i
+    productArithmetic : Tail.TailProductArithmetic A
 
     packetEnergy gammaNumerator gammaRatio : Index → Time → Scalar A
     packetEnergyDerivative gammaNumeratorDerivative gammaRatioDerivative :
@@ -36,7 +36,7 @@ record GammaNearTailDynamics
 
     nearGain farLowLoss farHighLoss totalTailLoss :
       Index → Time → Scalar A
-    weightedFiveHalvesRate : Index → Time → Scalar A
+    weightedFiveHalvesRate survivingMargin : Index → Time → Scalar A
 
     gammaPotentialDerivative gammaDissipation gammaForcing :
       Index → Time → Scalar A
@@ -61,9 +61,11 @@ record GammaNearTailDynamics
 
     decompositionContainsExactlyFiveParts : ∀ q τ → Set i
 
-    -- GM3.
+    -- GM3.  The coefficient cNear is explicit.
     nearTriadsGiveCoerciveGain : ∀ q τ →
-      _≤_ A (weightedFiveHalvesRate q τ) (nearGain q τ)
+      _≤_ A
+        (Tail._·_ productArithmetic cNear (weightedFiveHalvesRate q τ))
+        (nearGain q τ)
     cNearPositive : Positive cNear
 
     -- GM4.  The exact Fourier cancellation and multiplier difference are tied
@@ -72,10 +74,6 @@ record GammaNearTailDynamics
     farLowTriadsBecomeMultiplierCommutator : FarLowAtom → Set i
     farLowCommutatorTailBound : ∀ q τ →
       _≤_ A (farLowContribution q τ) (farLowLoss q τ)
-
-    concreteFarLowCompatibility :
-      Σ (FarTail.FourierCancellationAlgebra FarLowAtom FarLowAtom (Scalar A))
-        (λ _ → Set i)
 
     -- GM5.
     farHighTailBound : ∀ q τ →
@@ -99,19 +97,24 @@ record GammaNearTailDynamics
     selectedRadiusIsChosen :
       TailBelowHalfNearGain selectedRadius
 
-    -- GM8.
-    marginMeaning : ∀ q τ → Set i
-    survivingMarginPositive : ∀ q τ → Positive cStar
+    -- GM8.  The surviving margin is the coefficient cStar times the exact rate.
+    survivingMarginMeaning : ∀ q τ →
+      survivingMargin q τ ≡
+      Tail._·_ productArithmetic cStar (weightedFiveHalvesRate q τ)
+    cStarPositive : Positive cStar
+    survivingMarginPositive : ∀ q τ → Positive (survivingMargin q τ)
     tailNonnegative : ∀ q τ → Nonnegative (farTailPayment q τ)
 
     weightedRateBelowSurvivingMargin : ∀ q τ →
-      _≤_ A (weightedFiveHalvesRate q τ) cStar
+      _≤_ A (weightedFiveHalvesRate q τ) (survivingMargin q τ)
 
     -- GM9.  The same tail payment occurs literally on both sides.
     rawGammaNearTailInequality : ∀ q τ →
       _≤_ A
         (_+_ A
-          (_+_ A (gammaPotentialDerivative q τ) cStar)
+          (_+_ A
+            (gammaPotentialDerivative q τ)
+            (survivingMargin q τ))
           (farTailPayment q τ))
         (_+_ A
           (_+_ A (gammaDissipation q τ) (gammaForcing q τ))
@@ -128,11 +131,11 @@ asRawGammaNearTailInequality D = record
   ; gammaPotentialDerivative = gammaPotentialDerivative D
   ; gammaDissipation = gammaDissipation D
   ; gammaForcing = gammaForcing D
-  ; survivingMargin = λ _ _ → cStar D
+  ; survivingMargin = survivingMargin D
   ; farTailPayment = farTailPayment D
   ; weightedFiveHalvesRate = weightedFiveHalvesRate D
   ; survivingMarginPositive =
-      ∀ q τ → Positive D (cStar D)
+      ∀ q τ → Positive D (survivingMargin D q τ)
   ; weightedRateBelowMargin = weightedRateBelowSurvivingMargin D
   ; rawNearTailInequality = rawGammaNearTailInequality D
   }
@@ -142,7 +145,9 @@ gammaCoerciveDifferentialInequality :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
   (D : GammaNearTailDynamics A Index) → ∀ q τ →
   _≤_ A
-    (_+_ A (gammaPotentialDerivative D q τ) (cStar D))
+    (_+_ A
+      (gammaPotentialDerivative D q τ)
+      (survivingMargin D q τ))
     (_+_ A (gammaDissipation D q τ) (gammaForcing D q τ))
 gammaCoerciveDifferentialInequality D =
   gamma-near-tail-cancellation (asRawGammaNearTailInequality D)
@@ -166,7 +171,10 @@ gammaNumeratorTriadDecompositionExact = gammaNumeratorTriadDecomposition
 nearTriadsGiveSignedCoerciveGain :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
   (D : GammaNearTailDynamics A Index) → ∀ q τ →
-  _≤_ A (weightedFiveHalvesRate D q τ) (nearGain D q τ)
+  _≤_ A
+    (Tail._·_ (productArithmetic D) (cNear D)
+      (weightedFiveHalvesRate D q τ))
+    (nearGain D q τ)
 nearTriadsGiveSignedCoerciveGain = nearTriadsGiveCoerciveGain
 
 farLowCommutatorEstimate :
