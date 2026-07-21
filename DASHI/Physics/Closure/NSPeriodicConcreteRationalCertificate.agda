@@ -44,8 +44,9 @@ nearDeltaTotal16 =
 nearDeltaTotalIsQuarter : nearDeltaTotal16 ≡ 4
 nearDeltaTotalIsQuarter = refl
 
-nearResidualCoefficient : Nat
-nearResidualCoefficient = 64
+nearOptimizedResidualCoefficient : Nat
+nearOptimizedResidualCoefficient = 64
 
-nearResidualRegression : nearResidualCoefficient ≡ 64
-nearResidualRegression = refl
+nearOptimizedResidualRegression :
+  nearOptimizedResidualCoefficient ≡ 64
+nearOptimizedResidualRegression = refl
