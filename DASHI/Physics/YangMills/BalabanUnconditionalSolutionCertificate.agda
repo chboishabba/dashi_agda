@@ -132,7 +132,7 @@ record UnconditionalYangMillsSolution
     (GaugeGroup : Set)
     (CutoffFamily MeasureFamily SchwingerFamily InfiniteVolumeTheory
       ContinuumTheory PhysicalObservableAlgebra HilbertSpace Hamiltonian Mass :
-      GaugeGroup → Set) : Set₁ where
+      GaugeGroup → Set) : Set₂ where
   field
     CompactSimpleGaugeGroup : GaugeGroup → Set
 
