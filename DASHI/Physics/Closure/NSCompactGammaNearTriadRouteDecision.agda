@@ -125,6 +125,62 @@ absorbedNearTailDifferentialInequality :
 absorbedNearTailDifferentialInequality {A = A} D q τ =
   additionCancelRight A (rawAbsorbedNearTailInequality D q τ)
 
+------------------------------------------------------------------------
+-- The official replacement owner.  Besides the absorption inequality, it
+-- names the positive non-cubic term which produces the weighted rate.  This
+-- prevents the old `cNear` name from being reused after signed cubic coercivity
+-- has been refuted.
+------------------------------------------------------------------------
+
+record AbsorbedGammaRoute
+    {i : Level}
+    (A : AbsorptionArithmetic)
+    (Index : Set i) : Set (lsuc i) where
+  field
+    absorption : NearTriadDissipativeAbsorption A Index
+
+    _·_ : Scalar A → Scalar A → Scalar A
+    baseWeightedCoefficient : Scalar A
+    Positive : Scalar A → Set i
+    positiveDissipativeTerm :
+      Index → Time absorption → Scalar A
+
+    baseWeightedCoefficientPositive :
+      Positive baseWeightedCoefficient
+
+    baseWeightedCoefficientProducesRate : ∀ q τ →
+      _≤_ A
+        (_·_ baseWeightedCoefficient
+          (weightedFiveHalvesRate absorption q τ))
+        (positiveDissipativeTerm q τ)
+
+open AbsorbedGammaRoute public
+
+absorbedGammaRouteDifferentialInequality :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
+  (R : AbsorbedGammaRoute A Index) → ∀ q τ →
+  _≤_ A
+    (_+_ A
+      (gammaPotentialDerivative (absorption R) q τ)
+      (weightedFiveHalvesRate (absorption R) q τ))
+    (_+_ A
+      (_+_ A
+        (gammaDissipation (absorption R) q τ)
+        (gammaForcing (absorption R) q τ))
+      (residualEnvelope (absorption R) q τ))
+absorbedGammaRouteDifferentialInequality R =
+  absorbedNearTailDifferentialInequality (absorption R)
+
+baseWeightedCoefficientProducesRateExact :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
+  (R : AbsorbedGammaRoute A Index) → ∀ q τ →
+  _≤_ A
+    (_·_ R (baseWeightedCoefficient R)
+      (weightedFiveHalvesRate (absorption R) q τ))
+    (positiveDissipativeTerm R q τ)
+baseWeightedCoefficientProducesRateExact =
+  baseWeightedCoefficientProducesRate
+
 -- Audit aliases matching the mathematical review.
 nearTriadFormCannotBeGloballyCoerciveUnderSignReversal :
   ∀ {i} (O : ReversalClosedSignedGainObstruction i) →
