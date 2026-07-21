@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomain.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaConcreteInequalitySynthesis.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomainTest.agda'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
   push:
     paths:
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomain.agda'
+      - 'DASHI/Physics/Closure/NSCompactGammaConcreteInequalitySynthesis.agda'
       - 'DASHI/Physics/Closure/NSCompactGammaConcreteBernsteinEnvelopeDomainTest.agda'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
 
