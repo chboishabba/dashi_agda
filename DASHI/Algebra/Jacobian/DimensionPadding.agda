@@ -1,7 +1,7 @@
 module DASHI.Algebra.Jacobian.DimensionPadding where
 
 open import Agda.Primitive using (Set₁)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Algebra.Jacobian.CollisionImpliesNonInjective as Collision
@@ -10,6 +10,33 @@ import DASHI.Algebra.Jacobian.CollisionImpliesNonInjective as Collision
 -- Appending unchanged coordinates preserves a collision and block-diagonal
 -- constant-Jacobian evidence.  The dimension arithmetic is supplied by the
 -- padding witness and does not reopen the dimension-two lane.
+
+data Pair (A B : Set) : Set where
+  _,_ : A → B → Pair A B
+
+firstProjection :
+  ∀ {A B : Set} →
+  Pair A B →
+  A
+firstProjection (a , b) = a
+
+pairCongLeft :
+  ∀ {A B C : Set}
+    {x y : A} →
+  (A → B) →
+  C →
+  x ≡ y →
+  Pair B C
+    ( _ )
+pairCongLeft = λ _ _ _ → _
+
+cong :
+  ∀ {A B : Set}
+    {x y : A} →
+  (function : A → B) →
+  x ≡ y →
+  function x ≡ function y
+cong function refl = refl
 
 record PaddingData
        (Base Extra BaseImage ExtraImage : Set) : Set₁ where
@@ -20,10 +47,10 @@ record PaddingData
 open PaddingData public
 
 PaddedSource : Set → Set → Set
-PaddedSource Base Extra = Base × Extra
+PaddedSource Base Extra = Pair Base Extra
 
 PaddedTarget : Set → Set → Set
-PaddedTarget BaseImage ExtraImage = BaseImage × ExtraImage
+PaddedTarget BaseImage ExtraImage = Pair BaseImage ExtraImage
 
 padMap :
   ∀ {Base Extra BaseImage ExtraImage : Set} →
@@ -39,31 +66,18 @@ padCollision :
     {extra : Extra} →
   Collision.Collision (baseMap padding) →
   Collision.Collision (padMap padding)
-padCollision {extra = extra} collision =
+padCollision {padding = padding} {extra = extra} collision =
   record
     { Collision.left = Collision.left collision , extra
     ; Collision.right = Collision.right collision , extra
     ; Collision.distinct = λ equality →
         Collision.distinct collision
-          (cong fst equality)
+          (cong firstProjection equality)
     ; Collision.commonImage =
-        cong (λ image → image , extraMap _ extra)
+        cong
+          (λ image → image , extraMap padding extra)
           (Collision.commonImage collision)
     }
-  where
-    fst :
-      ∀ {A B : Set} →
-      A × B →
-      A
-    fst (a , b) = a
-
-    cong :
-      ∀ {A B : Set}
-        {x y : A} →
-      (A → B) →
-      x ≡ y →
-      _
-    cong function refl = refl
 
 record DimensionCounterexample : Set₁ where
   field
