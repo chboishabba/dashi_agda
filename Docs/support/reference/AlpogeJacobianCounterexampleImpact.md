@@ -53,6 +53,61 @@ global implication
 
 without extra hypotheses.
 
+## Dependency audit
+
+The current authoritative import surface and the most plausible inverse-labelled
+consumers were reviewed for dependence on that implication.
+
+### Result
+
+No existing theorem module was found that derives global invertibility of a
+polynomial map from a nonzero constant Jacobian determinant. Accordingly, no
+pre-existing mathematical theorem needs to be weakened by this change.
+
+The inverse-related modules inspected use materially different hypotheses:
+
+- `DASHI.Core.OperatorTypes.Invertible` stores an inverse function together with
+  explicit left- and right-inverse laws. Invertibility is evidence carried by
+  the record, not inferred from a derivative or determinant.
+- `DASHI.Algebra.ProjectionVsInvertible` assumes that explicit `Invertible`
+  witness and proves that an idempotent invertible operator is the identity.
+- `DASHI.Culture.InverseBidirectionalCultureOperators` defines concrete inverse
+  operations and checks the relevant round-trip equalities directly.
+- `DASHI.Biology.BodyMemoryCompiledInverseBridge` is a candidate-only semantic
+  bridge whose “inverse” terminology is chart-local and explicitly
+  non-authoritative; it does not state a polynomial global-inverse theorem.
+
+The only directly affected repository surfaces are therefore the newly added
+Jacobian diagnostic, its verification receipt, and documentation describing the
+status of the conjecture.
+
+### Review classification
+
+- **Direct invalid dependency:** none found.
+- **Inverse records with explicit two-sided laws:** unaffected.
+- **Concrete involutions or round-trip witnesses:** unaffected.
+- **Chart-local, metaphorical, or candidate-only inverse language:** unaffected,
+  provided it is not later promoted into a polynomial global-invertibility
+  theorem.
+- **Local inverse-function uses:** unaffected when they conclude only local
+  invertibility.
+- **Future dimension-2 statements:** must be dimension-indexed and remain
+  conjectural unless separately proved.
+
+### Ongoing guard
+
+Future review should flag a module when all of the following are present:
+
+1. the carrier is a polynomial self-map of affine space;
+2. the ambient dimension is at least 3 or left unrestricted;
+3. the only global hypothesis is a nonzero constant Jacobian determinant;
+4. the conclusion supplies injectivity, surjectivity, a polynomial inverse, or
+   an automorphism.
+
+A module is not affected merely because it contains the words `inverse`,
+`invertible`, `Jacobian`, or `determinant`; the proof dependency must match the
+four-part pattern above.
+
 ## Audit rule
 
 Future modules should not use `JacobianConjecture` as an undifferentiated name.
