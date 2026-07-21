@@ -159,7 +159,7 @@ primitiveInputsToRadiusEightReduction :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i} →
   RadiusEightPrimitiveInputs A Index →
   RadiusEight.RadiusEightFourierReduction A Index
-primitiveInputsToRadiusEightReduction P = record
+primitiveInputsToRadiusEightReduction {A = A} P = record
   { Time = Time P
   ; multiplierDifference = multiplierDifferenceTerm (low P)
   ; meanValueBudget = meanValueTerm (low P)
