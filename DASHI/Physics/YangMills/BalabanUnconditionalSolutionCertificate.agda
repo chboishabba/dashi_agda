@@ -5,21 +5,21 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- Terminal fail-closed certificate for the constructive Yang--Mills chain.
+-- Group-indexed terminal certificate.
 --
--- Every theorem below is indexed by the same selected gauge group, cutoff
--- family, finite-volume measures, Schwinger family, infinite-volume limit,
--- continuum limit and reconstructed Hamiltonian.  This prevents a terminal
--- certificate from mixing witnesses belonging to unrelated constructions.
--- No global inhabitant is supplied here.
+-- Every theorem is tied to one coherent cutoff/measure/Schwinger/continuum/
+-- Hamiltonian family for the selected group.  The outer certificate then
+-- requires such a construction for every compact simple gauge group, matching
+-- the quantifier in the official Jaffe--Witten problem statement.
 ------------------------------------------------------------------------
 
-record UnconditionalYangMillsSolution
-    (GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
-      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
-      HilbertSpace Hamiltonian Mass : Set) : Set₁ where
+record GaugeGroupYangMillsSolution
+    {GaugeGroup : Set}
+    (G : GaugeGroup)
+    (CutoffFamily MeasureFamily SchwingerFamily InfiniteVolumeTheory
+      ContinuumTheory PhysicalObservableAlgebra HilbertSpace Hamiltonian Mass :
+      Set) : Set₁ where
   field
-    selectedGaugeGroup : GaugeGroup
     selectedCutoffFamily : CutoffFamily
     selectedMeasureFamily : MeasureFamily
     selectedSchwingerFamily : SchwingerFamily
@@ -30,14 +30,10 @@ record UnconditionalYangMillsSolution
     selectedHamiltonian : Hamiltonian
     selectedMassGap : Mass
 
-    CompactSimpleGaugeGroup : GaugeGroup → Set
-    compactSimpleGaugeGroup : CompactSimpleGaugeGroup selectedGaugeGroup
-
     FiniteVolumeConstruction :
       GaugeGroup → CutoffFamily → MeasureFamily → Set
     finiteVolumeConstruction :
-      FiniteVolumeConstruction
-        selectedGaugeGroup selectedCutoffFamily selectedMeasureFamily
+      FiniteVolumeConstruction G selectedCutoffFamily selectedMeasureFamily
 
     SchwingerFamilyGeneratedByMeasures :
       MeasureFamily → SchwingerFamily → Set
@@ -74,6 +70,10 @@ record UnconditionalYangMillsSolution
     ContinuumLimitUnique : InfiniteVolumeTheory → ContinuumTheory → Set
     continuumLimitUnique :
       ContinuumLimitUnique selectedInfiniteVolumeTheory selectedContinuumTheory
+
+    QuantumYangMillsTheoryOnR4 : GaugeGroup → ContinuumTheory → Set
+    quantumYangMillsTheoryOnR4 :
+      QuantumYangMillsTheoryOnR4 G selectedContinuumTheory
 
     ContinuumOSAxioms : ContinuumTheory → Set
     continuumOSAxioms : ContinuumOSAxioms selectedContinuumTheory
@@ -120,6 +120,36 @@ record UnconditionalYangMillsSolution
     physicalHamiltonianMassGap :
       PhysicalHamiltonianMassGap selectedHamiltonian selectedMassGap
 
+    ImportedAuthoritiesHypothesesMatch :
+      GaugeGroup → CutoffFamily → MeasureFamily → SchwingerFamily → Set
+    importedAuthoritiesHypothesesMatch :
+      ImportedAuthoritiesHypothesesMatch
+        G selectedCutoffFamily selectedMeasureFamily selectedSchwingerFamily
+
+open GaugeGroupYangMillsSolution public
+
+record UnconditionalYangMillsSolution
+    (GaugeGroup : Set)
+    (CutoffFamily MeasureFamily SchwingerFamily InfiniteVolumeTheory
+      ContinuumTheory PhysicalObservableAlgebra HilbertSpace Hamiltonian Mass :
+      GaugeGroup → Set) : Set₁ where
+  field
+    CompactSimpleGaugeGroup : GaugeGroup → Set
+
+    solutionForEveryCompactSimpleGaugeGroup :
+      ∀ G → CompactSimpleGaugeGroup G →
+      GaugeGroupYangMillsSolution
+        G
+        (CutoffFamily G)
+        (MeasureFamily G)
+        (SchwingerFamily G)
+        (InfiniteVolumeTheory G)
+        (ContinuumTheory G)
+        (PhysicalObservableAlgebra G)
+        (HilbertSpace G)
+        (Hamiltonian G)
+        (Mass G)
+
     FocusedAggregateTypechecks : Set
     focusedAggregateTypechecks : FocusedAggregateTypechecks
 
@@ -132,55 +162,39 @@ record UnconditionalYangMillsSolution
     NoUnsolvedMetavariables : Set
     noUnsolvedMetavariables : NoUnsolvedMetavariables
 
-    NoConditionalLeafOnFinalPath :
-      GaugeGroup → CutoffFamily → MeasureFamily → SchwingerFamily →
-      InfiniteVolumeTheory → ContinuumTheory → Hamiltonian → Set
-    noConditionalLeafOnFinalPath :
-      NoConditionalLeafOnFinalPath
-        selectedGaugeGroup selectedCutoffFamily selectedMeasureFamily
-        selectedSchwingerFamily selectedInfiniteVolumeTheory
-        selectedContinuumTheory selectedHamiltonian
+    NoConditionalLeafOnFinalPath : Set
+    noConditionalLeafOnFinalPath : NoConditionalLeafOnFinalPath
 
-    NoConjecturalLeafOnFinalPath :
-      GaugeGroup → CutoffFamily → MeasureFamily → SchwingerFamily →
-      InfiniteVolumeTheory → ContinuumTheory → Hamiltonian → Set
-    noConjecturalLeafOnFinalPath :
-      NoConjecturalLeafOnFinalPath
-        selectedGaugeGroup selectedCutoffFamily selectedMeasureFamily
-        selectedSchwingerFamily selectedInfiniteVolumeTheory
-        selectedContinuumTheory selectedHamiltonian
+    NoConjecturalLeafOnFinalPath : Set
+    noConjecturalLeafOnFinalPath : NoConjecturalLeafOnFinalPath
 
-    ImportedAuthoritiesHypothesesMatch :
-      GaugeGroup → CutoffFamily → MeasureFamily → SchwingerFamily → Set
-    importedAuthoritiesHypothesesMatch :
-      ImportedAuthoritiesHypothesesMatch
-        selectedGaugeGroup selectedCutoffFamily
-        selectedMeasureFamily selectedSchwingerFamily
+    OfficialJaffeWittenStatementMatched : Set
+    officialJaffeWittenStatementMatched : OfficialJaffeWittenStatementMatched
 
 open UnconditionalYangMillsSolution public
 
--- Promotion is derived from a coherent complete certificate. There is
--- deliberately no nullary `true` declaration: until such a certificate is
+-- Promotion is derived only from an all-groups coherent complete certificate.
+-- There is deliberately no nullary `true` declaration: until such a value is
 -- constructed, the aggregate repository status remains fail-closed.
 clayYangMillsSubmissionPromotion :
-  ∀ {GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
-      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
-      HilbertSpace Hamiltonian Mass} →
+  ∀ {GaugeGroup}
+    {CutoffFamily MeasureFamily SchwingerFamily InfiniteVolumeTheory
+      ContinuumTheory PhysicalObservableAlgebra HilbertSpace Hamiltonian Mass :
+      GaugeGroup → Set} →
   UnconditionalYangMillsSolution
-    GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
-    InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
-    HilbertSpace Hamiltonian Mass →
+    GaugeGroup CutoffFamily MeasureFamily SchwingerFamily InfiniteVolumeTheory
+    ContinuumTheory PhysicalObservableAlgebra HilbertSpace Hamiltonian Mass →
   Bool
 clayYangMillsSubmissionPromotion solution = true
 
 certificatePromotesSubmission :
-  ∀ {GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
-      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
-      HilbertSpace Hamiltonian Mass}
+  ∀ {GaugeGroup}
+    {CutoffFamily MeasureFamily SchwingerFamily InfiniteVolumeTheory
+      ContinuumTheory PhysicalObservableAlgebra HilbertSpace Hamiltonian Mass :
+      GaugeGroup → Set}
     (solution : UnconditionalYangMillsSolution
-      GaugeGroup CutoffFamily MeasureFamily SchwingerFamily
-      InfiniteVolumeTheory ContinuumTheory PhysicalObservableAlgebra
-      HilbertSpace Hamiltonian Mass) →
+      GaugeGroup CutoffFamily MeasureFamily SchwingerFamily InfiniteVolumeTheory
+      ContinuumTheory PhysicalObservableAlgebra HilbertSpace Hamiltonian Mass) →
   clayYangMillsSubmissionPromotion solution ≡ true
 certificatePromotesSubmission solution = refl
 
