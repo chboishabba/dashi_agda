@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSPeriodicConcreteProofProgramRegression where
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.Closure.NSPeriodicConcreteCarrier public
+open import DASHI.Physics.Closure.NSPeriodicConcreteCarrierCoherence public
 open import DASHI.Physics.Closure.NSPeriodicConcreteDyadicPartition public
 open import DASHI.Physics.Closure.NSPeriodicConcreteNorms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma public
