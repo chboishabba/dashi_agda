@@ -29,43 +29,43 @@ def hat(K: int, radius: int) -> Fraction:
     return Fraction(hi - radius, hi - mid)
 
 
-def worst_gain(K: int, R: int) -> tuple[Fraction, dict[str, int] | None]:
+def worst_gain(K: int, R: int) -> Fraction:
     max_shift = max(1, 2 ** max(0, K - R))
     worst = Fraction(0)
-    witness = None
     for radius in range(0, 2 ** (K + 1) + max_shift + 1):
         for shift in range(1, max_shift + 1):
             for sign in (-1, 1):
                 moved = max(0, radius + sign * shift)
-                gain = abs(hat(K, moved) - hat(K, radius))
-                if gain > worst:
-                    worst = gain
-                    witness = {"radius": radius, "moved_radius": moved, "shift": shift}
-    return worst, witness
+                worst = max(worst, abs(hat(K, moved) - hat(K, radius)))
+    return worst
 
 
 def build() -> dict[str, Any]:
     rows = []
-    for K in range(2, 11):
-        for R in range(1, min(8, K) + 1):
-            gain, witness = worst_gain(K, R)
-            analytic = Fraction(1, 2 ** max(0, R - 1))
-            rows.append(
-                {
-                    "K": K,
-                    "R": R,
-                    "observed_gain": q(gain),
-                    "analytic_gain": q(analytic),
-                    "below_analytic": gain <= analytic,
-                    "witness": witness,
-                }
-            )
+    checked_pairs = 0
+    for R in range(1, 9):
+        shells = list(range(max(2, R), 11))
+        values = [worst_gain(K, R) for K in shells]
+        checked_pairs += len(shells)
+        analytic = Fraction(1, 2 ** max(0, R - 1))
+        rows.append(
+            {
+                "R": R,
+                "K_min": min(shells),
+                "K_max": max(shells),
+                "observed_min": q(min(values)),
+                "observed_max": q(max(values)),
+                "analytic_gain": q(analytic),
+                "scale_invariant": min(values) == max(values) == analytic,
+            }
+        )
     r8_symbolic = Fraction(1, 128)
     payload: dict[str, Any] = {
         "schema": SCHEMA,
         "authority": "exact_radial_reduction_for_the_max_norm_hat_only",
+        "shell_radius_pairs_checked": checked_pairs,
         "rows": rows,
-        "all_rows_below_analytic": all(row["below_analytic"] for row in rows),
+        "all_rows_scale_invariant": all(row["scale_invariant"] for row in rows),
         "R8_symbolic_gain": q(r8_symbolic),
         "R8_fits_one_eighth": r8_symbolic <= Fraction(1, 8),
         "promotion": {
