@@ -20,16 +20,6 @@ firstProjection :
   A
 firstProjection (a , b) = a
 
-pairCongLeft :
-  ∀ {A B C : Set}
-    {x y : A} →
-  (A → B) →
-  C →
-  x ≡ y →
-  Pair B C
-    ( _ )
-pairCongLeft = λ _ _ _ → _
-
 cong :
   ∀ {A B : Set}
     {x y : A} →
