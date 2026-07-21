@@ -1,0 +1,41 @@
+name: Jacobian counterexample closure
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Algebra/Jacobian/**"
+      - "DASHI/EverythingJacobianCounterexample.agda"
+      - "Verification/JacobianNoninjectiveRegression.agda"
+      - "scripts/check_jacobian_noninjective_example.py"
+      - "Docs/JacobianCounterexampleClosure.md"
+      - ".github/workflows/jacobian-counterexample.yml"
+  push:
+    paths:
+      - "DASHI/Algebra/Jacobian/**"
+      - "DASHI/EverythingJacobianCounterexample.agda"
+      - "Verification/JacobianNoninjectiveRegression.agda"
+      - "scripts/check_jacobian_noninjective_example.py"
+      - "Docs/JacobianCounterexampleClosure.md"
+      - ".github/workflows/jacobian-counterexample.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_FLAGS: "--no-libraries --no-default-libraries -i . -i .agda-stdlib"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run exact sparse-polynomial diagnostic
+        run: python3 scripts/check_jacobian_noninjective_example.py
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
+          cp -a /usr/share/agda-stdlib .agda-stdlib
+          agda --version
+      - name: Typecheck logical regression
+        run: agda $AGDA_FLAGS DASHI/Algebra/Jacobian/CounterexampleRegression.agda
+      - name: Typecheck Jacobian aggregate
+        run: agda $AGDA_FLAGS DASHI/Algebra/Jacobian/Everything.agda
+      - name: Typecheck repository integration
+        run: agda $AGDA_FLAGS DASHI/EverythingJacobianCounterexample.agda
