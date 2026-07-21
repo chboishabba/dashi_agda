@@ -8,6 +8,7 @@ import DASHI.Physics.YangMills.BalabanPatchTransferAnalyticReduction
 import DASHI.Physics.YangMills.BalabanExactPatchTransferCalculus
 import DASHI.Physics.YangMills.BalabanClayAnalyticConcreteDefinitions
 import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation
+import DASHI.Physics.YangMills.BalabanFiniteFourierHodgeReduction
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
 import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremAuthorities
@@ -24,6 +25,12 @@ import DASHI.Physics.YangMills.BalabanUnconditionalSolutionCertificate
 
 bulkFiniteBackgroundAssemblyLevel : ProofLevel
 bulkFiniteBackgroundAssemblyLevel = machineChecked
+
+finiteFourierHodgeReductionLevel : ProofLevel
+finiteFourierHodgeReductionLevel = machineChecked
+
+finiteFourierAndSymbolGapInputLevel : ProofLevel
+finiteFourierAndSymbolGapInputLevel = conditional
 
 bulkFiniteBackgroundInputLevel : ProofLevel
 bulkFiniteBackgroundInputLevel = conditional
