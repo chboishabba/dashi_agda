@@ -7,7 +7,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.Closure.NSIntegerFourierLattice using (FourierMode)
 
 ------------------------------------------------------------------------
--- Frozen conventions shared by the finite runner and the analytic bridge.
+-- Frozen conventions shared by the exact finite operators, numerical Galerkin
+-- diagnostics and analytic bridge.
 ------------------------------------------------------------------------
 
 data CutoffNorm : Set where
@@ -18,6 +19,9 @@ data FourierL2Convention : Set where
 
 data DyadicMultiplierConvention : Set where
   rationalMaximumNormHat : DyadicMultiplierConvention
+
+data DyadicEnergyPartitionConvention : Set where
+  normalizedSquaredHatPartition : DyadicEnergyPartitionConvention
 
 data PacketConvention : Set where
   threeShellPacket : PacketConvention
@@ -31,6 +35,7 @@ record PeriodicConcreteCarrier : Set₁ where
     cutoffNorm : CutoffNorm
     fourierL2 : FourierL2Convention
     dyadicMultiplier : DyadicMultiplierConvention
+    dyadicEnergyPartition : DyadicEnergyPartitionConvention
     packetConvention : PacketConvention
     sobolevConvention : SobolevConvention
 
@@ -46,6 +51,7 @@ periodicConcreteCarrier = record
   ; cutoffNorm = maximumCoordinateNorm
   ; fourierL2 = coefficientUnitaryL2
   ; dyadicMultiplier = rationalMaximumNormHat
+  ; dyadicEnergyPartition = normalizedSquaredHatPartition
   ; packetConvention = threeShellPacket
   ; sobolevConvention = sevenHalvesSobolev
   ; separationRadius = 8
@@ -62,6 +68,11 @@ packetHasHalfWidthOne = refl
 sobolevExponentIsSevenHalves :
   twiceSobolevExponent periodicConcreteCarrier ≡ 7
 sobolevExponentIsSevenHalves = refl
+
+energyPartitionUsesNormalizedHatSquares :
+  dyadicEnergyPartition periodicConcreteCarrier ≡
+  normalizedSquaredHatPartition
+energyPartitionUsesNormalizedHatSquares = refl
 
 concreteCarrierSuppliesUniversalAnalyticTheorems : Bool
 concreteCarrierSuppliesUniversalAnalyticTheorems = false
