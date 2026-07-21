@@ -13,7 +13,7 @@ open import Agda.Builtin.Equality using (_≡_)
 record ObservableDerivativeAlgebra (Time Scalar : Set) : Set₁ where
   field
     _+_ _-_ _*_ _/_ : Scalar → Scalar → Scalar
-    negativeLog : Scalar → Scalar
+    negative negativeLog : Scalar → Scalar
     derivative : (Time → Scalar) → Time → Scalar
 
     Differentiable : (Time → Scalar) → Time → Set
@@ -48,6 +48,6 @@ record ObservableDerivativeAlgebra (Time Scalar : Set) : Set₁ where
     derivativeNegativeLog : ∀ f τ →
       Differentiable f τ → Nonzero f τ →
       derivative (λ t → negativeLog (f t)) τ ≡
-      _/_ (derivative f τ) (f τ)
+      _/_ (negative (derivative f τ)) (f τ)
 
 open ObservableDerivativeAlgebra public
