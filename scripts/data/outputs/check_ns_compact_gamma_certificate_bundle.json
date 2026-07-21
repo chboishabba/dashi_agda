@@ -1,0 +1,11 @@
+{
+  "clay_promoted": false,
+  "error_count": 0,
+  "errors": [],
+  "full_ns_promoted": false,
+  "ok": true,
+  "schema": "check_ns_compact_gamma_certificate_bundle.v1",
+  "source_certificate_sha256": "993cc856a0db56eda965695ca62f046643c315de1ba934f1ae4a15bcdd25a979",
+  "source_schema": "ns_compact_gamma_certificate_bundle.v1",
+  "theorem_promoted": false
+}
