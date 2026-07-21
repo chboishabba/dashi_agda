@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.Closure.NSPeriodicConcreteCarrier public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCarrierCoherence public
 open import DASHI.Physics.Closure.NSPeriodicConcreteDyadicPartition public
+open import DASHI.Physics.Closure.NSPeriodicConcreteMultiplierScalingReceipt public
 open import DASHI.Physics.Closure.NSPeriodicConcreteNorms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma public
 open import DASHI.Physics.Closure.NSPeriodicConcreteTriadForms public
@@ -32,6 +33,9 @@ carrierSobolevRegression = refl
 
 multiplierGainRegression : radiusEightMultiplierDenominator ≡ 128
 multiplierGainRegression = refl
+
+multiplierScalingRegression : radiusEightGainDenominator ≡ 128
+multiplierScalingRegression = refl
 
 highConstantRegression : farHighConstantProduct ≡ 8
 highConstantRegression = refl
