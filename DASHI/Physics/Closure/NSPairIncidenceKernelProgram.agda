@@ -62,6 +62,7 @@ import DASHI.Physics.Closure.NSCompactGammaFixedFloorScalingObstruction
 import DASHI.Physics.Closure.NSCompactGammaGeneratedCertificateBridge
 import DASHI.Physics.Closure.NSPeriodicFourierCancellationAlgebra
 import DASHI.Physics.Closure.NSPeriodicFourierNearTriadPreYoung
+import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization
 import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction
 import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction
 import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary
