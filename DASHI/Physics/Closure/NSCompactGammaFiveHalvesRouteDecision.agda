@@ -1,6 +1,8 @@
 module DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Product using (_×_; _,_)
 open import Data.Sum.Base using (_⊎_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -10,12 +12,48 @@ open import DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay
 -- Route A1: adjacent-shell recurrence.
 ------------------------------------------------------------------------
 
+record GeometricRemainderControl
+    (A : AbsorptionArithmetic)
+    (M : OrderedSemiringExtension A)
+    (D : FourierShellDynamics A M) : Set₁ where
+  field
+    theta remainderConstant : Scalar A
+    thetaStrict : StrictlyBelow M theta (one M)
+
+    compactGammaEnvelope : Index D → Time D → Scalar A
+    geometricMajorant : Index D → Time D → Nat → Scalar A
+
+    geometricMajorantMeaning : ∀ q τ n →
+      geometricMajorant q τ n ≡
+      _*_ M remainderConstant
+        (_*_ M (power M theta n) (compactGammaEnvelope q τ))
+
+    highRemainderGeometric : ∀ q τ n →
+      _≤_ A
+        (highRemainder D q τ n)
+        (geometricMajorant q τ n)
+
+    lowRemainderGeometric : ∀ q τ n →
+      _≤_ A
+        (lowRemainder D q τ n)
+        (geometricMajorant q τ n)
+
+    summedMajorant uniformRemainderBound :
+      Index D → Time D → Scalar A
+
+    remainderMajorantSummable : ∀ q τ →
+      _≤_ A (summedMajorant q τ) (uniformRemainderBound q τ)
+
+open GeometricRemainderControl public
+
 record AdjacentRecurrenceFiveHalvesControl
     (A : AbsorptionArithmetic) : Set₁ where
   field
     multiplicativeOrder : OrderedSemiringExtension A
     reflexiveOrder : ReflexiveOrderExtension A
     dynamics : FourierShellDynamics A multiplicativeOrder
+    remainderControl :
+      GeometricRemainderControl A multiplicativeOrder dynamics
     decay :
       TwoSidedGeometricShellDecay
         A multiplicativeOrder reflexiveOrder dynamics
@@ -49,6 +87,21 @@ concreteAdjacentLowShellEstimate :
       (lowRemainder (dynamics C) q τ n))
 concreteAdjacentLowShellEstimate C =
   fourierTriadsGiveAdjacentLowShellDecay (dynamics C)
+
+concreteRemainderGeometric :
+  ∀ {A : AbsorptionArithmetic} →
+  (C : AdjacentRecurrenceFiveHalvesControl A) →
+  ∀ q τ n →
+  (_≤_ A
+    (highRemainder (dynamics C) q τ n)
+    (geometricMajorant (remainderControl C) q τ n))
+  ×
+  (_≤_ A
+    (lowRemainder (dynamics C) q τ n)
+    (geometricMajorant (remainderControl C) q τ n))
+concreteRemainderGeometric C q τ n =
+  highRemainderGeometric (remainderControl C) q τ n ,
+  lowRemainderGeometric (remainderControl C) q τ n
 
 concreteShellContraction :
   ∀ {A : AbsorptionArithmetic} →
