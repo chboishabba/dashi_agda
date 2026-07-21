@@ -1,6 +1,5 @@
 module DASHI.Physics.Closure.NSCompactGammaConcreteBernsteinEnvelopeDomainTest where
 
--- Focused recursive import check for the exact compact-Gamma mathematical cutset.
 open import DASHI.Physics.Closure.NSCompactGammaConcreteBernsteinEnvelopeDomain public
 open import DASHI.Physics.Closure.NSCompactGammaConcreteInequalitySynthesis public
 open import DASHI.Physics.Closure.NSCompactGammaConcreteAnalyticCutset public
@@ -17,6 +16,7 @@ open import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion publ
 open import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge public
 open import DASHI.Physics.Closure.NSCompactGammaOfficialCoverageCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaFixedFloorScalingObstruction public
+open import DASHI.Physics.Closure.NSCompactGammaGeneratedCertificateBridge public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset public
 open import DASHI.Physics.Closure.NSCompactGammaCriticalObligationCompletion public
