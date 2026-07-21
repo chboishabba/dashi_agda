@@ -184,8 +184,9 @@ authorityInterpretationToFactorizedNearTriad :
     {Y : Young.OrderedYoungLaw A} →
   NearTriadAuthorityInterpretation A Index Shell Time State S Y →
   Young.FactorizedNearTriadInputs A Index Y
-authorityInterpretationToFactorizedNearTriad {S = S} I = record
-  { Time = _
+authorityInterpretationToFactorizedNearTriad
+    {Time = Time} {S = S} I = record
+  { Time = Time
   ; literalFourierMagnitude = literalFourierMagnitude I
   ; nearTriadMagnitude = nearTriadMagnitude I
   ; nearLowHigh = λ q τ →
