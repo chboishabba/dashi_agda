@@ -7,11 +7,6 @@ import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary as Autho
 
 ------------------------------------------------------------------------
 -- Selected-state adapters for standard periodic harmonic-analysis theorems.
---
--- This module does not import a theorem merely by name.  It requires one exact
--- `PublishedPeriodicHarmonicAnalysisAuthority` instantiated with the repository's
--- scalar and order, plus admissibility of every selected state.  The standard
--- Bernstein/Bony/commutator/Sobolev conclusions then follow by specialization.
 ------------------------------------------------------------------------
 
 record SelectedPeriodicHarmonicAuthority
@@ -21,6 +16,7 @@ record SelectedPeriodicHarmonicAuthority
   field
     authority :
       Authority.PublishedPeriodicHarmonicAnalysisAuthority
+        {ℓProp = i}
         Index Shell Time State (Scalar A) (_≤_ A)
 
     selectedState : Index → Time → State
