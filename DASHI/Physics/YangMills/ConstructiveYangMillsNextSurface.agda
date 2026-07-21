@@ -21,6 +21,7 @@ import DASHI.Physics.YangMills.BalabanUniformGreenNonlinearProduct
 import DASHI.Physics.YangMills.BalabanSeparatedUniformGreenNonlinearBounds
 import DASHI.Physics.YangMills.BalabanReferenceHodgeCoercivity
 import DASHI.Physics.YangMills.BalabanFiniteFourierHodgeReduction
+import DASHI.Physics.YangMills.BalabanFiniteFourierHodgeReductionRegression
 import DASHI.Physics.YangMills.BalabanPatchRegimeHodgeUniformity
 import DASHI.Physics.YangMills.BalabanPatchTransferAnalyticReduction
 import DASHI.Physics.YangMills.BalabanConcreteFiniteBackgroundCutset
