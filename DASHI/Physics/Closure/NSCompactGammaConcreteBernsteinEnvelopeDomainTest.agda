@@ -5,3 +5,4 @@ open import DASHI.Physics.Closure.NSCompactGammaConcreteInequalitySynthesis publ
 open import DASHI.Physics.Closure.NSCompactGammaConcreteAnalyticCutset public
 open import DASHI.Physics.Closure.NSClaySubmissionReadinessGate public
 open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations public
+open import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas public
