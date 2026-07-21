@@ -9,6 +9,7 @@ open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
 open import DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay public
 open import DASHI.Physics.Closure.NSCompactGammaGammaNearTailCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion public
+open import DASHI.Physics.Closure.NSCompactGammaConcreteDyadicScalarCertificate public
 open import DASHI.Physics.Closure.NSCompactGammaOfficialDataObstruction public
 open import DASHI.Physics.Closure.NSCompactGammaOfficialCoverageCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaAbstractAdmissibilityObstruction public
