@@ -19,6 +19,7 @@ open import DASHI.Physics.Closure.NSPeriodicGammaDerivative public
 open import DASHI.Physics.Closure.NSPeriodicOffPacketRatioDerivative public
 open import DASHI.Physics.Closure.NSPeriodicSizeFunctionalDerivative public
 open import DASHI.Physics.Closure.NSCompactGammaBoundaryFaceEstimates public
+open import DASHI.Physics.Closure.NSPeriodicConcreteGalerkinFalsificationReceipt public
 open import DASHI.Physics.Closure.NSPeriodicConcreteProofProgramStatus public
 
 carrierRadiusRegression : separationRadius periodicConcreteCarrier ≡ 8
@@ -51,6 +52,9 @@ fiveHalvesCounterexampleRegression = refl
 
 sizeBoundaryRegression : sizeMargin ≡ 0
 sizeBoundaryRegression = refl
+
+packetFloorFalsificationRegression : packetFaceNonpositiveCount ≡ 16
+packetFloorFalsificationRegression = refl
 
 adaptiveChartRegression : finiteTraceSwitchCount ≡ 1
 adaptiveChartRegression = refl
