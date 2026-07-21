@@ -8,6 +8,7 @@ open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations public
 open import DASHI.Physics.Closure.NSCompactGammaFrontierAttackLemmas public
 open import DASHI.Physics.Closure.NSCompactGammaGeometricShellDecay public
 open import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision public
+open import DASHI.Physics.Closure.NSCompactGammaFiveHalvesSummationReduction public
 open import DASHI.Physics.Closure.NSCompactGammaGammaNearTailCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision public
 open import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction public
@@ -24,6 +25,7 @@ open import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction
 open import DASHI.Physics.Closure.NSCompactGammaInvariantCoverageReduction public
 open import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction public
 open import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary public
+open import DASHI.Physics.Closure.NSPeriodicFourierAuthorityAdapters public
 open import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction public
 open import DASHI.Physics.Closure.NSCompactGammaCertificateUniversalTailCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
