@@ -91,6 +91,11 @@ EXPECTED = {
         "dominantFreeBackgroundAssemblyLevel": "machineChecked",
         "dominantFreeBackgroundProducerInputsLevel": "conditional",
     },
+    "BalabanConstructiveCompletionSpine.agda": {
+        "constructiveCompletionSpineAssemblyLevel": "machineChecked",
+        "constructiveCompletionStageInputsLevel": "conditional",
+        "constructiveSubmissionReviewInputsLevel": "conditional",
+    },
 }
 
 
