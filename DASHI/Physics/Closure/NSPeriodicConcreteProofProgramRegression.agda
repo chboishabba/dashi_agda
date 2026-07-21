@@ -66,8 +66,13 @@ fiveHalvesCounterexampleRegression = refl
 sizeBoundaryRegression : sizeMargin ≡ 0
 sizeBoundaryRegression = refl
 
-packetFloorFalsificationRegression : packetFaceNonpositiveCount ≡ 16
+packetFloorFalsificationRegression :
+  absolutePacketFaceNonpositiveCount ≡ 16
 packetFloorFalsificationRegression = refl
+
+normalizedPacketFiniteRegression :
+  normalizedPacketFaceNonpositiveCount ≡ 0
+normalizedPacketFiniteRegression = refl
 
 adaptiveChartRegression : finiteTraceSwitchCount ≡ 1
 adaptiveChartRegression = refl
