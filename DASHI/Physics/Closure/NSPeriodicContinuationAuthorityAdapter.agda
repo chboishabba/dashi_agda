@@ -8,11 +8,6 @@ import DASHI.Physics.Closure.NSPeriodicFourierAnalyticAuthorityBoundary as Autho
 ------------------------------------------------------------------------
 -- Exact adapter from standard periodic continuation theorems to the official
 -- compact-Gamma setting.
---
--- Zero-data, small-data and diffuse-spectrum/BKM branches are standard once the
--- carrier predicates are matched.  The adapter proves those three branches and
--- leaves only Gamma-depletion and adaptive-chart continuation as novel coverage
--- inputs.
 ------------------------------------------------------------------------
 
 record SelectedPeriodicContinuationAuthority
@@ -69,7 +64,7 @@ diffuseAuthorityBranchContinues :
   SmoothDivergenceFreeFiniteEnergy S u₀ →
   Authority.DiffuseSpectrum (authority C) u₀ →
   UniversalContinuationMechanism S u₀
-diffuseAuthorityBranchContinues C u₀ official diffuse =
+diffuseAuthorityBranchContinues {S = S} C u₀ official diffuse =
   mechanismFromContinuationAtEveryTime C u₀ closeAt
   where
   solution : Solution S
