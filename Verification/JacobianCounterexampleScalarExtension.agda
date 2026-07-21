@@ -3,8 +3,7 @@ module Verification.JacobianCounterexampleScalarExtension where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
-open import Data.Rational using (ℚ)
+open import Data.Rational using (ℚ; _+_; _*_; -_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import Verification.JacobianCounterexampleKernel as J
@@ -27,18 +26,19 @@ open import Verification.JacobianCounterexampleKernel as J
     ; firstCoordinate
     ; secondCoordinate
     ; thirdCoordinate
+    ; applyPolynomialMap3
     ; alpogePolynomialMap
     ; jacobianDeterminantPolynomial
-    ; F
     ; pZero
     ; pPositive
-    ; target
     ; pZeroPositiveCollision
     ; zeroNotOne
     ; zeroQ
+    ; oneQ
     ; oneR
     ; minusTwoQ
     ; _≢_
+    ; ¬_
     ; Injective
     ; collisionImpliesNotInjective
     )
@@ -54,11 +54,11 @@ record RationalScalarExtension : Set₁ where
     negS : Scalar → Scalar
     embed : ℚ → Scalar
     embedInjective : ∀ {p q} → embed p ≡ embed q → p ≡ q
-    embedZero : embed J.zeroQ ≡ zeroS
-    embedOne : embed J.oneQ ≡ oneS
-    embedAdd : (p q : ℚ) → embed (p J.+ q) ≡ embed p +S embed q
-    embedMul : (p q : ℚ) → embed (p J.* q) ≡ embed p *S embed q
-    embedNeg : (p : ℚ) → embed (J.- p) ≡ negS (embed p)
+    embedZero : embed zeroQ ≡ zeroS
+    embedOne : embed oneQ ≡ oneS
+    embedAdd : (p q : ℚ) → embed (p + q) ≡ embed p +S embed q
+    embedMul : (p q : ℚ) → embed (p * q) ≡ embed p *S embed q
+    embedNeg : (p : ℚ) → embed (- p) ≡ negS (embed p)
 
 open RationalScalarExtension public
 
@@ -152,7 +152,7 @@ applyExtendedCommutes :
   (map : PolynomialMap3) →
   (p : Point3) →
   applyExtendedMap3 E map (liftPoint E p)
-    ≡ liftPoint E (J.applyPolynomialMap3 map p)
+    ≡ liftPoint E (applyPolynomialMap3 map p)
 applyExtendedCommutes E map (point3 x y z) =
   extendedPoint3-ext
     (evalExtendedCommutes E (firstCoordinate map) x y z)
@@ -186,7 +186,7 @@ liftedCollision E =
 
 extendedF-notInjective :
   (E : RationalScalarExtension) →
-  J.¬ Injective (extendedF E)
+  ¬ Injective (extendedF E)
 extendedF-notInjective E =
   collisionImpliesNotInjective
     (extendedF E)
@@ -221,7 +221,7 @@ record ScalarExtensionCounterexample
   constructor scalarExtensionCounterexample
   field
     determinantAuthority : KellerIdentityTransfer E
-    noninjective : J.¬ Injective (extendedF E)
+    noninjective : ¬ Injective (extendedF E)
 
 makeScalarExtensionCounterexample :
   (E : RationalScalarExtension) →
