@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction where
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -11,8 +12,11 @@ import DASHI.Physics.Closure.NSCompactGammaParameterCoverageCompletion as Parame
 import DASHI.Physics.Closure.NSCompactGammaCanonicalParameterBridge as ParameterBridge
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction as RadiusEight
 import DASHI.Physics.Closure.NSCompactGammaFiveHalvesSummationReduction as Summation
+import DASHI.Physics.Closure.NSPeriodicFourierAuthorityAdapters as Selected
 import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization as Young
+import DASHI.Physics.Closure.NSPeriodicFourierNearTriadAuthorityBridge as NearBridge
 import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction as Tail
+import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightAuthorityBridge as RadiusBridge
 import DASHI.Physics.Closure.NSCompactGammaDiniFirstExitReduction as Dini
 import DASHI.Physics.Closure.NSPeriodicContinuationAuthorityAdapter as Continuation
 import DASHI.Physics.Closure.NSCompactGammaCoverageFromContinuationAuthority as Coverage
@@ -20,17 +24,10 @@ import DASHI.Physics.Closure.NSCompactGammaCoverageFromContinuationAuthority as 
 ------------------------------------------------------------------------
 -- One owner for the six universal packages after the finite certificate.
 --
--- The fields are deliberately the earliest honest analytic inputs:
---
---   1. pointwise five-halves decay plus countable coefficient summation;
---   2. cutoff-uniform Fourier product bounds plus one generic Young law;
---   3/4. primitive far-low/far-high chains;
---   5. semantic real-carrier parameter interpretation plus concrete Dini data;
---   6. standard zero/small/diffuse continuation plus the novel exhaustive
---      Gamma-depletion/adaptive-chart classification.
---
--- Carrier-equality fields prevent witnesses proved for different time/state
--- models from being combined into one purported completion package.
+-- Standard Bony, commutator, Sobolev-tail and continuation theorems are consumed
+-- through exact carrier adapters.  The remaining fields are the genuinely novel
+-- compact-Gamma interpretations, normalizations, boundary estimates and all-data
+-- classification.  Carrier-equality fields prevent cross-model witness mixing.
 ------------------------------------------------------------------------
 
 record IndexedFiveHalvesUniversal
@@ -109,19 +106,31 @@ record UniversalPeriodicFourierTailInputs
     (Index : Set i)
     (S : OfficialInitialDataSetting i) : Set (lsuc i) where
   field
-    SharedTime SharedState : Set i
+    SharedShell SharedTime SharedState : Set i
+
+    harmonicAuthority :
+      Selected.SelectedPeriodicHarmonicAuthority
+        A Index SharedShell SharedTime SharedState
 
     fiveHalvesPointwise :
       Summation.FiveHalvesPointwiseSummationInputs A Index
 
     youngLaw : Young.OrderedYoungLaw A
-    nearTriad :
-      Young.FactorizedNearTriadInputs A Index youngLaw
 
-    radiusEight : Tail.RadiusEightPrimitiveInputs A Index
+    nearTriadInterpretation :
+      NearBridge.NearTriadAuthorityInterpretation
+        A Index SharedShell SharedTime SharedState
+        harmonicAuthority youngLaw
+
+    radiusEightInterpretation :
+      RadiusBridge.RadiusEightAuthorityInterpretation
+        A Index SharedShell SharedTime SharedState
+        harmonicAuthority
 
     realCarrier :
-      RealCarrierInwardCoercivePackage A Index radiusEight
+      RealCarrierInwardCoercivePackage A Index
+        (RadiusBridge.authorityInterpretationToRadiusEightPrimitive
+          radiusEightInterpretation)
 
     continuationAuthority :
       Continuation.SelectedPeriodicContinuationAuthority S
@@ -133,10 +142,13 @@ record UniversalPeriodicFourierTailInputs
       Summation.Time fiveHalvesPointwise ≡ SharedTime
     fiveHalvesStateCoherent :
       Summation.State fiveHalvesPointwise ≡ SharedState
-    nearTriadTimeCoherent :
-      Young.Time nearTriad ≡ SharedTime
-    radiusEightTimeCoherent :
-      Tail.Time radiusEight ≡ SharedTime
+
+    fiveHalvesSelectedStateCoherent : ∀ q τ →
+      subst (λ Carrier → Carrier) fiveHalvesStateCoherent
+        (Summation.selectedState fiveHalvesPointwise q τ) ≡
+      Selected.selectedState harmonicAuthority q
+        (subst (λ Carrier → Carrier) fiveHalvesTimeCoherent τ)
+
     diniTimeCoherent :
       Dini.Time (diniFirstExit realCarrier) ≡ SharedTime
     diniStateCoherent :
@@ -155,6 +167,24 @@ fiveHalves :
   IndexedFiveHalvesUniversal A Index
 fiveHalves U =
   pointwiseSummationToIndexedFiveHalves (fiveHalvesPointwise U)
+
+nearTriad :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i}
+    {S : OfficialInitialDataSetting i} →
+  (U : UniversalPeriodicFourierTailInputs A Index S) →
+  Young.FactorizedNearTriadInputs A Index (youngLaw U)
+nearTriad U =
+  NearBridge.authorityInterpretationToFactorizedNearTriad
+    (nearTriadInterpretation U)
+
+radiusEight :
+  ∀ {i} {A : AbsorptionArithmetic} {Index : Set i}
+    {S : OfficialInitialDataSetting i} →
+  UniversalPeriodicFourierTailInputs A Index S →
+  Tail.RadiusEightPrimitiveInputs A Index
+radiusEight U =
+  RadiusBridge.authorityInterpretationToRadiusEightPrimitive
+    (radiusEightInterpretation U)
 
 universalFiveHalvesEndpoint :
   ∀ {i} {A : AbsorptionArithmetic} {Index : Set i}
