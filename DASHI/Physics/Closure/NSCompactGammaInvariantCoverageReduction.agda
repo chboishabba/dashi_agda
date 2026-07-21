@@ -9,11 +9,6 @@ open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
 
 ------------------------------------------------------------------------
 -- Real-carrier invariant-region logic.
---
--- Once continuity/Dini regularity and the four strict boundary estimates have
--- been proved in the concrete real carrier, a first exit is impossible.  This
--- module performs that no-first-exit argument exactly; it does not replace any
--- boundary differential estimate by an opaque final invariant-field assumption.
 ------------------------------------------------------------------------
 
 data CompactGammaBoundaryFace : Set where
@@ -25,7 +20,6 @@ data CompactGammaBoundaryFace : Set where
 record FirstExitBoundaryReduction (i : Level) : Set (lsuc i) where
   field
     Time State : Set i
-
     FirstExit : Time → State → Set i
     BoundaryHit : CompactGammaBoundaryFace → Time → State → Set i
 
@@ -35,13 +29,10 @@ record FirstExitBoundaryReduction (i : Level) : Set (lsuc i) where
 
     gammaFloorStrictlyInward : ∀ τ u →
       BoundaryHit gammaFloorFace τ u → ⊥
-
     packetEnergyFloorStrictlyInward : ∀ τ u →
       BoundaryHit packetEnergyFloorFace τ u → ⊥
-
     offPacketCeilingStrictlyInward : ∀ τ u →
       BoundaryHit offPacketCeilingFace τ u → ⊥
-
     sizeCeilingStrictlyInward : ∀ τ u →
       BoundaryHit sizeCeilingFace τ u → ⊥
 
@@ -52,27 +43,19 @@ compactGammaFirstExitImpossible :
   ∀ τ u → FirstExit R τ u → ⊥
 compactGammaFirstExitImpossible R τ u exit
   with firstExitHitsBoundary R τ u exit
-... | gammaFloorFace , hit =
-  gammaFloorStrictlyInward R τ u hit
+... | gammaFloorFace , hit = gammaFloorStrictlyInward R τ u hit
 ... | packetEnergyFloorFace , hit =
   packetEnergyFloorStrictlyInward R τ u hit
 ... | offPacketCeilingFace , hit =
   offPacketCeilingStrictlyInward R τ u hit
-... | sizeCeilingFace , hit =
-  sizeCeilingStrictlyInward R τ u hit
+... | sizeCeilingFace , hit = sizeCeilingStrictlyInward R τ u hit
 
 ------------------------------------------------------------------------
 -- Official-data coverage logic.
 --
--- The fixed positive absolute-floor atlas is already refuted.  A viable route
--- must therefore classify each official datum into one of:
---
---   zero, direct small-data, direct diffuse-spectrum BKM,
---   normalized/adaptive compact-Gamma chart, or depletion/BKM.
---
--- The chart branch explicitly carries normalization/adaptive-floor validity,
--- locally finite switching, summable switch costs and preservation between
--- switches.  Pattern matching below proves the universal replacement mechanism.
+-- Every branch receives the same official smooth/finite-energy witness.  This is
+-- essential for standard small-data and BKM continuation adapters and prevents a
+-- branch theorem proved for a weaker or unrelated datum class from being reused.
 ------------------------------------------------------------------------
 
 record AdaptiveChartOrDirectBKM
@@ -98,33 +81,34 @@ record AdaptiveChartOrDirectBKM
       ⊎ AdaptiveChartRoute u₀)))
 
     zeroDatumContinues : ∀ u₀ →
+      SmoothDivergenceFreeFiniteEnergy S u₀ →
       ZeroDatum u₀ → UniversalContinuationMechanism S u₀
 
     smallDataContinues : ∀ u₀ →
+      SmoothDivergenceFreeFiniteEnergy S u₀ →
       SmallData u₀ → UniversalContinuationMechanism S u₀
 
     diffuseSpectrumBKMContinues : ∀ u₀ →
+      SmoothDivergenceFreeFiniteEnergy S u₀ →
       DiffuseSpectrum u₀ → UniversalContinuationMechanism S u₀
 
     gammaDepletionBKMContinues : ∀ u₀ →
+      SmoothDivergenceFreeFiniteEnergy S u₀ →
       GammaDepleted u₀ → UniversalContinuationMechanism S u₀
 
     chartRouteSuppliesNormalizationOrAdaptiveFloor : ∀ u₀ →
       AdaptiveChartRoute u₀ → PacketNormalizationOrAdaptiveFloor u₀
-
     chartRoutePiecewiseConstant : ∀ u₀ →
       AdaptiveChartRoute u₀ → ChartSelectionPiecewiseConstant u₀
-
     chartRouteSwitchesLocallyFinite : ∀ u₀ →
       AdaptiveChartRoute u₀ → ChartSwitchTimesLocallyFinite u₀
-
     chartRouteSwitchCostsSummable : ∀ u₀ →
       AdaptiveChartRoute u₀ → ChartSwitchCostsSummable u₀
-
     chartRoutePreservedBetweenSwitches : ∀ u₀ →
       AdaptiveChartRoute u₀ → CompactGammaPreservedBetweenSwitches u₀
 
     controlledAdaptiveChartContinues : ∀ u₀ →
+      SmoothDivergenceFreeFiniteEnergy S u₀ →
       AdaptiveChartRoute u₀ →
       PacketNormalizationOrAdaptiveFloor u₀ →
       ChartSelectionPiecewiseConstant u₀ →
@@ -146,14 +130,14 @@ adaptiveChartOrDirectBKMMechanism {S = S} C = record
     SmoothDivergenceFreeFiniteEnergy S u₀ →
     UniversalContinuationMechanism S u₀
   close u₀ official with officialCaseSplit C u₀ official
-  ... | inj₁ zero = zeroDatumContinues C u₀ zero
-  ... | inj₂ (inj₁ small) = smallDataContinues C u₀ small
+  ... | inj₁ zero = zeroDatumContinues C u₀ official zero
+  ... | inj₂ (inj₁ small) = smallDataContinues C u₀ official small
   ... | inj₂ (inj₂ (inj₁ diffuse)) =
-    diffuseSpectrumBKMContinues C u₀ diffuse
+    diffuseSpectrumBKMContinues C u₀ official diffuse
   ... | inj₂ (inj₂ (inj₂ (inj₁ depleted))) =
-    gammaDepletionBKMContinues C u₀ depleted
+    gammaDepletionBKMContinues C u₀ official depleted
   ... | inj₂ (inj₂ (inj₂ (inj₂ chart))) =
-    controlledAdaptiveChartContinues C u₀ chart
+    controlledAdaptiveChartContinues C u₀ official chart
       (chartRouteSuppliesNormalizationOrAdaptiveFloor C u₀ chart)
       (chartRoutePiecewiseConstant C u₀ chart)
       (chartRouteSwitchesLocallyFinite C u₀ chart)
