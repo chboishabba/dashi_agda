@@ -81,7 +81,7 @@ linearAmbiguityPenalty =
     "each unresolved source alternative contributes one unit to the selected reference score"
 
 record SheetAwareMDLReceipt : Set where
-  constructor sheetAwareMDLReceipt
+  constructor mkSheetAwareMDLReceipt
   field
     modelCostSeparatedFromResidual : Bool
     ambiguityCostSeparatedFromResidual : Bool
@@ -96,7 +96,7 @@ record SheetAwareMDLReceipt : Set where
 
 sheetAwareMDLReceipt : SheetAwareMDLReceipt
 sheetAwareMDLReceipt =
-  sheetAwareMDLReceipt
+  mkSheetAwareMDLReceipt
     true true true true
     false refl
     false refl
