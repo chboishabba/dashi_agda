@@ -19,6 +19,10 @@ EXPECTED = {
         "patchRegimeHodgeAssemblyLevel": "machineChecked",
         "patchRegimeHodgeEstimateInputsLevel": "conditional",
     },
+    "BalabanPatchRegimeGreenUniformity.agda": {
+        "patchRegimeGreenAssemblyLevel": "machineChecked",
+        "patchRegimeGreenEstimateInputsLevel": "conditional",
+    },
     "BalabanBackgroundPerturbationBudget.agda": {
         "backgroundPerturbationAssemblyLevel": "machineChecked",
         "backgroundPerturbationComponentInputsLevel": "conditional",
@@ -42,6 +46,10 @@ EXPECTED = {
     "BalabanExplicitContractionBudget.agda": {
         "explicitContractionBudgetAssemblyLevel": "machineChecked",
         "explicitNumericalSmallnessInputsLevel": "conditional",
+    },
+    "BalabanExplicitSmallnessWindow.agda": {
+        "explicitSmallnessWindowAssemblyLevel": "machineChecked",
+        "explicitSmallnessThresholdInputsLevel": "conditional",
     },
     "BalabanCommonSmallFieldRadius.agda": {
         "commonSmallFieldRadiusAssemblyLevel": "machineChecked",
