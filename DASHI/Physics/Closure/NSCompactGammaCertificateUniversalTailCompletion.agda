@@ -6,7 +6,7 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSCompactGammaFourCriticalObligations
 import DASHI.Physics.Closure.NSCompactGammaGeneratedCertificateBridge as Generated
-import DASHI.Physics.Closure.NSPeriodicFourierNearTriadPreYoung as Near
+import DASHI.Physics.Closure.NSPeriodicFourierYoungFactorization as Young
 import DASHI.Physics.Closure.NSPeriodicFourierRadiusEightPrimitiveReduction as Tail
 import DASHI.Physics.Closure.NSPeriodicFourierUniversalTailReduction as Universal
 
@@ -49,12 +49,12 @@ certificateSuppliesNearTriadAbsorption :
   (C : CheckedCertificateWithUniversalTailInputs A Index S) →
   ∀ q τ →
   _≤_ A
-    (Near.nearTriadMagnitude
+    (Young.nearTriadMagnitude
       (Universal.nearTriad (universalInputs C)) q τ)
     (_+_ A
-      (Near.deltaDissipation
+      (Young.deltaDissipation
         (Universal.nearTriad (universalInputs C)) q τ)
-      (Near.residualEnvelope
+      (Young.residualEnvelope
         (Universal.nearTriad (universalInputs C)) q τ))
 certificateSuppliesNearTriadAbsorption C =
   Universal.universalNearTriadEndpoint (universalInputs C)
