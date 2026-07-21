@@ -40,12 +40,17 @@ selectFrom offset (x ∷ xs) with selectFrom (suc offset) xs
 selectShell : List Nat → Maybe SelectedShell
 selectShell = selectFrom zero
 
+selectNonzeroShell : List Nat → Maybe SelectedShell
+selectNonzeroShell energy with sumEnergy energy
+... | zero = nothing
+... | suc total = selectShell energy
+
 -- Ties are resolved toward the smaller shell index.
 tieEnergy : List Nat
 tieEnergy = 1 ∷ 3 ∷ 3 ∷ 2 ∷ []
 
 tieSelectsFirstMaximum :
-  selectShell tieEnergy ≡ just (selected 1 3)
+  selectNonzeroShell tieEnergy ≡ just (selected 1 3)
 tieSelectsFirstMaximum = refl
 
 data ChartDecision : Set where
@@ -56,7 +61,7 @@ data ChartDecision : Set where
 -- Threshold 1/4: a selected shell receives a normalized chart exactly when
 -- totalEnergy <= 4 * selectedEnergy.  Otherwise the state is classified diffuse.
 classifyAtQuarter : List Nat → ChartDecision
-classifyAtQuarter energy with selectShell energy
+classifyAtQuarter energy with selectNonzeroShell energy
 ... | nothing = zeroBranch
 ... | just best with sumEnergy energy ≤ᵇ 4 * score best
 ... | true = normalizedChart (shell best)
@@ -64,6 +69,9 @@ classifyAtQuarter energy with selectShell energy
 
 zeroEnergy : List Nat
 zeroEnergy = []
+
+nonemptyZeroEnergy : List Nat
+nonemptyZeroEnergy = 0 ∷ 0 ∷ 0 ∷ []
 
 plateauFourEnergy : List Nat
 plateauFourEnergy = 1 ∷ 1 ∷ 1 ∷ 1 ∷ []
@@ -73,6 +81,10 @@ plateauEightEnergy = 1 ∷ 1 ∷ 1 ∷ 1 ∷ 1 ∷ 1 ∷ 1 ∷ 1 ∷ []
 
 zeroEnergyUsesZeroBranch : classifyAtQuarter zeroEnergy ≡ zeroBranch
 zeroEnergyUsesZeroBranch = refl
+
+nonemptyZeroEnergyUsesZeroBranch :
+  classifyAtQuarter nonemptyZeroEnergy ≡ zeroBranch
+nonemptyZeroEnergyUsesZeroBranch = refl
 
 plateauFourHasNormalizedChart :
   classifyAtQuarter plateauFourEnergy ≡ normalizedChart 0
@@ -103,10 +115,11 @@ data ChartState : Set where
   activeChart : Nat → Nat → ChartState
 
 updateChart : HysteresisThreshold → ChartState → List Nat → ChartState
-updateChart H noChart energy with selectShell energy
+updateChart H noChart energy with selectNonzeroShell energy
 ... | nothing = noChart
 ... | just best = activeChart (shell best) (score best)
-updateChart H (activeChart oldShell oldScore) energy with selectShell energy
+updateChart H (activeChart oldShell oldScore) energy
+  with selectNonzeroShell energy
 ... | nothing = activeChart oldShell oldScore
 ... | just best with shouldSwitch H oldScore (score best)
 ... | true = activeChart (shell best) (score best)
