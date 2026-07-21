@@ -54,6 +54,13 @@ REQUIRED = {
         "siteEnumerationRegression", "bondInversionRegression",
         "bondParsevalRegression", "periodicHodgeRegression",
     ],
+    "BalabanClayAnalyticInhabitationSpine.agda": [
+        "periodicTorus4CarrierLevel = machineChecked",
+        "periodicFiniteAbelianFourierAuthorityLevel = standardImported",
+        "periodicDifferenceFourierAuthorityLevel = standardImported",
+        "periodicLocalBlockGapInputLevel = conditional",
+        "clayYangMillsSubmissionPromoted = false",
+    ],
 }
 
 FORBIDDEN = ("postulate", "{!!}", "{-# TERMINATING #-}")
