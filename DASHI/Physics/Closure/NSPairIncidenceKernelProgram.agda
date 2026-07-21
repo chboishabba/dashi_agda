@@ -53,6 +53,7 @@ open import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram public
 
 -- Focused namespace imports: compile the exact absorbed route and cutset without
 -- flooding the existing public surface with overlapping projection names.
+import DASHI.Physics.Closure.NSCompactGammaFiveHalvesRouteDecision
 import DASHI.Physics.Closure.NSCompactGammaNearTriadRouteDecision
 import DASHI.Physics.Closure.NSCompactGammaNearTriadAbsorptionReduction
 import DASHI.Physics.Closure.NSCompactGammaRadiusEightFourierReduction
