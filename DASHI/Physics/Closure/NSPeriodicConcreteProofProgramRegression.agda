@@ -8,6 +8,7 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteNorms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma public
 open import DASHI.Physics.Closure.NSPeriodicConcreteTriadForms public
 open import DASHI.Physics.Closure.NSPeriodicConcreteRationalCertificate public
+open import DASHI.Physics.Closure.NSPeriodicConcreteFullOperatorReceipt public
 open import DASHI.Physics.Closure.NSPeriodicConcreteFiveHalvesFalsification public
 open import DASHI.Physics.Closure.NSPeriodicConcreteBoundaryBalance public
 open import DASHI.Physics.Closure.NSPeriodicConcreteAdaptiveChart public
@@ -39,6 +40,9 @@ nearBudgetRegression = refl
 
 combinedTailRegression : combinedTailAtEight128 ≡ 9
 combinedTailRegression = refl
+
+fullOperatorRegression : fullOperatorCheckedInteractions ≡ 221360
+fullOperatorRegression = refl
 
 fiveHalvesCounterexampleRegression :
   counterexampleAdjacentWeightedRatioSquared ≡ 33554432
