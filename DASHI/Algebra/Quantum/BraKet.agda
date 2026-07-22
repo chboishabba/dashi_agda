@@ -6,7 +6,7 @@ open import DASHI.Algebra.Quantum.Unitary
 
 ------------------------------------------------------------------------
 -- Explicit notation-level wrappers around the existing abstract inner product.
--- This adds no new Hilbert-space authority: bras are the canonical wrappers of
+-- This adds no new Hilbert-space authority: bras are canonical dual wrappers of
 -- vectors supplied by the same inner-product carrier.
 
 record Ket (S : Set) : Set where
@@ -39,6 +39,42 @@ ketOf-braOf :
   ketOf (braOf ψ) ≡ ψ
 ketOf-braOf (ket _) = refl
 
+------------------------------------------------------------------------
+-- Dagger interface.  In the canonical wrapper model, taking the dagger changes
+-- variance (ket to bra or bra to ket) while preserving the underlying vector.
+
+record DaggerStructure (S : Set) : Set₁ where
+  field
+    ketDagger : Ket S → Bra S
+    braDagger : Bra S → Ket S
+
+    ketDaggerInvolutive :
+      ∀ ψ →
+      braDagger (ketDagger ψ) ≡ ψ
+
+    braDaggerInvolutive :
+      ∀ φ →
+      ketDagger (braDagger φ) ≡ φ
+
+open DaggerStructure public
+
+canonicalDaggerStructure :
+  ∀ {S : Set} →
+  DaggerStructure S
+canonicalDaggerStructure =
+  record
+    { ketDagger = braOf
+    ; braDagger = ketOf
+    ; ketDaggerInvolutive = ketOf-braOf
+    ; braDaggerInvolutive = braOf-ketOf
+    }
+
+daggerKet : ∀ {S : Set} → Ket S → Bra S
+daggerKet = ketDagger canonicalDaggerStructure
+
+daggerBra : ∀ {S : Set} → Bra S → Ket S
+daggerBra = braDagger canonicalDaggerStructure
+
 braKet :
   ∀ {A : ComplexAxioms} {S : Set} →
   InnerProductSpace A S →
@@ -52,7 +88,7 @@ ketBraDiagonal :
   ∀ {A : ComplexAxioms} {S : Set} →
   (IPS : InnerProductSpace A S) →
   (ψ : Ket S) →
-  braKet IPS (braOf ψ) ψ
+  braKet IPS (daggerKet ψ) ψ
   ≡ InnerProductSpace.⟪_,_⟫ IPS (ketVector ψ) (ketVector ψ)
 ketBraDiagonal IPS (ket ψ) = refl
 
@@ -62,11 +98,13 @@ record BraKetInterface
   (IPS : InnerProductSpace A S) : Set₁ where
   field
     makeKet : S → Ket S
-    makeBra : Ket S → Bra S
+    dagger : DaggerStructure S
     bracket : Bra S → Ket S → ComplexAxioms.ℂ A
     bracketIsInnerProduct :
       ∀ φ ψ →
-      bracket (makeBra (makeKet φ)) (makeKet ψ)
+      bracket
+        (ketDagger dagger (makeKet φ))
+        (makeKet ψ)
       ≡ InnerProductSpace.⟪_,_⟫ IPS φ ψ
 
 open BraKetInterface public
@@ -78,7 +116,7 @@ canonicalBraKetInterface :
 canonicalBraKetInterface IPS =
   record
     { makeKet = ket
-    ; makeBra = braOf
+    ; dagger = canonicalDaggerStructure
     ; bracket = braKet IPS
     ; bracketIsInnerProduct = λ _ _ → refl
     }
