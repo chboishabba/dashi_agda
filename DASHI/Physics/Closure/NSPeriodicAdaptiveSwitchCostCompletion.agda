@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchCostCompletion where
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
@@ -16,7 +16,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- costs, and control of potential jumps by the selected switch budget.
 ------------------------------------------------------------------------
 
-data SwitchingControl (LocallyFinite Summable : Set) : Set where
+data SwitchingControl
+    {l f : Level}
+    (LocallyFinite : Set l)
+    (Summable : Set f) : Set (l ⊔ f) where
   locallyFiniteControl : LocallyFinite → SwitchingControl LocallyFinite Summable
   summableControl : Summable → SwitchingControl LocallyFinite Summable
 
