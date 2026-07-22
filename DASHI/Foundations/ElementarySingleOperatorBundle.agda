@@ -12,6 +12,8 @@ open import DASHI.Foundations.ElementaryCalculatorSmokeModel public
 open import DASHI.Foundations.TernaryElementaryOperatorCandidate public
 open import DASHI.Foundations.TernaryWitnessIndependentRepresentation public
 open import DASHI.Foundations.TernaryCalculatorUniversality public
+open import DASHI.Foundations.TernaryCalculatorSmokeModel public
 open import DASHI.Foundations.TernaryElementarySearchCertificate public
 open import DASHI.Foundations.TernaryElementarySearchSoundness public
+open import DASHI.Foundations.TernaryElementarySearchSmokeModel public
 open import DASHI.Foundations.ElementarySingleOperatorRegression public
