@@ -40,6 +40,11 @@ Every constructor lowers to the `1/exp/log/sub` kernel and then through the
 single-node EML compiler.  `CalculatorMeaning` is the independent semantic
 obligation: syntactic lowering alone does not establish global complex identities.
 
+`ElementaryCalculatorAnalyticPackage` assembles the final binary receipt for one
+selected semantics: an EML analytic package, independent calculator meaning, a
+calculator-domain predicate, source definedness, compiled definedness, and the
+semantic correctness theorem all travel together.
+
 ## Constant-free ternary candidate
 
 `TernaryWitnessIndependentRepresentation` proves that diagonal unit generation
