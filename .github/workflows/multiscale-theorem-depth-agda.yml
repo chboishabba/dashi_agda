@@ -12,8 +12,17 @@ on:
       - 'DASHI/Core/MultiscaleTheoremDepthRegression.agda'
       - 'DASHI/MDL/MultiscaleCodingTargets.agda'
       - 'DASHI/Physics/DiscreteContinuumKernelTargets.agda'
+      - 'DASHI/Cognition/CompressionAttractor.agda'
+      - 'DASHI/Control/DynamicalTernarySignal.agda'
+      - 'DASHI/Cognition/ResponseKink.agda'
+      - 'DASHI/Cognition/KepplerAdmissibility.agda'
+      - 'DASHI/Cognition/MicrocolumnPhase.agda'
+      - 'DASHI/Cognition/CuspCompressionModel.agda'
+      - 'DASHI/Cognition/PatternGenerator.agda'
+      - 'DASHI/Cognition/DASHICognitionDynamicsRegression.agda'
       - 'scripts/validate_multiscale_flagship_receipt.py'
       - 'Docs/formal/MultiscaleTheoremDepthRoadmap.md'
+      - 'Docs/formal/DASHICognitionDynamics.md'
       - '.github/workflows/multiscale-theorem-depth-agda.yml'
 
 concurrency:
@@ -62,7 +71,8 @@ jobs:
               DASHI/Core/TritCPRMultiscaleInstance.agda \
               DASHI/MDL/MultiscaleCodingTargets.agda \
               DASHI/Physics/DiscreteContinuumKernelTargets.agda \
-              DASHI/Core/MultiscaleTheoremDepthRegression.agda
+              DASHI/Core/MultiscaleTheoremDepthRegression.agda \
+              DASHI/Cognition/DASHICognitionDynamicsRegression.agda
           ) > agda-multiscale-theorem-depth.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
