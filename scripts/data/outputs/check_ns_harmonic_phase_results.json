@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "full_operator_digest": true,
+    "full_operator_does_not_fit_one_eighth_in_test_norm": true,
+    "full_operator_promotions_false": true,
+    "multiplier_R8_exact": true,
+    "multiplier_digest": true,
+    "multiplier_promotions_false": true,
+    "multiplier_scale_invariant": true,
+    "near_candidates_are_one": true,
+    "near_cutoff_rows_present": true,
+    "near_digest": true,
+    "near_promotions_false": true
+  },
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "schema": "check_ns_harmonic_phase_results.v1"
+}

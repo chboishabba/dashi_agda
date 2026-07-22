@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "receipts": [
+    {
+      "digest": true,
+      "file": "boundary.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "boundary_galerkin.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "coverage.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "far_high.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "far_low.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "full_operator.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "multiplier.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "five.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "trajectory.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "near.json",
+      "promotion_false": true
+    },
+    {
+      "digest": true,
+      "file": "near_full.json",
+      "promotion_false": true
+    }
+  ],
+  "schema": "check_ns_periodic_phase_receipts.v1"
+}

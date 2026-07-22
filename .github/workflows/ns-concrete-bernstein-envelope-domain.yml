@@ -7,14 +7,10 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGamma*.agda'
       - 'DASHI/Physics/Closure/NSPeriodic*.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
-      - 'scripts/ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/ns_compact_gamma_certificate_generator.py'
-      - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
-      - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
+      - 'scripts/ns_*.py'
+      - 'scripts/check_ns_*.py'
+      - 'scripts/data/outputs/ns_*.json'
+      - 'scripts/data/outputs/check_ns_*.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
   push:
     paths:
@@ -22,14 +18,10 @@ on:
       - 'DASHI/Physics/Closure/NSCompactGamma*.agda'
       - 'DASHI/Physics/Closure/NSPeriodic*.agda'
       - 'DASHI/Physics/Closure/NSClaySubmissionReadinessGate.agda'
-      - 'scripts/ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/check_ns_compact_gamma_exact_cutset_audit.py'
-      - 'scripts/ns_compact_gamma_certificate_generator.py'
-      - 'scripts/check_ns_compact_gamma_certificate_bundle.py'
-      - 'scripts/data/outputs/ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_exact_cutset_audit.json'
-      - 'scripts/data/outputs/ns_compact_gamma_certificate_bundle.json'
-      - 'scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json'
+      - 'scripts/ns_*.py'
+      - 'scripts/check_ns_*.py'
+      - 'scripts/data/outputs/ns_*.json'
+      - 'scripts/data/outputs/check_ns_*.json'
       - '.github/workflows/ns-concrete-bernstein-envelope-domain.yml'
 
 concurrency:
@@ -42,7 +34,7 @@ permissions:
 jobs:
   finite-audit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -50,6 +42,8 @@ jobs:
           python-version: '3.12'
       - name: Install numerical dependency
         run: python -m pip install --disable-pip-version-check numpy
+      - name: Audit no-placeholder and fail-closed theorem surface
+        run: python scripts/check_ns_periodic_program_surface.py
       - name: Reproduce finite falsification audit
         run: |
           set -euo pipefail
@@ -76,6 +70,64 @@ jobs:
             "$RUNNER_TEMP/ns-compact-gamma-audit/certificate.json"
           diff -u scripts/data/outputs/check_ns_compact_gamma_certificate_bundle.json \
             "$RUNNER_TEMP/ns-compact-gamma-audit/certificate-check.json"
+      - name: Reproduce concrete carrier proof-and-falsification program
+        run: |
+          set -euo pipefail
+          python scripts/ns_periodic_concrete_proof_program.py \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program.json"
+          python scripts/check_ns_periodic_concrete_proof_program.py \
+            --source-json "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program.json" \
+            --output-json "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program-check.json"
+          diff -u scripts/data/outputs/ns_periodic_concrete_proof_program.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program.json"
+          diff -u scripts/data/outputs/check_ns_periodic_concrete_proof_program.json \
+            "$RUNNER_TEMP/ns-compact-gamma-audit/concrete-program-check.json"
+      - name: Reproduce independent phase receipts
+        run: |
+          set -euo pipefail
+          phase="$RUNNER_TEMP/ns-compact-gamma-audit/phases"
+          mkdir -p "$phase"
+          python scripts/ns_radius8_far_low_exhaustive.py --output-json "$phase/far_low.json"
+          python scripts/ns_radius8_full_operator.py --output-json "$phase/full_operator.json" --K 2 --R 2
+          python scripts/ns_radius8_multiplier_scaling.py --output-json "$phase/multiplier.json"
+          python scripts/ns_radius8_far_high_scan.py --output-json "$phase/far_high.json"
+          python scripts/ns_near_triad_budget_scan.py --output-json "$phase/near.json"
+          python scripts/ns_near_triad_full_factor_scan.py --output-json "$phase/near_full.json"
+          python scripts/ns_five_halves_falsification.py --output-json "$phase/five.json"
+          python scripts/ns_five_halves_galerkin_trajectory.py --output-json "$phase/trajectory.json"
+          python scripts/ns_boundary_face_search.py --output-json "$phase/boundary.json"
+          python scripts/ns_boundary_face_galerkin_search.py --output-json "$phase/boundary_galerkin.json"
+          python scripts/ns_adaptive_chart_coverage_scan.py --output-json "$phase/coverage.json"
+          python scripts/check_ns_periodic_phase_receipts.py \
+            --inputs "$phase/boundary.json" "$phase/boundary_galerkin.json" \
+              "$phase/coverage.json" "$phase/far_high.json" "$phase/far_low.json" \
+              "$phase/full_operator.json" "$phase/multiplier.json" \
+              "$phase/five.json" "$phase/trajectory.json" \
+              "$phase/near.json" "$phase/near_full.json" \
+            --output-json "$phase/check.json"
+          python scripts/check_ns_galerkin_falsifications.py \
+            --trajectory-json "$phase/trajectory.json" \
+            --boundary-json "$phase/boundary_galerkin.json" \
+            --output-json "$phase/galerkin-check.json"
+          python scripts/check_ns_harmonic_phase_results.py \
+            --multiplier-json "$phase/multiplier.json" \
+            --full-operator-json "$phase/full_operator.json" \
+            --near-json "$phase/near_full.json" \
+            --output-json "$phase/harmonic-check.json"
+          diff -u scripts/data/outputs/ns_radius8_far_low_exhaustive.json "$phase/far_low.json"
+          diff -u scripts/data/outputs/ns_radius8_full_operator.json "$phase/full_operator.json"
+          diff -u scripts/data/outputs/ns_radius8_multiplier_scaling.json "$phase/multiplier.json"
+          diff -u scripts/data/outputs/ns_radius8_far_high_scan.json "$phase/far_high.json"
+          diff -u scripts/data/outputs/ns_near_triad_budget_scan.json "$phase/near.json"
+          diff -u scripts/data/outputs/ns_near_triad_full_factor_scan.json "$phase/near_full.json"
+          diff -u scripts/data/outputs/ns_five_halves_falsification.json "$phase/five.json"
+          diff -u scripts/data/outputs/ns_five_halves_galerkin_trajectory.json "$phase/trajectory.json"
+          diff -u scripts/data/outputs/ns_boundary_face_search.json "$phase/boundary.json"
+          diff -u scripts/data/outputs/ns_boundary_face_galerkin_search.json "$phase/boundary_galerkin.json"
+          diff -u scripts/data/outputs/ns_adaptive_chart_coverage_scan.json "$phase/coverage.json"
+          diff -u scripts/data/outputs/check_ns_periodic_phase_receipts.json "$phase/check.json"
+          diff -u scripts/data/outputs/check_ns_galerkin_falsifications.json "$phase/galerkin-check.json"
+          diff -u scripts/data/outputs/check_ns_harmonic_phase_results.json "$phase/harmonic-check.json"
 
   focused-agda:
     needs: finite-audit
@@ -86,7 +138,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check universal periodic-Fourier reductions
+      - name: Check universal periodic-Fourier reductions and concrete program
         shell: bash
         run: |
           set -euo pipefail
