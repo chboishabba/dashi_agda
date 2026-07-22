@@ -10,12 +10,6 @@ import DASHI.Cognition.DashiCognitiveSystem as Cognitive
 
 ------------------------------------------------------------------------
 -- Exact fixed-point control recurrence.
---
--- effectNext = persistence * effect + plasmaGain * plasma
---
--- A physical calibration supplies the scale.  The Agda layer proves the
--- algebraic control structure without pretending arbitrary Nat literals are
--- concentrations in clinical units.
 ------------------------------------------------------------------------
 
 record EffectSiteModel : Set where
@@ -49,12 +43,8 @@ effectSiteTrajectory steps model = iterate steps (effectSiteStep model)
 ------------------------------------------------------------------------
 -- Compensation-versus-impairment margin.
 --
--- A linear compensatory term followed by a cubic impairment term gives the
--- observed small upward kink before collapse without inserting a hand-drawn
--- GELU.  It is the finite polynomial normal form
---
---   support(Ce)    = baseline + compensation * Ce + coupling
---   impairment(Ce) = anesthetic * Ce^3 + obligation * stackDepth.
+-- support(Ce)    = baseline + compensation * Ce + coupling
+-- impairment(Ce) = anesthetic * Ce^3 + obligation * stackDepth
 ------------------------------------------------------------------------
 
 pow : Nat → Nat → Nat
@@ -119,8 +109,7 @@ couplingRaisesSupportExactly :
 couplingRaisesSupportExactly = refl
 
 ------------------------------------------------------------------------
--- Continuous/graded control can be observed through a ternary control band:
--- inactive/projective, compensatory-positive, impairment-negative.
+-- Graded control observed through a ternary control band.
 ------------------------------------------------------------------------
 
 data NatOrdering : Set where
@@ -151,9 +140,7 @@ controlAboveUpperIsNegative : controlTrit 2 5 7 ≡ BT.neg
 controlAboveUpperIsNegative = refl
 
 ------------------------------------------------------------------------
--- Schmitt-style phase gate with stack rebuilding.  This is the exact finite
--- hysteresis mechanism: descent and ascent use different thresholds, and a
--- collapsed system cannot recover until its obligation scaffold is rebuilt.
+-- Schmitt-style phase gate with stack rebuilding.
 ------------------------------------------------------------------------
 
 record HysteresisThresholds : Set where
@@ -170,10 +157,9 @@ data ControlPhase : Set where
   collapsed : ControlPhase
 
 atLeast : Nat → Nat → Bool
-atLeast zero required with required
-... | zero = true
-... | suc _ = false
-atLeast (suc actual) zero = true
+atLeast zero zero = true
+atLeast zero (suc _) = false
+atLeast (suc _) zero = true
 atLeast (suc actual) (suc required) = atLeast actual required
 
 atMost : Nat → Nat → Bool
@@ -221,13 +207,7 @@ sameControlCollapsedPathRemainsCollapsed :
 sameControlCollapsedPathRemainsCollapsed = refl
 
 ------------------------------------------------------------------------
--- Cusp discriminant boundary.
--- For x^3 - r x - h = 0, repeated roots occur at
---
---   4 r^3 = 27 h^2.
---
--- The coefficient 27 is literally 3^3, but it arises from eliminating x
--- between the cubic and its derivative, not from the ternary cognitive gate.
+-- Cubic cusp discriminant.
 ------------------------------------------------------------------------
 
 CuspBoundary : Nat → Nat → Set
