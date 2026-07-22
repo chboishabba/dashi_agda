@@ -8,6 +8,7 @@ open import DASHI.Foundations.EMLConcreteSmokeModel public
 open import DASHI.Foundations.ElementaryCalculator public
 open import DASHI.Foundations.ElementaryCalculatorSemantics public
 open import DASHI.Foundations.ElementaryCalculatorAnalyticPackage public
+open import DASHI.Foundations.ElementaryCalculatorSmokeModel public
 open import DASHI.Foundations.TernaryElementaryOperatorCandidate public
 open import DASHI.Foundations.TernaryWitnessIndependentRepresentation public
 open import DASHI.Foundations.TernaryElementarySearchCertificate public
