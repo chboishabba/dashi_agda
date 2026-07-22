@@ -11,6 +11,7 @@ open import DASHI.Physics.Closure.NSPeriodicFarHighTailCompletion public
 open import DASHI.Physics.Closure.NSPeriodicOfficialHarmonicAuthorityCompletion public
 open import DASHI.Physics.Closure.NSPeriodicWallIHarmonicCompletion public
 open import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureCompletion public
+open import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureStandardAdapter public
 open import DASHI.Physics.Closure.NSCompactGammaNormalizedBoundaryInwardnessCompletion public
 open import DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchCostCompletion public
 open import DASHI.Physics.Closure.NSPeriodicDiffuseSpectrumBKMCompletion public
