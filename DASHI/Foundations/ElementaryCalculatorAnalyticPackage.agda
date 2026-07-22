@@ -11,10 +11,9 @@ open import DASHI.Foundations.ElementaryCalculatorSemantics
 ------------------------------------------------------------------------
 -- Final binary universality package for one selected analytic semantics.
 --
--- The package simultaneously carries branch/domain-sensitive EML laws,
--- compiler-introduced definedness, an independent named calculator semantics,
--- its primitive lowering laws, and a domain proof for every admitted
--- expression/environment pair.
+-- The package simultaneously carries branch/domain-sensitive EML laws, an
+-- independent named calculator semantics, its primitive lowering laws, and an
+-- expression-indexed proof that both source and compiled trees are defined.
 
 record CalculatorAnalyticPackage (M : ExpLogSubModel) : Set₁ where
   field
@@ -26,16 +25,30 @@ record CalculatorAnalyticPackage (M : ExpLogSubModel) : Set₁ where
 
     CalculatorDomain : Env M → CalculatorExpr → Set
 
-    calculatorSourceDefined :
+    calculatorCompilationDefined :
       ∀ ρ t →
       CalculatorDomain ρ t →
-      DefinedCalculator
+      CompilationDefined
         M
         (admissibility emlAnalyticPackage)
         ρ
-        t
+        (lowerCalculator t)
 
 open CalculatorAnalyticPackage public
+
+calculatorSourceDefined :
+  ∀ {M : ExpLogSubModel} →
+  (P : CalculatorAnalyticPackage M) →
+  ∀ ρ t →
+  CalculatorDomain P ρ t →
+  DefinedCalculator
+    M
+    (admissibility (emlAnalyticPackage P))
+    ρ
+    t
+calculatorSourceDefined P ρ t domainProof =
+  sourceDefinedFromCompilation
+    (calculatorCompilationDefined P ρ t domainProof)
 
 calculatorCompiledDefined :
   ∀ {M : ExpLogSubModel} →
@@ -48,10 +61,8 @@ calculatorCompiledDefined :
     ρ
     (compileCalculator t)
 calculatorCompiledDefined P ρ t domainProof =
-  compileEML-preserves-defined
-    (compilerDefinedness (emlAnalyticPackage P))
-    ρ
-    (calculatorSourceDefined P ρ t domainProof)
+  compiledDefinedFromCompilation
+    (calculatorCompilationDefined P ρ t domainProof)
 
 calculatorCompiledHasMeaning :
   ∀ {M : ExpLogSubModel} →
@@ -64,7 +75,7 @@ calculatorCompiledHasMeaning P ρ t domainProof
   rewrite analyticCompileCorrect
             (emlAnalyticPackage P)
             ρ
-            (calculatorSourceDefined P ρ t domainProof) =
+            (calculatorCompilationDefined P ρ t domainProof) =
   lowerCalculator-semantics
     (calculatorPrimitiveLaws P)
     ρ
