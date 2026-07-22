@@ -27,5 +27,8 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{-# TERMINATING #-\}|\{-# 
   exit 1
 fi
 
-scripts/run_agda29_parallel_check.sh \
+agda_bin="${AGDA_BIN:-$(command -v agda)}"
+"$agda_bin" \
+  -i . \
+  -l standard-library \
   DASHI/Cognition/LanguagePhaseEverything.agda
