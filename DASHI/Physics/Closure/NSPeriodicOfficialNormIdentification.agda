@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification where
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -12,8 +13,14 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- This module does not identify a finite numerical matrix norm with the PDE norm
 -- by assertion.  Instead it records every equality and cutoff-uniform operator
--- estimate required for that identification, and derives the shell-vorticity and
--- reconstruction endpoints by transitivity.
+-- estimate required for that identification.  The shell quantities match the
+-- repository's concrete Bernstein chain exactly:
+--
+--   ||P_j omega||_2 <= curlWeightedShell_j,
+--   ||P_j omega||_infinity <= curlWeightedShell_j,
+--   curlWeightedShell_j = 2^(5j/2) ||P_j u||_2
+--
+-- in the selected scalar realization.
 ------------------------------------------------------------------------
 
 record OfficialPeriodicNormIdentification
@@ -31,7 +38,8 @@ record OfficialPeriodicNormIdentification
     biotSavartVorticityL2 biotSavartVelocityH1 :
       Cutoff → State → Scalar A
 
-    shellVelocityL2 shellGradientL2 shellVorticityLInfinity :
+    shellVelocityL2 shellVorticityL2 curlWeightedShell
+      shellVorticityLInfinity :
       Cutoff → Shell → State → Scalar A
 
     weightedFiveHalvesShellSum vorticityLInfinity :
@@ -56,14 +64,17 @@ record OfficialPeriodicNormIdentification
     shellCurlEstimate : ∀ N shell u →
       Admissible N u →
       _≤_ A
-        (shellGradientL2 N shell u)
-        (shellVelocityL2 N shell u)
+        (shellVorticityL2 N shell u)
+        (curlWeightedShell N shell u)
 
-    shellBernsteinEstimate : ∀ N shell u →
+    shellBernsteinFiveHalves : ∀ N shell u →
       Admissible N u →
       _≤_ A
         (shellVorticityLInfinity N shell u)
-        (shellGradientL2 N shell u)
+        (curlWeightedShell N shell u)
+
+    curlWeightedShellMeaning : ∀ N shell u →
+      curlWeightedShell N shell u ≡ shellVelocityL2 N shell u
 
     literalHatAgreesWithOfficialShell : ∀ N shell u →
       shellCoefficientL2 N shell u ≡ shellPhysicalL2 N shell u
@@ -82,6 +93,24 @@ record OfficialPeriodicNormIdentification
 
 open OfficialPeriodicNormIdentification public
 
+officialShellVorticityL2FromVelocity :
+  ∀ {i} {A : AbsorptionArithmetic}
+    {Cutoff Shell State : Set i} →
+  (N : OfficialPeriodicNormIdentification A Cutoff Shell State) →
+  ∀ cutoff shell state →
+  Admissible N cutoff state →
+  _≤_ A
+    (shellVorticityL2 N cutoff shell state)
+    (shellVelocityL2 N cutoff shell state)
+officialShellVorticityL2FromVelocity {A = A} N cutoff shell state admissible =
+  subst
+    (λ rhs →
+      _≤_ A
+        (shellVorticityL2 N cutoff shell state)
+        rhs)
+    (curlWeightedShellMeaning N cutoff shell state)
+    (shellCurlEstimate N cutoff shell state admissible)
+
 officialShellVorticityFromVelocity :
   ∀ {i} {A : AbsorptionArithmetic}
     {Cutoff Shell State : Set i} →
@@ -92,9 +121,13 @@ officialShellVorticityFromVelocity :
     (shellVorticityLInfinity N cutoff shell state)
     (shellVelocityL2 N cutoff shell state)
 officialShellVorticityFromVelocity {A = A} N cutoff shell state admissible =
-  ≤-trans A
-    (shellBernsteinEstimate N cutoff shell state admissible)
-    (shellCurlEstimate N cutoff shell state admissible)
+  subst
+    (λ rhs →
+      _≤_ A
+        (shellVorticityLInfinity N cutoff shell state)
+        rhs)
+    (curlWeightedShellMeaning N cutoff shell state)
+    (shellBernsteinFiveHalves N cutoff shell state admissible)
 
 officialVorticityReconstruction :
   ∀ {i} {A : AbsorptionArithmetic}
