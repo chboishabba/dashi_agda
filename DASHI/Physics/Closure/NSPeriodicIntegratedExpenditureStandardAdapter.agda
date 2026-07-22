@@ -93,8 +93,8 @@ periodicStandardBKMContinuation :
       (Standard.calculus C)
       (Standard.reserveLeaves C)
       (Standard.realFundamentalTheoremRealization C)} →
-  StandardBKMContinuationFromExpenditure A C B →
-  Continuation A C B
+  (K : StandardBKMContinuationFromExpenditure A C B) →
+  Continuation K
 periodicStandardBKMContinuation {C = C} {B = B} K =
   bkmContinuation K
     (vorticityBoundImpliesFinite K
