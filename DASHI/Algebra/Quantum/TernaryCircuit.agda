@@ -1,6 +1,6 @@
 module DASHI.Algebra.Quantum.TernaryCircuit where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_; map)
 
 import DASHI.Algebra.Trit as Trit
