@@ -2,6 +2,7 @@ module DASHI.Foundations.ElementaryCalculatorSmokeModel where
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (zero; suc)
 
 open import DASHI.Foundations.ElementarySingleOperator
 open import DASHI.Foundations.EMLAnalyticDomain
@@ -57,12 +58,23 @@ smokeCalculatorSemantics =
     ; hypotenuseS = λ _ _ → singleton
     }
 
+natVSmoke : ∀ n → natV smokeModel n ≡ singleton
+natVSmoke zero = refl
+natVSmoke (suc n) = refl
+
+integerVSmoke : ∀ n → integerV smokeModel n ≡ singleton
+integerVSmoke (integerLiteral positiveLiteral n) = natVSmoke n
+integerVSmoke (integerLiteral negativeLiteral n) = refl
+
+rationalVSmoke : ∀ q → rationalV smokeModel q ≡ singleton
+rationalVSmoke (rationalLiteral n d) = refl
+
 smokeCalculatorPrimitiveLaws :
   CalculatorPrimitiveLaws smokeModel smokeCalculatorSemantics
 smokeCalculatorPrimitiveLaws =
   record
-    { integerLaw = λ _ → refl
-    ; rationalLaw = λ _ → refl
+    { integerLaw = integerVSmoke
+    ; rationalLaw = rationalVSmoke
     ; piLaw = refl
     ; eLaw = refl
     ; iLaw = refl
