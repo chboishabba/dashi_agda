@@ -118,9 +118,10 @@ complexBranchAnalyticPackage :
   AnalyticEMLCompilerPackage (complexBranchEMLModel A)
 complexBranchAnalyticPackage A =
   record
-    { laws = complexBranchCompilerLaws A
-    ; admissibility = complexBranchAdmissibility A
+    { admissibility = complexBranchAdmissibility A
     ; compilerDefinedness = compilerDefinednessC A
+    ; compilerLawsOnDomain =
+        globalLawsGiveDomainLaws (complexBranchCompilerLaws A)
     }
 
 ------------------------------------------------------------------------
