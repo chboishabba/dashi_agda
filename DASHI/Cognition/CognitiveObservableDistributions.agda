@@ -2,16 +2,10 @@ module DASHI.Cognition.CognitiveObservableDistributions where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.List using (length)
 
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
-
-------------------------------------------------------------------------
--- Exact finite empirical distributions.  Expectations are represented by
--- numerator/sample-count pairs so no hidden floating-point or division axiom
--- is introduced into the proof layer.
-------------------------------------------------------------------------
 
 eqNat : Nat → Nat → Nat
 eqNat zero zero = 1
@@ -53,11 +47,6 @@ stackDepthDistribution :
   FiniteNatDistribution
 stackDepthDistribution configs = fromSamples (stackDepths configs)
 
-------------------------------------------------------------------------
--- Baseline-margin distribution.  Positive, boundary, and negative masses are
--- kept separately; positive/negative magnitudes remain available as samples.
-------------------------------------------------------------------------
-
 positiveMagnitude : Cognitive.SignedMargin → Nat
 positiveMagnitude (Cognitive.positiveMargin n) = n
 positiveMagnitude _ = 0
@@ -86,7 +75,7 @@ sumMarginMap f [] = 0
 sumMarginMap f (margin ∷ margins) = f margin + sumMarginMap f margins
 
 record BaselineMarginDistribution : Set where
-  constructor baselineMarginDistribution
+  constructor mkBaselineMarginDistribution
   field
     marginSamples : List Cognitive.SignedMargin
     positiveMass : Nat
@@ -98,7 +87,7 @@ record BaselineMarginDistribution : Set where
 baselineMarginDistribution :
   List Cognitive.SignedMargin → BaselineMarginDistribution
 baselineMarginDistribution margins =
-  baselineMarginDistribution
+  mkBaselineMarginDistribution
     margins
     (sumMarginMap positiveIndicator margins)
     (sumMarginMap boundaryIndicator margins)
