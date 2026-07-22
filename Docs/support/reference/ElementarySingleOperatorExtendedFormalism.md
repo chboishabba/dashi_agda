@@ -4,7 +4,9 @@
 
 This tranche extends the structural EML compiler merged in PR #312 without
 promoting branch-sensitive scalar analysis or the constant-free ternary candidate
-beyond what has actually been proved.
+beyond what has actually been proved.  The focused workflow
+`elementary-single-operator-extended.yml` checks every module listed below and
+runs the fail-closed scout/audit lane.
 
 ## Binary EML
 
