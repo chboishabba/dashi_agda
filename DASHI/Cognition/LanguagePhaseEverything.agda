@@ -5,3 +5,4 @@ import DASHI.Cognition.KepplerGlutamateZPFMDLTest
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.ResidualPhaseGeometry
 import DASHI.Cognition.VisualCompressionAttractors
+import DASHI.Cognition.DASHICognitionDynamicsRegression
