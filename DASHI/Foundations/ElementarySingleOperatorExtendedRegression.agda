@@ -2,14 +2,19 @@ module DASHI.Foundations.ElementarySingleOperatorExtendedRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero)
+open import Data.List.Base using ([]; _∷_)
 
 open import DASHI.Foundations.ElementarySingleOperator
 open import DASHI.Foundations.ElementaryCalculator
 open import DASHI.Foundations.ElementaryCalculatorSemantics
 open import DASHI.Foundations.EMLConcreteSmokeModel
 open import DASHI.Foundations.ElementaryCalculatorSmokeModel
+open import DASHI.Foundations.TernaryElementaryOperatorCandidate
+open import DASHI.Foundations.TernaryCalculatorUniversality
 open import DASHI.Foundations.TernaryCalculatorSmokeModel
+open import DASHI.Foundations.TernaryElementaryBoundedEnumeration
 open import DASHI.Foundations.TernaryElementarySearchCertificate
+open import DASHI.Foundations.TernaryElementarySearchSoundness
 open import DASHI.Foundations.TernaryElementarySearchSmokeModel
 open import DASHI.Foundations.DivergenceComparisonPackage
 open import DASHI.Algebra.Quantum.TernaryCircuit
@@ -69,17 +74,25 @@ smokeTernaryCalculatorRegression :
 smokeTernaryCalculatorRegression = smokeTernaryCalculatorCorrect
 
 ------------------------------------------------------------------------
--- Search and qutrit wiring.
+-- Search and certificate wiring.
 
 diagonalCandidateStatusShape :
   status (diagonalUnitSearchCandidate zero)
   ≡ symbolicCandidate
 diagonalCandidateStatusShape = refl
 
+boundedDepthZeroRegression :
+  enumerateAtMost (zero ∷ []) zero
+  ≡ varT zero ∷ []
+boundedDepthZeroRegression = refl
+
 searchCertificateSoundnessRegression :
   evaluateExpr smokeRewriteOperations smokeEnvironment oneR
   ≡ evaluateExpr smokeRewriteOperations smokeEnvironment oneR
 searchCertificateSoundnessRegression = smokeCertifiedCandidateSound
+
+------------------------------------------------------------------------
+-- Qutrit basis, circuit, and controlled-pair wiring.
 
 qutritCycleRegression :
   cycleQutrit (cycleQutrit (cycleQutrit qNeg)) ≡ qNeg
@@ -96,6 +109,16 @@ qutritCircuitReverseRegression :
   ≡ qNeg
 qutritCircuitReverseRegression =
   reverseCircuitLeft (applyThen cycleGate halt) qNeg
+
+controlledQutritPairRegression :
+  inverseControlledCycle
+    (controlledCycle (qpair qZero qNeg))
+  ≡ qpair qZero qNeg
+controlledQutritPairRegression =
+  controlledCycleInverseLeft (qpair qZero qNeg)
+
+------------------------------------------------------------------------
+-- Divergence role defaults.
 
 defaultOptimizationMetric :
   defaultDivergenceForRole optimizationLoss ≡ squaredHellinger
