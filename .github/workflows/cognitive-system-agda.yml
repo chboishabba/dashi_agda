@@ -1,18 +1,7 @@
 name: Cognitive system Agda
 
-# Focused type-check lane for the theorem-valued cognition aggregate.
 on:
   pull_request:
-    paths:
-      - 'DASHI/Cognition/**'
-      - 'DASHI/Algebra/BalancedTernary.agda'
-      - 'Base369.agda'
-      - 'Ultrametric.agda'
-      - 'flake.nix'
-      - '.github/workflows/cognitive-system-agda.yml'
-  push:
-    branches:
-      - cognitive-system-analytic-closure
     paths:
       - 'DASHI/Cognition/**'
       - 'DASHI/Algebra/BalancedTernary.agda'
