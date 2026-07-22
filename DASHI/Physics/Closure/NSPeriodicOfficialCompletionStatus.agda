@@ -16,6 +16,9 @@ concreteBernsteinBE1ToBE8AdapterLevel = machineChecked
 publishedPeriodicHarmonicAuthorityAdapterLevel : ProofLevel
 publishedPeriodicHarmonicAuthorityAdapterLevel = machineChecked
 
+officialFarLowSchurFactorAdapterLevel : ProofLevel
+officialFarLowSchurFactorAdapterLevel = machineChecked
+
 concreteRealIntegrationAdapterLevel : ProofLevel
 concreteRealIntegrationAdapterLevel = machineChecked
 
