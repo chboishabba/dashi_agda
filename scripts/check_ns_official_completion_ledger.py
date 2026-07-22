@@ -22,6 +22,12 @@ REQUIRED = [
     "all_data_coverage",
     "cutoff_continuum_bkm",
 ]
+REUSED = [
+    "concrete_bernstein_be1_be8",
+    "published_periodic_harmonic_authority",
+    "concrete_real_integration",
+    "galerkin_g1_g19_continuum",
+]
 
 
 def digest(payload: Any) -> str:
@@ -39,6 +45,8 @@ def main() -> None:
     supplied = payload.pop("sha256", None)
     stages = payload.get("stages", [])
     stage_map = {stage.get("id"): stage for stage in stages}
+    reused = payload.get("reused_repository_lanes", [])
+    reused_map = {lane.get("id"): lane for lane in reused}
     promotion = payload.get("promotion", {})
     negatives = payload.get("negative_findings_preserved", {})
 
@@ -57,6 +65,16 @@ def main() -> None:
             stage_map.get(stage, {}).get("analytic_input")
             in {"conditional", "conjectural"}
             for stage in REQUIRED
+        ),
+        "all_reused_lanes_present": all(lane in reused_map for lane in REUSED),
+        "reused_lanes_are_machine_checked_adapters": all(
+            reused_map.get(lane, {}).get("status") == "machine_checked_adapter"
+            for lane in REUSED
+        ),
+        "reused_lanes_name_source_and_adapter": all(
+            bool(reused_map.get(lane, {}).get("source"))
+            and bool(reused_map.get(lane, {}).get("adapter"))
+            for lane in REUSED
         ),
         "all_promotions_false": bool(promotion)
         and all(value is False for value in promotion.values()),
