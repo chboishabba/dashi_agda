@@ -2,6 +2,7 @@ module DASHI.Foundations.TernaryElementarySearchCertificate where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Empty using (⊥)
 
 open import DASHI.Foundations.ElementarySingleOperator using (Var)
 open import DASHI.Foundations.TernaryElementaryOperatorCandidate
@@ -186,9 +187,7 @@ record SemanticCounterexample
   field
     valuesDiffer :
       evaluate candidateExpression ≡ evaluate targetExpression →
-      Empty
-  where
-    data Empty : Set where
+      ⊥
 
 ------------------------------------------------------------------------
 -- The known diagonal unit remains a symbolic candidate until its analytic
