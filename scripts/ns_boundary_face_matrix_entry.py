@@ -29,9 +29,11 @@ def main() -> None:
     expected = EXPECTED_STRICT[args.face]
     observed = face["strict_inward_on_sample"] is True
     checks = {
-        "parent_schema": complete["schema"] == "ns_boundary_face_galerkin_search.v1",
+        "parent_schema": complete["schema"] == "ns_boundary_face_galerkin_search.v2",
         "promotion_false": all(value is False for value in complete["promotion"].values()),
         "expected_strict_result": observed is expected,
+        "normalized_route_visible": complete["corrected_normalized_route_strict_on_sample"] is True,
+        "absolute_route_rejected": complete["original_absolute_floor_route_strict_on_sample"] is False,
         "absolute_floor_failure_visible": (
             args.face != "packet_energy_floor"
             or face["nonpositive_count"] == args.samples
