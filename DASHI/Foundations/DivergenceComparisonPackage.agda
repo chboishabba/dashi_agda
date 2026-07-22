@@ -49,6 +49,9 @@ record DivergenceComparisonPackage
     DefinedKL :
       Distribution → Distribution → Set
 
+    JSFinite :
+      Distribution → Distribution → Set
+
     klDomainImpliesAbsoluteContinuity :
       ∀ P Q →
       DefinedKL P Q →
@@ -72,7 +75,8 @@ record DivergenceComparisonPackage
         (KL P Q)
 
     jsFiniteWithoutSharedSupport :
-      ∀ P Q → Set
+      ∀ P Q →
+      JSFinite P Q
 
     jsSymmetric :
       ∀ P Q →
