@@ -6,9 +6,13 @@ open import DASHI.Foundations.ElementarySingleOperator
 open import DASHI.Foundations.EMLAnalyticDomain
 
 ------------------------------------------------------------------------
--- A logarithm branch is data, not an ambient global convention.  The exact
--- EML identities are required only together with the branch/domain closure
--- which makes every introduced logarithm legitimate.
+-- A logarithm branch is data, not an ambient global convention.  Complex exp
+-- and subtraction are treated as total; logarithm definedness is exactly the
+-- selected branch domain.  The compiler-closure field records every introduced
+-- logarithm argument, not merely the source inputs.
+
+data ComplexAlways : Set where
+  complexAlways : ComplexAlways
 
 record ComplexLogBranchAuthority : Set₁ where
   field
@@ -60,10 +64,6 @@ record ComplexLogBranchAuthority : Set₁ where
         (logC (subC (expC w) (logC oneC)))
       ≡ subC z w
 
-    ExpAdmissibleC : Complex → Set
-    LogAdmissibleC : Complex → Set
-    SubAdmissibleC : Complex → Complex → Set
-
     compilerDefinednessC :
       let M = record
             { Carrier = Complex
@@ -73,9 +73,9 @@ record ComplexLogBranchAuthority : Set₁ where
             ; sub = subC
             }
           D = record
-            { ExpAdmissible = ExpAdmissibleC
-            ; LogAdmissible = LogAdmissibleC
-            ; SubAdmissible = SubAdmissibleC
+            { ExpAdmissible = λ _ → ComplexAlways
+            ; LogAdmissible = BranchDomain
+            ; SubAdmissible = λ _ _ → ComplexAlways
             }
       in EMLCompilerDefinedness M D
 
@@ -98,9 +98,9 @@ complexBranchAdmissibility :
   EMLAdmissibility (complexBranchEMLModel A)
 complexBranchAdmissibility A =
   record
-    { ExpAdmissible = ExpAdmissibleC A
-    ; LogAdmissible = LogAdmissibleC A
-    ; SubAdmissible = SubAdmissibleC A
+    { ExpAdmissible = λ _ → ComplexAlways
+    ; LogAdmissible = BranchDomain A
+    ; SubAdmissible = λ _ _ → ComplexAlways
     }
 
 complexBranchCompilerLaws :
@@ -129,10 +129,22 @@ complexBranchAnalyticPackage A =
 record ComplexBranchPromotionBoundary
   (A : ComplexLogBranchAuthority) : Set₁ where
   field
-    selectedBranch : ComplexLogBranchAuthority
-    selectedBranchIsA : selectedBranch ≡ A
-    allInputsStayInBranch : Set
-    allCompilerIntermediatesStayInBranch : Set
-    principalLogSignConventionChecked : Set
+    AdmissibleInput : Complex A → Set
+    CompilerIntermediate : Complex A → Set
+
+    admissibleInputInBranch :
+      ∀ z →
+      AdmissibleInput z →
+      BranchDomain A z
+
+    compilerIntermediateInBranch :
+      ∀ z →
+      CompilerIntermediate z →
+      BranchDomain A z
+
+    derivedImaginaryUnit : Complex A
+    standardImaginaryUnit : Complex A
+    principalLogSignConventionChecked :
+      derivedImaginaryUnit ≡ standardImaginaryUnit
 
 open ComplexBranchPromotionBoundary public
