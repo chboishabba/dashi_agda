@@ -106,7 +106,8 @@ positiveRealAnalyticPackage :
   AnalyticEMLCompilerPackage (positiveRealEMLModel A)
 positiveRealAnalyticPackage A =
   record
-    { laws = positiveRealCompilerLaws A
-    ; admissibility = positiveRealAdmissibility A
+    { admissibility = positiveRealAdmissibility A
     ; compilerDefinedness = compilerDefinednessR A
+    ; compilerLawsOnDomain =
+        globalLawsGiveDomainLaws (positiveRealCompilerLaws A)
     }
