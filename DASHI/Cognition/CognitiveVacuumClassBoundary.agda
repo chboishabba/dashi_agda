@@ -7,17 +7,12 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.List using (length)
-open import Data.Nat using (_≤_)
+open import Data.Nat using (_≤_; z≤n)
 
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
 
 ¬_ : Set → Set
 ¬ A = A → ⊥
-
-------------------------------------------------------------------------
--- A vacuum class is a stable observed class plus an actual multiscale
--- minimum theorem.  Stability alone does not manufacture that minimum.
-------------------------------------------------------------------------
 
 record MultiscaleDefectModel
     (system : Cognitive.DASHICognitiveSystem) : Set₁ where
@@ -71,9 +66,7 @@ vacuumClassIsStable :
 vacuumClassIsStable vacuum = VacuumClass.classStable vacuum
 
 ------------------------------------------------------------------------
--- Concrete counterexample: both hidden states lie in the same stable
--- observation class, but only true minimizes the literal defect.  Therefore
--- stable cognitive class does not imply vacuum class.
+-- Concrete counterexample: stable observed class does not imply vacuum.
 ------------------------------------------------------------------------
 
 booleanCognitiveSystem : Cognitive.DASHICognitiveSystem
@@ -100,8 +93,7 @@ booleanDefectModel : MultiscaleDefectModel booleanCognitiveSystem
 booleanDefectModel = record
   { scales = 0 ∷ []
   ; weight = λ _ → 1
-  ; defect = λ _ hidden →
-      caseBool hidden
+  ; defect = λ _ hidden → caseBool hidden
   }
   where
   caseBool : Bool → Nat
@@ -134,6 +126,6 @@ trueIsVacuum : VacuumClass booleanCognitiveSystem booleanDefectModel true
 trueIsVacuum = record
   { classStable = trueClassIsStable
   ; globallyMinimal = λ where
-      false → Data.Nat.z≤n
-      true → Data.Nat.z≤n
+      false → z≤n
+      true → z≤n
   }
