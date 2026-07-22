@@ -1,11 +1,12 @@
 module DASHI.Foundations.ElementarySingleOperatorExtendedRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Nat using (zero)
 
 open import DASHI.Foundations.ElementarySingleOperator
 open import DASHI.Foundations.ElementaryCalculator
 open import DASHI.Foundations.EMLConcreteSmokeModel
+open import DASHI.Foundations.ElementaryCalculatorSmokeModel
 open import DASHI.Foundations.TernaryElementarySearchCertificate
 open import DASHI.Foundations.DivergenceComparisonPackage
 open import DASHI.Algebra.Quantum.TernaryCircuit
@@ -48,6 +49,12 @@ smokeCalculatorCorrect :
   ≡ evalCalculator smokeModel ρ t
 smokeCalculatorCorrect = compileCalculator-correct smokeLaws
 
+smokeStructuredCalculatorCorrect :
+  ∀ ρ t →
+  evalEML smokeModel ρ (compileCalculator t)
+  ≡ evalSemanticCalculator smokeCalculatorSemantics ρ t
+smokeStructuredCalculatorCorrect = smokeStructuredCompileCorrect
+
 ------------------------------------------------------------------------
 -- Search and qutrit wiring.
 
@@ -63,6 +70,14 @@ qutritCycleRegression = refl
 qutritTritRoundtripRegression :
   tritToBasis (basisToTrit qPos) ≡ qPos
 qutritTritRoundtripRegression = refl
+
+qutritCircuitReverseRegression :
+  runCircuit
+    (reverseCircuit (applyThen cycleGate halt))
+    (runCircuit (applyThen cycleGate halt) qNeg)
+  ≡ qNeg
+qutritCircuitReverseRegression =
+  reverseCircuitLeft (applyThen cycleGate halt) qNeg
 
 defaultOptimizationMetric :
   defaultDivergenceForRole optimizationLoss ≡ squaredHellinger
