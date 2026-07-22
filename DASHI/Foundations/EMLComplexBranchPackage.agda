@@ -8,8 +8,8 @@ open import DASHI.Foundations.EMLAnalyticDomain
 ------------------------------------------------------------------------
 -- A logarithm branch is data, not an ambient global convention.  Complex exp
 -- and subtraction are treated as total; logarithm definedness is exactly the
--- selected branch domain.  The compiler-closure field records every introduced
--- logarithm argument, not merely the source inputs.
+-- selected branch domain.  Both semantic identities and compiler closure are
+-- required only on the certified branch, not globally across a branch cut.
 
 data ComplexAlways : Set where
   complexAlways : ComplexAlways
@@ -37,33 +37,6 @@ record ComplexLogBranchAuthority : Set₁ where
       PrincipalStrip z →
       logC (expC z) ≡ z
 
-    expEncodingLawC :
-      ∀ z →
-      subC (expC z) (logC oneC) ≡ expC z
-
-    logEncodingLawC :
-      ∀ z →
-      subC
-        (expC oneC)
-        (logC
-          (subC
-            (expC (subC (expC oneC) (logC z)))
-            (logC oneC)))
-      ≡ logC z
-
-    subEncodingLawC :
-      ∀ z w →
-      subC
-        (expC
-          (subC
-            (expC oneC)
-            (logC
-              (subC
-                (expC (subC (expC oneC) (logC z)))
-                (logC oneC)))))
-        (logC (subC (expC w) (logC oneC)))
-      ≡ subC z w
-
     compilerDefinednessC :
       let M = record
             { Carrier = Complex
@@ -78,6 +51,21 @@ record ComplexLogBranchAuthority : Set₁ where
             ; SubAdmissible = λ _ _ → ComplexAlways
             }
       in EMLCompilerDefinedness M D
+
+    compilerLawsOnDomainC :
+      let M = record
+            { Carrier = Complex
+            ; one = oneC
+            ; exp = expC
+            ; log = logC
+            ; sub = subC
+            }
+          D = record
+            { ExpAdmissible = λ _ → ComplexAlways
+            ; LogAdmissible = BranchDomain
+            ; SubAdmissible = λ _ _ → ComplexAlways
+            }
+      in EMLCompilerLawsOnDomain M D
 
 open ComplexLogBranchAuthority public
 
@@ -103,16 +91,6 @@ complexBranchAdmissibility A =
     ; SubAdmissible = λ _ _ → ComplexAlways
     }
 
-complexBranchCompilerLaws :
-  (A : ComplexLogBranchAuthority) →
-  EMLCompilerLaws (complexBranchEMLModel A)
-complexBranchCompilerLaws A =
-  record
-    { expEncoding = expEncodingLawC A
-    ; logEncoding = logEncodingLawC A
-    ; subEncoding = subEncodingLawC A
-    }
-
 complexBranchAnalyticPackage :
   (A : ComplexLogBranchAuthority) →
   AnalyticEMLCompilerPackage (complexBranchEMLModel A)
@@ -120,8 +98,7 @@ complexBranchAnalyticPackage A =
   record
     { admissibility = complexBranchAdmissibility A
     ; compilerDefinedness = compilerDefinednessC A
-    ; compilerLawsOnDomain =
-        globalLawsGiveDomainLaws (complexBranchCompilerLaws A)
+    ; compilerLawsOnDomain = compilerLawsOnDomainC A
     }
 
 ------------------------------------------------------------------------
