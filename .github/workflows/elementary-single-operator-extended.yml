@@ -62,6 +62,7 @@ jobs:
             $AGDA DASHI/Foundations/EMLComplexBranchPackage.agda
             $AGDA DASHI/Foundations/EMLConcreteSmokeModel.agda
             $AGDA DASHI/Foundations/ElementaryCalculator.agda
+            $AGDA DASHI/Foundations/ElementaryCalculatorSemantics.agda
             $AGDA DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda
             $AGDA DASHI/Foundations/TernaryElementaryOperatorCandidate.agda
             $AGDA DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda
