@@ -31,6 +31,12 @@ def build() -> dict[str, Any]:
             "status": "machine_checked_adapter",
         },
         {
+            "id": "factorized_official_far_low_schur",
+            "source": "NSPeriodicFourierAuthorityAdapters.agda",
+            "adapter": "NSPeriodicOfficialFarLowSchurAdapter.agda",
+            "status": "machine_checked_adapter",
+        },
+        {
             "id": "concrete_real_integration",
             "source": "NSCompactGammaStandardAnalysisCompletion.agda",
             "adapter": "NSPeriodicIntegratedExpenditureStandardAdapter.agda",
@@ -101,6 +107,12 @@ def build() -> dict[str, Any]:
         {
             "id": "all_data_coverage",
             "module": "NSPeriodicAllDataCoverageCompletion.agda",
+            "assembly": "machine_checked",
+            "analytic_input": "conjectural",
+        },
+        {
+            "id": "all_data_cutoff_coverage",
+            "module": "NSPeriodicAllDataCutoffCoverageAdapter.agda",
             "assembly": "machine_checked",
             "analytic_input": "conjectural",
         },
