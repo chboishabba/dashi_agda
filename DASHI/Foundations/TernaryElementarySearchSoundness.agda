@@ -11,51 +11,69 @@ open import DASHI.Foundations.TernaryElementarySearchCertificate
 -- side-condition rules are themselves proved.  Thus the external search may
 -- propose a trace, but Agda checks both the trace and every analytic premise.
 
-record RewriteSemanticModel
-  (A : SideConditionAuthority) : Set₁ where
+record RewriteOperations : Set₁ where
   field
     Value : Set
     oneV : Value
     expV logV : Value → Value
     subV mulV divV : Value → Value → Value
 
+open RewriteOperations public
+
+evaluateExpr :
+  (O : RewriteOperations) →
+  (Var → Value O) →
+  RewriteExpr →
+  Value O
+evaluateExpr O ρ (variableR x) = ρ x
+evaluateExpr O ρ oneR = oneV O
+evaluateExpr O ρ (expR x) = expV O (evaluateExpr O ρ x)
+evaluateExpr O ρ (logR x) = logV O (evaluateExpr O ρ x)
+evaluateExpr O ρ (subR x y) =
+  subV O (evaluateExpr O ρ x) (evaluateExpr O ρ y)
+evaluateExpr O ρ (mulR x y) =
+  mulV O (evaluateExpr O ρ x) (evaluateExpr O ρ y)
+evaluateExpr O ρ (divR x y) =
+  divV O (evaluateExpr O ρ x) (evaluateExpr O ρ y)
+
+record RewriteSemanticModel
+  (A : SideConditionAuthority) : Set₁ where
+  field
+    operations : RewriteOperations
+
     expLogSound :
-      ∀ (ρ : Var → Value) x →
+      ∀ (ρ : Var → Value operations) x →
       Valid A (branchAdmissible x) →
-      expV (logV (evaluateExpr ρ x)) ≡ evaluateExpr ρ x
+      expV operations
+        (logV operations (evaluateExpr operations ρ x))
+      ≡ evaluateExpr operations ρ x
 
     logExpSound :
-      ∀ (ρ : Var → Value) x →
+      ∀ (ρ : Var → Value operations) x →
       Valid A (principalStrip x) →
-      logV (expV (evaluateExpr ρ x)) ≡ evaluateExpr ρ x
+      logV operations
+        (expV operations (evaluateExpr operations ρ x))
+      ≡ evaluateExpr operations ρ x
 
     cancelMulDivSound :
-      ∀ (ρ : Var → Value) x y →
+      ∀ (ρ : Var → Value operations) x y →
       Valid A (nonzero y) →
-      mulV
-        (divV (evaluateExpr ρ x) (evaluateExpr ρ y))
-        (evaluateExpr ρ y)
-      ≡ evaluateExpr ρ x
+      mulV operations
+        (divV operations
+          (evaluateExpr operations ρ x)
+          (evaluateExpr operations ρ y))
+        (evaluateExpr operations ρ y)
+      ≡ evaluateExpr operations ρ x
 
     cancelDivMulSound :
-      ∀ (ρ : Var → Value) x y →
+      ∀ (ρ : Var → Value operations) x y →
       Valid A (nonzero y) →
-      divV
-        (mulV (evaluateExpr ρ x) (evaluateExpr ρ y))
-        (evaluateExpr ρ y)
-      ≡ evaluateExpr ρ x
-
-  evaluateExpr : (Var → Value) → RewriteExpr → Value
-  evaluateExpr ρ (variableR x) = ρ x
-  evaluateExpr ρ oneR = oneV
-  evaluateExpr ρ (expR x) = expV (evaluateExpr ρ x)
-  evaluateExpr ρ (logR x) = logV (evaluateExpr ρ x)
-  evaluateExpr ρ (subR x y) =
-    subV (evaluateExpr ρ x) (evaluateExpr ρ y)
-  evaluateExpr ρ (mulR x y) =
-    mulV (evaluateExpr ρ x) (evaluateExpr ρ y)
-  evaluateExpr ρ (divR x y) =
-    divV (evaluateExpr ρ x) (evaluateExpr ρ y)
+      divV operations
+        (mulV operations
+          (evaluateExpr operations ρ x)
+          (evaluateExpr operations ρ y))
+        (evaluateExpr operations ρ y)
+      ≡ evaluateExpr operations ρ x
 
 open RewriteSemanticModel public
 
@@ -71,10 +89,11 @@ binaryCongruence f refl refl = refl
 rewriteCertificateSound :
   ∀ {A : SideConditionAuthority} →
   (M : RewriteSemanticModel A) →
-  (ρ : Var → Value M) →
+  (ρ : Var → Value (operations M)) →
   ∀ {x y} →
   RewriteCertificate A x y →
-  evaluateExpr M ρ x ≡ evaluateExpr M ρ y
+  evaluateExpr (operations M) ρ x
+  ≡ evaluateExpr (operations M) ρ y
 rewriteCertificateSound M ρ rewriteRefl = refl
 rewriteCertificateSound M ρ (rewriteSym certificate) =
   sym (rewriteCertificateSound M ρ certificate)
@@ -83,22 +102,26 @@ rewriteCertificateSound M ρ (rewriteTrans first second) =
     (rewriteCertificateSound M ρ first)
     (rewriteCertificateSound M ρ second)
 rewriteCertificateSound M ρ (expCongruence certificate) =
-  cong (expV M) (rewriteCertificateSound M ρ certificate)
+  cong
+    (expV (operations M))
+    (rewriteCertificateSound M ρ certificate)
 rewriteCertificateSound M ρ (logCongruence certificate) =
-  cong (logV M) (rewriteCertificateSound M ρ certificate)
+  cong
+    (logV (operations M))
+    (rewriteCertificateSound M ρ certificate)
 rewriteCertificateSound M ρ (subCongruence left right) =
   binaryCongruence
-    (subV M)
+    (subV (operations M))
     (rewriteCertificateSound M ρ left)
     (rewriteCertificateSound M ρ right)
 rewriteCertificateSound M ρ (mulCongruence left right) =
   binaryCongruence
-    (mulV M)
+    (mulV (operations M))
     (rewriteCertificateSound M ρ left)
     (rewriteCertificateSound M ρ right)
 rewriteCertificateSound M ρ (divCongruence left right) =
   binaryCongruence
-    (divV M)
+    (divV (operations M))
     (rewriteCertificateSound M ρ left)
     (rewriteCertificateSound M ρ right)
 rewriteCertificateSound M ρ (expLogStep x admissible) =
@@ -114,10 +137,10 @@ certifiedCandidateSound :
   ∀ {A : SideConditionAuthority} →
   (M : RewriteSemanticModel A) →
   (C : CertifiedSearchCandidate A) →
-  (ρ : Var → Value M) →
-  evaluateExpr M ρ
+  (ρ : Var → Value (operations M)) →
+  evaluateExpr (operations M) ρ
     (normalizeTree C (tree (candidateData C)))
-  ≡ evaluateExpr M ρ
+  ≡ evaluateExpr (operations M) ρ
       (targetExpression C (target (candidateData C)))
 certifiedCandidateSound M C ρ =
   rewriteCertificateSound M ρ (certificateTrace C)
