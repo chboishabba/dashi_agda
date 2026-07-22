@@ -50,6 +50,10 @@ FILES = {
         "wallIOfficialHarmonicInputsInhabited = false",
     ],
     "NSPeriodicIntegratedExpenditureCompletion.agda": [
+        "navierStokesDerivativeMeaning",
+        "wallIBudgetPaidByCoerciveEnvelope",
+        "forcingAndSwitchRemainderMeaning",
+        "concretePeriodicNonlinearPaidByEnvelope",
         "periodicIntegratedWeightedShellEstimate",
         "periodicIntegratedVorticityEstimate",
         "periodicIntegratedBKMContinuation",
@@ -76,8 +80,13 @@ FILES = {
     "NSPeriodicAllDataCoverageCompletion.agda": [
         "normalizedChartCarriesBothControls",
         "normalizedChartGivesBKM",
+        "periodicAllDataVorticityFinite",
         "periodicAllDataContinuesBeyond",
         "allDataAdaptiveCoverageInputsInhabited = false",
+    ],
+    "NSPeriodicAllDataCutoffCoverageAdapter.agda": [
+        "allDataCoverageAtCutoff",
+        "Coverage.periodicAllDataVorticityFinite",
     ],
     "NSPeriodicStandardContinuumAdapter.agda": [
         "standardLimitIsLerayHopf",
