@@ -47,6 +47,11 @@ FILES = {
         "periodicIntegratedBKMContinuation",
         "periodicConcreteExpenditureInputsInhabited = false",
     ],
+    "NSPeriodicIntegratedExpenditureStandardAdapter.agda": [
+        "periodicStandardWeightedShellExpenditure",
+        "periodicStandardVorticityExpenditure",
+        "periodicStandardBKMContinuation",
+    ],
     "NSCompactGammaNormalizedBoundaryInwardnessCompletion.agda": [
         "normalizedAdaptiveCoverageNoFirstExit",
         "normalizedBoundaryPDEInputsInhabited = false",
