@@ -1,7 +1,18 @@
 module DASHI.Cognition.LanguagePhaseEverything where
 
 import DASHI.Cognition.AnesthesiaLanguagePhaseControl
+import DASHI.Cognition.AnesthesiaLanguagePhaseDynamics
+import DASHI.Cognition.BaselineMarginModelSelection
+import DASHI.Cognition.CognitiveObservableDistributions
+import DASHI.Cognition.CognitiveProjectionCategory
+import DASHI.Cognition.CognitiveSystemAnalyticClosure
+import DASHI.Cognition.CognitiveVacuumClassBoundary
+import DASHI.Cognition.DashiCognitiveSystem
+import DASHI.Cognition.KepplerFiniteResonanceMDL
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.ResidualPhaseGeometry
+import DASHI.Cognition.TernaryDerivationAddress
+import DASHI.Cognition.TernaryDerivationUltrametric
 import DASHI.Cognition.VisualCompressionAttractors
+import DASHI.Cognition.VisualPatternGeneratorMDL
