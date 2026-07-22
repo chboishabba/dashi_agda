@@ -11,6 +11,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 -- Exhaustive all-data coverage from zero, normalized/adaptive chart, and
 -- diffuse-spectrum branches.
+--
+-- The chart route cannot bypass its two analytic ingredients: its BKM estimate
+-- is obtained only after both normalized boundary invariance and hysteretic
+-- switching control have been established for the same solution and interval.
 ------------------------------------------------------------------------
 
 record PeriodicAllDataCoverageInputs
@@ -47,8 +51,9 @@ record PeriodicAllDataCoverageInputs
       NormalizedAdaptiveChartControlled u T →
       HystereticSwitchingControlled u T
 
-    chartControlGivesBKM : ∀ u T →
-      NormalizedAdaptiveChartControlled u T →
+    chartControlsGiveBKM : ∀ u T →
+      NormalizedBoundaryInvariant u T →
+      HystereticSwitchingControlled u T →
       Diffuse.VorticityTimeIntegralFinite diffuseInputs u T
 
     bkmContinuation : ∀ u₀ u T →
@@ -58,6 +63,30 @@ record PeriodicAllDataCoverageInputs
       ContinuesBeyond u₀ T
 
 open PeriodicAllDataCoverageInputs public
+
+normalizedChartCarriesBothControls :
+  ∀ {i} {InitialDatum Solution Time State Shell : Set i} →
+  (C : PeriodicAllDataCoverageInputs
+    InitialDatum Solution Time State Shell) →
+  ∀ u T →
+  NormalizedAdaptiveChartControlled C u T →
+  Σ (NormalizedBoundaryInvariant C u T)
+    (λ _ → HystereticSwitchingControlled C u T)
+normalizedChartCarriesBothControls C u T chart =
+  chartBoundaryInvariant C u T chart ,
+  chartSwitchingControlled C u T chart
+
+normalizedChartGivesBKM :
+  ∀ {i} {InitialDatum Solution Time State Shell : Set i} →
+  (C : PeriodicAllDataCoverageInputs
+    InitialDatum Solution Time State Shell) →
+  ∀ u T →
+  NormalizedAdaptiveChartControlled C u T →
+  Diffuse.VorticityTimeIntegralFinite (diffuseInputs C) u T
+normalizedChartGivesBKM C u T chart =
+  chartControlsGiveBKM C u T
+    (chartBoundaryInvariant C u T chart)
+    (chartSwitchingControlled C u T chart)
 
 periodicAllDataContinuesBeyond :
   ∀ {i} {InitialDatum Solution Time State Shell : Set i} →
@@ -72,23 +101,11 @@ periodicAllDataContinuesBeyond C u₀ u T smooth solves
 ... | inj₁ zero = zeroDatumGlobal C u₀ T zero
 ... | inj₂ (inj₁ chart) =
   bkmContinuation C u₀ u T smooth solves
-    (chartControlGivesBKM C u T chart)
+    (normalizedChartGivesBKM C u T chart)
 ... | inj₂ (inj₂ diffuse) =
   bkmContinuation C u₀ u T smooth solves
     (Diffuse.periodicDiffuseSpectrumGivesBKM
       (diffuseInputs C) u₀ u T solves diffuse)
-
-normalizedChartCarriesBothControls :
-  ∀ {i} {InitialDatum Solution Time State Shell : Set i} →
-  (C : PeriodicAllDataCoverageInputs
-    InitialDatum Solution Time State Shell) →
-  ∀ u T →
-  NormalizedAdaptiveChartControlled C u T →
-  Σ (NormalizedBoundaryInvariant C u T)
-    (λ _ → HystereticSwitchingControlled C u T)
-normalizedChartCarriesBothControls C u T chart =
-  chartBoundaryInvariant C u T chart ,
-  chartSwitchingControlled C u T chart
 
 ------------------------------------------------------------------------
 -- Proof-level and fail-closed status.
