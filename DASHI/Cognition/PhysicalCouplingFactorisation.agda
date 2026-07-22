@@ -2,17 +2,10 @@ module DASHI.Cognition.PhysicalCouplingFactorisation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Algebra.BalancedTernary as BT
+import DASHI.Cognition.CognitiveVacuumClassBoundary as Fixture
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
-
-------------------------------------------------------------------------
--- A control channel may alter the hidden physical carrier before a token is
--- interpreted without adding a new grammar symbol or stack symbol.  This is
--- the precise form of “external, measurable, not a PDA rule, but able to
--- affect internal state through coupling”.
-------------------------------------------------------------------------
 
 record PhysicalSemanticFactorisation
     (system : Cognitive.DASHICognitiveSystem) : Set₁ where
@@ -34,12 +27,6 @@ record PhysicalSemanticFactorisation
 
 open PhysicalSemanticFactorisation public
 
-------------------------------------------------------------------------
--- A stronger guard-only lane leaves token semantics and hidden state alone;
--- control acts only through the already control-indexed margin.  Keppler's
--- candidate term can be tested first in this smallest model class.
-------------------------------------------------------------------------
-
 record GuardOnlyCoupling
     (system : Cognitive.DASHICognitiveSystem) : Set₁ where
   field
@@ -56,11 +43,6 @@ record GuardOnlyCoupling
 
 open GuardOnlyCoupling public
 
-------------------------------------------------------------------------
--- State-affecting coupling is distinct: the grammar alphabet is unchanged,
--- but the physical carrier passed to token semantics may differ.
-------------------------------------------------------------------------
-
 record StateAffectingCoupling
     (system : Cognitive.DASHICognitiveSystem) : Set₁ where
   field
@@ -74,11 +56,6 @@ record StateAffectingCoupling
       ≡ coupledSample
 
 open StateAffectingCoupling public
-
-------------------------------------------------------------------------
--- Stack coupling is separately typed.  A physical control can alter the
--- maintenance/rebuilding of obligations without changing the stack alphabet.
-------------------------------------------------------------------------
 
 record StackCouplingFactorisation
     (system : Cognitive.DASHICognitiveSystem) : Set₁ where
@@ -99,3 +76,26 @@ record StackCouplingFactorisation
       ≡ tokenStackSemantics (physicalStackUpdate control stack) token
 
 open StackCouplingFactorisation public
+
+------------------------------------------------------------------------
+-- Concrete smallest-model witness: in the Boolean fixture, control leaves the
+-- carrier and token semantics unchanged, while the control-indexed margin is
+-- still free to gate transitions.  Thus external forcing need not add a PDA
+-- state or redefine token meaning.
+------------------------------------------------------------------------
+
+booleanPhysicalFactorisation :
+  PhysicalSemanticFactorisation Fixture.booleanCognitiveSystem
+booleanPhysicalFactorisation = record
+  { physicalEvolution = λ control hidden → hidden
+  ; tokenSemantics = λ hidden token → hidden
+  ; transitionFactorises = λ control hidden token → refl
+  }
+
+booleanGuardOnlyCoupling :
+  GuardOnlyCoupling Fixture.booleanCognitiveSystem
+booleanGuardOnlyCoupling = record
+  { factorisation = booleanPhysicalFactorisation
+  ; physicalEvolutionIsIdentity = λ control hidden → refl
+  ; tokenSemanticsMatchesTransition = λ control hidden token → refl
+  }
