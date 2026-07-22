@@ -11,22 +11,13 @@ import DASHI.Core.CandidateOnlyCore as CandidateOnly
 ------------------------------------------------------------------------
 -- Molecular mechanics as an effective-potential bridge.
 --
--- This module formalises the modelling distinction described in the
--- accompanying discussion:
+-- The atomistic configuration remains explicit, while unresolved electronic
+-- structure is represented by an effective potential.  Forces are obtained
+-- from a supplied negative-gradient operator; potential differences, free
+-- energy, electrostatic fields, and coarse graining remain distinct notions.
 --
---   * an atomistic configuration is retained as the state carrier;
---   * electronic structure is replaced by an effective potential;
---   * forces are read from a chosen negative-gradient operator;
---   * only potential differences are physically compared;
---   * free energy adds an entropy contribution;
---   * electrostatic potential and coarse-grained models are separate lanes.
---
--- The module does not claim that an arbitrary force field is derived from the
--- many-electron Schrödinger equation, predicts protein folding, or supplies a
--- validated biochemical model.  Those remain explicit external obligations.
-
-------------------------------------------------------------------------
--- Abstract scalar, configuration, and vector carriers.
+-- Nothing here claims a first-principles derivation, universal folding
+-- prediction, or experimentally validated biochemical model.
 
 record ScalarAlgebra : Set₁ where
   field
@@ -35,7 +26,6 @@ record ScalarAlgebra : Set₁ where
     _+_ : Scalar → Scalar → Scalar
     _-_ : Scalar → Scalar → Scalar
     _*_ : Scalar → Scalar → Scalar
-    negate : Scalar → Scalar
 
 open ScalarAlgebra public
 
@@ -45,9 +35,6 @@ record MolecularCarrier (S : ScalarAlgebra) : Set₁ where
     Configuration : Set
     ForceField : Set
     atomCount : Configuration → Nat
-    zeroForce : ForceField
-    addForce : ForceField → ForceField → ForceField
-    scaleForce : Scalar S → ForceField → ForceField
 
 open MolecularCarrier public
 
@@ -88,7 +75,7 @@ molecularPotentialDecomposition :
 molecularPotentialDecomposition P x = refl
 
 ------------------------------------------------------------------------
--- Potential differences and invariance under a constant energy offset.
+-- Potential differences and invariance under an energy-origin shift.
 
 potentialDifference :
   {S : ScalarAlgebra} →
@@ -119,36 +106,11 @@ potentialDifferenceIgnoresConstantOffset law =
   shiftedDifferenceCancels law
 
 ------------------------------------------------------------------------
--- Force is the negative gradient of the chosen effective potential.
+-- Force is the negative gradient of the effective potential.
 --
--- Differentiability and the implementation of the gradient are deliberately
--- explicit inputs.  The bridge therefore cannot silently promote an arbitrary
--- potential into a physically validated force field.
+-- The complete negative-gradient action is supplied as one typed operation.
+-- This avoids smuggling in coordinates, differentiability, or a scalar -1.
 
-record PotentialGradient
-  (S : ScalarAlgebra)
-  (M : MolecularCarrier S) : Set₁ where
-  field
-    gradient :
-      (Configuration M → Scalar S) →
-      Configuration M →
-      ForceField M
-
-open PotentialGradient public
-
-forceFromPotential :
-  {S : ScalarAlgebra} →
-  {M : MolecularCarrier S} →
-  PotentialGradient S M →
-  MolecularPotential S M →
-  Configuration M →
-  ForceField M
-forceFromPotential {S} {M} G P x =
-  scaleForce M (negate S (_+_ S (zero S) (zero S)))
-    (gradient G (totalPotential P) x)
-
--- The abstract scalar interface above intentionally does not assume a literal
--- numeric -1.  A concrete model supplies its own negative-gradient action.
 record NegativeGradientAction
   (S : ScalarAlgebra)
   (M : MolecularCarrier S) : Set₁ where
@@ -179,7 +141,7 @@ molecularForceIsNegativeGradient :
 molecularForceIsNegativeGradient G P x = refl
 
 ------------------------------------------------------------------------
--- Electrostatic potential is distinct from total molecular potential energy.
+-- Electrostatic potential is not the total molecular potential energy.
 
 record ElectrostaticField
   (S : ScalarAlgebra)
@@ -190,10 +152,7 @@ record ElectrostaticField
     electricPotential : Point → Scalar S
     atomPosition : Configuration M → Atom M → Point
 
-  electrostaticEnergyAt :
-    Configuration M →
-    Atom M →
-    Scalar S
+  electrostaticEnergyAt : Configuration M → Atom M → Scalar S
   electrostaticEnergyAt x atom =
     _*_ S (charge atom) (electricPotential (atomPosition x atom))
 
@@ -211,7 +170,7 @@ electrostaticEnergyIsChargeTimesPotential :
 electrostaticEnergyIsChargeTimesPotential E x atom = refl
 
 ------------------------------------------------------------------------
--- Free energy adds the entropy contribution to the energetic carrier.
+-- Free energy includes entropy and is therefore distinct from U alone.
 
 record ThermodynamicFreeEnergy
   (S : ScalarAlgebra)
@@ -238,7 +197,7 @@ freeEnergyDefinition :
 freeEnergyDefinition T x = refl
 
 ------------------------------------------------------------------------
--- All-atom versus coarse-grained modelling.
+-- All-atom versus coarse-grained representation.
 
 record CoarseGraining
   {S : ScalarAlgebra}
@@ -246,31 +205,30 @@ record CoarseGraining
   (coarse : MolecularCarrier S) : Set₁ where
   field
     coarseConfiguration :
-      Configuration allAtom →
-      Configuration coarse
+      Configuration allAtom → Configuration coarse
 
     effectiveCoarsePotential :
-      Configuration coarse →
-      Scalar S
+      Configuration coarse → Scalar S
 
-    informationDiscarded : Bool
-    informationDiscardedIsFalse : informationDiscarded ≡ false
+    informationPreservingClaim : Bool
+    informationPreservingClaimIsFalse :
+      informationPreservingClaim ≡ false
 
 open CoarseGraining public
 
 ------------------------------------------------------------------------
--- Explicit approximation obligations.
+-- Validation obligations remain explicit and cannot be discharged by typing.
 
 record MolecularMechanicsValidationBoundary
   (S : ScalarAlgebra)
   (M : MolecularCarrier S)
   (P : MolecularPotential S M) : Set₁ where
   field
-    parameterisationEvidence : Set
-    quantumCalibrationEvidence : Set
-    solventModelEvidence : Set
-    samplingAdequacyEvidence : Set
-    experimentalValidationEvidence : Set
+    ParameterisationEvidence : Set
+    QuantumCalibrationEvidence : Set
+    SolventModelEvidence : Set
+    SamplingAdequacyEvidence : Set
+    ExperimentalValidationEvidence : Set
 
     noFirstPrinciplesDerivationClaim : Bool
     noFirstPrinciplesDerivationClaimIsFalse :
@@ -287,7 +245,7 @@ record MolecularMechanicsValidationBoundary
 open MolecularMechanicsValidationBoundary public
 
 ------------------------------------------------------------------------
--- Candidate-only receipt surface.
+-- Candidate-only receipt surface, matching the repository's bridge discipline.
 
 molecularMechanicsBridgeOwner : String
 molecularMechanicsBridgeOwner =
@@ -301,8 +259,8 @@ canonicalPotentialLandscapeRow =
     "totalPotential"
     CandidateOnly.bridgeCandidateKind
     CandidateOnly.bridgeCandidateOnlyStatus
-    "A molecular configuration is assigned an effective potential assembled from bonded and non-bonded terms."
-    "The effective potential is not thereby derived from exact electronic structure or experimentally validated."
+    "A configuration receives an effective bonded and non-bonded potential."
+    "The potential is not thereby derived from exact electronic structure or experimentally validated."
 
 canonicalNegativeGradientForceRow : CandidateOnly.CandidateOnlyRow
 canonicalNegativeGradientForceRow =
@@ -313,7 +271,7 @@ canonicalNegativeGradientForceRow =
     CandidateOnly.bridgeCandidateKind
     CandidateOnly.bridgeCandidateOnlyStatus
     "A supplied negative-gradient action converts the effective potential into a force field."
-    "Differentiability, numerical accuracy, force-field calibration, and physical validity remain external obligations."
+    "Differentiability, calibration, numerical accuracy, and physical validity remain external obligations."
 
 canonicalPotentialDifferenceRow : CandidateOnly.CandidateOnlyRow
 canonicalPotentialDifferenceRow =
@@ -323,8 +281,8 @@ canonicalPotentialDifferenceRow =
     "potentialDifference"
     CandidateOnly.bridgeCandidateKind
     CandidateOnly.bridgeCandidateOnlyStatus
-    "Initial and final configurations are compared through a potential-energy difference rather than an absolute energy origin."
-    "Energetic preference alone does not establish kinetics, entropy, folding probability, or biological function."
+    "Configurations are compared through an energy difference rather than an absolute energy origin."
+    "Energetic preference alone does not establish kinetics, entropy, folding probability, or function."
 
 canonicalFreeEnergyRow : CandidateOnly.CandidateOnlyRow
 canonicalFreeEnergyRow =
@@ -334,8 +292,8 @@ canonicalFreeEnergyRow =
     "freeEnergy"
     CandidateOnly.bridgeCandidateKind
     CandidateOnly.bridgeCandidateOnlyStatus
-    "The thermodynamic bridge distinguishes potential energy from enthalpy-minus-temperature-times-entropy free energy."
-    "A formal free-energy expression does not supply entropy estimation, equilibrium sampling, or experimental validation."
+    "The bridge distinguishes potential energy from enthalpy minus temperature times entropy."
+    "The expression does not supply entropy estimation, equilibrium sampling, or validation."
 
 canonicalElectrostaticPotentialRow : CandidateOnly.CandidateOnlyRow
 canonicalElectrostaticPotentialRow =
@@ -345,11 +303,10 @@ canonicalElectrostaticPotentialRow =
     "electrostaticEnergyAt"
     CandidateOnly.bridgeCandidateKind
     CandidateOnly.bridgeCandidateOnlyStatus
-    "Electrostatic energy is represented as charge times an environmental electric potential at an atomic position."
-    "The field model does not automatically resolve solvent, screening, polarization, ions, or electron correlation."
+    "Atomic electrostatic energy is represented as charge times environmental potential."
+    "The field does not automatically resolve solvent, screening, polarization, ions, or correlation."
 
-canonicalMolecularMechanicsRows :
-  List CandidateOnly.CandidateOnlyRow
+canonicalMolecularMechanicsRows : List CandidateOnly.CandidateOnlyRow
 canonicalMolecularMechanicsRows =
   canonicalPotentialLandscapeRow
   ∷ canonicalNegativeGradientForceRow
@@ -362,33 +319,28 @@ canonicalPotentialLandscapeReceipt :
   CandidateOnly.CandidateOnlyReceipt canonicalPotentialLandscapeRow
 canonicalPotentialLandscapeReceipt =
   CandidateOnly.canonicalCandidateOnlyReceipt
-    canonicalPotentialLandscapeRow
-    refl refl refl refl refl refl refl refl
+    canonicalPotentialLandscapeRow refl refl refl refl refl refl refl refl
 
 canonicalNegativeGradientForceReceipt :
   CandidateOnly.CandidateOnlyReceipt canonicalNegativeGradientForceRow
 canonicalNegativeGradientForceReceipt =
   CandidateOnly.canonicalCandidateOnlyReceipt
-    canonicalNegativeGradientForceRow
-    refl refl refl refl refl refl refl refl
+    canonicalNegativeGradientForceRow refl refl refl refl refl refl refl refl
 
 canonicalPotentialDifferenceReceipt :
   CandidateOnly.CandidateOnlyReceipt canonicalPotentialDifferenceRow
 canonicalPotentialDifferenceReceipt =
   CandidateOnly.canonicalCandidateOnlyReceipt
-    canonicalPotentialDifferenceRow
-    refl refl refl refl refl refl refl refl
+    canonicalPotentialDifferenceRow refl refl refl refl refl refl refl refl
 
 canonicalFreeEnergyReceipt :
   CandidateOnly.CandidateOnlyReceipt canonicalFreeEnergyRow
 canonicalFreeEnergyReceipt =
   CandidateOnly.canonicalCandidateOnlyReceipt
-    canonicalFreeEnergyRow
-    refl refl refl refl refl refl refl refl
+    canonicalFreeEnergyRow refl refl refl refl refl refl refl refl
 
 canonicalElectrostaticPotentialReceipt :
   CandidateOnly.CandidateOnlyReceipt canonicalElectrostaticPotentialRow
 canonicalElectrostaticPotentialReceipt =
   CandidateOnly.canonicalCandidateOnlyReceipt
-    canonicalElectrostaticPotentialRow
-    refl refl refl refl refl refl refl refl
+    canonicalElectrostaticPotentialRow refl refl refl refl refl refl refl refl
