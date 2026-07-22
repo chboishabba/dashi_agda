@@ -97,5 +97,6 @@ import DASHI.Physics.Closure.NSPeriodicAllDataCoverageCompletion
 import DASHI.Physics.Closure.NSPeriodicAllDataCutoffCoverageAdapter
 import DASHI.Physics.Closure.NSPeriodicStandardContinuumAdapter
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion
+import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumAssembly
 import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus
 import DASHI.Physics.Closure.NSPeriodicOfficialCompletionRegression
