@@ -1,11 +1,10 @@
 module DASHI.Cognition.DashiCognitiveSystem where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.List using (List; []; _∷_; length)
-open import Data.Nat using (_+_; _∸_; _⊔_)
+open import Data.Nat using (_+_; _∸_; _⊔_; _≤_)
 open import Data.Product using (_×_; Σ; _,_; proj₁; proj₂)
 open import Data.Unit using (⊤; tt)
 open import Data.Vec using (Vec; toList)
@@ -16,10 +15,7 @@ import DASHI.Combinatorics.PDA_MDL.PDA as ExistingPDA
 import DASHI.Combinatorics.PDA_MDL.Prelude as MDL
 
 ------------------------------------------------------------------------
--- Signed feasibility is kept exact without pretending that the repository
--- already contains a completed real-analysis model of brain chemistry.
--- The positive / boundary / negative trichotomy is the only information
--- required by the derivation gate.
+-- Exact ternary feasibility sign.
 ------------------------------------------------------------------------
 
 data SignedMargin : Set where
@@ -42,12 +38,14 @@ survivalWeight BT.neg = 0
 survivalWeight BT.zero = 1
 survivalWeight BT.pos = 1
 
+infix 4 _∈_
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
+
 ------------------------------------------------------------------------
--- Master carrier.  Existing repository content is used directly:
---   * ExistingPDA.PDA supplies observe/admissible/costPDA;
---   * RPG.Projection and RPG.Fibre supply the lossy quotient/fibre surface;
---   * MDL.CodeLength is the common constructive code-length carrier;
---   * BT.Trit is the balanced ternary alphabet and gate.
+-- Master carrier, directly extending the in-repo PDA/MDL and quotient fibre.
 ------------------------------------------------------------------------
 
 record DASHICognitiveSystem : Set₁ where
@@ -101,7 +99,7 @@ ObservedEquivalent system left right =
   observe system left ≡ observe system right
 
 ------------------------------------------------------------------------
--- Configurations, semantics, and the guarded accepted language.
+-- Configurations, derivations, and prefix-closed admissibility witnesses.
 ------------------------------------------------------------------------
 
 record Configuration (system : DASHICognitiveSystem) : Set where
@@ -193,8 +191,7 @@ firstPrefixSurvives :
 firstPrefixSurvives evidence = proj₁ (proj₂ evidence)
 
 ------------------------------------------------------------------------
--- Classwise cognition: stability is a theorem over the observation quotient,
--- not a vacuum postulate.
+-- Classwise stability over the lossy observation quotient.
 ------------------------------------------------------------------------
 
 record StableObservedClass
@@ -217,12 +214,13 @@ canonicalStableObservedClass :
   (representative : Hidden system) →
   StableObservedClass system representative
 canonicalStableObservedClass system representative = record
-  { coarseStable = coarseObservationStable system representative
+  { coarseStable =
+      λ scale → coarseObservationStable system scale representative
   ; involutionStable = involutionObservationStable system representative
   }
 
 ------------------------------------------------------------------------
--- Constructive MDL selection and its finite-difference slope.
+-- Constructive two-part MDL and exact finite-difference slope.
 ------------------------------------------------------------------------
 
 MDLScore :
@@ -247,9 +245,9 @@ record DerivationArgMin
     (candidates : List (List BT.Trit)) : Set where
   field
     best : List BT.Trit
-    bestIsCandidate : Set
+    bestIsCandidate : best ∈ candidates
     minimal :
-      ∀ candidate →
+      ∀ candidate → candidate ∈ candidates →
       MDLScore system target control start best
       ≤ MDLScore system target control start candidate
 
@@ -260,14 +258,13 @@ record MDLFiniteDifference : Set where
     fall : Nat
 
 mdlFiniteDifference : Nat → Nat → MDLFiniteDifference
-mdlFiniteDifference before after =
-  record
-    { rise = after ∸ before
-    ; fall = before ∸ after
-    }
+mdlFiniteDifference before after = record
+  { rise = after ∸ before
+  ; fall = before ∸ after
+  }
 
 ------------------------------------------------------------------------
--- The four complementary observables are computed from one configuration.
+-- Four complementary finite observables.
 ------------------------------------------------------------------------
 
 branchingCount :
@@ -318,8 +315,7 @@ mutual
     suc (depthToFailure system control fuel
       (stepConfiguration system control config token))
 
-stackDepth :
-  ∀ {system} → Configuration system → Nat
+stackDepth : ∀ {system} → Configuration system → Nat
 stackDepth config = length (obligationStack config)
 
 data LanguagePhase : Set where
