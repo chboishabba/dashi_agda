@@ -10,10 +10,14 @@ open import DASHI.Foundations.EMLAnalyticDomain
 ------------------------------------------------------------------------
 -- Concrete carrier, explicit external transcendental authority.
 --
--- DASHI's canonical real carrier is axiomatic.  This module therefore fixes the
--- actual carrier and subtraction operation to that authority boundary, while
--- requiring the positive-domain exp/log identities and all compiler-introduced
--- definedness facts as a named package.  No global logarithm identity is hidden.
+-- DASHI's canonical real carrier is axiomatic.  This module fixes the actual
+-- carrier and subtraction operation to that authority boundary.  Real exp and
+-- subtraction are treated as total; logarithm definedness is exactly positivity.
+-- The remaining field is the genuine closure theorem for compiler-introduced
+-- intermediate values.
+
+data Always : Set where
+  always : Always
 
 record PositiveRealTranscendentalAuthority : Set₁ where
   field
@@ -48,10 +52,6 @@ record PositiveRealTranscendentalAuthority : Set₁ where
        logR (expR y -ℝ logR 1ℝ))
       ≡ x -ℝ y
 
-    ExpAdmissibleR : ℝ → Set
-    LogAdmissibleR : ℝ → Set
-    SubAdmissibleR : ℝ → ℝ → Set
-
     compilerDefinednessR :
       let M = record
             { Carrier = ℝ
@@ -61,9 +61,9 @@ record PositiveRealTranscendentalAuthority : Set₁ where
             ; sub = _-ℝ_
             }
           D = record
-            { ExpAdmissible = ExpAdmissibleR
-            ; LogAdmissible = LogAdmissibleR
-            ; SubAdmissible = SubAdmissibleR
+            { ExpAdmissible = λ _ → Always
+            ; LogAdmissible = Positive
+            ; SubAdmissible = λ _ _ → Always
             }
       in EMLCompilerDefinedness M D
 
@@ -86,9 +86,9 @@ positiveRealAdmissibility :
   EMLAdmissibility (positiveRealEMLModel A)
 positiveRealAdmissibility A =
   record
-    { ExpAdmissible = ExpAdmissibleR A
-    ; LogAdmissible = LogAdmissibleR A
-    ; SubAdmissible = SubAdmissibleR A
+    { ExpAdmissible = λ _ → Always
+    ; LogAdmissible = Positive A
+    ; SubAdmissible = λ _ _ → Always
     }
 
 positiveRealCompilerLaws :
