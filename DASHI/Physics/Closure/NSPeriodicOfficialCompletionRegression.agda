@@ -17,6 +17,7 @@ open import DASHI.Physics.Closure.NSCompactGammaNormalizedBoundaryInwardnessComp
 open import DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchCostCompletion public
 open import DASHI.Physics.Closure.NSPeriodicDiffuseSpectrumBKMCompletion public
 open import DASHI.Physics.Closure.NSPeriodicAllDataCoverageCompletion public
+open import DASHI.Physics.Closure.NSPeriodicAllDataCutoffCoverageAdapter public
 open import DASHI.Physics.Closure.NSPeriodicStandardContinuumAdapter public
 open import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion public
 open import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus public
