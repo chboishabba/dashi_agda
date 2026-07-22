@@ -7,6 +7,7 @@ open import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification public
 open import DASHI.Physics.Closure.NSPeriodicOfficialNormBernsteinAdapter public
 open import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion public
 open import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion public
+open import DASHI.Physics.Closure.NSPeriodicOfficialFarLowSchurAdapter public
 open import DASHI.Physics.Closure.NSPeriodicFarHighTailCompletion public
 open import DASHI.Physics.Closure.NSPeriodicOfficialHarmonicAuthorityCompletion public
 open import DASHI.Physics.Closure.NSPeriodicWallIHarmonicCompletion public
