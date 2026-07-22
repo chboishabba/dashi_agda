@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicAllDataCoverageCompletion where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
 import DASHI.Physics.Closure.NSPeriodicDiffuseSpectrumBKMCompletion as Diffuse
@@ -83,16 +84,11 @@ normalizedChartCarriesBothControls :
     InitialDatum Solution Time State Shell) →
   ∀ u T →
   NormalizedAdaptiveChartControlled C u T →
-  NormalizedBoundaryInvariant C u T
-  × HystereticSwitchingControlled C u T
+  Σ (NormalizedBoundaryInvariant C u T)
+    (λ _ → HystereticSwitchingControlled C u T)
 normalizedChartCarriesBothControls C u T chart =
-  chartBoundaryInvariant C u T chart , chartSwitchingControlled C u T chart
-  where
-  infixr 4 _×_
-  record _×_ (A B : Set _) : Set _ where
-    constructor _,_
-    field first : A
-          second : B
+  chartBoundaryInvariant C u T chart ,
+  chartSwitchingControlled C u T chart
 
 ------------------------------------------------------------------------
 -- Proof-level and fail-closed status.
