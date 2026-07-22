@@ -8,7 +8,9 @@ open import DASHI.Foundations.ElementaryCalculator
 open import DASHI.Foundations.ElementaryCalculatorSemantics
 open import DASHI.Foundations.EMLConcreteSmokeModel
 open import DASHI.Foundations.ElementaryCalculatorSmokeModel
+open import DASHI.Foundations.TernaryCalculatorSmokeModel
 open import DASHI.Foundations.TernaryElementarySearchCertificate
+open import DASHI.Foundations.TernaryElementarySearchSmokeModel
 open import DASHI.Foundations.DivergenceComparisonPackage
 open import DASHI.Algebra.Quantum.TernaryCircuit
 
@@ -56,6 +58,16 @@ smokeStructuredCalculatorCorrect :
   ≡ evalSemanticCalculator smokeCalculatorSemantics ρ t
 smokeStructuredCalculatorCorrect = smokeStructuredCompileCorrect
 
+smokeTernaryCalculatorRegression :
+  ∀ ρ t →
+  evalTernary
+    smokeTernaryModel
+    smokeTernaryEnvironment
+    (compileCalculatorTernary smokeTernaryRepresentsEML t)
+  ≡ embedCarrier smokeTernaryRepresentsEML
+      (evalSemanticCalculator smokeCalculatorSemantics ρ t)
+smokeTernaryCalculatorRegression = smokeTernaryCalculatorCorrect
+
 ------------------------------------------------------------------------
 -- Search and qutrit wiring.
 
@@ -63,6 +75,11 @@ diagonalCandidateStatusShape :
   status (diagonalUnitSearchCandidate zero)
   ≡ symbolicCandidate
 diagonalCandidateStatusShape = refl
+
+searchCertificateSoundnessRegression :
+  evaluateExpr smokeRewriteOperations smokeEnvironment oneR
+  ≡ evaluateExpr smokeRewriteOperations smokeEnvironment oneR
+searchCertificateSoundnessRegression = smokeCertifiedCandidateSound
 
 qutritCycleRegression :
   cycleQutrit (cycleQutrit (cycleQutrit qNeg)) ≡ qNeg
