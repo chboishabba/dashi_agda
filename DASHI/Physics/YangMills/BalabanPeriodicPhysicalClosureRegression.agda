@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanPeriodicPhysicalClosureRegression where
 
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.BalabanPeriodicFourierHodgeRegression as Base
 import DASHI.Physics.YangMills.BalabanPeriodicPhysicalConstraintMatching as Match
@@ -8,6 +8,7 @@ import DASHI.Physics.YangMills.BalabanPeriodicLocalBlockGapInhabitation as Local
 import DASHI.Physics.YangMills.BalabanPeriodicFourierNormalizationMatching as Normalization
 import DASHI.Physics.YangMills.BalabanPeriodicBulkHessianGreenClosure as Closure
 import DASHI.Physics.YangMills.BalabanPeriodicBlockSymbolGap as Gap
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
 import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation as Bulk
 
 ------------------------------------------------------------------------
@@ -20,6 +21,9 @@ import DASHI.Physics.YangMills.BalabanBulkPropagatorAnalyticInhabitation as Bulk
 
 oneStateEquality : ∀ state → Base.one ≡ state
 oneStateEquality Base.one = refl
+
+emptyEliminate : ∀ {A : Set} → Carrier.Empty → A
+emptyEliminate ()
 
 normalizationMatch :
   Normalization.PeriodicFourierNormalizationMatch
@@ -66,9 +70,9 @@ physicalConstraintInputs = record
       λ index state constraint → Base.holds
   ; Match.boundaryCompatibilityFourierIdentity =
       λ index state constraint → Base.holds
-  ; Match.ExactMode = λ index frequency → Base.Carrier.Empty
-  ; Match.ResidualKernel = λ index frequency → Base.Carrier.Empty
-  ; Match.BoundaryKernel = λ index frequency → Base.Carrier.Empty
+  ; Match.ExactMode = λ index frequency → Carrier.Empty
+  ; Match.ResidualKernel = λ index frequency → Carrier.Empty
+  ; Match.BoundaryKernel = λ index frequency → Carrier.Empty
   ; Match.gaugeConstraintRemovesExactModes =
       λ index state constraint impossible → impossible
   ; Match.blockConstraintRemovesConstantModes =
@@ -78,7 +82,7 @@ physicalConstraintInputs = record
   ; Match.boundaryConstraintRemovesBoundaryKernel =
       λ index state constraint impossible → impossible
   ; Match.symbolKernelClassification =
-      λ index frequency impossible → Base.emptyEliminate impossible
+      λ index frequency impossible → emptyEliminate impossible
   }
 
 matchedConstraints : Gap.PeriodicConstraintRemovalData Base.kernelData
