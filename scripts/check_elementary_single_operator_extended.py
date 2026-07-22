@@ -23,7 +23,9 @@ REQUIRED_FILES = [
     "DASHI/Foundations/ElementaryCalculatorSmokeModel.agda",
     "DASHI/Foundations/TernaryElementaryOperatorCandidate.agda",
     "DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda",
+    "DASHI/Foundations/TernaryCalculatorUniversality.agda",
     "DASHI/Foundations/TernaryElementarySearchCertificate.agda",
+    "DASHI/Foundations/TernaryElementarySearchSoundness.agda",
     "DASHI/Foundations/SpectralCountingComplexity.agda",
     "DASHI/Foundations/DivergenceComparisonPackage.agda",
     "DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda",
@@ -41,6 +43,8 @@ REQUIRED_SYMBOLS = {
         "DefinedSource",
         "DefinedEML",
         "compileEML-preserves-defined",
+        "EMLCompilerLawsOnDomain",
+        "analyticCompileCorrect",
         "AnalyticEMLCompilerPackage",
     ],
     "DASHI/Foundations/ElementaryCalculator.agda": [
@@ -73,16 +77,27 @@ REQUIRED_SYMBOLS = {
         "witnessIndependent",
         "contextsGiveTernaryRepresentation",
     ],
+    "DASHI/Foundations/TernaryCalculatorUniversality.agda": [
+        "compileCalculatorTernary",
+        "compileCalculatorTernary-correct",
+        "ConstantFreeTernaryCalculatorReceipt",
+    ],
     "DASHI/Foundations/TernaryElementarySearchCertificate.agda": [
         "RewriteCertificate",
         "expLogStep",
         "logExpStep",
         "CertifiedSearchCandidate",
     ],
+    "DASHI/Foundations/TernaryElementarySearchSoundness.agda": [
+        "RewriteSemanticModel",
+        "rewriteCertificateSound",
+        "certifiedCandidateSound",
+    ],
     "DASHI/Algebra/Quantum/TernaryCircuit.agda": [
         "QutritBasis",
         "QutritCircuit",
         "inverseGateLeft",
+        "reverseCircuitLeft",
         "canonicalFiniteQutritPermutationSemantics",
     ],
 }
