@@ -12,6 +12,7 @@ on:
       - 'DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda'
       - 'DASHI/Algebra/Quantum/BraKet.agda'
       - 'DASHI/Algebra/Quantum/TernaryCircuit.agda'
+      - 'DASHI/Algebra/Quantum/QutritUnitaryBridge.agda'
       - 'DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda'
       - 'DASHI/Unified/StructuralComplexitySurvivalBundle.agda'
       - 'scripts/search_ternary_elementary_candidates.py'
@@ -46,14 +47,21 @@ jobs:
             $AGDA DASHI/Foundations/ElementaryCalculator.agda
             $AGDA DASHI/Foundations/ElementaryCalculatorSemantics.agda
             $AGDA DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda
+            $AGDA DASHI/Foundations/ElementaryCalculatorSmokeModel.agda
             $AGDA DASHI/Foundations/TernaryElementaryOperatorCandidate.agda
             $AGDA DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda
+            $AGDA DASHI/Foundations/TernaryCalculatorUniversality.agda
+            $AGDA DASHI/Foundations/TernaryCalculatorSmokeModel.agda
+            $AGDA DASHI/Foundations/TernaryElementaryBoundedEnumeration.agda
             $AGDA DASHI/Foundations/TernaryElementarySearchCertificate.agda
+            $AGDA DASHI/Foundations/TernaryElementarySearchSoundness.agda
+            $AGDA DASHI/Foundations/TernaryElementarySearchSmokeModel.agda
             $AGDA DASHI/Foundations/SpectralCountingComplexity.agda
             $AGDA DASHI/Foundations/DivergenceComparisonPackage.agda
             $AGDA DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda
             $AGDA DASHI/Algebra/Quantum/BraKet.agda
             $AGDA DASHI/Algebra/Quantum/TernaryCircuit.agda
+            $AGDA DASHI/Algebra/Quantum/QutritUnitaryBridge.agda
             $AGDA DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda
             $AGDA DASHI/Foundations/ElementarySingleOperatorExtendedRegression.agda
             $AGDA DASHI/Foundations/ElementarySingleOperatorBundle.agda
