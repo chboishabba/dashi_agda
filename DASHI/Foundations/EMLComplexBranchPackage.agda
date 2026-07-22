@@ -8,8 +8,8 @@ open import DASHI.Foundations.EMLAnalyticDomain
 ------------------------------------------------------------------------
 -- A logarithm branch is data, not an ambient global convention.  Complex exp
 -- and subtraction are treated as total; logarithm definedness is exactly the
--- selected branch domain.  Both semantic identities and compiler closure are
--- required only on the certified branch, not globally across a branch cut.
+-- selected branch domain.  Compiler safety is expression-indexed, so the branch
+-- need not be closed over every possible complex value.
 
 data ComplexAlways : Set where
   complexAlways : ComplexAlways
@@ -36,21 +36,6 @@ record ComplexLogBranchAuthority : Set₁ where
       ∀ z →
       PrincipalStrip z →
       logC (expC z) ≡ z
-
-    compilerDefinednessC :
-      let M = record
-            { Carrier = Complex
-            ; one = oneC
-            ; exp = expC
-            ; log = logC
-            ; sub = subC
-            }
-          D = record
-            { ExpAdmissible = λ _ → ComplexAlways
-            ; LogAdmissible = BranchDomain
-            ; SubAdmissible = λ _ _ → ComplexAlways
-            }
-      in EMLCompilerDefinedness M D
 
     compilerLawsOnDomainC :
       let M = record
@@ -97,7 +82,6 @@ complexBranchAnalyticPackage :
 complexBranchAnalyticPackage A =
   record
     { admissibility = complexBranchAdmissibility A
-    ; compilerDefinedness = compilerDefinednessC A
     ; compilerLawsOnDomain = compilerLawsOnDomainC A
     }
 
