@@ -109,10 +109,32 @@ appendCircuit halt right = right
 appendCircuit (applyThen g left) right =
   applyThen g (appendCircuit left right)
 
+runAppendCircuit :
+  ∀ left right q →
+  runCircuit (appendCircuit left right) q
+  ≡ runCircuit right (runCircuit left q)
+runAppendCircuit halt right q = refl
+runAppendCircuit (applyThen g left) right q =
+  runAppendCircuit left right (applyGate g q)
+
 reverseCircuit : QutritCircuit → QutritCircuit
 reverseCircuit halt = halt
 reverseCircuit (applyThen g rest) =
-  appendCircuit (reverseCircuit rest) (applyThen (inverseGate g) halt)
+  appendCircuit
+    (reverseCircuit rest)
+    (applyThen (inverseGate g) halt)
+
+reverseCircuitLeft :
+  ∀ circuit q →
+  runCircuit (reverseCircuit circuit) (runCircuit circuit q) ≡ q
+reverseCircuitLeft halt q = refl
+reverseCircuitLeft (applyThen g rest) q
+  rewrite runAppendCircuit
+            (reverseCircuit rest)
+            (applyThen (inverseGate g) halt)
+            (runCircuit rest (applyGate g q))
+        | reverseCircuitLeft rest (applyGate g q) =
+  inverseGateLeft g q
 
 QutritRegister : Set
 QutritRegister = List QutritBasis
