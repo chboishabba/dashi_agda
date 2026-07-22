@@ -1,24 +1,6 @@
 name: Elementary single-operator extended
 
 on:
-  push:
-    branches:
-      - 'agent/eml-analytic-calculator-search-quantum'
-    paths:
-      - 'DASHI/Foundations/ElementarySingleOperator.agda'
-      - 'DASHI/Foundations/EML*.agda'
-      - 'DASHI/Foundations/ElementaryCalculator*.agda'
-      - 'DASHI/Foundations/Ternary*.agda'
-      - 'DASHI/Foundations/SpectralCountingComplexity.agda'
-      - 'DASHI/Foundations/DivergenceComparisonPackage.agda'
-      - 'DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda'
-      - 'DASHI/Algebra/Quantum/BraKet.agda'
-      - 'DASHI/Algebra/Quantum/TernaryCircuit.agda'
-      - 'DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda'
-      - 'DASHI/Unified/StructuralComplexitySurvivalBundle.agda'
-      - 'scripts/search_ternary_elementary_candidates.py'
-      - 'scripts/check_elementary_single_operator_extended.py'
-      - '.github/workflows/elementary-single-operator-extended.yml'
   pull_request:
     paths:
       - 'DASHI/Foundations/ElementarySingleOperator.agda'
