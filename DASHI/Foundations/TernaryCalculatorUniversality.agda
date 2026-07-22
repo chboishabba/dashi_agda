@@ -1,6 +1,6 @@
 module DASHI.Foundations.TernaryCalculatorUniversality where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Foundations.ElementarySingleOperator
