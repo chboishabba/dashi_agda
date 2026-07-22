@@ -11,10 +11,10 @@ open import DASHI.Foundations.ElementaryCalculatorSemantics
 ------------------------------------------------------------------------
 -- Final binary universality package for one selected analytic semantics.
 --
--- The package simultaneously carries EML compiler laws, compiler-introduced
--- definedness, an independent named calculator semantics, its primitive
--- lowering laws, and a domain proof for each admitted expression/environment
--- pair.
+-- The package simultaneously carries branch/domain-sensitive EML laws,
+-- compiler-introduced definedness, an independent named calculator semantics,
+-- its primitive lowering laws, and a domain proof for every admitted
+-- expression/environment pair.
 
 record CalculatorAnalyticPackage (M : ExpLogSubModel) : Set₁ where
   field
@@ -57,12 +57,18 @@ calculatorCompiledHasMeaning :
   ∀ {M : ExpLogSubModel} →
   (P : CalculatorAnalyticPackage M) →
   ∀ ρ t →
+  CalculatorDomain P ρ t →
   evalEML M ρ (compileCalculator t)
   ≡ evalSemanticCalculator (calculatorSemantics P) ρ t
-calculatorCompiledHasMeaning P =
-  compileCalculator-semantics
-    (laws (emlAnalyticPackage P))
+calculatorCompiledHasMeaning P ρ t domainProof
+  rewrite analyticCompileCorrect
+            (emlAnalyticPackage P)
+            ρ
+            (calculatorSourceDefined P ρ t domainProof) =
+  lowerCalculator-semantics
     (calculatorPrimitiveLaws P)
+    ρ
+    t
 
 record CalculatorUniversalityReceipt (M : ExpLogSubModel) : Set₁ where
   field
