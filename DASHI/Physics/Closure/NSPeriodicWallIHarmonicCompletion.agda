@@ -3,9 +3,11 @@ module DASHI.Physics.Closure.NSPeriodicWallIHarmonicCompletion where
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
+import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification as Norm
 import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion as Near
 import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion as Low
 import DASHI.Physics.Closure.NSPeriodicFarHighTailCompletion as High
@@ -13,6 +15,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
 -- One coherent owner for the official-norm Wall I estimate.
+--
+-- The official norm identification and the three interaction packages cannot be
+-- supplied independently.  Proof-relevant matching fields guarantee that the
+-- near, far-low and far-high estimates all concern the same Fourier
+-- normalization, dyadic partition, Leray/Biot--Savart operators and cutoff.
 ------------------------------------------------------------------------
 
 record PeriodicWallIHarmonicInputs
@@ -20,11 +27,23 @@ record PeriodicWallIHarmonicInputs
     (A : AbsorptionArithmetic)
     (Index Time State : Set i) : Set (lsuc i) where
   field
+    officialNorms : Norm.OfficialPeriodicNormIdentification A Index Nat State
     nearInputs : Near.PeriodicNearTriadUniformInputs A Index Time State
     farLowInputs : Low.PeriodicFarLowOfficialSchurInputs A Index Time State
     farHighInputs : High.PeriodicFarHighTailInputs A Index Time State
 
+    NearUsesOfficialNorms : Set i
+    FarLowUsesOfficialNorms : Set i
+    FarHighUsesOfficialNorms : Set i
+
+    nearUsesOfficialNorms : NearUsesOfficialNorms
+    farLowUsesOfficialNorms : FarLowUsesOfficialNorms
+    farHighUsesOfficialNorms : FarHighUsesOfficialNorms
+
     CommonAdmissible : Index → Time → State → Set i
+
+    commonImpliesNorm : ∀ q τ u →
+      CommonAdmissible q τ u → Norm.Admissible officialNorms q u
 
     commonImpliesNear : ∀ q τ u →
       CommonAdmissible q τ u → Near.Admissible nearInputs q τ u
@@ -57,6 +76,15 @@ record PeriodicWallIHarmonicInputs
         (officialWallIBudget q τ u)
 
 open PeriodicWallIHarmonicInputs public
+
+wallIOfficialNormAdmissibility :
+  ∀ {i} {A : AbsorptionArithmetic}
+    {Index Time State : Set i} →
+  (W : PeriodicWallIHarmonicInputs A Index Time State) →
+  ∀ q τ u →
+  CommonAdmissible W q τ u →
+  Norm.Admissible (officialNorms W) q u
+wallIOfficialNormAdmissibility W q τ u = commonImpliesNorm W q τ u
 
 wallIComponentSumBelowBudgetSum :
   ∀ {i} {A : AbsorptionArithmetic}
