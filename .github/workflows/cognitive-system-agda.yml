@@ -1,5 +1,6 @@
 name: Cognitive system Agda
 
+# Focused type-check lane for the theorem-valued cognition aggregate.
 on:
   pull_request:
     paths:
