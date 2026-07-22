@@ -1,5 +1,6 @@
 module DASHI.Foundations.TernaryElementaryBoundedEnumeration where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (List; []; _∷_)
 
