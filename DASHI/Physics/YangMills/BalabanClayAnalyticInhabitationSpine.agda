@@ -14,6 +14,10 @@ import DASHI.Physics.YangMills.BalabanPeriodicTorus4Fourier
 import DASHI.Physics.YangMills.BalabanPeriodicDifferenceSymbols
 import DASHI.Physics.YangMills.BalabanPeriodicBlockSymbolGap
 import DASHI.Physics.YangMills.BalabanPeriodicFiniteFourierHodgeCertificate
+import DASHI.Physics.YangMills.BalabanPeriodicFourierNormalizationMatching
+import DASHI.Physics.YangMills.BalabanPeriodicPhysicalConstraintMatching
+import DASHI.Physics.YangMills.BalabanPeriodicLocalBlockGapInhabitation
+import DASHI.Physics.YangMills.BalabanPeriodicBulkHessianGreenClosure
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
 import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremAuthorities
@@ -40,6 +44,9 @@ periodicFiniteFourierDefinitionLevel = machineChecked
 periodicFiniteAbelianFourierAuthorityLevel : ProofLevel
 periodicFiniteAbelianFourierAuthorityLevel = standardImported
 
+periodicFourierNormalizationMatchingLevel : ProofLevel
+periodicFourierNormalizationMatchingLevel = machineChecked
+
 periodicDifferenceDefinitionLevel : ProofLevel
 periodicDifferenceDefinitionLevel = machineChecked
 
@@ -49,11 +56,38 @@ periodicDifferenceFourierAuthorityLevel = standardImported
 periodicConstraintRemovalAssemblyLevel : ProofLevel
 periodicConstraintRemovalAssemblyLevel = machineChecked
 
+periodicPhysicalConstraintAdapterLevel : ProofLevel
+periodicPhysicalConstraintAdapterLevel = machineChecked
+
+periodicPhysicalConstraintFourierInputLevel : ProofLevel
+periodicPhysicalConstraintFourierInputLevel = conditional
+
+periodicLocalBlockGapAssemblyLevel : ProofLevel
+periodicLocalBlockGapAssemblyLevel = machineChecked
+
+periodicHighFrequencyTrigonometricInputLevel : ProofLevel
+periodicHighFrequencyTrigonometricInputLevel = standardImported
+
 periodicLocalBlockGapInputLevel : ProofLevel
 periodicLocalBlockGapInputLevel = conditional
 
 periodicFiniteFourierHodgeAdapterLevel : ProofLevel
 periodicFiniteFourierHodgeAdapterLevel = machineChecked
+
+periodicFivePerturbationAssemblyLevel : ProofLevel
+periodicFivePerturbationAssemblyLevel = machineChecked
+
+periodicFivePerturbationInputLevel : ProofLevel
+periodicFivePerturbationInputLevel = conditional
+
+periodicFullHessianCoercivityAssemblyLevel : ProofLevel
+periodicFullHessianCoercivityAssemblyLevel = machineChecked
+
+periodicFiniteCoerciveInverseInputLevel : ProofLevel
+periodicFiniteCoerciveInverseInputLevel = standardImported
+
+periodicBulkGreenKernelInputLevel : ProofLevel
+periodicBulkGreenKernelInputLevel = standardImported
 
 finiteFourierHodgeReductionLevel : ProofLevel
 finiteFourierHodgeReductionLevel = machineChecked
