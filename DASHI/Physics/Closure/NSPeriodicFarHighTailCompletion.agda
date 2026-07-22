@@ -2,6 +2,8 @@ module DASHI.Physics.Closure.NSPeriodicFarHighTailCompletion where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
