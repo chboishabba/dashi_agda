@@ -1,0 +1,69 @@
+module DASHI.Promotion.FiniteTernaryQuantumCircuitAdapter where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (List; []; _∷_)
+
+open import DASHI.Algebra.Quantum.TernaryCircuit
+import DASHI.Promotion.FiniteQuantumSchrodingerBornAdapter as Binary
+
+------------------------------------------------------------------------
+-- A finite qutrit/permutation adapter adjacent to the existing two-state
+-- Schrodinger/Born toy.  This records the actual circuit content without
+-- promoting amplitudes, superposition, general unitary matrices, or algorithms.
+
+record FiniteTernaryQuantumCircuitAdapter : Set₁ where
+  field
+    upstreamBinaryToy :
+      Binary.FiniteQuantumSchrodingerBornAdapter
+
+    qutritBasisStates : List QutritBasis
+    permutationSemantics : FiniteQutritPermutationSemantics
+
+    cycleOrderThree :
+      ∀ q →
+      cycleQutrit (cycleQutrit (cycleQutrit q)) ≡ q
+
+    finiteBasisPermutationOnly : Bool
+    finiteBasisPermutationOnlyIsTrue :
+      finiteBasisPermutationOnly ≡ true
+
+    amplitudeSuperpositionSupplied : Bool
+    amplitudeSuperpositionSuppliedIsFalse :
+      amplitudeSuperpositionSupplied ≡ false
+
+    arbitraryUnitaryMatricesSupplied : Bool
+    arbitraryUnitaryMatricesSuppliedIsFalse :
+      arbitraryUnitaryMatricesSupplied ≡ false
+
+    quantumAlgorithmLibrarySupplied : Bool
+    quantumAlgorithmLibrarySuppliedIsFalse :
+      quantumAlgorithmLibrarySupplied ≡ false
+
+    fullQutritQuantumComputerPromoted : Bool
+    fullQutritQuantumComputerPromotedIsFalse :
+      fullQutritQuantumComputerPromoted ≡ false
+
+open FiniteTernaryQuantumCircuitAdapter public
+
+canonicalFiniteTernaryQuantumCircuitAdapter :
+  FiniteTernaryQuantumCircuitAdapter
+canonicalFiniteTernaryQuantumCircuitAdapter =
+  record
+    { upstreamBinaryToy =
+        Binary.canonicalFiniteQuantumSchrodingerBornAdapter
+    ; qutritBasisStates = qNeg ∷ qZero ∷ qPos ∷ []
+    ; permutationSemantics =
+        canonicalFiniteQutritPermutationSemantics
+    ; cycleOrderThree = cycle³
+    ; finiteBasisPermutationOnly = true
+    ; finiteBasisPermutationOnlyIsTrue = refl
+    ; amplitudeSuperpositionSupplied = false
+    ; amplitudeSuperpositionSuppliedIsFalse = refl
+    ; arbitraryUnitaryMatricesSupplied = false
+    ; arbitraryUnitaryMatricesSuppliedIsFalse = refl
+    ; quantumAlgorithmLibrarySupplied = false
+    ; quantumAlgorithmLibrarySuppliedIsFalse = refl
+    ; fullQutritQuantumComputerPromoted = false
+    ; fullQutritQuantumComputerPromotedIsFalse = refl
+    }
