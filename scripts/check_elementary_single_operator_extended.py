@@ -18,6 +18,7 @@ REQUIRED_FILES = [
     "DASHI/Foundations/EMLComplexBranchPackage.agda",
     "DASHI/Foundations/EMLConcreteSmokeModel.agda",
     "DASHI/Foundations/ElementaryCalculator.agda",
+    "DASHI/Foundations/ElementaryCalculatorSemantics.agda",
     "DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda",
     "DASHI/Foundations/TernaryElementaryOperatorCandidate.agda",
     "DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda",
@@ -47,6 +48,12 @@ REQUIRED_SYMBOLS = {
         "compileCalculator-correct",
         "constantPi",
         "calcArcTanh",
+    ],
+    "DASHI/Foundations/ElementaryCalculatorSemantics.agda": [
+        "CalculatorSemanticModel",
+        "CalculatorPrimitiveLaws",
+        "lowerCalculator-semantics",
+        "compileCalculator-semantics",
     ],
     "DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda": [
         "CalculatorAnalyticPackage",
