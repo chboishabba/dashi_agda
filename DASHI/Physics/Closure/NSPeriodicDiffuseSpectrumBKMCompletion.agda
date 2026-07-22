@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSPeriodicDiffuseSpectrumBKMCompletion where
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -16,7 +16,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 data DiffuseControlRoute
-    (ShellSpreadControl SmallRegularityControl DissipationChargeControl : Set) : Set where
+    {s r d : Level}
+    (ShellSpreadControl : Set s)
+    (SmallRegularityControl : Set r)
+    (DissipationChargeControl : Set d) : Set (s ⊔ r ⊔ d) where
   shellSpreadRoute :
     ShellSpreadControl →
     DiffuseControlRoute
