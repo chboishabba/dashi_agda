@@ -4,7 +4,9 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
 
+open import DASHI.Core.OperatorTypes using (Invertible)
 open import DASHI.Algebra.Quantum.TernaryCircuit
+open import DASHI.Algebra.Quantum.QutritUnitaryBridge
 import DASHI.Promotion.FiniteQuantumSchrodingerBornAdapter as Binary
 
 ------------------------------------------------------------------------
@@ -23,6 +25,12 @@ record FiniteTernaryQuantumCircuitAdapter : Set₁ where
     cycleOrderThree :
       ∀ q →
       cycleQutrit (cycleQutrit (cycleQutrit q)) ≡ q
+
+    cycleIsInvertible : Invertible cycleQutrit
+
+    abstractUnitaryBridgeReady : Bool
+    abstractUnitaryBridgeReadyIsTrue :
+      abstractUnitaryBridgeReady ≡ true
 
     finiteBasisPermutationOnly : Bool
     finiteBasisPermutationOnlyIsTrue :
@@ -56,6 +64,9 @@ canonicalFiniteTernaryQuantumCircuitAdapter =
     ; permutationSemantics =
         canonicalFiniteQutritPermutationSemantics
     ; cycleOrderThree = cycle³
+    ; cycleIsInvertible = cycleQutritInvertible
+    ; abstractUnitaryBridgeReady = true
+    ; abstractUnitaryBridgeReadyIsTrue = refl
     ; finiteBasisPermutationOnly = true
     ; finiteBasisPermutationOnlyIsTrue = refl
     ; amplitudeSuperpositionSupplied = false
