@@ -6,6 +6,7 @@ open import DASHI.Foundations.EMLPositiveRealAnalyticPackage public
 open import DASHI.Foundations.EMLComplexBranchPackage public
 open import DASHI.Foundations.EMLConcreteSmokeModel public
 open import DASHI.Foundations.ElementaryCalculator public
+open import DASHI.Foundations.ElementaryCalculatorAnalyticPackage public
 open import DASHI.Foundations.TernaryElementaryOperatorCandidate public
 open import DASHI.Foundations.TernaryWitnessIndependentRepresentation public
 open import DASHI.Foundations.TernaryElementarySearchCertificate public
