@@ -20,11 +20,13 @@ REQUIRED = [
     "switch_cost",
     "diffuse_bkm",
     "all_data_coverage",
+    "all_data_cutoff_coverage",
     "cutoff_continuum_bkm",
 ]
 REUSED = [
     "concrete_bernstein_be1_be8",
     "published_periodic_harmonic_authority",
+    "factorized_official_far_low_schur",
     "concrete_real_integration",
     "galerkin_g1_g19_continuum",
 ]
