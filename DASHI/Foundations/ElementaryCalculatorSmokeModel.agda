@@ -126,6 +126,15 @@ allSourceDefined ρ (subE s t) =
     (allSourceDefined ρ t)
     top
 
+allCompilationDefined :
+  ∀ ρ t →
+  CompilationDefined smokeModel smokeAdmissibility ρ t
+allCompilationDefined ρ t =
+  globalClosureBuildsCompilation
+    smokeDefinedness
+    ρ
+    (allSourceDefined ρ t)
+
 smokeCalculatorAnalyticPackage :
   CalculatorAnalyticPackage smokeModel
 smokeCalculatorAnalyticPackage =
@@ -134,8 +143,8 @@ smokeCalculatorAnalyticPackage =
     ; calculatorSemantics = smokeCalculatorSemantics
     ; calculatorPrimitiveLaws = smokeCalculatorPrimitiveLaws
     ; CalculatorDomain = λ _ _ → Top
-    ; calculatorSourceDefined =
-        λ ρ t _ → allSourceDefined ρ (lowerCalculator t)
+    ; calculatorCompilationDefined =
+        λ ρ t _ → allCompilationDefined ρ (lowerCalculator t)
     }
 
 smokeCalculatorUniversalityReceipt :
