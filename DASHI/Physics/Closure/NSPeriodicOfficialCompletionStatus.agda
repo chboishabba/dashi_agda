@@ -9,6 +9,20 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- program.  These values are deliberately independent of finite receipts.
 ------------------------------------------------------------------------
 
+-- Existing repository theorems consumed by exact adapters.
+concreteBernsteinBE1ToBE8AdapterLevel : ProofLevel
+concreteBernsteinBE1ToBE8AdapterLevel = machineChecked
+
+publishedPeriodicHarmonicAuthorityAdapterLevel : ProofLevel
+publishedPeriodicHarmonicAuthorityAdapterLevel = machineChecked
+
+concreteRealIntegrationAdapterLevel : ProofLevel
+concreteRealIntegrationAdapterLevel = machineChecked
+
+galerkinG1ToG19ContinuumAdapterLevel : ProofLevel
+galerkinG1ToG19ContinuumAdapterLevel = machineChecked
+
+-- Remaining official-carrier theorem packages.
 officialNormIdentificationLevel : ProofLevel
 officialNormIdentificationLevel = conditional
 
