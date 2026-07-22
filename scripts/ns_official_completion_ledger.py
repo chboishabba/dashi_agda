@@ -17,6 +17,32 @@ def digest(payload: Any) -> str:
 
 
 def build() -> dict[str, Any]:
+    reused_repository_lanes = [
+        {
+            "id": "concrete_bernstein_be1_be8",
+            "source": "NSCompactGammaConcreteBernsteinEnvelopeDomain.agda",
+            "adapter": "NSPeriodicOfficialNormBernsteinAdapter.agda",
+            "status": "machine_checked_adapter",
+        },
+        {
+            "id": "published_periodic_harmonic_authority",
+            "source": "NSPeriodicFourierAuthorityAdapters.agda",
+            "adapter": "NSPeriodicOfficialHarmonicAuthorityCompletion.agda",
+            "status": "machine_checked_adapter",
+        },
+        {
+            "id": "concrete_real_integration",
+            "source": "NSCompactGammaStandardAnalysisCompletion.agda",
+            "adapter": "NSPeriodicIntegratedExpenditureStandardAdapter.agda",
+            "status": "machine_checked_adapter",
+        },
+        {
+            "id": "galerkin_g1_g19_continuum",
+            "source": "NSConcreteAubinLionsNonlinearLimitWitnesses.agda",
+            "adapter": "NSPeriodicStandardContinuumAdapter.agda",
+            "status": "machine_checked_adapter",
+        },
+    ]
     stages = [
         {
             "id": "official_norm_identification",
@@ -88,6 +114,7 @@ def build() -> dict[str, Any]:
     payload: dict[str, Any] = {
         "schema": SCHEMA,
         "authority": "proof_relevant_reduction_and_fail_closed_status_only",
+        "reused_repository_lanes": reused_repository_lanes,
         "dependency_order": [stage["id"] for stage in stages],
         "stages": stages,
         "negative_findings_preserved": {
