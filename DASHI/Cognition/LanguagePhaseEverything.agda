@@ -10,6 +10,9 @@ import DASHI.Cognition.CognitiveVacuumClassBoundary
 import DASHI.Cognition.DashiCognitiveSystem
 import DASHI.Cognition.KepplerFiniteResonanceMDL
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
+import DASHI.Cognition.MultipleDraftsQuotient
+import DASHI.Cognition.PhaseObservableIndependence
+import DASHI.Cognition.PhysicalCouplingFactorisation
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.ResidualPhaseGeometry
 import DASHI.Cognition.TernaryDerivationAddress
