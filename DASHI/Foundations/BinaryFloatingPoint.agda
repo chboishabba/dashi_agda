@@ -1,8 +1,20 @@
 module DASHI.Foundations.BinaryFloatingPoint where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _-_; _<_; _==_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+
+------------------------------------------------------------------------
+-- Small constructive product used by the format predicates.
+------------------------------------------------------------------------
+
+record _×_ (A B : Set) : Set where
+  constructor _,_
+  field
+    first : A
+    second : B
+
+infixr 4 _×_
+open _×_ public
 
 ------------------------------------------------------------------------
 -- Finite binary words
@@ -28,9 +40,11 @@ pow2 : Nat → Nat
 pow2 zero = 1
 pow2 (suc n) = 2 * pow2 n
 
+-- Words are written most-significant bit first.
 wordValue : {n : Nat} → Word n → Nat
-wordValue [] = 0
-wordValue (b ∷ bs) = bitValue b * pow2 _ + wordValue bs
+wordValue {zero} [] = 0
+wordValue {suc n} (b ∷ bs) =
+  bitValue b * pow2 n + wordValue bs
 
 ------------------------------------------------------------------------
 -- Radix and scale policy are different coordinates.
@@ -61,14 +75,6 @@ FloatingFormat format = scalePolicy format ≡ floatingScale
 BinaryFloatingFormat : NumericFormat → Set
 BinaryFloatingFormat format =
   BinaryFormat format × FloatingFormat format
-
-record _×_ (A B : Set) : Set where
-  constructor _,_
-  field
-    first : A
-    second : B
-
-open _×_ public
 
 binaryAndFloatingAreCompatible :
   BinaryFloatingFormat
