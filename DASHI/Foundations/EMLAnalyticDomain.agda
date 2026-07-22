@@ -6,8 +6,8 @@ open import DASHI.Foundations.ElementarySingleOperator
 
 ------------------------------------------------------------------------
 -- Definedness is kept separate from total evaluation.  A concrete real or
--- complex implementation may totalize exp/log/sub internally, while this
--- predicate records exactly which source and compiled trees are analytically
+-- complex implementation may totalize exp/log/sub internally, while these
+-- predicates record exactly which source and compiled trees are analytically
 -- legitimate on the selected domain and logarithm branch.
 
 record EMLAdmissibility (M : ExpLogSubModel) : Set₁ where
@@ -75,9 +75,9 @@ data DefinedEML
     DefinedEML M D ρ (emlM s t)
 
 ------------------------------------------------------------------------
--- The compiler introduces auxiliary exp/log/sub nodes.  Their closure is a
--- genuine analytic obligation and therefore has its own record, rather than
--- being hidden inside the structural compiler theorem.
+-- A globally closed model can expose one reusable closure theorem.  This is a
+-- convenience for smoke/total models, not a requirement for branch-sensitive
+-- real or complex models.
 
 record EMLCompilerDefinedness
   (M : ExpLogSubModel)
@@ -101,32 +101,134 @@ record EMLCompilerDefinedness
 
 open EMLCompilerDefinedness public
 
-compileEML-preserves-defined :
+------------------------------------------------------------------------
+-- Branch-safe compilation is expression-indexed.  This avoids the false
+-- requirement that every carrier value be a legal logarithm input.  Each
+-- constructor carries source definedness recursively and the proof that the
+-- exact compiled node, including all introduced intermediates, is defined.
+
+data CompilationDefined
+  (M : ExpLogSubModel)
+  (D : EMLAdmissibility M)
+  (ρ : Env M) :
+  ExpLogSubExpr → Set where
+
+  oneCompilationDefined :
+    CompilationDefined M D ρ oneE
+
+  varCompilationDefined :
+    ∀ x →
+    CompilationDefined M D ρ (varE x)
+
+  expCompilationDefined :
+    ∀ {t} →
+    CompilationDefined M D ρ t →
+    ExpAdmissible D (evalSource M ρ t) →
+    DefinedEML M D ρ (emlExp (compileEML t)) →
+    CompilationDefined M D ρ (expE t)
+
+  logCompilationDefined :
+    ∀ {t} →
+    CompilationDefined M D ρ t →
+    LogAdmissible D (evalSource M ρ t) →
+    DefinedEML M D ρ (emlLog (compileEML t)) →
+    CompilationDefined M D ρ (logE t)
+
+  subCompilationDefined :
+    ∀ {s t} →
+    CompilationDefined M D ρ s →
+    CompilationDefined M D ρ t →
+    SubAdmissible D (evalSource M ρ s) (evalSource M ρ t) →
+    DefinedEML M D ρ (emlSub (compileEML s) (compileEML t)) →
+    CompilationDefined M D ρ (subE s t)
+
+sourceDefinedFromCompilation :
+  ∀ {M : ExpLogSubModel}
+    {D : EMLAdmissibility M}
+    {ρ : Env M}
+    {t : ExpLogSubExpr} →
+  CompilationDefined M D ρ t →
+  DefinedSource M D ρ t
+sourceDefinedFromCompilation oneCompilationDefined = oneDefined
+sourceDefinedFromCompilation (varCompilationDefined x) = varDefined x
+sourceDefinedFromCompilation
+  (expCompilationDefined child admissible compiled) =
+  expDefined (sourceDefinedFromCompilation child) admissible
+sourceDefinedFromCompilation
+  (logCompilationDefined child admissible compiled) =
+  logDefined (sourceDefinedFromCompilation child) admissible
+sourceDefinedFromCompilation
+  (subCompilationDefined left right admissible compiled) =
+  subDefined
+    (sourceDefinedFromCompilation left)
+    (sourceDefinedFromCompilation right)
+    admissible
+
+compiledDefinedFromCompilation :
+  ∀ {M : ExpLogSubModel}
+    {D : EMLAdmissibility M}
+    {ρ : Env M}
+    {t : ExpLogSubExpr} →
+  CompilationDefined M D ρ t →
+  DefinedEML M D ρ (compileEML t)
+compiledDefinedFromCompilation oneCompilationDefined = oneMDefined
+compiledDefinedFromCompilation (varCompilationDefined x) = varMDefined x
+compiledDefinedFromCompilation
+  (expCompilationDefined child admissible compiled) = compiled
+compiledDefinedFromCompilation
+  (logCompilationDefined child admissible compiled) = compiled
+compiledDefinedFromCompilation
+  (subCompilationDefined left right admissible compiled) = compiled
+
+globalClosureBuildsCompilation :
   ∀ {M : ExpLogSubModel}
     {D : EMLAdmissibility M} →
   EMLCompilerDefinedness M D →
   ∀ ρ {t} →
   DefinedSource M D ρ t →
-  DefinedEML M D ρ (compileEML t)
-compileEML-preserves-defined closure ρ oneDefined =
-  oneMDefined
-compileEML-preserves-defined closure ρ (varDefined x) =
-  varMDefined x
-compileEML-preserves-defined closure ρ (expDefined sourceDefined _) =
-  expEncodingDefined closure ρ
-    (compileEML-preserves-defined closure ρ sourceDefined)
-compileEML-preserves-defined closure ρ (logDefined sourceDefined _) =
-  logEncodingDefined closure ρ
-    (compileEML-preserves-defined closure ρ sourceDefined)
-compileEML-preserves-defined closure ρ
-  (subDefined leftDefined rightDefined _) =
-  subEncodingDefined closure ρ
-    (compileEML-preserves-defined closure ρ leftDefined)
-    (compileEML-preserves-defined closure ρ rightDefined)
+  CompilationDefined M D ρ t
+globalClosureBuildsCompilation closure ρ oneDefined =
+  oneCompilationDefined
+globalClosureBuildsCompilation closure ρ (varDefined x) =
+  varCompilationDefined x
+globalClosureBuildsCompilation closure ρ
+  (expDefined sourceDefined admissible) =
+  expCompilationDefined
+    childCompilation
+    admissible
+    (expEncodingDefined closure ρ
+      (compiledDefinedFromCompilation childCompilation))
+  where
+    childCompilation =
+      globalClosureBuildsCompilation closure ρ sourceDefined
+globalClosureBuildsCompilation closure ρ
+  (logDefined sourceDefined admissible) =
+  logCompilationDefined
+    childCompilation
+    admissible
+    (logEncodingDefined closure ρ
+      (compiledDefinedFromCompilation childCompilation))
+  where
+    childCompilation =
+      globalClosureBuildsCompilation closure ρ sourceDefined
+globalClosureBuildsCompilation closure ρ
+  (subDefined leftDefined rightDefined admissible) =
+  subCompilationDefined
+    leftCompilation
+    rightCompilation
+    admissible
+    (subEncodingDefined closure ρ
+      (compiledDefinedFromCompilation leftCompilation)
+      (compiledDefinedFromCompilation rightCompilation))
+  where
+    leftCompilation =
+      globalClosureBuildsCompilation closure ρ leftDefined
+    rightCompilation =
+      globalClosureBuildsCompilation closure ρ rightDefined
 
 ------------------------------------------------------------------------
--- Branch/domain-sensitive semantic laws.  Unlike EMLCompilerLaws, these laws
--- are required only for EML trees whose complete evaluation is certified.
+-- Branch/domain-sensitive semantic laws are required only when the exact
+-- encoded node and its children are all certified as defined.
 
 record EMLCompilerLawsOnDomain
   (M : ExpLogSubModel)
@@ -135,12 +237,14 @@ record EMLCompilerLawsOnDomain
     expEncodingOnDomain :
       ∀ ρ {t} →
       DefinedEML M D ρ t →
+      DefinedEML M D ρ (emlExp t) →
       evalEML M ρ (emlExp t)
       ≡ exp M (evalEML M ρ t)
 
     logEncodingOnDomain :
       ∀ ρ {t} →
       DefinedEML M D ρ t →
+      DefinedEML M D ρ (emlLog t) →
       evalEML M ρ (emlLog t)
       ≡ log M (evalEML M ρ t)
 
@@ -148,6 +252,7 @@ record EMLCompilerLawsOnDomain
       ∀ ρ {s t} →
       DefinedEML M D ρ s →
       DefinedEML M D ρ t →
+      DefinedEML M D ρ (emlSub s t) →
       evalEML M ρ (emlSub s t)
       ≡ sub M (evalEML M ρ s) (evalEML M ρ t)
 
@@ -160,19 +265,19 @@ globalLawsGiveDomainLaws :
 globalLawsGiveDomainLaws laws =
   record
     { expEncodingOnDomain =
-        λ ρ {t} _ → expEncoding laws (evalEML _ ρ t)
+        λ ρ {t} childDefined compiledDefined →
+          expEncoding laws (evalEML _ ρ t)
     ; logEncodingOnDomain =
-        λ ρ {t} _ → logEncoding laws (evalEML _ ρ t)
+        λ ρ {t} childDefined compiledDefined →
+          logEncoding laws (evalEML _ ρ t)
     ; subEncodingOnDomain =
-        λ ρ {s} {t} _ _ →
+        λ ρ {s} {t} leftDefined rightDefined compiledDefined →
           subEncoding laws (evalEML _ ρ s) (evalEML _ ρ t)
     }
 
 record AnalyticEMLCompilerPackage (M : ExpLogSubModel) : Set₁ where
   field
     admissibility : EMLAdmissibility M
-    compilerDefinedness :
-      EMLCompilerDefinedness M admissibility
     compilerLawsOnDomain :
       EMLCompilerLawsOnDomain M admissibility
 
@@ -182,40 +287,33 @@ analyticCompileCorrect :
   ∀ {M : ExpLogSubModel} →
   (P : AnalyticEMLCompilerPackage M) →
   ∀ ρ {t} →
-  DefinedSource M (admissibility P) ρ t →
+  CompilationDefined M (admissibility P) ρ t →
   evalEML M ρ (compileEML t) ≡ evalSource M ρ t
-analyticCompileCorrect P ρ oneDefined = refl
-analyticCompileCorrect P ρ (varDefined x) = refl
-analyticCompileCorrect P ρ (expDefined sourceDefined _)
-  rewrite analyticCompileCorrect P ρ sourceDefined =
+analyticCompileCorrect P ρ oneCompilationDefined = refl
+analyticCompileCorrect P ρ (varCompilationDefined x) = refl
+analyticCompileCorrect P ρ
+  (expCompilationDefined child admissible compiled)
+  rewrite analyticCompileCorrect P ρ child =
   expEncodingOnDomain
     (compilerLawsOnDomain P)
     ρ
-    (compileEML-preserves-defined
-      (compilerDefinedness P)
-      ρ
-      sourceDefined)
-analyticCompileCorrect P ρ (logDefined sourceDefined _)
-  rewrite analyticCompileCorrect P ρ sourceDefined =
+    (compiledDefinedFromCompilation child)
+    compiled
+analyticCompileCorrect P ρ
+  (logCompilationDefined child admissible compiled)
+  rewrite analyticCompileCorrect P ρ child =
   logEncodingOnDomain
     (compilerLawsOnDomain P)
     ρ
-    (compileEML-preserves-defined
-      (compilerDefinedness P)
-      ρ
-      sourceDefined)
+    (compiledDefinedFromCompilation child)
+    compiled
 analyticCompileCorrect P ρ
-  (subDefined leftDefined rightDefined _)
-  rewrite analyticCompileCorrect P ρ leftDefined
-        | analyticCompileCorrect P ρ rightDefined =
+  (subCompilationDefined left right admissible compiled)
+  rewrite analyticCompileCorrect P ρ left
+        | analyticCompileCorrect P ρ right =
   subEncodingOnDomain
     (compilerLawsOnDomain P)
     ρ
-    (compileEML-preserves-defined
-      (compilerDefinedness P)
-      ρ
-      leftDefined)
-    (compileEML-preserves-defined
-      (compilerDefinedness P)
-      ρ
-      rightDefined)
+    (compiledDefinedFromCompilation left)
+    (compiledDefinedFromCompilation right)
+    compiled
