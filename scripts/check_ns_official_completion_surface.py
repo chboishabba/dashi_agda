@@ -9,9 +9,15 @@ CLOSURE = ROOT / "DASHI" / "Physics" / "Closure"
 
 FILES = {
     "NSPeriodicOfficialNormIdentification.agda": [
+        "officialShellVorticityL2FromVelocity",
         "officialShellVorticityFromVelocity",
         "officialVorticityReconstruction",
         "officialPeriodicNormIdentificationInhabited = false",
+    ],
+    "NSPeriodicOfficialNormBernsteinAdapter.agda": [
+        "concreteBernsteinToOfficialNormIdentification",
+        "shellCurlFromConcreteBernstein",
+        "vorticityReconstructionFromConcreteLeaves",
     ],
     "NSPeriodicNearTriadCutoffUniformCompletion.agda": [
         "periodicNearTriadCutoffUniformEstimate",
@@ -25,7 +31,13 @@ FILES = {
         "periodicFarHighOfficialRadiusEightEstimate",
         "farHighOfficialTailInputsInhabited = false",
     ],
+    "NSPeriodicOfficialHarmonicAuthorityCompletion.agda": [
+        "nearTriadFromSelectedAuthority",
+        "farLowFromSelectedAuthority",
+        "farHighFromSelectedAuthority",
+    ],
     "NSPeriodicWallIHarmonicCompletion.agda": [
+        "wallIOfficialNormAdmissibility",
         "periodicWallIHarmonicEstimate",
         "wallIOfficialHarmonicInputsInhabited = false",
     ],
