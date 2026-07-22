@@ -67,9 +67,9 @@ smokeDefinedness =
 smokeAnalyticPackage : AnalyticEMLCompilerPackage smokeModel
 smokeAnalyticPackage =
   record
-    { laws = smokeLaws
-    ; admissibility = smokeAdmissibility
+    { admissibility = smokeAdmissibility
     ; compilerDefinedness = smokeDefinedness
+    ; compilerLawsOnDomain = globalLawsGiveDomainLaws smokeLaws
     }
 
 smokeCompileCorrect :
