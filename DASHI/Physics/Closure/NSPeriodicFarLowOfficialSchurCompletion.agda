@@ -13,8 +13,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- The raw smooth-multiplier gain is deliberately not the endpoint.  The owner
 -- below retains the divergence-free cancellation, both linearized placements,
 -- Biot--Savart, Leray, convolution multiplicity, weighted row/column Schur
--- estimates, their exact product constant, and the final R=8 budget in one
--- coherent theorem package.
+-- estimates, and the final R=8 budget in one coherent theorem package.
 ------------------------------------------------------------------------
 
 record PeriodicFarLowOfficialSchurInputs
@@ -49,10 +48,6 @@ record PeriodicFarLowOfficialSchurInputs
     weightedSchurFactorization : ∀ q τ u →
       Admissible q τ u → WeightedSchurFactorization q τ u
 
-    fullOfficialSchurMeaning : ∀ q τ u →
-      fullOfficialSchur q τ u ≡
-      _∗_ A (weightedRowSchur q τ u) (weightedColumnSchur q τ u)
-
     farLowRewrittenAsCommutator : ∀ q τ u →
       Admissible q τ u →
       _≤_ A (farLowOperator q τ u) (commutatorOperator q τ u)
@@ -74,10 +69,28 @@ record PeriodicFarLowOfficialSchurInputs
 
 open PeriodicFarLowOfficialSchurInputs public
 
+-- Kept separate so standard harmonic authorities can be adapted before the
+-- official weighted row/column norm is chosen.  The coherent Wall I owner must
+-- supply this record before it can use the far-low package.
+record PeriodicFarLowSchurFactorCoherence
+    {i : Level}
+    {A : AbsorptionArithmetic}
+    {Index Time State : Set i}
+    (F : PeriodicFarLowOfficialSchurInputs A Index Time State) : Set i where
+  field
+    fullOfficialSchurMeaning : ∀ q τ u →
+      fullOfficialSchur F q τ u ≡
+      _∗_ A
+        (weightedRowSchur F q τ u)
+        (weightedColumnSchur F q τ u)
+
+open PeriodicFarLowSchurFactorCoherence public
+
 farLowFullSchurIsRowColumnProduct :
   ∀ {i} {A : AbsorptionArithmetic}
     {Index Time State : Set i} →
-  (F : PeriodicFarLowOfficialSchurInputs A Index Time State) →
+  {F : PeriodicFarLowOfficialSchurInputs A Index Time State} →
+  PeriodicFarLowSchurFactorCoherence F →
   ∀ q τ u →
   fullOfficialSchur F q τ u ≡
   _∗_ A
