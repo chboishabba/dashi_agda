@@ -25,6 +25,12 @@ concreteRealIntegrationAdapterLevel = machineChecked
 galerkinG1ToG19ContinuumAdapterLevel : ProofLevel
 galerkinG1ToG19ContinuumAdapterLevel = machineChecked
 
+allDataCutoffCoverageAdapterLevel : ProofLevel
+allDataCutoffCoverageAdapterLevel = machineChecked
+
+cutoffContinuumAssemblyLevel : ProofLevel
+cutoffContinuumAssemblyLevel = machineChecked
+
 -- Remaining official-carrier theorem packages.
 officialNormIdentificationLevel : ProofLevel
 officialNormIdentificationLevel = conditional
