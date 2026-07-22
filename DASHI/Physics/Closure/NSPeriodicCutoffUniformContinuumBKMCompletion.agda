@@ -61,12 +61,20 @@ record PeriodicCutoffUniformContinuumInputs
       SelectedGalerkinFamily u₀ →
       CompactSubsequence u₀
 
-    limitSolution : InitialDatum → CompactSubsequence → ContinuumSolution
+    limitSolution :
+      (u₀ : InitialDatum) →
+      CompactSubsequence u₀ →
+      ContinuumSolution
 
-    limitPreservesNavierStokes : ∀ u₀ smooth subsequence →
+    limitPreservesNavierStokes :
+      ∀ u₀
+        (smooth : SmoothDivergenceFreeMeanZero u₀)
+        (subsequence : CompactSubsequence u₀) →
       ContinuumSolvesFrom u₀ (limitSolution u₀ subsequence)
 
-    vorticityBoundPassesToLimit : ∀ u₀ T subsequence →
+    vorticityBoundPassesToLimit :
+      ∀ u₀ T
+        (subsequence : CompactSubsequence u₀) →
       SmoothDivergenceFreeMeanZero u₀ →
       CutoffUniformBound u₀ T →
       ContinuumVorticityIntegralFinite
