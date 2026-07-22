@@ -37,3 +37,4 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteProofProgramRegression publi
 open import DASHI.Physics.Closure.NSCompactGammaStandardAnalysisCompletion public
 open import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset public
 open import DASHI.Physics.Closure.NSCompactGammaCriticalObligationCompletion public
+open import DASHI.Physics.Closure.NSPeriodicOfficialCompletionRegression public
