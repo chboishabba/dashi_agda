@@ -5,7 +5,7 @@ on:
     paths:
       - 'DASHI/Foundations/ElementarySingleOperator.agda'
       - 'DASHI/Foundations/EML*.agda'
-      - 'DASHI/Foundations/ElementaryCalculator.agda'
+      - 'DASHI/Foundations/ElementaryCalculator*.agda'
       - 'DASHI/Foundations/Ternary*.agda'
       - 'DASHI/Foundations/SpectralCountingComplexity.agda'
       - 'DASHI/Foundations/DivergenceComparisonPackage.agda'
@@ -44,6 +44,7 @@ jobs:
             $AGDA DASHI/Foundations/EMLComplexBranchPackage.agda
             $AGDA DASHI/Foundations/EMLConcreteSmokeModel.agda
             $AGDA DASHI/Foundations/ElementaryCalculator.agda
+            $AGDA DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda
             $AGDA DASHI/Foundations/TernaryElementaryOperatorCandidate.agda
             $AGDA DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda
             $AGDA DASHI/Foundations/TernaryElementarySearchCertificate.agda
