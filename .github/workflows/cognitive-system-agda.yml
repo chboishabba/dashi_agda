@@ -7,6 +7,7 @@ on:
       - 'DASHI/Algebra/BalancedTernary.agda'
       - 'Base369.agda'
       - 'Ultrametric.agda'
+      - 'scripts/check_cognitive_formalism.sh'
       - 'flake.nix'
       - '.github/workflows/cognitive-system-agda.yml'
   workflow_dispatch:
@@ -28,5 +29,4 @@ jobs:
       - name: Type-check focused cognition aggregate
         run: >-
           nix develop .# --command
-          agda -i . -l standard-library
-          DASHI/Cognition/LanguagePhaseEverything.agda
+          bash scripts/check_cognitive_formalism.sh
