@@ -66,6 +66,8 @@ FILES = {
         "diffuseSpectrumBKMInputsInhabited = false",
     ],
     "NSPeriodicAllDataCoverageCompletion.agda": [
+        "normalizedChartCarriesBothControls",
+        "normalizedChartGivesBKM",
         "periodicAllDataContinuesBeyond",
         "allDataAdaptiveCoverageInputsInhabited = false",
     ],
@@ -75,6 +77,8 @@ FILES = {
         "standardContinuumBKMContinuation",
     ],
     "NSPeriodicCutoffUniformContinuumBKMCompletion.agda": [
+        "FamilyContains",
+        "familyMembership",
         "periodicContinuumGlobalRegularity",
         "unconditionalPeriodicGlobalRegularityPromoted = false",
     ],
