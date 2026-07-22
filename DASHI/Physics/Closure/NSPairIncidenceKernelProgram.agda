@@ -84,6 +84,7 @@ import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification
 import DASHI.Physics.Closure.NSPeriodicOfficialNormBernsteinAdapter
 import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion
 import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion
+import DASHI.Physics.Closure.NSPeriodicOfficialFarLowSchurAdapter
 import DASHI.Physics.Closure.NSPeriodicFarHighTailCompletion
 import DASHI.Physics.Closure.NSPeriodicOfficialHarmonicAuthorityCompletion
 import DASHI.Physics.Closure.NSPeriodicWallIHarmonicCompletion
@@ -93,6 +94,7 @@ import DASHI.Physics.Closure.NSCompactGammaNormalizedBoundaryInwardnessCompletio
 import DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchCostCompletion
 import DASHI.Physics.Closure.NSPeriodicDiffuseSpectrumBKMCompletion
 import DASHI.Physics.Closure.NSPeriodicAllDataCoverageCompletion
+import DASHI.Physics.Closure.NSPeriodicAllDataCutoffCoverageAdapter
 import DASHI.Physics.Closure.NSPeriodicStandardContinuumAdapter
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion
 import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus
