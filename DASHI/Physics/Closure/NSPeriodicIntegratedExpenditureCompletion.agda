@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureCompletion where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.Closure.NSCompactGammaDifferentialExpenditureProducer
@@ -12,10 +13,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Concrete-PDE bridge from the official Wall I estimate to the existing exact
 -- integrated compact-Gamma expenditure theorem.
 --
--- The genuinely analytic work is represented by proof-relevant propositions:
--- substitution of the Galerkin Navier--Stokes vector field into the observable
--- derivatives, identification of the Wall I budget with the coercive pointwise
--- ledger, and cutoff-uniform control of the forcing and switch remainder.
+-- Opaque marker propositions are deliberately avoided.  An inhabitant must tie
+-- the selected Galerkin Navier--Stokes derivative to the actual potential
+-- derivative, prove that the official Wall I budget is paid by the same
+-- coercive-envelope rate used by the pointwise expenditure record, and identify
+-- the integrated remainder with forcing plus chart-switch costs.
 ------------------------------------------------------------------------
 
 record PeriodicConcreteExpenditureInputs
@@ -33,20 +35,25 @@ record PeriodicConcreteExpenditureInputs
       WallI.CommonAdmissible harmonicInputs
         (selectedIndex τ) τ (selectedState τ)
 
-    ConcreteNavierStokesDerivativeSubstitution : Set i
-    WallIBudgetMatchesDifferentialLedger : Set i
-    ForcingAndSwitchRemainderUniform : Set i
-
-    concreteNavierStokesDerivativeSubstitution :
-      ConcreteNavierStokesDerivativeSubstitution
-
-    wallIBudgetMatchesDifferentialLedger :
-      WallIBudgetMatchesDifferentialLedger
-
-    forcingAndSwitchRemainderUniform :
-      ForcingAndSwitchRemainderUniform
-
     pointwiseExpenditure : PointwiseCompactGammaExpenditure A Time
+
+    navierStokesPotentialDerivative : Time → Scalar A
+
+    navierStokesDerivativeMeaning : ∀ τ →
+      navierStokesPotentialDerivative τ ≡
+      potentialDerivative pointwiseExpenditure τ
+
+    wallIBudgetPaidByCoerciveEnvelope : ∀ τ →
+      _≤_ A
+        (WallI.officialWallIBudget harmonicInputs
+          (selectedIndex τ) τ (selectedState τ))
+        (coerciveEnvelopeRate pointwiseExpenditure τ)
+
+    forcingRemainder switchRemainder : Scalar A
+
+    forcingAndSwitchRemainderMeaning :
+      forcingAndDataRemainder pointwiseExpenditure ≡
+      _+_ A forcingRemainder switchRemainder
 
     expenditureTransport :
       ConcreteExpenditureTransport {l = l} A L pointwiseExpenditure
@@ -71,6 +78,22 @@ concretePeriodicWallIEstimateAlongTrajectory P τ =
     (harmonicInputs P)
     (selectedIndex P τ) τ (selectedState P τ)
     (selectedAdmissible P τ)
+
+concretePeriodicNonlinearPaidByEnvelope :
+  ∀ {i l} {A : AbsorptionArithmetic}
+    {L : OrderedAdditiveCompletionLaws A}
+    {Index Time State : Set i} →
+  (P : PeriodicConcreteExpenditureInputs {l = l} A L Index Time State) →
+  ∀ τ →
+  _≤_ A
+    (WallI.nonlinearTotal
+      (harmonicInputs P)
+      (selectedIndex P τ) τ (selectedState P τ))
+    (coerciveEnvelopeRate (pointwiseExpenditure P) τ)
+concretePeriodicNonlinearPaidByEnvelope {A = A} P τ =
+  ≤-trans A
+    (concretePeriodicWallIEstimateAlongTrajectory P τ)
+    (wallIBudgetPaidByCoerciveEnvelope P τ)
 
 periodicIntegratedWeightedShellEstimate :
   ∀ {i l} {A : AbsorptionArithmetic}
