@@ -1,0 +1,42 @@
+name: Cognitive system Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Cognition/**'
+      - 'DASHI/Algebra/BalancedTernary.agda'
+      - 'Base369.agda'
+      - 'Ultrametric.agda'
+      - 'flake.nix'
+      - '.github/workflows/cognitive-system-agda.yml'
+  push:
+    branches:
+      - cognitive-system-analytic-closure
+    paths:
+      - 'DASHI/Cognition/**'
+      - 'DASHI/Algebra/BalancedTernary.agda'
+      - 'Base369.agda'
+      - 'Ultrametric.agda'
+      - 'flake.nix'
+      - '.github/workflows/cognitive-system-agda.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-cognitive-closure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check focused cognition aggregate
+        run: >-
+          nix develop .# --command
+          agda -i . -l standard-library
+          DASHI/Cognition/LanguagePhaseEverything.agda
