@@ -99,6 +99,11 @@ FILES = {
         "periodicContinuumGlobalRegularity",
         "unconditionalPeriodicGlobalRegularityPromoted = false",
     ],
+    "NSPeriodicCutoffUniformContinuumAssembly.agda": [
+        "assemblePeriodicCutoffUniformContinuumInputs",
+        "Coverage.allDataCoverageAtCutoff",
+        "assembledPeriodicContinuumGlobalRegularity",
+    ],
     "NSPeriodicOfficialCompletionStatus.agda": [
         "unconditionalPeriodicNavierStokesTheorem = false",
         "clayNavierStokesSubmissionPromoted = false",
