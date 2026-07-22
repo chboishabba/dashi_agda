@@ -10,13 +10,6 @@ import DASHI.Biology.ObserverPerceptualManifoldResidual as Observer
 import DASHI.Biology.RetinalPerturbationObservationBridge as Retinal
 import DASHI.Combinatorics.PDA_MDL.Prelude as MDL
 
-------------------------------------------------------------------------
--- Functional visual generators over a literal 3 x 3 ternary sheet.
--- These are not claims that V1 is a 3 x 3 grid; they are exact finite normal
--- forms for the geometric generator classes already present in the retinal
--- observation bridge.
-------------------------------------------------------------------------
-
 data VisualGenerator : Set where
   orientationWave : VisualGenerator
   lattice : VisualGenerator
@@ -68,12 +61,6 @@ formConstant tunnel = Retinal.tunnelField
 formConstant cobweb = Retinal.cobwebField
 formConstant semanticScene = Retinal.diffuseConfidenceField
 
-------------------------------------------------------------------------
--- Constructive two-part description length.
--- Symmetric generators have short rule codes; semantic scenes carry an
--- additional binding code.  A data-dependent fit cost is added separately.
-------------------------------------------------------------------------
-
 generatorCode : VisualGenerator → MDL.CodeLength
 generatorCode orientationWave = 2
 generatorCode lattice = 3
@@ -114,13 +101,11 @@ latticeIsCheaperThanSemanticBinding :
   visualMDL lattice 0 ≤ visualMDL semanticScene 0
 latticeIsCheaperThanSemanticBinding = s≤s (s≤s (s≤s z≤n))
 
-------------------------------------------------------------------------
--- Generator deformation.  Base369.rotateTri acts pointwise, so a shared
--- low-code generator can appear in multiple colour/polarity phases without
--- changing its topology or requiring shared learned semantic content.
-------------------------------------------------------------------------
-
-mapGrid : (Base.TriTruth → Base.TriTruth) → Grid9 → Grid9
+mapGrid :
+  ∀ {n} →
+  (Base.TriTruth → Base.TriTruth) →
+  Vec Base.TriTruth n →
+  Vec Base.TriTruth n
 mapGrid f [] = []
 mapGrid f (x ∷ xs) = f x ∷ mapGrid f xs
 
@@ -140,11 +125,6 @@ rotateRenderedThreeTimes spiral = refl
 rotateRenderedThreeTimes tunnel = refl
 rotateRenderedThreeTimes cobweb = refl
 rotateRenderedThreeTimes semanticScene = refl
-
-------------------------------------------------------------------------
--- Observer quotient boundary: shared generator classes do not imply shared
--- phenomenal identity.  This aliases the existing observer-fibre separation.
-------------------------------------------------------------------------
 
 humanGeneratorFibre : Observer.PerceptualFibre
 humanGeneratorFibre = Observer.fibreFor Observer.humanObserver
