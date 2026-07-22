@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPeriodicFourierNormalizationMatching where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Fourier
 
@@ -16,7 +17,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Fourier
 ------------------------------------------------------------------------
 
 record PeriodicFourierNormalizationMatch
-    {L : Agda.Builtin.Nat.Nat} {Scalar Bound : Set}
+    {L : Nat} {Scalar Bound : Set}
     (authority : PeriodicTorus4FourierAuthority L Scalar Bound)
     (theorems : PeriodicTorus4FourierTheorems authority) : Set₁ where
   field
@@ -63,11 +64,8 @@ record PeriodicFourierNormalizationMatch
 
 open PeriodicFourierNormalizationMatch public
 
-symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-symmetry refl = refl
-
 physicalBondFourierParseval :
-  ∀ {L : Agda.Builtin.Nat.Nat} {Scalar Bound : Set}
+  ∀ {L : Nat} {Scalar Bound : Set}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound}
     {theorems : PeriodicTorus4FourierTheorems authority} →
     (matching : PeriodicFourierNormalizationMatch authority theorems) →
@@ -84,7 +82,7 @@ physicalBondFourierParseval {authority = authority} {theorems = theorems}
     (physicalWeight matching) field
 
 literalTransformUsesInverseCardinality :
-  ∀ {L : Agda.Builtin.Nat.Nat} {Scalar Bound : Set}
+  ∀ {L : Nat} {Scalar Bound : Set}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound}
     {theorems : PeriodicTorus4FourierTheorems authority} →
     (matching : PeriodicFourierNormalizationMatch authority theorems) →
@@ -94,7 +92,7 @@ literalTransformUsesInverseCardinality =
   transformNormalizationMatchesInverseCardinality
 
 literalCharacterSumUsesTorusCardinality :
-  ∀ {L : Agda.Builtin.Nat.Nat} {Scalar Bound : Set}
+  ∀ {L : Nat} {Scalar Bound : Set}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound}
     {theorems : PeriodicTorus4FourierTheorems authority} →
     (matching : PeriodicFourierNormalizationMatch authority theorems) →
