@@ -3,21 +3,10 @@ module DASHI.Cognition.BaselineMarginModelSelection where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _-_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Nat using (_∸_)
 
 import DASHI.Cognition.CognitiveObservableDistributions as Distribution
-
-------------------------------------------------------------------------
--- Positive-margin inversion on a finite dataset.
---
--- observed = baseline + beta * resonance - control
--- therefore
--- baselineEstimate = control + observed - beta * resonance.
---
--- Nat subtraction is intentional: these data are the positive-margin lane.
--- Negative/collapsed observations remain represented by SignedMargin in the
--- master system and require a two-sided calibration rather than this solver.
-------------------------------------------------------------------------
 
 record MarginDatum : Set where
   constructor marginDatum
@@ -31,7 +20,7 @@ open MarginDatum public
 baselineEstimate : Nat → MarginDatum → Nat
 baselineEstimate beta datum =
   (controlLoad datum + observedPositiveMargin datum)
-  - (beta * resonanceDrive datum)
+  ∸ (beta * resonanceDrive datum)
 
 mapEstimate : Nat → List MarginDatum → List Nat
 mapEstimate beta [] = []
@@ -42,12 +31,6 @@ inferredBaselineDistribution :
   Nat → List MarginDatum → Distribution.FiniteNatDistribution
 inferredBaselineDistribution beta data =
   Distribution.fromSamples (mapEstimate beta data)
-
-------------------------------------------------------------------------
--- MDL cost for a common-baseline model.
--- The first inferred baseline is the reference parameter; remaining values
--- are residual-coded by absolute deviation.  beta itself costs unary length.
-------------------------------------------------------------------------
 
 absDiff : Nat → Nat → Nat
 absDiff zero n = n
@@ -65,7 +48,7 @@ baselineResidualCost (reference ∷ rest) = residualFrom reference rest
 
 betaCode : Nat → Nat
 betaCode zero = 0
-betaCode (suc beta) = suc (suc beta)
+betaCode (suc beta) = suc (suc (suc beta))
 
 modelCode : Nat → List MarginDatum → Nat
 modelCode beta data =
@@ -80,13 +63,6 @@ lessNat (suc m) (suc n) = lessNat m n
 couplingImprovesMDL : Nat → List MarginDatum → Bool
 couplingImprovesMDL beta data =
   lessNat (modelCode beta data) (modelCode 0 data)
-
-------------------------------------------------------------------------
--- Small exact condition family.
--- A true common baseline 10 is distorted under the scalar-only inversion
--- whenever resonance contributes 3 units.  The beta=3 model reconstructs the
--- tight distribution [10,10,10], while beta=0 gives [10,13,13].
-------------------------------------------------------------------------
 
 coupledDataset : List MarginDatum
 coupledDataset =
@@ -110,11 +86,6 @@ coupledModelCodeIsFive = refl
 couplingWinsThisFiniteDataset :
   couplingImprovesMDL 3 coupledDataset ≡ true
 couplingWinsThisFiniteDataset = refl
-
-------------------------------------------------------------------------
--- Control-only fixture.  With no resonance variation, the scalar model
--- already reconstructs a point-mass baseline and the extra beta code loses.
-------------------------------------------------------------------------
 
 scalarDataset : List MarginDatum
 scalarDataset =
