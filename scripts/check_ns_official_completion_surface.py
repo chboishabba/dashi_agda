@@ -24,8 +24,15 @@ FILES = {
         "nearTriadOfficialUniformInputsInhabited = false",
     ],
     "NSPeriodicFarLowOfficialSchurCompletion.agda": [
+        "PeriodicFarLowSchurFactorCoherence",
+        "farLowFullSchurIsRowColumnProduct",
         "periodicFarLowOfficialRadiusEightEstimate",
         "farLowOfficialSchurInputsInhabited = false",
+    ],
+    "NSPeriodicOfficialFarLowSchurAdapter.agda": [
+        "factorizedFarLowFromSelectedAuthority",
+        "factorizedFarLowSchurCoherence",
+        "factorizedFarLowRadiusEightEstimate",
     ],
     "NSPeriodicFarHighTailCompletion.agda": [
         "periodicFarHighOfficialRadiusEightEstimate",
@@ -38,6 +45,7 @@ FILES = {
     ],
     "NSPeriodicWallIHarmonicCompletion.agda": [
         "wallIOfficialNormAdmissibility",
+        "wallIFarLowSchurProduct",
         "periodicWallIHarmonicEstimate",
         "wallIOfficialHarmonicInputsInhabited = false",
     ],
