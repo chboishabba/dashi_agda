@@ -10,9 +10,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Final finite-cutoff-to-continuum completion surface.
 --
 -- This module begins only after all-data adaptive coverage has supplied a
--- cutoff-uniform finite-vorticity expenditure.  It names compactness, equation
--- passage, lower-semicontinuity/limit transport, BKM continuation, and arbitrary
--- time iteration separately, then assembles the global endpoint.
+-- cutoff-uniform finite-vorticity expenditure.  All cutoff estimates,
+-- compactness witnesses and the continuum limit are tied to one selected
+-- Galerkin family, preventing estimates for unrelated approximations from being
+-- combined in the final BKM assembly.
 ------------------------------------------------------------------------
 
 record PeriodicCutoffUniformContinuumInputs
@@ -42,43 +43,61 @@ record PeriodicCutoffUniformContinuumInputs
       GalerkinSolvesFrom N u₀ uN →
       CutoffVorticityIntegralFinite N uN T
 
-    CutoffUniformBound : InitialDatum → Time → Set i
-
-    cutoffUniformity : ∀ N u₀ uN T →
-      SmoothDivergenceFreeMeanZero u₀ →
-      GalerkinSolvesFrom N u₀ uN →
-      CutoffVorticityIntegralFinite N uN T →
-      CutoffUniformBound u₀ T
-
     SelectedGalerkinFamily : InitialDatum → Set i
     selectedGalerkinFamily : ∀ u₀ →
       SmoothDivergenceFreeMeanZero u₀ →
       SelectedGalerkinFamily u₀
 
-    CompactSubsequence : InitialDatum → Set i
-    compactnessExtraction : ∀ u₀ →
-      SmoothDivergenceFreeMeanZero u₀ →
+    FamilyContains : ∀ {u₀} →
       SelectedGalerkinFamily u₀ →
-      CompactSubsequence u₀
+      Cutoff → GalerkinSolution → Set i
+
+    CutoffUniformBound :
+      (u₀ : InitialDatum) →
+      SelectedGalerkinFamily u₀ →
+      Time → Set i
+
+    cutoffUniformity :
+      ∀ u₀
+        (family : SelectedGalerkinFamily u₀)
+        N uN T →
+      SmoothDivergenceFreeMeanZero u₀ →
+      GalerkinSolvesFrom N u₀ uN →
+      FamilyContains family N uN →
+      CutoffVorticityIntegralFinite N uN T →
+      CutoffUniformBound u₀ family T
+
+    CompactSubsequence :
+      (u₀ : InitialDatum) →
+      SelectedGalerkinFamily u₀ → Set i
+
+    compactnessExtraction :
+      ∀ u₀
+        (smooth : SmoothDivergenceFreeMeanZero u₀)
+        (family : SelectedGalerkinFamily u₀) →
+      CompactSubsequence u₀ family
 
     limitSolution :
       (u₀ : InitialDatum) →
-      CompactSubsequence u₀ →
+      (family : SelectedGalerkinFamily u₀) →
+      CompactSubsequence u₀ family →
       ContinuumSolution
 
     limitPreservesNavierStokes :
       ∀ u₀
         (smooth : SmoothDivergenceFreeMeanZero u₀)
-        (subsequence : CompactSubsequence u₀) →
-      ContinuumSolvesFrom u₀ (limitSolution u₀ subsequence)
+        (family : SelectedGalerkinFamily u₀)
+        (subsequence : CompactSubsequence u₀ family) →
+      ContinuumSolvesFrom u₀ (limitSolution u₀ family subsequence)
 
     vorticityBoundPassesToLimit :
       ∀ u₀ T
-        (subsequence : CompactSubsequence u₀) →
+        (family : SelectedGalerkinFamily u₀)
+        (subsequence : CompactSubsequence u₀ family) →
       SmoothDivergenceFreeMeanZero u₀ →
-      CutoffUniformBound u₀ T →
+      CutoffUniformBound u₀ family T →
       ContinuumVorticityIntegralFinite
-        (limitSolution u₀ subsequence) T
+        (limitSolution u₀ family subsequence) T
 
     bkmContinuation : ∀ u₀ u T →
       SmoothDivergenceFreeMeanZero u₀ →
@@ -101,13 +120,13 @@ periodicContinuumSolutionAndEquation :
   SmoothDivergenceFreeMeanZero C u₀ →
   Σ ContinuumSolution (λ u → ContinuumSolvesFrom C u₀ u)
 periodicContinuumSolutionAndEquation C u₀ smooth =
-  limitSolution C u₀ subsequence ,
-  limitPreservesNavierStokes C u₀ smooth subsequence
+  limitSolution C u₀ family subsequence ,
+  limitPreservesNavierStokes C u₀ smooth family subsequence
   where
   family : SelectedGalerkinFamily C u₀
   family = selectedGalerkinFamily C u₀ smooth
 
-  subsequence : CompactSubsequence C u₀
+  subsequence : CompactSubsequence C u₀ family
   subsequence = compactnessExtraction C u₀ smooth family
 
 periodicContinuumGlobalRegularity :
@@ -117,24 +136,31 @@ periodicContinuumGlobalRegularity :
   (selectedCutoff : Time → Cutoff) →
   (selectedGalerkinSolution : Time → GalerkinSolution) →
   ∀ u₀ →
-  SmoothDivergenceFreeMeanZero C u₀ →
-  (∀ T → GalerkinSolvesFrom C
+  (smooth : SmoothDivergenceFreeMeanZero C u₀) →
+  (solves : ∀ T → GalerkinSolvesFrom C
     (selectedCutoff T) u₀ (selectedGalerkinSolution T)) →
+  (familyMembership : ∀ T →
+    FamilyContains C
+      (selectedGalerkinFamily C u₀ smooth)
+      (selectedCutoff T)
+      (selectedGalerkinSolution T)) →
   GlobalSmoothSolution C u₀
-periodicContinuumGlobalRegularity C selectedCutoff selectedGalerkinSolution u₀ smooth solves =
+periodicContinuumGlobalRegularity
+    C selectedCutoff selectedGalerkinSolution u₀ smooth solves familyMembership =
   arbitraryFiniteTimeContinuationImpliesGlobal C u₀ smooth continuationAtEveryTime
   where
   family : SelectedGalerkinFamily C u₀
   family = selectedGalerkinFamily C u₀ smooth
 
-  subsequence : CompactSubsequence C u₀
+  subsequence : CompactSubsequence C u₀ family
   subsequence = compactnessExtraction C u₀ smooth family
 
   continuum : ContinuumSolution
-  continuum = limitSolution C u₀ subsequence
+  continuum = limitSolution C u₀ family subsequence
 
   continuumSolves : ContinuumSolvesFrom C u₀ continuum
-  continuumSolves = limitPreservesNavierStokes C u₀ smooth subsequence
+  continuumSolves =
+    limitPreservesNavierStokes C u₀ smooth family subsequence
 
   continuationAtEveryTime : ∀ T → ContinuesBeyond C u₀ T
   continuationAtEveryTime T =
@@ -148,15 +174,17 @@ periodicContinuumGlobalRegularity C selectedCutoff selectedGalerkinSolution u₀
         (selectedCutoff T) u₀ (selectedGalerkinSolution T) T
         smooth (solves T)
 
-    uniform : CutoffUniformBound C u₀ T
+    uniform : CutoffUniformBound C u₀ family T
     uniform =
       cutoffUniformity C
-        (selectedCutoff T) u₀ (selectedGalerkinSolution T) T
-        smooth (solves T) cutoffBKM
+        u₀ family
+        (selectedCutoff T) (selectedGalerkinSolution T) T
+        smooth (solves T) (familyMembership T) cutoffBKM
 
     continuumBKM : ContinuumVorticityIntegralFinite C continuum T
     continuumBKM =
-      vorticityBoundPassesToLimit C u₀ T subsequence smooth uniform
+      vorticityBoundPassesToLimit C
+        u₀ T family subsequence smooth uniform
 
 ------------------------------------------------------------------------
 -- Proof-level and fail-closed status.
