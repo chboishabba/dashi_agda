@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -12,7 +13,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- The raw smooth-multiplier gain is deliberately not the endpoint.  The owner
 -- below retains the divergence-free cancellation, both linearized placements,
 -- Biot--Savart, Leray, convolution multiplicity, weighted row/column Schur
--- estimates, and the final R=8 budget in one coherent theorem package.
+-- estimates, their exact product constant, and the final R=8 budget in one
+-- coherent theorem package.
 ------------------------------------------------------------------------
 
 record PeriodicFarLowOfficialSchurInputs
@@ -47,6 +49,10 @@ record PeriodicFarLowOfficialSchurInputs
     weightedSchurFactorization : ∀ q τ u →
       Admissible q τ u → WeightedSchurFactorization q τ u
 
+    fullOfficialSchurMeaning : ∀ q τ u →
+      fullOfficialSchur q τ u ≡
+      _∗_ A (weightedRowSchur q τ u) (weightedColumnSchur q τ u)
+
     farLowRewrittenAsCommutator : ∀ q τ u →
       Admissible q τ u →
       _≤_ A (farLowOperator q τ u) (commutatorOperator q τ u)
@@ -67,6 +73,17 @@ record PeriodicFarLowOfficialSchurInputs
     cutoffUniform : CutoffUniform
 
 open PeriodicFarLowOfficialSchurInputs public
+
+farLowFullSchurIsRowColumnProduct :
+  ∀ {i} {A : AbsorptionArithmetic}
+    {Index Time State : Set i} →
+  (F : PeriodicFarLowOfficialSchurInputs A Index Time State) →
+  ∀ q τ u →
+  fullOfficialSchur F q τ u ≡
+  _∗_ A
+    (weightedRowSchur F q τ u)
+    (weightedColumnSchur F q τ u)
+farLowFullSchurIsRowColumnProduct = fullOfficialSchurMeaning
 
 periodicFarLowOfficialRadiusEightEstimate :
   ∀ {i} {A : AbsorptionArithmetic}
