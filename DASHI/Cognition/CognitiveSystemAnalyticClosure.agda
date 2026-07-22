@@ -17,8 +17,11 @@ import DASHI.Cognition.CognitiveVacuumClassBoundary as Vacuum
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
 import DASHI.Cognition.KepplerFiniteResonanceMDL as Keppler
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
+import DASHI.Cognition.MultipleDraftsQuotient as Drafts
+import DASHI.Cognition.PhaseObservableIndependence as Independence
+import DASHI.Cognition.PhysicalCouplingFactorisation as Coupling
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
-import DASHI.Cognition.ResidualPhaseGeometry
+import DASHI.Cognition.ResidualPhaseGeometry as RPG
 import DASHI.Cognition.TernaryDerivationAddress as Address
 import DASHI.Cognition.TernaryDerivationUltrametric as TritMetric
 import DASHI.Cognition.VisualCompressionAttractors
@@ -38,11 +41,25 @@ record CognitiveAnalyticClosure : Set₁ where
     threeDigitAddressClosed :
       Address.encode3 (BT.neg ∷ BT.zero ∷ BT.pos ∷ []) ≡ 21
 
+    multipleDraftHistoriesDistinct :
+      Drafts.orwellianHistory ≡ Drafts.stalinesqueHistory → ⊥
+
+    multipleDraftPublicQuotientEqual :
+      RPG.Projection.observe Drafts.publicProjection Drafts.orwellianHistory
+      ≡ RPG.Projection.observe Drafts.publicProjection Drafts.stalinesqueHistory
+
     cubicControlKinkClosed :
       Dynamics.marginAt Dynamics.canonicalKinkDynamics 1 0 0
       ≡ Cognitive.positiveMargin 13
 
     cuspBoundaryClosed : Dynamics.CuspBoundary 3 2
+
+    guardOnlyCouplingClosed :
+      Coupling.GuardOnlyCoupling Vacuum.booleanCognitiveSystem
+
+    equalBranchingCanCarryDifferentStackDepth :
+      Cognitive.PhaseObservables.feasibleBranching Independence.emptyObservation
+      ≡ Cognitive.PhaseObservables.feasibleBranching Independence.obligatedObservation
 
     scalarControlFixtureRejectsExtraCoupling :
       Baseline.couplingImprovesMDL 3 Baseline.scalarDataset ≡ false
@@ -78,8 +95,12 @@ canonicalCognitiveAnalyticClosure = record
   { ternaryUltrametric = TritMetric.TritUltrametric
   ; cognitionCategory = Category.cognitiveProjectionCategory
   ; threeDigitAddressClosed = Address.negativeZeroPositiveAddress
+  ; multipleDraftHistoriesDistinct = Drafts.historiesAreDistinct
+  ; multipleDraftPublicQuotientEqual = Drafts.samePublicReport
   ; cubicControlKinkClosed = Dynamics.marginInitiallyRises
   ; cuspBoundaryClosed = Dynamics.canonicalCuspBoundary
+  ; guardOnlyCouplingClosed = Coupling.booleanGuardOnlyCoupling
+  ; equalBranchingCanCarryDifferentStackDepth = Independence.sameFeasibleBranching
   ; scalarControlFixtureRejectsExtraCoupling =
       Baseline.extraCouplingDoesNotImproveScalarDataset
   ; coupledFixtureSelectsExtraCoupling =
