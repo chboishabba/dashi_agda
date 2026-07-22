@@ -65,5 +65,5 @@ allDataCoverageAtCutoff C N u₀ uN T smooth solves =
     Diffuse.VorticityTimeIntegralFinite
       (Coverage.diffuseInputs (coverage C)) uN T
   coverageBKM =
-    Coverage.periodicAllDataContinuesBeyond
+    Coverage.periodicAllDataVorticityFinite
       (coverage C) u₀ uN T coverageSmooth coverageSolves
