@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "all_promotions_false": true,
+    "boundary_falsifier_active": true,
+    "coverage_diffuse_case": true,
+    "coverage_hysteresis": true,
+    "coverage_not_promoted": true,
+    "digest": true,
+    "dini_not_promoted": true,
+    "far_high_R8": true,
+    "far_low_R8": true,
+    "far_low_enumeration": true,
+    "five_halves_counterexample": true,
+    "five_halves_not_promoted": true,
+    "near_budget": true,
+    "schema": true
+  },
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "schema": "check_ns_periodic_concrete_proof_program.v1"
+}
