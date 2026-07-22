@@ -64,6 +64,11 @@ FILES = {
         "periodicAllDataContinuesBeyond",
         "allDataAdaptiveCoverageInputsInhabited = false",
     ],
+    "NSPeriodicStandardContinuumAdapter.agda": [
+        "standardLimitIsLerayHopf",
+        "standardCompactGammaCutoffEstimatePasses",
+        "standardContinuumBKMContinuation",
+    ],
     "NSPeriodicCutoffUniformContinuumBKMCompletion.agda": [
         "periodicContinuumGlobalRegularity",
         "unconditionalPeriodicGlobalRegularityPromoted = false",
