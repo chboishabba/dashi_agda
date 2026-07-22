@@ -1,7 +1,5 @@
 module DASHI.Foundations.EMLPositiveRealAnalyticPackage where
 
-open import Agda.Builtin.Equality using (_≡_)
-
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 1ℝ; _-ℝ_)
 open import DASHI.Foundations.ElementarySingleOperator
@@ -13,8 +11,8 @@ open import DASHI.Foundations.EMLAnalyticDomain
 -- DASHI's canonical real carrier is axiomatic.  This module fixes the actual
 -- carrier and subtraction operation to that authority boundary.  Real exp and
 -- subtraction are treated as total; logarithm definedness is exactly positivity.
--- The remaining field is the genuine closure theorem for compiler-introduced
--- intermediate values.
+-- Both semantic laws and compiler-introduced closure are required only on that
+-- certified domain, not as false global logarithm identities.
 
 data Always : Set where
   always : Always
@@ -26,31 +24,6 @@ record PositiveRealTranscendentalAuthority : Set₁ where
 
     onePositive : Positive 1ℝ
     expPositive : ∀ x → Positive (expR x)
-
-    expEncodingLaw :
-      ∀ x →
-      (expR x -ℝ logR 1ℝ) ≡ expR x
-
-    logEncodingLaw :
-      ∀ x →
-      (expR 1ℝ -ℝ
-        logR
-          (expR
-            (expR 1ℝ -ℝ logR x)
-           -ℝ logR 1ℝ))
-      ≡ logR x
-
-    subEncodingLaw :
-      ∀ x y →
-      (expR
-        (expR 1ℝ -ℝ
-          logR
-            (expR
-              (expR 1ℝ -ℝ logR x)
-             -ℝ logR 1ℝ))
-       -ℝ
-       logR (expR y -ℝ logR 1ℝ))
-      ≡ x -ℝ y
 
     compilerDefinednessR :
       let M = record
@@ -66,6 +39,21 @@ record PositiveRealTranscendentalAuthority : Set₁ where
             ; SubAdmissible = λ _ _ → Always
             }
       in EMLCompilerDefinedness M D
+
+    compilerLawsOnDomainR :
+      let M = record
+            { Carrier = ℝ
+            ; one = 1ℝ
+            ; exp = expR
+            ; log = logR
+            ; sub = _-ℝ_
+            }
+          D = record
+            { ExpAdmissible = λ _ → Always
+            ; LogAdmissible = Positive
+            ; SubAdmissible = λ _ _ → Always
+            }
+      in EMLCompilerLawsOnDomain M D
 
 open PositiveRealTranscendentalAuthority public
 
@@ -91,16 +79,6 @@ positiveRealAdmissibility A =
     ; SubAdmissible = λ _ _ → Always
     }
 
-positiveRealCompilerLaws :
-  (A : PositiveRealTranscendentalAuthority) →
-  EMLCompilerLaws (positiveRealEMLModel A)
-positiveRealCompilerLaws A =
-  record
-    { expEncoding = expEncodingLaw A
-    ; logEncoding = logEncodingLaw A
-    ; subEncoding = subEncodingLaw A
-    }
-
 positiveRealAnalyticPackage :
   (A : PositiveRealTranscendentalAuthority) →
   AnalyticEMLCompilerPackage (positiveRealEMLModel A)
@@ -108,6 +86,5 @@ positiveRealAnalyticPackage A =
   record
     { admissibility = positiveRealAdmissibility A
     ; compilerDefinedness = compilerDefinednessR A
-    ; compilerLawsOnDomain =
-        globalLawsGiveDomainLaws (positiveRealCompilerLaws A)
+    ; compilerLawsOnDomain = compilerLawsOnDomainR A
     }
