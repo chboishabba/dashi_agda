@@ -20,6 +20,7 @@ REQUIRED_FILES = [
     "DASHI/Foundations/ElementaryCalculator.agda",
     "DASHI/Foundations/ElementaryCalculatorSemantics.agda",
     "DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda",
+    "DASHI/Foundations/ElementaryCalculatorSmokeModel.agda",
     "DASHI/Foundations/TernaryElementaryOperatorCandidate.agda",
     "DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda",
     "DASHI/Foundations/TernaryElementarySearchCertificate.agda",
@@ -60,6 +61,12 @@ REQUIRED_SYMBOLS = {
         "calculatorCompiledDefined",
         "calculatorCompiledHasMeaning",
         "CalculatorUniversalityReceipt",
+    ],
+    "DASHI/Foundations/ElementaryCalculatorSmokeModel.agda": [
+        "smokeCalculatorPrimitiveLaws",
+        "smokeCalculatorAnalyticPackage",
+        "smokeCalculatorUniversalityReceipt",
+        "smokeStructuredCompileCorrect",
     ],
     "DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda": [
         "ReusableWitnessUnit",
