@@ -19,7 +19,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- The official norm identification and the three interaction packages cannot be
 -- supplied independently.  Proof-relevant matching fields guarantee that the
 -- near, far-low and far-high estimates all concern the same Fourier
--- normalization, dyadic partition, Leray/Biot--Savart operators and cutoff.
+-- normalization, dyadic partition, Leray/Biot--Savart operators and cutoff.  The
+-- full far-low constant must also be the exact product of the selected weighted
+-- row and column Schur factors.
 ------------------------------------------------------------------------
 
 record PeriodicWallIHarmonicInputs
@@ -31,6 +33,9 @@ record PeriodicWallIHarmonicInputs
     nearInputs : Near.PeriodicNearTriadUniformInputs A Index Time State
     farLowInputs : Low.PeriodicFarLowOfficialSchurInputs A Index Time State
     farHighInputs : High.PeriodicFarHighTailInputs A Index Time State
+
+    farLowSchurFactorCoherence :
+      Low.PeriodicFarLowSchurFactorCoherence farLowInputs
 
     NearUsesOfficialNorms : Set i
     FarLowUsesOfficialNorms : Set i
@@ -85,6 +90,19 @@ wallIOfficialNormAdmissibility :
   CommonAdmissible W q τ u →
   Norm.Admissible (officialNorms W) q u
 wallIOfficialNormAdmissibility W q τ u = commonImpliesNorm W q τ u
+
+wallIFarLowSchurProduct :
+  ∀ {i} {A : AbsorptionArithmetic}
+    {Index Time State : Set i} →
+  (W : PeriodicWallIHarmonicInputs A Index Time State) →
+  ∀ q τ u →
+  Low.fullOfficialSchur (farLowInputs W) q τ u ≡
+  _∗_ A
+    (Low.weightedRowSchur (farLowInputs W) q τ u)
+    (Low.weightedColumnSchur (farLowInputs W) q τ u)
+wallIFarLowSchurProduct W =
+  Low.farLowFullSchurIsRowColumnProduct
+    (farLowSchurFactorCoherence W)
 
 wallIComponentSumBelowBudgetSum :
   ∀ {i} {A : AbsorptionArithmetic}
