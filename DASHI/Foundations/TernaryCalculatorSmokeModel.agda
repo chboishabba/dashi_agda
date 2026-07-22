@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (zero)
 open import DASHI.Foundations.ElementarySingleOperator
 open import DASHI.Foundations.EMLConcreteSmokeModel
 open import DASHI.Foundations.ElementaryCalculator
+open import DASHI.Foundations.ElementaryCalculatorSemantics
 open import DASHI.Foundations.ElementaryCalculatorSmokeModel
 open import DASHI.Foundations.TernaryElementaryOperatorCandidate
 open import DASHI.Foundations.TernaryWitnessIndependentRepresentation
