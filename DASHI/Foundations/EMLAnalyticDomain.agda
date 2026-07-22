@@ -124,19 +124,98 @@ compileEML-preserves-defined closure ρ
     (compileEML-preserves-defined closure ρ leftDefined)
     (compileEML-preserves-defined closure ρ rightDefined)
 
+------------------------------------------------------------------------
+-- Branch/domain-sensitive semantic laws.  Unlike EMLCompilerLaws, these laws
+-- are required only for EML trees whose complete evaluation is certified.
+
+record EMLCompilerLawsOnDomain
+  (M : ExpLogSubModel)
+  (D : EMLAdmissibility M) : Set₁ where
+  field
+    expEncodingOnDomain :
+      ∀ ρ {t} →
+      DefinedEML M D ρ t →
+      evalEML M ρ (emlExp t)
+      ≡ exp M (evalEML M ρ t)
+
+    logEncodingOnDomain :
+      ∀ ρ {t} →
+      DefinedEML M D ρ t →
+      evalEML M ρ (emlLog t)
+      ≡ log M (evalEML M ρ t)
+
+    subEncodingOnDomain :
+      ∀ ρ {s t} →
+      DefinedEML M D ρ s →
+      DefinedEML M D ρ t →
+      evalEML M ρ (emlSub s t)
+      ≡ sub M (evalEML M ρ s) (evalEML M ρ t)
+
+open EMLCompilerLawsOnDomain public
+
+globalLawsGiveDomainLaws :
+  ∀ {M : ExpLogSubModel} {D : EMLAdmissibility M} →
+  EMLCompilerLaws M →
+  EMLCompilerLawsOnDomain M D
+globalLawsGiveDomainLaws laws =
+  record
+    { expEncodingOnDomain =
+        λ ρ {t} _ → expEncoding laws (evalEML _ ρ t)
+    ; logEncodingOnDomain =
+        λ ρ {t} _ → logEncoding laws (evalEML _ ρ t)
+    ; subEncodingOnDomain =
+        λ ρ {s} {t} _ _ →
+          subEncoding laws (evalEML _ ρ s) (evalEML _ ρ t)
+    }
+
 record AnalyticEMLCompilerPackage (M : ExpLogSubModel) : Set₁ where
   field
-    laws : EMLCompilerLaws M
     admissibility : EMLAdmissibility M
     compilerDefinedness :
       EMLCompilerDefinedness M admissibility
+    compilerLawsOnDomain :
+      EMLCompilerLawsOnDomain M admissibility
 
 open AnalyticEMLCompilerPackage public
 
 analyticCompileCorrect :
   ∀ {M : ExpLogSubModel} →
   (P : AnalyticEMLCompilerPackage M) →
-  (ρ : Env M) →
-  (t : ExpLogSubExpr) →
+  ∀ ρ {t} →
+  DefinedSource M (admissibility P) ρ t →
   evalEML M ρ (compileEML t) ≡ evalSource M ρ t
-analyticCompileCorrect P = compileEML-correct _ (laws P)
+analyticCompileCorrect P ρ oneDefined = refl
+analyticCompileCorrect P ρ (varDefined x) = refl
+analyticCompileCorrect P ρ (expDefined sourceDefined _)
+  rewrite analyticCompileCorrect P ρ sourceDefined =
+  expEncodingOnDomain
+    (compilerLawsOnDomain P)
+    ρ
+    (compileEML-preserves-defined
+      (compilerDefinedness P)
+      ρ
+      sourceDefined)
+analyticCompileCorrect P ρ (logDefined sourceDefined _)
+  rewrite analyticCompileCorrect P ρ sourceDefined =
+  logEncodingOnDomain
+    (compilerLawsOnDomain P)
+    ρ
+    (compileEML-preserves-defined
+      (compilerDefinedness P)
+      ρ
+      sourceDefined)
+analyticCompileCorrect P ρ
+  (subDefined leftDefined rightDefined _)
+  rewrite analyticCompileCorrect P ρ leftDefined
+        | analyticCompileCorrect P ρ rightDefined =
+  subEncodingOnDomain
+    (compilerLawsOnDomain P)
+    ρ
+    (compileEML-preserves-defined
+      (compilerDefinedness P)
+      ρ
+      leftDefined)
+    (compileEML-preserves-defined
+      (compilerDefinedness P)
+      ρ
+      rightDefined)
