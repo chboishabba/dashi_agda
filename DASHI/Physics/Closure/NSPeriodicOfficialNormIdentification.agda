@@ -24,13 +24,13 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 record OfficialPeriodicNormIdentification
-    {c sh st p : Level}
+    {c sh st : Level}
     (A : AbsorptionArithmetic)
     (Cutoff : Set c)
     (Shell : Set sh)
-    (State : Set st) : Set (lsuc (c ⊔ sh ⊔ st ⊔ p)) where
+    (State : Set st) : Set (lsuc (c ⊔ sh ⊔ st)) where
   field
-    Admissible : Cutoff → State → Set p
+    Admissible : Cutoff → State → Set (c ⊔ st)
 
     coefficientL2 physicalL2 hSobolevNorm : Cutoff → State → Scalar A
     shellCoefficientL2 shellPhysicalL2 :
@@ -90,15 +90,15 @@ record OfficialPeriodicNormIdentification
     -- Constants used above are independent of the Galerkin cutoff.  This is kept
     -- as a proposition rather than a Boolean or a comment so an inhabitant must
     -- expose the actual uniformity proof.
-    CutoffUniform : Set p
+    CutoffUniform : Set (c ⊔ st)
     cutoffUniform : CutoffUniform
 
 open OfficialPeriodicNormIdentification public
 
 officialShellVorticityL2FromVelocity :
-  ∀ {c sh st p} {A : AbsorptionArithmetic}
+  ∀ {c sh st} {A : AbsorptionArithmetic}
     {Cutoff : Set c} {Shell : Set sh} {State : Set st} →
-  (N : OfficialPeriodicNormIdentification {p = p} A Cutoff Shell State) →
+  (N : OfficialPeriodicNormIdentification A Cutoff Shell State) →
   ∀ cutoff shell state →
   Admissible N cutoff state →
   _≤_ A
@@ -114,9 +114,9 @@ officialShellVorticityL2FromVelocity {A = A} N cutoff shell state admissible =
     (shellCurlEstimate N cutoff shell state admissible)
 
 officialShellVorticityFromVelocity :
-  ∀ {c sh st p} {A : AbsorptionArithmetic}
+  ∀ {c sh st} {A : AbsorptionArithmetic}
     {Cutoff : Set c} {Shell : Set sh} {State : Set st} →
-  (N : OfficialPeriodicNormIdentification {p = p} A Cutoff Shell State) →
+  (N : OfficialPeriodicNormIdentification A Cutoff Shell State) →
   ∀ cutoff shell state →
   Admissible N cutoff state →
   _≤_ A
@@ -132,9 +132,9 @@ officialShellVorticityFromVelocity {A = A} N cutoff shell state admissible =
     (shellBernsteinFiveHalves N cutoff shell state admissible)
 
 officialVorticityReconstruction :
-  ∀ {c sh st p} {A : AbsorptionArithmetic}
+  ∀ {c sh st} {A : AbsorptionArithmetic}
     {Cutoff : Set c} {Shell : Set sh} {State : Set st} →
-  (N : OfficialPeriodicNormIdentification {p = p} A Cutoff Shell State) →
+  (N : OfficialPeriodicNormIdentification A Cutoff Shell State) →
   ∀ cutoff state →
   Admissible N cutoff state →
   _≤_ A
