@@ -155,5 +155,9 @@ smokeStructuredCompileCorrect :
   ∀ ρ t →
   evalEML smokeModel ρ (compileCalculator t)
   ≡ evalSemanticCalculator smokeCalculatorSemantics ρ t
-smokeStructuredCompileCorrect =
-  calculatorCompiledHasMeaning smokeCalculatorAnalyticPackage
+smokeStructuredCompileCorrect ρ t =
+  calculatorCompiledHasMeaning
+    smokeCalculatorAnalyticPackage
+    ρ
+    t
+    top
