@@ -15,6 +15,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- The chart route cannot bypass its two analytic ingredients: its BKM estimate
 -- is obtained only after both normalized boundary invariance and hysteretic
 -- switching control have been established for the same solution and interval.
+-- The zero branch also exports vorticity finiteness, allowing the all-data result
+-- to feed a cutoff-uniform compactness argument before continuation is invoked.
 ------------------------------------------------------------------------
 
 record PeriodicAllDataCoverageInputs
@@ -39,6 +41,11 @@ record PeriodicAllDataCoverageInputs
       ZeroDatum u₀
       ⊎ (NormalizedAdaptiveChartControlled u T
       ⊎ Diffuse.DiffuseAt diffuseInputs u T)
+
+    zeroDatumGivesBKM : ∀ u₀ u T →
+      ZeroDatum u₀ →
+      Diffuse.SolvesFrom diffuseInputs u₀ u →
+      Diffuse.VorticityTimeIntegralFinite diffuseInputs u T
 
     zeroDatumGlobal : ∀ u₀ T →
       ZeroDatum u₀ → ContinuesBeyond u₀ T
@@ -88,6 +95,22 @@ normalizedChartGivesBKM C u T chart =
     (chartBoundaryInvariant C u T chart)
     (chartSwitchingControlled C u T chart)
 
+periodicAllDataVorticityFinite :
+  ∀ {i} {InitialDatum Solution Time State Shell : Set i} →
+  (C : PeriodicAllDataCoverageInputs
+    InitialDatum Solution Time State Shell) →
+  ∀ u₀ u T →
+  SmoothDivergenceFreeFiniteEnergy C u₀ →
+  Diffuse.SolvesFrom (diffuseInputs C) u₀ u →
+  Diffuse.VorticityTimeIntegralFinite (diffuseInputs C) u T
+periodicAllDataVorticityFinite C u₀ u T smooth solves
+  with exhaustiveClassification C u₀ u T smooth solves
+... | inj₁ zero = zeroDatumGivesBKM C u₀ u T zero solves
+... | inj₂ (inj₁ chart) = normalizedChartGivesBKM C u T chart
+... | inj₂ (inj₂ diffuse) =
+  Diffuse.periodicDiffuseSpectrumGivesBKM
+    (diffuseInputs C) u₀ u T solves diffuse
+
 periodicAllDataContinuesBeyond :
   ∀ {i} {InitialDatum Solution Time State Shell : Set i} →
   (C : PeriodicAllDataCoverageInputs
@@ -96,16 +119,9 @@ periodicAllDataContinuesBeyond :
   SmoothDivergenceFreeFiniteEnergy C u₀ →
   Diffuse.SolvesFrom (diffuseInputs C) u₀ u →
   ContinuesBeyond C u₀ T
-periodicAllDataContinuesBeyond C u₀ u T smooth solves
-  with exhaustiveClassification C u₀ u T smooth solves
-... | inj₁ zero = zeroDatumGlobal C u₀ T zero
-... | inj₂ (inj₁ chart) =
+periodicAllDataContinuesBeyond C u₀ u T smooth solves =
   bkmContinuation C u₀ u T smooth solves
-    (normalizedChartGivesBKM C u T chart)
-... | inj₂ (inj₂ diffuse) =
-  bkmContinuation C u₀ u T smooth solves
-    (Diffuse.periodicDiffuseSpectrumGivesBKM
-      (diffuseInputs C) u₀ u T solves diffuse)
+    (periodicAllDataVorticityFinite C u₀ u T smooth solves)
 
 ------------------------------------------------------------------------
 -- Proof-level and fail-closed status.
