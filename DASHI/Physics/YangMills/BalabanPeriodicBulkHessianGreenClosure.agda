@@ -174,6 +174,9 @@ record PeriodicBulkHessianGreenInputs
 
 open PeriodicBulkHessianGreenInputs public
 
+symmetry : ∀ {A : Set} {left right : A} → left ≡ right → right ≡ left
+symmetry refl = refl
+
 fiveComponentHessianPerturbationBound :
   ∀ {Index State Frequency Bound Kernel : Set}
     {symbolData : PeriodicReferenceSymbolData Index State Frequency Bound}
@@ -217,7 +220,7 @@ periodicReferenceHessianCoercive :
 periodicReferenceHessianCoercive {symbolData = symbolData}
   {kernelData = kernelData} {constraints = constraints}
   {gapInputs = gapInputs} inputs index state tangent
-  rewrite referenceEnergyIsInner inputs index state =
+  rewrite symmetry (referenceEnergyIsInner inputs index state) =
   periodicBulkGaugeFixedHodgePoincare
     symbolData kernelData constraints
     (physicalPeriodicBlockGapData gapInputs)
@@ -256,10 +259,11 @@ record PeriodicBulkHessianGreenCertificate
     inner : State → State → Bound
     normSq weightedNorm : State → Bound
     scale multiplyBound : Bound → Bound → Bound
-    LessEqual Positive : Bound → Bound → Set
+    LessEqual : Bound → Bound → Set
+    Positive : Bound → Set
     cH CG CGradG CSecondGradG : Bound
 
-    cHPositive : Positive cH cH
+    cHPositive : Positive cH
     GaugeFixedTangent : Index → State → Set
 
     uniformConstrainedHessianCoercive : ∀ index state →
@@ -312,7 +316,7 @@ periodicBulkHessianGreenCertificate {symbolData = symbolData}
   ; scale = scale (ordered symbolData)
   ; multiplyBound = multiplyBound inputs
   ; LessEqual = LessEqual (ordered symbolData)
-  ; Positive = λ left right → Positive (ordered symbolData) left
+  ; Positive = Positive (ordered symbolData)
   ; cH = cH inputs
   ; CG = CG inputs
   ; CGradG = CGradG inputs
