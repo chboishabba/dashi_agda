@@ -4,18 +4,28 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Float using
   ( Float
-  ; primFloatPlus
-  ; primFloatMinus
-  ; primFloatTimes
-  ; primFloatDiv
   ; primFloatExp
   ; primFloatLess
   )
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc)
 
 open import DASHI.Biology.ConcreteProteinMolecularMechanics
 open import DASHI.Biology.BoltzmannConformationalEnsemble
+
+------------------------------------------------------------------------
+-- Local product carrier.
+
+record Pair (A B : Set) : Set where
+  constructor _,_
+  field
+    first : A
+    second : B
+
+open Pair public
+
+_×_ : Set → Set → Set
+A × B = Pair A B
 
 ------------------------------------------------------------------------
 -- Deterministic random-stream carrier.
@@ -140,18 +150,6 @@ swapReplicaConfigurations : Replica → Replica → Replica × Replica
 swapReplicaConfigurations left right =
   replica (replicaThermodynamics left) (replicaConfiguration right) ,
   replica (replicaThermodynamics right) (replicaConfiguration left)
-
--- Local product carrier to avoid importing a larger product library.
-record Pair (A B : Set) : Set where
-  constructor _,_
-  field
-    first : A
-    second : B
-
-open Pair public
-
-_×_ : Set → Set → Set
-A × B = Pair A B
 
 replicaExchangeStep :
   UniformDraw →
