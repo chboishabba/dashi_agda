@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "all_faces_present": true,
+    "all_faces_strict": true,
+    "all_witnesses_share_common_region": true,
+    "authority": true,
+    "digest": true,
+    "face_counts_positive": true,
+    "face_minima_positive": true,
+    "face_nonpositive_counts_zero": true,
+    "no_promotion": true,
+    "partition_identity": true,
+    "schema": true,
+    "selected_tuple_exact": true
+  },
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "schema": "check_ns_common_normalized_parameter_tuple_certificate.v1"
+}
