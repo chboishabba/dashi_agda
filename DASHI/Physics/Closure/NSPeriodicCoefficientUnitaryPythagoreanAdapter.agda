@@ -1,7 +1,9 @@
 module DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryPythagoreanAdapter where
 
 open import Agda.Primitive using (Level; lsuc)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 import DASHI.Physics.Closure.NSCompactGammaConcretePotentialInstantiation as Potential
