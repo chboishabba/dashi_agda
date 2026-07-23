@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicStrictDissipationMargin where
 
 open import Agda.Primitive using (Set)
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -36,10 +36,21 @@ record PeriodicStrictDissipationMarginInputs
           farHighPayment)
         strictMargin
 
+    strictMarginNonnegative : _≤_ A (zero A) strictMargin
+
     StrictMarginPositive : Set
     strictMarginPositive : StrictMarginPositive
 
 open PeriodicStrictDissipationMarginInputs public
+
+addZeroRightForMargin :
+  (A : AbsorptionArithmetic) →
+  (a : Scalar A) →
+  _+_ A a (zero A) ≡ a
+addZeroRightForMargin A a =
+  trans
+    (addCommutative A a (zero A))
+    (addZeroLeft A a)
 
 periodicNonlinearComponentsBelowPayments :
   ∀ {A : AbsorptionArithmetic} →
@@ -97,6 +108,46 @@ periodicNonlinearPlusStrictMarginBelowViscosity {A = A} M =
     (sym (viscositySplitsPaymentsAndMargin M))
     (additionMonotoneRight A
       (periodicNonlinearComponentsBelowPayments M))
+
+periodicNonlinearBelowNonlinearPlusMargin :
+  ∀ {A : AbsorptionArithmetic} →
+  (M : PeriodicStrictDissipationMarginInputs A) →
+  _≤_ A
+    (_+_ A
+      (_+_ A (nearTerm M) (farLowTerm M))
+      (farHighTerm M))
+    (_+_ A
+      (_+_ A
+        (_+_ A (nearTerm M) (farLowTerm M))
+        (farHighTerm M))
+      (strictMargin M))
+periodicNonlinearBelowNonlinearPlusMargin {A = A} M =
+  subst
+    (λ lhs →
+      _≤_ A lhs
+        (_+_ A
+          (_+_ A
+            (_+_ A (nearTerm M) (farLowTerm M))
+            (farHighTerm M))
+          (strictMargin M)))
+    (addZeroRightForMargin A
+      (_+_ A
+        (_+_ A (nearTerm M) (farLowTerm M))
+        (farHighTerm M)))
+    (additionMonotoneLeft A (strictMarginNonnegative M))
+
+periodicNonlinearBelowViscosity :
+  ∀ {A : AbsorptionArithmetic} →
+  (M : PeriodicStrictDissipationMarginInputs A) →
+  _≤_ A
+    (_+_ A
+      (_+_ A (nearTerm M) (farLowTerm M))
+      (farHighTerm M))
+    (viscosityBudget M)
+periodicNonlinearBelowViscosity {A = A} M =
+  ≤-trans A
+    (periodicNonlinearBelowNonlinearPlusMargin M)
+    (periodicNonlinearPlusStrictMarginBelowViscosity M)
 
 periodicStrictMarginWitness :
   ∀ {A : AbsorptionArithmetic} →
