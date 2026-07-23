@@ -51,7 +51,7 @@ sahooMaskedDiffusionLM = researchSource
   2024
   "Simple and Effective Masked Diffusion Language Models"
   "NeurIPS 2024"
-  ""
+  "10.52202/079017-4135"
   "arXiv:2406.07524"
 
 shiGeneralizedMaskedDiffusion : ResearchSource
@@ -60,7 +60,7 @@ shiGeneralizedMaskedDiffusion = researchSource
   2024
   "Simplified and Generalized Masked Diffusion for Discrete Data"
   "NeurIPS 2024"
-  ""
+  "10.52202/079017-3277"
   "arXiv:2406.04329"
 
 nieLargeLanguageDiffusion : ResearchSource
