@@ -105,6 +105,14 @@ FILES = {
         "assembledPeriodicContinuumGlobalRegularity",
     ],
     "NSPeriodicOfficialCompletionStatus.agda": [
+        "biotSavartTransversalityReductionLevel = machineChecked",
+        "strictDissipationMarginReductionLevel = machineChecked",
+        "packetFractionQuotientSignReductionLevel = machineChecked",
+        "normalizedBoundaryCommonParameterReductionLevel = machineChecked",
+        "hysteresisSeparationReductionLevel = machineChecked",
+        "diffuseDissipationChargingReductionLevel = machineChecked",
+        "zeroChartDiffuseSelectionReductionLevel = machineChecked",
+        "weightedEnvelopeLimitTransportReductionLevel = machineChecked",
         "unconditionalPeriodicNavierStokesTheorem = false",
         "clayNavierStokesSubmissionPromoted = false",
     ],
@@ -123,6 +131,45 @@ FILES = {
         "sevenAnalyticLeavesGiveEndpoint",
         "sevenAnalyticLeafObligationsInhabitedInOfficialCarrier = false",
         "sevenAnalyticLeafEndpointPromoted = false",
+    ],
+    "NSPeriodicBiotSavartTransversality.agda": [
+        "biotSavartVelocityIsTransverse",
+        "biotSavartTransversalityAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicStrictDissipationMargin.agda": [
+        "periodicNonlinearComponentsBelowPayments",
+        "periodicNonlinearPlusStrictMarginBelowViscosity",
+        "strictDissipationMarginAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicPacketFractionQuotientSign.agda": [
+        "packetFractionDerivativeStrictlyPositive",
+        "packetFractionQuotientSignAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicNormalizedBoundaryCommonParameters.agda": [
+        "commonParametersToNormalizedBoundaryInputs",
+        "commonParameterizedBoundaryHasNoFirstExit",
+        "normalizedBoundaryCommonParameterAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicHysteresisSeparation.agda": [
+        "twoWayHysteresisRequiresDoubleModulus",
+        "hysteresisGapExcludesImmediateBackSwitch",
+        "hysteresisSeparationAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicDiffuseDissipationCharging.agda": [
+        "diffuseChargedVorticityBelowTotalBudget",
+        "diffuseDissipationChargeGivesFiniteVorticity",
+        "diffuseDissipationChargingAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicZeroChartDiffuseSelection.agda": [
+        "periodicZeroChartDiffuseSelection",
+        "periodicCoverageClassAsDisjunction",
+        "zeroChartDiffuseSelectionAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicWeightedEnvelopeLimitTransport.agda": [
+        "continuumFullEnvelopeBelowUniformCutoffBound",
+        "continuumVorticityBelowUniformCutoffBound",
+        "weightedEnvelopeTransportGivesFiniteContinuumVorticity",
+        "weightedEnvelopeLimitTransportAssemblyLevel = machineChecked",
     ],
 }
 
