@@ -18,6 +18,16 @@ REQUIRED = [
     "exhaustive_zero_chart_diffuse",
     "cutoff_uniform_bound_and_limit_transport",
 ]
+REDUCTIONS = [
+    "biot_savart_transversality",
+    "strict_dissipation_margin",
+    "packet_fraction_quotient_sign",
+    "common_boundary_parameters",
+    "hysteresis_separation",
+    "diffuse_dissipation_charging",
+    "zero_chart_diffuse_selection",
+    "weighted_envelope_limit_transport",
+]
 
 
 def digest(payload: Any) -> str:
@@ -35,6 +45,8 @@ def main() -> None:
     supplied = payload.pop("sha256", None)
     leaves = payload.get("leaves", [])
     leaf_map = {leaf.get("id"): leaf for leaf in leaves}
+    reductions = payload.get("machine_checked_reductions", [])
+    reduction_map = {entry.get("id"): entry for entry in reductions}
     coherence = payload.get("coherence", {})
     negatives = payload.get("negative_findings_preserved", {})
     promotion = payload.get("promotion", {})
@@ -50,6 +62,16 @@ def main() -> None:
         "all_leaves_unpromoted": all(
             leaf_map.get(name, {}).get("status") in {"conditional", "conjectural"}
             for name in REQUIRED
+        ),
+        "all_reductions_present": all(name in reduction_map for name in REDUCTIONS),
+        "all_reductions_machine_checked": all(
+            reduction_map.get(name, {}).get("status") == "machine_checked_reduction"
+            for name in REDUCTIONS
+        ),
+        "reductions_name_module_and_result": all(
+            bool(reduction_map.get(name, {}).get("module"))
+            and bool(reduction_map.get(name, {}).get("result"))
+            for name in REDUCTIONS
         ),
         "carrier_coherence_required": bool(coherence)
         and all(value is True for value in coherence.values()),
