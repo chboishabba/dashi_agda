@@ -74,7 +74,7 @@ def build() -> dict[str, Any]:
             "completion": [
                 "zero branch",
                 "non-diffuse state selects a fully admissible normalized chart",
-                "all chart failures enter a proved diffuse mechanism",
+                "all chart failures enter a proved diffuse or direct-BKM mechanism",
             ],
             "status": "conjectural",
         },
@@ -83,10 +83,61 @@ def build() -> dict[str, Any]:
             "completion": [
                 "one numerical bound independent of cutoff, shell, switches, and subsequence",
                 "same selected Galerkin family",
-                "lower-semicontinuous weighted-envelope passage",
+                "fixed-shell convergence and finite-partial lower semicontinuity",
+                "least-upper-bound weighted-envelope passage",
                 "continuum vorticity reconstruction and BKM",
             ],
             "status": "conjectural",
+        },
+    ]
+    reductions = [
+        {
+            "id": "biot_savart_transversality",
+            "module": "NSPeriodicBiotSavartTransversality.agda",
+            "result": "Biot-Savart velocity is transverse from dot-scale and cross orthogonality",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "strict_dissipation_margin",
+            "module": "NSPeriodicStrictDissipationMargin.agda",
+            "result": "near plus far-low plus far-high plus named strict margin is below viscosity",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "packet_fraction_quotient_sign",
+            "module": "NSPeriodicPacketFractionQuotientSign.agda",
+            "result": "positive quotient numerator and positive total-energy square imply inward packet-fraction derivative",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "common_boundary_parameters",
+            "module": "NSPeriodicNormalizedBoundaryCommonParameters.agda",
+            "result": "one admissible parameter tuple feeds all four normalized first-exit faces",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "hysteresis_separation",
+            "module": "NSPeriodicHysteresisSeparation.agda",
+            "result": "two-way switch gains require two hysteresis gaps below two score moduli",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "diffuse_dissipation_charging",
+            "module": "NSPeriodicDiffuseDissipationCharging.agda",
+            "result": "absorbed diffuse dissipation charge plus finite remainder gives finite vorticity expenditure",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "zero_chart_diffuse_selection",
+            "module": "NSPeriodicZeroChartDiffuseSelection.agda",
+            "result": "nondiffuse large packet must yield an admissible chart or direct BKM control",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "weighted_envelope_limit_transport",
+            "module": "NSPeriodicWeightedEnvelopeLimitTransport.agda",
+            "result": "finite partial bounds plus least-upper-bound reconstruction transport the weighted envelope and vorticity bound",
+            "status": "machine_checked_reduction",
         },
     ]
     payload: dict[str, Any] = {
@@ -101,10 +152,12 @@ def build() -> dict[str, Any]:
             "cutoff_uniform_bound_and_limit_transport",
         ],
         "leaves": leaves,
+        "machine_checked_reductions": reductions,
         "coherence": {
             "same_official_fourier_carrier": True,
             "same_adaptive_trajectory": True,
             "same_selected_galerkin_family": True,
+            "one_common_boundary_parameter_tuple": True,
         },
         "negative_findings_preserved": {
             "raw_multiplier_gain_is_full_far_low_bound": False,
@@ -112,6 +165,7 @@ def build() -> dict[str, Any]:
             "absolute_packet_floor_is_invariant": False,
             "per_cutoff_finiteness_is_uniform_bound": False,
             "aubin_lions_l2_directly_transports_l1_linf_vorticity": False,
+            "nondiffuse_automatically_implies_chart_admissible": False,
         },
         "promotion": {
             "seven_leaves_inhabited": False,
