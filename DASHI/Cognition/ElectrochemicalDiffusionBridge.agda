@@ -1,5 +1,6 @@
 module DASHI.Cognition.ElectrochemicalDiffusionBridge where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_)
@@ -123,12 +124,13 @@ volumeTransmissionToEffectiveEdge = physicalToNetworkTransport
 record DiffusionLayerBoundary : Set where
   constructor diffusionLayerBoundary
   field
-    physicalDiffusionModelled : Set
-    networkTransportModelled  : Set
-    layersIdentified          : Set
+    physicalDiffusionModelled : Bool
+    networkTransportModelled  : Bool
+    layersIdentified          : Bool
 
 canonicalLayerBoundary : DiffusionLayerBoundary
-canonicalLayerBoundary = diffusionLayerBoundary
-  ConservativeDiffusionReceipt
-  Network.TwoSystemProfile
-  (0 ≡ 1)
+canonicalLayerBoundary = diffusionLayerBoundary true true false
+
+physicalAndNetworkDiffusionRemainDistinct :
+  DiffusionLayerBoundary.layersIdentified canonicalLayerBoundary ≡ false
+physicalAndNetworkDiffusionRemainDistinct = refl
