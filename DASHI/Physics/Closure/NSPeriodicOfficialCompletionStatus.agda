@@ -47,6 +47,9 @@ packetFractionQuotientSignReductionLevel = machineChecked
 normalizedBoundaryCommonParameterReductionLevel : ProofLevel
 normalizedBoundaryCommonParameterReductionLevel = machineChecked
 
+normalizedBoundaryCandidateTupleStatusLevel : ProofLevel
+normalizedBoundaryCandidateTupleStatusLevel = machineChecked
+
 hysteresisSeparationReductionLevel : ProofLevel
 hysteresisSeparationReductionLevel = machineChecked
 
