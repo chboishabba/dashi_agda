@@ -277,18 +277,17 @@ compactGammaPotentialDerivativeExact {A = A} P τ =
         τ
         (gammaReserveDifferentiable P τ)
         (ratioReserveDifferentiable P τ)))
-    (cong
-      (Calculus._+_ A (Calculus.derivative A (packetReserve P) τ))
-      (Calculus.derivativeAdd A
-        (gammaReserve P)
-        (ratioReserve P)
-        τ
-        (gammaReserveDifferentiable P τ)
-        (ratioReserveDifferentiable P τ)))
+    (trans
+      (cong
+        (Calculus._+_ A (Calculus.derivative A (packetReserve P) τ))
+        (Calculus.derivativeAdd A
+          (gammaReserve P)
+          (ratioReserve P)
+          τ
+          (gammaReserveDifferentiable P τ)
+          (ratioReserveDifferentiable P τ)))
+      componentNormalization)
   where
-  -- The outer derivative-add result is subsequently normalized by the three
-  -- exact component formulas.  The following named equality is what downstream
-  -- code should use when it needs the fully expanded expression.
   componentNormalization :
     Calculus._+_ A
       (Calculus.derivative A (packetReserve P) τ)
