@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicPacketFractionQuotientSign where
 
 open import Agda.Primitive using (Set)
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -59,7 +59,7 @@ packetFractionDerivativeStrictlyPositive :
 packetFractionDerivativeStrictlyPositive {A = A} Q =
   subst
     (StrictlyPositive A)
-    (quotientDerivativeFormula Q)
+    (sym (quotientDerivativeFormula Q))
     (positiveQuotient A
       (quotientDerivativeNumerator Q)
       (totalEnergySquared Q)
