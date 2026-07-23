@@ -159,6 +159,33 @@ strictMarginIntegratedWeightedShellEstimate I =
   Expenditure.periodicIntegratedWeightedShellEstimate
     (strictMarginInputsToConcreteExpenditure I)
 
+strictMarginIntegratedVorticityEstimate :
+  ∀ {i l} {A : AbsorptionArithmetic}
+    {L : Producer.OrderedAdditiveCompletionLaws A}
+    {Index Time State : Set i} →
+  (I : PeriodicStrictMarginExpenditureInputs
+    {l = l} A L Index Time State) →
+  _≤_ A
+    (Producer.vorticityExpenditure (expenditureTransport I))
+    (_+_ A
+      (Producer.potential (pointwiseExpenditure I)
+        (Producer.initialTime (pointwiseExpenditure I)))
+      (Producer.forcingAndDataRemainder (pointwiseExpenditure I)))
+strictMarginIntegratedVorticityEstimate I =
+  Expenditure.periodicIntegratedVorticityEstimate
+    (strictMarginInputsToConcreteExpenditure I)
+
+strictMarginIntegratedBKMContinuation :
+  ∀ {i l} {A : AbsorptionArithmetic}
+    {L : Producer.OrderedAdditiveCompletionLaws A}
+    {Index Time State : Set i} →
+  (I : PeriodicStrictMarginExpenditureInputs
+    {l = l} A L Index Time State) →
+  Producer.Continuation (expenditureTransport I)
+strictMarginIntegratedBKMContinuation I =
+  Expenditure.periodicIntegratedBKMContinuation
+    (strictMarginInputsToConcreteExpenditure I)
+
 ------------------------------------------------------------------------
 -- Status: the strict-margin-to-expenditure adapter is checked.  The analytic
 -- frontier is now the concrete construction of strictMarginAt and its exact
