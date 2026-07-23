@@ -18,6 +18,7 @@ import DASHI.Cognition.KepplerFiniteResonanceMDL
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
 import DASHI.Cognition.Monoidal369Nonseparability
 import DASHI.Cognition.MultipleDraftsQuotient
+import DASHI.Cognition.NetworkIntegritySynchronyMetrics
 import DASHI.Cognition.PhaseEnrichedTrit
 import DASHI.Cognition.PhaseObservableIndependence
 import DASHI.Cognition.PhysicalCouplingFactorisation
