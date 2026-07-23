@@ -6,7 +6,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 open import Data.List using (length)
 open import Data.Nat using (_≤_)
-open import Data.Product using (_×_)
+open import Data.Product using (_×_; _,_)
 open import Data.Vec using (Vec)
 
 import DASHI.Algebra.BalancedTernary as BT
@@ -25,6 +25,7 @@ import DASHI.Cognition.IdEgoSuperego369 as Self
 import DASHI.Cognition.IdentityVacuumClosure as IdentityVacuum
 import DASHI.Cognition.KepplerFiniteResonanceMDL as Keppler
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
+import DASHI.Cognition.LatentAttractorDenoising as Latent
 import DASHI.Cognition.Monoidal369Nonseparability as Nonseparable
 import DASHI.Cognition.MultipleDraftsQuotient as Drafts
 import DASHI.Cognition.NetworkIntegritySynchronyMetrics as NetworkMetrics
@@ -35,6 +36,7 @@ import DASHI.Cognition.PsychedelicNetworkDiffusion as Network
 import DASHI.Cognition.RecursiveFibreTower as Tower
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.ResidualPhaseGeometry as RPG
+import DASHI.Cognition.TernaryCommitmentLogic as Logic
 import DASHI.Cognition.TernaryDerivationAddress as Address
 import DASHI.Cognition.TernaryDerivationUltrametric as TritMetric
 import DASHI.Cognition.VisualAttractorDefect as VisualDefect
@@ -125,6 +127,11 @@ record CognitiveAnalyticClosure : Set₁ where
     recursiveZeroInverseLimitClosed :
       Tower.InverseLimitPoint Tower.recursivePhaseTower
 
+    excludedMiddleAndProjectiveCommitmentCoexist :
+      (Logic.publicTruth Logic.truthKnownCommitmentOpen ≡ true)
+      ×
+      (Logic.gate Logic.truthKnownCommitmentOpen ≡ BT.zero)
+
     commaBoundaryFixedUnderDenoising :
       Comma.commaProjection
         (Comma.denoiseSentence
@@ -138,6 +145,20 @@ record CognitiveAnalyticClosure : Set₁ where
     commaAnchorPlannerClosed :
       Comma.firstPlannedCoordinate Comma.anchorFirstPlan
       ≡ Comma.boundaryPosition
+
+    latentGeometricFixedPointClosed :
+      Latent.reducedSemanticDenoise Latent.geometricIntermediate
+      ≡ Latent.geometricIntermediate
+
+    latentGeometricEnergyWinsReducedPrecision :
+      Latent.totalEnergy
+        (Latent.reducedSemanticEnergy Latent.geometricIntermediate)
+      ≤
+      Latent.totalEnergy
+        (Latent.reducedSemanticEnergy Latent.semanticCompletion)
+
+    latentGeometricResidenceClosed :
+      Latent.countGeometric Latent.reducedPrecisionTrajectory ≡ 2
 
     selfTriadDiscrepancyClosed :
       Self.selfDiscrepancy Self.canonicalContestedSelf ≡ 2
@@ -218,8 +239,15 @@ canonicalCognitiveAnalyticClosure = record
   ; triadicTetrationLevelTwoClosed = Tower.triadicTetrationTwo
   ; triadicTetrationLevelThreeClosed = Tower.triadicTetrationThree
   ; recursiveZeroInverseLimitClosed = Tower.canonicalZeroInverseLimit
+  ; excludedMiddleAndProjectiveCommitmentCoexist = refl , refl
   ; commaBoundaryFixedUnderDenoising = refl
   ; commaAnchorPlannerClosed = Comma.commaAnchorIsPlannedFirst
+  ; latentGeometricFixedPointClosed =
+      Latent.geometricIntermediateIsReducedPrecisionFixedPoint
+  ; latentGeometricEnergyWinsReducedPrecision =
+      Latent.geometricWinsReducedPrecisionLandscape
+  ; latentGeometricResidenceClosed =
+      Latent.reducedPrecisionGeometricResidenceIsTwo
   ; selfTriadDiscrepancyClosed = Self.canonicalContestedSelfHasTwoDiscrepancies
   ; auxiliaryFibreLowersReasoningDefect = Braid.auxiliaryTransportLowersDefect
   ; physicalDiffusionConservesTotal = refl
