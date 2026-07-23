@@ -2,7 +2,6 @@ module DASHI.Foundations.TernaryEMLDecision where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Sigma using (Σ)
 open import Data.Empty using (⊥)
 
 open import DASHI.Foundations.ElementarySingleOperator
@@ -12,29 +11,37 @@ open import DASHI.Foundations.TernaryElementarySearchCertificate
 _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
 
+emlSource : Var → Var → ExpLogSubExpr
+emlSource left right = subE (expE (varE left)) (logE (varE right))
+
 record ConcreteTernaryEMLContext : Set₁ where
   field
     Value : Set
     Environment : Set
     WitnessDomain : Value → Set
-    SourceDomain : Environment → EMLExpr → Set
+    SourceDomain : Environment → ExpLogSubExpr → Set
     DefinedTernary : Environment → Value → TernaryExpr → Set
     evaluateTernary : Environment → Value → TernaryExpr → Value
-    evaluateEML : Environment → EMLExpr → Value
+    evaluateSource : Environment → ExpLogSubExpr → Value
 
     witnessVariable leftVariable rightVariable : Var
     emlContext : TernaryExpr
 
     contextAdmissible : ∀ ρ witness →
       WitnessDomain witness →
-      SourceDomain ρ (emlE (varE leftVariable) (varE rightVariable)) →
+      SourceDomain ρ (emlSource leftVariable rightVariable) →
       DefinedTernary ρ witness emlContext
 
-    contextCorrect : ∀ ρ witness witnessOK sourceOK →
+    contextCorrect : ∀ ρ witness →
+      (witnessOK : WitnessDomain witness) →
+      (sourceOK : SourceDomain ρ (emlSource leftVariable rightVariable)) →
       evaluateTernary ρ witness emlContext
-      ≡ evaluateEML ρ (emlE (varE leftVariable) (varE rightVariable))
+      ≡ evaluateSource ρ (emlSource leftVariable rightVariable)
 
-    witnessIndependent : ∀ ρ a b aOK bOK sourceOK →
+    witnessIndependent : ∀ ρ a b →
+      (aOK : WitnessDomain a) →
+      (bOK : WitnessDomain b) →
+      (sourceOK : SourceDomain ρ (emlSource leftVariable rightVariable)) →
       evaluateTernary ρ a emlContext
       ≡ evaluateTernary ρ b emlContext
 
@@ -45,9 +52,12 @@ record TernaryDomainObstruction : Set₁ where
     Value : Set
     CandidateDomain : Value → Set
     generatedUnit : Value → Value
+    unitValue : Value
     validFirstArgument : Value → Set
 
-    diagonalGeneratesUnit : ∀ a → CandidateDomain a → generatedUnit a ≡ generatedUnit a
+    diagonalGeneratesUnit :
+      ∀ a → CandidateDomain a → generatedUnit a ≡ unitValue
+
     generatedUnitCannotBeFirstArgument :
       ∀ a → CandidateDomain a → validFirstArgument (generatedUnit a) → ⊥
 
@@ -58,10 +68,13 @@ record FiniteDepthRefutation : Set₁ where
     depthBound : Nat
     candidateAtDepth : TernaryExpr → Set
     representsEML : TernaryExpr → Set
-    allCandidatesCovered :
-      ∀ t → candidateAtDepth t → structuralDepthUpperBound t ≡ depthBound → Set
+    coveredAtBound : TernaryExpr → Set
+
+    coverageSound :
+      ∀ t → candidateAtDepth t → coveredAtBound t
+
     noCandidateRepresentsEML :
-      ∀ t → candidateAtDepth t → representsEML t → ⊥
+      ∀ t → coveredAtBound t → representsEML t → ⊥
 
 open FiniteDepthRefutation public
 
@@ -73,6 +86,7 @@ data TernaryEMLDecision : Set₁ where
 record CertifiedTernaryResearchOutcome : Set₁ where
   field
     outcome : TernaryEMLDecision
-    numericalScoutPromotesNothing : Set
+    NumericalScoutEvidence : Set
+    numericalScoutCannotPromote : NumericalScoutEvidence → Set
 
 open CertifiedTernaryResearchOutcome public
