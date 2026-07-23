@@ -32,10 +32,10 @@ record IdentityClassAtDefectFloor
   field
     stableClass : Cognitive.StableObservedClass system representative
     coarseIdentity :
-      ∀ scale → Cognitive.DASHICognitiveSystem.coarseGrain system scale representative
+      ∀ scale → Cognitive.coarseGrain system scale representative
         ≡ representative
     involutionIdentity :
-      Cognitive.DASHICognitiveSystem.involution system representative
+      Cognitive.involution system representative
         ≡ representative
     defectFloor : Nat
     representativeAtFloor :
