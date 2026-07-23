@@ -1,6 +1,5 @@
 module DASHI.Physics.Closure.NSPeriodicRealFourierVectorLaws where
 
-open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (ℤ)
 
