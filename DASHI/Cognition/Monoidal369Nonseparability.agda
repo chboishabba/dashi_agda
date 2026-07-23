@@ -59,7 +59,7 @@ jointSupportDoesNotFactor factorisation with
     )
 ... | ()
 
-record StructuralNonseparabilityWitness : Set where
+record StructuralNonseparabilityWitness : Set₁ where
   constructor structuralNonseparabilityWitness
   field
     compositeCarrier : Set
