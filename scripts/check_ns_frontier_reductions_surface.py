@@ -8,6 +8,13 @@ ROOT = Path(__file__).resolve().parents[1]
 CLOSURE = ROOT / "DASHI" / "Physics" / "Closure"
 
 REQUIRED = {
+    "NSPeriodicCoefficientUnitaryNormAdapter.agda": [
+        "coefficientUnitaryToBernsteinAdapterInputs",
+        "coefficientUnitaryOfficialNormIdentification",
+        "coefficientUnitaryGlobalParseval",
+        "coefficientUnitaryShellParseval",
+        "coefficientUnitaryNormAdapterLevel = machineChecked",
+    ],
     "NSPeriodicBiotSavartTransversality.agda": [
         "biotSavartVelocityIsTransverse",
         "biotSavartTransversalityAssemblyLevel = machineChecked",
