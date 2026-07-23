@@ -31,6 +31,31 @@ allDataCutoffCoverageAdapterLevel = machineChecked
 cutoffContinuumAssemblyLevel : ProofLevel
 cutoffContinuumAssemblyLevel = machineChecked
 
+-- Exact reductions that narrow the remaining analytic frontier.
+biotSavartTransversalityReductionLevel : ProofLevel
+biotSavartTransversalityReductionLevel = machineChecked
+
+strictDissipationMarginReductionLevel : ProofLevel
+strictDissipationMarginReductionLevel = machineChecked
+
+packetFractionQuotientSignReductionLevel : ProofLevel
+packetFractionQuotientSignReductionLevel = machineChecked
+
+normalizedBoundaryCommonParameterReductionLevel : ProofLevel
+normalizedBoundaryCommonParameterReductionLevel = machineChecked
+
+hysteresisSeparationReductionLevel : ProofLevel
+hysteresisSeparationReductionLevel = machineChecked
+
+diffuseDissipationChargingReductionLevel : ProofLevel
+diffuseDissipationChargingReductionLevel = machineChecked
+
+zeroChartDiffuseSelectionReductionLevel : ProofLevel
+zeroChartDiffuseSelectionReductionLevel = machineChecked
+
+weightedEnvelopeLimitTransportReductionLevel : ProofLevel
+weightedEnvelopeLimitTransportReductionLevel = machineChecked
+
 -- Remaining official-carrier theorem packages.
 officialNormIdentificationLevel : ProofLevel
 officialNormIdentificationLevel = conditional
