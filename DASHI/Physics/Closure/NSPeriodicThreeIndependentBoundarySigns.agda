@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Sigma using (Σ)
 open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSCompactGammaNormalizedAdaptiveFirstExit as Exit
 import DASHI.Physics.Closure.NSCompactGammaNormalizedBoundaryInwardnessCompletion as Boundary
@@ -93,7 +93,7 @@ threeFaceOffPacketStrictlyInward :
 threeFaceOffPacketStrictlyInward T τ u offHit =
   subst
     (Exit.StrictlyPositive _)
-    (offInwardDerivativeEqualsPacket T τ u offHit)
+    (sym (offInwardDerivativeEqualsPacket T τ u offHit))
     (packetFractionFloorStrictlyInward T τ u
       (offBoundaryIsPacketBoundary T τ u offHit))
 
