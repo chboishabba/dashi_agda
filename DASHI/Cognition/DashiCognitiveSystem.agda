@@ -252,7 +252,7 @@ record DerivationArgMin
       ≤ MDLScore system target control start candidate
 
 record MDLFiniteDifference : Set where
-  constructor mdlFiniteDifference
+  constructor mkMDLFiniteDifference
   field
     rise : Nat
     fall : Nat
