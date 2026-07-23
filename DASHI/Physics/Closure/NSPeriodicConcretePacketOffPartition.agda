@@ -1,7 +1,8 @@
 module DASHI.Physics.Closure.NSPeriodicConcretePacketOffPartition where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSCompactGammaConcreteDyadicScalarCertificate as Order
 import DASHI.Physics.Closure.NSPeriodicConcreteCompactGamma as Compact
