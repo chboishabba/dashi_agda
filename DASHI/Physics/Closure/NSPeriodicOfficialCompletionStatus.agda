@@ -38,8 +38,8 @@ biotSavartTransversalityReductionLevel = machineChecked
 strictDissipationMarginReductionLevel : ProofLevel
 strictDissipationMarginReductionLevel = machineChecked
 
-strictMarginExpenditureAdapterLevel : ProofLevel
-strictMarginExpenditureAdapterLevel = machineChecked
+strictMarginExpenditureAdapterStatusLevel : ProofLevel
+strictMarginExpenditureAdapterStatusLevel = machineChecked
 
 packetFractionQuotientSignReductionLevel : ProofLevel
 packetFractionQuotientSignReductionLevel = machineChecked
@@ -50,26 +50,26 @@ normalizedBoundaryCommonParameterReductionLevel = machineChecked
 hysteresisSeparationReductionLevel : ProofLevel
 hysteresisSeparationReductionLevel = machineChecked
 
-adaptiveSwitchSeparationAdapterLevel : ProofLevel
-adaptiveSwitchSeparationAdapterLevel = machineChecked
+adaptiveSwitchSeparationAdapterStatusLevel : ProofLevel
+adaptiveSwitchSeparationAdapterStatusLevel = machineChecked
 
 diffuseDissipationChargingReductionLevel : ProofLevel
 diffuseDissipationChargingReductionLevel = machineChecked
 
-diffuseDissipationRouteAdapterLevel : ProofLevel
-diffuseDissipationRouteAdapterLevel = machineChecked
+diffuseDissipationRouteAdapterStatusLevel : ProofLevel
+diffuseDissipationRouteAdapterStatusLevel = machineChecked
 
 zeroChartDiffuseSelectionReductionLevel : ProofLevel
 zeroChartDiffuseSelectionReductionLevel = machineChecked
 
-extendedCoverageBKMAssemblyLevel : ProofLevel
-extendedCoverageBKMAssemblyLevel = machineChecked
+extendedCoverageBKMStatusLevel : ProofLevel
+extendedCoverageBKMStatusLevel = machineChecked
 
 weightedEnvelopeLimitTransportReductionLevel : ProofLevel
 weightedEnvelopeLimitTransportReductionLevel = machineChecked
 
-weightedEnvelopeContinuumAdapterLevel : ProofLevel
-weightedEnvelopeContinuumAdapterLevel = machineChecked
+weightedEnvelopeContinuumAdapterStatusLevel : ProofLevel
+weightedEnvelopeContinuumAdapterStatusLevel = machineChecked
 
 -- Remaining official-carrier theorem packages.
 officialNormIdentificationLevel : ProofLevel
