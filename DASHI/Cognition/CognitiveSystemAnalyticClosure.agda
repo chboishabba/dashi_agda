@@ -4,28 +4,40 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
+open import Data.List using (length)
 open import Data.Nat using (_≤_)
 open import Data.Vec using (Vec)
 
 import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Cognition.AnesthesiaLanguagePhaseControl
 import DASHI.Cognition.AnesthesiaLanguagePhaseDynamics as Dynamics
+import DASHI.Cognition.Base369ZeroFibre as Fibre
 import DASHI.Cognition.BaselineMarginModelSelection as Baseline
+import DASHI.Cognition.CommaDiffusionLanguage as Comma
 import DASHI.Cognition.CognitiveObservableDistributions
 import DASHI.Cognition.CognitiveProjectionCategory as Category
 import DASHI.Cognition.CognitiveVacuumClassBoundary as Vacuum
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
+import DASHI.Cognition.FibreBraidReasoning as Braid
+import DASHI.Cognition.IdEgoSuperego369 as Self
+import DASHI.Cognition.IdentityVacuumClosure as IdentityVacuum
 import DASHI.Cognition.KepplerFiniteResonanceMDL as Keppler
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
+import DASHI.Cognition.Monoidal369Nonseparability as Nonseparable
 import DASHI.Cognition.MultipleDraftsQuotient as Drafts
+import DASHI.Cognition.PhaseEnrichedTrit as Phase
 import DASHI.Cognition.PhaseObservableIndependence as Independence
 import DASHI.Cognition.PhysicalCouplingFactorisation as Coupling
+import DASHI.Cognition.PsychedelicNetworkDiffusion as Network
+import DASHI.Cognition.RecursiveFibreTower as Tower
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.ResidualPhaseGeometry as RPG
 import DASHI.Cognition.TernaryDerivationAddress as Address
 import DASHI.Cognition.TernaryDerivationUltrametric as TritMetric
+import DASHI.Cognition.VisualAttractorDefect as VisualDefect
 import DASHI.Cognition.VisualCompressionAttractors
 import DASHI.Cognition.VisualPatternGeneratorMDL as Visual
+import DASHI.Cognition.ZeroFibreContextuality as Contextual
 import DASHI.Combinatorics.PDA_MDL.KernelSelection
 import DASHI.Combinatorics.PDA_MDL.PDA
 import DASHI.Core.ProjectionCategory as PC
@@ -90,6 +102,58 @@ record CognitiveAnalyticClosure : Set₁ where
         false
       → ⊥
 
+    phaseBearingZeroFibreClosed :
+      Phase.observeTrit Phase.balancedOpposition ≡ BT.zero
+
+    sixZeroFibreClosed : length Fibre.allZeroHex ≡ 2
+    nineZeroFibreClosed : length Fibre.allZeroNonary ≡ 3
+    zeroPullbackClosed : length Fibre.zeroSixNineFibreProduct ≡ 6
+
+    zeroJointSupportNonfactorable :
+      Nonseparable.ProductFactorisation → ⊥
+
+    zeroFieldHasNoGlobalSection :
+      Contextual.GlobalZeroSection → ⊥
+
+    triadicTetrationLevelTwoClosed : Tower.tetration 3 2 ≡ 27
+
+    recursiveZeroInverseLimitClosed :
+      Tower.InverseLimitPoint Tower.recursivePhaseTower
+
+    commaBoundaryFixedUnderDenoising :
+      Comma.commaProjection
+        (Comma.denoiseSentence
+          (Comma.sentence
+            Comma.feltSelfClause
+            Comma.commaBoundary
+            Comma.blankClause
+            Comma.contrast))
+      ≡ Comma.commaBoundary
+
+    selfTriadDiscrepancyClosed :
+      Self.selfDiscrepancy Self.canonicalContestedSelf ≡ 2
+
+    auxiliaryFibreLowersReasoningDefect :
+      Braid.globalReasoningDefect Braid.resolvedByHighAuxiliary ≡ 1
+
+    psychedelicWithinIntegrityClosed :
+      Network.withinIntegrity Network.psychedelicProfile ≡ 12
+
+    psychedelicCrossTransportClosed :
+      Network.crossCommunication Network.psychedelicProfile ≡ 8
+
+    psychedelicZeroResidenceClosed :
+      Network.countProjective Network.psychedelicCommitmentTrajectory ≡ 3
+
+    visualBasisNoiseDefectClosed :
+      VisualDefect.compressionAttractorScore Visual.lattice ≡ 4
+
+    identityVacuumAtNonzeroFloorClosed :
+      Vacuum.VacuumClass
+        Vacuum.booleanCognitiveSystem
+        IdentityVacuum.shiftedBooleanDefectModel
+        true
+
 canonicalCognitiveAnalyticClosure : CognitiveAnalyticClosure
 canonicalCognitiveAnalyticClosure = record
   { ternaryUltrametric = TritMetric.TritUltrametric
@@ -109,4 +173,21 @@ canonicalCognitiveAnalyticClosure = record
   ; offBandControlClosed = Keppler.offBandScoreIsZero
   ; geometricCompressionClosed = Visual.latticeIsCheaperThanSemanticBinding
   ; stableClassNeedNotBeVacuum = Vacuum.falseStableClassIsNotVacuum
+  ; phaseBearingZeroFibreClosed = Phase.balancedOppositionObservesZero
+  ; sixZeroFibreClosed = Fibre.zeroHexFibreHasTwoRepresentatives
+  ; nineZeroFibreClosed = Fibre.zeroNonaryFibreHasThreeRepresentatives
+  ; zeroPullbackClosed = Fibre.visibleZeroHidesSixInteractionStates
+  ; zeroJointSupportNonfactorable = Nonseparable.jointSupportDoesNotFactor
+  ; zeroFieldHasNoGlobalSection = Contextual.noGlobalZeroSection
+  ; triadicTetrationLevelTwoClosed = Tower.triadicTetrationTwo
+  ; recursiveZeroInverseLimitClosed = Tower.canonicalZeroInverseLimit
+  ; commaBoundaryFixedUnderDenoising = refl
+  ; selfTriadDiscrepancyClosed = Self.canonicalContestedSelfHasTwoDiscrepancies
+  ; auxiliaryFibreLowersReasoningDefect = Braid.auxiliaryTransportLowersDefect
+  ; psychedelicWithinIntegrityClosed = Network.psychedelicIntegrityIsTwelve
+  ; psychedelicCrossTransportClosed = Network.psychedelicCrossCommunicationIsEight
+  ; psychedelicZeroResidenceClosed = Network.psychedelicZeroResidenceIsThree
+  ; visualBasisNoiseDefectClosed = VisualDefect.latticeAttractorScoreIsFour
+  ; identityVacuumAtNonzeroFloorClosed =
+      IdentityVacuum.nonzeroResidualIdentityIsVacuum
   }
