@@ -4,36 +4,14 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
-cognition_files=(
-  DASHI/Cognition/AnesthesiaLanguagePhaseDynamics.agda
-  DASHI/Cognition/Base369ZeroFibre.agda
-  DASHI/Cognition/BaselineMarginModelSelection.agda
-  DASHI/Cognition/CognitiveObservableDistributions.agda
-  DASHI/Cognition/CognitiveProjectionCategory.agda
-  DASHI/Cognition/CognitiveResearchSources.agda
-  DASHI/Cognition/CognitiveSystemAnalyticClosure.agda
-  DASHI/Cognition/CognitiveVacuumClassBoundary.agda
-  DASHI/Cognition/CommaDiffusionLanguage.agda
-  DASHI/Cognition/DashiCognitiveSystem.agda
-  DASHI/Cognition/FibreBraidReasoning.agda
-  DASHI/Cognition/IdEgoSuperego369.agda
-  DASHI/Cognition/IdentityVacuumClosure.agda
-  DASHI/Cognition/KepplerFiniteResonanceMDL.agda
-  DASHI/Cognition/Monoidal369Nonseparability.agda
-  DASHI/Cognition/MultipleDraftsQuotient.agda
-  DASHI/Cognition/PhaseEnrichedTrit.agda
-  DASHI/Cognition/PhaseObservableIndependence.agda
-  DASHI/Cognition/PhysicalCouplingFactorisation.agda
-  DASHI/Cognition/PsychedelicNetworkDiffusion.agda
-  DASHI/Cognition/QuantumMindEnrichedRetyping.agda
-  DASHI/Cognition/QuantumMindRetypingBoundary.agda
-  DASHI/Cognition/RecursiveFibreTower.agda
-  DASHI/Cognition/TernaryDerivationAddress.agda
-  DASHI/Cognition/TernaryDerivationUltrametric.agda
-  DASHI/Cognition/VisualAttractorDefect.agda
-  DASHI/Cognition/VisualPatternGeneratorMDL.agda
-  DASHI/Cognition/ZeroFibreContextuality.agda
+mapfile -t cognition_files < <(
+  find DASHI/Cognition -maxdepth 1 -type f -name '*.agda' -print | sort
 )
+
+if [ "${#cognition_files[@]}" -eq 0 ]; then
+  echo "No cognition modules found for placeholder audit." >&2
+  exit 1
+fi
 
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{-# TERMINATING #-\}|\{-# NON_TERMINATING #-\}|TODO|FIXME' \
   "${cognition_files[@]}"; then
@@ -41,8 +19,10 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{-# TERMINATING #-\}|\{-# 
   exit 1
 fi
 
-agda_bin="${AGDA_BIN:-$(command -v agda)}"
-"$agda_bin" \
-  -i . \
-  -l standard-library \
+export DASHI_REPO_ROOT="$repo_root"
+if [ -z "${AGDA_BIN:-}" ] && command -v agda >/dev/null 2>&1; then
+  export AGDA_BIN="$(command -v agda)"
+fi
+
+scripts/run_agda29_parallel_check.sh \
   DASHI/Cognition/LanguagePhaseEverything.agda
