@@ -11,6 +11,7 @@ import DASHI.Cognition.CognitiveSystemAnalyticClosure
 import DASHI.Cognition.CognitiveVacuumClassBoundary
 import DASHI.Cognition.CommaDiffusionLanguage
 import DASHI.Cognition.DashiCognitiveSystem
+import DASHI.Cognition.ElectrochemicalDiffusionBridge
 import DASHI.Cognition.FibreBraidReasoning
 import DASHI.Cognition.IdEgoSuperego369
 import DASHI.Cognition.IdentityVacuumClosure
