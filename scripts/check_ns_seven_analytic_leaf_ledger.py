@@ -21,12 +21,17 @@ REQUIRED = [
 REDUCTIONS = [
     "biot_savart_transversality",
     "strict_dissipation_margin",
+    "strict_margin_expenditure_adapter",
     "packet_fraction_quotient_sign",
     "common_boundary_parameters",
     "hysteresis_separation",
+    "adaptive_switch_separation_adapter",
     "diffuse_dissipation_charging",
+    "diffuse_dissipation_route_adapter",
     "zero_chart_diffuse_selection",
+    "extended_coverage_bkm",
     "weighted_envelope_limit_transport",
+    "weighted_envelope_continuum_adapter",
 ]
 
 
