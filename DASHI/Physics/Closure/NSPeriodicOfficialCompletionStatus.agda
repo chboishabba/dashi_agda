@@ -38,6 +38,9 @@ biotSavartTransversalityReductionLevel = machineChecked
 strictDissipationMarginReductionLevel : ProofLevel
 strictDissipationMarginReductionLevel = machineChecked
 
+strictMarginExpenditureAdapterLevel : ProofLevel
+strictMarginExpenditureAdapterLevel = machineChecked
+
 packetFractionQuotientSignReductionLevel : ProofLevel
 packetFractionQuotientSignReductionLevel = machineChecked
 
@@ -47,14 +50,26 @@ normalizedBoundaryCommonParameterReductionLevel = machineChecked
 hysteresisSeparationReductionLevel : ProofLevel
 hysteresisSeparationReductionLevel = machineChecked
 
+adaptiveSwitchSeparationAdapterLevel : ProofLevel
+adaptiveSwitchSeparationAdapterLevel = machineChecked
+
 diffuseDissipationChargingReductionLevel : ProofLevel
 diffuseDissipationChargingReductionLevel = machineChecked
+
+diffuseDissipationRouteAdapterLevel : ProofLevel
+diffuseDissipationRouteAdapterLevel = machineChecked
 
 zeroChartDiffuseSelectionReductionLevel : ProofLevel
 zeroChartDiffuseSelectionReductionLevel = machineChecked
 
+extendedCoverageBKMAssemblyLevel : ProofLevel
+extendedCoverageBKMAssemblyLevel = machineChecked
+
 weightedEnvelopeLimitTransportReductionLevel : ProofLevel
 weightedEnvelopeLimitTransportReductionLevel = machineChecked
+
+weightedEnvelopeContinuumAdapterLevel : ProofLevel
+weightedEnvelopeContinuumAdapterLevel = machineChecked
 
 -- Remaining official-carrier theorem packages.
 officialNormIdentificationLevel : ProofLevel
