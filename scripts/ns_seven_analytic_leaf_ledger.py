@@ -104,6 +104,12 @@ def build() -> dict[str, Any]:
             "status": "machine_checked_reduction",
         },
         {
+            "id": "strict_margin_expenditure_adapter",
+            "module": "NSPeriodicIntegratedExpenditureStrictMarginAdapter.agda",
+            "result": "the named strict margin constructs the Wall-II budget comparison, weighted-shell bound, vorticity bound, and BKM endpoint",
+            "status": "machine_checked_reduction",
+        },
+        {
             "id": "packet_fraction_quotient_sign",
             "module": "NSPeriodicPacketFractionQuotientSign.agda",
             "result": "positive quotient numerator and positive total-energy square imply inward packet-fraction derivative",
@@ -122,9 +128,21 @@ def build() -> dict[str, Any]:
             "status": "machine_checked_reduction",
         },
         {
+            "id": "adaptive_switch_separation_adapter",
+            "module": "NSPeriodicAdaptiveSwitchSeparationAdapter.agda",
+            "result": "the double-gap separation theorem constructs the no-immediate-back-switch field in the adaptive switch package",
+            "status": "machine_checked_reduction",
+        },
+        {
             "id": "diffuse_dissipation_charging",
             "module": "NSPeriodicDiffuseDissipationCharging.agda",
             "result": "absorbed diffuse dissipation charge plus finite remainder gives finite vorticity expenditure",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "diffuse_dissipation_route_adapter",
+            "module": "NSPeriodicDiffuseDissipationRouteAdapter.agda",
+            "result": "the dissipation-charge theorem concretely inhabits the diffuse BKM dispatcher",
             "status": "machine_checked_reduction",
         },
         {
@@ -134,9 +152,21 @@ def build() -> dict[str, Any]:
             "status": "machine_checked_reduction",
         },
         {
+            "id": "extended_coverage_bkm",
+            "module": "NSPeriodicExtendedCoverageBKM.agda",
+            "result": "zero, chart, diffuse, and direct-BKM branches map to one vorticity-control endpoint",
+            "status": "machine_checked_reduction",
+        },
+        {
             "id": "weighted_envelope_limit_transport",
             "module": "NSPeriodicWeightedEnvelopeLimitTransport.agda",
             "result": "finite partial bounds plus least-upper-bound reconstruction transport the weighted envelope and vorticity bound",
+            "status": "machine_checked_reduction",
+        },
+        {
+            "id": "weighted_envelope_continuum_adapter",
+            "module": "NSPeriodicWeightedEnvelopeContinuumAdapter.agda",
+            "result": "weighted-envelope transport supplies the continuum vorticity premise used by BKM",
             "status": "machine_checked_reduction",
         },
     ]
