@@ -115,9 +115,9 @@ latticeAttractorScoreIsFour :
   compressionAttractorScore Visual.lattice ≡ 4
 latticeAttractorScoreIsFour = refl
 
-semanticAttractorScoreIsTwentyOne :
-  compressionAttractorScore Visual.semanticScene ≡ 21
-semanticAttractorScoreIsTwentyOne = refl
+semanticAttractorScoreIsTwentySeven :
+  compressionAttractorScore Visual.semanticScene ≡ 27
+semanticAttractorScoreIsTwentySeven = refl
 
 atMost : Nat → Nat → Bool
 atMost zero limit = true
