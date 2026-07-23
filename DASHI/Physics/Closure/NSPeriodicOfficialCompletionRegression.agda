@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification public
 open import DASHI.Physics.Closure.NSPeriodicOfficialNormBernsteinAdapter public
+open import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryNormAdapter public
 open import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion public
 open import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion public
 open import DASHI.Physics.Closure.NSPeriodicOfficialFarLowSchurAdapter public
