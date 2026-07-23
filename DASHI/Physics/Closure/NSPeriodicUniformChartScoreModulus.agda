@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSPeriodicUniformChartScoreModulus where
 
 open import Agda.Primitive using (Level; lsuc)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -140,8 +141,6 @@ uniformDerivativeUsesCommonConstant {A = A} M shell τ state =
         upper)
     (derivativeLedgerUsesCommonConstant M shell τ state)
     (uniformScoreDerivativeBound (derivativeLedger M shell τ state))
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 uniformScoreModulus :
   ∀ {i} {A : AbsorptionArithmetic} {Time Shell State : Set i} →
