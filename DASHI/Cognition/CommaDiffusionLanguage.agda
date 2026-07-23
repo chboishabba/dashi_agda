@@ -11,16 +11,25 @@ import DASHI.Cognition.CognitiveResearchSources as Sources
 ------------------------------------------------------------------------
 -- Research contact.
 --
--- Discrete diffusion basis:
+-- Discrete/masked diffusion basis:
 --   Austin, Johnson, Ho, Tarlow & van den Berg (NeurIPS 2021),
 --   arXiv:2107.03006.
 --   Li, Thickstun, Gulrajani, Liang & Hashimoto (NeurIPS 2022),
 --   arXiv:2205.14217.
 --   Sahoo et al. (NeurIPS 2024), arXiv:2406.07524.
 --   Shi, Han, Wang, Doucet & Titsias (NeurIPS 2024), arXiv:2406.04329.
+--   Nie et al. (NeurIPS 2025), arXiv:2502.09992.
+--   Peng et al. (ICLR 2026 Oral), OpenReview:lAlI5FuIf7.
 --
--- These papers motivate iterative whole-sequence refinement.  They do not
--- state the comma fixed-point theorem below; that is the DASHI construction.
+-- Punctuation/prosodic boundary contact:
+--   Hill & Murray (2000), DOI 10.1016/B978-008043642-5/50027-9.
+--   Luo, Yan & Zhou (2013), DOI 10.1037/a0029182.
+--
+-- The DLM papers motivate iterative bidirectional refinement and, in the 2026
+-- planner-aware result, non-uniform choices of where to denoise.  The reading
+-- papers support comma-triggered wrap-up of preboundary information and changed
+-- processing of upcoming material.  None states the exact DASHI comma fixed-
+-- coordinate theorem below.
 ------------------------------------------------------------------------
 
 diffusionSources : List Sources.ResearchSource
@@ -28,7 +37,14 @@ diffusionSources =
   Sources.austinDiscreteDiffusion ∷
   Sources.liDiffusionLM ∷
   Sources.sahooMaskedDiffusionLM ∷
-  Sources.shiGeneralizedMaskedDiffusion ∷ []
+  Sources.shiGeneralizedMaskedDiffusion ∷
+  Sources.nieLargeLanguageDiffusion ∷
+  Sources.pengPlannerAwarePathLearning ∷ []
+
+commaProcessingSources : List Sources.ResearchSource
+commaProcessingSources =
+  Sources.hillMurrayCommaParsing ∷
+  Sources.luoProsodicBoundaryComma ∷ []
 
 ------------------------------------------------------------------------
 -- Finite sentence carrier.
@@ -126,6 +142,41 @@ interruptedExample =
 interruptionRecoversCoarseBasis :
   leftCanBeRecoveredAtInterruption interruptedExample ≡ feltSelfClause
 interruptionRecoversCoarseBasis = refl
+
+------------------------------------------------------------------------
+-- Planner-aware denoising order.
+--
+-- Current DLM research treats generation order as a planner/sampling decision
+-- rather than necessarily uniform random unmasking.  DASHI's anchor-first plan
+-- fixes the comma relation before revising the two high-dimensional clauses.
+------------------------------------------------------------------------
+
+data DenoisePosition : Set where
+  boundaryPosition leftPosition rightPosition : DenoisePosition
+
+anchorFirstPlan : List DenoisePosition
+anchorFirstPlan =
+  boundaryPosition ∷ leftPosition ∷ rightPosition ∷ []
+
+firstPlannedCoordinate : List DenoisePosition → DenoisePosition
+firstPlannedCoordinate [] = boundaryPosition
+firstPlannedCoordinate (position ∷ rest) = position
+
+commaAnchorIsPlannedFirst :
+  firstPlannedCoordinate anchorFirstPlan ≡ boundaryPosition
+commaAnchorIsPlannedFirst = refl
+
+applyPlannedStep : DenoisePosition → DiffusionSentence → DiffusionSentence
+applyPlannedStep boundaryPosition state = state
+applyPlannedStep leftPosition (sentence left anchor right relationKind) =
+  sentence (refineLeft left right) anchor right relationKind
+applyPlannedStep rightPosition (sentence left anchor right relationKind) =
+  sentence left anchor (refineRight left right) relationKind
+
+boundaryStepPreservesWholeSentence :
+  (state : DiffusionSentence) →
+  applyPlannedStep boundaryPosition state ≡ state
+boundaryStepPreservesWholeSentence state = refl
 
 ------------------------------------------------------------------------
 -- PDA-style comma frame: hold the completed/coarse left constituent, leave a
