@@ -3,7 +3,7 @@ module DASHI.Cognition.IdentityVacuumClosure where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
 open import Data.Nat using (_≤_; z≤n; s≤s)
 
@@ -14,15 +14,20 @@ open Vacuum.MultiscaleDefectModel
 open Vacuum.VacuumClass
 
 ------------------------------------------------------------------------
+-- Elementary order fact used to derive global minimality from a neutral floor
+-- plus non-negative residual excess.
+------------------------------------------------------------------------
+
+leftAddLower : (floor excess : Nat) → floor ≤ floor + excess
+leftAddLower zero excess = z≤n
+leftAddLower (suc floor) excess = s≤s (leftAddLower floor excess)
+
+------------------------------------------------------------------------
 -- Identity-class vacuum principle.
 --
 -- An arbitrary stable class still need not be a vacuum.  The stronger witness
 -- below singles out a representative that is fixed by coarse-graining and
--- involution and lies at a certified global defect floor.  From those laws the
--- existing VacuumClass follows constructively.
---
--- The floor is explicit and may be non-zero: categorical neutrality means
--- "adds no further admissibility defect", not necessarily zero measured energy.
+-- involution and lies at a certified global defect floor.
 ------------------------------------------------------------------------
 
 record IdentityClassAtDefectFloor
@@ -62,29 +67,107 @@ identityClassImpliesVacuum
     floorIsGlobalLowerBound witness candidate
 
 ------------------------------------------------------------------------
--- Existing zero-floor fixture.
+-- Stronger analytic law: identity neutrality supplies a decomposition
+--
+--   totalDefect(candidate) = neutralFloor + residualExcess(candidate)
+--
+-- with residualExcess(identity)=0.  Since residualExcess is a Nat, the global
+-- lower bound is derived rather than separately assumed.
 ------------------------------------------------------------------------
+
+record IdentityNeutralDefectLaw
+    (system : Cognitive.DASHICognitiveSystem)
+    (model : Vacuum.MultiscaleDefectModel system)
+    (representative : Cognitive.Hidden system) : Set where
+  field
+    identityStableClass :
+      Cognitive.StableObservedClass system representative
+    identityUnderCoarseGraining :
+      ∀ scale → Cognitive.coarseGrain system scale representative
+        ≡ representative
+    identityUnderInvolution :
+      Cognitive.involution system representative
+        ≡ representative
+    neutralFloor : Nat
+    residualExcess : Cognitive.Hidden system → Nat
+    defectDecomposes :
+      ∀ candidate →
+      Vacuum.totalDefect model candidate
+        ≡ neutralFloor + residualExcess candidate
+    identityHasNoExcess : residualExcess representative ≡ 0
+
+open IdentityNeutralDefectLaw public
+
+neutralDefectLawImpliesFloorWitness :
+  ∀ {system model representative} →
+  IdentityNeutralDefectLaw system model representative →
+  IdentityClassAtDefectFloor system model representative
+neutralDefectLawImpliesFloorWitness
+  {system} {model} {representative} law = record
+  { stableClass = identityStableClass law
+  ; coarseIdentity = identityUnderCoarseGraining law
+  ; involutionIdentity = identityUnderInvolution law
+  ; defectFloor = neutralFloor law
+  ; representativeAtFloor = representativeIsAtFloor
+  ; floorIsGlobalLowerBound = lowerBound
+  }
+  where
+  representativeIsAtFloor :
+    Vacuum.totalDefect model representative ≡ neutralFloor law
+  representativeIsAtFloor
+    rewrite defectDecomposes law representative
+          | identityHasNoExcess law = refl
+
+  lowerBound :
+    ∀ candidate →
+    neutralFloor law ≤ Vacuum.totalDefect model candidate
+  lowerBound candidate rewrite defectDecomposes law candidate =
+    leftAddLower (neutralFloor law) (residualExcess law candidate)
+
+identityNeutralityImpliesVacuum :
+  ∀ {system model representative} →
+  IdentityNeutralDefectLaw system model representative →
+  Vacuum.VacuumClass system model representative
+identityNeutralityImpliesVacuum law =
+  identityClassImpliesVacuum (neutralDefectLawImpliesFloorWitness law)
+
+------------------------------------------------------------------------
+-- Existing zero-floor fixture, now derived from the neutral decomposition.
+------------------------------------------------------------------------
+
+booleanIdentityLaw :
+  IdentityNeutralDefectLaw
+    Vacuum.booleanCognitiveSystem
+    Vacuum.booleanDefectModel
+    true
+booleanIdentityLaw = record
+  { identityStableClass = Vacuum.trueClassIsStable
+  ; identityUnderCoarseGraining = λ scale → refl
+  ; identityUnderInvolution = refl
+  ; neutralFloor = 0
+  ; residualExcess = λ where
+      false → 1
+      true → 0
+  ; defectDecomposes = λ where
+      false → refl
+      true → refl
+  ; identityHasNoExcess = refl
+  }
 
 booleanIdentityWitness :
   IdentityClassAtDefectFloor
     Vacuum.booleanCognitiveSystem
     Vacuum.booleanDefectModel
     true
-booleanIdentityWitness = record
-  { stableClass = Vacuum.trueClassIsStable
-  ; coarseIdentity = λ scale → refl
-  ; involutionIdentity = refl
-  ; defectFloor = 0
-  ; representativeAtFloor = Vacuum.trueDefectIsZero
-  ; floorIsGlobalLowerBound = λ candidate → z≤n
-  }
+booleanIdentityWitness =
+  neutralDefectLawImpliesFloorWitness booleanIdentityLaw
 
 booleanIdentityIsVacuum :
   Vacuum.VacuumClass
     Vacuum.booleanCognitiveSystem
     Vacuum.booleanDefectModel
     true
-booleanIdentityIsVacuum = identityClassImpliesVacuum booleanIdentityWitness
+booleanIdentityIsVacuum = identityNeutralityImpliesVacuum booleanIdentityLaw
 
 ------------------------------------------------------------------------
 -- Non-zero floor fixture: the identity representative is still the unique
@@ -111,21 +194,32 @@ shiftedFalseDefectIsThree :
   Vacuum.totalDefect shiftedBooleanDefectModel false ≡ 3
 shiftedFalseDefectIsThree = refl
 
+shiftedIdentityLaw :
+  IdentityNeutralDefectLaw
+    Vacuum.booleanCognitiveSystem
+    shiftedBooleanDefectModel
+    true
+shiftedIdentityLaw = record
+  { identityStableClass = Vacuum.trueClassIsStable
+  ; identityUnderCoarseGraining = λ scale → refl
+  ; identityUnderInvolution = refl
+  ; neutralFloor = 2
+  ; residualExcess = λ where
+      false → 1
+      true → 0
+  ; defectDecomposes = λ where
+      false → refl
+      true → refl
+  ; identityHasNoExcess = refl
+  }
+
 shiftedIdentityWitness :
   IdentityClassAtDefectFloor
     Vacuum.booleanCognitiveSystem
     shiftedBooleanDefectModel
     true
-shiftedIdentityWitness = record
-  { stableClass = Vacuum.trueClassIsStable
-  ; coarseIdentity = λ scale → refl
-  ; involutionIdentity = refl
-  ; defectFloor = 2
-  ; representativeAtFloor = shiftedTrueDefectIsTwo
-  ; floorIsGlobalLowerBound = λ where
-      false → s≤s (s≤s z≤n)
-      true → s≤s (s≤s z≤n)
-  }
+shiftedIdentityWitness =
+  neutralDefectLawImpliesFloorWitness shiftedIdentityLaw
 
 nonzeroResidualIdentityIsVacuum :
   Vacuum.VacuumClass
@@ -133,7 +227,7 @@ nonzeroResidualIdentityIsVacuum :
     shiftedBooleanDefectModel
     true
 nonzeroResidualIdentityIsVacuum =
-  identityClassImpliesVacuum shiftedIdentityWitness
+  identityNeutralityImpliesVacuum shiftedIdentityLaw
 
 ------------------------------------------------------------------------
 -- Correct implication surface.
