@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.Nat using (_≤_; z≤n; s≤s)
 
 import DASHI.Cognition.CognitiveVacuumClassBoundary as Vacuum
@@ -45,13 +46,15 @@ identityClassImpliesVacuum :
   ∀ {system model representative} →
   IdentityClassAtDefectFloor system model representative →
   Vacuum.VacuumClass system model representative
-identityClassImpliesVacuum witness = record
+identityClassImpliesVacuum
+  {system} {model} {representative} witness = record
   { classStable = stableClass witness
   ; globallyMinimal = λ candidate → minimal candidate
   }
   where
   minimal : ∀ candidate →
-    Vacuum.totalDefect _ _ ≤ Vacuum.totalDefect _ candidate
+    Vacuum.totalDefect model representative ≤
+    Vacuum.totalDefect model candidate
   minimal candidate rewrite representativeAtFloor witness =
     floorIsGlobalLowerBound witness candidate
 
@@ -88,9 +91,9 @@ booleanIdentityIsVacuum = identityClassImpliesVacuum booleanIdentityWitness
 shiftedBooleanDefectModel :
   Vacuum.MultiscaleDefectModel Vacuum.booleanCognitiveSystem
 shiftedBooleanDefectModel = record
-  { Vacuum.scales = 0 ∷ []
-  ; Vacuum.weight = λ _ → 1
-  ; Vacuum.defect = λ _ hidden → shifted hidden
+  { scales = 0 ∷ []
+  ; weight = λ _ → 1
+  ; defect = λ _ hidden → shifted hidden
   }
   where
   shifted : Bool → Nat
@@ -138,5 +141,5 @@ stableAloneStillInsufficient :
     Vacuum.booleanCognitiveSystem
     Vacuum.booleanDefectModel
     false →
-  Data.Empty.⊥
+  ⊥
 stableAloneStillInsufficient = Vacuum.falseStableClassIsNotVacuum
