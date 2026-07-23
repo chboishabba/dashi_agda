@@ -82,6 +82,7 @@ import DASHI.Physics.Closure.NSCompactGammaExactMathematicalCutset
 -- Official-norm, integrated-expenditure, adaptive-coverage and continuum spine.
 import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification
 import DASHI.Physics.Closure.NSPeriodicOfficialNormBernsteinAdapter
+import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryNormAdapter
 import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion
 import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion
 import DASHI.Physics.Closure.NSPeriodicOfficialFarLowSchurAdapter
