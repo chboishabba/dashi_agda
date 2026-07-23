@@ -3,6 +3,7 @@ module DASHI.Cognition.RecursiveFibreTower where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Product using (_×_; _,_)
 
 import Base369 as Base
 import DASHI.Algebra.BalancedTernary as BT
@@ -16,10 +17,11 @@ import DASHI.Cognition.PhaseEnrichedTrit as Phase
 -- 2. A literal exponent tower arises from iterated ternary-valued function
 --    spaces Level(n+1) = Level(n) -> TriTruth.
 --
--- The second has cardinality a(n+1) = 3 ^ a(n), hence genuine base-three
--- tetration.  The transformer recurrence X(n+1) = X(n) -> X(n) would instead
--- have cardinality a(n+1) = a(n) ^ a(n) and is not silently identified with
--- ordinary tetration.
+-- When Level(n) is finite with a(n) elements, the next function space has
+-- 3 ^ a(n) elements.  The code below proves the recurrence numerically and
+-- constructs explicit lossless codes for the first two levels.  The distinct
+-- transformer recurrence X(n+1)=X(n)->X(n) would instead have size
+-- a(n+1)=a(n)^a(n) and is not silently identified with ordinary tetration.
 ------------------------------------------------------------------------
 
 pow : Nat → Nat → Nat
@@ -29,6 +31,10 @@ pow base (suc exponent) = base * pow base exponent
 tetration : Nat → Nat → Nat
 tetration base zero = 1
 tetration base (suc height) = pow base (tetration base height)
+
+tetrationStep : (base height : Nat) →
+  tetration base (suc height) ≡ pow base (tetration base height)
+tetrationStep base height = refl
 
 triadicTetrationZero : tetration 3 0 ≡ 1
 triadicTetrationZero = refl
@@ -43,16 +49,15 @@ triadicTetrationThree : tetration 3 3 ≡ pow 3 27
 triadicTetrationThree = refl
 
 ------------------------------------------------------------------------
--- Literal function-space hierarchy whose finite cardinality follows the
--- tetration recurrence above.
+-- Literal function-space hierarchy.
 ------------------------------------------------------------------------
 
 PredicateLevel : Nat → Set
 PredicateLevel zero = ⊤
 PredicateLevel (suc level) = PredicateLevel level → Base.TriTruth
 
-predicateLevelCardinality : Nat → Nat
-predicateLevelCardinality level = tetration 3 level
+predicateLevelSizeRecurrence : Nat → Nat
+predicateLevelSizeRecurrence level = tetration 3 level
 
 levelZeroPoint : PredicateLevel zero
 levelZeroPoint = tt
@@ -65,6 +70,67 @@ levelOneMid _ = Base.tri-mid
 
 levelOneHigh : PredicateLevel 1
 levelOneHigh _ = Base.tri-high
+
+-- Level one is losslessly represented by one ternary coordinate.
+
+encodeLevelOne : PredicateLevel 1 → Base.TriTruth
+encodeLevelOne function = function tt
+
+decodeLevelOne : Base.TriTruth → PredicateLevel 1
+decodeLevelOne value _ = value
+
+levelOneDecodeEncodePointwise :
+  (function : PredicateLevel 1) → (unit : ⊤) →
+  decodeLevelOne (encodeLevelOne function) unit ≡ function unit
+levelOneDecodeEncodePointwise function tt with function tt
+... | Base.tri-low = refl
+... | Base.tri-mid = refl
+... | Base.tri-high = refl
+
+levelOneEncodeDecode :
+  (value : Base.TriTruth) →
+  encodeLevelOne (decodeLevelOne value) ≡ value
+levelOneEncodeDecode Base.tri-low = refl
+levelOneEncodeDecode Base.tri-mid = refl
+levelOneEncodeDecode Base.tri-high = refl
+
+-- Level two is a ternary-valued function on the three level-one functions and
+-- is losslessly represented by three ternary coordinates: 3^3 = 27 codes.
+
+LevelTwoCode : Set
+LevelTwoCode =
+  Base.TriTruth × (Base.TriTruth × Base.TriTruth)
+
+encodeLevelTwo : PredicateLevel 2 → LevelTwoCode
+encodeLevelTwo function =
+  function levelOneLow ,
+  (function levelOneMid , function levelOneHigh)
+
+decodeLevelTwo : LevelTwoCode → PredicateLevel 2
+decodeLevelTwo (lowValue , (midValue , highValue)) levelOne with levelOne tt
+... | Base.tri-low = lowValue
+... | Base.tri-mid = midValue
+... | Base.tri-high = highValue
+
+levelTwoDecodeEncodePointwise :
+  (function : PredicateLevel 2) →
+  (levelOne : PredicateLevel 1) →
+  decodeLevelTwo (encodeLevelTwo function) levelOne ≡ function levelOne
+levelTwoDecodeEncodePointwise function levelOne with levelOne tt
+... | Base.tri-low = refl
+... | Base.tri-mid = refl
+... | Base.tri-high = refl
+
+levelTwoEncodeDecode :
+  (code : LevelTwoCode) →
+  encodeLevelTwo (decodeLevelTwo code) ≡ code
+levelTwoEncodeDecode (lowValue , (midValue , highValue)) = refl
+
+levelTwoCodeCount : Nat
+levelTwoCodeCount = tetration 3 2
+
+levelTwoCodeCountIsTwentySeven : levelTwoCodeCount ≡ 27
+levelTwoCodeCountIsTwentySeven = refl
 
 ------------------------------------------------------------------------
 -- Recursive phase fibres.  Each refinement stores another hidden phase while
