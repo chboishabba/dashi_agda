@@ -17,11 +17,11 @@ import DASHI.Cognition.PhaseEnrichedTrit as Phase
 -- 2. A literal exponent tower arises from iterated ternary-valued function
 --    spaces Level(n+1) = Level(n) -> TriTruth.
 --
--- When Level(n) is finite with a(n) elements, the next function space has
--- 3 ^ a(n) elements.  The code below proves the recurrence numerically and
--- constructs explicit lossless codes for the first two levels.  The distinct
--- transformer recurrence X(n+1)=X(n)->X(n) would instead have size
--- a(n+1)=a(n)^a(n) and is not silently identified with ordinary tetration.
+-- When Level(n) is finite with a(n) observable points, the next extensional
+-- ternary-valued function space has 3 ^ a(n) tables.  The code below proves the
+-- recurrence numerically and gives lossless table encodings for one and three
+-- observable inputs.  The distinct transformer recurrence X(n+1)=X(n)->X(n)
+-- has size a(n+1)=a(n)^a(n) and is not silently identified with tetration.
 ------------------------------------------------------------------------
 
 pow : Nat → Nat → Nat
@@ -71,7 +71,7 @@ levelOneMid _ = Base.tri-mid
 levelOneHigh : PredicateLevel 1
 levelOneHigh _ = Base.tri-high
 
--- Level one is losslessly represented by one ternary coordinate.
+-- Level one is losslessly represented pointwise by one ternary coordinate.
 
 encodeLevelOne : PredicateLevel 1 → Base.TriTruth
 encodeLevelOne function = function tt
@@ -94,32 +94,34 @@ levelOneEncodeDecode Base.tri-low = refl
 levelOneEncodeDecode Base.tri-mid = refl
 levelOneEncodeDecode Base.tri-high = refl
 
--- Level two is a ternary-valued function on the three level-one functions and
--- is losslessly represented by three ternary coordinates: 3^3 = 27 codes.
+-- The observable quotient of level one has exactly the three TriTruth points.
+-- An extensional level-two predicate on those points is therefore a table with
+-- three ternary outputs: 3^3 = 27 possible codes.
+
+ObservableLevelTwo : Set
+ObservableLevelTwo = Base.TriTruth → Base.TriTruth
 
 LevelTwoCode : Set
 LevelTwoCode =
   Base.TriTruth × (Base.TriTruth × Base.TriTruth)
 
-encodeLevelTwo : PredicateLevel 2 → LevelTwoCode
+encodeLevelTwo : ObservableLevelTwo → LevelTwoCode
 encodeLevelTwo function =
-  function levelOneLow ,
-  (function levelOneMid , function levelOneHigh)
+  function Base.tri-low ,
+  (function Base.tri-mid , function Base.tri-high)
 
-decodeLevelTwo : LevelTwoCode → PredicateLevel 2
-decodeLevelTwo (lowValue , (midValue , highValue)) levelOne with levelOne tt
-... | Base.tri-low = lowValue
-... | Base.tri-mid = midValue
-... | Base.tri-high = highValue
+decodeLevelTwo : LevelTwoCode → ObservableLevelTwo
+decodeLevelTwo (lowValue , (midValue , highValue)) Base.tri-low = lowValue
+decodeLevelTwo (lowValue , (midValue , highValue)) Base.tri-mid = midValue
+decodeLevelTwo (lowValue , (midValue , highValue)) Base.tri-high = highValue
 
 levelTwoDecodeEncodePointwise :
-  (function : PredicateLevel 2) →
-  (levelOne : PredicateLevel 1) →
-  decodeLevelTwo (encodeLevelTwo function) levelOne ≡ function levelOne
-levelTwoDecodeEncodePointwise function levelOne with levelOne tt
-... | Base.tri-low = refl
-... | Base.tri-mid = refl
-... | Base.tri-high = refl
+  (function : ObservableLevelTwo) →
+  (input : Base.TriTruth) →
+  decodeLevelTwo (encodeLevelTwo function) input ≡ function input
+levelTwoDecodeEncodePointwise function Base.tri-low = refl
+levelTwoDecodeEncodePointwise function Base.tri-mid = refl
+levelTwoDecodeEncodePointwise function Base.tri-high = refl
 
 levelTwoEncodeDecode :
   (code : LevelTwoCode) →
