@@ -58,9 +58,9 @@ subR : ℝ → ℝ → ℝ
 subR a b = a +R (-R b)
 
 crossXR crossYR crossZR : ℝ → ℝ → ℝ → ℝ → ℝ → ℝ → ℝ
-crossXR kx ky kz wx wy wz = (ky *R wz) `subR` (kz *R wy)
-crossYR kx ky kz wx wy wz = (kz *R wx) `subR` (kx *R wz)
-crossZR kx ky kz wx wy wz = (kx *R wy) `subR` (ky *R wx)
+crossXR kx ky kz wx wy wz = subR (ky *R wz) (kz *R wy)
+crossYR kx ky kz wx wy wz = subR (kz *R wx) (kx *R wz)
+crossZR kx ky kz wx wy wz = subR (kx *R wy) (ky *R wx)
 
 dotR normKSquaredR normWSquaredR crossNormSquaredR :
   ℝ → ℝ → ℝ → ℝ → ℝ → ℝ → ℝ
