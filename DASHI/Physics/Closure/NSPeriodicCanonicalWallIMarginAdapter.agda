@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicCanonicalWallIMarginAdapter where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -34,14 +34,14 @@ record CanonicalWallIMarginInputs
 
     interpretDyadic : Nat → Scalar A
     interpretAddition : ∀ m n →
-      interpretDyadic (m Nat.+ n) ≡
+      interpretDyadic (m + n) ≡
       _+_ A (interpretDyadic m) (interpretDyadic n)
 
     interpretedMarginNonnegative :
       _≤_ A (zero A)
         (interpretDyadic Canonical.canonicalStrictMargin)
 
-    InterpretedMarginPositive : Set i
+    InterpretedMarginPositive : Set
     interpretedMarginPositive : InterpretedMarginPositive
 
     nearBudgetFitsCanonicalQuarter : ∀ q τ u →
