@@ -27,6 +27,7 @@ open import DASHI.Physics.Closure.NSPeriodicStrictDissipationMargin public
 open import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureStrictMarginAdapter public
 open import DASHI.Physics.Closure.NSPeriodicPacketFractionQuotientSign public
 open import DASHI.Physics.Closure.NSPeriodicNormalizedBoundaryCommonParameters public
+open import DASHI.Physics.Closure.NSPeriodicNormalizedBoundaryCandidateTuple public
 open import DASHI.Physics.Closure.NSPeriodicHysteresisSeparation public
 open import DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchSeparationAdapter public
 open import DASHI.Physics.Closure.NSPeriodicDiffuseDissipationCharging public
