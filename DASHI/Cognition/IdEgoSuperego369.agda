@@ -1,7 +1,7 @@
 module DASHI.Cognition.IdEgoSuperego369 where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
 import Base369 as Base
 import DASHI.Cognition.Base369ZeroFibre as Fibre
