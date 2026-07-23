@@ -1,0 +1,69 @@
+name: Elementary single-operator extended
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Foundations/ElementarySingleOperator.agda'
+      - 'DASHI/Foundations/EML*.agda'
+      - 'DASHI/Foundations/ElementaryCalculator*.agda'
+      - 'DASHI/Foundations/Ternary*.agda'
+      - 'DASHI/Foundations/SpectralCountingComplexity.agda'
+      - 'DASHI/Foundations/DivergenceComparisonPackage.agda'
+      - 'DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda'
+      - 'DASHI/Algebra/Quantum/BraKet.agda'
+      - 'DASHI/Algebra/Quantum/TernaryCircuit.agda'
+      - 'DASHI/Algebra/Quantum/QutritUnitaryBridge.agda'
+      - 'DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda'
+      - 'DASHI/Unified/StructuralComplexitySurvivalBundle.agda'
+      - 'scripts/search_ternary_elementary_candidates.py'
+      - 'scripts/check_elementary_single_operator_extended.py'
+      - '.github/workflows/elementary-single-operator-extended.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-and-typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Audit fail-closed source and scout lane
+        run: python3 scripts/check_elementary_single_operator_extended.py
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+      - name: Typecheck extended EML and structural-complexity tranche
+        run: |
+          nix develop .# --command bash -lc '
+            set -euo pipefail
+            AGDA="agda -i . -l standard-library"
+            $AGDA DASHI/Foundations/ElementarySingleOperator.agda
+            $AGDA DASHI/Foundations/EMLAnalyticDomain.agda
+            $AGDA DASHI/Foundations/EMLPositiveRealAnalyticPackage.agda
+            $AGDA DASHI/Foundations/EMLComplexBranchPackage.agda
+            $AGDA DASHI/Foundations/EMLConcreteSmokeModel.agda
+            $AGDA DASHI/Foundations/ElementaryCalculator.agda
+            $AGDA DASHI/Foundations/ElementaryCalculatorSemantics.agda
+            $AGDA DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda
+            $AGDA DASHI/Foundations/ElementaryCalculatorSmokeModel.agda
+            $AGDA DASHI/Foundations/TernaryElementaryOperatorCandidate.agda
+            $AGDA DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda
+            $AGDA DASHI/Foundations/TernaryCalculatorUniversality.agda
+            $AGDA DASHI/Foundations/TernaryCalculatorSmokeModel.agda
+            $AGDA DASHI/Foundations/TernaryElementaryBoundedEnumeration.agda
+            $AGDA DASHI/Foundations/TernaryElementarySearchCertificate.agda
+            $AGDA DASHI/Foundations/TernaryElementarySearchSoundness.agda
+            $AGDA DASHI/Foundations/TernaryElementarySearchSmokeModel.agda
+            $AGDA DASHI/Foundations/SpectralCountingComplexity.agda
+            $AGDA DASHI/Foundations/DivergenceComparisonPackage.agda
+            $AGDA DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda
+            $AGDA DASHI/Algebra/Quantum/BraKet.agda
+            $AGDA DASHI/Algebra/Quantum/TernaryCircuit.agda
+            $AGDA DASHI/Algebra/Quantum/QutritUnitaryBridge.agda
+            $AGDA DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda
+            $AGDA DASHI/Foundations/ElementarySingleOperatorExtendedRegression.agda
+            $AGDA DASHI/Foundations/ElementarySingleOperatorBundle.agda
+            $AGDA DASHI/Unified/StructuralComplexitySurvivalBundle.agda
+          '
