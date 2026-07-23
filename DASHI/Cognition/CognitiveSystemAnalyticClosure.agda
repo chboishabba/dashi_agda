@@ -19,6 +19,7 @@ import DASHI.Cognition.CognitiveObservableDistributions
 import DASHI.Cognition.CognitiveProjectionCategory as Category
 import DASHI.Cognition.CognitiveVacuumClassBoundary as Vacuum
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
+import DASHI.Cognition.ElectrochemicalDiffusionBridge as Electro
 import DASHI.Cognition.FibreBraidReasoning as Braid
 import DASHI.Cognition.IdEgoSuperego369 as Self
 import DASHI.Cognition.IdentityVacuumClosure as IdentityVacuum
@@ -39,6 +40,7 @@ import DASHI.Cognition.TernaryDerivationUltrametric as TritMetric
 import DASHI.Cognition.VisualAttractorDefect as VisualDefect
 import DASHI.Cognition.VisualCompressionAttractors
 import DASHI.Cognition.VisualPatternGeneratorMDL as Visual
+import DASHI.Cognition.VisualSymmetryFixedPoint as VisualFixed
 import DASHI.Cognition.ZeroFibreContextuality as Contextual
 import DASHI.Combinatorics.PDA_MDL.KernelSelection
 import DASHI.Combinatorics.PDA_MDL.PDA
@@ -143,6 +145,13 @@ record CognitiveAnalyticClosure : Set₁ where
     auxiliaryFibreLowersReasoningDefect :
       Braid.globalReasoningDefect Braid.resolvedByHighAuxiliary ≡ 1
 
+    physicalDiffusionConservesTotal :
+      Electro.totalConcentration Electro.initialConcentration
+      ≡ Electro.totalConcentration Electro.afterOneDiffusiveFlux
+
+    physicalDiffusionReducesGradient :
+      Electro.concentrationGradient Electro.afterOneDiffusiveFlux ≡ 2
+
     psychedelicWithinIntegrityClosed :
       Network.withinIntegrity Network.psychedelicProfile ≡ 12
 
@@ -161,6 +170,13 @@ record CognitiveAnalyticClosure : Set₁ where
 
     visualBasisNoiseDefectClosed :
       VisualDefect.compressionAttractorScore Visual.lattice ≡ 4
+
+    visualSymmetryFixedPointClosed :
+      VisualFixed.symmetryTransport VisualFixed.checkerFixedPoint
+      ≡ VisualFixed.checkerFixedPoint
+
+    visualFixedPointDefectClosed :
+      VisualFixed.fixedPointDefect VisualFixed.checkerFixedPoint ≡ 0
 
     identityNeutralDefectLawClosed :
       IdentityVacuum.IdentityNeutralDefectLaw
@@ -206,12 +222,16 @@ canonicalCognitiveAnalyticClosure = record
   ; commaAnchorPlannerClosed = Comma.commaAnchorIsPlannedFirst
   ; selfTriadDiscrepancyClosed = Self.canonicalContestedSelfHasTwoDiscrepancies
   ; auxiliaryFibreLowersReasoningDefect = Braid.auxiliaryTransportLowersDefect
+  ; physicalDiffusionConservesTotal = refl
+  ; physicalDiffusionReducesGradient = Electro.afterFluxGradientIsTwo
   ; psychedelicWithinIntegrityClosed = Network.psychedelicIntegrityIsTwelve
   ; psychedelicCrossTransportClosed = Network.psychedelicCrossCommunicationIsEight
   ; psychedelicZeroResidenceClosed = Network.psychedelicZeroResidenceIsThree
   ; crossTransportCanCoexistWithLowSynchrony =
       NetworkMetrics.crossTransportHighSynchronyLow
   ; visualBasisNoiseDefectClosed = VisualDefect.latticeAttractorScoreIsFour
+  ; visualSymmetryFixedPointClosed = VisualFixed.checkerIsSymmetryFixedPoint
+  ; visualFixedPointDefectClosed = VisualFixed.checkerFixedPointDefectIsZero
   ; identityNeutralDefectLawClosed = IdentityVacuum.shiftedIdentityLaw
   ; identityVacuumAtNonzeroFloorClosed =
       IdentityVacuum.nonzeroResidualIdentityIsVacuum
