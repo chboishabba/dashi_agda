@@ -14,13 +14,17 @@ open Vacuum.MultiscaleDefectModel
 open Vacuum.VacuumClass
 
 ------------------------------------------------------------------------
--- Elementary order fact used to derive global minimality from a neutral floor
--- plus non-negative residual excess.
+-- Elementary additive/order facts used to derive global minimality from a
+-- neutral floor plus non-negative residual excess.
 ------------------------------------------------------------------------
 
 leftAddLower : (floor excess : Nat) → floor ≤ floor + excess
 leftAddLower zero excess = z≤n
 leftAddLower (suc floor) excess = s≤s (leftAddLower floor excess)
+
+rightAddIdentity : (value : Nat) → value + 0 ≡ value
+rightAddIdentity zero = refl
+rightAddIdentity (suc value) rewrite rightAddIdentity value = refl
 
 ------------------------------------------------------------------------
 -- Identity-class vacuum principle.
@@ -116,7 +120,8 @@ neutralDefectLawImpliesFloorWitness
     Vacuum.totalDefect model representative ≡ neutralFloor law
   representativeIsAtFloor
     rewrite defectDecomposes law representative
-          | identityHasNoExcess law = refl
+          | identityHasNoExcess law
+          | rightAddIdentity (neutralFloor law) = refl
 
   lowerBound :
     ∀ candidate →
