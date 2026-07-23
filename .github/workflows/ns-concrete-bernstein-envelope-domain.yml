@@ -59,6 +59,19 @@ jobs:
             "$RUNNER_TEMP/ns-official-completion/ledger.json"
           diff -u scripts/data/outputs/check_ns_official_completion_ledger.json \
             "$RUNNER_TEMP/ns-official-completion/check.json"
+      - name: Reproduce seven analytic leaf ledger
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ns-seven-analytic-leaves"
+          python scripts/ns_seven_analytic_leaf_ledger.py \
+            --output-json "$RUNNER_TEMP/ns-seven-analytic-leaves/ledger.json"
+          python scripts/check_ns_seven_analytic_leaf_ledger.py \
+            --source-json "$RUNNER_TEMP/ns-seven-analytic-leaves/ledger.json" \
+            --output-json "$RUNNER_TEMP/ns-seven-analytic-leaves/check.json"
+          diff -u scripts/data/outputs/ns_seven_analytic_leaf_ledger.json \
+            "$RUNNER_TEMP/ns-seven-analytic-leaves/ledger.json"
+          diff -u scripts/data/outputs/check_ns_seven_analytic_leaf_ledger.json \
+            "$RUNNER_TEMP/ns-seven-analytic-leaves/check.json"
       - name: Reproduce finite falsification audit
         run: |
           set -euo pipefail
