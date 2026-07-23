@@ -4,7 +4,8 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _+ℝ_; _-ℝ_; _*ℝ_; _≤ℝ_; +-mono-≤; +-identityˡ)
+  (ℝ; 0ℝ; _+ℝ_; _-ℝ_; _*ℝ_; _≤ℝ_; +-mono-≤; +-identityˡ;
+   mulMonotoneNonnegative; mulZeroˡ; ≤ℝ-refl)
 open import DASHI.Physics.Closure.NSWall1ExactEvaluationCarrier using
   (Vec3; vec3)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -39,6 +40,21 @@ realAddNonnegative {a} {b} aNonnegative bNonnegative =
     (λ lower → lower ≤ℝ (a +ℝ b))
     (+-identityˡ 0ℝ)
     (+-mono-≤ aNonnegative bNonnegative)
+
+realMultiplyNonnegative :
+  ∀ {a b} →
+  0ℝ ≤ℝ a →
+  0ℝ ≤ℝ b →
+  0ℝ ≤ℝ (a *ℝ b)
+realMultiplyNonnegative {a} {b} aNonnegative bNonnegative =
+  subst
+    (λ lower → lower ≤ℝ (a *ℝ b))
+    (mulZeroˡ 0ℝ)
+    (mulMonotoneNonnegative
+      ≤ℝ-refl
+      aNonnegative
+      ≤ℝ-refl
+      bNonnegative)
 
 realVecNormSquared : Vec3 ℝ → ℝ
 realVecNormSquared (vec3 x y z) =
@@ -87,25 +103,15 @@ realLongitudinalComplementNonnegative :
     (inverseNormSquared *ℝ
       (realDot wave v *ℝ realDot wave v))
 realLongitudinalComplementNonnegative A wave v inverseNormSquared inverseNonnegative =
-  let dotSquareNonnegative = realDotSquaredNonnegative A wave v in
-  -- Multiplication monotonicity is deliberately supplied as part of the
-  -- ordered-real authority at the point where this theorem is instantiated.
-  -- The primitive vector nonnegativity above does not depend on it.
-  longitudinalProductNonnegative inverseNonnegative dotSquareNonnegative
-  where
-  postulate
-    longitudinalProductNonnegative :
-      ∀ {a b : ℝ} →
-      0ℝ ≤ℝ a →
-      0ℝ ≤ℝ b →
-      0ℝ ≤ℝ (a *ℝ b)
+  realMultiplyNonnegative
+    inverseNonnegative
+    (realDotSquaredNonnegative A wave v)
 
 ------------------------------------------------------------------------
--- NOTE: the local postulate above is intentionally forbidden by the frontier
--- audit and will be discharged by the follow-up ordered-product adapter before
--- this module is wired into the aggregate.  Keeping the draft theorem here
--- makes the exact missing ordered-field law visible during implementation.
+-- Status: every requested modewise nonnegativity theorem is reduced to the
+-- single standard ordered-real law 0 ≤ x².  No Navier--Stokes estimate and no
+-- Fourier-cutoff constant enters this layer.
 ------------------------------------------------------------------------
 
 realOrderedNormLawLevel : ProofLevel
-realOrderedNormLawLevel = conditional
+realOrderedNormLawLevel = machineChecked
