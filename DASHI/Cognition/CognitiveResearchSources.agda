@@ -63,6 +63,44 @@ shiGeneralizedMaskedDiffusion = researchSource
   ""
   "arXiv:2406.04329"
 
+nieLargeLanguageDiffusion : ResearchSource
+nieLargeLanguageDiffusion = researchSource
+  "Shen Nie; Fengqi Zhu; Zebin You; Xiaolu Zhang; Jingyang Ou; Jun Hu; Jun Zhou; Yankai Lin; Ji-Rong Wen; Chongxuan Li"
+  2025
+  "Large Language Diffusion Models"
+  "NeurIPS 2025"
+  ""
+  "arXiv:2502.09992"
+
+pengPlannerAwarePathLearning : ResearchSource
+pengPlannerAwarePathLearning = researchSource
+  "Fred Zhangzhi Peng; Zachary Bezemek; Jarrid Rector-Brooks; Shuibai Zhang; Michael M. Bronstein; Anru Zhang; Alexander Tong; Joey Bose"
+  2026
+  "Planner Aware Path Learning in Diffusion Language Models Training"
+  "ICLR 2026 Oral"
+  ""
+  "OpenReview:lAlI5FuIf7"
+
+-- Commas, punctuation, prosodic boundaries and online sentence processing.
+
+hillMurrayCommaParsing : ResearchSource
+hillMurrayCommaParsing = researchSource
+  "Robin L. Hill; Wayne S. Murray"
+  2000
+  "Commas and Spaces: Effects of Punctuation on Eye Movements and Sentence Parsing"
+  "Reading as a Perceptual Process, pp. 565-589"
+  "10.1016/B978-008043642-5/50027-9"
+  ""
+
+luoProsodicBoundaryComma : ResearchSource
+luoProsodicBoundaryComma = researchSource
+  "Yingyi Luo; Ming Yan; Xiaolin Zhou"
+  2013
+  "Prosodic Boundaries Delay the Processing of Upcoming Lexical Information During Silent Sentence Reading"
+  "Journal of Experimental Psychology: Learning, Memory, and Cognition 39(3):915-930"
+  "10.1037/a0029182"
+  "PMID:22774853"
+
 -- Connectivity and neurochemical communication.
 
 fristonConnectivityReview : ResearchSource
@@ -174,6 +212,10 @@ allCognitionSources =
   liDiffusionLM ∷
   sahooMaskedDiffusionLM ∷
   shiGeneralizedMaskedDiffusion ∷
+  nieLargeLanguageDiffusion ∷
+  pengPlannerAwarePathLearning ∷
+  hillMurrayCommaParsing ∷
+  luoProsodicBoundaryComma ∷
   fristonConnectivityReview ∷
   friesCommunicationThroughCoherence ∷
   fuxeWiredAndVolumeTransmission ∷
