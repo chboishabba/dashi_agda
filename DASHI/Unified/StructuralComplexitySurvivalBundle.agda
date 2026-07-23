@@ -8,6 +8,8 @@ open import DASHI.Physics.NavierStokes.DissipationNullComputationalCarrier publi
 open import DASHI.Algebra.Quantum.BraKet public
 open import DASHI.Algebra.Quantum.TernaryCircuit public
 open import DASHI.Algebra.Quantum.QutritAmplitude public
+open import DASHI.Algebra.Quantum.ConcreteQutritScalar public
+open import DASHI.Algebra.Quantum.QutritMatrixGates public
 open import DASHI.Algebra.Quantum.QutritUnitaryBridge public
 open import DASHI.Promotion.FiniteTernaryQuantumCircuitAdapter public
 
@@ -22,6 +24,7 @@ data ComplexityCarrierKind : Set where
   divergenceOperationalMeaning : ComplexityCarrierKind
   finiteQutritPermutation : ComplexityCarrierKind
   amplitudeQutrit : ComplexityCarrierKind
+  matrixQutrit : ComplexityCarrierKind
 
 record TypedComplexitySeparation : Set₁ where
   field
