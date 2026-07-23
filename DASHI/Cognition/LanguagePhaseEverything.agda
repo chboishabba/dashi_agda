@@ -29,6 +29,7 @@ import DASHI.Cognition.QuantumMindRetypingBoundary
 import DASHI.Cognition.RecursiveFibreTower
 import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.ResidualPhaseGeometry
+import DASHI.Cognition.TernaryCommitmentLogic
 import DASHI.Cognition.TernaryDerivationAddress
 import DASHI.Cognition.TernaryDerivationUltrametric
 import DASHI.Cognition.VisualAttractorDefect
