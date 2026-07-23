@@ -5,14 +5,10 @@ on:
     paths:
       - 'DASHI/Cognition/**'
       - 'DASHI/Algebra/BalancedTernary.agda'
-      - 'DASHI/Combinatorics/PDA_MDL/**'
-      - 'DASHI/Core/ProjectionCategory.agda'
       - 'Base369.agda'
       - 'Ultrametric.agda'
       - 'scripts/check_cognitive_formalism.sh'
-      - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
-      - 'flake.lock'
       - '.github/workflows/cognitive-system-agda.yml'
   workflow_dispatch:
 
@@ -26,8 +22,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
-        with:
-          persist-credentials: false
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
