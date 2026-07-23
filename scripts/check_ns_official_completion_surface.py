@@ -107,12 +107,17 @@ FILES = {
     "NSPeriodicOfficialCompletionStatus.agda": [
         "biotSavartTransversalityReductionLevel = machineChecked",
         "strictDissipationMarginReductionLevel = machineChecked",
+        "strictMarginExpenditureAdapterLevel = machineChecked",
         "packetFractionQuotientSignReductionLevel = machineChecked",
         "normalizedBoundaryCommonParameterReductionLevel = machineChecked",
         "hysteresisSeparationReductionLevel = machineChecked",
+        "adaptiveSwitchSeparationAdapterLevel = machineChecked",
         "diffuseDissipationChargingReductionLevel = machineChecked",
+        "diffuseDissipationRouteAdapterLevel = machineChecked",
         "zeroChartDiffuseSelectionReductionLevel = machineChecked",
+        "extendedCoverageBKMAssemblyLevel = machineChecked",
         "weightedEnvelopeLimitTransportReductionLevel = machineChecked",
+        "weightedEnvelopeContinuumAdapterLevel = machineChecked",
         "unconditionalPeriodicNavierStokesTheorem = false",
         "clayNavierStokesSubmissionPromoted = false",
     ],
@@ -139,7 +144,14 @@ FILES = {
     "NSPeriodicStrictDissipationMargin.agda": [
         "periodicNonlinearComponentsBelowPayments",
         "periodicNonlinearPlusStrictMarginBelowViscosity",
+        "periodicNonlinearBelowViscosity",
         "strictDissipationMarginAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicIntegratedExpenditureStrictMarginAdapter.agda": [
+        "strictMarginPaysOfficialBudget",
+        "strictMarginInputsToConcreteExpenditure",
+        "strictMarginIntegratedWeightedShellEstimate",
+        "strictMarginExpenditureAdapterLevel = machineChecked",
     ],
     "NSPeriodicPacketFractionQuotientSign.agda": [
         "packetFractionDerivativeStrictlyPositive",
@@ -155,21 +167,40 @@ FILES = {
         "hysteresisGapExcludesImmediateBackSwitch",
         "hysteresisSeparationAssemblyLevel = machineChecked",
     ],
+    "NSPeriodicAdaptiveSwitchSeparationAdapter.agda": [
+        "separationExcludesImmediateBackSwitch",
+        "switchSeparationToAdaptiveSwitchInputs",
+        "adaptiveSwitchControlFromSeparation",
+        "adaptiveSwitchSeparationAdapterLevel = machineChecked",
+    ],
     "NSPeriodicDiffuseDissipationCharging.agda": [
         "diffuseChargedVorticityBelowTotalBudget",
         "diffuseDissipationChargeGivesFiniteVorticity",
         "diffuseDissipationChargingAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicDiffuseDissipationRouteAdapter.agda": [
+        "diffuseDissipationRouteToBKMInputs",
+        "diffuseDissipationRouteGivesBKM",
+        "diffuseDissipationRouteAdapterLevel = machineChecked",
     ],
     "NSPeriodicZeroChartDiffuseSelection.agda": [
         "periodicZeroChartDiffuseSelection",
         "periodicCoverageClassAsDisjunction",
         "zeroChartDiffuseSelectionAssemblyLevel = machineChecked",
     ],
+    "NSPeriodicExtendedCoverageBKM.agda": [
+        "periodicExtendedCoverageGivesVorticityControl",
+        "extendedCoverageBKMAssemblyLevel = machineChecked",
+    ],
     "NSPeriodicWeightedEnvelopeLimitTransport.agda": [
         "continuumFullEnvelopeBelowUniformCutoffBound",
         "continuumVorticityBelowUniformCutoffBound",
         "weightedEnvelopeTransportGivesFiniteContinuumVorticity",
         "weightedEnvelopeLimitTransportAssemblyLevel = machineChecked",
+    ],
+    "NSPeriodicWeightedEnvelopeContinuumAdapter.agda": [
+        "weightedEnvelopeVorticityBoundPassesToLimit",
+        "weightedEnvelopeContinuumAdapterLevel = machineChecked",
     ],
 }
 
