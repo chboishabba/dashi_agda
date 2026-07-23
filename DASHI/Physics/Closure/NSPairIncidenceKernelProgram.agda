@@ -100,3 +100,4 @@ import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumAssembly
 import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus
 import DASHI.Physics.Closure.NSPeriodicOfficialCompletionRegression
+import DASHI.Physics.Closure.NSPeriodicSevenAnalyticLeafCutset
