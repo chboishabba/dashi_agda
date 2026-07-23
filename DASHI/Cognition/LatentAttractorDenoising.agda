@@ -2,7 +2,7 @@ module DASHI.Cognition.LatentAttractorDenoising where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat using (_≤_; z≤n; s≤s)
 
 import DASHI.Algebra.BalancedTernary as BT
@@ -91,11 +91,8 @@ record CompletionEnergy : Set where
 open CompletionEnergy public
 
 totalEnergy : CompletionEnergy → Nat
-totalEnergy energy = basisCost energy + noiseCost energy + bindingDefect energy
-  where
-  _+_ : Nat → Nat → Nat
-  zero + right = right
-  suc left + right = suc (left + right)
+totalEnergy energy =
+  basisCost energy + noiseCost energy + bindingDefect energy
 
 ordinaryEnergy : CompletionState → CompletionEnergy
 ordinaryEnergy noisyUnderdetermined = completionEnergy 1 6 2
