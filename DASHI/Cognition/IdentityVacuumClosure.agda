@@ -10,6 +10,9 @@ open import Data.Nat using (_≤_; z≤n; s≤s)
 import DASHI.Cognition.CognitiveVacuumClassBoundary as Vacuum
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
 
+open Vacuum.MultiscaleDefectModel
+open Vacuum.VacuumClass
+
 ------------------------------------------------------------------------
 -- Identity-class vacuum principle.
 --
