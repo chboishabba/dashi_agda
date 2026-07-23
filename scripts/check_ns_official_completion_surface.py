@@ -112,6 +112,18 @@ FILES = {
         "globalRegularityGateRegression = refl",
         "clayGateRegression = refl",
     ],
+    "NSPeriodicSevenAnalyticLeafCutset.agda": [
+        "OfficialCarrierAndUniformHarmonicBounds",
+        "ConcreteCompactGammaStrictExpenditure",
+        "StrictNormalizedBoundarySigns",
+        "UniversalSwitchControl",
+        "DiffuseSpectrumBKMControl",
+        "ExhaustiveZeroChartDiffuseClassification",
+        "CutoffUniformBoundAndContinuumTransport",
+        "sevenAnalyticLeavesGiveEndpoint",
+        "sevenAnalyticLeafObligationsInhabitedInOfficialCarrier = false",
+        "sevenAnalyticLeafEndpointPromoted = false",
+    ],
 }
 
 FORBIDDEN = (
@@ -121,6 +133,7 @@ FORBIDDEN = (
     "{-# NON_TERMINATING #-}",
     "unconditionalPeriodicNavierStokesTheorem = true",
     "clayNavierStokesSubmissionPromoted = true",
+    "sevenAnalyticLeafEndpointPromoted = true",
 )
 
 
