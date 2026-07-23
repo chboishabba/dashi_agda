@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Unit using (tt)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Cognition.CognitiveVacuumClassBoundary as Fixture
 import DASHI.Cognition.DashiCognitiveSystem as Cognitive
@@ -70,6 +71,9 @@ obligatedMDLRiseIsFive :
 obligatedMDLRiseIsFive = refl
 
 bothRemainProductive :
-  Cognitive.PhaseObservables.languagePhase emptyObservation
-  ≡ Cognitive.productivePhase
-bothRemainProductive = refl
+  (Cognitive.PhaseObservables.languagePhase emptyObservation
+    ≡ Cognitive.productivePhase)
+  ×
+  (Cognitive.PhaseObservables.languagePhase obligatedObservation
+    ≡ Cognitive.productivePhase)
+bothRemainProductive = refl , refl
