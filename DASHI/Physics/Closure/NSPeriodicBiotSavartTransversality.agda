@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicBiotSavartTransversality where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -61,7 +61,7 @@ biotSavartVelocityIsTransverse {L = L} T mode omega =
       (λ dotValue →
         scalarMultiply L (inverseNormSquared L mode) dotValue
         ≡ scalarZero L)
-      (waveDotOwnCrossIsZero T mode omega)
+      (sym (waveDotOwnCrossIsZero T mode omega))
       (multiplyZeroRight T (inverseNormSquared L mode)))
 
 ------------------------------------------------------------------------
