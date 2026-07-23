@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchSeparationAdapter where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Data.Empty using (⊥)
+open import Data.Sum.Base using (_⊎_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 import DASHI.Physics.Closure.NSPeriodicHysteresisSeparation as Separation
@@ -112,7 +113,7 @@ adaptiveSwitchControlFromSeparation :
   ∀ {i} {A : AbsorptionArithmetic}
     {Time State Shell : Set i} →
   (S : PeriodicAdaptiveSwitchSeparationInputs A Time State Shell) →
-  LocallyFiniteSwitching S Switch.⊎ SummableSwitchCosts S
+  LocallyFiniteSwitching S ⊎ SummableSwitchCosts S
 adaptiveSwitchControlFromSeparation S =
   Switch.adaptiveSwitchingIsControlled
     (switchSeparationToAdaptiveSwitchInputs S)
