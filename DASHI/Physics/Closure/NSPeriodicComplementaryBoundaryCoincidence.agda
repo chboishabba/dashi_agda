@@ -1,7 +1,8 @@
 module DASHI.Physics.Closure.NSPeriodicComplementaryBoundaryCoincidence where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Data.Product.Base using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -21,6 +22,12 @@ record ComplementaryBoundaryInputs
     packetFraction offPacketFraction totalFraction : Scalar A
     packetThreshold offPacketThreshold : Scalar A
 
+    cancelLeftEquality : ∀ {a b c} →
+      _+_ A a b ≡ _+_ A a c → b ≡ c
+
+    cancelRightEquality : ∀ {a b c} →
+      _+_ A a c ≡ _+_ A b c → a ≡ b
+
     statePartition :
       _+_ A packetFraction offPacketFraction ≡ totalFraction
 
@@ -35,7 +42,7 @@ packetBoundaryImpliesOffPacketBoundary :
   packetFraction C ≡ packetThreshold C →
   offPacketFraction C ≡ offPacketThreshold C
 packetBoundaryImpliesOffPacketBoundary {A = A} C packetFace =
-  additionCancelLeftEquality A aligned
+  cancelLeftEquality C aligned
   where
   aligned :
     _+_ A (packetThreshold C) (offPacketFraction C)
@@ -50,22 +57,13 @@ packetBoundaryImpliesOffPacketBoundary {A = A} C packetFace =
         (statePartition C)
         (sym (thresholdPartition C)))
 
-  additionCancelLeftEquality :
-    (A : AbsorptionArithmetic) →
-    ∀ {a b c} →
-    _+_ A a b ≡ _+_ A a c → b ≡ c
-  additionCancelLeftEquality A equality =
-    ≤-antisym A
-      (additionCancelLeft A (≤-from-≡ A equality))
-      (additionCancelLeft A (≤-from-≡ A (sym equality)))
-
 offPacketBoundaryImpliesPacketBoundary :
   ∀ {A : AbsorptionArithmetic} →
   (C : ComplementaryBoundaryInputs A) →
   offPacketFraction C ≡ offPacketThreshold C →
   packetFraction C ≡ packetThreshold C
 offPacketBoundaryImpliesPacketBoundary {A = A} C offFace =
-  additionCancelRightEquality A aligned
+  cancelRightEquality C aligned
   where
   aligned :
     _+_ A (packetFraction C) (offPacketThreshold C)
@@ -79,15 +77,6 @@ offPacketBoundaryImpliesPacketBoundary {A = A} C offFace =
       (trans
         (statePartition C)
         (sym (thresholdPartition C)))
-
-  additionCancelRightEquality :
-    (A : AbsorptionArithmetic) →
-    ∀ {a b c} →
-    _+_ A a c ≡ _+_ A b c → a ≡ b
-  additionCancelRightEquality A equality =
-    ≤-antisym A
-      (additionCancelRight A (≤-from-≡ A equality))
-      (additionCancelRight A (≤-from-≡ A (sym equality)))
 
 packetAndOffPacketFacesCoincide :
   ∀ {A : AbsorptionArithmetic} →
