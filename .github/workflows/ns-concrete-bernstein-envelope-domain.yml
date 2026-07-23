@@ -72,6 +72,19 @@ jobs:
             "$RUNNER_TEMP/ns-seven-analytic-leaves/ledger.json"
           diff -u scripts/data/outputs/check_ns_seven_analytic_leaf_ledger.json \
             "$RUNNER_TEMP/ns-seven-analytic-leaves/check.json"
+      - name: Reproduce common normalized parameter tuple certificate
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ns-common-normalized-tuple"
+          python scripts/ns_common_normalized_parameter_tuple_certificate.py \
+            --output-json "$RUNNER_TEMP/ns-common-normalized-tuple/certificate.json"
+          python scripts/check_ns_common_normalized_parameter_tuple_certificate.py \
+            --source-json "$RUNNER_TEMP/ns-common-normalized-tuple/certificate.json" \
+            --output-json "$RUNNER_TEMP/ns-common-normalized-tuple/check.json"
+          diff -u scripts/data/outputs/ns_common_normalized_parameter_tuple_certificate.json \
+            "$RUNNER_TEMP/ns-common-normalized-tuple/certificate.json"
+          diff -u scripts/data/outputs/check_ns_common_normalized_parameter_tuple_certificate.json \
+            "$RUNNER_TEMP/ns-common-normalized-tuple/check.json"
       - name: Reproduce finite falsification audit
         run: |
           set -euo pipefail
