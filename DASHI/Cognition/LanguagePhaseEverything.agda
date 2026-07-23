@@ -34,4 +34,5 @@ import DASHI.Cognition.TernaryDerivationUltrametric
 import DASHI.Cognition.VisualAttractorDefect
 import DASHI.Cognition.VisualCompressionAttractors
 import DASHI.Cognition.VisualPatternGeneratorMDL
+import DASHI.Cognition.VisualSymmetryFixedPoint
 import DASHI.Cognition.ZeroFibreContextuality
