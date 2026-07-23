@@ -1,14 +1,8 @@
 module DASHI.Algebra.Quantum.QutritAmplitude where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 open import DASHI.Algebra.Quantum.TernaryCircuit
-
-------------------------------------------------------------------------
--- Exact amplitude-level qutrit interface.  Scalar analysis remains parameterized
--- by an explicit complex-star-semiring authority; this module contributes no
--- hidden postulates and is reusable by finite exact, algebraic, or analytic models.
 
 record ComplexStarSemiring : Set₁ where
   field
@@ -49,8 +43,7 @@ scaleState :
   QutritState A →
   QutritState A
 scaleState {A} scalar (qstate a b c) =
-  qstate (scalar *S a) (scalar *S b) (scalar *S c)
-  where open ComplexStarSemiring A
+  qstate (_*S_ A scalar a) (_*S_ A scalar b) (_*S_ A scalar c)
 
 addState :
   ∀ {A} →
@@ -58,8 +51,7 @@ addState :
   QutritState A →
   QutritState A
 addState {A} (qstate a b c) (qstate x y z) =
-  qstate (a +S x) (b +S y) (c +S z)
-  where open ComplexStarSemiring A
+  qstate (_+S_ A a x) (_+S_ A b y) (_+S_ A c z)
 
 innerQutrit :
   ∀ {A} →
@@ -67,26 +59,24 @@ innerQutrit :
   QutritState A →
   Scalar A
 innerQutrit {A} (qstate a b c) (qstate x y z) =
-  ((conjugate a *S x) +S (conjugate b *S y)) +S
-  (conjugate c *S z)
-  where open ComplexStarSemiring A
+  _+S_ A
+    (_+S_ A
+      (_*S_ A (conjugate A a) x)
+      (_*S_ A (conjugate A b) y))
+    (_*S_ A (conjugate A c) z)
 
 stateNormSq :
   ∀ {A} →
   QutritState A →
   Scalar A
 stateNormSq {A} (qstate a b c) =
-  (normSq a +S normSq b) +S normSq c
-  where open ComplexStarSemiring A
+  _+S_ A (_+S_ A (normSq A a) (normSq A b)) (normSq A c)
 
 Normalized :
   ∀ {A} →
   QutritState A →
   Set
 Normalized {A} state = stateNormSq state ≡ oneS A
-
-------------------------------------------------------------------------
--- Concrete amplitude actions of the basis permutation gates.
 
 applyAmplitudeGate :
   ∀ {A} →
@@ -114,9 +104,6 @@ amplitudeInverseRight :
 amplitudeInverseRight identityGate state = refl
 amplitudeInverseRight cycleGate (qstate a b c) = refl
 amplitudeInverseRight inverseCycleGate (qstate a b c) = refl
-
-------------------------------------------------------------------------
--- Matrix and unitary interfaces.
 
 record QutritMatrix (A : ComplexStarSemiring) : Set where
   constructor qmatrix
@@ -166,10 +153,6 @@ permutationGateUnitary authority gate =
     ; preservesInner = permutationPreservesInner authority gate
     }
 
-------------------------------------------------------------------------
--- Projective measurement.  `Probability` and normalization of the three Born
--- weights are supplied by the selected scalar/probability authority.
-
 record QutritBornAuthority (A : ComplexStarSemiring) : Set₁ where
   field
     Probability : Set
@@ -180,9 +163,11 @@ record QutritBornAuthority (A : ComplexStarSemiring) : Set₁ where
     bornTotal :
       ∀ state →
       Normalized state →
-      (probabilityOfScalar (normSq A (ampNeg state)) +P
-       probabilityOfScalar (normSq A (ampZero state))) +P
-       probabilityOfScalar (normSq A (ampPos state))
+      _+P_
+        (_+P_
+          (probabilityOfScalar (normSq A (ampNeg state)))
+          (probabilityOfScalar (normSq A (ampZero state))))
+        (probabilityOfScalar (normSq A (ampPos state)))
       ≡ totalOne
 
 open QutritBornAuthority public
@@ -206,17 +191,11 @@ record QutritMeasurement
   probabilityPos = probabilityOfScalar B (normSq A (ampPos state))
 
   probabilitiesSumToOne :
-    (probabilityNeg +P probabilityZero) +P probabilityPos
+    _+P_ B (_+P_ B probabilityNeg probabilityZero) probabilityPos
     ≡ totalOne B
   probabilitiesSumToOne = bornTotal B state normalized
 
-  where open QutritBornAuthority B
-
 open QutritMeasurement public
-
-------------------------------------------------------------------------
--- Tensor-product carrier for two qutrits.  The nine amplitudes are explicit,
--- avoiding an unproved finite-index implementation.
 
 record TwoQutritState (A : ComplexStarSemiring) : Set where
   constructor twoQutritState
@@ -234,7 +213,6 @@ tensorQutrit :
   TwoQutritState A
 tensorQutrit {A} (qstate a b c) (qstate x y z) =
   twoQutritState
-    (a *S x) (a *S y) (a *S z)
-    (b *S x) (b *S y) (b *S z)
-    (c *S x) (c *S y) (c *S z)
-  where open ComplexStarSemiring A
+    (_*S_ A a x) (_*S_ A a y) (_*S_ A a z)
+    (_*S_ A b x) (_*S_ A b y) (_*S_ A b z)
+    (_*S_ A c x) (_*S_ A c y) (_*S_ A c z)
