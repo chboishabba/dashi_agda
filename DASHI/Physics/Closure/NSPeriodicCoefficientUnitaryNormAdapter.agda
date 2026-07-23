@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryNormAdapter where
 
 open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
