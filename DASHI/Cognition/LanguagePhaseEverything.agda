@@ -17,6 +17,7 @@ import DASHI.Cognition.IdEgoSuperego369
 import DASHI.Cognition.IdentityVacuumClosure
 import DASHI.Cognition.KepplerFiniteResonanceMDL
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
+import DASHI.Cognition.LatentAttractorDenoising
 import DASHI.Cognition.Monoidal369Nonseparability
 import DASHI.Cognition.MultipleDraftsQuotient
 import DASHI.Cognition.NetworkIntegritySynchronyMetrics
