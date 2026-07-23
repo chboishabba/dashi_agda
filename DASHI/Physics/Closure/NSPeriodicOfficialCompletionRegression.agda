@@ -24,12 +24,17 @@ open import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumAssembly publi
 open import DASHI.Physics.Closure.NSPeriodicSevenAnalyticLeafCutset public
 open import DASHI.Physics.Closure.NSPeriodicBiotSavartTransversality public
 open import DASHI.Physics.Closure.NSPeriodicStrictDissipationMargin public
+open import DASHI.Physics.Closure.NSPeriodicIntegratedExpenditureStrictMarginAdapter public
 open import DASHI.Physics.Closure.NSPeriodicPacketFractionQuotientSign public
 open import DASHI.Physics.Closure.NSPeriodicNormalizedBoundaryCommonParameters public
 open import DASHI.Physics.Closure.NSPeriodicHysteresisSeparation public
+open import DASHI.Physics.Closure.NSPeriodicAdaptiveSwitchSeparationAdapter public
 open import DASHI.Physics.Closure.NSPeriodicDiffuseDissipationCharging public
+open import DASHI.Physics.Closure.NSPeriodicDiffuseDissipationRouteAdapter public
 open import DASHI.Physics.Closure.NSPeriodicZeroChartDiffuseSelection public
+open import DASHI.Physics.Closure.NSPeriodicExtendedCoverageBKM public
 open import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeLimitTransport public
+open import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeContinuumAdapter public
 open import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus public
 
 officialNormGateRegression :
