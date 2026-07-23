@@ -5,10 +5,14 @@ on:
     paths:
       - 'DASHI/Cognition/**'
       - 'DASHI/Algebra/BalancedTernary.agda'
+      - 'DASHI/Combinatorics/PDA_MDL/**'
+      - 'DASHI/Core/ProjectionCategory.agda'
       - 'Base369.agda'
       - 'Ultrametric.agda'
       - 'scripts/check_cognitive_formalism.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
+      - 'flake.lock'
       - '.github/workflows/cognitive-system-agda.yml'
   workflow_dispatch:
 
