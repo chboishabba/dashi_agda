@@ -2,6 +2,7 @@ module DASHI.Biology.MolecularMechanicsRegression where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Float using (Float)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
@@ -79,11 +80,11 @@ canonicalContinuumConvergenceStillOpen = refl
 -- discharged.
 
 concretePotentialAvailable :
-  Concrete.ProteinConfiguration → Concrete.Float
+  Concrete.ProteinConfiguration → Float
 concretePotentialAvailable = Concrete.concreteTotalPotential
 
 finitePartitionAvailable :
   Ensemble.ThermodynamicParameters →
   List Ensemble.WeightedConformation →
-  Concrete.Float
+  Float
 finitePartitionAvailable = Ensemble.finitePartitionFunction
