@@ -6,6 +6,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 open import Data.List using (length)
 open import Data.Nat using (_≤_)
+open import Data.Product using (_×_)
 open import Data.Vec using (Vec)
 
 import DASHI.Algebra.BalancedTernary as BT
@@ -25,6 +26,7 @@ import DASHI.Cognition.KepplerFiniteResonanceMDL as Keppler
 import DASHI.Cognition.KepplerGlutamateZPFMDLTest
 import DASHI.Cognition.Monoidal369Nonseparability as Nonseparable
 import DASHI.Cognition.MultipleDraftsQuotient as Drafts
+import DASHI.Cognition.NetworkIntegritySynchronyMetrics as NetworkMetrics
 import DASHI.Cognition.PhaseEnrichedTrit as Phase
 import DASHI.Cognition.PhaseObservableIndependence as Independence
 import DASHI.Cognition.PhysicalCouplingFactorisation as Coupling
@@ -116,6 +118,7 @@ record CognitiveAnalyticClosure : Set₁ where
       Contextual.GlobalZeroSection → ⊥
 
     triadicTetrationLevelTwoClosed : Tower.tetration 3 2 ≡ 27
+    triadicTetrationLevelThreeClosed : Tower.tetration 3 3 ≡ Tower.pow 3 27
 
     recursiveZeroInverseLimitClosed :
       Tower.InverseLimitPoint Tower.recursivePhaseTower
@@ -129,6 +132,10 @@ record CognitiveAnalyticClosure : Set₁ where
             Comma.blankClause
             Comma.contrast))
       ≡ Comma.commaBoundary
+
+    commaAnchorPlannerClosed :
+      Comma.firstPlannedCoordinate Comma.anchorFirstPlan
+      ≡ Comma.boundaryPosition
 
     selfTriadDiscrepancyClosed :
       Self.selfDiscrepancy Self.canonicalContestedSelf ≡ 2
@@ -145,8 +152,21 @@ record CognitiveAnalyticClosure : Set₁ where
     psychedelicZeroResidenceClosed :
       Network.countProjective Network.psychedelicCommitmentTrajectory ≡ 3
 
+    crossTransportCanCoexistWithLowSynchrony :
+      (Network.crossCommunication Network.psychedelicProfile ≡ 8)
+      ×
+      (NetworkMetrics.countPhaseAgreement
+        NetworkMetrics.psychedelicTransmodalPhases
+        NetworkMetrics.psychedelicSensoryPhases ≡ 1)
+
     visualBasisNoiseDefectClosed :
       VisualDefect.compressionAttractorScore Visual.lattice ≡ 4
+
+    identityNeutralDefectLawClosed :
+      IdentityVacuum.IdentityNeutralDefectLaw
+        Vacuum.booleanCognitiveSystem
+        IdentityVacuum.shiftedBooleanDefectModel
+        true
 
     identityVacuumAtNonzeroFloorClosed :
       Vacuum.VacuumClass
@@ -180,14 +200,19 @@ canonicalCognitiveAnalyticClosure = record
   ; zeroJointSupportNonfactorable = Nonseparable.jointSupportDoesNotFactor
   ; zeroFieldHasNoGlobalSection = Contextual.noGlobalZeroSection
   ; triadicTetrationLevelTwoClosed = Tower.triadicTetrationTwo
+  ; triadicTetrationLevelThreeClosed = Tower.triadicTetrationThree
   ; recursiveZeroInverseLimitClosed = Tower.canonicalZeroInverseLimit
   ; commaBoundaryFixedUnderDenoising = refl
+  ; commaAnchorPlannerClosed = Comma.commaAnchorIsPlannedFirst
   ; selfTriadDiscrepancyClosed = Self.canonicalContestedSelfHasTwoDiscrepancies
   ; auxiliaryFibreLowersReasoningDefect = Braid.auxiliaryTransportLowersDefect
   ; psychedelicWithinIntegrityClosed = Network.psychedelicIntegrityIsTwelve
   ; psychedelicCrossTransportClosed = Network.psychedelicCrossCommunicationIsEight
   ; psychedelicZeroResidenceClosed = Network.psychedelicZeroResidenceIsThree
+  ; crossTransportCanCoexistWithLowSynchrony =
+      NetworkMetrics.crossTransportHighSynchronyLow
   ; visualBasisNoiseDefectClosed = VisualDefect.latticeAttractorScoreIsFour
+  ; identityNeutralDefectLawClosed = IdentityVacuum.shiftedIdentityLaw
   ; identityVacuumAtNonzeroFloorClosed =
       IdentityVacuum.nonzeroResidualIdentityIsVacuum
   }
