@@ -101,3 +101,13 @@ import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumAssembly
 import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus
 import DASHI.Physics.Closure.NSPeriodicOfficialCompletionRegression
 import DASHI.Physics.Closure.NSPeriodicSevenAnalyticLeafCutset
+
+-- Exact frontier reductions added after the seven-leaf cutset.
+import DASHI.Physics.Closure.NSPeriodicBiotSavartTransversality
+import DASHI.Physics.Closure.NSPeriodicStrictDissipationMargin
+import DASHI.Physics.Closure.NSPeriodicPacketFractionQuotientSign
+import DASHI.Physics.Closure.NSPeriodicNormalizedBoundaryCommonParameters
+import DASHI.Physics.Closure.NSPeriodicHysteresisSeparation
+import DASHI.Physics.Closure.NSPeriodicDiffuseDissipationCharging
+import DASHI.Physics.Closure.NSPeriodicZeroChartDiffuseSelection
+import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeLimitTransport
