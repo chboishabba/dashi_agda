@@ -2,9 +2,12 @@ module DASHI.Cognition.QuantumMindEnrichedRetyping where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+open import Data.List using (length)
 
 import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Cognition.Base369ZeroFibre as Fibre
+import DASHI.Cognition.CognitiveVacuumClassBoundary as Vacuum
 import DASHI.Cognition.IdentityVacuumClosure as IdentityVacuum
 import DASHI.Cognition.Monoidal369Nonseparability as Nonseparable
 import DASHI.Cognition.PhaseEnrichedTrit as Phase
@@ -48,23 +51,23 @@ phaseShiftedZeroCarriesPhaseOne = refl
 ------------------------------------------------------------------------
 
 sixZeroFibreCardinality :
-  Data.List.length Fibre.allZeroHex ≡ 2
+  length Fibre.allZeroHex ≡ 2
 sixZeroFibreCardinality = Fibre.zeroHexFibreHasTwoRepresentatives
 
 nineZeroFibreCardinality :
-  Data.List.length Fibre.allZeroNonary ≡ 3
+  length Fibre.allZeroNonary ≡ 3
 nineZeroFibreCardinality = Fibre.zeroNonaryFibreHasThreeRepresentatives
 
 sharedZeroInteractionCardinality :
-  Data.List.length Fibre.zeroSixNineFibreProduct ≡ 6
+  length Fibre.zeroSixNineFibreProduct ≡ 6
 sharedZeroInteractionCardinality = Fibre.visibleZeroHidesSixInteractionStates
 
 structuralNonseparabilityProved :
-  Nonseparable.ProductFactorisation → Data.Empty.⊥
+  Nonseparable.ProductFactorisation → ⊥
 structuralNonseparabilityProved = Nonseparable.jointSupportDoesNotFactor
 
 contextualGlobalSectionBlocked :
-  Contextual.GlobalZeroSection → Data.Empty.⊥
+  Contextual.GlobalZeroSection → ⊥
 contextualGlobalSectionBlocked = Contextual.noGlobalZeroSection
 
 recursiveZeroFamily :
@@ -73,7 +76,7 @@ recursiveZeroFamily = Tower.canonicalZeroInverseLimit
 
 identityClassCanBeVacuumAtNonzeroFloor :
   IdentityVacuum.IdentityClassAtDefectFloor
-    DASHI.Cognition.CognitiveVacuumClassBoundary.booleanCognitiveSystem
+    Vacuum.booleanCognitiveSystem
     IdentityVacuum.shiftedBooleanDefectModel
     true
 identityClassCanBeVacuumAtNonzeroFloor = IdentityVacuum.shiftedIdentityWitness
