@@ -19,6 +19,9 @@ publishedPeriodicHarmonicAuthorityAdapterLevel = machineChecked
 officialFarLowSchurFactorAdapterLevel : ProofLevel
 officialFarLowSchurFactorAdapterLevel = machineChecked
 
+coefficientUnitaryNormAdapterStatusLevel : ProofLevel
+coefficientUnitaryNormAdapterStatusLevel = machineChecked
+
 concreteRealIntegrationAdapterLevel : ProofLevel
 concreteRealIntegrationAdapterLevel = machineChecked
 
