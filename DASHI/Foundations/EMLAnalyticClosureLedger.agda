@@ -1,19 +1,17 @@
 module DASHI.Foundations.EMLAnalyticClosureLedger where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (zero)
 
 open import DASHI.Foundations.ElementarySingleOperator
 open import DASHI.Foundations.EMLAnalyticDomain
 open import DASHI.Foundations.ElementaryCalculator
 open import DASHI.Foundations.ElementaryCalculatorSemantics
-open import DASHI.Foundations.ElementaryCalculatorAnalyticPackage
 
 ------------------------------------------------------------------------
--- The calculator compiler is already structural.  This module makes the
--- remaining analytic work explicit operation-by-operation, so that arithmetic,
--- complex constants, direct transcendental functions, and principal inverse
--- branches can be promoted independently without pretending that one global
--- principal-log domain is closed under every calculator expression.
+-- Operation-indexed analytic closure.  The structural compiler is complete;
+-- concrete scalar models promote calculator fragments only after supplying the
+-- exact domain proof and semantic identity for each generated expression.
 
 data AnalyticPrimitiveClass : Set where
   positiveRealArithmetic : AnalyticPrimitiveClass
@@ -22,6 +20,9 @@ data AnalyticPrimitiveClass : Set where
   directHyperbolic : AnalyticPrimitiveClass
   principalInverseTrigonometric : AnalyticPrimitiveClass
   principalInverseHyperbolic : AnalyticPrimitiveClass
+
+zeroCalculator : CalculatorExpr
+zeroCalculator = integer (integerLiteral positiveLiteral zero)
 
 record PrimitiveClosureWitness
   (M : ExpLogSubModel)
@@ -32,10 +33,12 @@ record PrimitiveClosureWitness
 
   field
     environment : Env M
-    sourceDefined : DefinedSource M (admissibility P) environment
-      (lowerCalculator primitive)
-    compilationDefined : CompilationDefined M (admissibility P) environment
-      (lowerCalculator primitive)
+    sourceDefined :
+      DefinedSource M (admissibility P) environment
+        (lowerCalculator primitive)
+    compilationDefined :
+      CompilationDefined M (admissibility P) environment
+        (lowerCalculator primitive)
     semanticIdentity :
       evalSource M environment (lowerCalculator primitive)
       ≡ evalSemanticCalculator S environment primitive
@@ -49,7 +52,7 @@ record ArithmeticClosurePackage
   : Set₁ where
 
   field
-    zeroClosed : PrimitiveClosureWitness M S P constantZero
+    zeroClosed : PrimitiveClosureWitness M S P zeroCalculator
     minusOneClosed : PrimitiveClosureWitness M S P constantMinusOne
     additionClosed : ∀ x y → PrimitiveClosureWitness M S P (calcAdd x y)
     multiplicationClosed : ∀ x y → PrimitiveClosureWitness M S P (calcMultiply x y)
@@ -117,15 +120,14 @@ record CompleteCalculatorAnalyticClosure
 
 open CompleteCalculatorAnalyticClosure public
 
-------------------------------------------------------------------------
--- Promotion theorem: once one concrete scalar model supplies the ledger, every
--- listed primitive has both a compiler-defined tree and the intended meaning.
-
 primitiveCompiledCorrect :
-  ∀ {M S P primitive} →
-  PrimitiveClosureWitness M S P primitive →
-  evalEML M (environment _) (compileCalculator primitive)
-  ≡ evalSemanticCalculator S (environment _) primitive
+  ∀ {M : ExpLogSubModel}
+    {S : CalculatorSemanticModel M}
+    {P : AnalyticEMLCompilerPackage M}
+    {primitive : CalculatorExpr} →
+  (witness : PrimitiveClosureWitness M S P primitive) →
+  evalEML M (environment witness) (compileCalculator primitive)
+  ≡ evalSemanticCalculator S (environment witness) primitive
 primitiveCompiledCorrect {P = P} witness
   rewrite analyticCompileCorrect P
     (environment witness)
