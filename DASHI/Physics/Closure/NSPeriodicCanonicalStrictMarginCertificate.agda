@@ -48,7 +48,7 @@ canonicalPaymentPlusMarginIsViscosity :
 canonicalPaymentPlusMarginIsViscosity = refl
 
 canonicalStrictMarginPositive :
-  suc zero Dyadic.≤ᴺ canonicalStrictMargin
+  Dyadic._≤ᴺ_ (suc zero) canonicalStrictMargin
 canonicalStrictMarginPositive = Dyadic.halfPositiveᴰ
 
 record CanonicalStrictMarginCertificate : Set where
@@ -60,7 +60,8 @@ record CanonicalStrictMarginCertificate : Set where
     payment-plus-margin-is-viscosity :
       canonicalTotalNonlinearPayment + canonicalStrictMargin
       ≡ canonicalViscosityBudget
-    strict-margin-positive : suc zero Dyadic.≤ᴺ canonicalStrictMargin
+    strict-margin-positive :
+      Dyadic._≤ᴺ_ (suc zero) canonicalStrictMargin
 
 canonicalStrictMarginCertificate : CanonicalStrictMarginCertificate
 canonicalStrictMarginCertificate = record
