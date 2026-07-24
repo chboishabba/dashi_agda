@@ -1,8 +1,9 @@
 module DASHI.Analysis.FastCauchyReals where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl; subst)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 
@@ -41,6 +42,10 @@ record RationalMetricAuthority : Set₁ where
     zeroBelowDyadicSum : ∀ m n →
       zeroQ ≤Q (dyadicError m +Q dyadicError n)
 
+    dyadicAntitone : ∀ {m n} → m ≤ n → dyadicError n ≤Q dyadicError m
+    dyadicDoubleStep : ∀ n →
+      (dyadicError (suc n) +Q dyadicError (suc n)) ≡ dyadicError n
+
 open RationalMetricAuthority public
 
 record FastCauchyReal (A : RationalMetricAuthority) : Set where
@@ -54,9 +59,38 @@ record FastCauchyReal (A : RationalMetricAuthority) : Set where
 open FastCauchyReal public
 
 ------------------------------------------------------------------------
--- Extensional equality.  The bound is deliberately explicit: two canonical
--- representatives denote the same real when their pointwise difference is
--- swallowed by the canonical approximation error.
+-- Elementary natural-number infrastructure used to choose a common cutoff.
+
+maxN : Nat → Nat → Nat
+maxN zero n = n
+maxN (suc m) zero = suc m
+maxN (suc m) (suc n) = suc (maxN m n)
+
+left≤max : ∀ m n → m ≤ maxN m n
+left≤max zero n = z≤n
+left≤max (suc m) zero = s≤s (left≤max m zero)
+left≤max (suc m) (suc n) = s≤s (left≤max m n)
+
+right≤max : ∀ m n → n ≤ maxN m n
+right≤max zero n = reflexiveN n
+  where
+    reflexiveN : ∀ k → k ≤ k
+    reflexiveN zero = z≤n
+    reflexiveN (suc k) = s≤s (reflexiveN k)
+right≤max (suc m) zero = z≤n
+right≤max (suc m) (suc n) = s≤s (right≤max m n)
+
+≤N-trans : ∀ {a b c} → a ≤ b → b ≤ c → a ≤ c
+≤N-trans z≤n _ = z≤n
+≤N-trans (s≤s a≤b) (s≤s b≤c) = s≤s (≤N-trans a≤b b≤c)
+
+------------------------------------------------------------------------
+-- Extensional equality.
+--
+-- A fixed multiplicative error bound is not transitive.  The correct relation
+-- quantifies over every requested dyadic precision and permits a common tail
+-- cutoff.  Transitivity then requests precision n+1 from both premises and
+-- uses 2 ε(n+1) = ε(n).
 
 _≈R_ :
   ∀ {A : RationalMetricAuthority} →
@@ -64,9 +98,14 @@ _≈R_ :
   FastCauchyReal A →
   Set
 _≈R_ {A} x y =
-  ∀ n →
-    absQ A (_-Q_ A (approximate x n) (approximate y n))
-    ≤Q A (_+Q_ A (dyadicError A n) (dyadicError A n))
+  ∀ precision →
+  Σ Nat
+    (λ cutoff →
+      ∀ m n →
+      cutoff ≤ m →
+      cutoff ≤ n →
+      absQ A (_-Q_ A (approximate x m) (approximate y n))
+      ≤Q A dyadicError A precision)
 
 record FastCauchyEqualityLaws (A : RationalMetricAuthority) : Set₁ where
   field
@@ -75,6 +114,94 @@ record FastCauchyEqualityLaws (A : RationalMetricAuthority) : Set₁ where
     transitive : ∀ {x y z} → x ≈R y → y ≈R z → x ≈R z
 
 open FastCauchyEqualityLaws public
+
+fastCauchyReflexive :
+  ∀ {A : RationalMetricAuthority} →
+  (x : FastCauchyReal A) →
+  x ≈R x
+fastCauchyReflexive {A} x precision =
+  suc precision , λ m n cutoff≤m cutoff≤n →
+    leTrans A
+      (fastCauchy x m n)
+      (subst
+        (λ upper →
+          _≤Q_ A
+            (_+Q_ A (dyadicError A m) (dyadicError A n))
+            upper)
+        (dyadicDoubleStep A precision)
+        (addMono A
+          (dyadicAntitone A cutoff≤m)
+          (dyadicAntitone A cutoff≤n)))
+
+fastCauchySymmetric :
+  ∀ {A : RationalMetricAuthority}
+    {x y : FastCauchyReal A} →
+  x ≈R y →
+  y ≈R x
+fastCauchySymmetric {A} {x} {y} x≈y precision with x≈y precision
+... | cutoff , close =
+  cutoff , λ m n cutoff≤m cutoff≤n →
+    subst
+      (λ lower → _≤Q_ A lower (dyadicError A precision))
+      (absSymmetricDifference A (approximate x n) (approximate y m))
+      (close n m cutoff≤n cutoff≤m)
+
+fastCauchyTransitive :
+  ∀ {A : RationalMetricAuthority}
+    {x y z : FastCauchyReal A} →
+  x ≈R y →
+  y ≈R z →
+  x ≈R z
+fastCauchyTransitive {A} {x} {y} {z} x≈y y≈z precision
+  with x≈y (suc precision) | y≈z (suc precision)
+... | cutoffXY , closeXY | cutoffYZ , closeYZ =
+  common , closeXZ
+  where
+    common : Nat
+    common = maxN cutoffXY cutoffYZ
+
+    cutoffXY≤common : cutoffXY ≤ common
+    cutoffXY≤common = left≤max cutoffXY cutoffYZ
+
+    cutoffYZ≤common : cutoffYZ ≤ common
+    cutoffYZ≤common = right≤max cutoffXY cutoffYZ
+
+    closeXZ : ∀ m n → common ≤ m → common ≤ n →
+      absQ A (_-Q_ A (approximate x m) (approximate z n))
+      ≤Q A dyadicError A precision
+    closeXZ m n common≤m common≤n =
+      leTrans A
+        (absTriangleDifference A
+          (approximate x m)
+          (approximate y common)
+          (approximate z n))
+        (subst
+          (λ upper →
+            _≤Q_ A
+              (_+Q_ A
+                (absQ A (_-Q_ A (approximate x m) (approximate y common)))
+                (absQ A (_-Q_ A (approximate y common) (approximate z n))))
+              upper)
+          (dyadicDoubleStep A precision)
+          (addMono A
+            (closeXY
+              m common
+              (≤N-trans cutoffXY≤common common≤m)
+              cutoffXY≤common)
+            (closeYZ
+              common n
+              cutoffYZ≤common
+              (≤N-trans cutoffYZ≤common common≤n))))
+
+canonicalFastCauchyEqualityLaws :
+  ∀ (A : RationalMetricAuthority) →
+  FastCauchyEqualityLaws A
+canonicalFastCauchyEqualityLaws A =
+  record
+    { reflexive = fastCauchyReflexive
+    ; symmetric = fastCauchySymmetric
+    ; transitive = fastCauchyTransitive
+    }
 
 constantFastReal :
   ∀ (A : RationalMetricAuthority) →
