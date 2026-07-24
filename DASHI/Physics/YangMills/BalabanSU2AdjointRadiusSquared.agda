@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (_*R_; squareR)
+  (_*R_; squareR; oneR)
 open import DASHI.Physics.YangMills.BalabanSU2AdjointTransportExact
 open import DASHI.Physics.YangMills.BalabanSU2AdjointOrderedReduction
 
@@ -69,6 +69,8 @@ unitQuaternionAdjointDisplacementRadiusSq radiusOrder
 
 record SU2ExponentialRadiusMatch (radius : ℝ) : Set₁ where
   field
+    radiusOrder : SU2AdjointSquaredRadiusOrder radius
+
     chartParameter : Set
     expReal expI expJ expK : chartParameter → ℝ
     inChartBall : chartParameter → Set
@@ -90,8 +92,6 @@ record SU2ExponentialRadiusMatch (radius : ℝ) : Set₁ where
           (expJ parameter)
           (expK parameter))
         (squareR radius)
-
-    radiusOrder : SU2AdjointSquaredRadiusOrder radius
 
 open SU2ExponentialRadiusMatch public
 
