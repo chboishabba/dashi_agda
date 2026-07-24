@@ -8,6 +8,7 @@ open import DASHI.Physics.Closure.NSPeriodicOfficialNormBernsteinAdapter public
 open import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryNormAdapter public
 open import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryPythagoreanAdapter public
 open import DASHI.Physics.Closure.NSPeriodicConcreteModeOperatorPythagorean public
+open import DASHI.Physics.Closure.NSPeriodicOfficialOperatorFoldIdentification public
 open import DASHI.Physics.Closure.NSPeriodicConcreteOfficialOperatorNormAdapter public
 open import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion public
 open import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion public
