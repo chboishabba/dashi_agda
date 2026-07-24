@@ -135,11 +135,12 @@ physicalInverseSquareLatticeSpacingCoercivity :
   physicalCoercivityCoefficient inverseData
     * physicalNormSqAtSpacing spacing tangent
   ≤ physicalDifferenceEnergyAtSpacing spacing tangent
-physicalInverseSquareLatticeSpacingCoercivity inverseData tangent blockZero =
+physicalInverseSquareLatticeSpacingCoercivity
+  {spacing} inverseData tangent blockZero =
   subst
-    (λ left → left ≤ physicalDifferenceEnergyAtSpacing _ tangent)
+    (λ left → left ≤ physicalDifferenceEnergyAtSpacing spacing tangent)
     (sym (coefficientTimesPhysicalNormExact inverseData tangent))
-    (physicalLatticeSpacingCoercivity _ tangent blockZero)
+    (physicalLatticeSpacingCoercivity spacing tangent blockZero)
 
 configuredSideLatticeSpacingNormalizationLevel : ProofLevel
 configuredSideLatticeSpacingNormalizationLevel = machineChecked
