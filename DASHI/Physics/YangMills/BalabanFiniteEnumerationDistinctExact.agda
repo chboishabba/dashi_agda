@@ -4,7 +4,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (_≢_; cong; subst)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (sym; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -70,7 +71,7 @@ mapMembershipInverse :
   target ∈ values
 mapMembershipInverse injective {values = value ∷ values} here =
   subst (λ candidate → candidate ∈ value ∷ values)
-    (injective refl) here
+    (sym (injective refl)) here
 mapMembershipInverse injective {values = value ∷ values} (there membership) =
   there (mapMembershipInverse injective membership)
 
@@ -92,23 +93,25 @@ mapDuplicateFree injective (notMember ∷-free restFree) =
   mapNotMember injective notMember ∷-free
     mapDuplicateFree injective restFree
 
-appendMembershipCases :
+splitAppendMembership :
   ∀ {A : Set} {value : A} {left right} →
   value ∈ (left ++ right) →
-  (value ∈ left → ⊥) →
-  value ∈ right
-appendMembershipCases {left = []} membership noLeft = membership
-appendMembershipCases {left = item ∷ left} here noLeft =
-  noLeft here
-appendMembershipCases {left = item ∷ left} (there membership) noLeft =
-  appendMembershipCases membership (λ inLeft → noLeft (there inLeft))
+  (value ∈ left) ⊎ (value ∈ right)
+splitAppendMembership {left = []} membership = inj₂ membership
+splitAppendMembership {left = item ∷ left} here = inj₁ here
+splitAppendMembership {left = item ∷ left} (there membership)
+  with splitAppendMembership membership
+... | inj₁ inLeft = inj₁ (there inLeft)
+... | inj₂ inRight = inj₂ inRight
 
 notInAppend :
   ∀ {A : Set} {value : A} {left right} →
   value ∉ left → value ∉ right →
   value ∉ (left ++ right)
-notInAppend notLeft notRight membership =
-  notRight (appendMembershipCases membership notLeft)
+notInAppend notLeft notRight membership
+  with splitAppendMembership membership
+... | inj₁ inLeft = notLeft inLeft
+... | inj₂ inRight = notRight inRight
 
 record Disjoint {A : Set} (left right : List A) : Set where
   field
@@ -157,13 +160,12 @@ firstOfCartesianMembership :
   value ∈ cartesian left right →
   firstOf value ∈ left
 firstOfCartesianMembership {left = []} ()
-firstOfCartesianMembership {value = value} {left = item ∷ left} {right} membership
-  with appendMembershipCases membership
-    (λ inMapped →
-      let firstEquality = firstOfMappedFixed inMapped in
-      subst (λ candidate → candidate ∈ item ∷ left)
-        firstEquality here)
-... | inRest = there (firstOfCartesianMembership inRest)
+firstOfCartesianMembership {value = value} {left = item ∷ left} membership
+  with splitAppendMembership membership
+... | inj₁ inMapped =
+  subst (λ candidate → candidate ∈ item ∷ left)
+    (sym (firstOfMappedFixed inMapped)) here
+... | inj₂ inRest = there (firstOfCartesianMembership inRest)
 
 fixedBlockDisjointFromCartesianTail :
   ∀ {A B : Set} {fixed : A} {left : List A} {right : List B} →
@@ -171,11 +173,11 @@ fixedBlockDisjointFromCartesianTail :
   Disjoint
     (map (λ item → pair fixed item) right)
     (cartesian left right)
-fixedBlockDisjointFromCartesianTail notInTail = record
+fixedBlockDisjointFromCartesianTail {left = left} notInTail = record
   { disjoint = λ inFixed inTail →
       notInTail
         (subst
-          (λ candidate → candidate ∈ _)
+          (λ candidate → candidate ∈ left)
           (firstOfMappedFixed inFixed)
           (firstOfCartesianMembership inTail))
   }
