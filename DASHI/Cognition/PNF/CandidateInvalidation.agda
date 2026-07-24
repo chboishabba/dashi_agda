@@ -47,8 +47,7 @@ invalidatedCannotBeAdmitted :
   (receipt : PNFInvalidationReceipt) →
   PNF.validity (invalidatedCandidate receipt) ≡ PNF.admissible →
   ⊥
-invalidatedCannotBeAdmitted receipt proof =
-  PNF.invalidIsNotAdmissible
-    (Agda.Builtin.Equality.trans
-      (Agda.Builtin.Equality.sym (invalidatedCandidateIsInvalid receipt))
-      proof)
+invalidatedCannotBeAdmitted receipt proof
+  rewrite invalidatedCandidateIsInvalid receipt
+  with proof
+... | ()
