@@ -1,0 +1,91 @@
+name: YM exact quantitative certificates
+
+on:
+  push:
+    branches:
+      - 'agent/ym-periodic-physical-closure'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanBoolean4*.agda'
+      - 'DASHI/Physics/YangMills/BalabanPath*.agda'
+      - 'DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda'
+      - 'DASHI/Physics/YangMills/BalabanFourDimensional*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2Adjoint*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2Transport*.agda'
+      - 'DASHI/Physics/YangMills/BalabanDyadic*.agda'
+      - 'DASHI/Physics/YangMills/BalabanWilsonRGCoefficientCombinatoricsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanTerminal*.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_boolean4_exact.py'
+      - 'scripts/search_ym_quantitative_region.py'
+      - 'scripts/generate_path_poincare_sos.py'
+      - '.github/workflows/ym-boolean4-exact.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanBoolean4*.agda'
+      - 'DASHI/Physics/YangMills/BalabanPath*.agda'
+      - 'DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda'
+      - 'DASHI/Physics/YangMills/BalabanFourDimensional*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2Adjoint*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2Transport*.agda'
+      - 'DASHI/Physics/YangMills/BalabanDyadic*.agda'
+      - 'DASHI/Physics/YangMills/BalabanWilsonRGCoefficientCombinatoricsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanTerminal*.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_boolean4_exact.py'
+      - 'scripts/search_ym_quantitative_region.py'
+      - 'scripts/generate_path_poincare_sos.py'
+      - '.github/workflows/ym-boolean4-exact.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-certificates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+      - name: Audit exact and fail-closed quantitative surface
+        run: python3 scripts/check_ym_boolean4_exact.py
+      - name: Record exact dyadic quantitative search
+        run: python3 scripts/search_ym_quantitative_region.py --max-exponent 16 --output /tmp/ym-region.json
+      - name: Generate an arbitrary-side Agda LDL certificate
+        run: |
+          mkdir -p /tmp/DASHI/Physics/YangMills
+          python3 scripts/generate_path_poincare_sos.py 5 \
+            --output /tmp/path5-ldl.json \
+            --agda-output /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda \
+            --agda-module DASHI.Physics.YangMills.GeneratedPath5LDLCertificate
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - name: Typecheck exact quantitative modules
+        run: |
+          nix develop .# --command bash -lc '
+            set -euo pipefail
+            AGDA="agda -i . -i DCHoTT-Agda -i cubical -l standard-library"
+            $AGDA DASHI/Physics/YangMills/BalabanBoolean4BlockPoincareExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanBoolean4PhysicalBlockLiftExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath3PoincareExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4GeneratedLDLCertificate.agda
+            $AGDA DASHI/Physics/YangMills/BalabanFourDimensionalLDLTensorization.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4FourDimensionalTensorizationRegression.agda
+            $AGDA DASHI/Physics/YangMills/BalabanFourDimensionalHaloOverlapExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanBoolean4PatchExtensionsExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanBoolean4PatchLaplacianIntertwining.agda
+            $AGDA DASHI/Physics/YangMills/BalabanSU2AdjointTransportExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanSU2AdjointOrderedReduction.agda
+            $AGDA DASHI/Physics/YangMills/BalabanSU2TransportTelescopingExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanSU2TransportPathNormBound.agda
+            $AGDA DASHI/Physics/YangMills/BalabanDyadicQuantitativeRegionExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanWilsonRGCoefficientCombinatoricsExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanDyadicTerminalScaleExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanTerminalScalePhysicalClustering.agda
+            $AGDA DASHI/Physics/YangMills/BalabanTerminalKPPhysicalScaleAssembly.agda
+            agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda
+            $AGDA DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda
+          '
