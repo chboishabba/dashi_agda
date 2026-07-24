@@ -74,11 +74,12 @@ FILES: dict[Path, tuple[str, ...]] = {
         "physicalBlockPenaltyQuadraticFormExactLevel = machineChecked",
     ),
     YM / "BalabanPath4SU2ReferenceHodgePhysicalExact.agda": (
-        "referenceCovariantEnergyMatchesDifferenceEnergy",
+        "referenceWilsonGaugeEnergyMatchesDifferenceEnergy",
+        "gaugeFixedHessianPhysicalDecompositionExact",
         "referenceDifferenceBelowPhysicalHessian",
         "uniformReferenceHodgeCoercivity",
         "path4SU2ReferenceHodgeAssemblyLevel = machineChecked",
-        "referenceWilsonDifferenceIdentificationLevel = conditional",
+        "referenceWilsonGaugeDifferenceIdentificationLevel = conditional",
     ),
     YM / "BalabanSU2AdjointPointwiseRadiusSquared.agda": (
         "SU2AdjointSquaredRadiusOrderLaws",
@@ -156,7 +157,7 @@ FILES: dict[Path, tuple[str, ...]] = {
         "physicalGaugeFixingQuadraticFormExactLevel = machineChecked",
         "physicalBlockPenaltyQuadraticFormExactLevel = machineChecked",
         "path4SU2ReferenceHodgeAssemblyLevel = machineChecked",
-        "referenceWilsonDifferenceIdentificationLevel = conditional",
+        "referenceWilsonGaugeDifferenceIdentificationLevel = conditional",
         "physicalBondHodgeIdentificationLevel = conditional",
         "su2PointwiseRadiusInterfaceRepairLevel = machineChecked",
         "su2RadialExponentialChartReductionLevel = machineChecked",
