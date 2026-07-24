@@ -64,10 +64,16 @@ FILES: dict[Path, tuple[str, ...]] = {
         "su2AdjointSquaredRadiusConsequenceLevel = machineChecked",
         "finiteTraceKoteckyPreissBoundLevel = machineChecked",
         "runningCouplingFiniteIterationLevel = machineChecked",
-        "physicalFiveOperatorNormBoundsLevel = conditional"
-        if False else "physicalHessianCoefficientDerivationLevel = conditional",
+        "physicalHessianCoefficientDerivationLevel = conditional",
         "physicalTerminalOffsetBoundLevel = conjectural",
         "clayYangMillsSubmissionPromoted = false",
+    ),
+    YM / "BalabanPhysicalProgressLedger.agda": (
+        "literalPhysicalBlockDistinctnessLevel = machineChecked",
+        "literalPhysicalHaloOriginLevel = machineChecked",
+        "commutingProjectionOrthogonalityLevel = machineChecked",
+        "literalFiveWilsonOperatorBoundsLevel = conditional",
+        "physicalTerminalOffsetBoundLevel = conjectural",
     ),
 }
 
