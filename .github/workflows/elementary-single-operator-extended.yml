@@ -17,7 +17,7 @@ on:
       - 'DASHI/Algebra/Quantum/TernaryCircuit.agda'
       - 'DASHI/Algebra/Quantum/Qutrit*.agda'
       - 'DASHI/Algebra/Quantum/ConcreteQutritScalar.agda'
-      - 'DASHI/Algebra/Quantum/OrdinaryComplexQutrit.agda'
+      - 'DASHI/Algebra/Quantum/OrdinaryComplexQutrit*.agda'
       - 'DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda'
       - 'DASHI/Unified/StructuralComplexitySurvivalBundle.agda'
       - 'scripts/search_ternary_elementary_candidates.py'
@@ -79,7 +79,9 @@ jobs:
             $AGDA DASHI/Foundations/OdrzywolekGeneratedUnitObstruction.agda
             $AGDA DASHI/Foundations/OdrzywolekGlobalDecision.agda
             $AGDA DASHI/Foundations/TernaryElementarySearchSmokeModel.agda
+            $AGDA DASHI/Algebra/Quantum/QutritPermutationUnitary.agda
             $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutrit.agda
+            $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutritUnitary.agda
             $AGDA DASHI/Foundations/ElementarySingleOperatorExtendedRegression.agda
             $AGDA DASHI/Foundations/ElementarySingleOperatorBundle.agda
             $AGDA DASHI/Unified/StructuralComplexitySurvivalBundle.agda
