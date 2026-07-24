@@ -19,3 +19,4 @@ import DASHI.Geometry.CalabiYauPhysicalProducerCutset
 import DASHI.Geometry.QuinticThreefoldCandidate
 import DASHI.Cognition.PNF.PNFIRLearningRegression
 import DASHI.Cognition.PNF.PNFIRExecutionRegression
+import DASHI.Cognition.PNF.PNFNashiAttractorRegression
