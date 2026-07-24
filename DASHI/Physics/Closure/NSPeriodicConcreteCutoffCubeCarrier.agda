@@ -80,7 +80,7 @@ memberAppendCases {xs = _ ∷ xs} (there member)
 mapMember :
   ∀ {A B : Set} {f : A → B} {x xs} →
   x ∈ xs → f x ∈ map f xs
-mapMember (here equality) = here (cong _ equality)
+mapMember {f = f} (here equality) = here (cong f equality)
 mapMember (there member) = there (mapMember member)
 
 mapMemberReflect :
@@ -109,16 +109,17 @@ noDuplicatesAppend :
   Disjoint xs ys →
   NoDuplicates (xs ++ ys)
 noDuplicatesAppend unique[] right disjoint = right
-noDuplicatesAppend (unique∷ fresh left) right disjoint =
+noDuplicatesAppend {ys = ys}
+  (unique∷ {x = x} {xs = xs} fresh left) right disjoint =
   unique∷ combinedFresh
     (noDuplicatesAppend left right tailDisjoint)
   where
-  combinedFresh : _ ∉ (_ ++ _)
+  combinedFresh : x ∉ (xs ++ ys)
   combinedFresh member with memberAppendCases member
   ... | inj₁ leftMember = fresh leftMember
   ... | inj₂ rightMember = disjoint (here refl) rightMember
 
-  tailDisjoint : Disjoint _ _
+  tailDisjoint : Disjoint xs ys
   tailDisjoint tailMember rightMember =
     disjoint (there tailMember) rightMember
 
@@ -148,7 +149,7 @@ open Pair public
 
 pairWithLeftInjective :
   ∀ {A B : Set} {x : A} →
-  Injective (λ y → pair x y {A = A} {B = B})
+  Injective (λ y → pair {A = A} {B = B} x y)
 pairWithLeftInjective refl = refl
 
 cartesian :
@@ -202,8 +203,8 @@ cartesianNoDuplicates :
   NoDuplicates ys →
   NoDuplicates (cartesian xs ys)
 cartesianNoDuplicates unique[] ysUnique = unique[]
-cartesianNoDuplicates
-  (unique∷ {x = x} fresh xsUnique) ysUnique =
+cartesianNoDuplicates {xs = x ∷ xs} {ys = ys}
+  (unique∷ fresh xsUnique) ysUnique =
   noDuplicatesAppend
     (mapNoDuplicates (λ y → pair x y) pairWithLeftInjective ysUnique)
     (cartesianNoDuplicates xsUnique ysUnique)
@@ -211,12 +212,12 @@ cartesianNoDuplicates
   where
   blockTailDisjoint :
     Disjoint
-      (map (λ y → pair x y) _)
-      (cartesian _ _)
+      (map (λ y → pair x y) ys)
+      (cartesian xs ys)
   blockTailDisjoint blockMember tailMember =
     fresh
       (subst
-        (λ coordinate → coordinate ∈ _)
+        (λ coordinate → coordinate ∈ xs)
         (mappedPairFirst blockMember)
         (cartesianFirstMember tailMember))
 
@@ -258,6 +259,7 @@ notSuc≤Self {suc n} (s≤s proof) = notSuc≤Self proof
   ∀ {m n} → m ≤ᴺ n → (m ≡ n) ⊎ (suc m ≤ᴺ n)
 ≤ᴺ-equalOrStrict {zero} {zero} z≤n = inj₁ refl
 ≤ᴺ-equalOrStrict {zero} {suc n} z≤n = inj₂ (s≤s z≤n)
+≤ᴺ-equalOrStrict {suc m} {zero} ()
 ≤ᴺ-equalOrStrict {suc m} {suc n} (s≤s proof)
   with ≤ᴺ-equalOrStrict proof
 ... | inj₁ equality = inj₁ (cong suc equality)
@@ -450,6 +452,7 @@ cutoffClosedUnderNegation N k member =
   cutoffModeEnumerationComplete N (Z3.negateMode k)
     negatedMembership
   where
+  original : InCutoffCube N k
   original = cutoffModeEnumerationSound N k member
 
   negatedMembership : InCutoffCube N (Z3.negateMode k)
