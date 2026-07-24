@@ -13,6 +13,7 @@ import DASHI.Physics.Closure.NSCompactGammaAnalyticLeafCompletion as Leaves
 import DASHI.Physics.Closure.NSCompactGammaConcreteBernsteinEnvelopeDomain as Bernstein
 import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm as ModeNorm
 import DASHI.Physics.Closure.NSPeriodicConcreteModeOperatorPythagorean as Concrete
+import DASHI.Physics.Closure.NSPeriodicLerayBiotSavartNormReduction as Operator
 import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryPythagoreanAdapter as Pythagorean
 import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification as Official
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -64,29 +65,29 @@ literalLerayInput literalLerayOutput
     {R : Leaves.ConcreteReserveLeaves (Concrete.realNormArithmetic O) Time}
     {F : Leaves.RealFundamentalTheoremRealization
       (Concrete.realNormArithmetic O) C R} →
-  ConcreteOfficialOperatorNormInputs O C R F →
-  Time → Bernstein.ShellState (bernstein _) → ℝ
-literalLerayInput I τ state =
+  (I : ConcreteOfficialOperatorNormInputs O C R F) →
+  Time → Bernstein.ShellState (bernstein I) → ℝ
+literalLerayInput {O = O} I τ state =
   Concrete.lerayInputCutoffSum
-    _
+    O
     (modeAuthority I)
     (cutoffIndex I τ state)
     (velocityCoefficient I τ state)
-literalLerayOutput I τ state =
+literalLerayOutput {O = O} I τ state =
   Concrete.lerayOutputCutoffSum
-    _
+    O
     (modeAuthority I)
     (cutoffIndex I τ state)
     (velocityCoefficient I τ state)
-literalBiotSavartVorticity I τ state =
+literalBiotSavartVorticity {O = O} I τ state =
   Concrete.biotSavartInputCutoffSum
-    _
+    O
     (modeAuthority I)
     (cutoffIndex I τ state)
     (vorticityCoefficient I τ state)
-literalBiotSavartVelocityH1 I τ state =
+literalBiotSavartVelocityH1 {O = O} I τ state =
   Concrete.biotSavartOutputCutoffSum
-    _
+    O
     (modeAuthority I)
     (cutoffIndex I τ state)
     (vorticityCoefficient I τ state)
@@ -100,7 +101,7 @@ literalOperatorDecomposition :
       (Concrete.realNormArithmetic O) C R} →
   (I : ConcreteOfficialOperatorNormInputs O C R F) →
   ∀ τ state →
-  DASHI.Physics.Closure.NSPeriodicLerayBiotSavartNormReduction.PeriodicLerayBiotSavartNormInputs
+  Operator.PeriodicLerayBiotSavartNormInputs
     (Concrete.realNormArithmetic O)
 literalOperatorDecomposition {O = O} I τ state =
   Concrete.concreteCutoffOperatorNormInputs
