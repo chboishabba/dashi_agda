@@ -10,6 +10,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using
   (side4; average0123)
+open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate using
+  (oneSixteenth)
 open import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
 
 ------------------------------------------------------------------------
