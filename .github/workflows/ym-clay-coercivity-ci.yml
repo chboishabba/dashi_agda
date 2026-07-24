@@ -82,6 +82,7 @@ jobs:
             $AGDA DASHI/Physics/YangMills/BalabanPath4AverageJensenExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4AxisAverageNormContractionExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4PhysicalComponentPoincareExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4DirectionalEnergyContractionExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPhysicalHaloOriginExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda
             agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
