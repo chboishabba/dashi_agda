@@ -2,6 +2,7 @@ module DASHI.Analysis.FastCauchyOrder where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_)
 
 open import DASHI.Analysis.FastCauchyReals
@@ -48,7 +49,7 @@ _≤R_ {A} x y =
 record FastCauchyOrderLaws
   (A : RationalMetricAuthority) : Set₁ where
   field
-    lessIrreflexive : ∀ x → x <R x → Set
+    lessIrreflexive : ∀ x → x <R x → ⊥
     lessTransitive : ∀ {x y z} → x <R y → y <R z → x <R z
     lessRespectsEquality : ∀ {x x′ y y′} →
       x ≈R x′ → y ≈R y′ → x <R y → x′ <R y′
@@ -67,6 +68,9 @@ record ArchimedeanFastCauchyOrder
   field
     embedNatural : Nat → FastCauchyReal A
     eventuallyAbove : ∀ x → Σ Nat (λ n → x <R embedNatural n)
-    dyadicEventuallyBelowGap : ∀ {x y} → x <R y → Σ Nat (λ n → Set)
+
+    DyadicBelowWitnessGap : ∀ {x y} → x <R y → Nat → Set
+    dyadicEventuallyBelowGap : ∀ {x y} (w : x <R y) →
+      Σ Nat (λ n → DyadicBelowWitnessGap w n)
 
 open ArchimedeanFastCauchyOrder public
