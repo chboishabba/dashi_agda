@@ -12,6 +12,9 @@ open import DASHI.Algebra.Quantum.QutritAmplitude public
 open import DASHI.Algebra.Quantum.ConcreteQutritScalar public
 open import DASHI.Algebra.Quantum.TerminalQutritAnalyticInstance public
 open import DASHI.Algebra.Quantum.QutritMatrixGates public
+open import DASHI.Algebra.Quantum.QutritPermutationUnitary public
+open import DASHI.Algebra.Quantum.OrdinaryComplexQutrit public
+open import DASHI.Algebra.Quantum.OrdinaryComplexQutritUnitary public
 open import DASHI.Algebra.Quantum.QutritUnitaryBridge public
 open import DASHI.Promotion.FiniteTernaryQuantumCircuitAdapter public
 
@@ -27,6 +30,7 @@ data ComplexityCarrierKind : Set where
   finiteQutritPermutation : ComplexityCarrierKind
   amplitudeQutrit : ComplexityCarrierKind
   matrixQutrit : ComplexityCarrierKind
+  ordinaryComplexQutrit : ComplexityCarrierKind
 
 record TypedComplexitySeparation : Set₁ where
   field

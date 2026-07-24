@@ -1,0 +1,55 @@
+name: Ordinary analysis Agda
+
+on:
+  push:
+    branches:
+      - agent/ordinary-analysis-concrete-rational
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/*.agda'
+      - 'DASHI/Foundations/OrdinaryCalculatorLedger.agda'
+      - 'DASHI/Foundations/Odrzywolek*.agda'
+      - 'DASHI/Algebra/Quantum/OrdinaryComplexQutrit*.agda'
+      - 'DASHI/Algebra/Quantum/QutritPermutationUnitary.agda'
+      - 'DASHI/Analysis/OrdinaryAnalysisBundle.agda'
+      - '.github/workflows/ordinary-analysis-agda.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - name: Typecheck ordinary analysis cutset
+        run: |
+          nix develop .# --command bash -lc '
+            set -euo pipefail
+            AGDA="agda -i . -l standard-library"
+            $AGDA DASHI/Analysis/FastCauchyReals.agda
+            $AGDA DASHI/Analysis/FastCauchySetoid.agda
+            $AGDA DASHI/Analysis/FastCauchyOrder.agda
+            $AGDA DASHI/Analysis/FastCauchyArithmetic.agda
+            $AGDA DASHI/Analysis/FastCauchyQuotient.agda
+            $AGDA DASHI/Analysis/CanonicalRationalMetric.agda
+            $AGDA DASHI/Analysis/ConstructiveSeries.agda
+            $AGDA DASHI/Analysis/OrdinaryTranscendentalRealization.agda
+            $AGDA DASHI/Analysis/PowerSeriesTranscendentals.agda
+            $AGDA DASHI/Analysis/ConstructiveIntermediateValue.agda
+            $AGDA DASHI/Analysis/InverseLogarithmFromExponential.agda
+            $AGDA DASHI/Analysis/PrincipalComplexLogRealization.agda
+            $AGDA DASHI/Analysis/OrdinaryComplexPolar.agda
+            $AGDA DASHI/Foundations/OrdinaryCalculatorLedger.agda
+            $AGDA DASHI/Foundations/OdrzywolekGeneratedUnitObstruction.agda
+            $AGDA DASHI/Foundations/OdrzywolekGlobalDecision.agda
+            $AGDA DASHI/Algebra/Quantum/QutritPermutationUnitary.agda
+            $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutrit.agda
+            $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutritUnitary.agda
+            $AGDA DASHI/Analysis/OrdinaryAnalysisBundle.agda
+            $AGDA DASHI/Foundations/ElementarySingleOperatorBundle.agda
+            $AGDA DASHI/Unified/StructuralComplexitySurvivalBundle.agda
+          '
