@@ -51,21 +51,21 @@ commaProcessingSources =
 ------------------------------------------------------------------------
 
 data Clause : Set where
-  blankClause
-  feltSelfClause
-  desiredSelfClause
-  compelledSelfClause
+  blankClause : Clause
+  feltSelfClause : Clause
+  desiredSelfClause : Clause
+  compelledSelfClause : Clause
   reconciledSelfClause : Clause
 
 data Boundary : Set where
-  commaBoundary
+  commaBoundary : Boundary
   periodBoundary : Boundary
 
 data RelationKind : Set where
-  coordination
-  contrast
-  apposition
-  qualification
+  coordination : RelationKind
+  contrast : RelationKind
+  apposition : RelationKind
+  qualification : RelationKind
   repair : RelationKind
 
 record DiffusionSentence : Set where
