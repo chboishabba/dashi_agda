@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSCompactGammaAdmissiblePreservation where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Relation.Nullary using (¬_)
 
@@ -235,8 +235,8 @@ noFirstExit :
     {K : Shell} →
   NoFirstExitInputs {S = S} {B = B} p K →
   ¬ FirstExitData {S = S} {B = B} p K
-noFirstExit I exit =
-  <-irrefl-from-≤ _ (expenditureBelowMargin I)
+noFirstExit {O = O} I exit =
+  OrderedScalar.<-irrefl-from-≤ O (expenditureBelowMargin I)
     (everyFirstExitCostsMargin I exit)
 
 record FirstExitCompleteness

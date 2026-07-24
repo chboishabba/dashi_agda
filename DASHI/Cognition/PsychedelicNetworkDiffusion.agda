@@ -47,19 +47,19 @@ networkSources =
 ------------------------------------------------------------------------
 
 data SignalChannel : Set where
-  axonalSpike
-  chemicalSynapse
-  electricalGapJunction
-  extracellularVolumeTransmission
-  oscillatoryCoherenceGate
+  axonalSpike : SignalChannel
+  chemicalSynapse : SignalChannel
+  electricalGapJunction : SignalChannel
+  extracellularVolumeTransmission : SignalChannel
+  oscillatoryCoherenceGate : SignalChannel
   haemodynamicObservation : SignalChannel
 
 data ConnectivityLayer : Set where
-  structuralAdjacency
-  functionalDependence
-  effectiveDirectedInfluence
-  localJacobianLinearisation
-  phaseSynchrony
+  structuralAdjacency : ConnectivityLayer
+  functionalDependence : ConnectivityLayer
+  effectiveDirectedInfluence : ConnectivityLayer
+  localJacobianLinearisation : ConnectivityLayer
+  phaseSynchrony : ConnectivityLayer
   chemicalDiffusionKernel : ConnectivityLayer
 
 functionalIsNotStructural : ConnectivityLayer

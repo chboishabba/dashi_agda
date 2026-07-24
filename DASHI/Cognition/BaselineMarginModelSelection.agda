@@ -24,13 +24,13 @@ baselineEstimate beta datum =
 
 mapEstimate : Nat → List MarginDatum → List Nat
 mapEstimate beta [] = []
-mapEstimate beta (datum ∷ data) =
-  baselineEstimate beta datum ∷ mapEstimate beta data
+mapEstimate beta (datum ∷ rest) =
+  baselineEstimate beta datum ∷ mapEstimate beta rest
 
 inferredBaselineDistribution :
   Nat → List MarginDatum → Distribution.FiniteNatDistribution
-inferredBaselineDistribution beta data =
-  Distribution.fromSamples (mapEstimate beta data)
+inferredBaselineDistribution beta rest =
+  Distribution.fromSamples (mapEstimate beta rest)
 
 absDiff : Nat → Nat → Nat
 absDiff zero n = n
@@ -51,8 +51,8 @@ betaCode zero = 0
 betaCode (suc beta) = suc (suc (suc beta))
 
 modelCode : Nat → List MarginDatum → Nat
-modelCode beta data =
-  betaCode beta + baselineResidualCost (mapEstimate beta data)
+modelCode beta rest =
+  betaCode beta + baselineResidualCost (mapEstimate beta rest)
 
 lessNat : Nat → Nat → Bool
 lessNat zero zero = false
@@ -61,8 +61,8 @@ lessNat (suc _) zero = false
 lessNat (suc m) (suc n) = lessNat m n
 
 couplingImprovesMDL : Nat → List MarginDatum → Bool
-couplingImprovesMDL beta data =
-  lessNat (modelCode beta data) (modelCode 0 data)
+couplingImprovesMDL beta rest =
+  lessNat (modelCode beta rest) (modelCode 0 rest)
 
 coupledDataset : List MarginDatum
 coupledDataset =
