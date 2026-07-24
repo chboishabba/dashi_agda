@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSPeriodicConcreteCandidateBudgetArithmetic where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
 import DASHI.Physics.Closure.NSPeriodicConcreteNorms as Concrete
 import DASHI.Physics.Closure.NSPeriodicCanonicalNearYoungAllocation as Near
@@ -30,8 +30,8 @@ concreteHighHighDeltaMatches = refl
 
 concreteNearAllocationIsQuarter :
   Concrete.nearLowHighDeltaNumerator
-  Agda.Builtin.Nat.+ Concrete.nearHighLowDeltaNumerator
-  Agda.Builtin.Nat.+ Concrete.nearHighHighDeltaNumerator
+  + Concrete.nearHighLowDeltaNumerator
+  + Concrete.nearHighHighDeltaNumerator
   ≡ Near.oneQuarter
 concreteNearAllocationIsQuarter = refl
 
@@ -76,8 +76,8 @@ record ConcreteCandidateBudgetArithmetic : Set where
       Concrete.nearHighHighDeltaNumerator ≡ Near.highHighYoungPayment
     near-total-quarter :
       Concrete.nearLowHighDeltaNumerator
-      Agda.Builtin.Nat.+ Concrete.nearHighLowDeltaNumerator
-      Agda.Builtin.Nat.+ Concrete.nearHighHighDeltaNumerator
+      + Concrete.nearHighLowDeltaNumerator
+      + Concrete.nearHighHighDeltaNumerator
       ≡ Near.oneQuarter
     far-high-product-eight : Concrete.farHighConstantProduct ≡ 8
     far-high-one-sixteenth-fits-eighth :
