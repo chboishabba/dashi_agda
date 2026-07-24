@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "all_completion_lists_nonempty": true,
+    "all_leaves_present": true,
+    "all_leaves_unpromoted": true,
+    "all_promotions_false": true,
+    "all_reductions_machine_checked": true,
+    "all_reductions_present": true,
+    "carrier_coherence_required": true,
+    "dependency_order": true,
+    "digest": true,
+    "negative_findings_preserved": true,
+    "reductions_name_module_and_result": true,
+    "schema": true
+  },
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "schema": "check_ns_seven_analytic_leaf_ledger.v1"
+}

@@ -44,6 +44,47 @@ jobs:
         run: python -m pip install --disable-pip-version-check numpy
       - name: Audit no-placeholder and fail-closed theorem surface
         run: python scripts/check_ns_periodic_program_surface.py
+      - name: Audit official norm, expenditure, and coverage surface
+        run: python scripts/check_ns_official_completion_surface.py
+      - name: Reproduce official completion ledger
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ns-official-completion"
+          python scripts/ns_official_completion_ledger.py \
+            --output-json "$RUNNER_TEMP/ns-official-completion/ledger.json"
+          python scripts/check_ns_official_completion_ledger.py \
+            --source-json "$RUNNER_TEMP/ns-official-completion/ledger.json" \
+            --output-json "$RUNNER_TEMP/ns-official-completion/check.json"
+          diff -u scripts/data/outputs/ns_official_completion_ledger.json \
+            "$RUNNER_TEMP/ns-official-completion/ledger.json"
+          diff -u scripts/data/outputs/check_ns_official_completion_ledger.json \
+            "$RUNNER_TEMP/ns-official-completion/check.json"
+      - name: Reproduce seven analytic leaf ledger
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ns-seven-analytic-leaves"
+          python scripts/ns_seven_analytic_leaf_ledger.py \
+            --output-json "$RUNNER_TEMP/ns-seven-analytic-leaves/ledger.json"
+          python scripts/check_ns_seven_analytic_leaf_ledger.py \
+            --source-json "$RUNNER_TEMP/ns-seven-analytic-leaves/ledger.json" \
+            --output-json "$RUNNER_TEMP/ns-seven-analytic-leaves/check.json"
+          diff -u scripts/data/outputs/ns_seven_analytic_leaf_ledger.json \
+            "$RUNNER_TEMP/ns-seven-analytic-leaves/ledger.json"
+          diff -u scripts/data/outputs/check_ns_seven_analytic_leaf_ledger.json \
+            "$RUNNER_TEMP/ns-seven-analytic-leaves/check.json"
+      - name: Reproduce common normalized parameter tuple certificate
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ns-common-normalized-tuple"
+          python scripts/ns_common_normalized_parameter_tuple_certificate.py \
+            --output-json "$RUNNER_TEMP/ns-common-normalized-tuple/certificate.json"
+          python scripts/check_ns_common_normalized_parameter_tuple_certificate.py \
+            --source-json "$RUNNER_TEMP/ns-common-normalized-tuple/certificate.json" \
+            --output-json "$RUNNER_TEMP/ns-common-normalized-tuple/check.json"
+          diff -u scripts/data/outputs/ns_common_normalized_parameter_tuple_certificate.json \
+            "$RUNNER_TEMP/ns-common-normalized-tuple/certificate.json"
+          diff -u scripts/data/outputs/check_ns_common_normalized_parameter_tuple_certificate.json \
+            "$RUNNER_TEMP/ns-common-normalized-tuple/check.json"
       - name: Reproduce finite falsification audit
         run: |
           set -euo pipefail
@@ -129,8 +170,35 @@ jobs:
           diff -u scripts/data/outputs/check_ns_galerkin_falsifications.json "$phase/galerkin-check.json"
           diff -u scripts/data/outputs/check_ns_harmonic_phase_results.json "$phase/harmonic-check.json"
 
-  focused-agda:
+  boundary-face-matrix:
     needs: finite-audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        face:
+          - gamma_floor
+          - packet_energy_floor
+          - packet_fraction_floor
+          - off_packet_ceiling
+          - size_ceiling
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependency
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Run constrained boundary face
+        run: |
+          set -euo pipefail
+          python scripts/ns_boundary_face_matrix_entry.py \
+            --face "${{ matrix.face }}" \
+            --output-json "$RUNNER_TEMP/${{ matrix.face }}.json"
+
+  focused-agda:
+    needs: [finite-audit, boundary-face-matrix]
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -138,7 +206,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check universal periodic-Fourier reductions and concrete program
+      - name: Check universal periodic-Fourier reductions and official completion program
         shell: bash
         run: |
           set -euo pipefail

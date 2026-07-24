@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "all_promotions_false": true,
+    "all_reused_lanes_present": true,
+    "all_stages_present": true,
+    "analytic_inputs_not_promoted": true,
+    "assemblies_machine_checked": true,
+    "authority": true,
+    "dependency_order": true,
+    "digest": true,
+    "negative_findings_preserved": true,
+    "reused_lanes_are_machine_checked_adapters": true,
+    "reused_lanes_name_source_and_adapter": true,
+    "schema": true
+  },
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "schema": "check_ns_official_completion_ledger.v1"
+}
