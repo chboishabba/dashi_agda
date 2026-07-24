@@ -9,14 +9,14 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; s
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
   (baseBelowBasePlusRemainder)
-open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate using
-  (oneSixteenth)
+open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate using
+  (configuredPathCoercivityConstant)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
 
 ------------------------------------------------------------------------
--- One coherent owner for the literal side-four reference Hessian.
+-- One coherent owner for the literal configured-side reference Hessian.
 --
 -- The Wilson second variation is the curl part of the reference Hodge form;
 -- the gauge-fixing quadratic form is the longitudinal part.  Consequently the
@@ -112,7 +112,7 @@ uniformReferenceHodgeCoercivity :
     (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
     tangent →
   PhysicalBlockAverageZero tangent →
-  oneSixteenth * physicalUnweightedNormSq tangent
+  configuredPathCoercivityConstant * physicalUnweightedNormSq tangent
   ≤ gaugeFixedHessianQuadraticForm (quadraticData dataSet) tangent
 uniformReferenceHodgeCoercivity dataSet tangent blockZero =
   ℚP.≤-trans
