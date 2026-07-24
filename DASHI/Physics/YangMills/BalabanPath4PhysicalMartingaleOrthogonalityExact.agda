@@ -1,9 +1,10 @@
 module DASHI.Physics.YangMills.BalabanPath4PhysicalMartingaleOrthogonalityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -51,6 +52,22 @@ axisAverage4Subtract axis left right site =
       (physicalFibreSum left axis (axisTransverse axis site))
       (physicalFibreSum right axis (axisTransverse axis site)))
 
+axisAverage4RespectsPointwise :
+  ∀ axis {left right} →
+  FieldEqual left right →
+  FieldEqual (axisAverage4 left axis) (axisAverage4 right axis)
+axisAverage4RespectsPointwise axis equality site =
+  cong
+    (λ fibreTotal → quarter * fibreTotal)
+    (sumRationalCong
+      (allCyclicIndices side4)
+      (λ coordinate →
+        left (insertAxis axis coordinate (axisTransverse axis site)))
+      (λ coordinate →
+        right (insertAxis axis coordinate (axisTransverse axis site)))
+      (λ coordinate →
+        equality (insertAxis axis coordinate (axisTransverse axis site))))
+
 projectedFixedPointwise : ∀ axis field →
   FieldEqual (axisAverage4 (axisAverage4 field axis) axis)
     (axisAverage4 field axis)
@@ -66,17 +83,7 @@ commutingProjectPreservesFixedPointwise :
 commutingProjectPreservesFixedPointwise fixedAxis movingAxis field fixed site =
   trans
     (axisAverage4Commutes fixedAxis movingAxis field site)
-    (cong (λ value → axisAverage4 value movingAxis site)
-      (fieldPointwise fixed))
-  where
-  fieldPointwise :
-    FieldEqual (axisAverage4 field fixedAxis) field →
-    axisAverage4 field fixedAxis ≡point field
-  fieldPointwise equality = equality
-
-  infix 4 _≡point_
-  _≡point_ : SiteField side4 → SiteField side4 → Set
-  left ≡point right = ∀ point → left point ≡ right point
+    (axisAverage4RespectsPointwise movingAxis fixed site)
 
 commutingResidualPreservesFixedPointwise :
   ∀ fixedAxis residualAxis field →
@@ -101,13 +108,8 @@ commutingResidualPreservesFixedPointwise
           (λ rightValue → field site - rightValue)
           (axisAverage4Commutes fixedAxis residualAxis field site))
         (cong
-          (λ rightValue → field site - axisAverage4 rightValue residualAxis site)
-          (fieldPointwise fixed))))
-  where
-  fieldPointwise :
-    FieldEqual (axisAverage4 field fixedAxis) field →
-    FieldEqual (axisAverage4 field fixedAxis) field
-  fieldPointwise equality = equality
+          (λ rightValue → field site - rightValue)
+          (axisAverage4RespectsPointwise residualAxis fixed site))))
 
 innerSubtractLeft : ∀ left right test →
   globalBlockInner (subtractField left right) test
@@ -128,11 +130,11 @@ innerRespectsRightPointwise :
   ∀ left {right right′} →
   FieldEqual right right′ →
   globalBlockInner left right ≡ globalBlockInner left right′
-innerRespectsRightPointwise left equality =
+innerRespectsRightPointwise left {right} {right′} equality =
   sumRationalCong
     (physicalBlockSites side4)
-    (λ site → left site * _)
-    (λ site → left site * _)
+    (λ site → left site * right site)
+    (λ site → left site * right′ site)
     (λ site → cong (λ value → left site * value) (equality site))
 
 residualOrthogonalToFixedPointwise :
@@ -162,14 +164,19 @@ m1Fixed0 field =
     zeroᵢ (sucᵢ zeroᵢ) (average0 field)
     (projectedFixedPointwise zeroᵢ field)
 
+average01Fixed0 : ∀ field →
+  FieldEqual (axisAverage4 (average01 field) zeroᵢ) (average01 field)
+average01Fixed0 field =
+  commutingProjectPreservesFixedPointwise
+    zeroᵢ (sucᵢ zeroᵢ) (average0 field)
+    (projectedFixedPointwise zeroᵢ field)
+
 average012Fixed0 : ∀ field →
   FieldEqual (axisAverage4 (average012 field) zeroᵢ) (average012 field)
 average012Fixed0 field =
   commutingProjectPreservesFixedPointwise
     zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) (average01 field)
-    (commutingProjectPreservesFixedPointwise
-      zeroᵢ (sucᵢ zeroᵢ) (average0 field)
-      (projectedFixedPointwise zeroᵢ field))
+    (average01Fixed0 field)
 
 average012Fixed1 : ∀ field →
   FieldEqual (axisAverage4 (average012 field) (sucᵢ zeroᵢ))
@@ -185,9 +192,7 @@ m2Fixed0 : ∀ field →
 m2Fixed0 field =
   commutingResidualPreservesFixedPointwise
     zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) (average01 field)
-    (commutingProjectPreservesFixedPointwise
-      zeroᵢ (sucᵢ zeroᵢ) (average0 field)
-      (projectedFixedPointwise zeroᵢ field))
+    (average01Fixed0 field)
 
 m2Fixed1 : ∀ field →
   FieldEqual (axisAverage4 (martingaleField2 field) (sucᵢ zeroᵢ))
