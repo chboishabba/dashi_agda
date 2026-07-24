@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -8,6 +9,12 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
+open import DASHI.Physics.YangMills.BalabanFiniteEnumerationDistinctExact using
+  (DuplicateFree; cartesianDuplicateFree; allCyclicIndicesDuplicateFree)
+open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
+  (PhysicalBlockL; physicalBlockSites; physicalBlockSitesComplete)
+open import DASHI.Physics.YangMills.BalabanPhysicalBlockEnumerationDistinctExact using
+  (physicalBlockSitesDuplicateFree)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using
   (side4; average0123)
 open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate using
@@ -46,6 +53,30 @@ decodeEncodeTangent : ∀ tangent component bond →
   decodeTangent (encodeTangent tangent) component bond ≡ tangent component bond
 decodeEncodeTangent tangent component bond = refl
 
+------------------------------------------------------------------------
+-- The authoritative positive-bond enumeration is exactly site × positive axis.
+-- Its completeness and duplicate-freedom rule out a second orientation slot or
+-- an accidental factor two in the finite norm fold.
+------------------------------------------------------------------------
+
+physicalPositiveBondEnumeration4 : List (PositiveBond side4)
+physicalPositiveBondEnumeration4 =
+  cartesian (physicalBlockSites side4) (allCyclicIndices four)
+
+physicalPositiveBondEnumeration4Complete :
+  ∀ bond → bond ∈ physicalPositiveBondEnumeration4
+physicalPositiveBondEnumeration4Complete (pair site axis) =
+  cartesianMembership
+    (physicalBlockSitesComplete site)
+    (allCyclicIndicesComplete axis)
+
+physicalPositiveBondEnumeration4DuplicateFree :
+  DuplicateFree physicalPositiveBondEnumeration4
+physicalPositiveBondEnumeration4DuplicateFree =
+  cartesianDuplicateFree
+    (physicalBlockSitesDuplicateFree side4)
+    (allCyclicIndicesDuplicateFree four)
+
 physicalTangentComponent :
   PhysicalSU2Tangent4 →
   SU2Component → Axis4 → PhysicalBlockL side4 → ℚ
@@ -71,11 +102,16 @@ physicalNormSq latticeWeight tangent =
 
 physicalTangentNormMatchesBondNorm : ∀ latticeWeight tangent →
   physicalNormSq latticeWeight tangent
+  ≡ latticeWeight * encodedBondNormSq (encodeTangent tangent)
+physicalTangentNormMatchesBondNorm latticeWeight tangent = refl
+
+physicalTangentNormComponentExpansionExact : ∀ latticeWeight tangent →
+  physicalNormSq latticeWeight tangent
   ≡ latticeWeight * bondNormSq (encodeTangent tangent component1)
     + latticeWeight *
       (bondNormSq (encodeTangent tangent component2)
       + bondNormSq (encodeTangent tangent component3))
-physicalTangentNormMatchesBondNorm latticeWeight tangent =
+physicalTangentNormComponentExpansionExact latticeWeight tangent =
   ℚRing.solve-∀
     latticeWeight
     (bondNormSq (tangent component1))
@@ -141,6 +177,9 @@ physicalBlockConstrainedDifferencePoincare tangent blockZero =
 
 path4SU2PhysicalTangentCarrierLevel : ProofLevel
 path4SU2PhysicalTangentCarrierLevel = machineChecked
+
+physicalPositiveBondEnumeration4DuplicateFreeLevel : ProofLevel
+physicalPositiveBondEnumeration4DuplicateFreeLevel = machineChecked
 
 physicalTangentNormMatchesBondNormLevel : ProofLevel
 physicalTangentNormMatchesBondNormLevel = machineChecked
