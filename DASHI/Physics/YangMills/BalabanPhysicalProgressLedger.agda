@@ -21,10 +21,17 @@ import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact
 import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
 import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
+import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
+import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
+import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ReferenceHodgePhysicalExact
+import DASHI.Physics.YangMills.BalabanConfiguredSideLatticeSpacingExact
+import DASHI.Physics.YangMills.BalabanConfiguredSideTranslatedBlockExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
 import DASHI.Physics.YangMills.BalabanSU2AdjointPointwiseRadiusSquared
 import DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact
+import DASHI.Physics.YangMills.BalabanSU2RadialTrigAuthority
 import DASHI.Physics.YangMills.BalabanNonlinearDifferenceIdentitiesExact
 import DASHI.Physics.YangMills.BalabanQuadraticOperatorPerturbationExact
 import DASHI.Physics.YangMills.BalabanMultilinearLipschitzCalculus
@@ -93,6 +100,60 @@ path4BondComponentPoincareLevel = machineChecked
 path4BondReferenceHodgeCoercivityLevel : ProofLevel
 path4BondReferenceHodgeCoercivityLevel = machineChecked
 
+configuredRGSideSelectionLevel : ProofLevel
+configuredRGSideSelectionLevel = machineChecked
+
+configuredRGSideCertificateLevel : ProofLevel
+configuredRGSideCertificateLevel = machineChecked
+
+configuredRGCoercivityConstantPositiveLevel : ProofLevel
+configuredRGCoercivityConstantPositiveLevel = machineChecked
+
+arbitraryRGSideClaimLevel : ProofLevel
+arbitraryRGSideClaimLevel = conditional
+
+path4SU2PhysicalTangentCarrierLevel : ProofLevel
+path4SU2PhysicalTangentCarrierLevel = machineChecked
+
+physicalPositiveBondEnumeration4DuplicateFreeLevel : ProofLevel
+physicalPositiveBondEnumeration4DuplicateFreeLevel = machineChecked
+
+physicalTangentNormMatchesBondNormLevel : ProofLevel
+physicalTangentNormMatchesBondNormLevel = machineChecked
+
+physicalBlockConstraintRemovesComponentMeansLevel : ProofLevel
+physicalBlockConstraintRemovesComponentMeansLevel = machineChecked
+
+physicalGaugeFixingQuadraticFormExactLevel : ProofLevel
+physicalGaugeFixingQuadraticFormExactLevel = machineChecked
+
+physicalBlockPenaltyQuadraticFormExactLevel : ProofLevel
+physicalBlockPenaltyQuadraticFormExactLevel = machineChecked
+
+path4SU2ReferenceHodgeAssemblyLevel : ProofLevel
+path4SU2ReferenceHodgeAssemblyLevel = machineChecked
+
+referenceWilsonGaugeDifferenceIdentificationLevel : ProofLevel
+referenceWilsonGaugeDifferenceIdentificationLevel = conditional
+
+configuredSideLatticeSpacingNormalizationLevel : ProofLevel
+configuredSideLatticeSpacingNormalizationLevel = machineChecked
+
+configuredSideInverseSquareCoefficientLevel : ProofLevel
+configuredSideInverseSquareCoefficientLevel = machineChecked
+
+configuredSideTranslatedBlockReindexingLevel : ProofLevel
+configuredSideTranslatedBlockReindexingLevel = machineChecked
+
+configuredSideTranslatedBlockCoercivityLevel : ProofLevel
+configuredSideTranslatedBlockCoercivityLevel = machineChecked
+
+configuredSideHaloMultiplicityLevel : ProofLevel
+configuredSideHaloMultiplicityLevel = machineChecked
+
+globalWilsonToLocalTranslatedBlockLevel : ProofLevel
+globalWilsonToLocalTranslatedBlockLevel = conditional
+
 physicalArbitrarySideAverageNormalizationLevel : ProofLevel
 physicalArbitrarySideAverageNormalizationLevel = conditional
 
@@ -119,6 +180,21 @@ su2RadialQuaternionAlgebraLevel = computed
 
 su2RadialExponentialChartReductionLevel : ProofLevel
 su2RadialExponentialChartReductionLevel = machineChecked
+
+su2RadialTrigAuthoritySurfaceLevel : ProofLevel
+su2RadialTrigAuthoritySurfaceLevel = machineChecked
+
+su2RadialTrigToQuaternionChartLevel : ProofLevel
+su2RadialTrigToQuaternionChartLevel = machineChecked
+
+sinCosPythagoreanAuthorityLevel : ProofLevel
+sinCosPythagoreanAuthorityLevel = conditional
+
+sinOverArgumentAbsBelowOneAuthorityLevel : ProofLevel
+sinOverArgumentAbsBelowOneAuthorityLevel = conditional
+
+sinOverArgumentAtZeroAuthorityLevel : ProofLevel
+sinOverArgumentAtZeroAuthorityLevel = conditional
 
 su2ExponentialChartRadiusInputLevel : ProofLevel
 su2ExponentialChartRadiusInputLevel = conditional
