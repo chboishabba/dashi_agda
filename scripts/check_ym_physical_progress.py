@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit for the physical fibre, polymer and RG progress tranche."""
+"""Fail-closed audit for the physical fibre, coercivity, SU(2), polymer and RG tranche."""
 
 from __future__ import annotations
 
@@ -24,6 +24,49 @@ FILES: dict[Path, tuple[str, ...]] = {
         "physicalFibreEnumerationDuplicateFree",
         "physicalPositiveEdgesDuplicateFree",
         "physicalPositiveEdgesDuplicateFreeLevel = machineChecked",
+    ),
+    YM / "BalabanPath4AxisAverageNormContractionExact.agda": (
+        "axisAveragePythagoras",
+        "axisAverageNormContraction",
+        "path4AxisAveragePythagorasLevel = machineChecked",
+        "path4AxisAverageNormContractionLevel = machineChecked",
+    ),
+    YM / "BalabanPath4DirectionalEnergyContractionExact.agda": (
+        "axisAverageCommutesWithDistinctEdgeDifference",
+        "globalEdgeDifferenceNormFourfold",
+        "fourTimesDirectionalEnergyContraction",
+        "distinctAxisDirectionalEnergyContraction",
+        "path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked",
+    ),
+    YM / "BalabanPath4GlobalPoincareExact.agda": (
+        "axisCenteringDirectionalEnergyExact",
+        "path4MartingaleDirectionalEnergyContraction",
+        "path4GlobalPoincare",
+        "path4GlobalPoincareLevel = machineChecked",
+    ),
+    YM / "BalabanPath4BondHodgeCoercivityExact.agda": (
+        "bondReferenceDifferenceEnergy",
+        "path4BondDifferencePoincare",
+        "path4BondReferenceHodgeCoercivity",
+        "path4BondReferenceHodgeCoercivityLevel = machineChecked",
+        "literalGaugeBlockPenaltyIdentificationLevel = conditional",
+    ),
+    YM / "BalabanSU2AdjointPointwiseRadiusSquared.agda": (
+        "SU2AdjointSquaredRadiusOrderLaws",
+        "unitQuaternionAdjointDisplacementRadiusSqPointwise",
+        "SU2ExponentialPointwiseRadiusMatch",
+        "exponentialAdjointDisplacementRadiusSqPointwise",
+        "su2PointwiseRadiusInterfaceRepairLevel = machineChecked",
+        "su2PointwiseExponentialAnalyticInputLevel = conditional",
+    ),
+    YM / "BalabanSU2RadialExponentialChartExact.agda": (
+        "radialQuaternionNormExact",
+        "radialImaginaryNormExact",
+        "radialDataToPointwiseExponentialMatch",
+        "radialExponentialAdjointDisplacementRadiusSq",
+        "su2RadialQuaternionAlgebraLevel = computed",
+        "su2RadialExponentialChartReductionLevel = machineChecked",
+        "su2RadialScalarRadiusBoundLevel = conditional",
     ),
     YM / "BalabanPhysicalHaloOriginExact.agda": (
         "cyclicPredecessor",
@@ -72,8 +115,16 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
     YM / "BalabanPhysicalProgressLedger.agda": (
         "literalPhysicalBlockDistinctnessLevel = machineChecked",
+        "path4AxisAverageNormContractionLevel = machineChecked",
+        "path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked",
+        "path4ScalarGlobalPoincareLevel = machineChecked",
+        "path4BondComponentPoincareLevel = machineChecked",
+        "path4BondReferenceHodgeCoercivityLevel = machineChecked",
+        "physicalBondHodgeIdentificationLevel = conditional",
+        "su2PointwiseRadiusInterfaceRepairLevel = machineChecked",
+        "su2RadialExponentialChartReductionLevel = machineChecked",
+        "su2RadialScalarRadiusBoundLevel = conditional",
         "literalPhysicalHaloOriginLevel = machineChecked",
-        "commutingProjectionOrthogonalityLevel = machineChecked",
         "literalFiveWilsonOperatorBoundsLevel = conditional",
         "physicalTerminalOffsetBoundLevel = conjectural",
     ),
@@ -157,7 +208,7 @@ def main() -> None:
     for path, required in SCRIPTS.items():
         audit_text(path, required, forbid=False)
     audit_generated_physical_bridge()
-    print("Physical fibre, polymer and RG progress remains exact and fail-closed.")
+    print("Physical fibre, scalar/bond coercivity, SU(2), polymer and RG progress remains exact and fail-closed.")
 
 
 if __name__ == "__main__":

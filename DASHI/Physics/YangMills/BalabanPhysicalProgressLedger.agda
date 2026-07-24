@@ -14,8 +14,17 @@ import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact
 import DASHI.Physics.YangMills.BalabanCommutingProjectionMartingaleExact
 import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
 import DASHI.Physics.YangMills.BalabanPath4PhysicalMartingaleOrthogonalityExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact
+import DASHI.Physics.YangMills.BalabanPath4AverageJensenExact
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageNormContractionExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact
+import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
+import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
+import DASHI.Physics.YangMills.BalabanSU2AdjointPointwiseRadiusSquared
+import DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact
 import DASHI.Physics.YangMills.BalabanNonlinearDifferenceIdentitiesExact
 import DASHI.Physics.YangMills.BalabanQuadraticOperatorPerturbationExact
 import DASHI.Physics.YangMills.BalabanMultilinearLipschitzCalculus
@@ -66,11 +75,32 @@ path4PhysicalAxisAverageSelfAdjointnessLevel = machineChecked
 path4PhysicalMartingaleOrthogonalityLevel : ProofLevel
 path4PhysicalMartingaleOrthogonalityLevel = machineChecked
 
+path4PhysicalVarianceDecompositionLevel : ProofLevel
+path4PhysicalVarianceDecompositionLevel = machineChecked
+
+path4AxisAverageNormContractionLevel : ProofLevel
+path4AxisAverageNormContractionLevel = machineChecked
+
+path4DistinctAxisDirectionalEnergyContractionLevel : ProofLevel
+path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked
+
+path4ScalarGlobalPoincareLevel : ProofLevel
+path4ScalarGlobalPoincareLevel = machineChecked
+
+path4BondComponentPoincareLevel : ProofLevel
+path4BondComponentPoincareLevel = machineChecked
+
+path4BondReferenceHodgeCoercivityLevel : ProofLevel
+path4BondReferenceHodgeCoercivityLevel = machineChecked
+
 physicalArbitrarySideAverageNormalizationLevel : ProofLevel
 physicalArbitrarySideAverageNormalizationLevel = conditional
 
 physicalFourDimensionalTensorizationLevel : ProofLevel
 physicalFourDimensionalTensorizationLevel = conditional
+
+physicalBondHodgeIdentificationLevel : ProofLevel
+physicalBondHodgeIdentificationLevel = conditional
 
 literalPhysicalHaloOriginLevel : ProofLevel
 literalPhysicalHaloOriginLevel = machineChecked
@@ -81,8 +111,23 @@ physicalOriginWilsonContainmentMatchLevel = conditional
 su2SquaredRadiusTransportLevel : ProofLevel
 su2SquaredRadiusTransportLevel = machineChecked
 
+su2PointwiseRadiusInterfaceRepairLevel : ProofLevel
+su2PointwiseRadiusInterfaceRepairLevel = machineChecked
+
+su2RadialQuaternionAlgebraLevel : ProofLevel
+su2RadialQuaternionAlgebraLevel = computed
+
+su2RadialExponentialChartReductionLevel : ProofLevel
+su2RadialExponentialChartReductionLevel = machineChecked
+
 su2ExponentialChartRadiusInputLevel : ProofLevel
 su2ExponentialChartRadiusInputLevel = conditional
+
+su2RadialScalarUnitIdentityLevel : ProofLevel
+su2RadialScalarUnitIdentityLevel = conditional
+
+su2RadialScalarRadiusBoundLevel : ProofLevel
+su2RadialScalarRadiusBoundLevel = conditional
 
 quadraticOperatorExpansionLevel : ProofLevel
 quadraticOperatorExpansionLevel = machineChecked
