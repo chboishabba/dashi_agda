@@ -52,15 +52,18 @@ referencePenaltyEnergyNonnegative :
     tangent →
   0ℚ ≤ referencePenaltyEnergy dataSet tangent
 referencePenaltyEnergyNonnegative dataSet tangent =
-  ℚP.+-mono-≤
-    (nonnegativeIsRationalNonnegative dataSet
-      (gaugeFixingQuadraticForm (quadraticData dataSet) tangent)
-      (physicalGaugeFixingQuadraticFormNonnegative
-        (quadraticData dataSet) tangent))
-    (nonnegativeIsRationalNonnegative dataSet
-      (blockPenaltyQuadraticForm (quadraticData dataSet) tangent)
-      (physicalBlockPenaltyQuadraticFormNonnegative
-        (quadraticData dataSet) tangent))
+  subst
+    (λ left → left ≤ referencePenaltyEnergy dataSet tangent)
+    (ℚP.+-identityˡ 0ℚ)
+    (ℚP.+-mono-≤
+      (nonnegativeIsRationalNonnegative dataSet
+        (gaugeFixingNormSq (quadraticData dataSet) tangent)
+        (gaugeNormNonnegative (quadraticData dataSet)
+          (divergence (hessianData (quadraticData dataSet)) tangent)))
+      (nonnegativeIsRationalNonnegative dataSet
+        (blockAverageNormSq (quadraticData dataSet) tangent)
+        (coarseNormNonnegative (quadraticData dataSet)
+          (average (hessianData (quadraticData dataSet)) tangent))))
 
 referenceWilsonBelowGaugeFixedHessian :
   ∀ {Gauge Coarse}
