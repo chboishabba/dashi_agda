@@ -3,12 +3,11 @@ module DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
-open import Data.Nat.Base as ℕ using (ℕ)
 open import Data.Rational using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -16,12 +15,6 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
 
 ------------------------------------------------------------------------
 -- Exact geometric majorant for the rooted-trace entropy carrier.
---
--- Eight choices per traversal step and a suppression factor 1/16 per step give
--- shell ratio 1/2.  The finite KP shell sum is therefore bounded by two, with
--- an explicit nonnegative tail.  Passing from finite partial sums to the
--- physical infinite polymer sum still requires the physical trace injection
--- and the standard geometric-limit theorem.
 ------------------------------------------------------------------------
 
 half twoℚ : ℚ
@@ -46,14 +39,17 @@ halfNonnegative =
   in
   ℚP.nonNegative⁻¹ half
 
-halfPowerNonnegative : ∀ depth → 0ℚ ≤ halfPower depth
-halfPowerNonnegative zero =
+oneNonnegativeProof : 0ℚ ≤ 1ℚ
+oneNonnegativeProof =
   let
     instance
-      oneNonnegative : NonNegative 1ℚ
-      oneNonnegative = nonNegative ℚP.0≤1
+      oneNonnegativeInstance : NonNegative 1ℚ
+      oneNonnegativeInstance = ℚP.normalize-nonNeg 1 1
   in
   ℚP.nonNegative⁻¹ 1ℚ
+
+halfPowerNonnegative : ∀ depth → 0ℚ ≤ halfPower depth
+halfPowerNonnegative zero = oneNonnegativeProof
 halfPowerNonnegative (suc depth) =
   let
     instance
@@ -73,7 +69,8 @@ twoTimesHalfPowerNonnegative : ∀ depth →
 twoTimesHalfPowerNonnegative depth =
   let
     twoNonnegativeProof : 0ℚ ≤ twoℚ
-    twoNonnegativeProof = ℚP.+-mono-≤ ℚP.0≤1 ℚP.0≤1
+    twoNonnegativeProof =
+      ℚP.+-mono-≤ oneNonnegativeProof oneNonnegativeProof
 
     instance
       twoNonnegative : NonNegative twoℚ
