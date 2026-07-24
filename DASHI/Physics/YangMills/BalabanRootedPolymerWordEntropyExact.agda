@@ -3,10 +3,9 @@ module DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_) 
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.List.Base using (length)
 open import Data.Nat.Properties using (suc-injective)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -17,13 +16,6 @@ open import DASHI.Physics.YangMills.BalabanDyadicQuantitativeRegionExact using
 
 ------------------------------------------------------------------------
 -- Exact finite entropy carrier for rooted four-dimensional polymer traces.
---
--- A connected n-block polymer admits a rooted traversal by signed coordinate
--- directions.  This module does not assume that physical encoding: it proves
--- exactly that words of length n over the eight signed four-dimensional
--- directions form a complete finite carrier of cardinality 8^n.  A later
--- physical theorem only has to inject its canonical rooted traversals into this
--- already-counted carrier.
 ------------------------------------------------------------------------
 
 SignedAxis4 : Set
@@ -79,9 +71,9 @@ prependAllMembership :
   direction ∈ directions →
   word ∈ words →
   (direction ∷ word) ∈ prependAll directions words
-prependAllMembership here wordMembership =
+prependAllMembership {direction = direction} here wordMembership =
   appendMembershipLeft
-    (mapMembership (λ word → _ ∷ word) wordMembership)
+    (mapMembership (λ word → direction ∷ word) wordMembership)
 prependAllMembership (there directionMembership) wordMembership =
   appendMembershipRight
     (prependAllMembership directionMembership wordMembership)
@@ -130,9 +122,7 @@ rootedTraceWordEnumerated trace =
   allSignedWordsComplete (directions trace) (directionsLength trace)
 
 ------------------------------------------------------------------------
--- A dyadic suppression of 1/16 per traversal step beats the literal branching
--- factor eight.  This is the finite arithmetic inequality needed before the
--- geometric-series theorem is applied to the physical polymer injection.
+-- A dyadic suppression of 1/16 per traversal step beats branching factor 8.
 ------------------------------------------------------------------------
 
 traceSuppressionDenominator : Nat
