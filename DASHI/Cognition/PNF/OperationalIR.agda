@@ -87,6 +87,22 @@ timelineProjection p actor eventLabel effectiveTime =
     operationallyValid
     "timeline IR projected from resolved PNF"
 
+retrievalProjection :
+  PNF.ResolvedPNF → String → String → String → DomainIR
+retrievalProjection p entity queryKey retrievalFrame =
+  domainIR retrievalDomain p entity "retrieve" queryKey "" "" "" retrievalFrame
+    ("index-key" ∷ "source-PNF-retained" ∷ [])
+    operationallyValid
+    "retrieval IR projected from resolved PNF"
+
+memoryProjection :
+  PNF.ResolvedPNF → String → String → String → DomainIR
+memoryProjection p eventType valuationBand retrievalKey =
+  domainIR memoryDomain p "memory" eventType retrievalKey valuationBand "" "" "memory"
+    ("versioned" ∷ "semantic-content-retained" ∷ [])
+    operationallyValid
+    "memory IR projected from resolved PNF"
+
 nashiProjection :
   PNF.ResolvedPNF → String → String → String → DomainIR
 nashiProjection p entity eventType mechanismStatus =
