@@ -1,6 +1,7 @@
 module DASHI.Analysis.PowerSeriesTranscendentals where
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Sigma using (Σ)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.ConstructiveSeries
@@ -75,7 +76,7 @@ record ExponentialOrderLaws
       _<_ R x y → _<_ R (expValue x) (expValue y)
     expOntoPositive : ∀ y →
       Positive y →
-      Agda.Builtin.Sigma.Σ (Real R) (λ x → expValue x ≡ y)
+      Σ (Real R) (λ x → expValue x ≡ y)
 
 open ExponentialOrderLaws public
 
@@ -89,23 +90,23 @@ expAddFromCauchyProduct :
   ∀ x y →
   seriesExponentialValue C (_+_ R x y)
   ≡ _*_ R (seriesExponentialValue C x) (seriesExponentialValue C y)
-expAddFromCauchyProduct {R} C limits coefficients x y =
+expAddFromCauchyProduct {R} {S} C limits coefficients x y =
   trans (sym productEqualsSumSeries) productEqualsProduct
   where
-    leftAbs : AbsoluteConvergence R _ (expTerm C x)
+    leftAbs : AbsoluteConvergence R S (expTerm C x)
     leftAbs = expAbsoluteConvergence C x
 
-    rightAbs : AbsoluteConvergence R _ (expTerm C y)
+    rightAbs : AbsoluteConvergence R S (expTerm C y)
     rightAbs = expAbsoluteConvergence C y
 
     productSeries :
-      ConvergentSeries R _
+      ConvergentSeries R S
         (convolutionCoefficient R (expTerm C x) (expTerm C y))
     productSeries =
       productConverges (cauchyProductAuthority C) leftAbs rightAbs
 
     sumSeries :
-      ConvergentSeries R _ (expTerm C (_+_ R x y))
+      ConvergentSeries R S (expTerm C (_+_ R x y))
     sumSeries =
       seriesConverges (expAbsoluteConvergence C (_+_ R x y))
 
