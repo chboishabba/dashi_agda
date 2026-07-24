@@ -87,6 +87,15 @@ concreteIntegerModeNormStatusLevel = machineChecked
 concreteOfficialNormWeightsStatusLevel : ProofLevel
 concreteOfficialNormWeightsStatusLevel = machineChecked
 
+concreteModeOperatorPythagoreanStatusLevel : ProofLevel
+concreteModeOperatorPythagoreanStatusLevel = machineChecked
+
+officialOperatorFoldIdentificationStatusLevel : ProofLevel
+officialOperatorFoldIdentificationStatusLevel = machineChecked
+
+concreteOfficialOperatorNormAdapterStatusLevel : ProofLevel
+concreteOfficialOperatorNormAdapterStatusLevel = machineChecked
+
 canonicalNearYoungAllocationStatusLevel : ProofLevel
 canonicalNearYoungAllocationStatusLevel = machineChecked
 
