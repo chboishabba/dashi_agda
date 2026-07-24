@@ -45,8 +45,12 @@ data OrdinaryCalculatorDefined
     RationalLiteralAdmissible C q →
     OrdinaryCalculatorDefined M C ρ (rational q)
 
-  piDefinedO eDefinedO iDefinedO minusOneDefinedO oneDefinedO twoDefinedO :
-    OrdinaryCalculatorDefined M C ρ constantPi
+  piDefinedO : OrdinaryCalculatorDefined M C ρ constantPi
+  eDefinedO : OrdinaryCalculatorDefined M C ρ constantE
+  iDefinedO : OrdinaryCalculatorDefined M C ρ constantI
+  minusOneDefinedO : OrdinaryCalculatorDefined M C ρ constantMinusOne
+  oneDefinedO : OrdinaryCalculatorDefined M C ρ constantOne
+  twoDefinedO : OrdinaryCalculatorDefined M C ρ constantTwo
 
   expDefinedO : ∀ {x} →
     OrdinaryCalculatorDefined M C ρ x →
@@ -62,9 +66,13 @@ data OrdinaryCalculatorDefined
     NonZero C (evaluateSource M ρ x) →
     OrdinaryCalculatorDefined M C ρ (calcInverse x)
 
-  halfDefinedO negateDefinedO : ∀ {x} →
+  halfDefinedO : ∀ {x} →
     OrdinaryCalculatorDefined M C ρ x →
     OrdinaryCalculatorDefined M C ρ (calcHalf x)
+
+  negateDefinedO : ∀ {x} →
+    OrdinaryCalculatorDefined M C ρ x →
+    OrdinaryCalculatorDefined M C ρ (calcNegate x)
 
   sqrtDefinedO : ∀ {x} →
     OrdinaryCalculatorDefined M C ρ x →
@@ -81,9 +89,21 @@ data OrdinaryCalculatorDefined
     NonZero C (evaluateSource M ρ (calcAdd constantOne (calcExp (calcNegate x)))) →
     OrdinaryCalculatorDefined M C ρ (calcSigmoid x)
 
-  sinDefinedO cosDefinedO sinhDefinedO coshDefinedO : ∀ {x} →
+  sinDefinedO : ∀ {x} →
     OrdinaryCalculatorDefined M C ρ x →
     OrdinaryCalculatorDefined M C ρ (calcSin x)
+
+  cosDefinedO : ∀ {x} →
+    OrdinaryCalculatorDefined M C ρ x →
+    OrdinaryCalculatorDefined M C ρ (calcCos x)
+
+  sinhDefinedO : ∀ {x} →
+    OrdinaryCalculatorDefined M C ρ x →
+    OrdinaryCalculatorDefined M C ρ (calcSinh x)
+
+  coshDefinedO : ∀ {x} →
+    OrdinaryCalculatorDefined M C ρ x →
+    OrdinaryCalculatorDefined M C ρ (calcCosh x)
 
   tanDefinedO : ∀ {x} →
     OrdinaryCalculatorDefined M C ρ x →
@@ -125,10 +145,20 @@ data OrdinaryCalculatorDefined
     ArcTanhDomain C (evaluateSource M ρ x) →
     OrdinaryCalculatorDefined M C ρ (calcArcTanh x)
 
-  addDefinedO subtractDefinedO averageDefinedO : ∀ {x y} →
+  addDefinedO : ∀ {x y} →
     OrdinaryCalculatorDefined M C ρ x →
     OrdinaryCalculatorDefined M C ρ y →
     OrdinaryCalculatorDefined M C ρ (calcAdd x y)
+
+  subtractDefinedO : ∀ {x y} →
+    OrdinaryCalculatorDefined M C ρ x →
+    OrdinaryCalculatorDefined M C ρ y →
+    OrdinaryCalculatorDefined M C ρ (calcSubtract x y)
+
+  averageDefinedO : ∀ {x y} →
+    OrdinaryCalculatorDefined M C ρ x →
+    OrdinaryCalculatorDefined M C ρ y →
+    OrdinaryCalculatorDefined M C ρ (calcAverage x y)
 
   multiplyDefinedO : ∀ {x y} →
     OrdinaryCalculatorDefined M C ρ x →
