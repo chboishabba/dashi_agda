@@ -106,6 +106,9 @@ configuredRGSideSelectionLevel = machineChecked
 configuredRGSideCertificateLevel : ProofLevel
 configuredRGSideCertificateLevel = machineChecked
 
+configuredRGCoercivityConstantPositiveLevel : ProofLevel
+configuredRGCoercivityConstantPositiveLevel = machineChecked
+
 arbitraryRGSideClaimLevel : ProofLevel
 arbitraryRGSideClaimLevel = conditional
 
