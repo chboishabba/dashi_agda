@@ -1,7 +1,8 @@
 module DASHI.Analysis.CanonicalRationalMetric where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Rational.Base
   using (ℚ; 0ℚ; 1ℚ; ½; _+_; _-_; _*_; -_; ∣_∣; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚ
@@ -61,10 +62,42 @@ dyadicQNonnegative (suc n) =
 
 zeroBelowDyadicQSum : ∀ m n → 0ℚ ≤ dyadicQ m + dyadicQ n
 zeroBelowDyadicQSum m n = begin
-  0ℚ                 ≡⟨ ℚ.+-identityˡ 0ℚ ⟨
-  0ℚ + 0ℚ            ≤⟨ ℚ.+-mono-≤ (dyadicQNonnegative m) (dyadicQNonnegative n) ⟩
+  0ℚ                    ≡⟨ ℚ.+-identityˡ 0ℚ ⟨
+  0ℚ + 0ℚ               ≤⟨ ℚ.+-mono-≤ (dyadicQNonnegative m) (dyadicQNonnegative n) ⟩
   dyadicQ m + dyadicQ n ∎
   where open ℚ.≤-Reasoning
+
+halfDouble : ∀ q → (½ * q) + (½ * q) ≡ q
+halfDouble = solve-∀
+
+dyadicDoubleStepℚ : ∀ n →
+  dyadicQ (suc n) + dyadicQ (suc n) ≡ dyadicQ n
+dyadicDoubleStepℚ n = halfDouble (dyadicQ n)
+
+dyadicOneStep : ∀ n → dyadicQ (suc n) ≤ dyadicQ n
+dyadicOneStep n = begin
+  dyadicQ (suc n)
+    ≡⟨ ℚ.+-identityʳ (dyadicQ (suc n)) ⟨
+  dyadicQ (suc n) + 0ℚ
+    ≤⟨ ℚ.+-mono-≤ ℚ.≤-refl (dyadicQNonnegative (suc n)) ⟩
+  dyadicQ (suc n) + dyadicQ (suc n)
+    ≡⟨ dyadicDoubleStepℚ n ⟩
+  dyadicQ n ∎
+  where open ℚ.≤-Reasoning
+
+dyadicBelowOne : ∀ n → dyadicQ n ≤ 1ℚ
+dyadicBelowOne zero = ℚ.≤-refl
+dyadicBelowOne (suc n) =
+  ℚ.≤-trans (dyadicOneStep n) (dyadicBelowOne n)
+
+dyadicAntitoneℚ : ∀ {m n} → m ≤ n → dyadicQ n ≤ dyadicQ m
+dyadicAntitoneℚ {zero} {n} z≤n = dyadicBelowOne n
+dyadicAntitoneℚ {suc m} {suc n} (s≤s m≤n) =
+  ℚ.*-monoˡ-≤-nonNeg ½ (dyadicAntitoneℚ m≤n)
+  where
+    instance
+      halfNN : NonNegative ½
+      halfNN = nonNegative halfNonnegative
 
 canonicalRationalMetricAuthority : RationalMetricAuthority
 canonicalRationalMetricAuthority =
@@ -79,7 +112,7 @@ canonicalRationalMetricAuthority =
     ; absQ = ∣_∣
     ; _≤Q_ = _≤_
     ; dyadicError = dyadicQ
-    ; leRefl = λ q → ℚ.≤-refl
+    ; leRefl = λ _ → ℚ.≤-refl
     ; leTrans = ℚ.≤-trans
     ; addMono = ℚ.+-mono-≤
     ; subSelfQ = subSelfℚ
@@ -88,6 +121,8 @@ canonicalRationalMetricAuthority =
     ; absTriangleDifference = absDifferenceTriangle
     ; dyadicPositive = dyadicQNonnegative
     ; zeroBelowDyadicSum = zeroBelowDyadicQSum
+    ; dyadicAntitone = dyadicAntitoneℚ
+    ; dyadicDoubleStep = dyadicDoubleStepℚ
     }
 
 canonicalRationalEmbedding : ℚ → FastCauchyReal canonicalRationalMetricAuthority
