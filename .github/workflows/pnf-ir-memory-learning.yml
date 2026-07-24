@@ -12,6 +12,7 @@ on:
       - 'Docs/PNFIRMemoryLearning.md'
       - '.github/workflows/pnf-ir-memory-learning.yml'
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'DASHI/Cognition/PNF/**'
       - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
