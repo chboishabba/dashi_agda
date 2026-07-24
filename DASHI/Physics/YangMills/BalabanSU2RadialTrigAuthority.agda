@@ -19,7 +19,7 @@ import DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact as Chart
 ------------------------------------------------------------------------
 -- Minimal authoritative trigonometric surface for the SU(2) radial chart.
 --
--- No unrestricted trigonometry postulate is introduced here.  A concrete real
+-- No unrestricted trigonometry axiom is introduced here.  A concrete real
 -- analysis backend must inhabit exactly these three public facts for its sine,
 -- cosine and removable sin(t)/t implementation.
 ------------------------------------------------------------------------
