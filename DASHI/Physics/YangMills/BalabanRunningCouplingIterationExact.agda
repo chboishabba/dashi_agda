@@ -2,10 +2,11 @@ module DASHI.Physics.YangMills.BalabanRunningCouplingIterationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Nat.Base using (_≤_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _-_)
 import Data.Nat.Properties as ℕP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanDyadicQuantitativeRegionExact using
@@ -15,15 +16,6 @@ open import DASHI.Physics.YangMills.BalabanDyadicTerminalScaleExact using
 
 ------------------------------------------------------------------------
 -- Exact iteration of the inverse-coupling recursion.
---
--- The analytic one-step theorem has the form
---
---   u_{k+1} = u_k - betaStep + rho_k,
---
--- where u_k = g_k^{-2}.  This module proves by induction that the physical
--- sequence equals the ideal affine flow plus the accumulated remainder.  The
--- beta coefficient and the remainder estimate are not assumed again at every
--- scale.
 ------------------------------------------------------------------------
 
 idealInverseCoupling : ℚ → ℚ → Nat → ℚ
@@ -111,9 +103,7 @@ physicalIteratedInverseCouplingFormula flow step =
       step)
 
 ------------------------------------------------------------------------
--- Exact relation between a bounded terminal-step offset and physical dyadic
--- spacing.  If k*(N) = N+d, then 2^{k*(N)}/2^N = 2^d.  Consequently the hard
--- dimensional-transmutation estimate can target a bounded integer offset.
+-- Exact terminal-step offset scaling.
 ------------------------------------------------------------------------
 
 pow2Add : ∀ left right →
@@ -144,7 +134,7 @@ record BoundedTerminalStepOffset : Set₁ where
       physicalTerminalStep exponent ≡ exponent + terminalOffset exponent
 
     terminalOffsetPowerBelowMaximum : ∀ exponent →
-      pow2 (terminalOffset exponent) ℕP.≤ pow2 maximumOffset
+      pow2 (terminalOffset exponent) ≤ pow2 maximumOffset
 
 open BoundedTerminalStepOffset public
 
