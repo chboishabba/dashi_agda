@@ -59,8 +59,13 @@ record ShiftWavePresentationAdapter : Set₁ where
     coarseSurface : Set
     fineSurface : Set
     projectFineToCoarse : fineSurface → coarseSurface
+
     projectionAgreement : Set
+    projectionAgreementWitness : projectionAgreement
+
     phaseAndWaveRetainedAtFineSurface : Set
+    phaseAndWaveRetainedAtFineSurfaceWitness :
+      phaseAndWaveRetainedAtFineSurface
 
 open ShiftWavePresentationAdapter public
 
@@ -71,7 +76,10 @@ canonicalShiftWavePresentationAdapter =
     ; fineSurface = ShiftWave.FineObservation
     ; projectFineToCoarse = ShiftWave.projectFine
     ; projectionAgreement = ShiftWave.projectFineAgreement
+    ; projectionAgreementWitness = ShiftWave.projectFineAgreement-witness
     ; phaseAndWaveRetainedAtFineSurface = ShiftWave.waveShadowAgreement
+    ; phaseAndWaveRetainedAtFineSurfaceWitness =
+        ShiftWave.waveShadowAgreement-witness
     }
 
 record ExistingAdapterBoundary : Set where
