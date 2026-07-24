@@ -4,22 +4,26 @@ on:
   push:
     paths:
       - 'DASHI/Cognition/PNF/**'
+      - 'DASHI/Cognition/Utterance/All.agda'
       - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
       - 'DASHI/Foundations/DerivedCoarseDynamics.agda'
       - 'DASHI/NumberTheory/ThreeAdicCompletionCutset.agda'
       - 'DASHI/Empirical/PNFMeasurementIdentifiability.agda'
       - 'DASHI/Geometry/CalabiYauPhysicalProducerCutset.agda'
+      - 'DASHI/Geometry/QuinticThreefoldCandidate.agda'
       - 'Docs/PNFIRMemoryLearning.md'
       - '.github/workflows/pnf-ir-memory-learning.yml'
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'DASHI/Cognition/PNF/**'
+      - 'DASHI/Cognition/Utterance/All.agda'
       - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
       - 'DASHI/Foundations/DerivedCoarseDynamics.agda'
       - 'DASHI/NumberTheory/ThreeAdicCompletionCutset.agda'
       - 'DASHI/Empirical/PNFMeasurementIdentifiability.agda'
       - 'DASHI/Geometry/CalabiYauPhysicalProducerCutset.agda'
+      - 'DASHI/Geometry/QuinticThreefoldCandidate.agda'
       - 'Docs/PNFIRMemoryLearning.md'
       - '.github/workflows/pnf-ir-memory-learning.yml'
 
@@ -57,9 +61,12 @@ jobs:
             export AGDA_JOBS=2
             targets=(
               DASHI/Cognition/PNF/EventAlgebra.agda
+              DASHI/Cognition/PNF/CandidateInvalidation.agda
               DASHI/Cognition/PNF/OperationalIR.agda
+              DASHI/Cognition/PNF/OperationalIRExecution.agda
               DASHI/Cognition/PNF/MemoryFibre.agda
               DASHI/Cognition/PNF/LearningAlgebra.agda
+              DASHI/Cognition/PNF/FibreLearningDynamics.agda
               DASHI/Cognition/PNF/BraidLearningTransport.agda
               DASHI/Cognition/PNF/ExtractorBoundary.agda
               DASHI/Cognition/PNF/AttractorMeasurementValidation.agda
@@ -69,14 +76,17 @@ jobs:
               DASHI/NumberTheory/ThreeAdicCompletionCutset.agda
               DASHI/Empirical/PNFMeasurementIdentifiability.agda
               DASHI/Geometry/CalabiYauPhysicalProducerCutset.agda
+              DASHI/Geometry/QuinticThreefoldCandidate.agda
               DASHI/Cognition/PNF/PNFIRLearningRegression.agda
+              DASHI/Cognition/PNF/PNFIRExecutionRegression.agda
               DASHI/Cognition/PNF/PNFIRLearningEverything.agda
+              DASHI/Cognition/Utterance/All.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-pnf-ir-memory-learning-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 220 agda-pnf-ir-memory-learning-check.log
+          tail -n 240 agda-pnf-ir-memory-learning-check.log
           exit 0
       - name: Upload focused Agda log
         if: always()
