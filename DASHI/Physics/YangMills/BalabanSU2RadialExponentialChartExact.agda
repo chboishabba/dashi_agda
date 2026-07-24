@@ -17,110 +17,86 @@ open RealPolynomialSolver using (_:=_; _:+_; _:*_)
 
 ------------------------------------------------------------------------
 -- Exact radial algebra for the SU(2) exponential chart.
---
--- For a radial representation
---
---   q(A) = (c(A), s(A) A1, s(A) A2, s(A) A3),
---
--- quaternion unitarity and the imaginary-radius estimate reduce to two scalar
--- statements.  The vector/quaternion algebra below is proved computationally;
--- only the genuine analytic facts about c and s remain as named fields.
 ------------------------------------------------------------------------
 
-radialQuaternionNormExact : ∀ cosine radialScale x y z →
-  qNormSqR
-    cosine
-    (radialScale *R x)
-    (radialScale *R y)
-    (radialScale *R z)
-  ≡ squareR cosine
-    +R (squareR radialScale *R vectorNormSqR x y z)
+radialQuaternionNormExact : ∀ cosine scale x y z →
+  qNormSqR cosine (scale *R x) (scale *R y) (scale *R z)
+  ≡ squareR cosine +R (squareR scale *R vectorNormSqR x y z)
 radialQuaternionNormExact =
   solveComputed 5
-    (λ cosine radialScale x y z →
-      qNormSqP
-        cosine
-        (radialScale :* x)
-        (radialScale :* y)
-        (radialScale :* z)
-      := squareP cosine
-        :+ (squareP radialScale :* vectorNormSqP x y z))
+    (λ cosine scale x y z →
+      qNormSqP cosine (scale :* x) (scale :* y) (scale :* z)
+      := squareP cosine :+ (squareP scale :* vectorNormSqP x y z))
     computed
 
-radialImaginaryNormExact : ∀ radialScale x y z →
-  imaginaryNormSqR
-    (radialScale *R x)
-    (radialScale *R y)
-    (radialScale *R z)
-  ≡ squareR radialScale *R vectorNormSqR x y z
+radialImaginaryNormExact : ∀ scale x y z →
+  imaginaryNormSqR (scale *R x) (scale *R y) (scale *R z)
+  ≡ squareR scale *R vectorNormSqR x y z
 radialImaginaryNormExact =
   solveComputed 4
-    (λ radialScale x y z →
-      imaginaryNormSqP
-        (radialScale :* x)
-        (radialScale :* y)
-        (radialScale :* z)
-      := squareP radialScale :* vectorNormSqP x y z)
+    (λ scale x y z →
+      imaginaryNormSqP (scale :* x) (scale :* y) (scale :* z)
+      := squareP scale :* vectorNormSqP x y z)
     computed
 
 record SU2RadialExponentialChartData (radius : ℝ) : Set₁ where
   field
-    radiusOrderLaws : SU2AdjointSquaredRadiusOrderLaws
+    radialOrderLaws : SU2AdjointSquaredRadiusOrderLaws
 
-    chartParameter : Set
-    parameterX parameterY parameterZ : chartParameter → ℝ
-    radialCosine radialScale : chartParameter → ℝ
-    inChartBall : chartParameter → Set
+    radialParameter : Set
+    radialParameterX radialParameterY radialParameterZ : radialParameter → ℝ
+    radialCosine radialScale : radialParameter → ℝ
+    radialInChartBall : radialParameter → Set
 
     radialUnitIdentity : ∀ parameter →
-      inChartBall parameter →
+      radialInChartBall parameter →
       squareR (radialCosine parameter)
         +R (squareR (radialScale parameter)
           *R vectorNormSqR
-            (parameterX parameter)
-            (parameterY parameter)
-            (parameterZ parameter))
+            (radialParameterX parameter)
+            (radialParameterY parameter)
+            (radialParameterZ parameter))
       ≡ oneR
 
     radialImaginarySqBelowRadiusSq : ∀ parameter →
-      inChartBall parameter →
-      LessEqual (orderedSquares radiusOrderLaws)
+      radialInChartBall parameter →
+      LessEqual (orderedSquares radialOrderLaws)
         (squareR (radialScale parameter)
           *R vectorNormSqR
-            (parameterX parameter)
-            (parameterY parameter)
-            (parameterZ parameter))
+            (radialParameterX parameter)
+            (radialParameterY parameter)
+            (radialParameterZ parameter))
         (squareR radius)
 
 open SU2RadialExponentialChartData public
 
 radialExpReal : ∀ {radius}
   (dataSet : SU2RadialExponentialChartData radius) →
-  chartParameter dataSet → ℝ
+  radialParameter dataSet → ℝ
 radialExpReal dataSet = radialCosine dataSet
 
 radialExpI : ∀ {radius}
   (dataSet : SU2RadialExponentialChartData radius) →
-  chartParameter dataSet → ℝ
+  radialParameter dataSet → ℝ
 radialExpI dataSet parameter =
-  radialScale dataSet parameter *R parameterX dataSet parameter
+  radialScale dataSet parameter *R radialParameterX dataSet parameter
 
 radialExpJ : ∀ {radius}
   (dataSet : SU2RadialExponentialChartData radius) →
-  chartParameter dataSet → ℝ
+  radialParameter dataSet → ℝ
 radialExpJ dataSet parameter =
-  radialScale dataSet parameter *R parameterY dataSet parameter
+  radialScale dataSet parameter *R radialParameterY dataSet parameter
 
 radialExpK : ∀ {radius}
   (dataSet : SU2RadialExponentialChartData radius) →
-  chartParameter dataSet → ℝ
+  radialParameter dataSet → ℝ
 radialExpK dataSet parameter =
-  radialScale dataSet parameter *R parameterZ dataSet parameter
+  radialScale dataSet parameter *R radialParameterZ dataSet parameter
 
 radialExponentialUnitQuaternion :
   ∀ {radius} (dataSet : SU2RadialExponentialChartData radius)
-    (parameter : chartParameter dataSet) →
-  inChartBall dataSet parameter →
+    (parameter : radialParameter dataSet) →
+  radialInChartBall dataSet parameter →
   qNormSqR
     (radialExpReal dataSet parameter)
     (radialExpI dataSet parameter)
@@ -132,16 +108,16 @@ radialExponentialUnitQuaternion dataSet parameter inBall =
     (radialQuaternionNormExact
       (radialCosine dataSet parameter)
       (radialScale dataSet parameter)
-      (parameterX dataSet parameter)
-      (parameterY dataSet parameter)
-      (parameterZ dataSet parameter))
+      (radialParameterX dataSet parameter)
+      (radialParameterY dataSet parameter)
+      (radialParameterZ dataSet parameter))
     (radialUnitIdentity dataSet parameter inBall)
 
 radialExponentialImaginarySqBelowRadiusSq :
   ∀ {radius} (dataSet : SU2RadialExponentialChartData radius)
-    (parameter : chartParameter dataSet) →
-  inChartBall dataSet parameter →
-  LessEqual (orderedSquares (radiusOrderLaws dataSet))
+    (parameter : radialParameter dataSet) →
+  radialInChartBall dataSet parameter →
+  LessEqual (orderedSquares (radialOrderLaws dataSet))
     (imaginaryNormSqR
       (radialExpI dataSet parameter)
       (radialExpJ dataSet parameter)
@@ -150,33 +126,32 @@ radialExponentialImaginarySqBelowRadiusSq :
 radialExponentialImaginarySqBelowRadiusSq dataSet parameter inBall
   rewrite radialImaginaryNormExact
     (radialScale dataSet parameter)
-    (parameterX dataSet parameter)
-    (parameterY dataSet parameter)
-    (parameterZ dataSet parameter) =
+    (radialParameterX dataSet parameter)
+    (radialParameterY dataSet parameter)
+    (radialParameterZ dataSet parameter) =
   radialImaginarySqBelowRadiusSq dataSet parameter inBall
 
 radialDataToPointwiseExponentialMatch :
   ∀ {radius} (dataSet : SU2RadialExponentialChartData radius) →
   SU2ExponentialPointwiseRadiusMatch radius
 radialDataToPointwiseExponentialMatch dataSet = record
-  { radiusOrderLaws = radiusOrderLaws dataSet
-  ; chartParameter = chartParameter dataSet
+  { radiusOrderLaws = radialOrderLaws dataSet
+  ; chartParameter = radialParameter dataSet
   ; expReal = radialExpReal dataSet
   ; expI = radialExpI dataSet
   ; expJ = radialExpJ dataSet
   ; expK = radialExpK dataSet
-  ; inChartBall = inChartBall dataSet
-  ; exponentialUnitQuaternion =
-      radialExponentialUnitQuaternion dataSet
+  ; inChartBall = radialInChartBall dataSet
+  ; exponentialUnitQuaternion = radialExponentialUnitQuaternion dataSet
   ; exponentialImaginarySqBelowRadiusSq =
       radialExponentialImaginarySqBelowRadiusSq dataSet
   }
 
 radialExponentialAdjointDisplacementRadiusSq :
   ∀ {radius} (dataSet : SU2RadialExponentialChartData radius) →
-  ∀ (parameter : chartParameter dataSet) x y z →
-  inChartBall dataSet parameter →
-  LessEqual (orderedSquares (radiusOrderLaws dataSet))
+  ∀ (parameter : radialParameter dataSet) x y z →
+  radialInChartBall dataSet parameter →
+  LessEqual (orderedSquares (radialOrderLaws dataSet))
     (adjointDisplacementSqR
       (radialExpReal dataSet parameter)
       (radialExpI dataSet parameter)
