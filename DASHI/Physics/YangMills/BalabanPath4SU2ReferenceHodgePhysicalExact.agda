@@ -1,9 +1,10 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2ReferenceHodgePhysicalExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -17,11 +18,10 @@ open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
 ------------------------------------------------------------------------
 -- One coherent owner for the literal side-four reference Hessian.
 --
--- The carrier, norm, block constraint, gauge penalty and Q*Q penalty have now
--- been fixed concretely.  The one deliberately exposed producer is the Wilson
--- kinetic identity at the selected reference background.  Supplying that
--- identity cannot alter any of the other operators or norms because they are
--- all projections from the same quadraticData value.
+-- The Wilson second variation is the curl part of the reference Hodge form;
+-- the gauge-fixing quadratic form is the longitudinal part.  Consequently the
+-- physical finite-difference energy is identified with their sum, not with the
+-- Wilson term alone.  Q*Q remains the independent nonnegative block penalty.
 ------------------------------------------------------------------------
 
 record Path4SU2ReferenceHodgeData (Gauge Coarse : Set) : Set₁ where
@@ -29,58 +29,68 @@ record Path4SU2ReferenceHodgeData (Gauge Coarse : Set) : Set₁ where
     quadraticData :
       GaugeFixedHessianQuadraticData PhysicalSU2Tangent4 Gauge Coarse ℚ
 
+    addScalarMatchesRationalAddition : ∀ left right →
+      addScalar quadraticData left right ≡ left + right
+
     nonnegativeIsRationalNonnegative : ∀ value →
       Nonnegative quadraticData value → 0ℚ ≤ value
 
-    referenceCovariantEnergyMatchesDifferenceEnergy : ∀ tangent →
+    referenceWilsonGaugeEnergyMatchesDifferenceEnergy : ∀ tangent →
       wilsonHessianQuadraticForm quadraticData tangent
+      + gaugeFixingNormSq quadraticData tangent
       ≡ physicalReferenceDifferenceEnergy tangent
 
 open Path4SU2ReferenceHodgeData public
 
-referencePenaltyEnergy :
-  ∀ {Gauge Coarse} →
-  Path4SU2ReferenceHodgeData Gauge Coarse →
-  PhysicalSU2Tangent4 → ℚ
-referencePenaltyEnergy dataSet tangent =
-  gaugeFixingNormSq (quadraticData dataSet) tangent
-  + blockAverageNormSq (quadraticData dataSet) tangent
-
-referencePenaltyEnergyNonnegative :
+referenceBlockPenaltyNonnegative :
   ∀ {Gauge Coarse}
     (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
     tangent →
-  0ℚ ≤ referencePenaltyEnergy dataSet tangent
-referencePenaltyEnergyNonnegative dataSet tangent =
-  subst
-    (λ left → left ≤ referencePenaltyEnergy dataSet tangent)
-    (ℚP.+-identityˡ 0ℚ)
-    (ℚP.+-mono-≤
-      (nonnegativeIsRationalNonnegative dataSet
+  0ℚ ≤ blockAverageNormSq (quadraticData dataSet) tangent
+referenceBlockPenaltyNonnegative dataSet tangent =
+  nonnegativeIsRationalNonnegative dataSet
+    (blockAverageNormSq (quadraticData dataSet) tangent)
+    (coarseNormNonnegative (quadraticData dataSet)
+      (average (hessianData (quadraticData dataSet)) tangent))
+
+nestedScalarAdditionExact :
+  ∀ {Gauge Coarse}
+    (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
+    left middle right →
+  addScalar (quadraticData dataSet) left
+    (addScalar (quadraticData dataSet) middle right)
+  ≡ left + (middle + right)
+nestedScalarAdditionExact dataSet left middle right =
+  trans
+    (addScalarMatchesRationalAddition dataSet left
+      (addScalar (quadraticData dataSet) middle right))
+    (cong (λ value → left + value)
+      (addScalarMatchesRationalAddition dataSet middle right))
+
+gaugeFixedHessianPhysicalDecompositionExact :
+  ∀ {Gauge Coarse}
+    (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
+    tangent →
+  gaugeFixedHessianQuadraticForm (quadraticData dataSet) tangent
+  ≡ physicalReferenceDifferenceEnergy tangent
+    + blockAverageNormSq (quadraticData dataSet) tangent
+gaugeFixedHessianPhysicalDecompositionExact dataSet tangent =
+  trans
+    (gaugeFixedHessianQuadraticFormExact
+      (quadraticData dataSet) tangent)
+    (trans
+      (nestedScalarAdditionExact dataSet
+        (wilsonHessianQuadraticForm (quadraticData dataSet) tangent)
         (gaugeFixingNormSq (quadraticData dataSet) tangent)
-        (gaugeNormNonnegative (quadraticData dataSet)
-          (divergence (hessianData (quadraticData dataSet)) tangent)))
-      (nonnegativeIsRationalNonnegative dataSet
-        (blockAverageNormSq (quadraticData dataSet) tangent)
-        (coarseNormNonnegative (quadraticData dataSet)
-          (average (hessianData (quadraticData dataSet)) tangent))))
-
-referenceWilsonBelowGaugeFixedHessian :
-  ∀ {Gauge Coarse}
-    (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
-    tangent →
-  wilsonHessianQuadraticForm (quadraticData dataSet) tangent
-  ≤ gaugeFixedHessianQuadraticForm (quadraticData dataSet) tangent
-referenceWilsonBelowGaugeFixedHessian dataSet tangent =
-  subst
-    (λ right →
-      wilsonHessianQuadraticForm (quadraticData dataSet) tangent ≤ right)
-    (sym (gaugeFixedHessianQuadraticFormExact
-      (quadraticData dataSet) tangent))
-    (baseBelowBasePlusRemainder
-      (wilsonHessianQuadraticForm (quadraticData dataSet) tangent)
-      (referencePenaltyEnergy dataSet tangent)
-      (referencePenaltyEnergyNonnegative dataSet tangent))
+        (blockAverageNormSq (quadraticData dataSet) tangent))
+      (trans
+        (ℚRing.solve-∀
+          (wilsonHessianQuadraticForm (quadraticData dataSet) tangent)
+          (gaugeFixingNormSq (quadraticData dataSet) tangent)
+          (blockAverageNormSq (quadraticData dataSet) tangent))
+        (cong₂ _+_
+          (referenceWilsonGaugeEnergyMatchesDifferenceEnergy dataSet tangent)
+          refl)))
 
 referenceDifferenceBelowPhysicalHessian :
   ∀ {Gauge Coarse}
@@ -90,10 +100,12 @@ referenceDifferenceBelowPhysicalHessian :
   ≤ gaugeFixedHessianQuadraticForm (quadraticData dataSet) tangent
 referenceDifferenceBelowPhysicalHessian dataSet tangent =
   subst
-    (λ left →
-      left ≤ gaugeFixedHessianQuadraticForm (quadraticData dataSet) tangent)
-    (referenceCovariantEnergyMatchesDifferenceEnergy dataSet tangent)
-    (referenceWilsonBelowGaugeFixedHessian dataSet tangent)
+    (λ right → physicalReferenceDifferenceEnergy tangent ≤ right)
+    (sym (gaugeFixedHessianPhysicalDecompositionExact dataSet tangent))
+    (baseBelowBasePlusRemainder
+      (physicalReferenceDifferenceEnergy tangent)
+      (blockAverageNormSq (quadraticData dataSet) tangent)
+      (referenceBlockPenaltyNonnegative dataSet tangent))
 
 uniformReferenceHodgeCoercivity :
   ∀ {Gauge Coarse}
@@ -113,5 +125,5 @@ path4SU2ReferencePenaltyExactLevel = machineChecked
 path4SU2ReferenceHodgeAssemblyLevel : ProofLevel
 path4SU2ReferenceHodgeAssemblyLevel = machineChecked
 
-referenceWilsonDifferenceIdentificationLevel : ProofLevel
-referenceWilsonDifferenceIdentificationLevel = conditional
+referenceWilsonGaugeDifferenceIdentificationLevel : ProofLevel
+referenceWilsonGaugeDifferenceIdentificationLevel = conditional
