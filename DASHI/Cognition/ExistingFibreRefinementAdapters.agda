@@ -1,5 +1,6 @@
 module DASHI.Cognition.ExistingFibreRefinementAdapters where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
@@ -24,7 +25,7 @@ record SupervoxelRefinementAdapter (depth : Nat) : Set₁ where
 
 open SupervoxelRefinementAdapter public
 
-record CarryMemoryPsychologyAdapter : Set₁ where
+record CarryMemoryPsychologyAdapter : Setω where
   field
     sourceReceipt : Carry.CarryMemorySubvoxelReceipt
     HiddenMemoryState : Set
