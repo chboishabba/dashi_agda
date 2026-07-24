@@ -38,3 +38,4 @@ import DASHI.Cognition.VisualCompressionAttractors
 import DASHI.Cognition.VisualPatternGeneratorMDL
 import DASHI.Cognition.VisualSymmetryFixedPoint
 import DASHI.Cognition.ZeroFibreContextuality
+ import DASHI.Cognition.DASHICognitionDynamicsRegression
