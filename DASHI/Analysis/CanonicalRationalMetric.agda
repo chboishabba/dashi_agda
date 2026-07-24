@@ -9,6 +9,7 @@ import Data.Rational.Properties as ℚ
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 open import DASHI.Analysis.FastCauchyReals
+open import DASHI.Analysis.FastCauchyArithmetic
 
 ------------------------------------------------------------------------
 -- The standard library's reduced rational carrier supplies the exact metric
@@ -127,3 +128,61 @@ canonicalRationalMetricAuthority =
 
 canonicalRationalEmbedding : ℚ → FastCauchyReal canonicalRationalMetricAuthority
 canonicalRationalEmbedding = constantFastReal canonicalRationalMetricAuthority
+
+------------------------------------------------------------------------
+-- Exact additive laws used by precision-safe representative arithmetic.
+
+negDifference : ∀ a b → (- a) - (- b) ≡ - (a - b)
+negDifference = solve-∀
+
+negDifferenceAbsℚ : ∀ a b → ∣ (- a) - (- b) ∣ ≡ ∣ a - b ∣
+negDifferenceAbsℚ a b
+  rewrite negDifference a b =
+  ℚ.∣-p∣≡∣p∣ (a - b)
+
+addDifference : ∀ a b c d →
+  (a + b) - (c + d) ≡ (a - c) + (b - d)
+addDifference = solve-∀
+
+addDifferenceBoundℚ : ∀ a b c d →
+  ∣ (a + b) - (c + d) ∣ ≤ ∣ a - c ∣ + ∣ b - d ∣
+addDifferenceBoundℚ a b c d
+  rewrite addDifference a b c d =
+  ℚ.∣p+q∣≤∣p∣+∣q∣ (a - c) (b - d)
+
+doublePairDyadic : ∀ m n →
+  (dyadicQ (suc m) + dyadicQ (suc n))
+    + (dyadicQ (suc m) + dyadicQ (suc n))
+  ≡ dyadicQ m + dyadicQ n
+doublePairDyadic m n = solve-∀
+
+canonicalFastCauchyAdditiveLaws :
+  FastCauchyAdditiveLaws canonicalRationalMetricAuthority
+canonicalFastCauchyAdditiveLaws =
+  record
+    { negDifferenceAbs = negDifferenceAbsℚ
+    ; addDifferenceBound = addDifferenceBoundℚ
+    ; doublePairError = doublePairDyadic
+    }
+
+canonicalFastZero canonicalFastOne :
+  FastCauchyReal canonicalRationalMetricAuthority
+canonicalFastZero = canonicalRationalEmbedding 0ℚ
+canonicalFastOne = canonicalRationalEmbedding 1ℚ
+
+canonicalFastNeg :
+  FastCauchyReal canonicalRationalMetricAuthority →
+  FastCauchyReal canonicalRationalMetricAuthority
+canonicalFastNeg = fastNeg canonicalFastCauchyAdditiveLaws
+
+canonicalFastAdd :
+  FastCauchyReal canonicalRationalMetricAuthority →
+  FastCauchyReal canonicalRationalMetricAuthority →
+  FastCauchyReal canonicalRationalMetricAuthority
+canonicalFastAdd = fastAdd canonicalFastCauchyAdditiveLaws
+
+canonicalFastSub :
+  FastCauchyReal canonicalRationalMetricAuthority →
+  FastCauchyReal canonicalRationalMetricAuthority →
+  FastCauchyReal canonicalRationalMetricAuthority
+canonicalFastSub = fastSub canonicalFastCauchyAdditiveLaws
