@@ -2,33 +2,12 @@ name: Agda CI
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - agent/reflexive-clopen-psychology
-
-permissions:
-  contents: read
-  statuses: write
 
 jobs:
   typecheck:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Publish pending Agda status
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SHA: ${{ github.sha }}
-          REPO: ${{ github.repository }}
-        run: |
-          curl --fail-with-body -L \
-            -X POST \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${REPO}/statuses/${SHA}" \
-            -d '{"state":"pending","context":"Agda full root","description":"DASHI/Everything.agda typecheck running"}'
-
       - uses: actions/checkout@v4
 
       - name: Install Agda + stdlib
@@ -52,33 +31,3 @@ jobs:
         with:
           name: agda-typecheck-log
           path: agda-typecheck.log
-
-      - name: Publish successful Agda status
-        if: success()
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SHA: ${{ github.sha }}
-          REPO: ${{ github.repository }}
-        run: |
-          curl --fail-with-body -L \
-            -X POST \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${REPO}/statuses/${SHA}" \
-            -d '{"state":"success","context":"Agda full root","description":"DASHI/Everything.agda typechecks"}'
-
-      - name: Publish failed Agda status
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SHA: ${{ github.sha }}
-          REPO: ${{ github.repository }}
-        run: |
-          curl --fail-with-body -L \
-            -X POST \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${REPO}/statuses/${SHA}" \
-            -d '{"state":"failure","context":"Agda full root","description":"DASHI/Everything.agda typecheck failed"}'
