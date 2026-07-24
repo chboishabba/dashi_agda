@@ -1,7 +1,9 @@
 module DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.List.Base using (length)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -11,12 +13,6 @@ open import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact
 
 ------------------------------------------------------------------------
 -- Literal translated halo origins.
---
--- A relative offset is converted to an actual torus origin by repeatedly
--- applying the cyclic predecessor in each coordinate.  The containing-origin
--- carrier stores both the physical origin and its offset witness.  This gives
--- definitional round trips and transfers the exact W^4 offset count to a list
--- of concrete origin sites without relying on cardinality alone.
 ------------------------------------------------------------------------
 
 lastCyclicIndex : ∀ n → CyclicIndex (suc n)
@@ -128,7 +124,7 @@ literalPhysicalContainingOrigins :
   ∀ {latticeSide}
     (geometry : PhysicalHaloGeometry latticeSide)
     (site : periodicTorus4Definition latticeSide) →
-  Agda.Builtin.List.List (PhysicalContainingOrigin geometry site)
+  List (PhysicalContainingOrigin geometry site)
 literalPhysicalContainingOrigins geometry site =
   physicalContainingOriginEnumeration
     (physicalHaloOriginRoundTrips geometry) site
@@ -137,7 +133,7 @@ literalPhysicalContainingOriginCount :
   ∀ {latticeSide}
     (geometry : PhysicalHaloGeometry latticeSide)
     (site : periodicTorus4Definition latticeSide) →
-  Data.List.Base.length (literalPhysicalContainingOrigins geometry site)
+  length (literalPhysicalContainingOrigins geometry site)
   ≡ literalHaloOverlapCount (cover geometry)
 literalPhysicalContainingOriginCount geometry site =
   physicalContainingOriginEnumerationLength
