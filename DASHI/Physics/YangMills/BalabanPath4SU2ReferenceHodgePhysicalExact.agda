@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2ReferenceHodgePhysicalExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
@@ -10,7 +10,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
   (baseBelowBasePlusRemainder)
 open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate using
-  (configuredPathCoercivityConstant)
+  (configuredPathCoercivityConstant;
+   configuredPathCoercivityConstantPositive)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
@@ -23,6 +24,12 @@ open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
 -- physical finite-difference energy is identified with their sum, not with the
 -- Wilson term alone.  Q*Q remains the independent nonnegative block penalty.
 ------------------------------------------------------------------------
+
+cReference : ℚ
+cReference = configuredPathCoercivityConstant
+
+cReferencePositive : 0ℚ < cReference
+cReferencePositive = configuredPathCoercivityConstantPositive
 
 record Path4SU2ReferenceHodgeData (Gauge Coarse : Set) : Set₁ where
   field
@@ -112,7 +119,7 @@ uniformReferenceHodgeCoercivity :
     (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
     tangent →
   PhysicalBlockAverageZero tangent →
-  configuredPathCoercivityConstant * physicalUnweightedNormSq tangent
+  cReference * physicalUnweightedNormSq tangent
   ≤ gaugeFixedHessianQuadraticForm (quadraticData dataSet) tangent
 uniformReferenceHodgeCoercivity dataSet tangent blockZero =
   ℚP.≤-trans
@@ -124,6 +131,9 @@ path4SU2ReferencePenaltyExactLevel = machineChecked
 
 path4SU2ReferenceHodgeAssemblyLevel : ProofLevel
 path4SU2ReferenceHodgeAssemblyLevel = machineChecked
+
+cReferencePositiveLevel : ProofLevel
+cReferencePositiveLevel = machineChecked
 
 referenceWilsonGaugeDifferenceIdentificationLevel : ProofLevel
 referenceWilsonGaugeDifferenceIdentificationLevel = conditional
