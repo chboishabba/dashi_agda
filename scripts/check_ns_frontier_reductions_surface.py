@@ -80,6 +80,82 @@ REQUIRED = {
     "NSPeriodicWeightedEnvelopeContinuumAdapter.agda": [
         "weightedEnvelopeVorticityBoundPassesToLimit",
     ],
+    "NSPeriodicConcreteCutoffCubeCarrier.agda": [
+        "signedIntervalNoDuplicates",
+        "cutoffModeEnumerationComplete",
+        "cutoffModeEnumerationSound",
+        "cutoffModeEnumerationNoDuplicates",
+        "literalCutoffCubeLength",
+        "cutoffClosedUnderNegation",
+        "zeroModeHandledExactlyOnce",
+        "concreteCutoffCubeCarrierLevel = machineChecked",
+    ],
+    "NSPeriodicConcreteIntegerModeNorm.agda": [
+        "nonzeroModeNatNormPositive",
+        "embeddedNonzeroModeNormPositive",
+        "concreteIntegerModeNormIdentification",
+        "concreteModeInverseScaling",
+        "concreteIntegerModeNormLevel = machineChecked",
+    ],
+    "NSPeriodicConcreteOfficialNormWeights.agda": [
+        "literalL2Weight",
+        "literalH1Weight",
+        "literalShellWeightAt",
+        "concreteCoefficientUnitaryNormCarrier",
+        "concreteOfficialFiniteSumIdentification",
+        "concreteOfficialNormWeightsLevel = machineChecked",
+    ],
+    "NSPeriodicCanonicalNearYoungAllocation.agda": [
+        "nearPaymentsSumToQuarter",
+        "interpretedNearPaymentDecomposes",
+        "canonicalNearComponentsFitQuarter",
+        "canonicalNearYoungAllocationLevel = machineChecked",
+    ],
+    "NSPeriodicConcreteCandidateBudgetArithmetic.agda": [
+        "concreteNearAllocationIsQuarter",
+        "concreteFarHighConstantProductIsEight",
+        "farHighCandidateFitsCanonicalEighth",
+        "concreteCandidateBudgetArithmeticLevel = machineChecked",
+    ],
+    "NSPeriodicCompactGammaPDEBalance.agda": [
+        "componentBalancesCombine",
+        "literalPotentialDerivativePDEBalance",
+        "identifiedPotentialPDEBalance",
+        "compactGammaPDEBalanceLevel = machineChecked",
+    ],
+    "NSPeriodicCanonicalThreeBoundaryTupleAdapter.agda": [
+        "complementaryPacketOff",
+        "canonicalTupleToThreeBoundaryMarginInputs",
+        "canonicalTupleGivesThreeStrictBoundarySigns",
+        "canonicalThreeBoundaryTupleAdapterLevel = machineChecked",
+    ],
+    "NSPeriodicObservableDerivativeBoundReduction.agda": [
+        "quotientDerivativeUniform",
+        "observableBoundsToScoreDerivativeInputs",
+        "periodicScoreDerivativeUniformBound",
+        "observableDerivativeBoundReductionLevel = machineChecked",
+    ],
+    "NSPeriodicDiffuseLowHighSplit.agda": [
+        "lowHighPiecesBelowChargeAndRemainder",
+        "lowHighSplitToDissipationCharge",
+        "diffuseLowHighSplitGivesFiniteVorticity",
+        "diffuseLowHighSplitLevel = machineChecked",
+    ],
+    "NSPeriodicChartFailureAnalyticRoutes.agda": [
+        "badGammaVorticityEstimate",
+        "badTailVorticityEstimate",
+        "excessiveSizeVorticityEstimate",
+        "analyticFailureRoutesToCoverageInputs",
+        "largePacketGivesChartOrAnalyticBKM",
+        "chartFailureAnalyticRoutesLevel = machineChecked",
+    ],
+    "NSPeriodicFixedShellFiniteRankConvergence.agda": [
+        "finiteFoldConverges",
+        "fixedFinitePartialConverges",
+        "finitePartialLimitBelowUniformBound",
+        "finiteShellInputsToWeightedEnvelopeLimit",
+        "fixedShellFiniteRankConvergenceLevel = machineChecked",
+    ],
 }
 
 FORBIDDEN = (
@@ -93,6 +169,11 @@ FORBIDDEN = (
 )
 
 
+def uncommented_agda(text: str) -> str:
+    """Remove line comments before scanning for proof escape hatches."""
+    return "\n".join(line.split("--", 1)[0] for line in text.splitlines())
+
+
 def main() -> None:
     errors: list[str] = []
     for filename, tokens in REQUIRED.items():
@@ -101,11 +182,12 @@ def main() -> None:
             errors.append(f"missing file: {path.relative_to(ROOT)}")
             continue
         text = path.read_text(encoding="utf-8")
+        code = uncommented_agda(text)
         for token in tokens:
             if token not in text:
                 errors.append(f"{filename}: missing required token {token!r}")
         for token in FORBIDDEN:
-            if token in text:
+            if token in code:
                 errors.append(f"{filename}: forbidden token {token!r}")
 
     aggregate = (CLOSURE / "NSPairIncidenceKernelProgram.agda").read_text(
