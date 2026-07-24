@@ -73,7 +73,7 @@ record PhysicalCouplingAuthority
     CouplingValue : Set
     fibreOverlap :
       State spectrum → State spectrum → State spectrum → CouplingValue
-    fibreIntegralReceipt normalisationReceipt physicalUnitReceipt : String
+    fibreIntegralReceipt couplingNormalisationReceipt physicalUnitReceipt : String
 
 open PhysicalCouplingAuthority public
 
