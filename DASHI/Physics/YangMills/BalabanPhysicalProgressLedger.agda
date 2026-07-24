@@ -14,6 +14,12 @@ import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact
 import DASHI.Physics.YangMills.BalabanCommutingProjectionMartingaleExact
 import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
 import DASHI.Physics.YangMills.BalabanPath4PhysicalMartingaleOrthogonalityExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact
+import DASHI.Physics.YangMills.BalabanPath4AverageJensenExact
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageNormContractionExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact
+import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
+import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
 import DASHI.Physics.YangMills.BalabanNonlinearDifferenceIdentitiesExact
@@ -66,11 +72,26 @@ path4PhysicalAxisAverageSelfAdjointnessLevel = machineChecked
 path4PhysicalMartingaleOrthogonalityLevel : ProofLevel
 path4PhysicalMartingaleOrthogonalityLevel = machineChecked
 
+path4PhysicalVarianceDecompositionLevel : ProofLevel
+path4PhysicalVarianceDecompositionLevel = machineChecked
+
+path4AxisAverageNormContractionLevel : ProofLevel
+path4AxisAverageNormContractionLevel = machineChecked
+
+path4DistinctAxisDirectionalEnergyContractionLevel : ProofLevel
+path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked
+
+path4ScalarGlobalPoincareLevel : ProofLevel
+path4ScalarGlobalPoincareLevel = machineChecked
+
 physicalArbitrarySideAverageNormalizationLevel : ProofLevel
 physicalArbitrarySideAverageNormalizationLevel = conditional
 
 physicalFourDimensionalTensorizationLevel : ProofLevel
 physicalFourDimensionalTensorizationLevel = conditional
+
+physicalBondHodgeIdentificationLevel : ProofLevel
+physicalBondHodgeIdentificationLevel = conditional
 
 literalPhysicalHaloOriginLevel : ProofLevel
 literalPhysicalHaloOriginLevel = machineChecked
