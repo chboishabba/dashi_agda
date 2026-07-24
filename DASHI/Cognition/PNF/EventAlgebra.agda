@@ -10,12 +10,6 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Cognition.Utterance.LayeredMeaningCore as Utterance
 import DASHI.Interop.SensibLawResidualLattice as Residual
 
-------------------------------------------------------------------------
--- PNF sits between extractor observations and task-specific operational IR.
--- Extractors may propose candidates heuristically; all PNF objects remain
--- span/provenance-bearing and all algebraic comparison is explicit.
-------------------------------------------------------------------------
-
 data ParserProducer : Set where
   spaCyProducer stanzaProducer asrProducer ruleProducer : ParserProducer
   udProducer uccaProducer mrsProducer amrProducer specialistProducer : ParserProducer
@@ -179,6 +173,42 @@ record ContextProjection : Set where
     projectionReceipt : String
 
 open ContextProjection public
+
+------------------------------------------------------------------------
+-- Named PNF algebra. These operations preserve witnesses or return explicit
+-- residual structure; they do not operate on already-quotiented DomainIRs.
+------------------------------------------------------------------------
+
+infixr 4 _⊕_
+infixr 5 _⊗_
+infixr 6 _∘p_
+
+_⊕_ : CandidatePNF → CandidatePNF → AlternativeFibre
+left ⊕ right =
+  alternativeFibre (left ∷ right ∷ []) "typed unresolved alternative fibre"
+
+_⊗_ : EventPNF → EventPNF → TypedComposition
+left ⊗ right = composeByResidual left right "contextual fibre-product composition"
+
+_∘p_ : EventPNF → EventPNF → TypedComposition
+later ∘p earlier = composeByResidual earlier later "temporal/causal PNF composition"
+
+negateScoped : EventPNF → String → ScopedNegationReceipt
+negateScoped source scope =
+  scopedNegationReceipt source scope Residual.negated "scoped negation receipt"
+
+boundaryPNF : EventPNF → EventPNF → Residual.ResidualLevel
+boundaryPNF left right =
+  Residual.computeResidual (algebraicAtom left) (algebraicAtom right)
+
+projectToContext :
+  EventPNF → String → List SemanticRole → Residual.ResidualLevel → ContextProjection
+projectToContext source context roles residual =
+  contextProjection source context roles residual "context/chart projection receipt"
+
+revisePNF : EventPNF → EventPNF → RevisionKind → String → PNFRevision
+revisePNF before after kind receipt =
+  pnfRevision before after kind receipt true refl
 
 invalidIsNotAdmissible : invalid ≡ admissible → ⊥
 invalidIsNotAdmissible ()
