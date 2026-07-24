@@ -1,0 +1,100 @@
+name: PNF IR memory learning Agda check
+
+on:
+  push:
+    paths:
+      - 'DASHI/Cognition/PNF/**'
+      - 'DASHI/Cognition/Utterance/All.agda'
+      - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
+      - 'DASHI/Foundations/DerivedCoarseDynamics.agda'
+      - 'DASHI/NumberTheory/ThreeAdicCompletionCutset.agda'
+      - 'DASHI/Empirical/PNFMeasurementIdentifiability.agda'
+      - 'DASHI/Geometry/CalabiYauPhysicalProducerCutset.agda'
+      - 'DASHI/Geometry/QuinticThreefoldCandidate.agda'
+      - 'Docs/PNFIRMemoryLearning.md'
+      - '.github/workflows/pnf-ir-memory-learning.yml'
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'DASHI/Cognition/PNF/**'
+      - 'DASHI/Cognition/Utterance/All.agda'
+      - 'DASHI/Foundations/InverseLimitClopenRefinement.agda'
+      - 'DASHI/Foundations/DerivedCoarseDynamics.agda'
+      - 'DASHI/NumberTheory/ThreeAdicCompletionCutset.agda'
+      - 'DASHI/Empirical/PNFMeasurementIdentifiability.agda'
+      - 'DASHI/Geometry/CalabiYauPhysicalProducerCutset.agda'
+      - 'DASHI/Geometry/QuinticThreefoldCandidate.agda'
+      - 'Docs/PNFIRMemoryLearning.md'
+      - '.github/workflows/pnf-ir-memory-learning.yml'
+
+concurrency:
+  group: pnf-ir-memory-learning-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore Agda 2.9 shadow cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: pnf-ir-memory-learning-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Check PNF IR memory learning modules with Agda 2.9
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-pnf-ir-memory-learning-check.log"
+            export AGDA_JOBS=2
+            targets=(
+              DASHI/Cognition/PNF/EventAlgebra.agda
+              DASHI/Cognition/PNF/CandidateInvalidation.agda
+              DASHI/Cognition/PNF/OperationalIR.agda
+              DASHI/Cognition/PNF/OperationalIRExecution.agda
+              DASHI/Cognition/PNF/MemoryFibre.agda
+              DASHI/Cognition/PNF/LearningAlgebra.agda
+              DASHI/Cognition/PNF/FibreLearningDynamics.agda
+              DASHI/Cognition/PNF/BraidLearningTransport.agda
+              DASHI/Cognition/PNF/ExtractorBoundary.agda
+              DASHI/Cognition/PNF/AttractorMeasurementValidation.agda
+              DASHI/Cognition/PNF/NashiDecisionProofBridge.agda
+              DASHI/Foundations/InverseLimitClopenRefinement.agda
+              DASHI/Foundations/DerivedCoarseDynamics.agda
+              DASHI/NumberTheory/ThreeAdicCompletionCutset.agda
+              DASHI/Empirical/PNFMeasurementIdentifiability.agda
+              DASHI/Geometry/CalabiYauPhysicalProducerCutset.agda
+              DASHI/Geometry/QuinticThreefoldCandidate.agda
+              DASHI/Cognition/PNF/PNFIRLearningRegression.agda
+              DASHI/Cognition/PNF/PNFIRExecutionRegression.agda
+              DASHI/Cognition/PNF/PNFIRLearningEverything.agda
+              DASHI/Cognition/Utterance/All.agda
+            )
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
+          ) > agda-pnf-ir-memory-learning-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 240 agda-pnf-ir-memory-learning-check.log
+          exit 0
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pnf-ir-memory-learning-agda-log
+          path: agda-pnf-ir-memory-learning-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
