@@ -21,6 +21,9 @@ import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact
 import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
 import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
+import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
+import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ReferenceHodgePhysicalExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
 import DASHI.Physics.YangMills.BalabanSU2AdjointPointwiseRadiusSquared
@@ -92,6 +95,27 @@ path4BondComponentPoincareLevel = machineChecked
 
 path4BondReferenceHodgeCoercivityLevel : ProofLevel
 path4BondReferenceHodgeCoercivityLevel = machineChecked
+
+path4SU2PhysicalTangentCarrierLevel : ProofLevel
+path4SU2PhysicalTangentCarrierLevel = machineChecked
+
+physicalTangentNormMatchesBondNormLevel : ProofLevel
+physicalTangentNormMatchesBondNormLevel = machineChecked
+
+physicalBlockConstraintRemovesComponentMeansLevel : ProofLevel
+physicalBlockConstraintRemovesComponentMeansLevel = machineChecked
+
+physicalGaugeFixingQuadraticFormExactLevel : ProofLevel
+physicalGaugeFixingQuadraticFormExactLevel = machineChecked
+
+physicalBlockPenaltyQuadraticFormExactLevel : ProofLevel
+physicalBlockPenaltyQuadraticFormExactLevel = machineChecked
+
+path4SU2ReferenceHodgeAssemblyLevel : ProofLevel
+path4SU2ReferenceHodgeAssemblyLevel = machineChecked
+
+referenceWilsonDifferenceIdentificationLevel : ProofLevel
+referenceWilsonDifferenceIdentificationLevel = conditional
 
 physicalArbitrarySideAverageNormalizationLevel : ProofLevel
 physicalArbitrarySideAverageNormalizationLevel = conditional
