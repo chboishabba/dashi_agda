@@ -20,7 +20,7 @@ record CanonicalBoundaryTupleInterpretation
     (A : AbsorptionArithmetic) : Set₁ where
   field
     gammaThreshold packetFractionThreshold offPacketThreshold
-      sizeSquaredCeiling : Scalar A
+      sizeSquaredCeiling interpretOne : Scalar A
 
     RepresentsFraction : Nat → Nat → Scalar A → Set
     RepresentsNatural : Nat → Scalar A → Set
@@ -56,8 +56,6 @@ record CanonicalBoundaryTupleInterpretation
     complementaryPacketOff :
       _+_ A packetFractionThreshold offPacketThreshold
       ≡ interpretOne
-
-    interpretOne : Scalar A
 
 open CanonicalBoundaryTupleInterpretation public
 
