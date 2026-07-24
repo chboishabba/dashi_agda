@@ -97,10 +97,10 @@ exponentialAdjointDisplacementRadiusSqPointwise :
       x y z)
     (fourRadiusTimesVectorPointwiseR radius x y z)
 exponentialAdjointDisplacementRadiusSqPointwise
-  matching parameter x y z inBall =
+  {radius} matching parameter x y z inBall =
   unitQuaternionAdjointDisplacementRadiusSqPointwise
     (radiusOrderLaws matching)
-    _
+    radius
     (expReal matching parameter)
     (expI matching parameter)
     (expJ matching parameter)
