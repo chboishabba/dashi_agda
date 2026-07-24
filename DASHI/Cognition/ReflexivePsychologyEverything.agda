@@ -16,4 +16,5 @@ import DASHI.Cognition.ReflexivePsychologicalDynamics
 import DASHI.Cognition.BayesianReflexiveDynamicsBridge
 import DASHI.Cognition.ClopenPsychologicalSupervoxel
 import DASHI.Geometry.CalabiYau369CompactFibreBridge
+import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.ReflexivePsychologyRegression
