@@ -16,13 +16,12 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockEnumerationDistinctExact using
   (physicalBlockSitesDuplicateFree)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using
-  (side4; average0123)
-open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate using
-  (oneSixteenth)
+  (average0123)
+open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
 open import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
 
 ------------------------------------------------------------------------
--- The literal side-four SU(2) tangent carrier.
+-- The literal configured-side SU(2) tangent carrier.
 --
 -- A tangent vector has three Lie-algebra components.  Each component is the
 -- repository's existing positive-axis BondField: one value for (site, axis),
@@ -34,10 +33,10 @@ data SU2Component : Set where
   component1 component2 component3 : SU2Component
 
 PhysicalSU2Tangent4 : Set
-PhysicalSU2Tangent4 = SU2Component → RationalBondField4
+PhysicalSU2Tangent4 = SU2Component → ConfiguredRationalBondField
 
 EncodedSU2BondTangent4 : Set
-EncodedSU2BondTangent4 = SU2Component → RationalBondField4
+EncodedSU2BondTangent4 = SU2Component → ConfiguredRationalBondField
 
 encodeTangent : PhysicalSU2Tangent4 → EncodedSU2BondTangent4
 encodeTangent tangent = tangent
@@ -59,9 +58,11 @@ decodeEncodeTangent tangent component bond = refl
 -- an accidental factor two in the finite norm fold.
 ------------------------------------------------------------------------
 
-physicalPositiveBondEnumeration4 : List (PositiveBond side4)
+physicalPositiveBondEnumeration4 : List (PositiveBond configuredRGBlockSide)
 physicalPositiveBondEnumeration4 =
-  cartesian (physicalBlockSites side4) (allCyclicIndices four)
+  cartesian
+    (physicalBlockSites configuredRGBlockSide)
+    (allCyclicIndices four)
 
 physicalPositiveBondEnumeration4Complete :
   ∀ bond → bond ∈ physicalPositiveBondEnumeration4
@@ -74,12 +75,12 @@ physicalPositiveBondEnumeration4DuplicateFree :
   DuplicateFree physicalPositiveBondEnumeration4
 physicalPositiveBondEnumeration4DuplicateFree =
   cartesianDuplicateFree
-    (physicalBlockSitesDuplicateFree side4)
+    (physicalBlockSitesDuplicateFree configuredRGBlockSide)
     (allCyclicIndicesDuplicateFree four)
 
 physicalTangentComponent :
   PhysicalSU2Tangent4 →
-  SU2Component → Axis4 → PhysicalBlockL side4 → ℚ
+  SU2Component → Axis4 → PhysicalBlockL configuredRGBlockSide → ℚ
 physicalTangentComponent tangent component axis site =
   tangent component (pair site axis)
 
@@ -119,9 +120,9 @@ physicalTangentNormComponentExpansionExact latticeWeight tangent =
     (bondNormSq (tangent component3))
 
 ------------------------------------------------------------------------
--- The literal side-four block map is the normalized four-axis average already
--- used by the scalar Poincare theorem.  Qh = 0 therefore supplies, rather than
--- assumes separately, the componentwise mean-zero premise.
+-- The literal configured-side block map is the normalized four-axis average
+-- already used by the scalar Poincare theorem.  Qh = 0 therefore supplies,
+-- rather than assumes separately, the componentwise mean-zero premise.
 ------------------------------------------------------------------------
 
 PhysicalBlockAverageZero : PhysicalSU2Tangent4 → Set
@@ -142,10 +143,10 @@ physicalReferenceDifferenceEnergy tangent =
   + bondReferenceDifferenceEnergy (tangent component3))
 
 scaledPhysicalNormIsComponentFold : ∀ tangent →
-  oneSixteenth * physicalUnweightedNormSq tangent
-  ≡ oneSixteenth * bondNormSq (tangent component1)
-    + (oneSixteenth * bondNormSq (tangent component2)
-    + oneSixteenth * bondNormSq (tangent component3))
+  configuredPathCoercivityConstant * physicalUnweightedNormSq tangent
+  ≡ configuredPathCoercivityConstant * bondNormSq (tangent component1)
+    + (configuredPathCoercivityConstant * bondNormSq (tangent component2)
+    + configuredPathCoercivityConstant * bondNormSq (tangent component3))
 scaledPhysicalNormIsComponentFold tangent =
   ℚRing.solve-∀
     (bondNormSq (tangent component1))
@@ -154,7 +155,7 @@ scaledPhysicalNormIsComponentFold tangent =
 
 physicalBlockConstrainedDifferencePoincare :
   ∀ tangent → PhysicalBlockAverageZero tangent →
-  oneSixteenth * physicalUnweightedNormSq tangent
+  configuredPathCoercivityConstant * physicalUnweightedNormSq tangent
   ≤ physicalReferenceDifferenceEnergy tangent
 physicalBlockConstrainedDifferencePoincare tangent blockZero =
   subst
