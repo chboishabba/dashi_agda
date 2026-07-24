@@ -10,10 +10,11 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   (_+R_; _*R_; oneR)
 open import DASHI.Physics.YangMills.BalabanSU2AdjointTransportExact using
   (squareR; vectorNormSqR)
+open import DASHI.Physics.YangMills.BalabanSU2AdjointOrderedReduction using
+  (LessEqual)
 open import DASHI.Physics.YangMills.BalabanSU2AdjointPointwiseRadiusSquared using
-  (SU2AdjointSquaredRadiusOrderLaws; orderedSquares; LessEqual)
-open import DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact using
-  (SU2RadialExponentialChartData)
+  (SU2AdjointSquaredRadiusOrderLaws; orderedSquares)
+import DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact as Chart
 
 ------------------------------------------------------------------------
 -- Minimal authoritative trigonometric surface for the SU(2) radial chart.
@@ -130,21 +131,21 @@ trigRadialImaginarySqBelowRadiusSq {trig = trig} bridge parameter inBall =
 trigRadialExponentialChartData :
   ∀ {radius} {trig : SU2RadialTrigAuthority} →
   SU2RadialParameterBridge radius trig →
-  SU2RadialExponentialChartData radius
+  Chart.SU2RadialExponentialChartData radius
 trigRadialExponentialChartData {trig = trig} bridge = record
-  { radialOrderLaws = radialOrderLaws bridge
-  ; radialParameter = Parameter bridge
-  ; radialParameterX = parameterX bridge
-  ; radialParameterY = parameterY bridge
-  ; radialParameterZ = parameterZ bridge
-  ; radialCosine = λ parameter →
+  { Chart.radialOrderLaws = radialOrderLaws bridge
+  ; Chart.radialParameter = Parameter bridge
+  ; Chart.radialParameterX = parameterX bridge
+  ; Chart.radialParameterY = parameterY bridge
+  ; Chart.radialParameterZ = parameterZ bridge
+  ; Chart.radialCosine = λ parameter →
       cosine trig (parameterRadius bridge parameter)
-  ; radialScale = λ parameter →
+  ; Chart.radialScale = λ parameter →
       sinOverArgument trig (parameterRadius bridge parameter)
-  ; radialInChartBall = inChartBall bridge
-  ; radialUnitIdentity = λ parameter inBall →
+  ; Chart.radialInChartBall = inChartBall bridge
+  ; Chart.radialUnitIdentity = λ parameter inBall →
       trigRadialUnitIdentity bridge parameter
-  ; radialImaginarySqBelowRadiusSq =
+  ; Chart.radialImaginarySqBelowRadiusSq =
       trigRadialImaginarySqBelowRadiusSq bridge
   }
 
