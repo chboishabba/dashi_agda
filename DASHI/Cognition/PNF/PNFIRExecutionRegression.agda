@@ -1,12 +1,13 @@
 module DASHI.Cognition.PNF.PNFIRExecutionRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
 open import Data.List.Base using ([]; _∷_)
 
+import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Cognition.PNF.CandidateInvalidation as Invalidation
 import DASHI.Cognition.PNF.OperationalIR as IR
 import DASHI.Cognition.PNF.OperationalIRExecution as Execution
+import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.FibreLearningDynamics as FibreLearning
 import DASHI.Cognition.PNF.LearningAlgebra as Learning
 import DASHI.Cognition.PNF.PNFIRLearningRegression as Fixture
@@ -20,9 +21,10 @@ invalidJurisdictionReceipt =
     "candidate jurisdiction does not match the operational frame"
 
 invalidatedCandidateState :
-  Invalidation.invalidatedCandidate invalidJurisdictionReceipt
-    ≡ Invalidation.invalidatedCandidate invalidJurisdictionReceipt
-invalidatedCandidateState = refl
+  PNF.validity (Invalidation.invalidatedCandidate invalidJurisdictionReceipt)
+    ≡ PNF.invalid
+invalidatedCandidateState =
+  Invalidation.invalidatedCandidateIsInvalid invalidJurisdictionReceipt
 
 tenantPermissionRule : Execution.IRRule
 tenantPermissionRule =
@@ -63,12 +65,14 @@ withinFibreUpdate =
 withinFibrePublicCategoryStable :
   FibreLearning.publicLabelAfter withinFibreUpdate
     ≡ FibreLearning.publicLabelBefore withinFibreUpdate
-withinFibrePublicCategoryStable = refl
+withinFibrePublicCategoryStable =
+  FibreLearning.publicCategoryPreserved withinFibreUpdate
 
 withinFibreRememberedPNFStable :
+  Memory.rememberedEvent (FibreLearning.after withinFibreUpdate)
+    ≡ Memory.rememberedEvent (FibreLearning.before withinFibreUpdate)
+withinFibreRememberedPNFStable =
   FibreLearning.rememberedPNFPreserved withinFibreUpdate
-    ≡ FibreLearning.rememberedPNFPreserved withinFibreUpdate
-withinFibreRememberedPNFStable = refl
 
 selectedQuinticHasComplexDimensionThree :
   Quintic.hypersurfaceComplexDimension Quintic.quinticThreefoldCandidate ≡ 3
