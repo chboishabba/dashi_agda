@@ -3,19 +3,14 @@ name: YM Clay analytic inhabitation
 on:
   push:
     branches:
-      - 'agent/ym-periodic-fourier-physical-foundation'
+      - 'agent/ym-periodic-physical-closure'
     paths:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticConcreteDefinitions.agda'
       - 'DASHI/Physics/YangMills/BalabanExactPatchTransferCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReductionRegression.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicTorus4Carrier.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicTorus4Fourier.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicDifferenceSymbols.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicBlockSymbolGap.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicFiniteFourierHodgeCertificate.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicFourierHodgeRegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanPeriodic*.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
@@ -31,6 +26,7 @@ on:
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'scripts/check_ym_unconditional_gate.py'
       - 'scripts/check_ym_periodic_fourier_foundation.py'
+      - 'scripts/check_ym_periodic_physical_closure.py'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   pull_request:
     paths:
@@ -39,12 +35,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanBulkPropagatorAnalyticInhabitation.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReduction.agda'
       - 'DASHI/Physics/YangMills/BalabanFiniteFourierHodgeReductionRegression.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicTorus4Carrier.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicTorus4Fourier.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicDifferenceSymbols.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicBlockSymbolGap.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicFiniteFourierHodgeCertificate.agda'
-      - 'DASHI/Physics/YangMills/BalabanPeriodicFourierHodgeRegression.agda'
+      - 'DASHI/Physics/YangMills/BalabanPeriodic*.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAnalyticAuthorities.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedAuthorityAdapters.agda'
       - 'DASHI/Physics/YangMills/BalabanPublishedSourceTheoremAuthorities.agda'
@@ -60,6 +51,7 @@ on:
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'scripts/check_ym_unconditional_gate.py'
       - 'scripts/check_ym_periodic_fourier_foundation.py'
+      - 'scripts/check_ym_periodic_physical_closure.py'
       - '.github/workflows/ym-clay-analytic-inhabitation.yml'
   workflow_dispatch:
 
@@ -73,6 +65,8 @@ jobs:
         run: python3 scripts/check_ym_unconditional_gate.py
       - name: Audit periodic finite-Fourier foundation
         run: python3 scripts/check_ym_periodic_fourier_foundation.py
+      - name: Audit periodic physical closure
+        run: python3 scripts/check_ym_periodic_physical_closure.py
       - uses: DeterminateSystems/nix-installer-action@main
       - name: Typecheck periodic four-torus carrier
         run: |
@@ -88,6 +82,13 @@ jobs:
             agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
               DASHI/Physics/YangMills/BalabanPeriodicTorus4Fourier.agda
           '
+      - name: Typecheck physical Fourier normalization matching
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicFourierNormalizationMatching.agda
+          '
       - name: Typecheck difference symbols
         run: |
           nix develop --accept-flake-config --command bash -lc '
@@ -102,6 +103,20 @@ jobs:
             agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
               DASHI/Physics/YangMills/BalabanPeriodicBlockSymbolGap.agda
           '
+      - name: Typecheck physical constraint matching
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicPhysicalConstraintMatching.agda
+          '
+      - name: Typecheck local block gap inhabitation
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicLocalBlockGapInhabitation.agda
+          '
       - name: Typecheck physical Hodge adapter
         run: |
           nix develop --accept-flake-config --command bash -lc '
@@ -115,6 +130,41 @@ jobs:
             set -euo pipefail
             agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
               DASHI/Physics/YangMills/BalabanPeriodicFourierHodgeRegression.agda
+          '
+      - name: Typecheck periodic bulk Hessian and Green closure
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicBulkHessianGreenClosure.agda
+          '
+      - name: Typecheck periodic physical closure regression
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicPhysicalClosureRegression.agda
+          '
+      - name: Typecheck periodic patch Green transfer
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicPatchGreenTransfer.agda
+          '
+      - name: Typecheck periodic patch Green regression
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicPatchGreenTransferRegression.agda
+          '
+      - name: Typecheck periodic constructive completion spine
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/BalabanPeriodicConstructiveCompletionSpine.agda
           '
       - name: Typecheck finite Fourier Hodge reduction
         run: |

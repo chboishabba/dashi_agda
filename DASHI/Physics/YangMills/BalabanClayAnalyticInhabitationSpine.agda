@@ -14,6 +14,29 @@ import DASHI.Physics.YangMills.BalabanPeriodicTorus4Fourier
 import DASHI.Physics.YangMills.BalabanPeriodicDifferenceSymbols
 import DASHI.Physics.YangMills.BalabanPeriodicBlockSymbolGap
 import DASHI.Physics.YangMills.BalabanPeriodicFiniteFourierHodgeCertificate
+import DASHI.Physics.YangMills.BalabanPeriodicFourierNormalizationMatching
+import DASHI.Physics.YangMills.BalabanPeriodicPhysicalConstraintMatching
+import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact
+import DASHI.Physics.YangMills.BalabanBoolean4PhysicalBlockLiftExact
+import DASHI.Physics.YangMills.BalabanPath3PoincareExact
+import DASHI.Physics.YangMills.BalabanRationalLDLCertificate
+import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate
+import DASHI.Physics.YangMills.BalabanFourDimensionalLDLTensorization
+import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact
+import DASHI.Physics.YangMills.BalabanSU2AdjointTransportExact
+import DASHI.Physics.YangMills.BalabanSU2AdjointOrderedReduction
+import DASHI.Physics.YangMills.BalabanSU2TransportTelescopingExact
+import DASHI.Physics.YangMills.BalabanSU2TransportPathNormBound
+import DASHI.Physics.YangMills.BalabanDyadicQuantitativeRegionExact
+import DASHI.Physics.YangMills.BalabanWilsonRGCoefficientCombinatoricsExact
+import DASHI.Physics.YangMills.BalabanCollarPatchResidualBudgetExact
+import DASHI.Physics.YangMills.BalabanDyadicTerminalScaleExact
+import DASHI.Physics.YangMills.BalabanTerminalScalePhysicalClustering
+import DASHI.Physics.YangMills.BalabanTerminalKPPhysicalScaleAssembly
+import DASHI.Physics.YangMills.BalabanPeriodicLocalBlockGapInhabitation
+import DASHI.Physics.YangMills.BalabanPeriodicBulkHessianGreenClosure
+import DASHI.Physics.YangMills.BalabanPeriodicPatchGreenTransfer
+import DASHI.Physics.YangMills.BalabanPeriodicConstructiveCompletionSpine
 import DASHI.Physics.YangMills.BalabanPublishedAnalyticAuthorities
 import DASHI.Physics.YangMills.BalabanPublishedAuthorityAdapters
 import DASHI.Physics.YangMills.BalabanPublishedSourceTheoremAuthorities
@@ -25,7 +48,7 @@ import DASHI.Physics.YangMills.BalabanUniformPhysicalMassGapAnalyticInhabitation
 import DASHI.Physics.YangMills.BalabanUnconditionalSolutionCertificate
 
 ------------------------------------------------------------------------
--- One fail-closed status ledger for the complete attached mathematical cutset.
+-- One fail-closed status ledger for the complete mathematical cutset.
 ------------------------------------------------------------------------
 
 bulkFiniteBackgroundAssemblyLevel : ProofLevel
@@ -40,6 +63,9 @@ periodicFiniteFourierDefinitionLevel = machineChecked
 periodicFiniteAbelianFourierAuthorityLevel : ProofLevel
 periodicFiniteAbelianFourierAuthorityLevel = standardImported
 
+periodicFourierNormalizationMatchingLevel : ProofLevel
+periodicFourierNormalizationMatchingLevel = machineChecked
+
 periodicDifferenceDefinitionLevel : ProofLevel
 periodicDifferenceDefinitionLevel = machineChecked
 
@@ -49,11 +75,161 @@ periodicDifferenceFourierAuthorityLevel = standardImported
 periodicConstraintRemovalAssemblyLevel : ProofLevel
 periodicConstraintRemovalAssemblyLevel = machineChecked
 
+periodicPhysicalConstraintAdapterLevel : ProofLevel
+periodicPhysicalConstraintAdapterLevel = machineChecked
+
+periodicPhysicalConstraintFourierInputLevel : ProofLevel
+periodicPhysicalConstraintFourierInputLevel = conditional
+
+periodicLocalBlockGapAssemblyLevel : ProofLevel
+periodicLocalBlockGapAssemblyLevel = machineChecked
+
+periodicHighFrequencyTrigonometricInputLevel : ProofLevel
+periodicHighFrequencyTrigonometricInputLevel = standardImported
+
 periodicLocalBlockGapInputLevel : ProofLevel
 periodicLocalBlockGapInputLevel = conditional
 
+boolean4ExactLocalGapLevel : ProofLevel
+boolean4ExactLocalGapLevel = machineChecked
+
+boolean4TranslatedHaloHodgeLiftLevel : ProofLevel
+boolean4TranslatedHaloHodgeLiftLevel = machineChecked
+
+boolean4PhysicalSpacingNormalizationLevel : ProofLevel
+boolean4PhysicalSpacingNormalizationLevel = machineChecked
+
+path3ExactOneDimensionalGapLevel : ProofLevel
+path3ExactOneDimensionalGapLevel = machineChecked
+
+arbitraryLengthLDLCertificateConsumerLevel : ProofLevel
+arbitraryLengthLDLCertificateConsumerLevel = machineChecked
+
+path4GeneratedLDLConsumptionLevel : ProofLevel
+path4GeneratedLDLConsumptionLevel = machineChecked
+
+fourDimensionalLDLTensorizationAssemblyLevel : ProofLevel
+fourDimensionalLDLTensorizationAssemblyLevel = machineChecked
+
+physicalFourDimensionalFibreDecompositionLevel : ProofLevel
+physicalFourDimensionalFibreDecompositionLevel = conditional
+
+arbitraryFixedSideTensorizationLevel : ProofLevel
+arbitraryFixedSideTensorizationLevel = conditional
+
+regularFourDimensionalHaloOverlapCountLevel : ProofLevel
+regularFourDimensionalHaloOverlapCountLevel = machineChecked
+
+physicalBlockOriginOffsetBijectionLevel : ProofLevel
+physicalBlockOriginOffsetBijectionLevel = conditional
+
+physicalHaloOverlapCountingLevel : ProofLevel
+physicalHaloOverlapCountingLevel = conditional
+
 periodicFiniteFourierHodgeAdapterLevel : ProofLevel
 periodicFiniteFourierHodgeAdapterLevel = machineChecked
+
+su2AdjointExactDisplacementLevel : ProofLevel
+su2AdjointExactDisplacementLevel = machineChecked
+
+su2AdjointDiscardedSquareIdentityLevel : ProofLevel
+su2AdjointDiscardedSquareIdentityLevel = computed
+
+su2AdjointOrderedSquareReductionLevel : ProofLevel
+su2AdjointOrderedSquareReductionLevel = machineChecked
+
+su2ImaginaryPartAndNormPassageLevel : ProofLevel
+su2ImaginaryPartAndNormPassageLevel = conditional
+
+su2TransportTelescopingLevel : ProofLevel
+su2TransportTelescopingLevel = machineChecked
+
+su2TransportPathLengthAssemblyLevel : ProofLevel
+su2TransportPathLengthAssemblyLevel = machineChecked
+
+su2OneLinkOrderedRadiusLevel : ProofLevel
+su2OneLinkOrderedRadiusLevel = conditional
+
+candidateDyadicQuantitativeRegionLevel : ProofLevel
+candidateDyadicQuantitativeRegionLevel = computed
+
+wilsonRGIncidenceCoefficientArithmeticLevel : ProofLevel
+wilsonRGIncidenceCoefficientArithmeticLevel = computed
+
+literalWilsonRGOperatorCoefficientEstimateLevel : ProofLevel
+literalWilsonRGOperatorCoefficientEstimateLevel = conditional
+
+physicalHessianCoefficientDerivationLevel : ProofLevel
+physicalHessianCoefficientDerivationLevel = conditional
+
+physicalSevenNonlinearCoefficientDerivationLevel : ProofLevel
+physicalSevenNonlinearCoefficientDerivationLevel = conditional
+
+candidateCollarResidualArithmeticLevel : ProofLevel
+candidateCollarResidualArithmeticLevel = computed
+
+physicalCollarSchurDerivationLevel : ProofLevel
+physicalCollarSchurDerivationLevel = conditional
+
+periodicFivePerturbationAssemblyLevel : ProofLevel
+periodicFivePerturbationAssemblyLevel = machineChecked
+
+periodicFivePerturbationInputLevel : ProofLevel
+periodicFivePerturbationInputLevel = conditional
+
+periodicFullHessianCoercivityAssemblyLevel : ProofLevel
+periodicFullHessianCoercivityAssemblyLevel = machineChecked
+
+periodicFiniteCoerciveInverseInputLevel : ProofLevel
+periodicFiniteCoerciveInverseInputLevel = standardImported
+
+periodicBulkGreenKernelInputLevel : ProofLevel
+periodicBulkGreenKernelInputLevel = standardImported
+
+periodicPatchTransferAssemblyLevel : ProofLevel
+periodicPatchTransferAssemblyLevel = machineChecked
+
+periodicConcretePatchGeometryInputLevel : ProofLevel
+periodicConcretePatchGeometryInputLevel = conditional
+
+periodicConstructiveCompletionSpineAssemblyLevel : ProofLevel
+periodicConstructiveCompletionSpineAssemblyLevel = machineChecked
+
+periodicPatchResidualInputLevel : ProofLevel
+periodicPatchResidualInputLevel = conditional
+
+periodicOneStepAllScaleInputLevel : ProofLevel
+periodicOneStepAllScaleInputLevel = conditional
+
+normalizedDyadicTerminalSpacingLevel : ProofLevel
+normalizedDyadicTerminalSpacingLevel = machineChecked
+
+physicalRunningCouplingScaleMatchingLevel : ProofLevel
+physicalRunningCouplingScaleMatchingLevel = conditional
+
+dimensionalTransmutationScaleMatchingLevel : ProofLevel
+dimensionalTransmutationScaleMatchingLevel = conjectural
+
+terminalKPPhysicalScaleAssemblyLevel : ProofLevel
+terminalKPPhysicalScaleAssemblyLevel = machineChecked
+
+terminalStepVClusterCarrierMatchingLevel : ProofLevel
+terminalStepVClusterCarrierMatchingLevel = conditional
+
+terminalPhysicalClusteringAssemblyLevel : ProofLevel
+terminalPhysicalClusteringAssemblyLevel = machineChecked
+
+terminalPolymerClusteringInputLevel : ProofLevel
+terminalPolymerClusteringInputLevel = conditional
+
+terminalPhysicalScaleComparisonInputLevel : ProofLevel
+terminalPhysicalScaleComparisonInputLevel = conditional
+
+periodicThermodynamicContinuumInputLevel : ProofLevel
+periodicThermodynamicContinuumInputLevel = conjectural
+
+periodicPhysicalGapInputLevel : ProofLevel
+periodicPhysicalGapInputLevel = conjectural
 
 finiteFourierHodgeReductionLevel : ProofLevel
 finiteFourierHodgeReductionLevel = machineChecked

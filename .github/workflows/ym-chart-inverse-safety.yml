@@ -1,0 +1,48 @@
+name: YM chart and inverse safety
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanRestrictedFluctuationCoordinateBijection.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteConstrainedInverseApplicability.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_chart_inverse_safety.py'
+      - '.github/workflows/ym-chart-inverse-safety.yml'
+  push:
+    branches:
+      - 'agent/ym-periodic-physical-closure'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanRestrictedFluctuationCoordinateBijection.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteConstrainedInverseApplicability.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'scripts/check_ym_chart_inverse_safety.py'
+      - '.github/workflows/ym-chart-inverse-safety.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit proof safety
+        run: python3 scripts/check_ym_chart_inverse_safety.py
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Typecheck restricted fluctuation chart
+        run: >-
+          nix develop --accept-flake-config --command
+          agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+          DASHI/Physics/YangMills/BalabanRestrictedFluctuationCoordinateBijection.agda
+      - name: Typecheck finite constrained inverse applicability
+        run: >-
+          nix develop --accept-flake-config --command
+          agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+          DASHI/Physics/YangMills/BalabanFiniteConstrainedInverseApplicability.agda
+      - name: Typecheck focused aggregate
+        run: >-
+          nix develop --accept-flake-config --command
+          agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+          DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda
