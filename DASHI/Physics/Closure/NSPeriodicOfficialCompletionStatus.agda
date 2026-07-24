@@ -77,6 +77,40 @@ weightedEnvelopeLimitTransportReductionLevel = machineChecked
 weightedEnvelopeContinuumAdapterStatusLevel : ProofLevel
 weightedEnvelopeContinuumAdapterStatusLevel = machineChecked
 
+-- Concrete carrier and post-cutset reductions.
+concreteCutoffCubeCarrierStatusLevel : ProofLevel
+concreteCutoffCubeCarrierStatusLevel = machineChecked
+
+concreteIntegerModeNormStatusLevel : ProofLevel
+concreteIntegerModeNormStatusLevel = machineChecked
+
+concreteOfficialNormWeightsStatusLevel : ProofLevel
+concreteOfficialNormWeightsStatusLevel = machineChecked
+
+canonicalNearYoungAllocationStatusLevel : ProofLevel
+canonicalNearYoungAllocationStatusLevel = machineChecked
+
+concreteCandidateBudgetArithmeticStatusLevel : ProofLevel
+concreteCandidateBudgetArithmeticStatusLevel = machineChecked
+
+compactGammaPDEBalanceStatusLevel : ProofLevel
+compactGammaPDEBalanceStatusLevel = machineChecked
+
+canonicalThreeBoundaryTupleStatusLevel : ProofLevel
+canonicalThreeBoundaryTupleStatusLevel = machineChecked
+
+observableDerivativeBoundReductionStatusLevel : ProofLevel
+observableDerivativeBoundReductionStatusLevel = machineChecked
+
+diffuseLowHighSplitStatusLevel : ProofLevel
+diffuseLowHighSplitStatusLevel = machineChecked
+
+chartFailureAnalyticRoutesStatusLevel : ProofLevel
+chartFailureAnalyticRoutesStatusLevel = machineChecked
+
+fixedShellFiniteRankConvergenceStatusLevel : ProofLevel
+fixedShellFiniteRankConvergenceStatusLevel = machineChecked
+
 -- Remaining official-carrier theorem packages.
 officialNormIdentificationLevel : ProofLevel
 officialNormIdentificationLevel = conditional
