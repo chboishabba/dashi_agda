@@ -99,6 +99,9 @@ path4BondReferenceHodgeCoercivityLevel = machineChecked
 path4SU2PhysicalTangentCarrierLevel : ProofLevel
 path4SU2PhysicalTangentCarrierLevel = machineChecked
 
+physicalPositiveBondEnumeration4DuplicateFreeLevel : ProofLevel
+physicalPositiveBondEnumeration4DuplicateFreeLevel = machineChecked
+
 physicalTangentNormMatchesBondNormLevel : ProofLevel
 physicalTangentNormMatchesBondNormLevel = machineChecked
 
