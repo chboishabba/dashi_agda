@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; _+_; _≤_)
+open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -11,6 +11,8 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
+open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate using
+  (oneSixteenth)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact
 open import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact
 open import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact
