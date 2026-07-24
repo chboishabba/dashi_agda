@@ -94,27 +94,32 @@ record SU2RadialExponentialChartData (radius : ℝ) : Set₁ where
 
 open SU2RadialExponentialChartData public
 
-radialExpReal : ∀ {radius} → SU2RadialExponentialChartData radius →
-  chartParameter → ℝ
+radialExpReal : ∀ {radius}
+  (dataSet : SU2RadialExponentialChartData radius) →
+  chartParameter dataSet → ℝ
 radialExpReal dataSet = radialCosine dataSet
 
-radialExpI : ∀ {radius} → SU2RadialExponentialChartData radius →
-  chartParameter → ℝ
+radialExpI : ∀ {radius}
+  (dataSet : SU2RadialExponentialChartData radius) →
+  chartParameter dataSet → ℝ
 radialExpI dataSet parameter =
   radialScale dataSet parameter *R parameterX dataSet parameter
 
-radialExpJ : ∀ {radius} → SU2RadialExponentialChartData radius →
-  chartParameter → ℝ
+radialExpJ : ∀ {radius}
+  (dataSet : SU2RadialExponentialChartData radius) →
+  chartParameter dataSet → ℝ
 radialExpJ dataSet parameter =
   radialScale dataSet parameter *R parameterY dataSet parameter
 
-radialExpK : ∀ {radius} → SU2RadialExponentialChartData radius →
-  chartParameter → ℝ
+radialExpK : ∀ {radius}
+  (dataSet : SU2RadialExponentialChartData radius) →
+  chartParameter dataSet → ℝ
 radialExpK dataSet parameter =
   radialScale dataSet parameter *R parameterZ dataSet parameter
 
 radialExponentialUnitQuaternion :
-  ∀ {radius} (dataSet : SU2RadialExponentialChartData radius) parameter →
+  ∀ {radius} (dataSet : SU2RadialExponentialChartData radius)
+    (parameter : chartParameter dataSet) →
   inChartBall dataSet parameter →
   qNormSqR
     (radialExpReal dataSet parameter)
@@ -133,7 +138,8 @@ radialExponentialUnitQuaternion dataSet parameter inBall =
     (radialUnitIdentity dataSet parameter inBall)
 
 radialExponentialImaginarySqBelowRadiusSq :
-  ∀ {radius} (dataSet : SU2RadialExponentialChartData radius) parameter →
+  ∀ {radius} (dataSet : SU2RadialExponentialChartData radius)
+    (parameter : chartParameter dataSet) →
   inChartBall dataSet parameter →
   LessEqual (orderedSquares (radiusOrderLaws dataSet))
     (imaginaryNormSqR
@@ -168,7 +174,7 @@ radialDataToPointwiseExponentialMatch dataSet = record
 
 radialExponentialAdjointDisplacementRadiusSq :
   ∀ {radius} (dataSet : SU2RadialExponentialChartData radius) →
-  ∀ parameter x y z →
+  ∀ (parameter : chartParameter dataSet) x y z →
   inChartBall dataSet parameter →
   LessEqual (orderedSquares (radiusOrderLaws dataSet))
     (adjointDisplacementSqR
