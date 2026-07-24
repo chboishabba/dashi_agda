@@ -3,16 +3,21 @@ name: Elementary single-operator extended
 on:
   pull_request:
     paths:
+      - 'DASHI/Analysis/*.agda'
       - 'DASHI/Foundations/ElementarySingleOperator.agda'
       - 'DASHI/Foundations/EML*.agda'
       - 'DASHI/Foundations/ElementaryCalculator*.agda'
+      - 'DASHI/Foundations/OrdinaryCalculatorLedger.agda'
+      - 'DASHI/Foundations/Odrzywolek*.agda'
       - 'DASHI/Foundations/Ternary*.agda'
       - 'DASHI/Foundations/SpectralCountingComplexity.agda'
       - 'DASHI/Foundations/DivergenceComparisonPackage.agda'
       - 'DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda'
       - 'DASHI/Algebra/Quantum/BraKet.agda'
       - 'DASHI/Algebra/Quantum/TernaryCircuit.agda'
-      - 'DASHI/Algebra/Quantum/QutritUnitaryBridge.agda'
+      - 'DASHI/Algebra/Quantum/Qutrit*.agda'
+      - 'DASHI/Algebra/Quantum/ConcreteQutritScalar.agda'
+      - 'DASHI/Algebra/Quantum/OrdinaryComplexQutrit*.agda'
       - 'DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda'
       - 'DASHI/Unified/StructuralComplexitySurvivalBundle.agda'
       - 'scripts/search_ternary_elementary_candidates.py'
@@ -26,7 +31,7 @@ permissions:
 jobs:
   audit-and-typecheck:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
@@ -34,11 +39,25 @@ jobs:
         run: python3 scripts/check_elementary_single_operator_extended.py
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
-      - name: Typecheck extended EML and structural-complexity tranche
+      - name: Typecheck EML, ordinary analysis, and qutrit tranche
         run: |
           nix develop .# --command bash -lc '
             set -euo pipefail
             AGDA="agda -i . -l standard-library"
+            $AGDA DASHI/Analysis/FastCauchyReals.agda
+            $AGDA DASHI/Analysis/FastCauchySetoid.agda
+            $AGDA DASHI/Analysis/FastCauchyOrder.agda
+            $AGDA DASHI/Analysis/FastCauchyArithmetic.agda
+            $AGDA DASHI/Analysis/FastCauchyQuotient.agda
+            $AGDA DASHI/Analysis/CanonicalRationalMetric.agda
+            $AGDA DASHI/Analysis/ConstructiveSeries.agda
+            $AGDA DASHI/Analysis/OrdinaryTranscendentalRealization.agda
+            $AGDA DASHI/Analysis/PowerSeriesTranscendentals.agda
+            $AGDA DASHI/Analysis/ConstructiveIntermediateValue.agda
+            $AGDA DASHI/Analysis/InverseLogarithmFromExponential.agda
+            $AGDA DASHI/Analysis/PrincipalComplexLogRealization.agda
+            $AGDA DASHI/Analysis/OrdinaryComplexPolar.agda
+            $AGDA DASHI/Analysis/OrdinaryAnalysisBundle.agda
             $AGDA DASHI/Foundations/ElementarySingleOperator.agda
             $AGDA DASHI/Foundations/EMLAnalyticDomain.agda
             $AGDA DASHI/Foundations/EMLPositiveRealAnalyticPackage.agda
@@ -47,6 +66,8 @@ jobs:
             $AGDA DASHI/Foundations/ElementaryCalculator.agda
             $AGDA DASHI/Foundations/ElementaryCalculatorSemantics.agda
             $AGDA DASHI/Foundations/ElementaryCalculatorAnalyticPackage.agda
+            $AGDA DASHI/Foundations/ElementaryCalculatorDomains.agda
+            $AGDA DASHI/Foundations/OrdinaryCalculatorLedger.agda
             $AGDA DASHI/Foundations/ElementaryCalculatorSmokeModel.agda
             $AGDA DASHI/Foundations/TernaryElementaryOperatorCandidate.agda
             $AGDA DASHI/Foundations/TernaryWitnessIndependentRepresentation.agda
@@ -55,14 +76,12 @@ jobs:
             $AGDA DASHI/Foundations/TernaryElementaryBoundedEnumeration.agda
             $AGDA DASHI/Foundations/TernaryElementarySearchCertificate.agda
             $AGDA DASHI/Foundations/TernaryElementarySearchSoundness.agda
+            $AGDA DASHI/Foundations/OdrzywolekGeneratedUnitObstruction.agda
+            $AGDA DASHI/Foundations/OdrzywolekGlobalDecision.agda
             $AGDA DASHI/Foundations/TernaryElementarySearchSmokeModel.agda
-            $AGDA DASHI/Foundations/SpectralCountingComplexity.agda
-            $AGDA DASHI/Foundations/DivergenceComparisonPackage.agda
-            $AGDA DASHI/Physics/NavierStokes/DissipationNullComputationalCarrier.agda
-            $AGDA DASHI/Algebra/Quantum/BraKet.agda
-            $AGDA DASHI/Algebra/Quantum/TernaryCircuit.agda
-            $AGDA DASHI/Algebra/Quantum/QutritUnitaryBridge.agda
-            $AGDA DASHI/Promotion/FiniteTernaryQuantumCircuitAdapter.agda
+            $AGDA DASHI/Algebra/Quantum/QutritPermutationUnitary.agda
+            $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutrit.agda
+            $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutritUnitary.agda
             $AGDA DASHI/Foundations/ElementarySingleOperatorExtendedRegression.agda
             $AGDA DASHI/Foundations/ElementarySingleOperatorBundle.agda
             $AGDA DASHI/Unified/StructuralComplexitySurvivalBundle.agda
