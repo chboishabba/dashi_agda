@@ -23,6 +23,8 @@ import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
+import DASHI.Physics.YangMills.BalabanSU2AdjointPointwiseRadiusSquared
+import DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact
 import DASHI.Physics.YangMills.BalabanNonlinearDifferenceIdentitiesExact
 import DASHI.Physics.YangMills.BalabanQuadraticOperatorPerturbationExact
 import DASHI.Physics.YangMills.BalabanMultilinearLipschitzCalculus
@@ -109,8 +111,23 @@ physicalOriginWilsonContainmentMatchLevel = conditional
 su2SquaredRadiusTransportLevel : ProofLevel
 su2SquaredRadiusTransportLevel = machineChecked
 
+su2PointwiseRadiusInterfaceRepairLevel : ProofLevel
+su2PointwiseRadiusInterfaceRepairLevel = machineChecked
+
+su2RadialQuaternionAlgebraLevel : ProofLevel
+su2RadialQuaternionAlgebraLevel = computed
+
+su2RadialExponentialChartReductionLevel : ProofLevel
+su2RadialExponentialChartReductionLevel = machineChecked
+
 su2ExponentialChartRadiusInputLevel : ProofLevel
 su2ExponentialChartRadiusInputLevel = conditional
+
+su2RadialScalarUnitIdentityLevel : ProofLevel
+su2RadialScalarUnitIdentityLevel = conditional
+
+su2RadialScalarRadiusBoundLevel : ProofLevel
+su2RadialScalarRadiusBoundLevel = conditional
 
 quadraticOperatorExpansionLevel : ProofLevel
 quadraticOperatorExpansionLevel = machineChecked
