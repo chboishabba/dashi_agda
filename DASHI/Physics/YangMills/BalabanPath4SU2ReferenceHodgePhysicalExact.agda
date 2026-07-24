@@ -8,7 +8,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
   (baseBelowBasePlusRemainder)
-open import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact using
+open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate using
   (oneSixteenth)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian
