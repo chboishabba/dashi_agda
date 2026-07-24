@@ -260,7 +260,6 @@ producer-replenishment-absorption :
     (_+_ A (dissipationIntegral P) (forcingAndDataRemainder P))
 producer-replenishment-absorption L P =
   ≤-refl L
-    (_+_ A (dissipationIntegral P) (forcingAndDataRemainder P))
 
 ------------------------------------------------------------------------
 -- End-to-end highest-alpha conclusions from the pointwise differential theorem.
