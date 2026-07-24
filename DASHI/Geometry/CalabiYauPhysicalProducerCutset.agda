@@ -66,6 +66,17 @@ record EffectiveSpectrumAuthority (model : ConcreteCompactCalabiYau) : Set₁ wh
 
 open EffectiveSpectrumAuthority public
 
+record PhysicalCouplingAuthority
+    (model : ConcreteCompactCalabiYau)
+    (spectrum : EffectiveSpectrumAuthority model) : Set₁ where
+  field
+    CouplingValue : Set
+    fibreOverlap :
+      State spectrum → State spectrum → State spectrum → CouplingValue
+    fibreIntegralReceipt normalisationReceipt physicalUnitReceipt : String
+
+open PhysicalCouplingAuthority public
+
 record AnomalyCancellationAuthority (model : ConcreteCompactCalabiYau) : Set₁ where
   field
     GaugeBundle AnomalyClass : Set
@@ -91,6 +102,7 @@ record PhysicalCompactificationChain : Set₁ where
     stabilization : ModuliStabilizationAuthority model
     reduction : DimensionalReductionAuthority model
     spectrum : EffectiveSpectrumAuthority model
+    couplings : PhysicalCouplingAuthority model spectrum
     anomalyCancellation : AnomalyCancellationAuthority model
     predictionAuthority : ObservationalPredictionAuthority model
     chainReceipt : String
