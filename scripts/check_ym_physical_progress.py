@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit for the physical fibre, polymer and RG progress tranche."""
+"""Fail-closed audit for the physical fibre, coercivity, polymer and RG tranche."""
 
 from __future__ import annotations
 
@@ -24,6 +24,25 @@ FILES: dict[Path, tuple[str, ...]] = {
         "physicalFibreEnumerationDuplicateFree",
         "physicalPositiveEdgesDuplicateFree",
         "physicalPositiveEdgesDuplicateFreeLevel = machineChecked",
+    ),
+    YM / "BalabanPath4AxisAverageNormContractionExact.agda": (
+        "axisAveragePythagoras",
+        "axisAverageNormContraction",
+        "path4AxisAveragePythagorasLevel = machineChecked",
+        "path4AxisAverageNormContractionLevel = machineChecked",
+    ),
+    YM / "BalabanPath4DirectionalEnergyContractionExact.agda": (
+        "axisAverageCommutesWithDistinctEdgeDifference",
+        "globalEdgeDifferenceNormFourfold",
+        "fourTimesDirectionalEnergyContraction",
+        "distinctAxisDirectionalEnergyContraction",
+        "path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked",
+    ),
+    YM / "BalabanPath4GlobalPoincareExact.agda": (
+        "axisCenteringDirectionalEnergyExact",
+        "path4MartingaleDirectionalEnergyContraction",
+        "path4GlobalPoincare",
+        "path4GlobalPoincareLevel = machineChecked",
     ),
     YM / "BalabanPhysicalHaloOriginExact.agda": (
         "cyclicPredecessor",
@@ -72,8 +91,11 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
     YM / "BalabanPhysicalProgressLedger.agda": (
         "literalPhysicalBlockDistinctnessLevel = machineChecked",
+        "path4AxisAverageNormContractionLevel = machineChecked",
+        "path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked",
+        "path4ScalarGlobalPoincareLevel = machineChecked",
+        "physicalBondHodgeIdentificationLevel = conditional",
         "literalPhysicalHaloOriginLevel = machineChecked",
-        "commutingProjectionOrthogonalityLevel = machineChecked",
         "literalFiveWilsonOperatorBoundsLevel = conditional",
         "physicalTerminalOffsetBoundLevel = conjectural",
     ),
@@ -157,7 +179,7 @@ def main() -> None:
     for path, required in SCRIPTS.items():
         audit_text(path, required, forbid=False)
     audit_generated_physical_bridge()
-    print("Physical fibre, polymer and RG progress remains exact and fail-closed.")
+    print("Physical fibre, scalar coercivity, polymer and RG progress remains exact and fail-closed.")
 
 
 if __name__ == "__main__":
