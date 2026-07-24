@@ -2,7 +2,9 @@ module DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational using (ℚ; _*_; _≤_)
+open import Data.Rational using
+  (ℚ; 0ℚ; _*_; _≤_; _<_; Positive)
+import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -50,6 +52,16 @@ configuredPathCoercivityConstantIsOneSixteenth :
   configuredPathCoercivityConstant ≡ oneSixteenth
 configuredPathCoercivityConstantIsOneSixteenth = refl
 
+configuredPathCoercivityConstantPositive :
+  0ℚ < configuredPathCoercivityConstant
+configuredPathCoercivityConstantPositive =
+  let
+    instance
+      oneSixteenthPositive : Positive oneSixteenth
+      oneSixteenthPositive = ℚP.normalize-pos 1 16
+  in
+  ℚP.positive⁻¹ configuredPathCoercivityConstant
+
 configuredRGPathPoincare : ∀ coordinate →
   configuredPathCoercivityConstant * path4NormSq coordinate
   ≤ path4Energy coordinate
@@ -60,6 +72,9 @@ configuredRGSideSelectionLevel = machineChecked
 
 configuredRGSideCertificateLevel : ProofLevel
 configuredRGSideCertificateLevel = machineChecked
+
+configuredRGCoercivityConstantPositiveLevel : ProofLevel
+configuredRGCoercivityConstantPositiveLevel = machineChecked
 
 arbitraryRGSideClaimLevel : ProofLevel
 arbitraryRGSideClaimLevel = conditional
