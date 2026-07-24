@@ -50,19 +50,14 @@ record ConcreteCoefficientUnitaryWeightInputs
 
 open ConcreteCoefficientUnitaryWeightInputs public
 
-literalL2Weight literalH1Weight literalShellWeight :
+literalL2Weight literalH1Weight :
   ∀ {A : AbsorptionArithmetic} →
   ConcreteCoefficientUnitaryWeightInputs A →
   Nat → Z3.FourierMode → Scalar A
 literalL2Weight W = coefficientNormSquared W
 literalH1Weight W N k =
   multiply W (modeNormSquared W k) (coefficientNormSquared W N k)
-literalShellWeight W shell k =
-  multiply W
-    (shellMultiplierSquared W shell k)
-    (coefficientNormSquared W shell k)
 
--- The shell fold uses the cutoff parameter and shell index separately.
 literalShellWeightAt :
   ∀ {A : AbsorptionArithmetic} →
   ConcreteCoefficientUnitaryWeightInputs A →
@@ -102,7 +97,7 @@ literalShellWeightNegationInvariant W N shell k =
 
 record ConcreteOfficialRealityCompatible
     {A : AbsorptionArithmetic}
-    (W : ConcreteCoefficientUnitaryWeightInputs A) : Set₁ where
+    (W : ConcreteCoefficientUnitaryWeightInputs A) : Set where
   field
     cubeReality : Cube.CutoffCubeRealityCompatible
     coefficientReality : CoefficientRealityCompatible W
