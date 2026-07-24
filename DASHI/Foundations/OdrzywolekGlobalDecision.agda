@@ -1,6 +1,6 @@
 module DASHI.Foundations.OdrzywolekGlobalDecision where
 
-open import Agda.Builtin.Equality using (_≡_; refl; subst; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
