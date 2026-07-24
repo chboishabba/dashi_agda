@@ -140,7 +140,11 @@ canonicalNearComponentsFitQuarter :
   _≤_ A
     (_+_ A (_+_ A lowHighTerm highLowTerm) highHighTerm)
     (interpretedQuarter I)
-canonicalNearComponentsFitQuarter {A = A} {I = I} F =
+canonicalNearComponentsFitQuarter
+  {A = A} {I = I}
+  {lowHighTerm = lowHighTerm}
+  {highLowTerm = highLowTerm}
+  {highHighTerm = highHighTerm} F =
   substUpper
     (interpretedNearPaymentIsQuarter I)
     (substUpper
@@ -149,8 +153,10 @@ canonicalNearComponentsFitQuarter {A = A} {I = I} F =
   where
   componentBound :
     _≤_ A
-      (_+_ A (_+_ A _ _) _)
-      (_+_ A (_+_ A _ _) _)
+      (_+_ A (_+_ A lowHighTerm highLowTerm) highHighTerm)
+      (_+_ A
+        (_+_ A (interpretedLowHigh I) (interpretedHighLow I))
+        (interpretedHighHigh I))
   componentBound =
     ≤-trans A
       (additionMonotoneRight A
