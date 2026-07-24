@@ -133,3 +133,16 @@ import DASHI.Physics.Closure.NSPeriodicChartFailureCoverage
 import DASHI.Physics.Closure.NSPeriodicExtendedCoverageBKM
 import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeLimitTransport
 import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeContinuumAdapter
+
+-- Concrete carrier and narrowed analytic frontier.
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier
+import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm
+import DASHI.Physics.Closure.NSPeriodicConcreteOfficialNormWeights
+import DASHI.Physics.Closure.NSPeriodicCanonicalNearYoungAllocation
+import DASHI.Physics.Closure.NSPeriodicConcreteCandidateBudgetArithmetic
+import DASHI.Physics.Closure.NSPeriodicCompactGammaPDEBalance
+import DASHI.Physics.Closure.NSPeriodicCanonicalThreeBoundaryTupleAdapter
+import DASHI.Physics.Closure.NSPeriodicObservableDerivativeBoundReduction
+import DASHI.Physics.Closure.NSPeriodicDiffuseLowHighSplit
+import DASHI.Physics.Closure.NSPeriodicChartFailureAnalyticRoutes
+import DASHI.Physics.Closure.NSPeriodicFixedShellFiniteRankConvergence
