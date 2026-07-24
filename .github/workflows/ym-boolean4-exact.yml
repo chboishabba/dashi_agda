@@ -29,6 +29,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'scripts/check_ym_boolean4_exact.py'
+      - 'scripts/check_ym_physical_progress.py'
       - 'scripts/search_ym_quantitative_region.py'
       - 'scripts/generate_path_poincare_sos.py'
       - '.github/workflows/ym-boolean4-exact.yml'
@@ -58,6 +59,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'scripts/check_ym_boolean4_exact.py'
+      - 'scripts/check_ym_physical_progress.py'
       - 'scripts/search_ym_quantitative_region.py'
       - 'scripts/generate_path_poincare_sos.py'
       - '.github/workflows/ym-boolean4-exact.yml'
@@ -72,8 +74,10 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v6
-      - name: Audit exact and fail-closed quantitative surface
+      - name: Audit exact quantitative surface
         run: python3 scripts/check_ym_boolean4_exact.py
+      - name: Audit physical progress surface
+        run: python3 scripts/check_ym_physical_progress.py
       - name: Record exact dyadic quantitative search
         run: python3 scripts/search_ym_quantitative_region.py --max-exponent 16 --output /tmp/ym-region.json
       - name: Generate an arbitrary-side Agda LDL certificate
@@ -126,6 +130,7 @@ jobs:
             $AGDA DASHI/Physics/YangMills/BalabanRunningCouplingIterationExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanTerminalScalePhysicalClustering.agda
             $AGDA DASHI/Physics/YangMills/BalabanTerminalKPPhysicalScaleAssembly.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda
             agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
               /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda
             $AGDA DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda
