@@ -48,6 +48,5 @@ invalidatedCannotBeAdmitted :
   PNF.validity (invalidatedCandidate receipt) ≡ PNF.admissible →
   ⊥
 invalidatedCannotBeAdmitted receipt proof
-  rewrite invalidatedCandidateIsInvalid receipt
-  with proof
-... | ()
+  rewrite invalidatedCandidateIsInvalid receipt =
+    PNF.invalidIsNotAdmissible proof
