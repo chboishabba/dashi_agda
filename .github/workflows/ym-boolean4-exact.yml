@@ -9,6 +9,9 @@ on:
       - 'DASHI/Physics/YangMills/BalabanPath*.agda'
       - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
       - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
+      - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteEnumerationDistinctExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanConcreteRootedTracePolymer.agda'
       - 'DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanFourDimensional*.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2Adjoint*.agda'
@@ -35,6 +38,9 @@ on:
       - 'DASHI/Physics/YangMills/BalabanPath*.agda'
       - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
       - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
+      - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanFiniteEnumerationDistinctExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanConcreteRootedTracePolymer.agda'
       - 'DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanFourDimensional*.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2Adjoint*.agda'
@@ -88,14 +94,18 @@ jobs:
             $AGDA DASHI/Physics/YangMills/BalabanPath3PoincareExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4GeneratedLDLCertificate.agda
+            $AGDA DASHI/Physics/YangMills/BalabanFiniteEnumerationDistinctExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockFibreCarrier.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockEnumerationDistinctExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockFibreSumsExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4PhysicalFibreMatchExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanFourAxisMartingaleExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4AxisAverageExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanFourDimensionalLDLTensorization.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4FourDimensionalTensorizationRegression.agda
             $AGDA DASHI/Physics/YangMills/BalabanFourDimensionalHaloOverlapExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalHaloOriginExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanBoolean4PatchExtensionsExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanBoolean4PatchLaplacianIntertwining.agda
             $AGDA DASHI/Physics/YangMills/BalabanSU2AdjointTransportExact.agda
@@ -110,6 +120,7 @@ jobs:
             $AGDA DASHI/Physics/YangMills/BalabanMultilinearLipschitzCalculus.agda
             $AGDA DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanRootedPolymerWordEntropyExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanConcreteRootedTracePolymer.agda
             $AGDA DASHI/Physics/YangMills/BalabanTraceKoteckyPreissGeometricExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanDyadicTerminalScaleExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanRunningCouplingIterationExact.agda
