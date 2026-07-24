@@ -90,6 +90,9 @@ concreteOfficialNormWeightsStatusLevel = machineChecked
 concreteModeOperatorPythagoreanStatusLevel : ProofLevel
 concreteModeOperatorPythagoreanStatusLevel = machineChecked
 
+officialOperatorFoldIdentificationStatusLevel : ProofLevel
+officialOperatorFoldIdentificationStatusLevel = machineChecked
+
 concreteOfficialOperatorNormAdapterStatusLevel : ProofLevel
 concreteOfficialOperatorNormAdapterStatusLevel = machineChecked
 
