@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Geometry.CalabiYau as CY
+import DASHI.Geometry.ComplexManifold as CM
 
 ------------------------------------------------------------------------
 -- Dimension reading: 3 extended real dimensions plus a Calabi-Yau threefold's
@@ -85,6 +86,10 @@ record CalabiYau369Bridge
         Point Coordinate RealScalar Tangent IntegralCohomology2 TopForm
 
     dimensions : Dimension369
+
+    calabiYauComplexDimensionMatchesThreefold :
+      CM.complexDimension (CY.complexManifold calabiYauAuthority)
+        ≡ compactComplexDimension dimensions
 
     spatialBundle :
       BaseCompactFibreBundle ExtendedPoint Point TotalPoint
