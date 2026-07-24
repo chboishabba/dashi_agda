@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact
 import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact
 import DASHI.Physics.YangMills.BalabanCommutingProjectionMartingaleExact
 import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
+import DASHI.Physics.YangMills.BalabanPath4PhysicalMartingaleOrthogonalityExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
 import DASHI.Physics.YangMills.BalabanNonlinearDifferenceIdentitiesExact
@@ -61,6 +62,9 @@ physicalAxisPartitionInnerProductMatchLevel = machineChecked
 
 path4PhysicalAxisAverageSelfAdjointnessLevel : ProofLevel
 path4PhysicalAxisAverageSelfAdjointnessLevel = machineChecked
+
+path4PhysicalMartingaleOrthogonalityLevel : ProofLevel
+path4PhysicalMartingaleOrthogonalityLevel = machineChecked
 
 physicalArbitrarySideAverageNormalizationLevel : ProofLevel
 physicalArbitrarySideAverageNormalizationLevel = conditional
