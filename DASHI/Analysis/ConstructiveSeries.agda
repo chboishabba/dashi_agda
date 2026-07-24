@@ -1,9 +1,9 @@
 module DASHI.Analysis.ConstructiveSeries where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Sigma using (Σ)
-open import Data.Nat.Base using (_∸_)
+open import Data.Nat.Base using (_∸_) renaming (_+_ to _+N_; _*_ to _*N_)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 
@@ -41,7 +41,7 @@ convolutionCoefficient R left right k =
 ------------------------------------------------------------------------
 -- The abstract constructed-real record intentionally does not assume that every
 -- Agda function Nat → Real is already one of its admitted sequences.  This
--- small realization interface makes that bridge explicit.
+-- realization interface makes that bridge explicit.
 
 record FunctionSequenceRealization
   (R : ConstructedOrderedCompleteReal) : Set₁ where
@@ -95,6 +95,7 @@ record AbsoluteConvergence
   (S : FunctionSequenceRealization R)
   (term : Nat → Real R) : Set₁ where
   field
+    seriesConverges : ConvergentSeries R S term
     absoluteTerms : Nat → Real R
     absoluteTermsAreAbs : ∀ n → absoluteTerms n ≡ abs R (term n)
     absoluteSeriesConverges : ConvergentSeries R S absoluteTerms
@@ -107,8 +108,10 @@ record TailBound
   field
     tailMajorant : Nat → Real R
     tailMajorantNonnegative : ∀ n → _≤_ R (zero R) (tailMajorant n)
-    tailTendsToZero : Set
-    everyFiniteTailControlled : ∀ start finish → Set
+    TailTendsToZero : Set
+    FiniteTailControlled : Nat → Nat → Set
+    tailTendsToZero : TailTendsToZero
+    everyFiniteTailControlled : ∀ start finish → FiniteTailControlled start finish
 
 open TailBound public
 
@@ -143,8 +146,10 @@ record RatioTailCertificate
   field
     cutoff : Nat
     ratioBound : Real R
-    ratioBoundAdmissible : Set
-    successiveTermControlled : ∀ n → Set
+    RatioBoundAdmissible : Set
+    SuccessiveTermControlled : Nat → Set
+    ratioBoundAdmissible : RatioBoundAdmissible
+    successiveTermControlled : ∀ n → SuccessiveTermControlled n
 
 open RatioTailCertificate public
 
@@ -177,8 +182,8 @@ record CauchyProductAuthority
         (rightAbs : AbsoluteConvergence R S right) →
       limit (productConverges leftAbs rightAbs)
       ≡ _*_ R
-          (limit (absoluteSeriesConverges leftAbs))
-          (limit (absoluteSeriesConverges rightAbs))
+          (limit (seriesConverges leftAbs))
+          (limit (seriesConverges rightAbs))
 
 open CauchyProductAuthority public
 
@@ -201,15 +206,8 @@ record FactorialAuthority
     factorial : Nat → Real R
     factorialEmbedded : ∀ n → factorial n ≡ nat N (factorialNat n)
     reciprocal : Real R → Real R
-    factorialNonzero : ∀ n → Set
-
-  _*N_ : Nat → Nat → Nat
-  zero *N n = zero
-  suc m *N n = n +N (m *N n)
-    where
-      _+N_ : Nat → Nat → Nat
-      zero +N k = k
-      suc j +N k = suc (j +N k)
+    FactorialNonzero : Nat → Set
+    factorialNonzero : ∀ n → FactorialNonzero n
 
 open FactorialAuthority public
 
@@ -263,8 +261,13 @@ record TrigonometricSeriesCutset
     sineTerm cosineTerm : Real R → Nat → Real R
     sineAbsoluteConvergence : ∀ x → AbsoluteConvergence R S (sineTerm x)
     cosineAbsoluteConvergence : ∀ x → AbsoluteConvergence R S (cosineTerm x)
-    additionFormulaAuthority : Set
-    pythagoreanAuthority : Set
-    firstPositiveZeroAuthority : Set
+
+    AdditionFormulaAuthority : Set
+    PythagoreanAuthority : Set
+    FirstPositiveZeroAuthority : Set
+
+    additionFormulaAuthority : AdditionFormulaAuthority
+    pythagoreanAuthority : PythagoreanAuthority
+    firstPositiveZeroAuthority : FirstPositiveZeroAuthority
 
 open TrigonometricSeriesCutset public
