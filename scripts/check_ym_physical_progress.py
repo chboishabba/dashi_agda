@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 from pathlib import Path
+import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 YM = ROOT / "DASHI/Physics/YangMills"
@@ -77,6 +79,16 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
 }
 
+SCRIPTS: dict[Path, tuple[str, ...]] = {
+    ROOT / "scripts/generate_path_physical_bridge.py": (
+        "generate_bridge",
+        "physicalFinalCoordinateIsGenerated",
+        "physicalNormMatchesGenerated",
+        "physicalEnergyMatchesGenerated",
+        "physicalFibrePoincare",
+    ),
+}
+
 FORBIDDEN = (
     "postulate",
     "{!!}",
@@ -90,17 +102,61 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
-def main() -> None:
-    for path, required in FILES.items():
-        if not path.is_file():
-            fail(f"missing {path.relative_to(ROOT)}")
-        text = path.read_text(encoding="utf-8")
+def audit_text(path: Path, required: tuple[str, ...], forbid: bool) -> None:
+    if not path.is_file():
+        fail(f"missing {path.relative_to(ROOT)}")
+    text = path.read_text(encoding="utf-8")
+    if forbid:
         for token in FORBIDDEN:
             if token in text:
                 fail(f"forbidden token {token!r} in {path.relative_to(ROOT)}")
-        for theorem in required:
+    for theorem in required:
+        if theorem not in text:
+            fail(f"missing {theorem!r} in {path.relative_to(ROOT)}")
+
+
+def audit_generated_physical_bridge() -> None:
+    with tempfile.TemporaryDirectory() as directory:
+        output = Path(directory) / "GeneratedPath5PhysicalBridge.agda"
+        subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts/generate_path_physical_bridge.py"),
+                "5",
+                "--certificate-module",
+                "DASHI.Physics.YangMills.GeneratedPath5LDLCertificate",
+                "--bridge-module",
+                "DASHI.Physics.YangMills.GeneratedPath5PhysicalBridge",
+                "--output",
+                str(output),
+            ],
+            cwd=ROOT,
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        text = output.read_text(encoding="utf-8")
+        for theorem in (
+            "physicalFinalCoordinateIsGenerated",
+            "physicalNormMatchesGenerated",
+            "physicalEnergyMatchesGenerated",
+            "physicalFibrePoincare",
+            "generatedPhysicalFibrePoincareLevel = machineChecked",
+        ):
             if theorem not in text:
-                fail(f"missing {theorem!r} in {path.relative_to(ROOT)}")
+                fail(f"generated physical bridge missing {theorem!r}")
+        for token in FORBIDDEN:
+            if token in text:
+                fail(f"generated physical bridge contains {token!r}")
+
+
+def main() -> None:
+    for path, required in FILES.items():
+        audit_text(path, required, forbid=True)
+    for path, required in SCRIPTS.items():
+        audit_text(path, required, forbid=False)
+    audit_generated_physical_bridge()
     print("Physical fibre, polymer and RG progress remains exact and fail-closed.")
 
 
