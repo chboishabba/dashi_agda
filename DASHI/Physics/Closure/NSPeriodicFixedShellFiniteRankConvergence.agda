@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSPeriodicFixedShellFiniteRankConvergence where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -88,8 +88,8 @@ finiteFoldConverges :
   Converges L
     (λ N → cutoffFold F N items)
     (continuumFold F items)
-finiteFoldConverges {A = A} {L = L} F [] = zeroConverges L
-finiteFoldConverges {A = A} {L = L} F (item ∷ items) =
+finiteFoldConverges {L = L} F [] = zeroConverges L
+finiteFoldConverges {L = L} F (item ∷ items) =
   addConverges L
     (coefficientConverges F item)
     (finiteFoldConverges F items)
@@ -139,69 +139,8 @@ record PeriodicFiniteShellLimitInputs
 
 open PeriodicFiniteShellLimitInputs public
 
-fixedFinitePartialConverges :
-  ∀ {A : AbsorptionArithmetic}
-    {L : FiniteRankLimitArithmetic A} →
-  (P : PeriodicFiniteShellLimitInputs A L) →
-  ∀ J →
-  Converges L
-    (λ N → cutoffPartialEnvelope P N J)
-    (continuumPartialEnvelope P J)
-fixedFinitePartialConverges {L = L} P J =
-  subst
-    (λ limit →
-      Converges L (λ N → cutoffPartialEnvelope P N J) limit)
-    (sym (continuumPartialMeaning P J))
-    (transportSequenceMeaning
-      (finiteFoldConverges
-        (coefficientFamily P)
-        (partialCoefficients P J)))
-  where
-  transportSequenceMeaning :
-    Converges L
-      (λ N →
-        cutoffFold (coefficientFamily P) N (partialCoefficients P J))
-      (continuumFold (coefficientFamily P) (partialCoefficients P J)) →
-    Converges L
-      (λ N → cutoffPartialEnvelope P N J)
-      (continuumFold (coefficientFamily P) (partialCoefficients P J))
-  transportSequenceMeaning convergence =
-    subst
-      (λ sequence →
-        Converges L sequence
-          (continuumFold (coefficientFamily P) (partialCoefficients P J)))
-      (sequenceExtensionality
-        (λ N → sym (cutoffPartialMeaning P N J)))
-      convergence
-
-  -- Function extensionality is deliberately supplied only for this selected
-  -- convergence authority; no global extensionality postulate is introduced.
-  sequenceExtensionality :
-    (∀ N →
-      cutoffFold (coefficientFamily P) N (partialCoefficients P J)
-      ≡ cutoffPartialEnvelope P N J) →
-    (λ N → cutoffFold (coefficientFamily P) N (partialCoefficients P J))
-    ≡ (λ N → cutoffPartialEnvelope P N J)
-  sequenceExtensionality pointwise =
-    sequenceEqualityFromPointwise L pointwise
-
-  sequenceEqualityFromPointwise :
-    (L : FiniteRankLimitArithmetic A) →
-    ∀ {left right : Nat → Scalar A} →
-    (∀ N → left N ≡ right N) → left ≡ right
-  sequenceEqualityFromPointwise L pointwise =
-    convergenceFunctionExtensionality L pointwise
-
-  convergenceFunctionExtensionality :
-    FiniteRankLimitArithmetic A →
-    ∀ {left right : Nat → Scalar A} →
-    (∀ N → left N ≡ right N) → left ≡ right
-  convergenceFunctionExtensionality L pointwise =
-    functionExtensionalityWitness P pointwise
-
--- The finite-rank argument only needs extensionality for the selected sequence
--- representation.  It is attached to the concrete shell package rather than
--- assumed globally.
+-- Only the extensionality needed to identify the selected cutoff sequence is
+-- carried here.  No global function-extensionality postulate is introduced.
 record PeriodicFiniteShellExtensionalInputs
     (A : AbsorptionArithmetic)
     (L : FiniteRankLimitArithmetic A) : Set₁ where
@@ -213,6 +152,31 @@ record PeriodicFiniteShellExtensionalInputs
 
 open PeriodicFiniteShellExtensionalInputs public
 
+fixedFinitePartialConverges :
+  ∀ {A : AbsorptionArithmetic}
+    {L : FiniteRankLimitArithmetic A} →
+  (P : PeriodicFiniteShellExtensionalInputs A L) →
+  ∀ J →
+  Converges L
+    (λ N → cutoffPartialEnvelope (shellInputs P) N J)
+    (continuumPartialEnvelope (shellInputs P) J)
+fixedFinitePartialConverges {L = L} P J =
+  subst
+    (λ limit →
+      Converges L (λ N → cutoffPartialEnvelope S N J) limit)
+    (sym (continuumPartialMeaning S J))
+    (subst
+      (λ sequence →
+        Converges L sequence
+          (continuumFold (coefficientFamily S) (partialCoefficients S J)))
+      (functionExtensionalityWitness P
+        (λ N → sym (cutoffPartialMeaning S N J)))
+      (finiteFoldConverges
+        (coefficientFamily S)
+        (partialCoefficients S J)))
+  where
+  S = shellInputs P
+
 finitePartialLimitBelowUniformBound :
   ∀ {A : AbsorptionArithmetic}
     {L : FiniteRankLimitArithmetic A} →
@@ -222,34 +186,9 @@ finitePartialLimitBelowUniformBound :
     (continuumPartialEnvelope (shellInputs P) J)
     (uniformEnvelopeBound (shellInputs P))
 finitePartialLimitBelowUniformBound {L = L} P J =
-  uniformUpperBoundClosed L convergence uniform
-  where
-  S = shellInputs P
-
-  convergence :
-    Converges L
-      (λ N → cutoffPartialEnvelope S N J)
-      (continuumPartialEnvelope S J)
-  convergence =
-    subst
-      (λ limit →
-        Converges L (λ N → cutoffPartialEnvelope S N J) limit)
-      (sym (continuumPartialMeaning S J))
-      (subst
-        (λ sequence →
-          Converges L sequence
-            (continuumFold (coefficientFamily S) (partialCoefficients S J)))
-        (functionExtensionalityWitness P
-          (λ N → sym (cutoffPartialMeaning S N J)))
-        (finiteFoldConverges
-          (coefficientFamily S)
-          (partialCoefficients S J)))
-
-  uniform : ∀ N →
-    _≤_ A
-      (cutoffPartialEnvelope S N J)
-      (uniformEnvelopeBound S)
-  uniform N = cutoffPartialUniform S N J
+  uniformUpperBoundClosed L
+    (fixedFinitePartialConverges P J)
+    (λ N → cutoffPartialUniform (shellInputs P) N J)
 
 ------------------------------------------------------------------------
 -- Adapter to the already-built countable-envelope endpoint.
@@ -289,14 +228,14 @@ finiteShellInputsToWeightedEnvelopeLimit :
     {L : FiniteRankLimitArithmetic A} →
   FiniteShellToEnvelopeAdapter A L →
   Envelope.PeriodicWeightedEnvelopeLimitInputs A
-finiteShellInputsToWeightedEnvelopeLimit P = record
+finiteShellInputsToWeightedEnvelopeLimit {A = A} {L = L} P = record
   { continuumPartialEnvelope = continuumPartialEnvelope S
   ; continuumFullEnvelope = continuumFullEnvelope P
   ; cutoffUniformEnvelopeBound = uniformEnvelopeBound S
   ; continuumVorticityExpenditure = continuumVorticityExpenditure P
   ; FixedShellConvergence =
       ∀ J →
-        Converges _
+        Converges L
           (λ N → cutoffPartialEnvelope S N J)
           (continuumPartialEnvelope S J)
   ; FinitePartialLowerSemicontinuity =
@@ -304,8 +243,9 @@ finiteShellInputsToWeightedEnvelopeLimit P = record
         _≤_ A
           (continuumPartialEnvelope S J)
           (uniformEnvelopeBound S)
-  ; fixedShellConvergence = fixedConvergence
-  ; finitePartialLowerSemicontinuity = finiteLowerBound
+  ; fixedShellConvergence = fixedFinitePartialConverges E
+  ; finitePartialLowerSemicontinuity =
+      finitePartialLimitBelowUniformBound E
   ; finitePartialPassesToUniformBound =
       λ fixed lower J → lower J
   ; fullEnvelopeLeastUpperBound = fullEnvelopeLeastUpperBound P
@@ -318,31 +258,6 @@ finiteShellInputsToWeightedEnvelopeLimit P = record
   where
   E = finiteShellInputs P
   S = shellInputs E
-
-  fixedConvergence : ∀ J →
-    Converges L
-      (λ N → cutoffPartialEnvelope S N J)
-      (continuumPartialEnvelope S J)
-  fixedConvergence J =
-    subst
-      (λ limit →
-        Converges L (λ N → cutoffPartialEnvelope S N J) limit)
-      (sym (continuumPartialMeaning S J))
-      (subst
-        (λ sequence →
-          Converges L sequence
-            (continuumFold (coefficientFamily S) (partialCoefficients S J)))
-        (functionExtensionalityWitness E
-          (λ N → sym (cutoffPartialMeaning S N J)))
-        (finiteFoldConverges
-          (coefficientFamily S)
-          (partialCoefficients S J)))
-
-  finiteLowerBound : ∀ J →
-    _≤_ A
-      (continuumPartialEnvelope S J)
-      (uniformEnvelopeBound S)
-  finiteLowerBound = finitePartialLimitBelowUniformBound E
 
 ------------------------------------------------------------------------
 -- Status: literal finite-rank coefficient convergence now constructs every
