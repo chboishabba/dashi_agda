@@ -117,8 +117,8 @@ physicalBlockPenaltyQuadraticFormExactLevel = machineChecked
 path4SU2ReferenceHodgeAssemblyLevel : ProofLevel
 path4SU2ReferenceHodgeAssemblyLevel = machineChecked
 
-referenceWilsonDifferenceIdentificationLevel : ProofLevel
-referenceWilsonDifferenceIdentificationLevel = conditional
+referenceWilsonGaugeDifferenceIdentificationLevel : ProofLevel
+referenceWilsonGaugeDifferenceIdentificationLevel = conditional
 
 physicalArbitrarySideAverageNormalizationLevel : ProofLevel
 physicalArbitrarySideAverageNormalizationLevel = conditional
