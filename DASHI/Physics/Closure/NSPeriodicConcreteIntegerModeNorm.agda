@@ -11,8 +11,8 @@ open import DASHI.Physics.Closure.NSWall1ExactEvaluationCarrier using
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSPeriodicModeInverseNormScaling as Scaling
-open import DASHI.Physics.Closure.NSPeriodicRealOrderedNormLaws using
-  (realVecNormSquared)
+import DASHI.Physics.Closure.NSPeriodicRealOrderedNormLaws as Ordered
+open Ordered using (realVecNormSquared)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -129,8 +129,7 @@ concreteIntegerModeNormIdentification E = record
 record ConcretePeriodicModeNormAuthority : Set₁ where
   field
     realEmbedding : ConcreteIntegerRealNormEmbedding
-    squareAuthority :
-      DASHI.Physics.Closure.NSPeriodicRealOrderedNormLaws.OrderedRealSquareAuthority
+    squareAuthority : Ordered.OrderedRealSquareAuthority
     inverseAuthority : Scaling.OrderedRealInverseAuthority
 
 open ConcretePeriodicModeNormAuthority public
