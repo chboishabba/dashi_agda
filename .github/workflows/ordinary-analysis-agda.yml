@@ -9,7 +9,8 @@ on:
       - 'DASHI/Analysis/*.agda'
       - 'DASHI/Foundations/OrdinaryCalculatorLedger.agda'
       - 'DASHI/Foundations/Odrzywolek*.agda'
-      - 'DASHI/Algebra/Quantum/OrdinaryComplexQutrit.agda'
+      - 'DASHI/Algebra/Quantum/OrdinaryComplexQutrit*.agda'
+      - 'DASHI/Algebra/Quantum/QutritPermutationUnitary.agda'
       - 'DASHI/Analysis/OrdinaryAnalysisBundle.agda'
       - '.github/workflows/ordinary-analysis-agda.yml'
   workflow_dispatch:
@@ -45,7 +46,9 @@ jobs:
             $AGDA DASHI/Foundations/OrdinaryCalculatorLedger.agda
             $AGDA DASHI/Foundations/OdrzywolekGeneratedUnitObstruction.agda
             $AGDA DASHI/Foundations/OdrzywolekGlobalDecision.agda
+            $AGDA DASHI/Algebra/Quantum/QutritPermutationUnitary.agda
             $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutrit.agda
+            $AGDA DASHI/Algebra/Quantum/OrdinaryComplexQutritUnitary.agda
             $AGDA DASHI/Analysis/OrdinaryAnalysisBundle.agda
             $AGDA DASHI/Foundations/ElementarySingleOperatorBundle.agda
             $AGDA DASHI/Unified/StructuralComplexitySurvivalBundle.agda
