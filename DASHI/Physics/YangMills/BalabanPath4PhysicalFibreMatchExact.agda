@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -21,7 +22,7 @@ open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate
 -- identified literally with the generated P4 certificate.
 ------------------------------------------------------------------------
 
-fourSide : Agda.Builtin.Nat.Nat
+fourSide : Nat
 fourSide = four
 
 index0 index1 index2 index3 : CyclicIndex fourSide
@@ -152,15 +153,15 @@ physicalSide4FibrePoincare :
   ≤ scaledCenteredFibreEdgeEnergy field axis transverse
 physicalSide4FibrePoincare field axis transverse =
   subst
-    (λ normValue →
+    (λ energyValue →
       oneSixteenth * scaledCenteredFibreNormSq field axis transverse
-      ≤ normValue)
+      ≤ energyValue)
     (sym (physicalFibre4EnergyMatchesGenerated field axis transverse))
     (subst
       (λ normValue →
         oneSixteenth * normValue
         ≤ path4Energy (path4CoordinatesFromPhysicalFibre field axis transverse))
-      (physicalFibre4NormMatchesGenerated field axis transverse)
+      (sym (physicalFibre4NormMatchesGenerated field axis transverse))
       (path4Poincare (path4CoordinatesFromPhysicalFibre field axis transverse)))
 
 path4PhysicalFibreCoordinateMatchLevel : ProofLevel
