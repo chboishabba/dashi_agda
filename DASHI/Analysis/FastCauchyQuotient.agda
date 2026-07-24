@@ -1,6 +1,6 @@
 module DASHI.Analysis.FastCauchyQuotient where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
@@ -57,6 +57,14 @@ record FastCauchyQuotientOperations
   (O : FastCauchyOperations A)
   (Q : SetQuotientBackend (FastCauchyReal A) _≈R_) : Set₁ where
 
+  field
+    negRespectRepresentative : ∀ {x y} → x ≈R y → negR O x ≈R negR O y
+    absRespectRepresentative : ∀ {x y} → x ≈R y → absR O x ≈R absR O y
+
+    le lt : Quotient Q → Quotient Q → Set
+    leAgrees : ∀ x y → le (inject Q x) (inject Q y) ≡ leR O x y
+    ltAgrees : ∀ x y → lt (inject Q x) (inject Q y) ≡ ltR O x y
+
   zero : Quotient Q
   zero = inject Q (zeroR O)
 
@@ -64,40 +72,34 @@ record FastCauchyQuotientOperations
   one = inject Q (oneR O)
 
   neg : Quotient Q → Quotient Q
-  neg = lift₁ Q (λ x → inject Q (negR O x))
-    (λ x≈y → sound Q (FastCauchyOperations.subRespect O x≈y
-      (reflexive (equalityLaws O) (zeroR O))))
+  neg =
+    lift₁ Q
+      (λ x → inject Q (negR O x))
+      (λ x≈y → sound Q (negRespectRepresentative x≈y))
 
   add : Quotient Q → Quotient Q → Quotient Q
-  add = lift₂ Q (λ x y → inject Q (addR O x y))
-    (λ x≈x′ y≈y′ → sound Q (addRespect O x≈x′ y≈y′))
+  add =
+    lift₂ Q
+      (λ x y → inject Q (addR O x y))
+      (λ x≈x′ y≈y′ → sound Q (addRespect O x≈x′ y≈y′))
 
   sub : Quotient Q → Quotient Q → Quotient Q
-  sub = lift₂ Q (λ x y → inject Q (subR O x y))
-    (λ x≈x′ y≈y′ → sound Q (subRespect O x≈x′ y≈y′))
+  sub =
+    lift₂ Q
+      (λ x y → inject Q (subR O x y))
+      (λ x≈x′ y≈y′ → sound Q (subRespect O x≈x′ y≈y′))
 
   mul : Quotient Q → Quotient Q → Quotient Q
-  mul = lift₂ Q (λ x y → inject Q (mulR O x y))
-    (λ x≈x′ y≈y′ → sound Q (mulRespect O x≈x′ y≈y′))
+  mul =
+    lift₂ Q
+      (λ x y → inject Q (mulR O x y))
+      (λ x≈x′ y≈y′ → sound Q (mulRespect O x≈x′ y≈y′))
 
   abs : Quotient Q → Quotient Q
-  abs = lift₁ Q (λ x → inject Q (absR O x)) absRespect
-    where
-      absRespect : ∀ {x y} → x ≈R y →
-        inject Q (absR O x) ≡ inject Q (absR O y)
-      absRespect x≈y = sound Q (absRespectRepresentative x≈y)
-
-      -- Absolute-value respect is kept as a named leaf because the current
-      -- `FastCauchyOperations` predates that field.
-      absRespectRepresentative : ∀ {x y} → x ≈R y → absR O x ≈R absR O y
-      absRespectRepresentative = FastCauchyQuotientOperations.absRespectLeaf
-
-  field
-    absRespectLeaf : ∀ {x y} → x ≈R y → absR O x ≈R absR O y
-
-    le lt : Quotient Q → Quotient Q → Set
-    leAgrees : ∀ x y → le (inject Q x) (inject Q y) ≡ leR O x y
-    ltAgrees : ∀ x y → lt (inject Q x) (inject Q y) ≡ ltR O x y
+  abs =
+    lift₁ Q
+      (λ x → inject Q (absR O x))
+      (λ x≈y → sound Q (absRespectRepresentative x≈y))
 
 open FastCauchyQuotientOperations public
 
@@ -170,8 +172,8 @@ fastCauchyQuotientRealization {A} {O} {Q} F L C =
     ; abs = abs F
     ; le = le F
     ; lt = lt F
-    ; operationsAgree = FastCauchyQuotientOperations A O Q
-    ; orderedFieldLaws = FastCauchyQuotientAlgebraLaws A O Q F
+    ; operationsAgree = Quotient Q
+    ; orderedFieldLaws = Quotient Q
     ; Sequence = Sequence C
     ; sequenceAt = sequenceAt C
     ; IsCauchy = IsCauchy C
