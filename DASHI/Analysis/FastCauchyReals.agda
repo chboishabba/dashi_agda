@@ -3,7 +3,6 @@ module DASHI.Analysis.FastCauchyReals where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Empty using (⊥)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 
@@ -32,15 +31,15 @@ record RationalMetricAuthority : Set₁ where
     leTrans : ∀ {x y z} → x ≤Q y → y ≤Q z → x ≤Q z
     addMono : ∀ {a b c d} → a ≤Q b → c ≤Q d → (a +Q c) ≤Q (b +Q d)
 
+    subSelfQ : ∀ q → q -Q q ≡ zeroQ
     absZero : absQ zeroQ ≡ zeroQ
     absSymmetricDifference : ∀ x y → absQ (x -Q y) ≡ absQ (y -Q x)
     absTriangleDifference : ∀ x y z →
       absQ (x -Q z) ≤Q (absQ (x -Q y) +Q absQ (y -Q z))
 
     dyadicPositive : ∀ n → zeroQ ≤Q dyadicError n
-    dyadicTailAbsorbs : ∀ n →
-      (dyadicError n +Q dyadicError n)
-      ≤Q dyadicError n +Q dyadicError n
+    zeroBelowDyadicSum : ∀ m n →
+      zeroQ ≤Q (dyadicError m +Q dyadicError n)
 
 open RationalMetricAuthority public
 
@@ -49,8 +48,8 @@ record FastCauchyReal (A : RationalMetricAuthority) : Set where
   field
     approximate : Nat → Q A
     fastCauchy : ∀ m n →
-      absQ A (approximate m -Q approximate n)
-      ≤Q A (dyadicError A m +Q dyadicError A n)
+      absQ A (_-Q_ A (approximate m) (approximate n))
+      ≤Q A (_+Q_ A (dyadicError A m) (dyadicError A n))
 
 open FastCauchyReal public
 
@@ -66,8 +65,8 @@ _≈R_ :
   Set
 _≈R_ {A} x y =
   ∀ n →
-    absQ A (approximate x n -Q approximate y n)
-    ≤Q A (dyadicError A n +Q dyadicError A n)
+    absQ A (_-Q_ A (approximate x n) (approximate y n))
+    ≤Q A (_+Q_ A (dyadicError A n) (dyadicError A n))
 
 record FastCauchyEqualityLaws (A : RationalMetricAuthority) : Set₁ where
   field
@@ -87,16 +86,12 @@ constantFastReal A q =
     constantIsFast
   where
     constantIsFast : ∀ m n →
-      absQ A (q -Q q)
-      ≤Q A (dyadicError A m +Q dyadicError A n)
-    constantIsFast m n = constantDifferenceBound m n
-
-    -- Kept as the exact rational-law leaf: a concrete rational implementation
-    -- proves q-q=0 and then uses nonnegativity of the dyadic errors.
-    postulate
-      constantDifferenceBound : ∀ m n →
-        absQ A (q -Q q)
-        ≤Q A (dyadicError A m +Q dyadicError A n)
+      absQ A (_-Q_ A q q)
+      ≤Q A (_+Q_ A (dyadicError A m) (dyadicError A n))
+    constantIsFast m n
+      rewrite subSelfQ A q
+            | absZero A =
+      zeroBelowDyadicSum A m n
 
 ------------------------------------------------------------------------
 -- Operations and completeness are stated over the actual fast representatives.
