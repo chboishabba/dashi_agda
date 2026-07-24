@@ -1,0 +1,82 @@
+name: NS exact frontier reductions
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSPeriodic*.agda'
+      - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
+      - 'scripts/ns_common_normalized_parameter_tuple_certificate.py'
+      - 'scripts/check_ns_common_normalized_parameter_tuple_certificate.py'
+      - 'scripts/ns_seven_analytic_leaf_ledger.py'
+      - 'scripts/check_ns_seven_analytic_leaf_ledger.py'
+      - 'scripts/check_ns_frontier_reductions_surface.py'
+      - 'scripts/data/outputs/ns_common_normalized_parameter_tuple_certificate.json'
+      - 'scripts/data/outputs/check_ns_common_normalized_parameter_tuple_certificate.json'
+      - 'scripts/data/outputs/ns_seven_analytic_leaf_ledger.json'
+      - 'scripts/data/outputs/check_ns_seven_analytic_leaf_ledger.json'
+      - '.github/workflows/ns-frontier-reductions.yml'
+  push:
+    paths:
+      - 'DASHI/Physics/Closure/NSPeriodic*.agda'
+      - 'DASHI/Physics/Closure/NSPairIncidenceKernelProgram.agda'
+      - 'scripts/ns_common_normalized_parameter_tuple_certificate.py'
+      - 'scripts/check_ns_common_normalized_parameter_tuple_certificate.py'
+      - 'scripts/ns_seven_analytic_leaf_ledger.py'
+      - 'scripts/check_ns_seven_analytic_leaf_ledger.py'
+      - 'scripts/check_ns_frontier_reductions_surface.py'
+      - 'scripts/data/outputs/ns_common_normalized_parameter_tuple_certificate.json'
+      - 'scripts/data/outputs/check_ns_common_normalized_parameter_tuple_certificate.json'
+      - 'scripts/data/outputs/ns_seven_analytic_leaf_ledger.json'
+      - 'scripts/data/outputs/check_ns_seven_analytic_leaf_ledger.json'
+      - '.github/workflows/ns-frontier-reductions.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ns-frontier-reductions-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-frontier-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependency
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Audit exact frontier reduction surface
+        run: python scripts/check_ns_frontier_reductions_surface.py
+      - name: Reproduce seven-leaf frontier ledger
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/ns-seven-leaves"
+          mkdir -p "$out"
+          python scripts/ns_seven_analytic_leaf_ledger.py \
+            --output-json "$out/ledger.json"
+          python scripts/check_ns_seven_analytic_leaf_ledger.py \
+            --source-json "$out/ledger.json" \
+            --output-json "$out/check.json"
+          diff -u scripts/data/outputs/ns_seven_analytic_leaf_ledger.json \
+            "$out/ledger.json"
+          diff -u scripts/data/outputs/check_ns_seven_analytic_leaf_ledger.json \
+            "$out/check.json"
+      - name: Reproduce common normalized tuple diagnostic
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/ns-common-tuple"
+          mkdir -p "$out"
+          python scripts/ns_common_normalized_parameter_tuple_certificate.py \
+            --output-json "$out/certificate.json"
+          python scripts/check_ns_common_normalized_parameter_tuple_certificate.py \
+            --source-json "$out/certificate.json" \
+            --output-json "$out/check.json"
+          diff -u scripts/data/outputs/ns_common_normalized_parameter_tuple_certificate.json \
+            "$out/certificate.json"
+          diff -u scripts/data/outputs/check_ns_common_normalized_parameter_tuple_certificate.json \
+            "$out/check.json"
