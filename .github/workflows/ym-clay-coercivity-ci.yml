@@ -1,0 +1,92 @@
+name: YM Clay coercivity clean Agda CI
+
+on:
+  push:
+    branches:
+      - master
+      - 'agent/ym-*'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanPath4*.agda'
+      - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
+      - 'DASHI/Physics/YangMills/BalabanFinite*.agda'
+      - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
+      - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda'
+      - 'scripts/check_ym_boolean4_exact.py'
+      - 'scripts/check_ym_physical_progress.py'
+      - 'scripts/generate_path_poincare_sos.py'
+      - 'scripts/generate_path_physical_bridge.py'
+      - '.github/workflows/ym-clay-coercivity-ci.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanPath4*.agda'
+      - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
+      - 'DASHI/Physics/YangMills/BalabanFinite*.agda'
+      - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
+      - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
+      - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
+      - 'DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda'
+      - 'scripts/check_ym_boolean4_exact.py'
+      - 'scripts/check_ym_physical_progress.py'
+      - 'scripts/generate_path_poincare_sos.py'
+      - 'scripts/generate_path_physical_bridge.py'
+      - '.github/workflows/ym-clay-coercivity-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clean-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run fail-closed source audits
+        run: |
+          set -euo pipefail
+          python3 scripts/check_ym_boolean4_exact.py
+          python3 scripts/check_ym_physical_progress.py
+      - name: Generate arbitrary-side regression certificates
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/DASHI/Physics/YangMills
+          python3 scripts/generate_path_poincare_sos.py 5 \
+            --output /tmp/path5-ldl.json \
+            --agda-output /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda \
+            --agda-module DASHI.Physics.YangMills.GeneratedPath5LDLCertificate
+          python3 scripts/generate_path_physical_bridge.py 5 \
+            --certificate-module DASHI.Physics.YangMills.GeneratedPath5LDLCertificate \
+            --bridge-module DASHI.Physics.YangMills.GeneratedPath5PhysicalBridge \
+            --output /tmp/DASHI/Physics/YangMills/GeneratedPath5PhysicalBridge.agda
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - name: Typecheck complete coercivity dependency cone
+        run: |
+          nix develop .# --command bash -lc '
+            set -euo pipefail
+            AGDA="agda -i . -i DCHoTT-Agda -i cubical -l standard-library"
+            $AGDA DASHI/Physics/YangMills/BalabanFiniteEnumerationDistinctExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockFibreCarrier.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockEnumerationDistinctExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockFibreSumsExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4GeneratedLDLCertificate.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4PhysicalFibreMatchExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4ZeroMeanFibrePoincareExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanFiniteSumFubiniExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanFiniteFibreAverageExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4AxisAverageExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalAxisPartitionExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4PhysicalMartingaleOrthogonalityExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4PhysicalVarianceDecompositionExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4AverageJensenExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4AxisAverageNormContractionExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4PhysicalComponentPoincareExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalHaloOriginExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda
+            agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda
+            agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              /tmp/DASHI/Physics/YangMills/GeneratedPath5PhysicalBridge.agda
+            $AGDA DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda
+          '
