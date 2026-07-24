@@ -1,6 +1,6 @@
 module DASHI.Analysis.FastCauchyArithmetic where
 
-open import Agda.Builtin.Equality using (_≡_; subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
