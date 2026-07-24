@@ -44,9 +44,17 @@ canonicalTotalSpatialDimensionIsNine :
   CY369.totalSpatialDimension CY369.canonicalDimension369 ≡ 9
 canonicalTotalSpatialDimensionIsNine = refl
 
-shiftWaveFineProjectsThroughExistingAdapter : Set
+shiftWaveFineProjectsThroughExistingAdapter :
+  Existing.projectionAgreement Existing.canonicalShiftWavePresentationAdapter
 shiftWaveFineProjectsThroughExistingAdapter =
-  Existing.ShiftWavePresentationAdapter.projectionAgreement
+  Existing.projectionAgreementWitness
+    Existing.canonicalShiftWavePresentationAdapter
+
+shiftWaveRetainsFineWaveShadow :
+  Existing.phaseAndWaveRetainedAtFineSurface
+    Existing.canonicalShiftWavePresentationAdapter
+shiftWaveRetainsFineWaveShadow =
+  Existing.phaseAndWaveRetainedAtFineSurfaceWitness
     Existing.canonicalShiftWavePresentationAdapter
 
 existingZeroFibreProductRetainsSixStates :
