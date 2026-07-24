@@ -1,5 +1,6 @@
 module DASHI.Cognition.PNF.OperationalIRExecution where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
@@ -48,15 +49,13 @@ refuseInvalidIR input reason receiptId =
 record RuleExecutionBoundary : Set where
   constructor ruleExecutionBoundary
   field
-    semanticSimilarityAloneExecutesRule : Agda.Builtin.Bool.Bool
+    semanticSimilarityAloneExecutesRule : Bool
     semanticSimilarityAloneExecutesRuleIsFalse :
-      semanticSimilarityAloneExecutesRule ≡ Agda.Builtin.Bool.false
-    validIRAndApplicabilityWitnessRequired : Agda.Builtin.Bool.Bool
+      semanticSimilarityAloneExecutesRule ≡ false
+    validIRAndApplicabilityWitnessRequired : Bool
     validIRAndApplicabilityWitnessRequiredIsTrue :
-      validIRAndApplicabilityWitnessRequired ≡ Agda.Builtin.Bool.true
+      validIRAndApplicabilityWitnessRequired ≡ true
 
 canonicalRuleExecutionBoundary : RuleExecutionBoundary
 canonicalRuleExecutionBoundary =
-  ruleExecutionBoundary
-    Agda.Builtin.Bool.false refl
-    Agda.Builtin.Bool.true refl
+  ruleExecutionBoundary false refl true refl
