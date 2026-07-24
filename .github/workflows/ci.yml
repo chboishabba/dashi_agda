@@ -2,7 +2,9 @@ name: Agda CI
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
+    branches:
+      - agent/reflexive-clopen-psychology
 
 jobs:
   typecheck:
