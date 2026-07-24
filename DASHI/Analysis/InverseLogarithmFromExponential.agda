@@ -1,6 +1,6 @@
 module DASHI.Analysis.InverseLogarithmFromExponential where
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans; cong₂)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; cong₂)
 open import Agda.Builtin.Sigma using (fst; snd)
 
 open import DASHI.Analysis.ConstructiveRealSpine
