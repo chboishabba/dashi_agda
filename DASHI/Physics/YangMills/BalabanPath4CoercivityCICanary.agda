@@ -1,0 +1,11 @@
+module DASHI.Physics.YangMills.BalabanPath4CoercivityCICanary where
+
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageNormContractionExact
+import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
+import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+path4CoercivityCICanaryLevel : ProofLevel
+path4CoercivityCICanaryLevel = machineChecked
