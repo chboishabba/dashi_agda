@@ -1,10 +1,11 @@
 module DASHI.Physics.YangMills.BalabanPath4AxisAverageExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -18,7 +19,7 @@ open import DASHI.Physics.YangMills.BalabanFourAxisMartingaleExact
 -- Literal normalized axis averages on the side-four physical block.
 ------------------------------------------------------------------------
 
-side4 : Agda.Builtin.Nat.Nat
+side4 : Nat
 side4 = four
 
 quarter : ℚ
@@ -38,6 +39,14 @@ axisAverage4ConstantOnFibre :
 axisAverage4ConstantOnFibre field axis transverse coordinate
   rewrite extractInsertTransverse axis coordinate transverse = refl
 
+axisCentering4OnFibre :
+  ∀ field axis transverse coordinate →
+  axisCentering4 field axis (insertAxis axis coordinate transverse)
+  ≡ field (insertAxis axis coordinate transverse)
+    - quarter * physicalFibreSum field axis transverse
+axisCentering4OnFibre field axis transverse coordinate
+  rewrite axisAverage4ConstantOnFibre field axis transverse coordinate = refl
+
 axisAverage4Idempotent : ∀ field axis site →
   axisAverage4 (axisAverage4 field axis) axis site
   ≡ axisAverage4 field axis site
@@ -55,10 +64,7 @@ axisAverage4Commutes : ∀ left right field site →
   ≡ axisAverage4 (axisAverage4 field right) left site
 axisAverage4Commutes zeroᵢ zeroᵢ field site =
   trans (axisAverage4Idempotent field zeroᵢ site)
-        (symmetry (axisAverage4Idempotent field zeroᵢ site))
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+        (sym (axisAverage4Idempotent field zeroᵢ site))
 axisAverage4Commutes zeroᵢ (sucᵢ zeroᵢ) field
   (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
 axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field
@@ -66,86 +72,72 @@ axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field
 axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
   (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
 axisAverage4Commutes (sucᵢ zeroᵢ) zeroᵢ field site =
-  symmetry (axisAverage4Commutes zeroᵢ (sucᵢ zeroᵢ) field site)
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+  sym (axisAverage4Commutes zeroᵢ (sucᵢ zeroᵢ) field site)
 axisAverage4Commutes (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) field site =
   trans (axisAverage4Idempotent field (sucᵢ zeroᵢ) site)
-        (symmetry (axisAverage4Idempotent field (sucᵢ zeroᵢ) site))
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+        (sym (axisAverage4Idempotent field (sucᵢ zeroᵢ) site))
 axisAverage4Commutes (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) field
   (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
 axisAverage4Commutes (sucᵢ zeroᵢ)
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
   (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
 axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ field site =
-  symmetry (axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field site)
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+  sym (axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field site)
 axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) field site =
-  symmetry
-    (axisAverage4Commutes (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) field site)
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+  sym (axisAverage4Commutes (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) field site)
 axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ))
   (sucᵢ (sucᵢ zeroᵢ)) field site =
   trans (axisAverage4Idempotent field (sucᵢ (sucᵢ zeroᵢ)) site)
-        (symmetry (axisAverage4Idempotent field (sucᵢ (sucᵢ zeroᵢ)) site))
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+        (sym (axisAverage4Idempotent field (sucᵢ (sucᵢ zeroᵢ)) site))
 axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ))
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
   (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
 axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ field site =
-  symmetry
-    (axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+  sym (axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
 axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ zeroᵢ) field site =
-  symmetry
-    (axisAverage4Commutes (sucᵢ zeroᵢ)
-      (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+  sym (axisAverage4Commutes (sucᵢ zeroᵢ)
+    (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
 axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ (sucᵢ zeroᵢ)) field site =
-  symmetry
-    (axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ))
-      (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+  sym (axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ))
+    (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
 axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site =
   trans
     (axisAverage4Idempotent field (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site)
-    (symmetry
-      (axisAverage4Idempotent field (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site))
-  where
-    symmetry : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    symmetry refl = refl
+    (sym (axisAverage4Idempotent field (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site))
 
-axisCentering4FibreSumZero : ∀ field axis transverse →
+axisCentering4DirectFibreSumZero : ∀ field axis transverse →
   sumRational (allCyclicIndices side4)
     (λ coordinate →
-      axisCentering4 field axis (insertAxis axis coordinate transverse))
+      field (insertAxis axis coordinate transverse)
+      - quarter * physicalFibreSum field axis transverse)
   ≡ 0ℚ
-axisCentering4FibreSumZero field axis transverse
+axisCentering4DirectFibreSumZero field axis transverse
   rewrite sumScaledDifferenceFormula
     1ℚ
     (quarter * physicalFibreSum field axis transverse)
     (allCyclicIndices side4)
     (λ coordinate → field (insertAxis axis coordinate transverse))
   | lengthAllCyclicIndices side4 = ℚRing.solve-∀
+
+axisCentering4FibreSumZero : ∀ field axis transverse →
+  sumRational (allCyclicIndices side4)
+    (λ coordinate →
+      axisCentering4 field axis (insertAxis axis coordinate transverse))
+  ≡ 0ℚ
+axisCentering4FibreSumZero field axis transverse =
+  trans
+    (sumRationalCong
+      (allCyclicIndices side4)
+      (λ coordinate →
+        axisCentering4 field axis (insertAxis axis coordinate transverse))
+      (λ coordinate →
+        field (insertAxis axis coordinate transverse)
+        - quarter * physicalFibreSum field axis transverse)
+      (axisCentering4OnFibre field axis transverse))
+    (axisCentering4DirectFibreSumZero field axis transverse)
 
 ------------------------------------------------------------------------
 -- Literal four-axis martingale fields.
