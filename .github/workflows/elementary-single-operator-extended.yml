@@ -53,6 +53,7 @@ jobs:
             $AGDA DASHI/Analysis/ConstructiveSeries.agda
             $AGDA DASHI/Analysis/OrdinaryTranscendentalRealization.agda
             $AGDA DASHI/Analysis/PowerSeriesTranscendentals.agda
+            $AGDA DASHI/Analysis/ConstructiveIntermediateValue.agda
             $AGDA DASHI/Analysis/InverseLogarithmFromExponential.agda
             $AGDA DASHI/Analysis/PrincipalComplexLogRealization.agda
             $AGDA DASHI/Analysis/OrdinaryComplexPolar.agda
