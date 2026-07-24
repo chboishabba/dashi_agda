@@ -7,14 +7,23 @@ on:
     paths:
       - 'DASHI/Physics/YangMills/BalabanBoolean4*.agda'
       - 'DASHI/Physics/YangMills/BalabanPath*.agda'
+      - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
+      - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
       - 'DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanFourDimensional*.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2Adjoint*.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2Transport*.agda'
       - 'DASHI/Physics/YangMills/BalabanDyadic*.agda'
       - 'DASHI/Physics/YangMills/BalabanWilsonRGCoefficientCombinatoricsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanNonlinearDifferenceIdentitiesExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanQuadraticOperatorPerturbationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMultilinearLipschitzCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanRooted*.agda'
+      - 'DASHI/Physics/YangMills/BalabanTrace*.agda'
+      - 'DASHI/Physics/YangMills/BalabanRunningCouplingIterationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanTerminal*.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'scripts/check_ym_boolean4_exact.py'
       - 'scripts/search_ym_quantitative_region.py'
@@ -24,14 +33,23 @@ on:
     paths:
       - 'DASHI/Physics/YangMills/BalabanBoolean4*.agda'
       - 'DASHI/Physics/YangMills/BalabanPath*.agda'
+      - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
+      - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
       - 'DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanFourDimensional*.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2Adjoint*.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2Transport*.agda'
       - 'DASHI/Physics/YangMills/BalabanDyadic*.agda'
       - 'DASHI/Physics/YangMills/BalabanWilsonRGCoefficientCombinatoricsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanNonlinearDifferenceIdentitiesExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanQuadraticOperatorPerturbationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanMultilinearLipschitzCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanRooted*.agda'
+      - 'DASHI/Physics/YangMills/BalabanTrace*.agda'
+      - 'DASHI/Physics/YangMills/BalabanRunningCouplingIterationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanTerminal*.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'scripts/check_ym_boolean4_exact.py'
       - 'scripts/search_ym_quantitative_region.py'
@@ -70,6 +88,11 @@ jobs:
             $AGDA DASHI/Physics/YangMills/BalabanPath3PoincareExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanRationalLDLCertificate.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4GeneratedLDLCertificate.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockFibreCarrier.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPhysicalBlockFibreSumsExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4PhysicalFibreMatchExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanFourAxisMartingaleExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanPath4AxisAverageExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanFourDimensionalLDLTensorization.agda
             $AGDA DASHI/Physics/YangMills/BalabanPath4FourDimensionalTensorizationRegression.agda
             $AGDA DASHI/Physics/YangMills/BalabanFourDimensionalHaloOverlapExact.agda
@@ -77,15 +100,23 @@ jobs:
             $AGDA DASHI/Physics/YangMills/BalabanBoolean4PatchLaplacianIntertwining.agda
             $AGDA DASHI/Physics/YangMills/BalabanSU2AdjointTransportExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanSU2AdjointOrderedReduction.agda
+            $AGDA DASHI/Physics/YangMills/BalabanSU2AdjointRadiusSquared.agda
             $AGDA DASHI/Physics/YangMills/BalabanSU2TransportTelescopingExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanSU2TransportPathNormBound.agda
             $AGDA DASHI/Physics/YangMills/BalabanDyadicQuantitativeRegionExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanWilsonRGCoefficientCombinatoricsExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanNonlinearDifferenceIdentitiesExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanQuadraticOperatorPerturbationExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanMultilinearLipschitzCalculus.agda
             $AGDA DASHI/Physics/YangMills/BalabanCollarPatchResidualBudgetExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanRootedPolymerWordEntropyExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanTraceKoteckyPreissGeometricExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanDyadicTerminalScaleExact.agda
+            $AGDA DASHI/Physics/YangMills/BalabanRunningCouplingIterationExact.agda
             $AGDA DASHI/Physics/YangMills/BalabanTerminalScalePhysicalClustering.agda
             $AGDA DASHI/Physics/YangMills/BalabanTerminalKPPhysicalScaleAssembly.agda
             agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
               /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda
+            $AGDA DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda
             $AGDA DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda
           '
