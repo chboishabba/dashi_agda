@@ -32,6 +32,7 @@ on:
       - 'scripts/check_ym_physical_progress.py'
       - 'scripts/search_ym_quantitative_region.py'
       - 'scripts/generate_path_poincare_sos.py'
+      - 'scripts/generate_path_physical_bridge.py'
       - '.github/workflows/ym-boolean4-exact.yml'
   pull_request:
     paths:
@@ -62,6 +63,7 @@ on:
       - 'scripts/check_ym_physical_progress.py'
       - 'scripts/search_ym_quantitative_region.py'
       - 'scripts/generate_path_poincare_sos.py'
+      - 'scripts/generate_path_physical_bridge.py'
       - '.github/workflows/ym-boolean4-exact.yml'
   workflow_dispatch:
 
@@ -80,13 +82,17 @@ jobs:
         run: python3 scripts/check_ym_physical_progress.py
       - name: Record exact dyadic quantitative search
         run: python3 scripts/search_ym_quantitative_region.py --max-exponent 16 --output /tmp/ym-region.json
-      - name: Generate an arbitrary-side Agda LDL certificate
+      - name: Generate arbitrary-side Agda LDL and physical bridge
         run: |
           mkdir -p /tmp/DASHI/Physics/YangMills
           python3 scripts/generate_path_poincare_sos.py 5 \
             --output /tmp/path5-ldl.json \
             --agda-output /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda \
             --agda-module DASHI.Physics.YangMills.GeneratedPath5LDLCertificate
+          python3 scripts/generate_path_physical_bridge.py 5 \
+            --certificate-module DASHI.Physics.YangMills.GeneratedPath5LDLCertificate \
+            --bridge-module DASHI.Physics.YangMills.GeneratedPath5PhysicalBridge \
+            --output /tmp/DASHI/Physics/YangMills/GeneratedPath5PhysicalBridge.agda
       - uses: DeterminateSystems/nix-installer-action@v3
       - name: Typecheck exact quantitative modules
         run: |
@@ -133,6 +139,8 @@ jobs:
             $AGDA DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda
             agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
               /tmp/DASHI/Physics/YangMills/GeneratedPath5LDLCertificate.agda
+            agda -i /tmp -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              /tmp/DASHI/Physics/YangMills/GeneratedPath5PhysicalBridge.agda
             $AGDA DASHI/Physics/YangMills/BalabanClayAnalyticInhabitationSpine.agda
             $AGDA DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda
           '
