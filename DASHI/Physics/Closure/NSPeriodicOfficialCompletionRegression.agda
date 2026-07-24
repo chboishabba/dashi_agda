@@ -54,6 +54,19 @@ open import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeLimitTransport publi
 open import DASHI.Physics.Closure.NSPeriodicWeightedEnvelopeContinuumAdapter public
 open import DASHI.Physics.Closure.NSPeriodicOfficialCompletionStatus public
 
+-- Compile-only imports for the narrowed concrete frontier.
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier
+import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm
+import DASHI.Physics.Closure.NSPeriodicConcreteOfficialNormWeights
+import DASHI.Physics.Closure.NSPeriodicCanonicalNearYoungAllocation
+import DASHI.Physics.Closure.NSPeriodicConcreteCandidateBudgetArithmetic
+import DASHI.Physics.Closure.NSPeriodicCompactGammaPDEBalance
+import DASHI.Physics.Closure.NSPeriodicCanonicalThreeBoundaryTupleAdapter
+import DASHI.Physics.Closure.NSPeriodicObservableDerivativeBoundReduction
+import DASHI.Physics.Closure.NSPeriodicDiffuseLowHighSplit
+import DASHI.Physics.Closure.NSPeriodicChartFailureAnalyticRoutes
+import DASHI.Physics.Closure.NSPeriodicFixedShellFiniteRankConvergence
+
 officialNormGateRegression :
   allOfficialHarmonicInputsInhabited ≡ false
 officialNormGateRegression = refl
