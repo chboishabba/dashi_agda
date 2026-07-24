@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact
 import DASHI.Physics.YangMills.BalabanFourAxisMartingaleExact
+import DASHI.Physics.YangMills.BalabanFiniteFibreAverageExact
 import DASHI.Physics.YangMills.BalabanCommutingProjectionMartingaleExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
@@ -41,8 +42,17 @@ path4PhysicalFibreCertificateLevel = machineChecked
 path4AxisAverageAlgebraLevel : ProofLevel
 path4AxisAverageAlgebraLevel = computed
 
+finiteFibreAverageSelfAdjointnessLevel : ProofLevel
+finiteFibreAverageSelfAdjointnessLevel = machineChecked
+
+finiteFibreAverageIdempotenceLevel : ProofLevel
+finiteFibreAverageIdempotenceLevel = machineChecked
+
 commutingProjectionOrthogonalityLevel : ProofLevel
 commutingProjectionOrthogonalityLevel = machineChecked
+
+physicalAxisPartitionInnerProductMatchLevel : ProofLevel
+physicalAxisPartitionInnerProductMatchLevel = conditional
 
 physicalAxisAverageSelfAdjointnessLevel : ProofLevel
 physicalAxisAverageSelfAdjointnessLevel = conditional
