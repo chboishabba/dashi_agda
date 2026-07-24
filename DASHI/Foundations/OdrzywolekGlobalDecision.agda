@@ -1,17 +1,17 @@
 module DASHI.Foundations.OdrzywolekGlobalDecision where
 
-open import Agda.Builtin.Equality using (_≡_; refl; subst)
+open import Agda.Builtin.Equality using (_≡_; refl; subst; trans)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 open import DASHI.Foundations.ElementarySingleOperator
 open import DASHI.Foundations.TernaryElementaryOperatorCandidate
-open import DASHI.Foundations.TernaryElementarySearchCertificate
-open import DASHI.Foundations.OdrzywolekGeneratedUnitObstruction
+open import DASHI.Foundations.TernaryEMLDecision using (TernaryDomainObstruction)
 
 ------------------------------------------------------------------------
 -- The intended ordinary model uses the same scalar carrier for EML and T.  This
--- identity-carrier formulation prevents a vacuous exotic embedding from hiding
--- the actual functional-completeness question.
+-- identity-carrier formulation prevents an exotic embedding from hiding the
+-- actual functional-completeness question.
 
 record SharedTernaryEMLModel : Set₁ where
   field
@@ -50,63 +50,6 @@ record IdentityTernaryRepresentsEML
 
 open IdentityTernaryRepresentsEML public
 
-identityRepresentationPromotes :
-  ∀ {M : SharedTernaryEMLModel} →
-  IdentityTernaryRepresentsEML M →
-  TernaryRepresentsEML (ternaryModel M) (emlModel M)
-identityRepresentationPromotes R =
-  record
-    { embedCarrier = λ x → x
-    ; translate = translate R
-    ; translate-correct = λ ρ ρT agreement t →
-        identityCorrectUnderAgreement ρ ρT agreement t
-    }
-  where
-    identityCorrectUnderAgreement :
-      ∀ ρ ρT →
-      (∀ x → ρT x ≡ ρ x) →
-      ∀ t →
-      evalTernary _ ρT (translate R t)
-      ≡ evalEML _ ρ t
-    identityCorrectUnderAgreement ρ ρT agreement t =
-      transTernaryEnvironment
-        (translate R t)
-        ρT
-        ρ
-        agreement
-        (translateCorrect R ρ t)
-
-    transTernaryEnvironment :
-      ∀ t ρLeft ρRight →
-      (∀ x → ρLeft x ≡ ρRight x) →
-      evalTernary _ ρRight t ≡ evalEML _ ρRight (oneM) →
-      evalTernary _ ρLeft t ≡ evalEML _ ρRight (oneM)
-    transTernaryEnvironment (varT x) ρLeft ρRight agreement final =
-      Agda.Builtin.Equality.trans (agreement x) final
-    transTernaryEnvironment (nodeT a b c) ρLeft ρRight agreement final =
-      Agda.Builtin.Equality.trans
-        (Agda.Builtin.Equality.cong₃
-          (ternary M)
-          (environmentAgreement a)
-          (environmentAgreement b)
-          (environmentAgreement c))
-        final
-      where
-        environmentAgreement : ∀ q →
-          evalTernary (ternaryModel M) ρLeft q
-          ≡ evalTernary (ternaryModel M) ρRight q
-        environmentAgreement (varT x) = agreement x
-        environmentAgreement (nodeT x y z) =
-          Agda.Builtin.Equality.cong₃
-            (ternary M)
-            (environmentAgreement x)
-            (environmentAgreement y)
-            (environmentAgreement z)
-
-------------------------------------------------------------------------
--- The previous generic bridge is intentionally restated below without relying
--- on a ternary `cong3` primitive.  It is the exported, type-stable promotion.
-
 cong₃ :
   ∀ {A B C D : Set}
     (f : A → B → C → D)
@@ -130,16 +73,16 @@ evalTernaryEnvironmentCongruent {M} ρ σ agree (nodeT a b c) =
     (evalTernaryEnvironmentCongruent ρ σ agree b)
     (evalTernaryEnvironmentCongruent ρ σ agree c)
 
-identityRepresentationPromotes′ :
+identityRepresentationPromotes :
   ∀ {M : SharedTernaryEMLModel} →
   IdentityTernaryRepresentsEML M →
   TernaryRepresentsEML (ternaryModel M) (emlModel M)
-identityRepresentationPromotes′ {M} R =
+identityRepresentationPromotes {M} R =
   record
     { embedCarrier = λ x → x
     ; translate = translate R
     ; translate-correct = λ ρ ρT agreement t →
-        Agda.Builtin.Equality.trans
+        trans
           (evalTernaryEnvironmentCongruent ρT ρ agreement (translate R t))
           (translateCorrect R ρ t)
     }
@@ -193,7 +136,7 @@ invariantObstructionRefutesIdentityUniversality :
   GlobalInvariantObstruction M →
   IdentityTernaryRepresentsEML M →
   ⊥
-invariantObstructionRefutesIdentityUniversality O R =
+invariantObstructionRefutesIdentityUniversality {M} O R =
   targetViolatesInvariant O
     (subst
       (Invariant (invariant O))
@@ -203,7 +146,7 @@ invariantObstructionRefutesIdentityUniversality O R =
     treeInvariant :
       Invariant (invariant O)
         (evalTernary
-          (ternaryModel _)
+          (ternaryModel M)
           (environment O)
           (translate R (target O)))
     treeInvariant =
@@ -233,14 +176,16 @@ data GlobalTernaryEMLDecision
 record BoundedRefutationPromotion
   (M : SharedTernaryEMLModel) : Set₁ where
   field
-    depth : Agda.Builtin.Nat.Nat
+    depth : Nat
     CandidateAtDepth : TernaryExpr → Set
     target : EMLExpr
-    representsTarget : TernaryExpr → Set
-    exhaustive : ∀ t → CandidateAtDepth t → Set
+    RepresentsTarget : TernaryExpr → Set
+    Covered : TernaryExpr → Set
+
+    exhaustive : ∀ t → CandidateAtDepth t → Covered t
     noCandidateRepresents : ∀ t →
-      CandidateAtDepth t →
-      representsTarget t →
+      Covered t →
+      RepresentsTarget t →
       ⊥
 
 open BoundedRefutationPromotion public
