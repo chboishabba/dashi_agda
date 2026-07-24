@@ -20,6 +20,7 @@ import DASHI.Physics.YangMills.BalabanPath4AxisAverageNormContractionExact
 import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact
 import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
 import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
 import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
 import DASHI.Physics.YangMills.BalabanNonlinearDifferenceIdentitiesExact
@@ -83,6 +84,12 @@ path4DistinctAxisDirectionalEnergyContractionLevel = machineChecked
 
 path4ScalarGlobalPoincareLevel : ProofLevel
 path4ScalarGlobalPoincareLevel = machineChecked
+
+path4BondComponentPoincareLevel : ProofLevel
+path4BondComponentPoincareLevel = machineChecked
+
+path4BondReferenceHodgeCoercivityLevel : ProofLevel
+path4BondReferenceHodgeCoercivityLevel = machineChecked
 
 physicalArbitrarySideAverageNormalizationLevel : ProofLevel
 physicalArbitrarySideAverageNormalizationLevel = conditional
