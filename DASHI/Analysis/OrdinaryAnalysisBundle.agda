@@ -2,7 +2,10 @@ module DASHI.Analysis.OrdinaryAnalysisBundle where
 
 open import DASHI.Analysis.ConstructiveRealSpine public
 open import DASHI.Analysis.FastCauchyReals public
+open import DASHI.Analysis.FastCauchySetoid public
+open import DASHI.Analysis.FastCauchyOrder public
 open import DASHI.Analysis.FastCauchyArithmetic public
+open import DASHI.Analysis.FastCauchyQuotient public
 open import DASHI.Analysis.CanonicalRationalMetric public
 open import DASHI.Analysis.ConstructiveSeries public
 open import DASHI.Analysis.OrdinaryTranscendentalRealization public
