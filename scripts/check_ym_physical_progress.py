@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed audit for the physical fibre, coercivity, polymer and RG tranche."""
+"""Fail-closed audit for the physical fibre, coercivity, SU(2), polymer and RG tranche."""
 
 from __future__ import annotations
 
@@ -50,6 +50,23 @@ FILES: dict[Path, tuple[str, ...]] = {
         "path4BondReferenceHodgeCoercivity",
         "path4BondReferenceHodgeCoercivityLevel = machineChecked",
         "literalGaugeBlockPenaltyIdentificationLevel = conditional",
+    ),
+    YM / "BalabanSU2AdjointPointwiseRadiusSquared.agda": (
+        "SU2AdjointSquaredRadiusOrderLaws",
+        "unitQuaternionAdjointDisplacementRadiusSqPointwise",
+        "SU2ExponentialPointwiseRadiusMatch",
+        "exponentialAdjointDisplacementRadiusSqPointwise",
+        "su2PointwiseRadiusInterfaceRepairLevel = machineChecked",
+        "su2PointwiseExponentialAnalyticInputLevel = conditional",
+    ),
+    YM / "BalabanSU2RadialExponentialChartExact.agda": (
+        "radialQuaternionNormExact",
+        "radialImaginaryNormExact",
+        "radialDataToPointwiseExponentialMatch",
+        "radialExponentialAdjointDisplacementRadiusSq",
+        "su2RadialQuaternionAlgebraLevel = computed",
+        "su2RadialExponentialChartReductionLevel = machineChecked",
+        "su2RadialScalarRadiusBoundLevel = conditional",
     ),
     YM / "BalabanPhysicalHaloOriginExact.agda": (
         "cyclicPredecessor",
@@ -104,6 +121,9 @@ FILES: dict[Path, tuple[str, ...]] = {
         "path4BondComponentPoincareLevel = machineChecked",
         "path4BondReferenceHodgeCoercivityLevel = machineChecked",
         "physicalBondHodgeIdentificationLevel = conditional",
+        "su2PointwiseRadiusInterfaceRepairLevel = machineChecked",
+        "su2RadialExponentialChartReductionLevel = machineChecked",
+        "su2RadialScalarRadiusBoundLevel = conditional",
         "literalPhysicalHaloOriginLevel = machineChecked",
         "literalFiveWilsonOperatorBoundsLevel = conditional",
         "physicalTerminalOffsetBoundLevel = conjectural",
@@ -188,7 +208,7 @@ def main() -> None:
     for path, required in SCRIPTS.items():
         audit_text(path, required, forbid=False)
     audit_generated_physical_bridge()
-    print("Physical fibre, scalar/bond coercivity, polymer and RG progress remains exact and fail-closed.")
+    print("Physical fibre, scalar/bond coercivity, SU(2), polymer and RG progress remains exact and fail-closed.")
 
 
 if __name__ == "__main__":
