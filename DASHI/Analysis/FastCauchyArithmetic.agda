@@ -1,8 +1,8 @@
 module DASHI.Analysis.FastCauchyArithmetic where
 
 open import Agda.Builtin.Equality using (_≡_; subst)
-open import Agda.Builtin.Nat using (Nat; suc)
-open import Agda.Builtin.Sigma using (_,_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 
 open import DASHI.Analysis.FastCauchyReals
@@ -236,8 +236,7 @@ record BoundedFastCauchy
 open BoundedFastCauchy public
 
 record FastCauchyMultiplicationAuthority
-  (A : RationalMetricAuthority)
-  (laws : FastCauchyAdditiveLaws A) : Set₁ where
+  (A : RationalMetricAuthority) : Set₁ where
   field
     boundedness : (x : FastCauchyReal A) → BoundedFastCauchy x
     multiply : FastCauchyReal A → FastCauchyReal A → FastCauchyReal A
@@ -261,9 +260,11 @@ record SeparatedFromZero
   (x : FastCauchyReal A) : Set₁ where
   field
     separation : Q A
-    separationPositive : Set
+    PositiveQ : Q A → Set
+    separationPositive : PositiveQ separation
     cutoff : Nat
-    eventuallySeparated : ∀ n → cutoff ≤ n → Set
+    eventuallySeparated : ∀ n → cutoff ≤ n →
+      PositiveQ (_-Q_ A (absQ A (approximate x n)) separation)
 
 open SeparatedFromZero public
 
@@ -289,7 +290,8 @@ record FastCauchyDiagonalCompleteness
     sequenceAtReal : RealSequence → Nat → FastCauchyReal A
     IsCauchySequence : RealSequence → Set
     diagonalLimit : (s : RealSequence) → IsCauchySequence s → FastCauchyReal A
-    convergesToDiagonal : ∀ s cs → Set
+    ConvergesToReal : RealSequence → FastCauchyReal A → Set
+    convergesToDiagonal : ∀ s cs → ConvergesToReal s (diagonalLimit s cs)
     diagonalIndependent : ∀ s cs₁ cs₂ →
       diagonalLimit s cs₁ ≈R diagonalLimit s cs₂
 
