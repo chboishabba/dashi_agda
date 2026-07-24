@@ -10,6 +10,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
       - 'DASHI/Physics/YangMills/BalabanFinite*.agda'
       - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2*.agda'
       - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda'
@@ -24,6 +25,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanPhysical*.agda'
       - 'DASHI/Physics/YangMills/BalabanFinite*.agda'
       - 'DASHI/Physics/YangMills/BalabanFourAxis*.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2*.agda'
       - 'DASHI/Physics/YangMills/BalabanCommutingProjectionMartingaleExact.agda'
       - 'DASHI/Physics/YangMills/ConstructiveYangMillsNextSurface.agda'
       - 'DASHI/Physics/YangMills/BalabanPhysicalProgressLedger.agda'
@@ -63,7 +65,7 @@ jobs:
             --bridge-module DASHI.Physics.YangMills.GeneratedPath5PhysicalBridge \
             --output /tmp/DASHI/Physics/YangMills/GeneratedPath5PhysicalBridge.agda
       - uses: DeterminateSystems/nix-installer-action@v3
-      - name: Typecheck coercivity dependency cone
+      - name: Typecheck coercivity and SU2 chart dependency cone
         run: |
           nix develop .# --command bash -lc '
             set -euo pipefail
@@ -88,7 +90,9 @@ jobs:
               DASHI/Physics/YangMills/BalabanPath4DirectionalEnergyContractionExact.agda \
               DASHI/Physics/YangMills/BalabanPath4GlobalPoincareExact.agda \
               DASHI/Physics/YangMills/BalabanPath4BondHodgeCoercivityExact.agda \
-              DASHI/Physics/YangMills/BalabanPath4CoercivityCICanary.agda
+              DASHI/Physics/YangMills/BalabanPath4CoercivityCICanary.agda \
+              DASHI/Physics/YangMills/BalabanSU2AdjointPointwiseRadiusSquared.agda \
+              DASHI/Physics/YangMills/BalabanSU2RadialExponentialChartExact.agda
             do
               if [ -f "$module" ]; then
                 $AGDA "$module"
@@ -108,7 +112,8 @@ jobs:
         with:
           script: |
             const marker = '<!-- ym-clay-coercivity-clean-agda -->';
-            const body = `${marker}\nYM Clay coercivity clean Agda CI: **${{ job.status }}**\n\nCommit: \`${context.sha}\``;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = `${marker}\nYM Clay coercivity clean Agda CI: **${{ job.status }}**\n\nCommit: \`${context.sha}\`\nRun: ${runUrl}`;
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
