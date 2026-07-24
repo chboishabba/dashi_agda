@@ -1,6 +1,6 @@
 module DASHI.Cognition.PNF.LearningAlgebra where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
@@ -77,7 +77,7 @@ record ContextGeneralisationReceipt : Set where
     sourceContext targetContext : String
     transportCertificate : String
     generalisationIsAutomatic : Bool
-    generalisationIsAutomaticIsFalse : generalisationIsAutomatic ≡ Agda.Builtin.Bool.false
+    generalisationIsAutomaticIsFalse : generalisationIsAutomatic ≡ false
 
 open ContextGeneralisationReceipt public
 
