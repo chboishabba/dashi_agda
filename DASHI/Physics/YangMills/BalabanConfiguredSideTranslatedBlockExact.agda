@@ -11,15 +11,10 @@ open import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact
 open import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
 
 ------------------------------------------------------------------------
 -- Translated blocks are represented in local relative coordinates.
---
--- The global origin is retained in the type of the local chart, but the finite
--- carrier, norm, difference energy and Q=0 predicate depend only on relative
--- coordinates.  Their translation preservation is therefore definitional,
--- rather than an extra analytic estimate.  The separate global-to-local Wilson
--- extraction remains the only geometric matching obligation.
 ------------------------------------------------------------------------
 
 TranslatedPhysicalSU2Tangent4 :
@@ -96,10 +91,6 @@ translatedConfiguredSidePoincare tangent blockZero =
   physicalBlockConstrainedDifferencePoincare
     (translatedTangentToLocal tangent) blockZero
 
-------------------------------------------------------------------------
--- The translated halo overlap is the already-computed finite multiplicity.
-------------------------------------------------------------------------
-
 translatedContainingBlockMultiplicity :
   ∀ {latticeSide}
     (geometry : PhysicalHaloGeometry latticeSide)
@@ -124,5 +115,15 @@ configuredSideTranslatedBlockCoercivityLevel = machineChecked
 configuredSideHaloMultiplicityLevel : ProofLevel
 configuredSideHaloMultiplicityLevel = machineChecked
 
+-- The complete extraction is now proved for the configured periodic side-four
+-- global carrier.  Embedding an open side-four block into a larger global torus
+-- remains a different boundary-chart theorem.
+configuredPeriodicSide4GlobalWilsonToLocalTranslatedBlockLevel : ProofLevel
+configuredPeriodicSide4GlobalWilsonToLocalTranslatedBlockLevel = machineChecked
+
+arbitraryLatticeGlobalWilsonToLocalTranslatedBlockLevel : ProofLevel
+arbitraryLatticeGlobalWilsonToLocalTranslatedBlockLevel = conditional
+
 globalWilsonToLocalTranslatedBlockLevel : ProofLevel
-globalWilsonToLocalTranslatedBlockLevel = conditional
+globalWilsonToLocalTranslatedBlockLevel =
+  arbitraryLatticeGlobalWilsonToLocalTranslatedBlockLevel
