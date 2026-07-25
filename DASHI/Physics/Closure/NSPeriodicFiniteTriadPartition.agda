@@ -1,22 +1,12 @@
 module DASHI.Physics.Closure.NSPeriodicFiniteTriadPartition where
 
 open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
-import DASHI.Physics.Closure.NSPeriodicFinitePythagoreanSum as Finite
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-
-------------------------------------------------------------------------
--- Exact finite partition of literal Galerkin triads into LH, HL and HH.
---
--- Geometry decides one of the three classes for every near interaction.  This
--- module proves by list induction that the literal total fold is exactly the sum
--- of the three class folds.  No estimate, cutoff constant, or PDE assumption is
--- used in the partition theorem.
-------------------------------------------------------------------------
 
 data NearClass : Set where
   lowHigh highLow highHigh : NearClass
@@ -77,15 +67,11 @@ headIntoLowHigh :
 headIntoLowHigh A head lh hl hh =
   trans
     (cong (λ tail → _+_ A head tail)
-      (addAssociative A lh hl hh |> sym))
+      (sym (addAssociative A lh hl hh)))
     (trans
-      (addAssociative A head (_+_ A lh hl) hh |> sym)
+      (sym (addAssociative A head (_+_ A lh hl) hh))
       (cong (λ first → _+_ A first hh)
-        (addAssociative A head lh hl |> sym)))
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {X Y : Set} → X → (X → Y) → Y
-  x |> f = f x
+        (sym (addAssociative A head lh hl))))
 
 headIntoHighLow :
   (A : AbsorptionArithmetic) →
@@ -101,11 +87,7 @@ headIntoHighLow A head lh hl hh =
         (trans
           (cong (λ tail → _+_ A tail hl)
             (addCommutative A head lh))
-          (addAssociative A lh head hl |> sym))))
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {X Y : Set} → X → (X → Y) → Y
-  x |> f = f x
+          (sym (addAssociative A lh head hl)))))
 
 headIntoHighHigh :
   (A : AbsorptionArithmetic) →
@@ -115,17 +97,13 @@ headIntoHighHigh :
 headIntoHighHigh A head lh hl hh =
   trans
     (cong (λ tail → _+_ A head tail)
-      (addAssociative A lh hl hh |> sym))
+      (sym (addAssociative A lh hl hh)))
     (trans
-      (addAssociative A head (_+_ A lh hl) hh |> sym)
+      (sym (addAssociative A head (_+_ A lh hl) hh))
       (trans
         (cong (λ first → _+_ A first hh)
           (addCommutative A head (_+_ A lh hl)))
         (addAssociative A (_+_ A lh hl) head hh)))
-  where
-  infixl 0 _|>_
-  _|>_ : ∀ {X Y : Set} → X → (X → Y) → Y
-  x |> f = f x
 
 finiteNearTriadDecomposition :
   ∀ {i} {A : AbsorptionArithmetic} {Item : Set i} →
