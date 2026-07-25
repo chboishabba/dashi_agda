@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.NSPeriodicFarHighTailReindexing where
 open import Agda.Primitive using (Level)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
