@@ -15,6 +15,7 @@ open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate using
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
+open import DASHI.Physics.YangMills.BalabanPath4SU2WilsonGaugeHodgeExact
 
 ------------------------------------------------------------------------
 -- One coherent owner for the literal configured-side reference Hessian.
@@ -42,12 +43,21 @@ record Path4SU2ReferenceHodgeData (Gauge Coarse : Set) : Set₁ where
     nonnegativeIsRationalNonnegative : ∀ value →
       Nonnegative quadraticData value → 0ℚ ≤ value
 
-    referenceWilsonGaugeEnergyMatchesDifferenceEnergy : ∀ tangent →
-      wilsonHessianQuadraticForm quadraticData tangent
-      + gaugeFixingNormSq quadraticData tangent
-      ≡ physicalReferenceDifferenceEnergy tangent
+    literalWilsonGaugeHodgeProducer :
+      ConfiguredWilsonGaugeHodgeProducer Gauge Coarse quadraticData
 
 open Path4SU2ReferenceHodgeData public
+
+referenceWilsonGaugeEnergyMatchesDifferenceEnergy :
+  ∀ {Gauge Coarse}
+    (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
+    tangent →
+  wilsonHessianQuadraticForm (quadraticData dataSet) tangent
+  + gaugeFixingNormSq (quadraticData dataSet) tangent
+  ≡ physicalReferenceDifferenceEnergy tangent
+referenceWilsonGaugeEnergyMatchesDifferenceEnergy dataSet =
+  referenceWilsonGaugeEnergyMatchesDifferenceEnergyExact
+    (literalWilsonGaugeHodgeProducer dataSet)
 
 referenceBlockPenaltyNonnegative :
   ∀ {Gauge Coarse}
