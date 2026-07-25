@@ -14,6 +14,7 @@ import DASHI.Physics.Closure.NSTriadKNScaledOperatorErrorAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNVariationalRigidityOperatorRefinement as Variational
 import DASHI.Physics.Closure.NSTriadKNAdmissibleConstrainedSpectralAudit as SpectralAudit
 import DASHI.Physics.Closure.NSTriadKNAdmissibleFourierTriadCarrier as FourierTriad
+import DASHI.Physics.Closure.NSTriadKNRetainedPositiveSectorKernelOperator as RetainedKernel
 
 one : Nat
 one = suc zero
@@ -109,7 +110,7 @@ canonicalSharperScaledOperatorErrorClosedIsFalse :
 canonicalSharperScaledOperatorErrorClosedIsFalse = refl
 
 ------------------------------------------------------------------------
--- Implemented analytic and carrier routes.
+-- Implemented analytic, carrier, enumeration and operator routes.
 ------------------------------------------------------------------------
 
 variationalRouteImplemented : Bool
@@ -158,6 +159,33 @@ richStage3OperatorHandoffRouteImplementedIsTrue :
 richStage3OperatorHandoffRouteImplementedIsTrue =
   FourierTriad.richStage3OperatorHandoffImplementedIsTrue
 
+retainedPositiveSectorFiberRouteImplemented : Bool
+retainedPositiveSectorFiberRouteImplemented =
+  RetainedKernel.retainedPositiveSectorFiberConstructionImplemented
+
+retainedPositiveSectorFiberRouteImplementedIsTrue :
+  retainedPositiveSectorFiberRouteImplemented ≡ true
+retainedPositiveSectorFiberRouteImplementedIsTrue =
+  RetainedKernel.retainedPositiveSectorFiberConstructionImplementedIsTrue
+
+finiteRetainedWeightedAggregateRouteImplemented : Bool
+finiteRetainedWeightedAggregateRouteImplemented =
+  RetainedKernel.finiteWeightedAggregateImplemented
+
+finiteRetainedWeightedAggregateRouteImplementedIsTrue :
+  finiteRetainedWeightedAggregateRouteImplemented ≡ true
+finiteRetainedWeightedAggregateRouteImplementedIsTrue =
+  RetainedKernel.finiteWeightedAggregateImplementedIsTrue
+
+retainedFiberRichOperatorConstructionImplemented : Bool
+retainedFiberRichOperatorConstructionImplemented =
+  RetainedKernel.retainedFiberToRichOperatorImplemented
+
+retainedFiberRichOperatorConstructionImplementedIsTrue :
+  retainedFiberRichOperatorConstructionImplemented ≡ true
+retainedFiberRichOperatorConstructionImplementedIsTrue =
+  RetainedKernel.retainedFiberToRichOperatorImplementedIsTrue
+
 ------------------------------------------------------------------------
 -- Honest live boundary.
 ------------------------------------------------------------------------
@@ -177,6 +205,11 @@ canonicalEnergyCarrierConstraintLossConfirmed :
   SpectralAudit.canonicalEnergyCarrierCanEncodePhysicalConstraints ≡ false
 canonicalEnergyCarrierConstraintLossConfirmed =
   SpectralAudit.canonicalEnergyCarrierCanEncodePhysicalConstraintsIsFalse
+
+canonicalPhysicalRetainedFiberStillMissing :
+  RetainedKernel.canonicalPhysicalRetainedFiberInhabited ≡ false
+canonicalPhysicalRetainedFiberStillMissing =
+  RetainedKernel.canonicalPhysicalRetainedFiberInhabitedIsFalse
 
 actualRetainedTriadEnumerationStillMissing :
   FourierTriad.actualRetainedTriadEnumerationConnected ≡ false
