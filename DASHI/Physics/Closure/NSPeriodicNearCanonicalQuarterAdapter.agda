@@ -1,6 +1,8 @@
 module DASHI.Physics.Closure.NSPeriodicNearCanonicalQuarterAdapter where
 
 open import Agda.Primitive using (Level; lsuc)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion as Near
@@ -75,14 +77,10 @@ canonicalNearUpperSumFitsQuarter :
     (Near.officialNearBudget (base I) q τ u)
 canonicalNearUpperSumFitsQuarter {A = A} I q τ u =
   substUpper
-    (officialNearBudgetIsQuarter I q τ u |> sym)
+    (sym (officialNearBudgetIsQuarter I q τ u))
     (Young.canonicalNearComponentsFitQuarter
       (nearCanonicalPaymentFit I q τ u))
   where
-  infixl 0 _|>_
-  _|>_ : ∀ {X Y : Set} → X → (X → Y) → Y
-  x |> f = f x
-
   substUpper : ∀ {x y z : Scalar A} →
     y ≡ z → _≤_ A x y → _≤_ A x z
   substUpper refl proof = proof
