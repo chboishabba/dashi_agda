@@ -23,6 +23,8 @@ open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
 open import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact using
   (Lie3; lie3; x; y; z; normSqV)
+open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact using
+  (siteSum4)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
   using
     ( ScalarBondField4
