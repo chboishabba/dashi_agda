@@ -1,6 +1,17 @@
 name: NS triad concrete retained fiber Agda
 
 on:
+  push:
+    branches:
+      - 'agent/ns-triad-scale-compatibility-closure'
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalRetainedAuthorities.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClassFiniteFibers.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiberSource.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiber.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiber.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda'
+      - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalRetainedAuthorities.agda'
