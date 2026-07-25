@@ -13,6 +13,7 @@ open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
 import DASHI.Physics.YangMills.BalabanArbitraryTranslatedOpenBlockWilsonExtractionExact
+import DASHI.Physics.YangMills.BalabanSU2WilsonActionSecondVariationExact
 
 TranslatedPhysicalSU2Tangent4 :
   ∀ {latticeSide : Nat} →
@@ -118,11 +119,14 @@ configuredPeriodicSide4GlobalWilsonToLocalTranslatedBlockLevel = machineChecked
 arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
 arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
 
--- This remaining adapter is specifically the equality between the repository's
--- pre-existing SUNWilsonAction operator carrier and the concrete exact global
--- jet fold.  It is no longer a geometric or Hodge calculation.
-repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
-repositorySUNWilsonActionHessianAdapterLevel = conditional
+repositorySUNWilsonActionSecondVariationAdapterLevel : ProofLevel
+repositorySUNWilsonActionSecondVariationAdapterLevel = machineChecked
+
+-- The sole remaining operator-layer seam is the Riesz representative stored in
+-- the legacy wilsonHessian field.  The generic SUNWilsonAction second derivative
+-- itself is now identified with the exact physical six-plane fold.
+repositoryWilsonHessianOperatorRepresentativeLevel : ProofLevel
+repositoryWilsonHessianOperatorRepresentativeLevel = conditional
 
 globalWilsonToLocalTranslatedBlockLevel : ProofLevel
 globalWilsonToLocalTranslatedBlockLevel =
