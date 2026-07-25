@@ -1,9 +1,9 @@
 module DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -144,11 +144,37 @@ axisNegativeGradientAdjoint axis field gauge =
     (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
       (field site) (forwardDifference4 axis gauge site)))
     (trans
-      (cong -_ (periodicForwardBackwardSummationByParts axis gauge field))
+      (siteSum4Scale (- 1ℚ)
+        (λ site → forwardDifference4 axis gauge site * field site))
       (trans
-        (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-          (gauge site) (backwardDifference4 axis field site)))
-        refl))
+        (ℚRing.solve-∀
+          (siteSum4 (λ site →
+            forwardDifference4 axis gauge site * field site)))
+        (trans
+          (cong (λ value → - value)
+            (periodicForwardBackwardSummationByParts axis gauge field))
+          (trans
+            (ℚRing.solve-∀
+              (siteSum4 (λ site →
+                gauge site * backwardDifference4 axis field site)))
+            (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
+              (gauge site) (backwardDifference4 axis field site)))))))
+
+axisFoldTimesRight : ∀ field gauge site →
+  sumRational (allCyclicIndices four)
+    (λ axis → backwardDifference4 axis (field axis) site * gauge site)
+  ≡ literalPeriodicDivergenceScalar field site * gauge site
+axisFoldTimesRight field gauge site =
+  trans
+    (sumRationalCong (allCyclicIndices four) _ _
+      (λ axis → ℚRing.solve-∀
+        (backwardDifference4 axis (field axis) site) (gauge site)))
+    (trans
+      (sumRationalScale (gauge site) (allCyclicIndices four)
+        (λ axis → backwardDifference4 axis (field axis) site))
+      (ℚRing.solve-∀
+        (gauge site)
+        (literalPeriodicDivergenceScalar field site)))
 
 periodicDivergenceGradientAdjoint : ∀ field gauge →
   scalarBondInner field (literalNegativeForwardGradientScalar gauge)
@@ -160,11 +186,8 @@ periodicDivergenceGradientAdjoint field gauge =
     (trans
       (sumSwap (allCyclicIndices four) (physicalBlockSites side4)
         (λ axis site → backwardDifference4 axis (field axis) site * gauge site))
-      (sym
-        (sumRationalCong (physicalBlockSites side4) _ _
-          (λ site → sym
-            (sumRationalScale (gauge site) (allCyclicIndices four)
-              (λ axis → backwardDifference4 axis (field axis) site))))))
+      (sumRationalCong (physicalBlockSites side4) _ _
+        (axisFoldTimesRight field gauge)))
 
 literalCodifferentialEqualsPeriodicDivergence : ∀ field site →
   literalPeriodicDivergenceScalar field site
@@ -211,17 +234,21 @@ curlCrossTermEqualsDivergenceCrossTerm firstAxis secondAxis hFirst hSecond =
     (mixedForwardDifferenceSummationByParts
       firstAxis secondAxis hSecond hFirst)
     (trans
-      (cong -_ (siteSum4Cong _ _ (λ site → cong (hSecond site *_) 
-        (backwardForwardDifferenceCommutes
-          firstAxis secondAxis hFirst site))))
+      (cong (λ value → - value)
+        (siteSum4Cong _ _ (λ site →
+          cong (λ value → hSecond site * value)
+            (backwardForwardDifferenceCommutes
+              firstAxis secondAxis hFirst site))))
       (trans
-        (cong -_ (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-          (hSecond site)
-          (forwardDifference4 secondAxis
-            (backwardDifference4 firstAxis hFirst) site))))
+        (cong (λ value → - value)
+          (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
+            (hSecond site)
+            (forwardDifference4 secondAxis
+              (backwardDifference4 firstAxis hFirst) site))))
         (trans
-          (cong -_ (periodicForwardBackwardSummationByParts
-            secondAxis (backwardDifference4 firstAxis hFirst) hSecond))
+          (cong (λ value → - value)
+            (periodicForwardBackwardSummationByParts
+              secondAxis (backwardDifference4 firstAxis hFirst) hSecond))
           (ℚRing.solve-∀
             (siteSum4 (λ site →
               backwardDifference4 firstAxis hFirst site
