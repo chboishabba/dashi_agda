@@ -93,8 +93,23 @@ officialPrincipalTermCancels S a P divFree =
     (advectedIsTested P)
     (homogeneousTransportCancellation S a (advectedShell P) divFree)
 
+------------------------------------------------------------------------
+-- Proof boundary.
+--
+-- The derivation from skewness to self-cancellation is checked locally.  The
+-- periodic integration-by-parts theorem and characteristic-zero scalar law are
+-- standard analytic/algebraic authorities until instantiated on the official
+-- concrete carrier.
+------------------------------------------------------------------------
+
 farLowEnergyPairingCancellationLevel : ProofLevel
 farLowEnergyPairingCancellationLevel = machineChecked
+
+periodicTransportSkewAuthorityLevel : ProofLevel
+periodicTransportSkewAuthorityLevel = standardImported
+
+characteristicZeroDoubleCancellationLevel : ProofLevel
+characteristicZeroDoubleCancellationLevel = standardImported
 
 officialFarLowSelfTestIdentificationLevel : ProofLevel
 officialFarLowSelfTestIdentificationLevel = conditional
