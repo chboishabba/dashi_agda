@@ -6,7 +6,7 @@ open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
@@ -124,10 +124,25 @@ fibreAverageSelfAdjointPointwise coefficient points left right fibre =
   trans
     (fibreAverageLeftInner coefficient points left right fibre)
     (trans
-      (ℚRing.solve-∀
-        coefficient
-        (fibreSum points left fibre)
-        (fibreSum points right fibre))
+      (trans
+        (ℚP.*-assoc
+          coefficient
+          (fibreSum points left fibre)
+          (fibreSum points right fibre))
+        (trans
+          (cong (coefficient *_)
+            (ℚP.*-comm
+              (fibreSum points left fibre)
+              (fibreSum points right fibre)))
+          (trans
+            (sym
+              (ℚP.*-assoc
+                coefficient
+                (fibreSum points right fibre)
+                (fibreSum points left fibre)))
+            (ℚP.*-comm
+              (coefficient * fibreSum points right fibre)
+              (fibreSum points left fibre)))))
       (symmetry
         (fibreAverageRightInner coefficient points left right fibre)))
   where
@@ -164,17 +179,17 @@ fibreAverageOfProjection :
     (siteField : FibreField Fibre Point) fibre →
   fibreAverage coefficient points
     (fibreAverageProjection coefficient points siteField) fibre
-  ≡ coefficient * natAsRational (length points)
+  ≡ (coefficient * natAsRational (length points))
     * fibreAverage coefficient points siteField fibre
 fibreAverageOfProjection coefficient points siteField fibre =
   trans
     (congLeft
       (sumRationalConstant points
         (fibreAverage coefficient points siteField fibre)))
-    (ℚRing.solve-∀
+    (sym (ℚP.*-assoc
       coefficient
       (natAsRational (length points))
-      (fibreAverage coefficient points siteField fibre))
+      (fibreAverage coefficient points siteField fibre)))
   where
     congLeft : ∀ {left right : ℚ} → left ≡ right →
       coefficient * left ≡ coefficient * right
@@ -196,7 +211,7 @@ fibreAverageProjectionIdempotentPointwise
     (fibreAverageOfProjection coefficient points siteField fibre)
     (trans
       (congRight normalization)
-      (ℚRing.solve-∀ (fibreAverage coefficient points siteField fibre)))
+      (ℚP.*-identityˡ (fibreAverage coefficient points siteField fibre)))
   where
     congRight : ∀ {left right : ℚ} → left ≡ right →
       left * fibreAverage coefficient points siteField fibre
