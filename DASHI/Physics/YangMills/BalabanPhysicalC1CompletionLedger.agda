@@ -15,6 +15,7 @@ import DASHI.Physics.YangMills.BalabanPath4SU2LiteralGaugeFixedHessianAdapterExa
 import DASHI.Physics.YangMills.BalabanSU2WilsonGaugeNormalizationClosureExact
 import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
 import DASHI.Physics.YangMills.BalabanArbitraryTranslatedOpenBlockWilsonExtractionExact
+import DASHI.Physics.YangMills.BalabanC1ExactLemmaAliases
 
 literalSU2WilsonSecondJetLevel : ProofLevel
 literalSU2WilsonSecondJetLevel = machineChecked
@@ -57,6 +58,9 @@ configuredSide4TranslatedWilsonExtractionLevel = machineChecked
 
 arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
 arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
+
+c1ExactRequestedLemmaAliasLevel : ProofLevel
+c1ExactRequestedLemmaAliasLevel = machineChecked
 
 repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
 repositorySUNWilsonActionHessianAdapterLevel = conditional
