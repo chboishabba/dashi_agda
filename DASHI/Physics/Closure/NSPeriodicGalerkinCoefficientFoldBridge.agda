@@ -7,19 +7,18 @@ open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.Closure.NSWall1ExactEvaluationCarrier using (Vec3)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
-import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSPeriodicConcreteOfficialNormWeights as Weights
 import DASHI.Physics.Closure.NSPeriodicOfficialFiniteSumIdentification as Official
 import DASHI.Physics.Closure.NSPeriodicConcreteModeOperatorPythagorean as Concrete
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- One coefficient owner for the actual periodic Galerkin state.
+-- One coefficient owner for an existing periodic Galerkin state.
 --
--- The bridge deliberately does not invent a second Fourier state.  An
--- application supplies its existing state and coefficient extraction, together
--- with exact equations saying that its physical L2, homogeneous-H1 and shell
--- quantities are the literal folds over the already proved cutoff cube.
+-- An application supplies its actual state and coefficient extraction, one
+-- concrete weight package, and exact equations identifying its physical L2,
+-- homogeneous-H1 and shell quantities with the official literal finite folds.
+-- No second enumerator, Parseval convention, or shell norm can enter here.
 ------------------------------------------------------------------------
 
 record GalerkinCoefficientFoldBridge
@@ -32,88 +31,60 @@ record GalerkinCoefficientFoldBridge
     velocityCoefficient :
       State → Z3.FourierMode → Vec3 ℝ
 
-    coefficientNormSquared :
-      State → Z3.FourierMode → ℝ
-
-    modeNormSquared : Z3.FourierMode → ℝ
-    shellMultiplierSquared : Nat → Z3.FourierMode → ℝ
+    vorticityCoefficient :
+      State → Z3.FourierMode → Vec3 ℝ
 
     physicalL2Squared physicalHomogeneousH1Squared : State → ℝ
     physicalShellL2Squared : State → Nat → ℝ
 
-    coefficientNormMeaning : ∀ state k →
-      coefficientNormSquared state k
-      ≡ coefficientNormSquared state (Z3.negateMode (Z3.negateMode k))
+    coefficientWeights : State →
+      Weights.ConcreteCoefficientUnitaryWeightInputs
+        (Concrete.realNormArithmetic O)
 
-    coefficientRealityCompatible : Set s
-    coefficientReality : coefficientRealityCompatible
-
-    coefficientNormNegationInvariant : ∀ state k →
-      coefficientNormSquared state (Z3.negateMode k)
-      ≡ coefficientNormSquared state k
-
-    modeNormNegationInvariant : ∀ k →
-      modeNormSquared (Z3.negateMode k) ≡ modeNormSquared k
-
-    shellMultiplierNegationInvariant : ∀ shell k →
-      shellMultiplierSquared shell (Z3.negateMode k)
-      ≡ shellMultiplierSquared shell k
-
-    multiplyCongruent : ∀ {a a′ b b′ : ℝ} →
-      a ≡ a′ → b ≡ b′ →
-      Concrete.realNormArithmetic O Concrete._+_? a b ≡
-      Concrete.realNormArithmetic O Concrete._+_? a′ b′
+    coefficientExtractionMeaning : Set s
+    coefficientExtractionIsActual : coefficientExtractionMeaning
 
     l2FoldMeaning : ∀ state →
       physicalL2Squared state
       ≡ Official.officialL2Squared
-          (officialCarrier state)
+          (Weights.concreteCoefficientUnitaryNormCarrier
+            (coefficientWeights state))
           (cutoff state)
 
     h1FoldMeaning : ∀ state →
       physicalHomogeneousH1Squared state
       ≡ Official.officialHomogeneousH1Squared
-          (officialCarrier state)
+          (Weights.concreteCoefficientUnitaryNormCarrier
+            (coefficientWeights state))
           (cutoff state)
 
     shellFoldMeaning : ∀ state shell →
       physicalShellL2Squared state shell
       ≡ Official.officialShellL2Squared
-          (officialCarrier state)
+          (Weights.concreteCoefficientUnitaryNormCarrier
+            (coefficientWeights state))
           (cutoff state)
           shell
 
-  weightInputs : State →
-    Weights.ConcreteCoefficientUnitaryWeightInputs
-      (Concrete.realNormArithmetic O)
-  weightInputs state = record
-    { multiply = DASHI.Foundations.RealAnalysisAxioms._*ℝ_
-    ; coefficientNormSquared = λ N k → coefficientNormSquared state k
-    ; modeNormSquared = modeNormSquared
-    ; shellMultiplierSquared = shellMultiplierSquared
-    ; CoefficientRealityCompatible = coefficientRealityCompatible
-    ; coefficientRealityCompatible = coefficientReality
-    ; coefficientNormNegationInvariant = λ N k →
-        coefficientNormNegationInvariant state k
-    ; modeNormNegationInvariant = modeNormNegationInvariant
-    ; shellMultiplierNegationInvariant = shellMultiplierNegationInvariant
-    ; multiplyCongruent = λ {a} {a′} {b} {b′} a≡a′ b≡b′ →
-        DASHI.Physics.Closure.NSPeriodicConcreteOfficialNormWeights.multiplyCongruent
-          (weightInputs state) a≡a′ b≡b′
-    }
+    divergenceFreeCoefficientIdentity : Set s
+    divergenceFreeCoefficients : divergenceFreeCoefficientIdentity
 
-  officialCarrier : State →
-    Official.ConcreteFiniteFourierNormCarrier
-      (Concrete.realNormArithmetic O)
-  officialCarrier state =
-    Weights.concreteCoefficientUnitaryNormCarrier (weightInputs state)
+    vorticityCurlCoefficientIdentity : Set s
+    vorticityCurlCoefficients : vorticityCurlCoefficientIdentity
+
+    biotSavartInverseCoefficientIdentity : Set s
+    biotSavartInverseCoefficients : biotSavartInverseCoefficientIdentity
 
 open GalerkinCoefficientFoldBridge public
 
-------------------------------------------------------------------------
--- Exact endpoint aliases.  Once an existing Galerkin implementation supplies
--- the bridge record, no further summation or Parseval convention is needed.
-------------------------------------------------------------------------
+officialCarrier :
+  ∀ {s} {O : Concrete.RealOrderCancellationAuthority} {State : Set s} →
+  GalerkinCoefficientFoldBridge O State → State →
+  Official.ConcreteFiniteFourierNormCarrier
+    (Concrete.realNormArithmetic O)
+officialCarrier G state =
+  Weights.concreteCoefficientUnitaryNormCarrier
+    (coefficientWeights G state)
 
 galerkinL2IsOfficialFold :
   ∀ {s} {O : Concrete.RealOrderCancellationAuthority} {State : Set s} →
