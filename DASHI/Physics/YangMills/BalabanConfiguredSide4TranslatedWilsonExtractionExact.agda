@@ -201,17 +201,39 @@ translatedPlaquetteRestrictionCommutesWithCurl origin tangent plane site =
         plane site)
     ≡ lie3Component component
       (literalForwardDifferenceCurl tangent plane (translateSite4 origin site))
-  componentProof component
+  componentProof component1
     rewrite translatedBondRestrictionCommutesWithForwardShift
-      origin tangent component (positivePlaneSecond plane)
+      origin tangent component1 (positivePlaneSecond plane)
       (positivePlaneFirst plane) site
           | translatedBondRestrictionAtSiteAxis
-      origin tangent component (positivePlaneSecond plane) site
+      origin tangent component1 (positivePlaneSecond plane) site
           | translatedBondRestrictionCommutesWithForwardShift
-      origin tangent component (positivePlaneFirst plane)
+      origin tangent component1 (positivePlaneFirst plane)
       (positivePlaneSecond plane) site
           | translatedBondRestrictionAtSiteAxis
-      origin tangent component (positivePlaneFirst plane) site = refl
+      origin tangent component1 (positivePlaneFirst plane) site = refl
+  componentProof component2
+    rewrite translatedBondRestrictionCommutesWithForwardShift
+      origin tangent component2 (positivePlaneSecond plane)
+      (positivePlaneFirst plane) site
+          | translatedBondRestrictionAtSiteAxis
+      origin tangent component2 (positivePlaneSecond plane) site
+          | translatedBondRestrictionCommutesWithForwardShift
+      origin tangent component2 (positivePlaneFirst plane)
+      (positivePlaneSecond plane) site
+          | translatedBondRestrictionAtSiteAxis
+      origin tangent component2 (positivePlaneFirst plane) site = refl
+  componentProof component3
+    rewrite translatedBondRestrictionCommutesWithForwardShift
+      origin tangent component3 (positivePlaneSecond plane)
+      (positivePlaneFirst plane) site
+          | translatedBondRestrictionAtSiteAxis
+      origin tangent component3 (positivePlaneSecond plane) site
+          | translatedBondRestrictionCommutesWithForwardShift
+      origin tangent component3 (positivePlaneFirst plane)
+      (positivePlaneSecond plane) site
+          | translatedBondRestrictionAtSiteAxis
+      origin tangent component3 (positivePlaneFirst plane) site = refl
 
 translatedWilsonPlaquetteHessianReindexing :
   ∀ origin tangent plane site →
