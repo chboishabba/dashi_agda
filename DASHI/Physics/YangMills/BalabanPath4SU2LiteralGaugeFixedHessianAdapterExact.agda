@@ -17,7 +17,13 @@ open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact using
   (literalWilsonHessianPositivePlaneFold)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact using
-  (literalGaugeFixingEnergy; physicalPeriodicReferenceDifferenceEnergy)
+  (Lie3SiteField; literalGaugeFixingEnergy; physicalPeriodicReferenceDifferenceEnergy)
+open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralDivergenceHessianInstanceExact
+  using
+    ( LiteralNonDivergenceHessianData
+    ; literalGaugeFixedHessianQuadraticData
+    ; literalGaugeFixingNormSqExact
+    )
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact using
   ( literalWilsonGaugeEqualsPeriodicDifferenceEnergy
   ; physicalReferenceDifferenceBelowPeriodic
@@ -127,8 +133,62 @@ uniformReferenceHodgeCoercivityFromLiteralProducer dataSet tangent blockZero =
     (physicalBlockConstrainedDifferencePoincare tangent blockZero)
     (physicalDifferenceBelowLiteralGaugeFixedHessian dataSet tangent)
 
+------------------------------------------------------------------------
+-- Concrete-divergence specialization.  The only remaining identification field
+-- is the Wilson operator's quadratic form; the divergence and gauge norm are
+-- supplied definitionally by the literal configured instance.
+------------------------------------------------------------------------
+
+record Path4SU2LiteralWilsonOperatorMatch (Coarse : Set) : Set₁ where
+  field
+    nonDivergenceData : LiteralNonDivergenceHessianData Coarse
+
+    wilsonOperatorQuadraticMatchesLiteral : ∀ tangent →
+      wilsonHessianQuadraticForm
+        (literalGaugeFixedHessianQuadraticData nonDivergenceData) tangent
+      ≡ literalWilsonHessianPositivePlaneFold tangent
+
+open Path4SU2LiteralWilsonOperatorMatch public
+
+literalConcreteDivergenceAdapter :
+  ∀ {Coarse} → Path4SU2LiteralWilsonOperatorMatch Coarse →
+  Path4SU2LiteralGaugeFixedHessianData Lie3SiteField Coarse
+literalConcreteDivergenceAdapter match = record
+  { quadraticData =
+      literalGaugeFixedHessianQuadraticData (nonDivergenceData match)
+  ; addScalarMatchesRationalAddition = λ left right → refl
+  ; nonnegativeIsRationalNonnegative = λ value proof → proof
+  ; wilsonHessianMatchesLiteral = wilsonOperatorQuadraticMatchesLiteral match
+  ; gaugeFixingMatchesLiteral =
+      literalGaugeFixingNormSqExact (nonDivergenceData match)
+  }
+
+literalConcreteDivergenceGaugeFixedDecompositionExact :
+  ∀ {Coarse} (match : Path4SU2LiteralWilsonOperatorMatch Coarse) tangent →
+  gaugeFixedHessianQuadraticForm
+    (literalGaugeFixedHessianQuadraticData (nonDivergenceData match)) tangent
+  ≡ physicalPeriodicReferenceDifferenceEnergy tangent
+    + blockAverageNormSq
+      (literalGaugeFixedHessianQuadraticData (nonDivergenceData match)) tangent
+literalConcreteDivergenceGaugeFixedDecompositionExact match =
+  literalGaugeFixedHessianPeriodicDecompositionExact
+    (literalConcreteDivergenceAdapter match)
+
+uniformReferenceHodgeCoercivityFromConcreteDivergence :
+  ∀ {Coarse} (match : Path4SU2LiteralWilsonOperatorMatch Coarse) tangent →
+  PhysicalBlockAverageZero tangent →
+  configuredPathCoercivityConstant * physicalUnweightedNormSq tangent
+  ≤ gaugeFixedHessianQuadraticForm
+      (literalGaugeFixedHessianQuadraticData (nonDivergenceData match)) tangent
+uniformReferenceHodgeCoercivityFromConcreteDivergence match =
+  uniformReferenceHodgeCoercivityFromLiteralProducer
+    (literalConcreteDivergenceAdapter match)
+
 literalGaugeFixedHessianPeriodicAdapterLevel : ProofLevel
 literalGaugeFixedHessianPeriodicAdapterLevel = machineChecked
+
+literalConcreteDivergenceAdapterLevel : ProofLevel
+literalConcreteDivergenceAdapterLevel = machineChecked
 
 uniformReferenceHodgeCoercivityFromLiteralProducerLevel : ProofLevel
 uniformReferenceHodgeCoercivityFromLiteralProducerLevel = machineChecked
