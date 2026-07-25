@@ -102,6 +102,15 @@ galerkinCoefficientFoldBridgeStatusLevel = machineChecked
 finiteNearTriadPartitionStatusLevel : ProofLevel
 finiteNearTriadPartitionStatusLevel = machineChecked
 
+nearCanonicalQuarterAdapterStatusLevel : ProofLevel
+nearCanonicalQuarterAdapterStatusLevel = machineChecked
+
+finiteWeightedSchurKernelStatusLevel : ProofLevel
+finiteWeightedSchurKernelStatusLevel = machineChecked
+
+farHighCanonicalEighthAdapterStatusLevel : ProofLevel
+farHighCanonicalEighthAdapterStatusLevel = machineChecked
+
 canonicalNearYoungAllocationStatusLevel : ProofLevel
 canonicalNearYoungAllocationStatusLevel = machineChecked
 
