@@ -9,18 +9,14 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
   (PhysicalBlockL; physicalBlockSites)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
-  (sumRational; sumRationalCong)
+  (sumRationalCong)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
 open import DASHI.Physics.YangMills.BalabanPath4PlaquetteOrientationExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact using
-  (normSqV)
+  (Lie3; lie3Ext; x; y; z; normSqV)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact
-
-------------------------------------------------------------------------
--- Coordinate translations of the configured four-torus.
-------------------------------------------------------------------------
 
 shiftForward4Commutes : ∀ firstAxis secondAxis site →
   shiftForward4 firstAxis (shiftForward4 secondAxis site)
@@ -65,12 +61,13 @@ shiftForward4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (pair (pair x0 x1) (pair x2 x3)) = refl
 
 iterateForward4 :
-  Axis4 → CyclicIndex side4 → PhysicalBlockL side4 → PhysicalBlockL side4
+  ∀ {n} → Axis4 → CyclicIndex n → PhysicalBlockL side4 → PhysicalBlockL side4
 iterateForward4 axis zeroᵢ site = site
 iterateForward4 axis (sucᵢ offset) site =
   iterateForward4 axis offset (shiftForward4 axis site)
 
-iterateForward4Commutes : ∀ iterateAxis offset forwardAxis site →
+iterateForward4Commutes :
+  ∀ {n} iterateAxis (offset : CyclicIndex n) forwardAxis site →
   iterateForward4 iterateAxis offset (shiftForward4 forwardAxis site)
   ≡ shiftForward4 forwardAxis (iterateForward4 iterateAxis offset site)
 iterateForward4Commutes iterateAxis zeroᵢ forwardAxis site = refl
@@ -81,7 +78,8 @@ iterateForward4Commutes iterateAxis (sucᵢ offset) forwardAxis site =
     (iterateForward4Commutes iterateAxis offset forwardAxis
       (shiftForward4 iterateAxis site))
 
-iterateForward4SumInvariant : ∀ axis offset term →
+iterateForward4SumInvariant :
+  ∀ {n} axis (offset : CyclicIndex n) term →
   siteSum4 (λ site → term (iterateForward4 axis offset site))
   ≡ siteSum4 term
 iterateForward4SumInvariant axis zeroᵢ term = refl
@@ -157,10 +155,6 @@ siteSumTranslationInvariant
   axis2 = sucᵢ (sucᵢ zeroᵢ)
   axis3 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
 
-------------------------------------------------------------------------
--- Restrict a configured global side-four tangent to translated coordinates.
-------------------------------------------------------------------------
-
 translatedBondRestriction :
   PhysicalBlockL side4 → PhysicalSU2Tangent4 → PhysicalSU2Tangent4
 translatedBondRestriction origin tangent component (pair site axis) =
@@ -184,6 +178,11 @@ translatedBondRestrictionCommutesWithForwardShift
   cong
     (physicalTangentComponent tangent component bondAxis)
     (translateSite4ForwardCommutes origin shiftAxis site)
+
+lie3Component : SU2Component → Lie3 → ℚ
+lie3Component component1 value = x value
+lie3Component component2 value = y value
+lie3Component component3 value = z value
 
 translatedPlaquetteRestrictionCommutesWithCurl :
   ∀ origin tangent plane site →
