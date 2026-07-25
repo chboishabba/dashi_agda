@@ -2,7 +2,7 @@
 """Run the legacy physical-progress audit plus the exact C1 frontier audit.
 
 The legacy implementation is preserved verbatim in
-``check_ym_physical_progress_legacy.py``.  This wrapper updates the one status
+``check_ym_physical_progress_legacy.py``.  This wrapper updates the statuses
 that advanced in PR #335, then executes both fail-closed audits.
 """
 
@@ -29,14 +29,17 @@ def main() -> None:
     legacy = load_legacy()
 
     translated = legacy.YM / "BalabanConfiguredSideTranslatedBlockExact.agda"
+    obsolete = {
+        "globalWilsonToLocalTranslatedBlockLevel = conditional",
+        "repositorySUNWilsonActionHessianAdapterLevel = conditional",
+    }
     required = tuple(
-        item
-        for item in legacy.FILES[translated]
-        if item != "globalWilsonToLocalTranslatedBlockLevel = conditional"
+        item for item in legacy.FILES[translated] if item not in obsolete
     )
     legacy.FILES[translated] = required + (
         "arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked",
-        "repositorySUNWilsonActionHessianAdapterLevel = conditional",
+        "repositorySUNWilsonActionSecondVariationAdapterLevel = machineChecked",
+        "repositoryWilsonHessianOperatorRepresentativeLevel = conditional",
     )
 
     legacy.main()
