@@ -13,10 +13,7 @@ import DASHI.Physics.Closure.NSTriadKNShellScaleHeadroom as ScaleHeadroom
 import DASHI.Physics.Closure.NSTriadKNScaledOperatorErrorAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNVariationalRigidityOperatorRefinement as Variational
 import DASHI.Physics.Closure.NSTriadKNAdmissibleConstrainedSpectralAudit as SpectralAudit
-
-------------------------------------------------------------------------
--- Scale-corrected unit-shell operator-error bridge.
-------------------------------------------------------------------------
+import DASHI.Physics.Closure.NSTriadKNAdmissibleFourierTriadCarrier as FourierTriad
 
 one : Nat
 one = suc zero
@@ -73,15 +70,12 @@ canonicalScaledOperatorErrorBridgeClosedIsTrue :
 canonicalScaledOperatorErrorBridgeClosedIsTrue = refl
 
 scaledErrorConstantAtUnitForcesFourOrMore :
-  (C : Nat) →
-  four * one ≤ C * one →
-  four ≤ C
+  (C : Nat) → four * one ≤ C * one → four ≤ C
 scaledErrorConstantAtUnitForcesFourOrMore C proof
   rewrite *-identityʳ four
         | *-identityʳ C = proof
 
-canonicalCorrectedErrorConstantIsSharp :
-  four * one ≤ four * one
+canonicalCorrectedErrorConstantIsSharp : four * one ≤ four * one
 canonicalCorrectedErrorConstantIsSharp = ≤-refl
 
 canonicalCurrentModelHasNoStrictGap :
@@ -115,20 +109,13 @@ canonicalSharperScaledOperatorErrorClosedIsFalse :
 canonicalSharperScaledOperatorErrorClosedIsFalse = refl
 
 ------------------------------------------------------------------------
--- The non-generic analytic routes are first-class and imported by the active
--- scale-corrected bridge:
---
---   * variational Rayleigh base certificate;
---   * quantitative rigidity and admissible rigid-direction exclusion;
---   * refined operator-relative estimate;
---   * finite constrained generalized-eigenvalue certificate.
+-- Implemented analytic and carrier routes.
 ------------------------------------------------------------------------
 
 variationalRouteImplemented : Bool
 variationalRouteImplemented = true
 
-variationalRouteImplementedIsTrue :
-  variationalRouteImplemented ≡ true
+variationalRouteImplementedIsTrue : variationalRouteImplemented ≡ true
 variationalRouteImplementedIsTrue = refl
 
 compactnessRigidityRouteImplemented : Bool
@@ -141,8 +128,7 @@ compactnessRigidityRouteImplementedIsTrue = refl
 refinedOperatorRouteImplemented : Bool
 refinedOperatorRouteImplemented = true
 
-refinedOperatorRouteImplementedIsTrue :
-  refinedOperatorRouteImplemented ≡ true
+refinedOperatorRouteImplementedIsTrue : refinedOperatorRouteImplemented ≡ true
 refinedOperatorRouteImplementedIsTrue = refl
 
 constrainedSpectralAuditRouteImplemented : Bool
@@ -153,6 +139,28 @@ constrainedSpectralAuditRouteImplementedIsTrue :
   constrainedSpectralAuditRouteImplemented ≡ true
 constrainedSpectralAuditRouteImplementedIsTrue =
   SpectralAudit.constrainedSpectralAuditImplementedIsTrue
+
+admissibleFourierTriadCarrierRouteImplemented : Bool
+admissibleFourierTriadCarrierRouteImplemented =
+  FourierTriad.admissibleFourierTriadCarrierImplemented
+
+admissibleFourierTriadCarrierRouteImplementedIsTrue :
+  admissibleFourierTriadCarrierRouteImplemented ≡ true
+admissibleFourierTriadCarrierRouteImplementedIsTrue =
+  FourierTriad.admissibleFourierTriadCarrierImplementedIsTrue
+
+richStage3OperatorHandoffRouteImplemented : Bool
+richStage3OperatorHandoffRouteImplemented =
+  FourierTriad.richStage3OperatorHandoffImplemented
+
+richStage3OperatorHandoffRouteImplementedIsTrue :
+  richStage3OperatorHandoffRouteImplemented ≡ true
+richStage3OperatorHandoffRouteImplementedIsTrue =
+  FourierTriad.richStage3OperatorHandoffImplementedIsTrue
+
+------------------------------------------------------------------------
+-- Honest live boundary.
+------------------------------------------------------------------------
 
 canonicalGeneralizedEigenvalueSaturationConfirmed :
   SpectralAudit.canonicalQError SpectralAudit.canonicalUnit
@@ -169,6 +177,16 @@ canonicalEnergyCarrierConstraintLossConfirmed :
   SpectralAudit.canonicalEnergyCarrierCanEncodePhysicalConstraints ≡ false
 canonicalEnergyCarrierConstraintLossConfirmed =
   SpectralAudit.canonicalEnergyCarrierCanEncodePhysicalConstraintsIsFalse
+
+actualRetainedTriadEnumerationStillMissing :
+  FourierTriad.actualRetainedTriadEnumerationConnected ≡ false
+actualRetainedTriadEnumerationStillMissing =
+  FourierTriad.actualRetainedTriadEnumerationConnectedIsFalse
+
+actualRichStage3OperatorStillOpen :
+  FourierTriad.actualRichStage3OperatorClosed ≡ false
+actualRichStage3OperatorStillOpen =
+  FourierTriad.actualRichStage3OperatorClosedIsFalse
 
 canonicalRayleighSaturationConfirmed :
   Variational.canonicalRayleighRatioSaturated ≡ true
