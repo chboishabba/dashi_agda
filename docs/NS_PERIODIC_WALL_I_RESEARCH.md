@@ -50,7 +50,7 @@ produces the following finite facts for this deliberately small model.
 - There are 167,662 target-shell resonant triads.
 - The oriented far-low supports contain 12,250 triads in each placement.
 - The conservative absolute \(\ell^1\) Schur surrogate has row maximum `260`, column maximum `109712267774741/28832328525`, and product approximately `989347.41`.
-- For \(s=7/2\), the derivative surplus is one. At \(R=8\), the exact one-placement infinite tail is \(1/128\), while the literal two-placement sum is \(1/64\). Thus this bare geometric factor fits both \(1/16\) and \(1/8\); the remaining issue is the structural product constant, not the geometric series itself.
+- For \(s=7/2\), the derivative surplus is one. At \(R=8\), the exact one-placement infinite tail is \(1/128\), while the literal two-placement sum is \(1/64\). The selected structural product eight already includes the two-placement factor, so its exact scalar reduction is \(8/128=1/16\). The remaining theorem is the identification of that structural product with the official operator estimate, not the denominator arithmetic.
 
 The far-low number is not a theorem about the official operator. It is a useful negative result: taking absolute values before exploiting the full cancellation and weight geometry is catastrophically wasteful. A successful `farLowRadiusEightFitsEighth` proof must improve the kernel before Schur, change the weight factorisation, or use a sharper norm than this raw surrogate.
 
@@ -64,7 +64,7 @@ Consequently, no estimate of the form
 N_{\mathrm{lane}}(u)\le \varepsilon D(u)
 \]
 
-can hold uniformly over arbitrary amplitudes. The final near proof must visibly use a dimensionless smallness source: compact-\(\Gamma\) boundary control, first-exit data, high-frequency smallness, angular depletion, or a residual charged by Wall II. This is now an executable falsification criterion, not merely a warning in prose.
+can hold uniformly over arbitrary amplitudes. The final near proof must visibly use a dimensionless smallness source: compact-\(\Gamma\) boundary control, first-exit data, high-frequency smallness, angular depletion, or a residual charged by Wall II. `NSPeriodicNearAmplitudeScalingObstruction` records the exact doubling factors eight and four, so this is now both an executable and a formal falsification criterion.
 
 ## Agda modules added
 
@@ -77,8 +77,9 @@ The finite, decidable layer is split into the requested owners.
 - `NSPeriodicNearTriadPartitionCorrectness`
 - `NSPeriodicNearShellOverlapCount`
 - `NSPeriodicNearConvolutionMultiplicity`
+- `NSPeriodicNearAmplitudeScalingObstruction`
 
-These define literal resonant triads, an executable dyadic-gap Bony classifier, exact LH/HL/HH folds, a machine-checked partition identity, a structural two-shell overlap carrier, and duplicate-free Cartesian convolution multiplicity.
+These define literal resonant triads, an executable dyadic-gap Bony classifier, exact LH/HL/HH folds, a machine-checked partition identity, a structural two-shell overlap carrier, duplicate-free Cartesian convolution multiplicity, and the cubic-versus-quadratic scaling obstruction.
 
 ### Far-low
 
@@ -97,8 +98,9 @@ The kernel is support-masked by construction, so unsupported entries reduce defi
 - `NSPeriodicFarHighShellSeparation`
 - `NSPeriodicFarHighFiniteTail`
 - `NSPeriodicFarHighTailReindexing`
+- `NSPeriodicFarHighDyadicTailArithmetic`
 
-These provide the exact two-placement owner, constructive shell separation, literal finite tail indices and lengths, and successor reindexing of the tail fold.
+These provide the exact two-placement owner, constructive shell separation, literal finite tail indices and lengths, successor reindexing of the tail fold, and the exact \(R=8\) denominator/cross-multiplication certificate.
 
 ## Honest theorem boundary
 
