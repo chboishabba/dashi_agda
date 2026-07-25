@@ -154,12 +154,6 @@ constrainedSpectralAuditRouteImplementedIsTrue :
 constrainedSpectralAuditRouteImplementedIsTrue =
   SpectralAudit.constrainedSpectralAuditImplementedIsTrue
 
-canonicalExportedOperatorIdentityConfirmed :
-  (x : SpectralAudit.CanonicalCarrier) →
-  _
-canonicalExportedOperatorIdentityConfirmed =
-  SpectralAudit.canonicalExportedOperatorIsIdentity
-
 canonicalGeneralizedEigenvalueSaturationConfirmed :
   SpectralAudit.canonicalQError SpectralAudit.canonicalUnit
     ≡ SpectralAudit.canonicalQBase SpectralAudit.canonicalUnit
