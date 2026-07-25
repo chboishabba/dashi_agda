@@ -7,6 +7,15 @@ open import DASHI.Physics.Closure.NSPeriodicOfficialNormIdentification public
 open import DASHI.Physics.Closure.NSPeriodicOfficialNormBernsteinAdapter public
 open import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryNormAdapter public
 open import DASHI.Physics.Closure.NSPeriodicCoefficientUnitaryPythagoreanAdapter public
+open import DASHI.Physics.Closure.NSPeriodicConcreteModeOperatorPythagorean public
+open import DASHI.Physics.Closure.NSPeriodicOfficialOperatorFoldIdentification public
+open import DASHI.Physics.Closure.NSPeriodicConcreteOfficialOperatorNormAdapter public
+open import DASHI.Physics.Closure.NSPeriodicCanonicalRealAuthorities public
+open import DASHI.Physics.Closure.NSPeriodicGalerkinCoefficientFoldBridge public
+open import DASHI.Physics.Closure.NSPeriodicFiniteTriadPartition public
+open import DASHI.Physics.Closure.NSPeriodicNearCanonicalQuarterAdapter public
+open import DASHI.Physics.Closure.NSPeriodicFiniteWeightedSchurKernel public
+open import DASHI.Physics.Closure.NSPeriodicFarHighCanonicalEighthAdapter public
 open import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion public
 open import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion public
 open import DASHI.Physics.Closure.NSPeriodicOfficialFarLowSchurAdapter public
@@ -66,6 +75,23 @@ import DASHI.Physics.Closure.NSPeriodicObservableDerivativeBoundReduction
 import DASHI.Physics.Closure.NSPeriodicDiffuseLowHighSplit
 import DASHI.Physics.Closure.NSPeriodicChartFailureAnalyticRoutes
 import DASHI.Physics.Closure.NSPeriodicFixedShellFiniteRankConvergence
+import DASHI.Physics.Closure.NSPeriodicConcreteNearTriadSums
+import DASHI.Physics.Closure.NSPeriodicNearTriadClassification
+import DASHI.Physics.Closure.NSPeriodicNearTriadPartitionCorrectness
+import DASHI.Physics.Closure.NSPeriodicNearShellOverlapCount
+import DASHI.Physics.Closure.NSPeriodicNearConvolutionMultiplicity
+import DASHI.Physics.Closure.NSPeriodicNearAmplitudeScalingObstruction
+import DASHI.Physics.Closure.NSPeriodicFarLowSupportGeometry
+import DASHI.Physics.Closure.NSPeriodicConcreteFarLowKernel
+import DASHI.Physics.Closure.NSPeriodicFarLowKernelZeroExtension
+import DASHI.Physics.Closure.NSPeriodicFarLowShellIntersectionCount
+import DASHI.Physics.Closure.NSPeriodicFarLowRowMajorantFold
+import DASHI.Physics.Closure.NSPeriodicFarLowColumnMajorantFold
+import DASHI.Physics.Closure.NSPeriodicConcreteFarHighPlacements
+import DASHI.Physics.Closure.NSPeriodicFarHighShellSeparation
+import DASHI.Physics.Closure.NSPeriodicFarHighFiniteTail
+import DASHI.Physics.Closure.NSPeriodicFarHighTailReindexing
+import DASHI.Physics.Closure.NSPeriodicFarHighDyadicTailArithmetic
 
 officialNormGateRegression :
   allOfficialHarmonicInputsInhabited ≡ false

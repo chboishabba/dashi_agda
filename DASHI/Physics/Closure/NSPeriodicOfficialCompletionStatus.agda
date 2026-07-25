@@ -9,7 +9,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- program.  These values are deliberately independent of finite receipts.
 ------------------------------------------------------------------------
 
--- Existing repository theorems consumed by exact adapters.
 concreteBernsteinBE1ToBE8AdapterLevel : ProofLevel
 concreteBernsteinBE1ToBE8AdapterLevel = machineChecked
 
@@ -34,7 +33,6 @@ allDataCutoffCoverageAdapterLevel = machineChecked
 cutoffContinuumAssemblyLevel : ProofLevel
 cutoffContinuumAssemblyLevel = machineChecked
 
--- Exact reductions that narrow the remaining analytic frontier.
 biotSavartTransversalityReductionLevel : ProofLevel
 biotSavartTransversalityReductionLevel = machineChecked
 
@@ -77,7 +75,6 @@ weightedEnvelopeLimitTransportReductionLevel = machineChecked
 weightedEnvelopeContinuumAdapterStatusLevel : ProofLevel
 weightedEnvelopeContinuumAdapterStatusLevel = machineChecked
 
--- Concrete carrier and post-cutset reductions.
 concreteCutoffCubeCarrierStatusLevel : ProofLevel
 concreteCutoffCubeCarrierStatusLevel = machineChecked
 
@@ -86,6 +83,78 @@ concreteIntegerModeNormStatusLevel = machineChecked
 
 concreteOfficialNormWeightsStatusLevel : ProofLevel
 concreteOfficialNormWeightsStatusLevel = machineChecked
+
+concreteModeOperatorPythagoreanStatusLevel : ProofLevel
+concreteModeOperatorPythagoreanStatusLevel = machineChecked
+
+officialOperatorFoldIdentificationStatusLevel : ProofLevel
+officialOperatorFoldIdentificationStatusLevel = machineChecked
+
+concreteOfficialOperatorNormAdapterStatusLevel : ProofLevel
+concreteOfficialOperatorNormAdapterStatusLevel = machineChecked
+
+canonicalRealAuthoritiesStatusLevel : ProofLevel
+canonicalRealAuthoritiesStatusLevel = machineChecked
+
+galerkinCoefficientFoldBridgeStatusLevel : ProofLevel
+galerkinCoefficientFoldBridgeStatusLevel = machineChecked
+
+finiteNearTriadPartitionStatusLevel : ProofLevel
+finiteNearTriadPartitionStatusLevel = machineChecked
+
+nearCanonicalQuarterAdapterStatusLevel : ProofLevel
+nearCanonicalQuarterAdapterStatusLevel = machineChecked
+
+finiteWeightedSchurKernelStatusLevel : ProofLevel
+finiteWeightedSchurKernelStatusLevel = machineChecked
+
+farHighCanonicalEighthAdapterStatusLevel : ProofLevel
+farHighCanonicalEighthAdapterStatusLevel = machineChecked
+
+concreteNearTriadSumsStatusLevel : ProofLevel
+concreteNearTriadSumsStatusLevel = machineChecked
+
+nearTriadClassificationStatusLevel : ProofLevel
+nearTriadClassificationStatusLevel = machineChecked
+
+nearTriadPartitionCorrectnessStatusLevel : ProofLevel
+nearTriadPartitionCorrectnessStatusLevel = machineChecked
+
+nearShellOverlapCountStatusLevel : ProofLevel
+nearShellOverlapCountStatusLevel = machineChecked
+
+nearConvolutionMultiplicityStatusLevel : ProofLevel
+nearConvolutionMultiplicityStatusLevel = machineChecked
+
+farLowSupportGeometryStatusLevel : ProofLevel
+farLowSupportGeometryStatusLevel = machineChecked
+
+concreteFarLowKernelStatusLevel : ProofLevel
+concreteFarLowKernelStatusLevel = machineChecked
+
+farLowKernelZeroExtensionStatusLevel : ProofLevel
+farLowKernelZeroExtensionStatusLevel = machineChecked
+
+farLowShellIntersectionCountStatusLevel : ProofLevel
+farLowShellIntersectionCountStatusLevel = machineChecked
+
+farLowRowMajorantFoldStatusLevel : ProofLevel
+farLowRowMajorantFoldStatusLevel = machineChecked
+
+farLowColumnMajorantFoldStatusLevel : ProofLevel
+farLowColumnMajorantFoldStatusLevel = machineChecked
+
+concreteFarHighPlacementsStatusLevel : ProofLevel
+concreteFarHighPlacementsStatusLevel = machineChecked
+
+farHighShellSeparationStatusLevel : ProofLevel
+farHighShellSeparationStatusLevel = machineChecked
+
+farHighFiniteTailStatusLevel : ProofLevel
+farHighFiniteTailStatusLevel = machineChecked
+
+farHighTailReindexingStatusLevel : ProofLevel
+farHighTailReindexingStatusLevel = machineChecked
 
 canonicalNearYoungAllocationStatusLevel : ProofLevel
 canonicalNearYoungAllocationStatusLevel = machineChecked
