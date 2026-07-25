@@ -1,0 +1,73 @@
+module DASHI.Physics.YangMills.BalabanPhysicalC1CompletionLedger where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact
+import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact
+import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact
+import DASHI.Physics.YangMills.BalabanPath4SU2LiteralDivergenceHessianInstanceExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact
+import DASHI.Physics.YangMills.BalabanPath4SU2WilsonGaugeOpenFoldExact
+import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact
+import DASHI.Physics.YangMills.BalabanPath4SU2LiteralGaugeFixedHessianAdapterExact
+import DASHI.Physics.YangMills.BalabanSU2WilsonGaugeNormalizationClosureExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
+import DASHI.Physics.YangMills.BalabanArbitraryTranslatedOpenBlockWilsonExtractionExact
+import DASHI.Physics.YangMills.BalabanC1ExactLemmaAliases
+
+literalSU2WilsonSecondJetLevel : ProofLevel
+literalSU2WilsonSecondJetLevel = machineChecked
+
+literalPhysicalPlaquetteLiftLevel : ProofLevel
+literalPhysicalPlaquetteLiftLevel = machineChecked
+
+configuredPeriodicReindexingLevel : ProofLevel
+configuredPeriodicReindexingLevel = machineChecked
+
+configuredPeriodicDivergenceAdjointLevel : ProofLevel
+configuredPeriodicDivergenceAdjointLevel = machineChecked
+
+literalStoredDivergenceInstanceLevel : ProofLevel
+literalStoredDivergenceInstanceLevel = machineChecked
+
+configuredPeriodicHodgeCrossTermLevel : ProofLevel
+configuredPeriodicHodgeCrossTermLevel = machineChecked
+
+configuredPeriodicHodgeIdentityLevel : ProofLevel
+configuredPeriodicHodgeIdentityLevel = machineChecked
+
+literalWilsonGaugePeriodicDifferenceIdentityLevel : ProofLevel
+literalWilsonGaugePeriodicDifferenceIdentityLevel = machineChecked
+
+periodicOpenDifferenceSeamLevel : ProofLevel
+periodicOpenDifferenceSeamLevel = machineChecked
+
+literalWilsonGaugeOpenFoldWithBoundaryLevel : ProofLevel
+literalWilsonGaugeOpenFoldWithBoundaryLevel = machineChecked
+
+literalPeriodicReferenceCoercivityLevel : ProofLevel
+literalPeriodicReferenceCoercivityLevel = machineChecked
+
+literalGaugeFixedHessianAdapterLevel : ProofLevel
+literalGaugeFixedHessianAdapterLevel = machineChecked
+
+configuredNormalizationClosureLevel : ProofLevel
+configuredNormalizationClosureLevel = machineChecked
+
+configuredSide4TranslatedWilsonExtractionLevel : ProofLevel
+configuredSide4TranslatedWilsonExtractionLevel = machineChecked
+
+arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
+arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
+
+c1ExactRequestedLemmaAliasLevel : ProofLevel
+c1ExactRequestedLemmaAliasLevel = machineChecked
+
+repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
+repositorySUNWilsonActionHessianAdapterLevel = conditional
+
+branchHeadAuthoritativeTypecheckLevel : ProofLevel
+branchHeadAuthoritativeTypecheckLevel = conditional

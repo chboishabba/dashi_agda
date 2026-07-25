@@ -11,16 +11,9 @@ open import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact
 open import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
-
-------------------------------------------------------------------------
--- Translated blocks are represented in local relative coordinates.
---
--- The global origin is retained in the type of the local chart, but the finite
--- carrier, norm, difference energy and Q=0 predicate depend only on relative
--- coordinates.  Their translation preservation is therefore definitional,
--- rather than an extra analytic estimate.  The separate global-to-local Wilson
--- extraction remains the only geometric matching obligation.
-------------------------------------------------------------------------
+import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
+import DASHI.Physics.YangMills.BalabanArbitraryTranslatedOpenBlockWilsonExtractionExact
+import DASHI.Physics.YangMills.BalabanSU2WilsonActionSecondVariationExact
 
 TranslatedPhysicalSU2Tangent4 :
   ∀ {latticeSide : Nat} →
@@ -96,10 +89,6 @@ translatedConfiguredSidePoincare tangent blockZero =
   physicalBlockConstrainedDifferencePoincare
     (translatedTangentToLocal tangent) blockZero
 
-------------------------------------------------------------------------
--- The translated halo overlap is the already-computed finite multiplicity.
-------------------------------------------------------------------------
-
 translatedContainingBlockMultiplicity :
   ∀ {latticeSide}
     (geometry : PhysicalHaloGeometry latticeSide)
@@ -124,5 +113,21 @@ configuredSideTranslatedBlockCoercivityLevel = machineChecked
 configuredSideHaloMultiplicityLevel : ProofLevel
 configuredSideHaloMultiplicityLevel = machineChecked
 
+configuredPeriodicSide4GlobalWilsonToLocalTranslatedBlockLevel : ProofLevel
+configuredPeriodicSide4GlobalWilsonToLocalTranslatedBlockLevel = machineChecked
+
+arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
+arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
+
+repositorySUNWilsonActionSecondVariationAdapterLevel : ProofLevel
+repositorySUNWilsonActionSecondVariationAdapterLevel = machineChecked
+
+-- The sole remaining operator-layer seam is the Riesz representative stored in
+-- the legacy wilsonHessian field.  The generic SUNWilsonAction second derivative
+-- itself is now identified with the exact physical six-plane fold.
+repositoryWilsonHessianOperatorRepresentativeLevel : ProofLevel
+repositoryWilsonHessianOperatorRepresentativeLevel = conditional
+
 globalWilsonToLocalTranslatedBlockLevel : ProofLevel
-globalWilsonToLocalTranslatedBlockLevel = conditional
+globalWilsonToLocalTranslatedBlockLevel =
+  arbitraryLatticeOpenBlockWilsonExtractionLevel
