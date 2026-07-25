@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ)
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -15,7 +16,7 @@ open import DASHI.Physics.YangMills.BalabanPath4PlaquetteOrientationExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
-  using (shiftForward4; forwardDifference4; siteSum4)
+  using (shiftForward4; siteSum4)
 
 ------------------------------------------------------------------------
 -- The literal su(2) value carried by one configured positive bond.
@@ -105,7 +106,19 @@ literalPlaquetteLinearCurlEqualsForwardDifferenceCurl :
   ∀ tangent plane site →
   literalPlaquetteLinearCurl tangent plane site
   ≡ literalForwardDifferenceCurl tangent plane site
-literalPlaquetteLinearCurlEqualsForwardDifferenceCurl tangent plane site = refl
+literalPlaquetteLinearCurlEqualsForwardDifferenceCurl tangent plane site =
+  lie3Ext
+    (ℚRing.solve-∀
+      (x (firstLink links)) (x (secondLink links))
+      (x (thirdLink links)) (x (fourthLink links)))
+    (ℚRing.solve-∀
+      (y (firstLink links)) (y (secondLink links))
+      (y (thirdLink links)) (y (fourthLink links)))
+    (ℚRing.solve-∀
+      (z (firstLink links)) (z (secondLink links))
+      (z (thirdLink links)) (z (fourthLink links)))
+  where
+  links = literalPlaquetteFourLinks tangent plane site
 
 ------------------------------------------------------------------------
 -- Lift the exact one-plaquette Wilson theorem through sites and six planes.
