@@ -7,6 +7,7 @@ open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculus
   using (ScalarBondField4)
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact as Hodge
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact as Seam
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Bond
 
 -- Requested audit name for the four-axis divergence-square expansion.
 divergenceSquareExpansion : ∀ (field : ScalarBondField4) →
@@ -26,7 +27,7 @@ componentDifferenceEnergyAxisSiteFold =
 componentDifferenceEnergyMatchesBondReferenceDifferenceEnergy :
   ∀ (field : ScalarBondField4) →
   Seam.componentOpenDifferenceEnergy field
-  ≡ DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact.bondReferenceDifferenceEnergy field
+  ≡ Bond.bondReferenceDifferenceEnergy field
 componentDifferenceEnergyMatchesBondReferenceDifferenceEnergy =
   Seam.componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
 
