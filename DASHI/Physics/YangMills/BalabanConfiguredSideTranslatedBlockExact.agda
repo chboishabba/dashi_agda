@@ -124,10 +124,6 @@ arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
 repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
 repositorySUNWilsonActionHessianAdapterLevel = conditional
 
--- Legacy progress-audit expectation, retained only as an explicitly obsolete
--- marker until scripts/check_ym_physical_progress.py is regenerated:
--- globalWilsonToLocalTranslatedBlockLevel = conditional
--- The actual theorem status below is the exact arbitrary-lattice open-block result.
 globalWilsonToLocalTranslatedBlockLevel : ProofLevel
 globalWilsonToLocalTranslatedBlockLevel =
   arbitraryLatticeOpenBlockWilsonExtractionLevel
