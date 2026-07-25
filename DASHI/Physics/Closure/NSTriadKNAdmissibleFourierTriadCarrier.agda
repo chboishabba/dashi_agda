@@ -1,26 +1,29 @@
 module DASHI.Physics.Closure.NSTriadKNAdmissibleFourierTriadCarrier where
 
-open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Product using (_×_; _,_)
-open import Relation.Nullary using (¬_)
+open import Data.Nat using (_<_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 import DASHI.Physics.Closure.NSTriadKNAdmissibleConstrainedSpectralAudit as Spectral
 import DASHI.Physics.Closure.NSTriadKNVariationalRigidityOperatorRefinement as Refinement
 import DASHI.Physics.Closure.NSTriadKNShellScaleHeadroom as ScaleHeadroom
-import DASHI.Physics.Closure.NSTriadKNPairIncidenceKernelFormula as KernelFormula
+
+------------------------------------------------------------------------
+-- Local list membership, independent of decidable equality on Fourier modes.
+------------------------------------------------------------------------
+
+infix 4 _∈_
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : {xs : List A} → x ∈ (x ∷ xs)
+  there : {y : A} {xs : List A} → x ∈ xs → x ∈ (y ∷ xs)
 
 ------------------------------------------------------------------------
 -- Rich Stage-3 state space.
---
--- The old carrier stores only one Nat.  This carrier retains the Fourier modes,
--- amplitudes, triad incidences, and the proofs on which physical admissibility
--- acts before any projection to total residue energy.
 ------------------------------------------------------------------------
 
 record FourierCoefficient : Set where
@@ -83,18 +86,7 @@ record AdmissibleFourierTriadState
 open AdmissibleFourierTriadState public
 
 ------------------------------------------------------------------------
--- Local list membership, kept independent of decidable equality on modes.
-------------------------------------------------------------------------
-
-infix 4 _∈_
-
-data _∈_ {A : Set} (x : A) : List A → Set where
-  here : {xs : List A} → x ∈ (x ∷ xs)
-  there : {y : A} {xs : List A} → x ∈ xs → x ∈ (y ∷ xs)
-
-------------------------------------------------------------------------
--- Energy projection.  The projection is deliberately late: all physical
--- predicates are fields of the rich state and are not reconstructed afterward.
+-- Late energy projection.
 ------------------------------------------------------------------------
 
 fourierTriadResidueEnergy :
@@ -118,10 +110,6 @@ forgetFourierTriadPreservesEnergy x = refl
 
 ------------------------------------------------------------------------
 -- Actual Stage-3 operator boundary on the rich carrier.
---
--- `matrixEntry` and `operatorAction` must describe the same retained triad
--- operator.  qError is tied to that action, rather than being replaced by total
--- energy.  The two realization equations are the decisive anti-surrogate gates.
 ------------------------------------------------------------------------
 
 record RichStage3PairIncidenceOperator
@@ -154,10 +142,6 @@ record RichStage3PairIncidenceOperator
 
 open RichStage3PairIncidenceOperator public
 
-------------------------------------------------------------------------
--- Admissibility/normalization/rigidity package for the actual operator.
-------------------------------------------------------------------------
-
 record RichStage3ConstrainedModel
     (inputs : FourierTriadAdmissibilityInputs) : Set₁ where
   constructor mkRichStage3ConstrainedModel
@@ -168,15 +152,14 @@ record RichStage3ConstrainedModel
       RichStage3PairIncidenceOperator.State operator → Set
 
     everyStateCarriesAdmissibilityData :
-      (x : RichStage3PairIncidenceOperator.State operator) →
-      admissible x
+      (x : RichStage3PairIncidenceOperator.State operator) → admissible x
 
 open RichStage3ConstrainedModel public
 
 richModelToSpectralCarrier :
   {inputs : FourierTriadAdmissibilityInputs} →
   RichStage3ConstrainedModel inputs → Spectral.AdmissibleStage3Carrier
-richModelToSpectralCarrier model =
+richModelToSpectralCarrier {inputs} model =
   Spectral.mkAdmissibleStage3Carrier
     (RichStage3PairIncidenceOperator.State op)
     (RichStage3ConstrainedModel.admissible model)
@@ -194,10 +177,6 @@ richModelToSpectralCarrier model =
 
 ------------------------------------------------------------------------
 -- Exact closure handoff.
---
--- A caller that supplies the actual operator, a rigidity gap, and exclusion of
--- every rigid direction on normalized admissible states obtains the spectral
--- gap object already consumed by the variational compatibility lane.
 ------------------------------------------------------------------------
 
 record RichStage3CompatibilityHandoff
@@ -235,20 +214,19 @@ record RichStage3CompatibilityHandoff
 
     strictConstantGap :
       Refinement.ScaledRefinedOperatorEstimate.refinedErrorConstant scaledOperator
-        <
-      Refinement.ScaledRayleighBaseCertificate.baseConstant scaledRayleigh
+        < Refinement.ScaledRayleighBaseCertificate.baseConstant scaledRayleigh
 
 open RichStage3CompatibilityHandoff public
 
 handoffToVariationalCompatibility :
   {inputs : FourierTriadAdmissibilityInputs} →
   {model : RichStage3ConstrainedModel inputs} →
-  RichStage3CompatibilityHandoff inputs model →
+  (handoff : RichStage3CompatibilityHandoff inputs model) →
   Refinement.VariationalCompatibilityCertificate
     (suc zero)
     (RichStage3PairIncidenceOperator.State
       (RichStage3ConstrainedModel.operator model))
-    (RichStage3CompatibilityHandoff.scale _)
+    (RichStage3CompatibilityHandoff.scale handoff)
     (RichStage3PairIncidenceOperator.qBase
       (RichStage3ConstrainedModel.operator model))
     (RichStage3PairIncidenceOperator.qError
@@ -263,10 +241,6 @@ handoffToVariationalCompatibility handoff =
 
 ------------------------------------------------------------------------
 -- Audit status.
---
--- The rich carrier and exact operator handoff are implemented.  The current
--- repository still has no map from the retained physical triad enumeration into
--- this carrier and no proof that its matrix realizes the Stage-3 kernel formula.
 ------------------------------------------------------------------------
 
 admissibleFourierTriadCarrierImplemented : Bool
