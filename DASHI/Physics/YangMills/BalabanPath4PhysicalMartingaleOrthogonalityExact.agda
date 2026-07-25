@@ -93,7 +93,7 @@ commutingProjectPreservesFixedPointwise :
     (axisAverage4 siteField movingAxis)
 commutingProjectPreservesFixedPointwise fixedAxis movingAxis siteField fixed site =
   trans
-    (sym (axisAverage4Commutes fixedAxis movingAxis siteField site))
+    (axisAverage4Commutes movingAxis fixedAxis siteField site)
     (axisAverage4RespectsPointwise movingAxis fixed site)
 
 commutingResidualPreservesFixedPointwise :
@@ -115,9 +115,9 @@ commutingResidualPreservesFixedPointwise
           - axisAverage4 (axisAverage4 siteField residualAxis) fixedAxis site)
         (fixed site))
       (trans
-      (cong
+        (cong
           (λ rightValue → siteField site - rightValue)
-          (sym (axisAverage4Commutes fixedAxis residualAxis siteField site)))
+          (axisAverage4Commutes residualAxis fixedAxis siteField site))
         (cong
           (λ rightValue → siteField site - rightValue)
           (axisAverage4RespectsPointwise residualAxis fixed site))))
