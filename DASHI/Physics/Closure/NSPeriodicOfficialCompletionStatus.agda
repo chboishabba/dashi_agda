@@ -9,7 +9,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- program.  These values are deliberately independent of finite receipts.
 ------------------------------------------------------------------------
 
--- Existing repository theorems consumed by exact adapters.
 concreteBernsteinBE1ToBE8AdapterLevel : ProofLevel
 concreteBernsteinBE1ToBE8AdapterLevel = machineChecked
 
@@ -34,7 +33,6 @@ allDataCutoffCoverageAdapterLevel = machineChecked
 cutoffContinuumAssemblyLevel : ProofLevel
 cutoffContinuumAssemblyLevel = machineChecked
 
--- Exact reductions that narrow the remaining analytic frontier.
 biotSavartTransversalityReductionLevel : ProofLevel
 biotSavartTransversalityReductionLevel = machineChecked
 
@@ -77,7 +75,6 @@ weightedEnvelopeLimitTransportReductionLevel = machineChecked
 weightedEnvelopeContinuumAdapterStatusLevel : ProofLevel
 weightedEnvelopeContinuumAdapterStatusLevel = machineChecked
 
--- Concrete carrier and post-cutset reductions.
 concreteCutoffCubeCarrierStatusLevel : ProofLevel
 concreteCutoffCubeCarrierStatusLevel = machineChecked
 
@@ -95,6 +92,15 @@ officialOperatorFoldIdentificationStatusLevel = machineChecked
 
 concreteOfficialOperatorNormAdapterStatusLevel : ProofLevel
 concreteOfficialOperatorNormAdapterStatusLevel = machineChecked
+
+canonicalRealAuthoritiesStatusLevel : ProofLevel
+canonicalRealAuthoritiesStatusLevel = machineChecked
+
+galerkinCoefficientFoldBridgeStatusLevel : ProofLevel
+galerkinCoefficientFoldBridgeStatusLevel = machineChecked
+
+finiteNearTriadPartitionStatusLevel : ProofLevel
+finiteNearTriadPartitionStatusLevel = machineChecked
 
 canonicalNearYoungAllocationStatusLevel : ProofLevel
 canonicalNearYoungAllocationStatusLevel = machineChecked
