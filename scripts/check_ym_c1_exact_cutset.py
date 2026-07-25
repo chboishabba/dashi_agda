@@ -61,6 +61,14 @@ FILES: dict[Path, tuple[str, ...]] = {
         "threeComponentDifferenceEnergyFoldExact",
         "discreteCurlDivergenceHodgeIdentity",
     ),
+    YM / "BalabanPath4SU2LiteralDivergenceHessianInstanceExact.agda": (
+        "literalGaugeFixedHessianData",
+        "literalGaugeFixedHessianQuadraticData",
+        "literalConfiguredDivergenceIsStoredDivergence",
+        "literalConfiguredDivergenceStarIsNegativeForwardGradient",
+        "literalGaugeFixingNormSqExact",
+        "literalGaugeFixingQuadraticFormEqualsDivergenceEnergy",
+    ),
     YM / "BalabanConfiguredSide4PeriodicOpenEnergySeamExact.agda": (
         "periodicFibreDifferenceDecomposition",
         "forwardDerivativeEnergyOpenPlusWrap",
@@ -113,6 +121,7 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
     YM / "BalabanPhysicalC1CompletionLedger.agda": (
         "literalSU2WilsonSecondJetLevel = machineChecked",
+        "literalStoredDivergenceInstanceLevel = machineChecked",
         "configuredPeriodicHodgeIdentityLevel = machineChecked",
         "literalWilsonGaugeOpenFoldWithBoundaryLevel = machineChecked",
         "arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked",
@@ -148,8 +157,9 @@ def main() -> None:
                 fail(f"missing {theorem!r} in {path.relative_to(ROOT)}")
 
     print(
-        "Exact C1 SU(2) Wilson jet, periodic Hodge algebra, open-boundary seam, "
-        "normalization, and translated extraction surfaces are present and hole-free."
+        "Exact C1 SU(2) Wilson jet, literal stored divergence, periodic Hodge "
+        "algebra, open-boundary seam, normalization, and translated extraction "
+        "surfaces are present and hole-free."
     )
 
 
