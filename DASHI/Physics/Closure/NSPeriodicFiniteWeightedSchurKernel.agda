@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSPeriodicFiniteWeightedSchurKernel where
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; _⊔_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_; _++_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
@@ -21,7 +21,7 @@ record WeightedKernel
     {r c : Level}
     (A : AbsorptionArithmetic)
     (Row : Set r)
-    (Column : Set c) : Set (r Level.⊔ c) where
+    (Column : Set c) : Set (r ⊔ c) where
   field
     entryMajorant : Row → Column → Scalar A
 
