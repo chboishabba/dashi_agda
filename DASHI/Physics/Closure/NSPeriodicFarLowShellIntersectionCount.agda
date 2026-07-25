@@ -25,18 +25,17 @@ data _≤count_ : Nat → Nat → Set where
   zero≤ : ∀ {n} → zero ≤count n
   suc≤suc : ∀ {m n} → m ≤count n → suc m ≤count suc n
 
+weakenCountRight : ∀ {m n} → m ≤count n → m ≤count suc n
+weakenCountRight zero≤ = zero≤
+weakenCountRight (suc≤suc proof) = suc≤suc (weakenCountRight proof)
+
 filterLengthAtMostOriginal :
   ∀ {i} {A : Set i} (predicate : A → Bool) →
   ∀ items → length (filterBy predicate items) ≤count length items
 filterLengthAtMostOriginal predicate [] = zero≤
 filterLengthAtMostOriginal predicate (x ∷ xs) with predicate x
 ... | true = suc≤suc (filterLengthAtMostOriginal predicate xs)
-... | false =
-  weakenRight (filterLengthAtMostOriginal predicate xs)
-  where
-  weakenRight : ∀ {m n} → m ≤count n → m ≤count suc n
-  weakenRight zero≤ = zero≤
-  weakenRight (suc≤suc proof) = suc≤suc (weakenRight proof)
+... | false = weakenCountRight (filterLengthAtMostOriginal predicate xs)
 
 shellIntersection :
   ∀ {r c : Level} {Row : Set r} {Column : Set c} →
