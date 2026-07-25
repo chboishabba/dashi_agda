@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
+open Cube using (_∈_; NoDuplicates)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -40,7 +41,7 @@ literalInfinityCubeLength : ∀ n →
 literalInfinityCubeLength n = Cube.literalCutoffCubeLength (pow2 n)
 
 literalInfinityCubeNoDuplicates : ∀ n →
-  Cube.NoDuplicates (infinityCubeModes n)
+  NoDuplicates (infinityCubeModes n)
 literalInfinityCubeNoDuplicates n =
   Cube.cutoffModeEnumerationNoDuplicates (pow2 n)
 
@@ -51,10 +52,10 @@ record InfinityShellSupport (n : Nat) : Set₁ where
     -- The shell may use any exact annular profile, but every listed mode must
     -- belong to the counted outer cube.
     shellContainedInOuterCube : ∀ k →
-      Cube._∈_ k shellModes →
-      Cube._∈_ k (infinityCubeModes n)
+      k ∈ shellModes →
+      k ∈ infinityCubeModes n
 
-    shellNoDuplicates : Cube.NoDuplicates shellModes
+    shellNoDuplicates : NoDuplicates shellModes
 
 open InfinityShellSupport public
 
