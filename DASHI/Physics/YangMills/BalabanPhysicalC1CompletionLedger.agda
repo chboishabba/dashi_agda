@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact
 import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact
+import DASHI.Physics.YangMills.BalabanPath4SU2WilsonGaugeOpenFoldExact
 import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2LiteralGaugeFixedHessianAdapterExact
 import DASHI.Physics.YangMills.BalabanSU2WilsonGaugeNormalizationClosureExact
@@ -39,6 +40,9 @@ literalWilsonGaugePeriodicDifferenceIdentityLevel = machineChecked
 periodicOpenDifferenceSeamLevel : ProofLevel
 periodicOpenDifferenceSeamLevel = machineChecked
 
+literalWilsonGaugeOpenFoldWithBoundaryLevel : ProofLevel
+literalWilsonGaugeOpenFoldWithBoundaryLevel = machineChecked
+
 literalPeriodicReferenceCoercivityLevel : ProofLevel
 literalPeriodicReferenceCoercivityLevel = machineChecked
 
@@ -54,13 +58,8 @@ configuredSide4TranslatedWilsonExtractionLevel = machineChecked
 arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
 arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
 
--- The remaining boundary is only the adapter from the old SUNWilsonAction
--- operator carrier to the exact rational second-jet fold, not the translated
--- geometry, periodic Hodge algebra, or open-block plaquette enumeration.
 repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
 repositorySUNWilsonActionHessianAdapterLevel = conditional
 
--- These proof levels describe theorem terms in the branch.  An authoritative
--- Agda invocation or GitHub Actions run remains a separate validation receipt.
 branchHeadAuthoritativeTypecheckLevel : ProofLevel
 branchHeadAuthoritativeTypecheckLevel = conditional
