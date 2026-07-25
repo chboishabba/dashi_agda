@@ -2,13 +2,13 @@ module DASHI.Physics.YangMills.BalabanPath4PlaquetteOrientationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; _+_; _-_; _*_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanFiniteEnumerationDistinctExact using
-  (DuplicateFree; []-duplicateFree; _∷-duplicateFree_)
+  (DuplicateFree; []-free; _∷-free_)
 
 ------------------------------------------------------------------------
 -- Literal positive orientation convention for four dimensions.
@@ -49,11 +49,6 @@ positivePlaquettePlanes4Complete plane13 = there (there (there (there here)))
 positivePlaquettePlanes4Complete plane23 =
   there (there (there (there (there here))))
 
-------------------------------------------------------------------------
--- A direct duplicate-free proof is kept local rather than relying on a
--- cardinality claim.  The constructor distinctions discharge all exclusions.
-------------------------------------------------------------------------
-
 plane01NotInTail :
   Not (plane01 ∈ (plane02 ∷ plane03 ∷ plane12 ∷ plane13 ∷ plane23 ∷ []))
 plane01NotInTail ()
@@ -78,12 +73,12 @@ plane23NotInTail ()
 positivePlaquettePlanes4DuplicateFree :
   DuplicateFree positivePlaquettePlanes4
 positivePlaquettePlanes4DuplicateFree =
-  plane01NotInTail ∷-duplicateFree
-  (plane02NotInTail ∷-duplicateFree
-  (plane03NotInTail ∷-duplicateFree
-  (plane12NotInTail ∷-duplicateFree
-  (plane13NotInTail ∷-duplicateFree
-  (plane23NotInTail ∷-duplicateFree []-duplicateFree)))))
+  plane01NotInTail ∷-free
+  (plane02NotInTail ∷-free
+  (plane03NotInTail ∷-free
+  (plane12NotInTail ∷-free
+  (plane13NotInTail ∷-free
+  (plane23NotInTail ∷-free []-free)))))
 
 wilsonPlaquetteEnumerationMatchesPositivePairs :
   positivePlaquettePlanes4 ≡
@@ -109,7 +104,7 @@ positivePlaquetteMultiplicity : ℚ
 positivePlaquetteMultiplicity = 1ℚ
 
 orderedPlaquetteMultiplicity : ℚ
-orderedPlaquetteMultiplicity = 2ℚ
+orderedPlaquetteMultiplicity = 1ℚ + 1ℚ
 
 wilsonOrientationMultiplicityExact :
   orderedPlaquetteMultiplicity ≡
