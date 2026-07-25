@@ -2,13 +2,18 @@ module DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
+  (allCyclicIndices; four; zeroᵢ)
+open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
+  (insertAxis; physicalTransverseCoordinates)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational)
+open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
   (squareNonnegative; baseBelowBasePlusRemainder)
 open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate using
@@ -17,20 +22,16 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact
   using
     ( literalWilsonHessianPositivePlaneFold
-    ; literalDiscreteCurlEnergy
     ; literalWilsonHessianEqualsCurlEnergy
     )
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact
   using
-    ( literalGaugeFixingEnergy
+    ( componentScalarBondField
+    ; literalGaugeFixingEnergy
     ; physicalPeriodicReferenceDifferenceEnergy
     ; discreteCurlDivergenceHodgeIdentity
     )
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact
-
-------------------------------------------------------------------------
--- Finite sums of pointwise nonnegative rational terms are nonnegative.
-------------------------------------------------------------------------
 
 sumRationalNonnegative :
   ∀ {A : Set} (values : List A) (term : A → ℚ) →
@@ -50,8 +51,7 @@ periodicWrapFibreEnergyNonnegative : ∀ field axis transverse →
 periodicWrapFibreEnergyNonnegative field axis transverse =
   squareNonnegative
     (field (insertAxis axis zeroᵢ transverse)
-      Data.Rational._-_
-     field (insertAxis axis last4 transverse))
+      - field (insertAxis axis last4 transverse))
 
 periodicWrapEnergyNonnegative : ∀ axis field →
   0ℚ ≤ periodicWrapEnergy axis field
@@ -98,10 +98,6 @@ physicalPeriodicWrapEnergyNonnegative tangent =
         (componentPeriodicWrapEnergyNonnegative
           (componentScalarBondField tangent component3))))
 
-------------------------------------------------------------------------
--- Correct exact producer: Wilson + gauge equals the periodic difference fold.
-------------------------------------------------------------------------
-
 literalWilsonGaugeEqualsPeriodicDifferenceEnergy : ∀ tangent →
   literalWilsonHessianPositivePlaneFold tangent
   + literalGaugeFixingEnergy tangent
@@ -145,10 +141,6 @@ literalPeriodicReferenceHodgeCoercivity tangent blockZero =
     (physicalBlockConstrainedDifferencePoincare tangent blockZero)
     (physicalReferenceDifferenceBelowLiteralWilsonGauge tangent)
 
-------------------------------------------------------------------------
--- Adding any nonnegative block penalty preserves the same constant.
-------------------------------------------------------------------------
-
 literalGaugeFixedPeriodicHessian : PhysicalSU2Tangent4 → ℚ → ℚ
 literalGaugeFixedPeriodicHessian tangent blockPenalty =
   literalWilsonHessianPositivePlaneFold tangent
@@ -164,12 +156,12 @@ literalPeriodicReferenceHodgeWithBlockPenalty tangent blockPenalty blockZero
   blockPenaltyNonnegative =
   ℚP.≤-trans
     (literalPeriodicReferenceHodgeCoercivity tangent blockZero)
-    (subst
-      (λ left → left ≤ literalGaugeFixedPeriodicHessian tangent blockPenalty)
-      (ℚP.+-identityʳ
-        (literalWilsonHessianPositivePlaneFold tangent
-          + literalGaugeFixingEnergy tangent))
-      (ℚP.+-mono-≤ ℚP.≤-refl blockPenaltyNonnegative))
+    (ℚP.+-mono-≤
+      ℚP.≤-refl
+      (baseBelowBasePlusRemainder
+        (literalGaugeFixingEnergy tangent)
+        blockPenalty
+        blockPenaltyNonnegative))
 
 literalWilsonGaugePeriodicIdentityLevel : ProofLevel
 literalWilsonGaugePeriodicIdentityLevel = machineChecked
