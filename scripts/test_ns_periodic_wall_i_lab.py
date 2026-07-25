@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Fast regression checks for ns_periodic_wall_i_lab.py."""
+"""Fast regression checks for the Wall-I research scripts."""
 from fractions import Fraction
 import importlib.util
+import py_compile
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 TARGET = HERE / "ns_periodic_wall_i_lab.py"
+SWEEP = HERE / "ns_periodic_wall_i_sweep.py"
 spec = importlib.util.spec_from_file_location("wall_i_lab", TARGET)
 assert spec is not None and spec.loader is not None
 lab = importlib.util.module_from_spec(spec)
@@ -27,6 +29,7 @@ def main() -> int:
     report = lab.triad_geometry_report(1, 0, 2, 1)
     assert report.mode_count == report.expected_mode_count == 27
     assert report.triad_count > 0
+    py_compile.compile(str(SWEEP), doraise=True)
     print("[ok] Wall-I laboratory regressions passed")
     return 0
 
