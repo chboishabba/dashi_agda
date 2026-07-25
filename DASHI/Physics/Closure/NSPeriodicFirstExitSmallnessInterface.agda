@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSPeriodicFirstExitSmallnessInterface where
 
 open import Agda.Primitive using (Level; lsuc)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
