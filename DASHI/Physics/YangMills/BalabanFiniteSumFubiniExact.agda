@@ -3,8 +3,9 @@ module DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _+_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
@@ -20,7 +21,7 @@ sumRationalZero : ∀ {A : Set} (values : List A) →
   sumRational values (λ _ → 0ℚ) ≡ 0ℚ
 sumRationalZero [] = refl
 sumRationalZero (value ∷ values)
-  rewrite sumRationalZero values = ℚRing.solve-∀
+  rewrite sumRationalZero values = ℚP.+-identityˡ 0ℚ
 
 postulate
   sumRationalAdd :
@@ -73,7 +74,7 @@ sumSwap :
 sumSwap [] right term = sym (sumRationalZero right)
 sumSwap (leftValue ∷ left) right term =
   trans
-    (cong₂ _+_ refl (sumSwap left right term))
+    (cong (sumRational right (term leftValue) +_) (sumSwap left right term))
     (sym
       (sumRationalAdd right
         (term leftValue)

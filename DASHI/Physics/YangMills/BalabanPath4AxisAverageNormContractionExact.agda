@@ -37,12 +37,12 @@ sumRationalNonnegative (value ∷ values) term pointwise =
       (pointwise value)
       (sumRationalNonnegative values term pointwise))
 
-globalNormSqNonnegative : ∀ field → 0ℚ ≤ globalNormSq field
-globalNormSqNonnegative field =
+globalNormSqNonnegative : ∀ siteField → 0ℚ ≤ globalNormSq siteField
+globalNormSqNonnegative siteField =
   sumRationalNonnegative
     (physicalBlockSites side4)
-    (λ site → sq (field site))
-    (λ site → squareNonnegative (field site))
+    (λ site → sq (siteField site))
+    (λ site → squareNonnegative (siteField site))
 
 twoFieldSquareExpansion : ∀ left right →
   globalNormSq (addField left right)
@@ -75,28 +75,28 @@ twoFieldSquareExpansion left right =
               (λ site → left site * right site))))))
 
 axisResidual : SiteField side4 → Axis4 → SiteField side4
-axisResidual field axis = subtractField field (axisAverage4 field axis)
+axisResidual siteField axis = subtractField siteField (axisAverage4 siteField axis)
 
-axisResidualPlusAverage : ∀ field axis →
+axisResidualPlusAverage : ∀ siteField axis →
   FieldEqual
-    (addField (axisResidual field axis) (axisAverage4 field axis))
-    field
-axisResidualPlusAverage field axis site =
-  ℚRing.solve-∀ (field site) (axisAverage4 field axis site)
+    (addField (axisResidual siteField axis) (axisAverage4 siteField axis))
+    siteField
+axisResidualPlusAverage siteField axis site =
+  ℚRing.solve-∀ (siteField site) (axisAverage4 siteField axis site)
 
-axisAveragePythagoras : ∀ field axis →
-  globalNormSq field
-  ≡ globalNormSq (axisResidual field axis)
-    + globalNormSq (axisAverage4 field axis)
-axisAveragePythagoras field axis =
+axisAveragePythagoras : ∀ siteField axis →
+  globalNormSq siteField
+  ≡ globalNormSq (axisResidual siteField axis)
+    + globalNormSq (axisAverage4 siteField axis)
+axisAveragePythagoras siteField axis =
   trans
     (sym (globalNormRespectsPointwise
-      (axisResidualPlusAverage field axis)))
+      (axisResidualPlusAverage siteField axis)))
     (trans
       (twoFieldSquareExpansion
-        (axisResidual field axis)
-        (axisAverage4 field axis))
-      (dropCross field axis))
+        (axisResidual siteField axis)
+        (axisAverage4 siteField axis))
+      (dropCross siteField axis))
   where
   dropCross : ∀ current currentAxis →
     globalNormSq (axisResidual current currentAxis)
@@ -115,16 +115,16 @@ axisAveragePythagoras field axis =
       (globalNormSq (axisResidual current currentAxis))
       (globalNormSq (axisAverage4 current currentAxis))
 
-axisAverageNormContraction : ∀ field axis →
-  globalNormSq (axisAverage4 field axis) ≤ globalNormSq field
-axisAverageNormContraction field axis =
+axisAverageNormContraction : ∀ siteField axis →
+  globalNormSq (axisAverage4 siteField axis) ≤ globalNormSq siteField
+axisAverageNormContraction siteField axis =
   subst
-    (λ upper → globalNormSq (axisAverage4 field axis) ≤ upper)
-    (sym (averageFirstPythagoras field axis))
+    (λ upper → globalNormSq (axisAverage4 siteField axis) ≤ upper)
+    (sym (averageFirstPythagoras siteField axis))
     (baseBelowBasePlusRemainder
-      (globalNormSq (axisAverage4 field axis))
-      (globalNormSq (axisResidual field axis))
-      (globalNormSqNonnegative (axisResidual field axis)))
+      (globalNormSq (axisAverage4 siteField axis))
+      (globalNormSq (axisResidual siteField axis))
+      (globalNormSqNonnegative (axisResidual siteField axis)))
   where
   averageFirstPythagoras : ∀ current currentAxis →
     globalNormSq current

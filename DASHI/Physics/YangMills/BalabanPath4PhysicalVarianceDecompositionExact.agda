@@ -244,7 +244,7 @@ physicalMartingaleVarianceDecomposition blockField meanZero =
       (rewriteAllCrossTerms blockField))
   where
   rewriteAllCrossTerms : ∀ current →
-    globalNormSq (martingaleField0 current)
+    (globalNormSq (martingaleField0 current)
     + (globalNormSq (martingaleField1 current)
     + (globalNormSq (martingaleField2 current)
     + globalNormSq (martingaleField3 current)))
@@ -254,11 +254,12 @@ physicalMartingaleVarianceDecomposition blockField meanZero =
       + (globalBlockInner (martingaleField0 current) (martingaleField3 current)
       + (globalBlockInner (martingaleField1 current) (martingaleField2 current)
       + (globalBlockInner (martingaleField1 current) (martingaleField3 current)
-      + globalBlockInner (martingaleField2 current) (martingaleField3 current)))))
-    ≡ globalNormSq (martingaleField0 current)
-      + (globalNormSq (martingaleField1 current)
-      + (globalNormSq (martingaleField2 current)
-      + globalNormSq (martingaleField3 current))))
+      + globalBlockInner (martingaleField2 current) (martingaleField3 current))))))
+    ≡
+    (globalNormSq (martingaleField0 current)
+    + (globalNormSq (martingaleField1 current)
+    + (globalNormSq (martingaleField2 current)
+    + globalNormSq (martingaleField3 current)))))
   rewriteAllCrossTerms current
     rewrite martingale01Zero current
           | martingale02Zero current

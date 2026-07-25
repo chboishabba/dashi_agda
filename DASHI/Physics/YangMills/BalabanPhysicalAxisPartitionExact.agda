@@ -1,9 +1,10 @@
 module DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational using (ℚ; _*_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -19,10 +20,10 @@ open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact
 -- the axis-fibre proofs and the repository's one global block inner product.
 ------------------------------------------------------------------------
 
-axisValues : (L : Nat) → Agda.Builtin.List.List (CyclicIndex L)
+axisValues : (L : Nat) → List (CyclicIndex L)
 axisValues = allCyclicIndices
 
-pairValues : (L : Nat) → Agda.Builtin.List.List (Pair2 (CyclicIndex L))
+pairValues : (L : Nat) → List (Pair2 (CyclicIndex L))
 pairValues L = cartesian (axisValues L) (axisValues L)
 
 coordinateSum4 : ∀ {L} → SiteField L → ℚ
@@ -154,8 +155,8 @@ axis2PartitionMatchesCoordinateSum4 {L} siteField =
         (λ x0 →
           sumRational (pairValues L) (λ pair13 →
             sumRational (axisValues L) (λ x2 →
-              siteField (pair (pair x0 (first pair13))
-                (pair x2 (second pair13))))))
+              siteField (pair (pair x0 (pairFirst pair13))
+                (pair x2 (pairSecond pair13))))))
         (λ x0 →
           sumRational (axisValues L) (λ x1 →
             sumRational (axisValues L) (λ x3 →
@@ -166,17 +167,17 @@ axis2PartitionMatchesCoordinateSum4 {L} siteField =
             (axisValues L) (axisValues L)
             (λ pair13 →
               sumRational (axisValues L) (λ x2 →
-                siteField (pair (pair x0 (first pair13))
-                  (pair x2 (second pair13)))))))
+                siteField (pair (pair x0 (pairFirst pair13))
+                  (pair x2 (pairSecond pair13)))))))
       (rotateAxis2ToCanonical
         (axisValues L) (axisValues L) (axisValues L) (axisValues L)
         (λ x0 x1 x2 x3 → siteField (pair (pair x0 x1) (pair x2 x3)))))
   where
-  first : ∀ {A B} → Product A B → A
-  first (pair left right) = left
+  pairFirst : ∀ {A B} → Product A B → A
+  pairFirst (pair left right) = left
 
-  second : ∀ {A B} → Product A B → B
-  second (pair left right) = right
+  pairSecond : ∀ {A B} → Product A B → B
+  pairSecond (pair left right) = right
 
 axis3PartitionMatchesCoordinateSum4 : ∀ {L} siteField →
   axisPartitionSum (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField
@@ -194,8 +195,8 @@ axis3PartitionMatchesCoordinateSum4 {L} siteField =
       (λ x0 →
         sumRational (pairValues L) (λ pair12 →
           sumRational (axisValues L) (λ x3 →
-            siteField (pair (pair x0 (first pair12))
-              (pair (second pair12) x3)))))
+            siteField (pair (pair x0 (pairFirst pair12))
+              (pair (pairSecond pair12) x3)))))
       (λ x0 →
         sumRational (axisValues L) (λ x1 →
           sumRational (axisValues L) (λ x2 →
@@ -206,16 +207,17 @@ axis3PartitionMatchesCoordinateSum4 {L} siteField =
           (axisValues L) (axisValues L)
           (λ pair12 →
             sumRational (axisValues L) (λ x3 →
-              siteField (pair (pair x0 (first pair12))
-                (pair (second pair12) x3))))))
+              siteField (pair (pair x0 (pairFirst pair12))
+                (pair (pairSecond pair12) x3))))))
   where
-  first : ∀ {A B} → Product A B → A
-  first (pair left right) = left
+  pairFirst : ∀ {A B} → Product A B → A
+  pairFirst (pair left right) = left
 
-  second : ∀ {A B} → Product A B → B
-  second (pair left right) = right
+  pairSecond : ∀ {A B} → Product A B → B
+  pairSecond (pair left right) = right
 
-axisPartitionMatchesCoordinateSum4 : ∀ {L} axis siteField →
+axisPartitionMatchesCoordinateSum4 :
+  ∀ {L} (axis : Axis4) (siteField : SiteField L) →
   axisPartitionSum axis siteField ≡ coordinateSum4 siteField
 axisPartitionMatchesCoordinateSum4 zeroᵢ siteField =
   axis0PartitionMatchesCoordinateSum4 siteField
@@ -226,7 +228,8 @@ axisPartitionMatchesCoordinateSum4 (sucᵢ (sucᵢ zeroᵢ)) siteField =
 axisPartitionMatchesCoordinateSum4 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField =
   axis3PartitionMatchesCoordinateSum4 siteField
 
-axisPartitionSumMatchesGlobal : ∀ {L} axis siteField →
+axisPartitionSumMatchesGlobal :
+  ∀ {L} (axis : Axis4) (siteField : SiteField L) →
   axisPartitionSum axis siteField ≡ globalSiteSum siteField
 axisPartitionSumMatchesGlobal axis siteField =
   trans
@@ -245,7 +248,8 @@ axisPartitionInner : ∀ {L} → Axis4 → SiteField L → SiteField L → ℚ
 axisPartitionInner axis left right =
   axisPartitionSum axis (λ site → left site * right site)
 
-axisPartitionInnerMatchesGlobal : ∀ {L} axis left right →
+axisPartitionInnerMatchesGlobal :
+  ∀ {L} (axis : Axis4) (left right : SiteField L) →
   axisPartitionInner axis left right ≡ globalBlockInner left right
 axisPartitionInnerMatchesGlobal axis left right =
   axisPartitionSumMatchesGlobal axis
@@ -257,7 +261,9 @@ toAxisFibreField4 axis siteField transverse coordinate =
   siteField (insertAxis axis coordinate transverse)
 
 axisAverageProjectionMatchesPhysical :
-  ∀ axis siteField transverse coordinate →
+  ∀ (axis : Axis4) (siteField : SiteField side4)
+    (transverse : Triple (CyclicIndex side4))
+    (coordinate : CyclicIndex side4) →
   fibreAverageProjection quarter (axisValues side4)
     (toAxisFibreField4 axis siteField) transverse coordinate
   ≡ axisAverage4 siteField axis (insertAxis axis coordinate transverse)
@@ -265,7 +271,7 @@ axisAverageProjectionMatchesPhysical axis siteField transverse coordinate =
   sym (axisAverage4ConstantOnFibre siteField axis transverse coordinate)
 
 axisPartitionAverageLeftMatchesProductInner :
-  ∀ axis left right →
+  ∀ (axis : Axis4) (left right : SiteField side4) →
   axisPartitionInner axis (axisAverage4 left axis) right
   ≡ productInner
       (physicalTransverseCoordinates side4)
@@ -306,7 +312,7 @@ axisPartitionAverageLeftMatchesProductInner axis left right =
   congMultiplyLeft refl = refl
 
 axisPartitionAverageRightMatchesProductInner :
-  ∀ axis left right →
+  ∀ (axis : Axis4) (left right : SiteField side4) →
   axisPartitionInner axis left (axisAverage4 right axis)
   ≡ productInner
       (physicalTransverseCoordinates side4)
@@ -337,16 +343,14 @@ axisPartitionAverageRightMatchesProductInner axis left right =
           * fibreAverageProjection quarter (axisValues side4)
               (toAxisFibreField4 axis right) transverse coordinate)
         (λ coordinate →
-          congMultiplyRight
+          cong
+            (λ x →
+              left (insertAxis axis coordinate transverse) * x)
             (sym (axisAverageProjectionMatchesPhysical
               axis right transverse coordinate))))
-  where
-  congMultiplyRight : ∀ {leftValue rightValue multiplier : ℚ} →
-    leftValue ≡ rightValue →
-    multiplier * leftValue ≡ multiplier * rightValue
-  congMultiplyRight refl = refl
 
-physicalAxisAverage4SelfAdjoint : ∀ axis left right →
+physicalAxisAverage4SelfAdjoint :
+  ∀ (axis : Axis4) (left right : SiteField side4) →
   globalBlockInner (axisAverage4 left axis) right
   ≡ globalBlockInner left (axisAverage4 right axis)
 physicalAxisAverage4SelfAdjoint axis left right =
@@ -368,8 +372,8 @@ physicalAxisAverage4SelfAdjoint axis left right =
           (axisPartitionInnerMatchesGlobal axis
             left (axisAverage4 right axis)))))
 
-physicalAxisPartitionInnerProductMatchLevel : ProofLevel
-physicalAxisPartitionInnerProductMatchLevel = machineChecked
+path4PhysicalAxisPartitionInnerProductMatchLevel : ProofLevel
+path4PhysicalAxisPartitionInnerProductMatchLevel = machineChecked
 
 path4PhysicalAxisAverageSelfAdjointnessLevel : ProofLevel
 path4PhysicalAxisAverageSelfAdjointnessLevel = machineChecked
