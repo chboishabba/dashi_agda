@@ -12,6 +12,7 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
 open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate using
   (configuredPathCoercivityConstant)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
+open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact using
   (literalWilsonHessianPositivePlaneFold)
@@ -21,11 +22,6 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact u
   ( literalWilsonGaugeEqualsPeriodicDifferenceEnergy
   ; physicalReferenceDifferenceBelowPeriodic
   )
-
-------------------------------------------------------------------------
--- Exact adapter from the repository operator record to the concrete literal
--- Wilson and divergence folds.  No Hodge or normalization theorem is assumed.
-------------------------------------------------------------------------
 
 record Path4SU2LiteralGaugeFixedHessianData (Gauge Coarse : Set) : Set₁ where
   field
