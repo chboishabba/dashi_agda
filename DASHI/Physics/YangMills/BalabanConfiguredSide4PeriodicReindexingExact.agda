@@ -242,13 +242,13 @@ periodicBackwardReindexing axis term =
 
 forwardDifference4 : Axis4 → (PhysicalBlockL side4 → ℚ) →
   PhysicalBlockL side4 → ℚ
-forwardDifference4 axis field site =
-  field (shiftForward4 axis site) - field site
+forwardDifference4 axis scalarF site =
+  scalarF (shiftForward4 axis site) - scalarF site
 
 backwardDifference4 : Axis4 → (PhysicalBlockL side4 → ℚ) →
   PhysicalBlockL side4 → ℚ
-backwardDifference4 axis field site =
-  field site - field (shiftBackward4 axis site)
+backwardDifference4 axis scalarF site =
+  scalarF site - scalarF (shiftBackward4 axis site)
 
 periodicForwardBackwardSummationByParts : ∀ axis f g →
   siteSum4 (λ site → forwardDifference4 axis f site * g site)

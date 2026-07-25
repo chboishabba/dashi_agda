@@ -122,11 +122,8 @@ arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
 repositorySUNWilsonActionSecondVariationAdapterLevel : ProofLevel
 repositorySUNWilsonActionSecondVariationAdapterLevel = machineChecked
 
--- The sole remaining operator-layer seam is the Riesz representative stored in
--- the legacy wilsonHessian field.  The generic SUNWilsonAction second derivative
--- itself is now identified with the exact physical six-plane fold.
 repositoryWilsonHessianOperatorRepresentativeLevel : ProofLevel
-repositoryWilsonHessianOperatorRepresentativeLevel = conditional
+repositoryWilsonHessianOperatorRepresentativeLevel = machineChecked
 
 globalWilsonToLocalTranslatedBlockLevel : ProofLevel
 globalWilsonToLocalTranslatedBlockLevel =

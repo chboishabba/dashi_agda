@@ -26,151 +26,151 @@ pairValues : (L : Nat) → Agda.Builtin.List.List (Pair2 (CyclicIndex L))
 pairValues L = cartesian (axisValues L) (axisValues L)
 
 coordinateSum4 : ∀ {L} → SiteField L → ℚ
-coordinateSum4 {L} field =
+coordinateSum4 {L} siteField =
   sum4
     (axisValues L) (axisValues L) (axisValues L) (axisValues L)
-    (λ x0 x1 x2 x3 → field (pair (pair x0 x1) (pair x2 x3)))
+    (λ x0 x1 x2 x3 → siteField (pair (pair x0 x1) (pair x2 x3)))
 
 globalSiteSum : ∀ {L} → SiteField L → ℚ
-globalSiteSum {L} field = sumRational (physicalBlockSites L) field
+globalSiteSum {L} siteField = sumRational (physicalBlockSites L) siteField
 
-globalSiteSumMatchesCoordinateSum4 : ∀ {L} field →
-  globalSiteSum {L} field ≡ coordinateSum4 field
-globalSiteSumMatchesCoordinateSum4 {L} field =
+globalSiteSumMatchesCoordinateSum4 : ∀ {L} siteField →
+  globalSiteSum {L} siteField ≡ coordinateSum4 siteField
+globalSiteSumMatchesCoordinateSum4 {L} siteField =
   trans
-    (sumCartesian (pairValues L) (pairValues L) field)
+    (sumCartesian (pairValues L) (pairValues L) siteField)
     (trans
       (sumCartesian
         (axisValues L) (axisValues L)
         (λ pair01 →
           sumRational (pairValues L)
-            (λ pair23 → field (pair pair01 pair23))))
+            (λ pair23 → siteField (pair pair01 pair23))))
       (sumRationalCong
         (axisValues L)
         (λ x0 →
           sumRational (axisValues L) (λ x1 →
             sumRational (pairValues L) (λ pair23 →
-              field (pair (pair x0 x1) pair23))))
+              siteField (pair (pair x0 x1) pair23))))
         (λ x0 →
           sumRational (axisValues L) (λ x1 →
             sumRational (axisValues L) (λ x2 →
               sumRational (axisValues L) (λ x3 →
-                field (pair (pair x0 x1) (pair x2 x3))))))
+                siteField (pair (pair x0 x1) (pair x2 x3))))))
         (λ x0 →
           sumRationalCong
             (axisValues L)
             (λ x1 →
               sumRational (pairValues L) (λ pair23 →
-                field (pair (pair x0 x1) pair23)))
+                siteField (pair (pair x0 x1) pair23)))
             (λ x1 →
               sumRational (axisValues L) (λ x2 →
                 sumRational (axisValues L) (λ x3 →
-                  field (pair (pair x0 x1) (pair x2 x3)))))
+                  siteField (pair (pair x0 x1) (pair x2 x3)))))
             (λ x1 →
               sumCartesian
                 (axisValues L) (axisValues L)
-                (λ pair23 → field (pair (pair x0 x1) pair23))))))
+                (λ pair23 → siteField (pair (pair x0 x1) pair23))))))
 
 axisPartitionSum : ∀ {L} → Axis4 → SiteField L → ℚ
-axisPartitionSum {L} axis field =
+axisPartitionSum {L} axis siteField =
   sumRational (physicalTransverseCoordinates L) (λ transverse →
     sumRational (axisValues L) (λ coordinate →
-      field (insertAxis axis coordinate transverse)))
+      siteField (insertAxis axis coordinate transverse)))
 
-axis0PartitionMatchesCoordinateSum4 : ∀ {L} field →
-  axisPartitionSum zeroᵢ field ≡ coordinateSum4 field
-axis0PartitionMatchesCoordinateSum4 {L} field =
+axis0PartitionMatchesCoordinateSum4 : ∀ {L} siteField →
+  axisPartitionSum zeroᵢ siteField ≡ coordinateSum4 siteField
+axis0PartitionMatchesCoordinateSum4 {L} siteField =
   trans
     (sumCartesian
       (axisValues L) (pairValues L)
       (λ transverse →
         sumRational (axisValues L) (λ coordinate →
-          field (insertAxis zeroᵢ coordinate transverse))))
+          siteField (insertAxis zeroᵢ coordinate transverse))))
     (trans
       (sumRationalCong
         (axisValues L)
         (λ x1 →
           sumRational (pairValues L) (λ pair23 →
             sumRational (axisValues L) (λ x0 →
-              field (pair (pair x0 x1) pair23))))
+              siteField (pair (pair x0 x1) pair23))))
         (λ x1 →
           sumRational (axisValues L) (λ x2 →
             sumRational (axisValues L) (λ x3 →
               sumRational (axisValues L) (λ x0 →
-                field (pair (pair x0 x1) (pair x2 x3))))))
+                siteField (pair (pair x0 x1) (pair x2 x3))))))
         (λ x1 →
           sumCartesian
             (axisValues L) (axisValues L)
             (λ pair23 →
               sumRational (axisValues L) (λ x0 →
-                field (pair (pair x0 x1) pair23)))))
+                siteField (pair (pair x0 x1) pair23)))))
       (rotateAxis0ToCanonical
         (axisValues L) (axisValues L) (axisValues L) (axisValues L)
-        (λ x0 x1 x2 x3 → field (pair (pair x0 x1) (pair x2 x3)))))
+        (λ x0 x1 x2 x3 → siteField (pair (pair x0 x1) (pair x2 x3)))))
 
-axis1PartitionMatchesCoordinateSum4 : ∀ {L} field →
-  axisPartitionSum (sucᵢ zeroᵢ) field ≡ coordinateSum4 field
-axis1PartitionMatchesCoordinateSum4 {L} field =
+axis1PartitionMatchesCoordinateSum4 : ∀ {L} siteField →
+  axisPartitionSum (sucᵢ zeroᵢ) siteField ≡ coordinateSum4 siteField
+axis1PartitionMatchesCoordinateSum4 {L} siteField =
   trans
     (sumCartesian
       (axisValues L) (pairValues L)
       (λ transverse →
         sumRational (axisValues L) (λ coordinate →
-          field (insertAxis (sucᵢ zeroᵢ) coordinate transverse))))
+          siteField (insertAxis (sucᵢ zeroᵢ) coordinate transverse))))
     (trans
       (sumRationalCong
         (axisValues L)
         (λ x0 →
           sumRational (pairValues L) (λ pair23 →
             sumRational (axisValues L) (λ x1 →
-              field (pair (pair x0 x1) pair23))))
+              siteField (pair (pair x0 x1) pair23))))
         (λ x0 →
           sumRational (axisValues L) (λ x2 →
             sumRational (axisValues L) (λ x3 →
               sumRational (axisValues L) (λ x1 →
-                field (pair (pair x0 x1) (pair x2 x3))))))
+                siteField (pair (pair x0 x1) (pair x2 x3))))))
         (λ x0 →
           sumCartesian
             (axisValues L) (axisValues L)
             (λ pair23 →
               sumRational (axisValues L) (λ x1 →
-                field (pair (pair x0 x1) pair23)))))
+                siteField (pair (pair x0 x1) pair23)))))
       (rotateAxis1ToCanonical
         (axisValues L) (axisValues L) (axisValues L) (axisValues L)
-        (λ x0 x1 x2 x3 → field (pair (pair x0 x1) (pair x2 x3)))))
+        (λ x0 x1 x2 x3 → siteField (pair (pair x0 x1) (pair x2 x3)))))
 
-axis2PartitionMatchesCoordinateSum4 : ∀ {L} field →
-  axisPartitionSum (sucᵢ (sucᵢ zeroᵢ)) field ≡ coordinateSum4 field
-axis2PartitionMatchesCoordinateSum4 {L} field =
+axis2PartitionMatchesCoordinateSum4 : ∀ {L} siteField →
+  axisPartitionSum (sucᵢ (sucᵢ zeroᵢ)) siteField ≡ coordinateSum4 siteField
+axis2PartitionMatchesCoordinateSum4 {L} siteField =
   trans
     (sumCartesian
       (axisValues L) (pairValues L)
       (λ transverse →
         sumRational (axisValues L) (λ coordinate →
-          field (insertAxis (sucᵢ (sucᵢ zeroᵢ)) coordinate transverse))))
+          siteField (insertAxis (sucᵢ (sucᵢ zeroᵢ)) coordinate transverse))))
     (trans
       (sumRationalCong
         (axisValues L)
         (λ x0 →
           sumRational (pairValues L) (λ pair13 →
             sumRational (axisValues L) (λ x2 →
-              field (pair (pair x0 (first pair13))
+              siteField (pair (pair x0 (first pair13))
                 (pair x2 (second pair13))))))
         (λ x0 →
           sumRational (axisValues L) (λ x1 →
             sumRational (axisValues L) (λ x3 →
               sumRational (axisValues L) (λ x2 →
-                field (pair (pair x0 x1) (pair x2 x3))))))
+                siteField (pair (pair x0 x1) (pair x2 x3))))))
         (λ x0 →
           sumCartesian
             (axisValues L) (axisValues L)
             (λ pair13 →
               sumRational (axisValues L) (λ x2 →
-                field (pair (pair x0 (first pair13))
+                siteField (pair (pair x0 (first pair13))
                   (pair x2 (second pair13)))))))
       (rotateAxis2ToCanonical
         (axisValues L) (axisValues L) (axisValues L) (axisValues L)
-        (λ x0 x1 x2 x3 → field (pair (pair x0 x1) (pair x2 x3)))))
+        (λ x0 x1 x2 x3 → siteField (pair (pair x0 x1) (pair x2 x3)))))
   where
   first : ∀ {A B} → Product A B → A
   first (pair left right) = left
@@ -178,35 +178,35 @@ axis2PartitionMatchesCoordinateSum4 {L} field =
   second : ∀ {A B} → Product A B → B
   second (pair left right) = right
 
-axis3PartitionMatchesCoordinateSum4 : ∀ {L} field →
-  axisPartitionSum (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
-  ≡ coordinateSum4 field
-axis3PartitionMatchesCoordinateSum4 {L} field =
+axis3PartitionMatchesCoordinateSum4 : ∀ {L} siteField →
+  axisPartitionSum (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField
+  ≡ coordinateSum4 siteField
+axis3PartitionMatchesCoordinateSum4 {L} siteField =
   trans
     (sumCartesian
       (axisValues L) (pairValues L)
       (λ transverse →
         sumRational (axisValues L) (λ coordinate →
-          field (insertAxis (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
+          siteField (insertAxis (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
             coordinate transverse))))
     (sumRationalCong
       (axisValues L)
       (λ x0 →
         sumRational (pairValues L) (λ pair12 →
           sumRational (axisValues L) (λ x3 →
-            field (pair (pair x0 (first pair12))
+            siteField (pair (pair x0 (first pair12))
               (pair (second pair12) x3)))))
       (λ x0 →
         sumRational (axisValues L) (λ x1 →
           sumRational (axisValues L) (λ x2 →
             sumRational (axisValues L) (λ x3 →
-              field (pair (pair x0 x1) (pair x2 x3))))))
+              siteField (pair (pair x0 x1) (pair x2 x3))))))
       (λ x0 →
         sumCartesian
           (axisValues L) (axisValues L)
           (λ pair12 →
             sumRational (axisValues L) (λ x3 →
-              field (pair (pair x0 (first pair12))
+              siteField (pair (pair x0 (first pair12))
                 (pair (second pair12) x3))))))
   where
   first : ∀ {A B} → Product A B → A
@@ -215,23 +215,23 @@ axis3PartitionMatchesCoordinateSum4 {L} field =
   second : ∀ {A B} → Product A B → B
   second (pair left right) = right
 
-axisPartitionMatchesCoordinateSum4 : ∀ {L} axis field →
-  axisPartitionSum axis field ≡ coordinateSum4 field
-axisPartitionMatchesCoordinateSum4 zeroᵢ field =
-  axis0PartitionMatchesCoordinateSum4 field
-axisPartitionMatchesCoordinateSum4 (sucᵢ zeroᵢ) field =
-  axis1PartitionMatchesCoordinateSum4 field
-axisPartitionMatchesCoordinateSum4 (sucᵢ (sucᵢ zeroᵢ)) field =
-  axis2PartitionMatchesCoordinateSum4 field
-axisPartitionMatchesCoordinateSum4 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field =
-  axis3PartitionMatchesCoordinateSum4 field
+axisPartitionMatchesCoordinateSum4 : ∀ {L} axis siteField →
+  axisPartitionSum axis siteField ≡ coordinateSum4 siteField
+axisPartitionMatchesCoordinateSum4 zeroᵢ siteField =
+  axis0PartitionMatchesCoordinateSum4 siteField
+axisPartitionMatchesCoordinateSum4 (sucᵢ zeroᵢ) siteField =
+  axis1PartitionMatchesCoordinateSum4 siteField
+axisPartitionMatchesCoordinateSum4 (sucᵢ (sucᵢ zeroᵢ)) siteField =
+  axis2PartitionMatchesCoordinateSum4 siteField
+axisPartitionMatchesCoordinateSum4 (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField =
+  axis3PartitionMatchesCoordinateSum4 siteField
 
-axisPartitionSumMatchesGlobal : ∀ {L} axis field →
-  axisPartitionSum axis field ≡ globalSiteSum field
-axisPartitionSumMatchesGlobal axis field =
+axisPartitionSumMatchesGlobal : ∀ {L} axis siteField →
+  axisPartitionSum axis siteField ≡ globalSiteSum siteField
+axisPartitionSumMatchesGlobal axis siteField =
   trans
-    (axisPartitionMatchesCoordinateSum4 axis field)
-    (sym (globalSiteSumMatchesCoordinateSum4 field))
+    (axisPartitionMatchesCoordinateSum4 axis siteField)
+    (sym (globalSiteSumMatchesCoordinateSum4 siteField))
 
 ------------------------------------------------------------------------
 -- Inner products and side-four average self-adjointness.
@@ -253,16 +253,16 @@ axisPartitionInnerMatchesGlobal axis left right =
 
 toAxisFibreField4 : Axis4 → SiteField side4 →
   FibreField (Triple (CyclicIndex side4)) (CyclicIndex side4)
-toAxisFibreField4 axis field transverse coordinate =
-  field (insertAxis axis coordinate transverse)
+toAxisFibreField4 axis siteField transverse coordinate =
+  siteField (insertAxis axis coordinate transverse)
 
 axisAverageProjectionMatchesPhysical :
-  ∀ axis field transverse coordinate →
+  ∀ axis siteField transverse coordinate →
   fibreAverageProjection quarter (axisValues side4)
-    (toAxisFibreField4 axis field) transverse coordinate
-  ≡ axisAverage4 field axis (insertAxis axis coordinate transverse)
-axisAverageProjectionMatchesPhysical axis field transverse coordinate =
-  sym (axisAverage4ConstantOnFibre field axis transverse coordinate)
+    (toAxisFibreField4 axis siteField) transverse coordinate
+  ≡ axisAverage4 siteField axis (insertAxis axis coordinate transverse)
+axisAverageProjectionMatchesPhysical axis siteField transverse coordinate =
+  sym (axisAverage4ConstantOnFibre siteField axis transverse coordinate)
 
 axisPartitionAverageLeftMatchesProductInner :
   ∀ axis left right →

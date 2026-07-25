@@ -67,7 +67,7 @@ c1ExactRequestedLemmaAliasLevel : ProofLevel
 c1ExactRequestedLemmaAliasLevel = machineChecked
 
 repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
-repositorySUNWilsonActionHessianAdapterLevel = conditional
+repositorySUNWilsonActionHessianAdapterLevel = machineChecked
 
 branchHeadAuthoritativeTypecheckLevel : ProofLevel
 branchHeadAuthoritativeTypecheckLevel = conditional

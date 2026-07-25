@@ -30,55 +30,55 @@ RationalBondField4 : Set
 RationalBondField4 = BondField side4 ℚ
 
 bondComponent : RationalBondField4 → Axis4 → SiteField side4
-bondComponent field axis = bondFieldAsAxisIndexedSiteField field axis
+bondComponent bondF axis = bondFieldAsAxisIndexedSiteField bondF axis
 
 bondNormSq : RationalBondField4 → ℚ
-bondNormSq field =
+bondNormSq bondF =
   sumRational (allCyclicIndices four)
-    (λ axis → globalNormSq (bondComponent field axis))
+    (λ axis → globalNormSq (bondComponent bondF axis))
 
 bondReferenceDifferenceEnergy : RationalBondField4 → ℚ
-bondReferenceDifferenceEnergy field =
+bondReferenceDifferenceEnergy bondF =
   sumRational (allCyclicIndices four)
-    (λ axis → globalDirectionalEnergy (bondComponent field axis))
+    (λ axis → globalDirectionalEnergy (bondComponent bondF axis))
 
 BondComponentMeanZero : RationalBondField4 → Set
-BondComponentMeanZero field =
-  ∀ axis → GlobalMeanZero4 (bondComponent field axis)
+BondComponentMeanZero bondF =
+  ∀ axis → GlobalMeanZero4 (bondComponent bondF axis)
 
 componentwisePath4Poincare :
-  ∀ field → BondComponentMeanZero field →
+  ∀ bondF → BondComponentMeanZero bondF →
   sumRational (allCyclicIndices four)
-    (λ axis → oneSixteenth * globalNormSq (bondComponent field axis))
-  ≤ bondReferenceDifferenceEnergy field
-componentwisePath4Poincare field meanZero =
+    (λ axis → oneSixteenth * globalNormSq (bondComponent bondF axis))
+  ≤ bondReferenceDifferenceEnergy bondF
+componentwisePath4Poincare bondF meanZero =
   sumRationalMonotone
     (allCyclicIndices four)
-    (λ axis → oneSixteenth * globalNormSq (bondComponent field axis))
-    (λ axis → globalDirectionalEnergy (bondComponent field axis))
+    (λ axis → oneSixteenth * globalNormSq (bondComponent bondF axis))
+    (λ axis → globalDirectionalEnergy (bondComponent bondF axis))
     (λ axis → path4GlobalPoincare
-      (bondComponent field axis) (meanZero axis))
+      (bondComponent bondF axis) (meanZero axis))
 
-scaledBondNormIsComponentFold : ∀ field →
-  oneSixteenth * bondNormSq field
+scaledBondNormIsComponentFold : ∀ bondF →
+  oneSixteenth * bondNormSq bondF
   ≡ sumRational (allCyclicIndices four)
-      (λ axis → oneSixteenth * globalNormSq (bondComponent field axis))
-scaledBondNormIsComponentFold field =
+      (λ axis → oneSixteenth * globalNormSq (bondComponent bondF axis))
+scaledBondNormIsComponentFold bondF =
   sym
     (sumRationalScale
       oneSixteenth
       (allCyclicIndices four)
-      (λ axis → globalNormSq (bondComponent field axis)))
+      (λ axis → globalNormSq (bondComponent bondF axis)))
 
 path4BondDifferencePoincare :
-  ∀ field → BondComponentMeanZero field →
-  oneSixteenth * bondNormSq field
-  ≤ bondReferenceDifferenceEnergy field
-path4BondDifferencePoincare field meanZero =
+  ∀ bondF → BondComponentMeanZero bondF →
+  oneSixteenth * bondNormSq bondF
+  ≤ bondReferenceDifferenceEnergy bondF
+path4BondDifferencePoincare bondF meanZero =
   subst
-    (λ left → left ≤ bondReferenceDifferenceEnergy field)
-    (sym (scaledBondNormIsComponentFold field))
-    (componentwisePath4Poincare field meanZero)
+    (λ left → left ≤ bondReferenceDifferenceEnergy bondF)
+    (sym (scaledBondNormIsComponentFold bondF))
+    (componentwisePath4Poincare bondF meanZero)
 
 ------------------------------------------------------------------------
 -- Gauge fixing and block penalties enter the reference Hodge form as
@@ -88,8 +88,8 @@ path4BondDifferencePoincare field meanZero =
 
 referenceHodgeEnergy :
   RationalBondField4 → ℚ → ℚ → ℚ
-referenceHodgeEnergy field gaugeFixingEnergy blockPenaltyEnergy =
-  bondReferenceDifferenceEnergy field
+referenceHodgeEnergy bondF gaugeFixingEnergy blockPenaltyEnergy =
+  bondReferenceDifferenceEnergy bondF
   + (gaugeFixingEnergy + blockPenaltyEnergy)
 
 penaltySumNonnegative : ∀ gaugeFixingEnergy blockPenaltyEnergy →
@@ -104,34 +104,34 @@ penaltySumNonnegative gaugeFixingEnergy blockPenaltyEnergy
     (ℚP.+-mono-≤ gaugeNonnegative blockNonnegative)
 
 referenceDifferenceBelowHodge :
-  ∀ field gaugeFixingEnergy blockPenaltyEnergy →
+  ∀ bondF gaugeFixingEnergy blockPenaltyEnergy →
   0ℚ ≤ gaugeFixingEnergy →
   0ℚ ≤ blockPenaltyEnergy →
-  bondReferenceDifferenceEnergy field
-  ≤ referenceHodgeEnergy field gaugeFixingEnergy blockPenaltyEnergy
-referenceDifferenceBelowHodge field gaugeFixingEnergy blockPenaltyEnergy
+  bondReferenceDifferenceEnergy bondF
+  ≤ referenceHodgeEnergy bondF gaugeFixingEnergy blockPenaltyEnergy
+referenceDifferenceBelowHodge bondF gaugeFixingEnergy blockPenaltyEnergy
   gaugeNonnegative blockNonnegative =
   baseBelowBasePlusRemainder
-    (bondReferenceDifferenceEnergy field)
+    (bondReferenceDifferenceEnergy bondF)
     (gaugeFixingEnergy + blockPenaltyEnergy)
     (penaltySumNonnegative
       gaugeFixingEnergy blockPenaltyEnergy
       gaugeNonnegative blockNonnegative)
 
 path4BondReferenceHodgeCoercivity :
-  ∀ field gaugeFixingEnergy blockPenaltyEnergy →
-  BondComponentMeanZero field →
+  ∀ bondF gaugeFixingEnergy blockPenaltyEnergy →
+  BondComponentMeanZero bondF →
   0ℚ ≤ gaugeFixingEnergy →
   0ℚ ≤ blockPenaltyEnergy →
-  oneSixteenth * bondNormSq field
-  ≤ referenceHodgeEnergy field gaugeFixingEnergy blockPenaltyEnergy
+  oneSixteenth * bondNormSq bondF
+  ≤ referenceHodgeEnergy bondF gaugeFixingEnergy blockPenaltyEnergy
 path4BondReferenceHodgeCoercivity
-  field gaugeFixingEnergy blockPenaltyEnergy
+  bondF gaugeFixingEnergy blockPenaltyEnergy
   meanZero gaugeNonnegative blockNonnegative =
   ℚP.≤-trans
-    (path4BondDifferencePoincare field meanZero)
+    (path4BondDifferencePoincare bondF meanZero)
     (referenceDifferenceBelowHodge
-      field gaugeFixingEnergy blockPenaltyEnergy
+      bondF gaugeFixingEnergy blockPenaltyEnergy
       gaugeNonnegative blockNonnegative)
 
 path4BondComponentPoincareLevel : ProofLevel

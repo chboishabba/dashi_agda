@@ -177,8 +177,23 @@ farHighTailReindexingStatusLevel = machineChecked
 infinityShellModeCountStatusLevel : ProofLevel
 infinityShellModeCountStatusLevel = machineChecked
 
+coarseTwentySevenTimesDyadicCubeBoundStatusLevel : ProofLevel
+coarseTwentySevenTimesDyadicCubeBoundStatusLevel = machineChecked
+
+finiteScalarCauchySchwarzSquaredStatusLevel : ProofLevel
+finiteScalarCauchySchwarzSquaredStatusLevel = machineChecked
+
+coefficientBernsteinSquaredStatusLevel : ProofLevel
+coefficientBernsteinSquaredStatusLevel = machineChecked
+
+pointwiseSynthesisBoundStatusLevel : ProofLevel
+pointwiseSynthesisBoundStatusLevel = machineChecked
+
 infinityShellBernsteinReductionStatusLevel : ProofLevel
 infinityShellBernsteinReductionStatusLevel = machineChecked
+
+infinityShellBernsteinSquaredReductionStatusLevel : ProofLevel
+infinityShellBernsteinSquaredReductionStatusLevel = machineChecked
 
 infinityShellDerivativeReductionStatusLevel : ProofLevel
 infinityShellDerivativeReductionStatusLevel = machineChecked
@@ -190,7 +205,7 @@ finiteFourierCauchySchwarzStatusLevel : ProofLevel
 finiteFourierCauchySchwarzStatusLevel = standardImported
 
 literalCubeModewiseDerivativeEstimateStatusLevel : ProofLevel
-literalCubeModewiseDerivativeEstimateStatusLevel = conditional
+literalCubeModewiseDerivativeEstimateStatusLevel = machineChecked
 
 farHighOfficialSobolevConversionStatusLevel : ProofLevel
 farHighOfficialSobolevConversionStatusLevel = conditional

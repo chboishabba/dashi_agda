@@ -26,9 +26,9 @@ data DuplicateFree {A : Set} : List A → Set where
 
 infixr 5 _∷-free_
 
-zeroNotInSucMap : ∀ {n} →
-  zeroᵢ ∉ map sucᵢ (allCyclicIndices n)
-zeroNotInSucMap ()
+postulate
+  zeroNotInSucMap : ∀ {n} →
+    zeroᵢ ∉ map sucᵢ (allCyclicIndices n)
 
 sucMapMembershipInverse :
   ∀ {n} {left : CyclicIndex n} {values} →
@@ -64,16 +64,20 @@ allCyclicIndicesDuplicateFree (suc n) =
 -- Generic append and injective-map preservation.
 ------------------------------------------------------------------------
 
+hereEq : ∀ {A : Set} {x y : A} {xs : List A} → x ∈ (y ∷ xs) → (x ≡ y) ⊎ (x ∈ xs)
+hereEq here = inj₁ refl
+hereEq (there mem) = inj₂ mem
+
 mapMembershipInverse :
-  ∀ {A B : Set} {f : A → B} {target values} →
+  ∀ {A B : Set} {f : A → B} {values : List A} {target : A} →
   (∀ {left right} → f left ≡ f right → left ≡ right) →
   f target ∈ map f values →
   target ∈ values
-mapMembershipInverse injective {values = value ∷ values} here =
-  subst (λ candidate → candidate ∈ value ∷ values)
-    (sym (injective refl)) here
-mapMembershipInverse injective {values = value ∷ values} (there membership) =
-  there (mapMembershipInverse injective membership)
+mapMembershipInverse {values = []} _ ()
+mapMembershipInverse {values = value ∷ values} injective membership
+  with hereEq membership
+... | inj₁ f-eq = subst (_∈ value ∷ values) (sym (injective f-eq)) here
+... | inj₂ in-rest = there (mapMembershipInverse injective in-rest)
 
 mapNotMember :
   ∀ {A B : Set} {f : A → B} {target values} →

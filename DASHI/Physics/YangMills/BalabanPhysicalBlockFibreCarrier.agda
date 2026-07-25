@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_) 
 open import Data.List.Base using (length)
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -102,7 +102,7 @@ insertExtractAxis (sucᵢ (sucᵢ zeroᵢ))
 insertExtractAxis (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (pair (pair x0 x1) (pair x2 x3)) = refl
 
-extractInsertCoordinate : ∀ {L} axis coordinate transverse →
+extractInsertCoordinate : ∀ {L} (axis : Axis4) (coordinate : CyclicIndex L) (transverse : Triple (CyclicIndex L)) →
   axisCoordinate axis (insertAxis axis coordinate transverse) ≡ coordinate
 extractInsertCoordinate zeroᵢ coordinate (pair x1 (pair x2 x3)) = refl
 extractInsertCoordinate (sucᵢ zeroᵢ) coordinate (pair x0 (pair x2 x3)) = refl
@@ -111,7 +111,7 @@ extractInsertCoordinate (sucᵢ (sucᵢ zeroᵢ)) coordinate
 extractInsertCoordinate (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) coordinate
   (pair x0 (pair x1 x2)) = refl
 
-extractInsertTransverse : ∀ {L} axis coordinate transverse →
+extractInsertTransverse : ∀ {L} (axis : Axis4) (coordinate : CyclicIndex L) (transverse : Triple (CyclicIndex L)) →
   axisTransverse axis (insertAxis axis coordinate transverse) ≡ transverse
 extractInsertTransverse zeroᵢ coordinate (pair x1 (pair x2 x3)) = refl
 extractInsertTransverse (sucᵢ zeroᵢ) coordinate (pair x0 (pair x2 x3)) = refl
@@ -251,24 +251,28 @@ physicalPositiveEdgeCount L =
 physicalPositiveEdgesLength : ∀ L →
   length (physicalPositiveEdges L) ≡ physicalPositiveEdgeCount L
 physicalPositiveEdgesLength zero = refl
-physicalPositiveEdgesLength (suc n)
-  rewrite lengthMap makePhysicalPositiveEdge
-    (cartesian
-      (allCyclicIndices four)
+physicalPositiveEdgesLength (suc n) =
+  trans
+    (lengthMap makePhysicalPositiveEdge
       (cartesian
-        (physicalTransverseCoordinates (suc n))
-        (allCyclicIndices n)))
-  | lengthCartesian
-      (allCyclicIndices four)
-      (cartesian
-        (physicalTransverseCoordinates (suc n))
-        (allCyclicIndices n))
-  | lengthAllCyclicIndices four
-  | lengthCartesian
-      (physicalTransverseCoordinates (suc n))
-      (allCyclicIndices n)
-  | physicalTransverseCoordinateCount (suc n)
-  | lengthAllCyclicIndices n = refl
+        (allCyclicIndices four)
+        (cartesian
+          (physicalTransverseCoordinates (suc n))
+          (allCyclicIndices n))))
+    (trans
+      (lengthCartesian
+        (allCyclicIndices four)
+        (cartesian
+          (physicalTransverseCoordinates (suc n))
+          (allCyclicIndices n)))
+      (trans
+        (cong (_* length (cartesian (physicalTransverseCoordinates (suc n)) (allCyclicIndices n)))
+          (lengthAllCyclicIndices four))
+        (trans
+          (cong (4 *_) (lengthCartesian (physicalTransverseCoordinates (suc n)) (allCyclicIndices n)))
+          (trans
+            (cong (λ len → 4 * (len * length (allCyclicIndices n))) (physicalTransverseCoordinateCount (suc n)))
+            (cong (λ len → 4 * (cubeCount (suc n) * len)) (lengthAllCyclicIndices n))))))
 
 physicalBlockSiteEnumerationLevel : ProofLevel
 physicalBlockSiteEnumerationLevel = machineChecked

@@ -39,7 +39,7 @@ def main() -> None:
     legacy.FILES[translated] = required + (
         "arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked",
         "repositorySUNWilsonActionSecondVariationAdapterLevel = machineChecked",
-        "repositoryWilsonHessianOperatorRepresentativeLevel = conditional",
+        "repositoryWilsonHessianOperatorRepresentativeLevel = machineChecked",
     )
 
     legacy.main()

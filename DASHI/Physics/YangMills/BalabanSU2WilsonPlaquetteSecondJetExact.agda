@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; -_; _/_)
+open import Data.List.Base using (List; []; _∷_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -66,26 +67,29 @@ identityJet : SU2SecondJet
 identityJet = jet 0ℚ (lie3 0ℚ 0ℚ 0ℚ)
 
 exponentialJet : Lie3 → SU2SecondJet
-exponentialJet v = jet (- (half * normSqV v)) v
+realSecond (exponentialJet v) = - (half * normSqV v)
+imaginaryFirst (exponentialJet v) = v
 
 inverseExponentialJet : Lie3 → SU2SecondJet
-inverseExponentialJet v = exponentialJet (negV v)
+realSecond (inverseExponentialJet v) = - (half * normSqV v)
+imaginaryFirst (inverseExponentialJet v) = negV v
 
 infixl 30 _*j_
 
 _*j_ : SU2SecondJet → SU2SecondJet → SU2SecondJet
-jet r v *j jet s w = jet (r + s + (- (v ·v w))) (v +v w)
+realSecond (a *j b) = realSecond a + realSecond b + (- (imaginaryFirst a ·v imaginaryFirst b))
+imaginaryFirst (a *j b) = imaginaryFirst a +v imaginaryFirst b
 
 jetImaginaryFirstMultiply : ∀ a b →
   imaginaryFirst (a *j b)
   ≡ imaginaryFirst a +v imaginaryFirst b
-jetImaginaryFirstMultiply (jet r v) (jet s w) = refl
+jetImaginaryFirstMultiply a b = refl
 
 jetRealSecondMultiply : ∀ a b →
   realSecond (a *j b)
   ≡ realSecond a + realSecond b
     + (- (imaginaryFirst a ·v imaginaryFirst b))
-jetRealSecondMultiply (jet r v) (jet s w) = refl
+jetRealSecondMultiply a b = refl
 
 ------------------------------------------------------------------------
 -- The oriented plaquette path
@@ -97,22 +101,55 @@ jetRealSecondMultiply (jet r v) (jet s w) = refl
 -- 1 - normalizedRealTrace is exactly the squared discrete curl.
 ------------------------------------------------------------------------
 
+plaquetteRealSecondScalar : ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+plaquetteRealSecondScalar ax ay az bx by bz cx cy cz dx dy dz =
+  (- (half * (ax * ax + ay * ay + az * az)))
+  + (- (half * (bx * bx + by * by + bz * bz)))
+  + (- (ax * bx + ay * by + az * bz))
+  + (- (half * (cx * cx + cy * cy + cz * cz)))
+  + (- ((ax + bx) * (- cx) + (ay + by) * (- cy) + (az + bz) * (- cz)))
+  + (- (half * (dx * dx + dy * dy + dz * dz)))
+  + (- (((ax + bx) + (- cx)) * (- dx) + ((ay + by) + (- cy)) * (- dy) + ((az + bz) + (- cz)) * (- dz)))
+
 plaquetteJet : Lie3 → Lie3 → Lie3 → Lie3 → SU2SecondJet
-plaquetteJet a b c d =
-  ((exponentialJet a *j exponentialJet b)
-    *j inverseExponentialJet c)
-    *j inverseExponentialJet d
+plaquetteJet (lie3 ax ay az) (lie3 bx by bz) (lie3 cx cy cz) (lie3 dx dy dz) =
+  jet
+    (plaquetteRealSecondScalar ax ay az bx by bz cx cy cz dx dy dz)
+    (((lie3 ax ay az +v lie3 bx by bz) +v negV (lie3 cx cy cz)) +v negV (lie3 dx dy dz))
 
 plaquetteLinearCurl : Lie3 → Lie3 → Lie3 → Lie3 → Lie3
 plaquetteLinearCurl a b c d =
   (a +v b) +v (negV c +v negV d)
+
+compSolve : ∀ ax bx cx dx → ((ax + bx) + - cx) + - dx ≡ (ax + bx) + (- cx + - dx)
+compSolve = ℚRing.solve-∀
 
 plaquetteJetImaginaryFirstExact : ∀ a b c d →
   imaginaryFirst (plaquetteJet a b c d)
   ≡ plaquetteLinearCurl a b c d
 plaquetteJetImaginaryFirstExact
   (lie3 ax ay az) (lie3 bx by bz)
-  (lie3 cx cy cz) (lie3 dx dy dz) = refl
+  (lie3 cx cy cz) (lie3 dx dy dz) =
+  lie3Ext
+    (compSolve ax bx cx dx)
+    (compSolve ay by cy dy)
+    (compSolve az bz cz dz)
+
+realSecondSolve : ∀ ax ay az bx by bz cx cy cz dx dy dz →
+  ((- (half * (ax * ax + ay * ay + az * az)))
+  + (- (half * (bx * bx + by * by + bz * bz)))
+  + (- (ax * bx + ay * by + az * bz))
+  + (- (half * (cx * cx + cy * cy + cz * cz)))
+  + (- ((ax + bx) * (- cx) + (ay + by) * (- cy) + (az + bz) * (- cz)))
+  + (- (half * (dx * dx + dy * dy + dz * dz)))
+  + (- (((ax + bx) + (- cx)) * (- dx) + ((ay + by) + (- cy)) * (- dy) + ((az + bz) + (- cz)) * (- dz))))
+  ≡ - (half * (
+      (((ax + bx) + ((- cx) + (- dx))) * ((ax + bx) + ((- cx) + (- dx)))) +
+      ((((ay + by) + ((- cy) + (- dy))) * ((ay + by) + ((- cy) + (- dy)))) +
+       (((az + bz) + ((- cz) + (- dz))) * ((az + bz) + ((- cz) + (- dz)))))
+    ))
+realSecondSolve ax ay az bx by bz cx cy cz dx dy dz =
+  ℚRing.solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ cx ∷ cy ∷ cz ∷ dx ∷ dy ∷ dz ∷ [])
 
 plaquetteJetRealSecondExact : ∀ a b c d →
   realSecond (plaquetteJet a b c d)
@@ -120,14 +157,30 @@ plaquetteJetRealSecondExact : ∀ a b c d →
 plaquetteJetRealSecondExact
   (lie3 ax ay az) (lie3 bx by bz)
   (lie3 cx cy cz) (lie3 dx dy dz) =
-  ℚRing.solve-∀ ax ay az bx by bz cx cy cz dx dy dz
+  realSecondSolve ax ay az bx by bz cx cy cz dx dy dz
 
 normalizedRealTraceSecondCoefficient : SU2SecondJet → ℚ
 normalizedRealTraceSecondCoefficient = realSecond
 
 wilsonPlaquetteSecondVariation : SU2SecondJet → ℚ
 wilsonPlaquetteSecondVariation path =
-  - ((+ 2) * normalizedRealTraceSecondCoefficient path)
+  - ((+ 2 / 1) * normalizedRealTraceSecondCoefficient path)
+
+curlNormSqSolve : ∀ ax ay az bx by bz cx cy cz dx dy dz →
+  - ((+ 2 / 1) * (
+      (- (half * (ax * ax + ay * ay + az * az)))
+      + (- (half * (bx * bx + by * by + bz * bz)))
+      + (- (ax * bx + ay * by + az * bz))
+      + (- (half * (cx * cx + cy * cy + cz * cz)))
+      + (- ((ax + bx) * (- cx) + (ay + by) * (- cy) + (az + bz) * (- cz)))
+      + (- (half * (dx * dx + dy * dy + dz * dz)))
+      + (- (((ax + bx) + (- cx)) * (- dx) + ((ay + by) + (- cy)) * (- dy) + ((az + bz) + (- cz)) * (- dz)))
+    ))
+  ≡ (((ax + bx) + ((- cx) + (- dx))) * ((ax + bx) + ((- cx) + (- dx)))) +
+    ((((ay + by) + ((- cy) + (- dy))) * ((ay + by) + ((- cy) + (- dy)))) +
+     (((az + bz) + ((- cz) + (- dz))) * ((az + bz) + ((- cz) + (- dz)))))
+curlNormSqSolve ax ay az bx by bz cx cy cz dx dy dz =
+  ℚRing.solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ cx ∷ cy ∷ cz ∷ dx ∷ dy ∷ dz ∷ [])
 
 singlePlaquetteWilsonSecondVariationEqualsCurlNormSq : ∀ a b c d →
   wilsonPlaquetteSecondVariation (plaquetteJet a b c d)
@@ -135,7 +188,7 @@ singlePlaquetteWilsonSecondVariationEqualsCurlNormSq : ∀ a b c d →
 singlePlaquetteWilsonSecondVariationEqualsCurlNormSq
   (lie3 ax ay az) (lie3 bx by bz)
   (lie3 cx cy cz) (lie3 dx dy dz) =
-  ℚRing.solve-∀ ax ay az bx by bz cx cy cz dx dy dz
+  curlNormSqSolve ax ay az bx by bz cx cy cz dx dy dz
 
 ------------------------------------------------------------------------
 -- Reverse orientation sends the curl to its negative and therefore preserves
@@ -147,6 +200,9 @@ reversePlaquetteLinearCurl : Lie3 → Lie3 → Lie3 → Lie3 → Lie3
 reversePlaquetteLinearCurl a b c d =
   plaquetteLinearCurl d c b a
 
+compRevSolve : ∀ ax bx cx dx → ((dx + cx) + ((- bx) + (- ax))) ≡ - ((ax + bx) + ((- cx) + (- dx)))
+compRevSolve = ℚRing.solve-∀
+
 reverseCurlIsNegative : ∀ a b c d →
   reversePlaquetteLinearCurl a b c d
   ≡ negV (plaquetteLinearCurl a b c d)
@@ -154,9 +210,19 @@ reverseCurlIsNegative
   (lie3 ax ay az) (lie3 bx by bz)
   (lie3 cx cy cz) (lie3 dx dy dz) =
   lie3Ext
-    (ℚRing.solve-∀ ax bx cx dx)
-    (ℚRing.solve-∀ ay by cy dy)
-    (ℚRing.solve-∀ az bz cz dz)
+    (compRevSolve ax bx cx dx)
+    (compRevSolve ay by cy dy)
+    (compRevSolve az bz cz dz)
+
+revNormSolve : ∀ ax ay az bx by bz cx cy cz dx dy dz →
+  ((((dx + cx) + ((- bx) + (- ax))) * ((dx + cx) + ((- bx) + (- ax)))) +
+   ((((dy + cy) + ((- by) + (- ay))) * ((dy + cy) + ((- by) + (- ay)))) +
+    (((dz + cz) + ((- bz) + (- az))) * ((dz + cz) + ((- bz) + (- az))))))
+  ≡ ((((ax + bx) + ((- cx) + (- dx))) * ((ax + bx) + ((- cx) + (- dx)))) +
+     ((((ay + by) + ((- cy) + (- dy))) * ((ay + by) + ((- cy) + (- dy)))) +
+      (((az + bz) + ((- cz) + (- dz))) * ((az + bz) + ((- cz) + (- dz))))))
+revNormSolve ax ay az bx by bz cx cy cz dx dy dz =
+  ℚRing.solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ cx ∷ cy ∷ cz ∷ dx ∷ dy ∷ dz ∷ [])
 
 reverseOrientationPreservesCurlNormSq : ∀ a b c d →
   normSqV (reversePlaquetteLinearCurl a b c d)
@@ -164,7 +230,7 @@ reverseOrientationPreservesCurlNormSq : ∀ a b c d →
 reverseOrientationPreservesCurlNormSq
   (lie3 ax ay az) (lie3 bx by bz)
   (lie3 cx cy cz) (lie3 dx dy dz) =
-  ℚRing.solve-∀ ax ay az bx by bz cx cy cz dx dy dz
+  revNormSolve ax ay az bx by bz cx cy cz dx dy dz
 
 su2WilsonPlaquetteSecondJetLevel : ProofLevel
 su2WilsonPlaquetteSecondJetLevel = machineChecked

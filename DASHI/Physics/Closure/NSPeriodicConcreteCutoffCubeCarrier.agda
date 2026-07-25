@@ -11,7 +11,8 @@ open import Relation.Binary.PropositionalEquality using
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicOfficialFiniteSumIdentification as Official
-open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
+import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption as Absorption
+open Absorption using (AbsorptionArithmetic; Scalar)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -87,9 +88,10 @@ mapMemberReflect :
   ∀ {A B : Set} {f : A → B} →
   Injective f →
   ∀ {x xs} → f x ∈ map f xs → x ∈ xs
-mapMemberReflect injective (here equality) =
+mapMemberReflect injective {xs = []} ()
+mapMemberReflect injective {xs = y ∷ ys} (here equality) =
   here (injective equality)
-mapMemberReflect injective (there member) =
+mapMemberReflect injective {xs = y ∷ ys} (there member) =
   there (mapMemberReflect injective member)
 
 mapNoDuplicates :
@@ -161,14 +163,16 @@ cartesian (x ∷ xs) ys =
 mappedPairFirst :
   ∀ {A B : Set} {x : A} {ys : List B} {z : Pair A B} →
   z ∈ map (λ y → pair x y) ys → first z ≡ x
-mappedPairFirst (here equality) = cong first equality
-mappedPairFirst (there member) = mappedPairFirst member
+mappedPairFirst {ys = []} ()
+mappedPairFirst {ys = y ∷ ys} (here equality) = cong first equality
+mappedPairFirst {ys = y ∷ ys} (there member) = mappedPairFirst member
 
 mappedPairSecondMember :
   ∀ {A B : Set} {x : A} {ys : List B} {z : Pair A B} →
   z ∈ map (λ y → pair x y) ys → second z ∈ ys
-mappedPairSecondMember (here equality) = here (cong second equality)
-mappedPairSecondMember (there member) =
+mappedPairSecondMember {ys = []} ()
+mappedPairSecondMember {ys = y ∷ ys} (here equality) = here (cong second equality)
+mappedPairSecondMember {ys = y ∷ ys} (there member) =
   there (mappedPairSecondMember member)
 
 cartesianFirstMember :
@@ -178,16 +182,16 @@ cartesianFirstMember {xs = []} ()
 cartesianFirstMember {xs = x ∷ xs} member
   with memberAppendCases member
 ... | inj₁ block = here (mappedPairFirst block)
-... | inj₂ tail = there (cartesianFirstMember tail)
+... | inj₂ tail = there (cartesianFirstMember {xs = xs} tail)
 
 cartesianSecondMember :
   ∀ {A B : Set} {xs : List A} {ys : List B} {z : Pair A B} →
   z ∈ cartesian xs ys → second z ∈ ys
 cartesianSecondMember {xs = []} ()
-cartesianSecondMember {xs = _ ∷ _} member
+cartesianSecondMember {xs = x ∷ xs} member
   with memberAppendCases member
 ... | inj₁ block = mappedPairSecondMember block
-... | inj₂ tail = cartesianSecondMember tail
+... | inj₂ tail = cartesianSecondMember {xs = xs} tail
 
 cartesianComplete :
   ∀ {A B : Set} {xs : List A} {ys : List B} {x y} →
@@ -264,6 +268,42 @@ notSuc≤Self {suc n} (s≤s proof) = notSuc≤Self proof
   with ≤ᴺ-equalOrStrict proof
 ... | inj₁ equality = inj₁ (cong suc equality)
 ... | inj₂ strict = inj₂ (s≤s strict)
+
+≤ᴺ-trans : ∀ {a b c} → a ≤ᴺ b → b ≤ᴺ c → a ≤ᴺ c
+≤ᴺ-trans z≤n q = z≤n
+≤ᴺ-trans (s≤s p) (s≤s q) = s≤s (≤ᴺ-trans p q)
+
+≤ᴺ-+-right : ∀ b {c d} → c ≤ᴺ d → c ≤ᴺ b + d
+≤ᴺ-+-right zero q = q
+≤ᴺ-+-right (suc b) q = ≤ᴺ-step (≤ᴺ-+-right b q)
+
+≤ᴺ-+-mono : ∀ {a b c d} → a ≤ᴺ b → c ≤ᴺ d → a + c ≤ᴺ b + d
+≤ᴺ-+-mono {b = b} z≤n q = ≤ᴺ-+-right b q
+≤ᴺ-+-mono (s≤s p) q = s≤s (≤ᴺ-+-mono p q)
+
+≤ᴺ-*-right : ∀ n {a b} → a ≤ᴺ b → n * a ≤ᴺ n * b
+≤ᴺ-*-right zero p = z≤n
+≤ᴺ-*-right (suc n) p = ≤ᴺ-+-mono p (≤ᴺ-*-right n p)
+
+≤ᴺ-*-left : ∀ n {a b} → a ≤ᴺ b → a * n ≤ᴺ b * n
+≤ᴺ-*-left n z≤n = z≤n
+≤ᴺ-*-left n (s≤s p) = ≤ᴺ-+-mono (≤ᴺ-refl n) (≤ᴺ-*-left n p)
+
+natSquare : Nat → Nat
+natSquare n = n * n
+
+natSquare-mono : ∀ {a b} → a ≤ᴺ b → natSquare a ≤ᴺ natSquare b
+natSquare-mono {a} {b} p = ≤ᴺ-trans (≤ᴺ-*-left a p) (≤ᴺ-*-right b p)
+
+≤ᴺ-*-mono : ∀ {a b c d} → a ≤ᴺ b → c ≤ᴺ d → a * c ≤ᴺ b * d
+≤ᴺ-*-mono {a} {b} {c} {d} p q = ≤ᴺ-trans (≤ᴺ-*-left c p) (≤ᴺ-*-right b q)
+
+addZeroRight : ∀ n → n + 0 ≡ n
+addZeroRight zero = refl
+addZeroRight (suc n) = cong suc (addZeroRight n)
+
+≤ᴺ-substRight : ∀ {a b c} → b ≡ c → a ≤ᴺ b → a ≤ᴺ c
+≤ᴺ-substRight refl p = p
 
 integerMagnitude : ℤ → Nat
 integerMagnitude (+ n) = n
@@ -343,6 +383,27 @@ intervalCardinality : Nat → Nat
 intervalCardinality zero = suc zero
 intervalCardinality (suc N) = suc (suc (intervalCardinality N))
 
+plusSuc : ∀ a b → a + suc b ≡ suc (a + b)
+plusSuc zero b = refl
+plusSuc (suc a) b = cong suc (plusSuc a b)
+
+intervalCardinalityEq : ∀ N → intervalCardinality N ≡ suc (N + N)
+intervalCardinalityEq zero = refl
+intervalCardinalityEq (suc N) =
+  trans
+    (cong (λ x → suc (suc x)) (intervalCardinalityEq N))
+    (cong (λ x → suc (suc x)) (sym (plusSuc N N)))
+
+intervalCardinalityBound : ∀ N → 1 ≤ᴺ N → intervalCardinality N ≤ᴺ 3 * N
+intervalCardinalityBound N p =
+  subst
+    (λ x → x ≤ᴺ 3 * N)
+    (sym (intervalCardinalityEq N))
+    (≤ᴺ-+-mono p
+      (≤ᴺ-substRight
+        (sym (cong (λ x → N + x) (addZeroRight N)))
+        (≤ᴺ-refl (N + N))))
+
 signedIntervalLength : ∀ N →
   length (signedInterval N) ≡ intervalCardinality N
 signedIntervalLength zero = refl
@@ -398,9 +459,9 @@ cutoffModeEnumerationSound :
   ∀ N k → k ∈ cutoffModes N → InCutoffCube N k
 cutoffModeEnumerationSound N (Z3.mode x y z) member =
   cutoff-membership
-    (cartesianFirstMember tripleMember)
-    (cartesianFirstMember yzMember)
-    (cartesianSecondMember yzMember)
+    (cartesianFirstMember {xs = signedInterval N} tripleMember)
+    (cartesianFirstMember {xs = signedInterval N} yzMember)
+    (cartesianSecondMember {xs = signedInterval N} yzMember)
   where
   tripleMember :
     pair x (pair y z) ∈
@@ -409,7 +470,7 @@ cutoffModeEnumerationSound N (Z3.mode x y z) member =
   tripleMember = mapMemberReflect tripleToModeInjective member
 
   yzMember : pair y z ∈ cartesian (signedInterval N) (signedInterval N)
-  yzMember = cartesianSecondMember tripleMember
+  yzMember = cartesianSecondMember {xs = signedInterval N} tripleMember
 
 cutoffModeEnumerationNoDuplicates : ∀ N →
   NoDuplicates (cutoffModes N)

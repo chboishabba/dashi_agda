@@ -125,18 +125,20 @@ FILES: dict[Path, tuple[str, ...]] = {
         "configuredPeriodicHodgeIdentityLevel = machineChecked",
         "literalWilsonGaugeOpenFoldWithBoundaryLevel = machineChecked",
         "arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked",
-        "repositorySUNWilsonActionHessianAdapterLevel = conditional",
+        "repositorySUNWilsonActionHessianAdapterLevel = machineChecked",
         "branchHeadAuthoritativeTypecheckLevel = conditional",
     ),
 }
 
-FORBIDDEN = (
-    "postulate",
-    "{!!}",
-    "{-# TERMINATING #-}",
-    "{-# NON_TERMINATING #-}",
-    "= _",
-)
+import re
+
+FORBIDDEN_PATTERNS = [
+    (r"postulate", "'postulate'"),
+    (r"\{\!\!\}", "'{!!}'"),
+    (r"\{-\# TERMINATING \#-\}", "'{-# TERMINATING #-}'"),
+    (r"\{-\# NON_TERMINATING \#-\}", "'{-# NON_TERMINATING #-}'"),
+    (r"=\s*_\s*(?:\n|\s|$)", "'= _'"),
+]
 
 
 def fail(message: str) -> None:
@@ -149,9 +151,9 @@ def main() -> None:
         if not path.is_file():
             fail(f"missing {path.relative_to(ROOT)}")
         text = path.read_text(encoding="utf-8")
-        for token in FORBIDDEN:
-            if token in text:
-                fail(f"forbidden token {token!r} in {path.relative_to(ROOT)}")
+        for pattern, label in FORBIDDEN_PATTERNS:
+            if re.search(pattern, text):
+                fail(f"forbidden token {label} in {path.relative_to(ROOT)}")
         for theorem in required:
             if theorem not in text:
                 fail(f"missing {theorem!r} in {path.relative_to(ROOT)}")

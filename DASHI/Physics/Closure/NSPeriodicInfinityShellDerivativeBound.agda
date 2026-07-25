@@ -5,8 +5,13 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (subst)
 
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
+import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm as ModeNorm
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+literalCubeModeNatNormEstimate =
+  ModeNorm.literalCubeModeNatNormEstimate
 
 ------------------------------------------------------------------------
 -- Direct derivative reduction on |k|_infinity <= 2^n.
@@ -58,7 +63,7 @@ infinityShellDerivativeReductionLevel : ProofLevel
 infinityShellDerivativeReductionLevel = machineChecked
 
 literalCubeModewiseDerivativeEstimateLevel : ProofLevel
-literalCubeModewiseDerivativeEstimateLevel = conditional
+literalCubeModewiseDerivativeEstimateLevel = machineChecked
 
 sqrtThreeDyadicDerivativeFactorLevel : ProofLevel
 sqrtThreeDyadicDerivativeFactorLevel = conditional

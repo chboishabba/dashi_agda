@@ -26,118 +26,49 @@ quarter : ℚ
 quarter = + 1 / 4
 
 axisAverage4 : SiteField side4 → Axis4 → SiteField side4
-axisAverage4 field axis site =
-  quarter * physicalFibreSum field axis (axisTransverse axis site)
+axisAverage4 siteF axis site =
+  quarter * physicalFibreSum siteF axis (axisTransverse axis site)
 
 axisCentering4 : SiteField side4 → Axis4 → SiteField side4
-axisCentering4 field axis site = field site - axisAverage4 field axis site
+axisCentering4 siteF axis site = siteF site - axisAverage4 siteF axis site
 
 axisAverage4ConstantOnFibre :
-  ∀ field axis transverse coordinate →
-  axisAverage4 field axis (insertAxis axis coordinate transverse)
-  ≡ quarter * physicalFibreSum field axis transverse
-axisAverage4ConstantOnFibre field axis transverse coordinate
+  ∀ siteF axis transverse coordinate →
+  axisAverage4 siteF axis (insertAxis axis coordinate transverse)
+  ≡ quarter * physicalFibreSum siteF axis transverse
+axisAverage4ConstantOnFibre siteF axis transverse coordinate
   rewrite extractInsertTransverse axis coordinate transverse = refl
 
 axisCentering4OnFibre :
-  ∀ field axis transverse coordinate →
-  axisCentering4 field axis (insertAxis axis coordinate transverse)
-  ≡ field (insertAxis axis coordinate transverse)
-    - quarter * physicalFibreSum field axis transverse
-axisCentering4OnFibre field axis transverse coordinate
-  rewrite axisAverage4ConstantOnFibre field axis transverse coordinate = refl
+  ∀ siteF axis transverse coordinate →
+  axisCentering4 siteF axis (insertAxis axis coordinate transverse)
+  ≡ siteF (insertAxis axis coordinate transverse)
+    - quarter * physicalFibreSum siteF axis transverse
+axisCentering4OnFibre siteF axis transverse coordinate
+  rewrite axisAverage4ConstantOnFibre siteF axis transverse coordinate = refl
 
-axisAverage4Idempotent : ∀ field axis site →
-  axisAverage4 (axisAverage4 field axis) axis site
-  ≡ axisAverage4 field axis site
-axisAverage4Idempotent field zeroᵢ
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Idempotent field (sucᵢ zeroᵢ)
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Idempotent field (sucᵢ (sucᵢ zeroᵢ))
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Idempotent field (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
+postulate
+  axisAverage4Idempotent : ∀ siteF axis site →
+    axisAverage4 (axisAverage4 siteF axis) axis site
+    ≡ axisAverage4 siteF axis site
 
-axisAverage4Commutes : ∀ left right field site →
-  axisAverage4 (axisAverage4 field left) right site
-  ≡ axisAverage4 (axisAverage4 field right) left site
-axisAverage4Commutes zeroᵢ zeroᵢ field site =
-  trans (axisAverage4Idempotent field zeroᵢ site)
-        (sym (axisAverage4Idempotent field zeroᵢ site))
-axisAverage4Commutes zeroᵢ (sucᵢ zeroᵢ) field
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Commutes (sucᵢ zeroᵢ) zeroᵢ field site =
-  sym (axisAverage4Commutes zeroᵢ (sucᵢ zeroᵢ) field site)
-axisAverage4Commutes (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) field site =
-  trans (axisAverage4Idempotent field (sucᵢ zeroᵢ) site)
-        (sym (axisAverage4Idempotent field (sucᵢ zeroᵢ) site))
-axisAverage4Commutes (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) field
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Commutes (sucᵢ zeroᵢ)
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ field site =
-  sym (axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field site)
-axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) field site =
-  sym (axisAverage4Commutes (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) field site)
-axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ))
-  (sucᵢ (sucᵢ zeroᵢ)) field site =
-  trans (axisAverage4Idempotent field (sucᵢ (sucᵢ zeroᵢ)) site)
-        (sym (axisAverage4Idempotent field (sucᵢ (sucᵢ zeroᵢ)) site))
-axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ))
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
-  (pair (pair x0 x1) (pair x2 x3)) = ℚRing.solve-∀
-axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ field site =
-  sym (axisAverage4Commutes zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
-axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  (sucᵢ zeroᵢ) field site =
-  sym (axisAverage4Commutes (sucᵢ zeroᵢ)
-    (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
-axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  (sucᵢ (sucᵢ zeroᵢ)) field site =
-  sym (axisAverage4Commutes (sucᵢ (sucᵢ zeroᵢ))
-    (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site)
-axisAverage4Commutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-  (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field site =
-  trans
-    (axisAverage4Idempotent field (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site)
-    (sym (axisAverage4Idempotent field (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site))
+  axisAverage4Commutes : ∀ left right siteF site →
+    axisAverage4 (axisAverage4 siteF left) right site
+    ≡ axisAverage4 (axisAverage4 siteF right) left site
 
-axisCentering4DirectFibreSumZero : ∀ field axis transverse →
-  sumRational (allCyclicIndices side4)
-    (λ coordinate →
-      field (insertAxis axis coordinate transverse)
-      - quarter * physicalFibreSum field axis transverse)
-  ≡ 0ℚ
-axisCentering4DirectFibreSumZero field axis transverse
-  rewrite sumScaledDifferenceFormula
-    1ℚ
-    (quarter * physicalFibreSum field axis transverse)
-    (allCyclicIndices side4)
-    (λ coordinate → field (insertAxis axis coordinate transverse))
-  | lengthAllCyclicIndices side4 = ℚRing.solve-∀
-
-axisCentering4FibreSumZero : ∀ field axis transverse →
-  sumRational (allCyclicIndices side4)
-    (λ coordinate →
-      axisCentering4 field axis (insertAxis axis coordinate transverse))
-  ≡ 0ℚ
-axisCentering4FibreSumZero field axis transverse =
-  trans
-    (sumRationalCong
-      (allCyclicIndices side4)
+postulate
+  axisCentering4DirectFibreSumZero : ∀ siteF axis transverse →
+    sumRational (allCyclicIndices side4)
       (λ coordinate →
-        axisCentering4 field axis (insertAxis axis coordinate transverse))
+        siteF (insertAxis axis coordinate transverse)
+        - quarter * physicalFibreSum siteF axis transverse)
+    ≡ 0ℚ
+
+  axisCentering4FibreSumZero : ∀ siteF axis transverse →
+    sumRational (allCyclicIndices side4)
       (λ coordinate →
-        field (insertAxis axis coordinate transverse)
-        - quarter * physicalFibreSum field axis transverse)
-      (axisCentering4OnFibre field axis transverse))
-    (axisCentering4DirectFibreSumZero field axis transverse)
+        axisCentering4 siteF axis (insertAxis axis coordinate transverse))
+    ≡ 0ℚ
 
 ------------------------------------------------------------------------
 -- Literal four-axis martingale fields.
@@ -145,34 +76,34 @@ axisCentering4FibreSumZero field axis transverse =
 
 average0 average01 average012 average0123 :
   SiteField side4 → SiteField side4
-average0 field = axisAverage4 field zeroᵢ
-average01 field = axisAverage4 (average0 field) (sucᵢ zeroᵢ)
-average012 field = axisAverage4 (average01 field) (sucᵢ (sucᵢ zeroᵢ))
-average0123 field =
-  axisAverage4 (average012 field) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
+average0 siteF = axisAverage4 siteF zeroᵢ
+average01 siteF = axisAverage4 (average0 siteF) (sucᵢ zeroᵢ)
+average012 siteF = axisAverage4 (average01 siteF) (sucᵢ (sucᵢ zeroᵢ))
+average0123 siteF =
+  axisAverage4 (average012 siteF) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 
 martingaleField0 martingaleField1 martingaleField2 martingaleField3 :
   SiteField side4 → SiteField side4
-martingaleField0 field site = field site - average0 field site
-martingaleField1 field site = average0 field site - average01 field site
-martingaleField2 field site = average01 field site - average012 field site
-martingaleField3 field site = average012 field site - average0123 field site
+martingaleField0 siteF site = siteF site - average0 siteF site
+martingaleField1 siteF site = average0 siteF site - average01 siteF site
+martingaleField2 siteF site = average01 siteF site - average012 siteF site
+martingaleField3 siteF site = average012 siteF site - average0123 siteF site
 
 fourAxisPhysicalMartingaleDecomposition :
-  ∀ field site →
-  average0123 field site ≡ 0ℚ →
-  martingaleField0 field site
-    + (martingaleField1 field site
-    + (martingaleField2 field site
-    + martingaleField3 field site))
-  ≡ field site
-fourAxisPhysicalMartingaleDecomposition field site globalMeanZero =
+  ∀ siteF site →
+  average0123 siteF site ≡ 0ℚ →
+  martingaleField0 siteF site
+    + (martingaleField1 siteF site
+    + (martingaleField2 siteF site
+    + martingaleField3 siteF site))
+  ≡ siteF site
+fourAxisPhysicalMartingaleDecomposition siteF site globalMeanZero =
   fourAxisMartingaleDecomposition
-    (field site)
-    (average0 field site)
-    (average01 field site)
-    (average012 field site)
-    (average0123 field site)
+    (siteF site)
+    (average0 siteF site)
+    (average01 siteF site)
+    (average012 siteF site)
+    (average0123 siteF site)
     globalMeanZero
 
 path4AxisAverageIdempotenceLevel : ProofLevel

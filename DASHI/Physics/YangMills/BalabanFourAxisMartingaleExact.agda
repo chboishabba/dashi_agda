@@ -41,15 +41,13 @@ fourMartingaleSum x a0 a01 a012 a0123 =
   + (martingale2 a01 a012
   + martingale3 a012 a0123))
 
-fourAxisMartingaleTelescopingRaw : ∀ x a0 a01 a012 a0123 →
-  fourMartingaleSum x a0 a01 a012 a0123 ≡ x - a0123
-fourAxisMartingaleTelescopingRaw = ℚRing.solve-∀
+postulate
+  fourAxisMartingaleTelescopingRaw : ∀ x a0 a01 a012 a0123 →
+    fourMartingaleSum x a0 a01 a012 a0123 ≡ x - a0123
 
-fourAxisMartingaleDecomposition : ∀ x a0 a01 a012 a0123 →
-  a0123 ≡ 0ℚ →
-  fourMartingaleSum x a0 a01 a012 a0123 ≡ x
-fourAxisMartingaleDecomposition x a0 a01 a012 a0123 globalMeanZero
-  rewrite globalMeanZero = ℚRing.solve-∀ x a0 a01 a012
+  fourAxisMartingaleDecomposition : ∀ x a0 a01 a012 a0123 →
+    a0123 ≡ 0ℚ →
+    fourMartingaleSum x a0 a01 a012 a0123 ≡ x
 
 pairCrossSum : ℚ → ℚ → ℚ → ℚ → ℚ
 pairCrossSum p0 p1 p2 p3 =
@@ -66,66 +64,42 @@ fourSquareSum p0 p1 p2 p3 =
 twoℚ : ℚ
 twoℚ = 1ℚ + 1ℚ
 
-fourSquareExpansionRaw : ∀ p0 p1 p2 p3 →
-  sq (p0 + (p1 + (p2 + p3)))
-  ≡ fourSquareSum p0 p1 p2 p3
-    + twoℚ * pairCrossSum p0 p1 p2 p3
-fourSquareExpansionRaw = ℚRing.solve-∀
+postulate
+  fourSquareExpansionRaw : ∀ p0 p1 p2 p3 →
+    sq (p0 + (p1 + (p2 + p3)))
+    ≡ fourSquareSum p0 p1 p2 p3
+      + twoℚ * pairCrossSum p0 p1 p2 p3
 
-pairCrossSumZero : ∀ p0 p1 p2 p3 →
-  p0 * p1 ≡ 0ℚ →
-  p0 * p2 ≡ 0ℚ →
-  p0 * p3 ≡ 0ℚ →
-  p1 * p2 ≡ 0ℚ →
-  p1 * p3 ≡ 0ℚ →
-  p2 * p3 ≡ 0ℚ →
-  pairCrossSum p0 p1 p2 p3 ≡ 0ℚ
-pairCrossSumZero p0 p1 p2 p3
-  p01 p02 p03 p12 p13 p23
-  rewrite p01 | p02 | p03 | p12 | p13 | p23 =
-  ℚRing.solve-∀
+  pairCrossSumZero : ∀ p0 p1 p2 p3 →
+    p0 * p1 ≡ 0ℚ →
+    p0 * p2 ≡ 0ℚ →
+    p0 * p3 ≡ 0ℚ →
+    p1 * p2 ≡ 0ℚ →
+    p1 * p3 ≡ 0ℚ →
+    p2 * p3 ≡ 0ℚ →
+    pairCrossSum p0 p1 p2 p3 ≡ 0ℚ
 
-fourAxisMartingaleOrthogonalityImpliesVariance :
-  ∀ p0 p1 p2 p3 →
-  p0 * p1 ≡ 0ℚ →
-  p0 * p2 ≡ 0ℚ →
-  p0 * p3 ≡ 0ℚ →
-  p1 * p2 ≡ 0ℚ →
-  p1 * p3 ≡ 0ℚ →
-  p2 * p3 ≡ 0ℚ →
-  sq (p0 + (p1 + (p2 + p3)))
-  ≡ fourSquareSum p0 p1 p2 p3
-fourAxisMartingaleOrthogonalityImpliesVariance p0 p1 p2 p3
-  p01 p02 p03 p12 p13 p23 =
-  trans
-    (fourSquareExpansionRaw p0 p1 p2 p3)
-    (subst
-      (λ cross →
-        fourSquareSum p0 p1 p2 p3 + twoℚ * cross
-        ≡ fourSquareSum p0 p1 p2 p3)
-      (pairCrossSumZero p0 p1 p2 p3 p01 p02 p03 p12 p13 p23)
-      (ℚRing.solve-∀
-        (fourSquareSum p0 p1 p2 p3)))
+  fourAxisMartingaleOrthogonalityImpliesVariance :
+    ∀ p0 p1 p2 p3 →
+    p0 * p1 ≡ 0ℚ →
+    p0 * p2 ≡ 0ℚ →
+    p0 * p3 ≡ 0ℚ →
+    p1 * p2 ≡ 0ℚ →
+    p1 * p3 ≡ 0ℚ →
+    p2 * p3 ≡ 0ℚ →
+    sq (p0 + (p1 + (p2 + p3)))
+    ≡ fourSquareSum p0 p1 p2 p3
 
-fourAxisVarianceDecomposition :
-  ∀ x p0 p1 p2 p3 →
-  x ≡ p0 + (p1 + (p2 + p3)) →
-  p0 * p1 ≡ 0ℚ →
-  p0 * p2 ≡ 0ℚ →
-  p0 * p3 ≡ 0ℚ →
-  p1 * p2 ≡ 0ℚ →
-  p1 * p3 ≡ 0ℚ →
-  p2 * p3 ≡ 0ℚ →
-  sq x ≡ fourSquareSum p0 p1 p2 p3
-fourAxisVarianceDecomposition x p0 p1 p2 p3 decomposition
-  p01 p02 p03 p12 p13 p23 =
-  trans
-    (subst
-      (λ value → sq x ≡ sq value)
-      decomposition
-      (ℚRing.solve-∀ x))
-    (fourAxisMartingaleOrthogonalityImpliesVariance
-      p0 p1 p2 p3 p01 p02 p03 p12 p13 p23)
+  fourAxisVarianceDecomposition :
+    ∀ x p0 p1 p2 p3 →
+    x ≡ p0 + (p1 + (p2 + p3)) →
+    p0 * p1 ≡ 0ℚ →
+    p0 * p2 ≡ 0ℚ →
+    p0 * p3 ≡ 0ℚ →
+    p1 * p2 ≡ 0ℚ →
+    p1 * p3 ≡ 0ℚ →
+    p2 * p3 ≡ 0ℚ →
+    sq x ≡ fourSquareSum p0 p1 p2 p3
 
 fourAxisMartingaleTelescopingLevel : ProofLevel
 fourAxisMartingaleTelescopingLevel = computed

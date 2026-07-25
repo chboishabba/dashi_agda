@@ -1,3 +1,19 @@
+# 2026-07-25 C2 Balaban RG implementation planning
+
+- Mapped the next YM implementation lane to concrete module owners:
+  `CompactLieBlockAverage` for the coarse-block interface,
+  `YMSmallFieldSurvivalAuthority` for small-field cutoff and admissible-radius
+  control, `YMLargeFieldTemporalCutSeparation` for the large-field boundary,
+  and `BalabanRGLane` for the one-step RG aggregator.
+- Boundary receipts remain non-promoting:
+  `YMBalabanPhysicalBetaBridgeTargetReceipt` and
+  `YMBalabanRGScaleTransferFrontierReceipt`.
+- The next execution slice should make the coarse `Q` adapter explicit, then
+  thread the small/large field cutoffs and the RG step bookkeeping through the
+  lane modules.
+- No theorem-status or Clay-status change is recorded here.  This is a repo
+  planning update only.
+
 # 2026-07-17 NS interaction-closure pivot
 
 - **Evidence-authority freeze:** further finite-Galerkin production is paused

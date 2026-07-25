@@ -19,6 +19,34 @@ Execution checklist source:
 
 All canonical chain steps have now executed and Lemma A/B elimination is lodged inside `CausalForcesLorentz31`; the current focus is the post-checklist closure runway, which can now be worked in parallel across bounded file slices.
 
+## C2 Balaban RG Frontier (active 2026-07-25)
+Roadmap source:
+`Docs/roadmaps/ClayYMProofRoadmap.md`
+
+Concrete module anchors:
+
+- `DASHI/Physics/YangMills/CompactLieBlockAverage.agda`
+- `DASHI/Physics/Closure/YMSmallFieldSurvivalAuthority.agda`
+- `DASHI/Physics/Closure/YMLargeFieldTemporalCutSeparation.agda`
+- `DASHI/Physics/YangMills/BalabanRGLane.agda`
+- `DASHI/Physics/Closure/YMBalabanPhysicalBetaBridgeTargetReceipt.agda`
+- `DASHI/Physics/Closure/YMBalabanRGScaleTransferFrontierReceipt.agda`
+
+Implementation order:
+
+1. Make the coarse-block interface explicit around `CompactLieBlockAverage`.
+   The next concrete artifact is an owned `Q`-adapter surface, not a duplicated
+   block-average proof fragment.
+2. Thread small-field cutoffs through `YMSmallFieldSurvivalAuthority`.
+   Keep the admissible-radius and blocked-oscillation story there.
+3. Keep large-field tail separation and transfer-cut control in
+   `YMLargeFieldTemporalCutSeparation` and the large-field suppression lane.
+4. Use `BalabanRGLane` as the one-step RG aggregator that threads block map,
+   small/large split, polymer expansion, and remainder decay.
+5. Keep `YMBalabanPhysicalBetaBridgeTargetReceipt` and
+   `YMBalabanRGScaleTransferFrontierReceipt` as non-promoting target/obstacle
+   records.
+
 ## Milestones
 1. Canonical spine declaration and import policy. (done)
 2. Quadratic route consolidation to the split/parallelogram route. (done)
@@ -31,6 +59,7 @@ All canonical chain steps have now executed and Lemma A/B elimination is lodged 
 9. Parallel dynamics-status + witness threading. (active)
 10. Parallel concrete constraint/algebraic-closure wiring. (active)
 11. Parallel known-limits consumer uplift. (active)
+12. C2 Balaban RG interface wiring. (active)
 
 ## Milestone Tasks
 1. Keep canonical route map aligned to current implementation:
@@ -63,11 +92,24 @@ All canonical chain steps have now executed and Lemma A/B elimination is lodged 
    `CliffordEvenLiftBridge`, `CliffordToEvenWaveLiftBridgeTheorem`,
    `CanonicalContractionToCliffordBridgeTheorem`,
    `KnownLimitsQFTBridgeTheorem`.
+9. For the C2 lane, keep the work split at the module boundary:
+   `CompactLieBlockAverage` for the coarse-map interface,
+   `YMSmallFieldSurvivalAuthority` for admissible small-field control,
+   `YMLargeFieldTemporalCutSeparation` for the large-field boundary, and
+   `BalabanRGLane` for the one-step RG aggregator.
+10. Do not collapse the bridge-target receipts into proof owners.  Treat
+    `YMBalabanPhysicalBetaBridgeTargetReceipt` and
+    `YMBalabanRGScaleTransferFrontierReceipt` as boundary records only.
+11. Next bounded validation slice:
+    `CompactLieBlockAverage` → `YMSmallFieldSurvivalAuthority` →
+    `BalabanRGLane`, then the target/obstacle receipts.
 
 ## Exit Checkpoint
 - One canonical spine documented and used for closure claims.
 - No parallel emergence route required by the closure claim path.
 - Open seams listed once, on canonical modules only.
+- C2 lane anchored to concrete YM modules with a single coarse-map / cutoff /
+  RG-iteration story.
 
 ## Assumptions
 - Existing projection-defect and energy-split theorem surfaces are stable.

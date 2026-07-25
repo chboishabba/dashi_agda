@@ -4,7 +4,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using
   (ℚ; 0ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using

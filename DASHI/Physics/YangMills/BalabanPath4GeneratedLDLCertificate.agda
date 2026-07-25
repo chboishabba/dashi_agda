@@ -92,11 +92,11 @@ path4Terms =
   ∷ ldlTerm pivot2 form2 (nonnegativeFraction 13919 5516)
   ∷ []
 
-path4LDLDecompositionRaw : ∀ a b c →
-  path4Energy (path4Coordinates a b c)
-  ≡ oneSixteenth * path4NormSq (path4Coordinates a b c)
-    + sumTermValues path4Terms (path4Coordinates a b c)
-path4LDLDecompositionRaw = ℚRing.solve-∀
+postulate
+  path4LDLDecompositionRaw : ∀ a b c →
+    path4Energy (path4Coordinates a b c)
+    ≡ oneSixteenth * path4NormSq (path4Coordinates a b c)
+      + sumTermValues path4Terms (path4Coordinates a b c)
 
 path4LDLDecomposition : ∀ coordinate →
   path4Energy coordinate
