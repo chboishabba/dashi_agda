@@ -1,9 +1,9 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; _+_; _*_)
+open import Data.Rational using (ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -14,12 +14,29 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
   (sumRationalAdd)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
+open import DASHI.Physics.YangMills.BalabanPath4PlaquetteOrientationExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact using
   (Lie3; lie3; x; y; z; _·v_; normSqV)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
+  using (siteSum4; forwardDifference4)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
+  using
+    ( ScalarBondField4
+    ; literalPeriodicDivergenceScalar
+    ; literalNegativeForwardGradientScalar
+    ; scalarBondInner
+    ; scalarSiteInner
+    ; periodicDivergenceGradientAdjoint
+    )
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact
+  using
+    ( curlPlaneEnergy
+    ; componentCurlEnergy
+    ; componentDivergenceEnergy
+    ; componentPeriodicDifferenceEnergy
+    ; componentDiscreteCurlDivergenceHodgeIdentity
+    )
 import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact as Plaquette
 
 ------------------------------------------------------------------------
@@ -66,12 +83,10 @@ physicalTangentInner left right =
       (componentScalarBondField right component3))
 
 gaugeLie3Inner : Lie3SiteField → Lie3SiteField → ℚ
-gaugeLie3Inner left right =
-  siteSum4 (λ site → left site ·v right site)
+gaugeLie3Inner left right = siteSum4 (λ site → left site ·v right site)
 
 sumRationalThreeTerms : ∀ {A : Set} values first second third →
-  sumRational values (λ value →
-    first value + (second value + third value))
+  sumRational values (λ value → first value + (second value + third value))
   ≡ sumRational values first
     + (sumRational values second + sumRational values third)
 sumRationalThreeTerms values first second third =
@@ -79,10 +94,10 @@ sumRationalThreeTerms values first second third =
     (sumRationalAdd values first (λ value → second value + third value))
     (cong₂ _+_ refl (sumRationalAdd values second third))
 
-siteSum4ThreeTerms : ∀ first second third →
+siteSum4ThreeComponentTerms : ∀ first second third →
   siteSum4 (λ site → first site + (second site + third site))
   ≡ siteSum4 first + (siteSum4 second + siteSum4 third)
-siteSum4ThreeTerms first second third =
+siteSum4ThreeComponentTerms first second third =
   sumRationalThreeTerms (physicalBlockSites side4) first second third
 
 literalDivergencePairingComponentFold : ∀ tangent gauge →
@@ -101,7 +116,17 @@ literalDivergencePairingComponentFold : ∀ tangent gauge →
   ≡ gaugeLie3Inner (literalPeriodicDivergence tangent) gauge
 literalDivergencePairingComponentFold tangent gauge =
   trans
-    (symSiteSplit)
+    (sym
+      (siteSum4ThreeComponentTerms
+        (λ site →
+          literalPeriodicDivergenceScalar
+            (componentScalarBondField tangent component1) site * x (gauge site))
+        (λ site →
+          literalPeriodicDivergenceScalar
+            (componentScalarBondField tangent component2) site * y (gauge site))
+        (λ site →
+          literalPeriodicDivergenceScalar
+            (componentScalarBondField tangent component3) site * z (gauge site))))
     (sumRationalCong (physicalBlockSites side4) _ _
       (λ site → ℚRing.solve-∀
         (literalPeriodicDivergenceScalar
@@ -111,19 +136,6 @@ literalDivergencePairingComponentFold tangent gauge =
         (literalPeriodicDivergenceScalar
           (componentScalarBondField tangent component3) site)
         (x (gauge site)) (y (gauge site)) (z (gauge site))))
-  where
-  symSiteSplit =
-    Relation.Binary.PropositionalEquality.sym
-      (siteSum4ThreeTerms
-        (λ site →
-          literalPeriodicDivergenceScalar
-            (componentScalarBondField tangent component1) site * x (gauge site))
-        (λ site →
-          literalPeriodicDivergenceScalar
-            (componentScalarBondField tangent component2) site * y (gauge site))
-        (λ site →
-          literalPeriodicDivergenceScalar
-            (componentScalarBondField tangent component3) site * z (gauge site)))
 
 periodicDivergenceGradientAdjointSU2 : ∀ tangent gauge →
   physicalTangentInner tangent (literalNegativeForwardGradient gauge)
@@ -146,9 +158,9 @@ periodicDivergenceGradientAdjointSU2 tangent gauge =
 literalCodifferential : PhysicalSU2Tangent4 → Lie3SiteField
 literalCodifferential = literalPeriodicDivergence
 
-literalCodifferentialEqualsPeriodicDivergence : ∀ tangent site →
+literalCodifferentialEqualsPeriodicDivergenceSU2 : ∀ tangent site →
   literalCodifferential tangent site ≡ literalPeriodicDivergence tangent site
-literalCodifferentialEqualsPeriodicDivergence tangent site = refl
+literalCodifferentialEqualsPeriodicDivergenceSU2 tangent site = refl
 
 literalGaugeFixingEnergy : PhysicalSU2Tangent4 → ℚ
 literalGaugeFixingEnergy tangent =
@@ -156,12 +168,12 @@ literalGaugeFixingEnergy tangent =
     (literalPeriodicDivergence tangent)
     (literalPeriodicDivergence tangent)
 
-literalGaugeFixingFoldEqualsDivergenceFold : ∀ tangent →
+literalGaugeFixingFoldEqualsDivergenceFoldSU2 : ∀ tangent →
   literalGaugeFixingEnergy tangent
   ≡ gaugeLie3Inner
       (literalCodifferential tangent)
       (literalCodifferential tangent)
-literalGaugeFixingFoldEqualsDivergenceFold tangent = refl
+literalGaugeFixingFoldEqualsDivergenceFoldSU2 tangent = refl
 
 literalGaugeFixingEqualsDivergenceEnergy : ∀ tangent →
   literalGaugeFixingEnergy tangent
@@ -174,20 +186,23 @@ literalGaugeFixingEqualsDivergenceEnergy tangent = refl
 -- Lift the scalar Hodge theorem through the three Lie-algebra components.
 ------------------------------------------------------------------------
 
+componentCurlTerm :
+  PhysicalSU2Tangent4 → SU2Component → PositivePlaquettePlane4 →
+  PhysicalBlockL side4 → ℚ
+componentCurlTerm tangent component plane site =
+  let field = componentScalarBondField tangent component in
+  let first = positivePlaneFirst plane in
+  let second = positivePlaneSecond plane in
+  let value =
+    forwardDifference4 first (field second) site
+    - forwardDifference4 second (field first) site
+  in value * value
+
 literalCurlNormSqComponentExpansion : ∀ tangent plane site →
   Plaquette.literalPlaquetteCurlNormSq tangent plane site
-  ≡ curlScalar component1 + (curlScalar component2 + curlScalar component3)
-  where
-  curlScalar : SU2Component → ℚ
-  curlScalar component =
-    let field = componentScalarBondField tangent component in
-    let first = positivePlaneFirst plane in
-    let second = positivePlaneSecond plane in
-    let value =
-      forwardDifference4 first (field second) site
-      Data.Rational._-_
-      forwardDifference4 second (field first) site
-    in value * value
+  ≡ componentCurlTerm tangent component1 plane site
+    + (componentCurlTerm tangent component2 plane site
+    + componentCurlTerm tangent component3 plane site)
 literalCurlNormSqComponentExpansion tangent plane site =
   ℚRing.solve-∀
     (forwardDifference4 (positivePlaneFirst plane)
@@ -220,10 +235,10 @@ literalCurlEnergyComponentFold tangent =
       trans
         (sumRationalCong (physicalBlockSites side4) _ _
           (literalCurlNormSqComponentExpansion tangent plane))
-        (siteSum4ThreeTerms
-          (λ site → curlTerm component1 plane site)
-          (λ site → curlTerm component2 plane site)
-          (λ site → curlTerm component3 plane site))))
+        (siteSum4ThreeComponentTerms
+          (componentCurlTerm tangent component1 plane)
+          (componentCurlTerm tangent component2 plane)
+          (componentCurlTerm tangent component3 plane))))
     (sumRationalThreeTerms positivePlaquettePlanes4
       (λ plane → curlPlaneEnergy plane
         (componentScalarBondField tangent component1))
@@ -231,28 +246,19 @@ literalCurlEnergyComponentFold tangent =
         (componentScalarBondField tangent component2))
       (λ plane → curlPlaneEnergy plane
         (componentScalarBondField tangent component3)))
-  where
-  curlTerm : SU2Component → PositivePlaquettePlane4 →
-    PhysicalBlockL side4 → ℚ
-  curlTerm component plane site =
-    let field = componentScalarBondField tangent component in
-    let first = positivePlaneFirst plane in
-    let second = positivePlaneSecond plane in
-    let value =
-      forwardDifference4 first (field second) site
-      Data.Rational._-_
-      forwardDifference4 second (field first) site
-    in value * value
+
+componentDivergenceSq :
+  PhysicalSU2Tangent4 → SU2Component → PhysicalBlockL side4 → ℚ
+componentDivergenceSq tangent component site =
+  let value = literalPeriodicDivergenceScalar
+    (componentScalarBondField tangent component) site
+  in value * value
 
 literalDivergenceNormSqComponentExpansion : ∀ tangent site →
   normSqV (literalPeriodicDivergence tangent site)
-  ≡ divSq component1 + (divSq component2 + divSq component3)
-  where
-  divSq : SU2Component → ℚ
-  divSq component =
-    let value = literalPeriodicDivergenceScalar
-      (componentScalarBondField tangent component) site
-    in value * value
+  ≡ componentDivergenceSq tangent component1 site
+    + (componentDivergenceSq tangent component2 site
+    + componentDivergenceSq tangent component3 site)
 literalDivergenceNormSqComponentExpansion tangent site =
   ℚRing.solve-∀
     (literalPeriodicDivergenceScalar
@@ -271,13 +277,10 @@ literalDivergenceEnergyComponentFold tangent =
   trans
     (sumRationalCong (physicalBlockSites side4) _ _
       (literalDivergenceNormSqComponentExpansion tangent))
-    (siteSum4ThreeTerms
-      (λ site → let value = literalPeriodicDivergenceScalar
-        (componentScalarBondField tangent component1) site in value * value)
-      (λ site → let value = literalPeriodicDivergenceScalar
-        (componentScalarBondField tangent component2) site in value * value)
-      (λ site → let value = literalPeriodicDivergenceScalar
-        (componentScalarBondField tangent component3) site in value * value))
+    (siteSum4ThreeComponentTerms
+      (componentDivergenceSq tangent component1)
+      (componentDivergenceSq tangent component2)
+      (componentDivergenceSq tangent component3))
 
 physicalPeriodicReferenceDifferenceEnergy : PhysicalSU2Tangent4 → ℚ
 physicalPeriodicReferenceDifferenceEnergy tangent =
