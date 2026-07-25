@@ -87,11 +87,21 @@ import DASHI.Physics.Closure.NSPeriodicFarLowKernelZeroExtension
 import DASHI.Physics.Closure.NSPeriodicFarLowShellIntersectionCount
 import DASHI.Physics.Closure.NSPeriodicFarLowRowMajorantFold
 import DASHI.Physics.Closure.NSPeriodicFarLowColumnMajorantFold
+import DASHI.Physics.Closure.NSPeriodicFarLowEnergyPairingCancellation
+import DASHI.Physics.Closure.NSPeriodicFarLowExactCommutatorIdentity
+import DASHI.Physics.Closure.NSPeriodicFarLowMultiplierDifferenceKernel
+import DASHI.Physics.Closure.NSPeriodicFarLowMultiplierDifferenceBound
 import DASHI.Physics.Closure.NSPeriodicConcreteFarHighPlacements
 import DASHI.Physics.Closure.NSPeriodicFarHighShellSeparation
 import DASHI.Physics.Closure.NSPeriodicFarHighFiniteTail
 import DASHI.Physics.Closure.NSPeriodicFarHighTailReindexing
 import DASHI.Physics.Closure.NSPeriodicFarHighDyadicTailArithmetic
+import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount
+import DASHI.Physics.Closure.NSPeriodicInfinityShellBernstein
+import DASHI.Physics.Closure.NSPeriodicInfinityShellDerivativeBound
+import DASHI.Physics.Closure.NSPeriodicFarHighOfficialPlacementReduction
+import DASHI.Physics.Closure.NSPeriodicFirstExitSmallnessInterface
+import DASHI.Physics.Closure.NSPeriodicGeometricDepletionRejectionStatus as DepletionStatus
 
 officialNormGateRegression :
   allOfficialHarmonicInputsInhabited ≡ false
@@ -116,6 +126,10 @@ continuumCompletionGateRegression = refl
 globalRegularityGateRegression :
   unconditionalPeriodicNavierStokesTheorem ≡ false
 globalRegularityGateRegression = refl
+
+geometricDepletionGateRegression :
+  DepletionStatus.geometricDepletionOfficialInputInhabited ≡ false
+geometricDepletionGateRegression = refl
 
 clayGateRegression : clayNavierStokesSubmissionPromoted ≡ false
 clayGateRegression = refl
