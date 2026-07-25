@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 import DASHI.Physics.Closure.NSTriadKNShellScaleHeadroom as ScaleHeadroom
 import DASHI.Physics.Closure.NSTriadKNScaledOperatorErrorAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNVariationalRigidityOperatorRefinement as Variational
+import DASHI.Physics.Closure.NSTriadKNAdmissibleConstrainedSpectralAudit as SpectralAudit
 
 ------------------------------------------------------------------------
 -- Scale-corrected unit-shell operator-error bridge.
@@ -114,17 +115,13 @@ canonicalSharperScaledOperatorErrorClosedIsFalse :
 canonicalSharperScaledOperatorErrorClosedIsFalse = refl
 
 ------------------------------------------------------------------------
--- The three non-generic analytic routes are now first-class and imported by
--- the active scale-corrected bridge:
+-- The non-generic analytic routes are first-class and imported by the active
+-- scale-corrected bridge:
 --
---   * ScaledRayleighBaseCertificate
---   * QuantitativeRigidityGap
---   * RefinedOperatorRelativeGap / ScaledRefinedOperatorEstimate
---
--- Their combined VariationalCompatibilityCertificate supplies the exact base
--- and operator witnesses plus the strict constant gap needed by the q-gap
--- absorption chain.  The current energy-only model remains saturated, which is
--- proved constructively by the imported unit-state audit.
+--   * variational Rayleigh base certificate;
+--   * quantitative rigidity and admissible rigid-direction exclusion;
+--   * refined operator-relative estimate;
+--   * finite constrained generalized-eigenvalue certificate.
 ------------------------------------------------------------------------
 
 variationalRouteImplemented : Bool
@@ -147,6 +144,37 @@ refinedOperatorRouteImplemented = true
 refinedOperatorRouteImplementedIsTrue :
   refinedOperatorRouteImplemented ≡ true
 refinedOperatorRouteImplementedIsTrue = refl
+
+constrainedSpectralAuditRouteImplemented : Bool
+constrainedSpectralAuditRouteImplemented =
+  SpectralAudit.constrainedSpectralAuditImplemented
+
+constrainedSpectralAuditRouteImplementedIsTrue :
+  constrainedSpectralAuditRouteImplemented ≡ true
+constrainedSpectralAuditRouteImplementedIsTrue =
+  SpectralAudit.constrainedSpectralAuditImplementedIsTrue
+
+canonicalExportedOperatorIdentityConfirmed :
+  (x : SpectralAudit.CanonicalCarrier) →
+  _
+canonicalExportedOperatorIdentityConfirmed =
+  SpectralAudit.canonicalExportedOperatorIsIdentity
+
+canonicalGeneralizedEigenvalueSaturationConfirmed :
+  SpectralAudit.canonicalQError SpectralAudit.canonicalUnit
+    ≡ SpectralAudit.canonicalQBase SpectralAudit.canonicalUnit
+canonicalGeneralizedEigenvalueSaturationConfirmed =
+  SpectralAudit.canonicalGeneralizedEigenvalueIsOne
+
+canonicalActualStage3MatrixStillMissing :
+  SpectralAudit.canonicalActualStage3MatrixExposed ≡ false
+canonicalActualStage3MatrixStillMissing =
+  SpectralAudit.canonicalActualStage3MatrixExposedIsFalse
+
+canonicalEnergyCarrierConstraintLossConfirmed :
+  SpectralAudit.canonicalEnergyCarrierCanEncodePhysicalConstraints ≡ false
+canonicalEnergyCarrierConstraintLossConfirmed =
+  SpectralAudit.canonicalEnergyCarrierCanEncodePhysicalConstraintsIsFalse
 
 canonicalRayleighSaturationConfirmed :
   Variational.canonicalRayleighRatioSaturated ≡ true
