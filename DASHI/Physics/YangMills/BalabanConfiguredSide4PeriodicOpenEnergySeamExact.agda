@@ -173,24 +173,29 @@ physicalPeriodicDifferenceOpenPlusWrap tangent =
         (componentPeriodicDifferenceOpenPlusWrap
           (componentScalarBondField tangent component3))))
     (trans
-      (cong₂ _+_
-        (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
-          (componentScalarBondField tangent component1))
-        (cong₂ _+_
-          (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
-            (componentScalarBondField tangent component2))
-          (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
-            (componentScalarBondField tangent component3))))
       (ℚRing.solve-∀
-        (bondReferenceDifferenceEnergy (tangent component1))
-        (bondReferenceDifferenceEnergy (tangent component2))
-        (bondReferenceDifferenceEnergy (tangent component3))
+        (componentOpenDifferenceEnergy
+          (componentScalarBondField tangent component1))
+        (componentOpenDifferenceEnergy
+          (componentScalarBondField tangent component2))
+        (componentOpenDifferenceEnergy
+          (componentScalarBondField tangent component3))
         (componentPeriodicWrapEnergy
           (componentScalarBondField tangent component1))
         (componentPeriodicWrapEnergy
           (componentScalarBondField tangent component2))
         (componentPeriodicWrapEnergy
-          (componentScalarBondField tangent component3))))
+          (componentScalarBondField tangent component3)))
+      (cong₂ _+_
+        (cong₂ _+_
+          (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
+            (componentScalarBondField tangent component1))
+          (cong₂ _+_
+            (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
+              (componentScalarBondField tangent component2))
+            (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
+              (componentScalarBondField tangent component3))))
+        refl))
 
 hodgeRightHandSideMatchesPhysicalReferenceDifferenceEnergyPlusWrap : ∀ tangent →
   physicalPeriodicReferenceDifferenceEnergy tangent
