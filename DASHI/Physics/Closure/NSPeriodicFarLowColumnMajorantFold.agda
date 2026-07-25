@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSPeriodicFarLowColumnMajorantFold where
 
 open import Agda.Primitive using (Level)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.List.Base using (_++_)
 
