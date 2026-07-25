@@ -2,7 +2,8 @@ module DASHI.Physics.Closure.NSPeriodicInfinityShellBernstein where
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.List using (List)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
@@ -105,8 +106,59 @@ infinityShellBernsteinCoarseDyadic {A = A} I C n state supported =
     (infinityShellBernsteinExactCount I n state supported)
     (exactCountFactorBelowCoarse C n state)
 
+record InfinityShellBernsteinSquaredInputs
+    {i : Level}
+    (A : AbsorptionArithmetic)
+    (State : Set i) : Set (lsuc i) where
+  field
+    pointwiseValueSquared : Nat → State → Scalar A
+    physicalL2Squared : Nat → State → Scalar A
+    shellCoefficients : Nat → State → List (Scalar A)
+    sumCoefficientsSquared : List (Scalar A) → Scalar A
+    sumCoefficientsSqSum : List (Scalar A) → Scalar A
+    scaleNat : Nat → Scalar A → Scalar A
+
+    pointwiseBound : ∀ n state →
+      _≤_ A
+        (pointwiseValueSquared n state)
+        (sumCoefficientsSquared (shellCoefficients n state))
+
+    coefficientBernsteinSquared : ∀ n state →
+      _≤_ A
+        (sumCoefficientsSquared (shellCoefficients n state))
+        (scaleNat (27 * (Count.pow2 n * (Count.pow2 n * Count.pow2 n)))
+          (sumCoefficientsSqSum (shellCoefficients n state)))
+
+    shellParsevalSquared : ∀ n state →
+      sumCoefficientsSqSum (shellCoefficients n state) ≡ physicalL2Squared n state
+
+open InfinityShellBernsteinSquaredInputs public
+
+infinityShellBernsteinSquaredExact :
+  ∀ {i} {A : AbsorptionArithmetic} {State : Set i} →
+  (I : InfinityShellBernsteinSquaredInputs A State) →
+  ∀ n state →
+  _≤_ A
+    (pointwiseValueSquared I n state)
+    (scaleNat I
+      (27 * (Count.pow2 n * (Count.pow2 n * Count.pow2 n)))
+      (physicalL2Squared I n state))
+infinityShellBernsteinSquaredExact {A = A} I n state =
+  subst
+    (λ l2 →
+      _≤_ A
+        (pointwiseValueSquared I n state)
+        (scaleNat I (27 * (Count.pow2 n * (Count.pow2 n * Count.pow2 n))) l2))
+    (shellParsevalSquared I n state)
+    (≤-trans A
+      (pointwiseBound I n state)
+      (coefficientBernsteinSquared I n state))
+
 infinityShellBernsteinReductionLevel : ProofLevel
 infinityShellBernsteinReductionLevel = machineChecked
+
+infinityShellBernsteinSquaredReductionLevel : ProofLevel
+infinityShellBernsteinSquaredReductionLevel = machineChecked
 
 finiteFourierCauchySchwarzAuthorityLevel : ProofLevel
 finiteFourierCauchySchwarzAuthorityLevel = standardImported

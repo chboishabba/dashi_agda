@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥-elim)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _<ℝ_)
 open import DASHI.Physics.Closure.NSWall1ExactEvaluationCarrier using
@@ -31,6 +32,25 @@ modeNatNormSquared (Z3.mode x y z) =
     (natSquare (Cube.integerMagnitude y) +
       natSquare (Cube.integerMagnitude z))
 
+literalCubeModeNatNormEstimate :
+  ∀ N k → Cube.InCutoffCube N k →
+  modeNatNormSquared k Cube.≤ᴺ 3 * Cube.natSquare N
+literalCubeModeNatNormEstimate N (Z3.mode x y z)
+  (Cube.cutoff-membership xMember yMember zMember) =
+  Cube.≤ᴺ-substRight
+    (sym (tripleNatSquareEq (Cube.natSquare N)))
+    (Cube.≤ᴺ-+-mono
+      (Cube.natSquare-mono (Cube.intervalMagnitudeBound {N = N} xMember))
+      (Cube.≤ᴺ-+-mono
+        (Cube.natSquare-mono (Cube.intervalMagnitudeBound {N = N} yMember))
+        (Cube.natSquare-mono (Cube.intervalMagnitudeBound {N = N} zMember))))
+  where
+  tripleNatSquareEq : ∀ n → 3 * n ≡ n + (n + n)
+  tripleNatSquareEq n =
+    trans
+      (cong (λ x → n + (n + x)) (Cube.addZeroRight n))
+      refl
+
 positiveSquare : ∀ {n} → PositiveNat n → PositiveNat (natSquare n)
 positiveSquare (positive-suc n) = positive-suc _
 
@@ -47,20 +67,20 @@ nonzeroModeNatNormPositive :
   ∀ k → Z3.NonZeroMode k → PositiveNat (modeNatNormSquared k)
 nonzeroModeNatNormPositive
   (Z3.mode (+ zero) (+ zero) (+ zero)) nonzero =
-  ⊥-elim (Z3.notZero nonzero refl)
+  ⊥-elim (Z3.NonZeroMode.notZero nonzero refl)
 nonzeroModeNatNormPositive
   (Z3.mode (+ zero) (+ zero) (+ (suc z))) nonzero =
-  positivePlusRight (positivePlusRight (positiveSquare (positive-suc z)))
+  positivePlusRight {a = zero} (positivePlusRight {a = zero} (positiveSquare (positive-suc z)))
 nonzeroModeNatNormPositive
   (Z3.mode (+ zero) (+ zero) (-[1+ z ])) nonzero =
-  positivePlusRight (positivePlusRight (positiveSquare (positive-suc z)))
+  positivePlusRight {a = zero} (positivePlusRight {a = zero} (positiveSquare (positive-suc z)))
 nonzeroModeNatNormPositive
   (Z3.mode (+ zero) (+ (suc y)) z) nonzero =
-  positivePlusRight
+  positivePlusRight {a = zero}
     (positivePlusLeft (positiveSquare (positive-suc y)))
 nonzeroModeNatNormPositive
   (Z3.mode (+ zero) (-[1+ y ]) z) nonzero =
-  positivePlusRight
+  positivePlusRight {a = zero}
     (positivePlusLeft (positiveSquare (positive-suc y)))
 nonzeroModeNatNormPositive
   (Z3.mode (+ (suc x)) y z) nonzero =

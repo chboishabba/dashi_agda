@@ -126,6 +126,42 @@ policy and consumed accordingly.
      `ContractionForcesQuadraticStrong -> QuadraticToCliffordBridgeTheorem`
      (canonical bilinear from normalized quadratic, then Clifford presentation).
 
+## C2 YM Balaban Lane
+
+The current C2 implementation frontier is a structured YM lane, not a claim
+promotion boundary.  The lane should be read in this order:
+
+1. `DASHI.Physics.YangMills.CompactLieBlockAverage`
+2. `DASHI.Physics.Closure.YMSmallFieldSurvivalAuthority`
+3. `DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparation`
+4. `DASHI.Physics.YangMills.BalabanRGLane`
+5. `DASHI.Physics.Closure.YMBalabanPhysicalBetaBridgeTargetReceipt`
+6. `DASHI.Physics.Closure.YMBalabanRGScaleTransferFrontierReceipt`
+
+Route classification for this lane:
+
+- `CompactLieBlockAverage`: coarse-block interface / packaging surface for the
+  covariant block-average transport.
+- `YMSmallFieldSurvivalAuthority`: authority surface for the admissible
+  small-field radius, blocked oscillation envelope, and scale-uniform small
+  field constants.
+- `YMLargeFieldTemporalCutSeparation`: authority boundary for the large-field
+  / slow-field / transfer-cut split.
+- `BalabanRGLane`: lane-level aggregator for block map, effective action,
+  small/large split, polymer expansion, remainder decay, gauge compatibility,
+  and continuum stability.
+- `YMBalabanPhysicalBetaBridgeTargetReceipt` and
+  `YMBalabanRGScaleTransferFrontierReceipt`: non-promoting boundary records.
+
+Implementation rule:
+
+- keep the concrete block-averaging `Q` adapter explicit instead of
+  re-deriving it inside receipt modules
+- keep small-field and large-field cutoffs in separate owner modules
+- keep the RG iteration story inside `BalabanRGLane`
+- treat beta-bridge / scale-transfer receipts as target and obstruction
+  records, not proof owners
+
 ## WaveLift⇒Even Architecture Rule (2026-03-11)
 1. `Quadratic⇒Clifford` is the sole upstream producer for
    `WaveLift⇒Even` on the canonical path.

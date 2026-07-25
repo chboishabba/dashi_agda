@@ -5,10 +5,16 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
+open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact using
+  (literalWilsonHessianEqualsCurlEnergy)
+open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralWilsonOperatorRieszExact using
+  (literalWilsonOperator; physicalWilsonOperatorPairingExact)
+open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralGaugeFixedHessianAdapterExact using
+  (Path4SU2LiteralWilsonOperatorMatch)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
   (physicalBlockSites)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
@@ -247,6 +253,20 @@ literalGaugeFixingQuadraticFormEqualsDivergenceEnergy dataSet tangent =
     (physicalGaugeFixingQuadraticFormExact
       (literalGaugeFixedHessianQuadraticData dataSet) tangent)
     (literalGaugeFixingNormSqExact dataSet tangent)
+
+literalWilsonOperatorMatchExact :
+  ∀ {Coarse} (dataSet : LiteralNonDivergenceHessianData Coarse) →
+  (wilsonOperator dataSet ≡ literalWilsonOperator) →
+  Path4SU2LiteralWilsonOperatorMatch Coarse
+literalWilsonOperatorMatchExact dataSet eq = record
+  { nonDivergenceData = dataSet
+  ; wilsonOperatorQuadraticMatchesLiteral = λ tangent →
+      trans
+        (cong (λ op → physicalTangentInner tangent (op tangent)) eq)
+        (trans
+          (physicalWilsonOperatorPairingExact tangent)
+          (sym (literalWilsonHessianEqualsCurlEnergy tangent)))
+  }
 
 literalDivergenceHessianInstanceLevel : ProofLevel
 literalDivergenceHessianInstanceLevel = machineChecked

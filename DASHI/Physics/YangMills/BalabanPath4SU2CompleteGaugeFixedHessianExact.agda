@@ -1,9 +1,22 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2CompleteGaugeFixedHessianExact where
 
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; 0ℚ; _≤_)
+import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
+  (allCyclicIndices; four)
+open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
+  (physicalBlockSites)
+open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
+  (sumRational; sumRationalCong)
+open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
+  (sumRationalZero)
+open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact using
   (physicalTangentInner)
@@ -43,6 +56,98 @@ record LiteralCoarseBlockData (Coarse : Set) : Set₁ where
 
     coarseNormNonnegativeExact : ∀ coarse →
       0ℚ ≤ innerCoarseOperator coarse coarse
+
+zeroPhysicalSU2Tangent4 : PhysicalSU2Tangent4
+zeroPhysicalSU2Tangent4 component axisSite = 0ℚ
+
+sumRationalNonnegative :
+  ∀ {A : Set} (values : List A) (term : A → ℚ) →
+  (∀ value → 0ℚ ≤ term value) →
+  0ℚ ≤ sumRational values term
+sumRationalNonnegative [] term termNonnegative = ℚP.≤-refl
+sumRationalNonnegative (value ∷ values) term termNonnegative =
+  ℚP.+-mono-≤
+    (termNonnegative value)
+    (sumRationalNonnegative values term termNonnegative)
+
+scalarBondInnerZeroRight : ∀ tangent →
+  physicalTangentInner tangent zeroPhysicalSU2Tangent4 ≡ 0ℚ
+scalarBondInnerZeroRight tangent =
+  trans
+    (cong₂ _+_
+      (bondInnerZeroRight (tangent component1))
+      (cong₂ _+_
+        (bondInnerZeroRight (tangent component2))
+        (bondInnerZeroRight (tangent component3))))
+    (ℚRing.solve-∀)
+  where
+  bondInnerZeroRight : ∀ bondField →
+    sumRational (allCyclicIndices four)
+      (λ axis →
+        sumRational (physicalBlockSites side4)
+          (λ site → bondField axis site * 0ℚ))
+    ≡ 0ℚ
+  bondInnerZeroRight bondField =
+    trans
+      (sumRationalCong
+        (allCyclicIndices four)
+        (λ axis →
+          sumRational (physicalBlockSites side4)
+            (λ site → bondField axis site * 0ℚ))
+        (λ _ → 0ℚ)
+        (λ axis →
+          trans
+            (sumRationalCong
+              (physicalBlockSites side4)
+              (λ site → bondField axis site * 0ℚ)
+              (λ _ → 0ℚ)
+              (λ _ → ℚRing.solve-∀))
+            (sumRationalZero (physicalBlockSites side4))))
+      (sumRationalZero (allCyclicIndices four))
+
+scalarBondInnerNonnegative : ∀ bondField →
+  0ℚ ≤ sumRational (allCyclicIndices four)
+    (λ axis →
+      sumRational (physicalBlockSites side4)
+        (λ site → bondField axis site * bondField axis site))
+scalarBondInnerNonnegative bondField =
+  sumRationalNonnegative
+    (allCyclicIndices four)
+    (λ axis →
+      sumRational (physicalBlockSites side4)
+        (λ site → bondField axis site * bondField axis site))
+    (λ axis →
+      sumRationalNonnegative
+        (physicalBlockSites side4)
+        (λ site → bondField axis site * bondField axis site)
+        (λ site →
+          DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact.squareNonnegative
+            (bondField axis site)))
+
+physicalTangentInnerNonnegative : ∀ tangent →
+  0ℚ ≤ physicalTangentInner tangent tangent
+physicalTangentInnerNonnegative tangent =
+  ℚP.+-mono-≤
+    (scalarBondInnerNonnegative (tangent component1))
+    (ℚP.+-mono-≤
+      (scalarBondInnerNonnegative (tangent component2))
+      (scalarBondInnerNonnegative (tangent component3)))
+
+canonicalLiteralCoarseBlockData : LiteralCoarseBlockData PhysicalSU2Tangent4
+canonicalLiteralCoarseBlockData = record
+  { averageOperator = λ fine → fine
+  ; averageAdjointOperator = λ coarse → coarse
+  ; innerCoarseOperator = physicalTangentInner
+  ; coarseZeroOperator = zeroPhysicalSU2Tangent4
+  ; averageAdjointExact = λ fine coarse → refl
+  ; innerCoarseZeroExact = scalarBondInnerZeroRight zeroPhysicalSU2Tangent4
+  ; coarseNormNonnegativeExact = physicalTangentInnerNonnegative
+  }
+
+canonicalLiteralWilsonOperatorMatch :
+  Path4SU2LiteralWilsonOperatorMatch PhysicalSU2Tangent4
+canonicalLiteralWilsonOperatorMatch =
+  literalWilsonOperatorMatch canonicalLiteralCoarseBlockData
 
 open LiteralCoarseBlockData public
 

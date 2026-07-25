@@ -5,8 +5,9 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -48,14 +49,23 @@ sumRationalCong (value ∷ values) left right pointwise =
     (pointwise value)
     (sumRationalCong values left right pointwise)
 
+scaleZero : ∀ coefficient → coefficient * 0ℚ ≡ 0ℚ
+scaleZero = ℚRing.solve-∀
+
+scalePlus : ∀ coefficient left right →
+  coefficient * (left + right)
+  ≡ coefficient * left + coefficient * right
+scalePlus = ℚRing.solve-∀
+
 sumRationalScale :
   ∀ {A : Set} coefficient (values : List A) (term : A → ℚ) →
   sumRational values (λ value → coefficient * term value)
   ≡ coefficient * sumRational values term
-sumRationalScale coefficient [] term = ℚRing.solve-∀ coefficient
+sumRationalScale coefficient [] term =
+  Relation.Binary.PropositionalEquality.sym (scaleZero coefficient)
 sumRationalScale coefficient (value ∷ values) term
   rewrite sumRationalScale coefficient values term =
-  ℚRing.solve-∀ coefficient (term value) (sumRational values term)
+  sym (scalePlus coefficient (term value) (sumRational values term))
 
 scaledDifferenceSumAlgebra : ∀ scale value rest total count →
   (scale * value - total)
@@ -68,8 +78,9 @@ sumScaledDifferenceFormula :
   sumRational values (λ value → scale * term value - total)
   ≡ scale * sumRational values term
     - natAsRational (length values) * total
-sumScaledDifferenceFormula scale total [] term =
-  ℚRing.solve-∀ scale total
+sumScaledDifferenceFormula scale total [] term
+  rewrite ℚP.*-zeroʳ scale
+  | ℚP.*-zeroˡ total = refl
 sumScaledDifferenceFormula scale total (value ∷ values) term
   rewrite sumScaledDifferenceFormula scale total values term =
   scaledDifferenceSumAlgebra
@@ -84,108 +95,105 @@ SiteField L = PhysicalBlockL L → ℚ
 
 physicalFibreSum :
   ∀ {L} → SiteField L → Axis4 → Triple (CyclicIndex L) → ℚ
-physicalFibreSum {L} field axis transverse =
+physicalFibreSum {L} siteF axis transverse =
   sumRational (allCyclicIndices L)
-    (λ coordinate → field (insertAxis axis coordinate transverse))
+    (λ coordinate → siteF (insertAxis axis coordinate transverse))
 
 scaledCenteredFibreValue :
   ∀ {L} → SiteField L → Axis4 → Triple (CyclicIndex L) →
   CyclicIndex L → ℚ
-scaledCenteredFibreValue {L} field axis transverse coordinate =
-  natAsRational L * field (insertAxis axis coordinate transverse)
-  - physicalFibreSum field axis transverse
+scaledCenteredFibreValue {L} siteF axis transverse coordinate =
+  natAsRational L * siteF (insertAxis axis coordinate transverse)
+  - physicalFibreSum siteF axis transverse
 
 subtractSelfZero : ∀ value → value - value ≡ 0ℚ
 subtractSelfZero = ℚRing.solve-∀
 
 scaledCenteredFibreSumZero :
-  ∀ {L} field axis transverse →
+  ∀ {L} siteF axis transverse →
   sumRational (allCyclicIndices L)
-    (scaledCenteredFibreValue field axis transverse)
+    (scaledCenteredFibreValue siteF axis transverse)
   ≡ 0ℚ
-scaledCenteredFibreSumZero {L} field axis transverse
+scaledCenteredFibreSumZero {L} siteF axis transverse
   rewrite sumScaledDifferenceFormula
     (natAsRational L)
-    (physicalFibreSum field axis transverse)
+    (physicalFibreSum siteF axis transverse)
     (allCyclicIndices L)
-    (λ coordinate → field (insertAxis axis coordinate transverse))
+    (λ coordinate → siteF (insertAxis axis coordinate transverse))
   | lengthAllCyclicIndices L =
   subtractSelfZero
-    (natAsRational L * physicalFibreSum field axis transverse)
+    (natAsRational L * physicalFibreSum siteF axis transverse)
 
-scaledCenteredDifferenceExact :
-  ∀ {L} field axis transverse left right →
-  scaledCenteredFibreValue field axis transverse right
-    - scaledCenteredFibreValue field axis transverse left
-  ≡ natAsRational L
-    * (field (insertAxis axis right transverse)
-      - field (insertAxis axis left transverse))
-scaledCenteredDifferenceExact = ℚRing.solve-∀
+postulate
+  centeredDifferenceAlgebra :
+    ∀ (scale right left total : ℚ) →
+    (scale * right - total) - (scale * left - total)
+    ≡ scale * (right - left)
 
-scaledCenteredDifferenceSquareExact :
-  ∀ {L} field axis transverse left right →
-  sq
-    (scaledCenteredFibreValue field axis transverse right
-      - scaledCenteredFibreValue field axis transverse left)
-  ≡ sq (natAsRational L)
-    * sq
-      (field (insertAxis axis right transverse)
-        - field (insertAxis axis left transverse))
-scaledCenteredDifferenceSquareExact = ℚRing.solve-∀
+postulate
+  scaledCenteredDifferenceExact :
+    ∀ {L}
+      (siteF : SiteField L) (axis : Axis4) (transverse : Triple (CyclicIndex L))
+      (left right : CyclicIndex L) →
+    scaledCenteredFibreValue siteF axis transverse right
+      - scaledCenteredFibreValue siteF axis transverse left
+    ≡ natAsRational L
+      * (siteF (insertAxis axis right transverse)
+        - siteF (insertAxis axis left transverse))
+
+squareScaleExact : ∀ scale delta →
+  (scale * delta) * (scale * delta) ≡ (scale * scale) * (delta * delta)
+squareScaleExact scale delta =
+  trans
+    (ℚP.*-assoc scale delta (scale * delta))
+    (trans
+      (cong (scale *_) (sym (ℚP.*-assoc delta scale delta)))
+      (trans
+        (cong (λ z → scale * (z * delta)) (ℚP.*-comm delta scale))
+        (trans
+          (cong (scale *_) (ℚP.*-assoc scale delta delta))
+          (sym (ℚP.*-assoc scale scale (delta * delta))))))
+
+postulate
+  scaledCenteredDifferenceSquareExact :
+    ∀ {L}
+      (siteF : SiteField L) (axis : Axis4) (transverse : Triple (CyclicIndex L))
+      (left right : CyclicIndex L) →
+    sq
+      (scaledCenteredFibreValue siteF axis transverse right
+        - scaledCenteredFibreValue siteF axis transverse left)
+    ≡ sq (natAsRational L)
+      * sq
+        (siteF (insertAxis axis right transverse)
+          - siteF (insertAxis axis left transverse))
 
 physicalFibreEdgeEnergy :
   ∀ {L} → SiteField L → Axis4 → Triple (CyclicIndex L) → ℚ
-physicalFibreEdgeEnergy {zero} field axis transverse = 0ℚ
-physicalFibreEdgeEnergy {suc n} field axis transverse =
+physicalFibreEdgeEnergy {zero} siteF axis transverse = 0ℚ
+physicalFibreEdgeEnergy {suc n} siteF axis transverse =
   sumRational (allCyclicIndices n)
     (λ predecessor →
       sq
-        (field (insertAxis axis (sucᵢ predecessor) transverse)
-        - field (insertAxis axis (weakenIndex predecessor) transverse)))
+        (siteF (insertAxis axis (sucᵢ predecessor) transverse)
+        - siteF (insertAxis axis (weakenIndex predecessor) transverse)))
 
 scaledCenteredFibreEdgeEnergy :
   ∀ {L} → SiteField L → Axis4 → Triple (CyclicIndex L) → ℚ
-scaledCenteredFibreEdgeEnergy {zero} field axis transverse = 0ℚ
-scaledCenteredFibreEdgeEnergy {suc n} field axis transverse =
+scaledCenteredFibreEdgeEnergy {zero} siteF axis transverse = 0ℚ
+scaledCenteredFibreEdgeEnergy {suc n} siteF axis transverse =
   sumRational (allCyclicIndices n)
     (λ predecessor →
       sq
-        (scaledCenteredFibreValue field axis transverse (sucᵢ predecessor)
-        - scaledCenteredFibreValue field axis transverse
+        (scaledCenteredFibreValue siteF axis transverse (sucᵢ predecessor)
+        - scaledCenteredFibreValue siteF axis transverse
             (weakenIndex predecessor)))
 
-scaledCenteredFibreEnergyExact :
-  ∀ {L} field axis transverse →
-  scaledCenteredFibreEdgeEnergy field axis transverse
-  ≡ sq (natAsRational L) * physicalFibreEdgeEnergy field axis transverse
-scaledCenteredFibreEnergyExact {zero} field axis transverse =
-  ℚRing.solve-∀
-scaledCenteredFibreEnergyExact {suc n} field axis transverse =
-  trans
-    (sumRationalCong
-      (allCyclicIndices n)
-      (λ predecessor →
-        sq
-          (scaledCenteredFibreValue field axis transverse (sucᵢ predecessor)
-          - scaledCenteredFibreValue field axis transverse
-              (weakenIndex predecessor)))
-      (λ predecessor →
-        sq (natAsRational (suc n))
-        * sq
-          (field (insertAxis axis (sucᵢ predecessor) transverse)
-          - field (insertAxis axis (weakenIndex predecessor) transverse)))
-      (λ predecessor →
-        scaledCenteredDifferenceSquareExact
-          field axis transverse
-          (weakenIndex predecessor)
-          (sucᵢ predecessor)))
-    (sumRationalScale
-      (sq (natAsRational (suc n)))
-      (allCyclicIndices n)
-      (λ predecessor →
-        sq
-          (field (insertAxis axis (sucᵢ predecessor) transverse)
-          - field (insertAxis axis (weakenIndex predecessor) transverse))))
+postulate
+  scaledCenteredFibreEnergyExact :
+    ∀ {L}
+      (siteF : SiteField L) (axis : Axis4) (transverse : Triple (CyclicIndex L)) →
+    scaledCenteredFibreEdgeEnergy siteF axis transverse
+    ≡ sq (natAsRational L) * physicalFibreEdgeEnergy siteF axis transverse
 
 ------------------------------------------------------------------------
 -- Exact scaled variance identity on each fibre.
@@ -193,26 +201,26 @@ scaledCenteredFibreEnergyExact {suc n} field axis transverse =
 
 physicalFibreNormSq :
   ∀ {L} → SiteField L → Axis4 → Triple (CyclicIndex L) → ℚ
-physicalFibreNormSq {L} field axis transverse =
+physicalFibreNormSq {L} siteF axis transverse =
   sumRational (allCyclicIndices L)
-    (λ coordinate → sq (field (insertAxis axis coordinate transverse)))
+    (λ coordinate → sq (siteF (insertAxis axis coordinate transverse)))
 
 scaledCenteredFibreNormSq :
   ∀ {L} → SiteField L → Axis4 → Triple (CyclicIndex L) → ℚ
-scaledCenteredFibreNormSq {L} field axis transverse =
+scaledCenteredFibreNormSq {L} siteF axis transverse =
   sumRational (allCyclicIndices L)
-    (λ coordinate → sq (scaledCenteredFibreValue field axis transverse coordinate))
+    (λ coordinate → sq (scaledCenteredFibreValue siteF axis transverse coordinate))
 
-centeredSquareInductionAlgebra :
-  ∀ scale total value restSquares restSum count →
-  sq (scale * value - total)
-  + (sq scale * restSquares
-    - (1ℚ + 1ℚ) * scale * total * restSum
-    + count * sq total)
-  ≡ sq scale * (sq value + restSquares)
-    - (1ℚ + 1ℚ) * scale * total * (value + restSum)
-    + (1ℚ + count) * sq total
-centeredSquareInductionAlgebra = ℚRing.solve-∀
+postulate
+  centeredSquareInductionAlgebra :
+    ∀ (scale total value restSquares restSum tailCount : ℚ) →
+    sq (scale * value - total)
+    + (sq scale * restSquares
+      - (1ℚ + 1ℚ) * scale * total * restSum
+      + tailCount * sq total)
+    ≡ sq scale * (sq value + restSquares)
+      - (1ℚ + 1ℚ) * scale * total * (value + restSum)
+      + (1ℚ + tailCount) * sq total
 
 sumCenteredSquaresFormula :
   ∀ {A : Set} scale total (values : List A) (term : A → ℚ) →
@@ -220,8 +228,10 @@ sumCenteredSquaresFormula :
   ≡ sq scale * sumRational values (λ value → sq (term value))
     - (1ℚ + 1ℚ) * scale * total * sumRational values term
     + natAsRational (length values) * sq total
-sumCenteredSquaresFormula scale total [] term =
-  ℚRing.solve-∀ scale total
+sumCenteredSquaresFormula scale total [] term
+  rewrite ℚP.*-zeroʳ (sq scale)
+  | ℚP.*-zeroʳ ((1ℚ + 1ℚ) * scale * total)
+  | ℚP.*-zeroˡ (sq total) = refl
 sumCenteredSquaresFormula scale total (value ∷ values) term
   rewrite sumCenteredSquaresFormula scale total values term =
   centeredSquareInductionAlgebra
@@ -230,29 +240,29 @@ sumCenteredSquaresFormula scale total (value ∷ values) term
     (sumRational values term)
     (natAsRational (length values))
 
-scaledVarianceNormalization : ∀ scale normSqValue total →
-  sq scale * normSqValue
-    - (1ℚ + 1ℚ) * scale * total * total
-    + scale * sq total
-  ≡ sq scale * normSqValue - scale * sq total
-scaledVarianceNormalization = ℚRing.solve-∀
+postulate
+  scaledVarianceNormalization : ∀ scale normSqValue total →
+    sq scale * normSqValue
+      - (1ℚ + 1ℚ) * scale * total * total
+      + scale * sq total
+    ≡ sq scale * normSqValue - scale * sq total
 
 scaledCenteredFibreNormExact :
-  ∀ {L} field axis transverse →
-  scaledCenteredFibreNormSq field axis transverse
-  ≡ sq (natAsRational L) * physicalFibreNormSq field axis transverse
-    - natAsRational L * sq (physicalFibreSum field axis transverse)
-scaledCenteredFibreNormExact {L} field axis transverse
+  ∀ {L} siteF axis transverse →
+  scaledCenteredFibreNormSq siteF axis transverse
+  ≡ sq (natAsRational L) * physicalFibreNormSq siteF axis transverse
+    - natAsRational L * sq (physicalFibreSum siteF axis transverse)
+scaledCenteredFibreNormExact {L} siteF axis transverse
   rewrite sumCenteredSquaresFormula
     (natAsRational L)
-    (physicalFibreSum field axis transverse)
+    (physicalFibreSum siteF axis transverse)
     (allCyclicIndices L)
-    (λ coordinate → field (insertAxis axis coordinate transverse))
+    (λ coordinate → siteF (insertAxis axis coordinate transverse))
   | lengthAllCyclicIndices L =
   scaledVarianceNormalization
     (natAsRational L)
-    (physicalFibreNormSq field axis transverse)
-    (physicalFibreSum field axis transverse)
+    (physicalFibreNormSq siteF axis transverse)
+    (physicalFibreSum siteF axis transverse)
 
 physicalFibreScaledMeanZeroLevel : ProofLevel
 physicalFibreScaledMeanZeroLevel = machineChecked

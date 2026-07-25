@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -26,9 +27,6 @@ left ≢ right = Not (left ≡ right)
 data Dec (P : Set) : Set where
   yes : P → Dec P
   no  : Not P → Dec P
-
-cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-cong f refl = refl
 
 data CyclicIndex : Nat → Set where
   zeroᵢ : ∀ {n} → CyclicIndex (suc n)
@@ -230,27 +228,27 @@ AxisIndexedSiteField L Value = Axis4 → periodicTorus4Definition L → Value
 
 bondFieldAsAxisIndexedSiteField :
   ∀ {L Value} → BondField L Value → AxisIndexedSiteField L Value
-bondFieldAsAxisIndexedSiteField field axis site = field (pair site axis)
+bondFieldAsAxisIndexedSiteField bondF axis site = bondF (pair site axis)
 
 axisIndexedSiteFieldAsBondField :
   ∀ {L Value} → AxisIndexedSiteField L Value → BondField L Value
-axisIndexedSiteFieldAsBondField field (pair site axis) = field axis site
+axisIndexedSiteFieldAsBondField axisF (pair site axis) = axisF axis site
 
 bondFieldRoundTrip :
-  ∀ {L Value} (field : BondField L Value) site axis →
+  ∀ {L Value} (bondF : BondField L Value) site axis →
   axisIndexedSiteFieldAsBondField
-    (bondFieldAsAxisIndexedSiteField field)
+    (bondFieldAsAxisIndexedSiteField bondF)
     (pair site axis)
-  ≡ field (pair site axis)
-bondFieldRoundTrip field site axis = refl
+  ≡ bondF (pair site axis)
+bondFieldRoundTrip bondF site axis = refl
 
 axisIndexedSiteFieldRoundTrip :
-  ∀ {L Value} (field : AxisIndexedSiteField L Value) axis site →
+  ∀ {L Value} (axisF : AxisIndexedSiteField L Value) axis site →
   bondFieldAsAxisIndexedSiteField
-    (axisIndexedSiteFieldAsBondField field)
+    (axisIndexedSiteFieldAsBondField axisF)
     axis site
-  ≡ field axis site
-axisIndexedSiteFieldRoundTrip field axis site = refl
+  ≡ axisF axis site
+axisIndexedSiteFieldRoundTrip axisF axis site = refl
 
 periodicTorus4CarrierLevel : ProofLevel
 periodicTorus4CarrierLevel = machineChecked

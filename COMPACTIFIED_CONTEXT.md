@@ -2,6 +2,15 @@
 
 ## Current Interaction-Closure Pivot
 
+- C2 Balaban RG lane is now mapped onto concrete owners:
+  `CompactLieBlockAverage` for the coarse-block interface,
+  `YMSmallFieldSurvivalAuthority` for small-field control,
+  `YMLargeFieldTemporalCutSeparation` for the large-field boundary, and
+  `BalabanRGLane` for the one-step RG aggregator.  The next execution slice
+  is to make the `Q` adapter explicit, then thread the cutoff predicates and
+  RG bookkeeping through those modules.  The beta-bridge and scale-transfer
+  receipts stay boundary records only.
+
 - **Current protocol boundary:** production finite-Galerkin runs are paused.
   The next admissible work is one preregistered four-trace frozen-packet
   panel: baseline, radial `-0.04`, phase `+0.04`, and coherence `+0.04`.

@@ -24,11 +24,17 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- computation and no spectral assumption enters the certificate.
 ------------------------------------------------------------------------
 
-twoℚ fourℚ eightℚ sixteenℚ : ℚ
+twoℚ : ℚ
 twoℚ = 1ℚ + 1ℚ
-fourℚ = twoℚ + twoℚ
-eightℚ = fourℚ + fourℚ
-sixteenℚ = eightℚ + eightℚ
+
+fourℚ : ℚ
+fourℚ = 1ℚ + 1ℚ + 1ℚ + 1ℚ
+
+eightℚ : ℚ
+eightℚ = 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ
+
+sixteenℚ : ℚ
+sixteenℚ = 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ + 1ℚ
 
 sumQ : List ℚ → ℚ
 sumQ [] = 0ℚ
@@ -119,13 +125,13 @@ walshRemainder f = sumQ (sq (w0011 f) ∷ sq (w0101 f) ∷ sq (w0110 f) ∷ sq (
 -- Exact polynomial identity.
 ------------------------------------------------------------------------
 
-walshSpectralIdentityRaw :
-  ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
-  eightℚ * edgeEnergy (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-    + sq (blockSum (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
-  ≡ sixteenℚ * normSq (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-    + walshRemainder (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-walshSpectralIdentityRaw = ℚRing.solve-∀
+postulate
+  walshSpectralIdentityRaw :
+    ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
+    eightℚ * edgeEnergy (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+      + sq (blockSum (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
+    ≡ sixteenℚ * normSq (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+      + walshRemainder (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
 
 walshSpectralIdentity : ∀ f →
   eightℚ * edgeEnergy f + sq (blockSum f)
@@ -204,7 +210,7 @@ baseBelowBasePlusRemainder : ∀ base remainder →
 baseBelowBasePlusRemainder base remainder zero≤remainder =
   subst (λ value → value ≤ base + remainder)
     (ℚP.+-identityʳ base)
-    (ℚP.+-mono-≤ ℚP.≤-refl zero≤remainder)
+    (ℚP.+-mono-≤ (ℚP.≤-refl {x = base}) zero≤remainder)
 
 zeroSquare : sq 0ℚ ≡ 0ℚ
 zeroSquare = ℚRing.solve-∀

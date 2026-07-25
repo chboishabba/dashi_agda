@@ -26,7 +26,7 @@ sumBy :
   Scalar A
 sumBy {A = A} weight [] = zero A
 sumBy {A = A} weight (item ∷ items) =
-  _+_ A (weight item) (sumBy weight items)
+  AbsorptionArithmetic._+_ A (weight item) (sumBy {A = A} weight items)
 
 record ConcreteFiniteFourierNormCarrier
     (A : AbsorptionArithmetic) : Set₁ where
@@ -64,22 +64,22 @@ officialL2Squared :
   ∀ {A : AbsorptionArithmetic} →
   ConcreteFiniteFourierNormCarrier A →
   Nat → Scalar A
-officialL2Squared C N =
-  sumBy (l2ModeWeight C N) (cutoffModes C N)
+officialL2Squared {A = A} C N =
+  sumBy {A = A} (l2ModeWeight C N) (cutoffModes C N)
 
 officialHomogeneousH1Squared :
   ∀ {A : AbsorptionArithmetic} →
   ConcreteFiniteFourierNormCarrier A →
   Nat → Scalar A
-officialHomogeneousH1Squared C N =
-  sumBy (h1ModeWeight C N) (cutoffModes C N)
+officialHomogeneousH1Squared {A = A} C N =
+  sumBy {A = A} (h1ModeWeight C N) (cutoffModes C N)
 
 officialShellL2Squared :
   ∀ {A : AbsorptionArithmetic} →
   ConcreteFiniteFourierNormCarrier A →
   Nat → Nat → Scalar A
-officialShellL2Squared C N shell =
-  sumBy (shellModeWeight C N shell) (cutoffModes C N)
+officialShellL2Squared {A = A} C N shell =
+  sumBy {A = A} (shellModeWeight C N shell) (cutoffModes C N)
 
 literalL2Fold :
   ∀ {A : AbsorptionArithmetic} →

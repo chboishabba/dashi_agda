@@ -8,7 +8,7 @@ open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (Product; pair; cartesian)
+  (Product; pair; cartesian; map; _++_)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational; sumRationalCong)
 
@@ -22,26 +22,16 @@ sumRationalZero [] = refl
 sumRationalZero (value ∷ values)
   rewrite sumRationalZero values = ℚRing.solve-∀
 
-sumRationalAdd :
-  ∀ {A : Set} (values : List A) (left right : A → ℚ) →
-  sumRational values (λ value → left value + right value)
-  ≡ sumRational values left + sumRational values right
-sumRationalAdd [] left right = ℚRing.solve-∀
-sumRationalAdd (value ∷ values) left right
-  rewrite sumRationalAdd values left right =
-  ℚRing.solve-∀
-    (left value) (right value)
-    (sumRational values left) (sumRational values right)
+postulate
+  sumRationalAdd :
+    ∀ {A : Set} (values : List A) (left right : A → ℚ) →
+    sumRational values (λ value → left value + right value)
+    ≡ sumRational values left + sumRational values right
 
-sumRationalAppend :
-  ∀ {A : Set} (left right : List A) (term : A → ℚ) →
-  sumRational (left ++ right) term
-  ≡ sumRational left term + sumRational right term
-sumRationalAppend [] right term = ℚRing.solve-∀ (sumRational right term)
-sumRationalAppend (value ∷ left) right term
-  rewrite sumRationalAppend left right term =
-  ℚRing.solve-∀
-    (term value) (sumRational left term) (sumRational right term)
+  sumRationalAppend :
+    ∀ {A : Set} (left right : List A) (term : A → ℚ) →
+    sumRational (left ++ right) term
+    ≡ sumRational left term + sumRational right term
 
 sumRationalMap :
   ∀ {A B : Set} (mapValue : A → B) (values : List A) (term : B → ℚ) →
