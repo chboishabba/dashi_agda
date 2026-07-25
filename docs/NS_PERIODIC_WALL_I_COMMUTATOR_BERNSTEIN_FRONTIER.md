@@ -60,6 +60,24 @@ The script constructs the rational derivative/Leray/Biot-Savart tensor and compa
 
 Signed aggregation is deliberately not called a Schur norm. The output also states whether the requested target separation is geometrically accessible at the chosen finite cutoff. In particular, a cutoff-four, output-shell-two run cannot test an actual `R=8` low/high separation.
 
+### Current exact finite finding
+
+For cutoff `N=4`, output shell `j=2`, finite separation `2`, overlap `1`, and weight exponent `1`, the literal tensor enumerator finds `24,500` oriented far-low triads. The target `R=8` regime is not geometrically accessible at this cutoff.
+
+The absolute diagnostics are:
+
+```text
+raw row maximum                 = 23870 / 29
+raw column maximum              = 93723216941944 / 5088057975
+raw Schur product               ~= 15,161,757.8706
+
+absolute-difference row maximum = 348
+absolute-difference column max  = 53778259312442 / 12356712225
+absolute-difference product     ~= 1,514,548.0367
+```
+
+Thus the exact multiplier difference improves this particular absolute tensor majorant by roughly one order of magnitude, but the result is still catastrophically outside the Wall-I budget. The signed `K_diff` aggregation retains substantially more cancellation: its largest row and column aggregates are approximately `0.3653` and `0.2556` of their absolute-difference counterparts. Those ratios are diagnostics only, but they identify the next serious fork: an operator estimate that preserves signs or orthogonality, rather than another absolute `l1` Schur estimate.
+
 Fast regression:
 
 ```bash
