@@ -4,7 +4,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -30,6 +29,10 @@ record Lie3 : Set where
     x y z : ℚ
 
 open Lie3 public
+
+lie3Ext : ∀ {a b : Lie3} →
+  x a ≡ x b → y a ≡ y b → z a ≡ z b → a ≡ b
+lie3Ext {lie3 ax ay az} {lie3 .ax .ay .az} refl refl refl = refl
 
 infixl 20 _+v_
 infixl 25 _·v_
@@ -72,11 +75,6 @@ infixl 30 _*j_
 
 _*j_ : SU2SecondJet → SU2SecondJet → SU2SecondJet
 jet r v *j jet s w = jet (r + s + (- (v ·v w))) (v +v w)
-
-------------------------------------------------------------------------
--- Componentwise product identities.  They keep the physical calculation
--- auditable and avoid hiding the trace normalization inside a record field.
-------------------------------------------------------------------------
 
 jetImaginaryFirstMultiply : ∀ a b →
   imaginaryFirst (a *j b)
@@ -155,7 +153,10 @@ reverseCurlIsNegative : ∀ a b c d →
 reverseCurlIsNegative
   (lie3 ax ay az) (lie3 bx by bz)
   (lie3 cx cy cz) (lie3 dx dy dz) =
-  cong (λ values → values) refl
+  lie3Ext
+    (ℚRing.solve-∀ ax bx cx dx)
+    (ℚRing.solve-∀ ay by cy dy)
+    (ℚRing.solve-∀ az bz cz dz)
 
 reverseOrientationPreservesCurlNormSq : ∀ a b c d →
   normSqV (reversePlaquetteLinearCurl a b c d)
