@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2LiteralGaugeFixedHessianAdapterExact
 import DASHI.Physics.YangMills.BalabanSU2WilsonGaugeNormalizationClosureExact
 import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
+import DASHI.Physics.YangMills.BalabanArbitraryTranslatedOpenBlockWilsonExtractionExact
 
 literalSU2WilsonSecondJetLevel : ProofLevel
 literalSU2WilsonSecondJetLevel = machineChecked
@@ -50,13 +51,16 @@ configuredNormalizationClosureLevel = machineChecked
 configuredSide4TranslatedWilsonExtractionLevel : ProofLevel
 configuredSide4TranslatedWilsonExtractionLevel = machineChecked
 
--- The exact result above is for the configured periodic side-four carrier.
--- The distinct theorem embedding an open side-four block in a larger torus owns
--- a boundary/wrap chart and is not silently identified with this result.
 arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
-arbitraryLatticeOpenBlockWilsonExtractionLevel = conditional
+arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
 
--- These proof levels describe the theorem terms in the branch.  An authoritative
+-- The remaining boundary is only the adapter from the old SUNWilsonAction
+-- operator carrier to the exact rational second-jet fold, not the translated
+-- geometry, periodic Hodge algebra, or open-block plaquette enumeration.
+repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
+repositorySUNWilsonActionHessianAdapterLevel = conditional
+
+-- These proof levels describe theorem terms in the branch.  An authoritative
 -- Agda invocation or GitHub Actions run remains a separate validation receipt.
 branchHeadAuthoritativeTypecheckLevel : ProofLevel
 branchHeadAuthoritativeTypecheckLevel = conditional
