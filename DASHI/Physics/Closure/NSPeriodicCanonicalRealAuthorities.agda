@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSPeriodicCanonicalRealAuthorities where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Integer.Base using (ℤ)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -37,9 +37,9 @@ postulate
 
   natSquareSumEmbedding : ∀ x y z →
     natToReal
-      (Cube.natSquare (Cube.integerMagnitude x)
-       + (Cube.natSquare (Cube.integerMagnitude y)
-       + Cube.natSquare (Cube.integerMagnitude z)))
+      (ModeNorm.natSquare (Cube.integerMagnitude x)
+       + (ModeNorm.natSquare (Cube.integerMagnitude y)
+       + ModeNorm.natSquare (Cube.integerMagnitude z)))
     ≡
     Ordered.realVecNormSquared
       (vec3 (integerToReal x) (integerToReal y) (integerToReal z))
