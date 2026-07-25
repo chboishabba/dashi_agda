@@ -26,6 +26,9 @@ record FarHighCanonicalEighthInputs
     base : High.PeriodicFarHighTailInputs A Index Time State
     sixteenthInterpretation : Budget.SixteenthBudgetInterpretation A
 
+    sixteenthShareNonnegative :
+      _≤_ A (zero A) (Budget.interpretedLowHigh sixteenthInterpretation)
+
     completeR8TailFitsOneSixteenth : ∀ q τ u →
       High.Admissible base q τ u →
       _≤_ A
@@ -43,25 +46,15 @@ open FarHighCanonicalEighthInputs public
 oneSixteenthBelowOneEighth :
   ∀ {A : AbsorptionArithmetic} →
   (I : Budget.SixteenthBudgetInterpretation A) →
+  _≤_ A (zero A) (Budget.interpretedLowHigh I) →
   _≤_ A
     (Budget.interpretedLowHigh I)
     (_+_ A (Budget.interpretedLowHigh I) (Budget.interpretedLowHigh I))
-oneSixteenthBelowOneEighth {A = A} I =
+oneSixteenthBelowOneEighth {A = A} I shareNonnegative =
   summandBelowSum A
     (Budget.interpretedLowHigh I)
     (Budget.interpretedLowHigh I)
     shareNonnegative
-  where
-  shareNonnegative :
-    _≤_ A (zero A) (Budget.interpretedLowHigh I)
-  shareNonnegative =
-    substLower
-      (sym (Budget.interpretZero I))
-      (additionMonotoneRight A (≤-refl A))
-
-  substLower : ∀ {x y z : Scalar A} →
-    x ≡ y → _≤_ A x z → _≤_ A y z
-  substLower refl proof = proof
 
 farHighR8FullConstantFitsCanonicalEighth :
   ∀ {i} {A : AbsorptionArithmetic} {Index Time State : Set i} →
@@ -76,7 +69,9 @@ farHighR8FullConstantFitsCanonicalEighth {A = A} I q τ u admissible =
     (sym (officialFarHighBudgetIsEighth I q τ u))
     (≤-trans A
       (completeR8TailFitsOneSixteenth I q τ u admissible)
-      (oneSixteenthBelowOneEighth (sixteenthInterpretation I)))
+      (oneSixteenthBelowOneEighth
+        (sixteenthInterpretation I)
+        (sixteenthShareNonnegative I)))
   where
   substUpper : ∀ {x y z : Scalar A} →
     y ≡ z → _≤_ A x y → _≤_ A x z
