@@ -8,6 +8,7 @@ import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact
 import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact
 import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact
+import DASHI.Physics.YangMills.BalabanPath4SU2LiteralDivergenceHessianInstanceExact
 import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact
 import DASHI.Physics.YangMills.BalabanPath4SU2WilsonGaugeOpenFoldExact
 import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact
@@ -28,6 +29,9 @@ configuredPeriodicReindexingLevel = machineChecked
 
 configuredPeriodicDivergenceAdjointLevel : ProofLevel
 configuredPeriodicDivergenceAdjointLevel = machineChecked
+
+literalStoredDivergenceInstanceLevel : ProofLevel
+literalStoredDivergenceInstanceLevel = machineChecked
 
 configuredPeriodicHodgeCrossTermLevel : ProofLevel
 configuredPeriodicHodgeCrossTermLevel = machineChecked
