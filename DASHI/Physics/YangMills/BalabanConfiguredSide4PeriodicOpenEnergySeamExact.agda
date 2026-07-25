@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _*_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
@@ -17,7 +17,7 @@ open import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact u
 open import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact using
   (globalDirectionalEnergy)
 open import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact using
-  (bondReferenceDifferenceEnergy; bondComponent)
+  (bondReferenceDifferenceEnergy)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
@@ -28,10 +28,6 @@ open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact usi
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact using
   (componentScalarBondField; physicalPeriodicReferenceDifferenceEnergy)
 
-------------------------------------------------------------------------
--- The fourth edge of a periodic length-four fibre is the wrap edge 3 -> 0.
-------------------------------------------------------------------------
-
 last4 : CyclicIndex side4
 last4 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
 
@@ -40,8 +36,7 @@ periodicWrapFibreEnergy :
 periodicWrapFibreEnergy field axis transverse =
   sq
     (field (insertAxis axis zeroᵢ transverse)
-    Data.Rational._-_
-    field (insertAxis axis last4 transverse))
+    - field (insertAxis axis last4 transverse))
 
 periodicWrapEnergy : Axis4 → SiteField side4 → ℚ
 periodicWrapEnergy axis field =
@@ -102,10 +97,6 @@ forwardDerivativeEnergyOpenPlusWrap axis field =
       (sumRationalAdd (physicalTransverseCoordinates side4)
         (physicalFibreEdgeEnergy field axis)
         (periodicWrapFibreEnergy field axis)))
-
-------------------------------------------------------------------------
--- Component and three-component decompositions.
-------------------------------------------------------------------------
 
 componentOpenDifferenceEnergy : ScalarBondField4 → ℚ
 componentOpenDifferenceEnergy field =
@@ -181,16 +172,25 @@ physicalPeriodicDifferenceOpenPlusWrap tangent =
           (componentScalarBondField tangent component2))
         (componentPeriodicDifferenceOpenPlusWrap
           (componentScalarBondField tangent component3))))
-    (ℚRing.solve-∀
-      (bondReferenceDifferenceEnergy (tangent component1))
-      (bondReferenceDifferenceEnergy (tangent component2))
-      (bondReferenceDifferenceEnergy (tangent component3))
-      (componentPeriodicWrapEnergy
-        (componentScalarBondField tangent component1))
-      (componentPeriodicWrapEnergy
-        (componentScalarBondField tangent component2))
-      (componentPeriodicWrapEnergy
-        (componentScalarBondField tangent component3)))
+    (trans
+      (cong₂ _+_
+        (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
+          (componentScalarBondField tangent component1))
+        (cong₂ _+_
+          (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
+            (componentScalarBondField tangent component2))
+          (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
+            (componentScalarBondField tangent component3))))
+      (ℚRing.solve-∀
+        (bondReferenceDifferenceEnergy (tangent component1))
+        (bondReferenceDifferenceEnergy (tangent component2))
+        (bondReferenceDifferenceEnergy (tangent component3))
+        (componentPeriodicWrapEnergy
+          (componentScalarBondField tangent component1))
+        (componentPeriodicWrapEnergy
+          (componentScalarBondField tangent component2))
+        (componentPeriodicWrapEnergy
+          (componentScalarBondField tangent component3))))
 
 hodgeRightHandSideMatchesPhysicalReferenceDifferenceEnergyPlusWrap : ∀ tangent →
   physicalPeriodicReferenceDifferenceEnergy tangent
