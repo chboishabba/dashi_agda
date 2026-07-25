@@ -13,6 +13,9 @@ open import DASHI.Physics.Closure.NSPeriodicConcreteOfficialOperatorNormAdapter 
 open import DASHI.Physics.Closure.NSPeriodicCanonicalRealAuthorities public
 open import DASHI.Physics.Closure.NSPeriodicGalerkinCoefficientFoldBridge public
 open import DASHI.Physics.Closure.NSPeriodicFiniteTriadPartition public
+open import DASHI.Physics.Closure.NSPeriodicNearCanonicalQuarterAdapter public
+open import DASHI.Physics.Closure.NSPeriodicFiniteWeightedSchurKernel public
+open import DASHI.Physics.Closure.NSPeriodicFarHighCanonicalEighthAdapter public
 open import DASHI.Physics.Closure.NSPeriodicNearTriadCutoffUniformCompletion public
 open import DASHI.Physics.Closure.NSPeriodicFarLowOfficialSchurCompletion public
 open import DASHI.Physics.Closure.NSPeriodicOfficialFarLowSchurAdapter public
