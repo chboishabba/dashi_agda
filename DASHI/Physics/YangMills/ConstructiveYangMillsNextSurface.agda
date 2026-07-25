@@ -25,6 +25,7 @@ import DASHI.Physics.YangMills.BalabanSU2AdjointRadiusSquared
 import DASHI.Physics.YangMills.BalabanSU2TransportTelescopingExact
 import DASHI.Physics.YangMills.BalabanSU2TransportPathNormBound
 import DASHI.Physics.YangMills.BalabanSU2RadialTrigAuthority
+import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact
 import DASHI.Physics.YangMills.BalabanUniformGreenNonlinearProduct
 import DASHI.Physics.YangMills.BalabanSeparatedUniformGreenNonlinearBounds
 import DASHI.Physics.YangMills.BalabanReferenceHodgeCoercivity
