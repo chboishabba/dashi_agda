@@ -1,9 +1,9 @@
 module DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 1ℚ; _+_; _-_; _*_)
+open import Data.Rational using (ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -13,10 +13,6 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 open import DASHI.Physics.YangMills.BalabanPath4PlaquetteOrientationExact
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
 open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
-
-------------------------------------------------------------------------
--- Scalar component energies.
-------------------------------------------------------------------------
 
 two : ℚ
 two = 1ℚ + 1ℚ
@@ -63,10 +59,6 @@ componentPeriodicDifferenceEnergy field =
     sumRational (allCyclicIndices four) (λ derivativeAxis →
       forwardDerivativeEnergy derivativeAxis (field componentAxis)))
 
-------------------------------------------------------------------------
--- Backward and forward diagonal energies agree by periodic reindexing.
-------------------------------------------------------------------------
-
 backwardDifferenceAsForwardAtBackward : ∀ axis field site →
   backwardDifference4 axis field site
   ≡ forwardDifference4 axis field (shiftBackward4 axis site)
@@ -84,10 +76,6 @@ forwardBackwardNormSqExact axis field =
         (backwardDifferenceAsForwardAtBackward axis field site)))
     (periodicBackwardReindexing axis
       (λ site → sq (forwardDifference4 axis field site)))
-
-------------------------------------------------------------------------
--- Expand each positive-plane square.
-------------------------------------------------------------------------
 
 siteSum4ThreeTerms : ∀ first second third →
   siteSum4 (λ site → first site + (second site + third site))
@@ -175,16 +163,24 @@ componentCurlEnergyExpansion field
         | positivePlaneSquareExpansion plane13 field
         | positivePlaneSquareExpansion plane23 field =
   ℚRing.solve-∀
-    (curlPlaneEnergy plane01 field)
-    (curlPlaneEnergy plane02 field)
-    (curlPlaneEnergy plane03 field)
-    (curlPlaneEnergy plane12 field)
-    (curlPlaneEnergy plane13 field)
-    (curlPlaneEnergy plane23 field)
-
-------------------------------------------------------------------------
--- Expand the four-axis divergence square into four diagonal and six mixed terms.
-------------------------------------------------------------------------
+    (forwardDerivativeEnergy axis0 (field axis1))
+    (forwardDerivativeEnergy axis1 (field axis0))
+    (mixedForwardEnergy axis0 axis1 (field axis0) (field axis1))
+    (forwardDerivativeEnergy axis0 (field axis2))
+    (forwardDerivativeEnergy axis2 (field axis0))
+    (mixedForwardEnergy axis0 axis2 (field axis0) (field axis2))
+    (forwardDerivativeEnergy axis0 (field axis3))
+    (forwardDerivativeEnergy axis3 (field axis0))
+    (mixedForwardEnergy axis0 axis3 (field axis0) (field axis3))
+    (forwardDerivativeEnergy axis1 (field axis2))
+    (forwardDerivativeEnergy axis2 (field axis1))
+    (mixedForwardEnergy axis1 axis2 (field axis1) (field axis2))
+    (forwardDerivativeEnergy axis1 (field axis3))
+    (forwardDerivativeEnergy axis3 (field axis1))
+    (mixedForwardEnergy axis1 axis3 (field axis1) (field axis3))
+    (forwardDerivativeEnergy axis2 (field axis3))
+    (forwardDerivativeEnergy axis3 (field axis2))
+    (mixedForwardEnergy axis2 axis3 (field axis2) (field axis3))
 
 siteSum4TenTerms : ∀ t0 t1 t2 t3 t4 t5 t6 t7 t8 t9 →
   siteSum4 (λ site →
@@ -280,10 +276,6 @@ componentDivergenceEnergyExpansion field =
                     * backwardDifference4 axis3 (field axis3) site))))))))))
         refl))
 
-------------------------------------------------------------------------
--- Explicit sixteen-term full difference fold.
-------------------------------------------------------------------------
-
 componentPeriodicDifferenceExpanded : ScalarBondField4 → ℚ
 componentPeriodicDifferenceExpanded field =
   forwardDerivativeEnergy axis0 (field axis0)
@@ -324,10 +316,6 @@ componentPeriodicDifferenceEnergyExpansion field =
     (forwardDerivativeEnergy axis1 (field axis3))
     (forwardDerivativeEnergy axis2 (field axis3))
     (forwardDerivativeEnergy axis3 (field axis3))
-
-------------------------------------------------------------------------
--- Component and three-component periodic Hodge identities.
-------------------------------------------------------------------------
 
 fourAxisDiagonalOffDiagonalPartition : ∀ field →
   componentCurlExpanded field + componentDivergenceExpanded field
