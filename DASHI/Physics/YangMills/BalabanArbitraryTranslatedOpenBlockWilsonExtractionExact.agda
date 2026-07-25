@@ -15,18 +15,9 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
 open import DASHI.Physics.YangMills.BalabanPath4PlaquetteOrientationExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
-open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact using
-  (shiftForward4)
+open import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
 open import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact
-open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact using
-  ( literalPlaquetteWilsonSecondVariation
-  ; literalPlaquetteWilsonSecondVariationExact
-  ; literalForwardDifferenceCurl
-  )
-
-------------------------------------------------------------------------
--- Concrete forward translation on an arbitrary nonempty cyclic carrier.
-------------------------------------------------------------------------
+open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact
 
 cyclicNext : ∀ {n} → CyclicIndex (suc n) → CyclicIndex (suc n)
 cyclicNext {zero} zeroᵢ = zeroᵢ
@@ -96,10 +87,6 @@ translateLocalSiteToGlobal
     (pair
       (iterateCyclicNext local2 origin2)
       (iterateCyclicNext local3 origin3))
-
-------------------------------------------------------------------------
--- Open plaquette bases use coordinates 0,1,2 in the two plaquette axes.
-------------------------------------------------------------------------
 
 openPlaquetteBaseSite :
   PositivePlaquettePlane4 → CyclicIndex three → CyclicIndex three →
@@ -176,10 +163,6 @@ translatedOpenPlaquetteSecondShift
 translatedOpenPlaquetteSecondShift
   (pair (pair o0 o1) (pair o2 o3)) plane23 first second t0 t1
   rewrite next4WeakenIndex second | iterateWeakenIndex second o3 = refl
-
-------------------------------------------------------------------------
--- Restriction and pointwise Wilson extraction.
-------------------------------------------------------------------------
 
 restrictGlobalTangentToTranslatedOpenBlock :
   ∀ {n} → GlobalSite4 n → GlobalSU2Tangent4 n → PhysicalSU2Tangent4
@@ -322,10 +305,6 @@ translatedOpenPlaquetteWilsonHessianExact
         (translateLocalSiteToGlobal origin base))))
   where
   base = openPlaquetteBaseSite plane first second t0 t1
-
-------------------------------------------------------------------------
--- Exact finite folds over six planes and all open plaquette bases.
-------------------------------------------------------------------------
 
 openPlaquetteFold :
   (PositivePlaquettePlane4 → PhysicalBlockL side4 → ℚ) → ℚ
