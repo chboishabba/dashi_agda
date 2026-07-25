@@ -144,6 +144,24 @@ farLowRowMajorantFoldStatusLevel = machineChecked
 farLowColumnMajorantFoldStatusLevel : ProofLevel
 farLowColumnMajorantFoldStatusLevel = machineChecked
 
+farLowEnergyPairingCancellationStatusLevel : ProofLevel
+farLowEnergyPairingCancellationStatusLevel = machineChecked
+
+farLowExactCommutatorIdentityStatusLevel : ProofLevel
+farLowExactCommutatorIdentityStatusLevel = machineChecked
+
+farLowMultiplierDifferenceKernelStatusLevel : ProofLevel
+farLowMultiplierDifferenceKernelStatusLevel = machineChecked
+
+farLowMultiplierDifferenceReductionStatusLevel : ProofLevel
+farLowMultiplierDifferenceReductionStatusLevel = machineChecked
+
+concreteSmoothDyadicProfileGradientStatusLevel : ProofLevel
+concreteSmoothDyadicProfileGradientStatusLevel = conditional
+
+cutoffUniformDifferenceKernelSchurStatusLevel : ProofLevel
+cutoffUniformDifferenceKernelSchurStatusLevel = conditional
+
 concreteFarHighPlacementsStatusLevel : ProofLevel
 concreteFarHighPlacementsStatusLevel = machineChecked
 
@@ -155,6 +173,39 @@ farHighFiniteTailStatusLevel = machineChecked
 
 farHighTailReindexingStatusLevel : ProofLevel
 farHighTailReindexingStatusLevel = machineChecked
+
+infinityShellModeCountStatusLevel : ProofLevel
+infinityShellModeCountStatusLevel = machineChecked
+
+infinityShellBernsteinReductionStatusLevel : ProofLevel
+infinityShellBernsteinReductionStatusLevel = machineChecked
+
+infinityShellDerivativeReductionStatusLevel : ProofLevel
+infinityShellDerivativeReductionStatusLevel = machineChecked
+
+farHighPlacementReductionStatusLevel : ProofLevel
+farHighPlacementReductionStatusLevel = machineChecked
+
+finiteFourierCauchySchwarzStatusLevel : ProofLevel
+finiteFourierCauchySchwarzStatusLevel = standardImported
+
+literalCubeModewiseDerivativeEstimateStatusLevel : ProofLevel
+literalCubeModewiseDerivativeEstimateStatusLevel = conditional
+
+farHighOfficialSobolevConversionStatusLevel : ProofLevel
+farHighOfficialSobolevConversionStatusLevel = conditional
+
+farHighStructuralConstantDerivationStatusLevel : ProofLevel
+farHighStructuralConstantDerivationStatusLevel = conditional
+
+firstExitSmallnessReductionStatusLevel : ProofLevel
+firstExitSmallnessReductionStatusLevel = machineChecked
+
+firstExitAdmissibleImpliesSmallStatusLevel : ProofLevel
+firstExitAdmissibleImpliesSmallStatusLevel = conditional
+
+geometricDepletionRejectionStatusLevel : ProofLevel
+geometricDepletionRejectionStatusLevel = machineChecked
 
 canonicalNearYoungAllocationStatusLevel : ProofLevel
 canonicalNearYoungAllocationStatusLevel = machineChecked
