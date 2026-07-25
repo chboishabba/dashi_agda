@@ -75,6 +75,21 @@ import DASHI.Physics.Closure.NSPeriodicObservableDerivativeBoundReduction
 import DASHI.Physics.Closure.NSPeriodicDiffuseLowHighSplit
 import DASHI.Physics.Closure.NSPeriodicChartFailureAnalyticRoutes
 import DASHI.Physics.Closure.NSPeriodicFixedShellFiniteRankConvergence
+import DASHI.Physics.Closure.NSPeriodicConcreteNearTriadSums
+import DASHI.Physics.Closure.NSPeriodicNearTriadClassification
+import DASHI.Physics.Closure.NSPeriodicNearTriadPartitionCorrectness
+import DASHI.Physics.Closure.NSPeriodicNearShellOverlapCount
+import DASHI.Physics.Closure.NSPeriodicNearConvolutionMultiplicity
+import DASHI.Physics.Closure.NSPeriodicFarLowSupportGeometry
+import DASHI.Physics.Closure.NSPeriodicConcreteFarLowKernel
+import DASHI.Physics.Closure.NSPeriodicFarLowKernelZeroExtension
+import DASHI.Physics.Closure.NSPeriodicFarLowShellIntersectionCount
+import DASHI.Physics.Closure.NSPeriodicFarLowRowMajorantFold
+import DASHI.Physics.Closure.NSPeriodicFarLowColumnMajorantFold
+import DASHI.Physics.Closure.NSPeriodicConcreteFarHighPlacements
+import DASHI.Physics.Closure.NSPeriodicFarHighShellSeparation
+import DASHI.Physics.Closure.NSPeriodicFarHighFiniteTail
+import DASHI.Physics.Closure.NSPeriodicFarHighTailReindexing
 
 officialNormGateRegression :
   allOfficialHarmonicInputsInhabited ≡ false
