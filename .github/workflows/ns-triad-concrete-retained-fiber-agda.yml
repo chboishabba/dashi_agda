@@ -1,0 +1,41 @@
+name: NS triad concrete retained fiber Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalRetainedAuthorities.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNClassFiniteFibers.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiberSource.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiber.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiber.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPairIncidenceRelation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNRetainedPositiveSectorKernelOperator.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNAdmissibleFourierTriadCarrier.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check concrete retained-fiber aggregate
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda
