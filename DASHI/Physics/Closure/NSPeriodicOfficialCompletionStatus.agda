@@ -111,6 +111,51 @@ finiteWeightedSchurKernelStatusLevel = machineChecked
 farHighCanonicalEighthAdapterStatusLevel : ProofLevel
 farHighCanonicalEighthAdapterStatusLevel = machineChecked
 
+concreteNearTriadSumsStatusLevel : ProofLevel
+concreteNearTriadSumsStatusLevel = machineChecked
+
+nearTriadClassificationStatusLevel : ProofLevel
+nearTriadClassificationStatusLevel = machineChecked
+
+nearTriadPartitionCorrectnessStatusLevel : ProofLevel
+nearTriadPartitionCorrectnessStatusLevel = machineChecked
+
+nearShellOverlapCountStatusLevel : ProofLevel
+nearShellOverlapCountStatusLevel = machineChecked
+
+nearConvolutionMultiplicityStatusLevel : ProofLevel
+nearConvolutionMultiplicityStatusLevel = machineChecked
+
+farLowSupportGeometryStatusLevel : ProofLevel
+farLowSupportGeometryStatusLevel = machineChecked
+
+concreteFarLowKernelStatusLevel : ProofLevel
+concreteFarLowKernelStatusLevel = machineChecked
+
+farLowKernelZeroExtensionStatusLevel : ProofLevel
+farLowKernelZeroExtensionStatusLevel = machineChecked
+
+farLowShellIntersectionCountStatusLevel : ProofLevel
+farLowShellIntersectionCountStatusLevel = machineChecked
+
+farLowRowMajorantFoldStatusLevel : ProofLevel
+farLowRowMajorantFoldStatusLevel = machineChecked
+
+farLowColumnMajorantFoldStatusLevel : ProofLevel
+farLowColumnMajorantFoldStatusLevel = machineChecked
+
+concreteFarHighPlacementsStatusLevel : ProofLevel
+concreteFarHighPlacementsStatusLevel = machineChecked
+
+farHighShellSeparationStatusLevel : ProofLevel
+farHighShellSeparationStatusLevel = machineChecked
+
+farHighFiniteTailStatusLevel : ProofLevel
+farHighFiniteTailStatusLevel = machineChecked
+
+farHighTailReindexingStatusLevel : ProofLevel
+farHighTailReindexingStatusLevel = machineChecked
+
 canonicalNearYoungAllocationStatusLevel : ProofLevel
 canonicalNearYoungAllocationStatusLevel = machineChecked
 
