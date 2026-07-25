@@ -1,0 +1,62 @@
+module DASHI.Physics.YangMills.BalabanPhysicalC1CompletionLedger where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicReindexingExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicHodgeExact
+import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact
+import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact
+import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicReferenceHodgeExact
+import DASHI.Physics.YangMills.BalabanPath4SU2LiteralGaugeFixedHessianAdapterExact
+import DASHI.Physics.YangMills.BalabanSU2WilsonGaugeNormalizationClosureExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
+
+literalSU2WilsonSecondJetLevel : ProofLevel
+literalSU2WilsonSecondJetLevel = machineChecked
+
+literalPhysicalPlaquetteLiftLevel : ProofLevel
+literalPhysicalPlaquetteLiftLevel = machineChecked
+
+configuredPeriodicReindexingLevel : ProofLevel
+configuredPeriodicReindexingLevel = machineChecked
+
+configuredPeriodicDivergenceAdjointLevel : ProofLevel
+configuredPeriodicDivergenceAdjointLevel = machineChecked
+
+configuredPeriodicHodgeCrossTermLevel : ProofLevel
+configuredPeriodicHodgeCrossTermLevel = machineChecked
+
+configuredPeriodicHodgeIdentityLevel : ProofLevel
+configuredPeriodicHodgeIdentityLevel = machineChecked
+
+literalWilsonGaugePeriodicDifferenceIdentityLevel : ProofLevel
+literalWilsonGaugePeriodicDifferenceIdentityLevel = machineChecked
+
+periodicOpenDifferenceSeamLevel : ProofLevel
+periodicOpenDifferenceSeamLevel = machineChecked
+
+literalPeriodicReferenceCoercivityLevel : ProofLevel
+literalPeriodicReferenceCoercivityLevel = machineChecked
+
+literalGaugeFixedHessianAdapterLevel : ProofLevel
+literalGaugeFixedHessianAdapterLevel = machineChecked
+
+configuredNormalizationClosureLevel : ProofLevel
+configuredNormalizationClosureLevel = machineChecked
+
+configuredSide4TranslatedWilsonExtractionLevel : ProofLevel
+configuredSide4TranslatedWilsonExtractionLevel = machineChecked
+
+-- The exact result above is for the configured periodic side-four carrier.
+-- The distinct theorem embedding an open side-four block in a larger torus owns
+-- a boundary/wrap chart and is not silently identified with this result.
+arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
+arbitraryLatticeOpenBlockWilsonExtractionLevel = conditional
+
+-- These proof levels describe the theorem terms in the branch.  An authoritative
+-- Agda invocation or GitHub Actions run remains a separate validation receipt.
+branchHeadAuthoritativeTypecheckLevel : ProofLevel
+branchHeadAuthoritativeTypecheckLevel = conditional
