@@ -30,10 +30,6 @@ physicalTangentAtSiteAxisAsLie3 tangent axis site =
     (physicalTangentComponent tangent component2 axis site)
     (physicalTangentComponent tangent component3 axis site)
 
-lie3Ext : ∀ {left right : Lie3} →
-  x left ≡ x right → y left ≡ y right → z left ≡ z right → left ≡ right
-lie3Ext {lie3 ax ay az} {lie3 .ax .ay .az} refl refl refl = refl
-
 ------------------------------------------------------------------------
 -- The four positively-oriented link values around one plaquette.
 ------------------------------------------------------------------------
