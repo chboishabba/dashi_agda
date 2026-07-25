@@ -12,10 +12,7 @@ open import DASHI.Physics.YangMills.BalabanPhysicalHaloOriginExact
 open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 import DASHI.Physics.YangMills.BalabanConfiguredSide4TranslatedWilsonExtractionExact
-
-------------------------------------------------------------------------
--- Translated blocks are represented in local relative coordinates.
-------------------------------------------------------------------------
+import DASHI.Physics.YangMills.BalabanArbitraryTranslatedOpenBlockWilsonExtractionExact
 
 TranslatedPhysicalSU2Tangent4 :
   ∀ {latticeSide : Nat} →
@@ -115,15 +112,18 @@ configuredSideTranslatedBlockCoercivityLevel = machineChecked
 configuredSideHaloMultiplicityLevel : ProofLevel
 configuredSideHaloMultiplicityLevel = machineChecked
 
--- The complete extraction is now proved for the configured periodic side-four
--- global carrier.  Embedding an open side-four block into a larger global torus
--- remains a different boundary-chart theorem.
 configuredPeriodicSide4GlobalWilsonToLocalTranslatedBlockLevel : ProofLevel
 configuredPeriodicSide4GlobalWilsonToLocalTranslatedBlockLevel = machineChecked
 
-arbitraryLatticeGlobalWilsonToLocalTranslatedBlockLevel : ProofLevel
-arbitraryLatticeGlobalWilsonToLocalTranslatedBlockLevel = conditional
+arbitraryLatticeOpenBlockWilsonExtractionLevel : ProofLevel
+arbitraryLatticeOpenBlockWilsonExtractionLevel = machineChecked
+
+-- This remaining adapter is specifically the equality between the repository's
+-- pre-existing SUNWilsonAction operator carrier and the concrete exact global
+-- jet fold.  It is no longer a geometric or Hodge calculation.
+repositorySUNWilsonActionHessianAdapterLevel : ProofLevel
+repositorySUNWilsonActionHessianAdapterLevel = conditional
 
 globalWilsonToLocalTranslatedBlockLevel : ProofLevel
 globalWilsonToLocalTranslatedBlockLevel =
-  arbitraryLatticeGlobalWilsonToLocalTranslatedBlockLevel
+  arbitraryLatticeOpenBlockWilsonExtractionLevel
