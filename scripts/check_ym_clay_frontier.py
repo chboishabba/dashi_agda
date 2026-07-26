@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Fail-closed textual audit for the explicit P1--P5 Yang--Mills frontier.
 
-This script is intentionally narrower than Agda kernel validation.  It checks
-that the exact reductions and the honest producer ledger remain present, and
-rejects postulates, holes, unsafe termination and underscore proof bodies in the
-new frontier modules.
+This script is intentionally narrower than Agda kernel validation. It checks
+that exact reductions and the honest producer ledger remain present, and rejects
+postulates, holes, unsafe termination and underscore proof bodies in the new
+frontier modules.
 """
 
 from __future__ import annotations
@@ -17,6 +17,14 @@ ROOT = Path(__file__).resolve().parents[1]
 YM = ROOT / "DASHI/Physics/YangMills"
 
 FILES: dict[Path, tuple[str, ...]] = {
+    YM / "BalabanConstructiveRationalMatrixInverseExact.agda": (
+        "matrixProductActionExact",
+        "matrixInverseLeftExact",
+        "matrixInverseRightExact",
+        "constructiveFiniteCoerciveInverse",
+        "configuredMatrixRepresentationProducerLevel = conditional",
+        "configuredGeneratedInverseProductProducerLevel = conditional",
+    ),
     YM / "BalabanSU2RationalAdjointRadiusExact.agda": (
         "adjointDisplacementWithUnitDefectExact",
         "adjointDisplacementUnitExact",
@@ -81,6 +89,7 @@ FILES: dict[Path, tuple[str, ...]] = {
         "p5NontrivialityProducerLevel = conditional",
     ),
     YM / "BalabanClayFrontierCompletionLedger.agda": (
+        "finiteMatrixProductAndInverseConsequenceLevel = machineChecked",
         "uniformOneSixtyFourthCoercivityLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
@@ -119,6 +128,7 @@ def main() -> None:
     aggregate = YM / "ConstructiveYangMillsNextSurface.agda"
     aggregate_text = aggregate.read_text(encoding="utf-8")
     for module in (
+        "BalabanConstructiveRationalMatrixInverseExact",
         "BalabanSU2RationalAdjointRadiusExact",
         "BalabanSU2RationalWilsonLargeFieldGapExact",
         "BalabanClayP1BackgroundStabilityExact",
@@ -133,8 +143,9 @@ def main() -> None:
             fail(f"aggregate does not import {module}")
 
     print(
-        "P1--P5 exact reductions, numerical budgets, endpoint surfaces, and "
-        "honest conditional producer ledger are present and hole-free."
+        "Constructive finite-matrix inverse algebra, P1--P5 exact reductions, "
+        "numerical budgets, endpoint surfaces, and honest conditional producer "
+        "ledger are present and hole-free."
     )
 
 
