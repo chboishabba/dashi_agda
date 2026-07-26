@@ -22,8 +22,12 @@ import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredGreenNormExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
+import DASHI.Physics.YangMills.BalabanClayP1PicardBackgroundConstructionExact
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact
+import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact
+import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact
+import DASHI.Physics.YangMills.BalabanClayP3PrincipalFibreCoordinatesExact
 import DASHI.Physics.YangMills.BalabanClayP4DyadicCoercivityBudgetExact
 import DASHI.Physics.YangMills.BalabanClayP4CommonParameterDomainExact
 import DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact
@@ -133,6 +137,34 @@ physicalClusteringScaleConversionLevel = machineChecked
 
 clusteringToSpectralGapAssemblyLevel : ProofLevel
 clusteringToSpectralGapAssemblyLevel = machineChecked
+
+------------------------------------------------------------------------
+-- New constructive producer-side advances.
+------------------------------------------------------------------------
+
+p1PicardBackgroundConstructionLevel : ProofLevel
+p1PicardBackgroundConstructionLevel = machineChecked
+
+p1PicardFixedPointUniquenessLevel : ProofLevel
+p1PicardFixedPointUniquenessLevel = machineChecked
+
+p2BadPathComponentConstructionLevel : ProofLevel
+p2BadPathComponentConstructionLevel = machineChecked
+
+p2BadComponentGaugeInvarianceLevel : ProofLevel
+p2BadComponentGaugeInvarianceLevel = machineChecked
+
+p3FiniteConstrainedPartitionLevel : ProofLevel
+p3FiniteConstrainedPartitionLevel = machineChecked
+
+p3FiniteEffectiveActionAdapterLevel : ProofLevel
+p3FiniteEffectiveActionAdapterLevel = machineChecked
+
+p3PrincipalFibreCoordinateConstructionLevel : ProofLevel
+p3PrincipalFibreCoordinateConstructionLevel = machineChecked
+
+p3CoordinateUniquenessDomainRepairLevel : ProofLevel
+p3CoordinateUniquenessDomainRepairLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- Genuine frontier producers still to be inhabited over the literal model.
