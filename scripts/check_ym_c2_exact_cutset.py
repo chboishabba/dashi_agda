@@ -48,6 +48,13 @@ FILES: dict[Path, tuple[str, ...]] = {
         "coarsePenaltyNormMatchesProjection",
         "coarsePenalizedCoercivity",
     ),
+    YM / "BalabanPath4SU2CoarsePenaltyExact.agda": (
+        "coarsePenaltyScalarDomination",
+        "fineFluctuationAverageZero",
+        "fineFluctuationHessianCoercivity",
+        "coarsePenalizedFluctuationCoercivity",
+        "coarsePenaltyScalarDominationLevel = machineChecked",
+    ),
     YM / "BalabanPath4SU2ConcretePropagatorExact.agda": (
         "configuredGaugeFixedMatrix",
         "configuredGaugeFixedMatrixPositive",
@@ -82,6 +89,13 @@ FILES: dict[Path, tuple[str, ...]] = {
         "allScaleCoercivity",
         "oneStepPolymerRGContraction",
     ),
+    YM / "BalabanPhysicalC2CompletionLedger.agda": (
+        "coarsePenaltyDominationLevel = machineChecked",
+        "finiteCoerciveInverseAuthorityLevel = standardImported",
+        "backgroundRelativeFormProducerLevel = conditional",
+        "largeFieldSuppressionProducerLevel = conditional",
+        "branchHeadAuthoritativeAgda29TypecheckLevel = conditional",
+    ),
 }
 
 FORBIDDEN_PATTERNS = (
@@ -114,19 +128,21 @@ def main() -> None:
     for module in (
         "BalabanPath4SU2ConcreteCoarseBlockExact",
         "BalabanPath4SU2CoarseFineSplittingExact",
+        "BalabanPath4SU2CoarsePenaltyExact",
         "BalabanPath4SU2ConcretePropagatorExact",
         "BalabanPath4SU2TranslatedCoarsePropagatorExact",
         "BalabanPath4SU2BackgroundStabilityExact",
         "BalabanC2SmallLargeAllScaleExact",
+        "BalabanPhysicalC2CompletionLedger",
     ):
         if module not in aggregate_text:
             fail(f"aggregate does not import {module}")
 
     print(
-        "Side-four average laws, concrete Q/Q*, coarse-fine Pythagoras, "
-        "constrained propagator assembly, translation compatibility, background "
-        "stability assembly, and all-scale coercivity induction are present and "
-        "hole-free."
+        "Side-four average laws, concrete Q/Q*, coarse-fine Pythagoras, exact "
+        "coarse-penalty domination, constrained propagator assembly, translation "
+        "compatibility, background stability assembly, and all-scale coercivity "
+        "induction are present and hole-free."
     )
 
 
