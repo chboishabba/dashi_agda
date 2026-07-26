@@ -12,6 +12,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNComplex3RealityPhaseAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3GalerkinEquationAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNResonantNullGain.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3NullGainBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitConstruction.agda",
     "DASHI/Physics/Closure/NSTriadKNPhaseFactorizationReduction.agda",
     "DASHI/Physics/Closure/NSTriadKNCoarseGainDiagnostics.agda",
