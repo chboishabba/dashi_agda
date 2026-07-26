@@ -313,13 +313,12 @@ record RunningCouplingRecursion (Scale Bound : Set) : Set₁ where
     LessEqual : Bound → Bound → Set
     Absolute : Bound → Bound
     remainderUpper : Scale → Bound
+    nextScale : Scale → Scale
 
     recursionExact : ∀ scale →
       inverseCouplingSq (nextScale scale)
       ≡ add (inverseCouplingSq scale)
           (add (betaLogBlocking scale) (remainder scale))
-
-    nextScale : Scale → Scale
 
     remainderControlled : ∀ scale →
       LessEqual (Absolute (remainder scale)) (remainderUpper scale)
