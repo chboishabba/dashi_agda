@@ -11,6 +11,7 @@ open import DASHI.Analysis.MarxPowerRuleNormalisation
 open import DASHI.Analysis.MarxReciprocalQuotientNormalisation
 open import DASHI.Analysis.MarxOrdinaryDerivativeBridge
 open import DASHI.Analysis.MarxHigherCalculus
+open import DASHI.Analysis.MarxFrechetProduct
 open import DASHI.Analysis.MarxExteriorIntegration
 open import DASHI.Governance.GeopoliticalDifferentialEvidence
 
@@ -252,6 +253,46 @@ terminalDirectionalIdentity :
   DirectionalDerivativeAt terminalFrechetIdentity tt ≡ tt
 terminalDirectionalIdentity = refl
 
+terminalBilinearProduct :
+  BilinearProduct terminalAlgebra terminalModule
+terminalBilinearProduct =
+  record
+    { product = λ _ _ → tt
+    ; productZeroLeft = λ _ → refl
+    ; productZeroRight = λ _ → refl
+    ; productAddLeft = λ _ _ _ → refl
+    ; productAddRight = λ _ _ _ → refl
+    ; productScaleLeft = λ _ _ _ → refl
+    ; productScaleRight = λ _ _ _ → refl
+    }
+
+terminalFrechetProductConstruction :
+  FrechetProductConstruction
+    terminalVectorLittleO
+    terminalBilinearProduct
+    terminalFrechetIdentity
+    terminalFrechetIdentity
+terminalFrechetProductConstruction =
+  record
+    { productLinear = linearIdentity terminalModule
+    ; productLinearPointwise = λ _ → refl
+    ; productRemainder = λ _ → tt
+    ; productExpansion = λ _ → refl
+    ; productRemainderLittleO = tt
+    }
+
+terminalFrechetProduct :
+  FrechetDerivativeAt
+    terminalVectorLittleO
+    (multiplyVectorFunctions terminalBilinearProduct (λ x → x) (λ x → x))
+    tt
+terminalFrechetProduct =
+  frechetProduct
+    terminalBilinearProduct
+    terminalFrechetIdentity
+    terminalFrechetIdentity
+    terminalFrechetProductConstruction
+
 ------------------------------------------------------------------------
 -- Genuine d²=0 target and finite integration regression.
 
@@ -263,9 +304,10 @@ terminalForms =
     ; asAlternatingMap = λ _ →
         record
           { evaluate = λ _ → tt
-          ; arityReceipt = ⊤
-          ; multilinearityReceipt = ⊤
-          ; alternatingReceipt = ⊤
+          ; acceptedArity = λ _ → ⊤
+          ; multilinearAdd = λ _ _ _ _ _ → refl
+          ; multilinearScale = λ _ _ _ _ _ → refl
+          ; alternatingAdjacent = λ _ _ _ _ → refl
           }
     }
 
