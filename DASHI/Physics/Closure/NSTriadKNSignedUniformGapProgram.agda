@@ -3,10 +3,8 @@ module DASHI.Physics.Closure.NSTriadKNSignedUniformGapProgram where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_; _-_)
-open import Data.Nat.Base using (_≤_; _<_)
-
-import DASHI.Physics.Closure.NSTriadKNCutoffUniformClasswiseEstimateProgram as Classwise
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Nat.Base using (_≤_; _<_; _∸_)
 
 ------------------------------------------------------------------------
 -- Exact signed operator and its symmetric part.
@@ -149,7 +147,7 @@ record UniformSignedSpectralGap
 
     baseConstant errorConstant delta : Nat
 
-    deltaMeaning : delta ≡ baseConstant - errorConstant
+    deltaMeaning : delta ≡ baseConstant ∸ errorConstant
     deltaPositive : 0 < delta
 
     baseCoercive : ∀ N state →
@@ -169,10 +167,10 @@ open UniformSignedSpectralGap public
 data GapRouteSelected : Set where
   viaPositiveMajorant viaSignedBlocks viaModifiedEnergy : GapRouteSelected
 
-record UniformGapPromotion : Set₁ where
+record UniformGapPromotion {c s : Level} : Set (lsuc (c ⊔ s)) where
   field
     selectedRoute : GapRouteSelected
-    gap : UniformSignedSpectralGap
+    gap : UniformSignedSpectralGap {c} {s}
     finiteExperimentsUsedOnlyForFalsification : Set
     noFiniteToUniformPromotion : Set
     noPositivePartEqualityAssumed : Set
