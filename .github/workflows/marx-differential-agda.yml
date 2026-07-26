@@ -19,9 +19,11 @@ on:
       - 'DASHI/Governance/TraumaExploitationDifferential.agda'
       - 'DASHI/Governance/TraumaExploitationAttractor.agda'
       - 'DASHI/Governance/GeopoliticalDifferentialEvidence.agda'
+      - 'DASHI/Governance/GeopoliticalGlobalPlayerCriterion.agda'
       - 'DASHI/Governance/IsraelCyberLegalStatusCandidate.agda'
       - 'Verification/JacobianCounterexampleKernel.agda'
       - 'DASHI/Algebra/Jacobian/InvertibilityStrata.agda'
+      - 'scripts/check_marx_differential_completion.py'
       - '.github/workflows/marx-differential-agda.yml'
   workflow_dispatch:
 
@@ -30,6 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Run fail-closed source audit
+        run: python3 scripts/check_marx_differential_completion.py
       - uses: cachix/install-nix-action@v31
       - name: Typecheck focused bundle
         run: |
