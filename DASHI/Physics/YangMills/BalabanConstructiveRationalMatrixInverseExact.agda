@@ -1,8 +1,8 @@
 module DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational using (ℚ; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -11,7 +11,6 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational; sumRationalCong; sumRationalScale)
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
   (sumSwap)
-import DASHI.Physics.YangMills.BalabanFiniteCoerciveGreen as Green
 
 ------------------------------------------------------------------------
 -- Generic finite rational coordinates and matrices.
@@ -28,8 +27,7 @@ record FiniteRationalCoordinates (Index : Set) : Set₁ where
     coordinates : List Index
     delta : Index → Index → ℚ
 
-    -- The concrete coordinate enumerator must establish the Kronecker action.
-    -- This avoids assuming decidable equality or function extensionality here.
+    -- The concrete coordinate enumerator establishes the Kronecker action.
     deltaActsAsIdentity : ∀ vector row →
       sumRational coordinates (λ column → delta row column * vector column)
       ≡ vector row
@@ -198,9 +196,13 @@ matrixInverseRightExact {carrier = carrier} {operatorMatrix = operatorMatrix}
       (deltaActsAsIdentity carrier vector row))
 
 ------------------------------------------------------------------------
--- Adapter to the repository Green interface.  Once the literal configured
--- operator is identified with a finite rational matrix and its generated inverse
--- products are checked, no external coercive-inverse theorem is needed.
+-- Constructive pointwise Green certificate.
+--
+-- Propositional equality of arbitrary function-valued vectors would require an
+-- extensionality principle.  The actual analytic content is pointwise equality,
+-- so this interface records exactly that and does not assume function
+-- extensionality.  Downstream finite carriers can use a record representation if
+-- propositional vector equality is required.
 ------------------------------------------------------------------------
 
 record ConstructiveMatrixGreenData (Index : Set) : Set₁ where
@@ -208,12 +210,6 @@ record ConstructiveMatrixGreenData (Index : Set) : Set₁ where
     carrier : FiniteRationalCoordinates Index
     operatorMatrix : RationalMatrix Index
     inverseCertificate : RationalMatrixInverseCertificate carrier operatorMatrix
-
-    -- This is not an axiom: a concrete finite vector record must prove its own
-    -- extensional equality eliminator.  Keeping it in the producer prevents the
-    -- generic module from postulating function extensionality.
-    vectorExtensional : ∀ {left right : RationalVector Index} →
-      (∀ coordinate → left coordinate ≡ right coordinate) → left ≡ right
 
     inner : RationalVector Index → RationalVector Index → ℚ
     vectorNorm energy : RationalVector Index → ℚ
@@ -234,39 +230,35 @@ record ConstructiveMatrixGreenData (Index : Set) : Set₁ where
 
 open ConstructiveMatrixGreenData public
 
-matrixOperatorData :
-  ∀ {Index} → ConstructiveMatrixGreenData Index →
-  Green.CoerciveFiniteOperator (RationalVector Index) ℚ ℚ
-matrixOperatorData dataSet = record
-  { Green.operator = applyMatrix (carrier dataSet) (operatorMatrix dataSet)
-  ; Green.inner = inner dataSet
-  ; Green.vectorNorm = vectorNorm dataSet
-  ; Green.energy = energy dataSet
-  ; Green.coercivityConstant = coercivityConstant dataSet
-  ; Green.LessEqual = _≤_
-  ; Green.Positive = Positive dataSet
-  ; Green.positiveCoercivity = positiveCoercivity dataSet
-  ; Green.energyDefinition = energyDefinition dataSet
-  ; Green.Coercive = Coercive dataSet
-  ; Green.coercive = coercive dataSet
-  }
+record ConstructiveFiniteGreenCertificate (Index : Set) : Set₁ where
+  field
+    operator inverse : RationalVector Index → RationalVector Index
+    inverseLeftPointwise : ∀ vector coordinate →
+      inverse (operator vector) coordinate ≡ vector coordinate
+    inverseRightPointwise : ∀ vector coordinate →
+      operator (inverse vector) coordinate ≡ vector coordinate
+    norm : RationalVector Index → ℚ
+    reciprocalBound : ℚ
+    inverseBound : ∀ vector →
+      norm (inverse vector) ≤ reciprocalBound * norm vector
 
-constructiveFiniteCoerciveInverse :
+open ConstructiveFiniteGreenCertificate public
+
+constructiveFiniteGreen :
   ∀ {Index} (dataSet : ConstructiveMatrixGreenData Index) →
-  Green.FiniteCoerciveInverseAuthority (matrixOperatorData dataSet)
-constructiveFiniteCoerciveInverse dataSet = record
-  { Green.inverse = applyMatrix
+  ConstructiveFiniteGreenCertificate Index
+constructiveFiniteGreen dataSet = record
+  { operator = applyMatrix (carrier dataSet) (operatorMatrix dataSet)
+  ; inverse = applyMatrix
       (carrier dataSet)
       (inverseMatrix (inverseCertificate dataSet))
-  ; Green.inverseLeft = λ vector →
-      vectorExtensional dataSet
-        (matrixInverseLeftExact (inverseCertificate dataSet) vector)
-  ; Green.inverseRight = λ vector →
-      vectorExtensional dataSet
-        (matrixInverseRightExact (inverseCertificate dataSet) vector)
-  ; Green.reciprocalCoercivity = reciprocalCoercivity dataSet
-  ; Green.multiplyBound = _*_
-  ; Green.inverseNormBound = inverseNormBound dataSet
+  ; inverseLeftPointwise =
+      matrixInverseLeftExact (inverseCertificate dataSet)
+  ; inverseRightPointwise =
+      matrixInverseRightExact (inverseCertificate dataSet)
+  ; norm = vectorNorm dataSet
+  ; reciprocalBound = reciprocalCoercivity dataSet
+  ; inverseBound = inverseNormBound dataSet
   }
 
 finiteMatrixProductActionLevel : ProofLevel
@@ -274,6 +266,9 @@ finiteMatrixProductActionLevel = machineChecked
 
 finiteMatrixInverseConsequenceLevel : ProofLevel
 finiteMatrixInverseConsequenceLevel = machineChecked
+
+constructivePointwiseGreenAssemblyLevel : ProofLevel
+constructivePointwiseGreenAssemblyLevel = machineChecked
 
 configuredMatrixRepresentationProducerLevel : ProofLevel
 configuredMatrixRepresentationProducerLevel = conditional
