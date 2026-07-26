@@ -17,13 +17,28 @@ ROOT = Path(__file__).resolve().parents[1]
 YM = ROOT / "DASHI/Physics/YangMills"
 
 FILES: dict[Path, tuple[str, ...]] = {
+    YM / "BalabanFiniteEnumerationDistinctExact.agda": (
+        "zeroNotInSucMapGeneric",
+        "zeroNotInSucMap",
+        "allCyclicIndicesDuplicateFree",
+        "cyclicZeroNotInSuccessorMapLevel = machineChecked",
+    ),
     YM / "BalabanConstructiveRationalMatrixInverseExact.agda": (
         "matrixProductActionExact",
         "matrixInverseLeftExact",
         "matrixInverseRightExact",
-        "constructiveFiniteCoerciveInverse",
+        "constructiveFiniteGreen",
+        "constructivePointwiseGreenAssemblyLevel = machineChecked",
         "configuredMatrixRepresentationProducerLevel = conditional",
         "configuredGeneratedInverseProductProducerLevel = conditional",
+    ),
+    YM / "BalabanPath4SU2RationalMatrixCoordinatesExact.agda": (
+        "deltaSumIdentity",
+        "physicalCoordinateElementsDuplicateFree",
+        "physicalFiniteRationalCoordinates",
+        "tangentCoordinateRoundTripPointwise",
+        "configuredGaugeFixedOperatorMatrix",
+        "configuredMatrixActionLinearityProducerLevel = conditional",
     ),
     YM / "BalabanSU2RationalAdjointRadiusExact.agda": (
         "adjointDisplacementWithUnitDefectExact",
@@ -90,11 +105,14 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
     YM / "BalabanClayFrontierCompletionLedger.agda": (
         "finiteMatrixProductAndInverseConsequenceLevel = machineChecked",
+        "physicalCoordinateEnumerationAndDeltaLevel = machineChecked",
+        "configuredGaugeFixedMatrixDefinitionLevel = machineChecked",
         "uniformOneSixtyFourthCoercivityLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
         "p3ConstructiveSchurComplementPropagatorLevel = conditional",
         "p5ContinuumOSAndNontrivialityLevel = conditional",
+        "configuredMatrixActionLinearityLevel = conditional",
         "constructiveConfiguredFiniteInverseLevel = conditional",
         "branchHeadAuthoritativeAgda29TypecheckLevel = conditional",
     ),
@@ -142,10 +160,16 @@ def main() -> None:
         if module not in aggregate_text:
             fail(f"aggregate does not import {module}")
 
+    ledger = YM / "BalabanClayFrontierCompletionLedger.agda"
+    ledger_text = ledger.read_text(encoding="utf-8")
+    if "BalabanPath4SU2RationalMatrixCoordinatesExact" not in ledger_text:
+        fail("frontier ledger does not import the literal matrix coordinate carrier")
+
     print(
-        "Constructive finite-matrix inverse algebra, P1--P5 exact reductions, "
-        "numerical budgets, endpoint surfaces, and honest conditional producer "
-        "ledger are present and hole-free."
+        "Constructive finite-matrix inverse algebra, literal physical matrix "
+        "coordinates, P1--P5 exact reductions, numerical budgets, endpoint "
+        "surfaces, and honest conditional producer ledger are present and "
+        "hole-free."
     )
 
 
