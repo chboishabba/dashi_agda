@@ -4,7 +4,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
-open import Data.List.Base using (List)
 
 open import DASHI.Analysis.MarxDifferentialCore
 open import DASHI.Analysis.MarxPolynomialDifferential
@@ -68,8 +67,7 @@ terminalPowerTwoReceipt :
 terminalPowerTwoReceipt = powerFactorisation (suc (suc zero))
 
 ------------------------------------------------------------------------
--- Power normalisation is now constructed from algebra laws rather than filled
--- by an ad hoc record.
+-- Power normalisation constructed from algebra laws.
 
 terminalPowerAlgebraLaws : MarxPowerAlgebraLaws terminalAlgebra
 terminalPowerAlgebraLaws =
@@ -127,8 +125,9 @@ terminalReciprocalLaws =
     ; reciprocalDiagonalNormalisation = λ _ _ _ → refl
     }
 
-terminalEverywhereNonzero : ∀ _ → Nonzero terminalReciprocalLaws tt
-terminalEverywhereNonzero _ = tt
+terminalEverywhereNonzero :
+  (x : ⊤) → Nonzero terminalReciprocalLaws x
+terminalEverywhereNonzero x = tt
 
 terminalReciprocalReceipt :
   MarxFactorisation terminalAlgebra
