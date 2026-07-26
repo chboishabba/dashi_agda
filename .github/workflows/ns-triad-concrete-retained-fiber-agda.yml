@@ -7,6 +7,7 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
       - 'scripts/ns_triad_signed_frontier_lab.py'
+      - 'scripts/check_ns_triad_completion_identities.py'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -16,6 +17,7 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKN*.agda'
       - 'scripts/ns_triad_signed_frontier_lab.py'
+      - 'scripts/check_ns_triad_completion_identities.py'
       - 'scripts/check_ns_triad_clay_frontier.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
@@ -46,6 +48,11 @@ jobs:
         run: >-
           python3 scripts/ns_triad_signed_frontier_lab.py
           --cutoff 1 --overlap 3 --verify
+
+      - name: Verify exact null, orbit, and shell identities
+        run: >-
+          python3 scripts/check_ns_triad_completion_identities.py
+          --cutoff 3 --separation 3
 
       - name: Type-check complete physical Stage3 frontier
         run: >-
