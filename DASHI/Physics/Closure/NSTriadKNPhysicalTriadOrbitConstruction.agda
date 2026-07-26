@@ -11,7 +11,7 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 
 ------------------------------------------------------------------------
--- Exact group laws for Z^3, used to build the three energy-transfer legs.
+-- Exact group laws for Z^3, used to build the energy-transfer orbits.
 ------------------------------------------------------------------------
 
 modeExt :
@@ -65,6 +65,35 @@ addNegateLeft (Z3.mode px py pz) (Z3.mode qx qy qz) =
       b
     ∎
     where open ≡-Reasoning
+
+addNegatedSum :
+  ∀ p q →
+  Z3.addMode p (Z3.negateMode (Z3.addMode p q))
+  ≡ Z3.negateMode q
+addNegatedSum (Z3.mode px py pz) (Z3.mode qx qy qz) =
+  modeExt
+    (cancel px qx)
+    (cancel py qy)
+    (cancel pz qz)
+  where
+  cancel : ∀ a b → a + (- (a + b)) ≡ - b
+  cancel a b =
+    begin
+      a + (- (a + b))
+    ≡⟨ cong (a +_) (Int.neg-distrib-+ a b) ⟩
+      a + ((- a) + (- b))
+    ≡⟨ Int.+-assoc a (- a) (- b) ⟨
+      (a + (- a)) + (- b)
+    ≡⟨ cong (_+ (- b)) (Int.+-inverseʳ a) ⟩
+      (+ 0) + (- b)
+    ≡⟨ Int.+-identityˡ (- b) ⟩
+      - b
+    ∎
+    where open ≡-Reasoning
+
+------------------------------------------------------------------------
+-- Three-leg orbit for the symmetrised ordered-pair transfer.
+------------------------------------------------------------------------
 
 pEnergyLeg :
   Physical.PhysicalTriadIncidence →
@@ -127,6 +156,46 @@ qEnergyLegSecondInput τ = refl
 qEnergyLegOutput :
   ∀ τ → Physical.k (qEnergyLeg τ) ≡ Physical.q τ
 qEnergyLegOutput τ = refl
+
+------------------------------------------------------------------------
+-- Reality-paired mate for one ordered placement.
+--
+-- (p,q -> k) is paired with (p,-k -> -q).
+------------------------------------------------------------------------
+
+orderedRealityMate :
+  Physical.PhysicalTriadIncidence →
+  Physical.PhysicalTriadIncidence
+orderedRealityMate τ =
+  Physical.physicalTriad
+    (Physical.p τ)
+    (Z3.negateMode (Physical.k τ))
+    (Z3.negateMode (Physical.q τ))
+    proof
+  where
+  proof :
+    Z3.addMode
+      (Physical.p τ)
+      (Z3.negateMode (Physical.k τ))
+    ≡ Z3.negateMode (Physical.q τ)
+  proof rewrite sym (Physical.resonance τ) =
+    addNegatedSum (Physical.p τ) (Physical.q τ)
+
+orderedRealityMateFirstInput :
+  ∀ τ → Physical.p (orderedRealityMate τ) ≡ Physical.p τ
+orderedRealityMateFirstInput τ = refl
+
+orderedRealityMateSecondInput :
+  ∀ τ →
+  Physical.q (orderedRealityMate τ)
+  ≡ Z3.negateMode (Physical.k τ)
+orderedRealityMateSecondInput τ = refl
+
+orderedRealityMateOutput :
+  ∀ τ →
+  Physical.k (orderedRealityMate τ)
+  ≡ Z3.negateMode (Physical.q τ)
+orderedRealityMateOutput τ = refl
 
 physicalTriadEnergyOrbitConstructed : Bool
 physicalTriadEnergyOrbitConstructed = true
