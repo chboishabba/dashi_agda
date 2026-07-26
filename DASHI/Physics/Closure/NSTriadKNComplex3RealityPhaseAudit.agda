@@ -24,10 +24,10 @@ DivergenceFreeCondition :
   ∀ {r} {F : C3.RealField r} →
   C3.IntegerEmbedding F →
   (Z3.FourierMode → C3.Complex3 F) → Set r
-DivergenceFreeCondition E state =
+DivergenceFreeCondition {F = F} E state =
   ∀ k →
   C3.bilinearDot3 (state k) (C3.modeVector E k)
-  ≡ C3.complexZero _
+  ≡ C3.complexZero F
 
 record CorrectComplex3RealityLaws
     {r : Level}
@@ -244,6 +244,13 @@ orderedSignedTransferAt {F = F} E I τ velocity =
     (velocity (Physical.q τ))
     (velocity (Physical.k τ))
 
+signedTransferAt :
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E) →
+  Physical.PhysicalTriadIncidence →
+  (Z3.FourierMode → C3.Complex3 F) →
+  C3.Complex F
 signedTransferAt = orderedSignedTransferAt
 
 orderedPairSignedTransferAt :
