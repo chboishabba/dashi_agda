@@ -10,6 +10,15 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiberSource.agda'
       - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiber.agda'
       - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiber.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadEnumeration.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleTrichotomy.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalStage3Allocation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleStage3Compatibility.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassEncoding.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassWeightEnvelopes.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNExactPhysicalKernelIdentification.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalSpectralFrontier.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda'
       - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda'
       - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
   pull_request:
@@ -19,6 +28,15 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiberSource.agda'
       - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiber.agda'
       - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiber.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadEnumeration.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleTrichotomy.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalStage3Allocation.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleStage3Compatibility.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassEncoding.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassWeightEnvelopes.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNExactPhysicalKernelIdentification.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalSpectralFrontier.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda'
       - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPairIncidenceRelation.agda'
       - 'DASHI/Physics/Closure/NSTriadKNRetainedPositiveSectorKernelOperator.agda'
@@ -45,7 +63,7 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
 
-      - name: Type-check concrete retained-fiber aggregate
+      - name: Type-check concrete physical Stage3 aggregate
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
