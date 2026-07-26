@@ -54,7 +54,13 @@ student ecology / feedback hypervoxel
   → evidence return
 ```
 
-The machine scales a human coding frame. It does not remove interpretation or directly observe engagement truth.
+The machine scales a human coding frame. It does not remove interpretation or directly observe engagement truth. The `HumanCodingMachineCompilationBridge` records the common architecture shared by manual qualitative coding and supervised classification:
+
+```text
+text + coding frame + interpreter → categorised-meaning candidate
+```
+
+Repeatability is useful, but it does not make the coding frame neutral or turn the predicted category into latent student meaning.
 
 ## Main residual vector
 
@@ -106,7 +112,7 @@ Group differences remain aggregate candidate surfaces and cannot be projected in
 
 ## Longitudinal lift
 
-The paper’s training-semester to later-testing-semester structure is retained as a weak transfer surface. Stronger trajectory or intervention claims require repeated measurements, comparable cohorts, implementation receipts, student interpretation, confound audit, and replication.
+The paper’s training-semester to later-testing-semester structure is retained as a weak transfer surface. The formalisation does not invent matched longitudinal OEF vectors where the paper does not report them. Stronger trajectory or intervention claims require repeated measurements, comparable cohorts, implementation receipts, student interpretation, confound audit, and replication.
 
 ## Pedagogical +1 routing
 
@@ -115,11 +121,13 @@ AI output may route attention toward possible support handles, including clearer
 ## Modules
 
 - `DASHI/Biology/OEFMultiFibreFeedbackHyperfabric.agda`
+- `DASHI/Biology/HumanCodingMachineCompilationBridge.agda`
 - `DASHI/Biology/OEFOverlapAnalytics.agda`
 - `DASHI/Biology/FeedbackNonResponseGovernance.agda`
 - `DASHI/Biology/IntersectionalFeedbackPrivacyBoundary.agda`
 - `DASHI/Biology/LongitudinalEngagementTrajectory.agda`
 - `DASHI/Biology/PedagogicalJPlusOneRouting.agda`
 - `DASHI/Biology/OEFAIFeedbackFormalisation.agda`
+- `DASHI/Biology/OEFAIFeedbackFormalisationFull.agda`
 
-The aggregate module also binds the new source-specific layer to the existing `StudentEngagementEvidenceBridge` and `EducationBodyMemoryBridge` formalisms.
+`DASHI/Biology/Everything.agda` imports the full module packet. The aggregate modules also bind the new source-specific layer to the existing `StudentEngagementEvidenceBridge` and `EducationBodyMemoryBridge` formalisms.
