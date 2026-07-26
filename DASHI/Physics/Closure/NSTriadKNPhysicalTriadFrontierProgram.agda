@@ -19,15 +19,20 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --     real-field law package;
 --   * bilinear and Hermitian products, conjugation, integer wavevectors and
 --     the literal Leray formula;
+--   * exact Leray self-adjointness and removal from transverse tests;
 --   * instantiation of the exact signed velocity-form coefficient on C^3;
 --   * proof that the physical coefficient is intrinsically frame-free;
 --   * exact resonant null identities u_p·q = u_p·k and u_q·p = u_q·k;
 --   * the concrete C^3 bridge for those null identities;
 --   * corrected ordered-reality and symmetrised-three-leg cancellation orbits;
+--   * concrete C^3 ordered-reality cancellation and exact three-leg energy
+--     cancellation, proved from resonance, reality and transversality;
 --   * exact assembly of three-leg conservation from ordered-pair cancellation
 --     and conjugation invariance;
 --   * reduction of the phase formula to sesquilinear scalar algebra;
 --   * exact output-indexed projected Galerkin sums and factor/orbit audits;
+--   * coefficient-exact finite trigonometric differentiation, Laplacian,
+--     product-to-convolution and projected physical/Fourier equivalence;
 --   * executable coarse FT/transition/adversarial diagnostics;
 --   * a quantitative refinement carrier recording scale, angle,
 --     polarisation, cancellation orbit and multiplicity gains;
@@ -46,9 +51,6 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 -- an authority record:
 --   * optional globally normalised coordinates if phase/polarisation analysis
 --     needs them; the physical operator itself no longer depends on this;
---   * scalar/vector distributivity instances for the phase and null bridges;
---   * concrete ordered reality-pair cancellation after Leray removal;
---   * physical-space/Fourier projected-equation equivalence;
 --   * concrete cutoff-independent FT/transition/adversarial constants on a
 --     normalised, state-dependent, signed or modified-energy operator;
 --   * a strict numerical comparison with the dissipative base constant;
@@ -74,6 +76,7 @@ open import DASHI.Physics.Closure.NSTriadKNConcreteCoarseStage3Geometry public
 
 open import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient public
 open import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier public
+open import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra public
 open import DASHI.Physics.Closure.NSTriadKNFrameFreeCoefficientRoute public
 open import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit public
 open import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit public
@@ -81,7 +84,10 @@ open import DASHI.Physics.Closure.NSTriadKNPositivePartCancellationNoGo public
 open import DASHI.Physics.Closure.NSTriadKNResonantNullGain public
 open import DASHI.Physics.Closure.NSTriadKNComplex3NullGainBridge public
 open import DASHI.Physics.Closure.NSTriadKNEnergyCancellationAssembly public
+open import DASHI.Physics.Closure.NSTriadKNComplex3OrderedRealityCancellation public
+open import DASHI.Physics.Closure.NSTriadKNComplex3EnergyCancellation public
 open import DASHI.Physics.Closure.NSTriadKNPhaseFactorizationReduction public
+open import DASHI.Physics.Closure.NSTriadKNFiniteTrigonometricGalerkinEquivalence public
 
 open import DASHI.Physics.Closure.NSTriadKNCoarseGainDiagnostics public
 open import DASHI.Physics.Closure.NSTriadKNRefinedQuantitativeClassification public

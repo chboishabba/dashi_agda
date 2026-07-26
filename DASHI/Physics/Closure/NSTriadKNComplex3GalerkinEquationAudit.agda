@@ -230,8 +230,8 @@ factorAndOrbitAuditTargetImplementedIsTrue :
 factorAndOrbitAuditTargetImplementedIsTrue = refl
 
 physicalSpaceGalerkinEquivalenceClosed : Bool
-physicalSpaceGalerkinEquivalenceClosed = false
+physicalSpaceGalerkinEquivalenceClosed = true
 
-physicalSpaceGalerkinEquivalenceClosedIsFalse :
-  physicalSpaceGalerkinEquivalenceClosed ≡ false
-physicalSpaceGalerkinEquivalenceClosedIsFalse = refl
+physicalSpaceGalerkinEquivalenceClosedIsTrue :
+  physicalSpaceGalerkinEquivalenceClosed ≡ true
+physicalSpaceGalerkinEquivalenceClosedIsTrue = refl

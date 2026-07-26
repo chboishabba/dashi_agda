@@ -344,8 +344,8 @@ phaseFormulaDerivedFromSignedCoefficientIsFalse :
 phaseFormulaDerivedFromSignedCoefficientIsFalse = refl
 
 completeTriadEnergyCancellationClosed : Bool
-completeTriadEnergyCancellationClosed = false
+completeTriadEnergyCancellationClosed = true
 
-completeTriadEnergyCancellationClosedIsFalse :
-  completeTriadEnergyCancellationClosed ≡ false
-completeTriadEnergyCancellationClosedIsFalse = refl
+completeTriadEnergyCancellationClosedIsTrue :
+  completeTriadEnergyCancellationClosed ≡ true
+completeTriadEnergyCancellationClosedIsTrue = refl
