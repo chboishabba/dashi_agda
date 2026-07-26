@@ -25,14 +25,25 @@ record FiniteComplex3GalerkinSystem
     modes : List Z3.FourierMode
     triads : List Physical.PhysicalTriadIncidence
 
+    -- Exact output-indexed resonant list.  This avoids summing a triad into a
+    -- target different from its proved physical output.
+    triadsAt : Z3.FourierMode → List Physical.PhysicalTriadIncidence
+    triadsAtOutputAgreement : ∀ k τ →
+      RelationMember τ (triadsAt k) → Physical.k τ ≡ k
+
     velocity : Z3.FourierMode → C3.Complex3 F
     viscosity : C3.Carrier F
 
     modeListed : Z3.FourierMode → Set
     triadListed : Physical.PhysicalTriadIncidence → Set
+    RelationMember :
+      Physical.PhysicalTriadIncidence →
+      List Physical.PhysicalTriadIncidence → Set
 
     modesAreLiteralCutoff : Set
     triadsAreLiteralResonances : Set
+    triadsAtComplete : Set
+    triadsAtDuplicateFree : Set
     zeroModeExcluded : Set
     realityClosed : Set
 
@@ -54,18 +65,14 @@ mapTriadTerms :
   List (C3.Complex3 F)
 mapTriadTerms system k [] = []
 mapTriadTerms {F = F} {E} {I} system k (τ ∷ rest) =
-  term ∷ mapTriadTerms system k rest
-  where
-  L = C3.complex3VelocityGalerkinLaws F E I
-
-  term : C3.Complex3 F
-  term =
-    Signed.orderedVelocityInteraction L
-      k
-      (Physical.p τ)
-      (Physical.q τ)
-      (velocity system (Physical.p τ))
-      (velocity system (Physical.q τ))
+  Signed.orderedVelocityInteraction
+    (C3.complex3VelocityGalerkinLaws F E I)
+    k
+    (Physical.p τ)
+    (Physical.q τ)
+    (velocity system (Physical.p τ))
+    (velocity system (Physical.q τ))
+  ∷ mapTriadTerms system k rest
 
 projectedNonlinearity :
   ∀ {r} {F : C3.RealField r}
@@ -74,7 +81,7 @@ projectedNonlinearity :
   FiniteComplex3GalerkinSystem F E I →
   Z3.FourierMode → C3.Complex3 F
 projectedNonlinearity system k =
-  sumVectors (mapTriadTerms system k (triads system))
+  sumVectors (mapTriadTerms system k (triadsAt system k))
 
 ------------------------------------------------------------------------
 -- Ordered versus symmetrised conventions.
