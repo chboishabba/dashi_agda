@@ -1,9 +1,9 @@
 module DASHI.Physics.Closure.NSTriadKNCoarseGainDiagnostics where
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false; if_then_else_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalStage3Allocation as Allocation
@@ -28,7 +28,7 @@ maximumNat : List Nat → Nat
 maximumNat [] = zero
 maximumNat (x ∷ xs) = maxNat x (maximumNat xs)
 
-record CoarseGainDiagnosticInputs {i p : Level} : Set (lsuc (i Agda.Primitive.⊔ p)) where
+record CoarseGainDiagnosticInputs {i p : Level} : Set (lsuc (i ⊔ p)) where
   field
     Index : Set i
     PhysicalIncidence : Set p
