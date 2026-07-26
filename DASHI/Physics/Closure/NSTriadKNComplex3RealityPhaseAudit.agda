@@ -3,7 +3,6 @@ module DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit where
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -29,10 +28,6 @@ record CorrectComplex3RealityLaws
     (E : C3.IntegerEmbedding F)
     (I : C3.ModeInverseSquare F E) : Set (lsuc r) where
   field
-    waveVectorNegation : ∀ k →
-      C3.modeVector E (Z3.negateMode k)
-      ≡ C3.complex3Negate (C3.modeVector E k)
-
     inverseNormEven : ∀ k →
       C3.inverseNormSquared I (Z3.negateMode k)
       ≡ C3.inverseNormSquared I k
@@ -46,6 +41,22 @@ record CorrectComplex3RealityLaws
       ≡ C3.complex3Conjugate (C3.lerayProject3 E I k value)
 
 open CorrectComplex3RealityLaws public
+
+waveVectorNegationClosed :
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (k : Z3.FourierMode) →
+  C3.modeVector E (Z3.negateMode k)
+  ≡ C3.complex3Negate (C3.modeVector E k)
+waveVectorNegationClosed = C3.modeVectorNegation
+
+waveVectorConjugationClosed :
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (k : Z3.FourierMode) →
+  C3.complex3Conjugate (C3.modeVector E k)
+  ≡ C3.modeVector E k
+waveVectorConjugationClosed = C3.modeVectorConjugate
 
 record FiniteGalerkinRealityPreservation
     {r : Level}
@@ -126,9 +137,6 @@ open RealityCompatibleFrameFamily public
 
 ------------------------------------------------------------------------
 -- Phase coordinates without an undefined phase at zero amplitude.
---
--- The unit phase is only required when amplitude is nonzero.  At zero, the
--- synthesised coefficient is proved independent of the supplied phase.
 ------------------------------------------------------------------------
 
 record PhaseCoordinateSystem
@@ -139,9 +147,18 @@ record PhaseCoordinateSystem
     amplitudeZero : Amplitude
     phaseOne : Phase
 
+    AmplitudeNonnegative : Amplitude → Set r
+    amplitudeNonnegative : (amplitude : Amplitude) → AmplitudeNonnegative amplitude
+
     phaseScalar : Phase → C3.Complex F
     polarisationVector : Polarisation → C3.Complex3 F
     amplitudeScalar : Amplitude → C3.Complex F
+
+    phaseUnitMagnitude : (phase : Phase) →
+      C3.complexMultiply
+        (phaseScalar phase)
+        (C3.complexConjugate (phaseScalar phase))
+      ≡ C3.complexOne F
 
     synthesise : Amplitude → Phase → Polarisation → C3.Complex3 F
     synthesisMeaning : ∀ amplitude phase polarisation →
@@ -201,8 +218,25 @@ record ExactComplex3PhaseFormula
 open ExactComplex3PhaseFormula public
 
 ------------------------------------------------------------------------
--- Complete triad energy cancellation is the mandatory sign/factor audit.
+-- Complete triad energy cancellation tied to the exact signed coefficient.
 ------------------------------------------------------------------------
+
+signedTransferAt :
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E) →
+  Physical.PhysicalTriadIncidence →
+  (Z3.FourierMode → C3.Complex3 F) →
+  C3.Complex F
+signedTransferAt {F = F} E I τ velocity =
+  Signed.testedSignedCoefficient
+    (C3.complex3VelocityGalerkinLaws F E I)
+    (Physical.k τ)
+    (Physical.p τ)
+    (Physical.q τ)
+    (velocity (Physical.p τ))
+    (velocity (Physical.q τ))
+    (velocity (Physical.k τ))
 
 record ExactTriadEnergyCancellation
     {r : Level}
@@ -210,19 +244,28 @@ record ExactTriadEnergyCancellation
     (E : C3.IntegerEmbedding F)
     (I : C3.ModeInverseSquare F E) : Set (lsuc r) where
   field
-    transferToK transferToP transferToQ :
-      Physical.PhysicalTriadIncidence →
-      C3.Complex3 F → C3.Complex3 F → C3.Complex3 F →
-      C3.Complex F
+    baseTriad legK legP legQ : Physical.PhysicalTriadIncidence
+
+    legKIsBase : legK ≡ baseTriad
+
+    pLegFirstInput : Physical.p legP ≡ Physical.k baseTriad
+    pLegSecondInput :
+      Physical.q legP ≡ Z3.negateMode (Physical.q baseTriad)
+    pLegOutput : Physical.k legP ≡ Physical.p baseTriad
+
+    qLegFirstInput : Physical.p legQ ≡ Physical.k baseTriad
+    qLegSecondInput :
+      Physical.q legQ ≡ Z3.negateMode (Physical.p baseTriad)
+    qLegOutput : Physical.k legQ ≡ Physical.q baseTriad
 
     completeTriadCancellation :
-      (τ : Physical.PhysicalTriadIncidence) →
-      (uP uQ uK : C3.Complex3 F) →
+      (velocity : Z3.FourierMode → C3.Complex3 F) →
+      RealityCondition velocity →
       C3.complexAdd
         (C3.complexAdd
-          (transferToK τ uP uQ uK)
-          (transferToP τ uP uQ uK))
-        (transferToQ τ uP uQ uK)
+          (signedTransferAt E I legK velocity)
+          (signedTransferAt E I legP velocity))
+        (signedTransferAt E I legQ velocity)
       ≡ C3.complexZero F
 
 open ExactTriadEnergyCancellation public
@@ -232,6 +275,12 @@ correctRealityLawSpecified = true
 
 correctRealityLawSpecifiedIsTrue : correctRealityLawSpecified ≡ true
 correctRealityLawSpecifiedIsTrue = refl
+
+waveVectorRealityAlgebraClosed : Bool
+waveVectorRealityAlgebraClosed = true
+
+waveVectorRealityAlgebraClosedIsTrue : waveVectorRealityAlgebraClosed ≡ true
+waveVectorRealityAlgebraClosedIsTrue = refl
 
 normalisedFrameTargetSpecified : Bool
 normalisedFrameTargetSpecified = true
