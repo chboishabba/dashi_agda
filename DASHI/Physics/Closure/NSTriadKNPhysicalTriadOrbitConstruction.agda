@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base using (ℤ; +_; _+_;-_)
+open import Data.Integer.Base using (ℤ; +_; _+_; -_)
 import Data.Integer.Properties as Int
 open import Relation.Binary.PropositionalEquality
   using (cong; sym; module ≡-Reasoning)
