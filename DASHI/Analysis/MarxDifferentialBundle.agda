@@ -24,6 +24,8 @@ open import DASHI.Analysis.MarxFiniteVectorSpace public
 open import DASHI.Analysis.MarxFiniteVectorNorm public
 open import DASHI.Analysis.MarxFrechetProduct public
 open import DASHI.Analysis.MarxExteriorIntegration public
+open import DASHI.Analysis.MarxFiniteExteriorComplex public
+open import DASHI.Analysis.MarxFiniteRiemannSumLaws public
 open import DASHI.Analysis.MarxDifferentialRegression public
 open import DASHI.Governance.TraumaExploitationDifferential public
 open import DASHI.Governance.TraumaExploitationNormedDifferential public
