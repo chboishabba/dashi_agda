@@ -5,7 +5,7 @@ open import Agda.Primitive using (Set₁)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality
-  using (_≡_; refl; cong; cong₂)
+  using (_≡_; refl; cong₂)
 
 open import DASHI.Analysis.MarxDifferentialCore
 open import DASHI.Analysis.MarxPowerRuleNormalisation
@@ -118,9 +118,9 @@ finiteVectorModule :
   (L : MarxScalarModuleLaws A) →
   (n : Nat) →
   Module A
-finiteVectorModule L n =
+finiteVectorModule {A} L n =
   record
-    { Vector = Vec (Carrier _) n
+    { Vector = Vec (Carrier A) n
     ; zeroV = zeroVector n
     ; _+V_ = addVector
     ; _•_ = scaleVector
@@ -139,8 +139,8 @@ basisVector :
   {A : MarxAlgebra} →
   ∀ {n} →
   Fin n → Vec (Carrier A) n
-basisVector {n = suc n} fzero =
-  one _ ∷ zeroVector n
+basisVector {A} {n = suc n} fzero =
+  one A ∷ zeroVector n
 basisVector {A} {n = suc n} (fsuc i) =
   zero A ∷ basisVector i
 
