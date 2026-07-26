@@ -81,6 +81,22 @@ FILES: dict[Path, tuple[str, ...]] = {
         "literalConfiguredMatrixActionCertificate",
         "configuredMatrixActionLinearityLevel = machineChecked",
     ),
+    YM / "BalabanSide4ScalarGreenKernelComputed.agda": (
+        "inverseConfiguredEigen",
+        "scalarGreenKernel",
+        "scalarGreenKernelEquation",
+        "scalarGreenKernelTotalExact",
+        "allKernelEquationDecisionIsYes",
+        "scalarGreenKernelComputedLevel = machineChecked",
+    ),
+    YM / "BalabanPath4SU2ConfiguredScalarReductionExact.agda": (
+        "backwardPlaneCurlExpand",
+        "scalarWilsonGaugeCollapse",
+        "negativeForwardBackwardStencil",
+        "scalarForwardBackwardEqualsLocal",
+        "configuredGaugeFixedMatrixEqualsLaplacianPlusMean",
+        "configuredLaplacianPlusMeanReductionLevel = machineChecked",
+    ),
     YM / "BalabanSU2RationalAdjointRadiusExact.agda": (
         "adjointDisplacementWithUnitDefectExact",
         "adjointDisplacementUnitExact",
@@ -152,6 +168,8 @@ FILES: dict[Path, tuple[str, ...]] = {
         "configuredPhysicalMatrixDimension3072Level = machineChecked",
         "configuredGaugeFixedMatrixDefinitionLevel = machineChecked",
         "configuredMatrixActionLinearityLevel = machineChecked",
+        "sideFourScalarGreenKernelEquationLevel = machineChecked",
+        "configuredOperatorLaplacianPlusMeanReductionLevel = machineChecked",
         "uniformOneSixtyFourthCoercivityLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
@@ -195,6 +213,8 @@ def main() -> None:
         "BalabanPath4SU2RationalMatrixCoordinatesExact",
         "BalabanPath4SU2RationalMatrixDimensionExact",
         "BalabanPath4SU2ConfiguredMatrixActionExact",
+        "BalabanSide4ScalarGreenKernelComputed",
+        "BalabanPath4SU2ConfiguredScalarReductionExact",
         "BalabanSU2RationalAdjointRadiusExact",
         "BalabanSU2RationalWilsonLargeFieldGapExact",
         "BalabanClayP1BackgroundStabilityExact",
@@ -210,9 +230,10 @@ def main() -> None:
 
     print(
         "Finite martingale algebra, corrected scalar Wilson Riesz signs, the "
-        "literal 3072-coordinate configured matrix action, constructive inverse "
-        "consequences, P1--P5 reductions, numerical budgets and the honest "
-        "producer ledger are present and hole-free."
+        "literal 3072-coordinate configured matrix action, an exact computed "
+        "side-four Green kernel, the Laplacian-plus-mean operator reduction, "
+        "P1--P5 reductions and the honest producer ledger are present and "
+        "hole-free."
     )
 
 
