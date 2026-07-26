@@ -5,7 +5,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Nat.Base using (_≤_; _<_)
-import Data.Nat.Properties as Nat
 
 ------------------------------------------------------------------------
 -- Uniformity ledger.
@@ -46,8 +45,8 @@ record ClasswiseQuadraticForms {c s : Level} : Set (lsuc (c ⊔ s)) where
 open ClasswiseQuadraticForms public
 
 qError :
-  ∀ {c s} → ClasswiseQuadraticForms {c} {s} →
-  Cutoff _ → State _ → Nat
+  ∀ {c s} (forms : ClasswiseQuadraticForms {c} {s}) →
+  Cutoff forms → State forms → Nat
 qError forms N state =
   qForcedTail forms N state
   + qTransition forms N state
@@ -119,7 +118,9 @@ record ResidualDomination
 open ResidualDomination public
 
 ------------------------------------------------------------------------
--- Two admissible routes: absolute majorisation or signed cancellation.
+-- Three admissible routes: absolute majorisation, signed cancellation, or a
+-- modified energy.  None may substitute a finite-cutoff certificate for the
+-- cutoff-uniform estimate.
 ------------------------------------------------------------------------
 
 data EstimateStrategy : Set where
@@ -142,7 +143,7 @@ open ClasswisePromotionCertificate public
 record StrictClasswiseComparison
     {c s : Level}
     {forms : ClasswiseQuadraticForms {c} {s}}
-    (promotion : ClasswisePromotionCertificate forms) : Set where
+    (promotion : ClasswisePromotionCertificate forms) : Set (lsuc (c ⊔ s)) where
   field
     baseConstant : Nat
     strictComparison :
