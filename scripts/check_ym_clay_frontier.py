@@ -35,12 +35,34 @@ FILES: dict[Path, tuple[str, ...]] = {
         "p1MinimizingBackgroundProducerLevel = conditional",
         "p1FiveUniformComponentEstimatesLevel = conditional",
     ),
+    YM / "BalabanClayP1PicardBackgroundConstructionExact.agda": (
+        "picardBackgroundCore",
+        "picardBackgroundCoreFixed",
+        "fixedPointUniqueCore",
+        "backgroundSatisfiesConstraint",
+        "backgroundGaugeFixed",
+        "backgroundStationary",
+        "minimizerUniqueModuloGauge",
+        "backgroundRegularity",
+        "picardRegularBackgroundConstruction",
+        "p1LiteralWilsonPicardInputsLevel = conditional",
+    ),
     YM / "BalabanClayP2LargeFieldStepVExact.agda": (
         "GaugeInvariantBadBlockDecomposition",
         "LargeFieldActivityFactorization",
         "uniformFiniteVolumeKoteckyPreiss",
         "p2PhysicalActivityShellProducerLevel = conditional",
         "p2InfiniteClusterAndCorrelationProducerLevel = conditional",
+    ),
+    YM / "BalabanClayP2BadComponentGeometryExact.agda": (
+        "BadPath",
+        "everyBadBlockAssigned",
+        "componentConnected",
+        "sameComponentUnique",
+        "badBlockGaugeInvariantForward",
+        "badBlockGaugeInvariantBackward",
+        "badBlockMeasurable",
+        "p2LiteralWilsonBadPredicateInstantiationLevel = conditional",
     ),
     YM / "BalabanClayP3PhysicalOneStepTransferExact.agda": (
         "ExactOneStepIntegral",
@@ -51,6 +73,23 @@ FILES: dict[Path, tuple[str, ...]] = {
         "noGeneratedGaugeBosonMass",
         "RunningCouplingRecursion",
         "p3FivePhysicalComponentEstimateProducerLevel = conditional",
+    ),
+    YM / "BalabanClayP3FiniteConstrainedIntegralExact.agda": (
+        "coarseMatchesSound",
+        "coarseMatchesComplete",
+        "smallLargePartitionListExact",
+        "smallLargePartitionExact",
+        "effectiveActionDefinesIntegral",
+        "finiteExactOneStepIntegral",
+        "p3CompactHaarIntegralLimitLevel = conditional",
+    ),
+    YM / "BalabanClayP3PrincipalFibreCoordinatesExact.agda": (
+        "reconstructs",
+        "fluctuationSatisfiesConstraint",
+        "backgroundUnique",
+        "fluctuationUnique",
+        "jacobianExact",
+        "p3LiteralWilsonPrincipalFibreInstantiationLevel = conditional",
     ),
     YM / "BalabanClayP4DyadicCoercivityBudgetExact.agda": (
         "lossBudgetIdentity",
@@ -79,6 +118,10 @@ FILES: dict[Path, tuple[str, ...]] = {
         "configuredGreenMatrixInverseProductLevel = machineChecked",
         "configuredPhysicalGreenNormLevel = machineChecked",
         "constructiveConfiguredFiniteInverseLevel = machineChecked",
+        "p1PicardBackgroundConstructionLevel = machineChecked",
+        "p2BadPathComponentConstructionLevel = machineChecked",
+        "p3FiniteConstrainedPartitionLevel = machineChecked",
+        "p3PrincipalFibreCoordinateConstructionLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
         "p3ExactConstrainedIntegralCoordinatesLevel = conditional",
@@ -120,9 +163,11 @@ def main() -> None:
     )
 
     print(
-        "P1--P5 reductions and conditional physical producers remain explicit; "
-        "the configured side-four matrix action, two-sided rational inverse and "
-        "factor-16 norm certificate are closed by the focused Green audit."
+        "P1--P3 now include a constructed Picard-limit background adapter, "
+        "proof-relevant gauge-invariant bad components, an independently proved "
+        "finite constrained small/large partition, and exact principal-fibre "
+        "coordinates. Literal Wilson/Haar estimates and P4--P5 endpoints remain "
+        "explicit conditional producers; the configured Green audit stays closed."
     )
 
 
