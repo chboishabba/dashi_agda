@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayP1PicardBackgroundConstructionExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; trans)
 
@@ -10,19 +10,20 @@ import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact as P1
 ------------------------------------------------------------------------
 -- Constructive Picard production of the nonlinear background.
 --
--- The background is not a field of this record.  It is definitionally the limit
--- of the iterated critical map.  Completeness enters only through `limit` and
--- its two standard laws; the fixed-point, constraint, stationarity, uniqueness
--- and P1 adapter are then proved below.
+-- The background is never supplied as a field.  It is definitionally the limit
+-- of the recursively generated critical-map orbit.  Completeness enters through
+-- the limit laws; fixedness and uniqueness are proved from those laws and the
+-- strict contraction estimate.
 ------------------------------------------------------------------------
 
-record PicardBackgroundData
-    (Coarse State Tangent Bound : Set) : Set₁ where
+record PicardCoreData (Coarse State Bound : Set) : Set₁ where
   field
     criticalMap : Coarse → State → State
     seed : Coarse → State
 
     limit : (Nat → State) → State
+    limitCongruent : ∀ {left right : Nat → State} →
+      (∀ depth → left depth ≡ right depth) → limit left ≡ limit right
     mapCommutesWithLimit : ∀ coarse sequence →
       criticalMap coarse (limit sequence)
       ≡ limit (λ depth → criticalMap coarse (sequence depth))
@@ -43,6 +44,66 @@ record PicardBackgroundData
       LessEqual (distance left right) (scale rho (distance left right)) →
       left ≡ right
 
+open PicardCoreData public
+
+picard :
+  ∀ {Coarse State Bound} →
+  PicardCoreData Coarse State Bound → Coarse → Nat → State
+picard dataSet coarse zero = seed dataSet coarse
+picard dataSet coarse (suc depth) =
+  criticalMap dataSet coarse (picard dataSet coarse depth)
+
+picardStep :
+  ∀ {Coarse State Bound}
+    (dataSet : PicardCoreData Coarse State Bound)
+    coarse depth →
+  criticalMap dataSet coarse (picard dataSet coarse depth)
+  ≡ picard dataSet coarse (suc depth)
+picardStep dataSet coarse depth = refl
+
+picardBackgroundCore :
+  ∀ {Coarse State Bound} →
+  PicardCoreData Coarse State Bound → Coarse → State
+picardBackgroundCore dataSet coarse =
+  limit dataSet (picard dataSet coarse)
+
+picardBackgroundCoreFixed :
+  ∀ {Coarse State Bound}
+    (dataSet : PicardCoreData Coarse State Bound)
+    coarse →
+  criticalMap dataSet coarse (picardBackgroundCore dataSet coarse)
+  ≡ picardBackgroundCore dataSet coarse
+picardBackgroundCoreFixed dataSet coarse =
+  trans
+    (mapCommutesWithLimit dataSet coarse (picard dataSet coarse))
+    (trans
+      (limitCongruent dataSet (λ depth → picardStep dataSet coarse depth))
+      (tailShiftPreservesLimit dataSet (picard dataSet coarse)))
+
+fixedPointUniqueCore :
+  ∀ {Coarse State Bound}
+    (dataSet : PicardCoreData Coarse State Bound)
+    coarse left right →
+  criticalMap dataSet coarse left ≡ left →
+  criticalMap dataSet coarse right ≡ right →
+  left ≡ right
+fixedPointUniqueCore dataSet coarse left right leftFixed rightFixed =
+  strictShrinkForcesEquality dataSet left right
+    (subst
+      (λ value → LessEqual dataSet value
+        (scale dataSet (rho dataSet) (distance dataSet left right)))
+      (cong₂ (distance dataSet) leftFixed rightFixed)
+      (contractive dataSet coarse left right))
+
+------------------------------------------------------------------------
+-- Wilson/Balaban semantics attached to the constructed fixed point.
+------------------------------------------------------------------------
+
+record PicardBackgroundData
+    (Coarse State Tangent Bound : Set) : Set₁ where
+  field
+    core : PicardCoreData Coarse State Bound
+
     blockMap : State → Coarse
     reconstructFine : State → Tangent
     zeroBound : Bound
@@ -51,21 +112,21 @@ record PicardBackgroundData
     GaugeFixedBackground CandidateStationary : State → Set
 
     fixedImpliesConstraint : ∀ coarse state →
-      criticalMap coarse state ≡ state → blockMap state ≡ coarse
+      criticalMap core coarse state ≡ state → blockMap state ≡ coarse
     fixedImpliesGaugeFixed : ∀ coarse state →
-      criticalMap coarse state ≡ state → GaugeFixedBackground state
+      criticalMap core coarse state ≡ state → GaugeFixedBackground state
     fixedImpliesStationary : ∀ coarse state →
-      criticalMap coarse state ≡ state →
+      criticalMap core coarse state ≡ state →
       ∀ tangent → ConstraintTangent state tangent →
       actionFirstVariation state tangent ≡ zeroBound
     fixedImpliesCandidateStationary : ∀ coarse state →
-      criticalMap coarse state ≡ state → CandidateStationary state
+      criticalMap core coarse state ≡ state → CandidateStationary state
 
     candidateStationaryImpliesFixed : ∀ coarse state →
       blockMap state ≡ coarse →
       GaugeFixedBackground state →
       CandidateStationary state →
-      criticalMap coarse state ≡ state
+      criticalMap core coarse state ≡ state
 
     BackgroundEquivalent : State → State → Set
     equivalentFromEquality : ∀ {left right} →
@@ -75,65 +136,24 @@ record PicardBackgroundData
     coarseSmallness : Coarse → Bound
     regularityConstant : Bound
     picardLimitRegularity : ∀ coarse →
-      LessEqual
-        (regularitySize (limit (λ depth →
-          let
-            iterate : Nat → State
-            iterate zero = seed coarse
-            iterate (suc n) = criticalMap coarse (iterate n)
-          in iterate depth)))
-        (scale regularityConstant (coarseSmallness coarse))
+      LessEqual core
+        (regularitySize (picardBackgroundCore core coarse))
+        (scale core regularityConstant (coarseSmallness coarse))
 
 open PicardBackgroundData public
 
-picard :
-  ∀ {Coarse State Tangent Bound} →
-  PicardBackgroundData Coarse State Tangent Bound →
-  Coarse → Nat → State
-picard dataSet coarse zero = seed dataSet coarse
-picard dataSet coarse (suc depth) =
-  criticalMap dataSet coarse (picard dataSet coarse depth)
-
-picardStep :
-  ∀ {Coarse State Tangent Bound}
-    (dataSet : PicardBackgroundData Coarse State Tangent Bound)
-    coarse depth →
-  criticalMap dataSet coarse (picard dataSet coarse depth)
-  ≡ picard dataSet coarse (suc depth)
-picardStep dataSet coarse depth = Agda.Builtin.Equality.refl
-
 picardBackground :
   ∀ {Coarse State Tangent Bound} →
-  PicardBackgroundData Coarse State Tangent Bound →
-  Coarse → State
-picardBackground dataSet coarse =
-  limit dataSet (picard dataSet coarse)
+  PicardBackgroundData Coarse State Tangent Bound → Coarse → State
+picardBackground dataSet = picardBackgroundCore (core dataSet)
 
 picardBackgroundFixed :
   ∀ {Coarse State Tangent Bound}
     (dataSet : PicardBackgroundData Coarse State Tangent Bound)
     coarse →
-  criticalMap dataSet coarse (picardBackground dataSet coarse)
+  criticalMap (core dataSet) coarse (picardBackground dataSet coarse)
   ≡ picardBackground dataSet coarse
-picardBackgroundFixed dataSet coarse =
-  trans
-    (mapCommutesWithLimit dataSet coarse (picard dataSet coarse))
-    (tailShiftPreservesLimit dataSet (picard dataSet coarse))
-
-fixedPointUnique :
-  ∀ {Coarse State Tangent Bound}
-    (dataSet : PicardBackgroundData Coarse State Tangent Bound)
-    coarse left right →
-  criticalMap dataSet coarse left ≡ left →
-  criticalMap dataSet coarse right ≡ right →
-  left ≡ right
-fixedPointUnique dataSet coarse left right leftFixed rightFixed =
-  strictShrinkForcesEquality dataSet left right
-    (subst
-      (λ value → LessEqual dataSet value
-        (scale dataSet (rho dataSet) (distance dataSet left right)))
-      (cong₂ (distance dataSet) leftFixed rightFixed)
-      (contractive dataSet coarse left right))
+picardBackgroundFixed dataSet = picardBackgroundCoreFixed (core dataSet)
 
 backgroundSatisfiesConstraint :
   ∀ {Coarse State Tangent Bound}
@@ -184,7 +204,7 @@ minimizerUniqueModuloGauge :
   BackgroundEquivalent dataSet candidate (picardBackground dataSet coarse)
 minimizerUniqueModuloGauge dataSet coarse candidate constraint gauge stationary =
   equivalentFromEquality dataSet
-    (fixedPointUnique dataSet coarse candidate
+    (fixedPointUniqueCore (core dataSet) coarse candidate
       (picardBackground dataSet coarse)
       (candidateStationaryImpliesFixed dataSet coarse candidate
         constraint gauge stationary)
@@ -194,11 +214,11 @@ backgroundRegularity :
   ∀ {Coarse State Tangent Bound}
     (dataSet : PicardBackgroundData Coarse State Tangent Bound)
     coarse →
-  LessEqual dataSet
+  LessEqual (core dataSet)
     (regularitySize dataSet (picardBackground dataSet coarse))
-    (scale dataSet (regularityConstant dataSet)
+    (scale (core dataSet) (regularityConstant dataSet)
       (coarseSmallness dataSet coarse))
-backgroundRegularity dataSet coarse = picardLimitRegularity dataSet coarse
+backgroundRegularity dataSet = picardLimitRegularity dataSet
 
 picardRegularBackgroundConstruction :
   ∀ {Coarse State Tangent Bound} →
@@ -233,8 +253,8 @@ picardRegularBackgroundConstruction dataSet = record
   ; P1.RegularBackgroundConstruction.coarseSmallness = coarseSmallness dataSet
   ; P1.RegularBackgroundConstruction.regularityConstant =
       regularityConstant dataSet
-  ; P1.RegularBackgroundConstruction.scale = scale dataSet
-  ; P1.RegularBackgroundConstruction.LessEqual = LessEqual dataSet
+  ; P1.RegularBackgroundConstruction.scale = scale (core dataSet)
+  ; P1.RegularBackgroundConstruction.LessEqual = LessEqual (core dataSet)
   ; P1.RegularBackgroundConstruction.backgroundRegularity =
       backgroundRegularity dataSet
   }
