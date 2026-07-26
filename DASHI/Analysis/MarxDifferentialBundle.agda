@@ -2,6 +2,7 @@ module DASHI.Analysis.MarxDifferentialBundle where
 
 open import DASHI.Analysis.MarxDifferentialCore public
 open import DASHI.Analysis.MarxPolynomialDifferential public
+open import DASHI.Analysis.MarxPolynomialCoefficientNormalForm public
 open import DASHI.Analysis.MarxConstructiveRealAdapter public
 open import DASHI.Analysis.MarxConstructiveRealRingNormalisation public
 open import DASHI.Analysis.MarxConstructiveRealNamedLemmas public
@@ -19,6 +20,8 @@ open import DASHI.Analysis.MarxHigherCalculus public
 open import DASHI.Analysis.MarxHigherDerivativeConstruction public
 open import DASHI.Analysis.MarxScalarFrechetBridge public
 open import DASHI.Analysis.MarxLinearDirectionalLaws public
+open import DASHI.Analysis.MarxFiniteVectorSpace public
+open import DASHI.Analysis.MarxFiniteVectorNorm public
 open import DASHI.Analysis.MarxFrechetProduct public
 open import DASHI.Analysis.MarxExteriorIntegration public
 open import DASHI.Analysis.MarxDifferentialRegression public
