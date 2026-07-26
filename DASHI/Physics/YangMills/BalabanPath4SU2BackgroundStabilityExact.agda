@@ -1,14 +1,11 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2BackgroundStabilityExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; _+_; _≤_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational using (ℚ; _+_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
-  using (PhysicalSU2Tangent4)
-open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact
-  using (physicalTangentInner)
+  using (PhysicalSU2Tangent4; physicalUnweightedNormSq)
 open import DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact
   using (configuredGaugeFixedMatrix)
 import DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity as Relative
@@ -52,12 +49,9 @@ record Path4SU2BackgroundFormBound (Background : Set) : Set₁ where
     differenceData : Path4SU2BackgroundHessianDifference Background
     perturbationSize : Background → ℚ
     perturbationMagnitude : Background → PhysicalSU2Tangent4 → ℚ
-    backgroundHessianDifferenceBound : ∀ background tangent →
+    differenceBound : ∀ background tangent →
       perturbationMagnitude background tangent
-      ≤ perturbationSize background
-        Data.Rational._*_
-        DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact.physicalUnweightedNormSq
-          tangent
+      ≤ perturbationSize background * physicalUnweightedNormSq tangent
 
 open Path4SU2BackgroundFormBound public
 
@@ -66,12 +60,8 @@ backgroundHessianDifferenceBound :
     (dataSet : Path4SU2BackgroundFormBound Background)
     background tangent →
   perturbationMagnitude dataSet background tangent
-  ≤ perturbationSize dataSet background
-    Data.Rational._*_
-    DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact.physicalUnweightedNormSq
-      tangent
-backgroundHessianDifferenceBound dataSet =
-  Path4SU2BackgroundFormBound.backgroundHessianDifferenceBound dataSet
+  ≤ perturbationSize dataSet background * physicalUnweightedNormSq tangent
+backgroundHessianDifferenceBound dataSet = differenceBound dataSet
 
 ------------------------------------------------------------------------
 -- The small-background coercivity theorem is the already checked relative-form
