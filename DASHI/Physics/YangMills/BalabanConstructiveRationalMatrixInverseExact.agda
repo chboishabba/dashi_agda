@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
@@ -79,7 +79,7 @@ matrixProductActionExact carrier left right vector row =
           (λ middle →
             (left row middle * right middle column) * vector column))
       (λ column →
-        Relation.Binary.PropositionalEquality.sym
+        sym
           (sumRationalRightScale
             (coordinates carrier)
             (λ middle → left row middle * right middle column)
@@ -163,7 +163,7 @@ matrixInverseLeftExact :
 matrixInverseLeftExact {carrier = carrier} {operatorMatrix = operatorMatrix}
     certificate vector row =
   trans
-    (Relation.Binary.PropositionalEquality.sym
+    (sym
       (matrixProductActionExact carrier
         (inverseMatrix certificate) operatorMatrix vector row))
     (trans
@@ -186,7 +186,7 @@ matrixInverseRightExact :
 matrixInverseRightExact {carrier = carrier} {operatorMatrix = operatorMatrix}
     certificate vector row =
   trans
-    (Relation.Binary.PropositionalEquality.sym
+    (sym
       (matrixProductActionExact carrier
         operatorMatrix (inverseMatrix certificate) vector row))
     (trans
@@ -208,6 +208,12 @@ record ConstructiveMatrixGreenData (Index : Set) : Set₁ where
     carrier : FiniteRationalCoordinates Index
     operatorMatrix : RationalMatrix Index
     inverseCertificate : RationalMatrixInverseCertificate carrier operatorMatrix
+
+    -- This is not an axiom: a concrete finite vector record must prove its own
+    -- extensional equality eliminator.  Keeping it in the producer prevents the
+    -- generic module from postulating function extensionality.
+    vectorExtensional : ∀ {left right : RationalVector Index} →
+      (∀ coordinate → left coordinate ≡ right coordinate) → left ≡ right
 
     inner : RationalVector Index → RationalVector Index → ℚ
     vectorNorm energy : RationalVector Index → ℚ
@@ -253,21 +259,15 @@ constructiveFiniteCoerciveInverse dataSet = record
       (carrier dataSet)
       (inverseMatrix (inverseCertificate dataSet))
   ; Green.inverseLeft = λ vector →
-      funPointwise
+      vectorExtensional dataSet
         (matrixInverseLeftExact (inverseCertificate dataSet) vector)
   ; Green.inverseRight = λ vector →
-      funPointwise
+      vectorExtensional dataSet
         (matrixInverseRightExact (inverseCertificate dataSet) vector)
   ; Green.reciprocalCoercivity = reciprocalCoercivity dataSet
   ; Green.multiplyBound = _*_
   ; Green.inverseNormBound = inverseNormBound dataSet
   }
-  where
-    -- Function extensionality is deliberately not assumed by the matrix algebra.
-    -- The concrete finite coordinate carrier must provide the equality adapter.
-    postulate
-      funPointwise : ∀ {left right : RationalVector Index} →
-        (∀ coordinate → left coordinate ≡ right coordinate) → left ≡ right
 
 finiteMatrixProductActionLevel : ProofLevel
 finiteMatrixProductActionLevel = machineChecked
