@@ -9,11 +9,37 @@ open import DASHI.Analysis.MarxDifferentialCore
 open import DASHI.Analysis.MarxHigherCalculus
 
 ------------------------------------------------------------------------
--- Elementary natural addition for graded form degrees.
+-- Elementary list and degree operations.
 
 _+N_ : Nat → Nat → Nat
 zero +N n = n
 suc m +N n = suc (m +N n)
+
+_++L_ :
+  {X : Set} →
+  List X → List X → List X
+[] ++L right = right
+(x ∷ left) ++L right = x ∷ (left ++L right)
+
+plugVector :
+  {A : MarxAlgebra} →
+  {V : Module A} →
+  List (Vector V) →
+  Vector V →
+  List (Vector V) →
+  List (Vector V)
+plugVector prefix value suffix = prefix ++L (value ∷ suffix)
+
+plugAdjacent :
+  {A : MarxAlgebra} →
+  {V : Module A} →
+  List (Vector V) →
+  Vector V →
+  Vector V →
+  List (Vector V) →
+  List (Vector V)
+plugAdjacent prefix left right suffix =
+  prefix ++L (left ∷ right ∷ suffix)
 
 ------------------------------------------------------------------------
 -- Alternating multilinear forms and a genuine graded differential complex.
@@ -25,9 +51,27 @@ record AlternatingMultilinearMap
   : Set₁ where
   field
     evaluate : List (Vector V) → Carrier A
-    arityReceipt : Set
-    multilinearityReceipt : Set
-    alternatingReceipt : Set
+    acceptedArity : List (Vector V) → Set
+
+    multilinearAdd :
+      ∀ prefix suffix u v →
+      acceptedArity (plugVector prefix (_+V_ V u v) suffix) →
+      evaluate (plugVector prefix (_+V_ V u v) suffix)
+      ≡ _+_ A
+          (evaluate (plugVector prefix u suffix))
+          (evaluate (plugVector prefix v suffix))
+
+    multilinearScale :
+      ∀ prefix suffix scalar v →
+      acceptedArity (plugVector prefix (_•_ V scalar v) suffix) →
+      evaluate (plugVector prefix (_•_ V scalar v) suffix)
+      ≡ _*_ A scalar
+          (evaluate (plugVector prefix v suffix))
+
+    alternatingAdjacent :
+      ∀ prefix suffix v →
+      acceptedArity (plugAdjacent prefix v v suffix) →
+      evaluate (plugAdjacent prefix v v suffix) ≡ zero A
 
 open AlternatingMultilinearMap public
 
