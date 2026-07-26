@@ -3,7 +3,7 @@ module DASHI.Biology.LongitudinalEngagementTrajectory where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
@@ -30,18 +30,21 @@ data TrajectoryScope : Set where
   schoolTrajectoryScope : TrajectoryScope
   facultyTrajectoryScope : TrajectoryScope
 
-record EngagementVector : Set where
-  constructor mkEngagementVector
+record EngagementVectorSurface : Set where
+  constructor mkEngagementVectorSurface
   field
-    socialSignal : Nat
-    cognitiveSignal : Nat
-    behaviouralSignal : Nat
-    collaborativeSignal : Nat
-    emotionalSignal : Nat
+    socialSignal : String
+    cognitiveSignal : String
+    behaviouralSignal : String
+    collaborativeSignal : String
+    emotionalSignal : String
+    vectorReportedAsMatchedLongitudinalMeasure : Bool
+    vectorReportedAsMatchedLongitudinalMeasureIsFalse :
+      vectorReportedAsMatchedLongitudinalMeasure ≡ false
     vectorProxyOnly : Bool
     vectorProxyOnlyIsTrue : vectorProxyOnly ≡ true
 
-open EngagementVector public
+open EngagementVectorSurface public
 
 record EngagementSnapshot : Set where
   constructor mkEngagementSnapshot
@@ -50,7 +53,7 @@ record EngagementSnapshot : Set where
     snapshotTime : EngagementTimePoint
     snapshotScope : TrajectoryScope
     snapshotFeedbackSentimentCount : Nat
-    snapshotVector : EngagementVector
+    snapshotVector : EngagementVectorSurface
     snapshotConditionalOnResponse : Bool
     snapshotConditionalOnResponseIsTrue : snapshotConditionalOnResponse ≡ true
     snapshotAggregateOnly : Bool
@@ -60,9 +63,16 @@ record EngagementSnapshot : Set where
 
 open EngagementSnapshot public
 
-unknownProxyVector : EngagementVector
-unknownProxyVector =
-  mkEngagementVector 0 0 0 0 0 true refl
+unreportedMatchedLongitudinalVector : EngagementVectorSurface
+unreportedMatchedLongitudinalVector =
+  mkEngagementVectorSurface
+    "not reported as a matched longitudinal social measure"
+    "not reported as a matched longitudinal cognitive measure"
+    "not reported as a matched longitudinal behavioural measure"
+    "not reported as a matched longitudinal collaborative measure"
+    "not reported as a matched longitudinal emotional measure"
+    false refl
+    true refl
 
 canonicalTrainingSnapshot : EngagementSnapshot
 canonicalTrainingSnapshot =
@@ -71,7 +81,7 @@ canonicalTrainingSnapshot =
     trainingSemester
     courseTrajectoryScope
     383
-    unknownProxyVector
+    unreportedMatchedLongitudinalVector
     true refl
     true refl
     true refl
@@ -83,7 +93,7 @@ canonicalLaterTestingSnapshot =
     laterTestingSemester
     courseTrajectoryScope
     311
-    unknownProxyVector
+    unreportedMatchedLongitudinalVector
     true refl
     true refl
     true refl
