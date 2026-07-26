@@ -2,7 +2,7 @@ module DASHI.Analysis.MarxPolynomialDifferential where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Primitive using (Set₁)
+open import Agda.Primitive using (Set; Set₁)
 
 open import DASHI.Analysis.MarxDifferentialCore public
 
@@ -159,8 +159,8 @@ polynomialProductRule p q x = refl
 powerPolynomial :
   {A : MarxAlgebra} →
   Nat → Polynomial A
-powerPolynomial zero = constant (one _)
-powerPolynomial (suc n) = powerPolynomial n *P variable
+powerPolynomial {A} zero = constant (one A)
+powerPolynomial {A} (suc n) = powerPolynomial {A} n *P variable
 
 powerPolynomialInterpretsAsPower :
   {A : MarxAlgebra} →
@@ -168,8 +168,8 @@ powerPolynomialInterpretsAsPower :
   (x : Carrier A) →
   interpret (powerPolynomial n) x ≡ powerFunction n x
 powerPolynomialInterpretsAsPower zero x = refl
-powerPolynomialInterpretsAsPower (suc n) x =
-  cong (λ y → _*_ _ y x)
+powerPolynomialInterpretsAsPower {A} (suc n) x =
+  cong (λ y → _*_ A y x)
     (powerPolynomialInterpretsAsPower n x)
   where
     cong :
