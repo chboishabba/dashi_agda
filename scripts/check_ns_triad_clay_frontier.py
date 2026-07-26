@@ -26,6 +26,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNLegacyCoordinateInterpretationAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNCutoffUniformClasswiseEstimateProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNClasswiseAnalyticCutset.agda",
+    "DASHI/Physics/Closure/NSTriadKNCubicQuadraticUniformGapNoGo.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedUniformGapProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNArbitraryDataAprioriProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedGapAprioriComposition.agda",
