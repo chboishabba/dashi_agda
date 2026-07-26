@@ -9,7 +9,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
-  (axisTransverse)
+  (axisTransverse; insertAxis)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (SiteField; physicalFibreSum; sumRational; sumRationalCong)
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
@@ -701,11 +701,6 @@ literalPeriodicDivergenceScale coefficient tangent site
       | literalPeriodicDivergenceScalarScale coefficient
     (componentScalarBondField tangent component3) site = refl
 
-literalPeriodicDivergenceRespectsPointwise :
-  ∀ {left right} →
-  (∀ component bond → left component bond ≡ right component bond) →
-  ∀ site →
-  literalPeriodicDivergence left site ≡ literalPeriodicDivergence right site
 cong3 :
   ∀ {A B C D : Set} {f : A → B → C → D}
     {a₁ a₂ : A} {b₁ b₂ : B} {c₁ c₂ : C} →
@@ -713,6 +708,11 @@ cong3 :
   f a₁ b₁ c₁ ≡ f a₂ b₂ c₂
 cong3 refl refl refl = refl
 
+literalPeriodicDivergenceRespectsPointwise :
+  ∀ {left right} →
+  (∀ component bond → left component bond ≡ right component bond) →
+  ∀ site →
+  literalPeriodicDivergence left site ≡ literalPeriodicDivergence right site
 literalPeriodicDivergenceRespectsPointwise pointwise site =
   cong3
     (literalPeriodicDivergenceScalarRespectsPointwise
