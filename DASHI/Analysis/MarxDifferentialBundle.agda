@@ -4,6 +4,7 @@ open import DASHI.Analysis.MarxDifferentialCore public
 open import DASHI.Analysis.MarxPolynomialDifferential public
 open import DASHI.Analysis.MarxConstructiveRealAdapter public
 open import DASHI.Analysis.MarxConstructiveRealRingNormalisation public
+open import DASHI.Analysis.MarxConstructiveRealNamedLemmas public
 open import DASHI.Analysis.MarxConstructiveRealTopology public
 open import DASHI.Analysis.MarxConstructiveRealLimitSqueeze public
 open import DASHI.Analysis.MarxFastCauchyCompletionCutset public
