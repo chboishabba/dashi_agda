@@ -20,33 +20,6 @@ data CoordinateMeaning : Set where
   shellIndex modeIndex orientation helicity permutation realityOrbit
   angularSector phaseSector multiplicityResidue unexplained : CoordinateMeaning
 
-record LegacyCoordinateInterpretation (N : Nat) : Set₁ where
-  field
-    headMeaning tailMeaning residueMeaning :
-      Relation.ConcreteNonResidualTriadIncidence N → CoordinateMeaning
-
-    reconstruct :
-      Relation.ConcreteNonResidualTriadIncidence N →
-      Physical.PhysicalTriadIncidence
-
-    reconstructedInCutoff :
-      (code : Relation.ConcreteNonResidualTriadIncidence N) →
-      Physical.PhysicalTriadInCutoff N (reconstruct code)
-
-    headPhysicallyPreserved :
-      (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
-
-    tailPhysicallyPreserved :
-      (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
-
-    residuePhysicallyExplained :
-      (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
-
-    reconstructedClassSound :
-      (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
-
-open LegacyCoordinateInterpretation public
-
 ------------------------------------------------------------------------
 -- Validated subtype and exact falsification witnesses.
 ------------------------------------------------------------------------
@@ -70,6 +43,37 @@ ValidatedLegacyCode :
   (N : Nat) → LegacyValidityPolicy N → Set
 ValidatedLegacyCode N policy =
   Σ (Relation.ConcreteNonResidualTriadIncidence N) (CodeValid policy)
+
+record LegacyCoordinateInterpretation
+    (N : Nat)
+    (policy : LegacyValidityPolicy N) : Set₁ where
+  field
+    headMeaning tailMeaning residueMeaning :
+      Relation.ConcreteNonResidualTriadIncidence N → CoordinateMeaning
+
+    -- Reconstruction is deliberately available only after validity has been
+    -- established.  Invalid raw Cartesian tuples remain falsification data.
+    reconstruct :
+      ValidatedLegacyCode N policy →
+      Physical.PhysicalTriadIncidence
+
+    reconstructedInCutoff :
+      (code : ValidatedLegacyCode N policy) →
+      Physical.PhysicalTriadInCutoff N (reconstruct code)
+
+    headPhysicallyPreserved :
+      (code : ValidatedLegacyCode N policy) → Set
+
+    tailPhysicallyPreserved :
+      (code : ValidatedLegacyCode N policy) → Set
+
+    residuePhysicallyExplained :
+      (code : ValidatedLegacyCode N policy) → Set
+
+    reconstructedClassSound :
+      (code : ValidatedLegacyCode N policy) → Set
+
+open LegacyCoordinateInterpretation public
 
 record InvalidRawCodeWitness
     (N : Nat) (policy : LegacyValidityPolicy N) : Set where
