@@ -37,10 +37,10 @@ finiteGradedForms :
   (L : MarxScalarModuleLaws A) →
   (n : Nat) →
   GradedDifferentialForms A (finiteVectorModule L n)
-finiteGradedForms L n =
+finiteGradedForms {A} L n =
   record
     { Form = λ degree →
-        AlternatingMultilinearMap _ (finiteVectorModule L n) degree
+        AlternatingMultilinearMap A (finiteVectorModule L n) degree
     ; zeroForm = zeroAlternatingMap L n
     ; asAlternatingMap = λ form → form
     }
