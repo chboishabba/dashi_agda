@@ -1,13 +1,16 @@
 module DASHI.Governance.IsraelCyberLegalStatusCandidate where
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Nat using (zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Nat.Base using (_≤_)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import DASHI.Governance.GeopoliticalDifferentialEvidence
+open import DASHI.Governance.GeopoliticalGlobalPlayerCriterion
 
 ------------------------------------------------------------------------
 -- Narrow source-bound fixture.
@@ -94,6 +97,32 @@ defenceCyberShareEvidence =
     defenceExports2024Source
     "defence category evidence is not equivalent to the civilian cybersecurity market and does not identify particular deployments"
 
+------------------------------------------------------------------------
+-- An explicit cyber-specific threshold cannot be discharged by aggregate
+-- high-tech evidence whose cyber share and cyber company denominator are both
+-- recorded as unavailable (zero in this fail-closed fixture).
+
+minimalCyberSpecificCriterion : ConcreteGlobalPlayerCriterion
+minimalCyberSpecificCriterion =
+  concreteGlobalPlayerCriterion
+    usd
+    1
+    1
+    1
+    2025
+    "minimal executable criterion requiring positive cyber-specific exports, share, and company count"
+
+oneNotLeZero : suc zero ≤ zero → ⊥
+oneNotLeZero ()
+
+aggregateHighTechCannotMeetCyberSpecificCriterion :
+  ConcreteGlobalPlayerSupported
+    minimalCyberSpecificCriterion
+    aggregateHighTechEvidence →
+  ⊥
+aggregateHighTechCannotMeetCyberSpecificCriterion support =
+  oneNotLeZero (globalShareThresholdMet support)
+
 candidateScope : GeopoliticalClaimScope
 candidateScope =
   geopoliticalClaimScope
@@ -137,7 +166,7 @@ candidateAssessment =
     pos
     neg
     zer
-    "economic/export significance is source-supported at aggregate level; a final ICJ merits judgment is not present; the trauma-to-export mechanism remains undetermined pending product-level deployment and causal evidence"
+    "economic/export significance is source-supported at aggregate level; a final ICJ merits judgment is not present; the trauma-to-export mechanism remains undetermined pending cyber-specific denominator, product-level deployment, and causal evidence"
 
 -- Constructorless promotion token: the current fixture cannot promote the
 -- candidate mechanism while its required axes remain uninhabited.
