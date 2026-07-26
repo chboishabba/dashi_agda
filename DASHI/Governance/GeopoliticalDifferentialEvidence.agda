@@ -1,14 +1,15 @@
 module DASHI.Governance.GeopoliticalDifferentialEvidence where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Set; Set₁)
 open import Data.Empty using (⊥)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using (List)
 
 import DASHI.Cognition.PNF.EventAlgebra as PNF
+import DASHI.Governance.TraumaExploitationAttractor as Attractor
 import DASHI.Governance.TraumaExploitationDifferential as Differential
 
 ------------------------------------------------------------------------
@@ -186,8 +187,7 @@ record DoctrineTechnologyMechanismReceipt : Set₁ where
 open DoctrineTechnologyMechanismReceipt public
 
 ------------------------------------------------------------------------
--- PNF/ITIR evidence fibres.  Support, contradiction, alternatives and missing
--- axes remain distinct rather than being collapsed into one confidence score.
+-- PNF/ITIR evidence fibres.
 
 record GeopoliticalEvidenceFibre : Set₁ where
   constructor geopoliticalEvidenceFibre
@@ -252,11 +252,9 @@ record GeopoliticalClaimPromotionReceipt
     legalStatusPreciseIsTrue : legalStatusPrecise ≡ true
     noCollectiveEssentialisation : Bool
     noCollectiveEssentialisationIsTrue : noCollectiveEssentialisation ≡ true
-    independentEvidenceRetained :
-      IndependentEvidence
+    independentEvidenceRetained : IndependentEvidence
     independentEvidenceMatchesPacket :
-      independentEvidenceRetained
-      ≡ independentEvidencePacket packet
+      independentEvidenceRetained ≡ independentEvidencePacket packet
     promotionInterpretation : String
 
 open GeopoliticalClaimPromotionReceipt public
@@ -288,13 +286,12 @@ gainEvidenceAloneCannotPromote attempt =
     (independentEvidenceRetained (claimedPromotion attempt))
 
 ------------------------------------------------------------------------
--- Differential attribution must be evidence-bound before it receives a public
--- geopolitical interpretation.
+-- Evidence-bound differential attribution.
 
 record EvidenceBoundDifferentialAttribution
-  {S : _}
+  {S : Attractor.TraumaExploitationSystem}
   (D : Differential.TraumaExploitationDifferential S)
-  (x : _)
+  (x : Attractor.HistoricalState S)
   : Set₁ where
   field
     attribution : Differential.DifferentialAttribution D x
