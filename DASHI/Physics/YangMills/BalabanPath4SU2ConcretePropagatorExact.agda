@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 1ℚ; _+_; _*_; _≤_; Positive)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -65,7 +65,7 @@ configuredGaugeFixedOperatorData = record
   ; Green.energy = configuredGaugeFixedEnergy
   ; Green.coercivityConstant = configuredPathCoercivityConstant
   ; Green.LessEqual = _≤_
-  ; Green.Positive = Positive
+  ; Green.Positive = λ value → 0ℚ < value
   ; Green.positiveCoercivity = configuredPathCoercivityConstantPositive
   ; Green.energyDefinition = λ tangent → refl
   ; Green.Coercive = ConfiguredGaugeFixedCoercive
