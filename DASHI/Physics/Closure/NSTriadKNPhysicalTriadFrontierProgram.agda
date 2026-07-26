@@ -30,7 +30,9 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --   * positive-majorant, signed-block and modified-energy uniform-gap routes;
 --   * composition of a strict gap and global scalar comparison into an
 --     arbitrary-data uniform a-priori estimate;
---   * the Fourier diagonal-subsequence/tail route to the global limit.
+--   * the Fourier diagonal-subsequence/tail route to the global limit;
+--   * exact derivation of the periodic Clay endpoint from any completed
+--     Galerkin compactness/smoothness/continuation package.
 --
 -- Remaining mathematical leaves are deliberately local rather than hidden in
 -- an authority record:
@@ -92,3 +94,4 @@ open import DASHI.Physics.Closure.NSTriadKNArbitraryDataAprioriProgram public
 open import DASHI.Physics.Closure.NSTriadKNSignedGapAprioriComposition public
 open import DASHI.Physics.Closure.NSTriadKNFourierLimitCompletionComposition public
 open import DASHI.Physics.Closure.NSTriadKNGalerkinGlobalRegularityCompletion public
+open import DASHI.Physics.Closure.NSTriadKNGalerkinCompletionEndpoint public
