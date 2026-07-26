@@ -3,7 +3,7 @@ module DASHI.Analysis.MarxPowerArithmetic where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Primitive using (Set₁)
 open import Relation.Binary.PropositionalEquality
-  using (_≡_; refl; sym; trans; cong; cong₂)
+  using (_≡_; refl; sym; trans; cong)
 
 open import DASHI.Analysis.MarxDifferentialCore
 open import DASHI.Analysis.MarxPolynomialDifferential
@@ -19,12 +19,16 @@ record MarxPowerArithmeticLaws
   field
     powerLaws : MarxPowerAlgebraLaws A
     addCommLaw : ∀ x y → _+_ A x y ≡ _+_ A y x
+    mulInterchangeLaw :
+      ∀ a b x y →
+      _*_ A (_*_ A a b) (_*_ A x y)
+      ≡ _*_ A (_*_ A a x) (_*_ A b y)
 
 open MarxPowerArithmeticLaws public
 
 _+N_ : Nat → Nat → Nat
-zero +N n = n
-suc m +N n = suc (m +N n)
+m +N zero = m
+m +N suc n = suc (m +N n)
 
 natCastAdd :
   {A : MarxAlgebra} →
@@ -32,20 +36,12 @@ natCastAdd :
   ∀ m n →
   natCast {A} (m +N n)
   ≡ _+_ A (natCast m) (natCast n)
-natCastAdd {A} L zero n =
-  sym (addZeroLeftLaw (powerLaws L) (natCast n))
-natCastAdd {A} L (suc m) n =
+natCastAdd {A} L m zero =
+  sym (addZeroRightLaw (powerLaws L) (natCast m))
+natCastAdd {A} L m (suc n) =
   trans
     (cong (λ t → _+_ A t (one A)) (natCastAdd L m n))
-    (trans
-      (addAssocLaw (powerLaws L) (natCast m) (natCast n) (one A))
-      (trans
-        (cong
-          (λ t → _+_ A (natCast m) t)
-          (addCommLaw L (natCast n) (one A)))
-        (sym
-          (addAssocLaw (powerLaws L)
-            (natCast m) (one A) (natCast n)))))
+    (addAssocLaw (powerLaws L) (natCast m) (natCast n) (one A))
 
 natScaleAdd :
   {A : MarxAlgebra} →
@@ -103,45 +99,26 @@ powerMulBase {A} L (suc n) x y =
     (cong
       (λ t → _*_ A t (_*_ A x y))
       (powerMulBase L n x y))
-    (trans
-      (sym
-        (mulAssoc A
-          (_*_ A (powerFunction n x) (powerFunction n y))
-          x y))
-      (trans
-        (cong
-          (λ t → _*_ A t y)
-          (trans
-            (mulAssoc A (powerFunction n x) (powerFunction n y) x)
-            (trans
-              (cong
-                (λ t → _*_ A (powerFunction n x) t)
-                (mulCommLaw (powerLaws L) (powerFunction n y) x))
-              (sym
-                (mulAssoc A
-                  (powerFunction n x) x
-                  (powerFunction n y))))))
-        (mulAssoc A
-          (_*_ A (powerFunction n x) x)
-          (powerFunction n y)
-          y)))
+    (mulInterchangeLaw L
+      (powerFunction n x)
+      (powerFunction n y)
+      x y)
 
 ------------------------------------------------------------------------
 -- Zero-safe displayed power rule.
 
-data PowerDerivativeNormalForm
-  (A : MarxAlgebra)
-  : Nat → Set where
-  zeroPowerDerivative :
-    PowerDerivativeNormalForm A zero
-  successorPowerDerivative :
-    ∀ n →
-    PowerDerivativeNormalForm A (suc n)
+powerDerivativeValue :
+  {A : MarxAlgebra} →
+  Nat → Carrier A → Carrier A
+powerDerivativeValue {A} zero x = zero A
+powerDerivativeValue {A} (suc n) x =
+  natScale (suc n) (powerFunction n x)
 
-powerDerivativeZeroSafe :
+powerDerivative :
   {A : MarxAlgebra} →
   (L : MarxPowerAlgebraLaws A) →
   ∀ n x →
-  PowerDerivativeNormalForm A n
-powerDerivativeZeroSafe L zero x = zeroPowerDerivative
-powerDerivativeZeroSafe L (suc n) x = successorPowerDerivative n
+  marxDerivative (powerFactorisation n) x
+  ≡ powerDerivativeValue n x
+powerDerivative L zero x = powerDerivativeZero x
+powerDerivative L (suc n) x = powerDerivativeNatScale L n x
