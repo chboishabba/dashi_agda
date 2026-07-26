@@ -8,6 +8,7 @@ on:
       - 'DASHI/Analysis/MarxConstructiveRealAdapter.agda'
       - 'DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda'
       - 'DASHI/Analysis/MarxFastCauchyCompletionCutset.agda'
+      - 'DASHI/Analysis/MarxFastCauchyDerivativeCompletion.agda'
       - 'DASHI/Analysis/MarxPowerRuleNormalisation.agda'
       - 'DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda'
       - 'DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda'
