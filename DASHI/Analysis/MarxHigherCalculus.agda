@@ -70,6 +70,9 @@ record HigherDerivativeTower
   field
     baseAdmissible : admissible C f
     derivativeAtOrder : Nat → Function A
+    admissibleAtOrder :
+      (n : Nat) →
+      admissible C (derivativeAtOrder n)
     orderZero : derivativeAtOrder zero ≡ f
     orderSuccessor :
       ∀ n →
@@ -77,10 +80,6 @@ record HigherDerivativeTower
       ≡ familyDerivative C
           (derivativeAtOrder n)
           (admissibleAtOrder n)
-
-    admissibleAtOrder :
-      (n : Nat) →
-      admissible C (derivativeAtOrder n)
 
 ------------------------------------------------------------------------
 -- Taylor coefficients.
@@ -127,7 +126,6 @@ record DirectionalDerivative
   : Set₁ where
   field
     at : V → V → W
-    -- at x v represents D_v f(x).
 
 record FrechetDerivative
   (Scalar V W : Set)
@@ -181,14 +179,11 @@ record ExteriorDerivative
   (Scalar V : Set)
   : Set₁ where
   field
+    zeroForm : DifferentialForm Scalar V
     d : DifferentialForm Scalar V → DifferentialForm Scalar V
     dSquaredZero :
       ∀ omega →
-      d (d omega) ≡ d (d omega)
-
--- dSquaredZero is presently only the typed equation surface.  A concrete
--- alternating-form implementation must strengthen it to equality with the
--- selected zero form.
+      d (d omega) ≡ zeroForm
 
 record IntegrationInterface
   (Scalar Domain : Set)
