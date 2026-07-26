@@ -5,6 +5,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --
 -- Machine-constructed or exactly reduced here:
 --   * literal cutoff-cube resonant-triad enumeration;
+--   * executable, sound and complete output-indexed physical fibres;
+--   * exact swap, reality and three-leg energy-orbit constructions;
 --   * exact max-norm triangle and reverse-triangle geometry;
 --   * literal ceil-log dyadic shell function and explicit constants
 --       Csep = 3, Cout = 2, Cin = 2;
@@ -15,7 +17,6 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --   * instantiation of the exact signed velocity-form coefficient on C^3;
 --   * exact resonant null identities u_p·q = u_p·k and u_q·p = u_q·k;
 --   * the concrete C^3 bridge for those null identities;
---   * exact construction of the three physical energy-transfer legs;
 --   * reduction of the phase formula to sesquilinear scalar algebra;
 --   * exact output-indexed projected Galerkin sums and factor/orbit audits;
 --   * executable coarse FT/transition/adversarial diagnostics;
@@ -43,6 +44,9 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration public
+open import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber public
+open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry public
+open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction public
 open import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle public
 open import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalScaleTrichotomy public
@@ -57,7 +61,6 @@ open import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit public
 open import DASHI.Physics.Closure.NSTriadKNPositivePartCancellationNoGo public
 open import DASHI.Physics.Closure.NSTriadKNResonantNullGain public
 open import DASHI.Physics.Closure.NSTriadKNComplex3NullGainBridge public
-open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction public
 open import DASHI.Physics.Closure.NSTriadKNPhaseFactorizationReduction public
 
 open import DASHI.Physics.Closure.NSTriadKNCoarseGainDiagnostics public
