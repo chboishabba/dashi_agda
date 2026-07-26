@@ -6,14 +6,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 
 ------------------------------------------------------------------------
 -- Correct Fourier reality law.
---
--- For a real velocity field, u(-k) = conjugate (u(k)).  The literal wave
--- vector itself obeys q(-k) = -q(k), not q(-k) = conjugate(q(k)).
 ------------------------------------------------------------------------
 
 RealityCondition :
@@ -21,6 +19,15 @@ RealityCondition :
   (Z3.FourierMode → C3.Complex3 F) → Set r
 RealityCondition state =
   ∀ k → state (Z3.negateMode k) ≡ C3.complex3Conjugate (state k)
+
+DivergenceFreeCondition :
+  ∀ {r} {F : C3.RealField r} →
+  C3.IntegerEmbedding F →
+  (Z3.FourierMode → C3.Complex3 F) → Set r
+DivergenceFreeCondition E state =
+  ∀ k →
+  C3.bilinearDot3 (state k) (C3.modeVector E k)
+  ≡ C3.complexZero _
 
 record CorrectComplex3RealityLaws
     {r : Level}
@@ -82,8 +89,7 @@ record FiniteGalerkinRealityPreservation
 open FiniteGalerkinRealityPreservation public
 
 ------------------------------------------------------------------------
--- Normalised transverse frames.  A frame is data plus proofs, not an
--- arbitrary choice hidden behind a code-to-mode authority.
+-- Normalised transverse frames.
 ------------------------------------------------------------------------
 
 record NormalisedTransverseFrame
@@ -218,17 +224,17 @@ record ExactComplex3PhaseFormula
 open ExactComplex3PhaseFormula public
 
 ------------------------------------------------------------------------
--- Complete triad energy cancellation tied to the exact signed coefficient.
+-- Correct energy-cancellation conventions.
 ------------------------------------------------------------------------
 
-signedTransferAt :
+orderedSignedTransferAt :
   ∀ {r} {F : C3.RealField r}
     (E : C3.IntegerEmbedding F)
     (I : C3.ModeInverseSquare F E) →
   Physical.PhysicalTriadIncidence →
   (Z3.FourierMode → C3.Complex3 F) →
   C3.Complex F
-signedTransferAt {F = F} E I τ velocity =
+orderedSignedTransferAt {F = F} E I τ velocity =
   Signed.testedSignedCoefficient
     (C3.complex3VelocityGalerkinLaws F E I)
     (Physical.k τ)
@@ -238,34 +244,62 @@ signedTransferAt {F = F} E I τ velocity =
     (velocity (Physical.q τ))
     (velocity (Physical.k τ))
 
+signedTransferAt = orderedSignedTransferAt
+
+orderedPairSignedTransferAt :
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E) →
+  Physical.PhysicalTriadIncidence →
+  (Z3.FourierMode → C3.Complex3 F) →
+  C3.Complex F
+orderedPairSignedTransferAt {F = F} E I τ velocity =
+  Signed.testedOrderedPairCoefficient
+    (C3.complex3VelocityGalerkinLaws F E I)
+    (Physical.k τ)
+    (Physical.p τ)
+    (Physical.q τ)
+    (velocity (Physical.p τ))
+    (velocity (Physical.q τ))
+    (velocity (Physical.k τ))
+
+record ExactOrderedRealityPairCancellation
+    {r : Level}
+    (F : C3.RealField r)
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E)
+    (baseTriad : Physical.PhysicalTriadIncidence) : Set (lsuc r) where
+  field
+    orderedRealityPairCancellation :
+      (velocity : Z3.FourierMode → C3.Complex3 F) →
+      RealityCondition velocity →
+      DivergenceFreeCondition E velocity →
+      C3.complexAdd
+        (orderedSignedTransferAt E I baseTriad velocity)
+        (orderedSignedTransferAt E I
+          (Orbit.orderedRealityMate baseTriad) velocity)
+      ≡ C3.complexZero F
+
+open ExactOrderedRealityPairCancellation public
+
 record ExactTriadEnergyCancellation
     {r : Level}
     (F : C3.RealField r)
     (E : C3.IntegerEmbedding F)
-    (I : C3.ModeInverseSquare F E) : Set (lsuc r) where
+    (I : C3.ModeInverseSquare F E)
+    (baseTriad : Physical.PhysicalTriadIncidence) : Set (lsuc r) where
   field
-    baseTriad legK legP legQ : Physical.PhysicalTriadIncidence
-
-    legKIsBase : legK ≡ baseTriad
-
-    pLegFirstInput : Physical.p legP ≡ Physical.k baseTriad
-    pLegSecondInput :
-      Physical.q legP ≡ Z3.negateMode (Physical.q baseTriad)
-    pLegOutput : Physical.k legP ≡ Physical.p baseTriad
-
-    qLegFirstInput : Physical.p legQ ≡ Physical.k baseTriad
-    qLegSecondInput :
-      Physical.q legQ ≡ Z3.negateMode (Physical.p baseTriad)
-    qLegOutput : Physical.k legQ ≡ Physical.q baseTriad
-
     completeTriadCancellation :
       (velocity : Z3.FourierMode → C3.Complex3 F) →
       RealityCondition velocity →
+      DivergenceFreeCondition E velocity →
       C3.complexAdd
         (C3.complexAdd
-          (signedTransferAt E I legK velocity)
-          (signedTransferAt E I legP velocity))
-        (signedTransferAt E I legQ velocity)
+          (orderedPairSignedTransferAt E I baseTriad velocity)
+          (orderedPairSignedTransferAt E I
+            (Orbit.pEnergyLeg baseTriad) velocity))
+        (orderedPairSignedTransferAt E I
+          (Orbit.qEnergyLeg baseTriad) velocity)
       ≡ C3.complexZero F
 
 open ExactTriadEnergyCancellation public
@@ -281,6 +315,13 @@ waveVectorRealityAlgebraClosed = true
 
 waveVectorRealityAlgebraClosedIsTrue : waveVectorRealityAlgebraClosed ≡ true
 waveVectorRealityAlgebraClosedIsTrue = refl
+
+energyCancellationConventionCorrected : Bool
+energyCancellationConventionCorrected = true
+
+energyCancellationConventionCorrectedIsTrue :
+  energyCancellationConventionCorrected ≡ true
+energyCancellationConventionCorrectedIsTrue = refl
 
 normalisedFrameTargetSpecified : Bool
 normalisedFrameTargetSpecified = true
