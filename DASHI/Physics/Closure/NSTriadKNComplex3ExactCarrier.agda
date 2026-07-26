@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier where
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base using (ℤ)
+import Data.Integer.Base as Int using (ℤ; +_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
@@ -57,8 +57,8 @@ complexZero F = complex (zero F) (zero F)
 complexOne : ∀ {r} (F : RealField r) → Complex F
 complexOne F = complex (one F) (zero F)
 
-imaginaryUnit : ∀ {r} (F : RealField r) → Complex F
-imaginaryUnit F = complex (zero F) (one F)
+complexI : ∀ {r} (F : RealField r) → Complex F
+complexI F = complex (zero F) (one F)
 
 complexAdd : ∀ {r} {F : RealField r} → Complex F → Complex F → Complex F
 complexAdd {F = F} (complex ar ai) (complex br bi) =
@@ -155,12 +155,12 @@ hermitianPairing3 a b = bilinearDot3 (complex3Conjugate a) b
 record IntegerEmbedding {r : Level} (F : RealField r) : Set (lsuc r) where
   field
     embedInteger : ℤ → Carrier F
-    embedZero : embedInteger (+ 0) ≡ zero F
+    embedZero : embedInteger (Int.+ 0) ≡ zero F
     embedAdd : ∀ a b →
-      embedInteger (a Data.Integer.Base.+ b)
+      embedInteger (Int._+_ a b)
       ≡ add F (embedInteger a) (embedInteger b)
     embedNegate : ∀ a →
-      embedInteger (Data.Integer.Base.- a)
+      embedInteger (Int.- a)
       ≡ negate F (embedInteger a)
 
 open IntegerEmbedding public
@@ -227,7 +227,7 @@ complex3VelocityGalerkinLaws :
     (Complex F)
 complex3VelocityGalerkinLaws F E I = record
   { scalarZero = complexZero F
-  ; imaginaryUnit = imaginaryUnit F
+  ; imaginaryUnit = complexI F
   ; scalarAdd = complexAdd
   ; scalarMultiply = complexMultiply
   ; scalarNegate = complexNegate
