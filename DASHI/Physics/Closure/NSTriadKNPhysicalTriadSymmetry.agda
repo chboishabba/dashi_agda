@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (ℤ; +_; _+_; -_)
 import Data.Integer.Properties as Int
 open import Relation.Binary.PropositionalEquality
-  using (cong; trans)
+  using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -40,9 +40,9 @@ negateModeAdd :
   ≡ Z3.negateMode (Z3.addMode p q)
 negateModeAdd (Z3.mode px py pz) (Z3.mode qx qy qz) =
   modeExt
-    (Int.neg-distrib-+ px qx)
-    (Int.neg-distrib-+ py qy)
-    (Int.neg-distrib-+ pz qz)
+    (sym (Int.neg-distrib-+ px qx))
+    (sym (Int.neg-distrib-+ py qy))
+    (sym (Int.neg-distrib-+ pz qz))
 
 record SameLatticeTriad
     (left right : Physical.PhysicalTriadIncidence) : Set where
