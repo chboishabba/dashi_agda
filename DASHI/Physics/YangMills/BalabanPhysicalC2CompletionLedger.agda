@@ -8,6 +8,7 @@ import DASHI.Physics.YangMills.BalabanPath4PhysicalMartingaleOrthogonalityExact
 import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
 import DASHI.Physics.YangMills.BalabanPath4SU2CoarseFineSplittingExact
 import DASHI.Physics.YangMills.BalabanPath4SU2CoarsePenaltyExact
+import DASHI.Physics.YangMills.BalabanPath4SU2FullGaugeFixedCoercivityExact
 import DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact
 import DASHI.Physics.YangMills.BalabanPath4SU2TranslatedCoarsePropagatorExact
 import DASHI.Physics.YangMills.BalabanPath4SU2BackgroundStabilityExact
@@ -36,6 +37,15 @@ coarsePenaltyDominationLevel = machineChecked
 
 fineResidualKernelAndCoercivityLevel : ProofLevel
 fineResidualKernelAndCoercivityLevel = machineChecked
+
+periodicDifferenceResidualInvarianceLevel : ProofLevel
+periodicDifferenceResidualInvarianceLevel = machineChecked
+
+fullGaugeFixedResidualDecompositionLevel : ProofLevel
+fullGaugeFixedResidualDecompositionLevel = machineChecked
+
+unconditionalFullGaugeFixedCoercivityLevel : ProofLevel
+unconditionalFullGaugeFixedCoercivityLevel = machineChecked
 
 configuredGaugeFixedOperatorLevel : ProofLevel
 configuredGaugeFixedOperatorLevel = machineChecked
