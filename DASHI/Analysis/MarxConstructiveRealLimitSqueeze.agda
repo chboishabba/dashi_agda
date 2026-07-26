@@ -1,6 +1,8 @@
 module DASHI.Analysis.MarxConstructiveRealLimitSqueeze where
 
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Primitive using (Set; Set₁)
+open import Data.Product using (_×_; _,_)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.MarxConstructiveRealTopology
@@ -37,7 +39,19 @@ record EpsilonContinuityAt
   : Set₁ where
   field
     PositiveRadius : Real R → Set
-    epsilonDeltaStatement : Set
+
+    epsilonDeltaStatement :
+      ∀ epsilon →
+      PositiveRadius epsilon →
+      Σ (Real R)
+        (λ delta →
+          PositiveRadius delta
+          ×
+          (∀ y →
+            _<_ R (distance R x y) delta →
+            _<_ R (distance R (f x) (f y)) epsilon))
+
+open EpsilonContinuityAt public
 
 record SequentialEpsilonContinuityBridge
   (R : ConstructedOrderedCompleteReal)
@@ -67,10 +81,3 @@ sequentialContinuityIffEpsilonContinuity :
 sequentialContinuityIffEpsilonContinuity bridge f x =
   sequentialContinuityImpliesEpsilon bridge f x ,
   epsilonContinuityImpliesSequential bridge f x
-  where
-    infixr 4 _×_
-    record _×_ (A B : Set) : Set where
-      constructor _,_
-      field
-        first : A
-        second : B
