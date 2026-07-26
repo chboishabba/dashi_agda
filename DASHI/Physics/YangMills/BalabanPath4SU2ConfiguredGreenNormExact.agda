@@ -4,6 +4,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -11,6 +12,8 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational; sumRationalScale)
 open import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact
   using (sumRationalMonotone)
+open import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact
+  using (globalNormSq)
 open import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
   using (bondComponent; bondNormSq)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
@@ -26,18 +29,14 @@ configuredGreenBondNormBound source component =
   trans
     (sumRationalMonotone
       (allCyclicIndices four)
-      (λ axis →
-        DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact.globalNormSq
-          (bondComponent (configuredPhysicalGreen source component) axis))
-      (λ axis → sixteen *
-        DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact.globalNormSq
-          (bondComponent (source component) axis))
+      (λ axis → globalNormSq
+        (bondComponent (configuredPhysicalGreen source component) axis))
+      (λ axis → sixteen * globalNormSq
+        (bondComponent (source component) axis))
       (λ axis → scalarGreenNormBound
         (bondComponent (source component) axis)))
     (sumRationalScale sixteen (allCyclicIndices four)
-      (λ axis →
-        DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact.globalNormSq
-          (bondComponent (source component) axis)))
+      (λ axis → globalNormSq (bondComponent (source component) axis)))
 
 configuredPhysicalGreenNormBound : ∀ source →
   physicalUnweightedNormSq (configuredPhysicalGreen source)
