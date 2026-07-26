@@ -4,7 +4,7 @@
 This script is intentionally narrower than Agda kernel validation. It checks
 that exact reductions and the honest producer ledger remain present, and rejects
 postulates, holes, unsafe termination and underscore proof bodies in the new
-frontier modules.
+frontier modules and repaired finite foundations.
 """
 
 from __future__ import annotations
@@ -22,6 +22,15 @@ FILES: dict[Path, tuple[str, ...]] = {
         "zeroNotInSucMap",
         "allCyclicIndicesDuplicateFree",
         "cyclicZeroNotInSuccessorMapLevel = machineChecked",
+    ),
+    YM / "BalabanPhysicalBlockFibreSumsExact.agda": (
+        "centeredDifferenceAlgebra",
+        "scaledCenteredDifferenceExact",
+        "scaledCenteredDifferenceSquareExact",
+        "scaledCenteredFibreEnergyExact",
+        "centeredSquareInductionAlgebra",
+        "scaledVarianceNormalization",
+        "physicalFibreCenteredDifferenceLevel = machineChecked",
     ),
     YM / "BalabanConstructiveRationalMatrixInverseExact.agda": (
         "matrixProductActionExact",
@@ -166,10 +175,10 @@ def main() -> None:
         fail("frontier ledger does not import the literal matrix coordinate carrier")
 
     print(
-        "Constructive finite-matrix inverse algebra, literal physical matrix "
-        "coordinates, P1--P5 exact reductions, numerical budgets, endpoint "
-        "surfaces, and honest conditional producer ledger are present and "
-        "hole-free."
+        "Repaired finite enumeration and fibre centering foundations, constructive "
+        "finite-matrix inverse algebra, literal physical matrix coordinates, "
+        "P1--P5 exact reductions, numerical budgets, endpoint surfaces, and "
+        "honest conditional producer ledger are present and hole-free."
     )
 
 
