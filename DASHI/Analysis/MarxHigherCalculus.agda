@@ -3,7 +3,7 @@ module DASHI.Analysis.MarxHigherCalculus where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Primitive using (Set; Set₁)
-open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 open import DASHI.Analysis.MarxDifferentialCore public
 open import DASHI.Algebra.Jacobian.InvertibilityStrata
@@ -12,7 +12,7 @@ open import Verification.JacobianCounterexampleKernel
   using (¬_; JacobianConjectureDimension3; jacobianConjectureDimension3False)
 
 ------------------------------------------------------------------------
--- Iterated scalar derivatives.
+-- Iterated scalar derivatives and Taylor coefficients.
 
 iterateDerivative :
   {A : MarxAlgebra} →
@@ -78,9 +78,6 @@ record HigherDerivativeTower
           (derivativeAtOrder n)
           (admissibleAtOrder n)
 
-------------------------------------------------------------------------
--- Taylor coefficient carrier.
-
 record TaylorCoefficientStructure
   (A : MarxAlgebra)
   : Set₁ where
@@ -123,11 +120,6 @@ record Module
     addZeroLeftV : ∀ v → zeroV +V v ≡ v
     addZeroRightV : ∀ v → v +V zeroV ≡ v
     addAssocV : ∀ u v w → (u +V v) +V w ≡ u +V (v +V w)
-    addInterchangeV :
-      ∀ a b c d →
-      (a +V b) +V (c +V d)
-      ≡ (a +V c) +V (b +V d)
-
     scaleZeroV : ∀ scalar → scalar • zeroV ≡ zeroV
     scaleOneV : ∀ v → one A • v ≡ v
     scaleDistributesAddV :
@@ -198,34 +190,6 @@ linearZero {W = W} =
     ; mapScale = λ scalar _ → sym (scaleZeroV W scalar)
     }
 
-linearAdd :
-  {A : MarxAlgebra} →
-  {V W : Module A} →
-  LinearMap A V W →
-  LinearMap A V W →
-  LinearMap A V W
-linearAdd {W = W} F G =
-  record
-    { apply = λ v → _+V_ W (apply F v) (apply G v)
-    ; mapZero =
-        trans
-          (cong₂ (_+V_ W) (mapZero F) (mapZero G))
-          (addZeroLeftV W (zeroV W))
-    ; mapAdd = λ u v →
-        trans
-          (cong₂ (_+V_ W) (mapAdd F u v) (mapAdd G u v))
-          (addInterchangeV W
-            (apply F u) (apply F v)
-            (apply G u) (apply G v))
-    ; mapScale = λ scalar v →
-        trans
-          (cong₂ (_+V_ W)
-            (mapScale F scalar v)
-            (mapScale G scalar v))
-          (sym
-            (scaleDistributesAddV W scalar (apply F v) (apply G v)))
-    }
-
 ------------------------------------------------------------------------
 -- Normed modules and bounded operators.
 
@@ -266,13 +230,13 @@ record BoundedLinearMap
   : Set₁ where
   field
     linear : LinearMap A V W
-    bound : Carrier A
-    boundNonnegative : _≤S_ O (zero A) bound
+    operatorBound : Carrier A
+    operatorBoundNonnegative : _≤S_ O (zero A) operatorBound
     applyBound :
       ∀ v →
       _≤S_ O
         (norm NW (apply linear v))
-        (_*_ A bound (norm NV v))
+        (_*_ A operatorBound (norm NV v))
 
 open BoundedLinearMap public
 
@@ -333,22 +297,9 @@ record VectorLittleOStructure
       LittleO r →
       LittleO s →
       LittleO (λ h → _+V_ W (r h) (s h))
-    linearImageLittleO :
-      ∀ {Z : Module A}
-        (L : LinearMap A W Z)
-        {r : Vector V → Vector W} →
-      LittleO r →
-      VectorLittleOStructure.LittleO
-        (record
-          { LittleO = λ q → Set
-          ; zeroLittleO = Set
-          ; addLittleO = λ _ _ → Set
-          ; linearImageLittleO = λ _ _ → Set
-          })
-        (λ h → apply L (r h))
 
--- The generic linear-image field above cannot be inhabited without selecting
--- a target little-o structure.  The usable cross-space version is explicit:
+open VectorLittleOStructure public
+
 record LittleOTransport
   {A : MarxAlgebra}
   {U V W : Module A}
@@ -359,10 +310,9 @@ record LittleOTransport
   field
     transportLittleO :
       ∀ {r} →
-      VectorLittleOStructure.LittleO RUV r →
-      VectorLittleOStructure.LittleO RUW (λ h → apply L (r h))
+      LittleO RUV r →
+      LittleO RUW (λ h → apply L (r h))
 
-open VectorLittleOStructure public
 open LittleOTransport public
 
 record FrechetDerivativeAt
@@ -412,7 +362,7 @@ frechetConstant {W = W} R constant x =
   record
     { derivative = linearZero
     ; remainder = λ _ → zeroV W
-    ; expansion = λ h →
+    ; expansion = λ _ →
         sym
           (trans
             (cong (λ tail → _+V_ W constant tail)
@@ -421,43 +371,44 @@ frechetConstant {W = W} R constant x =
     ; remainderLittleO = zeroLittleO R
     }
 
-record FrechetAddExpansionLaws
+record FrechetAddData
   {A : MarxAlgebra}
   {V W : Module A}
   (R : VectorLittleOStructure A V W)
+  {f g : Vector V → Vector W}
+  {x : Vector V}
+  (F : FrechetDerivativeAt R f x)
+  (G : FrechetDerivativeAt R g x)
   : Set₁ where
   field
-    combineSumExpansion :
-      {f g : Vector V → Vector W} →
-      {x : Vector V} →
-      (F : FrechetDerivativeAt R f x) →
-      (G : FrechetDerivativeAt R g x) →
+    sumLinear : LinearMap A V W
+    sumRemainder : Vector V → Vector W
+    sumExpansion :
       ∀ h →
       _+V_ W (f (_+V_ V x h)) (g (_+V_ V x h))
       ≡ _+V_ W
           (_+V_ W (f x) (g x))
-          (_+V_ W
-            (apply (linearAdd (derivative F) (derivative G)) h)
-            (_+V_ W (remainder F h) (remainder G h)))
+          (_+V_ W (apply sumLinear h) (sumRemainder h))
+    sumRemainderLittleO : LittleO R sumRemainder
 
-open FrechetAddExpansionLaws public
+open FrechetAddData public
 
 frechetSum :
   {A : MarxAlgebra} →
   {V W : Module A} →
   {R : VectorLittleOStructure A V W} →
-  FrechetAddExpansionLaws R →
   {f g : Vector V → Vector W} →
   {x : Vector V} →
-  FrechetDerivativeAt R f x →
-  FrechetDerivativeAt R g x →
+  (F : FrechetDerivativeAt R f x) →
+  (G : FrechetDerivativeAt R g x) →
+  FrechetAddData R F G →
   FrechetDerivativeAt R (λ y → _+V_ W (f y) (g y)) x
-frechetSum laws F G =
+frechetSum F G data =
   record
-    { derivative = linearAdd (derivative F) (derivative G)
-    ; remainder = λ h → _+V_ _ (remainder F h) (remainder G h)
-    ; expansion = combineSumExpansion laws F G
-    ; remainderLittleO = addLittleO _ (remainderLittleO F) (remainderLittleO G)
+    { derivative = sumLinear data
+    ; remainder = sumRemainder data
+    ; expansion = sumExpansion data
+    ; remainderLittleO = sumRemainderLittleO data
     }
 
 record FrechetDerivativeUniqueness
@@ -522,7 +473,7 @@ frechetChainRule F G data =
     }
 
 ------------------------------------------------------------------------
--- Directional derivatives are applications of the Frechet derivative.
+-- Directional derivatives are evaluations of the Frechet derivative.
 
 DirectionalDerivativeAt :
   {A : MarxAlgebra} →
@@ -559,7 +510,7 @@ directionalScale :
 directionalScale F = mapScale (derivative F)
 
 ------------------------------------------------------------------------
--- Finite-coordinate Jacobians.
+-- Finite-coordinate Jacobians and the repository's counterexample boundary.
 
 record FiniteBasis
   {A : MarxAlgebra}
@@ -626,22 +577,16 @@ jacobianRepresentsFrechet BV CW F row column = refl
 
 record JacobianChainRuleReceipt
   {A : MarxAlgebra}
-  {U V W : Module A}
+  {U W : Module A}
   (BU : FiniteBasis U)
-  (BV : FiniteBasis V)
   (CW : CoordinateFunctional W)
   (composite : JacobianAt BU CW)
   : Set₁ where
   field
-    MiddleIndex : Set
     matrixProductEntry : Row CW → Index BU → Carrier A
     jacobianChainRule :
       ∀ row column →
       entry composite row column ≡ matrixProductEntry row column
-
--- Repository-wide boundary: a nonsingular/constant Jacobian remains local
--- differential data.  The checked three-dimensional collision refutes the
--- promotion to global injectivity.
 
 constantJacobianDoesNotEntailGlobalInjectivity :
   ¬ JacobianConjectureDimension3
@@ -652,7 +597,7 @@ jacobianPromotionBoundary : PromotionBoundary
 jacobianPromotionBoundary = canonicalPromotionBoundary
 
 ------------------------------------------------------------------------
--- Higher-calculus completion bundle.
+-- Completion bundle.
 
 record MarxHigherCalculusBundle : Set₁ where
   field
