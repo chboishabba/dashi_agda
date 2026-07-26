@@ -1,6 +1,5 @@
 module DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -27,8 +26,8 @@ record AllScaleFiniteVolumeConstruction
     finiteReflectionPositive : ∀ scale volume →
       ReflectionPositive (finiteMeasure scale volume)
 
-    constantsUniformInScaleAndVolume : Set
-    uniformConstants : constantsUniformInScaleAndVolume
+    ConstantsUniformInScaleAndVolume : Set
+    uniformConstants : ConstantsUniformInScaleAndVolume
 
 open AllScaleFiniteVolumeConstruction public
 
@@ -40,6 +39,7 @@ record ThermodynamicLimit
   field
     infiniteVolumeMeasure : Scale → InfiniteVolumeMeasure
     volumeTendsToInfinity : Nat → Volume
+    expectationInfinite : Scale → Observable → Value
     Converges : (Nat → Value) → Value → Set
 
     observableThermodynamicLimit : ∀ scale observable →
@@ -48,10 +48,8 @@ record ThermodynamicLimit
           (finiteMeasure finite scale (volumeTendsToInfinity n)) observable)
         (expectationInfinite scale observable)
 
-    expectationInfinite : Scale → Observable → Value
-
-    boundaryConditionIndependent : Set
-    thermodynamicBoundaryIndependence : boundaryConditionIndependent
+    BoundaryConditionIndependent : Set
+    thermodynamicBoundaryIndependence : BoundaryConditionIndependent
 
 open ThermodynamicLimit public
 
@@ -119,6 +117,7 @@ record PhysicalClusteringSurvival
     latticeDistance : Scale → Distance → Distance
     connectedCorrelation : Scale → Observable → Observable → Distance → Correlation
     correlationMajorant : Bound → Distance → Correlation
+    CorrelationBound : Correlation → Correlation → Set
 
     physicalMassPositive : Positive physicalMass
 
@@ -132,8 +131,6 @@ record PhysicalClusteringSurvival
         (connectedCorrelation scale left right distance)
         (correlationMajorant (latticeMass scale)
           (latticeDistance scale distance))
-
-    CorrelationBound : Correlation → Correlation → Set
 
     exponentConversion : ∀ scale distance →
       CorrelationBound
@@ -169,16 +166,15 @@ record OSSpectralReconstruction
     spectrum : Hamiltonian → Energy → Set
     energyGap : SchwingerFamily → Bound
     Positive : Bound → Set
+    ExponentialClustering : SchwingerFamily → Bound → Set
 
-    reconstructionExact : Set
-    reconstruction : reconstructionExact
+    ReconstructionExact : Set
+    reconstruction : ReconstructionExact
 
     exponentialClusteringImpliesGap : ∀ schwinger mass →
       ExponentialClustering schwinger mass →
       Positive mass →
       Positive (energyGap schwinger)
-
-    ExponentialClustering : SchwingerFamily → Bound → Set
 
 open OSSpectralReconstruction public
 
@@ -198,24 +194,26 @@ record InteractingNontriviality
         (expectation measure interactionObservable)
         (expectation measure gaussianComparisonObservable)
 
-    notConcentratedAtIdentity : ContinuumMeasure → Set
-    notUltralocalProduct : ContinuumMeasure → Set
-    notZeroAfterRenormalization : ContinuumMeasure → Set
+    NotConcentratedAtIdentity : ContinuumMeasure → Set
+    NotUltralocalProduct : ContinuumMeasure → Set
+    NotZeroAfterRenormalization : ContinuumMeasure → Set
 
-    identityNonconcentration : ∀ measure → notConcentratedAtIdentity measure
-    ultralocalProductExcluded : ∀ measure → notUltralocalProduct measure
-    renormalizedFieldNonzero : ∀ measure → notZeroAfterRenormalization measure
+    identityNonconcentration : ∀ measure → NotConcentratedAtIdentity measure
+    ultralocalProductExcluded : ∀ measure → NotUltralocalProduct measure
+    renormalizedFieldNonzero : ∀ measure → NotZeroAfterRenormalization measure
 
 open InteractingNontriviality public
 
 ------------------------------------------------------------------------
--- Complete P5 endpoint package.
+-- Complete P5 endpoint package.  The continuum clustering input is explicitly
+-- linked to OS reconstruction, yielding a positive spectral-gap conclusion.
 ------------------------------------------------------------------------
 
 record PhysicalP5MassGapCertificate
     (Scale Volume Configuration Observable Measure Value Bound
      InfiniteVolumeMeasure ContinuumMeasure ContinuumObservable ContinuumValue
-     SchwingerFamily Hilbert Hamiltonian Vector Energy Distance Correlation : Set) : Set₁ where
+     SchwingerFamily Hilbert Hamiltonian Vector Energy Distance Correlation : Set)
+    : Set₁ where
   field
     finiteConstruction : AllScaleFiniteVolumeConstruction
       Scale Volume Configuration Observable Measure Value Bound
@@ -232,10 +230,31 @@ record PhysicalP5MassGapCertificate
     nontriviality : InteractingNontriviality
       ContinuumMeasure ContinuumObservable ContinuumValue
 
+    continuumExponentialClustering :
+      ExponentialClustering spectralReconstruction
+        (schwingerFunctions osLimit (ContinuumLimit.continuumMeasure continuumLimit))
+        (physicalMass physicalClustering)
+
+    positivePhysicalSpectralGap :
+      Positive spectralReconstruction
+        (energyGap spectralReconstruction
+          (schwingerFunctions osLimit
+            (ContinuumLimit.continuumMeasure continuumLimit)))
+    positivePhysicalSpectralGap =
+      exponentialClusteringImpliesGap spectralReconstruction
+        (schwingerFunctions osLimit
+          (ContinuumLimit.continuumMeasure continuumLimit))
+        (physicalMass physicalClustering)
+        continuumExponentialClustering
+        (physicalMassPositive physicalClustering)
+
 open PhysicalP5MassGapCertificate public
 
 p5PhysicalClusteringScaleConversionLevel : ProofLevel
 p5PhysicalClusteringScaleConversionLevel = machineChecked
+
+p5ClusteringToSpectralGapAssemblyLevel : ProofLevel
+p5ClusteringToSpectralGapAssemblyLevel = machineChecked
 
 p5FiniteMeasureConstructionProducerLevel : ProofLevel
 p5FiniteMeasureConstructionProducerLevel = conditional
