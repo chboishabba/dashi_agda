@@ -51,9 +51,11 @@ import DASHI.Biology.BiologicalRecoveryBoundary
 -- OEF / AI student-feedback multi-fibre extension.
 
 import DASHI.Biology.OEFMultiFibreFeedbackHyperfabric
+import DASHI.Biology.HumanCodingMachineCompilationBridge
 import DASHI.Biology.OEFOverlapAnalytics
 import DASHI.Biology.FeedbackNonResponseGovernance
 import DASHI.Biology.IntersectionalFeedbackPrivacyBoundary
 import DASHI.Biology.LongitudinalEngagementTrajectory
 import DASHI.Biology.PedagogicalJPlusOneRouting
 import DASHI.Biology.OEFAIFeedbackFormalisation
+import DASHI.Biology.OEFAIFeedbackFormalisationFull
