@@ -1,0 +1,249 @@
+module DASHI.Analysis.MarxExteriorIntegration where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Primitive using (Set; Set₁)
+open import Data.List.Base using (List; []; _∷_)
+
+open import DASHI.Analysis.MarxDifferentialCore
+open import DASHI.Analysis.MarxHigherCalculus
+
+------------------------------------------------------------------------
+-- Alternating multilinear forms and a genuine graded differential complex.
+
+record AlternatingMultilinearMap
+  (A : MarxAlgebra)
+  (V : Module A)
+  (degree : Nat)
+  : Set₁ where
+  field
+    evaluate : List (Vector V) → Carrier A
+    arityReceipt : Set
+    multilinearityReceipt : Set
+    alternatingReceipt : Set
+
+open AlternatingMultilinearMap public
+
+record GradedDifferentialForms
+  (A : MarxAlgebra)
+  (V : Module A)
+  : Set₁ where
+  field
+    Form : Nat → Set
+    zeroForm : ∀ degree → Form degree
+    asAlternatingMap :
+      ∀ {degree} →
+      Form degree →
+      AlternatingMultilinearMap A V degree
+
+open GradedDifferentialForms public
+
+record ExteriorAlgebra
+  {A : MarxAlgebra}
+  {V : Module A}
+  (G : GradedDifferentialForms A V)
+  : Set₁ where
+  field
+    wedge :
+      ∀ {p q} →
+      Form G p → Form G q → Form G (p +N q)
+
+    wedgeZeroLeft :
+      ∀ {p q} (omega : Form G q) →
+      wedge (zeroForm G p) omega ≡ zeroForm G (p +N q)
+
+    wedgeZeroRight :
+      ∀ {p q} (omega : Form G p) →
+      wedge omega (zeroForm G q) ≡ zeroForm G (p +N q)
+  where
+    _+N_ : Nat → Nat → Nat
+    zero +N n = n
+    suc m +N n = suc (m +N n)
+
+record ExteriorDerivative
+  {A : MarxAlgebra}
+  {V : Module A}
+  (G : GradedDifferentialForms A V)
+  : Set₁ where
+  field
+    d : ∀ {degree} → Form G degree → Form G (suc degree)
+
+    exteriorDerivativeSquaredZero :
+      ∀ {degree} (omega : Form G degree) →
+      d (d omega) ≡ zeroForm G (suc (suc degree))
+
+open ExteriorDerivative public
+
+-- A concrete zero differential is useful as a regression inhabitant and, more
+-- importantly, proves that d²=0 now targets the selected zero form rather than
+-- the old reflexive equation d(d omega)=d(d omega).
+
+zeroExteriorDerivative :
+  {A : MarxAlgebra} →
+  {V : Module A} →
+  (G : GradedDifferentialForms A V) →
+  ExteriorDerivative G
+zeroExteriorDerivative G =
+  record
+    { d = λ {degree} _ → zeroForm G (suc degree)
+    ; exteriorDerivativeSquaredZero = λ _ → refl
+    }
+
+------------------------------------------------------------------------
+-- Literal finite Riemann sums.
+
+record Interval
+  (A : MarxAlgebra)
+  : Set where
+  constructor interval
+  field
+    leftEndpoint : Carrier A
+    rightEndpoint : Carrier A
+
+open Interval public
+
+intervalLength :
+  {A : MarxAlgebra} →
+  Interval A → Carrier A
+intervalLength {A} I = _-_ A (rightEndpoint I) (leftEndpoint I)
+
+record RiemannCell
+  (A : MarxAlgebra)
+  : Set where
+  constructor riemannCell
+  field
+    cellInterval : Interval A
+    tag : Carrier A
+
+open RiemannCell public
+
+cellTerm :
+  {A : MarxAlgebra} →
+  Function A → RiemannCell A → Carrier A
+cellTerm {A} f cell =
+  _*_ A
+    (f (tag cell))
+    (intervalLength (cellInterval cell))
+
+sumCarrierList :
+  {A : MarxAlgebra} →
+  List (Carrier A) → Carrier A
+sumCarrierList {A} [] = zero A
+sumCarrierList {A} (x ∷ xs) = _+_ A x (sumCarrierList xs)
+
+record TaggedPartition
+  (A : MarxAlgebra)
+  : Set₁ where
+  constructor taggedPartition
+  field
+    support : Interval A
+    cells : List (RiemannCell A)
+    orderedReceipt : Set
+    contiguousReceipt : Set
+    tagsInsideCellsReceipt : Set
+    coversSupportReceipt : Set
+
+open TaggedPartition public
+
+riemannSum :
+  {A : MarxAlgebra} →
+  Function A → TaggedPartition A → Carrier A
+riemannSum f partition =
+  sumCarrierList
+    (mapCells (cells partition))
+  where
+    mapCells : List (RiemannCell _) → List (Carrier _)
+    mapCells [] = []
+    mapCells (cell ∷ rest) = cellTerm f cell ∷ mapCells rest
+
+------------------------------------------------------------------------
+-- Constructive Riemann integration laws.
+
+record RiemannIntegralStructure
+  (A : MarxAlgebra)
+  : Set₁ where
+  field
+    _≤I_ : Carrier A → Carrier A → Set
+    IntegrableOn : Interval A → Function A → Set
+    integral : Interval A → Function A → Carrier A
+
+    integralConstant :
+      ∀ I c →
+      integral I (constantFunction c)
+      ≡ _*_ A c (intervalLength I)
+
+    integralAdd :
+      ∀ I f g →
+      IntegrableOn I f →
+      IntegrableOn I g →
+      integral I (addFunctions f g)
+      ≡ _+_ A (integral I f) (integral I g)
+
+    integralScale :
+      ∀ I scalar f →
+      IntegrableOn I f →
+      integral I (λ x → _*_ A scalar (f x))
+      ≡ _*_ A scalar (integral I f)
+
+    integralOrder :
+      ∀ I f g →
+      IntegrableOn I f →
+      IntegrableOn I g →
+      (∀ x → _≤I_ (f x) (g x)) →
+      _≤I_ (integral I f) (integral I g)
+
+    intervalAdditivity :
+      ∀ a b c f →
+      IntegrableOn (interval a b) f →
+      IntegrableOn (interval b c) f →
+      IntegrableOn (interval a c) f →
+      integral (interval a c) f
+      ≡ _+_ A
+          (integral (interval a b) f)
+          (integral (interval b c) f)
+
+open RiemannIntegralStructure public
+
+------------------------------------------------------------------------
+-- Fundamental theorem cutset.  The statements are equality-valued and tied to
+-- the Marx factorisation/ordinary derivative owner, not opaque Set markers.
+
+record FundamentalTheoremBridge
+  {A : MarxAlgebra}
+  (I : RiemannIntegralStructure A)
+  : Set₁ where
+  field
+    accumulated :
+      Interval A → Function A → Function A
+
+    derivativeOfIntegral :
+      ∀ intervalData f →
+      IntegrableOn I intervalData f →
+      MarxFactorisation A (accumulated intervalData f)
+
+    integralOfDerivative :
+      ∀ intervalData f →
+      (F : MarxFactorisation A f) →
+      IntegrableOn I intervalData (marxDerivative F) →
+      integral I intervalData (marxDerivative F)
+      ≡ _-_ A
+          (f (rightEndpoint intervalData))
+          (f (leftEndpoint intervalData))
+
+open FundamentalTheoremBridge public
+
+------------------------------------------------------------------------
+-- Social accumulation surface: cumulative local harm is an integral over an
+-- evidence-bound harm-rate function, not an untyped scalar slogan.
+
+record CumulativeHarmIntegral
+  {A : MarxAlgebra}
+  (I : RiemannIntegralStructure A)
+  : Set₁ where
+  field
+    observationWindow : Interval A
+    harmRate : Function A
+    harmRateIntegrable : IntegrableOn I observationWindow harmRate
+    cumulativeHarm : Carrier A
+    cumulativeHarmIsIntegral :
+      cumulativeHarm ≡ integral I observationWindow harmRate
