@@ -26,9 +26,16 @@ data DuplicateFree {A : Set} : List A → Set where
 
 infixr 5 _∷-free_
 
-postulate
-  zeroNotInSucMap : ∀ {n} →
-    zeroᵢ ∉ map sucᵢ (allCyclicIndices n)
+zeroNotInSucMapGeneric :
+  ∀ {n} {values : List (CyclicIndex n)} →
+  zeroᵢ ∉ map sucᵢ values
+zeroNotInSucMapGeneric {values = []} ()
+zeroNotInSucMapGeneric {values = value ∷ values} (there membership) =
+  zeroNotInSucMapGeneric membership
+
+zeroNotInSucMap : ∀ {n} →
+  zeroᵢ ∉ map sucᵢ (allCyclicIndices n)
+zeroNotInSucMap = zeroNotInSucMapGeneric
 
 sucMapMembershipInverse :
   ∀ {n} {left : CyclicIndex n} {values} →
@@ -197,6 +204,9 @@ cartesianDuplicateFree
     (mapDuplicateFree pairFixedInjective rightFree)
     (cartesianDuplicateFree tailFree rightFree)
     (fixedBlockDisjointFromCartesianTail notInTail)
+
+cyclicZeroNotInSuccessorMapLevel : ProofLevel
+cyclicZeroNotInSuccessorMapLevel = machineChecked
 
 cyclicEnumerationDuplicateFreeLevel : ProofLevel
 cyclicEnumerationDuplicateFreeLevel = machineChecked
