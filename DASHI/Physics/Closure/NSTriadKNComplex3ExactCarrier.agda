@@ -97,6 +97,16 @@ complexConjugateInvolutive :
 complexConjugateInvolutive {F = F} (complex ar ai)
   rewrite negateInvolutive F ai = refl
 
+realEmbedConjugate :
+  ∀ {r} (F : RealField r) (a : Carrier F) →
+  complexConjugate (realEmbed F a) ≡ realEmbed F a
+realEmbedConjugate F a rewrite negateZero F = refl
+
+realEmbedNegate :
+  ∀ {r} (F : RealField r) (a : Carrier F) →
+  complexNegate (realEmbed F a) ≡ realEmbed F (negate F a)
+realEmbedNegate F a rewrite negateZero F = refl
+
 ------------------------------------------------------------------------
 -- Literal C^3.
 ------------------------------------------------------------------------
@@ -139,6 +149,14 @@ complex3Conjugate (complex3 ax ay az) =
     (complexConjugate ay)
     (complexConjugate az)
 
+complex3ConjugateInvolutive :
+  ∀ {r} {F : RealField r} (v : Complex3 F) →
+  complex3Conjugate (complex3Conjugate v) ≡ v
+complex3ConjugateInvolutive (complex3 ax ay az)
+  rewrite complexConjugateInvolutive ax
+        | complexConjugateInvolutive ay
+        | complexConjugateInvolutive az = refl
+
 bilinearDot3 : ∀ {r} {F : RealField r} → Complex3 F → Complex3 F → Complex F
 bilinearDot3 (complex3 ax ay az) (complex3 bx by bz) =
   complexAdd
@@ -173,6 +191,29 @@ modeVector {F = F} E k =
     (realEmbed F (embedInteger E (Z3.kx k)))
     (realEmbed F (embedInteger E (Z3.ky k)))
     (realEmbed F (embedInteger E (Z3.kz k)))
+
+modeVectorConjugate :
+  ∀ {r} {F : RealField r}
+    (E : IntegerEmbedding F)
+    (k : Z3.FourierMode) →
+  complex3Conjugate (modeVector E k) ≡ modeVector E k
+modeVectorConjugate {F = F} E (Z3.mode kx ky kz)
+  rewrite realEmbedConjugate F (embedInteger E kx)
+        | realEmbedConjugate F (embedInteger E ky)
+        | realEmbedConjugate F (embedInteger E kz) = refl
+
+modeVectorNegation :
+  ∀ {r} {F : RealField r}
+    (E : IntegerEmbedding F)
+    (k : Z3.FourierMode) →
+  modeVector E (Z3.negateMode k) ≡ complex3Negate (modeVector E k)
+modeVectorNegation {F = F} E (Z3.mode kx ky kz)
+  rewrite embedNegate E kx
+        | embedNegate E ky
+        | embedNegate E kz
+        | realEmbedNegate F (embedInteger E kx)
+        | realEmbedNegate F (embedInteger E ky)
+        | realEmbedNegate F (embedInteger E kz) = refl
 
 record ModeInverseSquare
     {r : Level} (F : RealField r) (E : IntegerEmbedding F) :
