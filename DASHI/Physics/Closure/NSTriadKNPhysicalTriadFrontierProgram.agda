@@ -7,6 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --   * literal cutoff-cube resonant-triad enumeration;
 --   * executable, sound and complete output-indexed physical fibres;
 --   * exact swap, reality and three-leg energy-orbit constructions;
+--   * enumeration closure under swap and conjugation up to lattice equality;
 --   * exact max-norm triangle and reverse-triangle geometry;
 --   * literal ceil-log dyadic shell function and explicit constants
 --       Csep = 3, Cout = 2, Cin = 2;
@@ -48,6 +49,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry public
+open import DASHI.Physics.Closure.NSTriadKNPhysicalSymmetryEnumerationClosure public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction public
 open import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle public
 open import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants public
