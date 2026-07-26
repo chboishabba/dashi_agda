@@ -11,18 +11,26 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = [
     "DASHI/Analysis/MarxDifferentialCore.agda",
     "DASHI/Analysis/MarxPolynomialDifferential.agda",
+    "DASHI/Analysis/MarxPolynomialCoefficientNormalForm.agda",
     "DASHI/Analysis/MarxConstructiveRealAdapter.agda",
     "DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda",
+    "DASHI/Analysis/MarxConstructiveRealNamedLemmas.agda",
     "DASHI/Analysis/MarxConstructiveRealTopology.agda",
+    "DASHI/Analysis/MarxConstructiveRealMetricNamedLemmas.agda",
     "DASHI/Analysis/MarxConstructiveRealLimitSqueeze.agda",
     "DASHI/Analysis/MarxFastCauchyCompletionCutset.agda",
     "DASHI/Analysis/MarxFastCauchyDerivativeCompletion.agda",
     "DASHI/Analysis/MarxPowerRuleNormalisation.agda",
+    "DASHI/Analysis/MarxPowerArithmetic.agda",
     "DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda",
+    "DASHI/Analysis/MarxFieldCancellation.agda",
     "DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda",
     "DASHI/Analysis/MarxHigherCalculus.agda",
     "DASHI/Analysis/MarxHigherDerivativeConstruction.agda",
     "DASHI/Analysis/MarxScalarFrechetBridge.agda",
+    "DASHI/Analysis/MarxLinearDirectionalLaws.agda",
+    "DASHI/Analysis/MarxFiniteVectorSpace.agda",
+    "DASHI/Analysis/MarxFiniteVectorNorm.agda",
     "DASHI/Analysis/MarxFrechetProduct.agda",
     "DASHI/Analysis/MarxExteriorIntegration.agda",
     "DASHI/Analysis/MarxDifferentialRegression.agda",
@@ -50,14 +58,27 @@ REQUIRED = {
         "rawDiagonalQuotientImpossible",
         "chainRule",
     ),
+    "DASHI/Analysis/MarxPolynomialCoefficientNormalForm.agda": (
+        "coefficientDerivative",
+        "polynomialDerivativeCoefficientFormTheorem",
+    ),
     "DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda": (
         "ordinaryConstructiveRealMarxAlgebra",
         "ordinaryMarxCarrierNonterminal",
+    ),
+    "DASHI/Analysis/MarxConstructiveRealNamedLemmas.agda": (
+        "constructedRealMulZeroRight",
+        "constructedRealDifferenceOfProducts",
+        "constructedRealZeroNotOne",
     ),
     "DASHI/Analysis/MarxConstructiveRealTopology.agda": (
         "constructedRealMetricLaws",
         "ContinuousAtSequentially",
         "constructedRealRemainderDerivativeStructure",
+    ),
+    "DASHI/Analysis/MarxConstructiveRealMetricNamedLemmas.agda": (
+        "absZeroIff",
+        "metricTriangle",
     ),
     "DASHI/Analysis/MarxConstructiveRealLimitSqueeze.agda": (
         "squeezeLimit",
@@ -75,10 +96,22 @@ REQUIRED = {
         "powerDerivativeNatScale",
         "polynomialDerivativeInterpretationCommutes",
     ),
+    "DASHI/Analysis/MarxPowerArithmetic.agda": (
+        "natCastAdd",
+        "natScaleAdd",
+        "powerAdd",
+        "powerMulBase",
+        "powerDerivative",
+    ),
     "DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda": (
         "reciprocalDerivativeDenominatorSquared",
         "quotientRule",
         "LocallyNonzeroAt",
+    ),
+    "DASHI/Analysis/MarxFieldCancellation.agda": (
+        "mulCancelLeftNonzero",
+        "mulCancelRightNonzero",
+        "reciprocalUnique",
     ),
     "DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda": (
         "NormalizedRemainderVanishes",
@@ -98,6 +131,20 @@ REQUIRED = {
         "ordinaryDerivativeToFrechetDerivative",
         "frechetDerivativeToOrdinaryDerivative",
         "marxDerivativeToFrechetDerivative",
+    ),
+    "DASHI/Analysis/MarxLinearDirectionalLaws.agda": (
+        "linearAdd",
+        "frechetImpliesDirectional",
+        "directionalChainRule",
+    ),
+    "DASHI/Analysis/MarxFiniteVectorSpace.agda": (
+        "finiteVectorModule",
+        "finiteVectorBasis",
+        "finiteJacobianFromFrechet",
+    ),
+    "DASHI/Analysis/MarxFiniteVectorNorm.agda": (
+        "l1Norm",
+        "finiteL1NormedModule",
     ),
     "DASHI/Analysis/MarxFrechetProduct.agda": (
         "BilinearProduct",
@@ -123,6 +170,7 @@ REQUIRED = {
         "denominatorCompatibilityReceipt",
     ),
     "DASHI/Governance/IsraelCyberLegalStatusCandidate.agda": (
+        "aggregateHighTechCannotMeetCyberSpecificCriterion",
         "currentFixtureCannotPromoteMechanism",
         "traumaExportMechanismStatus",
     ),
