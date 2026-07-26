@@ -25,6 +25,10 @@ record FiniteComplex3GalerkinSystem
     modes : List Z3.FourierMode
     triads : List Physical.PhysicalTriadIncidence
 
+    RelationMember :
+      Physical.PhysicalTriadIncidence →
+      List Physical.PhysicalTriadIncidence → Set
+
     -- Exact output-indexed resonant list.  This avoids summing a triad into a
     -- target different from its proved physical output.
     triadsAt : Z3.FourierMode → List Physical.PhysicalTriadIncidence
@@ -36,9 +40,6 @@ record FiniteComplex3GalerkinSystem
 
     modeListed : Z3.FourierMode → Set
     triadListed : Physical.PhysicalTriadIncidence → Set
-    RelationMember :
-      Physical.PhysicalTriadIncidence →
-      List Physical.PhysicalTriadIncidence → Set
 
     modesAreLiteralCutoff : Set
     triadsAreLiteralResonances : Set
