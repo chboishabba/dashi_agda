@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayFrontierCompletionLedger where
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
+import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
@@ -18,6 +19,12 @@ import DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact
 
 finiteMatrixProductAndInverseConsequenceLevel : ProofLevel
 finiteMatrixProductAndInverseConsequenceLevel = machineChecked
+
+physicalCoordinateEnumerationAndDeltaLevel : ProofLevel
+physicalCoordinateEnumerationAndDeltaLevel = machineChecked
+
+configuredGaugeFixedMatrixDefinitionLevel : ProofLevel
+configuredGaugeFixedMatrixDefinitionLevel = machineChecked
 
 su2RationalAdjointDisplacementAlgebraLevel : ProofLevel
 su2RationalAdjointDisplacementAlgebraLevel = machineChecked
@@ -101,9 +108,13 @@ p5ContinuumOSAndNontrivialityLevel = conditional
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
 
--- Matrix multiplication and its inverse consequences are now formalized.  The
--- remaining producer is the literal 3072-coordinate configured operator matrix,
--- a generated inverse matrix, and exact product/norm certificates.
+-- The physical coordinate carrier, Kronecker identity and literal matrix-entry
+-- definition are now concrete.  The remaining inverse work is: prove that the
+-- matrix action equals the configured operator by finite linearity, generate the
+-- inverse matrix, and check both products and its norm certificate.
+configuredMatrixActionLinearityLevel : ProofLevel
+configuredMatrixActionLinearityLevel = conditional
+
 constructiveConfiguredFiniteInverseLevel : ProofLevel
 constructiveConfiguredFiniteInverseLevel = conditional
 
