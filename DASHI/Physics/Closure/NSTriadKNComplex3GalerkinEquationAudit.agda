@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -80,7 +81,7 @@ concreteTriadsAtOutputAgreement :
     {I : C3.ModeInverseSquare F E}
     {system : FiniteComplex3GalerkinSystem F E I}
     {output τ} →
-  Output._∈_ τ (concreteTriadsAt system output) →
+  Cube._∈_ τ (concreteTriadsAt system output) →
   Physical.k τ ≡ output
 concreteTriadsAtOutputAgreement = Output.physicalOutputFiberSound
 
