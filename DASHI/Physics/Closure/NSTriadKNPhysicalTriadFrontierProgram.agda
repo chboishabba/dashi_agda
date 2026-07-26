@@ -14,6 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --     the literal Leray formula;
 --   * instantiation of the exact signed velocity-form coefficient on C^3;
 --   * exact resonant null identities u_p·q = u_p·k and u_q·p = u_q·k;
+--   * the concrete C^3 bridge for those null identities;
 --   * exact construction of the three physical energy-transfer legs;
 --   * reduction of the phase formula to sesquilinear scalar algebra;
 --   * exact output-indexed projected Galerkin sums and factor/orbit audits;
@@ -31,7 +32,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 -- an authority record:
 --   * the complete integer ceil-log proof of the selected dyadic constants;
 --   * a concrete ordered/square-root real-field instance and normalised frame;
---   * instantiation of the exact phase reduction on that carrier;
+--   * scalar/vector distributivity instances for the phase and null bridges;
 --   * the signed three-leg cancellation algebra after Leray removal;
 --   * physical-space/Fourier projected-equation equivalence;
 --   * concrete cutoff-independent FT/transition/adversarial constants;
@@ -55,6 +56,7 @@ open import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit public
 open import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit public
 open import DASHI.Physics.Closure.NSTriadKNPositivePartCancellationNoGo public
 open import DASHI.Physics.Closure.NSTriadKNResonantNullGain public
+open import DASHI.Physics.Closure.NSTriadKNComplex3NullGainBridge public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction public
 open import DASHI.Physics.Closure.NSTriadKNPhaseFactorizationReduction public
 
