@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (ℤ; +_; _+_; -_)
 import Data.Integer.Properties as Int
 open import Relation.Binary.PropositionalEquality
-  using (cong; cong₂; sym; trans; module ≡-Reasoning)
+  using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -44,6 +44,16 @@ negateModeAdd (Z3.mode px py pz) (Z3.mode qx qy qz) =
     (Int.neg-distrib-+ py qy)
     (Int.neg-distrib-+ pz qz)
 
+record SameLatticeTriad
+    (left right : Physical.PhysicalTriadIncidence) : Set where
+  constructor same-lattice-triad
+  field
+    sameP : Physical.p left ≡ Physical.p right
+    sameQ : Physical.q left ≡ Physical.q right
+    sameK : Physical.k left ≡ Physical.k right
+
+open SameLatticeTriad public
+
 swapTriad :
   Physical.PhysicalTriadIncidence →
   Physical.PhysicalTriadIncidence
@@ -65,8 +75,10 @@ swapTriadQ τ = refl
 swapTriadK : ∀ τ → Physical.k (swapTriad τ) ≡ Physical.k τ
 swapTriadK τ = refl
 
-swapTriadInvolutive : ∀ τ → swapTriad (swapTriad τ) ≡ τ
-swapTriadInvolutive (Physical.physicalTriad p q k resonance) = refl
+swapTriadInvolutiveOnLattice :
+  ∀ τ → SameLatticeTriad (swapTriad (swapTriad τ)) τ
+swapTriadInvolutiveOnLattice τ =
+  same-lattice-triad refl refl refl
 
 conjugateTriad :
   Physical.PhysicalTriadIncidence →
@@ -95,13 +107,13 @@ conjugateTriadK :
   Physical.k (conjugateTriad τ) ≡ Z3.negateMode (Physical.k τ)
 conjugateTriadK τ = refl
 
-conjugateTriadInvolutive :
-  ∀ τ → conjugateTriad (conjugateTriad τ) ≡ τ
-conjugateTriadInvolutive
-  (Physical.physicalTriad p q k resonance)
-  rewrite negateModeInvolutive p
-        | negateModeInvolutive q
-        | negateModeInvolutive k = refl
+conjugateTriadInvolutiveOnLattice :
+  ∀ τ → SameLatticeTriad (conjugateTriad (conjugateTriad τ)) τ
+conjugateTriadInvolutiveOnLattice τ =
+  same-lattice-triad
+    (negateModeInvolutive (Physical.p τ))
+    (negateModeInvolutive (Physical.q τ))
+    (negateModeInvolutive (Physical.k τ))
 
 physicalTriadSymmetriesConstructed : Bool
 physicalTriadSymmetriesConstructed = true
