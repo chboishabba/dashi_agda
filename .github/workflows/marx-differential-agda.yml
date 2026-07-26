@@ -12,6 +12,7 @@ on:
       - 'DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda'
       - 'DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda'
       - 'DASHI/Analysis/MarxHigherCalculus.agda'
+      - 'DASHI/Analysis/MarxFrechetProduct.agda'
       - 'DASHI/Analysis/MarxExteriorIntegration.agda'
       - 'DASHI/Analysis/MarxDifferentialRegression.agda'
       - 'DASHI/Analysis/MarxDifferentialBundle.agda'
