@@ -10,6 +10,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNLiteralDyadicShellConstants.agda",
     "DASHI/Physics/Closure/NSTriadKNCeilLogShellBounds.agda",
     "DASHI/Physics/Closure/NSTriadKNShellFactorTwo.agda",
+    "DASHI/Physics/Closure/NSTriadKNLiteralDyadicConsequencesClosed.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiber.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalTriadSymmetry.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalSymmetryEnumerationClosure.agda",
