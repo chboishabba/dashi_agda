@@ -162,7 +162,7 @@ uniformOneSixtyFourthCoercivity dataSet depth =
       (subst
         (λ left →
           left ≤ coercivityAt dataSet depth + lossPartialSum depth)
-        oneSixtyFourthDouble
+        (sym oneSixtyFourthDouble)
         (initialBelowCoercivityPlusConsumedLoss dataSet depth))
       (addMonotone dataSet
         (reflexive dataSet (coercivityAt dataSet depth))
