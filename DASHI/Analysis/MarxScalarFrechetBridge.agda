@@ -2,7 +2,7 @@ module DASHI.Analysis.MarxScalarFrechetBridge where
 
 open import Agda.Primitive using (Set₁)
 open import Relation.Binary.PropositionalEquality
-  using (_≡_; refl; sym; trans; cong)
+  using (_≡_; sym; trans; cong)
 
 open import DASHI.Analysis.MarxDifferentialCore
 open import DASHI.Analysis.MarxPowerRuleNormalisation
@@ -63,8 +63,7 @@ coefficientLinearMap {A} L coefficient =
 
 ------------------------------------------------------------------------
 -- Ordinary scalar remainder data and vector little-o are intentionally linked
--- by an explicit compatibility receipt.  This avoids silently identifying two
--- independently chosen convergence predicates.
+-- by an explicit compatibility receipt.
 
 record ScalarFrechetCompatibility
   {A : MarxAlgebra}
@@ -121,7 +120,9 @@ frechetDerivativeToOrdinaryDerivative :
   (F : FrechetDerivativeAt vectorLittleO f x) →
   derivative F ≡ coefficientLinearMap L coefficient →
   OrdinaryDerivativeAt R f x
-frechetDerivativeToOrdinaryDerivative L R vectorLittleO compatibility coefficient F derivativeIsCoefficient =
+frechetDerivativeToOrdinaryDerivative
+  {A} L R vectorLittleO compatibility {f} {x}
+  coefficient F derivativeIsCoefficient =
   record
     { linearCoefficient = coefficient
     ; remainder = remainder F
@@ -130,7 +131,7 @@ frechetDerivativeToOrdinaryDerivative L R vectorLittleO compatibility coefficien
           (expansion F h)
           (cong
             (λ linearTerm →
-              _+_ _ (f _) (_+_ _ linearTerm (remainder F h)))
+              _+_ A (f x) (_+_ A linearTerm (remainder F h)))
             (cong (λ map → apply map h) derivativeIsCoefficient))
     ; normalizedRemainderVanishes =
         vectorLittleOImpliesOrdinaryLittleO compatibility
