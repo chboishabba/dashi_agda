@@ -40,15 +40,15 @@ supportStrategyName selfOrganisation = "self-organisation"
 supportStrategyName guidedScaffolding = "guided scaffolding"
 
 supportCandidatesFor : OEF.OEFElement → List SupportStrategy
-supportCandidatesFor OEF.social =
+supportCandidatesFor OEF.socialEngagement =
   meaningfulInteraction ∷ guidedScaffolding ∷ []
-supportCandidatesFor OEF.cognitive =
+supportCandidatesFor OEF.cognitiveEngagement =
   guidedScaffolding ∷ meaningfulInteraction ∷ []
-supportCandidatesFor OEF.behavioural =
+supportCandidatesFor OEF.behaviouralEngagement =
   selfOrganisation ∷ accessibleCentralisedResources ∷ autonomyFlexibility ∷ []
-supportCandidatesFor OEF.collaborative =
+supportCandidatesFor OEF.collaborativeEngagement =
   meaningfulInteraction ∷ guidedScaffolding ∷ []
-supportCandidatesFor OEF.emotional =
+supportCandidatesFor OEF.emotionalEngagement =
   autonomyFlexibility ∷ guidedScaffolding ∷ meaningfulInteraction ∷ []
 
 record StrategyRoutingRow : Set where
@@ -71,32 +71,42 @@ open StrategyRoutingRow public
 
 canonicalSocialRouting : StrategyRoutingRow
 canonicalSocialRouting =
-  mkStrategyRoutingRow OEF.social (supportCandidatesFor OEF.social) refl
-    true refl true refl true refl
+  mkStrategyRoutingRow
+    OEF.socialEngagement
+    (supportCandidatesFor OEF.socialEngagement)
+    refl true refl true refl true refl
     "Social-engagement residuals may route attention toward meaningful interaction and scaffolding, subject to student choice and local context."
 
 canonicalCognitiveRouting : StrategyRoutingRow
 canonicalCognitiveRouting =
-  mkStrategyRoutingRow OEF.cognitive (supportCandidatesFor OEF.cognitive) refl
-    true refl true refl true refl
+  mkStrategyRoutingRow
+    OEF.cognitiveEngagement
+    (supportCandidatesFor OEF.cognitiveEngagement)
+    refl true refl true refl true refl
     "Cognitive-engagement residuals may route attention toward guided scaffolding and meaningful interaction, without assuming a universal causal handle."
 
 canonicalBehaviouralRouting : StrategyRoutingRow
 canonicalBehaviouralRouting =
-  mkStrategyRoutingRow OEF.behavioural (supportCandidatesFor OEF.behavioural) refl
-    true refl true refl true refl
+  mkStrategyRoutingRow
+    OEF.behaviouralEngagement
+    (supportCandidatesFor OEF.behaviouralEngagement)
+    refl true refl true refl true refl
     "Behavioural-engagement residuals may route attention toward self-organisation, accessible resources and autonomy/flexibility."
 
 canonicalCollaborativeRouting : StrategyRoutingRow
 canonicalCollaborativeRouting =
-  mkStrategyRoutingRow OEF.collaborative (supportCandidatesFor OEF.collaborative) refl
-    true refl true refl true refl
+  mkStrategyRoutingRow
+    OEF.collaborativeEngagement
+    (supportCandidatesFor OEF.collaborativeEngagement)
+    refl true refl true refl true refl
     "Collaborative-engagement residuals may route attention toward interaction and scaffolding."
 
 canonicalEmotionalRouting : StrategyRoutingRow
 canonicalEmotionalRouting =
-  mkStrategyRoutingRow OEF.emotional (supportCandidatesFor OEF.emotional) refl
-    true refl true refl true refl
+  mkStrategyRoutingRow
+    OEF.emotionalEngagement
+    (supportCandidatesFor OEF.emotionalEngagement)
+    refl true refl true refl true refl
     "Emotional-engagement residuals may route attention toward flexibility, scaffolding and chosen interaction, with no wellbeing or treatment inference."
 
 canonicalStrategyRoutingRows : List StrategyRoutingRow
