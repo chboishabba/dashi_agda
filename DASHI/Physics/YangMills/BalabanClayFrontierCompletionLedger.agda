@@ -8,6 +8,8 @@ import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixDimensionExact
 import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredMatrixActionExact
+import DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed
+import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredScalarReductionExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
@@ -41,6 +43,15 @@ configuredGaugeFixedMatrixDefinitionLevel = machineChecked
 
 configuredMatrixActionLinearityLevel : ProofLevel
 configuredMatrixActionLinearityLevel = machineChecked
+
+sideFourScalarGreenKernelEquationLevel : ProofLevel
+sideFourScalarGreenKernelEquationLevel = machineChecked
+
+sideFourScalarGreenKernelNormalizationLevel : ProofLevel
+sideFourScalarGreenKernelNormalizationLevel = machineChecked
+
+configuredOperatorLaplacianPlusMeanReductionLevel : ProofLevel
+configuredOperatorLaplacianPlusMeanReductionLevel = machineChecked
 
 su2RationalAdjointDisplacementAlgebraLevel : ProofLevel
 su2RationalAdjointDisplacementAlgebraLevel = machineChecked
@@ -124,9 +135,9 @@ p5ContinuumOSAndNontrivialityLevel = conditional
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
 
--- Basis expansion and literal matrix action are now concrete.  The finite
--- inverse cut has narrowed to an exact inverse-product certificate and the
--- reciprocal norm certificate for the configured 3072-coordinate matrix.
+-- The literal scalar inverse kernel and operator reduction are now explicit.
+-- Remaining finite inverse work is the convolution/matrix-product assembly and
+-- a kernel-derived reciprocal norm certificate on the 3072-coordinate carrier.
 constructiveConfiguredFiniteInverseLevel : ProofLevel
 constructiveConfiguredFiniteInverseLevel = conditional
 
