@@ -73,7 +73,7 @@ record Stage3GapControlsGalerkinEvolution
     (energyData : GalerkinRegularityEnergy {c} {t} {s}) :
     Set (lsuc (c ⊔ t ⊔ s)) where
   field
-    spectralGap : Gap.UniformSignedSpectralGap
+    spectralGap : Gap.UniformSignedSpectralGap {c} {s}
 
     StateEmbedding : State energyData → Gap.State spectralGap
     CutoffEmbedding : Cutoff energyData → Gap.Cutoff spectralGap
