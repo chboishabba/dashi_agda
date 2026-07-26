@@ -36,6 +36,8 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredMatrixActionExact
     )
 open import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
   using (fineProjection)
+open import DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact
+  using (configuredGaugeFixedMatrix)
 
 subtractSiteField : SiteField side4 → SiteField side4 → SiteField side4
 subtractSiteField left right site = left site - right site
@@ -202,8 +204,7 @@ scalarForwardBackwardEqualsLocal field componentAxis site =
 
 configuredGaugeFixedMatrixEqualsLaplacianPlusMean :
   ∀ tangent component site bondAxis →
-  DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact.configuredGaugeFixedMatrix
-    tangent component (pair site bondAxis)
+  configuredGaugeFixedMatrix tangent component (pair site bondAxis)
   ≡ scalarLocalLaplacian
       (componentScalarBondField tangent component) bondAxis site
     + average0123
