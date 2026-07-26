@@ -7,6 +7,7 @@ on:
       - 'DASHI/Analysis/MarxPolynomialDifferential.agda'
       - 'DASHI/Analysis/MarxConstructiveRealAdapter.agda'
       - 'DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealTopology.agda'
       - 'DASHI/Analysis/MarxFastCauchyCompletionCutset.agda'
       - 'DASHI/Analysis/MarxFastCauchyDerivativeCompletion.agda'
       - 'DASHI/Analysis/MarxPowerRuleNormalisation.agda'
