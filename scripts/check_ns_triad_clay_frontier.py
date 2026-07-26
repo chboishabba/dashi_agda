@@ -29,6 +29,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNArbitraryDataAprioriProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedGapAprioriComposition.agda",
     "DASHI/Physics/Closure/NSTriadKNFourierLimitCompletionComposition.agda",
+    "DASHI/Physics/Closure/NSTriadKNGalerkinCompletionEndpoint.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda",
 ]
 
