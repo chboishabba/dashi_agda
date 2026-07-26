@@ -20,11 +20,28 @@ open import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExac
 -- Generic Kronecker calculus for a duplicate-free decidable enumeration.
 ------------------------------------------------------------------------
 
+emptyElim : ∀ {A : Set} → Empty → A
+emptyElim ()
+
 kroneckerDelta :
   ∀ {A : Set} → DecidableEquality A → A → A → ℚ
 kroneckerDelta decide left right with decide left right
 ... | yes equality = 1ℚ
 ... | no inequality = 0ℚ
+
+kroneckerSelf :
+  ∀ {A : Set} (decide : DecidableEquality A) value →
+  kroneckerDelta decide value value ≡ 1ℚ
+kroneckerSelf decide value with decide value value
+... | yes equality = refl
+... | no inequality = emptyElim (inequality refl)
+
+kroneckerDifferent :
+  ∀ {A : Set} (decide : DecidableEquality A) {left right} →
+  left ≢ right → kroneckerDelta decide left right ≡ 0ℚ
+kroneckerDifferent decide different with decide _ _
+... | yes equality = emptyElim (different equality)
+... | no inequality = refl
 
 deltaSumAbsent :
   ∀ {A : Set}
@@ -37,14 +54,13 @@ deltaSumAbsent :
   ≡ 0ℚ
 deltaSumAbsent decide [] row notMember vector = refl
 deltaSumAbsent decide (value ∷ values) row notMember vector
-  with decide row value
-... | yes equality
-  with notMember
-    (subst (λ candidate → candidate ∈ value ∷ values) (sym equality) here)
-... | ()
-... | no inequality
-  rewrite deltaSumAbsent decide values row
-    (λ membership → notMember (there membership)) vector =
+  rewrite kroneckerDifferent decide
+    (λ equality →
+      notMember
+        (subst (λ candidate → candidate ∈ value ∷ values)
+          (sym equality) here))
+        | deltaSumAbsent decide values row
+            (λ membership → notMember (there membership)) vector =
   ℚRing.solve-∀ (vector value)
 
 deltaSumIdentity :
@@ -59,21 +75,16 @@ deltaSumIdentity :
   ≡ vector row
 deltaSumIdentity decide []-free row () vector
 deltaSumIdentity decide (notTail ∷-free tailFree) row here vector
-  with decide row row
-... | yes equality
-  rewrite deltaSumAbsent decide _ row notTail vector =
+  rewrite kroneckerSelf decide row
+        | deltaSumAbsent decide _ row notTail vector =
   ℚRing.solve-∀ (vector row)
-... | no inequality with inequality refl
-... | ()
-deltaSumIdentity decide (notTail ∷-free tailFree)
-    row (there membership) vector
-  with decide row _
-... | yes equality
-  with notTail (subst (λ candidate → candidate ∈ _) equality membership)
-... | ()
-... | no inequality
-  rewrite deltaSumIdentity decide tailFree row membership vector =
-  ℚRing.solve-∀
+deltaSumIdentity decide {values = value ∷ values}
+    (notTail ∷-free tailFree) row (there membership) vector
+  rewrite kroneckerDifferent decide
+    (λ equality →
+      notTail (subst (λ candidate → candidate ∈ values) equality membership))
+        | deltaSumIdentity decide tailFree row membership vector =
+  ℚRing.solve-∀ (vector value) (vector row)
 
 ------------------------------------------------------------------------
 -- Literal three-colour tangent component enumeration.
