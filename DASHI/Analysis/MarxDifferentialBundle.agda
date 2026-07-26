@@ -14,4 +14,5 @@ open import DASHI.Analysis.MarxExteriorIntegration public
 open import DASHI.Analysis.MarxDifferentialRegression public
 open import DASHI.Governance.TraumaExploitationDifferential public
 open import DASHI.Governance.GeopoliticalDifferentialEvidence public
+open import DASHI.Governance.GeopoliticalGlobalPlayerCriterion public
 open import DASHI.Governance.IsraelCyberLegalStatusCandidate public
