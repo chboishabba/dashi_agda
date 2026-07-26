@@ -13,34 +13,32 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --   * bilinear and Hermitian products, conjugation, integer wavevectors and
 --     the literal Leray formula;
 --   * instantiation of the exact signed velocity-form coefficient on C^3;
---   * the correct Fourier reality target q(-k) = -q(k), together with
---     normalised-frame, phase and complete-triad cancellation targets;
+--   * exact resonant null identities u_p·q = u_p·k and u_q·p = u_q·k;
+--   * exact construction of the three physical energy-transfer legs;
+--   * reduction of the phase formula to sesquilinear scalar algebra;
 --   * exact output-indexed projected Galerkin sums and factor/orbit audits;
 --   * executable coarse FT/transition/adversarial diagnostics;
 --   * a quantitative refinement carrier recording scale, angle,
 --     polarisation, cancellation orbit and multiplicity gains;
 --   * validated sparse codes and a falsifiable legacy-coordinate audit;
---   * cancellation-preserving classwise estimate, residual-domination and
---     uniformity ledgers;
+--   * constructive assembly of concrete class estimates into one error bound;
 --   * positive-majorant, signed-block and modified-energy uniform-gap routes;
---   * the exact arbitrary-data H^s energy and non-blow-up comparison cutset;
---   * the full Galerkin-limit/global-regularity completion chain.
+--   * composition of a strict gap and global scalar comparison into an
+--     arbitrary-data uniform a-priori estimate;
+--   * the Fourier diagonal-subsequence/tail route to the global limit.
 --
--- Still fail-closed because they are genuine mathematical obligations:
+-- Remaining mathematical leaves are deliberately local rather than hidden in
+-- an authority record:
 --   * the complete integer ceil-log proof of the selected dyadic constants;
---   * a concrete analytic real-field instance and all Leray algebraic laws;
---   * a globally normalised reality-compatible transverse/helical frame;
---   * the exact phase expansion and complete triad-energy cancellation proof;
---   * physical-space/Fourier projected-equation equivalence and exact orbit
---     multiplicity theorems;
---   * proof that the coarse classes expose sufficient gain, or a concrete
---     refined-class estimate replacing them;
---   * physical interpretation or explicit invalid-code witnesses for every
---     legacy head/tail/residue family;
---   * concrete cutoff-independent FT/transition/adversarial/residual constants;
---   * a strict cutoff-uniform gap for the signed operator or a sharp majorant;
---   * the arbitrary-data non-blow-up differential inequality and global
---     smoothness endpoint.
+--   * a concrete ordered/square-root real-field instance and normalised frame;
+--   * instantiation of the exact phase reduction on that carrier;
+--   * the signed three-leg cancellation algebra after Leray removal;
+--   * physical-space/Fourier projected-equation equivalence;
+--   * concrete cutoff-independent FT/transition/adversarial constants;
+--   * a strict numerical comparison with the dissipative base constant;
+--   * a global scalar comparison ruling out finite-time blow-up;
+--   * compactness, nonlinear limit passage, bootstrap and continuation
+--     instantiated for the official periodic problem.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration public
@@ -56,6 +54,9 @@ open import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier public
 open import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit public
 open import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit public
 open import DASHI.Physics.Closure.NSTriadKNPositivePartCancellationNoGo public
+open import DASHI.Physics.Closure.NSTriadKNResonantNullGain public
+open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction public
+open import DASHI.Physics.Closure.NSTriadKNPhaseFactorizationReduction public
 
 open import DASHI.Physics.Closure.NSTriadKNCoarseGainDiagnostics public
 open import DASHI.Physics.Closure.NSTriadKNRefinedQuantitativeClassification public
@@ -69,6 +70,7 @@ open import DASHI.Physics.Closure.NSTriadKNLegacyCoordinateInterpretationAudit p
 open import DASHI.Physics.Closure.NSTriadKNPhysicalClassWeightEnvelopes public
 open import DASHI.Physics.Closure.NSTriadKNClasswiseSignedEnvelopeAssembly public
 open import DASHI.Physics.Closure.NSTriadKNCutoffUniformClasswiseEstimateProgram public
+open import DASHI.Physics.Closure.NSTriadKNClasswiseAnalyticCutset public
 open import DASHI.Physics.Closure.NSTriadKNExactPhysicalKernelIdentification public
 
 open import DASHI.Physics.Closure.NSTriadKNPhysicalSpectralFrontier public
@@ -76,4 +78,6 @@ open import DASHI.Physics.Closure.NSTriadKNFiniteSpectralDoesNotImplyUniform pub
 open import DASHI.Physics.Closure.NSTriadKNSignedUniformGapProgram public
 
 open import DASHI.Physics.Closure.NSTriadKNArbitraryDataAprioriProgram public
+open import DASHI.Physics.Closure.NSTriadKNSignedGapAprioriComposition public
+open import DASHI.Physics.Closure.NSTriadKNFourierLimitCompletionComposition public
 open import DASHI.Physics.Closure.NSTriadKNGalerkinGlobalRegularityCompletion public
