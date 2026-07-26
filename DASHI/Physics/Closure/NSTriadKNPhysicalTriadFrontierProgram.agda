@@ -29,7 +29,9 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --     polarisation, cancellation orbit and multiplicity gains;
 --   * validated sparse codes and a falsifiable legacy-coordinate audit;
 --   * constructive assembly of concrete class estimates into one error bound;
---   * positive-majorant, signed-block and modified-energy uniform-gap routes;
+--   * proof that a genuinely cubic nonnegative form cannot admit one fixed
+--     arbitrary-amplitude quadratic majorant;
+--   * signed-block, normalised/state-dependent and modified-energy gap routes;
 --   * composition of a strict gap and global scalar comparison into an
 --     arbitrary-data uniform a-priori estimate;
 --   * the Fourier diagonal-subsequence/tail route to the global limit;
@@ -42,7 +44,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --   * scalar/vector distributivity instances for the phase and null bridges;
 --   * the signed three-leg cancellation algebra after Leray removal;
 --   * physical-space/Fourier projected-equation equivalence;
---   * concrete cutoff-independent FT/transition/adversarial constants;
+--   * concrete cutoff-independent FT/transition/adversarial constants on a
+--     normalised, state-dependent, signed or modified-energy operator;
 --   * a strict numerical comparison with the dissipative base constant;
 --   * a global scalar comparison ruling out finite-time blow-up;
 --   * compactness, nonlinear limit passage, bootstrap and continuation
@@ -86,6 +89,7 @@ open import DASHI.Physics.Closure.NSTriadKNPhysicalClassWeightEnvelopes public
 open import DASHI.Physics.Closure.NSTriadKNClasswiseSignedEnvelopeAssembly public
 open import DASHI.Physics.Closure.NSTriadKNCutoffUniformClasswiseEstimateProgram public
 open import DASHI.Physics.Closure.NSTriadKNClasswiseAnalyticCutset public
+open import DASHI.Physics.Closure.NSTriadKNCubicQuadraticUniformGapNoGo public
 open import DASHI.Physics.Closure.NSTriadKNExactPhysicalKernelIdentification public
 
 open import DASHI.Physics.Closure.NSTriadKNPhysicalSpectralFrontier public
