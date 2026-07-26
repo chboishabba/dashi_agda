@@ -10,6 +10,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --   * exact max-norm triangle and reverse-triangle geometry;
 --   * literal ceil-log dyadic shell function and explicit constants
 --       Csep = 3, Cout = 2, Cin = 2;
+--   * proved ceil-log upper/lower shell boundaries;
+--   * proved factor-two norm comparison implies shell distance at most one;
 --   * the complex-number and complex-three-vector algebra over an explicit
 --     real-field law package;
 --   * bilinear and Hermitian products, conjugation, integer wavevectors and
@@ -31,7 +33,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadFrontierProgram where
 --
 -- Remaining mathematical leaves are deliberately local rather than hidden in
 -- an authority record:
---   * the complete integer ceil-log proof of the selected dyadic constants;
+--   * deriving factor-two norm comparisons from resonance plus Csep = 3;
 --   * a concrete ordered/square-root real-field instance and normalised frame;
 --   * scalar/vector distributivity instances for the phase and null bridges;
 --   * the signed three-leg cancellation algebra after Leray removal;
@@ -49,6 +51,8 @@ open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction public
 open import DASHI.Physics.Closure.NSTriadKNOfficialInfinityNormTriangle public
 open import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants public
+open import DASHI.Physics.Closure.NSTriadKNCeilLogShellBounds public
+open import DASHI.Physics.Closure.NSTriadKNShellFactorTwo public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalScaleTrichotomy public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalStage3Allocation public
 open import DASHI.Physics.Closure.NSTriadKNPhysicalScaleStage3Compatibility public
