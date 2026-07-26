@@ -12,6 +12,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNShellFactorTwo.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalOutputFiber.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalTriadSymmetry.agda",
+    "DASHI/Physics/Closure/NSTriadKNPhysicalSymmetryEnumerationClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3ExactCarrier.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3RealityPhaseAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3GalerkinEquationAudit.agda",
