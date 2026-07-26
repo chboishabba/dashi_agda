@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayFrontierCompletionLedger where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
@@ -14,6 +15,9 @@ import DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact
 ------------------------------------------------------------------------
 -- Newly closed exact reductions.
 ------------------------------------------------------------------------
+
+finiteMatrixProductAndInverseConsequenceLevel : ProofLevel
+finiteMatrixProductAndInverseConsequenceLevel = machineChecked
 
 su2RationalAdjointDisplacementAlgebraLevel : ProofLevel
 su2RationalAdjointDisplacementAlgebraLevel = machineChecked
@@ -97,9 +101,9 @@ p5ContinuumOSAndNontrivialityLevel = conditional
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
 
--- The C2 propagator still consumes a finite inverse authority.  Under the
--- project rule forbidding external mathematical authorities, a constructive
--- matrix/Fourier inverse certificate must inhabit this producer.
+-- Matrix multiplication and its inverse consequences are now formalized.  The
+-- remaining producer is the literal 3072-coordinate configured operator matrix,
+-- a generated inverse matrix, and exact product/norm certificates.
 constructiveConfiguredFiniteInverseLevel : ProofLevel
 constructiveConfiguredFiniteInverseLevel = conditional
 
