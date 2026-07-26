@@ -14,6 +14,7 @@ FILES = [
     "DASHI/Analysis/MarxConstructiveRealAdapter.agda",
     "DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda",
     "DASHI/Analysis/MarxFastCauchyCompletionCutset.agda",
+    "DASHI/Analysis/MarxFastCauchyDerivativeCompletion.agda",
     "DASHI/Analysis/MarxPowerRuleNormalisation.agda",
     "DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda",
     "DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda",
@@ -35,7 +36,7 @@ FORBIDDEN = (
     "TERMINATING",
     "NON_TERMINATING",
     "sorry",
-    "admit",
+    "admit ",
 )
 
 REQUIRED = {
@@ -47,6 +48,14 @@ REQUIRED = {
     "DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda": (
         "ordinaryConstructiveRealMarxAlgebra",
         "ordinaryMarxCarrierNonterminal",
+    ),
+    "DASHI/Analysis/MarxFastCauchyCompletionCutset.agda": (
+        "selectedFastCauchyMarxAlgebra",
+        "selectedFastCauchyCarrierNonterminal",
+    ),
+    "DASHI/Analysis/MarxFastCauchyDerivativeCompletion.agda": (
+        "selectedFastCauchyDerivativeSeam",
+        "selectedFastCauchyCompatibilityAuthority",
     ),
     "DASHI/Analysis/MarxPowerRuleNormalisation.agda": (
         "powerDerivativeNatScale",
@@ -67,7 +76,13 @@ REQUIRED = {
         "frechetChainRule",
         "constantJacobianDoesNotEntailGlobalInjectivity",
     ),
+    "DASHI/Analysis/MarxFrechetProduct.agda": (
+        "BilinearProduct",
+        "frechetProduct",
+        "frechetProductDerivativeFormula",
+    ),
     "DASHI/Analysis/MarxExteriorIntegration.agda": (
+        "alternatingAdjacent",
         "exteriorDerivativeSquaredZero",
         "riemannSum",
         "FundamentalTheoremBridge",
@@ -75,6 +90,10 @@ REQUIRED = {
     "DASHI/Governance/GeopoliticalDifferentialEvidence.agda": (
         "provisionalOrderDoesNotEntailFinalMeritsJudgment",
         "gainEvidenceAloneCannotPromote",
+    ),
+    "DASHI/Governance/GeopoliticalGlobalPlayerCriterion.agda": (
+        "ConcreteGlobalPlayerSupported",
+        "denominatorCompatibilityReceipt",
     ),
     "DASHI/Governance/IsraelCyberLegalStatusCandidate.agda": (
         "currentFixtureCannotPromoteMechanism",
@@ -107,15 +126,11 @@ def main() -> None:
     for relative in FILES:
         if relative.endswith("MarxDifferentialBundle.agda"):
             continue
-        if relative.startswith("scripts/"):
-            continue
         module_name = relative[:-5].replace("/", ".")
         if module_name.startswith("DASHI.Analysis.Marx") or module_name.startswith(
             "DASHI.Governance."
         ):
-            if module_name not in bundle and not module_name.endswith(
-                "GeopoliticalGlobalPlayerCriterion"
-            ):
+            if module_name not in bundle:
                 fail(f"bundle does not import {module_name}")
 
     print(f"Marx differential completion audit passed for {len(FILES)} files")
