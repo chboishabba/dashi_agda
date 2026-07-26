@@ -1,66 +1,20 @@
-name: NS triad concrete retained fiber Agda
+name: NS triad physical frontier Agda
 
 on:
   push:
     branches:
       - 'agent/ns-triad-scale-compatibility-closure'
     paths:
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalRetainedAuthorities.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClassFiniteFibers.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiberSource.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiber.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiber.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadEnumeration.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNOfficialInfinityNormTriangle.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleTrichotomy.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalStage3Allocation.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleStage3Compatibility.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNConcreteCoarseStage3Geometry.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNExactSignedGalerkinCoefficient.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPositivePartCancellationNoGo.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassEncoding.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNExactCoefficientToPhysicalWeight.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNValidatedPhysicalClassCode.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNValidatedPhysicalFiberImage.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassWeightEnvelopes.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClasswiseSignedEnvelopeAssembly.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNExactPhysicalKernelIdentification.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalSpectralFrontier.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNFiniteSpectralDoesNotImplyUniform.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNGalerkinGlobalRegularityCompletion.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda'
+      - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'scripts/ns_triad_signed_frontier_lab.py'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
       - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
   pull_request:
     paths:
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalRetainedAuthorities.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClassFiniteFibers.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiberSource.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNUnifiedConcreteFiber.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiber.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadEnumeration.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNOfficialInfinityNormTriangle.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleTrichotomy.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalStage3Allocation.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalScaleStage3Compatibility.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNConcreteCoarseStage3Geometry.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNExactSignedGalerkinCoefficient.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPositivePartCancellationNoGo.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassEncoding.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNExactCoefficientToPhysicalWeight.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNValidatedPhysicalClassCode.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNValidatedPhysicalFiberImage.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalClassWeightEnvelopes.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNClasswiseSignedEnvelopeAssembly.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNExactPhysicalKernelIdentification.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalSpectralFrontier.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNFiniteSpectralDoesNotImplyUniform.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNGalerkinGlobalRegularityCompletion.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPairIncidenceRelation.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNRetainedPositiveSectorKernelOperator.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNAdmissibleFourierTriadCarrier.agda'
+      - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'scripts/ns_triad_signed_frontier_lab.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
       - 'flake.lock'
@@ -83,7 +37,12 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
 
-      - name: Type-check concrete physical Stage3 aggregate
+      - name: Verify exact signed finite laboratory
+        run: >-
+          python3 scripts/ns_triad_signed_frontier_lab.py
+          --cutoff 1 --overlap 3 --verify
+
+      - name: Type-check complete physical Stage3 frontier
         run: >-
           nix develop .# --command
           bash scripts/run_agda29_parallel_check.sh
