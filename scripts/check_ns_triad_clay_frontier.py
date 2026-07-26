@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 FILES = [
@@ -19,13 +20,14 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda",
 ]
 
-FORBIDDEN = (
-    "postulate",
+LITERAL_MARKERS = (
     "{!!}",
     "?}",
     "{-# TERMINATING #-}",
     "{-# NON_TERMINATING #-}",
 )
+
+POSTULATE_DECLARATION = re.compile(r"(?m)^\s*postulate(?:\s|$)")
 
 
 def main() -> int:
@@ -39,7 +41,10 @@ def main() -> int:
             continue
 
         text = path.read_text(encoding="utf-8")
-        for marker in FORBIDDEN:
+        if POSTULATE_DECLARATION.search(text):
+            failures.append(f"{relative}: forbidden postulate declaration")
+
+        for marker in LITERAL_MARKERS:
             if marker in text:
                 failures.append(f"{relative}: forbidden marker {marker!r}")
 
