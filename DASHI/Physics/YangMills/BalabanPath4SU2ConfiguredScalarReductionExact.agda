@@ -37,12 +37,6 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredMatrixActionExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
   using (fineProjection)
 
-------------------------------------------------------------------------
--- Scalar curl-star-curl plus divergence-star-divergence is the componentwise
--- positive periodic Laplacian.  This is the operator-level Hodge cancellation,
--- not only the previously proved quadratic-form identity.
-------------------------------------------------------------------------
-
 subtractSiteField : SiteField side4 → SiteField side4 → SiteField side4
 subtractSiteField left right site = left site - right site
 
@@ -133,10 +127,6 @@ scalarWilsonGaugeCollapse field
         | backwardForwardDifferenceCommutes axis2 axis3 (field axis2) site =
   ℚRing.solve-∀
 
-------------------------------------------------------------------------
--- Local stencil form of the positive Laplacian.
-------------------------------------------------------------------------
-
 shiftBackwardAfterForward : ∀ axis site →
   shiftBackward4 axis (shiftForward4 axis site) ≡ site
 shiftBackwardAfterForward zeroᵢ (pair (pair x0 x1) (pair x2 x3))
@@ -171,28 +161,44 @@ scalarLocalLaplacian field componentAxis site =
       - (field componentAxis (shiftForward4 derivativeAxis site)
         + field componentAxis (shiftBackward4 derivativeAxis site)))
 
+fourTermCong : ∀ {a0 a1 a2 a3 b0 b1 b2 b3 : ℚ} →
+  a0 ≡ b0 → a1 ≡ b1 → a2 ≡ b2 → a3 ≡ b3 →
+  a0 + (a1 + (a2 + a3)) ≡ b0 + (b1 + (b2 + b3))
+fourTermCong refl refl refl refl = refl
+
 scalarForwardBackwardEqualsLocal : ∀ field componentAxis site →
   scalarForwardBackwardLaplacian field componentAxis site
   ≡ scalarLocalLaplacian field componentAxis site
-scalarForwardBackwardEqualsLocal field componentAxis site
-  rewrite negativeForwardBackwardStencil axis0 (field componentAxis) site
-        | negativeForwardBackwardStencil axis1 (field componentAxis) site
-        | negativeForwardBackwardStencil axis2 (field componentAxis) site
-        | negativeForwardBackwardStencil axis3 (field componentAxis) site =
-  ℚRing.solve-∀
-    (forwardDifference4 axis0
-      (backwardDifference4 axis0 (field componentAxis)) site)
-    (forwardDifference4 axis1
-      (backwardDifference4 axis1 (field componentAxis)) site)
-    (forwardDifference4 axis2
-      (backwardDifference4 axis2 (field componentAxis)) site)
-    (forwardDifference4 axis3
-      (backwardDifference4 axis3 (field componentAxis)) site)
-
-configuredScalarReduction : ∀ tangent component site bondAxis →
-  configuredGaugeFixedMatrixPointwise tangent component (pair site bondAxis)
-  ≡ configuredGaugeFixedMatrixPointwise tangent component (pair site bondAxis)
-configuredScalarReduction tangent component site bondAxis = refl
+scalarForwardBackwardEqualsLocal field componentAxis site =
+  trans
+    (ℚRing.solve-∀
+      (forwardDifference4 axis0
+        (backwardDifference4 axis0 (field componentAxis)) site)
+      (forwardDifference4 axis1
+        (backwardDifference4 axis1 (field componentAxis)) site)
+      (forwardDifference4 axis2
+        (backwardDifference4 axis2 (field componentAxis)) site)
+      (forwardDifference4 axis3
+        (backwardDifference4 axis3 (field componentAxis)) site))
+    (trans
+      (fourTermCong
+        (negativeForwardBackwardStencil axis0 (field componentAxis) site)
+        (negativeForwardBackwardStencil axis1 (field componentAxis) site)
+        (negativeForwardBackwardStencil axis2 (field componentAxis) site)
+        (negativeForwardBackwardStencil axis3 (field componentAxis) site))
+      (ℚRing.solve-∀
+        ((field componentAxis site + field componentAxis site)
+          - (field componentAxis (shiftForward4 axis0 site)
+            + field componentAxis (shiftBackward4 axis0 site)))
+        ((field componentAxis site + field componentAxis site)
+          - (field componentAxis (shiftForward4 axis1 site)
+            + field componentAxis (shiftBackward4 axis1 site)))
+        ((field componentAxis site + field componentAxis site)
+          - (field componentAxis (shiftForward4 axis2 site)
+            + field componentAxis (shiftBackward4 axis2 site)))
+        ((field componentAxis site + field componentAxis site)
+          - (field componentAxis (shiftForward4 axis3 site)
+            + field componentAxis (shiftBackward4 axis3 site)))))
 
 configuredGaugeFixedMatrixEqualsLaplacianPlusMean :
   ∀ tangent component site bondAxis →
@@ -207,17 +213,24 @@ configuredGaugeFixedMatrixEqualsLaplacianPlusMean
   trans
     (configuredGaugeFixedMatrixPointwise tangent component (pair site bondAxis))
     (trans
-      (cong
-        (λ wilsonGauge → wilsonGauge
-          + fineProjection tangent component (pair site bondAxis))
-        (scalarWilsonGaugeCollapse
-          (componentScalarBondField tangent component) bondAxis site))
-      (cong
-        (λ laplacian → laplacian
-          + average0123
-              (componentScalarBondField tangent component bondAxis) site)
-        (scalarForwardBackwardEqualsLocal
-          (componentScalarBondField tangent component) bondAxis site)))
+      (ℚRing.solve-∀
+        (scalarWilsonOperator
+          (componentScalarBondField tangent component) bondAxis site)
+        (scalarGaugePenalty
+          (componentScalarBondField tangent component) bondAxis site)
+        (fineProjection tangent component (pair site bondAxis)))
+      (trans
+        (cong
+          (λ wilsonGauge → wilsonGauge
+            + fineProjection tangent component (pair site bondAxis))
+          (scalarWilsonGaugeCollapse
+            (componentScalarBondField tangent component) bondAxis site))
+        (cong
+          (λ laplacian → laplacian
+            + average0123
+                (componentScalarBondField tangent component bondAxis) site)
+          (scalarForwardBackwardEqualsLocal
+            (componentScalarBondField tangent component) bondAxis site))))
 
 scalarWilsonGaugeOperatorHodgeLevel : ProofLevel
 scalarWilsonGaugeOperatorHodgeLevel = machineChecked
