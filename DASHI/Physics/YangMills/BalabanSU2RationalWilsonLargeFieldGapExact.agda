@@ -79,6 +79,10 @@ unitChordalEqualsTwiceTraceDeficit q =
         (quaternionNormMatchesUnit q))
       (ℚRing.solve-∀ (realPart q)))
 
+traceDeficitEqualsHalfTwice : ∀ value →
+  value ≡ halfℚ * (twoℚ * value)
+traceDeficitEqualsHalfTwice = ℚRing.solve-∀
+
 wilsonPlaquetteAction : ℚ → RationalUnitQuaternion → ℚ
 wilsonPlaquetteAction beta q = beta * wilsonTraceDeficit q
 
@@ -87,7 +91,8 @@ wilsonActionEqualsHalfBetaChordal : ∀ beta q →
   ≡ (halfℚ * beta) * literalChordalDistanceSq q
 wilsonActionEqualsHalfBetaChordal beta q =
   trans
-    (cong (beta *_) (sym (ℚRing.solve-∀ (wilsonTraceDeficit q))))
+    (cong (beta *_)
+      (traceDeficitEqualsHalfTwice (wilsonTraceDeficit q)))
     (trans
       (cong
         (λ value → beta * (halfℚ * value))
