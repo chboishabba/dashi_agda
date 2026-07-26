@@ -2,8 +2,9 @@
 """Fail-closed textual audit for the side-four C1 cleanup and C2 exact spine.
 
 This does not replace Agda kernel validation.  It prevents the finite averaging,
-coarse/fine, constrained-propagator, translated, background-assembly, and
-all-scale induction surfaces from silently losing declarations or gaining holes.
+coarse/fine, full gauge-fixed coercivity, propagator, translated,
+background-assembly, and all-scale induction surfaces from silently losing
+declarations or gaining holes.
 """
 
 from __future__ import annotations
@@ -55,6 +56,16 @@ FILES: dict[Path, tuple[str, ...]] = {
         "coarsePenalizedFluctuationCoercivity",
         "coarsePenaltyScalarDominationLevel = machineChecked",
     ),
+    YM / "BalabanPath4SU2FullGaugeFixedCoercivityExact.agda": (
+        "axisFixedImpliesShiftInvariant",
+        "average0123ForwardDifferenceZero",
+        "forwardDifferenceResidualExact",
+        "physicalPeriodicDifferenceResidualExact",
+        "residualBlockPenaltyZero",
+        "fullGaugeFixedResidualDecompositionExact",
+        "fullGaugeFixedCoercivity",
+        "fullGaugeFixedCoercivityLevel = machineChecked",
+    ),
     YM / "BalabanPath4SU2ConcretePropagatorExact.agda": (
         "configuredGaugeFixedMatrix",
         "configuredGaugeFixedMatrixPositive",
@@ -90,7 +101,7 @@ FILES: dict[Path, tuple[str, ...]] = {
         "oneStepPolymerRGContraction",
     ),
     YM / "BalabanPhysicalC2CompletionLedger.agda": (
-        "coarsePenaltyDominationLevel = machineChecked",
+        "unconditionalFullGaugeFixedCoercivityLevel = machineChecked",
         "finiteCoerciveInverseAuthorityLevel = standardImported",
         "backgroundRelativeFormProducerLevel = conditional",
         "largeFieldSuppressionProducerLevel = conditional",
@@ -129,6 +140,7 @@ def main() -> None:
         "BalabanPath4SU2ConcreteCoarseBlockExact",
         "BalabanPath4SU2CoarseFineSplittingExact",
         "BalabanPath4SU2CoarsePenaltyExact",
+        "BalabanPath4SU2FullGaugeFixedCoercivityExact",
         "BalabanPath4SU2ConcretePropagatorExact",
         "BalabanPath4SU2TranslatedCoarsePropagatorExact",
         "BalabanPath4SU2BackgroundStabilityExact",
@@ -140,9 +152,9 @@ def main() -> None:
 
     print(
         "Side-four average laws, concrete Q/Q*, coarse-fine Pythagoras, exact "
-        "coarse-penalty domination, constrained propagator assembly, translation "
-        "compatibility, background stability assembly, and all-scale coercivity "
-        "induction are present and hole-free."
+        "coarse-penalty domination, unconditional full gauge-fixed coercivity, "
+        "propagator assembly, translation compatibility, background stability "
+        "assembly, and all-scale coercivity induction are present and hole-free."
     )
 
 
