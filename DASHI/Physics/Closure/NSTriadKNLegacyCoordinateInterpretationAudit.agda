@@ -1,10 +1,10 @@
 module DASHI.Physics.Closure.NSTriadKNLegacyCoordinateInterpretationAudit where
 
-open import Agda.Primitive using (Level; lsuc; _⊔_)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
+open import Agda.Builtin.Sigma using (Σ; _,_; fst)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List)
 
@@ -96,7 +96,7 @@ record LegacyEncodingTest
     (N : Nat)
     (PhysicalIncidence : Set p)
     (policy : LegacyValidityPolicy N) :
-    Set (lsuc (p ⊔ Agda.Primitive.lzero)) where
+    Set (lsuc p) where
   field
     physicalItems : List PhysicalIncidence
     rawItems : List (Relation.ConcreteNonResidualTriadIncidence N)
