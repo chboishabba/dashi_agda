@@ -3,6 +3,7 @@ module DASHI.Analysis.MarxDifferentialRegression where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
 
 open import DASHI.Analysis.MarxDifferentialCore
 open import DASHI.Analysis.MarxPolynomialDifferential
@@ -83,10 +84,5 @@ terminalPolynomialReceipt = polynomialFactorisation terminalPolynomial
 
 terminalRawDiagonalImpossible :
   RawDiagonalQuotient terminalAlgebra identityFunction tt →
-  Agda.Builtin.Unit.⊤
-terminalRawDiagonalImpossible raw =
-  let impossible = rawDiagonalQuotientImpossible raw
-  in absurd impossible
-  where
-    absurd : Agda.Builtin.Empty.⊥ → Agda.Builtin.Unit.⊤
-    absurd ()
+  ⊥
+terminalRawDiagonalImpossible = rawDiagonalQuotientImpossible
