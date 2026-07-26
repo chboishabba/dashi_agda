@@ -5,12 +5,22 @@ on:
     paths:
       - 'DASHI/Analysis/MarxDifferentialCore.agda'
       - 'DASHI/Analysis/MarxPolynomialDifferential.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealAdapter.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda'
+      - 'DASHI/Analysis/MarxFastCauchyCompletionCutset.agda'
+      - 'DASHI/Analysis/MarxPowerRuleNormalisation.agda'
+      - 'DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda'
       - 'DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda'
       - 'DASHI/Analysis/MarxHigherCalculus.agda'
+      - 'DASHI/Analysis/MarxExteriorIntegration.agda'
       - 'DASHI/Analysis/MarxDifferentialRegression.agda'
       - 'DASHI/Analysis/MarxDifferentialBundle.agda'
       - 'DASHI/Governance/TraumaExploitationDifferential.agda'
       - 'DASHI/Governance/TraumaExploitationAttractor.agda'
+      - 'DASHI/Governance/GeopoliticalDifferentialEvidence.agda'
+      - 'DASHI/Governance/IsraelCyberLegalStatusCandidate.agda'
+      - 'Verification/JacobianCounterexampleKernel.agda'
+      - 'DASHI/Algebra/Jacobian/InvertibilityStrata.agda'
       - '.github/workflows/marx-differential-agda.yml'
   workflow_dispatch:
 
