@@ -4,8 +4,10 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath4SU2BackgroundStabilityExact as Background
+import DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity as Relative
 import DASHI.Physics.YangMills.BalabanExplicitStepVLargeField as StepV
 import DASHI.Physics.YangMills.BalabanConcreteOneStepRG as OneStep
+import DASHI.Physics.YangMills.BalabanOneStepPolymerEstimate as Polymer
 
 ------------------------------------------------------------------------
 -- Concrete names for the small-field and large-field domains.
@@ -21,9 +23,9 @@ record SmallFieldConfiguration (Field Bound : Set) : Set₁ where
 
 open SmallFieldConfiguration public
 
-record LargeFieldPolymer (Block Polymer Bound : Set) : Set₁ where
+record LargeFieldPolymer (Block PolymerCarrier Bound : Set) : Set₁ where
   field
-    polymer : Polymer
+    polymer : PolymerCarrier
     badBlock : Block
     actionDefect : Bound
     activityWeight : Bound
@@ -34,32 +36,27 @@ smallFieldHessianUniformCoercivity :
   ∀ {BackgroundIndex}
     (dataSet : Background.Path4SU2SmallBackgroundCoercivity BackgroundIndex)
     background tangent →
-  DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity.GaugeFixedTangent
-    (Background.relativeData dataSet) background tangent →
-  DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity.LessEqual
-    (Background.relativeData dataSet)
-    (DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity.scale
-      (Background.relativeData dataSet)
-      (DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity.cH
-        (Background.relativeData dataSet))
-      (DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity.normSq
-        (Background.relativeData dataSet) tangent))
-    (DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity.inner
-      (Background.relativeData dataSet) tangent
-      (DASHI.Physics.YangMills.BalabanRelativeHessianCoercivity.fullHessian
-        (Background.relativeData dataSet) background tangent))
+  Relative.GaugeFixedTangent (Background.relativeData dataSet) background tangent →
+  Relative.LessEqual (Background.relativeData dataSet)
+    (Relative.scale (Background.relativeData dataSet)
+      (Relative.cH (Background.relativeData dataSet))
+      (Relative.normSq (Background.relativeData dataSet) tangent))
+    (Relative.inner (Background.relativeData dataSet) tangent
+      (Relative.fullHessian (Background.relativeData dataSet) background tangent))
 smallFieldHessianUniformCoercivity =
   Background.smallBackgroundPreservesCoercivity
 
 largeFieldActionPenalty :
-  ∀ {Site Polymer Bound Cluster Observable}
-    (dataSet : StepV.StepVLargeFieldData Site Polymer Bound Cluster Observable) →
+  ∀ {Site PolymerCarrier Bound Cluster Observable}
+    (dataSet : StepV.StepVLargeFieldData
+      Site PolymerCarrier Bound Cluster Observable) →
   StepV.LargeFieldActionPenalty dataSet
 largeFieldActionPenalty = StepV.largeFieldActionLowerBound
 
 polymerActivitySuppression :
-  ∀ {Site Polymer Bound Cluster Observable}
-    (dataSet : StepV.StepVLargeFieldData Site Polymer Bound Cluster Observable) →
+  ∀ {Site PolymerCarrier Bound Cluster Observable}
+    (dataSet : StepV.StepVLargeFieldData
+      Site PolymerCarrier Bound Cluster Observable) →
   StepV.LargeFieldActivitySuppression dataSet
 polymerActivitySuppression = StepV.largeFieldPolymerSuppressed
 
@@ -108,11 +105,9 @@ oneStepPolymerRGContraction :
   ∀ {F B Z J P R G}
     (dataSet : OneStep.ConcreteOneStepAnalyticData F B Z J P R G) →
   ∀ scale →
-  DASHI.Physics.YangMills.BalabanOneStepPolymerEstimate.LessEqual
-    (OneStep.order dataSet)
+  Polymer.LessEqual (OneStep.order dataSet)
     (OneStep.polymerNorm dataSet (OneStep.E dataSet (suc scale)))
-    (DASHI.Physics.YangMills.BalabanOneStepPolymerEstimate.add
-      (OneStep.order dataSet)
+    (Polymer.add (OneStep.order dataSet)
       (OneStep.multiplyBound dataSet
         (OneStep.contractionFactor dataSet)
         (OneStep.polymerNorm dataSet (OneStep.E dataSet scale)))
