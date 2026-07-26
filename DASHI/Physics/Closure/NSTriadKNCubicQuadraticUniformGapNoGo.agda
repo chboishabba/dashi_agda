@@ -117,8 +117,9 @@ positiveCubicWitnessRefutesUniformQuadraticBound S constant uniformBound state n
   factor≤factorTimesNonlinear :
     factor ≤ factor * nonlinear S state
   factor≤factorTimesNonlinear =
-    Nat.≤-trans
-      (Nat.*-identityʳ factor Nat.≡-Reasoning.≡⟨⟩ factor)
+    subst
+      (λ left → left ≤ factor * nonlinear S state)
+      (Nat.*-identityʳ factor)
       (Nat.*-monoʳ-≤ factor nonlinearPositive)
 
   strictGrowth :
