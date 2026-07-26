@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 1ℚ; _+_; _*_; _≤_; _<_)
+open import Data.Rational using (ℚ; 1ℚ; _+_; _*_; _≤_; Positive)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -65,14 +65,12 @@ configuredGaugeFixedOperatorData = record
   ; Green.energy = configuredGaugeFixedEnergy
   ; Green.coercivityConstant = configuredPathCoercivityConstant
   ; Green.LessEqual = _≤_
-  ; Green.Positive = λ value → 1ℚ * 0ℚ < value
+  ; Green.Positive = Positive
   ; Green.positiveCoercivity = configuredPathCoercivityConstantPositive
   ; Green.energyDefinition = λ tangent → refl
   ; Green.Coercive = ConfiguredGaugeFixedCoercive
   ; Green.coercive = configuredGaugeFixedMatrixPositive
   }
-  where
-  open import Data.Rational using (0ℚ)
 
 ------------------------------------------------------------------------
 -- Finite-dimensional inversion authority.
@@ -94,6 +92,8 @@ record ConfiguredPropagatorAuthority : Set₁ where
       Green.FiniteCoerciveInverseAuthority configuredGaugeFixedOperatorData
     reciprocalIsSixteen :
       Green.reciprocalCoercivity finiteAuthority ≡ sixteenℚ
+    multiplyBoundExact : ∀ left right →
+      Green.multiplyBound finiteAuthority left right ≡ left * right
 
 open ConfiguredPropagatorAuthority public
 
@@ -102,20 +102,15 @@ configuredPropagator :
   PhysicalSU2Tangent4 → PhysicalSU2Tangent4
 configuredPropagator authority = Green.inverse (finiteAuthority authority)
 
-configuredGaugeFixedMatrixInvertible :
-  ConfiguredPropagatorAuthority → Set
-configuredGaugeFixedMatrixInvertible authority =
-  (∀ tangent →
-    configuredPropagator authority (configuredGaugeFixedMatrix tangent) ≡ tangent)
-  ×
-  (∀ tangent →
-    configuredGaugeFixedMatrix (configuredPropagator authority tangent) ≡ tangent)
-  where
-  infixr 4 _×_
-  record _×_ (A B : Set) : Set where
-    constructor _,_
-    field first : A
-          second : B
+record ConfiguredGaugeFixedMatrixInvertible
+    (authority : ConfiguredPropagatorAuthority) : Set where
+  field
+    inverseLeftExact : ∀ tangent →
+      configuredPropagator authority (configuredGaugeFixedMatrix tangent) ≡ tangent
+    inverseRightExact : ∀ tangent →
+      configuredGaugeFixedMatrix (configuredPropagator authority tangent) ≡ tangent
+
+open ConfiguredGaugeFixedMatrixInvertible public
 
 configuredPropagatorLeftInverse :
   (authority : ConfiguredPropagatorAuthority) → ∀ tangent →
@@ -129,18 +124,13 @@ configuredPropagatorRightInverse :
 configuredPropagatorRightInverse authority =
   Green.inverseRight (finiteAuthority authority)
 
-configuredGaugeFixedMatrixInvertibleWitness :
+configuredGaugeFixedMatrixInvertible :
   (authority : ConfiguredPropagatorAuthority) →
-  configuredGaugeFixedMatrixInvertible authority
-configuredGaugeFixedMatrixInvertibleWitness authority =
-  configuredPropagatorLeftInverse authority ,
-  configuredPropagatorRightInverse authority
-  where
-  infixr 4 _×_
-  record _×_ (A B : Set) : Set where
-    constructor _,_
-    field first : A
-          second : B
+  ConfiguredGaugeFixedMatrixInvertible authority
+configuredGaugeFixedMatrixInvertible authority = record
+  { inverseLeftExact = configuredPropagatorLeftInverse authority
+  ; inverseRightExact = configuredPropagatorRightInverse authority
+  }
 
 configuredPropagatorNormBound :
   (authority : ConfiguredPropagatorAuthority) → ∀ source →
@@ -152,7 +142,13 @@ configuredPropagatorNormBound authority source =
       physicalUnweightedNormSq (configuredPropagator authority source)
       ≤ coefficient * physicalUnweightedNormSq source)
     (reciprocalIsSixteen authority)
-    (Green.inverseNormBound (finiteAuthority authority) source)
+    (subst
+      (λ right →
+        physicalUnweightedNormSq (configuredPropagator authority source) ≤ right)
+      (multiplyBoundExact authority
+        (Green.reciprocalCoercivity (finiteAuthority authority))
+        (physicalUnweightedNormSq source))
+      (Green.inverseNormBound (finiteAuthority authority) source))
 
 configuredGaugeFixedMatrixLevel : ProofLevel
 configuredGaugeFixedMatrixLevel = machineChecked
