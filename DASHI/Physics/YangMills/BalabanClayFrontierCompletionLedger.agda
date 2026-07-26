@@ -4,6 +4,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact
+import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixDimensionExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
@@ -22,6 +23,9 @@ finiteMatrixProductAndInverseConsequenceLevel = machineChecked
 
 physicalCoordinateEnumerationAndDeltaLevel : ProofLevel
 physicalCoordinateEnumerationAndDeltaLevel = machineChecked
+
+configuredPhysicalMatrixDimension3072Level : ProofLevel
+configuredPhysicalMatrixDimension3072Level = machineChecked
 
 configuredGaugeFixedMatrixDefinitionLevel : ProofLevel
 configuredGaugeFixedMatrixDefinitionLevel = machineChecked
@@ -108,10 +112,10 @@ p5ContinuumOSAndNontrivialityLevel = conditional
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
 
--- The physical coordinate carrier, Kronecker identity and literal matrix-entry
--- definition are now concrete.  The remaining inverse work is: prove that the
--- matrix action equals the configured operator by finite linearity, generate the
--- inverse matrix, and check both products and its norm certificate.
+-- The physical coordinate carrier, exact count 3072, Kronecker identity and
+-- literal matrix-entry definition are now concrete.  Remaining inverse work:
+-- prove matrix action equals the configured operator by finite linearity,
+-- generate the inverse matrix, and check both products and its norm certificate.
 configuredMatrixActionLinearityLevel : ProofLevel
 configuredMatrixActionLinearityLevel = conditional
 
