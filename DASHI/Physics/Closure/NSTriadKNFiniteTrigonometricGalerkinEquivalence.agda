@@ -6,7 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (ℤ)
 open import Data.List.Base using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -225,8 +225,32 @@ projectedPhysicalRightHandSide :
     {I : C3.ModeInverseSquare F E} →
   Equation.FiniteComplex3GalerkinSystem F E I →
   Z3.FourierMode → C3.Complex3 F
-projectedPhysicalRightHandSide system k =
-  Equation.projectedNonlinearity system k
+projectedPhysicalRightHandSide {E = E} {I = I} system k =
+  sumTrigonometricVectors
+    (mapProjectedRightHandSide E I
+      (Equation.velocity system)
+      (Equation.concreteTriadsAt system k))
+
+mappedProjectedTermsAgree :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    (system : Equation.FiniteComplex3GalerkinSystem F E I)
+    (triads : List Physical.PhysicalTriadIncidence) →
+  mapProjectedRightHandSide E I
+    (Equation.velocity system) triads
+  ≡ Equation.mapTriadTerms system triads
+mappedProjectedTermsAgree system [] = refl
+mappedProjectedTermsAgree system (τ ∷ rest)
+  rewrite mappedProjectedTermsAgree system rest = refl
+
+sumTrigonometricVectorsAgreesWithEquation :
+  ∀ {r} {F : C3.RealField r}
+    (values : List (C3.Complex3 F)) →
+  sumTrigonometricVectors values ≡ Equation.sumVectors values
+sumTrigonometricVectorsAgreesWithEquation [] = refl
+sumTrigonometricVectorsAgreesWithEquation (value ∷ values)
+  rewrite sumTrigonometricVectorsAgreesWithEquation values = refl
 
 physicalProjectionEqualsProjectedODECoefficient :
   ∀ {r} {F : C3.RealField r}
@@ -236,7 +260,14 @@ physicalProjectionEqualsProjectedODECoefficient :
     (k : Z3.FourierMode) →
   projectedPhysicalRightHandSide system k
   ≡ Equation.projectedNonlinearity system k
-physicalProjectionEqualsProjectedODECoefficient system k = refl
+physicalProjectionEqualsProjectedODECoefficient system k =
+  trans
+    (cong sumTrigonometricVectors
+      (mappedProjectedTermsAgree system
+        (Equation.concreteTriadsAt system k)))
+    (sumTrigonometricVectorsAgreesWithEquation
+      (Equation.mapTriadTerms system
+        (Equation.concreteTriadsAt system k)))
 
 viscousCoefficient :
   ∀ {r} {F : C3.RealField r}
