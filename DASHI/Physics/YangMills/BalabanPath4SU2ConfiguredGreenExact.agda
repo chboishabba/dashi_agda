@@ -22,12 +22,15 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact
   using (configuredGaugeFixedMatrix)
 open import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredScalarReductionExact
   using (configuredGaugeFixedMatrixEqualsLaplacianPlusMean)
+open import DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed
+  using (scalarGreenKernel)
+open import DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact
+  using (subtractSite4)
 open import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact
   using
     ( scalarGreen
     ; scalarGreenAdd
     ; scalarGreenRespectsPointwise
-    ; configuredSiteOperator
     ; configuredSiteGreenRightInverse
     ; configuredSiteGreenLeftInverse
     )
@@ -50,11 +53,6 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredMatrixActionExact
 configuredPhysicalGreen : PhysicalSU2Tangent4 → PhysicalSU2Tangent4
 configuredPhysicalGreen source component (pair site bondAxis) =
   scalarGreen (componentScalarBondField source component bondAxis) site
-
-greenComponentExact : ∀ source component bondAxis site →
-  componentScalarBondField (configuredPhysicalGreen source) component bondAxis site
-  ≡ scalarGreen (componentScalarBondField source component bondAxis) site
-greenComponentExact source component bondAxis site = refl
 
 configuredPhysicalGreenRightInverse : ∀ source component bond →
   configuredGaugeFixedMatrix (configuredPhysicalGreen source) component bond
@@ -109,16 +107,11 @@ scalarGreenScale coefficient source row =
   trans
     (siteSum4Cong _ _ (λ column → ℚRing.solve-∀
       coefficient
-      (DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed.scalarGreenKernel
-        (DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact.subtractSite4
-          row column))
+      (scalarGreenKernel (subtractSite4 row column))
       (source column)))
     (sumRationalScale coefficient (physicalBlockSites side4)
       (λ column →
-        DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed.scalarGreenKernel
-          (DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact.subtractSite4
-            row column)
-        * source column))
+        scalarGreenKernel (subtractSite4 row column) * source column))
 
 configuredPhysicalGreenAdd : ∀ left right component bond →
   configuredPhysicalGreen (addPhysical left right) component bond
@@ -236,18 +229,13 @@ configuredGreenTimesOperator : ∀ row column →
     configuredGaugeFixedOperatorMatrix
     row column
   ≡ delta physicalFiniteRationalCoordinates row column
-configuredGreenTimesOperator row column =
+configuredGreenTimesOperator (pair component bond) column =
   trans
     (configuredGreenMatrixActsExactly
-      (configuredGaugeFixedMatrix (coordinateBasisTangent column)) row)
-    (trans
-      (cong
-        (λ tangent → tangentToCoordinateVector tangent row)
-        (λ component bond →
-          configuredPhysicalGreenLeftInverse
-            (coordinateBasisTangent column) component bond))
-      (deltaActsAsIdentity physicalFiniteRationalCoordinates
-        (tangentToCoordinateVector (coordinateBasisTangent column)) row))
+      (configuredGaugeFixedMatrix (coordinateBasisTangent column))
+      (pair component bond))
+    (configuredPhysicalGreenLeftInverse
+      (coordinateBasisTangent column) component bond)
 
 configuredOperatorTimesGreen : ∀ row column →
   multiplyMatrix
@@ -256,18 +244,13 @@ configuredOperatorTimesGreen : ∀ row column →
     configuredGreenOperatorMatrix
     row column
   ≡ delta physicalFiniteRationalCoordinates row column
-configuredOperatorTimesGreen row column =
+configuredOperatorTimesGreen (pair component bond) column =
   trans
     (configuredMatrixActsExactly
-      (configuredPhysicalGreen (coordinateBasisTangent column)) row)
-    (trans
-      (cong
-        (λ tangent → tangentToCoordinateVector tangent row)
-        (λ component bond →
-          configuredPhysicalGreenRightInverse
-            (coordinateBasisTangent column) component bond))
-      (deltaActsAsIdentity physicalFiniteRationalCoordinates
-        (tangentToCoordinateVector (coordinateBasisTangent column)) row))
+      (configuredPhysicalGreen (coordinateBasisTangent column))
+      (pair component bond))
+    (configuredPhysicalGreenRightInverse
+      (coordinateBasisTangent column) component bond)
 
 configuredGaugeFixedMatrixInverseCertificate :
   RationalMatrixInverseCertificate
