@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanPath4SU2CoarseFineSplittingExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
@@ -23,6 +24,10 @@ open import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExa
 open import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
   using (RationalBondField4; bondComponent; bondNormSq)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
+open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact
+  using (physicalTangentInner)
+open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
+  using (configuredPathCoercivityConstant)
 open import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
 
 ------------------------------------------------------------------------
@@ -154,9 +159,7 @@ coarseFineNormSqExact tangent =
       (physicalUnweightedNormSq (fineProjection tangent)))
 
 physicalNormMatchesInner : ∀ tangent →
-  physicalUnweightedNormSq tangent
-  ≡ DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact.physicalTangentInner
-      tangent tangent
+  physicalUnweightedNormSq tangent ≡ physicalTangentInner tangent tangent
 physicalNormMatchesInner tangent = refl
 
 coarsePenaltyNormMatchesProjection : ∀ tangent →
@@ -192,7 +195,7 @@ coarsePenalizedCoercivity tangent fluctuationEnergy fineLower coarseLower =
         + concreteCoarseInner
             (literalBlockAverageQ tangent) (literalBlockAverageQ tangent))
     (scaleSplitting tangent)
-    (Data.Rational.Properties.+-mono-≤ fineLower coarseLower)
+    (ℚP.+-mono-≤ fineLower coarseLower)
   where
   scaleSplitting : ∀ current →
     configuredPathCoercivityConstant * physicalUnweightedNormSq current
