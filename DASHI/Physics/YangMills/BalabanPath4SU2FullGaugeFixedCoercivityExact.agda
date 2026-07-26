@@ -190,10 +190,13 @@ physicalNormPointwiseZero : ∀ tangent →
 physicalNormPointwiseZero tangent tangentZero =
   trans
     (cong₂ _+_
-      (bondNormPointwiseZero (tangent component1) (tangentZero component1))
+      (bondNormPointwiseZero (tangent component1)
+        (λ axis site → tangentZero component1 site axis))
       (cong₂ _+_
-        (bondNormPointwiseZero (tangent component2) (tangentZero component2))
-        (bondNormPointwiseZero (tangent component3) (tangentZero component3))))
+        (bondNormPointwiseZero (tangent component2)
+          (λ axis site → tangentZero component2 site axis))
+        (bondNormPointwiseZero (tangent component3)
+          (λ axis site → tangentZero component3 site axis))))
     (ℚRing.solve-∀)
 
 fineProjectionResidualNormZero : ∀ tangent →
