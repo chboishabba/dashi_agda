@@ -7,6 +7,7 @@ import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact
 import DASHI.Physics.YangMills.BalabanPath4PhysicalMartingaleOrthogonalityExact
 import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
 import DASHI.Physics.YangMills.BalabanPath4SU2CoarseFineSplittingExact
+import DASHI.Physics.YangMills.BalabanPath4SU2CoarsePenaltyExact
 import DASHI.Physics.YangMills.BalabanPath4SU2ConcretePropagatorExact
 import DASHI.Physics.YangMills.BalabanPath4SU2TranslatedCoarsePropagatorExact
 import DASHI.Physics.YangMills.BalabanPath4SU2BackgroundStabilityExact
@@ -30,8 +31,11 @@ concreteQAdjointCoisometryLevel = machineChecked
 concreteCoarseFinePythagorasLevel : ProofLevel
 concreteCoarseFinePythagorasLevel = machineChecked
 
-fineFluctuationCoercivityLevel : ProofLevel
-fineFluctuationCoercivityLevel = machineChecked
+coarsePenaltyDominationLevel : ProofLevel
+coarsePenaltyDominationLevel = machineChecked
+
+fineResidualKernelAndCoercivityLevel : ProofLevel
+fineResidualKernelAndCoercivityLevel = machineChecked
 
 configuredGaugeFixedOperatorLevel : ProofLevel
 configuredGaugeFixedOperatorLevel = machineChecked
