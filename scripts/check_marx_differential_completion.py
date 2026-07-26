@@ -13,6 +13,7 @@ FILES = [
     "DASHI/Analysis/MarxPolynomialDifferential.agda",
     "DASHI/Analysis/MarxConstructiveRealAdapter.agda",
     "DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda",
+    "DASHI/Analysis/MarxConstructiveRealTopology.agda",
     "DASHI/Analysis/MarxFastCauchyCompletionCutset.agda",
     "DASHI/Analysis/MarxFastCauchyDerivativeCompletion.agda",
     "DASHI/Analysis/MarxPowerRuleNormalisation.agda",
@@ -48,6 +49,11 @@ REQUIRED = {
     "DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda": (
         "ordinaryConstructiveRealMarxAlgebra",
         "ordinaryMarxCarrierNonterminal",
+    ),
+    "DASHI/Analysis/MarxConstructiveRealTopology.agda": (
+        "constructedRealMetricLaws",
+        "ContinuousAtSequentially",
+        "constructedRealRemainderDerivativeStructure",
     ),
     "DASHI/Analysis/MarxFastCauchyCompletionCutset.agda": (
         "selectedFastCauchyMarxAlgebra",
