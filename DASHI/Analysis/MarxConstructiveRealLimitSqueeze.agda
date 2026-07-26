@@ -1,6 +1,6 @@
 module DASHI.Analysis.MarxConstructiveRealLimitSqueeze where
 
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Builtin.Sigma using (Σ)
 open import Agda.Primitive using (Set; Set₁)
 open import Data.Product using (_×_; _,_)
 
