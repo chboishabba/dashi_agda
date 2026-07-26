@@ -84,7 +84,9 @@ record Stage3GapControlsGalerkinEvolution
 
     nonlinearEstimate : AbsorbableNonlinearEstimate energyData
 
-    everyGalerkinStateAdmissible : ∀ N time → Set
+    everyGalerkinStateAdmissible :
+      (N : Cutoff energyData) →
+      (time : Time energyData) → Set
     noSmallnessAssumption : Set
     noSymmetryAssumption : Set
     noPhaseRestriction : Set
@@ -111,7 +113,9 @@ record UniformGalerkinAprioriEstimate
       energy energyData N time (solution energyData N time)
       ≤ bound horizon
 
-    integratedDissipationUniform : ∀ horizon N → Set
+    integratedDissipationUniform :
+      (horizon : Horizon) →
+      (N : Cutoff energyData) → Set
     boundIndependentOfCutoff : Set
 
 open UniformGalerkinAprioriEstimate public
