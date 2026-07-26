@@ -29,10 +29,9 @@ record LegacyCoordinateInterpretation (N : Nat) : Set₁ where
       Relation.ConcreteNonResidualTriadIncidence N →
       Physical.PhysicalTriadIncidence
 
-    reconstructionResonant :
+    reconstructedInCutoff :
       (code : Relation.ConcreteNonResidualTriadIncidence N) →
-      Physical.resonance (reconstruct code)
-      ≡ Physical.resonance (reconstruct code)
+      Physical.PhysicalTriadInCutoff N (reconstruct code)
 
     headPhysicallyPreserved :
       (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
@@ -41,6 +40,9 @@ record LegacyCoordinateInterpretation (N : Nat) : Set₁ where
       (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
 
     residuePhysicallyExplained :
+      (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
+
+    reconstructedClassSound :
       (code : Relation.ConcreteNonResidualTriadIncidence N) → Set
 
 open LegacyCoordinateInterpretation public
@@ -109,8 +111,8 @@ record LegacyEncodingTest
       Relation.ConcreteNonResidualTriadIncidence N →
       Relation.ConcreteNonResidualTriadIncidence N → Set
 
-    collision : Set
-    unsatisfiedRawCode : Set
+    collisionWitnessOrInjective : Set
+    invalidRawWitnessOrSurjective : Set
     boundedMultiplicity : Nat → Set
 
 open LegacyEncodingTest public
@@ -149,10 +151,10 @@ open ExactLegacyPromotion public
 data LegacyDisposition : Set where
   retainValidatedSubtype replaceWithPhysicalCode : LegacyDisposition
 
-record LegacyCoordinateDecision : Set₁ where
+record LegacyCoordinateDecision : Set where
   field
     disposition : LegacyDisposition
-    physicalMeaningEstablished : Set
+    physicalMeaningEstablished : Bool
     rawCartesianProductPromoted : Bool
     postulatedWeightPromoted : Bool
 
@@ -161,7 +163,7 @@ open LegacyCoordinateDecision public
 safeDefaultLegacyDecision : LegacyCoordinateDecision
 safeDefaultLegacyDecision = record
   { disposition = replaceWithPhysicalCode
-  ; physicalMeaningEstablished = Bool
+  ; physicalMeaningEstablished = false
   ; rawCartesianProductPromoted = false
   ; postulatedWeightPromoted = false
   }
