@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier where
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-import Data.Integer.Base as Int using (ℤ; +_)
+open import Data.Integer.Base using (ℤ; +_; _+_; -_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
@@ -155,12 +155,12 @@ hermitianPairing3 a b = bilinearDot3 (complex3Conjugate a) b
 record IntegerEmbedding {r : Level} (F : RealField r) : Set (lsuc r) where
   field
     embedInteger : ℤ → Carrier F
-    embedZero : embedInteger (Int.+ 0) ≡ zero F
+    embedZero : embedInteger (+ 0) ≡ zero F
     embedAdd : ∀ a b →
-      embedInteger (Int._+_ a b)
+      embedInteger (a + b)
       ≡ add F (embedInteger a) (embedInteger b)
     embedNegate : ∀ a →
-      embedInteger (Int.- a)
+      embedInteger (- a)
       ≡ negate F (embedInteger a)
 
 open IntegerEmbedding public
