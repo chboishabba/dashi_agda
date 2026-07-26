@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Fail-closed textual audit for the explicit P1--P5 Yang--Mills frontier.
 
-This script is intentionally narrower than Agda kernel validation. It checks
-that exact reductions and the honest producer ledger remain present, and rejects
-postulates, holes, unsafe termination and underscore proof bodies in the new
-frontier modules and repaired finite foundations.
+This script is narrower than Agda kernel validation. It checks that exact
+reductions and the honest producer ledger remain present, and rejects postulates,
+holes, unsafe termination and underscore proof bodies in the focused frontier
+modules and repaired finite foundations.
 """
 
 from __future__ import annotations
@@ -32,13 +32,29 @@ FILES: dict[Path, tuple[str, ...]] = {
         "scaledVarianceNormalization",
         "physicalFibreCenteredDifferenceLevel = machineChecked",
     ),
+    YM / "BalabanFourAxisMartingaleExact.agda": (
+        "fourAxisMartingaleTelescopingRaw",
+        "fourAxisMartingaleDecomposition",
+        "fourSquareExpansionRaw",
+        "pairCrossSumZero",
+        "fourAxisMartingaleOrthogonalityImpliesVariance",
+        "fourAxisVarianceDecomposition",
+        "fourAxisMartingaleTelescopingLevel = machineChecked",
+    ),
+    YM / "BalabanConfiguredSide4ScalarWilsonOperatorExact.agda": (
+        "siteSumProductZero",
+        "firstBackwardPairing",
+        "secondNegativeBackwardPairing",
+        "planeTwoAxisPairingExact",
+        "scalarPlanePairingExact",
+        "scalarWilsonPlaneRieszLevel = machineChecked",
+    ),
     YM / "BalabanConstructiveRationalMatrixInverseExact.agda": (
         "matrixProductActionExact",
         "matrixInverseLeftExact",
         "matrixInverseRightExact",
         "constructiveFiniteGreen",
         "constructivePointwiseGreenAssemblyLevel = machineChecked",
-        "configuredMatrixRepresentationProducerLevel = conditional",
         "configuredGeneratedInverseProductProducerLevel = conditional",
     ),
     YM / "BalabanPath4SU2RationalMatrixCoordinatesExact.agda": (
@@ -47,7 +63,6 @@ FILES: dict[Path, tuple[str, ...]] = {
         "physicalFiniteRationalCoordinates",
         "tangentCoordinateRoundTripPointwise",
         "configuredGaugeFixedOperatorMatrix",
-        "configuredMatrixActionLinearityProducerLevel = conditional",
     ),
     YM / "BalabanPath4SU2RationalMatrixDimensionExact.agda": (
         "lengthCartesianExact",
@@ -56,6 +71,15 @@ FILES: dict[Path, tuple[str, ...]] = {
         "physicalCoordinateCountExact",
         "configuredMatrixDimensionIs3072",
         "configuredPhysicalMatrixDimensionLevel = machineChecked",
+    ),
+    YM / "BalabanPath4SU2ConfiguredMatrixActionExact.agda": (
+        "configuredGaugeFixedMatrixAdd",
+        "configuredGaugeFixedMatrixScale",
+        "configuredGaugeFixedMatrixRespectsPointwise",
+        "basisExpansionPointwise",
+        "configuredMatrixActsExactly",
+        "literalConfiguredMatrixActionCertificate",
+        "configuredMatrixActionLinearityLevel = machineChecked",
     ),
     YM / "BalabanSU2RationalAdjointRadiusExact.agda": (
         "adjointDisplacementWithUnitDefectExact",
@@ -121,16 +145,18 @@ FILES: dict[Path, tuple[str, ...]] = {
         "p5NontrivialityProducerLevel = conditional",
     ),
     YM / "BalabanClayFrontierCompletionLedger.agda": (
+        "fourAxisMartingaleScalarAlgebraLevel = machineChecked",
+        "scalarWilsonRieszSignAndZeroFoldLevel = machineChecked",
         "finiteMatrixProductAndInverseConsequenceLevel = machineChecked",
         "physicalCoordinateEnumerationAndDeltaLevel = machineChecked",
         "configuredPhysicalMatrixDimension3072Level = machineChecked",
         "configuredGaugeFixedMatrixDefinitionLevel = machineChecked",
+        "configuredMatrixActionLinearityLevel = machineChecked",
         "uniformOneSixtyFourthCoercivityLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
         "p3ConstructiveSchurComplementPropagatorLevel = conditional",
         "p5ContinuumOSAndNontrivialityLevel = conditional",
-        "configuredMatrixActionLinearityLevel = conditional",
         "constructiveConfiguredFiniteInverseLevel = conditional",
         "branchHeadAuthoritativeAgda29TypecheckLevel = conditional",
     ),
@@ -164,7 +190,11 @@ def main() -> None:
     aggregate = YM / "ConstructiveYangMillsNextSurface.agda"
     aggregate_text = aggregate.read_text(encoding="utf-8")
     for module in (
+        "BalabanConfiguredSide4ScalarWilsonOperatorExact",
         "BalabanConstructiveRationalMatrixInverseExact",
+        "BalabanPath4SU2RationalMatrixCoordinatesExact",
+        "BalabanPath4SU2RationalMatrixDimensionExact",
+        "BalabanPath4SU2ConfiguredMatrixActionExact",
         "BalabanSU2RationalAdjointRadiusExact",
         "BalabanSU2RationalWilsonLargeFieldGapExact",
         "BalabanClayP1BackgroundStabilityExact",
@@ -178,21 +208,11 @@ def main() -> None:
         if module not in aggregate_text:
             fail(f"aggregate does not import {module}")
 
-    ledger = YM / "BalabanClayFrontierCompletionLedger.agda"
-    ledger_text = ledger.read_text(encoding="utf-8")
-    for module in (
-        "BalabanPath4SU2RationalMatrixCoordinatesExact",
-        "BalabanPath4SU2RationalMatrixDimensionExact",
-    ):
-        if module not in ledger_text:
-            fail(f"frontier ledger does not import {module}")
-
     print(
-        "Repaired finite enumeration and fibre centering foundations, constructive "
-        "finite-matrix inverse algebra, the literal 3072-coordinate physical "
-        "matrix carrier, P1--P5 exact reductions, numerical budgets, endpoint "
-        "surfaces, and honest conditional producer ledger are present and "
-        "hole-free."
+        "Finite martingale algebra, corrected scalar Wilson Riesz signs, the "
+        "literal 3072-coordinate configured matrix action, constructive inverse "
+        "consequences, P1--P5 reductions, numerical budgets and the honest "
+        "producer ledger are present and hole-free."
     )
 
 
