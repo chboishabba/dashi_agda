@@ -9,6 +9,13 @@ open import DASHI.Analysis.MarxDifferentialCore
 open import DASHI.Analysis.MarxHigherCalculus
 
 ------------------------------------------------------------------------
+-- Elementary natural addition for graded form degrees.
+
+_+N_ : Nat → Nat → Nat
+zero +N n = n
+suc m +N n = suc (m +N n)
+
+------------------------------------------------------------------------
 -- Alternating multilinear forms and a genuine graded differential complex.
 
 record AlternatingMultilinearMap
@@ -55,10 +62,6 @@ record ExteriorAlgebra
     wedgeZeroRight :
       ∀ {p q} (omega : Form G p) →
       wedge omega (zeroForm G q) ≡ zeroForm G (p +N q)
-  where
-    _+N_ : Nat → Nat → Nat
-    zero +N n = n
-    suc m +N n = suc (m +N n)
 
 record ExteriorDerivative
   {A : MarxAlgebra}
@@ -73,10 +76,6 @@ record ExteriorDerivative
       d (d omega) ≡ zeroForm G (suc (suc degree))
 
 open ExteriorDerivative public
-
--- A concrete zero differential is useful as a regression inhabitant and, more
--- importantly, proves that d²=0 now targets the selected zero form rather than
--- the old reflexive equation d(d omega)=d(d omega).
 
 zeroExteriorDerivative :
   {A : MarxAlgebra} →
@@ -148,11 +147,10 @@ open TaggedPartition public
 riemannSum :
   {A : MarxAlgebra} →
   Function A → TaggedPartition A → Carrier A
-riemannSum f partition =
-  sumCarrierList
-    (mapCells (cells partition))
+riemannSum {A} f partition =
+  sumCarrierList (mapCells (cells partition))
   where
-    mapCells : List (RiemannCell _) → List (Carrier _)
+    mapCells : List (RiemannCell A) → List (Carrier A)
     mapCells [] = []
     mapCells (cell ∷ rest) = cellTerm f cell ∷ mapCells rest
 
@@ -205,8 +203,7 @@ record RiemannIntegralStructure
 open RiemannIntegralStructure public
 
 ------------------------------------------------------------------------
--- Fundamental theorem cutset.  The statements are equality-valued and tied to
--- the Marx factorisation/ordinary derivative owner, not opaque Set markers.
+-- Fundamental theorem cutset.
 
 record FundamentalTheoremBridge
   {A : MarxAlgebra}
@@ -233,8 +230,7 @@ record FundamentalTheoremBridge
 open FundamentalTheoremBridge public
 
 ------------------------------------------------------------------------
--- Social accumulation surface: cumulative local harm is an integral over an
--- evidence-bound harm-rate function, not an untyped scalar slogan.
+-- Cumulative harm integration surface.
 
 record CumulativeHarmIntegral
   {A : MarxAlgebra}
