@@ -11,12 +11,18 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNComplex3ExactCarrier.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3RealityPhaseAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3GalerkinEquationAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNResonantNullGain.agda",
+    "DASHI/Physics/Closure/NSTriadKNPhysicalTriadOrbitConstruction.agda",
+    "DASHI/Physics/Closure/NSTriadKNPhaseFactorizationReduction.agda",
     "DASHI/Physics/Closure/NSTriadKNCoarseGainDiagnostics.agda",
     "DASHI/Physics/Closure/NSTriadKNRefinedQuantitativeClassification.agda",
     "DASHI/Physics/Closure/NSTriadKNLegacyCoordinateInterpretationAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNCutoffUniformClasswiseEstimateProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNClasswiseAnalyticCutset.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedUniformGapProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNArbitraryDataAprioriProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNSignedGapAprioriComposition.agda",
+    "DASHI/Physics/Closure/NSTriadKNFourierLimitCompletionComposition.agda",
     "DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda",
 ]
 
