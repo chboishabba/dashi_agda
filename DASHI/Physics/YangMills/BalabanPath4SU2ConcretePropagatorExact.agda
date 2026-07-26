@@ -22,11 +22,9 @@ open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
     ; gaugeFixedHessianQuadraticForm
     )
 open import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
-  using
-    ( concreteGaugeFixedHessianData
-    ; CoarseAverageZero
-    ; fineFluctuationCoercivity
-    )
+  using (concreteGaugeFixedHessianData)
+open import DASHI.Physics.YangMills.BalabanPath4SU2FullGaugeFixedCoercivityExact
+  using (fullGaugeFixedCoercivity)
 import DASHI.Physics.YangMills.BalabanFiniteCoerciveGreen as Green
 
 ------------------------------------------------------------------------
@@ -48,13 +46,12 @@ configuredGaugeFixedEnergyMatchesQuadratic tangent = refl
 
 ConfiguredGaugeFixedCoercive : Set
 ConfiguredGaugeFixedCoercive =
-  ∀ tangent → CoarseAverageZero tangent →
+  ∀ tangent →
   configuredPathCoercivityConstant * physicalUnweightedNormSq tangent
   ≤ configuredGaugeFixedEnergy tangent
 
 configuredGaugeFixedMatrixPositive : ConfiguredGaugeFixedCoercive
-configuredGaugeFixedMatrixPositive tangent averageZero =
-  fineFluctuationCoercivity tangent averageZero
+configuredGaugeFixedMatrixPositive = fullGaugeFixedCoercivity
 
 configuredGaugeFixedOperatorData :
   Green.CoerciveFiniteOperator PhysicalSU2Tangent4 ℚ ℚ
