@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
@@ -94,10 +94,8 @@ lowHighOutputTracksHighOne :
   (τ : Physical.PhysicalTriadIncidence) →
   Shell.shellIndex (Physical.p τ) + 3
     ≤ Shell.shellIndex (Physical.q τ) →
-  Data.Nat.Base.∣
-    Shell.shellIndex (Physical.k τ)
-    - Shell.shellIndex (Physical.q τ)
-  ∣ ≤ 1
+  ∣ Shell.shellIndex (Physical.k τ)
+    - Shell.shellIndex (Physical.q τ) ∣ ≤ 1
 lowHighOutputTracksHighOne τ gap =
   FactorTwo.shellDistanceAtMostOne outputUpper highUpper
   where
@@ -139,10 +137,8 @@ highLowOutputTracksHighOne :
   (τ : Physical.PhysicalTriadIncidence) →
   Shell.shellIndex (Physical.q τ) + 3
     ≤ Shell.shellIndex (Physical.p τ) →
-  Data.Nat.Base.∣
-    Shell.shellIndex (Physical.k τ)
-    - Shell.shellIndex (Physical.p τ)
-  ∣ ≤ 1
+  ∣ Shell.shellIndex (Physical.k τ)
+    - Shell.shellIndex (Physical.p τ) ∣ ≤ 1
 highLowOutputTracksHighOne τ gap =
   FactorTwo.shellDistanceAtMostOne outputUpper highUpper
   where
@@ -190,10 +186,8 @@ highHighToLowInputsComparableOne :
     ≤ Shell.shellIndex (Physical.p τ) →
   Shell.shellIndex (Physical.k τ) + 3
     ≤ Shell.shellIndex (Physical.q τ) →
-  Data.Nat.Base.∣
-    Shell.shellIndex (Physical.p τ)
-    - Shell.shellIndex (Physical.q τ)
-  ∣ ≤ 1
+  ∣ Shell.shellIndex (Physical.p τ)
+    - Shell.shellIndex (Physical.q τ) ∣ ≤ 1
 highHighToLowInputsComparableOne τ kGapP kGapQ =
   FactorTwo.shellDistanceAtMostOne pUpper qUpper
   where
