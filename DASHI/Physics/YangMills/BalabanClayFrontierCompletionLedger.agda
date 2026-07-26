@@ -2,9 +2,12 @@ module DASHI.Physics.YangMills.BalabanClayFrontierCompletionLedger where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanFourAxisMartingaleExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4ScalarWilsonOperatorExact
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixDimensionExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredMatrixActionExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
@@ -15,8 +18,14 @@ import DASHI.Physics.YangMills.BalabanClayP4CommonParameterDomainExact
 import DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact
 
 ------------------------------------------------------------------------
--- Newly closed exact reductions.
+-- Closed exact reductions.
 ------------------------------------------------------------------------
+
+fourAxisMartingaleScalarAlgebraLevel : ProofLevel
+fourAxisMartingaleScalarAlgebraLevel = machineChecked
+
+scalarWilsonRieszSignAndZeroFoldLevel : ProofLevel
+scalarWilsonRieszSignAndZeroFoldLevel = machineChecked
 
 finiteMatrixProductAndInverseConsequenceLevel : ProofLevel
 finiteMatrixProductAndInverseConsequenceLevel = machineChecked
@@ -29,6 +38,9 @@ configuredPhysicalMatrixDimension3072Level = machineChecked
 
 configuredGaugeFixedMatrixDefinitionLevel : ProofLevel
 configuredGaugeFixedMatrixDefinitionLevel = machineChecked
+
+configuredMatrixActionLinearityLevel : ProofLevel
+configuredMatrixActionLinearityLevel = machineChecked
 
 su2RationalAdjointDisplacementAlgebraLevel : ProofLevel
 su2RationalAdjointDisplacementAlgebraLevel = machineChecked
@@ -112,13 +124,9 @@ p5ContinuumOSAndNontrivialityLevel = conditional
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
 
--- The physical coordinate carrier, exact count 3072, Kronecker identity and
--- literal matrix-entry definition are now concrete.  Remaining inverse work:
--- prove matrix action equals the configured operator by finite linearity,
--- generate the inverse matrix, and check both products and its norm certificate.
-configuredMatrixActionLinearityLevel : ProofLevel
-configuredMatrixActionLinearityLevel = conditional
-
+-- Basis expansion and literal matrix action are now concrete.  The finite
+-- inverse cut has narrowed to an exact inverse-product certificate and the
+-- reciprocal norm certificate for the configured 3072-coordinate matrix.
 constructiveConfiguredFiniteInverseLevel : ProofLevel
 constructiveConfiguredFiniteInverseLevel = conditional
 
