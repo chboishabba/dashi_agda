@@ -12,34 +12,26 @@ open import DASHI.Analysis.MarxScalarFrechetBridge
 open import DASHI.Analysis.MarxHigherCalculus
 open import DASHI.Analysis.MarxFiniteVectorSpace
 
-------------------------------------------------------------------------
--- Scalar laws sufficient for the finite l1 norm.
-
 record L1NormScalarLaws
   (A : MarxAlgebra)
   (O : OrderedScalar A)
   : Set₁ where
   field
     absolute : Carrier A → Carrier A
-
     absoluteNonnegative :
       ∀ x → _≤S_ O (zero A) (absolute x)
-
     absoluteZero :
       absolute (zero A) ≡ zero A
-
     absoluteTriangle :
       ∀ x y →
       _≤S_ O
         (absolute (_+_ A x y))
         (_+_ A (absolute x) (absolute y))
-
     addNonnegative :
       ∀ {x y} →
       _≤S_ O (zero A) x →
       _≤S_ O (zero A) y →
       _≤S_ O (zero A) (_+_ A x y)
-
     l1TriangleStep :
       ∀ {a b c r s t} →
       _≤S_ O a (_+_ A b c) →
@@ -56,7 +48,7 @@ l1Norm :
   L1NormScalarLaws A O →
   ∀ {n} →
   Vec (Carrier A) n → Carrier A
-l1Norm L [] = zero _
+l1Norm {A} L [] = zero A
 l1Norm {A} L (x ∷ xs) =
   _+_ A (absolute L x) (l1Norm L xs)
 
@@ -99,8 +91,8 @@ l1NormTriangle :
   _≤S_ O
     (l1Norm L (addVector u v))
     (_+_ A (l1Norm L u) (l1Norm L v))
-l1NormTriangle L [] [] =
-  OrderedScalar.leRefl _ _
+l1NormTriangle {A} {O} L [] [] =
+  OrderedScalar.leRefl O (zero A)
 l1NormTriangle L (x ∷ xs) (y ∷ ys) =
   l1TriangleStep L
     (absoluteTriangle L x y)
