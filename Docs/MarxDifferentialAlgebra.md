@@ -2,7 +2,7 @@
 
 ## Implemented spine
 
-The formal sequence is now explicit:
+The formal sequence is explicit:
 
 ```text
 original function
@@ -19,77 +19,201 @@ For a selected algebra `A`, a factorisation receipt contains a two-point prelimi
 f(x1) - f(x) = (x1 - x) * F(x,x1).
 ```
 
-The Marx derivative is then definitionally
+The Marx derivative is definitionally
 
 ```text
 D_M f(x) = F(x,x).
 ```
 
-No quotient is evaluated on the diagonal. `RawDiagonalQuotient` requires a proof that `x - x` is nonzero, and `rawDiagonalQuotientImpossible` contradicts that requirement using `subSelf`.
+No quotient is evaluated on the diagonal. `RawDiagonalQuotient` requires a proof that `x - x` is nonzero, and `rawDiagonalQuotientImpossible` contradicts it using `subSelf`.
 
 ## Exact algebraic results
 
-`MarxDifferentialCore` constructs and proves:
+`MarxDifferentialCore` constructs:
 
 - constant factorisation and `D_M(c)=0`;
 - identity factorisation and `D_M(x)=1`;
-- closure under addition;
-- closure under multiplication;
-- the sum rule;
-- the product rule;
-- composition factorisation from nested finite transports;
-- the chain rule;
-- quotient factorisation as multiplication by a separately receipted reciprocal.
+- closure under addition and multiplication;
+- sum and product rules;
+- composition from nested finite transports;
+- the exact chain rule;
+- quotient factorisation as multiplication by a receipted reciprocal.
 
-The quotient's conventional denominator-squared normal form remains parameterised by `QuotientRuleNormalisation`. This is intentional: a reciprocal operation alone does not select all subtraction, commutativity, and denominator-normalisation laws needed by that printed formula.
+## Constructive-real completion path
 
-## Polynomial regime
+`MarxConstructiveRealAdapter` identifies the selected `ConstructedOrderedCompleteReal` as the intended carrier.
 
-`MarxPolynomialDifferential` builds powers recursively from the identity and product constructors. It proves the exact recursive power derivative and defines a polynomial syntax with constructed factorisation receipts for constants, variables, sums, and products.
-
-The conventional display
+`MarxConstructiveRealRingNormalisation` now derives the two finite-difference factor laws from a small explicit quotient-level ring-normalisation package:
 
 ```text
-D_M(x^n) = n * x^(n-1)
+x * 0 = 0
+subtraction as addition of a negative
+difference of sums
+difference of products
+0 != 1
+1 + 1 != 0
 ```
 
-is exported through `PowerRuleNormalisation`. The recursive derivative is already constructed; the remaining field is precisely the algebra-specific normalisation from repeated sums/products to a selected natural-scalar action. The terminal regression inhabits this interface without presenting the one-point model as ordinary analysis.
+It constructs:
+
+- `constructedRealRingNormalisation`;
+- `ordinaryConstructiveRealMarxAlgebra`;
+- `ordinaryConstructiveRealMarxPackage`;
+- `ordinaryMarxCarrierNonterminal`.
+
+`MarxFastCauchyCompletionCutset` binds this directly to the existing repository stack:
+
+```text
+FastCauchyOperations
+  -> SetQuotientBackend
+  -> FastCauchyQuotientOperations
+  -> FastCauchyQuotientAlgebraLaws
+  -> FastCauchyQuotientCompleteness
+  -> ConstructedOrderedCompleteReal
+  -> MarxAlgebra.
+```
+
+The existing representative-respect theorems for addition, subtraction, multiplication, and negation are reused. The remaining nondegenerate real leaf is therefore not a new real-number design: it is a concrete quotient backend plus quotient-level ring normalisation and nondegeneracy.
+
+## Power and polynomial regime
+
+`MarxPowerRuleNormalisation` defines the natural scalar internally:
+
+```text
+[n]_A = 1 + ... + 1
+n . x = [n]_A * x
+```
+
+It proves:
+
+- `natCastZero` and `natCastSuccessor`;
+- `natScaleZero`, `natScaleOne`, and `natScaleSuccessor`;
+- natural scaling through multiplication;
+- the inductive theorem
+
+```text
+D_M(x^(n+1)) = (n+1) . x^n.
+```
+
+The selected constructed real inherits the normalization through `ordinaryRealPowerRuleNormalisation` once its ring-normalisation package is supplied.
+
+The polynomial layer now also contains a structurally differentiated polynomial syntax and proves that its interpretation agrees with the existing receipt-derived polynomial derivative.
+
+## Reciprocal and quotient regime
+
+`MarxReciprocalQuotientNormalisation` defines an explicit field-level cutset:
+
+- `Nonzero`;
+- reciprocal and reciprocal nonzero transport;
+- left/right inverse laws;
+- the finite reciprocal-difference identity;
+- reciprocal finite factorisation;
+- reciprocal derivative;
+- reciprocal denominator-square normalization;
+- quotient construction through the existing product rule;
+- quotient product form;
+- the standard denominator-squared quotient rule;
+- `LocallyNonzeroAt` for punctured-neighbourhood domain control.
+
+The printed theorem is now obtained through the existing product factorisation:
+
+```text
+D_M(f/g)
+  = (g * D_M f - f * D_M g) * reciprocal(g*g).
+```
+
+No unrelated direct quotient derivative is postulated.
 
 ## Ordinary derivative bridge
 
-`MarxOrdinaryDerivativeBridge` adds:
+The former weak remainder and placeholder diagonal surfaces have been replaced.
 
-- a remainder-based derivative expansion;
-- a diagonal-continuity receipt for the preliminary function;
-- the theorem surface
+`RemainderDerivativeStructure` now owns punctured normalization and convergence. An ordinary derivative carries
+
+```text
+f(x+h) = f(x) + L*h + r(h)
+```
+
+with the actual little-o condition
+
+```text
+normaliseRemainder(h,r(h)) -> 0
+```
+
+on nonzero `h`.
+
+`PreliminaryContinuousAtDiagonal` is the genuine convergence statement
+
+```text
+F(x,x+h) - F(x,x) -> 0.
+```
+
+The module defines
+
+```text
+r_M(h) = h * (F(x,x+h) - F(x,x))
+```
+
+and proves
 
 ```text
 Marx factorisation
-+ continuous diagonal
-+ ordinary remainder derivative
--> D_M f(x) = D f(x).
++ diagonal continuity
++ finite rearrangement laws
+-> ordinary remainder derivative with coefficient D_M f(x).
 ```
 
-The repository's constructive-real spine currently has Cauchy completion and transcendental constructions but no selected normed derivative topology. Consequently, the compatibility proof is represented by the explicit `MarxOrdinaryCompatibilityAuthority` boundary rather than fabricated from insufficient structure.
+Derivative uniqueness then yields `marxDerivativeEqualsOrdinaryDerivative`. The compatibility authority no longer contains the desired equality as an assumption; it carries only the finite rearrangement and uniqueness laws from which the equality is derived.
 
-A concrete `ConstructiveRealDerivativeSeam` is the next analytic inhabitant: it must bind the selected constructive real to a norm/topology, prove diagonal continuity, and discharge the remainder argument.
+A converse divided-difference-extension constructor is also present.
 
-## Higher calculus
+## Fréchet calculus and Jacobians
 
-`MarxHigherCalculus` supplies typed surfaces for:
+`MarxHigherCalculus` now uses genuine structures rather than one-field placeholders:
 
-- iterated derivatives;
-- derivative-closed function families;
-- higher-derivative towers;
-- Taylor coefficients `D^n f(a)/n!`;
-- directional derivatives;
-- Frechet derivatives;
-- directional/Frechet compatibility;
-- Jacobians;
-- differential forms and `d^2=0`;
-- integration and fundamental-theorem bridges.
+- modules with vector addition and scalar action;
+- linear maps preserving zero, addition, and scaling;
+- identity, zero, and composition of linear maps;
+- ordered scalar carriers;
+- normed modules;
+- bounded linear maps and operator-norm receipts;
+- vector-valued little-o structures;
+- Fréchet derivatives with linear derivative, explicit remainder, and little-o proof;
+- identity and constant Fréchet derivatives;
+- additive and chain-rule construction data;
+- derivative uniqueness;
+- directional derivatives as applications of the Fréchet derivative;
+- finite bases, coordinate functionals, and Jacobian extraction.
 
-These interfaces do not claim that the current constructive-real carrier already inhabits every analytic law.
+The repository's checked Jacobian counterexample is imported as a promotion boundary:
+
+```text
+constant or nonsingular Jacobian data
+  does not entail global injectivity.
+```
+
+Local differential information, local inversion, finite fibres, global injectivity, and global polynomial invertibility remain distinct strata.
+
+## Differential forms and integration
+
+`MarxExteriorIntegration` adds:
+
+- degree-indexed alternating multilinear maps;
+- graded differential-form carriers;
+- wedge-product interfaces;
+- an exterior derivative with the genuine target
+
+```text
+d (d omega) = zeroForm;
+```
+
+- a concrete zero-differential regression inhabitant;
+- literal intervals, tagged cells, tagged partitions, and finite Riemann sums;
+- constructive integral laws for constants, sums, scaling, order, and interval additivity;
+- equality-valued fundamental-theorem interfaces;
+- a cumulative-harm integral surface.
+
+The previous tautology `d(d omega)=d(d omega)` has been removed.
 
 ## Social recursion differential
 
@@ -100,10 +224,10 @@ HistoricalState
   -> SufferingField
   -> ExploitationProtocol
   -> Institution
-  -> HistoricalState.
+  -> HistoricalState
 ```
 
-The exact local propagation operator is the typed chain
+as
 
 ```text
 dReproduce
@@ -115,27 +239,75 @@ dReproduce
 `DifferentialAttribution` keeps distinct:
 
 - where suffering enters;
-- where it is converted into an exploitation protocol;
+- where it becomes an extraction protocol;
 - where it becomes institutionally scalable;
 - where it is reproduced or externalised.
 
-A large local differential gain does not produce normative authority.
+The promotion boundary has been strengthened. Every normative authority must carry independent evidence, and a gain-only authority attempt is contradictory.
+
+## Evidence-bound geopolitical layer
+
+`GeopoliticalDifferentialEvidence` defines:
+
+- claim, jurisdiction, time, population, sector, and technology scope;
+- source receipts and source roles;
+- independent evidence;
+- legal procedural stages;
+- the indexed theorem that provisional measures or a pending counter-memorial do not constitute a final merits judgment;
+- cyber/economic evidence with explicit units and methodology;
+- explicit global-player criteria;
+- product, buyer, capability, use, and affected-population deployment receipts;
+- doctrine-to-technology-to-institution-to-externalisation mechanism receipts;
+- PNF support, contradiction, alternatives, and missing-axis fibres;
+- a full promotion receipt requiring source completeness, scope/time alignment, mechanism evidence, counterevidence, legal precision, non-essentialisation, and independent evidence;
+- an impossibility theorem for gain-only promotion.
+
+`IsraelCyberLegalStatusCandidate` is a deliberately narrow, fail-closed fixture. It records current official aggregate high-tech/defence-export evidence and current ICJ procedural status, but leaves the trauma-to-cyber-export mechanism undetermined because cyber-only denominators, product deployment, buyer/use, and causal mechanism receipts are absent. The fixture cannot promote that mechanism.
+
+## Regression and CI
+
+`MarxDifferentialRegression` now exercises:
+
+- constants, identity, sums, products, composition, and diagonal non-collapse;
+- law-derived natural-scalar power normalization;
+- polynomial differentiation;
+- reciprocal and quotient constructions;
+- the little-o compatibility theorem;
+- module and Fréchet identity structure;
+- directional differentiation;
+- the genuine `d^2=0` target;
+- Riemann integration structure;
+- legal procedural non-collapse.
+
+The focused workflow typechecks the complete `MarxDifferentialBundle` and watches every new dependency, including the Jacobian kernel boundary.
 
 ## Files
 
 - `DASHI/Analysis/MarxDifferentialCore.agda`
 - `DASHI/Analysis/MarxPolynomialDifferential.agda`
+- `DASHI/Analysis/MarxConstructiveRealAdapter.agda`
+- `DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda`
+- `DASHI/Analysis/MarxFastCauchyCompletionCutset.agda`
+- `DASHI/Analysis/MarxPowerRuleNormalisation.agda`
+- `DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda`
 - `DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda`
 - `DASHI/Analysis/MarxHigherCalculus.agda`
+- `DASHI/Analysis/MarxExteriorIntegration.agda`
 - `DASHI/Analysis/MarxDifferentialRegression.agda`
 - `DASHI/Analysis/MarxDifferentialBundle.agda`
 - `DASHI/Governance/TraumaExploitationDifferential.agda`
+- `DASHI/Governance/GeopoliticalDifferentialEvidence.agda`
+- `DASHI/Governance/IsraelCyberLegalStatusCandidate.agda`
 
-## Remaining substantive work
+## Honest remaining substantive inhabitants
 
-1. Instantiate `MarxAlgebra` on the repository's nondegenerate constructive real.
-2. Prove the algebra-specific power normalisation rather than merely providing its interface.
-3. Construct a reciprocal factorisation and denominator-squared quotient normalisation.
-4. Add a norm/topology and prove the ordinary-derivative compatibility authority.
-5. Inhabit Frechet, Jacobian, forms, integration, and fundamental-theorem structures on that same carrier.
-6. Supply evidence-bound empirical social-system instances; the generic differential architecture alone proves no historical or geopolitical claim.
+The requested theorem architecture and dependency reductions are now present. The remaining work is concrete rather than architectural:
+
+1. inhabit the repository's backend-neutral `SetQuotientBackend` for fast-Cauchy reals;
+2. prove quotient-level subtraction/negation normal forms and nondegeneracy for that backend;
+3. inhabit the ordinary-real reciprocal laws and denominator-square normalization;
+4. bind the selected real order/absolute value to punctured little-o convergence and prove derivative uniqueness;
+5. construct nonterminal normed finite-dimensional modules, operator norms, exterior forms, and Riemann/Fundamental-Theorem inhabitants;
+6. populate product-level deployment and mechanism evidence for any concrete geopolitical promotion.
+
+No missing backend, real-analysis theorem, or empirical causal link is fabricated merely to make a status flag green.
