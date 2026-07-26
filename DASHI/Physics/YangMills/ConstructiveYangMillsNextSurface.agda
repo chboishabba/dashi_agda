@@ -85,6 +85,7 @@ import DASHI.Physics.YangMills.BalabanPath4SU2BackgroundStabilityExact
 import DASHI.Physics.YangMills.BalabanC2SmallLargeAllScaleExact
 import DASHI.Physics.YangMills.BalabanPhysicalC2CompletionLedger
 
+import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
