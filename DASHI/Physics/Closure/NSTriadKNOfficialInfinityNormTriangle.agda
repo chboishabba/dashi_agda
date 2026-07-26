@@ -150,15 +150,23 @@ infinityNormReverseLeft p q =
       (zMagnitude≤InfinityNorm (Z3.addMode p q))
       (zMagnitude≤InfinityNorm q))
 
+addModeCommutative : ∀ p q → Z3.addMode p q ≡ Z3.addMode q p
+addModeCommutative (Z3.mode px py pz) (Z3.mode qx qy qz)
+  rewrite Int.+-comm px qx
+        | Int.+-comm py qy
+        | Int.+-comm pz qz
+  = refl
+
 infinityNormReverseRight :
   ∀ p q →
   infinityNorm q
   ≤ infinityNorm (Z3.addMode p q) + infinityNorm p
-infinityNormReverseRight p q
-  rewrite Int.+-comm (Z3.kx p) (Z3.kx q)
-        | Int.+-comm (Z3.ky p) (Z3.ky q)
-        | Int.+-comm (Z3.kz p) (Z3.kz q)
-  = infinityNormReverseLeft q p
+infinityNormReverseRight p q =
+  subst
+    (λ output →
+      infinityNorm q ≤ infinityNorm output + infinityNorm p)
+    (sym (addModeCommutative p q))
+    (infinityNormReverseLeft q p)
 
 record OfficialResonantNormConsequences
     (τ : Physical.PhysicalTriadIncidence) : Set where
