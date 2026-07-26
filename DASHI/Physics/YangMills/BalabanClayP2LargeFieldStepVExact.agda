@@ -4,11 +4,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using
-  ( ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_
+  ( ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_
   ; NonNegative; Positive; nonNegative )
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -34,7 +34,11 @@ record GaugeInvariantBadBlockDecomposition
     Contains : Polymer → Block → Set
     Connected : Polymer → Set
 
-    badBlockGaugeInvariant : ∀ gauge configuration block →
+    badBlockGaugeInvariantForward : ∀ gauge configuration block →
+      BadBlock configuration block →
+      BadBlock (transform gauge configuration) block
+
+    badBlockGaugeInvariantBackward : ∀ gauge configuration block →
       BadBlock (transform gauge configuration) block →
       BadBlock configuration block
 
@@ -55,6 +59,14 @@ record GaugeInvariantBadBlockDecomposition
     maximalBadSetCovered : ∀ configuration block →
       BadBlock configuration block →
       Contains (badPolymer configuration block) block
+
+    BadBlockMeasurable : Set
+    CollarAssignmentConsistent : Set
+    TransferRegionAssignmentConsistent : Set
+
+    badBlockMeasurable : BadBlockMeasurable
+    collarAssignmentConsistent : CollarAssignmentConsistent
+    transferRegionAssignmentConsistent : TransferRegionAssignmentConsistent
 
 open GaugeInvariantBadBlockDecomposition public
 
@@ -97,6 +109,14 @@ record LargeFieldActivityFactorization
     SizeMarginPositive DiameterMarginPositive : Set
     sizeMarginPositive : SizeMarginPositive
     diameterMarginPositive : DiameterMarginPositive
+
+    BlockingCompatible : Set
+    TransferCutCompatible : Set
+    NestedPatchCompatible : Set
+
+    blockingCompatible : BlockingCompatible
+    transferCutCompatible : TransferCutCompatible
+    nestedPatchCompatible : NestedPatchCompatible
 
 open LargeFieldActivityFactorization public
 
@@ -224,7 +244,7 @@ uniformFiniteVolumeKoteckyPreiss dataSet scale volume root depth =
     (rootedPartialBelowMajorant dataSet scale volume root depth)
     (shellMajorantPartialBelowHalf depth)
 
-etaGapPositive : 0ℚ ℚP.< half
+etaGapPositive : 0ℚ < half
 etaGapPositive =
   let
     instance
@@ -242,12 +262,13 @@ etaPlusGapIsOne = ℚRing.solve-∀
 ------------------------------------------------------------------------
 
 record PhysicalP2StepVCertificate
-    (Configuration GaugeTransform Block Polymer Scale Volume Root : Set) : Set₁ where
+    (Configuration GaugeTransform Block Plaquette Polymer Scale Volume Root : Set)
+    : Set₁ where
   field
     decomposition :
       GaugeInvariantBadBlockDecomposition
         Configuration GaugeTransform Block Polymer
-    witnessGap : LargeFieldWitnessSystem Block Polymer
+    witnessGap : LargeFieldWitnessSystem Block Plaquette
     activityFactorization : LargeFieldActivityFactorization Scale Polymer
     shellBound : UniformRootedShellBound Scale Volume Root
 
@@ -255,7 +276,7 @@ record PhysicalP2StepVCertificate
       rootedPartialSum shellBound scale volume root depth ≤ half
     kpAtEveryFiniteCutoff = uniformFiniteVolumeKoteckyPreiss shellBound
 
-    etaGap : 0ℚ ℚP.< half
+    etaGap : 0ℚ < half
     etaGap = etaGapPositive
 
 open PhysicalP2StepVCertificate public
