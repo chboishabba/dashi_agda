@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
@@ -121,9 +121,14 @@ scalarKernelLaplacian offset =
     - (scalarGreenKernel (shiftForward4 axis3 offset)
       + scalarGreenKernel (shiftBackward4 axis3 offset)))
 
+zeroSite4 : PhysicalBlockL side4
+zeroSite4 = pair (pair zeroᵢ zeroᵢ) (pair zeroᵢ zeroᵢ)
+
 scalarDeltaAtZero : PhysicalBlockL side4 → ℚ
-scalarDeltaAtZero (pair (pair zeroᵢ zeroᵢ) (pair zeroᵢ zeroᵢ)) = 1ℚ
-scalarDeltaAtZero _ = 0ℚ
+scalarDeltaAtZero offset
+  with periodicTorus4DecidableEquality four offset zeroSite4
+... | yes equality = 1ℚ
+... | no inequality = 0ℚ
 
 KernelEquation : PhysicalBlockL side4 → Set
 KernelEquation offset =
