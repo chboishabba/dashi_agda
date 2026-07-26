@@ -8,6 +8,7 @@ open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 
@@ -25,16 +26,6 @@ record FiniteComplex3GalerkinSystem
     modes : List Z3.FourierMode
     triads : List Physical.PhysicalTriadIncidence
 
-    RelationMember :
-      Physical.PhysicalTriadIncidence →
-      List Physical.PhysicalTriadIncidence → Set
-
-    -- Exact output-indexed resonant list.  This avoids summing a triad into a
-    -- target different from its proved physical output.
-    triadsAt : Z3.FourierMode → List Physical.PhysicalTriadIncidence
-    triadsAtOutputAgreement : ∀ k τ →
-      RelationMember τ (triadsAt k) → Physical.k τ ≡ k
-
     velocity : Z3.FourierMode → C3.Complex3 F
     viscosity : C3.Carrier F
 
@@ -42,9 +33,8 @@ record FiniteComplex3GalerkinSystem
     triadListed : Physical.PhysicalTriadIncidence → Set
 
     modesAreLiteralCutoff : Set
-    triadsAreLiteralResonances : Set
-    triadsAtComplete : Set
-    triadsAtDuplicateFree : Set
+    triadsAreLiteralEnumeration :
+      triads ≡ Physical.physicalTriadEnumeration cutoff
     zeroModeExcluded : Set
     realityClosed : Set
 
@@ -61,19 +51,38 @@ mapTriadTerms :
     {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
   FiniteComplex3GalerkinSystem F E I →
-  Z3.FourierMode →
   List Physical.PhysicalTriadIncidence →
   List (C3.Complex3 F)
-mapTriadTerms system k [] = []
-mapTriadTerms {F = F} {E} {I} system k (τ ∷ rest) =
+mapTriadTerms system [] = []
+mapTriadTerms {F = F} {E} {I} system (τ ∷ rest) =
   Signed.orderedVelocityInteraction
     (C3.complex3VelocityGalerkinLaws F E I)
-    k
+    (Physical.k τ)
     (Physical.p τ)
     (Physical.q τ)
     (velocity system (Physical.p τ))
     (velocity system (Physical.q τ))
-  ∷ mapTriadTerms system k rest
+  ∷ mapTriadTerms system rest
+
+concreteTriadsAt :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  FiniteComplex3GalerkinSystem F E I →
+  Z3.FourierMode →
+  List Physical.PhysicalTriadIncidence
+concreteTriadsAt system output =
+  Output.physicalOutputFiber (cutoff system) output
+
+concreteTriadsAtOutputAgreement :
+  ∀ {r} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {system : FiniteComplex3GalerkinSystem F E I}
+    {output τ} →
+  Output._∈_ τ (concreteTriadsAt system output) →
+  Physical.k τ ≡ output
+concreteTriadsAtOutputAgreement = Output.physicalOutputFiberSound
 
 projectedNonlinearity :
   ∀ {r} {F : C3.RealField r}
@@ -81,14 +90,15 @@ projectedNonlinearity :
     {I : C3.ModeInverseSquare F E} →
   FiniteComplex3GalerkinSystem F E I →
   Z3.FourierMode → C3.Complex3 F
-projectedNonlinearity system k =
-  sumVectors (mapTriadTerms system k (triadsAt system k))
+projectedNonlinearity system output =
+  sumVectors
+    (mapTriadTerms system (concreteTriadsAt system output))
 
 ------------------------------------------------------------------------
 -- Ordered versus symmetrised conventions.
 --
 -- A sum over all ordered resonant pairs already contains both (p,q) and
--- (q,p).  A quotient by the swap orbit must insert the corresponding orbit
+-- (q,p). A quotient by the swap orbit must insert the corresponding orbit
 -- multiplicity; it may not add a second copy and then divide by an unexplained
 -- factor two.
 ------------------------------------------------------------------------
@@ -204,6 +214,12 @@ literalProjectedGalerkinSumConstructed = true
 literalProjectedGalerkinSumConstructedIsTrue :
   literalProjectedGalerkinSumConstructed ≡ true
 literalProjectedGalerkinSumConstructedIsTrue = refl
+
+concreteOutputFiberUsed : Bool
+concreteOutputFiberUsed = true
+
+concreteOutputFiberUsedIsTrue : concreteOutputFiberUsed ≡ true
+concreteOutputFiberUsedIsTrue = refl
 
 factorAndOrbitAuditTargetImplemented : Bool
 factorAndOrbitAuditTargetImplemented = true
