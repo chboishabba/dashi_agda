@@ -3,8 +3,10 @@ module DASHI.Analysis.MarxConstructiveRealTopology where
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ)
 open import Agda.Primitive using (Set; Set₁)
+open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality
-  using (_≡_; refl; trans; cong)
+  using (_≡_; trans; cong)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.MarxDifferentialCore
@@ -175,8 +177,8 @@ record PuncturedApproach
       Σ Nat
         (λ cutoff →
           ∀ n →
-          cutoff Data.Nat.Base.≤ n →
-          sequenceAt R parameters n ≡ zero R → Set)
+          cutoff ≤ n →
+          sequenceAt R parameters n ≡ zero R → ⊥)
 
 open PuncturedApproach public
 
@@ -199,6 +201,14 @@ record ConstructedRealPuncturedTopology
       ≡ normaliseRemainder
           (sequenceAt R (parameters approach) n)
           (remainder (sequenceAt R (parameters approach) n))
+
+    approachNonzeroEventually :
+      ∀ approach →
+      Σ Nat
+        (λ cutoff →
+          ∀ n →
+          cutoff ≤ n →
+          Nonzero (sequenceAt R (parameters approach) n))
 
     puncturedCongruence :
       ∀ {phi psi : Real R → Real R} →
@@ -247,6 +257,5 @@ constructedRealRemainderDerivativeStructure {R} ring limits topology =
     }
 
 ------------------------------------------------------------------------
--- The metric and sequential structures are explicit theorem leaves, not a
--- second topology.  A concrete fast-Cauchy backend should inhabit them by
+-- A concrete fast-Cauchy backend should inhabit these structures by
 -- transporting the existing rational metric/order and quotient convergence.
