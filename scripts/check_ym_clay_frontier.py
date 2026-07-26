@@ -49,6 +49,14 @@ FILES: dict[Path, tuple[str, ...]] = {
         "configuredGaugeFixedOperatorMatrix",
         "configuredMatrixActionLinearityProducerLevel = conditional",
     ),
+    YM / "BalabanPath4SU2RationalMatrixDimensionExact.agda": (
+        "lengthCartesianExact",
+        "siteCountExact",
+        "positiveBondCountExact",
+        "physicalCoordinateCountExact",
+        "configuredMatrixDimensionIs3072",
+        "configuredPhysicalMatrixDimensionLevel = machineChecked",
+    ),
     YM / "BalabanSU2RationalAdjointRadiusExact.agda": (
         "adjointDisplacementWithUnitDefectExact",
         "adjointDisplacementUnitExact",
@@ -115,6 +123,7 @@ FILES: dict[Path, tuple[str, ...]] = {
     YM / "BalabanClayFrontierCompletionLedger.agda": (
         "finiteMatrixProductAndInverseConsequenceLevel = machineChecked",
         "physicalCoordinateEnumerationAndDeltaLevel = machineChecked",
+        "configuredPhysicalMatrixDimension3072Level = machineChecked",
         "configuredGaugeFixedMatrixDefinitionLevel = machineChecked",
         "uniformOneSixtyFourthCoercivityLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
@@ -171,14 +180,19 @@ def main() -> None:
 
     ledger = YM / "BalabanClayFrontierCompletionLedger.agda"
     ledger_text = ledger.read_text(encoding="utf-8")
-    if "BalabanPath4SU2RationalMatrixCoordinatesExact" not in ledger_text:
-        fail("frontier ledger does not import the literal matrix coordinate carrier")
+    for module in (
+        "BalabanPath4SU2RationalMatrixCoordinatesExact",
+        "BalabanPath4SU2RationalMatrixDimensionExact",
+    ):
+        if module not in ledger_text:
+            fail(f"frontier ledger does not import {module}")
 
     print(
         "Repaired finite enumeration and fibre centering foundations, constructive "
-        "finite-matrix inverse algebra, literal physical matrix coordinates, "
-        "P1--P5 exact reductions, numerical budgets, endpoint surfaces, and "
-        "honest conditional producer ledger are present and hole-free."
+        "finite-matrix inverse algebra, the literal 3072-coordinate physical "
+        "matrix carrier, P1--P5 exact reductions, numerical budgets, endpoint "
+        "surfaces, and honest conditional producer ledger are present and "
+        "hole-free."
     )
 
 
