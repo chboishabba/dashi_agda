@@ -10,10 +10,6 @@ open import DASHI.Analysis.MarxPowerRuleNormalisation
 open import DASHI.Analysis.MarxScalarFrechetBridge
 open import DASHI.Analysis.MarxExteriorIntegration
 
-------------------------------------------------------------------------
--- Additive interchange is the exact finite-sum normalization needed to collect
--- pointwise sums into two Riemann sums.
-
 record RiemannSumAlgebraLaws
   (A : MarxAlgebra)
   : Set₁ where
@@ -123,12 +119,12 @@ riemannSumAdd :
   (partition : TaggedPartition A) →
   riemannSum (addFunctions f g) partition
   ≡ _+_ A (riemannSum f partition) (riemannSum g partition)
-riemannSumAdd L f g partition =
+riemannSumAdd {A} L f g partition =
   trans
     (riemannSumMatchesCells (addFunctions f g) partition)
     (trans
       (riemannSumCellsAdd L f g (cells partition))
-      (cong₂ (_+_ _)
+      (cong₂ (_+_ A)
         (sym (riemannSumMatchesCells f partition))
         (sym (riemannSumMatchesCells g partition))))
 
@@ -163,10 +159,10 @@ riemannSumScale :
   (partition : TaggedPartition A) →
   riemannSum (λ x → _*_ A scalar (f x)) partition
   ≡ _*_ A scalar (riemannSum f partition)
-riemannSumScale L scalar f partition =
+riemannSumScale {A} L scalar f partition =
   trans
-    (riemannSumMatchesCells (λ x → _*_ _ scalar (f x)) partition)
+    (riemannSumMatchesCells (λ x → _*_ A scalar (f x)) partition)
     (trans
       (riemannSumCellsScale L scalar f (cells partition))
-      (cong (λ total → _*_ _ scalar total)
+      (cong (λ total → _*_ A scalar total)
         (sym (riemannSumMatchesCells f partition))))
