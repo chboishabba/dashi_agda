@@ -35,14 +35,14 @@ classifyScaleLevels :
   Nat → Nat → Nat → Nat → ScaleRegime
 classifyScaleLevels overlapLevel jp jq jk
   with NearClass.natLess (jp + overlapLevel) jq
-... | true = lowHigh
-... | false with NearClass.natLess (jq + overlapLevel) jp
-...   | true = highLow
-...   | false
-      with NearClass.natLess (jk + overlapLevel) jp
-         | NearClass.natLess (jk + overlapLevel) jq
-...     | true | true = highHigh
-...     | _ | _ = comparable
+     | NearClass.natLess (jq + overlapLevel) jp
+     | NearClass.natLess (jk + overlapLevel) jp
+     | NearClass.natLess (jk + overlapLevel) jq
+... | true  | hl    | kp    | kq    = lowHigh
+... | false | true  | kp    | kq    = highLow
+... | false | false | true  | true  = highHigh
+... | false | false | true  | false = comparable
+... | false | false | false | kq    = comparable
 
 classifyScale :
   PhysicalShellPolicy →
@@ -123,24 +123,23 @@ scaleClassificationSound policy τ
   with NearClass.natLess
     (shellLevel policy (Physical.p τ) + overlap policy)
     (shellLevel policy (Physical.q τ))
-... | true = lowHighCondition refl
-... | false
-  with NearClass.natLess
+     | NearClass.natLess
     (shellLevel policy (Physical.q τ) + overlap policy)
     (shellLevel policy (Physical.p τ))
-...   | true = highLowCondition refl refl
-...   | false
-  with NearClass.natLess
+     | NearClass.natLess
     (shellLevel policy (Physical.k τ) + overlap policy)
     (shellLevel policy (Physical.p τ))
      | NearClass.natLess
     (shellLevel policy (Physical.k τ) + overlap policy)
     (shellLevel policy (Physical.q τ))
-...     | true | true = highHighCondition refl refl refl refl
-...     | true | false =
-          comparableCondition refl refl (inj₂ refl)
-...     | false | right =
-          comparableCondition refl refl (inj₁ refl)
+... | true  | hl    | kp    | kq    = lowHighCondition refl
+... | false | true  | kp    | kq    = highLowCondition refl refl
+... | false | false | true  | true  =
+      highHighCondition refl refl refl refl
+... | false | false | true  | false =
+      comparableCondition refl refl (inj₂ refl)
+... | false | false | false | kq    =
+      comparableCondition refl refl (inj₁ refl)
 
 scaleClassificationComplete :
   ∀ policy τ →
