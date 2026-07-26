@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -19,9 +19,10 @@ record RegularBackgroundConstruction
     backgroundOf : CoarseField → Background
     reconstructFine : Background → FineField
 
+    zeroBound : Bound
     actionFirstVariation : Background → FineField → Bound
     ConstraintTangent : Background → FineField → Set
-    GaugeFixedBackground : Background → Set
+    GaugeFixedBackground CandidateStationary : Background → Set
 
     backgroundSatisfiesConstraint : ∀ coarse →
       blockMap (backgroundOf coarse) ≡ coarse
@@ -31,13 +32,16 @@ record RegularBackgroundConstruction
 
     backgroundStationary : ∀ coarse tangent →
       ConstraintTangent (backgroundOf coarse) tangent →
-      actionFirstVariation (backgroundOf coarse) tangent ≡
-      actionFirstVariation (backgroundOf coarse) tangent
+      actionFirstVariation (backgroundOf coarse) tangent ≡ zeroBound
+
+    backgroundCandidateStationary : ∀ coarse →
+      CandidateStationary (backgroundOf coarse)
 
     BackgroundEquivalent : Background → Background → Set
     minimizerUniqueModuloGauge : ∀ coarse candidate →
       blockMap candidate ≡ coarse →
       GaugeFixedBackground candidate →
+      CandidateStationary candidate →
       BackgroundEquivalent candidate (backgroundOf coarse)
 
     regularitySize : Background → Bound
@@ -54,17 +58,30 @@ record RegularBackgroundConstruction
 open RegularBackgroundConstruction public
 
 ------------------------------------------------------------------------
--- P1B--P1C: exact Hessian decomposition and the five quantitative pieces.
+-- P1B--P1C: literal Hessian difference and the five quantitative pieces.
 ------------------------------------------------------------------------
 
 record FiveTermBackgroundHessianData
     (Background State Bound : Set) : Set₁ where
   field
-    referenceHessian backgroundHessian : Background → State → State
+    referenceHessian backgroundHessian hessianRemainder :
+      Background → State → State
+    addState : State → State → State
     inner : State → State → Bound
+    Absolute : Bound → Bound
     normSq : State → Bound
 
+    backgroundHessianExact : ∀ background state →
+      backgroundHessian background state
+      ≡ addState
+          (referenceHessian background state)
+          (hessianRemainder background state)
+
     perturbationMagnitude : Background → State → Bound
+    perturbationMagnitudeExact : ∀ background state →
+      perturbationMagnitude background state
+      ≡ Absolute (inner state (hessianRemainder background state))
+
     curvaturePart transportPart chartPart gaugePart constraintPart :
       Background → State → Bound
 
@@ -78,10 +95,6 @@ record FiveTermBackgroundHessianData
     addMonotone : ∀ {left leftUpper right rightUpper} →
       LessEqual left leftUpper → LessEqual right rightUpper →
       LessEqual (add left right) (add leftUpper rightUpper)
-
-    exactBackgroundHessianDifference : ∀ background state →
-      perturbationMagnitude background state ≡
-      perturbationMagnitude background state
 
     perturbationBelowFiveTerms : ∀ background state →
       LessEqual (perturbationMagnitude background state)
@@ -248,6 +261,9 @@ record PhysicalP1BackgroundCertificate
       smallBackgroundOneThirtySecondCoercivity rationalCoercivityBudget
 
 open PhysicalP1BackgroundCertificate public
+
+p1LiteralHessianDifferenceSurfaceLevel : ProofLevel
+p1LiteralHessianDifferenceSurfaceLevel = machineChecked
 
 p1FiveTermAssemblyLevel : ProofLevel
 p1FiveTermAssemblyLevel = machineChecked
