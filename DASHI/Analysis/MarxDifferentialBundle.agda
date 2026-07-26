@@ -5,6 +5,7 @@ open import DASHI.Analysis.MarxPolynomialDifferential public
 open import DASHI.Analysis.MarxConstructiveRealAdapter public
 open import DASHI.Analysis.MarxConstructiveRealRingNormalisation public
 open import DASHI.Analysis.MarxFastCauchyCompletionCutset public
+open import DASHI.Analysis.MarxFastCauchyDerivativeCompletion public
 open import DASHI.Analysis.MarxPowerRuleNormalisation public
 open import DASHI.Analysis.MarxReciprocalQuotientNormalisation public
 open import DASHI.Analysis.MarxOrdinaryDerivativeBridge public
