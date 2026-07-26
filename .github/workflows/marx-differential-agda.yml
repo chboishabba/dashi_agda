@@ -1,0 +1,25 @@
+name: Marx differential Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/MarxDifferentialCore.agda'
+      - 'DASHI/Analysis/MarxPolynomialDifferential.agda'
+      - 'DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda'
+      - 'DASHI/Analysis/MarxHigherCalculus.agda'
+      - 'DASHI/Analysis/MarxDifferentialRegression.agda'
+      - 'DASHI/Analysis/MarxDifferentialBundle.agda'
+      - 'DASHI/Governance/TraumaExploitationDifferential.agda'
+      - 'DASHI/Governance/TraumaExploitationAttractor.agda'
+      - '.github/workflows/marx-differential-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Typecheck focused bundle
+        run: |
+          nix develop --command agda -i . -l standard-library DASHI/Analysis/MarxDifferentialBundle.agda
