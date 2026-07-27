@@ -106,7 +106,7 @@ identityLogisticSquareCommutes algebra parameter state =
     state
 
 ------------------------------------------------------------------------
--- Chart and finite-residue contracts.
+-- Chart, invariant-region and finite-residue contracts.
 ------------------------------------------------------------------------
 
 data LogisticChartKind : Set where
@@ -143,6 +143,24 @@ canonicalP3ChartSeparation = record
   ; algebraicFormulaShared = true
   }
 
+data InvariantRegionKind : Set where
+  orderedIntervalRegion : InvariantRegionKind
+  pAdicBallRegion : TP.SSP → InvariantRegionKind
+  finiteResidueRegion : TP.SSP → Nat → InvariantRegionKind
+
+record LogisticInvariantRegion
+  (Parameter State : Set) : Set₁ where
+  field
+    regionKind : InvariantRegionKind
+    contains : State → Set
+    admissibleParameter : Parameter → Set
+    step : Parameter → State → State
+    preservesRegion :
+      ∀ parameter state →
+      admissibleParameter parameter →
+      contains state →
+      contains (step parameter state)
+
 record FiniteResidueLogisticSquare
   (PAdicState ResidueState : Set) : Set₁ where
   field
@@ -151,8 +169,11 @@ record FiniteResidueLogisticSquare
     pAdicStep : PAdicState → PAdicState → PAdicState
     residueStep : ResidueState → ResidueState → ResidueState
     denominatorAdmissible : PAdicState → Bool
+    parameterDenominatorAdmissible :
+      denominatorAdmissible parameterPAdic ≡ true
     reductionCommutes :
       ∀ state →
+      denominatorAdmissible state ≡ true →
       reduce (pAdicStep parameterPAdic state)
       ≡ residueStep (reduce parameterPAdic) (reduce state)
 
@@ -268,13 +289,25 @@ record LogisticRationalFactorVecReceipt : Set₁ where
     denominatorFactors : Lattice.FactorVec
     numeratorExact : numerator ≡ 3 * 7 * 17
     denominatorExact : denominator ≡ 2 * 2 * 5 * 5
+    numeratorFactorsExact :
+      numeratorFactors ≡ numeratorFactorVec357
+    denominatorFactorsExact :
+      denominatorFactors ≡ denominatorFactorVec100
     valuationProfile : Lattice.Vec15 ValuationSign
+    valuationProfileExact :
+      valuationProfile ≡ valuationProfile357Over100
     p2Norm : NormFraction
     p3Norm : NormFraction
     p5Norm : NormFraction
     p7Norm : NormFraction
     p17Norm : NormFraction
     p11Norm : NormFraction
+    p2NormExact : p2Norm ≡ normAt2
+    p3NormExact : p3Norm ≡ normAt3
+    p5NormExact : p5Norm ≡ normAt5
+    p7NormExact : p7Norm ≡ normAt7
+    p17NormExact : p17Norm ≡ normAt17
+    p11NormExact : p11Norm ≡ normAt11
     allNonzeroSupportOnTrackedPrimes : Bool
     decimalApproximationToRealAccumulation : Bool
     exactRealAccumulationParameterClaimed : Bool
@@ -289,13 +322,22 @@ canonicalLogisticRationalFactorVecReceipt = record
   ; denominatorFactors = denominatorFactorVec100
   ; numeratorExact = numerator357Factorisation
   ; denominatorExact = denominator100Factorisation
+  ; numeratorFactorsExact = refl
+  ; denominatorFactorsExact = refl
   ; valuationProfile = valuationProfile357Over100
+  ; valuationProfileExact = refl
   ; p2Norm = normAt2
   ; p3Norm = normAt3
   ; p5Norm = normAt5
   ; p7Norm = normAt7
   ; p17Norm = normAt17
   ; p11Norm = normAt11
+  ; p2NormExact = refl
+  ; p3NormExact = refl
+  ; p5NormExact = refl
+  ; p7NormExact = refl
+  ; p17NormExact = refl
+  ; p11NormExact = refl
   ; allNonzeroSupportOnTrackedPrimes = true
   ; decimalApproximationToRealAccumulation = true
   ; exactRealAccumulationParameterClaimed = false
@@ -312,6 +354,8 @@ record LogisticContinuumAuthorityBoundary : Set where
     realCarrierConstructedHere : Bool
     derivativeTheoryImportedHere : Bool
     invariantRealIntervalProvedHere : Bool
+    pAdicInvariantBallProvedHere : Bool
+    finiteResidueSquareInstantiatedHere : Bool
     periodDoublingTheoremProvedHere : Bool
     accumulationConstantProvedHere : Bool
     continuumChaosPromoted : Bool
@@ -326,6 +370,8 @@ canonicalLogisticContinuumAuthorityBoundary = record
   ; realCarrierConstructedHere = false
   ; derivativeTheoryImportedHere = false
   ; invariantRealIntervalProvedHere = false
+  ; pAdicInvariantBallProvedHere = false
+  ; finiteResidueSquareInstantiatedHere = false
   ; periodDoublingTheoremProvedHere = false
   ; accumulationConstantProvedHere = false
   ; continuumChaosPromoted = false
@@ -336,4 +382,4 @@ canonicalLogisticContinuumAuthorityBoundary = record
 
 logisticAdicSummary : String
 logisticAdicSummary =
-  "The logistic polynomial is shared algebraically from a rational source; real, p-adic and finite-residue dynamics are distinct charts, and only the algebraic and admissible residue squares commute before the governed Stage-atlas arrow."
+  "The logistic polynomial is shared algebraically from a rational source; real, p-adic and finite-residue dynamics are distinct charts, and only proof-carrying algebraic or admissible residue squares commute before the governed Stage-atlas arrow."
