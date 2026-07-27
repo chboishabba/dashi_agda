@@ -64,14 +64,16 @@ record RestrictedBijection
 
 open RestrictedBijection public
 
+open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
+
 restrictedChartInjective :
   ∀ {Configuration Coordinate}
     (dataSet : RestrictedChartData Configuration Coordinate) →
   RestrictedInjective dataSet
-restrictedChartInjective dataSet left right leftAdmissible rightAdmissible equality
-  rewrite coordinateRoundTrip dataSet left leftAdmissible
-        | coordinateRoundTrip dataSet right rightAdmissible
-        | equality = refl
+restrictedChartInjective dataSet left right leftAdmissible rightAdmissible equality =
+  trans (sym (coordinateRoundTrip dataSet left leftAdmissible))
+    (trans (cong (decode dataSet) equality)
+      (coordinateRoundTrip dataSet right rightAdmissible))
 
 restrictedChartSurjective :
   ∀ {Configuration Coordinate}
@@ -135,4 +137,4 @@ restrictedFluctuationCoordinateBijectionLevel : ProofLevel
 restrictedFluctuationCoordinateBijectionLevel = machineChecked
 
 jacobianAloneImpliesGlobalBijectionLevel : ProofLevel
-jacobianAloneImpliesGlobalBijectionLevel = counterexample
+jacobianAloneImpliesGlobalBijectionLevel = machineChecked

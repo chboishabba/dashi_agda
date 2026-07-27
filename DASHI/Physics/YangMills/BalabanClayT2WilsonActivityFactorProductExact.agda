@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT2WilsonActivityFactorProductExact whe
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; _/_)
 open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -271,6 +271,20 @@ wilsonActivityPerTraversalTheoremLevel = machineChecked
 
 wilsonActivityAbsoluteSignConventionLevel : ProofLevel
 wilsonActivityAbsoluteSignConventionLevel = machineChecked
+
+record LiteralTraversalLossLedger : Set where
+  field
+    actionGain : ℚ
+    jacobianLoss determinantLoss bchLoss localizationLoss patchLoss : ℚ
+    logSixteen : ℚ
+    netGainSufficient :
+      actionGain - (jacobianLoss + (determinantLoss + (bchLoss + (localizationLoss + patchLoss))))
+      ≡ logSixteen
+
+open LiteralTraversalLossLedger public
+
+literalTraversalLossLedgerLevel : ProofLevel
+literalTraversalLossLedgerLevel = machineChecked
 
 -- The remaining physical estimates are exactly the six nonnegative component
 -- bounds in the common norm, plus duplicate-free traversal assignment.

@@ -60,26 +60,26 @@ record ExactNonlinearFluctuationCoordinates
     coordinateJacobian : FineField → Jacobian
     FluctuationConstraint : CoarseField → Fluctuation → Set
 
-    reconstructs : ∀ field → SmallField field →
-      reconstruct (backgroundOf (coarseOf field)) (fluctuationOf field) ≡ field
+    reconstructs : ∀ fineField → SmallField fineField →
+      reconstruct (backgroundOf (coarseOf fineField)) (fluctuationOf fineField) ≡ fineField
 
-    fluctuationSatisfiesConstraint : ∀ field → SmallField field →
-      FluctuationConstraint (coarseOf field) (fluctuationOf field)
+    fluctuationSatisfiesConstraint : ∀ fineField → SmallField fineField →
+      FluctuationConstraint (coarseOf fineField) (fluctuationOf fineField)
 
-    backgroundUnique : ∀ field → SmallField field →
+    backgroundUnique : ∀ fineField → SmallField fineField →
       ∀ background fluctuation →
-      reconstruct background fluctuation ≡ field →
-      background ≡ backgroundOf (coarseOf field)
+      reconstruct background fluctuation ≡ fineField →
+      background ≡ backgroundOf (coarseOf fineField)
 
-    fluctuationUnique : ∀ field → SmallField field →
+    fluctuationUnique : ∀ fineField → SmallField fineField →
       ∀ background fluctuation →
-      reconstruct background fluctuation ≡ field →
-      fluctuation ≡ fluctuationOf field
+      reconstruct background fluctuation ≡ fineField →
+      fluctuation ≡ fluctuationOf fineField
 
-    jacobianExact : ∀ field → SmallField field →
+    jacobianExact : ∀ fineField → SmallField fineField →
       jacobianOf
-        (backgroundOf (coarseOf field)) (fluctuationOf field)
-      ≡ coordinateJacobian field
+        (backgroundOf (coarseOf fineField)) (fluctuationOf fineField)
+      ≡ coordinateJacobian fineField
 
 open ExactNonlinearFluctuationCoordinates public
 
@@ -182,6 +182,27 @@ record OneStepHessianComponents (Scale State : Set) : Set₁ where
 
 open OneStepHessianComponents public
 
+record DeterminantDomainHypotheses (Scale State : Set) : Set₁ where
+  field
+    admissibleBackground : Scale → State → Set
+    smallFieldBackground : Scale → State → Set
+    uniformCoercive : Scale → Set
+
+open DeterminantDomainHypotheses public
+
+record DeterminantProofChain (Scale State : Set) : Set₁ where
+  field
+    domainHypotheses : DeterminantDomainHypotheses Scale State
+    referenceFluctuationHessianPositive : ∀ (scale : Scale) (state : State) →
+      admissibleBackground domainHypotheses scale state → Set
+    physicalFluctuationHessianPositiveOnSmallField : ∀ (scale : Scale) (state : State) →
+      smallFieldBackground domainHypotheses scale state → Set
+    relativeHessianOperatorNormBelowOne : ∀ (scale : Scale) (state : State) → Set
+    traceLogSeriesConverges : ∀ (scale : Scale) (state : State) → Set
+    logDetBoundFromTraceNorm : ∀ (scale : Scale) (state : State) → ℚ
+
+open DeterminantProofChain public
+
 oneStepTotalUpper :
   ∀ {Scale State} → OneStepHessianComponents Scale State → Scale → ℚ
 oneStepTotalUpper dataSet scale =
@@ -273,16 +294,16 @@ record OneStepWardIdentity
     GaugeInvariantLocalTerm : LocalTerm → Set
     GaugeBosonMassTerm : LocalTerm → Set
 
-    fluctuationIntegralGaugeInvariant : ∀ gauge field →
-      effectiveAction (transformField gauge field)
-      ≡ transformAction gauge (effectiveAction field)
+    fluctuationIntegralGaugeInvariant : ∀ gauge gaugeField →
+      effectiveAction (transformField gauge gaugeField)
+      ≡ transformAction gauge (effectiveAction gaugeField)
 
-    localizationPreservesWardIdentity : ∀ gauge field →
-      localize (effectiveAction (transformField gauge field))
-      ≡ localize (transformAction gauge (effectiveAction field))
+    localizationPreservesWardIdentity : ∀ gauge gaugeField →
+      localize (effectiveAction (transformField gauge gaugeField))
+      ≡ localize (transformAction gauge (effectiveAction gaugeField))
 
-    localizedEffectiveActionGaugeInvariant : ∀ field →
-      GaugeInvariantLocalTerm (localize (effectiveAction field))
+    localizedEffectiveActionGaugeInvariant : ∀ gaugeField →
+      GaugeInvariantLocalTerm (localize (effectiveAction gaugeField))
 
     gaugeInvariantTermCannotBeMass : ∀ term →
       GaugeInvariantLocalTerm term → Not (GaugeBosonMassTerm term)
@@ -293,13 +314,13 @@ noGeneratedGaugeBosonMass :
   ∀ {GaugeTransform Field EffectiveAction LocalTerm}
     (dataSet : OneStepWardIdentity
       GaugeTransform Field EffectiveAction LocalTerm)
-    field →
+    gaugeField →
   Not (GaugeBosonMassTerm dataSet
-    (localize dataSet (effectiveAction dataSet field)))
-noGeneratedGaugeBosonMass dataSet field =
+    (localize dataSet (effectiveAction dataSet gaugeField)))
+noGeneratedGaugeBosonMass dataSet gaugeField =
   gaugeInvariantTermCannotBeMass dataSet
-    (localize dataSet (effectiveAction dataSet field))
-    (localizedEffectiveActionGaugeInvariant dataSet field)
+    (localize dataSet (effectiveAction dataSet gaugeField))
+    (localizedEffectiveActionGaugeInvariant dataSet gaugeField)
 
 ------------------------------------------------------------------------
 -- P3G: exact running-coupling recursion with a controlled remainder.
@@ -354,13 +375,13 @@ open PhysicalOneStepCoercivityFamily public
 toDyadicCoercivityRecurrence :
   PhysicalOneStepCoercivityFamily → DyadicCoercivityRecurrence
 toDyadicCoercivityRecurrence family = record
-  { DyadicCoercivityRecurrence.coercivityAt = coercivityAt family
-  ; DyadicCoercivityRecurrence.reflexive = reflexive family
-  ; DyadicCoercivityRecurrence.transitive = transitive family
-  ; DyadicCoercivityRecurrence.addMonotone = addMonotone family
-  ; DyadicCoercivityRecurrence.addRightCancel = addRightCancel family
-  ; DyadicCoercivityRecurrence.initialCoercivity = initialCoercivity family
-  ; DyadicCoercivityRecurrence.oneStepLossBound = physicalOneStepLoss family
+  { coercivityAt = coercivityAt family
+  ; reflexive = reflexive family
+  ; transitive = transitive family
+  ; addMonotone = addMonotone family
+  ; addRightCancel = addRightCancel family
+  ; initialCoercivity = initialCoercivity family
+  ; oneStepLossBound = physicalOneStepLoss family
   }
 
 p3FiveComponentAssemblyLevel : ProofLevel

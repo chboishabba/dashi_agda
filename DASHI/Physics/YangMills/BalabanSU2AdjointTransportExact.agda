@@ -209,13 +209,15 @@ adjointDisplacementOnUnitQuaternion :
   qNormSqR a b c d ≡ oneR →
   adjointDisplacementSqR a b c d x y z
   ≡ unitAdjointDisplacementMainR b c d x y z
-adjointDisplacementOnUnitQuaternion a b c d x y z unit
-  rewrite unitDefectVanishes a b c d unit =
+adjointDisplacementOnUnitQuaternion a b c d x y z unit =
   trans
     (adjointDisplacementWithUnitDefectExact a b c d x y z)
-    (dropZeroDefect
-      (unitAdjointDisplacementMainR b c d x y z)
-      (vectorNormSqR x y z))
+    (trans
+      (cong (λ d0 → unitAdjointDisplacementMainR b c d x y z +R ((d0 *R d0) *R vectorNormSqR x y z))
+        (unitDefectVanishes a b c d unit))
+      (dropZeroDefect
+        (unitAdjointDisplacementMainR b c d x y z)
+        (vectorNormSqR x y z)))
 
 su2AdjointNormIdentityLevel : ProofLevel
 su2AdjointNormIdentityLevel = computed

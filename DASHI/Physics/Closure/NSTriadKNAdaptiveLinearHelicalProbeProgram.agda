@@ -10,6 +10,18 @@ module DASHI.Physics.Closure.NSTriadKNAdaptiveLinearHelicalProbeProgram where
 -- infrastructure module.
 -- Relationship: preserves the existing linear coherenceDirection carrier and
 -- records the cutoff-uniform coverage obstruction explicitly.
+--
+-- Corrected mathematical framing (2026-07): A state-dependent corrector
+-- chi_a(k) sign(E+(k)-E-(k)) C_k cannot exploit the six-mode witness
+-- because E+(k) = E-(k) at every mode.  Even for states with per-mode
+-- imbalance, such a corrector is not yet a valid Lyapunov multiplier
+-- family: it is state-dependent rather than a fixed quadratic operator,
+-- discontinuous where E+ = E-, and choosing the sign from the current
+-- state does not automatically give a favourable sign for the nonlinear
+-- derivative.  The decisive test is to evaluate the literal localized-
+-- helicity derivative on the six-mode witness for the actual candidate
+-- cutoffs chi_a, and to fail fast against all modewise-balanced states
+-- by searching within the variety |u_k^+| = |u_k^-|.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)

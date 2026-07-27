@@ -10,9 +10,21 @@ module DASHI.Physics.Closure.NSTriadKNGlobalHelicityH3DiscriminantCounterexample
 -- Uses: the six-mode state in
 -- NSTriadKNZeroCoherenceH3DiscriminantCounterexample and the literal curl
 -- symbol C_k u = i k cross u.
--- Relationship: proves that the known state is modewise helicity-balanced,
--- so the global helicity perturbation changes neither its viscous reserve nor
--- its failed discriminant, for either sign and every epsilon.
+-- Relationship: proves that the known state is modewise helicity-balanced
+-- (|u_k^+|^2 = |u_k^-|^2 at every occupied mode, i.e. an equal-energy
+-- superposition of the positive- and negative-curl eigenspaces), so the
+-- global helicity perturbation changes neither its viscous reserve nor its
+-- failed discriminant, for either sign and every epsilon.  The modewise
+-- balance is a codimension-one condition in each complex two-dimensional
+-- transverse fibre, not a measure-zero anomaly; symmetry constraints from
+-- the ordered-pair/reality-mate cancellation machinery make it structurally
+-- natural for states built by that route.  This eliminates the entire
+-- constant-sign global curl perturbation family: any scalar spectral
+-- localization still has zero quadratic value on this witness, because
+-- every summand <u_k, ik x u_k> vanishes individually.  The surviving
+-- mechanism for localized helicity is the non-conservation of H_chi under
+-- Euler dynamics: the triadic derivative produces cutoff-difference
+-- commutators because chi(k), chi(p), chi(q) are unequal when p+q=k.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)

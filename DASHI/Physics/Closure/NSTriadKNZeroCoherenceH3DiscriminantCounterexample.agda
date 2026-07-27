@@ -10,7 +10,12 @@ module DASHI.Physics.Closure.NSTriadKNZeroCoherenceH3DiscriminantCounterexample 
 -- Uses: the literal periodic coefficient convention documented in
 -- NSTriadKNComplex3GalerkinEquationAudit.
 -- Relationship: falsifies one concrete candidate; it does not establish or
--- refute the full adaptive quartic family.
+-- refute the full adaptive quartic family.  The discriminant gap
+-- C^2 - 4AB = 28,984,957,666,432 > 0 is exact.  The falsification is
+-- valuable because it identified a blind submanifold of the entire global
+-- helicity family: every state with |u_k^+| = |u_k^-| at every occupied
+-- mode is equally unreachable by any constant-sign global curl
+-- perturbation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)

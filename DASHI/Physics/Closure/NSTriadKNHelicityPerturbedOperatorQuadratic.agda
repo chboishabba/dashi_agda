@@ -11,6 +11,14 @@ module DASHI.Physics.Closure.NSTriadKNHelicityPerturbedOperatorQuadratic where
 -- Relationship: defines a DASHI-original operator-valued perturbation of the
 -- H^s quadratic correction.  It does not import conditional helical dominance
 -- as a theorem about arbitrary states.
+--
+-- Corrected mathematical framing (2026-07): The perturbed multiplier
+-- eigenvalues on the helical basis are baseWeight(k) +/- epsilon*|k|, so
+-- the quadratic form value changes by epsilon*(|u_k^+|^2 - |u_k^-|^2).
+-- For modewise helicity-balanced states (|u_k^+| = |u_k^-| at every
+-- mode), this perturbation vanishes identically regardless of sign or
+-- magnitude of epsilon.  The global helicity perturbation is therefore
+-- structurally blind to the entire family of modewise-balanced states.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)

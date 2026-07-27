@@ -15,7 +15,7 @@ record FiniteCriticalContraction
     distance : State → State → Distance
     StrictlySmaller : Distance → Distance → Set
     strictIrreflexive : ∀ value → StrictlySmaller value value → ⊥
-    distinctOrEqual : ∀ left right → left ≡ right ⊎ left ≢ right
+    distinctOrEqual : ∀ (left right : State) → left ≡ right ⊎ left ≢ right
     fixedPoint : State
     fixed : step fixedPoint ≡ fixedPoint
     contractiveOnDistinct :
@@ -30,29 +30,28 @@ fixedPointUnique :
   ∀ {State Distance : Set}
   (bundle : FiniteCriticalContraction State Distance) →
   ∀ state → step bundle state ≡ state → state ≡ fixedPoint bundle
-fixedPointUnique bundle state stateFixed
-  with distinctOrEqual bundle state (fixedPoint bundle)
-... | inj₁ equal = equal
-... | inj₂ distinct =
-  let
-    decrease = contractiveOnDistinct bundle distinct
-    sameDistance =
-      trans
-        (cong (λ left → distance bundle left (step bundle (fixedPoint bundle))) stateFixed)
-        (cong (distance bundle state) (fixed bundle))
-  in
-  ⊥-elim
-    (strictIrreflexive bundle (distance bundle state (fixedPoint bundle))
-      (substSmaller bundle sameDistance decrease))
+fixedPointUnique bundle state stateFixed = helper (distinctOrEqual bundle state (fixedPoint bundle))
   where
     ⊥-elim : ⊥ → state ≡ fixedPoint bundle
     ⊥-elim ()
 
     substSmaller :
-      ∀ {State Distance : Set}
-      (dataSet : FiniteCriticalContraction State Distance) →
       ∀ {left right target} →
       left ≡ target →
-      StrictlySmaller dataSet left right →
-      StrictlySmaller dataSet target right
-    substSmaller dataSet refl proof = proof
+      StrictlySmaller bundle left right →
+      StrictlySmaller bundle target right
+    substSmaller refl proof = proof
+
+    helper : state ≡ fixedPoint bundle ⊎ state ≢ fixedPoint bundle → state ≡ fixedPoint bundle
+    helper (inj₁ equal) = equal
+    helper (inj₂ distinct) =
+      let
+        decrease = contractiveOnDistinct bundle distinct
+        sameDistance =
+          trans
+            (cong (λ left → distance bundle left (step bundle (fixedPoint bundle))) stateFixed)
+            (cong (distance bundle state) (fixed bundle))
+      in
+      ⊥-elim
+        (strictIrreflexive bundle (distance bundle state (fixedPoint bundle))
+          (substSmaller sameDistance decrease))

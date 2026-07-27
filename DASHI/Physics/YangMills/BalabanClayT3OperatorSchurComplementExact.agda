@@ -107,35 +107,25 @@ operatorExactSchurComplement :
   (dataSet : OperatorSchurData Coarse Fluctuation Bound) →
   P3.ExactSchurComplement Coarse Fluctuation Bound
 operatorExactSchurComplement dataSet = record
-  { P3.ExactSchurComplement.coarseHessian = coarseHessian dataSet
-  ; P3.ExactSchurComplement.mixedHessian = mixedHessian dataSet
-  ; P3.ExactSchurComplement.fluctuationHessian = fluctuationHessian dataSet
-  ; P3.ExactSchurComplement.fluctuationGreen = fluctuationGreen dataSet
-  ; P3.ExactSchurComplement.schurHessian = schurHessian dataSet
-  ; P3.ExactSchurComplement.coarseInner = coarseInner dataSet
-  ; P3.ExactSchurComplement.fluctuationInner = fluctuationInner dataSet
-  ; P3.ExactSchurComplement.subtract = subtractBound dataSet
-  ; P3.ExactSchurComplement.fluctuationInverseLeft =
-      fluctuationInverseLeft dataSet
-  ; P3.ExactSchurComplement.fluctuationInverseRight =
-      fluctuationInverseRight dataSet
-  ; P3.ExactSchurComplement.schurEnergyExact =
-      operatorSchurEnergyExact dataSet
-  ; P3.ExactSchurComplement.FluctuationCoercive =
-      FluctuationCoercive dataSet
-  ; P3.ExactSchurComplement.fluctuationCoercive =
-      fluctuationCoercive dataSet
-  ; P3.ExactSchurComplement.GaugeCovariant = GaugeCovariant dataSet
-  ; P3.ExactSchurComplement.schurGaugeCovariant =
-      schurGaugeCovariantProof dataSet
-  ; P3.ExactSchurComplement.KernelExactlyPrescribedGaugeModes =
-      KernelExactlyPrescribedGaugeModes dataSet
-  ; P3.ExactSchurComplement.kernelExactlyPrescribedGaugeModes =
-      kernelExactlyPrescribedGaugeModes dataSet
-  ; P3.ExactSchurComplement.NextScaleNormalizationMatches =
-      NextScaleNormalizationMatches dataSet
-  ; P3.ExactSchurComplement.nextScaleNormalizationMatches =
-      nextScaleNormalizationMatches dataSet
+  { coarseHessian = coarseHessian dataSet
+  ; mixedHessian = mixedHessian dataSet
+  ; fluctuationHessian = fluctuationHessian dataSet
+  ; fluctuationGreen = fluctuationGreen dataSet
+  ; schurHessian = schurHessian dataSet
+  ; coarseInner = coarseInner dataSet
+  ; fluctuationInner = fluctuationInner dataSet
+  ; subtract = subtractBound dataSet
+  ; fluctuationInverseLeft = fluctuationInverseLeft dataSet
+  ; fluctuationInverseRight = fluctuationInverseRight dataSet
+  ; schurEnergyExact = operatorSchurEnergyExact dataSet
+  ; FluctuationCoercive = FluctuationCoercive dataSet
+  ; fluctuationCoercive = fluctuationCoercive dataSet
+  ; GaugeCovariant = GaugeCovariant dataSet
+  ; schurGaugeCovariant = schurGaugeCovariantProof dataSet
+  ; KernelExactlyPrescribedGaugeModes = KernelExactlyPrescribedGaugeModes dataSet
+  ; kernelExactlyPrescribedGaugeModes = kernelExactlyPrescribedGaugeModes dataSet
+  ; NextScaleNormalizationMatches = NextScaleNormalizationMatches dataSet
+  ; nextScaleNormalizationMatches = nextScaleNormalizationMatches dataSet
   }
 
 operatorSchurEnergyIdentityLevel : ProofLevel

@@ -10,8 +10,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.CompactLieGroupCore
 open import DASHI.Physics.YangMills.CompactLieGroupDerived using
   (conjugate; rightInverseAction)
-open import DASHI.Physics.YangMills.SUNMatrixCarrier
 open import DASHI.Physics.YangMills.SUNWilsonClassFunction
+open import DASHI.Physics.YangMills.SUNWilsonAction using (WilsonScalarOperations)
 open import DASHI.Physics.YangMills.BalabanSU2WilsonPlaquetteSecondJetExact
 
 ------------------------------------------------------------------------
@@ -34,6 +34,26 @@ jetExt : ∀ {left right : SU2SecondJet} →
   left ≡ right
 jetExt {jet leftSecond leftFirst} {jet .leftSecond .leftFirst} refl refl = refl
 
+open import Data.List.Base using (_∷_; [])
+
+jetMultiplyAssociativeScalar : ∀ ar ax ay az br bx by bz cr cx cy cz →
+  ((ar + br + (- (ax * bx + ay * by + az * bz))) + cr + (- ((ax + bx) * cx + (ay + by) * cy + (az + bz) * cz))) ≡
+  (ar + (br + cr + (- (bx * cx + by * cy + bz * cz))) + (- (ax * (bx + cx) + ay * (by + cy) + az * (bz + cz))))
+jetMultiplyAssociativeScalar ar ax ay az br bx by bz cr cx cy cz =
+  ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ cr ∷ cx ∷ cy ∷ cz ∷ [])
+
+jetMultiplyCommutativeScalar : ∀ ar ax ay az br bx by bz →
+  (ar + br + (- (ax * bx + ay * by + az * bz))) ≡
+  (br + ar + (- (bx * ax + by * ay + bz * az)))
+jetMultiplyCommutativeScalar ar ax ay az br bx by bz =
+  ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ [])
+
+assocQ : ∀ a b c → (a + b) + c ≡ a + (b + c)
+assocQ = ℚRing.solve-∀
+
+commQ : ∀ a b → a + b ≡ b + a
+commQ = ℚRing.solve-∀
+
 jetMultiplyAssociative : ∀ first second third →
   (first *j second) *j third ≡ first *j (second *j third)
 jetMultiplyAssociative
@@ -41,22 +61,22 @@ jetMultiplyAssociative
   (jet br (lie3 bx by bz))
   (jet cr (lie3 cx cy cz)) =
   jetExt
-    (ℚRing.solve-∀ ar ax ay az br bx by bz cr cx cy cz)
+    (jetMultiplyAssociativeScalar ar ax ay az br bx by bz cr cx cy cz)
     (lie3Ext
-      (ℚRing.solve-∀ ax bx cx)
-      (ℚRing.solve-∀ ay by cy)
-      (ℚRing.solve-∀ az bz cz))
+      (assocQ ax bx cx)
+      (assocQ ay by cy)
+      (assocQ az bz cz))
 
 jetMultiplyCommutative : ∀ first second → first *j second ≡ second *j first
 jetMultiplyCommutative
   (jet ar (lie3 ax ay az))
   (jet br (lie3 bx by bz)) =
   jetExt
-    (ℚRing.solve-∀ ar ax ay az br bx by bz)
+    (jetMultiplyCommutativeScalar ar ax ay az br bx by bz)
     (lie3Ext
-      (ℚRing.solve-∀ ax bx)
-      (ℚRing.solve-∀ ay by)
-      (ℚRing.solve-∀ az bz))
+      (commQ ax bx)
+      (commQ ay by)
+      (commQ az bz))
 
 jetIdentityLeft : ∀ path → identityJet *j path ≡ path
 jetIdentityLeft (jet r (lie3 vx vy vz)) =
@@ -126,6 +146,8 @@ jetInverseRightFromDefect (jet r (lie3 vx vy vz)) defectZero =
       (ℚRing.solve-∀ vy)
       (ℚRing.solve-∀ vz))
 
+open import DASHI.Physics.YangMills.SUNMatrixCarrier
+
 jetMatrixOperations : ComplexMatrixOperations SU2SecondJet ℚ
 jetMatrixOperations = record
   { identityM = identityJet
@@ -140,11 +162,11 @@ jetSpecialFromDefect : ∀ path → unitDefect path ≡ 0ℚ →
 jetSpecialFromDefect path defectZero = record
   { unitaryLeft = jetInverseLeftFromDefect path defectZero
   ; unitaryRight = jetInverseRightFromDefect path defectZero
-  ; determinantOne = defectZero
+  ; specialDeterminant = record { determinantOne = defectZero }
   }
 
 twoN : Nat
-twoN = suc (suc zero)
+twoN = suc (suc Nat.zero)
 
 jetSUNTheory : CertifiedSUNMatrixTheory twoN SU2SecondJet ℚ
 jetSUNTheory = record
@@ -159,13 +181,13 @@ jetSUNTheory = record
             (unitDefectMultiply A B)
             (trans
               (cong₂ _+_
-                (determinantOne specialA)
-                (determinantOne specialB))
+                (IsUnitDeterminant.determinantOne (IsSpecialUnitary.specialDeterminant specialA))
+                (IsUnitDeterminant.determinantOne (IsSpecialUnitary.specialDeterminant specialB)))
               (ℚRing.solve-∀))
       in jetSpecialFromDefect (A *j B) defectAB
   ; daggerSpecial = λ {A} specialA →
       jetSpecialFromDefect (inverseJet A)
-        (trans (unitDefectInverse A) (determinantOne specialA))
+        (trans (unitDefectInverse A) (IsUnitDeterminant.determinantOne (IsSpecialUnitary.specialDeterminant specialA)))
   }
 
 JetSUN : Set
@@ -217,7 +239,7 @@ addScalarJet (scalarJet ac aq) (scalarJet bc bq) =
 subtractScalarJet (scalarJet ac aq) (scalarJet bc bq) =
   scalarJet (ac + (- bc)) (aq + (- bq))
 
-scalarSecondJetOperations : ScalarOperations ScalarSecondJet
+scalarSecondJetOperations : WilsonScalarOperations ScalarSecondJet
 scalarSecondJetOperations = record
   { zeroS = zeroScalarJet
   ; oneS = oneScalarJet

@@ -1,19 +1,21 @@
 module DASHI.Physics.YangMills.BalabanClayP4DyadicCoercivityBudgetExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _/_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Data.Product using (proj₁)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
   (baseBelowBasePlusRemainder)
 open import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact using
-  ( halfPower
+  ( twoℚ
+  ; halfPower
   ; halfPowerNonnegative
   ; traceShellPartialSum
   ; traceShellGeometricIdentity
@@ -43,12 +45,10 @@ lossPartialSum (suc scale) =
 lossPartialSumMatchesGeometric : ∀ depth →
   lossPartialSum depth
   ≡ oneOneTwentyEighth * traceShellPartialSum depth
-lossPartialSumMatchesGeometric zero = ℚRing.solve-∀
+lossPartialSumMatchesGeometric zero = refl
 lossPartialSumMatchesGeometric (suc depth)
   rewrite lossPartialSumMatchesGeometric depth =
-  ℚRing.solve-∀
-    (traceShellPartialSum depth)
-    (halfPower depth)
+  sym (proj₁ ℚP.*-distrib-+ oneOneTwentyEighth (traceShellPartialSum depth) (halfPower depth))
 
 lossBudgetIdentity : ∀ depth →
   lossPartialSum depth
@@ -59,11 +59,14 @@ lossBudgetIdentity depth =
     (cong
       (λ partial → partial + oneSixtyFourth * halfPower depth)
       (lossPartialSumMatchesGeometric depth))
-    (trans
-      (ℚRing.solve-∀
-        (traceShellPartialSum depth) (halfPower depth))
-      (cong (oneOneTwentyEighth *_)
-        (traceShellGeometricIdentity depth)))
+  (trans
+    (cong (λ x → oneOneTwentyEighth * traceShellPartialSum depth + x)
+      (ℚP.*-assoc oneOneTwentyEighth twoℚ (halfPower depth)))
+  (trans
+    (sym (proj₁ ℚP.*-distrib-+ oneOneTwentyEighth (traceShellPartialSum depth) (twoℚ * halfPower depth)))
+  (trans
+    (cong (oneOneTwentyEighth *_) (traceShellGeometricIdentity depth))
+    refl)))
 
 oneSixtyFourthTimesHalfPowerNonnegative : ∀ depth →
   0ℚ ≤ oneSixtyFourth * halfPower depth
@@ -137,7 +140,7 @@ initialBelowCoercivityPlusConsumedLoss :
 initialBelowCoercivityPlusConsumedLoss dataSet zero =
   subst
     (λ right → oneThirtySecond ≤ right)
-    (sym (ℚRing.solve-∀ (coercivityAt dataSet zero)))
+    (sym (ℚP.+-identityʳ (coercivityAt dataSet zero)))
     (initialCoercivity dataSet)
 initialBelowCoercivityPlusConsumedLoss dataSet (suc depth) =
   transitive dataSet
@@ -145,10 +148,9 @@ initialBelowCoercivityPlusConsumedLoss dataSet (suc depth) =
     (subst
       (λ right →
         coercivityAt dataSet depth + lossPartialSum depth ≤ right)
-      (ℚRing.solve-∀
-        (coercivityAt dataSet (suc depth))
-        (coercivityLoss depth)
-        (lossPartialSum depth))
+      (trans
+        (ℚP.+-assoc (coercivityAt dataSet (suc depth)) (coercivityLoss depth) (lossPartialSum depth))
+        (cong (λ x → coercivityAt dataSet (suc depth) + x) (ℚP.+-comm (coercivityLoss depth) (lossPartialSum depth))))
       (addMonotone dataSet
         (oneStepLossBound dataSet depth)
         (reflexive dataSet (lossPartialSum depth))))
@@ -171,10 +173,11 @@ uniformOneSixtyFourthCoercivity dataSet depth =
 record UniformAllScaleCoercivityCertificate : Set₁ where
   field
     recurrence : DyadicCoercivityRecurrence
-    uniformPositiveLowerBound : ∀ depth →
-      oneSixtyFourth ≤ coercivityAt recurrence depth
-    uniformPositiveLowerBound =
-      uniformOneSixtyFourthCoercivity recurrence
+
+  uniformPositiveLowerBound : ∀ depth →
+    oneSixtyFourth ≤ coercivityAt recurrence depth
+  uniformPositiveLowerBound =
+    uniformOneSixtyFourthCoercivity recurrence
 
 open UniformAllScaleCoercivityCertificate public
 

@@ -12,6 +12,18 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure where
 -- Relationship: defines the literal periodic Fourier operators.  The cited
 -- theorem is conditional on helical dominance and is not used as a universal
 -- coercivity theorem.
+--
+-- Corrected mathematical framing (2026-07): For a divergence-free Fourier
+-- coefficient u_k = u_k^+ + u_k^- with ik x u_k^pm = +/- |k| u_k^pm,
+-- the helicity density <u_k, ik x u_k> = |k|(|u_k^+|^2 - |u_k^-|^2).
+-- Therefore <u_k, ik x u_k> = 0 iff |u_k^+|^2 = |u_k^-|^2: the state
+-- is an equal-energy superposition of the positive- and negative-curl
+-- eigenspaces.  This is a codimension-one condition in each complex
+-- two-dimensional transverse fibre, not a measure-zero anomaly.  The
+-- eigenspaces are linear subspaces, not regions separated by a geometric
+-- boundary; saying a state lies "on the boundary" is misleading.  The
+-- standard helical decomposition gives energy as the sum and helicity as
+-- the signed difference of the two helical modal energies.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
