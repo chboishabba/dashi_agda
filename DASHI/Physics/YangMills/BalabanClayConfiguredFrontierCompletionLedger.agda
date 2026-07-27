@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanClayT2ConfiguredComponentLossBoundsExact a
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredModelSpecificLossClosureExact as ModelLoss
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact as Loss
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredStrictLossMarginExact as Margin
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredRobustOneSixteenthEndpointExact as RobustEndpoint
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalLossInstanceExact as LossInstance
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact as Polymer
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact as PolymerExtraction
@@ -57,12 +58,10 @@ rightJacobianSampleRationalLevel = Sample.rightJacobianSampleRationalLevel
 rightJacobianSampleReductionLevel = Sample.rightJacobianSampleReductionLevel
 configuredIncidenceDataLevel = Geometry.configuredIncidenceDataLevel
 configuredCoefficientArithmeticLevel = Geometry.configuredCoefficientArithmeticLevel
-
 localToGlobalRemainderReductionLevel =
   Hessian.localToGlobalRemainderReductionLevel
 fiveConfiguredDominationAdapterLevel =
   Hessian.fiveConfiguredDominationAdapterLevel
-
 configuredCommonRadiusArithmeticLevel = Radius.configuredCommonRadiusArithmeticLevel
 configuredFiveRemaindersBelowHalfLevel = Radius.configuredFiveRemaindersBelowHalfLevel
 localCombesThomasReductionLevel = Green.localCombesThomasReductionLevel
@@ -94,6 +93,8 @@ configuredOneSixteenthAssemblyLevel = Loss.configuredOneSixteenthAssemblyLevel
 sharpPartialSumArithmeticLevel = Margin.sharpPartialSumArithmeticLevel
 configuredOneFifthRobustnessReductionLevel =
   Margin.configuredOneFifthRobustnessReductionLevel
+configuredRobustActivityEndpointLevel =
+  RobustEndpoint.configuredRobustActivityEndpointLevel
 configuredEmbeddedLossInstanceLevel = LossInstance.configuredEmbeddedLossInstanceLevel
 
 configuredPatchDirectionMaskLevel = Polymer.configuredPatchDirectionMaskLevel
@@ -138,17 +139,12 @@ rootedShellToBoundaryTailReductionLevel =
 
 ------------------------------------------------------------------------
 -- II. Remaining primitive analytic and model-specific inhabitants.
---
--- These are now strictly below the public endpoints.  Each broad endpoint has
--- been replaced by local Taylor remainders, local lattice estimates, explicit
--- operator identities, or finite box receipts.
 ------------------------------------------------------------------------
 
 elementaryTaylorLogExpInputsLevel = Elementary.elementaryTaylorLogExpInputsLevel
 positiveExponentialTailAndLogInputsLevel =
   Margin.positiveExponentialTailAndLogInputsLevel
 literalSampleSineEvaluationInputsLevel = Sample.literalSampleSineEvaluationInputsLevel
-
 literalLocalPointwiseAndIncidenceInputsLevel =
   Hessian.literalLocalPointwiseAndIncidenceInputsLevel
 literalLocalHessianGapFourierImageInputsLevel =
@@ -156,18 +152,17 @@ literalLocalHessianGapFourierImageInputsLevel =
 literalFiniteRangeGapAndFourierImageInputsLevel =
   GreenInstance.literalFiniteRangeGapAndFourierImageInputsLevel
 periodicRandomWalkTransferInputsLevel = Green.periodicRandomWalkTransferInputsLevel
-
 physicalLargeFieldPlaquetteAndBetaInputsLevel =
   Action.physicalLargeFieldPlaquetteAndBetaInputsLevel
 literalLinkTraceQuaternionCollarPatchInputsLevel =
   ModelLoss.literalLinkTraceQuaternionCollarPatchInputsLevel
+physicalAdditionalLossBelowOneFifthInputsLevel =
+  RobustEndpoint.physicalAdditionalLossBelowOneFifthInputsLevel
 physicalActionAndComponentInputsLevel =
   LossInstance.physicalActionAndComponentInputsLevel
 physicalLossDominationInputsLevel = Loss.physicalLossDominationInputsLevel
-
 repositoryOrderConnectivityAndDecoderInputsLevel =
   PolymerExtraction.repositoryOrderConnectivityAndDecoderInputsLevel
-
 literalWilsonGhostHaarFormulaInputsLevel =
   Diagrams.literalWilsonGhostHaarFormulaInputsLevel
 literalDiagramNumeratorDenominatorAndQuadratureInputsLevel =
@@ -178,7 +173,6 @@ literalDiagramToBalabanTargetInputsLevel =
   Balaban536.literalDiagramToBalabanTargetInputsLevel
 literalDASHIMainAndQuarticInputsLevel =
   BalabanShape.literalDASHIMainAndQuarticInputsLevel
-
 physicalClusterDiameterInputsLevel = Tail.physicalClusterDiameterInputsLevel
 boundaryEscapeInputsLevel = ShellTail.boundaryEscapeInputsLevel
 physicalExponentialMomentCompactnessInputsLevel =
