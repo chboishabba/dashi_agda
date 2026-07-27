@@ -2,11 +2,12 @@ module DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact as Log16
 
 ------------------------------------------------------------------------
 -- Literature normalization.
@@ -22,8 +23,13 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Barry Simon, "Trace Ideals and Their Applications", second edition,
 -- American Mathematical Society (2005). DOI: 10.1090/surv/120
 --
--- Relationship: the papers provide the analytic mechanisms.  The rational
--- allocation and exact slack calculation below are DASHI-owned bookkeeping.
+-- Marc Daumas, David Lester and César Muñoz, "Verified Real Number
+-- Calculations: A Library for Interval Arithmetic", IEEE Transactions on
+-- Computers 58 (2009), 226--237. DOI: 10.1109/TC.2008.213
+--
+-- Relationship: the first three sources provide the analytic mechanisms; the
+-- last provides verified elementary-function evaluation architecture.  The
+-- rational allocation and exact slack calculation are DASHI-owned.
 ------------------------------------------------------------------------
 
 twoℚ threeℚ fourℚ eightℚ sixteenℚ : ℚ
@@ -50,8 +56,6 @@ configuredTotalLoss =
   + (configuredLocalizationLoss
   + configuredPatchLoss)))
 
--- Choosing action gain 59/16 makes the net gain exactly 3, leaving the
--- elementary analytic obligation log 16 <= 3 as a separate one-line receipt.
 configuredActionGain : ℚ
 configuredActionGain = + 59 / 16
 
@@ -70,48 +74,48 @@ configuredNetSlackExact : configuredNetSlack ≡ 0ℚ
 configuredNetSlackExact = ℚRing.solve
 
 ------------------------------------------------------------------------
--- Physical domination data.  Each actual loss must be bounded by its assigned
--- rational slot and the actual action gain must dominate 59/16.  No factor is
--- individually required to be below 1/16.
+-- Physical domination data.  The order and rational embedding are owned by the
+-- common logarithm certificate, so log 16 <= 3 is derived rather than supplied
+-- again as an independent field.
 ------------------------------------------------------------------------
 
 record ConfiguredPhysicalLossDomination
     (Scale Polymer Scalar : Set) : Set₁ where
   field
+    logAuthority : Log16.LogSixteenAnalyticAuthority Scalar
+
     actionGain jacobianLoss determinantLoss bchLoss localizationLoss patchLoss :
       Scale → Polymer → Scalar
 
-    rational : ℚ → Scalar
     add subtract : Scalar → Scalar → Scalar
-    LessEqual : Scalar → Scalar → Set
-    transitive : ∀ {left middle right} →
-      LessEqual left middle → LessEqual middle right → LessEqual left right
+
     addMonotone : ∀ {a b c d} →
-      LessEqual a b → LessEqual c d → LessEqual (add a c) (add b d)
+      Log16.LessEqual logAuthority a b →
+      Log16.LessEqual logAuthority c d →
+      Log16.LessEqual logAuthority (add a c) (add b d)
 
     actionGainDominatesConfigured : ∀ scale polymer →
-      LessEqual (rational configuredActionGain) (actionGain scale polymer)
+      Log16.LessEqual logAuthority
+        (Log16.rational logAuthority configuredActionGain)
+        (actionGain scale polymer)
 
     jacobianLossBelowConfigured : ∀ scale polymer →
-      LessEqual (jacobianLoss scale polymer)
-        (rational configuredJacobianLoss)
+      Log16.LessEqual logAuthority (jacobianLoss scale polymer)
+        (Log16.rational logAuthority configuredJacobianLoss)
     determinantLossBelowConfigured : ∀ scale polymer →
-      LessEqual (determinantLoss scale polymer)
-        (rational configuredDeterminantLoss)
+      Log16.LessEqual logAuthority (determinantLoss scale polymer)
+        (Log16.rational logAuthority configuredDeterminantLoss)
     bchLossBelowConfigured : ∀ scale polymer →
-      LessEqual (bchLoss scale polymer) (rational configuredBCHLoss)
+      Log16.LessEqual logAuthority (bchLoss scale polymer)
+        (Log16.rational logAuthority configuredBCHLoss)
     localizationLossBelowConfigured : ∀ scale polymer →
-      LessEqual (localizationLoss scale polymer)
-        (rational configuredLocalizationLoss)
+      Log16.LessEqual logAuthority (localizationLoss scale polymer)
+        (Log16.rational logAuthority configuredLocalizationLoss)
     patchLossBelowConfigured : ∀ scale polymer →
-      LessEqual (patchLoss scale polymer) (rational configuredPatchLoss)
+      Log16.LessEqual logAuthority (patchLoss scale polymer)
+        (Log16.rational logAuthority configuredPatchLoss)
 
     rationalPreservesConfiguredArithmetic : Set
-
-    -- Elementary transcendental receipt, preferably discharged by the same
-    -- rational interval engine as the sinc/log chart certificate.
-    logSixteen : Scalar
-    logSixteenBelowThree : LessEqual logSixteen (rational threeℚ)
 
     totalLoss netGain : Scale → Polymer → Scalar
     totalLossDefinition : ∀ scale polymer →
@@ -126,29 +130,45 @@ record ConfiguredPhysicalLossDomination
       ≡ subtract (actionGain scale polymer) (totalLoss scale polymer)
 
     configuredLossSumBound : ∀ scale polymer →
-      LessEqual (totalLoss scale polymer) (rational configuredTotalLoss)
+      Log16.LessEqual logAuthority (totalLoss scale polymer)
+        (Log16.rational logAuthority configuredTotalLoss)
 
     configuredGainMinusLossBound : ∀ scale polymer →
-      LessEqual (rational configuredNetGain) (netGain scale polymer)
+      Log16.LessEqual logAuthority
+        (Log16.rational logAuthority configuredNetGain)
+        (netGain scale polymer)
 
 open ConfiguredPhysicalLossDomination public
+
+configuredLogSixteen :
+  ∀ {Scale Polymer Scalar} →
+  ConfiguredPhysicalLossDomination Scale Polymer Scalar → Scalar
+configuredLogSixteen dataSet =
+  Log16.logarithm (logAuthority dataSet)
+    (Log16.rational (logAuthority dataSet) Log16.sixteenℚ)
 
 physicalNetGainAtLeastLogSixteenConfigured :
   ∀ {Scale Polymer Scalar}
     (dataSet : ConfiguredPhysicalLossDomination Scale Polymer Scalar)
     scale polymer →
-  LessEqual dataSet (logSixteen dataSet) (netGain dataSet scale polymer)
+  Log16.LessEqual (logAuthority dataSet)
+    (configuredLogSixteen dataSet)
+    (netGain dataSet scale polymer)
 physicalNetGainAtLeastLogSixteenConfigured dataSet scale polymer =
-  transitive dataSet
-    (logSixteenBelowThree dataSet)
+  Log16.transitive (logAuthority dataSet)
+    (Log16.logSixteenBelowThree (logAuthority dataSet))
     (subst
-      (λ value → LessEqual dataSet value (netGain dataSet scale polymer))
-      (cong (rational dataSet) configuredNetGainExact)
+      (λ value →
+        Log16.LessEqual (logAuthority dataSet) value
+          (netGain dataSet scale polymer))
+      (cong
+        (Log16.rational (logAuthority dataSet))
+        configuredNetGainExact)
       (configuredGainMinusLossBound dataSet scale polymer))
 
 ------------------------------------------------------------------------
 -- Endpoint adapter: the exponential/product comparison remains explicit, but
--- the common numerical budget is no longer a free physical input.
+-- the common numerical budget and log 16 <= 3 receipt are no longer free.
 ------------------------------------------------------------------------
 
 record ConfiguredOneSixteenthEndpoint
@@ -158,11 +178,14 @@ record ConfiguredOneSixteenthEndpoint
     activity factorProduct oneSixteenth : Scale → Polymer → Scalar
 
     activityBelowFactorProduct : ∀ scale polymer →
-      LessEqual budget (activity scale polymer) (factorProduct scale polymer)
+      Log16.LessEqual (logAuthority budget)
+        (activity scale polymer) (factorProduct scale polymer)
 
     netGainImpliesFactorProductBelow : ∀ scale polymer →
-      LessEqual budget (logSixteen budget) (netGain budget scale polymer) →
-      LessEqual budget (factorProduct scale polymer) (oneSixteenth scale polymer)
+      Log16.LessEqual (logAuthority budget)
+        (configuredLogSixteen budget) (netGain budget scale polymer) →
+      Log16.LessEqual (logAuthority budget)
+        (factorProduct scale polymer) (oneSixteenth scale polymer)
 
 open ConfiguredOneSixteenthEndpoint public
 
@@ -170,11 +193,11 @@ literalWilsonActivityPerTraversalBelowOneSixteenthConfigured :
   ∀ {Scale Polymer Scalar}
     (dataSet : ConfiguredOneSixteenthEndpoint Scale Polymer Scalar)
     scale polymer →
-  LessEqual (budget dataSet)
+  Log16.LessEqual (logAuthority (budget dataSet))
     (activity dataSet scale polymer)
     (oneSixteenth dataSet scale polymer)
 literalWilsonActivityPerTraversalBelowOneSixteenthConfigured dataSet scale polymer =
-  transitive (budget dataSet)
+  Log16.transitive (logAuthority (budget dataSet))
     (activityBelowFactorProduct dataSet scale polymer)
     (netGainImpliesFactorProductBelow dataSet scale polymer
       (physicalNetGainAtLeastLogSixteenConfigured
@@ -183,11 +206,11 @@ literalWilsonActivityPerTraversalBelowOneSixteenthConfigured dataSet scale polym
 configuredLossArithmeticLevel : ProofLevel
 configuredLossArithmeticLevel = machineChecked
 
+configuredLogSixteenReductionLevel : ProofLevel
+configuredLogSixteenReductionLevel = machineChecked
+
 configuredOneSixteenthAssemblyLevel : ProofLevel
 configuredOneSixteenthAssemblyLevel = machineChecked
 
 physicalLossDominationInputsLevel : ProofLevel
 physicalLossDominationInputsLevel = conditional
-
-logSixteenIntervalReceiptLevel : ProofLevel
-logSixteenIntervalReceiptLevel = conditional
