@@ -51,6 +51,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNRepositoryDyadicSeparationAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNThreeNumericShellLedgerStatus.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3AdjointTailIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3AdjointTailBridge.agda",
 ]
 
 PROVENANCE_MARKERS = (
