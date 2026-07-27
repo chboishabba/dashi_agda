@@ -24,6 +24,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.Closure.NSTriadKNExactDyadicShellGeometry as Geometry
 import DASHI.Physics.Closure.NSTriadKNSeparatedComponentLedger as Components
 import DASHI.Physics.Closure.NSTriadKNSeparatedComponentEndpointProfiles as Profiles
 import DASHI.Physics.Closure.NSTriadKNFiniteOverlapCanonicalConstants as Overlap
@@ -82,13 +83,13 @@ record CompleteComponentConstraintLedger {s : Level} : Set (lsuc s) where
     epsilonStrictlyPositive : Set s
 
     outputSeparated :
-      Components.GeometryTag → ComponentAffineConstraint Scalar
+      Geometry.GeometryTag → ComponentAffineConstraint Scalar
     firstDirectSeparated :
-      Components.GeometryTag → ComponentAffineConstraint Scalar
+      Geometry.GeometryTag → ComponentAffineConstraint Scalar
     firstSwappedSeparated :
-      Components.GeometryTag → ComponentAffineConstraint Scalar
+      Geometry.GeometryTag → ComponentAffineConstraint Scalar
     secondSeparated :
-      Components.GeometryTag → ComponentAffineConstraint Scalar
+      Geometry.GeometryTag → ComponentAffineConstraint Scalar
 
     outputFiniteOverlap :
       FiniteOverlapClass → FiniteOverlapAffineConstraint Scalar
