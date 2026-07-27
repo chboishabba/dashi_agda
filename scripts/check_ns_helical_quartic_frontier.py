@@ -71,6 +71,11 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNFiniteOverlapConstantProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ShellCertificateIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3ShellCertificateBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianAdditiveLaws.agda",
+    "DASHI/Physics/Closure/NSTriadKNLeraySelfAdjointness.agda",
+    "DASHI/Physics/Closure/NSTriadKNLiteralVectorAdjointPairingTheorems.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3VectorAdjointCompletionIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3VectorAdjointCompletionBridge.agda",
 ]
 
 PROVENANCE_MARKERS = (
@@ -154,6 +159,7 @@ def main() -> int:
         ("scripts/ns_stage3_ternary_antisymmetry_audit.py", "ternary/369 and classical-antisymmetry audit"),
         ("scripts/ns_stage3_hermitian_convolution_audit.py", "Hermitian, Leray, and direct shell-convolution audit"),
         ("scripts/ns_stage3_shell_certificate_audit.py", "one-low, finite-overlap, and certificate-readiness audit"),
+        ("scripts/ns_stage3_vector_adjoint_pairing_audit.py", "Leray and exact vector-adjoint pairing audit"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -168,7 +174,8 @@ def main() -> int:
         "weighted-Schur, three-function exponent, symmetric-companion, "
         "frozen-leg/Bernstein, exact-transpose/high-high, symmetrised-adjoint, "
         "tail/threshold/affine-readiness, ternary/antisymmetry, "
-        "Hermitian/Leray/direct-convolution, and shell-certificate verifiers passed"
+        "Hermitian/Leray/direct-convolution, shell-certificate, and exact "
+        "vector-adjoint verifiers passed"
     )
     return 0
 
