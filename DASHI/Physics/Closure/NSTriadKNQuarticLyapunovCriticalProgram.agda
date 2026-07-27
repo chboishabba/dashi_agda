@@ -32,6 +32,13 @@ import DASHI.Physics.Closure.NSTriadKNQuarticBKMExpenditure as Stage7
 import DASHI.Physics.Closure.NSTriadKNQuarticStandardEndpoint as Stage8
 import DASHI.Physics.Closure.NSTriadKNZeroCoherenceH3DiscriminantCounterexample as Falsification
 
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as HelicalFourier
+import DASHI.Physics.Closure.NSTriadKNHelicityPerturbedOperatorQuadratic as HelicalOperator
+import DASHI.Physics.Closure.NSTriadKNGlobalHelicityH3DiscriminantCounterexample as HelicalFalsification
+import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityCommutatorProgram as LocalizedHelicity
+import DASHI.Physics.Closure.NSTriadKNAdaptiveLinearHelicalProbeProgram as LinearHelicity
+import DASHI.Physics.Closure.NSTriadKNHelicalDiscriminantMarginProgram as HelicalMargin
+
 quarticPaperTransferAlgebraClosed : Bool
 quarticPaperTransferAlgebraClosed = true
 
@@ -45,6 +52,24 @@ zeroCoherenceH3CandidateFalsified = true
 zeroCoherenceH3CandidateFalsifiedIsTrue :
   zeroCoherenceH3CandidateFalsified ≡ true
 zeroCoherenceH3CandidateFalsifiedIsTrue = refl
+
+globalHelicityPerturbedH3CandidateFalsified : Bool
+globalHelicityPerturbedH3CandidateFalsified =
+  HelicalFalsification.globalHelicityCounterexampleReceiptImplemented
+
+globalHelicityPerturbedH3CandidateFalsifiedIsTrue :
+  globalHelicityPerturbedH3CandidateFalsified ≡ true
+globalHelicityPerturbedH3CandidateFalsifiedIsTrue =
+  HelicalFalsification.globalHelicityCounterexampleReceiptImplementedIsTrue
+
+localizedHelicityResearchCutsetRepresented : Bool
+localizedHelicityResearchCutsetRepresented =
+  LocalizedHelicity.helicalSignGeometryProgrammeRepresented
+
+localizedHelicityResearchCutsetRepresentedIsTrue :
+  localizedHelicityResearchCutsetRepresented ≡ true
+localizedHelicityResearchCutsetRepresentedIsTrue =
+  LocalizedHelicity.helicalSignGeometryProgrammeRepresentedIsTrue
 
 cutoffUniformPeriodicCriticalQuarticDominationClosed : Bool
 cutoffUniformPeriodicCriticalQuarticDominationClosed = false

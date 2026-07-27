@@ -148,6 +148,23 @@ def main() -> int:
                 + (result.stderr.strip() or result.stdout.strip())
             )
 
+    helical_check = root / "scripts/check_ns_helical_quartic_frontier.py"
+    if not helical_check.is_file():
+        failures.append("missing helical quartic frontier check")
+    else:
+        result = subprocess.run(
+            [sys.executable, str(helical_check)],
+            cwd=root,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            failures.append(
+                "helical quartic frontier check failed: "
+                + (result.stderr.strip() or result.stdout.strip())
+            )
+
     if failures:
         for failure in failures:
             print(failure)
