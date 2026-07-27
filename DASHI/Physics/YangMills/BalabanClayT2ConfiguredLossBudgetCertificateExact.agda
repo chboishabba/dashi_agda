@@ -2,9 +2,9 @@ module DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact as Log16
@@ -27,9 +27,9 @@ import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact as Lo
 -- Calculations: A Library for Interval Arithmetic", IEEE Transactions on
 -- Computers 58 (2009), 226--237. DOI: 10.1109/TC.2008.213
 --
--- Relationship: the first three sources provide the analytic mechanisms; the
--- last provides verified elementary-function evaluation architecture.  The
--- rational allocation and exact slack calculation are DASHI-owned.
+-- Relationship: the sources provide analytic mechanisms and certified-number
+-- architecture.  The rational allocation and every sum/difference reduction
+-- below are DASHI-owned.
 ------------------------------------------------------------------------
 
 twoℚ threeℚ fourℚ eightℚ sixteenℚ : ℚ
@@ -73,12 +73,6 @@ configuredNetGainExact = ℚRing.solve
 configuredNetSlackExact : configuredNetSlack ≡ 0ℚ
 configuredNetSlackExact = ℚRing.solve
 
-------------------------------------------------------------------------
--- Physical domination data.  The order and rational embedding are owned by the
--- common logarithm certificate, so log 16 <= 3 is derived rather than supplied
--- again as an independent field.
-------------------------------------------------------------------------
-
 record ConfiguredPhysicalLossDomination
     (Scale Polymer Scalar : Set) : Set₁ where
   field
@@ -93,6 +87,12 @@ record ConfiguredPhysicalLossDomination
       Log16.LessEqual logAuthority a b →
       Log16.LessEqual logAuthority c d →
       Log16.LessEqual logAuthority (add a c) (add b d)
+
+    subtractMonotoneAntitone : ∀ {actionLower action loss lossUpper} →
+      Log16.LessEqual logAuthority actionLower action →
+      Log16.LessEqual logAuthority loss lossUpper →
+      Log16.LessEqual logAuthority
+        (subtract actionLower lossUpper) (subtract action loss)
 
     actionGainDominatesConfigured : ∀ scale polymer →
       Log16.LessEqual logAuthority
@@ -115,8 +115,6 @@ record ConfiguredPhysicalLossDomination
       Log16.LessEqual logAuthority (patchLoss scale polymer)
         (Log16.rational logAuthority configuredPatchLoss)
 
-    rationalPreservesConfiguredArithmetic : Set
-
     totalLoss netGain : Scale → Polymer → Scalar
     totalLossDefinition : ∀ scale polymer →
       totalLoss scale polymer
@@ -129,16 +127,82 @@ record ConfiguredPhysicalLossDomination
       netGain scale polymer
       ≡ subtract (actionGain scale polymer) (totalLoss scale polymer)
 
-    configuredLossSumBound : ∀ scale polymer →
-      Log16.LessEqual logAuthority (totalLoss scale polymer)
-        (Log16.rational logAuthority configuredTotalLoss)
+    configuredTotalLossEmbeddingExact :
+      add (Log16.rational logAuthority configuredJacobianLoss)
+        (add (Log16.rational logAuthority configuredDeterminantLoss)
+          (add (Log16.rational logAuthority configuredBCHLoss)
+            (add (Log16.rational logAuthority configuredLocalizationLoss)
+              (Log16.rational logAuthority configuredPatchLoss))))
+      ≡ Log16.rational logAuthority configuredTotalLoss
 
-    configuredGainMinusLossBound : ∀ scale polymer →
-      Log16.LessEqual logAuthority
-        (Log16.rational logAuthority configuredNetGain)
-        (netGain scale polymer)
+    configuredNetGainEmbeddingExact :
+      subtract
+        (Log16.rational logAuthority configuredActionGain)
+        (Log16.rational logAuthority configuredTotalLoss)
+      ≡ Log16.rational logAuthority configuredNetGain
 
 open ConfiguredPhysicalLossDomination public
+
+configuredLossSumBound :
+  ∀ {Scale Polymer Scalar}
+    (dataSet : ConfiguredPhysicalLossDomination Scale Polymer Scalar)
+    scale polymer →
+  Log16.LessEqual (logAuthority dataSet)
+    (totalLoss dataSet scale polymer)
+    (Log16.rational (logAuthority dataSet) configuredTotalLoss)
+configuredLossSumBound dataSet scale polymer =
+  subst
+    (λ upper →
+      Log16.LessEqual (logAuthority dataSet)
+        (totalLoss dataSet scale polymer) upper)
+    (configuredTotalLossEmbeddingExact dataSet)
+    (subst
+      (λ lower →
+        Log16.LessEqual (logAuthority dataSet) lower
+          (add dataSet
+            (Log16.rational (logAuthority dataSet) configuredJacobianLoss)
+            (add dataSet
+              (Log16.rational (logAuthority dataSet) configuredDeterminantLoss)
+              (add dataSet
+                (Log16.rational (logAuthority dataSet) configuredBCHLoss)
+                (add dataSet
+                  (Log16.rational (logAuthority dataSet) configuredLocalizationLoss)
+                  (Log16.rational (logAuthority dataSet) configuredPatchLoss))))))
+      (totalLossDefinition dataSet scale polymer)
+      (addMonotone dataSet
+        (jacobianLossBelowConfigured dataSet scale polymer)
+        (addMonotone dataSet
+          (determinantLossBelowConfigured dataSet scale polymer)
+          (addMonotone dataSet
+            (bchLossBelowConfigured dataSet scale polymer)
+            (addMonotone dataSet
+              (localizationLossBelowConfigured dataSet scale polymer)
+              (patchLossBelowConfigured dataSet scale polymer))))))
+
+configuredGainMinusLossBound :
+  ∀ {Scale Polymer Scalar}
+    (dataSet : ConfiguredPhysicalLossDomination Scale Polymer Scalar)
+    scale polymer →
+  Log16.LessEqual (logAuthority dataSet)
+    (Log16.rational (logAuthority dataSet) configuredNetGain)
+    (netGain dataSet scale polymer)
+configuredGainMinusLossBound dataSet scale polymer =
+  subst
+    (λ lower →
+      Log16.LessEqual (logAuthority dataSet) lower
+        (netGain dataSet scale polymer))
+    (sym (configuredNetGainEmbeddingExact dataSet))
+    (subst
+      (λ upper →
+        Log16.LessEqual (logAuthority dataSet)
+          (subtract dataSet
+            (Log16.rational (logAuthority dataSet) configuredActionGain)
+            (Log16.rational (logAuthority dataSet) configuredTotalLoss))
+          upper)
+      (sym (netGainDefinition dataSet scale polymer))
+      (subtractMonotoneAntitone dataSet
+        (actionGainDominatesConfigured dataSet scale polymer)
+        (configuredLossSumBound dataSet scale polymer)))
 
 configuredLogSixteen :
   ∀ {Scale Polymer Scalar} →
@@ -165,11 +229,6 @@ physicalNetGainAtLeastLogSixteenConfigured dataSet scale polymer =
         (Log16.rational (logAuthority dataSet))
         configuredNetGainExact)
       (configuredGainMinusLossBound dataSet scale polymer))
-
-------------------------------------------------------------------------
--- Endpoint adapter: the exponential/product comparison remains explicit, but
--- the common numerical budget and log 16 <= 3 receipt are no longer free.
-------------------------------------------------------------------------
 
 record ConfiguredOneSixteenthEndpoint
     (Scale Polymer Scalar : Set) : Set₁ where
@@ -205,6 +264,9 @@ literalWilsonActivityPerTraversalBelowOneSixteenthConfigured dataSet scale polym
 
 configuredLossArithmeticLevel : ProofLevel
 configuredLossArithmeticLevel = machineChecked
+
+configuredComponentSumReductionLevel : ProofLevel
+configuredComponentSumReductionLevel = machineChecked
 
 configuredLogSixteenReductionLevel : ProofLevel
 configuredLogSixteenReductionLevel = machineChecked
