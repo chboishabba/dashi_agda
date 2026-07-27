@@ -182,7 +182,7 @@ echo "Logging Agda output to: $AGDA_LOG_PATH"
 AGDA_RUN=("$AGDA_BIN" \
   --no-libraries --no-default-libraries \
   "-j$JOBS" \
-  -i . -i DCHoTT-Agda -i cubical -i "$STDLIB_INCLUDE" \
+  -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -i "$STDLIB_INCLUDE" \
   -WnoUnsupportedIndexedMatch)
 
 if command -v stdbuf >/dev/null 2>&1; then
