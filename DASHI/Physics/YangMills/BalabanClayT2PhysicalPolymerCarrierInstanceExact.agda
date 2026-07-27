@@ -84,8 +84,10 @@ boundaryExtensionCountAtMostEightLiteral :
     root →
   Encoding.regime (Encoding.directionMask (cliqueData dataSet)) root
   ≡ Encoding.boundary →
-  Encoding.validExtensionCount
-    (Encoding.directionMask (cliqueData dataSet)) root Encoding.≤N Encoding.eight
+  Encoding._≤N_
+    (Encoding.validExtensionCount
+      (Encoding.directionMask (cliqueData dataSet)) root)
+    Encoding.eight
 boundaryExtensionCountAtMostEightLiteral dataSet =
   Encoding.boundaryExtensionCountAtMostEight
     (Encoding.directionMask (cliqueData dataSet))
@@ -111,15 +113,15 @@ physicalRootedExtensionsFormCliqueLiteral :
     (Encoding.directionMask (cliqueData dataSet)) root first →
   Encoding.literalValidExtension
     (Encoding.directionMask (cliqueData dataSet)) root second →
-  Encoding.literalExtensionPolymer
-    (Encoding.literalRootedExtension
-      (Encoding.extensionGeometry (cliqueData dataSet))
-      (Encoding.rootBlockOf (cliqueData dataSet) root) first)
-  Encoding.#
-  Encoding.literalExtensionPolymer
-    (Encoding.literalRootedExtension
-      (Encoding.extensionGeometry (cliqueData dataSet))
-      (Encoding.rootBlockOf (cliqueData dataSet) root) second)
+  Encoding._#_
+    (Encoding.literalExtensionPolymer
+      (Encoding.literalRootedExtension
+        (Encoding.extensionGeometry (cliqueData dataSet))
+        (Encoding.rootBlockOf (cliqueData dataSet) root) first))
+    (Encoding.literalExtensionPolymer
+      (Encoding.literalRootedExtension
+        (Encoding.extensionGeometry (cliqueData dataSet))
+        (Encoding.rootBlockOf (cliqueData dataSet) root) second))
 physicalRootedExtensionsFormCliqueLiteral dataSet =
   Encoding.physicalRootedExtensionsFormClique (cliqueData dataSet)
 
