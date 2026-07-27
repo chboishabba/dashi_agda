@@ -15,6 +15,7 @@ FILES = [
     ROOT / "DASHI/Foundations/CompositeRadixPrimeLaneBridge.agda",
     ROOT / "DASHI/Foundations/FamilyDecimalMonsterCrossPollination.agda",
     ROOT / "DASHI/Foundations/StageValuationBundleAtlas.agda",
+    ROOT / "DASHI/Foundations/StageTetralemmaArrestBridge.agda",
     ROOT / "DASHI/Core/FramedORCSLPGFAdapter.agda",
     ROOT / "DASHI/Physics/Closure/SheetExchangeJFixedResolutionBoundary.agda",
     ROOT / "DASHI/Foundations/LogisticAdicStageRegression.agda",
@@ -87,6 +88,12 @@ REQUIRED = {
         "stage200Address",
         "CompressedStageTransition",
     ],
+    "StageTetralemmaArrestBridge.agda": [
+        "overflowToneCollapsesToSeedTone",
+        "fourStepsReturnToSeed",
+        "TetralemmaArrestReceipt",
+        "canonicalTetralemmaArrestReceipt",
+    ],
     "FramedORCSLPGFAdapter.agda": [
         "FramedCoordinate",
         "coordinateSlot",
@@ -106,6 +113,7 @@ REQUIRED = {
     "LogisticAdicStageRegression.agda": [
         "canonicalLogisticAdicStageRegression",
         "natIdentitySquare357At50",
+        "tetralemmaArrest",
         "compressedTransformativeJump",
         "familySupportFibre",
         "monsterRepresentationSeparation",
@@ -178,6 +186,7 @@ def main() -> int:
     print("PASS: rational logistic algebra and proof-carrying chart/residue contracts are present")
     print("PASS: 357/100 FactorVec support, place value and valuation profile are exact")
     print("PASS: composite 6/9 radices remain joined/primary-depth charts, not fields")
+    print("PASS: tetralemma quotient seam and Stage-4 arrest are proof-carrying")
     print("PASS: stage 0..11 is valuation-, memory-, learning- and residual-aware")
     print("PASS: Stage 8 cycle, Stage 11 bundle join and beyond-11 addresses are exact")
     print("PASS: family support, symbolic decimal and Monster/irrep boundaries are explicit")
