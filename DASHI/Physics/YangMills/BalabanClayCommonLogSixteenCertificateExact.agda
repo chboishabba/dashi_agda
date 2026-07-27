@@ -1,9 +1,12 @@
 module DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
+open import Data.Rational using (ℚ; 1ℚ; _+_; _*_; _≤_; _≤ᵇ_; _/_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -37,10 +40,7 @@ expThreeFourthPartialSumExact = ℚRing.solve
 
 sixteenBelowExpThreePartialSum :
   sixteenℚ ≤ expThreeFourthPartialSum
-sixteenBelowExpThreePartialSum =
-  Data.Rational.Properties.≤-reflexive
-  where
-  import Data.Rational.Properties
+sixteenBelowExpThreePartialSum = ℚP.≤ᵇ⇒≤ tt
 
 ------------------------------------------------------------------------
 -- Minimal real exponential/logarithm authority.  Positivity of the omitted
@@ -78,7 +78,7 @@ logSixteenBelowThree :
     (logarithm dataSet (rational dataSet sixteenℚ))
     (rational dataSet threeℚ)
 logSixteenBelowThree dataSet =
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (λ upper →
       LessEqual dataSet
         (logarithm dataSet (rational dataSet sixteenℚ)) upper)
@@ -87,8 +87,6 @@ logSixteenBelowThree dataSet =
       (transitive dataSet
         (rationalOrderEmbedding dataSet sixteenBelowExpThreePartialSum)
         (exponentialThreeAboveFourthPartialSum dataSet)))
-  where
-  open import Relation.Binary.PropositionalEquality
 
 logSixteenFinitePartialSumArithmeticLevel : ProofLevel
 logSixteenFinitePartialSumArithmeticLevel = machineChecked
