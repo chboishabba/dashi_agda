@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger whe
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Foundations.RealElementaryFunctionsAlternatingSeriesExact as Alternating
 import DASHI.Physics.YangMills.BalabanClayCommonTaylorRemainderToEnclosureExact as Taylor
 import DASHI.Physics.YangMills.BalabanClayCommonNegativeLogSincReductionExact as NegLog
 import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact as Sinc
@@ -10,31 +11,45 @@ import DASHI.Physics.YangMills.BalabanClayCommonElementaryRealInhabitantsExact a
 import DASHI.Physics.YangMills.BalabanClayT3RightJacobianSampleCheckExact as Sample
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as Geometry
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiveHessianDominationExact as Hessian
+import DASHI.Physics.YangMills.BalabanClayT3LiteralPointwiseHessianEstimatesExact as Pointwise
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact as Radius
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact as Green
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGreenInstanceExact as GreenInstance
+import DASHI.Physics.YangMills.BalabanClayT3LiteralHessianFourierImageInstanceExact as LiteralGreen
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGatewayExact as T3Gateway
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredActionGainThresholdExact as Action
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredComponentLossBoundsExact as Components
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredModelSpecificLossClosureExact as ModelLoss
+import DASHI.Physics.YangMills.BalabanClayT2LiteralHaarTraceClassClosureExact as HaarTrace
+import DASHI.Physics.YangMills.BalabanClayT2QuaternionCubicEnumerationExact as Quaternion
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact as Loss
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredStrictLossMarginExact as Margin
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredRobustOneSixteenthEndpointExact as RobustEndpoint
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalLossInstanceExact as LossInstance
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact as Polymer
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact as PolymerExtraction
+import DASHI.Physics.YangMills.BalabanClayT2RepositoryBreadthFirstTreeInstanceExact as BFSTree
 import DASHI.Physics.YangMills.BalabanClayT4Balaban1987TheoremShapeExact as BalabanShape
 import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact as Balaban536
 import DASHI.Physics.YangMills.BalabanClayT4LiteralDiagramWardCancellationExact as Diagrams
+import DASHI.Physics.YangMills.BalabanClayT4LiteralMomentumDiagramBoxDataExact as MomentumBoxes
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as OneLoop
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as BoxReceipts
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredPhysicalOneLoopInstanceExact as PhysicalOneLoop
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
 import DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact as ShellTail
+import DASHI.Physics.YangMills.BalabanClayT5BoundaryContinuumMomentMeasureExact as T5Primitive
 
 ------------------------------------------------------------------------
 -- I. Exact configured arithmetic, finite reductions and physical adapters.
 ------------------------------------------------------------------------
+
+alternatingSeriesSharedReductionLevel =
+  Alternating.alternatingSeriesSharedReductionLevel
+configuredRatioArithmeticLevel = Alternating.configuredRatioArithmeticLevel
+negativeLogIntegralReductionLevel = Alternating.negativeLogIntegralReductionLevel
+positiveExponentialTailReductionLevel =
+  Alternating.positiveExponentialTailReductionLevel
 
 symmetricRemainderReductionLevel = Taylor.symmetricRemainderReductionLevel
 alternatingBracketReductionLevel = Taylor.alternatingBracketReductionLevel
@@ -44,13 +59,9 @@ configuredHornerIdentityLevel = Sinc.configuredHornerIdentityLevel
 logSixteenFinitePartialSumArithmeticLevel =
   Log16.logSixteenFinitePartialSumArithmeticLevel
 logSixteenMonotoneReductionLevel = Log16.logSixteenMonotoneReductionLevel
-
-configuredSineCosineReductionLevel =
-  Elementary.configuredSineCosineReductionLevel
-configuredSincDivisionReductionLevel =
-  Elementary.configuredSincDivisionReductionLevel
-configuredNegativeLogReductionLevel =
-  Elementary.configuredNegativeLogReductionLevel
+configuredSineCosineReductionLevel = Elementary.configuredSineCosineReductionLevel
+configuredSincDivisionReductionLevel = Elementary.configuredSincDivisionReductionLevel
+configuredNegativeLogReductionLevel = Elementary.configuredNegativeLogReductionLevel
 configuredLogSixteenAuthorityAdapterLevel =
   Elementary.configuredLogSixteenAuthorityAdapterLevel
 
@@ -58,34 +69,42 @@ rightJacobianSampleRationalLevel = Sample.rightJacobianSampleRationalLevel
 rightJacobianSampleReductionLevel = Sample.rightJacobianSampleReductionLevel
 configuredIncidenceDataLevel = Geometry.configuredIncidenceDataLevel
 configuredCoefficientArithmeticLevel = Geometry.configuredCoefficientArithmeticLevel
-localToGlobalRemainderReductionLevel =
-  Hessian.localToGlobalRemainderReductionLevel
-fiveConfiguredDominationAdapterLevel =
-  Hessian.fiveConfiguredDominationAdapterLevel
+localToGlobalRemainderReductionLevel = Hessian.localToGlobalRemainderReductionLevel
+fiveConfiguredDominationAdapterLevel = Hessian.fiveConfiguredDominationAdapterLevel
+finiteAtomExpansionReductionLevel = Pointwise.finiteAtomExpansionReductionLevel
+literalCurvatureTransportChartReductionLevel =
+  Pointwise.literalCurvatureTransportChartReductionLevel
+literalGaugeConstraintReductionLevel = Pointwise.literalGaugeConstraintReductionLevel
 configuredCommonRadiusArithmeticLevel = Radius.configuredCommonRadiusArithmeticLevel
 configuredFiveRemaindersBelowHalfLevel = Radius.configuredFiveRemaindersBelowHalfLevel
 localCombesThomasReductionLevel = Green.localCombesThomasReductionLevel
 fourierRGImageAssemblyLevel = Green.fourierRGImageAssemblyLevel
-configuredCombesThomasArithmeticLevel =
-  GreenInstance.configuredCombesThomasArithmeticLevel
+configuredCombesThomasArithmeticLevel = GreenInstance.configuredCombesThomasArithmeticLevel
 configuredLocalGreenAdapterLevel = GreenInstance.configuredLocalGreenAdapterLevel
-configuredFourierRGImageReductionLevel =
-  GreenInstance.configuredFourierRGImageReductionLevel
-configuredT3LocalToCoerciveGatewayLevel =
-  T3Gateway.configuredT3LocalToCoerciveGatewayLevel
-configuredT3CoerciveToGreenGatewayLevel =
-  T3Gateway.configuredT3CoerciveToGreenGatewayLevel
+configuredFourierRGImageReductionLevel = GreenInstance.configuredFourierRGImageReductionLevel
+physicalGapReductionLevel = LiteralGreen.physicalGapReductionLevel
+weightedResolventReductionLevel = LiteralGreen.weightedResolventReductionLevel
+fourierStripReductionLevel = LiteralGreen.fourierStripReductionLevel
+rgImageReductionLevel = LiteralGreen.rgImageReductionLevel
+configuredT3LocalToCoerciveGatewayLevel = T3Gateway.configuredT3LocalToCoerciveGatewayLevel
+configuredT3CoerciveToGreenGatewayLevel = T3Gateway.configuredT3CoerciveToGreenGatewayLevel
 
-configuredActionThresholdArithmeticLevel =
-  Action.configuredActionThresholdArithmeticLevel
+configuredActionThresholdArithmeticLevel = Action.configuredActionThresholdArithmeticLevel
 configuredActionGainReductionLevel = Action.configuredActionGainReductionLevel
 configuredComponentArithmeticLevel = Components.configuredComponentArithmeticLevel
-configuredComponentBudgetReductionLevel =
-  Components.configuredComponentBudgetReductionLevel
+configuredComponentBudgetReductionLevel = Components.configuredComponentBudgetReductionLevel
 haarPhysicalReductionLevel = ModelLoss.haarPhysicalReductionLevel
 localizedTraceLogReductionLevel = ModelLoss.localizedTraceLogReductionLevel
 quaternionPhysicalReductionLevel = ModelLoss.quaternionPhysicalReductionLevel
 localizationPatchReductionLevel = ModelLoss.localizationPatchReductionLevel
+configuredHaarArithmeticLevel = HaarTrace.configuredHaarArithmeticLevel
+configuredTraceLogArithmeticLevel = HaarTrace.configuredTraceLogArithmeticLevel
+literalHaarProductReductionLevel = HaarTrace.literalHaarProductReductionLevel
+literalTraceClassReductionLevel = HaarTrace.literalTraceClassReductionLevel
+quaternionCubicArithmeticLevel = Quaternion.quaternionCubicArithmeticLevel
+quaternionFiniteEnumerationReductionLevel =
+  Quaternion.quaternionFiniteEnumerationReductionLevel
+polymerQuaternionSumReductionLevel = Quaternion.polymerQuaternionSumReductionLevel
 configuredLossArithmeticLevel = Loss.configuredLossArithmeticLevel
 configuredComponentSumReductionLevel = Loss.configuredComponentSumReductionLevel
 configuredLogSixteenReductionLevel = Loss.configuredLogSixteenReductionLevel
@@ -93,8 +112,7 @@ configuredOneSixteenthAssemblyLevel = Loss.configuredOneSixteenthAssemblyLevel
 sharpPartialSumArithmeticLevel = Margin.sharpPartialSumArithmeticLevel
 configuredOneFifthRobustnessReductionLevel =
   Margin.configuredOneFifthRobustnessReductionLevel
-configuredRobustActivityEndpointLevel =
-  RobustEndpoint.configuredRobustActivityEndpointLevel
+configuredRobustActivityEndpointLevel = RobustEndpoint.configuredRobustActivityEndpointLevel
 configuredEmbeddedLossInstanceLevel = LossInstance.configuredEmbeddedLossInstanceLevel
 
 configuredPatchDirectionMaskLevel = Polymer.configuredPatchDirectionMaskLevel
@@ -102,10 +120,11 @@ configuredInteriorEightCountLevel = Polymer.configuredInteriorEightCountLevel
 configuredCanonicalTraceAdapterLevel = Polymer.configuredCanonicalTraceAdapterLevel
 canonicalRootTreeAlgorithmReductionLevel =
   PolymerExtraction.canonicalRootTreeAlgorithmReductionLevel
-canonicalDecoderInjectivityLevel =
-  PolymerExtraction.canonicalDecoderInjectivityLevel
-configuredTraceFamilyAdapterLevel =
-  PolymerExtraction.configuredTraceFamilyAdapterLevel
+canonicalDecoderInjectivityLevel = PolymerExtraction.canonicalDecoderInjectivityLevel
+configuredTraceFamilyAdapterLevel = PolymerExtraction.configuredTraceFamilyAdapterLevel
+breadthFirstParentReductionLevel = BFSTree.breadthFirstParentReductionLevel
+deterministicDepthFirstReductionLevel = BFSTree.deterministicDepthFirstReductionLevel
+decoderLeftInverseReductionLevel = BFSTree.decoderLeftInverseReductionLevel
 
 balabanTheorem1ArchitectureLevel = BalabanShape.balabanTheorem1ArchitectureLevel
 balabanLocalizationConventionLevel = BalabanShape.balabanLocalizationConventionLevel
@@ -117,15 +136,16 @@ literalVertexReductionLevel = Diagrams.literalVertexReductionLevel
 literalDiagramCombinationLevel = Diagrams.literalDiagramCombinationLevel
 literalWardCancellationLevel = Diagrams.literalWardCancellationLevel
 literalTransverseScalarReductionLevel = Diagrams.literalTransverseScalarReductionLevel
+literalMomentumVertexReductionLevel = MomentumBoxes.literalMomentumVertexReductionLevel
+literalWardKernelReductionLevel = MomentumBoxes.literalWardKernelReductionLevel
+generatedBoxAdapterLevel = MomentumBoxes.generatedBoxAdapterLevel
 universalColorCoefficientArithmeticLevel = OneLoop.universalColorCoefficientArithmeticLevel
 brillouinBoxSummationReductionLevel = OneLoop.brillouinBoxSummationReductionLevel
-configuredPlaquetteCoefficientAssemblyLevel =
-  OneLoop.configuredPlaquetteCoefficientAssemblyLevel
+configuredPlaquetteCoefficientAssemblyLevel = OneLoop.configuredPlaquetteCoefficientAssemblyLevel
 boxReceiptConstructionLevel = BoxReceipts.boxReceiptConstructionLevel
 finiteBoxFamilyAssemblyLevel = BoxReceipts.finiteBoxFamilyAssemblyLevel
 configuredIntegralAdapterLevel = BoxReceipts.configuredIntegralAdapterLevel
-literalDiagramCoherenceReductionLevel =
-  PhysicalOneLoop.literalDiagramCoherenceReductionLevel
+literalDiagramCoherenceReductionLevel = PhysicalOneLoop.literalDiagramCoherenceReductionLevel
 configuredBoxToBalabanCoefficientReductionLevel =
   PhysicalOneLoop.configuredBoxToBalabanCoefficientReductionLevel
 balaban031EndpointReductionLevel = PhysicalOneLoop.balaban031EndpointReductionLevel
@@ -134,46 +154,61 @@ configuredDyadicTailArithmeticLevel = Tail.configuredDyadicTailArithmeticLevel
 configuredBoundaryTailReductionLevel = Tail.configuredBoundaryTailReductionLevel
 configuredContinuumTailReductionLevel = Tail.configuredContinuumTailReductionLevel
 rootedShellTailIdentificationLevel = ShellTail.rootedShellTailIdentificationLevel
-rootedShellToBoundaryTailReductionLevel =
-  ShellTail.rootedShellToBoundaryTailReductionLevel
+rootedShellToBoundaryTailReductionLevel = ShellTail.rootedShellToBoundaryTailReductionLevel
+boundaryEscapeReductionLevel = T5Primitive.boundaryEscapeReductionLevel
+continuumDefectReductionLevel = T5Primitive.continuumDefectReductionLevel
+exponentialMomentReductionLevel = T5Primitive.exponentialMomentReductionLevel
+measureCompactnessProjectiveReductionLevel =
+  T5Primitive.measureCompactnessProjectiveReductionLevel
 
 ------------------------------------------------------------------------
 -- II. Remaining primitive analytic and model-specific inhabitants.
 ------------------------------------------------------------------------
 
+repositoryElementaryCalculusInputsLevel =
+  Alternating.repositoryElementaryCalculusInputsLevel
 elementaryTaylorLogExpInputsLevel = Elementary.elementaryTaylorLogExpInputsLevel
-positiveExponentialTailAndLogInputsLevel =
-  Margin.positiveExponentialTailAndLogInputsLevel
+positiveExponentialTailAndLogInputsLevel = Margin.positiveExponentialTailAndLogInputsLevel
 literalSampleSineEvaluationInputsLevel = Sample.literalSampleSineEvaluationInputsLevel
-literalLocalPointwiseAndIncidenceInputsLevel =
-  Hessian.literalLocalPointwiseAndIncidenceInputsLevel
+literalPlaquetteTransportChartDivergenceBlockInputsLevel =
+  Pointwise.literalPlaquetteTransportChartDivergenceBlockInputsLevel
+literalLocalPointwiseAndIncidenceInputsLevel = Hessian.literalLocalPointwiseAndIncidenceInputsLevel
 literalLocalHessianGapFourierImageInputsLevel =
   T3Gateway.literalLocalHessianGapFourierImageInputsLevel
 literalFiniteRangeGapAndFourierImageInputsLevel =
   GreenInstance.literalFiniteRangeGapAndFourierImageInputsLevel
+literalHessianKernelSymbolAndImageInputsLevel =
+  LiteralGreen.literalHessianKernelSymbolAndImageInputsLevel
 periodicRandomWalkTransferInputsLevel = Green.periodicRandomWalkTransferInputsLevel
 physicalLargeFieldPlaquetteAndBetaInputsLevel =
   Action.physicalLargeFieldPlaquetteAndBetaInputsLevel
 literalLinkTraceQuaternionCollarPatchInputsLevel =
   ModelLoss.literalLinkTraceQuaternionCollarPatchInputsLevel
+literalLinkwiseHaarAndTraceClassInputsLevel =
+  HaarTrace.literalLinkwiseHaarAndTraceClassInputsLevel
+literalQuaternionCoordinateAndEnumerationInputsLevel =
+  Quaternion.literalQuaternionCoordinateAndEnumerationInputsLevel
 physicalAdditionalLossBelowOneFifthInputsLevel =
   RobustEndpoint.physicalAdditionalLossBelowOneFifthInputsLevel
-physicalActionAndComponentInputsLevel =
-  LossInstance.physicalActionAndComponentInputsLevel
+physicalActionAndComponentInputsLevel = LossInstance.physicalActionAndComponentInputsLevel
 physicalLossDominationInputsLevel = Loss.physicalLossDominationInputsLevel
 repositoryOrderConnectivityAndDecoderInputsLevel =
   PolymerExtraction.repositoryOrderConnectivityAndDecoderInputsLevel
+repositoryBreadthFirstOrderConnectivityInputsLevel =
+  BFSTree.repositoryBreadthFirstOrderConnectivityInputsLevel
 literalWilsonGhostHaarFormulaInputsLevel =
   Diagrams.literalWilsonGhostHaarFormulaInputsLevel
+literalMomentumNumeratorDenominatorBoxInputsLevel =
+  MomentumBoxes.literalMomentumNumeratorDenominatorBoxInputsLevel
 literalDiagramNumeratorDenominatorAndQuadratureInputsLevel =
   BoxReceipts.literalDiagramNumeratorDenominatorAndQuadratureInputsLevel
 literalDiagramIntegrandAndQuarticInputsLevel =
   PhysicalOneLoop.literalDiagramIntegrandAndQuarticInputsLevel
-literalDiagramToBalabanTargetInputsLevel =
-  Balaban536.literalDiagramToBalabanTargetInputsLevel
-literalDASHIMainAndQuarticInputsLevel =
-  BalabanShape.literalDASHIMainAndQuarticInputsLevel
+literalDiagramToBalabanTargetInputsLevel = Balaban536.literalDiagramToBalabanTargetInputsLevel
+literalDASHIMainAndQuarticInputsLevel = BalabanShape.literalDASHIMainAndQuarticInputsLevel
 physicalClusterDiameterInputsLevel = Tail.physicalClusterDiameterInputsLevel
 boundaryEscapeInputsLevel = ShellTail.boundaryEscapeInputsLevel
+literalT5BoundaryDefectMomentMeasureInputsLevel =
+  T5Primitive.literalT5BoundaryDefectMomentMeasureInputsLevel
 physicalExponentialMomentCompactnessInputsLevel =
   Tail.physicalExponentialMomentCompactnessInputsLevel
