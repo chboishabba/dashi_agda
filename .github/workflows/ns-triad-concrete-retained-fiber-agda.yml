@@ -1,0 +1,61 @@
+name: NS triad physical frontier Agda
+
+on:
+  push:
+    branches:
+      - 'agent/ns-triad-scale-compatibility-closure'
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'scripts/ns_triad_signed_frontier_lab.py'
+      - 'scripts/check_ns_triad_completion_identities.py'
+      - 'scripts/check_ns_triad_clay_frontier.py'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKN*.agda'
+      - 'scripts/ns_triad_signed_frontier_lab.py'
+      - 'scripts/check_ns_triad_completion_identities.py'
+      - 'scripts/check_ns_triad_clay_frontier.py'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/ns-triad-concrete-retained-fiber-agda.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Reject new frontier holes and postulates
+        run: python3 scripts/check_ns_triad_clay_frontier.py
+
+      - name: Verify exact signed finite laboratory
+        run: >-
+          python3 scripts/ns_triad_signed_frontier_lab.py
+          --cutoff 1 --overlap 3 --verify
+
+      - name: Verify exact null, orbit, and shell identities
+        run: >-
+          python3 scripts/check_ns_triad_completion_identities.py
+          --cutoff 3 --separation 3
+
+      - name: Type-check complete physical Stage3 frontier
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/NSTriadKNConcretePhysicalRetainedFiberProgram.agda
