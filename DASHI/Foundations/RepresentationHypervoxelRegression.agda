@@ -3,6 +3,7 @@ module DASHI.Foundations.RepresentationHypervoxelRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Cognition.SituatedFrameMetacognitionBoundary as Situated
+import DASHI.Foundations.LiftPolarityPathComposition as LiftPath
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Foundations.RepresentationChartInvariant as Representation
@@ -117,6 +118,9 @@ record RepresentationHypervoxelRegression : Set₁ where
     negativeNegativeParity :
       Hyper.multiplyPolarity negative negative ≡ positive
 
+    pathPolarityFactorisation :
+      LiftPath.CoarseFinePolarityFactorisation
+
     stage1And10Distinct :
       ¬ (Atlas.atlas-1 ≡ Atlas.atlas-10)
 
@@ -137,6 +141,7 @@ record RepresentationHypervoxelRegression : Set₁ where
 
     representationBoundary : Representation.RepresentationAuthorityBoundary
     hypervoxelBoundary : Hyper.HypervoxelAuthorityBoundary
+    polarityPathBoundary : LiftPath.PolarityPathAuthorityBoundary
     radixStageBoundary : Radix.RadixStageAuthorityBoundary
     prefixMetricBoundary : Prefix.PrefixMetricAuthorityBoundary
     su2so3Boundary : SU2SO3.SU2SO3369AuthorityBoundary
@@ -170,6 +175,7 @@ canonicalRepresentationHypervoxelRegression = record
   ; liftProjectionLaw = canonicalLiftProjectionInvariant
   ; positiveNegativeParity = refl
   ; negativeNegativeParity = refl
+  ; pathPolarityFactorisation = LiftPath.canonicalCoarseFineFactorisation
   ; stage1And10Distinct = Radix.stage1NotStage10
   ; stage10And11Distinct = Radix.stage10NotStage11
   ; stageCarryJoin = Radix.canonicalStageCarryJoin
@@ -183,6 +189,7 @@ canonicalRepresentationHypervoxelRegression = record
       Situated.canonicalExistingLogisticCarrierReconciliation
   ; representationBoundary = Representation.canonicalRepresentationAuthorityBoundary
   ; hypervoxelBoundary = Hyper.canonicalHypervoxelAuthorityBoundary
+  ; polarityPathBoundary = LiftPath.canonicalPolarityPathAuthorityBoundary
   ; radixStageBoundary = Radix.canonicalRadixStageAuthorityBoundary
   ; prefixMetricBoundary = Prefix.canonicalPrefixMetricAuthorityBoundary
   ; su2so3Boundary = SU2SO3.canonicalSU2SO3369AuthorityBoundary
