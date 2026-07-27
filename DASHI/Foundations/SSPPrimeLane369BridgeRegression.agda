@@ -3,6 +3,8 @@ module DASHI.Foundations.SSPPrimeLane369BridgeRegression where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero; suc)
 
+import DASHI.Foundations.RepresentationHypervoxelRegression
+
 open import DASHI.Core.SuperSSP369Field using
   ( rootField
   ; depth3Field
