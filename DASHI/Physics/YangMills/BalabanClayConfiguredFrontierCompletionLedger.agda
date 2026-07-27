@@ -2,8 +2,11 @@ module DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger whe
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanClayCommonTaylorRemainderToEnclosureExact as Taylor
+import DASHI.Physics.YangMills.BalabanClayCommonNegativeLogSincReductionExact as NegLog
 import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact as Sinc
 import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact as Log16
+import DASHI.Physics.YangMills.BalabanClayT3RightJacobianSampleCheckExact as Sample
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as Geometry
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact as Radius
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact as Green
@@ -21,6 +24,15 @@ import DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact as Shel
 -- I. Exact configured arithmetic and finite reductions.
 ------------------------------------------------------------------------
 
+symmetricRemainderReductionLevel : ProofLevel
+symmetricRemainderReductionLevel = Taylor.symmetricRemainderReductionLevel
+
+alternatingBracketReductionLevel : ProofLevel
+alternatingBracketReductionLevel = Taylor.alternatingBracketReductionLevel
+
+negativeLogSincReductionLevel : ProofLevel
+negativeLogSincReductionLevel = NegLog.negativeLogSincReductionLevel
+
 configuredRationalCoefficientLevel : ProofLevel
 configuredRationalCoefficientLevel = Sinc.configuredRationalCoefficientLevel
 
@@ -33,6 +45,12 @@ logSixteenFinitePartialSumArithmeticLevel =
 
 logSixteenMonotoneReductionLevel : ProofLevel
 logSixteenMonotoneReductionLevel = Log16.logSixteenMonotoneReductionLevel
+
+rightJacobianSampleRationalLevel : ProofLevel
+rightJacobianSampleRationalLevel = Sample.rightJacobianSampleRationalLevel
+
+rightJacobianSampleReductionLevel : ProofLevel
+rightJacobianSampleReductionLevel = Sample.rightJacobianSampleReductionLevel
 
 configuredIncidenceDataLevel : ProofLevel
 configuredIncidenceDataLevel = Geometry.configuredIncidenceDataLevel
@@ -121,6 +139,9 @@ configuredBoundaryTailReductionLevel = Tail.configuredBoundaryTailReductionLevel
 configuredContinuumTailReductionLevel : ProofLevel
 configuredContinuumTailReductionLevel = Tail.configuredContinuumTailReductionLevel
 
+rootedShellTailIdentificationLevel : ProofLevel
+rootedShellTailIdentificationLevel = ShellTail.rootedShellTailIdentificationLevel
+
 rootedShellToBoundaryTailReductionLevel : ProofLevel
 rootedShellToBoundaryTailReductionLevel =
   ShellTail.rootedShellToBoundaryTailReductionLevel
@@ -128,6 +149,14 @@ rootedShellToBoundaryTailReductionLevel =
 ------------------------------------------------------------------------
 -- II. Exact remaining inhabitants after the configured reductions.
 ------------------------------------------------------------------------
+
+literalDerivativeOrAlternatingRemainderInputsLevel : ProofLevel
+literalDerivativeOrAlternatingRemainderInputsLevel =
+  Taylor.literalDerivativeOrAlternatingRemainderInputsLevel
+
+elementaryNegativeLogOneMinusInputsLevel : ProofLevel
+elementaryNegativeLogOneMinusInputsLevel =
+  NegLog.elementaryNegativeLogOneMinusInputsLevel
 
 configuredAlternatingRemainderInputsLevel : ProofLevel
 configuredAlternatingRemainderInputsLevel =
@@ -139,6 +168,9 @@ configuredNegativeLogSincInputsLevel =
 
 exponentialPositiveTailInputsLevel : ProofLevel
 exponentialPositiveTailInputsLevel = Log16.exponentialPositiveTailInputsLevel
+
+literalSampleSineEvaluationInputsLevel : ProofLevel
+literalSampleSineEvaluationInputsLevel = Sample.literalSampleSineEvaluationInputsLevel
 
 literalConfiguredRemainderDominationInputsLevel : ProofLevel
 literalConfiguredRemainderDominationInputsLevel =
