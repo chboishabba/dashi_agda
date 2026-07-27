@@ -32,14 +32,14 @@ module DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEightStageProgram where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-open import DASHI.Physics.Closure.NSTriadKNQuarticAnalyticFiniteSums public
-open import DASHI.Physics.Closure.NSTriadKNQuarticLiteralGalerkinDerivative public
-open import DASHI.Physics.Closure.NSTriadKNPeriodicUniformHarmonicAnalysis public
-open import DASHI.Physics.Closure.NSTriadKNQuarticSignedNearFarDecomposition public
-open import DASHI.Physics.Closure.NSTriadKNQuarticJointDominationFrontier public
-open import DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticInvariantRegion public
-open import DASHI.Physics.Closure.NSTriadKNQuarticBKMExpenditure public
-open import DASHI.Physics.Closure.NSTriadKNQuarticStandardEndpoint public
+import DASHI.Physics.Closure.NSTriadKNQuarticAnalyticFiniteSums as Stage1
+import DASHI.Physics.Closure.NSTriadKNQuarticLiteralGalerkinDerivative as Stage2
+import DASHI.Physics.Closure.NSTriadKNPeriodicUniformHarmonicAnalysis as Stage3
+import DASHI.Physics.Closure.NSTriadKNQuarticSignedNearFarDecomposition as Stage4
+import DASHI.Physics.Closure.NSTriadKNQuarticJointDominationFrontier as Stage5
+import DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticInvariantRegion as Stage6
+import DASHI.Physics.Closure.NSTriadKNQuarticBKMExpenditure as Stage7
+import DASHI.Physics.Closure.NSTriadKNQuarticStandardEndpoint as Stage8
 
 allEightStagesRepresented : Bool
 allEightStagesRepresented = true
