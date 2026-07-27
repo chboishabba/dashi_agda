@@ -4,19 +4,20 @@ module DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork where
 -- PROVENANCE
 -- Authors: DASHI repository contributors.
 -- Title: "Exact helical, coherence, and Stage-3 three-function harmonic
--- analysis decision fork with remaining analytic cutset".
+-- analysis decision fork with symmetric-companion rank audit".
 -- Venue/year: DASHI formal development, 2026.
 -- DOI: not applicable; this is a DASHI-original dependency theorem.
 -- Uses: the global/scalar-helicity counterexamples, projected-axis matrix
 -- reconnaissance, Constantin--Fefferman direction-coherence interface,
--- triad-direction diagnostics, Kiriukhin raw-row theorem,
--- Grafakos--Torres three-function Schur, the frozen-output linear
+-- triad-direction diagnostics, Kiriukhin raw-row and symmetric-stretching
+-- theorems, Grafakos--Torres three-function Schur, the frozen-output linear
 -- specialization, paraproduct partial adjoints, and the fail-closed Permana
 -- audit.
 -- Relationship: keeps candidate-selection decisions separate from harmonic
--- strategy decisions.  The raw row theorem supplies one output-side
--- condition only; both partial adjoints and the three-weight exponent
--- system remain open.
+-- strategy decisions.  The raw row theorem supplies one output-side condition.
+-- The symmetric companion controls orbit-level enstrophy growth but adds no
+-- independent raw partial-adjoint exponent equation, so both adjoints remain
+-- open.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -31,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNMatrixCoherenceExactReconnaissance as Matr
 import DASHI.Physics.Closure.NSTriadKNTriadDirectionAlignmentProgram as Direction
 import DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit as Permana
 import DASHI.Physics.Closure.NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance as SchurFinite
+import DASHI.Physics.Closure.NSTriadKNKiriukhinSymmetricStretchingCompanionAudit as Symmetric
 import DASHI.Physics.Closure.NSTriadKNTriadicDyadicExponentSystem as Exponents
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3Schur
 
@@ -94,12 +96,15 @@ finiteDecisionReceipt =
 
 data HarmonicRoute : Set where
   rawOrbitRow
+  symmetricOrbitStretching
   grafakosTorresThreeFunction
   frozenOutputTwoFunction
   paraproductPartialAdjoints : HarmonicRoute
 
 data HarmonicRouteDecision : HarmonicRoute → Set where
   rawRowLiteratureBacked : HarmonicRouteDecision rawOrbitRow
+  symmetricStretchingRetainedForContinuation :
+    HarmonicRouteDecision symmetricOrbitStretching
   threeFunctionPromotedAsPrimary :
     HarmonicRouteDecision grafakosTorresThreeFunction
   twoFunctionRetainedAsSpecialization :
@@ -109,6 +114,10 @@ data HarmonicRouteDecision : HarmonicRoute → Set where
 
 rawOrbitRowDecision : HarmonicRouteDecision rawOrbitRow
 rawOrbitRowDecision = rawRowLiteratureBacked
+
+symmetricStretchingDecision :
+  HarmonicRouteDecision symmetricOrbitStretching
+symmetricStretchingDecision = symmetricStretchingRetainedForContinuation
 
 threeFunctionDecision :
   HarmonicRouteDecision grafakosTorresThreeFunction
@@ -127,12 +136,17 @@ record Stage3DecisionReceipt : Set where
   field
     rawRowSourceAvailable :
       Stage3Schur.kiriukhinRawRowLiteratureBacked ≡ true
+    symmetricStretchingSourceAvailable :
+      Stage3Schur.kiriukhinSymmetricStretchingLiteratureBacked ≡ true
+    symmetricCompanionDoesNotReduceNullity :
+      Stage3Schur.symmetricCompanionReducesTriadicNullity ≡ false
     threeFunctionFrameworkPrimary :
       Stage3Schur.threeFunctionSchurPrimary ≡ true
     twoFunctionIsSpecialization :
       Stage3Schur.twoFunctionSchurIsFrozenOutputSpecialization ≡ true
     rowOnlyDoesNotDetermineThreeWeights :
       Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeights ≡ false
+    symmetricRankAudit : Symmetric.SymmetricCompanionRankAudit
     sourceExponentReceipt :
       Exponents.GrafakosTorresSourceExponentReceipt
     finiteWeightEvidence : SchurFinite.WeightedSchurFiniteReceipt
@@ -143,9 +157,12 @@ stage3DecisionReceipt : Stage3DecisionReceipt
 stage3DecisionReceipt =
   stage3-decision-receipt
     Stage3Schur.kiriukhinRawRowLiteratureBackedIsTrue
+    Stage3Schur.kiriukhinSymmetricStretchingLiteratureBackedIsTrue
+    Stage3Schur.symmetricCompanionReducesTriadicNullityIsFalse
     Stage3Schur.threeFunctionSchurPrimaryIsTrue
     Stage3Schur.twoFunctionSchurIsFrozenOutputSpecializationIsTrue
     Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeightsIsFalse
+    Symmetric.symmetricCompanionRankAudit
     Exponents.grafakosTorresSourceExponentReceipt
     SchurFinite.weightedSchurFiniteReceipt
 
@@ -158,6 +175,8 @@ record DirectionCoherenceResearchCutset
 
     kiriukhinRawKernelIdentified : Set s
     kiriukhinConventionAdapterClosed : Set s
+    symmetricStretchingAdapterClosed : Set s
+    symmetricContinuationBridgeClosed : Set s
     orbitToDyadicShellBridgeClosed : Set s
     finiteHelicityRowLiftClosed : Set s
     boundedDirectionWeightRowLiftClosed : Set s
