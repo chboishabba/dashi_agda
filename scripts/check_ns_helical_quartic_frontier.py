@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the helical, coherence, and Stage-3 weighted-Schur tranche."""
+"""Fail closed on the helical, coherence, and Stage-3 Schur tranche."""
 
 from __future__ import annotations
 
@@ -29,7 +29,9 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNOrbitToDyadicShellBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNFiniteHelicityRowLifting.agda",
     "DASHI/Physics/Closure/NSTriadKNWeightedSchurDualityProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresThreeFunctionSchurProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNMultilinearSchurParaproductProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNTriadicDyadicExponentSystem.agda",
     "DASHI/Physics/Closure/NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3KiriukhinWeightedSchurProgram.agda",
 ]
@@ -100,6 +102,7 @@ def main() -> int:
         ("scripts/ns_quartic_matrix_coherence_reconnaissance.py", "off-diagonal matrix-coherence verifier"),
         ("scripts/ns_quartic_direction_coherence_audit.py", "direction-coherence and Permana audit verifier"),
         ("scripts/ns_kiriukhin_weighted_schur_reconnaissance.py", "Kiriukhin weighted-Schur reconnaissance verifier"),
+        ("scripts/ns_grafakos_torres_exponent_reconnaissance.py", "Grafakos--Torres exponent and rank verifier"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -112,7 +115,7 @@ def main() -> int:
     print(
         f"checked {len(FILES)} helical/coherence/Stage-3 files: no holes or "
         "postulates; global, localized, matrix, direction, manuscript-audit, "
-        "and weighted-Schur exact verifiers passed"
+        "weighted-Schur, and three-function exponent verifiers passed"
     )
     return 0
 
