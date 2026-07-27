@@ -53,12 +53,24 @@ zenodoMassGapClaim = quarantined
   "Harold D. Kirk"
   "From Lattice Mass Gap to Continuum SU(2) Yang--Mills"
   "Zenodo"
-  "record 18824739"
+  "10.5281/zenodo.18824739"
   "Repository deposit; no peer-reviewed status established by the audit"
   quarantinedCompletionClaim
   false
   "Claims completion of continuum/OS/mass-gap steps of an open Millennium problem"
   "May be inspected as an unreviewed candidate, never imported as an authority"
+
+zenodoMassGapNontrivialityCandidate : QuarantinedClaim
+zenodoMassGapNontrivialityCandidate = quarantined
+  "Harold D. Kirk"
+  "Mass Gap and Nontriviality for Four-Dimensional Yang--Mills via Lattice Coercivity and a Symmetry-Forced Haar Measure"
+  "Zenodo preprint, version 2.0, 16 April 2026"
+  "10.5281/zenodo.19614728"
+  "Self-published repository preprint; the record itself states that uniqueness is not claimed and that BRST extension is discussed but not verified"
+  quarantinedCompletionClaim
+  false
+  "Claims OS axioms, O(4) invariance, positive mass gap and non-Gaussianity for an unreviewed candidate addressing Clay requirements"
+  "Specific lattice inequalities may enter only as independently reconstructed falsification targets"
 
 vixraErikssonCorpus : QuarantinedClaim
 vixraErikssonCorpus = quarantined
@@ -124,6 +136,7 @@ quarantinedCompletionClaims : List QuarantinedClaim
 quarantinedCompletionClaims =
   yangmillsDevClaim ∷
   zenodoMassGapClaim ∷
+  zenodoMassGapNontrivialityCandidate ∷
   vixraErikssonCorpus ∷
   preprintsOrgCompletionClaims ∷
   academiaEduCompletionClaims ∷
