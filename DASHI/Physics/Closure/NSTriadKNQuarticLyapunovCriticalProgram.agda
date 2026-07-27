@@ -22,7 +22,6 @@ open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovDegreeAudit public
 open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEulerInvariantDecomposition public
 open import DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticCoherenceCharts public
 open import DASHI.Physics.Closure.NSTriadKNPeriodicStokesModeDegeneracy public
-open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEightStageProgram public
 
 ------------------------------------------------------------------------
 -- Fail-closed research socket for the periodic 3-D problem.
