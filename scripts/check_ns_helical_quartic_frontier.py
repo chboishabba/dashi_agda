@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the helical quartic candidate and reconnaissance tranche."""
+"""Fail closed on the helical, matrix, and direction-coherence tranche."""
 
 from __future__ import annotations
 
@@ -18,6 +18,12 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNLocalizedHelicityExactReconnaissance.agda",
     "DASHI/Physics/Closure/NSTriadKNFixedSymbolBalancedFamilyReconnaissance.agda",
     "DASHI/Physics/Closure/NSTriadKNTriadPhaseCoherenceFallback.agda",
+    "DASHI/Physics/Closure/NSTriadKNOffDiagonalReflectionMatrixCandidate.agda",
+    "DASHI/Physics/Closure/NSTriadKNMatrixCoherenceExactReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstantinFeffermanDirectionCoherenceProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNTriadDirectionAlignmentProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNPermanaAlignmentRateAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNObjectiveVortexCriteriaScopeAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNHelicalCandidateDecisionFork.agda",
 ]
 
@@ -71,32 +77,21 @@ def main() -> int:
                 failures.append(f"{relative}: forbidden marker {marker!r}")
         for opening, closing in (("(", ")"), ("{", "}")):
             if text.count(opening) != text.count(closing):
-                failures.append(
-                    f"{relative}: unbalanced {opening}{closing} delimiters"
-                )
+                failures.append(f"{relative}: unbalanced {opening}{closing} delimiters")
         for marker in PROVENANCE_MARKERS:
             if marker not in text:
-                failures.append(
-                    f"{relative}: missing provenance marker {marker!r}"
-                )
+                failures.append(f"{relative}: missing provenance marker {marker!r}")
         if "-- Authors:" not in text and "-- Author:" not in text:
             failures.append(f"{relative}: missing provenance author")
         if "-- DOI:" not in text:
             failures.append(f"{relative}: missing DOI status")
 
     for relative, label in (
-        (
-            "scripts/ns_quartic_helicity_perturbed_counterexample.py",
-            "global-helicity exact verifier",
-        ),
-        (
-            "scripts/ns_quartic_localized_helicity_reconnaissance.py",
-            "localized-helicity reconnaissance verifier",
-        ),
-        (
-            "scripts/ns_quartic_localized_helicity_extended_family.py",
-            "extended localized-helicity family verifier",
-        ),
+        ("scripts/ns_quartic_helicity_perturbed_counterexample.py", "global-helicity exact verifier"),
+        ("scripts/ns_quartic_localized_helicity_reconnaissance.py", "localized-helicity reconnaissance verifier"),
+        ("scripts/ns_quartic_localized_helicity_extended_family.py", "extended localized-helicity family verifier"),
+        ("scripts/ns_quartic_matrix_coherence_reconnaissance.py", "off-diagonal matrix-coherence verifier"),
+        ("scripts/ns_quartic_direction_coherence_audit.py", "direction-coherence and Permana audit verifier"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -107,8 +102,9 @@ def main() -> int:
         return 1
 
     print(
-        f"checked {len(FILES)} helical quartic files: no holes or postulates; "
-        "global, localized, and extended-family exact verifiers passed"
+        f"checked {len(FILES)} helical/matrix/direction files: no holes or "
+        "postulates; global, localized, matrix, direction, and manuscript-audit "
+        "exact verifiers passed"
     )
     return 0
 
