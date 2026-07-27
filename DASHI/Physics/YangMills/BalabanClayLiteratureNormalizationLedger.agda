@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayLiteratureNormalizationLedger where
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT2ClusterCriterionComparisonExact
+import DASHI.Physics.YangMills.BalabanClayT2EightWayFernandezProcacciExact
 import DASHI.Physics.YangMills.BalabanClayT3OperatorSchurComplementExact
 import DASHI.Physics.YangMills.BalabanClayT3UniformFluctuationSchurExact
 import DASHI.Physics.YangMills.BalabanClayT4BetaNormalizationConventionExact
@@ -26,6 +27,15 @@ extendedGruberKunzIdentificationSurfaceLevel = machineChecked
 
 absoluteActivitySignConventionLevel : ProofLevel
 absoluteActivitySignConventionLevel = machineChecked
+
+eightWayFPCliqueArithmeticLevel : ProofLevel
+eightWayFPCliqueArithmeticLevel = machineChecked
+
+oneSixteenthToOneTwelfthFPSlackLevel : ProofLevel
+oneSixteenthToOneTwelfthFPSlackLevel = machineChecked
+
+rootedShellVersusFPConvergenceSeparationLevel : ProofLevel
+rootedShellVersusFPConvergenceSeparationLevel = machineChecked
 
 operatorSchurAlgebraLevel : ProofLevel
 operatorSchurAlgebraLevel = machineChecked
@@ -59,6 +69,9 @@ osReflectionSequentialClosednessLevel = machineChecked
 
 literalCriterionMajorantIdentificationLevel : ProofLevel
 literalCriterionMajorantIdentificationLevel = conditional
+
+literalEightExtensionCliqueGeometryLevel : ProofLevel
+literalEightExtensionCliqueGeometryLevel = conditional
 
 literalUniformFluctuationCoercivityLevel : ProofLevel
 literalUniformFluctuationCoercivityLevel = conditional
