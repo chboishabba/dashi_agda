@@ -278,23 +278,60 @@ record RubikMove (rank depth : Nat) : Set₁ where
       ≡ baseMove (projectLiftedAddress x)
 
 ------------------------------------------------------------------------
--- Centre-blind data descends to the base; centre-sensitive data remains on
--- the lifted carrier.
+-- Centre-blind data descends to the base only with an invariance proof;
+-- centre-sensitive data remains unrestricted on the lifted carrier.
 ------------------------------------------------------------------------
 
 data CentreVisibility : Set where
   centreBlind : CentreVisibility
   centreSensitive : CentreVisibility
 
-record LiftedField (rank depth : Nat) (Value : Set) : Set₁ where
-  field
-    value : LiftedAddress rank depth → Value
-    visibility : CentreVisibility
-
 record CentreBlindField (rank depth : Nat) (Value : Set) : Set₁ where
   field
-    value : LiftedAddress rank depth → Value
-    centralFlipInvisible : ∀ x → value (centralFlip x) ≡ value x
+    blindValue : LiftedAddress rank depth → Value
+    centralFlipInvisible :
+      ∀ x → blindValue (centralFlip x) ≡ blindValue x
+
+record CentreSensitiveField (rank depth : Nat) (Value : Set) : Set₁ where
+  field
+    sensitiveValue : LiftedAddress rank depth → Value
+
+data LiftedField (rank depth : Nat) (Value : Set) : Set₁ where
+  centre-blind-field :
+    CentreBlindField rank depth Value →
+    LiftedField rank depth Value
+
+  centre-sensitive-field :
+    CentreSensitiveField rank depth Value →
+    LiftedField rank depth Value
+
+liftedFieldVisibility :
+  ∀ {rank depth Value} →
+  LiftedField rank depth Value →
+  CentreVisibility
+liftedFieldVisibility (centre-blind-field field) = centreBlind
+liftedFieldVisibility (centre-sensitive-field field) = centreSensitive
+
+liftedFieldValue :
+  ∀ {rank depth Value} →
+  LiftedField rank depth Value →
+  LiftedAddress rank depth →
+  Value
+liftedFieldValue (centre-blind-field field) =
+  CentreBlindField.blindValue field
+liftedFieldValue (centre-sensitive-field field) =
+  CentreSensitiveField.sensitiveValue field
+
+centreBlindFieldCarriesInvariance :
+  ∀ {rank depth Value}
+    (field : LiftedField rank depth Value) →
+  liftedFieldVisibility field ≡ centreBlind →
+  ∀ x →
+  liftedFieldValue field (centralFlip x)
+  ≡ liftedFieldValue field x
+centreBlindFieldCarriesInvariance (centre-blind-field field) refl =
+  CentreBlindField.centralFlipInvisible field
+centreBlindFieldCarriesInvariance (centre-sensitive-field field) ()
 
 ------------------------------------------------------------------------
 -- Boundary receipt.
@@ -307,6 +344,7 @@ record HypervoxelAuthorityBoundary : Set where
     cubieAndCubeAreAbsoluteRolesClaimed : Bool
     aggregationLawIsDomainIndependentClaimed : Bool
     baseAndFibreAreExplicit : Bool
+    centreBlindRequiresInvarianceProof : Bool
 
 canonicalHypervoxelAuthorityBoundary : HypervoxelAuthorityBoundary
 canonicalHypervoxelAuthorityBoundary = record
@@ -315,8 +353,9 @@ canonicalHypervoxelAuthorityBoundary = record
   ; cubieAndCubeAreAbsoluteRolesClaimed = false
   ; aggregationLawIsDomainIndependentClaimed = false
   ; baseAndFibreAreExplicit = true
+  ; centreBlindRequiresInvarianceProof = true
   }
 
 hypervoxelSummary : String
 hypervoxelSummary =
-  "Rank gives the local 3^rank shape; depth gives recursive subvoxel refinement; a binary lift is a fibre over every address, and configuration recursion is distinct from spatial refinement."
+  "Rank gives the local 3^rank shape; depth gives recursive subvoxel refinement; a binary lift is a fibre over every address, centre-blind descent is proof-carrying, and configuration recursion is distinct from spatial refinement."
