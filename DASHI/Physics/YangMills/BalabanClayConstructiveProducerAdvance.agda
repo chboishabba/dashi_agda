@@ -1,8 +1,9 @@
 module DASHI.Physics.YangMills.BalabanClayConstructiveProducerAdvance where
 
 import DASHI.Physics.YangMills.BalabanClayP1PicardBackgroundConstructionExact
-import DASHI.Physics.YangMills.BalabanClayP1CommonAnalyticContractionExact
+import DASHI.Physics.YangMills.BalabanClayT1CommonAnalyticContractionExact
 import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact
+import DASHI.Physics.YangMills.BalabanClayT2WilsonActivityFactorProductExact
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact
 import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact
