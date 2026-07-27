@@ -78,7 +78,7 @@ canonicalCoordinateRows =
     { coordinate = transitionT
     ; slot = Control.governanceSlot
     ; slotMatches = refl
-    ; responsibility = "evaluation-preserving transition plus admissibility gate"
+    ; responsibility = "target-correct, evaluation-preserving transition plus admissibility gate"
     ; authorityPromoted = false
     }
   ∷ record
@@ -114,23 +114,6 @@ framedDynamicRowReceipt =
     refl refl refl refl refl refl
     refl refl refl refl refl
 
-bottomInterpretiveArrowRequirement :
-  Bridge.BridgeRequirementRow
-bottomInterpretiveArrowRequirement =
-  Bridge.canonicalBridgeRequirementRow
-    "finite residue orbit"
-    "domain-qualified Stage interpretation"
-    Bridge.bridgeSuppliedCandidateOnly
-    true
-    true
-    true
-
-bottomInterpretiveArrowRequirementReceipt :
-  Bridge.BridgeRequirementRowReceipt
-    bottomInterpretiveArrowRequirement
-bottomInterpretiveArrowRequirementReceipt =
-  Bridge.bridgeRequirementRowReceipt refl refl refl
-
 record FramedORCSLPGFAdapter : Set₁ where
   field
     CoordinateValue : Set
@@ -140,7 +123,7 @@ record FramedORCSLPGFAdapter : Set₁ where
     frameObject :
       Representation.FramedScaleValuationObject
         Representation.RatioRepresentation
-        Representation.HalfPresentation
+        CanonicalFrame.ChartedHalfRepresentation
         Representation.PresentationChart
         Nat
         Nat
@@ -161,8 +144,16 @@ canonicalFramedORCSLPGFAdapter = record
   ; frameObject = CanonicalFrame.canonicalHalfFrameScaleValuation
   ; controlRow = framedDynamicRow
   ; controlReceipt = framedDynamicRowReceipt
-  ; interpretationBridge = bottomInterpretiveArrowRequirement
-  ; interpretationBridgeReceipt = bottomInterpretiveArrowRequirementReceipt
+  ; interpretationBridge =
+      Bridge.canonicalBridgeRequirementRow
+        "finite residue orbit"
+        "domain-qualified Stage interpretation"
+        Bridge.bridgeSuppliedCandidateOnly
+        true
+        true
+        true
+  ; interpretationBridgeReceipt =
+      Bridge.bridgeRequirementRowReceipt refl refl refl
   ; transitionCannotBypassGovernance = true
   ; promotedByAdapter = false
   }
