@@ -119,7 +119,7 @@ basisYRealProbe {F = F} (C3.complex3 vx vy vz)
         | Hermitian.complexMultiplyZeroLeft vx
         | Hermitian.complexMultiplyOneLeft vy
         | Hermitian.complexMultiplyZeroLeft vz
-        | C3.addZeroLeft F vy
+        | Algebra.complexAddZeroLeft vy
         | Algebra.complexAddZeroRight vy = refl
 
 basisZRealProbe :
@@ -132,8 +132,8 @@ basisZRealProbe {F = F} (C3.complex3 vx vy vz)
         | Hermitian.complexMultiplyZeroLeft vx
         | Hermitian.complexMultiplyZeroLeft vy
         | Hermitian.complexMultiplyOneLeft vz
-        | C3.addZeroLeft F (C3.complexZero F)
-        | C3.addZeroLeft F vz = refl
+        | Algebra.complexAddZeroLeft (C3.complexZero F)
+        | Algebra.complexAddZeroLeft vz = refl
 
 imaginaryBasisXRealProbe :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
@@ -157,7 +157,7 @@ imaginaryBasisYRealProbe {F = F} (C3.complex3 vx vy vz)
         | complexConjugateIIsMinusI F
         | Hermitian.complexMultiplyZeroLeft vx
         | Hermitian.complexMultiplyZeroLeft vz
-        | C3.addZeroLeft F
+        | Algebra.complexAddZeroLeft
             (C3.complexMultiply (C3.complexNegate (C3.complexI F)) vy)
         | Algebra.complexAddZeroRight
             (C3.complexMultiply (C3.complexNegate (C3.complexI F)) vy)
@@ -172,8 +172,8 @@ imaginaryBasisZRealProbe {F = F} (C3.complex3 vx vy vz)
         | complexConjugateIIsMinusI F
         | Hermitian.complexMultiplyZeroLeft vx
         | Hermitian.complexMultiplyZeroLeft vy
-        | C3.addZeroLeft F (C3.complexZero F)
-        | C3.addZeroLeft F
+        | Algebra.complexAddZeroLeft (C3.complexZero F)
+        | Algebra.complexAddZeroLeft
             (C3.complexMultiply (C3.complexNegate (C3.complexI F)) vz)
         | complexRealPartMinusIMultiply vz = refl
 
