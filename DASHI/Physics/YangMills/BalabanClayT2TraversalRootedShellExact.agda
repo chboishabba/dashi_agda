@@ -20,10 +20,10 @@ import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as P2
 -- Communications in Mathematical Physics 103 (1986), 491--498.
 -- DOI: 10.1007/BF01211762
 --
--- This module certifies the conservative KP lane.  The distinct
--- Fernández--Procacci and interpolating criteria, and the valid dominance
--- directions between their neighbourhood majorants, are formalized in
--- BalabanClayT2ClusterCriterionComparisonExact.
+-- This module certifies the conservative KP lane.  The distinct Dobrushin,
+-- Fernández--Procacci and extended Gruber--Kunz lanes, together with the valid
+-- implication directions between their neighbourhood majorants, are formalized
+-- in BalabanClayT2ClusterCriterionComparisonExact.
 --
 -- A rooted trace has at most eight signed one-step extensions in four
 -- dimensions.  If the absolute activity carried by each extension is at most
@@ -31,6 +31,10 @@ import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as P2
 -- Together with the root normalization 1/4 this produces exactly
 --
 --   rootedShell n <= (1/4) 2^{-n}.
+--
+-- Order discipline: monotonicity is required only for multiplication by the
+-- two fixed positive constants 8 and 1/2.  No false arbitrary-rational
+-- multiplication law is admitted.
 ------------------------------------------------------------------------
 
 eight oneSixteenth quarter : ℚ
@@ -52,8 +56,11 @@ record TraversalShellData (Scale Volume Root : Set) : Set₁ where
     addMonotone : ∀ {left leftUpper right rightUpper} →
       left ≤ leftUpper → right ≤ rightUpper →
       left + right ≤ leftUpper + rightUpper
-    multiplyMonotoneLeft : ∀ prefix {left right} →
-      left ≤ right → prefix * left ≤ prefix * right
+
+    multiplyByEightMonotone : ∀ {left right} →
+      left ≤ right → eight * left ≤ eight * right
+    multiplyByHalfMonotone : ∀ {left right} →
+      left ≤ right → half * left ≤ half * right
 
     rootNormalization : ∀ scale volume root →
       rootedShell scale volume root zero ≤ quarter
@@ -83,7 +90,7 @@ oneTraversalStepBelowHalf dataSet scale volume root depth =
     (transitive dataSet
       (atMostEightExtensions dataSet scale volume root depth)
       (transitive dataSet
-        (multiplyMonotoneLeft dataSet eight
+        (multiplyByEightMonotone dataSet
           (activityPerExtensionBelowOneSixteenth dataSet scale volume root depth))
         (subst
           (λ upper →
@@ -113,7 +120,7 @@ rootedShellBelowQuarterHalfPower dataSet scale volume root (suc depth) =
     (ℚRing.solve-∀ (halfPower depth))
     (transitive dataSet
       (oneTraversalStepBelowHalf dataSet scale volume root depth)
-      (multiplyMonotoneLeft dataSet half
+      (multiplyByHalfMonotone dataSet
         (rootedShellBelowQuarterHalfPower dataSet scale volume root depth)))
 
 asUniformRootedShellBound :
@@ -150,6 +157,9 @@ rootedShellToFiniteKoteckyPreissLevel = machineChecked
 
 rootedTraversalCriterionIsKPLevel : ProofLevel
 rootedTraversalCriterionIsKPLevel = machineChecked
+
+rootedShellPositiveMultiplierDisciplineLevel : ProofLevel
+rootedShellPositiveMultiplierDisciplineLevel = machineChecked
 
 -- What remains physical is now sharply one statement: derive the 1/16 extension
 -- activity from the Wilson action, Haar Jacobian, determinant, BCH, localization,
