@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Fail-closed textual audit for the explicit P1--P5 Yang--Mills frontier.
 
-The script checks declaration integrity and the honesty ledger.  It does not
-replace the Agda kernel.  The configured Green closure is delegated to its own
+The script checks declaration integrity and the honesty ledger. It does not
+replace the Agda kernel. The configured Green closure is delegated to its own
 stricter audit so the finite inverse and analytic producer cuts cannot drift.
 """
 
@@ -72,6 +72,12 @@ FILES: dict[Path, tuple[str, ...]] = {
         "badBlockMeasurable",
         "p2LiteralWilsonBadPredicateInstantiationLevel = conditional",
     ),
+    YM / "BalabanClayT2WilsonActivityFactorProductExact.agda": (
+        "WilsonTraversalActivityFactors",
+        "physicalProductBelowCertifiedProduct",
+        "wilsonActivityPerTraversalBelowOneSixteenth",
+        "literalWilsonSixFactorBoundsLevel = conditional",
+    ),
     YM / "BalabanClayT2TraversalRootedShellExact.agda": (
         "eightTimesOneSixteenthIsHalf",
         "activityPerExtensionBelowOneSixteenth",
@@ -120,6 +126,13 @@ FILES: dict[Path, tuple[str, ...]] = {
         "constrainedHaarGaugeInvariant",
         "haarEffectiveActionDefinesIntegral",
         "productHaarQuadratureIdentificationLevel = conditional",
+    ),
+    YM / "BalabanClayT3OperatorSchurComplementExact.agda": (
+        "OperatorSchurData",
+        "schurHessian",
+        "operatorSchurEnergyExact",
+        "operatorExactSchurComplement",
+        "physicalFluctuationSchurInputsLevel = conditional",
     ),
     YM / "BalabanClayT3SchurWardBetaExact.agda": (
         "scalarSchurDefectIdentity",
@@ -181,9 +194,11 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
     YM / "BalabanClayConstructiveProducerAdvance.agda": (
         "BalabanClayT1CommonAnalyticContractionExact",
+        "BalabanClayT2WilsonActivityFactorProductExact",
         "BalabanClayT2TraversalRootedShellExact",
         "BalabanClayT2UrsellCauchyExact",
         "BalabanClayT3CompactHaarLimitExact",
+        "BalabanClayT3OperatorSchurComplementExact",
         "BalabanClayT3SchurWardBetaExact",
         "BalabanClayT4CanonicalScalarWitnessExact",
         "BalabanClayT5PhysicalMassTransportExact",
@@ -193,9 +208,12 @@ FILES: dict[Path, tuple[str, ...]] = {
         "configuredMatrixActionLinearityLevel = machineChecked",
         "constructiveConfiguredFiniteInverseLevel = machineChecked",
         "t1CommonAnalyticContractionLevel = machineChecked",
+        "t2WilsonActivityOneSixteenthLevel = machineChecked",
         "t2RootedShellQuarterHalfPowerLevel = machineChecked",
         "t2UrsellCauchyModulusLevel = machineChecked",
         "t3CompactHaarLimitAlgebraLevel = machineChecked",
+        "t3OperatorSchurEnergyIdentityLevel = machineChecked",
+        "t3OperatorSchurP3AdapterLevel = machineChecked",
         "t3QuarticBetaRemainderSummabilityLevel = machineChecked",
         "p4CanonicalScalarIntersectionLevel = machineChecked",
         "p5PhysicalMassInterlacingLevel = machineChecked",
@@ -241,13 +259,14 @@ def main() -> None:
     )
 
     print(
-        "The frontier branch now derives common-norm contraction/self-map, the "
-        "exact 8/16 rooted-shell decay, an Ursell Cauchy modulus and connected "
-        "correlation tail, compact-Haar limit algebra, scalar Schur signs, exact "
-        "gauge reindexing, quartic beta-remainder summability, one common scalar "
-        "margin tuple, finite physical-mass interlacing, OS-property limit closure "
-        "and fourth-cumulant nontriviality. Literal Wilson/Haar identifications "
-        "remain explicit conditional producers; no kernel receipt is fabricated."
+        "The frontier branch now derives common-norm contraction/self-map, "
+        "the six-factor Wilson activity product, exact 8/16 rooted-shell decay, "
+        "an Ursell Cauchy modulus and correlation tail, compact-Haar limit "
+        "algebra, scalar and operator Schur identities, exact gauge reindexing, "
+        "quartic beta-remainder summability, one common scalar margin tuple, "
+        "physical-mass interlacing, OS-property limit closure and fourth-"
+        "cumulant nontriviality. Literal Wilson/Haar identifications remain "
+        "explicit conditional producers; no kernel receipt is fabricated."
     )
 
 
