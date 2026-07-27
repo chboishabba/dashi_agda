@@ -121,7 +121,7 @@ goswamiVariational = source
   "The Variational Problem and Background Field in the Renormalization Group Method for Nonlinear Sigma Models"
   "Annales Henri Poincaré 25 (2024), 2065--2085"
   "10.1007/s00023-023-01353-7"
-  ""
+  "arXiv:2204.08252"
   "single-scale nonlinear-sigma variational construction"
   "modern explanatory analogue; not the source of arXiv:2403.09800"
 
@@ -134,6 +134,76 @@ dybalskiStottmeisterTanimoto = source
   "arXiv:2403.09800v1"
   "Sections 3--4 and Appendix A; critical equation, positivity and random-walk Green bounds"
   "modern explanatory analogue; model-specific Yang--Mills estimates remain DASHI obligations"
+
+barfootStateEstimation : LiteratureSource
+barfootStateEstimation = source
+  "Timothy D. Barfoot"
+  "State Estimation for Robotics"
+  "Cambridge University Press (2017)"
+  "10.1017/9781316671528"
+  ""
+  "SO(3) exponential, left/right Jacobians and inverse formulas"
+  "convention calibration for the literal chart singular-value proof"
+
+hallLieGroups : LiteratureSource
+hallLieGroups = source
+  "Brian C. Hall"
+  "Lie Groups, Lie Algebras, and Representations: An Elementary Introduction"
+  "Second edition, Springer (2015)"
+  "10.1007/978-3-319-13467-3"
+  ""
+  "finite-dimensional exponential and adjoint identities"
+  "general Lie-theoretic calibration; SU(2) constants are derived separately"
+
+simonTraceIdeals : LiteratureSource
+simonTraceIdeals = source
+  "Barry Simon"
+  "Trace Ideals and Their Applications"
+  "Second edition, American Mathematical Society (2005)"
+  "10.1090/surv/120"
+  ""
+  "trace ideals, determinants and trace-log bounds"
+  "operator-theoretic architecture for the localized determinant lane"
+
+blanesCasasOteoRos1998 : LiteratureSource
+blanesCasasOteoRos1998 = source
+  "Sergio Blanes, Fernando Casas, José A. Oteo and José Ros"
+  "Magnus and Fer Expansions for Matrix Differential Equations: The Convergence Problem"
+  "Journal of Physics A: Mathematical and General 31 (1998), 259--268"
+  "10.1088/0305-4470/31/1/023"
+  ""
+  "explicit convergence and truncation-error estimates"
+  "generic Magnus/BCH sanity check; not the sharp SU(2) quaternion owner"
+
+blanesCasas2004 : LiteratureSource
+blanesCasas2004 = source
+  "Sergio Blanes and Fernando Casas"
+  "On the Convergence and Optimization of the Baker--Campbell--Hausdorff Formula"
+  "Linear Algebra and its Applications 378 (2004), 135--158"
+  "10.1016/j.laa.2003.09.010"
+  ""
+  "BCH convergence domains and optimized truncations"
+  "generic comparison radius for the plaquette logarithm"
+
+blanesCasasOteoRos2009 : LiteratureSource
+blanesCasasOteoRos2009 = source
+  "Sergio Blanes, Fernando Casas, José A. Oteo and José Ros"
+  "The Magnus Expansion and Some of Its Applications"
+  "Physics Reports 470 (2009), 151--238"
+  "10.1016/j.physrep.2008.11.001"
+  ""
+  "review of convergence, effective exponentials and applications"
+  "expository and comparison source only"
+
+deyLonigroYuasaBurgarth : LiteratureSource
+deyLonigroYuasaBurgarth = source
+  "Anirban Dey, Davide Lonigro, Kazuya Yuasa and Daniel Burgarth"
+  "Error Bounds for the Floquet--Magnus Expansion and Their Application to the Semiclassical Quantum Rabi Model"
+  "Physical Review A 112 (2025), 053723"
+  "10.1103/6bgj-s987"
+  "arXiv:2504.20533"
+  "explicit finite-order effective-dynamics error bounds"
+  "recent comparison source; not imported into the SU(2) plaquette proof"
 
 koteckyPreiss : LiteratureSource
 koteckyPreiss = source
@@ -208,6 +278,13 @@ verifiedLiteralFrontierSources =
   dashenGross ∷
   goswamiVariational ∷
   dybalskiStottmeisterTanimoto ∷
+  barfootStateEstimation ∷
+  hallLieGroups ∷
+  simonTraceIdeals ∷
+  blanesCasasOteoRos1998 ∷
+  blanesCasas2004 ∷
+  blanesCasasOteoRos2009 ∷
+  deyLonigroYuasaBurgarth ∷
   koteckyPreiss ∷
   fernandezProcacci ∷
   bissacotFernandezProcacci ∷
