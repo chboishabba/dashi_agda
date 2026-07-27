@@ -78,6 +78,9 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNFirstAdjointCutoffUniformAssembly.agda",
     "DASHI/Physics/Closure/NSTriadKNGrafakosOhDiagonalConvolutionAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNDAnconaCommutatorFallbackAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNComponentAffineConstraintLedger.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresComponentAssembly.agda",
+    "DASHI/Physics/Closure/NSTriadKNFinalCutoffUniformDualBoundAssembly.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OrderedL2AnalyticIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3OrderedL2Bridge.agda",
 ]
