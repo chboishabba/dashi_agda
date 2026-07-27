@@ -1,9 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -37,47 +35,46 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 -- DOI: 10.1007/BF01221251
 -- Relationship: finite-cutoff Wilson reflection-positivity input.
 --
--- DASHI-original contribution: the records below isolate the physical cluster
--- tail, diagonal-limit, exponential-moment and uniform-integrability leaves and
--- derive the legacy expectation-convergence fields from those leaves.  No
--- pointwise-correlator shortcut is used for OS positivity.
+-- DASHI-original contribution: quantitative crossing-cluster and multiscale
+-- tails are converted into staged and diagonal expectation convergence; a
+-- uniform exponential moment is converted into polynomial moments and an
+-- explicit uniform-integrability witness.  The legacy T5 expectation fields are
+-- constructed by the final adapter and are no longer primitive physical inputs.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
--- A generic tail-controlled convergence producer.
---
--- The physical input is a quantitative difference bound and a vanishing tail.
--- Completeness of the scalar topology is a reusable real-analysis authority;
--- convergence of the expectation sequence is derived, not stored as a field.
+-- Tail-controlled convergence for a fixed sequence and target.
 ------------------------------------------------------------------------
 
-record TailControlledConvergence (Scalar : Set) : Set₁ where
+record TailControlledConvergence
+    (Scalar : Set)
+    (Converges : (Nat → Scalar) → Scalar → Set)
+    (sequence : Nat → Scalar)
+    (target : Scalar) : Set₁ where
   field
-    Sequence : Nat → Scalar
-    Limit Tail : Nat → Scalar
-    target : Scalar
-
     Distance : Scalar → Scalar → Scalar
+    Tail : Nat → Scalar
     LessEqual : Scalar → Scalar → Set
-    Converges : (Nat → Scalar) → Scalar → Set
-
     earlier : Nat → Nat → Nat
+
     differenceControlled : ∀ left right →
-      LessEqual (Distance (Sequence left) (Sequence right))
+      LessEqual (Distance (sequence left) (sequence right))
         (Tail (earlier left right))
 
     tailVanishes : Set
+
     cauchyCompletionFromTail :
       (∀ left right →
-        LessEqual (Distance (Sequence left) (Sequence right))
+        LessEqual (Distance (sequence left) (sequence right))
           (Tail (earlier left right))) →
-      tailVanishes → Converges Sequence target
+      tailVanishes → Converges sequence target
 
 open TailControlledConvergence public
 
 tailControlledSequenceConverges :
-  ∀ {Scalar} (dataSet : TailControlledConvergence Scalar) →
-  Converges dataSet (Sequence dataSet) (target dataSet)
+  ∀ {Scalar Converges sequence target} →
+  TailControlledConvergence Scalar Converges sequence target →
+  Converges sequence target
 tailControlledSequenceConverges dataSet =
   cauchyCompletionFromTail dataSet
     (differenceControlled dataSet)
@@ -106,55 +103,59 @@ record PhysicalThermodynamicClusterData
       Observable → Set
 
     reflectedPair : Observable → Observable → Observable
-    reflectedPairDefinition : ∀ left right →
-      reflectedPair left right
-      ≡ Gram.multiplyObservable operations
-          (Gram.reflectObservable operations left) right
 
-    -- Fixed-cutoff thermodynamic limit from the crossing-cluster tail.
+    -- The equality with theta(left) * right is an exact observable identity.
+    reflectedPairDefinition : ∀ left right → Set
+
+    -- Fixed-cutoff thermodynamic limit.  The physical leaf is the connected
+    -- boundary-crossing cluster tail encoded inside this witness.
     finiteVolumePairTail : ∀ cutoff left right →
       LocalGaugeInvariant left → LocalGaugeInvariant right →
       TailControlledConvergence Scalar
+        (Gram.Converges scalarConvergence)
+        (λ volume →
+          Gram.expectation operations (finiteVolumeMeasure cutoff volume)
+            (reflectedPair left right))
+        (Gram.expectation operations (thermodynamicMeasure cutoff)
+          (reflectedPair left right))
 
-    finiteVolumePairSequenceExact : ∀ cutoff left right leftLocal rightLocal volume →
-      Sequence (finiteVolumePairTail cutoff left right leftLocal rightLocal) volume
-      ≡ Gram.expectation operations (finiteVolumeMeasure cutoff volume)
-          (reflectedPair left right)
-
-    finiteVolumePairTargetExact : ∀ cutoff left right leftLocal rightLocal →
-      target (finiteVolumePairTail cutoff left right leftLocal rightLocal)
-      ≡ Gram.expectation operations (thermodynamicMeasure cutoff)
-          (reflectedPair left right)
-
-    -- Continuum Cauchy estimate for thermodynamic expectations.
+    -- Thermodynamic continuum sequence.  The physical leaf is the summable
+    -- one-step blocking/localization defect.
     continuumPairTail : ∀ left right →
       RenormalizedObservable left → RenormalizedObservable right →
       TailControlledConvergence Scalar
+        (Gram.Converges scalarConvergence)
+        (λ cutoff →
+          Gram.expectation operations (thermodynamicMeasure cutoff)
+            (reflectedPair left right))
+        (Gram.expectation operations continuumMeasure
+          (reflectedPair left right))
 
-    continuumPairSequenceExact : ∀ left right leftRenormalized rightRenormalized cutoff →
-      Sequence (continuumPairTail left right leftRenormalized rightRenormalized) cutoff
-      ≡ Gram.expectation operations (thermodynamicMeasure cutoff)
-          (reflectedPair left right)
-
-    continuumPairTargetExact : ∀ left right leftRenormalized rightRenormalized →
-      target (continuumPairTail left right leftRenormalized rightRenormalized)
-      ≡ Gram.expectation operations continuumMeasure (reflectedPair left right)
-
-    -- Diagonal finite-volume/cutoff sequence.  The diagonal estimate combines
-    -- the finite-volume crossing tail with the continuum step tail.
+    -- Diagonal finite-volume/cutoff sequence.  This combines both tails and is
+    -- the sequence consumed by the legacy OS-Gram adapter.
     diagonalPairTail : ∀ left right →
       LocalGaugeInvariant left → LocalGaugeInvariant right →
       TailControlledConvergence Scalar
+        (Gram.Converges scalarConvergence)
+        (λ cutoff →
+          Gram.expectation operations
+            (finiteVolumeMeasure cutoff (diagonalVolume cutoff))
+            (reflectedPair left right))
+        (Gram.expectation operations continuumMeasure
+          (reflectedPair left right))
 
-    diagonalPairSequenceExact : ∀ left right leftLocal rightLocal cutoff →
-      Sequence (diagonalPairTail left right leftLocal rightLocal) cutoff
-      ≡ Gram.expectation operations
-          (finiteVolumeMeasure cutoff (diagonalVolume cutoff))
-          (reflectedPair left right)
-
-    diagonalPairTargetExact : ∀ left right leftLocal rightLocal →
-      target (diagonalPairTail left right leftLocal rightLocal)
-      ≡ Gram.expectation operations continuumMeasure (reflectedPair left right)
+    -- The same diagonal construction for renormalized, potentially unbounded
+    -- insertions after their moment/UI estimates have been supplied.
+    renormalizedDiagonalPairTail : ∀ left right →
+      RenormalizedObservable left → RenormalizedObservable right →
+      TailControlledConvergence Scalar
+        (Gram.Converges scalarConvergence)
+        (λ cutoff →
+          Gram.expectation operations
+            (finiteVolumeMeasure cutoff (diagonalVolume cutoff))
+            (reflectedPair left right))
+        (Gram.expectation operations continuumMeasure
+          (reflectedPair left right))
 
 open PhysicalThermodynamicClusterData public
 
@@ -164,9 +165,14 @@ finiteVolumeExpectationCauchy :
     cutoff left right
     (leftLocal : LocalGaugeInvariant dataSet left)
     (rightLocal : LocalGaugeInvariant dataSet right) →
-  Converges (finiteVolumePairTail dataSet cutoff left right leftLocal rightLocal)
-    (Sequence (finiteVolumePairTail dataSet cutoff left right leftLocal rightLocal))
-    (target (finiteVolumePairTail dataSet cutoff left right leftLocal rightLocal))
+  Gram.Converges (scalarConvergence dataSet)
+    (λ volume →
+      Gram.expectation (operations dataSet)
+        (finiteVolumeMeasure dataSet cutoff volume)
+        (reflectedPair dataSet left right))
+    (Gram.expectation (operations dataSet)
+      (thermodynamicMeasure dataSet cutoff)
+      (reflectedPair dataSet left right))
 finiteVolumeExpectationCauchy dataSet cutoff left right leftLocal rightLocal =
   tailControlledSequenceConverges
     (finiteVolumePairTail dataSet cutoff left right leftLocal rightLocal)
@@ -179,9 +185,14 @@ continuumCylinderObservableCauchy :
     left right
     (leftRenormalized : RenormalizedObservable dataSet left)
     (rightRenormalized : RenormalizedObservable dataSet right) →
-  Converges (continuumPairTail dataSet left right leftRenormalized rightRenormalized)
-    (Sequence (continuumPairTail dataSet left right leftRenormalized rightRenormalized))
-    (target (continuumPairTail dataSet left right leftRenormalized rightRenormalized))
+  Gram.Converges (scalarConvergence dataSet)
+    (λ cutoff →
+      Gram.expectation (operations dataSet)
+        (thermodynamicMeasure dataSet cutoff)
+        (reflectedPair dataSet left right))
+    (Gram.expectation (operations dataSet)
+      (continuumMeasure dataSet)
+      (reflectedPair dataSet left right))
 continuumCylinderObservableCauchy dataSet left right leftRenormalized rightRenormalized =
   tailControlledSequenceConverges
     (continuumPairTail dataSet left right leftRenormalized rightRenormalized)
@@ -194,12 +205,37 @@ diagonalReflectedPairExpectationConverges :
     left right
     (leftLocal : LocalGaugeInvariant dataSet left)
     (rightLocal : LocalGaugeInvariant dataSet right) →
-  Converges (diagonalPairTail dataSet left right leftLocal rightLocal)
-    (Sequence (diagonalPairTail dataSet left right leftLocal rightLocal))
-    (target (diagonalPairTail dataSet left right leftLocal rightLocal))
+  Gram.Converges (scalarConvergence dataSet)
+    (λ cutoff →
+      Gram.expectation (operations dataSet)
+        (finiteVolumeMeasure dataSet cutoff (diagonalVolume dataSet cutoff))
+        (reflectedPair dataSet left right))
+    (Gram.expectation (operations dataSet)
+      (continuumMeasure dataSet)
+      (reflectedPair dataSet left right))
 diagonalReflectedPairExpectationConverges dataSet left right leftLocal rightLocal =
   tailControlledSequenceConverges
     (diagonalPairTail dataSet left right leftLocal rightLocal)
+
+renormalizedDiagonalReflectedPairExpectationConverges :
+  ∀ {Measure Observable Scalar}
+    (dataSet : PhysicalThermodynamicClusterData Measure Observable Scalar)
+    left right
+    (leftRenormalized : RenormalizedObservable dataSet left)
+    (rightRenormalized : RenormalizedObservable dataSet right) →
+  Gram.Converges (scalarConvergence dataSet)
+    (λ cutoff →
+      Gram.expectation (operations dataSet)
+        (finiteVolumeMeasure dataSet cutoff (diagonalVolume dataSet cutoff))
+        (reflectedPair dataSet left right))
+    (Gram.expectation (operations dataSet)
+      (continuumMeasure dataSet)
+      (reflectedPair dataSet left right))
+renormalizedDiagonalReflectedPairExpectationConverges
+  dataSet left right leftRenormalized rightRenormalized =
+  tailControlledSequenceConverges
+    (renormalizedDiagonalPairTail dataSet left right
+      leftRenormalized rightRenormalized)
 
 ------------------------------------------------------------------------
 -- Compact-group Wilson observable bounds.
@@ -265,22 +301,30 @@ boundedCylinderObservableUniformBound = finiteProductWilsonObservableUniformBoun
 ------------------------------------------------------------------------
 
 record UniformIntegrabilityWitness
-    (Observable Scalar : Set) : Set₁ where
+    (Observable Scalar : Set)
+    (observableSequence : Nat → Observable) : Set₁ where
   field
-    sequence : Nat → Observable
     tailModulus : Nat → Scalar
     tailModulusVanishes : Set
     tailExpectationControlled : ∀ cutoff threshold → Set
 
 open UniformIntegrabilityWitness public
 
-record ExponentialMomentProducer
-    (Measure Observable Scalar : Set) : Set₁ where
+record UniformMomentWitness
+    (Observable Scalar : Set)
+    (observable : Observable) : Set₁ where
   field
-    operations : Gram.PhysicalOSOperations Measure Observable Scalar
-    measureSequence : Nat → Measure
+    momentBound : Nat → Scalar
+    everyCutoffMomentControlled : ∀ degree cutoff → Set
 
-    RenormalizedObservable : Observable → Set
+open UniformMomentWitness public
+
+record ExponentialMomentProducer
+    {Measure Observable Scalar : Set}
+    (operations : Gram.PhysicalOSOperations Measure Observable Scalar)
+    (measureSequence : Nat → Measure)
+    (RenormalizedObservable : Observable → Set) : Set₁ where
+  field
     absoluteObservable : Observable → Observable
     reflectedProduct : Observable → Observable → Observable
     exponentialObservable : Scalar → Observable → Observable
@@ -292,6 +336,7 @@ record ExponentialMomentProducer
     LessEqual : Scalar → Scalar → Set
 
     exponentialMomentBound : Observable → Scalar
+
     exponentialMomentUniformBound : ∀ observable →
       RenormalizedObservable observable → ∀ cutoff →
       LessEqual
@@ -318,42 +363,70 @@ record ExponentialMomentProducer
     buildUniformIntegrabilityWitness : ∀ left right →
       RenormalizedObservable left → RenormalizedObservable right →
       UniformIntegrabilityWitness Observable Scalar
+        (λ cutoff → reflectedProduct left right)
 
 open ExponentialMomentProducer public
 
 uniformEvenMomentBound :
   ∀ {Measure Observable Scalar}
-    (dataSet : ExponentialMomentProducer Measure Observable Scalar)
+    {operations : Gram.PhysicalOSOperations Measure Observable Scalar}
+    {measureSequence : Nat → Measure}
+    {RenormalizedObservable : Observable → Set}
+    (dataSet : ExponentialMomentProducer operations measureSequence
+      RenormalizedObservable)
     degree observable →
-  RenormalizedObservable dataSet observable → ∀ cutoff →
+  RenormalizedObservable observable → ∀ cutoff →
   LessEqual dataSet
-    (Gram.expectation (operations dataSet) (measureSequence dataSet cutoff)
+    (Gram.expectation operations (measureSequence cutoff)
       (powerObservable dataSet degree (absoluteObservable dataSet observable)))
     (multiply dataSet (factorial dataSet degree)
-      (divide dataSet (exponentialMomentBound dataSet observable) (lambda dataSet)))
+      (divide dataSet (exponentialMomentBound dataSet observable)
+        (lambda dataSet)))
 uniformEvenMomentBound = singleScaleInsertionMomentBound
 
 uniformExponentialMomentBound = exponentialMomentUniformBound
 
+uniformMomentWitnessFromExponential :
+  ∀ {Measure Observable Scalar}
+    {operations : Gram.PhysicalOSOperations Measure Observable Scalar}
+    {measureSequence : Nat → Measure}
+    {RenormalizedObservable : Observable → Set}
+    (dataSet : ExponentialMomentProducer operations measureSequence
+      RenormalizedObservable)
+    observable → RenormalizedObservable observable →
+  UniformMomentWitness Observable Scalar observable
+uniformMomentWitnessFromExponential dataSet observable admissible = record
+  { momentBound = λ degree →
+      multiply dataSet (factorial dataSet degree)
+        (divide dataSet (exponentialMomentBound dataSet observable)
+          (lambda dataSet))
+  ; everyCutoffMomentControlled = λ degree cutoff →
+      uniformEvenMomentBound dataSet degree observable admissible cutoff
+  }
+
 exponentialMomentImpliesUniformIntegrability :
   ∀ {Measure Observable Scalar}
-    (dataSet : ExponentialMomentProducer Measure Observable Scalar)
+    {operations : Gram.PhysicalOSOperations Measure Observable Scalar}
+    {measureSequence : Nat → Measure}
+    {RenormalizedObservable : Observable → Set}
+    (dataSet : ExponentialMomentProducer operations measureSequence
+      RenormalizedObservable)
     left right →
-  RenormalizedObservable dataSet left →
-  RenormalizedObservable dataSet right →
+  RenormalizedObservable left → RenormalizedObservable right →
   UniformIntegrabilityWitness Observable Scalar
+    (λ cutoff → reflectedProduct dataSet left right)
 exponentialMomentImpliesUniformIntegrability = buildUniformIntegrabilityWitness
 
 uniformIntegrabilityOfReflectedProducts =
   exponentialMomentImpliesUniformIntegrability
 
 ------------------------------------------------------------------------
--- Tightness and projective consistency are kept after the moment theorem, not
--- hidden inside expectation convergence.
+-- Tightness and projective consistency remain separate authorities after the
+-- moment theorem; they are not hidden inside expectation convergence.
 ------------------------------------------------------------------------
 
 record PhysicalMeasureCompactnessData
-    (Marginal Measure Scalar : Set) : Set₁ where
+    (Marginal Measure : Set) : Set₁ where
   field
     finiteDimensionalMarginal : Nat → Marginal
     continuumCandidate : Measure
@@ -373,52 +446,74 @@ record PhysicalMeasureCompactnessData
 open PhysicalMeasureCompactnessData public
 
 ------------------------------------------------------------------------
--- Physical expectation producer and adapter to the OS-Gram module.
+-- Physical expectation producer and adapter to the complete OS-Gram module.
 ------------------------------------------------------------------------
 
 record PhysicalExpectationProducerData
     (Measure Observable Scalar : Set) : Set₁ where
   field
     thermodynamic : PhysicalThermodynamicClusterData Measure Observable Scalar
-    moments : ExponentialMomentProducer Measure Observable Scalar
 
-    operationsAgree : operations thermodynamic ≡ operations moments
-    measureSequenceAgree : ∀ cutoff →
-      measureSequence moments cutoff
-      ≡ finiteVolumeMeasure thermodynamic cutoff
-          (diagonalVolume thermodynamic cutoff)
+    diagonalMeasure : Nat → Measure
+    diagonalMeasureDefinition : ∀ cutoff → Set
+
+    moments : ExponentialMomentProducer
+      (operations thermodynamic)
+      diagonalMeasure
+      (RenormalizedObservable thermodynamic)
 
     UniformlyIntegrable : (Nat → Observable) → Set
-    witnessImpliesUniformlyIntegrable : ∀ witness →
-      UniformlyIntegrable (sequence witness)
 
-    boundedWeakConvergence : ∀ observable →
+    witnessImpliesUniformlyIntegrable :
+      ∀ {sequence : Nat → Observable} →
+      UniformIntegrabilityWitness Observable Scalar sequence →
+      UniformlyIntegrable sequence
+
+    boundedObservableTail : ∀ observable →
       BoundedObservable thermodynamic observable →
-      Gram.Converges (scalarConvergence thermodynamic)
+      TailControlledConvergence Scalar
+        (Gram.Converges (scalarConvergence thermodynamic))
         (λ cutoff →
           Gram.expectation (operations thermodynamic)
-            (finiteVolumeMeasure thermodynamic cutoff
-              (diagonalVolume thermodynamic cutoff)) observable)
+            (diagonalMeasure cutoff) observable)
         (Gram.expectation (operations thermodynamic)
           (continuumMeasure thermodynamic) observable)
-
-    weakConvergencePlusUniformIntegrability : ∀ sequence →
-      UniformlyIntegrable sequence → Set
 
     boundedObservableHasWitness : ∀ observable →
       BoundedObservable thermodynamic observable → Set
 
-    renormalizedMomentWitness : ∀ observable →
-      RenormalizedObservable thermodynamic observable → Set
-
-    reflectedProductUI : ∀ left right →
-      RenormalizedObservable thermodynamic left →
-      RenormalizedObservable thermodynamic right →
-      UniformlyIntegrable
-        (λ cutoff →
-          reflectedProduct moments left right)
+    weakConvergencePlusUniformIntegrability : ∀ sequence →
+      UniformlyIntegrable sequence → Set
 
 open PhysicalExpectationProducerData public
+
+boundedWeakConvergenceFromTail :
+  ∀ {Measure Observable Scalar}
+    (dataSet : PhysicalExpectationProducerData Measure Observable Scalar)
+    observable (bounded : BoundedObservable (thermodynamic dataSet) observable) →
+  Gram.Converges (scalarConvergence (thermodynamic dataSet))
+    (λ cutoff →
+      Gram.expectation (operations (thermodynamic dataSet))
+        (diagonalMeasure dataSet cutoff) observable)
+    (Gram.expectation (operations (thermodynamic dataSet))
+      (continuumMeasure (thermodynamic dataSet)) observable)
+boundedWeakConvergenceFromTail dataSet observable bounded =
+  tailControlledSequenceConverges
+    (boundedObservableTail dataSet observable bounded)
+
+physicalReflectedProductUniformlyIntegrable :
+  ∀ {Measure Observable Scalar}
+    (dataSet : PhysicalExpectationProducerData Measure Observable Scalar)
+    left right →
+  RenormalizedObservable (thermodynamic dataSet) left →
+  RenormalizedObservable (thermodynamic dataSet) right →
+  UniformlyIntegrable dataSet
+    (λ cutoff → reflectedProduct (moments dataSet) left right)
+physicalReflectedProductUniformlyIntegrable
+  dataSet left right leftRenormalized rightRenormalized =
+  witnessImpliesUniformlyIntegrable dataSet
+    (uniformIntegrabilityOfReflectedProducts
+      (moments dataSet) left right leftRenormalized rightRenormalized)
 
 physicalMeasureConvergenceDataFromProducer :
   ∀ {Measure Observable Scalar} →
@@ -427,9 +522,7 @@ physicalMeasureConvergenceDataFromProducer :
 physicalMeasureConvergenceDataFromProducer dataSet = record
   { operations = operations (thermodynamic dataSet)
   ; scalarConvergence = scalarConvergence (thermodynamic dataSet)
-  ; measureSequence = λ cutoff →
-      finiteVolumeMeasure (thermodynamic dataSet) cutoff
-        (diagonalVolume (thermodynamic dataSet) cutoff)
+  ; measureSequence = diagonalMeasure dataSet
   ; continuumMeasure = continuumMeasure (thermodynamic dataSet)
   ; LocalGaugeInvariant = LocalGaugeInvariant (thermodynamic dataSet)
   ; RenormalizedObservable = RenormalizedObservable (thermodynamic dataSet)
@@ -445,16 +538,18 @@ physicalMeasureConvergenceDataFromProducer dataSet = record
           (thermodynamic dataSet) left right leftLocal rightLocal
   ; continuumReflectedPairExpectationConverges =
       λ left right leftRenormalized rightRenormalized →
-        continuumCylinderObservableCauchy
-          (thermodynamic dataSet) left right leftRenormalized rightRenormalized
+        renormalizedDiagonalReflectedPairExpectationConverges
+          (thermodynamic dataSet) left right
+          leftRenormalized rightRenormalized
   ; wilsonCylinderObservableUniformlyBounded =
       boundedObservableHasWitness dataSet
   ; boundedWeakConvergenceImpliesExpectationConvergence =
-      boundedWeakConvergence dataSet
+      boundedWeakConvergenceFromTail dataSet
   ; uniformRenormalizedInsertionMomentBound =
-      renormalizedMomentWitness dataSet
+      λ observable admissible →
+        UniformMomentWitness Observable Scalar observable
   ; uniformIntegrabilityOfReflectedProducts =
-      reflectedProductUI dataSet
+      physicalReflectedProductUniformlyIntegrable dataSet
   ; weakConvergencePlusUniformIntegrability =
       weakConvergencePlusUniformIntegrability dataSet
   }
