@@ -10,9 +10,12 @@ import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayConfiguredVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
--- Shared rational/Taylor interval carriers, configured sinc/cos/log
--- coefficients, and the finite exponential partial-sum proof of log 16 <= 3.
+-- Shared rational/Taylor interval carriers, generic remainder-to-enclosure and
+-- negative-log-sinc reductions, configured coefficients, and the finite
+-- exponential partial-sum proof of log 16 <= 3.
 import DASHI.Physics.YangMills.BalabanClayCommonCertifiedTaylorEnclosureExact
+import DASHI.Physics.YangMills.BalabanClayCommonTaylorRemainderToEnclosureExact
+import DASHI.Physics.YangMills.BalabanClayCommonNegativeLogSincReductionExact
 import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact
 import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact
 
