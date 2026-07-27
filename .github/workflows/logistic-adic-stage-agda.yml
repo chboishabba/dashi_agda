@@ -12,6 +12,7 @@ on:
       - 'DASHI/Foundations/FamilyDecimalMonsterCrossPollination.agda'
       - 'DASHI/Foundations/LogisticAdicStageRegression.agda'
       - 'DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda'
+      - 'DASHI/Foundations/StageTetralemmaArrestBridge.agda'
       - 'DASHI/Foundations/StageValuationBundleAtlas.agda'
       - 'DASHI/Physics/Closure/SheetExchangeJFixedResolutionBoundary.agda'
       - 'Docs/support/reference/LogisticAdicStageCommutingSpine.md'
