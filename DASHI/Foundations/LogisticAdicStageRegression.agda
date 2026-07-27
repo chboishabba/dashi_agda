@@ -6,6 +6,7 @@ import DASHI.Arithmetic.AdicGeometricMirror as Mirror
 import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.ControlCardCore as Control
 import DASHI.Core.FramedORCSLPGFAdapter as Governance
+import DASHI.Dynamics.LogisticAdicManifoldObligations as Obligations
 import DASHI.Dynamics.LogisticAdicStageCommutingSpine as Logistic
 import DASHI.Foundations.CompositeRadixPrimeLaneBridge as Composite
 import DASHI.Foundations.FamilyDecimalMonsterCrossPollination as Cross
@@ -144,6 +145,15 @@ record LogisticAdicStageRegression : Set₁ where
     governanceBoundary :
       Governance.FramedORCSLPGFAuthorityBoundary
 
+    attractorBoundary :
+      Obligations.AttractorBifurcationAuthorityBoundary
+    stage11ManifoldBoundary :
+      Obligations.Stage11ManifoldProcessBoundary
+    crossLaneBoundary :
+      Obligations.CrossLaneOrthogonalityBoundary
+    remainingObligations :
+      Obligations.DynamicalAdapterRemainingObligations
+
     sheetResolution :
       Sheet.SheetExchangeResolutionBoundary
 
@@ -226,6 +236,14 @@ canonicalLogisticAdicStageRegression = record
       Governance.canonicalMonsterCarrierAdmissionCandidate
   ; governanceBoundary =
       Governance.canonicalFramedORCSLPGFAuthorityBoundary
+  ; attractorBoundary =
+      Obligations.canonicalAttractorBifurcationAuthorityBoundary
+  ; stage11ManifoldBoundary =
+      Obligations.canonicalStage11ManifoldProcessBoundary
+  ; crossLaneBoundary =
+      Obligations.canonicalCrossLaneOrthogonalityBoundary
+  ; remainingObligations =
+      Obligations.canonicalDynamicalAdapterRemainingObligations
   ; sheetResolution =
       Sheet.canonicalSheetExchangeResolutionBoundary
   }
