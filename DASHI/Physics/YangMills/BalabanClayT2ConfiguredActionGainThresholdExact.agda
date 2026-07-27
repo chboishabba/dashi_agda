@@ -6,7 +6,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_; _≤ᵇ_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Gap
@@ -29,21 +29,31 @@ configuredBadChordalRadiusSq = + 1 / 16
 configuredBetaThreshold : ℚ
 configuredBetaThreshold = + 118 / 1
 
+configuredGainFactor : ℚ
+configuredGainFactor = (+ 1 / 2) * configuredBadChordalRadiusSq
+
 configuredBadRadiusSquareExact :
   configuredBadChordalRadius * configuredBadChordalRadius
   ≡ configuredBadChordalRadiusSq
 configuredBadRadiusSquareExact = ℚRing.solve
 
+configuredGainFactorExact : configuredGainFactor ≡ + 1 / 32
+configuredGainFactorExact = ℚRing.solve
+
 configuredLocalWilsonGapAtThreshold : ℚ
-configuredLocalWilsonGapAtThreshold =
-  (+ 1 / 2) * configuredBetaThreshold * configuredBadChordalRadiusSq
+configuredLocalWilsonGapAtThreshold = configuredGainFactor * configuredBetaThreshold
 
 configuredLocalGapFillsActionSlot :
   configuredLocalWilsonGapAtThreshold ≡ Budget.configuredActionGain
 configuredLocalGapFillsActionSlot = ℚRing.solve
 
-configuredBetaThresholdNonnegative : 0ℚ ≤ configuredBetaThreshold
-configuredBetaThresholdNonnegative = ℚP.≤ᵇ⇒≤ tt
+configuredGainFactorNonnegative : 0ℚ ≤ configuredGainFactor
+configuredGainFactorNonnegative = ℚP.≤ᵇ⇒≤ tt
+
+configuredCurrentGapNormalForm : ∀ beta →
+  configuredGainFactor * beta
+  ≡ (+ 1 / 2) * beta * configuredBadChordalRadiusSq
+configuredCurrentGapNormalForm = ℚRing.solve-∀
 
 record ConfiguredWilsonActionGainInput (Plaquette : Set) : Set₁ where
   field
@@ -66,6 +76,21 @@ record ConfiguredWilsonActionGainInput (Plaquette : Set) : Set₁ where
 
 open ConfiguredWilsonActionGainInput public
 
+configuredGainBelowCurrentLocalGap :
+  ∀ {Plaquette} (dataSet : ConfiguredWilsonActionGainInput Plaquette) →
+  Budget.configuredActionGain
+  ≤ (+ 1 / 2) * beta dataSet * configuredBadChordalRadiusSq
+configuredGainBelowCurrentLocalGap dataSet =
+  subst
+    (λ upper → Budget.configuredActionGain ≤ upper)
+    (configuredCurrentGapNormalForm (beta dataSet))
+    (subst
+      (λ lower → lower ≤ configuredGainFactor * beta dataSet)
+      configuredLocalGapFillsActionSlot
+      (betaMonotone dataSet
+        configuredGainFactorNonnegative
+        (betaAboveConfigured dataSet)))
+
 configuredPlaquetteActionGain :
   ∀ {Plaquette}
     (dataSet : ConfiguredWilsonActionGainInput Plaquette)
@@ -74,13 +99,7 @@ configuredPlaquetteActionGain :
   ≤ Gap.wilsonPlaquetteAction (beta dataSet) (holonomy dataSet plaquette)
 configuredPlaquetteActionGain dataSet plaquette large =
   Gap.transitive (order dataSet)
-    (subst
-      (λ lower → lower
-        ≤ (+ 1 / 2) * beta dataSet * configuredBadChordalRadiusSq)
-      configuredLocalGapFillsActionSlot
-      (betaMonotone dataSet
-        (ℚP.≤ᵇ⇒≤ tt)
-        (betaAboveConfigured dataSet)))
+    (configuredGainBelowCurrentLocalGap dataSet)
     (Gap.localWilsonActionGap
       (order dataSet)
       (beta dataSet)
