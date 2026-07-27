@@ -21,3 +21,4 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact
 import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact
 import DASHI.Physics.YangMills.BalabanClayT5OSGramClosedPropertyExact
+import DASHI.Physics.YangMills.BalabanClayLiteratureNormalizationLedger
