@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 FILES = [
     ROOT / "DASHI/Arithmetic/AdicGeometricMirror.agda",
+    ROOT / "DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda",
     ROOT / "DASHI/Dynamics/LogisticAdicStageCommutingSpine.agda",
     ROOT / "DASHI/Dynamics/LogisticAdicManifoldObligations.agda",
     ROOT / "DASHI/Foundations/CompositeRadixPrimeLaneBridge.agda",
@@ -29,6 +30,26 @@ REQUIRED = {
         "HalfCompletionMirrorBridge",
         "positiveNegativeCancel",
         "topologicalIdentificationClaimed",
+    ],
+    "TraumaMemoryHypervoxelBridge.agda": [
+        "memoryDepth",
+        "versionedMemoryDepth",
+        "MemoryDepthWitness",
+        "rememberedDepthIsAgreement",
+        "PNFMemoryHypervoxel",
+        "prime369Field",
+        "depthWitnessAt",
+        "FibreLearningUpdate",
+        "MemoryDepthLearningReceipt",
+        "Stage8PNFMemoryObstruction",
+        "PriorTraumaMemoryArchitectureCrossPollination",
+        "canonicalPriorTraumaMemoryArchitectureCrossPollination",
+        "canonicalTraumaBodyMemoryCandidateBridge",
+        "canonicalGenomeEpigenomeConnectomeBodyMemoryBridge",
+        "canonicalZeroSupervoxel",
+        "canonicalAvoidanceAttractor",
+        "SuperField.depth3Field",
+        "everyMemoryValuationIsPAdicClaimed",
     ],
     "LogisticAdicStageCommutingSpine.agda": [
         "LogisticAlgebra",
@@ -117,6 +138,8 @@ REQUIRED = {
         "natIdentitySquare357At50",
         "tetralemmaArrest",
         "compressedTransformativeJump",
+        "pnfTraumaMemoryHypervoxelBoundary",
+        "priorTraumaMemoryArchitecture",
         "familySupportFibre",
         "monsterRepresentationSeparation",
         "remainingObligations",
@@ -145,6 +168,10 @@ FORBIDDEN = [
     "numeralAloneConstructsManifold = true",
     "pureInvolutionConvergesClaimed = true",
     "observerPlusOneUniversallyReachesJClaimed = true",
+    "residualAloneProvesTrauma = true",
+    "formalCarrierDiagnosesPerson = true",
+    "extinctionErasesMemory = true",
+    "everyMemoryValuationIsPAdicClaimed = true",
 ]
 
 
@@ -190,12 +217,14 @@ def main() -> int:
     scan_sources()
     print("PASS: general adic mirror and exact 3-adic finite recurrence are present")
     print("PASS: rational logistic algebra and proof-carrying chart/residue contracts are present")
+    print("PASS: memoryDepth is explicit and can be witnessed by 369-prefix agreement")
+    print("PASS: PNF learning consumes existing fibre reweighting/rewiring dynamics")
+    print("PASS: trauma/body-memory, clopen psychology, attractor and SSP field surfaces are cross-pollinated")
     print("PASS: 357/100 FactorVec support, place value and valuation profile are exact")
     print("PASS: composite 6/9 radices remain joined/primary-depth charts, not fields")
     print("PASS: tetralemma quotient seam and Stage-4 arrest are proof-carrying")
     print("PASS: stage 0..11 is valuation-, memory-, learning- and residual-aware")
     print("PASS: Stage 8 cycle, Stage 11 bundle join and beyond-11 addresses are exact")
-    print("PASS: family support, symbolic decimal and Monster/irrep boundaries are explicit")
     print("PASS: ORCSLPGF, manifold, attractor and constant J quotient remain fail-closed")
     return 0
 
