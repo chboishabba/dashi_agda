@@ -23,16 +23,29 @@ sumRationalZero [] = refl
 sumRationalZero (value ∷ values)
   rewrite sumRationalZero values = ℚP.+-identityˡ 0ℚ
 
-postulate
-  sumRationalAdd :
-    ∀ {A : Set} (values : List A) (left right : A → ℚ) →
-    sumRational values (λ value → left value + right value)
-    ≡ sumRational values left + sumRational values right
+sumRationalAdd :
+  ∀ {A : Set} (values : List A) (left right : A → ℚ) →
+  sumRational values (λ value → left value + right value)
+  ≡ sumRational values left + sumRational values right
+sumRationalAdd [] left right = ℚRing.solve-∀
+sumRationalAdd (value ∷ values) left right
+  rewrite sumRationalAdd values left right =
+  ℚRing.solve-∀
+    (left value) (right value)
+    (sumRational values left) (sumRational values right)
 
-  sumRationalAppend :
-    ∀ {A : Set} (left right : List A) (term : A → ℚ) →
-    sumRational (left ++ right) term
-    ≡ sumRational left term + sumRational right term
+sumRationalAppend :
+  ∀ {A : Set} (left right : List A) (term : A → ℚ) →
+  sumRational (left ++ right) term
+  ≡ sumRational left term + sumRational right term
+sumRationalAppend [] right term =
+  sym (ℚP.+-identityˡ (sumRational right term))
+sumRationalAppend (value ∷ left) right term
+  rewrite sumRationalAppend left right term =
+  sym (ℚP.+-assoc
+    (term value)
+    (sumRational left term)
+    (sumRational right term))
 
 sumRationalMap :
   ∀ {A B : Set} (mapValue : A → B) (values : List A) (term : B → ℚ) →
