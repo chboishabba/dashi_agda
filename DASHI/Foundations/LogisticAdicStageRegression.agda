@@ -1,5 +1,6 @@
 module DASHI.Foundations.LogisticAdicStageRegression where
 
+open import Agda.Primitive using (Setω)
 open import DASHI.Core.Prelude
 
 import DASHI.Arithmetic.AdicGeometricMirror as Mirror
@@ -36,12 +37,9 @@ natIdentitySquare357At50 :
       (Logistic.identityLogisticMorphism natLogisticAlgebra)
       50)
 natIdentitySquare357At50 =
-  Logistic.identityLogisticSquareCommutes
-    natLogisticAlgebra
-    357
-    50
+  Logistic.identityLogisticSquareCommutes natLogisticAlgebra 357 50
 
-record LogisticAdicStageRegression : Set₁ where
+record LogisticAdicStageRegression : Setω where
   field
     threeAdicMirror : Mirror.HalfCompletionMirrorBridge
     generalAdicBoundary : Mirror.AdicMirrorAuthorityBoundary
@@ -55,11 +53,9 @@ record LogisticAdicStageRegression : Set₁ where
       ≡
       Logistic.logisticStep natLogisticAlgebra
         (Logistic.map
-          (Logistic.identityLogisticMorphism natLogisticAlgebra)
-          357)
+          (Logistic.identityLogisticMorphism natLogisticAlgebra) 357)
         (Logistic.map
-          (Logistic.identityLogisticMorphism natLogisticAlgebra)
-          50)
+          (Logistic.identityLogisticMorphism natLogisticAlgebra) 50)
     factorVecReceipt : Logistic.LogisticRationalFactorVecReceipt
     continuumBoundary : Logistic.LogisticContinuumAuthorityBoundary
     bottomArrowRequirement : Bridge.BridgeRequirementRow
@@ -92,6 +88,8 @@ record LogisticAdicStageRegression : Set₁ where
 
     pnfTraumaMemoryHypervoxelBoundary :
       TraumaMemory.TraumaMemoryHypervoxelAuthorityBoundary
+    priorTraumaMemoryArchitecture :
+      TraumaMemory.PriorTraumaMemoryArchitectureCrossPollination
 
     familySupportFibre : Cross.ThreeRoleSupportFibre
     oneThirdRoleWeight : Cross.OneThirdRoleWeight
@@ -111,7 +109,6 @@ record LogisticAdicStageRegression : Set₁ where
     stage11ManifoldBoundary : Obligations.Stage11ManifoldProcessBoundary
     crossLaneBoundary : Obligations.CrossLaneOrthogonalityBoundary
     remainingObligations : Obligations.DynamicalAdapterRemainingObligations
-
     sheetResolution : Sheet.SheetExchangeResolutionBoundary
 
 canonicalLogisticAdicStageRegression : LogisticAdicStageRegression
@@ -147,6 +144,8 @@ canonicalLogisticAdicStageRegression = record
   ; stageBoundary = Stage.canonicalStageValuationAuthorityBoundary
   ; pnfTraumaMemoryHypervoxelBoundary =
       TraumaMemory.canonicalTraumaMemoryHypervoxelAuthorityBoundary
+  ; priorTraumaMemoryArchitecture =
+      TraumaMemory.canonicalPriorTraumaMemoryArchitectureCrossPollination
   ; familySupportFibre = Cross.canonicalTwoParentOneChildSupportFibre
   ; oneThirdRoleWeight = Cross.canonicalOneThirdRoleWeight
   ; decimal357Address = Cross.canonicalDecimal357Address
@@ -160,12 +159,10 @@ canonicalLogisticAdicStageRegression = record
   ; governanceRowReceipt = Governance.framedDynamicRowReceipt
   ; monsterCarrierAdmission = Governance.canonicalMonsterCarrierAdmissionCandidate
   ; governanceBoundary = Governance.canonicalFramedORCSLPGFAuthorityBoundary
-  ; attractorBoundary =
-      Obligations.canonicalAttractorBifurcationAuthorityBoundary
+  ; attractorBoundary = Obligations.canonicalAttractorBifurcationAuthorityBoundary
   ; stage11ManifoldBoundary =
       Obligations.canonicalStage11ManifoldProcessBoundary
-  ; crossLaneBoundary =
-      Obligations.canonicalCrossLaneOrthogonalityBoundary
+  ; crossLaneBoundary = Obligations.canonicalCrossLaneOrthogonalityBoundary
   ; remainingObligations =
       Obligations.canonicalDynamicalAdapterRemainingObligations
   ; sheetResolution = Sheet.canonicalSheetExchangeResolutionBoundary
