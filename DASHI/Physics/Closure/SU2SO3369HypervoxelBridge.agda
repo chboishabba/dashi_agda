@@ -79,6 +79,12 @@ LiftPolarity = OrientationPolarity
 AxisLift : Set
 AxisLift = SU2Axis × LiftPolarity
 
+positiveAxisLift : SU2Axis → AxisLift
+positiveAxisLift axis = axis , positive
+
+negativeAxisLift : SU2Axis → AxisLift
+negativeAxisLift axis = axis , negative
+
 flipAxisLift : AxisLift → AxisLift
 flipAxisLift (axis , lift) = axis , flipOrientationPolarity lift
 
@@ -92,6 +98,24 @@ projectAxisLiftFlipInvariant (axis , lift) = refl
 flipAxisLiftInvolutive : ∀ lifted → flipAxisLift (flipAxisLift lifted) ≡ lifted
 flipAxisLiftInvolutive (axis , positive) = refl
 flipAxisLiftInvolutive (axis , negative) = refl
+
+positiveNotNegative : ¬ (positive ≡ negative)
+positiveNotNegative ()
+
+negativeNotPositive : ¬ (negative ≡ positive)
+negativeNotPositive ()
+
+positiveNegativeAxisLiftDistinct :
+  ∀ axis → ¬ (positiveAxisLift axis ≡ negativeAxisLift axis)
+positiveNegativeAxisLiftDistinct axis equality =
+  positiveNotNegative (cong proj₂ equality)
+
+flipAxisLiftHasNoFixedPoint :
+  ∀ lifted → ¬ (flipAxisLift lifted ≡ lifted)
+flipAxisLiftHasNoFixedPoint (axis , positive) equality =
+  negativeNotPositive (cong proj₂ equality)
+flipAxisLiftHasNoFixedPoint (axis , negative) equality =
+  positiveNotNegative (cong proj₂ equality)
 
 ------------------------------------------------------------------------
 -- HexTruth is used as a finite adapter for axis x lift polarity.
@@ -188,22 +212,58 @@ record CentreBlindOperatorSheet (Value : Set) : Set₁ where
       ∀ slot → liftedEntry slot positive ≡ liftedEntry slot negative
 
 ------------------------------------------------------------------------
--- Abstract double-cover interface and the finite axis-lift adapter.
+-- Two-sheet contract and the finite axis-lift adapter.
+--
+-- Completeness says that every cover point is one of the two canonical lifts
+-- over its projected base point.  Distinctness and the no-fixed-point law rule
+-- out the identity involution that a weaker projection contract would admit.
 ------------------------------------------------------------------------
 
-record DoubleCoverInterface (Cover Base : Set) : Set₁ where
+record TwoSheetedCoverInterface (Cover Base : Set) : Set₁ where
   field
     project : Cover → Base
     centralFlip : Cover → Cover
+    liftPositive : Base → Cover
+    liftNegative : Base → Cover
+    positiveProjects : ∀ base → project (liftPositive base) ≡ base
+    negativeProjects : ∀ base → project (liftNegative base) ≡ base
+    liftsDistinct : ∀ base → ¬ (liftPositive base ≡ liftNegative base)
+    centralFlipPositive :
+      ∀ base → centralFlip (liftPositive base) ≡ liftNegative base
+    centralFlipNegative :
+      ∀ base → centralFlip (liftNegative base) ≡ liftPositive base
     projectionInvariant : ∀ x → project (centralFlip x) ≡ project x
     centralFlipInvolutive : ∀ x → centralFlip (centralFlip x) ≡ x
+    centralFlipHasNoFixedPoint : ∀ x → ¬ (centralFlip x ≡ x)
+    fibreComplete :
+      ∀ x →
+      (x ≡ liftPositive (project x))
+      ⊎
+      (x ≡ liftNegative (project x))
 
-finiteAxisLiftDoubleCover : DoubleCoverInterface AxisLift SU2Axis
+axisLiftFibreComplete :
+  ∀ lifted →
+  (lifted ≡ positiveAxisLift (projectAxisLift lifted))
+  ⊎
+  (lifted ≡ negativeAxisLift (projectAxisLift lifted))
+axisLiftFibreComplete (axis , positive) = inj₁ refl
+axisLiftFibreComplete (axis , negative) = inj₂ refl
+
+finiteAxisLiftDoubleCover : TwoSheetedCoverInterface AxisLift SU2Axis
 finiteAxisLiftDoubleCover = record
   { project = projectAxisLift
   ; centralFlip = flipAxisLift
+  ; liftPositive = positiveAxisLift
+  ; liftNegative = negativeAxisLift
+  ; positiveProjects = λ axis → refl
+  ; negativeProjects = λ axis → refl
+  ; liftsDistinct = positiveNegativeAxisLiftDistinct
+  ; centralFlipPositive = λ axis → refl
+  ; centralFlipNegative = λ axis → refl
   ; projectionInvariant = projectAxisLiftFlipInvariant
   ; centralFlipInvolutive = flipAxisLiftInvolutive
+  ; centralFlipHasNoFixedPoint = flipAxisLiftHasNoFixedPoint
+  ; fibreComplete = axisLiftFibreComplete
   }
 
 ------------------------------------------------------------------------
@@ -360,6 +420,8 @@ record SU2SO3369AuthorityBoundary : Set where
     nineSlotsAreTruthValuesClaimed : Bool
     polarityIsGroupActionOnlyWhenLawSupplied : Bool
     finiteIndexAdapterClaimed : Bool
+    twoDistinctLiftsPerFiniteBaseProved : Bool
+    finiteFibreCompletenessProved : Bool
 
 canonicalSU2SO3369AuthorityBoundary : SU2SO3369AuthorityBoundary
 canonicalSU2SO3369AuthorityBoundary = record
@@ -370,8 +432,10 @@ canonicalSU2SO3369AuthorityBoundary = record
   ; nineSlotsAreTruthValuesClaimed = false
   ; polarityIsGroupActionOnlyWhenLawSupplied = true
   ; finiteIndexAdapterClaimed = true
+  ; twoDistinctLiftsPerFiniteBaseProved = true
+  ; finiteFibreCompletenessProved = true
   }
 
 bridgeSummary : String
 bridgeSummary =
-  "The three-axis Lie-algebra carrier, its two-point central-lift fibre, and its 3x3 operator sheet are connected through explicit finite adapters; no identification of SU(2), SO(3), Base6 or NonaryTruth is asserted."
+  "The three-axis Lie-algebra carrier, its proved two-element central-lift fibre, and its 3x3 operator sheet are connected through explicit finite adapters; no identification of SU(2), SO(3), Base6 or NonaryTruth is asserted."
