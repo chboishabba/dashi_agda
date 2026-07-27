@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNFiniteOverlapConstantProgram where
 -- are not prematurely marked closed.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
@@ -64,8 +65,7 @@ transitionMultiplicityReceipt : TransitionMultiplicityReceipt
 transitionMultiplicityReceipt =
   transition-receipt refl refl refl refl refl refl refl
 
-record ResidualSubtypePartition {s : Agda.Primitive.Level} :
-    Set (Agda.Primitive.lsuc s) where
+record ResidualSubtypePartition {s : Level} : Set (lsuc s) where
   field
     ResidualSubtype : Set s
     boundaryShellZero : ResidualSubtype
