@@ -33,6 +33,12 @@ import DASHI.Physics.Closure.NSTriadKNHelicalDiscriminantMarginProgram as Helica
 import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityExactReconnaissance as LocalizedExact
 import DASHI.Physics.Closure.NSTriadKNFixedSymbolBalancedFamilyReconnaissance as BalancedExact
 import DASHI.Physics.Closure.NSTriadKNTriadPhaseCoherenceFallback as PhaseFallback
+import DASHI.Physics.Closure.NSTriadKNOffDiagonalReflectionMatrixCandidate as MatrixCandidate
+import DASHI.Physics.Closure.NSTriadKNMatrixCoherenceExactReconnaissance as MatrixExact
+import DASHI.Physics.Closure.NSTriadKNConstantinFeffermanDirectionCoherenceProgram as CFDirection
+import DASHI.Physics.Closure.NSTriadKNTriadDirectionAlignmentProgram as TriadDirection
+import DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit as PermanaAudit
+import DASHI.Physics.Closure.NSTriadKNObjectiveVortexCriteriaScopeAudit as VortexCriteria
 import DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork as HelicalDecision
 
 allEightStagesRepresented : Bool
@@ -86,6 +92,69 @@ phaseFallbackFiniteEvidence :
   PhaseFallback.PhaseFallbackFiniteEvidence
 phaseFallbackFiniteEvidence = PhaseFallback.phaseFallbackFiniteEvidence
 
+matrixCoherenceReconnaissanceReceipt :
+  MatrixExact.MatrixCoherenceReconnaissanceReceipt
+matrixCoherenceReconnaissanceReceipt =
+  MatrixExact.matrixCoherenceReconnaissanceReceipt
+
+triadDirectionDiagnostic :
+  TriadDirection.FourierPolarizationGramDiagnostic
+triadDirectionDiagnostic = TriadDirection.exactPolarizationDiagnostic
+
 helicalFiniteDecisionReceipt :
   HelicalDecision.FiniteDecisionReceipt
 helicalFiniteDecisionReceipt = HelicalDecision.finiteDecisionReceipt
+
+projectedAxisMatrixCandidateRepresented : Bool
+projectedAxisMatrixCandidateRepresented =
+  MatrixCandidate.projectedAxisCandidateRepresented
+
+projectedAxisMatrixCandidateRepresentedIsTrue :
+  projectedAxisMatrixCandidateRepresented ≡ true
+projectedAxisMatrixCandidateRepresentedIsTrue =
+  MatrixCandidate.projectedAxisCandidateRepresentedIsTrue
+
+projectedAxisFamilySurvivesOptimizedSupportSearch : Bool
+projectedAxisFamilySurvivesOptimizedSupportSearch =
+  MatrixExact.projectedAxisFamilySurvivesOptimizedSupportSearch
+
+projectedAxisFamilySurvivesOptimizedSupportSearchIsFalse :
+  projectedAxisFamilySurvivesOptimizedSupportSearch ≡ false
+projectedAxisFamilySurvivesOptimizedSupportSearchIsFalse =
+  MatrixExact.projectedAxisFamilySurvivesOptimizedSupportSearchIsFalse
+
+triadDirectionBranchRepresented : Bool
+triadDirectionBranchRepresented =
+  TriadDirection.triadDirectionSignalRepresented
+
+triadDirectionBranchRepresentedIsTrue :
+  triadDirectionBranchRepresented ≡ true
+triadDirectionBranchRepresentedIsTrue =
+  TriadDirection.triadDirectionSignalRepresentedIsTrue
+
+constantinFeffermanRouteRemainsConditional : Bool
+constantinFeffermanRouteRemainsConditional =
+  CFDirection.constantinFeffermanRouteIsConditional
+
+constantinFeffermanRouteRemainsConditionalIsTrue :
+  constantinFeffermanRouteRemainsConditional ≡ true
+constantinFeffermanRouteRemainsConditionalIsTrue =
+  CFDirection.constantinFeffermanRouteIsConditionalIsTrue
+
+permanav3GlobalRegularityImported : Bool
+permanav3GlobalRegularityImported =
+  PermanaAudit.permanav3GlobalRegularityImported
+
+permanav3GlobalRegularityImportedIsFalse :
+  permanav3GlobalRegularityImported ≡ false
+permanav3GlobalRegularityImportedIsFalse =
+  PermanaAudit.permanav3GlobalRegularityImportedIsFalse
+
+objectiveVortexCriteriaOnClosurePath : Bool
+objectiveVortexCriteriaOnClosurePath =
+  VortexCriteria.objectiveQSuppliesUniformQuarticDomination
+
+objectiveVortexCriteriaOnClosurePathIsFalse :
+  objectiveVortexCriteriaOnClosurePath ≡ false
+objectiveVortexCriteriaOnClosurePathIsFalse =
+  VortexCriteria.objectiveQSuppliesUniformQuarticDominationIsFalse
