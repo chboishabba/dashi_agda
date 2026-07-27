@@ -17,6 +17,27 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedHelicityCommutatorProgram where
 -- Uses: motivation for retaining homochiral sign information.
 -- Relationship: the decimated/statistical conclusion is evidence, not an
 -- inhabitant of any pointwise signed-class bound below.
+--
+-- Corrected mathematical framing (2026-07): The six-mode witness is
+-- modewise helicity-balanced, so E+(k) = E-(k) at every occupied mode.
+-- Computing the per-mode helical split E+-/E- is therefore redundant
+-- once modewise helicity is proved zero.  A state-dependent corrector
+-- chi_a(k) sign(E+(k)-E-(k)) C_k is not yet a valid Lyapunov multiplier
+-- family: it is state-dependent rather than a fixed quadratic operator,
+-- discontinuous where E+ = E-, and choosing the sign from the current
+-- state does not automatically give a favourable sign for the nonlinear
+-- derivative.  Localization survives for a subtler reason: H_chi(u) = 0
+-- for every scalar chi on the witness (every summand vanishes), but H_chi
+-- is not an Euler invariant because chi(k), chi(p), chi(q) are unequal
+-- when p+q=k, so the triadic derivative produces cutoff-difference
+-- commutators.  The decisive next computations are: (1) evaluate the
+-- literal localized-helicity derivative on the six-mode witness for the
+-- actual candidate cutoffs chi_a; (2) compute triadwise contributions
+-- before summation, indexed by geometry and helicity triple; (3) test
+-- smooth fixed weights (dyadic windows, low/high transitions), not
+-- state-following signs; (4) fail fast against all modewise-balanced
+-- states by searching within |u_k^+| = |u_k^-| rather than treating the
+-- current witness as isolated.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)

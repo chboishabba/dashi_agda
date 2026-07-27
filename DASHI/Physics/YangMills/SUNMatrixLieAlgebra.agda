@@ -1,3 +1,5 @@
+{-# OPTIONS --irrelevant-projections #-}
+
 module DASHI.Physics.YangMills.SUNMatrixLieAlgebra where
 
 ------------------------------------------------------------------------
@@ -31,10 +33,10 @@ commutator :
   ∀ {m c} {Matrix : Set m} {Complex : Set c}
     {matrixOps : ComplexMatrixOperations Matrix Complex} →
   SUNMatrixLieOperations matrixOps → Matrix → Matrix → Matrix
-commutator lieOps X Y =
+commutator {Matrix = Matrix} {Complex = Complex} {matrixOps = ops} lieOps X Y =
   addM lieOps
-    (multiplyM _ X Y)
-    (negateM lieOps (multiplyM _ Y X))
+    (multiplyM {Matrix = Matrix} {Complex = Complex} ops X Y)
+    (negateM lieOps (multiplyM {Matrix = Matrix} {Complex = Complex} ops Y X))
 
 record IsSUNLieElement
     {m c : Level} {Matrix : Set m} {Complex : Set c}
@@ -45,7 +47,25 @@ record IsSUNLieElement
     antiHermitian : daggerM matrixOps X ≡ negateM lieOps X
     traceZero : traceM lieOps X ≡ zeroC lieOps
 
-open IsSUNLieElement public
+open IsSUNLieElement
+
+private
+  proofIrrelevant : ∀ {a} {A : Set a} {x y : A} (p1 p2 : x ≡ y) → p1 ≡ p2
+  proofIrrelevant refl refl = refl
+
+  cong : ∀ {a b} {A : Set a} {B : Set b} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+  cong f refl = refl
+
+  isSUNLieElementExt :
+    ∀ {m c} {Matrix : Set m} {Complex : Set c}
+      {matrixOps : ComplexMatrixOperations Matrix Complex}
+      {lieOps : SUNMatrixLieOperations matrixOps} {X : Matrix}
+      (l1 l2 : IsSUNLieElement lieOps X) → l1 ≡ l2
+  isSUNLieElementExt
+    (record { antiHermitian = a1 ; traceZero = t1 })
+    (record { antiHermitian = a2 ; traceZero = t2 })
+    with proofIrrelevant a1 a2 | proofIrrelevant t1 t2
+  ... | refl | refl = refl
 
 record CertifiedSUNMatrixLieTheory
     {m c : Level} (N : Nat)
@@ -94,10 +114,9 @@ record CertifiedSUNMatrixLieTheory
         (commutator lieOperations X (commutator lieOperations Y Z))
         (addM lieOperations
           (commutator lieOperations Y (commutator lieOperations Z X))
-          (commutator lieOperations Z (commutator lieOperations X Y)))
-      ≡ zeroM lieOperations
+          (commutator lieOperations Z (commutator lieOperations X Y))) ≡ zeroM lieOperations
 
-open CertifiedSUNMatrixLieTheory public
+open CertifiedSUNMatrixLieTheory
 
 record SUNMatrixLieElement
     {m c : Level} {N : Nat}
@@ -107,7 +126,7 @@ record SUNMatrixLieElement
   constructor sunLieMatrix
   field
     lieMatrix : Matrix
-    .isSUNLie : IsSUNLieElement (lieOperations lieTheory) lieMatrix
+    isSUNLie : IsSUNLieElement (lieOperations lieTheory) lieMatrix
 
 open SUNMatrixLieElement public
 
@@ -117,7 +136,8 @@ sunLieMatrixExt :
     {lieTheory : CertifiedSUNMatrixLieTheory N groupTheory}
     {X Y : SUNMatrixLieElement lieTheory} →
   lieMatrix X ≡ lieMatrix Y → X ≡ Y
-sunLieMatrixExt {X = sunLieMatrix X xLie} {Y = sunLieMatrix .X yLie} refl = refl
+sunLieMatrixExt {X = sunLieMatrix M l1} {Y = sunLieMatrix .M l2} refl =
+  cong (sunLieMatrix M) (isSUNLieElementExt l1 l2)
 
 sunMatrixLieAlgebra :
   ∀ {m c N} {Matrix : Set m} {Complex : Set c}

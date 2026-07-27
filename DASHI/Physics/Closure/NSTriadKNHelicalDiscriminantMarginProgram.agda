@@ -10,6 +10,19 @@ module DASHI.Physics.Closure.NSTriadKNHelicalDiscriminantMarginProgram where
 -- Relationship: formalises certificate soundness and the separate
 -- finite-to-uniform core/tail bridge.  A fixed-cutoff certificate is never
 -- promoted to a cutoff-uniform theorem by itself.
+--
+-- Corrected mathematical framing (2026-07): The modewise helicity balance
+-- of the six-mode witness means that any SOS certificate must fail on the
+-- restricted algebraic variety |u_k^+| = |u_k^-|, not just on the
+-- isolated witness.  The remaining open obligations (cutoff-uniform
+-- commutator, Schur and signed-class bounds) are the relevant leaves.
+-- Physical-space flux locality (arXiv:1101.2193, Dascaliuc and Grujic)
+-- provides methodological evidence for power-law decay in scale-disparity
+-- but does not automatically yield: deterministic pointwise-in-state
+-- Fourier multiplier commutator estimates, bounds uniform over all
+-- Galerkin cutoffs N, the exact Sobolev-weighted Schur sums, or
+-- favourable signs for each of the seven geometric classes and eight
+-- helicity triples.  Substantial translation is required.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)

@@ -114,6 +114,10 @@ betaZeroOverEightEqualsElevenOverTwentyFourLevel = machineChecked
 pureYMWilsonConventionLedgerLevel : ProofLevel
 pureYMWilsonConventionLedgerLevel = machineChecked
 
+localizedPlaquetteCoefficientOfExactRGStep : ℚ → ℚ
+localizedPlaquetteCoefficientOfExactRGStep casimirAdjoint =
+  pureYMInverseCouplingCoefficient casimirAdjoint
+
 -- The remaining physical theorem is to identify the localized plaquette
 -- coefficient produced by the exact Wilson/Haar RG step with this convention
 -- and with the Dashen--Gross lattice/continuum calibration.

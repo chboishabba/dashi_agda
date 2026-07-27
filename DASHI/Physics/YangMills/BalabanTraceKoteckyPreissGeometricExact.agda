@@ -7,7 +7,8 @@ open import Data.Rational using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Data.Product using (proj₂)
+open import Relation.Binary.PropositionalEquality using (subst; trans; cong; cong₂; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -90,12 +91,23 @@ geometricStepAlgebra : ∀ partial power →
   (partial + power) + twoℚ * (half * power) ≡ twoℚ
 geometricStepAlgebra partial power inductionHypothesis =
   trans
-    (ℚRing.solve-∀ partial power)
-    inductionHypothesis
+    (cong (λ x → (partial + power) + x)
+      (sym (ℚP.*-assoc twoℚ half power)))
+  (trans
+    (cong (λ x → (partial + power) + x)
+      (ℚP.*-identityˡ power))
+  (trans
+    (ℚP.+-assoc partial power power)
+  (trans
+    (cong (λ x → partial + x)
+      (sym (trans
+        (proj₂ ℚP.*-distrib-+ power 1ℚ 1ℚ)
+        (cong₂ _+_ (ℚP.*-identityˡ power) (ℚP.*-identityˡ power)))))
+    inductionHypothesis)))
 
 traceShellGeometricIdentity : ∀ depth →
   traceShellPartialSum depth + twoℚ * halfPower depth ≡ twoℚ
-traceShellGeometricIdentity zero = ℚRing.solve-∀
+traceShellGeometricIdentity zero = refl
 traceShellGeometricIdentity (suc depth) =
   geometricStepAlgebra
     (traceShellPartialSum depth)

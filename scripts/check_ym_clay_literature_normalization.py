@@ -57,6 +57,15 @@ FILES: dict[Path, tuple[str, ...]] = {
         "uniformFluctuationCoefficientPositive",
         "physicalUniformFluctuationInputsLevel = conditional",
     ),
+    YM / "BalabanClayT3PhysicalUniformFluctuationCoercivityExact.agda": (
+        "E. Eriksson",
+        "viXra:2602.0051 v2",
+        "T. Balaban",
+        "DOI: 10.1007/BF01215757",
+        "smallFieldFluctuationCoercive",
+        "smallFieldCoercivityArchitecturalCorrectionLevel = machineChecked",
+        "physicalSmallFieldUniformFluctuationInputsLevel = conditional",
+    ),
     YM / "BalabanClayT3WardIdentityLiteratureExact.agda": (
         "J. C. Ward",
         '"An Identity in Quantum Electrodynamics"',

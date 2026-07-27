@@ -6,6 +6,7 @@ import DASHI.Physics.YangMills.BalabanClayT2ClusterCriterionComparisonExact
 import DASHI.Physics.YangMills.BalabanClayT2EightWayFernandezProcacciExact
 import DASHI.Physics.YangMills.BalabanClayT3OperatorSchurComplementExact
 import DASHI.Physics.YangMills.BalabanClayT3UniformFluctuationSchurExact
+import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact
 import DASHI.Physics.YangMills.BalabanClayT3WardIdentityLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayT4BetaNormalizationConventionExact
 import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact
@@ -43,6 +44,15 @@ operatorSchurAlgebraLevel = machineChecked
 
 uniformFluctuationCoercivityReductionLevel : ProofLevel
 uniformFluctuationCoercivityReductionLevel = machineChecked
+
+smallFieldCoercivityArchitecturalCorrectionLevel : ProofLevel
+smallFieldCoercivityArchitecturalCorrectionLevel = machineChecked
+
+smallFieldCoercivityAlgebraLevel : ProofLevel
+smallFieldCoercivityAlgebraLevel = machineChecked
+
+smallFieldCoercivityFromErikssonHypothesesLevel : ProofLevel
+smallFieldCoercivityFromErikssonHypothesesLevel = machineChecked
 
 wardReindexingNormalizationLevel : ProofLevel
 wardReindexingNormalizationLevel = machineChecked

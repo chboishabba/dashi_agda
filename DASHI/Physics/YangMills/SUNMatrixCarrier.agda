@@ -1,3 +1,5 @@
+{-# OPTIONS --irrelevant-projections #-}
+
 module DASHI.Physics.YangMills.SUNMatrixCarrier where
 
 ------------------------------------------------------------------------
@@ -25,6 +27,13 @@ record ComplexMatrixOperations {m c : Level}
 
 open ComplexMatrixOperations public
 
+record IsUnitDeterminant
+    {m c : Level} {Matrix : Set m} {Complex : Set c}
+    (ops : ComplexMatrixOperations Matrix Complex)
+    (U : Matrix) : Set (m ⊔ c) where
+  field
+    determinantOne : determinant ops U ≡ oneC ops
+
 record IsSpecialUnitary
     {m c : Level} {Matrix : Set m} {Complex : Set c}
     (ops : ComplexMatrixOperations Matrix Complex)
@@ -34,9 +43,24 @@ record IsSpecialUnitary
       multiplyM ops (daggerM ops U) U ≡ identityM ops
     unitaryRight :
       multiplyM ops U (daggerM ops U) ≡ identityM ops
-    determinantOne : determinant ops U ≡ oneC ops
+    specialDeterminant : IsUnitDeterminant ops U
 
-open IsSpecialUnitary public
+private
+  proofIrrelevant : ∀ {a} {A : Set a} {x y : A} (p1 p2 : x ≡ y) → p1 ≡ p2
+  proofIrrelevant refl refl = refl
+
+  cong : ∀ {a b} {A : Set a} {B : Set b} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+  cong f refl = refl
+
+  isSpecialUnitaryExt :
+    ∀ {m c} {Matrix : Set m} {Complex : Set c}
+      {ops : ComplexMatrixOperations Matrix Complex} {M : Matrix}
+      (s1 s2 : IsSpecialUnitary ops M) → s1 ≡ s2
+  isSpecialUnitaryExt
+    (record { unitaryLeft = uL1 ; unitaryRight = uR1 ; specialDeterminant = record { determinantOne = d1 } })
+    (record { unitaryLeft = uL2 ; unitaryRight = uR2 ; specialDeterminant = record { determinantOne = d2 } })
+    with proofIrrelevant uL1 uL2 | proofIrrelevant uR1 uR2 | proofIrrelevant d1 d2
+  ... | refl | refl | refl = refl
 
 record CertifiedSUNMatrixTheory
     {m c : Level} (N : Nat)
@@ -71,7 +95,7 @@ record SUNMatrixElement
   constructor sunMatrix
   field
     matrix : Matrix
-    .specialUnitary : IsSpecialUnitary (operations theory) matrix
+    specialUnitary : IsSpecialUnitary (operations theory) matrix
 
 open SUNMatrixElement public
 
@@ -80,7 +104,8 @@ sunMatrixExt :
     {theory : CertifiedSUNMatrixTheory N Matrix Complex}
     {A B : SUNMatrixElement theory} →
   matrix A ≡ matrix B → A ≡ B
-sunMatrixExt {A = sunMatrix A aSU} {B = sunMatrix .A bSU} refl = refl
+sunMatrixExt {A = sunMatrix M s1} {B = sunMatrix .M s2} refl =
+  cong (sunMatrix M) (isSpecialUnitaryExt s1 s2)
 
 sunIdentity :
   ∀ {m c N} {Matrix : Set m} {Complex : Set c}
@@ -119,8 +144,8 @@ sunMatrixGroup theory = record
       sunMatrixExt (multiplyAssociative theory (matrix A) (matrix B) (matrix C))
   ; identityLeft = λ A → sunMatrixExt (identityLeft theory (matrix A))
   ; identityRight = λ A → sunMatrixExt (identityRight theory (matrix A))
-  ; inverseLeft = λ A → sunMatrixExt (unitaryLeft (specialUnitary A))
-  ; inverseRight = λ A → sunMatrixExt (unitaryRight (specialUnitary A))
+  ; inverseLeft = λ A → sunMatrixExt (IsSpecialUnitary.unitaryLeft (specialUnitary A))
+  ; inverseRight = λ A → sunMatrixExt (IsSpecialUnitary.unitaryRight (specialUnitary A))
   }
 
 sunMatrixCarrierLevel : ProofLevel

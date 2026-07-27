@@ -35,10 +35,12 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --   Fernandez--Procacci majorant <= Dobrushin majorant <= KP majorant.
 --
 -- Hence a KP witness implies a Dobrushin witness, which implies an FP witness.
--- The converses do not follow.  For subset polymers, the Bissacot--Fernández--
--- Procacci analysis identifies the suitable extended Gruber--Kunz lane with the
--- sharper subset criterion after the corresponding model-specific majorants
--- are shown equal.  No universal extra "interpolating" criterion is invented.
+-- The converses do not follow.  For subset polymers, Gruber--Kunz is weaker than
+-- the sharper Fernández--Procacci combinatorial criterion. The region inclusion
+-- chain of increasing strength is:
+--   Dobrushin ==> Gruber--Kunz ==> Fernandez--Procacci.
+-- Equivalently, satisfaction of a weaker criterion implies satisfaction of a
+-- stronger-region criterion when majorants are aligned.
 ------------------------------------------------------------------------
 
 record PolymerCriterionComparison (Polymer : Set) : Set₁ where
@@ -113,6 +115,12 @@ koteckyPreissImpliesFernandezProcacci dataSet kp =
   dobrushinImpliesFernandezProcacci dataSet
     (koteckyPreissImpliesDobrushin dataSet kp)
 
+kpImpliesSelectedFPInstance :
+  ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer) →
+  KoteckyPreissCriterion dataSet →
+  FernandezProcacciCriterion dataSet
+kpImpliesSelectedFPInstance = koteckyPreissImpliesFernandezProcacci
+
 ------------------------------------------------------------------------
 -- Subset-polymer identification and optional later refinements.
 ------------------------------------------------------------------------
@@ -128,6 +136,24 @@ record ExtendedGruberKunzIdentification
 
 open ExtendedGruberKunzIdentification public
 
+dobrushinMajorantBelowGKForSubsetPolymers :
+  ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer)
+    (identification : ExtendedGruberKunzIdentification dataSet) →
+  ∀ polymer →
+  extendedGruberKunzMajorant identification polymer ≤ dobrushinMajorant dataSet polymer
+dobrushinMajorantBelowGKForSubsetPolymers dataSet identification polymer =
+  subst (λ M → M ≤ dobrushinMajorant dataSet polymer)
+    (sym (extendedGKMatchesFernandezProcacci identification polymer))
+    (fernandezProcacciBelowDobrushin dataSet polymer)
+
+gkMajorantBelowFPForSubsetPolymers :
+  ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer)
+    (identification : ExtendedGruberKunzIdentification dataSet) →
+  ∀ polymer →
+  extendedGruberKunzMajorant identification polymer ≡ fernandezProcacciMajorant dataSet polymer
+gkMajorantBelowFPForSubsetPolymers dataSet identification polymer =
+  extendedGKMatchesFernandezProcacci identification polymer
+
 ExtendedGruberKunzCriterion :
   ∀ {Polymer}
     (dataSet : PolymerCriterionComparison Polymer) →
@@ -136,6 +162,7 @@ ExtendedGruberKunzCriterion dataSet identification = ∀ polymer →
   activity dataSet polymer
     * extendedGruberKunzMajorant identification polymer
   ≤ budget dataSet polymer
+
 
 fernandezProcacciImpliesExtendedGruberKunz :
   ∀ {Polymer}

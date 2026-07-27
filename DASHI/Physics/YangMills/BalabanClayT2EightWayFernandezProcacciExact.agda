@@ -106,6 +106,37 @@ record EightWayCliqueFPData (Scale Root : Set) : Set₁ where
 
 open EightWayCliqueFPData public
 
+record ExtensionCliqueGeometry (Scale Root Extension Direction Polymer : Set) : Set₁ where
+  field
+    validExtensionCount : Root → ℚ
+    polymerIncompatibilitySymmetric : Polymer → Polymer → Set
+    polymerSelfIncompatibleForNonemptySupport : Polymer → Set
+    extensionPolymerNonempty : Extension → Set
+    extensionPreservesRootWitness : Root → Extension → Set
+    distinctDirectionsGiveDistinctExtensions : Direction → Direction → Root → Set
+    distinctExtensionsShareIncompatibilityCore : Extension → Extension → Set
+    sharedCoreImpliesIncompatible : Extension → Extension → Set
+    distinctRootedExtensionsIncompatible : Extension → Extension → Set
+    
+    neighbourhoodPartitionFunction : Root → ℚ → ℚ
+    extensionCliquePartitionFunctionExact : ∀ root μ →
+      neighbourhoodPartitionFunction root μ ≡ 1ℚ + validExtensionCount root * μ
+
+    allEightExtensionsValid : ∀ root → validExtensionCount root ≡ eight
+
+open ExtensionCliqueGeometry public
+
+cliquePartitionFunctionAtEight :
+  ∀ {Scale Root Extension Direction Polymer} →
+  (geom : ExtensionCliqueGeometry Scale Root Extension Direction Polymer) →
+  (root : Root) (μ : ℚ) →
+  neighbourhoodPartitionFunction geom root μ ≡ 1ℚ + eight * μ
+cliquePartitionFunctionAtEight geom root μ =
+  subst
+    (λ count → neighbourhoodPartitionFunction geom root μ ≡ 1ℚ + count * μ)
+    (allEightExtensionsValid geom root)
+    (extensionCliquePartitionFunctionExact geom root μ)
+
 activityTimesCliqueMajorantBelowQuarter :
   ∀ {Scale Root}
     (dataSet : EightWayCliqueFPData Scale Root)
@@ -157,3 +188,4 @@ activityTimesFPCliqueMajorantLevel = machineChecked
 -- lane remains the valid conservative certificate.
 physicalEightExtensionCliqueIdentificationLevel : ProofLevel
 physicalEightExtensionCliqueIdentificationLevel = conditional
+

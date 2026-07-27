@@ -1,3 +1,5 @@
+{-# OPTIONS --irrelevant-projections #-}
+
 module DASHI.Physics.YangMills.SUNMatrixLieGroup where
 
 ------------------------------------------------------------------------
@@ -19,10 +21,10 @@ rawAdjoint :
   ∀ {m c N} {Matrix : Set m} {Complex : Set c}
     {groupTheory : CertifiedSUNMatrixTheory N Matrix Complex} →
   Matrix → Matrix → Matrix
-rawAdjoint {groupTheory = groupTheory} U X =
-  multiplyM (operations groupTheory) U
-    (multiplyM (operations groupTheory) X
-      (daggerM (operations groupTheory) U))
+rawAdjoint {Matrix = Matrix} {Complex = Complex} {groupTheory = groupTheory} U X =
+  multiplyM {Matrix = Matrix} {Complex = Complex} (operations groupTheory) U
+    (multiplyM {Matrix = Matrix} {Complex = Complex} (operations groupTheory) X
+      (daggerM {Matrix = Matrix} {Complex = Complex} (operations groupTheory) U))
 
 record CertifiedSUNMatrixLieGroupAuthority
     {m c : Level} (N : Nat)
@@ -43,17 +45,17 @@ record CertifiedSUNMatrixLieGroupAuthority
     adjointClosed : ∀ {U X} →
       IsSpecialUnitary (operations groupTheory) U →
       IsSUNLieElement (lieOperations lieTheory) X →
-      IsSUNLieElement (lieOperations lieTheory) (rawAdjoint U X)
+      IsSUNLieElement (lieOperations lieTheory) (rawAdjoint {groupTheory = groupTheory} U X)
 
     adjointIdentityRaw : ∀ X →
-      rawAdjoint (identityM (operations groupTheory)) X ≡ X
+      rawAdjoint {groupTheory = groupTheory} (identityM (operations groupTheory)) X ≡ X
     adjointProductRaw : ∀ U V X →
-      rawAdjoint (multiplyM (operations groupTheory) U V) X ≡
-      rawAdjoint U (rawAdjoint V X)
+      rawAdjoint {groupTheory = groupTheory} (multiplyM (operations groupTheory) U V) X ≡
+      rawAdjoint {groupTheory = groupTheory} U (rawAdjoint {groupTheory = groupTheory} V X)
     adjointBracketRaw : ∀ U X Y →
-      rawAdjoint U (commutator (lieOperations lieTheory) X Y) ≡
+      rawAdjoint {groupTheory = groupTheory} U (commutator (lieOperations lieTheory) X Y) ≡
       commutator (lieOperations lieTheory)
-        (rawAdjoint U X) (rawAdjoint U Y)
+        (rawAdjoint {groupTheory = groupTheory} U X) (rawAdjoint {groupTheory = groupTheory} U Y)
 
     ConjugatesExponentials : Set (m ⊔ c)
     conjugatesExponentials : ConjugatesExponentials
@@ -95,9 +97,9 @@ sunAd :
   CertifiedSUNMatrixLieGroupAuthority N groupTheory lieTheory →
   SUNMatrixElement groupTheory →
   SUNMatrixLieElement lieTheory → SUNMatrixLieElement lieTheory
-sunAd authority U X =
+sunAd {groupTheory = groupTheory} authority U X =
   sunLieMatrix
-    (rawAdjoint (matrix U) (lieMatrix X))
+    (rawAdjoint {groupTheory = groupTheory} (matrix U) (lieMatrix X))
     (adjointClosed authority (specialUnitary U) (isSUNLie X))
 
 sunCompactSimpleLieGroup :
