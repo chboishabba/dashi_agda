@@ -8,6 +8,7 @@ import DASHI.Cognition.PNF.MemoryFibre
 import DASHI.Cognition.PNF.LearningAlgebra
 import DASHI.Cognition.PNF.FibreLearningDynamics
 import DASHI.Cognition.PNF.BraidLearningTransport
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Cognition.PNF.ExtractorBoundary
 import DASHI.Cognition.PNF.AttractorMeasurementValidation
 import DASHI.Cognition.PNF.NashiDecisionProofBridge
