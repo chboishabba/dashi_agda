@@ -3,6 +3,8 @@ module DASHI.Foundations.SSPPrimeLane369ConsumerRegression where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
+import DASHI.Foundations.RepresentationHypervoxelRegression
+
 open import DASHI.Core.SuperSSP369Field as Super using
   ( SuperSSP369Field
   ; focusPrimeLane
