@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact
 import DASHI.Physics.YangMills.BalabanClayP3PrincipalFibreCoordinatesExact
 import DASHI.Physics.YangMills.BalabanClayT3CompactHaarLimitExact
+import DASHI.Physics.YangMills.BalabanClayT3OperatorSchurComplementExact
 import DASHI.Physics.YangMills.BalabanClayT3SchurWardBetaExact
 import DASHI.Physics.YangMills.BalabanClayP4DyadicCoercivityBudgetExact
 import DASHI.Physics.YangMills.BalabanClayP4CommonParameterDomainExact
@@ -150,6 +151,10 @@ t3CompactHaarWardTransportLevel : ProofLevel
 t3CompactHaarWardTransportLevel = machineChecked
 t3ScalarSchurNormalizationLevel : ProofLevel
 t3ScalarSchurNormalizationLevel = machineChecked
+t3OperatorSchurEnergyIdentityLevel : ProofLevel
+t3OperatorSchurEnergyIdentityLevel = machineChecked
+t3OperatorSchurP3AdapterLevel : ProofLevel
+t3OperatorSchurP3AdapterLevel = machineChecked
 t3GaugeReindexWardLevel : ProofLevel
 t3GaugeReindexWardLevel = machineChecked
 t3QuarticBetaRemainderSummabilityLevel : ProofLevel
