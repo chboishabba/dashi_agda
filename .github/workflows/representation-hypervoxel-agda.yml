@@ -20,6 +20,10 @@ on:
 jobs:
   typecheck:
     runs-on: ubuntu-latest
+    env:
+      AGDA_BIN: agda
+      DASHI_REPO_ROOT: ${{ github.workspace }}
+      AGDA_LOG_PATH: ${{ github.workspace }}/.cache/representation-hypervoxel-agda.log
     steps:
       - uses: actions/checkout@v4
         with:
