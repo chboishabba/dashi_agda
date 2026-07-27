@@ -1,6 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
@@ -114,9 +116,11 @@ measureLimitReflectionPositive :
       Measure Schwinger TestFamily Scalar) →
   GramReflectionPositive (gramLimit dataSet)
     (schwinger dataSet (continuumMeasure dataSet))
-measureLimitReflectionPositive dataSet testFamily
-  rewrite continuumSchwingerMatches dataSet =
-  continuumReflectionPositiveFromGramTopology (gramLimit dataSet) testFamily
+measureLimitReflectionPositive dataSet =
+  subst
+    (GramReflectionPositive (gramLimit dataSet))
+    (continuumSchwingerMatches dataSet)
+    (continuumReflectionPositiveFromGramTopology (gramLimit dataSet))
 
 osGramQuadraticFormClosureLevel : ProofLevel
 osGramQuadraticFormClosureLevel = machineChecked
