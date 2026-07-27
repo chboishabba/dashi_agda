@@ -146,6 +146,13 @@ record RationalBoxEvaluator : Set₁ where
       allInner cell ≡ false →
       Momentum.quadratureRemainderUpper (evaluate cell)
 
+    -- Finite-list fold receipts.  These connect the pointwise evaluator to the
+    -- exact generated 240-cell regular list consumed by the older partition API.
+    allRegularDenominatorsPositive : Set
+    allRegularNumeratorsEnclosed : Set
+    allRegularIntegrandsEnclosed : Set
+    allRegularQuadratureRemaindersEnclosed : Set
+
     normalizedCubeCoverExact : Set
     infraredCubeIsExactlyInnerCells : Set
     regularCellsPairwiseInteriorDisjoint : Set
@@ -170,14 +177,11 @@ asGeneratedBrillouinPartition evaluator = record
   ; regularBoxInteriorsDisjoint = regularCellsPairwiseInteriorDisjoint evaluator
   ; regularBoxesClosedUnderHypercubicSymmetry =
       regularCellsClosedUnderHypercubicSymmetry evaluator
-  ; allDenominatorsPositive = λ where
-      -- The finite traversal proof is supplied by the evaluator and follows the
-      -- generated 240-cell list; no ungenerated box is admitted.
-      _ → everyRegularDenominatorPositive evaluator
-  ; allNumeratorsEnclosed = λ _ → everyRegularNumeratorEnclosed evaluator
-  ; allIntegrandsEnclosed = λ _ → everyRegularIntegrandEnclosed evaluator
-  ; allQuadratureErrorsEnclosed = λ _ →
-      everyRegularQuadratureRemainderEnclosed evaluator
+  ; allDenominatorsPositive = allRegularDenominatorsPositive evaluator
+  ; allNumeratorsEnclosed = allRegularNumeratorsEnclosed evaluator
+  ; allIntegrandsEnclosed = allRegularIntegrandsEnclosed evaluator
+  ; allQuadratureErrorsEnclosed =
+      allRegularQuadratureRemaindersEnclosed evaluator
   ; sumLowerContributionsExact = lowerContributionSumExact evaluator
   ; sumUpperContributionsExact = upperContributionSumExact evaluator
   ; regularRemainderInsideCertifiedInterval =
