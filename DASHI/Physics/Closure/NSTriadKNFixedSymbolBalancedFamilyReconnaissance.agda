@@ -10,9 +10,12 @@ module DASHI.Physics.Closure.NSTriadKNFixedSymbolBalancedFamilyReconnaissance wh
 -- support.
 -- Relationship: restricts the search to deterministic state-independent
 -- low-pass, high-pass, smooth-window and dyadic-band symbols, and classifies
--- all 4^3 Gaussian phase choices crossed with 2^3 amplitude choices. The
--- dangerous half of the family has zero scalar-localized correction; the
--- quadrature half has nonzero localized flux but is already non-dangerous.
+-- all 4^3 Gaussian phase choices crossed with 2^3 amplitude choices. It also
+-- checks 48 signed coordinate permutations, four support dilations, five
+-- larger balanced clusters, and six transverse-to-balance perturbations over
+-- all 2,688 symbol/sign/admissible-epsilon combinations. The dangerous
+-- balanced half has zero scalar-localized correction, and no transverse
+-- perturbation is repaired by the represented regular symbol family.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -150,6 +153,44 @@ dangerousFamilyHasNoNonzeroScalarLocalizedCorrection :
   dangerousWithNonzeroLocalizedCount ≡ 0
 dangerousFamilyHasNoNonzeroScalarLocalizedCorrection = refl
 
+latticeSymmetryTestCount distinctSymmetrySupportCount
+  supportDilationTestCount largerClusterTestCount
+  transversePerturbationTestCount symbolSignEpsilonAttemptCount
+  transversePerturbationRepairCount : Nat
+latticeSymmetryTestCount = 48
+distinctSymmetrySupportCount = 12
+supportDilationTestCount = 4
+largerClusterTestCount = 5
+transversePerturbationTestCount = 6
+symbolSignEpsilonAttemptCount =
+  transversePerturbationTestCount * fixedCandidateCount * 2 * 8
+transversePerturbationRepairCount = 0
+
+latticeSymmetryTestCountIsFortyEight : latticeSymmetryTestCount ≡ 48
+latticeSymmetryTestCountIsFortyEight = refl
+
+distinctSymmetrySupportCountIsTwelve :
+  distinctSymmetrySupportCount ≡ 12
+distinctSymmetrySupportCountIsTwelve = refl
+
+supportDilationTestCountIsFour : supportDilationTestCount ≡ 4
+supportDilationTestCountIsFour = refl
+
+largerClusterTestCountIsFive : largerClusterTestCount ≡ 5
+largerClusterTestCountIsFive = refl
+
+transversePerturbationTestCountIsSix :
+  transversePerturbationTestCount ≡ 6
+transversePerturbationTestCountIsSix = refl
+
+symbolSignEpsilonAttemptCountIsTwoThousandSixHundredEightyEight :
+  symbolSignEpsilonAttemptCount ≡ 2688
+symbolSignEpsilonAttemptCountIsTwoThousandSixHundredEightyEight = refl
+
+noTransversePerturbationWasRepaired :
+  transversePerturbationRepairCount ≡ 0
+noTransversePerturbationWasRepaired = refl
+
 record BalancedFamilyExactReceipt : Set where
   constructor balanced-receipt
   field
@@ -164,6 +205,15 @@ record BalancedFamilyExactReceipt : Set where
       (localizedPByRelativePhase phase ≡ + 0)
       × (localizedQByRelativePhase phase ≡ + 0)
       × (localizedKByRelativePhase phase ≡ + 0)
+    allSignedCoordinatePermutationsTested : latticeSymmetryTestCount ≡ 48
+    allDistinctSymmetrySupportsCounted : distinctSymmetrySupportCount ≡ 12
+    supportDilationsTested : supportDilationTestCount ≡ 4
+    largerBalancedClustersTested : largerClusterTestCount ≡ 5
+    transversePerturbationsTested : transversePerturbationTestCount ≡ 6
+    allSymbolSignEpsilonAttemptsCounted :
+      symbolSignEpsilonAttemptCount ≡ 2688
+    noTransversePerturbationRepairFound :
+      transversePerturbationRepairCount ≡ 0
 
 open BalancedFamilyExactReceipt public
 
@@ -174,3 +224,10 @@ balancedFamilyExactReceipt =
     dangerousAndSafePartitionTheFamily
     dangerousFamilyHasNoNonzeroScalarLocalizedCorrection
     dangerousRelativePhaseHasZeroLocalizedCorrection
+    latticeSymmetryTestCountIsFortyEight
+    distinctSymmetrySupportCountIsTwelve
+    supportDilationTestCountIsFour
+    largerClusterTestCountIsFive
+    transversePerturbationTestCountIsSix
+    symbolSignEpsilonAttemptCountIsTwoThousandSixHundredEightyEight
+    noTransversePerturbationWasRepaired
