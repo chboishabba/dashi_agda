@@ -7,40 +7,43 @@ import JFixedPoint as J
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as SU2SO3
 
 ------------------------------------------------------------------------
--- Fixed-point-free sheet exchange is a transition carrier. A separate
--- quotient/coarse-graining map may land on the named J scalar, but this does
--- not prove attraction, convergence, damping or universal Stage semantics.
+-- Fixed-point-free sheet exchange is a transition carrier.
+--
+-- The map below is intentionally a constant, centre-blind quotient label: it
+-- forgets the lifted value and sends the whole finite cover to the existing J
+-- scalar. It is not a lift-sensitive resolution algorithm, convergence map,
+-- damping operator or attractor theorem.
 ------------------------------------------------------------------------
 
-resolveAxisLiftToJScalar : SU2SO3.AxisLift → Nat
-resolveAxisLiftToJScalar lifted =
+constantJScalarQuotient : SU2SO3.AxisLift → Nat
+constantJScalarQuotient lifted =
   J.contract J.unit-obs
 
-resolveCentralFlipInvariant :
+constantQuotientCentralFlipInvariant :
   ∀ lifted →
-  resolveAxisLiftToJScalar (SU2SO3.flipAxisLift lifted)
-  ≡ resolveAxisLiftToJScalar lifted
-resolveCentralFlipInvariant lifted = refl
+  constantJScalarQuotient (SU2SO3.flipAxisLift lifted)
+  ≡ constantJScalarQuotient lifted
+constantQuotientCentralFlipInvariant lifted = refl
 
-resolveCoverCentralFlipInvariant :
+constantQuotientCoverFlipInvariant :
   ∀ lifted →
-  resolveAxisLiftToJScalar
+  constantJScalarQuotient
     (SU2SO3.TwoSheetedCoverInterface.centralFlip
       SU2SO3.finiteAxisLiftDoubleCover
       lifted)
-  ≡ resolveAxisLiftToJScalar lifted
-resolveCoverCentralFlipInvariant lifted = refl
+  ≡ constantJScalarQuotient lifted
+constantQuotientCoverFlipInvariant lifted = refl
 
-resolveAxisLiftIs196884 :
+constantQuotientIs196884 :
   ∀ lifted →
-  resolveAxisLiftToJScalar lifted ≡ 196884
-resolveAxisLiftIs196884 lifted = J.unit-converges
+  constantJScalarQuotient lifted ≡ 196884
+constantQuotientIs196884 lifted = J.unit-converges
 
-resolveAxisLiftMatchesCRTPeriodPlusOne :
+constantQuotientMatchesCRTPeriodPlusOne :
   ∀ lifted →
-  resolveAxisLiftToJScalar lifted
+  constantJScalarQuotient lifted
   ≡ 196883 + 1
-resolveAxisLiftMatchesCRTPeriodPlusOne lifted = refl
+constantQuotientMatchesCRTPeriodPlusOne lifted = refl
 
 record SheetExchangeResolutionBoundary : Set₁ where
   field
@@ -48,19 +51,21 @@ record SheetExchangeResolutionBoundary : Set₁ where
       SU2SO3.TwoSheetedCoverInterface
         SU2SO3.AxisLift
         SU2SO3.SU2Axis
-    resolve : SU2SO3.AxisLift → Nat
-    resolutionFlipInvariant :
+    quotientToJScalar : SU2SO3.AxisLift → Nat
+    quotientFlipInvariant :
       ∀ lifted →
-      resolve
+      quotientToJScalar
         (SU2SO3.TwoSheetedCoverInterface.centralFlip cover lifted)
-      ≡ resolve lifted
+      ≡ quotientToJScalar lifted
     namedTarget : Nat
     targetIsJCoefficient : namedTarget ≡ 196884
-    everyCanonicalLiftResolvesToTarget :
-      ∀ lifted → resolve lifted ≡ namedTarget
+    everyLiftHasSameQuotientTarget :
+      ∀ lifted → quotientToJScalar lifted ≡ namedTarget
     crtPeriodPlusOneWitness :
       196883 + 1 ≡ 196884
-    quotientOrCoarseGrainingAvailable : Bool
+    constantQuotientIntentional : Bool
+    quotientIsLiftSensitive : Bool
+    quotientOrCoarseGrainingLabelAvailable : Bool
     pureInvolutionConvergesClaimed : Bool
     attractorBasinProved : Bool
     dampingOperatorSupplied : Bool
@@ -71,13 +76,15 @@ canonicalSheetExchangeResolutionBoundary :
   SheetExchangeResolutionBoundary
 canonicalSheetExchangeResolutionBoundary = record
   { cover = SU2SO3.finiteAxisLiftDoubleCover
-  ; resolve = resolveAxisLiftToJScalar
-  ; resolutionFlipInvariant = resolveCoverCentralFlipInvariant
+  ; quotientToJScalar = constantJScalarQuotient
+  ; quotientFlipInvariant = constantQuotientCoverFlipInvariant
   ; namedTarget = 196884
   ; targetIsJCoefficient = refl
-  ; everyCanonicalLiftResolvesToTarget = resolveAxisLiftIs196884
+  ; everyLiftHasSameQuotientTarget = constantQuotientIs196884
   ; crtPeriodPlusOneWitness = CRTJ.period-plus-one
-  ; quotientOrCoarseGrainingAvailable = true
+  ; constantQuotientIntentional = true
+  ; quotientIsLiftSensitive = false
+  ; quotientOrCoarseGrainingLabelAvailable = true
   ; pureInvolutionConvergesClaimed = false
   ; attractorBasinProved = false
   ; dampingOperatorSupplied = false
