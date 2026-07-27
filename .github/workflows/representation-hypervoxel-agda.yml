@@ -28,6 +28,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
       - name: Run fail-closed source and arithmetic audit
         run: python3 scripts/check_representation_hypervoxel_spine.py
       - uses: cachix/install-nix-action@v31
