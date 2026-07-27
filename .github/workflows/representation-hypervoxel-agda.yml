@@ -1,0 +1,34 @@
+name: Representation hypervoxel Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Cognition/SituatedFrameMetacognitionBoundary.agda'
+      - 'DASHI/Foundations/RadixValuationStageBridge.agda'
+      - 'DASHI/Foundations/RecursiveRadixHypervoxel.agda'
+      - 'DASHI/Foundations/RepresentationChartInvariant.agda'
+      - 'DASHI/Foundations/RepresentationHypervoxelRegression.agda'
+      - 'DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda'
+      - 'DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda'
+      - 'DASHI/Geometry/RepresentationPrefixUltrametricBridge.agda'
+      - 'DASHI/Physics/Closure/SU2SO3369HypervoxelBridge.agda'
+      - 'scripts/check_representation_hypervoxel_spine.py'
+      - '.github/workflows/representation-hypervoxel-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run fail-closed source and arithmetic audit
+        run: python3 scripts/check_representation_hypervoxel_spine.py
+      - uses: cachix/install-nix-action@v31
+      - name: Typecheck focused regression
+        run: |
+          nix develop --command agda -i . -l standard-library \
+            DASHI/Foundations/RepresentationHypervoxelRegression.agda
+      - name: Typecheck authoritative 369 wiring
+        run: |
+          nix develop --command agda -i . -l standard-library \
+            DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda
