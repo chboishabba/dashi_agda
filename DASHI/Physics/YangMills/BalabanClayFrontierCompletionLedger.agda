@@ -150,10 +150,12 @@ t2EightOverSixteenTraversalLevel : ProofLevel
 t2EightOverSixteenTraversalLevel = machineChecked
 t2RootedShellQuarterHalfPowerLevel : ProofLevel
 t2RootedShellQuarterHalfPowerLevel = machineChecked
-t2KoteckyPreissToFernandezProcacciLevel : ProofLevel
-t2KoteckyPreissToFernandezProcacciLevel = machineChecked
-t2FernandezProcacciToInterpolatingLevel : ProofLevel
-t2FernandezProcacciToInterpolatingLevel = machineChecked
+t2KoteckyPreissToDobrushinLevel : ProofLevel
+t2KoteckyPreissToDobrushinLevel = machineChecked
+t2DobrushinToFernandezProcacciLevel : ProofLevel
+t2DobrushinToFernandezProcacciLevel = machineChecked
+t2FernandezProcacciToExtendedGKLevel : ProofLevel
+t2FernandezProcacciToExtendedGKLevel = machineChecked
 t2CriterionSignConventionLevel : ProofLevel
 t2CriterionSignConventionLevel = machineChecked
 t2UrsellCauchyModulusLevel : ProofLevel
@@ -226,6 +228,8 @@ p2PhysicalActivityAndRootedShellEstimateLevel : ProofLevel
 p2PhysicalActivityAndRootedShellEstimateLevel = conditional
 p2PhysicalStrictCriterionSlackLevel : ProofLevel
 p2PhysicalStrictCriterionSlackLevel = conditional
+p2PhysicalExtendedGKIdentificationLevel : ProofLevel
+p2PhysicalExtendedGKIdentificationLevel = conditional
 p2InfiniteClusterCorrelationLevel : ProofLevel
 p2InfiniteClusterCorrelationLevel = conditional
 p3ExactConstrainedIntegralCoordinatesLevel : ProofLevel
