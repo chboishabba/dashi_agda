@@ -4,20 +4,22 @@ module DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram where
 -- PROVENANCE
 -- Authors: Oleg Kiriukhin; Gord Sinnamon; Loukas Grafakos;
 -- Rodolfo H. Torres; Pierre Germain; DASHI repository contributors.
--- Title: "Stage-3 raw-row adapter, three-function Schur, and partial-adjoint
--- trilinear programme".
+-- Title: "Stage-3 raw-row, symmetric-stretching, three-function Schur, and
+-- partial-adjoint trilinear programme".
 -- Venue/year: cited source publications and DASHI formal development, 2026.
--- DOI: 10.48550/arXiv.2604.12188; 10.1006/jfan.2001.3804;
--- 10.1016/j.jde.2005.10.007; Sinnamon publication has no DOI in the
--- cited metadata.
--- Uses: Kiriukhin raw orbit-row estimates, orbit-to-dyadic transport,
--- finite helical lifting, Grafakos--Torres three-function Schur, the
--- frozen-output two-function specialization, and Navier-Stokes
--- paraproduct duality.
+-- DOI: 10.48550/arXiv.2604.12188; 10.48550/arXiv.2603.23293;
+-- 10.1006/jfan.2001.3804; 10.1016/j.jde.2005.10.007; Sinnamon publication
+-- has no DOI in the cited metadata.
+-- Uses: Kiriukhin raw orbit-row and symmetric stretching estimates,
+-- orbit-to-dyadic transport, finite helical lifting, Grafakos--Torres
+-- three-function Schur, the frozen-output two-function specialization, and
+-- Navier-Stokes paraproduct duality.
 -- Relationship: the raw row source supplies only the output-side condition.
--- The two partial-adjoint homogeneity ledgers, three-weight exponent system,
--- repository separation threshold, and cutoff-uniform trilinear theorem
--- remain explicit open obligations.
+-- The companion symmetric-part estimate is useful for orbit-level enstrophy
+-- continuation but adds no independent raw partial-adjoint exponent equation.
+-- Both partial-adjoint homogeneity ledgers, the three-weight exponent system,
+-- repository separation threshold, and cutoff-uniform trilinear theorem remain
+-- explicit open obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -25,6 +27,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNKiriukhinOrbitRowSumAdapter as Kiriukhin
+import DASHI.Physics.Closure.NSTriadKNKiriukhinSymmetricStretchingCompanionAudit as Symmetric
 import DASHI.Physics.Closure.NSTriadKNOrbitToDyadicShellBridge as OrbitShell
 import DASHI.Physics.Closure.NSTriadKNFiniteHelicityRowLifting as HelicityLift
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurDualityProgram as WeightedSchur
@@ -41,6 +44,8 @@ record Stage3WeightedSchurResearchCutset
 
     rawOrbitKernelIdentified : Set s
     kiriukhinConventionAdapterClosed : Set s
+    symmetricStretchingConventionAdapterClosed : Set s
+    symmetricStretchingContinuationBridgeClosed : Set s
     orbitToExactShellBridgeClosed : Set s
     exactShellToDyadicBridgeClosed : Set s
     sevenClassTransportClosed : Set s
@@ -82,6 +87,27 @@ kiriukhinRawRowLiteratureBackedIsTrue :
   kiriukhinRawRowLiteratureBacked ≡ true
 kiriukhinRawRowLiteratureBackedIsTrue =
   Kiriukhin.kiriukhinRawRowSourceAvailableIsTrue
+
+kiriukhinSymmetricStretchingLiteratureBacked : Bool
+kiriukhinSymmetricStretchingLiteratureBacked =
+  Symmetric.companionUsefulForOrbitEnstrophyContinuation
+
+kiriukhinSymmetricStretchingLiteratureBackedIsTrue :
+  kiriukhinSymmetricStretchingLiteratureBacked ≡ true
+kiriukhinSymmetricStretchingLiteratureBackedIsTrue =
+  Symmetric.companionUsefulForOrbitEnstrophyContinuationIsTrue
+
+symmetricCompanionReducesTriadicNullity : Bool
+symmetricCompanionReducesTriadicNullity =
+  Symmetric.companionSymmetricBoundReducesTriadicNullity
+
+symmetricCompanionReducesTriadicNullityIsFalse :
+  symmetricCompanionReducesTriadicNullity ≡ false
+symmetricCompanionReducesTriadicNullityIsFalse =
+  Symmetric.companionSymmetricBoundReducesTriadicNullityIsFalse
+
+symmetricCompanionRankAudit : Symmetric.SymmetricCompanionRankAudit
+symmetricCompanionRankAudit = Symmetric.symmetricCompanionRankAudit
 
 threeFunctionSchurPrimary : Bool
 threeFunctionSchurPrimary = ThreeFunction.threeFunctionSchurPrimaryFramework
