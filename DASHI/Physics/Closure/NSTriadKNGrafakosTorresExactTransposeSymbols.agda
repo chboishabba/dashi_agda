@@ -19,7 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNGrafakosTorresExactTransposeSymbols where
 -- DOI: not applicable; this is a repository-original exact instantiation.
 -- Uses: the literal signed coefficient -i P_k[(u_p dot q)u_q].
 -- Relationship: the three scalar trilinear symbols below are definitionally
--- the same coefficient with the tested leg rotated.  Literal vector-valued
+-- the same coefficient with the tested leg rotated. Literal vector-valued
 -- adjoint formulas remain a separate algebraic obligation.
 ------------------------------------------------------------------------
 
@@ -30,10 +30,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
-
-------------------------------------------------------------------------
--- General three-leg permutation surface.
-------------------------------------------------------------------------
 
 data OperatorLeg : Set where
   outputLeg firstInputLeg secondInputLeg : OperatorLeg
@@ -57,7 +53,7 @@ secondKernelInput firstTranspose = secondInputLeg
 secondKernelInput secondTranspose = outputLeg
 
 record KernelPermutationReceipt : Set where
-  constructor receipt
+  constructor kernel-permutation-receipt
   field
     originalOutput : kernelOutputLeg original ≡ outputLeg
     firstTransposeOutput : kernelOutputLeg firstTranspose ≡ firstInputLeg
@@ -70,14 +66,8 @@ record KernelPermutationReceipt : Set where
 open KernelPermutationReceipt public
 
 kernelPermutationReceipt : KernelPermutationReceipt
-kernelPermutationReceipt = receipt refl refl refl refl refl refl refl
-
-------------------------------------------------------------------------
--- Grafakos--Torres equation (16), specialized to a bilinear operator.
---
--- Freeze input 1: the remaining linear transpose is inherited from T*2.
--- Freeze input 2: the remaining linear transpose is inherited from T*1.
-------------------------------------------------------------------------
+kernelPermutationReceipt =
+  kernel-permutation-receipt refl refl refl refl refl refl refl
 
 data FrozenInput : Set where
   freezeFirstInput freezeSecondInput : FrozenInput
@@ -90,7 +80,7 @@ transposeAfterFreeze freezeFirstInput = inheritedSecondTranspose
 transposeAfterFreeze freezeSecondInput = inheritedFirstTranspose
 
 record FrozenOperatorTransposeReceipt : Set where
-  constructor receipt
+  constructor frozen-operator-transpose-receipt
   field
     freezeFirstUsesSecondTranspose :
       transposeAfterFreeze freezeFirstInput ≡ inheritedSecondTranspose
@@ -100,11 +90,7 @@ record FrozenOperatorTransposeReceipt : Set where
 open FrozenOperatorTransposeReceipt public
 
 frozenOperatorTransposeReceipt : FrozenOperatorTransposeReceipt
-frozenOperatorTransposeReceipt = receipt refl refl
-
-------------------------------------------------------------------------
--- Literal scalar symbols for the repository coefficient.
-------------------------------------------------------------------------
+frozenOperatorTransposeReceipt = frozen-operator-transpose-receipt refl refl
 
 outputTrilinearSymbol :
   ∀ {r} (F : C3.RealField r)
@@ -157,11 +143,6 @@ secondTransposePairingIdentity :
   secondTransposeTrilinearSymbol F E I q p k uP testK uQ
   ≡ outputTrilinearSymbol F E I k p q uP uQ testK
 secondTransposePairingIdentity F E I k p q uP uQ testK = refl
-
-------------------------------------------------------------------------
--- The scalar pairing identities are exact.  Turning them into vector-valued
--- formulas requires the listed laws and must not be hidden by permutation.
-------------------------------------------------------------------------
 
 record LiteralVectorTransposeCutset {r : Level}
     (F : C3.RealField r) : Set (lsuc r) where
