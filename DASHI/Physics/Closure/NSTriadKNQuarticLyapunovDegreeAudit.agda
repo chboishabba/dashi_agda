@@ -1,5 +1,18 @@
 module DASHI.Physics.Closure.NSTriadKNQuarticLyapunovDegreeAudit where
 
+------------------------------------------------------------------------
+-- PROVENANCE
+-- Authors: David Darrow; Elizabeth Carlson; David Goluskin.
+-- Title: "Quartic Lyapunov functions for global fluid stability".
+-- Venue/year: arXiv preprint, 2026.
+-- Journal DOI: none recorded on arXiv v1.
+-- arXiv/DataCite DOI: 10.48550/arXiv.2606.18232.
+-- arXiv: 2606.18232v1.
+-- Uses: Remark 2.1 and equation (16).
+-- Relationship: contrasts the valid square of Euler-invariant kinetic energy
+-- with the DASHI-original positive-order H^s quintic obstruction.
+------------------------------------------------------------------------
+
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
