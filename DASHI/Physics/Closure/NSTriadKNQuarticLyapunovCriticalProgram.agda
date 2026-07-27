@@ -1,5 +1,17 @@
 module DASHI.Physics.Closure.NSTriadKNQuarticLyapunovCriticalProgram where
 
+------------------------------------------------------------------------
+-- PROVENANCE
+-- Authors: DASHI repository contributors.
+-- Title: "Periodic critical quartic Lyapunov research programme".
+-- Venue/year: DASHI formal development, 2026.
+-- DOI: not applicable; this is a DASHI-original integration layer.
+-- Uses: Darrow--Carlson--Goluskin, "Quartic Lyapunov functions for global
+-- fluid stability", arXiv:2606.18232v1, equations (16) and (21)--(25).
+-- Relationship: adapts and contrasts; it preserves the transferable quartic
+-- algebra but leaves arbitrary-data periodic 3-D domination fail-closed.
+------------------------------------------------------------------------
+
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -10,6 +22,7 @@ open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovDegreeAudit public
 open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEulerInvariantDecomposition public
 open import DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticCoherenceCharts public
 open import DASHI.Physics.Closure.NSTriadKNPeriodicStokesModeDegeneracy public
+open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEightStageProgram public
 
 ------------------------------------------------------------------------
 -- Fail-closed research socket for the periodic 3-D problem.
