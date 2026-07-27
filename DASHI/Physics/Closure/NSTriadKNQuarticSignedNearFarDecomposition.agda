@@ -43,11 +43,6 @@ record ExactSignedNearFarDecomposition {c s : Level} :
       + (classMagnitude transition N state
       + classMagnitude residualChartSwitch N state)))))
 
-    eachPhysicalTriadOccursExactlyOnce : Set
-    signedRealityOrbitsPreserved : Set
-    orderedPairMultiplicityPreserved : Set
-    transitionBoundaryIsDisjoint : Set
-
 open ExactSignedNearFarDecomposition public
 
 record QuantitativeNearFarBounds
