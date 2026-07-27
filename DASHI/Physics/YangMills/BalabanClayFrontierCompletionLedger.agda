@@ -2,9 +2,23 @@ module DASHI.Physics.YangMills.BalabanClayFrontierCompletionLedger where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanFourAxisMartingaleExact
+import DASHI.Physics.YangMills.BalabanConfiguredSide4ScalarWilsonOperatorExact
 import DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact
 import DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixDimensionExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredMatrixActionExact
+import DASHI.Physics.YangMills.BalabanPath4GlobalAverageExact
+import DASHI.Physics.YangMills.BalabanSide4ScalarGreenKernelComputed
+import DASHI.Physics.YangMills.BalabanSide4TranslationDifferenceExact
+import DASHI.Physics.YangMills.BalabanSide4TranslationConvolutionExact
+import DASHI.Physics.YangMills.BalabanSide4TranslationSymmetryExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredScalarReductionExact
+import DASHI.Physics.YangMills.BalabanSide4ScalarGreenConvolutionExact
+import DASHI.Physics.YangMills.BalabanFiniteRationalCauchyExact
+import DASHI.Physics.YangMills.BalabanSide4ScalarGreenNormExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredGreenExact
+import DASHI.Physics.YangMills.BalabanPath4SU2ConfiguredGreenNormExact
 import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
@@ -15,8 +29,14 @@ import DASHI.Physics.YangMills.BalabanClayP4CommonParameterDomainExact
 import DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact
 
 ------------------------------------------------------------------------
--- Newly closed exact reductions.
+-- Closed exact reductions.
 ------------------------------------------------------------------------
+
+fourAxisMartingaleScalarAlgebraLevel : ProofLevel
+fourAxisMartingaleScalarAlgebraLevel = machineChecked
+
+scalarWilsonRieszSignAndZeroFoldLevel : ProofLevel
+scalarWilsonRieszSignAndZeroFoldLevel = machineChecked
 
 finiteMatrixProductAndInverseConsequenceLevel : ProofLevel
 finiteMatrixProductAndInverseConsequenceLevel = machineChecked
@@ -29,6 +49,51 @@ configuredPhysicalMatrixDimension3072Level = machineChecked
 
 configuredGaugeFixedMatrixDefinitionLevel : ProofLevel
 configuredGaugeFixedMatrixDefinitionLevel = machineChecked
+
+configuredMatrixActionLinearityLevel : ProofLevel
+configuredMatrixActionLinearityLevel = machineChecked
+
+fourAxisAverageGlobalMeanLevel : ProofLevel
+fourAxisAverageGlobalMeanLevel = machineChecked
+
+sideFourTranslationDifferenceLevel : ProofLevel
+sideFourTranslationDifferenceLevel = machineChecked
+
+sideFourTranslationConvolutionLevel : ProofLevel
+sideFourTranslationConvolutionLevel = machineChecked
+
+sideFourTranslationSymmetryLevel : ProofLevel
+sideFourTranslationSymmetryLevel = machineChecked
+
+sideFourScalarGreenKernelEquationLevel : ProofLevel
+sideFourScalarGreenKernelEquationLevel = machineChecked
+
+sideFourScalarGreenKernelNormalizationLevel : ProofLevel
+sideFourScalarGreenKernelNormalizationLevel = machineChecked
+
+configuredOperatorLaplacianPlusMeanReductionLevel : ProofLevel
+configuredOperatorLaplacianPlusMeanReductionLevel = machineChecked
+
+sideFourScalarGreenTwoSidedLevel : ProofLevel
+sideFourScalarGreenTwoSidedLevel = machineChecked
+
+finiteRationalCauchyLevel : ProofLevel
+finiteRationalCauchyLevel = machineChecked
+
+sideFourScalarGreenNormLevel : ProofLevel
+sideFourScalarGreenNormLevel = machineChecked
+
+configuredPhysicalGreenTwoSidedLevel : ProofLevel
+configuredPhysicalGreenTwoSidedLevel = machineChecked
+
+configuredGreenMatrixInverseProductLevel : ProofLevel
+configuredGreenMatrixInverseProductLevel = machineChecked
+
+configuredPhysicalGreenNormLevel : ProofLevel
+configuredPhysicalGreenNormLevel = machineChecked
+
+constructiveConfiguredFiniteInverseLevel : ProofLevel
+constructiveConfiguredFiniteInverseLevel = machineChecked
 
 su2RationalAdjointDisplacementAlgebraLevel : ProofLevel
 su2RationalAdjointDisplacementAlgebraLevel = machineChecked
@@ -111,16 +176,6 @@ p5ContinuumOSAndNontrivialityLevel = conditional
 
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
-
--- The physical coordinate carrier, exact count 3072, Kronecker identity and
--- literal matrix-entry definition are now concrete.  Remaining inverse work:
--- prove matrix action equals the configured operator by finite linearity,
--- generate the inverse matrix, and check both products and its norm certificate.
-configuredMatrixActionLinearityLevel : ProofLevel
-configuredMatrixActionLinearityLevel = conditional
-
-constructiveConfiguredFiniteInverseLevel : ProofLevel
-constructiveConfiguredFiniteInverseLevel = conditional
 
 -- Promote only after the complete Agda 2.9 module graph reaches the end at this
 -- exact branch head.

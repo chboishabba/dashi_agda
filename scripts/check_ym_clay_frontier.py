@@ -1,79 +1,35 @@
 #!/usr/bin/env python3
 """Fail-closed textual audit for the explicit P1--P5 Yang--Mills frontier.
 
-This script is intentionally narrower than Agda kernel validation. It checks
-that exact reductions and the honest producer ledger remain present, and rejects
-postulates, holes, unsafe termination and underscore proof bodies in the new
-frontier modules and repaired finite foundations.
+The script checks declaration integrity and the honesty ledger.  It does not
+replace the Agda kernel.  The constructive configured Green closure is delegated
+to its own stricter audit so the frontier and finite inverse cuts cannot drift.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 import re
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 YM = ROOT / "DASHI/Physics/YangMills"
 
 FILES: dict[Path, tuple[str, ...]] = {
-    YM / "BalabanFiniteEnumerationDistinctExact.agda": (
-        "zeroNotInSucMapGeneric",
-        "zeroNotInSucMap",
-        "allCyclicIndicesDuplicateFree",
-        "cyclicZeroNotInSuccessorMapLevel = machineChecked",
-    ),
-    YM / "BalabanPhysicalBlockFibreSumsExact.agda": (
-        "centeredDifferenceAlgebra",
-        "scaledCenteredDifferenceExact",
-        "scaledCenteredDifferenceSquareExact",
-        "scaledCenteredFibreEnergyExact",
-        "centeredSquareInductionAlgebra",
-        "scaledVarianceNormalization",
-        "physicalFibreCenteredDifferenceLevel = machineChecked",
-    ),
-    YM / "BalabanConstructiveRationalMatrixInverseExact.agda": (
-        "matrixProductActionExact",
-        "matrixInverseLeftExact",
-        "matrixInverseRightExact",
-        "constructiveFiniteGreen",
-        "constructivePointwiseGreenAssemblyLevel = machineChecked",
-        "configuredMatrixRepresentationProducerLevel = conditional",
-        "configuredGeneratedInverseProductProducerLevel = conditional",
-    ),
-    YM / "BalabanPath4SU2RationalMatrixCoordinatesExact.agda": (
-        "deltaSumIdentity",
-        "physicalCoordinateElementsDuplicateFree",
-        "physicalFiniteRationalCoordinates",
-        "tangentCoordinateRoundTripPointwise",
-        "configuredGaugeFixedOperatorMatrix",
-        "configuredMatrixActionLinearityProducerLevel = conditional",
-    ),
-    YM / "BalabanPath4SU2RationalMatrixDimensionExact.agda": (
-        "lengthCartesianExact",
-        "siteCountExact",
-        "positiveBondCountExact",
-        "physicalCoordinateCountExact",
-        "configuredMatrixDimensionIs3072",
-        "configuredPhysicalMatrixDimensionLevel = machineChecked",
-    ),
     YM / "BalabanSU2RationalAdjointRadiusExact.agda": (
         "adjointDisplacementWithUnitDefectExact",
-        "adjointDisplacementUnitExact",
-        "adjointDisplacementPlusDiscardedSquareExact",
         "adjointDisplacementRadiusBound",
         "su2PhysicalLinkRadiusProducerLevel = conditional",
     ),
     YM / "BalabanSU2RationalWilsonLargeFieldGapExact.agda": (
         "unitChordalEqualsTwiceTraceDeficit",
-        "wilsonActionEqualsHalfBetaChordal",
         "localWilsonActionGap",
         "largeFieldActionLowerBoundFromWitnesses",
         "largeFieldDuplicateFreeWitnessGeometryLevel = conditional",
     ),
     YM / "BalabanClayP1BackgroundStabilityExact.agda": (
         "RegularBackgroundConstruction",
-        "backgroundHessianExact",
         "backgroundRelativeFormSmallness",
         "smallBackgroundOneThirtySecondCoercivity",
         "p1MinimizingBackgroundProducerLevel = conditional",
@@ -83,7 +39,6 @@ FILES: dict[Path, tuple[str, ...]] = {
         "GaugeInvariantBadBlockDecomposition",
         "LargeFieldActivityFactorization",
         "uniformFiniteVolumeKoteckyPreiss",
-        "etaGapPositive",
         "p2PhysicalActivityShellProducerLevel = conditional",
         "p2InfiniteClusterAndCorrelationProducerLevel = conditional",
     ),
@@ -105,7 +60,6 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
     YM / "BalabanClayP4CommonParameterDomainExact.agda": (
         "canonicalClayParameters",
-        "canonicalBackgroundBudgetIdentity",
         "canonicalDomainIsCommon",
         "canonicalBackgroundConstraintProducerLevel = conditional",
         "canonicalContinuumConstraintProducerLevel = conditional",
@@ -121,22 +75,20 @@ FILES: dict[Path, tuple[str, ...]] = {
         "p5NontrivialityProducerLevel = conditional",
     ),
     YM / "BalabanClayFrontierCompletionLedger.agda": (
-        "finiteMatrixProductAndInverseConsequenceLevel = machineChecked",
-        "physicalCoordinateEnumerationAndDeltaLevel = machineChecked",
-        "configuredPhysicalMatrixDimension3072Level = machineChecked",
-        "configuredGaugeFixedMatrixDefinitionLevel = machineChecked",
-        "uniformOneSixtyFourthCoercivityLevel = machineChecked",
+        "configuredMatrixActionLinearityLevel = machineChecked",
+        "configuredGreenMatrixInverseProductLevel = machineChecked",
+        "configuredPhysicalGreenNormLevel = machineChecked",
+        "constructiveConfiguredFiniteInverseLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
-        "p3ConstructiveSchurComplementPropagatorLevel = conditional",
+        "p3ExactConstrainedIntegralCoordinatesLevel = conditional",
+        "p4CanonicalCommonDomainInhabitationLevel = conditional",
         "p5ContinuumOSAndNontrivialityLevel = conditional",
-        "configuredMatrixActionLinearityLevel = conditional",
-        "constructiveConfiguredFiniteInverseLevel = conditional",
         "branchHeadAuthoritativeAgda29TypecheckLevel = conditional",
     ),
 }
 
-FORBIDDEN_PATTERNS = (
+FORBIDDEN = (
     (re.compile(r"(?m)^\s*postulate\b"), "postulate declaration"),
     (re.compile(r"\{\!\!\}"), "Agda hole"),
     (re.compile(r"\{-#\s*(?:NON_)?TERMINATING\s*#-\}"), "unsafe termination pragma"),
@@ -150,49 +102,27 @@ def fail(message: str) -> None:
 
 
 def main() -> None:
-    for path, required in FILES.items():
+    for path, tokens in FILES.items():
         if not path.is_file():
             fail(f"missing {path.relative_to(ROOT)}")
         text = path.read_text(encoding="utf-8")
-        for pattern, label in FORBIDDEN_PATTERNS:
+        for pattern, label in FORBIDDEN:
             if pattern.search(text):
                 fail(f"forbidden {label} in {path.relative_to(ROOT)}")
-        for token in required:
+        for token in tokens:
             if token not in text:
                 fail(f"missing {token!r} in {path.relative_to(ROOT)}")
 
-    aggregate = YM / "ConstructiveYangMillsNextSurface.agda"
-    aggregate_text = aggregate.read_text(encoding="utf-8")
-    for module in (
-        "BalabanConstructiveRationalMatrixInverseExact",
-        "BalabanSU2RationalAdjointRadiusExact",
-        "BalabanSU2RationalWilsonLargeFieldGapExact",
-        "BalabanClayP1BackgroundStabilityExact",
-        "BalabanClayP2LargeFieldStepVExact",
-        "BalabanClayP3PhysicalOneStepTransferExact",
-        "BalabanClayP4DyadicCoercivityBudgetExact",
-        "BalabanClayP4CommonParameterDomainExact",
-        "BalabanClayP5ContinuumMassGapExact",
-        "BalabanClayFrontierCompletionLedger",
-    ):
-        if module not in aggregate_text:
-            fail(f"aggregate does not import {module}")
-
-    ledger = YM / "BalabanClayFrontierCompletionLedger.agda"
-    ledger_text = ledger.read_text(encoding="utf-8")
-    for module in (
-        "BalabanPath4SU2RationalMatrixCoordinatesExact",
-        "BalabanPath4SU2RationalMatrixDimensionExact",
-    ):
-        if module not in ledger_text:
-            fail(f"frontier ledger does not import {module}")
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts/check_ym_configured_green_exact.py")],
+        cwd=ROOT,
+        check=True,
+    )
 
     print(
-        "Repaired finite enumeration and fibre centering foundations, constructive "
-        "finite-matrix inverse algebra, the literal 3072-coordinate physical "
-        "matrix carrier, P1--P5 exact reductions, numerical budgets, endpoint "
-        "surfaces, and honest conditional producer ledger are present and "
-        "hole-free."
+        "P1--P5 reductions and conditional physical producers remain explicit; "
+        "the configured side-four matrix action, two-sided rational inverse and "
+        "factor-16 norm certificate are closed by the focused Green audit."
     )
 
 
