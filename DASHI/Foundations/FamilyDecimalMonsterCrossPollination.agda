@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
+import DASHI.Moonshine.MonsterCharacterTableExact as MCT
 import DASHI.TrackedPrimes as TP
 import JFixedPoint as J
 import Ontology.GodelLattice as Lattice
@@ -61,7 +62,7 @@ record ThreeRoleSupportFibre : Set₁ where
     totalRoleCount : Nat
     countLaw :
       supportCount + dependentCount ≡ totalRoleCount
-    bothSupportsRelevantThroughAdolescence : Bool
+    modelTracksBothSupportsThroughAdolescence : Bool
     actualOutcomeProbabilityClaimed : Bool
     universalFamilyFormClaimed : Bool
 
@@ -76,7 +77,7 @@ canonicalTwoParentOneChildSupportFibre = record
   ; dependentCount = dependentChildCount
   ; totalRoleCount = familyRoleCount
   ; countLaw = twoSupportsPlusOneDependent
-  ; bothSupportsRelevantThroughAdolescence = true
+  ; modelTracksBothSupportsThroughAdolescence = true
   ; actualOutcomeProbabilityClaimed = false
   ; universalFamilyFormClaimed = false
   }
@@ -121,6 +122,11 @@ record Decimal357Address : Set where
       numerator ≡ 357
     exactScale :
       denominator ≡ 100
+    exactPlaceValue :
+      numerator
+      ≡ integerDigit * 100
+        + firstFractionalDigit * 10
+        + secondFractionalDigit
     stageInteger : Atlas.StageAtlasZeroToEleven
     stageFirstFractional : Atlas.StageAtlasZeroToEleven
     stageSecondFractional : Atlas.StageAtlasZeroToEleven
@@ -139,6 +145,7 @@ canonicalDecimal357Address = record
   ; denominator = 100
   ; exactRationalEvaluation = refl
   ; exactScale = refl
+  ; exactPlaceValue = refl
   ; stageInteger = Atlas.atlas-3
   ; stageFirstFractional = Atlas.atlas-5
   ; stageSecondFractional = Atlas.atlas-7
@@ -192,6 +199,18 @@ incrementLaneUpdatesCommute p q vector =
     (λ value → refl)
     vector
 
+exactMonsterTableClassCount :
+  (table : MCT.ExactMonsterCharacterTable) →
+  MCT.ExactMonsterCharacterTable.classCount table ≡ 194
+exactMonsterTableClassCount table =
+  MCT.ExactMonsterCharacterTable.classCountIs194 table
+
+exactMonsterTableIrreducibleCount :
+  (table : MCT.ExactMonsterCharacterTable) →
+  MCT.ExactMonsterCharacterTable.irreducibleCount table ≡ 194
+exactMonsterTableIrreducibleCount table =
+  MCT.ExactMonsterCharacterTable.irreducibleCountIs194 table
+
 monsterSmallestNontrivialPlusOne :
   196883 + 1 ≡ 196884
 monsterSmallestNontrivialPlusOne = refl
@@ -206,10 +225,13 @@ record MonsterRepresentationSeparationReceipt : Set where
     characterTableIrreducibleCountRole : Nat
     smallestNontrivialDegreeRole : Nat
     firstJCoefficientRole : Nat
+    classCountIs194 :
+      characterTableClassCountRole ≡ 194
     irreducibleCountIs194 :
       characterTableIrreducibleCountRole ≡ 194
     jIsDegreePlusOne :
       smallestNontrivialDegreeRole + 1 ≡ firstJCoefficientRole
+    repositoryExactTableContractCarries194 : Bool
     factorValuationDecompositionIsIrrepDecomposition : Bool
     primeSupportImpliesMonsterOrigin : Bool
     concreteCharacterTableInstanceImportedHere : Bool
@@ -222,8 +244,10 @@ canonicalMonsterRepresentationSeparationReceipt = record
   ; characterTableIrreducibleCountRole = 194
   ; smallestNontrivialDegreeRole = 196883
   ; firstJCoefficientRole = 196884
+  ; classCountIs194 = refl
   ; irreducibleCountIs194 = refl
   ; jIsDegreePlusOne = monsterSmallestNontrivialPlusOne
+  ; repositoryExactTableContractCarries194 = true
   ; factorValuationDecompositionIsIrrepDecomposition = false
   ; primeSupportImpliesMonsterOrigin = false
   ; concreteCharacterTableInstanceImportedHere = false
