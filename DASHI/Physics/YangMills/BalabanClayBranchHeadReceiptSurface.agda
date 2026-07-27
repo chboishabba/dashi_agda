@@ -27,6 +27,7 @@ record BranchHeadAgdaReceipt : Set where
     changedModules : List String
     constructiveProducerAggregateChecked : Bool
     frontierLedgerAggregateChecked : Bool
+    configuredFrontierLedgerChecked : Bool
     publicYangMillsAggregateChecked : Bool
     changedSurfacePostulateFree : Bool
 
@@ -38,6 +39,7 @@ record AuthoritativeBranchHeadEvidence
     allChangedModulesChecked : Set
     constructiveProducerChecked : Set
     frontierLedgerChecked : Set
+    configuredFrontierLedgerChecked : Set
     publicAggregateChecked : Set
     postulateFreeChangedSurface : Set
 
@@ -51,6 +53,9 @@ constructiveProducerAggregateTypecheckLevel = conditional
 
 frontierLedgerAggregateTypecheckLevel : ProofLevel
 frontierLedgerAggregateTypecheckLevel = conditional
+
+configuredFrontierLedgerAggregateTypecheckLevel : ProofLevel
+configuredFrontierLedgerAggregateTypecheckLevel = conditional
 
 publicYangMillsAggregateTypecheckLevel : ProofLevel
 publicYangMillsAggregateTypecheckLevel = conditional
