@@ -6,222 +6,180 @@ import DASHI.Physics.YangMills.BalabanClayCommonTaylorRemainderToEnclosureExact 
 import DASHI.Physics.YangMills.BalabanClayCommonNegativeLogSincReductionExact as NegLog
 import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact as Sinc
 import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact as Log16
+import DASHI.Physics.YangMills.BalabanClayCommonElementaryRealInhabitantsExact as Elementary
 import DASHI.Physics.YangMills.BalabanClayT3RightJacobianSampleCheckExact as Sample
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as Geometry
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiveHessianDominationExact as Hessian
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact as Radius
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact as Green
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGreenInstanceExact as GreenInstance
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGatewayExact as T3Gateway
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredActionGainThresholdExact as Action
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredComponentLossBoundsExact as Components
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredModelSpecificLossClosureExact as ModelLoss
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact as Loss
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredStrictLossMarginExact as Margin
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalLossInstanceExact as LossInstance
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact as Polymer
+import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact as PolymerExtraction
+import DASHI.Physics.YangMills.BalabanClayT4Balaban1987TheoremShapeExact as BalabanShape
 import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact as Balaban536
+import DASHI.Physics.YangMills.BalabanClayT4LiteralDiagramWardCancellationExact as Diagrams
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as OneLoop
+import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as BoxReceipts
+import DASHI.Physics.YangMills.BalabanClayT4ConfiguredPhysicalOneLoopInstanceExact as PhysicalOneLoop
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
 import DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact as ShellTail
 
 ------------------------------------------------------------------------
--- I. Exact configured arithmetic and finite reductions.
+-- I. Exact configured arithmetic, finite reductions and physical adapters.
 ------------------------------------------------------------------------
 
-symmetricRemainderReductionLevel : ProofLevel
 symmetricRemainderReductionLevel = Taylor.symmetricRemainderReductionLevel
-
-alternatingBracketReductionLevel : ProofLevel
 alternatingBracketReductionLevel = Taylor.alternatingBracketReductionLevel
-
-negativeLogSincReductionLevel : ProofLevel
 negativeLogSincReductionLevel = NegLog.negativeLogSincReductionLevel
-
-configuredRationalCoefficientLevel : ProofLevel
 configuredRationalCoefficientLevel = Sinc.configuredRationalCoefficientLevel
-
-configuredHornerIdentityLevel : ProofLevel
 configuredHornerIdentityLevel = Sinc.configuredHornerIdentityLevel
-
-logSixteenFinitePartialSumArithmeticLevel : ProofLevel
 logSixteenFinitePartialSumArithmeticLevel =
   Log16.logSixteenFinitePartialSumArithmeticLevel
-
-logSixteenMonotoneReductionLevel : ProofLevel
 logSixteenMonotoneReductionLevel = Log16.logSixteenMonotoneReductionLevel
 
-rightJacobianSampleRationalLevel : ProofLevel
+configuredSineCosineReductionLevel =
+  Elementary.configuredSineCosineReductionLevel
+configuredSincDivisionReductionLevel =
+  Elementary.configuredSincDivisionReductionLevel
+configuredNegativeLogReductionLevel =
+  Elementary.configuredNegativeLogReductionLevel
+configuredLogSixteenAuthorityAdapterLevel =
+  Elementary.configuredLogSixteenAuthorityAdapterLevel
+
 rightJacobianSampleRationalLevel = Sample.rightJacobianSampleRationalLevel
-
-rightJacobianSampleReductionLevel : ProofLevel
 rightJacobianSampleReductionLevel = Sample.rightJacobianSampleReductionLevel
-
-configuredIncidenceDataLevel : ProofLevel
 configuredIncidenceDataLevel = Geometry.configuredIncidenceDataLevel
-
-configuredCoefficientArithmeticLevel : ProofLevel
 configuredCoefficientArithmeticLevel = Geometry.configuredCoefficientArithmeticLevel
 
-configuredCommonRadiusArithmeticLevel : ProofLevel
+localToGlobalRemainderReductionLevel =
+  Hessian.localToGlobalRemainderReductionLevel
+fiveConfiguredDominationAdapterLevel =
+  Hessian.fiveConfiguredDominationAdapterLevel
+
 configuredCommonRadiusArithmeticLevel = Radius.configuredCommonRadiusArithmeticLevel
-
-configuredFiveRemaindersBelowHalfLevel : ProofLevel
 configuredFiveRemaindersBelowHalfLevel = Radius.configuredFiveRemaindersBelowHalfLevel
-
-localCombesThomasReductionLevel : ProofLevel
 localCombesThomasReductionLevel = Green.localCombesThomasReductionLevel
-
-fourierRGImageAssemblyLevel : ProofLevel
 fourierRGImageAssemblyLevel = Green.fourierRGImageAssemblyLevel
+configuredCombesThomasArithmeticLevel =
+  GreenInstance.configuredCombesThomasArithmeticLevel
+configuredLocalGreenAdapterLevel = GreenInstance.configuredLocalGreenAdapterLevel
+configuredFourierRGImageReductionLevel =
+  GreenInstance.configuredFourierRGImageReductionLevel
+configuredT3LocalToCoerciveGatewayLevel =
+  T3Gateway.configuredT3LocalToCoerciveGatewayLevel
+configuredT3CoerciveToGreenGatewayLevel =
+  T3Gateway.configuredT3CoerciveToGreenGatewayLevel
 
-configuredActionThresholdArithmeticLevel : ProofLevel
 configuredActionThresholdArithmeticLevel =
   Action.configuredActionThresholdArithmeticLevel
-
-configuredActionGainReductionLevel : ProofLevel
 configuredActionGainReductionLevel = Action.configuredActionGainReductionLevel
-
-configuredComponentArithmeticLevel : ProofLevel
 configuredComponentArithmeticLevel = Components.configuredComponentArithmeticLevel
-
-configuredComponentBudgetReductionLevel : ProofLevel
 configuredComponentBudgetReductionLevel =
   Components.configuredComponentBudgetReductionLevel
-
-configuredLossArithmeticLevel : ProofLevel
+haarPhysicalReductionLevel = ModelLoss.haarPhysicalReductionLevel
+localizedTraceLogReductionLevel = ModelLoss.localizedTraceLogReductionLevel
+quaternionPhysicalReductionLevel = ModelLoss.quaternionPhysicalReductionLevel
+localizationPatchReductionLevel = ModelLoss.localizationPatchReductionLevel
 configuredLossArithmeticLevel = Loss.configuredLossArithmeticLevel
-
-configuredComponentSumReductionLevel : ProofLevel
 configuredComponentSumReductionLevel = Loss.configuredComponentSumReductionLevel
-
-configuredLogSixteenReductionLevel : ProofLevel
 configuredLogSixteenReductionLevel = Loss.configuredLogSixteenReductionLevel
-
-configuredOneSixteenthAssemblyLevel : ProofLevel
 configuredOneSixteenthAssemblyLevel = Loss.configuredOneSixteenthAssemblyLevel
-
-configuredEmbeddedLossInstanceLevel : ProofLevel
+sharpPartialSumArithmeticLevel = Margin.sharpPartialSumArithmeticLevel
+configuredOneFifthRobustnessReductionLevel =
+  Margin.configuredOneFifthRobustnessReductionLevel
 configuredEmbeddedLossInstanceLevel = LossInstance.configuredEmbeddedLossInstanceLevel
 
-configuredPatchDirectionMaskLevel : ProofLevel
 configuredPatchDirectionMaskLevel = Polymer.configuredPatchDirectionMaskLevel
-
-configuredInteriorEightCountLevel : ProofLevel
 configuredInteriorEightCountLevel = Polymer.configuredInteriorEightCountLevel
-
-configuredCanonicalTraceAdapterLevel : ProofLevel
 configuredCanonicalTraceAdapterLevel = Polymer.configuredCanonicalTraceAdapterLevel
+canonicalRootTreeAlgorithmReductionLevel =
+  PolymerExtraction.canonicalRootTreeAlgorithmReductionLevel
+canonicalDecoderInjectivityLevel =
+  PolymerExtraction.canonicalDecoderInjectivityLevel
+configuredTraceFamilyAdapterLevel =
+  PolymerExtraction.configuredTraceFamilyAdapterLevel
 
-balaban536LaurentReductionLevel : ProofLevel
+balabanTheorem1ArchitectureLevel = BalabanShape.balabanTheorem1ArchitectureLevel
+balabanLocalizationConventionLevel = BalabanShape.balabanLocalizationConventionLevel
+balaban031ComparisonReductionLevel = BalabanShape.balaban031ComparisonReductionLevel
 balaban536LaurentReductionLevel = Balaban536.balaban536LaurentReductionLevel
-
-balaban537MomentumReductionLevel : ProofLevel
 balaban537MomentumReductionLevel = Balaban536.balaban537MomentumReductionLevel
-
-balaban541CoefficientExtractionLevel : ProofLevel
-balaban541CoefficientExtractionLevel =
-  Balaban536.balaban541CoefficientExtractionLevel
-
-universalColorCoefficientArithmeticLevel : ProofLevel
-universalColorCoefficientArithmeticLevel =
-  OneLoop.universalColorCoefficientArithmeticLevel
-
-brillouinBoxSummationReductionLevel : ProofLevel
-brillouinBoxSummationReductionLevel =
-  OneLoop.brillouinBoxSummationReductionLevel
-
-configuredPlaquetteCoefficientAssemblyLevel : ProofLevel
+balaban541CoefficientExtractionLevel = Balaban536.balaban541CoefficientExtractionLevel
+literalVertexReductionLevel = Diagrams.literalVertexReductionLevel
+literalDiagramCombinationLevel = Diagrams.literalDiagramCombinationLevel
+literalWardCancellationLevel = Diagrams.literalWardCancellationLevel
+literalTransverseScalarReductionLevel = Diagrams.literalTransverseScalarReductionLevel
+universalColorCoefficientArithmeticLevel = OneLoop.universalColorCoefficientArithmeticLevel
+brillouinBoxSummationReductionLevel = OneLoop.brillouinBoxSummationReductionLevel
 configuredPlaquetteCoefficientAssemblyLevel =
   OneLoop.configuredPlaquetteCoefficientAssemblyLevel
+boxReceiptConstructionLevel = BoxReceipts.boxReceiptConstructionLevel
+finiteBoxFamilyAssemblyLevel = BoxReceipts.finiteBoxFamilyAssemblyLevel
+configuredIntegralAdapterLevel = BoxReceipts.configuredIntegralAdapterLevel
+literalDiagramCoherenceReductionLevel =
+  PhysicalOneLoop.literalDiagramCoherenceReductionLevel
+configuredBoxToBalabanCoefficientReductionLevel =
+  PhysicalOneLoop.configuredBoxToBalabanCoefficientReductionLevel
+balaban031EndpointReductionLevel = PhysicalOneLoop.balaban031EndpointReductionLevel
 
-configuredDyadicTailArithmeticLevel : ProofLevel
 configuredDyadicTailArithmeticLevel = Tail.configuredDyadicTailArithmeticLevel
-
-configuredBoundaryTailReductionLevel : ProofLevel
 configuredBoundaryTailReductionLevel = Tail.configuredBoundaryTailReductionLevel
-
-configuredContinuumTailReductionLevel : ProofLevel
 configuredContinuumTailReductionLevel = Tail.configuredContinuumTailReductionLevel
-
-rootedShellTailIdentificationLevel : ProofLevel
 rootedShellTailIdentificationLevel = ShellTail.rootedShellTailIdentificationLevel
-
-rootedShellToBoundaryTailReductionLevel : ProofLevel
 rootedShellToBoundaryTailReductionLevel =
   ShellTail.rootedShellToBoundaryTailReductionLevel
 
 ------------------------------------------------------------------------
--- II. Exact remaining inhabitants after the configured reductions.
+-- II. Remaining primitive analytic and model-specific inhabitants.
+--
+-- These are now strictly below the public endpoints.  Each broad endpoint has
+-- been replaced by local Taylor remainders, local lattice estimates, explicit
+-- operator identities, or finite box receipts.
 ------------------------------------------------------------------------
 
-literalDerivativeOrAlternatingRemainderInputsLevel : ProofLevel
-literalDerivativeOrAlternatingRemainderInputsLevel =
-  Taylor.literalDerivativeOrAlternatingRemainderInputsLevel
-
-elementaryNegativeLogOneMinusInputsLevel : ProofLevel
-elementaryNegativeLogOneMinusInputsLevel =
-  NegLog.elementaryNegativeLogOneMinusInputsLevel
-
-configuredAlternatingRemainderInputsLevel : ProofLevel
-configuredAlternatingRemainderInputsLevel =
-  Sinc.configuredAlternatingRemainderInputsLevel
-
-configuredNegativeLogSincInputsLevel : ProofLevel
-configuredNegativeLogSincInputsLevel =
-  Sinc.configuredNegativeLogSincInputsLevel
-
-exponentialPositiveTailInputsLevel : ProofLevel
-exponentialPositiveTailInputsLevel = Log16.exponentialPositiveTailInputsLevel
-
-literalSampleSineEvaluationInputsLevel : ProofLevel
+elementaryTaylorLogExpInputsLevel = Elementary.elementaryTaylorLogExpInputsLevel
+positiveExponentialTailAndLogInputsLevel =
+  Margin.positiveExponentialTailAndLogInputsLevel
 literalSampleSineEvaluationInputsLevel = Sample.literalSampleSineEvaluationInputsLevel
 
-literalConfiguredRemainderDominationInputsLevel : ProofLevel
-literalConfiguredRemainderDominationInputsLevel =
-  Geometry.literalConfiguredRemainderDominationInputsLevel
-
-configuredPhysicalRemainderEstimateInputsLevel : ProofLevel
-configuredPhysicalRemainderEstimateInputsLevel =
-  Radius.configuredPhysicalRemainderEstimateInputsLevel
-
-physicalFiniteRangeGapInputsLevel : ProofLevel
-physicalFiniteRangeGapInputsLevel = Green.physicalFiniteRangeGapInputsLevel
-
-physicalFourierRGImageInputsLevel : ProofLevel
-physicalFourierRGImageInputsLevel = Green.physicalFourierRGImageInputsLevel
-
-periodicRandomWalkTransferInputsLevel : ProofLevel
+literalLocalPointwiseAndIncidenceInputsLevel =
+  Hessian.literalLocalPointwiseAndIncidenceInputsLevel
+literalLocalHessianGapFourierImageInputsLevel =
+  T3Gateway.literalLocalHessianGapFourierImageInputsLevel
+literalFiniteRangeGapAndFourierImageInputsLevel =
+  GreenInstance.literalFiniteRangeGapAndFourierImageInputsLevel
 periodicRandomWalkTransferInputsLevel = Green.periodicRandomWalkTransferInputsLevel
 
-physicalLargeFieldPlaquetteAndBetaInputsLevel : ProofLevel
 physicalLargeFieldPlaquetteAndBetaInputsLevel =
   Action.physicalLargeFieldPlaquetteAndBetaInputsLevel
-
-physicalHaarTraceQuaternionLocalizationPatchInputsLevel : ProofLevel
-physicalHaarTraceQuaternionLocalizationPatchInputsLevel =
-  Components.physicalHaarTraceQuaternionLocalizationPatchInputsLevel
-
-physicalActionAndComponentInputsLevel : ProofLevel
+literalLinkTraceQuaternionCollarPatchInputsLevel =
+  ModelLoss.literalLinkTraceQuaternionCollarPatchInputsLevel
 physicalActionAndComponentInputsLevel =
   LossInstance.physicalActionAndComponentInputsLevel
-
-physicalLossDominationInputsLevel : ProofLevel
 physicalLossDominationInputsLevel = Loss.physicalLossDominationInputsLevel
 
-repositoryConnectedPolymerExtractionInputsLevel : ProofLevel
-repositoryConnectedPolymerExtractionInputsLevel =
-  Polymer.repositoryConnectedPolymerExtractionInputsLevel
+repositoryOrderConnectivityAndDecoderInputsLevel =
+  PolymerExtraction.repositoryOrderConnectivityAndDecoderInputsLevel
 
-literalDiagramToBalabanTargetInputsLevel : ProofLevel
+literalWilsonGhostHaarFormulaInputsLevel =
+  Diagrams.literalWilsonGhostHaarFormulaInputsLevel
+literalDiagramNumeratorDenominatorAndQuadratureInputsLevel =
+  BoxReceipts.literalDiagramNumeratorDenominatorAndQuadratureInputsLevel
+literalDiagramIntegrandAndQuarticInputsLevel =
+  PhysicalOneLoop.literalDiagramIntegrandAndQuarticInputsLevel
 literalDiagramToBalabanTargetInputsLevel =
   Balaban536.literalDiagramToBalabanTargetInputsLevel
+literalDASHIMainAndQuarticInputsLevel =
+  BalabanShape.literalDASHIMainAndQuarticInputsLevel
 
-literalDiagramAndBoxCertificateInputsLevel : ProofLevel
-literalDiagramAndBoxCertificateInputsLevel =
-  OneLoop.literalDiagramAndBoxCertificateInputsLevel
-
-physicalClusterDiameterInputsLevel : ProofLevel
 physicalClusterDiameterInputsLevel = Tail.physicalClusterDiameterInputsLevel
-
-boundaryEscapeInputsLevel : ProofLevel
 boundaryEscapeInputsLevel = ShellTail.boundaryEscapeInputsLevel
-
-physicalExponentialMomentCompactnessInputsLevel : ProofLevel
 physicalExponentialMomentCompactnessInputsLevel =
   Tail.physicalExponentialMomentCompactnessInputsLevel
