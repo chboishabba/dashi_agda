@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayT4CanonicalScalarWitnessExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_; _/_; Positive)
 import Data.Rational.Properties as ℚP
@@ -12,11 +12,6 @@ open import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact usin
 
 ------------------------------------------------------------------------
 -- T4/P4: an exact common scalar margin certificate.
---
--- This does not identify analytic constants with their Wilson-model values.
--- It removes the separate-constant loophole: once the physical estimates are
--- shown below the displayed owners, all P1--P5 scalar inequalities hold at one
--- and the same canonical tuple.
 ------------------------------------------------------------------------
 
 record PositiveMargin (left right : ℚ) : Set where
@@ -27,12 +22,6 @@ record PositiveMargin (left right : ℚ) : Set where
     closes : left + slack ≡ right
 
 open PositiveMargin public
-
-positiveRational : ∀ numerator denominator →
-  Positive (+ numerator / denominator) →
-  0ℚ < (+ numerator / denominator)
-positiveRational numerator denominator positive =
-  ℚP.positive⁻¹ (+ numerator / denominator)
 
 canonicalGreenUpper canonicalNonlinearSlope : ℚ
 canonicalGreenUpper = + 16 / 1
@@ -152,8 +141,5 @@ canonicalCommonScalarWitnessLevel = machineChecked
 canonicalCommonScalarPositiveMarginsLevel : ProofLevel
 canonicalCommonScalarPositiveMarginsLevel = machineChecked
 
--- Remaining P4 work is no longer numerical choice.  It is the physical
--- identification theorem showing that the literal P1, P2, P3 and P5 constants
--- are bounded by these five owners at canonicalClayParameters.
 canonicalPhysicalConstantIdentificationLevel : ProofLevel
 canonicalPhysicalConstantIdentificationLevel = conditional
