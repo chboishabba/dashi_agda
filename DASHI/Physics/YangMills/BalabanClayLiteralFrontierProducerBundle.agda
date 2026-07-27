@@ -7,6 +7,7 @@ module DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle where
 -- Canonical authors/title/venue/DOI/arXiv/section/relationship metadata and a
 -- theorem-disconnected quarantine for unverified completion claims.
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
+import DASHI.Physics.YangMills.BalabanClayConfiguredVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
 -- Shared rational/Taylor interval carriers, configured sinc/cos/log
