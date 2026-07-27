@@ -16,8 +16,9 @@ oneSixteenth = + 1 / 16
 -- product is at most 1/16, the decisive traversal theorem follows.
 --
 -- Sign convention: every factor is an absolute-value majorant and therefore
--- nonnegative.  The nonnegativity witnesses are explicit fields; no signed
--- activity may be passed to the monotone product argument.
+-- nonnegative.  The nonnegativity witnesses enter every product-monotonicity
+-- step explicitly; no signed activity and no false globally monotone
+-- multiplication law can enter the certificate.
 --
 -- Cluster-expansion references used by the downstream criterion comparison:
 --
@@ -67,8 +68,13 @@ record WilsonTraversalActivityFactors (Scale Traversal : Set) : Set₁ where
     transitive : ∀ {left middle right} →
       left ≤ middle → middle ≤ right → left ≤ right
 
-    -- This law is used only on the explicitly nonnegative factor chain above.
-    multiplyMonotone : ∀ {left leftUpper right rightUpper} →
+    multiplyNonnegative : ∀ {left right} →
+      0ℚ ≤ left → 0ℚ ≤ right → 0ℚ ≤ left * right
+
+    multiplyMonotoneNonnegative :
+      ∀ {left leftUpper right rightUpper} →
+      0ℚ ≤ left → 0ℚ ≤ leftUpper →
+      0ℚ ≤ right → 0ℚ ≤ rightUpper →
       left ≤ leftUpper → right ≤ rightUpper →
       left * right ≤ leftUpper * rightUpper
 
@@ -104,6 +110,98 @@ record WilsonTraversalActivityFactors (Scale Traversal : Set) : Set₁ where
 
 open WilsonTraversalActivityFactors public
 
+physicalLocalizationPatchNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal)
+    scale traversal →
+  0ℚ ≤ localizationFactor dataSet scale traversal
+    * patchFactor dataSet scale traversal
+physicalLocalizationPatchNonnegative dataSet scale traversal =
+  multiplyNonnegative dataSet
+    (localizationFactorNonnegative dataSet scale traversal)
+    (patchFactorNonnegative dataSet scale traversal)
+
+upperLocalizationPatchNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal) →
+  0ℚ ≤ localizationUpper dataSet * patchUpper dataSet
+upperLocalizationPatchNonnegative dataSet =
+  multiplyNonnegative dataSet
+    (localizationUpperNonnegative dataSet)
+    (patchUpperNonnegative dataSet)
+
+physicalBCHTailNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal)
+    scale traversal →
+  0ℚ ≤ bchFactor dataSet scale traversal
+    * (localizationFactor dataSet scale traversal
+      * patchFactor dataSet scale traversal)
+physicalBCHTailNonnegative dataSet scale traversal =
+  multiplyNonnegative dataSet
+    (bchFactorNonnegative dataSet scale traversal)
+    (physicalLocalizationPatchNonnegative dataSet scale traversal)
+
+upperBCHTailNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal) →
+  0ℚ ≤ bchUpper dataSet
+    * (localizationUpper dataSet * patchUpper dataSet)
+upperBCHTailNonnegative dataSet =
+  multiplyNonnegative dataSet
+    (bchUpperNonnegative dataSet)
+    (upperLocalizationPatchNonnegative dataSet)
+
+physicalDeterminantTailNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal)
+    scale traversal →
+  0ℚ ≤ determinantFactor dataSet scale traversal
+    * (bchFactor dataSet scale traversal
+      * (localizationFactor dataSet scale traversal
+        * patchFactor dataSet scale traversal))
+physicalDeterminantTailNonnegative dataSet scale traversal =
+  multiplyNonnegative dataSet
+    (determinantFactorNonnegative dataSet scale traversal)
+    (physicalBCHTailNonnegative dataSet scale traversal)
+
+upperDeterminantTailNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal) →
+  0ℚ ≤ determinantUpper dataSet
+    * (bchUpper dataSet
+      * (localizationUpper dataSet * patchUpper dataSet))
+upperDeterminantTailNonnegative dataSet =
+  multiplyNonnegative dataSet
+    (determinantUpperNonnegative dataSet)
+    (upperBCHTailNonnegative dataSet)
+
+physicalJacobianTailNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal)
+    scale traversal →
+  0ℚ ≤ jacobianFactor dataSet scale traversal
+    * (determinantFactor dataSet scale traversal
+      * (bchFactor dataSet scale traversal
+        * (localizationFactor dataSet scale traversal
+          * patchFactor dataSet scale traversal)))
+physicalJacobianTailNonnegative dataSet scale traversal =
+  multiplyNonnegative dataSet
+    (jacobianFactorNonnegative dataSet scale traversal)
+    (physicalDeterminantTailNonnegative dataSet scale traversal)
+
+upperJacobianTailNonnegative :
+  ∀ {Scale Traversal}
+    (dataSet : WilsonTraversalActivityFactors Scale Traversal) →
+  0ℚ ≤ jacobianUpper dataSet
+    * (determinantUpper dataSet
+      * (bchUpper dataSet
+        * (localizationUpper dataSet * patchUpper dataSet)))
+upperJacobianTailNonnegative dataSet =
+  multiplyNonnegative dataSet
+    (jacobianUpperNonnegative dataSet)
+    (upperDeterminantTailNonnegative dataSet)
+
 physicalProductBelowCertifiedProduct :
   ∀ {Scale Traversal}
     (dataSet : WilsonTraversalActivityFactors Scale Traversal)
@@ -120,15 +218,35 @@ physicalProductBelowCertifiedProduct :
     * (bchUpper dataSet
     * (localizationUpper dataSet * patchUpper dataSet))))
 physicalProductBelowCertifiedProduct dataSet scale traversal =
-  multiplyMonotone dataSet
+  multiplyMonotoneNonnegative dataSet
+    (actionFactorNonnegative dataSet scale traversal)
+    (actionUpperNonnegative dataSet)
+    (physicalJacobianTailNonnegative dataSet scale traversal)
+    (upperJacobianTailNonnegative dataSet)
     (actionControlled dataSet scale traversal)
-    (multiplyMonotone dataSet
+    (multiplyMonotoneNonnegative dataSet
+      (jacobianFactorNonnegative dataSet scale traversal)
+      (jacobianUpperNonnegative dataSet)
+      (physicalDeterminantTailNonnegative dataSet scale traversal)
+      (upperDeterminantTailNonnegative dataSet)
       (jacobianControlled dataSet scale traversal)
-      (multiplyMonotone dataSet
+      (multiplyMonotoneNonnegative dataSet
+        (determinantFactorNonnegative dataSet scale traversal)
+        (determinantUpperNonnegative dataSet)
+        (physicalBCHTailNonnegative dataSet scale traversal)
+        (upperBCHTailNonnegative dataSet)
         (determinantControlled dataSet scale traversal)
-        (multiplyMonotone dataSet
+        (multiplyMonotoneNonnegative dataSet
+          (bchFactorNonnegative dataSet scale traversal)
+          (bchUpperNonnegative dataSet)
+          (physicalLocalizationPatchNonnegative dataSet scale traversal)
+          (upperLocalizationPatchNonnegative dataSet)
           (bchControlled dataSet scale traversal)
-          (multiplyMonotone dataSet
+          (multiplyMonotoneNonnegative dataSet
+            (localizationFactorNonnegative dataSet scale traversal)
+            (localizationUpperNonnegative dataSet)
+            (patchFactorNonnegative dataSet scale traversal)
+            (patchUpperNonnegative dataSet)
             (localizationControlled dataSet scale traversal)
             (patchControlled dataSet scale traversal)))))
 
