@@ -40,6 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNQuarticJointDominationFrontier as Stage5
 import DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticInvariantRegion as Stage6
 import DASHI.Physics.Closure.NSTriadKNQuarticBKMExpenditure as Stage7
 import DASHI.Physics.Closure.NSTriadKNQuarticStandardEndpoint as Stage8
+import DASHI.Physics.Closure.NSTriadKNZeroCoherenceH3DiscriminantCounterexample as Falsification
 
 allEightStagesRepresented : Bool
 allEightStagesRepresented = true
@@ -54,3 +55,12 @@ allEightStagesAnalyticallyClosed = false
 allEightStagesAnalyticallyClosedIsFalse :
   allEightStagesAnalyticallyClosed ≡ false
 allEightStagesAnalyticallyClosedIsFalse = refl
+
+simplestZeroCoherenceH3CandidateRejected : Bool
+simplestZeroCoherenceH3CandidateRejected =
+  Falsification.exactCounterexampleReceiptImplemented
+
+simplestZeroCoherenceH3CandidateRejectedIsTrue :
+  simplestZeroCoherenceH3CandidateRejected ≡ true
+simplestZeroCoherenceH3CandidateRejectedIsTrue =
+  Falsification.exactCounterexampleReceiptImplementedIsTrue
