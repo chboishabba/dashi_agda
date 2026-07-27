@@ -26,6 +26,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNObjectiveVortexCriteriaScopeAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNHelicalCandidateDecisionFork.agda",
     "DASHI/Physics/Closure/NSTriadKNKiriukhinOrbitRowSumAdapter.agda",
+    "DASHI/Physics/Closure/NSTriadKNKiriukhinSymmetricStretchingCompanionAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNOrbitToDyadicShellBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNFiniteHelicityRowLifting.agda",
     "DASHI/Physics/Closure/NSTriadKNWeightedSchurDualityProgram.agda",
@@ -103,6 +104,7 @@ def main() -> int:
         ("scripts/ns_quartic_direction_coherence_audit.py", "direction-coherence and Permana audit verifier"),
         ("scripts/ns_kiriukhin_weighted_schur_reconnaissance.py", "Kiriukhin weighted-Schur reconnaissance verifier"),
         ("scripts/ns_grafakos_torres_exponent_reconnaissance.py", "Grafakos--Torres exponent and rank verifier"),
+        ("scripts/ns_kiriukhin_symmetric_companion_audit.py", "Kiriukhin symmetric companion rank audit"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -115,7 +117,8 @@ def main() -> int:
     print(
         f"checked {len(FILES)} helical/coherence/Stage-3 files: no holes or "
         "postulates; global, localized, matrix, direction, manuscript-audit, "
-        "weighted-Schur, and three-function exponent verifiers passed"
+        "weighted-Schur, three-function exponent, and symmetric-companion "
+        "rank verifiers passed"
     )
     return 0
 
