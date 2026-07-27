@@ -1,5 +1,18 @@
 module DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticCoherenceCharts where
 
+------------------------------------------------------------------------
+-- PROVENANCE
+-- Authors: David Darrow; Elizabeth Carlson; David Goluskin.
+-- Title: "Quartic Lyapunov functions for global fluid stability".
+-- Venue/year: arXiv preprint, 2026.
+-- Journal DOI: none recorded on arXiv v1.
+-- arXiv/DataCite DOI: 10.48550/arXiv.2606.18232.
+-- arXiv: 2606.18232v1.
+-- Uses: Sections 3--4, especially symmetry constraints in Sections 4.1--4.2.
+-- Relationship: inspired by the paper's symmetry reduction; the equivariant
+-- adaptive-chart construction for homogeneous periodic flow is DASHI-original.
+------------------------------------------------------------------------
+
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
