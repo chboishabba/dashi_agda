@@ -42,6 +42,15 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNTriadicDyadicExponentSystem.agda",
     "DASHI/Physics/Closure/NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3KiriukhinWeightedSchurProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3AlgebraLaws.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3RelocationInstantiation.agda",
+    "DASHI/Physics/Closure/NSTriadKNLiteralVectorAdjointCandidates.agda",
+    "DASHI/Physics/Closure/NSTriadKNCherevanResonantParaproductAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNSymmetrisedFirstAdjointNullAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNFirstAdjointSobolevTailLedger.agda",
+    "DASHI/Physics/Closure/NSTriadKNRepositoryDyadicSeparationAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNThreeNumericShellLedgerStatus.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3AdjointTailIntegration.agda",
 ]
 
 PROVENANCE_MARKERS = (
@@ -49,6 +58,12 @@ PROVENANCE_MARKERS = (
     "-- Title:",
     "-- Venue/year:",
     "-- Relationship:",
+)
+
+DOI_MARKERS = (
+    "-- DOI:",
+    "-- Journal DOI:",
+    "-- arXiv/DataCite DOI:",
 )
 
 FORBIDDEN = (
@@ -100,7 +115,7 @@ def main() -> int:
                 failures.append(f"{relative}: missing provenance marker {marker!r}")
         if "-- Authors:" not in text and "-- Author:" not in text:
             failures.append(f"{relative}: missing provenance author")
-        if "-- DOI:" not in text:
+        if not any(marker in text for marker in DOI_MARKERS):
             failures.append(f"{relative}: missing DOI status")
 
     for relative, label in (
@@ -114,6 +129,8 @@ def main() -> int:
         ("scripts/ns_kiriukhin_symmetric_companion_audit.py", "Kiriukhin symmetric companion rank audit"),
         ("scripts/ns_tao_frozen_leg_paraproduct_audit.py", "Tao frozen-leg and Bernstein-direction audit"),
         ("scripts/ns_exact_transpose_high_high_audit.py", "exact transpose and high-high audit"),
+        ("scripts/ns_symmetrised_first_adjoint_audit.py", "symmetrised first-adjoint exact audit"),
+        ("scripts/ns_stage3_tail_threshold_affine_audit.py", "tail, threshold, and affine-readiness audit"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -122,12 +139,12 @@ def main() -> int:
     if failures:
         print("\n".join(failures))
         return 1
-
     print(
         f"checked {len(FILES)} helical/coherence/Stage-3 files: no holes or "
         "postulates; global, localized, matrix, direction, manuscript-audit, "
         "weighted-Schur, three-function exponent, symmetric-companion, "
-        "frozen-leg/Bernstein, and exact-transpose/high-high verifiers passed"
+        "frozen-leg/Bernstein, exact-transpose/high-high, symmetrised-adjoint, "
+        "and tail/threshold/affine-readiness verifiers passed"
     )
     return 0
 
