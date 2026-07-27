@@ -102,12 +102,19 @@ FILES: dict[Path, tuple[str, ...]] = {
         "DOI: 10.1007/s00220-007-0279-2",
         "R. Bissacot, R. Fernández and A. Procacci",
         "DOI: 10.1007/s10955-010-9956-1",
+        "C. Gruber and H. Kunz",
+        "DOI: 10.1007/BF01651334",
         "KoteckyPreissCriterion",
+        "DobrushinCriterion",
         "FernandezProcacciCriterion",
-        "InterpolatingCriterion",
-        "koteckyPreissImpliesFernandezProcacci",
-        "fernandezProcacciImpliesInterpolating",
+        "dobrushinBelowKP",
+        "fernandezProcacciBelowDobrushin",
+        "koteckyPreissImpliesDobrushin",
+        "dobrushinImpliesFernandezProcacci",
+        "ExtendedGruberKunzIdentification",
+        "fernandezProcacciImpliesExtendedGruberKunz",
         "physicalStrictCriterionSlackLevel = conditional",
+        "physicalExtendedGKIdentificationLevel = conditional",
     ),
     YM / "BalabanClayT2UrsellCauchyExact.agda": (
         "geometricTailBelow",
@@ -244,11 +251,15 @@ FILES: dict[Path, tuple[str, ...]] = {
         "physicalTransferOperatorInterlacingLevel = conditional",
     ),
     YM / "BalabanClayT5LimitAndNontrivialityExact.agda": (
+        "K. Osterwalder and R. Schrader",
+        "DOI: 10.1007/BF01645738",
+        "DOI: 10.1007/BF01608978",
         "SequentiallyClosedProperty",
         "continuumNormalized",
         "continuumPositive",
         "continuumGaugeInvariant",
         "continuumReflectionPositive",
+        "osClosureRequiresGramTopologyLevel = machineChecked",
         "nonzeroFourthCumulantExcludesGaussian",
         "physicalLimitTightnessAndNontrivialityLevel = conditional",
     ),
@@ -286,8 +297,9 @@ FILES: dict[Path, tuple[str, ...]] = {
         "configuredMatrixActionLinearityLevel = machineChecked",
         "constructiveConfiguredFiniteInverseLevel = machineChecked",
         "t1CommonAnalyticContractionLevel = machineChecked",
-        "t2KoteckyPreissToFernandezProcacciLevel = machineChecked",
-        "t2FernandezProcacciToInterpolatingLevel = machineChecked",
+        "t2KoteckyPreissToDobrushinLevel = machineChecked",
+        "t2DobrushinToFernandezProcacciLevel = machineChecked",
+        "t2FernandezProcacciToExtendedGKLevel = machineChecked",
         "t3UniformFluctuationCoercivityReductionLevel = machineChecked",
         "t4BetaZeroOverEightEqualsElevenOverTwentyFourLevel = machineChecked",
         "t4RunningCouplingConventionBridgeLevel = machineChecked",
@@ -295,6 +307,7 @@ FILES: dict[Path, tuple[str, ...]] = {
         "p5OSReflectionClosedPropertyLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
+        "p2PhysicalExtendedGKIdentificationLevel = conditional",
         "p3UniformFluctuationCoercivityInputsLevel = conditional",
         "p4PhysicalPlaquetteCoefficientIdentificationLevel = conditional",
         "p5PhysicalOSGramTopologyIdentificationLevel = conditional",
@@ -334,14 +347,15 @@ def main() -> None:
     )
 
     print(
-        "The frontier audit now distinguishes KP, Fernandez-Procacci and the "
-        "interpolating criterion with explicit nonnegative-activity conventions; "
-        "separates Schur algebra from uniform fluctuation coercivity; proves the "
-        "beta_0/(8 pi^2) = 11 C_A/(24 pi^2) convention identity; and requires "
-        "convergence of complete OS Gram quadratic forms rather than bare "
-        "pointwise correlators. Authors, titles and DOI metadata are pinned in "
-        "the relevant Agda modules. Literal Wilson/Haar identifications remain "
-        "explicit conditional producers; no kernel receipt is fabricated."
+        "The frontier audit now records the source-accurate hierarchy KP -> "
+        "Dobrushin -> Fernandez-Procacci, with extended Gruber-Kunz requiring "
+        "an explicit subset-polymer identification and all activities treated as "
+        "nonnegative absolute majorants. It separates Schur algebra from uniform "
+        "fluctuation coercivity, proves beta_0/(8 pi^2) = 11 C_A/(24 pi^2), "
+        "and requires convergence of complete OS Gram quadratic forms rather than "
+        "bare pointwise correlators. Authors, titles and DOI metadata are pinned "
+        "in the relevant Agda modules. Literal Wilson/Haar identifications remain "
+        "conditional; no kernel receipt is fabricated."
     )
 
 
