@@ -19,7 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNFiniteOverlapConstantProgram where
 -- are not prematurely marked closed.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
@@ -94,7 +94,7 @@ record NineFiniteOverlapConstantCutset : Set₁ where
 
     allNearConstantsAtMostGenericMultiplicity : Set
     allTransitionConstantsAtMostSix : Set
-    residualPartition : ResidualSubtypePartition
+    residualPartition : ResidualSubtypePartition {lzero}
     allResidualConstantsBoundedBySubtypeSum : Set
 
     constantsIndependentOfGalerkinCutoff : Set
