@@ -139,24 +139,32 @@ frameLiftFrame : {X : Set} → (x : X) → (frame : PresentationChart) →
 frameLiftFrame x frame = refl
 
 ------------------------------------------------------------------------
--- A chart atlas packages evaluation and lawful chart transition.
+-- A chart atlas packages evaluation and target-correct chart transition.
+--
+-- The source chart is read from the representation itself. This avoids an
+-- inconsistent API in which a caller can supply a source chart that does not
+-- match the representation. Every supported target is reached explicitly.
 ------------------------------------------------------------------------
 
 record FramedAtlas (Value Representation Chart : Set) : Set₁ where
   field
     evaluate : Chart → Representation → Value
-    transition : Chart → Chart → Representation → Representation
+    activeChart : Representation → Chart
+    transition : Chart → Representation → Representation
+    transitionTargetsChart :
+      ∀ target representation →
+      activeChart (transition target representation) ≡ target
     transitionPreservesEvaluation :
-      ∀ source target representation →
-      evaluate target (transition source target representation)
-      ≡ evaluate source representation
+      ∀ target representation →
+      evaluate target (transition target representation)
+      ≡ evaluate (activeChart representation) representation
     transitionIdentity :
-      ∀ chart representation →
-      transition chart chart representation ≡ representation
+      ∀ representation →
+      transition (activeChart representation) representation ≡ representation
     transitionComposition :
-      ∀ first second third representation →
-      transition second third (transition first second representation)
-      ≡ transition first third representation
+      ∀ second third representation →
+      transition third (transition second representation)
+      ≡ transition third representation
 
 ------------------------------------------------------------------------
 -- Unified value/representation/chart/scale/valuation carrier.
@@ -170,28 +178,31 @@ record FramedScaleValuationObject
   (Value Representation Chart Scale Valuation : Set) : Set₁ where
   field
     evaluate : Chart → Representation → Value
-    transition : Chart → Chart → Representation → Representation
-    transitionPreservesEvaluation :
-      ∀ source target representation →
-      evaluate target (transition source target representation)
-      ≡ evaluate source representation
-    transitionIdentity :
-      ∀ chart representation →
-      transition chart chart representation ≡ representation
-    transitionComposition :
-      ∀ first second third representation →
-      transition second third (transition first second representation)
-      ≡ transition first third representation
     activeChart : Representation → Chart
+    transition : Chart → Representation → Representation
+    transitionTargetsChart :
+      ∀ target representation →
+      activeChart (transition target representation) ≡ target
+    transitionPreservesEvaluation :
+      ∀ target representation →
+      evaluate target (transition target representation)
+      ≡ evaluate (activeChart representation) representation
+    transitionIdentity :
+      ∀ representation →
+      transition (activeChart representation) representation ≡ representation
+    transitionComposition :
+      ∀ second third representation →
+      transition third (transition second representation)
+      ≡ transition third representation
     scaleOf : Representation → Scale
     valuationOf : Representation → Valuation
 
 open FramedScaleValuationObject public
 
 InspectedRepresentation :
-  Set → Set → Set → Set
-InspectedRepresentation Value Chart Scale =
-  Value × (Chart × Scale)
+  Set → Set → Set → Set → Set
+InspectedRepresentation Value Chart Scale Valuation =
+  Value × (Chart × (Scale × Valuation))
 
 inspectRepresentation :
   ∀ {Value Representation Chart Scale Valuation}
@@ -199,7 +210,7 @@ inspectRepresentation :
       FramedScaleValuationObject
         Value Representation Chart Scale Valuation) →
   Representation →
-  Value × (Chart × (Scale × Valuation))
+  InspectedRepresentation Value Chart Scale Valuation
 inspectRepresentation object representation =
   evaluate object (activeChart object representation) representation
   , activeChart object representation
@@ -309,7 +320,7 @@ threefoldHalfRefinementPreserves =
   refineRatioPreserves 3 positive oneHalf
 
 ------------------------------------------------------------------------
--- 3/6/9 supports several different typed operations.  No operation below
+-- 3/6/9 supports several different typed operations. No operation below
 -- identifies those roles definitionally.
 ------------------------------------------------------------------------
 
@@ -345,6 +356,7 @@ record RepresentationAuthorityBoundary : Set where
     zeroDenominatorConstructible : Bool
     zeroRefinementFactorAccepted : Bool
     chartScaleValuationCarriedTogether : Bool
+    transitionCanMissRequestedTarget : Bool
 
 canonicalRepresentationAuthorityBoundary : RepresentationAuthorityBoundary
 canonicalRepresentationAuthorityBoundary = record
@@ -357,8 +369,9 @@ canonicalRepresentationAuthorityBoundary = record
   ; zeroDenominatorConstructible = false
   ; zeroRefinementFactorAccepted = false
   ; chartScaleValuationCarriedTogether = true
+  ; transitionCanMissRequestedTarget = false
   }
 
 representationSummary : String
 representationSummary =
-  "A positive-denominator value is carried together with its chart, scale and valuation; 3/6, 1/2, 0.5, 0.1 base 2 and 50% are distinct presentations of one rational point."
+  "A positive-denominator value is carried together with its active chart, scale and valuation; every supported transition reaches its requested target while preserving evaluation."
