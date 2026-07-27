@@ -29,12 +29,17 @@ FILES = [
 
 REQUIRED_TOKENS = {
     "RepresentationChartInvariant.agda": [
+        "data Positive",
+        "denominatorPositive",
+        "positiveProduct",
         "threeSixIsOneHalf",
         "binaryPointOneIsOneHalf",
         "presentationPreservesHalf",
         "threeSixIsSecondHarmonic",
         "refineRatioPreserves",
         "threefoldHalfRefinement",
+        "zeroDenominatorConstructible = false",
+        "zeroRefinementFactorAccepted = false",
         "FramedAtlas",
         "ContextualThreeSixNineObservation",
     ],
@@ -46,6 +51,9 @@ REQUIRED_TOKENS = {
         "tower3",
         "projectCentralFlipInvariant",
         "RubikMove",
+        "CentreBlindField",
+        "centralFlipInvisible",
+        "centreBlindFieldCarriesInvariance",
     ],
     "LiftPolarityPathComposition.agda": [
         "composePolarityPath",
@@ -54,6 +62,7 @@ REQUIRED_TOKENS = {
         "canonicalCoarseFineFactorisation",
     ],
     "RadixValuationStageBridge.agda": [
+        "radixPositive",
         "decimalBinaryHalfEquivalent",
         "RadixOriginPrefix",
         "canonicalDecimalCarryGrammar",
@@ -70,6 +79,10 @@ REQUIRED_TOKENS = {
     "SU2SO3369HypervoxelBridge.agda": [
         "axisLiftHexRoundTrip",
         "nonarySlotRoundTrip",
+        "TwoSheetedCoverInterface",
+        "positiveNegativeAxisLiftDistinct",
+        "centralFlipHasNoFixedPoint",
+        "fibreComplete",
         "finiteAxisLiftDoubleCover",
         "canonicalSO3RightJacobianConvention",
         "canonicalExponentialJacobianDiscipline",
@@ -164,8 +177,9 @@ def scan_sources() -> None:
 def main() -> int:
     check_exact_arithmetic()
     scan_sources()
-    print("PASS: ratio, harmonic and radix presentations preserve 1/2 exactly")
+    print("PASS: positive-denominator ratio, harmonic and radix presentations preserve 1/2 exactly")
     print("PASS: 3/6/9 lifted hierarchy and rank/depth counts are exact")
+    print("PASS: centre-blind descent and two-sheet fibres are proof-carrying")
     print("PASS: lift path prefix/suffix parity composes exactly")
     print("PASS: carry grammar 9 -> 10 -> 11 is exact and stage roles remain distinct")
     print("PASS: representation/hypervoxel source surface is fail-closed")
