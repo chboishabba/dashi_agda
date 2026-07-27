@@ -6,6 +6,7 @@ import DASHI.Cognition.SituatedFrameMetacognitionBoundary as Situated
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Foundations.RepresentationChartInvariant as Representation
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Geometry.RepresentationPrefixUltrametricBridge as Prefix
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as SU2SO3
 
@@ -65,10 +66,29 @@ record RepresentationHypervoxelRegression : Set₁ where
         Representation.fiveTenths
         Representation.oneHalf
 
+    binaryPointOneIsHalf :
+      Representation.RatioEquivalent
+        Representation.binaryPointOne
+        Representation.oneHalf
+
+    decimalBinaryHalfSameInvariant :
+      Representation.RatioEquivalent
+        Radix.decimalPointFiveReading
+        Radix.binaryPointOneReading
+
     fiftyPercentIsHalf :
       Representation.RatioEquivalent
         Representation.fiftyHundredths
         Representation.oneHalf
+
+    threeSixIsSecondHarmonic :
+      Representation.RatioEquivalent
+        Representation.threeSix
+        (Representation.harmonicTerm 1)
+
+    threefoldHalfRefinementIsThreeSix :
+      Representation.refineRatio 3 Representation.oneHalf
+      ≡ Representation.threeSix
 
     rank1SiteCountIs3 : Hyper.siteCount 1 1 ≡ 3
     rank2SiteCountIs9 : Hyper.siteCount 2 1 ≡ 9
@@ -97,6 +117,12 @@ record RepresentationHypervoxelRegression : Set₁ where
     negativeNegativeParity :
       Hyper.multiplyPolarity negative negative ≡ positive
 
+    stage1And10Distinct :
+      ¬ (Atlas.atlas-1 ≡ Atlas.atlas-10)
+
+    stage10And11Distinct :
+      ¬ (Atlas.atlas-10 ≡ Atlas.atlas-11)
+
     stageCarryJoin : Radix.StageCarryJoin
     decimalCarryGrammar : Radix.CarryGrammar
     p11Projection : Radix.PrimeLaneAddressProjection 3
@@ -105,6 +131,9 @@ record RepresentationHypervoxelRegression : Set₁ where
     rightJacobianConvention : SU2SO3.SO3RightJacobianConvention
     haarDensityConvention : SU2SO3.SU2HaarDensityConvention
     quaternionPlaquetteRoute : SU2SO3.QuaternionPlaquetteRoute
+
+    existingLogisticReconciliation :
+      Situated.ExistingLogisticCarrierReconciliation
 
     representationBoundary : Representation.RepresentationAuthorityBoundary
     hypervoxelBoundary : Hyper.HypervoxelAuthorityBoundary
@@ -121,7 +150,11 @@ canonicalRepresentationHypervoxelRegression :
 canonicalRepresentationHypervoxelRegression = record
   { ratioThreeSixIsHalf = Representation.threeSixIsOneHalf
   ; decimalPointFiveIsHalf = Representation.fiveTenthsIsOneHalf
+  ; binaryPointOneIsHalf = Representation.binaryPointOneIsOneHalf
+  ; decimalBinaryHalfSameInvariant = Radix.decimalBinaryHalfEquivalent
   ; fiftyPercentIsHalf = Representation.fiftyHundredthsIsOneHalf
+  ; threeSixIsSecondHarmonic = Representation.threeSixIsSecondHarmonic
+  ; threefoldHalfRefinementIsThreeSix = Representation.threefoldHalfRefinement
   ; rank1SiteCountIs3 = Hyper.rank1Depth1Sites
   ; rank2SiteCountIs9 = Hyper.rank2Depth1Sites
   ; rank3SiteCountIs27 = Hyper.rank3Depth1Sites
@@ -137,6 +170,8 @@ canonicalRepresentationHypervoxelRegression = record
   ; liftProjectionLaw = canonicalLiftProjectionInvariant
   ; positiveNegativeParity = refl
   ; negativeNegativeParity = refl
+  ; stage1And10Distinct = Radix.stage1NotStage10
+  ; stage10And11Distinct = Radix.stage10NotStage11
   ; stageCarryJoin = Radix.canonicalStageCarryJoin
   ; decimalCarryGrammar = Radix.canonicalDecimalCarryGrammar
   ; p11Projection = Radix.canonicalP11ThreeSixNineProjection
@@ -144,6 +179,8 @@ canonicalRepresentationHypervoxelRegression = record
   ; rightJacobianConvention = SU2SO3.canonicalSO3RightJacobianConvention
   ; haarDensityConvention = SU2SO3.canonicalSU2HaarDensityConvention
   ; quaternionPlaquetteRoute = SU2SO3.canonicalQuaternionPlaquetteRoute
+  ; existingLogisticReconciliation =
+      Situated.canonicalExistingLogisticCarrierReconciliation
   ; representationBoundary = Representation.canonicalRepresentationAuthorityBoundary
   ; hypervoxelBoundary = Hyper.canonicalHypervoxelAuthorityBoundary
   ; radixStageBoundary = Radix.canonicalRadixStageAuthorityBoundary
