@@ -4,18 +4,20 @@ module DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram where
 -- PROVENANCE
 -- Authors: Oleg Kiriukhin; Gord Sinnamon; Loukas Grafakos;
 -- Rodolfo H. Torres; Pierre Germain; DASHI repository contributors.
--- Title: "Stage-3 raw-row adapter, weighted-Schur column, and dual
+-- Title: "Stage-3 raw-row adapter, three-function Schur, and partial-adjoint
 -- trilinear programme".
 -- Venue/year: cited source publications and DASHI formal development, 2026.
 -- DOI: 10.48550/arXiv.2604.12188; 10.1006/jfan.2001.3804;
 -- 10.1016/j.jde.2005.10.007; Sinnamon publication has no DOI in the
 -- cited metadata.
 -- Uses: Kiriukhin raw orbit-row estimates, orbit-to-dyadic transport,
--- finite helical lifting, two-function Schur, multilinear Schur, and
--- Navier-Stokes paraproduct duality.
--- Relationship: integrates the revised Stage-3 dependency order. The raw
--- row source is available, while every repository adapter and the weighted
--- column/dual-trilinear theorem remain explicit open obligations.
+-- finite helical lifting, Grafakos--Torres three-function Schur, the
+-- frozen-output two-function specialization, and Navier-Stokes
+-- paraproduct duality.
+-- Relationship: the raw row source supplies only the output-side condition.
+-- The two partial-adjoint homogeneity ledgers, three-weight exponent system,
+-- repository separation threshold, and cutoff-uniform trilinear theorem
+-- remain explicit open obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -26,7 +28,9 @@ import DASHI.Physics.Closure.NSTriadKNKiriukhinOrbitRowSumAdapter as Kiriukhin
 import DASHI.Physics.Closure.NSTriadKNOrbitToDyadicShellBridge as OrbitShell
 import DASHI.Physics.Closure.NSTriadKNFiniteHelicityRowLifting as HelicityLift
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurDualityProgram as WeightedSchur
+import DASHI.Physics.Closure.NSTriadKNGrafakosTorresThreeFunctionSchurProgram as ThreeFunction
 import DASHI.Physics.Closure.NSTriadKNMultilinearSchurParaproductProgram as Multilinear
+import DASHI.Physics.Closure.NSTriadKNTriadicDyadicExponentSystem as Exponents
 import DASHI.Physics.Closure.NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance as Finite
 
 record Stage3WeightedSchurResearchCutset
@@ -43,13 +47,23 @@ record Stage3WeightedSchurResearchCutset
     finiteHelicityRowLiftClosed : Set s
     boundedDirectionWeightRowLiftClosed : Set s
 
-    selectedRowWeight : Set s
-    selectedColumnWeight : Set s
-    weightedForwardConditionClosed : Set s
-    weightedDualConditionClosed : Set s
+    outputRowHomogeneityExtracted : Set s
+    firstPartialAdjointHomogeneityExtracted : Set s
+    secondPartialAdjointHomogeneityExtracted : Set s
+    threeLegAffineExponentSystemSolved : Set s
+    repositorySeparationThresholdDerived : Set s
+
+    selectedLeftWeight : Set s
+    selectedRightWeight : Set s
+    selectedOutputWeight : Set s
+    threeFunctionOutputConditionClosed : Set s
+    firstPartialAdjointConditionClosed : Set s
+    secondPartialAdjointConditionClosed : Set s
+    threeFunctionOperatorBoundClosed : Set s
+
+    frozenOutputTwoFunctionSpecializationClosed : Set s
     symmetricPartWeightedOperatorBoundClosed : Set s
 
-    multilinearPartialAdjointsClosed : Set s
     lowHighDualEstimateClosed : Set s
     highLowDualEstimateClosed : Set s
     highHighToLowRemainderClosed : Set s
@@ -69,6 +83,28 @@ kiriukhinRawRowLiteratureBackedIsTrue :
 kiriukhinRawRowLiteratureBackedIsTrue =
   Kiriukhin.kiriukhinRawRowSourceAvailableIsTrue
 
+threeFunctionSchurPrimary : Bool
+threeFunctionSchurPrimary = ThreeFunction.threeFunctionSchurPrimaryFramework
+
+threeFunctionSchurPrimaryIsTrue :
+  threeFunctionSchurPrimary ≡ true
+threeFunctionSchurPrimaryIsTrue =
+  ThreeFunction.threeFunctionSchurPrimaryFrameworkIsTrue
+
+twoFunctionSchurIsFrozenOutputSpecialization : Bool
+twoFunctionSchurIsFrozenOutputSpecialization =
+  ThreeFunction.twoFunctionSchurRetainedAsFrozenOutputSpecialization
+
+twoFunctionSchurIsFrozenOutputSpecializationIsTrue :
+  twoFunctionSchurIsFrozenOutputSpecialization ≡ true
+twoFunctionSchurIsFrozenOutputSpecializationIsTrue =
+  ThreeFunction.twoFunctionSchurRetainedAsFrozenOutputSpecializationIsTrue
+
+grafakosTorresSourceExponentReceipt :
+  Exponents.GrafakosTorresSourceExponentReceipt
+grafakosTorresSourceExponentReceipt =
+  Exponents.grafakosTorresSourceExponentReceipt
+
 weightedSchurFiniteReceipt : Finite.WeightedSchurFiniteReceipt
 weightedSchurFiniteReceipt = Finite.weightedSchurFiniteReceipt
 
@@ -78,6 +114,24 @@ stage3WeightedSchurProgrammeRepresented = true
 stage3WeightedSchurProgrammeRepresentedIsTrue :
   stage3WeightedSchurProgrammeRepresented ≡ true
 stage3WeightedSchurProgrammeRepresentedIsTrue = refl
+
+kiriukhinRowAloneDeterminesTriadicWeights : Bool
+kiriukhinRowAloneDeterminesTriadicWeights =
+  Exponents.kiriukhinRowAloneDeterminesThreeWeights
+
+kiriukhinRowAloneDeterminesTriadicWeightsIsFalse :
+  kiriukhinRowAloneDeterminesTriadicWeights ≡ false
+kiriukhinRowAloneDeterminesTriadicWeightsIsFalse =
+  Exponents.kiriukhinRowAloneDeterminesThreeWeightsIsFalse
+
+repositorySeparationThresholdClosed : Bool
+repositorySeparationThresholdClosed =
+  Exponents.repositorySeparationThresholdClosed
+
+repositorySeparationThresholdClosedIsFalse :
+  repositorySeparationThresholdClosed ≡ false
+repositorySeparationThresholdClosedIsFalse =
+  Exponents.repositorySeparationThresholdClosedIsFalse
 
 stage3WeightedColumnOrDualBoundClosed : Bool
 stage3WeightedColumnOrDualBoundClosed = false
