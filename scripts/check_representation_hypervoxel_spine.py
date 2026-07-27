@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Fail-closed audit for the representation/frame/hypervoxel tranche.
 
-The arithmetic checks are exact.  The source scan is deliberately narrow: it
+The arithmetic checks are exact. The source scan is deliberately narrow: it
 protects the new theorem surface against proof holes, postulate declarations,
-and accidental removal of the central laws.  It is not a substitute for Agda
+and accidental removal of the central laws. It is not a substitute for Agda
 kernel checking.
 """
 
@@ -37,17 +37,28 @@ REQUIRED_TOKENS = {
         "binaryPointOneIsOneHalf",
         "presentationPreservesHalf",
         "FramedScaleValuationObject",
+        "transitionTargetsChart",
+        "transitionPreservesEvaluation",
+        "transitionIdentity",
+        "transitionComposition",
+        "InspectedRepresentation Value Chart Scale Valuation",
         "inspectRepresentation",
         "threeSixIsSecondHarmonic",
         "refineRatioPreserves",
         "threefoldHalfRefinement",
         "zeroDenominatorConstructible = false",
         "zeroRefinementFactorAccepted = false",
+        "transitionCanMissRequestedTarget = false",
         "FramedAtlas",
         "ContextualThreeSixNineObservation",
     ],
     "CanonicalHalfFrameScaleValuation.agda": [
+        "ChartedHalfRepresentation",
+        "carriedChart",
+        "transitionChart",
         "canonicalHalfFrameScaleValuation",
+        "canonicalTransitionTargetsChart",
+        "canonicalTransitionPreservesValue",
         "canonicalInspectionValue",
         "canonicalInspectionChart",
         "canonicalInspectionScale",
@@ -75,9 +86,13 @@ REQUIRED_TOKENS = {
         "radixPositive",
         "decimalBinaryHalfEquivalent",
         "RadixOriginPrefix",
-        "RadixHyperAddress",
+        "RadialAddress : RadixChart",
+        "ternaryChart",
+        "RadixHyperAddress (chart : RadixChart)",
+        "RadixBlock chart rank",
         "radixHyperCoarsenAfterRefine",
-        "radixHyperSiteCount",
+        "radixHyperSiteCount : RadixChart",
+        "zeroRadixConstructible = false",
         "canonicalDecimalCarryGrammar",
         "stage1NotStage10",
         "stage1ToStage10UnitLift",
@@ -112,6 +127,9 @@ REQUIRED_TOKENS = {
     "RepresentationHypervoxelRegression.agda": [
         "canonicalRepresentationHypervoxelRegression",
         "unifiedFrameScaleValuationCarrier",
+        "threeSixTransitionTargetsPercentageChart",
+        "Radix.binaryChart",
+        "Radix.ternaryChart",
         "binaryRank3Depth1CountIs8",
         "pathPolarityFactorisation",
         "prefixUltrametricReceipt",
@@ -125,6 +143,7 @@ FORBIDDEN_PATTERNS = [
     re.compile(r"!\}"),
     re.compile(r"\bTERMINATING\b"),
     re.compile(r"\bNON_TERMINATING\b"),
+    re.compile(r"transitionCanMissRequestedTarget\s*=\s*true"),
 ]
 
 
@@ -143,6 +162,7 @@ def check_exact_arithmetic() -> None:
     assert hierarchy == [3, 6, 9, 18, 27, 54, 81, 162]
 
     def site_count(base: int, rank: int, depth: int) -> int:
+        assert base > 0
         return base ** (rank * depth)
 
     assert site_count(3, 1, 1) == 3
@@ -194,7 +214,8 @@ def main() -> int:
     check_exact_arithmetic()
     scan_sources()
     print("PASS: positive-denominator ratio, harmonic and radix presentations preserve 1/2 exactly")
-    print("PASS: unified value/chart/scale/valuation carrier is present")
+    print("PASS: charted representations reach requested targets and preserve evaluation")
+    print("PASS: all generic radix addresses carry positive-radix evidence")
     print("PASS: generic p/rank/depth and 3/6/9 lifted hierarchy counts are exact")
     print("PASS: centre-blind descent and two-sheet fibres are proof-carrying")
     print("PASS: lift path prefix/suffix parity composes exactly")
