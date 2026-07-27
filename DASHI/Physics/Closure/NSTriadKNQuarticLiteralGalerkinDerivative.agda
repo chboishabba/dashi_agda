@@ -41,9 +41,25 @@ record LiteralQuarticGalerkinLieData
     literalProjectedEquation :
       Equation.ExactProjectedGalerkinEquation system
 
-    chainRuleForLiteralFiniteSums : Set r
-    linearPiecesAgreeWithViscousTerm : Set r
-    nonlinearPiecesAgreeWithPhysicalTriadSum : Set r
+    literalFiniteSumDerivative viscousScalarDerivative
+      physicalTriadScalarDerivative : C3.Carrier F
+
+    literalDerivativeSplits : literalFiniteSumDerivative
+      ≡ C3.add F
+          viscousScalarDerivative
+          physicalTriadScalarDerivative
+
+    linearPiecesAgreeWithViscousTerm :
+      C3.add F
+        (C3.add F energyLinear coherenceLinear)
+        correctionLinear
+      ≡ viscousScalarDerivative
+
+    nonlinearPiecesAgreeWithPhysicalTriadSum :
+      C3.add F
+        (C3.add F energyNonlinear coherenceNonlinear)
+        correctionNonlinear
+      ≡ physicalTriadScalarDerivative
 
 open LiteralQuarticGalerkinLieData public
 
