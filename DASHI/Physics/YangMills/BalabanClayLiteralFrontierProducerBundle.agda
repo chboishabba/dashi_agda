@@ -4,6 +4,9 @@ module DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle where
 -- modules keep their remaining local analytic hypotheses explicit; this bundle
 -- performs no proof-level promotion by import alone.
 
+-- Canonical authors/title/venue/DOI/arXiv/section/relationship metadata.
+import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
+
 -- T3: reference coercivity, literal five-remainder decomposition, and physical
 -- small-field Green/Schur reduction.
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact
