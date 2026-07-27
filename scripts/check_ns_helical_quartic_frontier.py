@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the helical quartic candidate tranche."""
+"""Fail closed on the helical quartic candidate and reconnaissance tranche."""
 
 from __future__ import annotations
 
@@ -15,6 +15,10 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNLocalizedHelicityCommutatorProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNAdaptiveLinearHelicalProbeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNHelicalDiscriminantMarginProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNLocalizedHelicityExactReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNFixedSymbolBalancedFamilyReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNTriadPhaseCoherenceFallback.agda",
+    "DASHI/Physics/Closure/NSTriadKNHelicalCandidateDecisionFork.agda",
 ]
 
 PROVENANCE_MARKERS = (
@@ -32,6 +36,22 @@ FORBIDDEN = (
 )
 
 POSTULATE = re.compile(r"(?m)^\s*postulate(?:\s|$)")
+
+
+def run_verifier(root: Path, relative: str, label: str) -> str | None:
+    verifier = root / relative
+    if not verifier.is_file():
+        return f"missing {label}"
+    result = subprocess.run(
+        [sys.executable, str(verifier)],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        return f"{label} failed: " + (result.stderr.strip() or result.stdout.strip())
+    return None
 
 
 def main() -> int:
@@ -64,30 +84,27 @@ def main() -> int:
         if "-- DOI:" not in text:
             failures.append(f"{relative}: missing DOI status")
 
-    verifier = root / "scripts/ns_quartic_helicity_perturbed_counterexample.py"
-    if not verifier.is_file():
-        failures.append("missing global-helicity exact verifier")
-    else:
-        result = subprocess.run(
-            [sys.executable, str(verifier)],
-            cwd=root,
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode:
-            failures.append(
-                "global-helicity verifier failed: "
-                + (result.stderr.strip() or result.stdout.strip())
-            )
+    for relative, label in (
+        (
+            "scripts/ns_quartic_helicity_perturbed_counterexample.py",
+            "global-helicity exact verifier",
+        ),
+        (
+            "scripts/ns_quartic_localized_helicity_reconnaissance.py",
+            "localized-helicity reconnaissance verifier",
+        ),
+    ):
+        failure = run_verifier(root, relative, label)
+        if failure is not None:
+            failures.append(failure)
 
     if failures:
         print("\n".join(failures))
         return 1
 
     print(
-        f"checked {len(FILES)} helical quartic files: "
-        "no holes or postulates; exact global-helicity verifier passed"
+        f"checked {len(FILES)} helical quartic files: no holes or postulates; "
+        "global and localized exact verifiers passed"
     )
     return 0
 
