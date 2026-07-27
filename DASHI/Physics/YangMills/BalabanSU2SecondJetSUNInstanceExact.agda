@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanSU2SecondJetSUNInstanceExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -37,14 +37,14 @@ jetExt {jet leftSecond leftFirst} {jet .leftSecond .leftFirst} refl refl = refl
 open import Data.List.Base using (_∷_; [])
 
 jetMultiplyAssociativeScalar : ∀ ar ax ay az br bx by bz cr cx cy cz →
-  ((ar + br + (- (ax * bx + ay * by + az * bz))) + cr + (- ((ax + bx) * cx + (ay + by) * cy + (az + bz) * cz))) ≡
-  (ar + (br + cr + (- (bx * cx + by * cy + bz * cz))) + (- (ax * (bx + cx) + ay * (by + cy) + az * (bz + cz))))
+  ((ar + br + (- (ax * bx + (ay * by + az * bz)))) + cr + (- ((ax + bx) * cx + ((ay + by) * cy + (az + bz) * cz)))) ≡
+  (ar + (br + cr + (- (bx * cx + (by * cy + bz * cz)))) + (- (ax * (bx + cx) + (ay * (by + cy) + az * (bz + cz)))))
 jetMultiplyAssociativeScalar ar ax ay az br bx by bz cr cx cy cz =
   ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ cr ∷ cx ∷ cy ∷ cz ∷ [])
 
 jetMultiplyCommutativeScalar : ∀ ar ax ay az br bx by bz →
-  (ar + br + (- (ax * bx + ay * by + az * bz))) ≡
-  (br + ar + (- (bx * ax + by * ay + bz * az)))
+  (ar + br + (- (ax * bx + (ay * by + az * bz)))) ≡
+  (br + ar + (- (bx * ax + (by * ay + bz * az))))
 jetMultiplyCommutativeScalar ar ax ay az br bx by bz =
   ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ [])
 
@@ -78,73 +78,108 @@ jetMultiplyCommutative
       (commQ ay by)
       (commQ az bz))
 
+zeroAddL : ∀ x → 0ℚ + x ≡ x
+zeroAddL = ℚRing.solve-∀
+
+zeroAddR : ∀ x → x + 0ℚ ≡ x
+zeroAddR = ℚRing.solve-∀
+
+negInvol : ∀ x → - (- x) ≡ x
+negInvol = ℚRing.solve-∀
+
+invL : ∀ x → - x + x ≡ 0ℚ
+invL = ℚRing.solve-∀
+
+invR : ∀ x → x + - x ≡ 0ℚ
+invR = ℚRing.solve-∀
+
+jetIdentityLeftRealScalar : ∀ r vx vy vz →
+  0ℚ + r + (- (0ℚ * vx + (0ℚ * vy + 0ℚ * vz))) ≡ r
+jetIdentityLeftRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
+
+jetIdentityRightRealScalar : ∀ r vx vy vz →
+  r + 0ℚ + (- (vx * 0ℚ + (vy * 0ℚ + vz * 0ℚ))) ≡ r
+jetIdentityRightRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
+
+unitDefectMultiplyScalar : ∀ ar ax ay az br bx by bz →
+  ((1ℚ + 1ℚ) * (ar + br + (- (ax * bx + (ay * by + az * bz)))) + ((ax + bx) * (ax + bx) + ((ay + by) * (ay + by) + (az + bz) * (az + bz)))) ≡
+  (((1ℚ + 1ℚ) * ar + (ax * ax + (ay * ay + az * az))) + ((1ℚ + 1ℚ) * br + (bx * bx + (by * by + bz * bz))))
+unitDefectMultiplyScalar ar ax ay az br bx by bz =
+  ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ [])
+
+unitDefectInverseScalar : ∀ r vx vy vz →
+  ((1ℚ + 1ℚ) * r + ((- vx) * (- vx) + ((- vy) * (- vy) + (- vz) * (- vz)))) ≡
+  ((1ℚ + 1ℚ) * r + (vx * vx + (vy * vy + vz * vz)))
+unitDefectInverseScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
+
+expDefectZeroScalar : ∀ vx vy vz →
+  ((1ℚ + 1ℚ) * (- (half * (vx * vx + (vy * vy + vz * vz)))) + (vx * vx + (vy * vy + vz * vz))) ≡ 0ℚ
+expDefectZeroScalar vx vy vz =
+  ℚRing.solve (vx ∷ vy ∷ vz ∷ [])
+
+inverseLeftRealScalar : ∀ r vx vy vz →
+  (r + r + (- ((- vx) * vx + ((- vy) * vy + (- vz) * vz)))) ≡
+  ((1ℚ + 1ℚ) * r + (vx * vx + (vy * vy + vz * vz)))
+inverseLeftRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
+
+inverseRightRealScalar : ∀ r vx vy vz →
+  (r + r + (- (vx * (- vx) + (vy * (- vy) + vz * (- vz))))) ≡
+  ((1ℚ + 1ℚ) * r + (vx * vx + (vy * vy + vz * vz)))
+inverseRightRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
+
 jetIdentityLeft : ∀ path → identityJet *j path ≡ path
 jetIdentityLeft (jet r (lie3 vx vy vz)) =
   jetExt
-    (ℚRing.solve-∀ r)
-    (lie3Ext
-      (ℚRing.solve-∀ vx)
-      (ℚRing.solve-∀ vy)
-      (ℚRing.solve-∀ vz))
+    (jetIdentityLeftRealScalar r vx vy vz)
+    (lie3Ext (zeroAddL vx) (zeroAddL vy) (zeroAddL vz))
 
 jetIdentityRight : ∀ path → path *j identityJet ≡ path
 jetIdentityRight (jet r (lie3 vx vy vz)) =
   jetExt
-    (ℚRing.solve-∀ r)
-    (lie3Ext
-      (ℚRing.solve-∀ vx)
-      (ℚRing.solve-∀ vy)
-      (ℚRing.solve-∀ vz))
+    (jetIdentityRightRealScalar r vx vy vz)
+    (lie3Ext (zeroAddR vx) (zeroAddR vy) (zeroAddR vz))
 
 inverseJetInvolutive : ∀ path → inverseJet (inverseJet path) ≡ path
 inverseJetInvolutive (jet r (lie3 vx vy vz)) =
   jetExt refl
-    (lie3Ext
-      (ℚRing.solve-∀ vx)
-      (ℚRing.solve-∀ vy)
-      (ℚRing.solve-∀ vz))
+    (lie3Ext (negInvol vx) (negInvol vy) (negInvol vz))
 
 unitDefectIdentity : unitDefect identityJet ≡ 0ℚ
-unitDefectIdentity = ℚRing.solve-∀
+unitDefectIdentity = refl
 
 unitDefectMultiply : ∀ first second →
   unitDefect (first *j second) ≡ unitDefect first + unitDefect second
 unitDefectMultiply
   (jet ar (lie3 ax ay az))
   (jet br (lie3 bx by bz)) =
-  ℚRing.solve-∀ ar ax ay az br bx by bz
+  unitDefectMultiplyScalar ar ax ay az br bx by bz
 
 unitDefectInverse : ∀ path → unitDefect (inverseJet path) ≡ unitDefect path
 unitDefectInverse (jet r (lie3 vx vy vz)) =
-  ℚRing.solve-∀ r vx vy vz
+  unitDefectInverseScalar r vx vy vz
 
 exponentialJetDefectZero : ∀ value → unitDefect (exponentialJet value) ≡ 0ℚ
 exponentialJetDefectZero (lie3 vx vy vz) =
-  ℚRing.solve-∀ vx vy vz
+  expDefectZeroScalar vx vy vz
 
 jetInverseLeftFromDefect : ∀ path → unitDefect path ≡ 0ℚ →
   inverseJet path *j path ≡ identityJet
 jetInverseLeftFromDefect (jet r (lie3 vx vy vz)) defectZero =
   jetExt
-    (trans
-      (ℚRing.solve-∀ r vx vy vz)
-      defectZero)
-    (lie3Ext
-      (ℚRing.solve-∀ vx)
-      (ℚRing.solve-∀ vy)
-      (ℚRing.solve-∀ vz))
+    (trans (inverseLeftRealScalar r vx vy vz) defectZero)
+    (lie3Ext (invL vx) (invL vy) (invL vz))
 
 jetInverseRightFromDefect : ∀ path → unitDefect path ≡ 0ℚ →
   path *j inverseJet path ≡ identityJet
 jetInverseRightFromDefect (jet r (lie3 vx vy vz)) defectZero =
   jetExt
-    (trans
-      (ℚRing.solve-∀ r vx vy vz)
-      defectZero)
-    (lie3Ext
-      (ℚRing.solve-∀ vx)
-      (ℚRing.solve-∀ vy)
-      (ℚRing.solve-∀ vz))
+    (trans (inverseRightRealScalar r vx vy vz) defectZero)
+    (lie3Ext (invR vx) (invR vy) (invR vz))
 
 open import DASHI.Physics.YangMills.SUNMatrixCarrier
 
