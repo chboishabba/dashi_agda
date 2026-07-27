@@ -9,6 +9,12 @@ open import Base369 using
   ; tri-mid
   ; tri-high
   ; HexTruth
+  ; hex-0
+  ; hex-1
+  ; hex-2
+  ; hex-3
+  ; hex-4
+  ; hex-5
   ; NonaryTruth
   ; non-0
   ; non-1
@@ -111,12 +117,12 @@ axisLiftHexRoundTrip (Hyper.axis-high , negative) = refl
 
 hexAxisLiftRoundTrip :
   ∀ hex → axisLiftToHexTruth (hexTruthToAxisLift hex) ≡ hex
-hexAxisLiftRoundTrip HexFactor.hex-0 = refl
-hexAxisLiftRoundTrip HexFactor.hex-1 = refl
-hexAxisLiftRoundTrip HexFactor.hex-2 = refl
-hexAxisLiftRoundTrip HexFactor.hex-3 = refl
-hexAxisLiftRoundTrip HexFactor.hex-4 = refl
-hexAxisLiftRoundTrip HexFactor.hex-5 = refl
+hexAxisLiftRoundTrip hex-0 = refl
+hexAxisLiftRoundTrip hex-1 = refl
+hexAxisLiftRoundTrip hex-2 = refl
+hexAxisLiftRoundTrip hex-3 = refl
+hexAxisLiftRoundTrip hex-4 = refl
+hexAxisLiftRoundTrip hex-5 = refl
 
 ------------------------------------------------------------------------
 -- NonaryTruth is an index adapter for output-axis x input-axis matrix slots.
