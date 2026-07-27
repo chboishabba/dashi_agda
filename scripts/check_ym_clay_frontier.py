@@ -2,8 +2,8 @@
 """Fail-closed textual audit for the explicit P1--P5 Yang--Mills frontier.
 
 The script checks declaration integrity and the honesty ledger.  It does not
-replace the Agda kernel.  The constructive configured Green closure is delegated
-to its own stricter audit so the frontier and finite inverse cuts cannot drift.
+replace the Agda kernel.  The configured Green closure is delegated to its own
+stricter audit so the finite inverse and analytic producer cuts cannot drift.
 """
 
 from __future__ import annotations
@@ -47,6 +47,14 @@ FILES: dict[Path, tuple[str, ...]] = {
         "picardRegularBackgroundConstruction",
         "p1LiteralWilsonPicardInputsLevel = conditional",
     ),
+    YM / "BalabanClayT1CommonAnalyticContractionExact.agda": (
+        "CommonAnalyticCriticalMap",
+        "criticalMapContraction",
+        "criticalMapPreservesCommonBall",
+        "CommonSecondJetEnvelope",
+        "commonSecondJetBound",
+        "t1LiteralWilsonCommonNormInputsLevel = conditional",
+    ),
     YM / "BalabanClayP2LargeFieldStepVExact.agda": (
         "GaugeInvariantBadBlockDecomposition",
         "LargeFieldActivityFactorization",
@@ -63,6 +71,21 @@ FILES: dict[Path, tuple[str, ...]] = {
         "badBlockGaugeInvariantBackward",
         "badBlockMeasurable",
         "p2LiteralWilsonBadPredicateInstantiationLevel = conditional",
+    ),
+    YM / "BalabanClayT2TraversalRootedShellExact.agda": (
+        "eightTimesOneSixteenthIsHalf",
+        "activityPerExtensionBelowOneSixteenth",
+        "oneTraversalStepBelowHalf",
+        "rootedShellBelowQuarterHalfPower",
+        "traversalSuppressionImpliesFiniteKP",
+        "wilsonActivityPerTraversalBelowOneSixteenthLevel = conditional",
+    ),
+    YM / "BalabanClayT2UrsellCauchyExact.agda": (
+        "geometricTailBelow",
+        "ursellTailBelowGeometric",
+        "ursellCauchyTail",
+        "connectedCorrelationExponentialDecay",
+        "physicalUrsellTreeGraphMajorantLevel = conditional",
     ),
     YM / "BalabanClayP3PhysicalOneStepTransferExact.agda": (
         "ExactOneStepIntegral",
@@ -91,6 +114,22 @@ FILES: dict[Path, tuple[str, ...]] = {
         "jacobianExact",
         "p3LiteralWilsonPrincipalFibreInstantiationLevel = conditional",
     ),
+    YM / "BalabanClayT3CompactHaarLimitExact.agda": (
+        "CompactHaarQuadratureLimit",
+        "smallLargeHaarPartitionExact",
+        "constrainedHaarGaugeInvariant",
+        "haarEffectiveActionDefinesIntegral",
+        "productHaarQuadratureIdentificationLevel = conditional",
+    ),
+    YM / "BalabanClayT3SchurWardBetaExact.agda": (
+        "scalarSchurDefectIdentity",
+        "scalarSchurEnergyExact",
+        "fluctuationIntegralGaugeInvariant",
+        "localizationPreservesWardIdentity",
+        "quarticGeometricIdentity",
+        "quarticRemainderPartialBound",
+        "physicalWardBetaIdentificationLevel = conditional",
+    ),
     YM / "BalabanClayP4DyadicCoercivityBudgetExact.agda": (
         "lossBudgetIdentity",
         "lossPartialSumBelowOneSixtyFourth",
@@ -103,6 +142,16 @@ FILES: dict[Path, tuple[str, ...]] = {
         "canonicalBackgroundConstraintProducerLevel = conditional",
         "canonicalContinuumConstraintProducerLevel = conditional",
     ),
+    YM / "BalabanClayT4CanonicalScalarWitnessExact.agda": (
+        "PositiveMargin",
+        "canonicalContractionMargin",
+        "canonicalKPMargin",
+        "canonicalOneStepMargin",
+        "canonicalBetaRemainderMargin",
+        "canonicalMassSurvivalMargin",
+        "canonicalScalarCutset",
+        "canonicalPhysicalConstantIdentificationLevel = conditional",
+    ),
     YM / "BalabanClayP5ContinuumMassGapExact.agda": (
         "AllScaleFiniteVolumeConstruction",
         "ThermodynamicLimit",
@@ -113,15 +162,44 @@ FILES: dict[Path, tuple[str, ...]] = {
         "InteractingNontriviality",
         "p5NontrivialityProducerLevel = conditional",
     ),
+    YM / "BalabanClayT5PhysicalMassTransportExact.agda": (
+        "partialFrom",
+        "gapAtDepthBelowInitialPlusDefects",
+        "terminalMassBelowInitialPlusBudget",
+        "positivePhysicalMassSurvives",
+        "terminalGapIsLambdaMultiple",
+        "physicalTransferOperatorInterlacingLevel = conditional",
+    ),
+    YM / "BalabanClayT5LimitAndNontrivialityExact.agda": (
+        "SequentiallyClosedProperty",
+        "continuumNormalized",
+        "continuumPositive",
+        "continuumGaugeInvariant",
+        "continuumReflectionPositive",
+        "nonzeroFourthCumulantExcludesGaussian",
+        "physicalLimitTightnessAndNontrivialityLevel = conditional",
+    ),
+    YM / "BalabanClayConstructiveProducerAdvance.agda": (
+        "BalabanClayT1CommonAnalyticContractionExact",
+        "BalabanClayT2TraversalRootedShellExact",
+        "BalabanClayT2UrsellCauchyExact",
+        "BalabanClayT3CompactHaarLimitExact",
+        "BalabanClayT3SchurWardBetaExact",
+        "BalabanClayT4CanonicalScalarWitnessExact",
+        "BalabanClayT5PhysicalMassTransportExact",
+        "BalabanClayT5LimitAndNontrivialityExact",
+    ),
     YM / "BalabanClayFrontierCompletionLedger.agda": (
         "configuredMatrixActionLinearityLevel = machineChecked",
-        "configuredGreenMatrixInverseProductLevel = machineChecked",
-        "configuredPhysicalGreenNormLevel = machineChecked",
         "constructiveConfiguredFiniteInverseLevel = machineChecked",
-        "p1PicardBackgroundConstructionLevel = machineChecked",
-        "p2BadPathComponentConstructionLevel = machineChecked",
-        "p3FiniteConstrainedPartitionLevel = machineChecked",
-        "p3PrincipalFibreCoordinateConstructionLevel = machineChecked",
+        "t1CommonAnalyticContractionLevel = machineChecked",
+        "t2RootedShellQuarterHalfPowerLevel = machineChecked",
+        "t2UrsellCauchyModulusLevel = machineChecked",
+        "t3CompactHaarLimitAlgebraLevel = machineChecked",
+        "t3QuarticBetaRemainderSummabilityLevel = machineChecked",
+        "p4CanonicalScalarIntersectionLevel = machineChecked",
+        "p5PhysicalMassInterlacingLevel = machineChecked",
+        "p5SequentialOSPropertyClosureLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
         "p3ExactConstrainedIntegralCoordinatesLevel = conditional",
@@ -163,11 +241,13 @@ def main() -> None:
     )
 
     print(
-        "P1--P3 now include a constructed Picard-limit background adapter, "
-        "proof-relevant gauge-invariant bad components, an independently proved "
-        "finite constrained small/large partition, and exact principal-fibre "
-        "coordinates. Literal Wilson/Haar estimates and P4--P5 endpoints remain "
-        "explicit conditional producers; the configured Green audit stays closed."
+        "The frontier branch now derives common-norm contraction/self-map, the "
+        "exact 8/16 rooted-shell decay, an Ursell Cauchy modulus and connected "
+        "correlation tail, compact-Haar limit algebra, scalar Schur signs, exact "
+        "gauge reindexing, quartic beta-remainder summability, one common scalar "
+        "margin tuple, finite physical-mass interlacing, OS-property limit closure "
+        "and fourth-cumulant nontriviality. Literal Wilson/Haar identifications "
+        "remain explicit conditional producers; no kernel receipt is fabricated."
     )
 
 
