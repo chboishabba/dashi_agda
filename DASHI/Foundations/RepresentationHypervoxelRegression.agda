@@ -98,7 +98,7 @@ record RepresentationHypervoxelRegression : Set₁ where
     unifiedFrameScaleValuationCarrier :
       Representation.FramedScaleValuationObject
         Representation.RatioRepresentation
-        Representation.HalfPresentation
+        CanonicalFrame.ChartedHalfRepresentation
         Representation.PresentationChart
         Nat
         Nat
@@ -107,8 +107,17 @@ record RepresentationHypervoxelRegression : Set₁ where
       proj₁
         (Representation.inspectRepresentation
           CanonicalFrame.canonicalHalfFrameScaleValuation
-          Representation.displayedThreeSix)
+          CanonicalFrame.chartedThreeSix)
       ≡ Representation.threeSix
+
+    threeSixTransitionTargetsPercentageChart :
+      Representation.activeChart
+        CanonicalFrame.canonicalHalfFrameScaleValuation
+        (Representation.transition
+          CanonicalFrame.canonicalHalfFrameScaleValuation
+          Representation.percentageChart
+          CanonicalFrame.chartedThreeSix)
+      ≡ Representation.percentageChart
 
     rank1SiteCountIs3 : Hyper.siteCount 1 1 ≡ 3
     rank2SiteCountIs9 : Hyper.siteCount 2 1 ≡ 9
@@ -116,13 +125,13 @@ record RepresentationHypervoxelRegression : Set₁ where
     rank3Depth2SiteCountIs729 : Hyper.siteCount 3 2 ≡ 729
 
     binaryRank3Depth1CountIs8 :
-      Radix.radixHyperSiteCount 2 3 1 ≡ 8
+      Radix.radixHyperSiteCount Radix.binaryChart 3 1 ≡ 8
 
     ternaryRank3Depth1CountIs27 :
-      Radix.radixHyperSiteCount 3 3 1 ≡ 27
+      Radix.radixHyperSiteCount Radix.ternaryChart 3 1 ≡ 27
 
     ternaryRank3Depth2CountIs729 :
-      Radix.radixHyperSiteCount 3 3 2 ≡ 729
+      Radix.radixHyperSiteCount Radix.ternaryChart 3 2 ≡ 729
 
     axisLiftCountIs6 : SU2SO3.axisLiftCarrierCount ≡ 6
     operatorSheetCountIs9 : SU2SO3.operatorSheetCount ≡ 9
@@ -192,6 +201,10 @@ canonicalRepresentationHypervoxelRegression = record
       CanonicalFrame.canonicalHalfFrameScaleValuation
   ; threeSixInspectionPreservesValue =
       CanonicalFrame.canonicalThreeSixInspectionValue
+  ; threeSixTransitionTargetsPercentageChart =
+      CanonicalFrame.canonicalTransitionTargetsChart
+        Representation.percentageChart
+        CanonicalFrame.chartedThreeSix
   ; rank1SiteCountIs3 = Hyper.rank1Depth1Sites
   ; rank2SiteCountIs9 = Hyper.rank2Depth1Sites
   ; rank3SiteCountIs27 = Hyper.rank3Depth1Sites
