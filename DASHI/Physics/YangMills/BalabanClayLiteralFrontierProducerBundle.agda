@@ -9,40 +9,50 @@ module DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle where
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
--- Shared rational/Taylor interval certificate used by the T3 chart and T2 Haar
--- lanes.
+-- Shared rational/Taylor interval carriers and the configured sinc/cos/log
+-- coefficients used by both the T3 chart and T2 Haar lanes.
 import DASHI.Physics.YangMills.BalabanClayCommonCertifiedTaylorEnclosureExact
+import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact
 
 -- T3: reference coercivity, exact chart singular values, literal five-remainder
--- constants, one common radius, and physical small-field Green/Schur reduction.
+-- constants, configured common radius, and physical Green decay reduction.
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralPhysicalCoercivityProducerExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralBackgroundHessianRemaindersExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralSU2ChartIntervalBoundsExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralFiveRemainderConstantsExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralCommonRadiusWitnessExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact
+import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact
 
--- T2: action gain, all five non-action losses, the physical loss witness,
--- rooted physical encoding and carrier instance, and the exact
--- Fernández--Procacci clique reduction.
+-- T2: action gain, all five non-action losses, configured one-sixteenth budget,
+-- rooted physical encoding, concrete patch masks and the exact FP clique lane.
 import DASHI.Physics.YangMills.BalabanClayT2LiteralWilsonSixFactorProducerExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralActivityLossConstantsExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralPhysicalLossWitnessExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralEightWayCliqueExact
 import DASHI.Physics.YangMills.BalabanClayT2PhysicalRootedPolymerEncodingExact
 import DASHI.Physics.YangMills.BalabanClayT2PhysicalPolymerCarrierInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact
 
--- T4: localized projector, literal Wilson/background one-loop and lattice
--- Brillouin-zone reduction, and the exact coefficient-closure cutset.
+-- T4: localized projector, literal Wilson/background one-loop reduction and a
+-- rational-box Brillouin-zone coefficient certificate.
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralVacuumPolarizationIntegralExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopCoefficientClosureExact
+import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact
 
--- T5: staged thermodynamic/continuum tails, exponential moments, uniform
--- integrability, compactness, complete Gram forms, and OS positivity transport.
+-- T5: staged thermodynamic/continuum tails, explicit dyadic geometric tails,
+-- exponential moments, compactness, complete Gram forms and OS transport.
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeTailMomentCompactnessExact
+import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact
+
+-- Exact status split for the newly configured arithmetic and remaining leaves.
+import DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger
 
 -- User-run authoritative typecheck receipt surface.
 import DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface
