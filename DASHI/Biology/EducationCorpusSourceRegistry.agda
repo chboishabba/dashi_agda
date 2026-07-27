@@ -1,0 +1,218 @@
+module DASHI.Biology.EducationCorpusSourceRegistry where
+
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
+
+------------------------------------------------------------------------
+-- Source-bound registry for the education-paper corpus.
+--
+-- Every row preserves title, authors, DOI, venue, year and the source-level
+-- contribution.  Cross-paper and DASHI inferences are stored separately;
+-- metadata does not promote any paper into universal authority.
+
+record PaperReference : Set where
+  constructor mkPaperReference
+  field
+    paperKey : String
+    paperTitle : String
+    paperAuthors : List String
+    paperDOI : String
+    paperJournal : String
+    paperYear : Nat
+    paperVolumeIssue : String
+    paperPages : String
+    paperSourceContribution : String
+    paperSourceBoundary : String
+    paperMetadataVerified : Bool
+    paperMetadataVerifiedIsTrue : paperMetadataVerified ≡ true
+
+open PaperReference public
+
+aiFeedbackAuthors : List String
+aiFeedbackAuthors =
+  "Christopher Dann"
+  ∷ "Petrea Redmond"
+  ∷ "Melissa Fanshawe"
+  ∷ "Alice Brown"
+  ∷ "Seyum Getenet"
+  ∷ "Thanveer Shaik"
+  ∷ "Xiaohui Tao"
+  ∷ "Linda Galligan"
+  ∷ "Yan Li"
+  ∷ []
+
+voiceAgencyAuthors : List String
+voiceAgencyAuthors = "Alice Brown" ∷ "Megan Kimber" ∷ []
+
+onlineSupportAuthors : List String
+onlineSupportAuthors =
+  "Seyum Getenet"
+  ∷ "Katie Burke"
+  ∷ "Melissa Fanshawe"
+  ∷ "Alice Brown"
+  ∷ []
+
+ecologyDataAuthors : List String
+ecologyDataAuthors = "Roxanne Finn" ∷ "Alice Brown" ∷ []
+
+parentalAllyshipLensAuthors : List String
+parentalAllyshipLensAuthors =
+  "Rachel Leslie" ∷ "Alice Brown" ∷ "Ellen Larsen" ∷ []
+
+advocacyAllyshipAuthors : List String
+advocacyAllyshipAuthors =
+  "Rachel Leslie"
+  ∷ "Ellen Larsen"
+  ∷ "Melissa Fanshawe"
+  ∷ "Alice Brown"
+  ∷ []
+
+partnershipBarriersAuthors : List String
+partnershipBarriersAuthors =
+  "Rachel Leslie"
+  ∷ "Melissa Fanshawe"
+  ∷ "Ellen Larsen"
+  ∷ "Alice Brown"
+  ∷ []
+
+aiFeedbackPaper : PaperReference
+aiFeedbackPaper =
+  mkPaperReference
+    "ajet-oef-ai-feedback-2024"
+    "Making sense of student feedback and engagement using artificial intelligence"
+    aiFeedbackAuthors
+    "10.14742/ajet.8903"
+    "Australasian Journal of Educational Technology"
+    2024
+    "40(3)"
+    "58-76"
+    "MVP feasibility evidence that manually OEF-labelled feedback can train an NLP/deep-learning classifier and aggregate visualisation surface."
+    "Classification remains a bounded proxy: not student meaning, complete voice, individual truth, equity, causal redesign effect, or pedagogical authority."
+    true refl
+
+voiceAgencyPaper : PaperReference
+voiceAgencyPaper =
+  mkPaperReference
+    "student-voice-epistemic-expansion-2026"
+    "Repositioning Student Voice and Agency: A Call for the Epistemic Expansion of Scholarship of Teaching and Learning Inquiry"
+    voiceAgencyAuthors
+    "10.1177/14697874261426374"
+    "Active Learning in Higher Education"
+    2026
+    "27(2)"
+    "253-264"
+    "Critiques extractive SoTL feedback practices and calls for students to participate as domain experts and contributors to research design and scholarship praxis."
+    "The paper supplies an epistemic-participation correction; it does not imply that every survey, partnership, or co-design process automatically realises agency."
+    true refl
+
+onlineSupportStrategiesPaper : PaperReference
+onlineSupportStrategiesPaper =
+  mkPaperReference
+    "online-teacher-education-support-strategies-2026"
+    "Supporting online learning in teacher education: student-identified strategies and social constructivist implications"
+    onlineSupportAuthors
+    "10.1080/01587919.2026.2669288"
+    "Distance Education"
+    2026
+    "online first"
+    "online first"
+    "Uses 584 pre-service-teacher responses to identify five student-valued support themes: autonomy/flexibility, accessible centralised resources, meaningful interaction, self-organisation, and guided scaffolding."
+    "The five themes are candidate support families in an Australian regional teacher-education context, not universal interventions or automatic causal effects."
+    true refl
+
+ecologyOfDataPaper : PaperReference
+ecologyOfDataPaper =
+  mkPaperReference
+    "ecology-of-data-custodianship-2025"
+    "Custodians of an ecology of data: Foundational theory and practice for data analysis in a complex world"
+    ecologyDataAuthors
+    "10.1177/14687941241234293"
+    "Qualitative Research"
+    2025
+    "25(1)"
+    "110-129"
+    "Develops an eco-behavioural, person-place co-constituted account of qualitative analysis through five responsibilities of data custodianship."
+    "Custodianship is a methodological and ethical stance; it does not make contextual interpretation infallible or eliminate the need for reflexivity and evidence."
+    true refl
+
+parentalAllyshipLensPaper : PaperReference
+parentalAllyshipLensPaper =
+  mkPaperReference
+    "parental-allyship-conceptual-lens-2025"
+    "Parental Allyship for Children With Dyslexia: A Conceptual Lens on Disability Experience"
+    parentalAllyshipLensAuthors
+    "10.1177/07319487241251730"
+    "Learning Disability Quarterly"
+    2025
+    "48(1)"
+    "3-12"
+    "Extends disability-experience analysis to parent allies through primary, vicarious, and primary-adjacent proximity to a child's dyslexic identity."
+    "Parent allyship is not identical to the child's voice, identity, or lived disability experience and cannot replace the child's epistemic position."
+    true refl
+
+advocacyAllyshipPaper : PaperReference
+advocacyAllyshipPaper =
+  mkPaperReference
+    "advocacy-allyship-distinction-2024"
+    "It is more than the average parent goes through: using the experiences of Australian parents of dyslexic children to draw a distinction between advocacy and allyship"
+    advocacyAllyshipAuthors
+    "10.1080/19404158.2024.2342523"
+    "Australian Journal of Learning Difficulties"
+    2024
+    "29(1)"
+    "53-74"
+    "Uses interviews with ten Australian parents to distinguish parental allyship from ordinary parental advocacy and describe additional responsibilities and disability-adjacent experience."
+    "The qualitative sample supports situated conceptual development, not prevalence, universal parent experience, or substitution of parent testimony for child testimony."
+    true refl
+
+partnershipBarriersPaper : PaperReference
+partnershipBarriersPaper =
+  mkPaperReference
+    "dyslexia-parent-school-partnership-barriers-2025"
+    "The Perceptions Parents of Dyslexic Children Have on Barriers to Meaningful Parent-School Partnerships in Australia"
+    partnershipBarriersAuthors
+    "10.1080/09362835.2024.2389081"
+    "Exceptionality"
+    2025
+    "33(1)"
+    "40-58"
+    "Reports parent-perceived interpersonal and systemic barriers, including rejection of parent expertise, in parent-school partnerships for dyslexic children."
+    "Parent perceptions are valid situated observer surfaces but do not alone establish every participant's state, institutional intent, or universal school-system behaviour."
+    true refl
+
+canonicalEducationCorpusPapers : List PaperReference
+canonicalEducationCorpusPapers =
+  aiFeedbackPaper
+  ∷ voiceAgencyPaper
+  ∷ onlineSupportStrategiesPaper
+  ∷ ecologyOfDataPaper
+  ∷ parentalAllyshipLensPaper
+  ∷ advocacyAllyshipPaper
+  ∷ partnershipBarriersPaper
+  ∷ []
+
+record EducationCorpusSourceRegistry : Set where
+  constructor mkEducationCorpusSourceRegistry
+  field
+    papers : List PaperReference
+    papersAreCanonical : papers ≡ canonicalEducationCorpusPapers
+    sourceClaimsSeparatedFromDashiInference : Bool
+    sourceClaimsSeparatedFromDashiInferenceIsTrue :
+      sourceClaimsSeparatedFromDashiInference ≡ true
+    metadataDoesNotConferAuthority : Bool
+    metadataDoesNotConferAuthorityIsTrue :
+      metadataDoesNotConferAuthority ≡ true
+    reading : String
+
+open EducationCorpusSourceRegistry public
+
+canonicalEducationCorpusSourceRegistry : EducationCorpusSourceRegistry
+canonicalEducationCorpusSourceRegistry =
+  mkEducationCorpusSourceRegistry
+    canonicalEducationCorpusPapers refl
+    true refl
+    true refl
+    "Seven source-bound papers are retained with verified title, author, DOI and venue metadata. Paper claims, cross-paper inferences, and DASHI extensions remain distinct promotion levels."

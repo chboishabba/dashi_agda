@@ -1,0 +1,54 @@
+name: Marx differential Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Analysis/MarxDifferentialCore.agda'
+      - 'DASHI/Analysis/MarxPolynomialDifferential.agda'
+      - 'DASHI/Analysis/MarxPolynomialCoefficientNormalForm.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealAdapter.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealRingNormalisation.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealNamedLemmas.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealTopology.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealMetricNamedLemmas.agda'
+      - 'DASHI/Analysis/MarxConstructiveRealLimitSqueeze.agda'
+      - 'DASHI/Analysis/MarxFastCauchyCompletionCutset.agda'
+      - 'DASHI/Analysis/MarxFastCauchyDerivativeCompletion.agda'
+      - 'DASHI/Analysis/MarxPowerRuleNormalisation.agda'
+      - 'DASHI/Analysis/MarxPowerArithmetic.agda'
+      - 'DASHI/Analysis/MarxReciprocalQuotientNormalisation.agda'
+      - 'DASHI/Analysis/MarxFieldCancellation.agda'
+      - 'DASHI/Analysis/MarxOrdinaryDerivativeBridge.agda'
+      - 'DASHI/Analysis/MarxHigherCalculus.agda'
+      - 'DASHI/Analysis/MarxHigherDerivativeConstruction.agda'
+      - 'DASHI/Analysis/MarxScalarFrechetBridge.agda'
+      - 'DASHI/Analysis/MarxLinearDirectionalLaws.agda'
+      - 'DASHI/Analysis/MarxFiniteVectorSpace.agda'
+      - 'DASHI/Analysis/MarxFiniteVectorNorm.agda'
+      - 'DASHI/Analysis/MarxFrechetProduct.agda'
+      - 'DASHI/Analysis/MarxExteriorIntegration.agda'
+      - 'DASHI/Analysis/MarxDifferentialRegression.agda'
+      - 'DASHI/Analysis/MarxDifferentialBundle.agda'
+      - 'DASHI/Governance/TraumaExploitationDifferential.agda'
+      - 'DASHI/Governance/TraumaExploitationNormedDifferential.agda'
+      - 'DASHI/Governance/TraumaExploitationAttractor.agda'
+      - 'DASHI/Governance/GeopoliticalDifferentialEvidence.agda'
+      - 'DASHI/Governance/GeopoliticalGlobalPlayerCriterion.agda'
+      - 'DASHI/Governance/IsraelCyberLegalStatusCandidate.agda'
+      - 'Verification/JacobianCounterexampleKernel.agda'
+      - 'DASHI/Algebra/Jacobian/InvertibilityStrata.agda'
+      - 'scripts/check_marx_differential_completion.py'
+      - '.github/workflows/marx-differential-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run fail-closed source audit
+        run: python3 scripts/check_marx_differential_completion.py
+      - uses: cachix/install-nix-action@v31
+      - name: Typecheck focused bundle
+        run: |
+          nix develop --command agda -i . -l standard-library DASHI/Analysis/MarxDifferentialBundle.agda
