@@ -9,8 +9,10 @@ import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExa
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact as Green
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact as Loss
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact as Polymer
+import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact as Balaban536
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as OneLoop
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
+import DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact as ShellTail
 
 ------------------------------------------------------------------------
 -- I. Exact configured arithmetic and finite reductions.
@@ -65,6 +67,16 @@ configuredInteriorEightCountLevel = Polymer.configuredInteriorEightCountLevel
 configuredCanonicalTraceAdapterLevel : ProofLevel
 configuredCanonicalTraceAdapterLevel = Polymer.configuredCanonicalTraceAdapterLevel
 
+balaban536LaurentReductionLevel : ProofLevel
+balaban536LaurentReductionLevel = Balaban536.balaban536LaurentReductionLevel
+
+balaban537MomentumReductionLevel : ProofLevel
+balaban537MomentumReductionLevel = Balaban536.balaban537MomentumReductionLevel
+
+balaban541CoefficientExtractionLevel : ProofLevel
+balaban541CoefficientExtractionLevel =
+  Balaban536.balaban541CoefficientExtractionLevel
+
 universalColorCoefficientArithmeticLevel : ProofLevel
 universalColorCoefficientArithmeticLevel =
   OneLoop.universalColorCoefficientArithmeticLevel
@@ -85,6 +97,10 @@ configuredBoundaryTailReductionLevel = Tail.configuredBoundaryTailReductionLevel
 
 configuredContinuumTailReductionLevel : ProofLevel
 configuredContinuumTailReductionLevel = Tail.configuredContinuumTailReductionLevel
+
+rootedShellToBoundaryTailReductionLevel : ProofLevel
+rootedShellToBoundaryTailReductionLevel =
+  ShellTail.rootedShellToBoundaryTailReductionLevel
 
 ------------------------------------------------------------------------
 -- II. Exact remaining inhabitants after the configured reductions.
@@ -125,12 +141,19 @@ repositoryConnectedPolymerExtractionInputsLevel : ProofLevel
 repositoryConnectedPolymerExtractionInputsLevel =
   Polymer.repositoryConnectedPolymerExtractionInputsLevel
 
+literalDiagramToBalabanTargetInputsLevel : ProofLevel
+literalDiagramToBalabanTargetInputsLevel =
+  Balaban536.literalDiagramToBalabanTargetInputsLevel
+
 literalDiagramAndBoxCertificateInputsLevel : ProofLevel
 literalDiagramAndBoxCertificateInputsLevel =
   OneLoop.literalDiagramAndBoxCertificateInputsLevel
 
 physicalClusterDiameterInputsLevel : ProofLevel
 physicalClusterDiameterInputsLevel = Tail.physicalClusterDiameterInputsLevel
+
+boundaryEscapeInputsLevel : ProofLevel
+boundaryEscapeInputsLevel = ShellTail.boundaryEscapeInputsLevel
 
 physicalExponentialMomentCompactnessInputsLevel : ProofLevel
 physicalExponentialMomentCompactnessInputsLevel =
