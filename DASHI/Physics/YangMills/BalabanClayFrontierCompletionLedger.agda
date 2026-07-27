@@ -26,6 +26,7 @@ import DASHI.Physics.YangMills.BalabanClayP1PicardBackgroundConstructionExact
 import DASHI.Physics.YangMills.BalabanClayT1CommonAnalyticContractionExact
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact
 import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact
+import DASHI.Physics.YangMills.BalabanClayT2WilsonActivityFactorProductExact
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact
 import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact
@@ -40,233 +41,155 @@ import DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact
 
-------------------------------------------------------------------------
--- Closed exact reductions.
-------------------------------------------------------------------------
-
 fourAxisMartingaleScalarAlgebraLevel : ProofLevel
 fourAxisMartingaleScalarAlgebraLevel = machineChecked
-
 scalarWilsonRieszSignAndZeroFoldLevel : ProofLevel
 scalarWilsonRieszSignAndZeroFoldLevel = machineChecked
-
 finiteMatrixProductAndInverseConsequenceLevel : ProofLevel
 finiteMatrixProductAndInverseConsequenceLevel = machineChecked
-
 physicalCoordinateEnumerationAndDeltaLevel : ProofLevel
 physicalCoordinateEnumerationAndDeltaLevel = machineChecked
-
 configuredPhysicalMatrixDimension3072Level : ProofLevel
 configuredPhysicalMatrixDimension3072Level = machineChecked
-
 configuredGaugeFixedMatrixDefinitionLevel : ProofLevel
 configuredGaugeFixedMatrixDefinitionLevel = machineChecked
-
 configuredMatrixActionLinearityLevel : ProofLevel
 configuredMatrixActionLinearityLevel = machineChecked
-
 fourAxisAverageGlobalMeanLevel : ProofLevel
 fourAxisAverageGlobalMeanLevel = machineChecked
-
 sideFourTranslationDifferenceLevel : ProofLevel
 sideFourTranslationDifferenceLevel = machineChecked
-
 sideFourTranslationConvolutionLevel : ProofLevel
 sideFourTranslationConvolutionLevel = machineChecked
-
 sideFourTranslationSymmetryLevel : ProofLevel
 sideFourTranslationSymmetryLevel = machineChecked
-
 sideFourScalarGreenKernelEquationLevel : ProofLevel
 sideFourScalarGreenKernelEquationLevel = machineChecked
-
 sideFourScalarGreenKernelNormalizationLevel : ProofLevel
 sideFourScalarGreenKernelNormalizationLevel = machineChecked
-
 configuredOperatorLaplacianPlusMeanReductionLevel : ProofLevel
 configuredOperatorLaplacianPlusMeanReductionLevel = machineChecked
-
 sideFourScalarGreenTwoSidedLevel : ProofLevel
 sideFourScalarGreenTwoSidedLevel = machineChecked
-
 finiteRationalCauchyLevel : ProofLevel
 finiteRationalCauchyLevel = machineChecked
-
 sideFourScalarGreenNormLevel : ProofLevel
 sideFourScalarGreenNormLevel = machineChecked
-
 configuredPhysicalGreenTwoSidedLevel : ProofLevel
 configuredPhysicalGreenTwoSidedLevel = machineChecked
-
 configuredGreenMatrixInverseProductLevel : ProofLevel
 configuredGreenMatrixInverseProductLevel = machineChecked
-
 configuredPhysicalGreenNormLevel : ProofLevel
 configuredPhysicalGreenNormLevel = machineChecked
-
 constructiveConfiguredFiniteInverseLevel : ProofLevel
 constructiveConfiguredFiniteInverseLevel = machineChecked
-
 su2RationalAdjointDisplacementAlgebraLevel : ProofLevel
 su2RationalAdjointDisplacementAlgebraLevel = machineChecked
-
 su2TraceChordalWilsonGapLevel : ProofLevel
 su2TraceChordalWilsonGapLevel = machineChecked
-
 backgroundFiveTermCombinationLevel : ProofLevel
 backgroundFiveTermCombinationLevel = machineChecked
-
 backgroundHalfMarginCoercivityLevel : ProofLevel
 backgroundHalfMarginCoercivityLevel = machineChecked
-
 finiteVolumeKPEtaHalfLevel : ProofLevel
 finiteVolumeKPEtaHalfLevel = machineChecked
-
 fiveOneStepPenaltyCombinationLevel : ProofLevel
 fiveOneStepPenaltyCombinationLevel = machineChecked
-
 oneStepCoercivityTransferAssemblyLevel : ProofLevel
 oneStepCoercivityTransferAssemblyLevel = machineChecked
-
 wardIdentityNoMassConsequenceLevel : ProofLevel
 wardIdentityNoMassConsequenceLevel = machineChecked
-
 dyadicSummableLossLevel : ProofLevel
 dyadicSummableLossLevel = machineChecked
-
 uniformOneSixtyFourthCoercivityLevel : ProofLevel
 uniformOneSixtyFourthCoercivityLevel = machineChecked
-
 commonParameterIntersectionSurfaceLevel : ProofLevel
 commonParameterIntersectionSurfaceLevel = machineChecked
-
 physicalClusteringScaleConversionLevel : ProofLevel
 physicalClusteringScaleConversionLevel = machineChecked
-
 clusteringToSpectralGapAssemblyLevel : ProofLevel
 clusteringToSpectralGapAssemblyLevel = machineChecked
 
-------------------------------------------------------------------------
--- Constructive producer-side advances.
-------------------------------------------------------------------------
-
 p1PicardBackgroundConstructionLevel : ProofLevel
 p1PicardBackgroundConstructionLevel = machineChecked
-
 p1PicardFixedPointUniquenessLevel : ProofLevel
 p1PicardFixedPointUniquenessLevel = machineChecked
-
 t1CommonAnalyticContractionLevel : ProofLevel
 t1CommonAnalyticContractionLevel = machineChecked
-
 t1CommonAnalyticSelfMapLevel : ProofLevel
 t1CommonAnalyticSelfMapLevel = machineChecked
-
 t1CommonSecondJetLevel : ProofLevel
 t1CommonSecondJetLevel = machineChecked
-
 p2BadPathComponentConstructionLevel : ProofLevel
 p2BadPathComponentConstructionLevel = machineChecked
-
 p2BadComponentGaugeInvarianceLevel : ProofLevel
 p2BadComponentGaugeInvarianceLevel = machineChecked
-
+t2WilsonActivityFactorCombinationLevel : ProofLevel
+t2WilsonActivityFactorCombinationLevel = machineChecked
+t2WilsonActivityOneSixteenthLevel : ProofLevel
+t2WilsonActivityOneSixteenthLevel = machineChecked
 t2EightOverSixteenTraversalLevel : ProofLevel
 t2EightOverSixteenTraversalLevel = machineChecked
-
 t2RootedShellQuarterHalfPowerLevel : ProofLevel
 t2RootedShellQuarterHalfPowerLevel = machineChecked
-
 t2UrsellCauchyModulusLevel : ProofLevel
 t2UrsellCauchyModulusLevel = machineChecked
-
 t2ConnectedCorrelationDecayLevel : ProofLevel
 t2ConnectedCorrelationDecayLevel = machineChecked
-
 p3FiniteConstrainedPartitionLevel : ProofLevel
 p3FiniteConstrainedPartitionLevel = machineChecked
-
 p3FiniteEffectiveActionAdapterLevel : ProofLevel
 p3FiniteEffectiveActionAdapterLevel = machineChecked
-
 p3PrincipalFibreCoordinateConstructionLevel : ProofLevel
 p3PrincipalFibreCoordinateConstructionLevel = machineChecked
-
 p3CoordinateUniquenessDomainRepairLevel : ProofLevel
 p3CoordinateUniquenessDomainRepairLevel = machineChecked
-
 t3CompactHaarLimitAlgebraLevel : ProofLevel
 t3CompactHaarLimitAlgebraLevel = machineChecked
-
 t3CompactHaarWardTransportLevel : ProofLevel
 t3CompactHaarWardTransportLevel = machineChecked
-
 t3ScalarSchurNormalizationLevel : ProofLevel
 t3ScalarSchurNormalizationLevel = machineChecked
-
 t3GaugeReindexWardLevel : ProofLevel
 t3GaugeReindexWardLevel = machineChecked
-
 t3QuarticBetaRemainderSummabilityLevel : ProofLevel
 t3QuarticBetaRemainderSummabilityLevel = machineChecked
-
 p4CanonicalScalarIntersectionLevel : ProofLevel
 p4CanonicalScalarIntersectionLevel = machineChecked
-
 p5PhysicalMassInterlacingLevel : ProofLevel
 p5PhysicalMassInterlacingLevel = machineChecked
-
 p5DimensionalTransmutationNormalizationLevel : ProofLevel
 p5DimensionalTransmutationNormalizationLevel = machineChecked
-
 p5SequentialOSPropertyClosureLevel : ProofLevel
 p5SequentialOSPropertyClosureLevel = machineChecked
-
 p5FourthCumulantNontrivialityLevel : ProofLevel
 p5FourthCumulantNontrivialityLevel = machineChecked
 
-------------------------------------------------------------------------
--- Genuine frontier producers still to be inhabited over the literal model.
-------------------------------------------------------------------------
-
 p1NonlinearMinimizingBackgroundLevel : ProofLevel
 p1NonlinearMinimizingBackgroundLevel = conditional
-
 p1CurvatureTransportChartGaugeConstraintBoundsLevel : ProofLevel
 p1CurvatureTransportChartGaugeConstraintBoundsLevel = conditional
-
 p2GaugeInvariantBadComponentGeometryLevel : ProofLevel
 p2GaugeInvariantBadComponentGeometryLevel = conditional
-
 p2PhysicalActivityAndRootedShellEstimateLevel : ProofLevel
 p2PhysicalActivityAndRootedShellEstimateLevel = conditional
-
 p2InfiniteClusterCorrelationLevel : ProofLevel
 p2InfiniteClusterCorrelationLevel = conditional
-
 p3ExactConstrainedIntegralCoordinatesLevel : ProofLevel
 p3ExactConstrainedIntegralCoordinatesLevel = conditional
-
 p3ConstructiveSchurComplementPropagatorLevel : ProofLevel
 p3ConstructiveSchurComplementPropagatorLevel = conditional
-
 p3FivePhysicalAnalyticEstimatesLevel : ProofLevel
 p3FivePhysicalAnalyticEstimatesLevel = conditional
-
 p3WardIdentityAndRunningCouplingLevel : ProofLevel
 p3WardIdentityAndRunningCouplingLevel = conditional
-
 p4CanonicalCommonDomainInhabitationLevel : ProofLevel
 p4CanonicalCommonDomainInhabitationLevel = conditional
-
 p5FiniteMeasureAndThermodynamicLimitLevel : ProofLevel
 p5FiniteMeasureAndThermodynamicLimitLevel = conditional
-
 p5ContinuumOSAndNontrivialityLevel : ProofLevel
 p5ContinuumOSAndNontrivialityLevel = conditional
-
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
-
 branchHeadAuthoritativeAgda29TypecheckLevel : ProofLevel
 branchHeadAuthoritativeAgda29TypecheckLevel = conditional
