@@ -31,6 +31,8 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNFiniteHelicityRowLifting.agda",
     "DASHI/Physics/Closure/NSTriadKNWeightedSchurDualityProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNGrafakosTorresThreeFunctionSchurProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNTaoFrozenLegParaproductProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNBernsteinDirectionAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNMultilinearSchurParaproductProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNTriadicDyadicExponentSystem.agda",
     "DASHI/Physics/Closure/NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance.agda",
@@ -105,6 +107,7 @@ def main() -> int:
         ("scripts/ns_kiriukhin_weighted_schur_reconnaissance.py", "Kiriukhin weighted-Schur reconnaissance verifier"),
         ("scripts/ns_grafakos_torres_exponent_reconnaissance.py", "Grafakos--Torres exponent and rank verifier"),
         ("scripts/ns_kiriukhin_symmetric_companion_audit.py", "Kiriukhin symmetric companion rank audit"),
+        ("scripts/ns_tao_frozen_leg_paraproduct_audit.py", "Tao frozen-leg and Bernstein-direction audit"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -117,8 +120,8 @@ def main() -> int:
     print(
         f"checked {len(FILES)} helical/coherence/Stage-3 files: no holes or "
         "postulates; global, localized, matrix, direction, manuscript-audit, "
-        "weighted-Schur, three-function exponent, and symmetric-companion "
-        "rank verifiers passed"
+        "weighted-Schur, three-function exponent, symmetric-companion, and "
+        "frozen-leg/Bernstein exact verifiers passed"
     )
     return 0
 
