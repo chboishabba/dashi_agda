@@ -28,11 +28,13 @@ import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact
 
--- T2: action gain, all five non-action losses, configured one-sixteenth budget,
--- rooted physical encoding, concrete patch masks and the exact FP clique lane.
+-- T2: action gain, all five non-action losses, configured per-component and
+-- one-sixteenth budgets, rooted physical encoding, concrete patch masks and FP.
 import DASHI.Physics.YangMills.BalabanClayT2LiteralWilsonSixFactorProducerExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralActivityLossConstantsExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralPhysicalLossWitnessExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredActionGainThresholdExact
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredComponentLossBoundsExact
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralEightWayCliqueExact
 import DASHI.Physics.YangMills.BalabanClayT2PhysicalRootedPolymerEncodingExact
