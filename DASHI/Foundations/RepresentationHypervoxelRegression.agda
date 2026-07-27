@@ -6,6 +6,7 @@ import DASHI.Cognition.SituatedFrameMetacognitionBoundary as Situated
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Foundations.RepresentationChartInvariant as Representation
+import DASHI.Geometry.RepresentationPrefixUltrametricBridge as Prefix
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as SU2SO3
 
 open import DASHI.Foundations.Base369MobiusTransport using
@@ -99,6 +100,7 @@ record RepresentationHypervoxelRegression : Set₁ where
     stageCarryJoin : Radix.StageCarryJoin
     decimalCarryGrammar : Radix.CarryGrammar
     p11Projection : Radix.PrimeLaneAddressProjection 3
+    prefixUltrametricReceipt : Prefix.OriginPrefixUltrametricReceipt 3
 
     rightJacobianConvention : SU2SO3.SO3RightJacobianConvention
     haarDensityConvention : SU2SO3.SU2HaarDensityConvention
@@ -107,6 +109,7 @@ record RepresentationHypervoxelRegression : Set₁ where
     representationBoundary : Representation.RepresentationAuthorityBoundary
     hypervoxelBoundary : Hyper.HypervoxelAuthorityBoundary
     radixStageBoundary : Radix.RadixStageAuthorityBoundary
+    prefixMetricBoundary : Prefix.PrefixMetricAuthorityBoundary
     su2so3Boundary : SU2SO3.SU2SO3369AuthorityBoundary
     situatedFrameBoundary : Situated.SituatedFrameAuthorityBoundary
     primorialBoundary : Situated.PrimorialTransformBoundary
@@ -137,12 +140,14 @@ canonicalRepresentationHypervoxelRegression = record
   ; stageCarryJoin = Radix.canonicalStageCarryJoin
   ; decimalCarryGrammar = Radix.canonicalDecimalCarryGrammar
   ; p11Projection = Radix.canonicalP11ThreeSixNineProjection
+  ; prefixUltrametricReceipt = Prefix.canonicalThreeSixPrefixReceipt
   ; rightJacobianConvention = SU2SO3.canonicalSO3RightJacobianConvention
   ; haarDensityConvention = SU2SO3.canonicalSU2HaarDensityConvention
   ; quaternionPlaquetteRoute = SU2SO3.canonicalQuaternionPlaquetteRoute
   ; representationBoundary = Representation.canonicalRepresentationAuthorityBoundary
   ; hypervoxelBoundary = Hyper.canonicalHypervoxelAuthorityBoundary
   ; radixStageBoundary = Radix.canonicalRadixStageAuthorityBoundary
+  ; prefixMetricBoundary = Prefix.canonicalPrefixMetricAuthorityBoundary
   ; su2so3Boundary = SU2SO3.canonicalSU2SO3369AuthorityBoundary
   ; situatedFrameBoundary = Situated.canonicalSituatedFrameAuthorityBoundary
   ; primorialBoundary = Situated.canonicalPrimorialTransformBoundary
