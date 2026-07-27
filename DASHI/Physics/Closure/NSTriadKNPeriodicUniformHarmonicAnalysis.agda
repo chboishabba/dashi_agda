@@ -96,18 +96,6 @@ record PeriodicUniformHarmonicAnalysis {c s : Level} :
 
 open PeriodicUniformHarmonicAnalysis public
 
-record HarmonicAnalysisUniformityAudit
-    {c s : Level}
-    (H : PeriodicUniformHarmonicAnalysis {c} {s}) :
-    Set (lsuc (c ⊔ s)) where
-  field
-    constantsDependOnlyOnFixedDimensionOverlapAndNorm : Set
-    noConstantDependsOnCutoff : Set
-    noConstantDependsOnShellLocation : Set
-    noDuplicateModeMultiplicity : Set
-
-open HarmonicAnalysisUniformityAudit public
-
 uniformHarmonicAnalysisTheoremSurfaceImplemented : Bool
 uniformHarmonicAnalysisTheoremSurfaceImplemented = true
 
