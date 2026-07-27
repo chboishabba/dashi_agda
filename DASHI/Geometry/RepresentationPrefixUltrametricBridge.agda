@@ -3,7 +3,7 @@ module DASHI.Geometry.RepresentationPrefixUltrametricBridge where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Data.Nat using (_≤_; _∸_)
-open import Data.Vec using (Vec; []; _∷_)
+import Data.Vec as Vec
 
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.SSPPrimeLane369Refinement as Refinement
@@ -72,10 +72,10 @@ laneDigitUltrametricRoundTrip Refinement.digit-6 = refl
 laneDigitUltrametricRoundTrip Refinement.digit-9 = refl
 
 ultrametricAddressToLaneDigits :
-  ∀ {depth} → U.Address depth → Vec Refinement.Lane369Digit depth
-ultrametricAddressToLaneDigits [] = []
-ultrametricAddressToLaneDigits (digit ∷ rest) =
-  ultrametricDigitToLaneDigit digit ∷ ultrametricAddressToLaneDigits rest
+  ∀ {depth} → U.Address depth → Vec.Vec Refinement.Lane369Digit depth
+ultrametricAddressToLaneDigits Vec.[] = Vec.[]
+ultrametricAddressToLaneDigits (digit Vec.∷ rest) =
+  ultrametricDigitToLaneDigit digit Vec.∷ ultrametricAddressToLaneDigits rest
 
 ------------------------------------------------------------------------
 -- Canonical depth-three example: two cells share the coarse 3/6 prefix and
@@ -83,10 +83,10 @@ ultrametricAddressToLaneDigits (digit ∷ rest) =
 ------------------------------------------------------------------------
 
 left369Address : U.Address 3
-left369Address = U.digit3 ∷ U.digit6 ∷ U.digit9 ∷ []
+left369Address = U.digit3 Vec.∷ U.digit6 Vec.∷ U.digit9 Vec.∷ Vec.[]
 
 right363Address : U.Address 3
-right363Address = U.digit3 ∷ U.digit6 ∷ U.digit3 ∷ []
+right363Address = U.digit3 Vec.∷ U.digit6 Vec.∷ U.digit3 Vec.∷ Vec.[]
 
 sharedThreeSixPrefix : U.PrefixMatch 2 left369Address right363Address
 sharedThreeSixPrefix =
