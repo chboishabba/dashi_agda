@@ -143,7 +143,7 @@ physicalNetGainAtLeastLogSixteenConfigured dataSet scale polymer =
     (logSixteenBelowThree dataSet)
     (subst
       (λ value → LessEqual dataSet value (netGain dataSet scale polymer))
-      (sym (cong (rational dataSet) configuredNetGainExact))
+      (cong (rational dataSet) configuredNetGainExact)
       (configuredGainMinusLossBound dataSet scale polymer))
 
 ------------------------------------------------------------------------
