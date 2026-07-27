@@ -97,10 +97,16 @@ logisticContinuumBoundary =
   Adic.canonicalLogisticContinuumAuthorityBoundary
 
 continuumChaosPromoted : Bool
-continuumChaosPromoted = false
+continuumChaosPromoted =
+  Adic.LogisticContinuumAuthorityBoundary.continuumChaosPromoted
+    logisticContinuumBoundary
 
 realBifurcationTreeTransferredToPAdics : Bool
-realBifurcationTreeTransferredToPAdics = false
+realBifurcationTreeTransferredToPAdics =
+  Adic.LogisticContinuumAuthorityBoundary.realBifurcationTreeTransferredToPAdics
+    logisticContinuumBoundary
 
 decimalDigitStageSemanticsPromoted : Bool
-decimalDigitStageSemanticsPromoted = false
+decimalDigitStageSemanticsPromoted =
+  Adic.LogisticContinuumAuthorityBoundary.stageMeaningDerivedFromResidueAlone
+    logisticContinuumBoundary
