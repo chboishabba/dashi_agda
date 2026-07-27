@@ -30,6 +30,10 @@ import DASHI.Physics.Closure.NSTriadKNGlobalHelicityH3DiscriminantCounterexample
 import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityCommutatorProgram as LocalizedHelicity
 import DASHI.Physics.Closure.NSTriadKNAdaptiveLinearHelicalProbeProgram as LinearHelicity
 import DASHI.Physics.Closure.NSTriadKNHelicalDiscriminantMarginProgram as HelicalMargin
+import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityExactReconnaissance as LocalizedExact
+import DASHI.Physics.Closure.NSTriadKNFixedSymbolBalancedFamilyReconnaissance as BalancedExact
+import DASHI.Physics.Closure.NSTriadKNTriadPhaseCoherenceFallback as PhaseFallback
+import DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork as HelicalDecision
 
 allEightStagesRepresented : Bool
 allEightStagesRepresented = true
@@ -69,3 +73,19 @@ globalHelicityPerturbedH3CandidateRejectedIsTrue :
   globalHelicityPerturbedH3CandidateRejected ≡ true
 globalHelicityPerturbedH3CandidateRejectedIsTrue =
   HelicalFalsification.globalHelicityCounterexampleReceiptImplementedIsTrue
+
+localizedHelicityExactReceipt :
+  LocalizedExact.LocalizedHelicityExactReceipt
+localizedHelicityExactReceipt = LocalizedExact.localizedHelicityExactReceipt
+
+balancedFamilyExactReceipt :
+  BalancedExact.BalancedFamilyExactReceipt
+balancedFamilyExactReceipt = BalancedExact.balancedFamilyExactReceipt
+
+phaseFallbackFiniteEvidence :
+  PhaseFallback.PhaseFallbackFiniteEvidence
+phaseFallbackFiniteEvidence = PhaseFallback.phaseFallbackFiniteEvidence
+
+helicalFiniteDecisionReceipt :
+  HelicalDecision.FiniteDecisionReceipt
+helicalFiniteDecisionReceipt = HelicalDecision.finiteDecisionReceipt
