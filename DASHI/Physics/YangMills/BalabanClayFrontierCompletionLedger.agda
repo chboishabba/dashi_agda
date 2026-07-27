@@ -23,14 +23,22 @@ import DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
 import DASHI.Physics.YangMills.BalabanClayP1BackgroundStabilityExact
 import DASHI.Physics.YangMills.BalabanClayP1PicardBackgroundConstructionExact
+import DASHI.Physics.YangMills.BalabanClayT1CommonAnalyticContractionExact
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact
 import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact
+import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact
 import DASHI.Physics.YangMills.BalabanClayP3PrincipalFibreCoordinatesExact
+import DASHI.Physics.YangMills.BalabanClayT3CompactHaarLimitExact
+import DASHI.Physics.YangMills.BalabanClayT3SchurWardBetaExact
 import DASHI.Physics.YangMills.BalabanClayP4DyadicCoercivityBudgetExact
 import DASHI.Physics.YangMills.BalabanClayP4CommonParameterDomainExact
+import DASHI.Physics.YangMills.BalabanClayT4CanonicalScalarWitnessExact
 import DASHI.Physics.YangMills.BalabanClayP5ContinuumMassGapExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact
+import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact
 
 ------------------------------------------------------------------------
 -- Closed exact reductions.
@@ -139,7 +147,7 @@ clusteringToSpectralGapAssemblyLevel : ProofLevel
 clusteringToSpectralGapAssemblyLevel = machineChecked
 
 ------------------------------------------------------------------------
--- New constructive producer-side advances.
+-- Constructive producer-side advances.
 ------------------------------------------------------------------------
 
 p1PicardBackgroundConstructionLevel : ProofLevel
@@ -148,11 +156,32 @@ p1PicardBackgroundConstructionLevel = machineChecked
 p1PicardFixedPointUniquenessLevel : ProofLevel
 p1PicardFixedPointUniquenessLevel = machineChecked
 
+t1CommonAnalyticContractionLevel : ProofLevel
+t1CommonAnalyticContractionLevel = machineChecked
+
+t1CommonAnalyticSelfMapLevel : ProofLevel
+t1CommonAnalyticSelfMapLevel = machineChecked
+
+t1CommonSecondJetLevel : ProofLevel
+t1CommonSecondJetLevel = machineChecked
+
 p2BadPathComponentConstructionLevel : ProofLevel
 p2BadPathComponentConstructionLevel = machineChecked
 
 p2BadComponentGaugeInvarianceLevel : ProofLevel
 p2BadComponentGaugeInvarianceLevel = machineChecked
+
+t2EightOverSixteenTraversalLevel : ProofLevel
+t2EightOverSixteenTraversalLevel = machineChecked
+
+t2RootedShellQuarterHalfPowerLevel : ProofLevel
+t2RootedShellQuarterHalfPowerLevel = machineChecked
+
+t2UrsellCauchyModulusLevel : ProofLevel
+t2UrsellCauchyModulusLevel = machineChecked
+
+t2ConnectedCorrelationDecayLevel : ProofLevel
+t2ConnectedCorrelationDecayLevel = machineChecked
 
 p3FiniteConstrainedPartitionLevel : ProofLevel
 p3FiniteConstrainedPartitionLevel = machineChecked
@@ -165,6 +194,36 @@ p3PrincipalFibreCoordinateConstructionLevel = machineChecked
 
 p3CoordinateUniquenessDomainRepairLevel : ProofLevel
 p3CoordinateUniquenessDomainRepairLevel = machineChecked
+
+t3CompactHaarLimitAlgebraLevel : ProofLevel
+t3CompactHaarLimitAlgebraLevel = machineChecked
+
+t3CompactHaarWardTransportLevel : ProofLevel
+t3CompactHaarWardTransportLevel = machineChecked
+
+t3ScalarSchurNormalizationLevel : ProofLevel
+t3ScalarSchurNormalizationLevel = machineChecked
+
+t3GaugeReindexWardLevel : ProofLevel
+t3GaugeReindexWardLevel = machineChecked
+
+t3QuarticBetaRemainderSummabilityLevel : ProofLevel
+t3QuarticBetaRemainderSummabilityLevel = machineChecked
+
+p4CanonicalScalarIntersectionLevel : ProofLevel
+p4CanonicalScalarIntersectionLevel = machineChecked
+
+p5PhysicalMassInterlacingLevel : ProofLevel
+p5PhysicalMassInterlacingLevel = machineChecked
+
+p5DimensionalTransmutationNormalizationLevel : ProofLevel
+p5DimensionalTransmutationNormalizationLevel = machineChecked
+
+p5SequentialOSPropertyClosureLevel : ProofLevel
+p5SequentialOSPropertyClosureLevel = machineChecked
+
+p5FourthCumulantNontrivialityLevel : ProofLevel
+p5FourthCumulantNontrivialityLevel = machineChecked
 
 ------------------------------------------------------------------------
 -- Genuine frontier producers still to be inhabited over the literal model.
@@ -209,7 +268,5 @@ p5ContinuumOSAndNontrivialityLevel = conditional
 p5PhysicalMassGapSurvivalLevel : ProofLevel
 p5PhysicalMassGapSurvivalLevel = conditional
 
--- Promote only after the complete Agda 2.9 module graph reaches the end at this
--- exact branch head.
 branchHeadAuthoritativeAgda29TypecheckLevel : ProofLevel
 branchHeadAuthoritativeAgda29TypecheckLevel = conditional
