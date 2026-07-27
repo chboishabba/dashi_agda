@@ -9,10 +9,11 @@ module DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle where
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
--- Shared rational/Taylor interval carriers and the configured sinc/cos/log
--- coefficients used by both the T3 chart and T2 Haar lanes.
+-- Shared rational/Taylor interval carriers, configured sinc/cos/log
+-- coefficients, and the finite exponential partial-sum proof of log 16 <= 3.
 import DASHI.Physics.YangMills.BalabanClayCommonCertifiedTaylorEnclosureExact
 import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact
+import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact
 
 -- T3: reference coercivity, exact chart singular values, literal five-remainder
 -- constants, configured common radius, and physical Green decay reduction.
