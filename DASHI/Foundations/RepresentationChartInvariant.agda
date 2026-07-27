@@ -173,13 +173,13 @@ refineRatioPreserves :
   (k : Nat) → (r : RatioRepresentation) →
   RatioEquivalent (refineRatio k r) r
 refineRatioPreserves k r =
-  *-assoc k (numerator r) (denominator r)
-  ∙ sym (*-assoc k (denominator r) (numerator r))
-  ∙ cong (k *_) (*-comm (numerator r) (denominator r))
-  where
-  infixr 2 _∙_
-  _∙_ : ∀ {a b c : Nat} → a ≡ b → b ≡ c → a ≡ c
-  _∙_ = trans
+  trans
+    (*-assoc k (numerator r) (denominator r))
+    (trans
+      (cong (k *_) (*-comm (numerator r) (denominator r)))
+      (trans
+        (sym (*-assoc k (denominator r) (numerator r)))
+        (*-comm (k * denominator r) (numerator r))))
 
 ------------------------------------------------------------------------
 -- 3/6/9 supports several different typed operations.  No operation below
