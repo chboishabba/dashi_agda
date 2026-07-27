@@ -159,6 +159,74 @@ record FramedAtlas (Value Representation Chart : Set) : Set₁ where
       ≡ transition first third representation
 
 ------------------------------------------------------------------------
+-- Unified value/representation/chart/scale/valuation carrier.
+--
+-- This is the formal version of carrying X, R, C, E, T, S and V together.
+-- It does not privilege one chart or valuation; it requires their roles to be
+-- explicit in the object consumed downstream.
+------------------------------------------------------------------------
+
+record FramedScaleValuationObject
+  (Value Representation Chart Scale Valuation : Set) : Set₁ where
+  field
+    evaluate : Chart → Representation → Value
+    transition : Chart → Chart → Representation → Representation
+    transitionPreservesEvaluation :
+      ∀ source target representation →
+      evaluate target (transition source target representation)
+      ≡ evaluate source representation
+    transitionIdentity :
+      ∀ chart representation →
+      transition chart chart representation ≡ representation
+    transitionComposition :
+      ∀ first second third representation →
+      transition second third (transition first second representation)
+      ≡ transition first third representation
+    activeChart : Representation → Chart
+    scaleOf : Representation → Scale
+    valuationOf : Representation → Valuation
+
+open FramedScaleValuationObject public
+
+InspectedRepresentation :
+  Set → Set → Set → Set
+InspectedRepresentation Value Chart Scale =
+  Value × (Chart × Scale)
+
+inspectRepresentation :
+  ∀ {Value Representation Chart Scale Valuation}
+    (object :
+      FramedScaleValuationObject
+        Value Representation Chart Scale Valuation) →
+  Representation →
+  Value × (Chart × (Scale × Valuation))
+inspectRepresentation object representation =
+  evaluate object (activeChart object representation) representation
+  , activeChart object representation
+  , scaleOf object representation
+  , valuationOf object representation
+
+inspectRepresentationValue :
+  ∀ {Value Representation Chart Scale Valuation}
+    (object :
+      FramedScaleValuationObject
+        Value Representation Chart Scale Valuation)
+    (representation : Representation) →
+  proj₁ (inspectRepresentation object representation)
+  ≡ evaluate object (activeChart object representation) representation
+inspectRepresentationValue object representation = refl
+
+inspectRepresentationChart :
+  ∀ {Value Representation Chart Scale Valuation}
+    (object :
+      FramedScaleValuationObject
+        Value Representation Chart Scale Valuation)
+    (representation : Representation) →
+  proj₁ (proj₂ (inspectRepresentation object representation))
+  ≡ activeChart object representation
+inspectRepresentationChart object representation = refl
+
+------------------------------------------------------------------------
 -- Harmonic and partition readings are typed roles, not meanings of glyphs.
 ------------------------------------------------------------------------
 
@@ -276,6 +344,7 @@ record RepresentationAuthorityBoundary : Set where
     harmonicRoleIsContextDependent : Bool
     zeroDenominatorConstructible : Bool
     zeroRefinementFactorAccepted : Bool
+    chartScaleValuationCarriedTogether : Bool
 
 canonicalRepresentationAuthorityBoundary : RepresentationAuthorityBoundary
 canonicalRepresentationAuthorityBoundary = record
@@ -287,8 +356,9 @@ canonicalRepresentationAuthorityBoundary = record
   ; harmonicRoleIsContextDependent = true
   ; zeroDenominatorConstructible = false
   ; zeroRefinementFactorAccepted = false
+  ; chartScaleValuationCarriedTogether = true
   }
 
 representationSummary : String
 representationSummary =
-  "A positive-denominator value is carried together with its chart, scale and relation; 3/6, 1/2, 0.5, 0.1 base 2 and 50% are distinct presentations of one rational point."
+  "A positive-denominator value is carried together with its chart, scale and valuation; 3/6, 1/2, 0.5, 0.1 base 2 and 50% are distinct presentations of one rational point."
