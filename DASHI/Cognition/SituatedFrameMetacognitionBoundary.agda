@@ -3,6 +3,8 @@ module DASHI.Cognition.SituatedFrameMetacognitionBoundary where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Dynamics.LogisticBifurcationDiagnostic as Logistic
+import DASHI.Foundations.PrimorialBaseSequences as Primorial
 import DASHI.Foundations.RepresentationChartInvariant as Representation
 
 ------------------------------------------------------------------------
@@ -212,6 +214,28 @@ logisticAccumulationReceipt = record
   ; identifiedWithUniversalDecisionBoundary = false
   }
 
+record ExistingLogisticCarrierReconciliation : Set where
+  field
+    existingFirstThreshold : Logistic.RParam
+    existingChaosApproximation : Logistic.RParam
+    firstThresholdIsScaled300 : existingFirstThreshold ≡ 300
+    chaosApproximationIsScaled357 : existingChaosApproximation ≡ 357
+    stateCoordinateSeparatedFromParameter : Bool
+    tlureyPhaseIsDiagnosticProjection : Bool
+    tlureyPhaseIsDynamicalEquivalenceClaimed : Bool
+
+canonicalExistingLogisticCarrierReconciliation :
+  ExistingLogisticCarrierReconciliation
+canonicalExistingLogisticCarrierReconciliation = record
+  { existingFirstThreshold = Logistic.rStableFixedPoint
+  ; existingChaosApproximation = Logistic.rChaosOnset
+  ; firstThresholdIsScaled300 = refl
+  ; chaosApproximationIsScaled357 = refl
+  ; stateCoordinateSeparatedFromParameter = true
+  ; tlureyPhaseIsDiagnosticProjection = true
+  ; tlureyPhaseIsDynamicalEquivalenceClaimed = false
+  }
+
 ------------------------------------------------------------------------
 -- Primorial transforms are arithmetic operators.  Interpretive readings are
 -- downstream and require their own evidence.
@@ -223,11 +247,23 @@ data PrimorialTransformRole : Set where
   primeExponentVectorRole : PrimorialTransformRole
   optionalInterpretiveProjectionRole : PrimorialTransformRole
 
+a276087IsSecondIterate :
+  ∀ n →
+  Primorial.a276087 n
+  ≡ Primorial.a276086 (Primorial.a276086 n)
+a276087IsSecondIterate n = refl
+
 record PrimorialTransformBoundary : Set where
   field
     a276086Role : PrimorialTransformRole
     a276087Role : PrimorialTransformRole
-    secondIsIterateOfFirst : Bool
+    secondIsIterateOfFirst :
+      ∀ n →
+      Primorial.a276087 n
+      ≡ Primorial.a276086 (Primorial.a276086 n)
+    finiteThreeValue : Primorial.a276086 2 ≡ 3
+    finiteSixValue : Primorial.a276086 3 ≡ 6
+    finiteNineValue : Primorial.a276086 4 ≡ 9
     systemicRebirthProvedBySequence : Bool
     logisticBranchesEncodedWithoutAdapter : Bool
     interpretationRequiresSeparateMap : Bool
@@ -236,7 +272,10 @@ canonicalPrimorialTransformBoundary : PrimorialTransformBoundary
 canonicalPrimorialTransformBoundary = record
   { a276086Role = primorialBaseExpFunctionRole
   ; a276087Role = secondIterateRole
-  ; secondIsIterateOfFirst = true
+  ; secondIsIterateOfFirst = a276087IsSecondIterate
+  ; finiteThreeValue = Primorial.a276086-2≡3
+  ; finiteSixValue = Primorial.a276086-3≡6
+  ; finiteNineValue = Primorial.a276086-4≡9
   ; systemicRebirthProvedBySequence = false
   ; logisticBranchesEncodedWithoutAdapter = false
   ; interpretationRequiresSeparateMap = true
