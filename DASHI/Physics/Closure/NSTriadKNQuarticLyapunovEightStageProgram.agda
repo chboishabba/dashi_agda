@@ -39,6 +39,13 @@ import DASHI.Physics.Closure.NSTriadKNConstantinFeffermanDirectionCoherenceProgr
 import DASHI.Physics.Closure.NSTriadKNTriadDirectionAlignmentProgram as TriadDirection
 import DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit as PermanaAudit
 import DASHI.Physics.Closure.NSTriadKNObjectiveVortexCriteriaScopeAudit as VortexCriteria
+import DASHI.Physics.Closure.NSTriadKNKiriukhinOrbitRowSumAdapter as KiriukhinRow
+import DASHI.Physics.Closure.NSTriadKNOrbitToDyadicShellBridge as OrbitShell
+import DASHI.Physics.Closure.NSTriadKNFiniteHelicityRowLifting as HelicityLift
+import DASHI.Physics.Closure.NSTriadKNWeightedSchurDualityProgram as WeightedSchur
+import DASHI.Physics.Closure.NSTriadKNMultilinearSchurParaproductProgram as MultilinearSchur
+import DASHI.Physics.Closure.NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance as SchurFinite
+import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3Schur
 import DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork as HelicalDecision
 
 allEightStagesRepresented : Bool
@@ -101,6 +108,10 @@ triadDirectionDiagnostic :
   TriadDirection.FourierPolarizationGramDiagnostic
 triadDirectionDiagnostic = TriadDirection.exactPolarizationDiagnostic
 
+weightedSchurFiniteReceipt :
+  SchurFinite.WeightedSchurFiniteReceipt
+weightedSchurFiniteReceipt = SchurFinite.weightedSchurFiniteReceipt
+
 helicalFiniteDecisionReceipt :
   HelicalDecision.FiniteDecisionReceipt
 helicalFiniteDecisionReceipt = HelicalDecision.finiteDecisionReceipt
@@ -158,3 +169,66 @@ objectiveVortexCriteriaOnClosurePathIsFalse :
   objectiveVortexCriteriaOnClosurePath ≡ false
 objectiveVortexCriteriaOnClosurePathIsFalse =
   VortexCriteria.objectiveQSuppliesUniformQuarticDominationIsFalse
+
+kiriukhinRawRowLiteratureBacked : Bool
+kiriukhinRawRowLiteratureBacked =
+  Stage3Schur.kiriukhinRawRowLiteratureBacked
+
+kiriukhinRawRowLiteratureBackedIsTrue :
+  kiriukhinRawRowLiteratureBacked ≡ true
+kiriukhinRawRowLiteratureBackedIsTrue =
+  Stage3Schur.kiriukhinRawRowLiteratureBackedIsTrue
+
+orbitToDyadicShellBridgeRepresented : Bool
+orbitToDyadicShellBridgeRepresented =
+  OrbitShell.orbitToDyadicShellBridgeRepresented
+
+orbitToDyadicShellBridgeRepresentedIsTrue :
+  orbitToDyadicShellBridgeRepresented ≡ true
+orbitToDyadicShellBridgeRepresentedIsTrue =
+  OrbitShell.orbitToDyadicShellBridgeRepresentedIsTrue
+
+finiteHelicityRowLiftingRepresented : Bool
+finiteHelicityRowLiftingRepresented =
+  HelicityLift.finiteHelicityRowLiftingRepresented
+
+finiteHelicityRowLiftingRepresentedIsTrue :
+  finiteHelicityRowLiftingRepresented ≡ true
+finiteHelicityRowLiftingRepresentedIsTrue =
+  HelicityLift.finiteHelicityRowLiftingRepresentedIsTrue
+
+weightedSchurTheoremSurfaceRepresented : Bool
+weightedSchurTheoremSurfaceRepresented =
+  WeightedSchur.weightedSchurTheoremSurfaceRepresented
+
+weightedSchurTheoremSurfaceRepresentedIsTrue :
+  weightedSchurTheoremSurfaceRepresented ≡ true
+weightedSchurTheoremSurfaceRepresentedIsTrue =
+  WeightedSchur.weightedSchurTheoremSurfaceRepresentedIsTrue
+
+multilinearAndParaproductRoutesRepresented : Bool
+multilinearAndParaproductRoutesRepresented =
+  MultilinearSchur.multilinearAndParaproductRoutesRepresented
+
+multilinearAndParaproductRoutesRepresentedIsTrue :
+  multilinearAndParaproductRoutesRepresented ≡ true
+multilinearAndParaproductRoutesRepresentedIsTrue =
+  MultilinearSchur.multilinearAndParaproductRoutesRepresentedIsTrue
+
+stage3WeightedSchurProgrammeRepresented : Bool
+stage3WeightedSchurProgrammeRepresented =
+  Stage3Schur.stage3WeightedSchurProgrammeRepresented
+
+stage3WeightedSchurProgrammeRepresentedIsTrue :
+  stage3WeightedSchurProgrammeRepresented ≡ true
+stage3WeightedSchurProgrammeRepresentedIsTrue =
+  Stage3Schur.stage3WeightedSchurProgrammeRepresentedIsTrue
+
+stage3WeightedColumnOrDualBoundClosed : Bool
+stage3WeightedColumnOrDualBoundClosed =
+  Stage3Schur.stage3WeightedColumnOrDualBoundClosed
+
+stage3WeightedColumnOrDualBoundClosedIsFalse :
+  stage3WeightedColumnOrDualBoundClosed ≡ false
+stage3WeightedColumnOrDualBoundClosedIsFalse =
+  Stage3Schur.stage3WeightedColumnOrDualBoundClosedIsFalse
