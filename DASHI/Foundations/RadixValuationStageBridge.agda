@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Fin using (Fin)
 import Data.Vec as Vec
 
+import DASHI.Foundations.RepresentationChartInvariant as Representation
 import DASHI.Foundations.SSPPrimeLane369Refinement as Ref
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.TrackedPrimes as TP
@@ -33,6 +34,33 @@ record PositionalReading : Set where
     glyphSequence : List Nat
     chart : RadixChart
     evaluationLabel : String
+
+onePlaceFraction : Nat → Nat → Representation.RatioRepresentation
+onePlaceFraction base digit = Representation.ratio digit base
+
+decimalPointFiveReading : Representation.RatioRepresentation
+decimalPointFiveReading = onePlaceFraction 10 5
+
+binaryPointOneReading : Representation.RatioRepresentation
+binaryPointOneReading = onePlaceFraction 2 1
+
+decimalPointFiveIsHalf :
+  Representation.RatioEquivalent
+    decimalPointFiveReading
+    Representation.oneHalf
+decimalPointFiveIsHalf = refl
+
+binaryPointOneIsHalf :
+  Representation.RatioEquivalent
+    binaryPointOneReading
+    Representation.oneHalf
+binaryPointOneIsHalf = refl
+
+decimalBinaryHalfEquivalent :
+  Representation.RatioEquivalent
+    decimalPointFiveReading
+    binaryPointOneReading
+decimalBinaryHalfEquivalent = refl
 
 ------------------------------------------------------------------------
 -- A decimal display and a p-adic valuation are independent coordinates.
@@ -162,6 +190,12 @@ stageScaleRole Atlas.atlas-10 = carriedPlaceUnitRole
 stageScaleRole Atlas.atlas-11 = carryPlusLocalUnitRole
 stageScaleRole _ = ordinaryStageRole
 
+stage1NotStage10 : ¬ (Atlas.atlas-1 ≡ Atlas.atlas-10)
+stage1NotStage10 ()
+
+stage10NotStage11 : ¬ (Atlas.atlas-10 ≡ Atlas.atlas-11)
+stage10NotStage11 ()
+
 data SameUnitRoleAcrossScale :
   Atlas.StageAtlasZeroToEleven →
   Atlas.StageAtlasZeroToEleven →
@@ -177,6 +211,8 @@ record StageCarryJoin : Set where
     localUnitIsStage1 : localUnit ≡ Atlas.atlas-1
     carriedUnitIsStage10 : carriedUnit ≡ Atlas.atlas-10
     joinedSuccessorIsStage11 : joinedSuccessor ≡ Atlas.atlas-11
+    localAndCarriedAreDistinct : ¬ (localUnit ≡ carriedUnit)
+    carriedAndJoinedAreDistinct : ¬ (carriedUnit ≡ joinedSuccessor)
     unitRoleTransport : SameUnitRoleAcrossScale localUnit carriedUnit
 
 canonicalStageCarryJoin : StageCarryJoin
@@ -187,6 +223,8 @@ canonicalStageCarryJoin = record
   ; localUnitIsStage1 = refl
   ; carriedUnitIsStage10 = refl
   ; joinedSuccessorIsStage11 = refl
+  ; localAndCarriedAreDistinct = stage1NotStage10
+  ; carriedAndJoinedAreDistinct = stage10NotStage11
   ; unitRoleTransport = stage1ToStage10UnitLift
   }
 
