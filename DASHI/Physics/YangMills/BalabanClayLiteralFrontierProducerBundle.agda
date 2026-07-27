@@ -49,11 +49,13 @@ import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetEx
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact
 
 -- T5: staged thermodynamic/continuum tails, explicit dyadic geometric tails,
--- exponential moments, compactness, complete Gram forms and OS transport.
+-- the rooted-shell-to-boundary bridge, exponential moments, compactness,
+-- complete Gram forms and OS transport.
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeTailMomentCompactnessExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact
+import DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact
 
 -- Exact status split for the newly configured arithmetic and remaining leaves.
 import DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger
