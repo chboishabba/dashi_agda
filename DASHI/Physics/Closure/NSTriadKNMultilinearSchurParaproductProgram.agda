@@ -6,41 +6,46 @@ module DASHI.Physics.Closure.NSTriadKNMultilinearSchurParaproductProgram where
 -- Title: "A Multilinear Schur Test and Multiplier Operators".
 -- Venue/year: Journal of Functional Analysis 187 (2001), 1--24.
 -- DOI: 10.1006/jfan.2001.3804.
--- Uses: Theorem 1(c), positive multilinear operators, three weight
--- functions, both partial adjoints, discrete trilinear forms, and multiplier
--- bounds on Sobolev and Besov spaces.
--- Relationship: the three-function theorem is the primary framework.  A
--- frozen-leg two-function row/column proof is only a specialization.
+-- Uses: Theorem 1(c), three independent weights, both partial adjoints,
+-- and the affine homogeneity method.
+-- Relationship: the primary Stage-3 operator theorem.
+--
+-- Authors: Loukas Grafakos; Rodolfo H. Torres.
+-- Title: "Multilinear Calderon--Zygmund Theory".
+-- Venue/year: Advances in Mathematics 165 (2002), 124--164.
+-- DOI: 10.1006/aima.2001.2028.
+-- Uses: formal transposes, kernel-variable permutation, and the frozen-input
+-- transpose rule in equations (15)--(16).
+-- Relationship: supplies exact transpose combinatorics, not the model-specific
+-- Navier--Stokes derivative or cancellation estimate.
 --
 -- Author: Pierre Germain.
 -- Title: "Multipliers, paramultipliers, and weak-strong uniqueness for the
 -- Navier-Stokes equations".
 -- Venue/year: Journal of Differential Equations 226 (2006), 373--428.
 -- DOI: 10.1016/j.jde.2005.10.007.
--- Uses: boundedness of the Navier-Stokes trilinear functional, multiplier
--- and paramultiplier spaces, and the Bony low-high/high-low/remainder split.
--- Relationship: motivates class-dependent asymmetric estimates instead of
--- a forced symmetric unweighted row/column proof.
+-- Uses: equation (9), the three-term Pi + R + tilde-Pi decomposition, and
+-- Theorem 3.9's Sobolev-indexed multiplier/paramultiplier characterization.
+-- Relationship: supports the paramultiplier proof strategy and boundary-index
+-- bookkeeping.  It does not supply the repository's eight orbit-shell classes.
 --
 -- Author: Terence Tao.
 -- Title: "Lecture Notes 6 for 247B: Paradifferential calculus,
 -- fractional chain and Leibnitz rules".
--- Venue/year: UCLA Math 247B Fourier Analysis lecture notes, Winter 2007;
--- relevant course-page errata recorded through 16 April 2026.
+-- Venue/year: UCLA Math 247B Fourier Analysis lecture notes, Winter 2007.
 -- DOI: none; these are course lecture notes.
--- Uses: transpose multipliers and the high-high/high-low/low-high
--- decomposition.
--- Relationship: provides one shared frozen-leg combinatorial template, but
--- not identical derivative or Hölder ledgers for all three frozen legs.
+-- Uses: transpose multipliers and the high-high/high-low/low-high split.
+-- Relationship: supplies the shared frozen-leg frequency combinatorics only.
 --
 -- Author: Jean-Michel Bony.
--- Title: "Calcul symbolique et propagation des singularités pour les
--- équations aux dérivées partielles non linéaires".
--- Venue/year: Annales scientifiques de l'École Normale Supérieure,
--- Série 4, 14 (1981), no. 2, 209--246.
+-- Title: "Calcul symbolique et propagation des singularites pour les
+-- equations aux derivees partielles non lineaires".
+-- Venue/year: Annales scientifiques de l'Ecole Normale Superieure,
+-- Serie 4, 14 (1981), no. 2, 209--246.
 -- DOI: 10.24033/asens.1404.
 -- Uses: original paradifferential-calculus provenance.
--- Relationship: supplies the decomposition principle only.
+-- Relationship: supplies the decomposition principle only; near/far,
+-- transition and residual orbit-shell classes are repository-original.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -48,8 +53,13 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNGrafakosTorresThreeFunctionSchurProgram as ThreeFunction
+import DASHI.Physics.Closure.NSTriadKNGrafakosTorresExactTransposeSymbols as Transpose
 import DASHI.Physics.Closure.NSTriadKNTaoFrozenLegParaproductProgram as Tao
 import DASHI.Physics.Closure.NSTriadKNBernsteinDirectionAudit as Bernstein
+import DASHI.Physics.Closure.NSTriadKNFrozenLegDerivativeLerayLedger as Derivative
+import DASHI.Physics.Closure.NSTriadKNShellExponentLedgerProgram as Ledgers
+import DASHI.Physics.Closure.NSTriadKNHighHighToLowCancellationProgram as HighHigh
+import DASHI.Physics.Closure.NSTriadKNThreeWeightAffineCertificateProgram as Certificate
 
 data ParaproductGeometry : Set where
   near lowHigh highLow highHighToLow farLow farHigh transition residual :
@@ -113,20 +123,32 @@ record FrozenLegParametrizedAdjointRoute
     nearTransitionResidualTransportClosed : Set s
     exactDecompositionForEveryFrozenLeg : Set s
 
-    outputSymbolIdentified : Set s
-    firstTransposeSymbolIdentified : Set s
-    secondTransposeSymbolIdentified : Set s
+    grafakosTorresKernelPermutationConsumed : Set s
+    grafakosTorresFrozenTransposeRuleConsumed : Set s
+    outputScalarSymbolIdentified : Set s
+    firstTransposeScalarSymbolIdentified : Set s
+    secondTransposeScalarSymbolIdentified : Set s
+
+    outputVectorSymbolIdentified : Set s
+    firstTransposeVectorSymbolIdentified : Set s
+    secondTransposeVectorSymbolIdentified : Set s
 
     outputDerivativeOwnerIdentified : Set s
     firstAdjointDerivativeOwnerIdentified : Set s
     secondAdjointDerivativeOwnerIdentified : Set s
+
+    outputLerayPlacementIdentified : Set s
+    firstAdjointLerayPlacementIdentified : Set s
+    secondAdjointLerayPlacementIdentified : Set s
 
     outputHolderTargetIdentified : Set s
     firstAdjointHolderTargetIdentified : Set s
     secondAdjointHolderTargetIdentified : Set s
 
     bernsteinDirectionsNamedAndSeparated : Set s
-    highHighToLowCancellationInputIdentified : Set s
+    outputHighHighRelocationIdentified : Set s
+    firstAdjointPrimitiveLowGainRejected : Set s
+    secondAdjointFrozenDerivativeIdentified : Set s
 
     sharedCombinatorialLedgerClosed : Set s
     outputAnalyticLedgerClosed : Set s
@@ -171,6 +193,13 @@ record NavierStokesParaproductDualRoute
     firstAdjointLedgerInstantiation : Set s
     secondAdjointLedgerInstantiation : Set s
 
+    outputCancellationGainClosed : Set s
+    firstAdjointTailOrCommutatorGainClosed : Set s
+    secondAdjointDirectLowDerivativeClosed : Set s
+
+    affineThreeWeightSystemSolved : Set s
+    strictEpsilonCertificateEmitted : Set s
+
     multiplierRouteClosed : Set s
     paramultiplierRouteClosed : Set s
     threeFunctionSchurRouteClosed : Set s
@@ -187,36 +216,27 @@ data HarmonicFrameworkLevel : Set where
 
 record Stage3HarmonicHierarchy : Set₁ where
   field
-    primaryFramework :
-      HarmonicFrameworkLevel
-    primaryIsThreeFunction :
-      primaryFramework ≡ primaryThreeFunction
+    primaryFramework : HarmonicFrameworkLevel
+    primaryIsThreeFunction : primaryFramework ≡ primaryThreeFunction
 
-    twoFunctionSpecializationAvailable :
-      Set
-    twoFunctionRequiresFrozenOutputLeg :
-      Set
+    twoFunctionSpecializationAvailable : Set
+    twoFunctionRequiresFrozenOutputLeg : Set
 
-    frozenLegParametrizationAvailable :
-      Set
-    frozenLegReusesFrequencyCombinatorics :
-      Set
-    frozenLegDoesNotIdentifyAnalyticLedgers :
-      Set
+    frozenLegParametrizationAvailable : Set
+    frozenLegReusesFrequencyCombinatorics : Set
+    frozenLegDoesNotIdentifyAnalyticLedgers : Set
 
-    outputConditionRequired :
-      Set
-    firstPartialAdjointConditionRequired :
-      Set
-    secondPartialAdjointConditionRequired :
-      Set
+    outputConditionRequired : Set
+    firstPartialAdjointConditionRequired : Set
+    secondPartialAdjointConditionRequired : Set
 
-    paraproductClassesRealizePartialAdjoints :
-      Set
-    bernsteinDirectionsAuditedBeforeAssembly :
-      Set
-    noRawRowTheoremPromotedToThreeFunctionClosure :
-      Set
+    taoBonyTrichotomyAttributionCorrect : Set
+    germainParamultiplierAttributionCorrect : Set
+    repositoryEightClassAttributionExplicit : Set
+
+    paraproductClassesRealizePartialAdjoints : Set
+    bernsteinDirectionsAuditedBeforeAssembly : Set
+    noRawRowTheoremPromotedToThreeFunctionClosure : Set
 
 open Stage3HarmonicHierarchy public
 
@@ -239,6 +259,24 @@ open BaselineColumnStrategyFork public
 frozenLegPermutationReceipt : Tao.FrozenLegPermutationReceipt
 frozenLegPermutationReceipt = Tao.frozenLegPermutationReceipt
 
+kernelPermutationReceipt : Transpose.KernelPermutationReceipt
+kernelPermutationReceipt = Transpose.kernelPermutationReceipt
+
+frozenOperatorTransposeReceipt : Transpose.FrozenOperatorTransposeReceipt
+frozenOperatorTransposeReceipt = Transpose.frozenOperatorTransposeReceipt
+
+frozenLegDerivativeReceipt : Derivative.FrozenLegDerivativeReceipt
+frozenLegDerivativeReceipt = Derivative.frozenLegDerivativeReceipt
+
+frozenLegGainReceipt : HighHigh.FrozenLegGainReceipt
+frozenLegGainReceipt = HighHigh.frozenLegGainReceipt
+
+attributionReceipt : Ledgers.AttributionReceipt
+attributionReceipt = Ledgers.attributionReceipt
+
+analyticReadinessReceipt : Certificate.AnalyticReadinessReceipt
+analyticReadinessReceipt = Certificate.analyticReadinessReceipt
+
 bernsteinDirectionReceipt : Bernstein.BernsteinDirectionReceipt
 bernsteinDirectionReceipt = Bernstein.bernsteinDirectionReceipt
 
@@ -252,13 +290,20 @@ threeFunctionFrameworkSubsumesFrozenLegSchurIsTrue =
   ThreeFunction.twoFunctionSchurRetainedAsFrozenOutputSpecializationIsTrue
 
 frozenLegTrichotomyRepresented : Bool
-frozenLegTrichotomyRepresented =
-  Tao.taoTransposeAndTrichotomySourceRepresented
+frozenLegTrichotomyRepresented = Tao.taoTransposeAndTrichotomySourceRepresented
 
 frozenLegTrichotomyRepresentedIsTrue :
   frozenLegTrichotomyRepresented ≡ true
 frozenLegTrichotomyRepresentedIsTrue =
   Tao.taoTransposeAndTrichotomySourceRepresentedIsTrue
+
+literalScalarTransposeSymbolsClosed : Bool
+literalScalarTransposeSymbolsClosed = Transpose.literalScalarTransposeSymbolsClosed
+
+literalScalarTransposeSymbolsClosedIsTrue :
+  literalScalarTransposeSymbolsClosed ≡ true
+literalScalarTransposeSymbolsClosedIsTrue =
+  Transpose.literalScalarTransposeSymbolsClosedIsTrue
 
 frozenLegPermutationClosesAllAnalyticLedgers : Bool
 frozenLegPermutationClosesAllAnalyticLedgers =
@@ -270,13 +315,28 @@ frozenLegPermutationClosesAllAnalyticLedgersIsFalse =
   Tao.permutationAloneClosesAllExponentLedgersIsFalse
 
 bernsteinDirectionAuditRepresented : Bool
-bernsteinDirectionAuditRepresented =
-  Bernstein.bernsteinDirectionSurfaceRepresented
+bernsteinDirectionAuditRepresented = Bernstein.bernsteinDirectionSurfaceRepresented
 
 bernsteinDirectionAuditRepresentedIsTrue :
   bernsteinDirectionAuditRepresented ≡ true
 bernsteinDirectionAuditRepresentedIsTrue =
   Bernstein.bernsteinDirectionSurfaceRepresentedIsTrue
+
+germainEightClassAttributionCorrected : Bool
+germainEightClassAttributionCorrected = true
+
+germainEightClassAttributionCorrectedIsTrue :
+  germainEightClassAttributionCorrected ≡ true
+germainEightClassAttributionCorrectedIsTrue = refl
+
+firstAdjointPrimitiveLowGainAvailable : Bool
+firstAdjointPrimitiveLowGainAvailable =
+  HighHigh.firstAdjointPrimitiveLowGainAvailable
+
+firstAdjointPrimitiveLowGainAvailableIsFalse :
+  firstAdjointPrimitiveLowGainAvailable ≡ false
+firstAdjointPrimitiveLowGainAvailableIsFalse =
+  HighHigh.firstAdjointPrimitiveLowGainAvailableIsFalse
 
 multilinearAndParaproductRoutesRepresented : Bool
 multilinearAndParaproductRoutesRepresented = true
