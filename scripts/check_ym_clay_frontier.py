@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Fail-closed textual audit for the explicit P1--P5 Yang--Mills frontier.
 
-The script checks declaration integrity and the honesty ledger. It does not
-replace the Agda kernel. The configured Green closure is delegated to its own
-stricter audit so the finite inverse and analytic producer cuts cannot drift.
+The script checks declaration integrity, literature metadata and the honesty
+ledger. It does not replace the Agda kernel. The configured Green closure is
+delegated to its own stricter audit so the finite inverse and analytic producer
+cuts cannot drift.
 """
 
 from __future__ import annotations
@@ -74,17 +75,39 @@ FILES: dict[Path, tuple[str, ...]] = {
     ),
     YM / "BalabanClayT2WilsonActivityFactorProductExact.agda": (
         "WilsonTraversalActivityFactors",
+        "activityNonnegative",
+        "actionFactorNonnegative",
         "physicalProductBelowCertifiedProduct",
         "wilsonActivityPerTraversalBelowOneSixteenth",
+        "wilsonActivityAbsoluteSignConventionLevel = machineChecked",
+        "DOI: 10.1007/BF01211762",
+        "DOI: 10.1007/s00220-007-0279-2",
         "literalWilsonSixFactorBoundsLevel = conditional",
     ),
     YM / "BalabanClayT2TraversalRootedShellExact.agda": (
+        "the exact 8/16 Kotecký--Preiss specialisation",
+        "DOI: 10.1007/BF01211762",
         "eightTimesOneSixteenthIsHalf",
         "activityPerExtensionBelowOneSixteenth",
         "oneTraversalStepBelowHalf",
         "rootedShellBelowQuarterHalfPower",
         "traversalSuppressionImpliesFiniteKP",
+        "rootedTraversalCriterionIsKPLevel = machineChecked",
         "wilsonActivityPerTraversalBelowOneSixteenthLevel = conditional",
+    ),
+    YM / "BalabanClayT2ClusterCriterionComparisonExact.agda": (
+        "R. Kotecký and D. Preiss",
+        "DOI: 10.1007/BF01211762",
+        "R. Fernández and A. Procacci",
+        "DOI: 10.1007/s00220-007-0279-2",
+        "R. Bissacot, R. Fernández and A. Procacci",
+        "DOI: 10.1007/s10955-010-9956-1",
+        "KoteckyPreissCriterion",
+        "FernandezProcacciCriterion",
+        "InterpolatingCriterion",
+        "koteckyPreissImpliesFernandezProcacci",
+        "fernandezProcacciImpliesInterpolating",
+        "physicalStrictCriterionSlackLevel = conditional",
     ),
     YM / "BalabanClayT2UrsellCauchyExact.agda": (
         "geometricTailBelow",
@@ -128,11 +151,22 @@ FILES: dict[Path, tuple[str, ...]] = {
         "productHaarQuadratureIdentificationLevel = conditional",
     ),
     YM / "BalabanClayT3OperatorSchurComplementExact.agda": (
+        "E. V. Haynsworth",
+        "DOI: 10.1016/0024-3795(68)90050-5",
         "OperatorSchurData",
         "schurHessian",
         "operatorSchurEnergyExact",
         "operatorExactSchurComplement",
+        "operatorSchurAlgebraVersusCoercivityBoundaryLevel = machineChecked",
         "physicalFluctuationSchurInputsLevel = conditional",
+    ),
+    YM / "BalabanClayT3UniformFluctuationSchurExact.agda": (
+        "UniformFluctuationSchurFamily",
+        "uniformFluctuationBlockCoercive",
+        "uniformFluctuationCoefficientPositive",
+        "exactSchurComplementAt",
+        "DOI: 10.1016/0024-3795(68)90050-5",
+        "physicalUniformFluctuationInputsLevel = conditional",
     ),
     YM / "BalabanClayT3SchurWardBetaExact.agda": (
         "scalarSchurDefectIdentity",
@@ -154,6 +188,32 @@ FILES: dict[Path, tuple[str, ...]] = {
         "canonicalDomainIsCommon",
         "canonicalBackgroundConstraintProducerLevel = conditional",
         "canonicalContinuumConstraintProducerLevel = conditional",
+    ),
+    YM / "BalabanClayT4BetaNormalizationConventionExact.agda": (
+        "D. J. Gross and F. Wilczek",
+        "DOI: 10.1103/PhysRevLett.30.1343",
+        "H. D. Politzer",
+        "DOI: 10.1103/PhysRevLett.30.1346",
+        "R. Dashen and D. J. Gross",
+        "DOI: 10.1103/PhysRevD.23.2340",
+        "pureYMBetaZero",
+        "inverseCouplingFromBetaDerivative",
+        "inverseCouplingIsElevenOverTwentyFour",
+        "inverseCouplingIsBetaZeroOverEight",
+        "physicalPlaquetteCoefficientIdentificationLevel = conditional",
+    ),
+    YM / "BalabanClayT4RunningCouplingConventionBridgeExact.agda": (
+        "ConventionMatchedRunningCoupling",
+        "betaLogBlockingUsesElevenOverTwentyFour",
+        "betaLogBlockingUsesBetaZeroOverEight",
+        "DOI: 10.1103/PhysRevD.23.2340",
+        "physicalRunningCouplingCoefficientCalculationLevel = conditional",
+    ),
+    YM / "BalabanDashenGrossCalibration.agda": (
+        "R. Dashen and D. J. Gross",
+        "DOI: 10.1103/PhysRevD.23.2340",
+        "calibratedConvention",
+        "dashenGrossBibliographicConventionLevel = machineChecked",
     ),
     YM / "BalabanClayT4CanonicalScalarWitnessExact.agda": (
         "PositiveMargin",
@@ -192,37 +252,52 @@ FILES: dict[Path, tuple[str, ...]] = {
         "nonzeroFourthCumulantExcludesGaussian",
         "physicalLimitTightnessAndNontrivialityLevel = conditional",
     ),
+    YM / "BalabanClayT5OSGramTopologyExact.agda": (
+        "K. Osterwalder and R. Schrader",
+        "DOI: 10.1007/BF01645738",
+        "DOI: 10.1007/BF01608978",
+        "P. Menotti and A. Pelissetto",
+        "DOI: 10.1007/BF01221251",
+        "OSGramLimitData",
+        "gramQuadraticFormConverges",
+        "continuumReflectionPositiveFromGramTopology",
+        "measureLimitReflectionPositive",
+        "physicalOSGramTopologyIdentificationLevel = conditional",
+    ),
+    YM / "BalabanClayT5OSGramClosedPropertyExact.agda": (
+        "MeasureTopologyControlsOSGram",
+        "measureConvergenceImpliesGramConvergence",
+        "measureReflectionPositiveClosed",
+        "reflectionPositiveSequentiallyClosed",
+        "DOI: 10.1007/BF01645738",
+        "DOI: 10.1007/BF01608978",
+        "physicalMeasureToOSGramContinuityLevel = conditional",
+    ),
     YM / "BalabanClayConstructiveProducerAdvance.agda": (
         "BalabanClayT1CommonAnalyticContractionExact",
-        "BalabanClayT2WilsonActivityFactorProductExact",
-        "BalabanClayT2TraversalRootedShellExact",
-        "BalabanClayT2UrsellCauchyExact",
-        "BalabanClayT3CompactHaarLimitExact",
-        "BalabanClayT3OperatorSchurComplementExact",
-        "BalabanClayT3SchurWardBetaExact",
-        "BalabanClayT4CanonicalScalarWitnessExact",
-        "BalabanClayT5PhysicalMassTransportExact",
-        "BalabanClayT5LimitAndNontrivialityExact",
+        "BalabanClayT2ClusterCriterionComparisonExact",
+        "BalabanClayT3UniformFluctuationSchurExact",
+        "BalabanClayT4BetaNormalizationConventionExact",
+        "BalabanClayT4RunningCouplingConventionBridgeExact",
+        "BalabanClayT5OSGramTopologyExact",
+        "BalabanClayT5OSGramClosedPropertyExact",
     ),
     YM / "BalabanClayFrontierCompletionLedger.agda": (
         "configuredMatrixActionLinearityLevel = machineChecked",
         "constructiveConfiguredFiniteInverseLevel = machineChecked",
         "t1CommonAnalyticContractionLevel = machineChecked",
-        "t2WilsonActivityOneSixteenthLevel = machineChecked",
-        "t2RootedShellQuarterHalfPowerLevel = machineChecked",
-        "t2UrsellCauchyModulusLevel = machineChecked",
-        "t3CompactHaarLimitAlgebraLevel = machineChecked",
-        "t3OperatorSchurEnergyIdentityLevel = machineChecked",
-        "t3OperatorSchurP3AdapterLevel = machineChecked",
-        "t3QuarticBetaRemainderSummabilityLevel = machineChecked",
-        "p4CanonicalScalarIntersectionLevel = machineChecked",
-        "p5PhysicalMassInterlacingLevel = machineChecked",
-        "p5SequentialOSPropertyClosureLevel = machineChecked",
+        "t2KoteckyPreissToFernandezProcacciLevel = machineChecked",
+        "t2FernandezProcacciToInterpolatingLevel = machineChecked",
+        "t3UniformFluctuationCoercivityReductionLevel = machineChecked",
+        "t4BetaZeroOverEightEqualsElevenOverTwentyFourLevel = machineChecked",
+        "t4RunningCouplingConventionBridgeLevel = machineChecked",
+        "p5OSGramQuadraticFormClosureLevel = machineChecked",
+        "p5OSReflectionClosedPropertyLevel = machineChecked",
         "p1NonlinearMinimizingBackgroundLevel = conditional",
         "p2PhysicalActivityAndRootedShellEstimateLevel = conditional",
-        "p3ExactConstrainedIntegralCoordinatesLevel = conditional",
-        "p4CanonicalCommonDomainInhabitationLevel = conditional",
-        "p5ContinuumOSAndNontrivialityLevel = conditional",
+        "p3UniformFluctuationCoercivityInputsLevel = conditional",
+        "p4PhysicalPlaquetteCoefficientIdentificationLevel = conditional",
+        "p5PhysicalOSGramTopologyIdentificationLevel = conditional",
         "branchHeadAuthoritativeAgda29TypecheckLevel = conditional",
     ),
 }
@@ -259,13 +334,13 @@ def main() -> None:
     )
 
     print(
-        "The frontier branch now derives common-norm contraction/self-map, "
-        "the six-factor Wilson activity product, exact 8/16 rooted-shell decay, "
-        "an Ursell Cauchy modulus and correlation tail, compact-Haar limit "
-        "algebra, scalar and operator Schur identities, exact gauge reindexing, "
-        "quartic beta-remainder summability, one common scalar margin tuple, "
-        "physical-mass interlacing, OS-property limit closure and fourth-"
-        "cumulant nontriviality. Literal Wilson/Haar identifications remain "
+        "The frontier audit now distinguishes KP, Fernandez-Procacci and the "
+        "interpolating criterion with explicit nonnegative-activity conventions; "
+        "separates Schur algebra from uniform fluctuation coercivity; proves the "
+        "beta_0/(8 pi^2) = 11 C_A/(24 pi^2) convention identity; and requires "
+        "convergence of complete OS Gram quadratic forms rather than bare "
+        "pointwise correlators. Authors, titles and DOI metadata are pinned in "
+        "the relevant Agda modules. Literal Wilson/Haar identifications remain "
         "explicit conditional producers; no kernel receipt is fabricated."
     )
 
