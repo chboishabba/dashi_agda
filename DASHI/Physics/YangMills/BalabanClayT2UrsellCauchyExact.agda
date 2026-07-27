@@ -17,9 +17,20 @@ open import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact usin
 quarter : ℚ
 quarter = + 1 / 4
 
-------------------------------------------------------------------------
--- Exact geometric tail used by the Ursell expansion.
-------------------------------------------------------------------------
+zeroNonnegative : 0ℚ ≤ 0ℚ
+zeroNonnegative =
+  let
+    instance
+      zeroNonnegativeInstance : NonNegative 0ℚ
+      zeroNonnegativeInstance = ℚP.normalize-nonNeg 0 1
+  in ℚP.nonNegative⁻¹ 0ℚ
+
+rationalReflexive : ∀ value → value ≤ value
+rationalReflexive value =
+  subst
+    (λ upper → value ≤ upper)
+    (ℚRing.solve-∀ value)
+    (baseBelowBasePlusRemainder value 0ℚ zeroNonnegative)
 
 geometricTailPartial : Nat → Nat → ℚ
 geometricTailPartial start zero = 0ℚ
@@ -56,7 +67,7 @@ geometricTailBelow start zero =
 geometricTailBelow start (suc count) =
   trans
     (ℚP.+-mono-≤
-      (ℚP.≤-reflexive (quarter * halfPower start))
+      (rationalReflexive (quarter * halfPower start))
       (geometricTailBelow (suc start) count))
     (subst
       (λ right →
@@ -64,13 +75,7 @@ geometricTailBelow start (suc count) =
           + half * halfPower (suc start)
         ≤ right)
       (ℚRing.solve-∀ (halfPower start))
-      (ℚP.≤-reflexive (half * halfPower start)))
-
-------------------------------------------------------------------------
--- The actual absolute Ursell coefficients are now a sequence with a concrete
--- Cauchy modulus.  Tree-graph/KP analysis only has to prove the per-depth bound;
--- convergence is then constructed rather than supplied as an opaque flag.
-------------------------------------------------------------------------
+      (rationalReflexive (half * halfPower start)))
 
 record UrsellDepthMajorant : Set₁ where
   field
@@ -91,7 +96,7 @@ ursellTailBelowGeometric :
   (dataSet : UrsellDepthMajorant) → ∀ start count →
   ursellTailPartial dataSet start count
   ≤ geometricTailPartial start count
-ursellTailBelowGeometric dataSet start zero = ℚP.≤-reflexive 0ℚ
+ursellTailBelowGeometric dataSet start zero = rationalReflexive 0ℚ
 ursellTailBelowGeometric dataSet start (suc count) =
   ℚP.+-mono-≤
     (depthBelowRootedShell dataSet start)
@@ -150,7 +155,5 @@ finiteConnectedCrossingDecayLevel = machineChecked
 infiniteConnectedCorrelationDecayAssemblyLevel : ProofLevel
 infiniteConnectedCorrelationDecayAssemblyLevel = machineChecked
 
--- The remaining combinatorial theorem is the literal tree-graph/KP estimate
--- identifying physical absolute Ursell coefficients with UrsellDepthMajorant.
 physicalUrsellTreeGraphMajorantLevel : ProofLevel
 physicalUrsellTreeGraphMajorantLevel = conditional
