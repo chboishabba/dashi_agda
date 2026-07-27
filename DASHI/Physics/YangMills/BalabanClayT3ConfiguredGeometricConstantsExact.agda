@@ -23,33 +23,38 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Press (2017). DOI: 10.1017/9781316671528
 --
 -- Relationship: the source papers motivate the five geometric mechanisms.  The
--- numerical allocation below is a conservative DASHI-owned certificate for the
--- literal 2 x 2 x 2 x 2 reference block.  Each physical estimate must prove
--- that its actual coefficient is bounded by the allocated rational constant.
+-- allocation below is deliberately conservative: it allows the plaquette and
+-- divergence incidence counts, Young inequalities and length-four block paths
+-- to be charged before the physical estimate is compared with the budget.
 ------------------------------------------------------------------------
 
-twoℚ fourℚ sixℚ eightℚ sixteenℚ thirtyTwoℚ : ℚ
+twoℚ fourℚ sixℚ eightℚ sixteenℚ thirtyTwoℚ sixtyFourℚ : ℚ
 twoℚ = 1ℚ + 1ℚ
 fourℚ = twoℚ + twoℚ
 sixℚ = fourℚ + twoℚ
 eightℚ = fourℚ + fourℚ
 sixteenℚ = eightℚ + eightℚ
 thirtyTwoℚ = sixteenℚ + sixteenℚ
+sixtyFourℚ = thirtyTwoℚ + thirtyTwoℚ
+
+oneHundredTwentyEightℚ twoHundredFiftySixℚ : ℚ
+oneHundredTwentyEightℚ = sixtyFourℚ + sixtyFourℚ
+twoHundredFiftySixℚ = oneHundredTwentyEightℚ + oneHundredTwentyEightℚ
 
 configuredCurvatureCoefficient : ℚ
-configuredCurvatureCoefficient = eightℚ
+configuredCurvatureCoefficient = thirtyTwoℚ
 
 configuredTransportCoefficient : ℚ
-configuredTransportCoefficient = eightℚ
+configuredTransportCoefficient = sixtyFourℚ
 
 configuredChartCoefficient : ℚ
-configuredChartCoefficient = fourℚ
+configuredChartCoefficient = thirtyTwoℚ
 
 configuredGaugeCoefficient : ℚ
-configuredGaugeCoefficient = eightℚ
+configuredGaugeCoefficient = sixtyFourℚ
 
 configuredConstraintCoefficient : ℚ
-configuredConstraintCoefficient = fourℚ
+configuredConstraintCoefficient = sixtyFourℚ
 
 configuredTotalCoefficient : ℚ
 configuredTotalCoefficient =
@@ -60,19 +65,20 @@ configuredTotalCoefficient =
   + configuredConstraintCoefficient)))
 
 configuredTotalCoefficientExact :
-  configuredTotalCoefficient ≡ thirtyTwoℚ
+  configuredTotalCoefficient ≡ twoHundredFiftySixℚ
 configuredTotalCoefficientExact = ℚRing.solve
 
 ------------------------------------------------------------------------
 -- Literal four-dimensional incidence data.
 ------------------------------------------------------------------------
 
-oneN twoN fourN sixN eightN : Nat
+oneN twoN fourN sixN eightN sixteenN : Nat
 oneN = suc zero
 twoN = suc oneN
 fourN = suc (suc twoN)
 sixN = suc (suc fourN)
 eightN = suc (suc sixN)
+sixteenN = suc (suc (suc (suc (suc (suc (suc (suc eightN)))))))
 
 -- Each positive-axis edge belongs to two plaquettes with each of the other
 -- three axes: 2(4-1)=6.
@@ -87,7 +93,10 @@ orientedEdgesPerSite4D = eightN
 boolean4CanonicalPathLength : Nat
 boolean4CanonicalPathLength = fourN
 
--- Four bond components are present in the configured local carrier.
+-- The Boolean 4-cell has sixteen sites and four positive bond components.
+boolean4SiteCount : Nat
+boolean4SiteCount = sixteenN
+
 bondComponentsPerBoolean4Block : Nat
 bondComponentsPerBoolean4Block = fourN
 
@@ -145,8 +154,6 @@ record ConfiguredFiveRemainderDomination
 
     addMonotone : ∀ {a b c d : ℚ} → a ≤ b → c ≤ d → a + c ≤ b + d
 
-    -- The nested sum of the five allocated upper bounds is normalized once,
-    -- rather than relying on implicit semiring reassociation.
     configuredUpperSumExact : ∀ background state →
       configuredCurvatureCoefficient * radius background state * normSq background state
       + (configuredTransportCoefficient * radius background state * normSq background state
@@ -168,8 +175,7 @@ configuredFiveRemainderSumBound :
       * normSq dataSet background state
 configuredFiveRemainderSumBound dataSet background state inRadius =
   subst
-    (λ value →
-      totalRemainder dataSet background state ≤ value)
+    (λ value → totalRemainder dataSet background state ≤ value)
     (configuredUpperSumExact dataSet background state)
     (subst
       (λ value → value
