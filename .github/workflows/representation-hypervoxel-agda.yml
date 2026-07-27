@@ -1,0 +1,49 @@
+name: Representation hypervoxel Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Cognition/SituatedFrameMetacognitionBoundary.agda'
+      - 'DASHI/Everything.agda'
+      - 'DASHI/Foundations/CanonicalHalfFrameScaleValuation.agda'
+      - 'DASHI/Foundations/LiftPolarityPathComposition.agda'
+      - 'DASHI/Foundations/RadixValuationStageBridge.agda'
+      - 'DASHI/Foundations/RecursiveRadixHypervoxel.agda'
+      - 'DASHI/Foundations/RepresentationChartInvariant.agda'
+      - 'DASHI/Foundations/RepresentationHypervoxelRegression.agda'
+      - 'DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda'
+      - 'DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda'
+      - 'DASHI/Geometry/RepresentationPrefixUltrametricBridge.agda'
+      - 'DASHI/Physics/Closure/SU2SO3369HypervoxelBridge.agda'
+      - 'scripts/check_representation_hypervoxel_spine.py'
+      - '.github/workflows/representation-hypervoxel-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_BIN: agda
+      DASHI_REPO_ROOT: ${{ github.workspace }}
+      AGDA_LOG_PATH: ${{ github.workspace }}/.cache/representation-hypervoxel-agda.log
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - name: Run fail-closed source and arithmetic audit
+        run: python3 scripts/check_representation_hypervoxel_spine.py
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - name: Typecheck focused regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/RepresentationHypervoxelRegression.agda
+      - name: Typecheck downstream 369 consumer wiring
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda
+      - name: Typecheck authoritative aggregate wiring
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Everything.agda
