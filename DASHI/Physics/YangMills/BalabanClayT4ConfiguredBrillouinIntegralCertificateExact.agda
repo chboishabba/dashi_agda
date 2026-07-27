@@ -5,6 +5,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -30,10 +31,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- extraction.
 ------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- Exact universal rational color coefficient.
-------------------------------------------------------------------------
-
 oneThird elevenThird elevenTwentyFourth : ℚ
 oneThird = + 1 / 3
 elevenThird = + 11 / 3
@@ -43,12 +40,6 @@ betaZeroToInverseCouplingCoefficient : ∀ casimirAdjoint →
   (elevenThird * casimirAdjoint) * (+ 1 / 8)
   ≡ elevenTwentyFourth * casimirAdjoint
 betaZeroToInverseCouplingCoefficient = ℚRing.solve-∀
-
-------------------------------------------------------------------------
--- Rational box enclosure for the regular part of the Brillouin-zone integral.
--- Singular logarithmic extraction is analytic and exact; only the regular
--- compact remainder is delegated to finitely many rational interval boxes.
-------------------------------------------------------------------------
 
 record RationalInterval : Set where
   constructor interval
@@ -101,12 +92,10 @@ record ConfiguredBrillouinIntegralCertificate
 
     singularBoxes regularBoxes : Scale → List BoxIntegralEnclosure
 
-    -- Exact tensor/color reduction before numerical integration.
     colorTensorReductionExact : ∀ scale → Set
     wardTransverseProjectorExact : ∀ scale → Set
     massAndLongitudinalTermsVanish : ∀ scale → Set
 
-    -- The singular part is integrated analytically and yields log L.
     infraredSingularIntegrandExact : ∀ scale → Set
     infraredShellIntegralLogLExact : ∀ scale →
       scalarIntegral scale
@@ -115,7 +104,6 @@ record ConfiguredBrillouinIntegralCertificate
             (casimirAdjoint scale))
           (multiply (inversePiSquared scale) (logBlocking scale))
 
-    -- Finitely many rational boxes certify the lattice-continuum regular part.
     regularBoxCoverExact : ∀ scale → Set
     regularBoxEnclosuresValid : ∀ scale → Set
     regularRemainderBetweenBoxSums : ∀ scale →
@@ -147,13 +135,11 @@ vacuumPolarizationPlaquetteCoefficientConfigured :
           (logBlocking dataSet scale)))
       (regularRemainder dataSet scale)
 vacuumPolarizationPlaquetteCoefficientConfigured dataSet scale =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (coefficientDefinition dataSet scale)
     (cong
       (λ singular → add dataSet singular (regularRemainder dataSet scale))
       (infraredShellIntegralLogLExact dataSet scale))
-  where
-  open import Relation.Binary.PropositionalEquality using (cong)
 
 record ConfiguredOneLoopRGClosure
     (Scale Scalar : Set) : Set₁ where
