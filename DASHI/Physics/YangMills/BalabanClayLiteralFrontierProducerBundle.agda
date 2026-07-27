@@ -39,11 +39,13 @@ import DASHI.Physics.YangMills.BalabanClayT2PhysicalRootedPolymerEncodingExact
 import DASHI.Physics.YangMills.BalabanClayT2PhysicalPolymerCarrierInstanceExact
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact
 
--- T4: localized projector, literal Wilson/background one-loop reduction and a
--- rational-box Brillouin-zone coefficient certificate.
+-- T4: localized projector, literal Wilson/background one-loop reduction,
+-- Balaban's exact Eqs. (5.36)--(5.41) comparison target, and a rational-box
+-- Brillouin-zone coefficient certificate.
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralVacuumPolarizationIntegralExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopCoefficientClosureExact
+import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact
 
 -- T5: staged thermodynamic/continuum tails, explicit dyadic geometric tails,
