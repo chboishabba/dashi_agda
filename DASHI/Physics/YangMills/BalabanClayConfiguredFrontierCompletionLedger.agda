@@ -41,12 +41,11 @@ configuredCommonRadiusArithmeticLevel = Radius.configuredCommonRadiusArithmeticL
 configuredFiveRemaindersBelowHalfLevel : ProofLevel
 configuredFiveRemaindersBelowHalfLevel = Radius.configuredFiveRemaindersBelowHalfLevel
 
-combesThomasWeightedResolventReductionLevel : ProofLevel
-combesThomasWeightedResolventReductionLevel =
-  Green.combesThomasWeightedResolventReductionLevel
+localCombesThomasReductionLevel : ProofLevel
+localCombesThomasReductionLevel = Green.localCombesThomasReductionLevel
 
-periodicRGImageAssemblyLevel : ProofLevel
-periodicRGImageAssemblyLevel = Green.periodicRGImageAssemblyLevel
+fourierRGImageAssemblyLevel : ProofLevel
+fourierRGImageAssemblyLevel = Green.fourierRGImageAssemblyLevel
 
 configuredLossArithmeticLevel : ProofLevel
 configuredLossArithmeticLevel = Loss.configuredLossArithmeticLevel
@@ -115,6 +114,9 @@ physicalFiniteRangeGapInputsLevel = Green.physicalFiniteRangeGapInputsLevel
 
 physicalFourierRGImageInputsLevel : ProofLevel
 physicalFourierRGImageInputsLevel = Green.physicalFourierRGImageInputsLevel
+
+periodicRandomWalkTransferInputsLevel : ProofLevel
+periodicRandomWalkTransferInputsLevel = Green.periodicRandomWalkTransferInputsLevel
 
 physicalLossDominationInputsLevel : ProofLevel
 physicalLossDominationInputsLevel = Loss.physicalLossDominationInputsLevel
