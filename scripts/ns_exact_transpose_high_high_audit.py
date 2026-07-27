@@ -5,10 +5,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
+from fractions import Fraction
 from itertools import product
 from typing import Iterable, Tuple
 
 Mode = Tuple[int, int, int]
+RationalVector = Tuple[Fraction, Fraction, Fraction]
 
 
 def add(a: Mode, b: Mode) -> Mode:
@@ -17,6 +19,10 @@ def add(a: Mode, b: Mode) -> Mode:
 
 def dot(a: Mode, b: Mode) -> int:
     return sum(x * y for x, y in zip(a, b))
+
+
+def rational_dot(a: RationalVector, b: RationalVector) -> Fraction:
+    return sum((x * y for x, y in zip(a, b)), Fraction(0))
 
 
 def cross(a: Mode, b: Mode) -> Mode:
@@ -29,6 +35,21 @@ def cross(a: Mode, b: Mode) -> Mode:
 
 def norm_sq(a: Mode) -> int:
     return dot(a, a)
+
+
+def rational_norm_sq(a: RationalVector) -> Fraction:
+    return rational_dot(a, a)
+
+
+def leray_project(mode: Mode, vector: Mode) -> RationalVector:
+    mode_norm = norm_sq(mode)
+    if mode_norm == 0:
+        raise ValueError("Leray projection requires a nonzero mode")
+    coefficient = Fraction(dot(mode, vector), mode_norm)
+    return tuple(
+        Fraction(value) - coefficient * coordinate
+        for value, coordinate in zip(vector, mode)
+    )  # type: ignore[return-value]
 
 
 class FrozenInput(Enum):
@@ -84,20 +105,22 @@ class FirstAdjointCounterexample:
     low_output: Mode
     high_input_q: Mode
     high_input_k: Mode
-    projected_derivative: Mode
+    projected_derivative: RationalVector
 
 
 def first_adjoint_counterexample(scale: int = 37) -> FirstAdjointCounterexample:
     # First-adjoint output p is low, while q and k=p+q are high.
-    # q is orthogonal to p, so P_p q=q and the projected derivative remains high.
+    # q is orthogonal to p, so the exact Leray formula gives P_p q=q.
     p = (1, 0, 0)
     q = (0, scale, 0)
     k = add(p, q)
     assert dot(p, q) == 0
-    projected_q = q
-    assert norm_sq(projected_q) == scale * scale
+    projected_q = leray_project(p, q)
+    exact_q = tuple(Fraction(value) for value in q)
+    assert projected_q == exact_q
+    assert rational_norm_sq(projected_q) == scale * scale
     assert norm_sq(p) == 1
-    assert norm_sq(projected_q) > scale * norm_sq(p)
+    assert rational_norm_sq(projected_q) > scale * norm_sq(p)
     return FirstAdjointCounterexample(p, q, k, projected_q)
 
 
@@ -117,8 +140,9 @@ def main() -> int:
     print(
         "verified Grafakos--Torres bilinear frozen-transpose rule, "
         f"{checked} exact incompressibility relocations u_p·q=u_p·k, "
-        "direct low derivative for the second adjoint, and a first-adjoint "
-        f"counterexample with |P_p q|^2={norm_sq(witness.projected_derivative)} "
+        "direct low derivative for the second adjoint, and an exact Leray "
+        "first-adjoint counterexample with "
+        f"|P_p q|^2={rational_norm_sq(witness.projected_derivative)} "
         f"while |p|^2={norm_sq(witness.low_output)}"
     )
     return 0
