@@ -57,6 +57,15 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNCannoneTrilinearAntisymmetryAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3TernaryAntisymmetryIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3TernaryAntisymmetryBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianAlgebraProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNLerayAlgebraProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianNondegeneracy.agda",
+    "DASHI/Physics/Closure/NSTriadKNVectorAdjointUniquenessProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNCheskidovEguchiCountingTransferAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNFirstAdjointShellConvolutionProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNKatoPonceFirstAdjointFallback.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3HermitianConvolutionIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3HermitianConvolutionBridge.agda",
 ]
 
 PROVENANCE_MARKERS = (
@@ -138,6 +147,7 @@ def main() -> int:
         ("scripts/ns_symmetrised_first_adjoint_audit.py", "symmetrised first-adjoint exact audit"),
         ("scripts/ns_stage3_tail_threshold_affine_audit.py", "tail, threshold, and affine-readiness audit"),
         ("scripts/ns_stage3_ternary_antisymmetry_audit.py", "ternary/369 and classical-antisymmetry audit"),
+        ("scripts/ns_stage3_hermitian_convolution_audit.py", "Hermitian, Leray, and direct shell-convolution audit"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -151,7 +161,8 @@ def main() -> int:
         "postulates; global, localized, matrix, direction, manuscript-audit, "
         "weighted-Schur, three-function exponent, symmetric-companion, "
         "frozen-leg/Bernstein, exact-transpose/high-high, symmetrised-adjoint, "
-        "tail/threshold/affine-readiness, and ternary/antisymmetry verifiers passed"
+        "tail/threshold/affine-readiness, ternary/antisymmetry, and "
+        "Hermitian/Leray/direct-convolution verifiers passed"
     )
     return 0
 
