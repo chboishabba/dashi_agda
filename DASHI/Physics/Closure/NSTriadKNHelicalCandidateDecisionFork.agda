@@ -3,24 +3,25 @@ module DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork where
 ------------------------------------------------------------------------
 -- PROVENANCE
 -- Authors: DASHI repository contributors.
--- Title: "Exact helical, coherence, and Stage-3 harmonic-analysis decision
--- fork with remaining analytic cutset".
+-- Title: "Exact helical, coherence, and Stage-3 three-function harmonic
+-- analysis decision fork with remaining analytic cutset".
 -- Venue/year: DASHI formal development, 2026.
 -- DOI: not applicable; this is a DASHI-original dependency theorem.
 -- Uses: the global/scalar-helicity counterexamples, projected-axis matrix
 -- reconnaissance, Constantin--Fefferman direction-coherence interface,
--- triad-direction diagnostics, Kiriukhin raw-row theorem, weighted Schur,
--- multilinear Schur, paraproduct duality, and the fail-closed Permana audit.
+-- triad-direction diagnostics, Kiriukhin raw-row theorem,
+-- Grafakos--Torres three-function Schur, the frozen-output linear
+-- specialization, paraproduct partial adjoints, and the fail-closed Permana
+-- audit.
 -- Relationship: keeps candidate-selection decisions separate from harmonic
--- strategy decisions. It rejects only the concretely tested projected-axis
--- mode-local family, promotes triad direction coherence, records the raw row
--- theorem as literature-backed, and leaves every adapter, weighted column,
--- dual-trilinear, and cutoff-uniform PDE estimate explicit and uninhabited.
+-- strategy decisions.  The raw row theorem supplies one output-side
+-- condition only; both partial adjoints and the three-weight exponent
+-- system remain open.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
-open import Agda.Builtin.Bool using (true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.Closure.NSTriadKNGlobalHelicityH3DiscriminantCounterexample as Global
 import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityExactReconnaissance as Local
@@ -30,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNMatrixCoherenceExactReconnaissance as Matr
 import DASHI.Physics.Closure.NSTriadKNTriadDirectionAlignmentProgram as Direction
 import DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit as Permana
 import DASHI.Physics.Closure.NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance as SchurFinite
+import DASHI.Physics.Closure.NSTriadKNTriadicDyadicExponentSystem as Exponents
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3Schur
 
 data CandidateBranch : Set where
@@ -92,30 +94,47 @@ finiteDecisionReceipt =
 
 data HarmonicRoute : Set where
   rawOrbitRow
-  twoFunctionWeightedSchur
-  multilinearDualTrilinear : HarmonicRoute
+  grafakosTorresThreeFunction
+  frozenOutputTwoFunction
+  paraproductPartialAdjoints : HarmonicRoute
 
 data HarmonicRouteDecision : HarmonicRoute → Set where
   rawRowLiteratureBacked : HarmonicRouteDecision rawOrbitRow
-  weightedSchurPromoted : HarmonicRouteDecision twoFunctionWeightedSchur
-  multilinearDualityRetained : HarmonicRouteDecision multilinearDualTrilinear
+  threeFunctionPromotedAsPrimary :
+    HarmonicRouteDecision grafakosTorresThreeFunction
+  twoFunctionRetainedAsSpecialization :
+    HarmonicRouteDecision frozenOutputTwoFunction
+  paraproductPartialAdjointsRetained :
+    HarmonicRouteDecision paraproductPartialAdjoints
 
 rawOrbitRowDecision : HarmonicRouteDecision rawOrbitRow
 rawOrbitRowDecision = rawRowLiteratureBacked
 
-twoFunctionWeightedSchurDecision :
-  HarmonicRouteDecision twoFunctionWeightedSchur
-twoFunctionWeightedSchurDecision = weightedSchurPromoted
+threeFunctionDecision :
+  HarmonicRouteDecision grafakosTorresThreeFunction
+threeFunctionDecision = threeFunctionPromotedAsPrimary
 
-multilinearDualTrilinearDecision :
-  HarmonicRouteDecision multilinearDualTrilinear
-multilinearDualTrilinearDecision = multilinearDualityRetained
+twoFunctionSpecializationDecision :
+  HarmonicRouteDecision frozenOutputTwoFunction
+twoFunctionSpecializationDecision = twoFunctionRetainedAsSpecialization
+
+paraproductPartialAdjointDecision :
+  HarmonicRouteDecision paraproductPartialAdjoints
+paraproductPartialAdjointDecision = paraproductPartialAdjointsRetained
 
 record Stage3DecisionReceipt : Set where
   constructor stage3-decision-receipt
   field
     rawRowSourceAvailable :
       Stage3Schur.kiriukhinRawRowLiteratureBacked ≡ true
+    threeFunctionFrameworkPrimary :
+      Stage3Schur.threeFunctionSchurPrimary ≡ true
+    twoFunctionIsSpecialization :
+      Stage3Schur.twoFunctionSchurIsFrozenOutputSpecialization ≡ true
+    rowOnlyDoesNotDetermineThreeWeights :
+      Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeights ≡ false
+    sourceExponentReceipt :
+      Exponents.GrafakosTorresSourceExponentReceipt
     finiteWeightEvidence : SchurFinite.WeightedSchurFiniteReceipt
 
 open Stage3DecisionReceipt public
@@ -124,6 +143,10 @@ stage3DecisionReceipt : Stage3DecisionReceipt
 stage3DecisionReceipt =
   stage3-decision-receipt
     Stage3Schur.kiriukhinRawRowLiteratureBackedIsTrue
+    Stage3Schur.threeFunctionSchurPrimaryIsTrue
+    Stage3Schur.twoFunctionSchurIsFrozenOutputSpecializationIsTrue
+    Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeightsIsFalse
+    Exponents.grafakosTorresSourceExponentReceipt
     SchurFinite.weightedSchurFiniteReceipt
 
 record DirectionCoherenceResearchCutset
@@ -138,9 +161,20 @@ record DirectionCoherenceResearchCutset
     orbitToDyadicShellBridgeClosed : Set s
     finiteHelicityRowLiftClosed : Set s
     boundedDirectionWeightRowLiftClosed : Set s
-    baselineWeightedColumnClosed : Set s
-    multilinearPartialAdjointsClosed : Set s
-    cutoffUniformDualTrilinearBoundClosed : Set s
+
+    outputRowHomogeneityExtracted : Set s
+    firstPartialAdjointHomogeneityExtracted : Set s
+    secondPartialAdjointHomogeneityExtracted : Set s
+    threeLegAffineExponentSystemSolved : Set s
+    repositorySeparationThresholdDerived : Set s
+
+    grafakosTorresOutputConditionClosed : Set s
+    grafakosTorresFirstAdjointConditionClosed : Set s
+    grafakosTorresSecondAdjointConditionClosed : Set s
+    cutoffUniformThreeFunctionBoundClosed : Set s
+
+    frozenOutputTwoFunctionFallbackClosed : Set s
+    paraproductClasswisePartialAdjointsClosed : Set s
 
     physicalDirectionKernelIdentified : Set s
     triadDirectionKernelIdentified : Set s
