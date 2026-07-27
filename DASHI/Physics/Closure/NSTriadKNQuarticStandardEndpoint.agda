@@ -54,14 +54,26 @@ record QuarticEightStageEndpointInputs
       Global.DivergenceFreeInitialData completion u0 →
       Global.UniformAprioriEstimate completion u0
 
-    compactnessUsesUniformTailAndTimeDerivative : Set
-    nonlinearLimitIdentificationUsesStrongConvergence : Set
-    projectedInitialDataRecovered : Set
-    smoothnessBootstrapAtEveryOrder : Set
-    uniquenessByDifferenceEnergyAndGronwall : Set
-    exactPeriodicEquationMatched : Set
-
 open QuarticEightStageEndpointInputs public
+
+quarticUniformAprioriFor :
+  ∀ {i c t g l s}
+    {InitialData : Set i}
+    {Cutoff : Set c}
+    {Time : Set t}
+    {GalerkinState : Set g}
+    {LimitState : Set l}
+    {Scalar : Set s}
+    (inputs :
+      QuarticEightStageEndpointInputs
+        InitialData Cutoff Time GalerkinState LimitState Scalar)
+    (u0 : InitialData) →
+  Global.AdmissibleInitialData (completion inputs) u0 →
+  Global.SmoothInitialData (completion inputs) u0 →
+  Global.DivergenceFreeInitialData (completion inputs) u0 →
+  Global.UniformAprioriEstimate (completion inputs) u0
+quarticUniformAprioriFor inputs =
+  uniformBKMDischargesContinuation inputs
 
 quarticEightStageInputsImplyClayPeriodic :
   ∀ {i c t g l s}
