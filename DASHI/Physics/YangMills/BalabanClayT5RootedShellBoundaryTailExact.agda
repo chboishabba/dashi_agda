@@ -1,7 +1,9 @@
 module DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational using (ℚ; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
@@ -29,28 +31,31 @@ record RootedShellBoundaryDifferenceData
   field
     shellData : Shell.TraversalShellData Scale Volume Root
 
+    -- One common support envelope is fixed for the finite observable family.
+    -- Consequently the boundary shell index is independent of the selected
+    -- pair inside that family.
     distinguishedRoot : Scale → Volume → Observable → Root
-    boundaryShellIndex : Scale → Volume → Observable → Nat
+    boundaryShellIndex : Scale → Volume → Nat
+    AdmissibleObservable : Observable → Set
 
     finiteExpectation thermodynamicExpectation :
       Scale → Volume → Observable → ℚ
     absoluteDifference : ℚ → ℚ → ℚ
 
-    -- Cluster cancellation leaves only rooted polymers that reach the boundary.
     onlyBoundaryCrossingClustersContribute :
-      ∀ scale volume observable → Set
+      ∀ scale volume observable → AdmissibleObservable observable → Set
 
     boundaryCrossingClusterMinimalDiameter :
-      ∀ scale volume observable → Set
+      ∀ scale volume → Set
 
     expectationDifferenceBelowRootedShell :
-      ∀ scale volume observable →
+      ∀ scale volume observable → AdmissibleObservable observable →
       absoluteDifference
         (finiteExpectation scale volume observable)
         (thermodynamicExpectation scale volume observable)
       ≤ Shell.rootedShell shellData scale volume
           (distinguishedRoot scale volume observable)
-          (boundaryShellIndex scale volume observable)
+          (boundaryShellIndex scale volume)
 
     transitive : ∀ {left middle right : ℚ} →
       left ≤ middle → middle ≤ right → left ≤ right
@@ -61,48 +66,38 @@ boundaryCrossingClusterExponentialBoundFromRootedShell :
   ∀ {Scale Volume Root Observable}
     (dataSet : RootedShellBoundaryDifferenceData Scale Volume Root Observable)
     scale volume observable →
+  AdmissibleObservable dataSet observable →
   absoluteDifference dataSet
     (finiteExpectation dataSet scale volume observable)
     (thermodynamicExpectation dataSet scale volume observable)
-  ≤ Shell.quarter
-      * Shell.halfPower (boundaryShellIndex dataSet scale volume observable)
+  ≤ Shell.quarter * Shell.halfPower (boundaryShellIndex dataSet scale volume)
 boundaryCrossingClusterExponentialBoundFromRootedShell
-  dataSet scale volume observable =
+  dataSet scale volume observable admissible =
   transitive dataSet
-    (expectationDifferenceBelowRootedShell dataSet scale volume observable)
+    (expectationDifferenceBelowRootedShell
+      dataSet scale volume observable admissible)
     (Shell.rootedShellBelowQuarterHalfPower
       (shellData dataSet) scale volume
       (distinguishedRoot dataSet scale volume observable)
-      (boundaryShellIndex dataSet scale volume observable))
-
-------------------------------------------------------------------------
--- The tail index must escape every fixed shell as the finite boundary recedes.
--- Vanishing of halfPower is already isolated by the repository's geometric
--- power package; this record only couples that fact to physical volumes.
-------------------------------------------------------------------------
+      (boundaryShellIndex dataSet scale volume))
 
 record BoundaryDistanceEscapes
-    (Scale Volume Observable : Set)
-    (boundaryIndex : Scale → Volume → Observable → Nat) : Set₁ where
+    (Scale Volume : Set)
+    (boundaryIndex : Scale → Volume → Nat) : Set₁ where
   field
-    VolumeEventually : Volume → Set
-    indexEventuallyBeyond : ∀ scale observable depth →
-      Set
-
+    indexEventuallyBeyond : ∀ scale depth → Set
     halfPowerVanishes : Set
 
 open BoundaryDistanceEscapes public
 
 finiteVolumePairTailVanishesFromEscapingBoundary :
-  ∀ {Scale Volume Observable}
-    {boundaryIndex : Scale → Volume → Observable → Nat} →
-  BoundaryDistanceEscapes Scale Volume Observable boundaryIndex →
-  Set
-finiteVolumePairTailVanishesFromEscapingBoundary dataSet =
-  halfPowerVanishes dataSet
+  ∀ {Scale Volume}
+    {boundaryIndex : Scale → Volume → Nat} →
+  BoundaryDistanceEscapes Scale Volume boundaryIndex → Set
+finiteVolumePairTailVanishesFromEscapingBoundary = halfPowerVanishes
 
 ------------------------------------------------------------------------
--- Direct adapter to the configured T5 tail carrier with Scalar = ℚ.
+-- Direct postulate-free adapter to the configured T5 tail carrier.
 ------------------------------------------------------------------------
 
 record RootedShellConfiguredBoundaryAdapter
@@ -110,15 +105,15 @@ record RootedShellConfiguredBoundaryAdapter
   field
     rootedData : RootedShellBoundaryDifferenceData Scale Volume Root Observable
     distanceEscapes : BoundaryDistanceEscapes
-      Scale Volume Observable (boundaryShellIndex rootedData)
+      Scale Volume (boundaryShellIndex rootedData)
 
     reflectedProduct : Observable → Observable → Observable
+    reflectedProductAdmissible : ∀ left right →
+      AdmissibleObservable rootedData (reflectedProduct left right)
 
     distance : ℚ → ℚ → ℚ
     distanceMatchesAbsoluteDifference : ∀ left right →
       distance left right ≡ absoluteDifference rootedData left right
-
-    lessEqualRefl : ∀ value → value ≤ value
 
 open RootedShellConfiguredBoundaryAdapter public
 
@@ -136,24 +131,20 @@ asConfiguredBoundaryClusterTail dataSet = record
       thermodynamicExpectation (rootedData dataSet)
   ; Tail.ConfiguredBoundaryClusterTail.reflectedProduct = reflectedProduct dataSet
   ; Tail.ConfiguredBoundaryClusterTail.boundaryShellIndex =
-      λ scale volume →
-        boundaryShellIndex (rootedData dataSet) scale volume
-          (reflectedProduct dataSet witnessLeft witnessRight)
+      boundaryShellIndex (rootedData dataSet)
   ; Tail.ConfiguredBoundaryClusterTail.onlyBoundaryCrossingClustersContribute =
       λ scale volume left right →
         onlyBoundaryCrossingClustersContribute (rootedData dataSet)
           scale volume (reflectedProduct dataSet left right)
+          (reflectedProductAdmissible dataSet left right)
   ; Tail.ConfiguredBoundaryClusterTail.boundaryCrossingClusterMinimalDiameter =
-      λ scale volume →
-        boundaryCrossingClusterMinimalDiameter (rootedData dataSet)
-          scale volume (reflectedProduct dataSet witnessLeft witnessRight)
+      boundaryCrossingClusterMinimalDiameter (rootedData dataSet)
   ; Tail.ConfiguredBoundaryClusterTail.boundaryCrossingClusterExponentialBound =
       λ scale volume left right →
-        Relation.Binary.PropositionalEquality.subst
+        subst
           (λ lower → lower
             ≤ Tail.rootedShellTail
-                (boundaryShellIndex (rootedData dataSet)
-                  scale volume (reflectedProduct dataSet left right)))
+                (boundaryShellIndex (rootedData dataSet) scale volume))
           (distanceMatchesAbsoluteDifference dataSet
             (finiteExpectation (rootedData dataSet)
               scale volume (reflectedProduct dataSet left right))
@@ -161,22 +152,13 @@ asConfiguredBoundaryClusterTail dataSet = record
               scale volume (reflectedProduct dataSet left right)))
           (boundaryCrossingClusterExponentialBoundFromRootedShell
             (rootedData dataSet) scale volume
-            (reflectedProduct dataSet left right))
+            (reflectedProduct dataSet left right)
+            (reflectedProductAdmissible dataSet left right))
   ; Tail.ConfiguredBoundaryClusterTail.boundaryShellIndexEscapes =
-      λ scale → indexEventuallyBeyond (distanceEscapes dataSet) scale witnessObservable zero
+      λ scale → indexEventuallyBeyond (distanceEscapes dataSet) scale
   ; Tail.ConfiguredBoundaryClusterTail.geometricTailVanishes =
       halfPowerVanishes (distanceEscapes dataSet)
   }
-  where
-  open import Agda.Builtin.Equality using (_≡_)
-  open import Agda.Builtin.Nat using (zero)
-  open import Relation.Binary.PropositionalEquality
-
-  -- These witnesses are used only to select the boundary index in fields whose
-  -- legacy T5 shape does not expose the test observable.  Physical instances
-  -- should choose the common support envelope of the finite test family.
-  postulate
-    witnessLeft witnessRight witnessObservable : Observable
 
 rootedShellToBoundaryTailReductionLevel : ProofLevel
 rootedShellToBoundaryTailReductionLevel = machineChecked
