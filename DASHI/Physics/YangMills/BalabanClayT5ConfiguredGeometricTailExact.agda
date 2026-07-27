@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
+import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -43,12 +44,7 @@ powHalfStepExact n = refl
 
 rootedShellTailStepExact : ∀ n →
   rootedShellTail (suc n) ≡ halfℚ * rootedShellTail n
-rootedShellTailStepExact n =
-  Relation.Binary.PropositionalEquality.sym
-    (Data.Rational.Tactic.RingSolver.solve-∀ (powHalf n))
-  where
-  import Data.Rational.Tactic.RingSolver
-  open import Relation.Binary.PropositionalEquality
+rootedShellTailStepExact n = ℚRing.solve-∀ (powHalf n)
 
 ------------------------------------------------------------------------
 -- Physical cluster-tail instance.  Once the boundary-crossing diameter theorem
