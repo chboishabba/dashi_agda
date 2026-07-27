@@ -18,16 +18,22 @@ module DASHI.Physics.Closure.NSTriadKNStage3HermitianConvolutionIntegration wher
 -- Uses: concrete conjugation and Hermitian symmetry, transverse Leray fixed
 -- points, six-probe nondegeneracy, uniqueness reduction, the direct
 -- low-output convolution mechanism, the Cheskidov--Eguchi transfer audit,
--- and Kato--Ponce as a fallback only.
+-- Kato--Ponce as a fallback only, and role-specific balanced/unbalanced
+-- ternary plus six/nonary Stage-3 status coordinates.
 -- Relationship: advances the bounded algebraic and discrete-convolution
 -- cutsets without claiming complex associativity/scale laws, Leray
 -- self-adjointness, literal vector pairing identities, the cutoff-uniform
--- first-adjoint theorem, or the final Grafakos--Torres bound.
+-- first-adjoint theorem, or the final Grafakos--Torres bound.  The six/nonary
+-- encodings are role-specific coordinates, not global product operations on
+-- Base369's cyclic C6 or C9 carriers.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Algebra.Trit as Balanced
+import Base369 as Base
+import DASHI.Physics.Closure.NSTriadKNStage3Ternary369Ledger as Ternary369
 import DASHI.Physics.Closure.NSTriadKNStage3TernaryAntisymmetryIntegration as Prior
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 import DASHI.Physics.Closure.NSTriadKNLerayAlgebraProgram as Leray
@@ -38,6 +44,62 @@ import DASHI.Physics.Closure.NSTriadKNFirstAdjointShellConvolutionProgram as Con
 import DASHI.Physics.Closure.NSTriadKNKatoPonceFirstAdjointFallback as KatoPonce
 import DASHI.Physics.Closure.NSTriadKNFirstAdjointSobolevTailLedger as Tail
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3
+
+hermitianSymmetryCoordinate : Ternary369.Stage3NonaryCoordinate
+hermitianSymmetryCoordinate =
+  Ternary369.nonary-coordinate Balanced.pos Base.tri-high
+
+nondegeneracyCoordinate : Ternary369.Stage3NonaryCoordinate
+nondegeneracyCoordinate =
+  Ternary369.nonary-coordinate Balanced.pos Base.tri-high
+
+uniquenessReductionCoordinate : Ternary369.Stage3NonaryCoordinate
+uniquenessReductionCoordinate =
+  Ternary369.nonary-coordinate Balanced.pos Base.tri-high
+
+literalPairingIdentityCoordinate : Ternary369.Stage3NonaryCoordinate
+literalPairingIdentityCoordinate =
+  Ternary369.nonary-coordinate Balanced.zer Base.tri-low
+
+directConvolutionCoordinate : Ternary369.Stage3NonaryCoordinate
+directConvolutionCoordinate =
+  Ternary369.nonary-coordinate Balanced.pos Base.tri-mid
+
+katoPonceFallbackCoordinate : Ternary369.Stage3NonaryCoordinate
+katoPonceFallbackCoordinate =
+  Ternary369.nonary-coordinate Balanced.zer Base.tri-mid
+
+hermitianSymmetrySix : Ternary369.Stage3SixCoordinate
+hermitianSymmetrySix = Ternary369.six-coordinate Balanced.pos true
+
+directConvolutionSix : Ternary369.Stage3SixCoordinate
+directConvolutionSix = Ternary369.six-coordinate Balanced.pos false
+
+record Stage3HermitianConvolution369Receipt : Set where
+  constructor status-receipt
+  field
+    HermitianSymmetryIsFavourableClosed :
+      Ternary369.encodeNonary hermitianSymmetryCoordinate ≡ Base.non-8
+    nondegeneracyIsFavourableClosed :
+      Ternary369.encodeNonary nondegeneracyCoordinate ≡ Base.non-8
+    uniquenessReductionIsFavourableClosed :
+      Ternary369.encodeNonary uniquenessReductionCoordinate ≡ Base.non-8
+    literalPairingIdentityIsNeutralMissing :
+      Ternary369.encodeNonary literalPairingIdentityCoordinate ≡ Base.non-3
+    directConvolutionIsFavourableAudited :
+      Ternary369.encodeNonary directConvolutionCoordinate ≡ Base.non-7
+    katoPonceFallbackIsNeutralAudited :
+      Ternary369.encodeNonary katoPonceFallbackCoordinate ≡ Base.non-4
+    HermitianSixIsFavourableClosed :
+      Ternary369.encodeSix hermitianSymmetrySix ≡ Base.hex-5
+    directConvolutionSixIsFavourableOpen :
+      Ternary369.encodeSix directConvolutionSix ≡ Base.hex-4
+
+open Stage3HermitianConvolution369Receipt public
+
+stage3HermitianConvolution369Receipt : Stage3HermitianConvolution369Receipt
+stage3HermitianConvolution369Receipt =
+  status-receipt refl refl refl refl refl refl refl refl
 
 record Stage3HermitianConvolutionReceipt : Set where
   constructor receipt
