@@ -38,6 +38,15 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNAdaptiveQuarticCoherenceCharts.agda",
     "DASHI/Physics/Closure/NSTriadKNPeriodicStokesModeDegeneracy.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovCriticalProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticAnalyticFiniteSums.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLiteralGalerkinDerivative.agda",
+    "DASHI/Physics/Closure/NSTriadKNPeriodicUniformHarmonicAnalysis.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticSignedNearFarDecomposition.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticJointDominationFrontier.agda",
+    "DASHI/Physics/Closure/NSTriadKNAdaptiveQuarticInvariantRegion.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticBKMExpenditure.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticStandardEndpoint.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovEightStageProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedUniformGapProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNArbitraryDataAprioriProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedGapAprioriComposition.agda",
@@ -46,11 +55,35 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNPhysicalTriadFrontierProgram.agda",
 ]
 
+PROVENANCE_FILES = [
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovDegreeAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovEulerInvariantDecomposition.agda",
+    "DASHI/Physics/Closure/NSTriadKNAdaptiveQuarticCoherenceCharts.agda",
+    "DASHI/Physics/Closure/NSTriadKNPeriodicStokesModeDegeneracy.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovCriticalProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticAnalyticFiniteSums.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLiteralGalerkinDerivative.agda",
+    "DASHI/Physics/Closure/NSTriadKNPeriodicUniformHarmonicAnalysis.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticSignedNearFarDecomposition.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticJointDominationFrontier.agda",
+    "DASHI/Physics/Closure/NSTriadKNAdaptiveQuarticInvariantRegion.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticBKMExpenditure.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticStandardEndpoint.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovEightStageProgram.agda",
+]
+
 LITERAL_MARKERS = (
     "{!!}",
     "?}",
     "{-# TERMINATING #-}",
     "{-# NON_TERMINATING #-}",
+)
+
+PROVENANCE_MARKERS = (
+    "-- PROVENANCE",
+    "-- Title:",
+    "-- Venue/year:",
+    "-- Relationship:",
 )
 
 POSTULATE_DECLARATION = re.compile(r"(?m)^\s*postulate(?:\s|$)")
@@ -79,12 +112,30 @@ def main() -> int:
         if text.count("{") != text.count("}"):
             failures.append(f"{relative}: unbalanced braces")
 
+    for relative in PROVENANCE_FILES:
+        path = root / relative
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for marker in PROVENANCE_MARKERS:
+            if marker not in text:
+                failures.append(
+                    f"{relative}: missing provenance marker {marker!r}"
+                )
+        if "-- Authors:" not in text and "-- Author:" not in text:
+            failures.append(f"{relative}: missing provenance author")
+        if "-- DOI:" not in text and "-- Journal DOI:" not in text:
+            failures.append(f"{relative}: missing DOI status")
+
     if failures:
         for failure in failures:
             print(failure)
         return 1
 
-    print(f"checked {len(FILES)} Clay-facing Stage-3 files: no holes or postulates")
+    print(
+        f"checked {len(FILES)} Clay-facing Stage-3 files and "
+        f"{len(PROVENANCE_FILES)} provenance headers: no holes or postulates"
+    )
     return 0
 
 
