@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopCoefficientClosureExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4LiteralVacuumPolarizationIntegralExact as VP
 
@@ -119,8 +121,6 @@ vacuumPolarizationPlaquetteCoefficientExactLiteral :
   ≡ VP.coefficient (VP.oneLoopIntegral (coefficientData dataSet)) scale
 vacuumPolarizationPlaquetteCoefficientExactLiteral dataSet =
   VP.vacuumPolarizationPlaquetteCoefficientExact (coefficientData dataSet)
-  where
-  open import Agda.Builtin.Equality using (_≡_)
 
 physicalRunningCouplingRecursionLiteral :
   ∀ {Background Fluctuation Operator Vertex Momentum Lorentz Color Kernel
@@ -136,8 +136,6 @@ physicalRunningCouplingRecursionLiteral dataSet scale =
       (VP.addScalar (coefficientData dataSet)
         (VP.coefficient (VP.oneLoopIntegral (coefficientData dataSet)) scale)
         (VP.quarticRemainder (coefficientData dataSet) scale))
-  where
-  open import Agda.Builtin.Equality using (_≡_)
 
 physicalRunningCouplingRecursionLiteralProof dataSet =
   VP.physicalRunningCouplingRecursion (coefficientData dataSet)
