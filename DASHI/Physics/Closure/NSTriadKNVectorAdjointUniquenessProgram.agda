@@ -55,21 +55,56 @@ record ConcreteAdjointPairingIdentityCutset
     firstAdjointFunctional : RealPairingFunctional F
     secondAdjointFunctional : RealPairingFunctional F
 
+    firstCandidate : C3.Complex3 F
+    secondCandidate : C3.Complex3 F
+
     firstCandidatePairingIdentity :
-      ∀ candidateTest →
-      realHermitianFunctionalValue candidateTest candidateTest
-      ≡ firstAdjointFunctional candidateTest
+      ∀ test →
+      realHermitianFunctionalValue test firstCandidate
+      ≡ firstAdjointFunctional test
 
     secondCandidatePairingIdentity :
-      ∀ candidateTest →
-      realHermitianFunctionalValue candidateTest candidateTest
-      ≡ secondAdjointFunctional candidateTest
+      ∀ test →
+      realHermitianFunctionalValue test secondCandidate
+      ≡ secondAdjointFunctional test
 
     literalFirstAdjointPairingTheorem : Set r
     literalSecondAdjointPairingTheorem : Set r
     orderedPairFirstAdjointPairingTheorem : Set r
 
 open ConcreteAdjointPairingIdentityCutset public
+
+firstRepresentativeUnique :
+  ∀ {r} {F : C3.RealField r}
+    (C : ConcreteAdjointPairingIdentityCutset F)
+    (other : C3.Complex3 F) →
+  (∀ test →
+    realHermitianFunctionalValue test other
+    ≡ firstAdjointFunctional C test) →
+  other ≡ firstCandidate C
+firstRepresentativeUnique C other otherRep =
+  representativeUniqueFromSharedFunctional
+    (firstAdjointFunctional C)
+    other
+    (firstCandidate C)
+    otherRep
+    (firstCandidatePairingIdentity C)
+
+secondRepresentativeUnique :
+  ∀ {r} {F : C3.RealField r}
+    (C : ConcreteAdjointPairingIdentityCutset F)
+    (other : C3.Complex3 F) →
+  (∀ test →
+    realHermitianFunctionalValue test other
+    ≡ secondAdjointFunctional C test) →
+  other ≡ secondCandidate C
+secondRepresentativeUnique C other otherRep =
+  representativeUniqueFromSharedFunctional
+    (secondAdjointFunctional C)
+    other
+    (secondCandidate C)
+    otherRep
+    (secondCandidatePairingIdentity C)
 
 realHermitianNondegeneracyNoLongerBlocksUniqueness : Bool
 realHermitianNondegeneracyNoLongerBlocksUniqueness = true
