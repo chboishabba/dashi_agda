@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 FILES = [
     ROOT / "DASHI/Foundations/RepresentationChartInvariant.agda",
+    ROOT / "DASHI/Foundations/CanonicalHalfFrameScaleValuation.agda",
     ROOT / "DASHI/Foundations/RecursiveRadixHypervoxel.agda",
     ROOT / "DASHI/Foundations/LiftPolarityPathComposition.agda",
     ROOT / "DASHI/Foundations/RadixValuationStageBridge.agda",
@@ -35,6 +36,8 @@ REQUIRED_TOKENS = {
         "threeSixIsOneHalf",
         "binaryPointOneIsOneHalf",
         "presentationPreservesHalf",
+        "FramedScaleValuationObject",
+        "inspectRepresentation",
         "threeSixIsSecondHarmonic",
         "refineRatioPreserves",
         "threefoldHalfRefinement",
@@ -42,6 +45,13 @@ REQUIRED_TOKENS = {
         "zeroRefinementFactorAccepted = false",
         "FramedAtlas",
         "ContextualThreeSixNineObservation",
+    ],
+    "CanonicalHalfFrameScaleValuation.agda": [
+        "canonicalHalfFrameScaleValuation",
+        "canonicalInspectionValue",
+        "canonicalInspectionChart",
+        "canonicalInspectionScale",
+        "canonicalInspectionValuation",
     ],
     "RecursiveRadixHypervoxel.agda": [
         "TernaryAddress",
@@ -65,6 +75,9 @@ REQUIRED_TOKENS = {
         "radixPositive",
         "decimalBinaryHalfEquivalent",
         "RadixOriginPrefix",
+        "RadixHyperAddress",
+        "radixHyperCoarsenAfterRefine",
+        "radixHyperSiteCount",
         "canonicalDecimalCarryGrammar",
         "stage1NotStage10",
         "stage1ToStage10UnitLift",
@@ -98,6 +111,8 @@ REQUIRED_TOKENS = {
     ],
     "RepresentationHypervoxelRegression.agda": [
         "canonicalRepresentationHypervoxelRegression",
+        "unifiedFrameScaleValuationCarrier",
+        "binaryRank3Depth1CountIs8",
         "pathPolarityFactorisation",
         "prefixUltrametricReceipt",
         "liftProjectionLaw",
@@ -127,13 +142,14 @@ def check_exact_arithmetic() -> None:
     hierarchy = [3, 3 * 2, 3**2, 2 * 3**2, 3**3, 2 * 3**3, 3**4, 2 * 3**4]
     assert hierarchy == [3, 6, 9, 18, 27, 54, 81, 162]
 
-    def site_count(rank: int, depth: int) -> int:
-        return 3 ** (rank * depth)
+    def site_count(base: int, rank: int, depth: int) -> int:
+        return base ** (rank * depth)
 
-    assert site_count(1, 1) == 3
-    assert site_count(2, 1) == 9
-    assert site_count(3, 1) == 27
-    assert site_count(3, 2) == 729
+    assert site_count(3, 1, 1) == 3
+    assert site_count(3, 2, 1) == 9
+    assert site_count(3, 3, 1) == 27
+    assert site_count(3, 3, 2) == 729
+    assert site_count(2, 3, 1) == 8
 
     def tower3(height: int) -> int:
         value = 1
@@ -178,7 +194,8 @@ def main() -> int:
     check_exact_arithmetic()
     scan_sources()
     print("PASS: positive-denominator ratio, harmonic and radix presentations preserve 1/2 exactly")
-    print("PASS: 3/6/9 lifted hierarchy and rank/depth counts are exact")
+    print("PASS: unified value/chart/scale/valuation carrier is present")
+    print("PASS: generic p/rank/depth and 3/6/9 lifted hierarchy counts are exact")
     print("PASS: centre-blind descent and two-sheet fibres are proof-carrying")
     print("PASS: lift path prefix/suffix parity composes exactly")
     print("PASS: carry grammar 9 -> 10 -> 11 is exact and stage roles remain distinct")
