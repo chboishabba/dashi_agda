@@ -4,9 +4,9 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanClayT3LiteralBackgroundHessianRemaindersExact as Remainder
 
 ------------------------------------------------------------------------
 -- Literature normalization.
@@ -93,9 +93,6 @@ bondComponentsPerBoolean4Block = fourN
 
 ------------------------------------------------------------------------
 -- Physical domination record.
---
--- This is not a free choice of constants: an instance must prove every actual
--- background-Hessian remainder lies below the corresponding configured budget.
 ------------------------------------------------------------------------
 
 record ConfiguredFiveRemainderDomination
@@ -147,7 +144,16 @@ record ConfiguredFiveRemainderDomination
         + constraintRemainder background state)))
 
     addMonotone : ∀ {a b c d : ℚ} → a ≤ b → c ≤ d → a + c ≤ b + d
-    multiplyAssociate : ∀ a b c → (a * b) * c ≡ a * (b * c)
+
+    -- The nested sum of the five allocated upper bounds is normalized once,
+    -- rather than relying on implicit semiring reassociation.
+    configuredUpperSumExact : ∀ background state →
+      configuredCurvatureCoefficient * radius background state * normSq background state
+      + (configuredTransportCoefficient * radius background state * normSq background state
+      + (configuredChartCoefficient * radius background state * normSq background state
+      + (configuredGaugeCoefficient * radius background state * normSq background state
+      + configuredConstraintCoefficient * radius background state * normSq background state)))
+      ≡ configuredTotalCoefficient * radius background state * normSq background state
 
 open ConfiguredFiveRemainderDomination public
 
@@ -161,23 +167,37 @@ configuredFiveRemainderSumBound :
       * radius dataSet background state
       * normSq dataSet background state
 configuredFiveRemainderSumBound dataSet background state inRadius =
-  Remainder.subst
-    (λ value → value
-      ≤ configuredTotalCoefficient
-        * radius dataSet background state
-        * normSq dataSet background state)
-    (totalRemainderDefinition dataSet background state)
-    (addMonotone dataSet
-      (curvatureDominated dataSet background state inRadius)
+  subst
+    (λ value →
+      totalRemainder dataSet background state ≤ value)
+    (configuredUpperSumExact dataSet background state)
+    (subst
+      (λ value → value
+        ≤ configuredCurvatureCoefficient
+            * radius dataSet background state
+            * normSq dataSet background state
+          + (configuredTransportCoefficient
+              * radius dataSet background state
+              * normSq dataSet background state
+          + (configuredChartCoefficient
+              * radius dataSet background state
+              * normSq dataSet background state
+          + (configuredGaugeCoefficient
+              * radius dataSet background state
+              * normSq dataSet background state
+          + configuredConstraintCoefficient
+              * radius dataSet background state
+              * normSq dataSet background state))))
+      (totalRemainderDefinition dataSet background state)
       (addMonotone dataSet
-        (transportDominated dataSet background state inRadius)
+        (curvatureDominated dataSet background state inRadius)
         (addMonotone dataSet
-          (chartDominated dataSet background state inRadius)
+          (transportDominated dataSet background state inRadius)
           (addMonotone dataSet
-            (gaugeDominated dataSet background state inRadius)
-            (constraintDominated dataSet background state inRadius)))))
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
+            (chartDominated dataSet background state inRadius)
+            (addMonotone dataSet
+              (gaugeDominated dataSet background state inRadius)
+              (constraintDominated dataSet background state inRadius))))))
 
 configuredIncidenceDataLevel : ProofLevel
 configuredIncidenceDataLevel = machineChecked
