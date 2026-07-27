@@ -18,16 +18,21 @@ record RadixChart : Set where
   constructor radix-chart
   field
     radix : Nat
+    radixPositive : Representation.Positive radix
     scaleOrigin : Nat
     displayLabel : String
 
 open RadixChart public
 
 decimalChart : RadixChart
-decimalChart = radix-chart 10 0 "base-10 display with the radix point at exponent zero"
+decimalChart =
+  radix-chart 10 Representation.positive 0
+    "base-10 display with the radix point at exponent zero"
 
 binaryChart : RadixChart
-binaryChart = radix-chart 2 0 "base-2 display with the radix point at exponent zero"
+binaryChart =
+  radix-chart 2 Representation.positive 0
+    "base-2 display with the radix point at exponent zero"
 
 record PositionalReading : Set where
   field
@@ -35,14 +40,20 @@ record PositionalReading : Set where
     chart : RadixChart
     evaluationLabel : String
 
-onePlaceFraction : Nat → Nat → Representation.RatioRepresentation
-onePlaceFraction base digit = Representation.ratio digit base
+onePlaceFraction :
+  (base digit : Nat) →
+  Representation.Positive base →
+  Representation.RatioRepresentation
+onePlaceFraction base digit basePositive =
+  Representation.ratio digit base basePositive
 
 decimalPointFiveReading : Representation.RatioRepresentation
-decimalPointFiveReading = onePlaceFraction 10 5
+decimalPointFiveReading =
+  onePlaceFraction 10 5 Representation.positive
 
 binaryPointOneReading : Representation.RatioRepresentation
-binaryPointOneReading = onePlaceFraction 2 1
+binaryPointOneReading =
+  onePlaceFraction 2 1 Representation.positive
 
 decimalPointFiveIsHalf :
   Representation.RatioEquivalent
@@ -289,6 +300,7 @@ record RadixStageAuthorityBoundary : Set where
     stage11IsOnlyArithmeticSuccessorClaimed : Bool
     everyPrimeLaneIsTernaryClaimed : Bool
     radixAndScaleOriginAreExplicit : Bool
+    zeroRadixConstructible : Bool
 
 canonicalRadixStageAuthorityBoundary : RadixStageAuthorityBoundary
 canonicalRadixStageAuthorityBoundary = record
@@ -298,8 +310,9 @@ canonicalRadixStageAuthorityBoundary = record
   ; stage11IsOnlyArithmeticSuccessorClaimed = false
   ; everyPrimeLaneIsTernaryClaimed = false
   ; radixAndScaleOriginAreExplicit = true
+  ; zeroRadixConstructible = false
   }
 
 radixStageSummary : String
 radixStageSummary =
-  "Place value is a coarse/fine geometry: the radix gives weights, the point gives the scale origin, p-adic proximity follows origin-prefix agreement, and Stage 1/10/11 record unit, carry and carry-plus-local-unit roles without arithmetic collapse."
+  "Place value is a positive-radix coarse/fine geometry: the radix gives weights, the point gives the scale origin, p-adic proximity follows origin-prefix agreement, and Stage 1/10/11 record unit, carry and carry-plus-local-unit roles without arithmetic collapse."
