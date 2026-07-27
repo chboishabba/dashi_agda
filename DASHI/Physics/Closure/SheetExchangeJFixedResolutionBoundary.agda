@@ -7,7 +7,7 @@ import JFixedPoint as J
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as SU2SO3
 
 ------------------------------------------------------------------------
--- Fixed-point-free sheet exchange is a transition carrier.  A separate
+-- Fixed-point-free sheet exchange is a transition carrier. A separate
 -- quotient/coarse-graining map may land on the named J scalar, but this does
 -- not prove attraction, convergence, damping or universal Stage semantics.
 ------------------------------------------------------------------------
@@ -21,6 +21,15 @@ resolveCentralFlipInvariant :
   resolveAxisLiftToJScalar (SU2SO3.flipAxisLift lifted)
   ≡ resolveAxisLiftToJScalar lifted
 resolveCentralFlipInvariant lifted = refl
+
+resolveCoverCentralFlipInvariant :
+  ∀ lifted →
+  resolveAxisLiftToJScalar
+    (SU2SO3.TwoSheetedCoverInterface.centralFlip
+      SU2SO3.finiteAxisLiftDoubleCover
+      lifted)
+  ≡ resolveAxisLiftToJScalar lifted
+resolveCoverCentralFlipInvariant lifted = refl
 
 resolveAxisLiftIs196884 :
   ∀ lifted →
@@ -42,7 +51,9 @@ record SheetExchangeResolutionBoundary : Set₁ where
     resolve : SU2SO3.AxisLift → Nat
     resolutionFlipInvariant :
       ∀ lifted →
-      resolve (SU2SO3.flipAxisLift lifted) ≡ resolve lifted
+      resolve
+        (SU2SO3.TwoSheetedCoverInterface.centralFlip cover lifted)
+      ≡ resolve lifted
     namedTarget : Nat
     targetIsJCoefficient : namedTarget ≡ 196884
     everyCanonicalLiftResolvesToTarget :
@@ -61,7 +72,7 @@ canonicalSheetExchangeResolutionBoundary :
 canonicalSheetExchangeResolutionBoundary = record
   { cover = SU2SO3.finiteAxisLiftDoubleCover
   ; resolve = resolveAxisLiftToJScalar
-  ; resolutionFlipInvariant = resolveCentralFlipInvariant
+  ; resolutionFlipInvariant = resolveCoverCentralFlipInvariant
   ; namedTarget = 196884
   ; targetIsJCoefficient = refl
   ; everyCanonicalLiftResolvesToTarget = resolveAxisLiftIs196884
