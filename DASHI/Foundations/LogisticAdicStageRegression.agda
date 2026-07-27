@@ -8,6 +8,7 @@ import DASHI.Core.ControlCardCore as Control
 import DASHI.Core.FramedORCSLPGFAdapter as Governance
 import DASHI.Dynamics.LogisticAdicStageCommutingSpine as Logistic
 import DASHI.Foundations.CompositeRadixPrimeLaneBridge as Composite
+import DASHI.Foundations.FamilyDecimalMonsterCrossPollination as Cross
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Foundations.StageValuationBundleAtlas as Stage
 import DASHI.Physics.Closure.SheetExchangeJFixedResolutionBoundary as Sheet
@@ -119,10 +120,27 @@ record LogisticAdicStageRegression : Set₁ where
     stageBoundary :
       Stage.StageValuationAuthorityBoundary
 
+    familySupportFibre :
+      Cross.ThreeRoleSupportFibre
+    oneThirdRoleWeight :
+      Cross.OneThirdRoleWeight
+    decimal357Address :
+      Cross.Decimal357Address
+    decimal357Cylinder :
+      Cross.SymbolicCylinderAddress
+    monsterRepresentationSeparation :
+      Cross.MonsterRepresentationSeparationReceipt
+    crossPollinationBoundary :
+      Cross.FamilyDecimalMonsterAuthorityBoundary
+
+    governanceAdapter :
+      Governance.FramedORCSLPGFAdapter
     governanceRow :
       Control.ControlCardRow
     governanceRowReceipt :
       Control.ControlCardRowReceipt governanceRow
+    monsterCarrierAdmission :
+      Governance.MonsterCarrierAdmission
     governanceBoundary :
       Governance.FramedORCSLPGFAuthorityBoundary
 
@@ -186,10 +204,26 @@ canonicalLogisticAdicStageRegression = record
       Stage.canonicalTransformativeJump3To14
   ; stageBoundary =
       Stage.canonicalStageValuationAuthorityBoundary
+  ; familySupportFibre =
+      Cross.canonicalTwoParentOneChildSupportFibre
+  ; oneThirdRoleWeight =
+      Cross.canonicalOneThirdRoleWeight
+  ; decimal357Address =
+      Cross.canonicalDecimal357Address
+  ; decimal357Cylinder =
+      Cross.canonical357SymbolicCylinder
+  ; monsterRepresentationSeparation =
+      Cross.canonicalMonsterRepresentationSeparationReceipt
+  ; crossPollinationBoundary =
+      Cross.canonicalFamilyDecimalMonsterAuthorityBoundary
+  ; governanceAdapter =
+      Governance.canonicalFramedORCSLPGFAdapter
   ; governanceRow =
       Governance.framedDynamicRow
   ; governanceRowReceipt =
       Governance.framedDynamicRowReceipt
+  ; monsterCarrierAdmission =
+      Governance.canonicalMonsterCarrierAdmissionCandidate
   ; governanceBoundary =
       Governance.canonicalFramedORCSLPGFAuthorityBoundary
   ; sheetResolution =
