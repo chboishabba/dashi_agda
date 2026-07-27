@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT2ClusterCriterionComparisonExact wher
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -148,7 +148,7 @@ fernandezProcacciImpliesExtendedGruberKunz dataSet identification fp polymer =
     (λ selectedMajorant →
       activity dataSet polymer * selectedMajorant
       ≤ budget dataSet polymer)
-    (extendedGKMatchesFernandezProcacci identification polymer)
+    (sym (extendedGKMatchesFernandezProcacci identification polymer))
     (fp polymer)
 
 record FurtherCriterionRefinement
