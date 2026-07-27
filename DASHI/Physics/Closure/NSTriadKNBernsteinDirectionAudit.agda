@@ -26,7 +26,6 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-import Data.Integer.Base as Int
 
 data FrequencySupport : Set where
   annularSupport lowPassSupport highPassSupport : FrequencySupport
@@ -37,7 +36,8 @@ data PowerDirection : Set where
 record RationalPower : Set where
   constructor power
   field
-    numerator : Int.ℤ
+    direction : PowerDirection
+    numeratorMagnitude : Nat
     denominator : Nat
 
 open RationalPower public
@@ -48,14 +48,9 @@ representativeSobolevDenominator = 3
 
 annularDerivativePower lowPassDerivativePower highPassTailPower :
   RationalPower
-annularDerivativePower = power (Int.+ 8) 3
-lowPassDerivativePower = power (Int.+ 8) 3
-highPassTailPower = power (Int.-[1+ 7 ]) 3
-
-annularDirection lowPassDirection highPassDirection : PowerDirection
-annularDirection = positiveDerivativeCost
-lowPassDirection = positiveDerivativeCost
-highPassDirection = negativeTailDecay
+annularDerivativePower = power positiveDerivativeCost 8 3
+lowPassDerivativePower = power positiveDerivativeCost 8 3
+highPassTailPower = power negativeTailDecay 8 3
 
 record BernsteinDirectionReceipt : Set where
   constructor receipt
@@ -64,18 +59,18 @@ record BernsteinDirectionReceipt : Set where
       representativeSobolevNumerator ≡ 8
     representativeDenominatorIsThree :
       representativeSobolevDenominator ≡ 3
-    annularNumeratorPositiveEight :
-      numerator annularDerivativePower ≡ Int.+ 8
-    lowPassNumeratorPositiveEight :
-      numerator lowPassDerivativePower ≡ Int.+ 8
-    highPassNumeratorNegativeEight :
-      numerator highPassTailPower ≡ Int.-[1+ 7 ]
+    annularMagnitudeIsEight :
+      numeratorMagnitude annularDerivativePower ≡ 8
+    lowPassMagnitudeIsEight :
+      numeratorMagnitude lowPassDerivativePower ≡ 8
+    highPassMagnitudeIsEight :
+      numeratorMagnitude highPassTailPower ≡ 8
     annularCostsDerivatives :
-      annularDirection ≡ positiveDerivativeCost
+      direction annularDerivativePower ≡ positiveDerivativeCost
     lowPassCostsDerivatives :
-      lowPassDirection ≡ positiveDerivativeCost
+      direction lowPassDerivativePower ≡ positiveDerivativeCost
     highPassSuppliesTailDecay :
-      highPassDirection ≡ negativeTailDecay
+      direction highPassTailPower ≡ negativeTailDecay
 
 open BernsteinDirectionReceipt public
 
