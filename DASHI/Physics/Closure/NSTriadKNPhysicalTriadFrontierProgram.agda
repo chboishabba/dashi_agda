@@ -116,4 +116,4 @@ open import DASHI.Physics.Closure.NSTriadKNGalerkinGlobalRegularityCompletion pu
 open import DASHI.Physics.Closure.NSTriadKNGalerkinCompletionEndpoint public
 
 open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovCriticalProgram public
-open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEightStageProgram public
+import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEightStageProgram as QuarticEightStage
