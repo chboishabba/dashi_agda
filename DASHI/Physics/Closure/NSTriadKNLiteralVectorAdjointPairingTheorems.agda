@@ -369,25 +369,24 @@ orderedPairFirstAdjointPairingIdentity {F = F}
               (swappedFirstAdjointIsSecondAdjoint E I p testK uQ))
             (secondVectorAdjointPairingIdentity
               E I k q p uQ uP testK transverseK transverseP)))
-        (sym
-          (trans
-            (complexRealPartAdd
-              (C3.hermitianPairing3 testK
-                (Signed.orderedVelocityInteraction
-                  (C3.complex3VelocityGalerkinLaws F E I)
-                  k p q uP uQ))
-              (C3.hermitianPairing3 testK
-                (Signed.orderedVelocityInteraction
-                  (C3.complex3VelocityGalerkinLaws F E I)
-                  k q p uQ uP)))
-            (cong C3.complexRealPart
-              (sym (Additive.hermitianPairingAddRight testK
-                (Signed.orderedVelocityInteraction
-                  (C3.complex3VelocityGalerkinLaws F E I)
-                  k p q uP uQ)
-                (Signed.orderedVelocityInteraction
-                  (C3.complex3VelocityGalerkinLaws F E I)
-                  k q p uQ uP))))))))
+        (trans
+          (sym (complexRealPartAdd
+            (C3.hermitianPairing3 testK
+              (Signed.orderedVelocityInteraction
+                (C3.complex3VelocityGalerkinLaws F E I)
+                k p q uP uQ))
+            (C3.hermitianPairing3 testK
+              (Signed.orderedVelocityInteraction
+                (C3.complex3VelocityGalerkinLaws F E I)
+                k q p uQ uP))))
+          (cong C3.complexRealPart
+            (sym (Additive.hermitianPairingAddRight testK
+              (Signed.orderedVelocityInteraction
+                (C3.complex3VelocityGalerkinLaws F E I)
+                k p q uP uQ)
+              (Signed.orderedVelocityInteraction
+                (C3.complex3VelocityGalerkinLaws F E I)
+                k q p uQ uP)))))))
 
 literalDirectAndSecondPairingTheoremsClosed : Bool
 literalDirectAndSecondPairingTheoremsClosed = true
