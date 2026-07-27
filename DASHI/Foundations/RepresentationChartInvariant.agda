@@ -7,11 +7,24 @@ open import Agda.Builtin.String using (String)
 -- A value is distinct from the chart in which it is displayed.
 ------------------------------------------------------------------------
 
+data Positive : Nat → Set where
+  positive : ∀ {n} → Positive (suc n)
+
+positiveProduct :
+  ∀ {left right} →
+  Positive left →
+  Positive right →
+  Positive (left * right)
+positiveProduct {zero} () rightPositive
+positiveProduct {suc left} {zero} leftPositive ()
+positiveProduct {suc left} {suc right} positive positive = positive
+
 record RatioRepresentation : Set where
   constructor ratio
   field
     numerator   : Nat
     denominator : Nat
+    denominatorPositive : Positive denominator
 
 open RatioRepresentation public
 
@@ -20,19 +33,19 @@ RatioEquivalent x y =
   numerator x * denominator y ≡ numerator y * denominator x
 
 threeSix : RatioRepresentation
-threeSix = ratio 3 6
+threeSix = ratio 3 6 positive
 
 oneHalf : RatioRepresentation
-oneHalf = ratio 1 2
+oneHalf = ratio 1 2 positive
 
 fiveTenths : RatioRepresentation
-fiveTenths = ratio 5 10
+fiveTenths = ratio 5 10 positive
 
 fiftyHundredths : RatioRepresentation
-fiftyHundredths = ratio 50 100
+fiftyHundredths = ratio 50 100 positive
 
 binaryPointOne : RatioRepresentation
-binaryPointOne = ratio 1 2
+binaryPointOne = ratio 1 2 positive
 
 threeSixIsOneHalf : RatioEquivalent threeSix oneHalf
 threeSixIsOneHalf = refl
@@ -178,9 +191,9 @@ fiftyPercentReading =
   typed-ratio-reading fiftyHundredths oneHalf percentageRole refl
 
 harmonicTerm : Nat → RatioRepresentation
-harmonicTerm n = ratio 1 (suc n)
+harmonicTerm n = ratio 1 (suc n) positive
 
-firstHarmonicTerm : harmonicTerm 0 ≡ ratio 1 1
+firstHarmonicTerm : harmonicTerm 0 ≡ ratio 1 1 positive
 firstHarmonicTerm = refl
 
 secondHarmonicTerm : harmonicTerm 1 ≡ oneHalf
@@ -193,27 +206,39 @@ threeSixHarmonicReading : TypedRatioReading
 threeSixHarmonicReading =
   typed-ratio-reading threeSix (harmonicTerm 1) harmonicReciprocalRole refl
 
-refineRatio : Nat → RatioRepresentation → RatioRepresentation
-refineRatio k r = ratio (k * numerator r) (k * denominator r)
+refineRatio :
+  (factor : Nat) →
+  Positive factor →
+  RatioRepresentation →
+  RatioRepresentation
+refineRatio factor factorPositive r =
+  ratio
+    (factor * numerator r)
+    (factor * denominator r)
+    (positiveProduct factorPositive (denominatorPositive r))
 
 refineRatioPreserves :
-  (k : Nat) → (r : RatioRepresentation) →
-  RatioEquivalent (refineRatio k r) r
-refineRatioPreserves k r =
+  (factor : Nat) →
+  (factorPositive : Positive factor) →
+  (r : RatioRepresentation) →
+  RatioEquivalent (refineRatio factor factorPositive r) r
+refineRatioPreserves factor factorPositive r =
   trans
-    (*-assoc k (numerator r) (denominator r))
+    (*-assoc factor (numerator r) (denominator r))
     (trans
-      (cong (k *_) (*-comm (numerator r) (denominator r)))
+      (cong (factor *_) (*-comm (numerator r) (denominator r)))
       (trans
-        (sym (*-assoc k (denominator r) (numerator r)))
-        (*-comm (k * denominator r) (numerator r))))
+        (sym (*-assoc factor (denominator r) (numerator r)))
+        (*-comm (factor * denominator r) (numerator r))))
 
-threefoldHalfRefinement : refineRatio 3 oneHalf ≡ threeSix
+threefoldHalfRefinement :
+  refineRatio 3 positive oneHalf ≡ threeSix
 threefoldHalfRefinement = refl
 
 threefoldHalfRefinementPreserves :
-  RatioEquivalent (refineRatio 3 oneHalf) oneHalf
-threefoldHalfRefinementPreserves = refineRatioPreserves 3 oneHalf
+  RatioEquivalent (refineRatio 3 positive oneHalf) oneHalf
+threefoldHalfRefinementPreserves =
+  refineRatioPreserves 3 positive oneHalf
 
 ------------------------------------------------------------------------
 -- 3/6/9 supports several different typed operations.  No operation below
@@ -249,6 +274,8 @@ record RepresentationAuthorityBoundary : Set where
     frameCanBeCompared : Bool
     presentationFibreIsGroupCoverClaimed : Bool
     harmonicRoleIsContextDependent : Bool
+    zeroDenominatorConstructible : Bool
+    zeroRefinementFactorAccepted : Bool
 
 canonicalRepresentationAuthorityBoundary : RepresentationAuthorityBoundary
 canonicalRepresentationAuthorityBoundary = record
@@ -258,8 +285,10 @@ canonicalRepresentationAuthorityBoundary = record
   ; frameCanBeCompared = true
   ; presentationFibreIsGroupCoverClaimed = false
   ; harmonicRoleIsContextDependent = true
+  ; zeroDenominatorConstructible = false
+  ; zeroRefinementFactorAccepted = false
   }
 
 representationSummary : String
 representationSummary =
-  "A value is carried together with its chart, scale and relation; 3/6, 1/2, 0.5, 0.1 base 2 and 50% are distinct presentations of one rational point."
+  "A positive-denominator value is carried together with its chart, scale and relation; 3/6, 1/2, 0.5, 0.1 base 2 and 50% are distinct presentations of one rational point."
