@@ -18,7 +18,9 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Nat.Base using (_≤_; _<_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -190,20 +192,251 @@ record CoerciveFourierQuarticCandidate
   field
     _≤_ : C3.Carrier F → C3.Carrier F → Set o
     lowerConstant upperConstant : C3.Carrier F
+    baseCoerciveSize : Nat → Velocity F → C3.Carrier F
+
+    baseCoerciveSizeMeaning : ∀ N velocity →
+      baseCoerciveSize N velocity
+      ≡
+      C3.add F
+        (C3.multiply F
+          (kineticEnergy P N velocity)
+          (kineticEnergy P N velocity))
+        (selectedQuadraticCorrection P N velocity)
 
     lowerEquivalent : ∀ N velocity →
       _≤_
         (C3.multiply F lowerConstant
-          (kineticEnergy P N velocity))
+          (baseCoerciveSize N velocity))
         (quarticLyapunovValue P N velocity)
 
     upperEquivalent : ∀ N velocity →
       _≤_
         (quarticLyapunovValue P N velocity)
-        (C3.multiply F upperConstant
-          (kineticEnergy P N velocity))
+        (C3.multiply F upperConstant (baseCoerciveSize N velocity))
 
 open CoerciveFourierQuarticCandidate public
+
+------------------------------------------------------------------------
+-- Exact admissibility and discovery surface.
+--
+-- The quartic functional cannot be globally equivalent to the quadratic
+-- kinetic energy.  Its homogeneous comparison object is E^2 + Q.
+------------------------------------------------------------------------
+
+data Occurs {a : Level} {A : Set a} (x : A) : List A → Set a where
+  here : ∀ {xs} → Occurs x (x ∷ xs)
+  there : ∀ {y xs} → Occurs x xs → Occurs x (y ∷ xs)
+
+data DuplicateFree {a : Level} {A : Set a} : List A → Set a where
+  empty : DuplicateFree []
+  prepend : ∀ {x xs} →
+    (Occurs x xs → ⊥) →
+    DuplicateFree xs →
+    DuplicateFree (x ∷ xs)
+
+quarticLyapunovValueAt :
+  ∀ {r c} {F : C3.RealField r} →
+  (P : FourierQuarticParameters {r} {c} F) →
+  Chart P → Nat → Velocity F → C3.Carrier F
+quarticLyapunovValueAt {F = F} P chart N velocity =
+  C3.add F
+    (C3.add F
+      (C3.multiply F
+        (kineticEnergy P N velocity)
+        (kineticEnergy P N velocity))
+      (C3.multiply F
+        (two F)
+        (C3.multiply F
+          (kineticEnergy P N velocity)
+          (coherenceCoordinateAt P chart N velocity))))
+    (quadraticCorrectionAt P chart N velocity)
+
+baseCoerciveSizeAt :
+  ∀ {r c} {F : C3.RealField r} →
+  (P : FourierQuarticParameters {r} {c} F) →
+  Chart P → Nat → Velocity F → C3.Carrier F
+baseCoerciveSizeAt {F = F} P chart N velocity =
+  C3.add F
+    (C3.multiply F
+      (kineticEnergy P N velocity)
+      (kineticEnergy P N velocity))
+    (quadraticCorrectionAt P chart N velocity)
+
+record ExplicitCoerciveQuarticCandidate
+    {r c o : Level}
+    (F : C3.RealField r) :
+    Set (lsuc (r ⊔ c ⊔ o)) where
+  field
+    parameters : FourierQuarticParameters {r} {c} F
+    _≤_ : C3.Carrier F → C3.Carrier F → Set o
+    _<_ : C3.Carrier F → C3.Carrier F → Set o
+
+    InCutoff : Nat → Z3.FourierMode → Set
+    cutoffModesComplete : ∀ N mode →
+      InCutoff N mode →
+      Occurs mode (cutoffModes parameters N)
+    cutoffModesNoDuplicates : ∀ N →
+      DuplicateFree (cutoffModes parameters N)
+
+    negateMode : Z3.FourierMode → Z3.FourierMode
+    wavevectorPairing :
+      Z3.FourierMode → C3.Complex3 F → C3.Complex F
+
+    AdmissibleVelocity : Nat → Velocity F → Set
+    admissibleVelocityReality : ∀ N velocity →
+      AdmissibleVelocity N velocity →
+      ∀ mode →
+      velocity (negateMode mode)
+      ≡ C3.complex3Conjugate (velocity mode)
+    admissibleVelocityDivergenceFree : ∀ N velocity →
+      AdmissibleVelocity N velocity →
+      ∀ mode →
+      wavevectorPairing mode (velocity mode)
+      ≡ C3.complexZero F
+
+    eulerNonlinearity : Nat → Velocity F → Velocity F
+    referenceEnergyNonlinearDerivative :
+      Nat → Velocity F → C3.Carrier F
+    referenceEnergyIsEulerInvariant : ∀ N velocity →
+      AdmissibleVelocity N velocity →
+      referenceEnergyNonlinearDerivative N velocity ≡ C3.zero F
+
+    quadraticWeightEven : ∀ chart N mode →
+      quadraticWeight parameters chart N (negateMode mode)
+      ≡ quadraticWeight parameters chart N mode
+
+    lowerQuadraticWeight : C3.Carrier F
+    lowerQuadraticWeightPositive :
+      _<_ (C3.zero F) lowerQuadraticWeight
+    quadraticWeightStrictlyPositive : ∀ chart N mode →
+      InCutoff N mode →
+      _≤_ lowerQuadraticWeight
+        (quadraticWeight parameters chart N mode)
+
+    quadraticWeightCutoffCompatible : ∀ chart N N′ mode →
+      N ≤ N′ →
+      InCutoff N mode →
+      quadraticWeight parameters chart N′ mode
+      ≡ quadraticWeight parameters chart N mode
+
+    coherenceDirectionRealityCompatible : ∀ chart N mode →
+      coherenceDirection parameters chart N (negateMode mode)
+      ≡ C3.complex3Conjugate
+          (coherenceDirection parameters chart N mode)
+
+    coherenceDirectionDivergenceFree : ∀ chart N mode →
+      wavevectorPairing mode
+        (coherenceDirection parameters chart N mode)
+      ≡ C3.complexZero F
+
+    kappa epsilon : C3.Carrier F
+    absolute : C3.Carrier F → C3.Carrier F
+    kappaPositive : _≤_ (C3.zero F) kappa
+    kappaLessThanEpsilon : _<_ kappa epsilon
+    epsilonLessThanOne : _<_ epsilon (C3.one F)
+
+    coherenceSquaredControlledByQuadraticCorrection :
+      ∀ chart N velocity →
+      AdmissibleVelocity N velocity →
+      _≤_
+        (C3.multiply F
+          (coherenceCoordinateAt parameters chart N velocity)
+          (coherenceCoordinateAt parameters chart N velocity))
+        (C3.multiply F kappa
+          (quadraticCorrectionAt parameters chart N velocity))
+
+    coherenceYoungLower : ∀ chart N velocity →
+      AdmissibleVelocity N velocity →
+      _≤_
+        (C3.multiply F
+          (two F)
+          (C3.multiply F
+            (kineticEnergy parameters N velocity)
+            (absolute
+              (coherenceCoordinateAt
+                parameters chart N velocity))))
+        (C3.add F
+          (C3.multiply F epsilon
+            (C3.multiply F
+              (kineticEnergy parameters N velocity)
+              (kineticEnergy parameters N velocity)))
+          (C3.multiply F
+            (C3.inverse F epsilon)
+            (C3.multiply F
+              (coherenceCoordinateAt parameters chart N velocity)
+              (coherenceCoordinateAt parameters chart N velocity))))
+
+    quarticCandidateLowerCoercive : ∀ chart N velocity →
+      AdmissibleVelocity N velocity →
+      _≤_
+        (C3.add F
+          (C3.multiply F
+            (C3.add F (C3.one F) (C3.negate F epsilon))
+            (C3.multiply F
+              (kineticEnergy parameters N velocity)
+              (kineticEnergy parameters N velocity)))
+          (C3.multiply F
+            (C3.add F
+              (C3.one F)
+              (C3.negate F
+                (C3.multiply F kappa (C3.inverse F epsilon))))
+            (quadraticCorrectionAt parameters chart N velocity)))
+        (quarticLyapunovValueAt parameters chart N velocity)
+
+    quarticCandidateUpperGrowth : ∀ chart N velocity →
+      AdmissibleVelocity N velocity →
+      _≤_
+        (quarticLyapunovValueAt parameters chart N velocity)
+        (C3.add F
+          (C3.multiply F
+            (C3.add F (C3.one F) epsilon)
+            (C3.multiply F
+              (kineticEnergy parameters N velocity)
+              (kineticEnergy parameters N velocity)))
+          (C3.multiply F
+            (C3.add F
+              (C3.one F)
+              (C3.multiply F kappa (C3.inverse F epsilon)))
+            (quadraticCorrectionAt parameters chart N velocity)))
+
+    ZeroVelocity : Velocity F → Set
+    quarticCandidateZeroImpliesVelocityZero : ∀ N velocity →
+      AdmissibleVelocity N velocity →
+      quarticLyapunovValue parameters N velocity ≡ C3.zero F →
+      ZeroVelocity velocity
+    velocityZeroImpliesQuarticCandidateZero : ∀ N velocity →
+      AdmissibleVelocity N velocity →
+      ZeroVelocity velocity →
+      quarticLyapunovValue parameters N velocity ≡ C3.zero F
+
+    SobolevEnergy : Nat → Velocity F → C3.Carrier F
+    twiceSobolevIndex : Nat
+    sobolevStrictlyAboveFiveHalves : 5 < twiceSobolevIndex
+    sobolevControlConstant : C3.Carrier F
+    quadraticCorrectionControlsSobolevEnergy : ∀ N velocity →
+      AdmissibleVelocity N velocity →
+      _≤_
+        (C3.multiply F sobolevControlConstant
+          (SobolevEnergy N velocity))
+        (selectedQuadraticCorrection parameters N velocity)
+
+    Symmetry : Set c
+    actChart : Symmetry → Chart parameters → Chart parameters
+    actVelocity : Symmetry → Velocity F → Velocity F
+    selectedCandidateEquivariant : ∀ symmetry N velocity →
+      quarticLyapunovValue parameters N
+        (actVelocity symmetry velocity)
+      ≡ quarticLyapunovValue parameters N velocity
+    coercivity :
+      CoerciveFourierQuarticCandidate {r} {c} {o} parameters
+
+open ExplicitCoerciveQuarticCandidate public
+
+explicitCoerciveQuarticCandidate :
+  ∀ {r c o} (F : C3.RealField r) →
+  Set (lsuc (r ⊔ c ⊔ o))
+explicitCoerciveQuarticCandidate {c = c} {o = o} F =
+  ExplicitCoerciveQuarticCandidate {c = c} {o = o} F
 
 literalFourierQuarticCandidateFamilyImplemented : Bool
 literalFourierQuarticCandidateFamilyImplemented = true
