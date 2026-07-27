@@ -115,15 +115,25 @@ dashenGross = source
   "weak background lattice field and Wilson-action coupling calibration"
   "normalization cross-check; not a replacement for the exact RG coefficient proof"
 
+goswamiVariational : LiteratureSource
+goswamiVariational = source
+  "Abhishek Goswami"
+  "The Variational Problem and Background Field in the Renormalization Group Method for Nonlinear Sigma Models"
+  "Annales Henri Poincaré 25 (2024), 2065--2085"
+  "10.1007/s00023-023-01353-7"
+  ""
+  "single-scale nonlinear-sigma variational construction"
+  "modern explanatory analogue; not the source of arXiv:2403.09800"
+
 dybalskiStottmeisterTanimoto : LiteratureSource
 dybalskiStottmeisterTanimoto = source
   "Wojciech Dybalski, Alexander Stottmeister and Yoh Tanimoto"
-  "The Variational Problem and Background Field in the Renormalization Group Method for Nonlinear Sigma Models"
-  "Annales Henri Poincaré 25 (2024)"
-  "10.1007/s00023-023-01353-7"
+  "The Bałaban Variational Problem in the Non-Linear Sigma Model"
+  "arXiv preprint (14 March 2024)"
+  "No DOI assigned in arXiv:2403.09800v1"
   "arXiv:2403.09800v1"
   "Sections 3--4 and Appendix A; critical equation, positivity and random-walk Green bounds"
-  "modern explanatory analogue; model-specific YM estimates remain DASHI obligations"
+  "modern explanatory analogue; model-specific Yang--Mills estimates remain DASHI obligations"
 
 koteckyPreiss : LiteratureSource
 koteckyPreiss = source
@@ -196,6 +206,7 @@ verifiedLiteralFrontierSources =
   balabanRGI ∷
   balabanRGII ∷
   dashenGross ∷
+  goswamiVariational ∷
   dybalskiStottmeisterTanimoto ∷
   koteckyPreiss ∷
   fernandezProcacci ∷
