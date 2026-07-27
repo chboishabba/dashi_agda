@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'DASHI/Arithmetic/AdicGeometricMirror.agda'
+      - 'DASHI/Cognition/PNF/PNFIRLearningEverything.agda'
+      - 'DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda'
       - 'DASHI/Cognition/TlureyChaosBridge.agda'
       - 'DASHI/Core/FramedORCSLPGFAdapter.agda'
       - 'DASHI/Dynamics/LogisticAdicManifoldObligations.agda'
@@ -38,6 +40,10 @@ jobs:
       - name: Run fail-closed source and arithmetic audit
         run: python3 scripts/check_logistic_adic_stage_spine.py
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - name: Typecheck PNF trauma memory hypervoxel bridge
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Cognition/PNF/TraumaMemoryHypervoxelBridge.agda
       - name: Typecheck logistic adic stage regression
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
