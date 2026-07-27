@@ -75,9 +75,16 @@ oneTraversalStepBelowHalf dataSet scale volume root depth =
       (transitive dataSet
         (multiplyMonotoneLeft dataSet eight
           (activityPerExtensionBelowOneSixteenth dataSet scale volume root depth))
-        (reflexive dataSet
-          ((eight * oneSixteenth)
-            * rootedShell dataSet scale volume root depth))))
+        (subst
+          (λ upper →
+            eight * (oneSixteenth
+              * rootedShell dataSet scale volume root depth)
+            ≤ upper)
+          (ℚRing.solve-∀
+            (rootedShell dataSet scale volume root depth))
+          (reflexive dataSet
+            (eight * (oneSixteenth
+              * rootedShell dataSet scale volume root depth))))))
 
 rootedShellBelowQuarterHalfPower :
   ∀ {Scale Volume Root}
