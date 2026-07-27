@@ -30,22 +30,15 @@ import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermiti
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 
-lerayRealCoefficient :
-  ∀ {r} {F : C3.RealField r}
-    (I : C3.ModeInverseSquare F _)
-    (k : Z3.FourierMode) → C3.Complex F
-lerayRealCoefficient {F = F} I k =
-  C3.realEmbed F (C3.inverseNormSquared I k)
-
 lerayCoefficient :
   ∀ {r} {F : C3.RealField r}
     (E : C3.IntegerEmbedding F)
     (I : C3.ModeInverseSquare F E)
     (k : Z3.FourierMode)
     (value : C3.Complex3 F) → C3.Complex F
-lerayCoefficient E I k value =
+lerayCoefficient {F = F} E I k value =
   C3.complexMultiply
-    (C3.realEmbed _ (C3.inverseNormSquared I k))
+    (C3.realEmbed F (C3.inverseNormSquared I k))
     (C3.bilinearDot3 (C3.modeVector E k) value)
 
 lerayRankOneCorrection :
