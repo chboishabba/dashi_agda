@@ -66,8 +66,12 @@ canonicalHalfFrameScaleValuation = record
   { evaluate = λ chart representation → carriedRatio representation
   ; activeChart = carriedChart
   ; transition = transitionChart
-  ; transitionTargetsChart = λ target representation → refl
-  ; transitionPreservesEvaluation = λ target representation → refl
+  ; transitionTargetsChart = λ
+      { target (charted-half value source) → refl
+      }
+  ; transitionPreservesEvaluation = λ
+      { target (charted-half value source) → refl
+      }
   ; transitionIdentity = λ
       { (charted-half value chart) → refl
       }
@@ -85,7 +89,7 @@ canonicalTransitionTargetsChart :
   Rep.activeChart canonicalHalfFrameScaleValuation
     (Rep.transition canonicalHalfFrameScaleValuation target representation)
   ≡ target
-canonicalTransitionTargetsChart target representation = refl
+canonicalTransitionTargetsChart target (charted-half value source) = refl
 
 canonicalTransitionPreservesValue :
   ∀ target representation →
@@ -95,7 +99,7 @@ canonicalTransitionPreservesValue :
   Rep.evaluate canonicalHalfFrameScaleValuation
     (Rep.activeChart canonicalHalfFrameScaleValuation representation)
     representation
-canonicalTransitionPreservesValue target representation = refl
+canonicalTransitionPreservesValue target (charted-half value source) = refl
 
 canonicalInspectionValue :
   ∀ representation →
