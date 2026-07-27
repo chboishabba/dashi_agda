@@ -19,6 +19,8 @@ module DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
+open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNGlobalHelicityH3DiscriminantCounterexample as Global
 import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityExactReconnaissance as Local
@@ -113,8 +115,7 @@ record Stage3DecisionReceipt : Set where
   constructor stage3-decision-receipt
   field
     rawRowSourceAvailable :
-      Stage3Schur.kiriukhinRawRowLiteratureBacked ≡
-      Stage3Schur.kiriukhinRawRowLiteratureBacked
+      Stage3Schur.kiriukhinRawRowLiteratureBacked ≡ true
     finiteWeightEvidence : SchurFinite.WeightedSchurFiniteReceipt
 
 open Stage3DecisionReceipt public
@@ -122,7 +123,7 @@ open Stage3DecisionReceipt public
 stage3DecisionReceipt : Stage3DecisionReceipt
 stage3DecisionReceipt =
   stage3-decision-receipt
-    refl
+    Stage3Schur.kiriukhinRawRowLiteratureBackedIsTrue
     SchurFinite.weightedSchurFiniteReceipt
 
 record DirectionCoherenceResearchCutset
