@@ -34,6 +34,11 @@ binaryChart =
   radix-chart 2 Representation.positive 0
     "base-2 display with the radix point at exponent zero"
 
+ternaryChart : RadixChart
+ternaryChart =
+  radix-chart 3 Representation.positive 0
+    "base-3 address chart with the radix point at exponent zero"
+
 record PositionalReading : Set where
   field
     glyphSequence : List Nat
@@ -97,34 +102,47 @@ canonicalDecimalPAdicReading p = record
 
 ------------------------------------------------------------------------
 -- Prefix agreement begins at the radix/valuation origin and moves outward.
+-- Positive radix evidence is carried by the chart, so no zero-radix address
+-- root can be constructed through this API.
 ------------------------------------------------------------------------
 
-RadialAddress : Nat → Nat → Set
-RadialAddress p depth = Vec.Vec (Fin p) depth
+RadialAddress : RadixChart → Nat → Set
+RadialAddress chart depth = Vec.Vec (Fin (radix chart)) depth
 
-data RadixOriginPrefix {p : Nat} :
-  ∀ {depth} → Nat → RadialAddress p depth → RadialAddress p depth → Set where
+data RadixOriginPrefix {chart : RadixChart} :
+  ∀ {depth} →
+  Nat →
+  RadialAddress chart depth →
+  RadialAddress chart depth →
+  Set where
   radix-prefix-zero :
-    ∀ {depth} {x y : RadialAddress p depth} →
+    ∀ {depth}
+      {x y : RadialAddress chart depth} →
     RadixOriginPrefix 0 x y
 
   radix-prefix-cons :
     ∀ {depth matched}
-      {x y : Fin p}
-      {xs ys : RadialAddress p depth} →
+      {x y : Fin (radix chart)}
+      {xs ys : RadialAddress chart depth} →
     x ≡ y →
     RadixOriginPrefix matched xs ys →
-    RadixOriginPrefix (suc matched) (x Vec.∷ xs) (y Vec.∷ ys)
+    RadixOriginPrefix
+      (suc matched)
+      (x Vec.∷ xs)
+      (y Vec.∷ ys)
 
 radixPrefixReflexive :
-  ∀ {p depth} (address : RadialAddress p depth) →
+  ∀ {chart depth}
+    (address : RadialAddress chart depth) →
   RadixOriginPrefix depth address address
 radixPrefixReflexive Vec.[] = radix-prefix-zero
 radixPrefixReflexive (x Vec.∷ xs) =
   radix-prefix-cons refl (radixPrefixReflexive xs)
 
-record PrefixUltrametricReading {p depth : Nat}
-  (x y : RadialAddress p depth) : Set where
+record PrefixUltrametricReading
+  {chart : RadixChart}
+  {depth : Nat}
+  (x y : RadialAddress chart depth) : Set where
   field
     sharedFromOrigin : Nat
     prefixWitness : RadixOriginPrefix sharedFromOrigin x y
@@ -133,45 +151,45 @@ record PrefixUltrametricReading {p depth : Nat}
 ------------------------------------------------------------------------
 -- Generic p/rank/depth geometry: (Fin p)^(rank * depth).
 --
--- Each refinement appends one rank-wide block of p-valued coordinates. The
--- ternary Rubik carrier is the special case p = 3; prime lanes need not be
--- identified with that special case.
+-- Each refinement appends one rank-wide block of positive-radix coordinates.
+-- The ternary Rubik carrier is the special case `ternaryChart`; prime lanes
+-- need not be identified with that special case.
 ------------------------------------------------------------------------
 
-RadixBlock : Nat → Nat → Set
-RadixBlock p rank = Vec.Vec (Fin p) rank
+RadixBlock : RadixChart → Nat → Set
+RadixBlock chart rank = Vec.Vec (Fin (radix chart)) rank
 
-data RadixHyperAddress (p rank : Nat) : Nat → Set where
-  radix-hyper-root : RadixHyperAddress p rank zero
+data RadixHyperAddress (chart : RadixChart) (rank : Nat) : Nat → Set where
+  radix-hyper-root : RadixHyperAddress chart rank zero
   radix-hyper-refine :
     ∀ {depth} →
-    RadixHyperAddress p rank depth →
-    RadixBlock p rank →
-    RadixHyperAddress p rank (suc depth)
+    RadixHyperAddress chart rank depth →
+    RadixBlock chart rank →
+    RadixHyperAddress chart rank (suc depth)
 
 radixHyperCoarsen :
-  ∀ {p rank depth} →
-  RadixHyperAddress p rank (suc depth) →
-  RadixHyperAddress p rank depth
+  ∀ {chart rank depth} →
+  RadixHyperAddress chart rank (suc depth) →
+  RadixHyperAddress chart rank depth
 radixHyperCoarsen (radix-hyper-refine parent block) = parent
 
 radixHyperFineBlock :
-  ∀ {p rank depth} →
-  RadixHyperAddress p rank (suc depth) →
-  RadixBlock p rank
+  ∀ {chart rank depth} →
+  RadixHyperAddress chart rank (suc depth) →
+  RadixBlock chart rank
 radixHyperFineBlock (radix-hyper-refine parent block) = block
 
 radixHyperCoarsenAfterRefine :
-  ∀ {p rank depth}
-    (parent : RadixHyperAddress p rank depth)
-    (block : RadixBlock p rank) →
+  ∀ {chart rank depth}
+    (parent : RadixHyperAddress chart rank depth)
+    (block : RadixBlock chart rank) →
   radixHyperCoarsen (radix-hyper-refine parent block) ≡ parent
 radixHyperCoarsenAfterRefine parent block = refl
 
 radixHyperFineBlockAfterRefine :
-  ∀ {p rank depth}
-    (parent : RadixHyperAddress p rank depth)
-    (block : RadixBlock p rank) →
+  ∀ {chart rank depth}
+    (parent : RadixHyperAddress chart rank depth)
+    (block : RadixBlock chart rank) →
   radixHyperFineBlock (radix-hyper-refine parent block) ≡ block
 radixHyperFineBlockAfterRefine parent block = refl
 
@@ -179,40 +197,44 @@ radixPower : Nat → Nat → Nat
 radixPower base zero = 1
 radixPower base (suc exponent) = base * radixPower base exponent
 
-radixHyperSiteCount : Nat → Nat → Nat → Nat
-radixHyperSiteCount p rank depth = radixPower p (rank * depth)
+radixHyperSiteCount : RadixChart → Nat → Nat → Nat
+radixHyperSiteCount chart rank depth =
+  radixPower (radix chart) (rank * depth)
 
-binaryRank3Depth1Count : radixHyperSiteCount 2 3 1 ≡ 8
+binaryRank3Depth1Count :
+  radixHyperSiteCount binaryChart 3 1 ≡ 8
 binaryRank3Depth1Count = refl
 
-ternaryRank3Depth1Count : radixHyperSiteCount 3 3 1 ≡ 27
+ternaryRank3Depth1Count :
+  radixHyperSiteCount ternaryChart 3 1 ≡ 27
 ternaryRank3Depth1Count = refl
 
-ternaryRank3Depth2Count : radixHyperSiteCount 3 3 2 ≡ 729
+ternaryRank3Depth2Count :
+  radixHyperSiteCount ternaryChart 3 2 ≡ 729
 ternaryRank3Depth2Count = refl
 
 ------------------------------------------------------------------------
 -- Coarse graining truncates an outward extension; fine graining appends one.
 ------------------------------------------------------------------------
 
-data RadialTreeAddress (p : Nat) : Nat → Set where
-  radial-root : RadialTreeAddress p zero
+data RadialTreeAddress (chart : RadixChart) : Nat → Set where
+  radial-root : RadialTreeAddress chart zero
   radial-extend :
     ∀ {depth} →
-    RadialTreeAddress p depth →
-    Fin p →
-    RadialTreeAddress p (suc depth)
+    RadialTreeAddress chart depth →
+    Fin (radix chart) →
+    RadialTreeAddress chart (suc depth)
 
 radialCoarsen :
-  ∀ {p depth} →
-  RadialTreeAddress p (suc depth) →
-  RadialTreeAddress p depth
+  ∀ {chart depth} →
+  RadialTreeAddress chart (suc depth) →
+  RadialTreeAddress chart depth
 radialCoarsen (radial-extend parent digit) = parent
 
 radialCoarsenAfterExtend :
-  ∀ {p depth}
-    (parent : RadialTreeAddress p depth)
-    (digit : Fin p) →
+  ∀ {chart depth}
+    (parent : RadialTreeAddress chart depth)
+    (digit : Fin (radix chart)) →
   radialCoarsen (radial-extend parent digit) ≡ parent
 radialCoarsenAfterExtend parent digit = refl
 
@@ -331,7 +353,8 @@ canonicalP3RootProjection = record
 canonicalP11ThreeSixNineProjection : PrimeLaneAddressProjection 3
 canonicalP11ThreeSixNineProjection = record
   { primeLane = TP.p11
-  ; primeSpecificAddressLabel = "p11 lane with a selected depth-three 369 diagnostic address"
+  ; primeSpecificAddressLabel =
+      "p11 lane with a selected depth-three 369 diagnostic address"
   ; selected369Address = Ref.canonicalThreeSixNineAddress
   ; stagePoint = Atlas.atlas-11
   ; primeBranchingIdentifiedWithTernary = false
@@ -378,4 +401,4 @@ canonicalRadixStageAuthorityBoundary = record
 
 radixStageSummary : String
 radixStageSummary =
-  "Place value is a positive-radix coarse/fine geometry: the radix gives weights, the point gives the scale origin, generic p/rank/depth addresses separate prime branching from ternary diagnostics, and Stage 1/10/11 record unit, carry and carry-plus-local-unit roles without arithmetic collapse."
+  "Place value is a positive-radix coarse/fine geometry: every address carries positive-radix evidence, generic p/rank/depth addresses separate prime branching from ternary diagnostics, and Stage 1/10/11 record unit, carry and carry-plus-local-unit roles without arithmetic collapse."
