@@ -1,11 +1,13 @@
 module DASHI.Physics.YangMills.BalabanClayT2ClusterCriterionComparisonExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- Literature normalization.
+-- Literature normalization and exact hierarchy.
 --
 -- R. Kotecký and D. Preiss,
 -- "Cluster expansion for abstract polymer models",
@@ -23,33 +25,32 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Journal of Statistical Physics 139 (2010), 598--617.
 -- DOI: 10.1007/s10955-010-9956-1
 --
--- The three criteria are not identified.  They are represented by their
--- different neighbourhood majorants.  A criterion with a smaller majorant has
--- a larger admissible activity region.  This module proves only the valid
--- direction of implication, preventing a sharper Fernández--Procacci or
--- interpolating witness from being silently relabelled as Kotecký--Preiss.
+-- C. Gruber and H. Kunz,
+-- "General properties of polymer systems",
+-- Communications in Mathematical Physics 22 (1971), 133--161.
+-- DOI: 10.1007/BF01651334
+--
+-- For abstract polymers, the published comparison is represented here by
+--
+--   Fernandez--Procacci majorant <= Dobrushin majorant <= KP majorant.
+--
+-- Hence a KP witness implies a Dobrushin witness, which implies an FP witness.
+-- The converses do not follow.  For subset polymers, the Bissacot--Fernández--
+-- Procacci analysis identifies the suitable extended Gruber--Kunz lane with the
+-- sharper subset criterion after the corresponding model-specific majorants
+-- are shown equal.  No universal extra "interpolating" criterion is invented.
 ------------------------------------------------------------------------
 
 record PolymerCriterionComparison (Polymer : Set) : Set₁ where
   field
     activity budget : Polymer → ℚ
 
-    -- KP uses the exponential of the full incompatible-neighbourhood sum.
     kpExponentialMajorant : Polymer → ℚ
-
-    -- Fernández--Procacci replaces that exponential by the compatible-subset
-    -- partition function of the incompatibility neighbourhood.
+    dobrushinMajorant : Polymer → ℚ
     fernandezProcacciMajorant : Polymer → ℚ
 
-    -- The Bissacot--Fernández--Procacci comparison permits an interpolating or
-    -- otherwise improved neighbourhood majorant.  Its exact physical instance
-    -- must say which incompatibility family is being summed over.
-    interpolatingMajorant : Polymer → ℚ
-
-    -- Sign convention: activities are absolute activities and hence
-    -- nonnegative.  Monotonicity of multiplication is recorded only in this
-    -- nonnegative activity slot; no invalid multiplication of inequalities by
-    -- an arbitrary rational is permitted.
+    -- Activities here are absolute activities.  This explicit sign convention
+    -- is required before multiplying a majorant inequality by the activity.
     activityNonnegative : ∀ polymer → 0ℚ ≤ activity polymer
     activityTimesMonotone : ∀ polymer {left right} →
       left ≤ right →
@@ -58,11 +59,11 @@ record PolymerCriterionComparison (Polymer : Set) : Set₁ where
     transitive : ∀ {left middle right} →
       left ≤ middle → middle ≤ right → left ≤ right
 
-    fernandezProcacciBelowKP : ∀ polymer →
-      fernandezProcacciMajorant polymer ≤ kpExponentialMajorant polymer
+    dobrushinBelowKP : ∀ polymer →
+      dobrushinMajorant polymer ≤ kpExponentialMajorant polymer
 
-    interpolatingBelowFernandezProcacci : ∀ polymer →
-      interpolatingMajorant polymer ≤ fernandezProcacciMajorant polymer
+    fernandezProcacciBelowDobrushin : ∀ polymer →
+      fernandezProcacciMajorant polymer ≤ dobrushinMajorant polymer
 
 open PolymerCriterionComparison public
 
@@ -72,45 +73,113 @@ KoteckyPreissCriterion dataSet = ∀ polymer →
   activity dataSet polymer * kpExponentialMajorant dataSet polymer
   ≤ budget dataSet polymer
 
+DobrushinCriterion : ∀ {Polymer} →
+  PolymerCriterionComparison Polymer → Set
+DobrushinCriterion dataSet = ∀ polymer →
+  activity dataSet polymer * dobrushinMajorant dataSet polymer
+  ≤ budget dataSet polymer
+
 FernandezProcacciCriterion : ∀ {Polymer} →
   PolymerCriterionComparison Polymer → Set
 FernandezProcacciCriterion dataSet = ∀ polymer →
   activity dataSet polymer * fernandezProcacciMajorant dataSet polymer
   ≤ budget dataSet polymer
 
-InterpolatingCriterion : ∀ {Polymer} →
-  PolymerCriterionComparison Polymer → Set
-InterpolatingCriterion dataSet = ∀ polymer →
-  activity dataSet polymer * interpolatingMajorant dataSet polymer
-  ≤ budget dataSet polymer
+koteckyPreissImpliesDobrushin :
+  ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer) →
+  KoteckyPreissCriterion dataSet →
+  DobrushinCriterion dataSet
+koteckyPreissImpliesDobrushin dataSet kp polymer =
+  transitive dataSet
+    (activityTimesMonotone dataSet polymer
+      (dobrushinBelowKP dataSet polymer))
+    (kp polymer)
+
+dobrushinImpliesFernandezProcacci :
+  ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer) →
+  DobrushinCriterion dataSet →
+  FernandezProcacciCriterion dataSet
+dobrushinImpliesFernandezProcacci dataSet dobrushin polymer =
+  transitive dataSet
+    (activityTimesMonotone dataSet polymer
+      (fernandezProcacciBelowDobrushin dataSet polymer))
+    (dobrushin polymer)
 
 koteckyPreissImpliesFernandezProcacci :
   ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer) →
   KoteckyPreissCriterion dataSet →
   FernandezProcacciCriterion dataSet
-koteckyPreissImpliesFernandezProcacci dataSet kp polymer =
-  transitive dataSet
-    (activityTimesMonotone dataSet polymer
-      (fernandezProcacciBelowKP dataSet polymer))
-    (kp polymer)
+koteckyPreissImpliesFernandezProcacci dataSet kp =
+  dobrushinImpliesFernandezProcacci dataSet
+    (koteckyPreissImpliesDobrushin dataSet kp)
 
-fernandezProcacciImpliesInterpolating :
-  ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer) →
+------------------------------------------------------------------------
+-- Subset-polymer identification and optional later refinements.
+------------------------------------------------------------------------
+
+record ExtendedGruberKunzIdentification
+    {Polymer : Set}
+    (dataSet : PolymerCriterionComparison Polymer) : Set₁ where
+  field
+    extendedGruberKunzMajorant : Polymer → ℚ
+    extendedGKMatchesFernandezProcacci : ∀ polymer →
+      extendedGruberKunzMajorant polymer
+      ≡ fernandezProcacciMajorant dataSet polymer
+
+open ExtendedGruberKunzIdentification public
+
+ExtendedGruberKunzCriterion :
+  ∀ {Polymer}
+    (dataSet : PolymerCriterionComparison Polymer) →
+    ExtendedGruberKunzIdentification dataSet → Set
+ExtendedGruberKunzCriterion dataSet identification = ∀ polymer →
+  activity dataSet polymer
+    * extendedGruberKunzMajorant identification polymer
+  ≤ budget dataSet polymer
+
+fernandezProcacciImpliesExtendedGruberKunz :
+  ∀ {Polymer}
+    (dataSet : PolymerCriterionComparison Polymer)
+    (identification : ExtendedGruberKunzIdentification dataSet) →
   FernandezProcacciCriterion dataSet →
-  InterpolatingCriterion dataSet
-fernandezProcacciImpliesInterpolating dataSet fp polymer =
-  transitive dataSet
-    (activityTimesMonotone dataSet polymer
-      (interpolatingBelowFernandezProcacci dataSet polymer))
+  ExtendedGruberKunzCriterion dataSet identification
+fernandezProcacciImpliesExtendedGruberKunz dataSet identification fp polymer =
+  subst
+    (λ selectedMajorant →
+      activity dataSet polymer * selectedMajorant
+      ≤ budget dataSet polymer)
+    (extendedGKMatchesFernandezProcacci identification polymer)
     (fp polymer)
 
-koteckyPreissImpliesInterpolating :
-  ∀ {Polymer} (dataSet : PolymerCriterionComparison Polymer) →
-  KoteckyPreissCriterion dataSet →
-  InterpolatingCriterion dataSet
-koteckyPreissImpliesInterpolating dataSet kp =
-  fernandezProcacciImpliesInterpolating dataSet
-    (koteckyPreissImpliesFernandezProcacci dataSet kp)
+record FurtherCriterionRefinement
+    {Polymer : Set}
+    (dataSet : PolymerCriterionComparison Polymer) : Set₁ where
+  field
+    refinedMajorant : Polymer → ℚ
+    refinedBelowFernandezProcacci : ∀ polymer →
+      refinedMajorant polymer ≤ fernandezProcacciMajorant dataSet polymer
+
+open FurtherCriterionRefinement public
+
+RefinedCriterion :
+  ∀ {Polymer}
+    (dataSet : PolymerCriterionComparison Polymer) →
+    FurtherCriterionRefinement dataSet → Set
+RefinedCriterion dataSet refinement = ∀ polymer →
+  activity dataSet polymer * refinedMajorant refinement polymer
+  ≤ budget dataSet polymer
+
+fernandezProcacciImpliesRefined :
+  ∀ {Polymer}
+    (dataSet : PolymerCriterionComparison Polymer)
+    (refinement : FurtherCriterionRefinement dataSet) →
+  FernandezProcacciCriterion dataSet →
+  RefinedCriterion dataSet refinement
+fernandezProcacciImpliesRefined dataSet refinement fp polymer =
+  transitive dataSet
+    (activityTimesMonotone dataSet polymer
+      (refinedBelowFernandezProcacci refinement polymer))
+    (fp polymer)
 
 record StrictCriterionSlack
     {Polymer : Set}
@@ -118,28 +187,34 @@ record StrictCriterionSlack
   field
     witnessPolymer : Polymer
     StrictlyLess : ℚ → ℚ → Set
-    fpStrictlyBelowKP :
+    dobrushinStrictlyBelowKP :
       StrictlyLess
-        (fernandezProcacciMajorant dataSet witnessPolymer)
+        (dobrushinMajorant dataSet witnessPolymer)
         (kpExponentialMajorant dataSet witnessPolymer)
-    interpolatingStrictlyBelowFP :
+    fpStrictlyBelowDobrushin :
       StrictlyLess
-        (interpolatingMajorant dataSet witnessPolymer)
         (fernandezProcacciMajorant dataSet witnessPolymer)
+        (dobrushinMajorant dataSet witnessPolymer)
 
 open StrictCriterionSlack public
 
-kpToFernandezProcacciDominanceLevel : ProofLevel
-kpToFernandezProcacciDominanceLevel = machineChecked
+kpToDobrushinDominanceLevel : ProofLevel
+kpToDobrushinDominanceLevel = machineChecked
 
-fernandezProcacciToInterpolatingDominanceLevel : ProofLevel
-fernandezProcacciToInterpolatingDominanceLevel = machineChecked
+dobrushinToFernandezProcacciDominanceLevel : ProofLevel
+dobrushinToFernandezProcacciDominanceLevel = machineChecked
+
+fernandezProcacciToExtendedGKIdentificationLevel : ProofLevel
+fernandezProcacciToExtendedGKIdentificationLevel = machineChecked
 
 polymerCriterionSignConventionLevel : ProofLevel
 polymerCriterionSignConventionLevel = machineChecked
 
--- Strict improvement is model dependent: it requires an actual incompatibility
--- neighbourhood whose compatible-subset partition function is strictly smaller
--- than the KP exponential majorant.  It is not inferred from names alone.
+-- Strict improvement and the extended-GK identification are physical/model
+-- statements: they require the actual incompatibility neighbourhood and subset
+-- support structure.  They are not inferred merely from criterion names.
 physicalStrictCriterionSlackLevel : ProofLevel
 physicalStrictCriterionSlackLevel = conditional
+
+physicalExtendedGKIdentificationLevel : ProofLevel
+physicalExtendedGKIdentificationLevel = conditional
