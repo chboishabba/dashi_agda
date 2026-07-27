@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiniteAtomListsExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; _≤_; _/_)
+open import Data.Rational using (ℚ; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
