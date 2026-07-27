@@ -10,9 +10,25 @@ Not : Set → Set
 Not proposition = proposition → ⊥
 
 ------------------------------------------------------------------------
--- P5 limit closure.  Every property is transported through the actual limit
--- by an explicit sequential-closedness theorem.  This prevents positivity or
--- an OS axiom from being silently reasserted after taking the limit.
+-- P5 limit closure.
+--
+-- K. Osterwalder and R. Schrader,
+-- "Axioms for Euclidean Green's functions",
+-- Communications in Mathematical Physics 31 (1973), 83--112.
+-- DOI: 10.1007/BF01645738
+--
+-- K. Osterwalder and R. Schrader,
+-- "Axioms for Euclidean Green's functions II",
+-- Communications in Mathematical Physics 42 (1975), 281--305.
+-- DOI: 10.1007/BF01608978
+--
+-- Every property below is transported through an actual sequential-closedness
+-- theorem.  For reflection positivity, however, the abstract field
+-- `reflectionPositiveClosed` is not accepted as a physical producer by itself.
+-- It must be instantiated by convergence of complete reflected Gram quadratic
+-- forms, as implemented in BalabanClayT5OSGramTopologyExact and
+-- BalabanClayT5OSGramClosedPropertyExact.  Pointwise convergence of individual
+-- correlators is deliberately insufficient.
 ------------------------------------------------------------------------
 
 record SequentialLimit (Object : Set) : Set₁ where
@@ -173,11 +189,14 @@ finiteToContinuumPositivityClosureLevel = machineChecked
 continuumOSPropertyTransportLevel : ProofLevel
 continuumOSPropertyTransportLevel = machineChecked
 
+osClosureRequiresGramTopologyLevel : ProofLevel
+osClosureRequiresGramTopologyLevel = machineChecked
+
 fourthCumulantNontrivialityLevel : ProofLevel
 fourthCumulantNontrivialityLevel = machineChecked
 
 -- Tightness, uniqueness of the thermodynamic/continuum limits, restoration of
--- Euclidean covariance and a uniform nonzero fourth-cumulant lower bound remain
--- the literal analytic producers.
+-- Euclidean covariance, Gram-topology convergence and a uniform nonzero
+-- fourth-cumulant lower bound remain the literal analytic producers.
 physicalLimitTightnessAndNontrivialityLevel : ProofLevel
 physicalLimitTightnessAndNontrivialityLevel = conditional
