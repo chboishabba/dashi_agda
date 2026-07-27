@@ -4,23 +4,26 @@ module DASHI.Physics.Closure.NSTriadKNStage3OrderedL2AnalyticIntegration where
 -- PROVENANCE
 -- Authors: Jean Leray; Marco Cannone; Hajer Bahouri; Jean-Yves Chemin;
 -- Raphael Danchin; Loukas Grafakos; Seungly Oh; Rodolfo H. Torres; Piero
--- D'Ancona; DASHI repository contributors.
+-- D'Ancona; Pierre Germain; Oleg Kiriukhin; DASHI repository contributors.
 -- Title: "Stage-3 ordered l2, exact shell geometry, and componentwise Schur
 -- integration".
 -- Venue/year: Handbook of Mathematical Fluid Dynamics 3 (2005); Springer
 -- Grundlehren 343 (2011); Communications in Partial Differential Equations 39
--- (2014); Advances in Mathematics 165 (2002); Journal of Fourier Analysis and
--- Applications 25 (2019), with correction in volume 26 (2020); DASHI formal
--- development, 2026.
+-- (2014); Journal of Functional Analysis 187 (2001); Advances in Mathematics
+-- 165 (2002); Journal of Fourier Analysis and Applications 25 (2019), with
+-- correction in volume 26 (2020); Journal of Differential Equations 226
+-- (2006); arXiv:2604.12188v1 (2026); DASHI formal development, 2026.
 -- DOI: 10.1016/S1874-5792(05)80006-0;
 -- 10.1007/978-3-642-16830-7; 10.1080/03605302.2013.822885;
--- 10.1006/aima.2001.2028; 10.1007/s00041-018-9612-8;
--- correction DOI 10.1007/s00041-019-09724-7; repository-original integration
--- has no DOI.
+-- 10.1006/jfan.2001.3804; 10.1006/aima.2001.2028;
+-- 10.1007/s00041-018-9612-8; correction DOI 10.1007/s00041-019-09724-7;
+-- 10.1016/j.jde.2005.10.007; 10.48550/arXiv.2604.12188;
+-- repository-original integration has no DOI.
 -- Uses: the exact vector adjoints, ordered Euclidean l2 surface, transverse
 -- uniqueness reduction, Leray contraction reduction, hard-shell owner,
 -- componentwise direct/swapped ledger, endpoint profiles, finite-overlap
--- constants, and cutoff-uniform first-adjoint target.
+-- constants, component affine ledger, three Schur-condition assembly and the
+-- final cutoff-uniform dual-bound factorization.
 -- Relationship: this is the proof-critical Stage-3 path.  It intentionally
 -- imports no balanced-ternary, unbalanced-ternary, Base369, C6 or C9 status
 -- layer.  Existing 369 mathematics is untouched and remains available outside
@@ -42,8 +45,9 @@ import DASHI.Physics.Closure.NSTriadKNFiniteOverlapCanonicalConstants as Overlap
 import DASHI.Physics.Closure.NSTriadKNFirstAdjointCutoffUniformAssembly as First
 import DASHI.Physics.Closure.NSTriadKNGrafakosOhDiagonalConvolutionAudit as GrafakosOh
 import DASHI.Physics.Closure.NSTriadKNDAnconaCommutatorFallbackAudit as DAncona
-import DASHI.Physics.Closure.NSTriadKNThreeWeightAffineCertificateProgram as Affine
-import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Schur
+import DASHI.Physics.Closure.NSTriadKNComponentAffineConstraintLedger as Affine
+import DASHI.Physics.Closure.NSTriadKNGrafakosTorresComponentAssembly as GTAssembly
+import DASHI.Physics.Closure.NSTriadKNFinalCutoffUniformDualBoundAssembly as Final
 
 record Stage3OrderedL2Receipt : Set where
   constructor receipt
@@ -97,10 +101,26 @@ record Stage3OrderedL2Receipt : Set where
     dAnconaRetainedOnlyAsFallback :
       DAncona.dAnconaClosesFirstAdjointConvolution ≡ false
 
+    componentAffineLedgerSurfaceRepresented :
+      Affine.allSeparatedEndpointProfilesAvailable ≡ true
+    completeNumericAffineLedgerStillOpen :
+      Affine.completeNumericComponentConstraintLedgerClosed ≡ false
     strictAffineCertificateStillOpen :
-      Affine.strictNavierStokesThreeWeightCertificateClosed ≡ false
-    finalDualBoundStillOpen :
-      Schur.stage3WeightedColumnOrDualBoundClosed ≡ false
+      Affine.strictComponentAffineCertificateClosed ≡ false
+
+    genericSixClassAssemblyClosed :
+      GTAssembly.sixClassMonotoneAssemblyClosed ≡ true
+    genericThreeConditionAssemblyClosed :
+      GTAssembly.allThreeGenericClassAssembliesClosed ≡ true
+    concreteThreeConditionsStillOpen :
+      GTAssembly.concreteNavierStokesGrafakosTorresConditionsClosed ≡ false
+
+    finalTransitiveAssemblyClosed :
+      Final.finalTransitiveAssemblyClosed ≡ true
+    sixConstantFactorsExposed :
+      Final.allSixConstantFactorsExposed ≡ true
+    concreteFinalDualBoundStillOpen :
+      Final.concreteStage3CutoffUniformDualBoundClosed ≡ false
 
 open Stage3OrderedL2Receipt public
 
@@ -127,8 +147,15 @@ stage3OrderedL2Receipt =
     First.cutoffUniformFirstAdjointEstimateClosedIsFalse
     GrafakosOh.grafakosOhConsumedAsRepositoryTheoremIsFalse
     DAncona.dAnconaClosesFirstAdjointConvolutionIsFalse
-    Affine.strictNavierStokesThreeWeightCertificateClosedIsFalse
-    Schur.stage3WeightedColumnOrDualBoundClosedIsFalse
+    Affine.allSeparatedEndpointProfilesAvailableIsTrue
+    Affine.completeNumericComponentConstraintLedgerClosedIsFalse
+    Affine.strictComponentAffineCertificateClosedIsFalse
+    GTAssembly.sixClassMonotoneAssemblyClosedIsTrue
+    GTAssembly.allThreeGenericClassAssembliesClosedIsTrue
+    GTAssembly.concreteNavierStokesGrafakosTorresConditionsClosedIsFalse
+    Final.finalTransitiveAssemblyClosedIsTrue
+    Final.allSixConstantFactorsExposedIsTrue
+    Final.concreteStage3CutoffUniformDualBoundClosedIsFalse
 
 stage3OrderedL2AnalyticPathRepresented : Bool
 stage3OrderedL2AnalyticPathRepresented = true
