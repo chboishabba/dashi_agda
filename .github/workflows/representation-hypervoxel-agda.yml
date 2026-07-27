@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Cognition/SituatedFrameMetacognitionBoundary.agda'
+      - 'DASHI/Foundations/CanonicalHalfFrameScaleValuation.agda'
       - 'DASHI/Foundations/LiftPolarityPathComposition.agda'
       - 'DASHI/Foundations/RadixValuationStageBridge.agda'
       - 'DASHI/Foundations/RecursiveRadixHypervoxel.agda'
