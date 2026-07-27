@@ -46,3 +46,28 @@ import DASHI.Biology.Evolution.EvolutionaryPopulationDynamics
 import DASHI.Biology.Ecology.EcologicalInteractionDynamics
 
 import DASHI.Biology.BiologicalRecoveryBoundary
+
+------------------------------------------------------------------------
+-- OEF / AI student-feedback multi-fibre extension.
+
+import DASHI.Biology.OEFMultiFibreFeedbackHyperfabric
+import DASHI.Biology.HumanCodingMachineCompilationBridge
+import DASHI.Biology.OEFOverlapAnalytics
+import DASHI.Biology.FeedbackNonResponseGovernance
+import DASHI.Biology.IntersectionalFeedbackPrivacyBoundary
+import DASHI.Biology.LongitudinalEngagementTrajectory
+import DASHI.Biology.PedagogicalJPlusOneRouting
+import DASHI.Biology.OEFAIFeedbackFormalisation
+import DASHI.Biology.OEFAIFeedbackFormalisationFull
+
+------------------------------------------------------------------------
+-- Cross-paper education corpus loom.
+
+import DASHI.Biology.EducationCorpusSourceRegistry
+import DASHI.Biology.StudentVoiceEpistemicAgencyBridge
+import DASHI.Biology.StudentIdentifiedSupportStrategiesBridge
+import DASHI.Biology.EcologyOfDataHyperfabricBridge
+import DASHI.Biology.ParentAllyshipMultiObserverBridge
+import DASHI.Biology.InterpretiveCodingSystem
+import DASHI.Biology.CrossPaperDialecticalDevelopment
+import DASHI.Biology.AliceBrownCorpusLoom
