@@ -3,6 +3,7 @@ module DASHI.Foundations.LogisticAdicStageRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Arithmetic.AdicGeometricMirror as Mirror
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge as TraumaMemory
 import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.ControlCardCore as Control
 import DASHI.Core.FramedORCSLPGFAdapter as Governance
@@ -14,11 +15,6 @@ import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Foundations.StageTetralemmaArrestBridge as Tetralemma
 import DASHI.Foundations.StageValuationBundleAtlas as Stage
 import DASHI.Physics.Closure.SheetExchangeJFixedResolutionBoundary as Sheet
-
-------------------------------------------------------------------------
--- Concrete identity square over Nat, used only as a kernel-checked witness that
--- the generic algebraic commutation theorem is inhabited.
-------------------------------------------------------------------------
 
 natLogisticAlgebra : Logistic.LogisticAlgebra Nat
 natLogisticAlgebra = record
@@ -47,15 +43,11 @@ natIdentitySquare357At50 =
 
 record LogisticAdicStageRegression : Set₁ where
   field
-    threeAdicMirror :
-      Mirror.HalfCompletionMirrorBridge
-    generalAdicBoundary :
-      Mirror.AdicMirrorAuthorityBoundary
-    threePartialSumDepth3 :
-      Mirror.geometricPartialSum 3 3 ≡ 40
+    threeAdicMirror : Mirror.HalfCompletionMirrorBridge
+    generalAdicBoundary : Mirror.AdicMirrorAuthorityBoundary
+    threePartialSumDepth3 : Mirror.geometricPartialSum 3 3 ≡ 40
 
-    chartSeparation :
-      Logistic.LogisticChartSeparation
+    chartSeparation : Logistic.LogisticChartSeparation
     algebraicIdentitySquare :
       Logistic.map
         (Logistic.identityLogisticMorphism natLogisticAlgebra)
@@ -68,28 +60,18 @@ record LogisticAdicStageRegression : Set₁ where
         (Logistic.map
           (Logistic.identityLogisticMorphism natLogisticAlgebra)
           50)
-    factorVecReceipt :
-      Logistic.LogisticRationalFactorVecReceipt
-    continuumBoundary :
-      Logistic.LogisticContinuumAuthorityBoundary
-    bottomArrowRequirement :
-      Bridge.BridgeRequirementRow
+    factorVecReceipt : Logistic.LogisticRationalFactorVecReceipt
+    continuumBoundary : Logistic.LogisticContinuumAuthorityBoundary
+    bottomArrowRequirement : Bridge.BridgeRequirementRow
     bottomArrowRequirementReceipt :
-      Bridge.BridgeRequirementRowReceipt
-        bottomArrowRequirement
+      Bridge.BridgeRequirementRowReceipt bottomArrowRequirement
 
-    sixJoinedChart :
-      Composite.CompositeRadixPrimeLaneReceipt
-    ninePrimaryDepthChart :
-      Composite.CompositeRadixPrimeLaneReceipt
-    compositeBoundary :
-      Composite.CompositeRadixAuthorityBoundary
-    stage3Low :
-      Composite.ClosureBandCoordinate
-    stage6Middle :
-      Composite.ClosureBandCoordinate
-    stage9High :
-      Composite.ClosureBandCoordinate
+    sixJoinedChart : Composite.CompositeRadixPrimeLaneReceipt
+    ninePrimaryDepthChart : Composite.CompositeRadixPrimeLaneReceipt
+    compositeBoundary : Composite.CompositeRadixAuthorityBoundary
+    stage3Low : Composite.ClosureBandCoordinate
+    stage6Middle : Composite.ClosureBandCoordinate
+    stage9High : Composite.ClosureBandCoordinate
 
     stage3ClosureProof :
       Stage.closureBand Atlas.atlas-3 ≡ Stage.lowClosure3
@@ -97,65 +79,42 @@ record LogisticAdicStageRegression : Set₁ where
       Stage.closureBand Atlas.atlas-6 ≡ Stage.middleClosure6
     stage9ClosureProof :
       Stage.closureBand Atlas.atlas-9 ≡ Stage.highClosure9
-    tetralemmaArrest :
-      Tetralemma.TetralemmaArrestReceipt
-    stage8Residual :
-      Stage.Stage8ObstructionObservation
-    stage11Join :
-      Stage.Stage11CrossScaleJoin
-    hundredBundle :
-      Stage.PlaceBundle
-    hundredIsTenTens :
-      100 ≡ 10 * 10
-    beyond11Stage14 :
-      Stage.DecimalStageAddress
-    beyond11Stage17 :
-      Stage.DecimalStageAddress
-    beyond11Stage200 :
-      Stage.DecimalStageAddress
-    compressedTransformativeJump :
-      Stage.CompressedStageTransition
-    stageBoundary :
-      Stage.StageValuationAuthorityBoundary
+    tetralemmaArrest : Tetralemma.TetralemmaArrestReceipt
+    stage8Residual : Stage.Stage8ObstructionObservation
+    stage11Join : Stage.Stage11CrossScaleJoin
+    hundredBundle : Stage.PlaceBundle
+    hundredIsTenTens : 100 ≡ 10 * 10
+    beyond11Stage14 : Stage.DecimalStageAddress
+    beyond11Stage17 : Stage.DecimalStageAddress
+    beyond11Stage200 : Stage.DecimalStageAddress
+    compressedTransformativeJump : Stage.CompressedStageTransition
+    stageBoundary : Stage.StageValuationAuthorityBoundary
 
-    familySupportFibre :
-      Cross.ThreeRoleSupportFibre
-    oneThirdRoleWeight :
-      Cross.OneThirdRoleWeight
-    decimal357Address :
-      Cross.Decimal357Address
-    decimal357Cylinder :
-      Cross.SymbolicCylinderAddress
+    pnfTraumaMemoryHypervoxelBoundary :
+      TraumaMemory.TraumaMemoryHypervoxelAuthorityBoundary
+
+    familySupportFibre : Cross.ThreeRoleSupportFibre
+    oneThirdRoleWeight : Cross.OneThirdRoleWeight
+    decimal357Address : Cross.Decimal357Address
+    decimal357Cylinder : Cross.SymbolicCylinderAddress
     monsterRepresentationSeparation :
       Cross.MonsterRepresentationSeparationReceipt
-    crossPollinationBoundary :
-      Cross.FamilyDecimalMonsterAuthorityBoundary
+    crossPollinationBoundary : Cross.FamilyDecimalMonsterAuthorityBoundary
 
-    governanceAdapter :
-      Governance.FramedORCSLPGFAdapter
-    governanceRow :
-      Control.ControlCardRow
-    governanceRowReceipt :
-      Control.ControlCardRowReceipt governanceRow
-    monsterCarrierAdmission :
-      Governance.MonsterCarrierAdmission
-    governanceBoundary :
-      Governance.FramedORCSLPGFAuthorityBoundary
+    governanceAdapter : Governance.FramedORCSLPGFAdapter
+    governanceRow : Control.ControlCardRow
+    governanceRowReceipt : Control.ControlCardRowReceipt governanceRow
+    monsterCarrierAdmission : Governance.MonsterCarrierAdmission
+    governanceBoundary : Governance.FramedORCSLPGFAuthorityBoundary
 
-    attractorBoundary :
-      Obligations.AttractorBifurcationAuthorityBoundary
-    stage11ManifoldBoundary :
-      Obligations.Stage11ManifoldProcessBoundary
-    crossLaneBoundary :
-      Obligations.CrossLaneOrthogonalityBoundary
-    remainingObligations :
-      Obligations.DynamicalAdapterRemainingObligations
+    attractorBoundary : Obligations.AttractorBifurcationAuthorityBoundary
+    stage11ManifoldBoundary : Obligations.Stage11ManifoldProcessBoundary
+    crossLaneBoundary : Obligations.CrossLaneOrthogonalityBoundary
+    remainingObligations : Obligations.DynamicalAdapterRemainingObligations
 
-    sheetResolution :
-      Sheet.SheetExchangeResolutionBoundary
+    sheetResolution : Sheet.SheetExchangeResolutionBoundary
 
-canonicalLogisticAdicStageRegression :
-  LogisticAdicStageRegression
+canonicalLogisticAdicStageRegression : LogisticAdicStageRegression
 canonicalLogisticAdicStageRegression = record
   { threeAdicMirror = Mirror.canonicalHalfCompletionMirrorBridge
   ; generalAdicBoundary = Mirror.canonicalAdicMirrorAuthorityBoundary
@@ -186,6 +145,8 @@ canonicalLogisticAdicStageRegression = record
   ; beyond11Stage200 = Stage.stage200Address
   ; compressedTransformativeJump = Stage.canonicalTransformativeJump3To14
   ; stageBoundary = Stage.canonicalStageValuationAuthorityBoundary
+  ; pnfTraumaMemoryHypervoxelBoundary =
+      TraumaMemory.canonicalTraumaMemoryHypervoxelAuthorityBoundary
   ; familySupportFibre = Cross.canonicalTwoParentOneChildSupportFibre
   ; oneThirdRoleWeight = Cross.canonicalOneThirdRoleWeight
   ; decimal357Address = Cross.canonicalDecimal357Address
