@@ -19,12 +19,14 @@ import DASHI.Physics.YangMills.BalabanClayCommonNegativeLogSincReductionExact
 import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact
 import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact
 
--- T3: reference coercivity, exact chart singular values, literal five-remainder
--- constants, configured common radius, and physical Green decay reduction.
+-- T3: reference coercivity, exact chart singular values, an independent
+-- half-radian sample certificate, literal five-remainder constants, configured
+-- common radius, and physical Green decay reduction.
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralPhysicalCoercivityProducerExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralBackgroundHessianRemaindersExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralSU2ChartIntervalBoundsExact
+import DASHI.Physics.YangMills.BalabanClayT3RightJacobianSampleCheckExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralFiveRemainderConstantsExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralCommonRadiusWitnessExact
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact
