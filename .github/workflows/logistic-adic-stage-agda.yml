@@ -1,0 +1,46 @@
+name: Logistic adic stage Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Arithmetic/AdicGeometricMirror.agda'
+      - 'DASHI/Cognition/TlureyChaosBridge.agda'
+      - 'DASHI/Core/FramedORCSLPGFAdapter.agda'
+      - 'DASHI/Dynamics/LogisticAdicStageCommutingSpine.agda'
+      - 'DASHI/Foundations/CompositeRadixPrimeLaneBridge.agda'
+      - 'DASHI/Foundations/LogisticAdicStageRegression.agda'
+      - 'DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda'
+      - 'DASHI/Foundations/StageValuationBundleAtlas.agda'
+      - 'DASHI/Physics/Closure/SheetExchangeJFixedResolutionBoundary.agda'
+      - 'scripts/check_logistic_adic_stage_spine.py'
+      - '.github/workflows/logistic-adic-stage-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_BIN: agda
+      DASHI_REPO_ROOT: ${{ github.workspace }}
+      AGDA_LOG_PATH: ${{ github.workspace }}/.cache/logistic-adic-stage-agda.log
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - name: Run fail-closed source and arithmetic audit
+        run: python3 scripts/check_logistic_adic_stage_spine.py
+      - uses: cachix/install-nix-action@v31
+      - name: Typecheck logistic adic stage regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/LogisticAdicStageRegression.agda
+      - name: Typecheck authoritative SSP 369 route
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda
+      - name: Typecheck authoritative aggregate
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Everything.agda
