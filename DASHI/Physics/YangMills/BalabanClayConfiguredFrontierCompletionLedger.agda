@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact as Gr
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredActionGainThresholdExact as Action
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredComponentLossBoundsExact as Components
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact as Loss
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalLossInstanceExact as LossInstance
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact as Polymer
 import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact as Balaban536
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as OneLoop
@@ -68,11 +69,17 @@ configuredComponentBudgetReductionLevel =
 configuredLossArithmeticLevel : ProofLevel
 configuredLossArithmeticLevel = Loss.configuredLossArithmeticLevel
 
+configuredComponentSumReductionLevel : ProofLevel
+configuredComponentSumReductionLevel = Loss.configuredComponentSumReductionLevel
+
 configuredLogSixteenReductionLevel : ProofLevel
 configuredLogSixteenReductionLevel = Loss.configuredLogSixteenReductionLevel
 
 configuredOneSixteenthAssemblyLevel : ProofLevel
 configuredOneSixteenthAssemblyLevel = Loss.configuredOneSixteenthAssemblyLevel
+
+configuredEmbeddedLossInstanceLevel : ProofLevel
+configuredEmbeddedLossInstanceLevel = LossInstance.configuredEmbeddedLossInstanceLevel
 
 configuredPatchDirectionMaskLevel : ProofLevel
 configuredPatchDirectionMaskLevel = Polymer.configuredPatchDirectionMaskLevel
@@ -157,6 +164,10 @@ physicalLargeFieldPlaquetteAndBetaInputsLevel =
 physicalHaarTraceQuaternionLocalizationPatchInputsLevel : ProofLevel
 physicalHaarTraceQuaternionLocalizationPatchInputsLevel =
   Components.physicalHaarTraceQuaternionLocalizationPatchInputsLevel
+
+physicalActionAndComponentInputsLevel : ProofLevel
+physicalActionAndComponentInputsLevel =
+  LossInstance.physicalActionAndComponentInputsLevel
 
 physicalLossDominationInputsLevel : ProofLevel
 physicalLossDominationInputsLevel = Loss.physicalLossDominationInputsLevel
