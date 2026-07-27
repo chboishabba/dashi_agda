@@ -1,0 +1,194 @@
+module DASHI.Governance.TraumaExploitationNormedDifferential where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Primitive using (Set₁)
+
+open import DASHI.Analysis.MarxDifferentialCore
+open import DASHI.Analysis.MarxHigherCalculus
+open import DASHI.Governance.TraumaExploitationAttractor
+
+------------------------------------------------------------------------
+-- Normed heterogeneous derivative of the social recursion.
+--
+-- Each lane owns a distinct tangent module and norm.  Local amplification is
+-- therefore represented by operator bounds on typed maps, not by one untyped
+-- scalar attached to the whole historical system.
+
+record TraumaExploitationNormedDifferential
+  (A : MarxAlgebra)
+  (O : OrderedScalar A)
+  (S : TraumaExploitationSystem)
+  : Set₁ where
+  field
+    HistoricalModule : HistoricalState S → Module A
+    SufferingModule : SufferingField S → Module A
+    ProtocolModule : ExploitationProtocol S → Module A
+    InstitutionModule : Institution S → Module A
+
+    HistoricalNorm :
+      (x : HistoricalState S) →
+      NormedModule A O (HistoricalModule x)
+
+    SufferingNorm :
+      (s : SufferingField S) →
+      NormedModule A O (SufferingModule s)
+
+    ProtocolNorm :
+      (p : ExploitationProtocol S) →
+      NormedModule A O (ProtocolModule p)
+
+    InstitutionNorm :
+      (i : Institution S) →
+      NormedModule A O (InstitutionModule i)
+
+    dTraumaProduction :
+      (x : HistoricalState S) →
+      BoundedLinearMap
+        (HistoricalNorm x)
+        (SufferingNorm (traumaProduction S x))
+
+    dExploitationExtraction :
+      (s : SufferingField S) →
+      BoundedLinearMap
+        (SufferingNorm s)
+        (ProtocolNorm (exploitationExtraction S s))
+
+    dInstitutionalise :
+      (p : ExploitationProtocol S) →
+      BoundedLinearMap
+        (ProtocolNorm p)
+        (InstitutionNorm (institutionalise S p))
+
+    dReproduce :
+      (i : Institution S) →
+      (x : HistoricalState S) →
+      BoundedLinearMap
+        (InstitutionNorm i)
+        (HistoricalNorm (reproduce S i x))
+
+open TraumaExploitationNormedDifferential public
+
+------------------------------------------------------------------------
+-- Composition of bounded maps requires the selected ordered scalar's
+-- multiplication/order compatibility.  That theorem is supplied once and
+-- reused across all four lanes.
+
+record BoundedCompositionLaws
+  {A : MarxAlgebra}
+  {O : OrderedScalar A}
+  : Set₁ where
+  field
+    composeBounded :
+      ∀ {U V W : Module A}
+        {NU : NormedModule A O U}
+        {NV : NormedModule A O V}
+        {NW : NormedModule A O W} →
+      BoundedLinearMap NV NW →
+      BoundedLinearMap NU NV →
+      BoundedLinearMap NU NW
+
+    composedBound :
+      ∀ {U V W : Module A}
+        {NU : NormedModule A O U}
+        {NV : NormedModule A O V}
+        {NW : NormedModule A O W}
+        (F : BoundedLinearMap NV NW)
+        (G : BoundedLinearMap NU NV) →
+      operatorBound (composeBounded F G)
+      ≡ _*_ A (operatorBound F) (operatorBound G)
+
+open BoundedCompositionLaws public
+
+fullStepBoundedDifferential :
+  {A : MarxAlgebra} →
+  {O : OrderedScalar A} →
+  {S : TraumaExploitationSystem} →
+  (composition : BoundedCompositionLaws {A} {O}) →
+  (D : TraumaExploitationNormedDifferential A O S) →
+  (x : HistoricalState S) →
+  BoundedLinearMap
+    (HistoricalNorm D x)
+    (HistoricalNorm D (step S x))
+fullStepBoundedDifferential {S = S} composition D x =
+  let
+    suffering = traumaProduction S x
+    protocol = exploitationExtraction S suffering
+    institution = institutionalise S protocol
+  in
+  composeBounded composition
+    (dReproduce D institution x)
+    (composeBounded composition
+      (dInstitutionalise D protocol)
+      (composeBounded composition
+        (dExploitationExtraction D suffering)
+        (dTraumaProduction D x)))
+
+------------------------------------------------------------------------
+-- Explicit local gain factorisation.
+
+record NormedDifferentialAttribution
+  {A : MarxAlgebra}
+  {O : OrderedScalar A}
+  {S : TraumaExploitationSystem}
+  (D : TraumaExploitationNormedDifferential A O S)
+  (x : HistoricalState S)
+  : Set₁ where
+  field
+    sufferingEntryGain : Carrier A
+    extractionAmplificationGain : Carrier A
+    institutionalScalabilityGain : Carrier A
+    reproductionExternalisationGain : Carrier A
+
+    sufferingEntryGainMatches :
+      sufferingEntryGain
+      ≡ operatorBound (dTraumaProduction D x)
+
+    extractionAmplificationGainMatches :
+      extractionAmplificationGain
+      ≡ operatorBound
+          (dExploitationExtraction D (traumaProduction S x))
+
+    institutionalScalabilityGainMatches :
+      institutionalScalabilityGain
+      ≡ operatorBound
+          (dInstitutionalise D
+            (exploitationExtraction S (traumaProduction S x)))
+
+    reproductionExternalisationGainMatches :
+      reproductionExternalisationGain
+      ≡ operatorBound
+          (dReproduce D
+            (institutionalise S
+              (exploitationExtraction S (traumaProduction S x)))
+            x)
+
+open NormedDifferentialAttribution public
+
+canonicalNormedDifferentialAttribution :
+  {A : MarxAlgebra} →
+  {O : OrderedScalar A} →
+  {S : TraumaExploitationSystem} →
+  (D : TraumaExploitationNormedDifferential A O S) →
+  (x : HistoricalState S) →
+  NormedDifferentialAttribution D x
+canonicalNormedDifferentialAttribution {S = S} D x =
+  record
+    { sufferingEntryGain = operatorBound (dTraumaProduction D x)
+    ; extractionAmplificationGain =
+        operatorBound
+          (dExploitationExtraction D (traumaProduction S x))
+    ; institutionalScalabilityGain =
+        operatorBound
+          (dInstitutionalise D
+            (exploitationExtraction S (traumaProduction S x)))
+    ; reproductionExternalisationGain =
+        operatorBound
+          (dReproduce D
+            (institutionalise S
+              (exploitationExtraction S (traumaProduction S x)))
+            x)
+    ; sufferingEntryGainMatches = refl
+    ; extractionAmplificationGainMatches = refl
+    ; institutionalScalabilityGainMatches = refl
+    ; reproductionExternalisationGainMatches = refl
+    }
