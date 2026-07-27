@@ -13,10 +13,20 @@ open import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact
 import DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact as P2
 
 ------------------------------------------------------------------------
--- T2: the exact 8/16 mechanism.
+-- T2: the exact 8/16 Kotecký--Preiss specialisation.
+--
+-- R. Kotecký and D. Preiss,
+-- "Cluster expansion for abstract polymer models",
+-- Communications in Mathematical Physics 103 (1986), 491--498.
+-- DOI: 10.1007/BF01211762
+--
+-- This module certifies the conservative KP lane.  The distinct
+-- Fernández--Procacci and interpolating criteria, and the valid dominance
+-- directions between their neighbourhood majorants, are formalized in
+-- BalabanClayT2ClusterCriterionComparisonExact.
 --
 -- A rooted trace has at most eight signed one-step extensions in four
--- dimensions.  If the total activity carried by each extension is at most
+-- dimensions.  If the absolute activity carried by each extension is at most
 -- 1/16 of its parent shell, then one shell step costs at most 8/16 = 1/2.
 -- Together with the root normalization 1/4 this produces exactly
 --
@@ -137,6 +147,9 @@ rootedShellQuarterHalfPowerLevel = machineChecked
 
 rootedShellToFiniteKoteckyPreissLevel : ProofLevel
 rootedShellToFiniteKoteckyPreissLevel = machineChecked
+
+rootedTraversalCriterionIsKPLevel : ProofLevel
+rootedTraversalCriterionIsKPLevel = machineChecked
 
 -- What remains physical is now sharply one statement: derive the 1/16 extension
 -- activity from the Wilson action, Haar Jacobian, determinant, BCH, localization,
