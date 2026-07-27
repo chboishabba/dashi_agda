@@ -63,6 +63,7 @@ record SharpLogSixteenAnalyticAuthority (Scalar : Set) : Set₁ where
     exponential logarithm : Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
 
+    reflexive : ∀ value → LessEqual value value
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
 
@@ -145,8 +146,8 @@ configuredPerturbedNetGainAboveFourteenFifths dataSet =
           (λ value → LessEqual (analytic dataSet)
             (rational (analytic dataSet) threeℚ) value)
           (sym (netGainExact dataSet))
-          (rationalOrderEmbedding (analytic dataSet)
-            (ℚP.≤-refl threeℚ)))
+          (reflexive (analytic dataSet)
+            (rational (analytic dataSet) threeℚ)))
         (extraLossBelowSlack dataSet)))
 
 configuredPerturbedNetGainAtLeastLogSixteen :
