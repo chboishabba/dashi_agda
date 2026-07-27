@@ -9,77 +9,140 @@ open Rep.FramedScaleValuationObject
 ------------------------------------------------------------------------
 -- Canonical concrete instance of the unified X/R/C/E/T/S/V carrier.
 --
--- The chart changes the presentation role but not the rational point carried
--- by a HalfPresentation.  Scale and valuation are exposed here as the positive
--- denominator and numerator coordinates of the selected presentation.
+-- A representation carries its rational value and active chart explicitly.
+-- Transition changes only the chart, so target correctness, evaluation
+-- preservation, identity and composition are all kernel-visible.
 ------------------------------------------------------------------------
+
+record ChartedHalfRepresentation : Set where
+  constructor charted-half
+  field
+    carriedRatio : Rep.RatioRepresentation
+    carriedChart : Rep.PresentationChart
+
+open ChartedHalfRepresentation public
+
+chartedPresentation :
+  Rep.HalfPresentation →
+  ChartedHalfRepresentation
+chartedPresentation presentation =
+  charted-half
+    (Rep.presentationRatio presentation)
+    (Rep.presentationChart presentation)
+
+chartedThreeSix : ChartedHalfRepresentation
+chartedThreeSix = chartedPresentation Rep.displayedThreeSix
+
+chartedOneHalf : ChartedHalfRepresentation
+chartedOneHalf = chartedPresentation Rep.displayedOneHalf
+
+chartedDecimalPointFive : ChartedHalfRepresentation
+chartedDecimalPointFive =
+  chartedPresentation Rep.displayedDecimalPointFive
+
+chartedFiftyPercent : ChartedHalfRepresentation
+chartedFiftyPercent =
+  chartedPresentation Rep.displayedFiftyPercent
+
+chartedBinaryPointOne : ChartedHalfRepresentation
+chartedBinaryPointOne =
+  chartedPresentation Rep.displayedBinaryPointOne
+
+transitionChart :
+  Rep.PresentationChart →
+  ChartedHalfRepresentation →
+  ChartedHalfRepresentation
+transitionChart target (charted-half value source) =
+  charted-half value target
 
 canonicalHalfFrameScaleValuation :
   Rep.FramedScaleValuationObject
     Rep.RatioRepresentation
-    Rep.HalfPresentation
+    ChartedHalfRepresentation
     Rep.PresentationChart
     Nat
     Nat
 canonicalHalfFrameScaleValuation = record
-  { evaluate = λ chart presentation → Rep.presentationRatio presentation
-  ; transition = λ source target presentation → presentation
-  ; transitionPreservesEvaluation = λ source target presentation → refl
-  ; transitionIdentity = λ chart presentation → refl
-  ; transitionComposition = λ first second third presentation → refl
-  ; activeChart = Rep.presentationChart
-  ; scaleOf = λ presentation →
-      Rep.denominator (Rep.presentationRatio presentation)
-  ; valuationOf = λ presentation →
-      Rep.numerator (Rep.presentationRatio presentation)
+  { evaluate = λ chart representation → carriedRatio representation
+  ; activeChart = carriedChart
+  ; transition = transitionChart
+  ; transitionTargetsChart = λ target representation → refl
+  ; transitionPreservesEvaluation = λ target representation → refl
+  ; transitionIdentity = λ
+      { (charted-half value chart) → refl
+      }
+  ; transitionComposition = λ
+      { second third (charted-half value source) → refl
+      }
+  ; scaleOf = λ representation →
+      Rep.denominator (carriedRatio representation)
+  ; valuationOf = λ representation →
+      Rep.numerator (carriedRatio representation)
   }
 
+canonicalTransitionTargetsChart :
+  ∀ target representation →
+  Rep.activeChart canonicalHalfFrameScaleValuation
+    (Rep.transition canonicalHalfFrameScaleValuation target representation)
+  ≡ target
+canonicalTransitionTargetsChart target representation = refl
+
+canonicalTransitionPreservesValue :
+  ∀ target representation →
+  Rep.evaluate canonicalHalfFrameScaleValuation target
+    (Rep.transition canonicalHalfFrameScaleValuation target representation)
+  ≡
+  Rep.evaluate canonicalHalfFrameScaleValuation
+    (Rep.activeChart canonicalHalfFrameScaleValuation representation)
+    representation
+canonicalTransitionPreservesValue target representation = refl
+
 canonicalInspectionValue :
-  ∀ presentation →
+  ∀ representation →
   proj₁
     (Rep.inspectRepresentation
       canonicalHalfFrameScaleValuation
-      presentation)
-  ≡ Rep.presentationRatio presentation
-canonicalInspectionValue presentation = refl
+      representation)
+  ≡ carriedRatio representation
+canonicalInspectionValue representation = refl
 
 canonicalInspectionChart :
-  ∀ presentation →
+  ∀ representation →
   proj₁
     (proj₂
       (Rep.inspectRepresentation
         canonicalHalfFrameScaleValuation
-        presentation))
-  ≡ Rep.presentationChart presentation
-canonicalInspectionChart presentation = refl
+        representation))
+  ≡ carriedChart representation
+canonicalInspectionChart representation = refl
 
 canonicalInspectionScale :
-  ∀ presentation →
+  ∀ representation →
   proj₁
     (proj₂
       (proj₂
         (Rep.inspectRepresentation
           canonicalHalfFrameScaleValuation
-          presentation)))
-  ≡ Rep.denominator (Rep.presentationRatio presentation)
-canonicalInspectionScale presentation = refl
+          representation)))
+  ≡ Rep.denominator (carriedRatio representation)
+canonicalInspectionScale representation = refl
 
 canonicalInspectionValuation :
-  ∀ presentation →
+  ∀ representation →
   proj₂
     (proj₂
       (proj₂
         (Rep.inspectRepresentation
           canonicalHalfFrameScaleValuation
-          presentation)))
-  ≡ Rep.numerator (Rep.presentationRatio presentation)
-canonicalInspectionValuation presentation = refl
+          representation)))
+  ≡ Rep.numerator (carriedRatio representation)
+canonicalInspectionValuation representation = refl
 
 canonicalThreeSixInspectionValue :
   proj₁
     (Rep.inspectRepresentation
       canonicalHalfFrameScaleValuation
-      Rep.displayedThreeSix)
+      chartedThreeSix)
   ≡ Rep.threeSix
 canonicalThreeSixInspectionValue = refl
 
@@ -87,6 +150,6 @@ canonicalFiftyPercentInspectionValue :
   proj₁
     (Rep.inspectRepresentation
       canonicalHalfFrameScaleValuation
-      Rep.displayedFiftyPercent)
+      chartedFiftyPercent)
   ≡ Rep.fiftyHundredths
 canonicalFiftyPercentInspectionValue = refl
