@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the helical, matrix, and direction-coherence tranche."""
+"""Fail closed on the helical, coherence, and Stage-3 weighted-Schur tranche."""
 
 from __future__ import annotations
 
@@ -25,6 +25,13 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNPermanaAlignmentRateAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNObjectiveVortexCriteriaScopeAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNHelicalCandidateDecisionFork.agda",
+    "DASHI/Physics/Closure/NSTriadKNKiriukhinOrbitRowSumAdapter.agda",
+    "DASHI/Physics/Closure/NSTriadKNOrbitToDyadicShellBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteHelicityRowLifting.agda",
+    "DASHI/Physics/Closure/NSTriadKNWeightedSchurDualityProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNMultilinearSchurParaproductProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3KiriukhinWeightedSchurProgram.agda",
 ]
 
 PROVENANCE_MARKERS = (
@@ -92,6 +99,7 @@ def main() -> int:
         ("scripts/ns_quartic_localized_helicity_extended_family.py", "extended localized-helicity family verifier"),
         ("scripts/ns_quartic_matrix_coherence_reconnaissance.py", "off-diagonal matrix-coherence verifier"),
         ("scripts/ns_quartic_direction_coherence_audit.py", "direction-coherence and Permana audit verifier"),
+        ("scripts/ns_kiriukhin_weighted_schur_reconnaissance.py", "Kiriukhin weighted-Schur reconnaissance verifier"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -102,9 +110,9 @@ def main() -> int:
         return 1
 
     print(
-        f"checked {len(FILES)} helical/matrix/direction files: no holes or "
-        "postulates; global, localized, matrix, direction, and manuscript-audit "
-        "exact verifiers passed"
+        f"checked {len(FILES)} helical/coherence/Stage-3 files: no holes or "
+        "postulates; global, localized, matrix, direction, manuscript-audit, "
+        "and weighted-Schur exact verifiers passed"
     )
     return 0
 
