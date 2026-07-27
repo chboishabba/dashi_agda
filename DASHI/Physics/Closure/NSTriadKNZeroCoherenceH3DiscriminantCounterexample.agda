@@ -106,6 +106,13 @@ cubicMagnitudeValue = 6111504
 discriminantGap : Nat
 discriminantGap = 28984957666432
 
+homogeneousQuadraticReserveValue homogeneousCubicMagnitudeValue : Nat
+homogeneousQuadraticReserveValue = 7250656
+homogeneousCubicMagnitudeValue = 5441472
+
+homogeneousDiscriminantGap : Nat
+homogeneousDiscriminantGap = 22476596169728
+
 exactDiscriminantGap :
   cubicMagnitudeValue * cubicMagnitudeValue
   ≡
@@ -115,6 +122,16 @@ exactDiscriminantGap = refl
 
 discriminantGapPositive : 0 < discriminantGap
 discriminantGapPositive = s≤s z≤n
+
+exactHomogeneousDiscriminantGap :
+  homogeneousCubicMagnitudeValue * homogeneousCubicMagnitudeValue
+  ≡
+  4 * homogeneousQuadraticReserveValue * quarticReserveValue
+  + homogeneousDiscriminantGap
+exactHomogeneousDiscriminantGap = refl
+
+homogeneousDiscriminantGapPositive : 0 < homogeneousDiscriminantGap
+homogeneousDiscriminantGapPositive = s≤s z≤n
 
 record ExactCounterexampleReceipt : Set where
   constructor receipt
@@ -129,6 +146,12 @@ record ExactCounterexampleReceipt : Set where
       4 * quadraticReserveValue * quarticReserveValue
       + discriminantGap
     strictFailureGap : 0 < discriminantGap
+    exactHomogeneousFailure :
+      homogeneousCubicMagnitudeValue * homogeneousCubicMagnitudeValue
+      ≡
+      4 * homogeneousQuadraticReserveValue * quarticReserveValue
+      + homogeneousDiscriminantGap
+    strictHomogeneousFailureGap : 0 < homogeneousDiscriminantGap
 
 zeroCoherenceH3DiscriminantCounterexample :
   ExactCounterexampleReceipt
@@ -140,6 +163,8 @@ zeroCoherenceH3DiscriminantCounterexample =
     kDivergenceFree
     exactDiscriminantGap
     discriminantGapPositive
+    exactHomogeneousDiscriminantGap
+    homogeneousDiscriminantGapPositive
 
 zeroCoherenceH3CandidateSurvivesDiscriminant : Bool
 zeroCoherenceH3CandidateSurvivesDiscriminant = false
