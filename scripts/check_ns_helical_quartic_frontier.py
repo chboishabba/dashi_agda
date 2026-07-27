@@ -93,6 +93,10 @@ def main() -> int:
             "scripts/ns_quartic_localized_helicity_reconnaissance.py",
             "localized-helicity reconnaissance verifier",
         ),
+        (
+            "scripts/ns_quartic_localized_helicity_extended_family.py",
+            "extended localized-helicity family verifier",
+        ),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -104,7 +108,7 @@ def main() -> int:
 
     print(
         f"checked {len(FILES)} helical quartic files: no holes or postulates; "
-        "global and localized exact verifiers passed"
+        "global, localized, and extended-family exact verifiers passed"
     )
     return 0
 
