@@ -1,0 +1,12 @@
+module DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle where
+
+-- One import surface for the literal T2--T5 producer tranche.  The individual
+-- modules keep analytic hypotheses explicit; this bundle performs no promotion.
+
+import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralPhysicalCoercivityProducerExact
+import DASHI.Physics.YangMills.BalabanClayT2LiteralWilsonSixFactorProducerExact
+import DASHI.Physics.YangMills.BalabanClayT2LiteralEightWayCliqueExact
+import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact
+import DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface
