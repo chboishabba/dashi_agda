@@ -88,7 +88,10 @@ record RepresentationHypervoxelRegression : Set₁ where
         (Representation.harmonicTerm 1)
 
     threefoldHalfRefinementIsThreeSix :
-      Representation.refineRatio 3 Representation.oneHalf
+      Representation.refineRatio
+        3
+        Representation.positive
+        Representation.oneHalf
       ≡ Representation.threeSix
 
     rank1SiteCountIs3 : Hyper.siteCount 1 1 ≡ 3
