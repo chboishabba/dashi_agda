@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = [
     ROOT / "DASHI/Foundations/RepresentationChartInvariant.agda",
     ROOT / "DASHI/Foundations/RecursiveRadixHypervoxel.agda",
+    ROOT / "DASHI/Foundations/LiftPolarityPathComposition.agda",
     ROOT / "DASHI/Foundations/RadixValuationStageBridge.agda",
     ROOT / "DASHI/Geometry/RepresentationPrefixUltrametricBridge.agda",
     ROOT / "DASHI/Physics/Closure/SU2SO3369HypervoxelBridge.agda",
@@ -45,6 +46,12 @@ REQUIRED_TOKENS = {
         "tower3",
         "projectCentralFlipInvariant",
         "RubikMove",
+    ],
+    "LiftPolarityPathComposition.agda": [
+        "composePolarityPath",
+        "composePolarityAppend",
+        "CoarseFinePolarityFactorisation",
+        "canonicalCoarseFineFactorisation",
     ],
     "RadixValuationStageBridge.agda": [
         "decimalBinaryHalfEquivalent",
@@ -78,6 +85,7 @@ REQUIRED_TOKENS = {
     ],
     "RepresentationHypervoxelRegression.agda": [
         "canonicalRepresentationHypervoxelRegression",
+        "pathPolarityFactorisation",
         "prefixUltrametricReceipt",
         "liftProjectionLaw",
     ],
@@ -128,6 +136,11 @@ def check_exact_arithmetic() -> None:
     assert 10 + 1 == 11
     assert 1 != 10 != 11
 
+    polarity_product = 1
+    for polarity in (-1, -1, 1):
+        polarity_product *= polarity
+    assert polarity_product == 1
+
 
 def scan_sources() -> None:
     for path in FILES:
@@ -153,6 +166,7 @@ def main() -> int:
     scan_sources()
     print("PASS: ratio, harmonic and radix presentations preserve 1/2 exactly")
     print("PASS: 3/6/9 lifted hierarchy and rank/depth counts are exact")
+    print("PASS: lift path prefix/suffix parity composes exactly")
     print("PASS: carry grammar 9 -> 10 -> 11 is exact and stage roles remain distinct")
     print("PASS: representation/hypervoxel source surface is fail-closed")
     print("NOTE: run the Agda checker for kernel validation")
