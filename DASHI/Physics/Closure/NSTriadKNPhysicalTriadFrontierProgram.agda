@@ -114,3 +114,6 @@ open import DASHI.Physics.Closure.NSTriadKNSignedGapAprioriComposition public
 open import DASHI.Physics.Closure.NSTriadKNFourierLimitCompletionComposition public
 open import DASHI.Physics.Closure.NSTriadKNGalerkinGlobalRegularityCompletion public
 open import DASHI.Physics.Closure.NSTriadKNGalerkinCompletionEndpoint public
+
+open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovCriticalProgram public
+open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEightStageProgram public
