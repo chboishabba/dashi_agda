@@ -2,9 +2,9 @@ module DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
+open import Data.Rational using (ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as Constants
@@ -21,11 +21,12 @@ import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as
 -- DOI: 10.1007/BF01240355
 --
 -- Relationship: the source papers motivate the small-field restriction.  The
--- finite scalar choice and equality below are DASHI-owned exact arithmetic.
+-- radius 1/2048 and the exact scalar equality below are DASHI-owned conservative
+-- arithmetic for the total configured coefficient 256.
 ------------------------------------------------------------------------
 
 configuredRadius configuredReferenceCoercivity configuredHalfReference : ℚ
-configuredRadius = + 1 / 256
+configuredRadius = + 1 / 2048
 configuredReferenceCoercivity = + 1 / 4
 configuredHalfReference = + 1 / 8
 
@@ -43,12 +44,6 @@ configuredRadiusBudgetScaledExact : ∀ norm →
   (Constants.configuredTotalCoefficient * configuredRadius) * norm
   ≡ configuredHalfReference * norm
 configuredRadiusBudgetScaledExact = ℚRing.solve-∀
-
-------------------------------------------------------------------------
--- The actual five remainder estimates enter only through the configured
--- domination record.  The radius and reference comparison are no longer free
--- fields: they are the explicit rationals above.
-------------------------------------------------------------------------
 
 record ConfiguredCommonRadiusPhysicalInput
     (Background State : Set) : Set₁ where
@@ -70,9 +65,6 @@ record ConfiguredCommonRadiusPhysicalInput
       ≡ referenceEnergy background state
         + Constants.totalRemainder domination background state
 
-    -- The Hessian difference is used in absolute-value form.  The lower-energy
-    -- transfer is kept explicit to avoid silently treating a signed remainder
-    -- as nonnegative.
     physicalEnergyLowerFromAbsoluteRemainder : ∀ background state →
       Constants.totalRemainder domination background state
       ≤ configuredHalfReference
