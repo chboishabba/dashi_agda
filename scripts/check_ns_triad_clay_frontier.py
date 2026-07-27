@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 FILES = [
@@ -47,6 +49,7 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNQuarticBKMExpenditure.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticStandardEndpoint.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovEightStageProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNZeroCoherenceH3DiscriminantCounterexample.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedUniformGapProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNArbitraryDataAprioriProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNSignedGapAprioriComposition.agda",
@@ -70,6 +73,7 @@ PROVENANCE_FILES = [
     "DASHI/Physics/Closure/NSTriadKNQuarticBKMExpenditure.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticStandardEndpoint.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovEightStageProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNZeroCoherenceH3DiscriminantCounterexample.agda",
 ]
 
 LITERAL_MARKERS = (
@@ -126,6 +130,23 @@ def main() -> int:
             failures.append(f"{relative}: missing provenance author")
         if "-- DOI:" not in text and "-- Journal DOI:" not in text:
             failures.append(f"{relative}: missing DOI status")
+
+    certificate = root / "scripts/ns_quartic_h3_zero_coherence_counterexample.py"
+    if not certificate.is_file():
+        failures.append("missing exact H^3 counterexample verifier")
+    else:
+        result = subprocess.run(
+            [sys.executable, str(certificate)],
+            cwd=root,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            failures.append(
+                "exact H^3 counterexample verifier failed: "
+                + (result.stderr.strip() or result.stdout.strip())
+            )
 
     if failures:
         for failure in failures:
