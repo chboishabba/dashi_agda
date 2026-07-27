@@ -43,6 +43,10 @@ data FrozenView : Set where
 data OrderedPiece : Set where
   unsplitPiece directPiece swappedPiece : OrderedPiece
 
+data GeometryTag : Set where
+  leftLowTag rightLowTag outputLowTag comparableTag transitionTag residualTag :
+    GeometryTag
+
 record LeftLow (jLeft jRight jOutput : Nat) : Set where
   constructor left-low
   field
@@ -117,12 +121,28 @@ record ResidualGeometry (jLeft jRight jOutput : Nat) : Set where
 
 record CanonicalGeometryPartition : Set₁ where
   field
-    classify : Nat → Nat → Nat →
-      LeftLow 0 0 0 ⊎ RightLow 0 0 0 ⊎ OutputLow 0 0 0 ⊎
-      ComparableGeometry 0 0 0 ⊎ TransitionGeometry 0 0 0 ⊎
-      ResidualGeometry 0 0 0
+    classify : Nat → Nat → Nat → GeometryTag
 
-    classificationUsesActualIndices : Set
+    leftTagSound : ∀ jLeft jRight jOutput →
+      classify jLeft jRight jOutput ≡ leftLowTag →
+      LeftLow jLeft jRight jOutput
+
+    rightTagSound : ∀ jLeft jRight jOutput →
+      classify jLeft jRight jOutput ≡ rightLowTag →
+      RightLow jLeft jRight jOutput
+
+    outputTagSound : ∀ jLeft jRight jOutput →
+      classify jLeft jRight jOutput ≡ outputLowTag →
+      OutputLow jLeft jRight jOutput
+
+    comparableTagSound : ∀ jLeft jRight jOutput →
+      classify jLeft jRight jOutput ≡ comparableTag →
+      ComparableGeometry jLeft jRight jOutput
+
+    transitionTagSound : ∀ jLeft jRight jOutput →
+      classify jLeft jRight jOutput ≡ transitionTag →
+      TransitionGeometry jLeft jRight jOutput
+
     classesPairwiseDisjoint : Set
     classesExhaustResonantTriples : Set
 
