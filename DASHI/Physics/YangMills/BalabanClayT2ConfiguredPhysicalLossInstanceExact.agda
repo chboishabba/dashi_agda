@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalLossInstanceExact where
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; subst)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational using (_≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact as Log16
@@ -49,7 +49,7 @@ record ConfiguredEmbeddedPhysicalLossData
         (subtract actionLower lossUpper) (subtract action loss)
 
     rationalOrderEmbedding : ∀ {left right} →
-      left Components.≤ right →
+      left ≤ right →
       Log16.LessEqual logAuthority
         (Log16.rational logAuthority left)
         (Log16.rational logAuthority right)
@@ -74,10 +74,6 @@ record ConfiguredEmbeddedPhysicalLossData
 
 open ConfiguredEmbeddedPhysicalLossData public
 
-embeddedJacobianLoss :
-  ∀ {Scale Polymer Scalar} →
-  ConfiguredEmbeddedPhysicalLossData Scale Polymer Scalar →
-  Scale → Polymer → Scalar
 embeddedJacobianLoss dataSet scale polymer =
   Log16.rational (logAuthority dataSet)
     (Components.haarLoss (componentLosses dataSet) scale polymer)
@@ -154,9 +150,9 @@ configuredPhysicalLossDominationInstance dataSet = record
   ; Budget.ConfiguredPhysicalLossDomination.totalLoss = embeddedTotalLoss dataSet
   ; Budget.ConfiguredPhysicalLossDomination.netGain = embeddedNetGain dataSet
   ; Budget.ConfiguredPhysicalLossDomination.totalLossDefinition =
-      λ scale polymer → Relation.Binary.PropositionalEquality.refl
+      λ scale polymer → refl
   ; Budget.ConfiguredPhysicalLossDomination.netGainDefinition =
-      λ scale polymer → Relation.Binary.PropositionalEquality.refl
+      λ scale polymer → refl
   ; Budget.ConfiguredPhysicalLossDomination.configuredTotalLossEmbeddingExact =
       rationalNestedLossExact dataSet
   ; Budget.ConfiguredPhysicalLossDomination.configuredNetGainEmbeddingExact =
