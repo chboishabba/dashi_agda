@@ -45,6 +45,12 @@ record QuantitativeT5PhysicalInputs
       T5.PhysicalExpectationProducerData Measure Observable Scalar
     compactnessData : T5.PhysicalMeasureCompactnessData Marginal Measure
 
+    -- The complete finite-test-family OS adapter.  Its convergence data is
+    -- built from expectationData; finite-cutoff positivity and closure of the
+    -- nonnegative cone remain explicit fields of this record.
+    osGramData : Gram.PhysicalMeasureToOSGramData Measure Observable Scalar
+    osGramUsesExpectationProducer : Set
+
     -- Finite-volume boundary-crossing cluster tail.
     boundaryConditionDifferenceClusterExpansionExact : ∀ cutoff volume → Set
     onlyBoundaryCrossingClustersContribute : ∀ cutoff volume → Set
@@ -139,28 +145,11 @@ physicalMeasureConvergenceDataLiteral :
 physicalMeasureConvergenceDataLiteral dataSet =
   T5.physicalMeasureConvergenceDataFromProducer (expectationData dataSet)
 
-physicalMeasureTopologyControlsOSGramLiteral :
-  ∀ {Measure Observable Scalar Marginal}
-    (dataSet : QuantitativeT5PhysicalInputs
-      Measure Observable Scalar Marginal) → Set
 physicalMeasureTopologyControlsOSGramLiteral dataSet =
-  Gram.MeasureTopologyControlsOSGram
-    (physicalMeasureConvergenceDataLiteral dataSet)
+  Gram.physicalMeasureTopologyControlsOSGram (osGramData dataSet)
 
-physicalContinuumReflectionPositiveLiteral :
-  ∀ {Measure Observable Scalar Marginal}
-    (dataSet : QuantitativeT5PhysicalInputs
-      Measure Observable Scalar Marginal) → Set
 physicalContinuumReflectionPositiveLiteral dataSet =
-  ∀ tests →
-  Gram.LessEqual
-    (Gram.scalarConvergence (physicalMeasureConvergenceDataLiteral dataSet))
-    (Gram.zero
-      (Gram.operations (physicalMeasureConvergenceDataLiteral dataSet)))
-    (Gram.reflectedGramQuadraticForm
-      (Gram.operations (physicalMeasureConvergenceDataLiteral dataSet))
-      (Gram.continuumMeasure
-        (physicalMeasureConvergenceDataLiteral dataSet)) tests)
+  Gram.physicalContinuumReflectionPositive (osGramData dataSet)
 
 boundaryClusterTailReductionLevel : ProofLevel
 boundaryClusterTailReductionLevel = machineChecked
