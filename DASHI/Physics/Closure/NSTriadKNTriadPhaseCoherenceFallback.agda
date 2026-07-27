@@ -92,6 +92,7 @@ record TriadPhaseCoherenceProgram
     matrixSymbolHermitian : MatrixSymbol → Set s
     matrixSymbolRealityCompatible : MatrixSymbol → Set s
     matrixSymbolRotationEquivariant : MatrixSymbol → Set s
+    physicalOperatorBasisFree : Set s
 
     CoherenceChart : Set s
     selectChart : Vector → CoherenceChart
@@ -111,6 +112,7 @@ record TriadPhaseUniformAnalyticCutset
   field
     Cutoff Chart State : Set c
     Scalar : Set s
+    add : Scalar → Scalar → Scalar
     _≤_ : Scalar → Scalar → Set s
 
     coerciveQuadraticReserve quarticReserve cubicMagnitude :
@@ -137,7 +139,9 @@ record TriadPhaseUniformAnalyticCutset
     uniformQuarticBoundaryDomination :
       ∀ chart cutoff state →
       _≤_ (cubicMagnitude chart cutoff state)
-           (quarticReserve chart cutoff state)
+           (add
+             (coerciveQuadraticReserve chart cutoff state)
+             (quarticReserve chart cutoff state))
 
 open TriadPhaseUniformAnalyticCutset public
 
