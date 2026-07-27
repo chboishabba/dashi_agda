@@ -2,85 +2,35 @@ module DASHI.Physics.Closure.NSTriadKNQuarticLyapunovCriticalProgram where
 
 ------------------------------------------------------------------------
 -- PROVENANCE
--- Authors: DASHI repository contributors.
--- Title: "Periodic critical quartic Lyapunov research programme".
--- Venue/year: DASHI formal development, 2026.
--- DOI: not applicable; this is a DASHI-original integration layer.
--- Uses: Darrow--Carlson--Goluskin, "Quartic Lyapunov functions for global
--- fluid stability", arXiv:2606.18232v1, equations (16) and (21)--(25).
--- Relationship: adapts and contrasts; it preserves the transferable quartic
--- algebra but leaves arbitrary-data periodic 3-D domination fail-closed.
+-- Authors: David Darrow; Elizabeth Carlson; David Goluskin.
+-- Title: "Quartic Lyapunov functions for global fluid stability".
+-- Venue/year: arXiv preprint, 2026.
+-- Journal DOI: none recorded on arXiv v1.
+-- arXiv/DataCite DOI: 10.48550/arXiv.2606.18232.
+-- arXiv: 2606.18232v1.
+-- Uses: quartic ansatz and derivative degree decomposition.
+-- Relationship: adapts only the transferable algebra.  The periodic 3-D
+-- candidate, discriminant margin and BKM expenditure are DASHI-original
+-- research obligations.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Data.Nat.Base using (_≤_)
 
 open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovDegreeAudit public
 open import DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEulerInvariantDecomposition public
 open import DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticCoherenceCharts public
 open import DASHI.Physics.Closure.NSTriadKNPeriodicStokesModeDegeneracy public
 
-------------------------------------------------------------------------
--- Fail-closed research socket for the periodic 3-D problem.
---
--- The paper's transferable content is now exact:
---   * square only an Euler-invariant quadratic energy;
---   * retain quadratic/cubic/quartic derivative pieces;
---   * let quadratic and quartic reserves jointly dominate the cubic part;
---   * use equivariant adaptive coherence charts, not one fixed shear mode.
---
--- The remaining field is the actual cutoff-uniform PDE inequality.
-------------------------------------------------------------------------
-
-record PeriodicCriticalQuarticCandidate {c s : Level} :
-    Set (lsuc (c ⊔ s)) where
-  field
-    Cutoff : Set c
-    State : Set s
-
-    lyapunovValue referenceEnergy : Cutoff → State → Nat
-    quadraticReserve cubicMagnitude quarticReserve :
-      Cutoff → State → Nat
-
-    lowerEquivalenceConstant upperEquivalenceConstant : Nat
-    lowerEquivalent : ∀ cutoff state →
-      lowerEquivalenceConstant * referenceEnergy cutoff state
-      ≤ lyapunovValue cutoff state
-    upperEquivalent : ∀ cutoff state →
-      lyapunovValue cutoff state
-      ≤ upperEquivalenceConstant * referenceEnergy cutoff state
-
-    exactEulerInvariantDegreeDecomposition : Set
-    exactSignedNearFarIdentification : Set
-    chartSelectionEquivariant : Set
-    zeroConcentratedTransitionDiffuseCoverage : Set
-    switchingDoesNotIncreaseLyapunovValue : Set
-    positiveChartDwellTime : Set
-
-    cutoffUniformJointDomination : ∀ cutoff state →
-      cubicMagnitude cutoff state
-      ≤ quadraticReserve cutoff state + quarticReserve cutoff state
-
-    dominationStrictOnEveryNonzeroBoundaryState : Set
-    boundIndependentOfCutoff : Set
-
-open PeriodicCriticalQuarticCandidate public
-
-record QuarticCandidateControlsBKM
-    {c s : Level}
-    (candidate : PeriodicCriticalQuarticCandidate {c} {s}) :
-    Set (lsuc (c ⊔ s)) where
-  field
-    weightedVorticityEnvelope : Cutoff candidate → State candidate → Nat
-    finiteTimeEnvelopeExpenditure : Set
-    envelopeDominatesVorticityInfinityNorm : Set
-    expenditureBoundIndependentOfCutoff : Set
-    finiteVorticityTimeIntegral : Set
-
-open QuarticCandidateControlsBKM public
+import DASHI.Physics.Closure.NSTriadKNQuarticAnalyticFiniteSums as Stage1
+import DASHI.Physics.Closure.NSTriadKNQuarticLiteralGalerkinDerivative as Stage2
+import DASHI.Physics.Closure.NSTriadKNPeriodicUniformHarmonicAnalysis as Stage3
+import DASHI.Physics.Closure.NSTriadKNQuarticSignedNearFarDecomposition as Stage4
+import DASHI.Physics.Closure.NSTriadKNQuarticJointDominationFrontier as Stage5
+import DASHI.Physics.Closure.NSTriadKNAdaptiveQuarticInvariantRegion as Stage6
+import DASHI.Physics.Closure.NSTriadKNQuarticBKMExpenditure as Stage7
+import DASHI.Physics.Closure.NSTriadKNQuarticStandardEndpoint as Stage8
+import DASHI.Physics.Closure.NSTriadKNZeroCoherenceH3DiscriminantCounterexample as Falsification
 
 quarticPaperTransferAlgebraClosed : Bool
 quarticPaperTransferAlgebraClosed = true
@@ -88,6 +38,13 @@ quarticPaperTransferAlgebraClosed = true
 quarticPaperTransferAlgebraClosedIsTrue :
   quarticPaperTransferAlgebraClosed ≡ true
 quarticPaperTransferAlgebraClosedIsTrue = refl
+
+zeroCoherenceH3CandidateFalsified : Bool
+zeroCoherenceH3CandidateFalsified = true
+
+zeroCoherenceH3CandidateFalsifiedIsTrue :
+  zeroCoherenceH3CandidateFalsified ≡ true
+zeroCoherenceH3CandidateFalsifiedIsTrue = refl
 
 cutoffUniformPeriodicCriticalQuarticDominationClosed : Bool
 cutoffUniformPeriodicCriticalQuarticDominationClosed = false
