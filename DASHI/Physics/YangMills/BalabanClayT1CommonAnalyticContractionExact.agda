@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT1CommonAnalyticContractionExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; _+_; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -40,9 +40,13 @@ record CommonAnalyticCriticalMap (Index State : Set) : Set₁ where
     multiplyMonotoneLeft : ∀ prefix {left right} →
       left ≤ right → prefix * left ≤ prefix * right
 
+    zeroInBall : norm zero ≤ radius
+
     criticalMapDifferenceExact : ∀ index left right →
       subtract (criticalMap index left) (criticalMap index right)
       ≡ green index (subtract (nonlinear index left) (nonlinear index right))
+
+    normRespectsEquality : ∀ {left right} → left ≡ right → norm left ≡ norm right
 
     greenBound : ∀ index source →
       norm (green index source) ≤ greenUpper * norm source
@@ -52,8 +56,9 @@ record CommonAnalyticCriticalMap (Index State : Set) : Set₁ where
       norm (subtract (nonlinear index left) (nonlinear index right))
       ≤ (nonlinearSlope * radius) * norm (subtract left right)
 
-    contractionRatioExact :
-      greenUpper * (nonlinearSlope * radius) ≡ contractionRatio
+    contractionScaleExact : ∀ distanceValue →
+      greenUpper * ((nonlinearSlope * radius) * distanceValue)
+      ≡ contractionRatio * distanceValue
 
     triangleFromZero : ∀ index state →
       norm (criticalMap index state)
@@ -85,8 +90,8 @@ criticalMapContraction dataSet index left right leftInBall rightInBall =
       norm dataSet
         (subtract dataSet (criticalMap dataSet index left)
           (criticalMap dataSet index right))
-      ≤ upper * norm dataSet (subtract dataSet left right))
-    (contractionRatioExact dataSet)
+      ≤ upper)
+    (contractionScaleExact dataSet (norm dataSet (subtract dataSet left right)))
     (transitive dataSet
       (subst
         (λ value →
@@ -95,9 +100,17 @@ criticalMapContraction dataSet index left right leftInBall rightInBall =
               (criticalMap dataSet index right))
           ≤ greenUpper dataSet * norm dataSet value)
         (criticalMapDifferenceExact dataSet index left right)
-        (greenBound dataSet index
-          (subtract dataSet (nonlinear dataSet index left)
-            (nonlinear dataSet index right))))
+        (subst
+          (λ leftNorm →
+            leftNorm
+            ≤ greenUpper dataSet * norm dataSet
+                (subtract dataSet (nonlinear dataSet index left)
+                  (nonlinear dataSet index right)))
+          (normRespectsEquality dataSet
+            (criticalMapDifferenceExact dataSet index left right))
+          (greenBound dataSet index
+            (subtract dataSet (nonlinear dataSet index left)
+              (nonlinear dataSet index right)))))
       (multiplyMonotoneLeft dataSet (greenUpper dataSet)
         (nonlinearLipschitzOnBall dataSet index left right
           leftInBall rightInBall)))
@@ -115,8 +128,7 @@ criticalMapPreservesCommonBall dataSet index state stateInBall =
       (addMonotone dataSet
         (reflexive dataSet (norm dataSet (criticalMap dataSet index (zero dataSet))))
         (criticalMapContraction dataSet index state (zero dataSet)
-          stateInBall
-          (reflexive dataSet (norm dataSet (zero dataSet)))))
+          stateInBall (zeroInBall dataSet)))
       (transitive dataSet
         (addMonotone dataSet
           (reflexive dataSet (norm dataSet (criticalMap dataSet index (zero dataSet))))
@@ -163,11 +175,7 @@ record CommonSecondJetEnvelope (Background State : Set) : Set₁ where
     constraintBound : ∀ background state →
       constraint background state ≤ constraintUpper * normSq state
 
-    upperCoefficientExact :
-      curvatureUpper + (transportUpper + (chartUpper + (gaugeUpper + constraintUpper)))
-      ≡ totalUpper
-
-    distributeUpper : ∀ radiusValue →
+    totalScaleExact : ∀ radiusValue →
       curvatureUpper * radiusValue
       + (transportUpper * radiusValue
       + (chartUpper * radiusValue
@@ -185,7 +193,7 @@ commonSecondJetBound :
 commonSecondJetBound dataSet background state =
   subst
     (λ upper → totalRemainder dataSet background state ≤ upper)
-    (distributeUpper dataSet (normSq dataSet state))
+    (totalScaleExact dataSet (normSq dataSet state))
     (transitive dataSet
       (totalBelowPieces dataSet background state)
       (addMonotone dataSet
