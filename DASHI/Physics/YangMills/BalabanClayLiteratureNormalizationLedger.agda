@@ -6,6 +6,7 @@ import DASHI.Physics.YangMills.BalabanClayT2ClusterCriterionComparisonExact
 import DASHI.Physics.YangMills.BalabanClayT2EightWayFernandezProcacciExact
 import DASHI.Physics.YangMills.BalabanClayT3OperatorSchurComplementExact
 import DASHI.Physics.YangMills.BalabanClayT3UniformFluctuationSchurExact
+import DASHI.Physics.YangMills.BalabanClayT3WardIdentityLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayT4BetaNormalizationConventionExact
 import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact
 import DASHI.Physics.YangMills.BalabanClayT4SUNWilsonActionConventionExact
@@ -43,6 +44,12 @@ operatorSchurAlgebraLevel = machineChecked
 uniformFluctuationCoercivityReductionLevel : ProofLevel
 uniformFluctuationCoercivityReductionLevel = machineChecked
 
+wardReindexingNormalizationLevel : ProofLevel
+wardReindexingNormalizationLevel = machineChecked
+
+wardLocalizationEquivarianceLevel : ProofLevel
+wardLocalizationEquivarianceLevel = machineChecked
+
 betaConventionFactorOfTwoLevel : ProofLevel
 betaConventionFactorOfTwoLevel = machineChecked
 
@@ -75,6 +82,9 @@ literalEightExtensionCliqueGeometryLevel = conditional
 
 literalUniformFluctuationCoercivityLevel : ProofLevel
 literalUniformFluctuationCoercivityLevel = conditional
+
+literalWardMeasureReindexingLevel : ProofLevel
+literalWardMeasureReindexingLevel = conditional
 
 literalWilsonPlaquetteCoefficientLevel : ProofLevel
 literalWilsonPlaquetteCoefficientLevel = conditional
