@@ -32,15 +32,13 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- optional periodic/patch transfer authority, not as part of Combes--Thomas.
 ------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- Local weighted resolvent estimate.
-------------------------------------------------------------------------
-
 record LocalCombesThomasBlockEstimate
     (Block State Scalar Operator Green : Set) : Set₂ where
   field
     blockDistance : Block → Block → Nat
-    zero one multiply subtract exponential : Scalar → Scalar → Scalar
+    zero one : Scalar
+    multiply subtract : Scalar → Scalar → Scalar
+    exponential : Scalar → Scalar
     natScalar : Nat → Scalar
     LessEqual StrictLess : Scalar → Scalar → Set
 
@@ -73,7 +71,7 @@ record LocalCombesThomasBlockEstimate
             (exponential
               (subtract zero
                 (multiply decayRate
-                  (natScalar (blockDistance left right)))) one)
+                  (natScalar (blockDistance left right)))))
             (multiply (norm2 rightState rightState)
               (norm2 leftState leftState))))
 
@@ -81,15 +79,13 @@ open LocalCombesThomasBlockEstimate public
 
 finiteRangeParametrixErrorBound = weightedPerturbationBound
 
-------------------------------------------------------------------------
--- Infinite-lattice Fourier strip estimate for the averaging propagator H_k.
-------------------------------------------------------------------------
-
 record InfiniteLatticeFourierDecay
     (Scale Site Scalar Green Symbol : Set) : Set₂ where
   field
     distance : Site → Site → Nat
-    zero one multiply subtract exponential : Scalar → Scalar → Scalar
+    zero one : Scalar
+    multiply subtract : Scalar → Scalar → Scalar
+    exponential : Scalar → Scalar
     natScalar : Nat → Scalar
     LessEqual : Scalar → Scalar → Set
 
@@ -109,18 +105,16 @@ record InfiniteLatticeFourierDecay
           (exponential
             (subtract zero
               (multiply stripWidth
-                (natScalar (distance left right)))) one))
+                (natScalar (distance left right))))))
 
 open InfiniteLatticeFourierDecay public
-
-------------------------------------------------------------------------
--- Theorem-A assembly for finite Neumann boxes.
-------------------------------------------------------------------------
 
 record FiniteVolumeRGImageGreenDecay
     (Scale Volume Site Function Scalar Green : Set) : Set₂ where
   field
-    zero one add multiply subtract exponential : Scalar → Scalar → Scalar
+    zero one : Scalar
+    add multiply subtract : Scalar → Scalar → Scalar
+    exponential : Scalar → Scalar
     natScalar : Nat → Scalar
     LessEqual : Scalar → Scalar → Set
 
@@ -139,9 +133,6 @@ record FiniteVolumeRGImageGreenDecay
     imageSumAbsolutelyConvergent : ∀ scale volume → Set
     imageTailExponential : ∀ scale volume → Set
 
-    -- Theorem A / Theorem 2.25 shape.  Constants are independent of lattice
-    -- spacing and volume; all explicit blocking dependence is owned by
-    -- dimensionFactor (the source writes c L^(2d)).
     theoremAUniformSupNormDecay : ∀ scale volume function point →
       LessEqual
         (applyGreen (finiteVolumeGreen scale volume) function point)
@@ -151,7 +142,7 @@ record FiniteVolumeRGImageGreenDecay
               (exponential
                 (subtract zero
                   (multiply decayRate
-                    (natScalar (distanceToSupport point function)))) one)
+                    (natScalar (distanceToSupport point function)))))
               (supNorm function))))
 
     fluctuationGreenFromRGDifferenceExact : ∀ scale volume → Set
@@ -164,7 +155,7 @@ record FiniteVolumeRGImageGreenDecay
               (exponential
                 (subtract zero
                   (multiply decayRate
-                    (natScalar (distanceToSupport point function)))) one)
+                    (natScalar (distanceToSupport point function)))))
               (supNorm function))))
 
 open FiniteVolumeRGImageGreenDecay public
@@ -183,8 +174,7 @@ physicalFluctuationGreenOffDiagonalDecayLiteral :
             (subtract dataSet (zero dataSet)
               (multiply dataSet (decayRate dataSet)
                 (natScalar dataSet
-                  (distanceToSupport dataSet point function))))
-            (one dataSet))
+                  (distanceToSupport dataSet point function)))))
           (supNorm dataSet function))))
 physicalFluctuationGreenOffDiagonalDecayLiteral =
   fluctuationGreenUniformSupNormDecay
@@ -192,11 +182,6 @@ physicalFluctuationGreenOffDiagonalDecayLiteral =
 patchUniformGreenDecay = physicalFluctuationGreenOffDiagonalDecayLiteral
 scaleUniformGreenDecay = physicalFluctuationGreenOffDiagonalDecayLiteral
 volumeUniformGreenDecay = physicalFluctuationGreenOffDiagonalDecayLiteral
-
-------------------------------------------------------------------------
--- Optional random-walk transfer.  This is useful for periodic boundary
--- conditions and patchwise inverses, but it is not claimed by the 2024 paper.
-------------------------------------------------------------------------
 
 record RandomWalkPeriodicPatchTransfer
     (Scale Volume Patch Green : Set) : Set₁ where
