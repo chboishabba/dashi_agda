@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanClayT2UrsellCauchyExact
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact
 import DASHI.Physics.YangMills.BalabanClayP3PrincipalFibreCoordinatesExact
 import DASHI.Physics.YangMills.BalabanClayT3CompactHaarLimitExact
+import DASHI.Physics.YangMills.BalabanClayT3OperatorSchurComplementExact
 import DASHI.Physics.YangMills.BalabanClayT3SchurWardBetaExact
 import DASHI.Physics.YangMills.BalabanClayT4CanonicalScalarWitnessExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact
