@@ -3,6 +3,7 @@ module DASHI.Foundations.RepresentationHypervoxelRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Cognition.SituatedFrameMetacognitionBoundary as Situated
+import DASHI.Foundations.CanonicalHalfFrameScaleValuation as CanonicalFrame
 import DASHI.Foundations.LiftPolarityPathComposition as LiftPath
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
@@ -94,10 +95,34 @@ record RepresentationHypervoxelRegression : Set₁ where
         Representation.oneHalf
       ≡ Representation.threeSix
 
+    unifiedFrameScaleValuationCarrier :
+      Representation.FramedScaleValuationObject
+        Representation.RatioRepresentation
+        Representation.HalfPresentation
+        Representation.PresentationChart
+        Nat
+        Nat
+
+    threeSixInspectionPreservesValue :
+      proj₁
+        (Representation.inspectRepresentation
+          CanonicalFrame.canonicalHalfFrameScaleValuation
+          Representation.displayedThreeSix)
+      ≡ Representation.threeSix
+
     rank1SiteCountIs3 : Hyper.siteCount 1 1 ≡ 3
     rank2SiteCountIs9 : Hyper.siteCount 2 1 ≡ 9
     rank3SiteCountIs27 : Hyper.siteCount 3 1 ≡ 27
     rank3Depth2SiteCountIs729 : Hyper.siteCount 3 2 ≡ 729
+
+    binaryRank3Depth1CountIs8 :
+      Radix.radixHyperSiteCount 2 3 1 ≡ 8
+
+    ternaryRank3Depth1CountIs27 :
+      Radix.radixHyperSiteCount 3 3 1 ≡ 27
+
+    ternaryRank3Depth2CountIs729 :
+      Radix.radixHyperSiteCount 3 3 2 ≡ 729
 
     axisLiftCountIs6 : SU2SO3.axisLiftCarrierCount ≡ 6
     operatorSheetCountIs9 : SU2SO3.operatorSheetCount ≡ 9
@@ -163,10 +188,17 @@ canonicalRepresentationHypervoxelRegression = record
   ; fiftyPercentIsHalf = Representation.fiftyHundredthsIsOneHalf
   ; threeSixIsSecondHarmonic = Representation.threeSixIsSecondHarmonic
   ; threefoldHalfRefinementIsThreeSix = Representation.threefoldHalfRefinement
+  ; unifiedFrameScaleValuationCarrier =
+      CanonicalFrame.canonicalHalfFrameScaleValuation
+  ; threeSixInspectionPreservesValue =
+      CanonicalFrame.canonicalThreeSixInspectionValue
   ; rank1SiteCountIs3 = Hyper.rank1Depth1Sites
   ; rank2SiteCountIs9 = Hyper.rank2Depth1Sites
   ; rank3SiteCountIs27 = Hyper.rank3Depth1Sites
   ; rank3Depth2SiteCountIs729 = Hyper.rank3Depth2Sites
+  ; binaryRank3Depth1CountIs8 = Radix.binaryRank3Depth1Count
+  ; ternaryRank3Depth1CountIs27 = Radix.ternaryRank3Depth1Count
+  ; ternaryRank3Depth2CountIs729 = Radix.ternaryRank3Depth2Count
   ; axisLiftCountIs6 = SU2SO3.axisLiftCarrierCountIs6
   ; operatorSheetCountIs9 = SU2SO3.operatorSheetCountIs9
   ; liftedSheetCountIs18 = SU2SO3.liftedOperatorSheetCountIs18
