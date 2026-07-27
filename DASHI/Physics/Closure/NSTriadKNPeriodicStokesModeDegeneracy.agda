@@ -1,5 +1,16 @@
 module DASHI.Physics.Closure.NSTriadKNPeriodicStokesModeDegeneracy where
 
+------------------------------------------------------------------------
+-- PROVENANCE
+-- Authors: DASHI repository contributors.
+-- Title: "First-shell periodic Stokes multiplier degeneracy".
+-- Venue/year: DASHI formal development, 2026.
+-- DOI: not applicable; this is a DASHI-original deduction.
+-- Uses: literal coordinate modes of the periodic integer Fourier lattice.
+-- Relationship: contrasts with the shear-selected energy eigenmode of
+-- Darrow--Carlson--Goluskin, arXiv:2606.18232v1, equations (11)--(12).
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
