@@ -6,7 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (CyclicIndex; zeroᵢ; sucᵢ; Product; pair; first; second; Axis4)
+  using (zeroᵢ; sucᵢ; pair)
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
   using (SignedAxis4)
 import DASHI.Physics.YangMills.BalabanClayT2PhysicalRootedPolymerEncodingExact as Encoding
@@ -25,12 +25,6 @@ import DASHI.Physics.YangMills.BalabanClayT2PhysicalRootedPolymerEncodingExact a
 -- Relationship: these sources provide the abstract polymer criteria.  The
 -- eight explicit face flags and the signed-direction mask below are the literal
 -- four-dimensional DASHI carrier.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- A root owns one Boolean flag for every signed coordinate direction.  This
--- represents interior, external-boundary, scale-interface, corner and nested
--- patch geometry without pretending unavailable directions exist.
 ------------------------------------------------------------------------
 
 record ConfiguredPhysicalRoot4 : Set where
@@ -57,8 +51,8 @@ configuredDirectionMask = record
   ; directionAllowed = configuredDirectionAllowed
   }
 
-interiorRoot : ConfiguredPhysicalRoot4
-interiorRoot = physicalRoot4 Encoding.interior
+configuredInteriorRoot : ConfiguredPhysicalRoot4
+configuredInteriorRoot = physicalRoot4 Encoding.interior
   true true true true true true true true
 
 boundaryMinus0Root : ConfiguredPhysicalRoot4
@@ -73,28 +67,29 @@ configuredInteriorMaskData :
   Encoding.InteriorDirectionMaskData ConfiguredPhysicalRoot4
 configuredInteriorMaskData = record
   { mask = configuredDirectionMask
-  ; interiorRoot = λ root → root ≡ interiorRoot
-  ; allDirectionsAllowedAtInterior = λ root direction rootIsInterior →
-      allAllowed root direction rootIsInterior
+  ; interiorRoot = λ root → root ≡ configuredInteriorRoot
+  ; allDirectionsAllowedAtInterior = allAllowed
   }
   where
-  allAllowed : ∀ root direction → root ≡ interiorRoot →
+  allAllowed : ∀ root direction → root ≡ configuredInteriorRoot →
     configuredDirectionAllowed root direction ≡ true
-  allAllowed .interiorRoot (pair zeroᵢ false) refl = refl
-  allAllowed .interiorRoot (pair zeroᵢ true) refl = refl
-  allAllowed .interiorRoot (pair (sucᵢ zeroᵢ) false) refl = refl
-  allAllowed .interiorRoot (pair (sucᵢ zeroᵢ) true) refl = refl
-  allAllowed .interiorRoot (pair (sucᵢ (sucᵢ zeroᵢ)) false) refl = refl
-  allAllowed .interiorRoot (pair (sucᵢ (sucᵢ zeroᵢ)) true) refl = refl
-  allAllowed .interiorRoot (pair (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) false) refl = refl
-  allAllowed .interiorRoot (pair (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) true) refl = refl
+  allAllowed .configuredInteriorRoot (pair zeroᵢ false) refl = refl
+  allAllowed .configuredInteriorRoot (pair zeroᵢ true) refl = refl
+  allAllowed .configuredInteriorRoot (pair (sucᵢ zeroᵢ) false) refl = refl
+  allAllowed .configuredInteriorRoot (pair (sucᵢ zeroᵢ) true) refl = refl
+  allAllowed .configuredInteriorRoot (pair (sucᵢ (sucᵢ zeroᵢ)) false) refl = refl
+  allAllowed .configuredInteriorRoot (pair (sucᵢ (sucᵢ zeroᵢ)) true) refl = refl
+  allAllowed .configuredInteriorRoot
+    (pair (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) false) refl = refl
+  allAllowed .configuredInteriorRoot
+    (pair (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) true) refl = refl
 
 configuredInteriorHasEightExtensions :
-  Encoding.validExtensionCount configuredDirectionMask interiorRoot
+  Encoding.validExtensionCount configuredDirectionMask configuredInteriorRoot
   ≡ Encoding.eight
 configuredInteriorHasEightExtensions =
   Encoding.interiorRootHasEightValidExtensions
-    configuredInteriorMaskData interiorRoot refl
+    configuredInteriorMaskData configuredInteriorRoot refl
 
 configuredBoundaryCountAtMostEight :
   Encoding.validExtensionCount configuredDirectionMask boundaryMinus0Root
@@ -111,12 +106,9 @@ configuredCornerCountAtMostEight =
     configuredDirectionMask codimensionTwoCornerRoot
 
 ------------------------------------------------------------------------
--- Canonical trace carrier for the actual connected polymer instance.
---
--- The block carrier and adjacency are repository parameters, but root choice,
--- spanning tree, depth-first traversal and signed reconstruction are bundled in
--- one object.  The only physical leaf is constructing this object from the
--- repository's connected finite block set.
+-- Canonical trace carrier.  The trace data itself is non-recursive; injectivity
+-- is a property of a family indexed by physical polymers.  This avoids placing
+-- the record being defined in a negative field position.
 ------------------------------------------------------------------------
 
 record ConfiguredConnectedPolymerTrace
@@ -136,21 +128,38 @@ record ConfiguredConnectedPolymerTrace
     traversalLengthAtMostTwiceTreeEdges : Set
     signedWordReconstructsTraversal : Set
 
-    traceInjective : ∀ {left right : ConfiguredConnectedPolymerTrace Block Tree Traversal} →
-      canonicalWord left ≡ canonicalWord right → left ≡ right
-
 open ConfiguredConnectedPolymerTrace public
 
-chooseCanonicalPolymerRootLiteral = canonicalRoot
-chooseCanonicalSpanningTreeLiteral = canonicalTree
-depthFirstTraversalOfSpanningTreeLiteral = canonicalTraversal
-canonicalSignedDirectionWordLiteral = canonicalWord
+record ConfiguredConnectedPolymerTraceFamily
+    (Polymer Block Tree Traversal : Set) : Set₁ where
+  field
+    traceOf : Polymer → ConfiguredConnectedPolymerTrace Block Tree Traversal
+    traceInjective : ∀ {left right} →
+      canonicalWord (traceOf left) ≡ canonicalWord (traceOf right) →
+      left ≡ right
 
-canonicalSpanningTreeCoversPolymerLiteral = treeCoversExactlyBlocks
-canonicalSpanningTreeEdgesAdjacentLiteral = treeEdgesAreNearestNeighbours
-depthFirstTraversalVisitsEveryBlockLiteral = traversalVisitsEveryBlock
-depthFirstTraversalLengthBoundLiteral = traversalLengthAtMostTwiceTreeEdges
-signedWordReconstructsTraversalLiteral = signedWordReconstructsTraversal
+open ConfiguredConnectedPolymerTraceFamily public
+
+chooseCanonicalPolymerRootLiteral family polymer =
+  canonicalRoot (traceOf family polymer)
+chooseCanonicalSpanningTreeLiteral family polymer =
+  canonicalTree (traceOf family polymer)
+depthFirstTraversalOfSpanningTreeLiteral family polymer =
+  canonicalTraversal (traceOf family polymer)
+canonicalSignedDirectionWordLiteral family polymer =
+  canonicalWord (traceOf family polymer)
+
+canonicalSpanningTreeCoversPolymerLiteral family polymer =
+  treeCoversExactlyBlocks (traceOf family polymer)
+canonicalSpanningTreeEdgesAdjacentLiteral family polymer =
+  treeEdgesAreNearestNeighbours (traceOf family polymer)
+depthFirstTraversalVisitsEveryBlockLiteral family polymer =
+  traversalVisitsEveryBlock (traceOf family polymer)
+depthFirstTraversalLengthBoundLiteral family polymer =
+  traversalLengthAtMostTwiceTreeEdges (traceOf family polymer)
+signedWordReconstructsTraversalLiteral family polymer =
+  signedWordReconstructsTraversal (traceOf family polymer)
+canonicalPhysicalTraceInjectiveLiteral = traceInjective
 
 configuredPatchDirectionMaskLevel : ProofLevel
 configuredPatchDirectionMaskLevel = machineChecked
