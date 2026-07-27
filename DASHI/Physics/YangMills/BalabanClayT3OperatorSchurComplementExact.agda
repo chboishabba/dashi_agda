@@ -6,6 +6,29 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 
+------------------------------------------------------------------------
+-- Exact operator Schur algebra.
+--
+-- E. V. Haynsworth,
+-- "Determination of the inertia of a partitioned Hermitian matrix",
+-- Linear Algebra and its Applications 1 (1968), 73--81.
+-- DOI: 10.1016/0024-3795(68)90050-5
+--
+-- This module proves the algebraic identity
+--
+--   H_eff = H_cc - H_cf H_ff^{-1} H_fc.
+--
+-- That identity is not the difficult Balaban theorem.  The physical content is
+-- a positive constant c_f, uniform in blocking scale, lattice spacing, volume
+-- and patch regime, such that
+--
+--   c_f ||h||^2 <= <h , H_ff h>
+--
+-- after the prescribed gauge modes are removed.  The reduction from reference
+-- coercivity plus a relative perturbation bound is implemented separately in
+-- BalabanClayT3UniformFluctuationSchurExact.
+------------------------------------------------------------------------
+
 record OperatorSchurData (Coarse Fluctuation Bound : Set) : Set₁ where
   field
     coarseHessian : Coarse → Coarse
@@ -120,6 +143,9 @@ operatorSchurEnergyIdentityLevel = machineChecked
 
 operatorSchurP3AdapterLevel : ProofLevel
 operatorSchurP3AdapterLevel = machineChecked
+
+operatorSchurAlgebraVersusCoercivityBoundaryLevel : ProofLevel
+operatorSchurAlgebraVersusCoercivityBoundaryLevel = machineChecked
 
 physicalFluctuationSchurInputsLevel : ProofLevel
 physicalFluctuationSchurInputsLevel = conditional
