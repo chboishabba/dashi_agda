@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact where
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational using (ℚ; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -26,14 +26,22 @@ import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
 -- 1/4 * 2^{-distance}.
 ------------------------------------------------------------------------
 
+halfPowerMatchesConfigured : ∀ depth →
+  Shell.halfPower depth ≡ Tail.powHalf depth
+halfPowerMatchesConfigured zero = refl
+halfPowerMatchesConfigured (suc depth)
+  rewrite halfPowerMatchesConfigured depth = refl
+
+rootedTailMatchesConfigured : ∀ depth →
+  Shell.quarter * Shell.halfPower depth ≡ Tail.rootedShellTail depth
+rootedTailMatchesConfigured depth
+  rewrite halfPowerMatchesConfigured depth = refl
+
 record RootedShellBoundaryDifferenceData
     (Scale Volume Root Observable : Set) : Set₁ where
   field
     shellData : Shell.TraversalShellData Scale Volume Root
 
-    -- One common support envelope is fixed for the finite observable family.
-    -- Consequently the boundary shell index is independent of the selected
-    -- pair inside that family.
     distinguishedRoot : Scale → Volume → Observable → Root
     boundaryShellIndex : Scale → Volume → Nat
     AdmissibleObservable : Observable → Set
@@ -70,16 +78,23 @@ boundaryCrossingClusterExponentialBoundFromRootedShell :
   absoluteDifference dataSet
     (finiteExpectation dataSet scale volume observable)
     (thermodynamicExpectation dataSet scale volume observable)
-  ≤ Shell.quarter * Shell.halfPower (boundaryShellIndex dataSet scale volume)
+  ≤ Tail.rootedShellTail (boundaryShellIndex dataSet scale volume)
 boundaryCrossingClusterExponentialBoundFromRootedShell
   dataSet scale volume observable admissible =
-  transitive dataSet
-    (expectationDifferenceBelowRootedShell
-      dataSet scale volume observable admissible)
-    (Shell.rootedShellBelowQuarterHalfPower
-      (shellData dataSet) scale volume
-      (distinguishedRoot dataSet scale volume observable)
-      (boundaryShellIndex dataSet scale volume))
+  subst
+    (λ upper →
+      absoluteDifference dataSet
+        (finiteExpectation dataSet scale volume observable)
+        (thermodynamicExpectation dataSet scale volume observable)
+      ≤ upper)
+    (rootedTailMatchesConfigured (boundaryShellIndex dataSet scale volume))
+    (transitive dataSet
+      (expectationDifferenceBelowRootedShell
+        dataSet scale volume observable admissible)
+      (Shell.rootedShellBelowQuarterHalfPower
+        (shellData dataSet) scale volume
+        (distinguishedRoot dataSet scale volume observable)
+        (boundaryShellIndex dataSet scale volume)))
 
 record BoundaryDistanceEscapes
     (Scale Volume : Set)
@@ -95,10 +110,6 @@ finiteVolumePairTailVanishesFromEscapingBoundary :
     {boundaryIndex : Scale → Volume → Nat} →
   BoundaryDistanceEscapes Scale Volume boundaryIndex → Set
 finiteVolumePairTailVanishesFromEscapingBoundary = halfPowerVanishes
-
-------------------------------------------------------------------------
--- Direct postulate-free adapter to the configured T5 tail carrier.
-------------------------------------------------------------------------
 
 record RootedShellConfiguredBoundaryAdapter
     (Scale Volume Root Observable : Set) : Set₁ where
@@ -159,6 +170,9 @@ asConfiguredBoundaryClusterTail dataSet = record
   ; Tail.ConfiguredBoundaryClusterTail.geometricTailVanishes =
       halfPowerVanishes (distanceEscapes dataSet)
   }
+
+rootedShellTailIdentificationLevel : ProofLevel
+rootedShellTailIdentificationLevel = machineChecked
 
 rootedShellToBoundaryTailReductionLevel : ProofLevel
 rootedShellToBoundaryTailReductionLevel = machineChecked
