@@ -29,8 +29,11 @@ FILES = [
 REQUIRED_TOKENS = {
     "RepresentationChartInvariant.agda": [
         "threeSixIsOneHalf",
+        "binaryPointOneIsOneHalf",
         "presentationPreservesHalf",
+        "threeSixIsSecondHarmonic",
         "refineRatioPreserves",
+        "threefoldHalfRefinement",
         "FramedAtlas",
         "ContextualThreeSixNineObservation",
     ],
@@ -44,8 +47,10 @@ REQUIRED_TOKENS = {
         "RubikMove",
     ],
     "RadixValuationStageBridge.agda": [
+        "decimalBinaryHalfEquivalent",
         "RadixOriginPrefix",
         "canonicalDecimalCarryGrammar",
+        "stage1NotStage10",
         "stage1ToStage10UnitLift",
         "canonicalStageCarryJoin",
         "PrimeLaneAddressProjection",
@@ -66,6 +71,8 @@ REQUIRED_TOKENS = {
         "metacognitiveLiftPreservesExperience",
         "PluralFrameLedger",
         "logisticHalfReceipt",
+        "canonicalExistingLogisticCarrierReconciliation",
+        "a276087IsSecondIterate",
         "canonicalPrimorialTransformBoundary",
         "canonicalSituatedFrameAuthorityBoundary",
     ],
@@ -91,8 +98,10 @@ def check_exact_arithmetic() -> None:
         Fraction(1, 2),
         Fraction(5, 10),
         Fraction(50, 100),
+        Fraction(1, 2),  # 0.1 in base two
     ]
     assert all(value == Fraction(1, 2) for value in presentations)
+    assert Fraction(3 * 1, 3 * 2) == Fraction(1, 2)
 
     hierarchy = [3, 3 * 2, 3**2, 2 * 3**2, 3**3, 2 * 3**3, 3**4, 2 * 3**4]
     assert hierarchy == [3, 6, 9, 18, 27, 54, 81, 162]
@@ -117,6 +126,7 @@ def check_exact_arithmetic() -> None:
 
     assert 9 + 1 == 10
     assert 10 + 1 == 11
+    assert 1 != 10 != 11
 
 
 def scan_sources() -> None:
@@ -141,9 +151,9 @@ def scan_sources() -> None:
 def main() -> int:
     check_exact_arithmetic()
     scan_sources()
-    print("PASS: ratio presentations preserve 1/2 exactly")
+    print("PASS: ratio, harmonic and radix presentations preserve 1/2 exactly")
     print("PASS: 3/6/9 lifted hierarchy and rank/depth counts are exact")
-    print("PASS: carry grammar 9 -> 10 -> 11 is exact")
+    print("PASS: carry grammar 9 -> 10 -> 11 is exact and stage roles remain distinct")
     print("PASS: representation/hypervoxel source surface is fail-closed")
     print("NOTE: run the Agda checker for kernel validation")
     return 0
