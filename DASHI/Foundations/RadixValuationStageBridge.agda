@@ -2,8 +2,8 @@ module DASHI.Foundations.RadixValuationStageBridge where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Data.Fin as Fin using (Fin)
-open import Data.Vec as Vec using (Vec; []; _∷_)
+open import Data.Fin using (Fin)
+import Data.Vec as Vec
 
 import DASHI.Foundations.SSPPrimeLane369Refinement as Ref
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
@@ -61,7 +61,7 @@ canonicalDecimalPAdicReading p = record
 ------------------------------------------------------------------------
 
 RadialAddress : Nat → Nat → Set
-RadialAddress p depth = Vec (Fin p) depth
+RadialAddress p depth = Vec.Vec (Fin p) depth
 
 data RadixOriginPrefix {p : Nat} :
   ∀ {depth} → Nat → RadialAddress p depth → RadialAddress p depth → Set where
@@ -75,13 +75,13 @@ data RadixOriginPrefix {p : Nat} :
       {xs ys : RadialAddress p depth} →
     x ≡ y →
     RadixOriginPrefix matched xs ys →
-    RadixOriginPrefix (suc matched) (x ∷ xs) (y ∷ ys)
+    RadixOriginPrefix (suc matched) (x Vec.∷ xs) (y Vec.∷ ys)
 
 radixPrefixReflexive :
   ∀ {p depth} (address : RadialAddress p depth) →
   RadixOriginPrefix depth address address
-radixPrefixReflexive [] = radix-prefix-zero
-radixPrefixReflexive (x ∷ xs) =
+radixPrefixReflexive Vec.[] = radix-prefix-zero
+radixPrefixReflexive (x Vec.∷ xs) =
   radix-prefix-cons refl (radixPrefixReflexive xs)
 
 record PrefixUltrametricReading {p depth : Nat}
