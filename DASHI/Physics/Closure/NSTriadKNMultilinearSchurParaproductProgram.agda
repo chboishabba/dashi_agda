@@ -6,10 +6,11 @@ module DASHI.Physics.Closure.NSTriadKNMultilinearSchurParaproductProgram where
 -- Title: "A Multilinear Schur Test and Multiplier Operators".
 -- Venue/year: Journal of Functional Analysis 187 (2001), 1--24.
 -- DOI: 10.1006/jfan.2001.3804.
--- Uses: positive multilinear operators, partial adjoints, discrete
--- trilinear forms, and multiplier bounds on Sobolev and Besov spaces.
--- Relationship: supplies a direct trilinear alternative to freezing one
--- Navier-Stokes leg and proving two linear Schur estimates.
+-- Uses: Theorem 1(c), positive multilinear operators, three weight
+-- functions, both partial adjoints, discrete trilinear forms, and multiplier
+-- bounds on Sobolev and Besov spaces.
+-- Relationship: the three-function theorem is the primary framework.  A
+-- frozen-leg two-function row/column proof is only a specialization.
 --
 -- Author: Pierre Germain.
 -- Title: "Multipliers, paramultipliers, and weak-strong uniqueness for the
@@ -25,6 +26,8 @@ module DASHI.Physics.Closure.NSTriadKNMultilinearSchurParaproductProgram where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNGrafakosTorresThreeFunctionSchurProgram as ThreeFunction
 
 data ParaproductGeometry : Set where
   near lowHigh highLow highHighToLow farLow farHigh transition residual :
@@ -96,26 +99,66 @@ record NavierStokesParaproductDualRoute
 
     multiplierRouteClosed : Set s
     paramultiplierRouteClosed : Set s
-    multilinearSchurRouteClosed : Set s
+    threeFunctionSchurRouteClosed : Set s
     classwiseDualTrilinearAssembly : Set s
     cutoffUniformTrilinearBound : Set s
 
 open NavierStokesParaproductDualRoute public
 
+data HarmonicFrameworkLevel : Set where
+  primaryThreeFunction
+  frozenOutputTwoFunction
+  classwiseParaproductRealization : HarmonicFrameworkLevel
+
+record Stage3HarmonicHierarchy : Set₁ where
+  field
+    primaryFramework :
+      HarmonicFrameworkLevel
+    primaryIsThreeFunction :
+      primaryFramework ≡ primaryThreeFunction
+
+    twoFunctionSpecializationAvailable :
+      Set
+    twoFunctionRequiresFrozenOutputLeg :
+      Set
+
+    outputConditionRequired :
+      Set
+    firstPartialAdjointConditionRequired :
+      Set
+    secondPartialAdjointConditionRequired :
+      Set
+
+    paraproductClassesRealizePartialAdjoints :
+      Set
+    noRawRowTheoremPromotedToThreeFunctionClosure :
+      Set
+
+open Stage3HarmonicHierarchy public
+
 record BaselineColumnStrategyFork : Set₁ where
   field
-    linearTwoWeightSchurAvailable : Set
-    multilinearSchurAvailable : Set
+    threeFunctionSchurAvailable : Set
+    linearTwoWeightSpecializationAvailable : Set
     paraproductDualityAvailable : Set
     swapSymmetryAvailable : Set
     nullGainRedistributionAvailable : Set
     orbitCardinalityRenormalizationAvailable : Set
 
-    selectedStrategy : Set
+    selectedPrimaryStrategy : HarmonicFrameworkLevel
     selectionJustifiedByClasswiseEstimates : Set
     noFiniteCertificatePromotedToUniformTheorem : Set
 
 open BaselineColumnStrategyFork public
+
+threeFunctionFrameworkSubsumesFrozenLegSchur : Bool
+threeFunctionFrameworkSubsumesFrozenLegSchur =
+  ThreeFunction.twoFunctionSchurRetainedAsFrozenOutputSpecialization
+
+threeFunctionFrameworkSubsumesFrozenLegSchurIsTrue :
+  threeFunctionFrameworkSubsumesFrozenLegSchur ≡ true
+threeFunctionFrameworkSubsumesFrozenLegSchurIsTrue =
+  ThreeFunction.twoFunctionSchurRetainedAsFrozenOutputSpecializationIsTrue
 
 multilinearAndParaproductRoutesRepresented : Bool
 multilinearAndParaproductRoutesRepresented = true
