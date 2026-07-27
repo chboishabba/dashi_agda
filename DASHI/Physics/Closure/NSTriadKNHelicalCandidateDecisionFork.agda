@@ -4,20 +4,20 @@ module DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork where
 -- PROVENANCE
 -- Authors: DASHI repository contributors.
 -- Title: "Exact helical, coherence, and Stage-3 three-function harmonic
--- analysis decision fork with symmetric-companion rank audit".
+-- analysis decision fork with frozen-leg and Bernstein audits".
 -- Venue/year: DASHI formal development, 2026.
 -- DOI: not applicable; this is a DASHI-original dependency theorem.
 -- Uses: the global/scalar-helicity counterexamples, projected-axis matrix
 -- reconnaissance, Constantin--Fefferman direction-coherence interface,
 -- triad-direction diagnostics, Kiriukhin raw-row and symmetric-stretching
--- theorems, Grafakos--Torres three-function Schur, the frozen-output linear
+-- theorems, Grafakos--Torres three-function Schur, Tao/Bony frozen-leg
+-- trichotomy, explicit Bernstein direction auditing, the frozen-output
 -- specialization, paraproduct partial adjoints, and the fail-closed Permana
 -- audit.
 -- Relationship: keeps candidate-selection decisions separate from harmonic
--- strategy decisions.  The raw row theorem supplies one output-side condition.
--- The symmetric companion controls orbit-level enstrophy growth but adds no
--- independent raw partial-adjoint exponent equation, so both adjoints remain
--- open.
+-- strategy decisions. Frequency-incidence combinatorics are shared under
+-- frozen-leg permutation, while multiplier symbols, derivative owners,
+-- Hölder targets, and both partial-adjoint exponent ledgers remain open.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
@@ -34,6 +34,8 @@ import DASHI.Physics.Closure.NSTriadKNPermanaAlignmentRateAudit as Permana
 import DASHI.Physics.Closure.NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance as SchurFinite
 import DASHI.Physics.Closure.NSTriadKNKiriukhinSymmetricStretchingCompanionAudit as Symmetric
 import DASHI.Physics.Closure.NSTriadKNTriadicDyadicExponentSystem as Exponents
+import DASHI.Physics.Closure.NSTriadKNTaoFrozenLegParaproductProgram as Tao
+import DASHI.Physics.Closure.NSTriadKNBernsteinDirectionAudit as Bernstein
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3Schur
 
 data CandidateBranch : Set where
@@ -99,6 +101,7 @@ data HarmonicRoute : Set where
   symmetricOrbitStretching
   grafakosTorresThreeFunction
   frozenOutputTwoFunction
+  frozenLegParametrizedTrichotomy
   paraproductPartialAdjoints : HarmonicRoute
 
 data HarmonicRouteDecision : HarmonicRoute → Set where
@@ -109,6 +112,8 @@ data HarmonicRouteDecision : HarmonicRoute → Set where
     HarmonicRouteDecision grafakosTorresThreeFunction
   twoFunctionRetainedAsSpecialization :
     HarmonicRouteDecision frozenOutputTwoFunction
+  frozenLegTrichotomyRetainedForSharedCombinatorics :
+    HarmonicRouteDecision frozenLegParametrizedTrichotomy
   paraproductPartialAdjointsRetained :
     HarmonicRouteDecision paraproductPartialAdjoints
 
@@ -127,6 +132,11 @@ twoFunctionSpecializationDecision :
   HarmonicRouteDecision frozenOutputTwoFunction
 twoFunctionSpecializationDecision = twoFunctionRetainedAsSpecialization
 
+frozenLegTrichotomyDecision :
+  HarmonicRouteDecision frozenLegParametrizedTrichotomy
+frozenLegTrichotomyDecision =
+  frozenLegTrichotomyRetainedForSharedCombinatorics
+
 paraproductPartialAdjointDecision :
   HarmonicRouteDecision paraproductPartialAdjoints
 paraproductPartialAdjointDecision = paraproductPartialAdjointsRetained
@@ -144,9 +154,19 @@ record Stage3DecisionReceipt : Set where
       Stage3Schur.threeFunctionSchurPrimary ≡ true
     twoFunctionIsSpecialization :
       Stage3Schur.twoFunctionSchurIsFrozenOutputSpecialization ≡ true
+    taoFrozenLegTrichotomyAvailable :
+      Stage3Schur.taoFrozenLegTrichotomyRepresented ≡ true
+    frozenLegPermutationDoesNotCloseAdjoints :
+      Stage3Schur.frozenLegPermutationClosesPartialAdjoints ≡ false
+    bernsteinDirectionAuditAvailable :
+      Stage3Schur.bernsteinDirectionAuditRepresented ≡ true
+    bernsteinDoesNotSupplyLowFrequencyDecay :
+      Stage3Schur.bernsteinAloneSuppliesLowFrequencyDecay ≡ false
     rowOnlyDoesNotDetermineThreeWeights :
       Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeights ≡ false
     symmetricRankAudit : Symmetric.SymmetricCompanionRankAudit
+    frozenLegReceipt : Tao.FrozenLegPermutationReceipt
+    bernsteinReceipt : Bernstein.BernsteinDirectionReceipt
     sourceExponentReceipt :
       Exponents.GrafakosTorresSourceExponentReceipt
     finiteWeightEvidence : SchurFinite.WeightedSchurFiniteReceipt
@@ -161,8 +181,14 @@ stage3DecisionReceipt =
     Stage3Schur.symmetricCompanionReducesTriadicNullityIsFalse
     Stage3Schur.threeFunctionSchurPrimaryIsTrue
     Stage3Schur.twoFunctionSchurIsFrozenOutputSpecializationIsTrue
+    Stage3Schur.taoFrozenLegTrichotomyRepresentedIsTrue
+    Stage3Schur.frozenLegPermutationClosesPartialAdjointsIsFalse
+    Stage3Schur.bernsteinDirectionAuditRepresentedIsTrue
+    Stage3Schur.bernsteinAloneSuppliesLowFrequencyDecayIsFalse
     Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeightsIsFalse
     Symmetric.symmetricCompanionRankAudit
+    Tao.frozenLegPermutationReceipt
+    Bernstein.bernsteinDirectionReceipt
     Exponents.grafakosTorresSourceExponentReceipt
     SchurFinite.weightedSchurFiniteReceipt
 
@@ -180,6 +206,19 @@ record DirectionCoherenceResearchCutset
     orbitToDyadicShellBridgeClosed : Set s
     finiteHelicityRowLiftClosed : Set s
     boundedDirectionWeightRowLiftClosed : Set s
+
+    frozenLegParametrizedTrichotomyClosed : Set s
+    frozenLegClassPermutationClosed : Set s
+    taoTransposeSymbolIdentitiesClosed : Set s
+    bernsteinDirectionsConsumed : Set s
+    lowPassDecayNotInferredFromBernsteinAlone : Set s
+
+    outputDerivativePlacementClosed : Set s
+    firstAdjointDerivativePlacementClosed : Set s
+    secondAdjointDerivativePlacementClosed : Set s
+    outputHolderTargetClosed : Set s
+    firstAdjointHolderTargetClosed : Set s
+    secondAdjointHolderTargetClosed : Set s
 
     outputRowHomogeneityExtracted : Set s
     firstPartialAdjointHomogeneityExtracted : Set s
