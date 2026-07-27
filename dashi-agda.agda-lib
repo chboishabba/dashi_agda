@@ -1,5 +1,6 @@
 name: dashi-agda
 depend: standard-library
         dchott-agda
+        bishop
         cubical-0.9
 include: .
