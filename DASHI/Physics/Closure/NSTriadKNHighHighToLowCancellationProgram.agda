@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNHighHighToLowCancellationProgram where
 -- Sobolev-tail, commutator, or further symbol cancellation argument.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
@@ -56,7 +56,7 @@ open FrozenLegGainReceipt public
 frozenLegGainReceipt : FrozenLegGainReceipt
 frozenLegGainReceipt = receipt refl refl refl
 
-record ExactOutputRelocationLaw {m v s : Level} : Set (lsuc (m Level.⊔ v Level.⊔ s)) where
+record ExactOutputRelocationLaw {m v s : Level} : Set (lsuc (m ⊔ v ⊔ s)) where
   field
     Mode : Set m
     Vector : Set v
