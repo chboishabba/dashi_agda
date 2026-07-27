@@ -43,7 +43,9 @@ import DASHI.Physics.Closure.NSTriadKNKiriukhinOrbitRowSumAdapter as KiriukhinRo
 import DASHI.Physics.Closure.NSTriadKNOrbitToDyadicShellBridge as OrbitShell
 import DASHI.Physics.Closure.NSTriadKNFiniteHelicityRowLifting as HelicityLift
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurDualityProgram as WeightedSchur
+import DASHI.Physics.Closure.NSTriadKNGrafakosTorresThreeFunctionSchurProgram as ThreeFunction
 import DASHI.Physics.Closure.NSTriadKNMultilinearSchurParaproductProgram as MultilinearSchur
+import DASHI.Physics.Closure.NSTriadKNTriadicDyadicExponentSystem as TriadicExponents
 import DASHI.Physics.Closure.NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance as SchurFinite
 import DASHI.Physics.Closure.NSTriadKNStage3KiriukhinWeightedSchurProgram as Stage3Schur
 import DASHI.Physics.Closure.NSTriadKNHelicalCandidateDecisionFork as HelicalDecision
@@ -112,9 +114,18 @@ weightedSchurFiniteReceipt :
   SchurFinite.WeightedSchurFiniteReceipt
 weightedSchurFiniteReceipt = SchurFinite.weightedSchurFiniteReceipt
 
+grafakosTorresSourceExponentReceipt :
+  TriadicExponents.GrafakosTorresSourceExponentReceipt
+grafakosTorresSourceExponentReceipt =
+  TriadicExponents.grafakosTorresSourceExponentReceipt
+
 helicalFiniteDecisionReceipt :
   HelicalDecision.FiniteDecisionReceipt
 helicalFiniteDecisionReceipt = HelicalDecision.finiteDecisionReceipt
+
+stage3DecisionReceipt :
+  HelicalDecision.Stage3DecisionReceipt
+stage3DecisionReceipt = HelicalDecision.stage3DecisionReceipt
 
 projectedAxisMatrixCandidateRepresented : Bool
 projectedAxisMatrixCandidateRepresented =
@@ -206,6 +217,24 @@ weightedSchurTheoremSurfaceRepresentedIsTrue :
 weightedSchurTheoremSurfaceRepresentedIsTrue =
   WeightedSchur.weightedSchurTheoremSurfaceRepresentedIsTrue
 
+threeFunctionSchurPrimary : Bool
+threeFunctionSchurPrimary =
+  Stage3Schur.threeFunctionSchurPrimary
+
+threeFunctionSchurPrimaryIsTrue :
+  threeFunctionSchurPrimary ≡ true
+threeFunctionSchurPrimaryIsTrue =
+  Stage3Schur.threeFunctionSchurPrimaryIsTrue
+
+twoFunctionSchurIsFrozenOutputSpecialization : Bool
+twoFunctionSchurIsFrozenOutputSpecialization =
+  Stage3Schur.twoFunctionSchurIsFrozenOutputSpecialization
+
+twoFunctionSchurIsFrozenOutputSpecializationIsTrue :
+  twoFunctionSchurIsFrozenOutputSpecialization ≡ true
+twoFunctionSchurIsFrozenOutputSpecializationIsTrue =
+  Stage3Schur.twoFunctionSchurIsFrozenOutputSpecializationIsTrue
+
 multilinearAndParaproductRoutesRepresented : Bool
 multilinearAndParaproductRoutesRepresented =
   MultilinearSchur.multilinearAndParaproductRoutesRepresented
@@ -214,6 +243,33 @@ multilinearAndParaproductRoutesRepresentedIsTrue :
   multilinearAndParaproductRoutesRepresented ≡ true
 multilinearAndParaproductRoutesRepresentedIsTrue =
   MultilinearSchur.multilinearAndParaproductRoutesRepresentedIsTrue
+
+grafakosTorresExponentSystemRepresented : Bool
+grafakosTorresExponentSystemRepresented =
+  TriadicExponents.grafakosTorresExponentSystemRepresented
+
+grafakosTorresExponentSystemRepresentedIsTrue :
+  grafakosTorresExponentSystemRepresented ≡ true
+grafakosTorresExponentSystemRepresentedIsTrue =
+  TriadicExponents.grafakosTorresExponentSystemRepresentedIsTrue
+
+kiriukhinRowAloneDeterminesTriadicWeights : Bool
+kiriukhinRowAloneDeterminesTriadicWeights =
+  Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeights
+
+kiriukhinRowAloneDeterminesTriadicWeightsIsFalse :
+  kiriukhinRowAloneDeterminesTriadicWeights ≡ false
+kiriukhinRowAloneDeterminesTriadicWeightsIsFalse =
+  Stage3Schur.kiriukhinRowAloneDeterminesTriadicWeightsIsFalse
+
+repositorySeparationThresholdClosed : Bool
+repositorySeparationThresholdClosed =
+  Stage3Schur.repositorySeparationThresholdClosed
+
+repositorySeparationThresholdClosedIsFalse :
+  repositorySeparationThresholdClosed ≡ false
+repositorySeparationThresholdClosedIsFalse =
+  Stage3Schur.repositorySeparationThresholdClosedIsFalse
 
 stage3WeightedSchurProgrammeRepresented : Bool
 stage3WeightedSchurProgrammeRepresented =
