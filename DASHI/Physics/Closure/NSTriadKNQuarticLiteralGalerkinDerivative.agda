@@ -31,12 +31,87 @@ record LiteralQuarticGalerkinLieData
     (system : Equation.FiniteComplex3GalerkinSystem F E I) :
     Set (lsuc (r ⊔ c)) where
   field
+    kineticEnergyTimeDerivative coherenceTimeDerivative
+      quadraticCorrectionTimeDerivative quarticTimeDerivative :
+      C3.Carrier F
+
     energyLinear energyNonlinear : C3.Carrier F
     coherenceLinear coherenceNonlinear : C3.Carrier F
     correctionLinear correctionNonlinear : C3.Carrier F
 
+    complexSquaredMagnitudeDerivativeLHS
+      complexSquaredMagnitudeDerivativeRHS :
+      C3.Carrier F
+    complexSquaredMagnitudeDerivative :
+      complexSquaredMagnitudeDerivativeLHS
+      ≡ complexSquaredMagnitudeDerivativeRHS
+
+    complex3SquaredMagnitudeDerivativeLHS
+      complex3SquaredMagnitudeDerivativeRHS :
+      C3.Carrier F
+    complex3SquaredMagnitudeDerivative :
+      complex3SquaredMagnitudeDerivativeLHS
+      ≡ complex3SquaredMagnitudeDerivativeRHS
+
+    finiteScalarSumDerivativeLHS
+      finiteScalarSumDerivativeRHS :
+      C3.Carrier F
+    finiteScalarSumDerivative :
+      finiteScalarSumDerivativeLHS
+      ≡ finiteScalarSumDerivativeRHS
+
+    kineticEnergyDerivative :
+      kineticEnergyTimeDerivative
+      ≡ C3.add F energyLinear energyNonlinear
+
+    coherenceCoordinateDerivative :
+      coherenceTimeDerivative
+      ≡ C3.add F coherenceLinear coherenceNonlinear
+
+    quadraticCorrectionDerivative :
+      quadraticCorrectionTimeDerivative
+      ≡ C3.add F correctionLinear correctionNonlinear
+
+    quarticProductChainRule :
+      quarticTimeDerivative
+      ≡
+      C3.add F
+        (C3.add F
+          (C3.multiply F (Candidate.two F)
+            (C3.multiply F
+              (Candidate.kineticEnergy P
+                (Equation.cutoff system)
+                (Equation.velocity system))
+              kineticEnergyTimeDerivative))
+          (C3.multiply F (Candidate.two F)
+            (C3.add F
+              (C3.multiply F kineticEnergyTimeDerivative
+                (Candidate.selectedCoherence P
+                  (Equation.cutoff system)
+                  (Equation.velocity system)))
+              (C3.multiply F
+                (Candidate.kineticEnergy P
+                  (Equation.cutoff system)
+                  (Equation.velocity system))
+                coherenceTimeDerivative))))
+        quadraticCorrectionTimeDerivative
+
     energyNonlinearVanishes :
       energyNonlinear ≡ C3.zero F
+
+    energyNonlinearTermVanishes :
+      energyNonlinear ≡ C3.zero F
+
+    energyViscousDerivative :
+      kineticEnergyTimeDerivative ≡ energyLinear
+
+    coherenceLinearNonlinearSplit :
+      coherenceTimeDerivative
+      ≡ C3.add F coherenceLinear coherenceNonlinear
+
+    quadraticCorrectionLinearNonlinearSplit :
+      quadraticCorrectionTimeDerivative
+      ≡ C3.add F correctionLinear correctionNonlinear
 
     literalProjectedEquation :
       Equation.ExactProjectedGalerkinEquation system
@@ -61,7 +136,45 @@ record LiteralQuarticGalerkinLieData
         correctionNonlinear
       ≡ physicalTriadScalarDerivative
 
+    literalQuadraticTriadSum literalCoherenceTriadSum
+      symmetrisedPhysicalTriadSum : C3.Carrier F
+
+    quadraticNonlinearityLiteralTriadExpansion :
+      correctionNonlinear ≡ literalQuadraticTriadSum
+
+    coherenceNonlinearityLiteralTriadExpansion :
+      coherenceNonlinear ≡ literalCoherenceTriadSum
+
+    weightedTriadSymmetrisationIdentity :
+      physicalTriadScalarDerivative
+      ≡ symmetrisedPhysicalTriadSum
+
+    fixedChartSelectedDerivativeAgreement :
+      quarticTimeDerivative ≡ literalFiniteSumDerivative
+
+    fixedChartResidual : C3.Carrier F
+    fixedChartResidualClassVanishes :
+      fixedChartResidual ≡ C3.zero F
+
+    ChartSwitch : Set c
+    oldChartValue newChartValue : ChartSwitch → C3.Carrier F
+    ChartValueNonincrease :
+      C3.Carrier F → C3.Carrier F → Set r
+    chartSwitchSeparatedFromContinuousDerivative : ∀ event →
+      ChartValueNonincrease (newChartValue event) (oldChartValue event)
+
 open LiteralQuarticGalerkinLieData public
+
+quarticDerivativeNoQuinticTerm :
+  ∀ {r c} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {P : Candidate.FourierQuarticParameters {r} {c} F}
+    {system : Equation.FiniteComplex3GalerkinSystem F E I}
+    (D : LiteralQuarticGalerkinLieData P system) →
+  energyNonlinear D ≡ C3.zero F
+quarticDerivativeNoQuinticTerm D =
+  energyNonlinearTermVanishes D
 
 quadraticDerivativePart :
   ∀ {r c} {F : C3.RealField r}
@@ -148,6 +261,23 @@ quarticDerivativeHasExactThreeDegreePieces :
     (quarticDerivativePart D)
 quarticDerivativeHasExactThreeDegreePieces D = refl
 
+quarticDerivativeExactDegreeSplit :
+  ∀ {r c} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {P : Candidate.FourierQuarticParameters {r} {c} F}
+    {system : Equation.FiniteComplex3GalerkinSystem F E I}
+    (D : LiteralQuarticGalerkinLieData P system) →
+  quarticDerivativeByDegree D
+  ≡
+  C3.add F
+    (C3.add F
+      (quadraticDerivativePart D)
+      (cubicDerivativePart D))
+    (quarticDerivativePart D)
+quarticDerivativeExactDegreeSplit =
+  quarticDerivativeHasExactThreeDegreePieces
+
 record LiteralDerivativeIdentification
     {r c : Level}
     {F : C3.RealField r}
@@ -162,6 +292,14 @@ record LiteralDerivativeIdentification
     actualDerivativeAgrees :
       actualTimeDerivativeOfQuartic
       ≡ quarticDerivativeByDegree D
+    literalDerivativeEqualsPhysicalTriadDerivative :
+      physicalTriadScalarDerivative D
+      ≡
+      C3.add F
+        (correctionNonlinear D)
+        (C3.add F
+          (coherenceNonlinear D)
+          (energyNonlinear D))
 
 open LiteralDerivativeIdentification public
 
