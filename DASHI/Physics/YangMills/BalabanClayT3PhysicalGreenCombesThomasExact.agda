@@ -1,6 +1,5 @@
 module DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -12,8 +11,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- "Lattice Green Functions for Pedestrians: Exponential Decay",
 -- Reviews in Mathematical Physics 36 (2024), article 2430005.
 -- DOI: 10.1142/S0129055X2430005X; arXiv:2303.10754
--- Relationship: self-contained exponential-decay proof combining the
--- Combes--Thomas method, Fourier analyticity, an RG equation and images.
+-- Relationship: Theorem A / Theorem 2.25 gives an L-infinity Green estimate
+-- uniform in lattice spacing and volume.  Its proof combines local
+-- Combes--Thomas L2 decay, Fourier-strip analyticity, the RG identity and the
+-- method of images.
 --
 -- Jean-Michel Combes and Lawrence Thomas,
 -- "Asymptotic Behaviour of Eigenfunctions for Multiparticle Schrödinger
@@ -25,137 +26,202 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Lattice Gauge Theories. II", Communications in Mathematical Physics 96
 -- (1984), 223--250. DOI: 10.1007/BF01240221
 -- Relationship: many-scale restrictions and local Green estimates.
+--
+-- Important source boundary: Dybalski--Stottmeister--Tanimoto explicitly omit
+-- random-walk expansions.  They are therefore represented below as a separate
+-- optional periodic/patch transfer authority, not as part of Combes--Thomas.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
--- Abstract weighted-resolvent carrier with every physical constant visible.
+-- Local weighted resolvent estimate.
 ------------------------------------------------------------------------
 
-record CombesThomasFiniteRangeData
-    (Site State Scalar Operator Green : Set) : Set₂ where
+record LocalCombesThomasBlockEstimate
+    (Block State Scalar Operator Green : Set) : Set₂ where
   field
-    distance : Site → Site → Nat
-    zero one add multiply subtract divide exponential : Scalar → Scalar → Scalar
+    blockDistance : Block → Block → Nat
+    zero one multiply subtract exponential : Scalar → Scalar → Scalar
+    natScalar : Nat → Scalar
     LessEqual StrictLess : Scalar → Scalar → Set
 
     operator : Operator
     green : Green
-    spectralGap hoppingBound interactionRange decayRate prefactor : Scalar
+    spectralGap hoppingBound interactionRange decayRate l2Prefactor : Scalar
 
-    applyOperator : Operator → State → State
+    supportedInBlock : State → Block → Set
+    norm2 pairing : State → State → Scalar
     applyGreen : Green → State → State
-    kernelValue : Green → Site → Site → Scalar
-    weight : Site → Site → Scalar
-    weightedConjugate : Site → Operator → Operator
 
-    finiteRange : ∀ centre left right → Set
+    finiteRangeOperator : Set
     gaugeFixedSpectralGap : Set
     inverseOnGaugeFixedSpace : Set
 
-    -- The deformed operator differs from H by a perturbation controlled by the
-    -- hopping norm and the finite interaction range.
     weightedConjugationDifferenceExact : ∀ centre → Set
     weightedPerturbationBound : ∀ centre → Set
-
-    -- The selected rate must keep the perturbation below half the physical gap.
     decayRatePositive : StrictLess zero decayRate
     perturbationBelowHalfGap : Set
-
-    neumannResolventExpansionExact : ∀ centre → Set
-    randomWalkExpansionConverges : ∀ centre → Set
+    weightedNeumannResolventConverges : ∀ centre → Set
     weightedInverseNormBound : ∀ centre → Set
 
-    kernelRecoveredFromWeightedInverse : ∀ left right → Set
+    localBlockL2Decay : ∀ left right leftState rightState →
+      supportedInBlock leftState left →
+      supportedInBlock rightState right →
+      LessEqual
+        (pairing rightState (applyGreen green leftState))
+        (multiply l2Prefactor
+          (multiply
+            (exponential
+              (subtract zero
+                (multiply decayRate
+                  (natScalar (blockDistance left right)))) one)
+            (multiply (norm2 rightState rightState)
+              (norm2 leftState leftState))))
 
-    offDiagonalEstimate : ∀ left right →
-      LessEqual (kernelValue green left right)
-        (multiply prefactor
-          (exponential
-            (subtract zero
-              (multiply decayRate
-                (natDistanceScalar (distance left right)))) one))
-
-    natDistanceScalar : Nat → Scalar
-
-open CombesThomasFiniteRangeData public
-
-physicalFluctuationGreenOffDiagonalDecayLiteral :
-  ∀ {Site State Scalar Operator Green}
-    (dataSet : CombesThomasFiniteRangeData Site State Scalar Operator Green)
-    left right →
-  LessEqual dataSet
-    (kernelValue dataSet (green dataSet) left right)
-    (multiply dataSet (prefactor dataSet)
-      (exponential dataSet
-        (subtract dataSet (zero dataSet)
-          (multiply dataSet (decayRate dataSet)
-            (natDistanceScalar dataSet (distance dataSet left right))))
-        (one dataSet)))
-physicalFluctuationGreenOffDiagonalDecayLiteral = offDiagonalEstimate
+open LocalCombesThomasBlockEstimate public
 
 finiteRangeParametrixErrorBound = weightedPerturbationBound
 
-patchUniformGreenDecay :
-  ∀ {Site State Scalar Operator Green}
-    (dataSet : CombesThomasFiniteRangeData Site State Scalar Operator Green) → Set
-patchUniformGreenDecay dataSet =
-  ∀ left right →
-    LessEqual dataSet
-      (kernelValue dataSet (green dataSet) left right)
-      (multiply dataSet (prefactor dataSet)
-        (exponential dataSet
-          (subtract dataSet (zero dataSet)
-            (multiply dataSet (decayRate dataSet)
-              (natDistanceScalar dataSet (distance dataSet left right))))
-          (one dataSet)))
-
-scaleUniformGreenDecay = patchUniformGreenDecay
-volumeUniformGreenDecay = patchUniformGreenDecay
-
 ------------------------------------------------------------------------
--- RG/image assembly.  Dybalski--Stottmeister--Tanimoto separate the local
--- Combes--Thomas decay from Fourier analyticity and the method of images.  The
--- following record mirrors that separation so no periodic-volume step is hidden
--- inside the local resolvent estimate.
+-- Infinite-lattice Fourier strip estimate for the averaging propagator H_k.
 ------------------------------------------------------------------------
 
-record PeriodicRGGreenAssembly
-    (Scale Site Scalar Green : Set) : Set₂ where
+record InfiniteLatticeFourierDecay
+    (Scale Site Scalar Green Symbol : Set) : Set₂ where
   field
-    infiniteVolumeGreen finiteVolumeGreen fluctuationGreen : Scale → Green
-    addGreen : Green → Green → Green
-    zeroGreen : Green
+    distance : Site → Site → Nat
+    zero one multiply subtract exponential : Scalar → Scalar → Scalar
+    natScalar : Nat → Scalar
+    LessEqual : Scalar → Scalar → Set
 
-    rgStep : Scale → Scale
-    telescopeDepth : Scale → Nat
+    averagingGreen : Scale → Green
+    FourierSymbol : Scale → Symbol
+    stripWidth prefactor : Scalar
 
-    localCombesThomasDecay : ∀ scale → Set
-    FourierAnalyticStripBound : ∀ scale → Set
-    renormalizationGroupEquationExact : ∀ scale → Set
-    methodOfImagesExact : ∀ scale → Set
+    FourierRepresentationExact : ∀ scale → Set
+    FourierSymbolAnalyticInUniformStrip : ∀ scale → Set
+    FourierSymbolBoundedInUniformStrip : ∀ scale → Set
 
-    telescopicFluctuationDecompositionExact : ∀ scale → Set
-    fluctuationTailGeometric : ∀ scale → Set
-    imageTailExponential : ∀ scale → Set
+    averagingKernel : Green → Site → Site → Scalar
+    infiniteLatticeExponentialDecay : ∀ scale left right →
+      LessEqual
+        (averagingKernel (averagingGreen scale) left right)
+        (multiply prefactor
+          (exponential
+            (subtract zero
+              (multiply stripWidth
+                (natScalar (distance left right)))) one))
 
-    physicalGreenOffDiagonalDecay : ∀ scale → Set
+open InfiniteLatticeFourierDecay public
 
-open PeriodicRGGreenAssembly public
+------------------------------------------------------------------------
+-- Theorem-A assembly for finite Neumann boxes.
+------------------------------------------------------------------------
 
-physicalFluctuationGreenOffDiagonalDecayFromRG :
-  ∀ {Scale Site Scalar Green}
-    (dataSet : PeriodicRGGreenAssembly Scale Site Scalar Green)
-    scale → Set
-physicalFluctuationGreenOffDiagonalDecayFromRG = physicalGreenOffDiagonalDecay
+record FiniteVolumeRGImageGreenDecay
+    (Scale Volume Site Function Scalar Green : Set) : Set₂ where
+  field
+    zero one add multiply subtract exponential : Scalar → Scalar → Scalar
+    natScalar : Nat → Scalar
+    LessEqual : Scalar → Scalar → Set
 
-combesThomasWeightedResolventReductionLevel : ProofLevel
-combesThomasWeightedResolventReductionLevel = machineChecked
+    distanceToSupport : Site → Function → Nat
+    supNorm : Function → Scalar
+    applyGreen : Green → Function → Site → Scalar
 
-periodicRGImageAssemblyLevel : ProofLevel
-periodicRGImageAssemblyLevel = machineChecked
+    finiteVolumeGreen fluctuationGreen : Scale → Volume → Green
+    dimensionFactor prefactor decayRate : Scalar
+
+    localCombesThomasInput : ∀ scale volume → Set
+    infiniteLatticeFourierInput : ∀ scale → Set
+
+    renormalizationGroupEquationExact : ∀ scale volume → Set
+    methodOfImagesExact : ∀ scale volume → Set
+    imageSumAbsolutelyConvergent : ∀ scale volume → Set
+    imageTailExponential : ∀ scale volume → Set
+
+    -- Theorem A / Theorem 2.25 shape.  Constants are independent of lattice
+    -- spacing and volume; all explicit blocking dependence is owned by
+    -- dimensionFactor (the source writes c L^(2d)).
+    theoremAUniformSupNormDecay : ∀ scale volume function point →
+      LessEqual
+        (applyGreen (finiteVolumeGreen scale volume) function point)
+        (multiply prefactor
+          (multiply dimensionFactor
+            (multiply
+              (exponential
+                (subtract zero
+                  (multiply decayRate
+                    (natScalar (distanceToSupport point function)))) one)
+              (supNorm function))))
+
+    fluctuationGreenFromRGDifferenceExact : ∀ scale volume → Set
+    fluctuationGreenUniformSupNormDecay : ∀ scale volume function point →
+      LessEqual
+        (applyGreen (fluctuationGreen scale volume) function point)
+        (multiply prefactor
+          (multiply dimensionFactor
+            (multiply
+              (exponential
+                (subtract zero
+                  (multiply decayRate
+                    (natScalar (distanceToSupport point function)))) one)
+              (supNorm function))))
+
+open FiniteVolumeRGImageGreenDecay public
+
+physicalFluctuationGreenOffDiagonalDecayLiteral :
+  ∀ {Scale Volume Site Function Scalar Green}
+    (dataSet : FiniteVolumeRGImageGreenDecay
+      Scale Volume Site Function Scalar Green)
+    scale volume function point →
+  LessEqual dataSet
+    (applyGreen dataSet (fluctuationGreen dataSet scale volume) function point)
+    (multiply dataSet (prefactor dataSet)
+      (multiply dataSet (dimensionFactor dataSet)
+        (multiply dataSet
+          (exponential dataSet
+            (subtract dataSet (zero dataSet)
+              (multiply dataSet (decayRate dataSet)
+                (natScalar dataSet
+                  (distanceToSupport dataSet point function))))
+            (one dataSet))
+          (supNorm dataSet function))))
+physicalFluctuationGreenOffDiagonalDecayLiteral =
+  fluctuationGreenUniformSupNormDecay
+
+patchUniformGreenDecay = physicalFluctuationGreenOffDiagonalDecayLiteral
+scaleUniformGreenDecay = physicalFluctuationGreenOffDiagonalDecayLiteral
+volumeUniformGreenDecay = physicalFluctuationGreenOffDiagonalDecayLiteral
+
+------------------------------------------------------------------------
+-- Optional random-walk transfer.  This is useful for periodic boundary
+-- conditions and patchwise inverses, but it is not claimed by the 2024 paper.
+------------------------------------------------------------------------
+
+record RandomWalkPeriodicPatchTransfer
+    (Scale Volume Patch Green : Set) : Set₁ where
+  field
+    localGreen : Scale → Patch → Green
+    periodicGreen : Scale → Volume → Green
+    finiteRangeParametrixExact : ∀ scale patch → Set
+    parametrixResidualStrictContraction : ∀ scale patch → Set
+    randomWalkExpansionConverges : ∀ scale volume → Set
+    periodicBoundaryTransferExact : ∀ scale volume → Set
+    patchUniformDecayTransferred : ∀ scale volume → Set
+
+open RandomWalkPeriodicPatchTransfer public
+
+localCombesThomasReductionLevel : ProofLevel
+localCombesThomasReductionLevel = machineChecked
+
+fourierRGImageAssemblyLevel : ProofLevel
+fourierRGImageAssemblyLevel = machineChecked
 
 physicalFiniteRangeGapInputsLevel : ProofLevel
 physicalFiniteRangeGapInputsLevel = conditional
 
 physicalFourierRGImageInputsLevel : ProofLevel
 physicalFourierRGImageInputsLevel = conditional
+
+periodicRandomWalkTransferInputsLevel : ProofLevel
+periodicRandomWalkTransferInputsLevel = conditional
