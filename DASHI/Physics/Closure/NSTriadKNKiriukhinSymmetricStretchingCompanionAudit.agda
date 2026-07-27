@@ -18,9 +18,8 @@ module DASHI.Physics.Closure.NSTriadKNKiriukhinSymmetricStretchingCompanionAudit
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat.Base using (_<_)
-import Data.Integer.Base as Int
+open import Agda.Builtin.Nat using (Nat; _+_)
+open import Data.Nat.Base using (_<_; z≤n; s≤s)
 
 record SymmetricStretchingSourceReceipt : Set where
   constructor source-receipt
@@ -65,7 +64,7 @@ open RawSymmetricIndependenceWitness public
 -- Hence V = (M + M^T)/2 = 0, while both raw row and column maxima are 37.
 rawSymmetricIndependenceWitness : RawSymmetricIndependenceWitness
 rawSymmetricIndependenceWitness =
-  witness 37 37 37 0 0 (Data.Nat.Base.s≤s Data.Nat.Base.z≤n) refl refl
+  witness 37 37 37 0 0 (s≤s z≤n) refl refl
 
 record SymmetricCompanionRankAudit : Set where
   constructor rank-audit
@@ -76,8 +75,10 @@ record SymmetricCompanionRankAudit : Set where
     companionAddsIndependentAdjointEquation : Bool
     rankAfterCompanion : Nat
     nullityAfterCompanion : Nat
-    rankNullityBefore : rawOutputRowRank + rowOnlyNullity ≡ threeWeightUnknownCount
-    rankNullityAfter : rankAfterCompanion + nullityAfterCompanion ≡ threeWeightUnknownCount
+    rankNullityBefore :
+      rawOutputRowRank + rowOnlyNullity ≡ threeWeightUnknownCount
+    rankNullityAfter :
+      rankAfterCompanion + nullityAfterCompanion ≡ threeWeightUnknownCount
     antisymmetricBlindnessWitness : RawSymmetricIndependenceWitness
 
 open SymmetricCompanionRankAudit public
