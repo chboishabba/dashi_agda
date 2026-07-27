@@ -6,7 +6,8 @@ module DASHI.Physics.Closure.NSTriadKNQuarticLyapunovEightStageProgram where
 -- Title: "Periodic quartic-Lyapunov eight-stage programme".
 -- Venue/year: DASHI formal development, 2026.
 -- DOI: not applicable; this is a DASHI-original integration theorem.
--- Uses: the source-specific results documented in each imported stage.
+-- Uses: the source-specific results documented in each imported stage,
+-- including Tao/Bony frozen-leg trichotomy and Bernstein direction receipts.
 -- Relationship: original synthesis and dependency composition; it does not
 -- attribute the periodic 3-D joint-domination or BKM-expenditure leaves to
 -- any cited source.
@@ -44,6 +45,8 @@ import DASHI.Physics.Closure.NSTriadKNOrbitToDyadicShellBridge as OrbitShell
 import DASHI.Physics.Closure.NSTriadKNFiniteHelicityRowLifting as HelicityLift
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurDualityProgram as WeightedSchur
 import DASHI.Physics.Closure.NSTriadKNGrafakosTorresThreeFunctionSchurProgram as ThreeFunction
+import DASHI.Physics.Closure.NSTriadKNTaoFrozenLegParaproductProgram as Tao
+import DASHI.Physics.Closure.NSTriadKNBernsteinDirectionAudit as Bernstein
 import DASHI.Physics.Closure.NSTriadKNMultilinearSchurParaproductProgram as MultilinearSchur
 import DASHI.Physics.Closure.NSTriadKNTriadicDyadicExponentSystem as TriadicExponents
 import DASHI.Physics.Closure.NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance as SchurFinite
@@ -118,6 +121,14 @@ grafakosTorresSourceExponentReceipt :
   TriadicExponents.GrafakosTorresSourceExponentReceipt
 grafakosTorresSourceExponentReceipt =
   TriadicExponents.grafakosTorresSourceExponentReceipt
+
+frozenLegPermutationReceipt :
+  Tao.FrozenLegPermutationReceipt
+frozenLegPermutationReceipt = Tao.frozenLegPermutationReceipt
+
+bernsteinDirectionReceipt :
+  Bernstein.BernsteinDirectionReceipt
+bernsteinDirectionReceipt = Bernstein.bernsteinDirectionReceipt
 
 helicalFiniteDecisionReceipt :
   HelicalDecision.FiniteDecisionReceipt
@@ -234,6 +245,42 @@ twoFunctionSchurIsFrozenOutputSpecializationIsTrue :
   twoFunctionSchurIsFrozenOutputSpecialization ≡ true
 twoFunctionSchurIsFrozenOutputSpecializationIsTrue =
   Stage3Schur.twoFunctionSchurIsFrozenOutputSpecializationIsTrue
+
+taoFrozenLegTrichotomyRepresented : Bool
+taoFrozenLegTrichotomyRepresented =
+  Stage3Schur.taoFrozenLegTrichotomyRepresented
+
+taoFrozenLegTrichotomyRepresentedIsTrue :
+  taoFrozenLegTrichotomyRepresented ≡ true
+taoFrozenLegTrichotomyRepresentedIsTrue =
+  Stage3Schur.taoFrozenLegTrichotomyRepresentedIsTrue
+
+frozenLegPermutationClosesPartialAdjoints : Bool
+frozenLegPermutationClosesPartialAdjoints =
+  Stage3Schur.frozenLegPermutationClosesPartialAdjoints
+
+frozenLegPermutationClosesPartialAdjointsIsFalse :
+  frozenLegPermutationClosesPartialAdjoints ≡ false
+frozenLegPermutationClosesPartialAdjointsIsFalse =
+  Stage3Schur.frozenLegPermutationClosesPartialAdjointsIsFalse
+
+bernsteinDirectionAuditRepresented : Bool
+bernsteinDirectionAuditRepresented =
+  Stage3Schur.bernsteinDirectionAuditRepresented
+
+bernsteinDirectionAuditRepresentedIsTrue :
+  bernsteinDirectionAuditRepresented ≡ true
+bernsteinDirectionAuditRepresentedIsTrue =
+  Stage3Schur.bernsteinDirectionAuditRepresentedIsTrue
+
+bernsteinAloneSuppliesLowFrequencyDecay : Bool
+bernsteinAloneSuppliesLowFrequencyDecay =
+  Stage3Schur.bernsteinAloneSuppliesLowFrequencyDecay
+
+bernsteinAloneSuppliesLowFrequencyDecayIsFalse :
+  bernsteinAloneSuppliesLowFrequencyDecay ≡ false
+bernsteinAloneSuppliesLowFrequencyDecayIsFalse =
+  Stage3Schur.bernsteinAloneSuppliesLowFrequencyDecayIsFalse
 
 multilinearAndParaproductRoutesRepresented : Bool
 multilinearAndParaproductRoutesRepresented =
