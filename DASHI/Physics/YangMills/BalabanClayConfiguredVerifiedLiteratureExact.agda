@@ -64,6 +64,76 @@ combesThomas = configuredSource
   "weighted resolvent conjugation estimate"
   "source of the local spectral-gap-to-exponential-decay mechanism"
 
+balaban1987TheoremArchitecture : ConfiguredLiteratureSource
+balaban1987TheoremArchitecture = configuredSource
+  "Tadeusz Bałaban"
+  "Renormalization Group Approach to Lattice Gauge Field Theories. I. Generation of Effective Actions in a Small Field Approximation and a Coupling Constant Renormalization in Four Dimensions"
+  "Communications in Mathematical Physics 109 (1987), 249--301"
+  "10.1007/BF01215223"
+  ""
+  "Introduction, pp. 249--260; Theorems 1--2 and Eqs. (0.22)--(0.31)"
+  "architectural template for conditional small-field control and the beta,beta-prime running-coupling endpoint; Theorem 2's perturbative proof is explicitly deferred"
+
+balaban1987LocalizationMetric : ConfiguredLiteratureSource
+balaban1987LocalizationMetric = configuredSource
+  "Tadeusz Bałaban"
+  "Renormalization Group Approach to Lattice Gauge Field Theories. I. Generation of Effective Actions in a Small Field Approximation and a Coupling Constant Renormalization in Four Dimensions"
+  "Communications in Mathematical Physics 109 (1987), 249--301"
+  "10.1007/BF01215223"
+  ""
+  "Introduction, Eqs. (0.24)--(0.27), including the tree-graph size d_j(X) and exp(-kappa d_j(X)) decay"
+  "literal localization-domain and collar/tree-size convention for T2 patch and polymer norms"
+
+balaban1987WardVacuumPolarization : ConfiguredLiteratureSource
+balaban1987WardVacuumPolarization = configuredSource
+  "Tadeusz Bałaban"
+  "Renormalization Group Approach to Lattice Gauge Field Theories. I. Generation of Effective Actions in a Small Field Approximation and a Coupling Constant Renormalization in Four Dimensions"
+  "Communications in Mathematical Physics 109 (1987), 249--301"
+  "10.1007/BF01215223"
+  ""
+  "Sections 4--5, pp. 281--298; Eqs. (5.36)--(5.41)"
+  "Ward-identity, transverse-kernel and mixed-Laurent-derivative falsification target; not an imported coefficient proof"
+
+simonTraceIdeals : ConfiguredLiteratureSource
+simonTraceIdeals = configuredSource
+  "Barry Simon"
+  "Trace Ideals and Their Applications, Second Edition"
+  "American Mathematical Society, Mathematical Surveys and Monographs 120 (2005)"
+  "10.1090/surv/120"
+  ""
+  "trace-class products, determinants and trace-log series"
+  "analytic mechanism for the localized fluctuation determinant lane"
+
+wilsonConfinement : ConfiguredLiteratureSource
+wilsonConfinement = configuredSource
+  "Kenneth G. Wilson"
+  "Confinement of Quarks"
+  "Physical Review D 10 (1974), 2445--2459"
+  "10.1103/PhysRevD.10.2445"
+  ""
+  "Wilson lattice action"
+  "normalization source for the literal background-field vertex expansion"
+
+faddeevPopov : ConfiguredLiteratureSource
+faddeevPopov = configuredSource
+  "Ludwig D. Faddeev and Victor N. Popov"
+  "Feynman Diagrams for the Yang--Mills Field"
+  "Physics Letters B 25 (1967), 29--30"
+  "10.1016/0370-2693(67)90067-6"
+  ""
+  "ghost determinant and gauge-fixing diagrammatics"
+  "conceptual source; the lattice ghost operator is derived from DASHI's fixed gauge convention"
+
+abbottBackgroundField : ConfiguredLiteratureSource
+abbottBackgroundField = configuredSource
+  "Luis F. Abbott"
+  "The Background Field Method Beyond One Loop"
+  "Nuclear Physics B 185 (1981), 189--203"
+  "10.1016/0550-3213(81)90371-0"
+  ""
+  "background-field Ward structure"
+  "continuum comparison source for gauge-invariant coupling extraction"
+
 chatterjeeYangMillsForProbabilists : ConfiguredLiteratureSource
 chatterjeeYangMillsForProbabilists = configuredSource
   "Sourav Chatterjee"
@@ -90,5 +160,12 @@ configuredVerifiedLiterature =
   solaDerayAtchuthan ∷
   dybalskiStottmeisterTanimotoGreen ∷
   combesThomas ∷
+  balaban1987TheoremArchitecture ∷
+  balaban1987LocalizationMetric ∷
+  balaban1987WardVacuumPolarization ∷
+  simonTraceIdeals ∷
+  wilsonConfinement ∷
+  faddeevPopov ∷
+  abbottBackgroundField ∷
   chatterjeeYangMillsForProbabilists ∷
   gopfertMack ∷ []
