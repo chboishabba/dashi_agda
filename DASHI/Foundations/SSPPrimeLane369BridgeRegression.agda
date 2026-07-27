@@ -3,6 +3,9 @@ module DASHI.Foundations.SSPPrimeLane369BridgeRegression where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero; suc)
 
+import DASHI.Foundations.RepresentationHypervoxelRegression
+import DASHI.Foundations.LogisticAdicStageRegression as Dynamic
+
 open import DASHI.Core.SuperSSP369Field using
   ( rootField
   ; depth3Field
@@ -65,3 +68,12 @@ canonicalZeroBridgeTriPhase = refl
 canonicalExampleBridgeTriPhase :
   triPhase canonicalExampleBridgeReceipt ≡ triPhase canonicalExampleBridgeReceipt
 canonicalExampleBridgeTriPhase = refl
+
+------------------------------------------------------------------------
+-- Authoritative import route for the logistic/adic/stage dynamical tranche.
+------------------------------------------------------------------------
+
+logisticAdicStageRegressionSurface :
+  Dynamic.LogisticAdicStageRegression
+logisticAdicStageRegressionSurface =
+  Dynamic.canonicalLogisticAdicStageRegression
