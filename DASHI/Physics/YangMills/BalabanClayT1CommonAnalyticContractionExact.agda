@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT1CommonAnalyticContractionExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; _+_; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -45,8 +45,6 @@ record CommonAnalyticCriticalMap (Index State : Set) : Set₁ where
     criticalMapDifferenceExact : ∀ index left right →
       subtract (criticalMap index left) (criticalMap index right)
       ≡ green index (subtract (nonlinear index left) (nonlinear index right))
-
-    normRespectsEquality : ∀ {left right} → left ≡ right → norm left ≡ norm right
 
     greenBound : ∀ index source →
       norm (green index source) ≤ greenUpper * norm source
@@ -95,22 +93,15 @@ criticalMapContraction dataSet index left right leftInBall rightInBall =
     (transitive dataSet
       (subst
         (λ value →
-          norm dataSet
-            (subtract dataSet (criticalMap dataSet index left)
-              (criticalMap dataSet index right))
-          ≤ greenUpper dataSet * norm dataSet value)
-        (criticalMapDifferenceExact dataSet index left right)
-        (subst
-          (λ leftNorm →
-            leftNorm
-            ≤ greenUpper dataSet * norm dataSet
-                (subtract dataSet (nonlinear dataSet index left)
-                  (nonlinear dataSet index right)))
-          (normRespectsEquality dataSet
-            (criticalMapDifferenceExact dataSet index left right))
-          (greenBound dataSet index
-            (subtract dataSet (nonlinear dataSet index left)
-              (nonlinear dataSet index right)))))
+          norm dataSet value
+          ≤ greenUpper dataSet
+              * norm dataSet
+                  (subtract dataSet (nonlinear dataSet index left)
+                    (nonlinear dataSet index right)))
+        (sym (criticalMapDifferenceExact dataSet index left right))
+        (greenBound dataSet index
+          (subtract dataSet (nonlinear dataSet index left)
+            (nonlinear dataSet index right))))
       (multiplyMonotoneLeft dataSet (greenUpper dataSet)
         (nonlinearLipschitzOnBall dataSet index left right
           leftInBall rightInBall)))
