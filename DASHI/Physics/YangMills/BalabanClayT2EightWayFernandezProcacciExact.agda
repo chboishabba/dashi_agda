@@ -92,8 +92,14 @@ record EightWayCliqueFPData (Scale Root : Set) : Set₁ where
     reflexive : ∀ value → value ≤ value
     transitive : ∀ {left middle right} →
       left ≤ middle → middle ≤ right → left ≤ right
-    multiplyMonotoneRight : ∀ factor {left right} →
-      left ≤ right → left * factor ≤ right * factor
+
+    -- The multiplier is the fixed positive value 1 + 8(1/4) = 3.  We do not
+    -- assume monotonicity for arbitrary rational multipliers, which would be
+    -- false for negative factors.
+    multiplyByCliqueMajorantMonotone : ∀ {left right} →
+      left ≤ right →
+      left * fpCliqueMajorantAtQuarter
+      ≤ right * fpCliqueMajorantAtQuarter
 
     activityBelowOneTwelfth : ∀ scale root →
       extensionActivity scale root ≤ oneTwelfth
@@ -108,7 +114,7 @@ activityTimesCliqueMajorantBelowQuarter :
   ≤ quarter
 activityTimesCliqueMajorantBelowQuarter dataSet scale root =
   transitive dataSet
-    (multiplyMonotoneRight dataSet fpCliqueMajorantAtQuarter
+    (multiplyByCliqueMajorantMonotone dataSet
       (activityBelowOneTwelfth dataSet scale root))
     (subst
       (λ upper → oneTwelfth * fpCliqueMajorantAtQuarter ≤ upper)
