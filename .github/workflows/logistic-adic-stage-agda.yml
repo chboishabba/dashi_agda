@@ -8,10 +8,12 @@ on:
       - 'DASHI/Core/FramedORCSLPGFAdapter.agda'
       - 'DASHI/Dynamics/LogisticAdicManifoldObligations.agda'
       - 'DASHI/Dynamics/LogisticAdicStageCommutingSpine.agda'
+      - 'DASHI/Everything.agda'
       - 'DASHI/Foundations/CompositeRadixPrimeLaneBridge.agda'
       - 'DASHI/Foundations/FamilyDecimalMonsterCrossPollination.agda'
       - 'DASHI/Foundations/LogisticAdicStageRegression.agda'
       - 'DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda'
+      - 'DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda'
       - 'DASHI/Foundations/StageTetralemmaArrestBridge.agda'
       - 'DASHI/Foundations/StageValuationBundleAtlas.agda'
       - 'DASHI/Physics/Closure/SheetExchangeJFixedResolutionBoundary.agda'
@@ -28,18 +30,22 @@ jobs:
       DASHI_REPO_ROOT: ${{ github.workspace }}
       AGDA_LOG_PATH: ${{ github.workspace }}/.cache/logistic-adic-stage-agda.log
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
       - name: Materialize Agda source dependencies
         run: git submodule update --init --depth 1 DCHoTT-Agda cubical
       - name: Run fail-closed source and arithmetic audit
         run: python3 scripts/check_logistic_adic_stage_spine.py
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
       - name: Typecheck logistic adic stage regression
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Foundations/LogisticAdicStageRegression.agda
+      - name: Typecheck downstream 369 consumer wiring
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda
       - name: Typecheck authoritative SSP 369 route
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
