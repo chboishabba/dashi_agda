@@ -66,6 +66,11 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNKatoPonceFirstAdjointFallback.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3HermitianConvolutionIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3HermitianConvolutionBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianScalingLaws.agda",
+    "DASHI/Physics/Closure/NSTriadKNOneLowShellExponentArchetypes.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteOverlapConstantProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3ShellCertificateIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3ShellCertificateBridge.agda",
 ]
 
 PROVENANCE_MARKERS = (
@@ -148,6 +153,7 @@ def main() -> int:
         ("scripts/ns_stage3_tail_threshold_affine_audit.py", "tail, threshold, and affine-readiness audit"),
         ("scripts/ns_stage3_ternary_antisymmetry_audit.py", "ternary/369 and classical-antisymmetry audit"),
         ("scripts/ns_stage3_hermitian_convolution_audit.py", "Hermitian, Leray, and direct shell-convolution audit"),
+        ("scripts/ns_stage3_shell_certificate_audit.py", "one-low, finite-overlap, and certificate-readiness audit"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -161,8 +167,8 @@ def main() -> int:
         "postulates; global, localized, matrix, direction, manuscript-audit, "
         "weighted-Schur, three-function exponent, symmetric-companion, "
         "frozen-leg/Bernstein, exact-transpose/high-high, symmetrised-adjoint, "
-        "tail/threshold/affine-readiness, ternary/antisymmetry, and "
-        "Hermitian/Leray/direct-convolution verifiers passed"
+        "tail/threshold/affine-readiness, ternary/antisymmetry, "
+        "Hermitian/Leray/direct-convolution, and shell-certificate verifiers passed"
     )
     return 0
 
