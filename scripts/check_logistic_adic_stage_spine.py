@@ -98,15 +98,17 @@ REQUIRED = {
         "FramedCoordinate",
         "coordinateSlot",
         "framedDynamicRow",
-        "bottomInterpretiveArrowRequirement",
         "canonicalFramedORCSLPGFAdapter",
         "canonicalMonsterCarrierAdmissionCandidate",
         "FramedORCSLPGFAuthorityBoundary",
     ],
     "SheetExchangeJFixedResolutionBoundary.agda": [
-        "resolveCoverCentralFlipInvariant",
+        "constantJScalarQuotient",
+        "constantQuotientCoverFlipInvariant",
         "TwoSheetedCoverInterface.centralFlip cover",
-        "resolveAxisLiftIs196884",
+        "constantQuotientIs196884",
+        "constantQuotientIntentional",
+        "quotientIsLiftSensitive",
         "pureInvolutionConvergesClaimed",
         "observerPlusOneUniversallyReachesJClaimed",
     ],
@@ -125,6 +127,7 @@ REQUIRED = {
         "continuumChaosPromoted",
         "realBifurcationTreeTransferredToPAdics",
         "decimalDigitStageSemanticsPromoted",
+        "LogisticContinuumAuthorityBoundary.continuumChaosPromoted",
     ],
 }
 
@@ -134,11 +137,14 @@ FORBIDDEN = [
     "?_",
     "continuumChaosPromoted = true",
     "realBifurcationTreeTransferredToPAdics = true",
+    "decimalDigitStageSemanticsPromoted = true",
     "monsterOriginClaimed = true",
     "topologicalIdentificationClaimed = true",
     "politicalAttractorTheoremPromoted = true",
     "psychiatricOutcomePredicted = true",
     "numeralAloneConstructsManifold = true",
+    "pureInvolutionConvergesClaimed = true",
+    "observerPlusOneUniversallyReachesJClaimed = true",
 ]
 
 
@@ -190,7 +196,7 @@ def main() -> int:
     print("PASS: stage 0..11 is valuation-, memory-, learning- and residual-aware")
     print("PASS: Stage 8 cycle, Stage 11 bundle join and beyond-11 addresses are exact")
     print("PASS: family support, symbolic decimal and Monster/irrep boundaries are explicit")
-    print("PASS: ORCSLPGF, manifold, attractor and JFixedPoint bridges remain fail-closed")
+    print("PASS: ORCSLPGF, manifold, attractor and constant J quotient remain fail-closed")
     return 0
 
 
