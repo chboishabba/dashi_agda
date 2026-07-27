@@ -131,6 +131,67 @@ record PrefixUltrametricReading {p depth : Nat}
     firstDifferenceDeterminesScale : Bool
 
 ------------------------------------------------------------------------
+-- Generic p/rank/depth geometry: (Fin p)^(rank * depth).
+--
+-- Each refinement appends one rank-wide block of p-valued coordinates. The
+-- ternary Rubik carrier is the special case p = 3; prime lanes need not be
+-- identified with that special case.
+------------------------------------------------------------------------
+
+RadixBlock : Nat → Nat → Set
+RadixBlock p rank = Vec.Vec (Fin p) rank
+
+data RadixHyperAddress (p rank : Nat) : Nat → Set where
+  radix-hyper-root : RadixHyperAddress p rank zero
+  radix-hyper-refine :
+    ∀ {depth} →
+    RadixHyperAddress p rank depth →
+    RadixBlock p rank →
+    RadixHyperAddress p rank (suc depth)
+
+radixHyperCoarsen :
+  ∀ {p rank depth} →
+  RadixHyperAddress p rank (suc depth) →
+  RadixHyperAddress p rank depth
+radixHyperCoarsen (radix-hyper-refine parent block) = parent
+
+radixHyperFineBlock :
+  ∀ {p rank depth} →
+  RadixHyperAddress p rank (suc depth) →
+  RadixBlock p rank
+radixHyperFineBlock (radix-hyper-refine parent block) = block
+
+radixHyperCoarsenAfterRefine :
+  ∀ {p rank depth}
+    (parent : RadixHyperAddress p rank depth)
+    (block : RadixBlock p rank) →
+  radixHyperCoarsen (radix-hyper-refine parent block) ≡ parent
+radixHyperCoarsenAfterRefine parent block = refl
+
+radixHyperFineBlockAfterRefine :
+  ∀ {p rank depth}
+    (parent : RadixHyperAddress p rank depth)
+    (block : RadixBlock p rank) →
+  radixHyperFineBlock (radix-hyper-refine parent block) ≡ block
+radixHyperFineBlockAfterRefine parent block = refl
+
+radixPower : Nat → Nat → Nat
+radixPower base zero = 1
+radixPower base (suc exponent) = base * radixPower base exponent
+
+radixHyperSiteCount : Nat → Nat → Nat → Nat
+radixHyperSiteCount p rank depth = radixPower p (rank * depth)
+
+binaryRank3Depth1Count : radixHyperSiteCount 2 3 1 ≡ 8
+binaryRank3Depth1Count = refl
+
+ternaryRank3Depth1Count : radixHyperSiteCount 3 3 1 ≡ 27
+ternaryRank3Depth1Count = refl
+
+ternaryRank3Depth2Count : radixHyperSiteCount 3 3 2 ≡ 729
+ternaryRank3Depth2Count = refl
+
+------------------------------------------------------------------------
 -- Coarse graining truncates an outward extension; fine graining appends one.
 ------------------------------------------------------------------------
 
@@ -301,6 +362,7 @@ record RadixStageAuthorityBoundary : Set where
     everyPrimeLaneIsTernaryClaimed : Bool
     radixAndScaleOriginAreExplicit : Bool
     zeroRadixConstructible : Bool
+    primeRankDepthGeometryExplicit : Bool
 
 canonicalRadixStageAuthorityBoundary : RadixStageAuthorityBoundary
 canonicalRadixStageAuthorityBoundary = record
@@ -311,8 +373,9 @@ canonicalRadixStageAuthorityBoundary = record
   ; everyPrimeLaneIsTernaryClaimed = false
   ; radixAndScaleOriginAreExplicit = true
   ; zeroRadixConstructible = false
+  ; primeRankDepthGeometryExplicit = true
   }
 
 radixStageSummary : String
 radixStageSummary =
-  "Place value is a positive-radix coarse/fine geometry: the radix gives weights, the point gives the scale origin, p-adic proximity follows origin-prefix agreement, and Stage 1/10/11 record unit, carry and carry-plus-local-unit roles without arithmetic collapse."
+  "Place value is a positive-radix coarse/fine geometry: the radix gives weights, the point gives the scale origin, generic p/rank/depth addresses separate prime branching from ternary diagnostics, and Stage 1/10/11 record unit, carry and carry-plus-local-unit roles without arithmetic collapse."
