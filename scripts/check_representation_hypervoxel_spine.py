@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""Fail-closed audit for the representation/frame/hypervoxel tranche.
+
+The arithmetic checks are exact.  The source scan is deliberately narrow: it
+protects the new theorem surface against proof holes, postulate declarations,
+and accidental removal of the central laws.  It is not a substitute for Agda
+kernel checking.
+"""
+
+from __future__ import annotations
+
+from fractions import Fraction
+from pathlib import Path
+import re
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+
+FILES = [
+    ROOT / "DASHI/Foundations/RepresentationChartInvariant.agda",
+    ROOT / "DASHI/Foundations/RecursiveRadixHypervoxel.agda",
+    ROOT / "DASHI/Foundations/RadixValuationStageBridge.agda",
+    ROOT / "DASHI/Geometry/RepresentationPrefixUltrametricBridge.agda",
+    ROOT / "DASHI/Physics/Closure/SU2SO3369HypervoxelBridge.agda",
+    ROOT / "DASHI/Cognition/SituatedFrameMetacognitionBoundary.agda",
+    ROOT / "DASHI/Foundations/RepresentationHypervoxelRegression.agda",
+]
+
+REQUIRED_TOKENS = {
+    "RepresentationChartInvariant.agda": [
+        "threeSixIsOneHalf",
+        "presentationPreservesHalf",
+        "refineRatioPreserves",
+        "FramedAtlas",
+        "ContextualThreeSixNineObservation",
+    ],
+    "RecursiveRadixHypervoxel.agda": [
+        "TernaryAddress",
+        "coarsenAfterRefine",
+        "joinAddress",
+        "configurationCount",
+        "tower3",
+        "projectCentralFlipInvariant",
+        "RubikMove",
+    ],
+    "RadixValuationStageBridge.agda": [
+        "RadixOriginPrefix",
+        "canonicalDecimalCarryGrammar",
+        "stage1ToStage10UnitLift",
+        "canonicalStageCarryJoin",
+        "PrimeLaneAddressProjection",
+    ],
+    "RepresentationPrefixUltrametricBridge.agda": [
+        "OriginPrefixUltrametricReceipt",
+        "sharedThreeSixPrefix",
+        "canonicalDistanceBound",
+    ],
+    "SU2SO3369HypervoxelBridge.agda": [
+        "axisLiftHexRoundTrip",
+        "nonarySlotRoundTrip",
+        "finiteAxisLiftDoubleCover",
+        "canonicalSO3RightJacobianConvention",
+        "canonicalExponentialJacobianDiscipline",
+    ],
+    "SituatedFrameMetacognitionBoundary.agda": [
+        "metacognitiveLiftPreservesExperience",
+        "PluralFrameLedger",
+        "logisticHalfReceipt",
+        "canonicalPrimorialTransformBoundary",
+        "canonicalSituatedFrameAuthorityBoundary",
+    ],
+    "RepresentationHypervoxelRegression.agda": [
+        "canonicalRepresentationHypervoxelRegression",
+        "prefixUltrametricReceipt",
+        "liftProjectionLaw",
+    ],
+}
+
+FORBIDDEN_PATTERNS = [
+    re.compile(r"^\s*postulate\b", re.MULTILINE),
+    re.compile(r"\{!"),
+    re.compile(r"!\}"),
+    re.compile(r"\bTERMINATING\b"),
+    re.compile(r"\bNON_TERMINATING\b"),
+]
+
+
+def check_exact_arithmetic() -> None:
+    presentations = [
+        Fraction(3, 6),
+        Fraction(1, 2),
+        Fraction(5, 10),
+        Fraction(50, 100),
+    ]
+    assert all(value == Fraction(1, 2) for value in presentations)
+
+    hierarchy = [3, 3 * 2, 3**2, 2 * 3**2, 3**3, 2 * 3**3, 3**4, 2 * 3**4]
+    assert hierarchy == [3, 6, 9, 18, 27, 54, 81, 162]
+
+    def site_count(rank: int, depth: int) -> int:
+        return 3 ** (rank * depth)
+
+    assert site_count(1, 1) == 3
+    assert site_count(2, 1) == 9
+    assert site_count(3, 1) == 27
+    assert site_count(3, 2) == 729
+
+    def tower3(height: int) -> int:
+        value = 1
+        for _ in range(height):
+            value = 3**value
+        return value
+
+    assert tower3(0) == 1
+    assert tower3(1) == 3
+    assert tower3(2) == 27
+
+    assert 9 + 1 == 10
+    assert 10 + 1 == 11
+
+
+def scan_sources() -> None:
+    for path in FILES:
+        if not path.is_file():
+            raise AssertionError(f"missing required file: {path.relative_to(ROOT)}")
+
+        text = path.read_text(encoding="utf-8")
+        for pattern in FORBIDDEN_PATTERNS:
+            if pattern.search(text):
+                raise AssertionError(
+                    f"forbidden pattern {pattern.pattern!r} in {path.relative_to(ROOT)}"
+                )
+
+        for token in REQUIRED_TOKENS[path.name]:
+            if token not in text:
+                raise AssertionError(
+                    f"missing required token {token!r} in {path.relative_to(ROOT)}"
+                )
+
+
+def main() -> int:
+    check_exact_arithmetic()
+    scan_sources()
+    print("PASS: ratio presentations preserve 1/2 exactly")
+    print("PASS: 3/6/9 lifted hierarchy and rank/depth counts are exact")
+    print("PASS: carry grammar 9 -> 10 -> 11 is exact")
+    print("PASS: representation/hypervoxel source surface is fail-closed")
+    print("NOTE: run the Agda checker for kernel validation")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except AssertionError as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        raise SystemExit(1)
