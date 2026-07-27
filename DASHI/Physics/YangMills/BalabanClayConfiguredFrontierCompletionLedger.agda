@@ -7,6 +7,8 @@ import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact as Lo
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as Geometry
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact as Radius
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact as Green
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredActionGainThresholdExact as Action
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredComponentLossBoundsExact as Components
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact as Loss
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact as Polymer
 import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact as Balaban536
@@ -48,6 +50,20 @@ localCombesThomasReductionLevel = Green.localCombesThomasReductionLevel
 
 fourierRGImageAssemblyLevel : ProofLevel
 fourierRGImageAssemblyLevel = Green.fourierRGImageAssemblyLevel
+
+configuredActionThresholdArithmeticLevel : ProofLevel
+configuredActionThresholdArithmeticLevel =
+  Action.configuredActionThresholdArithmeticLevel
+
+configuredActionGainReductionLevel : ProofLevel
+configuredActionGainReductionLevel = Action.configuredActionGainReductionLevel
+
+configuredComponentArithmeticLevel : ProofLevel
+configuredComponentArithmeticLevel = Components.configuredComponentArithmeticLevel
+
+configuredComponentBudgetReductionLevel : ProofLevel
+configuredComponentBudgetReductionLevel =
+  Components.configuredComponentBudgetReductionLevel
 
 configuredLossArithmeticLevel : ProofLevel
 configuredLossArithmeticLevel = Loss.configuredLossArithmeticLevel
@@ -133,6 +149,14 @@ physicalFourierRGImageInputsLevel = Green.physicalFourierRGImageInputsLevel
 
 periodicRandomWalkTransferInputsLevel : ProofLevel
 periodicRandomWalkTransferInputsLevel = Green.periodicRandomWalkTransferInputsLevel
+
+physicalLargeFieldPlaquetteAndBetaInputsLevel : ProofLevel
+physicalLargeFieldPlaquetteAndBetaInputsLevel =
+  Action.physicalLargeFieldPlaquetteAndBetaInputsLevel
+
+physicalHaarTraceQuaternionLocalizationPatchInputsLevel : ProofLevel
+physicalHaarTraceQuaternionLocalizationPatchInputsLevel =
+  Components.physicalHaarTraceQuaternionLocalizationPatchInputsLevel
 
 physicalLossDominationInputsLevel : ProofLevel
 physicalLossDominationInputsLevel = Loss.physicalLossDominationInputsLevel
