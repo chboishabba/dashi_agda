@@ -180,7 +180,7 @@ canonicalReflexiveOscillation = record
   }
 
 ------------------------------------------------------------------------
--- Stage 8 owns a gluing residual.  Decimal omission and the -1/2 mirror are
+-- Stage 8 owns a gluing residual. Decimal omission and the -1/2 mirror are
 -- admissible observations, not causes or definitional identities.
 ------------------------------------------------------------------------
 
@@ -206,6 +206,10 @@ digit8AbsentFromOneOver81Block :
   containsNat 8 oneOver81RepeatingBlock ≡ false
 digit8AbsentFromOneOver81Block = refl
 
+oneOver81DecimalCycleCertificate :
+  81 * 12345679 ≡ 999999999
+oneOver81DecimalCycleCertificate = refl
+
 record Stage8ObstructionObservation : Set₁ where
   field
     stage : Atlas.StageAtlasZeroToEleven
@@ -215,6 +219,8 @@ record Stage8ObstructionObservation : Set₁ where
     residualEmitted : Bool
     scopeExceededAvailable : Bool
     refinementRequested : Bool
+    decimalCycleCertificate :
+      81 * 12345679 ≡ 999999999
     decimalOmissionWitness :
       containsNat 8 oneOver81RepeatingBlock ≡ false
     omissionCausesObstructionClaimed : Bool
@@ -230,6 +236,7 @@ canonicalStage8ObstructionObservation = record
   ; residualEmitted = true
   ; scopeExceededAvailable = true
   ; refinementRequested = true
+  ; decimalCycleCertificate = oneOver81DecimalCycleCertificate
   ; decimalOmissionWitness = digit8AbsentFromOneOver81Block
   ; omissionCausesObstructionClaimed = false
   ; negativeHalfIdentifiedWithStage8Claimed = false
@@ -310,6 +317,8 @@ record Stage11CrossScaleJoin : Set where
     joinIsEleven :
       carriedBundleValue + freshLocalValue ≡ joinedValue
     coarseBundle : PlaceBundle
+    coarseBundleMatchesCarriedValue :
+      PlaceBundle.fineUnitCount coarseBundle ≡ carriedBundleValue
     manifoldRequiresGluingWitness : Bool
     manifoldFromNumeralAloneClaimed : Bool
 
@@ -324,6 +333,7 @@ canonicalStage11CrossScaleJoin = record
   ; freshIsOne = refl
   ; joinIsEleven = refl
   ; coarseBundle = decimalTenBundle
+  ; coarseBundleMatchesCarriedValue = refl
   ; manifoldRequiresGluingWitness = true
   ; manifoldFromNumeralAloneClaimed = false
   }
