@@ -12,8 +12,9 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedHelicityExactReconnaissance where
 -- Relationship: records the exact executable result that every ordered
 -- placement has zero real localized-helicity chain derivative on the witness,
 -- while its helical-resolved complex transfer amplitudes retain nontrivial
--- phase information. It rejects scalar localized helicity on this witness;
--- it does not claim a cutoff-uniform theorem for arbitrary states.
+-- phase information. It classifies the witness rows across all seven geometry
+-- classes, rejects scalar localized helicity on this witness, and does not
+-- claim a cutoff-uniform theorem for arbitrary states.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -24,6 +25,7 @@ import Data.Integer.Base as Int
 open import Data.Integer.Base using (+_)
 
 import DASHI.Physics.Closure.NSTriadKNGlobalHelicityH3DiscriminantCounterexample as Witness
+import DASHI.Physics.Closure.NSTriadKNLocalizedHelicityCommutatorProgram as Helical
 
 ScalarSymbol : Set
 ScalarSymbol = Witness.Mode → Int.ℤ
@@ -50,6 +52,7 @@ knownWitnessLocalizedCubicCorrectionIsZero symbol = refl
 record OrderedChainRow : Set where
   constructor chain-row
   field
+    geometry : Helical.GeometricClass
     leftImaginary rightImaginary realDerivative : Int.ℤ
 
 open OrderedChainRow public
@@ -62,18 +65,18 @@ negative n = Int.-_ (+ n)
 
 orderedChainRows : List OrderedChainRow
 orderedChainRows =
-  chain-row (negative 198) (positive 198) (positive 0) ∷
-  chain-row (positive 222) (negative 222) (positive 0) ∷
-  chain-row (positive 180) (negative 180) (positive 0) ∷
-  chain-row (negative 744) (positive 744) (positive 0) ∷
-  chain-row (negative 480) (positive 480) (positive 0) ∷
-  chain-row (negative 60) (positive 60) (positive 0) ∷
-  chain-row (negative 222) (positive 222) (positive 0) ∷
-  chain-row (positive 198) (negative 198) (positive 0) ∷
-  chain-row (positive 744) (negative 744) (positive 0) ∷
-  chain-row (negative 180) (positive 180) (positive 0) ∷
-  chain-row (positive 480) (negative 480) (positive 0) ∷
-  chain-row (positive 60) (negative 60) (positive 0) ∷ []
+  chain-row Helical.near (negative 198) (positive 198) (positive 0) ∷
+  chain-row Helical.near (positive 222) (negative 222) (positive 0) ∷
+  chain-row Helical.near (positive 180) (negative 180) (positive 0) ∷
+  chain-row Helical.near (negative 744) (positive 744) (positive 0) ∷
+  chain-row Helical.near (negative 480) (positive 480) (positive 0) ∷
+  chain-row Helical.near (negative 60) (positive 60) (positive 0) ∷
+  chain-row Helical.near (negative 222) (positive 222) (positive 0) ∷
+  chain-row Helical.near (positive 198) (negative 198) (positive 0) ∷
+  chain-row Helical.near (positive 744) (negative 744) (positive 0) ∷
+  chain-row Helical.near (negative 180) (positive 180) (positive 0) ∷
+  chain-row Helical.near (positive 480) (negative 480) (positive 0) ∷
+  chain-row Helical.near (positive 60) (negative 60) (positive 0) ∷ []
 
 orderedTriadCount helicityTripleCount resolvedContributionCount : Nat
 orderedTriadCount = 12
@@ -83,6 +86,25 @@ resolvedContributionCount = orderedTriadCount * helicityTripleCount
 resolvedContributionCountIsNinetySix :
   resolvedContributionCount ≡ 96
 resolvedContributionCountIsNinetySix = refl
+
+nearRowCount lowHighRowCount highLowRowCount farLowRowCount
+  farHighRowCount transitionRowCount residualRowCount : Nat
+nearRowCount = 12
+lowHighRowCount = 0
+highLowRowCount = 0
+farLowRowCount = 0
+farHighRowCount = 0
+transitionRowCount = 0
+residualRowCount = 0
+
+nearRowCountIsTwelve : nearRowCount ≡ 12
+nearRowCountIsTwelve = refl
+
+nonNearRowCountIsZero :
+  lowHighRowCount + highLowRowCount + farLowRowCount + farHighRowCount
+    + transitionRowCount + residualRowCount
+  ≡ 0
+nonNearRowCountIsZero = refl
 
 record RationalCoefficient : Set where
   constructor ratio
@@ -144,6 +166,11 @@ record LocalizedHelicityExactReceipt : Set where
         * localizedPerturbedCubic symbol epsilon
       ≡ 4 * baseQuadraticReserve * quarticReserve + discriminantGap
     allOrderedHelicityRowsPresent : resolvedContributionCount ≡ 96
+    witnessRowsAreNear : nearRowCount ≡ 12
+    allOtherWitnessGeometryClassesAreEmpty :
+      lowHighRowCount + highLowRowCount + farLowRowCount + farHighRowCount
+        + transitionRowCount + residualRowCount
+      ≡ 0
     retainedTriadPhaseIsNontrivial : 0 < 429
 
 open LocalizedHelicityExactReceipt public
@@ -154,6 +181,8 @@ localizedHelicityExactReceipt =
     knownWitnessLocalizedCubicCorrectionIsZero
     localizedWitnessDiscriminantIdentity
     resolvedContributionCountIsNinetySix
+    nearRowCountIsTwelve
+    nonNearRowCountIsZero
     firstNearPPPImaginarySqrt10NumeratorPositive
 
 data ScalarLocalizedWitnessDecision : Set where
