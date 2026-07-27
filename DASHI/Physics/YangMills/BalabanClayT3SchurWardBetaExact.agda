@@ -7,7 +7,7 @@ open import Data.Rational using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _/_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
@@ -17,11 +17,6 @@ open import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact usin
 
 ------------------------------------------------------------------------
 -- T3A: exact Schur completion in the one-dimensional block model.
---
--- This is the normalization regression for the physical operator theorem.  It
--- fixes every sign and factor of two in
---
---   H_eff = H_cc - H_cf H_ff^{-1} H_fc.
 ------------------------------------------------------------------------
 
 scalarFluctuationMinimizer : ℚ → ℚ → ℚ → ℚ
@@ -64,7 +59,7 @@ scalarSchurEnergyExact coarseHessian mixed fluctuationHessian
         + (product - 1ℚ)
           * (inverseFluctuation * mixed * mixed * coarse * coarse)
         ≡ scalarSchurHessian coarseHessian mixed inverseFluctuation * coarse * coarse)
-      inverseProduct
+      (sym inverseProduct)
       (ℚRing.solve-∀
         (scalarSchurHessian coarseHessian mixed inverseFluctuation)
         coarse inverseFluctuation mixed))
@@ -133,11 +128,6 @@ localizationPreservesWardIdentity = localizationEquivariant
 
 ------------------------------------------------------------------------
 -- T4B: a genuinely quartic remainder is summable.
---
--- The dyadic envelope is a rigorous majorant, not the physical beta recursion:
--- g_k^2 = 2^{-k}, hence g_k^4 = 4^{-k}.  The exact tail identity proves
--- sum_k g_k^4 = 4/3.  A physical running coupling only has to be compared with
--- this or an analogous harmonic-square envelope.
 ------------------------------------------------------------------------
 
 quarter fourThirds : ℚ
@@ -256,8 +246,6 @@ record QuarticRemainderBound : Set₁ where
     addMonotone : ∀ {left leftUpper right rightUpper} →
       left ≤ leftUpper → right ≤ rightUpper →
       left + right ≤ leftUpper + rightUpper
-    multiplyMonotoneLeft : ∀ prefix {left right} →
-      left ≤ right → prefix * left ≤ prefix * right
 
     partialZero : partialAbsoluteRemainder zero ≡ 0ℚ
     partialStep : ∀ depth →
@@ -277,19 +265,25 @@ quarticRemainderPartialBound :
 quarticRemainderPartialBound dataSet zero =
   subst
     (λ left → left ≤ coefficient dataSet * quarticPartialSum zero)
-    (partialZero dataSet)
+    (sym (partialZero dataSet))
     (reflexive dataSet 0ℚ)
 quarticRemainderPartialBound dataSet (suc depth) =
   subst
     (λ left →
       left ≤ coefficient dataSet * quarticPartialSum (suc depth))
-    (partialStep dataSet depth)
-    (transitive dataSet
+    (sym (partialStep dataSet depth))
+    (subst
+      (λ upper →
+        partialAbsoluteRemainder dataSet depth
+          + absoluteRemainder dataSet depth
+        ≤ upper)
+      (ℚRing.solve-∀
+        (coefficient dataSet)
+        (quarticPartialSum depth)
+        (couplingFourthEnvelope depth))
       (addMonotone dataSet
         (quarticRemainderPartialBound dataSet depth)
-        (remainderControlled dataSet depth))
-      (reflexive dataSet
-        (coefficient dataSet * quarticPartialSum (suc depth))))
+        (remainderControlled dataSet depth)))
 
 scalarSchurNormalizationLevel : ProofLevel
 scalarSchurNormalizationLevel = machineChecked
