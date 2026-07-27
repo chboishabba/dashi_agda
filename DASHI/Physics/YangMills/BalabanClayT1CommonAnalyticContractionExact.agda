@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT1CommonAnalyticContractionExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -17,6 +17,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- Consequently the contraction ratio is exactly C_G C_N r.  This is the
 -- common quantitative bridge needed by the Picard background construction.
+--
+-- Order discipline: multiplication is used monotonically only with explicit
+-- nonnegative coefficients.  The earlier unrestricted law
+-- `prefix * left <= prefix * right` for arbitrary rational `prefix` was false
+-- for negative prefixes and has been removed.
 ------------------------------------------------------------------------
 
 record CommonAnalyticCriticalMap (Index State : Set) : Set₁ where
@@ -31,14 +36,19 @@ record CommonAnalyticCriticalMap (Index State : Set) : Set₁ where
 
     radius greenUpper nonlinearSlope contractionRatio : ℚ
 
+    greenUpperNonnegative : 0ℚ ≤ greenUpper
+    contractionRatioNonnegative : 0ℚ ≤ contractionRatio
+
     reflexive : ∀ value → value ≤ value
     transitive : ∀ {left middle right} →
       left ≤ middle → middle ≤ right → left ≤ right
     addMonotone : ∀ {left leftUpper right rightUpper} →
       left ≤ leftUpper → right ≤ rightUpper →
       left + right ≤ leftUpper + rightUpper
-    multiplyMonotoneLeft : ∀ prefix {left right} →
-      left ≤ right → prefix * left ≤ prefix * right
+    multiplyMonotoneLeftNonnegative : ∀ prefix {left right} →
+      0ℚ ≤ prefix →
+      left ≤ right →
+      prefix * left ≤ prefix * right
 
     zeroInBall : norm zero ≤ radius
 
@@ -102,7 +112,8 @@ criticalMapContraction dataSet index left right leftInBall rightInBall =
         (greenBound dataSet index
           (subtract dataSet (nonlinear dataSet index left)
             (nonlinear dataSet index right))))
-      (multiplyMonotoneLeft dataSet (greenUpper dataSet)
+      (multiplyMonotoneLeftNonnegative dataSet (greenUpper dataSet)
+        (greenUpperNonnegative dataSet)
         (nonlinearLipschitzOnBall dataSet index left right
           leftInBall rightInBall)))
 
@@ -123,7 +134,10 @@ criticalMapPreservesCommonBall dataSet index state stateInBall =
       (transitive dataSet
         (addMonotone dataSet
           (reflexive dataSet (norm dataSet (criticalMap dataSet index (zero dataSet))))
-          (multiplyMonotoneLeft dataSet (contractionRatio dataSet) stateInBall))
+          (multiplyMonotoneLeftNonnegative dataSet
+            (contractionRatio dataSet)
+            (contractionRatioNonnegative dataSet)
+            stateInBall))
         (mapAtZeroBudget dataSet index)))
 
 ------------------------------------------------------------------------
@@ -202,6 +216,9 @@ commonAnalyticCriticalMapContractionLevel = machineChecked
 
 commonAnalyticCriticalMapSelfMapLevel : ProofLevel
 commonAnalyticCriticalMapSelfMapLevel = machineChecked
+
+commonAnalyticNonnegativeMultiplierLevel : ProofLevel
+commonAnalyticNonnegativeMultiplierLevel = machineChecked
 
 commonSecondJetFiveTermLevel : ProofLevel
 commonSecondJetFiveTermLevel = machineChecked
