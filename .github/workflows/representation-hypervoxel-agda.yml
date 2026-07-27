@@ -22,14 +22,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Run fail-closed source and arithmetic audit
         run: python3 scripts/check_representation_hypervoxel_spine.py
       - uses: cachix/install-nix-action@v31
       - name: Typecheck focused regression
         run: |
-          nix develop --command agda -i . -l standard-library \
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Foundations/RepresentationHypervoxelRegression.agda
-      - name: Typecheck authoritative 369 wiring
+      - name: Typecheck downstream 369 consumer wiring
         run: |
-          nix develop --command agda -i . -l standard-library \
-            DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda
+      - name: Typecheck authoritative aggregate wiring
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Everything.agda
