@@ -31,6 +31,9 @@ fiveTenths = ratio 5 10
 fiftyHundredths : RatioRepresentation
 fiftyHundredths = ratio 50 100
 
+binaryPointOne : RatioRepresentation
+binaryPointOne = ratio 1 2
+
 threeSixIsOneHalf : RatioEquivalent threeSix oneHalf
 threeSixIsOneHalf = refl
 
@@ -39,6 +42,9 @@ fiveTenthsIsOneHalf = refl
 
 fiftyHundredthsIsOneHalf : RatioEquivalent fiftyHundredths oneHalf
 fiftyHundredthsIsOneHalf = refl
+
+binaryPointOneIsOneHalf : RatioEquivalent binaryPointOne oneHalf
+binaryPointOneIsOneHalf = refl
 
 ------------------------------------------------------------------------
 -- Presentation charts for the same invariant rational point.
@@ -59,18 +65,21 @@ data HalfPresentation : Set where
   displayedOneHalf        : HalfPresentation
   displayedDecimalPointFive : HalfPresentation
   displayedFiftyPercent   : HalfPresentation
+  displayedBinaryPointOne : HalfPresentation
 
 presentationChart : HalfPresentation → PresentationChart
 presentationChart displayedThreeSix = unreducedFractionChart
 presentationChart displayedOneHalf = reducedFractionChart
 presentationChart displayedDecimalPointFive = decimalChart
 presentationChart displayedFiftyPercent = percentageChart
+presentationChart displayedBinaryPointOne = binaryRadixChart
 
 presentationRatio : HalfPresentation → RatioRepresentation
 presentationRatio displayedThreeSix = threeSix
 presentationRatio displayedOneHalf = oneHalf
 presentationRatio displayedDecimalPointFive = fiveTenths
 presentationRatio displayedFiftyPercent = fiftyHundredths
+presentationRatio displayedBinaryPointOne = binaryPointOne
 
 presentationPreservesHalf :
   (p : HalfPresentation) →
@@ -79,6 +88,7 @@ presentationPreservesHalf displayedThreeSix = refl
 presentationPreservesHalf displayedOneHalf = refl
 presentationPreservesHalf displayedDecimalPointFive = refl
 presentationPreservesHalf displayedFiftyPercent = refl
+presentationPreservesHalf displayedBinaryPointOne = refl
 
 record PresentationFibre (invariant : RatioRepresentation) : Set where
   constructor presentation-fibre
@@ -145,6 +155,7 @@ data RatioRole : Set where
   midpointRole            : RatioRole
   percentageRole          : RatioRole
   scaleRefinementRole     : RatioRole
+  harmonicReciprocalRole  : RatioRole
 
 record TypedRatioReading : Set where
   constructor typed-ratio-reading
@@ -166,6 +177,22 @@ fiftyPercentReading : TypedRatioReading
 fiftyPercentReading =
   typed-ratio-reading fiftyHundredths oneHalf percentageRole refl
 
+harmonicTerm : Nat → RatioRepresentation
+harmonicTerm n = ratio 1 (suc n)
+
+firstHarmonicTerm : harmonicTerm 0 ≡ ratio 1 1
+firstHarmonicTerm = refl
+
+secondHarmonicTerm : harmonicTerm 1 ≡ oneHalf
+secondHarmonicTerm = refl
+
+threeSixIsSecondHarmonic : RatioEquivalent threeSix (harmonicTerm 1)
+threeSixIsSecondHarmonic = refl
+
+threeSixHarmonicReading : TypedRatioReading
+threeSixHarmonicReading =
+  typed-ratio-reading threeSix (harmonicTerm 1) harmonicReciprocalRole refl
+
 refineRatio : Nat → RatioRepresentation → RatioRepresentation
 refineRatio k r = ratio (k * numerator r) (k * denominator r)
 
@@ -181,6 +208,13 @@ refineRatioPreserves k r =
         (sym (*-assoc k (denominator r) (numerator r)))
         (*-comm (k * denominator r) (numerator r))))
 
+threefoldHalfRefinement : refineRatio 3 oneHalf ≡ threeSix
+threefoldHalfRefinement = refl
+
+threefoldHalfRefinementPreserves :
+  RatioEquivalent (refineRatio 3 oneHalf) oneHalf
+threefoldHalfRefinementPreserves = refineRatioPreserves 3 oneHalf
+
 ------------------------------------------------------------------------
 -- 3/6/9 supports several different typed operations.  No operation below
 -- identifies those roles definitionally.
@@ -193,6 +227,7 @@ data ThreeSixNineUse : Set where
   matrixSheetUse    : ThreeSixNineUse
   residueObservationUse : ThreeSixNineUse
   semanticStageUse  : ThreeSixNineUse
+  harmonicRatioUse  : ThreeSixNineUse
 
 record ContextualThreeSixNineObservation (System : Set) : Set₁ where
   field
@@ -213,6 +248,7 @@ record RepresentationAuthorityBoundary : Set where
     frameCanBeInspected : Bool
     frameCanBeCompared : Bool
     presentationFibreIsGroupCoverClaimed : Bool
+    harmonicRoleIsContextDependent : Bool
 
 canonicalRepresentationAuthorityBoundary : RepresentationAuthorityBoundary
 canonicalRepresentationAuthorityBoundary = record
@@ -221,8 +257,9 @@ canonicalRepresentationAuthorityBoundary = record
   ; frameCanBeInspected = true
   ; frameCanBeCompared = true
   ; presentationFibreIsGroupCoverClaimed = false
+  ; harmonicRoleIsContextDependent = true
   }
 
 representationSummary : String
 representationSummary =
-  "A value is carried together with its chart, scale and relation; 3/6, 1/2, 0.5 and 50% are distinct presentations of one rational point."
+  "A value is carried together with its chart, scale and relation; 3/6, 1/2, 0.5, 0.1 base 2 and 50% are distinct presentations of one rational point."
