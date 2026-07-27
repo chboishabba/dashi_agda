@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.ControlCardCore as Control
+import DASHI.Foundations.CanonicalHalfFrameScaleValuation as CanonicalFrame
 import DASHI.Foundations.RepresentationChartInvariant as Representation
 
 ------------------------------------------------------------------------
@@ -150,6 +151,39 @@ record FramedORCSLPGFAdapter : Set₁ where
       Bridge.BridgeRequirementRowReceipt interpretationBridge
     transitionCannotBypassGovernance : Bool
     promotedByAdapter : Bool
+
+canonicalFramedORCSLPGFAdapter : FramedORCSLPGFAdapter
+canonicalFramedORCSLPGFAdapter = record
+  { CoordinateValue = Representation.RatioRepresentation
+  ; coordinateRows = canonicalCoordinateRows
+  ; selectedCarrier = genericRegisteredCarrier
+  ; monsterSpecificCarrierRequiresAdmission = true
+  ; frameObject = CanonicalFrame.canonicalHalfFrameScaleValuation
+  ; controlRow = framedDynamicRow
+  ; controlReceipt = framedDynamicRowReceipt
+  ; interpretationBridge = bottomInterpretiveArrowRequirement
+  ; interpretationBridgeReceipt = bottomInterpretiveArrowRequirementReceipt
+  ; transitionCannotBypassGovernance = true
+  ; promotedByAdapter = false
+  }
+
+record MonsterCarrierAdmission : Set where
+  field
+    requestedCarrier : CarrierRegistryEntry
+    requestedCarrierIsFactorVec15 :
+      requestedCarrier ≡ monsterFactorVec15Carrier
+    domainSpecificConsumer : Bool
+    carrierReceiptSupplied : Bool
+    promotionAuthorityGranted : Bool
+
+canonicalMonsterCarrierAdmissionCandidate : MonsterCarrierAdmission
+canonicalMonsterCarrierAdmissionCandidate = record
+  { requestedCarrier = monsterFactorVec15Carrier
+  ; requestedCarrierIsFactorVec15 = refl
+  ; domainSpecificConsumer = true
+  ; carrierReceiptSupplied = true
+  ; promotionAuthorityGranted = false
+  }
 
 record FramedORCSLPGFAuthorityBoundary : Set where
   field
