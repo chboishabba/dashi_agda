@@ -52,6 +52,11 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNThreeNumericShellLedgerStatus.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3AdjointTailIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3AdjointTailBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3Ternary369Ledger.agda",
+    "DASHI/Physics/Closure/NSTriadKNCherevanCompanionScalingAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNCannoneTrilinearAntisymmetryAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3TernaryAntisymmetryIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3TernaryAntisymmetryBridge.agda",
 ]
 
 PROVENANCE_MARKERS = (
@@ -132,6 +137,7 @@ def main() -> int:
         ("scripts/ns_exact_transpose_high_high_audit.py", "exact transpose and high-high audit"),
         ("scripts/ns_symmetrised_first_adjoint_audit.py", "symmetrised first-adjoint exact audit"),
         ("scripts/ns_stage3_tail_threshold_affine_audit.py", "tail, threshold, and affine-readiness audit"),
+        ("scripts/ns_stage3_ternary_antisymmetry_audit.py", "ternary/369 and classical-antisymmetry audit"),
     ):
         failure = run_verifier(root, relative, label)
         if failure is not None:
@@ -145,7 +151,7 @@ def main() -> int:
         "postulates; global, localized, matrix, direction, manuscript-audit, "
         "weighted-Schur, three-function exponent, symmetric-companion, "
         "frozen-leg/Bernstein, exact-transpose/high-high, symmetrised-adjoint, "
-        "and tail/threshold/affine-readiness verifiers passed"
+        "tail/threshold/affine-readiness, and ternary/antisymmetry verifiers passed"
     )
     return 0
 
