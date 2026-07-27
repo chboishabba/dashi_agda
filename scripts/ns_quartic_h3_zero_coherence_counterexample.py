@@ -136,10 +136,33 @@ def main() -> int:
     assert gap == 28_984_957_666_432
     assert gap > 0
 
+    homogeneous_quadratic_reserve = sum(
+        mode_norm_squared(mode) ** 3
+        * mode_norm_squared(mode)
+        * norms[mode]
+        for mode in modes
+    )
+    homogeneous_cubic = sum(
+        mode_norm_squared(mode) ** 3
+        * hermitian(velocity[mode], nonlinear[mode])[0]
+        for mode in modes
+    )
+    homogeneous_gap = (
+        homogeneous_cubic * homogeneous_cubic
+        - 4 * homogeneous_quadratic_reserve * quartic_reserve
+    )
+    assert homogeneous_quadratic_reserve == 7_250_656
+    assert abs(homogeneous_cubic) == 5_441_472
+    assert homogeneous_gap == 22_476_596_169_728
+    assert homogeneous_gap > 0
+
     print(
-        "verified exact zero-coherence H^3 counterexample: "
+        "verified exact zero-coherence H^3 counterexamples: "
         f"A={quadratic_reserve}, B={quartic_reserve}, "
-        f"|C|={abs(cubic)}, C^2-4AB={gap}"
+        f"|C|={abs(cubic)}, C^2-4AB={gap}; "
+        f"homogeneous A={homogeneous_quadratic_reserve}, "
+        f"|C|={abs(homogeneous_cubic)}, "
+        f"C^2-4AB={homogeneous_gap}"
     )
     return 0
 
