@@ -1,18 +1,10 @@
 module DASHI.Physics.YangMills.BalabanClayT3OperatorSchurComplementExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
-
-------------------------------------------------------------------------
--- Exact operator-level Schur complement.
---
--- The energy identity is derived from subtraction-linearity and the mixed
--- adjoint relation.  It is not installed as a field on the resulting P3
--- certificate.
-------------------------------------------------------------------------
 
 record OperatorSchurData (Coarse Fluctuation Bound : Set) : Set₁ where
   field
@@ -82,7 +74,7 @@ operatorSchurEnergyExact dataSet coarse =
     (let
       mixedTerm = fluctuationGreen dataSet (mixedHessian dataSet coarse)
      in
-      Agda.Builtin.Equality.cong
+      cong
         (subtractBound dataSet
           (coarseInner dataSet coarse (coarseHessian dataSet coarse)))
         (mixedAdjointExact dataSet coarse mixedTerm))
@@ -129,7 +121,5 @@ operatorSchurEnergyIdentityLevel = machineChecked
 operatorSchurP3AdapterLevel : ProofLevel
 operatorSchurP3AdapterLevel = machineChecked
 
--- The remaining physical input is coercivity/invertibility of the constrained
--- fluctuation block and identification of the exact gauge kernel on every patch.
 physicalFluctuationSchurInputsLevel : ProofLevel
 physicalFluctuationSchurInputsLevel = conditional
