@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the helical, coherence, and Stage-3 Schur tranche."""
+"""Fail closed on the helical, coherence, and Stage-3 analytic tranche."""
 
 from __future__ import annotations
 
@@ -52,11 +52,8 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNThreeNumericShellLedgerStatus.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3AdjointTailIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3AdjointTailBridge.agda",
-    "DASHI/Physics/Closure/NSTriadKNStage3Ternary369Ledger.agda",
     "DASHI/Physics/Closure/NSTriadKNCherevanCompanionScalingAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNCannoneTrilinearAntisymmetryAudit.agda",
-    "DASHI/Physics/Closure/NSTriadKNStage3TernaryAntisymmetryIntegration.agda",
-    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3TernaryAntisymmetryBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3HermitianAlgebraProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNLerayAlgebraProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3HermitianNondegeneracy.agda",
@@ -64,19 +61,31 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNCheskidovEguchiCountingTransferAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNFirstAdjointShellConvolutionProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNKatoPonceFirstAdjointFallback.agda",
-    "DASHI/Physics/Closure/NSTriadKNStage3HermitianConvolutionIntegration.agda",
-    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3HermitianConvolutionBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3HermitianScalingLaws.agda",
     "DASHI/Physics/Closure/NSTriadKNOneLowShellExponentArchetypes.agda",
     "DASHI/Physics/Closure/NSTriadKNFiniteOverlapConstantProgram.agda",
-    "DASHI/Physics/Closure/NSTriadKNStage3ShellCertificateIntegration.agda",
-    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3ShellCertificateBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNComplex3HermitianAdditiveLaws.agda",
     "DASHI/Physics/Closure/NSTriadKNLeraySelfAdjointness.agda",
     "DASHI/Physics/Closure/NSTriadKNLiteralVectorAdjointPairingTheorems.agda",
-    "DASHI/Physics/Closure/NSTriadKNStage3VectorAdjointCompletionIntegration.agda",
-    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3VectorAdjointCompletionBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNOrderedEuclideanL2Carrier.agda",
+    "DASHI/Physics/Closure/NSTriadKNRestrictedTransverseUniqueness.agda",
+    "DASHI/Physics/Closure/NSTriadKNLerayContractionFromPythagoras.agda",
+    "DASHI/Physics/Closure/NSTriadKNExactDyadicShellGeometry.agda",
+    "DASHI/Physics/Closure/NSTriadKNSeparatedComponentLedger.agda",
+    "DASHI/Physics/Closure/NSTriadKNSeparatedComponentEndpointProfiles.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteOverlapCanonicalConstants.agda",
+    "DASHI/Physics/Closure/NSTriadKNHardDyadicShellOwner.agda",
+    "DASHI/Physics/Closure/NSTriadKNFirstAdjointCutoffUniformAssembly.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosOhDiagonalConvolutionAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNDAnconaCommutatorFallbackAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3OrderedL2AnalyticIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3OrderedL2Bridge.agda",
 ]
+
+# The general DASHI balanced/unbalanced ternary and Base369 developments are
+# intentionally untouched.  The Stage-3 status-only adapters introduced on
+# this branch are preserved in history but are not part of this proof-critical
+# checker or dependency path.
 
 PROVENANCE_MARKERS = (
     "-- PROVENANCE",
@@ -84,20 +93,8 @@ PROVENANCE_MARKERS = (
     "-- Venue/year:",
     "-- Relationship:",
 )
-
-DOI_MARKERS = (
-    "-- DOI:",
-    "-- Journal DOI:",
-    "-- arXiv/DataCite DOI:",
-)
-
-FORBIDDEN = (
-    "{!!}",
-    "?}",
-    "{-# TERMINATING #-}",
-    "{-# NON_TERMINATING #-}",
-)
-
+DOI_MARKERS = ("-- DOI:", "-- Journal DOI:", "-- arXiv/DataCite DOI:")
+FORBIDDEN = ("{!!}", "?}", "{-# TERMINATING #-}", "{-# NON_TERMINATING #-}")
 POSTULATE = re.compile(r"(?m)^\s*postulate(?:\s|$)")
 
 
@@ -143,24 +140,26 @@ def main() -> int:
         if not any(marker in text for marker in DOI_MARKERS):
             failures.append(f"{relative}: missing DOI status")
 
-    for relative, label in (
+    verifiers = (
         ("scripts/ns_quartic_helicity_perturbed_counterexample.py", "global-helicity exact verifier"),
-        ("scripts/ns_quartic_localized_helicity_reconnaissance.py", "localized-helicity reconnaissance verifier"),
-        ("scripts/ns_quartic_localized_helicity_extended_family.py", "extended localized-helicity family verifier"),
-        ("scripts/ns_quartic_matrix_coherence_reconnaissance.py", "off-diagonal matrix-coherence verifier"),
-        ("scripts/ns_quartic_direction_coherence_audit.py", "direction-coherence and Permana audit verifier"),
-        ("scripts/ns_kiriukhin_weighted_schur_reconnaissance.py", "Kiriukhin weighted-Schur reconnaissance verifier"),
-        ("scripts/ns_grafakos_torres_exponent_reconnaissance.py", "Grafakos--Torres exponent and rank verifier"),
-        ("scripts/ns_kiriukhin_symmetric_companion_audit.py", "Kiriukhin symmetric companion rank audit"),
-        ("scripts/ns_tao_frozen_leg_paraproduct_audit.py", "Tao frozen-leg and Bernstein-direction audit"),
-        ("scripts/ns_exact_transpose_high_high_audit.py", "exact transpose and high-high audit"),
-        ("scripts/ns_symmetrised_first_adjoint_audit.py", "symmetrised first-adjoint exact audit"),
-        ("scripts/ns_stage3_tail_threshold_affine_audit.py", "tail, threshold, and affine-readiness audit"),
-        ("scripts/ns_stage3_ternary_antisymmetry_audit.py", "ternary/369 and classical-antisymmetry audit"),
-        ("scripts/ns_stage3_hermitian_convolution_audit.py", "Hermitian, Leray, and direct shell-convolution audit"),
-        ("scripts/ns_stage3_shell_certificate_audit.py", "one-low, finite-overlap, and certificate-readiness audit"),
-        ("scripts/ns_stage3_vector_adjoint_pairing_audit.py", "Leray and exact vector-adjoint pairing audit"),
-    ):
+        ("scripts/ns_quartic_localized_helicity_reconnaissance.py", "localized-helicity verifier"),
+        ("scripts/ns_quartic_localized_helicity_extended_family.py", "extended localized-helicity verifier"),
+        ("scripts/ns_quartic_matrix_coherence_reconnaissance.py", "matrix-coherence verifier"),
+        ("scripts/ns_quartic_direction_coherence_audit.py", "direction-coherence verifier"),
+        ("scripts/ns_kiriukhin_weighted_schur_reconnaissance.py", "weighted-Schur verifier"),
+        ("scripts/ns_grafakos_torres_exponent_reconnaissance.py", "Grafakos--Torres exponent verifier"),
+        ("scripts/ns_kiriukhin_symmetric_companion_audit.py", "symmetric companion verifier"),
+        ("scripts/ns_tao_frozen_leg_paraproduct_audit.py", "frozen-leg verifier"),
+        ("scripts/ns_exact_transpose_high_high_audit.py", "transpose/high-high verifier"),
+        ("scripts/ns_symmetrised_first_adjoint_audit.py", "symmetrised first-adjoint verifier"),
+        ("scripts/ns_stage3_tail_threshold_affine_audit.py", "tail/threshold verifier"),
+        ("scripts/ns_stage3_classical_antisymmetry_audit.py", "classical antisymmetry verifier"),
+        ("scripts/ns_stage3_hermitian_convolution_audit.py", "Hermitian/convolution verifier"),
+        ("scripts/ns_stage3_shell_certificate_audit.py", "shell-certificate verifier"),
+        ("scripts/ns_stage3_vector_adjoint_pairing_audit.py", "vector-adjoint verifier"),
+        ("scripts/ns_stage3_ordered_l2_shell_audit.py", "ordered-l2/hard-shell verifier"),
+    )
+    for relative, label in verifiers:
         failure = run_verifier(root, relative, label)
         if failure is not None:
             failures.append(failure)
@@ -169,13 +168,9 @@ def main() -> int:
         print("\n".join(failures))
         return 1
     print(
-        f"checked {len(FILES)} helical/coherence/Stage-3 files: no holes or "
-        "postulates; global, localized, matrix, direction, manuscript-audit, "
-        "weighted-Schur, three-function exponent, symmetric-companion, "
-        "frozen-leg/Bernstein, exact-transpose/high-high, symmetrised-adjoint, "
-        "tail/threshold/affine-readiness, ternary/antisymmetry, "
-        "Hermitian/Leray/direct-convolution, shell-certificate, and exact "
-        "vector-adjoint verifiers passed"
+        f"checked {len(FILES)} proof-critical Agda files and {len(verifiers)} "
+        "exact verifiers: no holes, postulates, termination escapes, missing "
+        "provenance, or verifier failures"
     )
     return 0
 
