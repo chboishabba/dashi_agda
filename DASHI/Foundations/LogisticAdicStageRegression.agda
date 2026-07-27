@@ -11,6 +11,7 @@ import DASHI.Dynamics.LogisticAdicStageCommutingSpine as Logistic
 import DASHI.Foundations.CompositeRadixPrimeLaneBridge as Composite
 import DASHI.Foundations.FamilyDecimalMonsterCrossPollination as Cross
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
+import DASHI.Foundations.StageTetralemmaArrestBridge as Tetralemma
 import DASHI.Foundations.StageValuationBundleAtlas as Stage
 import DASHI.Physics.Closure.SheetExchangeJFixedResolutionBoundary as Sheet
 
@@ -91,17 +92,13 @@ record LogisticAdicStageRegression : Set₁ where
       Composite.ClosureBandCoordinate
 
     stage3ClosureProof :
-      Stage.closureBand
-        Atlas.atlas-3
-      ≡ Stage.lowClosure3
+      Stage.closureBand Atlas.atlas-3 ≡ Stage.lowClosure3
     stage6ClosureProof :
-      Stage.closureBand
-        Atlas.atlas-6
-      ≡ Stage.middleClosure6
+      Stage.closureBand Atlas.atlas-6 ≡ Stage.middleClosure6
     stage9ClosureProof :
-      Stage.closureBand
-        Atlas.atlas-9
-      ≡ Stage.highClosure9
+      Stage.closureBand Atlas.atlas-9 ≡ Stage.highClosure9
+    tetralemmaArrest :
+      Tetralemma.TetralemmaArrestReceipt
     stage8Residual :
       Stage.Stage8ObstructionObservation
     stage11Join :
@@ -160,82 +157,48 @@ record LogisticAdicStageRegression : Set₁ where
 canonicalLogisticAdicStageRegression :
   LogisticAdicStageRegression
 canonicalLogisticAdicStageRegression = record
-  { threeAdicMirror =
-      Mirror.canonicalHalfCompletionMirrorBridge
-  ; generalAdicBoundary =
-      Mirror.canonicalAdicMirrorAuthorityBoundary
-  ; threePartialSumDepth3 =
-      Mirror.threePartial3
-  ; chartSeparation =
-      Logistic.canonicalP3ChartSeparation
-  ; algebraicIdentitySquare =
-      natIdentitySquare357At50
-  ; factorVecReceipt =
-      Logistic.canonicalLogisticRationalFactorVecReceipt
-  ; continuumBoundary =
-      Logistic.canonicalLogisticContinuumAuthorityBoundary
-  ; bottomArrowRequirement =
-      Logistic.canonicalResidueToStageBridgeRequirement
+  { threeAdicMirror = Mirror.canonicalHalfCompletionMirrorBridge
+  ; generalAdicBoundary = Mirror.canonicalAdicMirrorAuthorityBoundary
+  ; threePartialSumDepth3 = Mirror.threePartial3
+  ; chartSeparation = Logistic.canonicalP3ChartSeparation
+  ; algebraicIdentitySquare = natIdentitySquare357At50
+  ; factorVecReceipt = Logistic.canonicalLogisticRationalFactorVecReceipt
+  ; continuumBoundary = Logistic.canonicalLogisticContinuumAuthorityBoundary
+  ; bottomArrowRequirement = Logistic.canonicalResidueToStageBridgeRequirement
   ; bottomArrowRequirementReceipt =
       Logistic.canonicalResidueToStageBridgeRequirementReceipt
-  ; sixJoinedChart =
-      Composite.canonicalSixJoinedChart
-  ; ninePrimaryDepthChart =
-      Composite.canonicalNinePrimaryDepthChart
-  ; compositeBoundary =
-      Composite.canonicalCompositeRadixAuthorityBoundary
-  ; stage3Low =
-      Composite.stage3LowClosure
-  ; stage6Middle =
-      Composite.stage6MiddleClosure
-  ; stage9High =
-      Composite.stage9HighClosure
-  ; stage3ClosureProof =
-      Stage.stage3IsLowClosure
-  ; stage6ClosureProof =
-      Stage.stage6IsMiddleClosure
-  ; stage9ClosureProof =
-      Stage.stage9IsHighClosure
-  ; stage8Residual =
-      Stage.canonicalStage8ObstructionObservation
-  ; stage11Join =
-      Stage.canonicalStage11CrossScaleJoin
-  ; hundredBundle =
-      Stage.decimalHundredBundle
-  ; hundredIsTenTens =
-      Stage.hundredIsTenBundlesOfTen
-  ; beyond11Stage14 =
-      Stage.stage14Address
-  ; beyond11Stage17 =
-      Stage.stage17Address
-  ; beyond11Stage200 =
-      Stage.stage200Address
-  ; compressedTransformativeJump =
-      Stage.canonicalTransformativeJump3To14
-  ; stageBoundary =
-      Stage.canonicalStageValuationAuthorityBoundary
-  ; familySupportFibre =
-      Cross.canonicalTwoParentOneChildSupportFibre
-  ; oneThirdRoleWeight =
-      Cross.canonicalOneThirdRoleWeight
-  ; decimal357Address =
-      Cross.canonicalDecimal357Address
-  ; decimal357Cylinder =
-      Cross.canonical357SymbolicCylinder
+  ; sixJoinedChart = Composite.canonicalSixJoinedChart
+  ; ninePrimaryDepthChart = Composite.canonicalNinePrimaryDepthChart
+  ; compositeBoundary = Composite.canonicalCompositeRadixAuthorityBoundary
+  ; stage3Low = Composite.stage3LowClosure
+  ; stage6Middle = Composite.stage6MiddleClosure
+  ; stage9High = Composite.stage9HighClosure
+  ; stage3ClosureProof = Stage.stage3IsLowClosure
+  ; stage6ClosureProof = Stage.stage6IsMiddleClosure
+  ; stage9ClosureProof = Stage.stage9IsHighClosure
+  ; tetralemmaArrest = Tetralemma.canonicalTetralemmaArrestReceipt
+  ; stage8Residual = Stage.canonicalStage8ObstructionObservation
+  ; stage11Join = Stage.canonicalStage11CrossScaleJoin
+  ; hundredBundle = Stage.decimalHundredBundle
+  ; hundredIsTenTens = Stage.hundredIsTenBundlesOfTen
+  ; beyond11Stage14 = Stage.stage14Address
+  ; beyond11Stage17 = Stage.stage17Address
+  ; beyond11Stage200 = Stage.stage200Address
+  ; compressedTransformativeJump = Stage.canonicalTransformativeJump3To14
+  ; stageBoundary = Stage.canonicalStageValuationAuthorityBoundary
+  ; familySupportFibre = Cross.canonicalTwoParentOneChildSupportFibre
+  ; oneThirdRoleWeight = Cross.canonicalOneThirdRoleWeight
+  ; decimal357Address = Cross.canonicalDecimal357Address
+  ; decimal357Cylinder = Cross.canonical357SymbolicCylinder
   ; monsterRepresentationSeparation =
       Cross.canonicalMonsterRepresentationSeparationReceipt
   ; crossPollinationBoundary =
       Cross.canonicalFamilyDecimalMonsterAuthorityBoundary
-  ; governanceAdapter =
-      Governance.canonicalFramedORCSLPGFAdapter
-  ; governanceRow =
-      Governance.framedDynamicRow
-  ; governanceRowReceipt =
-      Governance.framedDynamicRowReceipt
-  ; monsterCarrierAdmission =
-      Governance.canonicalMonsterCarrierAdmissionCandidate
-  ; governanceBoundary =
-      Governance.canonicalFramedORCSLPGFAuthorityBoundary
+  ; governanceAdapter = Governance.canonicalFramedORCSLPGFAdapter
+  ; governanceRow = Governance.framedDynamicRow
+  ; governanceRowReceipt = Governance.framedDynamicRowReceipt
+  ; monsterCarrierAdmission = Governance.canonicalMonsterCarrierAdmissionCandidate
+  ; governanceBoundary = Governance.canonicalFramedORCSLPGFAuthorityBoundary
   ; attractorBoundary =
       Obligations.canonicalAttractorBifurcationAuthorityBoundary
   ; stage11ManifoldBoundary =
@@ -244,6 +207,5 @@ canonicalLogisticAdicStageRegression = record
       Obligations.canonicalCrossLaneOrthogonalityBoundary
   ; remainingObligations =
       Obligations.canonicalDynamicalAdapterRemainingObligations
-  ; sheetResolution =
-      Sheet.canonicalSheetExchangeResolutionBoundary
+  ; sheetResolution = Sheet.canonicalSheetExchangeResolutionBoundary
   }
