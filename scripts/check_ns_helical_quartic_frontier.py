@@ -86,10 +86,24 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNFinalCutoffUniformDualBoundAssembly.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OrderedL2AnalyticIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3OrderedL2Bridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalOrderedFiniteL2.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalComplex3Separation.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalComplex3LerayPythagoras.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalDirectConvolutionBound.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalFiniteBernstein.agda",
+    "DASHI/Physics/Closure/NSTriadKNG3ShellIndexPartition.agda",
+    "DASHI/Physics/Closure/NSTriadKNFourierModeG3Bridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteOverlapTransportConstants.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstructiveRealPowerBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiveArchetypeUniformClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineCertificateUnderdetermination.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresTheorem3Adapter.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3AnalyticCompletionIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3AnalyticCompletionBridge.agda",
 ]
 
 # The general DASHI balanced/unbalanced ternary and Base369 developments are
-# intentionally untouched.  The Stage-3 status-only adapters introduced on
+# intentionally untouched. The Stage-3 status-only adapters introduced on
 # this branch are preserved in history but are not part of this proof-critical
 # checker or dependency path.
 
@@ -164,6 +178,7 @@ def main() -> int:
         ("scripts/ns_stage3_shell_certificate_audit.py", "shell-certificate verifier"),
         ("scripts/ns_stage3_vector_adjoint_pairing_audit.py", "vector-adjoint verifier"),
         ("scripts/ns_stage3_ordered_l2_shell_audit.py", "ordered-l2/hard-shell verifier"),
+        ("scripts/ns_stage3_analytic_completion_audit.py", "analytic-completion verifier"),
     )
     for relative, label in verifiers:
         failure = run_verifier(root, relative, label)
