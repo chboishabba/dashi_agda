@@ -20,10 +20,16 @@ record BranchHeadAgdaReceipt : Set where
     repositoryHead : String
     agdaRevision : String
     standardLibraryRevision : String
+    bishopSubmoduleRevision : String
     cleanInterfaceDeletionPerformed : Bool
     literatureAuditPassed : Bool
     frontierClaimsAuditPassed : Bool
     frontierAggregateAuditPassed : Bool
+    bishopSubmodulePinnedChecked : Bool
+    bishopLibraryResolutionChecked : Bool
+    bishopConstructiveRealBridgeChecked : Bool
+    bishopElementarySeriesChecked : Bool
+    bishopFrontierLedgerChecked : Bool
     changedModules : List String
     constructiveProducerAggregateChecked : Bool
     frontierLedgerAggregateChecked : Bool
@@ -40,6 +46,11 @@ record AuthoritativeBranchHeadEvidence
     constructiveProducerChecked : Set
     frontierLedgerChecked : Set
     configuredFrontierLedgerChecked : Set
+    bishopGitlinkMatchesReceipt : Set
+    bishopLibraryResolvesInAgda29 : Set
+    bishopConstructiveRealBridgeTypechecks : Set
+    bishopElementarySeriesTypechecks : Set
+    bishopFrontierLedgerTypechecks : Set
     publicAggregateChecked : Set
     postulateFreeChangedSurface : Set
 
@@ -56,6 +67,18 @@ frontierLedgerAggregateTypecheckLevel = conditional
 
 configuredFrontierLedgerAggregateTypecheckLevel : ProofLevel
 configuredFrontierLedgerAggregateTypecheckLevel = conditional
+
+bishopSubmodulePinReceiptLevel : ProofLevel
+bishopSubmodulePinReceiptLevel = conditional
+
+bishopConstructiveRealBridgeTypecheckLevel : ProofLevel
+bishopConstructiveRealBridgeTypecheckLevel = conditional
+
+bishopElementarySeriesTypecheckLevel : ProofLevel
+bishopElementarySeriesTypecheckLevel = conditional
+
+bishopFrontierLedgerTypecheckLevel : ProofLevel
+bishopFrontierLedgerTypecheckLevel = conditional
 
 publicYangMillsAggregateTypecheckLevel : ProofLevel
 publicYangMillsAggregateTypecheckLevel = conditional
