@@ -3,21 +3,17 @@ module DASHI.Physics.YangMills.BalabanClayT5PhysicalRootedShellInjectionExact wh
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
+open import Data.Rational using (ℚ)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact using
   (SignedAxis4)
-import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact as Periodic
-import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
 -- Repository-specific boundary cluster to rooted-shell injection.
---
--- No external source is expected for this theorem.  Its content is finite graph
--- geometry: a boundary-crossing cluster contains a support-to-boundary path;
--- graph distance is bounded by cluster diameter; and the canonical root/word
--- decoder is a left inverse, hence injective.
+-- No external source is expected: this is finite graph geometry plus the
+-- canonical root/word decoder left inverse.
 ------------------------------------------------------------------------
 
 record BoundaryGeometry (Block Volume Observable : Set) : Set₁ where
@@ -162,7 +158,7 @@ polymerEqualityFromClusterTrace :
     clusterTraceRoot dataSet left ≡ clusterTraceRoot dataSet right →
     clusterTraceWord dataSet left ≡ clusterTraceWord dataSet right →
     polymerOf carrier left ≡ polymerOf carrier right
-polymerEqualityFromClusterTrace dataSet left right rootEquality wordEquality =
+polymerEqualityFromClusterTrace {trace = trace} dataSet left right rootEquality wordEquality =
   canonicalTraceInjective trace
     (trans
       (sym (clusterTraceUsesPolymerRoot dataSet left))
@@ -194,7 +190,6 @@ record BoundaryTailFromRootedShell
     boundaryConditionIndependence : ∀ observable → Set
 
 open BoundaryTailFromRootedShell public
-  where open import Data.Rational using (ℚ)
 
 rootedShellDecoderInjectivityLevel : ProofLevel
 rootedShellDecoderInjectivityLevel = machineChecked
