@@ -3,6 +3,7 @@ module DASHI.Foundations.RealElementaryFunctionsBishopTransportExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
+import Sequence as BishopSequence
 import DASHI.Foundations.RealAnalysisAxioms as DASHIReal
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Series
@@ -59,21 +60,33 @@ record BishopBackedDASHIElementaryFunctions : Set₁ where
 
 open BishopBackedDASHIElementaryFunctions public
 
+sinePartialSums :
+  (dataSet : BishopBackedDASHIElementaryFunctions) →
+  Bishop.Bishopℝ → Nat → Bishop.Bishopℝ
+sinePartialSums dataSet point =
+  BishopSequence.SeriesOf (Series.sineTerm (series dataSet) point)
+
+cosinePartialSums :
+  (dataSet : BishopBackedDASHIElementaryFunctions) →
+  Bishop.Bishopℝ → Nat → Bishop.Bishopℝ
+cosinePartialSums dataSet point =
+  BishopSequence.SeriesOf (Series.cosineTerm (series dataSet) point)
+
+exponentialPartialSums :
+  (dataSet : BishopBackedDASHIElementaryFunctions) →
+  Bishop.Bishopℝ → Nat → Bishop.Bishopℝ
+exponentialPartialSums dataSet point =
+  BishopSequence.SeriesOf (Series.exponentialTerm (series dataSet) point)
+
 bishopSineConvergenceTransported :
   (dataSet : BishopBackedDASHIElementaryFunctions) →
   (point : Bishop.Bishopℝ) →
   Bishop.DASHIConvergesTo (bridge dataSet)
     (λ index →
       Bishop.embed (bridge dataSet)
-        (importedSinePartialSum index))
+        (sinePartialSums dataSet point index))
     (Bishop.embed (bridge dataSet)
       (Series.bishopSin (series dataSet) point))
-  where
-  importedSinePartialSum : Nat → Bishop.Bishopℝ
-  importedSinePartialSum index =
-    import Sequence as BishopSequence
-    in BishopSequence.SeriesOf
-      (Series.sineTerm (series dataSet) point) index
 bishopSineConvergenceTransported dataSet point =
   Bishop.convergencePreserved (bridge dataSet)
     (Series.bishopSinConvergence (series dataSet) point)
@@ -81,38 +94,28 @@ bishopSineConvergenceTransported dataSet point =
 bishopCosineConvergenceTransported :
   (dataSet : BishopBackedDASHIElementaryFunctions) →
   (point : Bishop.Bishopℝ) →
-  Set
-bishopCosineConvergenceTransported dataSet point =
   Bishop.DASHIConvergesTo (bridge dataSet)
     (λ index →
       Bishop.embed (bridge dataSet)
-        (importedCosinePartialSum index))
+        (cosinePartialSums dataSet point index))
     (Bishop.embed (bridge dataSet)
       (Series.bishopCos (series dataSet) point))
-  where
-  importedCosinePartialSum : Nat → Bishop.Bishopℝ
-  importedCosinePartialSum index =
-    import Sequence as BishopSequence
-    in BishopSequence.SeriesOf
-      (Series.cosineTerm (series dataSet) point) index
+bishopCosineConvergenceTransported dataSet point =
+  Bishop.convergencePreserved (bridge dataSet)
+    (Series.bishopCosConvergence (series dataSet) point)
 
 bishopExponentialConvergenceTransported :
   (dataSet : BishopBackedDASHIElementaryFunctions) →
   (point : Bishop.Bishopℝ) →
-  Set
-bishopExponentialConvergenceTransported dataSet point =
   Bishop.DASHIConvergesTo (bridge dataSet)
     (λ index →
       Bishop.embed (bridge dataSet)
-        (importedExponentialPartialSum index))
+        (exponentialPartialSums dataSet point index))
     (Bishop.embed (bridge dataSet)
       (Series.bishopExp (series dataSet) point))
-  where
-  importedExponentialPartialSum : Nat → Bishop.Bishopℝ
-  importedExponentialPartialSum index =
-    import Sequence as BishopSequence
-    in BishopSequence.SeriesOf
-      (Series.exponentialTerm (series dataSet) point) index
+bishopExponentialConvergenceTransported dataSet point =
+  Bishop.convergencePreserved (bridge dataSet)
+    (Series.bishopExpConvergence (series dataSet) point)
 
 ------------------------------------------------------------------------
 -- A migration can now proceed in two auditable steps:
