@@ -26,17 +26,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
-
-finiteSum : List ℚ → ℚ
-finiteSum [] = 0ℚ
-finiteSum (value ∷ rest) = value + finiteSum rest
-
-repeatSum : ℚ → List L2.Pair → ℚ
-repeatSum bound [] = 0ℚ
-repeatSum bound (_ ∷ rest) = bound + repeatSum bound rest
 
 fibreValue : ℚ → List L2.Pair → ℚ
 fibreValue multiplier pairs = multiplier * L2.pairDot pairs
@@ -47,42 +40,23 @@ fibreValueSquared multiplier pairs = L2.square (fibreValue multiplier pairs)
 multiplierTimesCauchySchwarz :
   ∀ multiplier pairs →
   fibreValueSquared multiplier pairs
-  ≤
-  L2.square multiplier
-  * (L2.leftNormSquared pairs * L2.rightNormSquared pairs)
+  ≤ L2.square multiplier
+    * (L2.leftNormSquared pairs * L2.rightNormSquared pairs)
 multiplierTimesCauchySchwarz multiplier pairs =
   let
-    multiplierSquaredNonnegative = L2.squareNonnegative multiplier
-    pairDotBound = L2.finiteCauchySchwarzSquared pairs
-    instance
-      multiplierSquaredNN = ℚₚ.nonNegative multiplierSquaredNonnegative
-    multiplied = ℚₚ.*-monoˡ-≤-nonNeg (L2.square multiplier) pairDotBound
+    instance multiplierSquaredNN =
+      ℚₚ.nonNegative (L2.squareNonnegative multiplier)
+    multiplied = ℚₚ.*-monoˡ-≤-nonNeg
+      (L2.square multiplier)
+      (L2.finiteCauchySchwarzSquared pairs)
   in
   subst
     (λ left → left ≤
       L2.square multiplier
       * (L2.leftNormSquared pairs * L2.rightNormSquared pairs))
-    (sym (ℚₚ.*-assoc
-      (L2.square multiplier)
-      (L2.leftNormSquared pairs)
-      (L2.rightNormSquared pairs)))
+    (solve (multiplier ∷ L2.pairDot pairs ∷ []))
     multiplied
 
-record RestrictedResonantFibre
-    (fullLeftNorm fullRightNorm multiplierBoundSquared : ℚ)
-    (pairs : List L2.Pair) : Set where
-  field
-    leftRestriction : L2.leftNormSquared pairs ≤ fullLeftNorm
-    rightRestriction : L2.rightNormSquared pairs ≤ fullRightNorm
-    fullLeftNonnegative : 0ℚ ≤ fullLeftNorm
-    fullRightNonnegative : 0ℚ ≤ fullRightNorm
-    multiplierSquaredBound : L2.square (projMultiplier pairs) ≤ multiplierBoundSquared
-
-    projMultiplier : List L2.Pair → ℚ
-
-open RestrictedResonantFibre public
-
--- A less dependent presentation is convenient for actual shell fibres.
 record FibreMajorant
     (fullLeftNorm fullRightNorm multiplierBoundSquared : ℚ)
     (multiplier : ℚ)
@@ -106,16 +80,27 @@ fibreMajorantSquared
   {fullLeftNorm} {fullRightNorm} {multiplierBoundSquared} {multiplier} {pairs}
   majorant =
   let
-    restrictedProduct =
-      L2.nonnegativeProductMonotone
-        (L2.leftNormSquaredNonnegative pairs)
-        (L2.rightNormSquaredNonnegative pairs)
-        (fullLeftNonnegative majorant)
-        (fullRightNonnegative majorant)
-        (leftRestriction majorant)
-        (rightRestriction majorant)
+    restrictedProduct = L2.nonnegativeProductMonotone
+      (L2.leftNormSquaredNonnegative pairs)
+      (L2.rightNormSquaredNonnegative pairs)
+      (fullLeftNonnegative majorant)
+      (fullRightNonnegative majorant)
+      (leftRestriction majorant)
+      (rightRestriction majorant)
 
     cauchy = multiplierTimesCauchySchwarz multiplier pairs
+
+    pairProductNonnegative :
+      0ℚ ≤ L2.leftNormSquared pairs * L2.rightNormSquared pairs
+    pairProductNonnegative =
+      let
+        instance
+          leftNN = ℚₚ.nonNegative (L2.leftNormSquaredNonnegative pairs)
+          rightNN = ℚₚ.nonNegative (L2.rightNormSquaredNonnegative pairs)
+          productNN = ℚₚ.nonNeg*nonNeg⇒nonNeg
+            (L2.leftNormSquared pairs) (L2.rightNormSquared pairs)
+      in ℚₚ.nonNegative⁻¹
+        (L2.leftNormSquared pairs * L2.rightNormSquared pairs)
 
     multiplierStage :
       L2.square multiplier
@@ -123,16 +108,8 @@ fibreMajorantSquared
       ≤ multiplierBoundSquared
         * (L2.leftNormSquared pairs * L2.rightNormSquared pairs)
     multiplierStage =
-      let
-        productNN = L2.nonnegativeProductMonotone
-          (L2.leftNormSquaredNonnegative pairs)
-          (L2.rightNormSquaredNonnegative pairs)
-          (L2.leftNormSquaredNonnegative pairs)
-          (L2.rightNormSquaredNonnegative pairs)
-          ℚₚ.≤-refl ℚₚ.≤-refl
-        instance productNonnegative = ℚₚ.nonNegative productNN
-      in
-      ℚₚ.*-monoʳ-≤-nonNeg
+      let instance pairProductNN = ℚₚ.nonNegative pairProductNonnegative
+      in ℚₚ.*-monoʳ-≤-nonNeg
         (L2.leftNormSquared pairs * L2.rightNormSquared pairs)
         (multiplierSquaredBound majorant)
 
@@ -206,11 +183,11 @@ open ShellCardinalityMajorant public
 
 finiteLowOutputShellBoundSquared :
   ∀ {fullLeftNorm fullRightNorm multiplierBoundSquared outputs} →
-  ShellCardinalityMajorant
-    {fullLeftNorm} {fullRightNorm} {multiplierBoundSquared} outputs →
+  (cardinality : ShellCardinalityMajorant
+    {fullLeftNorm} {fullRightNorm} {multiplierBoundSquared} outputs) →
   sumOutputFibreSquares outputs
-  ≤ shellCardinalityFactor
-      _ * (multiplierBoundSquared * (fullLeftNorm * fullRightNorm))
+  ≤ shellCardinalityFactor cardinality
+      * (multiplierBoundSquared * (fullLeftNorm * fullRightNorm))
 finiteLowOutputShellBoundSquared {outputs = outputs} cardinality =
   subst
     (λ upper → sumOutputFibreSquares outputs ≤ upper)
