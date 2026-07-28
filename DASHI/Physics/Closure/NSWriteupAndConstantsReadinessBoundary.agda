@@ -5,6 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Physics.Closure.NSTriadKNStage3AnalyticCompletionIntegration as Stage3Analytic
+
 data List (A : Set) : Set where
   [] : List A
   _∷_ : A → List A → List A
@@ -117,7 +119,7 @@ nsWriteupAndConstantsReadinessBlockerCountIs10 = refl
 
 nsWriteupAndConstantsReadinessSummary : String
 nsWriteupAndConstantsReadinessSummary =
-  "Readiness grammar: the reviewer-facing NS packet is presented as a candidate-complete classical suitable-weak-solution plus pressure/local-energy package that explicitly consumes theorem-shape grammar for A1-A9 together with classical CKN/ESS/LRT intake; the remaining burden is promotion evidence, acceptance of the candidate self-contained packet, and sign-off on the exact consumed constants and norms, not missing theorem-shape placeholders."
+  "Readiness grammar: the reviewer-facing NS packet is presented as a candidate-complete classical suitable-weak-solution plus pressure/local-energy package that explicitly consumes theorem-shape grammar for A1-A9 together with classical CKN/ESS/LRT intake; the Stage-3 finite l2/Leray/G=3/transport core is now imported through the authoritative aggregate, while constructive-real H^s summation, exact affine epsilon and the final cutoff-uniform dual bound remain open."
 
 NSWriteupAndConstantsReadinessRecorded : Bool
 NSWriteupAndConstantsReadinessRecorded = true
@@ -137,6 +139,14 @@ NSSubmissionReady = false
 NSClayPromotionFromWriteupAndConstantsReady : Bool
 NSClayPromotionFromWriteupAndConstantsReady = false
 
+NSStage3FiniteAnalyticCoreClosed : Bool
+NSStage3FiniteAnalyticCoreClosed =
+  Stage3Analytic.stage3FiniteAlgebraAndCombinatoricsClosed
+
+NSStage3CutoffUniformAnalyticCompletionClosed : Bool
+NSStage3CutoffUniformAnalyticCompletionClosed =
+  Stage3Analytic.stage3CutoffUniformAnalyticCompletionClosed
+
 record NSWriteupAndConstantsReadinessBoundary : Set where
   field
     clauses : List NSWriteupAndConstantsReadinessClause
@@ -153,6 +163,10 @@ record NSWriteupAndConstantsReadinessBoundary : Set where
       NSWriteupAndConstantsReadinessRecorded ≡ true
     localRouteStructureReadyField :
       NSLocalRouteStructureReady ≡ false
+    stage3FiniteAnalyticCoreClosedField :
+      NSStage3FiniteAnalyticCoreClosed ≡ true
+    stage3CutoffUniformAnalyticCompletionStillFalse :
+      NSStage3CutoffUniformAnalyticCompletionClosed ≡ false
     authorityAuditStillFalse :
       NSAuthorityDependenciesAudited ≡ false
     submissionReadyStillFalse :
@@ -174,6 +188,10 @@ canonicalNSWriteupAndConstantsReadinessBoundary =
     ; blockerCountIs10 = refl
     ; readinessRecordedField = refl
     ; localRouteStructureReadyField = refl
+    ; stage3FiniteAnalyticCoreClosedField =
+        Stage3Analytic.stage3FiniteAlgebraAndCombinatoricsClosedIsTrue
+    ; stage3CutoffUniformAnalyticCompletionStillFalse =
+        Stage3Analytic.stage3CutoffUniformAnalyticCompletionClosedIsFalse
     ; authorityAuditStillFalse = refl
     ; submissionReadyStillFalse = refl
     ; completionStillFalse = refl
@@ -187,3 +205,13 @@ NSWriteupAndConstantsReadinessRecordedIsTrue = refl
 NSLocalRouteStructureReadyIsFalse :
   NSLocalRouteStructureReady ≡ false
 NSLocalRouteStructureReadyIsFalse = refl
+
+NSStage3FiniteAnalyticCoreClosedIsTrue :
+  NSStage3FiniteAnalyticCoreClosed ≡ true
+NSStage3FiniteAnalyticCoreClosedIsTrue =
+  Stage3Analytic.stage3FiniteAlgebraAndCombinatoricsClosedIsTrue
+
+NSStage3CutoffUniformAnalyticCompletionClosedIsFalse :
+  NSStage3CutoffUniformAnalyticCompletionClosed ≡ false
+NSStage3CutoffUniformAnalyticCompletionClosedIsFalse =
+  Stage3Analytic.stage3CutoffUniformAnalyticCompletionClosedIsFalse
