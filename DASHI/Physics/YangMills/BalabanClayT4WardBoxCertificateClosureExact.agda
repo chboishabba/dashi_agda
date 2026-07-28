@@ -4,7 +4,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Data.Integer.Base using (ℤ; +_; -[1+_])
 
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Evaluator
@@ -48,32 +47,25 @@ record SignedWardAtom : Set where
 
 open SignedWardAtom public
 
-signedCoefficient : SignedWardAtom → ℤ
-signedCoefficient (signedWardAtom positive _) = + 1
-signedCoefficient (signedWardAtom negative _) = -[1+ 0 ]
+positiveCount : List SignedWardAtom → Nat
+positiveCount [] = zero
+positiveCount (signedWardAtom positive generator ∷ atoms) =
+  suc (positiveCount atoms)
+positiveCount (signedWardAtom negative generator ∷ atoms) =
+  positiveCount atoms
 
-addInteger : ℤ → ℤ → ℤ
-addInteger (+ m) (+ n) = + (m +N n)
-  where
-  _+N_ : Nat → Nat → Nat
-  zero +N n = n
-  suc m +N n = suc (m +N n)
-addInteger (+ zero) (-[1+ n ]) = -[1+ n ]
-addInteger (+ (suc m)) (-[1+ zero ]) = + m
-addInteger (+ (suc m)) (-[1+ suc n ]) = addInteger (+ m) (-[1+ n ])
-addInteger (-[1+ m ]) (+ zero) = -[1+ m ]
-addInteger (-[1+ zero ]) (+ (suc n)) = + n
-addInteger (-[1+ suc m ]) (+ (suc n)) = addInteger (-[1+ m ]) (+ n)
-addInteger (-[1+ m ]) (-[1+ n ]) = -[1+ suc (m +N n) ]
-  where
-  _+N_ : Nat → Nat → Nat
-  zero +N n = n
-  suc m +N n = suc (m +N n)
+negativeCount : List SignedWardAtom → Nat
+negativeCount [] = zero
+negativeCount (signedWardAtom positive generator ∷ atoms) =
+  negativeCount atoms
+negativeCount (signedWardAtom negative generator ∷ atoms) =
+  suc (negativeCount atoms)
 
-sumWardCoefficients : List SignedWardAtom → ℤ
-sumWardCoefficients [] = + zero
-sumWardCoefficients (atom ∷ atoms) =
-  addInteger (signedCoefficient atom) (sumWardCoefficients atoms)
+record WardBalance (atoms : List SignedWardAtom) : Set where
+  field
+    positiveEqualsNegative : positiveCount atoms ≡ negativeCount atoms
+
+open WardBalance public
 
 canonicalWardAtoms : List SignedWardAtom
 canonicalWardAtoms =
@@ -82,9 +74,14 @@ canonicalWardAtoms =
   signedWardAtom positive measurePairGenerator ∷
   signedWardAtom negative measurePairGenerator ∷ []
 
-canonicalWardCoefficientZero :
-  sumWardCoefficients canonicalWardAtoms ≡ + zero
-canonicalWardCoefficientZero = refl
+canonicalWardPositiveCount : positiveCount canonicalWardAtoms ≡ 2
+canonicalWardPositiveCount = refl
+
+canonicalWardNegativeCount : negativeCount canonicalWardAtoms ≡ 2
+canonicalWardNegativeCount = refl
+
+canonicalWardBalance : WardBalance canonicalWardAtoms
+canonicalWardBalance = record { positiveEqualsNegative = refl }
 
 record LiteralWardReduction
     (expressions : Evaluator.LiteralDiagramExpressions) : Set₁ where
@@ -98,6 +95,7 @@ record LiteralWardReduction
     colorJacobiIdentitiesNormalized : Set
     longitudinalContractionNormalFormExact : ∀ axis → Set
     normalFormIsCanonicalWardAtoms : ∀ axis → Set
+    canonicalBalanceImplementsExactCancellation : ∀ axis → Set
 
 open LiteralWardReduction public
 
