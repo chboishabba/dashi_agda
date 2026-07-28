@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Product.Base using (_,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -64,6 +65,14 @@ rightNormMeaning [] = refl
 rightNormMeaning (coefficient ∷ rest)
   rewrite rightNormMeaning rest = solve (supportCardinality rest ∷ [])
 
+squareCong : ∀ {left right : ℚ} →
+  left ≡ right → L2.square left ≡ L2.square right
+squareCong refl = refl
+
+congProduct : ∀ {a b c d : ℚ} →
+  a ≡ b → c ≡ d → a * c ≡ b * d
+congProduct refl refl = refl
+
 finiteBernsteinSquared : ∀ coefficients →
   L2.square (coefficientSum coefficients)
   ≤ supportCardinality coefficients * coefficientNormSquared coefficients
@@ -77,7 +86,7 @@ finiteBernsteinSquared coefficients =
       subst
         (λ left → left ≤
           coefficientNormSquared coefficients * supportCardinality coefficients)
-        (L2.squareCong (pairDotMeaning coefficients))
+        (squareCong (pairDotMeaning coefficients))
         (subst
           (λ right →
             L2.square (L2.pairDot (coefficientPairs coefficients)) ≤ right)
@@ -92,10 +101,6 @@ finiteBernsteinSquared coefficients =
       (coefficientNormSquared coefficients)
       (supportCardinality coefficients))
     normalized
-  where
-  congProduct : ∀ {a b c d : ℚ} →
-    a ≡ b → c ≡ d → a * c ≡ b * d
-  congProduct refl refl = refl
 
 finiteBernsteinCountingClosed : Bool
 finiteBernsteinCountingClosed = true
