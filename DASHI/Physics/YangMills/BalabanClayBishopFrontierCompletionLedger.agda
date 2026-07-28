@@ -2,28 +2,61 @@ module DASHI.Physics.YangMills.BalabanClayBishopFrontierCompletionLedger where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Analysis.ConstructedRealBackendSpineExact as BackendSpine
+import DASHI.Analysis.BishopConstructedRealBackendExact as BishopBackend
+import DASHI.Analysis.FastCauchyConstructedRealBackendExact as FastBackend
+import DASHI.Analysis.BishopFastCauchyRealEquivalenceExact as ConcreteEquivalence
+import DASHI.Analysis.BishopConstructiveSeriesAdapterExact as SeriesAdapter
+import DASHI.Analysis.CanonicalDASHIRealBackendExact as CanonicalBackend
+import DASHI.Analysis.CubicalHoTTRealBackendBoundary as HoTTBoundary
+
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as BishopSeries
 import DASHI.Foundations.BishopElementarySeriesTermsExact as BishopTerms
+import DASHI.Foundations.BishopReciprocalCoefficientConstructionExact as BishopCoefficients
 import DASHI.Foundations.RealElementaryFunctionsBishopTransportExact as BishopTransport
 import DASHI.Foundations.RealElementaryFunctionsCanonicalInstanceExact as CanonicalReal
+import DASHI.Foundations.LegacyDASHIRealEquivalenceAuthorityExact as LegacyEquivalence
 
 import DASHI.Physics.YangMills.BalabanClayT3LiteralFixedAtomFormulaInstanceExact as AtomFormula
+import DASHI.Physics.YangMills.BalabanClayT3MechanismAtomBoundsExact as AtomMechanisms
 import DASHI.Physics.YangMills.BalabanClayT3PeriodicHessianKernelFormulaExact as HessianFormula
+import DASHI.Physics.YangMills.BalabanClayT3FiniteStencilStripImageClosureExact as GreenClosure
 
 import DASHI.Physics.YangMills.BalabanClayT2BishopQuaternionNormalizationExact as QuaternionNormalization
+import DASHI.Physics.YangMills.BalabanClayT2QuaternionTailCollarClosureExact as QuaternionClosure
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact as PeriodicBFS
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicTraversalDecoderExact as PeriodicDecoder
 
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopConventionExact as OneLoopConvention
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as OneLoopEvaluator
+import DASHI.Physics.YangMills.BalabanClayT4WardBoxCertificateClosureExact as WardBoxes
 
 import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as MarkedFP
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalRootedShellInjectionExact as ShellInjection
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact as PhysicalT5
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalTailMomentMeasureClosureExact as T5Closure
 
 ------------------------------------------------------------------------
 -- I. Newly internalized constructive and finite data.
 ------------------------------------------------------------------------
+
+setoidBackendSpineLevel = BackendSpine.setoidBackendSpineLevel
+legacyQuotientAdapterLevel = BackendSpine.legacyQuotientAdapterLevel
+bishopCarrierEqualityCompletenessLevel =
+  BishopBackend.bishopCarrierEqualityCompletenessLevel
+bishopBackendAssemblyLevel = BishopBackend.bishopBackendAssemblyLevel
+fastCauchyCarrierAndEqualityLevel = FastBackend.fastCauchyCarrierAndEqualityLevel
+fastCauchyBackendAssemblyLevel = FastBackend.fastCauchyBackendAssemblyLevel
+bishopFastCauchyConversionDefinitionLevel =
+  ConcreteEquivalence.bishopFastCauchyConversionDefinitionLevel
+bishopSeriesLimitConstructionLevel = SeriesAdapter.bishopSeriesLimitConstructionLevel
+canonicalBackendSelectionDefinitionLevel =
+  CanonicalBackend.canonicalBackendSelectionDefinitionLevel
+cubicalHoTTProvenanceLevel = HoTTBoundary.cubicalHoTTProvenanceLevel
+legacyEquivalenceArchitectureLevel = LegacyEquivalence.legacyEquivalenceArchitectureLevel
+reciprocalCoefficientFiniteConstructionLevel =
+  BishopCoefficients.reciprocalCoefficientFiniteConstructionLevel
 
 bishopConcreteRealCarrierLevel = Bishop.bishopConcreteRealCarrierLevel
 bishopCauchyCompletenessLevel = Bishop.bishopCauchyCompletenessLevel
@@ -40,6 +73,7 @@ bishopPowerSeriesLimitConstructionLevel =
 
 literalFixedAtomFormulaLevel = AtomFormula.literalFixedAtomFormulaLevel
 literalFixedAtomEnumerationLevel = AtomFormula.literalFixedAtomEnumerationLevel
+mechanismAtomEnumerationLevel = AtomMechanisms.mechanismAtomEnumerationLevel
 
 literalPeriodicKernelAlgebraLevel =
   HessianFormula.literalPeriodicKernelAlgebraLevel
@@ -49,11 +83,14 @@ literalFourierSymbolFormulaLevel =
   HessianFormula.literalFourierSymbolFormulaLevel
 literalRGGreenDifferenceLevel =
   HessianFormula.literalRGGreenDifferenceLevel
+finiteStencilReductionLevel = GreenClosure.finiteStencilReductionLevel
 
 bishopQuaternionAlgebraLevel =
   QuaternionNormalization.bishopQuaternionAlgebraLevel
 bishopQuaternionJetFormulaLevel =
   QuaternionNormalization.bishopQuaternionJetFormulaLevel
+collarSlotEnumerationLevel = QuaternionClosure.collarSlotEnumerationLevel
+collarCountAtMost96Level = QuaternionClosure.collarCountAtMost96Level
 
 periodicSuccessorPredecessorDefinitionLevel =
   PeriodicBFS.periodicSuccessorPredecessorDefinitionLevel
@@ -63,6 +100,7 @@ periodicAdjacencyDecisionLevel =
   PeriodicBFS.periodicAdjacencyDecisionLevel
 periodicConnectedPolymerCarrierLevel =
   PeriodicBFS.periodicConnectedPolymerCarrierLevel
+periodicReplayDecoderLevel = PeriodicDecoder.periodicReplayDecoderLevel
 
 canonicalOneLoopConventionLevel =
   OneLoopConvention.canonicalConventionLevel
@@ -74,6 +112,9 @@ recursiveIntervalEvaluationLevel =
   OneLoopEvaluator.recursiveIntervalEvaluationLevel
 literalGeneratedGridAdapterLevel =
   OneLoopEvaluator.literalGeneratedGridAdapterLevel
+wardNormalFormArithmeticLevel = WardBoxes.wardNormalFormArithmeticLevel
+generated240BoxFamilyDefinitionLevel =
+  WardBoxes.generated240BoxFamilyDefinitionLevel
 
 kpCriterionSeparatedLevel = MarkedFP.kpCriterionSeparatedLevel
 fpEightCliqueArithmeticLevel = MarkedFP.fpEightCliqueArithmeticLevel
@@ -85,13 +126,28 @@ finiteDyadicTelescopingLevel = PhysicalT5.finiteDyadicTelescopingLevel
 physicalClusterExpansionAdapterLevel =
   PhysicalT5.physicalClusterExpansionAdapterLevel
 physicalMarkedMomentAdapterLevel = PhysicalT5.physicalMarkedMomentAdapterLevel
+boundaryCancellationReductionLevel = T5Closure.boundaryCancellationReductionLevel
+rgRelevantCancellationReductionLevel = T5Closure.rgRelevantCancellationReductionLevel
+markedMomentReductionLevel = T5Closure.markedMomentReductionLevel
+measureTopologySeparationLevel = T5Closure.measureTopologySeparationLevel
 
 ------------------------------------------------------------------------
--- II. Remaining irreducible analytic/model-specific inhabitants.
---
--- These are not promoted by the presence of the Bishop submodule or generated
--- finite carriers.  Each conditional status names a concrete local theorem.
+-- II. Remaining analytic/model-specific inhabitants.
 ------------------------------------------------------------------------
+
+bishopAlgebraOrderPackagingLevel = BishopBackend.bishopAlgebraOrderPackagingLevel
+fastCauchyBackendPackagingLevel = FastBackend.fastCauchyBackendPackagingLevel
+bishopFastCauchyReindexingInputsLevel =
+  ConcreteEquivalence.bishopFastCauchyReindexingInputsLevel
+bishopFastCauchyStructureAgreementInputsLevel =
+  ConcreteEquivalence.bishopFastCauchyStructureAgreementInputsLevel
+bishopLegacySeriesTransportInputsLevel =
+  SeriesAdapter.bishopLegacySeriesTransportInputsLevel
+legacyFacadeMigrationInputsLevel = CanonicalBackend.legacyFacadeMigrationInputsLevel
+cubicalHoTTBackendAdapterLevel = HoTTBoundary.cubicalHoTTBackendAdapterLevel
+legacyEquivalenceExistenceLevel = LegacyEquivalence.legacyEquivalenceExistenceLevel
+factorialRecurrenceReceiptLevel = BishopCoefficients.factorialRecurrenceReceiptLevel
+unnormalisedRationalCodecLevel = BishopCoefficients.unnormalisedRationalCodecLevel
 
 bishopToDASHITransportInputsLevel = Bishop.bishopToDASHITransportInputsLevel
 bishopElementaryCoefficientTailInputsLevel =
@@ -107,21 +163,36 @@ legacyElementaryAuthorityAgreementLevel =
 
 literalFixedAtomInequalityInputsLevel =
   AtomFormula.literalFixedAtomInequalityInputsLevel
+mechanismInequalityInputsLevel = AtomMechanisms.mechanismInequalityInputsLevel
+fixedExpansionReceiptInputsLevel = AtomMechanisms.fixedExpansionReceiptInputsLevel
 literalHoppingStripAndImageInputsLevel =
   HessianFormula.literalHoppingStripAndImageInputsLevel
+physicalStencilEnumerationInputsLevel = GreenClosure.physicalStencilEnumerationInputsLevel
+complexStripPerturbationInputsLevel = GreenClosure.complexStripPerturbationInputsLevel
+periodicImageShellInputsLevel = GreenClosure.periodicImageShellInputsLevel
 
 bishopQuaternionTranscendentalTailInputsLevel =
   QuaternionNormalization.bishopQuaternionTranscendentalTailInputsLevel
 quaternionCollarCountingInputsLevel =
   QuaternionNormalization.quaternionCollarCountingInputsLevel
+quaternionTranscendentalInputsLevel =
+  QuaternionClosure.quaternionTranscendentalInputsLevel
+physicalCollarRealizationInputsLevel =
+  QuaternionClosure.physicalCollarRealizationInputsLevel
 
 periodicBFSShortestPathProofInputsLevel =
   PeriodicBFS.periodicBFSShortestPathProofInputsLevel
 periodicDFSDecoderProofInputsLevel =
   PeriodicBFS.periodicDFSDecoderProofInputsLevel
+periodicDirectionInverseInputsLevel = PeriodicDecoder.periodicDirectionInverseInputsLevel
+periodicBFSParentTerminationInputsLevel =
+  PeriodicDecoder.periodicBFSParentTerminationInputsLevel
+periodicDFSCoverageInputsLevel = PeriodicDecoder.periodicDFSCoverageInputsLevel
 
 literalDiagramWardAndBoxReceiptInputsLevel =
   OneLoopEvaluator.literalDiagramWardAndBoxReceiptInputsLevel
+literalWardReductionInputsLevel = WardBoxes.literalWardReductionInputsLevel
+generated240BoxReceiptInputsLevel = WardBoxes.generated240BoxReceiptInputsLevel
 
 markedFPClusterInputsLevel = MarkedFP.markedFPClusterInputsLevel
 physicalBoundaryCrossingGeometryInputsLevel =
@@ -133,3 +204,7 @@ physicalClusterCancellationInputsLevel =
 physicalRGDefectInputsLevel = PhysicalT5.physicalRGDefectInputsLevel
 physicalMomentCompactnessInputsLevel =
   PhysicalT5.physicalMomentCompactnessInputsLevel
+physicalBoundaryWeightInputsLevel = T5Closure.physicalBoundaryWeightInputsLevel
+physicalRGIrrelevantGainInputsLevel = T5Closure.physicalRGIrrelevantGainInputsLevel
+physicalMarkedMomentInputsLevel = T5Closure.physicalMarkedMomentInputsLevel
+measureTopologyAuthorityInputsLevel = T5Closure.measureTopologyAuthorityInputsLevel
