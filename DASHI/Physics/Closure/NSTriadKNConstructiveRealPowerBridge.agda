@@ -24,7 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNConstructiveRealPowerBridge where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product.Base using (_×_)
 
 record ConstructiveRealPowerCarrier
@@ -48,7 +48,7 @@ record ConstructiveRealPowerCarrier
     rationalFiniteProductPreserving : Set (r ⊔ q)
     natEmbedPreservesZero : natEmbed 0 ≡ zero
     natEmbedPreservesSuccessor : ∀ n →
-      natEmbed (Agda.Builtin.Nat.suc n) ≡ add one (natEmbed n)
+      natEmbed (suc n) ≡ add one (natEmbed n)
     twoPositive : zero < two
     powerPositive : ∀ base exponent → zero < base → zero < power base exponent
     powerAddExponent : ∀ base first second → zero < base →
