@@ -13,21 +13,24 @@ module DASHI.Physics.Closure.NSTriadKNComplex3RestrictedUniquenessInputs where
 -- Uses: transverse closure under subtraction, Hermitian subtraction in the
 -- tested slot, Re <d,d> = ||d||^2, and additive inverse cancellation.
 -- Relationship: proves that equality against the difference test forces the
--- squared norm of the difference to vanish.  Only ordered positive-definite
--- separation ||d||^2 = 0 -> d = 0 remains for concrete restricted uniqueness.
+-- squared norm of the difference to vanish and instantiates the generic
+-- restricted-test theorem modulo one ordered positive-definite separation law.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as Euclidean
 import DASHI.Physics.Closure.NSTriadKNComplex3EuclideanSelfPairing as SelfPairing
 import DASHI.Physics.Closure.NSTriadKNComplex3TransverseDifference as Difference
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNRestrictedTransverseUniqueness as Restricted
 
 realOfComplexSubtract :
   ∀ {r} {F : C3.RealField r} (a b : C3.Complex F) →
@@ -69,6 +72,51 @@ differenceSelfTestForcesZeroNormSquared {F = F} u v sameTest =
         (C3.hermitianPairing3 (C3.complex3Subtract u v) u)
         (C3.hermitianPairing3 (C3.complex3Subtract u v) v)
         sameTest))
+
+record Complex3DifferenceSeparation
+    {r : Level} (F : C3.RealField r) : Set (lsuc r) where
+  field
+    zeroDifferenceNormImpliesEqual : ∀ u v →
+      Euclidean.complex3NormSquared (C3.complex3Subtract u v)
+      ≡ C3.zero F →
+      u ≡ v
+
+open Complex3DifferenceSeparation public
+
+complex3TransversePositiveDefiniteCarrier :
+  ∀ {r} (F : C3.RealField r)
+    (E : C3.IntegerEmbedding F)
+    (P : Complex3DifferenceSeparation F) →
+  Restricted.TransversePositiveDefiniteCarrier
+complex3TransversePositiveDefiniteCarrier F E P = record
+  { Mode = Z3.FourierMode
+  ; Vector = C3.Complex3 F
+  ; Scalar = C3.Carrier F
+  ; zeroScalar = C3.zero F
+  ; difference = C3.complex3Subtract
+  ; transverse = Helical.Transverse E
+  ; realPairing = λ test value → C3.real (C3.hermitianPairing3 test value)
+  ; normSquared = Euclidean.complex3NormSquared
+  ; transverseDifference = Difference.transverseSubtract E
+  ; differenceSelfTest = differenceSelfTestForcesZeroNormSquared
+  ; zeroDifferenceNormImpliesEqual = zeroDifferenceNormImpliesEqual P
+  }
+
+complex3RestrictedTestsSeparate :
+  ∀ {r} (F : C3.RealField r)
+    (E : C3.IntegerEmbedding F)
+    (P : Complex3DifferenceSeparation F)
+    (mode : Z3.FourierMode)
+    (u v : C3.Complex3 F) →
+  Helical.Transverse E mode u →
+  Helical.Transverse E mode v →
+  (∀ test → Helical.Transverse E mode test →
+    C3.real (C3.hermitianPairing3 test u)
+    ≡ C3.real (C3.hermitianPairing3 test v)) →
+  u ≡ v
+complex3RestrictedTestsSeparate F E P =
+  Restricted.restrictedTransverseTestsSeparate
+    (complex3TransversePositiveDefiniteCarrier F E P)
 
 complex3RestrictedUniquenessAlgebraClosed : Bool
 complex3RestrictedUniquenessAlgebraClosed = true
