@@ -17,8 +17,8 @@ module DASHI.Physics.Closure.NSTriadKNSeparatedComponentLedger where
 -- Uses: one absolute left/right/output-low geometry, frozen-leg rotation, and
 -- the literal split T*1_ordered = T*1_direct + T*1_swapped.
 -- Relationship: maps every separated component to a small reusable analytic
--- archetype.  It does not claim that each archetype estimate or its uniform
--- constant has already been proved.
+-- archetype.  The swapped T*1 term differentiates the frozen p mode, unlike
+-- the direct term which differentiates q.  Uniform estimates remain open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -81,9 +81,9 @@ componentDerivativeOwner (component firstAdjointView directPiece residualTag) =
   derivativeRight
 
 componentDerivativeOwner (component firstAdjointView swappedPiece leftLowTag) =
-  derivativeOnHigh
-componentDerivativeOwner (component firstAdjointView swappedPiece rightLowTag) =
   derivativeOnLow
+componentDerivativeOwner (component firstAdjointView swappedPiece rightLowTag) =
+  derivativeOnHigh
 componentDerivativeOwner (component firstAdjointView swappedPiece outputLowTag) =
   derivativeOnHigh
 componentDerivativeOwner (component firstAdjointView swappedPiece comparableTag) =
@@ -106,8 +106,6 @@ componentDerivativeOwner (component secondAdjointView unsplitPiece transitionTag
 componentDerivativeOwner (component secondAdjointView unsplitPiece residualTag) =
   derivativeOutput
 
--- Invalid view/piece combinations are deliberately routed to a finite-overlap
--- majorant rather than silently identified with a physical component.
 componentDerivativeOwner (component outputView directPiece geometry) =
   mixedDerivativeOwner
 componentDerivativeOwner (component outputView swappedPiece geometry) =
@@ -135,9 +133,9 @@ componentArchetype (component firstAdjointView directPiece outputLowTag) =
   lowBernsteinDerivativeHigh
 
 componentArchetype (component firstAdjointView swappedPiece leftLowTag) =
-  highHighFirstAdjointConvolution
+  secondAdjointFrozenLowDerivative
 componentArchetype (component firstAdjointView swappedPiece rightLowTag) =
-  lowBernsteinDerivativeLow
+  lowBernsteinDerivativeHigh
 componentArchetype (component firstAdjointView swappedPiece outputLowTag) =
   lowBernsteinDerivativeHigh
 
