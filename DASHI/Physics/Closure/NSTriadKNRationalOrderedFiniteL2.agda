@@ -15,9 +15,10 @@ module DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 where
 --   ||a||^2 ||b||^2
 --     = <a,b>^2 + sum_{i<j} (a_i b_j - a_j b_i)^2.
 -- Relationship: supplies a genuine recursively defined finite dot product
--- and squared Cauchy--Schwarz theorem.  It deliberately does not identify
+-- and squared Cauchy--Schwarz theorem. It deliberately does not identify
 -- rational shell arithmetic with the constructive-real non-integral H^s
--- power layer.
+-- power layer. The total rational inverse is reciprocal off zero and zero at
+-- zero; none of the finite Cauchy--Schwarz argument depends on division.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -26,20 +27,22 @@ open import Algebra.Properties.Group as GroupProperties
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ
-  using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_)
+  using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_; 1/_; ≢-nonZero)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 
 module AddGroup = GroupProperties ℚₚ.+-0-group
 
-------------------------------------------------------------------------
--- Concrete rational RealField and order extension.
-------------------------------------------------------------------------
+rationalInverse : ℚ → ℚ
+rationalInverse value with value ℚₚ.≡? 0ℚ
+... | yes _ = 0ℚ
+... | no valueNonzero = 1/ value {{≢-nonZero valueNonzero}}
 
 rationalRealField : C3.RealField _
 rationalRealField = record
@@ -49,7 +52,7 @@ rationalRealField = record
   ; add = _+_
   ; multiply = _*_
   ; negate = -_
-  ; inverse = λ _ → 0ℚ
+  ; inverse = rationalInverse
   ; addAssociative = ℚₚ.+-assoc
   ; addCommutative = ℚₚ.+-comm
   ; addZeroLeft = ℚₚ.+-identityˡ
@@ -125,10 +128,6 @@ rationalOrderedExtension = record
   ; subtractMeaning = λ _ _ → refl
   ; subtractNonnegativeBelow = subtractNonnegativeBelow
   }
-
-------------------------------------------------------------------------
--- Actual finite dot product and Gram-defect development.
-------------------------------------------------------------------------
 
 Pair : Set
 Pair = ℚ × ℚ
@@ -243,10 +242,6 @@ finiteCauchySchwarzSquared pairs =
     (λ upper → square (pairDot pairs) ≤ upper)
     (sym (finiteGramIdentity pairs))
     addDefect
-
-------------------------------------------------------------------------
--- Restricting support only decreases the two nonnegative squared norms.
-------------------------------------------------------------------------
 
 record RestrictedPairFamily (full restricted : List Pair) : Set where
   field
