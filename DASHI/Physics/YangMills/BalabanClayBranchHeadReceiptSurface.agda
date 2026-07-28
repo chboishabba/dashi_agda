@@ -30,6 +30,24 @@ record BranchHeadAgdaReceipt : Set where
     bishopConstructiveRealBridgeChecked : Bool
     bishopElementarySeriesChecked : Bool
     bishopFrontierLedgerChecked : Bool
+
+    setoidBackendSpineChecked : Bool
+    bishopBackendChecked : Bool
+    fastCauchyBackendChecked : Bool
+    bishopFastCauchyEquivalenceSeamChecked : Bool
+    legacyEquivalenceAuthorityChecked : Bool
+    canonicalBackendSelectionChecked : Bool
+    cubicalHoTTBoundaryChecked : Bool
+    bishopSeriesAdapterChecked : Bool
+    reciprocalCoefficientConstructionChecked : Bool
+
+    mechanismAtomBoundsChecked : Bool
+    finiteStencilStripImageClosureChecked : Bool
+    quaternionTailCollarClosureChecked : Bool
+    periodicTraversalDecoderChecked : Bool
+    wardBoxCertificateClosureChecked : Bool
+    physicalT5TailMomentMeasureClosureChecked : Bool
+
     changedModules : List String
     constructiveProducerAggregateChecked : Bool
     frontierLedgerAggregateChecked : Bool
@@ -51,6 +69,19 @@ record AuthoritativeBranchHeadEvidence
     bishopConstructiveRealBridgeTypechecks : Set
     bishopElementarySeriesTypechecks : Set
     bishopFrontierLedgerTypechecks : Set
+
+    realBackendSpineTypechecks : Set
+    bishopAndFastCauchyBackendsTypecheck : Set
+    concreteEquivalenceSeamTypechecks : Set
+    legacyEquivalenceAuthorityTypechecks : Set
+    canonicalBackendAndHoTTBoundaryTypecheck : Set
+    bishopSeriesAndCoefficientAdaptersTypecheck : Set
+
+    t2TraversalAndQuaternionClosureTypecheck : Set
+    t3MechanismAndGreenClosureTypecheck : Set
+    t4WardAndBoxClosureTypecheck : Set
+    t5PhysicalClosureTypecheck : Set
+
     publicAggregateChecked : Set
     postulateFreeChangedSurface : Set
 
@@ -79,6 +110,21 @@ bishopElementarySeriesTypecheckLevel = conditional
 
 bishopFrontierLedgerTypecheckLevel : ProofLevel
 bishopFrontierLedgerTypecheckLevel = conditional
+
+realBackendTrancheTypecheckLevel : ProofLevel
+realBackendTrancheTypecheckLevel = conditional
+
+t2ClosureTrancheTypecheckLevel : ProofLevel
+t2ClosureTrancheTypecheckLevel = conditional
+
+t3ClosureTrancheTypecheckLevel : ProofLevel
+t3ClosureTrancheTypecheckLevel = conditional
+
+t4ClosureTrancheTypecheckLevel : ProofLevel
+t4ClosureTrancheTypecheckLevel = conditional
+
+t5ClosureTrancheTypecheckLevel : ProofLevel
+t5ClosureTrancheTypecheckLevel = conditional
 
 publicYangMillsAggregateTypecheckLevel : ProofLevel
 publicYangMillsAggregateTypecheckLevel = conditional
