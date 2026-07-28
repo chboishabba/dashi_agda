@@ -1,9 +1,8 @@
 module DASHI.Analysis.BishopFastCauchyRealEquivalenceExact where
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
 
 import Real as BishopReal
-import Sequence as BishopSequence
 
 import DASHI.Analysis.FastCauchyReals as Fast
 import DASHI.Analysis.ConstructedRealBackendSpineExact as Spine
@@ -54,6 +53,28 @@ record BishopFastCauchyStructureAgreement
     toFastMorphism : Spine.SetoidRealMorphism bishopBackend fastBackend
     toBishopMorphism : Spine.SetoidRealMorphism fastBackend bishopBackend
 
+    leftRoundTrip : ∀ value →
+      Spine._≈_ bishopBackend
+        (Spine.map toBishopMorphism (Spine.map toFastMorphism value))
+        value
+
+    rightRoundTrip : ∀ value →
+      Spine._≈_ fastBackend
+        (Spine.map toFastMorphism (Spine.map toBishopMorphism value))
+        value
+
+    reflectsLe : ∀ {left right} →
+      Spine._≤_ fastBackend
+        (Spine.map toFastMorphism left)
+        (Spine.map toFastMorphism right) →
+      Spine._≤_ bishopBackend left right
+
+    reflectsLt : ∀ {left right} →
+      Spine._<_ fastBackend
+        (Spine.map toFastMorphism left)
+        (Spine.map toFastMorphism right) →
+      Spine._<_ bishopBackend left right
+
     morphismMapsExact : Set
     rationalEmbeddingPreserved : Set
     orderPreservedAndReflected : Set
@@ -70,16 +91,10 @@ asSetoidRealEquivalence :
 asSetoidRealEquivalence agreement = record
   { toRight = toFastMorphism agreement
   ; toLeft = toBishopMorphism agreement
-  ; leftRoundTrip = λ value →
-      Spine.respectsEquality (toBishopMorphism agreement)
-        (BishopReal._≃_ value value)
-  ; rightRoundTrip = λ value →
-      Spine.respectsEquality (toFastMorphism agreement)
-        (Spine.≈-refl _)
-  ; reflectsLe = λ order →
-      Spine.preservesLe (toBishopMorphism agreement) order
-  ; reflectsLt = λ order →
-      Spine.preservesLt (toBishopMorphism agreement) order
+  ; leftRoundTrip = leftRoundTrip agreement
+  ; rightRoundTrip = rightRoundTrip agreement
+  ; reflectsLe = reflectsLe agreement
+  ; reflectsLt = reflectsLt agreement
   }
 
 ------------------------------------------------------------------------
