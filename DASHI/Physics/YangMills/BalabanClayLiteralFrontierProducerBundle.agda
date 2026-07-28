@@ -10,10 +10,12 @@ import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayConfiguredVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
--- Bishop constructive reals, series completeness and explicit transport into
--- the older postulated real socket, followed by the shared interval machinery.
+-- Bishop constructive reals, concrete series terms, series completeness and
+-- explicit transport into the older postulated real socket, followed by the
+-- shared interval machinery.
 import DASHI.Foundations.BishopConstructiveRealBridgeExact
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact
+import DASHI.Foundations.BishopElementarySeriesTermsExact
 import DASHI.Foundations.RealElementaryFunctionsBishopTransportExact
 import DASHI.Foundations.RealElementaryFunctionsAlternatingSeriesExact
 import DASHI.Foundations.RealElementaryFunctionsCanonicalInstanceExact
@@ -102,8 +104,9 @@ import DASHI.Physics.YangMills.BalabanClayT5BoundaryContinuumMomentMeasureExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredPhysicalTailMomentInstanceExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact
 
--- Exact status split for the newly configured arithmetic and remaining leaves.
+-- Exact status split for configured arithmetic, Bishop integration and leaves.
 import DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger
+import DASHI.Physics.YangMills.BalabanClayBishopFrontierCompletionLedger
 
 -- User-run authoritative typecheck receipt surface.
 import DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface
