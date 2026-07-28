@@ -17,7 +17,7 @@ module DASHI.Physics.Closure.NSTriadKNComplex3RestrictedUniquenessInputs where
 -- restricted-test theorem modulo one ordered positive-definite separation law.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -87,7 +87,7 @@ complex3TransversePositiveDefiniteCarrier :
   ∀ {r} (F : C3.RealField r)
     (E : C3.IntegerEmbedding F)
     (P : Complex3DifferenceSeparation F) →
-  Restricted.TransversePositiveDefiniteCarrier
+  Restricted.TransversePositiveDefiniteCarrier {lzero} {r} {r}
 complex3TransversePositiveDefiniteCarrier F E P = record
   { Mode = Z3.FourierMode
   ; Vector = C3.Complex3 F
