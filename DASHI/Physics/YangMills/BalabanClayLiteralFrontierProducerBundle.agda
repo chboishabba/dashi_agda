@@ -10,10 +10,11 @@ import DASHI.Physics.YangMills.BalabanClayLiteralFrontierVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayConfiguredVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
--- Shared rational/Taylor interval carriers, generic remainder-to-enclosure and
--- negative-log-sinc reductions, configured coefficients, the elementary-real
--- adapter, the common alternating-series/log/positive-exp-tail authority, and
--- the single canonical extension of DASHI's existing real carrier.
+-- Bishop constructive reals, series completeness and explicit transport into
+-- the older postulated real socket, followed by the shared interval machinery.
+import DASHI.Foundations.BishopConstructiveRealBridgeExact
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact
+import DASHI.Foundations.RealElementaryFunctionsBishopTransportExact
 import DASHI.Foundations.RealElementaryFunctionsAlternatingSeriesExact
 import DASHI.Foundations.RealElementaryFunctionsCanonicalInstanceExact
 import DASHI.Physics.YangMills.BalabanClayCommonCertifiedTaylorEnclosureExact
@@ -23,10 +24,9 @@ import DASHI.Physics.YangMills.BalabanClayCommonRationalSincCertificateExact
 import DASHI.Physics.YangMills.BalabanClayCommonLogSixteenCertificateExact
 import DASHI.Physics.YangMills.BalabanClayCommonElementaryRealInhabitantsExact
 
--- T3: reference coercivity, exact chart singular values, fixed finite atom
--- lists for plaquette/transport/chart/gauge/block estimates, configured common
--- radius, actual periodic-torus bond kernels and Fourier/image carriers, and
--- physical Green decay.
+-- T3: reference coercivity, exact chart singular values, fixed named atom lists
+-- and coordinate formulas, periodic bond kernels, Fourier symbols, RG/images
+-- and the configured Green gateway.
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralPhysicalCoercivityProducerExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralBackgroundHessianRemaindersExact
@@ -38,17 +38,17 @@ import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiveHessianDominationExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralPointwiseHessianEstimatesExact
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiniteAtomListsExact
+import DASHI.Physics.YangMills.BalabanClayT3LiteralFixedAtomFormulaInstanceExact
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredCommonRadiusCertificateExact
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalGreenCombesThomasExact
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGreenInstanceExact
 import DASHI.Physics.YangMills.BalabanClayT3LiteralHessianFourierImageInstanceExact
 import DASHI.Physics.YangMills.BalabanClayT3PeriodicTorusGreenCarrierExact
+import DASHI.Physics.YangMills.BalabanClayT3PeriodicHessianKernelFormulaExact
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredPhysicalGatewayExact
 
--- T2: action gain, all five non-action losses, strict one-fifth robustness,
--- literal Haar/trace-class closure, generated four-link quaternion jets,
--- rooted physical encoding, concrete periodic block/list/tree/traversal carrier,
--- breadth-first extraction, patch masks and FP geometry.
+-- T2: action gain, component losses, Bishop-backed quaternion normalization,
+-- rooted encoding, actual periodic adjacency and the certified BFS/DFS boundary.
 import DASHI.Physics.YangMills.BalabanClayT2LiteralWilsonSixFactorProducerExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralActivityLossConstantsExact
 import DASHI.Physics.YangMills.BalabanClayT2LiteralPhysicalLossWitnessExact
@@ -58,6 +58,7 @@ import DASHI.Physics.YangMills.BalabanClayT2ConfiguredModelSpecificLossClosureEx
 import DASHI.Physics.YangMills.BalabanClayT2LiteralHaarTraceClassClosureExact
 import DASHI.Physics.YangMills.BalabanClayT2QuaternionCubicEnumerationExact
 import DASHI.Physics.YangMills.BalabanClayT2GeneratedQuaternionJetExact
+import DASHI.Physics.YangMills.BalabanClayT2BishopQuaternionNormalizationExact
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredLossBudgetCertificateExact
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredStrictLossMarginExact
 import DASHI.Physics.YangMills.BalabanClayT2ConfiguredRobustOneSixteenthEndpointExact
@@ -69,32 +70,37 @@ import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExac
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryBreadthFirstTreeInstanceExact
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact
 
--- T4: localized projector, literal momentum-space Wilson/ghost/Haar vertices,
--- Ward cancellation, transverse scalar reduction, Balaban targets, generated
--- normalized 4^4 rational grid, and proof-producing Brillouin-box receipts.
+-- T4: fixed Wilson/ghost/Haar conventions, symbolic diagram expressions, Ward
+-- reduction, generated normalized grid and recursive proof-producing evaluator.
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralVacuumPolarizationIntegralExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopCoefficientClosureExact
+import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopConventionExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralDiagramWardCancellationExact
 import DASHI.Physics.YangMills.BalabanClayT4LiteralMomentumDiagramBoxDataExact
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact
+import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact
 import DASHI.Physics.YangMills.BalabanClayT4Balaban1987TheoremShapeExact
 import DASHI.Physics.YangMills.BalabanClayT4Balaban536VacuumPolarizationTargetExact
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredPhysicalOneLoopInstanceExact
 
--- T5: staged thermodynamic/continuum tails, explicit dyadic geometric tails,
--- finite-tail arithmetic, physical boundary/defect/moment/marginal adapters,
--- compactness, projective consistency, uniqueness and complete OS Gram forms.
+-- T5: separate KP and sharper FP criteria, exact marked-activity margins,
+-- repository-specific rooted-shell injection, physical cluster/RG/moment and
+-- marginal/projective compactness, followed by complete OS Gram transport.
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeTailMomentCompactnessExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact
 import DASHI.Physics.YangMills.BalabanClayT5RootedShellBoundaryTailExact
+import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalRootedShellInjectionExact
 import DASHI.Physics.YangMills.BalabanClayT5BoundaryContinuumMomentMeasureExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredPhysicalTailMomentInstanceExact
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact
 
 -- Exact status split for the newly configured arithmetic and remaining leaves.
 import DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger
