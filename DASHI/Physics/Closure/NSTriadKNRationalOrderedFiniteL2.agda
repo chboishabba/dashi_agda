@@ -24,15 +24,15 @@ module DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Algebra.Properties.Group as GroupProperties
+open import Data.Integer.Base using (+0; +[1+_]; -[1+_])
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ
-  using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_; 1/_; ≢-nonZero)
+  using (ℚ; mkℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_; 1/_; ≢-nonZero)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
-open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
@@ -40,9 +40,11 @@ import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 module AddGroup = GroupProperties ℚₚ.+-0-group
 
 rationalInverse : ℚ → ℚ
-rationalInverse value with value ℚₚ.≡? 0ℚ
-... | yes _ = 0ℚ
-... | no valueNonzero = 1/ value {{≢-nonZero valueNonzero}}
+rationalInverse (mkℚ +0 denominator coprime) = 0ℚ
+rationalInverse value@(mkℚ +[1+ numerator ] denominator coprime) =
+  1/ value {{≢-nonZero (λ ())}}
+rationalInverse value@(mkℚ -[1+ numerator ] denominator coprime) =
+  1/ value {{≢-nonZero (λ ())}}
 
 rationalRealField : C3.RealField _
 rationalRealField = record
