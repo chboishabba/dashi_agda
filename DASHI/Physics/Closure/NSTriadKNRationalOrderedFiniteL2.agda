@@ -24,13 +24,13 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Algebra.Properties.Group as GroupProperties
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ
   using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_)
 import Data.Rational.Properties as ℚₚ
-open import Data.Rational.Tactic.RingSolver using (solve; solve-∀)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
@@ -118,7 +118,6 @@ rationalOrderedExtension = record
   { _≤_ = _≤_
   ; leqReflexive = λ _ → ℚₚ.≤-refl
   ; leqTransitive = ℚₚ.≤-trans
-  ; leqAntisymmetric = ℚₚ.≤-antisym
   ; addMonotone = ℚₚ.+-mono-≤
   ; zeroBelowSquare = squareNonnegative
   ; zeroBelowAdd = λ {a} {b} → addNonnegative {a} {b}
@@ -180,7 +179,7 @@ finiteGramIdentity :
   ∀ pairs →
   leftNormSquared pairs * rightNormSquared pairs
   ≡ square (pairDot pairs) + gramDefect pairs
-finiteGramIdentity [] = refl
+finiteGramIdentity [] = solve []
 finiteGramIdentity ((left , right) ∷ rest)
   rewrite finiteGramIdentity rest
         | crossSquaresExpansion left right rest =
