@@ -19,13 +19,11 @@ module DASHI.Physics.Closure.NSTriadKNFourierModeG3Bridge where
 -- remain isolated inputs rather than implicit assumptions.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Integer.Base as Int using (∣_∣)
 open import Data.Nat.Base using (_≤_)
-open import Data.Product.Base using (_×_; _,_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNHardDyadicShellOwner as Shell
@@ -103,9 +101,15 @@ classifyOwnedTriadG3 triad =
 
 record ShellOwnershipLaw : Set₁ where
   field
-    owner : (mode : Z3.FourierMode) → Z3.NonZeroMode mode → OwnedFourierMode mode
-    ownerUnique : ∀ mode nonzero first second →
-      shellIndex (owner mode nonzero) ≡ shellIndex (owner mode nonzero)
+    owner :
+      (mode : Z3.FourierMode) →
+      Z3.NonZeroMode mode →
+      OwnedFourierMode mode
+
+    ownerUnique :
+      ∀ mode (nonzero : Z3.NonZeroMode mode)
+        (first second : OwnedFourierMode mode) →
+      shellIndex first ≡ shellIndex second
 
 open ShellOwnershipLaw public
 
