@@ -35,17 +35,17 @@ replayVisited block [] = block ∷ []
 replayVisited block (direction ∷ rest) =
   block ∷ replayVisited (Periodic.signedStep block direction) rest
 
+tailVisited :
+  ∀ {n} → Carrier.PeriodicBlock n → List SignedAxis4 → Carrier.PeriodicPolymer n
+tailVisited root [] = []
+tailVisited root (direction ∷ rest) =
+  replayVisited (Periodic.signedStep root direction) rest
+
 replayStartsAtRoot :
   ∀ {n} (root : Carrier.PeriodicBlock n) word →
   replayVisited root word ≡ root ∷ tailVisited root word
 replayStartsAtRoot root [] = refl
 replayStartsAtRoot root (direction ∷ rest) = refl
-
- tailVisited :
-  ∀ {n} → Carrier.PeriodicBlock n → List SignedAxis4 → Carrier.PeriodicPolymer n
- tailVisited root [] = []
- tailVisited root (direction ∷ rest) =
-  replayVisited (Periodic.signedStep root direction) rest
 
 replayLengthExact :
   ∀ {n} (root : Carrier.PeriodicBlock n) word →
