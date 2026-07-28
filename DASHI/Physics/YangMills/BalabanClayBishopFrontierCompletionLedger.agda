@@ -4,6 +4,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as BishopSeries
+import DASHI.Foundations.BishopElementarySeriesTermsExact as BishopTerms
 import DASHI.Foundations.RealElementaryFunctionsBishopTransportExact as BishopTransport
 import DASHI.Foundations.RealElementaryFunctionsCanonicalInstanceExact as CanonicalReal
 
@@ -29,6 +30,7 @@ bishopCauchyCompletenessLevel = Bishop.bishopCauchyCompletenessLevel
 bishopAbsoluteSeriesTransferLevel = Bishop.bishopAbsoluteSeriesTransferLevel
 bishopPowerSeriesDefinitionsLevel = BishopSeries.bishopPowerSeriesDefinitionsLevel
 bishopPowerSeriesCompletenessLevel = BishopSeries.bishopPowerSeriesCompletenessLevel
+bishopElementaryTermDefinitionLevel = BishopTerms.bishopElementaryTermDefinitionLevel
 bishopBackedFunctionDefinitionsLevel =
   BishopTransport.bishopBackedFunctionDefinitionsLevel
 bishopConcreteCompletenessImportedLevel =
@@ -94,6 +96,10 @@ physicalMarkedMomentAdapterLevel = PhysicalT5.physicalMarkedMomentAdapterLevel
 bishopToDASHITransportInputsLevel = Bishop.bishopToDASHITransportInputsLevel
 bishopElementaryCoefficientTailInputsLevel =
   BishopSeries.bishopElementaryCoefficientTailInputsLevel
+bishopReciprocalCoefficientInputsLevel =
+  BishopTerms.bishopReciprocalCoefficientInputsLevel
+bishopElementarySeriesConvergenceInputsLevel =
+  BishopTerms.bishopElementarySeriesConvergenceInputsLevel
 bishopToLegacyRealTransportLevel =
   BishopTransport.bishopToLegacyRealTransportLevel
 legacyElementaryAuthorityAgreementLevel =
