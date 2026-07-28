@@ -26,10 +26,10 @@ module DASHI.Physics.Closure.NSTriadKNFiveArchetypeUniformClosure where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Unit.Base using (⊤)
 
 import DASHI.Physics.Closure.NSTriadKNExactDyadicShellGeometry as Geometry
 import DASHI.Physics.Closure.NSTriadKNSeparatedComponentLedger as Components
-import DASHI.Physics.Closure.NSTriadKNSeparatedComponentEndpointProfiles as Profiles
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein as Bernstein
 import DASHI.Physics.Closure.NSTriadKNRationalDirectConvolutionBound as Convolution
 import DASHI.Physics.Closure.NSTriadKNHighHighToLowCancellationProgram as Relocation
@@ -41,14 +41,12 @@ record UniformArchetypeTheorems : Set₁ where
     directHighHighFirstAdjointUniform : Set
     outputRelocationUniform : Set
     frozenLowSecondAdjointUniform : Set
-
     finiteBernsteinCoreConsumed :
       Bernstein.finiteBernsteinCountingClosed ≡ true
     finiteDirectConvolutionCoreConsumed :
       Convolution.finiteDirectConvolutionAlgebraClosed ≡ true
     outputRelocationAlgebraConsumed :
       Relocation.outputRelocationAlgebraTheoremClosed ≡ true
-
     everyConstantChosenBeforeCutoff : Set
     everySobolevGapSeriesSummed : Set
     everyShellSupportAdapterClosed : Set
@@ -67,7 +65,7 @@ archetypeTheorem package Components.outputRelocationGain =
   outputRelocationUniform package
 archetypeTheorem package Components.secondAdjointFrozenLowDerivative =
   frozenLowSecondAdjointUniform package
-archetypeTheorem package Components.finiteOverlapMajorant = Set
+archetypeTheorem package Components.finiteOverlapMajorant = ⊤
 
 separatedComponentTheorem :
   UniformArchetypeTheorems → Components.ShellComponent → Set
