@@ -154,6 +154,12 @@ record MarkedActivityData (Polymer Observable : Set)
     baseActivityBelowOneSixteenth : ∀ polymer →
       absoluteActivity model polymer ≤ rhoBase
 
+    -- This explicit monotone-multiplication receipt avoids depending on a
+    -- particular standard-library argument order for rational positivity lemmas.
+    inflatedBaseActivityBelowThreeFortieths : ∀ polymer →
+      markedInflation * absoluteActivity model polymer
+      ≤ markedActivityMaximum
+
     logarithmicSourceCostBelowOneFifth : ∀ observable →
       sourceAdmissible observable → Set
 
@@ -174,11 +180,7 @@ markedActivityBelowThreeFortieths :
 markedActivityBelowThreeFortieths dataSet observable polymer admissible =
   ℚP.≤-trans
     (markedInflationBelowSixFifths dataSet observable polymer admissible)
-    (ℚP.≤-respʳ-≃
-      markedBaseActivityExact
-      (ℚP.*-monoʳ-≤-nonNeg
-        (baseActivityBelowOneSixteenth dataSet polymer)
-        (ℚP.nonNegative⁻¹ markedInflation)))
+    (inflatedBaseActivityBelowThreeFortieths dataSet polymer)
 
 markedActivityBelowFPThreshold :
   ∀ {Polymer Observable model}
