@@ -16,7 +16,7 @@ module DASHI.Physics.Closure.NSTriadKNFiniteOverlapTransportConstants where
 -- five named residual subtypes, octahedral orbit bound 48, eight helicity
 -- triples, and two ordered reality mates.
 -- Relationship: fixes both linear and post-squaring safe constants for all
--- three owners.  A concrete analytic instantiation still has to prove whether
+-- three owners. A concrete analytic instantiation still has to prove whether
 -- each class transports before or after squaring; it may select the smaller
 -- linear or the larger squared-safe ledger but may not mix them silently.
 ------------------------------------------------------------------------
@@ -46,20 +46,20 @@ nearLinearConstant : Nat
 nearLinearConstant = Canonical.nearPairMultiplicity * baseLinearTransport
 
 transitionLinearConstant : Nat
-transitionLinearConstant = Canonical.orientedTransitionMultiplicity * baseLinearTransport
+transitionLinearConstant = Canonical.transitionOrientedMultiplicity * baseLinearTransport
 
 residualLinearConstant : Nat
-residualLinearConstant = Canonical.residualSubtypeCount * baseLinearTransport
+residualLinearConstant = Canonical.residualSubtypeMultiplicity * baseLinearTransport
 
 nearSquaredSafeConstant : Nat
 nearSquaredSafeConstant = Canonical.nearPairMultiplicity * baseSquaredTransport
 
 transitionSquaredSafeConstant : Nat
 transitionSquaredSafeConstant =
-  Canonical.orientedTransitionMultiplicity * baseSquaredTransport
+  Canonical.transitionOrientedMultiplicity * baseSquaredTransport
 
 residualSquaredSafeConstant : Nat
-residualSquaredSafeConstant = Canonical.residualSubtypeCount * baseSquaredTransport
+residualSquaredSafeConstant = Canonical.residualSubtypeMultiplicity * baseSquaredTransport
 
 baseLinearTransportIs768 : baseLinearTransport ≡ 768
 baseLinearTransportIs768 = refl
@@ -96,8 +96,7 @@ data OverlapClass : Set where
 data TransportStage : Set where
   beforeSquaring afterSquaring : TransportStage
 
-transportedConstant :
-  ConditionOwner → OverlapClass → TransportStage → Nat
+transportedConstant : ConditionOwner → OverlapClass → TransportStage → Nat
 transportedConstant owner nearClass beforeSquaring = nearLinearConstant
 transportedConstant owner transitionClass beforeSquaring = transitionLinearConstant
 transportedConstant owner residualClass beforeSquaring = residualLinearConstant
@@ -110,14 +109,12 @@ record TransportMajorantLaw {s : Set} : Set₁ where
     _≤_ : s → s → Set
     scaleByNat : Nat → s → s
     transitive : ∀ {a b c} → a ≤ b → b ≤ c → a ≤ c
-
     orbitExpansionMajorant : ∀ value →
       value ≤ scaleByNat orbitMultiplicity value
     helicityResolutionMajorant : ∀ value →
       value ≤ scaleByNat helicityMultiplicity value
     realityMateMajorant : ∀ value →
       value ≤ scaleByNat realityMultiplicity value
-
     scaleAssociative : ∀ first second value →
       scaleByNat first (scaleByNat second value)
       ≡ scaleByNat (first * second) value
