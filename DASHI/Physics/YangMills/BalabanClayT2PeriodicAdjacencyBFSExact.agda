@@ -1,24 +1,20 @@
 module DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_; _<_)
 
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact using
-  (SignedAxis4; signedDirectionEnumeration)
+  (SignedAxis4; signedDirectionEnumeration; signedDirectionEnumerationComplete)
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
 -- Literal periodic adjacency and the canonical BFS/DFS proof boundary.
---
--- This is repository-specific finite graph theory.  No external theorem is
--- expected for the rooted-shell injection or canonical decoder: the relevant
--- facts follow from cyclic coordinates, finite list connectivity and strict
--- decrease of graph distance along parent edges.
+-- This is repository-specific finite graph theory; no external source is
+-- expected for the rooted-shell injection or decoder.
 ------------------------------------------------------------------------
 
 lastCyclic : ∀ {n} → CyclicIndex (suc n)
@@ -62,10 +58,6 @@ signedStep :
   ∀ {n} → Periodic.PeriodicBlock n → SignedAxis4 → Periodic.PeriodicBlock n
 signedStep block (pair axis orientation) =
   updateAxis axis (stepCoordinate orientation) block
-
-------------------------------------------------------------------------
--- A nearest-neighbour witness is a member of the exact eight-direction list.
-------------------------------------------------------------------------
 
 data ReachedByDirection {n}
     (left right : Periodic.PeriodicBlock n) :
@@ -114,16 +106,26 @@ nearestNeighbourDecidable :
 nearestNeighbourDecidable left right =
   reachedByDirectionDecidable left right signedDirectionEnumeration
 
-directionOfAdjacent :
-  ∀ {n} {left right : Periodic.PeriodicBlock n} →
-  PeriodicNearestNeighbour left right → SignedAxis4
-directionOfAdjacent = directionFromWitness
+defaultDirection : SignedAxis4
+defaultDirection = pair zeroᵢ false
 
-directionReconstructsAdjacent :
-  ∀ {n} {left right : Periodic.PeriodicBlock n}
-    (adjacent : PeriodicNearestNeighbour left right) →
-  signedStep left (directionOfAdjacent adjacent) ≡ right
-directionReconstructsAdjacent = directionWitnessExact
+directionOfBlocks :
+  ∀ {n} → Periodic.PeriodicBlock n → Periodic.PeriodicBlock n → SignedAxis4
+directionOfBlocks left right with nearestNeighbourDecidable left right
+... | yes witness = directionFromWitness witness
+... | no _ = defaultDirection
+
+directionReconstructsBlocks :
+  ∀ {n} (left right : Periodic.PeriodicBlock n) →
+  PeriodicNearestNeighbour left right →
+  signedStep left (directionOfBlocks left right) ≡ right
+directionReconstructsBlocks left right adjacent
+  with nearestNeighbourDecidable left right
+... | yes witness = directionWitnessExact witness
+... | no notAdjacent = emptyEliminate (notAdjacent adjacent)
+  where
+  emptyEliminate : ∀ {A : Set} → Empty → A
+  emptyEliminate ()
 
 signedStepAdjacent :
   ∀ {n} (block : Periodic.PeriodicBlock n) direction →
@@ -143,11 +145,10 @@ periodicAdjacencyData n = record
   ; nearestNeighbourDecidable = λ left right →
       Dec (PeriodicNearestNeighbour left right)
   ; signedStep = signedStep
-  ; directionOfAdjacent = λ left right →
-      directionOfAdjacent
+  ; directionOfAdjacent = directionOfBlocks
   ; signedStepAdjacent = signedStepAdjacent
   ; directionReconstructsAdjacent = λ left right adjacent →
-      directionReconstructsAdjacent adjacent
+      directionReconstructsBlocks left right adjacent
   }
 
 ------------------------------------------------------------------------
@@ -212,11 +213,6 @@ record CertifiedPeriodicBreadthFirstData
     parentLeastAmongCloserNeighbours : ∀ block → membership polymer block → Set
 
 open CertifiedPeriodicBreadthFirstData public
-
-------------------------------------------------------------------------
--- Canonical tree, DFS and decoder.  Strict distance descent is the acyclicity
--- witness; no separate opaque tree-injectivity assumption is permitted.
-------------------------------------------------------------------------
 
 record CertifiedPeriodicTreeDecoder
     (n : Nat) (polymer : ConnectedPeriodicPolymer n)
