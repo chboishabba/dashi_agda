@@ -3,9 +3,8 @@ module DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExac
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
-import Data.Rational.Tactic.RingSolver as ℚRing
+open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
 
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
 import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as FP
@@ -57,6 +56,8 @@ record FiniteVolumeClusterExpansion
     clusterWeight : Boundary → Observable → Cluster → ℚ
     clusterWeightDefinition : ∀ boundary observable cluster → Set
 
+    neutralObservable : Observable
+
     partitionClusterExpansionExact : ∀ volume boundary →
       partitionFunction volume boundary
       ≡ sumℚ (map (clusterWeight boundary neutralObservable) (clusters volume))
@@ -65,7 +66,6 @@ record FiniteVolumeClusterExpansion
       observablePartitionFunction volume boundary observable
       ≡ sumℚ (map (clusterWeight boundary observable) (clusters volume))
 
-    neutralObservable : Observable
     expectationAsPartitionRatioExact : ∀ volume boundary observable → Set
 
     fpPolymerModel : FP.AbstractPolymerModel Polymer
@@ -129,8 +129,6 @@ record BoundaryShellEstimate
     boundaryConditionIndependence : ∀ observable → Set
 
 open BoundaryShellEstimate public
-  where
-  open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
 
 record OneStepRGDefect
     (Cutoff Observable DefectTerm : Set) : Set₁ where
