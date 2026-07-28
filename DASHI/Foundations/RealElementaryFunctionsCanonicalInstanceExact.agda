@@ -7,9 +7,12 @@ open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ ; 0ℝ ; 1ℝ ; _+ℝ_ ; _-ℝ_ ; _*ℝ_ ; -ℝ_ ; absℝ ; _≤ℝ_ ; _<ℝ_ )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Foundations.RealElementaryFunctionsAlternatingSeriesExact as Alt
+import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as BishopSeries
+import DASHI.Foundations.RealElementaryFunctionsBishopTransportExact as BishopTransport
 
 ------------------------------------------------------------------------
--- Canonical elementary functions on DASHI's existing real carrier.
+-- Canonical elementary functions on DASHI's legacy real carrier.
 --
 -- Marc Daumas, David Lester and César Muñoz,
 -- "Verified Real Number Calculations: A Library for Interval Arithmetic",
@@ -17,16 +20,22 @@ import DASHI.Foundations.RealElementaryFunctionsAlternatingSeriesExact as Alt
 -- DOI: 10.1109/TC.2008.213; arXiv:0708.3721.
 -- Relationship: organization of proof-producing elementary-function bounds.
 --
+-- Zachary Murray, "Constructive Analysis in the Agda Proof Assistant",
+-- BSc Honours thesis, Dalhousie University, April 2022.
+-- arXiv:2205.08354. No DOI assigned.
+-- Relationship: concrete Bishop reals, arithmetic, sequence/series convergence
+-- and Cauchy completeness imported through vendor/bishop.
+--
 -- Walter Rudin, "Principles of Mathematical Analysis", third edition,
 -- McGraw--Hill (1976). No DOI assigned to the book edition used here.
--- Relationship: alternating power series, exponential/logarithm inverse laws
--- and the integral identity for -log(1-u).
+-- Relationship: classical comparison for alternating power series and the
+-- exponential/logarithm inverse law; it is not the constructive implementation.
 --
--- RealAnalysisAxioms intentionally postulates the carrier itself.  Consequently
--- transcendental functions cannot honestly be manufactured by finite Agda
--- definitions below that boundary.  This module fixes ONE canonical extension
--- of that carrier and constructs the shared package consumed by T2--T4.  It does
--- not introduce a second real type or a second incompatible sine convention.
+-- RealAnalysisAxioms intentionally postulates the legacy carrier.  The functions
+-- below remain compatibility names for existing modules.  New analytic work must
+-- be backed by BishopBackedDASHIElementaryFunctions, which explicitly transports
+-- the concrete Bishop series limits rather than creating a second completeness
+-- postulate.
 ------------------------------------------------------------------------
 
 postulate
@@ -57,45 +66,63 @@ postulate
   exponentialSeriesFunctionAgreement : Set
   logarithmExponentialFunctionAgreement : Set
 
+  -- One explicit bridge instance replaces any implicit identification of the
+  -- postulated legacy carrier with Bishop's setoid carrier.
+  bishopBackedLegacyElementaryFunctions :
+    BishopTransport.BishopBackedDASHIElementaryFunctions
+
 repositoryElementaryFunctionPrimitivePackage :
   Alt.ConfiguredElementaryFunctionPrimitivePackage ℝ
-repositoryElementaryFunctionPrimitivePackage = record
-  { sinCos = canonicalSinCosAlternatingData
-  ; negativeLog = canonicalNegativeLogOneMinusAuthority
-  ; exponentialSeries = canonicalPositiveExponentialSeriesAuthority
-  ; logExp = canonicalLogExpOrderAuthority
-  }
+repositoryElementaryFunctionPrimitivePackage =
+  BishopTransport.dashiPrimitivePackage
+    bishopBackedLegacyElementaryFunctions
 
 repositorySineTermMagnitudeDecreasing =
   Alt.termMagnitudeDecreasing
-    (Alt.sineSeries canonicalSinCosAlternatingData)
+    (Alt.sineSeries
+      (Alt.sinCos repositoryElementaryFunctionPrimitivePackage))
 
 repositoryCosineTermMagnitudeDecreasing =
   Alt.termMagnitudeDecreasing
-    (Alt.cosineSeries canonicalSinCosAlternatingData)
+    (Alt.cosineSeries
+      (Alt.sinCos repositoryElementaryFunctionPrimitivePackage))
 
 repositorySineFirstOmittedTermBound =
   Alt.firstOmittedTermControlsRemainder
-    (Alt.sineSeries canonicalSinCosAlternatingData)
+    (Alt.sineSeries
+      (Alt.sinCos repositoryElementaryFunctionPrimitivePackage))
 
 repositoryCosineFirstOmittedTermBound =
   Alt.firstOmittedTermControlsRemainder
-    (Alt.cosineSeries canonicalSinCosAlternatingData)
+    (Alt.cosineSeries
+      (Alt.sinCos repositoryElementaryFunctionPrimitivePackage))
 
 repositoryNegativeLogOneMinusBound =
-  Alt.negativeLogOneMinusBound canonicalNegativeLogOneMinusAuthority
+  Alt.negativeLogOneMinusBound
+    (Alt.negativeLog repositoryElementaryFunctionPrimitivePackage)
 
 repositoryExponentialPartialSumBelow =
-  Alt.exponentialPartialSumBelow canonicalPositiveExponentialSeriesAuthority
+  Alt.exponentialPartialSumBelow
+    (Alt.exponentialSeries repositoryElementaryFunctionPrimitivePackage)
 
 repositoryLogarithmMonotone =
-  Alt.logarithmMonotone canonicalLogExpOrderAuthority
+  Alt.logarithmMonotone
+    (Alt.logExp repositoryElementaryFunctionPrimitivePackage)
 
 repositoryLogarithmExponential =
-  Alt.logarithmExponential canonicalLogExpOrderAuthority
+  Alt.logarithmExponential
+    (Alt.logExp repositoryElementaryFunctionPrimitivePackage)
 
 canonicalRealElementaryAdapterLevel : ProofLevel
 canonicalRealElementaryAdapterLevel = machineChecked
+
+bishopConcreteCompletenessImportedLevel : ProofLevel
+bishopConcreteCompletenessImportedLevel =
+  Bishop.bishopCauchyCompletenessLevel
+
+bishopPowerSeriesLimitConstructionLevel : ProofLevel
+bishopPowerSeriesLimitConstructionLevel =
+  BishopSeries.bishopPowerSeriesCompletenessLevel
 
 canonicalRealElementaryFunctionAgreementLevel : ProofLevel
 canonicalRealElementaryFunctionAgreementLevel = conditional
