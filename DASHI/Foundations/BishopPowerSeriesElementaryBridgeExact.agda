@@ -1,8 +1,8 @@
 module DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product using (proj₂)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Unnormalised using (ℚᵘ)
 
 import Real as BishopReal
 import Sequence as BishopSequence
@@ -17,11 +17,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- BSc Honours thesis, Dalhousie University, April 2022.
 -- arXiv:2205.08354.  No DOI assigned.
 --
--- Murray's library proves the convergence technology used below: Cauchy
--- completeness, uniqueness of limits, algebraic limit laws, the Cauchy test for
--- series and absolute convergence implying convergence.  It does not itself
--- define sine, cosine, exponential or logarithm on main.  DASHI therefore owns
--- the coefficient/tail proofs, while Bishop supplies the concrete completion.
+-- Murray's library proves Cauchy completeness, uniqueness of limits, the Cauchy
+-- test for series and absolute convergence implying convergence.  It does not
+-- itself define sine, cosine, exponential or logarithm on main.  DASHI owns the
+-- coefficient/tail proofs, while Bishop supplies the concrete completion.
 ------------------------------------------------------------------------
 
 record AbsolutelyConvergentBishopSeries : Set₁ where
@@ -61,7 +60,7 @@ seriesValueUnique series =
 
 record BishopElementaryPowerSeriesData : Set₁ where
   field
-    rational : BishopReal.ℚᵘ → Bishop.Bishopℝ
+    rational : ℚᵘ → Bishop.Bishopℝ
     rationalDefinition : rational ≡ BishopReal._⋆
 
     sineTerm cosineTerm exponentialTerm :
