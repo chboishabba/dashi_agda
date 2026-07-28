@@ -19,11 +19,10 @@ module DASHI.Physics.Closure.NSTriadKNStage3OrderedL2AnalyticIntegration where
 -- 10.1007/s00041-018-9612-8; correction DOI 10.1007/s00041-019-09724-7;
 -- 10.1016/j.jde.2005.10.007; 10.48550/arXiv.2604.12188;
 -- repository-original integration has no DOI.
--- Uses: the exact vector adjoints, ordered Euclidean l2 surface, transverse
--- uniqueness reduction, Leray contraction reduction, hard-shell owner,
--- componentwise direct/swapped ledger, endpoint profiles, finite-overlap
--- constants, component affine ledger, three Schur-condition assembly and the
--- final cutoff-uniform dual-bound factorization.
+-- Uses: exact vector adjoints, the C3 Euclidean self-pairing and transverse
+-- subtraction theorems, ordered finite l2, Leray contraction, hard-shell
+-- geometry, component profiles, affine constraints, three Schur conditions
+-- and the final cutoff-uniform dual-bound factorization.
 -- Relationship: this is the proof-critical Stage-3 path.  It intentionally
 -- imports no balanced-ternary, unbalanced-ternary, Base369, C6 or C9 status
 -- layer.  Existing 369 mathematics is untouched and remains available outside
@@ -35,7 +34,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNLiteralVectorAdjointPairingTheorems as Pairing
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as OrderedL2
+import DASHI.Physics.Closure.NSTriadKNComplex3EuclideanSelfPairing as SelfPairing
+import DASHI.Physics.Closure.NSTriadKNComplex3TransverseDifference as TransverseDifference
 import DASHI.Physics.Closure.NSTriadKNRestrictedTransverseUniqueness as Restricted
+import DASHI.Physics.Closure.NSTriadKNComplex3RestrictedUniquenessInputs as RestrictedInputs
 import DASHI.Physics.Closure.NSTriadKNLerayContractionFromPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNExactDyadicShellGeometry as Geometry
 import DASHI.Physics.Closure.NSTriadKNHardDyadicShellOwner as Shell
@@ -61,11 +63,17 @@ record Stage3OrderedL2Receipt : Set where
       OrderedL2.orderedEuclideanL2SurfaceRepresented ≡ true
     concreteOrderedL2StillOpen :
       OrderedL2.concreteOrderedRealAndFiniteCauchySchwarzClosed ≡ false
+    C3SelfPairingIdentityClosed :
+      SelfPairing.complex3EuclideanSelfPairingClosed ≡ true
 
+    transverseDifferenceClosed :
+      TransverseDifference.complex3TransverseDifferenceClosed ≡ true
     restrictedUniquenessReductionClosed :
       Restricted.restrictedTransverseUniquenessReductionClosed ≡ true
-    concreteRestrictedUniquenessStillOpen :
-      Restricted.concreteC3RestrictedAdjointUniquenessClosed ≡ false
+    restrictedUniquenessAlgebraClosed :
+      RestrictedInputs.complex3RestrictedUniquenessAlgebraClosed ≡ true
+    zeroNormSeparationStillRequired :
+      RestrictedInputs.zeroNormSquaredSeparatesComplex3StillRequired ≡ true
 
     LerayContractionReductionClosed :
       Leray.lerayContractionReductionClosed ≡ true
@@ -131,8 +139,11 @@ stage3OrderedL2Receipt =
     Pairing.orderedPairFirstAdjointPairingTheoremClosedIsTrue
     OrderedL2.orderedEuclideanL2SurfaceRepresentedIsTrue
     OrderedL2.concreteOrderedRealAndFiniteCauchySchwarzClosedIsFalse
+    SelfPairing.complex3EuclideanSelfPairingClosedIsTrue
+    TransverseDifference.complex3TransverseDifferenceClosedIsTrue
     Restricted.restrictedTransverseUniquenessReductionClosedIsTrue
-    Restricted.concreteC3RestrictedAdjointUniquenessClosedIsFalse
+    RestrictedInputs.complex3RestrictedUniquenessAlgebraClosedIsTrue
+    RestrictedInputs.zeroNormSquaredSeparatesComplex3StillRequiredIsTrue
     Leray.lerayContractionReductionClosedIsTrue
     Leray.concreteC3LerayPythagoreanIdentityClosedIsFalse
     Geometry.canonicalAbsolutePredicatesDefinedIsTrue
