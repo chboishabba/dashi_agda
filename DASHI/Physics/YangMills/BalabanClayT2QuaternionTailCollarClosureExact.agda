@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayT2QuaternionTailCollarClosureExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Fin.Base using (Fin; zero; suc)
+open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.List.Base using (length)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 
@@ -29,7 +29,7 @@ mapList f (x ∷ xs) = f x ∷ mapList f xs
 
 allFin : (n : Nat) → List (Fin n)
 allFin zero = []
-allFin (suc n) = zero ∷ mapList suc (allFin n)
+allFin (suc n) = fzero ∷ mapList fsuc (allFin n)
 
 lengthMap : ∀ {A B : Set} (f : A → B) xs →
   length (mapList f xs) ≡ length xs
@@ -38,7 +38,7 @@ lengthMap f (x ∷ xs) rewrite lengthMap f xs = refl
 
 lengthAllFin : ∀ n → length (allFin n) ≡ n
 lengthAllFin zero = refl
-lengthAllFin (suc n) rewrite lengthMap suc (allFin n) | lengthAllFin n = refl
+lengthAllFin (suc n) rewrite lengthMap fsuc (allFin n) | lengthAllFin n = refl
 
 ≤-reflN : ∀ n → n ≤ n
 ≤-reflN zero = z≤n
