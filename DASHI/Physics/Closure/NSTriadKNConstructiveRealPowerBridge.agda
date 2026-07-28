@@ -34,6 +34,7 @@ record ConstructiveRealPowerCarrier
     Rational : Set q
     zero one two : Real
     rationalEmbed : Rational → Real
+    natEmbed : Nat → Real
     add multiply subtract : Real → Real → Real
     _≤_ _<_ : Real → Real → Set r
     power : Real → Real → Real
@@ -45,6 +46,9 @@ record ConstructiveRealPowerCarrier
     rationalEmbedOrderPreserving : Set (r ⊔ q)
     rationalFiniteSumPreserving : Set (r ⊔ q)
     rationalFiniteProductPreserving : Set (r ⊔ q)
+    natEmbedPreservesZero : natEmbed 0 ≡ zero
+    natEmbedPreservesSuccessor : ∀ n →
+      natEmbed (Agda.Builtin.Nat.suc n) ≡ add one (natEmbed n)
     twoPositive : zero < two
     powerPositive : ∀ base exponent → zero < base → zero < power base exponent
     powerAddExponent : ∀ base first second → zero < base →
@@ -52,7 +56,7 @@ record ConstructiveRealPowerCarrier
       ≡ multiply (power base first) (power base second)
     dyadicShellMeaning : ∀ exponent shell →
       dyadicShellPower exponent shell
-      ≡ power two (multiply exponent (natPower two shell))
+      ≡ power two (multiply exponent (natEmbed shell))
     geometricTail : Real → Nat → Real
     geometricTailBound : ∀ ratio start →
       zero ≤ ratio → ratio < one → zero ≤ geometricTail ratio start
