@@ -25,44 +25,37 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product.Base using (_×_)
 
 record ConstructiveRealPowerCarrier
     {r q : Level} : Set (lsuc (r ⊔ q)) where
   field
     Real : Set r
     Rational : Set q
-
     zero one two : Real
     rationalEmbed : Rational → Real
     add multiply subtract : Real → Real → Real
     _≤_ _<_ : Real → Real → Set r
-
     power : Real → Real → Real
     natPower : Real → Nat → Real
     dyadicShellPower : Real → Nat → Real
-
     orderReflexive : ∀ value → value ≤ value
     orderTransitive : ∀ {a b c} → a ≤ b → b ≤ c → a ≤ c
     orderAntisymmetric : ∀ {a b} → a ≤ b → b ≤ a → a ≡ b
-
     rationalEmbedOrderPreserving : Set (r ⊔ q)
     rationalFiniteSumPreserving : Set (r ⊔ q)
     rationalFiniteProductPreserving : Set (r ⊔ q)
-
     twoPositive : zero < two
     powerPositive : ∀ base exponent → zero < base → zero < power base exponent
     powerAddExponent : ∀ base first second → zero < base →
       power base (add first second)
       ≡ multiply (power base first) (power base second)
-
     dyadicShellMeaning : ∀ exponent shell →
       dyadicShellPower exponent shell
       ≡ power two (multiply exponent (natPower two shell))
-
     geometricTail : Real → Nat → Real
     geometricTailBound : ∀ ratio start →
-      zero ≤ ratio → ratio < one →
-      zero ≤ geometricTail ratio start
+      zero ≤ ratio → ratio < one → zero ≤ geometricTail ratio start
     geometricSeriesConverges : ∀ ratio →
       zero ≤ ratio → ratio < one → Set r
 
@@ -74,30 +67,23 @@ record Stage3SobolevPowerAdapter
   field
     fiveHalves three : Real C
     openSobolevExponent : Real C → Set r
-
     openIntervalMeaning : ∀ exponent →
       openSobolevExponent exponent →
       _<_ C fiveHalves exponent × _<_ C exponent three
-
     lowDecayExponent : Real C → Real C
     gapDecayDirectFirst : Real C → Real C
     gapDecayLowDerivative : Real C → Real C
-
     lowDecayPositive : ∀ exponent →
       openSobolevExponent exponent →
       _<_ C (zero C) (lowDecayExponent exponent)
-
     directGapDecayPositive : ∀ exponent →
       openSobolevExponent exponent →
       _<_ C (zero C) (gapDecayDirectFirst exponent)
-
     lowDerivativeGapDecayPositive : ∀ exponent →
       openSobolevExponent exponent →
       _<_ C (zero C) (gapDecayLowDerivative exponent)
-
     directFirstGapSeriesSummable : ∀ exponent →
       openSobolevExponent exponent → Set r
-
     allFourFavourableGapSeriesSummable : ∀ exponent →
       openSobolevExponent exponent → Set r
 
