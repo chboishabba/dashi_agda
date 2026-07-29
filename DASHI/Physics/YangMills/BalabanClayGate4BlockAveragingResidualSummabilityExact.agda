@@ -31,7 +31,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- This module proves the independent implication actually needed by DASHI:
 -- residual growth <= 4 per step and squared-adjoint decay = 1/8 per step give
--- a combined contraction <= 1/2.  No claim that the physical Q_k^* has this
+-- a combined contraction <= 1/2. No claim that the physical Q_k^* has this
 -- norm is imported from the locator.
 ------------------------------------------------------------------------
 
@@ -165,5 +165,7 @@ physicalResidualGrowthAtMostFourInputsLevel = conditional
 constructiveHalfGeometricSummabilityInputsLevel : ProofLevel
 constructiveHalfGeometricSummabilityInputsLevel = conditional
 
+-- The locator is explicitly inadmissible. Its authority field therefore remains
+-- an open/conjectural claim rather than a nonexistent proof-level constructor.
 rgNormalizedDisintegrationLocatorAcceptedAsAuthority : ProofLevel
-rgNormalizedDisintegrationLocatorAcceptedAsAuthority = quarantined
+rgNormalizedDisintegrationLocatorAcceptedAsAuthority = conjectural
