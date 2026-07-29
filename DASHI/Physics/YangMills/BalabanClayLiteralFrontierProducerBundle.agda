@@ -12,17 +12,19 @@ import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
 -- Existing DASHI constructed-real and series spines, direct Bishop/FastCauchy
 -- setoid backends, layered ordered-field/rational-density/effective-convergence
--- and derived transport capabilities, canonical categoricity from rational
--- approximants, explicit common-completion and concrete Bishop/FastCauchy
--- instances, explicit legacy authority, canonical backend selection and the
--- non-promoted Cubical HoTT boundary.
+-- and derived transport capabilities, stable complete-real packages, canonical
+-- categoricity from rational approximants, explicit common-completion and
+-- concrete Bishop/FastCauchy instances, explicit legacy authority, canonical
+-- backend selection and the non-promoted Cubical HoTT boundary.
 import DASHI.Analysis.ConstructedRealBackendSpineExact
 import DASHI.Analysis.ConstructiveRealCapabilityHierarchyExact
 import DASHI.Analysis.ConstructiveRealTransportCapabilitiesExact
+import DASHI.Analysis.ConstructiveCompleteRealPackageExact
 import DASHI.Analysis.ConstructiveRealCategoricityExact
 import DASHI.Analysis.BishopConstructedRealBackendExact
 import DASHI.Analysis.FastCauchyConstructedRealBackendExact
 import DASHI.Analysis.BishopFastCauchyRealEquivalenceExact
+import DASHI.Analysis.BishopFastCauchyCapabilityPackagesExact
 import DASHI.Analysis.BishopFastCauchyCommonCompletionExact
 import DASHI.Analysis.BishopFastCauchyCategoricityInstanceExact
 import DASHI.Analysis.BishopConstructiveSeriesAdapterExact
