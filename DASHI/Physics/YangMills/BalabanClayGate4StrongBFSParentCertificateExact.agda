@@ -18,8 +18,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- This is a proof-bearing replacement for older Set-valued BFS labels. Once a
 -- concrete distance and parent map satisfy the previous-layer equation, parent
 -- chains strictly descend in distance and therefore cannot contain a nonempty
--- cycle. Distance-zero uniqueness then makes every parent chain terminate at the
--- root. No choice principle or graph-analysis theorem is imported.
+-- cycle. Distance-zero uniqueness makes every parent chain terminate at the
+-- root, and physical parent adjacency reverses that chain into an explicit
+-- root-to-vertex path of exactly the assigned distance.
 ------------------------------------------------------------------------
 
 data Empty : Set where
@@ -164,18 +165,43 @@ parentChainToRoot certificate vertex inGraph =
   parentChainToRootAtDistance certificate vertex inGraph
     (distance certificate vertex) refl
 
+data RootPath
+    {Vertex : Set}
+    (certificate : StrongBFSParentCertificate Vertex) :
+    Vertex → Nat → Set where
+  rootPath : RootPath certificate (root certificate) zero
+  extendPath : ∀ {parentVertex child length} →
+    RootPath certificate parentVertex length →
+    Adjacent certificate parentVertex child →
+    RootPath certificate child (suc length)
+
+parentChainGivesRootPath :
+  ∀ {Vertex}
+    {certificate : StrongBFSParentCertificate Vertex}
+    {vertex length} →
+  ParentChain certificate vertex (root certificate) length →
+  RootPath certificate vertex length
+parentChainGivesRootPath rootChain@chainZero = rootPath
+parentChainGivesRootPath {certificate = certificate}
+  (chainStep {vertex = vertex} nonRoot rest) =
+  extendPath
+    (parentChainGivesRootPath rest)
+    (parentAdjacent certificate vertex nonRoot)
+
+rootPathAtAssignedDistance :
+  ∀ {Vertex}
+    (certificate : StrongBFSParentCertificate Vertex)
+    vertex → InGraph certificate vertex →
+  RootPath certificate vertex (distance certificate vertex)
+rootPathAtAssignedDistance certificate vertex inGraph =
+  parentChainGivesRootPath (parentChainToRoot certificate vertex inGraph)
+
 record StrongBFSShortestPathCertificate
     {Vertex : Set}
     (parentCertificate : StrongBFSParentCertificate Vertex) : Set₁ where
   field
-    Path : Vertex → Vertex → Nat → Set
-
-    parentPathExists : ∀ vertex → IsNonRoot parentCertificate vertex →
-      Path (root parentCertificate) vertex
-        (distance parentCertificate vertex)
-
     distanceLowerBoundForEveryPath : ∀ {vertex pathLength} →
-      Path (root parentCertificate) vertex pathLength →
+      RootPath parentCertificate vertex pathLength →
       distance parentCertificate vertex ≤N pathLength
 
 open StrongBFSShortestPathCertificate public
@@ -184,10 +210,21 @@ shortestPathRealized :
   ∀ {Vertex}
     {parentCertificate : StrongBFSParentCertificate Vertex}
     (certificate : StrongBFSShortestPathCertificate parentCertificate)
-    vertex → IsNonRoot parentCertificate vertex →
-  Path certificate (root parentCertificate) vertex
-    (distance parentCertificate vertex)
-shortestPathRealized certificate = parentPathExists certificate
+    vertex → InGraph parentCertificate vertex →
+  RootPath parentCertificate vertex (distance parentCertificate vertex)
+shortestPathRealized {parentCertificate = parentCertificate}
+  certificate vertex inGraph =
+  rootPathAtAssignedDistance parentCertificate vertex inGraph
+
+assignedDistanceIsMinimal :
+  ∀ {Vertex}
+    {parentCertificate : StrongBFSParentCertificate Vertex}
+    (certificate : StrongBFSShortestPathCertificate parentCertificate)
+    {vertex pathLength} →
+  RootPath parentCertificate vertex pathLength →
+  distance parentCertificate vertex ≤N pathLength
+assignedDistanceIsMinimal certificate =
+  distanceLowerBoundForEveryPath certificate
 
 strongBFSParentCertificateLevel : ProofLevel
 strongBFSParentCertificateLevel = machineChecked
@@ -200,6 +237,9 @@ parentAcyclicityFromDistanceDescentLevel = machineChecked
 
 parentConnectivityFromDistanceDescentLevel : ProofLevel
 parentConnectivityFromDistanceDescentLevel = machineChecked
+
+rootPathAtAssignedDistanceLevel : ProofLevel
+rootPathAtAssignedDistanceLevel = machineChecked
 
 strongShortestPathCertificateLevel : ProofLevel
 strongShortestPathCertificateLevel = machineChecked
