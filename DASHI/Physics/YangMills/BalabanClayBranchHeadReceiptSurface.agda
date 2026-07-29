@@ -30,13 +30,16 @@ record BranchHeadAgdaReceipt : Set where
     bishopConstructiveRealBridgeChecked : Bool
     bishopElementarySeriesChecked : Bool
     bishopFrontierLedgerChecked : Bool
+    categoricityLpReuseLedgerChecked : Bool
 
     setoidBackendSpineChecked : Bool
     constructiveRealCapabilityHierarchyChecked : Bool
+    constructiveRealTransportCapabilitiesChecked : Bool
     constructiveRealCategoricityChecked : Bool
     bishopBackendChecked : Bool
     fastCauchyBackendChecked : Bool
     bishopFastCauchyEquivalenceSeamChecked : Bool
+    bishopFastCauchyCommonCompletionChecked : Bool
     bishopFastCauchyCategoricityInstanceChecked : Bool
     legacyEquivalenceAuthorityChecked : Bool
     canonicalBackendSelectionChecked : Bool
@@ -51,6 +54,7 @@ record BranchHeadAgdaReceipt : Set where
     wardBoxCertificateClosureChecked : Bool
     physicalT5TailMomentMeasureClosureChecked : Bool
     t5LpUniformIntegrabilityChecked : Bool
+    t5LpPhysicalMeasureAdapterChecked : Bool
     legacyGaugeRGMeasureReuseChecked : Bool
 
     changedModules : List String
@@ -69,6 +73,7 @@ record AuthoritativeBranchHeadEvidence
     constructiveProducerChecked : Set
     frontierLedgerChecked : Set
     configuredFrontierLedgerChecked : Set
+    focusedCategoricityLpReuseLedgerChecked : Set
     bishopGitlinkMatchesReceipt : Set
     bishopLibraryResolvesInAgda29 : Set
     bishopConstructiveRealBridgeTypechecks : Set
@@ -76,10 +81,10 @@ record AuthoritativeBranchHeadEvidence
     bishopFrontierLedgerTypechecks : Set
 
     realBackendSpineTypechecks : Set
-    capabilityHierarchyAndCategoricityTypecheck : Set
+    capabilityHierarchyTransportAndCategoricityTypecheck : Set
     bishopAndFastCauchyBackendsTypecheck : Set
     concreteEquivalenceSeamTypechecks : Set
-    bishopFastCauchyCategoricityInstanceTypechecks : Set
+    commonCompletionAndCategoricityInstanceTypechecks : Set
     legacyEquivalenceAuthorityTypechecks : Set
     canonicalBackendAndHoTTBoundaryTypecheck : Set
     bishopSeriesAndCoefficientAdaptersTypecheck : Set
@@ -88,7 +93,7 @@ record AuthoritativeBranchHeadEvidence
     t3MechanismAndGreenClosureTypecheck : Set
     t4WardAndBoxClosureTypecheck : Set
     t5PhysicalClosureTypecheck : Set
-    lpUniformIntegrabilityAndReuseAdaptersTypecheck : Set
+    lpUniformIntegrabilityPhysicalMeasureAndReuseAdaptersTypecheck : Set
 
     publicAggregateChecked : Set
     postulateFreeChangedSurface : Set
@@ -106,6 +111,9 @@ frontierLedgerAggregateTypecheckLevel = conditional
 
 configuredFrontierLedgerAggregateTypecheckLevel : ProofLevel
 configuredFrontierLedgerAggregateTypecheckLevel = conditional
+
+focusedCategoricityLpReuseLedgerTypecheckLevel : ProofLevel
+focusedCategoricityLpReuseLedgerTypecheckLevel = conditional
 
 bishopSubmodulePinReceiptLevel : ProofLevel
 bishopSubmodulePinReceiptLevel = conditional
