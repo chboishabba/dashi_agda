@@ -4,7 +4,8 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- PROVENANCE
 -- Authors: Loukas Grafakos; Rodolfo H. Torres; Jean-Michel Bony; Hajer
 -- Bahouri; Jean-Yves Chemin; Raphael Danchin; Errett Bishop; Douglas Bridges;
--- Zachary Murray; DASHI repository contributors.
+-- Zachary Murray; Augustin-Louis Cauchy; Agda standard-library contributors;
+-- DASHI repository contributors.
 -- Title: "A Multilinear Schur Test and Multiplier Operators"; "Calcul
 -- symbolique et propagation des singularites pour les equations aux derivees
 -- partielles non lineaires"; "Fourier Analysis and Nonlinear Partial
@@ -13,18 +14,17 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- archetype program".
 -- Venue/year: Journal of Functional Analysis 187 (2001), 1--24; Annales
 -- scientifiques de l'Ecole Normale Superieure 14 (1981); Springer, 1985 and
--- 2011; arXiv, 2022; DASHI formal development, 2026.
+-- 2011; arXiv, 2022; Agda standard library; DASHI formal development, 2026.
 -- DOI: 10.1006/jfan.2001.3804; 10.24033/asens.1404;
 -- 10.1007/978-3-642-16830-7; 10.1007/978-3-642-61667-9;
 -- 10.48550/arXiv.2205.08354; the repository program has no DOI.
--- Uses: unit auxiliary weights, the exact integer geometric envelope with
--- constant 128/93, the minimal base-two power antitonicity bridge, the three
--- Grafakos--Torres conditions, and domination of the signed trilinear form by
--- its positive kernel majorant.
--- Relationship: names every remaining inhabitant needed to promote symbolic
--- Check A to the cutoff-uniform output-relocation archetype.  It does not
--- claim the constructive power bridge, the positive-kernel summation, or the
--- signed-majorant identification are already closed.
+-- Uses: unit auxiliary weights, the exact rational geometric envelope with
+-- constant 128/93, the canonical positive kernel, all three normalized shell
+-- Schur conditions, and finite two-sided signed domination.
+-- Relationship: every theorem downstream of the concrete shell bridge is now
+-- proved.  The remaining bridge consists only of the two H^s-to-rational
+-- envelope comparisons and the literal Navier--Stokes coefficient's pointwise
+-- two-sided domination.  The concrete operator theorem remains fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -35,12 +35,19 @@ import DASHI.Physics.Closure.NSTriadKNGrafakosTorresThreeFunctionSchurProgram as
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightCheckA as Unit
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationIntegerGeometricEnvelope as Envelope
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge as PowerBridge
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Majorant
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightShellSchur as ShellSchur
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteSignedMajorant as Signed
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as Conditional
 
 record OutputRelocationCutoffUniformArchetypeCutset {s : Level} : Set (lsuc s) where
   field
     Scalar : Set s
 
+    concreteShellBridge : Set s
     concretePowerEnvelopeBridge : Set s
+    concreteCoefficientTwoSidedDomination : Set s
+
     positiveKernelMajorant : Set s
     kernelMajorantNonnegative : Set s
 
@@ -70,12 +77,29 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       Envelope.outputRelocationIntegerEnvelopeExponentsClosed ≡ true
     exactRationalGeometricConstantsClosed :
       Envelope.outputRelocationRationalGeometricConstantsClosed ≡ true
+    rationalFiniteCutoffSummationClosed :
+      Envelope.outputRelocationRationalFiniteCutoffSummationClosed ≡ true
+    positiveKernelConstructed :
+      Majorant.outputRelocationPositiveKernelConstructed ≡ true
+    positiveKernelSummable :
+      Majorant.outputRelocationPositiveKernelCutoffUniformlySummable ≡ true
+    threeUnitWeightShellConditionsClosed :
+      ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosed
+      ≡ true
+    finiteSignedDominationClosed :
+      Signed.finiteTwoSidedTriangleDominationClosed ≡ true
+    conditionalArchetypeTheoremClosed :
+      Conditional.outputRelocationConditionalArchetypeTheoremClosed ≡ true
+    allDownstreamOfShellBridgeClosed :
+      Conditional.outputRelocationAllDownstreamOfShellBridgeClosed ≡ true
     minimalPowerBridgeSpecified :
       PowerBridge.outputRelocationMinimalPowerBridgeSpecified ≡ true
     onlyTwoPowerDominationLemmasRequired :
       PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequired ≡ true
     concretePowerBridgeStillOpen :
       PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosed ≡ false
+    concreteShellBridgeStillOpen :
+      Conditional.outputRelocationConcreteShellBridgeInhabited ≡ false
 
 open OutputRelocationArchetypeProgramReceipt public
 
@@ -85,15 +109,38 @@ outputRelocationArchetypeProgramReceipt = receipt
   Unit.outputRelocationUnitWeightSymbolicCheckAIsTrue
   Envelope.outputRelocationIntegerEnvelopeExponentsClosedIsTrue
   Envelope.outputRelocationRationalGeometricConstantsClosedIsTrue
+  Envelope.outputRelocationRationalFiniteCutoffSummationClosedIsTrue
+  Majorant.outputRelocationPositiveKernelConstructedIsTrue
+  Majorant.outputRelocationPositiveKernelCutoffUniformlySummableIsTrue
+  ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosedIsTrue
+  Signed.finiteTwoSidedTriangleDominationClosedIsTrue
+  Conditional.outputRelocationConditionalArchetypeTheoremClosedIsTrue
+  Conditional.outputRelocationAllDownstreamOfShellBridgeClosedIsTrue
   PowerBridge.outputRelocationMinimalPowerBridgeSpecifiedIsTrue
   PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue
   PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosedIsFalse
+  Conditional.outputRelocationConcreteShellBridgeInhabitedIsFalse
 
 outputRelocationFinalArchetypeCutsetSpecified : Bool
 outputRelocationFinalArchetypeCutsetSpecified = true
 
+outputRelocationKernelMajorantConstructed : Bool
+outputRelocationKernelMajorantConstructed = true
+
 outputRelocationKernelMajorantSummable : Bool
-outputRelocationKernelMajorantSummable = false
+outputRelocationKernelMajorantSummable = true
+
+outputRelocationThreeUnitWeightShellSchurConditionsClosed : Bool
+outputRelocationThreeUnitWeightShellSchurConditionsClosed = true
+
+outputRelocationFiniteSignedDominationTheoremClosed : Bool
+outputRelocationFiniteSignedDominationTheoremClosed = true
+
+outputRelocationConditionalCutoffUniformArchetypeClosed : Bool
+outputRelocationConditionalCutoffUniformArchetypeClosed = true
+
+outputRelocationConcreteShellBridgeClosed : Bool
+outputRelocationConcreteShellBridgeClosed = false
 
 outputRelocationThreeConcreteSchurConditionsClosed : Bool
 outputRelocationThreeConcreteSchurConditionsClosed = false
@@ -108,9 +155,29 @@ outputRelocationFinalArchetypeCutsetSpecifiedIsTrue :
   outputRelocationFinalArchetypeCutsetSpecified ≡ true
 outputRelocationFinalArchetypeCutsetSpecifiedIsTrue = refl
 
-outputRelocationKernelMajorantSummableIsFalse :
-  outputRelocationKernelMajorantSummable ≡ false
-outputRelocationKernelMajorantSummableIsFalse = refl
+outputRelocationKernelMajorantConstructedIsTrue :
+  outputRelocationKernelMajorantConstructed ≡ true
+outputRelocationKernelMajorantConstructedIsTrue = refl
+
+outputRelocationKernelMajorantSummableIsTrue :
+  outputRelocationKernelMajorantSummable ≡ true
+outputRelocationKernelMajorantSummableIsTrue = refl
+
+outputRelocationThreeUnitWeightShellSchurConditionsClosedIsTrue :
+  outputRelocationThreeUnitWeightShellSchurConditionsClosed ≡ true
+outputRelocationThreeUnitWeightShellSchurConditionsClosedIsTrue = refl
+
+outputRelocationFiniteSignedDominationTheoremClosedIsTrue :
+  outputRelocationFiniteSignedDominationTheoremClosed ≡ true
+outputRelocationFiniteSignedDominationTheoremClosedIsTrue = refl
+
+outputRelocationConditionalCutoffUniformArchetypeClosedIsTrue :
+  outputRelocationConditionalCutoffUniformArchetypeClosed ≡ true
+outputRelocationConditionalCutoffUniformArchetypeClosedIsTrue = refl
+
+outputRelocationConcreteShellBridgeClosedIsFalse :
+  outputRelocationConcreteShellBridgeClosed ≡ false
+outputRelocationConcreteShellBridgeClosedIsFalse = refl
 
 outputRelocationThreeConcreteSchurConditionsClosedIsFalse :
   outputRelocationThreeConcreteSchurConditionsClosed ≡ false
