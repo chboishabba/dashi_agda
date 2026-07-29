@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4TOperationSmallFactorReductionExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -21,7 +22,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperation
 -- 355--392. DOI: 10.1007/BF01238433.
 --
 -- Target: equation (1.89), p. 387, pending direct theorem-text verification.
--- This module proves the finite integration step.  The remaining physical input
+-- This module proves the finite integration step. The remaining physical input
 -- is exactly the pointwise Wilson/Boltzmann suppression on the second-class fast
 -- fibre together with the normalized reference-fibre estimate.
 ------------------------------------------------------------------------
@@ -164,11 +165,17 @@ tOperationEquation189FromPointwiseSuppression :
             (one (equation189 reduction))
             (beta0 (equation189 reduction))))
         (p0 (equation189 reduction) scale)))
-tOperationEquation189FromPointwiseSuppression reduction scale selected slow
-  rewrite suppressionDefinition (equation189 reduction) scale
-        | suppressionAgrees reduction scale =
-  tOperationSmallFactorFromPointwiseSuppression
-    (pointwiseData reduction) scale selected slow
+tOperationEquation189FromPointwiseSuppression reduction scale selected slow =
+  subst
+    (λ upper → T.LessEqual (order (pointwiseData reduction))
+      (T.localizedTOperation _ scale selected slow
+        (T.oneFunctional _))
+      upper)
+    (trans
+      (suppressionAgrees reduction scale)
+      (suppressionDefinition (equation189 reduction) scale))
+    (tOperationSmallFactorFromPointwiseSuppression
+      (pointwiseData reduction) scale selected slow)
 
 finiteTOperationSuppressionSummationLevel : ProofLevel
 finiteTOperationSuppressionSummationLevel = machineChecked
@@ -176,9 +183,6 @@ finiteTOperationSuppressionSummationLevel = machineChecked
 equation189ReductionAssemblyLevel : ProofLevel
 equation189ReductionAssemblyLevel = machineChecked
 
--- The frontier is now the pointwise Boltzmann estimate and normalized reference
--- fibre, not finite summation.  These must be derived from the literal Wilson
--- action, Haar/Jacobian density and Bałaban's second-class component definition.
 equation189PointwiseWilsonSuppressionInputsLevel : ProofLevel
 equation189PointwiseWilsonSuppressionInputsLevel = conditional
 
