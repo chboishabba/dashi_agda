@@ -1,0 +1,44 @@
+module DASHI.Physics.YangMills.BalabanClayGate4July2026ResearchUpdateLedger where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayGate4July2026ResearchUpdateExact as Update
+
+froehlichOSMethodAuthorityLevel : ProofLevel
+froehlichOSMethodAuthorityLevel = verifiedLiterature
+
+osReconstructionIncludesCyclicVacuumLevel =
+  Update.osReconstructionIncludesCyclicVacuumLevel
+
+osCyclicityAdapterEngineeringCorrectionLevel =
+  Update.osCyclicityAdapterEngineeringCorrectionLevel
+
+balabanTheoremOneAbstractArchitectureLevel =
+  Update.balabanTheoremOneAbstractArchitectureLevel
+
+balabanEquation175PrimaryTextLevel =
+  Update.balabanEquation175PrimaryTextLevel
+
+bfsAlgorithmAndCorrectnessMethodLevel =
+  Update.bfsAlgorithmAndCorrectnessMethodLevel
+
+periodicVisitedSetBFSImplementationLevel =
+  Update.periodicVisitedSetBFSImplementationLevel
+
+os1PerPolymerA2MechanismLevel =
+  Update.os1PerPolymerA2MechanismLevel
+
+harrisMethodAuthorityLevel : ProofLevel
+harrisMethodAuthorityLevel = verifiedLiterature
+
+harrisPhysicalBoundaryApplicationLevel =
+  Update.harrisPhysicalBoundaryApplicationLevel
+
+philArchiveDefinitiveProofAcceptedAsAuthority =
+  Update.philArchiveDefinitiveProofAcceptedAsAuthority
+
+zenodoAnisotropyClaimAcceptedAsAuthority =
+  Update.zenodoAnisotropyClaimAcceptedAsAuthority
+
+july2026ResearchUpdateLedgerLevel : ProofLevel
+july2026ResearchUpdateLedgerLevel = machineChecked
