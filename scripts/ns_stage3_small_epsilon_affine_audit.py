@@ -110,19 +110,33 @@ def verify_row_factorisation() -> dict[str, object]:
     total_rows = len(separated) + len(overlap)
     raw_slots = total_rows * 3
     independent_families = len(set(separated.values())) + len(set(overlap.values()))
-    independent_slots = independent_families * 3
+    structural_independent_slots = independent_families * 3
+
+    resolved_family = "output-relocation"
+    resolved_family_count = 1
+    resolved_slots = resolved_family_count * 3
+    remaining_families = independent_families - resolved_family_count
+    remaining_slots = structural_independent_slots - resolved_slots
 
     assert total_rows == 21
     assert raw_slots == 63
     assert independent_families == 8
-    assert independent_slots == 24
+    assert structural_independent_slots == 24
+    assert resolved_family in set(separated.values())
+    assert resolved_slots == 3
+    assert remaining_families == 7
+    assert remaining_slots == 21
 
     return {
         "separatedRows": len(separated),
         "overlapRows": len(overlap),
         "rawCoefficientSlots": raw_slots,
-        "independentFamilies": independent_families,
-        "independentCoefficientSlots": independent_slots,
+        "structuralIndependentFamilies": independent_families,
+        "structuralIndependentCoefficientSlots": structural_independent_slots,
+        "resolvedFamily": resolved_family,
+        "resolvedCoefficientSlots": resolved_slots,
+        "remainingIndependentFamilies": remaining_families,
+        "remainingIndependentCoefficientSlots": remaining_slots,
     }
 
 
@@ -136,8 +150,11 @@ def main() -> int:
         f"factorised {factor['separatedRows']} separated plus "
         f"{factor['overlapRows']} overlap rows from "
         f"{factor['rawCoefficientSlots']} raw slots through "
-        f"{factor['independentFamilies']} families / "
-        f"{factor['independentCoefficientSlots']} independent slots"
+        f"{factor['structuralIndependentFamilies']} families / "
+        f"{factor['structuralIndependentCoefficientSlots']} structural slots, "
+        f"then resolved {factor['resolvedFamily']} to leave "
+        f"{factor['remainingIndependentFamilies']} families / "
+        f"{factor['remainingIndependentCoefficientSlots']} live slots"
     )
     return 0
 
