@@ -13,19 +13,17 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPhysicalAdjacencyAndBadRe
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact as Collar
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicReachCollarEnumerationExact as Reach
 import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as TOperation
+import DASHI.Physics.YangMills.BalabanClayGate4TOperationStructuralReductionExact as TStructural
 import DASHI.Physics.YangMills.BalabanClayGate4TOperationSmallFactorReductionExact as TReduction
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact as ROperation
 import DASHI.Physics.YangMills.BalabanClayGate4CountingAndLocalizationReuseExact as Reuse
 import DASHI.Physics.YangMills.BalabanClayGate4P0GrowthAbsorptionExact as Absorption
+import DASHI.Physics.YangMills.BalabanClayGate4PolynomialSuppressionRecurrenceExact as Recurrence
 import DASHI.Physics.YangMills.BalabanClayGate4CombinedSmallLargeNormAssemblyExact as Combined
 import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact as UV
 import DASHI.Physics.YangMills.BalabanClayGate4ROperationDecayTargetsExact as Targets
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryTargetAndAttachmentAuditExact as Audit
 import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact as External
-
-------------------------------------------------------------------------
--- Exact definitions, metadata and proof-bearing reuse.
-------------------------------------------------------------------------
 
 largeFieldLiteratureMetadataLevel = Gate4.largeFieldLiteratureMetadataLevel
 gate4ArchaeologyGraphLevel = Gate4.gate4ArchaeologyGraphLevel
@@ -100,6 +98,12 @@ finiteLocalTOperationDefinitionLevel =
   TOperation.finiteLocalTOperationDefinitionLevel
 finiteTOperationPositivityMonotonicityLevel =
   TOperation.finiteTOperationPositivityMonotonicityLevel
+finiteTOperationFoldCongruenceLevel =
+  TStructural.finiteTOperationFoldCongruenceLevel
+tOperationGaugeCovarianceReductionLevel =
+  TStructural.tOperationGaugeCovarianceReductionLevel
+tOperationEnlargementLocalityReductionLevel =
+  TStructural.tOperationEnlargementLocalityReductionLevel
 finiteTOperationSuppressionSummationLevel =
   TReduction.finiteTOperationSuppressionSummationLevel
 equation189ReductionAssemblyLevel =
@@ -124,6 +128,10 @@ existingRGLocalizationSupportWeightReuseLevel =
 p0GrowthTargetDefinitionLevel = Absorption.p0GrowthTargetDefinitionLevel
 largeFieldAbsorptionAssemblyLevel =
   Absorption.largeFieldAbsorptionAssemblyLevel
+polynomialSuppressionOneStepAssemblyLevel =
+  Recurrence.polynomialSuppressionOneStepAssemblyLevel
+polynomialSuppressionGeometricInductionLevel =
+  Recurrence.polynomialSuppressionGeometricInductionLevel
 
 combinedSmallLargeNormAssemblyLevel =
   Combined.combinedSmallLargeNormAssemblyLevel
@@ -143,10 +151,6 @@ externalAuditVocabularyLevel = External.externalAuditVocabularyLevel
 massGapAcyclicityReceiptDefinitionLevel =
   External.massGapAcyclicityReceiptDefinitionLevel
 
-------------------------------------------------------------------------
--- Remaining analytic/model-specific inhabitants. Imports never promote them.
-------------------------------------------------------------------------
-
 literalBoltzmannExponentialSuppressionInputsLevel =
   Wilson.literalBoltzmannExponentialSuppressionInputsLevel
 periodicBondFieldHolonomyRealizationLevel =
@@ -165,6 +169,12 @@ tOperationActivationRatioInputsLevel =
   TOperation.tOperationActivationRatioInputsLevel
 tOperationEquation189InhabitantLevel =
   TOperation.tOperationEquation189InhabitantLevel
+tOperationPointwiseGaugeInvarianceInputsLevel =
+  TStructural.tOperationPointwiseGaugeInvarianceInputsLevel
+tOperationPointwiseEnlargementLocalityInputsLevel =
+  TStructural.tOperationPointwiseEnlargementLocalityInputsLevel
+tOperationFastFibreDomainInputsLevel =
+  TStructural.tOperationFastFibreDomainInputsLevel
 equation189PointwiseWilsonSuppressionInputsLevel =
   TReduction.equation189PointwiseWilsonSuppressionInputsLevel
 normalizedReferenceFastFibreInputsLevel =
@@ -187,6 +197,12 @@ residualPolynomialEnvelopeInputsLevel =
   Absorption.residualPolynomialEnvelopeInputsLevel
 polynomialSuppressionCalculusInputsLevel =
   Absorption.polynomialSuppressionCalculusInputsLevel
+polynomialEnvelopeRatioInputsLevel =
+  Recurrence.polynomialEnvelopeRatioInputsLevel
+p0SuppressionRatioInputsLevel =
+  Recurrence.p0SuppressionRatioInputsLevel
+strictGeometricRateInputsLevel =
+  Recurrence.strictGeometricRateInputsLevel
 
 combinedPolymerRepresentationInputsLevel =
   Combined.combinedPolymerRepresentationInputsLevel
@@ -199,8 +215,6 @@ primaryEquationStatementVerificationLevel =
 primaryCountingLocalizationAttributionLevel =
   Audit.primaryCountingLocalizationAttributionLevel
 
--- Older target records remain useful compatibility surfaces, but they are not
--- inhabitants of the concrete finite T/R pipelines above.
 tOperationSmallFactorTargetLevel = Targets.tOperationSmallFactorTargetLevel
 rOperationPolymerDecayTargetLevel = Targets.rOperationPolymerDecayTargetLevel
 largeFieldAbsorptionTargetLevel = Targets.largeFieldAbsorptionTargetLevel
