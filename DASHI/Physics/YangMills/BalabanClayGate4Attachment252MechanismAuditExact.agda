@@ -109,5 +109,7 @@ attachmentMechanismEntries =
 attachmentMechanismAuditLevel : ProofLevel
 attachmentMechanismAuditLevel = machineChecked
 
+-- The Boolean fields above carry the fail-closed authority decision. The
+-- proof-level view is therefore conjectural, not a separate quarantine tag.
 locatorMechanismsAcceptedAsAuthority : ProofLevel
-locatorMechanismsAcceptedAsAuthority = quarantined
+locatorMechanismsAcceptedAsAuthority = conjectural
