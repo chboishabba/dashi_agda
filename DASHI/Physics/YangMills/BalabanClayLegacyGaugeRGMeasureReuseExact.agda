@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExac
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalTailMomentMeasureClosureExact as Closure
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanClayT5LpUniformIntegrabilityExact as Lp
+import DASHI.Physics.YangMills.BalabanClayT5LpPhysicalMeasureAdapterExact as LpAdapter
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as Thermo
 
 ------------------------------------------------------------------------
@@ -140,11 +141,17 @@ record ExistingGaugeRGMeasureReuse
     lpUniformIntegrabilityUpgrade :
       Lp.LpExpectationProducerUpgrade physicalExpectationProducer
 
+    lpPhysicalMeasureAdapter :
+      LpAdapter.LpPhysicalMeasureToOSGramData lpUniformIntegrabilityUpgrade
     physicalMeasureToGram :
       Gram.PhysicalMeasureToOSGramData Measure Observable Scalar
+    physicalMeasureToGramUsesLpAdapter :
+      physicalMeasureToGram
+      ≡ LpAdapter.lpPhysicalMeasureToGramData lpPhysicalMeasureAdapter
     gramConvergenceConsumesLpUniformIntegrability :
       Gram.convergenceData physicalMeasureToGram
-      ≡ Lp.lpRoutePhysicalMeasureConvergenceData lpUniformIntegrabilityUpgrade
+      ≡ LpAdapter.lpPhysicalMeasureConvergenceData
+          lpUniformIntegrabilityUpgrade
 
     gaugeFixedCoercivityFeedsCriticalMapRadius : Set
     wardCertificateNormalizesToExistingWardIdentity : Set
@@ -159,9 +166,13 @@ record ExistingLpReuseReceipt
         Measure Observable Scalar}
     (upgrade : Lp.LpExpectationProducerUpgrade producer) : Set₁ where
   field
+    lpGramAdapter : LpAdapter.LpPhysicalMeasureToOSGramData upgrade
     convergenceData : Gram.PhysicalMeasureConvergenceData Measure Observable Scalar
     convergenceDataExact :
-      convergenceData ≡ Lp.lpRoutePhysicalMeasureConvergenceData upgrade
+      convergenceData ≡ LpAdapter.lpPhysicalMeasureConvergenceData upgrade
+    gramDataExact :
+      LpAdapter.lpPhysicalMeasureToGramData lpGramAdapter
+      ≡ LpAdapter.lpPhysicalMeasureToGramData lpGramAdapter
     existingPhysicalExpectationAdapterUsed : Set
     existingOSGramFiniteSumAdapterUsed : Set
 
