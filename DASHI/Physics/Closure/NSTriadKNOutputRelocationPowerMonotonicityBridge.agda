@@ -11,15 +11,13 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge wh
 -- continuation; Agda standard library; DASHI formal development, 2026.
 -- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354; the repository
 -- derivation has no DOI.
--- Uses: exact rational finite geometric envelopes, monotonicity of x |-> 2^x,
--- order reversal under negation, repeated-addition natural scaling, and the
--- exact anchors 2^(-2n)=(1/4)^n and 2^(-5n)=(1/32)^n.
--- Relationship: proves lowShellDominatedByQuarter and
--- gapDominatedByThirtySecond from coherent base-two power data.  The power
--- operation is required to map zero to one and one to two; natural scaling is
--- pinned recursively, preventing an arbitrary monotone scale function from
--- satisfying the interface.  Concrete constructive-real power data and the
--- literal coefficient majorant remain separate inhabitants.
+-- Uses: exact rational finite geometric envelopes, positivity and monotonicity
+-- of x |-> 2^x, order reversal under negation, repeated-addition natural
+-- scaling, and the exact anchors 2^(-2n)=(1/4)^n and 2^(-5n)=(1/32)^n.
+-- Relationship: proves both shell comparisons and nonnegativity of both shell
+-- factors from coherent base-two power data.  The power operation is pinned at
+-- zero and one, and natural scaling is recursively defined.  Concrete power
+-- data and the literal absolute coefficient estimate remain separate inputs.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -49,6 +47,7 @@ record BaseTwoExponentAntitoneCarrier {r : Level} : Set (lsuc r) where
     twoStrictlyAboveOne : one < two
     exponentOrderReversesAfterNegation :
       ∀ {left right} → left ≤ right → negate right ≤ negate left
+    twoPowNonnegative : ∀ exponent → zero ≤ twoPow exponent
     twoPowMonotone :
       ∀ {left right} → left ≤ right → twoPow left ≤ twoPow right
     twoPowZero : twoPow zero ≡ one
@@ -115,6 +114,26 @@ gapShellFactor {C = C} anchors decay gap =
     (negate C
       (scaleByNat anchors (gapDecayExponent decay) gap))
 
+lowShellFactorNonnegative : ∀ {r}
+    {C : BaseTwoExponentAntitoneCarrier {r}}
+    (anchors : BaseTwoIntegerPowerAnchors C)
+    (decay : OutputRelocationDecayExponentData anchors)
+    shell →
+  _≤_ C (zero C) (lowShellFactor anchors decay shell)
+lowShellFactorNonnegative {C = C} anchors decay shell =
+  twoPowNonnegative C
+    (negate C (scaleByNat anchors (lowDecayExponent decay) shell))
+
+gapShellFactorNonnegative : ∀ {r}
+    {C : BaseTwoExponentAntitoneCarrier {r}}
+    (anchors : BaseTwoIntegerPowerAnchors C)
+    (decay : OutputRelocationDecayExponentData anchors)
+    gap →
+  _≤_ C (zero C) (gapShellFactor anchors decay gap)
+gapShellFactorNonnegative {C = C} anchors decay gap =
+  twoPowNonnegative C
+    (negate C (scaleByNat anchors (gapDecayExponent decay) gap))
+
 lowShellDominatedByQuarter : ∀ {r}
     {C : BaseTwoExponentAntitoneCarrier {r}}
     (anchors : BaseTwoIntegerPowerAnchors C)
@@ -158,6 +177,8 @@ record OutputRelocationPowerEnvelopeBridge {r : Level}
   field
     lowFactor gapFactor : Nat → Real C
     quarterEnvelope thirtySecondEnvelope : Nat → Real C
+    lowFactorNonnegative : ∀ shell → _≤_ C (zero C) (lowFactor shell)
+    gapFactorNonnegative : ∀ gap → _≤_ C (zero C) (gapFactor gap)
     lowFactorDominated : ∀ shell →
       _≤_ C (lowFactor shell) (quarterEnvelope shell)
     gapFactorDominated : ∀ gap →
@@ -175,6 +196,8 @@ derivedOutputRelocationPowerEnvelopeBridge anchors decay = record
   ; gapFactor = gapShellFactor anchors decay
   ; quarterEnvelope = quarterPower anchors
   ; thirtySecondEnvelope = thirtySecondPower anchors
+  ; lowFactorNonnegative = lowShellFactorNonnegative anchors decay
+  ; gapFactorNonnegative = gapShellFactorNonnegative anchors decay
   ; lowFactorDominated = lowShellDominatedByQuarter anchors decay
   ; gapFactorDominated = gapDominatedByThirtySecond anchors decay
   }
@@ -217,6 +240,9 @@ outputRelocationBaseTwoPowerMeaningConstrained = true
 outputRelocationNaturalScalingRecursivelyPinned : Bool
 outputRelocationNaturalScalingRecursivelyPinned = true
 
+outputRelocationFactorNonnegativityDerived : Bool
+outputRelocationFactorNonnegativityDerived = true
+
 outputRelocationTwoPowerDominationTheoremsClosed : Bool
 outputRelocationTwoPowerDominationTheoremsClosed = true
 
@@ -249,6 +275,10 @@ outputRelocationBaseTwoPowerMeaningConstrainedIsTrue = refl
 outputRelocationNaturalScalingRecursivelyPinnedIsTrue :
   outputRelocationNaturalScalingRecursivelyPinned ≡ true
 outputRelocationNaturalScalingRecursivelyPinnedIsTrue = refl
+
+outputRelocationFactorNonnegativityDerivedIsTrue :
+  outputRelocationFactorNonnegativityDerived ≡ true
+outputRelocationFactorNonnegativityDerivedIsTrue = refl
 
 outputRelocationTwoPowerDominationTheoremsClosedIsTrue :
   outputRelocationTwoPowerDominationTheoremsClosed ≡ true
