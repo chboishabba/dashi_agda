@@ -126,18 +126,35 @@ inverseCouplingGrowsLinearly {stepData = stepData} iteration (suc scale) =
         (inverseCouplingGrowsLinearly iteration scale))
       (stepLowerBound iteration scale))
 
+infix 4 _≤ᴺ_
+data _≤ᴺ_ : Nat → Nat → Set where
+  zero≤ : ∀ {upper} → zero ≤ᴺ upper
+  suc≤suc : ∀ {lower upper} → lower ≤ᴺ upper → suc lower ≤ᴺ suc upper
+
+natLessEqualReflexive : ∀ value → value ≤ᴺ value
+natLessEqualReflexive zero = zero≤
+natLessEqualReflexive (suc value) = suc≤suc (natLessEqualReflexive value)
+
+natLessEqualTransitive : ∀ {left middle right} →
+  left ≤ᴺ middle → middle ≤ᴺ right → left ≤ᴺ right
+natLessEqualTransitive zero≤ upper = zero≤
+natLessEqualTransitive (suc≤suc lower) (suc≤suc upper) =
+  suc≤suc (natLessEqualTransitive lower upper)
+
 record FiniteWeakCouplingWindow (Bound : Set) : Set₁ where
   field
     cutoff : Nat
-    WithinWindow : Nat → Set
     largeFieldContribution smallFieldBudget : Nat → Bound
     LessEqual : Bound → Bound → Set
-    everyScaleThroughCutoffInside : ∀ scale → Set
-    absorbedInsideWindow : ∀ scale →
-      WithinWindow scale →
+
+    absorbedThroughCutoff : ∀ scale →
+      scale ≤ᴺ cutoff →
       LessEqual (largeFieldContribution scale) (smallFieldBudget scale)
 
 open FiniteWeakCouplingWindow public
+
+WithinWindow : ∀ {Bound} → FiniteWeakCouplingWindow Bound → Nat → Set
+WithinWindow window scale = scale ≤ᴺ cutoff window
 
 windowedAbsorption :
   ∀ {Bound} (window : FiniteWeakCouplingWindow Bound) scale →
@@ -145,13 +162,16 @@ windowedAbsorption :
   LessEqual window
     (largeFieldContribution window scale)
     (smallFieldBudget window scale)
-windowedAbsorption = absorbedInsideWindow
+windowedAbsorption = absorbedThroughCutoff
 
 cauchyLargeFieldRemainderAssemblyLevel : ProofLevel
 cauchyLargeFieldRemainderAssemblyLevel = machineChecked
 
 inverseCouplingLinearGrowthInductionLevel : ProofLevel
 inverseCouplingLinearGrowthInductionLevel = machineChecked
+
+finiteWindowNaturalOrderLevel : ProofLevel
+finiteWindowNaturalOrderLevel = machineChecked
 
 finiteWeakCouplingWindowAssemblyLevel : ProofLevel
 finiteWeakCouplingWindowAssemblyLevel = machineChecked
