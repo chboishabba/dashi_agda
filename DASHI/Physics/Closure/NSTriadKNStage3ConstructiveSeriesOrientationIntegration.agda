@@ -7,7 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- Gabor Pataki; Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin; Raphael
 -- Danchin; DASHI repository contributors.
 -- Title: "Stage-3 constructive-series candidate, literal Schur-shell
--- substitution, and affine infeasibility integration".
+-- substitution, affine falsification, and unit-weight Check A integration".
 -- Venue/year: Reals-in-agda formal development, 2015; Constructive Analysis in
 -- the Agda Proof Assistant, 2022; Logical Methods in Computer Science 9(1:1),
 -- 2013; Journal of Functional Analysis 187 (2001), 1--24 and 199 (2003),
@@ -21,12 +21,11 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- integration receipt has no DOI.
 -- Uses: constructive-real candidate comparison, literal power-law Schur
 -- orientation, the closed physical exponent identity, exact shell
--- substitution, the symbolic affine epsilon-family substitution, and the
--- exact primal/dual classification of the current homogeneity-preserving
--- ansatz.
--- Relationship: closes the highest-alpha algebraic decision.  The current
--- ansatz is proved infeasible before constructive dyadic summation is built.
--- This does not falsify relaxed, condition-dependent, or non-affine weights.
+-- substitution, exact falsification of the unnecessary all-three-homogeneity
+-- ansatz, and the constant-unit-weight Schur specialization.
+-- Relationship: closes symbolic Check A with unit weights.  The source-style
+-- affine construction is rejected, not the output-relocation archetype.  The
+-- next proof-critical leaf is constructive cutoff-uniform dyadic summation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +37,7 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationWeightedExponentIdentity a
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationLiteralShellSubstitution as Shells
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFamilySubstitution as AffineRows
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFarkasDecision as Decision
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightCheckA as Unit
 
 record ConstructiveSeriesOrientationReceipt : Set where
   constructor receipt
@@ -70,19 +70,21 @@ record ConstructiveSeriesOrientationReceipt : Set where
       Decision.outputRelocationBaseSystemClassified ≡ true
     directionSystemClassified :
       Decision.outputRelocationDirectionSystemClassified ≡ true
-    commonIntervalComputed :
+    sourceStyleCommonIntervalComputed :
       Decision.outputRelocationCommonIntervalComputed ≡ true
-    currentAffineAnsatzInfeasible :
+    sourceStyleAffineAnsatzInfeasible :
       Decision.currentHomogeneityPreservingAffineAnsatzInfeasible ≡ true
     noOverbroadFalsificationClaim :
       Decision.allPossibleThreeWeightAnsatzesInfeasible ≡ false
+    unitWeightsAllowed : Unit.unitWeightsAllowedBySchurCarrier ≡ true
+    unitWeightRowsReduced :
+      Unit.outputRelocationUnitWeightSixRowsReduced ≡ true
+    unitWeightSymbolicCheckAClosed :
+      Unit.outputRelocationUnitWeightSymbolicCheckA ≡ true
     constructiveTailStillOpen :
-      Shells.outputRelocationConstructiveDyadicTailClosed ≡ false
-    admissibleNumericFamilyUnavailable :
-      AffineRows.outputRelocationNumericBasesAndDirectionsSupplied ≡ false
-    positiveIntervalIsEmpty :
-      Decision.outputRelocationCommonPositiveIntervalNonempty ≡ false
-    symbolicCheckAFails : Decision.outputRelocationSymbolicCheckA ≡ false
+      Unit.outputRelocationUnitWeightConstructiveDyadicTailClosed ≡ false
+    analyticArchetypeStillOpen :
+      Unit.outputRelocationUnitWeightAnalyticArchetypeClosed ≡ false
 
 open ConstructiveSeriesOrientationReceipt public
 
@@ -106,10 +108,11 @@ constructiveSeriesOrientationReceipt = receipt
   Decision.outputRelocationCommonIntervalComputedIsTrue
   Decision.currentHomogeneityPreservingAffineAnsatzInfeasibleIsTrue
   Decision.allPossibleThreeWeightAnsatzesInfeasibleIsFalse
-  Shells.outputRelocationConstructiveDyadicTailClosedIsFalse
-  AffineRows.outputRelocationNumericBasesAndDirectionsSuppliedIsFalse
-  Decision.outputRelocationCommonPositiveIntervalNonemptyIsFalse
-  Decision.outputRelocationSymbolicCheckAIsFalse
+  Unit.unitWeightsAllowedBySchurCarrierIsTrue
+  Unit.outputRelocationUnitWeightSixRowsReducedIsTrue
+  Unit.outputRelocationUnitWeightSymbolicCheckAIsTrue
+  Unit.outputRelocationUnitWeightConstructiveDyadicTailClosedIsFalse
+  Unit.outputRelocationUnitWeightAnalyticArchetypeClosedIsFalse
 
 constructiveRealCandidateComparisonClosed : Bool
 constructiveRealCandidateComparisonClosed = true
@@ -123,11 +126,17 @@ outputRelocationAffineEpsilonSlopesClosed = true
 outputRelocationHighestAlphaDecisionClosed : Bool
 outputRelocationHighestAlphaDecisionClosed = true
 
-outputRelocationCurrentAffineAnsatzInfeasible : Bool
-outputRelocationCurrentAffineAnsatzInfeasible = true
+outputRelocationSourceStyleAffineAnsatzInfeasible : Bool
+outputRelocationSourceStyleAffineAnsatzInfeasible = true
+
+outputRelocationUnitWeightSymbolicCheckAClosed : Bool
+outputRelocationUnitWeightSymbolicCheckAClosed = true
+
+nextLeafIsConstructiveDyadicTail : Bool
+nextLeafIsConstructiveDyadicTail = true
 
 nextLeafIsWeightAnsatzRevision : Bool
-nextLeafIsWeightAnsatzRevision = true
+nextLeafIsWeightAnsatzRevision = false
 
 nextLeafIsNumericBasesDirectionsAndDyadicTail : Bool
 nextLeafIsNumericBasesDirectionsAndDyadicTail = false
@@ -151,12 +160,20 @@ outputRelocationHighestAlphaDecisionClosedIsTrue :
   outputRelocationHighestAlphaDecisionClosed ≡ true
 outputRelocationHighestAlphaDecisionClosedIsTrue = refl
 
-outputRelocationCurrentAffineAnsatzInfeasibleIsTrue :
-  outputRelocationCurrentAffineAnsatzInfeasible ≡ true
-outputRelocationCurrentAffineAnsatzInfeasibleIsTrue = refl
+outputRelocationSourceStyleAffineAnsatzInfeasibleIsTrue :
+  outputRelocationSourceStyleAffineAnsatzInfeasible ≡ true
+outputRelocationSourceStyleAffineAnsatzInfeasibleIsTrue = refl
 
-nextLeafIsWeightAnsatzRevisionIsTrue : nextLeafIsWeightAnsatzRevision ≡ true
-nextLeafIsWeightAnsatzRevisionIsTrue = refl
+outputRelocationUnitWeightSymbolicCheckAClosedIsTrue :
+  outputRelocationUnitWeightSymbolicCheckAClosed ≡ true
+outputRelocationUnitWeightSymbolicCheckAClosedIsTrue = refl
+
+nextLeafIsConstructiveDyadicTailIsTrue :
+  nextLeafIsConstructiveDyadicTail ≡ true
+nextLeafIsConstructiveDyadicTailIsTrue = refl
+
+nextLeafIsWeightAnsatzRevisionIsFalse : nextLeafIsWeightAnsatzRevision ≡ false
+nextLeafIsWeightAnsatzRevisionIsFalse = refl
 
 nextLeafIsNumericBasesDirectionsAndDyadicTailIsFalse :
   nextLeafIsNumericBasesDirectionsAndDyadicTail ≡ false
