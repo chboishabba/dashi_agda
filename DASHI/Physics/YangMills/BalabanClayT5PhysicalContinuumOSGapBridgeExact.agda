@@ -1,14 +1,15 @@
 module DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (zero)
 open import Data.Rational using (_≤_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact as UV
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Physical
-import DASHI.Physics.YangMills.BalabanClayT5OSGramClosedPropertyExact as Gram
+import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as OS
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact as Mass
 import DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact as Existing
@@ -53,33 +54,32 @@ record ReconstructedTransferTheory
 open ReconstructedTransferTheory public
 
 record PhysicalContinuumOSGapData
-    (State Bound Measure Observable Schwinger Scalar
-      TestFamily Hilbert Vector : Set) : Set₁ where
+    (State Bound Measure Observable Schwinger Scalar Hilbert Vector : Set) : Set₁ where
   field
     uvPackage : UV.Gate4UVCompletionPackage State Bound
 
-    physicalMeasureConvergence :
-      Physical.PhysicalMeasureConvergenceData Measure Observable Scalar
+    physicalGramData :
+      Physical.PhysicalMeasureToOSGramData Measure Observable Scalar
 
     continuumClosure : Limit.FiniteToContinuumOSClosure Measure Schwinger
 
     physicalMeasureSequenceAgrees : ∀ cutoff →
-      Physical.measureSequence physicalMeasureConvergence cutoff
+      Physical.measureSequence
+        (Physical.convergenceData physicalGramData) cutoff
       ≡ Limit.finiteMeasures continuumClosure cutoff
 
     physicalContinuumMeasureAgrees :
-      Physical.continuumMeasure physicalMeasureConvergence
+      Physical.continuumMeasure
+        (Physical.convergenceData physicalGramData)
       ≡ Limit.continuumMeasure continuumClosure
 
-    gramTopology :
-      Gram.MeasureTopologyControlsOSGram Measure Schwinger TestFamily Scalar
-
-    measureLimitAgrees :
-      Gram.measureLimit gramTopology ≡ Limit.measureLimit continuumClosure
-
-    finiteReflectionPositive : ∀ cutoff →
-      Gram.MeasureReflectionPositive gramTopology
-        (Limit.finiteMeasures continuumClosure cutoff)
+    gramReflectionImpliesClosureReflection :
+      OS.GramReflectionPositive
+        (Physical.physicalMeasureTopologyControlsOSGram physicalGramData)
+        (Limit.continuumMeasure continuumClosure) →
+      Limit.ReflectionPositive continuumClosure
+        (Limit.schwinger continuumClosure
+          (Limit.continuumMeasure continuumClosure))
 
     reconstructedTheory : ReconstructedTransferTheory Hilbert Vector Scalar
 
@@ -106,48 +106,45 @@ record PhysicalContinuumOSGapData
 open PhysicalContinuumOSGapData public
 
 continuumOSAxiomsFromPhysicalClosure :
-  ∀ {State Bound Measure Observable Schwinger Scalar
-      TestFamily Hilbert Vector}
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
     (dataSet : PhysicalContinuumOSGapData
-      State Bound Measure Observable Schwinger Scalar
-      TestFamily Hilbert Vector) →
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
   Existing.ContinuumOSAxioms (continuumClosure dataSet)
 continuumOSAxiomsFromPhysicalClosure dataSet =
   Existing.assembleContinuumOSAxioms (continuumClosure dataSet)
 
-continuumReflectionPositiveFromGramTopology :
-  ∀ {State Bound Measure Observable Schwinger Scalar
-      TestFamily Hilbert Vector}
+physicalGramReflectionPositiveAtClosure :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
     (dataSet : PhysicalContinuumOSGapData
-      State Bound Measure Observable Schwinger Scalar
-      TestFamily Hilbert Vector) →
-  Gram.MeasureReflectionPositive (gramTopology dataSet)
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  OS.GramReflectionPositive
+    (Physical.physicalMeasureTopologyControlsOSGram
+      (physicalGramData dataSet))
     (Limit.continuumMeasure (continuumClosure dataSet))
-continuumReflectionPositiveFromGramTopology dataSet =
-  Gram.measureReflectionPositiveClosed
-    (gramTopology dataSet)
-    (Limit.finiteMeasures (continuumClosure dataSet))
-    (Limit.continuumMeasure (continuumClosure dataSet))
-    (transportConvergence
-      (measureLimitAgrees dataSet)
-      (Limit.continuumIsLimit (continuumClosure dataSet)))
-    (finiteReflectionPositive dataSet)
-  where
-  transportConvergence :
-    ∀ {Measure : Set}
-      {left right : Limit.SequentialLimit Measure}
-      {sequence target} →
-    left ≡ right →
-    Limit.Converges right sequence target →
-    Limit.Converges left sequence target
-  transportConvergence refl proof = proof
+physicalGramReflectionPositiveAtClosure dataSet =
+  subst
+    (OS.GramReflectionPositive
+      (Physical.physicalMeasureTopologyControlsOSGram
+        (physicalGramData dataSet)))
+    (physicalContinuumMeasureAgrees dataSet)
+    (Physical.physicalContinuumReflectionPositive
+      (physicalGramData dataSet))
+
+physicalContinuumReflectionPositive :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
+    (dataSet : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  Limit.ReflectionPositive (continuumClosure dataSet)
+    (Limit.schwinger (continuumClosure dataSet)
+      (Limit.continuumMeasure (continuumClosure dataSet)))
+physicalContinuumReflectionPositive dataSet =
+  gramReflectionImpliesClosureReflection dataSet
+    (physicalGramReflectionPositiveAtClosure dataSet)
 
 constructedPhysicalMassTransport :
-  ∀ {State Bound Measure Observable Schwinger Scalar
-      TestFamily Hilbert Vector}
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
     (dataSet : PhysicalContinuumOSGapData
-      State Bound Measure Observable Schwinger Scalar
-      TestFamily Hilbert Vector) →
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
   Mass.survivingMass (physicalInterlacing dataSet)
   ≤ Mass.physicalGap (physicalInterlacing dataSet) zero
 constructedPhysicalMassTransport dataSet =
@@ -156,8 +153,11 @@ constructedPhysicalMassTransport dataSet =
 physicalMeasurePresentationAgreementLevel : ProofLevel
 physicalMeasurePresentationAgreementLevel = machineChecked
 
-physicalMeasureToGramClosureAssemblyLevel : ProofLevel
-physicalMeasureToGramClosureAssemblyLevel = machineChecked
+physicalMeasureToGramClosureReuseLevel : ProofLevel
+physicalMeasureToGramClosureReuseLevel = machineChecked
+
+physicalContinuumReflectionPositivityAssemblyLevel : ProofLevel
+physicalContinuumReflectionPositivityAssemblyLevel = machineChecked
 
 physicalContinuumOSAxiomAssemblyLevel : ProofLevel
 physicalContinuumOSAxiomAssemblyLevel = machineChecked
@@ -168,8 +168,11 @@ physicalGapToInterlacingAssemblyLevel = machineChecked
 physicalUVToContinuumMeasureInputsLevel : ProofLevel
 physicalUVToContinuumMeasureInputsLevel = conditional
 
-physicalMeasureToGramTopologyInputsLevel : ProofLevel
-physicalMeasureToGramTopologyInputsLevel = conditional
+physicalExpectationConvergenceInputsLevel : ProofLevel
+physicalExpectationConvergenceInputsLevel = conditional
+
+physicalGramToClosureReflectionMeaningInputsLevel : ProofLevel
+physicalGramToClosureReflectionMeaningInputsLevel = conditional
 
 uniformClusteringOS4InputsLevel : ProofLevel
 uniformClusteringOS4InputsLevel = conditional
