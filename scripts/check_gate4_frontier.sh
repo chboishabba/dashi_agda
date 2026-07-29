@@ -4,6 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
+  DASHI/Physics/YangMills/BalabanClayGate4RationalPositiveMassReciprocalExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4TCompensatedSixFactorBudgetExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4HaarDeterminantRelativeLossReuseExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FlatReferencePositiveWitnessExact.agda \
