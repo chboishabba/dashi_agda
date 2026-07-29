@@ -3,21 +3,21 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge wh
 ------------------------------------------------------------------------
 -- PROVENANCE
 -- Authors: Errett Bishop; Douglas Bridges; Zachary Murray; Viktor Csimma;
--- DASHI repository contributors.
+-- Agda standard-library contributors; DASHI repository contributors.
 -- Title: "Constructive Analysis"; "Constructive Analysis in the Agda Proof
 -- Assistant"; and "Minimal base-two exponent-antitonicity bridge for output
 -- relocation".
 -- Venue/year: Springer, 1985; arXiv, 2022; maintained constructive-real
--- continuation and DASHI formal development, 2026.
+-- continuation; Agda standard library; DASHI formal development, 2026.
 -- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354; the repository
 -- bridge has no DOI.
--- Uses: ordered constructive reals, the pinned Murray thesis snapshot, and the
--- integer geometric envelope already derived for output relocation.
--- Relationship: replaces the earlier broad fixed-base exponential/geometric
--- API target by exactly two domination lemmas: the low-shell real power is
--- bounded by 4^-j and the gap real power by 32^-d.  It does not claim that the
--- pinned external repository already exposes these lemmas or builds against
--- the current DASHI toolchain.
+-- Uses: the pinned constructive-real candidate audit and the exact rational
+-- finite geometric envelope proved internally in DASHI.
+-- Relationship: rational/integer exponentiation now closes all finite sums.
+-- It does not by itself compare a non-integral H^s factor 2^(-delta n) with
+-- the rational sequences (1/4)^n and (1/32)^n.  The power layer therefore has
+-- exactly two remaining comparison lemmas.  Literal signed-coefficient
+-- domination is a separate operator bridge, not a third power lemma.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -28,6 +28,8 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealPowerBridge as Power
 import DASHI.Physics.Closure.NSTriadKNMurrayThesisCommitSourceInspection as Murray
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationIntegerGeometricEnvelope as Envelope
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Rational
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
 
 record BaseTwoExponentAntitoneCarrier {r : Level} : Set (lsuc r) where
   field
@@ -83,8 +85,14 @@ record PowerMonotonicityBridgeReceipt : Set where
       Envelope.outputRelocationIntegerEnvelopeExponentsClosed ≡ true
     rationalConstantsClosed :
       Envelope.outputRelocationRationalGeometricConstantsClosed ≡ true
+    rationalFiniteSummationClosed :
+      Rational.rationalFiniteGeometricEnvelopeClosed ≡ true
     arbitraryRatioSeriesNotRequired :
       Envelope.outputRelocationArbitraryRatioGeometricTheoremRequired ≡ false
+    orderedEmbeddingClosureTheoremClosed :
+      Embedded.orderedRationalEmbeddingClosureTheoremClosed ≡ true
+    concreteOrderedCarrierAdapterStillOpen :
+      Embedded.concreteOrderedCarrierAdapterClosed ≡ false
 
 open PowerMonotonicityBridgeReceipt public
 
@@ -94,7 +102,10 @@ powerMonotonicityBridgeReceipt = receipt
   Power.stage3ConstructiveRealPowerAdapterClosedIsFalse
   Envelope.outputRelocationIntegerEnvelopeExponentsClosedIsTrue
   Envelope.outputRelocationRationalGeometricConstantsClosedIsTrue
+  Rational.rationalFiniteGeometricEnvelopeClosedIsTrue
   Envelope.outputRelocationArbitraryRatioGeometricTheoremRequiredIsFalse
+  Embedded.orderedRationalEmbeddingClosureTheoremClosedIsTrue
+  Embedded.concreteOrderedCarrierAdapterClosedIsFalse
 
 outputRelocationMinimalPowerBridgeSpecified : Bool
 outputRelocationMinimalPowerBridgeSpecified = true
@@ -102,8 +113,17 @@ outputRelocationMinimalPowerBridgeSpecified = true
 outputRelocationOnlyTwoPowerDominationLemmasRequired : Bool
 outputRelocationOnlyTwoPowerDominationLemmasRequired = true
 
+outputRelocationRationalFiniteSummationClosed : Bool
+outputRelocationRationalFiniteSummationClosed = true
+
+outputRelocationIntegerPowersAloneCloseNonIntegralHsComparison : Bool
+outputRelocationIntegerPowersAloneCloseNonIntegralHsComparison = false
+
 outputRelocationGeneralRealRatioSeriesRequired : Bool
 outputRelocationGeneralRealRatioSeriesRequired = false
+
+outputRelocationConcreteOrderedCarrierAdapterClosed : Bool
+outputRelocationConcreteOrderedCarrierAdapterClosed = false
 
 outputRelocationConcretePowerEnvelopeBridgeClosed : Bool
 outputRelocationConcretePowerEnvelopeBridgeClosed = false
@@ -116,9 +136,21 @@ outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue :
   outputRelocationOnlyTwoPowerDominationLemmasRequired ≡ true
 outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue = refl
 
+outputRelocationRationalFiniteSummationClosedIsTrue :
+  outputRelocationRationalFiniteSummationClosed ≡ true
+outputRelocationRationalFiniteSummationClosedIsTrue = refl
+
+outputRelocationIntegerPowersAloneCloseNonIntegralHsComparisonIsFalse :
+  outputRelocationIntegerPowersAloneCloseNonIntegralHsComparison ≡ false
+outputRelocationIntegerPowersAloneCloseNonIntegralHsComparisonIsFalse = refl
+
 outputRelocationGeneralRealRatioSeriesRequiredIsFalse :
   outputRelocationGeneralRealRatioSeriesRequired ≡ false
 outputRelocationGeneralRealRatioSeriesRequiredIsFalse = refl
+
+outputRelocationConcreteOrderedCarrierAdapterClosedIsFalse :
+  outputRelocationConcreteOrderedCarrierAdapterClosed ≡ false
+outputRelocationConcreteOrderedCarrierAdapterClosedIsFalse = refl
 
 outputRelocationConcretePowerEnvelopeBridgeClosedIsFalse :
   outputRelocationConcretePowerEnvelopeBridgeClosed ≡ false
