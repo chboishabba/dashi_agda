@@ -10,6 +10,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Dec)
 
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Gap
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as Wilson
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPhysicalAdjacencyAndBadReachExact as Physical
@@ -31,8 +32,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPhysicalAdjacencyAndBadRe
 -- Communications in Mathematical Physics 122 (1989), 175--202.
 -- DOI: 10.1007/BF01257412.
 --
--- Hall owns the SU(2)/unit-quaternion group formula.  Bałaban owns the lattice
--- gauge and large-field architecture.  The rational polynomial identities and
+-- Hall owns the SU(2)/unit-quaternion group formula. Bałaban owns the lattice
+-- gauge and large-field architecture. The rational polynomial identities and
 -- periodic plaquette instance below are exact DASHI constructions.
 ------------------------------------------------------------------------
 
@@ -212,7 +213,7 @@ literalPeriodicPlaquetteWilsonData :
     Scale
     (PlaquetteHolonomyConfiguration n)
     (PlaquetteGauge n)
-    (DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact.PeriodicBlock n)
+    (Periodic.PeriodicBlock n)
     (Plaquette.PeriodicPlaquette n)
 literalPeriodicPlaquetteWilsonData {n = n} parameters = record
   { Wilson.LiteralWilsonLargeFieldData.transform =
