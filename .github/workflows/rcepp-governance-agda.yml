@@ -1,4 +1,4 @@
-name: RCEPP governance Agda
+name: RCEPP and revolutionary governance Agda
 
 on:
   pull_request:
@@ -10,6 +10,11 @@ on:
       - 'DASHI/Governance/RelationalMandateFibre.agda'
       - 'DASHI/Governance/SituatedConstituency.agda'
       - 'DASHI/Governance/TransitionResidual.agda'
+      - 'DASHI/Governance/RevolutionarySourceAtlas.agda'
+      - 'DASHI/Governance/RevolutionaryPracticeBraid.agda'
+      - 'DASHI/Governance/TraumaMemorySublationBoundary.agda'
+      - 'DASHI/Governance/ComparativeCrisisClimateAtlas.agda'
+      - 'DASHI/Governance/RevolutionaryAdjunctRegression.agda'
       - 'DASHI/Governance/Sudan/RCEPPSourceBoundary.agda'
       - 'DASHI/Governance/Sudan/RCEPPInstitutionalSurface.agda'
       - 'DASHI/Governance/Sudan/RCEPPPromotionBoundary.agda'
@@ -48,6 +53,10 @@ jobs:
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Governance/Sudan/RCEPPRegression.agda
+      - name: Typecheck revolutionary adjunct regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/RevolutionaryAdjunctRegression.agda
       - name: Typecheck governance aggregate
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
