@@ -6,9 +6,9 @@ module DASHI.Physics.Closure.NSTriadKNStage3AnalyticCompletionIntegration where
 -- Marco Cannone; Sergei Bernstein; Jean-Michel Bony; Errett Bishop; Douglas
 -- Bridges; Zachary Murray; Loukas Grafakos; Rodolfo H. Torres; Terence Tao;
 -- Pierre Germain; Fabian Waleffe; Oleg Kiriukhin; Minghui Liu; Gabor Pataki;
--- DASHI repository contributors.
+-- Agda standard-library contributors; DASHI repository contributors.
 -- Title: "Stage-3 finite l2, Leray, G=3, transport, multilinear-Schur, and
--- output-relocation decision integration".
+-- output-relocation analytic integration".
 -- Venue/year: Handbook of Mathematical Fluid Dynamics 3 (2005); Fourier
 -- Analysis and Nonlinear Partial Differential Equations, Springer, 2011;
 -- Constructive Analysis, Springer, 1985; Constructive Analysis in the Agda
@@ -16,8 +16,8 @@ module DASHI.Physics.Closure.NSTriadKNStage3AnalyticCompletionIntegration where
 -- Journal of Functional Analysis 199 (2003), 379--385; Publicacions
 -- Matematiques Extra 2002, 57--91; Journal of Differential Equations 226
 -- (2006), 373--428; Physics of Fluids A 4 (1992); arXiv:2604.12188v1;
--- Mathematical Programming / arXiv, 2015--2017; DASHI formal development,
--- 2026.
+-- Mathematical Programming / arXiv, 2015--2017; Agda standard library;
+-- DASHI formal development, 2026.
 -- DOI: 10.1016/S1874-5792(05)80006-0;
 -- 10.1007/978-3-642-16830-7; 10.1007/978-3-642-61667-9;
 -- 10.48550/arXiv.2205.08354; 10.1006/jfan.2001.3804;
@@ -27,23 +27,21 @@ module DASHI.Physics.Closure.NSTriadKNStage3AnalyticCompletionIntegration where
 -- theorem has no DOI.
 -- Uses: exact rational finite Cauchy--Schwarz, positive-definite C3,
 -- literal rational Leray Pythagoras, finite direct convolution and Bernstein,
--- the total G=3 shell-index classifier, explicit overlap transport constants,
--- the five-archetype reduction, the Grafakos--Torres Section-5.10 affine
--- template, the eight-family/twenty-four-slot factorisation, the generic
--- small-epsilon theorem, the Theorem-3 convention adapter, and the exact
--- output-relocation primal/dual plus unit-weight decision tranche.
--- Relationship: this is the ordinary proof-critical path and imports no
--- balanced-ternary, unbalanced-ternary, Base369, C6 or C9 status layer.
--- Existing 369 mathematics is untouched. Output relocation now has symbolic
--- Check A and exact integer geometric constants. The integration remains
--- fail-closed on constructive base-two exponent antitonicity, universal shell
--- ownership, the remaining cutoff-uniform Sobolev estimates, the remaining
--- numeric coefficient families, positive global DASHI epsilon, and the
--- concrete final dual bound.
+-- the total G=3 shell-index classifier, overlap transport, five-archetype
+-- reduction, affine row factorisation, exact output-relocation falsification,
+-- unit-weight recovery, rational geometric summation, the positive kernel,
+-- three shell Schur conditions and finite signed domination.
+-- Relationship: this ordinary proof-critical path imports no balanced-ternary,
+-- unbalanced-ternary, Base369, C6 or C9 status layer.  Output relocation has a
+-- complete conditional cutoff-uniform shell theorem and resolves one affine
+-- family, reducing the live independent slot count from 24 to 21.  The
+-- concrete H^s/coefficient bridge, the other four archetypes, global shell
+-- ownership and the final dual bound remain fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
@@ -60,10 +58,12 @@ import DASHI.Physics.Closure.NSTriadKNAffineRowFactorisation as RowFactor
 import DASHI.Physics.Closure.NSTriadKNSmallEpsilonCertificate as SmallEpsilon
 import DASHI.Physics.Closure.NSTriadKNAffineCertificateExactAudit as AffineAudit
 import DASHI.Physics.Closure.NSTriadKNAffineCertificateUnderdetermination as Affine
+import DASHI.Physics.Closure.NSTriadKNAffineResolvedFamilyReduction as Resolved
 import DASHI.Physics.Closure.NSTriadKNGrafakosTorresTheorem3Adapter as Theorem3
 import DASHI.Physics.Closure.NSTriadKNGrafakosTorresComponentAssembly as GTAssembly
 import DASHI.Physics.Closure.NSTriadKNFinalCutoffUniformDualBoundAssembly as Final
 import DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegration as OutputRelocation
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as OutputConditional
 
 record Stage3AnalyticCompletionReceipt : Set where
   constructor receipt
@@ -109,8 +109,12 @@ record Stage3AnalyticCompletionReceipt : Set where
       SmallEpsilon.genericTwentyOneRowSmallEpsilonTheoremClosed ≡ true
     affineSolverArchitectureClosed :
       AffineAudit.affineSolverArchitectureClosed ≡ true
-    affineOutcomeUnderdetermined :
+    structuralAffineOutcomeUnderdetermined24 :
       Affine.currentAffineOutcome ≡ Affine.underdetermined 24
+    outputRelocationFamilyResolved :
+      Resolved.outputRelocationAffineFamilyResolved ≡ true
+    liveAffineOutcomeUnderdetermined21 :
+      Resolved.postOutputRelocationAffineOutcome ≡ Affine.underdetermined 21
 
     outputRelocationHighestAlphaDecisionClosed :
       OutputRelocation.outputRelocationHighestAlphaDecisionClosed ≡ true
@@ -118,10 +122,18 @@ record Stage3AnalyticCompletionReceipt : Set where
       OutputRelocation.outputRelocationSourceStyleAffineAnsatzInfeasible ≡ true
     outputRelocationUnitWeightSymbolicCheckAClosed :
       OutputRelocation.outputRelocationUnitWeightSymbolicCheckAClosed ≡ true
-    outputRelocationIntegerGeometricEnvelopeClosed :
-      OutputRelocation.outputRelocationIntegerGeometricEnvelopeClosed ≡ true
-    outputRelocationPowerMonotonicityBridgeOpen :
-      OutputRelocation.nextLeafIsConstructivePowerMonotonicityBridge ≡ true
+    outputRelocationRationalFiniteSummationClosed :
+      OutputRelocation.outputRelocationRationalFiniteSummationClosed ≡ true
+    outputRelocationPositiveKernelClosed :
+      OutputRelocation.outputRelocationPositiveKernelProgramClosed ≡ true
+    outputRelocationThreeShellSchurConditionsClosed :
+      OutputRelocation.outputRelocationThreeShellSchurConditionsClosed ≡ true
+    outputRelocationFiniteSignedDominationClosed :
+      OutputRelocation.outputRelocationFiniteSignedDominationClosed ≡ true
+    outputRelocationConditionalArchetypeClosed :
+      OutputRelocation.outputRelocationConditionalArchetypeClosed ≡ true
+    outputRelocationConcreteShellBridgeOpen :
+      OutputConditional.outputRelocationConcreteShellBridgeInhabited ≡ false
 
     theorem3ShapeMatched :
       Theorem3.threeConditionShapeMatchesTheorem3 ≡ true
@@ -142,8 +154,8 @@ record Stage3AnalyticCompletionReceipt : Set where
       FourierG3.fullOctahedralActionInstantiated ≡ false
     fiveUniformSobolevTheoremsOpen :
       Archetypes.allFiveCutoffUniformSobolevTheoremsClosed ≡ false
-    numericIndependentCoefficientVectorsOpen :
-      AffineAudit.numericTwentyFourCoefficientSlotsClosed ≡ false
+    remainingNumericIndependentCoefficientVectorsOpen :
+      Resolved.globalAffineCertificateClosed ≡ false
     positiveAffineEpsilonOpen :
       Affine.strictPositiveEpsilonAvailable ≡ false
     concreteThreeConditionsOpen :
@@ -177,12 +189,18 @@ stage3AnalyticCompletionReceipt = receipt
   SmallEpsilon.genericTwentyOneRowSmallEpsilonTheoremClosedIsTrue
   AffineAudit.affineSolverArchitectureClosedIsTrue
   Affine.currentOutcomeIsUnderdetermined24
+  Resolved.outputRelocationAffineFamilyResolvedIsTrue
+  Resolved.postOutputRelocationOutcomeIsUnderdetermined21
 
   OutputRelocation.outputRelocationHighestAlphaDecisionClosedIsTrue
   OutputRelocation.outputRelocationSourceStyleAffineAnsatzInfeasibleIsTrue
   OutputRelocation.outputRelocationUnitWeightSymbolicCheckAClosedIsTrue
-  OutputRelocation.outputRelocationIntegerGeometricEnvelopeClosedIsTrue
-  OutputRelocation.nextLeafIsConstructivePowerMonotonicityBridgeIsTrue
+  OutputRelocation.outputRelocationRationalFiniteSummationClosedIsTrue
+  OutputRelocation.outputRelocationPositiveKernelProgramClosedIsTrue
+  OutputRelocation.outputRelocationThreeShellSchurConditionsClosedIsTrue
+  OutputRelocation.outputRelocationFiniteSignedDominationClosedIsTrue
+  OutputRelocation.outputRelocationConditionalArchetypeClosedIsTrue
+  OutputConditional.outputRelocationConcreteShellBridgeInhabitedIsFalse
 
   Theorem3.threeConditionShapeMatchesTheorem3IsTrue
   Theorem3.onlySufficiencyDirectionRequiredIsTrue
@@ -194,7 +212,7 @@ stage3AnalyticCompletionReceipt = receipt
   FourierG3.allNonzeroModesHaveUniqueHardShellOwnerIsFalse
   FourierG3.fullOctahedralActionInstantiatedIsFalse
   Archetypes.allFiveCutoffUniformSobolevTheoremsClosedIsFalse
-  AffineAudit.numericTwentyFourCoefficientSlotsClosedIsFalse
+  Resolved.globalAffineCertificateClosedIsFalse
   Affine.strictPositiveEpsilonAvailableIsFalse
   GTAssembly.concreteNavierStokesGrafakosTorresConditionsClosedIsFalse
   Final.concreteStage3CutoffUniformDualBoundClosedIsFalse
@@ -229,12 +247,21 @@ stage3OutputRelocationSymbolicCheckAClosedIsTrue :
   stage3OutputRelocationSymbolicCheckAClosed ≡ true
 stage3OutputRelocationSymbolicCheckAClosedIsTrue = refl
 
-stage3OutputRelocationIntegerEnvelopeClosed : Bool
-stage3OutputRelocationIntegerEnvelopeClosed = true
+stage3OutputRelocationFiniteMajorantProgramClosed : Bool
+stage3OutputRelocationFiniteMajorantProgramClosed = true
 
-stage3OutputRelocationIntegerEnvelopeClosedIsTrue :
-  stage3OutputRelocationIntegerEnvelopeClosed ≡ true
-stage3OutputRelocationIntegerEnvelopeClosedIsTrue = refl
+stage3OutputRelocationFiniteMajorantProgramClosedIsTrue :
+  stage3OutputRelocationFiniteMajorantProgramClosed ≡ true
+stage3OutputRelocationFiniteMajorantProgramClosedIsTrue = refl
+
+stage3RemainingAffineIndependentSlotCount : Nat
+stage3RemainingAffineIndependentSlotCount =
+  Resolved.remainingIndependentCoefficientSlotCount
+
+stage3RemainingAffineIndependentSlotCountIs21 :
+  stage3RemainingAffineIndependentSlotCount ≡ 21
+stage3RemainingAffineIndependentSlotCountIs21 =
+  Resolved.remainingIndependentCoefficientSlotCountIs21
 
 stage3CutoffUniformAnalyticCompletionClosed : Bool
 stage3CutoffUniformAnalyticCompletionClosed = false
