@@ -120,8 +120,8 @@ record PhysicalOneStepClosure
 open PhysicalOneStepClosure public
 
 physicalAdmissibility :
-  ∀ {State Bound} → PhysicalOneStepClosure State Bound →
-  UV.CombinedRGAdmissibility (normData _)
+  ∀ {State Bound} (closure : PhysicalOneStepClosure State Bound) →
+  UV.CombinedRGAdmissibility (normData closure)
 physicalAdmissibility closure = record
   { UV.CombinedRGAdmissibility.AdmissibleCoupling =
       AdmissibleCoupling closure
