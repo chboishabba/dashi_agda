@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Fail-closed audit for the RCEPP governance/fibre tranche.
+"""Fail-closed audit for the RCEPP and revolutionary-practice governance tranche.
 
-The exact checks protect the coarse-one/fine-three distinction.  The source scan
-protects the new theorem surface against proof holes, postulate declarations and
-accidental authority promotion.  It is not a substitute for Agda kernel checking
-or for external legal, political or popular-recognition authority.
+The exact checks protect the coarse-one/fine-three distinction, local/global
+section preservation, plural revolutionary braid, trauma-memory non-authority,
+liberation-goal/tactic separation and climate-pressure non-reduction.  The
+source scan protects the theorem surface against proof holes, postulate
+declarations and accidental authority promotion.  It is not a substitute for
+Agda kernel checking or external historical, legal, political, cultural or
+popular-recognition authority.
 """
 
 from __future__ import annotations
@@ -23,6 +26,11 @@ FILES = [
     ROOT / "DASHI/Governance/LocalGlobalCouncilGluing.agda",
     ROOT / "DASHI/Governance/TransitionResidual.agda",
     ROOT / "DASHI/Governance/ExternalLegitimacyBoundary.agda",
+    ROOT / "DASHI/Governance/RevolutionarySourceAtlas.agda",
+    ROOT / "DASHI/Governance/RevolutionaryPracticeBraid.agda",
+    ROOT / "DASHI/Governance/TraumaMemorySublationBoundary.agda",
+    ROOT / "DASHI/Governance/ComparativeCrisisClimateAtlas.agda",
+    ROOT / "DASHI/Governance/RevolutionaryAdjunctRegression.agda",
     ROOT / "DASHI/Governance/Sudan/RCEPPSourceBoundary.agda",
     ROOT / "DASHI/Governance/Sudan/RCEPPInstitutionalSurface.agda",
     ROOT / "DASHI/Governance/Sudan/RCEPPPromotionBoundary.agda",
@@ -105,6 +113,83 @@ REQUIRED_TOKENS = {
         "politicalAuthorityPromoted",
         "legalAuthorityPromoted",
     ],
+    "RevolutionarySourceAtlas.agda": [
+        "record SourceReference",
+        "Robin Wall Kimmerer",
+        "Braiding Sweetgrass",
+        "Andie Nordgren",
+        "Relationship Anarchy",
+        "Peter Kropotkin",
+        "Frantz Fanon",
+        "Judith Butler",
+        "Dominick LaCapra",
+        "10.2307/1229039",
+        "The 9/11 Commission Report",
+        "Edward W. Said",
+        "Rashid Khalidi",
+        "Ervand Abrahamian",
+        "Todd Gitlin",
+        "sourceCreatesInterpretiveAuthorityIsFalse",
+    ],
+    "RevolutionaryPracticeBraid.agda": [
+        "data RevolutionaryPracticeStrand",
+        "data RelationalFreedomDimension",
+        "data PrefigurativePractice",
+        "repoLocalPatternMindRepairContext",
+        "canonicalSummerOfLoveHistoricalBoundary",
+        "canonicalMeansEndsSedimentationBoundary",
+        "Sweetgrass.SweetgrassCarrierSpineSurface",
+        "Dialectic.DialecticalDepthAccumulationReceipt",
+        "CarryBraid.UnifiedCarryBraidReceipt",
+        "braidCollapsesTraditions",
+        "unityRequiresUniformity",
+        "publicOwnershipEqualsEcologicalReciprocity",
+        "universalRevolutionaryDoctrinePromoted",
+        "politicalAuthorityPromoted",
+    ],
+    "TraumaMemorySublationBoundary.agda": [
+        "data CollectiveTraumaContext",
+        "data TraumaResponseMode",
+        "data SublationInvariant",
+        "record HistoricalOriginFrame",
+        "iranNineteenFiftyThreeFrame",
+        "iranNineteenSeventyNineFrame",
+        "israelPalestinePluralOriginFrame",
+        "sudanAprilTwentyTwentyThreeFrame",
+        "record PriorInjuryAuthorityBoundary",
+        "priorInjuryAuthorisesCivilianHarm",
+        "traumaParityImpliesPowerParity",
+        "reflectingPoolObservation",
+        "whiteHouseRenovationObservation",
+        "Freedom 250 / WWE",
+        "motiveInferredAsFact",
+        "formalSublationGuaranteesReconciliation",
+    ],
+    "ComparativeCrisisClimateAtlas.agda": [
+        "data ComparativeCrisisContext",
+        "data PalestinianLiberationCurrent",
+        "marxistPFLPCurrent",
+        "Popular Front for the Liberation of Palestine (PFLP)",
+        "liberatoryObjectiveAutomaticallyLegitimatesEveryTactic",
+        "tacticCondemnationErasesUnderlyingLiberationClaim",
+        "data ClimateJusticeAxis",
+        "climatePressureAloneCausesWar",
+        "record EcologicalPeaceRepairSurface",
+        "record GlobalAttentionResidual",
+        "sufferingScaleEqualsAttention",
+        "casesAreHistoricallyEquivalent",
+        "formalAtlasCreatesPoliticalAuthority",
+    ],
+    "RevolutionaryAdjunctRegression.agda": [
+        "record RevolutionaryAdjunctRegression",
+        "canonicalRevolutionaryAdjunctRegression",
+        "relationshipCategoryDoesNotCreateEntitlement",
+        "priorInjuryDoesNotAuthoriseCivilianHarm",
+        "pflpObjectiveDoesNotLegitimateEveryTactic",
+        "climateDoesNotActAsSoleWarCause",
+        "globalAttentionDoesNotMeasureSuffering",
+        "canonicalRevolutionaryAdjunctReceiptsNonPromoting",
+    ],
     "RCEPPSourceBoundary.agda": [
         "The Revolutionary Charter for Establishing People's Power",
         "11 January 2023",
@@ -149,6 +234,11 @@ REQUIRED_TOKENS = {
         "import DASHI.Governance.AuthorityMandateCore",
         "import DASHI.Governance.LocalGlobalCouncilGluing",
         "import DASHI.Governance.RelationalMandateFibre",
+        "import DASHI.Governance.RevolutionarySourceAtlas",
+        "import DASHI.Governance.RevolutionaryPracticeBraid",
+        "import DASHI.Governance.TraumaMemorySublationBoundary",
+        "import DASHI.Governance.ComparativeCrisisClimateAtlas",
+        "import DASHI.Governance.RevolutionaryAdjunctRegression",
         "import DASHI.Governance.Sudan.RCEPPPromotionBoundary",
         "import DASHI.Governance.Sudan.RCEPPRegression",
     ],
@@ -170,6 +260,14 @@ FORBIDDEN_PATTERNS = [
     re.compile(r"universalEndorsementClaimed\s*=\s*true"),
     re.compile(r"officialRCEPPInterpretationClaimed\s*=\s*true"),
     re.compile(r"canonicalPromotionAuthorized\s*=\s*true"),
+    re.compile(r"sourceCreatesInterpretiveAuthority\s*=\s*true"),
+    re.compile(r"universalRevolutionaryDoctrinePromoted\s*=\s*true"),
+    re.compile(r"priorInjuryAuthorisesCivilianHarm\s*=\s*true"),
+    re.compile(r"motiveInferredAsFact\s*=\s*true"),
+    re.compile(r"liberatoryObjectiveAutomaticallyLegitimatesEveryTactic\s*=\s*true"),
+    re.compile(r"climatePressureAloneCausesWar\s*=\s*true"),
+    re.compile(r"casesAreHistoricallyEquivalent\s*=\s*true"),
+    re.compile(r"formalAtlasCreatesPoliticalAuthority\s*=\s*true"),
 ]
 
 
@@ -210,6 +308,55 @@ def check_exact_shape() -> None:
     )
     assert len(validation_positions) == 4
 
+    revolutionary_strands = (
+        "institutional",
+        "relational",
+        "epistemic",
+        "ecological",
+        "historical-trauma",
+    )
+    assert len(revolutionary_strands) == 5
+
+    relational_dimensions = (
+        "consent",
+        "autonomy",
+        "material-asymmetry",
+        "reciprocity",
+        "exit-recall-revision",
+    )
+    assert len(relational_dimensions) == 5
+
+    palestinian_currents = (
+        "secular-national",
+        "marxist-pflp",
+        "islamist",
+        "trade-union-student-women",
+        "popular-committee",
+        "diplomatic-state-building",
+        "cultural-intellectual",
+        "diaspora",
+    )
+    assert len(palestinian_currents) == 8
+
+    climate_axes = (
+        "food-water",
+        "displacement",
+        "land-livelihood",
+        "urban-pressure",
+        "energy-geopolitics",
+        "border-militarisation",
+        "disaster-opportunism",
+        "unequal-recovery",
+    )
+    assert len(climate_axes) == 8
+
+    memory_infrastructure = (
+        "reflecting-pool",
+        "executive-renovation",
+        "national-anniversary-combat-spectacle",
+    )
+    assert len(memory_infrastructure) == 3
+
 
 def scan_sources() -> None:
     for path in FILES:
@@ -240,8 +387,17 @@ def main() -> int:
     print("PASS: delegation upward remains distinct from accountability and recall downward")
     print("PASS: compatible local council sections glue and restrict back without erasure")
     print("PASS: constitutional +1 transitions retain residuals and preserve authority boundaries")
+    print("PASS: source atlas retains author/title/DOI state without minting interpretive authority")
+    print("PASS: Sweetgrass, PatternMind, relationship-anarchy and anarchist strands braid without collapse")
+    print("PASS: Summer of Love informality, consent, labour and commodification residuals remain explicit")
+    print("PASS: prior injury never authorises unlimited control or civilian harm")
+    print("PASS: reflecting-pool, White House and Freedom 250 observations remain candidate-only")
+    print("PASS: Palestinian liberation goals remain distinct from tactic-specific accountability")
+    print("PASS: Iran/USA selected origins retain prior history and do not close causation")
+    print("PASS: climate pressure is material but not a sole-cause war theorem")
+    print("PASS: Sudan remains a situated case rather than an ignored analogy or attention proxy")
     print("PASS: RCEPP citation identity remains separate from artifact, legal and popular authority")
-    print("PASS: governance/RCEPP source surface is fail-closed")
+    print("PASS: governance/RCEPP/revolutionary adjunct source surface is fail-closed")
     print("NOTE: run the Agda checker for kernel validation")
     return 0
 
