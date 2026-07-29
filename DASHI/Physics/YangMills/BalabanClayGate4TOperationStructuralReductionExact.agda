@@ -31,15 +31,17 @@ foldSelectedCongruent :
   ∀ {Fine SlowField Scalar}
     (sumData : Integral.FiniteConstrainedSum Fine SlowField Scalar)
     (fields : List Fine) (left right : Fine → Scalar)
-    (slow : SlowField) →
+    (leftCoarse rightCoarse : SlowField) →
   (∀ fine → left fine ≡ right fine) →
-  Integral.foldSelected sumData left slow fields
-  ≡ Integral.foldSelected sumData right slow fields
-foldSelectedCongruent sumData [] left right slow pointwise = refl
-foldSelectedCongruent sumData (fine ∷ fields) left right slow pointwise =
+  Integral.foldSelected sumData left leftCoarse fields
+  ≡ Integral.foldSelected sumData right rightCoarse fields
+foldSelectedCongruent sumData [] left right leftCoarse rightCoarse pointwise = refl
+foldSelectedCongruent sumData (fine ∷ fields) left right
+  leftCoarse rightCoarse pointwise =
   cong₂ (Integral.add sumData)
     (pointwise fine)
-    (foldSelectedCongruent sumData fields left right slow pointwise)
+    (foldSelectedCongruent sumData fields left right
+      leftCoarse rightCoarse pointwise)
 
 record TOperationPointwiseGaugeData
     {Scale Fine SlowField Component Functional Scalar Gauge : Set}
@@ -88,6 +90,7 @@ tOperationGaugeCovariantFromPointwiseFibre {dataSet = dataSet}
     (Integral.selectedWith (T.sumData dataSet)
       (T.localIntegrand dataSet scale (T.component selected) slow functional)
       slow)
+    (transformSlowField gaugeData gauge slow)
     slow
     (selectedIntegrandGaugeInvariant gaugeData gauge scale
       (T.component selected) slow functional)
@@ -136,6 +139,7 @@ tOperationDependsOnlyOnEnlargementFromPointwiseFibre {dataSet = dataSet}
       (T.localIntegrand dataSet scale (T.component selected) right functional)
       right)
     left
+    right
     (selectedIntegrandDependsOnlyOnEnlargement localityData
       scale (T.component selected) left right functional agreement)
 
@@ -163,7 +167,6 @@ tOperationGaugeCovarianceReductionLevel = machineChecked
 tOperationEnlargementLocalityReductionLevel : ProofLevel
 tOperationEnlargementLocalityReductionLevel = machineChecked
 
--- Remaining inputs are now pointwise statements on the literal fast fibre.
 tOperationPointwiseGaugeInvarianceInputsLevel : ProofLevel
 tOperationPointwiseGaugeInvarianceInputsLevel = conditional
 
