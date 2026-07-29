@@ -20,7 +20,9 @@ module DASHI.Analysis.SetoidConstructiveRealSpine where
 -- Relationship: this is the nondegenerate backend boundary used when a
 -- literal quotient would require representative choice for arbitrary
 -- quotient-valued sequences.  It records exactly the algebra, order and
--- Cauchy-completeness laws used by the output-relocation programme.
+-- Cauchy-completeness laws used by the output-relocation programme.  Square
+-- order reflection is kept as a sibling capability because it is not part of
+-- the minimal ordered-complete-real interface.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -84,9 +86,6 @@ record SetoidOrderedCompleteReal : Set₁ where
     valueBelowAbsolute : ∀ value → value ≤ abs value
     negativeAbsoluteBelowValue : ∀ value → neg (abs value) ≤ value
     absoluteNonnegative : ∀ value → zero ≤ abs value
-    squareReflectsOrderOnNonnegative : ∀ {left right} →
-      zero ≤ left → zero ≤ right →
-      (left * left) ≤ (right * right) → left ≤ right
 
     Sequence : Set
     sequenceAt : Sequence → Nat → Carrier
@@ -96,6 +95,16 @@ record SetoidOrderedCompleteReal : Set₁ where
       IsCauchy sequence → Σ Carrier (λ limit → ConvergesTo sequence limit)
 
 open SetoidOrderedCompleteReal public
+
+record SetoidNonnegativeSquareOrder
+    (R : SetoidOrderedCompleteReal) : Set₁ where
+  field
+    squareReflectsOrderOnNonnegative : ∀ {left right} →
+      _≤_ R (zero R) left → _≤_ R (zero R) right →
+      _≤_ R (_*_ R left left) (_*_ R right right) →
+      _≤_ R left right
+
+open SetoidNonnegativeSquareOrder public
 
 record SetoidRealExponential
     (R : SetoidOrderedCompleteReal) : Set₁ where
