@@ -9,7 +9,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 -- Branch-head verification receipt surface.
 --
--- The user deliberately owns execution of Agda.  This module therefore records
+-- The user deliberately owns execution of Agda. This module therefore records
 -- the exact evidence that a later clean run must provide without falsely
 -- promoting any unchecked branch head.
 ------------------------------------------------------------------------
@@ -59,6 +59,13 @@ record BranchHeadAgdaReceipt : Set where
     t5LpPhysicalMeasureAdapterChecked : Bool
     legacyGaugeRGMeasureReuseChecked : Bool
 
+    gate4ValidationAggregateChecked : Bool
+    gate4LiteralPeriodicGeometryChecked : Bool
+    gate4FiniteTOperationChecked : Bool
+    gate4FiniteROperationChecked : Bool
+    gate4AbsorptionAndUVAssemblyChecked : Bool
+    dongLiDissipativeBernsteinChecked : Bool
+
     changedModules : List String
     constructiveProducerAggregateChecked : Bool
     frontierLedgerAggregateChecked : Bool
@@ -97,6 +104,13 @@ record AuthoritativeBranchHeadEvidence
     t4WardAndBoxClosureTypecheck : Set
     t5PhysicalClosureTypecheck : Set
     lpUniformIntegrabilityPhysicalMeasureAndReuseAdaptersTypecheck : Set
+
+    gate4ValidationAggregateTypechecks : Set
+    gate4LiteralPeriodicGeometryTypechecks : Set
+    gate4FiniteTOperationTypechecks : Set
+    gate4FiniteROperationTypechecks : Set
+    gate4AbsorptionAndUVAssemblyTypechecks : Set
+    dongLiDissipativeBernsteinTypechecks : Set
 
     publicAggregateChecked : Set
     postulateFreeChangedSurface : Set
@@ -153,6 +167,24 @@ t5ClosureTrancheTypecheckLevel = conditional
 
 t5LpReuseTrancheTypecheckLevel : ProofLevel
 t5LpReuseTrancheTypecheckLevel = conditional
+
+gate4ValidationAggregateTypecheckLevel : ProofLevel
+gate4ValidationAggregateTypecheckLevel = conditional
+
+gate4LiteralPeriodicGeometryTypecheckLevel : ProofLevel
+gate4LiteralPeriodicGeometryTypecheckLevel = conditional
+
+gate4FiniteTOperationTypecheckLevel : ProofLevel
+gate4FiniteTOperationTypecheckLevel = conditional
+
+gate4FiniteROperationTypecheckLevel : ProofLevel
+gate4FiniteROperationTypecheckLevel = conditional
+
+gate4AbsorptionAndUVAssemblyTypecheckLevel : ProofLevel
+gate4AbsorptionAndUVAssemblyTypecheckLevel = conditional
+
+dongLiDissipativeBernsteinTypecheckLevel : ProofLevel
+dongLiDissipativeBernsteinTypecheckLevel = conditional
 
 publicYangMillsAggregateTypecheckLevel : ProofLevel
 publicYangMillsAggregateTypecheckLevel = conditional
