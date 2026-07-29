@@ -6,6 +6,7 @@ on:
       - 'DASHI/Governance/AuthorityMandateCore.agda'
       - 'DASHI/Governance/CouncilDelegationGraph.agda'
       - 'DASHI/Governance/ExternalLegitimacyBoundary.agda'
+      - 'DASHI/Governance/LocalGlobalCouncilGluing.agda'
       - 'DASHI/Governance/RelationalMandateFibre.agda'
       - 'DASHI/Governance/SituatedConstituency.agda'
       - 'DASHI/Governance/TransitionResidual.agda'
@@ -39,6 +40,10 @@ jobs:
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Governance/RelationalMandateFibre.agda
+      - name: Typecheck local-global council gluing
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/LocalGlobalCouncilGluing.agda
       - name: Typecheck RCEPP aggregate regression
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
