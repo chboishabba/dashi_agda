@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4LocalizedFactorAnalyticReductionExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -24,7 +26,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 record LocalizedFactorRemainderReduction (Term Bound : Set) : Set₁ where
   field
     one : Bound
-    add exp : Bound → Bound → Bound
+    add : Bound → Bound → Bound
     exponential : Bound → Bound
     LessEqual : Bound → Bound → Set
 
