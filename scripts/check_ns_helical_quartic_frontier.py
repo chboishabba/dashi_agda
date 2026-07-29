@@ -96,6 +96,10 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNFiniteOverlapTransportConstants.agda",
     "DASHI/Physics/Closure/NSTriadKNConstructiveRealPowerBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNFiveArchetypeUniformClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresAffineWeightTemplate.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineRowFactorisation.agda",
+    "DASHI/Physics/Closure/NSTriadKNSmallEpsilonCertificate.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineCertificateExactAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNAffineCertificateUnderdetermination.agda",
     "DASHI/Physics/Closure/NSTriadKNGrafakosTorresTheorem3Adapter.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3AnalyticCompletionIntegration.agda",
@@ -179,6 +183,7 @@ def main() -> int:
         ("scripts/ns_stage3_vector_adjoint_pairing_audit.py", "vector-adjoint verifier"),
         ("scripts/ns_stage3_ordered_l2_shell_audit.py", "ordered-l2/hard-shell verifier"),
         ("scripts/ns_stage3_analytic_completion_audit.py", "analytic-completion verifier"),
+        ("scripts/ns_stage3_small_epsilon_affine_audit.py", "small-epsilon/factorisation verifier"),
     )
     for relative, label in verifiers:
         failure = run_verifier(root, relative, label)
