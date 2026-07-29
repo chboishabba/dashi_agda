@@ -15,10 +15,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Symposium on the Theory of Switching, Part II (1959), 285--292.
 -- No DOI recorded.
 --
--- This is a proof-bearing replacement for older Set-valued BFS labels.  Once a
+-- This is a proof-bearing replacement for older Set-valued BFS labels. Once a
 -- concrete distance and parent map satisfy the previous-layer equation, parent
 -- chains strictly descend in distance and therefore cannot contain a nonempty
--- cycle.  No choice principle or graph-analysis theorem is imported.
+-- cycle. No choice principle or graph-analysis theorem is imported.
 ------------------------------------------------------------------------
 
 data Empty : Set where
@@ -41,6 +41,15 @@ noPositiveAddFixedPoint positiveTail (suc value) equality =
     (trans
       (sucInjective equality)
       (plusSucShift positiveTail value))
+
+infix 4 _≤N_
+data _≤N_ : Nat → Nat → Set where
+  zero≤N : ∀ {right} → zero ≤N right
+  suc≤N : ∀ {left right} → left ≤N right → suc left ≤N suc right
+
+≤N-reflexive : ∀ value → value ≤N value
+≤N-reflexive zero = zero≤N
+≤N-reflexive (suc value) = suc≤N (≤N-reflexive value)
 
 record StrongBFSParentCertificate (Vertex : Set) : Set₁ where
   field
@@ -127,9 +136,18 @@ record StrongBFSShortestPathCertificate
 
     distanceLowerBoundForEveryPath : ∀ {vertex pathLength} →
       Path (root parentCertificate) vertex pathLength →
-      Set
+      distance parentCertificate vertex ≤N pathLength
 
 open StrongBFSShortestPathCertificate public
+
+shortestPathRealized :
+  ∀ {Vertex}
+    {parentCertificate : StrongBFSParentCertificate Vertex}
+    (certificate : StrongBFSShortestPathCertificate parentCertificate)
+    vertex → IsNonRoot parentCertificate vertex →
+  Path certificate (root parentCertificate) vertex
+    (distance parentCertificate vertex)
+shortestPathRealized certificate = parentPathExists certificate
 
 strongBFSParentCertificateLevel : ProofLevel
 strongBFSParentCertificateLevel = machineChecked
@@ -139,6 +157,9 @@ parentChainDistanceLevel = machineChecked
 
 parentAcyclicityFromDistanceDescentLevel : ProofLevel
 parentAcyclicityFromDistanceDescentLevel = machineChecked
+
+strongShortestPathCertificateLevel : ProofLevel
+strongShortestPathCertificateLevel = machineChecked
 
 physicalPeriodicDistanceStepInputsLevel : ProofLevel
 physicalPeriodicDistanceStepInputsLevel = conditional
