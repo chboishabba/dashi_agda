@@ -4,14 +4,14 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- PROVENANCE
 -- Authors: Loukas Grafakos; Rodolfo H. Torres; Jean-Michel Bony; Hajer
 -- Bahouri; Jean-Yves Chemin; Raphael Danchin; Errett Bishop; Douglas Bridges;
--- Zachary Murray; Augustin-Louis Cauchy; Agda standard-library contributors;
--- DASHI repository contributors.
+-- Zachary Murray; Viktor Csimma; Augustin-Louis Cauchy; Hermann Amandus
+-- Schwarz; Agda standard-library contributors; DASHI repository contributors.
 -- Title: "A Multilinear Schur Test and Multiplier Operators"; "Calcul
 -- symbolique et propagation des singularites pour les equations aux derivees
 -- partielles non lineaires"; "Fourier Analysis and Nonlinear Partial
 -- Differential Equations"; "Constructive Analysis"; "Constructive Analysis
--- in the Agda Proof Assistant"; and "Final cutoff-uniform output-relocation
--- archetype program".
+-- in the Agda Proof Assistant"; and "Final derived cutoff-uniform
+-- output-relocation archetype program".
 -- Venue/year: Journal of Functional Analysis 187 (2001), 1--24; Annales
 -- scientifiques de l'Ecole Normale Superieure 14 (1981); Springer, 1985 and
 -- 2011; arXiv, 2022; Agda standard library; DASHI formal development, 2026.
@@ -20,13 +20,14 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- 10.48550/arXiv.2205.08354; the repository program has no DOI.
 -- Uses: unit auxiliary weights, exact rational geometric summation with
 -- constant 128/93, the canonical positive kernel, all three normalized shell
--- Schur conditions, finite two-sided signed domination, the generic ordered
--- rational-embedding theorem, and the native ConstructiveRealSpine adapter.
--- Relationship: every theorem downstream of native spine capability and shell
--- data is proved.  Remaining inhabitants are the concrete spine order/rational
--- embedding capability, the two H^s-to-rational envelope comparisons, and the
--- literal coefficient's pointwise two-sided domination.  The concrete operator
--- theorem remains fail-closed.
+-- Schur conditions, finite signed domination, the ordered rational-embedding
+-- theorem, the native ConstructiveRealSpine adapter, base-two power-order
+-- derivation and absolute-magnitude coefficient derivation.
+-- Relationship: the four former raw bridge fields are now theorem outputs.
+-- The remaining concrete inputs are coherent native-spine ordered/rational
+-- data, base-two power and integer-anchor data, the endpoint decay inequalities,
+-- absolute-value order laws, factor nonnegativity and one literal absolute-
+-- coefficient estimate.  The concrete operator theorem remains fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -43,15 +44,18 @@ import DASHI.Physics.Closure.NSTriadKNRationalFiniteSignedMajorant as Signed
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as Conditional
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter as SpineAdapter
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationAbsoluteCoefficientBridge as Absolute
+import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDerivedClosure as Derived
 
 record OutputRelocationCutoffUniformArchetypeCutset {s : Level} : Set (lsuc s) where
   field
     Scalar : Set s
 
-    concreteNativeSpineCapability : Set s
-    concreteNativeSpineShellData : Set s
-    concretePowerEnvelopeBridge : Set s
-    concreteCoefficientTwoSidedDomination : Set s
+    concreteNativeSpineEnvelopeCapability : Set s
+    concreteNativeBaseTwoPowerCapability : Set s
+    concreteOutputDecayData : Set s
+    concreteNativeAbsoluteOrderCapability : Set s
+    concreteLiteralAbsoluteCoefficientEstimate : Set s
 
     positiveKernelMajorant : Set s
     kernelMajorantNonnegative : Set s
@@ -97,17 +101,23 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       SpineAdapter.nativeConstructiveRealSpineAdapterSpecified ≡ true
     nativeSpineClosureTheoremClosed :
       SpineAdapter.nativeSpineToEmbeddedClosureTheoremClosed ≡ true
-    minimalPowerBridgeSpecified :
-      PowerBridge.outputRelocationMinimalPowerBridgeSpecified ≡ true
-    onlyTwoPowerDominationLemmasRequired :
-      PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequired ≡ true
+    twoPowerDominationTheoremsClosed :
+      PowerBridge.outputRelocationTwoPowerDominationTheoremsClosed ≡ true
+    absoluteMagnitudeToTwoSidedClosed :
+      Absolute.absoluteMagnitudeToTwoSidedDominationClosed ≡ true
+    fourFormerRawFieldsDerived :
+      Derived.fourFormerRawBridgeFieldsDerived ≡ true
+    nativeSpineDerivedClosureTheoremClosed :
+      Derived.nativeSpineDerivedClosureTheoremClosed ≡ true
     integerPowersAloneInsufficientForHsComparison :
       PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparison
       ≡ false
     concreteNativeSpineCapabilityStillOpen :
       SpineAdapter.concreteSpineEnvelopeCapabilityClosed ≡ false
-    concreteNativeSpineShellDataStillOpen :
-      SpineAdapter.concreteSpineOutputShellDataClosed ≡ false
+    concreteBaseTwoPowerCapabilityStillOpen :
+      Derived.concreteNativeBaseTwoPowerCapabilityClosed ≡ false
+    concreteLiteralAbsoluteEstimateStillOpen :
+      Derived.concreteLiteralAbsoluteCoefficientEstimateClosed ≡ false
 
 open OutputRelocationArchetypeProgramReceipt public
 
@@ -126,11 +136,14 @@ outputRelocationArchetypeProgramReceipt = receipt
   Embedded.allDownstreamOfEmbeddedShellBridgeClosedIsTrue
   SpineAdapter.nativeConstructiveRealSpineAdapterSpecifiedIsTrue
   SpineAdapter.nativeSpineToEmbeddedClosureTheoremClosedIsTrue
-  PowerBridge.outputRelocationMinimalPowerBridgeSpecifiedIsTrue
-  PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue
+  PowerBridge.outputRelocationTwoPowerDominationTheoremsClosedIsTrue
+  Absolute.absoluteMagnitudeToTwoSidedDominationClosedIsTrue
+  Derived.fourFormerRawBridgeFieldsDerivedIsTrue
+  Derived.nativeSpineDerivedClosureTheoremClosedIsTrue
   PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparisonIsFalse
   SpineAdapter.concreteSpineEnvelopeCapabilityClosedIsFalse
-  SpineAdapter.concreteSpineOutputShellDataClosedIsFalse
+  Derived.concreteNativeBaseTwoPowerCapabilityClosedIsFalse
+  Derived.concreteLiteralAbsoluteCoefficientEstimateClosedIsFalse
 
 outputRelocationFinalArchetypeCutsetSpecified : Bool
 outputRelocationFinalArchetypeCutsetSpecified = true
@@ -153,12 +166,23 @@ outputRelocationOrderedEmbeddingClosureTheoremClosed = true
 outputRelocationNativeSpineClosureTheoremClosed : Bool
 outputRelocationNativeSpineClosureTheoremClosed = true
 
-outputRelocationAllDownstreamOfNativeSpineDataClosed : Bool
-outputRelocationAllDownstreamOfNativeSpineDataClosed = true
+outputRelocationFourFormerRawBridgeFieldsDerived : Bool
+outputRelocationFourFormerRawBridgeFieldsDerived = true
+
+outputRelocationAllDownstreamOfDerivedNativeDataClosed : Bool
+outputRelocationAllDownstreamOfDerivedNativeDataClosed = true
 
 outputRelocationConcreteNativeSpineCapabilityClosed : Bool
 outputRelocationConcreteNativeSpineCapabilityClosed = false
 
+outputRelocationConcreteNativeBaseTwoPowerCapabilityClosed : Bool
+outputRelocationConcreteNativeBaseTwoPowerCapabilityClosed = false
+
+outputRelocationConcreteLiteralAbsoluteCoefficientEstimateClosed : Bool
+outputRelocationConcreteLiteralAbsoluteCoefficientEstimateClosed = false
+
+-- Compatibility status: the old monolithic shell-data inhabitant is not
+-- supplied directly; it is generated by Derived when the smaller inputs exist.
 outputRelocationConcreteNativeSpineShellDataClosed : Bool
 outputRelocationConcreteNativeSpineShellDataClosed = false
 
@@ -199,13 +223,25 @@ outputRelocationNativeSpineClosureTheoremClosedIsTrue :
   outputRelocationNativeSpineClosureTheoremClosed ≡ true
 outputRelocationNativeSpineClosureTheoremClosedIsTrue = refl
 
-outputRelocationAllDownstreamOfNativeSpineDataClosedIsTrue :
-  outputRelocationAllDownstreamOfNativeSpineDataClosed ≡ true
-outputRelocationAllDownstreamOfNativeSpineDataClosedIsTrue = refl
+outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue :
+  outputRelocationFourFormerRawBridgeFieldsDerived ≡ true
+outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue = refl
+
+outputRelocationAllDownstreamOfDerivedNativeDataClosedIsTrue :
+  outputRelocationAllDownstreamOfDerivedNativeDataClosed ≡ true
+outputRelocationAllDownstreamOfDerivedNativeDataClosedIsTrue = refl
 
 outputRelocationConcreteNativeSpineCapabilityClosedIsFalse :
   outputRelocationConcreteNativeSpineCapabilityClosed ≡ false
 outputRelocationConcreteNativeSpineCapabilityClosedIsFalse = refl
+
+outputRelocationConcreteNativeBaseTwoPowerCapabilityClosedIsFalse :
+  outputRelocationConcreteNativeBaseTwoPowerCapabilityClosed ≡ false
+outputRelocationConcreteNativeBaseTwoPowerCapabilityClosedIsFalse = refl
+
+outputRelocationConcreteLiteralAbsoluteCoefficientEstimateClosedIsFalse :
+  outputRelocationConcreteLiteralAbsoluteCoefficientEstimateClosed ≡ false
+outputRelocationConcreteLiteralAbsoluteCoefficientEstimateClosedIsFalse = refl
 
 outputRelocationConcreteNativeSpineShellDataClosedIsFalse :
   outputRelocationConcreteNativeSpineShellDataClosed ≡ false
