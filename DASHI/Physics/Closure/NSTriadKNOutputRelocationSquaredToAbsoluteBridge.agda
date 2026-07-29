@@ -11,7 +11,7 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationSquaredToAbsoluteBridge wh
 -- DOI: 10.1080/03605302.2013.822885; the repository order theorem has no DOI.
 -- Uses: the exact finite squared coefficient estimate, nonnegativity of the
 -- absolute value and shell factors, monotonicity of multiplication on the
--- nonnegative cone, and reflection of order by squaring there.
+-- nonnegative cone, 0*0=0, and reflection of order by squaring there.
 -- Relationship: replaces the formerly primitive absolute-coefficient estimate
 -- by a squared estimate of the form naturally emitted by finite
 -- Cauchy--Schwarz/Bernstein.  A concrete constructive-real carrier must still
@@ -22,6 +22,7 @@ open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAbsoluteCoefficientBridge as Absolute
@@ -34,6 +35,9 @@ record NonnegativeSquareOrderCapability {s : Level}
     (C : Embedded.OrderedRationalEnvelopeCarrier {s})
     (absoluteOrder : Absolute.AbsoluteValueOrderCapability C) : Set (lsuc s) where
   field
+    multiplyZeroZero :
+      Embedded.multiply C (Embedded.zero C) (Embedded.zero C)
+      ≡ Embedded.zero C
     absoluteNonnegative : ∀ value →
       Embedded.leq C (Embedded.zero C)
         (Absolute.absolute absoluteOrder value)
@@ -67,18 +71,26 @@ open SquaredCoefficientFactorMajorant public
 factorProductNonnegative : ∀ {s}
     {C : Embedded.OrderedRationalEnvelopeCarrier {s}}
     {absoluteOrder : Absolute.AbsoluteValueOrderCapability C}
+    (squareOrder : NonnegativeSquareOrderCapability C absoluteOrder)
     (majorant : SquaredCoefficientFactorMajorant absoluteOrder)
     lowShell gap →
   Embedded.leq C (Embedded.zero C)
     (Embedded.multiply C
       (lowFactor majorant lowShell)
       (gapFactor majorant gap))
-factorProductNonnegative {C = C} majorant lowShell gap =
-  Embedded.multiplyMonotoneNonnegative C
-    (lowFactorNonnegative majorant lowShell)
-    (Embedded.leqReflexive C (lowFactor majorant lowShell))
-    (gapFactorNonnegative majorant gap)
-    (Embedded.leqReflexive C (gapFactor majorant gap))
+factorProductNonnegative {C = C} squareOrder majorant lowShell gap =
+  subst
+    (λ lower →
+      Embedded.leq C lower
+        (Embedded.multiply C
+          (lowFactor majorant lowShell)
+          (gapFactor majorant gap)))
+    (multiplyZeroZero squareOrder)
+    (Embedded.multiplyMonotoneNonnegative C
+      (Embedded.leqReflexive C (Embedded.zero C))
+      (lowFactorNonnegative majorant lowShell)
+      (Embedded.leqReflexive C (Embedded.zero C))
+      (gapFactorNonnegative majorant gap))
 
 absoluteCoefficientDominatedByFactors : ∀ {s}
     {C : Embedded.OrderedRationalEnvelopeCarrier {s}}
@@ -97,7 +109,7 @@ absoluteCoefficientDominatedByFactors {C = C} {absoluteOrder}
   squareReflectsOrderOnNonnegative squareOrder
     (absoluteNonnegative squareOrder
       (signedCoefficient majorant lowShell gap))
-    (factorProductNonnegative majorant lowShell gap)
+    (factorProductNonnegative squareOrder majorant lowShell gap)
     (squaredCoefficientDominatedBySquaredFactors majorant lowShell gap)
 
 asAbsoluteCoefficientFactorMajorant : ∀ {s}
@@ -117,12 +129,19 @@ asAbsoluteCoefficientFactorMajorant squareOrder majorant = record
 squaredToAbsoluteCoefficientBridgeClosed : Bool
 squaredToAbsoluteCoefficientBridgeClosed = true
 
+factorProductNonnegativityDerivedCorrectly : Bool
+factorProductNonnegativityDerivedCorrectly = true
+
 concreteNonnegativeSquareOrderCapabilityClosed : Bool
 concreteNonnegativeSquareOrderCapabilityClosed = false
 
 squaredToAbsoluteCoefficientBridgeClosedIsTrue :
   squaredToAbsoluteCoefficientBridgeClosed ≡ true
 squaredToAbsoluteCoefficientBridgeClosedIsTrue = refl
+
+factorProductNonnegativityDerivedCorrectlyIsTrue :
+  factorProductNonnegativityDerivedCorrectly ≡ true
+factorProductNonnegativityDerivedCorrectlyIsTrue = refl
 
 concreteNonnegativeSquareOrderCapabilityClosedIsFalse :
   concreteNonnegativeSquareOrderCapabilityClosed ≡ false
