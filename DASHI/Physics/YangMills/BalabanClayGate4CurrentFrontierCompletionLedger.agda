@@ -17,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4OnePlusExponentialSeriesExact as 
 import DASHI.Physics.YangMills.BalabanClayGate4LocalizedFactorAnalyticReductionExact as Factor
 import DASHI.Physics.YangMills.BalabanClayGate4DyadicRunningCouplingConventionExact as Dyadic
 import DASHI.Physics.YangMills.BalabanClayGate4BlockAveragingResidualSummabilityExact as BlockSum
+import DASHI.Physics.YangMills.BalabanClayGate4SummableTailBudgetClosureExact as TailBudget
 import DASHI.Physics.YangMills.BalabanClayGate4ExistingRGPhysicalOneStepReuseExact as OneStep
 import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
 import DASHI.Physics.YangMills.BalabanClayT5ConditionedObservableLocalizationSummationExact as HLOC
@@ -27,6 +28,7 @@ import DASHI.Physics.YangMills.BalabanClayT5OSReconstructionCyclicityExact as Cy
 import DASHI.Physics.YangMills.BalabanClayT5AlternativeHarrisMixingAuditExact as Harris
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact as PhysicalGap
 import DASHI.Physics.YangMills.BalabanClayMassGapClaimEcosystemQuarantineExact as Claims
+import DASHI.Physics.YangMills.BalabanClayGate4Attachment252MechanismAuditExact as AttachmentAudit
 
 ------------------------------------------------------------------------
 -- Preferred current-frontier ledger.
@@ -88,6 +90,9 @@ polynomialGrowthTimesAdjointContractionLevel =
   BlockSum.polynomialGrowthTimesAdjointContractionLevel
 weightedResidualSummabilityReductionLevel =
   BlockSum.weightedResidualSummabilityReductionLevel
+summableTailOneStepReductionLevel = TailBudget.summableTailOneStepReductionLevel
+tailBudgetMonotonicityLevel = TailBudget.tailBudgetMonotonicityLevel
+allScaleTailBudgetInductionLevel = TailBudget.allScaleTailBudgetInductionLevel
 
 existingRGPhysicalOneStepReuseLevel = OneStep.existingRGPhysicalOneStepReuseLevel
 physicalCombinedNormExistingRGReuseLevel =
@@ -128,6 +133,7 @@ physicalOS4ToTransferGapAssemblyLevel = PhysicalGap.physicalOS4ToTransferGapAsse
 harrisAlternativeVocabularyLevel = Harris.harrisAlternativeVocabularyLevel
 harrisContractionToGapAssemblyLevel = Harris.harrisContractionToGapAssemblyLevel
 claimEcosystemAuditLevel = Claims.claimEcosystemAuditLevel
+attachmentMechanismAuditLevel = AttachmentAudit.attachmentMechanismAuditLevel
 
 ------------------------------------------------------------------------
 -- Exact remaining physical and analytic inputs.
@@ -181,6 +187,11 @@ physicalResidualGrowthAtMostFourInputsLevel =
   BlockSum.physicalResidualGrowthAtMostFourInputsLevel
 constructiveHalfGeometricSummabilityInputsLevel =
   BlockSum.constructiveHalfGeometricSummabilityInputsLevel
+physicalErrorTailDefinitionInputsLevel = TailBudget.physicalErrorTailDefinitionInputsLevel
+physicalTailSplitAndConvergenceInputsLevel =
+  TailBudget.physicalTailSplitAndConvergenceInputsLevel
+physicalTailBudgetImpliesPolymerAdmissibilityInputsLevel =
+  TailBudget.physicalTailBudgetImpliesPolymerAdmissibilityInputsLevel
 physicalRGDefectRepresentationInputsLevel =
   OneStep.physicalRGDefectRepresentationInputsLevel
 physicalInvariantDomainAndBoundaryInputsLevel =
@@ -222,3 +233,4 @@ physicalUniformHarrisContractionInputsLevel =
   Harris.physicalUniformHarrisContractionInputsLevel
 harrisRouteAcceptedAsMassGapAuthority = Harris.harrisRouteAcceptedAsMassGapAuthority
 claimedCompleteProofsAcceptedAsAuthority = Claims.claimedCompleteProofsAcceptedAsAuthority
+locatorMechanismsAcceptedAsAuthority = AttachmentAudit.locatorMechanismsAcceptedAsAuthority
