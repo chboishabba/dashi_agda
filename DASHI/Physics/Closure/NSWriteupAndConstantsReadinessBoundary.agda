@@ -20,25 +20,18 @@ listLength (_ ∷ xs) = suc (listLength xs)
 data NSWriteupAndConstantsReadinessClause : Set where
   classicalPDEPacketDependsOnCandidateCompleteSuitableWeakSolutionPackage :
     NSWriteupAndConstantsReadinessClause
-
   classicalPDEPacketDependsOnCandidateCompletePressureAndLocalEnergyPackage :
     NSWriteupAndConstantsReadinessClause
-
   candidateCompleteA1A3PackageRecordedForReviewerConsumption :
     NSWriteupAndConstantsReadinessClause
-
   candidateCompleteA4PackageRecordedForConstantsAndGeometry :
     NSWriteupAndConstantsReadinessClause
-
   candidateCompleteA5A9TheoremPackageLadderRecorded :
     NSWriteupAndConstantsReadinessClause
-
   writeupSurfaceExplicitlyConsumesClassicalPDEAndCKNESSLRTAndA1A3A4A5A9Packages :
     NSWriteupAndConstantsReadinessClause
-
   constantsSurfaceExplicitlyDependsOnA1A3AndA4AndDownstreamA5A9Packages :
     NSWriteupAndConstantsReadinessClause
-
   remainingGapIsPromotionEvidenceAcceptanceAndExactConstantsNotMissingGrammar :
     NSWriteupAndConstantsReadinessClause
 
@@ -66,31 +59,22 @@ nsWriteupAndConstantsReadinessClauseCountIs8 = refl
 data NSWriteupAndConstantsReadinessBlocker : Set where
   candidateA1TypeILorentzToAbelMassRouteNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
-
   candidateA3QuantitativeStationarityRateNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
-
   candidateA4ResidualPositiveLadderNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
-
   candidateA5A6A7A8A9ConsumerLadderNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
-
   candidateSuitableWeakSolutionAndPressurePackageNeedsAcceptanceInConsumedNorms :
     NSWriteupAndConstantsReadinessBlocker
-
   exactConstantsCompatibilityAcceptanceStillOpen :
     NSWriteupAndConstantsReadinessBlocker
-
   candidateStandardPDEWriteupNeedsReviewerAcceptanceAsSelfContainedPacket :
     NSWriteupAndConstantsReadinessBlocker
-
   classicalCKNESSLRTIntakeNeedsAcceptanceInReviewerConsumedForm :
     NSWriteupAndConstantsReadinessBlocker
-
   externalAuthorityAcceptanceStillOpen :
     NSWriteupAndConstantsReadinessBlocker
-
   clayPromotionForbiddenUntilA1ThroughA9AndAuthorityClose :
     NSWriteupAndConstantsReadinessBlocker
 
@@ -119,7 +103,7 @@ nsWriteupAndConstantsReadinessBlockerCountIs10 = refl
 
 nsWriteupAndConstantsReadinessSummary : String
 nsWriteupAndConstantsReadinessSummary =
-  "Readiness grammar: the reviewer-facing NS packet remains a candidate-complete classical suitable-weak-solution plus pressure/local-energy package consuming A1-A9 and classical CKN/ESS/LRT intake. Stage 3 now imports the finite l2/Leray/G=3/transport core, exact rejection of the source-style output-relocation affine ansatz, unit-weight Check A, recursive rational 4/3 and 32/31 sums, the 128/93 positive-kernel bound, ordered rational-embedding and native ConstructiveRealSpine closure, finite signed domination, and derivations of both H^s shell comparisons and both signed coefficient inequalities. The output-relocation family is resolved, reducing the live independent affine frontier from twenty-four to twenty-one slots. Concrete native ordered/rational data, coherent base-two power anchors, decay and absolute-order data, factor nonnegativity, one literal absolute-coefficient estimate, the other four archetypes, positive global DASHI epsilon, authority acceptance and the final cutoff-uniform dual bound remain open."
+  "Readiness grammar: the reviewer-facing NS packet remains a candidate-complete classical suitable-weak-solution plus pressure/local-energy package consuming A1-A9 and classical CKN/ESS/LRT intake. Stage 3 now imports the finite l2/Leray/G=3/transport core, exact rejection of the source-style output-relocation affine ansatz, unit-weight Check A, recursive rational 4/3 and 32/31 sums, the 128/93 positive-kernel bound, ordered rational-embedding and native ConstructiveRealSpine closure, finite signed domination, derivations of both H^s shell comparisons and both signed coefficient inequalities, exact decay formulas 2s-5/2 and 2s, and derived shell-factor positivity. The output-relocation family is resolved, reducing the live independent affine frontier from twenty-four to twenty-one slots. Concrete unital native ordered/rational data, coherent positive base-two power anchors, endpoint inequality inhabitants, native absolute-order laws, one literal absolute-coefficient estimate, the other four archetypes, positive global DASHI epsilon, authority acceptance and the final cutoff-uniform dual bound remain open."
 
 NSWriteupAndConstantsReadinessRecorded : Bool
 NSWriteupAndConstantsReadinessRecorded = true
