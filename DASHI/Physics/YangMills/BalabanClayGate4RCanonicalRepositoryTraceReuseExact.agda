@@ -1,11 +1,13 @@
 module DASHI.Physics.YangMills.BalabanClayGate4RCanonicalRepositoryTraceReuseExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
-open import Data.Rational using (ℚ)
+open import Data.Rational using (ℚ; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact using (SignedAxis4)
 
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryBreadthFirstTreeInstanceExact as BFS
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact as Extraction
@@ -69,8 +71,7 @@ rCanonicalWord :
   ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
   RCanonicalRepositoryTrace
     RExpression Polymer Block Tree Traversal Scale Volume →
-  RExpression → Agda.Builtin.List.List
-    DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact.SignedAxis4
+  RExpression → List SignedAxis4
 rCanonicalWord dataSet expression =
   BFS.canonicalDirectionWord (breadthFirstData dataSet)
     (expressionPolymer dataSet expression)
@@ -105,8 +106,9 @@ asExactRootedFamilyRepresentation :
     {shellData : Shell.TraversalShellData Scale Volume Block} →
   RCanonicalShellIdentification trace shellData →
   Reuse.ExactRootedFamilyRepresentation Scale Volume Block shellData
-asExactRootedFamilyRepresentation {trace = trace} identification = record
-  { Reuse.ExactRootedFamilyRepresentation.Family = _
+asExactRootedFamilyRepresentation {RExpression = RExpression}
+  {trace = trace} identification = record
+  { Reuse.ExactRootedFamilyRepresentation.Family = RExpression
   ; Reuse.ExactRootedFamilyRepresentation.scaleOf = scaleOf trace
   ; Reuse.ExactRootedFamilyRepresentation.volumeOf = volumeOf trace
   ; Reuse.ExactRootedFamilyRepresentation.rootOf = rCanonicalRoot trace
@@ -124,7 +126,7 @@ rCanonicalCountingBound :
     (identification : RCanonicalShellIdentification trace shellData)
     expression →
   familyMass trace expression
-  Shell.≤ Shell.quarter * Shell.halfPower (rCanonicalDepth trace expression)
+  ≤ Shell.quarter * Shell.halfPower (rCanonicalDepth trace expression)
 rCanonicalCountingBound identification =
   Reuse.exactRootedFamilyCounting
     (asExactRootedFamilyRepresentation identification)
