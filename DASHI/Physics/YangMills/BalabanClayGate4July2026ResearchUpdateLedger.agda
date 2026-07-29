@@ -5,7 +5,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4July2026ResearchUpdateExact as Update
 
 froehlichOSMethodAuthorityLevel : ProofLevel
-froehlichOSMethodAuthorityLevel = verifiedLiterature
+froehlichOSMethodAuthorityLevel = standardImported
 
 osReconstructionIncludesCyclicVacuumLevel =
   Update.osReconstructionIncludesCyclicVacuumLevel
@@ -29,7 +29,7 @@ os1PerPolymerA2MechanismLevel =
   Update.os1PerPolymerA2MechanismLevel
 
 harrisMethodAuthorityLevel : ProofLevel
-harrisMethodAuthorityLevel = verifiedLiterature
+harrisMethodAuthorityLevel = standardImported
 
 harrisPhysicalBoundaryApplicationLevel =
   Update.harrisPhysicalBoundaryApplicationLevel
