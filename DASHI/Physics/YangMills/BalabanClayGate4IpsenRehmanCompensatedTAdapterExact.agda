@@ -1,8 +1,9 @@
 module DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanCompensatedTAdapterExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Rational using (ℚ; _*_; _≤_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -12,7 +13,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact a
 
 ------------------------------------------------------------------------
 -- This adapter supplies the determinantCompensated field consumed by the
--- compensated six-factor T-operation budget.  The finite determinant theorem is
+-- compensated six-factor T-operation budget. The finite determinant theorem is
 -- already assembled; the remaining input is the physical identification of the
 -- Hessian matrices, determinant factors and rational order.
 ------------------------------------------------------------------------
@@ -58,19 +59,32 @@ ipsenRehmanSuppliesDeterminantCompensated :
 ipsenRehmanSuppliesDeterminantCompensated
   {comparison = comparison} {meaning = meaning} bridge scale traversal =
   let dataSet = Determinant.determinantData meaning scale traversal
+      physicalValue = Determinant.physicalDeterminant meaning scale traversal
+      referenceValue = Determinant.referenceDeterminant meaning scale traversal
+      multiplierValue = Determinant.determinantMultiplier meaning scale traversal
       base = determinantOrderMeaning bridge scale traversal
         (Determinant.physicalDeterminantBelowIpsenRehmanMultiplier
           meaning scale traversal)
+      commute : referenceValue * multiplierValue ≡ multiplierValue * referenceValue
+      commute = ℚRing.solve
+      comparisonProductMeaning :
+        Compensated.determinantLoss comparison scale traversal
+          * Compensated.referenceDeterminant comparison scale traversal
+        ≡ multiplierValue * referenceValue
+      comparisonProductMeaning = cong₂ _*_
+        (multiplierMeaning bridge scale traversal)
+        (referenceFactorMeaning bridge scale traversal)
+      upperMeaning :
+        referenceValue * multiplierValue
+        ≡ Compensated.determinantLoss comparison scale traversal
+            * Compensated.referenceDeterminant comparison scale traversal
+      upperMeaning = trans commute (sym comparisonProductMeaning)
   in subst
       (λ upper → Factors.determinantFactor
         (Compensated.physical comparison) scale traversal ≤ upper)
-      (sym (Agda.Builtin.Equality.cong₂ _*_
-        (multiplierMeaning bridge scale traversal)
-        (referenceFactorMeaning bridge scale traversal)))
+      upperMeaning
       (subst
-        (λ lower → lower ≤
-          Determinant.determinantMultiplier meaning scale traversal
-          * Determinant.referenceDeterminant meaning scale traversal)
+        (λ lower → lower ≤ referenceValue * multiplierValue)
         (sym (physicalFactorMeaning bridge scale traversal))
         base)
 
