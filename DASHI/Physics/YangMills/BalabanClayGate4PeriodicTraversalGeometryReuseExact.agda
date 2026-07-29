@@ -1,11 +1,14 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PeriodicTraversalGeometryReuseExact where
 
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using ([]; _∷_)
+
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicTraversalDecoderExact as Decoder
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as Geometry
-import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 
 ------------------------------------------------------------------------
 -- Repository-specific finite geometry.  The conventional link reversal is
@@ -18,9 +21,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as B
 periodicDirectionInverseLaw : ∀ n → Decoder.DirectionInverseLaw n
 periodicDirectionInverseLaw n = record
   { Decoder.DirectionInverseLaw.forwardThenReverse =
-      λ { block (pair axis Agda.Builtin.Bool.true) →
+      λ { block (pair axis true) →
             Geometry.negativeAfterPositiveBlock block axis
-        ; block (pair axis Agda.Builtin.Bool.false) →
+        ; block (pair axis false) →
             Geometry.positiveAfterNegativeBlock block axis
         }
   }
@@ -28,7 +31,7 @@ periodicDirectionInverseLaw n = record
 periodicSingleEdgeReturns :
   ∀ {n} block direction →
   Decoder.replayTerminal block
-    (direction Decoder.∷ Decoder.reverseDirection direction Decoder.∷ Decoder.[])
+    (direction ∷ Decoder.reverseDirection direction ∷ [])
   ≡ block
 periodicSingleEdgeReturns {n} =
   Decoder.singleEdgeReturns (periodicDirectionInverseLaw n)
