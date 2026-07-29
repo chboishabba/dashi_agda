@@ -9,6 +9,8 @@ from pathlib import Path
 
 FILES = (
     "DASHI/Physics/Closure/NSTriadKNInageHighHighComparatorAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3RelocationInstantiation.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationWeightedExponentIdentity.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationVerticalSlice.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationExperimentIntegration.agda",
 )
@@ -57,9 +59,10 @@ def main() -> int:
         print("\n".join(failures))
         return 1
     print(
-        "checked output-relocation experiment: 3 Agda modules, exact audit, "
-        "provenance, no holes/postulates/termination escapes; numeric vector "
-        "and epsilon remain correctly fail-closed"
+        f"checked output-relocation experiment: {len(FILES)} Agda modules, "
+        "exact audit, provenance, no holes/postulates/termination escapes; "
+        "concrete carrier and weighted exponent closed, while constructive "
+        "series, numeric vector and epsilon remain correctly fail-closed"
     )
     return 0
 
