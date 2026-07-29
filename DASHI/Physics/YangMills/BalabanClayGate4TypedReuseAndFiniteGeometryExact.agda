@@ -5,8 +5,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Dec; yes; no)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
+  using (Dec; yes; no; Empty)
 
+import DASHI.Physics.YangMills.BalabanCriticalMapOneStepRGClosure as Core
 import DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion as ExistingRG
 import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as ExistingGeometry
 
@@ -33,12 +35,12 @@ smallFieldCoordinatesExist :
     (adapter : ExistingSmallFieldToCombinedRGAdapter Configuration Background
       Fluctuation GaugeOrbit Polymer Region Coupling Bound Density) {U} →
   ExistingRG.SmallFieldConfiguration (rg adapter) U →
-  ExistingRG.Σ Background (λ Ubg →
-    ExistingRG.Σ Fluctuation (λ Z →
-      ExistingRG.SmallFieldCoordinates (rg adapter) Ubg Z
-      ExistingRG.×
-      U ≡ ExistingRG.multiplyConfiguration (rg adapter) Ubg
-        (ExistingRG.exp (rg adapter) Z)))
+  Core.Σ Background (λ Ubg →
+    Core.Σ Fluctuation (λ Z →
+      Core._×_
+        (ExistingRG.SmallFieldCoordinates (rg adapter) Ubg Z)
+        (U ≡ ExistingRG.multiplyConfiguration (rg adapter) Ubg
+          (ExistingRG.exp (rg adapter) Z))))
 smallFieldCoordinatesExist adapter = ExistingRG.fluctuationCoordinatesExist (rg adapter)
 
 smallFieldLocalization :
@@ -162,14 +164,11 @@ data ClassifiedLocalizedTerm {Term Region : Set}
     (dataSet : SupportLargeFieldIntersection Term Region)
     (term : Term) (region : Region) : LocalizedClass → Set where
   classifiedFirst :
-    (doesNotIntersect : Intersects dataSet term region → ⊥) →
+    (doesNotIntersect : Intersects dataSet term region → Empty) →
     ClassifiedLocalizedTerm dataSet term region firstClass
   classifiedSecond :
     Intersects dataSet term region →
     ClassifiedLocalizedTerm dataSet term region secondClass
-
--- Explicit empty proposition used by the negative branch of Dec.
-data ⊥ : Set where
 
 classifyLocalizedTermExact :
   ∀ {Term Region}
