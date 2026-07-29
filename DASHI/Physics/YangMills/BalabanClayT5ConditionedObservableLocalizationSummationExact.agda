@@ -1,6 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayT5ConditionedObservableLocalizationSummationExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -43,8 +45,7 @@ record FiniteLocalizationAlgebra
     localTermAtDepth : Observable → Nat → LocalTerm
     localTermNorm localizationDecay : Observable → Nat → Bound
 
-    localizationExpansionExact : ∀ observable cutoff → Set
-
+    localizationExpansionExact : ∀ observable → Set
     localTermNormMeaning : ∀ observable depth → Set
 
     localTermExponentiallyLocalized : ∀ observable depth →
@@ -119,22 +120,22 @@ record ConditionedObservableLocalizationMeaning
     (dataSet : FiniteLocalizationAlgebra
       Observable LocalTerm Region Bound) : Set₁ where
   field
-    regionOf : Observable → Region → Nat
+    regionDepth : Observable → Region → Nat
     localTerms : Observable → Region → LocalTerm
     localTermNormByRegion localizationDecayByRegion :
       Observable → Region → Bound
 
     localTermsMeaning : ∀ observable region →
       localTerms observable region
-      ≡ localTermAtDepth dataSet observable (regionOf observable region)
+      ≡ localTermAtDepth dataSet observable (regionDepth observable region)
 
     localTermNormRegionMeaning : ∀ observable region →
       localTermNormByRegion observable region
-      ≡ localTermNorm dataSet observable (regionOf observable region)
+      ≡ localTermNorm dataSet observable (regionDepth observable region)
 
     localizationDecayRegionMeaning : ∀ observable region →
       localizationDecayByRegion observable region
-      ≡ localizationDecay dataSet observable (regionOf observable region)
+      ≡ localizationDecay dataSet observable (regionDepth observable region)
 
 open ConditionedObservableLocalizationMeaning public
 
@@ -154,26 +155,22 @@ asConditionedObservableLocalization {dataSet = dataSet} meaning = record
       localTermNormByRegion meaning
   ; Clustering.ConditionedObservableLocalization.localizationDecay =
       localizationDecayByRegion meaning
-  ; Clustering.ConditionedObservableLocalization.LessEqual =
-      LessEqual dataSet
+  ; Clustering.ConditionedObservableLocalization.LessEqual = LessEqual dataSet
   ; Clustering.ConditionedObservableLocalization.localizationExpansionExact =
-      λ observable → localizationExpansionExact dataSet observable
-        (regionOf meaning observable
-          (regionAtDepth dataSet observable zero))
+      localizationExpansionExact dataSet
   ; Clustering.ConditionedObservableLocalization.localTermExponentiallyLocalized =
       λ observable region →
-        let depth = regionOf meaning observable region
-        in Agda.Builtin.Equality.subst
+        subst
           (λ normValue → LessEqual dataSet normValue
             (localizationDecayByRegion meaning observable region))
-          (Agda.Builtin.Equality.sym
-            (localTermNormRegionMeaning meaning observable region))
-          (Agda.Builtin.Equality.subst
+          (sym (localTermNormRegionMeaning meaning observable region))
+          (subst
             (λ decayValue → LessEqual dataSet
-              (localTermNorm dataSet observable depth) decayValue)
-            (Agda.Builtin.Equality.sym
-              (localizationDecayRegionMeaning meaning observable region))
-            (localTermExponentiallyLocalized dataSet observable depth))
+              (localTermNorm dataSet observable
+                (regionDepth meaning observable region)) decayValue)
+            (sym (localizationDecayRegionMeaning meaning observable region))
+            (localTermExponentiallyLocalized dataSet observable
+              (regionDepth meaning observable region)))
   }
 
 finiteLocalizationSumLevel : ProofLevel
