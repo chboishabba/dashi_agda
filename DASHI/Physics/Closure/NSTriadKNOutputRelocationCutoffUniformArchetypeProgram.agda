@@ -18,13 +18,15 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- DOI: 10.1006/jfan.2001.3804; 10.24033/asens.1404;
 -- 10.1007/978-3-642-16830-7; 10.1007/978-3-642-61667-9;
 -- 10.48550/arXiv.2205.08354; the repository program has no DOI.
--- Uses: unit auxiliary weights, the exact rational geometric envelope with
+-- Uses: unit auxiliary weights, exact rational geometric summation with
 -- constant 128/93, the canonical positive kernel, all three normalized shell
--- Schur conditions, and finite two-sided signed domination.
--- Relationship: every theorem downstream of the concrete shell bridge is now
--- proved.  The remaining bridge consists only of the two H^s-to-rational
--- envelope comparisons and the literal Navier--Stokes coefficient's pointwise
--- two-sided domination.  The concrete operator theorem remains fail-closed.
+-- Schur conditions, finite two-sided signed domination, and the generic
+-- ordered rational-embedding closure theorem.
+-- Relationship: every theorem downstream of an embedded concrete shell bridge
+-- is proved.  Remaining inhabitants are the concrete ordered carrier, the two
+-- H^s-to-rational envelope comparisons, and the literal coefficient's
+-- pointwise two-sided domination.  The concrete operator theorem remains
+-- fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -39,21 +41,19 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightShellSchur as ShellSchur
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteSignedMajorant as Signed
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as Conditional
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
 
 record OutputRelocationCutoffUniformArchetypeCutset {s : Level} : Set (lsuc s) where
   field
     Scalar : Set s
 
-    concreteShellBridge : Set s
+    concreteOrderedCarrier : Set s
+    concreteEmbeddedShellBridge : Set s
     concretePowerEnvelopeBridge : Set s
     concreteCoefficientTwoSidedDomination : Set s
 
     positiveKernelMajorant : Set s
     kernelMajorantNonnegative : Set s
-
-    lowShellSeriesBoundedByFourThirds : Set s
-    gapSeriesBoundedByThirtyTwoThirtyFirsts : Set s
-    doubleSeriesBoundedByOneTwentyEightOverNinetyThree : Set s
     doubleSeriesBoundIndependentOfCutoff : Set s
 
     outputSchurConditionWithUnitWeights : Set s
@@ -75,8 +75,6 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       Unit.outputRelocationUnitWeightSymbolicCheckA ≡ true
     integerEnvelopeClosed :
       Envelope.outputRelocationIntegerEnvelopeExponentsClosed ≡ true
-    exactRationalGeometricConstantsClosed :
-      Envelope.outputRelocationRationalGeometricConstantsClosed ≡ true
     rationalFiniteCutoffSummationClosed :
       Envelope.outputRelocationRationalFiniteCutoffSummationClosed ≡ true
     positiveKernelConstructed :
@@ -88,18 +86,23 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       ≡ true
     finiteSignedDominationClosed :
       Signed.finiteTwoSidedTriangleDominationClosed ≡ true
-    conditionalArchetypeTheoremClosed :
+    rationalConditionalArchetypeTheoremClosed :
       Conditional.outputRelocationConditionalArchetypeTheoremClosed ≡ true
-    allDownstreamOfShellBridgeClosed :
-      Conditional.outputRelocationAllDownstreamOfShellBridgeClosed ≡ true
+    orderedEmbeddingClosureTheoremClosed :
+      Embedded.orderedRationalEmbeddingClosureTheoremClosed ≡ true
+    allDownstreamOfEmbeddedShellBridgeClosed :
+      Embedded.allDownstreamOfEmbeddedShellBridgeClosed ≡ true
     minimalPowerBridgeSpecified :
       PowerBridge.outputRelocationMinimalPowerBridgeSpecified ≡ true
     onlyTwoPowerDominationLemmasRequired :
       PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequired ≡ true
-    concretePowerBridgeStillOpen :
-      PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosed ≡ false
-    concreteShellBridgeStillOpen :
-      Conditional.outputRelocationConcreteShellBridgeInhabited ≡ false
+    integerPowersAloneInsufficientForHsComparison :
+      PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparison
+      ≡ false
+    concreteOrderedCarrierStillOpen :
+      Embedded.concreteOrderedCarrierAdapterClosed ≡ false
+    concreteEmbeddedShellBridgeStillOpen :
+      Embedded.concreteEmbeddedShellBridgeClosed ≡ false
 
 open OutputRelocationArchetypeProgramReceipt public
 
@@ -108,18 +111,19 @@ outputRelocationArchetypeProgramReceipt = receipt
   Schur.threeFunctionSchurPrimaryFrameworkIsTrue
   Unit.outputRelocationUnitWeightSymbolicCheckAIsTrue
   Envelope.outputRelocationIntegerEnvelopeExponentsClosedIsTrue
-  Envelope.outputRelocationRationalGeometricConstantsClosedIsTrue
   Envelope.outputRelocationRationalFiniteCutoffSummationClosedIsTrue
   Majorant.outputRelocationPositiveKernelConstructedIsTrue
   Majorant.outputRelocationPositiveKernelCutoffUniformlySummableIsTrue
   ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosedIsTrue
   Signed.finiteTwoSidedTriangleDominationClosedIsTrue
   Conditional.outputRelocationConditionalArchetypeTheoremClosedIsTrue
-  Conditional.outputRelocationAllDownstreamOfShellBridgeClosedIsTrue
+  Embedded.orderedRationalEmbeddingClosureTheoremClosedIsTrue
+  Embedded.allDownstreamOfEmbeddedShellBridgeClosedIsTrue
   PowerBridge.outputRelocationMinimalPowerBridgeSpecifiedIsTrue
   PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue
-  PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosedIsFalse
-  Conditional.outputRelocationConcreteShellBridgeInhabitedIsFalse
+  PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparisonIsFalse
+  Embedded.concreteOrderedCarrierAdapterClosedIsFalse
+  Embedded.concreteEmbeddedShellBridgeClosedIsFalse
 
 outputRelocationFinalArchetypeCutsetSpecified : Bool
 outputRelocationFinalArchetypeCutsetSpecified = true
@@ -136,8 +140,14 @@ outputRelocationThreeUnitWeightShellSchurConditionsClosed = true
 outputRelocationFiniteSignedDominationTheoremClosed : Bool
 outputRelocationFiniteSignedDominationTheoremClosed = true
 
-outputRelocationConditionalCutoffUniformArchetypeClosed : Bool
-outputRelocationConditionalCutoffUniformArchetypeClosed = true
+outputRelocationOrderedEmbeddingClosureTheoremClosed : Bool
+outputRelocationOrderedEmbeddingClosureTheoremClosed = true
+
+outputRelocationAllDownstreamOfEmbeddedShellBridgeClosed : Bool
+outputRelocationAllDownstreamOfEmbeddedShellBridgeClosed = true
+
+outputRelocationConcreteOrderedCarrierClosed : Bool
+outputRelocationConcreteOrderedCarrierClosed = false
 
 outputRelocationConcreteShellBridgeClosed : Bool
 outputRelocationConcreteShellBridgeClosed = false
@@ -171,9 +181,17 @@ outputRelocationFiniteSignedDominationTheoremClosedIsTrue :
   outputRelocationFiniteSignedDominationTheoremClosed ≡ true
 outputRelocationFiniteSignedDominationTheoremClosedIsTrue = refl
 
-outputRelocationConditionalCutoffUniformArchetypeClosedIsTrue :
-  outputRelocationConditionalCutoffUniformArchetypeClosed ≡ true
-outputRelocationConditionalCutoffUniformArchetypeClosedIsTrue = refl
+outputRelocationOrderedEmbeddingClosureTheoremClosedIsTrue :
+  outputRelocationOrderedEmbeddingClosureTheoremClosed ≡ true
+outputRelocationOrderedEmbeddingClosureTheoremClosedIsTrue = refl
+
+outputRelocationAllDownstreamOfEmbeddedShellBridgeClosedIsTrue :
+  outputRelocationAllDownstreamOfEmbeddedShellBridgeClosed ≡ true
+outputRelocationAllDownstreamOfEmbeddedShellBridgeClosedIsTrue = refl
+
+outputRelocationConcreteOrderedCarrierClosedIsFalse :
+  outputRelocationConcreteOrderedCarrierClosed ≡ false
+outputRelocationConcreteOrderedCarrierClosedIsFalse = refl
 
 outputRelocationConcreteShellBridgeClosedIsFalse :
   outputRelocationConcreteShellBridgeClosed ≡ false
