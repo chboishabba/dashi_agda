@@ -18,6 +18,7 @@ record CurrentGate4FrontierReceipt : Set where
     literalRationalSU2GroupChecked : Bool
     periodicCoordinateClosureChecked : Bool
     literalCubeBianchiChecked : Bool
+    rationalSU2CubeBianchiChecked : Bool
     periodicTraversalGeometryChecked : Bool
 
     positiveReferenceMassChecked : Bool
@@ -25,6 +26,7 @@ record CurrentGate4FrontierReceipt : Set where
 
     canonicalRTraceReuseChecked : Bool
     localizedFactorReductionChecked : Bool
+    existingRGPhysicalOneStepReuseChecked : Bool
 
     publishedTerminalCriteriaChecked : Bool
     denseRotationOS1ReductionChecked : Bool
@@ -42,11 +44,13 @@ record AuthoritativeCurrentGate4Evidence
     rationalSU2GroupTypechecks : Set
     periodicCoordinateClosureTypechecks : Set
     literalCubeBianchiTypechecks : Set
+    rationalSU2CubeBianchiTypechecks : Set
     periodicTraversalGeometryTypechecks : Set
     positiveReferenceMassTypechecks : Set
     physicalReferenceNormalizationAssemblyTypechecks : Set
     canonicalRTraceReuseTypechecks : Set
     localizedFactorReductionTypechecks : Set
+    existingRGPhysicalOneStepReuseTypechecks : Set
     publishedTerminalCriteriaTypechecks : Set
     denseRotationOS1ReductionTypechecks : Set
     clusteringToTransferGapReductionTypechecks : Set
@@ -69,6 +73,9 @@ periodicCoordinateClosureTypecheckLevel = conditional
 literalCubeBianchiTypecheckLevel : ProofLevel
 literalCubeBianchiTypecheckLevel = conditional
 
+rationalSU2CubeBianchiTypecheckLevel : ProofLevel
+rationalSU2CubeBianchiTypecheckLevel = conditional
+
 periodicTraversalGeometryTypecheckLevel : ProofLevel
 periodicTraversalGeometryTypecheckLevel = conditional
 
@@ -83,6 +90,9 @@ canonicalRTraceReuseTypecheckLevel = conditional
 
 localizedFactorReductionTypecheckLevel : ProofLevel
 localizedFactorReductionTypecheckLevel = conditional
+
+existingRGPhysicalOneStepReuseTypecheckLevel : ProofLevel
+existingRGPhysicalOneStepReuseTypecheckLevel = conditional
 
 publishedTerminalCriteriaTypecheckLevel : ProofLevel
 publishedTerminalCriteriaTypecheckLevel = conditional
