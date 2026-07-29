@@ -1,6 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact where
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Rational using (_≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -33,7 +35,7 @@ import DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact as 
 -- Lluis Eriksson, "Exponential Clustering and Mass Gap for Four-Dimensional
 -- SU(N) Lattice Yang--Mills Theory Via Balaban's Renormalization Group and
 -- Multiscale Correlator Decoupling -- a Conditional Clustering Theorem --",
--- ai.viXra:2602.0088v3, no DOI recorded.  Version 3 explicitly leaves H-KP,
+-- ai.viXra:2602.0088v3, no DOI recorded. Version 3 explicitly leaves H-KP,
 -- H-LOC, H-Rbeta, H-P0', per-scale decoupling and OS1 conditional.
 ------------------------------------------------------------------------
 
@@ -60,6 +62,14 @@ record PhysicalContinuumOSGapData
       Physical.PhysicalMeasureConvergenceData Measure Observable Scalar
 
     continuumClosure : Limit.FiniteToContinuumOSClosure Measure Schwinger
+
+    physicalMeasureSequenceAgrees : ∀ cutoff →
+      Physical.measureSequence physicalMeasureConvergence cutoff
+      ≡ Limit.finiteMeasures continuumClosure cutoff
+
+    physicalContinuumMeasureAgrees :
+      Physical.continuumMeasure physicalMeasureConvergence
+      ≡ Limit.continuumMeasure continuumClosure
 
     gramTopology :
       Gram.MeasureTopologyControlsOSGram Measure Schwinger TestFamily Scalar
@@ -139,10 +149,12 @@ constructedPhysicalMassTransport :
       State Bound Measure Observable Schwinger Scalar
       TestFamily Hilbert Vector) →
   Mass.survivingMass (physicalInterlacing dataSet)
-  Data.Rational._≤_
-    Mass.physicalGap (physicalInterlacing dataSet) Agda.Builtin.Nat.zero
+  ≤ Mass.physicalGap (physicalInterlacing dataSet) zero
 constructedPhysicalMassTransport dataSet =
   Mass.positivePhysicalMassSurvives (physicalInterlacing dataSet)
+
+physicalMeasurePresentationAgreementLevel : ProofLevel
+physicalMeasurePresentationAgreementLevel = machineChecked
 
 physicalMeasureToGramClosureAssemblyLevel : ProofLevel
 physicalMeasureToGramClosureAssemblyLevel = machineChecked
@@ -153,10 +165,6 @@ physicalContinuumOSAxiomAssemblyLevel = machineChecked
 physicalGapToInterlacingAssemblyLevel : ProofLevel
 physicalGapToInterlacingAssemblyLevel = machineChecked
 
--- Exact remaining analytic bridges.  OS2 is supplied at lattice level by the
--- Wilson-action reflection-positivity theorem, but OS4 requires uniform
--- exponential clustering.  Full relativistic reconstruction additionally
--- requires OS1, which the uploaded locator explicitly does not establish.
 physicalUVToContinuumMeasureInputsLevel : ProofLevel
 physicalUVToContinuumMeasureInputsLevel = conditional
 
