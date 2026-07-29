@@ -7,8 +7,8 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- Gabor Pataki; Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin; Raphael
 -- Danchin; Errett Bishop; Douglas Bridges; DASHI repository contributors.
 -- Title: "Stage-3 constructive-series candidate, literal Schur-shell
--- substitution, affine falsification, unit-weight Check A, and integer
--- geometric-envelope integration".
+-- substitution, affine falsification, unit-weight Check A, integer geometric
+-- envelope, and final output-relocation cutset integration".
 -- Venue/year: Reals-in-agda formal development, 2015; Constructive Analysis in
 -- the Agda Proof Assistant, 2022; Logical Methods in Computer Science 9(1:1),
 -- 2013; Journal of Functional Analysis 187 (2001), 1--24 and 199 (2003),
@@ -23,12 +23,14 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- Uses: constructive-real candidate comparison, literal power-law Schur
 -- orientation, the closed physical exponent identity, exact shell
 -- substitution, exact falsification of the unnecessary all-three-homogeneity
--- ansatz, the constant-unit-weight Schur specialization, and integer geometric
--- envelopes with exact rational constants.
--- Relationship: closes symbolic Check A and the geometric-series arithmetic.
--- A general arbitrary-real-ratio geometric theorem is no longer required. The
--- remaining constructive leaf is the base-two exponent antitonicity bridge
--- that dominates the real shell factors by 4^-j and 32^-d.
+-- ansatz, the constant-unit-weight Schur specialization, integer geometric
+-- envelopes, the minimal base-two power bridge, and the final archetype
+-- cutset.
+-- Relationship: closes symbolic Check A, the geometric-series arithmetic, and
+-- the final theorem dependency graph. A general arbitrary-real-ratio
+-- geometric theorem is no longer required. The remaining constructive leaf is
+-- the two-inequality base-two exponent antitonicity bridge, followed by
+-- positive-kernel and signed-majorant instantiation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -42,6 +44,8 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFamilySubstitution a
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFarkasDecision as Decision
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightCheckA as Unit
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationIntegerGeometricEnvelope as Envelope
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge as PowerBridge
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProgram as Archetype
 
 record ConstructiveSeriesOrientationReceipt : Set where
   constructor receipt
@@ -91,12 +95,18 @@ record ConstructiveSeriesOrientationReceipt : Set where
       Envelope.outputRelocationRationalGeometricConstantsClosed ≡ true
     arbitraryRatioGeometricTheoremNotRequired :
       Envelope.outputRelocationArbitraryRatioGeometricTheoremRequired ≡ false
+    minimalPowerBridgeSpecified :
+      PowerBridge.outputRelocationMinimalPowerBridgeSpecified ≡ true
+    onlyTwoPowerDominationLemmasRequired :
+      PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequired ≡ true
+    finalArchetypeCutsetSpecified :
+      Archetype.outputRelocationFinalArchetypeCutsetSpecified ≡ true
     powerMonotonicityBridgeStillOpen :
-      Envelope.outputRelocationConstructivePowerMonotonicityBridgeClosed ≡ false
+      PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosed ≡ false
     cutoffUniformSeriesStillOpen :
       Envelope.outputRelocationCutoffUniformSeriesClosed ≡ false
     analyticArchetypeStillOpen :
-      Unit.outputRelocationUnitWeightAnalyticArchetypeClosed ≡ false
+      Archetype.outputRelocationCutoffUniformArchetypeTheoremClosed ≡ false
 
 open ConstructiveSeriesOrientationReceipt public
 
@@ -126,9 +136,12 @@ constructiveSeriesOrientationReceipt = receipt
   Envelope.outputRelocationIntegerEnvelopeExponentsClosedIsTrue
   Envelope.outputRelocationRationalGeometricConstantsClosedIsTrue
   Envelope.outputRelocationArbitraryRatioGeometricTheoremRequiredIsFalse
-  Envelope.outputRelocationConstructivePowerMonotonicityBridgeClosedIsFalse
+  PowerBridge.outputRelocationMinimalPowerBridgeSpecifiedIsTrue
+  PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue
+  Archetype.outputRelocationFinalArchetypeCutsetSpecifiedIsTrue
+  PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosedIsFalse
   Envelope.outputRelocationCutoffUniformSeriesClosedIsFalse
-  Unit.outputRelocationUnitWeightAnalyticArchetypeClosedIsFalse
+  Archetype.outputRelocationCutoffUniformArchetypeTheoremClosedIsFalse
 
 constructiveRealCandidateComparisonClosed : Bool
 constructiveRealCandidateComparisonClosed = true
@@ -150,6 +163,9 @@ outputRelocationUnitWeightSymbolicCheckAClosed = true
 
 outputRelocationIntegerGeometricEnvelopeClosed : Bool
 outputRelocationIntegerGeometricEnvelopeClosed = true
+
+outputRelocationFinalArchetypeCutsetSpecified : Bool
+outputRelocationFinalArchetypeCutsetSpecified = true
 
 nextLeafIsConstructivePowerMonotonicityBridge : Bool
 nextLeafIsConstructivePowerMonotonicityBridge = true
@@ -193,6 +209,10 @@ outputRelocationUnitWeightSymbolicCheckAClosedIsTrue = refl
 outputRelocationIntegerGeometricEnvelopeClosedIsTrue :
   outputRelocationIntegerGeometricEnvelopeClosed ≡ true
 outputRelocationIntegerGeometricEnvelopeClosedIsTrue = refl
+
+outputRelocationFinalArchetypeCutsetSpecifiedIsTrue :
+  outputRelocationFinalArchetypeCutsetSpecified ≡ true
+outputRelocationFinalArchetypeCutsetSpecifiedIsTrue = refl
 
 nextLeafIsConstructivePowerMonotonicityBridgeIsTrue :
   nextLeafIsConstructivePowerMonotonicityBridge ≡ true
