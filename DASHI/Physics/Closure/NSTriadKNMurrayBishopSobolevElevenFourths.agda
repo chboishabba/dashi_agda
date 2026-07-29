@@ -48,11 +48,15 @@ elevenHalves = Int.+ 11 / 2
 
 fiveHalvesBelowElevenFourths : fiveHalves < elevenFourths
 fiveHalvesBelowElevenFourths =
-  toWitness (fiveHalves RationalLaws.<? elevenFourths)
+  toWitness
+    {a? = RationalLaws._<?_ fiveHalves elevenFourths}
+    tt
 
 elevenFourthsBelowThree : elevenFourths < threeRational
 elevenFourthsBelowThree =
-  toWitness (elevenFourths RationalLaws.<? threeRational)
+  toWitness
+    {a? = RationalLaws._<?_ elevenFourths threeRational}
+    tt
 
 murrayBishopSobolevExponent : Bishop.ℝ
 murrayBishopSobolevExponent =
