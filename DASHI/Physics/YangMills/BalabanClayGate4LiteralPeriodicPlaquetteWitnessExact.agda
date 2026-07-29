@@ -5,6 +5,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Product using (_×_; _,_)
+open import Data.Rational using (_*_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -31,8 +32,13 @@ import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometr
 -- R Operation", Communications in Mathematical Physics 122 (1989), 175--202.
 -- DOI: 10.1007/BF01257412.
 --
+-- Tadeusz Bałaban, "Large Field Renormalization. II. Localization,
+-- Exponentiation, and Bounds for the R Operation", Communications in
+-- Mathematical Physics 122 (1989), 355--392.
+-- DOI: 10.1007/BF01238433.
+--
 -- Relationship: the positive periodic plaquette enumeration below is a
--- DASHI-specific finite carrier.  The papers own the averaging, background and
+-- DASHI-specific finite carrier. The papers own the averaging, background and
 -- large-field architecture; they do not replace the exact finite proofs here.
 ------------------------------------------------------------------------
 
@@ -204,6 +210,7 @@ ReachableThroughLiteralLargeBlocks :
 ReachableThroughLiteralLargeBlocks dataSet scale configuration =
   Geometry.BadPath (Wilson.literalWilsonBadBlockGeometry dataSet scale) configuration
 
+infix 2 _↔_
 record _↔_ (Left Right : Set) : Set where
   field
     forward : Left → Right
