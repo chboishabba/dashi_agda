@@ -26,7 +26,7 @@ import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as 
 --     exp(a(gamma') + d(gamma')) |Phi(gamma')| <= a(gamma).
 --
 -- This is not definitionally the same as DASHI's earlier single rooted-shell
--- bound.  The bridge below requires an explicit identification of the physical
+-- bound. The bridge below requires an explicit identification of the physical
 -- incompatible-neighbourhood sum and its a-budget with that rooted carrier.
 ------------------------------------------------------------------------
 
@@ -36,7 +36,18 @@ record KoteckyPreissTwoWeightData
     activityNorm aWeight dWeight : Polymer → Scalar
     Incompatible : Polymer → Polymer → Set
 
+    add multiply : Scalar → Scalar → Scalar
+    exponential : Scalar → Scalar
+
+    incompatibleWeightedTerm : Polymer → Polymer → Scalar
+    incompatibleWeightedTermMeaning : ∀ centre neighbour →
+      incompatibleWeightedTerm centre neighbour
+      ≡ multiply
+          (exponential (add (aWeight neighbour) (dWeight neighbour)))
+          (activityNorm neighbour)
+
     incompatibleWeightedSum : Polymer → Scalar
+    incompatibleWeightedSumEnumerationMeaning : ∀ polymer → Set
     LessEqual : Scalar → Scalar → Set
 
     partitionFunction : FiniteVolume → Scalar
