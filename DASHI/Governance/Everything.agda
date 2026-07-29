@@ -12,6 +12,7 @@ import DASHI.Governance.CaseyITIRNixBridgeTests
 import DASHI.Governance.AuthorityMandateCore
 import DASHI.Governance.CouncilDelegationGraph
 import DASHI.Governance.ExternalLegitimacyBoundary
+import DASHI.Governance.LocalGlobalCouncilGluing
 import DASHI.Governance.RelationalMandateFibre
 import DASHI.Governance.SituatedConstituency
 import DASHI.Governance.TransitionResidual
