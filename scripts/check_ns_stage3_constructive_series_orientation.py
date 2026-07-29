@@ -19,6 +19,7 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationDirectionSystemClassification.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationIntegerGeometricEnvelope.agda",
     "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
@@ -28,6 +29,7 @@ VERIFIERS = (
     "scripts/ns_stage3_power_law_orientation_audit.py",
     "scripts/ns_stage3_output_relocation_farkas_audit.py",
     "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
+    "scripts/ns_stage3_output_relocation_integer_envelope_audit.py",
 )
 
 PROVENANCE = (
@@ -85,11 +87,12 @@ def main() -> int:
         return 1
     print(
         "checked Murray thesis pin, Dong Li coercivity boundary and "
-        "output-relocation Check A tranche: 13 Agda modules, 4 exact "
+        "output-relocation Check A tranche: 14 Agda modules, 5 exact "
         "verifiers, provenance, no holes/postulates/escapes; the source-style "
-        "all-three-homogeneity affine ansatz is exactly infeasible, while "
-        "constant unit weights recover symbolic Check A on 5/2<s<3; "
-        "constructive dyadic summation and the full analytic archetype remain "
+        "all-three-homogeneity affine ansatz is exactly infeasible, constant "
+        "unit weights recover symbolic Check A, and integer geometric "
+        "envelopes give the exact 128/93 cutoff bound; only constructive "
+        "base-two exponent antitonicity and the full analytic archetype remain "
         "fail-closed"
     )
     return 0
