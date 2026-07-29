@@ -99,6 +99,7 @@ import DASHI.Physics.Closure.NSPeriodicFarHighDyadicTailArithmetic
 import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount
 import DASHI.Physics.Closure.NSPeriodicInfinityShellBernstein
 import DASHI.Physics.Closure.NSPeriodicInfinityShellDerivativeBound
+import DASHI.Physics.Closure.NSFrequencyLocalizedDissipativeBernsteinExact
 import DASHI.Physics.Closure.NSPeriodicFarHighOfficialPlacementReduction
 import DASHI.Physics.Closure.NSPeriodicFirstExitSmallnessInterface
 import DASHI.Physics.Closure.NSPeriodicGeometricDepletionRejectionStatus as DepletionStatus
