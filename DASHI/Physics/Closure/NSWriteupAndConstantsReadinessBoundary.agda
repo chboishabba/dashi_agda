@@ -119,7 +119,7 @@ nsWriteupAndConstantsReadinessBlockerCountIs10 = refl
 
 nsWriteupAndConstantsReadinessSummary : String
 nsWriteupAndConstantsReadinessSummary =
-  "Readiness grammar: the reviewer-facing NS packet remains a candidate-complete classical suitable-weak-solution plus pressure/local-energy package consuming A1-A9 and classical CKN/ESS/LRT intake. Stage 3 now imports the finite l2/Leray/G=3/transport core, exact rejection of the source-style output-relocation affine ansatz, unit-weight Check A, recursive rational 4/3 and 32/31 sums, the 128/93 positive-kernel bound, the ordered rational-embedding closure theorem and finite signed domination. The output-relocation family is resolved, reducing the live independent affine frontier from twenty-four to twenty-one slots. The concrete ordered H^s shell bridge, the other four archetypes, positive global DASHI epsilon, authority acceptance and the final cutoff-uniform dual bound remain open."
+  "Readiness grammar: the reviewer-facing NS packet remains a candidate-complete classical suitable-weak-solution plus pressure/local-energy package consuming A1-A9 and classical CKN/ESS/LRT intake. Stage 3 now imports the finite l2/Leray/G=3/transport core, exact rejection of the source-style output-relocation affine ansatz, unit-weight Check A, recursive rational 4/3 and 32/31 sums, the 128/93 positive-kernel bound, ordered rational-embedding and native ConstructiveRealSpine closure, finite signed domination, and derivations of both H^s shell comparisons and both signed coefficient inequalities. The output-relocation family is resolved, reducing the live independent affine frontier from twenty-four to twenty-one slots. Concrete native ordered/rational data, coherent base-two power anchors, decay and absolute-order data, factor nonnegativity, one literal absolute-coefficient estimate, the other four archetypes, positive global DASHI epsilon, authority acceptance and the final cutoff-uniform dual bound remain open."
 
 NSWriteupAndConstantsReadinessRecorded : Bool
 NSWriteupAndConstantsReadinessRecorded = true
@@ -151,6 +151,14 @@ NSStage3OutputRelocationFiniteMajorantProgramClosed : Bool
 NSStage3OutputRelocationFiniteMajorantProgramClosed =
   Stage3Analytic.stage3OutputRelocationFiniteMajorantProgramClosed
 
+NSStage3OutputRelocationFourRawBridgeFieldsDerived : Bool
+NSStage3OutputRelocationFourRawBridgeFieldsDerived =
+  Stage3Analytic.stage3OutputRelocationFourRawBridgeFieldsDerived
+
+NSStage3OutputRelocationNativeDerivedTheoremClosed : Bool
+NSStage3OutputRelocationNativeDerivedTheoremClosed =
+  Stage3Analytic.stage3OutputRelocationNativeDerivedTheoremClosed
+
 NSStage3RemainingAffineIndependentSlotCount : Nat
 NSStage3RemainingAffineIndependentSlotCount =
   Stage3Analytic.stage3RemainingAffineIndependentSlotCount
@@ -181,6 +189,10 @@ record NSWriteupAndConstantsReadinessBoundary : Set where
       NSStage3AffineSolverArchitectureClosed ≡ true
     stage3OutputRelocationFiniteMajorantProgramClosedField :
       NSStage3OutputRelocationFiniteMajorantProgramClosed ≡ true
+    stage3OutputRelocationFourRawBridgeFieldsDerivedField :
+      NSStage3OutputRelocationFourRawBridgeFieldsDerived ≡ true
+    stage3OutputRelocationNativeDerivedTheoremClosedField :
+      NSStage3OutputRelocationNativeDerivedTheoremClosed ≡ true
     stage3RemainingAffineIndependentSlotCountIs21 :
       NSStage3RemainingAffineIndependentSlotCount ≡ 21
     stage3CutoffUniformAnalyticCompletionStillFalse :
@@ -212,6 +224,10 @@ canonicalNSWriteupAndConstantsReadinessBoundary =
         Stage3Analytic.stage3AffineSolverArchitectureClosedIsTrue
     ; stage3OutputRelocationFiniteMajorantProgramClosedField =
         Stage3Analytic.stage3OutputRelocationFiniteMajorantProgramClosedIsTrue
+    ; stage3OutputRelocationFourRawBridgeFieldsDerivedField =
+        Stage3Analytic.stage3OutputRelocationFourRawBridgeFieldsDerivedIsTrue
+    ; stage3OutputRelocationNativeDerivedTheoremClosedField =
+        Stage3Analytic.stage3OutputRelocationNativeDerivedTheoremClosedIsTrue
     ; stage3RemainingAffineIndependentSlotCountIs21 =
         Stage3Analytic.stage3RemainingAffineIndependentSlotCountIs21
     ; stage3CutoffUniformAnalyticCompletionStillFalse =
@@ -244,6 +260,16 @@ NSStage3OutputRelocationFiniteMajorantProgramClosedIsTrue :
   NSStage3OutputRelocationFiniteMajorantProgramClosed ≡ true
 NSStage3OutputRelocationFiniteMajorantProgramClosedIsTrue =
   Stage3Analytic.stage3OutputRelocationFiniteMajorantProgramClosedIsTrue
+
+NSStage3OutputRelocationFourRawBridgeFieldsDerivedIsTrue :
+  NSStage3OutputRelocationFourRawBridgeFieldsDerived ≡ true
+NSStage3OutputRelocationFourRawBridgeFieldsDerivedIsTrue =
+  Stage3Analytic.stage3OutputRelocationFourRawBridgeFieldsDerivedIsTrue
+
+NSStage3OutputRelocationNativeDerivedTheoremClosedIsTrue :
+  NSStage3OutputRelocationNativeDerivedTheoremClosed ≡ true
+NSStage3OutputRelocationNativeDerivedTheoremClosedIsTrue =
+  Stage3Analytic.stage3OutputRelocationNativeDerivedTheoremClosedIsTrue
 
 NSStage3RemainingAffineIndependentSlotCountIs21 :
   NSStage3RemainingAffineIndependentSlotCount ≡ 21
