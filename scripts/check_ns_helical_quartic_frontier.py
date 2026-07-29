@@ -102,14 +102,29 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNAffineCertificateExactAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNAffineCertificateUnderdetermination.agda",
     "DASHI/Physics/Closure/NSTriadKNGrafakosTorresTheorem3Adapter.agda",
+    "DASHI/Physics/Closure/NSTriadKNMurrayThesisCommitSourceInspection.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstructiveRealCandidateComparison.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresPowerLawOrientation.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationWeightedExponentIdentity.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationLiteralShellSubstitution.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFamilySubstitution.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationCheckACriterion.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationBaseSystemClassification.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationDirectionSystemClassification.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
+    "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationVerticalSlice.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationExperimentIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3AnalyticCompletionIntegration.agda",
     "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3AnalyticCompletionBridge.agda",
 ]
 
 # The general DASHI balanced/unbalanced ternary and Base369 developments are
 # intentionally untouched. The Stage-3 status-only adapters introduced on
-# this branch are preserved in history but are not part of this proof-critical
-# checker or dependency path.
+# this branch remain excluded unless they become part of the proof-critical
+# dependency path.
 
 PROVENANCE_MARKERS = (
     "-- PROVENANCE",
@@ -134,7 +149,9 @@ def run_verifier(root: Path, relative: str, label: str) -> str | None:
         text=True,
     )
     if result.returncode:
-        return f"{label} failed: " + (result.stderr.strip() or result.stdout.strip())
+        return f"{label} failed: " + (
+            result.stderr.strip() or result.stdout.strip()
+        )
     return None
 
 
@@ -155,10 +172,14 @@ def main() -> int:
                 failures.append(f"{relative}: forbidden marker {marker!r}")
         for opening, closing in (("(", ")"), ("{", "}")):
             if text.count(opening) != text.count(closing):
-                failures.append(f"{relative}: unbalanced {opening}{closing} delimiters")
+                failures.append(
+                    f"{relative}: unbalanced {opening}{closing} delimiters"
+                )
         for marker in PROVENANCE_MARKERS:
             if marker not in text:
-                failures.append(f"{relative}: missing provenance marker {marker!r}")
+                failures.append(
+                    f"{relative}: missing provenance marker {marker!r}"
+                )
         if "-- Authors:" not in text and "-- Author:" not in text:
             failures.append(f"{relative}: missing provenance author")
         if not any(marker in text for marker in DOI_MARKERS):
@@ -184,6 +205,7 @@ def main() -> int:
         ("scripts/ns_stage3_ordered_l2_shell_audit.py", "ordered-l2/hard-shell verifier"),
         ("scripts/ns_stage3_analytic_completion_audit.py", "analytic-completion verifier"),
         ("scripts/ns_stage3_small_epsilon_affine_audit.py", "small-epsilon/factorisation verifier"),
+        ("scripts/check_ns_stage3_constructive_series_orientation.py", "output-relocation decision verifier"),
     )
     for relative, label in verifiers:
         failure = run_verifier(root, relative, label)
