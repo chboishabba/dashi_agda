@@ -26,16 +26,11 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact as Mass
 -- "Axioms for Euclidean Green's Functions II",
 -- Communications in Mathematical Physics 42 (1975), 281--305.
 -- DOI: 10.1007/BF01608978.
---
--- This module replaces an arbitrary four-Set dependency receipt with the actual
--- DASHI UV, continuum-OS and physical-interlacing record types. It does not
--- manufacture the thermodynamic/continuum limit, OS reconstruction theorem or
--- clustering-to-gap theorem; those remain precisely typed bridge functions.
 ------------------------------------------------------------------------
 
 record ContinuumOSAxioms
     {Measure Schwinger : Set}
-    (closure : Limit.FiniteToContinuumOSClosure Measure Schwinger) : Set where
+    (closure : Limit.FiniteToContinuumOSClosure Measure Schwinger) : Set₁ where
   field
     normalized :
       Limit.Normalized closure (Limit.continuumMeasure closure)
@@ -43,7 +38,6 @@ record ContinuumOSAxioms
       Limit.Positive closure (Limit.continuumMeasure closure)
     gaugeInvariant :
       Limit.GaugeInvariant closure (Limit.continuumMeasure closure)
-
     euclideanCovariant :
       Limit.EuclideanCovariant closure
         (Limit.schwinger closure (Limit.continuumMeasure closure))
