@@ -1,0 +1,97 @@
+module DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt where
+
+open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.String using (String)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface as Branch
+import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierCompletionLedger as Ledger
+
+record CurrentGate4FrontierReceipt : Set where
+  constructor currentGate4FrontierReceipt
+  field
+    repositoryHead : String
+    legacyBranchReceiptChecked : Bool
+    currentFrontierLedgerChecked : Bool
+
+    literalRationalSU2GroupChecked : Bool
+    periodicCoordinateClosureChecked : Bool
+    literalCubeBianchiChecked : Bool
+    periodicTraversalGeometryChecked : Bool
+
+    positiveReferenceMassChecked : Bool
+    physicalReferenceNormalizationAssemblyChecked : Bool
+
+    canonicalRTraceReuseChecked : Bool
+    localizedFactorReductionChecked : Bool
+
+    publishedTerminalCriteriaChecked : Bool
+    denseRotationOS1ReductionChecked : Bool
+    clusteringToTransferGapReductionChecked : Bool
+
+    currentSurfacePostulateFree : Bool
+
+open CurrentGate4FrontierReceipt public
+
+record AuthoritativeCurrentGate4Evidence
+    (receipt : CurrentGate4FrontierReceipt) : Set where
+  field
+    legacyReceiptTypechecks : Set
+    currentLedgerTypechecks : Set
+    rationalSU2GroupTypechecks : Set
+    periodicCoordinateClosureTypechecks : Set
+    literalCubeBianchiTypechecks : Set
+    periodicTraversalGeometryTypechecks : Set
+    positiveReferenceMassTypechecks : Set
+    physicalReferenceNormalizationAssemblyTypechecks : Set
+    canonicalRTraceReuseTypechecks : Set
+    localizedFactorReductionTypechecks : Set
+    publishedTerminalCriteriaTypechecks : Set
+    denseRotationOS1ReductionTypechecks : Set
+    clusteringToTransferGapReductionTypechecks : Set
+    currentSurfaceHasNoPostulatesOrUnsolvedMetas : Set
+
+open AuthoritativeCurrentGate4Evidence public
+
+legacyBranchReceiptTypecheckLevel : ProofLevel
+legacyBranchReceiptTypecheckLevel = Branch.cleanAgda29BranchHeadReceiptLevel
+
+currentFrontierLedgerTypecheckLevel : ProofLevel
+currentFrontierLedgerTypecheckLevel = conditional
+
+literalRationalSU2GroupTypecheckLevel : ProofLevel
+literalRationalSU2GroupTypecheckLevel = conditional
+
+periodicCoordinateClosureTypecheckLevel : ProofLevel
+periodicCoordinateClosureTypecheckLevel = conditional
+
+literalCubeBianchiTypecheckLevel : ProofLevel
+literalCubeBianchiTypecheckLevel = conditional
+
+periodicTraversalGeometryTypecheckLevel : ProofLevel
+periodicTraversalGeometryTypecheckLevel = conditional
+
+positiveReferenceMassTypecheckLevel : ProofLevel
+positiveReferenceMassTypecheckLevel = conditional
+
+physicalReferenceNormalizationAssemblyTypecheckLevel : ProofLevel
+physicalReferenceNormalizationAssemblyTypecheckLevel = conditional
+
+canonicalRTraceReuseTypecheckLevel : ProofLevel
+canonicalRTraceReuseTypecheckLevel = conditional
+
+localizedFactorReductionTypecheckLevel : ProofLevel
+localizedFactorReductionTypecheckLevel = conditional
+
+publishedTerminalCriteriaTypecheckLevel : ProofLevel
+publishedTerminalCriteriaTypecheckLevel = conditional
+
+denseRotationOS1ReductionTypecheckLevel : ProofLevel
+denseRotationOS1ReductionTypecheckLevel = conditional
+
+clusteringToTransferGapReductionTypecheckLevel : ProofLevel
+clusteringToTransferGapReductionTypecheckLevel = conditional
+
+currentSurfacePostulateFreeLevel : ProofLevel
+currentSurfacePostulateFreeLevel = conditional
