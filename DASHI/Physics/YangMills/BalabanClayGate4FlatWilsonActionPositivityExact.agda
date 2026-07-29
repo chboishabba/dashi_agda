@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FlatWilsonActionPositivityExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
@@ -51,12 +51,11 @@ flatProductExactOnList :
     ≡ Wilson.one (productData dataSet)) →
   Wilson.productWeights (productData dataSet) plaquettes
   ≡ Wilson.one (productData dataSet)
-flatProductExactOnList dataSet [] allOne =
-  Agda.Builtin.Equality.refl
+flatProductExactOnList dataSet [] allOne = refl
 flatProductExactOnList dataSet (plaquette ∷ plaquettes) allOne =
   trans
     (cong₂ (Wilson.multiply (productData dataSet))
-      (allOne plaquette (Wilson.here))
+      (allOne plaquette Wilson.here)
       (flatProductExactOnList dataSet plaquettes
         (λ selected membership →
           allOne selected (Wilson.there membership))))
