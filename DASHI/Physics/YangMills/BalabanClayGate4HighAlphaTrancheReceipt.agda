@@ -15,8 +15,10 @@ record HighAlphaTrancheReceipt : Set where
     bfsParentCorrectnessChecked : Bool
     periodicExecutableBFSChecked : Bool
     ipsenRehmanDeterminantBridgeChecked : Bool
+    ipsenRehmanCompensatedTAdapterChecked : Bool
     finiteKernelSchurBridgeChecked : Bool
     exactTwoWeightKPBridgeChecked : Bool
+    physicalTerminalKPAdapterChecked : Bool
     anisotropyPolymerSummationChecked : Bool
     correctedProvenanceChecked : Bool
     tranchePostulateFree : Bool
@@ -30,8 +32,10 @@ record AuthoritativeHighAlphaEvidence
     bfsParentCorrectnessTypechecks : Set
     periodicExecutableBFSTypechecks : Set
     ipsenRehmanDeterminantBridgeTypechecks : Set
+    ipsenRehmanCompensatedTAdapterTypechecks : Set
     finiteKernelSchurBridgeTypechecks : Set
     exactTwoWeightKPBridgeTypechecks : Set
+    physicalTerminalKPAdapterTypechecks : Set
     anisotropyPolymerSummationTypechecks : Set
     correctedProvenanceTypechecks : Set
     trancheHasNoPostulatesOrUnsolvedMetas : Set
@@ -50,11 +54,17 @@ periodicExecutableBFSTypecheckLevel = conditional
 ipsenRehmanDeterminantBridgeTypecheckLevel : ProofLevel
 ipsenRehmanDeterminantBridgeTypecheckLevel = conditional
 
+ipsenRehmanCompensatedTAdapterTypecheckLevel : ProofLevel
+ipsenRehmanCompensatedTAdapterTypecheckLevel = conditional
+
 finiteKernelSchurBridgeTypecheckLevel : ProofLevel
 finiteKernelSchurBridgeTypecheckLevel = conditional
 
 exactTwoWeightKPBridgeTypecheckLevel : ProofLevel
 exactTwoWeightKPBridgeTypecheckLevel = conditional
+
+physicalTerminalKPAdapterTypecheckLevel : ProofLevel
+physicalTerminalKPAdapterTypecheckLevel = conditional
 
 anisotropyPolymerSummationTypecheckLevel : ProofLevel
 anisotropyPolymerSummationTypecheckLevel = conditional
