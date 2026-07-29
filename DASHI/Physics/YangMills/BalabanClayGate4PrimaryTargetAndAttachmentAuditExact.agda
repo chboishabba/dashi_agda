@@ -150,7 +150,8 @@ record AttachmentAudit : Set where
     doi : String
     scope : AttachmentScope
     importedIntoGate4 : Bool
-    possibleRepositoryConsumer : String
+    integratedOutsideGate4 : Bool
+    repositoryConsumer : String
     reason : String
 
 open AttachmentAudit public
@@ -163,8 +164,9 @@ dongLiBernsteinAttachment = attachment
   "no DOI recorded in the uploaded paper"
   harmonicAnalysisOutsideGate4
   false
-  "Navier--Stokes/fractional-dissipation or Littlewood--Paley harmonic-analysis lanes"
-  "the paper proves frequency-localized Bernstein and periodic Poincare-type inequalities; it does not define or bound Bałaban T/R operations"
+  true
+  "DASHI.Physics.Closure.NSFrequencyLocalizedDissipativeBernsteinExact"
+  "the paper is integrated as a distinct dissipative-semigroup Bernstein/Poincare authority and is not used to define or bound Bałaban T/R operations"
 
 primaryTargetMetadataLevel : ProofLevel
 primaryTargetMetadataLevel = machineChecked
