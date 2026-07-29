@@ -7,7 +7,7 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- Branch-head verification receipt surface.  These fields describe evidence a
+-- Branch-head verification receipt surface. These fields describe evidence a
 -- clean run must provide; they do not promote an unchecked branch head.
 ------------------------------------------------------------------------
 
@@ -59,10 +59,13 @@ record BranchHeadAgdaReceipt : Set where
     gate4ValidationAggregateChecked : Bool
     gate4LiteralPeriodicGeometryChecked : Bool
     gate4PeriodicAdjacencyHolonomyChecked : Bool
+    gate4WilsonBoltzmannSuppressionChecked : Bool
     gate4FiniteTOperationChecked : Bool
     gate4TStructuralSuppressionReductionChecked : Bool
     gate4FiniteROperationChecked : Bool
+    gate4RBoundarySupportChecked : Bool
     gate4CountingLocalizationReuseChecked : Bool
+    gate4P0CompatibilityAuditChecked : Bool
     gate4SuppressionRecurrenceChecked : Bool
     gate4CombinedSmallLargeAssemblyChecked : Bool
     gate4AbsorptionAndUVAssemblyChecked : Bool
@@ -111,10 +114,13 @@ record AuthoritativeBranchHeadEvidence
     gate4ValidationAggregateTypechecks : Set
     gate4LiteralPeriodicGeometryTypechecks : Set
     gate4PeriodicAdjacencyHolonomyTypechecks : Set
+    gate4WilsonBoltzmannSuppressionTypechecks : Set
     gate4FiniteTOperationTypechecks : Set
     gate4TStructuralSuppressionReductionTypechecks : Set
     gate4FiniteROperationTypechecks : Set
+    gate4RBoundarySupportTypechecks : Set
     gate4CountingLocalizationReuseTypechecks : Set
+    gate4P0CompatibilityAuditTypechecks : Set
     gate4SuppressionRecurrenceTypechecks : Set
     gate4CombinedSmallLargeAssemblyTypechecks : Set
     gate4AbsorptionAndUVAssemblyTypechecks : Set
@@ -186,6 +192,9 @@ gate4LiteralPeriodicGeometryTypecheckLevel = conditional
 gate4PeriodicAdjacencyHolonomyTypecheckLevel : ProofLevel
 gate4PeriodicAdjacencyHolonomyTypecheckLevel = conditional
 
+gate4WilsonBoltzmannSuppressionTypecheckLevel : ProofLevel
+gate4WilsonBoltzmannSuppressionTypecheckLevel = conditional
+
 gate4FiniteTOperationTypecheckLevel : ProofLevel
 gate4FiniteTOperationTypecheckLevel = conditional
 
@@ -195,8 +204,14 @@ gate4TStructuralSuppressionReductionTypecheckLevel = conditional
 gate4FiniteROperationTypecheckLevel : ProofLevel
 gate4FiniteROperationTypecheckLevel = conditional
 
+gate4RBoundarySupportTypecheckLevel : ProofLevel
+gate4RBoundarySupportTypecheckLevel = conditional
+
 gate4CountingLocalizationReuseTypecheckLevel : ProofLevel
 gate4CountingLocalizationReuseTypecheckLevel = conditional
+
+gate4P0CompatibilityAuditTypecheckLevel : ProofLevel
+gate4P0CompatibilityAuditTypecheckLevel = conditional
 
 gate4SuppressionRecurrenceTypecheckLevel : ProofLevel
 gate4SuppressionRecurrenceTypecheckLevel = conditional
