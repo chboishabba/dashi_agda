@@ -8,6 +8,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as PeriodicGeometry
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2ExactGroupLaws as Group
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 
@@ -39,7 +40,6 @@ RationalSU2SiteGauge n =
 
 record RationalSU2BondData (n : Nat) : Set₁ where
   field
-    stepInverseLaws : Covariance.PeriodicStepInverseLaws n
     links : RationalSU2BondField n
     siteGauge : RationalSU2SiteGauge n
 
@@ -49,10 +49,10 @@ realization :
   ∀ {n} (dataSet : RationalSU2BondData n) →
   Bond.PeriodicBondGaugeRealization
     n SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
-realization dataSet =
+realization {n} dataSet =
   Covariance.literalPeriodicBondGaugeRealization
     Group.rationalSU2ExactLinkGroup
-    (stepInverseLaws dataSet)
+    (PeriodicGeometry.periodicStepInverseLaws n)
     (links dataSet)
     (siteGauge dataSet)
 
@@ -74,6 +74,26 @@ rationalSU2PathGaugeCancellation :
 rationalSU2PathGaugeCancellation dataSet =
   Bond.pathSiteGaugeCancellation (realization dataSet)
 
+rationalSU2PlaquetteGaugeCancellation :
+  ∀ {n} (dataSet : RationalSU2BondData n)
+    (plaquette : Plaquette.PeriodicPlaquette n) →
+  Bond.transformedPathHolonomy (realization dataSet)
+    (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first plaquette)
+    (Bond.plaquetteBoundaryDirections
+      (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.second plaquette))
+  ≡ Bond.multiply Group.rationalSU2ExactLinkGroup
+      (Bond.multiply Group.rationalSU2ExactLinkGroup
+        (siteGauge dataSet
+          (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first plaquette))
+        (rationalSU2PlaquetteHolonomy dataSet plaquette))
+      (Bond.inverse Group.rationalSU2ExactLinkGroup
+        (siteGauge dataSet
+          (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first plaquette)))
+rationalSU2PlaquetteGaugeCancellation {n} dataSet =
+  Bond.plaquetteGaugeCancellation
+    (PeriodicGeometry.periodicPlaquetteClosure n)
+    (realization dataSet)
+
 literalRationalSU2BondCarrierLevel : ProofLevel
 literalRationalSU2BondCarrierLevel = machineChecked
 
@@ -83,8 +103,12 @@ literalRationalSU2PlaquetteHolonomyLevel = machineChecked
 rationalSU2PathGaugeCancellationLevel : ProofLevel
 rationalSU2PathGaugeCancellationLevel = machineChecked
 
+rationalSU2PlaquetteGaugeCancellationLevel : ProofLevel
+rationalSU2PlaquetteGaugeCancellationLevel = machineChecked
+
 rationalSU2ExactGroupLawReuseLevel : ProofLevel
 rationalSU2ExactGroupLawReuseLevel = Group.rationalSU2ExactGroupLawLevel
 
-rationalSU2PeriodicStepInverseInputsLevel : ProofLevel
-rationalSU2PeriodicStepInverseInputsLevel = conditional
+rationalSU2PeriodicGeometryReuseLevel : ProofLevel
+rationalSU2PeriodicGeometryReuseLevel =
+  PeriodicGeometry.literalPeriodicPlaquetteClosureLevel
