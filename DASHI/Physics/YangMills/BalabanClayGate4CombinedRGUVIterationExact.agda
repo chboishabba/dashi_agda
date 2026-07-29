@@ -32,7 +32,7 @@ record CombinedOneStepPolymerNormData
     add multiply : Bound → Bound → Bound
     LessEqual StrictLess : Bound → Bound → Set
 
-    combinedOneStepPolymerNorm : ∀ state →
+    combinedOneStepPolymerNorm : ∀ (state : State) →
       LessEqual
         (norm (next state))
         (add
@@ -51,15 +51,15 @@ record CombinedRGAdmissibility
     BoundaryAdmissible : State → Set
     PolymerNormAdmissible : State → Set
 
-    admissibleCouplingDomainPreserved : ∀ state →
+    admissibleCouplingDomainPreserved : ∀ (state : State) →
       AdmissibleCoupling state →
       AdmissibleCoupling (next normData state)
 
-    boundaryTermsRemainAdmissible : ∀ state →
+    boundaryTermsRemainAdmissible : ∀ (state : State) →
       BoundaryAdmissible state →
       BoundaryAdmissible (next normData state)
 
-    combinedPolymerNormCloses : ∀ state →
+    combinedPolymerNormCloses : ∀ (state : State) →
       PolymerNormAdmissible state →
       PolymerNormAdmissible (next normData state)
 
@@ -81,7 +81,7 @@ combinedStepPreservesAdmissibility :
   ∀ {State Bound}
     {normData : CombinedOneStepPolymerNormData State Bound}
     (admissibility : CombinedRGAdmissibility normData)
-    state →
+    (state : State) →
   AdmissibleRGState admissibility state →
   AdmissibleRGState admissibility (next normData state)
 combinedStepPreservesAdmissibility admissibility state evidence = record
@@ -109,7 +109,7 @@ allScaleAdmissible :
     (admissibility : CombinedRGAdmissibility normData)
     (initial : State) →
   AdmissibleRGState admissibility initial →
-  ∀ scale →
+  ∀ (scale : Nat) →
   AdmissibleRGState admissibility (stateAt normData initial scale)
 allScaleAdmissible normData admissibility initial initialEvidence zero =
   initialEvidence
@@ -129,11 +129,10 @@ record UniformUVConsequences
     UniformlyStable : State → Set
     PartitionFunctionUniformlyBounded : State → Set
 
-    stableInitial : ∀ initial → Set
-    stabilityPreserved : ∀ state →
+    stabilityPreserved : ∀ (state : State) →
       UniformlyStable state → UniformlyStable (next normData state)
 
-    partitionBoundFromStable : ∀ state →
+    partitionBoundFromStable : ∀ (state : State) →
       UniformlyStable state → PartitionFunctionUniformlyBounded state
 
 open UniformUVConsequences public
@@ -154,7 +153,7 @@ allScaleUniformlyStable :
     (consequences : UniformUVConsequences normData)
     (initial : State) →
   InitialUVStability consequences initial →
-  ∀ scale → UniformlyStable consequences (stateAt normData initial scale)
+  ∀ (scale : Nat) → UniformlyStable consequences (stateAt normData initial scale)
 allScaleUniformlyStable normData consequences initial initialData zero =
   initialUniformlyStable initialData
 allScaleUniformlyStable normData consequences initial initialData (suc scale) =
@@ -168,7 +167,7 @@ partitionFunctionUniformBound :
     (consequences : UniformUVConsequences normData)
     (initial : State) →
   InitialUVStability consequences initial →
-  ∀ scale →
+  ∀ (scale : Nat) →
   PartitionFunctionUniformlyBounded consequences
     (stateAt normData initial scale)
 partitionFunctionUniformBound normData consequences initial initialData scale =
@@ -189,7 +188,9 @@ record Gate4UVCompletionPackage
 open Gate4UVCompletionPackage public
 
 packageAllScaleAdmissible :
-  ∀ {State Bound} (package : Gate4UVCompletionPackage State Bound) scale →
+  ∀ {State Bound}
+    (package : Gate4UVCompletionPackage State Bound)
+    (scale : Nat) →
   AdmissibleRGState (admissibility package)
     (stateAt (normData package) (initial package) scale)
 packageAllScaleAdmissible package =
@@ -200,7 +201,9 @@ packageAllScaleAdmissible package =
     (initialAdmissible package)
 
 packagePartitionFunctionUniformBound :
-  ∀ {State Bound} (package : Gate4UVCompletionPackage State Bound) scale →
+  ∀ {State Bound}
+    (package : Gate4UVCompletionPackage State Bound)
+    (scale : Nat) →
   PartitionFunctionUniformlyBounded (consequences package)
     (stateAt (normData package) (initial package) scale)
 packagePartitionFunctionUniformBound package =
