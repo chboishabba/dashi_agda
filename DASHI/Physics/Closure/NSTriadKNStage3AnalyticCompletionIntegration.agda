@@ -4,11 +4,12 @@ module DASHI.Physics.Closure.NSTriadKNStage3AnalyticCompletionIntegration where
 -- PROVENANCE
 -- Authors: Augustin-Louis Cauchy; Hermann Amandus Schwarz; Jean Leray;
 -- Marco Cannone; Sergei Bernstein; Jean-Michel Bony; Errett Bishop; Douglas
--- Bridges; Zachary Murray; Loukas Grafakos; Rodolfo H. Torres; Terence Tao;
--- Pierre Germain; Fabian Waleffe; Oleg Kiriukhin; Minghui Liu; Gabor Pataki;
--- Agda standard-library contributors; DASHI repository contributors.
+-- Bridges; Zachary Murray; Viktor Csimma; Loukas Grafakos; Rodolfo H. Torres;
+-- Terence Tao; Pierre Germain; Fabian Waleffe; Oleg Kiriukhin; Minghui Liu;
+-- Gabor Pataki; Agda standard-library contributors; DASHI repository
+-- contributors.
 -- Title: "Stage-3 finite l2, Leray, G=3, transport, multilinear-Schur, and
--- output-relocation analytic integration".
+-- derived output-relocation analytic integration".
 -- Venue/year: Handbook of Mathematical Fluid Dynamics 3 (2005); Fourier
 -- Analysis and Nonlinear Partial Differential Equations, Springer, 2011;
 -- Constructive Analysis, Springer, 1985; Constructive Analysis in the Agda
@@ -30,13 +31,14 @@ module DASHI.Physics.Closure.NSTriadKNStage3AnalyticCompletionIntegration where
 -- the total G=3 shell-index classifier, overlap transport, five-archetype
 -- reduction, affine row factorisation, exact output-relocation falsification,
 -- unit-weight recovery, rational geometric summation, the positive kernel,
--- three shell Schur conditions and finite signed domination.
+-- three shell Schur conditions, finite signed domination, base-two power-order
+-- derivation, absolute-coefficient derivation and native-spine composition.
 -- Relationship: this ordinary proof-critical path imports no balanced-ternary,
 -- unbalanced-ternary, Base369, C6 or C9 status layer.  Output relocation has a
--- complete conditional cutoff-uniform shell theorem and resolves one affine
--- family, reducing the live independent slot count from 24 to 21.  The
--- concrete H^s/coefficient bridge, the other four archetypes, global shell
--- ownership and the final dual bound remain fail-closed.
+-- complete theorem downstream of smaller native data, and its four former raw
+-- bridge fields are derived.  One affine family is resolved, leaving 21 slots.
+-- Concrete native real/power/magnitude data, the other four archetypes, global
+-- shell ownership and the final dual bound remain fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -63,7 +65,7 @@ import DASHI.Physics.Closure.NSTriadKNGrafakosTorresTheorem3Adapter as Theorem3
 import DASHI.Physics.Closure.NSTriadKNGrafakosTorresComponentAssembly as GTAssembly
 import DASHI.Physics.Closure.NSTriadKNFinalCutoffUniformDualBoundAssembly as Final
 import DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegration as OutputRelocation
-import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as OutputConditional
+import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDerivedClosure as OutputDerived
 
 record Stage3AnalyticCompletionReceipt : Set where
   constructor receipt
@@ -132,8 +134,19 @@ record Stage3AnalyticCompletionReceipt : Set where
       OutputRelocation.outputRelocationFiniteSignedDominationClosed ≡ true
     outputRelocationConditionalArchetypeClosed :
       OutputRelocation.outputRelocationConditionalArchetypeClosed ≡ true
-    outputRelocationConcreteShellBridgeOpen :
-      OutputConditional.outputRelocationConcreteShellBridgeInhabited ≡ false
+    outputRelocationPowerComparisonsDerived :
+      OutputRelocation.outputRelocationTwoPowerDominationTheoremsClosed ≡ true
+    outputRelocationSignedInequalitiesDerived :
+      OutputRelocation.outputRelocationAbsoluteCoefficientDerivationClosed ≡ true
+    outputRelocationFourRawFieldsDerived :
+      OutputRelocation.outputRelocationFourFormerRawBridgeFieldsDerived ≡ true
+    outputRelocationNativeDerivedTheoremClosed :
+      OutputRelocation.outputRelocationNativeSpineDerivedClosureTheoremClosed
+      ≡ true
+    outputRelocationConcretePowerDataOpen :
+      OutputDerived.concreteNativeBaseTwoPowerCapabilityClosed ≡ false
+    outputRelocationLiteralMagnitudeEstimateOpen :
+      OutputDerived.concreteLiteralAbsoluteCoefficientEstimateClosed ≡ false
 
     theorem3ShapeMatched :
       Theorem3.threeConditionShapeMatchesTheorem3 ≡ true
@@ -200,7 +213,12 @@ stage3AnalyticCompletionReceipt = receipt
   OutputRelocation.outputRelocationThreeShellSchurConditionsClosedIsTrue
   OutputRelocation.outputRelocationFiniteSignedDominationClosedIsTrue
   OutputRelocation.outputRelocationConditionalArchetypeClosedIsTrue
-  OutputConditional.outputRelocationConcreteShellBridgeInhabitedIsFalse
+  OutputRelocation.outputRelocationTwoPowerDominationTheoremsClosedIsTrue
+  OutputRelocation.outputRelocationAbsoluteCoefficientDerivationClosedIsTrue
+  OutputRelocation.outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue
+  OutputRelocation.outputRelocationNativeSpineDerivedClosureTheoremClosedIsTrue
+  OutputDerived.concreteNativeBaseTwoPowerCapabilityClosedIsFalse
+  OutputDerived.concreteLiteralAbsoluteCoefficientEstimateClosedIsFalse
 
   Theorem3.threeConditionShapeMatchesTheorem3IsTrue
   Theorem3.onlySufficiencyDirectionRequiredIsTrue
@@ -253,6 +271,20 @@ stage3OutputRelocationFiniteMajorantProgramClosed = true
 stage3OutputRelocationFiniteMajorantProgramClosedIsTrue :
   stage3OutputRelocationFiniteMajorantProgramClosed ≡ true
 stage3OutputRelocationFiniteMajorantProgramClosedIsTrue = refl
+
+stage3OutputRelocationFourRawBridgeFieldsDerived : Bool
+stage3OutputRelocationFourRawBridgeFieldsDerived = true
+
+stage3OutputRelocationFourRawBridgeFieldsDerivedIsTrue :
+  stage3OutputRelocationFourRawBridgeFieldsDerived ≡ true
+stage3OutputRelocationFourRawBridgeFieldsDerivedIsTrue = refl
+
+stage3OutputRelocationNativeDerivedTheoremClosed : Bool
+stage3OutputRelocationNativeDerivedTheoremClosed = true
+
+stage3OutputRelocationNativeDerivedTheoremClosedIsTrue :
+  stage3OutputRelocationNativeDerivedTheoremClosed ≡ true
+stage3OutputRelocationNativeDerivedTheoremClosedIsTrue = refl
 
 stage3RemainingAffineIndependentSlotCount : Nat
 stage3RemainingAffineIndependentSlotCount =
