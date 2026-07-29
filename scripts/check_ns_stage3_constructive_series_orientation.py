@@ -21,12 +21,14 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
     "DASHI/Physics/Closure/NSTriadKNRationalFiniteGeometricEnvelope.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationIntegerGeometricEnvelope.agda",
-    "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationPositiveKernelMajorant.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightShellSchur.agda",
     "DASHI/Physics/Closure/NSTriadKNRationalFiniteSignedMajorant.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationConditionalCutoffUniformClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationEmbeddedEnvelopeClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineResolvedFamilyReduction.agda",
     "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
@@ -38,6 +40,7 @@ VERIFIERS = (
     "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
     "scripts/ns_stage3_output_relocation_integer_envelope_audit.py",
     "scripts/ns_stage3_output_relocation_majorant_audit.py",
+    "scripts/ns_stage3_small_epsilon_affine_audit.py",
 )
 
 PROVENANCE = (
@@ -98,10 +101,10 @@ def main() -> int:
         f"output-relocation closure tranche: {len(FILES)} Agda modules, "
         f"{len(VERIFIERS)} exact verifiers, provenance and static safety; "
         "source-style homogeneity is rejected, unit weights close Check A, "
-        "the rational 128/93 positive-kernel and finite signed programmes are "
-        "closed, and all conclusions downstream of the concrete H^s shell "
-        "bridge are proved; only that bridge and the concrete operator mapping "
-        "remain fail-closed"
+        "the rational 128/93 positive-kernel, embedded-carrier and finite "
+        "signed programmes are closed, one affine family is resolved leaving "
+        "21 live slots, and only the concrete ordered carrier/H^s/coefficient "
+        "bridge plus concrete operator mapping remain fail-closed"
     )
     return 0
 
