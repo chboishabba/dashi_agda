@@ -3,10 +3,11 @@ module DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateE
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Dec; yes; no)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
+  using (Empty; Dec; yes; no)
 
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Gap
 import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometry
@@ -34,7 +35,7 @@ import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometr
 --
 -- Relationship: the two 1985 papers own the gauge-covariant averaging and
 -- constrained-background lanes; the 1989 pair owns the large-field/R-operation
--- architecture.  The concrete SU(2) trace/chordal identity and rational Wilson
+-- architecture. The concrete SU(2) trace/chordal identity and rational Wilson
 -- cost reduction are reused from BalabanSU2RationalWilsonLargeFieldGapExact.
 -- The February 2026 Eriksson viXra paper is only a locator for notation and is
 -- not admitted as theorem authority.
@@ -59,8 +60,8 @@ record LiteralWilsonLargeFieldData
     thresholdDefinition : ∀ scale →
       threshold scale ≡ coupling scale * p0 scale
 
-    -- The uploaded locator uses both epsilon_k and epsilon_k eta^2.  This bridge
-    -- remains explicit until the primary scale convention is fixed.
+    -- The locator uses both epsilon_k and epsilon_k eta^2. This bridge remains
+    -- explicit until the primary scale convention is fixed.
     physicalThresholdBridge : ∀ scale →
       scaleAdjustedThreshold scale ≡ etaSquared scale * threshold scale
 
@@ -124,7 +125,7 @@ anyLargeOwnedPlaquette dataSet scale configuration block (plaquette ∷ plaquett
       yes (largeWitness witness (there member) large)
 ... | no noTail = no reject
   where
-  reject : LargeFieldBlock dataSet scale configuration block → Set
+  reject : LargeFieldBlock dataSet scale configuration block → Empty
   reject (largeWitness .plaquette here large) = notLarge large
   reject (largeWitness witness (there member) large) =
     noTail (largeWitness witness member large)
@@ -228,9 +229,10 @@ scaledWilsonPlaquetteCost :
     {largeField : LiteralWilsonLargeFieldData
       Scale Configuration Gauge Block Plaquette} →
   LiteralWilsonCostData largeField → Scale → Configuration → Plaquette → ℚ
-scaledWilsonPlaquetteCost cost scale configuration plaquette =
+scaledWilsonPlaquetteCost {largeField = largeField}
+  cost scale configuration plaquette =
   Gap.wilsonPlaquetteAction (beta cost scale)
-    (plaquetteHolonomy _ configuration plaquette)
+    (plaquetteHolonomy largeField configuration plaquette)
 
 largePlaquetteImpliesWilsonCost :
   ∀ {Scale Configuration Gauge Block Plaquette}
