@@ -2,7 +2,9 @@ module DASHI.Physics.YangMills.BalabanClayGate4July2026ResearchUpdateExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Sigma using (Σ)
 open import Agda.Builtin.String using (String)
+open import Data.Product using (_×_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -147,11 +149,10 @@ record OSReconstructionCyclicOutput (Hilbert Observable Vector : Set) : Set₁ w
       Σ Observable (λ observable →
         PositiveTimeObservable observable ×
         Overlap (positiveTimeVector observable) vector)
-  where
-  open import Agda.Builtin.Sigma using (Σ)
-  open import Data.Product using (_×_)
 
--- The mathematical reconstruction theorem includes a cyclic vacuum.  DASHI's
+open OSReconstructionCyclicOutput public
+
+-- The mathematical reconstruction theorem includes a cyclic vacuum. DASHI's
 -- explicit adapter remains necessary because the older reconstructed-theory
 -- carrier did not store this output field.
 osReconstructionIncludesCyclicVacuumLevel : ProofLevel
@@ -187,7 +188,7 @@ bfsFiniteAlgorithmSourceNote =
   "standard finite BFS: V0={root}; Vi contains undiscovered neighbours of V(i-1); assign each newly discovered vertex the least previous-layer neighbour; terminate because the undiscovered finite set strictly shrinks"
 
 -- The literature confirms the proof template and that no analytic or choice
--- principle is needed.  The repository must still implement the visited-set
+-- principle is needed. The repository must still implement the visited-set
 -- recursion and its invariants for the concrete periodic polymer carrier.
 bfsAlgorithmAndCorrectnessMethodLevel : ProofLevel
 bfsAlgorithmAndCorrectnessMethodLevel = verifiedLiterature
