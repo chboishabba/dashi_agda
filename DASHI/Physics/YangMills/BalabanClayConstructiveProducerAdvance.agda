@@ -30,3 +30,12 @@ import DASHI.Physics.YangMills.BalabanClayLiteratureNormalizationLedger
 -- explicit analytic input records, and fail-closed frontier ledger.
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierCompletionLedger
+
+-- Gate-4 large-field archaeology, numerical dependency graph, model-suitability
+-- quarantine and mass-gap anti-circularity audit.  These modules reference the
+-- existing small-field/RG/numerical owners rather than creating parallel proofs.
+import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact
+import DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExact
+import DASHI.Physics.YangMills.BalabanClayGate4LargeFieldArchaeologyExact
+import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact
+import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger
