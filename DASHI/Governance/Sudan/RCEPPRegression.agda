@@ -5,10 +5,12 @@ open import DASHI.Core.Prelude
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Foundations.StageValuationBundleAtlas as Stage
+import DASHI.Governance.ArtifactAuthorityPromotionBridge as ArtifactBridge
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.CouncilDelegationGraph as Council
 import DASHI.Governance.ExternalLegitimacyBoundary as Legitimacy
 import DASHI.Governance.GovernedArtifactCore as Governed
+import DASHI.Governance.PromotionSpine as Promotion
 import DASHI.Governance.RelationalMandateFibre as MandateFibre
 import DASHI.Governance.SituatedConstituency as Situated
 import DASHI.Governance.TransitionResidual as Transition
@@ -83,8 +85,8 @@ record RCEPPGovernanceRegression : Set where
       ≡ false
 
     citationOnlyAuthorizationAbstains :
-      PromotionBoundary.Promotion.authorizationFromObligations
-        (PromotionBoundary.ArtifactBridge.authorityPromotionObligations
+      Promotion.authorizationFromObligations
+        (ArtifactBridge.authorityPromotionObligations
           Source.canonicalRCEPPCitationBoundary
           true
           true
