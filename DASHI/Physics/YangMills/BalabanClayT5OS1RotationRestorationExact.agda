@@ -155,10 +155,11 @@ continuumOS1FromDenseRotationRestoration :
   OS1ClosureInterpretation closure assembly →
   Limit.EuclideanCovariant closure
     (Limit.schwinger closure (Limit.continuumMeasure closure))
-continuumOS1FromDenseRotationRestoration interpretation =
+continuumOS1FromDenseRotationRestoration
+  {assembly = assembly} interpretation =
   translationAndRotationCovarianceImpliesOS1 interpretation
-    (translationCovariant _)
-    (assembledRotationCovariance _)
+    (translationCovariant assembly)
+    (assembledRotationCovariance assembly)
 
 denseRotationLimitArgumentLevel : ProofLevel
 denseRotationLimitArgumentLevel = machineChecked
