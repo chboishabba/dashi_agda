@@ -2,8 +2,9 @@ module DASHI.Physics.YangMills.BalabanClayGate4PeriodicReachCollarEnumerationExa
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _≤_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Nat.Base using (_≤_)
 open import Data.Product using (_×_; _,_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 
@@ -29,6 +30,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipE
 -- The bounded graph search, finite enumeration and collar partition below are
 -- exact DASHI combinatorics over any finite block carrier.
 ------------------------------------------------------------------------
+
+emptyElim : ∀ {A : Set} → Empty → A
+emptyElim ()
 
 record FiniteReachCarrier (Block : Set) : Set₁ where
   field
@@ -162,7 +166,7 @@ filterDecComplete decide {values = head ∷ values} member proof
 ... | there tailMember =
     there (filterDecComplete decide tailMember proof)
 ... | no notSelected with member
-... | here = notSelected proof
+... | here = emptyElim (notSelected proof)
 ... | there tailMember = filterDecComplete decide tailMember proof
 
 enumerateReachWithin :
@@ -291,8 +295,7 @@ outerEnlargementPartition carrier regionData inner outer block inner≤outer out
 ... | no notInner = inj₂ (outerMember , notInner)
 
 ------------------------------------------------------------------------
--- Boundary support carrier: generation stores the proof that support lies in
--- the selected collar, so later R-operation consumers cannot lose ownership.
+-- Boundary support carrier.
 ------------------------------------------------------------------------
 
 record GeneratedBoundaryTerm
