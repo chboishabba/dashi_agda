@@ -75,8 +75,8 @@ bchReferencePositive :
   (inputs : CanonicalReferenceFactorInputs factors scale component slow) →
   PositiveMass.Positive positiveAlgebra
     (Flat.bchFactor factors scale component slow (referenceFine inputs))
-bchReferencePositive inputs =
-  subst (PositiveMass.Positive _)
+bchReferencePositive {positiveAlgebra = positiveAlgebra} inputs =
+  subst (PositiveMass.Positive positiveAlgebra)
     (sym (bchAtReferenceOne inputs))
     (multiplicativeOnePositive inputs)
 
@@ -91,8 +91,8 @@ localizationReferencePositive :
   (inputs : CanonicalReferenceFactorInputs factors scale component slow) →
   PositiveMass.Positive positiveAlgebra
     (Flat.localizationFactor factors scale component slow (referenceFine inputs))
-localizationReferencePositive inputs =
-  subst (PositiveMass.Positive _)
+localizationReferencePositive {positiveAlgebra = positiveAlgebra} inputs =
+  subst (PositiveMass.Positive positiveAlgebra)
     (sym (localizationAtReferenceOne inputs))
     (multiplicativeOnePositive inputs)
 
@@ -107,8 +107,8 @@ patchReferencePositive :
   (inputs : CanonicalReferenceFactorInputs factors scale component slow) →
   PositiveMass.Positive positiveAlgebra
     (Flat.patchFactor factors scale component slow (referenceFine inputs))
-patchReferencePositive inputs =
-  subst (PositiveMass.Positive _)
+patchReferencePositive {positiveAlgebra = positiveAlgebra} inputs =
+  subst (PositiveMass.Positive positiveAlgebra)
     (sym (patchAtReferenceOne inputs))
     (multiplicativeOnePositive inputs)
 
