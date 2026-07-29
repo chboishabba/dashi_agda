@@ -19,20 +19,31 @@ record CurrentGate4FrontierReceipt : Set where
     periodicCoordinateClosureChecked : Bool
     literalCubeBianchiChecked : Bool
     rationalSU2CubeBianchiChecked : Bool
+    flatRationalSU2ReferenceChecked : Bool
     periodicTraversalGeometryChecked : Bool
 
+    flatReferencePositiveWitnessChecked : Bool
     positiveReferenceMassChecked : Bool
     physicalReferenceNormalizationAssemblyChecked : Bool
-    sixFactorTPointwiseComparisonChecked : Bool
+    compensatedSixFactorTComparisonChecked : Bool
+    haarDeterminantRelativeLossReuseChecked : Bool
 
     canonicalRTraceReuseChecked : Bool
+    orderedExponentialSeriesChecked : Bool
     localizedFactorReductionChecked : Bool
+    dyadicRunningCouplingConventionChecked : Bool
+    blockAveragingSummabilityChecked : Bool
     existingRGPhysicalOneStepReuseChecked : Bool
 
     publishedTerminalCriteriaChecked : Bool
+    conditionedObservableLocalizationChecked : Bool
+    perScaleDecouplingClosureChecked : Bool
     denseRotationOS1ReductionChecked : Bool
+    osReconstructionCyclicityChecked : Bool
     clusteringToTransferGapReductionChecked : Bool
 
+    harrisAlternativeQuarantined : Bool
+    massGapClaimEcosystemQuarantined : Bool
     currentSurfacePostulateFree : Bool
 
 open CurrentGate4FrontierReceipt public
@@ -46,16 +57,26 @@ record AuthoritativeCurrentGate4Evidence
     periodicCoordinateClosureTypechecks : Set
     literalCubeBianchiTypechecks : Set
     rationalSU2CubeBianchiTypechecks : Set
+    flatRationalSU2ReferenceTypechecks : Set
     periodicTraversalGeometryTypechecks : Set
+    flatReferencePositiveWitnessTypechecks : Set
     positiveReferenceMassTypechecks : Set
     physicalReferenceNormalizationAssemblyTypechecks : Set
-    sixFactorTPointwiseComparisonTypechecks : Set
+    compensatedSixFactorTComparisonTypechecks : Set
+    haarDeterminantRelativeLossReuseTypechecks : Set
     canonicalRTraceReuseTypechecks : Set
+    orderedExponentialSeriesTypechecks : Set
     localizedFactorReductionTypechecks : Set
+    dyadicRunningCouplingConventionTypechecks : Set
+    blockAveragingSummabilityTypechecks : Set
     existingRGPhysicalOneStepReuseTypechecks : Set
     publishedTerminalCriteriaTypechecks : Set
+    conditionedObservableLocalizationTypechecks : Set
+    perScaleDecouplingClosureTypechecks : Set
     denseRotationOS1ReductionTypechecks : Set
+    osReconstructionCyclicityTypechecks : Set
     clusteringToTransferGapReductionTypechecks : Set
+    quarantineAuditTypechecks : Set
     currentSurfaceHasNoPostulatesOrUnsolvedMetas : Set
 
 open AuthoritativeCurrentGate4Evidence public
@@ -78,8 +99,14 @@ literalCubeBianchiTypecheckLevel = conditional
 rationalSU2CubeBianchiTypecheckLevel : ProofLevel
 rationalSU2CubeBianchiTypecheckLevel = conditional
 
+flatRationalSU2ReferenceTypecheckLevel : ProofLevel
+flatRationalSU2ReferenceTypecheckLevel = conditional
+
 periodicTraversalGeometryTypecheckLevel : ProofLevel
 periodicTraversalGeometryTypecheckLevel = conditional
+
+flatReferencePositiveWitnessTypecheckLevel : ProofLevel
+flatReferencePositiveWitnessTypecheckLevel = conditional
 
 positiveReferenceMassTypecheckLevel : ProofLevel
 positiveReferenceMassTypecheckLevel = conditional
@@ -87,14 +114,26 @@ positiveReferenceMassTypecheckLevel = conditional
 physicalReferenceNormalizationAssemblyTypecheckLevel : ProofLevel
 physicalReferenceNormalizationAssemblyTypecheckLevel = conditional
 
-sixFactorTPointwiseComparisonTypecheckLevel : ProofLevel
-sixFactorTPointwiseComparisonTypecheckLevel = conditional
+compensatedSixFactorTComparisonTypecheckLevel : ProofLevel
+compensatedSixFactorTComparisonTypecheckLevel = conditional
+
+haarDeterminantRelativeLossReuseTypecheckLevel : ProofLevel
+haarDeterminantRelativeLossReuseTypecheckLevel = conditional
 
 canonicalRTraceReuseTypecheckLevel : ProofLevel
 canonicalRTraceReuseTypecheckLevel = conditional
 
+orderedExponentialSeriesTypecheckLevel : ProofLevel
+orderedExponentialSeriesTypecheckLevel = conditional
+
 localizedFactorReductionTypecheckLevel : ProofLevel
 localizedFactorReductionTypecheckLevel = conditional
+
+dyadicRunningCouplingConventionTypecheckLevel : ProofLevel
+dyadicRunningCouplingConventionTypecheckLevel = conditional
+
+blockAveragingSummabilityTypecheckLevel : ProofLevel
+blockAveragingSummabilityTypecheckLevel = conditional
 
 existingRGPhysicalOneStepReuseTypecheckLevel : ProofLevel
 existingRGPhysicalOneStepReuseTypecheckLevel = conditional
@@ -102,11 +141,23 @@ existingRGPhysicalOneStepReuseTypecheckLevel = conditional
 publishedTerminalCriteriaTypecheckLevel : ProofLevel
 publishedTerminalCriteriaTypecheckLevel = conditional
 
+conditionedObservableLocalizationTypecheckLevel : ProofLevel
+conditionedObservableLocalizationTypecheckLevel = conditional
+
+perScaleDecouplingClosureTypecheckLevel : ProofLevel
+perScaleDecouplingClosureTypecheckLevel = conditional
+
 denseRotationOS1ReductionTypecheckLevel : ProofLevel
 denseRotationOS1ReductionTypecheckLevel = conditional
 
+osReconstructionCyclicityTypecheckLevel : ProofLevel
+osReconstructionCyclicityTypecheckLevel = conditional
+
 clusteringToTransferGapReductionTypecheckLevel : ProofLevel
 clusteringToTransferGapReductionTypecheckLevel = conditional
+
+quarantineAuditTypecheckLevel : ProofLevel
+quarantineAuditTypecheckLevel = conditional
 
 currentSurfacePostulateFreeLevel : ProofLevel
 currentSurfacePostulateFreeLevel = conditional
