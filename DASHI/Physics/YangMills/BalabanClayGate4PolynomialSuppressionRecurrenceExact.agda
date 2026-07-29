@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4PolynomialSuppressionRecurrenceEx
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -18,11 +18,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- "Large Field Renormalization. II. Localization, Exponentiation, and Bounds
 -- for the R Operation", Communications in Mathematical Physics 122 (1989),
 -- 355--392. DOI: 10.1007/BF01238433.
---
--- This module isolates the discrete calculus behind large-field absorption:
--- separate one-step ratio bounds for a polynomial envelope and a p0 suppression
--- imply a one-step contraction of their product. The analytic work is reduced to
--- obtaining the two ratios and checking that their product is below q.
 ------------------------------------------------------------------------
 
 record PolynomialSuppressionStep (Bound : Set) : Set₁ where
@@ -30,7 +25,6 @@ record PolynomialSuppressionStep (Bound : Set) : Set₁ where
     zero q polynomialRate suppressionRate : Bound
     multiply : Bound → Bound → Bound
     LessEqual : Bound → Bound → Set
-
     polynomialEnvelope suppression : Nat → Bound
 
     reflexive : ∀ value → LessEqual value value
@@ -119,7 +113,7 @@ polynomialTimesSuppressionContracts dataSet scale =
           (multiply dataSet
             (polynomialEnvelope dataSet scale)
             (suppression dataSet scale))))
-      (regroupStep dataSet scale)
+      (sym (regroupStep dataSet scale))
       (multiplyMonotoneNonnegative dataSet
         (multiplyNonnegative dataSet
           (polynomialRateNonnegative dataSet)
@@ -183,9 +177,6 @@ polynomialSuppressionOneStepAssemblyLevel = machineChecked
 polynomialSuppressionGeometricInductionLevel : ProofLevel
 polynomialSuppressionGeometricInductionLevel = machineChecked
 
--- Remaining analysis: derive the polynomial and suppression ratios from the
--- running coupling and p0 definition, and instantiate a geometric majorant with
--- q strictly below one.
 polynomialEnvelopeRatioInputsLevel : ProofLevel
 polynomialEnvelopeRatioInputsLevel = conditional
 
