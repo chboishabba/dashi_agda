@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact as UV
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Physical
 import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as OS
 import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as Clustering
+import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact as Mass
 import DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact as Existing
@@ -32,6 +33,11 @@ import DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact as 
 -- "General Proof of Osterwalder-Schrader Positivity for the Wilson Action",
 -- Communications in Mathematical Physics 113 (1987), 369--373.
 -- DOI: 10.1007/BF01221251.
+--
+-- O. Penrose and J. L. Lebowitz,
+-- "On the Exponential Decay of Correlation Functions",
+-- Communications in Mathematical Physics 39 (1974), 165--184.
+-- DOI: 10.1007/BF01614239.
 --
 -- Secondary locator only, not theorem authority:
 -- Lluis Eriksson, "Exponential Clustering and Mass Gap for Four-Dimensional
@@ -165,6 +171,29 @@ physicalContinuumClustered dataSet =
   clusteringBoundImpliesClosureClustered dataSet
     (Clustering.conditionalUniformClustering (clusteringCutset dataSet))
 
+record PhysicalOS4SpectralGapInterpretation
+    {State Bound Measure Observable Schwinger Scalar Hilbert Vector Energy : Set}
+    (physical : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) : Set₁ where
+  field
+    spectrum : Gap.ReconstructedClusteringSpectrum Observable Energy Scalar
+    os4SpectralMeaning :
+      Gap.OS4SpectralInterpretation (continuumClosure physical) spectrum
+
+open PhysicalOS4SpectralGapInterpretation public
+
+physicalContinuumPositiveTransferGap :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector Energy}
+    {physical : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector} →
+  (interpretation : PhysicalOS4SpectralGapInterpretation
+    {Energy = Energy} physical) →
+  Gap.PositiveTransferGap (spectrum interpretation)
+physicalContinuumPositiveTransferGap {physical = physical} interpretation =
+  Gap.positiveTransferGapFromOS4
+    (os4SpectralMeaning interpretation)
+    (physicalContinuumClustered physical)
+
 constructedPhysicalMassTransport :
   ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
     (dataSet : PhysicalContinuumOSGapData
@@ -185,6 +214,9 @@ physicalContinuumReflectionPositivityAssemblyLevel = machineChecked
 
 conditionalClusteringToOS4AssemblyLevel : ProofLevel
 conditionalClusteringToOS4AssemblyLevel = machineChecked
+
+physicalOS4ToTransferGapAssemblyLevel : ProofLevel
+physicalOS4ToTransferGapAssemblyLevel = machineChecked
 
 physicalContinuumOSAxiomAssemblyLevel : ProofLevel
 physicalContinuumOSAxiomAssemblyLevel = machineChecked
@@ -212,5 +244,8 @@ uniformClusteringOS4InputsLevel = clusteringBoundToClosureOS4MeaningInputsLevel
 fullO4CovarianceOS1InputsLevel : ProofLevel
 fullO4CovarianceOS1InputsLevel = conditional
 
+-- Compatibility name for older consumers. The generic implication is now split
+-- by BalabanClayT5ClusteringToTransferGapExact into spectral representation,
+-- observable overlap, rate comparison and OS4 meaning.
 clusteringToPositiveTransferGapInputsLevel : ProofLevel
 clusteringToPositiveTransferGapInputsLevel = conditional
