@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PhysicalReferenceMassAssemblyExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
