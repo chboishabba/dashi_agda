@@ -5,27 +5,27 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge wh
 -- Authors: Errett Bishop; Douglas Bridges; Zachary Murray; Viktor Csimma;
 -- Agda standard-library contributors; DASHI repository contributors.
 -- Title: "Constructive Analysis"; "Constructive Analysis in the Agda Proof
--- Assistant"; and "Base-two exponent-antitonicity derivation for the
+-- Assistant"; and "Coherent base-two exponent-antitonicity derivation for the
 -- output-relocation shell envelopes".
 -- Venue/year: Springer, 1985; arXiv, 2022; maintained constructive-real
 -- continuation; Agda standard library; DASHI formal development, 2026.
 -- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354; the repository
 -- derivation has no DOI.
--- Uses: the pinned constructive-real candidate audit, exact rational finite
--- geometric envelopes, monotonicity of x |-> 2^x, order reversal under
--- negation, monotonicity of multiplication by a natural shell index, and the
+-- Uses: exact rational finite geometric envelopes, monotonicity of x |-> 2^x,
+-- order reversal under negation, repeated-addition natural scaling, and the
 -- exact anchors 2^(-2n)=(1/4)^n and 2^(-5n)=(1/32)^n.
 -- Relationship: proves lowShellDominatedByQuarter and
--- gapDominatedByThirtySecond from coherent base-two power data.  Those two
--- inequalities are theorem outputs rather than independent caller-supplied
--- fields.  A concrete constructive-real base-two implementation and the
+-- gapDominatedByThirtySecond from coherent base-two power data.  The power
+-- operation is required to map zero to one and one to two; natural scaling is
+-- pinned recursively, preventing an arbitrary monotone scale function from
+-- satisfying the interface.  Concrete constructive-real power data and the
 -- literal coefficient majorant remain separate inhabitants.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealPowerBridge as Power
@@ -51,6 +51,8 @@ record BaseTwoExponentAntitoneCarrier {r : Level} : Set (lsuc r) where
       ∀ {left right} → left ≤ right → negate right ≤ negate left
     twoPowMonotone :
       ∀ {left right} → left ≤ right → twoPow left ≤ twoPow right
+    twoPowZero : twoPow zero ≡ one
+    twoPowOne : twoPow one ≡ two
     twoPowAdditive :
       ∀ left right →
       twoPow (add left right) ≡ multiply (twoPow left) (twoPow right)
@@ -62,6 +64,11 @@ record BaseTwoIntegerPowerAnchors {r : Level}
   field
     twoExponent fiveExponent : Real C
     scaleByNat : Real C → Nat → Real C
+    scaleByNatZero : ∀ exponent →
+      scaleByNat exponent zero ≡ zero C
+    scaleByNatSuc : ∀ exponent shell →
+      scaleByNat exponent (suc shell)
+      ≡ add C exponent (scaleByNat exponent shell)
     scaleByNatMonotone : ∀ {left right} →
       _≤_ C left right →
       ∀ shell → _≤_ C (scaleByNat left shell) (scaleByNat right shell)
@@ -204,6 +211,12 @@ powerMonotonicityBridgeReceipt = receipt
 outputRelocationMinimalPowerBridgeSpecified : Bool
 outputRelocationMinimalPowerBridgeSpecified = true
 
+outputRelocationBaseTwoPowerMeaningConstrained : Bool
+outputRelocationBaseTwoPowerMeaningConstrained = true
+
+outputRelocationNaturalScalingRecursivelyPinned : Bool
+outputRelocationNaturalScalingRecursivelyPinned = true
+
 outputRelocationTwoPowerDominationTheoremsClosed : Bool
 outputRelocationTwoPowerDominationTheoremsClosed = true
 
@@ -228,6 +241,14 @@ outputRelocationConcretePowerEnvelopeBridgeClosed = false
 outputRelocationMinimalPowerBridgeSpecifiedIsTrue :
   outputRelocationMinimalPowerBridgeSpecified ≡ true
 outputRelocationMinimalPowerBridgeSpecifiedIsTrue = refl
+
+outputRelocationBaseTwoPowerMeaningConstrainedIsTrue :
+  outputRelocationBaseTwoPowerMeaningConstrained ≡ true
+outputRelocationBaseTwoPowerMeaningConstrainedIsTrue = refl
+
+outputRelocationNaturalScalingRecursivelyPinnedIsTrue :
+  outputRelocationNaturalScalingRecursivelyPinned ≡ true
+outputRelocationNaturalScalingRecursivelyPinnedIsTrue = refl
 
 outputRelocationTwoPowerDominationTheoremsClosedIsTrue :
   outputRelocationTwoPowerDominationTheoremsClosed ≡ true
