@@ -59,17 +59,25 @@ record BranchHeadAgdaReceipt : Set where
     gate4ValidationAggregateChecked : Bool
     gate4LiteralPeriodicGeometryChecked : Bool
     gate4PeriodicAdjacencyHolonomyChecked : Bool
+    gate4BondPathBianchiChecked : Bool
     gate4WilsonBoltzmannSuppressionChecked : Bool
+    gate4PhysicalTDensityChecked : Bool
+    gate4ReferenceFibreNormalizationChecked : Bool
     gate4FiniteTOperationChecked : Bool
     gate4TStructuralSuppressionReductionChecked : Bool
     gate4FiniteROperationChecked : Bool
     gate4RBoundarySupportChecked : Bool
     gate4CountingLocalizationReuseChecked : Bool
+    gate4RRepresentationExponentiationChecked : Bool
     gate4P0CompatibilityAuditChecked : Bool
+    gate4AnalyticityCouplingControlChecked : Bool
     gate4SuppressionRecurrenceChecked : Bool
     gate4CombinedSmallLargeAssemblyChecked : Bool
+    gate4PhysicalOneStepClosureChecked : Bool
     gate4AbsorptionAndUVAssemblyChecked : Bool
     concreteUVToMassGapDependencyChecked : Bool
+    physicalContinuumOSGapBridgeChecked : Bool
+    clusteringLocatorAuditChecked : Bool
     dongLiDissipativeBernsteinChecked : Bool
 
     changedModules : List String
@@ -114,17 +122,25 @@ record AuthoritativeBranchHeadEvidence
     gate4ValidationAggregateTypechecks : Set
     gate4LiteralPeriodicGeometryTypechecks : Set
     gate4PeriodicAdjacencyHolonomyTypechecks : Set
+    gate4BondPathBianchiTypechecks : Set
     gate4WilsonBoltzmannSuppressionTypechecks : Set
+    gate4PhysicalTDensityTypechecks : Set
+    gate4ReferenceFibreNormalizationTypechecks : Set
     gate4FiniteTOperationTypechecks : Set
     gate4TStructuralSuppressionReductionTypechecks : Set
     gate4FiniteROperationTypechecks : Set
     gate4RBoundarySupportTypechecks : Set
     gate4CountingLocalizationReuseTypechecks : Set
+    gate4RRepresentationExponentiationTypechecks : Set
     gate4P0CompatibilityAuditTypechecks : Set
+    gate4AnalyticityCouplingControlTypechecks : Set
     gate4SuppressionRecurrenceTypechecks : Set
     gate4CombinedSmallLargeAssemblyTypechecks : Set
+    gate4PhysicalOneStepClosureTypechecks : Set
     gate4AbsorptionAndUVAssemblyTypechecks : Set
     concreteUVToMassGapDependencyTypechecks : Set
+    physicalContinuumOSGapBridgeTypechecks : Set
+    clusteringLocatorAuditTypechecks : Set
     dongLiDissipativeBernsteinTypechecks : Set
 
     publicAggregateChecked : Set
@@ -192,8 +208,17 @@ gate4LiteralPeriodicGeometryTypecheckLevel = conditional
 gate4PeriodicAdjacencyHolonomyTypecheckLevel : ProofLevel
 gate4PeriodicAdjacencyHolonomyTypecheckLevel = conditional
 
+gate4BondPathBianchiTypecheckLevel : ProofLevel
+gate4BondPathBianchiTypecheckLevel = conditional
+
 gate4WilsonBoltzmannSuppressionTypecheckLevel : ProofLevel
 gate4WilsonBoltzmannSuppressionTypecheckLevel = conditional
+
+gate4PhysicalTDensityTypecheckLevel : ProofLevel
+gate4PhysicalTDensityTypecheckLevel = conditional
+
+gate4ReferenceFibreNormalizationTypecheckLevel : ProofLevel
+gate4ReferenceFibreNormalizationTypecheckLevel = conditional
 
 gate4FiniteTOperationTypecheckLevel : ProofLevel
 gate4FiniteTOperationTypecheckLevel = conditional
@@ -210,8 +235,14 @@ gate4RBoundarySupportTypecheckLevel = conditional
 gate4CountingLocalizationReuseTypecheckLevel : ProofLevel
 gate4CountingLocalizationReuseTypecheckLevel = conditional
 
+gate4RRepresentationExponentiationTypecheckLevel : ProofLevel
+gate4RRepresentationExponentiationTypecheckLevel = conditional
+
 gate4P0CompatibilityAuditTypecheckLevel : ProofLevel
 gate4P0CompatibilityAuditTypecheckLevel = conditional
+
+gate4AnalyticityCouplingControlTypecheckLevel : ProofLevel
+gate4AnalyticityCouplingControlTypecheckLevel = conditional
 
 gate4SuppressionRecurrenceTypecheckLevel : ProofLevel
 gate4SuppressionRecurrenceTypecheckLevel = conditional
@@ -219,11 +250,20 @@ gate4SuppressionRecurrenceTypecheckLevel = conditional
 gate4CombinedSmallLargeAssemblyTypecheckLevel : ProofLevel
 gate4CombinedSmallLargeAssemblyTypecheckLevel = conditional
 
+gate4PhysicalOneStepClosureTypecheckLevel : ProofLevel
+gate4PhysicalOneStepClosureTypecheckLevel = conditional
+
 gate4AbsorptionAndUVAssemblyTypecheckLevel : ProofLevel
 gate4AbsorptionAndUVAssemblyTypecheckLevel = conditional
 
 concreteUVToMassGapDependencyTypecheckLevel : ProofLevel
 concreteUVToMassGapDependencyTypecheckLevel = conditional
+
+physicalContinuumOSGapBridgeTypecheckLevel : ProofLevel
+physicalContinuumOSGapBridgeTypecheckLevel = conditional
+
+clusteringLocatorAuditTypecheckLevel : ProofLevel
+clusteringLocatorAuditTypecheckLevel = conditional
 
 dongLiDissipativeBernsteinTypecheckLevel : ProofLevel
 dongLiDissipativeBernsteinTypecheckLevel = conditional
