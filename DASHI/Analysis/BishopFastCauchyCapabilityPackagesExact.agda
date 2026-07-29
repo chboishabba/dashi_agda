@@ -27,26 +27,26 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 record BishopCompleteRealCapabilityData
     (packaging : Bishop.BishopAlgebraOrderPackaging) : Set₂ where
   field
-    constructiveField :
+    bishopConstructiveField :
       Capability.ConstructiveOrderedFieldCapability
         (Bishop.bishopSetoidOrderedCompleteReal packaging)
-    rationals :
+    bishopRationals :
       Capability.RationalEmbeddingStructure
         (Bishop.bishopSetoidOrderedCompleteReal packaging)
-    rationalDensity :
+    bishopRationalDensity :
       Capability.RationalDensityStructure
-        (Bishop.bishopSetoidOrderedCompleteReal packaging) rationals
-    naturalMajorization :
+        (Bishop.bishopSetoidOrderedCompleteReal packaging) bishopRationals
+    bishopNaturalMajorization :
       Capability.NaturalMajorizationStructure
         (Bishop.bishopSetoidOrderedCompleteReal packaging)
-    densityMajorizationBridge :
+    bishopDensityMajorizationBridge :
       Capability.DensityMajorizationBridge
         (Bishop.bishopSetoidOrderedCompleteReal packaging)
-        rationals rationalDensity naturalMajorization
-    effectiveConvergence :
+        bishopRationals bishopRationalDensity bishopNaturalMajorization
+    bishopEffectiveConvergence :
       Capability.EffectiveConvergenceStructure
         (Bishop.bishopSetoidOrderedCompleteReal packaging)
-    effectiveLogicalOrder :
+    bishopEffectiveLogicalOrder :
       Transport.EffectiveLogicalOrderView
         (Bishop.bishopSetoidOrderedCompleteReal packaging)
 
@@ -59,19 +59,13 @@ bishopCompleteRealPackage :
 bishopCompleteRealPackage {packaging} dataSet = record
   { packageName = "Bishop regular rational-sequence complete reals"
   ; backend = Bishop.bishopConstructiveRealBackend packaging
-  ; constructiveField =
-      BishopCompleteRealCapabilityData.constructiveField dataSet
-  ; rationals = BishopCompleteRealCapabilityData.rationals dataSet
-  ; rationalDensity =
-      BishopCompleteRealCapabilityData.rationalDensity dataSet
-  ; naturalMajorization =
-      BishopCompleteRealCapabilityData.naturalMajorization dataSet
-  ; densityMajorizationBridge =
-      BishopCompleteRealCapabilityData.densityMajorizationBridge dataSet
-  ; effectiveConvergence =
-      BishopCompleteRealCapabilityData.effectiveConvergence dataSet
-  ; effectiveLogicalOrder =
-      BishopCompleteRealCapabilityData.effectiveLogicalOrder dataSet
+  ; constructiveField = bishopConstructiveField dataSet
+  ; rationals = bishopRationals dataSet
+  ; rationalDensity = bishopRationalDensity dataSet
+  ; naturalMajorization = bishopNaturalMajorization dataSet
+  ; densityMajorizationBridge = bishopDensityMajorizationBridge dataSet
+  ; effectiveConvergence = bishopEffectiveConvergence dataSet
+  ; effectiveLogicalOrder = bishopEffectiveLogicalOrder dataSet
   }
 
 record FastCauchyCompleteRealCapabilityData
@@ -79,27 +73,27 @@ record FastCauchyCompleteRealCapabilityData
     (operations : Fast.FastCauchyOperations A)
     (packaging : FastBackend.FastCauchyBackendPackaging A operations) : Set₂ where
   field
-    constructiveField :
+    fastConstructiveField :
       Capability.ConstructiveOrderedFieldCapability
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations packaging)
-    rationals :
+    fastRationals :
       Capability.RationalEmbeddingStructure
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations packaging)
-    rationalDensity :
+    fastRationalDensity :
       Capability.RationalDensityStructure
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations packaging)
-        rationals
-    naturalMajorization :
+        fastRationals
+    fastNaturalMajorization :
       Capability.NaturalMajorizationStructure
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations packaging)
-    densityMajorizationBridge :
+    fastDensityMajorizationBridge :
       Capability.DensityMajorizationBridge
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations packaging)
-        rationals rationalDensity naturalMajorization
-    effectiveConvergence :
+        fastRationals fastRationalDensity fastNaturalMajorization
+    fastEffectiveConvergence :
       Capability.EffectiveConvergenceStructure
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations packaging)
-    effectiveLogicalOrder :
+    fastEffectiveLogicalOrder :
       Transport.EffectiveLogicalOrderView
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations packaging)
 
@@ -113,19 +107,13 @@ fastCauchyCompleteRealPackage
   {operations = operations} {packaging = packaging} dataSet = record
   { packageName = "DASHI quotient-free FastCauchy complete reals"
   ; backend = FastBackend.fastCauchyConstructiveRealBackend operations packaging
-  ; constructiveField =
-      FastCauchyCompleteRealCapabilityData.constructiveField dataSet
-  ; rationals = FastCauchyCompleteRealCapabilityData.rationals dataSet
-  ; rationalDensity =
-      FastCauchyCompleteRealCapabilityData.rationalDensity dataSet
-  ; naturalMajorization =
-      FastCauchyCompleteRealCapabilityData.naturalMajorization dataSet
-  ; densityMajorizationBridge =
-      FastCauchyCompleteRealCapabilityData.densityMajorizationBridge dataSet
-  ; effectiveConvergence =
-      FastCauchyCompleteRealCapabilityData.effectiveConvergence dataSet
-  ; effectiveLogicalOrder =
-      FastCauchyCompleteRealCapabilityData.effectiveLogicalOrder dataSet
+  ; constructiveField = fastConstructiveField dataSet
+  ; rationals = fastRationals dataSet
+  ; rationalDensity = fastRationalDensity dataSet
+  ; naturalMajorization = fastNaturalMajorization dataSet
+  ; densityMajorizationBridge = fastDensityMajorizationBridge dataSet
+  ; effectiveConvergence = fastEffectiveConvergence dataSet
+  ; effectiveLogicalOrder = fastEffectiveLogicalOrder dataSet
   }
 
 record BishopFastCauchyPackagePair
@@ -140,13 +128,9 @@ record BishopFastCauchyPackagePair
 
     CommonQ : Set
     bishopQDecode :
-      CommonQ →
-      Capability.Q
-        (BishopCompleteRealCapabilityData.rationals bishopCapabilities)
+      CommonQ → Capability.Q (bishopRationals bishopCapabilities)
     fastQDecode :
-      CommonQ →
-      Capability.Q
-        (FastCauchyCompleteRealCapabilityData.rationals fastCapabilities)
+      CommonQ → Capability.Q (fastRationals fastCapabilities)
 
     commonRationalEmbeddingAgreement : Set
     packageCauchyDefinitionsCompatible : Set
