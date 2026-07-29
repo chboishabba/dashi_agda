@@ -38,6 +38,9 @@ record LocalizedExponentiationData (Term Bound : Set) : Set₁ where
     reflexive : ∀ value → LessEqual value value
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
+    multiplyNonnegative : ∀ {left right} →
+      LessEqual zero left → LessEqual zero right →
+      LessEqual zero (multiply left right)
     multiplyMonotoneNonnegative : ∀ {left leftUpper right rightUpper} →
       LessEqual zero left → LessEqual zero leftUpper →
       LessEqual zero right → LessEqual zero rightUpper →
@@ -72,13 +75,9 @@ localizedProductNonnegative :
   LessEqual dataSet (zero dataSet) (localizedProduct dataSet terms)
 localizedProductNonnegative dataSet [] = oneNonnegative dataSet
 localizedProductNonnegative dataSet (term ∷ terms) =
-  multiplyMonotoneNonnegative dataSet
-    (factorNonnegative dataSet term)
+  multiplyNonnegative dataSet
     (factorNonnegative dataSet term)
     (localizedProductNonnegative dataSet terms)
-    (localizedProductNonnegative dataSet terms)
-    (reflexive dataSet (localizedFactor dataSet term))
-    (reflexive dataSet (localizedProduct dataSet terms))
 
 localizedExponentiationBound :
   ∀ {Term Bound} (dataSet : LocalizedExponentiationData Term Bound) terms →
@@ -142,8 +141,6 @@ localizedExponentiationInductionLevel = machineChecked
 rLocalizedExponentiationAssemblyLevel : ProofLevel
 rLocalizedExponentiationAssemblyLevel = machineChecked
 
--- Remaining analytic input: instantiate factorBelowExponential and identify the
--- actual R expression with the localized product in the common polymer norm.
 localizedFactorAnalyticEstimateInputsLevel : ProofLevel
 localizedFactorAnalyticEstimateInputsLevel = conditional
 
