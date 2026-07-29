@@ -5,32 +5,30 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- Authors: Martin Lundfall; Zachary Murray; Viktor Csimma; Robbert Krebbers;
 -- Bas Spitters; Loukas Grafakos; Rodolfo H. Torres; Terence Tao; Minghui Liu;
 -- Gabor Pataki; Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin; Raphael
--- Danchin; Errett Bishop; Douglas Bridges; DASHI repository contributors.
+-- Danchin; Errett Bishop; Douglas Bridges; Augustin-Louis Cauchy; Agda
+-- standard-library contributors; DASHI repository contributors.
 -- Title: "Stage-3 constructive-series candidate, literal Schur-shell
--- substitution, affine falsification, unit-weight Check A, integer geometric
--- envelope, and final output-relocation cutset integration".
+-- substitution, affine falsification, unit-weight Check A and cutoff-uniform
+-- output-relocation shell-majorant integration".
 -- Venue/year: Reals-in-agda formal development, 2015; Constructive Analysis in
 -- the Agda Proof Assistant, 2022; Logical Methods in Computer Science 9(1:1),
 -- 2013; Journal of Functional Analysis 187 (2001), 1--24 and 199 (2003),
 -- 379--385; Mathematical Programming / arXiv, 2015--2017; Annales
 -- scientifiques de l'Ecole Normale Superieure 14 (1981); Springer, 1985 and
--- 2011; DASHI formal development, 2026.
+-- 2011; Agda standard library; DASHI formal development, 2026.
 -- DOI: 10.2168/LMCS-9(1:1)2013; 10.1006/jfan.2001.3804;
 -- 10.1016/S0022-1236(02)00098-8; 10.48550/arXiv.1507.00290;
 -- 10.24033/asens.1404; 10.1007/978-3-642-61667-9;
 -- 10.1007/978-3-642-16830-7; Murray arXiv:2205.08354 has no DOI; no DOI
 -- located for Reals-in-agda; the integration receipt has no DOI.
 -- Uses: constructive-real candidate comparison, literal power-law Schur
--- orientation, the closed physical exponent identity, exact shell
--- substitution, exact falsification of the unnecessary all-three-homogeneity
--- ansatz, the constant-unit-weight Schur specialization, integer geometric
--- envelopes, the minimal base-two power bridge, and the final archetype
--- cutset.
--- Relationship: closes symbolic Check A, the geometric-series arithmetic, and
--- the final theorem dependency graph. A general arbitrary-real-ratio
--- geometric theorem is no longer required. The remaining constructive leaf is
--- the two-inequality base-two exponent antitonicity bridge, followed by
--- positive-kernel and signed-majorant instantiation.
+-- orientation, exact affine falsification and unit-weight recovery, recursive
+-- rational geometric sums, the positive kernel, three normalized shell Schur
+-- bounds, finite signed domination and the conditional archetype theorem.
+-- Relationship: all reasoning downstream of the concrete shell bridge is now
+-- closed.  A general arbitrary-real-ratio geometric theorem is not required.
+-- The remaining bridge contains the two H^s shell-factor comparisons and the
+-- literal coefficient's pointwise two-sided domination.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -45,6 +43,10 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFarkasDecision as De
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightCheckA as Unit
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationIntegerGeometricEnvelope as Envelope
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge as PowerBridge
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Majorant
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightShellSchur as ShellSchur
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteSignedMajorant as Signed
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as Conditional
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProgram as Archetype
 
 record ConstructiveSeriesOrientationReceipt : Set where
@@ -93,19 +95,36 @@ record ConstructiveSeriesOrientationReceipt : Set where
       Envelope.outputRelocationIntegerEnvelopeExponentsClosed ≡ true
     rationalGeometricConstantsClosed :
       Envelope.outputRelocationRationalGeometricConstantsClosed ≡ true
+    rationalFiniteSummationClosed :
+      Envelope.outputRelocationRationalFiniteCutoffSummationClosed ≡ true
     arbitraryRatioGeometricTheoremNotRequired :
       Envelope.outputRelocationArbitraryRatioGeometricTheoremRequired ≡ false
+    positiveKernelConstructed :
+      Majorant.outputRelocationPositiveKernelConstructed ≡ true
+    positiveKernelSummable :
+      Majorant.outputRelocationPositiveKernelCutoffUniformlySummable ≡ true
+    threeUnitWeightShellConditionsClosed :
+      ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosed
+      ≡ true
+    finiteSignedDominationClosed :
+      Signed.finiteTwoSidedTriangleDominationClosed ≡ true
+    conditionalArchetypeTheoremClosed :
+      Conditional.outputRelocationConditionalArchetypeTheoremClosed ≡ true
+    allDownstreamOfShellBridgeClosed :
+      Conditional.outputRelocationAllDownstreamOfShellBridgeClosed ≡ true
     minimalPowerBridgeSpecified :
       PowerBridge.outputRelocationMinimalPowerBridgeSpecified ≡ true
     onlyTwoPowerDominationLemmasRequired :
       PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequired ≡ true
     finalArchetypeCutsetSpecified :
       Archetype.outputRelocationFinalArchetypeCutsetSpecified ≡ true
-    powerMonotonicityBridgeStillOpen :
+    concretePowerBridgeStillOpen :
       PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosed ≡ false
-    cutoffUniformSeriesStillOpen :
-      Envelope.outputRelocationCutoffUniformSeriesClosed ≡ false
-    analyticArchetypeStillOpen :
+    concreteShellBridgeStillOpen :
+      Conditional.outputRelocationConcreteShellBridgeInhabited ≡ false
+    actualHsSeriesStillOpen :
+      Envelope.outputRelocationActualHsCutoffUniformSeriesClosed ≡ false
+    concreteAnalyticArchetypeStillOpen :
       Archetype.outputRelocationCutoffUniformArchetypeTheoremClosed ≡ false
 
 open ConstructiveSeriesOrientationReceipt public
@@ -135,12 +154,20 @@ constructiveSeriesOrientationReceipt = receipt
   Unit.outputRelocationUnitWeightSymbolicCheckAIsTrue
   Envelope.outputRelocationIntegerEnvelopeExponentsClosedIsTrue
   Envelope.outputRelocationRationalGeometricConstantsClosedIsTrue
+  Envelope.outputRelocationRationalFiniteCutoffSummationClosedIsTrue
   Envelope.outputRelocationArbitraryRatioGeometricTheoremRequiredIsFalse
+  Majorant.outputRelocationPositiveKernelConstructedIsTrue
+  Majorant.outputRelocationPositiveKernelCutoffUniformlySummableIsTrue
+  ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosedIsTrue
+  Signed.finiteTwoSidedTriangleDominationClosedIsTrue
+  Conditional.outputRelocationConditionalArchetypeTheoremClosedIsTrue
+  Conditional.outputRelocationAllDownstreamOfShellBridgeClosedIsTrue
   PowerBridge.outputRelocationMinimalPowerBridgeSpecifiedIsTrue
   PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue
   Archetype.outputRelocationFinalArchetypeCutsetSpecifiedIsTrue
   PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosedIsFalse
-  Envelope.outputRelocationCutoffUniformSeriesClosedIsFalse
+  Conditional.outputRelocationConcreteShellBridgeInhabitedIsFalse
+  Envelope.outputRelocationActualHsCutoffUniformSeriesClosedIsFalse
   Archetype.outputRelocationCutoffUniformArchetypeTheoremClosedIsFalse
 
 constructiveRealCandidateComparisonClosed : Bool
@@ -164,8 +191,26 @@ outputRelocationUnitWeightSymbolicCheckAClosed = true
 outputRelocationIntegerGeometricEnvelopeClosed : Bool
 outputRelocationIntegerGeometricEnvelopeClosed = true
 
+outputRelocationRationalFiniteSummationClosed : Bool
+outputRelocationRationalFiniteSummationClosed = true
+
+outputRelocationPositiveKernelProgramClosed : Bool
+outputRelocationPositiveKernelProgramClosed = true
+
+outputRelocationThreeShellSchurConditionsClosed : Bool
+outputRelocationThreeShellSchurConditionsClosed = true
+
+outputRelocationFiniteSignedDominationClosed : Bool
+outputRelocationFiniteSignedDominationClosed = true
+
+outputRelocationConditionalArchetypeClosed : Bool
+outputRelocationConditionalArchetypeClosed = true
+
 outputRelocationFinalArchetypeCutsetSpecified : Bool
 outputRelocationFinalArchetypeCutsetSpecified = true
+
+nextLeafIsConcreteShellBridge : Bool
+nextLeafIsConcreteShellBridge = true
 
 nextLeafIsConstructivePowerMonotonicityBridge : Bool
 nextLeafIsConstructivePowerMonotonicityBridge = true
@@ -179,6 +224,8 @@ nextLeafIsWeightAnsatzRevision = false
 nextLeafIsNumericBasesDirectionsAndDyadicTail : Bool
 nextLeafIsNumericBasesDirectionsAndDyadicTail = false
 
+-- Compatibility name: this denotes the concrete operator-level Check A, not
+-- the already-closed symbolic unit-weight shell criterion.
 outputRelocationCheckAClosed : Bool
 outputRelocationCheckAClosed = false
 
@@ -210,9 +257,33 @@ outputRelocationIntegerGeometricEnvelopeClosedIsTrue :
   outputRelocationIntegerGeometricEnvelopeClosed ≡ true
 outputRelocationIntegerGeometricEnvelopeClosedIsTrue = refl
 
+outputRelocationRationalFiniteSummationClosedIsTrue :
+  outputRelocationRationalFiniteSummationClosed ≡ true
+outputRelocationRationalFiniteSummationClosedIsTrue = refl
+
+outputRelocationPositiveKernelProgramClosedIsTrue :
+  outputRelocationPositiveKernelProgramClosed ≡ true
+outputRelocationPositiveKernelProgramClosedIsTrue = refl
+
+outputRelocationThreeShellSchurConditionsClosedIsTrue :
+  outputRelocationThreeShellSchurConditionsClosed ≡ true
+outputRelocationThreeShellSchurConditionsClosedIsTrue = refl
+
+outputRelocationFiniteSignedDominationClosedIsTrue :
+  outputRelocationFiniteSignedDominationClosed ≡ true
+outputRelocationFiniteSignedDominationClosedIsTrue = refl
+
+outputRelocationConditionalArchetypeClosedIsTrue :
+  outputRelocationConditionalArchetypeClosed ≡ true
+outputRelocationConditionalArchetypeClosedIsTrue = refl
+
 outputRelocationFinalArchetypeCutsetSpecifiedIsTrue :
   outputRelocationFinalArchetypeCutsetSpecified ≡ true
 outputRelocationFinalArchetypeCutsetSpecifiedIsTrue = refl
+
+nextLeafIsConcreteShellBridgeIsTrue :
+  nextLeafIsConcreteShellBridge ≡ true
+nextLeafIsConcreteShellBridgeIsTrue = refl
 
 nextLeafIsConstructivePowerMonotonicityBridgeIsTrue :
   nextLeafIsConstructivePowerMonotonicityBridge ≡ true
