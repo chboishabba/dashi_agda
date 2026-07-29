@@ -10,6 +10,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact as UV
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Physical
 import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as OS
+import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as Clustering
 import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact as Mass
 import DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact as Existing
@@ -81,6 +82,18 @@ record PhysicalContinuumOSGapData
         (Limit.schwinger continuumClosure
           (Limit.continuumMeasure continuumClosure))
 
+    clusteringCutset :
+      Clustering.ConditionalClusteringAssembly Observable Scalar
+
+    clusteringBoundImpliesClosureClustered :
+      ((left right : Observable) →
+        Clustering.LessEqual clusteringCutset
+          (Clustering.covariance clusteringCutset left right)
+          (Clustering.targetClusteringBound clusteringCutset left right)) →
+      Limit.Clustered continuumClosure
+        (Limit.schwinger continuumClosure
+          (Limit.continuumMeasure continuumClosure))
+
     reconstructedTheory : ReconstructedTransferTheory Hilbert Vector Scalar
 
     reconstructionFromOSAxioms :
@@ -141,6 +154,17 @@ physicalContinuumReflectionPositive dataSet =
   gramReflectionImpliesClosureReflection dataSet
     (physicalGramReflectionPositiveAtClosure dataSet)
 
+physicalContinuumClustered :
+  ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
+    (dataSet : PhysicalContinuumOSGapData
+      State Bound Measure Observable Schwinger Scalar Hilbert Vector) →
+  Limit.Clustered (continuumClosure dataSet)
+    (Limit.schwinger (continuumClosure dataSet)
+      (Limit.continuumMeasure (continuumClosure dataSet)))
+physicalContinuumClustered dataSet =
+  clusteringBoundImpliesClosureClustered dataSet
+    (Clustering.conditionalUniformClustering (clusteringCutset dataSet))
+
 constructedPhysicalMassTransport :
   ∀ {State Bound Measure Observable Schwinger Scalar Hilbert Vector}
     (dataSet : PhysicalContinuumOSGapData
@@ -159,6 +183,9 @@ physicalMeasureToGramClosureReuseLevel = machineChecked
 physicalContinuumReflectionPositivityAssemblyLevel : ProofLevel
 physicalContinuumReflectionPositivityAssemblyLevel = machineChecked
 
+conditionalClusteringToOS4AssemblyLevel : ProofLevel
+conditionalClusteringToOS4AssemblyLevel = machineChecked
+
 physicalContinuumOSAxiomAssemblyLevel : ProofLevel
 physicalContinuumOSAxiomAssemblyLevel = machineChecked
 
@@ -174,8 +201,8 @@ physicalExpectationConvergenceInputsLevel = conditional
 physicalGramToClosureReflectionMeaningInputsLevel : ProofLevel
 physicalGramToClosureReflectionMeaningInputsLevel = conditional
 
-uniformClusteringOS4InputsLevel : ProofLevel
-uniformClusteringOS4InputsLevel = conditional
+clusteringBoundToClosureOS4MeaningInputsLevel : ProofLevel
+clusteringBoundToClosureOS4MeaningInputsLevel = conditional
 
 fullO4CovarianceOS1InputsLevel : ProofLevel
 fullO4CovarianceOS1InputsLevel = conditional
