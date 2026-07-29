@@ -1,5 +1,6 @@
 module DASHI.Codec.DNADeBruijnGeometry where
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 
 open import DASHI.Codec.DNAFirstFormalism using
@@ -9,10 +10,6 @@ open import DASHI.Codec.DNAFirstFormalism using
   )
 open import DASHI.Codec.DNAProductionConstraints using (ProductionState)
 open import DASHI.Codec.DNAProductionDeBruijn using (LabelledWalk)
-
-------------------------------------------------------------------------
--- Geometry and stream order are distinct carriers. A Traversal is explicit
--- data supplied by the caller; no field is definitionally a graph walk.
 
 record Traversal (Shape : Set) : Set₁ where
   field
@@ -55,9 +52,6 @@ cubeLayerMajor = record
       cube axis2 axis0 axis2 ∷ cube axis2 axis1 axis2 ∷ cube axis2 axis2 axis2 ∷ []
   }
 
-------------------------------------------------------------------------
--- Stream legality and geometric legality remain independent predicates.
-
 record GeometryPolicy (Shape : Set) : Set₁ where
   field
     GeometryLegal : Shape → Set
@@ -74,10 +68,6 @@ record AdmissibleField
     streamLegal : LabelledWalk start (serialise traversal field) end
     geometryLegal : GeometryLegal geometry field
 open AdmissibleField public
-
-------------------------------------------------------------------------
--- A serialized geometric block is a finite-state transfer only relative to its
--- explicit traversal and incoming production state.
 
 record Transfer (Shape : Set) (traversal : Traversal Shape) : Set₁ where
   constructor transfer
@@ -99,9 +89,6 @@ ColumnMajorVoxelTransfer = Transfer Voxel9 voxelColumnMajor
 
 LayerMajorCubeTransfer : Set₁
 LayerMajorCubeTransfer = Transfer Cube27 cubeLayerMajor
-
-------------------------------------------------------------------------
--- This record makes the non-identification an explicit API boundary.
 
 record GeometryStreamBoundary : Set₁ where
   field
