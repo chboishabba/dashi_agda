@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on constructive-real comparison and Schur substitution."""
+"""Fail closed on constructive-real comparison and output-relocation Check A."""
 from __future__ import annotations
 
 import re
@@ -15,15 +15,28 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationLiteralShellSubstitution.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFamilySubstitution.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCheckACriterion.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationBaseSystemClassification.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationDirectionSystemClassification.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
 
 VERIFIERS = (
     "scripts/ns_stage3_murray_source_pin_audit.py",
     "scripts/ns_stage3_power_law_orientation_audit.py",
+    "scripts/ns_stage3_output_relocation_farkas_audit.py",
+    "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
 )
 
-PROVENANCE = ("-- PROVENANCE", "-- Authors:", "-- Title:", "-- Venue/year:", "-- DOI:", "-- Relationship:")
+PROVENANCE = (
+    "-- PROVENANCE",
+    "-- Authors:",
+    "-- Title:",
+    "-- Venue/year:",
+    "-- DOI:",
+    "-- Relationship:",
+)
 FORBIDDEN = ("{!!}", "?}", "{-# TERMINATING #-}", "{-# NON_TERMINATING #-}")
 POSTULATE = re.compile(r"(?m)^\s*postulate(?:\s|$)")
 
@@ -44,7 +57,9 @@ def main() -> int:
                 failures.append(f"{relative}: forbidden marker {marker!r}")
         for marker in PROVENANCE:
             if marker not in text:
-                failures.append(f"{relative}: missing provenance marker {marker!r}")
+                failures.append(
+                    f"{relative}: missing provenance marker {marker!r}"
+                )
         for opening, closing in (("(", ")"), ("{", "}")):
             if text.count(opening) != text.count(closing):
                 failures.append(f"{relative}: unbalanced {opening}{closing}")
@@ -55,8 +70,11 @@ def main() -> int:
             failures.append(f"missing exact verifier: {relative}")
             continue
         result = subprocess.run(
-            [sys.executable, str(verifier)], cwd=root, check=False,
-            capture_output=True, text=True
+            [sys.executable, str(verifier)],
+            cwd=root,
+            check=False,
+            capture_output=True,
+            text=True,
         )
         if result.returncode:
             failures.append(result.stderr.strip() or result.stdout.strip())
@@ -65,11 +83,12 @@ def main() -> int:
         print("\n".join(failures))
         return 1
     print(
-        "checked Murray thesis pin, constructive-real comparison and output-relocation "
-        "Schur substitution: 8 Agda modules, 2 exact verifiers, provenance, no holes/"
-        "postulates/escapes; literal rows, six epsilon slopes and the Check A criterion "
-        "are closed while dyadic API, numeric DASHI data, positive epsilon and the "
-        "inhabited Check A result remain fail-closed"
+        "checked Murray thesis pin and output-relocation Check A tranche: "
+        "12 Agda modules, 4 exact verifiers, provenance, no holes/postulates/"
+        "escapes; the source-style all-three-homogeneity affine ansatz is "
+        "exactly infeasible, while constant unit weights recover symbolic "
+        "Check A on 5/2<s<3; constructive dyadic summation and the full "
+        "analytic archetype remain fail-closed"
     )
     return 0
 
