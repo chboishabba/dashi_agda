@@ -98,17 +98,14 @@ cancelMiddleGauge group middle secondSegment finish =
       (inverse group middle)
       (multiply group middle secondSegment)
       (inverse group finish)))
-    (trans
-      (cong (λ left → multiply group left (inverse group finish))
+    (cong (λ left → multiply group left (inverse group finish))
+      (trans
+        (sym (multiplyAssociative group
+          (inverse group middle) middle secondSegment))
         (trans
-          (sym (multiplyAssociative group
-            (inverse group middle) middle secondSegment))
-          (trans
-            (cong (λ left → multiply group left secondSegment)
-              (inverseLeft group middle))
-            (identityLeft group secondSegment))))
-      (multiplyAssociative group secondSegment
-        (identity group) (inverse group finish)))
+          (cong (λ left → multiply group left secondSegment)
+            (inverseLeft group middle))
+          (identityLeft group secondSegment))))
 
 composeGaugeSegments :
   ∀ {Value} (group : ExactLinkGroup Value)
