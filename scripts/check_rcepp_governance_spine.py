@@ -20,6 +20,7 @@ FILES = [
     ROOT / "DASHI/Governance/AuthorityMandateCore.agda",
     ROOT / "DASHI/Governance/SituatedConstituency.agda",
     ROOT / "DASHI/Governance/CouncilDelegationGraph.agda",
+    ROOT / "DASHI/Governance/LocalGlobalCouncilGluing.agda",
     ROOT / "DASHI/Governance/TransitionResidual.agda",
     ROOT / "DASHI/Governance/ExternalLegitimacyBoundary.agda",
     ROOT / "DASHI/Governance/Sudan/RCEPPSourceBoundary.agda",
@@ -74,6 +75,17 @@ REQUIRED_TOKENS = {
         "militaryToPeoplePath",
         "militaryHasDirectSovereignEdge",
     ],
+    "LocalGlobalCouncilGluing.agda": [
+        "record LocalCouncilSection",
+        "record CompatibleCouncilFamily",
+        "rceppCouncilBundleSheaf",
+        "canonicalCouncilCompatibility",
+        "canonicalGlobalRestrictsToNeighbourhood",
+        "canonicalGlobalRestrictsToIDPCamp",
+        "compatibilityWitnessRequired",
+        "coexistenceAloneCreatesGlobalCouncil",
+        "actualConstituencyCompatibilityEstablished",
+    ],
     "TransitionResidual.agda": [
         "governanceTopologyIsChartResidualPlusOne",
         "data TransitionalPhase",
@@ -125,6 +137,9 @@ REQUIRED_TOKENS = {
         "canonicalRCEPPGovernanceRegression",
         "rankOneFineRoleCountIsThree",
         "rankOneHypervoxelCountIsThree",
+        "localGlobalGluingBoundary",
+        "neighbourhoodRestrictionExact",
+        "idpRestrictionExact",
         "forceSourceRejected",
         "formalLegitimacyNotMinted",
         "citationOnlyAuthorizationAbstains",
@@ -132,6 +147,7 @@ REQUIRED_TOKENS = {
     ],
     "Everything.agda": [
         "import DASHI.Governance.AuthorityMandateCore",
+        "import DASHI.Governance.LocalGlobalCouncilGluing",
         "import DASHI.Governance.RelationalMandateFibre",
         "import DASHI.Governance.Sudan.RCEPPPromotionBoundary",
         "import DASHI.Governance.Sudan.RCEPPRegression",
@@ -148,6 +164,8 @@ FORBIDDEN_PATTERNS = [
     re.compile(r"spatialOntologyClaimed\s*=\s*true"),
     re.compile(r"formalModelCreatesPopularLegitimacy\s*=\s*true"),
     re.compile(r"militaryHasDirectSovereignEdge\s*=\s*true"),
+    re.compile(r"coexistenceAloneCreatesGlobalCouncil\s*=\s*true"),
+    re.compile(r"actualConstituencyCompatibilityEstablished\s*=\s*true"),
     re.compile(r"legalOperationClaimed\s*=\s*true"),
     re.compile(r"universalEndorsementClaimed\s*=\s*true"),
     re.compile(r"officialRCEPPInterpretationClaimed\s*=\s*true"),
@@ -164,6 +182,15 @@ def check_exact_shape() -> None:
     assert len(fine_roles) == 3
     assert 3 ** (rank * depth) == len(fine_roles)
     assert coarse_units != len(fine_roles)
+
+    local_sections = (
+        "neighbourhood",
+        "rural-locality",
+        "elected-union",
+        "idp-camp",
+    )
+    assert len(local_sections) == 4
+    assert len(set(local_sections)) == len(local_sections)
 
     phases = (
         "coup",
@@ -211,6 +238,7 @@ def main() -> int:
     print("PASS: force, elite agreement and external recognition alone cannot originate authority")
     print("PASS: situated representation carries explicit rural, displacement, land and power axes")
     print("PASS: delegation upward remains distinct from accountability and recall downward")
+    print("PASS: compatible local council sections glue and restrict back without erasure")
     print("PASS: constitutional +1 transitions retain residuals and preserve authority boundaries")
     print("PASS: RCEPP citation identity remains separate from artifact, legal and popular authority")
     print("PASS: governance/RCEPP source surface is fail-closed")
