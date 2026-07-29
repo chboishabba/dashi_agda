@@ -1,5 +1,6 @@
 module DASHI.Governance.ComparativeCrisisClimateAtlas where
 
+open import Agda.Primitive using (Setω)
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
