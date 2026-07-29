@@ -35,6 +35,7 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationAbsoluteCoefficientBridge 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationSquaredToAbsoluteBridge as Squared
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationFiniteSquaredCoefficientMajorant as Finite
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationFiniteToNativeSquaredBridge as FiniteNative
+import DASHI.Physics.Closure.NSTriadKNRationalDirectConvolutionBound as Direct
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge as Power
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter as Adapter
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDerivedClosure as Derived
@@ -89,7 +90,7 @@ record ConstructiveRealSpineFiniteSquaredCoefficientRealization
 
     factorSquareMeaning : ∀ lowShell gap →
       Adapter.rationalEmbed capability
-        (DASHI.Physics.Closure.NSTriadKNRationalDirectConvolutionBound.shellCardinalityFactor
+        (Direct.shellCardinalityFactor
           (Finite.cardinality (finiteModel lowShell gap)))
       ≡ Spine._*_ R
           (Spine._*_ R
