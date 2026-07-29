@@ -119,7 +119,7 @@ nsWriteupAndConstantsReadinessBlockerCountIs10 = refl
 
 nsWriteupAndConstantsReadinessSummary : String
 nsWriteupAndConstantsReadinessSummary =
-  "Readiness grammar: the reviewer-facing NS packet is presented as a candidate-complete classical suitable-weak-solution plus pressure/local-energy package that explicitly consumes theorem-shape grammar for A1-A9 together with classical CKN/ESS/LRT intake; the Stage-3 finite l2/Leray/G=3/transport core is now imported through the authoritative aggregate, while constructive-real H^s summation, exact affine epsilon and the final cutoff-uniform dual bound remain open."
+  "Readiness grammar: the reviewer-facing NS packet is presented as a candidate-complete classical suitable-weak-solution plus pressure/local-energy package that explicitly consumes theorem-shape grammar for A1-A9 together with classical CKN/ESS/LRT intake; the Stage-3 finite l2/Leray/G=3/transport core and the Grafakos--Torres affine/small-epsilon solver architecture are imported through the authoritative aggregate, while constructive-real H^s summation, twenty-four independent numeric row coefficients, positive DASHI epsilon and the final cutoff-uniform dual bound remain open."
 
 NSWriteupAndConstantsReadinessRecorded : Bool
 NSWriteupAndConstantsReadinessRecorded = true
@@ -143,6 +143,10 @@ NSStage3FiniteAnalyticCoreClosed : Bool
 NSStage3FiniteAnalyticCoreClosed =
   Stage3Analytic.stage3FiniteAlgebraAndCombinatoricsClosed
 
+NSStage3AffineSolverArchitectureClosed : Bool
+NSStage3AffineSolverArchitectureClosed =
+  Stage3Analytic.stage3AffineSolverArchitectureClosed
+
 NSStage3CutoffUniformAnalyticCompletionClosed : Bool
 NSStage3CutoffUniformAnalyticCompletionClosed =
   Stage3Analytic.stage3CutoffUniformAnalyticCompletionClosed
@@ -165,6 +169,8 @@ record NSWriteupAndConstantsReadinessBoundary : Set where
       NSLocalRouteStructureReady ≡ false
     stage3FiniteAnalyticCoreClosedField :
       NSStage3FiniteAnalyticCoreClosed ≡ true
+    stage3AffineSolverArchitectureClosedField :
+      NSStage3AffineSolverArchitectureClosed ≡ true
     stage3CutoffUniformAnalyticCompletionStillFalse :
       NSStage3CutoffUniformAnalyticCompletionClosed ≡ false
     authorityAuditStillFalse :
@@ -190,6 +196,8 @@ canonicalNSWriteupAndConstantsReadinessBoundary =
     ; localRouteStructureReadyField = refl
     ; stage3FiniteAnalyticCoreClosedField =
         Stage3Analytic.stage3FiniteAlgebraAndCombinatoricsClosedIsTrue
+    ; stage3AffineSolverArchitectureClosedField =
+        Stage3Analytic.stage3AffineSolverArchitectureClosedIsTrue
     ; stage3CutoffUniformAnalyticCompletionStillFalse =
         Stage3Analytic.stage3CutoffUniformAnalyticCompletionClosedIsFalse
     ; authorityAuditStillFalse = refl
@@ -210,6 +218,11 @@ NSStage3FiniteAnalyticCoreClosedIsTrue :
   NSStage3FiniteAnalyticCoreClosed ≡ true
 NSStage3FiniteAnalyticCoreClosedIsTrue =
   Stage3Analytic.stage3FiniteAlgebraAndCombinatoricsClosedIsTrue
+
+NSStage3AffineSolverArchitectureClosedIsTrue :
+  NSStage3AffineSolverArchitectureClosed ≡ true
+NSStage3AffineSolverArchitectureClosedIsTrue =
+  Stage3Analytic.stage3AffineSolverArchitectureClosedIsTrue
 
 NSStage3CutoffUniformAnalyticCompletionClosedIsFalse :
   NSStage3CutoffUniformAnalyticCompletionClosed ≡ false
