@@ -1,13 +1,12 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product using (_×_; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Empty; Not; Dec; yes; no)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Not)
 
 import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometry
 
@@ -23,7 +22,7 @@ import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometr
 -- Mathematical Physics 122 (1989), 355--392.
 -- DOI: 10.1007/BF01238433.
 --
--- Relationship: Balaban's determining sets, enlarged large-field regions and
+-- Relationship: Bałaban's determining sets, enlarged large-field regions and
 -- boundary terms motivate these proof-relevant finite carriers. This module
 -- proves only the combinatorial bookkeeping; metric scale choices and analytic
 -- collar bounds remain separate inputs.
@@ -65,23 +64,13 @@ Enlarged :
 Enlarged dataSet region radius block =
   Σ _ (λ seed →
     Contains region seed × ReachWithin (Adjacent dataSet) radius seed block)
-  where
-  record _×_ (A B : Set) : Set where
-    constructor _,×_
-    field first : A
-          second : B
 
 regionIncludedInEnlargement :
   ∀ {Block} (dataSet : EnlargementData Block)
     (region : FiniteLargeFieldRegion Block) radius block →
   Contains region block → Enlarged dataSet region radius block
 regionIncludedInEnlargement dataSet region radius block member =
-  block , (member ,× stay)
-  where
-  record _×_ (A B : Set) : Set where
-    constructor _,×_
-    field first : A
-          second : B
+  block , (member , stay)
 
 EnlargementMonotone :
   ∀ {Block} (dataSet : EnlargementData Block)
@@ -95,16 +84,8 @@ enlargementMonotone :
     (region : FiniteLargeFieldRegion Block) radius block →
   EnlargementMonotone dataSet region radius block
 enlargementMonotone dataSet region radius block
-  (seed , pair) = seed , lift pair
-  where
-  record _×_ (A B : Set) : Set where
-    constructor _,×_
-    field first : A
-          second : B
-  lift :
-    Contains region seed × ReachWithin (Adjacent dataSet) radius seed block →
-    Contains region seed × ReachWithin (Adjacent dataSet) (suc radius) seed block
-  lift (member ,× reach) = member ,× reachMonotone reach
+  (seed , (member , reach)) =
+  seed , (member , reachMonotone reach)
 
 Collar :
   ∀ {Block} → EnlargementData Block → FiniteLargeFieldRegion Block →
@@ -112,19 +93,10 @@ Collar :
 Collar dataSet region inner outer block =
   Enlarged dataSet region outer block ×
   Not (Enlarged dataSet region inner block)
-  where
-  record _×_ (A B : Set) : Set where
-    constructor _,×_
-    field first : A
-          second : B
 
 ------------------------------------------------------------------------
 -- Support ownership and boundary classification.
 ------------------------------------------------------------------------
-
-data _∈_ {A : Set} (value : A) : List A → Set where
-  here  : ∀ {values} → value ∈ (value ∷ values)
-  there : ∀ {other values} → value ∈ values → value ∈ (other ∷ values)
 
 data Every {A : Set} (P : A → Set) : List A → Set where
   every[] : Every P []
