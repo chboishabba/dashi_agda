@@ -46,11 +46,6 @@ record ReconstructedClusteringSpectrum
     subgapSpectralEnvelope : Energy → Observable → Nat → Bound
     LessEqual : Bound → Bound → Set
 
-    clusteringUpperBound : ∀ observable time →
-      LessEqual
-        (connectedCorrelation observable time)
-        (clusteringEnvelope observable time)
-
     SubgapMode : Energy → Set
     modeObservable : ∀ energy → SubgapMode energy → Observable
 
@@ -73,6 +68,14 @@ record ReconstructedClusteringSpectrum
 
 open ReconstructedClusteringSpectrum public
 
+ClusteringUpperBound :
+  ∀ {Observable Energy Bound} →
+  ReconstructedClusteringSpectrum Observable Energy Bound → Set
+ClusteringUpperBound dataSet = ∀ observable time →
+  LessEqual dataSet
+    (connectedCorrelation dataSet observable time)
+    (clusteringEnvelope dataSet observable time)
+
 NoPositiveSubgapMode :
   ∀ {Observable Energy Bound} →
   ReconstructedClusteringSpectrum Observable Energy Bound → Set
@@ -84,18 +87,20 @@ NoPositiveSubgapMode dataSet = ∀ energy →
 exponentialClusteringExcludesPositiveSubgapMode :
   ∀ {Observable Energy Bound}
     (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) →
+  ClusteringUpperBound dataSet →
   NoPositiveSubgapMode dataSet
-exponentialClusteringExcludesPositiveSubgapMode dataSet
+exponentialClusteringExcludesPositiveSubgapMode dataSet clusteringUpper
   energy positive below mode =
   slowSubgapEnvelopeContradictsFastClustering dataSet
     energy mode positive below
     (spectralRepresentationLowerBound dataSet energy mode)
-    (clusteringUpperBound dataSet (modeObservable dataSet energy mode))
+    (clusteringUpper (modeObservable dataSet energy mode))
 
 record PositiveTransferGap
     {Observable Energy Bound : Set}
     (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) : Set₁ where
   field
+    clusteringUpperBound : ClusteringUpperBound dataSet
     gapCandidatePositive : PositiveEnergy dataSet (gapCandidate dataSet)
     noPositiveSubgapMode : NoPositiveSubgapMode dataSet
 
@@ -104,12 +109,14 @@ open PositiveTransferGap public
 positiveTransferGapFromClusteringCutset :
   ∀ {Observable Energy Bound}
     (dataSet : ReconstructedClusteringSpectrum Observable Energy Bound) →
+  ClusteringUpperBound dataSet →
   PositiveEnergy dataSet (gapCandidate dataSet) →
   PositiveTransferGap dataSet
-positiveTransferGapFromClusteringCutset dataSet positiveGap = record
-  { PositiveTransferGap.gapCandidatePositive = positiveGap
+positiveTransferGapFromClusteringCutset dataSet upper positiveGap = record
+  { PositiveTransferGap.clusteringUpperBound = upper
+  ; PositiveTransferGap.gapCandidatePositive = positiveGap
   ; PositiveTransferGap.noPositiveSubgapMode =
-      exponentialClusteringExcludesPositiveSubgapMode dataSet
+      exponentialClusteringExcludesPositiveSubgapMode dataSet upper
   }
 
 record OS4SpectralInterpretation
@@ -120,10 +127,7 @@ record OS4SpectralInterpretation
     closureClusteringMeaning :
       Limit.Clustered closure
         (Limit.schwinger closure (Limit.continuumMeasure closure)) →
-      ∀ observable time →
-      LessEqual spectrum
-        (connectedCorrelation spectrum observable time)
-        (clusteringEnvelope spectrum observable time)
+      ClusteringUpperBound spectrum
 
     candidateGapPositive : PositiveEnergy spectrum (gapCandidate spectrum)
 
@@ -139,6 +143,7 @@ positiveTransferGapFromOS4 :
   PositiveTransferGap spectrum
 positiveTransferGapFromOS4 {spectrum = spectrum} interpretation clustered =
   positiveTransferGapFromClusteringCutset spectrum
+    (closureClusteringMeaning interpretation clustered)
     (candidateGapPositive interpretation)
 
 clusteringSpectralContradictionAssemblyLevel : ProofLevel
