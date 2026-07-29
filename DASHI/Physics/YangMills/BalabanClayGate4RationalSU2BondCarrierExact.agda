@@ -5,6 +5,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
@@ -78,17 +79,14 @@ rationalSU2PlaquetteGaugeCancellation :
   ∀ {n} (dataSet : RationalSU2BondData n)
     (plaquette : Plaquette.PeriodicPlaquette n) →
   Bond.transformedPathHolonomy (realization dataSet)
-    (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first plaquette)
-    (Bond.plaquetteBoundaryDirections
-      (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.second plaquette))
+    (Carrier.first plaquette)
+    (Bond.plaquetteBoundaryDirections (Carrier.second plaquette))
   ≡ Bond.multiply Group.rationalSU2ExactLinkGroup
       (Bond.multiply Group.rationalSU2ExactLinkGroup
-        (siteGauge dataSet
-          (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first plaquette))
+        (siteGauge dataSet (Carrier.first plaquette))
         (rationalSU2PlaquetteHolonomy dataSet plaquette))
       (Bond.inverse Group.rationalSU2ExactLinkGroup
-        (siteGauge dataSet
-          (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first plaquette)))
+        (siteGauge dataSet (Carrier.first plaquette)))
 rationalSU2PlaquetteGaugeCancellation {n} dataSet =
   Bond.plaquetteGaugeCancellation
     (PeriodicGeometry.periodicPlaquetteClosure n)
