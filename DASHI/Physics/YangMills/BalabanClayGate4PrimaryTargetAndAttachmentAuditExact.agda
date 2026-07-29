@@ -40,7 +40,7 @@ tOperationEquation189 = primaryTarget
   "equation (1.89), p. 387"
   "T_k(Y)1 <= exp(-(2/(1+beta_0)) p_0(g_k))"
   pendingPrimarySourceCheck
-  "exact target of ExactBalabanTOperationSmallFactor; the viXra transcription is not theorem authority"
+  "exact target of Equation189Reduction; the finite summation is now separated from the pointwise Wilson suppression and reference-fibre normalization"
 
 rOperationEquation1100 : PrimaryGate4Target
 rOperationEquation1100 = primaryTarget
@@ -84,10 +84,33 @@ inductiveTheoremOne = primaryTarget
   "Theorem 1, p. 388"
   "the complete small-/large-field step preserves the inductive effective-action parameters"
   pendingPrimarySourceCheck
-  "target for Gate4UVCompletionPackage"
+  "target for Gate4UVCompletionPackage and CombinedSmallLargeNormData"
+
+clusterFamilyCountingCandidate : PrimaryGate4Target
+clusterFamilyCountingCandidate = primaryTarget
+  "Tadeusz Bałaban"
+  "Renormalization Group Approach to Lattice Gauge Field Theories. II. Cluster Expansions"
+  "Communications in Mathematical Physics 116 (1988), 1--22"
+  "10.1007/BF01239022"
+  "paper-wide primary candidate; exact lemma/page pending verification"
+  "connected polymer-family representation and exponentiated cluster counting bound"
+  pendingPrimarySourceCheck
+  "candidate source for the representation bridge from R-component families to the existing rooted traversal shell"
+
+convergentLocalizationCandidate : PrimaryGate4Target
+convergentLocalizationCandidate = primaryTarget
+  "Tadeusz Bałaban"
+  "Convergent Renormalization Expansions for Lattice Gauge Theories"
+  "Communications in Mathematical Physics 119 (1988), 243--285"
+  "10.1007/BF01217741"
+  "paper-wide primary candidate; exact lemma/page pending verification"
+  "preservation of the inductive effective-density form, including large-field domains and convergent localized expansions"
+  pendingPrimarySourceCheck
+  "candidate source for component-family convergence, localization-norm stability and the combined effective-density representation seam"
 
 primaryGate4Targets : List PrimaryGate4Target
 primaryGate4Targets =
+  clusterFamilyCountingCandidate ∷ convergentLocalizationCandidate ∷
   tOperationEquation189 ∷ rOperationEquation1100 ∷ boundaryEquation169 ∷
   p0SectionOneFour ∷ inductiveTheoremOne ∷ []
 
@@ -179,3 +202,6 @@ attachmentScopeAuditLevel = machineChecked
 
 primaryEquationStatementVerificationLevel : ProofLevel
 primaryEquationStatementVerificationLevel = conditional
+
+primaryCountingLocalizationAttributionLevel : ProofLevel
+primaryCountingLocalizationAttributionLevel = conditional
