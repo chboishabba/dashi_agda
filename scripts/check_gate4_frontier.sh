@@ -9,6 +9,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4SU2HaarIdentityPositivityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteCoerciveDeterminantPositivityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanDeterminantLossExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanCompensatedTAdapterExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalReferenceFactorAssemblyExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4RationalPositiveMassReciprocalExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalReferenceNormalizationExact.agda \
@@ -24,6 +25,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SummableTailBudgetClosureExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5KoteckyPreissTwoWeightPrimaryExact.agda \
+  DASHI/Physics/YangMills/BalabanClayT5PhysicalTwoWeightKoteckyPreissExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5ConditionedObservableLocalizationSummationExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5PerScaleDecouplingClosureExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5AnisotropyPolymerSummationExact.agda \
