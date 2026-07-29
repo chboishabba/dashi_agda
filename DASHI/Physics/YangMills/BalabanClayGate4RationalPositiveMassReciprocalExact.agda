@@ -1,11 +1,11 @@
 module DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using
   (ℚ; 0ℚ; 1ℚ; Positive; _*_; 1/_; _≟_; ≢-nonZero)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (sym; trans)
-open import Relation.Nullary.Decidable.Core using (yes; no)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Nullary using (yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -31,6 +31,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibrePositiveMassExact a
 
 data Empty : Set where
 
+emptyEliminate : ∀ {A : Set} → Empty → A
+emptyEliminate ()
+
 positiveZeroImpossible : Positive 0ℚ → Empty
 positiveZeroImpossible ()
 
@@ -43,11 +46,9 @@ safeRationalReciprocalTimesPositive :
   ∀ value → Positive value →
   safeRationalReciprocal value * value ≡ 1ℚ
 safeRationalReciprocalTimesPositive value positive with value ≟ 0ℚ
-... | yes value≡zero rewrite value≡zero =
-  emptyEliminate (positiveZeroImpossible positive)
-  where
-  emptyEliminate : ∀ {A : Set} → Empty → A
-  emptyEliminate ()
+... | yes value≡zero =
+  emptyEliminate
+    (positiveZeroImpossible (subst Positive value≡zero positive))
 ... | no value≢zero =
   ℚP.*-inverseˡ value {{≢-nonZero value≢zero}}
 
