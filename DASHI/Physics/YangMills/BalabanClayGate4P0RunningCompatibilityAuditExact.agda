@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4P0RunningCompatibilityAuditExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -17,10 +18,10 @@ import DASHI.Physics.YangMills.BalabanClayGate4PolynomialSuppressionRecurrenceEx
 -- 355--392. DOI: 10.1007/BF01238433.
 --
 -- The precise primary p0 definition, direction of the scale flow and constants
--- still require direct verification against the paper.  The July 2026 v2 audit
+-- still require direct verification against the paper. The July 2026 v2 audit
 -- of the Eriksson locator series is not theorem authority, but it correctly
 -- retracts the earlier implication from a polylogarithmic p0 floor to a fixed
--- geometric factor in the scale index.  This module records that correction as
+-- geometric factor in the scale index. This module records that correction as
 -- a fail-closed compatibility boundary.
 ------------------------------------------------------------------------
 
@@ -79,10 +80,6 @@ windowedSuppressionRoute = runningAudit
   true
   "useful for finite-volume estimates, insufficient for the all-volume continuum mass-gap chain"
 
-------------------------------------------------------------------------
--- Typed separation of the two interfaces.
-------------------------------------------------------------------------
-
 record PolylogP0RunningData (Scale Scalar : Set) : Set₁ where
   field
     p0Growth : P0.P0SuperlinearLogGrowth Scale Scalar
@@ -122,9 +119,6 @@ polylogVersusGeometricInterfaceSeparationLevel = machineChecked
 windowedAbsorptionVocabularyLevel : ProofLevel
 windowedAbsorptionVocabularyLevel = machineChecked
 
--- No constructor is supplied from PolylogP0RunningData to
--- GeometricAbsorptionUpgrade. The missing bridge is exactly the strong penalty
--- or ratio estimate needed for fixed-ratio absorption.
 powerLawOrGeometricUpgradeInputsLevel : ProofLevel
 powerLawOrGeometricUpgradeInputsLevel = conditional
 
