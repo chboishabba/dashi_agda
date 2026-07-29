@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -17,10 +18,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- The construction is the standard finite breadth-first layering algorithm:
 -- V0 contains the root; V(i+1) contains the as-yet undiscovered vertices with
--- an edge to Vi.  Every new vertex receives the first (hence canonical for the
+-- an edge to Vi. Every new vertex receives the first (hence canonical for the
 -- supplied frontier order) adjacent parent in the preceding layer.
 --
--- This module implements the executable fuel-bounded algorithm.  Shortest-path,
+-- This module implements the executable fuel-bounded algorithm. Shortest-path,
 -- exact-spanning and least-parent correctness for the physical periodic graph
 -- remain separate proof obligations; they are not inferred merely from the
 -- standard name "BFS".
@@ -33,18 +34,6 @@ append (left ∷ rest) right = left ∷ append rest right
 length : ∀ {A : Set} → List A → Nat
 length [] = zero
 length (_ ∷ rest) = suc (length rest)
-
-not : Bool → Bool
-not false = true
-not true = false
-
-and : Bool → Bool → Bool
-and false _ = false
-and true right = right
-
-or : Bool → Bool → Bool
-or false right = right
-or true _ = true
 
 record FiniteDecidableGraph (Vertex : Set) : Set₁ where
   field
@@ -151,7 +140,7 @@ runFiniteBFS graph root =
 bfsFuelZeroExact :
   ∀ {Vertex} (graph : FiniteDecidableGraph Vertex) state →
   bfsFuel graph zero state ≡ state
-bfsFuelZeroExact graph state = Agda.Builtin.Equality.refl
+bfsFuelZeroExact graph state = refl
 
 record FiniteBFSCorrectness
     {Vertex : Set}
