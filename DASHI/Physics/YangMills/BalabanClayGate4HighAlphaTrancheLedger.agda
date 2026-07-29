@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4HighAlphaTrancheLedger where
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact as BFS
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSParentCorrectnessExact as BFSParent
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicExecutableBFSInstantiationExact as PeriodicBFS
 import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact as Determinant
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteKernelSchurBlockAdjointExact as Schur
@@ -12,7 +13,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4AnisotropyBlockAndCriterionProven
 
 ------------------------------------------------------------------------
 -- Concise ledger for the highest-alpha tranche described in the attached proof
--- plan.  The exact finite reductions are separated from their remaining
+-- plan. The exact finite reductions are separated from their remaining
 -- physical Yang--Mills identifications and uniform analytic estimates.
 ------------------------------------------------------------------------
 
@@ -22,6 +23,10 @@ fuelBoundedTerminationByConstructionLevel =
   BFS.fuelBoundedTerminationByConstructionLevel
 canonicalPreviousLayerParentDefinitionLevel =
   BFS.canonicalPreviousLayerParentDefinitionLevel
+firstAdjacentParentSoundLevel = BFSParent.firstAdjacentParentSoundLevel
+firstAdjacentParentCanonicalOrderLevel =
+  BFSParent.firstAdjacentParentCanonicalOrderLevel
+discoveredParentEdgesSoundLevel = BFSParent.discoveredParentEdgesSoundLevel
 periodicExecutableGraphLevel = PeriodicBFS.periodicExecutableGraphLevel
 periodicEqualityBooleanReflectionLevel =
   PeriodicBFS.periodicEqualityBooleanReflectionLevel
@@ -62,6 +67,10 @@ balabanEquation175SingleLocatorLevel =
 -- Remaining physical and correctness inhabitants.
 ------------------------------------------------------------------------
 
+bfsDistanceLayerInvariantInputsLevel =
+  BFSParent.bfsDistanceLayerInvariantInputsLevel
+bfsSpanningAndAcyclicityInputsLevel =
+  BFSParent.bfsSpanningAndAcyclicityInputsLevel
 periodicBFSShortestPathInvariantInputsLevel =
   PeriodicBFS.periodicBFSShortestPathInvariantInputsLevel
 periodicBFSParentTreeCorrectnessInputsLevel =
