@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4SU2HaarIdentityPositivityExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -82,8 +82,7 @@ haarDensityAtIdentityPositive :
     (Loss.haarDensity (haar dataSet) (identityLink dataSet))
 haarDensityAtIdentityPositive dataSet =
   subst (Positive dataSet)
-    (Relation.Binary.PropositionalEquality.sym
-      (haarDensityAtIdentityExact dataSet))
+    (sym (haarDensityAtIdentityExact dataSet))
     (onePositive dataSet)
 
 su2HaarIdentityDensityLevel : ProofLevel
