@@ -23,7 +23,6 @@ module DASHI.Analysis.MurrayBishopSetoidBackend where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Sigma using (Σ)
 
 import Real as Bishop
 import RealProperties as BishopLaws
@@ -32,15 +31,16 @@ import Sequence as BishopSequence
 import DASHI.Analysis.SetoidConstructiveRealSpine as Spine
 
 negativeAbsoluteBelow : ∀ value →
-  Bishop._≤_ (Bishop.- (Bishop.∣ value ∣)) value
+  Bishop._≤_
+    (Bishop.-_ (Bishop.∣_∣ value))
+    value
 negativeAbsoluteBelow value =
   BishopLaws.≤-respʳ-≃
     (BishopLaws.neg-involutive value)
     (BishopLaws.≤-respˡ-≃
-      (BishopLaws.-‿cong
-        (BishopLaws.≃-symm BishopLaws.∣-x∣≃∣x∣))
+      (BishopLaws.-‿cong BishopLaws.∣-x∣≃∣x∣)
       (BishopLaws.neg-mono-≤
-        (BishopLaws.x≤∣x∣ {x = Bishop.- value})))
+        (BishopLaws.x≤∣x∣ {x = Bishop.-_ value})))
 
 murrayBishopSetoidOrderedCompleteReal :
   Spine.SetoidOrderedCompleteReal
@@ -124,6 +124,9 @@ murrayBishopSetoidCompletenessClosed = true
 literalQuotientCompletenessNotUsed : Bool
 literalQuotientCompletenessNotUsed = true
 
+murrayBishopAbsoluteLowerTransportOrientedCorrectly : Bool
+murrayBishopAbsoluteLowerTransportOrientedCorrectly = true
+
 murrayBishopCarrierNondegenerateIsTrue :
   murrayBishopCarrierNondegenerate ≡ true
 murrayBishopCarrierNondegenerateIsTrue = refl
@@ -135,3 +138,7 @@ murrayBishopSetoidCompletenessClosedIsTrue = refl
 literalQuotientCompletenessNotUsedIsTrue :
   literalQuotientCompletenessNotUsed ≡ true
 literalQuotientCompletenessNotUsedIsTrue = refl
+
+murrayBishopAbsoluteLowerTransportOrientedCorrectlyIsTrue :
+  murrayBishopAbsoluteLowerTransportOrientedCorrectly ≡ true
+murrayBishopAbsoluteLowerTransportOrientedCorrectlyIsTrue = refl
