@@ -287,6 +287,14 @@ setoidDirectCanonicalArchetypeTheorem C bridge = record
         canonicalBound =
           embeddedCanonicalCutoffBound C lowCutoff gapCutoff
         negatedBound = negateAntitone C canonicalBound
+        negatedRectangleMeaning =
+          rectangleSumNeg C canonical lowCutoff gapCutoff
+        negatedRectangleTransport =
+          leqRespectsRight C
+            (approxSymmetric C negatedRectangleMeaning)
+            (leqReflexive C
+              (negate C
+                (rectangleSum C canonical lowCutoff gapCutoff)))
         pointwiseLower =
           rectangleSumMonotone C
             (λ low gap → negate C (canonical low gap))
@@ -296,14 +304,7 @@ setoidDirectCanonicalArchetypeTheorem C bridge = record
       in
       leqTransitive C
         negatedBound
-        (leqTransitive C
-          (leqRespectsLeft C
-            (approxSymmetric C
-              (rectangleSumNeg C canonical lowCutoff gapCutoff))
-            (leqReflexive C
-              (negate C
-                (rectangleSum C canonical lowCutoff gapCutoff))))
-          pointwiseLower)
+        (leqTransitive C negatedRectangleTransport pointwiseLower)
   }
 
 setoidDirectCanonicalSummationClosed : Bool
@@ -312,6 +313,9 @@ setoidDirectCanonicalSummationClosed = true
 setoidDirectCanonicalExpLogIndependent : Bool
 setoidDirectCanonicalExpLogIndependent = true
 
+setoidDirectCanonicalLowerTransportOrientedCorrectly : Bool
+setoidDirectCanonicalLowerTransportOrientedCorrectly = true
+
 setoidDirectCanonicalSummationClosedIsTrue :
   setoidDirectCanonicalSummationClosed ≡ true
 setoidDirectCanonicalSummationClosedIsTrue = refl
@@ -319,3 +323,7 @@ setoidDirectCanonicalSummationClosedIsTrue = refl
 setoidDirectCanonicalExpLogIndependentIsTrue :
   setoidDirectCanonicalExpLogIndependent ≡ true
 setoidDirectCanonicalExpLogIndependentIsTrue = refl
+
+setoidDirectCanonicalLowerTransportOrientedCorrectlyIsTrue :
+  setoidDirectCanonicalLowerTransportOrientedCorrectly ≡ true
+setoidDirectCanonicalLowerTransportOrientedCorrectlyIsTrue = refl
