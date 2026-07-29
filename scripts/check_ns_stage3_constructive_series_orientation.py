@@ -28,6 +28,8 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationEmbeddedEnvelopeClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAbsoluteCoefficientBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstructiveRealSpineOutputRelocationDerivedClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNAffineResolvedFamilyReduction.agda",
     "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
@@ -41,6 +43,7 @@ VERIFIERS = (
     "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
     "scripts/ns_stage3_output_relocation_integer_envelope_audit.py",
     "scripts/ns_stage3_output_relocation_majorant_audit.py",
+    "scripts/ns_stage3_output_relocation_derived_bridge_audit.py",
     "scripts/ns_stage3_small_epsilon_affine_audit.py",
 )
 
@@ -102,10 +105,11 @@ def main() -> int:
         f"output-relocation closure tranche: {len(FILES)} Agda modules, "
         f"{len(VERIFIERS)} exact verifiers, provenance and static safety; "
         "source-style homogeneity is rejected, unit weights close Check A, "
-        "the rational 128/93 positive-kernel, embedded-carrier, native-spine "
-        "adapter and finite signed programmes are closed, one affine family is "
-        "resolved leaving 21 live slots, and only concrete spine capability/"
-        "H^s/coefficient data plus concrete operator mapping remain fail-closed"
+        "the rational 128/93 kernel, embedded/native-spine closure and finite "
+        "signed programmes are closed, the two shell comparisons and both "
+        "signed inequalities are derived, one affine family is resolved leaving "
+        "21 live slots, and only concrete spine/power/absolute-coefficient data "
+        "plus concrete operator mapping remain fail-closed"
     )
     return 0
 
