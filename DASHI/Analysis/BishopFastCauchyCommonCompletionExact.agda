@@ -1,5 +1,6 @@
 module DASHI.Analysis.BishopFastCauchyCommonCompletionExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 import Real as BishopReal
@@ -38,7 +39,7 @@ record RationalCauchyCompletionPresentation
     EquivalentRepresentatives : Sequence → Sequence → Set
     equalityIffEquivalentRepresentatives : ∀ left right → Set
 
-    realize : Sequence → RegularOrCauchy Sequence → Real
+    realize : (sequence : Sequence) → RegularOrCauchy sequence → Real
     realizeRepresentativeRoundTrip : ∀ value →
       Equality (realize (representative value) (representativeRegular value)) value
     representativeRealizeRoundTrip : ∀ sequence regular →
@@ -90,6 +91,8 @@ record BishopFastCauchyCommonCompletion
         (FastBackend.fastCauchySetoidOrderedCompleteReal operations fastPackaging)
         (Bishop.bishopSetoidOrderedCompleteReal bishopPackaging)
 
+    bridgeRationalCarriersAgree :
+      Categoricity.Q forwardBridge ≡ Categoricity.Q backwardBridge
     forwardBridgeGeneratedByReindexingAndFastLimit : Set
     backwardBridgeGeneratedByReindexingAndBishopLimit : Set
     bothAreCauchyCompletionsOfSameRationals : Set
@@ -106,7 +109,7 @@ commonCompletionPresentation :
 commonCompletionPresentation dataSet = record
   { forward = forwardBridge dataSet
   ; backward = backwardBridge dataSet
-  ; sameRationalCarrier = fastRationalsAgreeWithMetricAuthority dataSet
+  ; sameRationalCarrier = bridgeRationalCarriersAgree dataSet
   ; leftIsCauchyCompletionOfRationals =
       bothAreCauchyCompletionsOfSameRationals dataSet
   ; rightIsCauchyCompletionOfRationals =
