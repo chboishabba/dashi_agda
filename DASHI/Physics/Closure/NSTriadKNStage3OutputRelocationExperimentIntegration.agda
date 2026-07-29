@@ -4,26 +4,28 @@ module DASHI.Physics.Closure.NSTriadKNStage3OutputRelocationExperimentIntegratio
 -- PROVENANCE
 -- Authors: Shin-ichi Inage; Jean-Michel Bony; Hajer Bahouri; Jean-Yves
 -- Chemin; Raphael Danchin; Tosio Kato; Gustavo Ponce; Loukas Grafakos;
--- Rodolfo H. Torres; Minghui Liu; Gabor Pataki; DASHI repository contributors.
--- Title: "Stage-3 output-relocation falsification and unit-weight recovery
--- experiment integration".
+-- Rodolfo H. Torres; Minghui Liu; Gabor Pataki; Augustin-Louis Cauchy; Agda
+-- standard-library contributors; DASHI repository contributors.
+-- Title: "Stage-3 output-relocation falsification, unit-weight recovery and
+-- cutoff-uniform shell-majorant experiment integration".
 -- Venue/year: Mathematics 14 (2026), article 1410; Annales scientifiques de
 -- l'Ecole Normale Superieure 14 (1981); Fourier Analysis and Nonlinear Partial
 -- Differential Equations, Springer, 2011; Communications on Pure and Applied
 -- Mathematics 41 (1988); Journal of Functional Analysis 187 (2001);
--- Mathematical Programming / arXiv, 2015--2017; DASHI formal development,
--- 2026.
+-- Mathematical Programming / arXiv, 2015--2017; Agda standard library; DASHI
+-- formal development, 2026.
 -- DOI: 10.3390/math14091410; 10.24033/asens.1404;
 -- 10.1007/978-3-642-16830-7; 10.1002/cpa.3160410704;
 -- 10.1006/jfan.2001.3804; 10.48550/arXiv.1507.00290; the integration receipt
 -- has no DOI.
 -- Uses: the comparator source-status audit, the output-relocation vertical
--- slice, the exact primal/dual affine classification, and the unit-weight
--- Grafakos--Torres specialization.
--- Relationship: the cheap experiment now reaches a real decision.  The
--- source-style all-three-homogeneity affine construction is infeasible, but
--- constant unit weights close symbolic Check A.  Constructive dyadic
--- summation is the first remaining proof-critical leaf.
+-- slice, exact primal/dual affine classification, unit weights, exact rational
+-- geometric sums, the positive kernel and finite signed domination.
+-- Relationship: the cheap experiment reaches a sharper decision.  The
+-- source-style affine construction is infeasible, unit weights close symbolic
+-- Check A, and all finite-cutoff reasoning after the concrete shell bridge is
+-- proved.  The first remaining leaf is inhabiting that shell bridge, not
+-- constructing a general geometric-series library.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -33,6 +35,11 @@ import DASHI.Physics.Closure.NSTriadKNInageHighHighComparatorAudit as Comparator
 import DASHI.Physics.Closure.NSTriadKNStage3OutputRelocationVerticalSlice as Slice
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFarkasDecision as Decision
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightCheckA as Unit
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationIntegerGeometricEnvelope as Envelope
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Majorant
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightShellSchur as ShellSchur
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteSignedMajorant as Signed
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as Conditional
 
 record OutputRelocationExperimentReceipt : Set where
   constructor receipt
@@ -65,10 +72,23 @@ record OutputRelocationExperimentReceipt : Set where
     unitWeightSymbolicCheckAClosed :
       Unit.outputRelocationUnitWeightSymbolicCheckA ≡ true
 
-    cutoffUniformSeriesStillOpen :
-      Unit.outputRelocationUnitWeightConstructiveDyadicTailClosed ≡ false
-    analyticArchetypeStillOpen :
-      Unit.outputRelocationUnitWeightAnalyticArchetypeClosed ≡ false
+    rationalFiniteCutoffSummationClosed :
+      Envelope.outputRelocationRationalFiniteCutoffSummationClosed ≡ true
+    positiveKernelSummable :
+      Majorant.outputRelocationPositiveKernelCutoffUniformlySummable ≡ true
+    threeUnitWeightShellConditionsClosed :
+      ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosed
+      ≡ true
+    finiteSignedDominationClosed :
+      Signed.finiteTwoSidedTriangleDominationClosed ≡ true
+    allDownstreamOfShellBridgeClosed :
+      Conditional.outputRelocationAllDownstreamOfShellBridgeClosed ≡ true
+
+    concreteShellBridgeStillOpen :
+      Conditional.outputRelocationConcreteShellBridgeInhabited ≡ false
+    concreteAnalyticArchetypeStillOpen :
+      Conditional.outputRelocationConcreteCutoffUniformArchetypeClosed
+      ≡ false
 
 open OutputRelocationExperimentReceipt public
 
@@ -87,8 +107,13 @@ outputRelocationExperimentReceipt = receipt
   Decision.currentHomogeneityPreservingAffineAnsatzInfeasibleIsTrue
   Unit.unitWeightsAllowedBySchurCarrierIsTrue
   Unit.outputRelocationUnitWeightSymbolicCheckAIsTrue
-  Unit.outputRelocationUnitWeightConstructiveDyadicTailClosedIsFalse
-  Unit.outputRelocationUnitWeightAnalyticArchetypeClosedIsFalse
+  Envelope.outputRelocationRationalFiniteCutoffSummationClosedIsTrue
+  Majorant.outputRelocationPositiveKernelCutoffUniformlySummableIsTrue
+  ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosedIsTrue
+  Signed.finiteTwoSidedTriangleDominationClosedIsTrue
+  Conditional.outputRelocationAllDownstreamOfShellBridgeClosedIsTrue
+  Conditional.outputRelocationConcreteShellBridgeInhabitedIsFalse
+  Conditional.outputRelocationConcreteCutoffUniformArchetypeClosedIsFalse
 
 outputRelocationCheapFalsificationExperimentImplemented : Bool
 outputRelocationCheapFalsificationExperimentImplemented = true
@@ -102,8 +127,16 @@ outputRelocationExperimentReachesNumericFeasibilityTest = true
 unitWeightSymbolicCheckARecovered : Bool
 unitWeightSymbolicCheckARecovered = true
 
+outputRelocationFiniteCutoffMajorantProgramClosed : Bool
+outputRelocationFiniteCutoffMajorantProgramClosed = true
+
+firstOpenLeafIsConcreteShellBridge : Bool
+firstOpenLeafIsConcreteShellBridge = true
+
+-- Compatibility status retained for old audit consumers.  A broad constructive
+-- dyadic-series development is no longer the first open leaf.
 firstOpenLeafIsConstructiveDyadicSeries : Bool
-firstOpenLeafIsConstructiveDyadicSeries = true
+firstOpenLeafIsConstructiveDyadicSeries = false
 
 outputRelocationCheapFalsificationExperimentImplementedIsTrue :
   outputRelocationCheapFalsificationExperimentImplemented ≡ true
@@ -121,6 +154,14 @@ unitWeightSymbolicCheckARecoveredIsTrue :
   unitWeightSymbolicCheckARecovered ≡ true
 unitWeightSymbolicCheckARecoveredIsTrue = refl
 
-firstOpenLeafIsConstructiveDyadicSeriesIsTrue :
-  firstOpenLeafIsConstructiveDyadicSeries ≡ true
-firstOpenLeafIsConstructiveDyadicSeriesIsTrue = refl
+outputRelocationFiniteCutoffMajorantProgramClosedIsTrue :
+  outputRelocationFiniteCutoffMajorantProgramClosed ≡ true
+outputRelocationFiniteCutoffMajorantProgramClosedIsTrue = refl
+
+firstOpenLeafIsConcreteShellBridgeIsTrue :
+  firstOpenLeafIsConcreteShellBridge ≡ true
+firstOpenLeafIsConcreteShellBridgeIsTrue = refl
+
+firstOpenLeafIsConstructiveDyadicSeriesIsFalse :
+  firstOpenLeafIsConstructiveDyadicSeries ≡ false
+firstOpenLeafIsConstructiveDyadicSeriesIsFalse = refl
