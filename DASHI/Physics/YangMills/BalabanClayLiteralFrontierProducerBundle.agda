@@ -11,12 +11,17 @@ import DASHI.Physics.YangMills.BalabanClayConfiguredVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims
 
 -- Existing DASHI constructed-real and series spines, direct Bishop/FastCauchy
--- setoid backends, concrete-model equivalence seam, explicit legacy authority,
--- canonical backend selection and non-promoted Cubical HoTT boundary.
+-- setoid backends, layered ordered-field/rational-density/effective-convergence
+-- capabilities, canonical categoricity from rational approximants, the concrete
+-- Bishop/FastCauchy categoricity instance, explicit legacy authority, canonical
+-- backend selection and the non-promoted Cubical HoTT boundary.
 import DASHI.Analysis.ConstructedRealBackendSpineExact
+import DASHI.Analysis.ConstructiveRealCapabilityHierarchyExact
+import DASHI.Analysis.ConstructiveRealCategoricityExact
 import DASHI.Analysis.BishopConstructedRealBackendExact
 import DASHI.Analysis.FastCauchyConstructedRealBackendExact
 import DASHI.Analysis.BishopFastCauchyRealEquivalenceExact
+import DASHI.Analysis.BishopFastCauchyCategoricityInstanceExact
 import DASHI.Analysis.BishopConstructiveSeriesAdapterExact
 import DASHI.Analysis.CanonicalDASHIRealBackendExact
 import DASHI.Analysis.CubicalHoTTRealBackendBoundary
@@ -112,8 +117,10 @@ import DASHI.Physics.YangMills.BalabanClayT4ConfiguredPhysicalOneLoopInstanceExa
 
 -- T5: separate KP and sharper FP criteria, exact marked-activity margins,
 -- repository-specific rooted-shell injection, physical cancellation/RG/moment,
--- measure topology and complete OS Gram transport.
+-- the selected L^p -> reflected-product -> UI route, explicit reuse of the older
+-- gauge/RG/measure stack, measure topology and complete OS Gram transport.
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact
+import DASHI.Physics.YangMills.BalabanClayT5LpUniformIntegrabilityExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeTailMomentCompactnessExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact
@@ -124,6 +131,7 @@ import DASHI.Physics.YangMills.BalabanClayT5BoundaryContinuumMomentMeasureExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredPhysicalTailMomentInstanceExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalTailMomentMeasureClosureExact
+import DASHI.Physics.YangMills.BalabanClayLegacyGaugeRGMeasureReuseExact
 
 -- Exact status split for configured arithmetic, Bishop integration and leaves.
 import DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger
