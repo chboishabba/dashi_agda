@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSFrequencyLocalizedDissipativeBernsteinExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -22,7 +23,7 @@ import DASHI.Physics.Closure.NSPeriodicInfinityShellDerivativeBound as FiniteDer
 --   generalized Poincare inequalities.
 --
 -- Relationship to DASHI: this is an adjacent Navier--Stokes/fractional-
--- dissipation authority.  It is not the same theorem as the existing finite
+-- dissipation authority. It is not the same theorem as the existing finite
 -- cube-shell L-infinity-from-L2 Bernstein count and is not imported into the
 -- Yang--Mills Gate-4 proof.
 ------------------------------------------------------------------------
@@ -32,7 +33,7 @@ data BernsteinMechanism : Set where
   dissipativeSemigroupCoercivity : BernsteinMechanism
 
 finiteAndDissipativeBernsteinAreDistinct :
-  finiteFourierCounting ≡ dissipativeSemigroupCoercivity → Set
+  finiteFourierCounting ≡ dissipativeSemigroupCoercivity → ⊥
 finiteAndDissipativeBernsteinAreDistinct ()
 
 ------------------------------------------------------------------------
