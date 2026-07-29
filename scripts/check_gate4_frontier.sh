@@ -3,6 +3,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+bash "$SCRIPT_DIR/check_gate4_frontier_static.sh"
+
 exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalBackgroundFibreWitnessExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FlatWilsonActionPositivityExact.agda \
