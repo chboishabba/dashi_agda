@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the constructive-real comparison and Schur orientation tranche."""
+"""Fail closed on the constructive-real comparison and Schur substitution tranche."""
 from __future__ import annotations
 
 import re
@@ -10,6 +10,8 @@ from pathlib import Path
 FILES = (
     "DASHI/Physics/Closure/NSTriadKNConstructiveRealCandidateComparison.agda",
     "DASHI/Physics/Closure/NSTriadKNGrafakosTorresPowerLawOrientation.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationWeightedExponentIdentity.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationLiteralShellSubstitution.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
 
@@ -41,7 +43,7 @@ def main() -> int:
 
     verifier = root / "scripts/ns_stage3_power_law_orientation_audit.py"
     if not verifier.is_file():
-        failures.append("missing power-law orientation exact verifier")
+        failures.append("missing power-law substitution exact verifier")
     else:
         result = subprocess.run(
             [sys.executable, str(verifier)], cwd=root, check=False,
@@ -54,9 +56,10 @@ def main() -> int:
         print("\n".join(failures))
         return 1
     print(
-        "checked constructive-real comparison and Grafakos--Torres orientation: "
-        "3 Agda modules, exact verifier, provenance, no holes/postulates/escapes; "
-        "external imports, shell substitution and Check A remain fail-closed"
+        "checked constructive-real comparison and Grafakos--Torres shell substitution: "
+        "5 Agda modules, exact verifier, provenance, no holes/postulates/escapes; "
+        "literal three-condition rows closed while external import, dyadic tail, "
+        "affine-family substitution and Check A remain fail-closed"
     )
     return 0
 
