@@ -3,6 +3,8 @@ module DASHI.Governance.Sudan.RCEPPRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
+import DASHI.Foundations.StageValuationBundleAtlas as Stage
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.CouncilDelegationGraph as Council
 import DASHI.Governance.ExternalLegitimacyBoundary as Legitimacy
@@ -47,7 +49,7 @@ record RCEPPGovernanceRegression : Set where
       MandateFibre.listCount MandateFibre.canonicalMandateFineRoles ≡ 3
 
     rankOneHypervoxelCountIsThree :
-      MandateFibre.Hyper.siteCount 1 1 ≡ 3
+      Hyper.siteCount 1 1 ≡ 3
 
     militarySubordinateToPeople :
       Council.SubordinationPath
@@ -71,8 +73,8 @@ record RCEPPGovernanceRegression : Set where
       ≡ false
 
     stageCompressionAuthorityFalse :
-      Transition.Stage.semanticAuthorityPromoted
-        Transition.Stage.canonicalTransformativeJump3To14
+      Stage.semanticAuthorityPromoted
+        Stage.canonicalTransformativeJump3To14
       ≡ false
 
 canonicalRCEPPGovernanceRegression : RCEPPGovernanceRegression
