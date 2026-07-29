@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Product using (_×_; _,_)
@@ -43,46 +43,8 @@ import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometr
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
--- Duplicate-free finite positive plaquettes based at one periodic block.
+-- Six positive coordinate planes based at one periodic block.
 ------------------------------------------------------------------------
-
-data NoDuplicates {A : Set} : List A → Set where
-  unique[] : NoDuplicates []
-  unique∷ : ∀ {value values} →
-    Not (value ∈ values) → NoDuplicates values →
-    NoDuplicates (value ∷ values)
-
-mapMembershipInverse :
-  ∀ {A B : Set} {f : A → B} →
-  (∀ {left right} → f left ≡ f right → left ≡ right) →
-  ∀ {value values} → f value ∈ map f values → value ∈ values
-mapMembershipInverse injective here = here
-mapMembershipInverse injective (there member) =
-  there (mapMembershipInverse injective member)
-
-mapNoDuplicates :
-  ∀ {A B : Set} {f : A → B} →
-  (∀ {left right} → f left ≡ f right → left ≡ right) →
-  ∀ {values} → NoDuplicates values → NoDuplicates (map f values)
-mapNoDuplicates injective unique[] = unique[]
-mapNoDuplicates injective (unique∷ notMember rest) =
-  unique∷
-    (λ member → notMember (mapMembershipInverse injective member))
-    (mapNoDuplicates injective rest)
-
-zeroNotInSuccessorMap :
-  ∀ {n} (values : List (CyclicIndex n)) →
-  Not (zeroᵢ ∈ map sucᵢ values)
-zeroNotInSuccessorMap [] ()
-zeroNotInSuccessorMap (value ∷ values) (there member) =
-  zeroNotInSuccessorMap values member
-
-allCyclicIndicesNoDuplicates : ∀ n → NoDuplicates (allCyclicIndices n)
-allCyclicIndicesNoDuplicates zero = unique[]
-allCyclicIndicesNoDuplicates (suc n) =
-  unique∷
-    (zeroNotInSuccessorMap (allCyclicIndices n))
-    (mapNoDuplicates sucInjective (allCyclicIndicesNoDuplicates n))
 
 six : Nat
 six = suc (suc (suc (suc (suc (suc zero)))))
@@ -93,27 +55,52 @@ PositivePlane4 = CyclicIndex six
 PeriodicPlaquette : Nat → Set
 PeriodicPlaquette n = Product (PeriodicBlock n) PositivePlane4
 
+periodicPlaquetteAt :
+  ∀ {n} → PeriodicBlock n → PositivePlane4 → PeriodicPlaquette n
+periodicPlaquetteAt block plane = pair block plane
+
 ownedPeriodicPlaquettes : ∀ {n} → PeriodicBlock n → List (PeriodicPlaquette n)
 ownedPeriodicPlaquettes block =
-  map (λ plane → pair block plane) (allCyclicIndices six)
+  map (periodicPlaquetteAt block) (allCyclicIndices six)
 
 ownedPeriodicPlaquettesComplete :
   ∀ {n} (block : PeriodicBlock n) plane →
-  pair block plane ∈ ownedPeriodicPlaquettes block
+  periodicPlaquetteAt block plane ∈ ownedPeriodicPlaquettes block
 ownedPeriodicPlaquettesComplete block plane =
-  mapMembership (λ selectedPlane → pair block selectedPlane)
+  mapMembership (periodicPlaquetteAt block)
     (allCyclicIndicesComplete plane)
 
-ownedPeriodicPlaquettesNoDuplicates :
-  ∀ {n} (block : PeriodicBlock n) →
-  NoDuplicates (ownedPeriodicPlaquettes block)
-ownedPeriodicPlaquettesNoDuplicates block =
-  mapNoDuplicates productSecondInjective
-    (allCyclicIndicesNoDuplicates six)
+periodicPlaquetteIndexInjective :
+  ∀ {n} {block : PeriodicBlock n} {left right : PositivePlane4} →
+  periodicPlaquetteAt block left ≡ periodicPlaquetteAt block right →
+  left ≡ right
+periodicPlaquetteIndexInjective = productSecondInjective
 
-------------------------------------------------------------------------
--- Explicit six positive coordinate planes.
-------------------------------------------------------------------------
+record CollisionFreeIndexedEnumeration (Index Value : Set) : Set₁ where
+  field
+    indices : List Index
+    indexComplete : ∀ index → index ∈ indices
+    encode : Index → Value
+    encodeInjective : ∀ {left right} →
+      encode left ≡ encode right → left ≡ right
+
+open CollisionFreeIndexedEnumeration public
+
+ownedPeriodicPlaquetteIndexing :
+  ∀ {n} (block : PeriodicBlock n) →
+  CollisionFreeIndexedEnumeration PositivePlane4 (PeriodicPlaquette n)
+ownedPeriodicPlaquetteIndexing block = record
+  { indices = allCyclicIndices six
+  ; indexComplete = allCyclicIndicesComplete
+  ; encode = periodicPlaquetteAt block
+  ; encodeInjective = periodicPlaquetteIndexInjective
+  }
+
+ownedPeriodicPlaquettesNoDuplicate :
+  ∀ {n} (block : PeriodicBlock n) {left right : PositivePlane4} →
+  periodicPlaquetteAt block left ≡ periodicPlaquetteAt block right →
+  left ≡ right
+ownedPeriodicPlaquettesNoDuplicate block = periodicPlaquetteIndexInjective
 
 axis0 axis1 axis2 axis3 : Axis4
 axis0 = zeroᵢ
@@ -154,7 +141,7 @@ ownedPlaquettesComplete :
     (dataSet : LiteralPeriodicPlaquetteOwnership
       n Scale Configuration Gauge)
     block plane →
-  Wilson._∈_ (pair block plane)
+  Wilson._∈_ (periodicPlaquetteAt block plane)
     (Wilson.ownedPlaquettes (largeField dataSet) block)
 ownedPlaquettesComplete dataSet block plane
   rewrite ownedPlaquettesArePeriodic dataSet block =
@@ -164,11 +151,11 @@ ownedPlaquettesNoDuplicate :
   ∀ {n Scale Configuration Gauge}
     (dataSet : LiteralPeriodicPlaquetteOwnership
       n Scale Configuration Gauge)
-    block →
-  NoDuplicates (Wilson.ownedPlaquettes (largeField dataSet) block)
-ownedPlaquettesNoDuplicate dataSet block
-  rewrite ownedPlaquettesArePeriodic dataSet block =
-  ownedPeriodicPlaquettesNoDuplicates block
+    block {left right : PositivePlane4} →
+  periodicPlaquetteAt block left ≡ periodicPlaquetteAt block right →
+  left ≡ right
+ownedPlaquettesNoDuplicate dataSet block =
+  ownedPeriodicPlaquettesNoDuplicate block
 
 ------------------------------------------------------------------------
 -- Exact derived threshold and witness bridges.
