@@ -37,7 +37,8 @@ record RationalCauchyCompletionPresentation
 
     Equality : Real → Real → Set
     EquivalentRepresentatives : Sequence → Sequence → Set
-    equalityIffEquivalentRepresentatives : ∀ left right → Set
+    equalityIffEquivalentRepresentatives :
+      (left right : Real) → Set
 
     realize : (sequence : Sequence) → RegularOrCauchy sequence → Real
     realizeRepresentativeRoundTrip : ∀ value →
@@ -77,10 +78,14 @@ record BishopFastCauchyCommonCompletion
     fastCauchyAndBishopRegularityReindex :
       FastSequence → BishopSequence
 
-    forwardReindexPreservesRationalTerms : ∀ sequence index → Set
-    backwardReindexPreservesRationalTerms : ∀ sequence index → Set
-    regularityImpliesDyadicFastCauchy : ∀ sequence → Set
-    dyadicFastCauchyImpliesRegularity : ∀ sequence → Set
+    forwardReindexPreservesRationalTerms :
+      (sequence : BishopSequence) → (index : Nat) → Set
+    backwardReindexPreservesRationalTerms :
+      (sequence : FastSequence) → (index : Nat) → Set
+    regularityImpliesDyadicFastCauchy :
+      (sequence : BishopSequence) → Set
+    dyadicFastCauchyImpliesRegularity :
+      (sequence : FastSequence) → Set
 
     forwardBridge :
       Categoricity.CommonRationalApproximationBridge
