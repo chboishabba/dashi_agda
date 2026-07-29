@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FiniteKernelSchurBlockAdjointExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -111,7 +111,7 @@ physicalBlockAdjointRelativeOneEighth meaning scale =
       budget = contractionBudget meaning scale
       base = finiteSchurImpliesRelativeOneEighthSquaredNorm budget
       rightEq = cong₂ (multiply dataSet)
-        Agda.Builtin.Equality.refl
+        refl
         (sym (previousNormMeaning meaning scale))
   in subst
       (λ upper → LessEqual dataSet
