@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact where
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Rational using (_≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -159,9 +160,7 @@ constructedPositivePhysicalMassTransport :
     (dataSet : ConcreteUVToMassGapDependency
       State Bound Measure Schwinger HilbertTheory) →
   Mass.survivingMass (constructedPhysicalMassInterlacing dataSet)
-  Data.Rational._≤_
-    Mass.physicalGap (constructedPhysicalMassInterlacing dataSet)
-      Agda.Builtin.Nat.zero
+  ≤ Mass.physicalGap (constructedPhysicalMassInterlacing dataSet) zero
 constructedPositivePhysicalMassTransport dataSet =
   Mass.positivePhysicalMassSurvives
     (constructedPhysicalMassInterlacing dataSet)
@@ -172,9 +171,6 @@ continuumOSAxiomAssemblyLevel = machineChecked
 concreteUVToMassGapDependencyAssemblyLevel : ProofLevel
 concreteUVToMassGapDependencyAssemblyLevel = machineChecked
 
--- The remaining inputs are actual theorem bridges, not arbitrary proposition
--- names: all-scale UV to the continuum closure, OS reconstruction plus clustering
--- to a spectral gap, and spectral gap to the physical interlacing package.
 allScaleUVToContinuumClosureInputsLevel : ProofLevel
 allScaleUVToContinuumClosureInputsLevel = conditional
 
