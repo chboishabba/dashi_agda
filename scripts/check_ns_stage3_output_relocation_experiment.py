@@ -20,7 +20,10 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightShellSchur.agda",
     "DASHI/Physics/Closure/NSTriadKNRationalFiniteSignedMajorant.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationConditionalCutoffUniformClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationEmbeddedEnvelopeClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineResolvedFamilyReduction.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationExperimentIntegration.agda",
 )
 
@@ -30,6 +33,7 @@ VERIFIERS = (
     "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
     "scripts/ns_stage3_output_relocation_integer_envelope_audit.py",
     "scripts/ns_stage3_output_relocation_majorant_audit.py",
+    "scripts/ns_stage3_small_epsilon_affine_audit.py",
 )
 
 PROVENANCE = (
@@ -86,9 +90,10 @@ def main() -> int:
         f"checked output-relocation experiment: {len(FILES)} Agda modules, "
         f"{len(VERIFIERS)} exact audits, provenance and static safety; "
         "source-style affine homogeneity is rejected, unit weights and the "
-        "rational 128/93 majorant programme are closed, and every theorem "
-        "downstream of the concrete H^s shell bridge is proved; the bridge and "
-        "concrete operator theorem remain fail-closed"
+        "rational/embedded 128/93 majorant programmes are closed, one affine "
+        "family is resolved leaving 21 live slots, and only the concrete "
+        "ordered carrier/H^s/coefficient bridge and operator theorem remain "
+        "fail-closed"
     )
     return 0
 
