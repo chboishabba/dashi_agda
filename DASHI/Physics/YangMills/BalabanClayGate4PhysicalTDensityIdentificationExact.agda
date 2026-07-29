@@ -1,7 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PhysicalTDensityIdentificationExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Agda.Builtin.List using (List)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Data.Rational using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -68,7 +69,7 @@ record OwnedPlaquetteActionFactorIdentification
     (identification : PhysicalTDensityIdentification dataSet) : Set₁ where
   field
     productData : Wilson.OrderedPlaquetteProduct Plaquette
-    ownedPlaquettes : Component → SlowField → Fine → Agda.Builtin.List.List Plaquette
+    ownedPlaquettes : Component → SlowField → Fine → List Plaquette
 
     actionFactorIsOwnedPlaquetteProduct : ∀ scale component slow fine →
       Six.actionFactor (sixFactors identification) scale
@@ -104,10 +105,6 @@ physicalTDensityOneSixteenthLevel = machineChecked
 ownedPlaquetteActionIdentificationVocabularyLevel : ProofLevel
 ownedPlaquetteActionIdentificationVocabularyLevel = machineChecked
 
--- The concrete inhabitant must identify the actual fast field with the traversal
--- used by the existing six-factor producer and identify its action factor with
--- the bond-derived owned-plaquette product.  Jacobian, determinant,
--- localization and patch estimates are then reused rather than reproved.
 physicalFastFieldTraversalIdentificationInputsLevel : ProofLevel
 physicalFastFieldTraversalIdentificationInputsLevel = conditional
 
