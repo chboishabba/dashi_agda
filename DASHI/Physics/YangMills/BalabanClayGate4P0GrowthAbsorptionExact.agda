@@ -20,7 +20,7 @@ import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact
 -- equation (1.100), p. 388, for the R-operation suppression;
 -- Theorem 1, p. 388, for invariant-domain preservation.
 --
--- The unreviewed Eriksson interface document is a locator only.  It is not an
+-- The unreviewed Eriksson interface document is a locator only. It is not an
 -- admissible authority for the inequalities below.
 --
 -- Existing DASHI reuse: the running coupling must be supplied through the
@@ -43,7 +43,7 @@ record P0SuperlinearLogGrowth
     epsilon0Positive : Set
     primarySectionOneFourChecked : Set
 
-    p0GrowthDefinition : ∀ scale →
+    p0GrowthDefinition : ∀ (scale : Scale) →
       SmallCoupling scale →
       LessEqual
         (multiply c0
@@ -69,28 +69,28 @@ record LargeFieldAbsorptionDerivation
     residualMagnitude residualMagnitudeSquared polynomialEnvelope : Scale → Bound
     largeFieldSuppression smallFieldScaleGain : Scale → Bound
 
-    residualSquareDefinition : ∀ scale →
+    residualSquareDefinition : ∀ (scale : Scale) →
       residualMagnitudeSquared scale
       ≡ multiply (residualMagnitude scale) (residualMagnitude scale)
 
-    residualMagnitudeSquaredBound : ∀ scale →
+    residualMagnitudeSquaredBound : ∀ (scale : Scale) →
       LessEqual
         (residualMagnitudeSquared scale)
         (polynomialEnvelope scale)
 
-    suppressionNonnegative : ∀ scale →
+    suppressionNonnegative : ∀ (scale : Scale) →
       LessEqual zero (largeFieldSuppression scale)
 
-    multiplyRightMonotone : ∀ coefficient {left right} →
+    multiplyRightMonotone : ∀ (coefficient : Bound) {left right} →
       LessEqual zero coefficient →
       LessEqual left right →
       LessEqual (multiply left coefficient) (multiply right coefficient)
 
     -- This is the single calculus estimate obtained from the superlinear-log
-    -- p0 growth and the convention-matched running coupling.  It replaces two
+    -- p0 growth and the convention-matched running coupling. It replaces two
     -- redundant frontier fields called "p0 dominates linear scale" and
     -- "exponential beats polynomial".
-    polynomialTimesP0SuppressionGeometric : ∀ scale →
+    polynomialTimesP0SuppressionGeometric : ∀ (scale : Scale) →
       LessEqual
         (multiply (polynomialEnvelope scale)
           (largeFieldSuppression scale))
@@ -101,7 +101,7 @@ open LargeFieldAbsorptionDerivation public
 residualTimesSuppressionBelowPolynomial :
   ∀ {Scale Bound}
     (dataSet : LargeFieldAbsorptionDerivation Scale Bound)
-    scale →
+    (scale : Scale) →
   LessEqual dataSet
     (multiply dataSet
       (residualMagnitudeSquared dataSet scale)
@@ -118,7 +118,7 @@ residualTimesSuppressionBelowPolynomial dataSet scale =
 largeFieldAbsorbedBySmallFieldBudget :
   ∀ {Scale Bound}
     (dataSet : LargeFieldAbsorptionDerivation Scale Bound)
-    scale →
+    (scale : Scale) →
   LessEqual dataSet
     (multiply dataSet
       (residualMagnitudeSquared dataSet scale)
@@ -139,11 +139,11 @@ record BalabanResidualEnvelope
     polynomialEnvelope : Scale → Bound
     LessEqual : Bound → Bound → Set
 
-    MDefinition : ∀ scale →
+    MDefinition : ∀ (scale : Scale) →
       M scale ≡ multiply CResidual (add one (beta scale))
 
-    betaAtMostAffineInScale : ∀ scale → Set
-    mSquaredAtMostPolynomialEnvelope : ∀ scale →
+    betaAtMostAffineInScale : ∀ (scale : Scale) → Set
+    mSquaredAtMostPolynomialEnvelope : ∀ (scale : Scale) →
       LessEqual
         (multiply (M scale) (M scale))
         (polynomialEnvelope scale)
