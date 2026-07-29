@@ -8,6 +8,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4FlatWilsonActionPositivityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SU2HaarIdentityPositivityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteCoerciveDeterminantPositivityExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanDeterminantLossExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalReferenceFactorAssemblyExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4RationalPositiveMassReciprocalExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalReferenceNormalizationExact.agda \
@@ -15,15 +16,23 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalCompensatedEquation189Exact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4HaarDeterminantRelativeLossReuseExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FlatReferencePositiveWitnessExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PeriodicExecutableBFSInstantiationExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRunningCouplingConventionExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteKernelSchurBlockAdjointExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SummableTailBudgetClosureExact.agda \
+  DASHI/Physics/YangMills/BalabanClayT5KoteckyPreissTwoWeightPrimaryExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5ConditionedObservableLocalizationSummationExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5PerScaleDecouplingClosureExact.agda \
+  DASHI/Physics/YangMills/BalabanClayT5AnisotropyPolymerSummationExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5OSReconstructionCyclicityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment252MechanismAuditExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateLedger.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4AnisotropyBlockAndCriterionProvenanceExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4HighAlphaTrancheLedger.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4HighAlphaTrancheReceipt.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Validation.agda \
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerAdvance.agda \
   DASHI/Physics/YangMills/BalabanClayGate4AndNumericalAuditCompletionLedger.agda \
