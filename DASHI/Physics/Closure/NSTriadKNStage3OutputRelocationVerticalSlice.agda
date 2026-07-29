@@ -15,26 +15,31 @@ module DASHI.Physics.Closure.NSTriadKNStage3OutputRelocationVerticalSlice where
 -- DOI: 10.24033/asens.1404; 10.1007/978-3-642-16830-7;
 -- 10.1002/cpa.3160410704; 10.1006/jfan.2001.3804; the repository vertical
 -- slice has no DOI.
--- Uses: the exact identity u_p dot q = u_p dot k, the output-low endpoint
--- profile (5,10) after scaling exponents by two, finite Bernstein and Leray
+-- Uses: the exact identity u_p dot q = u_p dot k on the concrete Complex3
+-- carrier, the symbolic weighted identity
+--
+--   2^(3j/2) 2^j 2^(-sJ) 2^(-sJ)
+--     = 2^(-(2s-5/2)j) 2^(-2sd),
+--
+-- the output-low endpoint profile (5,10), finite Bernstein and Leray
 -- contraction, the three-weight affine row factorisation, and the generic
 -- small-positive-epsilon theorem.
--- Relationship: executes the cheapest Stage-3 falsification path.  It closes
--- the source identity, component/archetype ownership, endpoint arithmetic and
--- coefficient-extraction interface.  It deliberately stops before claiming a
--- concrete coefficient vector because the repository complex carrier and the
--- cutoff-uniform weighted shell estimate remain open.
+-- Relationship: executes the cheapest Stage-3 falsification path. It now
+-- closes the concrete carrier and weighted shell exponent arithmetic. It
+-- remains fail-closed on constructive dyadic summation and on the orientation
+-- of the three Grafakos--Torres auxiliary-weight coefficients.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Closure.NSTriadKNExactDyadicShellGeometry as Geometry
 import DASHI.Physics.Closure.NSTriadKNSeparatedComponentLedger as Components
 import DASHI.Physics.Closure.NSTriadKNSeparatedComponentEndpointProfiles as Profiles
 import DASHI.Physics.Closure.NSTriadKNHighHighToLowCancellationProgram as Relocation
+import DASHI.Physics.Closure.NSTriadKNComplex3RelocationInstantiation as Concrete
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationWeightedExponentIdentity as Weighted
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein as Bernstein
 import DASHI.Physics.Closure.NSTriadKNAffineRowFactorisation as Rows
@@ -104,8 +109,14 @@ record OutputRelocationVerticalSliceCutset : Set₁ where
   field
     genericRelocationIdentity :
       Relocation.outputRelocationAlgebraTheoremClosed ≡ true
+    concreteComplexRelocationIdentity :
+      Concrete.concreteComplexCarrierOutputRelocationClosed ≡ true
     structuralGainIdentified :
       Relocation.outputHighHighToLowStructuralGainIdentified ≡ true
+    weightedExponentIdentity :
+      Weighted.outputRelocationWeightedExponentIdentityClosed ≡ true
+    endpointFiveTenRecovered :
+      Weighted.outputRelocationEndpointFiveTenRecovered ≡ true
     rationalLerayCore :
       Leray.rationalProjectedModeSquaredBoundClosed ≡ true
     rationalBernsteinCore :
@@ -126,8 +137,14 @@ outputRelocationVerticalSliceCutset : OutputRelocationVerticalSliceCutset
 outputRelocationVerticalSliceCutset = record
   { genericRelocationIdentity =
       Relocation.outputRelocationAlgebraTheoremClosedIsTrue
+  ; concreteComplexRelocationIdentity =
+      Concrete.concreteComplexCarrierOutputRelocationClosedIsTrue
   ; structuralGainIdentified =
       Relocation.outputHighHighToLowStructuralGainIdentifiedIsTrue
+  ; weightedExponentIdentity =
+      Weighted.outputRelocationWeightedExponentIdentityClosedIsTrue
+  ; endpointFiveTenRecovered =
+      Weighted.outputRelocationEndpointFiveTenRecoveredIsTrue
   ; rationalLerayCore =
       Leray.rationalProjectedModeSquaredBoundClosedIsTrue
   ; rationalBernsteinCore =
@@ -151,16 +168,19 @@ outputRelocationCoefficientExtractionInterfaceClosed = true
 
 outputRelocationConcreteComplexCarrierClosed : Bool
 outputRelocationConcreteComplexCarrierClosed =
-  Relocation.concreteComplexCarrierOutputRelocationClosed
+  Concrete.concreteComplexCarrierOutputRelocationClosed
 
 outputRelocationWeightedExponentIdentityClosed : Bool
-outputRelocationWeightedExponentIdentityClosed = false
+outputRelocationWeightedExponentIdentityClosed =
+  Weighted.outputRelocationWeightedExponentIdentityClosed
 
 outputRelocationCutoffUniformSeriesClosed : Bool
-outputRelocationCutoffUniformSeriesClosed = false
+outputRelocationCutoffUniformSeriesClosed =
+  Weighted.outputRelocationConstructiveDyadicSeriesClosed
 
 outputRelocationCoefficientVectorClosed : Bool
-outputRelocationCoefficientVectorClosed = false
+outputRelocationCoefficientVectorClosed =
+  Weighted.outputRelocationSchurCoefficientOrientationDetermined
 
 outputRelocationAffineConstraintClosed : Bool
 outputRelocationAffineConstraintClosed = false
@@ -189,22 +209,25 @@ outputRelocationCoefficientExtractionInterfaceClosedIsTrue :
   outputRelocationCoefficientExtractionInterfaceClosed ≡ true
 outputRelocationCoefficientExtractionInterfaceClosedIsTrue = refl
 
-outputRelocationConcreteComplexCarrierClosedIsFalse :
-  outputRelocationConcreteComplexCarrierClosed ≡ false
-outputRelocationConcreteComplexCarrierClosedIsFalse =
-  Relocation.concreteComplexCarrierOutputRelocationClosedIsFalse
+outputRelocationConcreteComplexCarrierClosedIsTrue :
+  outputRelocationConcreteComplexCarrierClosed ≡ true
+outputRelocationConcreteComplexCarrierClosedIsTrue =
+  Concrete.concreteComplexCarrierOutputRelocationClosedIsTrue
 
-outputRelocationWeightedExponentIdentityClosedIsFalse :
-  outputRelocationWeightedExponentIdentityClosed ≡ false
-outputRelocationWeightedExponentIdentityClosedIsFalse = refl
+outputRelocationWeightedExponentIdentityClosedIsTrue :
+  outputRelocationWeightedExponentIdentityClosed ≡ true
+outputRelocationWeightedExponentIdentityClosedIsTrue =
+  Weighted.outputRelocationWeightedExponentIdentityClosedIsTrue
 
 outputRelocationCutoffUniformSeriesClosedIsFalse :
   outputRelocationCutoffUniformSeriesClosed ≡ false
-outputRelocationCutoffUniformSeriesClosedIsFalse = refl
+outputRelocationCutoffUniformSeriesClosedIsFalse =
+  Weighted.outputRelocationConstructiveDyadicSeriesClosedIsFalse
 
 outputRelocationCoefficientVectorClosedIsFalse :
   outputRelocationCoefficientVectorClosed ≡ false
-outputRelocationCoefficientVectorClosedIsFalse = refl
+outputRelocationCoefficientVectorClosedIsFalse =
+  Weighted.outputRelocationSchurCoefficientOrientationDeterminedIsFalse
 
 outputRelocationAffineConstraintClosedIsFalse :
   outputRelocationAffineConstraintClosed ≡ false
