@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -32,9 +32,6 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessEx
 -- Michael Creutz,
 -- "Quarks, Gluons and Lattices", Cambridge University Press (1983).
 -- DOI: 10.1017/CBO9780511622630.
---
--- Bałaban owns the gauge-covariant blocking architecture. The literal finite
--- torus, path recursion and cancellation lemmas below are DASHI constructions.
 ------------------------------------------------------------------------
 
 PeriodicBondField : Nat → Set → Set
@@ -73,21 +70,72 @@ record ExactLinkGroup (Value : Set) : Set₁ where
       inverse (multiply left right) ≡ multiply (inverse right) (inverse left)
     inverseInverse : ∀ value → inverse (inverse value) ≡ value
 
-    -- Derived group algebra is retained as a named proof obligation so the path
-    -- recursion does not duplicate a long associativity/cancellation chain.
-    conjugateIdentity : ∀ gauge →
-      identity
-      ≡ multiply (multiply gauge identity) (inverse gauge)
-
-    composeGaugeSegments : ∀ start middle finish firstSegment secondSegment →
-      multiply
-        (multiply (multiply start firstSegment) (inverse middle))
-        (multiply (multiply middle secondSegment) (inverse finish))
-      ≡ multiply
-          (multiply start (multiply firstSegment secondSegment))
-          (inverse finish)
-
 open ExactLinkGroup public
+
+conjugateIdentity :
+  ∀ {Value} (group : ExactLinkGroup Value) gauge →
+  identity group
+  ≡ multiply group
+      (multiply group gauge (identity group))
+      (inverse group gauge)
+conjugateIdentity group gauge =
+  sym (trans
+    (cong (λ left → multiply group left (inverse group gauge))
+      (identityRight group gauge))
+    (inverseRight group gauge))
+
+cancelMiddleGauge :
+  ∀ {Value} (group : ExactLinkGroup Value)
+    middle secondSegment finish →
+  multiply group (inverse group middle)
+    (multiply group
+      (multiply group middle secondSegment)
+      (inverse group finish))
+  ≡ multiply group secondSegment (inverse group finish)
+cancelMiddleGauge group middle secondSegment finish =
+  trans
+    (sym (multiplyAssociative group
+      (inverse group middle)
+      (multiply group middle secondSegment)
+      (inverse group finish)))
+    (trans
+      (cong (λ left → multiply group left (inverse group finish))
+        (trans
+          (sym (multiplyAssociative group
+            (inverse group middle) middle secondSegment))
+          (trans
+            (cong (λ left → multiply group left secondSegment)
+              (inverseLeft group middle))
+            (identityLeft group secondSegment))))
+      (multiplyAssociative group secondSegment
+        (identity group) (inverse group finish)))
+
+composeGaugeSegments :
+  ∀ {Value} (group : ExactLinkGroup Value)
+    start middle finish firstSegment secondSegment →
+  multiply group
+    (multiply group (multiply group start firstSegment) (inverse group middle))
+    (multiply group (multiply group middle secondSegment) (inverse group finish))
+  ≡ multiply group
+      (multiply group start (multiply group firstSegment secondSegment))
+      (inverse group finish)
+composeGaugeSegments group start middle finish firstSegment secondSegment =
+  trans
+    (multiplyAssociative group
+      (multiply group start firstSegment)
+      (inverse group middle)
+      (multiply group (multiply group middle secondSegment)
+        (inverse group finish)))
+    (trans
+      (cong (multiply group (multiply group start firstSegment))
+        (cancelMiddleGauge group middle secondSegment finish))
+      (trans
+        (sym (multiplyAssociative group
+          (multiply group start firstSegment)
+          secondSegment
+          (inverse group finish)))
+        (cong (λ left → multiply group left (inverse group finish))
+          (multiplyAssociative group start firstSegment secondSegment))))
 
 record PeriodicBondGaugeRealization
     (n : Nat) (Value : Set) (group : ExactLinkGroup Value) : Set₁ where
@@ -228,13 +276,6 @@ plaquetteGaugeCancellation {group = group} closure realization plaquette =
     (pathSiteGaugeCancellation realization (first plaquette)
       (plaquetteBoundaryDirections (second plaquette)))
 
-------------------------------------------------------------------------
--- Bianchi bridge.
---
--- A non-Abelian cube identity uses six face loops transported to one base point;
--- the untransported product of six plaquettes is not the correct statement.
-------------------------------------------------------------------------
-
 record TransportedCubeBoundaryCertificate
     (n : Nat) (Value : Set) (group : ExactLinkGroup Value)
     (realization : PeriodicBondGaugeRealization n Value group) : Set₁ where
@@ -257,6 +298,9 @@ latticeBianchiFromTransportedBoundary :
     (transportedSixFaceBoundary certificate)
   ≡ identity group
 latticeBianchiFromTransportedBoundary = boundaryHolonomyIsIdentity
+
+fundamentalGroupCancellationAlgebraLevel : ProofLevel
+fundamentalGroupCancellationAlgebraLevel = machineChecked
 
 periodicBondFieldDefinitionLevel : ProofLevel
 periodicBondFieldDefinitionLevel = machineChecked
