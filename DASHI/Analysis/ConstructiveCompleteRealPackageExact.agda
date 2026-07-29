@@ -102,8 +102,10 @@ record PackagedCategoricityAuthority
     forwardPackageMorphism : PackagedConstructiveRealMorphism Left Right
     backwardPackageMorphism : PackagedConstructiveRealMorphism Right Left
 
-    forwardMinimalIsCanonical : ∀ value → Set
-    backwardMinimalIsCanonical : ∀ value → Set
+    forwardMinimalIsCanonical :
+      (value : packageCarrier Left) → Set
+    backwardMinimalIsCanonical :
+      (value : packageCarrier Right) → Set
     packageMorphismUnique : Set
 
 open PackagedCategoricityAuthority public
