@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -13,7 +14,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- DOI: 10.1137/070704770.
 --
 -- The paper proves finite-dimensional absolute and relative determinant
--- perturbation bounds.  The physical Hessian application below uses only a
+-- perturbation bounds. The physical Hessian application below uses only a
 -- finite matrix/operator carrier; no continuum or zeta-regularized determinant
 -- is imported.
 --
@@ -32,17 +33,19 @@ record FiniteRelativeDeterminantPerturbation
     inverseReferenceNorm perturbationNorm relativePerturbation : Scalar
 
     one : Scalar
-    add multiply natScale power exponential : Scalar → Scalar → Scalar
-    LessEqual Nonnegative : Scalar → Scalar → Set
+    add multiply power exponential : Scalar → Scalar → Scalar
+    naturalScalar : Nat → Scalar
+    LessEqual : Scalar → Scalar → Set
+    Nonnegative : Scalar → Set
 
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
 
     referenceDeterminantNonnegative :
-      Nonnegative one (determinant referenceMatrix)
+      Nonnegative (determinant referenceMatrix)
 
     multiplyMonotoneLeft : ∀ {left lower upper} →
-      Nonnegative one left → LessEqual lower upper →
+      Nonnegative left → LessEqual lower upper →
       LessEqual (multiply left lower) (multiply left upper)
 
     perturbedMatrixMeaning : Set
@@ -57,20 +60,16 @@ record FiniteRelativeDeterminantPerturbation
         (determinant perturbedMatrix)
         (multiply (determinant referenceMatrix)
           (power (add one relativePerturbation)
-            (natScale one (recordNat dimension))))
+            (naturalScalar dimension)))
 
     -- Standard scalar estimate (1+x)^n <= exp(nx), x >= 0.
     binomialPowerBelowExponential :
       LessEqual
         (power (add one relativePerturbation)
-          (natScale one (recordNat dimension)))
+          (naturalScalar dimension))
         (exponential
-          (natScale relativePerturbation (recordNat dimension)) one)
-
-  where
-  recordNat : Nat → Scalar
-  recordNat zero = one
-  recordNat (suc n) = add one (recordNat n)
+          (multiply (naturalScalar dimension) relativePerturbation)
+          one)
 
 open FiniteRelativeDeterminantPerturbation public
 
@@ -83,8 +82,9 @@ determinantPerturbationBelowExponentialLoss :
     (multiply dataSet
       (determinant dataSet (referenceMatrix dataSet))
       (exponential dataSet
-        (natScale dataSet (relativePerturbation dataSet)
-          (recordNat dataSet (dimension dataSet)))
+        (multiply dataSet
+          (naturalScalar dataSet (dimension dataSet))
+          (relativePerturbation dataSet))
         (one dataSet)))
 determinantPerturbationBelowExponentialLoss dataSet =
   transitive dataSet
@@ -115,10 +115,10 @@ record PhysicalRelativeHessianDeterminantMeaning
     determinantMultiplierMeaning : ∀ scale traversal →
       determinantMultiplier scale traversal
       ≡ exponential (determinantData scale traversal)
-          (natScale (determinantData scale traversal)
-            (relativePerturbation (determinantData scale traversal))
-            (recordNat (determinantData scale traversal)
-              (dimension (determinantData scale traversal))))
+          (multiply (determinantData scale traversal)
+            (naturalScalar (determinantData scale traversal)
+              (dimension (determinantData scale traversal)))
+            (relativePerturbation (determinantData scale traversal)))
           (one (determinantData scale traversal))
 
 open PhysicalRelativeHessianDeterminantMeaning public
