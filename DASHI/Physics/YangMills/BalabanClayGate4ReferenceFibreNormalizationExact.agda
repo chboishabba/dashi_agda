@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibreNormalizationExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -47,30 +47,71 @@ scaledSelector :
     {sumData : Integral.FiniteConstrainedSum Fine SlowField Scalar} →
   FiniteReferenceFibreAlgebra sumData → Scalar →
   (Fine → Scalar) → Fine → Scalar
-scaledSelector algebra suppression selector fine =
-  multiply algebra suppression (selector fine)
+scaledSelector algebra coefficient selector fine =
+  multiply algebra coefficient (selector fine)
 
 scaleFiniteFold :
   ∀ {Fine SlowField Scalar}
     {sumData : Integral.FiniteConstrainedSum Fine SlowField Scalar}
     (algebra : FiniteReferenceFibreAlgebra sumData)
-    suppression selector slow fields →
+    coefficient selector slow fields →
   Integral.foldSelected sumData
-    (scaledSelector algebra suppression selector) slow fields
-  ≡ multiply algebra suppression
+    (scaledSelector algebra coefficient selector) slow fields
+  ≡ multiply algebra coefficient
       (Integral.foldSelected sumData selector slow fields)
-scaleFiniteFold algebra suppression selector slow [] =
-  sym (multiplyZeroRight algebra suppression)
-scaleFiniteFold {sumData = sumData} algebra suppression selector slow
+scaleFiniteFold algebra coefficient selector slow [] =
+  sym (multiplyZeroRight algebra coefficient)
+scaleFiniteFold {sumData = sumData} algebra coefficient selector slow
   (fine ∷ fields) =
   trans
     (cong
       (Integral.add sumData
-        (multiply algebra suppression (selector fine)))
-      (scaleFiniteFold algebra suppression selector slow fields))
-    (sym (distributeLeftOverAdd algebra suppression
+        (multiply algebra coefficient (selector fine)))
+      (scaleFiniteFold algebra coefficient selector slow fields))
+    (sym (distributeLeftOverAdd algebra coefficient
       (selector fine)
       (Integral.foldSelected sumData selector slow fields)))
+
+record ReciprocalReferenceMass
+    {Fine SlowField Scalar : Set}
+    {sumData : Integral.FiniteConstrainedSum Fine SlowField Scalar}
+    (algebra : FiniteReferenceFibreAlgebra sumData)
+    (selector : Fine → Scalar) (slow : SlowField) (fields : List Fine) : Set₁ where
+  field
+    mass reciprocalMass : Scalar
+    massDefinition :
+      Integral.foldSelected sumData selector slow fields ≡ mass
+    reciprocalTimesMass :
+      multiply algebra reciprocalMass mass ≡ one algebra
+
+open ReciprocalReferenceMass public
+
+normalizedReferenceSelector :
+  ∀ {Fine SlowField Scalar}
+    {sumData : Integral.FiniteConstrainedSum Fine SlowField Scalar}
+    {algebra : FiniteReferenceFibreAlgebra sumData}
+    {selector : Fine → Scalar} {slow fields} →
+  ReciprocalReferenceMass algebra selector slow fields → Fine → Scalar
+normalizedReferenceSelector {algebra = algebra} {selector = selector} reciprocal =
+  scaledSelector algebra (reciprocalMass reciprocal) selector
+
+normalizedReferenceMassExact :
+  ∀ {Fine SlowField Scalar}
+    {sumData : Integral.FiniteConstrainedSum Fine SlowField Scalar}
+    {algebra : FiniteReferenceFibreAlgebra sumData}
+    {selector : Fine → Scalar} {slow fields}
+    (reciprocal : ReciprocalReferenceMass algebra selector slow fields) →
+  Integral.foldSelected sumData
+    (normalizedReferenceSelector reciprocal) slow fields
+  ≡ one algebra
+normalizedReferenceMassExact {algebra = algebra} {selector = selector}
+  {slow = slow} {fields = fields} reciprocal =
+  trans
+    (scaleFiniteFold algebra (reciprocalMass reciprocal) selector slow fields)
+    (trans
+      (cong (multiply algebra (reciprocalMass reciprocal))
+        (massDefinition reciprocal))
+      (reciprocalTimesMass reciprocal))
 
 normalizedSuppressedReferenceFibreExact :
   ∀ {Fine SlowField Scalar}
@@ -139,11 +180,14 @@ referenceFibreAtFastFibreExact {dataSet = dataSet} data scale component slow =
 finiteReferenceFibreScalingLevel : ProofLevel
 finiteReferenceFibreScalingLevel = machineChecked
 
+reciprocalReferenceNormalizationLevel : ProofLevel
+reciprocalReferenceNormalizationLevel = machineChecked
+
 normalizedSuppressedReferenceFibreLevel : ProofLevel
 normalizedSuppressedReferenceFibreLevel = machineChecked
 
 tReferenceFibreAdapterLevel : ProofLevel
 tReferenceFibreAdapterLevel = machineChecked
 
-physicalReferenceHaarNormalizationInputsLevel : ProofLevel
-physicalReferenceHaarNormalizationInputsLevel = conditional
+physicalReferenceMassNonzeroReciprocalInputsLevel : ProofLevel
+physicalReferenceMassNonzeroReciprocalInputsLevel = conditional
