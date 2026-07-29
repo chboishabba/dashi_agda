@@ -24,6 +24,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
 
 record AbsoluteValueOrderCapability {s : Level}
@@ -99,17 +100,11 @@ record AbsoluteOutputRelocationShellData {s : Level}
     lowShellDominatedByQuarter : ∀ lowShell →
       Embedded.leq C
         (lowFactor lowShell)
-        (Embedded.rationalEmbed C
-          (DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.pow
-            DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.quarter
-            lowShell))
+        (Embedded.rationalEmbed C (Geo.pow Geo.quarter lowShell))
     gapDominatedByThirtySecond : ∀ gap →
       Embedded.leq C
         (gapFactor gap)
-        (Embedded.rationalEmbed C
-          (DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.pow
-            DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.thirtySecond
-            gap))
+        (Embedded.rationalEmbed C (Geo.pow Geo.thirtySecond gap))
 
     absoluteCoefficientDominatedByFactors : ∀ lowShell gap →
       Embedded.leq C
