@@ -7,11 +7,8 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- Branch-head verification receipt surface.
---
--- The user deliberately owns execution of Agda. This module therefore records
--- the exact evidence that a later clean run must provide without falsely
--- promoting any unchecked branch head.
+-- Branch-head verification receipt surface.  These fields describe evidence a
+-- clean run must provide; they do not promote an unchecked branch head.
 ------------------------------------------------------------------------
 
 record BranchHeadAgdaReceipt : Set where
@@ -61,9 +58,15 @@ record BranchHeadAgdaReceipt : Set where
 
     gate4ValidationAggregateChecked : Bool
     gate4LiteralPeriodicGeometryChecked : Bool
+    gate4PeriodicAdjacencyHolonomyChecked : Bool
     gate4FiniteTOperationChecked : Bool
+    gate4TStructuralSuppressionReductionChecked : Bool
     gate4FiniteROperationChecked : Bool
+    gate4CountingLocalizationReuseChecked : Bool
+    gate4SuppressionRecurrenceChecked : Bool
+    gate4CombinedSmallLargeAssemblyChecked : Bool
     gate4AbsorptionAndUVAssemblyChecked : Bool
+    concreteUVToMassGapDependencyChecked : Bool
     dongLiDissipativeBernsteinChecked : Bool
 
     changedModules : List String
@@ -107,9 +110,15 @@ record AuthoritativeBranchHeadEvidence
 
     gate4ValidationAggregateTypechecks : Set
     gate4LiteralPeriodicGeometryTypechecks : Set
+    gate4PeriodicAdjacencyHolonomyTypechecks : Set
     gate4FiniteTOperationTypechecks : Set
+    gate4TStructuralSuppressionReductionTypechecks : Set
     gate4FiniteROperationTypechecks : Set
+    gate4CountingLocalizationReuseTypechecks : Set
+    gate4SuppressionRecurrenceTypechecks : Set
+    gate4CombinedSmallLargeAssemblyTypechecks : Set
     gate4AbsorptionAndUVAssemblyTypechecks : Set
+    concreteUVToMassGapDependencyTypechecks : Set
     dongLiDissipativeBernsteinTypechecks : Set
 
     publicAggregateChecked : Set
@@ -174,14 +183,32 @@ gate4ValidationAggregateTypecheckLevel = conditional
 gate4LiteralPeriodicGeometryTypecheckLevel : ProofLevel
 gate4LiteralPeriodicGeometryTypecheckLevel = conditional
 
+gate4PeriodicAdjacencyHolonomyTypecheckLevel : ProofLevel
+gate4PeriodicAdjacencyHolonomyTypecheckLevel = conditional
+
 gate4FiniteTOperationTypecheckLevel : ProofLevel
 gate4FiniteTOperationTypecheckLevel = conditional
+
+gate4TStructuralSuppressionReductionTypecheckLevel : ProofLevel
+gate4TStructuralSuppressionReductionTypecheckLevel = conditional
 
 gate4FiniteROperationTypecheckLevel : ProofLevel
 gate4FiniteROperationTypecheckLevel = conditional
 
+gate4CountingLocalizationReuseTypecheckLevel : ProofLevel
+gate4CountingLocalizationReuseTypecheckLevel = conditional
+
+gate4SuppressionRecurrenceTypecheckLevel : ProofLevel
+gate4SuppressionRecurrenceTypecheckLevel = conditional
+
+gate4CombinedSmallLargeAssemblyTypecheckLevel : ProofLevel
+gate4CombinedSmallLargeAssemblyTypecheckLevel = conditional
+
 gate4AbsorptionAndUVAssemblyTypecheckLevel : ProofLevel
 gate4AbsorptionAndUVAssemblyTypecheckLevel = conditional
+
+concreteUVToMassGapDependencyTypecheckLevel : ProofLevel
+concreteUVToMassGapDependencyTypecheckLevel = conditional
 
 dongLiDissipativeBernsteinTypecheckLevel : ProofLevel
 dongLiDissipativeBernsteinTypecheckLevel = conditional
