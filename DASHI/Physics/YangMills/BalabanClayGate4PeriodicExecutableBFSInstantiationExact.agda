@@ -10,12 +10,14 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact as Adjacency
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact as BFS
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSParentCorrectnessExact as Parent
 
 ------------------------------------------------------------------------
 -- The generic executable visited-set BFS is instantiated with DASHI's literal
 -- finite four-torus enumeration, decidable equality and decidable nearest-
--- neighbour relation.  This closes the executable graph layer.  Shortest-path,
--- parent-tree and decoder correctness remain proof obligations over this run.
+-- neighbour relation. This closes graph execution and local parent correctness.
+-- Shortest-path distance, global spanning-tree and decoder correctness remain
+-- proof obligations over this run.
 ------------------------------------------------------------------------
 
 decisionBool : ∀ {P : Set} → Dec P → Bool
@@ -78,6 +80,14 @@ periodicAdjacentBoolComplete :
 periodicAdjacentBoolComplete left right =
   witnessGivesDecisionTrue (Adjacency.nearestNeighbourDecidable left right)
 
+periodicGraphBooleanMeaning :
+  ∀ n → Parent.GraphBooleanMeaning (periodicExecutableGraph n)
+periodicGraphBooleanMeaning n = record
+  { Parent.GraphBooleanMeaning.Adjacent = Adjacency.PeriodicNearestNeighbour
+  ; Parent.GraphBooleanMeaning.adjacentBoolSound = periodicAdjacentBoolSound
+  ; Parent.GraphBooleanMeaning.adjacentBoolComplete = periodicAdjacentBoolComplete
+  }
+
 periodicBFSState :
   ∀ {n} → Periodic.PeriodicBlock n → BFS.BFSState (Periodic.PeriodicBlock n)
 periodicBFSState {n} root = BFS.runFiniteBFS (periodicExecutableGraph n) root
@@ -87,6 +97,15 @@ periodicVertexEnumerationComplete :
   block ∈ BFS.vertices (periodicExecutableGraph n)
 periodicVertexEnumerationComplete {n} block =
   complete (periodicTorus4Finite (suc n)) block
+
+periodicDiscoverLayerParentsSound :
+  ∀ {n} frontier candidates →
+  Parent.ParentEdgesSound (periodicGraphBooleanMeaning n) frontier
+    (BFS.parentEdges
+      (BFS.discoverLayer (periodicExecutableGraph n) frontier candidates))
+periodicDiscoverLayerParentsSound {n} frontier candidates =
+  Parent.discoverLayerParentEdgesSound
+    (periodicGraphBooleanMeaning n) frontier candidates
 
 periodicExecutableGraphLevel : ProofLevel
 periodicExecutableGraphLevel = machineChecked
@@ -99,6 +118,9 @@ periodicAdjacencyBooleanReflectionLevel = machineChecked
 
 periodicFuelBoundedBFSExecutionLevel : ProofLevel
 periodicFuelBoundedBFSExecutionLevel = machineChecked
+
+periodicLocalParentCorrectnessLevel : ProofLevel
+periodicLocalParentCorrectnessLevel = machineChecked
 
 periodicBFSShortestPathInvariantInputsLevel : ProofLevel
 periodicBFSShortestPathInvariantInputsLevel = conditional
