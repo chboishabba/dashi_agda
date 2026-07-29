@@ -6,7 +6,8 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationSquaredCoefficientIntegrat
 -- Zachary Murray; Viktor Csimma; Tosio Kato; Gustavo Ponce; Augustin-Louis
 -- Cauchy; Hermann Amandus Schwarz; Sergei Bernstein; Jean-Michel Bony;
 -- Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin; Loukas Grafakos;
--- Seungly Oh; Xinfeng Wu; Rodolfo H. Torres; DASHI repository contributors.
+-- Seungly Oh; Xinfeng Wu; Rodolfo H. Torres; Agda standard-library
+-- contributors; DASHI repository contributors.
 -- Title: "Constructive Analysis"; "Constructive Reals in Coq: Axioms and
 -- Categoricity"; "Constructive Analysis in the Agda Proof Assistant";
 -- "Commutator estimates and the Euler and Navier-Stokes equations";
@@ -18,8 +19,8 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationSquaredCoefficientIntegrat
 -- LNCS 2277 (2002), 79--95; arXiv, 2022; Communications on Pure and Applied
 -- Mathematics 41 (1988), 891--907; Communications in Partial Differential
 -- Equations 39 (2014), 1128--1157; Mathematische Zeitschrift 302 (2022),
--- 1489--1526; Journal of Functional Analysis 187 (2001), 1--24; DASHI
--- formal development, 2026.
+-- 1489--1526; Journal of Functional Analysis 187 (2001), 1--24; Agda
+-- standard library; DASHI formal development, 2026.
 -- DOI: 10.1007/978-3-642-61667-9; 10.1007/3-540-45842-5_6;
 -- 10.48550/arXiv.2205.08354; 10.1002/cpa.3160410704;
 -- 10.1080/03605302.2013.822885; 10.1007/s00209-022-03120-6;
@@ -27,8 +28,8 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationSquaredCoefficientIntegrat
 -- the repository integration receipt has no DOI.
 -- Uses: exact output derivative relocation, finite rational Cauchy--Schwarz and
 -- Bernstein, squared coefficient transport, unified native ordered-field
--- capabilities, base-two powers from the native exponential, exact endpoint
--- arithmetic and the complete 128/93 Schur composition.
+-- capabilities, base-two powers from the native exponential, computed exact
+-- endpoint arithmetic and the complete 128/93 Schur composition.
 -- Relationship: closes all theorem construction downstream of explicit
 -- concrete backend/representation data.  It keeps the final physical theorem
 -- false until those inhabitants are supplied and typechecked.
@@ -64,6 +65,8 @@ record OutputRelocationSquaredCoefficientReceipt : Set where
       Finite.finiteSquaredOutputCoefficientMajorantClosed ≡ true
     squaredToAbsoluteBridgeClosed :
       SquareAbsolute.squaredToAbsoluteCoefficientBridgeClosed ≡ true
+    factorProductNonnegativityDerivedCorrectly :
+      SquareAbsolute.factorProductNonnegativityDerivedCorrectly ≡ true
     finiteToNativeSquaredBridgeClosed :
       FiniteNative.finiteToNativeSquaredBridgeClosed ≡ true
     nativeSquaredClosureClosed :
@@ -79,6 +82,8 @@ record OutputRelocationSquaredCoefficientReceipt : Set where
       BaseTwo.baseTwoPowerConstructedFromNativeExponential ≡ true
     naturalScalingDerived :
       BaseTwo.naturalScalingDerivedRecursively ≡ true
+    exactRationalEndpointWitnessComputed :
+      Decay.exactRationalEndpointWitnessClosed ≡ true
     rationalEndpointIdentitiesClosed :
       Decay.rationalEndpointIdentitiesClosed ≡ true
     endpointDataDerivedFromTargetInterval :
@@ -110,6 +115,7 @@ outputRelocationSquaredCoefficientReceipt = receipt
   Scope.arXiv2108IsOhWuPolynomialWeightPaperIsTrue
   Finite.finiteSquaredOutputCoefficientMajorantClosedIsTrue
   SquareAbsolute.squaredToAbsoluteCoefficientBridgeClosedIsTrue
+  SquareAbsolute.factorProductNonnegativityDerivedCorrectlyIsTrue
   FiniteNative.finiteToNativeSquaredBridgeClosedIsTrue
   NativeSquared.squaredToAbsoluteNativeClosureClosedIsTrue
   Interval.nativeOutputDecayEndpointInequalitiesDerivedIsTrue
@@ -117,6 +123,7 @@ outputRelocationSquaredCoefficientReceipt = receipt
   Ordered.nativeRationalEmbeddingSupportsStrictIntervalArithmeticIsTrue
   BaseTwo.baseTwoPowerConstructedFromNativeExponentialIsTrue
   BaseTwo.naturalScalingDerivedRecursivelyIsTrue
+  Decay.exactRationalEndpointWitnessClosedIsTrue
   Decay.rationalEndpointIdentitiesClosedIsTrue
   Decay.nativeEndpointInequalitiesDerivedFromTargetIntervalIsTrue
   Frontier.fullTheoremCompositionClosedIsTrue
