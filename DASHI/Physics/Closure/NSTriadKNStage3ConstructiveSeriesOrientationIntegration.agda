@@ -2,20 +2,27 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 
 ------------------------------------------------------------------------
 -- PROVENANCE
--- Authors: Martin Lundfall; Zachary Murray; Viktor Csimma; Loukas Grafakos;
--- Rodolfo H. Torres; DASHI repository contributors.
--- Title: "Stage-3 constructive-series candidate and Schur-orientation
--- integration".
+-- Authors: Martin Lundfall; Zachary Murray; Viktor Csimma; Robbert Krebbers;
+-- Bas Spitters; Loukas Grafakos; Rodolfo H. Torres; Jean-Michel Bony; Hajer
+-- Bahouri; Jean-Yves Chemin; Raphael Danchin; DASHI repository contributors.
+-- Title: "Stage-3 constructive-series candidate and literal Schur-shell
+-- substitution integration".
 -- Venue/year: Reals-in-agda formal development, 2015; Constructive Analysis in
--- the Agda Proof Assistant, 2022; Journal of Functional Analysis 187 (2001),
--- 1--24; DASHI formal development, 2026.
--- DOI: 10.1006/jfan.2001.3804; Murray arXiv:2205.08354 has no DOI; no DOI
--- located for Reals-in-agda; the integration receipt has no DOI.
--- Uses: candidate API comparison, literal power-law Schur orientation, and the
--- already-closed output-relocation physical exponent identity.
--- Relationship: closes the condition-incidence theorem and narrows the next
--- leaves.  It does not claim an imported constructive-real implementation, a
--- numeric output-relocation row, or a positive epsilon interval.
+-- the Agda Proof Assistant, 2022; Logical Methods in Computer Science 9(1:1),
+-- 2013; Journal of Functional Analysis 187 (2001), 1--24; Annales scientifiques
+-- de l'Ecole Normale Superieure 14 (1981); Springer, 2011; DASHI formal
+-- development, 2026.
+-- DOI: 10.2168/LMCS-9(1:1)2013; 10.1006/jfan.2001.3804;
+-- 10.24033/asens.1404; 10.1007/978-3-642-16830-7; Murray
+-- arXiv:2205.08354 has no DOI; no DOI located for Reals-in-agda; the integration
+-- receipt has no DOI.
+-- Uses: constructive-real candidate comparison, literal power-law Schur
+-- orientation, the closed output-relocation physical exponent identity, and the
+-- exact j_O=j, j_L=j_R=j+d substitution.
+-- Relationship: closes the three symbolic output-relocation affine rows and
+-- records Murray/Csimma as the preferred live Agda candidate. It does not claim
+-- a constructive-real import, dyadic-tail theorem, affine weight-family solve,
+-- or positive epsilon interval.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -24,11 +31,19 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealCandidateComparison as Reals
 import DASHI.Physics.Closure.NSTriadKNGrafakosTorresPowerLawOrientation as Orientation
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationWeightedExponentIdentity as Weighted
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationLiteralShellSubstitution as Shells
 
 record ConstructiveSeriesOrientationReceipt : Set where
   constructor receipt
   field
-    bothConstructiveCandidatesRecorded : Reals.bothCandidatesRecorded ≡ true
+    bothConstructiveCandidatesRecorded : Reals.bothAgdaCandidatesRecorded ≡ true
+    lundfallLegacyPinRecorded : Reals.lundfallLegacyStdlibPinRecorded ≡ true
+    lundfallDirectImportDeprioritized :
+      Reals.lundfallDirectImportDeprioritized ≡ true
+    murrayPreferredLiveCandidate :
+      Reals.murrayCsimmaPreferredLiveCandidate ≡ true
+    coqReferenceArchitectureRecorded :
+      Reals.coqReferenceArchitectureRecorded ≡ true
     candidateComparisonDoesNotPromoteProof :
       Reals.candidateComparisonChangesProofStatus ≡ false
     physicalExponentIdentityClosed :
@@ -37,25 +52,38 @@ record ConstructiveSeriesOrientationReceipt : Set where
       Orientation.grafakosTorresSignOrientationClosed ≡ true
     literalThreeConditionTemplateClosed :
       Orientation.literalThreeConditionTemplateClosed ≡ true
-    mrChicoImportStillOpen : Reals.mrChicoReadyForStage3Import ≡ false
+    literalShellSubstitutionClosed :
+      Shells.outputRelocationLiteralShellSubstitutionClosed ≡ true
+    threeConditionAffineRowsClosed :
+      Shells.outputRelocationThreeConditionAffineRowsClosed ≡ true
+    mrChicoImportStillClosedOff : Reals.mrChicoReadyForStage3Import ≡ false
     murrayImportStillOpen : Reals.murrayBishopReadyForStage3Import ≡ false
-    numericOrientationStillOpen :
-      Orientation.outputRelocationNumericOrientationClosed ≡ false
-    checkAStillOpen : Orientation.outputRelocationCheckAAvailable ≡ false
+    constructiveTailStillOpen :
+      Shells.outputRelocationConstructiveDyadicTailClosed ≡ false
+    affineFamilySubstitutionStillOpen :
+      Shells.outputRelocationAffineWeightFamilySubstituted ≡ false
+    checkAStillOpen : Shells.outputRelocationCheckAAvailable ≡ false
 
 open ConstructiveSeriesOrientationReceipt public
 
 constructiveSeriesOrientationReceipt : ConstructiveSeriesOrientationReceipt
 constructiveSeriesOrientationReceipt = receipt
-  Reals.bothCandidatesRecordedIsTrue
+  Reals.bothAgdaCandidatesRecordedIsTrue
+  Reals.lundfallLegacyStdlibPinRecordedIsTrue
+  Reals.lundfallDirectImportDeprioritizedIsTrue
+  Reals.murrayCsimmaPreferredLiveCandidateIsTrue
+  Reals.coqReferenceArchitectureRecordedIsTrue
   Reals.candidateComparisonChangesProofStatusIsFalse
   Weighted.outputRelocationWeightedExponentIdentityClosedIsTrue
   Orientation.grafakosTorresSignOrientationClosedIsTrue
   Orientation.literalThreeConditionTemplateClosedIsTrue
+  Shells.outputRelocationLiteralShellSubstitutionClosedIsTrue
+  Shells.outputRelocationThreeConditionAffineRowsClosedIsTrue
   Reals.mrChicoReadyForStage3ImportIsFalse
   Reals.murrayBishopReadyForStage3ImportIsFalse
-  Orientation.outputRelocationNumericOrientationClosedIsFalse
-  Orientation.outputRelocationCheckAAvailableIsFalse
+  Shells.outputRelocationConstructiveDyadicTailClosedIsFalse
+  Shells.outputRelocationAffineWeightFamilySubstitutedIsFalse
+  Shells.outputRelocationCheckAAvailableIsFalse
 
 constructiveRealCandidateComparisonClosed : Bool
 constructiveRealCandidateComparisonClosed = true
@@ -63,8 +91,11 @@ constructiveRealCandidateComparisonClosed = true
 threeConditionSignOrientationClosed : Bool
 threeConditionSignOrientationClosed = true
 
-nextLeafIsLiteralShellSubstitutionAndDyadicTail : Bool
-nextLeafIsLiteralShellSubstitutionAndDyadicTail = true
+literalOutputRelocationShellSubstitutionClosed : Bool
+literalOutputRelocationShellSubstitutionClosed = true
+
+nextLeafIsAffineFamilySubstitutionAndDyadicTail : Bool
+nextLeafIsAffineFamilySubstitutionAndDyadicTail = true
 
 outputRelocationCheckAClosed : Bool
 outputRelocationCheckAClosed = false
@@ -77,9 +108,13 @@ threeConditionSignOrientationClosedIsTrue :
   threeConditionSignOrientationClosed ≡ true
 threeConditionSignOrientationClosedIsTrue = refl
 
-nextLeafIsLiteralShellSubstitutionAndDyadicTailIsTrue :
-  nextLeafIsLiteralShellSubstitutionAndDyadicTail ≡ true
-nextLeafIsLiteralShellSubstitutionAndDyadicTailIsTrue = refl
+literalOutputRelocationShellSubstitutionClosedIsTrue :
+  literalOutputRelocationShellSubstitutionClosed ≡ true
+literalOutputRelocationShellSubstitutionClosedIsTrue = refl
+
+nextLeafIsAffineFamilySubstitutionAndDyadicTailIsTrue :
+  nextLeafIsAffineFamilySubstitutionAndDyadicTail ≡ true
+nextLeafIsAffineFamilySubstitutionAndDyadicTailIsTrue = refl
 
 outputRelocationCheckAClosedIsFalse : outputRelocationCheckAClosed ≡ false
 outputRelocationCheckAClosedIsFalse = refl
