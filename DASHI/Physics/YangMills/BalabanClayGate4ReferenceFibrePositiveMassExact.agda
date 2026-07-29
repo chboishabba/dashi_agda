@@ -23,6 +23,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibreNormalizationExact 
 -- Haar-positivity theorem is imported as a substitute for that finite fact.
 ------------------------------------------------------------------------
 
+data Empty : Set where
+
 infix 4 _∈_
 data _∈_ {A : Set} (value : A) : List A → Set where
   here : ∀ {values} → value ∈ (value ∷ values)
@@ -46,7 +48,7 @@ record PositiveFiniteFoldAlgebra
       Positive (Integral.add sumData left right)
 
     positiveImpliesNonzero : ∀ {value} →
-      Positive value → value ≡ Integral.zero sumData → Set
+      Positive value → value ≡ Integral.zero sumData → Empty
 
 open PositiveFiniteFoldAlgebra public
 
@@ -113,8 +115,10 @@ selectedReferenceMassPositive :
   PositiveSelectedReferenceFibre algebra selector slow fields →
   Positive algebra
     (Integral.foldSelected sumData selector slow fields)
-selectedReferenceMassPositive dataSet =
-  foldPositiveAtMember _ _ _ _ _
+selectedReferenceMassPositive {algebra = algebra} {selector = selector}
+  {slow = slow} {fields = fields} dataSet =
+  foldPositiveAtMember algebra selector slow fields
+    (witness dataSet)
     (witnessInFibre dataSet)
     (selectedWeightNonnegative dataSet)
     (witnessWeightPositive dataSet)
@@ -126,7 +130,7 @@ selectedReferenceMassNonzero :
     {selector : Fine → Scalar} {slow fields} →
   PositiveSelectedReferenceFibre algebra selector slow fields →
   Integral.foldSelected sumData selector slow fields
-    ≡ Integral.zero sumData → Set
+    ≡ Integral.zero sumData → Empty
 selectedReferenceMassNonzero {algebra = algebra} dataSet =
   positiveImpliesNonzero algebra (selectedReferenceMassPositive dataSet)
 
