@@ -51,8 +51,11 @@ quarantinedClaimEntries = recentClaimCluster ∷ []
 claimEcosystemAuditLevel : ProofLevel
 claimEcosystemAuditLevel = machineChecked
 
+-- The Boolean authority field above carries the quarantine decision.  At the
+-- proof-level layer, an unaccepted completion claim is an open/conjectural item,
+-- not a separate constructor.
 claimedCompleteProofsAcceptedAsAuthority : ProofLevel
-claimedCompleteProofsAcceptedAsAuthority = quarantined
+claimedCompleteProofsAcceptedAsAuthority = conjectural
 
 independentLemmaReproductionInputsLevel : ProofLevel
 independentLemmaReproductionInputsLevel = conditional
