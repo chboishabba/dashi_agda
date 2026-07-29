@@ -41,6 +41,7 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNConstructiveRealSpineOutputDecayFromOrderedField.agda",
     "DASHI/Physics/Closure/NSTriadKNConstructiveRealSpineOutputRelocationFrontierClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationSquaredCoefficientIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationSquaredFrontierBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNAffineResolvedFamilyReduction.agda",
     "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
