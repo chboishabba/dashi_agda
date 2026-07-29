@@ -5,6 +5,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Analysis.ConstructiveRealCapabilityHierarchyExact as Capability
 import DASHI.Analysis.ConstructiveRealTransportCapabilitiesExact as Transport
 import DASHI.Analysis.ConstructiveRealCategoricityExact as Categoricity
+import DASHI.Analysis.ConstructiveCompleteRealPackageExact as CompletePackage
+import DASHI.Analysis.BishopFastCauchyCapabilityPackagesExact as CapabilityPackages
 import DASHI.Analysis.BishopFastCauchyCommonCompletionExact as CommonCompletion
 import DASHI.Analysis.BishopFastCauchyCategoricityInstanceExact as BishopFast
 import DASHI.Physics.YangMills.BalabanClayT5LpUniformIntegrabilityExact as LpUI
@@ -28,6 +30,15 @@ minimalHomomorphismDefinitionLevel =
 effectiveLogicalOrderViewLevel = Transport.effectiveLogicalOrderViewLevel
 sequenceSeriesElementaryTransportLayerLevel =
   Transport.sequenceSeriesElementaryTransportLayerLevel
+
+constructiveCompleteRealPackageLevel =
+  CompletePackage.constructiveCompleteRealPackageLevel
+packageArchimedeanCeilingLevel =
+  CompletePackage.packageArchimedeanCeilingLevel
+bishopCapabilityPackageAssemblyLevel =
+  CapabilityPackages.bishopCapabilityPackageAssemblyLevel
+fastCauchyCapabilityPackageAssemblyLevel =
+  CapabilityPackages.fastCauchyCapabilityPackageAssemblyLevel
 
 canonicalMapDefinitionLevel = Categoricity.canonicalMapDefinitionLevel
 categoricityAuthorityDefinitionLevel =
@@ -57,6 +68,10 @@ derivedHomomorphismLawsInputsLevel =
   Capability.derivedHomomorphismLawsInputsLevel
 minimalTransportDerivationInputsLevel =
   Transport.minimalTransportDerivationInputsLevel
+packagedMorphismAndCategoricityInputsLevel =
+  CompletePackage.packagedMorphismAndCategoricityInputsLevel
+bishopFastCauchyCapabilityInstanceInputsLevel =
+  CapabilityPackages.bishopFastCauchyCapabilityInstanceInputsLevel
 canonicalHomomorphismAndUniquenessInputsLevel =
   Categoricity.canonicalHomomorphismAndUniquenessInputsLevel
 commonCauchyCompletionPresentationInputsLevel =
