@@ -93,16 +93,22 @@ record ExistingRGToT5DefectAdapter
       Bound Density)
     (defect : Physical.OneStepRGDefect Cutoff Observable DefectTerm) : Set₁ where
   field
-    blockedObservableIsExistingRGObservableTransform : ∀ cutoff observable → Set
-    defectExpansionIsExistingLocalizedPolymerRemainder : ∀ cutoff observable → Set
+    blockedObservableIsExistingRGObservableTransform :
+      (cutoff : Cutoff) → (observable : Observable) → Set
+    defectExpansionIsExistingLocalizedPolymerRemainder :
+      (cutoff : Cutoff) → (observable : Observable) → Set
 
-    relevantCancellationUsesWardAndRenormalization : ∀ cutoff observable → Set
+    relevantCancellationUsesWardAndRenormalization :
+      (cutoff : Cutoff) → (observable : Observable) → Set
     vacuumPartUsesExistingCountertermCancellation : Set
     couplingPartUsesExistingYangMillsBetaFlow : Set
 
-    irrelevantTermsUseExistingTaylorContraction : ∀ cutoff observable term → Set
+    irrelevantTermsUseExistingTaylorContraction :
+      (cutoff : Cutoff) → (observable : Observable) →
+      (term : DefectTerm) → Set
     localizationSupportAndWeightAreReused : Set
-    quantitativeScaleGainSpecializesExistingPolymerContraction : ∀ cutoff observable → Set
+    quantitativeScaleGainSpecializesExistingPolymerContraction :
+      (cutoff : Cutoff) → (observable : Observable) → Set
 
     noDuplicateOneStepRGAuthority : Set
 
