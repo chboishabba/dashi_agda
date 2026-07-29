@@ -35,6 +35,8 @@ record BranchHeadAgdaReceipt : Set where
     setoidBackendSpineChecked : Bool
     constructiveRealCapabilityHierarchyChecked : Bool
     constructiveRealTransportCapabilitiesChecked : Bool
+    constructiveCompleteRealPackageChecked : Bool
+    bishopFastCauchyCapabilityPackagesChecked : Bool
     constructiveRealCategoricityChecked : Bool
     bishopBackendChecked : Bool
     fastCauchyBackendChecked : Bool
@@ -82,6 +84,7 @@ record AuthoritativeBranchHeadEvidence
 
     realBackendSpineTypechecks : Set
     capabilityHierarchyTransportAndCategoricityTypecheck : Set
+    stableCompleteRealPackagesTypecheck : Set
     bishopAndFastCauchyBackendsTypecheck : Set
     concreteEquivalenceSeamTypechecks : Set
     commonCompletionAndCategoricityInstanceTypechecks : Set
@@ -129,6 +132,9 @@ bishopFrontierLedgerTypecheckLevel = conditional
 
 realBackendTrancheTypecheckLevel : ProofLevel
 realBackendTrancheTypecheckLevel = conditional
+
+stableCompleteRealPackageTypecheckLevel : ProofLevel
+stableCompleteRealPackageTypecheckLevel = conditional
 
 categoricityTrancheTypecheckLevel : ProofLevel
 categoricityTrancheTypecheckLevel = conditional
