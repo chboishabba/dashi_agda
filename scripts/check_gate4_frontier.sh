@@ -17,6 +17,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4HaarDeterminantRelativeLossReuseExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FlatReferencePositiveWitnessExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteVisitedSetBFSParentCorrectnessExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicExecutableBFSInstantiationExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRunningCouplingConventionExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteKernelSchurBlockAdjointExact.agda \
