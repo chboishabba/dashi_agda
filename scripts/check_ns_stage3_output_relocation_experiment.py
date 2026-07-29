@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the output-relocation vertical-slice experiment."""
+"""Fail closed on the output-relocation falsification and closure experiment."""
 from __future__ import annotations
 
 import re
@@ -12,10 +12,33 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNComplex3RelocationInstantiation.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationWeightedExponentIdentity.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationVerticalSlice.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalFiniteGeometricEnvelope.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationIntegerGeometricEnvelope.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationPositiveKernelMajorant.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightShellSchur.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalFiniteSignedMajorant.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationConditionalCutoffUniformClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationExperimentIntegration.agda",
 )
 
-PROVENANCE = ("-- PROVENANCE", "-- Title:", "-- Venue/year:", "-- DOI:", "-- Relationship:")
+VERIFIERS = (
+    "scripts/ns_stage3_output_relocation_vertical_slice_audit.py",
+    "scripts/ns_stage3_output_relocation_farkas_audit.py",
+    "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
+    "scripts/ns_stage3_output_relocation_integer_envelope_audit.py",
+    "scripts/ns_stage3_output_relocation_majorant_audit.py",
+)
+
+PROVENANCE = (
+    "-- PROVENANCE",
+    "-- Title:",
+    "-- Venue/year:",
+    "-- DOI:",
+    "-- Relationship:",
+)
 FORBIDDEN = ("{!!}", "?}", "{-# TERMINATING #-}", "{-# NON_TERMINATING #-}")
 POSTULATE = re.compile(r"(?m)^\s*postulate(?:\s|$)")
 
@@ -41,10 +64,11 @@ def main() -> int:
             if text.count(opening) != text.count(closing):
                 failures.append(f"{relative}: unbalanced {opening}{closing}")
 
-    verifier = root / "scripts/ns_stage3_output_relocation_vertical_slice_audit.py"
-    if not verifier.is_file():
-        failures.append("missing output-relocation exact verifier")
-    else:
+    for relative in VERIFIERS:
+        verifier = root / relative
+        if not verifier.is_file():
+            failures.append(f"missing exact verifier: {relative}")
+            continue
         result = subprocess.run(
             [sys.executable, str(verifier)],
             cwd=root,
@@ -60,9 +84,11 @@ def main() -> int:
         return 1
     print(
         f"checked output-relocation experiment: {len(FILES)} Agda modules, "
-        "exact audit, provenance, no holes/postulates/termination escapes; "
-        "concrete carrier and weighted exponent closed, while constructive "
-        "series, numeric vector and epsilon remain correctly fail-closed"
+        f"{len(VERIFIERS)} exact audits, provenance and static safety; "
+        "source-style affine homogeneity is rejected, unit weights and the "
+        "rational 128/93 majorant programme are closed, and every theorem "
+        "downstream of the concrete H^s shell bridge is proved; the bridge and "
+        "concrete operator theorem remain fail-closed"
     )
     return 0
 
