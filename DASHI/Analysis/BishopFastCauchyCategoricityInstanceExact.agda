@@ -84,7 +84,7 @@ record BishopFastCauchyCategoricityData
             bishopField fastField) →
       Capability.DerivedHomomorphismLaws candidate →
       Capability.CompleteHomomorphismCompatibility candidate →
-      (∀ value → Set) →
+      ((value : BishopReal.ℝ) → Set) →
       ∀ value →
       Fast._≈R_
         (Capability.map candidate value)
@@ -98,7 +98,7 @@ record BishopFastCauchyCategoricityData
             fastField bishopField) →
       Capability.DerivedHomomorphismLaws candidate →
       Capability.CompleteHomomorphismCompatibility candidate →
-      (∀ value → Set) →
+      ((value : Fast.FastCauchyReal A) → Set) →
       ∀ value →
       BishopReal._≃_
         (Capability.map candidate value)
