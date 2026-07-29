@@ -5,27 +5,30 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- Authors: Martin Lundfall; Zachary Murray; Viktor Csimma; Robbert Krebbers;
 -- Bas Spitters; Loukas Grafakos; Rodolfo H. Torres; Terence Tao; Minghui Liu;
 -- Gabor Pataki; Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin; Raphael
--- Danchin; DASHI repository contributors.
+-- Danchin; Errett Bishop; Douglas Bridges; DASHI repository contributors.
 -- Title: "Stage-3 constructive-series candidate, literal Schur-shell
--- substitution, affine falsification, and unit-weight Check A integration".
+-- substitution, affine falsification, unit-weight Check A, and integer
+-- geometric-envelope integration".
 -- Venue/year: Reals-in-agda formal development, 2015; Constructive Analysis in
 -- the Agda Proof Assistant, 2022; Logical Methods in Computer Science 9(1:1),
 -- 2013; Journal of Functional Analysis 187 (2001), 1--24 and 199 (2003),
 -- 379--385; Mathematical Programming / arXiv, 2015--2017; Annales
--- scientifiques de l'Ecole Normale Superieure 14 (1981); Springer, 2011;
--- DASHI formal development, 2026.
+-- scientifiques de l'Ecole Normale Superieure 14 (1981); Springer, 1985 and
+-- 2011; DASHI formal development, 2026.
 -- DOI: 10.2168/LMCS-9(1:1)2013; 10.1006/jfan.2001.3804;
 -- 10.1016/S0022-1236(02)00098-8; 10.48550/arXiv.1507.00290;
--- 10.24033/asens.1404; 10.1007/978-3-642-16830-7; Murray
--- arXiv:2205.08354 has no DOI; no DOI located for Reals-in-agda; the
--- integration receipt has no DOI.
+-- 10.24033/asens.1404; 10.1007/978-3-642-61667-9;
+-- 10.1007/978-3-642-16830-7; Murray arXiv:2205.08354 has no DOI; no DOI
+-- located for Reals-in-agda; the integration receipt has no DOI.
 -- Uses: constructive-real candidate comparison, literal power-law Schur
 -- orientation, the closed physical exponent identity, exact shell
 -- substitution, exact falsification of the unnecessary all-three-homogeneity
--- ansatz, and the constant-unit-weight Schur specialization.
--- Relationship: closes symbolic Check A with unit weights.  The source-style
--- affine construction is rejected, not the output-relocation archetype.  The
--- next proof-critical leaf is constructive cutoff-uniform dyadic summation.
+-- ansatz, the constant-unit-weight Schur specialization, and integer geometric
+-- envelopes with exact rational constants.
+-- Relationship: closes symbolic Check A and the geometric-series arithmetic.
+-- A general arbitrary-real-ratio geometric theorem is no longer required. The
+-- remaining constructive leaf is the base-two exponent antitonicity bridge
+-- that dominates the real shell factors by 4^-j and 32^-d.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationLiteralShellSubstitution a
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFamilySubstitution as AffineRows
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAffineFarkasDecision as Decision
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightCheckA as Unit
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationIntegerGeometricEnvelope as Envelope
 
 record ConstructiveSeriesOrientationReceipt : Set where
   constructor receipt
@@ -81,8 +85,16 @@ record ConstructiveSeriesOrientationReceipt : Set where
       Unit.outputRelocationUnitWeightSixRowsReduced ≡ true
     unitWeightSymbolicCheckAClosed :
       Unit.outputRelocationUnitWeightSymbolicCheckA ≡ true
-    constructiveTailStillOpen :
-      Unit.outputRelocationUnitWeightConstructiveDyadicTailClosed ≡ false
+    integerEnvelopeExponentsClosed :
+      Envelope.outputRelocationIntegerEnvelopeExponentsClosed ≡ true
+    rationalGeometricConstantsClosed :
+      Envelope.outputRelocationRationalGeometricConstantsClosed ≡ true
+    arbitraryRatioGeometricTheoremNotRequired :
+      Envelope.outputRelocationArbitraryRatioGeometricTheoremRequired ≡ false
+    powerMonotonicityBridgeStillOpen :
+      Envelope.outputRelocationConstructivePowerMonotonicityBridgeClosed ≡ false
+    cutoffUniformSeriesStillOpen :
+      Envelope.outputRelocationCutoffUniformSeriesClosed ≡ false
     analyticArchetypeStillOpen :
       Unit.outputRelocationUnitWeightAnalyticArchetypeClosed ≡ false
 
@@ -111,7 +123,11 @@ constructiveSeriesOrientationReceipt = receipt
   Unit.unitWeightsAllowedBySchurCarrierIsTrue
   Unit.outputRelocationUnitWeightSixRowsReducedIsTrue
   Unit.outputRelocationUnitWeightSymbolicCheckAIsTrue
-  Unit.outputRelocationUnitWeightConstructiveDyadicTailClosedIsFalse
+  Envelope.outputRelocationIntegerEnvelopeExponentsClosedIsTrue
+  Envelope.outputRelocationRationalGeometricConstantsClosedIsTrue
+  Envelope.outputRelocationArbitraryRatioGeometricTheoremRequiredIsFalse
+  Envelope.outputRelocationConstructivePowerMonotonicityBridgeClosedIsFalse
+  Envelope.outputRelocationCutoffUniformSeriesClosedIsFalse
   Unit.outputRelocationUnitWeightAnalyticArchetypeClosedIsFalse
 
 constructiveRealCandidateComparisonClosed : Bool
@@ -132,8 +148,14 @@ outputRelocationSourceStyleAffineAnsatzInfeasible = true
 outputRelocationUnitWeightSymbolicCheckAClosed : Bool
 outputRelocationUnitWeightSymbolicCheckAClosed = true
 
+outputRelocationIntegerGeometricEnvelopeClosed : Bool
+outputRelocationIntegerGeometricEnvelopeClosed = true
+
+nextLeafIsConstructivePowerMonotonicityBridge : Bool
+nextLeafIsConstructivePowerMonotonicityBridge = true
+
 nextLeafIsConstructiveDyadicTail : Bool
-nextLeafIsConstructiveDyadicTail = true
+nextLeafIsConstructiveDyadicTail = false
 
 nextLeafIsWeightAnsatzRevision : Bool
 nextLeafIsWeightAnsatzRevision = false
@@ -168,9 +190,17 @@ outputRelocationUnitWeightSymbolicCheckAClosedIsTrue :
   outputRelocationUnitWeightSymbolicCheckAClosed ≡ true
 outputRelocationUnitWeightSymbolicCheckAClosedIsTrue = refl
 
-nextLeafIsConstructiveDyadicTailIsTrue :
-  nextLeafIsConstructiveDyadicTail ≡ true
-nextLeafIsConstructiveDyadicTailIsTrue = refl
+outputRelocationIntegerGeometricEnvelopeClosedIsTrue :
+  outputRelocationIntegerGeometricEnvelopeClosed ≡ true
+outputRelocationIntegerGeometricEnvelopeClosedIsTrue = refl
+
+nextLeafIsConstructivePowerMonotonicityBridgeIsTrue :
+  nextLeafIsConstructivePowerMonotonicityBridge ≡ true
+nextLeafIsConstructivePowerMonotonicityBridgeIsTrue = refl
+
+nextLeafIsConstructiveDyadicTailIsFalse :
+  nextLeafIsConstructiveDyadicTail ≡ false
+nextLeafIsConstructiveDyadicTailIsFalse = refl
 
 nextLeafIsWeightAnsatzRevisionIsFalse : nextLeafIsWeightAnsatzRevision ≡ false
 nextLeafIsWeightAnsatzRevisionIsFalse = refl
