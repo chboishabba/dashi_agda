@@ -20,13 +20,13 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- 10.48550/arXiv.2205.08354; the repository program has no DOI.
 -- Uses: unit auxiliary weights, exact rational geometric summation with
 -- constant 128/93, the canonical positive kernel, all three normalized shell
--- Schur conditions, finite two-sided signed domination, and the generic
--- ordered rational-embedding closure theorem.
--- Relationship: every theorem downstream of an embedded concrete shell bridge
--- is proved.  Remaining inhabitants are the concrete ordered carrier, the two
--- H^s-to-rational envelope comparisons, and the literal coefficient's
--- pointwise two-sided domination.  The concrete operator theorem remains
--- fail-closed.
+-- Schur conditions, finite two-sided signed domination, the generic ordered
+-- rational-embedding theorem, and the native ConstructiveRealSpine adapter.
+-- Relationship: every theorem downstream of native spine capability and shell
+-- data is proved.  Remaining inhabitants are the concrete spine order/rational
+-- embedding capability, the two H^s-to-rational envelope comparisons, and the
+-- literal coefficient's pointwise two-sided domination.  The concrete operator
+-- theorem remains fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -42,13 +42,14 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightShellSchur as Sh
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteSignedMajorant as Signed
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as Conditional
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
+import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter as SpineAdapter
 
 record OutputRelocationCutoffUniformArchetypeCutset {s : Level} : Set (lsuc s) where
   field
     Scalar : Set s
 
-    concreteOrderedCarrier : Set s
-    concreteEmbeddedShellBridge : Set s
+    concreteNativeSpineCapability : Set s
+    concreteNativeSpineShellData : Set s
     concretePowerEnvelopeBridge : Set s
     concreteCoefficientTwoSidedDomination : Set s
 
@@ -92,6 +93,10 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       Embedded.orderedRationalEmbeddingClosureTheoremClosed ≡ true
     allDownstreamOfEmbeddedShellBridgeClosed :
       Embedded.allDownstreamOfEmbeddedShellBridgeClosed ≡ true
+    nativeSpineAdapterSpecified :
+      SpineAdapter.nativeConstructiveRealSpineAdapterSpecified ≡ true
+    nativeSpineClosureTheoremClosed :
+      SpineAdapter.nativeSpineToEmbeddedClosureTheoremClosed ≡ true
     minimalPowerBridgeSpecified :
       PowerBridge.outputRelocationMinimalPowerBridgeSpecified ≡ true
     onlyTwoPowerDominationLemmasRequired :
@@ -99,10 +104,10 @@ record OutputRelocationArchetypeProgramReceipt : Set where
     integerPowersAloneInsufficientForHsComparison :
       PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparison
       ≡ false
-    concreteOrderedCarrierStillOpen :
-      Embedded.concreteOrderedCarrierAdapterClosed ≡ false
-    concreteEmbeddedShellBridgeStillOpen :
-      Embedded.concreteEmbeddedShellBridgeClosed ≡ false
+    concreteNativeSpineCapabilityStillOpen :
+      SpineAdapter.concreteSpineEnvelopeCapabilityClosed ≡ false
+    concreteNativeSpineShellDataStillOpen :
+      SpineAdapter.concreteSpineOutputShellDataClosed ≡ false
 
 open OutputRelocationArchetypeProgramReceipt public
 
@@ -119,11 +124,13 @@ outputRelocationArchetypeProgramReceipt = receipt
   Conditional.outputRelocationConditionalArchetypeTheoremClosedIsTrue
   Embedded.orderedRationalEmbeddingClosureTheoremClosedIsTrue
   Embedded.allDownstreamOfEmbeddedShellBridgeClosedIsTrue
+  SpineAdapter.nativeConstructiveRealSpineAdapterSpecifiedIsTrue
+  SpineAdapter.nativeSpineToEmbeddedClosureTheoremClosedIsTrue
   PowerBridge.outputRelocationMinimalPowerBridgeSpecifiedIsTrue
   PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue
   PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparisonIsFalse
-  Embedded.concreteOrderedCarrierAdapterClosedIsFalse
-  Embedded.concreteEmbeddedShellBridgeClosedIsFalse
+  SpineAdapter.concreteSpineEnvelopeCapabilityClosedIsFalse
+  SpineAdapter.concreteSpineOutputShellDataClosedIsFalse
 
 outputRelocationFinalArchetypeCutsetSpecified : Bool
 outputRelocationFinalArchetypeCutsetSpecified = true
@@ -143,14 +150,17 @@ outputRelocationFiniteSignedDominationTheoremClosed = true
 outputRelocationOrderedEmbeddingClosureTheoremClosed : Bool
 outputRelocationOrderedEmbeddingClosureTheoremClosed = true
 
-outputRelocationAllDownstreamOfEmbeddedShellBridgeClosed : Bool
-outputRelocationAllDownstreamOfEmbeddedShellBridgeClosed = true
+outputRelocationNativeSpineClosureTheoremClosed : Bool
+outputRelocationNativeSpineClosureTheoremClosed = true
 
-outputRelocationConcreteOrderedCarrierClosed : Bool
-outputRelocationConcreteOrderedCarrierClosed = false
+outputRelocationAllDownstreamOfNativeSpineDataClosed : Bool
+outputRelocationAllDownstreamOfNativeSpineDataClosed = true
 
-outputRelocationConcreteShellBridgeClosed : Bool
-outputRelocationConcreteShellBridgeClosed = false
+outputRelocationConcreteNativeSpineCapabilityClosed : Bool
+outputRelocationConcreteNativeSpineCapabilityClosed = false
+
+outputRelocationConcreteNativeSpineShellDataClosed : Bool
+outputRelocationConcreteNativeSpineShellDataClosed = false
 
 outputRelocationThreeConcreteSchurConditionsClosed : Bool
 outputRelocationThreeConcreteSchurConditionsClosed = false
@@ -185,17 +195,21 @@ outputRelocationOrderedEmbeddingClosureTheoremClosedIsTrue :
   outputRelocationOrderedEmbeddingClosureTheoremClosed ≡ true
 outputRelocationOrderedEmbeddingClosureTheoremClosedIsTrue = refl
 
-outputRelocationAllDownstreamOfEmbeddedShellBridgeClosedIsTrue :
-  outputRelocationAllDownstreamOfEmbeddedShellBridgeClosed ≡ true
-outputRelocationAllDownstreamOfEmbeddedShellBridgeClosedIsTrue = refl
+outputRelocationNativeSpineClosureTheoremClosedIsTrue :
+  outputRelocationNativeSpineClosureTheoremClosed ≡ true
+outputRelocationNativeSpineClosureTheoremClosedIsTrue = refl
 
-outputRelocationConcreteOrderedCarrierClosedIsFalse :
-  outputRelocationConcreteOrderedCarrierClosed ≡ false
-outputRelocationConcreteOrderedCarrierClosedIsFalse = refl
+outputRelocationAllDownstreamOfNativeSpineDataClosedIsTrue :
+  outputRelocationAllDownstreamOfNativeSpineDataClosed ≡ true
+outputRelocationAllDownstreamOfNativeSpineDataClosedIsTrue = refl
 
-outputRelocationConcreteShellBridgeClosedIsFalse :
-  outputRelocationConcreteShellBridgeClosed ≡ false
-outputRelocationConcreteShellBridgeClosedIsFalse = refl
+outputRelocationConcreteNativeSpineCapabilityClosedIsFalse :
+  outputRelocationConcreteNativeSpineCapabilityClosed ≡ false
+outputRelocationConcreteNativeSpineCapabilityClosedIsFalse = refl
+
+outputRelocationConcreteNativeSpineShellDataClosedIsFalse :
+  outputRelocationConcreteNativeSpineShellDataClosed ≡ false
+outputRelocationConcreteNativeSpineShellDataClosedIsFalse = refl
 
 outputRelocationThreeConcreteSchurConditionsClosedIsFalse :
   outputRelocationThreeConcreteSchurConditionsClosed ≡ false
