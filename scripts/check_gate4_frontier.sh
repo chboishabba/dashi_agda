@@ -8,6 +8,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4FlatWilsonActionPositivityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SU2HaarIdentityPositivityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteCoerciveDeterminantPositivityExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteCoercivityInverseNormExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanDeterminantLossExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanCompensatedTAdapterExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalReferenceFactorAssemblyExact.agda \
@@ -20,6 +21,8 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteVisitedSetBFSParentCorrectnessExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicExecutableBFSInstantiationExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4StrongBFSParentCertificateExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4BFSAdjacentLayerShortestPathExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRunningCouplingConventionExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteKernelSchurBlockAdjointExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda \
