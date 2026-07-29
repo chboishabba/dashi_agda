@@ -22,6 +22,8 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayT5PerScaleDecouplingClosureExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5OSReconstructionCyclicityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment252MechanismAuditExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateLedger.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Validation.agda \
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerAdvance.agda \
   DASHI/Physics/YangMills/BalabanClayGate4AndNumericalAuditCompletionLedger.agda \
