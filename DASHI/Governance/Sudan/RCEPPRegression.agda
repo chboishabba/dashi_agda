@@ -10,6 +10,7 @@ import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.CouncilDelegationGraph as Council
 import DASHI.Governance.ExternalLegitimacyBoundary as Legitimacy
 import DASHI.Governance.GovernedArtifactCore as Governed
+import DASHI.Governance.LocalGlobalCouncilGluing as Gluing
 import DASHI.Governance.PromotionSpine as Promotion
 import DASHI.Governance.RelationalMandateFibre as MandateFibre
 import DASHI.Governance.SituatedConstituency as Situated
@@ -37,6 +38,9 @@ record RCEPPGovernanceRegression : Set where
     councilGraphBoundary :
       Council.CouncilGraphBoundary
 
+    localGlobalGluingBoundary :
+      Gluing.CouncilGluingBoundary
+
     transitionBoundary :
       Transition.TransitionAuthorityBoundary
 
@@ -57,6 +61,20 @@ record RCEPPGovernanceRegression : Set where
 
     rankOneHypervoxelCountIsThree :
       Hyper.siteCount 1 1 ≡ 3
+
+    neighbourhoodRestrictionExact :
+      Stage.BundleSheaf.restrict
+        Gluing.rceppCouncilBundleSheaf
+        Gluing.canonicalGlobalCouncilSection
+        Gluing.neighbourhoodPoint
+      ≡ Gluing.canonicalLocalCouncilFamily Gluing.neighbourhoodPoint
+
+    idpRestrictionExact :
+      Stage.BundleSheaf.restrict
+        Gluing.rceppCouncilBundleSheaf
+        Gluing.canonicalGlobalCouncilSection
+        Gluing.idpCampPoint
+      ≡ Gluing.canonicalLocalCouncilFamily Gluing.idpCampPoint
 
     militarySubordinateToPeople :
       Council.SubordinationPath
@@ -101,6 +119,7 @@ canonicalRCEPPGovernanceRegression =
     Authority.canonicalMandateAuthorityBoundary
     Situated.canonicalAxisAwareRepresentationBoundary
     Council.canonicalCouncilGraphBoundary
+    Gluing.canonicalCouncilGluingBoundary
     Transition.canonicalTransitionAuthorityBoundary
     Legitimacy.canonicalLegitimacyBoundary
     Source.canonicalRCEPPSourceBoundary
@@ -108,6 +127,8 @@ canonicalRCEPPGovernanceRegression =
     PromotionBoundary.canonicalRCEPPPromotionBoundary
     MandateFibre.canonicalMandateFineRoleCountIsThree
     MandateFibre.rankOneDepthOneHasThreeSites
+    Gluing.canonicalGlobalRestrictsToNeighbourhood
+    Gluing.canonicalGlobalRestrictsToIDPCamp
     Council.militaryToPeoplePath
     Authority.possessionOfForceRejected
     refl
@@ -123,6 +144,7 @@ canonicalRCEPPGovernanceReceipts =
   ∷ Authority.canonicalAuthorityMandateCoreReceipt
   ∷ Situated.canonicalSituatedConstituencyReceipt
   ∷ Council.canonicalCouncilDelegationGraphReceipt
+  ∷ Gluing.canonicalLocalGlobalCouncilGluingReceipt
   ∷ Transition.canonicalTransitionResidualReceipt
   ∷ Legitimacy.canonicalExternalLegitimacyBoundaryReceipt
   ∷ Source.canonicalRCEPPSourceGenericReceipt
