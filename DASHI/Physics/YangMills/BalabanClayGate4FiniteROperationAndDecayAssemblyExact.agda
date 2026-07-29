@@ -1,12 +1,14 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact where
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product using (_×_; _,_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Dec; yes; no)
+  using (_∈_)
 
 import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact as Typed
 
@@ -28,7 +30,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact 
 -- Theorem 1, p. 388, for inductive-parameter preservation.
 --
 -- Relationship: the list partition and R-expression construction below are
--- exact.  Analytic locality, gauge covariance, common-domain and norm-decay
+-- exact. Analytic locality, gauge covariance, common-domain and norm-decay
 -- statements remain separate typed inhabitants.
 ------------------------------------------------------------------------
 
@@ -40,17 +42,14 @@ localizedExpressionPartition :
   ∀ {Term Region}
     (dataSet : Typed.SupportLargeFieldIntersection Term Region)
     term region →
-  (Typed.Intersects dataSet term region →
-    Typed.ClassifiedLocalizedTerm dataSet term region Typed.secondClass)
-  ⊎ ((Typed.Intersects dataSet term region →
-        DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.Empty) →
-      Typed.ClassifiedLocalizedTerm dataSet term region Typed.firstClass)
+  Typed.ClassifiedLocalizedTerm dataSet term region Typed.firstClass
+  ⊎ Typed.ClassifiedLocalizedTerm dataSet term region Typed.secondClass
 localizedExpressionPartition dataSet term region
   with Typed.classifyLocalizedTermExact dataSet term region
-... | Typed.classifiedSecond intersects =
-  inj₁ (λ _ → Typed.classifiedSecond intersects)
 ... | Typed.classifiedFirst notIntersects =
-  inj₂ (λ _ → Typed.classifiedFirst notIntersects)
+  inj₁ (Typed.classifiedFirst notIntersects)
+... | Typed.classifiedSecond intersects =
+  inj₂ (Typed.classifiedSecond intersects)
 
 ------------------------------------------------------------------------
 -- Concrete finite R-operation pipeline.
@@ -58,6 +57,12 @@ localizedExpressionPartition dataSet term region
 
 data ExpressionDisposition : Set where
   regularDisposition boundaryDisposition : ExpressionDisposition
+
+sameDisposition : ExpressionDisposition → ExpressionDisposition → Bool
+sameDisposition regularDisposition regularDisposition = true
+sameDisposition regularDisposition boundaryDisposition = false
+sameDisposition boundaryDisposition regularDisposition = false
+sameDisposition boundaryDisposition boundaryDisposition = true
 
 record FiniteROperationData
     (Scale Polymer BoundaryCondition Region Term LocalizedTerm BoundaryTerm
@@ -86,14 +91,11 @@ filterDisposition :
   ExpressionDisposition → Region → List Term → List Term
 filterDisposition dataSet selected region [] = []
 filterDisposition dataSet selected region (term ∷ terms)
-  with disposition dataSet
-    (Typed.classifyLocalizedTerm (intersection dataSet) term region)
-... | regularDisposition with selected
-... | regularDisposition = term ∷ filterDisposition dataSet selected region terms
-... | boundaryDisposition = filterDisposition dataSet selected region terms
-... | boundaryDisposition with selected
-... | regularDisposition = filterDisposition dataSet selected region terms
-... | boundaryDisposition = term ∷ filterDisposition dataSet selected region terms
+  with sameDisposition selected
+    (disposition dataSet
+      (Typed.classifyLocalizedTerm (intersection dataSet) term region))
+... | true = term ∷ filterDisposition dataSet selected region terms
+... | false = filterDisposition dataSet selected region terms
 
 regularTerms :
   ∀ {Scale Polymer BoundaryCondition Region Term LocalizedTerm BoundaryTerm
@@ -241,14 +243,7 @@ record BoundarySupportReinjectionLaws
 
     reinjectBoundaryTermsPreservesSupport :
       ∀ scale polymer boundary term →
-      Typed.Intersects
-        (record
-          { Typed.SupportLargeFieldIntersection.Intersects =
-              λ selected terms → Set
-          ; Typed.SupportLargeFieldIntersection.intersectsDecidable =
-              λ selected terms → no (λ value → value)
-          })
-        term (B dataSet scale polymer boundary) →
+      term ∈ B dataSet scale polymer boundary →
       SupportOwnedBy (boundarySupport term)
         (nextDeterminingSet scale polymer)
 
@@ -266,6 +261,7 @@ record ROperationDecayDerivation
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
 
+    multiply : Bound → Bound → Bound
     rNorm : Scale → Polymer → BoundaryCondition → Bound
     componentProductBound localizedBound exponentiatedBound :
       Scale → Polymer → Bound
@@ -289,10 +285,9 @@ record ROperationDecayDerivation
 
     targetIsP0TimesDiameter : ∀ scale polymer →
       targetBound scale polymer
-      ≡ p0Suppression scale polymer
-
-    boundaryIndependentTarget : ∀ scale polymer first second →
-      targetBound scale polymer ≡ targetBound scale polymer
+      ≡ multiply
+          (p0Suppression scale polymer)
+          (diameterDecay scale polymer)
 
 open ROperationDecayDerivation public
 
@@ -312,6 +307,14 @@ rOperationDecayUniformInBoundary dataSet scale polymer boundary =
       (transitive dataSet
         (rLocalizationNonexpansive dataSet scale polymer)
         (localizedExponentiationBound dataSet scale polymer)))
+
+rDecayTargetIndependentOfBoundary :
+  ∀ {Scale Polymer BoundaryCondition Bound}
+    (dataSet : ROperationDecayDerivation
+      Scale Polymer BoundaryCondition Bound)
+    scale polymer (first second : BoundaryCondition) →
+  targetBound dataSet scale polymer ≡ targetBound dataSet scale polymer
+rDecayTargetIndependentOfBoundary dataSet scale polymer first second = refl
 
 expressionIntersectionPartitionLevel : ProofLevel
 expressionIntersectionPartitionLevel = machineChecked
