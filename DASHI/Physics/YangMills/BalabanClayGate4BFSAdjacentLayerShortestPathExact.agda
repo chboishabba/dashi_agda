@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4BFSAdjacentLayerShortestPathExact where
 
+open import Agda.Builtin.Nat using (zero; suc)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -14,8 +15,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4StrongBFSParentCertificateExact a
 --   adjacent u v -> distance(v) <= 1 + distance(u),
 --
 -- induction along an arbitrary root path shows that the assigned BFS distance
--- is no larger than the path length.  Combined with the exact parent path
--- already constructed in StrongBFSParentCertificate, this proves shortest-path
+-- is no larger than the path length. Combined with the exact parent path already
+-- constructed in StrongBFSParentCertificate, this proves shortest-path
 -- realization without a contradiction argument or classical choice.
 ------------------------------------------------------------------------
 
@@ -34,7 +35,7 @@ record AdjacentLayerUpperBound
       Strong.Adjacent certificate left right →
       Strong._≤N_
         (Strong.distance certificate right)
-        (Agda.Builtin.Nat.suc (Strong.distance certificate left))
+        (suc (Strong.distance certificate left))
 
 open AdjacentLayerUpperBound public
 
@@ -48,7 +49,7 @@ pathLengthBoundsAssignedDistance :
 pathLengthBoundsAssignedDistance {certificate = certificate}
   upper Strong.rootPath =
   subst
-    (λ selectedDistance → Strong._≤N_ selectedDistance Agda.Builtin.Nat.zero)
+    (λ selectedDistance → Strong._≤N_ selectedDistance zero)
     (sym (Strong.rootDistanceZero certificate))
     Strong.zero≤N
 pathLengthBoundsAssignedDistance {certificate = certificate}
