@@ -2,7 +2,6 @@ module DASHI.Analysis.BishopFastCauchyCapabilityPackagesExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 
-import Real as BishopReal
 import DASHI.Analysis.FastCauchyReals as Fast
 import DASHI.Analysis.BishopConstructedRealBackendExact as Bishop
 import DASHI.Analysis.FastCauchyConstructedRealBackendExact as FastBackend
@@ -60,13 +59,19 @@ bishopCompleteRealPackage :
 bishopCompleteRealPackage {packaging} dataSet = record
   { packageName = "Bishop regular rational-sequence complete reals"
   ; backend = Bishop.bishopConstructiveRealBackend packaging
-  ; constructiveField = constructiveField dataSet
-  ; rationals = rationals dataSet
-  ; rationalDensity = rationalDensity dataSet
-  ; naturalMajorization = naturalMajorization dataSet
-  ; densityMajorizationBridge = densityMajorizationBridge dataSet
-  ; effectiveConvergence = effectiveConvergence dataSet
-  ; effectiveLogicalOrder = effectiveLogicalOrder dataSet
+  ; constructiveField =
+      BishopCompleteRealCapabilityData.constructiveField dataSet
+  ; rationals = BishopCompleteRealCapabilityData.rationals dataSet
+  ; rationalDensity =
+      BishopCompleteRealCapabilityData.rationalDensity dataSet
+  ; naturalMajorization =
+      BishopCompleteRealCapabilityData.naturalMajorization dataSet
+  ; densityMajorizationBridge =
+      BishopCompleteRealCapabilityData.densityMajorizationBridge dataSet
+  ; effectiveConvergence =
+      BishopCompleteRealCapabilityData.effectiveConvergence dataSet
+  ; effectiveLogicalOrder =
+      BishopCompleteRealCapabilityData.effectiveLogicalOrder dataSet
   }
 
 record FastCauchyCompleteRealCapabilityData
@@ -104,16 +109,23 @@ fastCauchyCompleteRealPackage :
   ∀ {A operations packaging} →
   FastCauchyCompleteRealCapabilityData A operations packaging →
   Package.ConstructiveCompleteRealPackage
-fastCauchyCompleteRealPackage {operations = operations} {packaging = packaging} dataSet = record
+fastCauchyCompleteRealPackage
+  {operations = operations} {packaging = packaging} dataSet = record
   { packageName = "DASHI quotient-free FastCauchy complete reals"
   ; backend = FastBackend.fastCauchyConstructiveRealBackend operations packaging
-  ; constructiveField = constructiveField dataSet
-  ; rationals = rationals dataSet
-  ; rationalDensity = rationalDensity dataSet
-  ; naturalMajorization = naturalMajorization dataSet
-  ; densityMajorizationBridge = densityMajorizationBridge dataSet
-  ; effectiveConvergence = effectiveConvergence dataSet
-  ; effectiveLogicalOrder = effectiveLogicalOrder dataSet
+  ; constructiveField =
+      FastCauchyCompleteRealCapabilityData.constructiveField dataSet
+  ; rationals = FastCauchyCompleteRealCapabilityData.rationals dataSet
+  ; rationalDensity =
+      FastCauchyCompleteRealCapabilityData.rationalDensity dataSet
+  ; naturalMajorization =
+      FastCauchyCompleteRealCapabilityData.naturalMajorization dataSet
+  ; densityMajorizationBridge =
+      FastCauchyCompleteRealCapabilityData.densityMajorizationBridge dataSet
+  ; effectiveConvergence =
+      FastCauchyCompleteRealCapabilityData.effectiveConvergence dataSet
+  ; effectiveLogicalOrder =
+      FastCauchyCompleteRealCapabilityData.effectiveLogicalOrder dataSet
   }
 
 record BishopFastCauchyPackagePair
@@ -128,9 +140,13 @@ record BishopFastCauchyPackagePair
 
     CommonQ : Set
     bishopQDecode :
-      CommonQ → Capability.Q (BishopCompleteRealCapabilityData.rationals bishopCapabilities)
+      CommonQ →
+      Capability.Q
+        (BishopCompleteRealCapabilityData.rationals bishopCapabilities)
     fastQDecode :
-      CommonQ → Capability.Q (FastCauchyCompleteRealCapabilityData.rationals fastCapabilities)
+      CommonQ →
+      Capability.Q
+        (FastCauchyCompleteRealCapabilityData.rationals fastCapabilities)
 
     commonRationalEmbeddingAgreement : Set
     packageCauchyDefinitionsCompatible : Set
