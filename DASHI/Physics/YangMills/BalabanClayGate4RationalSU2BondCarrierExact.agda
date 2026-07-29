@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as PeriodicGeometry
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralCubeBianchiExact as Cube
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2ExactGroupLaws as Group
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 
@@ -25,6 +26,11 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessEx
 -- "Lie Groups, Lie Algebras, and Representations: An Elementary
 -- Introduction", second edition, Springer (2015).
 -- DOI: 10.1007/978-3-319-13467-3.
+--
+-- G. G. Batrouni,
+-- "Plaquette Formulation and the Bianchi Identity for Lattice Gauge Theories",
+-- Nuclear Physics B 208 (1982), 467--483.
+-- DOI: 10.1016/0550-3213(82)90231-0.
 --
 -- Michael Creutz,
 -- "Quarks, Gluons and Lattices", Cambridge University Press, first published
@@ -92,6 +98,17 @@ rationalSU2PlaquetteGaugeCancellation {n} dataSet =
     (PeriodicGeometry.periodicPlaquetteClosure n)
     (realization dataSet)
 
+rationalSU2CubeBianchi :
+  ∀ {n} (dataSet : RationalSU2BondData n)
+    site (axisA axisB axisC : Carrier.Axis4) →
+  Bond.pathHolonomy (realization dataSet) site
+    (Cube.cubeSixFaceBoundary axisA axisB axisC)
+  ≡ Bond.identity Group.rationalSU2ExactLinkGroup
+rationalSU2CubeBianchi {n} dataSet =
+  Cube.literalCubeBianchi
+    (PeriodicGeometry.periodicStepInverseLaws n)
+    (realization dataSet)
+
 literalRationalSU2BondCarrierLevel : ProofLevel
 literalRationalSU2BondCarrierLevel = machineChecked
 
@@ -103,6 +120,9 @@ rationalSU2PathGaugeCancellationLevel = machineChecked
 
 rationalSU2PlaquetteGaugeCancellationLevel : ProofLevel
 rationalSU2PlaquetteGaugeCancellationLevel = machineChecked
+
+rationalSU2CubeBianchiLevel : ProofLevel
+rationalSU2CubeBianchiLevel = machineChecked
 
 rationalSU2ExactGroupLawReuseLevel : ProofLevel
 rationalSU2ExactGroupLawReuseLevel = Group.rationalSU2ExactGroupLawLevel
