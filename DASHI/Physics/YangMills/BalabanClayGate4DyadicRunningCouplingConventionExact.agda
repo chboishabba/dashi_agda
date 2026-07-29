@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -53,6 +53,14 @@ locatorTwiceB0EqualsInverseCouplingCoefficient : ∀ casimirAdjoint →
 locatorTwiceB0EqualsInverseCouplingCoefficient casimirAdjoint =
   ℚRing.solve-∀ casimirAdjoint
 
+elevenOverTwentyFourEqualsTwiceLocatorB0 : ∀ casimirAdjoint →
+  (+ 11 / 24) * casimirAdjoint
+  ≡ (+ 2 / 1) * locatorB0Rational casimirAdjoint
+elevenOverTwentyFourEqualsTwiceLocatorB0 casimirAdjoint =
+  trans
+    (sym (Beta.inverseCouplingIsElevenOverTwentyFour casimirAdjoint))
+    (sym (locatorTwiceB0EqualsInverseCouplingCoefficient casimirAdjoint))
+
 record DyadicRunningCouplingConvention (Scale Scalar : Set) : Set₁ where
   field
     running : Running.ConventionMatchedRunningCoupling Scale Scalar
@@ -97,20 +105,18 @@ dyadicIncrementUsesTwiceLocatorB0 dataSet scale =
               (Running.embedRational (running dataSet) rationalCoefficient)
               (Running.inversePiSquared (running dataSet)))
             (dyadicLog dataSet))
-        (symmetry
-          (locatorTwiceB0EqualsInverseCouplingCoefficient
-            (Running.casimirAdjoint (running dataSet))))))
-  where
-  symmetry : ∀ {A : Set} {left right : A} → left ≡ right → right ≡ left
-  symmetry equality = Relation.Binary.PropositionalEquality.sym equality
+        (elevenOverTwentyFourEqualsTwiceLocatorB0
+          (Running.casimirAdjoint (running dataSet)))))
 
 record HRBetaRemainderControl
     {Scale Scalar : Set}
     (dataSet : DyadicRunningCouplingConvention Scale Scalar) : Set₁ where
   field
     beta inverseCouplingRemainder : Scale → Scalar
-    add subtract absolute half : Scalar → Scalar → Scalar
+    add : Scalar → Scalar → Scalar
+    absolute halfOf : Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
+    previous : Scale → Scale
 
     exactOneStepRecursion : ∀ scale →
       beta scale
@@ -120,14 +126,9 @@ record HRBetaRemainderControl
               (Running.recursion (running dataSet)) scale)
             (inverseCouplingRemainder scale))
 
-    previous : Scale → Scale
-
     remainderBelowHalfDyadicIncrement : ∀ scale →
-      LessEqual (absolute (inverseCouplingRemainder scale)
-        (inverseCouplingRemainder scale))
-        (half
-          (P3.betaLogBlocking
-            (Running.recursion (running dataSet)) scale)
+      LessEqual (absolute (inverseCouplingRemainder scale))
+        (halfOf
           (P3.betaLogBlocking
             (Running.recursion (running dataSet)) scale))
 
