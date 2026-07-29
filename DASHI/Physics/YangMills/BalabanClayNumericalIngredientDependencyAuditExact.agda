@@ -42,9 +42,9 @@ open NumericalIngredient public
 record IngredientDependency : Set where
   constructor edge
   field
-    sourceIdentifier : String
-    targetIdentifier : String
-    use : DependencyUse
+    dependencySource : String
+    dependencyTarget : String
+    dependencyUse : DependencyUse
     justificationOwnerModule : String
     justificationDeclaration : String
     independentlyChecked : Bool
@@ -120,7 +120,7 @@ selectedTaylorGrid = ingredient
 
 record ExistingDASHINumericalAudit : Set₁ where
   field
-    graph : NumericalDependencyGraph
+    existingGraph : NumericalDependencyGraph
     fpThresholdDerivedFromClique : Set
     oneLoopConventionSeparatedFromCoefficientTheorem : Set
     generatedGridSeparatedFromAnalyticEnclosure : Set
@@ -136,7 +136,7 @@ open ExistingDASHINumericalAudit public
 record ExternalModelNumericalAudit : Set₁ where
   field
     modelName : String
-    graph : NumericalDependencyGraph
+    externalGraph : NumericalDependencyGraph
     theoryMatchesPureYangMillsFieldContent : Bool
     pureSectorTransferTheoremOwner : String
     continuousParameterCountAudited : Set
