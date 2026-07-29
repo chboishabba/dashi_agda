@@ -6,7 +6,38 @@ import json
 from fractions import Fraction as Q
 
 
+def scale_by_nat(value: Q, shell: int) -> Q:
+    assert shell >= 0
+    total = Q(0)
+    for _ in range(shell):
+        total += value
+    return total
+
+
 def run() -> dict[str, object]:
+    # The native rational embedding is modelled by the identity on exact
+    # rationals.  Check the laws which the Agda capability now requires,
+    # including preservation of one.
+    embed = lambda value: value
+    rational_samples = (Q(-7, 5), Q(-1), Q(0), Q(1), Q(3, 2), Q(128, 93))
+    assert embed(Q(0)) == 0
+    assert embed(Q(1)) == 1
+    for left in rational_samples:
+        for right in rational_samples:
+            assert embed(left + right) == embed(left) + embed(right)
+            assert embed(left * right) == embed(left) * embed(right)
+            if left <= right:
+                assert embed(left) <= embed(right)
+
+    two_rational = Q(1) + Q(1)
+    five_rational = (two_rational + two_rational) + Q(1)
+    assert two_rational == 2
+    assert five_rational == 5
+
+    two_pow = lambda exponent: Q(2) ** exponent
+    assert two_pow(0) == 1
+    assert two_pow(1) == 2
+
     regularities = (Q(251, 100), Q(8, 3), Q(299, 100))
     shells = (0, 1, 2, 3, 7, 16, 64)
 
@@ -15,20 +46,33 @@ def run() -> dict[str, object]:
         low_decay = 2 * regularity - Q(5, 2)
         gap_decay = 2 * regularity
         assert regularity > Q(5, 2)
-        assert low_decay >= 2
-        assert gap_decay >= 5
+        assert low_decay >= two_rational
+        assert gap_decay >= five_rational
 
         for shell in shells:
+            # Repeated-addition semantics of natural scaling.
+            assert scale_by_nat(low_decay, 0) == 0
+            assert scale_by_nat(low_decay, shell) == low_decay * shell
+            assert scale_by_nat(gap_decay, shell) == gap_decay * shell
+            assert scale_by_nat(low_decay, shell + 1) == (
+                low_decay + scale_by_nat(low_decay, shell)
+            )
+            assert scale_by_nat(gap_decay, shell + 1) == (
+                gap_decay + scale_by_nat(gap_decay, shell)
+            )
+
             # Multiplication by a nonnegative natural preserves order, then
             # negation reverses it.
-            assert 2 * shell <= low_decay * shell
-            assert -low_decay * shell <= -2 * shell
-            assert 5 * shell <= gap_decay * shell
-            assert -gap_decay * shell <= -5 * shell
+            assert scale_by_nat(two_rational, shell) <= scale_by_nat(low_decay, shell)
+            assert -scale_by_nat(low_decay, shell) <= -scale_by_nat(two_rational, shell)
+            assert scale_by_nat(five_rational, shell) <= scale_by_nat(gap_decay, shell)
+            assert -scale_by_nat(gap_decay, shell) <= -scale_by_nat(five_rational, shell)
 
             # Exact integer anchors used by the Agda theorem.
             quarter_anchor = Q(1, 4) ** shell
             thirty_second_anchor = Q(1, 32) ** shell
+            assert Q(2) ** (-2 * shell) == quarter_anchor
+            assert Q(2) ** (-5 * shell) == thirty_second_anchor
             assert quarter_anchor == Q(1, 2) ** (2 * shell)
             assert thirty_second_anchor == Q(1, 2) ** (5 * shell)
 
@@ -74,6 +118,10 @@ def run() -> dict[str, object]:
         "signedChecks": signed_checks,
         "decision": {
             "unaryNegationCarrierCorrected": True,
+            "nativeRationalEmbeddingUnital": True,
+            "twoAndFivePinnedToRationals": True,
+            "twoPowZeroAndOnePinned": True,
+            "naturalScalingRecursivelyPinned": True,
             "lowShellComparisonDerived": True,
             "gapComparisonDerived": True,
             "signedUpperDerivedFromAbsolute": True,
@@ -91,9 +139,9 @@ def main() -> int:
     result = run()
     print(json.dumps(result["decision"], sort_keys=True))
     print(
-        "verified exact exponent-order reversal, natural-shell scaling, "
-        "the -2n/-5n rational anchors, and absolute-value derivation of both "
-        "signed coefficient inequalities"
+        "verified unital rational embedding, pinned two/five and twoPow zero/one, "
+        "recursive natural scaling, exact exponent-order reversal and -2n/-5n "
+        "anchors, and absolute-value derivation of both signed inequalities"
     )
     return 0
 
