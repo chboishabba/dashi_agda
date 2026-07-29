@@ -1,5 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FiniteKernelSchurBlockAdjointExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -21,9 +24,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- (1985), 299--329. DOI: 10.1007/BF01206191.
 --
 -- The literature supports uniform kernel bounds and exponential decay in related
--- constructive-RG carriers.  The theorem below isolates what is actually needed
+-- constructive-RG carriers. The theorem below isolates what is actually needed
 -- for DASHI's physical Q-star estimate: finite row and column sums whose product
--- fits the selected squared-norm contraction budget.
+-- fits the selected relative squared-norm contraction budget.
 ------------------------------------------------------------------------
 
 record FiniteKernelSchurData
@@ -51,25 +54,27 @@ record DyadicBlockAdjointSchurBudget
     {Input Output Scalar}
     (dataSet : FiniteKernelSchurData Input Output Scalar) : Set₁ where
   field
-    oneEighth : Scalar
-    rowColumnProductBelowOneEighth :
+    oneEighth previousNormSquared : Scalar
+    rowColumnProductBelowRelativeBudget :
       LessEqual dataSet
         (multiply dataSet (rowBound dataSet) (columnBound dataSet))
-        oneEighth
+        (multiply dataSet oneEighth previousNormSquared)
 
 open DyadicBlockAdjointSchurBudget public
 
-finiteSchurImpliesOneEighthSquaredNorm :
+finiteSchurImpliesRelativeOneEighthSquaredNorm :
   ∀ {Input Output Scalar}
     {dataSet : FiniteKernelSchurData Input Output Scalar} →
   (budget : DyadicBlockAdjointSchurBudget dataSet) →
   LessEqual dataSet
     (operatorNormSquared dataSet)
-    (oneEighth budget)
-finiteSchurImpliesOneEighthSquaredNorm {dataSet = dataSet} budget =
+    (multiply dataSet
+      (oneEighth budget)
+      (previousNormSquared budget))
+finiteSchurImpliesRelativeOneEighthSquaredNorm {dataSet = dataSet} budget =
   transitive dataSet
     (finiteSchurTest dataSet)
-    (rowColumnProductBelowOneEighth budget)
+    (rowColumnProductBelowRelativeBudget budget)
 
 record PhysicalBlockAdjointKernelMeaning
     (Scale Input Output Scalar : Set) : Set₁ where
@@ -78,20 +83,56 @@ record PhysicalBlockAdjointKernelMeaning
     nextScale : Scale → Scale
 
     physicalBlockAdjointNormSquared : Scale → Scalar
-    physicalNormMeaning : ∀ scale →
-      physicalBlockAdjointNormSquared (nextScale scale)
-      ≡ operatorNormSquared (kernelData scale)
-
     contractionBudget : ∀ scale →
       DyadicBlockAdjointSchurBudget (kernelData scale)
 
+    nextNormMeaning : ∀ scale →
+      physicalBlockAdjointNormSquared (nextScale scale)
+      ≡ operatorNormSquared (kernelData scale)
+
+    previousNormMeaning : ∀ scale →
+      physicalBlockAdjointNormSquared scale
+      ≡ previousNormSquared (contractionBudget scale)
+
 open PhysicalBlockAdjointKernelMeaning public
+
+physicalBlockAdjointRelativeOneEighth :
+  ∀ {Scale Input Output Scalar}
+    (meaning : PhysicalBlockAdjointKernelMeaning Scale Input Output Scalar)
+    scale →
+  let dataSet = kernelData meaning scale
+  in LessEqual dataSet
+      (physicalBlockAdjointNormSquared meaning (nextScale meaning scale))
+      (multiply dataSet
+        (oneEighth (contractionBudget meaning scale))
+        (physicalBlockAdjointNormSquared meaning scale))
+physicalBlockAdjointRelativeOneEighth meaning scale =
+  let dataSet = kernelData meaning scale
+      budget = contractionBudget meaning scale
+      base = finiteSchurImpliesRelativeOneEighthSquaredNorm budget
+      rightEq = cong₂ (multiply dataSet)
+        Agda.Builtin.Equality.refl
+        (sym (previousNormMeaning meaning scale))
+  in subst
+      (λ upper → LessEqual dataSet
+        (physicalBlockAdjointNormSquared meaning (nextScale meaning scale)) upper)
+      rightEq
+      (subst
+        (λ lower → LessEqual dataSet lower
+          (multiply dataSet
+            (oneEighth budget)
+            (previousNormSquared budget)))
+        (sym (nextNormMeaning meaning scale))
+        base)
 
 finiteKernelSchurReductionLevel : ProofLevel
 finiteKernelSchurReductionLevel = machineChecked
 
 oneEighthKernelBudgetAssemblyLevel : ProofLevel
 oneEighthKernelBudgetAssemblyLevel = machineChecked
+
+physicalBlockAdjointRelativeContractionAssemblyLevel : ProofLevel
+physicalBlockAdjointRelativeContractionAssemblyLevel = machineChecked
 
 schurTestMethodProvenanceLevel : ProofLevel
 schurTestMethodProvenanceLevel = standardImported
