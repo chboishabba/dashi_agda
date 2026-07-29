@@ -2,8 +2,8 @@ module DASHI.Physics.Closure.NSTriadKNSmallEpsilonCertificate where
 
 ------------------------------------------------------------------------
 -- PROVENANCE
--- Authors: Loukas Grafakos; Rodolfo H. Torres; Loukas Grafakos; Terence
--- Tao; DASHI repository contributors.
+-- Authors: Loukas Grafakos; Rodolfo H. Torres; Terence Tao; DASHI
+-- repository contributors.
 -- Title: "A Multilinear Schur Test and Multiplier Operators" and
 -- "Multilinear Interpolation Between Adjoint Operators".
 -- Venue/year: Journal of Functional Analysis 187 (2001), 1--24; Journal
