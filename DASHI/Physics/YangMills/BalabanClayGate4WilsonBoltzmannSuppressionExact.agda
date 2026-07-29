@@ -94,7 +94,8 @@ record OrderedPlaquetteProduct (Plaquette : Set) : Set₁ where
 open OrderedPlaquetteProduct public
 
 productWeights :
-  ∀ {Plaquette} → OrderedPlaquetteProduct Plaquette → List Plaquette → Weight
+  ∀ {Plaquette} (dataSet : OrderedPlaquetteProduct Plaquette) →
+  List Plaquette → Weight dataSet
 productWeights dataSet [] = one dataSet
 productWeights dataSet (plaquette ∷ plaquettes) =
   multiply dataSet (weight dataSet plaquette) (productWeights dataSet plaquettes)
