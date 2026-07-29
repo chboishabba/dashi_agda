@@ -1,0 +1,29 @@
+module DASHI.Physics.YangMills.BalabanClayGate4Validation where
+
+-- Existing carriers and exact reusable owners.
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact
+import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact
+import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact
+import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact
+
+-- Earlier Gate-4 architecture and literal predicate tranche.
+import DASHI.Physics.YangMills.BalabanClayGate4LargeFieldArchaeologyExact
+import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact
+import DASHI.Physics.YangMills.BalabanClayGate4ROperationDecayTargetsExact
+
+-- Literal periodic incidence, finite geometry and concrete T/R pipelines.
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicReachCollarEnumerationExact
+import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact
+
+-- Absorption, one-step closure, all-scale induction and provenance audit.
+import DASHI.Physics.YangMills.BalabanClayGate4P0GrowthAbsorptionExact
+import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryTargetAndAttachmentAuditExact
+
+-- Authoritative proof-level split.
+import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger
