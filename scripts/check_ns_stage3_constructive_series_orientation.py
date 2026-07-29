@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on constructive-real comparison and output-relocation Check A."""
+"""Fail closed on constructive-real comparison and output-relocation closure."""
 from __future__ import annotations
 
 import re
@@ -19,8 +19,13 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationDirectionSystemClassification.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalFiniteGeometricEnvelope.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationIntegerGeometricEnvelope.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationPositiveKernelMajorant.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightShellSchur.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalFiniteSignedMajorant.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationConditionalCutoffUniformClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
@@ -32,6 +37,7 @@ VERIFIERS = (
     "scripts/ns_stage3_output_relocation_farkas_audit.py",
     "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
     "scripts/ns_stage3_output_relocation_integer_envelope_audit.py",
+    "scripts/ns_stage3_output_relocation_majorant_audit.py",
 )
 
 PROVENANCE = (
@@ -88,14 +94,14 @@ def main() -> int:
         print("\n".join(failures))
         return 1
     print(
-        "checked Murray thesis pin, Dong Li coercivity boundary and "
-        "output-relocation Check A tranche: 16 Agda modules, 5 exact "
-        "verifiers, provenance, no holes/postulates/escapes; the source-style "
-        "all-three-homogeneity affine ansatz is exactly infeasible, constant "
-        "unit weights recover symbolic Check A, integer geometric envelopes "
-        "give the exact 128/93 cutoff bound, and the final archetype cutset is "
-        "specified; only the two constructive base-two domination lemmas and "
-        "positive-kernel/signed-majorant instantiation remain fail-closed"
+        f"checked Murray thesis pin, Dong Li coercivity boundary and "
+        f"output-relocation closure tranche: {len(FILES)} Agda modules, "
+        f"{len(VERIFIERS)} exact verifiers, provenance and static safety; "
+        "source-style homogeneity is rejected, unit weights close Check A, "
+        "the rational 128/93 positive-kernel and finite signed programmes are "
+        "closed, and all conclusions downstream of the concrete H^s shell "
+        "bridge are proved; only that bridge and the concrete operator mapping "
+        "remain fail-closed"
     )
     return 0
 
