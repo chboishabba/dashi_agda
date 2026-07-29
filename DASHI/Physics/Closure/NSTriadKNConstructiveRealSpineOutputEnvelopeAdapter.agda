@@ -6,25 +6,25 @@ module DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter
 -- Rodolfo H. Torres; DASHI repository contributors.
 -- Title: "Constructive Analysis"; "Constructive Analysis in the Agda Proof
 -- Assistant"; "A Multilinear Schur Test and Multiplier Operators"; and
--- "Native ConstructiveRealSpine adapter for the output-relocation envelope".
+-- "Unital native ConstructiveRealSpine adapter for the output-relocation
+-- envelope".
 -- Venue/year: Springer, 1985; arXiv, 2022; Journal of Functional Analysis 187
 -- (2001), 1--24; DASHI formal development, 2026.
 -- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354;
 -- 10.1006/jfan.2001.3804; the repository adapter has no DOI.
 -- Uses: DASHI.Analysis.ConstructiveRealSpine as the native carrier boundary,
--- the exact rational embedding/order laws absent from that intentionally small
--- spine, and the embedded 128/93 output-relocation closure theorem.
--- Relationship: no parallel real-number carrier is introduced.  Given one
--- native constructed real, its rational embedding/order capability, and the
--- three concrete shell-bridge facts, this module constructs the complete
--- cutoff-uniform output-relocation theorem.  Concrete capability inhabitants
--- remain fail-closed.
+-- a unital order-preserving rational embedding, and the embedded 128/93
+-- output-relocation closure theorem.
+-- Relationship: no parallel real-number carrier is introduced.  Preservation
+-- of rational one is explicit, preventing a degenerate zero embedding from
+-- satisfying the native capability.  Given the capability and concrete shell
+-- data, this module constructs the complete cutoff-uniform theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Spine
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -54,6 +54,7 @@ record ConstructiveRealSpineEnvelopeCapability
       ≡ Spine._+_ R (Spine.neg R a) (Spine.neg R b)
 
     embedZero : rationalEmbed 0ℚ ≡ Spine.zero R
+    embedOne : rationalEmbed 1ℚ ≡ Spine.one R
     embedAdd : ∀ left right →
       rationalEmbed (left + right)
       ≡ Spine._+_ R (rationalEmbed left) (rationalEmbed right)
@@ -151,6 +152,9 @@ constructiveRealSpineOutputRelocationTheorem R capability data =
 nativeConstructiveRealSpineAdapterSpecified : Bool
 nativeConstructiveRealSpineAdapterSpecified = true
 
+nativeRationalEmbeddingRequiredUnital : Bool
+nativeRationalEmbeddingRequiredUnital = true
+
 nativeSpineToEmbeddedClosureTheoremClosed : Bool
 nativeSpineToEmbeddedClosureTheoremClosed = true
 
@@ -163,6 +167,10 @@ concreteSpineOutputShellDataClosed = false
 nativeConstructiveRealSpineAdapterSpecifiedIsTrue :
   nativeConstructiveRealSpineAdapterSpecified ≡ true
 nativeConstructiveRealSpineAdapterSpecifiedIsTrue = refl
+
+nativeRationalEmbeddingRequiredUnitalIsTrue :
+  nativeRationalEmbeddingRequiredUnital ≡ true
+nativeRationalEmbeddingRequiredUnitalIsTrue = refl
 
 nativeSpineToEmbeddedClosureTheoremClosedIsTrue :
   nativeSpineToEmbeddedClosureTheoremClosed ≡ true
