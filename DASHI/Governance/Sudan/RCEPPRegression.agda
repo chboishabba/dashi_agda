@@ -8,10 +8,12 @@ import DASHI.Foundations.StageValuationBundleAtlas as Stage
 import DASHI.Governance.AuthorityMandateCore as Authority
 import DASHI.Governance.CouncilDelegationGraph as Council
 import DASHI.Governance.ExternalLegitimacyBoundary as Legitimacy
+import DASHI.Governance.GovernedArtifactCore as Governed
 import DASHI.Governance.RelationalMandateFibre as MandateFibre
 import DASHI.Governance.SituatedConstituency as Situated
 import DASHI.Governance.TransitionResidual as Transition
 import DASHI.Governance.Sudan.RCEPPInstitutionalSurface as Institutional
+import DASHI.Governance.Sudan.RCEPPPromotionBoundary as PromotionBoundary
 import DASHI.Governance.Sudan.RCEPPSourceBoundary as Source
 
 ------------------------------------------------------------------------
@@ -45,6 +47,9 @@ record RCEPPGovernanceRegression : Set where
     institutionalBoundary :
       Institutional.RCEPPInstitutionalInterpretationBoundary
 
+    promotionBoundary :
+      PromotionBoundary.RCEPPPromotionBoundary
+
     rankOneFineRoleCountIsThree :
       MandateFibre.listCount MandateFibre.canonicalMandateFineRoles ≡ 3
 
@@ -77,6 +82,16 @@ record RCEPPGovernanceRegression : Set where
         Stage.canonicalTransformativeJump3To14
       ≡ false
 
+    citationOnlyAuthorizationAbstains :
+      PromotionBoundary.Promotion.authorizationFromObligations
+        (PromotionBoundary.ArtifactBridge.authorityPromotionObligations
+          Source.canonicalRCEPPCitationBoundary
+          true
+          true
+          true
+          true)
+      ≡ Governed.abstain
+
 canonicalRCEPPGovernanceRegression : RCEPPGovernanceRegression
 canonicalRCEPPGovernanceRegression =
   rceppGovernanceRegression
@@ -88,6 +103,7 @@ canonicalRCEPPGovernanceRegression =
     Legitimacy.canonicalLegitimacyBoundary
     Source.canonicalRCEPPSourceBoundary
     Institutional.canonicalRCEPPInstitutionalInterpretationBoundary
+    PromotionBoundary.canonicalRCEPPPromotionBoundary
     MandateFibre.canonicalMandateFineRoleCountIsThree
     MandateFibre.rankOneDepthOneHasThreeSites
     Council.militaryToPeoplePath
@@ -96,6 +112,7 @@ canonicalRCEPPGovernanceRegression =
     refl
     refl
     Transition.stageCompressionDoesNotPromoteAuthority
+    PromotionBoundary.rceppCitationOnlyAuthorizationAbstains
 
 canonicalRCEPPGovernanceReceipts :
   List GenericReceipt.GenericReceipt
@@ -108,6 +125,7 @@ canonicalRCEPPGovernanceReceipts =
   ∷ Legitimacy.canonicalExternalLegitimacyBoundaryReceipt
   ∷ Source.canonicalRCEPPSourceGenericReceipt
   ∷ Institutional.canonicalRCEPPInstitutionalSurfaceReceipt
+  ∷ PromotionBoundary.canonicalRCEPPPromotionBoundaryReceipt
   ∷ []
 
 canonicalRCEPPGovernanceReceiptCount : Nat
