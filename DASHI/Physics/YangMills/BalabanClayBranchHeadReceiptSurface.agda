@@ -60,9 +60,13 @@ record BranchHeadAgdaReceipt : Set where
     gate4LiteralPeriodicGeometryChecked : Bool
     gate4PeriodicAdjacencyHolonomyChecked : Bool
     gate4BondPathBianchiChecked : Bool
+    gate4RationalSU2ExactGroupChecked : Bool
+    gate4PeriodicCoordinateClosureChecked : Bool
+    gate4TransportedBianchiCancellationChecked : Bool
     gate4WilsonBoltzmannSuppressionChecked : Bool
     gate4PhysicalTDensityChecked : Bool
     gate4ReferenceFibreNormalizationChecked : Bool
+    gate4ReferenceFibrePositiveMassChecked : Bool
     gate4FiniteTOperationChecked : Bool
     gate4TStructuralSuppressionReductionChecked : Bool
     gate4FiniteROperationChecked : Bool
@@ -75,6 +79,8 @@ record BranchHeadAgdaReceipt : Set where
     gate4CombinedSmallLargeAssemblyChecked : Bool
     gate4PhysicalOneStepClosureChecked : Bool
     gate4AbsorptionAndUVAssemblyChecked : Bool
+    t5PublishedTerminalCriteriaChecked : Bool
+    t5OS1RotationRestorationChecked : Bool
     concreteUVToMassGapDependencyChecked : Bool
     physicalContinuumOSGapBridgeChecked : Bool
     clusteringLocatorAuditChecked : Bool
@@ -123,9 +129,13 @@ record AuthoritativeBranchHeadEvidence
     gate4LiteralPeriodicGeometryTypechecks : Set
     gate4PeriodicAdjacencyHolonomyTypechecks : Set
     gate4BondPathBianchiTypechecks : Set
+    gate4RationalSU2ExactGroupTypechecks : Set
+    gate4PeriodicCoordinateClosureTypechecks : Set
+    gate4TransportedBianchiCancellationTypechecks : Set
     gate4WilsonBoltzmannSuppressionTypechecks : Set
     gate4PhysicalTDensityTypechecks : Set
     gate4ReferenceFibreNormalizationTypechecks : Set
+    gate4ReferenceFibrePositiveMassTypechecks : Set
     gate4FiniteTOperationTypechecks : Set
     gate4TStructuralSuppressionReductionTypechecks : Set
     gate4FiniteROperationTypechecks : Set
@@ -138,6 +148,8 @@ record AuthoritativeBranchHeadEvidence
     gate4CombinedSmallLargeAssemblyTypechecks : Set
     gate4PhysicalOneStepClosureTypechecks : Set
     gate4AbsorptionAndUVAssemblyTypechecks : Set
+    t5PublishedTerminalCriteriaTypechecks : Set
+    t5OS1RotationRestorationTypechecks : Set
     concreteUVToMassGapDependencyTypechecks : Set
     physicalContinuumOSGapBridgeTypechecks : Set
     clusteringLocatorAuditTypechecks : Set
@@ -211,6 +223,15 @@ gate4PeriodicAdjacencyHolonomyTypecheckLevel = conditional
 gate4BondPathBianchiTypecheckLevel : ProofLevel
 gate4BondPathBianchiTypecheckLevel = conditional
 
+gate4RationalSU2ExactGroupTypecheckLevel : ProofLevel
+gate4RationalSU2ExactGroupTypecheckLevel = conditional
+
+gate4PeriodicCoordinateClosureTypecheckLevel : ProofLevel
+gate4PeriodicCoordinateClosureTypecheckLevel = conditional
+
+gate4TransportedBianchiCancellationTypecheckLevel : ProofLevel
+gate4TransportedBianchiCancellationTypecheckLevel = conditional
+
 gate4WilsonBoltzmannSuppressionTypecheckLevel : ProofLevel
 gate4WilsonBoltzmannSuppressionTypecheckLevel = conditional
 
@@ -219,6 +240,9 @@ gate4PhysicalTDensityTypecheckLevel = conditional
 
 gate4ReferenceFibreNormalizationTypecheckLevel : ProofLevel
 gate4ReferenceFibreNormalizationTypecheckLevel = conditional
+
+gate4ReferenceFibrePositiveMassTypecheckLevel : ProofLevel
+gate4ReferenceFibrePositiveMassTypecheckLevel = conditional
 
 gate4FiniteTOperationTypecheckLevel : ProofLevel
 gate4FiniteTOperationTypecheckLevel = conditional
@@ -255,6 +279,12 @@ gate4PhysicalOneStepClosureTypecheckLevel = conditional
 
 gate4AbsorptionAndUVAssemblyTypecheckLevel : ProofLevel
 gate4AbsorptionAndUVAssemblyTypecheckLevel = conditional
+
+t5PublishedTerminalCriteriaTypecheckLevel : ProofLevel
+t5PublishedTerminalCriteriaTypecheckLevel = conditional
+
+t5OS1RotationRestorationTypecheckLevel : ProofLevel
+t5OS1RotationRestorationTypecheckLevel = conditional
 
 concreteUVToMassGapDependencyTypecheckLevel : ProofLevel
 concreteUVToMassGapDependencyTypecheckLevel = conditional
