@@ -49,8 +49,8 @@ scaleByNatMonotone : ∀ {R : Spine.ConstructedOrderedCompleteReal}
   Spine._≤_ R left right →
   ∀ shell →
   Spine._≤_ R (scaleByNat left shell) (scaleByNat right shell)
-scaleByNatMonotone field left≤right zero =
-  Ordered.leqReflexive field (Spine.zero _)
+scaleByNatMonotone {R} field left≤right zero =
+  Ordered.leqReflexive field (Spine.zero R)
 scaleByNatMonotone field left≤right (suc shell) =
   Ordered.addMonotone field
     left≤right
@@ -137,7 +137,7 @@ twoPowNonnegative : ∀ {R field E}
     (data : BaseTwoExponentialBridgeData R field E)
     exponent →
   Spine._≤_ R (Spine.zero R) (twoPow data exponent)
-twoPowNonnegative data exponent = expNonnegative data _
+twoPowNonnegative data exponent = expNonnegative data exponent
 
 twoPowMonotone : ∀ {R field E}
     (data : BaseTwoExponentialBridgeData R field E)
