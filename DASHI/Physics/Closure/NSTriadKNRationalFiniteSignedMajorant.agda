@@ -26,7 +26,7 @@ open import Data.Rational.Base using (ℚ; _+_; -_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
-  using (cong; subst)
+  using (cong; cong₂; subst)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Majorant
@@ -39,10 +39,6 @@ sumToCong left right (suc cutoff) pointwise =
   cong₂ _+_
     (pointwise (suc cutoff))
     (sumToCong left right cutoff pointwise)
-  where
-  cong₂ : ∀ {a b c d : ℚ} →
-    a ≡ b → c ≡ d → a + c ≡ b + d
-  cong₂ refl refl = refl
 
 sumToNeg : ∀ values cutoff →
   Majorant.sumTo (λ index → - values index) cutoff
