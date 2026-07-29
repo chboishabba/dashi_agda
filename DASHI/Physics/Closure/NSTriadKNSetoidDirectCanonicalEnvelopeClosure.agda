@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNSetoidDirectCanonicalEnvelopeClosure where
 -- and the two-sided 128/93 conclusion then follow constructively.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -33,7 +33,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Rational
 
 record SetoidOrderedRationalEnvelopeCarrier {s e : Level} :
-    Set (lsuc (s Level.⊔ e)) where
+    Set (lsuc (s ⊔ e)) where
   field
     Scalar : Set s
     _≈_ : Scalar → Scalar → Set e
@@ -233,7 +233,7 @@ rectangleSumNeg C kernel lowCutoff gapCutoff =
 
 record DirectCanonicalCoefficientBridge {s e}
     (C : SetoidOrderedRationalEnvelopeCarrier {s} {e}) :
-    Set (lsuc (s Level.⊔ e)) where
+    Set (lsuc (s ⊔ e)) where
   field
     signedCoefficient : Nat → Nat → Scalar C
     signedCoefficientUpper : ∀ low gap →
@@ -251,7 +251,7 @@ open DirectCanonicalCoefficientBridge public
 record SetoidDirectCanonicalArchetypeTheorem {s e}
     (C : SetoidOrderedRationalEnvelopeCarrier {s} {e})
     (bridge : DirectCanonicalCoefficientBridge C) :
-    Set (lsuc (s Level.⊔ e)) where
+    Set (lsuc (s ⊔ e)) where
   field
     cutoffUpper : ∀ lowCutoff gapCutoff →
       leq C
