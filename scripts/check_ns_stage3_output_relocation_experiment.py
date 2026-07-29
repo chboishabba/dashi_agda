@@ -23,6 +23,8 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationEmbeddedEnvelopeClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAbsoluteCoefficientBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstructiveRealSpineOutputRelocationDerivedClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNAffineResolvedFamilyReduction.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationExperimentIntegration.agda",
@@ -34,6 +36,7 @@ VERIFIERS = (
     "scripts/ns_stage3_output_relocation_unit_weight_audit.py",
     "scripts/ns_stage3_output_relocation_integer_envelope_audit.py",
     "scripts/ns_stage3_output_relocation_majorant_audit.py",
+    "scripts/ns_stage3_output_relocation_derived_bridge_audit.py",
     "scripts/ns_stage3_small_epsilon_affine_audit.py",
 )
 
@@ -91,10 +94,11 @@ def main() -> int:
         f"checked output-relocation experiment: {len(FILES)} Agda modules, "
         f"{len(VERIFIERS)} exact audits, provenance and static safety; "
         "source-style affine homogeneity is rejected, unit weights and the "
-        "rational/embedded/native-spine 128/93 programmes are closed, one "
-        "affine family is resolved leaving 21 live slots, and only concrete "
-        "spine capability/H^s/coefficient data and operator mapping remain "
-        "fail-closed"
+        "rational/embedded/native-spine 128/93 programmes are closed, the two "
+        "shell comparisons and both signed inequalities are derived, one affine "
+        "family is resolved leaving 21 live slots, and only concrete native "
+        "spine order/rational data, base-two anchors, decay data, absolute order "
+        "and one literal absolute-coefficient estimate remain fail-closed"
     )
     return 0
 
