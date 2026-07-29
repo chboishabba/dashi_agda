@@ -17,19 +17,20 @@ module DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDeriv
 -- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354;
 -- 10.24033/asens.1404; 10.1007/978-3-642-16830-7;
 -- 10.1006/jfan.2001.3804; the repository composition theorem has no DOI.
--- Uses: the unital ConstructiveRealSpine adapter, the proved base-two shell
--- comparison derivation, and the proved absolute-magnitude to two-sided-order
--- derivation.
--- Relationship: the four former raw fields are constructed here.  The native
--- constants two and five are pinned to rational embeddings, twoPow is pinned at
--- zero and one, and scaleByNat is repeated addition.  This prevents degenerate
--- or merely nominal power/scaling data from inhabiting the physical interface.
+-- Uses: the unital ConstructiveRealSpine adapter, coherent base-two powers,
+-- exact Sobolev decay formulas, and the absolute-magnitude coefficient bridge.
+-- Relationship: the four former raw fields and both factor-nonnegativity facts
+-- are constructed here.  The decay exponents are pinned to 2s-5/2 and 2s on
+-- the target interval 5/2 < s < 3.  The remaining genuinely operator-specific
+-- input is one literal absolute-coefficient estimate, together with concrete
+-- native real/power capability inhabitants.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; 1ℚ; _/_; _+_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Spine
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -41,8 +42,14 @@ import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter
 twoRational : ℚ
 twoRational = 1ℚ + 1ℚ
 
+threeRational : ℚ
+threeRational = twoRational + 1ℚ
+
 fiveRational : ℚ
 fiveRational = (twoRational + twoRational) + 1ℚ
+
+fiveHalvesRational : ℚ
+fiveHalvesRational = Int.+ 5 / 2
 
 record ConstructiveRealSpineBaseTwoPowerCapability
     (R : Spine.ConstructedOrderedCompleteReal)
@@ -54,6 +61,8 @@ record ConstructiveRealSpineBaseTwoPowerCapability
 
     twoPow : Spine.Real R → Spine.Real R
     twoStrictlyAboveOne : Spine._<_ R (Spine.one R) two
+    twoPowNonnegative : ∀ exponent →
+      Spine._≤_ R (Spine.zero R) (twoPow exponent)
     twoPowMonotone : ∀ {left right} →
       Spine._≤_ R left right →
       Spine._≤_ R (twoPow left) (twoPow right)
@@ -103,6 +112,7 @@ asBaseTwoExponentAntitoneCarrier R capability power = record
   ; orderTransitive = Adapter.leqTransitive capability
   ; twoStrictlyAboveOne = twoStrictlyAboveOne power
   ; exponentOrderReversesAfterNegation = Adapter.negateAntitone capability
+  ; twoPowNonnegative = twoPowNonnegative power
   ; twoPowMonotone = twoPowMonotone power
   ; twoPowZero = twoPowZero power
   ; twoPowOne = twoPowOne power
@@ -133,7 +143,24 @@ record ConstructiveRealSpineOutputDecayData
     (capability : Adapter.ConstructiveRealSpineEnvelopeCapability R)
     (power : ConstructiveRealSpineBaseTwoPowerCapability R capability) : Set₁ where
   field
+    sobolevExponent fiveHalves three : Spine.Real R
+    fiveHalvesMeaning :
+      fiveHalves ≡ Adapter.rationalEmbed capability fiveHalvesRational
+    threeMeaning :
+      three ≡ Adapter.rationalEmbed capability threeRational
+    sobolevAboveFiveHalves : Spine._<_ R fiveHalves sobolevExponent
+    sobolevBelowThree : Spine._<_ R sobolevExponent three
+
     lowDecayExponent gapDecayExponent : Spine.Real R
+    lowDecayMeaning :
+      lowDecayExponent
+      ≡ Spine._-_ R
+          (Spine._+_ R sobolevExponent sobolevExponent)
+          fiveHalves
+    gapDecayMeaning :
+      gapDecayExponent
+      ≡ Spine._+_ R sobolevExponent sobolevExponent
+
     lowDecayAtLeastTwo : Spine._≤_ R (two power) lowDecayExponent
     gapDecayAtLeastFive : Spine._≤_ R (five power) gapDecayExponent
 
@@ -195,16 +222,6 @@ record ConstructiveRealSpineLiteralMagnitudeData
     (absoluteOrder : ConstructiveRealSpineAbsoluteOrderCapability R capability) : Set₁ where
   field
     signedCoefficient : Nat → Nat → Spine.Real R
-
-    lowFactorNonnegative : ∀ lowShell →
-      Spine._≤_ R
-        (Spine.zero R)
-        (spineLowFactor R capability power decay lowShell)
-    gapFactorNonnegative : ∀ gap →
-      Spine._≤_ R
-        (Spine.zero R)
-        (spineGapFactor R capability power decay gap)
-
     absoluteCoefficientDominatedByFactors : ∀ lowShell gap →
       Spine._≤_ R
         (Spine.abs R (signedCoefficient lowShell gap))
@@ -224,8 +241,14 @@ asAbsoluteOutputRelocationShellData
   { lowFactor = spineLowFactor R capability power decay
   ; gapFactor = spineGapFactor R capability power decay
   ; signedCoefficient = signedCoefficient magnitude
-  ; lowFactorNonnegative = lowFactorNonnegative magnitude
-  ; gapFactorNonnegative = gapFactorNonnegative magnitude
+  ; lowFactorNonnegative =
+      Power.lowShellFactorNonnegative
+        (asBaseTwoIntegerPowerAnchors R capability power)
+        (asOutputRelocationDecayExponentData R capability power decay)
+  ; gapFactorNonnegative =
+      Power.gapShellFactorNonnegative
+        (asBaseTwoIntegerPowerAnchors R capability power)
+        (asOutputRelocationDecayExponentData R capability power decay)
   ; lowShellDominatedByQuarter =
       Power.lowShellDominatedByQuarter
         (asBaseTwoIntegerPowerAnchors R capability power)
@@ -258,8 +281,10 @@ asConstructiveRealSpineOutputShellData
     { lowFactor = spineLowFactor R capability power decay
     ; gapFactor = spineGapFactor R capability power decay
     ; signedCoefficient = signedCoefficient magnitude
-    ; lowFactorNonnegative = lowFactorNonnegative magnitude
-    ; gapFactorNonnegative = gapFactorNonnegative magnitude
+    ; lowFactorNonnegative =
+        Embedded.lowFactorNonnegative embeddedBridge
+    ; gapFactorNonnegative =
+        Embedded.gapFactorNonnegative embeddedBridge
     ; lowShellDominatedByQuarter =
         Embedded.lowShellDominatedByQuarter embeddedBridge
     ; gapDominatedByThirtySecond =
@@ -290,11 +315,17 @@ constructiveRealSpineDerivedOutputRelocationTheorem
 fourFormerRawBridgeFieldsDerived : Bool
 fourFormerRawBridgeFieldsDerived = true
 
+factorNonnegativityDerived : Bool
+factorNonnegativityDerived = true
+
 nativePowerConstantsPinnedToRationals : Bool
 nativePowerConstantsPinnedToRationals = true
 
 nativePowerZeroOneAndScalingPinned : Bool
 nativePowerZeroOneAndScalingPinned = true
+
+nativeOutputDecayFormulaPinned : Bool
+nativeOutputDecayFormulaPinned = true
 
 baseTwoPowerEnvelopeDerivationIntegrated : Bool
 baseTwoPowerEnvelopeDerivationIntegrated = true
@@ -318,6 +349,10 @@ fourFormerRawBridgeFieldsDerivedIsTrue :
   fourFormerRawBridgeFieldsDerived ≡ true
 fourFormerRawBridgeFieldsDerivedIsTrue = refl
 
+factorNonnegativityDerivedIsTrue :
+  factorNonnegativityDerived ≡ true
+factorNonnegativityDerivedIsTrue = refl
+
 nativePowerConstantsPinnedToRationalsIsTrue :
   nativePowerConstantsPinnedToRationals ≡ true
 nativePowerConstantsPinnedToRationalsIsTrue = refl
@@ -325,6 +360,10 @@ nativePowerConstantsPinnedToRationalsIsTrue = refl
 nativePowerZeroOneAndScalingPinnedIsTrue :
   nativePowerZeroOneAndScalingPinned ≡ true
 nativePowerZeroOneAndScalingPinnedIsTrue = refl
+
+nativeOutputDecayFormulaPinnedIsTrue :
+  nativeOutputDecayFormulaPinned ≡ true
+nativeOutputDecayFormulaPinnedIsTrue = refl
 
 baseTwoPowerEnvelopeDerivationIntegratedIsTrue :
   baseTwoPowerEnvelopeDerivationIntegrated ≡ true
