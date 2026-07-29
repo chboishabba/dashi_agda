@@ -1,0 +1,147 @@
+module DASHI.Physics.YangMills.BalabanClayGate4StrongBFSParentCertificateExact where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_+_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+------------------------------------------------------------------------
+-- Algorithmic provenance.
+--
+-- Edward F. Moore,
+-- "The Shortest Path Through a Maze", Proceedings of the International
+-- Symposium on the Theory of Switching, Part II (1959), 285--292.
+-- No DOI recorded.
+--
+-- This is a proof-bearing replacement for older Set-valued BFS labels.  Once a
+-- concrete distance and parent map satisfy the previous-layer equation, parent
+-- chains strictly descend in distance and therefore cannot contain a nonempty
+-- cycle.  No choice principle or graph-analysis theorem is imported.
+------------------------------------------------------------------------
+
+data Empty : Set where
+
+Not : Set → Set
+Not proposition = proposition → Empty
+
+sucInjective : ∀ {left right} → suc left ≡ suc right → left ≡ right
+sucInjective refl = refl
+
+plusSucShift : ∀ left right → left + suc right ≡ suc left + right
+plusSucShift zero right = refl
+plusSucShift (suc left) right = cong suc (plusSucShift left right)
+
+noPositiveAddFixedPoint : ∀ positiveTail value →
+  value ≡ suc positiveTail + value → Empty
+noPositiveAddFixedPoint positiveTail zero ()
+noPositiveAddFixedPoint positiveTail (suc value) equality =
+  noPositiveAddFixedPoint positiveTail value
+    (trans
+      (sucInjective equality)
+      (plusSucShift positiveTail value))
+
+record StrongBFSParentCertificate (Vertex : Set) : Set₁ where
+  field
+    root : Vertex
+    InGraph : Vertex → Set
+    Adjacent : Vertex → Vertex → Set
+    IsNonRoot : Vertex → Set
+
+    distance : Vertex → Nat
+    parent : Vertex → Vertex
+
+    rootInGraph : InGraph root
+    rootDistanceZero : distance root ≡ zero
+
+    parentInGraph : ∀ vertex → IsNonRoot vertex → InGraph (parent vertex)
+    parentAdjacent : ∀ vertex → IsNonRoot vertex →
+      Adjacent (parent vertex) vertex
+
+    -- The parent lies in the immediately preceding BFS layer.
+    parentDistanceStep : ∀ vertex → IsNonRoot vertex →
+      suc (distance (parent vertex)) ≡ distance vertex
+
+open StrongBFSParentCertificate public
+
+data ParentChain
+    {Vertex : Set}
+    (certificate : StrongBFSParentCertificate Vertex) :
+    Vertex → Vertex → Nat → Set where
+  chainZero : ∀ {vertex} → ParentChain certificate vertex vertex zero
+  chainStep : ∀ {vertex terminal length} →
+    IsNonRoot certificate vertex →
+    ParentChain certificate (parent certificate vertex) terminal length →
+    ParentChain certificate vertex terminal (suc length)
+
+parentChainDistanceExact :
+  ∀ {Vertex}
+    {certificate : StrongBFSParentCertificate Vertex}
+    {start terminal length} →
+  ParentChain certificate start terminal length →
+  distance certificate start
+  ≡ length + distance certificate terminal
+parentChainDistanceExact chainZero = refl
+parentChainDistanceExact {certificate = certificate}
+  (chainStep {vertex = vertex} nonRoot rest) =
+  trans
+    (sym (parentDistanceStep certificate vertex nonRoot))
+    (cong suc (parentChainDistanceExact rest))
+
+nonemptyParentChainCannotCycle :
+  ∀ {Vertex}
+    {certificate : StrongBFSParentCertificate Vertex}
+    {vertex length} →
+  ParentChain certificate vertex vertex (suc length) →
+  Empty
+nonemptyParentChainCannotCycle {certificate = certificate} {vertex = vertex}
+  {length = length} chain =
+  noPositiveAddFixedPoint length (distance certificate vertex)
+    (parentChainDistanceExact chain)
+
+parentCannotEqualChild :
+  ∀ {Vertex}
+    (certificate : StrongBFSParentCertificate Vertex)
+    vertex → IsNonRoot certificate vertex →
+  Not (parent certificate vertex ≡ vertex)
+parentCannotEqualChild certificate vertex nonRoot equality =
+  nonemptyParentChainCannotCycle
+    (substituteChain equality (chainStep nonRoot chainZero))
+  where
+  substituteChain :
+    parent certificate vertex ≡ vertex →
+    ParentChain certificate vertex (parent certificate vertex) (suc zero) →
+    ParentChain certificate vertex vertex (suc zero)
+  substituteChain refl chain = chain
+
+record StrongBFSShortestPathCertificate
+    {Vertex : Set}
+    (parentCertificate : StrongBFSParentCertificate Vertex) : Set₁ where
+  field
+    Path : Vertex → Vertex → Nat → Set
+
+    parentPathExists : ∀ vertex → IsNonRoot parentCertificate vertex →
+      Path (root parentCertificate) vertex
+        (distance parentCertificate vertex)
+
+    distanceLowerBoundForEveryPath : ∀ {vertex pathLength} →
+      Path (root parentCertificate) vertex pathLength →
+      Set
+
+open StrongBFSShortestPathCertificate public
+
+strongBFSParentCertificateLevel : ProofLevel
+strongBFSParentCertificateLevel = machineChecked
+
+parentChainDistanceLevel : ProofLevel
+parentChainDistanceLevel = machineChecked
+
+parentAcyclicityFromDistanceDescentLevel : ProofLevel
+parentAcyclicityFromDistanceDescentLevel = machineChecked
+
+physicalPeriodicDistanceStepInputsLevel : ProofLevel
+physicalPeriodicDistanceStepInputsLevel = conditional
+
+physicalPeriodicShortestPathMinimalityInputsLevel : ProofLevel
+physicalPeriodicShortestPathMinimalityInputsLevel = conditional
