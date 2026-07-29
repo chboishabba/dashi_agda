@@ -9,7 +9,7 @@ open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Empty; Not; Dec; yes; no; _∈_; here; there)
+  using (Empty; Dec; yes; no; _∈_; here; there)
 
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact as Collar
 
@@ -48,7 +48,15 @@ anyFromMembership :
   ∀ {A : Set} {P : A → Set} {value values} →
   value ∈ values → P value → Any P values
 anyFromMembership here proof = anyHere proof
-anyFromMembership (there member) proof = anyThere (anyFromMembership member proof)
+anyFromMembership (there member) proof =
+  anyThere (anyFromMembership member proof)
+
+anyWitnessMembership :
+  ∀ {A : Set} {P : A → Set} {values} →
+  Any P values → Σ A (λ value → value ∈ values × P value)
+anyWitnessMembership (anyHere proof) = _ , (here , proof)
+anyWitnessMembership (anyThere rest) with anyWitnessMembership rest
+... | value , (member , proof) = value , (there member , proof)
 
 decideAny :
   ∀ {A : Set} {P : A → Set} →
@@ -75,53 +83,49 @@ record StepCandidate {Block : Set}
 
 open StepCandidate public
 
-stepCandidateDecidable :
-  ∀ {Block} (dataSet : FiniteReachCarrier Block)
-    radius start finish middle →
-  Dec (StepCandidate dataSet radius start finish middle)
-stepCandidateDecidable dataSet radius start finish middle
-  with adjacentDecidable dataSet start middle
-... | no notAdjacent = no (λ value → notAdjacent (adjacent value))
-... | yes adjacentProof
-  with reachWithinDecidable dataSet radius middle finish
-... | yes reachProof = yes (candidate adjacentProof reachProof)
-... | no notReach = no (λ value → notReach (reaches value))
+mutual
+  reachWithinDecidable :
+    ∀ {Block} (dataSet : FiniteReachCarrier Block) →
+    (radius : Nat) (start finish : Block) →
+    Dec (Collar.ReachWithin (Adjacent dataSet) radius start finish)
+  reachWithinDecidable dataSet zero start finish
+    with equalDecidable dataSet start finish
+  ... | yes refl = yes Collar.stay
+  ... | no notEqual = no reject
+    where
+    reject : Collar.ReachWithin (Adjacent dataSet) zero start finish → Empty
+    reject Collar.stay = notEqual refl
+  reachWithinDecidable dataSet (suc radius) start finish
+    with equalDecidable dataSet start finish
+  ... | yes refl = yes Collar.stay
+  ... | no notEqual
+    with decideAny
+      (stepCandidateDecidable dataSet radius start finish)
+      (allBlocks dataSet)
+  ... | yes witness with anyWitnessMembership witness
+  ... | middle , (member , value) =
+      yes (Collar.step (adjacent value) (reaches value))
+  ... | no noStep = no reject
+    where
+    reject :
+      Collar.ReachWithin (Adjacent dataSet) (suc radius) start finish → Empty
+    reject Collar.stay = notEqual refl
+    reject (Collar.step {next = middle} adjacentProof reachProof) =
+      noStep
+        (anyFromMembership (allBlocksComplete dataSet middle)
+          (candidate adjacentProof reachProof))
 
-reachWithinDecidable :
-  ∀ {Block} (dataSet : FiniteReachCarrier Block) →
-  (radius : Nat) (start finish : Block) →
-  Dec (Collar.ReachWithin (Adjacent dataSet) radius start finish)
-reachWithinDecidable dataSet zero start finish
-  with equalDecidable dataSet start finish
-... | yes refl = yes Collar.stay
-... | no notEqual = no reject
-  where
-  reject : Collar.ReachWithin (Adjacent dataSet) zero start finish → Empty
-  reject Collar.stay = notEqual refl
-reachWithinDecidable dataSet (suc radius) start finish
-  with equalDecidable dataSet start finish
-... | yes refl = yes Collar.stay
-... | no notEqual
-  with decideAny
-    (stepCandidateDecidable dataSet radius start finish)
-    (allBlocks dataSet)
-... | yes witness = yes (assemble witness)
-  where
-  assemble :
-    Any (StepCandidate dataSet radius start finish) (allBlocks dataSet) →
-    Collar.ReachWithin (Adjacent dataSet) (suc radius) start finish
-  assemble (anyHere value) =
-    Collar.step (adjacent value) (reaches value)
-  assemble (anyThere rest) = assemble rest
-... | no noStep = no reject
-  where
-  reject :
-    Collar.ReachWithin (Adjacent dataSet) (suc radius) start finish → Empty
-  reject Collar.stay = notEqual refl
-  reject (Collar.step {next = middle} adjacentProof reachProof) =
-    noStep
-      (anyFromMembership (allBlocksComplete dataSet middle)
-        (candidate adjacentProof reachProof))
+  stepCandidateDecidable :
+    ∀ {Block} (dataSet : FiniteReachCarrier Block)
+      radius start finish middle →
+    Dec (StepCandidate dataSet radius start finish middle)
+  stepCandidateDecidable dataSet radius start finish middle
+    with adjacentDecidable dataSet start middle
+  ... | no notAdjacent = no (λ value → notAdjacent (adjacent value))
+  ... | yes adjacentProof
+    with reachWithinDecidable dataSet radius middle finish
+  ... | yes reachProof = yes (candidate adjacentProof reachProof)
+  ... | no notReach = no (λ value → notReach (reaches value))
 
 ------------------------------------------------------------------------
 -- Exact filtering and finite reach enumeration.
@@ -140,23 +144,23 @@ filterDecSound :
     (decide : ∀ value → Dec (P value)) {value values} →
   value ∈ filterDec decide values → P value
 filterDecSound decide {values = []} ()
-filterDecSound decide {value = value} {values = head ∷ values}
-  with decide head
-... | yes proof = λ where
-    here → proof
-    (there member) → filterDecSound decide member
-... | no notProof = filterDecSound decide
+filterDecSound decide {values = head ∷ values} member with decide head
+... | yes proof with member
+... | here = proof
+... | there tailMember = filterDecSound decide tailMember
+... | no notProof = filterDecSound decide member
 
 filterDecComplete :
   ∀ {A : Set} {P : A → Set}
     (decide : ∀ value → Dec (P value)) {value values} →
   value ∈ values → P value → value ∈ filterDec decide values
 filterDecComplete decide {values = []} () proof
-filterDecComplete decide {value = value} {values = head ∷ values}
-  member proof with decide head
+filterDecComplete decide {values = head ∷ values} member proof
+  with decide head
 ... | yes selected with member
 ... | here = here
-... | there tailMember = there (filterDecComplete decide tailMember proof)
+... | there tailMember =
+    there (filterDecComplete decide tailMember proof)
 ... | no notSelected with member
 ... | here = notSelected proof
 ... | there tailMember = filterDecComplete decide tailMember proof
@@ -198,15 +202,6 @@ record FiniteRegionEnumeration (Block : Set) : Set₁ where
 
 open FiniteRegionEnumeration public
 
-concatMap : ∀ {A B : Set} → (A → List B) → List A → List B
-concatMap function [] = []
-concatMap function (value ∷ values) =
-  function value ++ concatMap function values
-  where
-  _++_ : List B → List B → List B
-  [] ++ right = right
-  (left ∷ rest) ++ right = left ∷ (rest ++ right)
-
 record FinitePredicate (A : Set) (P : A → Set) : Set₁ where
   field
     elements : List A
@@ -214,26 +209,6 @@ record FinitePredicate (A : Set) (P : A → Set) : Set₁ where
     complete : ∀ value → P value → value ∈ elements
 
 open FinitePredicate public
-
-record EnlargedEnumeration
-    {Block : Set}
-    (dataSet : FiniteReachCarrier Block)
-    (regionData : FiniteRegionEnumeration Block)
-    (radius : Nat) : Set₁ where
-  field
-    enumeration : FinitePredicate Block
-      (Collar.Enlarged
-        (record
-          { Collar.EnlargementData.Adjacent = Adjacent dataSet
-          ; Collar.EnlargementData.adjacentSymmetric = λ adjacent → adjacent
-          })
-        (region regionData) radius)
-
-------------------------------------------------------------------------
--- A direct finite construction using the all-block enumeration.  This avoids
--- duplicate-sensitive concatenation: enumerate every torus block and filter by
--- the decidable enlarged predicate.
-------------------------------------------------------------------------
 
 record SymmetricFiniteReachCarrier (Block : Set) : Set₁ where
   field
@@ -250,6 +225,14 @@ enlargementData carrier = record
   ; Collar.EnlargementData.adjacentSymmetric = adjacentSymmetric carrier
   }
 
+seedReachDecidable :
+  ∀ {Block} (carrier : SymmetricFiniteReachCarrier Block)
+    radius block seed →
+  Dec (Collar.ReachWithin
+    (Adjacent (finiteReach carrier)) radius seed block)
+seedReachDecidable carrier radius block seed =
+  reachWithinDecidable (finiteReach carrier) radius seed block
+
 enlargedDecidable :
   ∀ {Block} (carrier : SymmetricFiniteReachCarrier Block)
     (regionData : FiniteRegionEnumeration Block)
@@ -257,31 +240,17 @@ enlargedDecidable :
   Dec (Collar.Enlarged (enlargementData carrier)
     (region regionData) radius block)
 enlargedDecidable carrier regionData radius block
-  with decideAny decideSeed (regionBlocks regionData)
-... | yes witness = yes (assemble witness)
-  where
-  decideSeed : ∀ seed → Dec
-    (Collar.ReachWithin (Adjacent (finiteReach carrier)) radius seed block)
-  decideSeed seed = reachWithinDecidable (finiteReach carrier) radius seed block
-
-  assemble :
-    Any (λ seed → Collar.ReachWithin
-      (Adjacent (finiteReach carrier)) radius seed block)
-      (regionBlocks regionData) →
-    Collar.Enlarged (enlargementData carrier) (region regionData) radius block
-  assemble (anyHere reach) =
-    _ , (regionSound regionData here , reach)
-  assemble (anyThere rest) with assemble rest
-  ... | seed , (member , reach) =
-    seed , (member , reach)
+  with decideAny
+    (seedReachDecidable carrier radius block)
+    (regionBlocks regionData)
+... | yes witness with anyWitnessMembership witness
+... | seed , (member , reach) =
+    yes (seed , (regionSound regionData member , reach))
 ... | no noSeed = no reject
   where
-  decideSeed : ∀ seed → Dec
-    (Collar.ReachWithin (Adjacent (finiteReach carrier)) radius seed block)
-  decideSeed seed = reachWithinDecidable (finiteReach carrier) radius seed block
-
   reject :
-    Collar.Enlarged (enlargementData carrier) (region regionData) radius block → Empty
+    Collar.Enlarged (enlargementData carrier)
+      (region regionData) radius block → Empty
   reject (seed , (member , reach)) =
     noSeed
       (anyFromMembership (regionComplete regionData seed member) reach)
