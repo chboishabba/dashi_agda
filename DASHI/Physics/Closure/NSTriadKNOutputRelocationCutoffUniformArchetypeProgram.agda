@@ -10,7 +10,7 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- symbolique et propagation des singularites pour les equations aux derivees
 -- partielles non lineaires"; "Fourier Analysis and Nonlinear Partial
 -- Differential Equations"; "Constructive Analysis"; "Constructive Analysis
--- in the Agda Proof Assistant"; and "Final derived cutoff-uniform
+-- in the Agda Proof Assistant"; and "Semantically pinned cutoff-uniform
 -- output-relocation archetype program".
 -- Venue/year: Journal of Functional Analysis 187 (2001), 1--24; Annales
 -- scientifiques de l'Ecole Normale Superieure 14 (1981); Springer, 1985 and
@@ -18,16 +18,14 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- DOI: 10.1006/jfan.2001.3804; 10.24033/asens.1404;
 -- 10.1007/978-3-642-16830-7; 10.1007/978-3-642-61667-9;
 -- 10.48550/arXiv.2205.08354; the repository program has no DOI.
--- Uses: unit auxiliary weights, exact rational geometric summation with
--- constant 128/93, the canonical positive kernel, all three normalized shell
--- Schur conditions, finite signed domination, the ordered rational-embedding
--- theorem, the native ConstructiveRealSpine adapter, base-two power-order
--- derivation and absolute-magnitude coefficient derivation.
--- Relationship: the four former raw bridge fields are now theorem outputs.
--- The remaining concrete inputs are coherent native-spine ordered/rational
--- data, base-two power and integer-anchor data, the endpoint decay inequalities,
--- absolute-value order laws, factor nonnegativity and one literal absolute-
--- coefficient estimate.  The concrete operator theorem remains fail-closed.
+-- Uses: exact rational geometric summation with constant 128/93, the positive
+-- kernel, all three unit-weight Schur conditions, finite signed domination,
+-- the unital native ConstructiveRealSpine adapter, semantically pinned base-two
+-- power/scaling data and the absolute-magnitude coefficient derivation.
+-- Relationship: the four former raw bridge fields are theorem outputs.  The
+-- native embedding preserves rational one; two/five are embedded integers;
+-- twoPow is pinned at zero/one; and natural shell scaling is repeated addition.
+-- Concrete inhabitants and the final operator theorem remain fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -99,14 +97,24 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       Embedded.allDownstreamOfEmbeddedShellBridgeClosed ≡ true
     nativeSpineAdapterSpecified :
       SpineAdapter.nativeConstructiveRealSpineAdapterSpecified ≡ true
+    nativeRationalEmbeddingRequiredUnital :
+      SpineAdapter.nativeRationalEmbeddingRequiredUnital ≡ true
     nativeSpineClosureTheoremClosed :
       SpineAdapter.nativeSpineToEmbeddedClosureTheoremClosed ≡ true
+    baseTwoPowerMeaningConstrained :
+      PowerBridge.outputRelocationBaseTwoPowerMeaningConstrained ≡ true
+    naturalScalingRecursivelyPinned :
+      PowerBridge.outputRelocationNaturalScalingRecursivelyPinned ≡ true
     twoPowerDominationTheoremsClosed :
       PowerBridge.outputRelocationTwoPowerDominationTheoremsClosed ≡ true
     absoluteMagnitudeToTwoSidedClosed :
       Absolute.absoluteMagnitudeToTwoSidedDominationClosed ≡ true
     fourFormerRawFieldsDerived :
       Derived.fourFormerRawBridgeFieldsDerived ≡ true
+    nativePowerConstantsPinnedToRationals :
+      Derived.nativePowerConstantsPinnedToRationals ≡ true
+    nativePowerZeroOneAndScalingPinned :
+      Derived.nativePowerZeroOneAndScalingPinned ≡ true
     nativeSpineDerivedClosureTheoremClosed :
       Derived.nativeSpineDerivedClosureTheoremClosed ≡ true
     integerPowersAloneInsufficientForHsComparison :
@@ -135,10 +143,15 @@ outputRelocationArchetypeProgramReceipt = receipt
   Embedded.orderedRationalEmbeddingClosureTheoremClosedIsTrue
   Embedded.allDownstreamOfEmbeddedShellBridgeClosedIsTrue
   SpineAdapter.nativeConstructiveRealSpineAdapterSpecifiedIsTrue
+  SpineAdapter.nativeRationalEmbeddingRequiredUnitalIsTrue
   SpineAdapter.nativeSpineToEmbeddedClosureTheoremClosedIsTrue
+  PowerBridge.outputRelocationBaseTwoPowerMeaningConstrainedIsTrue
+  PowerBridge.outputRelocationNaturalScalingRecursivelyPinnedIsTrue
   PowerBridge.outputRelocationTwoPowerDominationTheoremsClosedIsTrue
   Absolute.absoluteMagnitudeToTwoSidedDominationClosedIsTrue
   Derived.fourFormerRawBridgeFieldsDerivedIsTrue
+  Derived.nativePowerConstantsPinnedToRationalsIsTrue
+  Derived.nativePowerZeroOneAndScalingPinnedIsTrue
   Derived.nativeSpineDerivedClosureTheoremClosedIsTrue
   PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparisonIsFalse
   SpineAdapter.concreteSpineEnvelopeCapabilityClosedIsFalse
@@ -166,6 +179,9 @@ outputRelocationOrderedEmbeddingClosureTheoremClosed = true
 outputRelocationNativeSpineClosureTheoremClosed : Bool
 outputRelocationNativeSpineClosureTheoremClosed = true
 
+outputRelocationNativeSemanticsPinned : Bool
+outputRelocationNativeSemanticsPinned = true
+
 outputRelocationFourFormerRawBridgeFieldsDerived : Bool
 outputRelocationFourFormerRawBridgeFieldsDerived = true
 
@@ -181,8 +197,8 @@ outputRelocationConcreteNativeBaseTwoPowerCapabilityClosed = false
 outputRelocationConcreteLiteralAbsoluteCoefficientEstimateClosed : Bool
 outputRelocationConcreteLiteralAbsoluteCoefficientEstimateClosed = false
 
--- Compatibility status: the old monolithic shell-data inhabitant is not
--- supplied directly; it is generated by Derived when the smaller inputs exist.
+-- Compatibility status: the old monolithic shell-data inhabitant is generated
+-- by Derived when the smaller concrete inputs exist.
 outputRelocationConcreteNativeSpineShellDataClosed : Bool
 outputRelocationConcreteNativeSpineShellDataClosed = false
 
@@ -222,6 +238,10 @@ outputRelocationOrderedEmbeddingClosureTheoremClosedIsTrue = refl
 outputRelocationNativeSpineClosureTheoremClosedIsTrue :
   outputRelocationNativeSpineClosureTheoremClosed ≡ true
 outputRelocationNativeSpineClosureTheoremClosedIsTrue = refl
+
+outputRelocationNativeSemanticsPinnedIsTrue :
+  outputRelocationNativeSemanticsPinned ≡ true
+outputRelocationNativeSemanticsPinnedIsTrue = refl
 
 outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue :
   outputRelocationFourFormerRawBridgeFieldsDerived ≡ true
