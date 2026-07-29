@@ -8,7 +8,7 @@ module DASHI.Physics.Closure.NSTriadKNStage3OutputRelocationExperimentIntegratio
 -- Amandus Schwarz; Errett Bishop; Douglas Bridges; Zachary Murray; Viktor
 -- Csimma; Agda standard-library contributors; DASHI repository contributors.
 -- Title: "Stage-3 output-relocation falsification, unit-weight recovery and
--- derived native-spine shell-majorant experiment integration".
+-- semantically pinned native-spine shell-majorant experiment integration".
 -- Venue/year: Mathematics 14 (2026), article 1410; Annales scientifiques de
 -- l'Ecole Normale Superieure 14 (1981); Fourier Analysis and Nonlinear Partial
 -- Differential Equations, Springer, 2011; Communications on Pure and Applied
@@ -21,17 +21,16 @@ module DASHI.Physics.Closure.NSTriadKNStage3OutputRelocationExperimentIntegratio
 -- 10.1006/jfan.2001.3804; 10.48550/arXiv.1507.00290;
 -- 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354; the integration
 -- receipt has no DOI.
--- Uses: the comparator source-status audit, the output-relocation vertical
--- slice, exact primal/dual affine classification, unit weights, exact rational
--- geometric sums, the positive kernel, finite signed domination, base-two
--- exponent-order derivation, absolute-coefficient derivation and native-spine
--- closure composition.
+-- Uses: the comparator source-status audit, exact affine classification, unit
+-- weights, exact rational geometric sums, the positive kernel, finite signed
+-- domination, semantically pinned base-two exponent-order derivation, exact
+-- Sobolev decay formulas, derived factor positivity, absolute-coefficient
+-- derivation and native-spine closure composition.
 -- Relationship: the source-style affine construction is infeasible and unit
--- weights close symbolic Check A.  The two shell comparisons and both signed
--- inequalities are now theorem outputs.  Remaining inputs are the concrete
--- native ordered/rational capability, coherent base-two power anchors, decay
--- data, absolute-order laws, factor positivity and one literal absolute-
--- coefficient estimate.
+-- weights close symbolic Check A.  The two shell comparisons, both factor-
+-- positivity facts and both signed inequalities are theorem outputs.  The
+-- concrete frontier is the native real/order/power capability data and one
+-- literal absolute-coefficient estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -94,12 +93,20 @@ record OutputRelocationExperimentReceipt : Set where
     allDownstreamOfShellBridgeClosed :
       Conditional.outputRelocationAllDownstreamOfShellBridgeClosed ≡ true
 
+    baseTwoPowerMeaningConstrained :
+      PowerBridge.outputRelocationBaseTwoPowerMeaningConstrained ≡ true
+    naturalScalingRecursivelyPinned :
+      PowerBridge.outputRelocationNaturalScalingRecursivelyPinned ≡ true
+    factorNonnegativityDerived :
+      PowerBridge.outputRelocationFactorNonnegativityDerived ≡ true
     twoPowerDominationTheoremsClosed :
       PowerBridge.outputRelocationTwoPowerDominationTheoremsClosed ≡ true
     absoluteMagnitudeToTwoSidedClosed :
       Absolute.absoluteMagnitudeToTwoSidedDominationClosed ≡ true
     fourFormerRawBridgeFieldsDerived :
       Derived.fourFormerRawBridgeFieldsDerived ≡ true
+    nativeOutputDecayFormulaPinned :
+      Derived.nativeOutputDecayFormulaPinned ≡ true
     nativeSpineDerivedClosureTheoremClosed :
       Derived.nativeSpineDerivedClosureTheoremClosed ≡ true
 
@@ -132,9 +139,13 @@ outputRelocationExperimentReceipt = receipt
   ShellSchur.outputRelocationThreeUnitWeightShellSchurConditionsClosedIsTrue
   Signed.finiteTwoSidedTriangleDominationClosedIsTrue
   Conditional.outputRelocationAllDownstreamOfShellBridgeClosedIsTrue
+  PowerBridge.outputRelocationBaseTwoPowerMeaningConstrainedIsTrue
+  PowerBridge.outputRelocationNaturalScalingRecursivelyPinnedIsTrue
+  PowerBridge.outputRelocationFactorNonnegativityDerivedIsTrue
   PowerBridge.outputRelocationTwoPowerDominationTheoremsClosedIsTrue
   Absolute.absoluteMagnitudeToTwoSidedDominationClosedIsTrue
   Derived.fourFormerRawBridgeFieldsDerivedIsTrue
+  Derived.nativeOutputDecayFormulaPinnedIsTrue
   Derived.nativeSpineDerivedClosureTheoremClosedIsTrue
   Derived.concreteNativeBaseTwoPowerCapabilityClosedIsFalse
   Derived.concreteLiteralAbsoluteCoefficientEstimateClosedIsFalse
@@ -154,6 +165,9 @@ unitWeightSymbolicCheckARecovered = true
 
 outputRelocationFiniteCutoffMajorantProgramClosed : Bool
 outputRelocationFiniteCutoffMajorantProgramClosed = true
+
+outputRelocationDecayFormulaAndFactorPositivityDerived : Bool
+outputRelocationDecayFormulaAndFactorPositivityDerived = true
 
 outputRelocationFourFormerRawBridgeFieldsDerived : Bool
 outputRelocationFourFormerRawBridgeFieldsDerived = true
@@ -190,6 +204,10 @@ unitWeightSymbolicCheckARecoveredIsTrue = refl
 outputRelocationFiniteCutoffMajorantProgramClosedIsTrue :
   outputRelocationFiniteCutoffMajorantProgramClosed ≡ true
 outputRelocationFiniteCutoffMajorantProgramClosedIsTrue = refl
+
+outputRelocationDecayFormulaAndFactorPositivityDerivedIsTrue :
+  outputRelocationDecayFormulaAndFactorPositivityDerived ≡ true
+outputRelocationDecayFormulaAndFactorPositivityDerivedIsTrue = refl
 
 outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue :
   outputRelocationFourFormerRawBridgeFieldsDerived ≡ true
