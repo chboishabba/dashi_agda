@@ -26,10 +26,23 @@ open import Data.Rational.Base using (ℚ; _+_; -_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
-  using (cong; subst; sym)
+  using (cong; subst)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Majorant
+
+sumToCong : ∀ left right cutoff →
+  (∀ index → left index ≡ right index) →
+  Majorant.sumTo left cutoff ≡ Majorant.sumTo right cutoff
+sumToCong left right zero pointwise = pointwise zero
+sumToCong left right (suc cutoff) pointwise =
+  cong₂ _+_
+    (pointwise (suc cutoff))
+    (sumToCong left right cutoff pointwise)
+  where
+  cong₂ : ∀ {a b c d : ℚ} →
+    a ≡ b → c ≡ d → a + c ≡ b + d
+  cong₂ refl refl = refl
 
 sumToNeg : ∀ values cutoff →
   Majorant.sumTo (λ index → - values index) cutoff
@@ -61,19 +74,13 @@ rectangleSumNeg kernel lowCutoff gapCutoff =
   begin
     Majorant.rectangleSum
       (λ low gap → - kernel low gap) lowCutoff gapCutoff
-  ≡⟨ Majorant.sumToMonotone
+  ≡⟨ sumToCong
        (λ low →
          Majorant.rowSum (λ left gap → - kernel left gap)
            low gapCutoff)
        (λ low → - Majorant.rowSum kernel low gapCutoff)
        lowCutoff
-       (λ low →
-         subst
-           (λ value →
-             Majorant.rowSum (λ left gap → - kernel left gap)
-               low gapCutoff ≤ value)
-           (rowSumNeg kernel low gapCutoff)
-           ℚₚ.≤-refl) ⟩
+       (λ low → rowSumNeg kernel low gapCutoff) ⟩
     Majorant.sumTo
       (λ low → - Majorant.rowSum kernel low gapCutoff)
       lowCutoff
@@ -82,15 +89,6 @@ rectangleSumNeg kernel lowCutoff gapCutoff =
        lowCutoff ⟩
     - Majorant.rectangleSum kernel lowCutoff gapCutoff
   ∎
-
--- The preceding equality proof deliberately uses monotonicity only to bridge
--- pointwise definitional equality.  The following direct equality lemma is the
--- reusable transport surface.
-rectangleSumNegMeaning : ∀ kernel lowCutoff gapCutoff →
-  Majorant.rectangleSum
-    (λ low gap → - kernel low gap) lowCutoff gapCutoff
-  ≡ - Majorant.rectangleSum kernel lowCutoff gapCutoff
-rectangleSumNegMeaning = rectangleSumNeg
 
 rectangleSumMonotone : ∀ left right lowCutoff gapCutoff →
   (∀ low gap → left low gap ≤ right low gap) →
@@ -143,7 +141,7 @@ signedRectangleLower S lowCutoff gapCutoff =
   subst
     (λ lower →
       lower ≤ Majorant.rectangleSum (signedKernel S) lowCutoff gapCutoff)
-    (rectangleSumNegMeaning
+    (rectangleSumNeg
       (positiveMajorant S) lowCutoff gapCutoff)
     pointwiseLower
 
