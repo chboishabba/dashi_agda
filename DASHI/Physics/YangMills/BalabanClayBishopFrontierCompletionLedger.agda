@@ -3,9 +3,12 @@ module DASHI.Physics.YangMills.BalabanClayBishopFrontierCompletionLedger where
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Analysis.ConstructedRealBackendSpineExact as BackendSpine
+import DASHI.Analysis.ConstructiveRealCapabilityHierarchyExact as CapabilityHierarchy
+import DASHI.Analysis.ConstructiveRealCategoricityExact as Categoricity
 import DASHI.Analysis.BishopConstructedRealBackendExact as BishopBackend
 import DASHI.Analysis.FastCauchyConstructedRealBackendExact as FastBackend
 import DASHI.Analysis.BishopFastCauchyRealEquivalenceExact as ConcreteEquivalence
+import DASHI.Analysis.BishopFastCauchyCategoricityInstanceExact as CategoricityInstance
 import DASHI.Analysis.BishopConstructiveSeriesAdapterExact as SeriesAdapter
 import DASHI.Analysis.CanonicalDASHIRealBackendExact as CanonicalBackend
 import DASHI.Analysis.CubicalHoTTRealBackendBoundary as HoTTBoundary
@@ -36,6 +39,8 @@ import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as Mark
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalRootedShellInjectionExact as ShellInjection
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact as PhysicalT5
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalTailMomentMeasureClosureExact as T5Closure
+import DASHI.Physics.YangMills.BalabanClayT5LpUniformIntegrabilityExact as LpUI
+import DASHI.Physics.YangMills.BalabanClayLegacyGaugeRGMeasureReuseExact as LegacyReuse
 
 ------------------------------------------------------------------------
 -- I. Newly internalized constructive and finite data.
@@ -43,6 +48,20 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalTailMomentMeasureClosureExac
 
 setoidBackendSpineLevel = BackendSpine.setoidBackendSpineLevel
 legacyQuotientAdapterLevel = BackendSpine.legacyQuotientAdapterLevel
+constructiveOrderedFieldCapabilityLevel =
+  CapabilityHierarchy.constructiveOrderedFieldCapabilityLevel
+rationalDensityAndMajorizationSeparationLevel =
+  CapabilityHierarchy.rationalDensityAndMajorizationSeparationLevel
+effectiveConvergenceCapabilityLevel =
+  CapabilityHierarchy.effectiveConvergenceCapabilityLevel
+minimalHomomorphismDefinitionLevel =
+  CapabilityHierarchy.minimalHomomorphismDefinitionLevel
+canonicalMapDefinitionLevel = Categoricity.canonicalMapDefinitionLevel
+categoricityAuthorityDefinitionLevel =
+  Categoricity.categoricityAuthorityDefinitionLevel
+bishopFastCauchyCategoricityAssemblyLevel =
+  CategoricityInstance.bishopFastCauchyCategoricityAssemblyLevel
+
 bishopCarrierEqualityCompletenessLevel =
   BishopBackend.bishopCarrierEqualityCompletenessLevel
 bishopBackendAssemblyLevel = BishopBackend.bishopBackendAssemblyLevel
@@ -131,6 +150,14 @@ rgRelevantCancellationReductionLevel = T5Closure.rgRelevantCancellationReduction
 markedMomentReductionLevel = T5Closure.markedMomentReductionLevel
 measureTopologySeparationLevel = T5Closure.measureTopologySeparationLevel
 
+lpHolderReductionLevel = LpUI.lpHolderReductionLevel
+powerYoungFunctionReductionLevel = LpUI.powerYoungFunctionReductionLevel
+lpToPhysicalMeasureAdapterLevel = LpUI.lpToPhysicalMeasureAdapterLevel
+lpToOSGramAdapterLevel = LpUI.lpToOSGramAdapterLevel
+gaugeReuseLevel = LegacyReuse.gaugeReuseLevel
+oneStepRGWitnessReuseLevel = LegacyReuse.oneStepRGWitnessReuseLevel
+physicalMeasureOSGramReuseLevel = LegacyReuse.physicalMeasureOSGramReuseLevel
+
 ------------------------------------------------------------------------
 -- II. Remaining analytic/model-specific inhabitants.
 ------------------------------------------------------------------------
@@ -148,6 +175,17 @@ cubicalHoTTBackendAdapterLevel = HoTTBoundary.cubicalHoTTBackendAdapterLevel
 legacyEquivalenceExistenceLevel = LegacyEquivalence.legacyEquivalenceExistenceLevel
 factorialRecurrenceReceiptLevel = BishopCoefficients.factorialRecurrenceReceiptLevel
 unnormalisedRationalCodecLevel = BishopCoefficients.unnormalisedRationalCodecLevel
+
+derivedHomomorphismLawsInputsLevel =
+  CapabilityHierarchy.derivedHomomorphismLawsInputsLevel
+canonicalHomomorphismAndUniquenessInputsLevel =
+  Categoricity.canonicalHomomorphismAndUniquenessInputsLevel
+commonCauchyCompletionPresentationInputsLevel =
+  Categoricity.commonCauchyCompletionPresentationInputsLevel
+bishopFastCauchyCommonApproximationInputsLevel =
+  CategoricityInstance.bishopFastCauchyCommonApproximationInputsLevel
+bishopFastCauchyCanonicalityAndUniquenessInputsLevel =
+  CategoricityInstance.bishopFastCauchyCanonicalityAndUniquenessInputsLevel
 
 bishopToDASHITransportInputsLevel = Bishop.bishopToDASHITransportInputsLevel
 bishopElementaryCoefficientTailInputsLevel =
@@ -208,3 +246,9 @@ physicalBoundaryWeightInputsLevel = T5Closure.physicalBoundaryWeightInputsLevel
 physicalRGIrrelevantGainInputsLevel = T5Closure.physicalRGIrrelevantGainInputsLevel
 physicalMarkedMomentInputsLevel = T5Closure.physicalMarkedMomentInputsLevel
 measureTopologyAuthorityInputsLevel = T5Closure.measureTopologyAuthorityInputsLevel
+
+physicalSelectedMomentInputsLevel = LpUI.physicalSelectedMomentInputsLevel
+physicalHolderAndUniformIntegrabilityInputsLevel =
+  LpUI.physicalHolderAndUniformIntegrabilityInputsLevel
+rgToT5RepresentationSeamLevel = LegacyReuse.rgToT5RepresentationSeamLevel
+physicalMeasureAgreementSeamLevel = LegacyReuse.physicalMeasureAgreementSeamLevel
