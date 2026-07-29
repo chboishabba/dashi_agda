@@ -124,8 +124,8 @@ lpPhysicalMeasureToGramData :
   LpPhysicalMeasureToOSGramData
     {Measure} {Observable} {Scalar} {producer} upgrade →
   Gram.PhysicalMeasureToOSGramData Measure Observable Scalar
-lpPhysicalMeasureToGramData dataSet = record
-  { convergenceData = lpPhysicalMeasureConvergenceData _
+lpPhysicalMeasureToGramData {upgrade = upgrade} dataSet = record
+  { convergenceData = lpPhysicalMeasureConvergenceData upgrade
   ; TestFamily = TestFamily dataSet
   ; decodeFamily = decodeFamily dataSet
   ; admissibleFamily = admissibleFamily dataSet
