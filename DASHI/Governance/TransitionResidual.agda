@@ -232,7 +232,8 @@ canonicalOrganisationPlusOne =
     refl
 
 stageCompressionDoesNotPromoteAuthority :
-  Stage.semanticAuthorityPromoted Stage.canonicalTransformativeJump3To14
+  Stage.CompressedStageTransition.semanticAuthorityPromoted
+    Stage.canonicalTransformativeJump3To14
   ≡ false
 stageCompressionDoesNotPromoteAuthority = refl
 
