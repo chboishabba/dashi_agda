@@ -20,3 +20,6 @@
 [submodule "ym-mass-gap-lean-verification"]
 	path = ym-mass-gap-lean-verification
 	url = https://github.com/lluiseriksson/ym-mass-gap-lean-verification
+[submodule "bishop"]
+	path = bishop
+	url = https://github.com/viktorcsimma/bishop.git
