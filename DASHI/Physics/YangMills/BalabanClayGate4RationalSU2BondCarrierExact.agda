@@ -29,72 +29,47 @@ RationalSU2SiteGauge : Nat → Set
 RationalSU2SiteGauge n =
   Bond.PeriodicSiteGauge n SU2.RationalUnitQuaternion
 
-record RationalSU2BondData (n : Nat) : Set₁ where
+record RationalSU2BondRealization (n : Nat) : Set₁ where
   field
     exactGroup : Bond.ExactLinkGroup SU2.RationalUnitQuaternion
-    links : RationalSU2BondField n
-    siteGauge : RationalSU2SiteGauge n
-    orientedCovariance :
-      let preliminary : Bond.PeriodicBondGaugeRealization
-            n SU2.RationalUnitQuaternion exactGroup
-          preliminary = record
-            { Bond.PeriodicBondGaugeRealization.bondField = links
-            ; Bond.PeriodicBondGaugeRealization.gauge = siteGauge
-            ; Bond.PeriodicBondGaugeRealization.orientedLinkGaugeCovariant =
-                λ site direction → orientedCovariance
-            }
-      in ∀ site direction →
-        Bond.transformedOrientedLink preliminary site direction
-        ≡ Bond.multiply exactGroup
-            (Bond.multiply exactGroup
-              (siteGauge site)
-              (Bond.orientedLink preliminary site direction))
-            (Bond.inverse exactGroup
-              (siteGauge (Bond.walkStep site direction)))
+    realization :
+      Bond.PeriodicBondGaugeRealization
+        n SU2.RationalUnitQuaternion exactGroup
 
-open RationalSU2BondData public
+open RationalSU2BondRealization public
 
--- The self-reference above is avoided in consumers by supplying the same
--- covariance theorem directly to this constructor.
-rationalSU2BondRealization :
-  ∀ {n} (group : Bond.ExactLinkGroup SU2.RationalUnitQuaternion)
-    (links : RationalSU2BondField n)
-    (siteGauge : RationalSU2SiteGauge n) →
-  (covariance :
-    let preliminary : Bond.PeriodicBondGaugeRealization
-          n SU2.RationalUnitQuaternion group
-        preliminary = record
-          { Bond.PeriodicBondGaugeRealization.bondField = links
-          ; Bond.PeriodicBondGaugeRealization.gauge = siteGauge
-          ; Bond.PeriodicBondGaugeRealization.orientedLinkGaugeCovariant =
-              λ site direction → covariance site direction
-          }
-    in ∀ site direction →
-      Bond.transformedOrientedLink preliminary site direction
-      ≡ Bond.multiply group
-          (Bond.multiply group
-            (siteGauge site)
-            (Bond.orientedLink preliminary site direction))
-          (Bond.inverse group
-            (siteGauge (Bond.walkStep site direction)))) →
-  Bond.PeriodicBondGaugeRealization n SU2.RationalUnitQuaternion group
-rationalSU2BondRealization group links siteGauge covariance = record
-  { Bond.PeriodicBondGaugeRealization.bondField = links
-  ; Bond.PeriodicBondGaugeRealization.gauge = siteGauge
-  ; Bond.PeriodicBondGaugeRealization.orientedLinkGaugeCovariant = covariance
-  }
+rationalSU2Links : ∀ {n} → RationalSU2BondRealization n → RationalSU2BondField n
+rationalSU2Links dataSet = Bond.bondField (realization dataSet)
+
+rationalSU2SiteGauge : ∀ {n} → RationalSU2BondRealization n → RationalSU2SiteGauge n
+rationalSU2SiteGauge dataSet = Bond.gauge (realization dataSet)
 
 rationalSU2PlaquetteHolonomy :
-  ∀ {n} {group : Bond.ExactLinkGroup SU2.RationalUnitQuaternion} →
-  Bond.PeriodicBondGaugeRealization n SU2.RationalUnitQuaternion group →
+  ∀ {n} (dataSet : RationalSU2BondRealization n) →
   Plaquette.PeriodicPlaquette n → SU2.RationalUnitQuaternion
-rationalSU2PlaquetteHolonomy = Bond.plaquetteHolonomyFromBonds
+rationalSU2PlaquetteHolonomy dataSet =
+  Bond.plaquetteHolonomyFromBonds (realization dataSet)
+
+rationalSU2PathGaugeCancellation :
+  ∀ {n} (dataSet : RationalSU2BondRealization n) site directions →
+  Bond.transformedPathHolonomy (realization dataSet) site directions
+  ≡ Bond.multiply (exactGroup dataSet)
+      (Bond.multiply (exactGroup dataSet)
+        (rationalSU2SiteGauge dataSet site)
+        (Bond.pathHolonomy (realization dataSet) site directions))
+      (Bond.inverse (exactGroup dataSet)
+        (rationalSU2SiteGauge dataSet (Bond.walk site directions)))
+rationalSU2PathGaugeCancellation dataSet =
+  Bond.pathSiteGaugeCancellation (realization dataSet)
 
 literalRationalSU2BondCarrierLevel : ProofLevel
 literalRationalSU2BondCarrierLevel = machineChecked
 
 literalRationalSU2PlaquetteHolonomyLevel : ProofLevel
 literalRationalSU2PlaquetteHolonomyLevel = machineChecked
+
+rationalSU2PathGaugeCancellationLevel : ProofLevel
+rationalSU2PathGaugeCancellationLevel = machineChecked
 
 -- Propositional equality of the proof-carrying rational-unit-quaternion record
 -- and covariance of negative-oriented links still require the exact group-law
