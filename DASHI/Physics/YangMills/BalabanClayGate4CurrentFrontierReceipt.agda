@@ -24,6 +24,7 @@ record CurrentGate4FrontierReceipt : Set where
 
     flatReferencePositiveWitnessChecked : Bool
     positiveReferenceMassChecked : Bool
+    rationalPositiveMassReciprocalChecked : Bool
     physicalReferenceNormalizationAssemblyChecked : Bool
     compensatedSixFactorTComparisonChecked : Bool
     haarDeterminantRelativeLossReuseChecked : Bool
@@ -63,6 +64,7 @@ record AuthoritativeCurrentGate4Evidence
     periodicTraversalGeometryTypechecks : Set
     flatReferencePositiveWitnessTypechecks : Set
     positiveReferenceMassTypechecks : Set
+    rationalPositiveMassReciprocalTypechecks : Set
     physicalReferenceNormalizationAssemblyTypechecks : Set
     compensatedSixFactorTComparisonTypechecks : Set
     haarDeterminantRelativeLossReuseTypechecks : Set
@@ -114,6 +116,9 @@ flatReferencePositiveWitnessTypecheckLevel = conditional
 
 positiveReferenceMassTypecheckLevel : ProofLevel
 positiveReferenceMassTypecheckLevel = conditional
+
+rationalPositiveMassReciprocalTypecheckLevel : ProofLevel
+rationalPositiveMassReciprocalTypecheckLevel = conditional
 
 physicalReferenceNormalizationAssemblyTypecheckLevel : ProofLevel
 physicalReferenceNormalizationAssemblyTypecheckLevel = conditional
