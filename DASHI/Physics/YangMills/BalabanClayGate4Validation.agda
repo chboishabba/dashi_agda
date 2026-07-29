@@ -25,5 +25,6 @@ import DASHI.Physics.YangMills.BalabanClayGate4P0GrowthAbsorptionExact
 import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryTargetAndAttachmentAuditExact
 
--- Authoritative proof-level split.
+-- Authoritative proof-level and branch-head verification surfaces.
 import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger
+import DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface
