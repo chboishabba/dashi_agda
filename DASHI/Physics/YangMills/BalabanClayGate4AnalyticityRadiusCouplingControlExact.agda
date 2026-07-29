@@ -1,6 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayGate4AnalyticityRadiusCouplingControlExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -47,12 +49,9 @@ record CauchyRadiusCouplingStep (Bound : Set) : Set₁ where
       LessEqual (totalRemainder scale)
         (add (smallFieldRemainder scale) (largeFieldRemainder scale))
 
-    -- H-Rbeta: Cauchy estimate in h = g^2 with radius and bound uniform in k.
     smallFieldCauchyBound : ∀ scale →
       LessEqual (smallFieldRemainder scale) closureBudget
 
-    -- H-P0': the large-field penalty profile is separately strong enough that
-    -- C_lf exp(-p0(g_k)) fits the chosen closure budget.
     largeFieldPenaltyBound : ∀ scale →
       LessEqual (largeFieldRemainder scale) closureBudget
 
@@ -85,9 +84,14 @@ record InverseCouplingIteration
         (addStep (inverseCoupling scale) (b0Half stepData))
         (inverseCoupling (suc scale))
 
-    addStepMonotoneLeft : ∀ common {left right} →
+    addStepMonotoneRight : ∀ common {left right} →
       LessEqual stepData left right →
-      LessEqual stepData (addStep common left) (addStep common right)
+      LessEqual stepData (addStep left common) (addStep right common)
+
+    baseIdentity :
+      addStep (inverseCoupling zero)
+        (natScale zero (b0Half stepData))
+      ≡ inverseCoupling zero
 
     iterationIdentity : ∀ scale →
       addStep
@@ -107,19 +111,20 @@ inverseCouplingGrowsLinearly :
       (inverseCoupling iteration zero)
       (natScale iteration scale (b0Half stepData)))
     (inverseCoupling iteration scale)
-inverseCouplingGrowsLinearly iteration zero =
-  reflexive _ (inverseCoupling iteration zero)
+inverseCouplingGrowsLinearly {stepData = stepData} iteration zero =
+  subst
+    (λ lower → LessEqual stepData lower (inverseCoupling iteration zero))
+    (sym (baseIdentity iteration))
+    (reflexive stepData (inverseCoupling iteration zero))
 inverseCouplingGrowsLinearly {stepData = stepData} iteration (suc scale) =
-  transportLeft
+  subst
+    (λ lower → LessEqual stepData lower
+      (inverseCoupling iteration (suc scale)))
     (iterationIdentity iteration scale)
     (transitive stepData
-      (addStepMonotoneLeft iteration (inverseCoupling iteration zero)
+      (addStepMonotoneRight iteration (b0Half stepData)
         (inverseCouplingGrowsLinearly iteration scale))
       (stepLowerBound iteration scale))
-  where
-  transportLeft : ∀ {A : Set} {R : A → A → Set} {left left' right} →
-    left ≡ left' → R left' right → R left right
-  transportLeft refl proof = proof
 
 record FiniteWeakCouplingWindow (Bound : Set) : Set₁ where
   field
