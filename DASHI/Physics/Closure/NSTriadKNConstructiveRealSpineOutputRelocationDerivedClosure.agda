@@ -1,0 +1,320 @@
+module DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDerivedClosure where
+
+------------------------------------------------------------------------
+-- PROVENANCE
+-- Authors: Errett Bishop; Douglas Bridges; Zachary Murray; Viktor Csimma;
+-- Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin; Loukas
+-- Grafakos; Rodolfo H. Torres; DASHI repository contributors.
+-- Title: "Constructive Analysis"; "Constructive Analysis in the Agda Proof
+-- Assistant"; "Calcul symbolique et propagation des singularites pour les
+-- equations aux derivees partielles non lineaires"; "Fourier Analysis and
+-- Nonlinear Partial Differential Equations"; "A Multilinear Schur Test and
+-- Multiplier Operators"; and "Derived native-spine closure of the
+-- output-relocation shell theorem".
+-- Venue/year: Springer, 1985 and 2011; arXiv, 2022; Annales scientifiques de
+-- l'Ecole Normale Superieure 14 (1981); Journal of Functional Analysis 187
+-- (2001), 1--24; DASHI formal development, 2026.
+-- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354;
+-- 10.24033/asens.1404; 10.1007/978-3-642-16830-7;
+-- 10.1006/jfan.2001.3804; the repository composition theorem has no DOI.
+-- Uses: the existing ConstructiveRealSpine adapter, the proved base-two shell
+-- comparison derivation, and the proved absolute-magnitude to two-sided-order
+-- derivation.
+-- Relationship: the four former raw fields
+-- lowShellDominatedByQuarter, gapDominatedByThirtySecond,
+-- signedCoefficientUpper and signedCoefficientLower are constructed here.
+-- A concrete caller supplies coherent base-two power/anchor data, the endpoint
+-- decay inequalities, absolute-value order laws, factor nonnegativity and one
+-- literal absolute-coefficient estimate.  No summation, Schur or triangle
+-- theorem remains after those inputs.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Analysis.ConstructiveRealSpine as Spine
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge as Power
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationAbsoluteCoefficientBridge as Absolute
+import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter as Adapter
+
+record ConstructiveRealSpineBaseTwoPowerCapability
+    (R : Spine.ConstructedOrderedCompleteReal)
+    (capability : Adapter.ConstructiveRealSpineEnvelopeCapability R) : Set₁ where
+  field
+    two five : Spine.Real R
+    twoPow : Spine.Real R → Spine.Real R
+
+    twoStrictlyAboveOne : Spine._<_ R (Spine.one R) two
+    twoPowMonotone : ∀ {left right} →
+      Spine._≤_ R left right →
+      Spine._≤_ R (twoPow left) (twoPow right)
+    twoPowAdditive : ∀ left right →
+      twoPow (Spine._+_ R left right)
+      ≡ Spine._*_ R (twoPow left) (twoPow right)
+
+    scaleByNat : Spine.Real R → Nat → Spine.Real R
+    scaleByNatMonotone : ∀ {left right} →
+      Spine._≤_ R left right →
+      ∀ shell →
+      Spine._≤_ R
+        (scaleByNat left shell)
+        (scaleByNat right shell)
+
+    negativeTwoAnchor : ∀ shell →
+      twoPow (Spine.neg R (scaleByNat two shell))
+      ≡ Adapter.rationalEmbed capability (Geo.pow Geo.quarter shell)
+    negativeFiveAnchor : ∀ gap →
+      twoPow (Spine.neg R (scaleByNat five gap))
+      ≡ Adapter.rationalEmbed capability (Geo.pow Geo.thirtySecond gap)
+
+open ConstructiveRealSpineBaseTwoPowerCapability public
+
+asBaseTwoExponentAntitoneCarrier : ∀ R capability →
+  ConstructiveRealSpineBaseTwoPowerCapability R capability →
+  Power.BaseTwoExponentAntitoneCarrier
+asBaseTwoExponentAntitoneCarrier R capability power = record
+  { Real = Spine.Real R
+  ; zero = Spine.zero R
+  ; one = Spine.one R
+  ; two = two power
+  ; add = Spine._+_ R
+  ; multiply = Spine._*_ R
+  ; negate = Spine.neg R
+  ; _≤_ = Spine._≤_ R
+  ; _<_ = Spine._<_ R
+  ; twoPow = twoPow power
+  ; orderReflexive = Adapter.leqReflexive capability
+  ; orderTransitive = Adapter.leqTransitive capability
+  ; twoStrictlyAboveOne = twoStrictlyAboveOne power
+  ; exponentOrderReversesAfterNegation = Adapter.negateAntitone capability
+  ; twoPowMonotone = twoPowMonotone power
+  ; twoPowAdditive = twoPowAdditive power
+  }
+
+asBaseTwoIntegerPowerAnchors : ∀ R capability
+    (power : ConstructiveRealSpineBaseTwoPowerCapability R capability) →
+  Power.BaseTwoIntegerPowerAnchors
+    (asBaseTwoExponentAntitoneCarrier R capability power)
+asBaseTwoIntegerPowerAnchors R capability power = record
+  { twoExponent = two power
+  ; fiveExponent = five power
+  ; scaleByNat = scaleByNat power
+  ; scaleByNatMonotone = scaleByNatMonotone power
+  ; quarterPower = λ shell →
+      Adapter.rationalEmbed capability (Geo.pow Geo.quarter shell)
+  ; thirtySecondPower = λ gap →
+      Adapter.rationalEmbed capability (Geo.pow Geo.thirtySecond gap)
+  ; negativeTwoAnchor = negativeTwoAnchor power
+  ; negativeFiveAnchor = negativeFiveAnchor power
+  }
+
+record ConstructiveRealSpineOutputDecayData
+    (R : Spine.ConstructedOrderedCompleteReal)
+    (capability : Adapter.ConstructiveRealSpineEnvelopeCapability R)
+    (power : ConstructiveRealSpineBaseTwoPowerCapability R capability) : Set₁ where
+  field
+    lowDecayExponent gapDecayExponent : Spine.Real R
+    lowDecayAtLeastTwo : Spine._≤_ R (two power) lowDecayExponent
+    gapDecayAtLeastFive : Spine._≤_ R (five power) gapDecayExponent
+
+open ConstructiveRealSpineOutputDecayData public
+
+asOutputRelocationDecayExponentData : ∀ R capability power →
+  ConstructiveRealSpineOutputDecayData R capability power →
+  Power.OutputRelocationDecayExponentData
+    (asBaseTwoIntegerPowerAnchors R capability power)
+asOutputRelocationDecayExponentData R capability power decay = record
+  { lowDecayExponent = lowDecayExponent decay
+  ; gapDecayExponent = gapDecayExponent decay
+  ; lowDecayAtLeastTwo = lowDecayAtLeastTwo decay
+  ; gapDecayAtLeastFive = gapDecayAtLeastFive decay
+  }
+
+spineLowFactor : ∀ R capability power →
+  ConstructiveRealSpineOutputDecayData R capability power →
+  Nat → Spine.Real R
+spineLowFactor R capability power decay =
+  Power.lowShellFactor
+    (asBaseTwoIntegerPowerAnchors R capability power)
+    (asOutputRelocationDecayExponentData R capability power decay)
+
+spineGapFactor : ∀ R capability power →
+  ConstructiveRealSpineOutputDecayData R capability power →
+  Nat → Spine.Real R
+spineGapFactor R capability power decay =
+  Power.gapShellFactor
+    (asBaseTwoIntegerPowerAnchors R capability power)
+    (asOutputRelocationDecayExponentData R capability power decay)
+
+record ConstructiveRealSpineAbsoluteOrderCapability
+    (R : Spine.ConstructedOrderedCompleteReal)
+    (capability : Adapter.ConstructiveRealSpineEnvelopeCapability R) : Set₁ where
+  field
+    valueBelowAbsolute : ∀ value →
+      Spine._≤_ R value (Spine.abs R value)
+    negativeAbsoluteBelowValue : ∀ value →
+      Spine._≤_ R (Spine.neg R (Spine.abs R value)) value
+
+open ConstructiveRealSpineAbsoluteOrderCapability public
+
+asAbsoluteValueOrderCapability : ∀ R capability →
+  ConstructiveRealSpineAbsoluteOrderCapability R capability →
+  Absolute.AbsoluteValueOrderCapability
+    (Adapter.asOrderedRationalEnvelopeCarrier R capability)
+asAbsoluteValueOrderCapability R capability absoluteOrder = record
+  { absolute = Spine.abs R
+  ; valueBelowAbsolute = valueBelowAbsolute absoluteOrder
+  ; negativeAbsoluteBelowValue = negativeAbsoluteBelowValue absoluteOrder
+  }
+
+record ConstructiveRealSpineLiteralMagnitudeData
+    (R : Spine.ConstructedOrderedCompleteReal)
+    (capability : Adapter.ConstructiveRealSpineEnvelopeCapability R)
+    (power : ConstructiveRealSpineBaseTwoPowerCapability R capability)
+    (decay : ConstructiveRealSpineOutputDecayData R capability power)
+    (absoluteOrder : ConstructiveRealSpineAbsoluteOrderCapability R capability) : Set₁ where
+  field
+    signedCoefficient : Nat → Nat → Spine.Real R
+
+    lowFactorNonnegative : ∀ lowShell →
+      Spine._≤_ R
+        (Spine.zero R)
+        (spineLowFactor R capability power decay lowShell)
+    gapFactorNonnegative : ∀ gap →
+      Spine._≤_ R
+        (Spine.zero R)
+        (spineGapFactor R capability power decay gap)
+
+    absoluteCoefficientDominatedByFactors : ∀ lowShell gap →
+      Spine._≤_ R
+        (Spine.abs R (signedCoefficient lowShell gap))
+        (Spine._*_ R
+          (spineLowFactor R capability power decay lowShell)
+          (spineGapFactor R capability power decay gap))
+
+open ConstructiveRealSpineLiteralMagnitudeData public
+
+asAbsoluteOutputRelocationShellData : ∀ R capability power decay absoluteOrder →
+  ConstructiveRealSpineLiteralMagnitudeData
+    R capability power decay absoluteOrder →
+  Absolute.AbsoluteOutputRelocationShellData
+    (asAbsoluteValueOrderCapability R capability absoluteOrder)
+asAbsoluteOutputRelocationShellData
+    R capability power decay absoluteOrder magnitude = record
+  { lowFactor = spineLowFactor R capability power decay
+  ; gapFactor = spineGapFactor R capability power decay
+  ; signedCoefficient = signedCoefficient magnitude
+  ; lowFactorNonnegative = lowFactorNonnegative magnitude
+  ; gapFactorNonnegative = gapFactorNonnegative magnitude
+  ; lowShellDominatedByQuarter =
+      Power.lowShellDominatedByQuarter
+        (asBaseTwoIntegerPowerAnchors R capability power)
+        (asOutputRelocationDecayExponentData R capability power decay)
+  ; gapDominatedByThirtySecond =
+      Power.gapDominatedByThirtySecond
+        (asBaseTwoIntegerPowerAnchors R capability power)
+        (asOutputRelocationDecayExponentData R capability power decay)
+  ; absoluteCoefficientDominatedByFactors =
+      absoluteCoefficientDominatedByFactors magnitude
+  }
+
+asConstructiveRealSpineOutputShellData : ∀ R capability power decay absoluteOrder →
+  (magnitude : ConstructiveRealSpineLiteralMagnitudeData
+    R capability power decay absoluteOrder) →
+  Adapter.ConstructiveRealSpineOutputShellData R capability
+asConstructiveRealSpineOutputShellData
+    R capability power decay absoluteOrder magnitude =
+  let
+    absoluteData =
+      asAbsoluteOutputRelocationShellData
+        R capability power decay absoluteOrder magnitude
+
+    embeddedBridge =
+      Absolute.asEmbeddedOutputRelocationShellBridge
+        (asAbsoluteValueOrderCapability R capability absoluteOrder)
+        absoluteData
+  in
+  record
+    { lowFactor = spineLowFactor R capability power decay
+    ; gapFactor = spineGapFactor R capability power decay
+    ; signedCoefficient = signedCoefficient magnitude
+    ; lowFactorNonnegative = lowFactorNonnegative magnitude
+    ; gapFactorNonnegative = gapFactorNonnegative magnitude
+    ; lowShellDominatedByQuarter =
+        Embedded.lowShellDominatedByQuarter embeddedBridge
+    ; gapDominatedByThirtySecond =
+        Embedded.gapDominatedByThirtySecond embeddedBridge
+    ; signedCoefficientUpper =
+        Embedded.signedCoefficientUpper embeddedBridge
+    ; signedCoefficientLower =
+        Embedded.signedCoefficientLower embeddedBridge
+    }
+
+constructiveRealSpineDerivedOutputRelocationTheorem : ∀
+    R capability power decay absoluteOrder
+    (magnitude : ConstructiveRealSpineLiteralMagnitudeData
+      R capability power decay absoluteOrder) →
+  Embedded.EmbeddedConditionalArchetypeTheorem
+    (Adapter.asOrderedRationalEnvelopeCarrier R capability)
+    (Adapter.asEmbeddedOutputRelocationShellBridge
+      R capability
+      (asConstructiveRealSpineOutputShellData
+        R capability power decay absoluteOrder magnitude))
+constructiveRealSpineDerivedOutputRelocationTheorem
+    R capability power decay absoluteOrder magnitude =
+  Adapter.constructiveRealSpineOutputRelocationTheorem
+    R capability
+    (asConstructiveRealSpineOutputShellData
+      R capability power decay absoluteOrder magnitude)
+
+fourFormerRawBridgeFieldsDerived : Bool
+fourFormerRawBridgeFieldsDerived = true
+
+baseTwoPowerEnvelopeDerivationIntegrated : Bool
+baseTwoPowerEnvelopeDerivationIntegrated = true
+
+absoluteCoefficientDerivationIntegrated : Bool
+absoluteCoefficientDerivationIntegrated = true
+
+nativeSpineDerivedClosureTheoremClosed : Bool
+nativeSpineDerivedClosureTheoremClosed = true
+
+concreteNativeBaseTwoPowerCapabilityClosed : Bool
+concreteNativeBaseTwoPowerCapabilityClosed = false
+
+concreteLiteralAbsoluteCoefficientEstimateClosed : Bool
+concreteLiteralAbsoluteCoefficientEstimateClosed = false
+
+concreteOutputRelocationTheoremClosed : Bool
+concreteOutputRelocationTheoremClosed = false
+
+fourFormerRawBridgeFieldsDerivedIsTrue :
+  fourFormerRawBridgeFieldsDerived ≡ true
+fourFormerRawBridgeFieldsDerivedIsTrue = refl
+
+baseTwoPowerEnvelopeDerivationIntegratedIsTrue :
+  baseTwoPowerEnvelopeDerivationIntegrated ≡ true
+baseTwoPowerEnvelopeDerivationIntegratedIsTrue = refl
+
+absoluteCoefficientDerivationIntegratedIsTrue :
+  absoluteCoefficientDerivationIntegrated ≡ true
+absoluteCoefficientDerivationIntegratedIsTrue = refl
+
+nativeSpineDerivedClosureTheoremClosedIsTrue :
+  nativeSpineDerivedClosureTheoremClosed ≡ true
+nativeSpineDerivedClosureTheoremClosedIsTrue = refl
+
+concreteNativeBaseTwoPowerCapabilityClosedIsFalse :
+  concreteNativeBaseTwoPowerCapabilityClosed ≡ false
+concreteNativeBaseTwoPowerCapabilityClosedIsFalse = refl
+
+concreteLiteralAbsoluteCoefficientEstimateClosedIsFalse :
+  concreteLiteralAbsoluteCoefficientEstimateClosed ≡ false
+concreteLiteralAbsoluteCoefficientEstimateClosedIsFalse = refl
+
+concreteOutputRelocationTheoremClosedIsFalse :
+  concreteOutputRelocationTheoremClosed ≡ false
+concreteOutputRelocationTheoremClosedIsFalse = refl
