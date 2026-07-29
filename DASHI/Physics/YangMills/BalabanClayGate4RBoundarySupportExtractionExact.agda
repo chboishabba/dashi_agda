@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4RBoundarySupportExtractionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ) renaming (_,_ to _,Σ_)
 open import Data.Product using (_×_; _,_)
@@ -32,8 +32,9 @@ mapMembershipSource :
   ∀ {A B : Set} (function : A → B) {target values} →
   target ∈ R.map function values →
   Σ A (λ source → source ∈ values × function source ≡ target)
-mapMembershipSource function here = _ ,Σ (here , refl)
-mapMembershipSource function (there membership)
+mapMembershipSource function {values = source ∷ rest} here =
+  source ,Σ (here , refl)
+mapMembershipSource function {values = head ∷ rest} (there membership)
   with mapMembershipSource function membership
 ... | source ,Σ (sourceMember , equality) =
   source ,Σ (there sourceMember , equality)
@@ -148,8 +149,6 @@ rBoundaryCollarSupportTransportLevel = machineChecked
 rBoundaryDeterminingSetOwnershipLevel : ProofLevel
 rBoundaryDeterminingSetOwnershipLevel = machineChecked
 
--- Remaining inputs: prove that each classified source term satisfies the collar
--- condition and that the selected next-scale determining set contains the collar.
 rBoundarySourceCollarClassificationInputsLevel : ProofLevel
 rBoundarySourceCollarClassificationInputsLevel = conditional
 
