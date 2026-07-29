@@ -32,6 +32,7 @@ record CurrentGate4FrontierReceipt : Set where
     canonicalReferenceNormalizationChecked : Bool
     physicalReferenceNormalizationAssemblyChecked : Bool
     compensatedSixFactorTComparisonChecked : Bool
+    canonicalEquation189AssemblyChecked : Bool
     haarDeterminantRelativeLossReuseChecked : Bool
 
     canonicalRTraceReuseChecked : Bool
@@ -77,6 +78,7 @@ record AuthoritativeCurrentGate4Evidence
     canonicalReferenceNormalizationTypechecks : Set
     physicalReferenceNormalizationAssemblyTypechecks : Set
     compensatedSixFactorTComparisonTypechecks : Set
+    canonicalEquation189AssemblyTypechecks : Set
     haarDeterminantRelativeLossReuseTypechecks : Set
     canonicalRTraceReuseTypechecks : Set
     orderedExponentialSeriesTypechecks : Set
@@ -150,6 +152,9 @@ physicalReferenceNormalizationAssemblyTypecheckLevel = conditional
 
 compensatedSixFactorTComparisonTypecheckLevel : ProofLevel
 compensatedSixFactorTComparisonTypecheckLevel = conditional
+
+canonicalEquation189AssemblyTypecheckLevel : ProofLevel
+canonicalEquation189AssemblyTypecheckLevel = conditional
 
 haarDeterminantRelativeLossReuseTypecheckLevel : ProofLevel
 haarDeterminantRelativeLossReuseTypecheckLevel = conditional
