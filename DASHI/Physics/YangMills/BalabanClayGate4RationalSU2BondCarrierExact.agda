@@ -7,6 +7,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 
 ------------------------------------------------------------------------
@@ -30,36 +31,44 @@ RationalSU2SiteGauge : Nat → Set
 RationalSU2SiteGauge n =
   Bond.PeriodicSiteGauge n SU2.RationalUnitQuaternion
 
-record RationalSU2BondRealization (n : Nat) : Set₁ where
+record RationalSU2BondData (n : Nat) : Set₁ where
   field
     exactGroup : Bond.ExactLinkGroup SU2.RationalUnitQuaternion
-    realization :
-      Bond.PeriodicBondGaugeRealization
-        n SU2.RationalUnitQuaternion exactGroup
+    stepInverseLaws : Covariance.PeriodicStepInverseLaws n
+    links : RationalSU2BondField n
+    siteGauge : RationalSU2SiteGauge n
 
-open RationalSU2BondRealization public
+open RationalSU2BondData public
 
-rationalSU2Links : ∀ {n} → RationalSU2BondRealization n → RationalSU2BondField n
-rationalSU2Links dataSet = Bond.bondField (realization dataSet)
-
-rationalSU2SiteGauge : ∀ {n} → RationalSU2BondRealization n → RationalSU2SiteGauge n
-rationalSU2SiteGauge dataSet = Bond.gauge (realization dataSet)
+realization :
+  ∀ {n} → RationalSU2BondData n →
+  Bond.PeriodicBondGaugeRealization
+    n SU2.RationalUnitQuaternion ∘ exactGroup
+realization dataSet =
+  Covariance.literalPeriodicBondGaugeRealization
+    (exactGroup dataSet)
+    (stepInverseLaws dataSet)
+    (links dataSet)
+    (siteGauge dataSet)
+  where
+  _∘_ : ∀ {A : Set} → (A → Set₁) → A → Set₁
+  family ∘ value = family value
 
 rationalSU2PlaquetteHolonomy :
-  ∀ {n} (dataSet : RationalSU2BondRealization n) →
+  ∀ {n} (dataSet : RationalSU2BondData n) →
   Plaquette.PeriodicPlaquette n → SU2.RationalUnitQuaternion
 rationalSU2PlaquetteHolonomy dataSet =
   Bond.plaquetteHolonomyFromBonds (realization dataSet)
 
 rationalSU2PathGaugeCancellation :
-  ∀ {n} (dataSet : RationalSU2BondRealization n) site directions →
+  ∀ {n} (dataSet : RationalSU2BondData n) site directions →
   Bond.transformedPathHolonomy (realization dataSet) site directions
   ≡ Bond.multiply (exactGroup dataSet)
       (Bond.multiply (exactGroup dataSet)
-        (rationalSU2SiteGauge dataSet site)
+        (siteGauge dataSet site)
         (Bond.pathHolonomy (realization dataSet) site directions))
       (Bond.inverse (exactGroup dataSet)
-        (rationalSU2SiteGauge dataSet (Bond.walk site directions)))
+        (siteGauge dataSet (Bond.walk site directions)))
 rationalSU2PathGaugeCancellation dataSet =
   Bond.pathSiteGaugeCancellation (realization dataSet)
 
@@ -72,8 +81,8 @@ literalRationalSU2PlaquetteHolonomyLevel = machineChecked
 rationalSU2PathGaugeCancellationLevel : ProofLevel
 rationalSU2PathGaugeCancellationLevel = machineChecked
 
--- Propositional equality of the proof-carrying rational-unit-quaternion record
--- and covariance of negative-oriented links still require the exact group-law
--- inhabitant recorded by BalabanClayGate4PeriodicBondPathBianchiExact.
 rationalSU2ExactGroupLawInputsLevel : ProofLevel
 rationalSU2ExactGroupLawInputsLevel = conditional
+
+rationalSU2PeriodicStepInverseInputsLevel : ProofLevel
+rationalSU2PeriodicStepInverseInputsLevel = conditional
