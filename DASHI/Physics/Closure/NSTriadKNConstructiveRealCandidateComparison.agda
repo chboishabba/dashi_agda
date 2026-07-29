@@ -13,17 +13,20 @@ module DASHI.Physics.Closure.NSTriadKNConstructiveRealCandidateComparison where
 -- DOI: no DOI located for Lundfall's Reals-in-agda development; Murray thesis
 -- arXiv:2205.08354 has no DOI; Krebbers--Spitters DOI
 -- 10.2168/LMCS-9(1:1)2013; the repository comparison has no DOI.
--- Uses: candidate API and toolchain reconnaissance only.
+-- Murray thesis commit: 5cd6d3d023279518213f3e58879bfc867bb2503c.
+-- Uses: candidate API, source-pin and toolchain reconnaissance only.
 -- Relationship: neither external Agda tree is promoted. Lundfall is retained as
 -- a mathematical/API comparator but deprioritized as a direct import because
--- its documented target is Agda Standard Library v0.9. Krebbers--Spitters is a
--- Coq reference architecture only and cannot be imported into Agda. An
--- authoritative pinned Nix/Agda build and explicit fixed-base-two/geometric-tail
--- adapter remain required for the Murray/Csimma lane.
+-- its documented target is Agda Standard Library v0.9. Murray's thesis snapshot
+-- is now pinned exactly, but source inspection has not located arbitrary-real
+-- fixed-base 2^x, a suitable geometric-series theorem or an effective tail
+-- modulus. Krebbers--Spitters is a Coq reference architecture only.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.Closure.NSTriadKNMurrayThesisCommitSourceInspection as MurraySource
 
 record FixedBaseDyadicSeriesCapability : Set₁ where
   field
@@ -56,9 +59,6 @@ record CandidateCompatibilityAudit : Set₁ where
 
 open CandidateCompatibilityAudit public
 
--- Lundfall explicitly documents Agda Standard Library v0.9.  This converts the
--- earlier soft compatibility unknown into a concrete legacy-toolchain reason to
--- deprioritize direct import.  It does not impugn the mathematics.
 mrChicoRealsInAgdaAudit : CandidateCompatibilityAudit
 mrChicoRealsInAgdaAudit = record
   { namespaceLocated = true
@@ -73,18 +73,15 @@ mrChicoRealsInAgdaAudit = record
   ; stage3AdapterConstructed = false
   }
 
--- Murray/Csimma is already the better-integrated live candidate elsewhere in
--- DASHI, but the exact Stage-3 fixed-base-two adapter and authoritative build
--- are still not closed on this branch.
 murrayBishopAudit : CandidateCompatibilityAudit
 murrayBishopAudit = record
   { namespaceLocated = true
-  ; pinnedRevisionRecorded = true
+  ; pinnedRevisionRecorded = MurraySource.murrayThesisCommitPinned
   ; standardLibraryVersionRecorded = false
   ; modernToolchainCompatibilityEstablished = false
   ; fixedBaseTwoPowerLocated = false
   ; arbitraryRealExponentLocated = false
-  ; geometricSeriesTheoremLocated = true
+  ; geometricSeriesTheoremLocated = false
   ; explicitTailModulusLocated = false
   ; authoritativeAgdaBuildPassed = false
   ; stage3AdapterConstructed = false
@@ -100,8 +97,6 @@ record ReferenceArchitectureAudit : Set where
 
 open ReferenceArchitectureAudit public
 
--- Krebbers--Spitters is rigorous and useful for API design, but it is a Coq
--- development and therefore cannot be a direct DASHI build dependency.
 krebbersSpittersCoqReference : ReferenceArchitectureAudit
 krebbersSpittersCoqReference = reference-audit false true true false
 
@@ -113,6 +108,12 @@ lundfallLegacyStdlibPinRecorded = true
 
 lundfallDirectImportDeprioritized : Bool
 lundfallDirectImportDeprioritized = true
+
+murrayThesisRevisionPinned : Bool
+murrayThesisRevisionPinned = true
+
+murrayFixedBaseDyadicAPIStillUnconfirmed : Bool
+murrayFixedBaseDyadicAPIStillUnconfirmed = true
 
 murrayCsimmaPreferredLiveCandidate : Bool
 murrayCsimmaPreferredLiveCandidate = true
@@ -139,6 +140,13 @@ lundfallLegacyStdlibPinRecordedIsTrue = refl
 lundfallDirectImportDeprioritizedIsTrue :
   lundfallDirectImportDeprioritized ≡ true
 lundfallDirectImportDeprioritizedIsTrue = refl
+
+murrayThesisRevisionPinnedIsTrue : murrayThesisRevisionPinned ≡ true
+murrayThesisRevisionPinnedIsTrue = refl
+
+murrayFixedBaseDyadicAPIStillUnconfirmedIsTrue :
+  murrayFixedBaseDyadicAPIStillUnconfirmed ≡ true
+murrayFixedBaseDyadicAPIStillUnconfirmedIsTrue = refl
 
 murrayCsimmaPreferredLiveCandidateIsTrue :
   murrayCsimmaPreferredLiveCandidate ≡ true
