@@ -120,10 +120,12 @@ import DASHI.Physics.YangMills.BalabanClayT4ConfiguredPhysicalOneLoopInstanceExa
 
 -- T5: separate KP and sharper FP criteria, exact marked-activity margins,
 -- repository-specific rooted-shell injection, physical cancellation/RG/moment,
--- the selected L^p -> reflected-product -> UI route, explicit reuse of the older
--- gauge/RG/measure stack, measure topology and complete OS Gram transport.
+-- the selected L^p -> reflected-product -> UI route, exact physical-measure
+-- record assembly, explicit reuse of the older gauge/RG/measure stack, measure
+-- topology and complete OS Gram transport.
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact
 import DASHI.Physics.YangMills.BalabanClayT5LpUniformIntegrabilityExact
+import DASHI.Physics.YangMills.BalabanClayT5LpPhysicalMeasureAdapterExact
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact
 import DASHI.Physics.YangMills.BalabanClayT5QuantitativeTailMomentCompactnessExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact
@@ -139,6 +141,7 @@ import DASHI.Physics.YangMills.BalabanClayLegacyGaugeRGMeasureReuseExact
 -- Exact status split for configured arithmetic, Bishop integration and leaves.
 import DASHI.Physics.YangMills.BalabanClayConfiguredFrontierCompletionLedger
 import DASHI.Physics.YangMills.BalabanClayBishopFrontierCompletionLedger
+import DASHI.Physics.YangMills.BalabanClayCategoricityLpReuseCompletionLedger
 
 -- User-run authoritative typecheck receipt surface.
 import DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface
