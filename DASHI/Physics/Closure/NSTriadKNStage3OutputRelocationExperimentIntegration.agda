@@ -16,11 +16,10 @@ module DASHI.Physics.Closure.NSTriadKNStage3OutputRelocationExperimentIntegratio
 -- 10.1006/jfan.2001.3804; the integration receipt has no DOI.
 -- Uses: the comparator source-status audit and the output-relocation vertical
 -- slice.
--- Relationship: records the result of the cheapest affine-route test.  The
--- route is not falsified by the already-proved algebra, but it is not yet
--- numerically testable: concrete complex-carrier relocation and the weighted
--- exponent identity are the first unresolved leaves before coefficient and
--- epsilon extraction.
+-- Relationship: records the result of the cheapest affine-route test. The
+-- concrete Complex3 relocation theorem and exact weighted shell exponent
+-- identity are now closed. The first remaining leaves are constructive dyadic
+-- summation and the orientation of the three auxiliary-weight coefficients.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -41,15 +40,15 @@ record OutputRelocationExperimentReceipt : Set where
 
     relocationSymbolIdentityClosed :
       Slice.outputRelocationSymbolIdentityClosed ≡ true
+    concreteComplexCarrierClosed :
+      Slice.outputRelocationConcreteComplexCarrierClosed ≡ true
     endpointArithmeticClosed :
       Slice.outputRelocationEndpointArithmeticClosed ≡ true
+    weightedExponentIdentityClosed :
+      Slice.outputRelocationWeightedExponentIdentityClosed ≡ true
     coefficientExtractionInterfaceClosed :
       Slice.outputRelocationCoefficientExtractionInterfaceClosed ≡ true
 
-    concreteComplexCarrierStillOpen :
-      Slice.outputRelocationConcreteComplexCarrierClosed ≡ false
-    weightedExponentIdentityStillOpen :
-      Slice.outputRelocationWeightedExponentIdentityClosed ≡ false
     cutoffUniformSeriesStillOpen :
       Slice.outputRelocationCutoffUniformSeriesClosed ≡ false
     coefficientVectorStillOpen :
@@ -67,10 +66,10 @@ outputRelocationExperimentReceipt = receipt
   Comparator.preprintSuppliesDASHIArchetypeTheoremIsFalse
   Comparator.preprintSuppliesUnconditionalAbsorptionIsFalse
   Slice.outputRelocationSymbolIdentityClosedIsTrue
+  Slice.outputRelocationConcreteComplexCarrierClosedIsTrue
   Slice.outputRelocationEndpointArithmeticClosedIsTrue
+  Slice.outputRelocationWeightedExponentIdentityClosedIsTrue
   Slice.outputRelocationCoefficientExtractionInterfaceClosedIsTrue
-  Slice.outputRelocationConcreteComplexCarrierClosedIsFalse
-  Slice.outputRelocationWeightedExponentIdentityClosedIsFalse
   Slice.outputRelocationCutoffUniformSeriesClosedIsFalse
   Slice.outputRelocationCoefficientVectorClosedIsFalse
   Slice.outputRelocationAffineConstraintClosedIsFalse
@@ -85,8 +84,11 @@ currentAffineRouteFalsifiedByOutputRelocationAlgebra = false
 outputRelocationExperimentReachesNumericFeasibilityTest : Bool
 outputRelocationExperimentReachesNumericFeasibilityTest = false
 
-firstOpenLeafIsConcreteCarrierThenWeightedExponent : Bool
-firstOpenLeafIsConcreteCarrierThenWeightedExponent = true
+concreteCarrierAndWeightedExponentClosed : Bool
+concreteCarrierAndWeightedExponentClosed = true
+
+firstOpenLeafIsConstructiveSeriesThenCoefficientOrientation : Bool
+firstOpenLeafIsConstructiveSeriesThenCoefficientOrientation = true
 
 outputRelocationCheapFalsificationExperimentImplementedIsTrue :
   outputRelocationCheapFalsificationExperimentImplemented ≡ true
@@ -100,6 +102,10 @@ outputRelocationExperimentReachesNumericFeasibilityTestIsFalse :
   outputRelocationExperimentReachesNumericFeasibilityTest ≡ false
 outputRelocationExperimentReachesNumericFeasibilityTestIsFalse = refl
 
-firstOpenLeafIsConcreteCarrierThenWeightedExponentIsTrue :
-  firstOpenLeafIsConcreteCarrierThenWeightedExponent ≡ true
-firstOpenLeafIsConcreteCarrierThenWeightedExponentIsTrue = refl
+concreteCarrierAndWeightedExponentClosedIsTrue :
+  concreteCarrierAndWeightedExponentClosed ≡ true
+concreteCarrierAndWeightedExponentClosedIsTrue = refl
+
+firstOpenLeafIsConstructiveSeriesThenCoefficientOrientationIsTrue :
+  firstOpenLeafIsConstructiveSeriesThenCoefficientOrientation ≡ true
+firstOpenLeafIsConstructiveSeriesThenCoefficientOrientationIsTrue = refl
