@@ -20,7 +20,7 @@ module DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOrderedFieldCapabilit
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Spine
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter as Adapter
@@ -56,11 +56,16 @@ record ConstructiveRealSpineOrderedFieldCapability
     embedAdd : ∀ left right →
       rationalEmbed (left + right)
       ≡ Spine._+_ R (rationalEmbed left) (rationalEmbed right)
+    embedSubtract : ∀ left right →
+      rationalEmbed (left - right)
+      ≡ Spine._-_ R (rationalEmbed left) (rationalEmbed right)
     embedMultiply : ∀ left right →
       rationalEmbed (left * right)
       ≡ Spine._*_ R (rationalEmbed left) (rationalEmbed right)
     embedOrder : ∀ {left right} →
       left ≤ right → Spine._≤_ R (rationalEmbed left) (rationalEmbed right)
+    embedStrictOrder : ∀ {left right} →
+      left < right → Spine._<_ R (rationalEmbed left) (rationalEmbed right)
 
     valueBelowAbsolute : ∀ value →
       Spine._≤_ R value (Spine.abs R value)
@@ -142,12 +147,19 @@ asStrictOrderedSubtractionCapability R field = record
 nativeOrderedFieldCapabilitiesUnified : Bool
 nativeOrderedFieldCapabilitiesUnified = true
 
+nativeRationalEmbeddingSupportsStrictIntervalArithmetic : Bool
+nativeRationalEmbeddingSupportsStrictIntervalArithmetic = true
+
 concreteNativeOrderedFieldCapabilityClosed : Bool
 concreteNativeOrderedFieldCapabilityClosed = false
 
 nativeOrderedFieldCapabilitiesUnifiedIsTrue :
   nativeOrderedFieldCapabilitiesUnified ≡ true
 nativeOrderedFieldCapabilitiesUnifiedIsTrue = refl
+
+nativeRationalEmbeddingSupportsStrictIntervalArithmeticIsTrue :
+  nativeRationalEmbeddingSupportsStrictIntervalArithmetic ≡ true
+nativeRationalEmbeddingSupportsStrictIntervalArithmeticIsTrue = refl
 
 concreteNativeOrderedFieldCapabilityClosedIsFalse :
   concreteNativeOrderedFieldCapabilityClosed ≡ false
