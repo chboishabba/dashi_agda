@@ -26,19 +26,22 @@ import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact
 import DASHI.Physics.YangMills.BalabanClayT5OSGramClosedPropertyExact
 import DASHI.Physics.YangMills.BalabanClayLiteratureNormalizationLedger
 
--- Literal producer tranche.  The bundle contains the new finite proofs,
+-- Literal producer tranche. The bundle contains the new finite proofs,
 -- explicit analytic input records, and fail-closed frontier ledger.
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierCompletionLedger
 
 -- Gate-4 large-field archaeology, typed reuse of the existing small-field RG,
--- finite bad-component/support/boundary bookkeeping, exact Balaban analytic
--- targets, numerical dependency graph, model-suitability quarantine and
--- mass-gap anti-circularity audit.
+-- literal Wilson threshold/bad-component instantiation, finite enlargement,
+-- collar/support/boundary bookkeeping, exact Balaban analytic targets,
+-- numerical dependency graph, model-suitability quarantine and mass-gap
+-- anti-circularity audit.
 import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExact
 import DASHI.Physics.YangMills.BalabanClayGate4LargeFieldArchaeologyExact
 import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact
 import DASHI.Physics.YangMills.BalabanClayGate4ROperationDecayTargetsExact
 import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact
 import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger
