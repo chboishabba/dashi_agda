@@ -5,7 +5,6 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
 import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as T
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibrePositiveMassExact as PositiveMass
 
@@ -117,10 +116,10 @@ flatReferenceWeightPositive :
   (flat : FlatReferenceInPhysicalFibre factors scale component slow) →
   PositiveMass.Positive positiveAlgebra
     (rawSelectedReference factors scale component slow (flatFine flat))
-flatReferenceWeightPositive {factors = factors}
-  {scale = scale} {component = component} {slow = slow} flat =
+flatReferenceWeightPositive {positiveAlgebra = positiveAlgebra}
+  {factors = factors} {scale = scale} {component = component} {slow = slow} flat =
   subst
-    (PositiveMass.Positive _)
+    (PositiveMass.Positive positiveAlgebra)
     (sym (referenceWeightMeaning factors scale component slow (flatFine flat)))
     (multiplyPositive factors
       (flatActionPositive flat)
