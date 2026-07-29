@@ -26,22 +26,30 @@ import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact
 import DASHI.Physics.YangMills.BalabanClayT5OSGramClosedPropertyExact
 import DASHI.Physics.YangMills.BalabanClayLiteratureNormalizationLedger
 
--- Literal producer tranche. The bundle contains the new finite proofs,
--- explicit analytic input records, and fail-closed frontier ledger.
+-- Literal producer tranche. The bundle contains finite proofs, explicit
+-- analytic input records, and the fail-closed frontier ledger.
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierCompletionLedger
 
--- Gate-4 large-field archaeology, typed reuse of the existing small-field RG,
--- literal Wilson threshold/bad-component instantiation, finite enlargement,
--- collar/support/boundary bookkeeping, exact Balaban analytic targets,
--- numerical dependency graph, model-suitability quarantine and mass-gap
--- anti-circularity audit.
+-- Gate-4 large-field archaeology and proof-bearing finite carrier work.
 import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact
-import DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExact
 import DASHI.Physics.YangMills.BalabanClayGate4LargeFieldArchaeologyExact
 import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicReachCollarEnumerationExact
+
+-- Concrete finite T/R pipelines and exact assembly theorems. Importing these
+-- modules does not inhabit their representation-specific analytic records.
+import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact
+import DASHI.Physics.YangMills.BalabanClayGate4P0GrowthAbsorptionExact
+import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact
 import DASHI.Physics.YangMills.BalabanClayGate4ROperationDecayTargetsExact
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryTargetAndAttachmentAuditExact
+
+-- Numerical dependency graph, external-model quarantine and anti-circularity.
+import DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExact
 import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact
 import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger
