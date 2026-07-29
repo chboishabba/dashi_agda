@@ -2,6 +2,7 @@ module DASHI.Governance.Sudan.RCEPPPromotionBoundary where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.CanonicalProvenancePromotion as Canonical
 import DASHI.Governance.ArtifactAuthorityPromotionBridge as ArtifactBridge
 import DASHI.Governance.GovernedArtifactCore as Governed
@@ -80,3 +81,14 @@ canonicalRCEPPPromotionBoundary =
     false
     Governed.abstain
     refl
+
+canonicalRCEPPPromotionBoundaryReceipt :
+  GenericReceipt.GenericReceipt
+canonicalRCEPPPromotionBoundaryReceipt =
+  GenericReceipt.mkNonPromotingReceipt
+    "RCEPP promotion-spine boundary"
+    "DASHI.Governance.Sudan.RCEPPPromotionBoundary"
+    "rceppCitationOnlyAuthorizationAbstains"
+    "threads the Charter citation boundary through the existing artifact-authority and governed-state promotion spine and proves quarantine/abstention even when all downstream closure bits are optimistic"
+    "an authenticated artifact, operative constitutional authority and popular-recognition token remain absent"
+    "agda -i . DASHI/Governance/Sudan/RCEPPPromotionBoundary.agda"
