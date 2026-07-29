@@ -22,9 +22,14 @@ record CurrentGate4FrontierReceipt : Set where
     flatRationalSU2ReferenceChecked : Bool
     periodicTraversalGeometryChecked : Bool
 
+    canonicalBackgroundFibreChecked : Bool
+    identityHaarActionPositivityChecked : Bool
+    finiteCoerciveDeterminantChecked : Bool
     flatReferencePositiveWitnessChecked : Bool
+    canonicalReferenceFactorAssemblyChecked : Bool
     positiveReferenceMassChecked : Bool
     rationalPositiveMassReciprocalChecked : Bool
+    canonicalReferenceNormalizationChecked : Bool
     physicalReferenceNormalizationAssemblyChecked : Bool
     compensatedSixFactorTComparisonChecked : Bool
     haarDeterminantRelativeLossReuseChecked : Bool
@@ -62,9 +67,14 @@ record AuthoritativeCurrentGate4Evidence
     rationalSU2CubeBianchiTypechecks : Set
     flatRationalSU2ReferenceTypechecks : Set
     periodicTraversalGeometryTypechecks : Set
+    canonicalBackgroundFibreTypechecks : Set
+    identityHaarActionPositivityTypechecks : Set
+    finiteCoerciveDeterminantTypechecks : Set
     flatReferencePositiveWitnessTypechecks : Set
+    canonicalReferenceFactorAssemblyTypechecks : Set
     positiveReferenceMassTypechecks : Set
     rationalPositiveMassReciprocalTypechecks : Set
+    canonicalReferenceNormalizationTypechecks : Set
     physicalReferenceNormalizationAssemblyTypechecks : Set
     compensatedSixFactorTComparisonTypechecks : Set
     haarDeterminantRelativeLossReuseTypechecks : Set
@@ -111,14 +121,29 @@ flatRationalSU2ReferenceTypecheckLevel = conditional
 periodicTraversalGeometryTypecheckLevel : ProofLevel
 periodicTraversalGeometryTypecheckLevel = conditional
 
+canonicalBackgroundFibreTypecheckLevel : ProofLevel
+canonicalBackgroundFibreTypecheckLevel = conditional
+
+identityHaarActionPositivityTypecheckLevel : ProofLevel
+identityHaarActionPositivityTypecheckLevel = conditional
+
+finiteCoerciveDeterminantTypecheckLevel : ProofLevel
+finiteCoerciveDeterminantTypecheckLevel = conditional
+
 flatReferencePositiveWitnessTypecheckLevel : ProofLevel
 flatReferencePositiveWitnessTypecheckLevel = conditional
+
+canonicalReferenceFactorAssemblyTypecheckLevel : ProofLevel
+canonicalReferenceFactorAssemblyTypecheckLevel = conditional
 
 positiveReferenceMassTypecheckLevel : ProofLevel
 positiveReferenceMassTypecheckLevel = conditional
 
 rationalPositiveMassReciprocalTypecheckLevel : ProofLevel
 rationalPositiveMassReciprocalTypecheckLevel = conditional
+
+canonicalReferenceNormalizationTypecheckLevel : ProofLevel
+canonicalReferenceNormalizationTypecheckLevel = conditional
 
 physicalReferenceNormalizationAssemblyTypecheckLevel : ProofLevel
 physicalReferenceNormalizationAssemblyTypecheckLevel = conditional
