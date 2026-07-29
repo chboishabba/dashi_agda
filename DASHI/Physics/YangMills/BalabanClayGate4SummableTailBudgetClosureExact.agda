@@ -1,8 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayGate4SummableTailBudgetClosureExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; suc)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -58,6 +58,27 @@ budgetedNorm :
   ∀ {Bound} → SummableTailOneStepData Bound → Nat → Bound
 budgetedNorm dataSet scale = add dataSet (norm dataSet scale) (tail dataSet scale)
 
+regroupOneStepErrorIntoTail :
+  ∀ {Bound} (dataSet : SummableTailOneStepData Bound) scale →
+  add dataSet
+    (add dataSet
+      (multiply dataSet (lambda dataSet) (norm dataSet scale))
+      (error dataSet scale))
+    (tail dataSet (suc scale))
+  ≡ add dataSet
+      (multiply dataSet (lambda dataSet) (norm dataSet scale))
+      (tail dataSet scale)
+regroupOneStepErrorIntoTail dataSet scale =
+  trans
+    (addAssociative dataSet
+      (multiply dataSet (lambda dataSet) (norm dataSet scale))
+      (error dataSet scale)
+      (tail dataSet (suc scale)))
+    (cong
+      (add dataSet
+        (multiply dataSet (lambda dataSet) (norm dataSet scale)))
+      (sym (tailSplit dataSet scale)))
+
 nextBudgetBelowContractedCurrentAndTail :
   ∀ {Bound} (dataSet : SummableTailOneStepData Bound) scale →
   LessEqual dataSet
@@ -66,37 +87,13 @@ nextBudgetBelowContractedCurrentAndTail :
       (multiply dataSet (lambda dataSet) (norm dataSet scale))
       (tail dataSet scale))
 nextBudgetBelowContractedCurrentAndTail dataSet scale =
-  transitive dataSet
+  subst
+    (λ upper → LessEqual dataSet
+      (budgetedNorm dataSet (suc scale)) upper)
+    (regroupOneStepErrorIntoTail dataSet scale)
     (addMonotone dataSet
       (oneStepNormBound dataSet scale)
       (reflexive dataSet (tail dataSet (suc scale))))
-    (subst
-      (λ upper → LessEqual dataSet
-        (add dataSet
-          (add dataSet
-            (multiply dataSet (lambda dataSet) (norm dataSet scale))
-            (error dataSet scale))
-          (tail dataSet (suc scale)))
-        upper)
-      (sym (tailSplit dataSet scale))
-      (subst
-        (λ upper → LessEqual dataSet
-          (add dataSet
-            (add dataSet
-              (multiply dataSet (lambda dataSet) (norm dataSet scale))
-              (error dataSet scale))
-            (tail dataSet (suc scale)))
-          upper)
-        (sym (addAssociative dataSet
-          (multiply dataSet (lambda dataSet) (norm dataSet scale))
-          (error dataSet scale)
-          (tail dataSet (suc scale))))
-        (reflexive dataSet
-          (add dataSet
-            (add dataSet
-              (multiply dataSet (lambda dataSet) (norm dataSet scale))
-              (error dataSet scale))
-            (tail dataSet (suc scale))))))
 
 budgetedNormNonincreasing :
   ∀ {Bound} (dataSet : SummableTailOneStepData Bound) scale →
@@ -114,15 +111,14 @@ record InitialTailBudget
     {Bound : Set} (dataSet : SummableTailOneStepData Bound) : Set₁ where
   field
     cap : Bound
-    initialBudgetBelowCap : LessEqual dataSet (budgetedNorm dataSet 0) cap
+    initialBudgetBelowCap : LessEqual dataSet (budgetedNorm dataSet zero) cap
 
 open InitialTailBudget public
 
 allScaleTailBudgetBelowCap :
   ∀ {Bound} (dataSet : SummableTailOneStepData Bound) →
-  InitialTailBudget dataSet →
-  ∀ scale → LessEqual dataSet (budgetedNorm dataSet scale)
-    (cap (InitialTailBudget dataSet))
+  (initial : InitialTailBudget dataSet) →
+  ∀ scale → LessEqual dataSet (budgetedNorm dataSet scale) (cap initial)
 allScaleTailBudgetBelowCap dataSet initial zero =
   initialBudgetBelowCap initial
 allScaleTailBudgetBelowCap dataSet initial (suc scale) =
