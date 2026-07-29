@@ -1,7 +1,7 @@
 module DASHI.Analysis.ConstructiveRealTransportCapabilitiesExact where
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Sigma using (Σ)
+open import Agda.Builtin.Sigma using (Σ; fst)
 
 import DASHI.Analysis.ConstructedRealBackendSpineExact as Spine
 import DASHI.Analysis.ConstructiveRealCapabilityHierarchyExact as Capability
@@ -51,7 +51,8 @@ record EffectiveLogicalOrderView
             y) →
       Spine._<_ R x y
 
-    effectiveLogicalAgreement : ∀ x y → Set
+    effectiveLogicalAgreement :
+      (x y : Spine.Carrier R) → Set
 
 open EffectiveLogicalOrderView public
 
@@ -81,8 +82,8 @@ record SequenceTransportCapability
     limitPreserved : ∀ sequence cauchy →
       Spine._≈_ Target
         (Capability.map hom
-          (Agda.Builtin.Sigma.fst (Spine.cauchyLimit Source sequence cauchy)))
-        (Agda.Builtin.Sigma.fst
+          (fst (Spine.cauchyLimit Source sequence cauchy)))
+        (fst
           (Spine.cauchyLimit Target (targetSequence sequence)
             (cauchyPreserved sequence cauchy)))
 
@@ -100,9 +101,19 @@ record ModulusTransportCapability
     translatePrecision :
       Capability.Precision targetEffective → Capability.Precision sourceEffective
 
-    sourceCauchyModulusTransports : ∀ sequence cauchy precision → Set
-    sourceConvergenceModulusTransports : ∀ sequence limit convergence precision → Set
-    translatedRadiusIsSufficient : ∀ precision → Set
+    sourceCauchyModulusTransports :
+      (sequence : Spine.Sequence Source) →
+      Spine.IsCauchy Source sequence →
+      (precision : Capability.Precision targetEffective) → Set
+
+    sourceConvergenceModulusTransports :
+      (sequence : Spine.Sequence Source) →
+      (limit : Spine.Carrier Source) →
+      Spine.ConvergesTo Source sequence limit →
+      (precision : Capability.Precision targetEffective) → Set
+
+    translatedRadiusIsSufficient :
+      (precision : Capability.Precision targetEffective) → Set
 
 open ModulusTransportCapability public
 
@@ -154,6 +165,7 @@ record ElementaryFunctionTransportCapability
       Spine.Carrier Source → Spine.Carrier Source
     targetSin targetCos targetExp targetLog :
       Spine.Carrier Target → Spine.Carrier Target
+    PositiveSource : Spine.Carrier Source → Set
 
     sinTransport : ∀ x →
       Spine._≈_ Target
@@ -167,7 +179,10 @@ record ElementaryFunctionTransportCapability
       Spine._≈_ Target
         (Capability.map hom (sourceExp x))
         (targetExp (Capability.map hom x))
-    logTransportOnPositiveDomain : ∀ x → Set
+    logTransportOnPositiveDomain : ∀ x → PositiveSource x →
+      Spine._≈_ Target
+        (Capability.map hom (sourceLog x))
+        (targetLog (Capability.map hom x))
 
 open ElementaryFunctionTransportCapability public
 
