@@ -12,6 +12,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4RationalPositiveMassReciprocalExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4CanonicalReferenceNormalizationExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4TCompensatedSixFactorBudgetExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4CanonicalCompensatedEquation189Exact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4HaarDeterminantRelativeLossReuseExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FlatReferencePositiveWitnessExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRunningCouplingConventionExact.agda \
