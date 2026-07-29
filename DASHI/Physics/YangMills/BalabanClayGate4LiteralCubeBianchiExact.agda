@@ -62,6 +62,44 @@ cubeSixFaceBoundary axisA axisB axisC =
   faceBoundary axisC axisA ++
   transportedOppositeFace axisA (faceBoundary axisB axisC)
 
+expandedCubeBoundary : Axis4 → Axis4 → Axis4 → List SignedAxis4
+expandedCubeBoundary axisA axisB axisC =
+  positiveDirection axisA ∷
+  positiveDirection axisB ∷
+  negativeDirection axisA ∷
+  negativeDirection axisB ∷
+  positiveDirection axisB ∷
+  positiveDirection axisA ∷
+  positiveDirection axisC ∷
+  negativeDirection axisA ∷
+  negativeDirection axisC ∷
+  negativeDirection axisB ∷
+  positiveDirection axisB ∷
+  positiveDirection axisC ∷
+  negativeDirection axisB ∷
+  negativeDirection axisC ∷
+  positiveDirection axisC ∷
+  positiveDirection axisB ∷
+  positiveDirection axisA ∷
+  negativeDirection axisB ∷
+  negativeDirection axisA ∷
+  negativeDirection axisC ∷
+  positiveDirection axisC ∷
+  positiveDirection axisA ∷
+  negativeDirection axisC ∷
+  negativeDirection axisA ∷
+  positiveDirection axisA ∷
+  positiveDirection axisC ∷
+  positiveDirection axisB ∷
+  negativeDirection axisC ∷
+  negativeDirection axisB ∷
+  negativeDirection axisA ∷ []
+
+cubeSixFaceBoundaryExpanded : ∀ axisA axisB axisC →
+  cubeSixFaceBoundary axisA axisB axisC
+  ≡ expandedCubeBoundary axisA axisB axisC
+cubeSixFaceBoundaryExpanded axisA axisB axisC = refl
+
 ------------------------------------------------------------------------
 -- Freely cancellable path words.
 ------------------------------------------------------------------------
@@ -179,12 +217,12 @@ cancellableBoundaryIdentity {group = group} stepLaws realization
   }
 
 ------------------------------------------------------------------------
--- The literal six-face word is freely cancellable.
+-- The expanded literal six-face word is freely cancellable.
 ------------------------------------------------------------------------
 
-literalCubeBoundaryCancellable : ∀ axisA axisB axisC →
-  CancellableBoundary (cubeSixFaceBoundary axisA axisB axisC)
-literalCubeBoundaryCancellable axisA axisB axisC =
+expandedCubeBoundaryCancellable : ∀ axisA axisB axisC →
+  CancellableBoundary (expandedCubeBoundary axisA axisB axisC)
+expandedCubeBoundaryCancellable axisA axisB axisC =
   boundaryWrap (positiveDirection axisA)
     (boundaryWrap (positiveDirection axisB)
       (boundaryWrap (negativeDirection axisA)
@@ -216,6 +254,13 @@ literalCubeBoundaryCancellable axisA axisB axisC =
           boundaryEmpty))
       boundaryEmpty)
     boundaryEmpty
+
+literalCubeBoundaryCancellable : ∀ axisA axisB axisC →
+  CancellableBoundary (cubeSixFaceBoundary axisA axisB axisC)
+literalCubeBoundaryCancellable axisA axisB axisC =
+  subst CancellableBoundary
+    (sym (cubeSixFaceBoundaryExpanded axisA axisB axisC))
+    (expandedCubeBoundaryCancellable axisA axisB axisC)
 
 literalCubeBoundaryIdentity :
   ∀ {n Value} {group : Bond.ExactLinkGroup Value}
