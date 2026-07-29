@@ -31,11 +31,14 @@ import DASHI.Physics.YangMills.BalabanClayLiteratureNormalizationLedger
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierProducerBundle
 import DASHI.Physics.YangMills.BalabanClayLiteralFrontierCompletionLedger
 
--- Gate-4 large-field archaeology, numerical dependency graph, model-suitability
--- quarantine and mass-gap anti-circularity audit.  These modules reference the
--- existing small-field/RG/numerical owners rather than creating parallel proofs.
+-- Gate-4 large-field archaeology, typed reuse of the existing small-field RG,
+-- finite bad-component/support/boundary bookkeeping, exact Balaban analytic
+-- targets, numerical dependency graph, model-suitability quarantine and
+-- mass-gap anti-circularity audit.
 import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact
 import DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExact
 import DASHI.Physics.YangMills.BalabanClayGate4LargeFieldArchaeologyExact
+import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact
+import DASHI.Physics.YangMills.BalabanClayGate4ROperationDecayTargetsExact
 import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact
 import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger
