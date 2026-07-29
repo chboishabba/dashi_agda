@@ -32,9 +32,12 @@ record BranchHeadAgdaReceipt : Set where
     bishopFrontierLedgerChecked : Bool
 
     setoidBackendSpineChecked : Bool
+    constructiveRealCapabilityHierarchyChecked : Bool
+    constructiveRealCategoricityChecked : Bool
     bishopBackendChecked : Bool
     fastCauchyBackendChecked : Bool
     bishopFastCauchyEquivalenceSeamChecked : Bool
+    bishopFastCauchyCategoricityInstanceChecked : Bool
     legacyEquivalenceAuthorityChecked : Bool
     canonicalBackendSelectionChecked : Bool
     cubicalHoTTBoundaryChecked : Bool
@@ -47,6 +50,8 @@ record BranchHeadAgdaReceipt : Set where
     periodicTraversalDecoderChecked : Bool
     wardBoxCertificateClosureChecked : Bool
     physicalT5TailMomentMeasureClosureChecked : Bool
+    t5LpUniformIntegrabilityChecked : Bool
+    legacyGaugeRGMeasureReuseChecked : Bool
 
     changedModules : List String
     constructiveProducerAggregateChecked : Bool
@@ -71,8 +76,10 @@ record AuthoritativeBranchHeadEvidence
     bishopFrontierLedgerTypechecks : Set
 
     realBackendSpineTypechecks : Set
+    capabilityHierarchyAndCategoricityTypecheck : Set
     bishopAndFastCauchyBackendsTypecheck : Set
     concreteEquivalenceSeamTypechecks : Set
+    bishopFastCauchyCategoricityInstanceTypechecks : Set
     legacyEquivalenceAuthorityTypechecks : Set
     canonicalBackendAndHoTTBoundaryTypecheck : Set
     bishopSeriesAndCoefficientAdaptersTypecheck : Set
@@ -81,6 +88,7 @@ record AuthoritativeBranchHeadEvidence
     t3MechanismAndGreenClosureTypecheck : Set
     t4WardAndBoxClosureTypecheck : Set
     t5PhysicalClosureTypecheck : Set
+    lpUniformIntegrabilityAndReuseAdaptersTypecheck : Set
 
     publicAggregateChecked : Set
     postulateFreeChangedSurface : Set
@@ -114,6 +122,9 @@ bishopFrontierLedgerTypecheckLevel = conditional
 realBackendTrancheTypecheckLevel : ProofLevel
 realBackendTrancheTypecheckLevel = conditional
 
+categoricityTrancheTypecheckLevel : ProofLevel
+categoricityTrancheTypecheckLevel = conditional
+
 t2ClosureTrancheTypecheckLevel : ProofLevel
 t2ClosureTrancheTypecheckLevel = conditional
 
@@ -125,6 +136,9 @@ t4ClosureTrancheTypecheckLevel = conditional
 
 t5ClosureTrancheTypecheckLevel : ProofLevel
 t5ClosureTrancheTypecheckLevel = conditional
+
+t5LpReuseTrancheTypecheckLevel : ProofLevel
+t5LpReuseTrancheTypecheckLevel = conditional
 
 publicYangMillsAggregateTypecheckLevel : ProofLevel
 publicYangMillsAggregateTypecheckLevel = conditional
