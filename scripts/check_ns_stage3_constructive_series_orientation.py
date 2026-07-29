@@ -20,6 +20,8 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationIntegerGeometricEnvelope.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
@@ -87,13 +89,13 @@ def main() -> int:
         return 1
     print(
         "checked Murray thesis pin, Dong Li coercivity boundary and "
-        "output-relocation Check A tranche: 14 Agda modules, 5 exact "
+        "output-relocation Check A tranche: 16 Agda modules, 5 exact "
         "verifiers, provenance, no holes/postulates/escapes; the source-style "
         "all-three-homogeneity affine ansatz is exactly infeasible, constant "
-        "unit weights recover symbolic Check A, and integer geometric "
-        "envelopes give the exact 128/93 cutoff bound; only constructive "
-        "base-two exponent antitonicity and the full analytic archetype remain "
-        "fail-closed"
+        "unit weights recover symbolic Check A, integer geometric envelopes "
+        "give the exact 128/93 cutoff bound, and the final archetype cutset is "
+        "specified; only the two constructive base-two domination lemmas and "
+        "positive-kernel/signed-majorant instantiation remain fail-closed"
     )
     return 0
 
