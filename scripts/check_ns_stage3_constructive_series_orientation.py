@@ -18,6 +18,11 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
 
+VERIFIERS = (
+    "scripts/ns_stage3_murray_source_pin_audit.py",
+    "scripts/ns_stage3_power_law_orientation_audit.py",
+)
+
 PROVENANCE = ("-- PROVENANCE", "-- Authors:", "-- Title:", "-- Venue/year:", "-- DOI:", "-- Relationship:")
 FORBIDDEN = ("{!!}", "?}", "{-# TERMINATING #-}", "{-# NON_TERMINATING #-}")
 POSTULATE = re.compile(r"(?m)^\s*postulate(?:\s|$)")
@@ -44,10 +49,11 @@ def main() -> int:
             if text.count(opening) != text.count(closing):
                 failures.append(f"{relative}: unbalanced {opening}{closing}")
 
-    verifier = root / "scripts/ns_stage3_power_law_orientation_audit.py"
-    if not verifier.is_file():
-        failures.append("missing power-law substitution exact verifier")
-    else:
+    for relative in VERIFIERS:
+        verifier = root / relative
+        if not verifier.is_file():
+            failures.append(f"missing exact verifier: {relative}")
+            continue
         result = subprocess.run(
             [sys.executable, str(verifier)], cwd=root, check=False,
             capture_output=True, text=True
@@ -60,7 +66,7 @@ def main() -> int:
         return 1
     print(
         "checked Murray thesis pin, constructive-real comparison and output-relocation "
-        "Schur substitution: 8 Agda modules, exact verifier, provenance, no holes/"
+        "Schur substitution: 8 Agda modules, 2 exact verifiers, provenance, no holes/"
         "postulates/escapes; literal rows, six epsilon slopes and the Check A criterion "
         "are closed while dyadic API, numeric DASHI data, positive epsilon and the "
         "inhabited Check A result remain fail-closed"
