@@ -204,6 +204,11 @@ physicalGramToClosureReflectionMeaningInputsLevel = conditional
 clusteringBoundToClosureOS4MeaningInputsLevel : ProofLevel
 clusteringBoundToClosureOS4MeaningInputsLevel = conditional
 
+-- Compatibility name for older consumers. The missing input is now the typed
+-- interpretation of the clustering cutset's bound as the closure's OS4 field.
+uniformClusteringOS4InputsLevel : ProofLevel
+uniformClusteringOS4InputsLevel = clusteringBoundToClosureOS4MeaningInputsLevel
+
 fullO4CovarianceOS1InputsLevel : ProofLevel
 fullO4CovarianceOS1InputsLevel = conditional
 
