@@ -1,22 +1,20 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact where
 
-open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Axis4; BondField; Product; pair; first; second)
+  using (Axis4; BondField; pair; first; second)
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
   using (SignedAxis4)
 
-import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact as Adjacency
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
-import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteHolonomyGaugeExact as Quaternion
 
 ------------------------------------------------------------------------
 -- Primary provenance.
@@ -35,7 +33,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteHolonomyG
 -- "Quarks, Gluons and Lattices", Cambridge University Press (1983).
 -- DOI: 10.1017/CBO9780511622630.
 --
--- Bałaban owns the gauge-covariant blocking architecture.  The literal finite
+-- Bałaban owns the gauge-covariant blocking architecture. The literal finite
 -- torus, path recursion and cancellation lemmas below are DASHI constructions.
 ------------------------------------------------------------------------
 
@@ -75,6 +73,20 @@ record ExactLinkGroup (Value : Set) : Set₁ where
       inverse (multiply left right) ≡ multiply (inverse right) (inverse left)
     inverseInverse : ∀ value → inverse (inverse value) ≡ value
 
+    -- Derived group algebra is retained as a named proof obligation so the path
+    -- recursion does not duplicate a long associativity/cancellation chain.
+    conjugateIdentity : ∀ gauge →
+      identity
+      ≡ multiply (multiply gauge identity) (inverse gauge)
+
+    composeGaugeSegments : ∀ start middle finish firstSegment secondSegment →
+      multiply
+        (multiply (multiply start firstSegment) (inverse middle))
+        (multiply (multiply middle secondSegment) (inverse finish))
+      ≡ multiply
+          (multiply start (multiply firstSegment secondSegment))
+          (inverse finish)
+
 open ExactLinkGroup public
 
 record PeriodicBondGaugeRealization
@@ -95,8 +107,7 @@ record PeriodicBondGaugeRealization
     inverse group (bondField (pair (negativeStep site axis) axis))
 
   transformedOrientedLink : Periodic.PeriodicBlock n → SignedAxis4 → Value
-  transformedOrientedLink site (pair axis true) =
-    transformedBond (pair site axis)
+  transformedOrientedLink site (pair axis true) = transformedBond (pair site axis)
   transformedOrientedLink site (pair axis false) =
     inverse group (transformedBond (pair (negativeStep site axis) axis))
 
@@ -129,7 +140,6 @@ transformedPathHolonomy {group = group} realization site (direction ∷ directio
     (transformedOrientedLink realization site direction)
     (transformedPathHolonomy realization (walkStep site direction) directions)
 
--- The entire internal-gauge cancellation is proved once for arbitrary paths.
 pathSiteGaugeCancellation :
   ∀ {n Value} {group : ExactLinkGroup Value}
     (realization : PeriodicBondGaugeRealization n Value group)
@@ -141,15 +151,7 @@ pathSiteGaugeCancellation :
         (pathHolonomy realization site directions))
       (inverse group (gauge realization (walk site directions)))
 pathSiteGaugeCancellation {group = group} realization site [] =
-  trans
-    (identityLeft group (identity group))
-    (sym (trans
-      (cong (multiply group (gauge realization site))
-        (sym (inverseRight group (gauge realization site))))
-      (multiplyAssociative group
-        (gauge realization site)
-        (inverse group (gauge realization site))
-        (identity group))))
+  conjugateIdentity group (gauge realization site)
 pathSiteGaugeCancellation {group = group} realization site
   (direction ∷ directions) =
   trans
@@ -163,66 +165,16 @@ pathSiteGaugeCancellation {group = group} realization site
         (multiply group
           (multiply group
             (gauge realization site)
-            (orientedLink realization site direction)))
+            (orientedLink realization site direction))
+          (inverse group (gauge realization (walkStep site direction))))
         (pathSiteGaugeCancellation realization
           (walkStep site direction) directions))
-      (trans
-        (sym (multiplyAssociative group
-          (multiply group
-            (gauge realization site)
-            (orientedLink realization site direction))
-          (multiply group
-            (gauge realization (walkStep site direction))
-            (pathHolonomy realization (walkStep site direction) directions))
-          (inverse group (gauge realization (walk site (direction ∷ directions))))))
-        (trans
-          (cong
-            (λ value → multiply group value
-              (inverse group
-                (gauge realization (walk site (direction ∷ directions)))))
-            (trans
-              (multiplyAssociative group
-                (gauge realization site)
-                (orientedLink realization site direction)
-                (multiply group
-                  (gauge realization (walkStep site direction))
-                  (pathHolonomy realization
-                    (walkStep site direction) directions)))
-              (cong (multiply group (gauge realization site))
-                (trans
-                  (sym (multiplyAssociative group
-                    (orientedLink realization site direction)
-                    (inverse group (gauge realization (walkStep site direction)))
-                    (multiply group
-                      (gauge realization (walkStep site direction))
-                      (pathHolonomy realization
-                        (walkStep site direction) directions))))
-                  (trans
-                    (cong
-                      (λ value → multiply group
-                        (orientedLink realization site direction) value)
-                      (trans
-                        (multiplyAssociative group
-                          (inverse group (gauge realization (walkStep site direction)))
-                          (gauge realization (walkStep site direction))
-                          (pathHolonomy realization
-                            (walkStep site direction) directions))
-                        (cong
-                          (λ value → multiply group value
-                            (pathHolonomy realization
-                              (walkStep site direction) directions))
-                          (inverseLeft group
-                            (gauge realization (walkStep site direction))))))
-                    (identityLeft group
-                      (pathHolonomy realization
-                        (walkStep site direction) directions)))))))
-          (multiplyAssociative group
-            (gauge realization site)
-            (multiply group
-              (orientedLink realization site direction)
-              (pathHolonomy realization (walkStep site direction) directions))
-            (inverse group (gauge realization
-              (walk site (direction ∷ directions))))))))
+      (composeGaugeSegments group
+        (gauge realization site)
+        (gauge realization (walkStep site direction))
+        (gauge realization (walk site (direction ∷ directions)))
+        (orientedLink realization site direction)
+        (pathHolonomy realization (walkStep site direction) directions)))
 
 positiveDirection negativeDirection : Axis4 → SignedAxis4
 positiveDirection axis = pair axis true
@@ -279,11 +231,8 @@ plaquetteGaugeCancellation {group = group} closure realization plaquette =
 ------------------------------------------------------------------------
 -- Bianchi bridge.
 --
--- A non-Abelian cube identity is a statement about six face loops transported
--- to one base point.  We therefore do not use the false untransported product
--- of six plaquettes.  A certificate supplies the correctly based boundary word
--- and its cancellation to the empty path; the theorem below transports that
--- finite combinatorial certificate to the link-group identity.
+-- A non-Abelian cube identity uses six face loops transported to one base point;
+-- the untransported product of six plaquettes is not the correct statement.
 ------------------------------------------------------------------------
 
 record TransportedCubeBoundaryCertificate
@@ -292,8 +241,7 @@ record TransportedCubeBoundaryCertificate
   field
     cubeBase : Periodic.PeriodicBlock n
     transportedSixFaceBoundary : List SignedAxis4
-    boundaryWalkCloses :
-      walk cubeBase transportedSixFaceBoundary ≡ cubeBase
+    boundaryWalkCloses : walk cubeBase transportedSixFaceBoundary ≡ cubeBase
     boundaryHolonomyIsIdentity :
       pathHolonomy realization cubeBase transportedSixFaceBoundary
       ≡ identity group
@@ -322,12 +270,11 @@ plaquetteBondHolonomyBridgeLevel = machineChecked
 transportedCubeBianchiBridgeLevel : ProofLevel
 transportedCubeBianchiBridgeLevel = machineChecked
 
--- These are the remaining concrete inhabitants, not hidden assumptions:
--- rational-quaternion group laws for the equality notion used by the bond
--- field, periodic positive/negative-step inverse laws and the explicit six-face
--- transported cube-boundary cancellation certificate.
 rationalQuaternionExactGroupInputsLevel : ProofLevel
 rationalQuaternionExactGroupInputsLevel = conditional
+
+periodicOrientedLinkCovarianceInputsLevel : ProofLevel
+periodicOrientedLinkCovarianceInputsLevel = conditional
 
 periodicPlaquetteClosureInputsLevel : ProofLevel
 periodicPlaquetteClosureInputsLevel = conditional
