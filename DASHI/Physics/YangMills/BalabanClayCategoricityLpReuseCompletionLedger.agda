@@ -8,6 +8,7 @@ import DASHI.Analysis.ConstructiveRealCategoricityExact as Categoricity
 import DASHI.Analysis.BishopFastCauchyCommonCompletionExact as CommonCompletion
 import DASHI.Analysis.BishopFastCauchyCategoricityInstanceExact as BishopFast
 import DASHI.Physics.YangMills.BalabanClayT5LpUniformIntegrabilityExact as LpUI
+import DASHI.Physics.YangMills.BalabanClayT5LpPhysicalMeasureAdapterExact as LpAdapter
 import DASHI.Physics.YangMills.BalabanClayLegacyGaugeRGMeasureReuseExact as Reuse
 
 ------------------------------------------------------------------------
@@ -40,6 +41,9 @@ lpHolderReductionLevel = LpUI.lpHolderReductionLevel
 powerYoungFunctionReductionLevel = LpUI.powerYoungFunctionReductionLevel
 lpToPhysicalMeasureAdapterLevel = LpUI.lpToPhysicalMeasureAdapterLevel
 lpToOSGramAdapterLevel = LpUI.lpToOSGramAdapterLevel
+lpPhysicalMeasureRecordAssemblyLevel =
+  LpAdapter.lpPhysicalMeasureRecordAssemblyLevel
+lpPhysicalOSGramAdapterLevel = LpAdapter.lpPhysicalOSGramAdapterLevel
 
 gaugeReuseLevel = Reuse.gaugeReuseLevel
 oneStepRGWitnessReuseLevel = Reuse.oneStepRGWitnessReuseLevel
@@ -67,5 +71,7 @@ bishopFastCauchyCanonicalityAndUniquenessInputsLevel =
 physicalSelectedMomentInputsLevel = LpUI.physicalSelectedMomentInputsLevel
 physicalHolderAndUniformIntegrabilityInputsLevel =
   LpUI.physicalHolderAndUniformIntegrabilityInputsLevel
+lpPhysicalMomentAndTopologyInputsLevel =
+  LpAdapter.lpPhysicalMomentAndTopologyInputsLevel
 rgToT5RepresentationSeamLevel = Reuse.rgToT5RepresentationSeamLevel
 physicalMeasureAgreementSeamLevel = Reuse.physicalMeasureAgreementSeamLevel
