@@ -8,11 +8,13 @@ import sys
 from pathlib import Path
 
 FILES = (
+    "DASHI/Physics/Closure/NSTriadKNMurrayThesisCommitSourceInspection.agda",
     "DASHI/Physics/Closure/NSTriadKNConstructiveRealCandidateComparison.agda",
     "DASHI/Physics/Closure/NSTriadKNGrafakosTorresPowerLawOrientation.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationWeightedExponentIdentity.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationLiteralShellSubstitution.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFamilySubstitution.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationCheckACriterion.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
 
@@ -46,7 +48,10 @@ def main() -> int:
     if not verifier.is_file():
         failures.append("missing power-law substitution exact verifier")
     else:
-        result = subprocess.run([sys.executable, str(verifier)], cwd=root, check=False, capture_output=True, text=True)
+        result = subprocess.run(
+            [sys.executable, str(verifier)], cwd=root, check=False,
+            capture_output=True, text=True
+        )
         if result.returncode:
             failures.append(result.stderr.strip() or result.stdout.strip())
 
@@ -54,10 +59,11 @@ def main() -> int:
         print("\n".join(failures))
         return 1
     print(
-        "checked constructive-real comparison and output-relocation Schur substitution: "
-        "6 Agda modules, exact verifier, provenance, no holes/postulates/escapes; "
-        "literal rows and six epsilon slopes closed while dyadic tail, numeric "
-        "bases/directions, positive epsilon and Check A remain fail-closed"
+        "checked Murray thesis pin, constructive-real comparison and output-relocation "
+        "Schur substitution: 8 Agda modules, exact verifier, provenance, no holes/"
+        "postulates/escapes; literal rows, six epsilon slopes and the Check A criterion "
+        "are closed while dyadic API, numeric DASHI data, positive epsilon and the "
+        "inhabited Check A result remain fail-closed"
     )
     return 0
 
