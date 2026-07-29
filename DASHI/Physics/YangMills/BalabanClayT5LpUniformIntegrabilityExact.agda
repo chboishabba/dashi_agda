@@ -67,9 +67,9 @@ record ExponentialToPolynomialMomentAuthority
       UniformLpMoment Measure Observable Scalar Exponent
         operations measureSequence absoluteObservable powerObservable LessEqual
         exponent observable
-    exponentialImpliesSelectedMoment : ∀ exponent observable →
-      Admissible observable → exponentialMomentBound observable →
-      Set
+    exponentialImpliesSelectedMoment :
+      (exponent : Exponent) → (observable : Observable) →
+      Admissible observable → exponentialMomentBound observable → Set
 
 open ExponentialToPolynomialMomentAuthority public
 
@@ -98,7 +98,7 @@ record ReflectedProductHolderAuthority
         (Gram.multiplyObservable operations
           (Gram.reflectObservable operations left) right)
 
-    holderOrYoungProof : ∀ left right → Set
+    holderOrYoungProof : (left right : Observable) → Set
 
 open ReflectedProductHolderAuthority public
 
@@ -118,7 +118,8 @@ record LpUniformIntegrabilityAuthority
         operations measureSequence absoluteObservable powerObservable LessEqual
         exponent observable →
       UniformlyIntegrable (λ _ → observable)
-    holderChebyshevTailModulus : ∀ exponent observable → Set
+    holderChebyshevTailModulus :
+      (exponent : Exponent) → (observable : Observable) → Set
 
 open LpUniformIntegrabilityAuthority public
 
@@ -244,7 +245,8 @@ record PhysicalLpUniformIntegrabilityRoute
         absoluteObservable powerObservable LessEqual UniformlyIntegrable
         deLaValleePoussin
 
-    directLpAndPowerYoungRoutesAgree : ∀ left right → Set
+    directLpAndPowerYoungRoutesAgree :
+      (left right : Observable) → Set
 
     witnessFromLpRoute : ∀ left right →
       RenormalizedObservable left → RenormalizedObservable right →
@@ -303,7 +305,8 @@ record LpExpectationProducerUpgrade
       UniformlyIntegrable lpRoute sequence →
       Thermo.UniformlyIntegrable producer sequence
 
-    reflectedProductWitnessIsLpDerived : ∀ left right → Set
+    reflectedProductWitnessIsLpDerived :
+      (left right : Observable) → Set
 
 open LpExpectationProducerUpgrade public
 
