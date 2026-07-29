@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4CountingAndLocalizationReuseExact
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational using (ℚ; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -29,14 +29,10 @@ import DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion as ExistingR
 -- 355--392. DOI: 10.1007/BF01238433.
 --
 -- The first two papers are the primary candidates for the connected-family and
--- localization-norm estimates used by the later R-operation proof.  Exact
+-- localization-norm estimates used by the later R-operation proof. Exact
 -- theorem-number attribution remains pending direct primary-text verification.
 -- The DASHI theorems below reuse existing in-repository quantitative owners and
 -- do not claim that the remaining representation bridge has been proved.
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- E2: rooted connected-family counting from the existing traversal shell.
 ------------------------------------------------------------------------
 
 record RootedComponentFamilyCounting
@@ -91,16 +87,12 @@ exactRootedFamilyCounting {shellData = shellData} representation family =
   subst
     (λ lower → lower
       ≤ Shell.quarter * Shell.halfPower (depthOf representation family))
-    (familyMassDefinition representation family)
+    (sym (familyMassDefinition representation family))
     (Shell.rootedShellBelowQuarterHalfPower shellData
       (scaleOf representation family)
       (volumeOf representation family)
       (rootOf representation family)
       (depthOf representation family))
-
-------------------------------------------------------------------------
--- E3: quantitative localization budget already owned by OneStepRGCutset.
-------------------------------------------------------------------------
 
 existingLocalizationBudgetBound :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
@@ -163,12 +155,12 @@ rLocalizationBudgetFromExistingRG {rg = rg} interpretation expression =
   subst
     (λ lower → ExistingRG.LessEqual rg lower
       (localizationNormUpper interpretation expression))
-    (localizedNormMeaning interpretation expression)
+    (sym (localizedNormMeaning interpretation expression))
     (subst
       (λ upper → ExistingRG.LessEqual rg
         (ExistingRG.localizationContribution rg
           (regionOf interpretation expression)) upper)
-      (localizationUpperMeaning interpretation expression)
+      (sym (localizationUpperMeaning interpretation expression))
       (ExistingRG.localizationBudgetBound rg
         (regionOf interpretation expression)))
 
@@ -184,9 +176,6 @@ existingRGLocalizationBudgetReuseLevel = machineChecked
 existingRGLocalizationSupportWeightReuseLevel : ProofLevel
 existingRGLocalizationSupportWeightReuseLevel = machineChecked
 
--- These are the precise remaining seams: identify the actual R-component family
--- with the rooted traversal representation, and identify the R-localized norm
--- with the existing one-step localization contribution/budget.
 rComponentFamilyToRootedTraversalIdentificationLevel : ProofLevel
 rComponentFamilyToRootedTraversalIdentificationLevel = conditional
 
