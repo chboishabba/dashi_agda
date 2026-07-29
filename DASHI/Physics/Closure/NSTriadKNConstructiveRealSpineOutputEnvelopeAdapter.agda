@@ -27,6 +27,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Spine
+import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationEmbeddedEnvelopeClosure as Embedded
 
 record ConstructiveRealSpineEnvelopeCapability
@@ -91,8 +92,6 @@ asOrderedRationalEnvelopeCarrier R capability = record
 record ConstructiveRealSpineOutputShellData
     (R : Spine.ConstructedOrderedCompleteReal)
     (capability : ConstructiveRealSpineEnvelopeCapability R) : Set₁ where
-  private
-    C = asOrderedRationalEnvelopeCarrier R capability
   field
     lowFactor gapFactor : Nat → Spine.Real R
     signedCoefficient : Nat → Nat → Spine.Real R
@@ -105,17 +104,11 @@ record ConstructiveRealSpineOutputShellData
     lowShellDominatedByQuarter : ∀ lowShell →
       Spine._≤_ R
         (lowFactor lowShell)
-        (Embedded.rationalEmbed C
-          (DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.pow
-            DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.quarter
-            lowShell))
+        (rationalEmbed capability (Geo.pow Geo.quarter lowShell))
     gapDominatedByThirtySecond : ∀ gap →
       Spine._≤_ R
         (gapFactor gap)
-        (Embedded.rationalEmbed C
-          (DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.pow
-            DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope.thirtySecond
-            gap))
+        (rationalEmbed capability (Geo.pow Geo.thirtySecond gap))
 
     signedCoefficientUpper : ∀ lowShell gap →
       Spine._≤_ R
