@@ -1,6 +1,5 @@
 module DASHI.Physics.YangMills.BalabanClayGate4LargeFieldArchaeologyExact where
 
-open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -9,7 +8,7 @@ import DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion as ExistingR
 import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact as Literature
 
 ------------------------------------------------------------------------
--- Gate 4 archaeology: Balaban's large-field R-operation lane.
+-- Gate 4 archaeology: Bałaban's large-field R-operation lane.
 --
 -- Primary sources:
 -- Tadeusz Bałaban,
@@ -23,7 +22,12 @@ import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact as L
 -- 355--392, DOI: 10.1007/BF01238433.
 --
 -- J. Dimock, "The Renormalization Group According to Balaban. II. Large
--- Fields", arXiv:1212.5562, is used only as scalar-model exposition.
+-- Fields", Journal of Mathematical Physics 54 (2013), 092301,
+-- DOI: 10.1063/1.4821275, arXiv:1212.5562, is used only as scalar-model
+-- exposition and not as gauge-theory theorem authority.
+--
+-- Exact equation/page transcriptions below remain pending direct primary-source
+-- verification.  The Eriksson viXra documents are locators only.
 ------------------------------------------------------------------------
 
 data ArchaeologyStatus : Set where
@@ -46,7 +50,7 @@ open Gate4Mechanism public
 smallFieldCoordinates : Gate4Mechanism
 smallFieldCoordinates = mechanism
   "small-field coordinate decomposition"
-  "Balaban RG I; small-field effective action"
+  "Bałaban RG I; small-field effective action"
   "DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion"
   "OneStepRGCutset.fluctuationCoordinatesExist"
   existingConditional
@@ -56,7 +60,7 @@ smallFieldCoordinates = mechanism
 smallFieldIrrelevantContraction : Gate4Mechanism
 smallFieldIrrelevantContraction = mechanism
   "localized irrelevant Taylor contraction"
-  "Balaban RG I/II"
+  "Bałaban RG I/II"
   "DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion"
   "OneStepRGCutset.irrelevantTaylorRemainderContractive"
   existingConditional
@@ -65,53 +69,63 @@ smallFieldIrrelevantContraction = mechanism
 
 largeFieldRegionCarrier : Gate4Mechanism
 largeFieldRegionCarrier = mechanism
-  "large-field region and component carrier"
-  "Large Field I, determining sets and large-field regions"
-  ""
-  ""
+  "literal large-field block, connected component, enlargement and collar"
+  "Large Field I/II; determining sets and enlarged large-field regions"
+  "DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact"
+  "literalWilsonBadBlockGeometry"
   newCombinatorial
-  "BalabanROperationExact"
-  "bad blocks, connected components, enlargements and collars"
+  "BalabanClayGate4ComponentClassAndFiniteTOperationExact"
+  "literal Wilson predicate and generic component algebra are proof-bearing; the physical adjacency/holonomy instance remains separate"
+
+componentClassSplit : Gate4Mechanism
+componentClassSplit = mechanism
+  "first/small-field versus second/T-operation component class"
+  "Large Field II, component-class convention near the large-field decomposition"
+  "DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact"
+  "SecondClassComponent"
+  newCombinatorial
+  "localizedTOperation"
+  "this classifies connected components; it is distinct from localized-expression intersection classification"
+
+localizedExpressionClassSplit : Gate4Mechanism
+localizedExpressionClassSplit = mechanism
+  "localized-expression regular/boundary split by large-field intersection"
+  "Large Field II, localization and boundary extraction"
+  "DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact"
+  "classifyLocalizedTermExact"
+  newCombinatorial
+  "runROperation"
+  "do not conflate this term classification with the component class controlling T"
 
 determiningSetUpdate : Gate4Mechanism
 determiningSetUpdate = mechanism
   "determining-set update and background redefinition"
-  "Large Field II, new determining sets B'_k"
+  "Large Field II, new determining sets and boundary terms"
   "DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion"
   "CriticalMapCutset.backgroundField"
   newAnalytic
-  "BalabanLocalTOperationExact"
-  "reuse the existing background carrier but prove the large-field update law"
-
-firstSecondClassSplit : Gate4Mechanism
-firstSecondClassSplit = mechanism
-  "first-class and second-class localized-term split"
-  "Large Field II, classification by intersection with the large-field region Z"
-  ""
-  ""
-  newCombinatorial
-  "BalabanLocalTOperationExact"
-  "classification must preserve support and polymer ownership"
+  "BalabanClayGate4FiniteROperationAndDecayAssemblyExact"
+  "reuse the existing background carrier but prove the large-field update and support law"
 
 localTOperation : Gate4Mechanism
 localTOperation = mechanism
-  "localized T operation"
-  "Large Field I equation (1.100) and Large Field II composition step"
-  "DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion"
-  "OneStepRGCutset.polymerLocalizationStable"
+  "localized T operation on certified second-class components"
+  "Large Field II, equation (1.89), p. 387, pending primary-source check"
+  "DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact"
+  "constrainedIntegral"
   newAnalytic
-  "BalabanROperationExact"
-  "existing localization laws are inputs, not the T operation itself"
+  "ExactBalabanTOperationSmallFactor"
+  "the finite T definition, positivity and monotonicity are internal; locality, covariance and the small-factor estimate remain analytic"
 
 rOperation : Gate4Mechanism
 rOperation = mechanism
-  "large-field R operation"
-  "Large Field I basic step; Large Field II completion"
-  ""
-  ""
-  newAnalytic
-  "BalabanRLocalizationExact"
-  "must transform large-field-associated expressions without importing a completion claim"
+  "finite R-operation expression pipeline"
+  "Large Field I basic step; Large Field II localization/exponentiation"
+  "DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact"
+  "runROperation"
+  newCombinatorial
+  "ROperationStructuralLaws"
+  "the algebraic partition/localize/extract/exponentiate pipeline is concrete; physical expression operations remain inputs"
 
 rLocalization : Gate4Mechanism
 rLocalization = mechanism
@@ -120,8 +134,8 @@ rLocalization = mechanism
   "DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion"
   "OneStepRGCutset.localizationPreservesSupport"
   newAnalytic
-  "BalabanRExponentiationExact"
-  "reuse support and exponential-weight preservation"
+  "ROperationDecayDerivation"
+  "reuse support and exponential-weight preservation through a representation adapter"
 
 rExponentiation : Gate4Mechanism
 rExponentiation = mechanism
@@ -130,35 +144,71 @@ rExponentiation = mechanism
   "DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion"
   "OneStepRGCutset.jacobianPolymerLocalization"
   newAnalytic
-  "BalabanLargeFieldPolymerBound"
-  "must produce polymer activities compatible with the existing cluster lane"
+  "ROperationDecayDerivation.localizedExponentiationBound"
+  "must produce activities compatible with the existing polymer norm"
+
+rDecay : Gate4Mechanism
+rDecay = mechanism
+  "boundary-uniform R-polymer decay"
+  "Large Field II, equation (1.100), p. 388, pending primary-source check"
+  "DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact"
+  "rOperationDecayUniformInBoundary"
+  newAnalytic
+  "BalabanCombinedSmallLargeFieldRGStep"
+  "transitive assembly is exact; component counting, localization and exponentiation inequalities remain inhabitants"
 
 boundaryTermReinjection : Gate4Mechanism
 boundaryTermReinjection = mechanism
-  "boundary-term generation and reinjection"
-  "Large Field II, terms B^{l(k)}(X) returned to the next renormalization step"
-  ""
-  ""
+  "boundary-term generation, support ownership and reinjection"
+  "Large Field II, equation (1.69), p. 377, pending primary-source check"
+  "DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact"
+  "nextBoundaryDensity"
   newAnalytic
   "BalabanCombinedSmallLargeFieldRGStep"
-  "load-bearing mechanism distinct from localization and exponentiation"
+  "list reinjection is exact; analytic support and next-determining-set preservation remain inputs"
+
+largeFieldAbsorption : Gate4Mechanism
+largeFieldAbsorption = mechanism
+  "large-field suppression absorbed into the small-field scale budget"
+  "Large Field II p0-growth and inductive estimates, exact locations pending primary-source check"
+  "DASHI.Physics.YangMills.BalabanClayGate4P0GrowthAbsorptionExact"
+  "largeFieldAbsorbedBySmallFieldBudget"
+  newAnalytic
+  "BalabanCombinedSmallLargeFieldRGStep"
+  "final transitive proof is exact once residual-envelope and polynomial-times-suppression estimates are supplied"
 
 admissibleCouplingDomain : Gate4Mechanism
 admissibleCouplingDomain = mechanism
   "scale-uniform admissible effective-coupling domain"
-  "Large Field II Theorem 1 hypothesis on the effective coupling sequence"
-  "DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion"
-  "OneStepRGCutset.couplingRenormalization"
+  "Large Field II Theorem 1, p. 388, pending primary-source check"
+  "DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact"
+  "ConventionMatchedRunningCoupling"
   newAnalytic
-  "BalabanUltravioletStabilityIteration"
-  "must show the coupling sequence remains in the invariant domain"
+  "Gate4UVCompletionPackage"
+  "must preserve the existing fixed beta-function convention"
+
+ultravioletIteration : Gate4Mechanism
+ultravioletIteration = mechanism
+  "combined one-step closure and all-scale ultraviolet induction"
+  "Large Field II Theorem 1, p. 388, pending primary-source check"
+  "DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact"
+  "allScaleAdmissible"
+  newCombinatorial
+  "partitionFunctionUniformBound"
+  "the induction is exact; one-step analytic preservation and initial stability remain conditional"
 
 gate4Mechanisms : List Gate4Mechanism
 gate4Mechanisms =
   smallFieldCoordinates ∷ smallFieldIrrelevantContraction ∷
-  largeFieldRegionCarrier ∷ determiningSetUpdate ∷ firstSecondClassSplit ∷
-  localTOperation ∷ rOperation ∷ rLocalization ∷ rExponentiation ∷
-  boundaryTermReinjection ∷ admissibleCouplingDomain ∷ []
+  largeFieldRegionCarrier ∷ componentClassSplit ∷
+  localizedExpressionClassSplit ∷ determiningSetUpdate ∷ localTOperation ∷
+  rOperation ∷ rLocalization ∷ rExponentiation ∷ rDecay ∷
+  boundaryTermReinjection ∷ largeFieldAbsorption ∷
+  admissibleCouplingDomain ∷ ultravioletIteration ∷ []
+
+------------------------------------------------------------------------
+-- Stable completion-package surfaces retained for downstream consumers.
+------------------------------------------------------------------------
 
 record BalabanLargeFieldRegionCarrier
     (Block Region : Set) : Set₁ where
