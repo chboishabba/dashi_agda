@@ -1,12 +1,13 @@
 module DASHI.Physics.YangMills.BalabanClayGate4WilsonBoltzmannSuppressionExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; _≤_)
+open import Data.Rational using (ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Gap
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as Wilson
 
 ------------------------------------------------------------------------
@@ -21,11 +22,6 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateE
 -- "Large Field Renormalization. II. Localization, Exponentiation, and Bounds
 -- for the R Operation", Communications in Mathematical Physics 122 (1989),
 -- 355--392. DOI: 10.1007/BF01238433.
---
--- This module proves only order-algebra consequences of the existing literal
--- SU(2) Wilson-cost theorem. It does not identify the resulting local threshold
--- with Bałaban's complete T-operation constant without an explicit convention
--- and measure-density bridge.
 ------------------------------------------------------------------------
 
 record ExponentialBoltzmannOrder : Set₁ where
@@ -50,18 +46,15 @@ largePlaquetteImpliesBoltzmannSuppression :
   boltzmannWeight exponential
     (Wilson.scaledWilsonPlaquetteCost cost scale configuration plaquette)
   ≤ expNegative exponential
-      ((DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact.halfℚ
-        * Wilson.beta cost scale)
-        * DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact.squareℚ
-          (Wilson.threshold largeField scale))
-largePlaquetteImpliesBoltzmannSuppression cost exponential
+      ((Gap.halfℚ * Wilson.beta cost scale)
+        * Gap.squareℚ (Wilson.threshold largeField scale))
+largePlaquetteImpliesBoltzmannSuppression
+  {largeField = largeField} cost exponential
   scale configuration plaquette large =
   subst
     (λ left → left ≤ expNegative exponential
-      ((DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact.halfℚ
-        * Wilson.beta cost scale)
-        * DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact.squareℚ
-          (Wilson.threshold _ scale)))
+      ((Gap.halfℚ * Wilson.beta cost scale)
+        * Gap.squareℚ (Wilson.threshold largeField scale)))
     (sym (boltzmannDefinition exponential
       (Wilson.scaledWilsonPlaquetteCost cost scale configuration plaquette)))
     (expNegativeAntitone exponential
@@ -74,7 +67,6 @@ record OrderedPlaquetteProduct (Plaquette : Set) : Set₁ where
     zero one : Weight
     multiply : Weight → Weight → Weight
     LessEqual : Weight → Weight → Set
-
     weight : Plaquette → Weight
     suppression : Weight
 
@@ -102,8 +94,7 @@ record OrderedPlaquetteProduct (Plaquette : Set) : Set₁ where
 open OrderedPlaquetteProduct public
 
 productWeights :
-  ∀ {Plaquette} → OrderedPlaquetteProduct Plaquette → List Plaquette →
-  Weight
+  ∀ {Plaquette} → OrderedPlaquetteProduct Plaquette → List Plaquette → Weight
 productWeights dataSet [] = one dataSet
 productWeights dataSet (plaquette ∷ plaquettes) =
   multiply dataSet (weight dataSet plaquette) (productWeights dataSet plaquettes)
@@ -141,44 +132,38 @@ oneSuppressedFactorControlsProduct :
   Wilson._∈_ selected plaquettes →
   LessEqual dataSet (weight dataSet selected) (suppression dataSet) →
   LessEqual dataSet (productWeights dataSet plaquettes) (suppression dataSet)
-oneSuppressedFactorControlsProduct dataSet Wilson.here selectedSuppressed =
+oneSuppressedFactorControlsProduct dataSet
+  {selected = selected} {plaquettes = .selected ∷ rest}
+  Wilson.here selectedSuppressed =
   subst
     (λ upper → LessEqual dataSet
-      (multiply dataSet (weight dataSet _) (productWeights dataSet _)) upper)
+      (multiply dataSet (weight dataSet selected)
+        (productWeights dataSet rest)) upper)
     (multiplyOneRight dataSet (suppression dataSet))
     (multiplyMonotoneNonnegative dataSet
-      (weightNonnegative dataSet _)
+      (weightNonnegative dataSet selected)
       (suppressionNonnegative dataSet)
-      (productWeightsNonnegative dataSet _)
+      (productWeightsNonnegative dataSet rest)
       (oneNonnegative dataSet)
       selectedSuppressed
-      (productWeightsBelowOne dataSet _))
+      (productWeightsBelowOne dataSet rest))
 oneSuppressedFactorControlsProduct dataSet
+  {selected = selected} {plaquettes = head ∷ rest}
   (Wilson.there membership) selectedSuppressed =
   subst
     (λ upper → LessEqual dataSet
-      (multiply dataSet (weight dataSet _) (productWeights dataSet _)) upper)
+      (multiply dataSet (weight dataSet head)
+        (productWeights dataSet rest)) upper)
     (multiplyOneLeft dataSet (suppression dataSet))
     (multiplyMonotoneNonnegative dataSet
-      (weightNonnegative dataSet _)
+      (weightNonnegative dataSet head)
       (oneNonnegative dataSet)
-      (productWeightsNonnegative dataSet _)
+      (productWeightsNonnegative dataSet rest)
       (suppressionNonnegative dataSet)
-      (weightBelowOne dataSet _)
-      (oneSuppressedFactorControlsProduct dataSet membership selectedSuppressed))
-
-record LargeBlockOwnedBoltzmannProduct
-    {Scale Configuration Gauge Block Plaquette : Set}
-    (largeField : Wilson.LiteralWilsonLargeFieldData
-      Scale Configuration Gauge Block Plaquette) : Set₁ where
-  field
-    productData : OrderedPlaquetteProduct Plaquette
-    plaquetteWeightMeaning :
-      ∀ scale configuration plaquette →
-      weight productData plaquette ≡
-      weight productData plaquette
-
-open LargeBlockOwnedBoltzmannProduct public
+      (weightBelowOne dataSet head)
+      (oneSuppressedFactorControlsProduct dataSet
+        {selected = selected} {plaquettes = rest}
+        membership selectedSuppressed))
 
 largeFieldBlockHasOwnedSuppression :
   ∀ {Scale Configuration Gauge Block Plaquette}
@@ -205,8 +190,5 @@ localWilsonBoltzmannSuppressionAssemblyLevel = machineChecked
 ownedPlaquetteProductSuppressionLevel : ProofLevel
 ownedPlaquetteProductSuppressionLevel = machineChecked
 
--- Remaining physical identification: the T-operation density's action factor
--- must equal this owned-plaquette Boltzmann product, with all Jacobian,
--- determinant, localization and patch factors assigned to their existing owners.
 tOperationActionFactorIdentificationInputsLevel : ProofLevel
 tOperationActionFactorIdentificationInputsLevel = conditional
