@@ -119,7 +119,7 @@ nsWriteupAndConstantsReadinessBlockerCountIs10 = refl
 
 nsWriteupAndConstantsReadinessSummary : String
 nsWriteupAndConstantsReadinessSummary =
-  "Readiness grammar: the reviewer-facing NS packet is presented as a candidate-complete classical suitable-weak-solution plus pressure/local-energy package that explicitly consumes theorem-shape grammar for A1-A9 together with classical CKN/ESS/LRT intake; the Stage-3 finite l2/Leray/G=3/transport core and the Grafakos--Torres affine/small-epsilon solver architecture are imported through the authoritative aggregate, while constructive-real H^s summation, twenty-four independent numeric row coefficients, positive DASHI epsilon and the final cutoff-uniform dual bound remain open."
+  "Readiness grammar: the reviewer-facing NS packet remains a candidate-complete classical suitable-weak-solution plus pressure/local-energy package consuming A1-A9 and classical CKN/ESS/LRT intake. Stage 3 now imports the finite l2/Leray/G=3/transport core, exact rejection of the source-style output-relocation affine ansatz, unit-weight Check A, recursive rational 4/3 and 32/31 sums, the 128/93 positive-kernel bound, the ordered rational-embedding closure theorem and finite signed domination. The output-relocation family is resolved, reducing the live independent affine frontier from twenty-four to twenty-one slots. The concrete ordered H^s shell bridge, the other four archetypes, positive global DASHI epsilon, authority acceptance and the final cutoff-uniform dual bound remain open."
 
 NSWriteupAndConstantsReadinessRecorded : Bool
 NSWriteupAndConstantsReadinessRecorded = true
@@ -147,6 +147,14 @@ NSStage3AffineSolverArchitectureClosed : Bool
 NSStage3AffineSolverArchitectureClosed =
   Stage3Analytic.stage3AffineSolverArchitectureClosed
 
+NSStage3OutputRelocationFiniteMajorantProgramClosed : Bool
+NSStage3OutputRelocationFiniteMajorantProgramClosed =
+  Stage3Analytic.stage3OutputRelocationFiniteMajorantProgramClosed
+
+NSStage3RemainingAffineIndependentSlotCount : Nat
+NSStage3RemainingAffineIndependentSlotCount =
+  Stage3Analytic.stage3RemainingAffineIndependentSlotCount
+
 NSStage3CutoffUniformAnalyticCompletionClosed : Bool
 NSStage3CutoffUniformAnalyticCompletionClosed =
   Stage3Analytic.stage3CutoffUniformAnalyticCompletionClosed
@@ -171,6 +179,10 @@ record NSWriteupAndConstantsReadinessBoundary : Set where
       NSStage3FiniteAnalyticCoreClosed ≡ true
     stage3AffineSolverArchitectureClosedField :
       NSStage3AffineSolverArchitectureClosed ≡ true
+    stage3OutputRelocationFiniteMajorantProgramClosedField :
+      NSStage3OutputRelocationFiniteMajorantProgramClosed ≡ true
+    stage3RemainingAffineIndependentSlotCountIs21 :
+      NSStage3RemainingAffineIndependentSlotCount ≡ 21
     stage3CutoffUniformAnalyticCompletionStillFalse :
       NSStage3CutoffUniformAnalyticCompletionClosed ≡ false
     authorityAuditStillFalse :
@@ -198,6 +210,10 @@ canonicalNSWriteupAndConstantsReadinessBoundary =
         Stage3Analytic.stage3FiniteAlgebraAndCombinatoricsClosedIsTrue
     ; stage3AffineSolverArchitectureClosedField =
         Stage3Analytic.stage3AffineSolverArchitectureClosedIsTrue
+    ; stage3OutputRelocationFiniteMajorantProgramClosedField =
+        Stage3Analytic.stage3OutputRelocationFiniteMajorantProgramClosedIsTrue
+    ; stage3RemainingAffineIndependentSlotCountIs21 =
+        Stage3Analytic.stage3RemainingAffineIndependentSlotCountIs21
     ; stage3CutoffUniformAnalyticCompletionStillFalse =
         Stage3Analytic.stage3CutoffUniformAnalyticCompletionClosedIsFalse
     ; authorityAuditStillFalse = refl
@@ -223,6 +239,16 @@ NSStage3AffineSolverArchitectureClosedIsTrue :
   NSStage3AffineSolverArchitectureClosed ≡ true
 NSStage3AffineSolverArchitectureClosedIsTrue =
   Stage3Analytic.stage3AffineSolverArchitectureClosedIsTrue
+
+NSStage3OutputRelocationFiniteMajorantProgramClosedIsTrue :
+  NSStage3OutputRelocationFiniteMajorantProgramClosed ≡ true
+NSStage3OutputRelocationFiniteMajorantProgramClosedIsTrue =
+  Stage3Analytic.stage3OutputRelocationFiniteMajorantProgramClosedIsTrue
+
+NSStage3RemainingAffineIndependentSlotCountIs21 :
+  NSStage3RemainingAffineIndependentSlotCount ≡ 21
+NSStage3RemainingAffineIndependentSlotCountIs21 =
+  Stage3Analytic.stage3RemainingAffineIndependentSlotCountIs21
 
 NSStage3CutoffUniformAnalyticCompletionClosedIsFalse :
   NSStage3CutoffUniformAnalyticCompletionClosed ≡ false
