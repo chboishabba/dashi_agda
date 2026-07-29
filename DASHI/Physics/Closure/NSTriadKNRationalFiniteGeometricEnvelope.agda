@@ -41,9 +41,13 @@ pow : ℚ → Nat → ℚ
 pow ratio zero = 1ℚ
 pow ratio (suc exponent) = ratio * pow ratio exponent
 
+-- The ordinary inclusive prefix sum
+--
+--   partialSum r N = 1 + r + ... + r^N.
 partialSum : ℚ → Nat → ℚ
 partialSum ratio zero = 1ℚ
-partialSum ratio (suc cutoff) = 1ℚ + ratio * partialSum ratio cutoff
+partialSum ratio (suc cutoff) =
+  pow ratio (suc cutoff) + partialSum ratio cutoff
 
 geometricIdentity : ∀ ratio cutoff →
   (1ℚ - ratio) * partialSum ratio cutoff
@@ -52,14 +56,17 @@ geometricIdentity ratio zero = solve (ratio ∷ [])
 geometricIdentity ratio (suc cutoff) =
   begin
     (1ℚ - ratio) * partialSum ratio (suc cutoff)
-  ≡⟨ solve (ratio ∷ partialSum ratio cutoff ∷ []) ⟩
-    (1ℚ - ratio)
-      + ratio * ((1ℚ - ratio) * partialSum ratio cutoff)
+  ≡⟨ solve
+       (ratio ∷ pow ratio (suc cutoff)
+        ∷ partialSum ratio cutoff ∷ []) ⟩
+    (1ℚ - ratio) * pow ratio (suc cutoff)
+      + (1ℚ - ratio) * partialSum ratio cutoff
   ≡⟨ cong
-       (λ value → (1ℚ - ratio) + ratio * value)
+       (λ value →
+         (1ℚ - ratio) * pow ratio (suc cutoff) + value)
        (geometricIdentity ratio cutoff) ⟩
-    (1ℚ - ratio)
-      + ratio * (1ℚ - pow ratio (suc cutoff))
+    (1ℚ - ratio) * pow ratio (suc cutoff)
+      + (1ℚ - pow ratio (suc cutoff))
   ≡⟨ solve (ratio ∷ pow ratio (suc cutoff) ∷ []) ⟩
     1ℚ - pow ratio (suc (suc cutoff))
   ∎
@@ -84,20 +91,20 @@ partialSumNonnegative : ∀ ratio cutoff →
 partialSumNonnegative ratio zero ratioNonnegative = zeroBelowOne
 partialSumNonnegative ratio (suc cutoff) ratioNonnegative =
   let
+    currentPowerNonnegative =
+      powNonnegative ratio (suc cutoff) ratioNonnegative
     restNonnegative =
       partialSumNonnegative ratio cutoff ratioNonnegative
     instance
-      oneIsNonnegative = ℚₚ.nonNegative zeroBelowOne
-      ratioIsNonnegative = ℚₚ.nonNegative ratioNonnegative
+      currentPowerIsNonnegative =
+        ℚₚ.nonNegative currentPowerNonnegative
       restIsNonnegative = ℚₚ.nonNegative restNonnegative
-      productIsNonnegative =
-        ℚₚ.nonNeg*nonNeg⇒nonNeg ratio (partialSum ratio cutoff)
       sumIsNonnegative =
-        ℚₚ.nonNeg+nonNeg⇒nonNeg 1ℚ
-          (ratio * partialSum ratio cutoff)
+        ℚₚ.nonNeg+nonNeg⇒nonNeg
+          (pow ratio (suc cutoff)) (partialSum ratio cutoff)
   in
   ℚₚ.nonNegative⁻¹
-    (1ℚ + ratio * partialSum ratio cutoff)
+    (pow ratio (suc cutoff) + partialSum ratio cutoff)
 
 geometricPartialSumBound : ∀ ratio bound cutoff →
   0ℚ ≤ ratio →
