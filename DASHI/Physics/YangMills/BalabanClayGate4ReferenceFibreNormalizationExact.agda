@@ -136,7 +136,7 @@ record TReferenceFibreNormalization
       Scale Fine SlowField Component Functional Scalar) : Set₁ where
   field
     algebra : FiniteReferenceFibreAlgebra (T.sumData dataSet)
-    baseReferenceIntegrand : Scale → Component → SlowField → Fine → Scalar
+    selectedBaseReference : Scale → Component → SlowField → Fine → Scalar
     referenceIntegrand : Scale → Component → SlowField → Fine → Scalar
     suppression : Scale → Scalar
 
@@ -145,18 +145,61 @@ record TReferenceFibreNormalization
       Integral.selectedWith (T.sumData dataSet)
         (referenceIntegrand scale component slow) slow fine
       ≡ scaledSelector algebra (suppression scale)
-          (Integral.selectedWith (T.sumData dataSet)
-            (baseReferenceIntegrand scale component slow) slow) fine
+          (selectedBaseReference scale component slow) fine
 
-    baseReferenceMassNormalizedOnFastFibre :
+    selectedBaseReferenceMassNormalized :
       ∀ scale component slow →
       Integral.foldSelected (T.sumData dataSet)
-        (Integral.selectedWith (T.sumData dataSet)
-          (baseReferenceIntegrand scale component slow) slow)
+        (selectedBaseReference scale component slow)
         slow (T.fastFibre dataSet scale component)
       ≡ one algebra
 
 open TReferenceFibreNormalization public
+
+record TReferenceReciprocalConstruction
+    {Scale Fine SlowField Component Functional Scalar : Set}
+    (dataSet : T.FiniteLocalTOperationData
+      Scale Fine SlowField Component Functional Scalar) : Set₁ where
+  field
+    algebra : FiniteReferenceFibreAlgebra (T.sumData dataSet)
+    rawSelectedReference : Scale → Component → SlowField → Fine → Scalar
+    reciprocalReference : ∀ scale component slow →
+      ReciprocalReferenceMass algebra
+        (rawSelectedReference scale component slow)
+        slow (T.fastFibre dataSet scale component)
+    suppression : Scale → Scalar
+    referenceIntegrand : Scale → Component → SlowField → Fine → Scalar
+
+    selectedReferenceIntegrandMeaning :
+      ∀ scale component slow fine →
+      Integral.selectedWith (T.sumData dataSet)
+        (referenceIntegrand scale component slow) slow fine
+      ≡ scaledSelector algebra (suppression scale)
+          (normalizedReferenceSelector
+            (reciprocalReference scale component slow)) fine
+
+open TReferenceReciprocalConstruction public
+
+tReferenceNormalizationFromReciprocal :
+  ∀ {Scale Fine SlowField Component Functional Scalar}
+    {dataSet : T.FiniteLocalTOperationData
+      Scale Fine SlowField Component Functional Scalar} →
+  TReferenceReciprocalConstruction dataSet →
+  TReferenceFibreNormalization dataSet
+tReferenceNormalizationFromReciprocal construction = record
+  { TReferenceFibreNormalization.algebra = algebra construction
+  ; TReferenceFibreNormalization.selectedBaseReference =
+      λ scale component slow → normalizedReferenceSelector
+        (reciprocalReference construction scale component slow)
+  ; TReferenceFibreNormalization.referenceIntegrand =
+      referenceIntegrand construction
+  ; TReferenceFibreNormalization.suppression = suppression construction
+  ; TReferenceFibreNormalization.selectedReferenceIntegrandMeaning =
+      selectedReferenceIntegrandMeaning construction
+  ; TReferenceFibreNormalization.selectedBaseReferenceMassNormalized =
+      λ scale component slow → normalizedReferenceMassExact
+        (reciprocalReference construction scale component slow)
+  }
 
 selectedReferenceFoldCongruence :
   ∀ {Scale Fine SlowField Component Functional Scalar}
@@ -170,8 +213,7 @@ selectedReferenceFoldCongruence :
     slow fields
   ≡ Integral.foldSelected (T.sumData dataSet)
       (scaledSelector (algebra data) (suppression data scale)
-        (Integral.selectedWith (T.sumData dataSet)
-          (baseReferenceIntegrand data scale component slow) slow))
+        (selectedBaseReference data scale component slow))
       slow fields
 selectedReferenceFoldCongruence data scale component slow [] = refl
 selectedReferenceFoldCongruence {dataSet = dataSet} data scale component slow
@@ -203,17 +245,19 @@ referenceFibreAtFastFibreExact {dataSet = dataSet} data scale component slow =
     (normalizedSuppressedReferenceFibreExact
       (algebra data)
       (suppression data scale)
-      (Integral.selectedWith (T.sumData dataSet)
-        (baseReferenceIntegrand data scale component slow) slow)
+      (selectedBaseReference data scale component slow)
       slow
       (T.fastFibre dataSet scale component)
-      (baseReferenceMassNormalizedOnFastFibre data scale component slow))
+      (selectedBaseReferenceMassNormalized data scale component slow))
 
 finiteReferenceFibreScalingLevel : ProofLevel
 finiteReferenceFibreScalingLevel = machineChecked
 
 reciprocalReferenceNormalizationLevel : ProofLevel
 reciprocalReferenceNormalizationLevel = machineChecked
+
+tReferenceReciprocalConstructionLevel : ProofLevel
+tReferenceReciprocalConstructionLevel = machineChecked
 
 selectedReferenceNormalizationLevel : ProofLevel
 selectedReferenceNormalizationLevel = machineChecked
