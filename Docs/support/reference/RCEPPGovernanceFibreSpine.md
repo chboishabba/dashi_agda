@@ -187,6 +187,157 @@ The source-specific lane remains separate from the reusable governance core so
 that one Sudanese programme is not silently promoted into a universal theory of
 government.
 
+## Plural revolutionary-practice ecology
+
+`DASHI.Governance.RevolutionaryPracticeBraid` adds five strands without
+collapsing them:
+
+```text
+institutional transformation
++ relational transformation
++ epistemic transformation
++ ecological transformation
++ historical-trauma transformation
+```
+
+It cross-pollinates:
+
+- the existing Sweetgrass braid/fabric attribution and non-promotion boundary;
+- knot/weave/braid cultural operators;
+- non-alienating mandate and local/global council gluing;
+- reciprocity on the chart/residual/+1 topology;
+- dialectical memory carry and distributed braid tension;
+- the repo-local `PatternMind` repair-context vocabulary.
+
+`PatternMind` remains a repository-local label here.  The implementation does
+not attach speculative external authorship or pretend that a single doctrine
+has been identified.
+
+The relationship-anarchy adjunct records five dimensions:
+
+```text
+consent
++ autonomy
++ dependency/material asymmetry
++ obligation/reciprocity
++ exit/recall/revision
+```
+
+A relationship category alone creates no entitlement.  Declared consent does
+not prove material symmetry, informal structure does not prove equality, and a
+relationship label does not alienate autonomy.
+
+The Summer of Love enters as ambivalent historical context rather than an
+origin myth.  Relational experimentation, anti-war communal practice and art as
+social infrastructure are retained beside informal hierarchy, gendered care
+labour, racial/class exclusion and commodification residuals:
+
+```text
+removal of convention != removal of domination
+sexual openness != consent
+communal life != shared labour
+```
+
+### Attributed philosophy and history sources
+
+`DASHI.Governance.RevolutionarySourceAtlas` records author, title, publication
+context and DOI state.  A missing DOI means only that none is recorded by this
+atlas.
+
+- Robin Wall Kimmerer, *Braiding Sweetgrass: Indigenous Wisdom, Scientific
+  Knowledge and the Teachings of Plants* (2013); no DOI recorded by the atlas.
+- Andie Nordgren, *The Short Instructional Manifesto for Relationship Anarchy*
+  (original Swedish circulation 2006; later English circulation); no DOI
+  recorded by the atlas.
+- Peter Kropotkin, *Mutual Aid: A Factor of Evolution* (1902); no DOI recorded.
+- Frantz Fanon, *The Wretched of the Earth* (1961); no DOI recorded.
+- Judith Butler, *Frames of War: When Is Life Grievable?* (2009); no DOI
+  recorded.
+- Dominick LaCapra, *Writing History, Writing Trauma* (2001); no DOI recorded.
+- Kimberle Williams Crenshaw, "Mapping the Margins" (1991), DOI
+  `10.2307/1229039`.
+- National Commission on Terrorist Attacks Upon the United States, *The 9/11
+  Commission Report* (2004); no DOI recorded.
+- Edward W. Said, *The Question of Palestine* (1979); no DOI recorded.
+- Rashid Khalidi, *The Hundred Years' War on Palestine* (2020); no DOI recorded.
+- Ervand Abrahamian, *The Coup: 1953, the CIA, and the Roots of Modern
+  U.S.-Iranian Relations* (2013); no DOI recorded.
+- Todd Gitlin, *The Sixties: Years of Hope, Days of Rage* (1987); no DOI
+  recorded.
+
+The atlas does not claim that these sources agree, endorse DASHI, or exhaust the
+relevant intellectual traditions.
+
+## Trauma, memory, sublation and spectacle
+
+`DASHI.Governance.TraumaMemorySublationBoundary` connects the existing
+body-memory residual, multi-observer quotient and constitutional transition
+surfaces.
+
+Its central boundary is:
+
+```text
+trauma explains political formation
+!=
+trauma legitimates violence
+```
+
+Prior injury may support recognition, safety and repair claims.  It does not
+authorise unlimited control, erase another population's grief, establish power
+parity, or authorise civilian harm.
+
+Historical narratives retain the selected-origin problem.  The Iran/USA lane
+carries both 1953 and 1979 frames; the post-9/11 lane retains history prior to 11
+September 2001; Israel/Palestine carries plural persecution, displacement,
+occupation, attack, war and resistance frames; Sudan's April 2023 frame retains
+prior colonial, authoritarian, regional and revolutionary history.
+
+The reflecting pool, White House renovation and Freedom 250/WWE/combat-sport
+imagery enter only as `ContemporaryMemoryObservation` values.  They permit a
+candidate symbolic reading while requiring external sources and explicitly
+blocking factual motive inference, legal conclusions, personality diagnosis and
+closed historical meaning.
+
+## Comparative crisis, liberation and climate atlas
+
+`DASHI.Governance.ComparativeCrisisClimateAtlas` keeps Sudan/RCEPP as the
+situated constitutional case and introduces non-equating comparative lanes for:
+
+- Israel/Palestine;
+- Iran/USA;
+- United States post-9/11 trauma and war-on-terror repetition;
+- the war-on-drugs enemy-carrier/punitive-state grammar;
+- Trumpist traumatic-restoration and memory-spectacle analysis.
+
+Palestinian liberatory practice is represented as plural: secular-national,
+Marxist/PFLP, Islamist, trade-union/student/women, popular-committee,
+diplomatic/state-building, cultural-intellectual and diaspora currents.  The
+PFLP row enforces:
+
+```text
+liberatory objective != automatic legitimacy of every tactic
+criticism of a tactic != erasure of the underlying liberation claim
+```
+
+No organisational label represents a whole people, determines every historical
+tactic, or creates designation authority inside Agda.
+
+The climate/social-justice lane records food/water pressure, displacement,
+land/livelihood, urban pressure, energy geopolitics, border militarisation,
+disaster opportunism and unequal recovery.  Climate pressure is material but is
+not a sole-cause theorem.  Political responsibility, militarisation, unequal
+land relations, institutional capacity and historical dispossession remain
+explicit.
+
+The ecological peace carrier requires civilian safety, land repair, voluntary
+return, reciprocity, material justice, ecological continuance and affected
+community participation.  Armed-elite agreement alone is insufficient, and
+public ownership alone is not ecological reciprocity.
+
+The global-attention residual records that attention is not a measure of the
+scale of suffering.  Sudan is therefore neither reduced to an analogy nor
+silently made secondary to conflicts with greater imperial or media centrality.
+
 ## Claim layers
 
 The implementation keeps five layers distinct:
@@ -207,14 +358,21 @@ Agda may prove that a model has recall, scope, subordination, local/global
 restriction and fail-closed promotion properties.  It cannot determine which
 real committee represents a constituency, authenticate signatories, establish
 real compatibility among constituencies, enact a constitution, establish peace,
-or issue popular legitimacy.
+resolve collective trauma, determine historical motive, endorse an organisation
+or tactic, or issue popular legitimacy.
 
 ## Validation surfaces
 
-Focused aggregate:
+RCEPP-focused aggregate:
 
 ```text
 DASHI/Governance/Sudan/RCEPPRegression.agda
+```
+
+Revolutionary adjunct aggregate:
+
+```text
+DASHI/Governance/RevolutionaryAdjunctRegression.agda
 ```
 
 Domain aggregate:
