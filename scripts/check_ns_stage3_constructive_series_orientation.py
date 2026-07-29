@@ -19,6 +19,7 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationDirectionSystemClassification.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
+    "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
     "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
 )
 
@@ -83,12 +84,13 @@ def main() -> int:
         print("\n".join(failures))
         return 1
     print(
-        "checked Murray thesis pin and output-relocation Check A tranche: "
-        "12 Agda modules, 4 exact verifiers, provenance, no holes/postulates/"
-        "escapes; the source-style all-three-homogeneity affine ansatz is "
-        "exactly infeasible, while constant unit weights recover symbolic "
-        "Check A on 5/2<s<3; constructive dyadic summation and the full "
-        "analytic archetype remain fail-closed"
+        "checked Murray thesis pin, Dong Li coercivity boundary and "
+        "output-relocation Check A tranche: 13 Agda modules, 4 exact "
+        "verifiers, provenance, no holes/postulates/escapes; the source-style "
+        "all-three-homogeneity affine ansatz is exactly infeasible, while "
+        "constant unit weights recover symbolic Check A on 5/2<s<3; "
+        "constructive dyadic summation and the full analytic archetype remain "
+        "fail-closed"
     )
     return 0
 
