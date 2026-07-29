@@ -10,7 +10,7 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- Situated constituency carrier.
 --
 -- Intersectionality precedent:
---   Kimberle Crenshaw,
+--   Kimberle Williams Crenshaw,
 --   "Mapping the Margins: Intersectionality, Identity Politics, and Violence
 --   against Women of Color", Stanford Law Review 43(6), 1991.
 --   DOI: 10.2307/1229039.
