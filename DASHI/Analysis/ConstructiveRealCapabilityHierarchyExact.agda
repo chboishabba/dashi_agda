@@ -195,8 +195,9 @@ record EffectiveConvergenceStructure
               (Spine.sequenceAt R sequence index)
               limit))
 
-    cauchyModulusSound : ∀ sequence → Set
-    convergenceModulusSound : ∀ sequence limit → Set
+    cauchyModulusSound : (sequence : Spine.Sequence R) → Set
+    convergenceModulusSound :
+      (sequence : Spine.Sequence R) → (limit : Spine.Carrier R) → Set
     epsilonAndReciprocalDefinitionsAgreeUnderArchimedeanBridge : Set
 
 open EffectiveConvergenceStructure public
