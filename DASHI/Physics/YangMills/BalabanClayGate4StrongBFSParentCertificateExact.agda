@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4StrongBFSParentCertificateExact w
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_+_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -18,7 +18,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- This is a proof-bearing replacement for older Set-valued BFS labels. Once a
 -- concrete distance and parent map satisfy the previous-layer equation, parent
 -- chains strictly descend in distance and therefore cannot contain a nonempty
--- cycle. No choice principle or graph-analysis theorem is imported.
+-- cycle. Distance-zero uniqueness then makes every parent chain terminate at the
+-- root. No choice principle or graph-analysis theorem is imported.
 ------------------------------------------------------------------------
 
 data Empty : Set where
@@ -63,6 +64,10 @@ record StrongBFSParentCertificate (Vertex : Set) : Set₁ where
 
     rootInGraph : InGraph root
     rootDistanceZero : distance root ≡ zero
+    distanceZeroImpliesRoot : ∀ vertex → InGraph vertex →
+      distance vertex ≡ zero → vertex ≡ root
+    positiveDistanceIsNonRoot : ∀ vertex distanceTail → InGraph vertex →
+      distance vertex ≡ suc distanceTail → IsNonRoot vertex
 
     parentInGraph : ∀ vertex → IsNonRoot vertex → InGraph (parent vertex)
     parentAdjacent : ∀ vertex → IsNonRoot vertex →
@@ -124,6 +129,41 @@ parentCannotEqualChild certificate vertex nonRoot equality =
     ParentChain certificate vertex vertex (suc zero)
   substituteChain refl chain = chain
 
+parentChainToRootAtDistance :
+  ∀ {Vertex}
+    (certificate : StrongBFSParentCertificate Vertex)
+    vertex → InGraph certificate vertex →
+    (selectedDistance : Nat) →
+    distance certificate vertex ≡ selectedDistance →
+    ParentChain certificate vertex (root certificate) selectedDistance
+parentChainToRootAtDistance certificate vertex inGraph zero distanceIsZero =
+  subst
+    (λ terminal → ParentChain certificate vertex terminal zero)
+    (distanceZeroImpliesRoot certificate vertex inGraph distanceIsZero)
+    chainZero
+parentChainToRootAtDistance certificate vertex inGraph (suc distanceTail)
+  distanceIsSuccessor =
+  let nonRoot = positiveDistanceIsNonRoot certificate
+        vertex distanceTail inGraph distanceIsSuccessor
+      parentGraph = parentInGraph certificate vertex nonRoot
+      parentDistance = sucInjective
+        (trans
+          (parentDistanceStep certificate vertex nonRoot)
+          distanceIsSuccessor)
+      rest = parentChainToRootAtDistance certificate
+        (parent certificate vertex) parentGraph distanceTail parentDistance
+  in chainStep nonRoot rest
+
+parentChainToRoot :
+  ∀ {Vertex}
+    (certificate : StrongBFSParentCertificate Vertex)
+    vertex → InGraph certificate vertex →
+  ParentChain certificate vertex (root certificate)
+    (distance certificate vertex)
+parentChainToRoot certificate vertex inGraph =
+  parentChainToRootAtDistance certificate vertex inGraph
+    (distance certificate vertex) refl
+
 record StrongBFSShortestPathCertificate
     {Vertex : Set}
     (parentCertificate : StrongBFSParentCertificate Vertex) : Set₁ where
@@ -158,11 +198,17 @@ parentChainDistanceLevel = machineChecked
 parentAcyclicityFromDistanceDescentLevel : ProofLevel
 parentAcyclicityFromDistanceDescentLevel = machineChecked
 
+parentConnectivityFromDistanceDescentLevel : ProofLevel
+parentConnectivityFromDistanceDescentLevel = machineChecked
+
 strongShortestPathCertificateLevel : ProofLevel
 strongShortestPathCertificateLevel = machineChecked
 
 physicalPeriodicDistanceStepInputsLevel : ProofLevel
 physicalPeriodicDistanceStepInputsLevel = conditional
+
+physicalPeriodicDistanceZeroUniquenessInputsLevel : ProofLevel
+physicalPeriodicDistanceZeroUniquenessInputsLevel = conditional
 
 physicalPeriodicShortestPathMinimalityInputsLevel : ProofLevel
 physicalPeriodicShortestPathMinimalityInputsLevel = conditional
