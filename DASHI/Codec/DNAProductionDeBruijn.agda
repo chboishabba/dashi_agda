@@ -1,7 +1,7 @@
 module DASHI.Codec.DNAProductionDeBruijn where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Codec.DNAFirstFormalism using (Base)
@@ -9,11 +9,6 @@ open import DASHI.Codec.DNAProductionConstraints using
   ( ProductionState; initialState; legal?; IsTrue; step )
 open import DASHI.Codec.DNAProductionChoices using
   ( legalBases; branchCount; length )
-
-------------------------------------------------------------------------
--- The constrained graph has the complete production state as its vertex.
--- It is de Bruijn-like because History9 shifts by one emitted base, but run
--- state and GC debt split suffix-equivalent vertices.
 
 Vertex : Set
 Vertex = ProductionState
@@ -33,9 +28,6 @@ edge-target-determined :
   ∀ {s b t} → Edge s b t → t ≡ step s b
 edge-target-determined e = targetIsStep e
 
-------------------------------------------------------------------------
--- Reachability and labelled walks are intentionally separate from geometry.
-
 infixr 5 _∷ʷ_
 data LabelledWalk : Vertex → List Base → Vertex → Set where
   done : ∀ {s} → LabelledWalk s [] s
@@ -51,9 +43,6 @@ record Reachable (target : Vertex) : Set where
     labels : List Base
     path : LabelledWalk initialState labels target
 open Reachable public
-
-------------------------------------------------------------------------
--- Graph out-degree is definitionally the number of legal emitted bases.
 
 outLabels : Vertex → List Base
 outLabels = legalBases
