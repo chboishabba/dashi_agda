@@ -44,7 +44,8 @@ record CommonRationalApproximationBridge
       Spine.IsCauchy Target
         (targetRationalSequence (sourceRationalApproximation value))
 
-    sourceApproximationRealization : ∀ value → Set
+    sourceApproximationRealization :
+      (value : Spine.Carrier Source) → Set
     rationalApproximationAlgorithmExact : Set
 
 open CommonRationalApproximationBridge public
@@ -85,7 +86,8 @@ record CanonicalHomomorphismEvidence
       Capability.map homomorphism value ≡ canonicalMap bridge value
     derivedLaws : Capability.DerivedHomomorphismLaws homomorphism
     completeCompatibility : Capability.CompleteHomomorphismCompatibility homomorphism
-    rationalApproximationLimitPreserved : ∀ value → Set
+    rationalApproximationLimitPreserved :
+      (value : Spine.Carrier Source) → Set
 
 open CanonicalHomomorphismEvidence public
 
@@ -127,7 +129,7 @@ record ConstructiveRealCategoricityAuthority
             Left Right leftField rightField) →
         Capability.DerivedHomomorphismLaws candidate →
         Capability.CompleteHomomorphismCompatibility candidate →
-        (∀ value → Set) →
+        ((value : Spine.Carrier Left) → Set) →
         ∀ value →
           Spine._≈_ Right
             (Capability.map candidate value)
@@ -139,7 +141,7 @@ record ConstructiveRealCategoricityAuthority
             Right Left rightField leftField) →
         Capability.DerivedHomomorphismLaws candidate →
         Capability.CompleteHomomorphismCompatibility candidate →
-        (∀ value → Set) →
+        ((value : Spine.Carrier Right) → Set) →
         ∀ value →
           Spine._≈_ Left
             (Capability.map candidate value)
