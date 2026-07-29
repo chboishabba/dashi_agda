@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from fractions import Fraction as Q
 
 
@@ -15,9 +16,8 @@ def scale_by_nat(value: Q, shell: int) -> Q:
 
 
 def run() -> dict[str, object]:
-    # The native rational embedding is modelled by the identity on exact
-    # rationals.  Check the laws which the Agda capability now requires,
-    # including preservation of one.
+    # Identity embedding on exact rationals checks the native unital embedding
+    # laws required by the Agda interface.
     embed = lambda value: value
     rational_samples = (Q(-7, 5), Q(-1), Q(0), Q(1), Q(3, 2), Q(128, 93))
     assert embed(Q(0)) == 0
@@ -30,8 +30,11 @@ def run() -> dict[str, object]:
                 assert embed(left) <= embed(right)
 
     two_rational = Q(1) + Q(1)
+    three_rational = two_rational + Q(1)
     five_rational = (two_rational + two_rational) + Q(1)
+    five_halves = Q(5, 2)
     assert two_rational == 2
+    assert three_rational == 3
     assert five_rational == 5
 
     two_pow = lambda exponent: Q(2) ** exponent
@@ -43,9 +46,12 @@ def run() -> dict[str, object]:
 
     exponent_checks: list[dict[str, str | int]] = []
     for regularity in regularities:
-        low_decay = 2 * regularity - Q(5, 2)
+        # The concrete decay record is pinned to these identities.
+        low_decay = 2 * regularity - five_halves
         gap_decay = 2 * regularity
-        assert regularity > Q(5, 2)
+        assert five_halves < regularity < three_rational
+        assert low_decay == regularity + regularity - five_halves
+        assert gap_decay == regularity + regularity
         assert low_decay >= two_rational
         assert gap_decay >= five_rational
 
@@ -75,6 +81,12 @@ def run() -> dict[str, object]:
             assert Q(2) ** (-5 * shell) == thirty_second_anchor
             assert quarter_anchor == Q(1, 2) ** (2 * shell)
             assert thirty_second_anchor == Q(1, 2) ** (5 * shell)
+
+            # Numerical sanity only for non-integral real powers: positivity is
+            # a supplied carrier law and the Agda theorem derives factor
+            # nonnegativity from it.
+            assert math.pow(2.0, float(-low_decay * shell)) > 0.0
+            assert math.pow(2.0, float(-gap_decay * shell)) > 0.0
 
             exponent_checks.append(
                 {
@@ -122,6 +134,8 @@ def run() -> dict[str, object]:
             "twoAndFivePinnedToRationals": True,
             "twoPowZeroAndOnePinned": True,
             "naturalScalingRecursivelyPinned": True,
+            "sobolevDecayFormulasPinned": True,
+            "factorNonnegativityDerivedFromPowerPositivity": True,
             "lowShellComparisonDerived": True,
             "gapComparisonDerived": True,
             "signedUpperDerivedFromAbsolute": True,
@@ -140,8 +154,9 @@ def main() -> int:
     print(json.dumps(result["decision"], sort_keys=True))
     print(
         "verified unital rational embedding, pinned two/five and twoPow zero/one, "
-        "recursive natural scaling, exact exponent-order reversal and -2n/-5n "
-        "anchors, and absolute-value derivation of both signed inequalities"
+        "recursive natural scaling, exact Sobolev decay formulas, exponent-order "
+        "and -2n/-5n anchors, derived factor positivity, and the absolute-value "
+        "derivation of both signed inequalities"
     )
     return 0
 
