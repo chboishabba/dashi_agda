@@ -80,7 +80,7 @@ record RCEPPGovernanceRegression : Set where
       ≡ false
 
     stageCompressionAuthorityFalse :
-      Stage.semanticAuthorityPromoted
+      Stage.CompressedStageTransition.semanticAuthorityPromoted
         Stage.canonicalTransformativeJump3To14
       ≡ false
 
