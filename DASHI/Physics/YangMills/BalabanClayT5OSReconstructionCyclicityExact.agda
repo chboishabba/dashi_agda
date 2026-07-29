@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT5OSReconstructionCyclicityExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ; fst; snd)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Product using (_×_; proj₁; proj₂)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -28,7 +28,7 @@ import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 --
 -- The exact interface used below is weaker than a full local-net
 -- Reeh--Schlieder theorem: the positive-time OS cylinder vectors need only
--- detect every nonzero reconstructed subgap vector.  This is the precise
+-- detect every nonzero reconstructed subgap vector. This is the precise
 -- overlap premise consumed by the clustering-to-gap contradiction.
 ------------------------------------------------------------------------
 
@@ -52,8 +52,8 @@ record ReconstructedSubgapVectors (Energy Vector : Set) : Set₁ where
   field
     SubgapMode : Energy → Set
     modeVector : ∀ energy → SubgapMode energy → Vector
-    modeVectorNonzero : ∀ energy mode → NonzeroVectorWitness energy mode
     NonzeroVectorWitness : ∀ energy → SubgapMode energy → Set
+    modeVectorNonzero : ∀ energy mode → NonzeroVectorWitness energy mode
 
 open ReconstructedSubgapVectors public
 
