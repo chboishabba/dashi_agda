@@ -14,10 +14,16 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanDeterminantLossExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanCompensatedTAdapterExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteKernelSchurBlockAdjointExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda
   DASHI/Physics/YangMills/BalabanClayT5KoteckyPreissTwoWeightPrimaryExact.agda
   DASHI/Physics/YangMills/BalabanClayT5PhysicalTwoWeightKoteckyPreissExact.agda
   DASHI/Physics/YangMills/BalabanClayT5AnisotropyPolymerSummationExact.agda
+  DASHI/Physics/YangMills/BalabanClayT5AlternativeHarrisMixingAuditExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4Attachment252MechanismAuditExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4AnisotropyBlockAndCriterionProvenanceExact.agda
+  DASHI/Physics/YangMills/BalabanClayMassGapClaimEcosystemQuarantineExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4HighAlphaTrancheLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4HighAlphaTrancheReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4Validation.agda
