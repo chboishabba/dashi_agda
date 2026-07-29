@@ -9,31 +9,49 @@ import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact 
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as Wilson
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteHolonomyGaugeExact as Holonomy
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPhysicalAdjacencyAndBadReachExact as Physical
 import DASHI.Physics.YangMills.BalabanClayGate4WilsonBoltzmannSuppressionExact as WilsonSuppression
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact as Collar
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicReachCollarEnumerationExact as Reach
 import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as TOperation
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalTDensityIdentificationExact as TDensity
+import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibreNormalizationExact as TReference
 import DASHI.Physics.YangMills.BalabanClayGate4TOperationStructuralReductionExact as TStructural
 import DASHI.Physics.YangMills.BalabanClayGate4TOperationSmallFactorReductionExact as TReduction
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact as ROperation
 import DASHI.Physics.YangMills.BalabanClayGate4RBoundarySupportExtractionExact as RBoundary
 import DASHI.Physics.YangMills.BalabanClayGate4CountingAndLocalizationReuseExact as Reuse
+import DASHI.Physics.YangMills.BalabanClayGate4RRepresentationBridgeExact as RRepresentation
+import DASHI.Physics.YangMills.BalabanClayGate4LocalizedExponentiationExact as RExponentiation
 import DASHI.Physics.YangMills.BalabanClayGate4P0GrowthAbsorptionExact as Absorption
 import DASHI.Physics.YangMills.BalabanClayGate4P0RunningCompatibilityAuditExact as P0Compatibility
+import DASHI.Physics.YangMills.BalabanClayGate4AnalyticityRadiusCouplingControlExact as CouplingControl
 import DASHI.Physics.YangMills.BalabanClayGate4PolynomialSuppressionRecurrenceExact as Recurrence
 import DASHI.Physics.YangMills.BalabanClayGate4CombinedSmallLargeNormAssemblyExact as Combined
 import DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact as UV
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalOneStepClosureExact as PhysicalStep
 import DASHI.Physics.YangMills.BalabanClayConcreteUVToMassGapDependencyExact as ConcreteMass
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact as PhysicalMass
 import DASHI.Physics.YangMills.BalabanClayGate4ROperationDecayTargetsExact as Targets
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryTargetAndAttachmentAuditExact as Audit
+import DASHI.Physics.YangMills.BalabanClayGate4ClusteringLocatorAuditExact as Locator
 import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact as External
+
+------------------------------------------------------------------------
+-- Exact metadata, finite constructions, reuse and implication assemblies.
+------------------------------------------------------------------------
 
 largeFieldLiteratureMetadataLevel = Gate4.largeFieldLiteratureMetadataLevel
 gate4ArchaeologyGraphLevel = Gate4.gate4ArchaeologyGraphLevel
 primaryTargetMetadataLevel = Audit.primaryTargetMetadataLevel
 secondaryLocatorQuarantineLevel = Audit.secondaryLocatorQuarantineLevel
 attachmentScopeAuditLevel = Audit.attachmentScopeAuditLevel
+clusteringLocatorQuarantineLevel = Locator.clusteringLocatorQuarantineLevel
+clusteringLocatorConditionalLoadAuditLevel =
+  Locator.clusteringLocatorConditionalLoadAuditLevel
+projectEuclidClusterExpansionLocatorLevel =
+  Locator.projectEuclidClusterExpansionLocatorLevel
 
 typedExistingSmallFieldReuseLevel = Typed.typedExistingSmallFieldReuseLevel
 existingBadComponentLargeFieldReuseLevel = Typed.existingBadComponentLargeFieldReuseLevel
@@ -56,6 +74,12 @@ rationalQuaternionMultiplicationLevel = Holonomy.rationalQuaternionMultiplicatio
 rationalQuaternionConjugationTraceLevel = Holonomy.rationalQuaternionConjugationTraceLevel
 plaquetteHolonomyGaugeInvarianceLevel = Holonomy.plaquetteHolonomyGaugeInvarianceLevel
 literalPeriodicWilsonDataInstanceLevel = Holonomy.literalPeriodicWilsonDataInstanceLevel
+
+periodicBondFieldDefinitionLevel = Bond.periodicBondFieldDefinitionLevel
+pathSiteGaugeCancellationLevel = Bond.pathSiteGaugeCancellationLevel
+plaquetteBondHolonomyBridgeLevel = Bond.plaquetteBondHolonomyBridgeLevel
+transportedCubeBianchiBridgeLevel = Bond.transportedCubeBianchiBridgeLevel
+
 localWilsonBoltzmannSuppressionAssemblyLevel =
   WilsonSuppression.localWilsonBoltzmannSuppressionAssemblyLevel
 ownedPlaquetteProductSuppressionLevel =
@@ -74,7 +98,6 @@ enlargementMonotonicityLevel = Collar.enlargementMonotonicityLevel
 finiteCollarDefinitionLevel = Collar.finiteCollarDefinitionLevel
 supportOwnershipAndBoundaryClassificationLevel =
   Collar.supportOwnershipAndBoundaryClassificationLevel
-
 boundedReachDecisionLevel = Reach.boundedReachDecisionLevel
 finiteReachEnumerationLevel = Reach.finiteReachEnumerationLevel
 enlargedRegionFiniteEnumerationLevel = Reach.enlargedRegionFiniteEnumerationLevel
@@ -85,6 +108,14 @@ componentClassVocabularyLevel = TOperation.componentClassVocabularyLevel
 finiteLocalTOperationDefinitionLevel = TOperation.finiteLocalTOperationDefinitionLevel
 finiteTOperationPositivityMonotonicityLevel =
   TOperation.finiteTOperationPositivityMonotonicityLevel
+physicalTDensityExistingSixFactorLevel = TDensity.physicalTDensityExistingSixFactorLevel
+physicalTDensityOneSixteenthLevel = TDensity.physicalTDensityOneSixteenthLevel
+ownedPlaquetteActionIdentificationVocabularyLevel =
+  TDensity.ownedPlaquetteActionIdentificationVocabularyLevel
+finiteReferenceFibreScalingLevel = TReference.finiteReferenceFibreScalingLevel
+normalizedSuppressedReferenceFibreLevel =
+  TReference.normalizedSuppressedReferenceFibreLevel
+tReferenceFibreAdapterLevel = TReference.tReferenceFibreAdapterLevel
 finiteTOperationFoldCongruenceLevel = TStructural.finiteTOperationFoldCongruenceLevel
 tOperationGaugeCovarianceReductionLevel = TStructural.tOperationGaugeCovarianceReductionLevel
 tOperationEnlargementLocalityReductionLevel =
@@ -100,12 +131,17 @@ rBoundarySourceExtractionLevel = RBoundary.rBoundarySourceExtractionLevel
 rBoundaryCollarSupportTransportLevel = RBoundary.rBoundaryCollarSupportTransportLevel
 rBoundaryDeterminingSetOwnershipLevel = RBoundary.rBoundaryDeterminingSetOwnershipLevel
 rDecayTransitiveAssemblyLevel = ROperation.rDecayTransitiveAssemblyLevel
-
 rootedComponentFamilyCountingReuseLevel = Reuse.rootedComponentFamilyCountingReuseLevel
 exactRootedFamilyRepresentationCountingLevel = Reuse.exactRootedFamilyRepresentationCountingLevel
 existingRGLocalizationBudgetReuseLevel = Reuse.existingRGLocalizationBudgetReuseLevel
 existingRGLocalizationSupportWeightReuseLevel =
   Reuse.existingRGLocalizationSupportWeightReuseLevel
+rRepresentationBridgeAssemblyLevel = RRepresentation.rRepresentationBridgeAssemblyLevel
+rRootedCountingConsequenceLevel = RRepresentation.rRootedCountingConsequenceLevel
+rLocalizationBudgetConsequenceLevel = RRepresentation.rLocalizationBudgetConsequenceLevel
+finiteLocalizedProductDefinitionLevel = RExponentiation.finiteLocalizedProductDefinitionLevel
+localizedExponentiationInductionLevel = RExponentiation.localizedExponentiationInductionLevel
+rLocalizedExponentiationAssemblyLevel = RExponentiation.rLocalizedExponentiationAssemblyLevel
 
 p0GrowthTargetDefinitionLevel = Absorption.p0GrowthTargetDefinitionLevel
 largeFieldAbsorptionAssemblyLevel = Absorption.largeFieldAbsorptionAssemblyLevel
@@ -113,6 +149,12 @@ p0RunningRegimeAuditLevel = P0Compatibility.p0RunningRegimeAuditLevel
 polylogVersusGeometricInterfaceSeparationLevel =
   P0Compatibility.polylogVersusGeometricInterfaceSeparationLevel
 windowedAbsorptionVocabularyLevel = P0Compatibility.windowedAbsorptionVocabularyLevel
+cauchyLargeFieldRemainderAssemblyLevel =
+  CouplingControl.cauchyLargeFieldRemainderAssemblyLevel
+inverseCouplingLinearGrowthInductionLevel =
+  CouplingControl.inverseCouplingLinearGrowthInductionLevel
+finiteWeakCouplingWindowAssemblyLevel =
+  CouplingControl.finiteWeakCouplingWindowAssemblyLevel
 polynomialSuppressionOneStepAssemblyLevel =
   Recurrence.polynomialSuppressionOneStepAssemblyLevel
 polynomialSuppressionGeometricInductionLevel =
@@ -124,27 +166,50 @@ combinedAdmissibilityAssemblyLevel = UV.combinedAdmissibilityAssemblyLevel
 allScaleAdmissibilityInductionLevel = UV.allScaleAdmissibilityInductionLevel
 allScaleUniformStabilityInductionLevel = UV.allScaleUniformStabilityInductionLevel
 partitionFunctionUniformBoundAssemblyLevel = UV.partitionFunctionUniformBoundAssemblyLevel
+physicalStateCarrierLevel = PhysicalStep.physicalStateCarrierLevel
+physicalCombinedPolymerNormTransportLevel =
+  PhysicalStep.physicalCombinedPolymerNormTransportLevel
+physicalOneStepAdmissibilityAssemblyLevel =
+  PhysicalStep.physicalOneStepAdmissibilityAssemblyLevel
+physicalUVPackageAssemblyLevel = PhysicalStep.physicalUVPackageAssemblyLevel
 
 continuumOSAxiomAssemblyLevel = ConcreteMass.continuumOSAxiomAssemblyLevel
 concreteUVToMassGapDependencyAssemblyLevel =
   ConcreteMass.concreteUVToMassGapDependencyAssemblyLevel
+physicalMeasurePresentationAgreementLevel =
+  PhysicalMass.physicalMeasurePresentationAgreementLevel
+physicalMeasureToGramClosureAssemblyLevel =
+  PhysicalMass.physicalMeasureToGramClosureAssemblyLevel
+physicalContinuumOSAxiomAssemblyLevel =
+  PhysicalMass.physicalContinuumOSAxiomAssemblyLevel
+physicalGapToInterlacingAssemblyLevel =
+  PhysicalMass.physicalGapToInterlacingAssemblyLevel
 
 numericalIngredientVocabularyLevel = Numerical.numericalIngredientVocabularyLevel
 existingNumericalReferenceSurfaceLevel = Numerical.existingNumericalReferenceSurfaceLevel
 externalAuditVocabularyLevel = External.externalAuditVocabularyLevel
 massGapAcyclicityReceiptDefinitionLevel = External.massGapAcyclicityReceiptDefinitionLevel
 
+------------------------------------------------------------------------
+-- Genuine physical/analytic inhabitants. Imports never promote these.
+------------------------------------------------------------------------
+
 literalBoltzmannExponentialSuppressionInputsLevel =
   Wilson.literalBoltzmannExponentialSuppressionInputsLevel
-periodicBondFieldHolonomyRealizationLevel = Holonomy.periodicBondFieldHolonomyRealizationLevel
-tOperationActionFactorIdentificationInputsLevel =
-  WilsonSuppression.tOperationActionFactorIdentificationInputsLevel
+rationalQuaternionExactGroupInputsLevel = Bond.rationalQuaternionExactGroupInputsLevel
+periodicOrientedLinkCovarianceInputsLevel = Bond.periodicOrientedLinkCovarianceInputsLevel
+periodicPlaquetteClosureInputsLevel = Bond.periodicPlaquetteClosureInputsLevel
+literalTransportedCubeBoundaryCertificateLevel =
+  Bond.literalTransportedCubeBoundaryCertificateLevel
 uniformDuplicateFreeBadComponentEnumerationLevel =
   Physical.uniformDuplicateFreeBadComponentEnumerationLevel
 
-analyticBoundaryReinjectionInputsLevel = Collar.analyticBoundaryReinjectionInputsLevel
-largeFieldGeometryAndROperationInputsLevel = Gate4.largeFieldGeometryAndROperationInputsLevel
-
+physicalFastFieldTraversalIdentificationInputsLevel =
+  TDensity.physicalFastFieldTraversalIdentificationInputsLevel
+ownedPlaquetteProductActionMeaningInputsLevel =
+  TDensity.ownedPlaquetteProductActionMeaningInputsLevel
+physicalReferenceHaarNormalizationInputsLevel =
+  TReference.physicalReferenceHaarNormalizationInputsLevel
 tOperationStructuralLawInputsLevel = TOperation.tOperationStructuralLawInputsLevel
 tOperationActivationRatioInputsLevel = TOperation.tOperationActivationRatioInputsLevel
 tOperationEquation189InhabitantLevel = TOperation.tOperationEquation189InhabitantLevel
@@ -155,8 +220,9 @@ tOperationPointwiseEnlargementLocalityInputsLevel =
 tOperationFastFibreDomainInputsLevel = TStructural.tOperationFastFibreDomainInputsLevel
 equation189PointwiseWilsonSuppressionInputsLevel =
   TReduction.equation189PointwiseWilsonSuppressionInputsLevel
-normalizedReferenceFastFibreInputsLevel = TReduction.normalizedReferenceFastFibreInputsLevel
 
+analyticBoundaryReinjectionInputsLevel = Collar.analyticBoundaryReinjectionInputsLevel
+largeFieldGeometryAndROperationInputsLevel = Gate4.largeFieldGeometryAndROperationInputsLevel
 rOperationStructuralLawInputsLevel = ROperation.rOperationStructuralLawInputsLevel
 rBoundarySupportReinjectionInputsLevel = ROperation.rBoundarySupportReinjectionInputsLevel
 rBoundarySourceCollarClassificationInputsLevel =
@@ -164,9 +230,14 @@ rBoundarySourceCollarClassificationInputsLevel =
 nextDeterminingSetContainsCollarInputsLevel =
   RBoundary.nextDeterminingSetContainsCollarInputsLevel
 rDecayAnalyticInequalityInputsLevel = ROperation.rDecayAnalyticInequalityInputsLevel
-rComponentFamilyToRootedTraversalIdentificationLevel =
-  Reuse.rComponentFamilyToRootedTraversalIdentificationLevel
-rLocalizationNormInterpretationInputsLevel = Reuse.rLocalizationNormInterpretationInputsLevel
+rExpressionToCanonicalRootedFamilyInputsLevel =
+  RRepresentation.rExpressionToCanonicalRootedFamilyInputsLevel
+rExpressionLocalizationMeaningInputsLevel =
+  RRepresentation.rExpressionLocalizationMeaningInputsLevel
+localizedFactorAnalyticEstimateInputsLevel =
+  RExponentiation.localizedFactorAnalyticEstimateInputsLevel
+rExpressionLocalizedProductMeaningInputsLevel =
+  RExponentiation.rExpressionLocalizedProductMeaningInputsLevel
 
 p0GrowthPrimarySourceAndRunningCouplingInputsLevel =
   Absorption.p0GrowthPrimarySourceAndRunningCouplingInputsLevel
@@ -176,6 +247,11 @@ powerLawOrGeometricUpgradeInputsLevel =
   P0Compatibility.powerLawOrGeometricUpgradeInputsLevel
 primaryP0ConventionVerificationLevel =
   P0Compatibility.primaryP0ConventionVerificationLevel
+uniformBetaAnalyticityRadiusInputsLevel =
+  CouplingControl.uniformBetaAnalyticityRadiusInputsLevel
+p0ProfileGFourthInputsLevel = CouplingControl.p0ProfileGFourthInputsLevel
+allScalePenaltyBeyondFiniteWindowInputsLevel =
+  CouplingControl.allScalePenaltyBeyondFiniteWindowInputsLevel
 polynomialEnvelopeRatioInputsLevel = Recurrence.polynomialEnvelopeRatioInputsLevel
 p0SuppressionRatioInputsLevel = Recurrence.p0SuppressionRatioInputsLevel
 strictGeometricRateInputsLevel = Recurrence.strictGeometricRateInputsLevel
@@ -183,9 +259,25 @@ strictGeometricRateInputsLevel = Recurrence.strictGeometricRateInputsLevel
 combinedPolymerRepresentationInputsLevel = Combined.combinedPolymerRepresentationInputsLevel
 largeFieldAbsorptionIntoExistingNormInputsLevel =
   Combined.largeFieldAbsorptionIntoExistingNormInputsLevel
+actualCombinedPolymerRepresentationInputsLevel =
+  PhysicalStep.actualCombinedPolymerRepresentationInputsLevel
+physicalCouplingDomainPreservationInputsLevel =
+  PhysicalStep.physicalCouplingDomainPreservationInputsLevel
+physicalBoundaryAdmissibilityInputsLevel =
+  PhysicalStep.physicalBoundaryAdmissibilityInputsLevel
+physicalStrictPolymerNormClosureInputsLevel =
+  PhysicalStep.physicalStrictPolymerNormClosureInputsLevel
 combinedOneStepAnalyticInputsLevel = UV.combinedOneStepAnalyticInputsLevel
 initialUVStabilityInputsLevel = UV.initialUVStabilityInputsLevel
 
+physicalUVToContinuumMeasureInputsLevel =
+  PhysicalMass.physicalUVToContinuumMeasureInputsLevel
+physicalMeasureToGramTopologyInputsLevel =
+  PhysicalMass.physicalMeasureToGramTopologyInputsLevel
+uniformClusteringOS4InputsLevel = PhysicalMass.uniformClusteringOS4InputsLevel
+fullO4CovarianceOS1InputsLevel = PhysicalMass.fullO4CovarianceOS1InputsLevel
+clusteringToPositiveTransferGapInputsLevel =
+  PhysicalMass.clusteringToPositiveTransferGapInputsLevel
 allScaleUVToContinuumClosureInputsLevel =
   ConcreteMass.allScaleUVToContinuumClosureInputsLevel
 osReconstructionAndClusteringToGapInputsLevel =
@@ -208,5 +300,5 @@ uidtNumericalAndPureSectorAuditInputsLevel =
   External.uidtNumericalAndPureSectorAuditInputsLevel
 
 -- Compatibility only: the old arbitrary-Set receipt remains available, but the
--- concrete UV/continuum/OS/interlacing package above is the preferred authority.
+-- concrete physical UV/measure/Gram/OS/interlacing packages above are preferred.
 massGapDependencyAcyclicityInputsLevel = External.massGapDependencyAcyclicityInputsLevel
