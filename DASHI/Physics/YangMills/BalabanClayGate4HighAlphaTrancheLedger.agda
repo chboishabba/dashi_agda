@@ -5,6 +5,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact as BFS
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSParentCorrectnessExact as BFSParent
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicExecutableBFSInstantiationExact as PeriodicBFS
+import DASHI.Physics.YangMills.BalabanClayGate4StrongBFSParentCertificateExact as StrongBFS
+import DASHI.Physics.YangMills.BalabanClayGate4BFSAdjacentLayerShortestPathExact as BFSShortest
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoercivityInverseNormExact as InverseNorm
 import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact as Determinant
 import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanCompensatedTAdapterExact as DeterminantT
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteKernelSchurBlockAdjointExact as Schur
@@ -30,15 +33,33 @@ firstAdjacentParentCanonicalOrderLevel =
   BFSParent.firstAdjacentParentCanonicalOrderLevel
 discoveredParentEdgesSoundLevel = BFSParent.discoveredParentEdgesSoundLevel
 periodicExecutableGraphLevel = PeriodicBFS.periodicExecutableGraphLevel
+periodicPolymerInducedGraphLevel = PeriodicBFS.periodicPolymerInducedGraphLevel
 periodicEqualityBooleanReflectionLevel =
   PeriodicBFS.periodicEqualityBooleanReflectionLevel
 periodicAdjacencyBooleanReflectionLevel =
   PeriodicBFS.periodicAdjacencyBooleanReflectionLevel
 periodicFuelBoundedBFSExecutionLevel =
   PeriodicBFS.periodicFuelBoundedBFSExecutionLevel
+periodicPolymerFuelBoundedBFSExecutionLevel =
+  PeriodicBFS.periodicPolymerFuelBoundedBFSExecutionLevel
 periodicLocalParentCorrectnessLevel =
   PeriodicBFS.periodicLocalParentCorrectnessLevel
+strongBFSParentCertificateLevel = StrongBFS.strongBFSParentCertificateLevel
+parentChainDistanceLevel = StrongBFS.parentChainDistanceLevel
+parentAcyclicityFromDistanceDescentLevel =
+  StrongBFS.parentAcyclicityFromDistanceDescentLevel
+parentConnectivityFromDistanceDescentLevel =
+  StrongBFS.parentConnectivityFromDistanceDescentLevel
+rootPathAtAssignedDistanceLevel = StrongBFS.rootPathAtAssignedDistanceLevel
+adjacentLayerUpperBoundReductionLevel =
+  BFSShortest.adjacentLayerUpperBoundReductionLevel
+shortestPathFromAdjacentLayerInvariantLevel =
+  BFSShortest.shortestPathFromAdjacentLayerInvariantLevel
 
+finiteSpectralInverseNormReductionLevel =
+  InverseNorm.finiteSpectralInverseNormReductionLevel
+coercivityReciprocalInverseBoundLevel =
+  InverseNorm.coercivityReciprocalInverseBoundLevel
 ipsenRehmanStatementProvenanceLevel =
   Determinant.ipsenRehmanStatementProvenanceLevel
 finiteDeterminantExponentialLossAssemblyLevel =
@@ -77,6 +98,8 @@ balabanEquation175SingleLocatorLevel =
 -- Remaining physical and correctness inhabitants.
 ------------------------------------------------------------------------
 
+-- The historical Set-valued BFS labels remain for compatibility. The preferred
+-- proof boundary is now the strong distance certificate below.
 bfsDistanceLayerInvariantInputsLevel =
   BFSParent.bfsDistanceLayerInvariantInputsLevel
 bfsSpanningAndAcyclicityInputsLevel =
@@ -87,7 +110,17 @@ periodicBFSParentTreeCorrectnessInputsLevel =
   PeriodicBFS.periodicBFSParentTreeCorrectnessInputsLevel
 periodicBFSImplementationAssemblyInputsLevel =
   BFS.periodicBFSImplementationAssemblyInputsLevel
+physicalPeriodicDistanceStepInputsLevel =
+  StrongBFS.physicalPeriodicDistanceStepInputsLevel
+physicalPeriodicDistanceZeroUniquenessInputsLevel =
+  StrongBFS.physicalPeriodicDistanceZeroUniquenessInputsLevel
+physicalPeriodicAdjacentLayerUpperBoundInputsLevel =
+  BFSShortest.physicalPeriodicAdjacentLayerUpperBoundInputsLevel
 
+physicalCoercivityToSpectrumLowerBoundInputsLevel =
+  InverseNorm.physicalCoercivityToSpectrumLowerBoundInputsLevel
+physicalInverseHessianSpectralNormMeaningInputsLevel =
+  InverseNorm.physicalInverseHessianSpectralNormMeaningInputsLevel
 physicalReferenceHessianInvertibilityInputsLevel =
   Determinant.physicalReferenceHessianInvertibilityInputsLevel
 physicalHessianPerturbationNormInputsLevel =
