@@ -41,10 +41,6 @@ import DASHI.Physics.YangMills.BalabanClayGate4PrimaryTargetAndAttachmentAuditEx
 import DASHI.Physics.YangMills.BalabanClayGate4ClusteringLocatorAuditExact as Locator
 import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact as External
 
-------------------------------------------------------------------------
--- Exact metadata, finite constructions, reuse and implication assemblies.
-------------------------------------------------------------------------
-
 largeFieldLiteratureMetadataLevel = Gate4.largeFieldLiteratureMetadataLevel
 gate4ArchaeologyGraphLevel = Gate4.gate4ArchaeologyGraphLevel
 primaryTargetMetadataLevel = Audit.primaryTargetMetadataLevel
@@ -174,6 +170,7 @@ cauchyLargeFieldRemainderAssemblyLevel =
   CouplingControl.cauchyLargeFieldRemainderAssemblyLevel
 inverseCouplingLinearGrowthInductionLevel =
   CouplingControl.inverseCouplingLinearGrowthInductionLevel
+finiteWindowNaturalOrderLevel = CouplingControl.finiteWindowNaturalOrderLevel
 finiteWeakCouplingWindowAssemblyLevel =
   CouplingControl.finiteWeakCouplingWindowAssemblyLevel
 polynomialSuppressionOneStepAssemblyLevel =
@@ -199,8 +196,10 @@ concreteUVToMassGapDependencyAssemblyLevel =
   ConcreteMass.concreteUVToMassGapDependencyAssemblyLevel
 physicalMeasurePresentationAgreementLevel =
   PhysicalMass.physicalMeasurePresentationAgreementLevel
-physicalMeasureToGramClosureAssemblyLevel =
-  PhysicalMass.physicalMeasureToGramClosureAssemblyLevel
+physicalMeasureToGramClosureReuseLevel =
+  PhysicalMass.physicalMeasureToGramClosureReuseLevel
+physicalContinuumReflectionPositivityAssemblyLevel =
+  PhysicalMass.physicalContinuumReflectionPositivityAssemblyLevel
 physicalContinuumOSAxiomAssemblyLevel =
   PhysicalMass.physicalContinuumOSAxiomAssemblyLevel
 physicalGapToInterlacingAssemblyLevel =
@@ -210,10 +209,6 @@ numericalIngredientVocabularyLevel = Numerical.numericalIngredientVocabularyLeve
 existingNumericalReferenceSurfaceLevel = Numerical.existingNumericalReferenceSurfaceLevel
 externalAuditVocabularyLevel = External.externalAuditVocabularyLevel
 massGapAcyclicityReceiptDefinitionLevel = External.massGapAcyclicityReceiptDefinitionLevel
-
-------------------------------------------------------------------------
--- Genuine physical/analytic inhabitants. Imports never promote these.
-------------------------------------------------------------------------
 
 literalBoltzmannExponentialSuppressionInputsLevel =
   Wilson.literalBoltzmannExponentialSuppressionInputsLevel
@@ -300,8 +295,10 @@ initialUVStabilityInputsLevel = UV.initialUVStabilityInputsLevel
 
 physicalUVToContinuumMeasureInputsLevel =
   PhysicalMass.physicalUVToContinuumMeasureInputsLevel
-physicalMeasureToGramTopologyInputsLevel =
-  PhysicalMass.physicalMeasureToGramTopologyInputsLevel
+physicalExpectationConvergenceInputsLevel =
+  PhysicalMass.physicalExpectationConvergenceInputsLevel
+physicalGramToClosureReflectionMeaningInputsLevel =
+  PhysicalMass.physicalGramToClosureReflectionMeaningInputsLevel
 uniformClusteringOS4InputsLevel = PhysicalMass.uniformClusteringOS4InputsLevel
 fullO4CovarianceOS1InputsLevel = PhysicalMass.fullO4CovarianceOS1InputsLevel
 clusteringToPositiveTransferGapInputsLevel =
@@ -327,6 +324,4 @@ numericalDependencyGraphAuditInputsLevel = Numerical.numericalDependencyGraphAud
 uidtNumericalAndPureSectorAuditInputsLevel =
   External.uidtNumericalAndPureSectorAuditInputsLevel
 
--- Compatibility only: the old arbitrary-Set receipt remains available, but the
--- concrete physical UV/measure/Gram/OS/interlacing packages above are preferred.
 massGapDependencyAcyclicityInputsLevel = External.massGapDependencyAcyclicityInputsLevel
