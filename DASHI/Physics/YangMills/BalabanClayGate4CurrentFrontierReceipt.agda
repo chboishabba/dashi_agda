@@ -33,6 +33,7 @@ record CurrentGate4FrontierReceipt : Set where
     localizedFactorReductionChecked : Bool
     dyadicRunningCouplingConventionChecked : Bool
     blockAveragingSummabilityChecked : Bool
+    summableTailBudgetClosureChecked : Bool
     existingRGPhysicalOneStepReuseChecked : Bool
 
     publishedTerminalCriteriaChecked : Bool
@@ -44,6 +45,7 @@ record CurrentGate4FrontierReceipt : Set where
 
     harrisAlternativeQuarantined : Bool
     massGapClaimEcosystemQuarantined : Bool
+    attachmentMechanismAuditChecked : Bool
     currentSurfacePostulateFree : Bool
 
 open CurrentGate4FrontierReceipt public
@@ -69,6 +71,7 @@ record AuthoritativeCurrentGate4Evidence
     localizedFactorReductionTypechecks : Set
     dyadicRunningCouplingConventionTypechecks : Set
     blockAveragingSummabilityTypechecks : Set
+    summableTailBudgetClosureTypechecks : Set
     existingRGPhysicalOneStepReuseTypechecks : Set
     publishedTerminalCriteriaTypechecks : Set
     conditionedObservableLocalizationTypechecks : Set
@@ -76,6 +79,7 @@ record AuthoritativeCurrentGate4Evidence
     denseRotationOS1ReductionTypechecks : Set
     osReconstructionCyclicityTypechecks : Set
     clusteringToTransferGapReductionTypechecks : Set
+    attachmentMechanismAuditTypechecks : Set
     quarantineAuditTypechecks : Set
     currentSurfaceHasNoPostulatesOrUnsolvedMetas : Set
 
@@ -135,6 +139,9 @@ dyadicRunningCouplingConventionTypecheckLevel = conditional
 blockAveragingSummabilityTypecheckLevel : ProofLevel
 blockAveragingSummabilityTypecheckLevel = conditional
 
+summableTailBudgetClosureTypecheckLevel : ProofLevel
+summableTailBudgetClosureTypecheckLevel = conditional
+
 existingRGPhysicalOneStepReuseTypecheckLevel : ProofLevel
 existingRGPhysicalOneStepReuseTypecheckLevel = conditional
 
@@ -155,6 +162,9 @@ osReconstructionCyclicityTypecheckLevel = conditional
 
 clusteringToTransferGapReductionTypecheckLevel : ProofLevel
 clusteringToTransferGapReductionTypecheckLevel = conditional
+
+attachmentMechanismAuditTypecheckLevel : ProofLevel
+attachmentMechanismAuditTypecheckLevel = conditional
 
 quarantineAuditTypecheckLevel : ProofLevel
 quarantineAuditTypecheckLevel = conditional
