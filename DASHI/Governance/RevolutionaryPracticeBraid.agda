@@ -1,5 +1,6 @@
 module DASHI.Governance.RevolutionaryPracticeBraid where
 
+open import Agda.Primitive using (Setω)
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
@@ -175,7 +176,7 @@ canonicalMeansEndsSedimentationBoundary =
     false
     false
 
-record RevolutionaryPracticeBraidSurface : Set₁ where
+record RevolutionaryPracticeBraidSurface : Setω where
   constructor revolutionaryPracticeBraidSurface
   field
     sourceAtlas : List Source.SourceReference
