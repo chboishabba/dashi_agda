@@ -4,10 +4,12 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger as Previous
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralCubeBianchiExact as Cube
+import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2BondCarrierExact as RationalBond
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalReferenceMassAssemblyExact as Reference
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTraversalGeometryReuseExact as Traversal
 import DASHI.Physics.YangMills.BalabanClayGate4RCanonicalRepositoryTraceReuseExact as RTrace
 import DASHI.Physics.YangMills.BalabanClayGate4LocalizedFactorAnalyticReductionExact as Factor
+import DASHI.Physics.YangMills.BalabanClayGate4ExistingRGPhysicalOneStepReuseExact as OneStep
 import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
 import DASHI.Physics.YangMills.BalabanClayT5OS1RotationRestorationExact as OS1
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
@@ -16,7 +18,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact as
 ------------------------------------------------------------------------
 -- Preferred current-frontier ledger.
 --
--- The previous completion ledger remains imported for compatibility.  This file
+-- The previous completion ledger remains imported for compatibility. This file
 -- records proof closures added after that compatibility surface was established
 -- and is the authoritative concise boundary for the present branch head.
 ------------------------------------------------------------------------
@@ -30,6 +32,7 @@ cancellableBoundaryAlgebraLevel = Cube.cancellableBoundaryAlgebraLevel
 literalCubeBoundaryCancellationLevel =
   Cube.literalCubeBoundaryCancellationLevel
 literalCubeBianchiLevel = Cube.literalCubeBianchiLevel
+rationalSU2CubeBianchiLevel = RationalBond.rationalSU2CubeBianchiLevel
 
 periodicTraversalDirectionInverseLevel =
   Traversal.periodicTraversalDirectionInverseLevel
@@ -50,6 +53,15 @@ localizedFactorRemainderReductionLevel =
   Factor.localizedFactorRemainderReductionLevel
 localizedFactorExponentialAssemblyLevel =
   Factor.localizedFactorExponentialAssemblyLevel
+
+existingRGPhysicalOneStepReuseLevel =
+  OneStep.existingRGPhysicalOneStepReuseLevel
+physicalCombinedNormExistingRGReuseLevel =
+  OneStep.physicalCombinedNormExistingRGReuseLevel
+physicalGaugeWardCountertermReuseLevel =
+  OneStep.physicalGaugeWardCountertermReuseLevel
+physicalCouplingIrrelevantReuseLevel =
+  OneStep.physicalCouplingIrrelevantReuseLevel
 
 finiteTerminalKPReuseLevel = Terminal.finiteTerminalKPReuseLevel
 physicalTerminalKPSmallnessAssemblyLevel =
@@ -95,6 +107,11 @@ physicalLocalizedTriangleNormInputsLevel =
   Factor.physicalLocalizedTriangleNormInputsLevel
 physicalOnePlusExponentialInputsLevel =
   Factor.physicalOnePlusExponentialInputsLevel
+
+physicalRGDefectRepresentationInputsLevel =
+  OneStep.physicalRGDefectRepresentationInputsLevel
+physicalInvariantDomainAndBoundaryInputsLevel =
+  OneStep.physicalInvariantDomainAndBoundaryInputsLevel
 
 physicalTerminalRootedSumIdentificationInputsLevel =
   Terminal.physicalTerminalRootedSumIdentificationInputsLevel
