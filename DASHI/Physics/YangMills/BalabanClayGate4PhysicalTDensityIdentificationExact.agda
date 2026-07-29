@@ -1,12 +1,13 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PhysicalTDensityIdentificationExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Data.Rational using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
 import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as T
 import DASHI.Physics.YangMills.BalabanClayT2LiteralWilsonSixFactorProducerExact as Six
 import DASHI.Physics.YangMills.BalabanClayT2WilsonActivityFactorProductExact as Product
@@ -32,6 +33,43 @@ import DASHI.Physics.YangMills.BalabanClayGate4WilsonBoltzmannSuppressionExact a
 -- 355--392. DOI: 10.1007/BF01238433.
 ------------------------------------------------------------------------
 
+record PhysicalTConstruction
+    (Scale Fine SlowField Component Functional : Set) : Set₁ where
+  field
+    sumData : Integral.FiniteConstrainedSum Fine SlowField ℚ
+    classData : T.ComponentClassData Scale Component
+
+    Traversal : Set
+    sixFactors : Six.LiteralWilsonSixFactorData Scale Traversal
+    traversalOf : Component → SlowField → Fine → Traversal
+
+    fastFibre : Scale → Component → List Fine
+    evaluateFunctional : Functional → Fine → ℚ
+    multiply : ℚ → ℚ → ℚ
+    oneFunctional : Functional
+    largeFieldIndicator : Scale → Component → Functional
+
+open PhysicalTConstruction public
+
+physicalTData :
+  ∀ {Scale Fine SlowField Component Functional} →
+  PhysicalTConstruction Scale Fine SlowField Component Functional →
+  T.FiniteLocalTOperationData Scale Fine SlowField Component Functional ℚ
+physicalTData construction = record
+  { T.FiniteLocalTOperationData.sumData = sumData construction
+  ; T.FiniteLocalTOperationData.classData = classData construction
+  ; T.FiniteLocalTOperationData.fastFibre = fastFibre construction
+  ; T.FiniteLocalTOperationData.localDensity = λ scale component slow fine →
+      Six.activity (sixFactors construction) scale
+        (traversalOf construction component slow fine)
+  ; T.FiniteLocalTOperationData.evaluateFunctional =
+      evaluateFunctional construction
+  ; T.FiniteLocalTOperationData.multiply = multiply construction
+  ; T.FiniteLocalTOperationData.oneFunctional = oneFunctional construction
+  ; T.FiniteLocalTOperationData.largeFieldIndicator =
+      largeFieldIndicator construction
+  }
+
 record PhysicalTDensityIdentification
     {Scale Fine SlowField Component Functional : Set}
     (dataSet : T.FiniteLocalTOperationData
@@ -46,6 +84,19 @@ record PhysicalTDensityIdentification
       ≡ Six.activity sixFactors scale (traversalOf component slow fine)
 
 open PhysicalTDensityIdentification public
+
+physicalTDensityIdentificationFromConstruction :
+  ∀ {Scale Fine SlowField Component Functional}
+    (construction : PhysicalTConstruction
+      Scale Fine SlowField Component Functional) →
+  PhysicalTDensityIdentification (physicalTData construction)
+physicalTDensityIdentificationFromConstruction construction = record
+  { PhysicalTDensityIdentification.Traversal = Traversal construction
+  ; PhysicalTDensityIdentification.sixFactors = sixFactors construction
+  ; PhysicalTDensityIdentification.traversalOf = traversalOf construction
+  ; PhysicalTDensityIdentification.densityIsExistingActivity =
+      λ scale component slow fine → refl
+  }
 
 physicalTDensityBelowOneSixteenth :
   ∀ {Scale Fine SlowField Component Functional}
@@ -103,6 +154,9 @@ record OwnedPlaquetteActionFactorIdentification
           (traversalOf identification component slow fine)
 
 open OwnedPlaquetteActionFactorIdentification public
+
+physicalTConstructionLevel : ProofLevel
+physicalTConstructionLevel = machineChecked
 
 physicalTDensityExistingSixFactorLevel : ProofLevel
 physicalTDensityExistingSixFactorLevel = machineChecked
