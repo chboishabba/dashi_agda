@@ -41,18 +41,15 @@ record RationalSU2BondData (n : Nat) : Set₁ where
 open RationalSU2BondData public
 
 realization :
-  ∀ {n} → RationalSU2BondData n →
+  ∀ {n} (dataSet : RationalSU2BondData n) →
   Bond.PeriodicBondGaugeRealization
-    n SU2.RationalUnitQuaternion ∘ exactGroup
+    n SU2.RationalUnitQuaternion (exactGroup dataSet)
 realization dataSet =
   Covariance.literalPeriodicBondGaugeRealization
     (exactGroup dataSet)
     (stepInverseLaws dataSet)
     (links dataSet)
     (siteGauge dataSet)
-  where
-  _∘_ : ∀ {A : Set} → (A → Set₁) → A → Set₁
-  family ∘ value = family value
 
 rationalSU2PlaquetteHolonomy :
   ∀ {n} (dataSet : RationalSU2BondData n) →
