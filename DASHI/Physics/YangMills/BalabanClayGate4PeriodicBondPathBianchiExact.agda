@@ -30,8 +30,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessEx
 -- DOI: 10.1007/BF01466594.
 --
 -- Michael Creutz,
--- "Quarks, Gluons and Lattices", Cambridge University Press (1983).
--- DOI: 10.1017/CBO9780511622630.
+-- "Quarks, Gluons and Lattices", Cambridge University Press, first published
+-- 1983; open-access reissue 2022. DOI: 10.1017/9781009290395.
 ------------------------------------------------------------------------
 
 PeriodicBondField : Nat → Set → Set
