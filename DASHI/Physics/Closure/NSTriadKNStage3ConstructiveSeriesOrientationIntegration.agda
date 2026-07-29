@@ -5,11 +5,12 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- Authors: Martin Lundfall; Zachary Murray; Viktor Csimma; Robbert Krebbers;
 -- Bas Spitters; Loukas Grafakos; Rodolfo H. Torres; Terence Tao; Minghui Liu;
 -- Gabor Pataki; Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin; Raphael
--- Danchin; Errett Bishop; Douglas Bridges; Augustin-Louis Cauchy; Agda
--- standard-library contributors; DASHI repository contributors.
+-- Danchin; Errett Bishop; Douglas Bridges; Augustin-Louis Cauchy; Hermann
+-- Amandus Schwarz; Agda standard-library contributors; DASHI repository
+-- contributors.
 -- Title: "Stage-3 constructive-series candidate, literal Schur-shell
--- substitution, affine falsification, unit-weight Check A and cutoff-uniform
--- output-relocation shell-majorant integration".
+-- substitution, affine falsification, unit-weight Check A and derived native-
+-- spine output-relocation integration".
 -- Venue/year: Reals-in-agda formal development, 2015; Constructive Analysis in
 -- the Agda Proof Assistant, 2022; Logical Methods in Computer Science 9(1:1),
 -- 2013; Journal of Functional Analysis 187 (2001), 1--24 and 199 (2003),
@@ -24,11 +25,12 @@ module DASHI.Physics.Closure.NSTriadKNStage3ConstructiveSeriesOrientationIntegra
 -- Uses: constructive-real candidate comparison, literal power-law Schur
 -- orientation, exact affine falsification and unit-weight recovery, recursive
 -- rational geometric sums, the positive kernel, three normalized shell Schur
--- bounds, finite signed domination and the conditional archetype theorem.
--- Relationship: all reasoning downstream of the concrete shell bridge is now
--- closed.  A general arbitrary-real-ratio geometric theorem is not required.
--- The remaining bridge contains the two H^s shell-factor comparisons and the
--- literal coefficient's pointwise two-sided domination.
+-- bounds, finite signed domination, base-two envelope derivation, absolute-
+-- coefficient derivation and the native-spine composite theorem.
+-- Relationship: the four former raw fields are now derived theorem outputs.
+-- The concrete frontier is the native ordered/rational capability, coherent
+-- base-two power and integer anchors, endpoint decay data, absolute-value order
+-- laws, factor nonnegativity and one literal absolute-coefficient estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -47,6 +49,8 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationUnitWeightShellSchur as ShellSchur
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteSignedMajorant as Signed
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformClosure as Conditional
+import DASHI.Physics.Closure.NSTriadKNOutputRelocationAbsoluteCoefficientBridge as Absolute
+import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDerivedClosure as Derived
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProgram as Archetype
 
 record ConstructiveSeriesOrientationReceipt : Set where
@@ -112,16 +116,20 @@ record ConstructiveSeriesOrientationReceipt : Set where
       Conditional.outputRelocationConditionalArchetypeTheoremClosed ≡ true
     allDownstreamOfShellBridgeClosed :
       Conditional.outputRelocationAllDownstreamOfShellBridgeClosed ≡ true
-    minimalPowerBridgeSpecified :
-      PowerBridge.outputRelocationMinimalPowerBridgeSpecified ≡ true
-    onlyTwoPowerDominationLemmasRequired :
-      PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequired ≡ true
+    twoPowerDominationTheoremsClosed :
+      PowerBridge.outputRelocationTwoPowerDominationTheoremsClosed ≡ true
+    absoluteMagnitudeToTwoSidedClosed :
+      Absolute.absoluteMagnitudeToTwoSidedDominationClosed ≡ true
+    fourFormerRawFieldsDerived :
+      Derived.fourFormerRawBridgeFieldsDerived ≡ true
+    nativeSpineDerivedClosureTheoremClosed :
+      Derived.nativeSpineDerivedClosureTheoremClosed ≡ true
     finalArchetypeCutsetSpecified :
       Archetype.outputRelocationFinalArchetypeCutsetSpecified ≡ true
-    concretePowerBridgeStillOpen :
-      PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosed ≡ false
-    concreteShellBridgeStillOpen :
-      Conditional.outputRelocationConcreteShellBridgeInhabited ≡ false
+    concreteBaseTwoPowerDataStillOpen :
+      Derived.concreteNativeBaseTwoPowerCapabilityClosed ≡ false
+    concreteLiteralAbsoluteEstimateStillOpen :
+      Derived.concreteLiteralAbsoluteCoefficientEstimateClosed ≡ false
     actualHsSeriesStillOpen :
       Envelope.outputRelocationActualHsCutoffUniformSeriesClosed ≡ false
     concreteAnalyticArchetypeStillOpen :
@@ -162,11 +170,13 @@ constructiveSeriesOrientationReceipt = receipt
   Signed.finiteTwoSidedTriangleDominationClosedIsTrue
   Conditional.outputRelocationConditionalArchetypeTheoremClosedIsTrue
   Conditional.outputRelocationAllDownstreamOfShellBridgeClosedIsTrue
-  PowerBridge.outputRelocationMinimalPowerBridgeSpecifiedIsTrue
-  PowerBridge.outputRelocationOnlyTwoPowerDominationLemmasRequiredIsTrue
+  PowerBridge.outputRelocationTwoPowerDominationTheoremsClosedIsTrue
+  Absolute.absoluteMagnitudeToTwoSidedDominationClosedIsTrue
+  Derived.fourFormerRawBridgeFieldsDerivedIsTrue
+  Derived.nativeSpineDerivedClosureTheoremClosedIsTrue
   Archetype.outputRelocationFinalArchetypeCutsetSpecifiedIsTrue
-  PowerBridge.outputRelocationConcretePowerEnvelopeBridgeClosedIsFalse
-  Conditional.outputRelocationConcreteShellBridgeInhabitedIsFalse
+  Derived.concreteNativeBaseTwoPowerCapabilityClosedIsFalse
+  Derived.concreteLiteralAbsoluteCoefficientEstimateClosedIsFalse
   Envelope.outputRelocationActualHsCutoffUniformSeriesClosedIsFalse
   Archetype.outputRelocationCutoffUniformArchetypeTheoremClosedIsFalse
 
@@ -206,14 +216,36 @@ outputRelocationFiniteSignedDominationClosed = true
 outputRelocationConditionalArchetypeClosed : Bool
 outputRelocationConditionalArchetypeClosed = true
 
+outputRelocationTwoPowerDominationTheoremsClosed : Bool
+outputRelocationTwoPowerDominationTheoremsClosed = true
+
+outputRelocationAbsoluteCoefficientDerivationClosed : Bool
+outputRelocationAbsoluteCoefficientDerivationClosed = true
+
+outputRelocationFourFormerRawBridgeFieldsDerived : Bool
+outputRelocationFourFormerRawBridgeFieldsDerived = true
+
+outputRelocationNativeSpineDerivedClosureTheoremClosed : Bool
+outputRelocationNativeSpineDerivedClosureTheoremClosed = true
+
 outputRelocationFinalArchetypeCutsetSpecified : Bool
 outputRelocationFinalArchetypeCutsetSpecified = true
 
+-- Compatibility aggregate leaves retained for downstream consumers.
 nextLeafIsConcreteShellBridge : Bool
 nextLeafIsConcreteShellBridge = true
 
 nextLeafIsConstructivePowerMonotonicityBridge : Bool
 nextLeafIsConstructivePowerMonotonicityBridge = true
+
+nextLeafIsConcreteNativeSpineCapability : Bool
+nextLeafIsConcreteNativeSpineCapability = true
+
+nextLeafIsConcreteBaseTwoPowerData : Bool
+nextLeafIsConcreteBaseTwoPowerData = true
+
+nextLeafIsLiteralAbsoluteCoefficientEstimate : Bool
+nextLeafIsLiteralAbsoluteCoefficientEstimate = true
 
 nextLeafIsConstructiveDyadicTail : Bool
 nextLeafIsConstructiveDyadicTail = false
@@ -277,6 +309,22 @@ outputRelocationConditionalArchetypeClosedIsTrue :
   outputRelocationConditionalArchetypeClosed ≡ true
 outputRelocationConditionalArchetypeClosedIsTrue = refl
 
+outputRelocationTwoPowerDominationTheoremsClosedIsTrue :
+  outputRelocationTwoPowerDominationTheoremsClosed ≡ true
+outputRelocationTwoPowerDominationTheoremsClosedIsTrue = refl
+
+outputRelocationAbsoluteCoefficientDerivationClosedIsTrue :
+  outputRelocationAbsoluteCoefficientDerivationClosed ≡ true
+outputRelocationAbsoluteCoefficientDerivationClosedIsTrue = refl
+
+outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue :
+  outputRelocationFourFormerRawBridgeFieldsDerived ≡ true
+outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue = refl
+
+outputRelocationNativeSpineDerivedClosureTheoremClosedIsTrue :
+  outputRelocationNativeSpineDerivedClosureTheoremClosed ≡ true
+outputRelocationNativeSpineDerivedClosureTheoremClosedIsTrue = refl
+
 outputRelocationFinalArchetypeCutsetSpecifiedIsTrue :
   outputRelocationFinalArchetypeCutsetSpecified ≡ true
 outputRelocationFinalArchetypeCutsetSpecifiedIsTrue = refl
@@ -288,6 +336,18 @@ nextLeafIsConcreteShellBridgeIsTrue = refl
 nextLeafIsConstructivePowerMonotonicityBridgeIsTrue :
   nextLeafIsConstructivePowerMonotonicityBridge ≡ true
 nextLeafIsConstructivePowerMonotonicityBridgeIsTrue = refl
+
+nextLeafIsConcreteNativeSpineCapabilityIsTrue :
+  nextLeafIsConcreteNativeSpineCapability ≡ true
+nextLeafIsConcreteNativeSpineCapabilityIsTrue = refl
+
+nextLeafIsConcreteBaseTwoPowerDataIsTrue :
+  nextLeafIsConcreteBaseTwoPowerData ≡ true
+nextLeafIsConcreteBaseTwoPowerDataIsTrue = refl
+
+nextLeafIsLiteralAbsoluteCoefficientEstimateIsTrue :
+  nextLeafIsLiteralAbsoluteCoefficientEstimate ≡ true
+nextLeafIsLiteralAbsoluteCoefficientEstimateIsTrue = refl
 
 nextLeafIsConstructiveDyadicTailIsFalse :
   nextLeafIsConstructiveDyadicTail ≡ false
