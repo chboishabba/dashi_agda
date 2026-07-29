@@ -3,8 +3,9 @@ module DASHI.Physics.YangMills.BalabanClayGate4ExistingRGPhysicalOneStepReuseExa
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion as ExistingRG
-import DASHI.Physics.YangMills.BalabanClayT5PhysicalRGClosureExact as PhysicalT5
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact as PhysicalT5
 import DASHI.Physics.YangMills.BalabanClayLegacyGaugeRGMeasureReuseExact as Legacy
+import DASHI.Physics.YangMills.BalabanClayGate4CombinedSmallLargeNormAssemblyExact as Combined
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalOneStepClosureExact as PhysicalStep
 
 ------------------------------------------------------------------------
@@ -21,30 +22,33 @@ import DASHI.Physics.YangMills.BalabanClayGate4PhysicalOneStepClosureExact as Ph
 -- 355--392. DOI: 10.1007/BF01238433.
 --
 -- This module is an adapter over the existing one-step RG and physical T5
--- defect carriers.  It deliberately does not create a second RG transform.
+-- defect carriers. It deliberately does not create a second RG transform.
 ------------------------------------------------------------------------
 
 record ExistingRGPhysicalOneStepReuse
     {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect : Set}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm : Set}
     (rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density)
-    (defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect) : Set₁ where
+    (defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm) : Set₁ where
   field
     physicalIdentification :
       PhysicalStep.PhysicalOneStepIdentification
         {BoundaryTerm = BoundaryTerm} rg
 
-    defectAdapter : Legacy.ExistingRGToT5DefectAdapter rg defect
+    defectAdapter :
+      Legacy.ExistingRGToT5DefectAdapter
+        Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
+        Bound Density Cutoff Observable DefectTerm rg defect
 
 open ExistingRGPhysicalOneStepReuse public
 
 physicalCombinedNormFromExistingRG :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm}
     {rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density}
-    {defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect} →
+    {defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm} →
   (reuse : ExistingRGPhysicalOneStepReuse
     {BoundaryTerm = BoundaryTerm} rg defect) →
   ExistingRG.LessEqual rg
@@ -59,7 +63,7 @@ physicalCombinedNormFromExistingRG :
             (PhysicalStep.current (physicalIdentification reuse)))))
       (ExistingRG.addBound rg
         (ExistingRG.perturbativeError rg)
-        (DASHI.Physics.YangMills.BalabanClayGate4CombinedSmallLargeNormAssemblyExact.totalLargeFieldError
+        (Combined.totalLargeFieldError
           (PhysicalStep.combinedBridge (physicalIdentification reuse)))))
 physicalCombinedNormFromExistingRG reuse =
   PhysicalStep.physicalCombinedPolymerNormBound
@@ -67,75 +71,75 @@ physicalCombinedNormFromExistingRG reuse =
 
 physicalFluctuationGaugeInvarianceFromExistingRG :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm}
     {rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density}
-    {defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect}
+    {defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm}
     (reuse : ExistingRGPhysicalOneStepReuse
       {BoundaryTerm = BoundaryTerm} rg defect) →
-  Legacy.FluctuationIntegralGaugeInvariant (defectAdapter reuse)
-physicalFluctuationGaugeInvarianceFromExistingRG reuse =
-  Legacy.reusedFluctuationGaugeInvariance (defectAdapter reuse)
+  ExistingRG.FluctuationIntegralGaugeInvariant rg
+physicalFluctuationGaugeInvarianceFromExistingRG {rg = rg} reuse =
+  Legacy.existingFluctuationIntegralGaugeInvariant rg
 
 physicalEffectiveWardFromExistingRG :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm}
     {rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density}
-    {defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect}
+    {defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm}
     (reuse : ExistingRGPhysicalOneStepReuse
       {BoundaryTerm = BoundaryTerm} rg defect) →
-  Legacy.EffectiveActionSatisfiesWard (defectAdapter reuse)
-physicalEffectiveWardFromExistingRG reuse =
-  Legacy.reusedEffectiveActionWard (defectAdapter reuse)
+  ExistingRG.EffectiveActionWardIdentity rg
+physicalEffectiveWardFromExistingRG {rg = rg} reuse =
+  Legacy.existingEffectiveActionWardIdentity rg
 
 physicalLocalizationWardFromExistingRG :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm}
     {rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density}
-    {defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect}
+    {defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm}
     (reuse : ExistingRGPhysicalOneStepReuse
       {BoundaryTerm = BoundaryTerm} rg defect) →
-  Legacy.LocalizationSatisfiesWard (defectAdapter reuse)
-physicalLocalizationWardFromExistingRG reuse =
-  Legacy.reusedLocalizationWard (defectAdapter reuse)
+  ExistingRG.LocalizationPreservesWardIdentity rg
+physicalLocalizationWardFromExistingRG {rg = rg} reuse =
+  Legacy.existingLocalizationPreservesWardIdentity rg
 
 physicalCountertermCancellationFromExistingRG :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm}
     {rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density}
-    {defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect}
+    {defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm}
     (reuse : ExistingRGPhysicalOneStepReuse
       {BoundaryTerm = BoundaryTerm} rg defect) →
-  Legacy.VacuumCountertermCancels (defectAdapter reuse)
-physicalCountertermCancellationFromExistingRG reuse =
-  Legacy.reusedVacuumCountertermCancellation (defectAdapter reuse)
+  ExistingRG.VacuumCountertermCancelsLocalConstant rg
+physicalCountertermCancellationFromExistingRG {rg = rg} reuse =
+  Legacy.existingVacuumCountertermCancellation rg
 
 physicalCouplingRenormalizationFromExistingRG :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm}
     {rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density}
-    {defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect}
+    {defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm}
     (reuse : ExistingRGPhysicalOneStepReuse
       {BoundaryTerm = BoundaryTerm} rg defect) →
-  Legacy.CouplingRenormalizes (defectAdapter reuse)
-physicalCouplingRenormalizationFromExistingRG reuse =
-  Legacy.reusedCouplingRenormalization (defectAdapter reuse)
+  ExistingRG.CouplingRenormalization rg
+physicalCouplingRenormalizationFromExistingRG {rg = rg} reuse =
+  Legacy.existingCouplingRenormalization rg
 
 physicalIrrelevantContractionFromExistingRG :
   ∀ {Configuration Background Fluctuation GaugeOrbit Polymer Region Coupling
-      Bound Density BoundaryTerm Observable Defect}
+      Bound Density BoundaryTerm Cutoff Observable DefectTerm}
     {rg : ExistingRG.OneStepRGCutset Configuration Background Fluctuation
       GaugeOrbit Polymer Region Coupling Bound Density}
-    {defect : PhysicalT5.PhysicalRGDefectClosure Observable Defect}
+    {defect : PhysicalT5.OneStepRGDefect Cutoff Observable DefectTerm}
     (reuse : ExistingRGPhysicalOneStepReuse
       {BoundaryTerm = BoundaryTerm} rg defect) →
-  Legacy.IrrelevantRemainderContracts (defectAdapter reuse)
-physicalIrrelevantContractionFromExistingRG reuse =
-  Legacy.reusedIrrelevantContraction (defectAdapter reuse)
+  ExistingRG.IrrelevantTaylorRemainderContractive rg
+physicalIrrelevantContractionFromExistingRG {rg = rg} reuse =
+  Legacy.existingIrrelevantTaylorContraction rg
 
 existingRGPhysicalOneStepReuseLevel : ProofLevel
 existingRGPhysicalOneStepReuseLevel = machineChecked
