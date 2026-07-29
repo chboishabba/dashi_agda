@@ -62,16 +62,19 @@ record BranchHeadAgdaReceipt : Set where
     gate4BondPathBianchiChecked : Bool
     gate4RationalSU2ExactGroupChecked : Bool
     gate4PeriodicCoordinateClosureChecked : Bool
+    gate4PeriodicTraversalGeometryReuseChecked : Bool
     gate4TransportedBianchiCancellationChecked : Bool
     gate4WilsonBoltzmannSuppressionChecked : Bool
     gate4PhysicalTDensityChecked : Bool
     gate4ReferenceFibreNormalizationChecked : Bool
     gate4ReferenceFibrePositiveMassChecked : Bool
+    gate4PhysicalReferenceMassAssemblyChecked : Bool
     gate4FiniteTOperationChecked : Bool
     gate4TStructuralSuppressionReductionChecked : Bool
     gate4FiniteROperationChecked : Bool
     gate4RBoundarySupportChecked : Bool
     gate4CountingLocalizationReuseChecked : Bool
+    gate4RCanonicalTraceReuseChecked : Bool
     gate4RRepresentationExponentiationChecked : Bool
     gate4P0CompatibilityAuditChecked : Bool
     gate4AnalyticityCouplingControlChecked : Bool
@@ -81,6 +84,7 @@ record BranchHeadAgdaReceipt : Set where
     gate4AbsorptionAndUVAssemblyChecked : Bool
     t5PublishedTerminalCriteriaChecked : Bool
     t5OS1RotationRestorationChecked : Bool
+    t5ClusteringToTransferGapChecked : Bool
     concreteUVToMassGapDependencyChecked : Bool
     physicalContinuumOSGapBridgeChecked : Bool
     clusteringLocatorAuditChecked : Bool
@@ -131,16 +135,19 @@ record AuthoritativeBranchHeadEvidence
     gate4BondPathBianchiTypechecks : Set
     gate4RationalSU2ExactGroupTypechecks : Set
     gate4PeriodicCoordinateClosureTypechecks : Set
+    gate4PeriodicTraversalGeometryReuseTypechecks : Set
     gate4TransportedBianchiCancellationTypechecks : Set
     gate4WilsonBoltzmannSuppressionTypechecks : Set
     gate4PhysicalTDensityTypechecks : Set
     gate4ReferenceFibreNormalizationTypechecks : Set
     gate4ReferenceFibrePositiveMassTypechecks : Set
+    gate4PhysicalReferenceMassAssemblyTypechecks : Set
     gate4FiniteTOperationTypechecks : Set
     gate4TStructuralSuppressionReductionTypechecks : Set
     gate4FiniteROperationTypechecks : Set
     gate4RBoundarySupportTypechecks : Set
     gate4CountingLocalizationReuseTypechecks : Set
+    gate4RCanonicalTraceReuseTypechecks : Set
     gate4RRepresentationExponentiationTypechecks : Set
     gate4P0CompatibilityAuditTypechecks : Set
     gate4AnalyticityCouplingControlTypechecks : Set
@@ -150,6 +157,7 @@ record AuthoritativeBranchHeadEvidence
     gate4AbsorptionAndUVAssemblyTypechecks : Set
     t5PublishedTerminalCriteriaTypechecks : Set
     t5OS1RotationRestorationTypechecks : Set
+    t5ClusteringToTransferGapTypechecks : Set
     concreteUVToMassGapDependencyTypechecks : Set
     physicalContinuumOSGapBridgeTypechecks : Set
     clusteringLocatorAuditTypechecks : Set
@@ -229,6 +237,9 @@ gate4RationalSU2ExactGroupTypecheckLevel = conditional
 gate4PeriodicCoordinateClosureTypecheckLevel : ProofLevel
 gate4PeriodicCoordinateClosureTypecheckLevel = conditional
 
+gate4PeriodicTraversalGeometryReuseTypecheckLevel : ProofLevel
+gate4PeriodicTraversalGeometryReuseTypecheckLevel = conditional
+
 gate4TransportedBianchiCancellationTypecheckLevel : ProofLevel
 gate4TransportedBianchiCancellationTypecheckLevel = conditional
 
@@ -244,6 +255,9 @@ gate4ReferenceFibreNormalizationTypecheckLevel = conditional
 gate4ReferenceFibrePositiveMassTypecheckLevel : ProofLevel
 gate4ReferenceFibrePositiveMassTypecheckLevel = conditional
 
+gate4PhysicalReferenceMassAssemblyTypecheckLevel : ProofLevel
+gate4PhysicalReferenceMassAssemblyTypecheckLevel = conditional
+
 gate4FiniteTOperationTypecheckLevel : ProofLevel
 gate4FiniteTOperationTypecheckLevel = conditional
 
@@ -258,6 +272,9 @@ gate4RBoundarySupportTypecheckLevel = conditional
 
 gate4CountingLocalizationReuseTypecheckLevel : ProofLevel
 gate4CountingLocalizationReuseTypecheckLevel = conditional
+
+gate4RCanonicalTraceReuseTypecheckLevel : ProofLevel
+gate4RCanonicalTraceReuseTypecheckLevel = conditional
 
 gate4RRepresentationExponentiationTypecheckLevel : ProofLevel
 gate4RRepresentationExponentiationTypecheckLevel = conditional
@@ -285,6 +302,9 @@ t5PublishedTerminalCriteriaTypecheckLevel = conditional
 
 t5OS1RotationRestorationTypecheckLevel : ProofLevel
 t5OS1RotationRestorationTypecheckLevel = conditional
+
+t5ClusteringToTransferGapTypecheckLevel : ProofLevel
+t5ClusteringToTransferGapTypecheckLevel = conditional
 
 concreteUVToMassGapDependencyTypecheckLevel : ProofLevel
 concreteUVToMassGapDependencyTypecheckLevel = conditional
