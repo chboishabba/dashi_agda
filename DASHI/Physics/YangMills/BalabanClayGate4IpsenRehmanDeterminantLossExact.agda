@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -123,11 +124,48 @@ record PhysicalRelativeHessianDeterminantMeaning
 
 open PhysicalRelativeHessianDeterminantMeaning public
 
+physicalDeterminantBelowIpsenRehmanMultiplier :
+  ∀ {Scale Traversal Matrix Scalar}
+    (meaning : PhysicalRelativeHessianDeterminantMeaning
+      Scale Traversal Matrix Scalar)
+    scale traversal →
+  let dataSet = determinantData meaning scale traversal
+  in LessEqual dataSet
+      (physicalDeterminant meaning scale traversal)
+      (multiply dataSet
+        (referenceDeterminant meaning scale traversal)
+        (determinantMultiplier meaning scale traversal))
+physicalDeterminantBelowIpsenRehmanMultiplier meaning scale traversal =
+  let dataSet = determinantData meaning scale traversal
+      physicalEq = physicalDeterminantMeaning meaning scale traversal
+      referenceEq = referenceDeterminantMeaning meaning scale traversal
+      multiplierEq = determinantMultiplierMeaning meaning scale traversal
+      rightEq = cong₂ (multiply dataSet) referenceEq multiplierEq
+      base = determinantPerturbationBelowExponentialLoss dataSet
+  in subst
+      (λ upper → LessEqual dataSet
+        (physicalDeterminant meaning scale traversal) upper)
+      (sym rightEq)
+      (subst
+        (λ lower → LessEqual dataSet lower
+          (multiply dataSet
+            (determinant dataSet (referenceMatrix dataSet))
+            (exponential dataSet
+              (multiply dataSet
+                (naturalScalar dataSet (dimension dataSet))
+                (relativePerturbation dataSet))
+              (one dataSet))))
+        (sym physicalEq)
+        base)
+
 ipsenRehmanStatementProvenanceLevel : ProofLevel
 ipsenRehmanStatementProvenanceLevel = standardImported
 
 finiteDeterminantExponentialLossAssemblyLevel : ProofLevel
 finiteDeterminantExponentialLossAssemblyLevel = machineChecked
+
+physicalDeterminantMultiplierAssemblyLevel : ProofLevel
+physicalDeterminantMultiplierAssemblyLevel = machineChecked
 
 physicalReferenceHessianInvertibilityInputsLevel : ProofLevel
 physicalReferenceHessianInvertibilityInputsLevel = conditional
