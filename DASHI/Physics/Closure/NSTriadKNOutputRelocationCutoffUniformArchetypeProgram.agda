@@ -21,11 +21,13 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationCutoffUniformArchetypeProg
 -- Uses: exact rational geometric summation with constant 128/93, the positive
 -- kernel, all three unit-weight Schur conditions, finite signed domination,
 -- the unital native ConstructiveRealSpine adapter, semantically pinned base-two
--- power/scaling data and the absolute-magnitude coefficient derivation.
--- Relationship: the four former raw bridge fields are theorem outputs.  The
--- native embedding preserves rational one; two/five are embedded integers;
--- twoPow is pinned at zero/one; and natural shell scaling is repeated addition.
--- Concrete inhabitants and the final operator theorem remain fail-closed.
+-- power/scaling data, exact Sobolev decay formulas, derived factor positivity
+-- and the absolute-magnitude coefficient derivation.
+-- Relationship: the four former raw bridge fields and factor nonnegativity are
+-- theorem outputs.  The native embedding preserves rational one; two/five are
+-- embedded integers; twoPow is pinned at zero/one; natural shell scaling is
+-- repeated addition; and the decays are 2s-5/2 and 2s on 5/2<s<3.  Concrete
+-- inhabitants and the final operator theorem remain fail-closed.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -105,6 +107,8 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       PowerBridge.outputRelocationBaseTwoPowerMeaningConstrained ≡ true
     naturalScalingRecursivelyPinned :
       PowerBridge.outputRelocationNaturalScalingRecursivelyPinned ≡ true
+    factorNonnegativityDerived :
+      PowerBridge.outputRelocationFactorNonnegativityDerived ≡ true
     twoPowerDominationTheoremsClosed :
       PowerBridge.outputRelocationTwoPowerDominationTheoremsClosed ≡ true
     absoluteMagnitudeToTwoSidedClosed :
@@ -115,6 +119,8 @@ record OutputRelocationArchetypeProgramReceipt : Set where
       Derived.nativePowerConstantsPinnedToRationals ≡ true
     nativePowerZeroOneAndScalingPinned :
       Derived.nativePowerZeroOneAndScalingPinned ≡ true
+    nativeOutputDecayFormulaPinned :
+      Derived.nativeOutputDecayFormulaPinned ≡ true
     nativeSpineDerivedClosureTheoremClosed :
       Derived.nativeSpineDerivedClosureTheoremClosed ≡ true
     integerPowersAloneInsufficientForHsComparison :
@@ -147,11 +153,13 @@ outputRelocationArchetypeProgramReceipt = receipt
   SpineAdapter.nativeSpineToEmbeddedClosureTheoremClosedIsTrue
   PowerBridge.outputRelocationBaseTwoPowerMeaningConstrainedIsTrue
   PowerBridge.outputRelocationNaturalScalingRecursivelyPinnedIsTrue
+  PowerBridge.outputRelocationFactorNonnegativityDerivedIsTrue
   PowerBridge.outputRelocationTwoPowerDominationTheoremsClosedIsTrue
   Absolute.absoluteMagnitudeToTwoSidedDominationClosedIsTrue
   Derived.fourFormerRawBridgeFieldsDerivedIsTrue
   Derived.nativePowerConstantsPinnedToRationalsIsTrue
   Derived.nativePowerZeroOneAndScalingPinnedIsTrue
+  Derived.nativeOutputDecayFormulaPinnedIsTrue
   Derived.nativeSpineDerivedClosureTheoremClosedIsTrue
   PowerBridge.outputRelocationIntegerPowersAloneCloseNonIntegralHsComparisonIsFalse
   SpineAdapter.concreteSpineEnvelopeCapabilityClosedIsFalse
@@ -181,6 +189,9 @@ outputRelocationNativeSpineClosureTheoremClosed = true
 
 outputRelocationNativeSemanticsPinned : Bool
 outputRelocationNativeSemanticsPinned = true
+
+outputRelocationDecayFormulaAndFactorPositivityDerived : Bool
+outputRelocationDecayFormulaAndFactorPositivityDerived = true
 
 outputRelocationFourFormerRawBridgeFieldsDerived : Bool
 outputRelocationFourFormerRawBridgeFieldsDerived = true
@@ -242,6 +253,10 @@ outputRelocationNativeSpineClosureTheoremClosedIsTrue = refl
 outputRelocationNativeSemanticsPinnedIsTrue :
   outputRelocationNativeSemanticsPinned ≡ true
 outputRelocationNativeSemanticsPinnedIsTrue = refl
+
+outputRelocationDecayFormulaAndFactorPositivityDerivedIsTrue :
+  outputRelocationDecayFormulaAndFactorPositivityDerived ≡ true
+outputRelocationDecayFormulaAndFactorPositivityDerivedIsTrue = refl
 
 outputRelocationFourFormerRawBridgeFieldsDerivedIsTrue :
   outputRelocationFourFormerRawBridgeFieldsDerived ≡ true
