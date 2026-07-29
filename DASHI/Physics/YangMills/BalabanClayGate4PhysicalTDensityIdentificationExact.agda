@@ -69,29 +69,37 @@ record OwnedPlaquetteActionFactorIdentification
     (identification : PhysicalTDensityIdentification dataSet) : Set₁ where
   field
     productData : Wilson.OrderedPlaquetteProduct Plaquette
+    interpretProductWeight : Wilson.Weight productData → ℚ
     ownedPlaquettes : Component → SlowField → Fine → List Plaquette
 
     actionFactorIsOwnedPlaquetteProduct : ∀ scale component slow fine →
       Six.actionFactor (sixFactors identification) scale
         (traversalOf identification component slow fine)
-      ≡ Wilson.productWeights productData (ownedPlaquettes component slow fine)
+      ≡ interpretProductWeight
+          (Wilson.productWeights productData
+            (ownedPlaquettes component slow fine))
+
+    physicalJacobian physicalDeterminant physicalLocalization physicalPatch :
+      Scale → Component → SlowField → Fine → ℚ
 
     jacobianOwnerIsExisting : ∀ scale component slow fine →
-      Six.jacobianFactor (sixFactors identification) scale
-        (traversalOf identification component slow fine)
+      physicalJacobian scale component slow fine
       ≡ Six.jacobianFactor (sixFactors identification) scale
           (traversalOf identification component slow fine)
 
     determinantOwnerIsExisting : ∀ scale component slow fine →
-      Six.determinantFactor (sixFactors identification) scale
-        (traversalOf identification component slow fine)
+      physicalDeterminant scale component slow fine
       ≡ Six.determinantFactor (sixFactors identification) scale
           (traversalOf identification component slow fine)
 
-    localizationAndPatchOwnersAreExisting : ∀ scale component slow fine →
-      Six.localizationFactor (sixFactors identification) scale
-        (traversalOf identification component slow fine)
+    localizationOwnerIsExisting : ∀ scale component slow fine →
+      physicalLocalization scale component slow fine
       ≡ Six.localizationFactor (sixFactors identification) scale
+          (traversalOf identification component slow fine)
+
+    patchOwnerIsExisting : ∀ scale component slow fine →
+      physicalPatch scale component slow fine
+      ≡ Six.patchFactor (sixFactors identification) scale
           (traversalOf identification component slow fine)
 
 open OwnedPlaquetteActionFactorIdentification public
