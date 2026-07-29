@@ -46,6 +46,8 @@ record ConstructiveRealSpineSquareOrderCapability
     (absoluteOrder : Derived.ConstructiveRealSpineAbsoluteOrderCapability
       R capability) : Set₁ where
   field
+    multiplyZeroZero :
+      Spine._*_ R (Spine.zero R) (Spine.zero R) ≡ Spine.zero R
     absoluteNonnegative : ∀ value →
       Spine._≤_ R (Spine.zero R) (Spine.abs R value)
     squareReflectsOrderOnNonnegative : ∀ {left right} →
@@ -64,7 +66,8 @@ asNonnegativeSquareOrderCapability : ∀ R capability absoluteOrder →
     (Adapter.asOrderedRationalEnvelopeCarrier R capability)
     (Derived.asAbsoluteValueOrderCapability R capability absoluteOrder)
 asNonnegativeSquareOrderCapability R capability absoluteOrder squareOrder = record
-  { absoluteNonnegative = absoluteNonnegative squareOrder
+  { multiplyZeroZero = multiplyZeroZero squareOrder
+  ; absoluteNonnegative = absoluteNonnegative squareOrder
   ; squareReflectsOrderOnNonnegative =
       squareReflectsOrderOnNonnegative squareOrder
   }
