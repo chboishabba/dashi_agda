@@ -6,8 +6,10 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSParentCorrectnessExact as BFSParent
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicExecutableBFSInstantiationExact as PeriodicBFS
 import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact as Determinant
+import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanCompensatedTAdapterExact as DeterminantT
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteKernelSchurBlockAdjointExact as Schur
 import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact as KP
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalTwoWeightKoteckyPreissExact as PhysicalKP
 import DASHI.Physics.YangMills.BalabanClayT5AnisotropyPolymerSummationExact as Anisotropy
 import DASHI.Physics.YangMills.BalabanClayGate4AnisotropyBlockAndCriterionProvenanceExact as Provenance
 
@@ -34,6 +36,8 @@ periodicAdjacencyBooleanReflectionLevel =
   PeriodicBFS.periodicAdjacencyBooleanReflectionLevel
 periodicFuelBoundedBFSExecutionLevel =
   PeriodicBFS.periodicFuelBoundedBFSExecutionLevel
+periodicLocalParentCorrectnessLevel =
+  PeriodicBFS.periodicLocalParentCorrectnessLevel
 
 ipsenRehmanStatementProvenanceLevel =
   Determinant.ipsenRehmanStatementProvenanceLevel
@@ -41,6 +45,8 @@ finiteDeterminantExponentialLossAssemblyLevel =
   Determinant.finiteDeterminantExponentialLossAssemblyLevel
 physicalDeterminantMultiplierAssemblyLevel =
   Determinant.physicalDeterminantMultiplierAssemblyLevel
+ipsenRehmanCompensatedTAdapterLevel =
+  DeterminantT.ipsenRehmanCompensatedTAdapterLevel
 
 finiteKernelSchurReductionLevel = Schur.finiteKernelSchurReductionLevel
 oneEighthKernelBudgetAssemblyLevel = Schur.oneEighthKernelBudgetAssemblyLevel
@@ -50,6 +56,10 @@ physicalBlockAdjointRelativeContractionAssemblyLevel =
 koteckyPreissPrimaryStatementLevel = KP.koteckyPreissPrimaryStatementLevel
 rootedTerminalToTwoWeightKPAssemblyLevel =
   KP.rootedTerminalToTwoWeightKPAssemblyLevel
+physicalTerminalTwoWeightKPAssemblyLevel =
+  PhysicalKP.physicalTerminalTwoWeightKPAssemblyLevel
+physicalTerminalPublishedKPConclusionLevel =
+  PhysicalKP.physicalTerminalPublishedKPConclusionLevel
 
 finiteAnisotropySummationLevel = Anisotropy.finiteAnisotropySummationLevel
 totalAnisotropyA2EnvelopeAssemblyLevel =
@@ -84,6 +94,10 @@ physicalHessianPerturbationNormInputsLevel =
   Determinant.physicalHessianPerturbationNormInputsLevel
 physicalIpsenRehmanNormIdentificationInputsLevel =
   Determinant.physicalIpsenRehmanNormIdentificationInputsLevel
+physicalFiniteHessianToTDeterminantMeaningInputsLevel =
+  DeterminantT.physicalFiniteHessianToTDeterminantMeaningInputsLevel
+physicalDeterminantRationalOrderMeaningInputsLevel =
+  DeterminantT.physicalDeterminantRationalOrderMeaningInputsLevel
 
 physicalBlockAdjointKernelIdentificationInputsLevel =
   Schur.physicalBlockAdjointKernelIdentificationInputsLevel
@@ -96,6 +110,10 @@ physicalTerminalAAndDWeightMeaningInputsLevel =
   KP.physicalTerminalAAndDWeightMeaningInputsLevel
 physicalFernandezProcacciDirectCriterionInputsLevel =
   KP.physicalFernandezProcacciDirectCriterionInputsLevel
+physicalTerminalTwoWeightMeaningInputsLevel =
+  PhysicalKP.physicalTerminalTwoWeightMeaningInputsLevel
+physicalTerminalFernandezProcacciFallbackInputsLevel =
+  PhysicalKP.physicalTerminalFernandezProcacciFallbackInputsLevel
 
 physicalPerPolymerAnisotropyA2InputsLevel =
   Anisotropy.physicalPerPolymerAnisotropyA2InputsLevel
