@@ -1,5 +1,6 @@
 module DASHI.Codec.DNADeBruijnMacros where
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
@@ -11,9 +12,6 @@ open import DASHI.Codec.DNADeBruijnWalks using
   ( append; appendWalk )
 open import DASHI.Codec.DNADeBruijnGeometry using
   ( Traversal; Transfer; serialise; sourceField; incoming; outgoing; path )
-
-------------------------------------------------------------------------
--- Macros carry sequential boundary semantics only after serialization.
 
 record SerializedMacro (Summary : Set) : Set₁ where
   constructor serializedMacro
@@ -60,9 +58,6 @@ composeMacros left right refl =
     (compositeSummary (summary left) (summary right))
     (appendWalk (legalPath left) (legalPath right))
 
-------------------------------------------------------------------------
--- A residual selects a source word inside a summary-and-boundary fibre.
-
 record ResidualFibre (Summary Residual : Set) : Set₁ where
   field
     decodeResidual :
@@ -73,10 +68,6 @@ record ResidualFibre (Summary Residual : Set) : Set₁ where
       Σ ProductionState
         (λ t → LabelledWalk (start macro) (decodeResidual macro residual) t)
 
-------------------------------------------------------------------------
--- Reverse complement reverses path direction. Whether the production policy
--- admits this action requires an explicit state dual and edge theorem.
-
 record ReverseComplementGraphAction : Set₁ where
   field
     reverseState : ProductionState → ProductionState
@@ -84,6 +75,3 @@ record ReverseComplementGraphAction : Set₁ where
       ∀ {s b t} →
       Edge s b t →
       Edge (reverseState t) (complement b) (reverseState s)
-
--- No instance is fabricated here: the current bounded-history representation
--- is directional, and its reverse-state construction must be proved separately.
