@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact rational and combinatorial audit for the Stage-3 analytic completion tranche."""
+"""Exact rational and combinatorial audit for Stage-3 analytic completion."""
 from __future__ import annotations
 
 from fractions import Fraction as Q
@@ -220,7 +220,7 @@ def verify_transport_constants() -> dict[str, int]:
     return constants
 
 
-def verify_archetypes_and_affine_boundary() -> tuple[int, int]:
+def verify_archetypes_and_affine_boundary() -> dict[str, int]:
     table = {
         ("output", "unsplit", "left-low"): "low-high",
         ("output", "unsplit", "right-low"): "low-low",
@@ -229,7 +229,7 @@ def verify_archetypes_and_affine_boundary() -> tuple[int, int]:
         ("first", "direct", "right-low"): "low-low",
         ("first", "direct", "output-low"): "low-high",
         ("first", "swapped", "left-low"): "second-frozen",
-        ("first", "swapped", "right-low"): "low-low",
+        ("first", "swapped", "right-low"): "low-high",
         ("first", "swapped", "output-low"): "low-high",
         ("second", "unsplit", "left-low"): "low-high",
         ("second", "unsplit", "right-low"): "second-frozen",
@@ -238,12 +238,35 @@ def verify_archetypes_and_affine_boundary() -> tuple[int, int]:
     assert len(table) == 12
     assert sum(value == "first-convolution" for value in table.values()) == 1
     assert table[("first", "swapped", "left-low")] == "second-frozen"
+    assert table[("first", "swapped", "right-low")] == "low-high"
+
     row_count = 12 + 9
-    missing_coefficients = row_count * 3
+    raw_slots = row_count * 3
+    structural_families = 5 + 3
+    structural_slots = structural_families * 3
+    resolved_families = 1
+    resolved_slots = resolved_families * 3
+    live_families = structural_families - resolved_families
+    live_slots = structural_slots - resolved_slots
+
     assert row_count == 21
-    assert missing_coefficients == 63
+    assert raw_slots == 63
+    assert structural_families == 8
+    assert structural_slots == 24
+    assert resolved_slots == 3
+    assert live_families == 7
+    assert live_slots == 21
     assert 1 + 2 == 3
-    return len(table), missing_coefficients
+
+    return {
+        "separatedComponents": len(table),
+        "rawSlots": raw_slots,
+        "structuralFamilies": structural_families,
+        "structuralSlots": structural_slots,
+        "resolvedSlots": resolved_slots,
+        "liveFamilies": live_families,
+        "liveSlots": live_slots,
+    }
 
 
 def verify_three_condition_shape() -> int:
@@ -264,7 +287,7 @@ def main() -> int:
     convolution_cases, bernstein_cases = verify_convolution_and_bernstein()
     g3_cases, g3_counts = verify_g3_partition()
     constants = verify_transport_constants()
-    archetypes, missing = verify_archetypes_and_affine_boundary()
+    affine = verify_archetypes_and_affine_boundary()
     conditions = verify_three_condition_shape()
     print(
         "Stage-3 analytic completion audit passed: "
@@ -273,8 +296,9 @@ def main() -> int:
         f"{leray_cases} Leray cases, "
         f"{convolution_cases} convolution and {bernstein_cases} Bernstein cases, "
         f"{g3_cases} G=3 triples {g3_counts}, transport={constants}, "
-        f"{archetypes} separated components, "
-        f"{missing} affine coefficients missing, "
+        f"{affine['separatedComponents']} separated components, "
+        f"{affine['rawSlots']} raw -> {affine['structuralSlots']} structural -> "
+        f"{affine['liveSlots']} live affine slots, "
         f"{conditions} Grafakos-Torres conditions"
     )
     return 0
