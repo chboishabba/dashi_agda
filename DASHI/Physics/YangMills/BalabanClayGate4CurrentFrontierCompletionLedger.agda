@@ -5,16 +5,28 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger as Previous
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralCubeBianchiExact as Cube
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2BondCarrierExact as RationalBond
+import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2FlatReferenceExact as FlatReference
+import DASHI.Physics.YangMills.BalabanClayGate4FlatReferencePositiveWitnessExact as FlatWitness
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalReferenceMassAssemblyExact as Reference
 import DASHI.Physics.YangMills.BalabanClayGate4TPointwiseSixFactorComparisonExact as TComparison
+import DASHI.Physics.YangMills.BalabanClayGate4TCompensatedSixFactorBudgetExact as TCompensated
+import DASHI.Physics.YangMills.BalabanClayGate4HaarDeterminantRelativeLossReuseExact as HaarDet
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTraversalGeometryReuseExact as Traversal
 import DASHI.Physics.YangMills.BalabanClayGate4RCanonicalRepositoryTraceReuseExact as RTrace
+import DASHI.Physics.YangMills.BalabanClayGate4OnePlusExponentialSeriesExact as Exponential
 import DASHI.Physics.YangMills.BalabanClayGate4LocalizedFactorAnalyticReductionExact as Factor
+import DASHI.Physics.YangMills.BalabanClayGate4DyadicRunningCouplingConventionExact as Dyadic
+import DASHI.Physics.YangMills.BalabanClayGate4BlockAveragingResidualSummabilityExact as BlockSum
 import DASHI.Physics.YangMills.BalabanClayGate4ExistingRGPhysicalOneStepReuseExact as OneStep
 import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
+import DASHI.Physics.YangMills.BalabanClayT5ConditionedObservableLocalizationSummationExact as HLOC
+import DASHI.Physics.YangMills.BalabanClayT5PerScaleDecouplingClosureExact as UVSum
 import DASHI.Physics.YangMills.BalabanClayT5OS1RotationRestorationExact as OS1
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
+import DASHI.Physics.YangMills.BalabanClayT5OSReconstructionCyclicityExact as Cyclicity
+import DASHI.Physics.YangMills.BalabanClayT5AlternativeHarrisMixingAuditExact as Harris
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact as PhysicalGap
+import DASHI.Physics.YangMills.BalabanClayMassGapClaimEcosystemQuarantineExact as Claims
 
 ------------------------------------------------------------------------
 -- Preferred current-frontier ledger.
@@ -27,106 +39,148 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalContinuumOSGapBridgeExact as
 previousGate4LedgerLevel : ProofLevel
 previousGate4LedgerLevel = Previous.gate4ArchaeologyGraphLevel
 
-literalSixFaceBoundaryDefinitionLevel =
-  Cube.literalSixFaceBoundaryDefinitionLevel
+literalSixFaceBoundaryDefinitionLevel = Cube.literalSixFaceBoundaryDefinitionLevel
 cancellableBoundaryAlgebraLevel = Cube.cancellableBoundaryAlgebraLevel
-literalCubeBoundaryCancellationLevel =
-  Cube.literalCubeBoundaryCancellationLevel
+literalCubeBoundaryCancellationLevel = Cube.literalCubeBoundaryCancellationLevel
 literalCubeBianchiLevel = Cube.literalCubeBianchiLevel
 rationalSU2CubeBianchiLevel = RationalBond.rationalSU2CubeBianchiLevel
+flatReferenceDefinitionLevel = FlatReference.flatReferenceDefinitionLevel
+flatOrientedLinkIdentityLevel = FlatReference.flatOrientedLinkIdentityLevel
+flatPathHolonomyIdentityLevel = FlatReference.flatPathHolonomyIdentityLevel
+flatPlaquetteHolonomyIdentityLevel = FlatReference.flatPlaquetteHolonomyIdentityLevel
+flatWilsonCostZeroLevel = FlatReference.flatWilsonCostZeroLevel
 
-periodicTraversalDirectionInverseLevel =
-  Traversal.periodicTraversalDirectionInverseLevel
+periodicTraversalDirectionInverseLevel = Traversal.periodicTraversalDirectionInverseLevel
 periodicSingleEdgeReturnLevel = Traversal.periodicSingleEdgeReturnLevel
 
-physicalPositiveReferenceAssemblyLevel =
-  Reference.physicalPositiveReferenceAssemblyLevel
+flatFactorProductPositivityLevel = FlatWitness.flatFactorProductPositivityLevel
+flatReferencePositiveWitnessAssemblyLevel =
+  FlatWitness.flatReferencePositiveWitnessAssemblyLevel
+physicalPositiveReferenceAssemblyLevel = Reference.physicalPositiveReferenceAssemblyLevel
 physicalReferenceNormalizationFromPositiveWitnessLevel =
   Reference.physicalReferenceNormalizationFromPositiveWitnessLevel
+
 relativeSixFactorProductComparisonLevel =
   TComparison.relativeSixFactorProductComparisonLevel
 relativeTPointwiseSelectionLevel = TComparison.relativeTPointwiseSelectionLevel
 relativeTEquation189AdapterLevel = TComparison.relativeTEquation189AdapterLevel
+compensatedSixFactorProductLevel = TCompensated.compensatedSixFactorProductLevel
+compensatedBudgetToPointwiseLevel = TCompensated.compensatedBudgetToPointwiseLevel
+compensatedEquation189AdapterLevel = TCompensated.compensatedEquation189AdapterLevel
+haarRelativeFactorReuseLevel = HaarDet.haarRelativeFactorReuseLevel
+determinantRelativeFactorReuseLevel = HaarDet.determinantRelativeFactorReuseLevel
+haarMultiplierBudgetReuseLevel = HaarDet.haarMultiplierBudgetReuseLevel
+determinantMultiplierBudgetReuseLevel = HaarDet.determinantMultiplierBudgetReuseLevel
 
-rCanonicalRepositoryTraceReuseLevel =
-  RTrace.rCanonicalRepositoryTraceReuseLevel
-rCanonicalRootWordInjectivityLevel =
-  RTrace.rCanonicalRootWordInjectivityLevel
+rCanonicalRepositoryTraceReuseLevel = RTrace.rCanonicalRepositoryTraceReuseLevel
+rCanonicalRootWordInjectivityLevel = RTrace.rCanonicalRootWordInjectivityLevel
 rCanonicalCountingAssemblyLevel = RTrace.rCanonicalCountingAssemblyLevel
 
-localizedFactorRemainderReductionLevel =
-  Factor.localizedFactorRemainderReductionLevel
-localizedFactorExponentialAssemblyLevel =
-  Factor.localizedFactorExponentialAssemblyLevel
+exponentialTailOrderAssemblyLevel = Exponential.exponentialTailOrderAssemblyLevel
+onePlusExponentialSeriesAssemblyLevel = Exponential.onePlusExponentialSeriesAssemblyLevel
+localizedFactorRemainderReductionLevel = Factor.localizedFactorRemainderReductionLevel
+localizedFactorExponentialAssemblyLevel = Factor.localizedFactorExponentialAssemblyLevel
 
-existingRGPhysicalOneStepReuseLevel =
-  OneStep.existingRGPhysicalOneStepReuseLevel
+locatorB0ConventionReconciliationLevel = Dyadic.locatorB0ConventionReconciliationLevel
+dyadicIncrementConventionLevel = Dyadic.dyadicIncrementConventionLevel
+blockAdjointDyadicArithmeticLevel = BlockSum.blockAdjointDyadicArithmeticLevel
+polynomialGrowthTimesAdjointContractionLevel =
+  BlockSum.polynomialGrowthTimesAdjointContractionLevel
+weightedResidualSummabilityReductionLevel =
+  BlockSum.weightedResidualSummabilityReductionLevel
+
+existingRGPhysicalOneStepReuseLevel = OneStep.existingRGPhysicalOneStepReuseLevel
 physicalCombinedNormExistingRGReuseLevel =
   OneStep.physicalCombinedNormExistingRGReuseLevel
 physicalGaugeWardCountertermReuseLevel =
   OneStep.physicalGaugeWardCountertermReuseLevel
-physicalCouplingIrrelevantReuseLevel =
-  OneStep.physicalCouplingIrrelevantReuseLevel
+physicalCouplingIrrelevantReuseLevel = OneStep.physicalCouplingIrrelevantReuseLevel
 
 finiteTerminalKPReuseLevel = Terminal.finiteTerminalKPReuseLevel
 physicalTerminalKPSmallnessAssemblyLevel =
   Terminal.physicalTerminalKPSmallnessAssemblyLevel
-publishedKPToFernandezProcacciLevel =
-  Terminal.publishedKPToFernandezProcacciLevel
+publishedKPToFernandezProcacciLevel = Terminal.publishedKPToFernandezProcacciLevel
 publishedFernandezProcacciAlternativeLevel =
   Terminal.publishedFernandezProcacciAlternativeLevel
+finiteLocalizationSumLevel = HLOC.finiteLocalizationSumLevel
+conditionedTailLocalizationAssemblyLevel =
+  HLOC.conditionedTailLocalizationAssemblyLevel
+conditionedObservableLocalizationAdapterLevel =
+  HLOC.conditionedObservableLocalizationAdapterLevel
+finiteScaleDecouplingSummationLevel = UVSum.finiteScaleDecouplingSummationLevel
+uvTailMajorantAssemblyLevel = UVSum.uvTailMajorantAssemblyLevel
+conditionalClusteringFromScaleSumsLevel =
+  UVSum.conditionalClusteringFromScaleSumsLevel
 
 denseRotationLimitArgumentLevel = OS1.denseRotationLimitArgumentLevel
 euclideanCovarianceAssemblyLevel = OS1.euclideanCovarianceAssemblyLevel
-continuumOS1InterpretationAssemblyLevel =
-  OS1.continuumOS1InterpretationAssemblyLevel
-
+continuumOS1InterpretationAssemblyLevel = OS1.continuumOS1InterpretationAssemblyLevel
 clusteringSpectralContradictionAssemblyLevel =
   Gap.clusteringSpectralContradictionAssemblyLevel
 positiveTransferGapAssemblyLevel = Gap.positiveTransferGapAssemblyLevel
 os4ToTransferGapAssemblyLevel = Gap.os4ToTransferGapAssemblyLevel
-physicalOS4ToTransferGapAssemblyLevel =
-  PhysicalGap.physicalOS4ToTransferGapAssemblyLevel
+osVacuumCyclicityToObservableChoiceLevel =
+  Cyclicity.osVacuumCyclicityToObservableChoiceLevel
+cyclicityToSubgapOverlapLevel = Cyclicity.cyclicityToSubgapOverlapLevel
+cyclicSpectrumAdapterLevel = Cyclicity.cyclicSpectrumAdapterLevel
+physicalOS4ToTransferGapAssemblyLevel = PhysicalGap.physicalOS4ToTransferGapAssemblyLevel
+
+harrisAlternativeVocabularyLevel = Harris.harrisAlternativeVocabularyLevel
+harrisContractionToGapAssemblyLevel = Harris.harrisContractionToGapAssemblyLevel
+claimEcosystemAuditLevel = Claims.claimEcosystemAuditLevel
 
 ------------------------------------------------------------------------
 -- Exact remaining physical and analytic inputs.
 ------------------------------------------------------------------------
 
-physicalReferenceIdentityConfigurationInputsLevel =
-  Reference.physicalReferenceIdentityConfigurationInputsLevel
-physicalReferenceWeightStrictPositivityInputsLevel =
-  Reference.physicalReferenceWeightStrictPositivityInputsLevel
+flatReferenceFastFibreMembershipInputsLevel =
+  FlatReference.flatReferenceFastFibreMembershipInputsLevel
+flatReferenceNonActionFactorPositivityInputsLevel =
+  FlatReference.flatReferenceNonActionFactorPositivityInputsLevel
+physicalFlatCoarseConstraintInputsLevel = FlatWitness.physicalFlatCoarseConstraintInputsLevel
+physicalFlatGaugeSupportBoundaryInputsLevel =
+  FlatWitness.physicalFlatGaugeSupportBoundaryInputsLevel
+physicalFlatHaarDeterminantFactorPositivityInputsLevel =
+  FlatWitness.physicalFlatHaarDeterminantFactorPositivityInputsLevel
 physicalReferenceScalarReciprocalInputsLevel =
   Reference.physicalReferenceScalarReciprocalInputsLevel
-physicalActionRelativeReferenceInputsLevel =
-  TComparison.physicalActionRelativeReferenceInputsLevel
-physicalJacobianRelativeReferenceInputsLevel =
-  TComparison.physicalJacobianRelativeReferenceInputsLevel
-physicalDeterminantRelativeReferenceInputsLevel =
-  TComparison.physicalDeterminantRelativeReferenceInputsLevel
-physicalBCHRelativeReferenceInputsLevel =
-  TComparison.physicalBCHRelativeReferenceInputsLevel
-physicalLocalizationRelativeReferenceInputsLevel =
-  TComparison.physicalLocalizationRelativeReferenceInputsLevel
-physicalPatchRelativeReferenceInputsLevel =
-  TComparison.physicalPatchRelativeReferenceInputsLevel
-physicalReferenceIntegrandMeaningInputsLevel =
-  TComparison.physicalReferenceIntegrandMeaningInputsLevel
+
+physicalActionGainInputsLevel = TCompensated.physicalActionGainInputsLevel
+physicalHaarLossInputsLevel = TCompensated.physicalHaarLossInputsLevel
+physicalDeterminantLossInputsLevel = TCompensated.physicalDeterminantLossInputsLevel
+physicalBCHLocalizationPatchLossInputsLevel =
+  TCompensated.physicalBCHLocalizationPatchLossInputsLevel
+primaryEquation189BudgetIdentificationLevel =
+  TCompensated.primaryEquation189BudgetIdentificationLevel
+physicalHaarRatioMeaningInputsLevel = HaarDet.physicalHaarRatioMeaningInputsLevel
+physicalDeterminantRatioMeaningInputsLevel =
+  HaarDet.physicalDeterminantRatioMeaningInputsLevel
+physicalRelativeHessianSmallFieldInputsLevel =
+  HaarDet.physicalRelativeHessianSmallFieldInputsLevel
 
 physicalRExpressionPolymerIdentificationInputsLevel =
   RTrace.physicalRExpressionPolymerIdentificationInputsLevel
 physicalRFamilyMassRootedShellInputsLevel =
   RTrace.physicalRFamilyMassRootedShellInputsLevel
-repositoryBreadthFirstTreeInputsLevel =
-  RTrace.repositoryBreadthFirstTreeInputsLevel
-
+repositoryBreadthFirstTreeInputsLevel = RTrace.repositoryBreadthFirstTreeInputsLevel
+constructiveExponentialSeriesSplitInputsLevel =
+  Exponential.constructiveExponentialSeriesSplitInputsLevel
+constructiveExponentialTailNonnegativeInputsLevel =
+  Exponential.constructiveExponentialTailNonnegativeInputsLevel
 physicalLocalizedFactorRemainderMeaningInputsLevel =
   Factor.physicalLocalizedFactorRemainderMeaningInputsLevel
-physicalLocalizedTriangleNormInputsLevel =
-  Factor.physicalLocalizedTriangleNormInputsLevel
-physicalOnePlusExponentialInputsLevel =
-  Factor.physicalOnePlusExponentialInputsLevel
+physicalLocalizedTriangleNormInputsLevel = Factor.physicalLocalizedTriangleNormInputsLevel
+physicalOnePlusExponentialInputsLevel = Factor.physicalOnePlusExponentialInputsLevel
 
+physicalLocalizedPlaquetteCoefficientInputsLevel =
+  Dyadic.physicalLocalizedPlaquetteCoefficientInputsLevel
+physicalHRBetaRemainderInputsLevel = Dyadic.physicalHRBetaRemainderInputsLevel
+physicalBlockAveragingAdjointNormInputsLevel =
+  BlockSum.physicalBlockAveragingAdjointNormInputsLevel
+physicalResidualGrowthAtMostFourInputsLevel =
+  BlockSum.physicalResidualGrowthAtMostFourInputsLevel
+constructiveHalfGeometricSummabilityInputsLevel =
+  BlockSum.constructiveHalfGeometricSummabilityInputsLevel
 physicalRGDefectRepresentationInputsLevel =
   OneStep.physicalRGDefectRepresentationInputsLevel
 physicalInvariantDomainAndBoundaryInputsLevel =
@@ -136,19 +190,35 @@ physicalTerminalRootedSumIdentificationInputsLevel =
   Terminal.physicalTerminalRootedSumIdentificationInputsLevel
 physicalTerminalFPMajorantIdentificationInputsLevel =
   Terminal.physicalTerminalFPMajorantIdentificationInputsLevel
+physicalConditionedObservableExpansionInputsLevel =
+  HLOC.physicalConditionedObservableExpansionInputsLevel
+physicalLocalizationShellNormInputsLevel = HLOC.physicalLocalizationShellNormInputsLevel
+physicalLocalizationInfiniteTailInputsLevel =
+  HLOC.physicalLocalizationInfiniteTailInputsLevel
+physicalPerScaleClusterWithHolesInputsLevel =
+  UVSum.physicalPerScaleClusterWithHolesInputsLevel
+physicalUltravioletTailSummabilityInputsLevel =
+  UVSum.physicalUltravioletTailSummabilityInputsLevel
+physicalCovarianceScaleSplitInputsLevel = UVSum.physicalCovarianceScaleSplitInputsLevel
 
 physicalDenseRotationApproximationInputsLevel =
   OS1.physicalDenseRotationApproximationInputsLevel
 physicalRotatedCorrelatorContinuityInputsLevel =
   OS1.physicalRotatedCorrelatorContinuityInputsLevel
-physicalOS1PredicateMeaningInputsLevel =
-  OS1.physicalOS1PredicateMeaningInputsLevel
-
-physicalSpectralRepresentationLowerBoundInputsLevel =
-  Gap.physicalSpectralRepresentationLowerBoundInputsLevel
-physicalObservableSubgapOverlapInputsLevel =
-  Gap.physicalObservableSubgapOverlapInputsLevel
+physicalOS1PredicateMeaningInputsLevel = OS1.physicalOS1PredicateMeaningInputsLevel
+physicalPositiveTimeCylinderCyclicityInputsLevel =
+  Cyclicity.physicalPositiveTimeCylinderCyclicityInputsLevel
+physicalSubgapVectorNonzeroMeaningInputsLevel =
+  Cyclicity.physicalSubgapVectorNonzeroMeaningInputsLevel
+physicalSpectralLowerBoundFromOverlapInputsLevel =
+  Cyclicity.physicalSpectralLowerBoundFromOverlapInputsLevel
 physicalSlowVersusFastRateComparisonInputsLevel =
   Gap.physicalSlowVersusFastRateComparisonInputsLevel
-physicalOS4ClusteringMeaningInputsLevel =
-  Gap.physicalOS4ClusteringMeaningInputsLevel
+physicalOS4ClusteringMeaningInputsLevel = Gap.physicalOS4ClusteringMeaningInputsLevel
+
+physicalBoundaryMarkovProcessIdentificationLevel =
+  Harris.physicalBoundaryMarkovProcessIdentificationLevel
+physicalUniformHarrisContractionInputsLevel =
+  Harris.physicalUniformHarrisContractionInputsLevel
+harrisRouteAcceptedAsMassGapAuthority = Harris.harrisRouteAcceptedAsMassGapAuthority
+claimedCompleteProofsAcceptedAsAuthority = Claims.claimedCompleteProofsAcceptedAsAuthority
