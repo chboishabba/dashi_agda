@@ -15,9 +15,10 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSParentCorrectn
 ------------------------------------------------------------------------
 -- The generic executable visited-set BFS is instantiated with DASHI's literal
 -- finite four-torus enumeration, decidable equality and decidable nearest-
--- neighbour relation. This closes graph execution and local parent correctness.
--- Shortest-path distance, global spanning-tree and decoder correctness remain
--- proof obligations over this run.
+-- neighbour relation.  The induced-subgraph specialization uses the blocks of
+-- the actual periodic polymer as its vertex enumeration.  This closes graph
+-- execution and local parent correctness; shortest-path distance, global
+-- spanning-tree and decoder correctness remain proof obligations over the run.
 ------------------------------------------------------------------------
 
 decisionBool : ∀ {P : Set} → Dec P → Bool
@@ -56,6 +57,15 @@ periodicExecutableGraph n = record
   ; BFS.FiniteDecidableGraph.adjacentBool = periodicAdjacentBool
   }
 
+periodicPolymerExecutableGraph :
+  ∀ {n} → Periodic.PeriodicPolymer n →
+  BFS.FiniteDecidableGraph (Periodic.PeriodicBlock n)
+periodicPolymerExecutableGraph polymer = record
+  { BFS.FiniteDecidableGraph.vertices = polymer
+  ; BFS.FiniteDecidableGraph.equalBool = periodicBlockEqualBool
+  ; BFS.FiniteDecidableGraph.adjacentBool = periodicAdjacentBool
+  }
+
 periodicBlockEqualBoolSound :
   ∀ {n} left right → periodicBlockEqualBool {n} left right ≡ true → left ≡ right
 periodicBlockEqualBoolSound {n} left right =
@@ -88,9 +98,24 @@ periodicGraphBooleanMeaning n = record
   ; Parent.GraphBooleanMeaning.adjacentBoolComplete = periodicAdjacentBoolComplete
   }
 
+periodicPolymerGraphBooleanMeaning :
+  ∀ {n} (polymer : Periodic.PeriodicPolymer n) →
+  Parent.GraphBooleanMeaning (periodicPolymerExecutableGraph polymer)
+periodicPolymerGraphBooleanMeaning polymer = record
+  { Parent.GraphBooleanMeaning.Adjacent = Adjacency.PeriodicNearestNeighbour
+  ; Parent.GraphBooleanMeaning.adjacentBoolSound = periodicAdjacentBoolSound
+  ; Parent.GraphBooleanMeaning.adjacentBoolComplete = periodicAdjacentBoolComplete
+  }
+
 periodicBFSState :
   ∀ {n} → Periodic.PeriodicBlock n → BFS.BFSState (Periodic.PeriodicBlock n)
 periodicBFSState {n} root = BFS.runFiniteBFS (periodicExecutableGraph n) root
+
+periodicPolymerBFSState :
+  ∀ {n} (polymer : Periodic.PeriodicPolymer n) →
+  Periodic.PeriodicBlock n → BFS.BFSState (Periodic.PeriodicBlock n)
+periodicPolymerBFSState polymer root =
+  BFS.runFiniteBFS (periodicPolymerExecutableGraph polymer) root
 
 periodicVertexEnumerationComplete :
   ∀ {n} (block : Periodic.PeriodicBlock n) →
@@ -107,8 +132,21 @@ periodicDiscoverLayerParentsSound {n} frontier candidates =
   Parent.discoverLayerParentEdgesSound
     (periodicGraphBooleanMeaning n) frontier candidates
 
+periodicPolymerDiscoverLayerParentsSound :
+  ∀ {n} (polymer : Periodic.PeriodicPolymer n) frontier candidates →
+  Parent.ParentEdgesSound (periodicPolymerGraphBooleanMeaning polymer) frontier
+    (BFS.parentEdges
+      (BFS.discoverLayer
+        (periodicPolymerExecutableGraph polymer) frontier candidates))
+periodicPolymerDiscoverLayerParentsSound polymer frontier candidates =
+  Parent.discoverLayerParentEdgesSound
+    (periodicPolymerGraphBooleanMeaning polymer) frontier candidates
+
 periodicExecutableGraphLevel : ProofLevel
 periodicExecutableGraphLevel = machineChecked
+
+periodicPolymerInducedGraphLevel : ProofLevel
+periodicPolymerInducedGraphLevel = machineChecked
 
 periodicEqualityBooleanReflectionLevel : ProofLevel
 periodicEqualityBooleanReflectionLevel = machineChecked
@@ -118,6 +156,9 @@ periodicAdjacencyBooleanReflectionLevel = machineChecked
 
 periodicFuelBoundedBFSExecutionLevel : ProofLevel
 periodicFuelBoundedBFSExecutionLevel = machineChecked
+
+periodicPolymerFuelBoundedBFSExecutionLevel : ProofLevel
+periodicPolymerFuelBoundedBFSExecutionLevel = machineChecked
 
 periodicLocalParentCorrectnessLevel : ProofLevel
 periodicLocalParentCorrectnessLevel = machineChecked
