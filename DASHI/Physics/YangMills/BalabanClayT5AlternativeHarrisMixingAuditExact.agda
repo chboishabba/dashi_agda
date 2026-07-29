@@ -96,5 +96,7 @@ physicalBoundaryMarkovProcessIdentificationLevel = conditional
 physicalUniformHarrisContractionInputsLevel : ProofLevel
 physicalUniformHarrisContractionInputsLevel = conditional
 
+-- The route is explicitly not accepted as a completed mass-gap authority. Its
+-- mathematical application remains an open/conjectural alternative.
 harrisRouteAcceptedAsMassGapAuthority : ProofLevel
-harrisRouteAcceptedAsMassGapAuthority = quarantined
+harrisRouteAcceptedAsMassGapAuthority = conjectural
