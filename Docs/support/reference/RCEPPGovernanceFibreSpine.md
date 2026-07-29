@@ -95,7 +95,7 @@ institutional access.
 
 Intersectionality precedent:
 
-- Kimberle Crenshaw, "Mapping the Margins: Intersectionality, Identity
+- Kimberle Williams Crenshaw, "Mapping the Margins: Intersectionality, Identity
   Politics, and Violence against Women of Color", *Stanford Law Review* 43(6),
   1991. DOI: `10.2307/1229039`.
 
@@ -122,6 +122,28 @@ military/security
 ```
 
 There is no military-to-sovereignty edge.
+
+### Proof-carrying local/global gluing
+
+`DASHI.Governance.LocalGlobalCouncilGluing` reuses the repository's existing
+`BundleSheaf` carrier.  Neighbourhood, rural-locality, elected-union and IDP-camp
+sections do not become a national section merely by coexisting.  The model
+requires a compatibility witness, constructs a global section only through the
+gluing operation, and proves that the result restricts back exactly to each
+local section.
+
+```text
+compatible local sections
+        -> glue
+one global section
+        -> restrict
+original local sections
+```
+
+This gives the council hierarchy a local-to-global consistency law without
+collapsing local mandates into the global node.  The witness is internal to the
+finite model: it does not establish actual political compatibility, consent,
+apportionment or authority.
 
 ### Constitutional chart, residual and +1
 
@@ -151,6 +173,8 @@ The Sudan-specific modules instantiate the generic spine with:
 
 - neighbourhood, rural, elected-union and IDP-camp constituencies;
 - neighbourhood/locality/state/national council nodes;
+- proof-carrying local/global section gluing and exact restriction back to local
+  mandate/recall sections;
 - upward delegation and downward accountability;
 - civilian supremacy and rejection of armed veto as legitimacy;
 - one auditable civilian public-resource jurisdiction;
@@ -179,9 +203,10 @@ operative constitutional validity
 actual popular legitimacy
 ```
 
-Agda may prove that a model has recall, scope, subordination and fail-closed
-promotion properties.  It cannot determine which real committee represents a
-constituency, authenticate signatories, enact a constitution, establish peace,
+Agda may prove that a model has recall, scope, subordination, local/global
+restriction and fail-closed promotion properties.  It cannot determine which
+real committee represents a constituency, authenticate signatories, establish
+real compatibility among constituencies, enact a constitution, establish peace,
 or issue popular legitimacy.
 
 ## Validation surfaces
