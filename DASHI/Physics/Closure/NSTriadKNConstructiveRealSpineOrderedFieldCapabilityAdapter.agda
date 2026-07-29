@@ -50,6 +50,8 @@ record ConstructiveRealSpineOrderedFieldCapability
     negateAdd : ∀ a b →
       Spine.neg R (Spine._+_ R a b)
       ≡ Spine._+_ R (Spine.neg R a) (Spine.neg R b)
+    multiplyZeroZero :
+      Spine._*_ R (Spine.zero R) (Spine.zero R) ≡ Spine.zero R
 
     embedZero : rationalEmbed 0ℚ ≡ Spine.zero R
     embedOne : rationalEmbed 1ℚ ≡ Spine.one R
@@ -129,7 +131,8 @@ asSquareOrderCapability : ∀ R
     (asEnvelopeCapability R field)
     (asAbsoluteOrderCapability R field)
 asSquareOrderCapability R field = record
-  { absoluteNonnegative = absoluteNonnegative field
+  { multiplyZeroZero = multiplyZeroZero field
+  ; absoluteNonnegative = absoluteNonnegative field
   ; squareReflectsOrderOnNonnegative =
       squareReflectsOrderOnNonnegative field
   }
