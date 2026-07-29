@@ -20,13 +20,11 @@ import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact
 -- equation (1.100), p. 388, for the R-operation suppression;
 -- Theorem 1, p. 388, for invariant-domain preservation.
 --
--- The unreviewed Eriksson interface document is a locator only. It is not an
--- admissible authority for the inequalities below.
---
--- Existing DASHI reuse: the running coupling must be supplied through the
--- convention-matched recursion of
--- BalabanClayT4RunningCouplingConventionBridgeExact; this module does not
--- create a second beta-function convention.
+-- The p0 lower-growth record and the absorption record are deliberately
+-- separate. A polylogarithmic p0 profile under affine inverse-coupling running
+-- does not by itself imply a fixed-ratio geometric scale gain. Any all-scale
+-- absorption estimate below is therefore an independent analytic inhabitant or
+-- must be supplied through a stronger penalty/window hypothesis.
 ------------------------------------------------------------------------
 
 record P0SuperlinearLogGrowth
@@ -51,11 +49,6 @@ record P0SuperlinearLogGrowth
         (p0 scale)
 
 open P0SuperlinearLogGrowth public
-
-------------------------------------------------------------------------
--- F1--F4: collapse the absorption proof into two analytic inequalities and
--- prove the final transitive assembly.
-------------------------------------------------------------------------
 
 record LargeFieldAbsorptionDerivation
     (Scale Bound : Set) : Set₁ where
@@ -86,10 +79,8 @@ record LargeFieldAbsorptionDerivation
       LessEqual left right →
       LessEqual (multiply left coefficient) (multiply right coefficient)
 
-    -- This is the single calculus estimate obtained from the superlinear-log
-    -- p0 growth and the convention-matched running coupling. It replaces two
-    -- redundant frontier fields called "p0 dominates linear scale" and
-    -- "exponential beats polynomial".
+    -- Independent analytic estimate. Despite the retained compatibility name,
+    -- this field is not derived from P0SuperlinearLogGrowth in this module.
     polynomialTimesP0SuppressionGeometric : ∀ (scale : Scale) →
       LessEqual
         (multiply (polynomialEnvelope scale)
@@ -162,5 +153,6 @@ largeFieldAbsorptionAssemblyLevel = machineChecked
 residualPolynomialEnvelopeInputsLevel : ProofLevel
 residualPolynomialEnvelopeInputsLevel = conditional
 
+-- This includes the extra power-law/fixed-ratio or finite-window hypothesis.
 polynomialSuppressionCalculusInputsLevel : ProofLevel
 polynomialSuppressionCalculusInputsLevel = conditional
