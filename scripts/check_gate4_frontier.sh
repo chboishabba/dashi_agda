@@ -9,9 +9,11 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4FlatReferencePositiveWitnessExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRunningCouplingConventionExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4SummableTailBudgetClosureExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5ConditionedObservableLocalizationSummationExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5PerScaleDecouplingClosureExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5OSReconstructionCyclicityExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4Attachment252MechanismAuditExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Validation.agda \
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerAdvance.agda \
   DASHI/Physics/YangMills/BalabanClayGate4AndNumericalAuditCompletionLedger.agda \
