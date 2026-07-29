@@ -26,7 +26,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
-  using (cong; subst)
+  using (cong; subst; sym)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -139,7 +139,7 @@ lowFactorSumBound K lowCutoff =
     powerSumBound =
       subst
         (λ sum → sum ≤ Geo.fourThirds)
-        (powerSumMeaning Geo.quarter lowCutoff)
+        (sym (powerSumMeaning Geo.quarter lowCutoff))
         (Geo.quarterPartialSumBound lowCutoff)
   in
   ℚₚ.≤-trans toPowerSum powerSumBound
@@ -164,7 +164,7 @@ gapFactorSumBound K gapCutoff =
     powerSumBound =
       subst
         (λ sum → sum ≤ Geo.thirtyTwoThirtyFirsts)
-        (powerSumMeaning Geo.thirtySecond gapCutoff)
+        (sym (powerSumMeaning Geo.thirtySecond gapCutoff))
         (Geo.thirtySecondPartialSumBound gapCutoff)
   in
   ℚₚ.≤-trans toPowerSum powerSumBound
