@@ -6,9 +6,15 @@ import DASHI.Physics.YangMills.BalabanClayGate4AndNumericalAuditCompletionLedger
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralCubeBianchiExact as Cube
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2BondCarrierExact as RationalBond
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2FlatReferenceExact as FlatReference
+import DASHI.Physics.YangMills.BalabanClayGate4CanonicalBackgroundFibreWitnessExact as Background
+import DASHI.Physics.YangMills.BalabanClayGate4FlatWilsonActionPositivityExact as FlatAction
+import DASHI.Physics.YangMills.BalabanClayGate4SU2HaarIdentityPositivityExact as HaarIdentity
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoerciveDeterminantPositivityExact as DetPositive
 import DASHI.Physics.YangMills.BalabanClayGate4FlatReferencePositiveWitnessExact as FlatWitness
+import DASHI.Physics.YangMills.BalabanClayGate4CanonicalReferenceFactorAssemblyExact as CanonicalFactors
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalReferenceMassAssemblyExact as Reference
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
+import DASHI.Physics.YangMills.BalabanClayGate4CanonicalReferenceNormalizationExact as CanonicalNorm
 import DASHI.Physics.YangMills.BalabanClayGate4TPointwiseSixFactorComparisonExact as TComparison
 import DASHI.Physics.YangMills.BalabanClayGate4TCompensatedSixFactorBudgetExact as TCompensated
 import DASHI.Physics.YangMills.BalabanClayGate4HaarDeterminantRelativeLossReuseExact as HaarDet
@@ -33,10 +39,6 @@ import DASHI.Physics.YangMills.BalabanClayGate4Attachment252MechanismAuditExact 
 
 ------------------------------------------------------------------------
 -- Preferred current-frontier ledger.
---
--- The previous completion ledger remains imported for compatibility. This file
--- records proof closures added after that compatibility surface was established
--- and is the authoritative concise boundary for the present branch head.
 ------------------------------------------------------------------------
 
 previousGate4LedgerLevel : ProofLevel
@@ -56,18 +58,41 @@ flatWilsonCostZeroLevel = FlatReference.flatWilsonCostZeroLevel
 periodicTraversalDirectionInverseLevel = Traversal.periodicTraversalDirectionInverseLevel
 periodicSingleEdgeReturnLevel = Traversal.periodicSingleEdgeReturnLevel
 
+canonicalBackgroundFibreConstraintLevel = Background.canonicalBackgroundFibreConstraintLevel
+canonicalBackgroundIdentityFluctuationLevel =
+  Background.canonicalBackgroundIdentityFluctuationLevel
+canonicalBackgroundCoordinateRoundTripLevel =
+  Background.canonicalBackgroundCoordinateRoundTripLevel
+flatWilsonProductExactLevel = FlatAction.flatWilsonProductExactLevel
+flatWilsonProductPositivityLevel = FlatAction.flatWilsonProductPositivityLevel
+su2HaarIdentityDensityLevel = HaarIdentity.su2HaarIdentityDensityLevel
+su2HaarIdentityPositivityLevel = HaarIdentity.su2HaarIdentityPositivityLevel
+finitePositiveProductLevel = DetPositive.finitePositiveProductLevel
+coerciveDeterminantPositivityReductionLevel =
+  DetPositive.coerciveDeterminantPositivityReductionLevel
+relativeHessianDeterminantPositivityLevel =
+  DetPositive.relativeHessianDeterminantPositivityLevel
+
 flatFactorProductPositivityLevel = FlatWitness.flatFactorProductPositivityLevel
 flatReferencePositiveWitnessAssemblyLevel =
   FlatWitness.flatReferencePositiveWitnessAssemblyLevel
+canonicalReferenceUnitFactorPositivityLevel =
+  CanonicalFactors.canonicalReferenceUnitFactorPositivityLevel
+canonicalReferenceFactorAssemblyLevel =
+  CanonicalFactors.canonicalReferenceFactorAssemblyLevel
 physicalPositiveReferenceAssemblyLevel = Reference.physicalPositiveReferenceAssemblyLevel
 physicalReferenceNormalizationFromPositiveWitnessLevel =
   Reference.physicalReferenceNormalizationFromPositiveWitnessLevel
-safeRationalReciprocalDefinitionLevel =
-  Reciprocal.safeRationalReciprocalDefinitionLevel
-positiveRationalReciprocalLawLevel =
-  Reciprocal.positiveRationalReciprocalLawLevel
+safeRationalReciprocalDefinitionLevel = Reciprocal.safeRationalReciprocalDefinitionLevel
+positiveRationalReciprocalLawLevel = Reciprocal.positiveRationalReciprocalLawLevel
 rationalReferenceReciprocalInstanceLevel =
   Reciprocal.rationalReferenceReciprocalInstanceLevel
+canonicalReferencePositiveFibreAssemblyLevel =
+  CanonicalNorm.canonicalReferencePositiveFibreAssemblyLevel
+canonicalRationalReferenceConstructionLevel =
+  CanonicalNorm.canonicalRationalReferenceConstructionLevel
+canonicalPhysicalReferenceNormalizationLevel =
+  CanonicalNorm.canonicalPhysicalReferenceNormalizationLevel
 
 relativeSixFactorProductComparisonLevel =
   TComparison.relativeSixFactorProductComparisonLevel
@@ -115,8 +140,7 @@ publishedKPToFernandezProcacciLevel = Terminal.publishedKPToFernandezProcacciLev
 publishedFernandezProcacciAlternativeLevel =
   Terminal.publishedFernandezProcacciAlternativeLevel
 finiteLocalizationSumLevel = HLOC.finiteLocalizationSumLevel
-conditionedTailLocalizationAssemblyLevel =
-  HLOC.conditionedTailLocalizationAssemblyLevel
+conditionedTailLocalizationAssemblyLevel = HLOC.conditionedTailLocalizationAssemblyLevel
 conditionedObservableLocalizationAdapterLevel =
   HLOC.conditionedObservableLocalizationAdapterLevel
 finiteScaleDecouplingSummationLevel = UVSum.finiteScaleDecouplingSummationLevel
@@ -150,15 +174,41 @@ flatReferenceFastFibreMembershipInputsLevel =
   FlatReference.flatReferenceFastFibreMembershipInputsLevel
 flatReferenceNonActionFactorPositivityInputsLevel =
   FlatReference.flatReferenceNonActionFactorPositivityInputsLevel
+physicalBackgroundSectionInstantiationInputsLevel =
+  Background.physicalBackgroundSectionInstantiationInputsLevel
+physicalIdentityFluctuationChartMembershipInputsLevel =
+  Background.physicalIdentityFluctuationChartMembershipInputsLevel
+physicalBackgroundSupportGaugeBoundaryInputsLevel =
+  Background.physicalBackgroundSupportGaugeBoundaryInputsLevel
+physicalFlatPlaquetteBoltzmannOneInputsLevel =
+  FlatAction.physicalFlatPlaquetteBoltzmannOneInputsLevel
+physicalIdentityLinkHaarFormulaInputsLevel =
+  HaarIdentity.physicalIdentityLinkHaarFormulaInputsLevel
+physicalFiniteSpectralRepresentationInputsLevel =
+  DetPositive.physicalFiniteSpectralRepresentationInputsLevel
+physicalCoercivityToEigenvaluePositivityInputsLevel =
+  DetPositive.physicalCoercivityToEigenvaluePositivityInputsLevel
 physicalFlatCoarseConstraintInputsLevel = FlatWitness.physicalFlatCoarseConstraintInputsLevel
 physicalFlatGaugeSupportBoundaryInputsLevel =
   FlatWitness.physicalFlatGaugeSupportBoundaryInputsLevel
 physicalFlatHaarDeterminantFactorPositivityInputsLevel =
   FlatWitness.physicalFlatHaarDeterminantFactorPositivityInputsLevel
+physicalCanonicalReferenceActionInputsLevel =
+  CanonicalFactors.physicalCanonicalReferenceActionInputsLevel
+physicalCanonicalReferenceHaarInputsLevel =
+  CanonicalFactors.physicalCanonicalReferenceHaarInputsLevel
+physicalCanonicalReferenceDeterminantInputsLevel =
+  CanonicalFactors.physicalCanonicalReferenceDeterminantInputsLevel
+physicalCanonicalReferenceUnitFactorMeaningInputsLevel =
+  CanonicalFactors.physicalCanonicalReferenceUnitFactorMeaningInputsLevel
 physicalReferencePositiveMeansRationalPositiveInputsLevel =
   Reciprocal.physicalReferencePositiveMeansRationalPositiveInputsLevel
 physicalReferenceRationalAlgebraMeaningInputsLevel =
   Reciprocal.physicalReferenceRationalAlgebraMeaningInputsLevel
+physicalCanonicalReferenceFamilyInputsLevel =
+  CanonicalNorm.physicalCanonicalReferenceFamilyInputsLevel
+physicalSelectedReferenceIntegrandMeaningInputsLevel =
+  CanonicalNorm.physicalSelectedReferenceIntegrandMeaningInputsLevel
 physicalReferenceScalarReciprocalInputsLevel =
   Reference.physicalReferenceScalarReciprocalInputsLevel
 
