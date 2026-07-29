@@ -23,6 +23,7 @@ record CurrentGate4FrontierReceipt : Set where
 
     positiveReferenceMassChecked : Bool
     physicalReferenceNormalizationAssemblyChecked : Bool
+    sixFactorTPointwiseComparisonChecked : Bool
 
     canonicalRTraceReuseChecked : Bool
     localizedFactorReductionChecked : Bool
@@ -48,6 +49,7 @@ record AuthoritativeCurrentGate4Evidence
     periodicTraversalGeometryTypechecks : Set
     positiveReferenceMassTypechecks : Set
     physicalReferenceNormalizationAssemblyTypechecks : Set
+    sixFactorTPointwiseComparisonTypechecks : Set
     canonicalRTraceReuseTypechecks : Set
     localizedFactorReductionTypechecks : Set
     existingRGPhysicalOneStepReuseTypechecks : Set
@@ -84,6 +86,9 @@ positiveReferenceMassTypecheckLevel = conditional
 
 physicalReferenceNormalizationAssemblyTypecheckLevel : ProofLevel
 physicalReferenceNormalizationAssemblyTypecheckLevel = conditional
+
+sixFactorTPointwiseComparisonTypecheckLevel : ProofLevel
+sixFactorTPointwiseComparisonTypecheckLevel = conditional
 
 canonicalRTraceReuseTypecheckLevel : ProofLevel
 canonicalRTraceReuseTypecheckLevel = conditional
