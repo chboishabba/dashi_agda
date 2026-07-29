@@ -12,6 +12,7 @@ record HighAlphaTrancheReceipt : Set where
   field
     repositoryHead : String
     executableVisitedSetBFSChecked : Bool
+    bfsParentCorrectnessChecked : Bool
     periodicExecutableBFSChecked : Bool
     ipsenRehmanDeterminantBridgeChecked : Bool
     finiteKernelSchurBridgeChecked : Bool
@@ -26,6 +27,7 @@ record AuthoritativeHighAlphaEvidence
     (receipt : HighAlphaTrancheReceipt) : Set where
   field
     executableVisitedSetBFSTypechecks : Set
+    bfsParentCorrectnessTypechecks : Set
     periodicExecutableBFSTypechecks : Set
     ipsenRehmanDeterminantBridgeTypechecks : Set
     finiteKernelSchurBridgeTypechecks : Set
@@ -38,6 +40,9 @@ open AuthoritativeHighAlphaEvidence public
 
 executableVisitedSetBFSTypecheckLevel : ProofLevel
 executableVisitedSetBFSTypecheckLevel = conditional
+
+bfsParentCorrectnessTypecheckLevel : ProofLevel
+bfsParentCorrectnessTypecheckLevel = conditional
 
 periodicExecutableBFSTypecheckLevel : ProofLevel
 periodicExecutableBFSTypecheckLevel = conditional
