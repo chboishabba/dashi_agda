@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$SCRIPT_DIR/.." && pwd)}"
+DASHI_CACHE_HOME="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29}"
+
 JOBS="${AGDA_JOBS:-8}"
-AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
-REPO_ROOT="${DASHI_REPO_ROOT:-/home/c/Documents/code/dashi_agda}"
+AGDA_FLAKE="${AGDA_FLAKE:-$REPO_ROOT/../agda#debug.bin}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
 STDLIB_REPO="${AGDA_STDLIB_REPO:-https://github.com/agda/agda-stdlib.git}"
 STDLIB_REF="${AGDA_STDLIB_REF:-experimental}"
-DASHI_CACHE_HOME="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29}"
+STDLIB_PINNED_COMMIT="${AGDA_STDLIB_PINNED_COMMIT:-}"
 DASHI_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
 DASHI_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 STDLIB_UPDATE="${AGDA_STDLIB_UPDATE:-0}"
-AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check.log}"
+AGDA_LOG_PATH="${AGDA_LOG_PATH:-$DASHI_CACHE_HOME/logs/agda29-check.log}"
 AGDA_LOG_KEEP_COUNT="${AGDA_LOG_KEEP_COUNT:-10}"
 AGDA_LOG_BASE_PATH="$AGDA_LOG_PATH"
 
@@ -21,10 +24,20 @@ if [ -z "${XDG_CACHE_HOME:-}" ]; then
 fi
 
 if [ "$#" -eq 0 ]; then
+  # Default: do-everything check.
   TARGETS=("DASHI/Everything.agda")
 else
   TARGETS=("$@")
 fi
+
+# Focused Bishop-to-Stage-3 compile ladder (for debugging):
+#   vendor/bishop/ExtraProperties.agda
+#   vendor/bishop/Real.agda
+#   vendor/bishop/RealProperties.agda
+#   vendor/bishop/Sequence.agda
+#   DASHI/Analysis/MurrayBishopSetoidBackend.agda
+#   DASHI/Physics/Closure/NSTriadKNMurrayBishopDirectCanonicalCarrier.agda
+#   DASHI/Physics/Closure/NSTriadKNStage3MurrayBishopConcreteBackendIntegration.agda
 
 log_target_slug() {
   local slug="$1"
@@ -162,6 +175,12 @@ else
     git -C "$STDLIB_WORK" checkout -q "$STDLIB_REF"
     git -C "$STDLIB_WORK" reset --hard -q "origin/$STDLIB_REF"
   fi
+  if [ -n "$STDLIB_PINNED_COMMIT" ]; then
+    if ! git -C "$STDLIB_WORK" cat-file -e "$STDLIB_PINNED_COMMIT" 2>/dev/null; then
+      git -C "$STDLIB_WORK" fetch --depth=1 origin "$STDLIB_REF"
+    fi
+    git -C "$STDLIB_WORK" checkout -q "$STDLIB_PINNED_COMMIT"
+  fi
   STDLIB_INCLUDE="$STDLIB_WORK/src"
 fi
 chmod -R u+w "$STDLIB_WORK"
@@ -182,7 +201,7 @@ echo "Logging Agda output to: $AGDA_LOG_PATH"
 AGDA_RUN=("$AGDA_BIN" \
   --no-libraries --no-default-libraries \
   "-j$JOBS" \
-  -i . -i DCHoTT-Agda -i cubical -i "$STDLIB_INCLUDE" \
+  -i . -i bishop -i DCHoTT-Agda -i cubical -i "$STDLIB_INCLUDE" \
   -WnoUnsupportedIndexedMatch)
 
 if command -v stdbuf >/dev/null 2>&1; then

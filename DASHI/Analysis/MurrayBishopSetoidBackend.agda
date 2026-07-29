@@ -10,8 +10,11 @@ module DASHI.Analysis.MurrayBishopSetoidBackend where
 -- repository, 2022--2023; DASHI formal development, 2026.
 -- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354; the software
 -- continuation and repository adapter have no DOI.
--- Source pin: viktorcsimma/bishop commit
+-- Upstream source pin: viktorcsimma/bishop commit
 -- 582c6afcdf805d06730c8c0aa970f4a6e033b611.
+-- Compatibility patch: chboishabba/bishop commit
+-- d6b24f905ec6596c2a63a1dcdfe4dda4ffe4a6a2
+-- (direct child of the upstream base; Agda 2.9 / stdlib 2.0+ compatibility).
 -- Uses: Murray's regular rational sequences, extensional equality, arithmetic,
 -- located order, absolute value and the Cauchy-completeness theorem proved in
 -- Sequence.agda.

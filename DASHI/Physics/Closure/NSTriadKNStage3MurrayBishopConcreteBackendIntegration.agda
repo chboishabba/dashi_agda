@@ -17,8 +17,11 @@ module DASHI.Physics.Closure.NSTriadKNStage3MurrayBishopConcreteBackendIntegrati
 -- DOI: 10.1007/978-3-642-61667-9; 10.1145/3018610.3018614;
 -- 10.48550/arXiv.2205.08354; 10.1007/978-3-642-16830-7;
 -- 10.1006/jfan.2001.3804; the repository integration receipt has no DOI.
--- Source pin: viktorcsimma/bishop commit
+-- Upstream source pin: viktorcsimma/bishop commit
 -- 582c6afcdf805d06730c8c0aa970f4a6e033b611.
+-- Compatibility patch: chboishabba/bishop commit
+-- d6b24f905ec6596c2a63a1dcdfe4dda4ffe4a6a2
+-- (direct child of the upstream base; Agda 2.9 / stdlib 2.0+ compatibility).
 -- Uses: the concrete complete setoid backend, exact rational embedding,
 -- canonical dyadic anchors, s = 11/4 and the setoid direct-canonical 128/93
 -- theorem.
