@@ -26,6 +26,7 @@ FILES = (
     "DASHI/Physics/Closure/NSTriadKNRationalFiniteSignedMajorant.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationConditionalCutoffUniformClosure.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationEmbeddedEnvelopeClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationPowerMonotonicityBridge.agda",
     "DASHI/Physics/Closure/NSTriadKNOutputRelocationCutoffUniformArchetypeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNAffineResolvedFamilyReduction.agda",
@@ -101,10 +102,10 @@ def main() -> int:
         f"output-relocation closure tranche: {len(FILES)} Agda modules, "
         f"{len(VERIFIERS)} exact verifiers, provenance and static safety; "
         "source-style homogeneity is rejected, unit weights close Check A, "
-        "the rational 128/93 positive-kernel, embedded-carrier and finite "
-        "signed programmes are closed, one affine family is resolved leaving "
-        "21 live slots, and only the concrete ordered carrier/H^s/coefficient "
-        "bridge plus concrete operator mapping remain fail-closed"
+        "the rational 128/93 positive-kernel, embedded-carrier, native-spine "
+        "adapter and finite signed programmes are closed, one affine family is "
+        "resolved leaving 21 live slots, and only concrete spine capability/"
+        "H^s/coefficient data plus concrete operator mapping remain fail-closed"
     )
     return 0
 
