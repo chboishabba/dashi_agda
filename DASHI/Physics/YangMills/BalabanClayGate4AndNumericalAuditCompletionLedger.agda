@@ -6,6 +6,8 @@ import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact as L
 import DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExact as Numerical
 import DASHI.Physics.YangMills.BalabanClayGate4LargeFieldArchaeologyExact as Gate4
 import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact as Typed
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as Wilson
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact as Collar
 import DASHI.Physics.YangMills.BalabanClayGate4ROperationDecayTargetsExact as Targets
 import DASHI.Physics.YangMills.BalabanClayExternalModelAndFailureAuditExact as External
 
@@ -22,17 +24,42 @@ existingBadComponentLargeFieldReuseLevel =
 finiteFirstSecondClassSplitLevel = Typed.finiteFirstSecondClassSplitLevel
 boundaryTermListReinjectionLevel = Typed.boundaryTermListReinjectionLevel
 
+literalWilsonPredicateDefinitionLevel =
+  Wilson.literalWilsonPredicateDefinitionLevel
+literalWilsonBadBlockDecidabilityLevel =
+  Wilson.literalWilsonBadBlockDecidabilityLevel
+literalWilsonGaugeInvariantBadComponentInstanceLevel =
+  Wilson.literalWilsonGaugeInvariantBadComponentInstanceLevel
+literalSU2ThresholdToWilsonCostLevel =
+  Wilson.literalSU2ThresholdToWilsonCostLevel
+
+finiteReachAndEnlargementDefinitionLevel =
+  Collar.finiteReachAndEnlargementDefinitionLevel
+largeFieldRegionIncludedInEnlargementLevel =
+  Collar.largeFieldRegionIncludedInEnlargementLevel
+enlargementMonotonicityLevel = Collar.enlargementMonotonicityLevel
+finiteCollarDefinitionLevel = Collar.finiteCollarDefinitionLevel
+supportOwnershipAndBoundaryClassificationLevel =
+  Collar.supportOwnershipAndBoundaryClassificationLevel
+
 numericalIngredientVocabularyLevel = Numerical.numericalIngredientVocabularyLevel
 existingNumericalReferenceSurfaceLevel = Numerical.existingNumericalReferenceSurfaceLevel
 externalAuditVocabularyLevel = External.externalAuditVocabularyLevel
 massGapAcyclicityReceiptDefinitionLevel = External.massGapAcyclicityReceiptDefinitionLevel
 
 ------------------------------------------------------------------------
--- Remaining analytic/model-specific inhabitants.  Imports never promote them.
+-- Remaining analytic/model-specific inhabitants. Imports never promote them.
 ------------------------------------------------------------------------
 
-largeFieldEnlargementAndCollarInputsLevel =
-  Typed.largeFieldEnlargementAndCollarInputsLevel
+literalScaleAdjustedThresholdBridgeInputsLevel =
+  Wilson.literalScaleAdjustedThresholdBridgeInputsLevel
+literalBoltzmannExponentialSuppressionInputsLevel =
+  Wilson.literalBoltzmannExponentialSuppressionInputsLevel
+literalMetricRadiusAndCollarFinitenessInputsLevel =
+  Collar.literalMetricRadiusAndCollarFinitenessInputsLevel
+analyticBoundaryReinjectionInputsLevel =
+  Collar.analyticBoundaryReinjectionInputsLevel
+
 largeFieldGeometryAndROperationInputsLevel =
   Gate4.largeFieldGeometryAndROperationInputsLevel
 
