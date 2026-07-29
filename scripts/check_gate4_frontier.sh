@@ -7,5 +7,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4Validation.agda \
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerAdvance.agda \
   DASHI/Physics/YangMills/BalabanClayGate4AndNumericalAuditCompletionLedger.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda \
   DASHI/Physics/YangMills/BalabanClayBranchHeadReceiptSurface.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda \
   DASHI/Physics/Closure/NSPeriodicOfficialCompletionRegression.agda
