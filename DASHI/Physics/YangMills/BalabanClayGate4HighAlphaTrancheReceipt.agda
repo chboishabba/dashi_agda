@@ -14,6 +14,9 @@ record HighAlphaTrancheReceipt : Set where
     executableVisitedSetBFSChecked : Bool
     bfsParentCorrectnessChecked : Bool
     periodicExecutableBFSChecked : Bool
+    strongBFSParentCertificateChecked : Bool
+    adjacentLayerShortestPathReductionChecked : Bool
+    finiteCoercivityInverseNormChecked : Bool
     ipsenRehmanDeterminantBridgeChecked : Bool
     ipsenRehmanCompensatedTAdapterChecked : Bool
     finiteKernelSchurBridgeChecked : Bool
@@ -31,6 +34,9 @@ record AuthoritativeHighAlphaEvidence
     executableVisitedSetBFSTypechecks : Set
     bfsParentCorrectnessTypechecks : Set
     periodicExecutableBFSTypechecks : Set
+    strongBFSParentCertificateTypechecks : Set
+    adjacentLayerShortestPathReductionTypechecks : Set
+    finiteCoercivityInverseNormTypechecks : Set
     ipsenRehmanDeterminantBridgeTypechecks : Set
     ipsenRehmanCompensatedTAdapterTypechecks : Set
     finiteKernelSchurBridgeTypechecks : Set
@@ -50,6 +56,15 @@ bfsParentCorrectnessTypecheckLevel = conditional
 
 periodicExecutableBFSTypecheckLevel : ProofLevel
 periodicExecutableBFSTypecheckLevel = conditional
+
+strongBFSParentCertificateTypecheckLevel : ProofLevel
+strongBFSParentCertificateTypecheckLevel = conditional
+
+adjacentLayerShortestPathReductionTypecheckLevel : ProofLevel
+adjacentLayerShortestPathReductionTypecheckLevel = conditional
+
+finiteCoercivityInverseNormTypecheckLevel : ProofLevel
+finiteCoercivityInverseNormTypecheckLevel = conditional
 
 ipsenRehmanDeterminantBridgeTypecheckLevel : ProofLevel
 ipsenRehmanDeterminantBridgeTypecheckLevel = conditional
