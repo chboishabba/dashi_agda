@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as 
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExact as Covariance
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPathInverseBianchiExact as Path
+open Path using (_++_)
 
 ------------------------------------------------------------------------
 -- Primary provenance.
@@ -30,7 +31,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPathInverseBianchiExact a
 --   F_ab · T_b(F_ca^{-1}) · F_bc · T_c(F_ab^{-1})
 --        · F_ca · T_a(F_bc^{-1}),
 -- where T_d transports a shifted opposite face back to the common cube base.
--- Every oriented cube edge appears once with each orientation.  The proof is
+-- Every oriented cube edge appears once with each orientation. The proof is
 -- non-Abelian: the order and transports are part of the theorem statement.
 ------------------------------------------------------------------------
 
@@ -49,16 +50,16 @@ transportedOppositeFace :
   Axis4 → List SignedAxis4 → List SignedAxis4
 transportedOppositeFace transportAxis face =
   positiveDirection transportAxis ∷
-  (Path.reverseOpposite face Path.++
+  (Path.reverseOpposite face ++
     (negativeDirection transportAxis ∷ []))
 
 cubeSixFaceBoundary : Axis4 → Axis4 → Axis4 → List SignedAxis4
 cubeSixFaceBoundary axisA axisB axisC =
-  faceBoundary axisA axisB Path.++
-  transportedOppositeFace axisB (faceBoundary axisC axisA) Path.++
-  faceBoundary axisB axisC Path.++
-  transportedOppositeFace axisC (faceBoundary axisA axisB) Path.++
-  faceBoundary axisC axisA Path.++
+  faceBoundary axisA axisB ++
+  transportedOppositeFace axisB (faceBoundary axisC axisA) ++
+  faceBoundary axisB axisC ++
+  transportedOppositeFace axisC (faceBoundary axisA axisB) ++
+  faceBoundary axisC axisA ++
   transportedOppositeFace axisA (faceBoundary axisB axisC)
 
 ------------------------------------------------------------------------
@@ -72,7 +73,7 @@ data CancellableBoundary : List SignedAxis4 → Set where
     CancellableBoundary rest →
     CancellableBoundary
       (direction ∷
-        (inside Path.++
+        (inside ++
           (Path.oppositeDirection direction ∷ rest)))
 
 record BoundaryIdentity
@@ -124,25 +125,27 @@ cancellableBoundaryIdentity stepLaws realization boundaryEmpty site = record
   ; BoundaryIdentity.boundaryHolonomyIdentity = refl
   }
 cancellableBoundaryIdentity {group = group} stepLaws realization
-  (boundaryWrap direction insideProof restProof) site =
+  (boundaryWrap direction {inside = inside} {rest = rest}
+    insideProof restProof) site =
   let
     stepped = Bond.walkStep site direction
+    tail : List SignedAxis4
+    tail = Path.oppositeDirection direction ∷ rest
     insideIdentity =
       cancellableBoundaryIdentity stepLaws realization insideProof stepped
     restIdentity =
       cancellableBoundaryIdentity stepLaws realization restProof site
-    tail = Path.oppositeDirection direction ∷ _
     tailHolonomy =
-      wrappedTailHolonomy stepLaws realization site direction _ restIdentity
+      wrappedTailHolonomy stepLaws realization site direction rest restIdentity
   in record
   { BoundaryIdentity.boundaryCloses =
       trans
-        (Path.walkAppend stepped _ tail)
+        (Path.walkAppend stepped inside tail)
         (trans
           (cong (λ intermediate → Bond.walk intermediate tail)
             (boundaryCloses insideIdentity))
           (trans
-            (cong (λ intermediate → Bond.walk intermediate _)
+            (cong (λ intermediate → Bond.walk intermediate rest)
               (Path.walkOppositeStep stepLaws site direction))
             (boundaryCloses restIdentity)))
   ; BoundaryIdentity.boundaryHolonomyIdentity =
@@ -150,7 +153,7 @@ cancellableBoundaryIdentity {group = group} stepLaws realization
         (cong
           (Bond.multiply group
             (Bond.orientedLink realization site direction))
-          (Path.holonomyAppend realization stepped _ tail))
+          (Path.holonomyAppend realization stepped inside tail))
         (trans
           (cong
             (Bond.multiply group
