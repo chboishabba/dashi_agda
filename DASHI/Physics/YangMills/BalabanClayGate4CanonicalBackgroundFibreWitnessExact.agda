@@ -13,7 +13,7 @@ import DASHI.Physics.YangMills.BalabanClayP3PrincipalFibreCoordinatesExact as Fi
 -- Tadeusz Bałaban,
 -- "The Variational Problem and Background Fields in Renormalization Group
 -- Method for Lattice Gauge Theories",
--- Communications in Mathematical Physics 102 (1985), 255--275.
+-- Communications in Mathematical Physics 102 (1985), 277--309.
 -- DOI: 10.1007/BF01229381.
 --
 -- Relationship: the physical background map remains an input, but once it is
