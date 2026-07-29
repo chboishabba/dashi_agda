@@ -9,7 +9,7 @@ module DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDeriv
 -- Assistant"; "Calcul symbolique et propagation des singularites pour les
 -- equations aux derivees partielles non lineaires"; "Fourier Analysis and
 -- Nonlinear Partial Differential Equations"; "A Multilinear Schur Test and
--- Multiplier Operators"; and "Derived native-spine closure of the
+-- Multiplier Operators"; and "Semantically pinned native-spine closure of the
 -- output-relocation shell theorem".
 -- Venue/year: Springer, 1985 and 2011; arXiv, 2022; Annales scientifiques de
 -- l'Ecole Normale Superieure 14 (1981); Journal of Functional Analysis 187
@@ -17,21 +17,19 @@ module DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputRelocationDeriv
 -- DOI: 10.1007/978-3-642-61667-9; 10.48550/arXiv.2205.08354;
 -- 10.24033/asens.1404; 10.1007/978-3-642-16830-7;
 -- 10.1006/jfan.2001.3804; the repository composition theorem has no DOI.
--- Uses: the existing ConstructiveRealSpine adapter, the proved base-two shell
+-- Uses: the unital ConstructiveRealSpine adapter, the proved base-two shell
 -- comparison derivation, and the proved absolute-magnitude to two-sided-order
 -- derivation.
--- Relationship: the four former raw fields
--- lowShellDominatedByQuarter, gapDominatedByThirtySecond,
--- signedCoefficientUpper and signedCoefficientLower are constructed here.
--- A concrete caller supplies coherent base-two power/anchor data, the endpoint
--- decay inequalities, absolute-value order laws, factor nonnegativity and one
--- literal absolute-coefficient estimate.  No summation, Schur or triangle
--- theorem remains after those inputs.
+-- Relationship: the four former raw fields are constructed here.  The native
+-- constants two and five are pinned to rational embeddings, twoPow is pinned at
+-- zero and one, and scaleByNat is repeated addition.  This prevents degenerate
+-- or merely nominal power/scaling data from inhabiting the physical interface.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Spine
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -40,22 +38,37 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationPowerMonotonicityBridge as
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationAbsoluteCoefficientBridge as Absolute
 import DASHI.Physics.Closure.NSTriadKNConstructiveRealSpineOutputEnvelopeAdapter as Adapter
 
+twoRational : ℚ
+twoRational = 1ℚ + 1ℚ
+
+fiveRational : ℚ
+fiveRational = (twoRational + twoRational) + 1ℚ
+
 record ConstructiveRealSpineBaseTwoPowerCapability
     (R : Spine.ConstructedOrderedCompleteReal)
     (capability : Adapter.ConstructiveRealSpineEnvelopeCapability R) : Set₁ where
   field
     two five : Spine.Real R
-    twoPow : Spine.Real R → Spine.Real R
+    twoMeaning : two ≡ Adapter.rationalEmbed capability twoRational
+    fiveMeaning : five ≡ Adapter.rationalEmbed capability fiveRational
 
+    twoPow : Spine.Real R → Spine.Real R
     twoStrictlyAboveOne : Spine._<_ R (Spine.one R) two
     twoPowMonotone : ∀ {left right} →
       Spine._≤_ R left right →
       Spine._≤_ R (twoPow left) (twoPow right)
+    twoPowZero : twoPow (Spine.zero R) ≡ Spine.one R
+    twoPowOne : twoPow (Spine.one R) ≡ two
     twoPowAdditive : ∀ left right →
       twoPow (Spine._+_ R left right)
       ≡ Spine._*_ R (twoPow left) (twoPow right)
 
     scaleByNat : Spine.Real R → Nat → Spine.Real R
+    scaleByNatZero : ∀ exponent →
+      scaleByNat exponent zero ≡ Spine.zero R
+    scaleByNatSuc : ∀ exponent shell →
+      scaleByNat exponent (suc shell)
+      ≡ Spine._+_ R exponent (scaleByNat exponent shell)
     scaleByNatMonotone : ∀ {left right} →
       Spine._≤_ R left right →
       ∀ shell →
@@ -91,6 +104,8 @@ asBaseTwoExponentAntitoneCarrier R capability power = record
   ; twoStrictlyAboveOne = twoStrictlyAboveOne power
   ; exponentOrderReversesAfterNegation = Adapter.negateAntitone capability
   ; twoPowMonotone = twoPowMonotone power
+  ; twoPowZero = twoPowZero power
+  ; twoPowOne = twoPowOne power
   ; twoPowAdditive = twoPowAdditive power
   }
 
@@ -102,6 +117,8 @@ asBaseTwoIntegerPowerAnchors R capability power = record
   { twoExponent = two power
   ; fiveExponent = five power
   ; scaleByNat = scaleByNat power
+  ; scaleByNatZero = scaleByNatZero power
+  ; scaleByNatSuc = scaleByNatSuc power
   ; scaleByNatMonotone = scaleByNatMonotone power
   ; quarterPower = λ shell →
       Adapter.rationalEmbed capability (Geo.pow Geo.quarter shell)
@@ -273,6 +290,12 @@ constructiveRealSpineDerivedOutputRelocationTheorem
 fourFormerRawBridgeFieldsDerived : Bool
 fourFormerRawBridgeFieldsDerived = true
 
+nativePowerConstantsPinnedToRationals : Bool
+nativePowerConstantsPinnedToRationals = true
+
+nativePowerZeroOneAndScalingPinned : Bool
+nativePowerZeroOneAndScalingPinned = true
+
 baseTwoPowerEnvelopeDerivationIntegrated : Bool
 baseTwoPowerEnvelopeDerivationIntegrated = true
 
@@ -294,6 +317,14 @@ concreteOutputRelocationTheoremClosed = false
 fourFormerRawBridgeFieldsDerivedIsTrue :
   fourFormerRawBridgeFieldsDerived ≡ true
 fourFormerRawBridgeFieldsDerivedIsTrue = refl
+
+nativePowerConstantsPinnedToRationalsIsTrue :
+  nativePowerConstantsPinnedToRationals ≡ true
+nativePowerConstantsPinnedToRationalsIsTrue = refl
+
+nativePowerZeroOneAndScalingPinnedIsTrue :
+  nativePowerZeroOneAndScalingPinned ≡ true
+nativePowerZeroOneAndScalingPinnedIsTrue = refl
 
 baseTwoPowerEnvelopeDerivationIntegratedIsTrue :
   baseTwoPowerEnvelopeDerivationIntegrated ≡ true
