@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4RRepresentationBridgeExact where
 
-open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational using (_*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -39,7 +39,6 @@ record ConcreteRRepresentationBridge
     rootedFamily : Reuse.ExactRootedFamilyRepresentation
       Scale Volume Root shellData
     expressionToFamily : RExpression → Reuse.Family rootedFamily
-
     localization : Reuse.RLocalizationNormInterpretation rg RExpression
 
 open ConcreteRRepresentationBridge public
@@ -53,8 +52,7 @@ rExpressionRootedCounting :
     (bridge : ConcreteRRepresentationBridge rg shellData RExpression)
     expression →
   Reuse.familyMass (rootedFamily bridge) (expressionToFamily bridge expression)
-  Shell.≤
-    Shell.quarter * Shell.halfPower
+  ≤ Shell.quarter * Shell.halfPower
       (Reuse.depthOf (rootedFamily bridge)
         (expressionToFamily bridge expression))
 rExpressionRootedCounting bridge expression =
@@ -84,9 +82,6 @@ rRootedCountingConsequenceLevel = machineChecked
 rLocalizationBudgetConsequenceLevel : ProofLevel
 rLocalizationBudgetConsequenceLevel = machineChecked
 
--- The actual inhabitants must map each R expression to its canonical physical
--- connected-polymer trace and prove that its mass and localized norm use the
--- same conventions as the existing rooted-shell and OneStepRGCutset owners.
 rExpressionToCanonicalRootedFamilyInputsLevel : ProofLevel
 rExpressionToCanonicalRootedFamilyInputsLevel = conditional
 
