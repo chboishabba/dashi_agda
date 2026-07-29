@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4PeriodicPathInverseBianchiExact w
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -26,7 +27,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicOrientedLinkCovarianceExa
 -- reissue (2022). DOI: 10.1017/9781009290395.
 --
 -- In a non-Abelian lattice theory, six face holonomies must first be transported
--- to one base point and ordered.  The algebra below proves cancellation from a
+-- to one base point and ordered. The algebra below proves cancellation from a
 -- literal path/opposite-reverse decomposition; it does not use the false
 -- untransported statement that an arbitrary product of six plaquettes is one.
 ------------------------------------------------------------------------
@@ -201,7 +202,7 @@ pathFollowedByReverseHasIdentityHolonomy {group = group}
         (Bond.pathHolonomy realization site directions)))
 
 record TransportedSixFaceBoundaryDecomposition
-    (n : Agda.Builtin.Nat.Nat)
+    (n : Nat)
     (Value : Set)
     (group : Bond.ExactLinkGroup Value)
     (realization : Bond.PeriodicBondGaugeRealization n Value group) : Set₁ where
@@ -226,14 +227,16 @@ latticeBianchiFromTransportedFaceDecomposition :
     (transportedSixFaceBoundary decomposition)
   ≡ Bond.identity group
 latticeBianchiFromTransportedFaceDecomposition
+  {group = group} {realization = realization}
   stepLaws decomposition =
   subst
     (λ boundary →
-      Bond.pathHolonomy _ (cubeBase decomposition) boundary
-      ≡ Bond.identity _)
+      Bond.pathHolonomy realization (cubeBase decomposition) boundary
+      ≡ Bond.identity group)
     (sym (transportedFacesFormCancellableBoundary decomposition))
     (pathFollowedByReverseHasIdentityHolonomy
-      stepLaws _ (cubeBase decomposition) (cancellationHalf decomposition))
+      stepLaws realization
+      (cubeBase decomposition) (cancellationHalf decomposition))
 
 periodicPathReverseGeometryLevel : ProofLevel
 periodicPathReverseGeometryLevel = machineChecked
