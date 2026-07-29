@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -14,7 +14,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiniteVisitedSetBFSAlgorithmExact
 ------------------------------------------------------------------------
 -- Correctness of the executable parent-selection layer.
 --
--- The proof is finite recursion over the supplied frontier order.  It does not
+-- The proof is finite recursion over the supplied frontier order. It does not
 -- use choice: the first Boolean-adjacent vertex is returned, and Boolean
 -- reflection supplies the physical adjacency witness.
 ------------------------------------------------------------------------
@@ -137,8 +137,8 @@ discoverLayerParentEdgesSound {graph = graph} meaning frontier (candidate ∷ re
 ...   | BFS.layerDiscovery laterVertices laterEdges =
       let selected = firstAdjacentParentSound meaning candidate frontier parent refl
       in soundEdge
-          (Data.Product.proj₁ selected)
-          (Data.Product.proj₂ selected)
+          (proj₁ selected)
+          (proj₂ selected)
           (discoverLayerParentEdgesSound meaning frontier rest)
 
 firstAdjacentParentSoundLevel : ProofLevel
