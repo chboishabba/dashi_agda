@@ -14,7 +14,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- The proof is the ordered power-series fact
 --   exp(x) = 1 + x + sum_{n>=2} x^n/n!,
--- with a nonnegative tail on the selected nonnegative domain.  The tail
+-- with a nonnegative tail on the selected nonnegative domain. The tail
 -- positivity and series identity remain explicit constructive-analysis inputs.
 ------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ onePlusBelowExponential dataSet value nonnegative =
       (λ lower → LessEqual dataSet lower
         (add dataSet (add dataSet (one dataSet) value)
           (tail dataSet value)))
-      (sym (addZeroRight dataSet (add dataSet (one dataSet) value)))
+      (addZeroRight dataSet (add dataSet (one dataSet) value))
       (addMonotoneRight dataSet
         (add dataSet (one dataSet) value)
         (nonnegativeMeansZeroBelow dataSet
