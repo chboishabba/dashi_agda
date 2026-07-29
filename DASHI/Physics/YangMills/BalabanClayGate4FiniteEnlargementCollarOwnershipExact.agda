@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipE
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Builtin.Sigma using (Σ) renaming (_,_ to _,Σ_)
 open import Data.Product using (_×_; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -70,7 +70,7 @@ regionIncludedInEnlargement :
     (region : FiniteLargeFieldRegion Block) radius block →
   Contains region block → Enlarged dataSet region radius block
 regionIncludedInEnlargement dataSet region radius block member =
-  block , (member , stay)
+  block ,Σ (member , stay)
 
 EnlargementMonotone :
   ∀ {Block} (dataSet : EnlargementData Block)
@@ -84,8 +84,8 @@ enlargementMonotone :
     (region : FiniteLargeFieldRegion Block) radius block →
   EnlargementMonotone dataSet region radius block
 enlargementMonotone dataSet region radius block
-  (seed , (member , reach)) =
-  seed , (member , reachMonotone reach)
+  (seed ,Σ (member , reach)) =
+  seed ,Σ (member , reachMonotone reach)
 
 Collar :
   ∀ {Block} → EnlargementData Block → FiniteLargeFieldRegion Block →
