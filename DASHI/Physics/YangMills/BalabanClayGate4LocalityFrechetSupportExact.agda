@@ -36,10 +36,6 @@ record LocalCoordinateDerivativeMeaning
     perturbAtZero : ∀ input fine →
       perturbCoordinate input fine zeroParameter ≡ input
 
-    coordinatePerturbationPreservesOtherSites :
-      ∀ input selected parameter other →
-      selected ≡ other → Set
-
     coordinatePerturbationAgreesAwayFromSelected :
       ∀ input selected parameter other →
       CMP109.Not (selected ≡ other) →
