@@ -39,6 +39,8 @@ periodicQkRowSupportEnumerationLevel =
   Primary.periodicQkRowSupportEnumerationLevel
 periodicQkColumnIncidenceEnumerationLevel =
   Primary.periodicQkColumnIncidenceEnumerationLevel
+periodicQkSupportFromEndpointPredicateLevel =
+  Primary.periodicQkSupportFromEndpointPredicateLevel
 periodicQkUniformRowBoundConstructionLevel =
   Primary.periodicQkUniformRowBoundConstructionLevel
 periodicQkUniformColumnBoundConstructionLevel =
@@ -47,6 +49,14 @@ periodicPrimaryRowBudgetInstantiationLevel =
   Primary.periodicPrimaryRowBudgetInstantiationLevel
 periodicPrimaryAdjointColumnBudgetInstantiationLevel =
   Primary.periodicPrimaryAdjointColumnBudgetInstantiationLevel
+periodicQkLiteralWeightedRowSumLevel =
+  Primary.periodicQkLiteralWeightedRowSumLevel
+periodicQkLiteralWeightedColumnSumLevel =
+  Primary.periodicQkLiteralWeightedColumnSumLevel
+periodicQkWeightedSchurInstantiationLevel =
+  Primary.periodicQkWeightedSchurInstantiationLevel
+periodicQkWeightedRelativeContractionAssemblyLevel =
+  Primary.periodicQkWeightedRelativeContractionAssemblyLevel
 constrainedMinimizerFormulaLevel = Primary.constrainedMinimizerFormulaLevel
 constraintProjectionKernelLevel = Primary.constraintProjectionKernelLevel
 constrainedHessianRestrictionSplitLevel =
@@ -82,6 +92,12 @@ physicalPrimaryQkScaleWeightMeaningInputsLevel =
   Primary.physicalPrimaryQkScaleWeightMeaningInputsLevel
 physicalPrimaryQkWeightedProductBudgetInputsLevel =
   Primary.physicalPrimaryQkWeightedProductBudgetInputsLevel
+physicalPeriodicQkWeightChoiceInputsLevel =
+  Primary.physicalPeriodicQkWeightChoiceInputsLevel
+physicalPeriodicQkWeightedBoundsInputsLevel =
+  Primary.physicalPeriodicQkWeightedBoundsInputsLevel
+physicalPeriodicQkRelativeProductInputsLevel =
+  Primary.physicalPeriodicQkRelativeProductInputsLevel
 physicalConstraintProjectionMeaningInputsLevel =
   Primary.physicalConstraintProjectionMeaningInputsLevel
 physicalConstrainedFiniteHessianMeaningInputsLevel =
