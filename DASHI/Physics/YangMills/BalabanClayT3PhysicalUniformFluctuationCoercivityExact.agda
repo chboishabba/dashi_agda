@@ -22,10 +22,10 @@ import DASHI.Physics.YangMills.BalabanClayT3UniformFluctuationSchurExact as Unif
 -- (Note: v2 supersedes v1 as conditional and windowed, explicitly restoring
 -- hypotheses such as (H-PTW) rather than claiming an unconditional bootstrap).
 --
--- T. Balaban,
--- "Propagators and renormalization transformations for lattice gauge theories",
--- Commun. Math. Phys. 95 (1984), 17--40.
--- DOI: 10.1007/BF01215757
+-- Tadeusz Bałaban,
+-- "Propagators and Renormalization Transformations for Lattice Gauge
+-- Theories. I", Communications in Mathematical Physics 95 (1984), 17--40.
+-- DOI: 10.1007/BF01215753.
 --
 -- E. V. Haynsworth,
 -- "Determination of the inertia of a partitioned Hermitian matrix",
