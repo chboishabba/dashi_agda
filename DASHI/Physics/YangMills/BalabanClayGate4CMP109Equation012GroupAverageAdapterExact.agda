@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4CMP109Equation012GroupAverageAdapterExact where
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -114,8 +115,7 @@ sourceContourIsEquation011Average :
       (Average.mapList
         (sourcePathHolonomy inputs field coarse fine)
         (sourcePaths inputs coarse fine))
-sourceContourIsEquation011Average inputs field coarse fine =
-  Agda.Builtin.Equality.refl
+sourceContourIsEquation011Average inputs field coarse fine = refl
 
 targetContourIsEquation011Average :
   ∀ {Field CoarseBond FineSite Path Group Lie Scalar}
@@ -128,8 +128,7 @@ targetContourIsEquation011Average :
       (Average.mapList
         (targetReversePathHolonomy inputs field coarse fine)
         (targetReversePaths inputs coarse fine))
-targetContourIsEquation011Average inputs field coarse fine =
-  Agda.Builtin.Equality.refl
+targetContourIsEquation011Average inputs field coarse fine = refl
 
 cmp109Equation011SourceContourInstantiationLevel : ProofLevel
 cmp109Equation011SourceContourInstantiationLevel = computed
