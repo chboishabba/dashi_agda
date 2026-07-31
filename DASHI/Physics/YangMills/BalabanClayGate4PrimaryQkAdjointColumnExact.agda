@@ -48,14 +48,14 @@ asAdjointColumnRowData :
     CoarseBond FineBond Scalar algebra →
   Primary.BalabanPrimaryQkRowData
     FineBond CoarseBond Scalar algebra
-asAdjointColumnRowData meaning = record
+asAdjointColumnRowData {algebra = algebra} meaning = record
   { kernelAbsoluteValue = adjointKernelAbsoluteValue meaning
   ; localSupport = columnSupport meaning
   ; primaryEntryBound = Primary.primaryEntryBound (primalRows meaning)
   ; rowBudget = columnBudget meaning
   ; proposition4PointwiseBound = λ fine coarse →
       subst
-        (λ value → Primary.LessEqual (PrimaryQkAdjointColumnMeaning.algebra meaning)
+        (λ value → Primary.LessEqual algebra
           value (Primary.primaryEntryBound (primalRows meaning)))
         (sym (adjointTransposeExact meaning fine coarse))
         (Primary.proposition4PointwiseBound
