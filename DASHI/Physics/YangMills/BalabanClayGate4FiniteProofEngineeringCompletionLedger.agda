@@ -4,6 +4,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedPathFormulaExact as Printed
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPathWordExact as PathWord
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicWordPathConstructionExact as WordPath
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedMapInstantiationExact as PrintedMap
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteHolonomyDerivativeExact as HolonomyDerivative
 import DASHI.Physics.YangMills.BalabanClayGate4SU2DexpInverseClosedFormExact as SU2Derivative
@@ -13,6 +14,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedAdjointFormulaExact
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedSchurCertificateCompletionExact as Certificate
 import DASHI.Physics.YangMills.BalabanClayGate4SpanningTreeGaugeSliceExact as TreeSlice
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCanonicalFreeBasisExact as FreeBasis
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeSU2FreeBasisExact as SU2Basis
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoordinateMatrixEquivalenceExact as Matrix
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteDeterminantFactorizationExact as Determinant
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteSpectrumDeterminantCompletionExact as SpectrumDeterminant
@@ -42,6 +44,12 @@ cmp109EuclideanAveragedContourVariantSelectionLevel =
 periodicPathToSignedWordLevel = PathWord.periodicPathToSignedWordLevel
 periodicPathWordEndpointLevel = PathWord.periodicPathWordEndpointLevel
 periodicPathWordLengthLevel = PathWord.periodicPathWordLengthLevel
+periodicWordPathConstructionLevel =
+  WordPath.periodicWordPathConstructionLevel
+periodicNamedEndpointPathTransportLevel =
+  WordPath.periodicNamedEndpointPathTransportLevel
+periodicConstructedContourCarrierLevel =
+  WordPath.periodicConstructedContourCarrierLevel
 
 cmp109Equation012CanonicalStageLevel =
   PrintedMap.cmp109Equation012CanonicalStageLevel
@@ -117,6 +125,17 @@ periodicOffTreePositionToBondLevel =
 periodicOffTreeCanonicalBasisLevel =
   FreeBasis.periodicOffTreeCanonicalBasisLevel
 
+periodicTreeGaugeSU2BasisIndexCountLevel =
+  SU2Basis.periodicTreeGaugeSU2BasisIndexCountLevel
+periodicTreeGaugeSU2TupleRoundTripLevel =
+  SU2Basis.periodicTreeGaugeSU2TupleRoundTripLevel
+periodicTreeGaugeSU2BasisBiorthogonalityLevel =
+  SU2Basis.periodicTreeGaugeSU2BasisBiorthogonalityLevel
+periodicTreeGaugeSU2BasisCarrierLevel =
+  SU2Basis.periodicTreeGaugeSU2BasisCarrierLevel
+periodicTreeGaugeSU2BasisSupportLevel =
+  SU2Basis.periodicTreeGaugeSU2BasisSupportLevel
+
 finiteCoordinateMatrixActionLevel = Matrix.finiteCoordinateMatrixActionLevel
 finiteMatrixActionInjectivityLevel = Matrix.finiteMatrixActionInjectivityLevel
 finiteMatrixOperatorRoundTripLevel = Matrix.finiteMatrixOperatorRoundTripLevel
@@ -174,6 +193,8 @@ physicalBalabanSliceTransitionInputsLevel =
   TreeSlice.physicalBalabanSliceTransitionInputsLevel
 physicalFreeCoordinatesToFluctuationFibreInputsLevel =
   FreeBasis.physicalFreeCoordinatesToFluctuationFibreInputsLevel
+physicalSU2CoordinateTupleToLieFieldInputsLevel =
+  SU2Basis.physicalSU2CoordinateTupleToLieFieldInputsLevel
 physicalCoordinateOperatorIdentificationInputsLevel =
   Matrix.physicalCoordinateOperatorIdentificationInputsLevel
 physicalSymmetricRelativeSpectrumInputsLevel =
