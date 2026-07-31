@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Rational using
   ( ℚ ; _+_ ; _-_ ; _*_ ; _/_ ; _≤_ ; _<_ ; 0ℚ )
+open import Relation.Binary.PropositionalEquality.Core using (subst; sym)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Core.GenericReceipt as GenericReceipt
@@ -164,14 +165,10 @@ observerAntitoneFromFactorCertificate
   crossMultiplyAntitone crossMultiplication
     (xDenominatorPositive certificate)
     (yDenominatorPositive certificate)
-    (let factorNonnegative = factorProductNonnegative certificate in
-      subst
-        (0ℚ ≤_)
-        (sym (observerCrossDifferenceIdentity x y))
-        factorNonnegative)
-  where
-    open import Relation.Binary.PropositionalEquality.Core
-      using (subst; sym)
+    (subst
+      (0ℚ ≤_)
+      (sym (observerCrossDifferenceIdentity x y))
+      (factorProductNonnegative certificate))
 
 ------------------------------------------------------------------------
 -- Canonical continued-fraction rational endpoints.
@@ -212,11 +209,11 @@ canonicalYUpperDefinition :
   canonicalYUpperCandidate ≡ observerMap canonicalPiLower
 canonicalYUpperDefinition = refl
 
-record PiYTransportInstantiation (ExactReal : Set) : Set₁ where
+record PiYTransportInstantiation : Set₁ where
   field
     embedding : ExactRealEmbeddingBoundary
-    piExact : ExactReal
-    observerExact : ExactReal → ExactReal
+    piExact : ExactReal embedding
+    observerExact : ExactReal embedding → ExactReal embedding
 
     canonicalPiInterval : RationalInterval
     canonicalPiIntervalLower :
