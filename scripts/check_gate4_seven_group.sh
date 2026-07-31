@@ -46,10 +46,16 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicProjectionNormalizationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicSupportBudgetsExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicCellWeightExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicEnvelopeSchurExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicFrechetAssemblyExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4TwoFamilyChannelMajorantExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4T3TwoFamilyChannelReuseExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4TreeBackgroundSliceTransitionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4HRBetaLocalToUniformExact.agda
   DASHI/Physics/YangMills/BalabanClayOSWilsonReflectionPositivityExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound1Ledger.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound1Receipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound1Validation.agda
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerPhysicalClosureRound1Advance.agda
 
@@ -62,7 +68,7 @@ FILES=(
 for relative in "${FILES[@]}"; do
   file="$ROOT_DIR/$relative"
   [[ -f "$file" ]] || {
-    echo "missing seven-group frontier file: $relative" >&2
+    echo "missing Gate-4 focused file: $relative" >&2
     exit 1
   }
 
