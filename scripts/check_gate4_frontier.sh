@@ -36,6 +36,7 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4ConstrainedMinimizerProjectionExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheLedger.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheReceipt.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingCurrentFrontierExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SummableTailBudgetClosureExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5KoteckyPreissTwoWeightPrimaryExact.agda \
