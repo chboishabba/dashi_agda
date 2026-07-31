@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _/_; 0ℚ)
+import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.ExternalRepositoryProvenance as Provenance
@@ -77,14 +78,14 @@ pairwiseBiasYCoefficientsSumToZero :
   + yCoefficient xzPairwiseBias
   + yCoefficient yzPairwiseBias
   ≡ 0ℚ
-pairwiseBiasYCoefficientsSumToZero = refl
+pairwiseBiasYCoefficientsSumToZero = ℚRing.solve
 
 pairwiseBiasConstantsSumToZero :
   constant xyPairwiseBias
   + constant xzPairwiseBias
   + constant yzPairwiseBias
   ≡ 0ℚ
-pairwiseBiasConstantsSumToZero = refl
+pairwiseBiasConstantsSumToZero = ℚRing.solve
 
 record TGICWalshExtractionStatus : Set where
   constructor tgicWalshExtractionStatus
