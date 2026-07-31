@@ -3,6 +3,7 @@ module DASHI.Foundations.UBP.FrontierRegression where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational using (ℚ)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.BishopAbsMigrationReceipt as BishopMigration
@@ -70,7 +71,7 @@ bishopSequenceValidated =
     BishopMigration.canonicalBishopAbsMigrationStatus
 
 observerFactorisationRegression :
-  (x y : Data.Rational.ℚ) →
+  (x y : ℚ) →
   RationalTransport.observerCrossDifference x y
   ≡ RationalTransport.observerFactorDifference x y
 observerFactorisationRegression =
