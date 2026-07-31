@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4PeriodicWordPathConstructionExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -50,7 +51,7 @@ wordToNamedEndpointPath start finish directions endpointExact =
     (wordToPeriodicPath start directions)
 
 record ConstructedPeriodicContour
-    {n : _}
+    {n : Nat}
     (start finish : Periodic.PeriodicBlock n) : Set where
   field
     directions : List SignedAxis4
