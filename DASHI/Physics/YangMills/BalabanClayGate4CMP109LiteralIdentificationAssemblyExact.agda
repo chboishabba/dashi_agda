@@ -1,15 +1,13 @@
 module DASHI.Physics.YangMills.BalabanClayGate4CMP109LiteralIdentificationAssemblyExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryAveragingLocalityExact as Locality
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalAveragingConventionSelectionExact as Convention
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as PrincipalLog
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109ProjectedEndpointBlocksExact as Endpoint
-import DASHI.Physics.YangMills.BalabanClayGate4PeriodicEndpointBlockPredicateExact as EndpointPredicate
 
 ------------------------------------------------------------------------
 -- Unified CMP 109 literal-identification witness.
@@ -26,6 +24,11 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicEndpointBlockPredicateExa
 -- derivative, principal-log interpretation and physical normalization.  Once
 -- inhabited, it produces the repository's official CMP 109 convention meaning.
 ------------------------------------------------------------------------
+
+data Empty : Set where
+
+Not : Set → Set
+Not proposition = proposition → Empty
 
 record ProjectedEndpointLocality
     (Input Output FineBond CoarseBond Value : Set) : Set₁ where
@@ -82,9 +85,7 @@ record CMP109LiteralIdentification
     zeroDerivativeEntry : Entry
 
     derivativeVanishesOutsideProjectedSupport : ∀ coarse fine →
-      (ProjectedEndpointSupport projectedLocality coarse fine →
-        Endpoint.Not
-          (ProjectedEndpointSupport projectedLocality coarse fine)) →
+      Not (ProjectedEndpointSupport projectedLocality coarse fine) →
       derivativeEntry coarse fine ≡ zeroDerivativeEntry
 
     physicalNormalization : Normalization
@@ -149,22 +150,6 @@ asGate4CMP109PhysicalMeaning meaning = record
   ; Convention.Gate4CMP109PhysicalMeaning.normalizationMatchesCMP109 =
       normalizationMatchesCMP109 meaning
   }
-
-record ProjectedEndpointUnionIdentification
-    (Input Output FineBond CoarseBond Value : Set) : Set₁ where
-  field
-    locality : ProjectedEndpointLocality
-      Input Output FineBond CoarseBond Value
-
-    endpointLists : CoarseBond → EndpointPredicate.PeriodicEndpointBlockLists
-      _ _
-
-    endpointUnionMeaning : ∀ coarse fine →
-      ProjectedEndpointSupport locality coarse fine
-      ≡ EndpointPredicate.EndpointBlockUnionSupport
-          (endpointLists coarse) coarse fine
-
-open ProjectedEndpointUnionIdentification public
 
 cmp109ProjectedLocalityTransportLevel : ProofLevel
 cmp109ProjectedLocalityTransportLevel = machineChecked
