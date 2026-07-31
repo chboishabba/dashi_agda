@@ -70,6 +70,17 @@ addVec algebra vnil vnil = vnil
 addVec algebra (left v∷ lefts) (right v∷ rights) =
   add algebra left right v∷ addVec algebra lefts rights
 
+lookupAddVec :
+  ∀ {Scalar n} (algebra : CommutativeSemiringLaws Scalar)
+    (left right : Vec Scalar n) index →
+  lookupVec (addVec algebra left right) index
+  ≡ add algebra (lookupVec left index) (lookupVec right index)
+lookupAddVec {n = suc n} algebra
+    (left v∷ lefts) (right v∷ rights) fzero = refl
+lookupAddVec {n = suc n} algebra
+    (left v∷ lefts) (right v∷ rights) (fsuc index) =
+  lookupAddVec algebra lefts rights index
+
 basisVector : ∀ {Scalar n} → CommutativeSemiringLaws Scalar →
   Fin n → Vec Scalar n
 basisVector {n = suc n} algebra fzero =
@@ -176,6 +187,17 @@ addMatrix algebra (leftRow v∷ leftRows) (rightRow v∷ rightRows) =
   addVec algebra leftRow rightRow v∷
   addMatrix algebra leftRows rightRows
 
+lookupAddMatrix :
+  ∀ {Scalar n} (algebra : CommutativeSemiringLaws Scalar)
+    (left right : FiniteMatrix Scalar n) row →
+  lookupVec (addMatrix algebra left right) row
+  ≡ addVec algebra (lookupVec left row) (lookupVec right row)
+lookupAddMatrix {n = suc n} algebra
+    (leftRow v∷ leftRows) (rightRow v∷ rightRows) fzero = refl
+lookupAddMatrix {n = suc n} algebra
+    (leftRow v∷ leftRows) (rightRow v∷ rightRows) (fsuc row) =
+  lookupAddMatrix algebra leftRows rightRows row
+
 matrixAction : ∀ {Scalar n} → CommutativeSemiringLaws Scalar →
   FiniteMatrix Scalar n → Vec Scalar n → Vec Scalar n
 matrixAction algebra matrix vector =
@@ -216,12 +238,20 @@ matrixActionAddPointwise algebra left right vector =
       (matrixActionEntry algebra
         (addMatrix algebra left right) vector row)
       (trans
-        (dotAddLeft algebra
-          (lookupVec left row) (lookupVec right row) vector)
-        (sym
-          (cong₂ (add algebra)
-            (matrixActionEntry algebra left vector row)
-            (matrixActionEntry algebra right vector row)))))
+        (cong (λ selectedRow → dot algebra selectedRow vector)
+          (lookupAddMatrix algebra left right row))
+        (trans
+          (dotAddLeft algebra
+            (lookupVec left row) (lookupVec right row) vector)
+          (trans
+            (cong₂ (add algebra)
+              (sym (matrixActionEntry algebra left vector row))
+              (sym (matrixActionEntry algebra right vector row)))
+            (sym
+              (lookupAddVec algebra
+                (matrixAction algebra left vector)
+                (matrixAction algebra right vector)
+                row))))))
 
 matrixActionInjective :
   ∀ {Scalar n} (algebra : CommutativeSemiringLaws Scalar)
