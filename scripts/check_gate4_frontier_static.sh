@@ -34,6 +34,17 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4T3ConstrainedHessianRestrictionReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4T3RestrictedDeterminantAdapterExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryBetaFiniteDifferenceExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4Attachment254ResearchAuditExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4SU2PrincipalLogBallExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PeriodicEndpointBlockPredicateExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4SelfAdjointFormOperatorNormExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteHermitianRayleighSpectrumExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4NearContractionSummableSlackExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanPrimaryCorollary214Exact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4BetaMonteCarloConventionAuditExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryCouplingAdmissibilityInductionExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4Attachment254CompletionLedger.agda
+  DASHI/Physics/YangMills/BalabanClayGate4Attachment254CompletionReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingCurrentFrontierExact.agda
