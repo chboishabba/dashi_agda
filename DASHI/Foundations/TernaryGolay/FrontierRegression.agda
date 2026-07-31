@@ -6,8 +6,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat.Base using (_*_)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Foundations.FiniteLinear.AntiDiagonalKernel as AntiDiagonal
+import DASHI.Foundations.FiniteLinear.F3Subspace as Linear
 import DASHI.Foundations.TernaryGolay.CompleteWeightEnumerator as Complete
 import DASHI.Foundations.TernaryGolay.ExplicitCode729 as Explicit
+import DASHI.Foundations.TernaryGolay.GolaySelfDualSubspace as GolaySubspace
 import DASHI.Foundations.TernaryGolay.MathieuPresentationAction as Action
 import DASHI.Foundations.TernaryGolay.MathieuSourceAtlas as MathieuSources
 import DASHI.Foundations.TernaryGolay.MathieuStabilizerChain as Stabilizers
@@ -39,6 +42,14 @@ selfOrthogonalityReadinessRegression :
   SelfDual.allCodewordsOrthogonalToGeneratorsCheck ≡ true
 selfOrthogonalityReadinessRegression =
   SelfDual.allCodewordsOrthogonalToGenerators
+
+concreteGolaySelfDualRegression :
+  GolaySubspace.codeSubspace Linear.≈ₛ GolaySubspace.dualSubspace
+concreteGolaySelfDualRegression = GolaySubspace.golaySelfDual
+
+antiDiagonalKernelRegression :
+  AntiDiagonal.sumZeroLine Linear.≈ₛ AntiDiagonal.antiDiagonalLine
+antiDiagonalKernelRegression = AntiDiagonal.sumZeroIsAntiDiagonal
 
 sDesignActionRegression :
   Action.sPreservesAllHexadsCheck ≡ true
@@ -77,6 +88,7 @@ focusedReceipts =
   ∷ Complete.completeWeightEnumeratorReceipt
   ∷ Puncture.puncturedPerfectCodeReceipt
   ∷ SelfDual.selfDualityFiniteBoundaryReceipt
+  ∷ GolaySubspace.golaySelfDualSubspaceReceipt
   ∷ Action.mathieuFiniteActionReceipt
   ∷ Stabilizers.stabilizerChainReceipt
   ∷ []
