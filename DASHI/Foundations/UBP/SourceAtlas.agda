@@ -11,79 +11,48 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 ------------------------------------------------------------------------
 -- Attributed sources used by the UBP boundary formalisation.
 --
--- A bibliographic entry is provenance and calibration only.  Importing a
--- title, author, or DOI does not import the cited theorem into Agda and does
--- not promote any UBP physical or semantic interpretation.
+-- A bibliographic entry is provenance and calibration only. Importing a
+-- title, author, URL, or DOI does not import the cited theorem into Agda and
+-- does not promote any UBP physical or semantic interpretation.
+------------------------------------------------------------------------
 
 data DOIStatus : Set where
-  doiRecorded :
-    String →
-    DOIStatus
-
-  noDOIRecordedInAtlas :
-    DOIStatus
+  doiRecorded : String → DOIStatus
+  noDOIRecordedInAtlas : DOIStatus
 
 data SourceRelationship : Set where
-  historicalCodingSource :
-    SourceRelationship
-
-  mogAndMathieuSource :
-    SourceRelationship
-
-  leechLatticeSource :
-    SourceRelationship
-
-  latticeReferenceSource :
-    SourceRelationship
-
-  grayMapSource :
-    SourceRelationship
-
-  verifiedIntervalArithmeticSource :
-    SourceRelationship
-
-  dimensionTwentyFourOptimalitySource :
-    SourceRelationship
+  historicalCodingSource : SourceRelationship
+  mogAndMathieuSource : SourceRelationship
+  leechLatticeSource : SourceRelationship
+  latticeReferenceSource : SourceRelationship
+  grayMapSource : SourceRelationship
+  verifiedIntervalArithmeticSource : SourceRelationship
+  dimensionTwentyFourOptimalitySource : SourceRelationship
+  continuedFractionSequenceSource : SourceRelationship
 
 record SourceEntry : Set where
   constructor sourceEntry
   field
-    author :
-      String
-
-    title :
-      String
-
-    publication :
-      String
-
-    year :
-      Nat
-
-    doiStatus :
-      DOIStatus
-
-    relationship :
-      SourceRelationship
-
-    relationshipReading :
-      String
+    author : String
+    title : String
+    publication : String
+    year : Nat
+    doiStatus : DOIStatus
+    canonicalURL : String
+    relationship : SourceRelationship
+    relationshipReading : String
 
 open SourceEntry public
 
-sourceCount :
-  List SourceEntry →
-  Nat
-sourceCount [] =
-  zero
-sourceCount (_ ∷ entries) =
-  suc (sourceCount entries)
+sourceCount : List SourceEntry → Nat
+sourceCount [] = zero
+sourceCount (_ ∷ entries) = suc (sourceCount entries)
 
 ------------------------------------------------------------------------
 -- Canonical attributed entries.
+------------------------------------------------------------------------
 
-golayNotesOnDigitalCoding :
-  SourceEntry
+golayNotesOnDigitalCoding : SourceEntry
 golayNotesOnDigitalCoding =
   sourceEntry
     "Marcel J. E. Golay"
@@ -91,11 +60,11 @@ golayNotesOnDigitalCoding =
     "Proceedings of the IRE 37, page 657"
     1949
     noDOIRecordedInAtlas
+    "https://ieeexplore.ieee.org/document/1698149"
     historicalCodingSource
     "historical source for the binary and ternary Golay-code programme; this atlas does not treat the citation as a machine-checked construction"
 
-curtisM24 :
-  SourceEntry
+curtisM24 : SourceEntry
 curtisM24 =
   sourceEntry
     "R. T. Curtis"
@@ -103,11 +72,11 @@ curtisM24 =
     "Mathematical Proceedings of the Cambridge Philosophical Society 79(1), 25-42"
     1976
     (doiRecorded "10.1017/S0305004100052075")
+    "https://doi.org/10.1017/S0305004100052075"
     mogAndMathieuSource
     "source for the Miracle Octad Generator and the combinatorial M24 presentation; it does not identify a chosen MOG coordinate labelling with physical meaning"
 
-leechNotesOnSpherePackings :
-  SourceEntry
+leechNotesOnSpherePackings : SourceEntry
 leechNotesOnSpherePackings =
   sourceEntry
     "John Leech"
@@ -115,11 +84,11 @@ leechNotesOnSpherePackings =
     "Canadian Journal of Mathematics 19, 251-267"
     1967
     (doiRecorded "10.4153/CJM-1967-017-0")
+    "https://doi.org/10.4153/CJM-1967-017-0"
     leechLatticeSource
     "historical lattice source; the UBP boundary uses the rootless minimum-norm distinction only through an explicit witness"
 
-conwaySloaneSpherePackings :
-  SourceEntry
+conwaySloaneSpherePackings : SourceEntry
 conwaySloaneSpherePackings =
   sourceEntry
     "J. H. Conway and N. J. A. Sloane"
@@ -127,11 +96,11 @@ conwaySloaneSpherePackings =
     "Springer, Grundlehren der mathematischen Wissenschaften 290"
     1999
     (doiRecorded "10.1007/978-1-4757-6568-7")
+    "https://doi.org/10.1007/978-1-4757-6568-7"
     latticeReferenceSource
     "reference for Golay, MOG, Hexacode, Construction A, Leech-lattice and sporadic-group background; citation is not proof import"
 
-hammonsKumarCalderbankSloaneSoleGrayMap :
-  SourceEntry
+hammonsKumarCalderbankSloaneSoleGrayMap : SourceEntry
 hammonsKumarCalderbankSloaneSoleGrayMap =
   sourceEntry
     "A. Roger Hammons, P. Vijay Kumar, A. R. Calderbank, N. J. A. Sloane, and Patrick Sole"
@@ -139,11 +108,11 @@ hammonsKumarCalderbankSloaneSoleGrayMap =
     "IEEE Transactions on Information Theory 40(2), 301-319"
     1994
     (doiRecorded "10.1109/18.312154")
+    "https://doi.org/10.1109/18.312154"
     grayMapSource
     "source for the Z4 Gray-map metric interface; Lee-Hamming isometry does not itself construct a semantic metric embedding"
 
-daumasLesterMunozIntervalArithmetic :
-  SourceEntry
+daumasLesterMunozIntervalArithmetic : SourceEntry
 daumasLesterMunozIntervalArithmetic =
   sourceEntry
     "Marc Daumas, David Lester, and Cesar Munoz"
@@ -151,11 +120,11 @@ daumasLesterMunozIntervalArithmetic =
     "IEEE Transactions on Computers 58(2), 226-237"
     2009
     (doiRecorded "10.1109/TC.2008.213")
+    "https://doi.org/10.1109/TC.2008.213"
     verifiedIntervalArithmeticSource
     "source for rational interval certification of irrational real calculations; exact rational execution is separated from exact irrational representation"
 
-cohnKumarMillerRadchenkoViazovskaDimension24 :
-  SourceEntry
+cohnKumarMillerRadchenkoViazovskaDimension24 : SourceEntry
 cohnKumarMillerRadchenkoViazovskaDimension24 =
   sourceEntry
     "Henry Cohn, Abhinav Kumar, Stephen D. Miller, Danylo Radchenko, and Maryna Viazovska"
@@ -163,11 +132,23 @@ cohnKumarMillerRadchenkoViazovskaDimension24 =
     "Annals of Mathematics 185(3), 1017-1033"
     2017
     (doiRecorded "10.4007/annals.2017.185.3.8")
+    "https://doi.org/10.4007/annals.2017.185.3.8"
     dimensionTwentyFourOptimalitySource
     "source for optimality and uniqueness of the Leech packing in dimension 24; it supplies no UBP mass, vacuum, semantic, or manifestation interpretation"
 
-canonicalUBPSources :
-  List SourceEntry
+oeisPiContinuedFraction : SourceEntry
+oeisPiContinuedFraction =
+  sourceEntry
+    "N. J. A. Sloane"
+    "A001203: Simple continued fraction expansion of Pi"
+    "The On-Line Encyclopedia of Integer Sequences"
+    1996
+    noDOIRecordedInAtlas
+    "https://oeis.org/A001203"
+    continuedFractionSequenceSource
+    "canonical coefficient table used to distinguish the genuine first 50 simple-continued-fraction coefficients of pi from the attributed UBP source list"
+
+canonicalUBPSources : List SourceEntry
 canonicalUBPSources =
   golayNotesOnDigitalCoding
   ∷ curtisM24
@@ -176,26 +157,23 @@ canonicalUBPSources =
   ∷ hammonsKumarCalderbankSloaneSoleGrayMap
   ∷ daumasLesterMunozIntervalArithmetic
   ∷ cohnKumarMillerRadchenkoViazovskaDimension24
+  ∷ oeisPiContinuedFraction
   ∷ []
 
-canonicalUBPSourceCount :
-  Nat
-canonicalUBPSourceCount =
-  sourceCount canonicalUBPSources
+canonicalUBPSourceCount : Nat
+canonicalUBPSourceCount = sourceCount canonicalUBPSources
 
-canonicalUBPSourceCountIsSeven :
-  canonicalUBPSourceCount ≡ 7
-canonicalUBPSourceCountIsSeven =
-  refl
+canonicalUBPSourceCountIsEight :
+  canonicalUBPSourceCount ≡ 8
+canonicalUBPSourceCountIsEight = refl
 
-canonicalUBPSourceReceipt :
-  GenericReceipt.GenericReceipt
+canonicalUBPSourceReceipt : GenericReceipt.GenericReceipt
 canonicalUBPSourceReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "UBP mathematical source atlas"
     "DASHI.Foundations.UBP.SourceAtlas"
     "canonicalUBPSources"
-    "authors, exact titles, publication contexts, DOI states, and formalisation relationships are attached to the UBP boundary tranche"
+    "authors, exact titles, publication contexts, canonical URLs, DOI states, and formalisation relationships are attached to the UBP boundary tranche"
     "citations do not import external theorem proofs and do not promote physical, semantic, empirical, or metaphysical authority"
     "agda -i . DASHI/Foundations/UBP/SourceAtlas.agda"
 
