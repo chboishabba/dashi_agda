@@ -26,6 +26,7 @@ record SevenGroupFrontierReceipt : Set where
 
     printedCMP109PathFormulaChecked : Bool
     periodicPathWordChecked : Bool
+    periodicWordPathConstructionChecked : Bool
     printedCMP109MapInstantiationChecked : Bool
     finiteHolonomyDerivativeChecked : Bool
     su2DexpInverseClosedFormChecked : Bool
@@ -35,8 +36,11 @@ record SevenGroupFrontierReceipt : Set where
     totalSchurCertificateDecisionChecked : Bool
     spanningTreeGaugeSliceChecked : Bool
     canonicalOffTreeFreeBasisChecked : Bool
+    canonicalOffTreeSU2BasisChecked : Bool
     coordinateMatrixEquivalenceChecked : Bool
+    coordinateMatrixCompositionChecked : Bool
     determinantFactorizationChecked : Bool
+    similaritySpectrumDeterminantChecked : Bool
     spectrumDeterminantCompletionChecked : Bool
     finiteProofEngineeringLedgerChecked : Bool
 
@@ -65,6 +69,7 @@ record AuthoritativeSevenGroupEvidence
 
     printedCMP109PathFormulaTypechecks : Set
     periodicPathWordTypechecks : Set
+    periodicWordPathConstructionTypechecks : Set
     printedCMP109MapInstantiationTypechecks : Set
     finiteHolonomyDerivativeTypechecks : Set
     su2DexpInverseClosedFormTypechecks : Set
@@ -74,8 +79,11 @@ record AuthoritativeSevenGroupEvidence
     totalSchurCertificateDecisionTypechecks : Set
     spanningTreeGaugeSliceTypechecks : Set
     canonicalOffTreeFreeBasisTypechecks : Set
+    canonicalOffTreeSU2BasisTypechecks : Set
     coordinateMatrixEquivalenceTypechecks : Set
+    coordinateMatrixCompositionTypechecks : Set
     determinantFactorizationTypechecks : Set
+    similaritySpectrumDeterminantTypechecks : Set
     spectrumDeterminantCompletionTypechecks : Set
     finiteProofEngineeringLedgerTypechecks : Set
 
