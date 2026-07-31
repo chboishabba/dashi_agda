@@ -44,7 +44,7 @@ record PeriodicPrimaryQkKernelInputs
         primaryEntryBound
 
     natScaleMonotone : ∀ {lower upper} →
-      lower Uniform.≤ᴺ upper →
+      Uniform._≤ᴺ_ lower upper →
       Primary.LessEqual algebra
         (Primary.natScale algebra lower primaryEntryBound)
         (Primary.natScale algebra upper primaryEntryBound)
