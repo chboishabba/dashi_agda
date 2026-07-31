@@ -21,6 +21,8 @@ import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
 import DASHI.Foundations.TernaryGolay.TGICWalshS3Decomposition as Walsh
 import DASHI.Foundations.UBP.ExternalRepositoryProvenance as Provenance
 import DASHI.Foundations.UBP.LeechValidMoveSet as Moves
+import DASHI.Foundations.UBP.MOGGolayCharacterisationBoundary as MOG
+import DASHI.Foundations.UBP.NRCIModelParameterBoundary as NRCI
 import DASHI.Foundations.UBP.YIntervalCertificate as Interval
 
 sourceCountRegression : Sources.canonicalTernaryGolaySourceCount ≡ 8
@@ -92,6 +94,21 @@ walshPairwiseYCoefficientsCancel :
 walshPairwiseYCoefficientsCancel =
   Walsh.pairwiseBiasYCoefficientsSumToZero
 
+mogShadowAloneClosed :
+  MOG.shadowAloneDefinesGolay MOG.canonicalMOGCharacterisationStatus
+  ≡ false
+mogShadowAloneClosed =
+  MOG.shadowAloneDefinesGolayIsFalse
+    MOG.canonicalMOGCharacterisationStatus
+
+nrciPhysicalEmergenceClosed :
+  NRCI.independentlyEmergentThresholdEstablished
+    NRCI.canonicalNRCIParameterStatus
+  ≡ false
+nrciPhysicalEmergenceClosed =
+  NRCI.independentlyEmergentThresholdEstablishedIsFalse
+    NRCI.canonicalNRCIParameterStatus
+
 focusedReceipts : List GenericReceipt.GenericReceipt
 focusedReceipts =
   Provenance.externalRepositoryProvenanceGenericReceipt
@@ -101,6 +118,8 @@ focusedReceipts =
   ∷ K12.coxeterToddRoutesGenericReceipt
   ∷ Mathieu.mathieuExceptionalBridgeReceipt
   ∷ Walsh.tgicWalshGenericReceipt
+  ∷ MOG.mogCharacterisationReceipt
+  ∷ NRCI.nrciParameterReceipt
   ∷ Interval.yIntervalGenericReceipt
   ∷ Moves.leechValidMoveGenericReceipt
   ∷ []
