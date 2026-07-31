@@ -6,6 +6,7 @@ on:
       - 'DASHI/Foundations/FiniteLinear/**'
       - 'DASHI/Foundations/TernaryGolay/**'
       - 'DASHI/Foundations/UBP/**'
+      - 'DASHI/Physics/Closure/NSTriadKNFiniteIncidenceSubspaceAdapter.agda'
       - 'DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda'
       - 'Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md'
       - 'scripts/check_explicit_ternary_golay.py'
@@ -17,6 +18,7 @@ on:
       - 'DASHI/Foundations/FiniteLinear/**'
       - 'DASHI/Foundations/TernaryGolay/**'
       - 'DASHI/Foundations/UBP/**'
+      - 'DASHI/Physics/Closure/NSTriadKNFiniteIncidenceSubspaceAdapter.agda'
       - 'DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda'
       - 'Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md'
       - 'scripts/check_explicit_ternary_golay.py'
@@ -45,7 +47,12 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Check ternary Golay and finite-linear frontier
+      - name: Check reusable finite-linear and NS Gram adapter
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/FiniteLinear/Regression.agda
+
+      - name: Check ternary Golay frontier
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Foundations/TernaryGolay/FrontierRegression.agda
