@@ -28,12 +28,20 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRunningCouplingConventionExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteKernelSchurBlockAdjointExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingDimensionAuditExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryBibliographyChainExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingLocalityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkFiniteKernelBudgetExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkAdjointColumnExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkSchurBridgeExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkPhysicalSchurAssemblyExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteWeightedSchurBlockAdjointExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkWeightedSchurExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkSupportEnumerationExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkUniformSupportBoundsExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkPrimaryKernelInstantiationExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4ConstrainedMinimizerProjectionExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4ConstrainedHessianRestrictionExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryBetaFiniteDifferenceExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheLedger.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheReceipt.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingCurrentFrontierExact.agda \
