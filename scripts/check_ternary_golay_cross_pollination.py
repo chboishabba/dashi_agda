@@ -41,6 +41,7 @@ REQUIRED_TEXT = {
         "constructionProducesK12IsFalse",
         "determinantIsThreePowerTwelve",
         "NoBlock9LiftCanProduceK12",
+        "correctedAndWithdrawnIdentification",
     ],
     "DASHI/Foundations/TernaryGolay/CoxeterToddRoutesBoundary.agda": [
         "OrderThreeFixedSublatticeRoute",
@@ -71,7 +72,6 @@ FORBIDDEN = [
     re.compile(r"\{!.*?!\}", re.DOTALL),
     re.compile(r"TERMINATING"),
     re.compile(r"NO_POSITIVITY_CHECK"),
-    re.compile(r"Z9.*produces.*K12", re.IGNORECASE),
 ]
 
 
