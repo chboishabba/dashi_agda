@@ -27,6 +27,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkSupportEnumerationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkUniformSupportBoundsExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkPrimaryKernelInstantiationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkWeightedSchurInstantiationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4ConstrainedMinimizerProjectionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4ConstrainedHessianRestrictionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryBetaFiniteDifferenceExact.agda
