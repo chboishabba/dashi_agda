@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 import Data.Nat.Base as Nat
-open import Data.Rational using (ℚ; _+_; _-_; _*_; _/_; 0ℚ)
+open import Data.Rational using (ℚ; _+_; _-_; _*_; 0ℚ)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.EvidenceInterpretationLedger as Evidence
@@ -70,12 +70,12 @@ longCycleCancellationRegression :
   2 * Algebra.activationQuantum y 1
   + 2 * Algebra.deexcitationQuantum y 4
   ≡
-  0ℚ - 3 / 4
+  0ℚ - Algebra.threeQuarters
 longCycleCancellationRegression =
   Algebra.longCycleCancellationIdentity
 
 nrciHalfThresholdRegression :
-  Algebra.nrci 10 ≡ 1 / 2
+  Algebra.nrci 10 ≡ Algebra.oneHalf
 nrciHalfThresholdRegression =
   Algebra.nrciAtTaxTen
 
