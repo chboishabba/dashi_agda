@@ -108,6 +108,11 @@ record T3RestrictedOperatorNormInputs
   field
     ambientRemainderNorm restrictedRemainderNorm epsilonOperator : Bound
 
+    lessEqualTransitive : ∀ {left middle right} →
+      T3.LessEqual (t3 inputs) left middle →
+      T3.LessEqual (t3 inputs) middle right →
+      T3.LessEqual (t3 inputs) left right
+
     projectionDoesNotIncreaseRemainderNorm :
       T3.LessEqual (t3 inputs)
         restrictedRemainderNorm ambientRemainderNorm
@@ -131,7 +136,7 @@ toProjectedPerturbationNormData {inputs = inputs} normInputs = record
   ; restrictedPerturbationNorm = restrictedRemainderNorm normInputs
   ; epsilon = epsilonOperator normInputs
   ; LessEqual = T3.LessEqual (t3 inputs)
-  ; transitive = T3.transitive (t3 inputs)
+  ; transitive = lessEqualTransitive normInputs
   ; projectionDoesNotIncreasePerturbationNorm =
       projectionDoesNotIncreaseRemainderNorm normInputs
   ; ambientPerturbationBelowEpsilon =
