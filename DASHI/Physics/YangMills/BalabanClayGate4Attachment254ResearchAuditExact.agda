@@ -12,10 +12,13 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- model", Physical Review D 24 (1981), 548--551.
 -- DOI: 10.1103/PhysRevD.24.548.
 --
--- The Monte Carlo fit reports gamma_0 = 0.041 and compares it with the SU(2)
--- perturbative value 11/(24 pi^2) = 0.046....  This is independent numerical
--- corroboration of the convention, not a proof of Bałaban's localized
--- coefficient or its all-scale remainder.
+-- The Monte Carlo fit reports gamma_0 = 0.041 and compares it with the paper's
+-- SU(2) perturbative convention gamma_0 = 11/(24 pi^2) = 0.046....  This is
+-- independent numerical corroboration of asymptotic freedom.  It is not a
+-- direct numerical confirmation of DASHI's inverse-coupling coefficient
+-- 11 C_A/(24 pi^2): at C_A = 2 that coefficient is 11/(12 pi^2).  A typed
+-- convention map is therefore required before the two constants may be
+-- identified.
 --
 -- Primary and peer-reviewed methodological provenance:
 --
@@ -66,8 +69,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 nauenbergSchalkBrowerMetadataLevel : ProofLevel
 nauenbergSchalkBrowerMetadataLevel = standardImported
 
-monteCarloBetaCoefficientCorroborationLevel : ProofLevel
-monteCarloBetaCoefficientCorroborationLevel = standardImported
+monteCarloAsymptoticFreedomCorroborationLevel : ProofLevel
+monteCarloAsymptoticFreedomCorroborationLevel = standardImported
+
+monteCarloGammaConventionEqualsRepositoryInverseCouplingConvention : ProofLevel
+monteCarloGammaConventionEqualsRepositoryInverseCouplingConvention = conjectural
 
 monteCarloCorroborationProvesPhysicalBalabanCoefficient : ProofLevel
 monteCarloCorroborationProvesPhysicalBalabanCoefficient = conjectural
@@ -104,6 +110,9 @@ physicalRestrictedRemainderSelfAdjointInputsLevel = conditional
 
 physicalQstarSlackSequenceInputsLevel : ProofLevel
 physicalQstarSlackSequenceInputsLevel = conditional
+
+physicalBetaConventionMapInputsLevel : ProofLevel
+physicalBetaConventionMapInputsLevel = conditional
 
 physicalBetaRemainderAndAdmissibilityInputsLevel : ProofLevel
 physicalBetaRemainderAndAdmissibilityInputsLevel = conditional
