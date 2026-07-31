@@ -1,0 +1,185 @@
+module DASHI.Physics.YangMills.BalabanClayGate4FiniteProofEngineeringCompletionLedger where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedPathFormulaExact as Printed
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPathWordExact as PathWord
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedMapInstantiationExact as PrintedMap
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteHolonomyDerivativeExact as HolonomyDerivative
+import DASHI.Physics.YangMills.BalabanClayGate4SU2DexpInverseClosedFormExact as SU2Derivative
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109SupportOverlapCompletionExact as Overlap
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedAdjointFubiniExact as WeightedAdjoint
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedAdjointFormulaExact as WeightedAdjointFormula
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedSchurCertificateCompletionExact as Certificate
+import DASHI.Physics.YangMills.BalabanClayGate4SpanningTreeGaugeSliceExact as TreeSlice
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCanonicalFreeBasisExact as FreeBasis
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoordinateMatrixEquivalenceExact as Matrix
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteDeterminantFactorizationExact as Determinant
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteSpectrumDeterminantCompletionExact as SpectrumDeterminant
+
+------------------------------------------------------------------------
+-- Highest-alpha finite proof-engineering completion ledger.
+--
+-- This ledger deliberately separates finite closure from the remaining
+-- analytic identifications.  Every theorem below `Finite closure` is computed
+-- or machine checked.  The final section lists only maps from these canonical
+-- finite carriers into Bałaban's physical small-field/tangent conventions.
+------------------------------------------------------------------------
+
+cmp109StraightCrossingPathConstructionLevel =
+  Printed.cmp109StraightCrossingPathConstructionLevel
+cmp109RelativeLoopClosureAssemblyLevel =
+  Printed.cmp109RelativeLoopClosureAssemblyLevel
+cmp109Equation04OrderedPathSyntaxLevel =
+  Printed.cmp109Equation04OrderedPathSyntaxLevel
+cmp109Equation04LiteralMapEqualityLevel =
+  Printed.cmp109Equation04LiteralMapEqualityLevel
+cmp109Equation012LiteralMapEqualityLevel =
+  Printed.cmp109Equation012LiteralMapEqualityLevel
+cmp109EuclideanAveragedContourVariantSelectionLevel =
+  Printed.cmp109EuclideanAveragedContourVariantSelectionLevel
+
+periodicPathToSignedWordLevel = PathWord.periodicPathToSignedWordLevel
+periodicPathWordEndpointLevel = PathWord.periodicPathWordEndpointLevel
+periodicPathWordLengthLevel = PathWord.periodicPathWordLengthLevel
+
+cmp109Equation012CanonicalStageLevel =
+  PrintedMap.cmp109Equation012CanonicalStageLevel
+cmp109Equation012PrimaryFormulaLevel =
+  PrintedMap.cmp109Equation012PrimaryFormulaLevel
+cmp109PrintedMapEqualityByConstructionLevel =
+  PrintedMap.cmp109PrintedMapEqualityByConstructionLevel
+cmp109UnifiedEqualityPredicateLevel =
+  PrintedMap.cmp109UnifiedEqualityPredicateLevel
+
+finiteHolonomyDefinitionLevel = HolonomyDerivative.finiteHolonomyDefinitionLevel
+finiteHolonomyDerivativeFormulaLevel =
+  HolonomyDerivative.finiteHolonomyDerivativeFormulaLevel
+finiteHolonomyDerivativeSupportLevel =
+  HolonomyDerivative.finiteHolonomyDerivativeSupportLevel
+
+su2DexpInversePolynomialDefinitionLevel =
+  SU2Derivative.su2DexpInversePolynomialDefinitionLevel
+su2DexpInverseFiniteSpanLevel =
+  SU2Derivative.su2DexpInverseFiniteSpanLevel
+su2DexpInverseZeroValueLevel =
+  SU2Derivative.su2DexpInverseZeroValueLevel
+inverseDifferentialUniquenessLevel =
+  SU2Derivative.inverseDifferentialUniquenessLevel
+derivativeLogClosedFormAssemblyLevel =
+  SU2Derivative.derivativeLogClosedFormAssemblyLevel
+
+cmp109ExactRowOverlapDefinitionLevel =
+  Overlap.cmp109ExactRowOverlapDefinitionLevel
+cmp109ExactColumnOverlapDefinitionLevel =
+  Overlap.cmp109ExactColumnOverlapDefinitionLevel
+cmp109UniformNrowConstructionLevel =
+  Overlap.cmp109UniformNrowConstructionLevel
+cmp109UniformNcolConstructionLevel =
+  Overlap.cmp109UniformNcolConstructionLevel
+cmp109OverlapUniversalBoundsLevel =
+  Overlap.cmp109OverlapUniversalBoundsLevel
+
+finiteAdditiveFubiniLevel = WeightedAdjoint.finiteAdditiveFubiniLevel
+weightedAdjointLocalToGlobalLevel =
+  WeightedAdjoint.weightedAdjointLocalToGlobalLevel
+weightedAdjointFiniteSumOrderLevel =
+  WeightedAdjoint.weightedAdjointFiniteSumOrderLevel
+weightedAdjointFormulaDefinitionLevel =
+  WeightedAdjointFormula.weightedAdjointFormulaDefinitionLevel
+weightedAdjointEntryLocalIdentityLevel =
+  WeightedAdjointFormula.weightedAdjointEntryLocalIdentityLevel
+weightedAdjointFormulaToGlobalFubiniLevel =
+  WeightedAdjointFormula.weightedAdjointFormulaToGlobalFubiniLevel
+
+finiteWeightedCertificateTotalDecisionLevel =
+  Certificate.finiteWeightedCertificateTotalDecisionLevel
+finiteWeightedCertificateFailureRefutationLevel =
+  Certificate.finiteWeightedCertificateFailureRefutationLevel
+finiteWeightedCertificateUniversalExecutionLevel =
+  Certificate.finiteWeightedCertificateUniversalExecutionLevel
+
+spanningTreeCanonicalGaugeConstructionLevel =
+  TreeSlice.spanningTreeCanonicalGaugeConstructionLevel
+spanningTreeEdgeGaugeFixingLevel =
+  TreeSlice.spanningTreeEdgeGaugeFixingLevel
+spanningTreeRootAnchoredUniquenessLevel =
+  TreeSlice.spanningTreeRootAnchoredUniquenessLevel
+spanningTreeCoordinateReconstructionLevel =
+  TreeSlice.spanningTreeCoordinateReconstructionLevel
+
+finiteCoordinateTupleRoundTripLevel =
+  FreeBasis.finiteCoordinateTupleRoundTripLevel
+finiteStandardBasisBiorthogonalityLevel =
+  FreeBasis.finiteStandardBasisBiorthogonalityLevel
+periodicOffTreePositionToBondLevel =
+  FreeBasis.periodicOffTreePositionToBondLevel
+periodicOffTreeCanonicalBasisLevel =
+  FreeBasis.periodicOffTreeCanonicalBasisLevel
+
+finiteCoordinateMatrixActionLevel = Matrix.finiteCoordinateMatrixActionLevel
+finiteMatrixActionInjectivityLevel = Matrix.finiteMatrixActionInjectivityLevel
+finiteMatrixOperatorRoundTripLevel = Matrix.finiteMatrixOperatorRoundTripLevel
+finiteRestrictedOperatorMatrixSplitLevel =
+  Matrix.finiteRestrictedOperatorMatrixSplitLevel
+
+finiteDeterminantFactorizationLevel =
+  Determinant.finiteDeterminantFactorizationLevel
+finiteEigenvalueProductLowerBoundLevel =
+  Determinant.finiteEigenvalueProductLowerBoundLevel
+finiteEigenvalueProductUpperBoundLevel =
+  Determinant.finiteEigenvalueProductUpperBoundLevel
+finiteSpectrumCoercivityCompletionLevel =
+  SpectrumDeterminant.finiteSpectrumCoercivityCompletionLevel
+finiteSpectrumPositivityCompletionLevel =
+  SpectrumDeterminant.finiteSpectrumPositivityCompletionLevel
+finiteDeterminantIdentityCompletionLevel =
+  SpectrumDeterminant.finiteDeterminantIdentityCompletionLevel
+
+physicalCMP109ContourEndpointInputsLevel =
+  Printed.physicalCMP109ContourEndpointInputsLevel
+physicalCMP109BlockProjectionTranslationInputsLevel =
+  Printed.physicalCMP109BlockProjectionTranslationInputsLevel
+physicalCMP109GroupAverage011InputsLevel =
+  Printed.physicalCMP109GroupAverage011InputsLevel
+physicalCMP109Equation012LocalDependenceInputsLevel =
+  PrintedMap.physicalCMP109Equation012LocalDependenceInputsLevel
+physicalCMP109DerivativeAndNormalizationInputsLevel =
+  PrintedMap.physicalCMP109DerivativeAndNormalizationInputsLevel
+
+physicalLeftPerturbationCalculusInputsLevel =
+  HolonomyDerivative.physicalLeftPerturbationCalculusInputsLevel
+physicalSU2NormAndThetaInputsLevel =
+  SU2Derivative.physicalSU2NormAndThetaInputsLevel
+physicalSU2TrigonometricCoefficientInputsLevel =
+  SU2Derivative.physicalSU2TrigonometricCoefficientInputsLevel
+physicalExpLogDifferentialIdentificationInputsLevel =
+  SU2Derivative.physicalExpLogDifferentialIdentificationInputsLevel
+physicalCMP109ProjectionSelectionInputsLevel =
+  Overlap.physicalCMP109ProjectionSelectionInputsLevel
+physicalWeightedAdjointEntryFormulaInputsLevel =
+  WeightedAdjoint.physicalWeightedAdjointEntryFormulaInputsLevel
+physicalFineCoarsePairingIdentificationInputsLevel =
+  WeightedAdjoint.physicalFineCoarsePairingIdentificationInputsLevel
+physicalOrdinaryEntryAdjointInputsLevel =
+  WeightedAdjointFormula.physicalOrdinaryEntryAdjointInputsLevel
+physicalFineCoarseWeightInvertibilityInputsLevel =
+  WeightedAdjointFormula.physicalFineCoarseWeightInvertibilityInputsLevel
+
+physicalPeriodicTreeInductionInputsLevel =
+  TreeSlice.physicalPeriodicTreeInductionInputsLevel
+physicalTreeTransportFromBondFieldInputsLevel =
+  TreeSlice.physicalTreeTransportFromBondFieldInputsLevel
+physicalBalabanSliceTransitionInputsLevel =
+  TreeSlice.physicalBalabanSliceTransitionInputsLevel
+physicalFreeCoordinatesToFluctuationFibreInputsLevel =
+  FreeBasis.physicalFreeCoordinatesToFluctuationFibreInputsLevel
+physicalCoordinateOperatorIdentificationInputsLevel =
+  Matrix.physicalCoordinateOperatorIdentificationInputsLevel
+physicalSymmetricRelativeSpectrumInputsLevel =
+  Determinant.physicalSymmetricRelativeSpectrumInputsLevel
+physicalSpectrumCoordinateIdentificationInputsLevel =
+  SpectrumDeterminant.physicalSpectrumCoordinateIdentificationInputsLevel
+
+finiteProofEngineeringCompletionLedgerLevel : ProofLevel
+finiteProofEngineeringCompletionLedgerLevel = machineChecked
