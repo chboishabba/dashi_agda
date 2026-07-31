@@ -167,7 +167,8 @@ asPrimaryQkWeightedSchurMeaning dataSet = record
   ; WeightedAdjointMeaning = λ candidate →
       candidate ≡ Periodic.adjointKernelAbsoluteValue (primary dataSet)
   ; weightedAdjointMeaning = refl
-  ; relativeBudget = asRelativeWeightedSchurBudget
+  ; relativeBudget =
+      asRelativeWeightedSchurBudget {dataSet = dataSet}
   }
 
 periodicPrimaryWeightedRelativeOneEighth :
@@ -177,8 +178,10 @@ periodicPrimaryWeightedRelativeOneEighth :
   Weighted.LessEqual (asFiniteWeightedSchurData dataSet)
     (Weighted.operatorNormSquared (asFiniteWeightedSchurData dataSet))
     (Weighted.multiply (asFiniteWeightedSchurData dataSet)
-      (Weighted.oneEighth asRelativeWeightedSchurBudget)
-      (Weighted.previousNormSquared asRelativeWeightedSchurBudget))
+      (Weighted.oneEighth
+        (asRelativeWeightedSchurBudget {dataSet = dataSet}))
+      (Weighted.previousNormSquared
+        (asRelativeWeightedSchurBudget {dataSet = dataSet})))
 periodicPrimaryWeightedRelativeOneEighth dataSet =
   PrimaryWeighted.primaryQkWeightedRelativeOneEighth
     (asPrimaryQkWeightedSchurMeaning dataSet)
