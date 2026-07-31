@@ -10,8 +10,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4SelfAdjointFormOperatorNormExact 
 -- Five-channel form aggregation.
 --
 -- Bałaban's CMP 109 small-field expansion estimates the remainder after the
--- quadratic normalization.  DASHI records curvature, transport, chart, gauge
--- and constraint channels.  The efficient route is:
+-- quadratic normalization. DASHI records curvature, transport, chart, gauge
+-- and constraint channels. The efficient route is:
 --
 --   channelwise absolute quadratic-form bounds
 --     -> total absolute form bound
@@ -148,10 +148,7 @@ fiveChannelSelfAdjointOperatorNormBelowTotal meaning =
           (epsilonTotal (formData meaning)))
         (sym (formAbsoluteMeaning meaning state))
         (subst
-          (λ relation → relation
-            (formAbsolute (formData meaning)
-              (total (formData meaning)) state)
-            (epsilonTotal (formData meaning)))
+          (λ proposition → proposition)
           (sym (orderMeaning meaning
             (formAbsolute (formData meaning)
               (total (formData meaning)) state)
@@ -159,7 +156,7 @@ fiveChannelSelfAdjointOperatorNormBelowTotal meaning =
           (fiveChannelAbsoluteFormBelowTotal
             (formData meaning) state
             (subst
-              (UnitState (formData meaning))
+              (λ proposition → proposition)
               (unitStateMeaning meaning state)
               normUnit)))
 
