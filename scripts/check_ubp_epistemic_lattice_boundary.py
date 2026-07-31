@@ -31,6 +31,16 @@ FOCUSED_FILES = {
         "fullGolayParityGlueCertificateRequired",
         "ubpExactnessAndLatticeReceiptNonPromoting",
     ),
+    "DASHI/Foundations/UBP/ObservableAlgebraBoundary.agda": (
+        "module DASHI.Foundations.UBP.ObservableAlgebraBoundary where",
+        "activationDifferenceIdentity",
+        "deexcitationDifferenceIdentity",
+        "longCycleCancellationIdentity",
+        "nrciAtTaxTen",
+        "independentlyEmergentPhysicalThresholdEstablishedIsFalse",
+        "endpointTaxExtensional",
+        "observableAlgebraReceiptNonPromoting",
+    ),
     "DASHI/Foundations/UBP/RepresentationAndObserverBoundary.agda": (
         "module DASHI.Foundations.UBP.RepresentationAndObserverBoundary where",
         "shadowPreimageCountIsSixtyFourTimesGolayCount",
@@ -64,6 +74,10 @@ FOCUSED_FILES = {
         "shadowCardinalityRegression",
         "observerConstantFractionClaimClosed",
         "ambientAddressMembershipClaimClosed",
+        "activationDifferenceRegression",
+        "longCycleCancellationRegression",
+        "nrciHalfThresholdRegression",
+        "nrciPhysicalEmergenceClaimClosed",
         "mogEquivalenceClaimClosed",
         "coordinateMassMeaningClosed",
         "graySemanticAutomaticityClosed",
@@ -103,12 +117,53 @@ FORBIDDEN_PROMOTION_PHRASES = (
     "individualAddressMembershipClaimIsTrue",
     "checkAloneProvesEquivalenceIsTrue",
     "genuineLeechToThreeDimensionalProjectionSuppliedIsTrue",
+    "independentlyEmergentPhysicalThresholdEstablishedIsTrue",
 )
 
 
 def fail(message: str) -> None:
     print(f"UBP boundary audit failed: {message}", file=sys.stderr)
     raise SystemExit(1)
+
+
+def strip_agda_comments(text: str) -> str:
+    """Remove line and nested block comments before escape-token scanning."""
+    output: list[str] = []
+    index = 0
+    block_depth = 0
+    in_string = False
+    while index < len(text):
+        pair = text[index : index + 2]
+        char = text[index]
+        if block_depth:
+            if pair == "{-":
+                block_depth += 1
+                index += 2
+                continue
+            if pair == "-}":
+                block_depth -= 1
+                index += 2
+                continue
+            index += 1
+            continue
+        if not in_string and pair == "{-":
+            block_depth = 1
+            index += 2
+            continue
+        if not in_string and pair == "--":
+            newline = text.find("\n", index)
+            if newline == -1:
+                break
+            output.append("\n")
+            index = newline + 1
+            continue
+        if char == '"' and (index == 0 or text[index - 1] != "\\"):
+            in_string = not in_string
+        output.append(char)
+        index += 1
+    if block_depth:
+        fail("unterminated Agda block comment in focused source")
+    return "".join(output)
 
 
 def require_file(relative: str, tokens: tuple[str, ...], *, agda: bool) -> str:
@@ -120,11 +175,12 @@ def require_file(relative: str, tokens: tuple[str, ...], *, agda: bool) -> str:
         if token not in text:
             fail(f"{relative} is missing required token {token!r}")
     if agda:
+        code = strip_agda_comments(text)
         for token in FORBIDDEN_AGDA_TOKENS:
-            if token in text:
+            if token in code:
                 fail(f"{relative} contains forbidden Agda token {token!r}")
         for phrase in FORBIDDEN_PROMOTION_PHRASES:
-            if phrase in text:
+            if phrase in code:
                 fail(f"{relative} contains forbidden promotion phrase {phrase!r}")
     return text
 
@@ -164,6 +220,19 @@ def main() -> None:
         fail("rational exact-execution status is missing")
     if "exactIrrationalTargetRepresentedByFractionIsFalse" not in exactness:
         fail("irrational-target nonrepresentation boundary is missing")
+
+    algebra = agda_text[
+        "DASHI/Foundations/UBP/ObservableAlgebraBoundary.agda"
+    ]
+    for theorem in (
+        "activationDifferenceIdentity",
+        "deexcitationDifferenceIdentity",
+        "longCycleCancellationIdentity",
+        "nrciAtTaxTen",
+        "endpointTaxExtensional",
+    ):
+        if theorem not in algebra:
+            fail(f"observable algebra missing theorem {theorem}")
 
     representation = agda_text[
         "DASHI/Foundations/UBP/RepresentationAndObserverBoundary.agda"
