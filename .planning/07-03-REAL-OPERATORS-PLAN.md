@@ -34,6 +34,19 @@ Output: A stub inventory + a concrete decision on what is considered “real ope
 @DASHI/Geometry/FiberContraction.agda
 </context>
 
+<!--
+Backend cross-reference: the current Dashi real-arithmetic policy is recorded
+in DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda and the finite rational
+transport surface is in
+DASHI/Foundations/UBP/RationalCertificateTransport.agda. Keep rationalizable
+estimates in normalized ℚ before embedding into the Bishop ordered-real
+authority; treat Cubical/HoTT reals as a comparative lane rather than a
+replacement dependency. Bishop commit
+d732b0340d729b264227a70fcf38383d8fb3ac3c closes the current K-abs/index
+migration seam. This planning file concerns operator semantics and should not
+silently expand either the Agda 2.9 migration or the exact-real backend scope.
+-->
+
 <tasks>
 
 <task type="auto">
