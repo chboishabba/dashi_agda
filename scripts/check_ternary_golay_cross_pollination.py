@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import collections
 import pathlib
 import re
 import sys
@@ -52,6 +53,11 @@ REQUIRED_TEXT = {
         "10.1017/S0305004100060746",
         "10.1007/978-1-4757-6568-7",
     ],
+    "DASHI/Foundations/TernaryGolay/CodeBoundary.agda": [
+        "arithmeticFieldIsomorphismClaimedIsFalse",
+        "existingSSPTritCodecRoundTrip",
+        "minimumDistanceRoleIsSix",
+    ],
     "DASHI/Foundations/TernaryGolay/RetractedZ9CoxeterToddBoundary.agda": [
         "constructionProducesK12IsFalse",
         "determinantIsThreePowerTwelve",
@@ -95,6 +101,25 @@ def strip_agda_comments(text: str) -> str:
     return re.sub(r"--.*$", "", text, flags=re.MULTILINE)
 
 
+def record_field_names(text: str) -> list[str]:
+    """Collect four-space record projections from Agda `field` blocks."""
+    names: list[str] = []
+    in_fields = False
+    for line in text.splitlines():
+        if re.fullmatch(r"\s*field\s*", line):
+            in_fields = True
+            continue
+        if not in_fields:
+            continue
+        if line and not line.startswith("    "):
+            in_fields = False
+            continue
+        match = re.match(r"^    ([^\s:]+)\s*:", line)
+        if match:
+            names.append(match.group(1))
+    return names
+
+
 def main() -> int:
     failures: list[str] = []
     for relative in REQUIRED_FILES:
@@ -110,6 +135,13 @@ def main() -> int:
         for required in REQUIRED_TEXT.get(relative, []):
             if required not in raw:
                 failures.append(f"missing required text {required!r}: {relative}")
+
+        projection_counts = collections.Counter(record_field_names(stripped))
+        duplicates = sorted(name for name, count in projection_counts.items() if count > 1)
+        if duplicates:
+            failures.append(
+                f"duplicate record projection names in {relative}: {', '.join(duplicates)}"
+            )
 
     if failures:
         print("Ternary-Golay cross-pollination audit failed:")
