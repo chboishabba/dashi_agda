@@ -27,6 +27,15 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4BFSAdjacentLayerShortestPathExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRunningCouplingConventionExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteKernelSchurBlockAdjointExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingDimensionAuditExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingLocalityExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkFiniteKernelBudgetExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkAdjointColumnExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkSchurBridgeExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkPhysicalSchurAssemblyExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4ConstrainedMinimizerProjectionExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheLedger.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheReceipt.agda \
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SummableTailBudgetClosureExact.agda \
   DASHI/Physics/YangMills/BalabanClayT5KoteckyPreissTwoWeightPrimaryExact.agda \
