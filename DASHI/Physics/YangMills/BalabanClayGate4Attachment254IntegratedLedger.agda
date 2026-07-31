@@ -7,6 +7,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4PhysicalAveragingConventionSelect
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalWeightedL2NormalizationExact as WeightedL2
 import DASHI.Physics.YangMills.BalabanClayGate4WeightedSchurSummableSlackReuseExact as WeightedSlack
 import DASHI.Physics.YangMills.BalabanClayGate4T3SelfAdjointFormNormReuseExact as T3FormNorm
+import DASHI.Physics.YangMills.BalabanClayGate4FiveChannelSelfAdjointOperatorBoundExact as FiveChannel
+import DASHI.Physics.YangMills.BalabanClayGate4T3FiveChannelSelfAdjointReuseExact as T3FiveChannel
 
 completionLedgerLevel = Completion.attachment254CompletionLedgerLevel
 
@@ -31,6 +33,15 @@ t3SelfAdjointFormNormAttachmentLevel =
   T3FormNorm.t3SelfAdjointFormNormAttachmentLevel
 t3RestrictedFormToOperatorNormLevel =
   T3FormNorm.t3RestrictedFormToOperatorNormLevel
+
+fiveChannelAbsoluteFormAggregationLevel =
+  FiveChannel.fiveChannelAbsoluteFormAggregationLevel
+fiveChannelSelfAdjointOperatorNormLevel =
+  FiveChannel.fiveChannelSelfAdjointOperatorNormLevel
+t3FiveChannelLiteralInstantiationLevel =
+  T3FiveChannel.t3FiveChannelLiteralInstantiationLevel
+t3FiveChannelOperatorNormAssemblyLevel =
+  T3FiveChannel.t3FiveChannelOperatorNormAssemblyLevel
 
 physicalCMP109LiteralMapInputsLevel =
   Convention.physicalCMP109LiteralMapInputsLevel
@@ -63,6 +74,17 @@ physicalT3RestrictedFormAbsoluteBoundInputsLevel =
   T3FormNorm.physicalT3RestrictedFormAbsoluteBoundInputsLevel
 physicalT3InnerProductNormIdentificationInputsLevel =
   T3FormNorm.physicalT3InnerProductNormIdentificationInputsLevel
+
+physicalFiveChannelRemainderSplitInputsLevel =
+  FiveChannel.physicalFiveChannelRemainderSplitInputsLevel
+physicalFiveChannelAbsoluteFormBoundsInputsLevel =
+  FiveChannel.physicalFiveChannelAbsoluteFormBoundsInputsLevel
+physicalT3FiveChannelFormBoundsInputsLevel =
+  T3FiveChannel.physicalT3FiveChannelFormBoundsInputsLevel
+physicalT3RemainderSelfAdjointnessInputsLevel =
+  T3FiveChannel.physicalT3RemainderSelfAdjointnessInputsLevel
+physicalT3FiveChannelNormMeaningInputsLevel =
+  T3FiveChannel.physicalT3FiveChannelNormMeaningInputsLevel
 
 attachment254IntegratedLedgerLevel : ProofLevel
 attachment254IntegratedLedgerLevel = machineChecked
