@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4WeightedSchurSummableSlackReuseExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -121,7 +121,7 @@ physicalWeightedSchurStateEnvelope :
         (Slack.rhoPower (factorization meaning) count)
         (Slack.exponential (algebra inputs)
           (Slack.totalSlack (factorization meaning))))
-      (state inputs Nat.zero))
+      (state inputs zero))
 physicalWeightedSchurStateEnvelope meaning count =
   Slack.stateBelowSummableSlackEnvelope
     (factorization meaning) count
