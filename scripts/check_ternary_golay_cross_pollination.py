@@ -13,6 +13,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 REQUIRED_FILES = [
     "DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda",
     "DASHI/Foundations/UBP/YIntervalCertificate.agda",
+    "DASHI/Foundations/UBP/Pi50ConvergentTable.agda",
     "DASHI/Foundations/UBP/LeechValidMoveSet.agda",
     "DASHI/Foundations/UBP/MOGGolayCharacterisationBoundary.agda",
     "DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda",
@@ -20,6 +21,10 @@ REQUIRED_FILES = [
     "DASHI/Foundations/TernaryGolay/ChannelC3OrbitDecomposition.agda",
     "DASHI/Foundations/TernaryGolay/NonaryTernaryReduction.agda",
     "DASHI/Foundations/TernaryGolay/CodeBoundary.agda",
+    "DASHI/Foundations/TernaryGolay/ExplicitCode729.agda",
+    "DASHI/Foundations/TernaryGolay/TernaryGolayWeightEnumerator.agda",
+    "DASHI/Foundations/TernaryGolay/SmallWittHexadCount.agda",
+    "DASHI/Foundations/TernaryGolay/BinaryTernaryMacWilliamsUnification.agda",
     "DASHI/Foundations/TernaryGolay/RetractedZ9CoxeterToddBoundary.agda",
     "DASHI/Foundations/TernaryGolay/CoxeterToddRoutesBoundary.agda",
     "DASHI/Foundations/TernaryGolay/TGICWalshS3Decomposition.agda",
@@ -33,6 +38,15 @@ REQUIRED_TEXT = {
         "https://github.com/DigitalEuan/UBP_Repo",
         "core_studio_v4.0/core/tgic_v3.py",
         "dashiClaimsOriginalUBPAuthorshipIsFalse",
+    ],
+    "DASHI/Foundations/UBP/Pi50ConvergentTable.agda": [
+        "sourceCoefficient48 = 6",
+        "canonicalCoefficient48 = 2",
+        "coefficient48Mismatch",
+        "sourceTableIsCanonicalPiCFThrough50IsFalse",
+        "183157143516396120473427579101",
+        "16397605394050964443746106649",
+        "30975954210267369528087864730966858500331494237311153657",
     ],
     "DASHI/Foundations/UBP/MOGGolayCharacterisationBoundary.agda": [
         "HexacodeShadow",
@@ -48,6 +62,11 @@ REQUIRED_TEXT = {
         "independentlyEmergentThresholdEstablishedIsFalse",
     ],
     "DASHI/Foundations/TernaryGolay/SourceAtlas.agda": [
+        "canonicalTernaryGolaySourceCountIsTwelve",
+        "Noam D. Elkies",
+        "10.1002/j.1538-7305.1963.tb04003.x",
+        "10.1109/TIT.1972.1054898",
+        "10.1016/0012-365X(92)90569-2",
         "10.1109/18.485733",
         "10.1109/TIT.2002.806139",
         "10.1017/S0305004100060746",
@@ -57,6 +76,34 @@ REQUIRED_TEXT = {
         "arithmeticFieldIsomorphismClaimedIsFalse",
         "existingSSPTritCodecRoundTrip",
         "minimumDistanceRoleIsSix",
+    ],
+    "DASHI/Foundations/TernaryGolay/ExplicitCode729.agda": [
+        "decodeEncode",
+        "encodeInjective",
+        "allMessagesCountIs729",
+        "generatorGramIsZero",
+        "weight6Count",
+        "weight9Count",
+        "weight12Count",
+    ],
+    "DASHI/Foundations/TernaryGolay/TernaryGolayWeightEnumerator.agda": [
+        "X^12 + 264 X^6Y^6 + 440 X^3Y^9 + 24 Y^12",
+        "enumeratorCoefficientSum",
+        "10.1109/TIT.1972.1054898",
+    ],
+    "DASHI/Foundations/TernaryGolay/SmallWittHexadCount.agda": [
+        "hexadSupportCountIs132",
+        "pentadCountIs792",
+        "everyPentadHasUniqueHexad",
+        "10.1016/0012-365X(92)90569-2",
+    ],
+    "DASHI/Foundations/TernaryGolay/BinaryTernaryMacWilliamsUnification.agda": [
+        "QaryWeightDistribution",
+        "MacWilliamsCoefficientIdentity",
+        "octadCountIs759",
+        "distinctHexadCountIs132",
+        "oneProofAutomaticallyCoversBothFieldsIsFalse",
+        "10.1002/j.1538-7305.1963.tb04003.x",
     ],
     "DASHI/Foundations/TernaryGolay/RetractedZ9CoxeterToddBoundary.agda": [
         "constructionProducesK12IsFalse",
@@ -86,13 +133,23 @@ REQUIRED_TEXT = {
         "pairwiseBiasConstantsSumToZero",
         "DigitalEuan/UBP_Repo",
     ],
+    "DASHI/Foundations/TernaryGolay/Regression.agda": [
+        "explicitMessageCountRegression",
+        "explicitGeneratorGramRegression",
+        "explicitWeightSixRegression",
+        "weightEnumeratorSumRegression",
+        "hexadCountRegression",
+        "smallWittRegression",
+    ],
 }
 
 FORBIDDEN = [
     re.compile(r"\bpostulate\b"),
     re.compile(r"\{!.*?!\}", re.DOTALL),
     re.compile(r"TERMINATING"),
+    re.compile(r"NON_TERMINATING"),
     re.compile(r"NO_POSITIVITY_CHECK"),
+    re.compile(r"NO_UNIVERSE_CHECK"),
 ]
 
 
