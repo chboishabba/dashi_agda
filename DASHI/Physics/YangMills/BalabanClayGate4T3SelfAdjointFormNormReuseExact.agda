@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4T3SelfAdjointFormNormReuseExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT3PhysicalUniformFluctuationCoercivityExact as T3
@@ -88,7 +88,7 @@ asRestrictedFormToOperatorNormMeaning :
 asRestrictedFormToOperatorNormMeaning inputs = record
   { normData = normData inputs
   ; selfAdjointData = selfAdjointData inputs
-  ; restrictedOperatorsAgree = Agda.Builtin.Equality.refl
+  ; restrictedOperatorsAgree = refl
   ; epsilonForm = epsilonForm inputs
   ; restrictedQuadraticFormBound = restrictedQuadraticFormBound inputs
   }
