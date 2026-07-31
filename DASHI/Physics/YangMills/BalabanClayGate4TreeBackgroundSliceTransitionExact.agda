@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4TreeBackgroundSliceTransitionExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -122,14 +122,14 @@ transportEigenpairAcrossSlice :
     (leftOperator operators) (scaleLeft operators) →
   Eigenpair Right Scalar
     (rightOperator operators) (scaleRight operators)
-transportEigenpairAcrossSlice operators source = record
-  { eigenvector = forward _ (eigenvector source)
+transportEigenpairAcrossSlice {isomorphism = isomorphism} operators source = record
+  { eigenvector = forward isomorphism (eigenvector source)
   ; eigenvalue = eigenvalue source
   ; eigenEquation =
       trans
         (conjugacy operators (eigenvector source))
         (trans
-          (cong (forward _)
+          (cong (forward isomorphism)
             (eigenEquation source))
           (forwardLinearForScale operators
             (eigenvalue source) (eigenvector source)))
