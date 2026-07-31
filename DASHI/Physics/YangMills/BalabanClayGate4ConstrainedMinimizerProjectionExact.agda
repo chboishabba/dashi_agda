@@ -11,12 +11,12 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Tadeusz Balaban,
 -- "Propagators and Renormalization Transformations for Lattice Gauge Field
 -- Theories I", Communications in Mathematical Physics 95 (1984), 17--40.
--- DOI: 10.1007/BF01215757.
+-- DOI: 10.1007/BF01215753.
 --
 -- Tadeusz Balaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
 -- Communications in Mathematical Physics 99 (1985), 389--434.
--- DOI: 10.1007/BF01215910.
+-- DOI: 10.1007/BF01240355.
 --
 -- Abhishek Goswami,
 -- "The Variational Problem and Background Field in the Renormalization Group
