@@ -9,6 +9,8 @@ on:
       - 'DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda'
       - 'DASHI/Foundations/UBP/YIntervalCertificate.agda'
       - 'DASHI/Foundations/UBP/LeechValidMoveSet.agda'
+      - 'DASHI/Foundations/UBP/MOGGolayCharacterisationBoundary.agda'
+      - 'DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda'
       - 'scripts/check_ternary_golay_cross_pollination.py'
       - '.github/workflows/ternary-golay-cross-pollination.yml'
   pull_request:
@@ -17,6 +19,8 @@ on:
       - 'DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda'
       - 'DASHI/Foundations/UBP/YIntervalCertificate.agda'
       - 'DASHI/Foundations/UBP/LeechValidMoveSet.agda'
+      - 'DASHI/Foundations/UBP/MOGGolayCharacterisationBoundary.agda'
+      - 'DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda'
       - 'scripts/check_ternary_golay_cross_pollination.py'
 
 jobs:
