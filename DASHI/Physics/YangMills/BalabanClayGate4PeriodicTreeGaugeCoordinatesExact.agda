@@ -8,8 +8,7 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Empty; Dec; yes; no; Not; _∈_; pair; first; second;
-    PositiveBond; elements)
+  using (Dec; yes; no; Not; _∈_; pair; PositiveBond; elements; complete)
 
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact as Adjacency
@@ -106,7 +105,7 @@ offTreePositiveBondsComplete :
 offTreePositiveBondsComplete {n} tree bond offTree =
   Support.filterDecComplete
     (offTreeBondDecidable tree)
-    (Support.complete (Support.positiveBondFinite (suc n)) bond)
+    (complete (Support.positiveBondFinite (suc n)) bond)
     offTree
 
 data TreeOrOffTree {n}
