@@ -42,8 +42,10 @@ mapCongPointwise :
   (∀ value → left value ≡ right value) →
   ∀ values → mapList left values ≡ mapList right values
 mapCongPointwise pointwise [] = refl
-mapCongPointwise pointwise (value ∷ values) =
-  cong (pointwise value ∷_) (mapCongPointwise pointwise values)
+mapCongPointwise {left = left} pointwise (value ∷ values)
+  with pointwise value
+... | refl =
+  cong (left value ∷_) (mapCongPointwise pointwise values)
 
 data _∈List_ {A : Set} (value : A) : List A → Set where
   here : ∀ {values} → value ∈List (value ∷ values)
