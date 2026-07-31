@@ -7,7 +7,7 @@ open import Agda.Builtin.String using (String)
 
 open import Base369 using (TriTruth; tri-low; tri-mid; tri-high)
 open import DASHI.Foundations.SSPTritCarrier using
-  ( SSPTrit ; sspNegOne ; sspZero ; sspPosOne ; toTriTruth )
+  ( SSPTrit ; fromTriTruth ; toTriTruth )
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.Base369TriTruthField as F3
 import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
@@ -16,7 +16,7 @@ import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
 -- Ternary Golay theorem boundary.
 --
 -- The standard parameters are recorded exactly, but an actual code theorem
--- requires an explicit generator/check matrix and proof receipts.  A citation
+-- requires an explicit generator/check matrix and proof receipts. A citation
 -- or parameter tuple alone does not become a machine-checked code.
 ------------------------------------------------------------------------
 
@@ -51,16 +51,35 @@ Word11 = Vec11 TriTruth
 Word12 : Set
 Word12 = Vec12 TriTruth
 
-triToBalancedTrit : TriTruth → SSPTrit
-triToBalancedTrit tri-low = sspZero
-triToBalancedTrit tri-mid = sspPosOne
-triToBalancedTrit tri-high = sspNegOne
+-- Existing DASHI semantic ordering codec. This is a total round-trip between
+-- the carriers, but it is not a field homomorphism: Base369TriTruthField uses
+-- tri-low as zero, whereas SSPTritCarrier labels tri-low as -1.
+triToExistingSSPTritCodec : TriTruth → SSPTrit
+triToExistingSSPTritCodec = fromTriTruth
 
-balancedTritRoundTrip :
-  (x : TriTruth) → toTriTruth (triToBalancedTrit x) ≡ x
-balancedTritRoundTrip tri-low = refl
-balancedTritRoundTrip tri-mid = refl
-balancedTritRoundTrip tri-high = refl
+existingSSPTritCodecRoundTrip :
+  (x : TriTruth) →
+  toTriTruth (triToExistingSSPTritCodec x) ≡ x
+existingSSPTritCodecRoundTrip tri-low = refl
+existingSSPTritCodecRoundTrip tri-mid = refl
+existingSSPTritCodecRoundTrip tri-high = refl
+
+record TriTruthSSPCodecStatus : Set where
+  constructor triTruthSSPCodecStatus
+  field
+    totalRoundTrip : Bool
+    totalRoundTripIsTrue : totalRoundTrip ≡ true
+    arithmeticFieldIsomorphismClaimed : Bool
+    arithmeticFieldIsomorphismClaimedIsFalse :
+      arithmeticFieldIsomorphismClaimed ≡ false
+    statusReading : String
+
+canonicalTriTruthSSPCodecStatus : TriTruthSSPCodecStatus
+canonicalTriTruthSSPCodecStatus =
+  triTruthSSPCodecStatus
+    true refl
+    false refl
+    "the existing low/mid/high to -1/0/+1 map is a semantic-order codec; an arithmetic F3-to-balanced-trit isomorphism needs a separately chosen representation"
 
 record LinearTernaryCode12 : Set₁ where
   field
@@ -196,8 +215,8 @@ ternaryGolayBoundaryReceipt =
     "ternary Golay code boundary"
     "DASHI.Foundations.TernaryGolay.CodeBoundary"
     "canonicalTernaryGolayParameters"
-    "the [12,6,6]_3 parameter surface, 729 count, balanced-trit bridge, puncture/extension obligations, and M12 action interface are attached"
-    "generator matrix, self-duality, minimum distance, perfect decoding, Witt design, and automorphism theorems still require explicit proof terms"
+    "the [12,6,6]_3 parameter surface, 729 count, existing SSP codec boundary, puncture/extension obligations, and M12 action interface are attached"
+    "generator matrix, self-duality, minimum distance, perfect decoding, Witt design, automorphism theorems, and any arithmetic balanced-trit representation still require explicit proof terms"
     "agda -i . DASHI/Foundations/TernaryGolay/CodeBoundary.agda"
 
 ternaryGolayBoundaryReceiptNonPromoting :
