@@ -38,6 +38,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- perturbation calculus supplies the component derivative equalities.
 ------------------------------------------------------------------------
 
+data Empty : Set where
+
 record CMP109DifferentialAlgebra
     (Base Entry Scalar : Set) : Set₁ where
   field
@@ -60,6 +62,11 @@ record CMP109DifferentialAlgebra
       endpointTransport base zeroEntry ≡ zeroEntry
 
 open CMP109DifferentialAlgebra public
+
+mapList : ∀ {A B : Set} → (A → B) → List A → List B
+mapList function [] = []
+mapList function (value ∷ values) =
+  function value ∷ mapList function values
 
 finiteSumEntries :
   ∀ {Base Entry Scalar} →
@@ -94,8 +101,6 @@ record DyadicCMP109DifferentialComponents
 
 open DyadicCMP109DifferentialComponents public
 
-data Empty : Set where
-
 localLogDerivative :
   ∀ {Coarse Fine Term Base Entry Scalar} →
   DyadicCMP109DifferentialComponents
@@ -116,6 +121,14 @@ weightedLocalDerivative components coarse fine term =
     (termWeight components coarse term)
     (localLogDerivative components coarse term fine)
 
+weightedTermList :
+  ∀ {Coarse Fine Term Base Entry Scalar} →
+  DyadicCMP109DifferentialComponents
+    Coarse Fine Term Base Entry Scalar →
+  Coarse → Fine → List Term → List Entry
+weightedTermList components coarse fine =
+  mapList (weightedLocalDerivative components coarse fine)
+
 averageDerivative :
   ∀ {Coarse Fine Term Base Entry Scalar} →
   DyadicCMP109DifferentialComponents
@@ -123,14 +136,8 @@ averageDerivative :
   Coarse → Fine → Entry
 averageDerivative components coarse fine =
   finiteSumEntries (algebra components)
-    (mapList
-      (weightedLocalDerivative components coarse fine)
+    (weightedTermList components coarse fine
       (localTerms components coarse))
-  where
-  mapList : ∀ {A B : Set} → (A → B) → List A → List B
-  mapList function [] = []
-  mapList function (value ∷ values) =
-    function value ∷ mapList function values
 
 assembledCMP109DerivativeEntry :
   ∀ {Coarse Fine Term Base Entry Scalar} →
@@ -154,14 +161,8 @@ allWeightedTermsZeroOutsideSupport :
   (Support components coarse fine → Empty) →
   ∀ terms →
   finiteSumEntries (algebra components)
-    (mapWeighted terms)
+    (weightedTermList components coarse fine terms)
   ≡ zeroEntry (algebra components)
-  where
-  mapWeighted : List Term → List Entry
-  mapWeighted [] = []
-  mapWeighted (term ∷ terms) =
-    weightedLocalDerivative components coarse fine term ∷
-    mapWeighted terms
 allWeightedTermsZeroOutsideSupport components coarse fine outside [] = refl
 allWeightedTermsZeroOutsideSupport components coarse fine outside
     (term ∷ terms) =
@@ -169,7 +170,7 @@ allWeightedTermsZeroOutsideSupport components coarse fine outside
     (cong
       (λ head → addEntry (algebra components) head
         (finiteSumEntries (algebra components)
-          (mapWeighted terms)))
+          (weightedTermList components coarse fine terms)))
       (trans
         (cong
           (scaleEntry (algebra components)
@@ -186,15 +187,10 @@ allWeightedTermsZeroOutsideSupport components coarse fine outside
           (termWeight components coarse term))))
     (trans
       (addZeroLeft (algebra components)
-        (finiteSumEntries (algebra components) (mapWeighted terms)))
+        (finiteSumEntries (algebra components)
+          (weightedTermList components coarse fine terms)))
       (allWeightedTermsZeroOutsideSupport
         components coarse fine outside terms))
-  where
-  mapWeighted : List Term → List Entry
-  mapWeighted [] = []
-  mapWeighted (selected ∷ selectedTerms) =
-    weightedLocalDerivative components coarse fine selected ∷
-    mapWeighted selectedTerms
 
 averageDerivativeOutsideSupport :
   ∀ {Coarse Fine Term Base Entry Scalar}
