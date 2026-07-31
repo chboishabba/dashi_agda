@@ -1,0 +1,47 @@
+name: Exceptional Mathieu and real-backend frontier
+
+on:
+  push:
+    paths:
+      - 'DASHI/Foundations/TernaryGolay/**'
+      - 'DASHI/Foundations/UBP/**'
+      - 'Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md'
+      - 'scripts/check_explicit_ternary_golay.py'
+      - 'scripts/check_exceptional_mathieu_frontier.py'
+      - '.github/workflows/exceptional-mathieu-frontier.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Foundations/TernaryGolay/**'
+      - 'DASHI/Foundations/UBP/**'
+      - 'Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md'
+      - 'scripts/check_explicit_ternary_golay.py'
+      - 'scripts/check_exceptional_mathieu_frontier.py'
+      - '.github/workflows/exceptional-mathieu-frontier.yml'
+  workflow_dispatch:
+
+jobs:
+  exceptional-frontier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Static fail-closed audit
+        run: python3 scripts/check_exceptional_mathieu_frontier.py
+
+      - name: Independent exhaustive finite oracle
+        run: python3 scripts/check_explicit_ternary_golay.py
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Check ternary Golay and Mathieu frontier
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/TernaryGolay/FrontierRegression.agda
+
+      - name: Check UBP exact-real and dynamics frontier
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/UBP/FrontierRegression.agda
