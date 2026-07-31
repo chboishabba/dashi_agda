@@ -9,7 +9,6 @@ open import Base369 using (TriTruth; tri-low; tri-mid; tri-high)
 open import DASHI.Foundations.SSPTritCarrier using
   ( SSPTrit ; fromTriTruth ; toTriTruth )
 import DASHI.Core.GenericReceipt as GenericReceipt
-import DASHI.Foundations.Base369TriTruthField as F3
 import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
 
 ------------------------------------------------------------------------
@@ -189,12 +188,14 @@ canonicalTernaryGolayParameters =
 record SixRoleSeparation : Set where
   constructor sixRoleSeparation
   field
-    informationDimensionIsSix : Bool
-    informationDimensionIsSixIsTrue : informationDimensionIsSix ≡ true
-    minimumDistanceIsSix : Bool
-    minimumDistanceIsSixIsTrue : minimumDistanceIsSix ≡ true
-    smallWittBlockSizeIsSix : Bool
-    smallWittBlockSizeIsSixIsTrue : smallWittBlockSizeIsSix ≡ true
+    informationDimensionRoleIsSix : Bool
+    informationDimensionRoleIsSixIsTrue :
+      informationDimensionRoleIsSix ≡ true
+    minimumDistanceRoleIsSix : Bool
+    minimumDistanceRoleIsSixIsTrue : minimumDistanceRoleIsSix ≡ true
+    smallWittBlockSizeRoleIsSix : Bool
+    smallWittBlockSizeRoleIsSixIsTrue :
+      smallWittBlockSizeRoleIsSix ≡ true
     sixIsOneHexTruthCoefficient : Bool
     sixIsOneHexTruthCoefficientIsFalse :
       sixIsOneHexTruthCoefficient ≡ false
