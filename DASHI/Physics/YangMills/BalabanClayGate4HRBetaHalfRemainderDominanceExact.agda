@@ -1,13 +1,15 @@
 module DASHI.Physics.YangMills.BalabanClayGate4HRBetaHalfRemainderDominanceExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4DyadicRunningCouplingConventionExact as Dyadic
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryCouplingAdmissibilityInductionExact as Induction
+import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
+import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact as Running
 
 ------------------------------------------------------------------------
 -- H-Rbeta half-remainder dominance.
@@ -78,6 +80,13 @@ record OrderedAdditiveGroupMeaning
 
 open OrderedAdditiveGroupMeaning public
 
+leadingIncrement :
+  ∀ {Scale Scalar}
+    {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar} →
+  Scale → Scalar
+leadingIncrement {convention = convention} scale =
+  P3.betaLogBlocking (Running.recursion (Dyadic.running convention)) scale
+
 halfIncrementBelowNetIncrement :
   ∀ {Scale Scalar}
     {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar}
@@ -85,22 +94,13 @@ halfIncrementBelowNetIncrement :
     (algebra : OrderedAdditiveGroupMeaning control)
     scale →
   Dyadic.LessEqual control
-    (Dyadic.halfOf control
-      (DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact.betaLogBlocking
-        (DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact.recursion
-          (Dyadic.running convention)) scale))
+    (Dyadic.halfOf control (leadingIncrement scale))
     (Dyadic.add control
-      (DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact.betaLogBlocking
-        (DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact.recursion
-          (Dyadic.running convention)) scale)
+      (leadingIncrement scale)
       (Dyadic.inverseCouplingRemainder control scale))
-halfIncrementBelowNetIncrement {convention = convention}
-    {control = control} algebra scale =
+halfIncrementBelowNetIncrement {control = control} algebra scale =
   let
-    increment =
-      DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact.betaLogBlocking
-        (DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact.recursion
-          (Dyadic.running convention)) scale
+    increment = leadingIncrement scale
     halfIncrement = Dyadic.halfOf control increment
     remainder = Dyadic.inverseCouplingRemainder control scale
     negativeHalfBelowNegativeAbsolute =
@@ -117,7 +117,7 @@ halfIncrementBelowNetIncrement {convention = convention}
         (addInverseRight algebra halfIncrement)
         (addMonotoneLeft algebra halfIncrement
           negativeHalfBelowRemainder)
-    halfBelowHalfPlusHalfPlusRemainder =
+    halfBelowNestedSum =
       subst
         (λ lower → Dyadic.LessEqual control lower
           (Dyadic.add control halfIncrement
@@ -125,14 +125,18 @@ halfIncrementBelowNetIncrement {convention = convention}
         (addZeroRight algebra halfIncrement)
         (addMonotoneLeft algebra halfIncrement
           zeroBelowHalfPlusRemainder)
+    nestedSumEqualsNet =
+      trans
+        (sym (addAssociative algebra
+          halfIncrement halfIncrement remainder))
+        (cong
+          (λ doubledHalf → Dyadic.add control doubledHalf remainder)
+          (halfDecomposition algebra increment))
   in
   subst
     (λ upper → Dyadic.LessEqual control halfIncrement upper)
-    (trans
-      (sym (addAssociative algebra halfIncrement halfIncrement remainder))
-      (DASHI.Physics.YangMills.BalabanClayGate4CMP109LiteralIdentificationAssemblyExact.Not
-        (halfDecomposition algebra increment)))
-    halfBelowHalfPlusHalfPlusRemainder
+    nestedSumEqualsNet
+    halfBelowNestedSum
 
 record ScaleSuccessorMeaning
     {Scale Scalar : Set}
@@ -152,32 +156,23 @@ asHRBetaRemainderDominance :
     (algebra : OrderedAdditiveGroupMeaning control)
     (successor : ScaleSuccessorMeaning control) →
   Induction.HRBetaRemainderDominance Scale Scalar
-asHRBetaRemainderDominance {convention = convention}
-    {control = control} algebra successor = record
+asHRBetaRemainderDominance {control = control} algebra successor = record
   { Induction.HRBetaRemainderDominance.inverseCoupling =
       Dyadic.beta control
   ; Induction.HRBetaRemainderDominance.nextScale = next successor
   ; Induction.HRBetaRemainderDominance.leadingIncrement = λ scale →
-      DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact.betaLogBlocking
-        (DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact.recursion
-          (Dyadic.running convention)) (next successor scale)
+      leadingIncrement (next successor scale)
   ; Induction.HRBetaRemainderDominance.remainder = λ scale →
       Dyadic.inverseCouplingRemainder control (next successor scale)
   ; Induction.HRBetaRemainderDominance.netIncrement = λ scale →
       Dyadic.add control
-        (DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact.betaLogBlocking
-          (DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact.recursion
-            (Dyadic.running convention)) (next successor scale))
+        (leadingIncrement (next successor scale))
         (Dyadic.inverseCouplingRemainder control (next successor scale))
   ; Induction.HRBetaRemainderDominance.betaLower = λ scale →
-      Dyadic.halfOf control
-        (DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact.betaLogBlocking
-          (DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact.recursion
-            (Dyadic.running convention)) (next successor scale))
+      Dyadic.halfOf control (leadingIncrement (next successor scale))
   ; Induction.HRBetaRemainderDominance.add = Dyadic.add control
   ; Induction.HRBetaRemainderDominance.LessEqual = Dyadic.LessEqual control
-  ; Induction.HRBetaRemainderDominance.netIncrementMeaning = λ scale →
-      Agda.Builtin.Equality.refl
+  ; Induction.HRBetaRemainderDominance.netIncrementMeaning = λ scale → refl
   ; Induction.HRBetaRemainderDominance.oneStepMeaning = λ scale →
       subst
         (λ previousScale →
@@ -185,9 +180,7 @@ asHRBetaRemainderDominance {convention = convention}
           ≡ Dyadic.add control
               (Dyadic.beta control previousScale)
               (Dyadic.add control
-                (DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact.betaLogBlocking
-                  (DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact.recursion
-                    (Dyadic.running convention)) (next successor scale))
+                (leadingIncrement (next successor scale))
                 (Dyadic.inverseCouplingRemainder control
                   (next successor scale))))
         (previousNext successor scale)
@@ -254,9 +247,14 @@ asPrimaryCouplingAdmissibilityInduction {control = control}
             (transitive algebra
               (subst
                 (λ lower → Dyadic.LessEqual control
-                  (Dyadic.beta control (iterateScale meaning count)) lower)
-                (sym (addZeroRight algebra
-                  (Dyadic.beta control (iterateScale meaning count))))
+                  lower
+                  (Dyadic.add control
+                    (Dyadic.beta control (iterateScale meaning count))
+                    (Induction.betaLower
+                      (asHRBetaRemainderDominance algebra successor)
+                      (iterateScale meaning count))))
+                (addZeroRight algebra
+                  (Dyadic.beta control (iterateScale meaning count)))
                 (addMonotoneLeft algebra
                   (Dyadic.beta control (iterateScale meaning count))
                   (betaLowerNonnegative meaning
