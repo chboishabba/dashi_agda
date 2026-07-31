@@ -5,7 +5,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Dec; yes; no; _∈_; here; there; FiniteEnumeration; elements;
+  using (Empty; Dec; yes; no; _∈_; here; there; FiniteEnumeration; elements;
     complete; productFinite; periodicTorus4Finite; cyclicIndexFinite;
     PositiveBond; four)
 
@@ -21,6 +21,9 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 -- incidence lists from the complete periodic bond enumerations and proves both
 -- lists sound and complete.  Their lengths are therefore exact finite counts.
 ------------------------------------------------------------------------
+
+emptyElim : ∀ {A : Set} → Empty → A
+emptyElim ()
 
 record Iff (left right : Set) : Set where
   constructor iff
@@ -69,7 +72,7 @@ filterDecComplete {Predicate = Predicate} decide
 ...   | here = here
 ...   | there rest = there (filterDecComplete decide rest proof)
 ... | no candidateRefutation with membership
-...   | here = candidateRefutation proof
+...   | here = emptyElim (candidateRefutation proof)
 ...   | there rest = filterDecComplete decide rest proof
 
 listLength : ∀ {A : Set} → List A → Nat
