@@ -3,7 +3,7 @@ module DASHI.Foundations.UBP.Regression where
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Nat.Base using (_*_)
+import Data.Nat.Base as Nat
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _/_; 0ℚ)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
@@ -29,8 +29,9 @@ claimRowCountRegression =
 shadowCardinalityRegression :
   Representation.hexacodeShadowPreimageCount
   ≡
-  Representation.shadowPreimageToGolayCardinalityRatio
-    Data.Nat.Base.* Representation.golayCodewordCount
+  Nat._*_
+    Representation.shadowPreimageToGolayCardinalityRatio
+    Representation.golayCodewordCount
 shadowCardinalityRegression =
   Representation.shadowPreimageCountIsSixtyFourTimesGolayCount
 
