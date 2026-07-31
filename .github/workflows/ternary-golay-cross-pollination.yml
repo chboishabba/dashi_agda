@@ -15,6 +15,7 @@ on:
       - 'DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda'
       - 'Docs/support/reference/TernaryGolayCrossPollination.md'
       - 'scripts/check_ternary_golay_cross_pollination.py'
+      - 'scripts/check_explicit_ternary_golay.py'
       - '.github/workflows/ternary-golay-cross-pollination.yml'
   pull_request:
     paths:
@@ -28,6 +29,7 @@ on:
       - 'DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda'
       - 'Docs/support/reference/TernaryGolayCrossPollination.md'
       - 'scripts/check_ternary_golay_cross_pollination.py'
+      - 'scripts/check_explicit_ternary_golay.py'
       - '.github/workflows/ternary-golay-cross-pollination.yml'
   workflow_dispatch:
 
@@ -39,6 +41,9 @@ jobs:
 
       - name: Static fail-closed audit
         run: python3 scripts/check_ternary_golay_cross_pollination.py
+
+      - name: Independent finite oracle
+        run: python3 scripts/check_explicit_ternary_golay.py
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
