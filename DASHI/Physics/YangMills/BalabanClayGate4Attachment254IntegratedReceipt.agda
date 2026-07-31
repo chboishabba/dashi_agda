@@ -15,6 +15,8 @@ record Attachment254IntegratedReceipt : Set where
     weightedL2NormalizationChecked : Bool
     weightedSchurSlackAdapterChecked : Bool
     t3SelfAdjointFormNormChecked : Bool
+    fiveChannelAggregationChecked : Bool
+    t3FiveChannelInstantiationChecked : Bool
     validationWrapperChecked : Bool
     producerWrapperChecked : Bool
     integratedTranchePostulateFree : Bool
@@ -29,6 +31,8 @@ record AuthoritativeAttachment254IntegratedEvidence
     weightedL2NormalizationTypechecks : Set
     weightedSchurSlackAdapterTypechecks : Set
     t3SelfAdjointFormNormTypechecks : Set
+    fiveChannelAggregationTypechecks : Set
+    t3FiveChannelInstantiationTypechecks : Set
     validationWrapperTypechecks : Set
     producerWrapperTypechecks : Set
     integratedTrancheHasNoPostulatesOrUnsolvedMetas : Set
@@ -49,6 +53,12 @@ attachment254WeightedSchurSlackAdapterTypecheckLevel = conditional
 
 attachment254T3SelfAdjointFormNormTypecheckLevel : ProofLevel
 attachment254T3SelfAdjointFormNormTypecheckLevel = conditional
+
+attachment254FiveChannelAggregationTypecheckLevel : ProofLevel
+attachment254FiveChannelAggregationTypecheckLevel = conditional
+
+attachment254T3FiveChannelInstantiationTypecheckLevel : ProofLevel
+attachment254T3FiveChannelInstantiationTypecheckLevel = conditional
 
 attachment254ValidationWrapperTypecheckLevel : ProofLevel
 attachment254ValidationWrapperTypecheckLevel = conditional
