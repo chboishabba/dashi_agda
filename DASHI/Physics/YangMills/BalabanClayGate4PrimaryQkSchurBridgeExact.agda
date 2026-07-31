@@ -74,7 +74,8 @@ asFiniteKernelSchurData :
   ∀ {Input Output Scalar : Set} →
   StrongPrimaryQkSchurData Input Output Scalar →
   Schur.FiniteKernelSchurData Input Output Scalar
-asFiniteKernelSchurData {Input = Input} {Output = Output} dataSet = record
+asFiniteKernelSchurData
+  {Input = Input} {Output = Output} {Scalar = Scalar} dataSet = record
   { Kernel = Output → Input → Scalar
   ; selectedKernel =
       Primary.kernelAbsoluteValue
