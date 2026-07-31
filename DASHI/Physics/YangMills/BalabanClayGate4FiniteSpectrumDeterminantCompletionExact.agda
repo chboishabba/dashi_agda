@@ -6,6 +6,7 @@ open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCanonicalFreeBasisExact as FreeBasis
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoordinateMatrixEquivalenceExact as Coordinate
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteHermitianRayleighSpectrumExact as Spectrum
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoercivityInverseNormExact as Inverse
@@ -34,7 +35,7 @@ record FiniteSpectrumDeterminantCompletion
     coordinates : Coordinate.ExactRestrictedCoordinateRepresentation Scalar n
 
     rayleigh : Spectrum.FiniteHermitianRayleighData
-      SpectralIndex (Coordinate.Vec Scalar n) Scalar
+      SpectralIndex (FreeBasis.Vec Scalar n) Scalar
     selectedIndex : SpectralIndex
 
     determinantAlgebra : Determinant.DeterminantMatrixAlgebra
