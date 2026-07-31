@@ -4,3 +4,4 @@ import DASHI.Physics.YangMills.BalabanClayConstructiveProducerAdvance
 import DASHI.Physics.YangMills.BalabanClayGate4Attachment254CompletionLedger
 import DASHI.Physics.YangMills.BalabanClayGate4Attachment254CompletionReceipt
 import DASHI.Physics.YangMills.BalabanClayGate4Attachment254IntegratedLedger
+import DASHI.Physics.YangMills.BalabanClayGate4Attachment254IntegratedReceipt
