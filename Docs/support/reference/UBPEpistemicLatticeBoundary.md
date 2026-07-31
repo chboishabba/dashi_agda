@@ -54,6 +54,42 @@ For the stated integer Leech normalisation, it separates a single-bit address \(
 
 Closure under addition is available only after membership of both summands is supplied.
 
+### `DASHI/Foundations/UBP/ObservableAlgebraBoundary.agda`
+
+Retains the exact algebra which genuinely follows from the declared UBP observables.
+
+For
+
+\[
+T_Y(s,n)=sY+\frac{n}{8},
+\]
+
+it proves the generic activation and de-excitation differences
+
+\[
+T_Y(s+1,n+k^2)-T_Y(s,n)=Y+\frac{k^2}{8},
+\]
+
+\[
+T_Y(s-1,n-k^2)-T_Y(s,n)=-\left(Y+\frac{k^2}{8}\right).
+\]
+
+It instantiates the unit, Class A, Class B and Class C coordinate-square cases and proves the UBP long-cycle cancellation independently of the value of \(Y\):
+
+\[
+2\left(Y+\frac18\right)-2\left(Y+\frac48\right)=-\frac34.
+\]
+
+It also proves
+
+\[
+\operatorname{NRCI}(10)=\frac{10}{10+10}=\frac12.
+\]
+
+The associated status explicitly records that this is a normalization identity. It does not establish an independently emergent physical phase threshold.
+
+Finally, `endpointTaxExtensional` proves that states with equal support and squared norm have equal endpoint TAX. Path-sensitive discrimination is therefore a separate observer property rather than a hidden dependency of the endpoint functional.
+
 ### `DASHI/Foundations/UBP/RepresentationAndObserverBoundary.agda`
 
 Formalises four distinctions.
@@ -108,7 +144,8 @@ Aggregates the tranche and checks that:
 - seven attributed source entries are present;
 - eight evidence rows are present;
 - the `[24,18]` shadow-preimage cardinality is 64 times the `[24,12]` Golay cardinality;
-- exact-Fraction-as-exact-irrational, ambient-address membership, MOG-equivalence, intrinsic mass meaning, automatic semantic transport, genuine Leech-to-3D projection and external replication all remain closed;
+- activation, long-cycle and NRCI normalization identities are exported through the aggregate;
+- exact-Fraction-as-exact-irrational, ambient-address membership, independently emergent NRCI threshold, MOG-equivalence, intrinsic mass meaning, automatic semantic transport, genuine Leech-to-3D projection and external replication all remain closed;
 - every focused receipt remains non-promoting.
 
 ## Source atlas
@@ -125,16 +162,20 @@ Aggregates the tranche and checks that:
 
 ## What is proved here
 
-The tranche proves generic logical boundaries and exact finite identities:
+The tranche proves generic logical boundaries and exact identities:
 
 - rational images cannot equal a supplied irrational target;
 - a supplied norm-16 exclusion prevents `4e_i` membership;
 - lattice closure requires membership premises;
+- activation and de-excitation differences follow exactly from the TAX definition;
+- the long-cycle cancellation is exactly `-3/4` and independent of `Y`;
+- `NRCI(10)=1/2` is a normalization identity;
+- endpoint TAX is extensional in support and squared norm;
 - `262144 = 64 * 4096`;
 - endpoint state cost and path-sensitive observation can differ in discriminating power;
 - all canonical UBP evidence and interpretation rows remain non-promoting.
 
-These are real theorem advances over the supplied critique because the distinctions are now typed and compositional rather than prose-only.
+These are real theorem advances over the supplied critique because the distinctions and surviving algebra are now typed and compositional rather than prose-only.
 
 ## Remaining frontier
 
