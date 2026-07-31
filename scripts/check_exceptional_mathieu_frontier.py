@@ -28,6 +28,7 @@ REQUIRED_FILES = (
     "DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda",
     "Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md",
     "scripts/check_explicit_ternary_golay.py",
+    "scripts/check_finite_subspace_self_duality.py",
 )
 
 REQUIRED_TEXT = {
@@ -120,6 +121,12 @@ REQUIRED_TEXT = {
         "assert len(monomial_elements) == 190080",
         "assert len(covered_words) == 3**11",
         "assert 720 != 660",
+    ),
+    "scripts/check_finite_subspace_self_duality.py": (
+        "for word in product(range(3), repeat=12)",
+        "assert dual == code",
+        "assert sum_zero == anti_diagonal",
+        "observer_factor_difference",
     ),
 }
 
