@@ -17,6 +17,8 @@ record Attachment254IntegratedReceipt : Set where
     t3SelfAdjointFormNormChecked : Bool
     fiveChannelAggregationChecked : Bool
     t3FiveChannelInstantiationChecked : Bool
+    finiteTangentMatrixChecked : Bool
+    finiteMatrixSpectrumDeterminantChecked : Bool
     validationWrapperChecked : Bool
     producerWrapperChecked : Bool
     integratedTranchePostulateFree : Bool
@@ -33,6 +35,8 @@ record AuthoritativeAttachment254IntegratedEvidence
     t3SelfAdjointFormNormTypechecks : Set
     fiveChannelAggregationTypechecks : Set
     t3FiveChannelInstantiationTypechecks : Set
+    finiteTangentMatrixTypechecks : Set
+    finiteMatrixSpectrumDeterminantTypechecks : Set
     validationWrapperTypechecks : Set
     producerWrapperTypechecks : Set
     integratedTrancheHasNoPostulatesOrUnsolvedMetas : Set
@@ -59,6 +63,12 @@ attachment254FiveChannelAggregationTypecheckLevel = conditional
 
 attachment254T3FiveChannelInstantiationTypecheckLevel : ProofLevel
 attachment254T3FiveChannelInstantiationTypecheckLevel = conditional
+
+attachment254FiniteTangentMatrixTypecheckLevel : ProofLevel
+attachment254FiniteTangentMatrixTypecheckLevel = conditional
+
+attachment254FiniteMatrixSpectrumDeterminantTypecheckLevel : ProofLevel
+attachment254FiniteMatrixSpectrumDeterminantTypecheckLevel = conditional
 
 attachment254ValidationWrapperTypecheckLevel : ProofLevel
 attachment254ValidationWrapperTypecheckLevel = conditional
