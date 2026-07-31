@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkPrimaryKernelInstantiationExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -25,9 +25,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkUniformSupportBoundsExa
 listLengthAgreement :
   ∀ {A : Set} (values : List A) →
   Primary.listLength values ≡ Support.listLength values
-listLengthAgreement [] = Agda.Builtin.Equality.refl
+listLengthAgreement [] = refl
 listLengthAgreement (_ ∷ values)
-  rewrite listLengthAgreement values = Agda.Builtin.Equality.refl
+  rewrite listLengthAgreement values = refl
 
 record PeriodicPrimaryQkKernelInputs
     (CoarseBond FineBond Scalar : Set) : Set₁ where
@@ -57,11 +57,10 @@ record PeriodicPrimaryQkKernelInputs
 open PeriodicPrimaryQkKernelInputs public
 
 periodicPrimaryRowData :
-  ∀ {CoarseBond FineBond Scalar : Set} →
-  PeriodicPrimaryQkKernelInputs CoarseBond FineBond Scalar →
+  ∀ {CoarseBond FineBond Scalar : Set}
+    (dataSet : PeriodicPrimaryQkKernelInputs CoarseBond FineBond Scalar) →
   Primary.BalabanPrimaryQkRowData
-    CoarseBond FineBond Scalar
-    (PeriodicPrimaryQkKernelInputs.algebra _)
+    CoarseBond FineBond Scalar (algebra dataSet)
 periodicPrimaryRowData dataSet = record
   { kernelAbsoluteValue = kernelAbsoluteValue dataSet
   ; localSupport = Support.rowSupport (supportData dataSet)
