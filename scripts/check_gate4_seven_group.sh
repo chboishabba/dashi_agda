@@ -43,6 +43,16 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4FiniteProofEngineeringValidation.agda
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerFiniteProofEngineeringAdvance.agda
 
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicProjectionNormalizationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicSupportBudgetsExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicCellWeightExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4TwoFamilyChannelMajorantExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4HRBetaLocalToUniformExact.agda
+  DASHI/Physics/YangMills/BalabanClayOSWilsonReflectionPositivityExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound1Ledger.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound1Validation.agda
+  DASHI/Physics/YangMills/BalabanClayConstructiveProducerPhysicalClosureRound1Advance.agda
+
   DASHI/Physics/YangMills/BalabanClayGate4SevenGroupFrontierLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4SevenGroupFrontierReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4SevenGroupValidation.agda
