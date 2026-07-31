@@ -15,7 +15,7 @@ import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
 -- lattice, requiring an explicit automorphism and equivalence receipt.
 -- Route B: an Eisenstein Construction-Bc style route from a length-six
 -- ternary repetition code, requiring the actual Eisenstein and construction
--- laws.  Neither route is conflated with the corrected Z/9 Golay lift.
+-- laws. Neither route is conflated with the corrected Z/9 Golay lift.
 ------------------------------------------------------------------------
 
 record CoxeterToddInvariantReceipt : Set where
@@ -55,38 +55,45 @@ canonicalCoxeterToddInvariants =
 record OrderThreeFixedSublatticeRoute
     (Leech Automorphism K12 : Set) : Set₁ where
   field
-    sigma : Automorphism
-    automorphismActs : Automorphism → Leech → Leech
-    identityAutomorphism : Automorphism
-    composeAutomorphism : Automorphism → Automorphism → Automorphism
-    sigmaCubedIsIdentity :
-      composeAutomorphism sigma (composeAutomorphism sigma sigma)
-      ≡ identityAutomorphism
+    fixedSigma : Automorphism
+    fixedAutomorphismActs : Automorphism → Leech → Leech
+    fixedIdentityAutomorphism : Automorphism
+    fixedComposeAutomorphism : Automorphism → Automorphism → Automorphism
+    fixedSigmaCubedIsIdentity :
+      fixedComposeAutomorphism
+        fixedSigma
+        (fixedComposeAutomorphism fixedSigma fixedSigma)
+      ≡ fixedIdentityAutomorphism
     Fixed : Leech → Set
     fixedDefinition :
       (x : Leech) →
       Fixed x →
-      automorphismActs sigma x ≡ x
+      fixedAutomorphismActs fixedSigma x ≡ x
     fixedCarrier : Set
     fixedCarrierRepresentsFixedPoints : Set
-    equivalenceToK12 : Set
-    equivalenceReceipt : equivalenceToK12
-    sourceAuthor : String
-    sourceTitle : String
-    sourceDOI : String
+    fixedEquivalenceToK12 : Set
+    fixedEquivalenceReceipt : fixedEquivalenceToK12
+    fixedSourceAuthor : String
+    fixedSourceTitle : String
+    fixedSourceDOI : String
 
 open OrderThreeFixedSublatticeRoute public
 
 record EisensteinRepetitionConstructionRoute
     (Eisenstein CoefficientVector RepetitionCode Lattice K12 : Set) : Set₁ where
   field
-    zeroE : Eisenstein
-    oneE : Eisenstein
-    omega : Eisenstein
-    addE : Eisenstein → Eisenstein → Eisenstein
-    mulE : Eisenstein → Eisenstein → Eisenstein
-    omegaQuadraticLaw :
-      addE (addE (mulE omega omega) omega) oneE ≡ zeroE
+    eisensteinZero : Eisenstein
+    eisensteinOne : Eisenstein
+    eisensteinOmega : Eisenstein
+    eisensteinAdd : Eisenstein → Eisenstein → Eisenstein
+    eisensteinMul : Eisenstein → Eisenstein → Eisenstein
+    eisensteinOmegaQuadraticLaw :
+      eisensteinAdd
+        (eisensteinAdd
+          (eisensteinMul eisensteinOmega eisensteinOmega)
+          eisensteinOmega)
+        eisensteinOne
+      ≡ eisensteinZero
     lengthSixCoefficientVector : CoefficientVector
     ternaryRepetitionCode : RepetitionCode
     repetitionCodeLengthIsSix : Set
@@ -94,11 +101,11 @@ record EisensteinRepetitionConstructionRoute
     constructionLattice : Lattice
     constructionLatticeIsBcImage :
       constructionLattice ≡ constructionBc ternaryRepetitionCode
-    equivalenceToK12 : Set
-    equivalenceReceipt : equivalenceToK12
-    sourceAuthor : String
-    sourceTitle : String
-    sourceDOI : String
+    eisensteinEquivalenceToK12 : Set
+    eisensteinEquivalenceReceipt : eisensteinEquivalenceToK12
+    eisensteinSourceAuthor : String
+    eisensteinSourceTitle : String
+    eisensteinSourceDOI : String
 
 open EisensteinRepetitionConstructionRoute public
 
