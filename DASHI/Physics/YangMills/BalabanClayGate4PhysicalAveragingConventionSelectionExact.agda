@@ -1,0 +1,125 @@
+module DASHI.Physics.YangMills.BalabanClayGate4PhysicalAveragingConventionSelectionExact where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryAveragingDimensionAuditExact as Primary
+
+------------------------------------------------------------------------
+-- Gate-4 physical convention selection.
+--
+-- Tadeusz Bałaban,
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
+-- Generation of Effective Actions in a Small Field Approximation and a
+-- Coupling Constant Renormalization in Four Dimensions",
+-- Communications in Mathematical Physics 109 (1987), 249--301.
+-- DOI: 10.1007/BF01215223.
+--
+-- Gate 4 is the four-dimensional small-field RG programme, so its physical
+-- target convention is fixed to the CMP 109 Euclidean-symmetric average.  This
+-- is a specification choice, not a proof that an existing repository map
+-- already implements the CMP 109 equations.  Literal map, derivative, support
+-- and normalization matching remain proof-bearing fields below.
+--
+-- The CMP 98 average remains primary authority for its own locality and kernel
+-- estimates.  Reusing such an estimate for the CMP 109 target requires an
+-- explicit convention bridge; chronology or dimensional analogy is not enough.
+------------------------------------------------------------------------
+
+gate4PhysicalAveragingConvention : Primary.AveragingOperatorConvention
+gate4PhysicalAveragingConvention =
+  Primary.cmp109EuclideanSymmetricAverage
+
+gate4PhysicalAveragingConventionIsCMP109 :
+  gate4PhysicalAveragingConvention
+  ≡ Primary.cmp109EuclideanSymmetricAverage
+gate4PhysicalAveragingConventionIsCMP109 = refl
+
+record Gate4CMP109PhysicalMeaning
+    (LiteralMap Derivative Support Normalization : Set) : Set₁ where
+  field
+    LiteralMapMatchesCMP109 : LiteralMap → Set
+    DerivativeMatchesCMP109 : Derivative → Set
+    SupportMatchesCMP109 : Support → Set
+    NormalizationMatchesCMP109 : Normalization → Set
+
+    physicalLiteralMap : LiteralMap
+    physicalDerivative : Derivative
+    physicalSupport : Support
+    physicalNormalization : Normalization
+
+    literalMapMatchesCMP109 :
+      LiteralMapMatchesCMP109 physicalLiteralMap
+    derivativeMatchesCMP109 :
+      DerivativeMatchesCMP109 physicalDerivative
+    supportMatchesCMP109 :
+      SupportMatchesCMP109 physicalSupport
+    normalizationMatchesCMP109 :
+      NormalizationMatchesCMP109 physicalNormalization
+
+open Gate4CMP109PhysicalMeaning public
+
+asPrimaryPhysicalAveragingConventionMeaning :
+  ∀ {LiteralMap Derivative Support Normalization}
+    (meaning : Gate4CMP109PhysicalMeaning
+      LiteralMap Derivative Support Normalization) →
+  Primary.PhysicalAveragingConventionMeaning
+    LiteralMap Derivative Support Normalization
+asPrimaryPhysicalAveragingConventionMeaning meaning = record
+  { selectedConvention = gate4PhysicalAveragingConvention
+  ; LiteralMapMatches = λ convention literalMap →
+      Primary.AveragingOperatorConvention
+      × LiteralMapMatchesCMP109 meaning literalMap
+  ; DerivativeMatches = λ convention derivative →
+      Primary.AveragingOperatorConvention
+      × DerivativeMatchesCMP109 meaning derivative
+  ; SupportMatches = λ convention support →
+      Primary.AveragingOperatorConvention
+      × SupportMatchesCMP109 meaning support
+  ; NormalizationMatches = λ convention normalization →
+      Primary.AveragingOperatorConvention
+      × NormalizationMatchesCMP109 meaning normalization
+  ; physicalLiteralMap = physicalLiteralMap meaning
+  ; physicalDerivative = physicalDerivative meaning
+  ; physicalSupport = physicalSupport meaning
+  ; physicalNormalization = physicalNormalization meaning
+  ; literalMapMatchesSelected =
+      gate4PhysicalAveragingConvention , literalMapMatchesCMP109 meaning
+  ; derivativeMatchesSelected =
+      gate4PhysicalAveragingConvention , derivativeMatchesCMP109 meaning
+  ; supportMatchesSelected =
+      gate4PhysicalAveragingConvention , supportMatchesCMP109 meaning
+  ; normalizationMatchesSelected =
+      gate4PhysicalAveragingConvention , normalizationMatchesCMP109 meaning
+  }
+
+record CMP98ToCMP109KernelBridge
+    (Kernel : Set) : Set₁ where
+  field
+    cmp98Kernel cmp109Kernel : Kernel
+    CMP98KernelEstimateTransfers : Kernel → Kernel → Set
+    cmp98EstimateTransfersToCMP109 :
+      CMP98KernelEstimateTransfers cmp98Kernel cmp109Kernel
+
+open CMP98ToCMP109KernelBridge public
+
+gate4CMP109ConventionSelectionLevel : ProofLevel
+gate4CMP109ConventionSelectionLevel = computed
+
+gate4CMP109PhysicalMeaningAssemblyLevel : ProofLevel
+gate4CMP109PhysicalMeaningAssemblyLevel = machineChecked
+
+physicalCMP109LiteralMapInputsLevel : ProofLevel
+physicalCMP109LiteralMapInputsLevel = conditional
+
+physicalCMP109DerivativeInputsLevel : ProofLevel
+physicalCMP109DerivativeInputsLevel = conditional
+
+physicalCMP109SupportInputsLevel : ProofLevel
+physicalCMP109SupportInputsLevel = conditional
+
+physicalCMP109NormalizationInputsLevel : ProofLevel
+physicalCMP109NormalizationInputsLevel = conditional
+
+cmp98KernelEstimateTransferToCMP109InputsLevel : ProofLevel
+cmp98KernelEstimateTransferToCMP109InputsLevel = conditional
