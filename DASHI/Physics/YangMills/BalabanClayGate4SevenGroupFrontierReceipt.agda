@@ -23,6 +23,23 @@ record SevenGroupFrontierReceipt : Set where
     treeGaugeBasisChecked : Bool
     t3SpectralDeterminantChecked : Bool
     hrBetaDominanceChecked : Bool
+
+    printedCMP109PathFormulaChecked : Bool
+    periodicPathWordChecked : Bool
+    printedCMP109MapInstantiationChecked : Bool
+    finiteHolonomyDerivativeChecked : Bool
+    su2DexpInverseClosedFormChecked : Bool
+    supportOverlapCompletionChecked : Bool
+    weightedAdjointFubiniChecked : Bool
+    weightedAdjointFormulaChecked : Bool
+    totalSchurCertificateDecisionChecked : Bool
+    spanningTreeGaugeSliceChecked : Bool
+    canonicalOffTreeFreeBasisChecked : Bool
+    coordinateMatrixEquivalenceChecked : Bool
+    determinantFactorizationChecked : Bool
+    spectrumDeterminantCompletionChecked : Bool
+    finiteProofEngineeringLedgerChecked : Bool
+
     validationWrapperChecked : Bool
     producerWrapperChecked : Bool
     sevenGroupTranchePostulateFree : Bool
@@ -45,6 +62,23 @@ record AuthoritativeSevenGroupEvidence
     treeGaugeBasisTypechecks : Set
     t3SpectralDeterminantTypechecks : Set
     hrBetaDominanceTypechecks : Set
+
+    printedCMP109PathFormulaTypechecks : Set
+    periodicPathWordTypechecks : Set
+    printedCMP109MapInstantiationTypechecks : Set
+    finiteHolonomyDerivativeTypechecks : Set
+    su2DexpInverseClosedFormTypechecks : Set
+    supportOverlapCompletionTypechecks : Set
+    weightedAdjointFubiniTypechecks : Set
+    weightedAdjointFormulaTypechecks : Set
+    totalSchurCertificateDecisionTypechecks : Set
+    spanningTreeGaugeSliceTypechecks : Set
+    canonicalOffTreeFreeBasisTypechecks : Set
+    coordinateMatrixEquivalenceTypechecks : Set
+    determinantFactorizationTypechecks : Set
+    spectrumDeterminantCompletionTypechecks : Set
+    finiteProofEngineeringLedgerTypechecks : Set
+
     validationWrapperTypechecks : Set
     producerWrapperTypechecks : Set
     trancheHasNoPostulatesOrUnsolvedMetas : Set
@@ -77,6 +111,9 @@ sevenGroupSpectralDeterminantTypecheckLevel = conditional
 
 sevenGroupHRBetaTypecheckLevel : ProofLevel
 sevenGroupHRBetaTypecheckLevel = conditional
+
+finiteProofEngineeringTypecheckLevel : ProofLevel
+finiteProofEngineeringTypecheckLevel = conditional
 
 sevenGroupValidationWrapperTypecheckLevel : ProofLevel
 sevenGroupValidationWrapperTypecheckLevel = conditional
