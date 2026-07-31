@@ -12,6 +12,7 @@ EXTRA_FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4WeightedSchurSummableSlackReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4T3SelfAdjointFormNormReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedLedger.agda
+  DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254Validation.agda
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerAttachment254Advance.agda
 )
@@ -61,5 +62,6 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254CompletionLedger.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254CompletionReceipt.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedLedger.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedReceipt.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254Validation.agda \
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerAttachment254Advance.agda
