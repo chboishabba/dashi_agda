@@ -4,6 +4,8 @@ This tranche deliberately separates two dependency lanes:
 
 ```text
 explicit ternary code
+  -> reusable finite F3 subspaces
+  -> concrete self-duality
   -> complete symbol enumerator
   -> S(5,6,12)
   -> transported M12 design action
@@ -11,15 +13,65 @@ explicit ternary code
 
 pi continued fractions
   -> provenance-indexed rational constants
-  -> narrow pi/Y interval interface
+  -> rational antitone certificates
+  -> exact-real embedding boundary
   -> versioned TAX/NRCI claims
 ```
 
 The finite exceptional lane does not depend on Bishop reals.
 
+## Reusable finite-linear layer
+
+`DASHI/Foundations/FiniteLinear/F3Subspace.agda` introduces the smallest first-class API required by demonstrated consumers:
+
+- finite `F3Space` carriers;
+- `F3Subspace` predicates with zero/additive/scalar closure;
+- inclusion and extensional subspace equality;
+- `F3LinearMap`;
+- kernel and image subspaces;
+- reusable finite dot/add/scale algebra.
+
+It deliberately does not attempt a universal field/rank hierarchy before the current theorem graph needs one.
+
+A second non-code consumer, `AntiDiagonalKernel.agda`, proves that the sum-zero line in `F3²` is exactly the image of the anti-diagonal embedding
+
+```text
+t |-> (t,-t).
+```
+
+This exercises the same kernel/image/inclusion API used by the Golay construction and connects to diagonal/off-diagonal channel decompositions without importing coding-specific assumptions.
+
+## Concrete ternary Golay self-duality
+
+The explicit code now supplies more than a readiness boundary.
+
+`GolaySelfDualSubspace.agda` represents:
+
+```text
+C    = image of the systematic encoder
+Cperp = all words orthogonal to every codeword
+```
+
+as first-class `F3Subspace` predicates. It proves:
+
+1. the six-row linear-combination encoder equals the existing systematic encoder;
+2. every encoded word is orthogonal to all generator rows;
+3. every codeword lies in `Cperp`;
+4. every word in `Cperp` has a systematic dual normal form determined by its final six coordinates;
+5. that normal form is again an encoded codeword;
+6. therefore `C = Cperp` by mutual inclusion.
+
+The two finite presentation identities are checked over the complete 729-message carrier. Uniqueness of the ternary Golay equivalence class is not used to infer self-duality.
+
+The source calibration remains:
+
+- F. Jessie MacWilliams and N. J. A. Sloane, *The Theory of Error-Correcting Codes*, no DOI recorded for the cited book;
+- F. Jessie MacWilliams, Colin L. Mallows and N. J. A. Sloane, *Generalizations of Gleason's theorem on weight enumerators of self-dual codes*, DOI `10.1109/TIT.1972.1054898`;
+- Vera Pless, *More on the uniqueness of the Golay codes*, DOI `10.1016/0012-365X(92)90569-2`.
+
 ## Explicit finite results
 
-The existing systematic `[12,6,6]_3` construction is extended with the full three-symbol composition enumerator:
+The systematic `[12,6,6]_3` construction has the full three-symbol composition enumerator:
 
 ```text
 (n0,n1,n2)  coefficient
@@ -34,7 +86,7 @@ The existing systematic `[12,6,6]_3` construction is extended with the full thre
 (0,0,12)      1
 ```
 
-Puncturing any coordinate gives the same independently checked distribution:
+Puncturing any coordinate gives the independently checked distribution:
 
 ```text
 weight 0   1
@@ -51,26 +103,10 @@ The radius-two sphere volume is
 
 ```text
 1 + 11*2 + C(11,2)*2^2 = 243,
-```
-
-and
-
-```text
 729 * 243 = 3^11 = 177147.
 ```
 
-The independent standard-library Python oracle constructs every error sphere and verifies that their union has exactly `3^11` elements.
-
-## Self-duality boundary
-
-The explicit code already supplies:
-
-- a systematic left inverse and injective encoder;
-- a zero Gram matrix;
-- every enumerated codeword orthogonal to all six generator rows;
-- half-dimension arithmetic `6+6=12`.
-
-`SelfDualityFiniteBoundary.agda` exposes the reusable theorem that a half-dimensional self-orthogonal finite subspace is self-dual. The remaining local seam is representation, not mathematics: the ad hoc `Vec12` API does not yet expose first-class `rowSpan`, `dual` and `dimension` objects against which the generic theorem can be instantiated. This remains fail-closed rather than using uniqueness to prove self-duality.
+The dependency-free oracle constructs every error sphere and verifies that their union has exactly `3^11` elements.
 
 ## Transported Mathieu action
 
@@ -78,62 +114,119 @@ The compact two-generator presentation is attributed to:
 
 - John Leech, *A Presentation of the Mathieu Group M12*, DOI `10.4153/CMB-1969-005-8`.
 
-Its published coordinate labelling is not assumed to equal the local code labelling. The checked transport is:
+Its published coordinate labelling is transported by
 
 ```text
 q = (0,9,3,1,5,7,2,10,8,11,6,4).
 ```
 
-After conjugation, the local support permutations are:
+The local support permutations are:
 
 ```text
 S = (1 5 7 2 10 8 11 6 4 9 3)
 T = (0 9)(1 5)(2 10)(3 4)(6 7)(8 11).
 ```
 
-The Agda finite surface checks that both preserve all 132 locally computed hexads and that thirteen closure rounds from one transported seed recover all 132 blocks. The dependency-free oracle additionally enumerates the generated permutation group and obtains order `95040`.
+The Agda finite surface checks preservation of all 132 locally computed hexads and recovery of the full design orbit. The oracle obtains permutation-group order `95040`.
 
-## Why signs are necessary
-
-The support permutations do not preserve the oriented ternary codeword set on their own. Explicit sign vectors give monomial lifts:
+The support permutations need sign lifts to preserve oriented ternary codewords:
 
 ```text
 dS = (1,1,2,2,1,1,2,2,2,1,1,2)
 dT = (1,2,2,1,2,1,1,2,1,2,1,2).
 ```
 
-The Agda module checks both lifts against all 729 codewords. The lifted `T` has order four:
-
-```text
-T_lift^2 = -I,
-```
-
-and central negation has order two.
-
-The oracle enumerates the signed group with order `190080` and checks that the induced six-dimensional `F3` module is irreducible: every one of the 728 nonzero vectors generates the full six-dimensional module under the two induced matrices.
+The lifted `T` satisfies `T_lift^2 = -I`; the oracle obtains signed-group order `190080` and checks computational irreducibility of the induced six-dimensional `F3` module.
 
 The external identification with `M12` and `2.M12` is calibrated by:
 
 - John H. Conway, Noam D. Elkies and Jeremy L. Martin, *The Mathieu Group M12 and Its Pseudogroup Extension M13*, DOI `10.1080/10586458.2006.10128958`.
 
-Group isomorphism is not silently replaced by an order calculation.
+Group isomorphism is not replaced by an order calculation.
 
 ## Stabilizer correction
 
-The order-660 ambiguity is resolved as follows:
-
 ```text
 |M12|                    = 95040
-point stabilizer         = 95040/12      = 7920
-ordered two-point stab.  = 95040/(12*11) = 720
-L2(11) maximal in M11    = 7920/12       = 660
+point stabilizer         = 95040/12       = 7920
+ordered two-point stab.  = 95040/(12*11)  = 720
+L2(11) maximal in M11    = 7920/12        = 660
 ```
 
-Therefore `660` is not the ordered two-point stabilizer and is not produced by puncturing twice. It is the order of a distinct index-12 maximal subgroup of `M11`, as calibrated by the ATLAS of Finite Group Representations.
+Thus `660` is not the ordered two-point stabilizer and is not produced merely by puncturing twice.
+
+## Rational certificate first
+
+`RationalCertificateTransport.agda` exposes the backend-independent principle:
+
+```text
+prove the ordered finite inequality in Q
+then transport the certificate through an exact-real embedding.
+```
+
+It contains:
+
+- generic antitone interval transport;
+- rational interval and point-containment records;
+- the observer map `f(x)=x/(x^2+2)`;
+- the exact factorisation
+
+```text
+x*(y*y+2) - y*(x*x+2) = (y-x)*(x*y-2);
+```
+
+- a positive cross-multiplication interface;
+- canonical continued-fraction rational endpoints around the canonical 50-coefficient convergent;
+- candidate `Y` endpoints obtained by reversing the source interval through the antitone observer map;
+- an exact-real embedding/containment interface.
+
+The constructive `pi` containment theorem remains a genuine open instantiation. Neither the source nor canonical finite rational is promoted to exact `pi` or exact `Y`.
+
+## Completed Bishop absolute-product seam
+
+The previous migration decision tree has resolved to its narrow branch.
+
+Bishop commit
+
+```text
+d732b0340d729b264227a70fcf38383d8fb3ac3c
+```
+
+contains:
+
+```text
+K-abs
+K-abs-index
+seq-abs-mul-index
+```
+
+and advances the original real absolute-product theorem by aligning the multiplication sampling indices through the actual unnormalised rational representation.
+
+The Dashi master pin is
+
+```text
+7b31431846ede85473454bf4cc57f5fa5d050a95.
+```
+
+Reported validation is:
+
+- `RealProperties.agda`: passed;
+- `Inverse.agda`: passed;
+- `Sequence.agda`: passed;
+- `git diff --check`: passed.
+
+`BishopAbsMigrationReceipt.agda` records this as a successful compatibility result. Common-index transport is not required for this theorem; it remains a future fallback only for operations that genuinely select different modulus indices.
+
+The source attribution is:
+
+- Zachary Murray, *Constructive Analysis in the Agda Proof Assistant*, DOI `10.48550/arXiv.2205.08354`;
+- Viktor Csimma and contributors, `bishop: Constructive Analysis in Agda`, repository source with no DOI.
+
+This does not assert that Bishop regular sequences are the universally optimal executable exact-real backend.
 
 ## Observer-constant identity fork
 
-Three identities are now distinct:
+The following remain distinct:
 
 ```text
 craig-v5-4-1-source
@@ -141,32 +234,7 @@ canonical-pi-cf-50
 exact-pi-target
 ```
 
-The exact rational sensitivity is recorded:
-
-```text
-Y_Craig - Y_CF =
-2734787287797861895878337337413165344545354810381555572709194
-/
-1449569606998549182495542391376708973611508633517180526971395851214621946728005627560091575061157712043175668851961.
-```
-
 Historical UBP calculations remain reproducible, corrected canonical calculations are possible, and neither finite rational is promoted to the exact irrational target.
-
-## Exact-real backend roles
-
-The architecture distinguishes:
-
-1. Bishop regular sequences for preserving and migrating the existing theorem corpus;
-2. narrow rational enclosures for the specific pi/Y certificate;
-3. a Cubical HoTT-real prototype for a future hard analytic archetype.
-
-Sources are attached as:
-
-- Zachary Murray, *Constructive Analysis in the Agda Proof Assistant*, DOI `10.48550/arXiv.2205.08354`;
-- Jackson Brough, *Formalizing the Real Numbers in Homotopy Type Theory with Cubical Agda*, DOI `10.48550/arXiv.2604.24782`;
-- `viktorcsimma/bishop`, repository source with no DOI.
-
-The Bishop migration first tests whether constructor-level absolute-value idempotence gives the representation equality needed for `K-abs`. Rational equivalence alone is not treated as sufficient because `K` observes a concrete representation. If the computation lemma fails, the formal fallback is a common-index regularity proof.
 
 ## TAX dynamics
 
@@ -180,7 +248,7 @@ Before any complete-Lyapunov promotion, a concrete certified Leech move system m
 
 The conceptual source is Peter Giesl, Zachary Langhorne, Carlos Argáez and Sigurdur Hafstein, *Computing complete Lyapunov functions for discrete-time dynamical systems*, DOI `10.3934/dcdsb.2020331`.
 
-For the first finite Leech model this is an exact graph problem; numerical meshfree or RKHS methods are not prerequisites.
+Endpoint TAX differences remain exact gradients; any genuinely nontrivial path circulation requires a separate edge observable.
 
 ## Validation authority
 
@@ -190,4 +258,4 @@ Three authority levels remain explicit:
 2. dependency-free exhaustive Python oracle checks;
 3. cited external theorem/group identifications.
 
-The oracle is not a substitute for the Agda kernel, and citations are not proof terms. The pull request should remain draft until both frontier regression aggregates receive green Agda 2.9 receipts.
+The oracle is not a substitute for the Agda kernel, and citations are not proof terms. The pull request remains draft until both updated frontier regression aggregates receive green Agda 2.9 receipts.
