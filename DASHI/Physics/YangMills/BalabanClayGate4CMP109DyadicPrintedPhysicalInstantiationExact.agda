@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -29,9 +29,11 @@ import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as Princ
 -- The generic printed-map adapter previously left support and normalization as
 -- arbitrary fields.  This module fixes them to the exact one-step dyadic
 -- projection, endpoint-union support and 1/16 four-dimensional block
--- normalization.  Consequently one witness now owns the printed map, literal
--- geometry and normalization; only the physical contour values, principal
--- chart and derivative calculus remain analytic inputs.
+-- normalization.  The primary formula's transported logarithm is now the
+-- literal physical principal logarithm, and a termwise field identifies it with
+-- the logarithm of the equation-(0.12) relative product.  Thus map, chart,
+-- support and normalization cannot be inhabited by mutually inconsistent
+-- conventions.
 ------------------------------------------------------------------------
 
 FineBond : Nat → Set
@@ -65,12 +67,20 @@ record DyadicCMP109PrintedPhysicalInputs
       Printed.printedEquation012Map printedData left coarse
       ≡ Printed.printedEquation012Map printedData right coarse
 
-    transportedLog :
-      Field → CoarseBond coarseN → FineBond coarseN → Lie
-
     principalLogMeaning : PrincipalLog.PhysicalSU2PrincipalLogMeaning
       Field (CoarseBond coarseN) (FineBond coarseN)
       Lie Group Radius
+
+    crossingFineBond :
+      CoarseBond coarseN → FineSite coarseN → FineBond coarseN
+
+    printedRelativeProductUsesPhysicalPrincipalLog :
+      ∀ field coarse fineSite →
+      PrincipalLog.physicalLog principalLogMeaning
+        field coarse (crossingFineBond coarse fineSite)
+      ≡ Printed.antiHermitianLogCoordinate printedData
+          (Printed.printedEquation012RelativeProduct
+            printedData field coarse fineSite)
 
     derivativeEntry : CoarseBond coarseN → FineBond coarseN → Entry
     zeroDerivativeEntry : Entry
@@ -98,7 +108,7 @@ dyadicCanonicalStageInputs inputs = record
   ; Instantiation.CanonicalEquation012StageInputs.printedMapLocalDependence =
       printedMapLocalDependence inputs
   ; Instantiation.CanonicalEquation012StageInputs.transportedLog =
-      transportedLog inputs
+      PrincipalLog.physicalLog (principalLogMeaning inputs)
   }
 
 dyadicCanonicalPrintedIdentificationInputs :
@@ -143,6 +153,9 @@ cmp109DyadicSupportIdentificationLevel = machineChecked
 
 cmp109DyadicNormalizationIdentificationLevel : ProofLevel
 cmp109DyadicNormalizationIdentificationLevel = machineChecked
+
+cmp109DyadicPrincipalLogTermIdentificationLevel : ProofLevel
+cmp109DyadicPrincipalLogTermIdentificationLevel = machineChecked
 
 physicalCMP109ContourValueInputsLevel : ProofLevel
 physicalCMP109ContourValueInputsLevel = conditional
