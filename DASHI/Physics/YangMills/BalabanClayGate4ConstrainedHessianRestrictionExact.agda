@@ -117,12 +117,26 @@ record PhysicalConstrainedHessianRestrictionMeaning
     restriction : Scale → Background →
       ConstrainedHessianRestrictionData Fine
 
-    projectionIsMinimizerKernelProjection : ∀ scale background →
-      Set
+    ProjectionIsMinimizerKernelProjection :
+      Scale → Background → Set
+    PhysicalSecondVariationMeaning :
+      Scale → Background → Set
+    ReferenceSecondVariationMeaning :
+      Scale → Background → Set
+    PerturbationDifferenceMeaning :
+      Scale → Background → Set
 
-    physicalSecondVariationMeaning : ∀ scale background → Set
-    referenceSecondVariationMeaning : ∀ scale background → Set
-    perturbationDifferenceMeaning : ∀ scale background → Set
+    projectionIsMinimizerKernelProjection : ∀ scale background →
+      ProjectionIsMinimizerKernelProjection scale background
+
+    physicalSecondVariationMeaning : ∀ scale background →
+      PhysicalSecondVariationMeaning scale background
+
+    referenceSecondVariationMeaning : ∀ scale background →
+      ReferenceSecondVariationMeaning scale background
+
+    perturbationDifferenceMeaning : ∀ scale background →
+      PerturbationDifferenceMeaning scale background
 
 open PhysicalConstrainedHessianRestrictionMeaning public
 
