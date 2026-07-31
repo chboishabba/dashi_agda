@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanCompensatedTAdapterExa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; _*_; _≤_)
-import Data.Rational.Tactic.RingSolver as ℚRing
+open import Data.Rational.Properties using (*-comm)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -29,6 +29,12 @@ record IpsenRehmanCompensatedTMeaning
         (Determinant.determinantData meaning scale traversal)
         left right →
       left ≤ right
+
+    multiplyMeaning : ∀ scale traversal left right →
+      Determinant.multiply
+        (Determinant.determinantData meaning scale traversal)
+        left right
+      ≡ left * right
 
     physicalFactorMeaning : ∀ scale traversal →
       Factors.determinantFactor
@@ -66,7 +72,7 @@ ipsenRehmanSuppliesDeterminantCompensated
         (Determinant.physicalDeterminantBelowIpsenRehmanMultiplier
           meaning scale traversal)
       commute : referenceValue * multiplierValue ≡ multiplierValue * referenceValue
-      commute = ℚRing.solve
+      commute = *-comm referenceValue multiplierValue
       comparisonProductMeaning :
         Compensated.determinantLoss comparison scale traversal
           * Compensated.referenceDeterminant comparison scale traversal
@@ -86,7 +92,10 @@ ipsenRehmanSuppliesDeterminantCompensated
       (subst
         (λ lower → lower ≤ referenceValue * multiplierValue)
         (sym (physicalFactorMeaning bridge scale traversal))
-        base)
+        (subst
+          (λ mult → physicalValue ≤ mult)
+          (multiplyMeaning bridge scale traversal referenceValue multiplierValue)
+          base))
 
 ipsenRehmanCompensatedTAdapterLevel : ProofLevel
 ipsenRehmanCompensatedTAdapterLevel = machineChecked

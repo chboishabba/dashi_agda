@@ -76,19 +76,15 @@ asCompensatedTPointwiseMeaning :
     Scale Fine SlowField Component Functional Traversal tData) →
   Compensated.CompensatedTPointwiseMeaning tData (comparison dataSet)
 asCompensatedTPointwiseMeaning dataSet = record
-  { Compensated.CompensatedTPointwiseMeaning.order = order dataSet
-  ; Compensated.CompensatedTPointwiseMeaning.orderTransitive =
-      orderTransitive dataSet
-  ; Compensated.CompensatedTPointwiseMeaning.rationalOrderImpliesTOperationOrder =
-      rationalOrderImpliesTOperationOrder dataSet
-  ; Compensated.CompensatedTPointwiseMeaning.traversalOf = traversalOf dataSet
-  ; Compensated.CompensatedTPointwiseMeaning.oneIntegrandMeaning =
-      oneIntegrandMeaning dataSet
-  ; Compensated.CompensatedTPointwiseMeaning.referenceNormalization =
+  { order = order dataSet
+  ; orderTransitive = orderTransitive dataSet
+  ; rationalOrderImpliesTOperationOrder = rationalOrderImpliesTOperationOrder dataSet
+  ; traversalOf = traversalOf dataSet
+  ; oneIntegrandMeaning = oneIntegrandMeaning dataSet
+  ; referenceNormalization =
       Canonical.canonicalPhysicalReferenceNormalization
         (canonicalReference dataSet)
-  ; Compensated.CompensatedTPointwiseMeaning.referenceIntegrandMeaning =
-      referenceIntegrandFactorMeaning dataSet
+  ; referenceIntegrandMeaning = referenceIntegrandFactorMeaning dataSet
   }
 
 asPhysicalEquation189Data :

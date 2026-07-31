@@ -29,7 +29,7 @@ record HighAlphaTrancheReceipt : Set where
 open HighAlphaTrancheReceipt public
 
 record AuthoritativeHighAlphaEvidence
-    (receipt : HighAlphaTrancheReceipt) : Set where
+    (receipt : HighAlphaTrancheReceipt) : Set₁ where
   field
     executableVisitedSetBFSTypechecks : Set
     bfsParentCorrectnessTypechecks : Set

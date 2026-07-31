@@ -5,7 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (length)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; Σ)
+open import Data.Sum using (inj₁; inj₂; _⊎_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -15,7 +16,7 @@ open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
     ; signedDirectionEnumeration
     ; signedDirectionEnumerationLength
     ; eight
-    )
+    ) public
 
 ------------------------------------------------------------------------
 -- Literature normalization.
@@ -57,6 +58,10 @@ data _≤N_ : Nat → Nat → Set where
 ≤N-trans zero≤ right = zero≤
 ≤N-trans (suc≤suc left) (suc≤suc right) = suc≤suc (≤N-trans left right)
 
+≤N-step : ∀ {n} → n ≤N suc n
+≤N-step {zero} = zero≤
+≤N-step {suc n} = suc≤suc ≤N-step
+
 filterBool : ∀ {A : Set} → (A → Bool) → List A → List A
 filterBool predicate [] = []
 filterBool predicate (value ∷ values) with predicate value
@@ -70,7 +75,7 @@ filterLengthAtMost predicate (value ∷ values) with predicate value
 ... | true = suc≤suc (filterLengthAtMost predicate values)
 ... | false = ≤N-trans
   (filterLengthAtMost predicate values)
-  (suc≤suc (≤N-refl (length values)))
+  ≤N-step
 
 ------------------------------------------------------------------------
 -- Boundary-aware signed directions.
@@ -309,9 +314,6 @@ compatibleExtensionSubsetEmptyOrSingleton compatibleEmpty =
   inj₁ (refl , refl)
 compatibleExtensionSubsetEmptyOrSingleton (compatibleSingleton polymer) =
   inj₂ (polymer , refl)
-  where
-  open import Agda.Builtin.Sigma using (Σ; _,_)
-  open import Data.Sum using (inj₁; inj₂; _⊎_)
 
 ------------------------------------------------------------------------
 -- Exact clique partition polynomial for the actual valid count.
@@ -319,7 +321,8 @@ compatibleExtensionSubsetEmptyOrSingleton (compatibleSingleton polymer) =
 
 record CliquePartitionScalar (Scalar : Set) : Set₁ where
   field
-    one add : Scalar
+    one : Scalar
+    add : Scalar → Scalar → Scalar
     natScale : Nat → Scalar → Scalar
 
 open CliquePartitionScalar public
@@ -355,12 +358,12 @@ record CanonicalPhysicalPolymerTraceData
     depthFirstTraversalOfSpanningTree : Polymer → List Block
     canonicalSignedDirectionWord : Polymer → List SignedAxis4
 
-    canonicalTraversalVisitsEveryPolymerBlock : ∀ polymer block →
+    canonicalTraversalVisitsEveryPolymerBlock : ∀ (polymer : Polymer) (block : Block) →
       physicalPolymerConnectedDefinition polymer → Set
-    canonicalTraversalStepsAreAdjacent : ∀ polymer →
+    canonicalTraversalStepsAreAdjacent : ∀ (polymer : Polymer) →
       physicalPolymerConnectedDefinition polymer → Set
-    canonicalTraversalWordLengthBound : ∀ polymer → Set
-    canonicalTraversalDeterminesPolymer : ∀ {left right} →
+    canonicalTraversalWordLengthBound : ∀ (polymer : Polymer) → Set
+    canonicalTraversalDeterminesPolymer : ∀ {left right : Polymer} →
       canonicalSignedDirectionWord left ≡ canonicalSignedDirectionWord right →
       left ≡ right
 

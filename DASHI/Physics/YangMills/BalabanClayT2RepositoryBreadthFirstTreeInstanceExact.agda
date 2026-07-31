@@ -3,11 +3,14 @@ module DASHI.Physics.YangMills.BalabanClayT2RepositoryBreadthFirstTreeInstanceEx
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Sum using (_⊎_)
+open import Data.Product using (_×_; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
   using (SignedAxis4)
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact as Extraction
+import DASHI.Physics.YangMills.BalabanClayT2ConfiguredPhysicalPolymerCarrierExact as Carrier
 
 ------------------------------------------------------------------------
 -- Literature normalization.
@@ -31,62 +34,62 @@ record RepositoryBreadthFirstTreeData
     blocksOf : Polymer → List Block
 
     blockLessEqual : Block → Block → Set
-    physicalBlockOrderTotal : ∀ left right →
+    physicalBlockOrderTotal : ∀ (left right : Block) →
       blockLessEqual left right ⊎ blockLessEqual right left
-    physicalBlockOrderAntisymmetric : ∀ {left right} →
+    physicalBlockOrderAntisymmetric : ∀ {left right : Block} →
       blockLessEqual left right → blockLessEqual right left → left ≡ right
-    physicalBlockOrderDecidable : ∀ left right → Set
+    physicalBlockOrderDecidable : ∀ (left right : Block) → Set
 
     physicalNearestNeighbour : Block → Block → Set
-    physicalNearestNeighbourDecidable : ∀ left right → Set
+    physicalNearestNeighbourDecidable : ∀ (left right : Block) → Set
     signedStep : Block → SignedAxis4 → Block
     directionOfAdjacentBlocks : Block → Block → SignedAxis4
-    signedStepAdjacent : ∀ block direction →
+    signedStepAdjacent : ∀ (block : Block) (direction : SignedAxis4) →
       physicalNearestNeighbour block (signedStep block direction)
-    decodeDirectionStepExact : ∀ left right →
+    decodeDirectionStepExact : ∀ (left right : Block) →
       physicalNearestNeighbour left right →
       signedStep left (directionOfAdjacentBlocks left right) ≡ right
 
-    connectedPolymerNonempty : ∀ polymer → Set
-    connectedPolymerPathExists : ∀ polymer left right → Set
+    connectedPolymerNonempty : ∀ (polymer : Polymer) → Set
+    connectedPolymerPathExists : ∀ (polymer : Polymer) (left right : Block) → Set
 
     leastBlockOfNonemptyPolymer : Polymer → Block
-    leastBlockBelongsToPolymer : ∀ polymer → Set
-    leastBlockMinimal : ∀ polymer block → Set
+    leastBlockBelongsToPolymer : ∀ (polymer : Polymer) → Set
+    leastBlockMinimal : ∀ (polymer : Polymer) (block : Block) → blockLessEqual (leastBlockOfNonemptyPolymer polymer) block
 
     breadthFirstDistance : Polymer → Block → Nat
-    rootDistanceZero : ∀ polymer → Set
-    everyNonRootHasCloserNeighbour : ∀ polymer block → Set
+    rootDistanceZero : ∀ (polymer : Polymer) → Set
+    everyNonRootHasCloserNeighbour : ∀ (polymer : Polymer) (block : Block) → Set
 
     canonicalParentOfNonRootBlock : Polymer → Block → Block
-    canonicalParentBelongsToPolymer : ∀ polymer block → Set
-    canonicalParentIsNeighbour : ∀ polymer block → Set
-    canonicalParentStrictlyCloserToRoot : ∀ polymer block → Set
-    canonicalParentIsLeastCloserNeighbour : ∀ polymer block → Set
+    canonicalParentBelongsToPolymer : ∀ (polymer : Polymer) (block : Block) → Set
+    canonicalParentIsNeighbour : ∀ (polymer : Polymer) (block : Block) → Set
+    canonicalParentStrictlyCloserToRoot : ∀ (polymer : Polymer) (block : Block) → Set
+    canonicalParentIsLeastCloserNeighbour : ∀ (polymer : Polymer) (block : Block) → Set
 
     canonicalTree : Polymer → Tree
-    canonicalTreeEdgesAreParentEdges : ∀ polymer → Set
-    canonicalSpanningTreeAcyclic : ∀ polymer → Set
-    canonicalSpanningTreeConnected : ∀ polymer → Set
-    canonicalSpanningTreeCoversExactlyPolymer : ∀ polymer → Set
-    canonicalTreeRootIsLeastBlock : ∀ polymer → Set
+    canonicalTreeEdgesAreParentEdges : ∀ (polymer : Polymer) → Set
+    canonicalSpanningTreeAcyclic : ∀ (polymer : Polymer) → Set
+    canonicalSpanningTreeConnected : ∀ (polymer : Polymer) → Set
+    canonicalSpanningTreeCoversExactlyPolymer : ∀ (polymer : Polymer) → Set
+    canonicalTreeRootIsLeastBlock : ∀ (polymer : Polymer) → Set
 
     canonicalDepthFirstTour : Tree → Traversal
-    depthFirstTourUsesFixedAxisOrder : ∀ polymer → Set
-    depthFirstTourVisitsEveryTreeVertex : ∀ polymer → Set
-    depthFirstTourLengthEqualsTwiceEdges : ∀ polymer → Set
+    depthFirstTourUsesFixedAxisOrder : ∀ (polymer : Polymer) → Set
+    depthFirstTourVisitsEveryTreeVertex : ∀ (polymer : Polymer) → Set
+    depthFirstTourLengthEqualsTwiceEdges : ∀ (polymer : Polymer) → Set
 
     traversalWord : Traversal → List SignedAxis4
-    signedWordReconstructsTraversal : ∀ polymer → Set
+    signedWordReconstructsTraversal : ∀ (polymer : Polymer) → Set
 
     canonicalWordDecoder : Block → List SignedAxis4 → Polymer
-    decoderReplaysBacktrackingExactly : ∀ polymer → Set
-    decoderOfCanonicalWordExact : ∀ polymer →
+    decoderReplaysBacktrackingExactly : ∀ (polymer : Polymer) → Set
+    decoderOfCanonicalWordExact : ∀ (polymer : Polymer) →
       canonicalWordDecoder (leastBlockOfNonemptyPolymer polymer)
         (traversalWord (canonicalDepthFirstTour (canonicalTree polymer)))
       ≡ polymer
 
-    rootRecoverableAfterDecode : ∀ polymer →
+    rootRecoverableAfterDecode : ∀ (polymer : Polymer) →
       leastBlockOfNonemptyPolymer
         (canonicalWordDecoder (leastBlockOfNonemptyPolymer polymer)
           (traversalWord (canonicalDepthFirstTour (canonicalTree polymer))))
@@ -94,12 +97,35 @@ record RepositoryBreadthFirstTreeData
 
 open RepositoryBreadthFirstTreeData public
 
-physicalBlockLexicographicOrder = blockLessEqual
-leastBlock = leastBlockOfNonemptyPolymer
-canonicalParent = canonicalParentOfNonRootBlock
-canonicalSpanningTree = canonicalTree
+physicalBlockLexicographicOrder : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryBreadthFirstTreeData Polymer Block Tree Traversal) →
+  Block → Block → Set
+physicalBlockLexicographicOrder dataSet = blockLessEqual dataSet
+
+leastBlock : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryBreadthFirstTreeData Polymer Block Tree Traversal) →
+  Polymer → Block
+leastBlock dataSet = leastBlockOfNonemptyPolymer dataSet
+
+canonicalParent : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryBreadthFirstTreeData Polymer Block Tree Traversal) →
+  Polymer → Block → Block
+canonicalParent dataSet = canonicalParentOfNonRootBlock dataSet
+
+canonicalSpanningTree : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryBreadthFirstTreeData Polymer Block Tree Traversal) →
+  Polymer → Tree
+canonicalSpanningTree dataSet = canonicalTree dataSet
+
+canonicalDepthFirstTraversal : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryBreadthFirstTreeData Polymer Block Tree Traversal) →
+  Polymer → Traversal
 canonicalDepthFirstTraversal dataSet polymer =
   canonicalDepthFirstTour dataSet (canonicalTree dataSet polymer)
+
+canonicalDirectionWord : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryBreadthFirstTreeData Polymer Block Tree Traversal) →
+  Polymer → List SignedAxis4
 canonicalDirectionWord dataSet polymer =
   traversalWord dataSet (canonicalDepthFirstTraversal dataSet polymer)
 
@@ -116,18 +142,18 @@ asRepositoryConnectedBlockCarrier dataSet = record
   ; signedStep = signedStep dataSet
   ; signedStepAdjacent = signedStepAdjacent dataSet
   ; polymerNonempty = connectedPolymerNonempty dataSet
-  ; polymerConnected = λ polymer → connectedPolymerPathExists dataSet polymer
+  ; polymerConnected = λ polymer → ∀ left right → connectedPolymerPathExists dataSet polymer left right
   ; leastBlock = leastBlockOfNonemptyPolymer dataSet
   ; leastBlockBelongs = leastBlockBelongsToPolymer dataSet
   ; leastBlockMinimal = leastBlockMinimal dataSet
   ; canonicalTree = canonicalTree dataSet
   ; treeCoversExactlyBlocks = canonicalSpanningTreeCoversExactlyPolymer dataSet
   ; treeEdgesAreNearestNeighbours = λ polymer →
-      canonicalTreeEdgesAreParentEdges dataSet polymer ,
-      canonicalParentIsNeighbour dataSet polymer
+      canonicalTreeEdgesAreParentEdges dataSet polymer ×
+      (∀ block → canonicalParentIsNeighbour dataSet polymer block)
   ; treeRootIsLeastBlock = canonicalTreeRootIsLeastBlock dataSet
   ; leastParentTieBreakExact = λ polymer →
-      canonicalParentIsLeastCloserNeighbour dataSet polymer
+      ∀ block → canonicalParentIsLeastCloserNeighbour dataSet polymer block
   ; depthFirstTraversal = canonicalDepthFirstTour dataSet
   ; traversalVisitsEveryTreeVertex = depthFirstTourVisitsEveryTreeVertex dataSet
   ; traversalUsesFixedSignedAxisOrder = depthFirstTourUsesFixedAxisOrder dataSet
@@ -152,6 +178,10 @@ canonicalTraceInjective dataSet =
   Extraction.canonicalRootAndWordInjective
     (asRepositoryConnectedBlockCarrier dataSet)
 
+asConfiguredConnectedPolymerTraceFamily :
+  ∀ {Polymer Block Tree Traversal} →
+  (dataSet : RepositoryBreadthFirstTreeData Polymer Block Tree Traversal) →
+  Carrier.ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal
 asConfiguredConnectedPolymerTraceFamily dataSet =
   Extraction.asConfiguredConnectedPolymerTraceFamily
     (asRepositoryConnectedBlockCarrier dataSet)

@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -67,8 +67,8 @@ adjacentBoolFalseMeansNotAdjacent :
     left right →
   BFS.adjacentBool graph left right ≡ false →
   Not (Adjacent meaning left right)
-adjacentBoolFalseMeansNotAdjacent meaning left right refl adjacent =
-  falseNotTrue (adjacentBoolComplete meaning left right adjacent)
+adjacentBoolFalseMeansNotAdjacent meaning left right eq adjacent =
+  falseNotTrue (sym (trans (sym (adjacentBoolComplete meaning left right adjacent)) eq))
 
 firstAdjacentParentSound :
   ∀ {Vertex}
@@ -79,13 +79,13 @@ firstAdjacentParentSound :
   parent ∈L frontier × Adjacent meaning parent child
 firstAdjacentParentSound meaning child [] parent ()
 firstAdjacentParentSound {graph = graph} meaning child (candidate ∷ rest) parent equality
-  with BFS.adjacentBool graph candidate child
+  with BFS.adjacentBool graph candidate child in adjEq
 ... | true =
   subst
     (λ selected → selected ∈L (candidate ∷ rest)
       × Adjacent meaning selected child)
     (justInjective equality)
-    (hereL , adjacentBoolSound meaning candidate child refl)
+    (hereL , adjacentBoolSound meaning candidate child adjEq)
 ... | false with firstAdjacentParentSound meaning child rest parent equality
 ...   | membership , adjacent = thereL membership , adjacent
 
@@ -98,15 +98,15 @@ firstAdjacentParentIsFirst :
   FirstAdjacent meaning child parent frontier
 firstAdjacentParentIsFirst meaning child [] parent ()
 firstAdjacentParentIsFirst {graph = graph} meaning child (candidate ∷ rest) parent equality
-  with BFS.adjacentBool graph candidate child
+  with BFS.adjacentBool graph candidate child in adjEq
 ... | true =
   subst
     (λ selected → FirstAdjacent meaning child selected (candidate ∷ rest))
     (justInjective equality)
-    (firstHere (adjacentBoolSound meaning candidate child refl))
+    (firstHere (adjacentBoolSound meaning candidate child adjEq))
 ... | false =
   firstThere
-    (adjacentBoolFalseMeansNotAdjacent meaning candidate child refl)
+    (adjacentBoolFalseMeansNotAdjacent meaning candidate child adjEq)
     (firstAdjacentParentIsFirst meaning child rest parent equality)
 
 data ParentEdgesSound
@@ -131,15 +131,15 @@ discoverLayerParentEdgesSound :
     (BFS.parentEdges (BFS.discoverLayer graph frontier candidates))
 discoverLayerParentEdgesSound meaning frontier [] = noEdges
 discoverLayerParentEdgesSound {graph = graph} meaning frontier (candidate ∷ rest)
-  with BFS.firstAdjacentParent graph candidate frontier
+  with BFS.firstAdjacentParent graph candidate frontier in fapEq
 ... | nothing = discoverLayerParentEdgesSound meaning frontier rest
-... | just parent with BFS.discoverLayer graph frontier rest
-...   | BFS.layerDiscovery laterVertices laterEdges =
-      let selected = firstAdjacentParentSound meaning candidate frontier parent refl
+... | just parent with BFS.discoverLayer graph frontier rest | discoverLayerParentEdgesSound meaning frontier rest
+...   | BFS.layerDiscovery laterVertices laterEdges | rec =
+      let selected = firstAdjacentParentSound meaning candidate frontier parent fapEq
       in soundEdge
           (proj₁ selected)
           (proj₂ selected)
-          (discoverLayerParentEdgesSound meaning frontier rest)
+          rec
 
 firstAdjacentParentSoundLevel : ProofLevel
 firstAdjacentParentSoundLevel = machineChecked

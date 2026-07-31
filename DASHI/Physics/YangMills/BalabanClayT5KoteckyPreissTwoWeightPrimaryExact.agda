@@ -47,7 +47,7 @@ record KoteckyPreissTwoWeightData
           (activityNorm neighbour)
 
     incompatibleWeightedSum : Polymer → Scalar
-    incompatibleWeightedSumEnumerationMeaning : ∀ polymer → Set
+    incompatibleWeightedSumEnumerationMeaning : ∀ (polymer : Polymer) → Set
     LessEqual : Scalar → Scalar → Set
 
     partitionFunction : FiniteVolume → Scalar

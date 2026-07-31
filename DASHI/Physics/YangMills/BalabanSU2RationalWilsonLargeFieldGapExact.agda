@@ -62,8 +62,12 @@ chordalExpandedThroughNorm : ∀ q →
   literalChordalDistanceSq q
   ≡ quaternionNormSq q - twoℚ * realPart q + 1ℚ
 chordalExpandedThroughNorm q =
-  ℚRing.solve-∀
-    (realPart q) (imagI q) (imagJ q) (imagK q)
+  regroup (realPart q) (imagI q) (imagJ q) (imagK q)
+  where
+  regroup : (w x y zVal : ℚ) →
+    (w - 1ℚ) * (w - 1ℚ) + x * x + y * y + zVal * zVal
+    ≡ (w * w + x * x + y * y + zVal * zVal) - twoℚ * w + 1ℚ
+  regroup = ℚRing.solve-∀
 
 quaternionNormMatchesUnit : ∀ q → quaternionNormSq q ≡ 1ℚ
 quaternionNormMatchesUnit q = unitNormExact q
@@ -77,7 +81,10 @@ unitChordalEqualsTwiceTraceDeficit q =
       (cong
         (λ normValue → normValue - twoℚ * realPart q + 1ℚ)
         (quaternionNormMatchesUnit q))
-      (ℚRing.solve-∀ (realPart q)))
+      (regroup (realPart q)))
+  where
+  regroup : ∀ w → 1ℚ - twoℚ * w + 1ℚ ≡ twoℚ * (1ℚ - w)
+  regroup = ℚRing.solve-∀
 
 traceDeficitEqualsHalfTwice : ∀ value →
   value ≡ halfℚ * (twoℚ * value)
@@ -97,7 +104,10 @@ wilsonActionEqualsHalfBetaChordal beta q =
       (cong
         (λ value → beta * (halfℚ * value))
         (sym (unitChordalEqualsTwiceTraceDeficit q)))
-      (ℚRing.solve-∀ beta (literalChordalDistanceSq q)))
+      (regroup beta (literalChordalDistanceSq q)))
+  where
+  regroup : ∀ b d → b * (halfℚ * d) ≡ (halfℚ * b) * d
+  regroup = ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- Ordered consequence.  Only monotonicity of multiplication by a certified

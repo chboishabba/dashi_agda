@@ -2,7 +2,8 @@ module DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtraction
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Data.Sum using (_⊎_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
@@ -42,36 +43,36 @@ record RepositoryConnectedBlockCarrier
     signedStep : Block → SignedAxis4 → Block
     signedStepAdjacent : ∀ block direction → adjacent block (signedStep block direction)
 
-    polymerNonempty : ∀ polymer → Set
-    polymerConnected : ∀ polymer → Set
+    polymerNonempty : ∀ (polymer : Polymer) → Set
+    polymerConnected : ∀ (polymer : Polymer) → Set
 
     leastBlock : Polymer → Block
-    leastBlockBelongs : ∀ polymer → Set
-    leastBlockMinimal : ∀ polymer block → Set
+    leastBlockBelongs : ∀ (polymer : Polymer) → Set
+    leastBlockMinimal : ∀ (polymer : Polymer) (block : Block) → blockLessEqual (leastBlock polymer) block
 
     canonicalTree : Polymer → Tree
-    treeCoversExactlyBlocks : ∀ polymer → Set
-    treeEdgesAreNearestNeighbours : ∀ polymer → Set
-    treeRootIsLeastBlock : ∀ polymer → Set
-    leastParentTieBreakExact : ∀ polymer → Set
+    treeCoversExactlyBlocks : ∀ (polymer : Polymer) → Set
+    treeEdgesAreNearestNeighbours : ∀ (polymer : Polymer) → Set
+    treeRootIsLeastBlock : ∀ (polymer : Polymer) → Set
+    leastParentTieBreakExact : ∀ (polymer : Polymer) → Set
 
     depthFirstTraversal : Tree → Traversal
-    traversalVisitsEveryTreeVertex : ∀ polymer → Set
-    traversalUsesFixedSignedAxisOrder : ∀ polymer → Set
-    traversalLengthAtMostTwiceTreeEdges : ∀ polymer → Set
+    traversalVisitsEveryTreeVertex : ∀ (polymer : Polymer) → Set
+    traversalUsesFixedSignedAxisOrder : ∀ (polymer : Polymer) → Set
+    traversalLengthAtMostTwiceTreeEdges : ∀ (polymer : Polymer) → Set
 
     traversalWord : Traversal → List SignedAxis4
-    signedWordReconstructsTraversal : ∀ polymer → Set
+    signedWordReconstructsTraversal : ∀ (polymer : Polymer) → Set
 
     -- Decoder includes the canonical root because a relative direction word by
     -- itself is translation invariant.
     decodePolymer : Block → List SignedAxis4 → Polymer
-    decodeCanonicalTrace : ∀ polymer →
+    decodeCanonicalTrace : ∀ (polymer : Polymer) →
       decodePolymer (leastBlock polymer)
         (traversalWord (depthFirstTraversal (canonicalTree polymer)))
       ≡ polymer
 
-    rootRecoverableFromPolymer : ∀ polymer →
+    rootRecoverableFromPolymer : ∀ (polymer : Polymer) →
       leastBlock
         (decodePolymer (leastBlock polymer)
           (traversalWord (depthFirstTraversal (canonicalTree polymer))))
@@ -79,21 +80,63 @@ record RepositoryConnectedBlockCarrier
 
 open RepositoryConnectedBlockCarrier public
 
-canonicalRoot = leastBlock
-chooseCanonicalPolymerRootLiteral = leastBlock
-chooseCanonicalSpanningTreeLiteral = canonicalTree
+canonicalRoot : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  Polymer → Block
+canonicalRoot dataSet = leastBlock dataSet
+
+chooseCanonicalPolymerRootLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  Polymer → Block
+chooseCanonicalPolymerRootLiteral dataSet = leastBlock dataSet
+
+chooseCanonicalSpanningTreeLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  Polymer → Tree
+chooseCanonicalSpanningTreeLiteral dataSet = canonicalTree dataSet
+
+depthFirstTraversalOfSpanningTreeLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  Polymer → Traversal
 depthFirstTraversalOfSpanningTreeLiteral dataSet polymer =
   depthFirstTraversal dataSet (canonicalTree dataSet polymer)
+
+canonicalSignedDirectionWordLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  Polymer → List SignedAxis4
 canonicalSignedDirectionWordLiteral dataSet polymer =
   traversalWord dataSet
     (depthFirstTraversal dataSet (canonicalTree dataSet polymer))
 
-canonicalRootBelongsToPolymer = leastBlockBelongs
-canonicalSpanningTreeCoversPolymerLiteral = treeCoversExactlyBlocks
-canonicalSpanningTreeEdgesAdjacentLiteral = treeEdgesAreNearestNeighbours
-depthFirstTraversalVisitsEveryBlockLiteral = traversalVisitsEveryTreeVertex
-depthFirstTraversalLengthBoundLiteral = traversalLengthAtMostTwiceTreeEdges
-signedWordReconstructsTraversalLiteral = signedWordReconstructsTraversal
+canonicalRootBelongsToPolymer : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
+canonicalRootBelongsToPolymer dataSet = leastBlockBelongs dataSet
+
+canonicalSpanningTreeCoversPolymerLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
+canonicalSpanningTreeCoversPolymerLiteral dataSet = treeCoversExactlyBlocks dataSet
+
+canonicalSpanningTreeEdgesAdjacentLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
+canonicalSpanningTreeEdgesAdjacentLiteral dataSet = treeEdgesAreNearestNeighbours dataSet
+
+depthFirstTraversalVisitsEveryBlockLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
+depthFirstTraversalVisitsEveryBlockLiteral dataSet = traversalVisitsEveryTreeVertex dataSet
+
+depthFirstTraversalLengthBoundLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
+depthFirstTraversalLengthBoundLiteral dataSet = traversalLengthAtMostTwiceTreeEdges dataSet
+
+signedWordReconstructsTraversalLiteral : ∀ {Polymer Block Tree Traversal}
+  (dataSet : RepositoryConnectedBlockCarrier Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
+signedWordReconstructsTraversalLiteral dataSet = signedWordReconstructsTraversal dataSet
 
 canonicalRootAndWordInjective :
   ∀ {Polymer Block Tree Traversal}
@@ -105,16 +148,10 @@ canonicalRootAndWordInjective :
   left ≡ right
 canonicalRootAndWordInjective dataSet {left} {right} rootEqual wordEqual =
   trans
-    (symmetry (decodeCanonicalTrace dataSet left))
+    (sym (decodeCanonicalTrace dataSet left))
     (trans
       (cong₂ (decodePolymer dataSet) rootEqual wordEqual)
       (decodeCanonicalTrace dataSet right))
-  where
-  open import Relation.Binary.PropositionalEquality using (sym)
-  symmetry = sym
-  cong₂ : ∀ {A B C : Set} {f : A → B → C} {a a' : A} {b b' : B} →
-    a ≡ a' → b ≡ b' → f a b ≡ f a' b'
-  cong₂ refl refl = refl
 
 record RootIncludedCanonicalCode
     (Polymer Block Tree Traversal Code : Set) : Set₁ where

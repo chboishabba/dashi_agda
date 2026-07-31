@@ -93,23 +93,16 @@ asPhysicalPositiveReferenceConstruction :
     Scale Fine SlowField Component Functional tData →
   Physical.PhysicalPositiveReferenceConstruction tData
 asPhysicalPositiveReferenceConstruction dataSet = record
-  { Physical.PhysicalPositiveReferenceConstruction.referenceAlgebra =
-      referenceAlgebra dataSet
-  ; Physical.PhysicalPositiveReferenceConstruction.positiveAlgebra =
-      positiveAlgebra dataSet
-  ; Physical.PhysicalPositiveReferenceConstruction.reciprocalAlgebra =
+  { referenceAlgebra = referenceAlgebra dataSet
+  ; positiveAlgebra = positiveAlgebra dataSet
+  ; reciprocalAlgebra =
       Reciprocal.rationalPositiveMassReciprocalAlgebra
         (rationalInterpretation dataSet)
-  ; Physical.PhysicalPositiveReferenceConstruction.rawSelectedReference =
-      Flat.rawSelectedReference (factors dataSet)
-  ; Physical.PhysicalPositiveReferenceConstruction.positiveSelectedFibre =
-      positiveSelectedFibre dataSet
-  ; Physical.PhysicalPositiveReferenceConstruction.suppression =
-      suppression dataSet
-  ; Physical.PhysicalPositiveReferenceConstruction.referenceIntegrand =
-      referenceIntegrand dataSet
-  ; Physical.PhysicalPositiveReferenceConstruction.selectedReferenceIntegrandMeaning =
-      selectedReferenceIntegrandMeaning dataSet
+  ; rawSelectedReference = Flat.rawSelectedReference (factors dataSet)
+  ; positiveSelectedFibre = positiveSelectedFibre dataSet
+  ; suppression = suppression dataSet
+  ; referenceIntegrand = referenceIntegrand dataSet
+  ; selectedReferenceIntegrandMeaning = selectedReferenceIntegrandMeaning dataSet
   }
 
 canonicalPhysicalReferenceNormalization :

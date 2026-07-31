@@ -123,29 +123,19 @@ asFlatReferenceInPhysicalFibre :
   CanonicalReferenceFactorInputs factors scale component slow →
   Flat.FlatReferenceInPhysicalFibre factors scale component slow
 asFlatReferenceInPhysicalFibre inputs = record
-  { Flat.FlatReferenceInPhysicalFibre.flatFine = referenceFine inputs
-  ; Flat.FlatReferenceInPhysicalFibre.RepresentsCanonicalFlatSU2 =
-      RepresentsCanonicalBackground inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatRepresentsCanonicalSU2 =
-      representsCanonicalBackground inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatInFastFibre =
-      referenceInFastFibre inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatCoarseConstraintExact =
-      coarseConstraintExact inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatGaugeRestrictionExact =
-      gaugeRestrictionExact inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatSupportAndBoundaryRestrictionExact =
-      supportAndBoundaryRestrictionExact inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatActionPositive = actionPositive inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatHaarPositive = haarPositive inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatDeterminantPositive =
-      determinantPositive inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatBCHPositive =
-      bchReferencePositive inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatLocalizationPositive =
-      localizationReferencePositive inputs
-  ; Flat.FlatReferenceInPhysicalFibre.flatPatchPositive =
-      patchReferencePositive inputs
+  { flatFine = referenceFine inputs
+  ; RepresentsCanonicalFlatSU2 = RepresentsCanonicalBackground inputs
+  ; flatRepresentsCanonicalSU2 = representsCanonicalBackground inputs
+  ; flatInFastFibre = referenceInFastFibre inputs
+  ; flatCoarseConstraintExact = coarseConstraintExact inputs
+  ; flatGaugeRestrictionExact = gaugeRestrictionExact inputs
+  ; flatSupportAndBoundaryRestrictionExact = supportAndBoundaryRestrictionExact inputs
+  ; flatActionPositive = actionPositive inputs
+  ; flatHaarPositive = haarPositive inputs
+  ; flatDeterminantPositive = determinantPositive inputs
+  ; flatBCHPositive = bchReferencePositive inputs
+  ; flatLocalizationPositive = localizationReferencePositive inputs
+  ; flatPatchPositive = patchReferencePositive inputs
   }
 
 canonicalReferenceUnitFactorPositivityLevel : ProofLevel

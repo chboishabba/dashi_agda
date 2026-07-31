@@ -96,20 +96,23 @@ asTerminalKPSmallness :
       Scale Volume Root Polymer Link) →
   Clustering.TerminalKPSmallness Polymer Link ℚ
 asTerminalKPSmallness identification = record
-  { Clustering.TerminalKPSmallness.activityNorm =
-      activityNorm identification
-  ; Clustering.TerminalKPSmallness.weightedActivity =
-      weightedActivity identification
-  ; Clustering.TerminalKPSmallness.Contains =
-      Contains identification
-  ; Clustering.TerminalKPSmallness.terminalKPBound = λ _ → P2.half
-  ; Clustering.TerminalKPSmallness.LessEqual = _≤_
-  ; Clustering.TerminalKPSmallness.rootedWeightedSum =
-      physicalRootedWeightedSum identification
-  ; Clustering.TerminalKPSmallness.rootedWeightedSumMeaning =
-      physicalRootedWeightedSumMeaning identification
-  ; Clustering.TerminalKPSmallness.terminalKPSmall =
-      physicalTerminalRootedSumBelowHalf identification
+  { activityNorm = activityNorm identification
+  ; weightedActivity = weightedActivity identification
+  ; Contains = Contains identification
+  ; terminalKPBound = λ _ → P2.half
+  ; LessEqual = _≤_
+  ; rootedWeightedSum = physicalRootedWeightedSum identification
+  ; rootedWeightedSumMeaning = λ link →
+      physicalRootedWeightedSum identification link
+      ≡ P2.rootedPartialSum
+          (Shell.asUniformRootedShellBound
+            (shellData (finiteTerminal identification)))
+          (selectedScale identification) (selectedVolume identification)
+          (rootOf identification link)
+          (terminalDepth (finiteTerminal identification)
+            (selectedScale identification) (selectedVolume identification)
+            (rootOf identification link))
+  ; terminalKPSmall = physicalTerminalRootedSumBelowHalf identification
   }
 
 data PublishedCriterionWitness

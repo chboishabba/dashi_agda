@@ -51,19 +51,18 @@ periodicAdjacentBool left right =
 periodicExecutableGraph :
   ∀ n → BFS.FiniteDecidableGraph (Periodic.PeriodicBlock n)
 periodicExecutableGraph n = record
-  { BFS.FiniteDecidableGraph.vertices =
-      elements (periodicTorus4Finite (suc n))
-  ; BFS.FiniteDecidableGraph.equalBool = periodicBlockEqualBool
-  ; BFS.FiniteDecidableGraph.adjacentBool = periodicAdjacentBool
+  { vertices = elements (periodicTorus4Finite (suc n))
+  ; equalBool = periodicBlockEqualBool
+  ; adjacentBool = periodicAdjacentBool
   }
 
 periodicPolymerExecutableGraph :
   ∀ {n} → Periodic.PeriodicPolymer n →
   BFS.FiniteDecidableGraph (Periodic.PeriodicBlock n)
 periodicPolymerExecutableGraph polymer = record
-  { BFS.FiniteDecidableGraph.vertices = polymer
-  ; BFS.FiniteDecidableGraph.equalBool = periodicBlockEqualBool
-  ; BFS.FiniteDecidableGraph.adjacentBool = periodicAdjacentBool
+  { vertices = polymer
+  ; equalBool = periodicBlockEqualBool
+  ; adjacentBool = periodicAdjacentBool
   }
 
 periodicBlockEqualBoolSound :
@@ -93,18 +92,18 @@ periodicAdjacentBoolComplete left right =
 periodicGraphBooleanMeaning :
   ∀ n → Parent.GraphBooleanMeaning (periodicExecutableGraph n)
 periodicGraphBooleanMeaning n = record
-  { Parent.GraphBooleanMeaning.Adjacent = Adjacency.PeriodicNearestNeighbour
-  ; Parent.GraphBooleanMeaning.adjacentBoolSound = periodicAdjacentBoolSound
-  ; Parent.GraphBooleanMeaning.adjacentBoolComplete = periodicAdjacentBoolComplete
+  { Adjacent = Adjacency.PeriodicNearestNeighbour
+  ; adjacentBoolSound = periodicAdjacentBoolSound
+  ; adjacentBoolComplete = periodicAdjacentBoolComplete
   }
 
 periodicPolymerGraphBooleanMeaning :
   ∀ {n} (polymer : Periodic.PeriodicPolymer n) →
   Parent.GraphBooleanMeaning (periodicPolymerExecutableGraph polymer)
 periodicPolymerGraphBooleanMeaning polymer = record
-  { Parent.GraphBooleanMeaning.Adjacent = Adjacency.PeriodicNearestNeighbour
-  ; Parent.GraphBooleanMeaning.adjacentBoolSound = periodicAdjacentBoolSound
-  ; Parent.GraphBooleanMeaning.adjacentBoolComplete = periodicAdjacentBoolComplete
+  { Adjacent = Adjacency.PeriodicNearestNeighbour
+  ; adjacentBoolSound = periodicAdjacentBoolSound
+  ; adjacentBoolComplete = periodicAdjacentBoolComplete
   }
 
 periodicBFSState :

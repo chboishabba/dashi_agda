@@ -216,30 +216,20 @@ literalPeriodicPlaquetteWilsonData :
     (Periodic.PeriodicBlock n)
     (Plaquette.PeriodicPlaquette n)
 literalPeriodicPlaquetteWilsonData {n = n} parameters = record
-  { Wilson.LiteralWilsonLargeFieldData.transform =
-      transformPlaquetteConfiguration
-  ; Wilson.LiteralWilsonLargeFieldData.Adjacent =
-      Physical.PeriodicPhysicalAdjacent
-  ; Wilson.LiteralWilsonLargeFieldData.adjacentSymmetric =
-      Physical.periodicPhysicalAdjacentSymmetric
-  ; Wilson.LiteralWilsonLargeFieldData.ownedPlaquettes =
-      Plaquette.ownedPeriodicPlaquettes
-  ; Wilson.LiteralWilsonLargeFieldData.plaquetteHolonomy =
-      λ configuration plaquette → configuration plaquette
-  ; Wilson.LiteralWilsonLargeFieldData.coupling = coupling parameters
-  ; Wilson.LiteralWilsonLargeFieldData.p0 = p0 parameters
-  ; Wilson.LiteralWilsonLargeFieldData.threshold = threshold parameters
-  ; Wilson.LiteralWilsonLargeFieldData.etaSquared = etaSquared parameters
-  ; Wilson.LiteralWilsonLargeFieldData.scaleAdjustedThreshold =
-      scaleAdjustedThreshold parameters
-  ; Wilson.LiteralWilsonLargeFieldData.thresholdDefinition =
-      thresholdDefinition parameters
-  ; Wilson.LiteralWilsonLargeFieldData.physicalThresholdBridge =
-      physicalThresholdBridge parameters
-  ; Wilson.LiteralWilsonLargeFieldData.lessEqualDecidable =
-      lessEqualDecidable parameters
-  ; Wilson.LiteralWilsonLargeFieldData.plaquetteDistanceGaugeInvariant =
-      periodicPlaquetteDistanceGaugeInvariant
+  { transform = transformPlaquetteConfiguration
+  ; Adjacent = Physical.PeriodicPhysicalAdjacent
+  ; adjacentSymmetric = Physical.periodicPhysicalAdjacentSymmetric
+  ; ownedPlaquettes = Plaquette.ownedPeriodicPlaquettes
+  ; plaquetteHolonomy = λ configuration plaquette → configuration plaquette
+  ; coupling = coupling parameters
+  ; p0 = p0 parameters
+  ; threshold = threshold parameters
+  ; etaSquared = etaSquared parameters
+  ; scaleAdjustedThreshold = scaleAdjustedThreshold parameters
+  ; thresholdDefinition = thresholdDefinition parameters
+  ; physicalThresholdBridge = physicalThresholdBridge parameters
+  ; lessEqualDecidable = lessEqualDecidable parameters
+  ; plaquetteDistanceGaugeInvariant = periodicPlaquetteDistanceGaugeInvariant
   }
 
 rationalQuaternionMultiplicationLevel : ProofLevel

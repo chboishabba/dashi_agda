@@ -165,11 +165,11 @@ tOperationEquation189FromPointwiseSuppression :
             (one (equation189 reduction))
             (beta0 (equation189 reduction))))
         (p0 (equation189 reduction) scale)))
-tOperationEquation189FromPointwiseSuppression reduction scale selected slow =
+tOperationEquation189FromPointwiseSuppression {dataSet = dataSet} reduction scale selected slow =
   subst
     (λ upper → T.LessEqual (order (pointwiseData reduction))
-      (T.localizedTOperation _ scale selected slow
-        (T.oneFunctional _))
+      (T.localizedTOperation dataSet scale selected slow
+        (T.oneFunctional dataSet))
       upper)
     (trans
       (suppressionAgrees reduction scale)
