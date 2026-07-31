@@ -26,6 +26,8 @@ record PrimaryAveragingTrancheReceipt : Set where
     periodicWeightedSchurInstantiationChecked : Bool
     constrainedMinimizerProjectionChecked : Bool
     constrainedHessianRestrictionChecked : Bool
+    t3ConstrainedRestrictionReuseChecked : Bool
+    t3RestrictedDeterminantAdapterChecked : Bool
     primaryBetaFiniteDifferenceChecked : Bool
     tranchePostulateFree : Bool
 
@@ -49,6 +51,8 @@ record AuthoritativePrimaryAveragingEvidence
     periodicWeightedSchurInstantiationTypechecks : Set
     constrainedMinimizerProjectionTypechecks : Set
     constrainedHessianRestrictionTypechecks : Set
+    t3ConstrainedRestrictionReuseTypechecks : Set
+    t3RestrictedDeterminantAdapterTypechecks : Set
     primaryBetaFiniteDifferenceTypechecks : Set
     trancheHasNoPostulatesOrUnsolvedMetas : Set
 
@@ -98,6 +102,12 @@ constrainedMinimizerProjectionTypecheckLevel = conditional
 
 constrainedHessianRestrictionTypecheckLevel : ProofLevel
 constrainedHessianRestrictionTypecheckLevel = conditional
+
+t3ConstrainedRestrictionReuseTypecheckLevel : ProofLevel
+t3ConstrainedRestrictionReuseTypecheckLevel = conditional
+
+t3RestrictedDeterminantAdapterTypecheckLevel : ProofLevel
+t3RestrictedDeterminantAdapterTypecheckLevel = conditional
 
 primaryBetaFiniteDifferenceTypecheckLevel : ProofLevel
 primaryBetaFiniteDifferenceTypecheckLevel = conditional
