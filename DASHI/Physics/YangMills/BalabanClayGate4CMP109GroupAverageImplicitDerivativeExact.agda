@@ -101,14 +101,13 @@ implicitDerivativeUnique :
   ≡ zero (cancellation dataSet) →
   candidate ≡ implicitAverageDerivative dataSet input
 implicitDerivativeUnique dataSet input candidate linearizedEquation =
-  sym
-    (trans
-      (cong (inverseCentreDifferential dataSet)
-        (solveRightFromZero (cancellation dataSet)
-          (inputDifferential dataSet input)
-          (centreDifferential dataSet candidate)
-          linearizedEquation))
-      (inverseAfterCentre dataSet candidate))
+  trans
+    (sym (inverseAfterCentre dataSet candidate))
+    (cong (inverseCentreDifferential dataSet)
+      (solveRightFromZero (cancellation dataSet)
+        (inputDifferential dataSet input)
+        (centreDifferential dataSet candidate)
+        linearizedEquation))
 
 record PhysicalFederbushAverageDerivative
     (InputTangent CentreTangent Residual : Set) : Set₁ where
