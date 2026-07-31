@@ -10,16 +10,18 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.EvidenceInterpretationLedger as Evidence
 import DASHI.Foundations.UBP.ExactnessAndLatticeBoundary as Exactness
 import DASHI.Foundations.UBP.ObservableAlgebraBoundary as Algebra
+import DASHI.Foundations.UBP.Pi50ConvergentTable as Pi50
 import DASHI.Foundations.UBP.RepresentationAndObserverBoundary as Representation
 import DASHI.Foundations.UBP.SourceAtlas as Sources
 
 ------------------------------------------------------------------------
 -- Focused aggregate for the UBP epistemic/lattice tranche.
+------------------------------------------------------------------------
 
 sourceCountRegression :
-  Sources.canonicalUBPSourceCount ≡ 7
+  Sources.canonicalUBPSourceCount ≡ 8
 sourceCountRegression =
-  Sources.canonicalUBPSourceCountIsSeven
+  Sources.canonicalUBPSourceCountIsEight
 
 claimRowCountRegression :
   Evidence.canonicalUBPClaimRowCount ≡ 8
@@ -133,6 +135,42 @@ externalReplicationClaimClosed =
   Evidence.externalReplicationSuppliedIsFalse
     Evidence.canonicalInterpretationBoundaryStatus
 
+sourcePiTableCanonicalClaimClosed :
+  Pi50.sourceTableIsCanonicalPiCFThrough50
+    Pi50.canonicalPi50TableStatus
+  ≡ false
+sourcePiTableCanonicalClaimClosed =
+  Pi50.sourceTableIsCanonicalPiCFThrough50IsFalse
+    Pi50.canonicalPi50TableStatus
+
+sourcePiCoefficient48Regression :
+  Pi50.sourceCoefficient48 ≡ 6
+sourcePiCoefficient48Regression =
+  Pi50.sourceCoefficient48IsSix
+
+canonicalPiCoefficient48Regression :
+  Pi50.canonicalCoefficient48 ≡ 2
+canonicalPiCoefficient48Regression =
+  Pi50.canonicalCoefficient48IsTwo
+
+sourceP50Regression :
+  Pi50.sourceP50 ≡
+    183157143516396120473427579101
+sourceP50Regression =
+  Pi50.sourceP50Exact
+
+canonicalP50Regression :
+  Pi50.canonicalP50 ≡
+    16397605394050964443746106649
+canonicalP50Regression =
+  Pi50.canonicalP50Exact
+
+canonicalQ50Regression :
+  Pi50.canonicalQ50 ≡
+    5219519906667074477262822481
+canonicalQ50Regression =
+  Pi50.canonicalQ50Exact
+
 allEvidenceRowsRemainNonPromoting :
   Evidence.AllClaimRowsNonPromoting Evidence.canonicalUBPClaimRows
 allEvidenceRowsRemainNonPromoting =
@@ -146,6 +184,7 @@ focusedReceipts =
   ∷ Algebra.observableAlgebraReceipt
   ∷ Representation.representationAndObserverReceipt
   ∷ Evidence.ubpInterpretationGenericReceipt
+  ∷ Pi50.pi50GenericReceipt
   ∷ []
 
 allFocusedReceiptsRemainNonPromoting :
