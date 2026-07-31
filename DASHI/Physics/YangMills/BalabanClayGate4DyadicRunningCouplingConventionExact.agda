@@ -31,7 +31,9 @@ import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 -- DOI: 10.1103/PhysRevD.23.2340.
 --
 -- Tadeusz Bałaban,
--- "Renormalization Group Approach to Lattice Gauge Field Theories. I",
+-- "Renormalization Group Approach to Lattice Gauge Field Theories. I.
+-- Generation of Effective Actions in a Small Field Approximation and a
+-- Coupling Constant Renormalization in Four Dimensions",
 -- Communications in Mathematical Physics 109 (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
 --
@@ -146,5 +148,7 @@ physicalLocalizedPlaquetteCoefficientInputsLevel = conditional
 physicalHRBetaRemainderInputsLevel : ProofLevel
 physicalHRBetaRemainderInputsLevel = conditional
 
+-- The locator is inadmissible as theorem authority.  ProofLevel has no
+-- quarantine constructor; the open locator claim is therefore conjectural.
 locatorRunningCouplingFormulaAcceptedAsAuthority : ProofLevel
-locatorRunningCouplingFormulaAcceptedAsAuthority = quarantined
+locatorRunningCouplingFormulaAcceptedAsAuthority = conjectural
