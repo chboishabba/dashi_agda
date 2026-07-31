@@ -1,0 +1,36 @@
+module DASHI.Physics.YangMills.BalabanClayGate4Attachment254IntegratedLedger where
+
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+import DASHI.Physics.YangMills.BalabanClayGate4Attachment254CompletionLedger as Completion
+import DASHI.Physics.YangMills.BalabanClayGate4WeightedSchurSummableSlackReuseExact as WeightedSlack
+import DASHI.Physics.YangMills.BalabanClayGate4T3SelfAdjointFormNormReuseExact as T3FormNorm
+
+completionLedgerLevel = Completion.attachment254CompletionLedgerLevel
+
+weightedSchurNearContractionAdapterLevel =
+  WeightedSlack.weightedSchurNearContractionAdapterLevel
+weightedSchurSummableSlackEnvelopeLevel =
+  WeightedSlack.weightedSchurSummableSlackEnvelopeLevel
+
+t3SelfAdjointFormNormAttachmentLevel =
+  T3FormNorm.t3SelfAdjointFormNormAttachmentLevel
+t3RestrictedFormToOperatorNormLevel =
+  T3FormNorm.t3RestrictedFormToOperatorNormLevel
+
+physicalWeightedSchurStateMeaningInputsLevel =
+  WeightedSlack.physicalWeightedSchurStateMeaningInputsLevel
+physicalWeightedSchurNearFactorBudgetInputsLevel =
+  WeightedSlack.physicalWeightedSchurNearFactorBudgetInputsLevel
+physicalWeightedSchurSlackSummabilityInputsLevel =
+  WeightedSlack.physicalWeightedSchurSlackSummabilityInputsLevel
+
+physicalT3HessianSelfAdjointnessInputsLevel =
+  T3FormNorm.physicalT3HessianSelfAdjointnessInputsLevel
+physicalT3RestrictedFormAbsoluteBoundInputsLevel =
+  T3FormNorm.physicalT3RestrictedFormAbsoluteBoundInputsLevel
+physicalT3InnerProductNormIdentificationInputsLevel =
+  T3FormNorm.physicalT3InnerProductNormIdentificationInputsLevel
+
+attachment254IntegratedLedgerLevel : ProofLevel
+attachment254IntegratedLedgerLevel = machineChecked
