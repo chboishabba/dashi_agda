@@ -13,7 +13,7 @@ import DASHI.Foundations.UBP.ExternalRepositoryProvenance as UBPProvenance
 -- Attributed source atlas for the ternary-Golay cross-pollination tranche.
 --
 -- Entries record provenance and the exact logical role assigned to a source.
--- A citation is not a proof import.  In particular, the 1996 Calderbank–Sloane
+-- A citation is not a proof import. In particular, the 1996 Calderbank-Sloane
 -- claim is always paired with the authors' published correction.
 ------------------------------------------------------------------------
 
@@ -23,6 +23,8 @@ data SourceStatus : Set where
   publishedClaimCorrected : SourceStatus
   publishedCorrection : SourceStatus
   externalTheoremAwaitingFormalImport : SourceStatus
+  lectureNoteConstructionCalibration : SourceStatus
+  locallyRecomputedExternalResult : SourceStatus
 
 data DOIStatus : Set where
   doiRecorded : String → DOIStatus
@@ -82,6 +84,54 @@ macWilliamsSloaneEntry =
     "https://www.sciencedirect.com/bookseries/north-holland-mathematical-library/vol/16"
     standardReference
     "reference for the ternary Golay code, puncturing, extension, weight distribution, and perfect-code background"
+
+elkiesTernaryGolayEntry : SourceEntry
+elkiesTernaryGolayEntry =
+  sourceEntry
+    "Noam D. Elkies"
+    "The ternary Golay codes and related structures"
+    "Harvard Math 256x: The Theory of Error-Correcting Codes, extended lecture notes"
+    2013
+    noDOIRecordedHere
+    "https://people.math.harvard.edu/~elkies/M256.13/golay3.pdf"
+    lectureNoteConstructionCalibration
+    "source for the order-12 Hadamard presentation, reduction mod 3, exact weight enumerator, 132 support pairs, small Witt design, and M12/2.M12 discussion; the finite code and design are recomputed locally"
+
+macWilliamsSystematicWeightEntry : SourceEntry
+macWilliamsSystematicWeightEntry =
+  sourceEntry
+    "F. Jessie MacWilliams"
+    "A Theorem on the Distribution of Weights in a Systematic Code"
+    "Bell System Technical Journal 42(1), 79-94"
+    1963
+    (doiRecorded "10.1002/j.1538-7305.1963.tb04003.x")
+    "https://doi.org/10.1002/j.1538-7305.1963.tb04003.x"
+    externalTheoremAwaitingFormalImport
+    "primary source for the MacWilliams weight-distribution identity; the q-ary coefficient interface is formalised without pretending the paper is a proof term"
+
+macWilliamsMallowsSloaneGleasonEntry : SourceEntry
+macWilliamsMallowsSloaneGleasonEntry =
+  sourceEntry
+    "F. Jessie MacWilliams, Colin L. Mallows, and N. J. A. Sloane"
+    "Generalizations of Gleason's theorem on weight enumerators of self-dual codes"
+    "IEEE Transactions on Information Theory 18(6), 794-805"
+    1972
+    (doiRecorded "10.1109/TIT.1972.1054898")
+    "https://doi.org/10.1109/TIT.1972.1054898"
+    externalTheoremAwaitingFormalImport
+    "source for the Type III invariant-theory route to the ternary self-dual weight enumerator; the explicit 729-word code is enumerated independently in Agda"
+
+plessGolayUniquenessEntry : SourceEntry
+plessGolayUniquenessEntry =
+  sourceEntry
+    "Vera Pless"
+    "More on the uniqueness of the Golay codes"
+    "Discrete Mathematics 106-107, 391-398"
+    1992
+    (doiRecorded "10.1016/0012-365X(92)90569-2")
+    "https://doi.org/10.1016/0012-365X(92)90569-2"
+    locallyRecomputedExternalResult
+    "source for uniqueness of the ternary Golay parameter sets and for the S(5,6,12) support theorem; the explicit code, 132 supports, and unique pentad incidence are recomputed locally"
 
 calderbankSloaneClaimEntry : SourceEntry
 calderbankSloaneClaimEntry =
@@ -148,6 +198,10 @@ canonicalTernaryGolaySources =
   ubpRepositoryEntry
   ∷ golayDigitalCodingEntry
   ∷ macWilliamsSloaneEntry
+  ∷ elkiesTernaryGolayEntry
+  ∷ macWilliamsSystematicWeightEntry
+  ∷ macWilliamsMallowsSloaneGleasonEntry
+  ∷ plessGolayUniquenessEntry
   ∷ calderbankSloaneClaimEntry
   ∷ calderbankSloaneCorrectionEntry
   ∷ sloaneCoxeterToddEntry
@@ -158,9 +212,9 @@ canonicalTernaryGolaySources =
 canonicalTernaryGolaySourceCount : Nat
 canonicalTernaryGolaySourceCount = sourceCount canonicalTernaryGolaySources
 
-canonicalTernaryGolaySourceCountIsEight :
-  canonicalTernaryGolaySourceCount ≡ 8
-canonicalTernaryGolaySourceCountIsEight = refl
+canonicalTernaryGolaySourceCountIsTwelve :
+  canonicalTernaryGolaySourceCount ≡ 12
+canonicalTernaryGolaySourceCountIsTwelve = refl
 
 sourceAtlasReceipt : GenericReceipt.GenericReceipt
 sourceAtlasReceipt =
@@ -168,8 +222,8 @@ sourceAtlasReceipt =
     "ternary Golay source atlas"
     "DASHI.Foundations.TernaryGolay.SourceAtlas"
     "canonicalTernaryGolaySources"
-    "UBP repository authorship and the ternary-Golay, Z9-correction, Coxeter-Todd, Eisenstein, Mathieu, and lattice references are explicitly attached"
-    "citations do not import theorem proofs; corrected and retracted claims remain distinguished"
+    "UBP authorship and the explicit ternary-code, MacWilliams, Type III Gleason, Golay uniqueness, Z9-correction, Coxeter-Todd, Eisenstein, Mathieu, and lattice references are attached with authors, titles, URLs and DOIs where available"
+    "citations do not import theorem proofs; locally recomputed finite results, external theorem boundaries, and corrected claims remain distinguished"
     "agda -i . DASHI/Foundations/TernaryGolay/SourceAtlas.agda"
 
 sourceAtlasReceiptNonPromoting :
