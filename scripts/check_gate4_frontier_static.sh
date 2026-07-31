@@ -14,6 +14,15 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanDeterminantLossExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4IpsenRehmanCompensatedTAdapterExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteKernelSchurBlockAdjointExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingDimensionAuditExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingLocalityExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkFiniteKernelBudgetExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkAdjointColumnExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkSchurBridgeExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryQkPhysicalSchurAssemblyExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4ConstrainedMinimizerProjectionExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheLedger.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda
   DASHI/Physics/YangMills/BalabanClayT5KoteckyPreissTwoWeightPrimaryExact.agda
   DASHI/Physics/YangMills/BalabanClayT5PhysicalTwoWeightKoteckyPreissExact.agda
