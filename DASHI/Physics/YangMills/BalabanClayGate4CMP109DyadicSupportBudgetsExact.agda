@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicSupportBudgetsExact w
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -12,7 +12,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
     ; _∈_; here; there; map; mapMembership
     ; _++_; appendMembershipLeft; appendMembershipRight
     ; cartesian; cartesianMembership
-    ; pair; first; second; PositiveBond; Axis4; four
+    ; pair; first; PositiveBond; Axis4; four
     ; elements; complete; cyclicIndexFinite
     ; periodicTorus4DecidableEquality
     )
@@ -42,9 +42,6 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicProjectionNormalizati
 -- the repository's periodic successor/predecessor inverse laws; no unproved
 -- arithmetic identity is silently promoted.
 ------------------------------------------------------------------------
-
-emptyEliminate : ∀ {A : Set} → Empty → A
-emptyEliminate ()
 
 allAxes : List Axis4
 allAxes = elements (cyclicIndexFinite four)
@@ -210,9 +207,9 @@ checkPeriodicStepInverse n =
 stepInverseCertificateUniversal :
   ∀ {n} → PeriodicStepInverseCertificate n →
   ∀ site axis → StepInverseAt (pair site axis)
-stepInverseCertificateUniversal certificate site axis =
+stepInverseCertificateUniversal {n} certificate site axis =
   allMember certificate
-    (complete (Support.positiveBondFinite _) (pair site axis))
+    (complete (Support.positiveBondFinite (suc n)) (pair site axis))
 
 ------------------------------------------------------------------------
 -- Eight-entry coarse-column envelope.
