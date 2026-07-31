@@ -23,6 +23,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4ConstrainedMinimizerProjectionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheReceipt.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingCurrentFrontierExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda
   DASHI/Physics/YangMills/BalabanClayT5KoteckyPreissTwoWeightPrimaryExact.agda
   DASHI/Physics/YangMills/BalabanClayT5PhysicalTwoWeightKoteckyPreissExact.agda
