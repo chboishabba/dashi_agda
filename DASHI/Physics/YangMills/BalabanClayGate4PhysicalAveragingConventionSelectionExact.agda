@@ -26,6 +26,14 @@ import DASHI.Physics.YangMills.BalabanClayGate4PrimaryAveragingDimensionAuditExa
 -- explicit convention bridge; chronology or dimensional analogy is not enough.
 ------------------------------------------------------------------------
 
+record Both (left right : Set) : Set where
+  constructor both
+  field
+    firstWitness : left
+    secondWitness : right
+
+open Both public
+
 gate4PhysicalAveragingConvention : Primary.AveragingOperatorConvention
 gate4PhysicalAveragingConvention =
   Primary.cmp109EuclideanSymmetricAverage
@@ -68,29 +76,33 @@ asPrimaryPhysicalAveragingConventionMeaning :
 asPrimaryPhysicalAveragingConventionMeaning meaning = record
   { selectedConvention = gate4PhysicalAveragingConvention
   ; LiteralMapMatches = λ convention literalMap →
-      Primary.AveragingOperatorConvention
-      × LiteralMapMatchesCMP109 meaning literalMap
+      Both
+        (convention ≡ gate4PhysicalAveragingConvention)
+        (LiteralMapMatchesCMP109 meaning literalMap)
   ; DerivativeMatches = λ convention derivative →
-      Primary.AveragingOperatorConvention
-      × DerivativeMatchesCMP109 meaning derivative
+      Both
+        (convention ≡ gate4PhysicalAveragingConvention)
+        (DerivativeMatchesCMP109 meaning derivative)
   ; SupportMatches = λ convention support →
-      Primary.AveragingOperatorConvention
-      × SupportMatchesCMP109 meaning support
+      Both
+        (convention ≡ gate4PhysicalAveragingConvention)
+        (SupportMatchesCMP109 meaning support)
   ; NormalizationMatches = λ convention normalization →
-      Primary.AveragingOperatorConvention
-      × NormalizationMatchesCMP109 meaning normalization
+      Both
+        (convention ≡ gate4PhysicalAveragingConvention)
+        (NormalizationMatchesCMP109 meaning normalization)
   ; physicalLiteralMap = physicalLiteralMap meaning
   ; physicalDerivative = physicalDerivative meaning
   ; physicalSupport = physicalSupport meaning
   ; physicalNormalization = physicalNormalization meaning
   ; literalMapMatchesSelected =
-      gate4PhysicalAveragingConvention , literalMapMatchesCMP109 meaning
+      both refl (literalMapMatchesCMP109 meaning)
   ; derivativeMatchesSelected =
-      gate4PhysicalAveragingConvention , derivativeMatchesCMP109 meaning
+      both refl (derivativeMatchesCMP109 meaning)
   ; supportMatchesSelected =
-      gate4PhysicalAveragingConvention , supportMatchesCMP109 meaning
+      both refl (supportMatchesCMP109 meaning)
   ; normalizationMatchesSelected =
-      gate4PhysicalAveragingConvention , normalizationMatchesCMP109 meaning
+      both refl (normalizationMatchesCMP109 meaning)
   }
 
 record CMP98ToCMP109KernelBridge
