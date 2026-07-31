@@ -113,12 +113,16 @@ record PhysicalConstrainedHessianMeaning
     finiteReferenceHessian finitePhysicalHessian :
       Scale → Background → Matrix
 
-    projectionMeaning : ∀ (scale : Scale) (background : Background) →
-      Set
-    referenceHessianMeaning : ∀ (scale : Scale) (background : Background) →
-      Set
-    physicalHessianMeaning : ∀ (scale : Scale) (background : Background) →
-      Set
+    ProjectionMeaning : Scale → Background → Set
+    ReferenceHessianMeaning : Scale → Background → Set
+    PhysicalHessianMeaning : Scale → Background → Set
+
+    projectionMeaning : ∀ scale background →
+      ProjectionMeaning scale background
+    referenceHessianMeaning : ∀ scale background →
+      ReferenceHessianMeaning scale background
+    physicalHessianMeaning : ∀ scale background →
+      PhysicalHessianMeaning scale background
 
 open PhysicalConstrainedHessianMeaning public
 
