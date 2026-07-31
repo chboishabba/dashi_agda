@@ -1,0 +1,32 @@
+name: Ternary Golay cross-pollination
+
+on:
+  push:
+    branches:
+      - agent/ubp-epistemic-lattice-boundary
+    paths:
+      - 'DASHI/Foundations/TernaryGolay/**'
+      - 'DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda'
+      - 'DASHI/Foundations/UBP/YIntervalCertificate.agda'
+      - 'DASHI/Foundations/UBP/LeechValidMoveSet.agda'
+      - 'scripts/check_ternary_golay_cross_pollination.py'
+      - '.github/workflows/ternary-golay-cross-pollination.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Foundations/TernaryGolay/**'
+      - 'DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda'
+      - 'DASHI/Foundations/UBP/YIntervalCertificate.agda'
+      - 'DASHI/Foundations/UBP/LeechValidMoveSet.agda'
+      - 'scripts/check_ternary_golay_cross_pollination.py'
+
+jobs:
+  audit-and-agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Static fail-closed audit
+        run: python3 scripts/check_ternary_golay_cross_pollination.py
+      - name: Check focused Agda aggregate
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/TernaryGolay/Regression.agda
