@@ -17,6 +17,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkPrimaryKernelInstantiat
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicQkWeightedSchurInstantiationExact as PeriodicWeighted
 import DASHI.Physics.YangMills.BalabanClayGate4ConstrainedMinimizerProjectionExact as Minimizer
 import DASHI.Physics.YangMills.BalabanClayGate4ConstrainedHessianRestrictionExact as HessianRestriction
+import DASHI.Physics.YangMills.BalabanClayGate4T3ConstrainedHessianRestrictionReuseExact as T3Restriction
+import DASHI.Physics.YangMills.BalabanClayGate4T3RestrictedDeterminantAdapterExact as T3Determinant
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryBetaFiniteDifferenceExact as PrimaryBeta
 
 ------------------------------------------------------------------------
@@ -102,6 +104,16 @@ constrainedHessianRestrictionSplitLevel =
   HessianRestriction.constrainedHessianRestrictionSplitLevel
 projectedPerturbationNormTransportLevel =
   HessianRestriction.projectedPerturbationNormTransportLevel
+t3PhysicalHessianRestrictionReuseLevel =
+  T3Restriction.t3PhysicalHessianRestrictionReuseLevel
+t3RestrictedHessianSplitLevel =
+  T3Restriction.t3RestrictedHessianSplitLevel
+t3ProjectedOperatorNormTransportLevel =
+  T3Restriction.t3ProjectedOperatorNormTransportLevel
+t3RestrictedDeterminantRepresentationLevel =
+  T3Determinant.t3RestrictedDeterminantRepresentationLevel
+t3PerturbationNormToDeterminantOrderLevel =
+  T3Determinant.t3PerturbationNormToDeterminantOrderLevel
 
 primaryBetaFiniteDifferenceOrientationLevel =
   PrimaryBeta.primaryBetaFiniteDifferenceOrientationLevel
@@ -180,6 +192,18 @@ physicalHessianSecondVariationSplitInputsLevel =
   HessianRestriction.physicalHessianSecondVariationSplitInputsLevel
 physicalAmbientHessianPerturbationBoundInputsLevel =
   HessianRestriction.physicalAmbientHessianPerturbationBoundInputsLevel
+physicalT3ProjectionMeaningInputsLevel =
+  T3Restriction.physicalT3ProjectionMeaningInputsLevel
+physicalT3AmbientRemainderOperatorNormInputsLevel =
+  T3Restriction.physicalT3AmbientRemainderOperatorNormInputsLevel
+relativeFormBudgetToOperatorNormAcceptedWithoutProof =
+  T3Restriction.relativeFormBudgetToOperatorNormAcceptedWithoutProof
+physicalFiniteMatrixRestrictionMeaningInputsLevel =
+  T3Determinant.physicalFiniteMatrixRestrictionMeaningInputsLevel
+physicalDeterminantOrderIdentificationInputsLevel =
+  T3Determinant.physicalDeterminantOrderIdentificationInputsLevel
+physicalReferenceInverseNormIdentificationInputsLevel =
+  T3Determinant.physicalReferenceInverseNormIdentificationInputsLevel
 
 physicalPrimaryBetaFunctionIdentificationInputsLevel =
   PrimaryBeta.physicalPrimaryBetaFunctionIdentificationInputsLevel
