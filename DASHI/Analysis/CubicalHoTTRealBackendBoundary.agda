@@ -29,6 +29,27 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Truncation", TYPES 2014. DOI: 10.4230/LIPIcs.TYPES.2014.111.
 ------------------------------------------------------------------------
 
+-- Current Dashi backend policy:
+--
+-- * Bishop/Murray is the constructive ordered-real authority for the
+--   migrated Dashi slice and is used as the semantic embedding target.
+-- * Proof-critical estimates should remain in normalized ℚ whenever they
+--   are rationalizable; embed the resulting certificate only afterward.
+-- * Deeply composed native Bishop-real evaluation is not assumed efficient.
+--   Future archetypes must be classified as rationalizable, fixed algebraic,
+--   general analytic, or proof-only abstract before choosing a backend.
+-- * Cubical/HoTT reals are a comparative prototype lane, not a replacement
+--   dependency for the current theorem graph.
+--
+-- These performance and backend-scope observations do not block the Bishop
+-- Agda 2.9 migration.  For the migration itself, inspect ℚᵘ directly rather
+-- than inferring it from normalized ℚ: the ℚᵘ properties API supplies the
+-- propositional absolute-value idempotence used by K-abs, and reconstruction
+-- may be judgmental when the constructor and projections genuinely match.
+-- Bishop commit d732b0340d729b264227a70fcf38383d8fb3ac3c now closes this
+-- particular K-abs/index seam; common-index transport remains a future
+-- fallback rather than a requirement for the absolute-product theorem.
+
 record CubicalHoTTRealSourceReceipt : Set where
   field
     author : String
