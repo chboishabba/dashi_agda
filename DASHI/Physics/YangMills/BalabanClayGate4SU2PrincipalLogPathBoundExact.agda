@@ -2,7 +2,8 @@ module DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogPathBoundExact whe
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact as Scale
@@ -56,8 +57,8 @@ productList algebra (value ∷ values) =
   multiply algebra value (productList algebra values)
 
 listLength : ∀ {A : Set} → List A → Nat
-listLength [] = Agda.Builtin.Nat.zero
-listLength (_ ∷ values) = Agda.Builtin.Nat.suc (listLength values)
+listLength [] = zero
+listLength (_ ∷ values) = suc (listLength values)
 
 data AllDefectBelow
     {Group Bound : Set}
@@ -78,21 +79,17 @@ productDefectBelowLengthScale :
     (defect algebra (productList algebra values))
     (Scale.natScale (scale algebra) (listLength values) bound)
 productDefectBelowLengthScale algebra bound allDefectNil =
-  Scale.substLower
-    (defectIdentity algebra)
+  subst
+    (λ lower →
+      Scale.LessEqual (scale algebra) lower
+        (Scale.zeroScalar (scale algebra)))
+    (sym (defectIdentity algebra))
     (Scale.reflexive (scale algebra) (Scale.zeroScalar (scale algebra)))
-  where
-  Scale.substLower : ∀ {Scalar : Set}
-    {ordered : Scale.OrderedAdditiveScale Scalar}
-    {left right upper : Scalar} →
-    left ≡ right →
-    Scale.LessEqual ordered right upper →
-    Scale.LessEqual ordered left upper
-  Scale.substLower equality proof rewrite equality = proof
 productDefectBelowLengthScale algebra bound
-    (allDefectCons headBound tailBounds) =
+    (allDefectCons {value = value} {values = values}
+      headBound tailBounds) =
   Scale.transitive (scale algebra)
-    (defectProduct algebra _ _)
+    (defectProduct algebra value (productList algebra values))
     (Scale.addMonotone (scale algebra)
       headBound
       (productDefectBelowLengthScale algebra bound tailBounds))
