@@ -17,20 +17,35 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- an internal identity to a physical activation, vacuum, force, or
 -- manifestation theorem.
 
+oneEighth :
+  ℚ
+oneEighth =
+  1 / 8
+
+oneHalf :
+  ℚ
+oneHalf =
+  1 / 2
+
+threeQuarters :
+  ℚ
+threeQuarters =
+  3 / 4
+
 symmetryTax :
   ℚ →
   ℚ →
   ℚ →
   ℚ
 symmetryTax y support normSquared =
-  support * y + normSquared / 8
+  support * y + normSquared * oneEighth
 
 activationQuantum :
   ℚ →
   ℚ →
   ℚ
 activationQuantum y coordinateSquare =
-  y + coordinateSquare / 8
+  y + coordinateSquare * oneEighth
 
 deexcitationQuantum :
   ℚ →
@@ -67,42 +82,57 @@ unitActivationIdentity :
   (y : ℚ) →
   activationQuantum y 1
   ≡
-  y + 1 / 8
+  y + oneEighth
 unitActivationIdentity y =
-  refl
+  ℚRing.solve
 
 classADeexcitationIdentity :
   (y : ℚ) →
   deexcitationQuantum y 16
   ≡
-  0ℚ - (y + 16 / 8)
+  0ℚ - (y + 16 * oneEighth)
 classADeexcitationIdentity y =
-  refl
+  ℚRing.solve
 
 classBDeexcitationIdentity :
   (y : ℚ) →
   deexcitationQuantum y 4
   ≡
-  0ℚ - (y + 4 / 8)
+  0ℚ - (y + 4 * oneEighth)
 classBDeexcitationIdentity y =
-  refl
+  ℚRing.solve
 
 classCThreeDeexcitationIdentity :
   (y : ℚ) →
   deexcitationQuantum y 9
   ≡
-  0ℚ - (y + 9 / 8)
+  0ℚ - (y + 9 * oneEighth)
 classCThreeDeexcitationIdentity y =
-  refl
+  ℚRing.solve
 
 longCycleCancellationIdentity :
   (y : ℚ) →
   2 * activationQuantum y 1
   + 2 * deexcitationQuantum y 4
   ≡
-  0ℚ - 3 / 4
+  0ℚ - threeQuarters
 longCycleCancellationIdentity y =
   ℚRing.solve
+
+oneEighthIsOneOverEight :
+  oneEighth ≡ 1 / 8
+oneEighthIsOneOverEight =
+  refl
+
+oneHalfIsOneOverTwo :
+  oneHalf ≡ 1 / 2
+oneHalfIsOneOverTwo =
+  refl
+
+threeQuartersIsThreeOverFour :
+  threeQuarters ≡ 3 / 4
+threeQuartersIsThreeOverFour =
+  refl
 
 ------------------------------------------------------------------------
 -- NRCI half-threshold is a normalization identity.
@@ -114,9 +144,9 @@ nrci tax =
   10 / (10 + tax)
 
 nrciAtTaxTen :
-  nrci 10 ≡ 1 / 2
+  nrci 10 ≡ oneHalf
 nrciAtTaxTen =
-  ℚRing.solve
+  refl
 
 record CoherenceThresholdStatus : Set where
   constructor coherenceThresholdStatus
