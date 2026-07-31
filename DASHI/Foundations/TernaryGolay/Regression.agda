@@ -11,13 +11,17 @@ open import Base369 using
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.Base369NonaryTruthRing as Z9
 import DASHI.Foundations.Base369TriTruthField as F3
+import DASHI.Foundations.TernaryGolay.BinaryTernaryMacWilliamsUnification as MacWilliams
 import DASHI.Foundations.TernaryGolay.ChannelC3OrbitDecomposition as Channels
 import DASHI.Foundations.TernaryGolay.CodeBoundary as Code
 import DASHI.Foundations.TernaryGolay.CoxeterToddRoutesBoundary as K12
+import DASHI.Foundations.TernaryGolay.ExplicitCode729 as Explicit
 import DASHI.Foundations.TernaryGolay.MathieuExceptionalBridgeBoundary as Mathieu
 import DASHI.Foundations.TernaryGolay.NonaryTernaryReduction as Reduction
 import DASHI.Foundations.TernaryGolay.RetractedZ9CoxeterToddBoundary as Retraction
+import DASHI.Foundations.TernaryGolay.SmallWittHexadCount as SmallWitt
 import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
+import DASHI.Foundations.TernaryGolay.TernaryGolayWeightEnumerator as Enumerator
 import DASHI.Foundations.TernaryGolay.TGICWalshS3Decomposition as Walsh
 import DASHI.Foundations.UBP.ExternalRepositoryProvenance as Provenance
 import DASHI.Foundations.UBP.LeechValidMoveSet as Moves
@@ -25,8 +29,8 @@ import DASHI.Foundations.UBP.MOGGolayCharacterisationBoundary as MOG
 import DASHI.Foundations.UBP.NRCIModelParameterBoundary as NRCI
 import DASHI.Foundations.UBP.YIntervalCertificate as Interval
 
-sourceCountRegression : Sources.canonicalTernaryGolaySourceCount ≡ 8
-sourceCountRegression = Sources.canonicalTernaryGolaySourceCountIsEight
+sourceCountRegression : Sources.canonicalTernaryGolaySourceCount ≡ 12
+sourceCountRegression = Sources.canonicalTernaryGolaySourceCountIsTwelve
 
 externalSourceCountRegression :
   Provenance.canonicalUBPExternalSourceCount ≡ 4
@@ -35,6 +39,58 @@ externalSourceCountRegression =
 
 threePowerSixRegression : Code.pow 3 6 ≡ 729
 threePowerSixRegression = Code.threePowerSix
+
+explicitMessageCountRegression :
+  Explicit.listCount Explicit.allMessages ≡ 729
+explicitMessageCountRegression = Explicit.allMessagesCountIs729
+
+explicitGeneratorGramRegression :
+  Explicit.gramZeroCheck Explicit.generatorRows ≡ true
+explicitGeneratorGramRegression = Explicit.generatorGramIsZero
+
+explicitMinimumWeightRegression :
+  Explicit.countWeight 5 Explicit.allCodewords ≡ 0
+explicitMinimumWeightRegression = Explicit.weight5Count
+
+explicitWeightSixRegression :
+  Explicit.countWeight 6 Explicit.allCodewords ≡ 264
+explicitWeightSixRegression = Explicit.weight6Count
+
+explicitWeightNineRegression :
+  Explicit.countWeight 9 Explicit.allCodewords ≡ 440
+explicitWeightNineRegression = Explicit.weight9Count
+
+explicitWeightTwelveRegression :
+  Explicit.countWeight 12 Explicit.allCodewords ≡ 24
+explicitWeightTwelveRegression = Explicit.weight12Count
+
+weightEnumeratorSumRegression :
+  Enumerator.coefficient0 Enumerator.ternaryGolayWeightEnumerator
+  + Enumerator.coefficient6 Enumerator.ternaryGolayWeightEnumerator
+  + Enumerator.coefficient9 Enumerator.ternaryGolayWeightEnumerator
+  + Enumerator.coefficient12 Enumerator.ternaryGolayWeightEnumerator
+  ≡ 729
+weightEnumeratorSumRegression = Enumerator.enumeratorCoefficientSum
+
+hexadCountRegression :
+  Explicit.listCount SmallWitt.hexadSupports ≡ 132
+hexadCountRegression = SmallWitt.hexadSupportCountIs132
+
+pentadCountRegression :
+  Explicit.listCount SmallWitt.pentads ≡ 792
+pentadCountRegression = SmallWitt.pentadCountIs792
+
+smallWittRegression :
+  SmallWitt.everyPentadHasUniqueHexadCheck ≡ true
+smallWittRegression = SmallWitt.everyPentadHasUniqueHexad
+
+binaryOctadArithmeticRegression :
+  64 * MacWilliams.octadCount
+    MacWilliams.canonicalBinaryGolayOctadCoefficientReceipt
+  ≡ 48576
+binaryOctadArithmeticRegression =
+  MacWilliams.reducedCoefficientEquation
+    MacWilliams.canonicalBinaryGolayOctadCoefficientReceipt
 
 channelCountRegression : Channels.listCount Channels.allChannels ≡ 9
 channelCountRegression = Channels.channelCountIsNine
@@ -114,6 +170,10 @@ focusedReceipts =
   Provenance.externalRepositoryProvenanceGenericReceipt
   ∷ Sources.sourceAtlasReceipt
   ∷ Code.ternaryGolayBoundaryReceipt
+  ∷ Explicit.explicitTernaryGolayGenericReceipt
+  ∷ Enumerator.weightEnumeratorGenericReceipt
+  ∷ SmallWitt.smallWittGenericReceipt
+  ∷ MacWilliams.macWilliamsUnificationGenericReceipt
   ∷ Retraction.retractedLiftGenericReceipt
   ∷ K12.coxeterToddRoutesGenericReceipt
   ∷ Mathieu.mathieuExceptionalBridgeReceipt
