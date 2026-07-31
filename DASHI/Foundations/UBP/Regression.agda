@@ -2,7 +2,7 @@ module DASHI.Foundations.UBP.Regression where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat.Base using (_*_)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
@@ -101,7 +101,7 @@ allEvidenceRowsRemainNonPromoting =
   Evidence.canonicalUBPClaimRowsNonPromoting
 
 focusedReceipts :
-  Agda.Builtin.List.List GenericReceipt.GenericReceipt
+  List GenericReceipt.GenericReceipt
 focusedReceipts =
   Sources.canonicalUBPSourceReceipt
   ∷ Exactness.ubpExactnessAndLatticeReceipt
