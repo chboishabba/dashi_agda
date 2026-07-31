@@ -14,9 +14,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Communications in Mathematical Physics 98 (1985), 17--51.
 -- DOI: 10.1007/BF01211042.
 --
--- Equations (42)--(43) give the local averaging operation.  Immediately after
+-- Equations (42)--(43) give the local averaging operation. Immediately after
 -- (43), Balaban states that the kth average at a coarse bond c depends only on
--- fine bonds in B^k(c_-) union B^k(c_+).  Proposition 4 and equations
+-- fine bonds in B^k(c_-) union B^k(c_+). Proposition 4 and equations
 -- (146)--(147) give the linearized estimate
 --
 --   |Q_k(U_0) A| <= (1 + 2 C'_1 alpha_0) Q'_k |A|,
@@ -99,14 +99,14 @@ record BalabanPrimaryQkRowData
 
     -- Proposition 4, equation (147), after the physical kernel and norm are
     -- identified with the selected Scalar carrier.
-    proposition4PointwiseBound : ∀ coarse fine →
+    proposition4PointwiseBound : ∀ (coarse : CoarseBond) (fine : FineBond) →
       LessEqual algebra
         (kernelAbsoluteValue coarse fine)
         primaryEntryBound
 
     -- Locality after equation (43), together with the literal finite block
     -- enumeration, supplies this cardinality-to-budget estimate.
-    localSupportCardinalityBudget : ∀ coarse →
+    localSupportCardinalityBudget : ∀ (coarse : CoarseBond) →
       LessEqual algebra
         (natScale algebra
           (listLength (localSupport coarse))
@@ -128,14 +128,14 @@ localKernelValuesPointwiseBelow :
     {algebra : OrderedAdditiveScale Scalar}
     (dataSet : BalabanPrimaryQkRowData
       CoarseBond FineBond Scalar algebra)
-    coarse →
+    (coarse : CoarseBond) →
   AllBelow algebra
     (primaryEntryBound dataSet)
     (localKernelValues dataSet coarse)
-localKernelValuesPointwiseBelow dataSet coarse =
+localKernelValuesPointwiseBelow {algebra = algebra} dataSet coarse =
   go (localSupport dataSet coarse)
   where
-  go : ∀ support →
+  go : (support : List FineBond) →
     AllBelow algebra
       (primaryEntryBound dataSet)
       (mapList (kernelAbsoluteValue dataSet coarse) support)
@@ -150,7 +150,7 @@ primaryQkLocalRowSumBelowBudget :
     {algebra : OrderedAdditiveScale Scalar}
     (dataSet : BalabanPrimaryQkRowData
       CoarseBond FineBond Scalar algebra)
-    coarse →
+    (coarse : CoarseBond) →
   LessEqual algebra
     (finiteSum algebra (localKernelValues dataSet coarse))
     (rowBudget dataSet coarse)
@@ -167,7 +167,7 @@ record UniformFiniteKernelBudget
   field
     rowData : BalabanPrimaryQkRowData Index Entry Scalar algebra
     uniformBudget : Scalar
-    everyRowBudgetUniform : ∀ index →
+    everyRowBudgetUniform : ∀ (index : Index) →
       LessEqual algebra (rowBudget rowData index) uniformBudget
 
 open UniformFiniteKernelBudget public
@@ -176,7 +176,7 @@ primaryQkEveryLocalRowBelowUniformBudget :
   ∀ {Index Entry Scalar : Set}
     {algebra : OrderedAdditiveScale Scalar}
     (dataSet : UniformFiniteKernelBudget Index Entry Scalar algebra)
-    index →
+    (index : Index) →
   LessEqual algebra
     (finiteSum algebra
       (localKernelValues (rowData dataSet) index))
