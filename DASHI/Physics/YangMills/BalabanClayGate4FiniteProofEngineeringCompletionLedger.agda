@@ -16,7 +16,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4SpanningTreeGaugeSliceExact as Tr
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCanonicalFreeBasisExact as FreeBasis
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeSU2FreeBasisExact as SU2Basis
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoordinateMatrixEquivalenceExact as Matrix
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteCoordinateMatrixCompositionExact as MatrixComposition
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteDeterminantFactorizationExact as Determinant
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteSimilaritySpectrumDeterminantExact as Similarity
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteSpectrumDeterminantCompletionExact as SpectrumDeterminant
 
 ------------------------------------------------------------------------
@@ -141,6 +143,14 @@ finiteMatrixActionInjectivityLevel = Matrix.finiteMatrixActionInjectivityLevel
 finiteMatrixOperatorRoundTripLevel = Matrix.finiteMatrixOperatorRoundTripLevel
 finiteRestrictedOperatorMatrixSplitLevel =
   Matrix.finiteRestrictedOperatorMatrixSplitLevel
+finiteMatrixProductActionLevel =
+  MatrixComposition.finiteMatrixProductActionLevel
+finiteMatrixIdentityActionLevel =
+  MatrixComposition.finiteMatrixIdentityActionLevel
+finiteOperatorCompositionMatrixLevel =
+  MatrixComposition.finiteOperatorCompositionMatrixLevel
+finiteOperatorIdentityMatrixLevel =
+  MatrixComposition.finiteOperatorIdentityMatrixLevel
 
 finiteDeterminantFactorizationLevel =
   Determinant.finiteDeterminantFactorizationLevel
@@ -148,6 +158,10 @@ finiteEigenvalueProductLowerBoundLevel =
   Determinant.finiteEigenvalueProductLowerBoundLevel
 finiteEigenvalueProductUpperBoundLevel =
   Determinant.finiteEigenvalueProductUpperBoundLevel
+finiteSimilarityDeterminantInvariantLevel =
+  Similarity.finiteSimilarityDeterminantInvariantLevel
+finiteSimilarityEigenpairTransportLevel =
+  Similarity.finiteSimilarityEigenpairTransportLevel
 finiteSpectrumCoercivityCompletionLevel =
   SpectrumDeterminant.finiteSpectrumCoercivityCompletionLevel
 finiteSpectrumPositivityCompletionLevel =
@@ -197,6 +211,8 @@ physicalSU2CoordinateTupleToLieFieldInputsLevel =
   SU2Basis.physicalSU2CoordinateTupleToLieFieldInputsLevel
 physicalCoordinateOperatorIdentificationInputsLevel =
   Matrix.physicalCoordinateOperatorIdentificationInputsLevel
+physicalTreeToBalabanChangeOfBasisInputsLevel =
+  Similarity.physicalTreeToBalabanChangeOfBasisInputsLevel
 physicalSymmetricRelativeSpectrumInputsLevel =
   Determinant.physicalSymmetricRelativeSpectrumInputsLevel
 physicalSpectrumCoordinateIdentificationInputsLevel =
