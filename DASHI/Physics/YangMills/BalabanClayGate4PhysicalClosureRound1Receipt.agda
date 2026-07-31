@@ -17,11 +17,21 @@ record PhysicalClosureRound1Receipt : Set where
     dyadicSupport128By8Checked : Bool
     dyadicCellWeightChecked : Bool
     dyadicSchurEnvelopeChecked : Bool
+
+    cmp109GroupAverageAxiomsChecked : Bool
+    cmp109ImplicitAverageDerivativeChecked : Bool
+    equation011ContourAdapterChecked : Bool
     printedPhysicalInstanceChecked : Bool
+    dyadicGroupAverageInstanceChecked : Bool
+    principalLogPathBoundChecked : Bool
     frechetAssemblyChecked : Bool
+
     twoFamilyChannelReductionChecked : Bool
     t3TwoFamilyReuseChecked : Bool
+
     treeBackgroundSliceTransitionChecked : Bool
+    treeBackgroundSpectralDeterminantChecked : Bool
+
     localToUniformHRBetaChecked : Bool
     wilsonReflectionPositivitySourceChecked : Bool
 
@@ -40,13 +50,24 @@ record AuthoritativePhysicalClosureRound1Evidence
     dyadicSupport128By8Typechecks : Set
     dyadicCellWeightTypechecks : Set
     dyadicSchurEnvelopeTypechecks : Set
+
+    cmp109GroupAverageAxiomsTypechecks : Set
+    cmp109ImplicitAverageDerivativeTypechecks : Set
+    equation011ContourAdapterTypechecks : Set
     printedPhysicalInstanceTypechecks : Set
+    dyadicGroupAverageInstanceTypechecks : Set
+    principalLogPathBoundTypechecks : Set
     frechetAssemblyTypechecks : Set
+
     twoFamilyChannelReductionTypechecks : Set
     t3TwoFamilyReuseTypechecks : Set
+
     treeBackgroundSliceTransitionTypechecks : Set
+    treeBackgroundSpectralDeterminantTypechecks : Set
+
     localToUniformHRBetaTypechecks : Set
     wilsonReflectionPositivitySourceTypechecks : Set
+
     validationWrapperTypechecks : Set
     producerWrapperTypechecks : Set
     roundHasNoPostulatesOrUnsolvedMetas : Set
