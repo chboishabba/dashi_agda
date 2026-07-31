@@ -5,6 +5,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicProjectionNormalizationExact as Dyadic
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as DyadicPrinted
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109Equation012GroupAverageAdapterExact as GroupAdapter
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedPathFormulaExact as Printed
@@ -118,8 +119,7 @@ dyadicGroupAverageLiteralIdentification :
     Field (DyadicPrinted.CoarseBond coarseN → Group)
     (DyadicPrinted.FineBond coarseN)
     (DyadicPrinted.CoarseBond coarseN)
-    Group Lie Group Radius Entry
-    DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicProjectionNormalizationExact.CMP109Dyadic4Normalization
+    Group Lie Group Radius Entry Dyadic.CMP109Dyadic4Normalization
 dyadicGroupAverageLiteralIdentification inputs =
   DyadicPrinted.dyadicCMP109LiteralIdentification
     (asDyadicPrintedPhysicalInputs inputs)
