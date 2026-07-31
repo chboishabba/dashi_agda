@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkPhysicalSchurAssemblyExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -11,7 +12,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkSchurBridgeExact as Brid
 ------------------------------------------------------------------------
 -- One physical package for the primary Q_k route.
 --
--- Balaban supplies locality and the pointwise derivative-kernel bound.  DASHI
+-- Balaban supplies locality and the pointwise derivative-kernel bound. DASHI
 -- must still instantiate the finite support lists, their row and column incidence
 -- budgets, the adjoint transpose meaning, and the normalized Schur inequality.
 -- Once those are present, there is no further analytic step between the primary
@@ -53,8 +54,12 @@ asStrongPrimaryQkSchurData dataSet = record
   ; columnKernel =
       Adjoint.asUniformAdjointColumnKernelBudget (adjointColumns dataSet)
   ; columnIsAdjointTranspose = λ input output →
-      Adjoint.adjointTransposeExact
-        (Adjoint.adjointMeaning (adjointColumns dataSet)) input output
+      trans
+        (Adjoint.adjointTransposeExact
+          (Adjoint.adjointMeaning (adjointColumns dataSet)) input output)
+        (cong
+          (λ rows → Primary.kernelAbsoluteValue rows output input)
+          (sym (primalAgreement dataSet)))
   ; operatorNormSquared = operatorNormSquared dataSet
   ; finiteSchurTest = finiteSchurTest dataSet
   }
