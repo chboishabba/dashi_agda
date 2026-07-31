@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
@@ -12,10 +13,10 @@ import DASHI.Foundations.TernaryGolay.SourceAtlas as Sources
 -- Calderbank–Sloane correction boundary.
 --
 -- The 1996 paper claimed that a Z/9Z lift of the ternary Golay code followed
--- by Construction A produced K12.  The authors' published correction states
+-- by Construction A produced K12. The authors' published correction states
 -- that the resulting lattice is not the Coxeter–Todd lattice, corrects the
 -- determinant from 3^6 to 3^12, and rules out the stated block-9I generator
--- form.  This module makes the correction impossible to omit downstream.
+-- form. This module makes the correction impossible to omit downstream.
 ------------------------------------------------------------------------
 
 pow : Nat → Nat → Nat
@@ -93,10 +94,9 @@ record Block9GeneratorFamily {IntegerMatrix Lattice K12 : Set} : Set₁ where
 
 open Block9GeneratorFamily public
 
--- This is the exact proof obligation extracted from the correction.  It is an
--- interface rather than a postulate: a downstream formal import must provide
--- the arithmetic contradiction for its chosen integer-matrix and real-lattice
--- carriers.
+-- Exact proof obligation extracted from the correction. It is an interface,
+-- not a postulate: a downstream formal import supplies the arithmetic facts
+-- for its chosen matrix, real-number, and lattice carriers and derives bottom.
 record NoBlock9LiftCanProduceK12
     {IntegerMatrix Lattice K12 : Set}
     (family : Block9GeneratorFamily {IntegerMatrix} {Lattice} {K12}) : Set₁ where
@@ -109,7 +109,7 @@ record NoBlock9LiftCanProduceK12
       twelveSqrtThreeIsNotInteger →
       integerLatticeMinimumSquaredLengthIsInteger →
       k12Identification family →
-      Set
+      ⊥
 
 open NoBlock9LiftCanProduceK12 public
 
@@ -143,7 +143,7 @@ retractedLiftGenericReceipt =
     "corrected ternary-Golay Z9 lift boundary"
     "DASHI.Foundations.TernaryGolay.RetractedZ9CoxeterToddBoundary"
     "canonicalCorrectedZ9LiftFacts"
-    "the original DOI, correction DOI, determinant 3^12, minimum norm 4, centre-density denominator 729, and K12 non-identification are attached"
+    "the original DOI, correction DOI, determinant 3^12, minimum norm 4, centre-density denominator 729, K12 non-identification, and block-9I contradiction interface are attached"
     "the corrected lattice is not K12; any K12 theorem must enter through an independent fixed-sublattice or Eisenstein construction receipt"
     "agda -i . DASHI/Foundations/TernaryGolay/RetractedZ9CoxeterToddBoundary.agda"
 
