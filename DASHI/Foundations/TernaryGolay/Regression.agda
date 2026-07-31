@@ -1,13 +1,16 @@
 module DASHI.Foundations.TernaryGolay.Regression where
 
 open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (0ℚ)
+open import Agda.Builtin.Nat using (_*_)
+open import Data.Rational using (_+_; 0ℚ)
 
 open import Base369 using
   ( tri-mid ; non-7 )
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Foundations.Base369NonaryTruthRing as Z9
+import DASHI.Foundations.Base369TriTruthField as F3
 import DASHI.Foundations.TernaryGolay.ChannelC3OrbitDecomposition as Channels
 import DASHI.Foundations.TernaryGolay.CodeBoundary as Code
 import DASHI.Foundations.TernaryGolay.CoxeterToddRoutesBoundary as K12
@@ -53,14 +56,12 @@ fullS3OrbitRegression :
 fullS3OrbitRegression = Channels.swapReturnsToSingleS3Orbit
 
 nonaryReductionSample : Reduction.reduce9to3 non-7 ≡ tri-mid
-nonaryReductionSample =
-  Reduction.reducePreservesOne
+nonaryReductionSample = refl
 
 nonaryReductionAddLawAvailable :
-  Reduction.reduce9to3
-    (DASHI.Foundations.Base369NonaryTruthRing.nonaryAdd non-7 non-7)
+  Reduction.reduce9to3 (Z9.nonaryAdd non-7 non-7)
   ≡
-  DASHI.Foundations.Base369TriTruthField.triAdd
+  F3.triAdd
     (Reduction.reduce9to3 non-7)
     (Reduction.reduce9to3 non-7)
 nonaryReductionAddLawAvailable = Reduction.reducePreservesAdd non-7 non-7
