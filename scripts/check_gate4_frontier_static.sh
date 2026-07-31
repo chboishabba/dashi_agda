@@ -30,6 +30,9 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicQkWeightedSchurInstantiationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4ConstrainedMinimizerProjectionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4ConstrainedHessianRestrictionExact.agda
+  DASHI/Physics/YangMills/BalabanClayT3PhysicalUniformFluctuationCoercivityExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4T3ConstrainedHessianRestrictionReuseExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4T3RestrictedDeterminantAdapterExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryBetaFiniteDifferenceExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PrimaryAveragingTrancheReceipt.agda
