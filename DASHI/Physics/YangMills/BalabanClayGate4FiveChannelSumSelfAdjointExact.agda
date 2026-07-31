@@ -86,15 +86,15 @@ formAbsoluteOfSumBelowSum algebra left right state =
       (addBound algebra
         (quadraticFormAbsolute algebra left state)
         (quadraticFormAbsolute algebra right state)))
-    (applyAdd algebra left right state)
+    (sym (applyAdd algebra left right state))
     (subst
       (λ selectedInner → LessEqual algebra
         (absolute algebra selectedInner)
         (addBound algebra
           (quadraticFormAbsolute algebra left state)
           (quadraticFormAbsolute algebra right state)))
-      (innerRightAdd algebra state
-        (apply algebra left state) (apply algebra right state))
+      (sym (innerRightAdd algebra state
+        (apply algebra left state) (apply algebra right state)))
       (absoluteTriangle algebra
         (inner algebra state (apply algebra left state))
         (inner algebra state (apply algebra right state))))
