@@ -7,6 +7,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicSupportBudgetsExact a
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicCellWeightExact as Weight
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicEnvelopeSchurExact as Schur
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109GroupAverageAxiomsExact as GroupAverage
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109GroupAverageImplicitDerivativeExact as GroupDerivative
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109Equation012GroupAverageAdapterExact as GroupAdapter
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as PrintedPhysical
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicGroupAveragePhysicalExact as DyadicGroupAverage
@@ -25,9 +26,10 @@ import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as O
 -- This round closes the repository-specific four-dimensional dyadic geometry
 -- and normalization, supplies explicit 128/8 Schur envelopes, fixes the printed
 -- equation-(0.12) instance to the equation-(0.11) analytic group average and
--- principal-log convention, assembles its componentwise Fréchet kernel, factors
--- the five Hessian channels through two shared analytic majorants and discharges
--- the five T3 form estimates from those two families.  It also unifies the local
+-- principal-log convention, derives the implicit Federbush-average derivative,
+-- and assembles the componentwise Fréchet kernel.  It factors the five Hessian
+-- channels through two shared analytic majorants and discharges the five T3
+-- form estimates from those two families.  It also unifies the local
 -- tree/background slice with spectrum/coercivity/determinant transport, reduces
 -- the uniform H-R_beta estimate to local absorption, and records the exact
 -- Menotti--Pelissetto Wilson-action reflection-positivity theorem without
@@ -78,6 +80,10 @@ cmp109AveragedContourGaugeCovarianceLevel =
   GroupAverage.cmp109AveragedContourGaugeCovarianceLevel
 cmp109ReversedContourAverageLevel =
   GroupAverage.cmp109ReversedContourAverageLevel
+cmp109FederbushImplicitDerivativeFormulaLevel =
+  GroupDerivative.cmp109FederbushImplicitDerivativeFormulaLevel
+cmp109FederbushImplicitDerivativeUniquenessLevel =
+  GroupDerivative.cmp109FederbushImplicitDerivativeUniquenessLevel
 cmp109Equation011SourceContourInstantiationLevel =
   GroupAdapter.cmp109Equation011SourceContourInstantiationLevel
 cmp109Equation011TargetContourInstantiationLevel =
@@ -159,6 +165,10 @@ physicalCMP109FederbushAverageExistenceInputsLevel =
   GroupAverage.physicalCMP109FederbushAverageExistenceInputsLevel
 physicalCMP109ContourFamilySmallDiameterInputsLevel =
   GroupAverage.physicalCMP109ContourFamilySmallDiameterInputsLevel
+physicalCMP109FederbushDifferentialIdentificationInputsLevel =
+  GroupDerivative.physicalCMP109FederbushDifferentialIdentificationInputsLevel
+physicalCMP109FederbushCentreInvertibilityInputsLevel =
+  GroupDerivative.physicalCMP109FederbushCentreInvertibilityInputsLevel
 physicalCMP109FiniteContourFamilyInputsLevel =
   GroupAdapter.physicalCMP109FiniteContourFamilyInputsLevel
 physicalCMP109DyadicLocalDependenceInputsLevel =
