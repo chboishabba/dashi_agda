@@ -47,11 +47,17 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicSupportBudgetsExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicCellWeightExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicEnvelopeSchurExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109GroupAverageAxiomsExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109GroupAverageImplicitDerivativeExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109Equation012GroupAverageAdapterExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicGroupAveragePhysicalExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4SU2PrincipalLogPathBoundExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicFrechetAssemblyExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4TwoFamilyChannelMajorantExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4T3TwoFamilyChannelReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4TreeBackgroundSliceTransitionExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4TreeBackgroundSpectralDeterminantTransportExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4HRBetaLocalToUniformExact.agda
   DASHI/Physics/YangMills/BalabanClayOSWilsonReflectionPositivityExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound1Ledger.agda
