@@ -5,6 +5,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicProjectionNormalizationExact as Projection
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicSupportBudgetsExact as Support
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicCellWeightExact as Weight
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as PrintedPhysical
 import DASHI.Physics.YangMills.BalabanClayGate4TwoFamilyChannelMajorantExact as Channels
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact as HRBeta
 import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as OS
@@ -13,9 +14,10 @@ import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as O
 -- Highest-alpha continuation beyond the finite proof-engineering tranche.
 --
 -- This round closes the repository-specific four-dimensional dyadic geometry
--- and normalization, supplies explicit 128/8 support envelopes, factors the
--- five Hessian channels through two shared analytic majorants, and reduces the
--- uniform H-R_beta estimate to local absorption.  It also records the exact
+-- and normalization, supplies explicit 128/8 support envelopes, fixes the
+-- printed equation-(0.12) instance to that geometry and principal log, factors
+-- the five Hessian channels through two shared analytic majorants, and reduces
+-- the uniform H-R_beta estimate to local absorption.  It also records the exact
 -- Menotti--Pelissetto Wilson-action reflection-positivity theorem for the later
 -- Osterwalder--Schrader lane without conflating it with RG preservation.
 ------------------------------------------------------------------------
@@ -53,6 +55,15 @@ cmp109DyadicWeightedAdjointRatioLevel =
 cmp109DyadicBlockAverageCancellationLevel =
   Weight.cmp109DyadicBlockAverageCancellationLevel
 
+cmp109DyadicPrintedMapInstantiationLevel =
+  PrintedPhysical.cmp109DyadicPrintedMapInstantiationLevel
+cmp109DyadicSupportIdentificationLevel =
+  PrintedPhysical.cmp109DyadicSupportIdentificationLevel
+cmp109DyadicNormalizationIdentificationLevel =
+  PrintedPhysical.cmp109DyadicNormalizationIdentificationLevel
+cmp109DyadicPrincipalLogTermIdentificationLevel =
+  PrintedPhysical.cmp109DyadicPrincipalLogTermIdentificationLevel
+
 twoFamilyFiveChannelReductionLevel =
   Channels.twoFamilyFiveChannelReductionLevel
 su2NonlinearityFamilyProvenanceLevel =
@@ -80,6 +91,13 @@ wilsonTransferMatrixPositivityProvenanceLevel =
 ------------------------------------------------------------------------
 -- Remaining analytic/physical inhabitants after this round.
 ------------------------------------------------------------------------
+
+physicalCMP109ContourValueInputsLevel =
+  PrintedPhysical.physicalCMP109ContourValueInputsLevel
+physicalCMP109PrincipalChartInputsLevel =
+  PrintedPhysical.physicalCMP109PrincipalChartInputsLevel
+physicalCMP109FrechetKernelInputsLevel =
+  PrintedPhysical.physicalCMP109FrechetKernelInputsLevel
 
 physicalScalarCellWeightInstantiationInputsLevel =
   Weight.physicalScalarCellWeightInstantiationInputsLevel
