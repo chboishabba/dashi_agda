@@ -1,11 +1,12 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PeriodicEndpointBlockPredicateExact where
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Empty; Dec; yes; no; Not; _∈_; here; there;
+  using (Empty; Dec; yes; no; _∈_; here; there;
     PositiveBond; DecidableEquality; productDecidableEquality;
     periodicTorus4DecidableEquality; cyclicIndexDecidableEquality)
 
@@ -43,12 +44,11 @@ membershipDecidable :
 membershipDecidable decide value [] = no (λ ())
 membershipDecidable decide value (candidate ∷ values)
   with decide value candidate
-... | yes equality with equality
-...   | yes _ = yes here
+... | yes refl = yes here
 ... | no value≢candidate with membershipDecidable decide value values
 ...   | yes membership = yes (there membership)
 ...   | no absent = no λ where
-      here → value≢candidate (Agda.Builtin.Equality.refl)
+      here → value≢candidate refl
       (there membership) → absent membership
 
 unionDecidable :
@@ -142,17 +142,6 @@ record TranslationCovariantEndpointBlocks
   field
     translateCoarse : Translation → PositiveBond coarseSide → PositiveBond coarseSide
     translateFine : Translation → PositiveBond fineSide → PositiveBond fineSide
-
-    SourceMembershipTranslationIff :
-      Translation → PositiveBond coarseSide → PositiveBond fineSide → Set
-    TargetMembershipTranslationIff :
-      Translation → PositiveBond coarseSide → PositiveBond fineSide → Set
-
-    sourceMembershipTranslationIff : ∀ translation coarse fine →
-      SourceMembershipTranslationIff translation coarse fine
-
-    targetMembershipTranslationIff : ∀ translation coarse fine →
-      TargetMembershipTranslationIff translation coarse fine
 
     sourceForward : ∀ translation coarse fine →
       FineBondInSourceEndpointBlock geometry coarse fine →
