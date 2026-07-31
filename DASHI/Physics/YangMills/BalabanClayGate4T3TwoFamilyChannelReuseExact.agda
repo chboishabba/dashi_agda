@@ -111,15 +111,17 @@ transportFamilyEstimate :
   sourceForm ≡ targetForm →
   sourceBudget ≡ targetBudget →
   T3.LessEqual (t3 inputs) targetForm targetBudget
-transportFamilyEstimate inputs estimate formMeaning budgetMeaning =
+transportFamilyEstimate
+    inputs {sourceForm} {targetForm} {sourceBudget} {targetBudget}
+    estimate formMeaning budgetMeaning =
   subst
-    (λ upper → T3.LessEqual (t3 inputs) _ upper)
+    (λ upper → T3.LessEqual (t3 inputs) targetForm upper)
     budgetMeaning
     (subst
-      (λ lower → T3.LessEqual (t3 inputs) lower _)
+      (λ lower → T3.LessEqual (t3 inputs) lower sourceBudget)
       formMeaning
       (subst
-        (λ relation → relation _ _)
+        (λ relation → relation sourceForm sourceBudget)
         (orderMeaning inputs)
         estimate))
 
