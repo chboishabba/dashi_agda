@@ -58,7 +58,14 @@ weightedOutputNormSq :
   WeightedL2Algebra Scalar Component →
   List Output → (Output → Scalar) →
   (Output → Component) → Scalar
-weightedOutputNormSq = weightedInputNormSq
+weightedOutputNormSq algebra outputs weight field =
+  finiteSum (zero algebra) (add algebra)
+    (mapList
+      (λ output →
+        multiply algebra
+          (square algebra (weight output))
+          (componentNormSq algebra (field output)))
+      outputs)
 
 record PhysicalWeightedL2NormMeaning
     (Input Output Scalar Component : Set) : Set₁ where
