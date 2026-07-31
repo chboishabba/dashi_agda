@@ -6,7 +6,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicProjectionNormalizati
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicSupportBudgetsExact as Support
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicCellWeightExact as Weight
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as PrintedPhysical
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicFrechetAssemblyExact as Frechet
 import DASHI.Physics.YangMills.BalabanClayGate4TwoFamilyChannelMajorantExact as Channels
+import DASHI.Physics.YangMills.BalabanClayGate4TreeBackgroundSliceTransitionExact as Slice
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact as HRBeta
 import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as OS
 
@@ -15,11 +17,12 @@ import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as O
 --
 -- This round closes the repository-specific four-dimensional dyadic geometry
 -- and normalization, supplies explicit 128/8 support envelopes, fixes the
--- printed equation-(0.12) instance to that geometry and principal log, factors
--- the five Hessian channels through two shared analytic majorants, and reduces
--- the uniform H-R_beta estimate to local absorption.  It also records the exact
--- Menotti--Pelissetto Wilson-action reflection-positivity theorem for the later
--- Osterwalder--Schrader lane without conflating it with RG preservation.
+-- printed equation-(0.12) instance to that geometry and principal log, assembles
+-- its exact componentwise Fréchet kernel, factors the five Hessian channels
+-- through two shared analytic majorants, and reduces the uniform H-R_beta
+-- estimate to local absorption.  It also fixes the local tree/background-slice
+-- transition theorem and records the exact Menotti--Pelissetto Wilson-action
+-- reflection-positivity result without conflating it with RG preservation.
 ------------------------------------------------------------------------
 
 dyadicCyclicSplitRoundTripLevel =
@@ -64,12 +67,26 @@ cmp109DyadicNormalizationIdentificationLevel =
 cmp109DyadicPrincipalLogTermIdentificationLevel =
   PrintedPhysical.cmp109DyadicPrincipalLogTermIdentificationLevel
 
+cmp109FrechetKernelDefinitionLevel =
+  Frechet.cmp109FrechetKernelDefinitionLevel
+cmp109FrechetEndpointSupportLevel =
+  Frechet.cmp109FrechetEndpointSupportLevel
+cmp109PhysicalDerivativeChainAssemblyLevel =
+  Frechet.cmp109PhysicalDerivativeChainAssemblyLevel
+
 twoFamilyFiveChannelReductionLevel =
   Channels.twoFamilyFiveChannelReductionLevel
 su2NonlinearityFamilyProvenanceLevel =
   Channels.su2NonlinearityFamilyProvenanceLevel
 resolventRelativeBoundFamilyProvenanceLevel =
   Channels.resolventRelativeBoundFamilyProvenanceLevel
+
+localSliceTangentIsomorphismAssemblyLevel =
+  Slice.localSliceTangentIsomorphismAssemblyLevel
+sliceHessianEigenpairTransportLevel =
+  Slice.sliceHessianEigenpairTransportLevel
+sliceCoercivityTransportLevel =
+  Slice.sliceCoercivityTransportLevel
 
 hrBetaFiniteAbsoluteTriangleLevel =
   HRBeta.hrBetaFiniteAbsoluteTriangleLevel
@@ -98,6 +115,10 @@ physicalCMP109PrincipalChartInputsLevel =
   PrintedPhysical.physicalCMP109PrincipalChartInputsLevel
 physicalCMP109FrechetKernelInputsLevel =
   PrintedPhysical.physicalCMP109FrechetKernelInputsLevel
+physicalCMP109ComponentDerivativeInputsLevel =
+  Frechet.physicalCMP109ComponentDerivativeInputsLevel
+physicalCMP109ProductChainRuleInputsLevel =
+  Frechet.physicalCMP109ProductChainRuleInputsLevel
 
 physicalScalarCellWeightInstantiationInputsLevel =
   Weight.physicalScalarCellWeightInstantiationInputsLevel
@@ -106,6 +127,13 @@ physicalSU2DefectMajorantInputsLevel =
   Channels.physicalSU2DefectMajorantInputsLevel
 physicalResolventDefectMajorantInputsLevel =
   Channels.physicalResolventDefectMajorantInputsLevel
+
+physicalTreeBackgroundLocalTransitionInputsLevel =
+  Slice.physicalTreeBackgroundLocalTransitionInputsLevel
+physicalFaddeevPopovInvertibilityInputsLevel =
+  Slice.physicalFaddeevPopovInvertibilityInputsLevel
+physicalSliceNormIsometryInputsLevel =
+  Slice.physicalSliceNormIsometryInputsLevel
 
 physicalHRBetaLocalDecompositionInputsLevel =
   HRBeta.physicalHRBetaLocalDecompositionInputsLevel
