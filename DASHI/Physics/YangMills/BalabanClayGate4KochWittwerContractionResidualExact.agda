@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4KochWittwerContractionResidualExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -36,7 +36,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record ContractionResidualAlgebra (Scalar : Set) : Set₁ where
   field
-    zero add multiply : Scalar → Scalar → Scalar
+    zero : Scalar
+    add multiply : Scalar → Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
 
     reflexive : ∀ value → LessEqual value value
@@ -125,7 +126,8 @@ record ExplicitResidualQuotientMeaning
     {Point Scalar : Set}
     (dataSet : ContractionResidualData Point Scalar) : Set₁ where
   field
-    one subtract divide : Scalar → Scalar → Scalar
+    one : Scalar
+    subtract divide : Scalar → Scalar → Scalar
 
     residualErrorBoundMeaning :
       residualErrorBound dataSet
