@@ -8,23 +8,41 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_FILES = (
+    "DASHI/Foundations/FiniteLinear/F3Subspace.agda",
+    "DASHI/Foundations/FiniteLinear/AntiDiagonalKernel.agda",
     "DASHI/Foundations/TernaryGolay/MathieuSourceAtlas.agda",
     "DASHI/Foundations/TernaryGolay/CompleteWeightEnumerator.agda",
     "DASHI/Foundations/TernaryGolay/PuncturedPerfectCode.agda",
     "DASHI/Foundations/TernaryGolay/SelfDualityFiniteBoundary.agda",
+    "DASHI/Foundations/TernaryGolay/GolaySelfDualSubspace.agda",
     "DASHI/Foundations/TernaryGolay/MathieuPresentationAction.agda",
     "DASHI/Foundations/TernaryGolay/MathieuStabilizerChain.agda",
     "DASHI/Foundations/TernaryGolay/FrontierRegression.agda",
     "DASHI/Foundations/UBP/ExactRealSourceAtlas.agda",
     "DASHI/Foundations/UBP/ObserverConstantProvenance.agda",
     "DASHI/Foundations/UBP/ExactRealBackendBoundary.agda",
+    "DASHI/Foundations/UBP/BishopAbsMigrationReceipt.agda",
+    "DASHI/Foundations/UBP/RationalCertificateTransport.agda",
     "DASHI/Foundations/UBP/TaxFiniteDynamicsBoundary.agda",
     "DASHI/Foundations/UBP/FrontierRegression.agda",
+    "DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda",
     "Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md",
     "scripts/check_explicit_ternary_golay.py",
 )
 
 REQUIRED_TEXT = {
+    "DASHI/Foundations/FiniteLinear/F3Subspace.agda": (
+        "record F3Subspace",
+        "record F3LinearMap",
+        "imageSubspace",
+        "kernel",
+        "selfDualFromInclusions",
+    ),
+    "DASHI/Foundations/FiniteLinear/AntiDiagonalKernel.agda": (
+        "sumZeroLine",
+        "antiDiagonalLine",
+        "sumZeroIsAntiDiagonal",
+    ),
     "DASHI/Foundations/TernaryGolay/MathieuSourceAtlas.agda": (
         "10.4153/CMB-1969-005-8",
         "10.1080/10586458.2006.10128958",
@@ -44,6 +62,13 @@ REQUIRED_TEXT = {
         "selfDualFromHalfDimension",
         "allCodewordsOrthogonalToGenerators",
         "concreteRowSpanDualBridgeInCurrentVectorAPIIsFalse",
+    ),
+    "DASHI/Foundations/TernaryGolay/GolaySelfDualSubspace.agda": (
+        "spanEncodeCheckIsTrue",
+        "dualCandidateCodeCheckIsTrue",
+        "codeToDual",
+        "dualToCode",
+        "golaySelfDual",
     ),
     "DASHI/Foundations/TernaryGolay/MathieuPresentationAction.agda": (
         "hexadOrbitCountIs132",
@@ -66,10 +91,29 @@ REQUIRED_TEXT = {
         "10.48550/arXiv.2604.24782",
         "finiteExceptionalLayerDependsOnBishopIsFalse",
     ),
+    "DASHI/Foundations/UBP/BishopAbsMigrationReceipt.agda": (
+        "d732b0340d729b264227a70fcf38383d8fb3ac3c",
+        "K-abs",
+        "seq-abs-mul-index",
+        "commonIndexTransportRequiredHereIsFalse",
+        "10.48550/arXiv.2205.08354",
+    ),
+    "DASHI/Foundations/UBP/RationalCertificateTransport.agda": (
+        "antitoneIntervalTransport",
+        "observerCrossDifferenceIdentity",
+        "canonicalPiLower",
+        "canonicalYLowerCandidate",
+        "constructivePiContainmentInstantiatedIsFalse",
+    ),
     "DASHI/Foundations/UBP/TaxFiniteDynamicsBoundary.agda": (
         "10.3934/dcdsb.2020331",
         "StronglyConnectedComponent",
         "concreteLeechGraphInstantiatedIsFalse",
+    ),
+    "DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda": (
+        "rationalizable",
+        "d732b0340d729b264227a70fcf38383d8fb3ac3c",
+        "comparative prototype lane",
     ),
     "scripts/check_explicit_ternary_golay.py": (
         "assert len(permutation_elements) == 95040",
