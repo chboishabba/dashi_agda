@@ -13,6 +13,8 @@ EXTRA_FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4T3SelfAdjointFormNormReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiveChannelSelfAdjointOperatorBoundExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4T3FiveChannelSelfAdjointReuseExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteTangentMatrixRepresentationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteMatrixSpectrumDeterminantAssemblyExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254Validation.agda
@@ -63,6 +65,8 @@ exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4T3SelfAdjointFormNormReuseExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiveChannelSelfAdjointOperatorBoundExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4T3FiveChannelSelfAdjointReuseExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteTangentMatrixRepresentationExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteMatrixSpectrumDeterminantAssemblyExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254CompletionLedger.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254CompletionReceipt.agda \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedLedger.agda \
