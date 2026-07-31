@@ -5,9 +5,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicProjectionNormalizationExact as Projection
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicSupportBudgetsExact as Support
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicCellWeightExact as Weight
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicEnvelopeSchurExact as Schur
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicPrintedPhysicalInstantiationExact as PrintedPhysical
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicFrechetAssemblyExact as Frechet
 import DASHI.Physics.YangMills.BalabanClayGate4TwoFamilyChannelMajorantExact as Channels
+import DASHI.Physics.YangMills.BalabanClayGate4T3TwoFamilyChannelReuseExact as T3Channels
 import DASHI.Physics.YangMills.BalabanClayGate4TreeBackgroundSliceTransitionExact as Slice
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact as HRBeta
 import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as OS
@@ -16,13 +18,14 @@ import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as O
 -- Highest-alpha continuation beyond the finite proof-engineering tranche.
 --
 -- This round closes the repository-specific four-dimensional dyadic geometry
--- and normalization, supplies explicit 128/8 support envelopes, fixes the
--- printed equation-(0.12) instance to that geometry and principal log, assembles
--- its exact componentwise Fréchet kernel, factors the five Hessian channels
--- through two shared analytic majorants, and reduces the uniform H-R_beta
--- estimate to local absorption.  It also fixes the local tree/background-slice
--- transition theorem and records the exact Menotti--Pelissetto Wilson-action
--- reflection-positivity result without conflating it with RG preservation.
+-- and normalization, supplies explicit 128/8 Schur envelopes, fixes the printed
+-- equation-(0.12) instance to that geometry and principal log, assembles its
+-- exact componentwise Fréchet kernel, factors the five Hessian channels through
+-- two shared analytic majorants and discharges the five T3 form estimates from
+-- those two families.  It also fixes the local tree/background-slice transition,
+-- reduces the uniform H-R_beta estimate to local absorption, and records the
+-- exact Menotti--Pelissetto Wilson-action reflection-positivity result without
+-- conflating it with RG preservation.
 ------------------------------------------------------------------------
 
 dyadicCyclicSplitRoundTripLevel =
@@ -58,6 +61,11 @@ cmp109DyadicWeightedAdjointRatioLevel =
 cmp109DyadicBlockAverageCancellationLevel =
   Weight.cmp109DyadicBlockAverageCancellationLevel
 
+cmp109DyadicRow128EntryBudgetLevel =
+  Schur.cmp109DyadicRow128EntryBudgetLevel
+cmp109DyadicColumn8EntryBudgetLevel =
+  Schur.cmp109DyadicColumn8EntryBudgetLevel
+
 cmp109DyadicPrintedMapInstantiationLevel =
   PrintedPhysical.cmp109DyadicPrintedMapInstantiationLevel
 cmp109DyadicSupportIdentificationLevel =
@@ -80,6 +88,8 @@ su2NonlinearityFamilyProvenanceLevel =
   Channels.su2NonlinearityFamilyProvenanceLevel
 resolventRelativeBoundFamilyProvenanceLevel =
   Channels.resolventRelativeBoundFamilyProvenanceLevel
+t3TwoFamilyFiveEstimateDischargeLevel =
+  T3Channels.t3TwoFamilyFiveEstimateDischargeLevel
 
 localSliceTangentIsomorphismAssemblyLevel =
   Slice.localSliceTangentIsomorphismAssemblyLevel
@@ -122,11 +132,19 @@ physicalCMP109ProductChainRuleInputsLevel =
 
 physicalScalarCellWeightInstantiationInputsLevel =
   Weight.physicalScalarCellWeightInstantiationInputsLevel
+physicalDyadicEnvelopeDominationInputsLevel =
+  Schur.physicalDyadicEnvelopeDominationInputsLevel
+physicalDyadicEntryNormBoundInputsLevel =
+  Schur.physicalDyadicEntryNormBoundInputsLevel
 
 physicalSU2DefectMajorantInputsLevel =
   Channels.physicalSU2DefectMajorantInputsLevel
 physicalResolventDefectMajorantInputsLevel =
   Channels.physicalResolventDefectMajorantInputsLevel
+physicalT3SU2FamilyIdentificationInputsLevel =
+  T3Channels.physicalT3SU2FamilyIdentificationInputsLevel
+physicalT3ResolventFamilyIdentificationInputsLevel =
+  T3Channels.physicalT3ResolventFamilyIdentificationInputsLevel
 
 physicalTreeBackgroundLocalTransitionInputsLevel =
   Slice.physicalTreeBackgroundLocalTransitionInputsLevel
