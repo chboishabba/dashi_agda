@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FiniteTangentMatrixRepresentationExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Relation.Binary.PropositionalEquality using
   (cong₂; subst; sym; trans)
@@ -13,12 +13,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Roger A. Horn and Charles R. Johnson,
 -- "Matrix Analysis", second edition, Cambridge University Press (2012).
 -- DOI: 10.1017/CBO9781139020411.
---
--- At fixed lattice volume the gauge-fixed constrained tangent fibre is finite.
--- Once a complete independent basis is supplied, every restricted Hessian has
--- a finite matrix.  The proofs below derive matrix splitting and norm transport
--- from proof-bearing operator representations; no determinant theorem is used
--- at this layer.
 ------------------------------------------------------------------------
 
 record FiniteTangentBasis
@@ -51,6 +45,8 @@ record RestrictedHessianMatrixRepresentation
 
     addOperator : Operator → Operator → Operator
     addMatrix : Matrix → Matrix → Matrix
+    addOperatorAction :
+      (Vector → Vector) → (Vector → Vector) → Vector → Vector
 
     physicalOperatorSplit :
       physicalOperator ≡ addOperator referenceOperator remainderOperator
@@ -66,9 +62,6 @@ record RestrictedHessianMatrixRepresentation
       matrixAction (addMatrix left right)
       ≡ addOperatorAction
           (matrixAction left) (matrixAction right)
-
-    addOperatorAction :
-      (Vector → Vector) → (Vector → Vector) → Vector → Vector
 
     addOperatorMeaning : ∀ left right →
       apply (addOperator left right)
@@ -94,7 +87,7 @@ physicalMatrixSplitsExactly meaning =
           (λ operator → apply meaning (physicalOperator meaning) ≡
             apply meaning operator)
           (physicalOperatorSplit meaning)
-          (Agda.Builtin.Equality.refl))
+          refl)
         (trans
           (addOperatorMeaning meaning
             (referenceOperator meaning) (remainderOperator meaning))
@@ -116,8 +109,9 @@ record MatrixOperatorNormTransport
 
     OperatorLessEqual MatrixLessEqual : Bound → Bound → Set
 
-    matrixRepresentsOperator : Set
-    matrixRepresentationEvidence : matrixRepresentsOperator
+    MatrixRepresentsOperator : Matrix → Operator → Set
+    matrixRepresentationEvidence :
+      MatrixRepresentsOperator selectedMatrix selectedOperator
 
     matrixNormMeaning :
       matrixNorm selectedMatrix ≡ operatorNorm selectedOperator
