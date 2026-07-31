@@ -6,6 +6,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4TreeBackgroundSliceTransitionExact as Slice
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteSimilaritySpectrumDeterminantExact as Similarity
+import DASHI.Physics.YangMills.BalabanClayGate4FiniteDeterminantFactorizationExact as Determinant
 
 ------------------------------------------------------------------------
 -- Coherent tree/background spectrum and determinant transport.
@@ -98,10 +99,10 @@ backgroundReferenceDeterminantEqualsTreeReference :
     (dataSet : TreeBackgroundSpectralDeterminantTransport
       TreeSlice BackgroundSlice TreeTangent BackgroundTangent
       Matrix Scalar Bound) →
-  Similarity.Determinant.determinant
+  Determinant.determinant
     (Similarity.matrixAlgebra (determinantSimilarity dataSet))
     (Similarity.similarityMatrix (determinantSimilarity dataSet))
-  ≡ Similarity.Determinant.determinant
+  ≡ Determinant.determinant
       (Similarity.matrixAlgebra (determinantSimilarity dataSet))
       (Similarity.operator (determinantSimilarity dataSet))
 backgroundReferenceDeterminantEqualsTreeReference dataSet =
