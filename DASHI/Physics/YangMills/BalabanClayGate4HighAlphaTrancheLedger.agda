@@ -15,6 +15,7 @@ import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact a
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalTwoWeightKoteckyPreissExact as PhysicalKP
 import DASHI.Physics.YangMills.BalabanClayT5AnisotropyPolymerSummationExact as Anisotropy
 import DASHI.Physics.YangMills.BalabanClayGate4AnisotropyBlockAndCriterionProvenanceExact as Provenance
+import DASHI.Physics.YangMills.BalabanClayGate4PrimaryAveragingTrancheLedger as PrimaryAveraging
 
 ------------------------------------------------------------------------
 -- Concise ledger for the highest-alpha tranche described in the attached proof
@@ -73,6 +74,25 @@ finiteKernelSchurReductionLevel = Schur.finiteKernelSchurReductionLevel
 oneEighthKernelBudgetAssemblyLevel = Schur.oneEighthKernelBudgetAssemblyLevel
 physicalBlockAdjointRelativeContractionAssemblyLevel =
   Schur.physicalBlockAdjointRelativeContractionAssemblyLevel
+
+primaryAveragingNormalizationLevel =
+  PrimaryAveraging.primaryAveragingNormalizationLevel
+localityClosedUnderCompositionLevel =
+  PrimaryAveraging.localityClosedUnderCompositionLevel
+finitePointwiseToRowSumLevel =
+  PrimaryAveraging.finitePointwiseToRowSumLevel
+adjointEntryBoundFromPrimaryTransposeLevel =
+  PrimaryAveraging.adjointEntryBoundFromPrimaryTransposeLevel
+adjointColumnFiniteSumLevel =
+  PrimaryAveraging.adjointColumnFiniteSumLevel
+primaryQkStrongSchurAdapterLevel =
+  PrimaryAveraging.primaryQkStrongSchurAdapterLevel
+primaryQkPhysicalRelativeContractionLevel =
+  PrimaryAveraging.primaryQkPhysicalRelativeContractionLevel
+constrainedMinimizerFormulaLevel =
+  PrimaryAveraging.constrainedMinimizerFormulaLevel
+constraintProjectionKernelLevel =
+  PrimaryAveraging.constraintProjectionKernelLevel
 
 koteckyPreissPrimaryStatementLevel = KP.koteckyPreissPrimaryStatementLevel
 rootedTerminalToTwoWeightKPAssemblyLevel =
@@ -136,6 +156,26 @@ physicalBlockAdjointKernelIdentificationInputsLevel =
   Schur.physicalBlockAdjointKernelIdentificationInputsLevel
 physicalBlockAdjointRowColumnSumInputsLevel =
   Schur.physicalBlockAdjointRowColumnSumInputsLevel
+physicalAveragingFormulaIdentificationInputsLevel =
+  PrimaryAveraging.physicalAveragingFormulaIdentificationInputsLevel
+physicalIteratedSupportEnumerationInputsLevel =
+  PrimaryAveraging.physicalIteratedSupportEnumerationInputsLevel
+physicalQkKernelAndNormIdentificationInputsLevel =
+  PrimaryAveraging.physicalQkKernelAndNormIdentificationInputsLevel
+physicalQkSupportCardinalityInputsLevel =
+  PrimaryAveraging.physicalQkSupportCardinalityInputsLevel
+physicalQkAdjointTransposeIdentificationInputsLevel =
+  PrimaryAveraging.physicalQkAdjointTransposeIdentificationInputsLevel
+physicalQkColumnIncidenceCardinalityInputsLevel =
+  PrimaryAveraging.physicalQkColumnIncidenceCardinalityInputsLevel
+physicalQkNormalizedSchurBudgetInputsLevel =
+  PrimaryAveraging.physicalQkNormalizedSchurBudgetInputsLevel
+physicalConstraintProjectionMeaningInputsLevel =
+  PrimaryAveraging.physicalConstraintProjectionMeaningInputsLevel
+physicalConstrainedFiniteHessianMeaningInputsLevel =
+  PrimaryAveraging.physicalConstrainedFiniteHessianMeaningInputsLevel
+qstarOneEighthContractionFromPrimaryCoefficientLevel =
+  PrimaryAveraging.qstarOneEighthContractionFromPrimaryCoefficientLevel
 
 physicalTerminalIncompatibilitySumMeaningInputsLevel =
   KP.physicalTerminalIncompatibilitySumMeaningInputsLevel
