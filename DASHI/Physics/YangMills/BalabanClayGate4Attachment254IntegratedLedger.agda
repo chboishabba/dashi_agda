@@ -3,10 +3,24 @@ module DASHI.Physics.YangMills.BalabanClayGate4Attachment254IntegratedLedger whe
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4Attachment254CompletionLedger as Completion
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalAveragingConventionSelectionExact as Convention
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalWeightedL2NormalizationExact as WeightedL2
 import DASHI.Physics.YangMills.BalabanClayGate4WeightedSchurSummableSlackReuseExact as WeightedSlack
 import DASHI.Physics.YangMills.BalabanClayGate4T3SelfAdjointFormNormReuseExact as T3FormNorm
 
 completionLedgerLevel = Completion.attachment254CompletionLedgerLevel
+
+gate4CMP109ConventionSelectionLevel =
+  Convention.gate4CMP109ConventionSelectionLevel
+gate4CMP109PhysicalMeaningAssemblyLevel =
+  Convention.gate4CMP109PhysicalMeaningAssemblyLevel
+
+literalFiniteWeightedL2NormLevel =
+  WeightedL2.literalFiniteWeightedL2NormLevel
+physicalWeightedL2MeaningAssemblyLevel =
+  WeightedL2.physicalWeightedL2MeaningAssemblyLevel
+formalTransposePhysicalAdjointUniquenessLevel =
+  WeightedL2.formalTransposePhysicalAdjointUniquenessLevel
 
 weightedSchurNearContractionAdapterLevel =
   WeightedSlack.weightedSchurNearContractionAdapterLevel
@@ -17,6 +31,24 @@ t3SelfAdjointFormNormAttachmentLevel =
   T3FormNorm.t3SelfAdjointFormNormAttachmentLevel
 t3RestrictedFormToOperatorNormLevel =
   T3FormNorm.t3RestrictedFormToOperatorNormLevel
+
+physicalCMP109LiteralMapInputsLevel =
+  Convention.physicalCMP109LiteralMapInputsLevel
+physicalCMP109DerivativeInputsLevel =
+  Convention.physicalCMP109DerivativeInputsLevel
+physicalCMP109SupportInputsLevel =
+  Convention.physicalCMP109SupportInputsLevel
+physicalCMP109NormalizationInputsLevel =
+  Convention.physicalCMP109NormalizationInputsLevel
+cmp98KernelEstimateTransferToCMP109InputsLevel =
+  Convention.cmp98KernelEstimateTransferToCMP109InputsLevel
+
+physicalCMP109FineCoarseWeightInputsLevel =
+  WeightedL2.physicalCMP109FineCoarseWeightInputsLevel
+physicalInnerProductScalingInputsLevel =
+  WeightedL2.physicalInnerProductScalingInputsLevel
+physicalFormalTransposeCharacterizationInputsLevel =
+  WeightedL2.physicalFormalTransposeCharacterizationInputsLevel
 
 physicalWeightedSchurStateMeaningInputsLevel =
   WeightedSlack.physicalWeightedSchurStateMeaningInputsLevel
