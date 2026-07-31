@@ -4,10 +4,12 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat.Base using (_*_)
+open import Data.Rational using (ℚ)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Foundations.UBP.EvidenceInterpretationLedger as Evidence
 import DASHI.Foundations.UBP.ExactnessAndLatticeBoundary as Exactness
+import DASHI.Foundations.UBP.ObservableAlgebraBoundary as Algebra
 import DASHI.Foundations.UBP.RepresentationAndObserverBoundary as Representation
 import DASHI.Foundations.UBP.SourceAtlas as Sources
 
@@ -49,6 +51,41 @@ ambientAddressMembershipClaimClosed :
 ambientAddressMembershipClaimClosed =
   Exactness.individualAddressMembershipClaimIsFalse
     Exactness.canonicalAmbientAddressStatus
+
+activationDifferenceRegression :
+  (y support normSquared coordinateSquare : ℚ) →
+  Algebra.symmetryTax
+    y
+    (support Data.Rational.+ 1)
+    (normSquared Data.Rational.+ coordinateSquare)
+  Data.Rational.- Algebra.symmetryTax y support normSquared
+  ≡
+  Algebra.activationQuantum y coordinateSquare
+activationDifferenceRegression =
+  Algebra.activationDifferenceIdentity
+
+longCycleCancellationRegression :
+  (y : ℚ) →
+  2 Data.Rational.* Algebra.activationQuantum y 1
+  Data.Rational.+ 2 Data.Rational.* Algebra.deexcitationQuantum y 4
+  ≡
+  Data.Rational.0ℚ Data.Rational.- 3 Data.Rational./ 4
+longCycleCancellationRegression =
+  Algebra.longCycleCancellationIdentity
+
+nrciHalfThresholdRegression :
+  Algebra.nrci 10 ≡ 1 Data.Rational./ 2
+nrciHalfThresholdRegression =
+  Algebra.nrciAtTaxTen
+
+nrciPhysicalEmergenceClaimClosed :
+  Algebra.independentlyEmergentPhysicalThresholdEstablished
+    Algebra.canonicalCoherenceThresholdStatus
+  ≡
+  false
+nrciPhysicalEmergenceClaimClosed =
+  Algebra.independentlyEmergentPhysicalThresholdEstablishedIsFalse
+    Algebra.canonicalCoherenceThresholdStatus
 
 mogEquivalenceClaimClosed :
   Representation.checkAloneProvesEquivalence
@@ -105,6 +142,7 @@ focusedReceipts :
 focusedReceipts =
   Sources.canonicalUBPSourceReceipt
   ∷ Exactness.ubpExactnessAndLatticeReceipt
+  ∷ Algebra.observableAlgebraReceipt
   ∷ Representation.representationAndObserverReceipt
   ∷ Evidence.ubpInterpretationGenericReceipt
   ∷ []
