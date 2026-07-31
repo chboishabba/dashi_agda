@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_FILES = (
     "DASHI/Foundations/FiniteLinear/F3Subspace.agda",
     "DASHI/Foundations/FiniteLinear/AntiDiagonalKernel.agda",
+    "DASHI/Foundations/FiniteLinear/Regression.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteIncidenceSubspaceAdapter.agda",
     "DASHI/Foundations/TernaryGolay/MathieuSourceAtlas.agda",
     "DASHI/Foundations/TernaryGolay/CompleteWeightEnumerator.agda",
     "DASHI/Foundations/TernaryGolay/PuncturedPerfectCode.agda",
@@ -43,6 +45,17 @@ REQUIRED_TEXT = {
         "sumZeroLine",
         "antiDiagonalLine",
         "sumZeroIsAntiDiagonal",
+    ),
+    "DASHI/Foundations/FiniteLinear/Regression.agda": (
+        "antiDiagonalKernelImageRegression",
+        "nsFiniteEdgeKernelImageRegression",
+        "physicalGramPromotionClosed",
+    ),
+    "DASHI/Physics/Closure/NSTriadKNFiniteIncidenceSubspaceAdapter.agda": (
+        "NSTriadKNExactPairIncidenceGramAssembly",
+        "orientedPairEdgeHasZeroSum",
+        "finitePairEdgeKernelImageEquality",
+        "pairIncidenceFoldEqualsPDEGramProvedHereIsFalse",
     ),
     "DASHI/Foundations/TernaryGolay/MathieuSourceAtlas.agda": (
         "10.4153/CMB-1969-005-8",
