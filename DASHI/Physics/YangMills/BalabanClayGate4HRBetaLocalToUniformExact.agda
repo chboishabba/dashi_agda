@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -68,16 +68,10 @@ finiteSumPointwiseMonotone :
   ∀ {A Scalar}
     (algebra : OrderedAbsoluteAdditiveAlgebra Scalar)
     (left right : A → Scalar) (values : List A) →
-  (∀ value → left value `LessThanOrEqualBy` algebra `To` right value) →
+  (∀ value → LessEqual algebra (left value) (right value)) →
   LessEqual algebra
     (finiteSum algebra (mapList left values))
     (finiteSum algebra (mapList right values))
-  where
-  infix 4 _`LessThanOrEqualBy`_`To`_
-  _`LessThanOrEqualBy`_`To`_ :
-    Scalar → OrderedAbsoluteAdditiveAlgebra Scalar → Scalar → Set
-  lower `LessThanOrEqualBy` selected `To` upper =
-    LessEqual selected lower upper
 finiteSumPointwiseMonotone algebra left right [] pointwise =
   reflexive algebra (zero algebra)
 finiteSumPointwiseMonotone algebra left right (value ∷ values) pointwise =
