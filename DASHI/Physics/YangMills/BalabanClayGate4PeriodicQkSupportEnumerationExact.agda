@@ -16,10 +16,11 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 --
 --   Support c b  iff  b belongs to B^k(c_-) union B^k(c_+).
 --
--- This module does not guess that geometric predicate.  Given any decidable
--- support relation, it constructs the literal row-support and dual column-
--- incidence lists from the complete periodic bond enumerations and proves both
--- lists sound and complete.  Their lengths are therefore exact finite counts.
+-- This module does not guess that geometric predicate. Given any decidable
+-- endpoint-block-union relation, it constructs the literal row-support and dual
+-- column-incidence lists from the complete periodic bond enumerations and proves
+-- both lists sound and complete. Their lengths are therefore exact finite
+-- counts.
 ------------------------------------------------------------------------
 
 emptyElim : ∀ {A : Set} → Empty → A
@@ -191,6 +192,39 @@ periodicSupportCarrier :
     (PositiveBond coarseSide) (PositiveBond fineSide)
 periodicSupportCarrier = supportRelation
 
+periodicSupportRelationFromEndpointPredicate :
+  ∀ {fineSide coarseSide}
+    (EndpointBlockUnionSupport :
+      PositiveBond coarseSide → PositiveBond fineSide → Set) →
+  (∀ coarse fine → Dec (EndpointBlockUnionSupport coarse fine)) →
+  FiniteKernelSupportRelation
+    (PositiveBond coarseSide) (PositiveBond fineSide)
+periodicSupportRelationFromEndpointPredicate
+    {fineSide = fineSide} {coarseSide = coarseSide}
+    EndpointBlockUnionSupport decide = record
+  { coarseFinite = positiveBondFinite coarseSide
+  ; fineFinite = positiveBondFinite fineSide
+  ; Support = EndpointBlockUnionSupport
+  ; supportDecidable = decide
+  }
+
+periodicQkSupportMeaningFromEndpointPredicate :
+  ∀ {fineSide coarseSide}
+    (EndpointBlockUnionSupport :
+      PositiveBond coarseSide → PositiveBond fineSide → Set)
+    (decide : ∀ coarse fine →
+      Dec (EndpointBlockUnionSupport coarse fine)) →
+  PeriodicQkSupportMeaning fineSide coarseSide
+periodicQkSupportMeaningFromEndpointPredicate
+    EndpointBlockUnionSupport decide = record
+  { supportRelation =
+      periodicSupportRelationFromEndpointPredicate
+        EndpointBlockUnionSupport decide
+  ; EndpointBlockUnionSupport = EndpointBlockUnionSupport
+  ; supportIsEndpointBlockUnion = λ coarse fine →
+      iff (λ support → support) (λ support → support)
+  }
+
 periodicQkRowSupportEnumerationLevel : ProofLevel
 periodicQkRowSupportEnumerationLevel = machineChecked
 
@@ -200,11 +234,8 @@ periodicQkColumnIncidenceEnumerationLevel = machineChecked
 periodicQkExactFiniteCountDefinitionLevel : ProofLevel
 periodicQkExactFiniteCountDefinitionLevel = computed
 
+periodicQkSupportFromEndpointPredicateLevel : ProofLevel
+periodicQkSupportFromEndpointPredicateLevel = machineChecked
+
 physicalQkEndpointBlockUnionPredicateInputsLevel : ProofLevel
 physicalQkEndpointBlockUnionPredicateInputsLevel = conditional
-
-physicalQkUniformRowCountBoundInputsLevel : ProofLevel
-physicalQkUniformRowCountBoundInputsLevel = conditional
-
-physicalQkUniformColumnCountBoundInputsLevel : ProofLevel
-physicalQkUniformColumnCountBoundInputsLevel = conditional
