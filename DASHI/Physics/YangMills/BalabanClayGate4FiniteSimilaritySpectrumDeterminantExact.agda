@@ -64,6 +64,25 @@ similarityMatrix dataSet =
     (Determinant.multiplyMatrix (matrixAlgebra dataSet)
       (operator dataSet) (change dataSet))
 
+determinantProductInSelectedScalar :
+  ∀ {Matrix Scalar}
+    (dataSet : FiniteSimilarityDeterminantData Matrix Scalar)
+    left right →
+  Determinant.determinant (matrixAlgebra dataSet)
+    (Determinant.multiplyMatrix (matrixAlgebra dataSet) left right)
+  ≡ multiply (scalarAlgebra dataSet)
+      (Determinant.determinant (matrixAlgebra dataSet) left)
+      (Determinant.determinant (matrixAlgebra dataSet) right)
+determinantProductInSelectedScalar dataSet left right =
+  trans
+    (Determinant.determinantMultiplicative
+      (matrixAlgebra dataSet) left right)
+    (cong
+      (λ multiplication → multiplication
+        (Determinant.determinant (matrixAlgebra dataSet) left)
+        (Determinant.determinant (matrixAlgebra dataSet) right))
+      (scalarMultiplicationExact dataSet))
+
 determinantInverseTimesChangeIsOne :
   ∀ {Matrix Scalar}
     (dataSet : FiniteSimilarityDeterminantData Matrix Scalar) →
@@ -76,18 +95,8 @@ determinantInverseTimesChangeIsOne :
 determinantInverseTimesChangeIsOne dataSet =
   trans
     (sym
-      (trans
-        (cong
-          (λ multiplication → multiplication
-            (Determinant.determinant (matrixAlgebra dataSet)
-              (inverseChange dataSet))
-            (Determinant.determinant (matrixAlgebra dataSet)
-              (change dataSet)))
-          (scalarMultiplicationExact dataSet))
-        (sym
-          (Determinant.determinantMultiplicative
-            (matrixAlgebra dataSet)
-            (inverseChange dataSet) (change dataSet)))))
+      (determinantProductInSelectedScalar dataSet
+        (inverseChange dataSet) (change dataSet)))
     (trans
       (cong (Determinant.determinant (matrixAlgebra dataSet))
         (inverseChangeLeft dataSet))
@@ -102,67 +111,54 @@ determinantSimilarityInvariant :
       (operator dataSet)
 determinantSimilarityInvariant dataSet =
   trans
-    (Determinant.determinantMultiplicative
-      (matrixAlgebra dataSet)
+    (determinantProductInSelectedScalar dataSet
       (inverseChange dataSet)
       (Determinant.multiplyMatrix (matrixAlgebra dataSet)
         (operator dataSet) (change dataSet)))
     (trans
       (cong
-        (Determinant.multiplyScalar (matrixAlgebra dataSet)
+        (multiply (scalarAlgebra dataSet)
           (Determinant.determinant (matrixAlgebra dataSet)
             (inverseChange dataSet)))
-        (Determinant.determinantMultiplicative
-          (matrixAlgebra dataSet)
+        (determinantProductInSelectedScalar dataSet
           (operator dataSet) (change dataSet)))
       (trans
-        (cong
-          (λ multiplication → multiplication
+        (sym
+          (associative (scalarAlgebra dataSet)
             (Determinant.determinant (matrixAlgebra dataSet)
               (inverseChange dataSet))
-            (multiplication
-              (Determinant.determinant (matrixAlgebra dataSet)
-                (operator dataSet))
-              (Determinant.determinant (matrixAlgebra dataSet)
-                (change dataSet))))
-          (scalarMultiplicationExact dataSet))
+            (Determinant.determinant (matrixAlgebra dataSet)
+              (operator dataSet))
+            (Determinant.determinant (matrixAlgebra dataSet)
+              (change dataSet))))
         (trans
-          (sym
-            (associative (scalarAlgebra dataSet)
+          (cong
+            (λ firstProduct → multiply (scalarAlgebra dataSet)
+              firstProduct
+              (Determinant.determinant (matrixAlgebra dataSet)
+                (change dataSet)))
+            (commutative (scalarAlgebra dataSet)
               (Determinant.determinant (matrixAlgebra dataSet)
                 (inverseChange dataSet))
               (Determinant.determinant (matrixAlgebra dataSet)
+                (operator dataSet))))
+          (trans
+            (associative (scalarAlgebra dataSet)
+              (Determinant.determinant (matrixAlgebra dataSet)
                 (operator dataSet))
               (Determinant.determinant (matrixAlgebra dataSet)
-                (change dataSet))))
-          (trans
-            (cong
-              (λ firstProduct → multiply (scalarAlgebra dataSet)
-                firstProduct
-                (Determinant.determinant (matrixAlgebra dataSet)
-                  (change dataSet)))
-              (commutative (scalarAlgebra dataSet)
-                (Determinant.determinant (matrixAlgebra dataSet)
-                  (inverseChange dataSet))
-                (Determinant.determinant (matrixAlgebra dataSet)
-                  (operator dataSet))))
+                (inverseChange dataSet))
+              (Determinant.determinant (matrixAlgebra dataSet)
+                (change dataSet)))
             (trans
-              (associative (scalarAlgebra dataSet)
-                (Determinant.determinant (matrixAlgebra dataSet)
-                  (operator dataSet))
-                (Determinant.determinant (matrixAlgebra dataSet)
-                  (inverseChange dataSet))
-                (Determinant.determinant (matrixAlgebra dataSet)
-                  (change dataSet)))
-              (trans
-                (cong
-                  (multiply (scalarAlgebra dataSet)
-                    (Determinant.determinant (matrixAlgebra dataSet)
-                      (operator dataSet)))
-                  (determinantInverseTimesChangeIsOne dataSet))
-                (identityRight (scalarAlgebra dataSet)
+              (cong
+                (multiply (scalarAlgebra dataSet)
                   (Determinant.determinant (matrixAlgebra dataSet)
-                    (operator dataSet))))))))
+                    (operator dataSet)))
+                (determinantInverseTimesChangeIsOne dataSet))
+              (identityRight (scalarAlgebra dataSet)
+                (Determinant.determinant (matrixAlgebra dataSet)
+                  (operator dataSet))))))))
 
 record FiniteSimilaritySpectrumData
     (Matrix Vector Scalar : Set) : Set₁ where
@@ -210,6 +206,23 @@ record Eigenpair
 
 open Eigenpair public
 
+changeAfterInverseReturnsVector :
+  ∀ {Matrix Vector Scalar}
+    (dataSet : FiniteSimilaritySpectrumData Matrix Vector Scalar)
+    vectorValue →
+  applyMatrix dataSet (change dataSet)
+    (applyMatrix dataSet (inverseChange dataSet) vectorValue)
+  ≡ vectorValue
+changeAfterInverseReturnsVector dataSet vectorValue =
+  trans
+    (sym
+      (actionMultiplication dataSet
+        (change dataSet) (inverseChange dataSet) vectorValue))
+    (trans
+      (cong (λ matrix → applyMatrix dataSet matrix vectorValue)
+        (changeInverseRight dataSet))
+      (actionIdentity dataSet vectorValue))
+
 transportEigenpairThroughSimilarity :
   ∀ {Matrix Vector Scalar}
     (dataSet : FiniteSimilaritySpectrumData Matrix Vector Scalar) →
@@ -228,19 +241,12 @@ transportEigenpairThroughSimilarity dataSet source = record
         (trans
           (cong (applyMatrix dataSet (inverseChange dataSet))
             (trans
-              (sym
-                (actionMultiplication dataSet
-                  (operator dataSet) (change dataSet)
-                  (applyMatrix dataSet (inverseChange dataSet)
-                    (vector source))))
-              (trans
-                (cong
-                  (λ combined → applyMatrix dataSet
-                    (operator dataSet)
-                    (applyMatrix dataSet combined (vector source)))
-                  (changeInverseRight dataSet))
-                (cong (applyMatrix dataSet (operator dataSet))
-                  (actionIdentity dataSet (vector source))))))
+              (actionMultiplication dataSet
+                (operator dataSet) (change dataSet)
+                (applyMatrix dataSet (inverseChange dataSet)
+                  (vector source)))
+              (cong (applyMatrix dataSet (operator dataSet))
+                (changeAfterInverseReturnsVector dataSet (vector source)))))
           (trans
             (cong (applyMatrix dataSet (inverseChange dataSet))
               (eigenEquation source))
