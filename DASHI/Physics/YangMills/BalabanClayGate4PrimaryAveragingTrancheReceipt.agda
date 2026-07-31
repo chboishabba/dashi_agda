@@ -23,6 +23,7 @@ record PrimaryAveragingTrancheReceipt : Set where
     periodicSupportEnumerationChecked : Bool
     periodicUniformBoundsChecked : Bool
     periodicPrimaryKernelInstantiationChecked : Bool
+    periodicWeightedSchurInstantiationChecked : Bool
     constrainedMinimizerProjectionChecked : Bool
     constrainedHessianRestrictionChecked : Bool
     primaryBetaFiniteDifferenceChecked : Bool
@@ -45,6 +46,7 @@ record AuthoritativePrimaryAveragingEvidence
     periodicSupportEnumerationTypechecks : Set
     periodicUniformBoundsTypechecks : Set
     periodicPrimaryKernelInstantiationTypechecks : Set
+    periodicWeightedSchurInstantiationTypechecks : Set
     constrainedMinimizerProjectionTypechecks : Set
     constrainedHessianRestrictionTypechecks : Set
     primaryBetaFiniteDifferenceTypechecks : Set
@@ -87,6 +89,9 @@ periodicUniformBoundsTypecheckLevel = conditional
 
 periodicPrimaryKernelInstantiationTypecheckLevel : ProofLevel
 periodicPrimaryKernelInstantiationTypecheckLevel = conditional
+
+periodicWeightedSchurInstantiationTypecheckLevel : ProofLevel
+periodicWeightedSchurInstantiationTypecheckLevel = conditional
 
 constrainedMinimizerProjectionTypecheckLevel : ProofLevel
 constrainedMinimizerProjectionTypecheckLevel = conditional
