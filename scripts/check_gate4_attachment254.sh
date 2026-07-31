@@ -7,6 +7,8 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 bash "$SCRIPT_DIR/check_gate4_frontier_static.sh"
 
 EXTRA_FILES=(
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalAveragingConventionSelectionExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalWeightedL2NormalizationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4WeightedSchurSummableSlackReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4T3SelfAdjointFormNormReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254IntegratedLedger.agda
@@ -44,8 +46,10 @@ done
 
 exec "$SCRIPT_DIR/run_agda29_parallel_check.sh" \
   DASHI/Physics/YangMills/BalabanClayGate4Attachment254ResearchAuditExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalAveragingConventionSelectionExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SU2PrincipalLogBallExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicEndpointBlockPredicateExact.agda \
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalWeightedL2NormalizationExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4SelfAdjointFormOperatorNormExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4FiniteHermitianRayleighSpectrumExact.agda \
   DASHI/Physics/YangMills/BalabanClayGate4NearContractionSummableSlackExact.agda \
