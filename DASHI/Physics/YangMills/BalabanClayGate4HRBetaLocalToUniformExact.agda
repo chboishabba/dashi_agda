@@ -140,7 +140,7 @@ uniformHalfRemainderFromLocalAbsorption dataSet =
           (absolute (algebra dataSet) selectedRemainder)
           (finiteSum (algebra dataSet)
             (mapList (localHalfIncrement dataSet) (cells dataSet))))
-      (totalRemainderMeaning dataSet)
+      (sym (totalRemainderMeaning dataSet))
       (transitive (algebra dataSet)
         (absoluteFiniteSumBelowSumAbsolute
           (algebra dataSet)
@@ -184,7 +184,7 @@ physicalUniformHRBetaRemainder dataSet =
         LessEqual (algebra (local dataSet))
           (absolute (algebra (local dataSet))
             (totalRemainder (local dataSet))) upper)
-      (halfDeltaMeaning dataSet)
+      (sym (halfDeltaMeaning dataSet))
       (uniformHalfRemainderFromLocalAbsorption (local dataSet)))
 
 hrBetaFiniteAbsoluteTriangleLevel : ProofLevel
