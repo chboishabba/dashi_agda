@@ -7,7 +7,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (_∈_; here; there; PositiveBond)
+  using (Dec; yes; no; _∈_; here; there; PositiveBond)
 
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCoordinatesExact as Tree
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCanonicalFreeBasisExact as Free
@@ -270,11 +270,11 @@ pairDelta pointed (indexPair leftBond leftColour)
     (indexPair rightBond rightColour)
   with Free.finDecidableEquality leftBond rightBond
      | Free.finDecidableEquality leftColour rightColour
-... | Free.yes bondEquality | Free.yes colourEquality =
+... | yes bondEquality | yes colourEquality =
   Free.oneScalar pointed
-... | Free.no bondInequality | colourDecision =
+... | no bondInequality | colourDecision =
   Free.zeroScalar pointed
-... | Free.yes bondEquality | Free.no colourInequality =
+... | yes bondEquality | no colourInequality =
   Free.zeroScalar pointed
 
 su2BasisVector :
