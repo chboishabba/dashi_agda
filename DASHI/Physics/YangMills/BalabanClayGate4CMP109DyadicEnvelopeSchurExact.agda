@@ -3,11 +3,11 @@ module DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicEnvelopeSchurExact wh
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (PositiveBond)
+  using (PositiveBond; first)
 
 import DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact as Primary
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicProjectionNormalizationExact as Dyadic
@@ -95,8 +95,7 @@ columnEnvelopeValues dataSet fine =
   mapList
     (adjointKernelAbsolute dataSet fine)
     (Support.incidentPositiveBonds
-      (Dyadic.projectDyadicSite
-        (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first fine)))
+      (Dyadic.projectDyadicSite (first fine)))
 
 rowEnvelopeSum :
   ∀ {coarseN Scalar} →
@@ -151,8 +150,7 @@ columnEnvelopeBelow8Entries dataSet fine =
         (columnEnvelopeSum dataSet fine)
         (Primary.natScale (algebra dataSet) count (entryBound dataSet)))
     (Support.incidentPositiveBondsLength
-      (Dyadic.projectDyadicSite
-        (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first fine)))
+      (Dyadic.projectDyadicSite (first fine)))
     (Primary.finiteSumBelowCardinalityScale
       (algebra dataSet) (entryBound dataSet)
       (allMappedBelow
@@ -160,8 +158,7 @@ columnEnvelopeBelow8Entries dataSet fine =
         (adjointKernelAbsolute dataSet fine)
         (entryBound dataSet)
         (Support.incidentPositiveBonds
-          (Dyadic.projectDyadicSite
-            (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.first fine)))
+          (Dyadic.projectDyadicSite (first fine)))
         (adjointEntryBelow dataSet fine)))
 
 record PhysicalDyadicEnvelopeDomination
