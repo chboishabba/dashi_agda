@@ -48,10 +48,10 @@ data EightEightEightStatus : Set where
 record GolayTrioOrbitTheorem
     (M24 Coordinate Octad Trio : Set) : Set₁ where
   field
-    actsOnCoordinate : M24 → Coordinate → Coordinate
+    trioActsOnCoordinate : M24 → Coordinate → Coordinate
     trioBlocks : Trio → Octad → Set
     trioIsThreeDisjointOctads : Set
-    actionOnTrios : M24 → Trio → Trio
+    trioAction : M24 → Trio → Trio
     transitiveOnTrios : Set
     transitivityWitness : transitiveOnTrios
     stabilizerHasOrder64512 : Set
@@ -60,23 +60,23 @@ record GolayTrioOrbitTheorem
     s3FactorWitness : stabilizerContainsS3BlockPermutation
     orbitHas3795Trios : Set
     orbitCountWitness : orbitHas3795Trios
-    sourceAuthor : String
-    sourceTitle : String
-    sourceDOI : String
+    trioSourceAuthor : String
+    trioSourceTitle : String
+    trioSourceDOI : String
 
 open GolayTrioOrbitTheorem public
 
 record EquivariantTrioObservable
     (M24 Trio Value : Set) : Set₁ where
   field
-    actionOnTrios : M24 → Trio → Trio
-    actionOnValues : M24 → Value → Value
-    observable : Trio → Value
-    equivariant :
+    observableTrioAction : M24 → Trio → Trio
+    observableValueAction : M24 → Value → Value
+    trioObservable : Trio → Value
+    trioObservableEquivariant :
       (g : M24) →
       (trio : Trio) →
-      observable (actionOnTrios g trio)
-      ≡ actionOnValues g (observable trio)
+      trioObservable (observableTrioAction g trio)
+      ≡ observableValueAction g (trioObservable trio)
 
 open EquivariantTrioObservable public
 
@@ -96,9 +96,9 @@ record DodecadM12EmbeddingTheorem
     pointwiseDodecadStabilizerIsM12 : Set
     outerAutomorphismSwapsComplementPair : Set
     embeddingReceipt : M12 → M24
-    sourceAuthor : String
-    sourceTitle : String
-    sourceDOI : String
+    dodecadSourceAuthor : String
+    dodecadSourceTitle : String
+    dodecadSourceDOI : String
 
 open DodecadM12EmbeddingTheorem public
 
@@ -114,26 +114,26 @@ record HexadTernaryGolaySupportTheorem
     hexadCountIs132 : Set
     m12ActsOnHexads : M12 → Hexad → Hexad
     m12PreservesHexads : Set
-    theoremReceipt :
+    hexadTheoremReceipt :
       everyHexadIsWeightSixSupport →
       hexadCountIs132 →
       m12PreservesHexads →
       Set
-    sourceAuthor : String
-    sourceTitle : String
-    sourceDOI : String
+    hexadSourceAuthor : String
+    hexadSourceTitle : String
+    hexadSourceDOI : String
 
 open HexadTernaryGolaySupportTheorem public
 
 record MonomialAutomorphismExtensionTheorem
     (MonomialAut M12 Kernel : Set) : Set₁ where
   field
-    projection : MonomialAut → M12
-    kernel : Kernel
-    kernelOrder : Nat
-    kernelOrderIsTwo : kernelOrder ≡ 2
-    projectionSurjective : Set
-    exactSequenceReceipt : Set
+    monomialProjection : MonomialAut → M12
+    monomialKernel : Kernel
+    monomialKernelOrder : Nat
+    monomialKernelOrderIsTwo : monomialKernelOrder ≡ 2
+    monomialProjectionSurjective : Set
+    monomialExactSequenceReceipt : Set
 
 open MonomialAutomorphismExtensionTheorem public
 
