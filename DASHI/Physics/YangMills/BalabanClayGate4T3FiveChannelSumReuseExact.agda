@@ -13,10 +13,10 @@ import DASHI.Physics.YangMills.BalabanClayGate4T3FiveChannelSelfAdjointReuseExac
 ------------------------------------------------------------------------
 -- T3 instantiation of the derived five-channel sum laws.
 --
--- The actual T3 operators are used literally.  Total-remainder
--- self-adjointness and the total form triangle are derived from the physical
--- five-channel split and channelwise self-adjointness rather than requested as
--- independent inputs.
+-- The actual T3 operators are used literally. Total-remainder self-adjointness
+-- and the total form triangle are derived from the physical five-channel split
+-- and channelwise self-adjointness.  The sum algebra's Bound addition and order
+-- are explicitly identified with T3's rather than assumed definitionally equal.
 ------------------------------------------------------------------------
 
 record T3FiveChannelReducedInputs
@@ -33,6 +33,24 @@ record T3FiveChannelReducedInputs
 
     sumAlgebra : Sum.OperatorFormSumAlgebra
       (Fluctuation → Fluctuation) Fluctuation Bound
+
+    sumAddBoundMeaning :
+      Sum.addBound sumAlgebra ≡ T3.addBound t3
+
+    sumLessEqualMeaning :
+      Sum.LessEqual sumAlgebra ≡ T3.LessEqual t3
+
+    t3LessEqualTransitive : ∀ {left middle right} →
+      T3.LessEqual t3 left middle →
+      T3.LessEqual t3 middle right →
+      T3.LessEqual t3 left right
+
+    t3AddBoundMonotone : ∀ {left lower right upper} →
+      T3.LessEqual t3 left lower →
+      T3.LessEqual t3 right upper →
+      T3.LessEqual t3
+        (T3.addBound t3 left right)
+        (T3.addBound t3 lower upper)
 
     totalRemainderSplit :
       T3.backgroundHessianRemainder t3
@@ -76,7 +94,7 @@ record T3FiveChannelReducedInputs
     UnitState : Fluctuation → Set
 
     curvatureFormBound : ∀ fluctuation → UnitState fluctuation →
-      Sum.LessEqual sumAlgebra
+      T3.LessEqual t3
         (Sum.quadraticFormAbsolute sumAlgebra
           (T3.curvatureRemainder t3
             (T3.makeIndex t3 scale volume regime background))
@@ -84,7 +102,7 @@ record T3FiveChannelReducedInputs
         (T3.εCurvature t3)
 
     transportFormBound : ∀ fluctuation → UnitState fluctuation →
-      Sum.LessEqual sumAlgebra
+      T3.LessEqual t3
         (Sum.quadraticFormAbsolute sumAlgebra
           (T3.transportRemainder t3
             (T3.makeIndex t3 scale volume regime background))
@@ -92,7 +110,7 @@ record T3FiveChannelReducedInputs
         (T3.εTransport t3)
 
     chartFormBound : ∀ fluctuation → UnitState fluctuation →
-      Sum.LessEqual sumAlgebra
+      T3.LessEqual t3
         (Sum.quadraticFormAbsolute sumAlgebra
           (T3.chartRemainder t3
             (T3.makeIndex t3 scale volume regime background))
@@ -100,7 +118,7 @@ record T3FiveChannelReducedInputs
         (T3.εChart t3)
 
     gaugeFormBound : ∀ fluctuation → UnitState fluctuation →
-      Sum.LessEqual sumAlgebra
+      T3.LessEqual t3
         (Sum.quadraticFormAbsolute sumAlgebra
           (T3.gaugeRemainder t3
             (T3.makeIndex t3 scale volume regime background))
@@ -108,7 +126,7 @@ record T3FiveChannelReducedInputs
         (T3.εGauge t3)
 
     constraintFormBound : ∀ fluctuation → UnitState fluctuation →
-      Sum.LessEqual sumAlgebra
+      T3.LessEqual t3
         (Sum.quadraticFormAbsolute sumAlgebra
           (T3.constraintRemainder t3
             (T3.makeIndex t3 scale volume regime background))
@@ -129,7 +147,7 @@ record T3FiveChannelReducedInputs
 
     orderMeaning : ∀ left right →
       FormNorm.LessEqual normData left right
-      ≡ Sum.LessEqual sumAlgebra left right
+      ≡ T3.LessEqual t3 left right
 
     selfAdjointMeaning : ∀ operator →
       FormNorm.SelfAdjoint normData operator
@@ -200,6 +218,53 @@ derivedTotalRemainderSelfAdjoint inputs =
     (Sum.totalFiveChannelSelfAdjoint
       (asFiveChannelOperatorSum inputs))
 
+derivedTotalFormTriangleInT3Order :
+  ∀ {Scale Volume PatchRegime Background Fluctuation Tangent Bound}
+    (inputs : T3FiveChannelReducedInputs
+      Scale Volume PatchRegime Background Fluctuation Tangent Bound)
+    fluctuation →
+  T3.LessEqual (t3 inputs)
+    (Sum.quadraticFormAbsolute (sumAlgebra inputs)
+      (T3.backgroundHessianRemainder (t3 inputs)
+        (T3.makeIndex (t3 inputs)
+          (scale inputs) (volume inputs)
+          (regime inputs) (background inputs)))
+      fluctuation)
+    (T3.addBound (t3 inputs)
+      (Sum.quadraticFormAbsolute (sumAlgebra inputs)
+        (T3.curvatureRemainder (t3 inputs)
+          (T3.makeIndex (t3 inputs)
+            (scale inputs) (volume inputs)
+            (regime inputs) (background inputs))) fluctuation)
+      (T3.addBound (t3 inputs)
+        (Sum.quadraticFormAbsolute (sumAlgebra inputs)
+          (T3.transportRemainder (t3 inputs)
+            (T3.makeIndex (t3 inputs)
+              (scale inputs) (volume inputs)
+              (regime inputs) (background inputs))) fluctuation)
+        (T3.addBound (t3 inputs)
+          (Sum.quadraticFormAbsolute (sumAlgebra inputs)
+            (T3.chartRemainder (t3 inputs)
+              (T3.makeIndex (t3 inputs)
+                (scale inputs) (volume inputs)
+                (regime inputs) (background inputs))) fluctuation)
+          (T3.addBound (t3 inputs)
+            (Sum.quadraticFormAbsolute (sumAlgebra inputs)
+              (T3.gaugeRemainder (t3 inputs)
+                (T3.makeIndex (t3 inputs)
+                  (scale inputs) (volume inputs)
+                  (regime inputs) (background inputs))) fluctuation)
+            (Sum.quadraticFormAbsolute (sumAlgebra inputs)
+              (T3.constraintRemainder (t3 inputs)
+                (T3.makeIndex (t3 inputs)
+                  (scale inputs) (volume inputs)
+                  (regime inputs) (background inputs))) fluctuation)))))
+derivedTotalFormTriangleInT3Order inputs fluctuation
+  rewrite sym (sumAddBoundMeaning inputs)
+        | sym (sumLessEqualMeaning inputs) =
+  Sum.totalFiveChannelFormTriangle
+    (asFiveChannelOperatorSum inputs) fluctuation
+
 asT3FiveChannelSelfAdjointInputs :
   ∀ {Scale Volume PatchRegime Background Fluctuation Tangent Bound}
     (inputs : T3FiveChannelReducedInputs
@@ -216,13 +281,11 @@ asT3FiveChannelSelfAdjointInputs inputs = record
       Sum.quadraticFormAbsolute (sumAlgebra inputs)
   ; T3Reuse.T3FiveChannelSelfAdjointInputs.UnitState = UnitState inputs
   ; T3Reuse.T3FiveChannelSelfAdjointInputs.lessEqualTransitive =
-      Sum.transitive (sumAlgebra inputs)
+      t3LessEqualTransitive inputs
   ; T3Reuse.T3FiveChannelSelfAdjointInputs.addBoundMonotone =
-      Sum.addMonotone (sumAlgebra inputs)
+      t3AddBoundMonotone inputs
   ; T3Reuse.T3FiveChannelSelfAdjointInputs.totalFormTriangle =
-      λ fluctuation unit →
-        Sum.totalFiveChannelFormTriangle
-          (asFiveChannelOperatorSum inputs) fluctuation
+      λ fluctuation unit → derivedTotalFormTriangleInT3Order inputs fluctuation
   ; T3Reuse.T3FiveChannelSelfAdjointInputs.curvatureFormBound =
       curvatureFormBound inputs
   ; T3Reuse.T3FiveChannelSelfAdjointInputs.transportFormBound =
@@ -280,3 +343,6 @@ physicalT3ChannelSelfAdjointnessInputsLevel = conditional
 
 physicalT3FiveAbsoluteFormEstimateInputsLevel : ProofLevel
 physicalT3FiveAbsoluteFormEstimateInputsLevel = conditional
+
+physicalT3SumAlgebraMeaningInputsLevel : ProofLevel
+physicalT3SumAlgebraMeaningInputsLevel = conditional
