@@ -45,6 +45,11 @@ mapCongPointwise pointwise [] = refl
 mapCongPointwise pointwise (value ∷ values) =
   cong (pointwise value ∷_) (mapCongPointwise pointwise values)
 
+data _∈List_ {A : Set} (value : A) : List A → Set where
+  here : ∀ {values} → value ∈List (value ∷ values)
+  there : ∀ {other values} → value ∈List values →
+    value ∈List (other ∷ values)
+
 record CMP109GroupAverageAxioms
     (Group Lie Scalar : Set) : Set₁ where
   field
@@ -90,32 +95,28 @@ record CMP109GroupAverageAxioms
       (∀ value → value ∈List values → ClosedSubgroup value) →
       ClosedSubgroup (average values)
 
+    logarithmSumRelativeTo : List Group → Group → Lie
+    logarithmSumNil : ∀ centre →
+      logarithmSumRelativeTo [] centre ≡ zeroLie
+    logarithmSumCons : ∀ value values centre →
+      logarithmSumRelativeTo (value ∷ values) centre
+      ≡ addLie
+          (logarithmCoordinate (multiply value (inverse centre)))
+          (logarithmSumRelativeTo values centre)
+
     federbushEquation : ∀ values →
       SmallDiameter values →
       logarithmSumRelativeTo values (average values) ≡ zeroLie
 
-  logarithmSumRelativeTo : List Group → Group → Lie
-  logarithmSumRelativeTo [] centre = zeroLie
-  logarithmSumRelativeTo (value ∷ values) centre =
-    addLie
-      (logarithmCoordinate (multiply value (inverse centre)))
-      (logarithmSumRelativeTo values centre)
-
-  data _∈List_ (value : Group) : List Group → Set where
-    here : ∀ {values} → value ∈List (value ∷ values)
-    there : ∀ {other values} → value ∈List values →
-      value ∈List (other ∷ values)
-
 open CMP109GroupAverageAxioms public
 
 record GaugeCovariantPathFamily
-    (Field Gauge Path Group Lie Scalar : Set)
+    (Field Path Group Lie Scalar : Set)
     (averageAxioms : CMP109GroupAverageAxioms Group Lie Scalar) : Set₁ where
   field
     paths : List Path
     holonomy transformedHolonomy : Field → Path → Group
 
-    transformedField : Field → Field
     leftGauge rightGauge : Field → Group
 
     pathHolonomyGaugeCovariant : ∀ field path →
@@ -130,30 +131,30 @@ record GaugeCovariantPathFamily
 open GaugeCovariantPathFamily public
 
 averagedContour :
-  ∀ {Field Gauge Path Group Lie Scalar}
+  ∀ {Field Path Group Lie Scalar}
     {averageAxioms : CMP109GroupAverageAxioms Group Lie Scalar} →
   GaugeCovariantPathFamily
-    Field Gauge Path Group Lie Scalar averageAxioms →
+    Field Path Group Lie Scalar averageAxioms →
   Field → Group
 averagedContour {averageAxioms = averageAxioms} family field =
   average averageAxioms
     (mapList (holonomy family field) (paths family))
 
 transformedAveragedContour :
-  ∀ {Field Gauge Path Group Lie Scalar}
+  ∀ {Field Path Group Lie Scalar}
     {averageAxioms : CMP109GroupAverageAxioms Group Lie Scalar} →
   GaugeCovariantPathFamily
-    Field Gauge Path Group Lie Scalar averageAxioms →
+    Field Path Group Lie Scalar averageAxioms →
   Field → Group
 transformedAveragedContour {averageAxioms = averageAxioms} family field =
   average averageAxioms
     (mapList (transformedHolonomy family field) (paths family))
 
 averagedContourGaugeCovariant :
-  ∀ {Field Gauge Path Group Lie Scalar}
+  ∀ {Field Path Group Lie Scalar}
     {averageAxioms : CMP109GroupAverageAxioms Group Lie Scalar}
     (family : GaugeCovariantPathFamily
-      Field Gauge Path Group Lie Scalar averageAxioms)
+      Field Path Group Lie Scalar averageAxioms)
     field →
   transformedAveragedContour family field
   ≡ multiply averageAxioms (leftGauge family field)
