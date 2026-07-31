@@ -17,7 +17,8 @@ FOCUSED_FILES = {
         "10.1109/18.312154",
         "10.1109/TC.2008.213",
         "10.4007/annals.2017.185.3.8",
-        "canonicalUBPSourceCountIsSeven",
+        "https://oeis.org/A001203",
+        "canonicalUBPSourceCountIsEight",
         "canonicalUBPSourceReceiptNonPromoting",
     ),
     "DASHI/Foundations/UBP/ExactnessAndLatticeBoundary.agda": (
@@ -30,6 +31,22 @@ FOCUSED_FILES = {
         "LeechMembershipCertificate",
         "fullGolayParityGlueCertificateRequired",
         "ubpExactnessAndLatticeReceiptNonPromoting",
+    ),
+    "DASHI/Foundations/UBP/Pi50ConvergentTable.agda": (
+        "module DASHI.Foundations.UBP.Pi50ConvergentTable where",
+        "sourceFirst50",
+        "canonicalPiFirst50",
+        "first47CoefficientsAgree",
+        "sourceCoefficient48IsSix",
+        "canonicalCoefficient48IsTwo",
+        "coefficient48Mismatch",
+        "sourceP50Exact",
+        "canonicalP50Exact",
+        "canonicalQ50Exact",
+        "canonicalErrorBoundDenominatorExact",
+        "sourceTableIsCanonicalPiCFThrough50IsFalse",
+        "eightyDecimalDigitAccuracyEstablishedIsFalse",
+        "pi50GenericReceiptNonPromoting",
     ),
     "DASHI/Foundations/UBP/ObservableAlgebraBoundary.agda": (
         "module DASHI.Foundations.UBP.ObservableAlgebraBoundary where",
@@ -83,6 +100,11 @@ FOCUSED_FILES = {
         "graySemanticAutomaticityClosed",
         "leechToThreeDimensionalProjectionClaimClosed",
         "externalReplicationClaimClosed",
+        "sourcePiTableCanonicalClaimClosed",
+        "sourcePiCoefficient48Regression",
+        "canonicalPiCoefficient48Regression",
+        "sourceP50Regression",
+        "canonicalP50Regression",
         "allFocusedReceiptsRemainNonPromoting",
     ),
 }
@@ -118,6 +140,8 @@ FORBIDDEN_PROMOTION_PHRASES = (
     "checkAloneProvesEquivalenceIsTrue",
     "genuineLeechToThreeDimensionalProjectionSuppliedIsTrue",
     "independentlyEmergentPhysicalThresholdEstablishedIsTrue",
+    "sourceTableIsCanonicalPiCFThrough50IsTrue",
+    "eightyDecimalDigitAccuracyEstablishedIsTrue",
 )
 
 
@@ -194,8 +218,8 @@ def main() -> None:
         require_file(relative, tokens, agda=False)
 
     source = agda_text["DASHI/Foundations/UBP/SourceAtlas.agda"]
-    if source.count("sourceEntry\n") < 7:
-        fail("source atlas does not visibly contain seven source entries")
+    if source.count("sourceEntry\n") < 8:
+        fail("source atlas does not visibly contain eight source entries")
 
     ledger = agda_text[
         "DASHI/Foundations/UBP/EvidenceInterpretationLedger.agda"
@@ -220,6 +244,14 @@ def main() -> None:
         fail("rational exact-execution status is missing")
     if "exactIrrationalTargetRepresentedByFractionIsFalse" not in exactness:
         fail("irrational-target nonrepresentation boundary is missing")
+
+    pi50 = agda_text["DASHI/Foundations/UBP/Pi50ConvergentTable.agda"]
+    if "sourceCoefficient48 = 6" not in pi50:
+        fail("attributed source coefficient 48 is not fixed to 6")
+    if "canonicalCoefficient48 = 2" not in pi50:
+        fail("canonical coefficient 48 is not fixed to 2")
+    if "sourceTableIsCanonicalPiCFThrough50IsFalse" not in pi50:
+        fail("source/canonical continued-fraction distinction is not fail-closed")
 
     algebra = agda_text[
         "DASHI/Foundations/UBP/ObservableAlgebraBoundary.agda"
