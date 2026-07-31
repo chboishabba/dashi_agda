@@ -23,10 +23,10 @@ record FiniteConstrainedSum
     fineFields : List Fine
     blockMap : Fine → Coarse
     coarseMatches : Fine → Coarse → Bool
-    coarseMatchesSound : ∀ field coarse →
-      coarseMatches field coarse ≡ true → blockMap field ≡ coarse
-    coarseMatchesComplete : ∀ field coarse →
-      blockMap field ≡ coarse → coarseMatches field coarse ≡ true
+    coarseMatchesSound : ∀ fineField coarse →
+      coarseMatches fineField coarse ≡ true → blockMap fineField ≡ coarse
+    coarseMatchesComplete : ∀ fineField coarse →
+      blockMap fineField ≡ coarse → coarseMatches fineField coarse ≡ true
 
     isSmall : Fine → Bool
     weight : Fine → Scalar
@@ -45,51 +45,51 @@ selectedWith :
   ∀ {Fine Coarse Scalar} →
   FiniteConstrainedSum Fine Coarse Scalar →
   (Fine → Scalar) → Coarse → Fine → Scalar
-selectedWith dataSet weightFunction coarse field
-  with coarseMatches dataSet field coarse
-... | true = weightFunction field
+selectedWith dataSet weightFunction coarse fine
+  with coarseMatches dataSet fine coarse
+... | true = weightFunction fine
 ... | false = zero dataSet
 
 smallSelectedWith :
   ∀ {Fine Coarse Scalar} →
   FiniteConstrainedSum Fine Coarse Scalar →
   (Fine → Scalar) → Coarse → Fine → Scalar
-smallSelectedWith dataSet weightFunction coarse field
-  with isSmall dataSet field
-... | true = selectedWith dataSet weightFunction coarse field
+smallSelectedWith dataSet weightFunction coarse fine
+  with isSmall dataSet fine
+... | true = selectedWith dataSet weightFunction coarse fine
 ... | false = zero dataSet
 
 largeSelectedWith :
   ∀ {Fine Coarse Scalar} →
   FiniteConstrainedSum Fine Coarse Scalar →
   (Fine → Scalar) → Coarse → Fine → Scalar
-largeSelectedWith dataSet weightFunction coarse field
-  with isSmall dataSet field
+largeSelectedWith dataSet weightFunction coarse fine
+  with isSmall dataSet fine
 ... | true = zero dataSet
-... | false = selectedWith dataSet weightFunction coarse field
+... | false = selectedWith dataSet weightFunction coarse fine
 
 selectedSplits :
   ∀ {Fine Coarse Scalar}
     (dataSet : FiniteConstrainedSum Fine Coarse Scalar)
-    weightFunction coarse field →
-  selectedWith dataSet weightFunction coarse field
+    weightFunction coarse fine →
+  selectedWith dataSet weightFunction coarse fine
   ≡ add dataSet
-      (smallSelectedWith dataSet weightFunction coarse field)
-      (largeSelectedWith dataSet weightFunction coarse field)
-selectedSplits dataSet weightFunction coarse field
-  with isSmall dataSet field
+      (smallSelectedWith dataSet weightFunction coarse fine)
+      (largeSelectedWith dataSet weightFunction coarse fine)
+selectedSplits dataSet weightFunction coarse fine
+  with isSmall dataSet fine
 ... | true = sym (addZeroRight dataSet
-    (selectedWith dataSet weightFunction coarse field))
+    (selectedWith dataSet weightFunction coarse fine))
 ... | false = sym (addZeroLeft dataSet
-    (selectedWith dataSet weightFunction coarse field))
+    (selectedWith dataSet weightFunction coarse fine))
 
 foldSelected :
   ∀ {Fine Coarse Scalar} →
   FiniteConstrainedSum Fine Coarse Scalar →
   (Fine → Scalar) → Coarse → List Fine → Scalar
 foldSelected dataSet selector coarse [] = zero dataSet
-foldSelected dataSet selector coarse (field ∷ fields) =
-  add dataSet (selector field)
+foldSelected dataSet selector coarse (fine ∷ fields) =
+  add dataSet (selector fine)
     (foldSelected dataSet selector coarse fields)
 
 constrainedIntegral :
@@ -129,11 +129,11 @@ smallLargePartitionListExact :
       (largeFieldContribution dataSet fields weightFunction coarse)
 smallLargePartitionListExact dataSet [] weightFunction coarse =
   sym (addZeroLeft dataSet (zero dataSet))
-smallLargePartitionListExact dataSet (field ∷ fields) weightFunction coarse =
+smallLargePartitionListExact dataSet (fine ∷ fields) weightFunction coarse =
   trans
     (cong
       (add dataSet
-        (selectedWith dataSet weightFunction coarse field))
+        (selectedWith dataSet weightFunction coarse fine))
       (smallLargePartitionListExact dataSet fields weightFunction coarse))
     (trans
       (cong
@@ -141,10 +141,10 @@ smallLargePartitionListExact dataSet (field ∷ fields) weightFunction coarse =
           (add dataSet
             (smallFieldContribution dataSet fields weightFunction coarse)
             (largeFieldContribution dataSet fields weightFunction coarse)))
-        (selectedSplits dataSet weightFunction coarse field))
+        (selectedSplits dataSet weightFunction coarse fine))
       (interchange dataSet
-        (smallSelectedWith dataSet weightFunction coarse field)
-        (largeSelectedWith dataSet weightFunction coarse field)
+        (smallSelectedWith dataSet weightFunction coarse fine)
+        (largeSelectedWith dataSet weightFunction coarse fine)
         (smallFieldContribution dataSet fields weightFunction coarse)
         (largeFieldContribution dataSet fields weightFunction coarse)))
 
@@ -208,28 +208,23 @@ finiteExactOneStepIntegral :
   P3.ExactOneStepIntegral
     Fine Coarse (List Fine) Scalar EffectiveAction Scalar
 finiteExactOneStepIntegral dataSet = record
-  { P3.ExactOneStepIntegral.blockMap = blockMap (sumData dataSet)
-  ; P3.ExactOneStepIntegral.fineMeasure = fineFields (sumData dataSet)
-  ; P3.ExactOneStepIntegral.boltzmannWeight = weight (sumData dataSet)
-  ; P3.ExactOneStepIntegral.constrainedIntegral =
-      constrainedIntegral (sumData dataSet)
-  ; P3.ExactOneStepIntegral.nextEffectiveAction = nextEffectiveAction dataSet
-  ; P3.ExactOneStepIntegral.exponentialOfNegativeAction =
-      exponentialOfNegativeAction dataSet
-  ; P3.ExactOneStepIntegral.smallFieldContribution =
+  { blockMap = blockMap (sumData dataSet)
+  ; fineMeasure = fineFields (sumData dataSet)
+  ; boltzmannWeight = weight (sumData dataSet)
+  ; constrainedIntegral = constrainedIntegral (sumData dataSet)
+  ; nextEffectiveAction = nextEffectiveAction dataSet
+  ; exponentialOfNegativeAction = exponentialOfNegativeAction dataSet
+  ; smallFieldContribution =
       smallFieldContribution (sumData dataSet)
         (fineFields (sumData dataSet)) (weight (sumData dataSet))
-  ; P3.ExactOneStepIntegral.largeFieldContribution =
+  ; largeFieldContribution =
       largeFieldContribution (sumData dataSet)
         (fineFields (sumData dataSet)) (weight (sumData dataSet))
-  ; P3.ExactOneStepIntegral.vacuumNormalization =
-      vacuumNormalization dataSet
-  ; P3.ExactOneStepIntegral.addScalar = add (sumData dataSet)
-  ; P3.ExactOneStepIntegral.multiplyScalar = multiply dataSet
-  ; P3.ExactOneStepIntegral.smallLargePartitionExact =
-      smallLargePartitionExact (sumData dataSet)
-  ; P3.ExactOneStepIntegral.effectiveActionDefinesIntegral =
-      effectiveActionDefinesIntegral dataSet
+  ; vacuumNormalization = vacuumNormalization dataSet
+  ; addScalar = add (sumData dataSet)
+  ; multiplyScalar = multiply dataSet
+  ; smallLargePartitionExact = smallLargePartitionExact (sumData dataSet)
+  ; effectiveActionDefinesIntegral = effectiveActionDefinesIntegral dataSet
   }
 
 p3FiniteConstrainedSumDefinitionLevel : ProofLevel

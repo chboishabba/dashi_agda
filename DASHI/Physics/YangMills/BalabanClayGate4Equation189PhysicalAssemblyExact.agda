@@ -80,15 +80,14 @@ physicalPointwiseSuppressionData :
   PhysicalEquation189Data dataSet →
   Reduction.TOperationPointwiseSuppressionData dataSet
 physicalPointwiseSuppressionData physical = record
-  { Reduction.TOperationPointwiseSuppressionData.order = order physical
-  ; Reduction.TOperationPointwiseSuppressionData.transitive = transitive physical
-  ; Reduction.TOperationPointwiseSuppressionData.referenceIntegrand =
+  { order = order physical
+  ; transitive = transitive physical
+  ; referenceIntegrand =
       Reference.referenceIntegrand (referenceNormalization physical)
-  ; Reduction.TOperationPointwiseSuppressionData.suppression =
+  ; suppression =
       Reference.suppression (referenceNormalization physical)
-  ; Reduction.TOperationPointwiseSuppressionData.pointwiseLargeFieldSuppression =
-      pointwisePhysicalSuppression physical
-  ; Reduction.TOperationPointwiseSuppressionData.normalizedSuppressedReferenceFibre =
+  ; pointwiseLargeFieldSuppression = pointwisePhysicalSuppression physical
+  ; normalizedSuppressedReferenceFibre =
       normalizedReferenceFibreOrderBound physical
   }
 

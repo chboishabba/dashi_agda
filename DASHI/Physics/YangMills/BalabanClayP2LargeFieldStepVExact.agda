@@ -146,7 +146,10 @@ shellMajorantPartialMatchesTrace : ∀ depth →
 shellMajorantPartialMatchesTrace zero = ℚRing.solve-∀
 shellMajorantPartialMatchesTrace (suc depth)
   rewrite shellMajorantPartialMatchesTrace depth =
-  ℚRing.solve-∀ (traceShellPartialSum depth) (halfPower depth)
+  regroup (traceShellPartialSum depth) (halfPower depth)
+  where
+  regroup : (a b : ℚ) → quarter * a + quarter * b ≡ quarter * (a + b)
+  regroup = ℚRing.solve-∀
 
 shellMajorantTailIdentity : ∀ depth →
   shellMajorantPartialSum depth + half * halfPower depth ≡ half
@@ -156,9 +159,11 @@ shellMajorantTailIdentity depth =
       (λ partial → partial + half * halfPower depth)
       (shellMajorantPartialMatchesTrace depth))
     (trans
-      (ℚRing.solve-∀
-        (traceShellPartialSum depth) (halfPower depth))
+      (regroup (traceShellPartialSum depth) (halfPower depth))
       (cong (quarter *_) (traceShellGeometricIdentity depth)))
+  where
+  regroup : (a b : ℚ) → quarter * a + half * b ≡ quarter * (a + twoℚ * b)
+  regroup = ℚRing.solve-∀
 
 halfTimesPowerNonnegative : ∀ depth →
   0ℚ ≤ half * halfPower depth
@@ -272,14 +277,20 @@ record PhysicalP2StepVCertificate
     activityFactorization : LargeFieldActivityFactorization Scale Polymer
     shellBound : UniformRootedShellBound Scale Volume Root
 
-    kpAtEveryFiniteCutoff : ∀ scale volume root depth →
-      rootedPartialSum shellBound scale volume root depth ≤ half
-    kpAtEveryFiniteCutoff = uniformFiniteVolumeKoteckyPreiss shellBound
-
-    etaGap : 0ℚ < half
-    etaGap = etaGapPositive
-
 open PhysicalP2StepVCertificate public
+
+kpAtEveryFiniteCutoff :
+  ∀ {Configuration GaugeTransform Block Plaquette Polymer Scale Volume Root}
+    (cert : PhysicalP2StepVCertificate Configuration GaugeTransform Block Plaquette Polymer Scale Volume Root) →
+  ∀ scale volume root depth →
+  rootedPartialSum (shellBound cert) scale volume root depth ≤ half
+kpAtEveryFiniteCutoff cert = uniformFiniteVolumeKoteckyPreiss (shellBound cert)
+
+etaGap :
+  ∀ {Configuration GaugeTransform Block Plaquette Polymer Scale Volume Root} →
+  PhysicalP2StepVCertificate Configuration GaugeTransform Block Plaquette Polymer Scale Volume Root →
+  0ℚ < half
+etaGap _ = etaGapPositive
 
 p2GaugeInvariantSplitSurfaceLevel : ProofLevel
 p2GaugeInvariantSplitSurfaceLevel = machineChecked

@@ -173,8 +173,8 @@ record ConnectedPeriodicPolymer (n : Nat) : Set₁ where
     nonempty : Set
     duplicateFree : Set
     membership : Periodic.PeriodicBlock n → Set
-    membershipAgreesWithList : ∀ block → Set
-    connected : ∀ left right →
+    membershipAgreesWithList : ∀ (block : Periodic.PeriodicBlock n) → Set
+    connected : ∀ (left right : Periodic.PeriodicBlock n) →
       membership left → membership right → PeriodicPath left right
 
 open ConnectedPeriodicPolymer public
@@ -185,7 +185,7 @@ record ShortestPathCertificate {n}
   field
     path : PeriodicPath root block
     insidePolymer : Set
-    minimal : ∀ candidate → Set
+    minimal : ∀ (candidate : PeriodicPath root block) → Set
 
 open ShortestPathCertificate public
 
@@ -194,9 +194,9 @@ record CertifiedPeriodicBreadthFirstData
   field
     root : Periodic.PeriodicBlock n
     rootBelongs : membership polymer root
-    rootIsLeast : ∀ block → membership polymer block → Set
+    rootIsLeast : ∀ (block : Periodic.PeriodicBlock n) → membership polymer block → Set
 
-    shortestPath : ∀ block → membership polymer block →
+    shortestPath : ∀ (block : Periodic.PeriodicBlock n) → membership polymer block →
       ShortestPathCertificate polymer root block
 
     distance : Periodic.PeriodicBlock n → Nat

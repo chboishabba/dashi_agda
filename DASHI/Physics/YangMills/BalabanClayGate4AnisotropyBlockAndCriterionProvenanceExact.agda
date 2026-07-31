@@ -101,9 +101,9 @@ allNormalizedEntries =
   fernandezProcacciPrimaryReference ∷ []
 
 data LocatorConfidence : Set where
-  singleQuarantinedLocator
-  multipleIndependentLocators
-  primaryAbstractOnly
+  singleQuarantinedLocator : LocatorConfidence
+  multipleIndependentLocators : LocatorConfidence
+  primaryAbstractOnly : LocatorConfidence
   primaryTextVerified : LocatorConfidence
 
 balabanEquation175Confidence : LocatorConfidence

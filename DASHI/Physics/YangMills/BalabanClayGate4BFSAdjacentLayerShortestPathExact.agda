@@ -64,7 +64,7 @@ asStrongShortestPathCertificate :
   AdjacentLayerUpperBound certificate →
   Strong.StrongBFSShortestPathCertificate certificate
 asStrongShortestPathCertificate upper = record
-  { Strong.StrongBFSShortestPathCertificate.distanceLowerBoundForEveryPath =
+  { distanceLowerBoundForEveryPath =
       pathLengthBoundsAssignedDistance upper
   }
 

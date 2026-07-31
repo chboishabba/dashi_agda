@@ -105,19 +105,19 @@ record PeriodicPolymerEvidence (n : Nat) (polymer : PeriodicPolymer n) : Set₁ 
     duplicateFree : Set
     connectedByNearestNeighbourPaths : Set
     leastBlockBelongs : Set
-    leastBlockMinimal : ∀ block → Set
+    leastBlockMinimal : ∀ (block : PeriodicBlock n) → lexLe4Bool (leastBlockList polymer) block ≡ true
 
 open PeriodicPolymerEvidence public
 
 record PeriodicAdjacencyData (n : Nat) : Set₁ where
   field
     nearestNeighbour : PeriodicBlock n → PeriodicBlock n → Set
-    nearestNeighbourDecidable : ∀ left right → Set
+    nearestNeighbourDecidable : ∀ (left right : PeriodicBlock n) → Set
     signedStep : PeriodicBlock n → SignedAxis4 → PeriodicBlock n
     directionOfAdjacent : PeriodicBlock n → PeriodicBlock n → SignedAxis4
-    signedStepAdjacent : ∀ block direction →
+    signedStepAdjacent : ∀ (block : PeriodicBlock n) (direction : SignedAxis4) →
       nearestNeighbour block (signedStep block direction)
-    directionReconstructsAdjacent : ∀ left right →
+    directionReconstructsAdjacent : ∀ (left right : PeriodicBlock n) →
       nearestNeighbour left right →
       signedStep left (directionOfAdjacent left right) ≡ right
 
@@ -126,46 +126,46 @@ open PeriodicAdjacencyData public
 record PeriodicBreadthFirstImplementation (n : Nat) : Set₁ where
   field
     adjacency : PeriodicAdjacencyData n
-    evidence : ∀ polymer → PeriodicPolymerEvidence n polymer
+    evidence : ∀ (polymer : PeriodicPolymer n) → PeriodicPolymerEvidence n polymer
 
-    blockOrderTotal : ∀ left right →
+    blockOrderTotal : ∀ (left right : PeriodicBlock n) →
       blockLessEqual left right ⊎ blockLessEqual right left
-    blockOrderAntisymmetric : ∀ {left right} →
+    blockOrderAntisymmetric : ∀ {left right : PeriodicBlock n} →
       blockLessEqual left right → blockLessEqual right left → left ≡ right
-    blockOrderDecidable : ∀ left right → Set
+    blockOrderDecidable : ∀ (left right : PeriodicBlock n) → Set
 
     breadthFirstDistance : PeriodicPolymer n → PeriodicBlock n → Nat
-    rootDistanceZero : ∀ polymer → Set
-    everyNonRootHasCloserNeighbour : ∀ polymer block → Set
+    rootDistanceZero : ∀ (polymer : PeriodicPolymer n) → Set
+    everyNonRootHasCloserNeighbour : ∀ (polymer : PeriodicPolymer n) (block : PeriodicBlock n) → Set
 
     canonicalParent : PeriodicPolymer n → PeriodicBlock n → PeriodicBlock n
-    canonicalParentBelongs : ∀ polymer block → Set
-    canonicalParentAdjacent : ∀ polymer block → Set
-    canonicalParentDistanceDecreases : ∀ polymer block → Set
-    canonicalParentLeastAmongCloser : ∀ polymer block → Set
+    canonicalParentBelongs : ∀ (polymer : PeriodicPolymer n) (block : PeriodicBlock n) → Set
+    canonicalParentAdjacent : ∀ (polymer : PeriodicPolymer n) (block : PeriodicBlock n) → Set
+    canonicalParentDistanceDecreases : ∀ (polymer : PeriodicPolymer n) (block : PeriodicBlock n) → Set
+    canonicalParentLeastAmongCloser : ∀ (polymer : PeriodicPolymer n) (block : PeriodicBlock n) → Set
 
     parentTree : PeriodicPolymer n → PeriodicTree n
-    parentTreeEdgesExact : ∀ polymer → Set
-    parentTreeAcyclic : ∀ polymer → Set
-    parentTreeConnected : ∀ polymer → Set
-    parentTreeCoversExactly : ∀ polymer → Set
-    parentTreeRootExact : ∀ polymer → Set
+    parentTreeEdgesExact : ∀ (polymer : PeriodicPolymer n) → Set
+    parentTreeAcyclic : ∀ (polymer : PeriodicPolymer n) → Set
+    parentTreeConnected : ∀ (polymer : PeriodicPolymer n) → Set
+    parentTreeCoversExactly : ∀ (polymer : PeriodicPolymer n) → Set
+    parentTreeRootExact : ∀ (polymer : PeriodicPolymer n) → Set
 
     depthFirstTour : PeriodicTree n → PeriodicTraversal n
-    depthFirstUsesSignedAxisOrder : ∀ polymer → Set
-    depthFirstVisitsEveryBlock : ∀ polymer → Set
-    depthFirstLengthTwiceEdges : ∀ polymer → Set
+    depthFirstUsesSignedAxisOrder : ∀ (polymer : PeriodicPolymer n) → Set
+    depthFirstVisitsEveryBlock : ∀ (polymer : PeriodicPolymer n) → Set
+    depthFirstLengthTwiceEdges : ∀ (polymer : PeriodicPolymer n) → Set
 
     traversalWord : PeriodicTraversal n → List SignedAxis4
-    signedWordReconstructsTraversal : ∀ polymer → Set
+    signedWordReconstructsTraversal : ∀ (polymer : PeriodicPolymer n) → Set
 
     decodePolymer : PeriodicBlock n → List SignedAxis4 → PeriodicPolymer n
-    decoderReplaysBacktracking : ∀ polymer → Set
-    decodeCanonicalTrace : ∀ polymer →
+    decoderReplaysBacktracking : ∀ (polymer : PeriodicPolymer n) → Set
+    decodeCanonicalTrace : ∀ (polymer : PeriodicPolymer n) →
       decodePolymer (leastBlockList polymer)
         (traversalWord (depthFirstTour (parentTree polymer)))
       ≡ polymer
-    rootRecoverableAfterDecode : ∀ polymer →
+    rootRecoverableAfterDecode : ∀ (polymer : PeriodicPolymer n) →
       leastBlockList
         (decodePolymer (leastBlockList polymer)
           (traversalWord (depthFirstTour (parentTree polymer))))

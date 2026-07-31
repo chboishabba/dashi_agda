@@ -282,12 +282,10 @@ asPhysicalEquation189Data :
   RelativeTPointwiseMeaning tData comparison →
   Equation189.PhysicalEquation189Data tData
 asPhysicalEquation189Data meaning = record
-  { Equation189.PhysicalEquation189Data.order = order meaning
-  ; Equation189.PhysicalEquation189Data.transitive = orderTransitive meaning
-  ; Equation189.PhysicalEquation189Data.referenceNormalization =
-      referenceNormalization meaning
-  ; Equation189.PhysicalEquation189Data.pointwisePhysicalSuppression =
-      selectedRelativePointwise meaning
+  { order = order meaning
+  ; transitive = orderTransitive meaning
+  ; referenceNormalization = referenceNormalization meaning
+  ; pointwisePhysicalSuppression = selectedRelativePointwise meaning
   }
 
 relativeSixFactorProductComparisonLevel : ProofLevel

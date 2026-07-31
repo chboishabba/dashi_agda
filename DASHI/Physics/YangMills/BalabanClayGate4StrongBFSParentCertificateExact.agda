@@ -122,13 +122,7 @@ parentCannotEqualChild :
   Not (parent certificate vertex ≡ vertex)
 parentCannotEqualChild certificate vertex nonRoot equality =
   nonemptyParentChainCannotCycle
-    (substituteChain equality (chainStep nonRoot chainZero))
-  where
-  substituteChain :
-    parent certificate vertex ≡ vertex →
-    ParentChain certificate vertex (parent certificate vertex) (suc zero) →
-    ParentChain certificate vertex vertex (suc zero)
-  substituteChain refl chain = chain
+    (subst (λ p → ParentChain certificate vertex p (suc zero)) equality (chainStep nonRoot chainZero))
 
 parentChainToRootAtDistance :
   ∀ {Vertex}

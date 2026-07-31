@@ -41,8 +41,8 @@ record TerminalKPSmallness
     LessEqual : Bound → Bound → Set
 
     rootedWeightedSum : Link → Bound
-    rootedWeightedSumMeaning : ∀ link → Set
-    terminalKPSmall : ∀ link →
+    rootedWeightedSumMeaning : ∀ (link : Link) → Set
+    terminalKPSmall : ∀ (link : Link) →
       LessEqual (rootedWeightedSum link) (terminalKPBound link)
 
 open TerminalKPSmallness public
@@ -55,8 +55,8 @@ record ConditionedObservableLocalization
     localTermNorm localizationDecay : Observable → Region → Bound
     LessEqual : Bound → Bound → Set
 
-    localizationExpansionExact : ∀ observable → Set
-    localTermExponentiallyLocalized : ∀ observable region →
+    localizationExpansionExact : ∀ (observable : Observable) → Set
+    localTermExponentiallyLocalized : ∀ (observable : Observable) (region : Region) →
       LessEqual (localTermNorm observable region)
         (localizationDecay observable region)
 
@@ -70,7 +70,7 @@ record PerScaleCorrelatorDecoupling
     scaleDecay : Nat → Observable → Observable → Bound
     LessEqual : Bound → Bound → Set
 
-    singleScaleDecoupling : ∀ scale left right →
+    singleScaleDecoupling : ∀ (scale : Nat) (left right : Observable) →
       LessEqual (scaleRemainder scale left right)
         (scaleDecay scale left right)
 
@@ -86,26 +86,26 @@ record ConditionalClusteringAssembly
 
     add : Bound → Bound → Bound
     LessEqual : Bound → Bound → Set
-    transitive : ∀ {left middle right} →
+    transitive : ∀ {left middle right : Bound} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
-    addMonotone : ∀ {left leftUpper right rightUpper} →
+    addMonotone : ∀ {left leftUpper right rightUpper : Bound} →
       LessEqual left leftUpper → LessEqual right rightUpper →
       LessEqual (add left right) (add leftUpper rightUpper)
 
-    multiscaleCovarianceSplit : ∀ left right →
+    multiscaleCovarianceSplit : ∀ (left right : Observable) →
       LessEqual (covariance left right)
         (add (terminalContribution left right)
           (ultravioletContribution left right))
 
-    terminalKPAndLocalizationGiveIR : ∀ left right →
+    terminalKPAndLocalizationGiveIR : ∀ (left right : Observable) →
       LessEqual (terminalContribution left right)
         (irClusteringBound left right)
 
-    perScaleDecouplingSumsToUV : ∀ left right →
+    perScaleDecouplingSumsToUV : ∀ (left right : Observable) →
       LessEqual (ultravioletContribution left right)
         (uvSummedBound left right)
 
-    combineIRAndUVDecay : ∀ left right →
+    combineIRAndUVDecay : ∀ (left right : Observable) →
       LessEqual
         (add (irClusteringBound left right) (uvSummedBound left right))
         (targetClusteringBound left right)

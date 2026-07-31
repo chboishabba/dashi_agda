@@ -97,11 +97,13 @@ oneTraversalStepBelowHalf dataSet scale volume root depth =
             eight * (oneSixteenth
               * rootedShell dataSet scale volume root depth)
             ≤ upper)
-          (ℚRing.solve-∀
-            (rootedShell dataSet scale volume root depth))
+          (regroupEightOneSixteenth (rootedShell dataSet scale volume root depth))
           (reflexive dataSet
             (eight * (oneSixteenth
               * rootedShell dataSet scale volume root depth))))))
+  where
+  regroupEightOneSixteenth : ∀ (x : ℚ) → eight * (oneSixteenth * x) ≡ half * x
+  regroupEightOneSixteenth = ℚRing.solve-∀
 
 rootedShellBelowQuarterHalfPower :
   ∀ {Scale Volume Root}
@@ -112,28 +114,33 @@ rootedShellBelowQuarterHalfPower :
 rootedShellBelowQuarterHalfPower dataSet scale volume root zero =
   subst
     (λ upper → rootedShell dataSet scale volume root zero ≤ upper)
-    (ℚRing.solve-∀)
+    regroupQuarter
     (rootNormalization dataSet scale volume root)
+  where
+  regroupQuarter : quarter ≡ quarter * halfPower zero
+  regroupQuarter = ℚRing.solve-∀
 rootedShellBelowQuarterHalfPower dataSet scale volume root (suc depth) =
   subst
     (λ upper → rootedShell dataSet scale volume root (suc depth) ≤ upper)
-    (ℚRing.solve-∀ (halfPower depth))
+    (regroupHalf (halfPower depth))
     (transitive dataSet
       (oneTraversalStepBelowHalf dataSet scale volume root depth)
       (multiplyByHalfMonotone dataSet
         (rootedShellBelowQuarterHalfPower dataSet scale volume root depth)))
+  where
+  regroupHalf : ∀ h → half * (quarter * h) ≡ quarter * (half * h)
+  regroupHalf = ℚRing.solve-∀
 
 asUniformRootedShellBound :
   ∀ {Scale Volume Root} →
   TraversalShellData Scale Volume Root →
   P2.UniformRootedShellBound Scale Volume Root
 asUniformRootedShellBound dataSet = record
-  { P2.UniformRootedShellBound.rootedShell = rootedShell dataSet
-  ; P2.UniformRootedShellBound.reflexive = reflexive dataSet
-  ; P2.UniformRootedShellBound.transitive = transitive dataSet
-  ; P2.UniformRootedShellBound.addMonotone = addMonotone dataSet
-  ; P2.UniformRootedShellBound.rootedShellBelowMajorant =
-      rootedShellBelowQuarterHalfPower dataSet
+  { rootedShell = rootedShell dataSet
+  ; reflexive = reflexive dataSet
+  ; transitive = transitive dataSet
+  ; addMonotone = addMonotone dataSet
+  ; rootedShellBelowMajorant = rootedShellBelowQuarterHalfPower dataSet
   }
 
 traversalSuppressionImpliesFiniteKP :

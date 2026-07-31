@@ -140,26 +140,77 @@ record ConfiguredConnectedPolymerTraceFamily
 
 open ConfiguredConnectedPolymerTraceFamily public
 
+chooseCanonicalPolymerRootLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal →
+  Polymer → Block
 chooseCanonicalPolymerRootLiteral family polymer =
   canonicalRoot (traceOf family polymer)
+
+chooseCanonicalSpanningTreeLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal →
+  Polymer → Tree
 chooseCanonicalSpanningTreeLiteral family polymer =
   canonicalTree (traceOf family polymer)
+
+depthFirstTraversalOfSpanningTreeLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal →
+  Polymer → Traversal
 depthFirstTraversalOfSpanningTreeLiteral family polymer =
   canonicalTraversal (traceOf family polymer)
+
+canonicalSignedDirectionWordLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal →
+  Polymer → List SignedAxis4
 canonicalSignedDirectionWordLiteral family polymer =
   canonicalWord (traceOf family polymer)
 
+canonicalSpanningTreeCoversPolymerLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  (family : ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
 canonicalSpanningTreeCoversPolymerLiteral family polymer =
   treeCoversExactlyBlocks (traceOf family polymer)
+
+canonicalSpanningTreeEdgesAdjacentLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  (family : ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
 canonicalSpanningTreeEdgesAdjacentLiteral family polymer =
   treeEdgesAreNearestNeighbours (traceOf family polymer)
+
+depthFirstTraversalVisitsEveryBlockLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  (family : ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
 depthFirstTraversalVisitsEveryBlockLiteral family polymer =
   traversalVisitsEveryBlock (traceOf family polymer)
+
+depthFirstTraversalLengthBoundLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  (family : ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
 depthFirstTraversalLengthBoundLiteral family polymer =
   traversalLengthAtMostTwiceTreeEdges (traceOf family polymer)
+
+signedWordReconstructsTraversalLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  (family : ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal) →
+  (polymer : Polymer) → Set
 signedWordReconstructsTraversalLiteral family polymer =
   signedWordReconstructsTraversal (traceOf family polymer)
-canonicalPhysicalTraceInjectiveLiteral = traceInjective
+
+canonicalPhysicalTraceInjectiveLiteral :
+  ∀ {Polymer Block Tree Traversal} →
+  (family : ConfiguredConnectedPolymerTraceFamily Polymer Block Tree Traversal) →
+  ∀ {left right} →
+  canonicalSignedDirectionWordLiteral family left
+  ≡ canonicalSignedDirectionWordLiteral family right →
+  left ≡ right
+canonicalPhysicalTraceInjectiveLiteral family = traceInjective family
 
 configuredPatchDirectionMaskLevel : ProofLevel
 configuredPatchDirectionMaskLevel = machineChecked

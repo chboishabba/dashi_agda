@@ -127,60 +127,60 @@ asRelativeSixFactorComparison :
   CompensatedSixFactorComparison Scale Traversal →
   Relative.RelativeSixFactorComparison Scale Traversal
 asRelativeSixFactorComparison dataSet = record
-  { Relative.RelativeSixFactorComparison.physical = physical dataSet
-  ; Relative.RelativeSixFactorComparison.referenceAction =
+  { physical = physical dataSet
+  ; referenceAction =
       λ scale traversal →
         actionGain dataSet scale traversal * referenceAction dataSet scale traversal
-  ; Relative.RelativeSixFactorComparison.referenceJacobian =
+  ; referenceJacobian =
       λ scale traversal →
         haarLoss dataSet scale traversal * referenceJacobian dataSet scale traversal
-  ; Relative.RelativeSixFactorComparison.referenceDeterminant =
+  ; referenceDeterminant =
       λ scale traversal →
         determinantLoss dataSet scale traversal
           * referenceDeterminant dataSet scale traversal
-  ; Relative.RelativeSixFactorComparison.referenceBCH =
+  ; referenceBCH =
       λ scale traversal →
         bchLoss dataSet scale traversal * referenceBCH dataSet scale traversal
-  ; Relative.RelativeSixFactorComparison.referenceLocalization =
+  ; referenceLocalization =
       λ scale traversal →
         localizationLoss dataSet scale traversal
           * referenceLocalization dataSet scale traversal
-  ; Relative.RelativeSixFactorComparison.referencePatch =
+  ; referencePatch =
       λ scale traversal →
         patchLoss dataSet scale traversal * referencePatch dataSet scale traversal
-  ; Relative.RelativeSixFactorComparison.referenceActionNonnegative =
+  ; referenceActionNonnegative =
       λ scale traversal → Factors.multiplyNonnegative (physical dataSet)
         (actionGainNonnegative dataSet scale traversal)
         (referenceActionNonnegative dataSet scale traversal)
-  ; Relative.RelativeSixFactorComparison.referenceJacobianNonnegative =
+  ; referenceJacobianNonnegative =
       λ scale traversal → Factors.multiplyNonnegative (physical dataSet)
         (haarLossNonnegative dataSet scale traversal)
         (referenceJacobianNonnegative dataSet scale traversal)
-  ; Relative.RelativeSixFactorComparison.referenceDeterminantNonnegative =
+  ; referenceDeterminantNonnegative =
       λ scale traversal → Factors.multiplyNonnegative (physical dataSet)
         (determinantLossNonnegative dataSet scale traversal)
         (referenceDeterminantNonnegative dataSet scale traversal)
-  ; Relative.RelativeSixFactorComparison.referenceBCHNonnegative =
+  ; referenceBCHNonnegative =
       λ scale traversal → Factors.multiplyNonnegative (physical dataSet)
         (bchLossNonnegative dataSet scale traversal)
         (referenceBCHNonnegative dataSet scale traversal)
-  ; Relative.RelativeSixFactorComparison.referenceLocalizationNonnegative =
+  ; referenceLocalizationNonnegative =
       λ scale traversal → Factors.multiplyNonnegative (physical dataSet)
         (localizationLossNonnegative dataSet scale traversal)
         (referenceLocalizationNonnegative dataSet scale traversal)
-  ; Relative.RelativeSixFactorComparison.referencePatchNonnegative =
+  ; referencePatchNonnegative =
       λ scale traversal → Factors.multiplyNonnegative (physical dataSet)
         (patchLossNonnegative dataSet scale traversal)
         (referencePatchNonnegative dataSet scale traversal)
-  ; Relative.RelativeSixFactorComparison.actionRelative = actionCompensated dataSet
-  ; Relative.RelativeSixFactorComparison.jacobianRelative =
+  ; actionRelative = actionCompensated dataSet
+  ; jacobianRelative =
       jacobianCompensated dataSet
-  ; Relative.RelativeSixFactorComparison.determinantRelative =
+  ; determinantRelative =
       determinantCompensated dataSet
-  ; Relative.RelativeSixFactorComparison.bchRelative = bchCompensated dataSet
-  ; Relative.RelativeSixFactorComparison.localizationRelative =
+  ; bchRelative = bchCompensated dataSet
+  ; localizationRelative =
       localizationCompensated dataSet
-  ; Relative.RelativeSixFactorComparison.patchRelative = patchCompensated dataSet
+  ; patchRelative = patchCompensated dataSet
   }
 
 compensatedProductRegroupExact :
@@ -192,7 +192,7 @@ compensatedProductRegroupExact :
   ≡ combinedMultiplier dataSet scale traversal
     * referenceProduct dataSet scale traversal
 compensatedProductRegroupExact dataSet scale traversal =
-  ℚRing.solve-∀
+  regroup
     (actionGain dataSet scale traversal)
     (referenceAction dataSet scale traversal)
     (haarLoss dataSet scale traversal)
@@ -205,6 +205,11 @@ compensatedProductRegroupExact dataSet scale traversal =
     (referenceLocalization dataSet scale traversal)
     (patchLoss dataSet scale traversal)
     (referencePatch dataSet scale traversal)
+  where
+  regroup : ∀ a1 r1 a2 r2 a3 r3 a4 r4 a5 r5 a6 r6 →
+    (a1 * r1) * ((a2 * r2) * ((a3 * r3) * ((a4 * r4) * ((a5 * r5) * (a6 * r6)))))
+    ≡ (a1 * (a2 * (a3 * (a4 * (a5 * a6))))) * (r1 * (r2 * (r3 * (r4 * (r5 * r6)))))
+  regroup = ℚRing.solve-∀
 
 referenceProductNonnegative :
   ∀ {Scale Traversal}
@@ -349,12 +354,10 @@ asPhysicalEquation189Data :
   CompensatedTPointwiseMeaning tData comparison →
   Equation189.PhysicalEquation189Data tData
 asPhysicalEquation189Data meaning = record
-  { Equation189.PhysicalEquation189Data.order = order meaning
-  ; Equation189.PhysicalEquation189Data.transitive = orderTransitive meaning
-  ; Equation189.PhysicalEquation189Data.referenceNormalization =
-      referenceNormalization meaning
-  ; Equation189.PhysicalEquation189Data.pointwisePhysicalSuppression =
-      selectedCompensatedPointwise meaning
+  { order = order meaning
+  ; transitive = orderTransitive meaning
+  ; referenceNormalization = referenceNormalization meaning
+  ; pointwisePhysicalSuppression = selectedCompensatedPointwise meaning
   }
 
 compensatedSixFactorProductLevel : ProofLevel

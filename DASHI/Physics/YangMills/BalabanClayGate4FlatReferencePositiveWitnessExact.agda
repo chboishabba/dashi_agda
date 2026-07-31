@@ -147,13 +147,11 @@ positiveSelectedReferenceFibreFromFlat :
     slow (T.fastFibre tData scale component)
 positiveSelectedReferenceFibreFromFlat {factors = factors}
   {scale = scale} {component = component} {slow = slow} flat = record
-  { PositiveMass.PositiveSelectedReferenceFibre.selectedWeightNonnegative =
+  { selectedWeightNonnegative =
       selectedWeightNonnegative factors scale component slow
-  ; PositiveMass.PositiveSelectedReferenceFibre.witness = flatFine flat
-  ; PositiveMass.PositiveSelectedReferenceFibre.witnessInFibre =
-      flatInFastFibre flat
-  ; PositiveMass.PositiveSelectedReferenceFibre.witnessWeightPositive =
-      flatReferenceWeightPositive flat
+  ; witness = flatFine flat
+  ; witnessInFibre = flatInFastFibre flat
+  ; witnessWeightPositive = flatReferenceWeightPositive flat
   }
 
 flatFactorProductPositivityLevel : ProofLevel
