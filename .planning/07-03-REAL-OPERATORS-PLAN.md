@@ -34,6 +34,15 @@ Output: A stub inventory + a concrete decision on what is considered “real ope
 @DASHI/Geometry/FiberContraction.agda
 </context>
 
+<!--
+Backend cross-reference: the current Dashi real-arithmetic policy is recorded
+in DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda.  Keep rationalizable
+estimates in normalized ℚ before embedding into the Bishop ordered-real
+authority; treat Cubical/HoTT reals as a comparative lane rather than a
+replacement dependency.  This planning file concerns operator semantics and
+should not silently expand the Agda 2.9 migration scope.
+-->
+
 <tasks>
 
 <task type="auto">
