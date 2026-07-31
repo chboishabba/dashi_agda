@@ -13,6 +13,8 @@ REQUIRED_FILES = [
     "DASHI/Foundations/UBP/ExternalRepositoryProvenance.agda",
     "DASHI/Foundations/UBP/YIntervalCertificate.agda",
     "DASHI/Foundations/UBP/LeechValidMoveSet.agda",
+    "DASHI/Foundations/UBP/MOGGolayCharacterisationBoundary.agda",
+    "DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda",
     "DASHI/Foundations/TernaryGolay/SourceAtlas.agda",
     "DASHI/Foundations/TernaryGolay/ChannelC3OrbitDecomposition.agda",
     "DASHI/Foundations/TernaryGolay/NonaryTernaryReduction.agda",
@@ -30,6 +32,19 @@ REQUIRED_TEXT = {
         "https://github.com/DigitalEuan/UBP_Repo",
         "core_studio_v4.0/core/tgic_v3.py",
         "dashiClaimsOriginalUBPAuthorshipIsFalse",
+    ],
+    "DASHI/Foundations/UBP/MOGGolayCharacterisationBoundary.agda": [
+        "HexacodeShadow",
+        "ColumnParityEven",
+        "GlobalParityEven",
+        "shadowParitySuffices",
+        "shadowAloneDefinesGolayIsFalse",
+    ],
+    "DASHI/Foundations/UBP/NRCIModelParameterBoundary.agda": [
+        "PositiveModelParameter",
+        "NRCIHalfThresholdCertificate",
+        "sourceTauIsTen",
+        "independentlyEmergentThresholdEstablishedIsFalse",
     ],
     "DASHI/Foundations/TernaryGolay/SourceAtlas.agda": [
         "10.1109/18.485733",
