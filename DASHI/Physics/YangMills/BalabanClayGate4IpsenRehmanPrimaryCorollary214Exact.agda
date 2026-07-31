@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanPrimaryCorollary214Exa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact as Existing
@@ -21,7 +21,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4IpsenRehmanDeterminantLossExact a
 --   <= (1 + ||A^-1||_2 ||E||_2)^n - 1.
 --
 -- The multiplicative determinant bound and its exponential weakening are
--- derived consequences.  Corollary 2.14 itself does not require
+-- derived consequences. Corollary 2.14 itself does not require
 -- ||A^-1|| ||E|| < 1 for a fixed finite n; such a smallness condition is needed
 -- separately when the RG requires a uniformly controlled multiplier.
 ------------------------------------------------------------------------
@@ -39,7 +39,8 @@ record IpsenRehmanCorollary214Data
     inverseReferenceNorm perturbationNorm relativeSize : Scalar
 
     zero one : Scalar
-    add subtract multiply power exponential absolute : Scalar → Scalar → Scalar
+    add subtract multiply power exponential : Scalar → Scalar → Scalar
+    absolute : Scalar → Scalar
     naturalScalar : Nat → Scalar
 
     LessEqual : Scalar → Scalar → Set
@@ -60,15 +61,12 @@ record IpsenRehmanCorollary214Data
 
     perturbedMatrixMeaning : Truth
 
-    -- Literal relative-difference statement of Corollary 2.14 after clearing
-    -- the nonnegative reference determinant denominator.
     primaryRelativeDifferenceBound :
       LessEqual
         (absolute
           (subtract
             (determinant perturbedMatrix)
-            (determinant referenceMatrix))
-          one)
+            (determinant referenceMatrix)))
         (multiply
           (determinant referenceMatrix)
           (subtract
@@ -84,8 +82,7 @@ record IpsenRehmanCorollary214Data
           (absolute
             (subtract
               (determinant perturbedMatrix)
-              (determinant referenceMatrix))
-            one))
+              (determinant referenceMatrix))))
 
     addRelativeDifferenceRegroups :
       add
@@ -135,8 +132,7 @@ primaryRelativeDifferenceImpliesMultiplicativeBound dataSet =
           (absolute dataSet
             (subtract dataSet
               (determinant dataSet (perturbedMatrix dataSet))
-              (determinant dataSet (referenceMatrix dataSet)))
-            (one dataSet)))
+              (determinant dataSet (referenceMatrix dataSet)))))
         upper)
       (addRelativeDifferenceRegroups dataSet)
       (addMonotoneRight dataSet
