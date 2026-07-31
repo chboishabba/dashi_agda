@@ -35,7 +35,9 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicTreeGaugeCanonicalFreeBasisExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PeriodicTreeGaugeSU2FreeBasisExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteCoordinateMatrixEquivalenceExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteCoordinateMatrixCompositionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteDeterminantFactorizationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteSimilaritySpectrumDeterminantExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteSpectrumDeterminantCompletionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteProofEngineeringCompletionLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteProofEngineeringValidation.agda
