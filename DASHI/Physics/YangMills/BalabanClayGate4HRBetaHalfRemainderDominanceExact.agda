@@ -21,18 +21,9 @@ import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact
 -- Communications in Mathematical Physics 109 (2) (1987), 249--301.
 -- DOI: 10.1007/BF01215223.
 --
--- If the inverse-coupling remainder obeys
---
---   |r_k| <= (1/2) Delta_k,
---
--- then ordered additive-group algebra gives
---
---   (1/2) Delta_k <= Delta_k + r_k.
---
--- The result constructs the existing HRBetaRemainderDominance carrier and then
--- reuses the all-scale induction.  The physical work is exactly the uniform
--- remainder estimate and one-step preservation of the selected admissible
--- interval.
+-- If |r_k| <= (1/2) Delta_k, ordered additive-group algebra gives
+-- (1/2) Delta_k <= Delta_k + r_k.  The result constructs the existing
+-- HRBetaRemainderDominance carrier and reuses the all-scale induction.
 ------------------------------------------------------------------------
 
 record OrderedAdditiveGroupMeaning
@@ -80,11 +71,11 @@ record OrderedAdditiveGroupMeaning
 
 open OrderedAdditiveGroupMeaning public
 
-leadingIncrement :
+leadingIncrementAt :
   ∀ {Scale Scalar}
     {convention : Dyadic.DyadicRunningCouplingConvention Scale Scalar} →
-  Scale → Scalar
-leadingIncrement {convention = convention} scale =
+  Dyadic.HRBetaRemainderControl convention → Scale → Scalar
+leadingIncrementAt {convention = convention} control scale =
   P3.betaLogBlocking (Running.recursion (Dyadic.running convention)) scale
 
 halfIncrementBelowNetIncrement :
@@ -94,13 +85,13 @@ halfIncrementBelowNetIncrement :
     (algebra : OrderedAdditiveGroupMeaning control)
     scale →
   Dyadic.LessEqual control
-    (Dyadic.halfOf control (leadingIncrement scale))
+    (Dyadic.halfOf control (leadingIncrementAt control scale))
     (Dyadic.add control
-      (leadingIncrement scale)
+      (leadingIncrementAt control scale)
       (Dyadic.inverseCouplingRemainder control scale))
 halfIncrementBelowNetIncrement {control = control} algebra scale =
   let
-    increment = leadingIncrement scale
+    increment = leadingIncrementAt control scale
     halfIncrement = Dyadic.halfOf control increment
     remainder = Dyadic.inverseCouplingRemainder control scale
     negativeHalfBelowNegativeAbsolute =
@@ -161,15 +152,16 @@ asHRBetaRemainderDominance {control = control} algebra successor = record
       Dyadic.beta control
   ; Induction.HRBetaRemainderDominance.nextScale = next successor
   ; Induction.HRBetaRemainderDominance.leadingIncrement = λ scale →
-      leadingIncrement (next successor scale)
+      leadingIncrementAt control (next successor scale)
   ; Induction.HRBetaRemainderDominance.remainder = λ scale →
       Dyadic.inverseCouplingRemainder control (next successor scale)
   ; Induction.HRBetaRemainderDominance.netIncrement = λ scale →
       Dyadic.add control
-        (leadingIncrement (next successor scale))
+        (leadingIncrementAt control (next successor scale))
         (Dyadic.inverseCouplingRemainder control (next successor scale))
   ; Induction.HRBetaRemainderDominance.betaLower = λ scale →
-      Dyadic.halfOf control (leadingIncrement (next successor scale))
+      Dyadic.halfOf control
+        (leadingIncrementAt control (next successor scale))
   ; Induction.HRBetaRemainderDominance.add = Dyadic.add control
   ; Induction.HRBetaRemainderDominance.LessEqual = Dyadic.LessEqual control
   ; Induction.HRBetaRemainderDominance.netIncrementMeaning = λ scale → refl
@@ -180,7 +172,7 @@ asHRBetaRemainderDominance {control = control} algebra successor = record
           ≡ Dyadic.add control
               (Dyadic.beta control previousScale)
               (Dyadic.add control
-                (leadingIncrement (next successor scale))
+                (leadingIncrementAt control (next successor scale))
                 (Dyadic.inverseCouplingRemainder control
                   (next successor scale))))
         (previousNext successor scale)
