@@ -29,8 +29,10 @@ record PhysicalClosureRound2Receipt : Set where
 
     quantitativeContractionUniquenessChecked : Bool
     quantitativeBallConstructionChecked : Bool
+    quantitativeNewtonMapChecked : Bool
     relativeInverseKernelChecked : Bool
     federbushAndFaddeevPopovIFTReuseChecked : Bool
+    federbushAndFaddeevPopovNewtonReuseChecked : Bool
     finiteSquareInverseUpgradeChecked : Bool
 
     su2DefectPipelineChecked : Bool
@@ -38,6 +40,8 @@ record PhysicalClosureRound2Receipt : Set where
     resolvedTwoFamilyDefectsChecked : Bool
     t3ResolvedFiveChannelReuseChecked : Bool
 
+    hrBetaSpectralDeterminantChannelChecked : Bool
+    hrBetaSpectralDeterminantAdapterChecked : Bool
     hrBetaFiveLocalChannelsChecked : Bool
     hrBetaFiveChannelUniformAssemblyChecked : Bool
     integratedRound2CarrierChecked : Bool
@@ -70,8 +74,10 @@ record AuthoritativePhysicalClosureRound2Evidence
 
     quantitativeContractionUniquenessTypechecks : Set
     quantitativeBallConstructionTypechecks : Set
+    quantitativeNewtonMapTypechecks : Set
     relativeInverseKernelTypechecks : Set
     sharedIFTReuseTypechecks : Set
+    sharedNewtonReuseTypechecks : Set
     finiteSquareInverseUpgradeTypechecks : Set
 
     su2DefectPipelineTypechecks : Set
@@ -79,6 +85,8 @@ record AuthoritativePhysicalClosureRound2Evidence
     resolvedTwoFamilyDefectsTypechecks : Set
     t3ResolvedFiveChannelReuseTypechecks : Set
 
+    hrBetaSpectralDeterminantChannelTypechecks : Set
+    hrBetaSpectralDeterminantAdapterTypechecks : Set
     hrBetaFiveLocalChannelsTypechecks : Set
     hrBetaFiveChannelUniformAssemblyTypechecks : Set
     integratedRound2CarrierTypechecks : Set
