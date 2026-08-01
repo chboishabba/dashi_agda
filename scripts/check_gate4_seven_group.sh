@@ -74,6 +74,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4FederbushFaddeevPopovQuantitativeIFTReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FederbushFaddeevPopovInverseStabilityExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4HRBetaFiveLocalChannelsExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2IntegratedExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Ledger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Receipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Validation.agda
