@@ -8,6 +8,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Blocks
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact as Adjacency
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embedding
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredEndpointCertificateExact as Endpoint
@@ -30,8 +31,10 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredBlockEndpointCertif
 -- A centred coordinate with radius r has one origin, r positive offsets and r
 -- negative offsets.  This module maps it bijectively to CyclicIndex(1+r+r),
 -- hence maps the full centred block bijectively to the repository's periodic
--- four-torus of the same odd width.  Injectivity and both decode round trips are
--- proved structurally; no cardinality-only argument or affine bridge remains.
+-- four-torus of the same odd width.  Positive k maps to cyclic index k, while
+-- negative k maps to cyclic index 1+2r-k, exactly matching repeated successor
+-- and predecessor steps from the origin.  Injectivity and decode round trips
+-- are proved structurally; no cardinality-only argument remains.
 --
 -- Agreement between this direct bijection and the repository's concrete
 -- signed-step walk is a finite decidable certificate over the whole block.
@@ -88,6 +91,45 @@ splitInjectedRight {zero} index = refl
 splitInjectedRight {suc leftSize} index
   rewrite splitInjectedRight {leftSize} {rightSize} index = refl
 
+weakenFiniteIndex :
+  ∀ {size} → Carrier.CyclicIndex size → Carrier.CyclicIndex (suc size)
+weakenFiniteIndex {zero} ()
+weakenFiniteIndex {suc size} Carrier.zeroᵢ = Carrier.zeroᵢ
+weakenFiniteIndex {suc size} (Carrier.sucᵢ index) =
+  Carrier.sucᵢ (weakenFiniteIndex index)
+
+reverseFiniteIndex :
+  ∀ {size} → Carrier.CyclicIndex size → Carrier.CyclicIndex size
+reverseFiniteIndex {zero} ()
+reverseFiniteIndex {suc size} Carrier.zeroᵢ = Adjacency.lastCyclic
+reverseFiniteIndex {suc size} (Carrier.sucᵢ index) =
+  weakenFiniteIndex (reverseFiniteIndex index)
+
+reverseLastFiniteIndex : ∀ size →
+  reverseFiniteIndex (Adjacency.lastCyclic {size}) ≡ Carrier.zeroᵢ
+reverseLastFiniteIndex zero = refl
+reverseLastFiniteIndex (suc size)
+  rewrite reverseLastFiniteIndex size = refl
+
+reverseWeakenFiniteIndex :
+  ∀ {size} (index : Carrier.CyclicIndex size) →
+  reverseFiniteIndex (weakenFiniteIndex index)
+  ≡ Carrier.sucᵢ (reverseFiniteIndex index)
+reverseWeakenFiniteIndex {zero} ()
+reverseWeakenFiniteIndex {suc size} Carrier.zeroᵢ = refl
+reverseWeakenFiniteIndex {suc size} (Carrier.sucᵢ index)
+  rewrite reverseWeakenFiniteIndex index = refl
+
+reverseFiniteIndexInvolutive :
+  ∀ {size} (index : Carrier.CyclicIndex size) →
+  reverseFiniteIndex (reverseFiniteIndex index) ≡ index
+reverseFiniteIndexInvolutive {zero} ()
+reverseFiniteIndexInvolutive {suc size} Carrier.zeroᵢ =
+  reverseLastFiniteIndex size
+reverseFiniteIndexInvolutive {suc size} (Carrier.sucᵢ index)
+  rewrite reverseWeakenFiniteIndex (reverseFiniteIndex index)
+        | reverseFiniteIndexInvolutive index = refl
+
 centeredOffsetIndex :
   ∀ {radius} →
   Centered.CenteredOffset radius →
@@ -96,7 +138,7 @@ centeredOffsetIndex Centered.centre = Carrier.zeroᵢ
 centeredOffsetIndex (Centered.positive index) =
   Carrier.sucᵢ (injectLeftIndex index)
 centeredOffsetIndex (Centered.negative index) =
-  Carrier.sucᵢ (injectRightIndex index)
+  Carrier.sucᵢ (injectRightIndex (reverseFiniteIndex index))
 
 centeredOffsetFromIndex :
   ∀ {radius} →
@@ -106,7 +148,7 @@ centeredOffsetFromIndex Carrier.zeroᵢ = Centered.centre
 centeredOffsetFromIndex (Carrier.sucᵢ index)
   with splitIndex index
 ... | fromLeft left = Centered.positive left
-... | fromRight right = Centered.negative right
+... | fromRight right = Centered.negative (reverseFiniteIndex right)
 
 centeredOffsetDecodeEncode :
   ∀ {radius} (offset : Centered.CenteredOffset radius) →
@@ -115,7 +157,8 @@ centeredOffsetDecodeEncode Centered.centre = refl
 centeredOffsetDecodeEncode (Centered.positive index)
   rewrite splitInjectedLeft index = refl
 centeredOffsetDecodeEncode (Centered.negative index)
-  rewrite splitInjectedRight index = refl
+  rewrite splitInjectedRight (reverseFiniteIndex index)
+        | reverseFiniteIndexInvolutive index = refl
 
 centeredOffsetIndexInjective :
   ∀ {radius} {left right : Centered.CenteredOffset radius} →
@@ -271,6 +314,9 @@ canonicalCenteredNoWrapEmbedding certificate = record
   ; Embedding.CenteredPeriodicNoWrapEmbedding.originMeaning =
       directCenteredOriginExact
   }
+
+cmp109CenteredFiniteIndexReversalLevel : ProofLevel
+cmp109CenteredFiniteIndexReversalLevel = machineChecked
 
 cmp109CenteredOffsetPeriodicBijectionLevel : ProofLevel
 cmp109CenteredOffsetPeriodicBijectionLevel = machineChecked
