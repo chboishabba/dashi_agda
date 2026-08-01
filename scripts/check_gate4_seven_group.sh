@@ -68,13 +68,23 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4BFAverageCoherenceScopeExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109BlockConventionSeparationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109ShortestContourEnumerationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteDimensionalFrechetChainProductExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4OperatorNormPipelineExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109DyadicSchurFromNormPipelineExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4QuantitativeImplicitFunctionCommonExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4QuantitativeContractionBallConstructionExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FederbushFaddeevPopovQuantitativeIFTReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FederbushFaddeevPopovInverseStabilityExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4ResolventDefectPipelineExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4ResolventDefectOnUnitStateExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4SU2NonlinearityDefectPipelineExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4TwoFamilyResolvedResolventAdapterExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4TwoFamilyResolvedDefectsAdapterExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4T3ResolvedDefectsReuseExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4HRBetaFiveLocalChannelsExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2IntegratedExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2AnalyticReductionLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Ledger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Receipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Validation.agda
