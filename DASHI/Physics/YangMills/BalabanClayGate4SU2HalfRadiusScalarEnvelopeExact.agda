@@ -18,9 +18,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- The generic fixed-radius module previously accepted unnamed coefficient
 -- envelopes.  This module names the exact scalar functions and the standard
--- Taylor targets on 0 <= theta <= 1/2.  A real-analysis instantiation must prove
--- these displayed inequalities; every downstream chart and Newton constant
--- then refers to this one ledger.
+-- Taylor targets on 0 <= theta <= 1/2.  Quotient formulas are used only away
+-- from zero; the analytic continuations at zero are recorded separately.
 ------------------------------------------------------------------------
 
 record OrderedTrigScalar (Scalar : Set) : Set₁ where
@@ -30,6 +29,7 @@ record OrderedTrigScalar (Scalar : Set) : Set₁ where
     absolute negate : Scalar → Scalar
     sine cosine : Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
+    Nonzero : Scalar → Set
 
     reflexive : ∀ value → LessEqual value value
     transitive : ∀ {left middle right} →
@@ -65,16 +65,22 @@ record SU2HalfRadiusScalarEnvelope (Scalar : Set) : Set₁ where
     cosc : Scalar → Scalar
     inverseDexpQuadratic : Scalar → Scalar
 
-    sincMeaningAwayFromZero : ∀ theta →
+    sincAtZero : sinc (zero scalar) ≡ one scalar
+    coscAtZero : cosc (zero scalar) ≡ oneHalf
+    inverseDexpQuadraticAtZero :
+      inverseDexpQuadratic (zero scalar) ≡ oneTwelfth
+
+    sincMeaningAwayFromZero : ∀ theta → Nonzero scalar theta →
       sinc theta ≡ divide scalar (sine scalar theta) theta
 
-    coscMeaningAwayFromZero : ∀ theta →
+    coscMeaningAwayFromZero : ∀ theta → Nonzero scalar theta →
       cosc theta
       ≡ divide scalar
           (subtract scalar (one scalar) (cosine scalar theta))
           (multiply scalar theta theta)
 
-    inverseDexpQuadraticMeaningAwayFromZero : ∀ theta →
+    inverseDexpQuadraticMeaningAwayFromZero :
+      ∀ theta → Nonzero scalar theta →
       inverseDexpQuadratic theta
       ≡ subtract scalar
           (divide scalar (one scalar)
@@ -156,6 +162,9 @@ sharedHalfRadiusFromNumericalLedger ledger = adRadiusMeaning ledger
 
 su2HalfRadiusScalarTargetLevel : ProofLevel
 su2HalfRadiusScalarTargetLevel = machineChecked
+
+su2HalfRadiusZeroContinuationLevel : ProofLevel
+su2HalfRadiusZeroContinuationLevel = machineChecked
 
 su2HalfRadiusSingleLedgerLevel : ProofLevel
 su2HalfRadiusSingleLedgerLevel = machineChecked
