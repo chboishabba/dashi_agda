@@ -9,6 +9,7 @@ bash "$SCRIPT_DIR/check_gate4_seven_group.sh"
 FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109CenteredOddBlockCarrierExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109CenteredEndpointCertificateExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DimockTrilogyResearchAuditExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DimockNormalizedPolymerReblockingExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DimockLargeFieldSuppressionExact.agda
