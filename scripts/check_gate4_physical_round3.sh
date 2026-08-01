@@ -12,6 +12,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109CenteredEndpointCertificateExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109CenteredBlockEndpointCertificateExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109CenteredTorusBijectionExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109CenteredExecutableGeometryExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DimockTrilogyResearchAuditExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DimockNormalizedPolymerReblockingExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DimockLargeFieldSuppressionExact.agda
