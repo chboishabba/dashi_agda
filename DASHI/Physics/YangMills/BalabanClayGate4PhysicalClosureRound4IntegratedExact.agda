@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4ConservativeDyadicNewtonBudgetExa
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeContractionBallConstructionExact as Ball
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact as Quantitative
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalHessianFromFactorizationsExact as Hessian
+import DASHI.Physics.YangMills.BalabanClayGate4FiveChannelSumSelfAdjointExact as FiveSum
 import DASHI.Physics.YangMills.BalabanClayGate4FiveChannelSelfAdjointOperatorBoundExact as FiveBound
 import DASHI.Physics.YangMills.BalabanClayGate4FiveChannelSixteenthBudgetExact as Sixteenth
 import DASHI.Physics.YangMills.BalabanClayGate4SelfAdjointFormOperatorNormExact as FormNorm
@@ -232,7 +233,7 @@ physicalHessianSelfAdjointFromRound4 :
       ActivityType ReblockingScalar Scale Block Configuration LargeFieldScalar
       ClusterIndex Boundary Parameter Derivative ClusterScalar
       Polymer RootedScalar Cell HRScalar) →
-  FiveBound.SelfAdjoint
+  FiveSum.SelfAdjoint
     (Hessian.formAlgebra (factorizedHessian inputs))
     (Hessian.fullHessian (factorizedHessian inputs))
 physicalHessianSelfAdjointFromRound4 inputs =
