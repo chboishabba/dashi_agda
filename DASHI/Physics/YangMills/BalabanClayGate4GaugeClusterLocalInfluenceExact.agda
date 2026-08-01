@@ -26,6 +26,15 @@ import DASHI.Physics.YangMills.BalabanClayGate4DimockClusterWithHolesLocalInflue
 -- estimate.
 ------------------------------------------------------------------------
 
+data Empty : Set where
+
+Not : Set → Set
+Not proposition = proposition → Empty
+
+infix 4 _≢_
+_≢_ : ∀ {A : Set} → A → A → Set
+left ≢ right = Not (left ≡ right)
+
 record GaugeWeakeningLocalInfluence
     (Cluster Boundary Parameter Derivative : Set) : Set₁ where
   field
@@ -38,7 +47,7 @@ record GaugeWeakeningLocalInfluence
 
     separatedMeansNoTouch : ∀ cluster boundary →
       separated cluster boundary →
-      Set
+      Not (supportTouches cluster boundary)
 
     derivativeVanishesWhenSeparated : ∀ cluster boundary →
       separated cluster boundary →
@@ -46,7 +55,9 @@ record GaugeWeakeningLocalInfluence
       ≡ zeroDerivative
 
     nonzeroDerivativeForcesTouch : ∀ cluster boundary →
-      Set
+      activityDerivative cluster (weakeningParameter boundary)
+      ≢ zeroDerivative →
+      supportTouches cluster boundary
 
 open GaugeWeakeningLocalInfluence public
 
