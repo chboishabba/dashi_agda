@@ -17,7 +17,7 @@ import DASHI.Physics.YangMills.BalabanGeometricPowerVanishing as Geometric
 -- Tadeusz Bałaban,
 -- "Regularity and Decay of Lattice Green's Functions",
 -- Communications in Mathematical Physics 89 (1983), 571--597.
--- DOI: 10.1007/BF01214738.
+-- DOI: 10.1007/BF01214744.
 --
 -- Tadeusz Bałaban,
 -- "Propagators and Renormalization Transformations for Lattice Gauge
