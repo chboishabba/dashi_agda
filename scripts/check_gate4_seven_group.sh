@@ -66,6 +66,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerPhysicalClosureRound1Advance.agda
 
   DASHI/Physics/YangMills/BalabanClayGate4BFAverageCoherenceScopeExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109BlockConventionSeparationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109ShortestContourEnumerationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiniteDimensionalFrechetChainProductExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4OperatorNormPipelineExact.agda
