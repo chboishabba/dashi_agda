@@ -20,8 +20,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- and the induced adjoint operator satisfies ||ad_X|| <= ||X||.  Equality may
 -- be proved later for the Euclidean operator norm, but only the upper bound is
--- required by the shared chart and Newton estimates.  The sign is irrelevant
--- to the norm and remains part of the literal bracket identification.
+-- required by the shared chart and Newton estimates.  Scalar identities use a
+-- setoid equality so Bishop regular-sequence norms are admitted directly.
 ------------------------------------------------------------------------
 
 record NormedCrossProduct (Vector Scalar : Set) : Set₁ where
@@ -29,11 +29,27 @@ record NormedCrossProduct (Vector Scalar : Set) : Set₁ where
     cross : Vector → Vector → Vector
     norm : Vector → Scalar
     multiply : Scalar → Scalar → Scalar
-    LessEqual : Scalar → Scalar → Set
+
+    Equivalent LessEqual : Scalar → Scalar → Set
+
+    equivalentRefl : ∀ value → Equivalent value value
+    equivalentSym : ∀ {left right} →
+      Equivalent left right → Equivalent right left
+    equivalentTrans : ∀ {left middle right} →
+      Equivalent left middle → Equivalent middle right →
+      Equivalent left right
+
+    multiplyCong : ∀ {left left′ right right′} →
+      Equivalent left left′ → Equivalent right right′ →
+      Equivalent (multiply left right) (multiply left′ right′)
 
     reflexive : ∀ value → LessEqual value value
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
+
+    lessEqualResp : ∀ {left left′ right right′} →
+      Equivalent left left′ → Equivalent right right′ →
+      LessEqual left right → LessEqual left′ right′
 
     crossProductBound : ∀ left right →
       LessEqual
@@ -61,7 +77,8 @@ record PauliSU2NormConvention
       ≡ cross vectorGeometry (decode left) (decode right)
 
     normAsEuclidean : ∀ lie →
-      lieNorm lie ≡ norm vectorGeometry (decode lie)
+      Equivalent vectorGeometry
+        (lieNorm lie) (norm vectorGeometry (decode lie))
 
 open PauliSU2NormConvention public
 
@@ -80,39 +97,24 @@ pauliBracketNormBound :
     (multiply (vectorGeometry convention)
       (lieNorm convention left) (lieNorm convention right))
 pauliBracketNormBound convention left right =
-  subst
-    (λ lower → LessEqual (vectorGeometry convention) lower
-      (multiply (vectorGeometry convention)
-        (lieNorm convention left) (lieNorm convention right)))
-    (sym (normAsEuclidean convention (bracket convention left right)))
+  lessEqualResp geometry
+    (equivalentSym geometry
+      (normAsEuclidean convention (bracket convention left right)))
+    (multiplyCong geometry
+      (equivalentSym geometry (normAsEuclidean convention left))
+      (equivalentSym geometry (normAsEuclidean convention right)))
     (subst
-      (λ decodedBracket →
-        LessEqual (vectorGeometry convention)
-          (norm (vectorGeometry convention) decodedBracket)
-          (multiply (vectorGeometry convention)
-            (lieNorm convention left) (lieNorm convention right)))
+      (λ selected →
+        LessEqual geometry
+          (norm geometry selected)
+          (multiply geometry
+            (norm geometry (decode convention left))
+            (norm geometry (decode convention right))))
       (sym (bracketAsSignedCross convention left right))
-      (subst
-        (λ leftNorm →
-          LessEqual (vectorGeometry convention)
-            (norm (vectorGeometry convention)
-              (cross (vectorGeometry convention)
-                (decode convention left) (decode convention right)))
-            (multiply (vectorGeometry convention)
-              leftNorm (lieNorm convention right)))
-        (sym (normAsEuclidean convention left))
-        (subst
-          (λ rightNorm →
-            LessEqual (vectorGeometry convention)
-              (norm (vectorGeometry convention)
-                (cross (vectorGeometry convention)
-                  (decode convention left) (decode convention right)))
-              (multiply (vectorGeometry convention)
-                (norm (vectorGeometry convention) (decode convention left))
-                rightNorm))
-          (sym (normAsEuclidean convention right))
-          (crossProductBound (vectorGeometry convention)
-            (decode convention left) (decode convention right)))))
+      (crossProductBound geometry
+        (decode convention left) (decode convention right)))
+  where
+  geometry = vectorGeometry convention
 
 record PauliAdjointOperatorNormMeaning
     (Lie Vector Scalar : Set) : Set₁ where
@@ -146,9 +148,10 @@ record ConservativeHalfChartRadius (Scalar : Set) : Set₁ where
   field
     one two half cutRadius : Scalar
     divide : Scalar → Scalar → Scalar
+    Equivalent : Scalar → Scalar → Set
     StrictlyBelow : Scalar → Scalar → Set
 
-    halfMeaning : half ≡ divide one two
+    halfMeaning : Equivalent half (divide one two)
     halfBelowCutRadius : StrictlyBelow half cutRadius
 
 open ConservativeHalfChartRadius public
@@ -158,6 +161,9 @@ pauliSU2BracketNormLevel = machineChecked
 
 pauliSU2AdjointNormTransportLevel : ProofLevel
 pauliSU2AdjointNormTransportLevel = machineChecked
+
+pauliSU2SetoidScalarLevel : ProofLevel
+pauliSU2SetoidScalarLevel = machineChecked
 
 su2ConservativeHalfRadiusSelectionLevel : ProofLevel
 su2ConservativeHalfRadiusSelectionLevel = computed
