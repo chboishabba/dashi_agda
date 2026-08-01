@@ -1,7 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4GaugeTaylorLocalizationExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -34,7 +33,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4DimockNormalizedPolymerReblocking
 
 record GaugeTaylorLocalization (Activity : Set) : Set₁ where
   field
-    zero add : Activity → Activity → Activity
+    zero : Activity
+    add : Activity → Activity → Activity
     localize remainder : Activity → Activity
 
     GaugeInvariant LatticeSymmetric ReflectionCompatible : Activity → Set
@@ -53,25 +53,28 @@ record GaugeTaylorLocalization (Activity : Set) : Set₁ where
       RelevantGaugeSector (localize activity)
 
     remainderHasNoRelevantPart : ∀ activity →
-      localize (remainder activity) ≡ zero (remainder activity)
+      localize (remainder activity) ≡ zero
 
 open GaugeTaylorLocalization public
 
 record VacuumCurvatureRelevantSector
     (Activity Coefficient : Set) : Set₁ where
   field
-    vacuumActivity curvatureSquaredActivity : Activity
-    scale addActivity : Coefficient → Activity → Activity
+    zeroActivity vacuumActivity curvatureSquaredActivity : Activity
+    addActivity : Activity → Activity → Activity
+    scaleActivity : Coefficient → Activity → Activity
 
     RelevantGaugeSector : Activity → Set
 
+    vacuumCoefficient curvatureCoefficient : Activity → Coefficient
+
     relevantSectorMeaning : ∀ activity →
       RelevantGaugeSector activity →
-      Set
-
-    vacuumAndCurvatureSpan : ∀ activity →
-      RelevantGaugeSector activity →
-      Set
+      activity
+      ≡ addActivity
+          (scaleActivity (vacuumCoefficient activity) vacuumActivity)
+          (scaleActivity
+            (curvatureCoefficient activity) curvatureSquaredActivity)
 
 open VacuumCurvatureRelevantSector public
 
@@ -114,6 +117,9 @@ gaugeNormalizedReblockingContraction inputs =
 
 gaugeTaylorProjectorAlgebraLevel : ProofLevel
 gaugeTaylorProjectorAlgebraLevel = machineChecked
+
+gaugeVacuumCurvatureRelevantSectorLevel : ProofLevel
+gaugeVacuumCurvatureRelevantSectorLevel = machineChecked
 
 gaugeNormalizedReblockingReuseLevel : ProofLevel
 gaugeNormalizedReblockingReuseLevel = machineChecked
