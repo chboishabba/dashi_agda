@@ -59,7 +59,7 @@ record FunctionSequenceRealization
     (R : SetoidOrderedCompleteReal) : Set₁ where
   field
     fromFunction : (Nat → Carrier R) → Sequence R
-    sequenceAtFromFunction : ∀ f n → sequenceAt R (fromFunction f) n ≈ R f n
+    sequenceAtFromFunction : ∀ f n → _≈_ R (sequenceAt R (fromFunction f) n) (f n)
 
 open FunctionSequenceRealization public
 
@@ -71,14 +71,14 @@ record SetoidRealMorphism
     (Source Target : SetoidOrderedCompleteReal) : Set₁ where
   field
     map : Carrier Source → Carrier Target
-    respectsEquality : ∀ {x y} → x ≈ Source y → map x ≈ Target map y
-    preservesZero : map (zero Source) ≈ Target zero Target
-    preservesOne : map (one Source) ≈ Target one Target
-    preservesAdd : ∀ x y → map (_+_ Source x y) ≈ Target _+_ Target (map x) (map y)
-    preservesSub : ∀ x y → map (_-_ Source x y) ≈ Target _-_ Target (map x) (map y)
-    preservesMul : ∀ x y → map (_*_ Source x y) ≈ Target _*_ Target (map x) (map y)
-    preservesNeg : ∀ x → map (neg Source x) ≈ Target neg Target (map x)
-    preservesAbs : ∀ x → map (abs Source x) ≈ Target abs Target (map x)
+    respectsEquality : ∀ {x y} → _≈_ Source x y → _≈_ Target (map x) (map y)
+    preservesZero : _≈_ Target (map (zero Source)) (zero Target)
+    preservesOne : _≈_ Target (map (one Source)) (one Target)
+    preservesAdd : ∀ x y → _≈_ Target (map (_+_ Source x y)) (_+_ Target (map x) (map y))
+    preservesSub : ∀ x y → _≈_ Target (map (_-_ Source x y)) (_-_ Target (map x) (map y))
+    preservesMul : ∀ x y → _≈_ Target (map (_*_ Source x y)) (_*_ Target (map x) (map y))
+    preservesNeg : ∀ x → _≈_ Target (map (neg Source x)) (neg Target (map x))
+    preservesAbs : ∀ x → _≈_ Target (map (abs Source x)) (abs Target (map x))
     preservesLe : ∀ {x y} → _≤_ Source x y → _≤_ Target (map x) (map y)
     preservesLt : ∀ {x y} → _<_ Source x y → _<_ Target (map x) (map y)
 
@@ -89,8 +89,8 @@ record SetoidRealEquivalence
   field
     toRight : SetoidRealMorphism Left Right
     toLeft : SetoidRealMorphism Right Left
-    leftRoundTrip : ∀ x → map toLeft (map toRight x) ≈ Left x
-    rightRoundTrip : ∀ y → map toRight (map toLeft y) ≈ Right y
+    leftRoundTrip : ∀ x → _≈_ Left (map toLeft (map toRight x)) x
+    rightRoundTrip : ∀ y → _≈_ Right (map toRight (map toLeft y)) y
     reflectsLe : ∀ {x y} → _≤_ Right (map toRight x) (map toRight y) → _≤_ Left x y
     reflectsLt : ∀ {x y} → _<_ Right (map toRight x) (map toRight y) → _<_ Left x y
 
@@ -105,7 +105,7 @@ record PropositionalQuotientRealization
   field
     Quotient : Set
     quotient : Carrier R → Quotient
-    quotientSound : ∀ {x y} → x ≈ R y → quotient x ≡ quotient y
+    quotientSound : ∀ {x y} → _≈_ R x y → quotient x ≡ quotient y
     quotientComplete : ∀ value → Σ (Carrier R) (λ x → quotient x ≡ value)
 
     zeroQ oneQ : Quotient
