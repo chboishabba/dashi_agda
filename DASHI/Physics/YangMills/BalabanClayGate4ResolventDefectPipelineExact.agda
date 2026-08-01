@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4ResolventDefectPipelineExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -142,7 +142,7 @@ resolventDifferenceNormBelowBudget dataSet =
             (multiply (algebra dataSet)
               (perturbationBound dataSet)
               (referenceInverseBound dataSet))))
-      (secondResolventIdentity dataSet)
+      (sym (secondResolventIdentity dataSet))
       (subst
         (λ lower →
           LessEqual (algebra dataSet) lower
@@ -151,12 +151,13 @@ resolventDifferenceNormBelowBudget dataSet =
               (multiply (algebra dataSet)
                 (perturbationBound dataSet)
                 (referenceInverseBound dataSet))))
-        (normNegate (algebra dataSet)
-          (compose (algebra dataSet)
-            (perturbedInverse dataSet)
+        (sym
+          (normNegate (algebra dataSet)
             (compose (algebra dataSet)
-              (perturbation dataSet)
-              (referenceInverse dataSet))))
+              (perturbedInverse dataSet)
+              (compose (algebra dataSet)
+                (perturbation dataSet)
+                (referenceInverse dataSet)))))
         (threeFactorNormBound (algebra dataSet)
           (perturbedInverse dataSet)
           (perturbation dataSet)
