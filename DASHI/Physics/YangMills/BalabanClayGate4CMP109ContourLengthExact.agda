@@ -104,7 +104,10 @@ insertionPreservesSegmentCountSum :
       (segmentCountSum source)
 insertionPreservesSegmentCountSum Contours.insertHere = refl
 insertionPreservesSegmentCountSum
-    (Contours.insertThere {other = other} insertion) =
+    {value = value}
+    (Contours.insertThere
+      {other = other} {values = values} {inserted = inserted}
+      insertion) =
   trans
     (cong
       (addNat (Contours.count (Contours.segmentCount other)))
@@ -113,18 +116,18 @@ insertionPreservesSegmentCountSum
       (symmetry
         (addNatAssociative
           (Contours.count (Contours.segmentCount other))
-          (Contours.count (Contours.segmentCount _))
-          (segmentCountSum _)))
+          (Contours.count (Contours.segmentCount value))
+          (segmentCountSum values)))
       (trans
         (cong
-          (λ middle → addNat middle (segmentCountSum _))
+          (λ middle → addNat middle (segmentCountSum values))
           (addNatCommutative
             (Contours.count (Contours.segmentCount other))
-            (Contours.count (Contours.segmentCount _))))
+            (Contours.count (Contours.segmentCount value))))
         (addNatAssociative
-          (Contours.count (Contours.segmentCount _))
+          (Contours.count (Contours.segmentCount value))
           (Contours.count (Contours.segmentCount other))
-          (segmentCountSum _))))
+          (segmentCountSum values))))
   where
   symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
   symmetry refl = refl
@@ -135,11 +138,14 @@ generatedPermutationPreservesSegmentCountSum :
   segmentCountSum order ≡ segmentCountSum source
 generatedPermutationPreservesSegmentCountSum Contours.permutationNil = refl
 generatedPermutationPreservesSegmentCountSum
-    (Contours.permutationInsert permutation insertion) =
+    (Contours.permutationInsert
+      {value = value} {source = source}
+      {permuted = permuted} {inserted = inserted}
+      permutation insertion) =
   trans
     (insertionPreservesSegmentCountSum insertion)
     (cong
-      (addNat (Contours.count (Contours.segmentCount _)))
+      (addNat (Contours.count (Contours.segmentCount value)))
       (generatedPermutationPreservesSegmentCountSum permutation))
 
 enumeratedContourWordLengthExact :
