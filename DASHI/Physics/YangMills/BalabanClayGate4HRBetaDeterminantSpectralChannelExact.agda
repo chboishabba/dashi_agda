@@ -116,7 +116,8 @@ record UniformScalarLogRemainder
     (Scalar : Set) : Set₁ where
   field
     absolute : Scalar → Scalar
-    logarithmOnePlus subtract multiply divide : Scalar → Scalar → Scalar
+    logarithmOnePlus : Scalar → Scalar
+    subtract multiply divide : Scalar → Scalar → Scalar
     one two theta : Scalar
     StrictlyBelow : Scalar → Scalar → Set
     LessEqual : Scalar → Scalar → Set
