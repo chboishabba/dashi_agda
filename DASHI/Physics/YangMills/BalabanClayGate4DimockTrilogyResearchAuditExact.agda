@@ -9,16 +9,22 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Source audit for Dimock's three-part exposition of Bałaban's method.
 --
 -- J. Dimock,
--- "The Renormalization Group According to Balaban - I. Small Fields",
--- arXiv:1108.1335v2 [math-ph]. No DOI recorded.
+-- "The Renormalization Group According to Balaban, I. Small Fields",
+-- Reviews in Mathematical Physics 25 (7) (2013), article 1330010.
+-- arXiv:1108.1335v2 [math-ph].
+-- DOI: 10.1142/S0129055X13300100.
 --
 -- J. Dimock,
--- "The Renormalization Group According to Balaban - II. Large Fields",
--- arXiv:1212.5562v2 [math-ph]. No DOI recorded.
+-- "The Renormalization Group According to Balaban. II. Large Fields",
+-- Journal of Mathematical Physics 54 (9) (2013), article 092301.
+-- arXiv:1212.5562v2 [math-ph].
+-- DOI: 10.1063/1.4821275.
 --
 -- J. Dimock,
--- "The Renormalization Group According to Balaban - III. Convergence",
--- arXiv:1304.0705v1 [math-ph]. No DOI recorded.
+-- "The Renormalization Group According to Balaban III. Convergence",
+-- Annales Henri Poincare 15 (11) (2014), 2133--2175.
+-- arXiv:1304.0705v1 [math-ph].
+-- DOI: 10.1007/s00023-013-0303-3.
 --
 -- These papers prove a scalar phi^4_3 stability theorem, not the four-
 -- dimensional Yang--Mills theorem.  Their importable value here is the exact
@@ -70,6 +76,9 @@ largeFieldSourceLevel = standardImported
 
 convergenceSourceLevel : ProofLevel
 convergenceSourceLevel = standardImported
+
+dimockPublishedMetadataAuditLevel : ProofLevel
+dimockPublishedMetadataAuditLevel = machineChecked
 
 dimockTrilogyScopeAuditLevel : ProofLevel
 dimockTrilogyScopeAuditLevel = machineChecked
