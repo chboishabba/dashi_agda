@@ -8,12 +8,14 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Additive exponent budget for Dimock II/III large-field suppression.
 --
 -- J. Dimock,
--- "The Renormalization Group According to Balaban - II. Large Fields",
--- arXiv:1212.5562v2 [math-ph]. No DOI recorded.
+-- "The Renormalization Group According to Balaban. II. Large Fields",
+-- Journal of Mathematical Physics 54 (9) (2013), article 092301.
+-- arXiv:1212.5562v2 [math-ph]. DOI: 10.1063/1.4821275.
 --
 -- J. Dimock,
--- "The Renormalization Group According to Balaban - III. Convergence",
--- arXiv:1304.0705v1 [math-ph]. No DOI recorded.
+-- "The Renormalization Group According to Balaban III. Convergence",
+-- Annales Henri Poincare 15 (11) (2014), 2133--2175.
+-- arXiv:1304.0705v1 [math-ph]. DOI: 10.1007/s00023-013-0303-3.
 --
 -- On every bad cube at least one small-field inequality fails and the action
 -- supplies a penalty of order p_k^2.  The sum over possible bad regions has an
