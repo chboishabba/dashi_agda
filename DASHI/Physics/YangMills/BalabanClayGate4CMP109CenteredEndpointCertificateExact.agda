@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredEndpointCertificate
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -158,10 +159,10 @@ certifiedEmbeddedPrintedEndpointExact :
 certifiedEmbeddedPrintedEndpointExact
     {embedding = embedding} {point = point}
     certificate order membership =
-  Carrier.trans
+  trans
     (certifiedCenteredContourEndpointExact
       (computed certificate) order membership)
-    (Carrier.sym (Embedding.embedMeaning embedding point))
+    (sym (Embedding.embedMeaning embedding point))
 
 cmp109CenteredEndpointDecisionLevel : ProofLevel
 cmp109CenteredEndpointDecisionLevel = computed
