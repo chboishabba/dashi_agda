@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2Ledger where
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4BFAverageCoherenceScopeExact as BF
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109BlockConventionSeparationExact as Convention
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact as Contours
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteDimensionalFrechetChainProductExact as Frechet
 import DASHI.Physics.YangMills.BalabanClayGate4OperatorNormPipelineExact as NormPipeline
@@ -23,8 +24,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4HRBetaFiveLocalChannelsExact as H
 -- local H-R_beta theorem to five named local channels.
 --
 -- It also corrects the scope of the Torriani--Hazewinkel BF-average source and
--- keeps the current dyadic corner carrier distinct from CMP109's centred block
--- convention until the physical bridge is proved.
+-- proves that the repository's side-2 dyadic corner carrier is not literally
+-- CMP109's centred odd-side convention.  The necessary translated convention
+-- bridge remains explicit and fail-closed.
 ------------------------------------------------------------------------
 
 bfAverageBibliographyLevel = BF.bfAverageBibliographyLevel
@@ -40,6 +42,9 @@ dyadicFourDimensionalTwoStepWeightLevel =
   BF.dyadicFourDimensionalTwoStepWeightLevel
 cmp109CenteredOddBlockNormalizationLevel =
   BF.cmp109CenteredOddBlockNormalizationLevel
+
+cmp109CenteredDyadicConventionSeparationLevel =
+  Convention.cmp109CenteredDyadicConventionSeparationLevel
 
 cmp109ShortestContourEnumerationLevel =
   Contours.cmp109ShortestContourEnumerationLevel
@@ -103,6 +108,8 @@ hrBetaFiveChannelPhysicalHalfAssemblyLevel =
 
 physicalDyadicCornerToCMP109CenteredBlockBridgeInputsLevel =
   BF.physicalDyadicCornerToCMP109CenteredBlockBridgeInputsLevel
+physicalCMP109DyadicConventionBridgeInputsLevel =
+  Convention.physicalCMP109DyadicConventionBridgeInputsLevel
 physicalNonAbelianFederbushAverageExistenceInputsLevel =
   BF.physicalNonAbelianFederbushAverageExistenceInputsLevel
 
