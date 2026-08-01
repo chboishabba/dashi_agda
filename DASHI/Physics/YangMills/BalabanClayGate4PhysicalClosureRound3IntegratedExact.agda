@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound3IntegratedExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
