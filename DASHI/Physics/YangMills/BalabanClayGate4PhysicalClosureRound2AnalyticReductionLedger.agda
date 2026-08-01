@@ -3,6 +3,8 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2AnalyticRedu
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeContractionBallConstructionExact as Ball
+import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeNewtonImplicitFunctionExact as Newton
+import DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovNewtonReuseExact as NewtonReuse
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Contours
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109DyadicSchurFromNormPipelineExact as Schur
 import DASHI.Physics.YangMills.BalabanClayGate4ResolventDefectPipelineExact as Resolvent
@@ -17,13 +19,23 @@ import DASHI.Physics.YangMills.BalabanClayGate4T3ResolvedDefectsReuseExact as T3
 --
 -- These modules do not assert the missing physical constants.  They prove that
 -- once component estimates are supplied, no additional global Schur,
--- resolvent, SU(2)-defect or five-channel theorem remains.
+-- resolvent, SU(2)-defect, Newton residual or five-channel theorem remains.
 ------------------------------------------------------------------------
 
 quantitativeBallInvarianceFromScalarBudgetLevel =
   Ball.quantitativeBallInvarianceFromScalarBudgetLevel
 quantitativeContractionBallConstructionLevel =
   Ball.quantitativeContractionBallConstructionLevel
+
+newtonResidualFixedPointEquivalenceLevel =
+  Newton.newtonResidualFixedPointEquivalenceLevel
+quantitativeNewtonIFTAssemblyLevel = Newton.quantitativeNewtonIFTAssemblyLevel
+sharedFederbushNewtonIFTAssemblyLevel =
+  NewtonReuse.sharedFederbushNewtonIFTAssemblyLevel
+sharedBackgroundSliceNewtonIFTAssemblyLevel =
+  NewtonReuse.sharedBackgroundSliceNewtonIFTAssemblyLevel
+sharedNewtonApplicationsReuseLevel =
+  NewtonReuse.sharedNewtonApplicationsReuseLevel
 
 cmp109SegmentToSignedWordLevel = Contours.cmp109SegmentToSignedWordLevel
 cmp109SegmentWordLengthLevel = Contours.cmp109SegmentWordLengthLevel
@@ -74,6 +86,15 @@ t3FiveChannelBoundsFromResolvedDefectsLevel =
 
 physicalCentreMembershipAndScalarBudgetInputsLevel =
   Ball.physicalCentreMembershipAndScalarBudgetInputsLevel
+physicalFederbushNewtonCorrectionInputsLevel =
+  Newton.physicalFederbushNewtonCorrectionInputsLevel
+physicalFaddeevPopovNewtonCorrectionInputsLevel =
+  Newton.physicalFaddeevPopovNewtonCorrectionInputsLevel
+physicalFederbushResidualAndCorrectionIdentificationInputsLevel =
+  NewtonReuse.physicalFederbushResidualAndCorrectionIdentificationInputsLevel
+physicalBackgroundGaugeResidualAndCorrectionIdentificationInputsLevel =
+  NewtonReuse.physicalBackgroundGaugeResidualAndCorrectionIdentificationInputsLevel
+
 physicalCMP109ComputedEndpointIdentificationInputsLevel =
   Contours.physicalCMP109ComputedEndpointIdentificationInputsLevel
 physicalCMP109KernelNormConventionInputsLevel =
