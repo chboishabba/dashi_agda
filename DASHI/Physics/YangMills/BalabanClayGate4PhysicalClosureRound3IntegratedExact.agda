@@ -10,7 +10,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstan
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embedding
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredBlockEndpointCertificateExact as BlockCertificate
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredExecutableGeometryExact as ExecutableGeometry
 import DASHI.Physics.YangMills.BalabanClayGate4SU2FixedRadiusEnvelopeExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4DimockNormalizedPolymerReblockingExact as Reblocking
 import DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact as LargeField
@@ -24,27 +24,23 @@ import DASHI.Physics.YangMills.BalabanClayGate4SU2QuadraticChartDefectExact as Q
 ------------------------------------------------------------------------
 -- One coherent consumer for the Dimock/centred-geometry closure tranche.
 --
--- The record owns the literal centred block, its injective periodic embedding,
--- one executable certificate covering every centred point and every printed
--- contour ordering, one SU(2) chart radius, normalized polymer reblocking,
--- large-field slack, cluster-with-holes correction, connected H-R_beta
--- activities and the physical channel naming map.  This prevents later
--- consumers from mixing incompatible radii, endpoint conventions, polymer
--- norms or channel allocations.
+-- The record owns one executable centred geometry for the chosen radius.  That
+-- single value contains the literal odd block, direct periodic bijection,
+-- no-wrap injection and complete all-points/all-contours endpoint certificate.
+-- The same record then owns one SU(2) chart radius, normalized polymer
+-- reblocking, large-field slack, cluster-with-holes correction, connected
+-- H-R_beta activities and the physical channel naming map.  Incompatible
+-- geometry, radii, polymer norms and channel allocations cannot be selected
+-- independently by downstream consumers.
 ------------------------------------------------------------------------
 
 record PhysicalClosureRound3Inputs
-    (n radius : Nat)
+    (radius : Nat)
     (SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator : Set) : Set₁ where
   field
-    centeredBlock : Centered.CMP109CenteredBlockConvention radius
-    centeredEmbedding : Embedding.CenteredPeriodicNoWrapEmbedding n radius
-
-    centeredEndpointCertificate :
-      BlockCertificate.EmbeddedCenteredBlockEndpointCertificate
-        n radius centeredEmbedding
+    centeredGeometry : ExecutableGeometry.CenteredExecutableGeometry radius
 
     su2Envelope : SU2.SU2FixedRadiusEnvelope SU2Operator SU2Scalar
 
@@ -68,13 +64,16 @@ record PhysicalClosureRound3Inputs
     channelIdentification :
       Channels.PhysicalChannelOperatorIdentification PhysicalOperator
 
+  centeredBlock : Centered.CMP109CenteredBlockConvention radius
+  centeredBlock = Centered.canonicalCMP109CenteredBlockConvention radius
+
 open PhysicalClosureRound3Inputs public
 
 centeredPrintedContourEndpointFromRound3 :
-  ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator}
-    (inputs : PhysicalClosureRound3Inputs n radius
+    (inputs : PhysicalClosureRound3Inputs radius
       SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator)
@@ -83,18 +82,38 @@ centeredPrintedContourEndpointFromRound3 :
     (Contours.cmp109ShortestContourOrders
       (Embedding.centeredDisplacement4 point)) →
   Bond.walk
-      (Embedding.embeddingCentre (centeredEmbedding inputs))
+      (Embedding.embeddingCentre
+        (ExecutableGeometry.embedding (centeredGeometry inputs)))
       (Periodic.contourWord order)
-  ≡ Embedding.embed (centeredEmbedding inputs) point
-centeredPrintedContourEndpointFromRound3 inputs point order membership =
-  BlockCertificate.blockCertifiedEmbeddedPrintedEndpointExact
-    (centeredEndpointCertificate inputs) point order membership
+  ≡ Embedding.embed
+      (ExecutableGeometry.embedding (centeredGeometry inputs)) point
+centeredPrintedContourEndpointFromRound3 inputs =
+  ExecutableGeometry.executableCenteredGeometryEndpointExact
+    (centeredGeometry inputs)
 
-su2AdDefectBoundFromRound3 :
-  ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
+centeredEmbeddingInjectiveFromRound3 :
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator}
-    (inputs : PhysicalClosureRound3Inputs n radius
+    (inputs : PhysicalClosureRound3Inputs radius
+      SU2Operator SU2Scalar ReblockingScalar
+      Scale LargeFieldScalar ClusterIndex ClusterScalar
+      Cell Polymer HRScalar PhysicalOperator)
+    {left right : Centered.CenteredBlockPoint4 radius} →
+  Embedding.embed
+    (ExecutableGeometry.embedding (centeredGeometry inputs)) left
+  ≡ Embedding.embed
+    (ExecutableGeometry.embedding (centeredGeometry inputs)) right →
+  left ≡ right
+centeredEmbeddingInjectiveFromRound3 inputs =
+  ExecutableGeometry.executableCenteredGeometryInjective
+    (centeredGeometry inputs)
+
+su2AdDefectBoundFromRound3 :
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
+      Scale LargeFieldScalar ClusterIndex ClusterScalar
+      Cell Polymer HRScalar PhysicalOperator}
+    (inputs : PhysicalClosureRound3Inputs radius
       SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator) →
@@ -109,10 +128,10 @@ su2AdDefectBoundFromRound3 inputs =
   SU2.adMinusIdentityBelowFixedRadiusEnvelope (su2Envelope inputs)
 
 su2DexpDefectBoundFromRound3 :
-  ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator}
-    (inputs : PhysicalClosureRound3Inputs n radius
+    (inputs : PhysicalClosureRound3Inputs radius
       SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator) →
@@ -127,10 +146,10 @@ su2DexpDefectBoundFromRound3 inputs =
   SU2.dexpMinusIdentityBelowFixedRadiusEnvelope (su2Envelope inputs)
 
 normalizedReblockingContractionFromRound3 :
-  ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator}
-    (inputs : PhysicalClosureRound3Inputs n radius
+    (inputs : PhysicalClosureRound3Inputs radius
       SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator) →
@@ -145,10 +164,10 @@ normalizedReblockingContractionFromRound3 inputs =
     (normalizedReblockingContraction inputs)
 
 largeFieldSlackFromRound3 :
-  ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator}
-    (inputs : PhysicalClosureRound3Inputs n radius
+    (inputs : PhysicalClosureRound3Inputs radius
       SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator) →
@@ -186,10 +205,10 @@ largeFieldSlackFromRound3 inputs =
     (largeFieldBudgets inputs) (selectedScale inputs)
 
 clusterCorrectionBoundFromRound3 :
-  ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator}
-    (inputs : PhysicalClosureRound3Inputs n radius
+    (inputs : PhysicalClosureRound3Inputs radius
       SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator) →
@@ -202,10 +221,10 @@ clusterCorrectionBoundFromRound3 inputs =
     (clusterCorrectionAbsorption inputs)
 
 hrBetaPhysicalHalfFromRound3 :
-  ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
+  ∀ {radius SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator}
-    (inputs : PhysicalClosureRound3Inputs n radius
+    (inputs : PhysicalClosureRound3Inputs radius
       SU2Operator SU2Scalar ReblockingScalar
       Scale LargeFieldScalar ClusterIndex ClusterScalar
       Cell Polymer HRScalar PhysicalOperator) →
@@ -233,6 +252,9 @@ physicalClosureRound3IntegratedCarrierLevel = machineChecked
 
 physicalClosureRound3CenteredEndpointLevel : ProofLevel
 physicalClosureRound3CenteredEndpointLevel = machineChecked
+
+physicalClosureRound3CenteredInjectionLevel : ProofLevel
+physicalClosureRound3CenteredInjectionLevel = machineChecked
 
 physicalClosureRound3SU2AndPolymerConsequencesLevel : ProofLevel
 physicalClosureRound3SU2AndPolymerConsequencesLevel = machineChecked
