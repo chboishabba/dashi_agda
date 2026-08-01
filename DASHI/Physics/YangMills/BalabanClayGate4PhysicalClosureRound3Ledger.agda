@@ -4,6 +4,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embedding
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredEndpointCertificateExact as EndpointCertificate
 import DASHI.Physics.YangMills.BalabanClayGate4DimockTrilogyResearchAuditExact as Audit
 import DASHI.Physics.YangMills.BalabanClayGate4DimockNormalizedPolymerReblockingExact as Reblocking
 import DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact as LargeField
@@ -41,6 +42,13 @@ cmp109CenteredAllPermutationEndpointReductionLevel =
   Embedding.cmp109CenteredAllPermutationEndpointReductionLevel
 cmp109CenteredNoWrapEmbeddingInterfaceLevel =
   Embedding.cmp109CenteredNoWrapEmbeddingInterfaceLevel
+
+cmp109CenteredEndpointDecisionLevel =
+  EndpointCertificate.cmp109CenteredEndpointDecisionLevel
+cmp109CenteredCompleteFamilyCertificateLevel =
+  EndpointCertificate.cmp109CenteredCompleteFamilyCertificateLevel
+cmp109CenteredCertificateMembershipTransportLevel =
+  EndpointCertificate.cmp109CenteredCertificateMembershipTransportLevel
 
 smallFieldSourceLevel = Audit.smallFieldSourceLevel
 largeFieldSourceLevel = Audit.largeFieldSourceLevel
@@ -100,6 +108,8 @@ physicalPeriodicCoordinateTranslationCommutationInputsLevel =
   Embedding.physicalPeriodicCoordinateTranslationCommutationInputsLevel
 physicalCMP109FineSpacingAndNoWrapInputsLevel =
   Embedding.physicalCMP109FineSpacingAndNoWrapInputsLevel
+physicalCMP109ConcreteEndpointCertificateInputsLevel =
+  EndpointCertificate.physicalCMP109ConcreteEndpointCertificateInputsLevel
 
 physicalSU2ScalarTrigonometricEnvelopeInputsLevel =
   SU2.physicalSU2ScalarTrigonometricEnvelopeInputsLevel
