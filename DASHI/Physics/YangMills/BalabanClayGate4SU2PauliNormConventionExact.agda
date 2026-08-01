@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4SU2PauliNormConventionExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -18,10 +18,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 --   ||[X,Y]|| <= ||X|| ||Y||
 --
--- and the induced adjoint operator satisfies ||ad_X|| <= ||X||.  The sign is
--- irrelevant to the norm but remains part of the literal bracket equality.
--- This module forces the same encode/decode and norm convention to be used by
--- the principal logarithm, chart defects, Hessian forms and Newton constants.
+-- and the induced adjoint operator satisfies ||ad_X|| <= ||X||.  Equality may
+-- be proved later for the Euclidean operator norm, but only the upper bound is
+-- required by the shared chart and Newton estimates.  The sign is irrelevant
+-- to the norm and remains part of the literal bracket identification.
 ------------------------------------------------------------------------
 
 record NormedCrossProduct (Vector Scalar : Set) : Set₁ where
@@ -114,39 +114,20 @@ pauliBracketNormBound convention left right =
           (crossProductBound (vectorGeometry convention)
             (decode convention left) (decode convention right)))))
 
-record InducedOperatorNorm
-    (Lie Scalar : Set) : Set₁ where
-  field
-    operatorNorm : (Lie → Lie) → Scalar
-    multiply : Scalar → Scalar → Scalar
-    LessEqual : Scalar → Scalar → Set
-
-    pointwiseBoundGivesOperatorBound : ∀ operator bound →
-      (∀ vector →
-        LessEqual
-          (operatorNorm (λ input → operator input))
-          bound) →
-      LessEqual (operatorNorm operator) bound
-
-open InducedOperatorNorm public
-
 record PauliAdjointOperatorNormMeaning
     (Lie Vector Scalar : Set) : Set₁ where
   field
     convention : PauliSU2NormConvention Lie Vector Scalar
-    operatorStructure : InducedOperatorNorm Lie Scalar
 
-    scalarMultiplicationAgrees :
-      multiply operatorStructure
-      ≡ multiply (vectorGeometry convention)
+    operatorNorm : (Lie → Lie) → Scalar
+    OperatorLessEqual : Scalar → Scalar → Set
 
     orderAgrees :
-      LessEqual operatorStructure
-      ≡ LessEqual (vectorGeometry convention)
+      OperatorLessEqual ≡ LessEqual (vectorGeometry convention)
 
     adjointOperatorUpperFromBracket : ∀ x →
-      LessEqual operatorStructure
-        (operatorNorm operatorStructure (adAction convention x))
+      OperatorLessEqual
+        (operatorNorm (adAction convention x))
         (lieNorm convention x)
 
 open PauliAdjointOperatorNormMeaning public
@@ -155,9 +136,8 @@ pauliAdjointNormBelowLieNorm :
   ∀ {Lie Vector Scalar}
     (meaning : PauliAdjointOperatorNormMeaning Lie Vector Scalar)
     x →
-  LessEqual (operatorStructure meaning)
-    (operatorNorm (operatorStructure meaning)
-      (adAction (convention meaning) x))
+  OperatorLessEqual meaning
+    (operatorNorm meaning (adAction (convention meaning) x))
     (lieNorm (convention meaning) x)
 pauliAdjointNormBelowLieNorm meaning x =
   adjointOperatorUpperFromBracket meaning x
