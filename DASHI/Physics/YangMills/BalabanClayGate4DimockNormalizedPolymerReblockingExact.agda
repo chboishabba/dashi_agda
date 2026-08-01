@@ -9,8 +9,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Exact algebra behind Dimock I, Lemmas 10--11.
 --
 -- J. Dimock,
--- "The Renormalization Group According to Balaban - I. Small Fields",
--- arXiv:1108.1335v2 [math-ph]. No DOI recorded.
+-- "The Renormalization Group According to Balaban, I. Small Fields",
+-- Reviews in Mathematical Physics 25 (7) (2013), article 1330010.
+-- arXiv:1108.1335v2 [math-ph].
+-- DOI: 10.1142/S0129055X13300100.
 --
 -- The source first obtains a raw reblocking loss of order 9 K0 L^3 and then
 -- removes relevant Taylor coefficients on small polymers.  The normalized
