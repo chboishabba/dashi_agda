@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4ConservativeDyadicNewtonBudgetExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -97,19 +97,15 @@ dyadicContractionForcingFits {triangle = triangle}
     (sym radiusMeaning)
     (Quantitative.transitive (Construction.metric triangle)
       (Construction.addMonotone triangle
-        (Quantitative.transitive (Construction.metric triangle)
+        (subst
+          (λ upper →
+            Quantitative.LessEqual (Construction.metric triangle)
+              (Quantitative.multiply (Construction.metric triangle)
+                contraction (half constants)) upper)
+          (quarterTimesHalf constants)
           (multiplyMonotone constants contractionBound
             (Quantitative.reflexive (Construction.metric triangle)
-              (half constants)))
-          (subst
-            (λ upper →
-              Quantitative.LessEqual (Construction.metric triangle)
-                (Quantitative.multiply (Construction.metric triangle)
-                  contraction (half constants)) upper)
-            (quarterTimesHalf constants)
-            (multiplyMonotone constants contractionBound
-              (Quantitative.reflexive (Construction.metric triangle)
-                (half constants)))))
+              (half constants))))
         forcingBound)
       (subst
         (λ lower →
