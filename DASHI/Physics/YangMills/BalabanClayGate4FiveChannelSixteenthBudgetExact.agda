@@ -122,7 +122,7 @@ epsilonTotalBelowFiveSixteenths {dataSet = dataSet} allocation =
               (Five.add dataSet (oneSixteenth (budget allocation))
                 (Five.add dataSet (oneSixteenth (budget allocation))
                   (oneSixteenth (budget allocation)))))))
-      (Five.epsilonTotalMeaning dataSet)
+      (sym (Five.epsilonTotalMeaning dataSet))
       (Five.addMonotone dataSet
         (curvatureBelowSixteenth allocation)
         (Five.addMonotone dataSet
