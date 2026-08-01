@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommo
 import DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovQuantitativeIFTReuseExact as IFTReuse
 import DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovInverseStabilityExact as InverseReuse
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaFiveLocalChannelsExact as HRBeta
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2IntegratedExact as Integrated
 
 ------------------------------------------------------------------------
 -- Physical closure round two.
@@ -25,8 +26,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4HRBetaFiveLocalChannelsExact as H
 --
 -- It also corrects the scope of the Torriani--Hazewinkel BF-average source and
 -- proves that the repository's side-2 dyadic corner carrier is not literally
--- CMP109's centred odd-side convention.  The necessary translated convention
--- bridge remains explicit and fail-closed.
+-- CMP109's centred odd-side convention.  One integrated carrier now owns the
+-- convention bridge, quantitative IFTs, inverse data, entry bound and H-R_beta
+-- channels together.
 ------------------------------------------------------------------------
 
 bfAverageBibliographyLevel = BF.bfAverageBibliographyLevel
@@ -101,6 +103,15 @@ hrBetaFiveChannelLocalToUniformLevel =
   HRBeta.hrBetaFiveChannelLocalToUniformLevel
 hrBetaFiveChannelPhysicalHalfAssemblyLevel =
   HRBeta.hrBetaFiveChannelPhysicalHalfAssemblyLevel
+
+physicalClosureRound2IntegratedCarrierLevel =
+  Integrated.physicalClosureRound2IntegratedCarrierLevel
+physicalClosureRound2IntegratedIFTConsequencesLevel =
+  Integrated.physicalClosureRound2IntegratedIFTConsequencesLevel
+physicalClosureRound2IntegratedInverseConsequencesLevel =
+  Integrated.physicalClosureRound2IntegratedInverseConsequencesLevel
+physicalClosureRound2IntegratedNormAndRemainderLevel =
+  Integrated.physicalClosureRound2IntegratedNormAndRemainderLevel
 
 ------------------------------------------------------------------------
 -- Remaining physical constants and identifications.
