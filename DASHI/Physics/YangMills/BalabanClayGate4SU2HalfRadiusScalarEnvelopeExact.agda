@@ -1,7 +1,5 @@
 module DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusScalarEnvelopeExact where
 
-open import Agda.Builtin.Equality using (_≡_)
-
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -20,6 +18,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- envelopes.  This module names the exact scalar functions and the standard
 -- Taylor targets on 0 <= theta <= 1/2.  Quotient formulas are used only away
 -- from zero; the analytic continuations at zero are recorded separately.
+--
+-- Scalar identities use an explicit setoid equality.  This is essential for
+-- the Bishop regular-sequence real backend, whose mathematical equality is not
+-- Agda propositional equality.
 ------------------------------------------------------------------------
 
 record OrderedTrigScalar (Scalar : Set) : Set₁ where
@@ -28,12 +30,24 @@ record OrderedTrigScalar (Scalar : Set) : Set₁ where
     add subtract multiply divide : Scalar → Scalar → Scalar
     absolute negate : Scalar → Scalar
     sine cosine : Scalar → Scalar
-    LessEqual : Scalar → Scalar → Set
+
+    Equivalent LessEqual : Scalar → Scalar → Set
     Nonzero : Scalar → Set
+
+    equivalentRefl : ∀ value → Equivalent value value
+    equivalentSym : ∀ {left right} →
+      Equivalent left right → Equivalent right left
+    equivalentTrans : ∀ {left middle right} →
+      Equivalent left middle → Equivalent middle right →
+      Equivalent left right
 
     reflexive : ∀ value → LessEqual value value
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
+
+    lessEqualResp : ∀ {left left′ right right′} →
+      Equivalent left left′ → Equivalent right right′ →
+      LessEqual left right → LessEqual left′ right′
 
 open OrderedTrigScalar public
 
@@ -44,16 +58,17 @@ record SU2HalfRadiusScalarEnvelope (Scalar : Set) : Set₁ where
     half oneHalf oneSixth oneTwelfth oneTwentyFourth : Scalar
 
     halfMeaning :
-      half ≡ divide scalar (one scalar) (two scalar)
+      Equivalent scalar half (divide scalar (one scalar) (two scalar))
     oneHalfMeaning :
-      oneHalf ≡ divide scalar (one scalar) (two scalar)
+      Equivalent scalar oneHalf (divide scalar (one scalar) (two scalar))
     oneSixthMeaning :
-      oneSixth ≡ divide scalar (one scalar) (six scalar)
+      Equivalent scalar oneSixth (divide scalar (one scalar) (six scalar))
     oneTwelfthMeaning :
-      oneTwelfth ≡ divide scalar (one scalar) (twelve scalar)
+      Equivalent scalar oneTwelfth
+        (divide scalar (one scalar) (twelve scalar))
     oneTwentyFourthMeaning :
-      oneTwentyFourth
-      ≡ divide scalar (one scalar) (twentyFour scalar)
+      Equivalent scalar oneTwentyFourth
+        (divide scalar (one scalar) (twentyFour scalar))
 
     InsideHalfBall : Scalar → Set
     insideImpliesNonnegative : ∀ theta → InsideHalfBall theta →
@@ -65,30 +80,32 @@ record SU2HalfRadiusScalarEnvelope (Scalar : Set) : Set₁ where
     cosc : Scalar → Scalar
     inverseDexpQuadratic : Scalar → Scalar
 
-    sincAtZero : sinc (zero scalar) ≡ one scalar
-    coscAtZero : cosc (zero scalar) ≡ oneHalf
+    sincAtZero : Equivalent scalar (sinc (zero scalar)) (one scalar)
+    coscAtZero : Equivalent scalar (cosc (zero scalar)) oneHalf
     inverseDexpQuadraticAtZero :
-      inverseDexpQuadratic (zero scalar) ≡ oneTwelfth
+      Equivalent scalar
+        (inverseDexpQuadratic (zero scalar)) oneTwelfth
 
     sincMeaningAwayFromZero : ∀ theta → Nonzero scalar theta →
-      sinc theta ≡ divide scalar (sine scalar theta) theta
+      Equivalent scalar (sinc theta)
+        (divide scalar (sine scalar theta) theta)
 
     coscMeaningAwayFromZero : ∀ theta → Nonzero scalar theta →
-      cosc theta
-      ≡ divide scalar
+      Equivalent scalar (cosc theta)
+        (divide scalar
           (subtract scalar (one scalar) (cosine scalar theta))
-          (multiply scalar theta theta)
+          (multiply scalar theta theta))
 
     inverseDexpQuadraticMeaningAwayFromZero :
       ∀ theta → Nonzero scalar theta →
-      inverseDexpQuadratic theta
-      ≡ subtract scalar
+      Equivalent scalar (inverseDexpQuadratic theta)
+        (subtract scalar
           (divide scalar (one scalar)
             (multiply scalar theta theta))
           (divide scalar
             (add scalar (one scalar) (cosine scalar theta))
             (multiply scalar (two scalar)
-              (multiply scalar theta (sine scalar theta))))
+              (multiply scalar theta (sine scalar theta)))))
 
     sincTaylorBound : ∀ theta → InsideHalfBall theta →
       LessEqual scalar
@@ -141,8 +158,10 @@ record SU2HalfRadiusNumericalLedger
     envelope : SU2HalfRadiusScalarEnvelope Scalar
 
     bracketConstant adRadius : Scalar
-    bracketConstantMeaning : bracketConstant ≡ one (scalar envelope)
-    adRadiusMeaning : adRadius ≡ half envelope
+    bracketConstantMeaning :
+      Equivalent (scalar envelope) bracketConstant (one (scalar envelope))
+    adRadiusMeaning :
+      Equivalent (scalar envelope) adRadius (half envelope)
 
     adDefectBudget dexpDefectBudget dexpInverseDefectBudget : Scalar
 
@@ -157,7 +176,8 @@ open SU2HalfRadiusNumericalLedger public
 
 sharedHalfRadiusFromNumericalLedger :
   ∀ {Scalar} (ledger : SU2HalfRadiusNumericalLedger Scalar) →
-  adRadius ledger ≡ half (envelope ledger)
+  Equivalent (scalar (envelope ledger))
+    (adRadius ledger) (half (envelope ledger))
 sharedHalfRadiusFromNumericalLedger ledger = adRadiusMeaning ledger
 
 su2HalfRadiusScalarTargetLevel : ProofLevel
@@ -165,6 +185,9 @@ su2HalfRadiusScalarTargetLevel = machineChecked
 
 su2HalfRadiusZeroContinuationLevel : ProofLevel
 su2HalfRadiusZeroContinuationLevel = machineChecked
+
+su2HalfRadiusSetoidEqualityLevel : ProofLevel
+su2HalfRadiusSetoidEqualityLevel = machineChecked
 
 su2HalfRadiusSingleLedgerLevel : ProofLevel
 su2HalfRadiusSingleLedgerLevel = machineChecked
