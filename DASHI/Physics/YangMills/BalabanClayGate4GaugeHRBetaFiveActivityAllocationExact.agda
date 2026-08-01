@@ -125,7 +125,7 @@ totalActivityCouplingVolumeBelowAllowance {connected = connected} allocation =
                 (Dimock.add (Dimock.algebra connected)
                   (gaugeAllowance allocation)
                   (localizationAllowance allocation))))))
-      (connectedCouplingMeaning allocation)
+      (sym (connectedCouplingMeaning allocation))
       (subst
         (λ selectedCoupling →
           Dimock.LessEqual (Dimock.algebra connected)
@@ -140,7 +140,7 @@ totalActivityCouplingVolumeBelowAllowance {connected = connected} allocation =
                   (Dimock.add (Dimock.algebra connected)
                     (gaugeAllowance allocation)
                     (localizationAllowance allocation))))))
-        (totalCouplingMeaning allocation)
+        (sym (totalCouplingMeaning allocation))
         (subst
           (λ lower → Dimock.LessEqual (Dimock.algebra connected) lower
             (Dimock.add (Dimock.algebra connected)
