@@ -1,7 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4ConservativeDyadicNewtonBudgetExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -25,10 +24,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeContractionBallConstr
 --
 --   radius = 1/2,  contraction <= 1/4,  forcing <= 1/4.
 --
--- Hence q r + f <= 1/8 + 1/4 = 3/8 <= 1/2.  The theorem is scalar-
--- representation independent: a constructive-real instantiation supplies the
--- named dyadic constants and their order facts once, and both the Federbush
--- centre and Faddeev--Popov slice reuse the same invariant-ball proof.
+-- Hence q r + f <= 1/8 + 1/4 = 3/8 <= 1/2.  All arithmetic is expressed by
+-- order inequalities rather than propositional rewriting.  This admits Bishop
+-- regular-sequence reals and any other ordered setoid scalar directly.
 ------------------------------------------------------------------------
 
 record DyadicNewtonConstants
@@ -37,12 +35,15 @@ record DyadicNewtonConstants
   field
     half quarter eighth threeEighths : Bound
 
-    quarterTimesHalf :
-      Quantitative.multiply (Construction.metric triangle) quarter half
-      ≡ eighth
+    quarterTimesHalfBelowEighth :
+      Quantitative.LessEqual (Construction.metric triangle)
+        (Quantitative.multiply (Construction.metric triangle) quarter half)
+        eighth
 
-    eighthPlusQuarter :
-      Construction.add triangle eighth quarter ≡ threeEighths
+    eighthPlusQuarterBelowThreeEighths :
+      Quantitative.LessEqual (Construction.metric triangle)
+        (Construction.add triangle eighth quarter)
+        threeEighths
 
     threeEighthsBelowHalf :
       Quantitative.LessEqual (Construction.metric triangle)
@@ -76,7 +77,10 @@ dyadicContractionForcingFits :
     contraction (quarter constants) →
   Quantitative.LessEqual (Construction.metric triangle)
     forcing (quarter constants) →
-  radius ≡ half constants →
+  Quantitative.LessEqual (Construction.metric triangle)
+    radius (half constants) →
+  Quantitative.LessEqual (Construction.metric triangle)
+    (half constants) radius →
   Quantitative.LessEqual (Construction.metric triangle)
     (Construction.add triangle
       (Quantitative.multiply (Construction.metric triangle)
@@ -85,34 +89,18 @@ dyadicContractionForcingFits :
     radius
 dyadicContractionForcingFits {triangle = triangle}
     constants contraction forcing radius contractionBound forcingBound
-    radiusMeaning =
-  subst
-    (λ selectedRadius →
-      Quantitative.LessEqual (Construction.metric triangle)
-        (Construction.add triangle
-          (Quantitative.multiply (Construction.metric triangle)
-            contraction selectedRadius)
-          forcing)
-        selectedRadius)
-    (sym radiusMeaning)
+    radiusBelowHalf halfBelowRadius =
+  Quantitative.transitive (Construction.metric triangle)
+    (Construction.addMonotone triangle
+      (Quantitative.transitive (Construction.metric triangle)
+        (multiplyMonotone constants contractionBound radiusBelowHalf)
+        (quarterTimesHalfBelowEighth constants))
+      forcingBound)
     (Quantitative.transitive (Construction.metric triangle)
-      (Construction.addMonotone triangle
-        (subst
-          (λ upper →
-            Quantitative.LessEqual (Construction.metric triangle)
-              (Quantitative.multiply (Construction.metric triangle)
-                contraction (half constants)) upper)
-          (quarterTimesHalf constants)
-          (multiplyMonotone constants contractionBound
-            (Quantitative.reflexive (Construction.metric triangle)
-              (half constants))))
-        forcingBound)
-      (subst
-        (λ lower →
-          Quantitative.LessEqual (Construction.metric triangle)
-            lower (half constants))
-        (sym (eighthPlusQuarter constants))
-        (threeEighthsBelowHalf constants)))
+      (eighthPlusQuarterBelowThreeEighths constants)
+      (Quantitative.transitive (Construction.metric triangle)
+        (threeEighthsBelowHalf constants)
+        halfBelowRadius))
 
 record ConservativeDyadicContractionBall
     {Point Bound : Set}
@@ -123,7 +111,14 @@ record ConservativeDyadicContractionBall
     map : Point → Point
 
     radius contractionFactor forcing : Bound
-    radiusMeaning : radius ≡ half constants
+
+    radiusBelowHalf :
+      Quantitative.LessEqual (Construction.metric triangle)
+        radius (half constants)
+
+    halfBelowRadius :
+      Quantitative.LessEqual (Construction.metric triangle)
+        (half constants) radius
 
     InBall : Point → Set
     inBallMeaning : ∀ point →
@@ -201,7 +196,8 @@ asContractionBallConstruction {triangle = triangle}
         (radius dataSet)
         (contractionBelowQuarter dataSet)
         (forcingBelowQuarter dataSet)
-        (radiusMeaning dataSet)
+        (radiusBelowHalf dataSet)
+        (halfBelowRadius dataSet)
   }
 
 record FederbushFaddeevPopovDyadicNewtonReuse
@@ -218,6 +214,9 @@ open FederbushFaddeevPopovDyadicNewtonReuse public
 
 conservativeDyadicNewtonArithmeticLevel : ProofLevel
 conservativeDyadicNewtonArithmeticLevel = machineChecked
+
+conservativeDyadicSetoidOrderCompatibilityLevel : ProofLevel
+conservativeDyadicSetoidOrderCompatibilityLevel = machineChecked
 
 conservativeDyadicInvariantBallAdapterLevel : ProofLevel
 conservativeDyadicInvariantBallAdapterLevel = machineChecked
