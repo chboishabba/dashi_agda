@@ -17,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeFiniteBasisExact
 import DASHI.Physics.YangMills.BalabanClayGate4T3TreeGaugeSpectralDeterminantExact as Spectral
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaHalfRemainderDominanceExact as HRBeta
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteProofEngineeringCompletionLedger as FiniteCompletion
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2Ledger as PhysicalClosure2
 
 ------------------------------------------------------------------------
 -- Previous exact frontier remains imported.
@@ -133,11 +134,14 @@ lowerIntervalAllScaleAdmissibilityLevel =
   HRBeta.lowerIntervalAllScaleAdmissibilityLevel
 
 ------------------------------------------------------------------------
--- Highest-alpha finite proof-engineering closure.
+-- Highest-alpha finite and physical closure.
 ------------------------------------------------------------------------
 
 finiteProofEngineeringCompletionLedgerLevel =
   FiniteCompletion.finiteProofEngineeringCompletionLedgerLevel
+
+physicalClosureRound2LedgerLevel =
+  PhysicalClosure2.physicalClosureRound2LedgerLevel
 
 ------------------------------------------------------------------------
 -- Exact remaining physical inhabitants.
