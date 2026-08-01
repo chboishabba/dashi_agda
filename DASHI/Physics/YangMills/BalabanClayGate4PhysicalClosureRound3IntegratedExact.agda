@@ -2,7 +2,6 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound3IntegratedEx
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -11,7 +10,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstan
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embedding
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredEndpointCertificateExact as EndpointCertificate
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredBlockEndpointCertificateExact as BlockCertificate
 import DASHI.Physics.YangMills.BalabanClayGate4SU2FixedRadiusEnvelopeExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4DimockNormalizedPolymerReblockingExact as Reblocking
 import DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact as LargeField
@@ -26,11 +25,12 @@ import DASHI.Physics.YangMills.BalabanClayGate4SU2QuadraticChartDefectExact as Q
 -- One coherent consumer for the Dimock/centred-geometry closure tranche.
 --
 -- The record owns the literal centred block, its injective periodic embedding,
--- executable certificates for every printed contour endpoint, one SU(2) chart
--- radius, normalized polymer reblocking, large-field slack, cluster-with-holes
--- correction, connected H-R_beta activities and the physical channel naming
--- map.  This prevents later consumers from mixing incompatible radii, endpoint
--- conventions, polymer norms or channel allocations.
+-- one executable certificate covering every centred point and every printed
+-- contour ordering, one SU(2) chart radius, normalized polymer reblocking,
+-- large-field slack, cluster-with-holes correction, connected H-R_beta
+-- activities and the physical channel naming map.  This prevents later
+-- consumers from mixing incompatible radii, endpoint conventions, polymer
+-- norms or channel allocations.
 ------------------------------------------------------------------------
 
 record PhysicalClosureRound3Inputs
@@ -42,10 +42,9 @@ record PhysicalClosureRound3Inputs
     centeredBlock : Centered.CMP109CenteredBlockConvention radius
     centeredEmbedding : Embedding.CenteredPeriodicNoWrapEmbedding n radius
 
-    centeredEndpointCertificates :
-      ∀ point →
-      EndpointCertificate.CenteredEndpointCertificate n radius
-        (Embedding.embeddingCentre centeredEmbedding) point
+    centeredEndpointCertificate :
+      BlockCertificate.EmbeddedCenteredBlockEndpointCertificate
+        n radius centeredEmbedding
 
     su2Envelope : SU2.SU2FixedRadiusEnvelope SU2Operator SU2Scalar
 
@@ -88,11 +87,8 @@ centeredPrintedContourEndpointFromRound3 :
       (Periodic.contourWord order)
   ≡ Embedding.embed (centeredEmbedding inputs) point
 centeredPrintedContourEndpointFromRound3 inputs point order membership =
-  trans
-    (EndpointCertificate.certifiedCenteredContourEndpointExact
-      (centeredEndpointCertificates inputs point)
-      order membership)
-    (sym (Embedding.embedMeaning (centeredEmbedding inputs) point))
+  BlockCertificate.blockCertifiedEmbeddedPrintedEndpointExact
+    (centeredEndpointCertificate inputs) point order membership
 
 su2AdDefectBoundFromRound3 :
   ∀ {n radius SU2Operator SU2Scalar ReblockingScalar
