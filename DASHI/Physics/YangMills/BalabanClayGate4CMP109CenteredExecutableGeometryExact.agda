@@ -44,7 +44,7 @@ record CenteredExecutableGeometry (radius : Nat) : Set where
       BlockCertificate.CenteredBlockEndpointCertificate
         (Bijection.centeredTorusParameter radius)
         radius
-        Bijection.directCenteredOrigin
+        (Bijection.directCenteredOrigin {radius})
 
   embedding : Embedding.CenteredPeriodicNoWrapEmbedding
     (Bijection.centeredTorusParameter radius) radius
@@ -65,7 +65,7 @@ centeredExecutableGeometryDecision :
 centeredExecutableGeometryDecision radius
   with Bijection.centeredTorusWalkAgreementCertificateDecision radius
      | BlockCertificate.centeredBlockEndpointCertificateDecision
-         radius Bijection.directCenteredOrigin
+         radius (Bijection.directCenteredOrigin {radius})
 ... | Carrier.yes walk | Carrier.yes endpoints = Carrier.yes record
   { walkAgreement = walk
   ; allEndpoints = endpoints
