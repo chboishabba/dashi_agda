@@ -65,6 +65,19 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound1Validation.agda
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerPhysicalClosureRound1Advance.agda
 
+  DASHI/Physics/YangMills/BalabanClayGate4BFAverageCoherenceScopeExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109ShortestContourEnumerationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FiniteDimensionalFrechetChainProductExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4OperatorNormPipelineExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4QuantitativeImplicitFunctionCommonExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FederbushFaddeevPopovQuantitativeIFTReuseExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FederbushFaddeevPopovInverseStabilityExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4HRBetaFiveLocalChannelsExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Ledger.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Receipt.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound2Validation.agda
+  DASHI/Physics/YangMills/BalabanClayConstructiveProducerPhysicalClosureRound2Advance.agda
+
   DASHI/Physics/YangMills/BalabanClayGate4SevenGroupFrontierLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4SevenGroupFrontierReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4SevenGroupValidation.agda
