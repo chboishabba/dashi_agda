@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -36,9 +36,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationE
 -- over every ordering of those segments.  The sibling module enumerates those
 -- orderings.  Here each signed segment is expanded into the repository's
 -- SignedAxis4 word and converted to a proof-bearing periodic nearest-neighbour
--- path.  Consequently finite path existence for every enumerated contour is no
--- longer a physical input; only identification of its computed endpoint with
--- the selected CMP109 block endpoint remains.
+-- path.  The whole finite family is executable, with 24 members when all four
+-- coordinates are active.  Only identification of the computed endpoint with
+-- the selected CMP109 block endpoint remains physical.
 ------------------------------------------------------------------------
 
 infixr 5 _++_
@@ -86,6 +86,13 @@ listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
 listLength (_ ∷ values) = suc (listLength values)
 
+mapListLength :
+  ∀ {A B : Set} (function : A → B) values →
+  listLength (Contours.mapList function values) ≡ listLength values
+mapListLength function [] = refl
+mapListLength function (value ∷ values) =
+  cong suc (mapListLength function values)
+
 repeatDirectionLength : ∀ direction count →
   listLength (repeatDirection direction count) ≡ count
 repeatDirectionLength direction zero = refl
@@ -109,6 +116,57 @@ periodicContourPath :
 periodicContourPath start order =
   WordPath.wordToPeriodicPath start (contourWord order)
 
+record ExecutablePeriodicContour
+    (n : Nat)
+    (start : Periodic.PeriodicBlock n) : Set where
+  constructor executablePeriodicContour
+  field
+    order : List Contours.AxisSegment
+
+  directions : List Word.SignedAxis4
+  directions = contourWord order
+
+  computedEndpoint : Periodic.PeriodicBlock n
+  computedEndpoint = Bond.walk start directions
+
+  path : Adjacency.PeriodicPath start computedEndpoint
+  path = periodicContourPath start order
+
+open ExecutablePeriodicContour public
+
+makeExecutableContour :
+  ∀ {n} (start : Periodic.PeriodicBlock n) →
+  List Contours.AxisSegment → ExecutablePeriodicContour n start
+makeExecutableContour start order = executablePeriodicContour order
+
+allPeriodicContours :
+  ∀ {n} (start : Periodic.PeriodicBlock n) →
+  Contours.Displacement4 → List (ExecutablePeriodicContour n start)
+allPeriodicContours start displacement =
+  Contours.mapList (makeExecutableContour start)
+    (Contours.cmp109ShortestContourOrders displacement)
+
+allPeriodicContourCountEqualsOrderCount :
+  ∀ {n} (start : Periodic.PeriodicBlock n) displacement →
+  listLength (allPeriodicContours start displacement)
+  ≡ listLength (Contours.cmp109ShortestContourOrders displacement)
+allPeriodicContourCountEqualsOrderCount start displacement =
+  mapListLength (makeExecutableContour start)
+    (Contours.cmp109ShortestContourOrders displacement)
+
+allPeriodicContourMembershipPreimage :
+  ∀ {n} (start : Periodic.PeriodicBlock n) displacement contour →
+  Contours._∈_ contour (allPeriodicContours start displacement) →
+  Contours.MapPreimage
+    (makeExecutableContour start)
+    (Contours.cmp109ShortestContourOrders displacement)
+    contour
+allPeriodicContourMembershipPreimage start displacement contour membership =
+  Contours.mapMembershipPreimage
+    (makeExecutableContour start)
+    (Contours.cmp109ShortestContourOrders displacement)
+    contour membership
+
 record PeriodicCMP109ContourFamily
     (n : Nat)
     (start : Periodic.PeriodicBlock n)
@@ -119,14 +177,8 @@ record PeriodicCMP109ContourFamily
       Contours._∈_ selectedOrder
         (Contours.cmp109ShortestContourOrders displacement)
 
-  directions : List Word.SignedAxis4
-  directions = contourWord selectedOrder
-
-  computedEndpoint : Periodic.PeriodicBlock n
-  computedEndpoint = Bond.walk start directions
-
-  path : Adjacency.PeriodicPath start computedEndpoint
-  path = periodicContourPath start selectedOrder
+  executable : ExecutablePeriodicContour n start
+  executable = makeExecutableContour start selectedOrder
 
 open PeriodicCMP109ContourFamily public
 
@@ -136,14 +188,38 @@ record NamedPeriodicCMP109Contour
     (displacement : Contours.Displacement4) : Set where
   field
     family : PeriodicCMP109ContourFamily n start displacement
-    endpointExact : computedEndpoint family ≡ finish
+    endpointExact : computedEndpoint (executable family) ≡ finish
 
   pathToNamedEndpoint : Adjacency.PeriodicPath start finish
   pathToNamedEndpoint =
     WordPath.wordToNamedEndpointPath
-      start finish (directions family) endpointExact
+      start finish
+      (directions (executable family))
+      endpointExact
 
 open NamedPeriodicCMP109Contour public
+
+one : Nat
+one = suc zero
+
+allFourPositiveUnitDisplacement : Contours.Displacement4
+allFourPositiveUnitDisplacement =
+  Contours.displacement4
+    (Contours.signedCount Contours.positive one)
+    (Contours.signedCount Contours.positive one)
+    (Contours.signedCount Contours.positive one)
+    (Contours.signedCount Contours.positive one)
+
+allFourPeriodicContourCount24 :
+  ∀ {n} (start : Periodic.PeriodicBlock n) →
+  listLength
+    (allPeriodicContours start allFourPositiveUnitDisplacement)
+  ≡ 24
+allFourPeriodicContourCount24 start =
+  trans
+    (allPeriodicContourCountEqualsOrderCount
+      start allFourPositiveUnitDisplacement)
+    Contours.fourActiveContourFamilyHas24Members
 
 cmp109SegmentToSignedWordLevel : ProofLevel
 cmp109SegmentToSignedWordLevel = computed
@@ -153,6 +229,12 @@ cmp109SegmentWordLengthLevel = machineChecked
 
 cmp109EnumeratedPeriodicPathConstructionLevel : ProofLevel
 cmp109EnumeratedPeriodicPathConstructionLevel = machineChecked
+
+cmp109FullPeriodicContourFamilyLevel : ProofLevel
+cmp109FullPeriodicContourFamilyLevel = machineChecked
+
+cmp109FourActivePeriodicContourCount24Level : ProofLevel
+cmp109FourActivePeriodicContourCount24Level = machineChecked
 
 cmp109NamedEndpointPathTransportLevel : ProofLevel
 cmp109NamedEndpointPathTransportLevel = machineChecked
