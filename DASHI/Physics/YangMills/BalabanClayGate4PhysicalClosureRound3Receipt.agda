@@ -19,6 +19,8 @@ record PhysicalClosureRound3Receipt : Set where
     centeredNoWrapInterfaceChecked : Bool
     centeredEndpointDecisionChecked : Bool
     centeredCompleteFamilyCertificateChecked : Bool
+    centeredBlockEndpointDecisionChecked : Bool
+    centeredBlockCompleteCertificateChecked : Bool
 
     dimockTrilogyScopeAudited : Bool
     normalizedReblockingAssemblyChecked : Bool
@@ -49,6 +51,8 @@ record AuthoritativePhysicalClosureRound3Evidence
     centeredNoWrapInterfaceTypechecks : Set
     centeredEndpointDecisionTypechecks : Set
     centeredCompleteFamilyCertificateTypechecks : Set
+    centeredBlockEndpointDecisionTypechecks : Set
+    centeredBlockCompleteCertificateTypechecks : Set
 
     dimockTrilogyScopeAuditTypechecks : Set
     normalizedReblockingAssemblyTypechecks : Set
