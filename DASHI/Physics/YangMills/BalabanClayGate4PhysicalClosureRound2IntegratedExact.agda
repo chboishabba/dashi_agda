@@ -1,7 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2IntegratedExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -10,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationE
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact as Quantitative
 import DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovQuantitativeIFTReuseExact as IFT
 import DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovInverseStabilityExact as Inverse
+import DASHI.Physics.YangMills.BalabanClayGate4TreeBackgroundSliceTransitionExact as Slice
 import DASHI.Physics.YangMills.BalabanClayGate4OperatorNormPipelineExact as Norm
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaFiveLocalChannelsExact as HR
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact as HRBase
@@ -61,13 +61,13 @@ record PhysicalClosureRound2Inputs
     centreInverse :
       Inverse.FederbushCentreInverseClosure CentreTangent Bound
     centreZeroAgreement :
-      Quantitative.ZeroConventionAgreement
+      Inverse.ZeroConventionAgreement
         (Inverse.closure centreInverse)
 
     faddeevPopovInverse :
       Inverse.FaddeevPopovInverseClosure GaugeParameter Bound
     faddeevPopovZeroAgreement :
-      Quantitative.ZeroConventionAgreement
+      Inverse.ZeroConventionAgreement
         (Inverse.closure faddeevPopovInverse)
 
     entryPipeline : Norm.CMP109DerivativeEntryPipeline Operator Bound
@@ -152,9 +152,8 @@ backgroundSliceUniqueFromIntegratedInputs :
   Quantitative.ResidualZero
     (IFT.implicitFunction (selectedBackgroundClosure inputs))
     tree candidate →
-  candidate ≡
-    DASHI.Physics.YangMills.BalabanClayGate4TreeBackgroundSliceTransitionExact.toBackground
-      (IFT.transition (selectedBackgroundClosure inputs)) tree
+  candidate ≡ Slice.toBackground
+    (IFT.transition (selectedBackgroundClosure inputs)) tree
 backgroundSliceUniqueFromIntegratedInputs inputs =
   IFT.backgroundSliceUniqueOnQuantitativeBall
     (selectedBackgroundClosure inputs)
