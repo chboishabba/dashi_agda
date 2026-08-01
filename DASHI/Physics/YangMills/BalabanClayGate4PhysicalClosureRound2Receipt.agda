@@ -13,6 +13,7 @@ record PhysicalClosureRound2Receipt : Set where
 
     bfAverageScopeAudited : Bool
     cmp109CenteredNormalizationSeparated : Bool
+    centeredDyadicConventionInequalityChecked : Bool
     dyadicTwoStepWeightChecked : Bool
 
     shortestContourEnumerationChecked : Bool
@@ -43,6 +44,7 @@ record AuthoritativePhysicalClosureRound2Evidence
   field
     bfAverageScopeTypechecks : Set
     centeredNormalizationSeparationTypechecks : Set
+    centeredDyadicConventionInequalityTypechecks : Set
     dyadicTwoStepWeightTypechecks : Set
 
     shortestContourEnumerationTypechecks : Set
