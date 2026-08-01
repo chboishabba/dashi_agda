@@ -120,23 +120,28 @@ asPhysicalHessianFiveChannelDecomposition inputs = record
   ; Hessian.PhysicalHessianFiveChannelDecomposition.referenceSelfAdjoint =
       referenceSelfAdjoint inputs
   ; Hessian.PhysicalHessianFiveChannelDecomposition.curvatureSelfAdjoint =
-      transportFactorSelfAdjoint inputs _
+      transportFactorSelfAdjoint inputs
+        (Factor.curvature (factorizations inputs))
         (Factor.curvatureSelfAdjointFromFactorization
           (factorizations inputs))
   ; Hessian.PhysicalHessianFiveChannelDecomposition.transportSelfAdjoint =
-      transportFactorSelfAdjoint inputs _
+      transportFactorSelfAdjoint inputs
+        (Factor.transport (factorizations inputs))
         (Factor.transportSelfAdjointFromFactorization
           (factorizations inputs))
   ; Hessian.PhysicalHessianFiveChannelDecomposition.chartSelfAdjoint =
-      transportFactorSelfAdjoint inputs _
+      transportFactorSelfAdjoint inputs
+        (Factor.chart (factorizations inputs))
         (Factor.chartSelfAdjointFromFactorization
           (factorizations inputs))
   ; Hessian.PhysicalHessianFiveChannelDecomposition.gaugeSelfAdjoint =
-      transportFactorSelfAdjoint inputs _
+      transportFactorSelfAdjoint inputs
+        (Factor.gauge (factorizations inputs))
         (Factor.gaugeSelfAdjointFromFactorization
           (factorizations inputs))
   ; Hessian.PhysicalHessianFiveChannelDecomposition.constraintSelfAdjoint =
-      transportFactorSelfAdjoint inputs _
+      transportFactorSelfAdjoint inputs
+        (Factor.constraint (factorizations inputs))
         (Factor.constraintSelfAdjointFromFactorization
           (factorizations inputs))
   ; Hessian.PhysicalHessianFiveChannelDecomposition.channelIdentification =
