@@ -13,13 +13,16 @@ import DASHI.Physics.YangMills.BalabanClayGate4SU2NonlinearityDefectPipelineExac
 import DASHI.Physics.YangMills.BalabanClayGate4TwoFamilyResolvedResolventAdapterExact as ResolvedResolvent
 import DASHI.Physics.YangMills.BalabanClayGate4TwoFamilyResolvedDefectsAdapterExact as ResolvedBoth
 import DASHI.Physics.YangMills.BalabanClayGate4T3ResolvedDefectsReuseExact as T3Resolved
+import DASHI.Physics.YangMills.BalabanClayGate4HRBetaDeterminantSpectralChannelExact as Determinant
+import DASHI.Physics.YangMills.BalabanClayGate4HRBetaFiveChannelsSpectralDeterminantAdapterExact as DeterminantAdapter
 
 ------------------------------------------------------------------------
 -- Round-two analytic reductions after the common structural tranche.
 --
 -- These modules do not assert the missing physical constants.  They prove that
 -- once component estimates are supplied, no additional global Schur,
--- resolvent, SU(2)-defect, Newton residual or five-channel theorem remains.
+-- resolvent, SU(2)-defect, Newton residual, determinant-summation or
+-- five-channel theorem remains.
 ------------------------------------------------------------------------
 
 quantitativeBallInvarianceFromScalarBudgetLevel =
@@ -80,6 +83,15 @@ twoFamilyResolvedDefectsAdapterLevel =
 t3FiveChannelBoundsFromResolvedDefectsLevel =
   T3Resolved.t3FiveChannelBoundsFromResolvedDefectsLevel
 
+localDeterminantSpectralTriangleLevel =
+  Determinant.localDeterminantSpectralTriangleLevel
+scalarLogOnePlusQuadraticRemainderLevel =
+  Determinant.scalarLogOnePlusQuadraticRemainderLevel
+hrBetaSpectralDeterminantAdapterLevel =
+  DeterminantAdapter.hrBetaSpectralDeterminantAdapterLevel
+hrBetaSpectralDeterminantUniformAssemblyLevel =
+  DeterminantAdapter.hrBetaSpectralDeterminantUniformAssemblyLevel
+
 ------------------------------------------------------------------------
 -- Remaining physical constants and identifications.
 ------------------------------------------------------------------------
@@ -130,6 +142,15 @@ physicalT3FiveFormIdentificationInputsLevel =
   T3Resolved.physicalT3FiveFormIdentificationInputsLevel
 physicalT3ResolvedBudgetMeaningInputsLevel =
   T3Resolved.physicalT3ResolvedBudgetMeaningInputsLevel
+
+physicalLocalRelativeSpectrumInputsLevel =
+  Determinant.physicalLocalRelativeSpectrumInputsLevel
+physicalLocalScalarLogRemainderInputsLevel =
+  Determinant.physicalLocalScalarLogRemainderInputsLevel
+physicalHRBetaLocalizedRelativeSpectrumInputsLevel =
+  DeterminantAdapter.physicalHRBetaLocalizedRelativeSpectrumInputsLevel
+physicalHRBetaFourRemainingChannelInputsLevel =
+  DeterminantAdapter.physicalHRBetaFourRemainingChannelInputsLevel
 
 physicalClosureRound2AnalyticReductionLedgerLevel : ProofLevel
 physicalClosureRound2AnalyticReductionLedgerLevel = machineChecked
