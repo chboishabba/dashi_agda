@@ -2,22 +2,21 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound4IntegratedEx
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109SiteWeightIdentificationExact as CMP109
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109ContourMultiplicityExact as Multiplicity
 import DASHI.Physics.YangMills.BalabanClayGate4SU2PauliNormConventionExact as Pauli
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusScalarEnvelopeExact as HalfRadius
 import DASHI.Physics.YangMills.BalabanClayGate4ConservativeDyadicNewtonBudgetExact as Newton
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeContractionBallConstructionExact as Ball
 import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact as Quantitative
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalHessianFromFactorizationsExact as Hessian
-import DASHI.Physics.YangMills.BalabanClayGate4PhysicalHessianFiveChannelDecompositionExact as HessianSplit
 import DASHI.Physics.YangMills.BalabanClayGate4FiveChannelSelfAdjointOperatorBoundExact as FiveBound
 import DASHI.Physics.YangMills.BalabanClayGate4FiveChannelSixteenthBudgetExact as Sixteenth
 import DASHI.Physics.YangMills.BalabanClayGate4SelfAdjointFormOperatorNormExact as FormNorm
+import DASHI.Physics.YangMills.BalabanClayGate4DimockNormalizedPolymerReblockingExact as Reblocking
 import DASHI.Physics.YangMills.BalabanClayGate4GaugeTaylorLocalizationExact as Taylor
 import DASHI.Physics.YangMills.BalabanClayGate4GaugeLargeFieldPenaltyExact as LargeField
 import DASHI.Physics.YangMills.BalabanClayGate4GaugeClusterLocalInfluenceExact as Cluster
@@ -284,27 +283,15 @@ gaugeTaylorContractionFromRound4 :
       ActivityType ReblockingScalar Scale Block Configuration LargeFieldScalar
       ClusterIndex Boundary Parameter Derivative ClusterScalar
       Polymer RootedScalar Cell HRScalar) →
-  ReblockingConclusion inputs
-gaugeTaylorContractionFromRound4 inputs =
-  Taylor.gaugeNormalizedReblockingContraction (gaugeTaylor inputs)
-  where
-  ReblockingConclusion :
-    PhysicalClosureRound4Inputs
-      radius FineSite CoarseSite Spacing FineBond CoarseBond Path
-      AverageScalar AverageValue Input Output
-      Lie Vector SU2Scalar PointBF PointFP Operator State HessianBound
-      ActivityType ReblockingScalar Scale Block Configuration LargeFieldScalar
-      ClusterIndex Boundary Parameter Derivative ClusterScalar
-      Polymer RootedScalar Cell HRScalar → Set
-  ReblockingConclusion selected =
-    let dataSet = Taylor.genericReblocking (gaugeTaylor selected)
-        certificate = Taylor.contraction (gaugeTaylor selected)
-    in
-    Reblocking.LessEqual (Reblocking.algebra dataSet)
+  let dataSet = Taylor.genericReblocking (gaugeTaylor inputs)
+      certificate = Taylor.contraction (gaugeTaylor inputs)
+  in Reblocking.LessEqual (Reblocking.algebra dataSet)
       (Reblocking.normalizedReblockedNorm dataSet)
       (Reblocking.multiply (Reblocking.algebra dataSet)
         (Reblocking.targetContraction certificate)
         (Reblocking.currentNorm dataSet))
+gaugeTaylorContractionFromRound4 inputs =
+  Taylor.gaugeNormalizedReblockingContraction (gaugeTaylor inputs)
 
 allFiniteRootedSumsFromRound4 :
   ∀ {radius FineSite CoarseSite Spacing FineBond CoarseBond Path
