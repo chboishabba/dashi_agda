@@ -20,7 +20,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- arXiv:2205.08354.  No DOI was assigned to the thesis.
 --
 -- Code continuation: Viktor Csimma, viktorcsimma/bishop, pinned by DASHI at
--- vendor/bishop commit 582c6afcdf805d06730c8c0aa970f4a6e033b611.
+-- vendor/bishop commit 240e38c7f6938f20f865b1f956c5f084da48bd54.
 --
 -- The carrier, equality, sequence semantics, completeness and uniqueness below
 -- are the imported checked objects.  Algebra/order packaging is a separate
