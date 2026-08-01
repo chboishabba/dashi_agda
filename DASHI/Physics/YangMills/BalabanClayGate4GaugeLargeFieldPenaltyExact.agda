@@ -26,11 +26,16 @@ import DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact 
 -- finite bad regions.
 ------------------------------------------------------------------------
 
+data Either (left right : Set) : Set where
+  leftWitness : left → Either left right
+  rightWitness : right → Either left right
+
 record GaugeBadBlockCriterion
     (Block Configuration Scalar : Set) : Set₁ where
   field
-    plaquetteDefect chartDerivativeSize threshold :
+    plaquetteDefect chartDerivativeSize :
       Block → Configuration → Scalar
+    threshold : Block → Configuration → Scalar
 
     LessEqual : Scalar → Scalar → Set
 
@@ -38,17 +43,21 @@ record GaugeBadBlockCriterion
 
     plaquetteBadMeaning : ∀ block configuration →
       PlaquetteBad block configuration
-      ≡ LessEqual threshold
+      ≡ LessEqual
+          (threshold block configuration)
           (plaquetteDefect block configuration)
 
     chartBadMeaning : ∀ block configuration →
       ChartBad block configuration
-      ≡ LessEqual threshold
+      ≡ LessEqual
+          (threshold block configuration)
           (chartDerivativeSize block configuration)
 
     badIsPlaquetteOrChart : ∀ block configuration →
       Bad block configuration →
-      Set
+      Either
+        (PlaquetteBad block configuration)
+        (ChartBad block configuration)
 
 open GaugeBadBlockCriterion public
 
