@@ -32,6 +32,7 @@ record PhysicalClosureRound2Receipt : Set where
 
     hrBetaFiveLocalChannelsChecked : Bool
     hrBetaFiveChannelUniformAssemblyChecked : Bool
+    integratedRound2CarrierChecked : Bool
 
     validationWrapperChecked : Bool
     producerWrapperChecked : Bool
@@ -63,6 +64,7 @@ record AuthoritativePhysicalClosureRound2Evidence
 
     hrBetaFiveLocalChannelsTypechecks : Set
     hrBetaFiveChannelUniformAssemblyTypechecks : Set
+    integratedRound2CarrierTypechecks : Set
 
     validationWrapperTypechecks : Set
     producerWrapperTypechecks : Set
