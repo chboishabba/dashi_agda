@@ -1,7 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusScalarEnvelopeExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -27,8 +26,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 record OrderedTrigScalar (Scalar : Set) : Set₁ where
   field
     zero one two six twelve twentyFour : Scalar
-    add subtract multiply divide absolute : Scalar → Scalar → Scalar
-    negate : Scalar → Scalar
+    add subtract multiply divide : Scalar → Scalar → Scalar
+    absolute negate : Scalar → Scalar
     sine cosine : Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
 
