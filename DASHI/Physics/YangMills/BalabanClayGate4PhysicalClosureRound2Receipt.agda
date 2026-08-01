@@ -20,19 +20,28 @@ record PhysicalClosureRound2Receipt : Set where
     contourPermutationSoundnessChecked : Bool
     contourEndpointIndependenceChecked : Bool
     fourDirectionCount24Checked : Bool
+    periodicContourFamilyChecked : Bool
 
     exactFrechetChainRemainderChecked : Bool
     exactBilinearProductRemainderChecked : Bool
     operatorNormPipelineChecked : Bool
+    dyadicSchurFromNormPipelineChecked : Bool
 
     quantitativeContractionUniquenessChecked : Bool
+    quantitativeBallConstructionChecked : Bool
     relativeInverseKernelChecked : Bool
     federbushAndFaddeevPopovIFTReuseChecked : Bool
     finiteSquareInverseUpgradeChecked : Bool
 
+    su2DefectPipelineChecked : Bool
+    resolventDefectPipelineChecked : Bool
+    resolvedTwoFamilyDefectsChecked : Bool
+    t3ResolvedFiveChannelReuseChecked : Bool
+
     hrBetaFiveLocalChannelsChecked : Bool
     hrBetaFiveChannelUniformAssemblyChecked : Bool
     integratedRound2CarrierChecked : Bool
+    analyticReductionLedgerChecked : Bool
 
     validationWrapperChecked : Bool
     producerWrapperChecked : Bool
@@ -52,19 +61,28 @@ record AuthoritativePhysicalClosureRound2Evidence
     contourPermutationSoundnessTypechecks : Set
     contourEndpointIndependenceTypechecks : Set
     fourDirectionCount24Typechecks : Set
+    periodicContourFamilyTypechecks : Set
 
     exactFrechetChainRemainderTypechecks : Set
     exactBilinearProductRemainderTypechecks : Set
     operatorNormPipelineTypechecks : Set
+    dyadicSchurFromNormPipelineTypechecks : Set
 
     quantitativeContractionUniquenessTypechecks : Set
+    quantitativeBallConstructionTypechecks : Set
     relativeInverseKernelTypechecks : Set
     sharedIFTReuseTypechecks : Set
     finiteSquareInverseUpgradeTypechecks : Set
 
+    su2DefectPipelineTypechecks : Set
+    resolventDefectPipelineTypechecks : Set
+    resolvedTwoFamilyDefectsTypechecks : Set
+    t3ResolvedFiveChannelReuseTypechecks : Set
+
     hrBetaFiveLocalChannelsTypechecks : Set
     hrBetaFiveChannelUniformAssemblyTypechecks : Set
     integratedRound2CarrierTypechecks : Set
+    analyticReductionLedgerTypechecks : Set
 
     validationWrapperTypechecks : Set
     producerWrapperTypechecks : Set
