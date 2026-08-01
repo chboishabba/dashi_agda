@@ -44,6 +44,11 @@ record SevenGroupFrontierReceipt : Set where
     spectrumDeterminantCompletionChecked : Bool
     finiteProofEngineeringLedgerChecked : Bool
 
+    physicalClosureRound2LedgerChecked : Bool
+    physicalClosureRound2ReceiptChecked : Bool
+    physicalClosureRound2ValidationChecked : Bool
+    integratedPhysicalClosureRound2Checked : Bool
+
     validationWrapperChecked : Bool
     producerWrapperChecked : Bool
     sevenGroupTranchePostulateFree : Bool
@@ -87,6 +92,11 @@ record AuthoritativeSevenGroupEvidence
     spectrumDeterminantCompletionTypechecks : Set
     finiteProofEngineeringLedgerTypechecks : Set
 
+    physicalClosureRound2LedgerTypechecks : Set
+    physicalClosureRound2ReceiptTypechecks : Set
+    physicalClosureRound2ValidationTypechecks : Set
+    integratedPhysicalClosureRound2Typechecks : Set
+
     validationWrapperTypechecks : Set
     producerWrapperTypechecks : Set
     trancheHasNoPostulatesOrUnsolvedMetas : Set
@@ -122,6 +132,9 @@ sevenGroupHRBetaTypecheckLevel = conditional
 
 finiteProofEngineeringTypecheckLevel : ProofLevel
 finiteProofEngineeringTypecheckLevel = conditional
+
+physicalClosureRound2TypecheckLevel : ProofLevel
+physicalClosureRound2TypecheckLevel = conditional
 
 sevenGroupValidationWrapperTypecheckLevel : ProofLevel
 sevenGroupValidationWrapperTypecheckLevel = conditional
