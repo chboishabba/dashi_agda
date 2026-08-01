@@ -7,6 +7,9 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 bash "$SCRIPT_DIR/check_gate4_physical_round3.sh"
 
 FILES=(
+  DASHI/Analysis/ConstructedRealBackendSpineExact.agda
+  DASHI/Analysis/BishopConstructedRealBackendExact.agda
+  DASHI/Foundations/BishopPowerSeriesElementaryBridgeExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109PhysicalScaleGeometryExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109SiteWeightIdentificationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109ContourMultiplicityExact.agda
