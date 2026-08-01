@@ -76,9 +76,9 @@ physicalBlockElements :
   ∀ {radius FineSite CoarseSite Spacing} →
   CMP109PhysicalScaleGeometry radius FineSite CoarseSite Spacing →
   CoarseSite → List FineSite
-physicalBlockElements geometry coarse =
+physicalBlockElements {radius} geometry coarse =
   Carrier.map (embedAt geometry coarse)
-    (Carrier.elements (Centered.centeredBlockFinite _))
+    (Carrier.elements (Centered.centeredBlockFinite radius))
 
 physicalBlockMembership :
   ∀ {radius FineSite CoarseSite Spacing} →
