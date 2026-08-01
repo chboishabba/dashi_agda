@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovQuantitativeIFTReuseExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -123,26 +124,11 @@ backgroundSliceUniqueOnQuantitativeBall :
   candidate ≡ Slice.toBackground (transition closure) tree
 backgroundSliceUniqueOnQuantitativeBall closure tree admissible candidate
     candidateIn candidateResidual =
-  Quantitative.trans
-    (Quantitative.metric (implicitFunction closure))
-    (Quantitative.reflexive
-      (Quantitative.metric (implicitFunction closure))
-      (Quantitative.distance
-        (Quantitative.metric (implicitFunction closure)) candidate candidate))
-    (Quantitative.reflexive
-      (Quantitative.metric (implicitFunction closure))
-      (Quantitative.distance
-        (Quantitative.metric (implicitFunction closure)) candidate candidate))
-  where
-  -- The equality proof itself is kept separate from the Bound-valued order
-  -- calculation above; this local helper avoids assuming proof irrelevance.
-  equality : candidate ≡ Slice.toBackground (transition closure) tree
-  equality =
-    Agda.Builtin.Equality.trans
-      (Quantitative.residualSolutionUniqueInQuantitativeBall
-        (implicitFunction closure) tree admissible candidate
-        candidateIn candidateResidual)
-      (implicitSolutionIsTransition closure tree admissible)
+  trans
+    (Quantitative.residualSolutionUniqueInQuantitativeBall
+      (implicitFunction closure) tree admissible candidate
+      candidateIn candidateResidual)
+    (implicitSolutionIsTransition closure tree admissible)
 
 record SharedQuantitativeIFTApplications
     (FederbushInput FederbushCentre FederbushResidual
