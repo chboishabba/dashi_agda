@@ -72,8 +72,17 @@ record FiveChannelSixteenthAllocation
   field
     budget : SixteenthBudgetAlgebra Bound
 
-    addMeaning : Five.add dataSet ≡ add budget
-    orderMeaning : Five.LessEqual dataSet ≡ LessEqual budget
+    physicalNestedFiveMeaning :
+      Five.add dataSet (oneSixteenth budget)
+        (Five.add dataSet (oneSixteenth budget)
+          (Five.add dataSet (oneSixteenth budget)
+            (Five.add dataSet (oneSixteenth budget)
+              (oneSixteenth budget))))
+      ≡ fiveSixteenths budget
+
+    physicalFiveBelowHalf :
+      Five.LessEqual dataSet
+        (fiveSixteenths budget) (half budget)
 
     curvatureBelowSixteenth :
       Five.LessEqual dataSet
@@ -104,35 +113,25 @@ epsilonTotalBelowFiveSixteenths {dataSet = dataSet} allocation =
   subst
     (λ upper → Five.LessEqual dataSet
       (Five.epsilonTotal dataSet) upper)
-    (nestedFiveSixteenths (budget allocation))
+    (physicalNestedFiveMeaning allocation)
     (subst
-      (λ selectedAdd →
-        Five.LessEqual dataSet
-          (Five.epsilonTotal dataSet)
-          (selectedAdd (oneSixteenth (budget allocation))
-            (selectedAdd (oneSixteenth (budget allocation))
-              (selectedAdd (oneSixteenth (budget allocation))
-                (selectedAdd (oneSixteenth (budget allocation))
-                  (oneSixteenth (budget allocation)))))))
-      (sym (addMeaning allocation))
-      (subst
-        (λ selectedTotal →
-          Five.LessEqual dataSet selectedTotal
+      (λ selectedTotal →
+        Five.LessEqual dataSet selectedTotal
+          (Five.add dataSet (oneSixteenth (budget allocation))
             (Five.add dataSet (oneSixteenth (budget allocation))
               (Five.add dataSet (oneSixteenth (budget allocation))
                 (Five.add dataSet (oneSixteenth (budget allocation))
-                  (Five.add dataSet (oneSixteenth (budget allocation))
-                    (oneSixteenth (budget allocation)))))))
-        (Five.epsilonTotalMeaning dataSet)
+                  (oneSixteenth (budget allocation)))))))
+      (Five.epsilonTotalMeaning dataSet)
+      (Five.addMonotone dataSet
+        (curvatureBelowSixteenth allocation)
         (Five.addMonotone dataSet
-          (curvatureBelowSixteenth allocation)
+          (transportBelowSixteenth allocation)
           (Five.addMonotone dataSet
-            (transportBelowSixteenth allocation)
+            (chartBelowSixteenth allocation)
             (Five.addMonotone dataSet
-              (chartBelowSixteenth allocation)
-              (Five.addMonotone dataSet
-                (gaugeBelowSixteenth allocation)
-                (constraintBelowSixteenth allocation)))))))
+              (gaugeBelowSixteenth allocation)
+              (constraintBelowSixteenth allocation))))))
 
 epsilonTotalBelowHalf :
   ∀ {Operator State Bound}
@@ -144,12 +143,7 @@ epsilonTotalBelowHalf :
 epsilonTotalBelowHalf {dataSet = dataSet} allocation =
   Five.transitive dataSet
     (epsilonTotalBelowFiveSixteenths allocation)
-    (subst
-      (λ relation → relation
-        (fiveSixteenths (budget allocation))
-        (half (budget allocation)))
-      (sym (orderMeaning allocation))
-      (fiveBelowHalf (budget allocation)))
+    (physicalFiveBelowHalf allocation)
 
 selfAdjointRemainderNormBelowHalf :
   ∀ {Operator State Bound}
