@@ -22,10 +22,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- 1--22. DOI: 10.1007/BF01239022.
 --
 -- The five fluctuation-Hessian channels and the five H-R_beta channels use
--- overlapping but non-identical terminology.  This module fixes one exhaustive
--- map to the underlying analytic families.  A physical instantiation must give
--- literal operator equalities for every constructor, preventing an epsilon
--- budget or determinant/localization term from being silently dropped.
+-- overlapping but non-identical terminology.  Family ownership is metadata for
+-- choosing a common majorant; it is not operator equality.  In particular,
+-- curvature, transport and chart are three distinct operators even though all
+-- are estimated by the SU(2)-geometry defect family.  This module keeps those
+-- notions separate and requires one literal operator for every constructor.
 ------------------------------------------------------------------------
 
 data PhysicalAnalyticFamily : Set where
@@ -76,49 +77,47 @@ hrBetaChannelCountFive = refl
 
 record PhysicalChannelOperatorIdentification (Operator : Set) : Set₁ where
   field
-    operatorForFamily : PhysicalAnalyticFamily → Operator
     t3Operator : T3Channel → Operator
     hrBetaOperator : HRBetaChannel → Operator
 
-    t3OperatorMeaning : ∀ channel →
-      t3Operator channel ≡ operatorForFamily (t3Family channel)
+    t3FamilyOwner : T3Channel → PhysicalAnalyticFamily
+    hrBetaFamilyOwner : HRBetaChannel → PhysicalAnalyticFamily
 
-    hrBetaOperatorMeaning : ∀ channel →
-      hrBetaOperator channel ≡ operatorForFamily (hrBetaFamily channel)
+    t3FamilyOwnerMeaning : ∀ channel →
+      t3FamilyOwner channel ≡ t3Family channel
+
+    hrBetaFamilyOwnerMeaning : ∀ channel →
+      hrBetaFamilyOwner channel ≡ hrBetaFamily channel
 
 open PhysicalChannelOperatorIdentification public
 
-t3CurvatureOperatorMeaning :
+t3CurvatureFamilyMeaning :
   ∀ {Operator}
     (identification : PhysicalChannelOperatorIdentification Operator) →
-  t3Operator identification curvature
-  ≡ operatorForFamily identification su2Geometry
-t3CurvatureOperatorMeaning identification =
-  t3OperatorMeaning identification curvature
+  t3FamilyOwner identification curvature ≡ su2Geometry
+t3CurvatureFamilyMeaning identification =
+  t3FamilyOwnerMeaning identification curvature
 
-t3GaugeOperatorMeaning :
+t3GaugeFamilyMeaning :
   ∀ {Operator}
     (identification : PhysicalChannelOperatorIdentification Operator) →
-  t3Operator identification gauge
-  ≡ operatorForFamily identification resolventConstraint
-t3GaugeOperatorMeaning identification =
-  t3OperatorMeaning identification gauge
+  t3FamilyOwner identification gauge ≡ resolventConstraint
+t3GaugeFamilyMeaning identification =
+  t3FamilyOwnerMeaning identification gauge
 
-hrBetaDeterminantOperatorMeaning :
+hrBetaDeterminantFamilyMeaning :
   ∀ {Operator}
     (identification : PhysicalChannelOperatorIdentification Operator) →
-  hrBetaOperator identification determinant
-  ≡ operatorForFamily identification spectralDeterminant
-hrBetaDeterminantOperatorMeaning identification =
-  hrBetaOperatorMeaning identification determinant
+  hrBetaFamilyOwner identification determinant ≡ spectralDeterminant
+hrBetaDeterminantFamilyMeaning identification =
+  hrBetaFamilyOwnerMeaning identification determinant
 
-hrBetaLocalizationOperatorMeaning :
+hrBetaLocalizationFamilyMeaning :
   ∀ {Operator}
     (identification : PhysicalChannelOperatorIdentification Operator) →
-  hrBetaOperator identification localization
-  ≡ operatorForFamily identification randomWalkLocalization
-hrBetaLocalizationOperatorMeaning identification =
-  hrBetaOperatorMeaning identification localization
+  hrBetaFamilyOwner identification localization ≡ randomWalkLocalization
+hrBetaLocalizationFamilyMeaning identification =
+  hrBetaFamilyOwnerMeaning identification localization
 
 physicalChannelEnumerationLevel : ProofLevel
 physicalChannelEnumerationLevel = computed
