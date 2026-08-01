@@ -100,7 +100,7 @@ pauliBracketNormBound convention left right =
                 (decode convention left) (decode convention right)))
             (multiply (vectorGeometry convention)
               leftNorm (lieNorm convention right)))
-        (normAsEuclidean convention left)
+        (sym (normAsEuclidean convention left))
         (subst
           (λ rightNorm →
             LessEqual (vectorGeometry convention)
@@ -110,7 +110,7 @@ pauliBracketNormBound convention left right =
               (multiply (vectorGeometry convention)
                 (norm (vectorGeometry convention) (decode convention left))
                 rightNorm))
-          (normAsEuclidean convention right)
+          (sym (normAsEuclidean convention right))
           (crossProductBound (vectorGeometry convention)
             (decode convention left) (decode convention right)))))
 
