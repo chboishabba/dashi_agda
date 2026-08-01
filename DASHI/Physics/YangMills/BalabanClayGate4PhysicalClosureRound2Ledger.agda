@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovQuantitative
 import DASHI.Physics.YangMills.BalabanClayGate4FederbushFaddeevPopovInverseStabilityExact as InverseReuse
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaFiveLocalChannelsExact as HRBeta
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2IntegratedExact as Integrated
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2AnalyticReductionLedger as AnalyticReduction
 
 ------------------------------------------------------------------------
 -- Physical closure round two.
@@ -28,7 +29,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2IntegratedEx
 -- proves that the repository's side-2 dyadic corner carrier is not literally
 -- CMP109's centred odd-side convention.  One integrated carrier now owns the
 -- convention bridge, quantitative IFTs, inverse data, entry bound and H-R_beta
--- channels together.
+-- channels together.  The analytic-reduction ledger additionally derives the
+-- global Schur, resolvent, SU(2)-defect and T3 five-channel consequences from
+-- their remaining component constants.
 ------------------------------------------------------------------------
 
 bfAverageBibliographyLevel = BF.bfAverageBibliographyLevel
@@ -112,6 +115,9 @@ physicalClosureRound2IntegratedInverseConsequencesLevel =
   Integrated.physicalClosureRound2IntegratedInverseConsequencesLevel
 physicalClosureRound2IntegratedNormAndRemainderLevel =
   Integrated.physicalClosureRound2IntegratedNormAndRemainderLevel
+
+physicalClosureRound2AnalyticReductionLedgerLevel =
+  AnalyticReduction.physicalClosureRound2AnalyticReductionLedgerLevel
 
 ------------------------------------------------------------------------
 -- Remaining physical constants and identifications.
