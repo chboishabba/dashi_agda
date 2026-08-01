@@ -257,7 +257,7 @@ record AxisSegment : Set where
   constructor axisSegment
   field
     axis : Axis4
-    signedCount : SignedCount
+    segmentCount : SignedCount
 
 open AxisSegment public
 
