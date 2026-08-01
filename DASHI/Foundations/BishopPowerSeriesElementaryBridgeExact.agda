@@ -87,18 +87,18 @@ record BishopElementaryPowerSeriesData : Set₁ where
 
     -- Coefficient recurrences pin the intended power series.  They prevent a
     -- caller from satisfying the convergence fields with unrelated sequences.
-    sineCoefficientRecurrenceExact : ∀ point index → Set
-    cosineCoefficientRecurrenceExact : ∀ point index → Set
-    exponentialCoefficientRecurrenceExact : ∀ point index → Set
-    negativeLogCoefficientRecurrenceExact : ∀ point index → Set
+    sineCoefficientRecurrenceExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
+    cosineCoefficientRecurrenceExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
+    exponentialCoefficientRecurrenceExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
+    negativeLogCoefficientRecurrenceExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
 
-    sineOddPowersAndFactorialsExact : ∀ point index → Set
-    cosineEvenPowersAndFactorialsExact : ∀ point index → Set
-    exponentialPowersAndFactorialsExact : ∀ point index → Set
-    negativeLogPowersOverPositiveIntegersExact : ∀ point index → Set
+    sineOddPowersAndFactorialsExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
+    cosineEvenPowersAndFactorialsExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
+    exponentialPowersAndFactorialsExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
+    negativeLogPowersOverPositiveIntegersExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
 
-    sineAlternatingSignsExact : ∀ point index → Set
-    cosineAlternatingSignsExact : ∀ point index → Set
+    sineAlternatingSignsExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
+    cosineAlternatingSignsExact : (point : Bishop.Bishopℝ) (index : Nat) → Set
 
 open BishopElementaryPowerSeriesData public
 
@@ -206,31 +206,31 @@ record BishopConfiguredElementaryTailProofs
     configuredRadius : Bishop.Bishopℝ
     InConfiguredRadius : Bishop.Bishopℝ → Set
 
-    sineTermMagnitudeDecreasing : ∀ point index →
+    sineTermMagnitudeDecreasing : (point : Bishop.Bishopℝ) (index : Nat) →
       InConfiguredRadius point → Set
-    cosineTermMagnitudeDecreasing : ∀ point index →
-      InConfiguredRadius point → Set
-
-    sineCubicSignedRemainder : ∀ point →
-      InConfiguredRadius point → Set
-    sineQuinticSignedRemainder : ∀ point →
-      InConfiguredRadius point → Set
-    cosineQuadraticSignedRemainder : ∀ point →
-      InConfiguredRadius point → Set
-    cosineQuarticSignedRemainder : ∀ point →
+    cosineTermMagnitudeDecreasing : (point : Bishop.Bishopℝ) (index : Nat) →
       InConfiguredRadius point → Set
 
-    sineCubicFirstOmittedBound : ∀ point →
+    sineCubicSignedRemainder : (point : Bishop.Bishopℝ) →
       InConfiguredRadius point → Set
-    sineQuinticFirstOmittedBound : ∀ point →
+    sineQuinticSignedRemainder : (point : Bishop.Bishopℝ) →
       InConfiguredRadius point → Set
-    cosineQuadraticFirstOmittedBound : ∀ point →
+    cosineQuadraticSignedRemainder : (point : Bishop.Bishopℝ) →
       InConfiguredRadius point → Set
-    cosineQuarticFirstOmittedBound : ∀ point →
+    cosineQuarticSignedRemainder : (point : Bishop.Bishopℝ) →
       InConfiguredRadius point → Set
 
-    negativeLogOneMinusBound : ∀ point inUnit → Set
-    positiveExponentialTail : ∀ point → Set
+    sineCubicFirstOmittedBound : (point : Bishop.Bishopℝ) →
+      InConfiguredRadius point → Set
+    sineQuinticFirstOmittedBound : (point : Bishop.Bishopℝ) →
+      InConfiguredRadius point → Set
+    cosineQuadraticFirstOmittedBound : (point : Bishop.Bishopℝ) →
+      InConfiguredRadius point → Set
+    cosineQuarticFirstOmittedBound : (point : Bishop.Bishopℝ) →
+      InConfiguredRadius point → Set
+
+    negativeLogOneMinusBound : (point : Bishop.Bishopℝ) (inUnit : InOpenUnitInterval dataSet point) → Set
+    positiveExponentialTail : (point : Bishop.Bishopℝ) → Set
     logarithmMonotoneOnPositive : Set
     logarithmExponentialInverse : Set
 

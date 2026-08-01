@@ -2,6 +2,8 @@ module DASHI.Analysis.BishopConstructedRealBackendExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ)
+open import Agda.Builtin.Unit using (⊤)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -107,7 +109,7 @@ bishopConstructiveRealBackend packaging = record
   { backendName = "viktorcsimma/bishop regular rational-sequence reals"
   ; real = bishopSetoidOrderedCompleteReal packaging
   ; functionSequences = bishopFunctionSequenceRealization packaging
-  ; quotientOptional = Set
+  ; quotientOptional = ⊤
   }
 
 record BishopBackendReceipt
