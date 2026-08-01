@@ -21,13 +21,12 @@ import DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact as HR
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. II.
 -- Cluster Expansions", Communications in Mathematical Physics 116 (1988),
--- 1--22. DOI: 10.1007/BF01239021.
+-- 1--22. DOI: 10.1007/BF01239022.
 --
 -- Tadeusz Bałaban,
--- "Renormalization Group Approach to Lattice Gauge Field Theories. III.
--- Convergence of Polymer Expansions", Communications in Mathematical
--- Physics 116 (1988), 1--22. Bibliographic identification remains to be
--- checked against the primary series before this secondary title is promoted.
+-- "Convergent Renormalization Expansions for Lattice Gauge Field Theories",
+-- Communications in Mathematical Physics 119 (1988), 243--285.
+-- DOI: 10.1007/BF01217741.
 --
 -- The local remainder is decomposed into determinant, interaction, chart,
 -- gauge and localization channels.  Channelwise absolute estimates imply the
@@ -85,14 +84,28 @@ record FiveLocalHRBetaChannels
     localHalfIncrementMeaning : ∀ cell →
       localHalfIncrement cell
       ≡ HR.finiteSum algebra
-          (HR.mapList (channelBudgetAt cell) allChannels)
+          ( determinantBudget cell
+          ∷ interactionBudget cell
+          ∷ chartBudget cell
+          ∷ gaugeBudget cell
+          ∷ localizationBudget cell
+          ∷ [] )
 
     totalRemainder totalHalfIncrement : Scalar
 
     totalRemainderMeaning :
       totalRemainder
       ≡ HR.finiteSum algebra
-          (HR.mapList localRemainder cells)
+          (HR.mapList
+            (λ cell →
+              HR.finiteSum algebra
+                ( determinantRemainder cell
+                ∷ interactionRemainder cell
+                ∷ chartRemainder cell
+                ∷ gaugeRemainder cell
+                ∷ localizationRemainder cell
+                ∷ [] ))
+            cells)
 
     totalHalfIncrementMeaning :
       totalHalfIncrement
@@ -116,7 +129,12 @@ record FiveLocalHRBetaChannels
   localRemainder : Cell → Scalar
   localRemainder cell =
     HR.finiteSum algebra
-      (HR.mapList (channelRemainderAt cell) allChannels)
+      ( determinantRemainder cell
+      ∷ interactionRemainder cell
+      ∷ chartRemainder cell
+      ∷ gaugeRemainder cell
+      ∷ localizationRemainder cell
+      ∷ [] )
 
 open FiveLocalHRBetaChannels public
 
