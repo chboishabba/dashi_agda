@@ -68,15 +68,23 @@ productNormSq left right =
   + productJ left right * productJ left right
   + productK left right * productK left right
 
-productNormMultiplicative : ∀ left right →
+productNormMultiplicative : ∀ (left right : Gap.RationalUnitQuaternion) →
   productNormSq left right
   ≡ Gap.quaternionNormSq left * Gap.quaternionNormSq right
 productNormMultiplicative left right =
-  ℚRing.solve-∀
+  regroup
     (Gap.realPart left) (Gap.imagI left) (Gap.imagJ left) (Gap.imagK left)
     (Gap.realPart right) (Gap.imagI right) (Gap.imagJ right) (Gap.imagK right)
+  where
+  regroup : (w1 x1 y1 z1 w2 x2 y2 z2 : ℚ) →
+    (w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2) * (w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2)
+    + (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2) * (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2)
+    + (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2) * (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2)
+    + (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2) * (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2)
+    ≡ (w1 * w1 + x1 * x1 + y1 * y1 + z1 * z1) * (w2 * w2 + x2 * x2 + y2 * y2 + z2 * z2)
+  regroup = ℚRing.solve-∀
 
-productUnitNorm : ∀ left right → productNormSq left right ≡ 1ℚ
+productUnitNorm : ∀ (left right : Gap.RationalUnitQuaternion) → productNormSq left right ≡ 1ℚ
 productUnitNorm left right =
   trans
     (productNormMultiplicative left right)
@@ -84,7 +92,10 @@ productUnitNorm left right =
       (cong₂ _*_
         (Gap.unitNormExact left)
         (Gap.unitNormExact right))
-      (ℚRing.solve-∀))
+      (regroup))
+  where
+  regroup : 1ℚ * 1ℚ ≡ 1ℚ
+  regroup = ℚRing.solve-∀
 
 multiplyQuaternion :
   Gap.RationalUnitQuaternion → Gap.RationalUnitQuaternion →
@@ -103,13 +114,17 @@ inverseNormSq value =
   + (0ℚ - Gap.imagJ value) * (0ℚ - Gap.imagJ value)
   + (0ℚ - Gap.imagK value) * (0ℚ - Gap.imagK value)
 
-inverseNormMatches : ∀ value →
+inverseNormMatches : ∀ (value : Gap.RationalUnitQuaternion) →
   inverseNormSq value ≡ Gap.quaternionNormSq value
 inverseNormMatches value =
-  ℚRing.solve-∀
-    (Gap.realPart value) (Gap.imagI value) (Gap.imagJ value) (Gap.imagK value)
+  regroup (Gap.realPart value) (Gap.imagI value) (Gap.imagJ value) (Gap.imagK value)
+  where
+  regroup : (w x y zVal : ℚ) →
+    w * w + (0ℚ - x) * (0ℚ - x) + (0ℚ - y) * (0ℚ - y) + (0ℚ - zVal) * (0ℚ - zVal)
+    ≡ w * w + x * x + y * y + zVal * zVal
+  regroup = ℚRing.solve-∀
 
-inverseUnitNorm : ∀ value → inverseNormSq value ≡ 1ℚ
+inverseUnitNorm : ∀ (value : Gap.RationalUnitQuaternion) → inverseNormSq value ≡ 1ℚ
 inverseUnitNorm value =
   trans (inverseNormMatches value) (Gap.unitNormExact value)
 
@@ -130,15 +145,23 @@ conjugateQuaternion gauge value =
     (multiplyQuaternion gauge value)
     (inverseQuaternion gauge)
 
-conjugationRealThroughGaugeNorm : ∀ gauge value →
+conjugationRealThroughGaugeNorm : ∀ (gauge value : Gap.RationalUnitQuaternion) →
   Gap.realPart (conjugateQuaternion gauge value)
   ≡ Gap.quaternionNormSq gauge * Gap.realPart value
 conjugationRealThroughGaugeNorm gauge value =
-  ℚRing.solve-∀
+  regroup
     (Gap.realPart gauge) (Gap.imagI gauge) (Gap.imagJ gauge) (Gap.imagK gauge)
     (Gap.realPart value) (Gap.imagI value) (Gap.imagJ value) (Gap.imagK value)
+  where
+  regroup : (w1 x1 y1 z1 w2 x2 y2 z2 : ℚ) →
+    (w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2) * w1
+    - (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2) * (0ℚ - x1)
+    - (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2) * (0ℚ - y1)
+    - (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2) * (0ℚ - z1)
+    ≡ (w1 * w1 + x1 * x1 + y1 * y1 + z1 * z1) * w2
+  regroup = ℚRing.solve-∀
 
-conjugationPreservesRealPart : ∀ gauge value →
+conjugationPreservesRealPart : ∀ (gauge value : Gap.RationalUnitQuaternion) →
   Gap.realPart (conjugateQuaternion gauge value)
   ≡ Gap.realPart value
 conjugationPreservesRealPart gauge value =
@@ -147,15 +170,18 @@ conjugationPreservesRealPart gauge value =
     (trans
       (cong (λ normValue → normValue * Gap.realPart value)
         (Gap.unitNormExact gauge))
-      (ℚRing.solve-∀ (Gap.realPart value)))
+      (regroup (Gap.realPart value)))
+  where
+  regroup : (v : ℚ) → 1ℚ * v ≡ v
+  regroup = ℚRing.solve-∀
 
-conjugationPreservesTraceDeficit : ∀ gauge value →
+conjugationPreservesTraceDeficit : ∀ (gauge value : Gap.RationalUnitQuaternion) →
   Gap.wilsonTraceDeficit (conjugateQuaternion gauge value)
   ≡ Gap.wilsonTraceDeficit value
 conjugationPreservesTraceDeficit gauge value =
   cong (1ℚ -_) (conjugationPreservesRealPart gauge value)
 
-conjugationPreservesChordalDistanceSq : ∀ gauge value →
+conjugationPreservesChordalDistanceSq : ∀ (gauge value : Gap.RationalUnitQuaternion) →
   Gap.literalChordalDistanceSq (conjugateQuaternion gauge value)
   ≡ Gap.literalChordalDistanceSq value
 conjugationPreservesChordalDistanceSq gauge value =
@@ -203,7 +229,7 @@ record LiteralPeriodicWilsonParameters
       threshold scale ≡ coupling scale * p0 scale
     physicalThresholdBridge : ∀ scale →
       scaleAdjustedThreshold scale ≡ etaSquared scale * threshold scale
-    lessEqualDecidable : ∀ left right → Dec (left ≤ right)
+    lessEqualDecidable : ∀ (left right : ℚ) → Dec (left ≤ right)
 
 open LiteralPeriodicWilsonParameters public
 
