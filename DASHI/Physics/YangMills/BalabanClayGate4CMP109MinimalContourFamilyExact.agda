@@ -2,12 +2,11 @@ module DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalContourFamilyExact w
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; suc)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Agda.Builtin.Nat using (suc)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredOddBlockCarrierExact as Centered
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embedding
@@ -38,7 +37,7 @@ minimalContourStart geometry =
   Embedding.embeddingCentre (Executable.embedding geometry)
 
 minimalContourFamily :
-  Executable.CenteredExecutableGeometry Minimal.radius →
+  (geometry : Executable.CenteredExecutableGeometry Minimal.radius) →
   Centered.CenteredBlockPoint4 Minimal.radius →
   List
     (Periodic.ExecutablePeriodicContour
@@ -53,8 +52,7 @@ listLengthAgreement : ∀ {A : Set} (values : List A) →
   Periodic.listLength values ≡ Contours.listLength values
 listLengthAgreement [] = refl
 listLengthAgreement (_ ∷ values) =
-  subst (λ result → suc (Periodic.listLength values) ≡ result)
-    (sym (listLengthAgreement values)) refl
+  cong suc (listLengthAgreement values)
 
 minimalContourFamilyCardinality :
   (geometry : Executable.CenteredExecutableGeometry Minimal.radius) →
