@@ -17,8 +17,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiveActivityTenthToHalfExact as A
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound5IntegratedExact as Integrated
 
 ------------------------------------------------------------------------
--- Round-five proof-level ledger.  Exact arithmetic and finite/order-theoretic
--- consequences are machine checked.  The remaining levels name only literal
+-- Round-five proof-level ledger. Exact arithmetic and finite/order-theoretic
+-- consequences are machine checked. The remaining levels name only literal
 -- local analytic estimates, never whole conclusions already derived above.
 ------------------------------------------------------------------------
 
@@ -84,3 +84,6 @@ physicalGaugeWeakeningSupportInputsLevel = conditional
 
 physicalGaugeConnectedActivityDecayInputsLevel : ProofLevel
 physicalGaugeConnectedActivityDecayInputsLevel = conditional
+
+physicalClosureRound5LedgerLevel : ProofLevel
+physicalClosureRound5LedgerLevel = machineChecked
