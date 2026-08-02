@@ -4,3 +4,4 @@ depend: standard-library
         bishop
         cubical-0.9
 include: .
+         bishop
