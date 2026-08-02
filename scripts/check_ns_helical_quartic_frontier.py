@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on the helical quartic candidate tranche."""
+"""Fail closed on the helical, coherence, and Stage-3 analytic tranche."""
 
 from __future__ import annotations
 
@@ -15,7 +15,116 @@ FILES = [
     "DASHI/Physics/Closure/NSTriadKNLocalizedHelicityCommutatorProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNAdaptiveLinearHelicalProbeProgram.agda",
     "DASHI/Physics/Closure/NSTriadKNHelicalDiscriminantMarginProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNLocalizedHelicityExactReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNFixedSymbolBalancedFamilyReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNTriadPhaseCoherenceFallback.agda",
+    "DASHI/Physics/Closure/NSTriadKNOffDiagonalReflectionMatrixCandidate.agda",
+    "DASHI/Physics/Closure/NSTriadKNMatrixCoherenceExactReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstantinFeffermanDirectionCoherenceProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNTriadDirectionAlignmentProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNPermanaAlignmentRateAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNObjectiveVortexCriteriaScopeAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNHelicalCandidateDecisionFork.agda",
+    "DASHI/Physics/Closure/NSTriadKNKiriukhinOrbitRowSumAdapter.agda",
+    "DASHI/Physics/Closure/NSTriadKNKiriukhinSymmetricStretchingCompanionAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNOrbitToDyadicShellBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteHelicityRowLifting.agda",
+    "DASHI/Physics/Closure/NSTriadKNWeightedSchurDualityProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresThreeFunctionSchurProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresExactTransposeSymbols.agda",
+    "DASHI/Physics/Closure/NSTriadKNTaoFrozenLegParaproductProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNBernsteinDirectionAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNFrozenLegDerivativeLerayLedger.agda",
+    "DASHI/Physics/Closure/NSTriadKNShellExponentLedgerProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNHighHighToLowCancellationProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNThreeWeightAffineCertificateProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNMultilinearSchurParaproductProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNTriadicDyadicExponentSystem.agda",
+    "DASHI/Physics/Closure/NSTriadKNKiriukhinWeightedSchurFiniteReconnaissance.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3KiriukhinWeightedSchurProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3AlgebraLaws.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3RelocationInstantiation.agda",
+    "DASHI/Physics/Closure/NSTriadKNLiteralVectorAdjointCandidates.agda",
+    "DASHI/Physics/Closure/NSTriadKNCherevanResonantParaproductAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNSymmetrisedFirstAdjointNullAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNFirstAdjointSobolevTailLedger.agda",
+    "DASHI/Physics/Closure/NSTriadKNRepositoryDyadicSeparationAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNThreeNumericShellLedgerStatus.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3AdjointTailIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3AdjointTailBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNCherevanCompanionScalingAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNCannoneTrilinearAntisymmetryAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianAlgebraProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNLerayAlgebraProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianNondegeneracy.agda",
+    "DASHI/Physics/Closure/NSTriadKNVectorAdjointUniquenessProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNCheskidovEguchiCountingTransferAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNFirstAdjointShellConvolutionProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNKatoPonceFirstAdjointFallback.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianScalingLaws.agda",
+    "DASHI/Physics/Closure/NSTriadKNOneLowShellExponentArchetypes.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteOverlapConstantProgram.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3HermitianAdditiveLaws.agda",
+    "DASHI/Physics/Closure/NSTriadKNLeraySelfAdjointness.agda",
+    "DASHI/Physics/Closure/NSTriadKNLiteralVectorAdjointPairingTheorems.agda",
+    "DASHI/Physics/Closure/NSTriadKNOrderedEuclideanL2Carrier.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3EuclideanSelfPairing.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3TransverseDifference.agda",
+    "DASHI/Physics/Closure/NSTriadKNRestrictedTransverseUniqueness.agda",
+    "DASHI/Physics/Closure/NSTriadKNComplex3RestrictedUniquenessInputs.agda",
+    "DASHI/Physics/Closure/NSTriadKNLerayContractionFromPythagoras.agda",
+    "DASHI/Physics/Closure/NSTriadKNExactDyadicShellGeometry.agda",
+    "DASHI/Physics/Closure/NSTriadKNSeparatedComponentLedger.agda",
+    "DASHI/Physics/Closure/NSTriadKNSeparatedComponentEndpointProfiles.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteOverlapCanonicalConstants.agda",
+    "DASHI/Physics/Closure/NSTriadKNHardDyadicShellOwner.agda",
+    "DASHI/Physics/Closure/NSTriadKNFirstAdjointCutoffUniformAssembly.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosOhDiagonalConvolutionAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNDAnconaCommutatorFallbackAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNComponentAffineConstraintLedger.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresComponentAssembly.agda",
+    "DASHI/Physics/Closure/NSTriadKNFinalCutoffUniformDualBoundAssembly.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3OrderedL2AnalyticIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3OrderedL2Bridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalOrderedFiniteL2.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalComplex3Separation.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalComplex3LerayPythagoras.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalDirectConvolutionBound.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalFiniteBernstein.agda",
+    "DASHI/Physics/Closure/NSTriadKNG3ShellIndexPartition.agda",
+    "DASHI/Physics/Closure/NSTriadKNFourierModeG3Bridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiniteOverlapTransportConstants.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstructiveRealPowerBridge.agda",
+    "DASHI/Physics/Closure/NSTriadKNFiveArchetypeUniformClosure.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresAffineWeightTemplate.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineRowFactorisation.agda",
+    "DASHI/Physics/Closure/NSTriadKNSmallEpsilonCertificate.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineCertificateExactAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNAffineCertificateUnderdetermination.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresTheorem3Adapter.agda",
+    "DASHI/Physics/Closure/NSTriadKNMurrayThesisCommitSourceInspection.agda",
+    "DASHI/Physics/Closure/NSTriadKNConstructiveRealCandidateComparison.agda",
+    "DASHI/Physics/Closure/NSTriadKNGrafakosTorresPowerLawOrientation.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationWeightedExponentIdentity.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationLiteralShellSubstitution.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFamilySubstitution.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationCheckACriterion.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationBaseSystemClassification.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationDirectionSystemClassification.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationAffineFarkasDecision.agda",
+    "DASHI/Physics/Closure/NSTriadKNOutputRelocationUnitWeightCheckA.agda",
+    "DASHI/Physics/Closure/NSTriadKNDongLiFrequencyLocalizedCoercivityAudit.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3ConstructiveSeriesOrientationIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationVerticalSlice.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3OutputRelocationExperimentIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNStage3AnalyticCompletionIntegration.agda",
+    "DASHI/Physics/Closure/NSTriadKNQuarticLyapunovStage3AnalyticCompletionBridge.agda",
 ]
+
+# The general DASHI balanced/unbalanced ternary and Base369 developments are
+# intentionally untouched. The Stage-3 status-only adapters introduced on
+# this branch remain excluded unless they become part of the proof-critical
+# dependency path.
 
 PROVENANCE_MARKERS = (
     "-- PROVENANCE",
@@ -23,15 +132,27 @@ PROVENANCE_MARKERS = (
     "-- Venue/year:",
     "-- Relationship:",
 )
-
-FORBIDDEN = (
-    "{!!}",
-    "?}",
-    "{-# TERMINATING #-}",
-    "{-# NON_TERMINATING #-}",
-)
-
+DOI_MARKERS = ("-- DOI:", "-- Journal DOI:", "-- arXiv/DataCite DOI:")
+FORBIDDEN = ("{!!}", "?}", "{-# TERMINATING #-}", "{-# NON_TERMINATING #-}")
 POSTULATE = re.compile(r"(?m)^\s*postulate(?:\s|$)")
+
+
+def run_verifier(root: Path, relative: str, label: str) -> str | None:
+    verifier = root / relative
+    if not verifier.is_file():
+        return f"missing {label}"
+    result = subprocess.run(
+        [sys.executable, str(verifier)],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        return f"{label} failed: " + (
+            result.stderr.strip() or result.stdout.strip()
+        )
+    return None
 
 
 def main() -> int:
@@ -61,33 +182,43 @@ def main() -> int:
                 )
         if "-- Authors:" not in text and "-- Author:" not in text:
             failures.append(f"{relative}: missing provenance author")
-        if "-- DOI:" not in text:
+        if not any(marker in text for marker in DOI_MARKERS):
             failures.append(f"{relative}: missing DOI status")
 
-    verifier = root / "scripts/ns_quartic_helicity_perturbed_counterexample.py"
-    if not verifier.is_file():
-        failures.append("missing global-helicity exact verifier")
-    else:
-        result = subprocess.run(
-            [sys.executable, str(verifier)],
-            cwd=root,
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-        if result.returncode:
-            failures.append(
-                "global-helicity verifier failed: "
-                + (result.stderr.strip() or result.stdout.strip())
-            )
+    verifiers = (
+        ("scripts/ns_quartic_helicity_perturbed_counterexample.py", "global-helicity exact verifier"),
+        ("scripts/ns_quartic_localized_helicity_reconnaissance.py", "localized-helicity verifier"),
+        ("scripts/ns_quartic_localized_helicity_extended_family.py", "extended localized-helicity verifier"),
+        ("scripts/ns_quartic_matrix_coherence_reconnaissance.py", "matrix-coherence verifier"),
+        ("scripts/ns_quartic_direction_coherence_audit.py", "direction-coherence verifier"),
+        ("scripts/ns_kiriukhin_weighted_schur_reconnaissance.py", "weighted-Schur verifier"),
+        ("scripts/ns_grafakos_torres_exponent_reconnaissance.py", "Grafakos--Torres exponent verifier"),
+        ("scripts/ns_kiriukhin_symmetric_companion_audit.py", "symmetric companion verifier"),
+        ("scripts/ns_tao_frozen_leg_paraproduct_audit.py", "frozen-leg verifier"),
+        ("scripts/ns_exact_transpose_high_high_audit.py", "transpose/high-high verifier"),
+        ("scripts/ns_symmetrised_first_adjoint_audit.py", "symmetrised first-adjoint verifier"),
+        ("scripts/ns_stage3_tail_threshold_affine_audit.py", "tail/threshold verifier"),
+        ("scripts/ns_stage3_classical_antisymmetry_audit.py", "classical antisymmetry verifier"),
+        ("scripts/ns_stage3_hermitian_convolution_audit.py", "Hermitian/convolution verifier"),
+        ("scripts/ns_stage3_shell_certificate_audit.py", "shell-certificate verifier"),
+        ("scripts/ns_stage3_vector_adjoint_pairing_audit.py", "vector-adjoint verifier"),
+        ("scripts/ns_stage3_ordered_l2_shell_audit.py", "ordered-l2/hard-shell verifier"),
+        ("scripts/ns_stage3_analytic_completion_audit.py", "analytic-completion verifier"),
+        ("scripts/ns_stage3_small_epsilon_affine_audit.py", "small-epsilon/factorisation verifier"),
+        ("scripts/check_ns_stage3_constructive_series_orientation.py", "output-relocation decision verifier"),
+    )
+    for relative, label in verifiers:
+        failure = run_verifier(root, relative, label)
+        if failure is not None:
+            failures.append(failure)
 
     if failures:
         print("\n".join(failures))
         return 1
-
     print(
-        f"checked {len(FILES)} helical quartic files: "
-        "no holes or postulates; exact global-helicity verifier passed"
+        f"checked {len(FILES)} proof-critical Agda files and {len(verifiers)} "
+        "exact verifiers: no holes, postulates, termination escapes, missing "
+        "provenance, or verifier failures"
     )
     return 0
 

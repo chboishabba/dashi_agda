@@ -1,4 +1,4 @@
-name: Representation hypervoxel Agda
+name: Representation hypervoxel and governance Agda
 
 on:
   pull_request:
@@ -15,7 +15,20 @@ on:
       - 'DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda'
       - 'DASHI/Geometry/RepresentationPrefixUltrametricBridge.agda'
       - 'DASHI/Physics/Closure/SU2SO3369HypervoxelBridge.agda'
+      - 'DASHI/Governance/AuthorityMandateCore.agda'
+      - 'DASHI/Governance/CouncilDelegationGraph.agda'
+      - 'DASHI/Governance/ExternalLegitimacyBoundary.agda'
+      - 'DASHI/Governance/LocalGlobalCouncilGluing.agda'
+      - 'DASHI/Governance/RelationalMandateFibre.agda'
+      - 'DASHI/Governance/SituatedConstituency.agda'
+      - 'DASHI/Governance/TransitionResidual.agda'
+      - 'DASHI/Governance/Sudan/RCEPPSourceBoundary.agda'
+      - 'DASHI/Governance/Sudan/RCEPPInstitutionalSurface.agda'
+      - 'DASHI/Governance/Sudan/RCEPPPromotionBoundary.agda'
+      - 'DASHI/Governance/Sudan/RCEPPRegression.agda'
+      - 'DASHI/Governance/Everything.agda'
       - 'scripts/check_representation_hypervoxel_spine.py'
+      - 'scripts/check_rcepp_governance_spine.py'
       - '.github/workflows/representation-hypervoxel-agda.yml'
   workflow_dispatch:
 
@@ -32,10 +45,12 @@ jobs:
           persist-credentials: false
       - name: Materialize Agda source dependencies
         run: git submodule update --init --depth 1 DCHoTT-Agda cubical
-      - name: Run fail-closed source and arithmetic audit
+      - name: Run fail-closed representation source and arithmetic audit
         run: python3 scripts/check_representation_hypervoxel_spine.py
+      - name: Run fail-closed RCEPP governance source audit
+        run: python3 scripts/check_rcepp_governance_spine.py
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
-      - name: Typecheck focused regression
+      - name: Typecheck focused representation regression
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Foundations/RepresentationHypervoxelRegression.agda
@@ -43,6 +58,14 @@ jobs:
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda
+      - name: Typecheck RCEPP governance regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/Sudan/RCEPPRegression.agda
+      - name: Typecheck governance aggregate wiring
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/Everything.agda
       - name: Typecheck authoritative aggregate wiring
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
