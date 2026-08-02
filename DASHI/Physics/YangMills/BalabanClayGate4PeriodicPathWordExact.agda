@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4PeriodicPathWordExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
@@ -39,10 +39,10 @@ pathDirectionsReachEndpoint Adjacency.pathStop = refl
 pathDirectionsReachEndpoint {right = right}
     (Adjacency.pathStep {left = left} {middle = middle}
       adjacent rest) =
-  subst
-    (λ firstStep →
-      Bond.walk firstStep (pathDirections rest) ≡ right)
-    (Adjacency.directionReconstructsBlocks left middle adjacent)
+  trans
+    (cong
+      (λ firstStep → Bond.walk firstStep (pathDirections rest))
+      (Adjacency.directionReconstructsBlocks left middle adjacent))
     (pathDirectionsReachEndpoint rest)
 
 pathWordLength :
