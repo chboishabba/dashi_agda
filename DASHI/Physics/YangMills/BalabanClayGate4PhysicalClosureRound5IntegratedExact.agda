@@ -12,6 +12,8 @@ import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PhysicalScaleGeometryExact as Physical
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact as Minimal
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalEquation012Exact as MinimalEquation012
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedPathFormulaExact as Printed
 import DASHI.Physics.YangMills.BalabanClayGate4BishopSU2HalfRadiusInstantiationExact as BishopSU2
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusScalarEnvelopeExact as HalfRadius
 import DASHI.Physics.YangMills.BalabanClayGate4NewtonFourChannelQuarterExact as Newton
@@ -31,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiveActivityTenthToHalfExact as A
 -- previous physical cut.
 --
 -- * CMP109 uses the minimal source-admissible L=13 repository torus.
+-- * Equation (0.12) uses its literal 28561-site block and reciprocal weight.
 -- * SU(2) sine and cosine are the actual Bishop power-series values.
 -- * Federbush retains the conservative four-channel quarter budget.
 -- * Faddeev--Popov/background gauge uses Bałaban Proposition 5's source-exact
@@ -45,6 +48,11 @@ record PhysicalClosureRound5Inputs : Set₂ where
       Physical.CMP109PhysicalScaleGeometry
         Minimal.radius Minimal.RepositoryFineSite
         Minimal.RepositoryCoarseSite Nat
+
+    AveragingField AveragingGroup AveragingLie : Set
+    minimalEquation012Inputs :
+      MinimalEquation012.MinimalEquation012Inputs
+        AveragingField AveragingGroup AveragingLie
 
     bishopSeriesData : Elementary.BishopElementaryPowerSeriesData
     bishopHalfRadius : BishopSU2.BishopSU2HalfRadiusInputs bishopSeriesData
@@ -105,6 +113,17 @@ round5MinimalBlockCardinality inputs coarse =
 round5MinimalSiteWeightReciprocal :
   Minimal.siteWeightℚ * Minimal.volumeℚ ≡ 1ℚ
 round5MinimalSiteWeightReciprocal = Minimal.minimalSiteWeightIsReciprocal
+
+round5MinimalEquation012UsesPhysicalWeight :
+  (inputs : PhysicalClosureRound5Inputs) →
+  ∀ coarseBond →
+  Printed.blockWeight
+    (MinimalEquation012.minimalEquation012PrintedData
+      (minimalEquation012Inputs inputs)) coarseBond
+  ≡ Minimal.siteWeightℚ
+round5MinimalEquation012UsesPhysicalWeight inputs =
+  MinimalEquation012.minimalEquation012BlockWeight
+    (minimalEquation012Inputs inputs)
 
 round5BishopScalarEnvelope :
   (inputs : PhysicalClosureRound5Inputs) →
