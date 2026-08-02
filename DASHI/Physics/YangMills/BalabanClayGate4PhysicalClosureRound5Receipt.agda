@@ -11,17 +11,23 @@ record PhysicalClosureRound5Receipt : Set where
   field
     repositoryHead : String
 
-    cmp109RadiusOneSplitFibreChecked : Bool
-    cmp109RadiusOneWeightChecked : Bool
+    cmp109RadiusOneCalibrationChecked : Bool
+    cmp109MinimalL13RepositoryScaleChecked : Bool
+    cmp109MinimalWeightChecked : Bool
 
     alternatingTaylorEnvelopeChecked : Bool
+    BishopSeriesFunctionIdentificationChecked : Bool
     signedTailSU2EnvelopeChecked : Bool
     seriesLipschitzAssemblyChecked : Bool
-    fourChannelNewtonQuarterChecked : Bool
+    FederbushFourChannelQuarterChecked : Bool
+
+    BalabanGaugeProposition5Checked : Bool
+    gaugeHalfContractionBallChecked : Bool
 
     WilsonQuadraticSecondDifferenceChecked : Bool
     functionalSecondVariationChecked : Bool
     sandwichFormBoundChecked : Bool
+    fiveSandwichChannelAssemblyChecked : Bool
 
     WilsonBadCubePenaltyChecked : Bool
     gaugeCubicTaylorSumChecked : Bool
@@ -41,17 +47,23 @@ open PhysicalClosureRound5Receipt public
 record AuthoritativePhysicalClosureRound5Evidence
     (receipt : PhysicalClosureRound5Receipt) : Set₁ where
   field
-    cmp109RadiusOneSplitFibreTypechecks : Set
-    cmp109RadiusOneWeightTypechecks : Set
+    cmp109RadiusOneCalibrationTypechecks : Set
+    cmp109MinimalL13RepositoryScaleTypechecks : Set
+    cmp109MinimalWeightTypechecks : Set
 
     alternatingTaylorEnvelopeTypechecks : Set
+    BishopSeriesFunctionIdentificationTypechecks : Set
     signedTailSU2EnvelopeTypechecks : Set
     seriesLipschitzAssemblyTypechecks : Set
-    fourChannelNewtonQuarterTypechecks : Set
+    FederbushFourChannelQuarterTypechecks : Set
+
+    BalabanGaugeProposition5Typechecks : Set
+    gaugeHalfContractionBallTypechecks : Set
 
     WilsonQuadraticSecondDifferenceTypechecks : Set
     functionalSecondVariationTypechecks : Set
     sandwichFormBoundTypechecks : Set
+    fiveSandwichChannelAssemblyTypechecks : Set
 
     WilsonBadCubePenaltyTypechecks : Set
     gaugeCubicTaylorSumTypechecks : Set
