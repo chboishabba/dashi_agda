@@ -88,7 +88,7 @@ record CriticalMapFiniteBackgroundClosure
       InCriticalBall index h → InCriticalBall index (Φ index h)
 
     uniformCriticalFixedPointExists : ∀ index →
-      Unique (λ h → InCriticalBall index h × Φ index h ≡ h)
+      Unique (λ h → InCriticalBall index h × (Φ index h ≡ h))
 
     -- F11.
     EulerLagrange : Index → State → Set

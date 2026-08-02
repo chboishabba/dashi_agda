@@ -192,7 +192,7 @@ record LowerIntervalAdmissibility
   field
     initialScale : Scale
     iterateScale : Nat → Scale
-    iterateZero : iterateScale zero ≡ initialScale
+    iterateZero : iterateScale Agda.Builtin.Nat.zero ≡ initialScale
     iterateSuccessor : ∀ count →
       iterateScale (suc count) ≡ next successor (iterateScale count)
 
