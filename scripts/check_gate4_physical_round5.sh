@@ -13,8 +13,12 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4AlternatingTaylorEnvelopeExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SU2HalfRadiusFromSignedTailsExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4BishopSU2HalfRadiusInstantiationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SeriesLipschitzAssemblyExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4NewtonFourChannelQuarterExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4HalfContractionInvariantBallExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4BalabanGaugeFixingProposition5Exact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4GaugeFixingProposition5ToHalfBallExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4RationalWilsonQuadraticSecondDifferenceExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalFunctionalSecondVariationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SandwichOperatorToFormBoundExact.agda
