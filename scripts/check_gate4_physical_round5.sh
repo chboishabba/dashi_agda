@@ -12,6 +12,8 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneRepositoryTorusExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneWeightExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109MinimalContourFamilyExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109MinimalAveragedContourExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109MinimalEquation012Exact.agda
   DASHI/Physics/YangMills/BalabanClayGate4AlternatingTaylorEnvelopeExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SU2HalfRadiusFromSignedTailsExact.agda
