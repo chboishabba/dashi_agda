@@ -8,8 +8,12 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepository
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneWeightExact as CalibrationWeight
 import DASHI.Physics.YangMills.BalabanClayGate4AlternatingTaylorEnvelopeExact as Taylor
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusFromSignedTailsExact as SU2
+import DASHI.Physics.YangMills.BalabanClayGate4BishopSU2HalfRadiusInstantiationExact as BishopSU2
 import DASHI.Physics.YangMills.BalabanClayGate4SeriesLipschitzAssemblyExact as Lipschitz
 import DASHI.Physics.YangMills.BalabanClayGate4NewtonFourChannelQuarterExact as Newton
+import DASHI.Physics.YangMills.BalabanClayGate4HalfContractionInvariantBallExact as HalfBall
+import DASHI.Physics.YangMills.BalabanClayGate4BalabanGaugeFixingProposition5Exact as GaugeSource
+import DASHI.Physics.YangMills.BalabanClayGate4GaugeFixingProposition5ToHalfBallExact as GaugeBridge
 import DASHI.Physics.YangMills.BalabanClayGate4RationalWilsonQuadraticSecondDifferenceExact as WilsonHessian
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalFunctionalSecondVariationExact as Functional
 import DASHI.Physics.YangMills.BalabanClayGate4SandwichOperatorToFormBoundExact as Sandwich
@@ -43,10 +47,18 @@ alternatingTaylorEnvelopeLevel = Taylor.alternatingTaylorEnvelopeLevel
 positiveTaylorTailEnvelopeLevel = Taylor.positiveTaylorTailEnvelopeLevel
 su2HalfRadiusSignedTailConstructionLevel = SU2.su2HalfRadiusSignedTailConstructionLevel
 su2HalfRadiusTaylorInequalitiesDerivedLevel = SU2.su2HalfRadiusTaylorInequalitiesDerivedLevel
+bishopSU2PowerSeriesFunctionIdentificationLevel = BishopSU2.bishopSU2PowerSeriesFunctionIdentificationLevel
+bishopSU2HalfRadiusEnvelopeAssemblyLevel = BishopSU2.bishopSU2HalfRadiusEnvelopeAssemblyLevel
 finiteSeriesLipschitzAssemblyLevel = Lipschitz.finiteSeriesLipschitzAssemblyLevel
 seriesLimitLipschitzPassageLevel = Lipschitz.seriesLimitLipschitzPassageLevel
 newtonFourChannelQuarterArithmeticLevel = Newton.newtonFourChannelQuarterArithmeticLevel
-federbushFaddeevPopovFourChannelReuseLevel = Newton.federbushFaddeevPopovFourChannelReuseLevel
+
+halfContractionInvariantArithmeticLevel = HalfBall.halfContractionInvariantArithmeticLevel
+halfContractionBallAdapterLevel = HalfBall.halfContractionBallAdapterLevel
+balabanGaugeFixingProposition5SourceLevel = GaugeSource.balabanGaugeFixingProposition5SourceLevel
+balabanGaugeFixingHalfContractionProfileLevel = GaugeSource.balabanGaugeFixingHalfContractionProfileLevel
+balabanGaugeFixingMetricTransportLevel = GaugeBridge.balabanGaugeFixingMetricTransportLevel
+balabanGaugeFixingInvariantBallLevel = GaugeBridge.balabanGaugeFixingInvariantBallLevel
 
 wilsonAmbientParallelogramLevel = WilsonHessian.wilsonAmbientParallelogramLevel
 wilsonQuadraticSecondDifferenceLevel = WilsonHessian.wilsonQuadraticSecondDifferenceLevel
@@ -70,17 +82,25 @@ fiveActivityHalfAllocationLevel = Activity.fiveActivityHalfAllocationLevel
 
 physicalClosureRound5IntegratedCarrierLevel = Integrated.physicalClosureRound5IntegratedCarrierLevel
 physicalClosureRound5MinimalCMP109Level = Integrated.physicalClosureRound5MinimalCMP109Level
-physicalClosureRound5SignedTailAndNewtonLevel = Integrated.physicalClosureRound5SignedTailAndNewtonLevel
+physicalClosureRound5BishopAndFederbushLevel = Integrated.physicalClosureRound5BishopAndFederbushLevel
+physicalClosureRound5GaugeFixingSourceProfileLevel = Integrated.physicalClosureRound5GaugeFixingSourceProfileLevel
 physicalClosureRound5FunctionalAndPolymerLevel = Integrated.physicalClosureRound5FunctionalAndPolymerLevel
 
 ------------------------------------------------------------------------
 -- Irreducible physical inhabitants after round five.
 ------------------------------------------------------------------------
 
-physicalBishopSignedTailInputsLevel = SU2.physicalBishopSignedTailInputsLevel
+physicalBishopHalfRadiusSignedTailCertificateInputsLevel =
+  BishopSU2.physicalBishopHalfRadiusSignedTailCertificateInputsLevel
 physicalBishopOrderClosedLimitInputsLevel = Lipschitz.physicalBishopOrderClosedLimitInputsLevel
 physicalFederbushChannelEstimatesInputsLevel = Newton.physicalFederbushChannelEstimatesInputsLevel
-physicalFaddeevPopovChannelEstimatesInputsLevel = Newton.physicalFaddeevPopovChannelEstimatesInputsLevel
+
+physicalGaugeFixingRepositoryIdentificationInputsLevel =
+  GaugeSource.physicalGaugeFixingRepositoryIdentificationInputsLevel
+physicalGaugeFixingMetricIdentificationInputsLevel =
+  GaugeBridge.physicalGaugeFixingMetricIdentificationInputsLevel
+physicalGaugeFixingCentreForcingInputsLevel =
+  GaugeBridge.physicalGaugeFixingCentreForcingInputsLevel
 
 physicalPlaquetteDerivativeChainRuleInputsLevel = WilsonHessian.physicalPlaquetteDerivativeChainRuleInputsLevel
 physicalWilsonTransportChartDerivativeInputsLevel = Functional.physicalWilsonTransportChartDerivativeInputsLevel
