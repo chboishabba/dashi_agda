@@ -31,6 +31,8 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Receipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Validation.agda
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerPhysicalClosureRound6Advance.agda
+  DASHI/Physics/YangMills/BalabanClayGate4SevenGroupRound6AdvanceLedger.agda
+  DASHI/Physics/YangMills/BalabanClayGate4SevenGroupRound6AdvanceReceipt.agda
   DASHI/Physics/YangMills/BalabanClayGate4SevenGroupValidation.agda
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerSevenGroupAdvance.agda
 )
