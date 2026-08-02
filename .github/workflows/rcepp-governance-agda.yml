@@ -1,20 +1,8 @@
-name: Representation hypervoxel and governance Agda
+name: RCEPP and revolutionary governance Agda
 
 on:
   pull_request:
     paths:
-      - 'DASHI/Cognition/SituatedFrameMetacognitionBoundary.agda'
-      - 'DASHI/Everything.agda'
-      - 'DASHI/Foundations/CanonicalHalfFrameScaleValuation.agda'
-      - 'DASHI/Foundations/LiftPolarityPathComposition.agda'
-      - 'DASHI/Foundations/RadixValuationStageBridge.agda'
-      - 'DASHI/Foundations/RecursiveRadixHypervoxel.agda'
-      - 'DASHI/Foundations/RepresentationChartInvariant.agda'
-      - 'DASHI/Foundations/RepresentationHypervoxelRegression.agda'
-      - 'DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda'
-      - 'DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda'
-      - 'DASHI/Geometry/RepresentationPrefixUltrametricBridge.agda'
-      - 'DASHI/Physics/Closure/SU2SO3369HypervoxelBridge.agda'
       - 'DASHI/Governance/AuthorityMandateCore.agda'
       - 'DASHI/Governance/CouncilDelegationGraph.agda'
       - 'DASHI/Governance/ExternalLegitimacyBoundary.agda'
@@ -22,14 +10,19 @@ on:
       - 'DASHI/Governance/RelationalMandateFibre.agda'
       - 'DASHI/Governance/SituatedConstituency.agda'
       - 'DASHI/Governance/TransitionResidual.agda'
+      - 'DASHI/Governance/RevolutionarySourceAtlas.agda'
+      - 'DASHI/Governance/RevolutionaryPracticeBraid.agda'
+      - 'DASHI/Governance/TraumaMemorySublationBoundary.agda'
+      - 'DASHI/Governance/ComparativeCrisisClimateAtlas.agda'
+      - 'DASHI/Governance/RevolutionaryAdjunctRegression.agda'
       - 'DASHI/Governance/Sudan/RCEPPSourceBoundary.agda'
       - 'DASHI/Governance/Sudan/RCEPPInstitutionalSurface.agda'
       - 'DASHI/Governance/Sudan/RCEPPPromotionBoundary.agda'
       - 'DASHI/Governance/Sudan/RCEPPRegression.agda'
       - 'DASHI/Governance/Everything.agda'
-      - 'scripts/check_representation_hypervoxel_spine.py'
+      - 'Docs/support/reference/RCEPPGovernanceFibreSpine.md'
       - 'scripts/check_rcepp_governance_spine.py'
-      - '.github/workflows/representation-hypervoxel-agda.yml'
+      - '.github/workflows/rcepp-governance-agda.yml'
   workflow_dispatch:
 
 jobs:
@@ -38,35 +31,33 @@ jobs:
     env:
       AGDA_BIN: agda
       DASHI_REPO_ROOT: ${{ github.workspace }}
-      AGDA_LOG_PATH: ${{ github.workspace }}/.cache/representation-hypervoxel-agda.log
+      AGDA_LOG_PATH: ${{ github.workspace }}/.cache/rcepp-governance-agda.log
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
       - name: Materialize Agda source dependencies
         run: git submodule update --init --depth 1 DCHoTT-Agda cubical
-      - name: Run fail-closed representation source and arithmetic audit
-        run: python3 scripts/check_representation_hypervoxel_spine.py
-      - name: Run fail-closed RCEPP governance source audit
+      - name: Run fail-closed governance source audit
         run: python3 scripts/check_rcepp_governance_spine.py
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
-      - name: Typecheck focused representation regression
+      - name: Typecheck coarse mandate fibre
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
-            DASHI/Foundations/RepresentationHypervoxelRegression.agda
-      - name: Typecheck downstream 369 consumer wiring
+            DASHI/Governance/RelationalMandateFibre.agda
+      - name: Typecheck local-global council gluing
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
-            DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda
-      - name: Typecheck RCEPP governance regression
+            DASHI/Governance/LocalGlobalCouncilGluing.agda
+      - name: Typecheck RCEPP aggregate regression
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Governance/Sudan/RCEPPRegression.agda
-      - name: Typecheck governance aggregate wiring
+      - name: Typecheck revolutionary adjunct regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/RevolutionaryAdjunctRegression.agda
+      - name: Typecheck governance aggregate
         run: |
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
             DASHI/Governance/Everything.agda
-      - name: Typecheck authoritative aggregate wiring
-        run: |
-          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
-            DASHI/Everything.agda
