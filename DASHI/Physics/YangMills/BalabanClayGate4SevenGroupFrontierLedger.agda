@@ -18,6 +18,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4T3TreeGaugeSpectralDeterminantExa
 import DASHI.Physics.YangMills.BalabanClayGate4HRBetaHalfRemainderDominanceExact as HRBeta
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteProofEngineeringCompletionLedger as FiniteCompletion
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound2Ledger as PhysicalClosure2
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound5Ledger as PhysicalClosure5
 
 ------------------------------------------------------------------------
 -- Previous exact frontier remains imported.
@@ -142,6 +143,20 @@ finiteProofEngineeringCompletionLedgerLevel =
 
 physicalClosureRound2LedgerLevel =
   PhysicalClosure2.physicalClosureRound2LedgerLevel
+
+physicalClosureRound5LedgerLevel =
+  PhysicalClosure5.physicalClosureRound5LedgerLevel
+
+cmp109MinimalOddScaleAdmissibilityLevel =
+  PhysicalClosure5.cmp109MinimalOddScaleAdmissibilityLevel
+bishopSU2PowerSeriesFunctionIdentificationLevel =
+  PhysicalClosure5.bishopSU2PowerSeriesFunctionIdentificationLevel
+balabanGaugeFixingHalfContractionProfileLevel =
+  PhysicalClosure5.balabanGaugeFixingHalfContractionProfileLevel
+fiveSandwichChannelFormAssemblyLevel =
+  PhysicalClosure5.fiveSandwichChannelFormAssemblyLevel
+fiveActivityHalfAllocationLevel =
+  PhysicalClosure5.fiveActivityHalfAllocationLevel
 
 ------------------------------------------------------------------------
 -- Exact remaining physical inhabitants.
