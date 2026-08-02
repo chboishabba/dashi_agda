@@ -54,6 +54,10 @@ record PhysicalClosureRound5Inputs : Set₂ where
       MinimalEquation012.MinimalEquation012Inputs
         AveragingField AveragingGroup AveragingLie
 
+    equation012GeometryMeaning :
+      MinimalEquation012.geometry minimalEquation012Inputs
+      ≡ minimalGeometry
+
     bishopSeriesData : Elementary.BishopElementaryPowerSeriesData
     bishopHalfRadius : BishopSU2.BishopSU2HalfRadiusInputs bishopSeriesData
 
@@ -97,6 +101,12 @@ record PhysicalClosureRound5Inputs : Set₂ where
     activityAllocation : Activity.FiveActivityTenthAllocation activityOrder
 
 open PhysicalClosureRound5Inputs public
+
+round5Equation012GeometryOwned :
+  (inputs : PhysicalClosureRound5Inputs) →
+  MinimalEquation012.geometry (minimalEquation012Inputs inputs)
+  ≡ minimalGeometry inputs
+round5Equation012GeometryOwned = equation012GeometryMeaning
 
 round5MinimalBlockCardinality :
   (inputs : PhysicalClosureRound5Inputs) →
