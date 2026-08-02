@@ -45,49 +45,49 @@ record HolonomyDifferentialAlgebra
 open HolonomyDifferentialAlgebra public
 
 holonomy :
-  ∀ {Edge Group Lie} →
+  ∀ {Edge Group Lie : Set} →
   HolonomyDifferentialAlgebra Group Lie →
   (Edge → Group) → List Edge → Group
-holonomy algebra field [] = identityGroup algebra
-holonomy algebra field (edge ∷ edges) =
-  multiplyGroup algebra (field edge) (holonomy algebra field edges)
+holonomy algebra connection [] = identityGroup algebra
+holonomy algebra connection (edge ∷ edges) =
+  multiplyGroup algebra (connection edge) (holonomy algebra connection edges)
 
 leftTrivializedHolonomyDerivative :
-  ∀ {Edge Group Lie} →
+  ∀ {Edge Group Lie : Set} →
   HolonomyDifferentialAlgebra Group Lie →
   (Edge → Group) → (Edge → Lie) → List Edge → Lie
-leftTrivializedHolonomyDerivative algebra field variation [] =
+leftTrivializedHolonomyDerivative algebra connection variation [] =
   zeroLie algebra
-leftTrivializedHolonomyDerivative algebra field variation (edge ∷ edges) =
+leftTrivializedHolonomyDerivative algebra connection variation (edge ∷ edges) =
   addLie algebra
     (variation edge)
-    (adjoint algebra (field edge)
-      (leftTrivializedHolonomyDerivative algebra field variation edges))
+    (adjoint algebra (connection edge)
+      (leftTrivializedHolonomyDerivative algebra connection variation edges))
 
-record All {A : Set} (Predicate : A → Set) : List A → Set where
+data All {A : Set} (Predicate : A → Set) : List A → Set where
   allNil : All Predicate []
   allCons : ∀ {value values} →
     Predicate value → All Predicate values →
     All Predicate (value ∷ values)
 
 variationZeroOnPath :
-  ∀ {Edge Group Lie}
+  ∀ {Edge Group Lie : Set}
     (algebra : HolonomyDifferentialAlgebra Group Lie)
-    (field : Edge → Group) (variation : Edge → Lie)
+    (connection : Edge → Group) (variation : Edge → Lie)
     (edges : List Edge) →
   All (λ edge → variation edge ≡ zeroLie algebra) edges →
-  leftTrivializedHolonomyDerivative algebra field variation edges
+  leftTrivializedHolonomyDerivative algebra connection variation edges
   ≡ zeroLie algebra
-variationZeroOnPath algebra field variation [] allNil = refl
-variationZeroOnPath algebra field variation (edge ∷ edges)
+variationZeroOnPath algebra connection variation [] allNil = refl
+variationZeroOnPath algebra connection variation (edge ∷ edges)
     (allCons edgeZero restZero) =
   trans
     (cong
       (addLie algebra (variation edge))
       (trans
-        (cong (adjoint algebra (field edge))
-          (variationZeroOnPath algebra field variation edges restZero))
-        (adjointZero algebra (field edge))))
+        (cong (adjoint algebra (connection edge))
+          (variationZeroOnPath algebra connection variation edges restZero))
+        (adjointZero algebra (connection edge))))
     (trans
       (cong (λ head → addLie algebra head (zeroLie algebra)) edgeZero)
       (addZeroLeft algebra (zeroLie algebra)))
