@@ -96,9 +96,9 @@ literalPeriodicBondGaugeRealization :
     (gauge : Bond.PeriodicSiteGauge n Value) →
   Bond.PeriodicBondGaugeRealization n Value group
 literalPeriodicBondGaugeRealization group stepLaws links gauge = record
-  { Bond.PeriodicBondGaugeRealization.bondField = links
-  ; Bond.PeriodicBondGaugeRealization.gauge = gauge
-  ; Bond.PeriodicBondGaugeRealization.orientedLinkGaugeCovariant =
+  { bondField = links
+  ; gauge = gauge
+  ; orientedLinkGaugeCovariant =
       λ { site (pair axis true) → refl
         ; site (pair axis false) →
             negativeOrientedLinkGaugeCovariant
