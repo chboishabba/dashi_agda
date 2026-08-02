@@ -182,7 +182,7 @@ relativeLoopCloses geometry coarseBond fineSite sourceMembership =
               (blockSide geometry) (second coarseBond)))
         ≡ embedCoarseSite geometry
             (Endpoint.sourceEndpoint coarseBond))
-      (sourceContourEndpoint geometry coarseBond fineSite sourceMembership)
+      (sym (sourceContourEndpoint geometry coarseBond fineSite sourceMembership))
       (trans
         (walkAppend fineSite
           (positiveStraightDirections
@@ -204,8 +204,8 @@ relativeLoopCloses geometry coarseBond fineSite sourceMembership =
                   (blockSide geometry) (second coarseBond))
               ≡ embedCoarseSite geometry
                   (Endpoint.sourceEndpoint coarseBond))
-            (targetContourEndpoint geometry
-              coarseBond fineSite sourceMembership)
+            (sym (targetContourEndpoint geometry
+              coarseBond fineSite sourceMembership))
             (coarseReverseEndpoint geometry coarseBond)))))
 
 ------------------------------------------------------------------------
@@ -265,30 +265,31 @@ record PrintedCMP109Equation04Data
 open PrintedCMP109Equation04Data public
 
 sumList :
-  ∀ {A Scalar} → Scalar → (Scalar → Scalar → Scalar) →
+  (A : Set) (Scalar : Set) →
+  Scalar → (Scalar → Scalar → Scalar) →
   List A → (A → Scalar) → Scalar
-sumList zero add [] term = zero
-sumList zero add (value ∷ values) term =
-  add (term value) (sumList zero add values term)
+sumList A Scalar scalar add [] term = scalar
+sumList A Scalar scalar add (value ∷ values) term =
+  add (term value) (sumList A Scalar scalar add values term)
 
 segmentProduct :
   ∀ {Field CoarseBond FineSite FineBond Path Group Lie Scalar}
     (dataSet : PrintedCMP109Equation04Data
       Field CoarseBond FineSite FineBond Path Group Lie Scalar) →
   Field → List (PrintedLoopSegment Path FineBond CoarseBond) → Group
-segmentProduct dataSet field [] = identityGroup dataSet
-segmentProduct dataSet field (segment ∷ segments) =
+segmentProduct dataSet coarseField [] = identityGroup dataSet
+segmentProduct dataSet coarseField (segment ∷ segments) =
   multiplyGroup dataSet
-    (segmentValue dataSet field segment)
-    (segmentProduct dataSet field segments)
+    (segmentValue dataSet coarseField segment)
+    (segmentProduct dataSet coarseField segments)
 
 printedEquation04LoopHolonomy :
   ∀ {Field CoarseBond FineSite FineBond Path Group Lie Scalar}
     (dataSet : PrintedCMP109Equation04Data
       Field CoarseBond FineSite FineBond Path Group Lie Scalar) →
   Field → CoarseBond → FineSite → Path → Path → Group
-printedEquation04LoopHolonomy dataSet field coarse fine sourcePath targetPath =
-  segmentProduct dataSet field
+printedEquation04LoopHolonomy dataSet coarseField coarse fine sourcePath targetPath =
+  segmentProduct dataSet coarseField
     (printedEquation04Loop
       sourcePath
       (crossingBond dataSet coarse fine)
@@ -300,23 +301,23 @@ printedEquation04LieAverage :
   PrintedCMP109Equation04Data
     Field CoarseBond FineSite FineBond Path Group Lie Scalar →
   Field → CoarseBond → Lie
-printedEquation04LieAverage dataSet field coarse =
-  sumList (zeroLie dataSet) (addLie dataSet)
+printedEquation04LieAverage dataSet coarseField coarse =
+  sumList _ _ (zeroLie dataSet) (addLie dataSet)
     (blockSites dataSet coarse)
     (λ fine →
       scaleLie dataSet (blockWeight dataSet coarse)
-        (sumList (zeroLie dataSet) (addLie dataSet)
+        (sumList _ _ (zeroLie dataSet) (addLie dataSet)
           (sourceContours dataSet coarse fine)
           (λ sourcePath →
             scaleLie dataSet
               (sourceContourWeight dataSet coarse fine)
-              (sumList (zeroLie dataSet) (addLie dataSet)
+              (sumList _ _ (zeroLie dataSet) (addLie dataSet)
                 (targetContours dataSet coarse fine)
                 (λ targetPath →
                   scaleLie dataSet
                     (targetContourWeight dataSet coarse fine)
                     (antiHermitianLogCoordinate dataSet
-                      (printedEquation04LoopHolonomy dataSet field coarse fine
+                      (printedEquation04LoopHolonomy dataSet coarseField coarse fine
                         sourcePath targetPath)))))))
 
 printedEquation04Map :
@@ -324,11 +325,11 @@ printedEquation04Map :
   PrintedCMP109Equation04Data
     Field CoarseBond FineSite FineBond Path Group Lie Scalar →
   Field → CoarseBond → Group
-printedEquation04Map dataSet field coarse =
+printedEquation04Map dataSet coarseField coarse =
   multiplyGroup dataSet
     (outerExponential dataSet
-      (printedEquation04LieAverage dataSet field coarse))
-    (coarseBondValue dataSet field coarse)
+      (printedEquation04LieAverage dataSet coarseField coarse))
+    (coarseBondValue dataSet coarseField coarse)
 
 implementedEquation04Map :
   ∀ {Field CoarseBond FineSite FineBond Path Group Lie Scalar} →
@@ -375,38 +376,38 @@ printedEquation012RelativeProduct :
     (dataSet : PrintedCMP109Equation012Data
       Field CoarseBond FineSite Group Lie Scalar) →
   Field → CoarseBond → FineSite → Group
-printedEquation012RelativeProduct dataSet field coarse fine =
+printedEquation012RelativeProduct dataSet coarseField coarse fine =
   multiplyGroup dataSet
-    (sourceAveragedContour dataSet field coarse fine)
+    (sourceAveragedContour dataSet coarseField coarse fine)
     (multiplyGroup dataSet
-      (crossingValue dataSet field coarse fine)
+      (crossingValue dataSet coarseField coarse fine)
       (multiplyGroup dataSet
-        (targetAveragedContourReverse dataSet field coarse fine)
-        (reversedCoarseBondValue dataSet field coarse)))
+        (targetAveragedContourReverse dataSet coarseField coarse fine)
+        (reversedCoarseBondValue dataSet coarseField coarse)))
 
 printedEquation012LieAverage :
   ∀ {Field CoarseBond FineSite Group Lie Scalar} →
   PrintedCMP109Equation012Data
     Field CoarseBond FineSite Group Lie Scalar →
   Field → CoarseBond → Lie
-printedEquation012LieAverage dataSet field coarse =
-  sumList (zeroLie dataSet) (addLie dataSet)
+printedEquation012LieAverage dataSet coarseField coarse =
+  sumList _ _ (zeroLie dataSet) (addLie dataSet)
     (blockSites dataSet coarse)
     (λ fine →
       scaleLie dataSet (blockWeight dataSet coarse)
         (antiHermitianLogCoordinate dataSet
-          (printedEquation012RelativeProduct dataSet field coarse fine)))
+          (printedEquation012RelativeProduct dataSet coarseField coarse fine)))
 
 printedEquation012Map :
   ∀ {Field CoarseBond FineSite Group Lie Scalar} →
   PrintedCMP109Equation012Data
     Field CoarseBond FineSite Group Lie Scalar →
   Field → CoarseBond → Group
-printedEquation012Map dataSet field coarse =
+printedEquation012Map dataSet coarseField coarse =
   multiplyGroup dataSet
     (outerExponential dataSet
-      (printedEquation012LieAverage dataSet field coarse))
-    (coarseBondValue dataSet field coarse)
+      (printedEquation012LieAverage dataSet coarseField coarse))
+    (coarseBondValue dataSet coarseField coarse)
 
 implementedEquation012Map :
   ∀ {Field CoarseBond FineSite Group Lie Scalar} →
