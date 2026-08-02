@@ -3,16 +3,23 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound5IntegratedEx
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
-open import Data.Rational using (ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Data.Rational using (1ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PhysicalScaleGeometryExact as Physical
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact as Minimal
-import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusFromSignedTailsExact as Signed
+import DASHI.Physics.YangMills.BalabanClayGate4BishopSU2HalfRadiusInstantiationExact as BishopSU2
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusScalarEnvelopeExact as HalfRadius
 import DASHI.Physics.YangMills.BalabanClayGate4NewtonFourChannelQuarterExact as Newton
+import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeContractionBallConstructionExact as Construction
+import DASHI.Physics.YangMills.BalabanClayGate4HalfContractionInvariantBallExact as HalfBall
+import DASHI.Physics.YangMills.BalabanClayGate4BalabanGaugeFixingProposition5Exact as GaugeSource
+import DASHI.Physics.YangMills.BalabanClayGate4GaugeFixingProposition5ToHalfBallExact as GaugeBridge
+import DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact as Quantitative
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalFunctionalSecondVariationExact as Functional
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as Wilson
 import DASHI.Physics.YangMills.BalabanClayGate4WilsonPlaquetteBadCubeBudgetExact as WilsonBudget
@@ -21,10 +28,15 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiveActivityTenthToHalfExact as A
 
 ------------------------------------------------------------------------
 -- Round five owns the strongest concrete instantiations extracted from the
--- previous physical cut. It does not collapse the remaining local analytic
--- estimates into anonymous propositions: signed series tails, four Newton
--- channels, physical functional atoms, Wilson entropy comparison, random-walk
--- shell decay and five activity bounds are explicit data.
+-- previous physical cut.
+--
+-- * CMP109 uses the minimal source-admissible L=13 repository torus.
+-- * SU(2) sine and cosine are the actual Bishop power-series values.
+-- * Federbush retains the conservative four-channel quarter budget.
+-- * Faddeev--Popov/background gauge uses Bałaban Proposition 5's source-exact
+--   beta=1/4 domain and contraction factor 1/2.
+-- * Wilson, random-walk and activity consequences are exact downstream of
+--   local physical estimates.
 ------------------------------------------------------------------------
 
 record PhysicalClosureRound5Inputs : Set₂ where
@@ -34,14 +46,25 @@ record PhysicalClosureRound5Inputs : Set₂ where
         Minimal.radius Minimal.RepositoryFineSite
         Minimal.RepositoryCoarseSite Nat
 
-    SU2Scalar : Set
-    scalarCore : Signed.SU2HalfRadiusScalarCore SU2Scalar
-    scalarSignedTails : Signed.SU2HalfRadiusSignedTailInputs scalarCore
+    bishopSeriesData : Elementary.BishopElementaryPowerSeriesData
+    bishopHalfRadius : BishopSU2.BishopSU2HalfRadiusInputs bishopSeriesData
 
-    NewtonBound : Set
-    newtonAlgebra : Newton.FourChannelQuarterAlgebra NewtonBound
-    newtonClosure :
-      Newton.FederbushFaddeevPopovFourChannelClosure newtonAlgebra
+    FederbushBound : Set
+    federbushAlgebra : Newton.FourChannelQuarterAlgebra FederbushBound
+    federbushContractionBudget :
+      Newton.NewtonFourChannelBudget federbushAlgebra
+    federbushForcingBudget :
+      Newton.NewtonFourChannelBudget federbushAlgebra
+
+    GaugeConfiguration GaugeCorrection GaugeBound : Set
+    gaugeSource : GaugeSource.BalabanGaugeFixingProposition5
+      GaugeConfiguration GaugeCorrection GaugeBound
+    gaugeTriangle :
+      Construction.MetricTriangleBudget GaugeCorrection GaugeBound
+    gaugeHalfBudget : HalfBall.HalfContractionBudget gaugeTriangle
+    gaugeMetricBridge :
+      GaugeBridge.GaugeFixingProposition5MetricBridge
+        gaugeSource gaugeTriangle gaugeHalfBudget
 
     FunctionalCarrier Operator : Set
     secondVariation :
@@ -83,45 +106,57 @@ round5MinimalSiteWeightReciprocal :
   Minimal.siteWeightℚ * Minimal.volumeℚ ≡ 1ℚ
 round5MinimalSiteWeightReciprocal = Minimal.minimalSiteWeightIsReciprocal
 
-round5ScalarEnvelope :
+round5BishopScalarEnvelope :
   (inputs : PhysicalClosureRound5Inputs) →
-  HalfRadius.SU2HalfRadiusScalarEnvelope (SU2Scalar inputs)
-round5ScalarEnvelope inputs =
-  Signed.halfRadiusEnvelopeFromSignedTails (scalarSignedTails inputs)
+  HalfRadius.SU2HalfRadiusScalarEnvelope Bishop.Bishopℝ
+round5BishopScalarEnvelope inputs =
+  BishopSU2.bishopSU2HalfRadiusEnvelope (bishopHalfRadius inputs)
 
 round5FederbushContractionBelowQuarter :
   (inputs : PhysicalClosureRound5Inputs) →
-  Newton.LessEqual (newtonAlgebra inputs)
-    (Newton.total
-      (Newton.federbushContraction (newtonClosure inputs)))
-    (Newton.quarter (newtonAlgebra inputs))
+  Newton.LessEqual (federbushAlgebra inputs)
+    (Newton.total (federbushContractionBudget inputs))
+    (Newton.quarter (federbushAlgebra inputs))
 round5FederbushContractionBelowQuarter inputs =
-  Newton.federbushContractionBelowQuarter (newtonClosure inputs)
+  Newton.newtonFourChannelTotalBelowQuarter
+    (federbushContractionBudget inputs)
 
 round5FederbushForcingBelowQuarter :
   (inputs : PhysicalClosureRound5Inputs) →
-  Newton.LessEqual (newtonAlgebra inputs)
-    (Newton.total (Newton.federbushForcing (newtonClosure inputs)))
-    (Newton.quarter (newtonAlgebra inputs))
+  Newton.LessEqual (federbushAlgebra inputs)
+    (Newton.total (federbushForcingBudget inputs))
+    (Newton.quarter (federbushAlgebra inputs))
 round5FederbushForcingBelowQuarter inputs =
-  Newton.federbushForcingBelowQuarter (newtonClosure inputs)
+  Newton.newtonFourChannelTotalBelowQuarter
+    (federbushForcingBudget inputs)
 
-round5FaddeevPopovContractionBelowQuarter :
+round5GaugeInvariantHalfBall :
   (inputs : PhysicalClosureRound5Inputs) →
-  Newton.LessEqual (newtonAlgebra inputs)
-    (Newton.total
-      (Newton.faddeevPopovContraction (newtonClosure inputs)))
-    (Newton.quarter (newtonAlgebra inputs))
-round5FaddeevPopovContractionBelowQuarter inputs =
-  Newton.faddeevPopovContractionBelowQuarter (newtonClosure inputs)
+  Quantitative.InvariantContractionBall
+    (Construction.metric (gaugeTriangle inputs))
+round5GaugeInvariantHalfBall inputs =
+  GaugeBridge.asInvariantGaugeFixingBall (gaugeMetricBridge inputs)
 
-round5FaddeevPopovForcingBelowQuarter :
+round5GaugeSolutionBound :
   (inputs : PhysicalClosureRound5Inputs) →
-  Newton.LessEqual (newtonAlgebra inputs)
-    (Newton.total (Newton.faddeevPopovForcing (newtonClosure inputs)))
-    (Newton.quarter (newtonAlgebra inputs))
-round5FaddeevPopovForcingBelowQuarter inputs =
-  Newton.faddeevPopovForcingBelowQuarter (newtonClosure inputs)
+  GaugeSource.LessEqual (gaugeSource inputs)
+    (GaugeSource.correctionNorm (gaugeSource inputs)
+      (GaugeSource.solution (gaugeSource inputs)
+        (GaugeBridge.configuration (gaugeMetricBridge inputs))
+        (GaugeBridge.admissible (gaugeMetricBridge inputs))))
+    (GaugeSource.multiply (gaugeSource inputs)
+      (GaugeSource.eight (gaugeSource inputs))
+      (GaugeSource.multiply (gaugeSource inputs)
+        (GaugeSource.B0Prime (gaugeSource inputs))
+        (GaugeSource.multiply (gaugeSource inputs)
+          (GaugeSource.B1 (gaugeSource inputs))
+          (GaugeSource.add (gaugeSource inputs)
+            (GaugeSource.alpha0 (gaugeSource inputs))
+            (GaugeSource.alpha1 (gaugeSource inputs))))))
+round5GaugeSolutionBound inputs =
+  GaugeSource.solutionBound (gaugeSource inputs)
+    (GaugeBridge.configuration (gaugeMetricBridge inputs))
+    (GaugeBridge.admissible (gaugeMetricBridge inputs))
 
 round5SelectedFunctionalSecondVariation :
   (inputs : PhysicalClosureRound5Inputs) →
@@ -173,8 +208,11 @@ physicalClosureRound5IntegratedCarrierLevel = machineChecked
 physicalClosureRound5MinimalCMP109Level : ProofLevel
 physicalClosureRound5MinimalCMP109Level = machineChecked
 
-physicalClosureRound5SignedTailAndNewtonLevel : ProofLevel
-physicalClosureRound5SignedTailAndNewtonLevel = machineChecked
+physicalClosureRound5BishopAndFederbushLevel : ProofLevel
+physicalClosureRound5BishopAndFederbushLevel = machineChecked
+
+physicalClosureRound5GaugeFixingSourceProfileLevel : ProofLevel
+physicalClosureRound5GaugeFixingSourceProfileLevel = machineChecked
 
 physicalClosureRound5FunctionalAndPolymerLevel : ProofLevel
 physicalClosureRound5FunctionalAndPolymerLevel = machineChecked
