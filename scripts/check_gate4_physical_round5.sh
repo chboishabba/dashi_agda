@@ -10,6 +10,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneSplitFibreExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneRepositoryTorusExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneWeightExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4AlternatingTaylorEnvelopeExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SU2HalfRadiusFromSignedTailsExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SeriesLipschitzAssemblyExact.agda
