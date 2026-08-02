@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (length; _++_)
 
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact using (SignedAxis4)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Product; pair; first; second)
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicAdjacencyBFSExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Carrier
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -21,7 +22,7 @@ reverseOrientation false = true
 reverseOrientation true = false
 
 reverseDirection : SignedAxis4 → SignedAxis4
-reverseDirection (pair axis orientation) = pair axis (reverseOrientation orientation)
+reverseDirection d = pair (first d) (reverseOrientation (second d))
 
 replayTerminal :
   ∀ {n} → Carrier.PeriodicBlock n → List SignedAxis4 → Carrier.PeriodicBlock n
