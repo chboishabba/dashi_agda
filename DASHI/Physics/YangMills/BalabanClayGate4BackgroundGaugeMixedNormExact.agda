@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4BackgroundGaugeMixedNormExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -82,13 +82,13 @@ mixedGaugeDistanceTriangle algebra left middle right =
   subst
     (λ upper → LessEqual algebra
       (mixedGaugeDistance algebra left right) upper)
-    (sym (addInterchange algebra
+    (addInterchange algebra
       (fieldDistance algebra left middle)
       (fieldDistance algebra middle right)
       (scaleDerivative algebra
         (derivativeDistance algebra left middle))
       (scaleDerivative algebra
-        (derivativeDistance algebra middle right))))
+        (derivativeDistance algebra middle right)))
     (addMonotone algebra
       (fieldTriangle algebra left middle right)
       (scaledDerivativeTriangle algebra left middle right))
