@@ -23,17 +23,15 @@ record BishopConfiguredElementaryTailEvidence
   field
     sineTermMagnitudeDecreasingEvidence :
       (point : Bishop.Bishopℝ) (index : Nat) →
-      Elementary.InConfiguredRadius configuration point →
+      (inside : Elementary.InConfiguredRadius configuration point) →
       Elementary.sineTermMagnitudeDecreasing
-        configuration point index
-        (λ proof → proof)
+        configuration point index inside
 
     cosineTermMagnitudeDecreasingEvidence :
       (point : Bishop.Bishopℝ) (index : Nat) →
-      Elementary.InConfiguredRadius configuration point →
+      (inside : Elementary.InConfiguredRadius configuration point) →
       Elementary.cosineTermMagnitudeDecreasing
-        configuration point index
-        (λ proof → proof)
+        configuration point index inside
 
     sineCubicSignedRemainderEvidence :
       (point : Bishop.Bishopℝ) →
