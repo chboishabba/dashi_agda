@@ -147,9 +147,9 @@ record DeterminingSetReinjection
     emptyDensity : EffectiveDensity
     insertBoundary : Term → EffectiveDensity → EffectiveDensity
     insertAllBoundary : List Term → EffectiveDensity → EffectiveDensity
-    insertAllDefinition : ∀ terms density → Set
-    supportOwnerPreserved : ∀ term density → Set
-    determiningSetUpdated : ∀ term density → Set
+    insertAllDefinition : List Term → EffectiveDensity → Set
+    supportOwnerPreserved : Term → EffectiveDensity → Set
+    determiningSetUpdated : Term → EffectiveDensity → Set
 
 open DeterminingSetReinjection public
 

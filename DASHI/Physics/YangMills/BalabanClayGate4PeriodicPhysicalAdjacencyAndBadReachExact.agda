@@ -72,23 +72,23 @@ periodicDirectedAdjacencyIncluded = inj₁
 periodicPhysicalFiniteReachCarrier :
   ∀ n → Reach.FiniteReachCarrier (Periodic.PeriodicBlock n)
 periodicPhysicalFiniteReachCarrier n = record
-  { Reach.FiniteReachCarrier.allBlocks =
+  { allBlocks =
       elements (periodicTorus4Finite (suc n))
-  ; Reach.FiniteReachCarrier.allBlocksComplete =
+  ; allBlocksComplete =
       complete (periodicTorus4Finite (suc n))
-  ; Reach.FiniteReachCarrier.equalDecidable =
+  ; equalDecidable =
       periodicTorus4DecidableEquality (suc n)
-  ; Reach.FiniteReachCarrier.Adjacent = PeriodicPhysicalAdjacent
-  ; Reach.FiniteReachCarrier.adjacentDecidable =
+  ; Adjacent = PeriodicPhysicalAdjacent
+  ; adjacentDecidable =
       periodicPhysicalAdjacentDecidable
   }
 
 periodicPhysicalSymmetricReachCarrier :
   ∀ n → Reach.SymmetricFiniteReachCarrier (Periodic.PeriodicBlock n)
 periodicPhysicalSymmetricReachCarrier n = record
-  { Reach.SymmetricFiniteReachCarrier.finiteReach =
+  { finiteReach =
       periodicPhysicalFiniteReachCarrier n
-  ; Reach.SymmetricFiniteReachCarrier.adjacentSymmetric =
+  ; adjacentSymmetric =
       periodicPhysicalAdjacentSymmetric
   }
 
@@ -103,17 +103,17 @@ literalPeriodicPhysicalBadGeometry :
     (scale : Scale) →
   Geometry.BadBlockGeometry Configuration Gauge (Periodic.PeriodicBlock n)
 literalPeriodicPhysicalBadGeometry dataSet scale = record
-  { Geometry.BadBlockGeometry.transform = Wilson.transform dataSet
-  ; Geometry.BadBlockGeometry.Adjacent = PeriodicPhysicalAdjacent
-  ; Geometry.BadBlockGeometry.adjacentSymmetric =
+  { transform = Wilson.transform dataSet
+  ; Adjacent = PeriodicPhysicalAdjacent
+  ; adjacentSymmetric =
       periodicPhysicalAdjacentSymmetric
-  ; Geometry.BadBlockGeometry.BadBlock = λ configuration block →
+  ; BadBlock = λ configuration block →
       Wilson.LargeFieldBlock dataSet scale configuration block
-  ; Geometry.BadBlockGeometry.badBlockDecidable =
+  ; badBlockDecidable =
       Wilson.largeFieldBlockDecidable dataSet scale
-  ; Geometry.BadBlockGeometry.badGaugeForward = λ gauge configuration block →
+  ; badGaugeForward = λ gauge configuration block →
       Wilson.largeFieldBlockGaugeForward dataSet gauge scale configuration block
-  ; Geometry.BadBlockGeometry.badGaugeBackward = λ gauge configuration block →
+  ; badGaugeBackward = λ gauge configuration block →
       Wilson.largeFieldBlockGaugeBackward dataSet gauge scale configuration block
   }
 
@@ -157,15 +157,15 @@ badPhysicalReachCarrier :
     (scale : Scale) (configuration : Configuration) →
   Reach.FiniteReachCarrier (Periodic.PeriodicBlock n)
 badPhysicalReachCarrier {n = n} dataSet scale configuration = record
-  { Reach.FiniteReachCarrier.allBlocks =
+  { allBlocks =
       elements (periodicTorus4Finite (suc n))
-  ; Reach.FiniteReachCarrier.allBlocksComplete =
+  ; allBlocksComplete =
       complete (periodicTorus4Finite (suc n))
-  ; Reach.FiniteReachCarrier.equalDecidable =
+  ; equalDecidable =
       periodicTorus4DecidableEquality (suc n)
-  ; Reach.FiniteReachCarrier.Adjacent =
+  ; Adjacent =
       BadPhysicalEdge dataSet scale configuration
-  ; Reach.FiniteReachCarrier.adjacentDecidable =
+  ; adjacentDecidable =
       badPhysicalEdgeDecidable dataSet scale configuration
   }
 

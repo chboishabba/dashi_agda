@@ -37,10 +37,10 @@ emptyElim ()
 record FiniteReachCarrier (Block : Set) : Set₁ where
   field
     allBlocks : List Block
-    allBlocksComplete : ∀ block → block ∈ allBlocks
-    equalDecidable : ∀ left right → Dec (left ≡ right)
+    allBlocksComplete : ∀ (block : Block) → block ∈ allBlocks
+    equalDecidable : ∀ (left right : Block) → Dec (left ≡ right)
     Adjacent : Block → Block → Set
-    adjacentDecidable : ∀ left right → Dec (Adjacent left right)
+    adjacentDecidable : ∀ (left right : Block) → Dec (Adjacent left right)
 
 open FiniteReachCarrier public
 
@@ -109,7 +109,7 @@ mutual
   ... | yes witness with anyWitnessMembership witness
   ... | middle , (member , value) =
       yes (Collar.step (adjacent value) (reaches value))
-  ... | no noStep = no reject
+  reachWithinDecidable dataSet (suc radius) start finish | no notEqual | no noStep = no reject
     where
     reject :
       Collar.ReachWithin (Adjacent dataSet) (suc radius) start finish → Empty
@@ -137,7 +137,7 @@ mutual
 
 filterDec :
   ∀ {A : Set} {P : A → Set} →
-  (∀ value → Dec (P value)) → List A → List A
+  (∀ (value : A) → Dec (P value)) → List A → List A
 filterDec decide [] = []
 filterDec decide (value ∷ values) with decide value
 ... | yes _ = value ∷ filterDec decide values
@@ -145,29 +145,25 @@ filterDec decide (value ∷ values) with decide value
 
 filterDecSound :
   ∀ {A : Set} {P : A → Set}
-    (decide : ∀ value → Dec (P value)) {value values} →
+    (decide : ∀ (value : A) → Dec (P value)) {value values} →
   value ∈ filterDec decide values → P value
 filterDecSound decide {values = []} ()
-filterDecSound decide {values = head ∷ values} member with decide head
-... | yes proof with member
-... | here = proof
-... | there tailMember = filterDecSound decide tailMember
-... | no notProof = filterDecSound decide member
+filterDecSound decide {values = head ∷ values} member with decide head | member
+... | yes proof | here = proof
+... | yes proof | there tailMember = filterDecSound decide {values = values} tailMember
+... | no notProof | member = filterDecSound decide {values = values} member
 
 filterDecComplete :
   ∀ {A : Set} {P : A → Set}
-    (decide : ∀ value → Dec (P value)) {value values} →
+    (decide : ∀ (value : A) → Dec (P value)) {value values} →
   value ∈ values → P value → value ∈ filterDec decide values
 filterDecComplete decide {values = []} () proof
-filterDecComplete decide {values = head ∷ values} member proof
-  with decide head
-... | yes selected with member
-... | here = here
-... | there tailMember =
-    there (filterDecComplete decide tailMember proof)
-... | no notSelected with member
-... | here = emptyElim (notSelected proof)
-... | there tailMember = filterDecComplete decide tailMember proof
+filterDecComplete decide {values = head ∷ values} member proof with decide head | member
+... | yes selected | here = here
+... | yes selected | there tailMember =
+    there (filterDecComplete decide {values = values} tailMember proof)
+... | no notSelected | here = emptyElim (notSelected proof)
+... | no notSelected | there tailMember = filterDecComplete decide {values = values} tailMember proof
 
 enumerateReachWithin :
   ∀ {Block} → FiniteReachCarrier Block → Nat → Block → List Block
@@ -179,8 +175,9 @@ enumerateReachWithinSound :
     radius start {finish} →
   finish ∈ enumerateReachWithin dataSet radius start →
   Collar.ReachWithin (Adjacent dataSet) radius start finish
-enumerateReachWithinSound dataSet radius start =
+enumerateReachWithinSound dataSet radius start member =
   filterDecSound (reachWithinDecidable dataSet radius start)
+    {values = allBlocks dataSet} member
 
 enumerateReachWithinComplete :
   ∀ {Block} (dataSet : FiniteReachCarrier Block)
@@ -201,23 +198,23 @@ record FiniteRegionEnumeration (Block : Set) : Set₁ where
   field
     region : Collar.FiniteLargeFieldRegion Block
     regionBlocks : List Block
-    regionSound : ∀ {block} → block ∈ regionBlocks → Collar.Contains region block
-    regionComplete : ∀ block → Collar.Contains region block → block ∈ regionBlocks
+    regionSound : ∀ {block : Block} → block ∈ regionBlocks → Collar.Contains region block
+    regionComplete : ∀ (block : Block) → Collar.Contains region block → block ∈ regionBlocks
 
 open FiniteRegionEnumeration public
 
 record FinitePredicate (A : Set) (P : A → Set) : Set₁ where
   field
     elements : List A
-    sound : ∀ {value} → value ∈ elements → P value
-    complete : ∀ value → P value → value ∈ elements
+    sound : ∀ {value : A} → value ∈ elements → P value
+    complete : ∀ (value : A) → P value → value ∈ elements
 
 open FinitePredicate public
 
 record SymmetricFiniteReachCarrier (Block : Set) : Set₁ where
   field
     finiteReach : FiniteReachCarrier Block
-    adjacentSymmetric : ∀ {left right} →
+    adjacentSymmetric : ∀ {left right : Block} →
       Adjacent finiteReach left right → Adjacent finiteReach right left
 
 open SymmetricFiniteReachCarrier public
@@ -225,8 +222,8 @@ open SymmetricFiniteReachCarrier public
 enlargementData :
   ∀ {Block} → SymmetricFiniteReachCarrier Block → Collar.EnlargementData Block
 enlargementData carrier = record
-  { Collar.EnlargementData.Adjacent = Adjacent (finiteReach carrier)
-  ; Collar.EnlargementData.adjacentSymmetric = adjacentSymmetric carrier
+  { Adjacent = Adjacent (finiteReach carrier)
+  ; adjacentSymmetric = adjacentSymmetric carrier
   }
 
 seedReachDecidable :
@@ -250,7 +247,7 @@ enlargedDecidable carrier regionData radius block
 ... | yes witness with anyWitnessMembership witness
 ... | seed , (member , reach) =
     yes (seed , (regionSound regionData member , reach))
-... | no noSeed = no reject
+enlargedDecidable carrier regionData radius block | no noSeed = no reject
   where
   reject :
     Collar.Enlarged (enlargementData carrier)
@@ -269,8 +266,9 @@ enlargedRegionFinite carrier regionData radius = record
   { elements = filterDec
       (enlargedDecidable carrier regionData radius)
       (allBlocks (finiteReach carrier))
-  ; sound = filterDecSound
+  ; sound = λ member → filterDecSound
       (enlargedDecidable carrier regionData radius)
+      {values = allBlocks (finiteReach carrier)} member
   ; complete = λ block proof →
       filterDecComplete
         (enlargedDecidable carrier regionData radius)
