@@ -2,9 +2,10 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound5Ledger where
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneSplitFibreExact as CMP109
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneSplitFibreExact as CMP109Calibration
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneRepositoryTorusExact as RepositoryTorus
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneWeightExact as Weight
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact as MinimalCMP109
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneWeightExact as CalibrationWeight
 import DASHI.Physics.YangMills.BalabanClayGate4AlternatingTaylorEnvelopeExact as Taylor
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusFromSignedTailsExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4SeriesLipschitzAssemblyExact as Lipschitz
@@ -23,20 +24,20 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiveActivityTenthToHalfExact as A
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound5IntegratedExact as Integrated
 
 ------------------------------------------------------------------------
--- Round-five proof-level ledger. Exact arithmetic and finite/order-theoretic
--- consequences are machine checked. The remaining levels name only literal
--- local analytic estimates, never whole conclusions already derived above.
+-- Round-five proof-level ledger. L=3 is retained only as a small executable
+-- calibration. The authoritative source-admissible CMP109 scale is L=13,
+-- r=6, the minimal odd L strictly greater than eleven.
 ------------------------------------------------------------------------
 
-cmp109RadiusOneSideAndVolumeLevel = CMP109.cmp109RadiusOneSideAndVolumeLevel
-cmp109SplitProjectionFibreLevel = CMP109.cmp109SplitProjectionFibreLevel
-cmp109SplitEndpointBlockLevel = CMP109.cmp109SplitEndpointBlockLevel
-cmp109RadiusOnePhysicalDecisionLevel = CMP109.cmp109RadiusOnePhysicalDecisionLevel
+cmp109RadiusOneCalibrationLevel = CMP109Calibration.cmp109RadiusOneSideAndVolumeLevel
+cmp109RadiusOneCalibrationWeightLevel = CalibrationWeight.cmp109RadiusOneRationalWeightLevel
 cmp109CenteredTorusSurjectionLevel = RepositoryTorus.cmp109CenteredTorusSurjectionLevel
-cmp109RadiusOneRepositoryProjectionLevel = RepositoryTorus.cmp109RadiusOneRepositoryProjectionLevel
-cmp109RadiusOneRepositoryEndpointLevel = RepositoryTorus.cmp109RadiusOneRepositoryEndpointLevel
-cmp109RadiusOneRepositoryGeometryDecisionLevel = RepositoryTorus.cmp109RadiusOneRepositoryGeometryDecisionLevel
-cmp109RadiusOneRationalWeightLevel = Weight.cmp109RadiusOneRationalWeightLevel
+
+cmp109MinimalOddScaleAdmissibilityLevel = MinimalCMP109.cmp109MinimalOddScaleAdmissibilityLevel
+cmp109MinimalRepositoryProjectionLevel = MinimalCMP109.cmp109MinimalRepositoryProjectionLevel
+cmp109MinimalRepositoryEndpointLevel = MinimalCMP109.cmp109MinimalRepositoryEndpointLevel
+cmp109MinimalSiteWeightLevel = MinimalCMP109.cmp109MinimalSiteWeightLevel
+cmp109MinimalGeometryDecisionLevel = MinimalCMP109.cmp109MinimalGeometryDecisionLevel
 
 alternatingTaylorEnvelopeLevel = Taylor.alternatingTaylorEnvelopeLevel
 positiveTaylorTailEnvelopeLevel = Taylor.positiveTaylorTailEnvelopeLevel
@@ -68,7 +69,7 @@ fiveActivityTenthArithmeticLevel = Activity.fiveActivityTenthArithmeticLevel
 fiveActivityHalfAllocationLevel = Activity.fiveActivityHalfAllocationLevel
 
 physicalClosureRound5IntegratedCarrierLevel = Integrated.physicalClosureRound5IntegratedCarrierLevel
-physicalClosureRound5ConcreteCMP109Level = Integrated.physicalClosureRound5ConcreteCMP109Level
+physicalClosureRound5MinimalCMP109Level = Integrated.physicalClosureRound5MinimalCMP109Level
 physicalClosureRound5SignedTailAndNewtonLevel = Integrated.physicalClosureRound5SignedTailAndNewtonLevel
 physicalClosureRound5FunctionalAndPolymerLevel = Integrated.physicalClosureRound5FunctionalAndPolymerLevel
 
