@@ -2,7 +2,6 @@ module DASHI.Physics.YangMills.BalabanClayGate4WilsonAnimalEntropyLedgerExact wh
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; _+_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -29,47 +28,6 @@ import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Gap
 -- DOI: 10.1007/BF01211762.
 ------------------------------------------------------------------------
 
-record WilsonAnimalEntropyLedger
-    {Scale Configuration Gauge Block Plaquette : Set}
-    (largeField : Wilson.LiteralWilsonLargeFieldData
-      Scale Configuration Gauge Block Plaquette)
-    (cost : Wilson.LiteralWilsonCostData largeField) : Set₁ where
-  field
-    scale : Scale
-
-    animalEntropy decayWeight reservedSlack : ℚ
-    entropyWithDecay : ℚ
-
-    entropyWithDecayMeaning :
-      entropyWithDecay ≡ animalEntropy + decayWeight
-
-    completePayment : ℚ
-    completePaymentMeaning :
-      completePayment
-      ≡ animalEntropy + (decayWeight + reservedSlack)
-
-    completePaymentBelowWilsonPenalty :
-      completePayment
-      ≤ WilsonBudget.wilsonPenaltyPerBadCube
-          (record
-            { WilsonBudget.WilsonPlaquetteBadCubeBudget.scale = scale
-            ; WilsonBudget.WilsonPlaquetteBadCubeBudget.entropyPerBadCube =
-                entropyWithDecay
-            ; WilsonBudget.WilsonPlaquetteBadCubeBudget.reservedSlackPerBadCube =
-                reservedSlack
-            ; WilsonBudget.WilsonPlaquetteBadCubeBudget.entropyAndSlackBelowWilsonPenalty =
-                subst
-                  (λ selected → selected
-                    ≤ (Gap.halfℚ * Wilson.beta cost scale)
-                        * Gap.squareℚ (Wilson.threshold largeField scale))
-                  (sym completePaymentMeaning)
-                  completePaymentBelowWilsonPenalty
-            })
-
-open WilsonAnimalEntropyLedger public
-
--- The directly recursive field above would make the record ill-founded.  The
--- usable constructor below therefore takes the scalar comparison separately.
 record WilsonAnimalEntropyInputs
     {Scale Configuration Gauge Block Plaquette : Set}
     (largeField : Wilson.LiteralWilsonLargeFieldData
