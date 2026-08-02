@@ -8,6 +8,7 @@ bash "$SCRIPT_DIR/check_gate4_physical_round4.sh"
 
 FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneSplitFibreExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneRepositoryTorusExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneWeightExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4AlternatingTaylorEnvelopeExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SU2HalfRadiusFromSignedTailsExact.agda
@@ -16,6 +17,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4RationalWilsonQuadraticSecondDifferenceExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalFunctionalSecondVariationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SandwichOperatorToFormBoundExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4FiveSandwichChannelAssemblyExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4WilsonPlaquetteBadCubeBudgetExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4GaugeCubicTaylorRemainderSumExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4WeakeningProductSupportExact.agda
