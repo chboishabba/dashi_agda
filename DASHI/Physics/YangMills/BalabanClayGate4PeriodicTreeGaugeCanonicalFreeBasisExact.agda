@@ -140,7 +140,7 @@ standardReconstruct : ∀ {Scalar n} →
 standardReconstruct = tabulateVec
 
 standardCoordinateOfBasis :
-  ∀ {Scalar n} (pointed : PointedScalar Scalar) left right →
+  ∀ {Scalar n} (pointed : PointedScalar Scalar) (left right : Fin n) →
   standardCoordinate (standardBasisVector pointed left) right
   ≡ delta pointed left right
 standardCoordinateOfBasis pointed left right =
@@ -167,27 +167,28 @@ Biorthogonal pointed family =
 standardBasisBiorthogonal :
   ∀ {Scalar n} (pointed : PointedScalar Scalar) →
   Biorthogonal pointed (standardBasisVector pointed)
-standardBasisBiorthogonal = standardCoordinateOfBasis
+standardBasisBiorthogonal {n = n} pointed left right =
+  standardCoordinateOfBasis {n = n} pointed left right
 
 canonicalFiniteTangentBasis :
   ∀ {Scalar n} → PointedScalar Scalar →
   Matrix.FiniteTangentBasis
     (Fin n) (Vec Scalar n) Scalar
 canonicalFiniteTangentBasis {n = n} pointed = record
-  { Matrix.FiniteTangentBasis.indices = allFin n
-  ; Matrix.FiniteTangentBasis.basisVector = standardBasisVector pointed
-  ; Matrix.FiniteTangentBasis.coordinates = standardCoordinate
-  ; Matrix.FiniteTangentBasis.linearCombination =
-      λ selected coefficients → standardReconstruct coefficients
-  ; Matrix.FiniteTangentBasis.BasisIndexComplete =
+  { indices = allFin n
+  ; basisVector = standardBasisVector {n = n} pointed
+  ; coordinates = standardCoordinate {n = n}
+  ; linearCombination =
+      λ selected coefficients → standardReconstruct {n = n} coefficients
+  ; BasisIndexComplete =
       λ index → index ∈ allFin n
-  ; Matrix.FiniteTangentBasis.basisIndexComplete = allFinComplete
-  ; Matrix.FiniteTangentBasis.basisComplete =
-      λ vector → sym (standardReconstructionExact vector)
-  ; Matrix.FiniteTangentBasis.LinearlyIndependent =
-      Biorthogonal pointed
-  ; Matrix.FiniteTangentBasis.basisIndependent =
-      standardBasisBiorthogonal pointed
+  ; basisIndexComplete = allFinComplete {n = n}
+  ; basisComplete =
+      λ vector → sym (standardReconstructionExact {n = n} vector)
+  ; LinearlyIndependent =
+      Biorthogonal {n = n} pointed
+  ; basisIndependent =
+      standardBasisBiorthogonal {n = n} pointed
   }
 
 bondAt : ∀ {A : Set} (values : List A) →
