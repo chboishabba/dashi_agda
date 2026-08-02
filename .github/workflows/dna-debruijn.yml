@@ -1,0 +1,50 @@
+name: DNA de Bruijn formalism
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Codec/DNAProductionDeBruijn.agda'
+      - 'DASHI/Codec/DNADeBruijn**'
+      - '.github/workflows/dna-debruijn.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dna-debruijn-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda agda-stdlib
+      - name: Prepare writable standard library
+        id: stdlib
+        shell: bash
+        run: |
+          file="$(dpkg -L agda-stdlib | grep '/Data/Product.agda$' | head -n 1)"
+          test -n "$file"
+          source_path="${file%/Data/Product.agda}"
+          target_path="$RUNNER_TEMP/agda-stdlib"
+          cp -a "$source_path" "$target_path"
+          echo "path=$target_path" >> "$GITHUB_OUTPUT"
+      - name: Typecheck de Bruijn aggregate
+        shell: bash
+        run: |
+          set +e
+          agda --no-libraries --no-default-libraries \
+            -i . -i '${{ steps.stdlib.outputs.path }}' \
+            DASHI/Codec/DNADeBruijnValidation.agda \
+            2>&1 | tee agda-debruijn.log
+          status=${PIPESTATUS[0]}
+          exit "$status"
+      - name: Upload Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dna-debruijn-agda-log
+          path: agda-debruijn.log
+          if-no-files-found: error
