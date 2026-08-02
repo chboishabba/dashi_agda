@@ -39,7 +39,7 @@ record AdditiveCommutativeMonoid (Scalar : Set) : Set₁ where
 open AdditiveCommutativeMonoid public
 
 sumList :
-  ∀ {A Scalar} →
+  ∀ {A Scalar : Set} →
   AdditiveCommutativeMonoid Scalar →
   List A → (A → Scalar) → Scalar
 sumList algebra [] term = zero algebra
@@ -47,7 +47,7 @@ sumList algebra (value ∷ values) term =
   add algebra (term value) (sumList algebra values term)
 
 sumCong :
-  ∀ {A Scalar}
+  ∀ {A Scalar : Set}
     (algebra : AdditiveCommutativeMonoid Scalar)
     (values : List A) (left right : A → Scalar) →
   (∀ value → left value ≡ right value) →
@@ -59,7 +59,7 @@ sumCong algebra (value ∷ values) left right pointwise =
     (sumCong algebra values left right pointwise)
 
 shuffleFour :
-  ∀ {Scalar}
+  ∀ {Scalar : Set}
     (algebra : AdditiveCommutativeMonoid Scalar)
     a b c d →
   add algebra (add algebra a b) (add algebra c d)
@@ -78,7 +78,7 @@ shuffleFour algebra a b c d =
       (sym (addAssociative algebra a c (add algebra b d))))
 
 sumPointwiseAdd :
-  ∀ {A Scalar}
+  ∀ {A Scalar : Set}
     (algebra : AdditiveCommutativeMonoid Scalar)
     (values : List A) (left right : A → Scalar) →
   sumList algebra values
@@ -99,7 +99,7 @@ sumPointwiseAdd algebra (value ∷ values) left right =
       (sumList algebra values right))
 
 sumZero :
-  ∀ {A Scalar}
+  ∀ {A Scalar : Set}
     (algebra : AdditiveCommutativeMonoid Scalar)
     (values : List A) →
   sumList algebra values (λ value → zero algebra) ≡ zero algebra
@@ -110,7 +110,7 @@ sumZero algebra (value ∷ values) =
     (addIdentityLeft algebra (zero algebra))
 
 finiteFubini :
-  ∀ {A B Scalar}
+  ∀ {A B Scalar : Set}
     (algebra : AdditiveCommutativeMonoid Scalar)
     (leftValues : List A) (rightValues : List B)
     (term : A → B → Scalar) →
@@ -154,7 +154,7 @@ record FiniteWeightedAdjointContributionData
 open FiniteWeightedAdjointContributionData public
 
 primalWeightedPairing :
-  ∀ {Input Output FineValue CoarseValue Scalar} →
+  ∀ {Input Output FineValue CoarseValue Scalar : Set} →
   FiniteWeightedAdjointContributionData
     Input Output FineValue CoarseValue Scalar →
   (Input → FineValue) → (Output → CoarseValue) → Scalar
@@ -167,7 +167,7 @@ primalWeightedPairing dataSet fineField coarseField =
             (fineField input) (coarseField output)))
 
 adjointWeightedPairing :
-  ∀ {Input Output FineValue CoarseValue Scalar} →
+  ∀ {Input Output FineValue CoarseValue Scalar : Set} →
   FiniteWeightedAdjointContributionData
     Input Output FineValue CoarseValue Scalar →
   (Input → FineValue) → (Output → CoarseValue) → Scalar
@@ -180,7 +180,7 @@ adjointWeightedPairing dataSet fineField coarseField =
             (fineField input) (coarseField output)))
 
 globalWeightedAdjointIdentity :
-  ∀ {Input Output FineValue CoarseValue Scalar}
+  ∀ {Input Output FineValue CoarseValue Scalar : Set}
     (dataSet : FiniteWeightedAdjointContributionData
       Input Output FineValue CoarseValue Scalar)
     fineField coarseField →
