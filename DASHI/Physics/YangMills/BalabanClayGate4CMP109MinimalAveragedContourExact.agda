@@ -51,7 +51,10 @@ record MinimalContourGaugeData
 open MinimalContourGaugeData public
 
 asGaugeCovariantPathFamily :
-  ∀ {Field Group Lie Scalar geometry point averageAxioms} →
+  ∀ {Field Group Lie Scalar : Set}
+    {geometry : Executable.CenteredExecutableGeometry Minimal.radius}
+    {point : Centered.CenteredBlockPoint4 Minimal.radius}
+    {averageAxioms : Average.CMP109GroupAverageAxioms Group Lie Scalar} →
   MinimalContourGaugeData
     Field Group Lie Scalar geometry point averageAxioms →
   Average.GaugeCovariantPathFamily
@@ -75,7 +78,10 @@ asGaugeCovariantPathFamily {geometry = geometry} {point = point} dataSet = recor
   }
 
 minimalAveragedContour :
-  ∀ {Field Group Lie Scalar geometry point averageAxioms} →
+  ∀ {Field Group Lie Scalar : Set}
+    {geometry : Executable.CenteredExecutableGeometry Minimal.radius}
+    {point : Centered.CenteredBlockPoint4 Minimal.radius}
+    {averageAxioms : Average.CMP109GroupAverageAxioms Group Lie Scalar} →
   MinimalContourGaugeData
     Field Group Lie Scalar geometry point averageAxioms →
   Field → Group
@@ -83,7 +89,10 @@ minimalAveragedContour dataSet =
   Average.averagedContour (asGaugeCovariantPathFamily dataSet)
 
 minimalTransformedAveragedContour :
-  ∀ {Field Group Lie Scalar geometry point averageAxioms} →
+  ∀ {Field Group Lie Scalar : Set}
+    {geometry : Executable.CenteredExecutableGeometry Minimal.radius}
+    {point : Centered.CenteredBlockPoint4 Minimal.radius}
+    {averageAxioms : Average.CMP109GroupAverageAxioms Group Lie Scalar} →
   MinimalContourGaugeData
     Field Group Lie Scalar geometry point averageAxioms →
   Field → Group
@@ -92,7 +101,10 @@ minimalTransformedAveragedContour dataSet =
     (asGaugeCovariantPathFamily dataSet)
 
 minimalAveragedContourGaugeCovariant :
-  ∀ {Field Group Lie Scalar geometry point averageAxioms}
+  ∀ {Field Group Lie Scalar : Set}
+    {geometry : Executable.CenteredExecutableGeometry Minimal.radius}
+    {point : Centered.CenteredBlockPoint4 Minimal.radius}
+    {averageAxioms : Average.CMP109GroupAverageAxioms Group Lie Scalar}
     (dataSet : MinimalContourGaugeData
       Field Group Lie Scalar geometry point averageAxioms)
     field →
