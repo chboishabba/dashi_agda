@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PointwiseSmallFactorEntropyBridgeExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -24,14 +24,17 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- Communications in Mathematical Physics 103 (1986), 491--498.
 -- DOI: 10.1007/BF01211762.
 --
--- The source small factor and the animal-count weight are separate.  Their
--- product is assembled before the strict convergence-ratio check.
+-- The source small factor and the animal-count weight are separate. Their
+-- product is assembled before the strict convergence-ratio check. The power
+-- operation and its product law belong to the scalar backend; this bridge does
+-- not attempt to reconstruct a commutative monoid from insufficient laws.
 ------------------------------------------------------------------------
 
 record MultiplicativeSuppressionAlgebra (Bound : Set) : Set₁ where
   field
     one : Bound
     multiply : Bound → Bound → Bound
+    power : Bound → Nat → Bound
     LessEqual StrictlyLess : Bound → Bound → Set
 
     reflexive : ∀ value → LessEqual value value
@@ -42,96 +45,11 @@ record MultiplicativeSuppressionAlgebra (Bound : Set) : Set₁ where
       LessEqual left leftUpper → LessEqual right rightUpper →
       LessEqual (multiply left right) (multiply leftUpper rightUpper)
 
-    multiplyAssociative : ∀ left middle right →
-      multiply (multiply left middle) right
-      ≡ multiply left (multiply middle right)
-
-    multiplyCommutative : ∀ left right →
-      multiply left right ≡ multiply right left
+    powerProduct : ∀ left right exponent →
+      multiply (power left exponent) (power right exponent)
+      ≡ power (multiply left right) exponent
 
 open MultiplicativeSuppressionAlgebra public
-
-power :
-  ∀ {Bound} → MultiplicativeSuppressionAlgebra Bound → Bound → Nat → Bound
-power algebra ratio zero = one algebra
-power algebra ratio (suc exponent) =
-  multiply algebra ratio (power algebra ratio exponent)
-
-powerProduct :
-  ∀ {Bound}
-    (algebra : MultiplicativeSuppressionAlgebra Bound)
-    left right exponent →
-  multiply algebra
-    (power algebra left exponent)
-    (power algebra right exponent)
-  ≡ power algebra (multiply algebra left right) exponent
-powerProduct algebra left right zero =
-  multiplyCommutative algebra (one algebra) (one algebra)
-powerProduct algebra left right (suc exponent) =
-  let induction = powerProduct algebra left right exponent
-  in
-  subst
-    (λ selected →
-      multiply algebra
-        (multiply algebra left (power algebra left exponent))
-        (multiply algebra right (power algebra right exponent))
-      ≡ multiply algebra (multiply algebra left right) selected)
-    induction
-    (subst
-      (λ selected →
-        multiply algebra
-          (multiply algebra left (power algebra left exponent))
-          (multiply algebra right (power algebra right exponent))
-        ≡ selected)
-      (sym (multiplyAssociative algebra
-        (multiply algebra left right)
-        (power algebra left exponent)
-        (power algebra right exponent)))
-      (subst
-        (λ selected →
-          multiply algebra
-            (multiply algebra left (power algebra left exponent))
-            (multiply algebra right (power algebra right exponent))
-          ≡ multiply algebra selected (power algebra right exponent))
-        (subst
-          (λ selected →
-            multiply algebra left
-              (multiply algebra (power algebra left exponent) right)
-            ≡ multiply algebra selected (power algebra left exponent))
-          (multiplyCommutative algebra left right)
-          (subst
-            (λ selected →
-              multiply algebra
-                (multiply algebra left (power algebra left exponent))
-                (multiply algebra right (power algebra right exponent))
-              ≡ multiply algebra left selected)
-            (sym (multiplyAssociative algebra
-              right (power algebra left exponent)
-              (power algebra right exponent)))
-            (subst
-              (λ selected →
-                multiply algebra
-                  (multiply algebra left (power algebra left exponent))
-                  (multiply algebra right (power algebra right exponent))
-                ≡ selected)
-              (sym (multiplyAssociative algebra
-                left
-                (multiply algebra (power algebra left exponent) right)
-                (power algebra right exponent)))
-              (subst
-                (λ selected →
-                  multiply algebra
-                    (multiply algebra left (power algebra left exponent))
-                    (multiply algebra right (power algebra right exponent))
-                  ≡ multiply algebra
-                      (multiply algebra left selected)
-                      (power algebra right exponent))
-                (multiplyCommutative algebra
-                  (power algebra left exponent) right)
-                (multiplyAssociative algebra
-                  (multiply algebra left (power algebra left exponent))
-                  right
-                  (power algebra right exponent)))))))))
 
 record PointwiseSmallFactorComponent
     {Component Bound : Set}
