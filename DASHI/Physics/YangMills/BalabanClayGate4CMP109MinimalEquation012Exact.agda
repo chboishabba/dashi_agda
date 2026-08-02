@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalEquation012Exact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
 open import Data.Rational using (ℚ)
 open import Relation.Binary.PropositionalEquality using (trans)
@@ -34,7 +35,7 @@ record MinimalEquation012Inputs
   field
     geometry : Physical.CMP109PhysicalScaleGeometry
       Minimal.radius Minimal.RepositoryFineSite
-      Minimal.RepositoryCoarseSite _
+      Minimal.RepositoryCoarseSite Nat
 
     zeroLie : Lie
     addLie : Lie → Lie → Lie
