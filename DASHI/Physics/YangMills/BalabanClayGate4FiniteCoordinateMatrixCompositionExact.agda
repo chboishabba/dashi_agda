@@ -48,22 +48,22 @@ dotZeroLeft :
     (vector : Free.Vec Scalar n) →
   Coordinate.dot (semiring laws)
     (Coordinate.zeroVec (semiring laws) n) vector
-  ≡ Coordinate.zero (semiring laws)
+  ≡ Coordinate.zeroScalar (semiring laws)
 dotZeroLeft laws Free.vnil = refl
 dotZeroLeft laws (value Free.v∷ values) =
   trans
     (cong
       (Coordinate.add (semiring laws)
         (Coordinate.multiply (semiring laws)
-          (Coordinate.zero (semiring laws)) value))
+          (Coordinate.zeroScalar (semiring laws)) value))
       (dotZeroLeft laws values))
     (trans
       (cong
         (λ head → Coordinate.add (semiring laws) head
-          (Coordinate.zero (semiring laws)))
+          (Coordinate.zeroScalar (semiring laws)))
         (Coordinate.multiplyZeroLeft (semiring laws) value))
       (Coordinate.addIdentityRight (semiring laws)
-        (Coordinate.zero (semiring laws))))
+        (Coordinate.zeroScalar (semiring laws))))
 
 dotScaleLeft :
   ∀ {Scalar n} (laws : MatrixMultiplicationLaws Scalar)
@@ -256,12 +256,12 @@ dotBasisVector {dimension = suc dimension} laws Free.fzero
     (cong
       (Coordinate.add (semiring laws)
         (Coordinate.multiply (semiring laws)
-          (Coordinate.one (semiring laws)) value))
+          (Coordinate.oneScalar (semiring laws)) value))
       (dotZeroLeft laws values))
     (trans
       (cong
         (λ head → Coordinate.add (semiring laws) head
-          (Coordinate.zero (semiring laws)))
+          (Coordinate.zeroScalar (semiring laws)))
         (Coordinate.multiplyIdentityLeft (semiring laws) value))
       (Coordinate.addIdentityRight (semiring laws) value))
 dotBasisVector {dimension = suc dimension} laws (Free.fsuc index)
@@ -270,7 +270,7 @@ dotBasisVector {dimension = suc dimension} laws (Free.fsuc index)
     (cong
       (Coordinate.add (semiring laws)
         (Coordinate.multiply (semiring laws)
-          (Coordinate.zero (semiring laws)) value))
+          (Coordinate.zeroScalar (semiring laws)) value))
       (dotBasisVector laws index values))
     (trans
       (cong
@@ -321,15 +321,16 @@ coordinateOperatorCompositionExact :
   ∀ {Scalar dimension}
     (laws : MatrixMultiplicationLaws Scalar)
     (left right : Coordinate.CoordinateOperator Scalar dimension)
-    vector →
+    (vector : Free.Vec Scalar dimension) →
   Coordinate.applyCoordinateOperator (semiring laws)
     (composeCoordinateOperator laws left right) vector
   ≡ Coordinate.applyCoordinateOperator (semiring laws) left
       (Coordinate.applyCoordinateOperator (semiring laws) right vector)
-coordinateOperatorCompositionExact laws left right =
+coordinateOperatorCompositionExact laws left right vector =
   matrixProductActsAsComposition laws
     (Coordinate.operatorMatrix left)
     (Coordinate.operatorMatrix right)
+    vector
 
 identityCoordinateOperator :
   ∀ {Scalar dimension} →
@@ -341,11 +342,12 @@ identityCoordinateOperator laws =
 identityCoordinateOperatorExact :
   ∀ {Scalar dimension}
     (laws : MatrixMultiplicationLaws Scalar)
-    vector →
+    (vector : Free.Vec Scalar dimension) →
   Coordinate.applyCoordinateOperator (semiring laws)
     (identityCoordinateOperator laws) vector
   ≡ vector
-identityCoordinateOperatorExact = identityMatrixActsIdentically
+identityCoordinateOperatorExact laws vector =
+  identityMatrixActsIdentically laws vector
 
 finiteMatrixProductActionLevel : ProofLevel
 finiteMatrixProductActionLevel = machineChecked

@@ -133,6 +133,13 @@ mapLength function [] = refl
 mapLength function (value ∷ values) =
   cong suc (mapLength function values)
 
+freeMapLength :
+  ∀ {A B : Set} (function : A → B) values →
+  listLength (Free.mapList function values) ≡ listLength values
+freeMapLength function [] = refl
+freeMapLength function (value ∷ values) =
+  cong suc (freeMapLength function values)
+
 appendLength :
   ∀ {A : Set} (left right : List A) →
   listLength (left ++ right)
@@ -161,7 +168,7 @@ cartesianLength (left ∷ lefts) rights =
 allFinLength : ∀ n → listLength (Free.allFin n) ≡ n
 allFinLength zero = refl
 allFinLength (suc n) =
-  cong suc (trans (mapLength Free.fsuc (Free.allFin n)) (allFinLength n))
+  cong suc (trans (freeMapLength Free.fsuc (Free.allFin n)) (allFinLength n))
 
 SU2Colour : Set
 SU2Colour = Free.Fin three
@@ -288,7 +295,7 @@ su2BasisVector pointed index =
 su2CoordinateOfBasis :
   ∀ {Scalar bondCount}
     (pointed : Free.PointedScalar Scalar)
-    left right →
+    (left right : IndexPair (Free.Fin bondCount) SU2Colour) →
   lookupSU2Coordinate (su2BasisVector pointed left) right
   ≡ pairDelta pointed left right
 su2CoordinateOfBasis pointed left right =
@@ -308,7 +315,8 @@ su2BasisBiorthogonal :
   ∀ {Scalar bondCount}
     (pointed : Free.PointedScalar Scalar) →
   SU2Biorthogonal pointed (su2BasisVector pointed)
-su2BasisBiorthogonal = su2CoordinateOfBasis
+su2BasisBiorthogonal {bondCount = bondCount} pointed left right =
+  su2CoordinateOfBasis {bondCount = bondCount} pointed left right
 
 canonicalPeriodicTreeGaugeSU2Basis :
   ∀ {n Scalar}
@@ -319,21 +327,26 @@ canonicalPeriodicTreeGaugeSU2Basis :
     (SU2CoordinateTuple Scalar (Free.offTreeDimension tree))
     Scalar
 canonicalPeriodicTreeGaugeSU2Basis pointed tree = record
-  { Matrix.FiniteTangentBasis.indices = offTreeColourIndices tree
-  ; Matrix.FiniteTangentBasis.basisVector = su2BasisVector pointed
-  ; Matrix.FiniteTangentBasis.coordinates = lookupSU2Coordinate
-  ; Matrix.FiniteTangentBasis.linearCombination =
-      λ selected coefficients → tabulateSU2Coordinates coefficients
-  ; Matrix.FiniteTangentBasis.BasisIndexComplete =
+  { indices = offTreeColourIndices tree
+  ; basisVector =
+      su2BasisVector {bondCount = Free.offTreeDimension tree} pointed
+  ; coordinates =
+      lookupSU2Coordinate {bondCount = Free.offTreeDimension tree}
+  ; linearCombination =
+      λ selected coefficients →
+        tabulateSU2Coordinates
+          {bondCount = Free.offTreeDimension tree} coefficients
+  ; BasisIndexComplete =
       λ index → index ∈ offTreeColourIndices tree
-  ; Matrix.FiniteTangentBasis.basisIndexComplete =
+  ; basisIndexComplete =
       offTreeColourIndicesComplete tree
-  ; Matrix.FiniteTangentBasis.basisComplete =
-      λ tuple → sym (tabulateLookupSU2 tuple)
-  ; Matrix.FiniteTangentBasis.LinearlyIndependent =
-      SU2Biorthogonal pointed
-  ; Matrix.FiniteTangentBasis.basisIndependent =
-      su2BasisBiorthogonal pointed
+  ; basisComplete =
+      λ tuple → sym (tabulateLookupSU2
+        {bondCount = Free.offTreeDimension tree} tuple)
+  ; LinearlyIndependent =
+      SU2Biorthogonal {bondCount = Free.offTreeDimension tree} pointed
+  ; basisIndependent =
+      su2BasisBiorthogonal {bondCount = Free.offTreeDimension tree} pointed
   }
 
 offTreeColourBond :

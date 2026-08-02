@@ -25,19 +25,19 @@ open import DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCanonicalFr
 
 record CommutativeSemiringLaws (Scalar : Set) : Set₁ where
   field
-    zero one : Scalar
+    zeroScalar oneScalar : Scalar
     add multiply : Scalar → Scalar → Scalar
 
     addAssociative : ∀ left middle right →
       add (add left middle) right ≡ add left (add middle right)
     addCommutative : ∀ left right → add left right ≡ add right left
-    addIdentityLeft : ∀ value → add zero value ≡ value
-    addIdentityRight : ∀ value → add value zero ≡ value
+    addIdentityLeft : ∀ value → add zeroScalar value ≡ value
+    addIdentityRight : ∀ value → add value zeroScalar ≡ value
 
-    multiplyIdentityLeft : ∀ value → multiply one value ≡ value
-    multiplyIdentityRight : ∀ value → multiply value one ≡ value
-    multiplyZeroLeft : ∀ value → multiply zero value ≡ zero
-    multiplyZeroRight : ∀ value → multiply value zero ≡ zero
+    multiplyIdentityLeft : ∀ value → multiply oneScalar value ≡ value
+    multiplyIdentityRight : ∀ value → multiply value oneScalar ≡ value
+    multiplyZeroLeft : ∀ value → multiply zeroScalar value ≡ zeroScalar
+    multiplyZeroRight : ∀ value → multiply value zeroScalar ≡ zeroScalar
 
     distributeLeft : ∀ value left right →
       multiply value (add left right)
@@ -62,7 +62,7 @@ vecExt {n = suc n} {leftHead v∷ leftTail} {rightHead v∷ rightTail}
 zeroVec : ∀ {Scalar} → CommutativeSemiringLaws Scalar →
   ∀ n → Vec Scalar n
 zeroVec algebra zero = vnil
-zeroVec algebra (suc n) = zero algebra v∷ zeroVec algebra n
+zeroVec algebra (suc n) = zeroScalar algebra v∷ zeroVec algebra n
 
 addVec : ∀ {Scalar n} → CommutativeSemiringLaws Scalar →
   Vec Scalar n → Vec Scalar n → Vec Scalar n
@@ -84,13 +84,13 @@ lookupAddVec {n = suc n} algebra
 basisVector : ∀ {Scalar n} → CommutativeSemiringLaws Scalar →
   Fin n → Vec Scalar n
 basisVector {n = suc n} algebra fzero =
-  one algebra v∷ zeroVec algebra n
+  oneScalar algebra v∷ zeroVec algebra n
 basisVector {n = suc n} algebra (fsuc index) =
-  zero algebra v∷ basisVector algebra index
+  zeroScalar algebra v∷ basisVector algebra index
 
 dot : ∀ {Scalar n} → CommutativeSemiringLaws Scalar →
   Vec Scalar n → Vec Scalar n → Scalar
-dot algebra vnil vnil = zero algebra
+dot algebra vnil vnil = zeroScalar algebra
 dot algebra (left v∷ lefts) (right v∷ rights) =
   add algebra
     (multiply algebra left right)
@@ -99,16 +99,16 @@ dot algebra (left v∷ lefts) (right v∷ rights) =
 dotZeroRight :
   ∀ {Scalar n} (algebra : CommutativeSemiringLaws Scalar)
     (vector : Vec Scalar n) →
-  dot algebra vector (zeroVec algebra n) ≡ zero algebra
+  dot algebra vector (zeroVec algebra n) ≡ zeroScalar algebra
 dotZeroRight algebra vnil = refl
 dotZeroRight algebra (value v∷ values) =
   trans
-    (cong (add algebra (multiply algebra value (zero algebra)))
+    (cong (add algebra (multiply algebra value (zeroScalar algebra)))
       (dotZeroRight algebra values))
     (trans
-      (cong (λ left → add algebra left (zero algebra))
+      (cong (λ left → add algebra left (zeroScalar algebra))
         (multiplyZeroRight algebra value))
-      (addIdentityRight algebra (zero algebra)))
+      (addIdentityRight algebra (zeroScalar algebra)))
 
 dotRowBasis :
   ∀ {Scalar n} (algebra : CommutativeSemiringLaws Scalar)
@@ -117,15 +117,15 @@ dotRowBasis :
   ≡ lookupVec row index
 dotRowBasis {n = suc n} algebra (value v∷ values) fzero =
   trans
-    (cong (add algebra (multiply algebra value (one algebra)))
+    (cong (add algebra (multiply algebra value (oneScalar algebra)))
       (dotZeroRight algebra values))
     (trans
-      (cong (λ left → add algebra left (zero algebra))
+      (cong (λ left → add algebra left (zeroScalar algebra))
         (multiplyIdentityRight algebra value))
       (addIdentityRight algebra value))
 dotRowBasis {n = suc n} algebra (value v∷ values) (fsuc index) =
   trans
-    (cong (add algebra (multiply algebra value (zero algebra)))
+    (cong (add algebra (multiply algebra value (zeroScalar algebra)))
       (dotRowBasis algebra values index))
     (trans
       (cong (λ left → add algebra left (lookupVec values index))
@@ -156,7 +156,7 @@ dotAddLeft :
   dot algebra (addVec algebra left right) vector
   ≡ add algebra (dot algebra left vector) (dot algebra right vector)
 dotAddLeft algebra vnil vnil vnil =
-  sym (addIdentityLeft algebra (zero algebra))
+  sym (addIdentityLeft algebra (zeroScalar algebra))
 dotAddLeft algebra
     (left v∷ lefts) (right v∷ rights) (value v∷ values) =
   trans
@@ -182,21 +182,22 @@ FiniteMatrix Scalar n = Vec (Vec Scalar n) n
 
 addMatrix : ∀ {Scalar n} → CommutativeSemiringLaws Scalar →
   FiniteMatrix Scalar n → FiniteMatrix Scalar n → FiniteMatrix Scalar n
-addMatrix algebra vnil vnil = vnil
-addMatrix algebra (leftRow v∷ leftRows) (rightRow v∷ rightRows) =
-  addVec algebra leftRow rightRow v∷
-  addMatrix algebra leftRows rightRows
+addMatrix {n = n} algebra left right =
+  tabulateVec (λ rowIndex →
+    addVec algebra
+      (lookupVec left rowIndex)
+      (lookupVec right rowIndex))
 
 lookupAddMatrix :
   ∀ {Scalar n} (algebra : CommutativeSemiringLaws Scalar)
     (left right : FiniteMatrix Scalar n) row →
   lookupVec (addMatrix algebra left right) row
   ≡ addVec algebra (lookupVec left row) (lookupVec right row)
-lookupAddMatrix {n = suc n} algebra
-    (leftRow v∷ leftRows) (rightRow v∷ rightRows) fzero = refl
-lookupAddMatrix {n = suc n} algebra
-    (leftRow v∷ leftRows) (rightRow v∷ rightRows) (fsuc row) =
-  lookupAddMatrix algebra leftRows rightRows row
+lookupAddMatrix {n = n} algebra left right row =
+  lookupTabulate
+    (λ rowIndex →
+      addVec algebra (lookupVec left rowIndex) (lookupVec right rowIndex))
+    row
 
 matrixAction : ∀ {Scalar n} → CommutativeSemiringLaws Scalar →
   FiniteMatrix Scalar n → Vec Scalar n → Vec Scalar n
