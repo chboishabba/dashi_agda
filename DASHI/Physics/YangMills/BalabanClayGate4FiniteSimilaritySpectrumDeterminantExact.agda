@@ -229,10 +229,10 @@ transportEigenpairThroughSimilarity :
   Eigenpair dataSet (operator dataSet) →
   Eigenpair dataSet (similarityOperator dataSet)
 transportEigenpairThroughSimilarity dataSet source = record
-  { Eigenpair.vector =
+  { vector =
       applyMatrix dataSet (inverseChange dataSet) (vector source)
-  ; Eigenpair.eigenvalue = eigenvalue source
-  ; Eigenpair.eigenEquation =
+  ; eigenvalue = eigenvalue source
+  ; eigenEquation =
       trans
         (actionMultiplication dataSet
           (inverseChange dataSet)
