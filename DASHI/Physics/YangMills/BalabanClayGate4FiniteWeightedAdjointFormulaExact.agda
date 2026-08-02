@@ -128,15 +128,14 @@ asFiniteWeightedAdjointContributionData :
   Fubini.FiniteWeightedAdjointContributionData
     Input Output FineValue CoarseValue Scalar
 asFiniteWeightedAdjointContributionData inputs outputs algebra = record
-  { Fubini.FiniteWeightedAdjointContributionData.scalarAdditive =
-      additive algebra
-  ; Fubini.FiniteWeightedAdjointContributionData.inputs = inputs
-  ; Fubini.FiniteWeightedAdjointContributionData.outputs = outputs
-  ; Fubini.FiniteWeightedAdjointContributionData.primalWeightedContribution =
+  { scalarAdditive = additive algebra
+  ; inputs = inputs
+  ; outputs = outputs
+  ; primalWeightedContribution =
       primalLocalWeightedContribution algebra
-  ; Fubini.FiniteWeightedAdjointContributionData.adjointWeightedContribution =
+  ; adjointWeightedContribution =
       adjointLocalWeightedContribution algebra
-  ; Fubini.FiniteWeightedAdjointContributionData.localWeightedAdjointIdentity =
+  ; localWeightedAdjointIdentity =
       weightedAdjointEntryLocalIdentity algebra
   }
 
