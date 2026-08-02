@@ -2,15 +2,14 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound5IntegratedEx
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PhysicalScaleGeometryExact as Physical
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneSplitFibreExact as Split
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneWeightExact as Weight
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact as Minimal
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusFromSignedTailsExact as Signed
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusScalarEnvelopeExact as HalfRadius
 import DASHI.Physics.YangMills.BalabanClayGate4NewtonFourChannelQuarterExact as Newton
@@ -22,7 +21,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiveActivityTenthToHalfExact as A
 
 ------------------------------------------------------------------------
 -- Round five owns the strongest concrete instantiations extracted from the
--- previous physical cut.  It does not collapse the remaining local analytic
+-- previous physical cut. It does not collapse the remaining local analytic
 -- estimates into anonymous propositions: signed series tails, four Newton
 -- channels, physical functional atoms, Wilson entropy comparison, random-walk
 -- shell decay and five activity bounds are explicit data.
@@ -30,11 +29,10 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiveActivityTenthToHalfExact as A
 
 record PhysicalClosureRound5Inputs : Set₂ where
   field
-    CoarseSite : Set
-    fineSpacing : Nat
-    radiusOneGeometry :
+    minimalGeometry :
       Physical.CMP109PhysicalScaleGeometry
-        Split.one (Split.SplitFineSite Split.one CoarseSite) CoarseSite Nat
+        Minimal.radius Minimal.RepositoryFineSite
+        Minimal.RepositoryCoarseSite Nat
 
     SU2Scalar : Set
     scalarCore : Signed.SU2HalfRadiusScalarCore SU2Scalar
@@ -69,19 +67,21 @@ record PhysicalClosureRound5Inputs : Set₂ where
 
 open PhysicalClosureRound5Inputs public
 
-round5RadiusOneBlockCardinality :
+round5MinimalBlockCardinality :
   (inputs : PhysicalClosureRound5Inputs) →
   ∀ coarse →
   length
-    (Physical.physicalBlockElements (radiusOneGeometry inputs) coarse)
-  ≡ Split.eightyOne
-round5RadiusOneBlockCardinality inputs =
-  Split.radiusOnePhysicalBlockHasEightyOneSites
-    (radiusOneGeometry inputs)
+    (Physical.physicalBlockElements (minimalGeometry inputs) coarse)
+  ≡ Minimal.volume
+round5MinimalBlockCardinality inputs coarse =
+  trans
+    (Physical.physicalBlockEnumerationLength
+      (minimalGeometry inputs) coarse)
+    Minimal.volumeExact
 
-round5SiteWeightReciprocal :
-  Weight.oneOverEightyOneℚ * Weight.eightyOneℚ ≡ 1ℚ
-round5SiteWeightReciprocal = Weight.radiusOneSiteWeightIsReciprocal
+round5MinimalSiteWeightReciprocal :
+  Minimal.siteWeightℚ * Minimal.volumeℚ ≡ 1ℚ
+round5MinimalSiteWeightReciprocal = Minimal.minimalSiteWeightIsReciprocal
 
 round5ScalarEnvelope :
   (inputs : PhysicalClosureRound5Inputs) →
@@ -170,8 +170,8 @@ round5FiveActivitiesBelowHalf inputs =
 physicalClosureRound5IntegratedCarrierLevel : ProofLevel
 physicalClosureRound5IntegratedCarrierLevel = machineChecked
 
-physicalClosureRound5ConcreteCMP109Level : ProofLevel
-physicalClosureRound5ConcreteCMP109Level = machineChecked
+physicalClosureRound5MinimalCMP109Level : ProofLevel
+physicalClosureRound5MinimalCMP109Level = machineChecked
 
 physicalClosureRound5SignedTailAndNewtonLevel : ProofLevel
 physicalClosureRound5SignedTailAndNewtonLevel = machineChecked
