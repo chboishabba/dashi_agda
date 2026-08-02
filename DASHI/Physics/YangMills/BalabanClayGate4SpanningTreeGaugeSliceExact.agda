@@ -115,7 +115,7 @@ fixedEdgeDeterminesChildGauge :
   ≡ Bond.multiply group
       (gauge selected (parent tree edge))
       (edgeValue tree edge)
-fixedEdgeDeterminesChildGauge {group = group} {tree = tree}
+fixedEdgeDeterminesChildGauge {Vertex} {Edge} {Group} {group = group} {tree = tree}
     selected edge =
   sym
     (trans
@@ -168,9 +168,9 @@ canonicalRootAnchoredGauge :
     (tree : RootedTreeTransport Vertex Edge Group group) →
   RootAnchoredTreeGauge tree
 canonicalRootAnchoredGauge tree = record
-  { RootAnchoredTreeGauge.gauge = canonicalTreeGauge tree
-  ; RootAnchoredTreeGauge.rootAnchored = canonicalGaugeAnchoredAtRoot tree
-  ; RootAnchoredTreeGauge.fixesTreeEdge = canonicalGaugeFixesTreeEdge tree
+  { gauge = canonicalTreeGauge tree
+  ; rootAnchored = canonicalGaugeAnchoredAtRoot tree
+  ; fixesTreeEdge = canonicalGaugeFixesTreeEdge tree
   }
 
 canonicalGaugeFixedCoordinate :
