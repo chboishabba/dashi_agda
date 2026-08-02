@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound5Ledger where
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneSplitFibreExact as CMP109
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneRepositoryTorusExact as RepositoryTorus
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneWeightExact as Weight
 import DASHI.Physics.YangMills.BalabanClayGate4AlternatingTaylorEnvelopeExact as Taylor
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusFromSignedTailsExact as SU2
@@ -11,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4NewtonFourChannelQuarterExact as 
 import DASHI.Physics.YangMills.BalabanClayGate4RationalWilsonQuadraticSecondDifferenceExact as WilsonHessian
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalFunctionalSecondVariationExact as Functional
 import DASHI.Physics.YangMills.BalabanClayGate4SandwichOperatorToFormBoundExact as Sandwich
+import DASHI.Physics.YangMills.BalabanClayGate4FiveSandwichChannelAssemblyExact as FiveSandwich
 import DASHI.Physics.YangMills.BalabanClayGate4WilsonPlaquetteBadCubeBudgetExact as LargeField
 import DASHI.Physics.YangMills.BalabanClayGate4GaugeCubicTaylorRemainderSumExact as Cubic
 import DASHI.Physics.YangMills.BalabanClayGate4WeakeningProductSupportExact as Weakening
@@ -30,6 +32,10 @@ cmp109RadiusOneSideAndVolumeLevel = CMP109.cmp109RadiusOneSideAndVolumeLevel
 cmp109SplitProjectionFibreLevel = CMP109.cmp109SplitProjectionFibreLevel
 cmp109SplitEndpointBlockLevel = CMP109.cmp109SplitEndpointBlockLevel
 cmp109RadiusOnePhysicalDecisionLevel = CMP109.cmp109RadiusOnePhysicalDecisionLevel
+cmp109CenteredTorusSurjectionLevel = RepositoryTorus.cmp109CenteredTorusSurjectionLevel
+cmp109RadiusOneRepositoryProjectionLevel = RepositoryTorus.cmp109RadiusOneRepositoryProjectionLevel
+cmp109RadiusOneRepositoryEndpointLevel = RepositoryTorus.cmp109RadiusOneRepositoryEndpointLevel
+cmp109RadiusOneRepositoryGeometryDecisionLevel = RepositoryTorus.cmp109RadiusOneRepositoryGeometryDecisionLevel
 cmp109RadiusOneRationalWeightLevel = Weight.cmp109RadiusOneRationalWeightLevel
 
 alternatingTaylorEnvelopeLevel = Taylor.alternatingTaylorEnvelopeLevel
@@ -47,6 +53,7 @@ physicalFunctionalSecondVariationLevel = Functional.physicalFunctionalSecondVari
 physicalFunctionalFiveChannelOwnershipLevel = Functional.physicalFunctionalFiveChannelOwnershipLevel
 sandwichOperatorNormProductLevel = Sandwich.sandwichOperatorNormProductLevel
 sandwichUnitFormProductLevel = Sandwich.sandwichUnitFormProductLevel
+fiveSandwichChannelFormAssemblyLevel = FiveSandwich.fiveSandwichChannelFormAssemblyLevel
 
 wilsonPlaquetteBadCubePenaltyLevel = LargeField.wilsonPlaquetteBadCubePenaltyLevel
 wilsonFiniteBadRegionBudgetLevel = LargeField.wilsonFiniteBadRegionBudgetLevel
@@ -69,9 +76,6 @@ physicalClosureRound5FunctionalAndPolymerLevel = Integrated.physicalClosureRound
 -- Irreducible physical inhabitants after round five.
 ------------------------------------------------------------------------
 
-physicalPeriodicTorusSplitFibreEquivalenceInputsLevel : ProofLevel
-physicalPeriodicTorusSplitFibreEquivalenceInputsLevel = conditional
-
 physicalBishopSignedTailInputsLevel = SU2.physicalBishopSignedTailInputsLevel
 physicalBishopOrderClosedLimitInputsLevel = Lipschitz.physicalBishopOrderClosedLimitInputsLevel
 physicalFederbushChannelEstimatesInputsLevel = Newton.physicalFederbushChannelEstimatesInputsLevel
@@ -80,7 +84,8 @@ physicalFaddeevPopovChannelEstimatesInputsLevel = Newton.physicalFaddeevPopovCha
 physicalPlaquetteDerivativeChainRuleInputsLevel = WilsonHessian.physicalPlaquetteDerivativeChainRuleInputsLevel
 physicalWilsonTransportChartDerivativeInputsLevel = Functional.physicalWilsonTransportChartDerivativeInputsLevel
 physicalGaugeConstraintDerivativeInputsLevel = Functional.physicalGaugeConstraintDerivativeInputsLevel
-physicalFiveChannelStageNormInputsLevel = Sandwich.physicalFiveChannelStageNormInputsLevel
+physicalFiveChannelTotalTriangleInputsLevel = FiveSandwich.physicalFiveChannelTotalTriangleInputsLevel
+physicalFiveChannelStageNormBudgetsInputsLevel = FiveSandwich.physicalFiveChannelStageNormBudgetsInputsLevel
 
 physicalWilsonEntropyComparisonInputsLevel = LargeField.physicalWilsonEntropyComparisonInputsLevel
 physicalGaugeLocalThirdDerivativeInputsLevel = Cubic.physicalGaugeLocalThirdDerivativeInputsLevel
