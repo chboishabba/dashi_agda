@@ -46,6 +46,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- than inferring it from normalized ℚ: the ℚᵘ properties API supplies the
 -- propositional absolute-value idempotence used by K-abs, and reconstruction
 -- may be judgmental when the constructor and projections genuinely match.
+-- Bishop commit d732b0340d729b264227a70fcf38383d8fb3ac3c now closes this
+-- particular K-abs/index seam; common-index transport remains a future
+-- fallback rather than a requirement for the absolute-product theorem.
 
 record CubicalHoTTRealSourceReceipt : Set where
   field
