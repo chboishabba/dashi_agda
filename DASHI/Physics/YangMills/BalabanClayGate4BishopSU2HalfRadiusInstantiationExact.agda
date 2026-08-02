@@ -6,6 +6,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
+import DASHI.Foundations.BishopElementaryTailEvidenceExact as TailEvidence
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusScalarEnvelopeExact as HalfRadius
 import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusFromSignedTailsExact as Signed
 
@@ -20,8 +21,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4SU2HalfRadiusFromSignedTailsExact
 -- absolutely convergent Bishop-real power series. This record prevents the
 -- physical SU(2) envelope from being inhabited with unrelated abstract
 -- functions: its scalar sine and cosine must be exactly those series values.
--- The remaining analytic work is the signed first-omitted-tail certificate on
--- the selected half ball.
+-- It also requires inhabitants of the configured tail propositions, not merely
+-- the proposition families themselves.
 ------------------------------------------------------------------------
 
 record BishopSU2HalfRadiusInputs
@@ -39,6 +40,9 @@ record BishopSU2HalfRadiusInputs
 
     configuredTails :
       Elementary.BishopConfiguredElementaryTailProofs seriesData
+
+    configuredTailEvidence :
+      TailEvidence.BishopConfiguredElementaryTailEvidence configuredTails
 
     configuredRadiusIsHalf :
       Bishop.BishopEquivalent
@@ -75,6 +79,9 @@ bishopCosineUsedByEnvelope inputs = cosineIsBishopSeries inputs
 
 bishopSU2PowerSeriesFunctionIdentificationLevel : ProofLevel
 bishopSU2PowerSeriesFunctionIdentificationLevel = machineChecked
+
+bishopSU2TailEvidenceRequirementLevel : ProofLevel
+bishopSU2TailEvidenceRequirementLevel = machineChecked
 
 bishopSU2HalfRadiusEnvelopeAssemblyLevel : ProofLevel
 bishopSU2HalfRadiusEnvelopeAssemblyLevel = machineChecked
