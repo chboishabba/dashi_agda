@@ -6,6 +6,8 @@ import DASHI.Foundations.BishopElementaryTailEvidenceExact as BishopTailEvidence
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneSplitFibreExact as CMP109Calibration
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneRepositoryTorusExact as RepositoryTorus
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepositoryScaleExact as MinimalCMP109
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalContourFamilyExact as MinimalContours
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAveragedContourExact as MinimalAverage
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalEquation012Exact as MinimalEquation012
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneWeightExact as CalibrationWeight
 import DASHI.Physics.YangMills.BalabanClayGate4AlternatingTaylorEnvelopeExact as Taylor
@@ -45,6 +47,11 @@ cmp109MinimalRepositoryProjectionLevel = MinimalCMP109.cmp109MinimalRepositoryPr
 cmp109MinimalRepositoryEndpointLevel = MinimalCMP109.cmp109MinimalRepositoryEndpointLevel
 cmp109MinimalSiteWeightLevel = MinimalCMP109.cmp109MinimalSiteWeightLevel
 cmp109MinimalGeometryDecisionLevel = MinimalCMP109.cmp109MinimalGeometryDecisionLevel
+cmp109MinimalContourFamilyEnumerationLevel = MinimalContours.cmp109MinimalContourFamilyEnumerationLevel
+cmp109MinimalContourFamilyCardinalityLevel = MinimalContours.cmp109MinimalContourFamilyCardinalityLevel
+cmp109MinimalContourFamilyEndpointLevel = MinimalContours.cmp109MinimalContourFamilyEndpointLevel
+cmp109MinimalEquation011PathIdentificationLevel = MinimalAverage.cmp109MinimalEquation011PathIdentificationLevel
+cmp109MinimalEquation011GaugeCovarianceLevel = MinimalAverage.cmp109MinimalEquation011GaugeCovarianceLevel
 cmp109MinimalEquation012InstantiationLevel = MinimalEquation012.cmp109MinimalEquation012InstantiationLevel
 cmp109MinimalEquation012WeightAndCardinalityLevel = MinimalEquation012.cmp109MinimalEquation012WeightAndCardinalityLevel
 
@@ -99,7 +106,8 @@ physicalClosureRound5FunctionalAndPolymerLevel = Integrated.physicalClosureRound
 -- Irreducible physical inhabitants after round five.
 ------------------------------------------------------------------------
 
-physicalCMP109Equation011AveragedContourInputsLevel = MinimalEquation012.physicalCMP109Equation011AveragedContourInputsLevel
+physicalCMP109MinimalContourHolonomyInputsLevel = MinimalAverage.physicalCMP109MinimalContourHolonomyInputsLevel
+physicalCMP109MinimalContourSmallDiameterInputsLevel = MinimalAverage.physicalCMP109MinimalContourSmallDiameterInputsLevel
 physicalCMP109PrincipalLogChartInputsLevel = MinimalEquation012.physicalCMP109PrincipalLogChartInputsLevel
 physicalBishopElementaryTailEvidenceInputsLevel = BishopTailEvidence.physicalBishopElementaryTailEvidenceInputsLevel
 physicalBishopHalfRadiusSignedTailCertificateInputsLevel = BishopSU2.physicalBishopHalfRadiusSignedTailCertificateInputsLevel
