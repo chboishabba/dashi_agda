@@ -10,6 +10,14 @@ import DASHI.Physics.YangMills.BalabanClayGate4SU2PrincipalLogBallExact as Princ
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109LiteralIdentificationAssemblyExact as Literal
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedPathFormulaExact as Printed
 
+record SupportAgreement (left right : Set) : Set where
+  constructor supportAgreement
+  field
+    forward : left → right
+    backward : right → left
+
+open SupportAgreement public
+
 ------------------------------------------------------------------------
 -- Canonical instantiation of the repository one-step formula by CMP 109
 -- equation (0.12).
@@ -27,6 +35,13 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109PrintedPathFormulaExact as 
 -- and the primary formula are constructed with that fold as their definition,
 -- so their printed-map equality is `refl`; only the physical field, support,
 -- principal-log, derivative and normalization inhabitants remain to be chosen.
+--
+-- The support matching uses pointwise logical equivalence instead of
+-- propositional equality: the support is `Set`-valued (`CoarseBond → FineBond →
+-- Set`), so an equality predicate over it would live in `Set₁` while the
+-- `CMP109LiteralIdentification.SupportMatchesCMP109` field is `Set`-valued.
+-- Pointwise bi-implication stays `Set`-level, and at the witness site the
+-- candidate is definitionally the reference, so both directions are identity.
 ------------------------------------------------------------------------
 
 record CanonicalEquation012StageInputs
@@ -57,13 +72,11 @@ canonicalEquation012LocalStage :
   Locality.LocalAveragingStage
     Field (CoarseBond → Group) FineBond CoarseBond Group
 canonicalEquation012LocalStage inputs = record
-  { Locality.LocalAveragingStage.inputValue = inputValue inputs
-  ; Locality.LocalAveragingStage.outputValue = λ output coarse → output coarse
-  ; Locality.LocalAveragingStage.average =
-      Printed.printedEquation012Map (printedData inputs)
-  ; Locality.LocalAveragingStage.Support = ProjectedEndpointSupport inputs
-  ; Locality.LocalAveragingStage.localDependence =
-      printedMapLocalDependence inputs
+  { inputValue = inputValue inputs
+  ; outputValue = λ output coarse → output coarse
+  ; average = Printed.printedEquation012Map (printedData inputs)
+  ; Support = ProjectedEndpointSupport inputs
+  ; localDependence = printedMapLocalDependence inputs
   }
 
 canonicalEquation012OneStepFormula :
@@ -73,23 +86,16 @@ canonicalEquation012OneStepFormula :
   Locality.BalabanPrimaryOneStepFormula
     Field (CoarseBond → Group) FineBond CoarseBond Group Lie
 canonicalEquation012OneStepFormula inputs = record
-  { Locality.BalabanPrimaryOneStepFormula.localStage =
-      canonicalEquation012LocalStage inputs
-  ; Locality.BalabanPrimaryOneStepFormula.transportedLog =
-      transportedLog inputs
-  ; Locality.BalabanPrimaryOneStepFormula.weightedLocalLogSum =
+  { localStage = canonicalEquation012LocalStage inputs
+  ; transportedLog = transportedLog inputs
+  ; weightedLocalLogSum =
       Printed.printedEquation012LieAverage (printedData inputs)
-  ; Locality.BalabanPrimaryOneStepFormula.exponential =
-      Printed.outerExponential (printedData inputs)
-  ; Locality.BalabanPrimaryOneStepFormula.multiply =
-      Printed.multiplyGroup (printedData inputs)
-  ; Locality.BalabanPrimaryOneStepFormula.endpointValue =
-      Printed.coarseBondValue (printedData inputs)
-  ; Locality.BalabanPrimaryOneStepFormula.primaryFormula =
-      λ field coarse → refl
-  ; Locality.BalabanPrimaryOneStepFormula.coefficientConvention =
-      Dimension.volumeDimensionExponent
-  ; Locality.BalabanPrimaryOneStepFormula.coefficientConventionExact = refl
+  ; exponential = Printed.outerExponential (printedData inputs)
+  ; multiply = Printed.multiplyGroup (printedData inputs)
+  ; endpointValue = Printed.coarseBondValue (printedData inputs)
+  ; primaryFormula = λ coarseField coarse → refl
+  ; coefficientConvention = Dimension.volumeDimensionExponent
+  ; coefficientConventionExact = refl
   }
 
 canonicalProjectedEndpointLocality :
@@ -99,12 +105,9 @@ canonicalProjectedEndpointLocality :
   Literal.ProjectedEndpointLocality
     Field (CoarseBond → Group) FineBond CoarseBond Group
 canonicalProjectedEndpointLocality inputs = record
-  { Literal.ProjectedEndpointLocality.stage =
-      canonicalEquation012LocalStage inputs
-  ; Literal.ProjectedEndpointLocality.ProjectedEndpointSupport =
-      ProjectedEndpointSupport inputs
-  ; Literal.ProjectedEndpointLocality.supportMatchesProjectedEndpoints =
-      λ coarse fine → refl
+  { stage = canonicalEquation012LocalStage inputs
+  ; ProjectedEndpointSupport = ProjectedEndpointSupport inputs
+  ; supportMatchesProjectedEndpoints = λ coarse fine → refl
   }
 
 record CanonicalCMP109PrintedIdentificationInputs
@@ -139,37 +142,33 @@ canonicalCMP109LiteralIdentification :
     Field (CoarseBond → Group) FineBond CoarseBond Group Lie Group Radius Entry
     Normalization
 canonicalCMP109LiteralIdentification inputs = record
-  { Literal.CMP109LiteralIdentification.oneStepFormula =
-      canonicalEquation012OneStepFormula (stageInputs inputs)
-  ; Literal.CMP109LiteralIdentification.projectedLocality =
-      canonicalProjectedEndpointLocality (stageInputs inputs)
-  ; Literal.CMP109LiteralIdentification.formulaStageMatchesLocality = refl
-  ; Literal.CMP109LiteralIdentification.principalLogMeaning =
-      principalLogMeaning inputs
-  ; Literal.CMP109LiteralIdentification.derivativeEntry =
-      derivativeEntry inputs
-  ; Literal.CMP109LiteralIdentification.zeroDerivativeEntry =
-      zeroDerivativeEntry inputs
-  ; Literal.CMP109LiteralIdentification.derivativeVanishesOutsideProjectedSupport =
+  { oneStepFormula = canonicalEquation012OneStepFormula (stageInputs inputs)
+  ; projectedLocality = canonicalProjectedEndpointLocality (stageInputs inputs)
+  ; formulaStageMatchesLocality = refl
+  ; principalLogMeaning = principalLogMeaning inputs
+  ; derivativeEntry = derivativeEntry inputs
+  ; zeroDerivativeEntry = zeroDerivativeEntry inputs
+  ; derivativeVanishesOutsideProjectedSupport =
       derivativeVanishesOutsideProjectedSupport inputs
-  ; Literal.CMP109LiteralIdentification.physicalNormalization =
-      physicalNormalization inputs
-  ; Literal.CMP109LiteralIdentification.LiteralMapMatchesCMP109 =
+  ; physicalNormalization = physicalNormalization inputs
+  ; LiteralMapMatchesCMP109 =
       λ candidate →
         candidate
         ≡ Printed.printedEquation012Map
             (printedData (stageInputs inputs))
-  ; Literal.CMP109LiteralIdentification.DerivativeMatchesCMP109 =
-      λ candidate → candidate ≡ derivativeEntry inputs
-  ; Literal.CMP109LiteralIdentification.SupportMatchesCMP109 =
+  ; DerivativeMatchesCMP109 = λ candidate → candidate ≡ derivativeEntry inputs
+  ; SupportMatchesCMP109 =
       λ candidate →
-        candidate ≡ ProjectedEndpointSupport (stageInputs inputs)
-  ; Literal.CMP109LiteralIdentification.NormalizationMatchesCMP109 =
+        ∀ coarse fine →
+          SupportAgreement
+            (candidate coarse fine)
+            (ProjectedEndpointSupport (stageInputs inputs) coarse fine)
+  ; NormalizationMatchesCMP109 =
       λ candidate → candidate ≡ physicalNormalization inputs
-  ; Literal.CMP109LiteralIdentification.literalMapMatchesCMP109 = refl
-  ; Literal.CMP109LiteralIdentification.derivativeMatchesCMP109 = refl
-  ; Literal.CMP109LiteralIdentification.supportMatchesCMP109 = refl
-  ; Literal.CMP109LiteralIdentification.normalizationMatchesCMP109 = refl
+  ; literalMapMatchesCMP109 = refl
+  ; derivativeMatchesCMP109 = refl
+  ; supportMatchesCMP109 = λ coarse fine → supportAgreement (λ p → p) (λ p → p)
+  ; normalizationMatchesCMP109 = refl
   }
 
 cmp109Equation012CanonicalStageLevel : ProofLevel
