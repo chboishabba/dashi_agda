@@ -7,6 +7,7 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 bash "$SCRIPT_DIR/check_gate4_physical_round4.sh"
 
 FILES=(
+  DASHI/Foundations/BishopElementaryTailEvidenceExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneSplitFibreExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneRepositoryTorusExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4CMP109RadiusOneWeightExact.agda
@@ -21,6 +22,7 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4BalabanGaugeFixingProposition5Exact.agda
   DASHI/Physics/YangMills/BalabanClayGate4GaugeFixingProposition5ToHalfBallExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4RationalWilsonQuadraticSecondDifferenceExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4QuadraticCompositionSecondVariationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalFunctionalSecondVariationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SandwichOperatorToFormBoundExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiveSandwichChannelAssemblyExact.agda
