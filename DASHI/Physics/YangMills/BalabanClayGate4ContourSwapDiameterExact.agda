@@ -16,8 +16,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact 
 -- DOI: 10.1007/BF01215223.
 --
 -- Two coordinate-ordering contours with the same endpoints are compared by
--- adjacent coordinate swaps.  With at most four active coordinate directions,
--- the maximum inversion count is six.  The analytic input is therefore a
+-- adjacent coordinate swaps. With at most four active coordinate directions,
+-- the maximum inversion count is six. The analytic input is therefore a
 -- one-swap rectangular-curvature estimate; the finite assembly below converts
 -- it into a diameter estimate for the whole contour family.
 ------------------------------------------------------------------------
@@ -32,12 +32,17 @@ record AdjacentSwapCurvatureCost (Scalar : Set) : Set₁ where
   field
     algebra : Additive.OrderedAdditiveBudget Scalar
 
-    rectangleArea curvatureAmplitude nonlinearCorrection oneSwapCost : Scalar
+    rectangleArea curvatureAmplitude rectangleCurvatureCost : Scalar
+    nonlinearCorrection oneSwapCost : Scalar
+
+    RectangleCurvatureProductMeaning : Set
+    rectangleCurvatureProductMeaning :
+      RectangleCurvatureProductMeaning
 
     oneSwapCostMeaning :
       oneSwapCost
       ≡ Additive.add algebra
-          rectangleArea nonlinearCorrection
+          rectangleCurvatureCost nonlinearCorrection
 
     rectangularCurvatureContribution : Set
     rectangularCurvatureContributionEvidence :
@@ -115,6 +120,9 @@ contourSwapDiameterAssemblyLevel = machineChecked
 
 principalLogDiameterTransportLevel : ProofLevel
 principalLogDiameterTransportLevel = machineChecked
+
+physicalRectangleCurvatureProductInputsLevel : ProofLevel
+physicalRectangleCurvatureProductInputsLevel = conditional
 
 physicalAdjacentSwapCurvatureEstimateInputsLevel : ProofLevel
 physicalAdjacentSwapCurvatureEstimateInputsLevel = conditional
