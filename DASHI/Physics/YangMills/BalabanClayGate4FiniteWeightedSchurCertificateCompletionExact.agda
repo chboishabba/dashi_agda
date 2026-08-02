@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedSchurCertificateCom
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (Dec; yes; no)
+  using (Dec; yes; no; Empty)
 
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedSchurCertificateExact as Base
 
@@ -21,22 +21,26 @@ import DASHI.Physics.YangMills.BalabanClayGate4FiniteWeightedSchurCertificateExa
 -- universal row and column theorems without any manually assembled receipt.
 ------------------------------------------------------------------------
 
+data DecidedCertificate (P : Set₁) : Set₁ where
+  certificateAccepted : P → DecidedCertificate P
+  certificateRefuted : (P → Empty) → DecidedCertificate P
+
 checkFiniteWeightedSchurCertificate :
   ∀ {Input Output Scalar}
     (dataSet : Base.FiniteWeightedComparisonData Input Output Scalar) →
-  Dec (Base.AcceptedFiniteWeightedCertificate dataSet)
+  DecidedCertificate (Base.AcceptedFiniteWeightedCertificate dataSet)
 checkFiniteWeightedSchurCertificate dataSet
   with Base.checkAllWeightedRows dataSet
      | Base.checkAllWeightedColumns dataSet
-... | yes rows | yes columns = yes record
-      { Base.AcceptedFiniteWeightedCertificate.allRowsAccepted = rows
-      ; Base.AcceptedFiniteWeightedCertificate.allColumnsAccepted = columns
+... | yes rows | yes columns = certificateAccepted record
+      { allRowsAccepted = rows
+      ; allColumnsAccepted = columns
       }
 ... | no rowsRefuted | columnsDecision =
-      no (λ certificate →
+      certificateRefuted (λ certificate →
         rowsRefuted (Base.allRowsAccepted certificate))
 ... | yes rows | no columnsRefuted =
-      no (λ certificate →
+      certificateRefuted (λ certificate →
         columnsRefuted (Base.allColumnsAccepted certificate))
 
 record ExecutedFiniteWeightedSchurCertificate
