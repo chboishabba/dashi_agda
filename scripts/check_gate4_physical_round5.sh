@@ -23,8 +23,10 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4HalfContractionInvariantBallExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4BalabanGaugeFixingProposition5Exact.agda
   DASHI/Physics/YangMills/BalabanClayGate4GaugeFixingProposition5ToHalfBallExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4BackgroundFieldVariationalTheoremExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4RationalWilsonQuadraticSecondDifferenceExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4QuadraticCompositionSecondVariationExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4ConstraintProjectionSecondVariationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalFunctionalSecondVariationExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4SandwichOperatorToFormBoundExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiveSandwichChannelAssemblyExact.agda
@@ -32,9 +34,12 @@ FILES=(
   DASHI/Physics/YangMills/BalabanClayGate4GaugeCubicTaylorRemainderSumExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4WeakeningProductSupportExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4ConnectedTreeDecayExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4BackgroundPropagatorDecayTheoremsExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4DecayStepToDyadicShellExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DyadicGeometricRootedSummabilityExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4DyadicRandomWalkTailExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4FiveActivityTenthToHalfExact.agda
+  DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound5SourceTheoremLedger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound5IntegratedExact.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound5Ledger.agda
   DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound5Receipt.agda
