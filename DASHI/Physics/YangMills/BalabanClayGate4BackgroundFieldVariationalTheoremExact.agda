@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
