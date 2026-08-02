@@ -1,0 +1,63 @@
+name: RCEPP and revolutionary governance Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Governance/AuthorityMandateCore.agda'
+      - 'DASHI/Governance/CouncilDelegationGraph.agda'
+      - 'DASHI/Governance/ExternalLegitimacyBoundary.agda'
+      - 'DASHI/Governance/LocalGlobalCouncilGluing.agda'
+      - 'DASHI/Governance/RelationalMandateFibre.agda'
+      - 'DASHI/Governance/SituatedConstituency.agda'
+      - 'DASHI/Governance/TransitionResidual.agda'
+      - 'DASHI/Governance/RevolutionarySourceAtlas.agda'
+      - 'DASHI/Governance/RevolutionaryPracticeBraid.agda'
+      - 'DASHI/Governance/TraumaMemorySublationBoundary.agda'
+      - 'DASHI/Governance/ComparativeCrisisClimateAtlas.agda'
+      - 'DASHI/Governance/RevolutionaryAdjunctRegression.agda'
+      - 'DASHI/Governance/Sudan/RCEPPSourceBoundary.agda'
+      - 'DASHI/Governance/Sudan/RCEPPInstitutionalSurface.agda'
+      - 'DASHI/Governance/Sudan/RCEPPPromotionBoundary.agda'
+      - 'DASHI/Governance/Sudan/RCEPPRegression.agda'
+      - 'DASHI/Governance/Everything.agda'
+      - 'Docs/support/reference/RCEPPGovernanceFibreSpine.md'
+      - 'scripts/check_rcepp_governance_spine.py'
+      - '.github/workflows/rcepp-governance-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    env:
+      AGDA_BIN: agda
+      DASHI_REPO_ROOT: ${{ github.workspace }}
+      AGDA_LOG_PATH: ${{ github.workspace }}/.cache/rcepp-governance-agda.log
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - name: Run fail-closed governance source audit
+        run: python3 scripts/check_rcepp_governance_spine.py
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - name: Typecheck coarse mandate fibre
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/RelationalMandateFibre.agda
+      - name: Typecheck local-global council gluing
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/LocalGlobalCouncilGluing.agda
+      - name: Typecheck RCEPP aggregate regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/Sudan/RCEPPRegression.agda
+      - name: Typecheck revolutionary adjunct regression
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/RevolutionaryAdjunctRegression.agda
+      - name: Typecheck governance aggregate
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Governance/Everything.agda
