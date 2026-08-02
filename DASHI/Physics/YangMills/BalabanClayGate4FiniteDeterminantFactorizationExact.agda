@@ -196,9 +196,9 @@ allLowerProductBound :
   LessEqual algebra
     (power algebra lower (listLength values))
     (productList algebra values)
-allLowerProductBound algebra lowerNonnegative allNil allNil =
+allLowerProductBound {lower = lower} algebra lowerNonnegative allNil allNil =
   lessEqualReflexive algebra (one algebra)
-allLowerProductBound algebra lowerNonnegative
+allLowerProductBound {lower = lower} algebra lowerNonnegative
     (allCons valueNonnegative restNonnegative)
     (allCons lowerBelow restBounds) =
   multiplyMonotoneNonnegative algebra
@@ -227,9 +227,9 @@ allUpperProductBound :
   LessEqual algebra
     (productList algebra values)
     (power algebra upper (listLength values))
-allUpperProductBound algebra upperNonnegative allNil allNil =
+allUpperProductBound {upper = upper} algebra upperNonnegative allNil allNil =
   lessEqualReflexive algebra (one algebra)
-allUpperProductBound algebra upperNonnegative
+allUpperProductBound {upper = upper} algebra upperNonnegative
     (allCons valueNonnegative restNonnegative)
     (allCons belowUpper restBounds) =
   multiplyMonotoneNonnegative algebra
