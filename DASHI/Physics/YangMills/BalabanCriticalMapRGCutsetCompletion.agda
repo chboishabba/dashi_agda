@@ -1,6 +1,9 @@
 module DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanCriticalMapOneStepRGClosure
   using (_×_; _,_; Σ; witness; Unique)
@@ -17,6 +20,7 @@ record CriticalMapCutset
     subtract : State → State → State
     addForce subtractForce : Force → Force → Force
     norm : State → Bound
+    normForce : Force → Bound
 
     fullGreen : Index → Force → State
     nonlinear : Index → State → Force
@@ -44,11 +48,11 @@ record CriticalMapCutset
             (subtractForce (nonlinear index h) (nonlinear index h′)))
 
     greenOperatorBound : ∀ index f →
-      LessEqual (norm (fullGreen index f)) (multiply CG (norm f))
+      LessEqual (norm (fullGreen index f)) (multiply CG (normForce f))
 
     nonlinearDifferenceBound : ∀ index h h′ →
       LessEqual
-        (norm (subtractForce (nonlinear index h) (nonlinear index h′)))
+        (normForce (subtractForce (nonlinear index h) (nonlinear index h′)))
         (multiply LN (norm (subtract h h′)))
 
     criticalDifferenceNormIdentity : ∀ index h h′ →
@@ -84,7 +88,7 @@ record CriticalMapCutset
       CriticalBallCauchy index sequence → CriticalBallConverges index sequence
 
     uniformCriticalFixedPointExists : ∀ index →
-      Unique (λ h → InCriticalBall index h × Φ index h ≡ h)
+      Unique (λ h → InCriticalBall index h × (Φ index h ≡ h))
 
     EulerLagrange : Index → State → Set
     fixedPointImpliesEulerLagrange : ∀ index h →
@@ -129,15 +133,13 @@ criticalMapContraction :
     (multiply D (multiply D (CG D) (LN D))
       (norm D (subtract D h h′)))
 criticalMapContraction D index h h′
-  rewrite criticalDifferenceNormIdentity D index h h′ =
+  rewrite criticalDifferenceNormIdentity D index h h′
+        | sym (multiplyAssociative D (CG D) (LN D) (norm D (subtract D h h′))) =
   lessEqualTransitive D
     (greenOperatorBound D index
       (subtractForce D (nonlinear D index h) (nonlinear D index h′)))
-    (transportRight
-      (multiplyMonotoneLeft D (CG D)
-        (nonlinearDifferenceBound D index h h′))
-      (multiplyAssociative D (CG D) (LN D)
-        (norm D (subtract D h h′))))
+    (multiplyMonotoneLeft D (CG D)
+      (nonlinearDifferenceBound D index h h′))
 
 record FiniteBackgroundCriticalMapCompletion
     (Index State Force Bound CoarseField Background NatLike : Set) : Set₁ where
@@ -180,7 +182,7 @@ record OneStepRGCutset
       Σ Background (λ Ubg →
         Σ Fluctuation (λ Z →
           SmallFieldCoordinates Ubg Z ×
-          U ≡ multiplyConfiguration Ubg (exp Z)))
+          (U ≡ multiplyConfiguration Ubg (exp Z))))
 
     SameCoordinates : Background → Fluctuation →
       Background → Fluctuation → Set
