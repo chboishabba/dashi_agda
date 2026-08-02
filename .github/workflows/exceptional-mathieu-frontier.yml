@@ -1,0 +1,63 @@
+name: Exceptional Mathieu and real-backend frontier
+
+on:
+  push:
+    paths:
+      - 'DASHI/Foundations/FiniteLinear/**'
+      - 'DASHI/Foundations/TernaryGolay/**'
+      - 'DASHI/Foundations/UBP/**'
+      - 'DASHI/Physics/Closure/NSTriadKNFiniteIncidenceSubspaceAdapter.agda'
+      - 'DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda'
+      - 'Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md'
+      - 'scripts/check_explicit_ternary_golay.py'
+      - 'scripts/check_finite_subspace_self_duality.py'
+      - 'scripts/check_exceptional_mathieu_frontier.py'
+      - '.github/workflows/exceptional-mathieu-frontier.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Foundations/FiniteLinear/**'
+      - 'DASHI/Foundations/TernaryGolay/**'
+      - 'DASHI/Foundations/UBP/**'
+      - 'DASHI/Physics/Closure/NSTriadKNFiniteIncidenceSubspaceAdapter.agda'
+      - 'DASHI/Analysis/CubicalHoTTRealBackendBoundary.agda'
+      - 'Docs/support/reference/ExceptionalMathieuAndRealBackendFrontier.md'
+      - 'scripts/check_explicit_ternary_golay.py'
+      - 'scripts/check_finite_subspace_self_duality.py'
+      - 'scripts/check_exceptional_mathieu_frontier.py'
+      - '.github/workflows/exceptional-mathieu-frontier.yml'
+  workflow_dispatch:
+
+jobs:
+  exceptional-frontier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Static fail-closed audit
+        run: python3 scripts/check_exceptional_mathieu_frontier.py
+
+      - name: Independent exhaustive finite oracle
+        run: python3 scripts/check_explicit_ternary_golay.py
+
+      - name: Independent finite-subspace oracle
+        run: python3 scripts/check_finite_subspace_self_duality.py
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Check reusable finite-linear and NS Gram adapter
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/FiniteLinear/Regression.agda
+
+      - name: Check ternary Golay frontier
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/TernaryGolay/FrontierRegression.agda
+
+      - name: Check UBP exact-real and migration frontier
+        run: |
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Foundations/UBP/FrontierRegression.agda
