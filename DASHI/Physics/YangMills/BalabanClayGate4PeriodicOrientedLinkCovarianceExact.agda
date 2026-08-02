@@ -23,9 +23,9 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as B
 
 record PeriodicStepInverseLaws (n : Nat) : Set₁ where
   field
-    positiveAfterNegative : ∀ site axis →
+    positiveAfterNegative : ∀ (site : Periodic.PeriodicBlock n) (axis : Axis4) →
       Bond.positiveStep (Bond.negativeStep site axis) axis ≡ site
-    negativeAfterPositive : ∀ site axis →
+    negativeAfterPositive : ∀ (site : Periodic.PeriodicBlock n) (axis : Axis4) →
       Bond.negativeStep (Bond.positiveStep site axis) axis ≡ site
 
 open PeriodicStepInverseLaws public
@@ -59,7 +59,7 @@ negativeOrientedLinkGaugeCovariant :
     (stepLaws : PeriodicStepInverseLaws n)
     (links : Bond.PeriodicBondField n Value)
     (gauge : Bond.PeriodicSiteGauge n Value)
-    site axis →
+    (site : Periodic.PeriodicBlock n) (axis : Axis4) →
   Bond.inverse group
     (Bond.multiply group
       (Bond.multiply group
