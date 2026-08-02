@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PlaquetteDerivativeCombinatoricsExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
