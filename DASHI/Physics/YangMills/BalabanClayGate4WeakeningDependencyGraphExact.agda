@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4WeakeningDependencyGraphExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -12,9 +13,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- for the R-Operation", Communications in Mathematical Physics 122 (1989),
 -- 355--392. DOI: 10.1007/BF01238433.
 --
--- Physical activities are not primitive products only.  A weakening variable
+-- Physical activities are not primitive products only. A weakening variable
 -- first influences local factors, which feed local operators/determinants and
--- finally a connected activity.  This module packages the relational
+-- finally a connected activity. This module packages the relational
 -- composition and the zero-derivative passage through that dependency graph.
 ------------------------------------------------------------------------
 
@@ -35,19 +36,8 @@ CompositeSupport graph primitive output =
     Σ (primitiveSupportsIntermediate graph primitive intermediate)
       (λ _ → intermediateSupportsOutput graph intermediate output))
 
-OutsideCompositeSupport :
-  ∀ {Primitive Intermediate Output} →
-  TwoStageSupport Primitive Intermediate Output →
-  Primitive → Output → Set
-OutsideCompositeSupport {Intermediate = Intermediate}
-    graph primitive output =
-  ∀ intermediate →
-  intermediateSupportsOutput graph intermediate output →
-  primitiveSupportsIntermediate graph primitive intermediate →
-  Agda.Builtin.Sigma.Σ Agda.Builtin.Sigma.⊥ (λ impossible → impossible)
-
--- A constructive negation carrier independent of the standard-library
--- bottom type.  The dependency theorem below uses this directly.
+-- A constructive negation carrier independent of the standard-library bottom
+-- type keeps this small module backend-neutral.
 data Empty : Set where
 
 Not : Set → Set
