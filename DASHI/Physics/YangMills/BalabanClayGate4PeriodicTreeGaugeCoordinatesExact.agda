@@ -130,13 +130,13 @@ TreeGaugeCoordinate {n} tree =
 coordinateBond :
   ∀ {n} {tree : Periodic.PeriodicTree n} →
   TreeGaugeCoordinate tree → PositiveBond (suc n)
-coordinateBond (bond , offTree) = bond
+coordinateBond (bond , isOffTree) = bond
 
 coordinateOffTree :
   ∀ {n} {tree : Periodic.PeriodicTree n}
     (coordinate : TreeGaugeCoordinate tree) →
   OffTreeBond tree (coordinateBond coordinate)
-coordinateOffTree (bond , offTree) = offTree
+coordinateOffTree (bond , isOffTree) = isOffTree
 
 record CertifiedPeriodicTreeGaugeCoordinates
     (n : Nat) : Set₁ where

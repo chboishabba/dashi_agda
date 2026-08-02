@@ -41,23 +41,23 @@ record MinimalContourSwapGaugeData
 
     leftGauge rightGauge : Field → Group
 
-    pathHolonomyGaugeCovariant : ∀ field path →
-      transformedHolonomy field path
-      ≡ Average.multiply averageAxioms (leftGauge field)
+    pathHolonomyGaugeCovariant : ∀ fld path →
+      transformedHolonomy fld path
+      ≡ Average.multiply averageAxioms (leftGauge fld)
           (Average.multiply averageAxioms
-            (holonomy field path) (rightGauge field))
+            (holonomy fld path) (rightGauge fld))
 
     swapCostAt : Field → Swaps.AdjacentSwapCurvatureCost Bound
-    diameterBudgetAt : (field : Field) →
-      Swaps.PrincipalLogDiameterBudget (swapCostAt field)
+    diameterBudgetAt : (fld : Field) →
+      Swaps.PrincipalLogDiameterBudget (swapCostAt fld)
 
-    smallDiameterFromSixSwapBound : ∀ field →
-      Additive.LessEqual (Swaps.algebra (swapCostAt field))
+    smallDiameterFromSixSwapBound : ∀ fld →
+      Additive.LessEqual (Swaps.algebra (swapCostAt fld))
         (Swaps.pairwiseContourDistance
-          (Swaps.diameter (diameterBudgetAt field)))
-        (Swaps.principalLogRadius (diameterBudgetAt field)) →
+          (Swaps.diameter (diameterBudgetAt fld)))
+        (Swaps.principalLogRadius (diameterBudgetAt fld)) →
       Average.SmallDiameter averageAxioms
-        (Average.mapList (holonomy field)
+        (Average.mapList (holonomy fld)
           (Contour.minimalContourFamily geometry point))
 
 open MinimalContourSwapGaugeData public

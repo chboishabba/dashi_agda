@@ -1,8 +1,9 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PrimaryQkFiniteKernelBudgetExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -23,8 +24,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --   |Q_k(U_0;c,b)| <= 1 + 2 C'_1 alpha_0.
 --
 -- The theorem below performs the finite step that is implicit but necessary for
--- a Schur estimate: a pointwise bound on every entry in the finite local support
--- implies a row-sum bound by the support cardinality times the entry bound.
+-- numerical budgets: point-level matrix entries bounded by M on a finite set of
+-- size S imply that the row sum is bounded by S * M.
 ------------------------------------------------------------------------
 
 record OrderedAdditiveScale (Scalar : Set) : Set₁ where
@@ -36,7 +37,7 @@ record OrderedAdditiveScale (Scalar : Set) : Set₁ where
     reflexive : ∀ value → LessEqual value value
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
-    addMonotone : ∀ {left leftUpper right rightUpper} →
+    addMonotone : ∀ {left right leftUpper rightUpper} →
       LessEqual left leftUpper → LessEqual right rightUpper →
       LessEqual (add left right) (add leftUpper rightUpper)
 
@@ -49,6 +50,11 @@ listLength (_ ∷ values) = suc (listLength values)
 mapList : ∀ {A B : Set} → (A → B) → List A → List B
 mapList function [] = []
 mapList function (value ∷ values) = function value ∷ mapList function values
+
+mapListLength : ∀ {A B : Set} (function : A → B) (values : List A) →
+  listLength (mapList function values) ≡ listLength values
+mapListLength function [] = refl
+mapListLength function (value ∷ values) = cong suc (mapListLength function values)
 
 finiteSum : ∀ {Scalar : Set} →
   OrderedAdditiveScale Scalar → List Scalar → Scalar
@@ -132,7 +138,7 @@ localKernelValuesPointwiseBelow :
   AllBelow algebra
     (primaryEntryBound dataSet)
     (localKernelValues dataSet coarse)
-localKernelValuesPointwiseBelow {algebra = algebra} dataSet coarse =
+localKernelValuesPointwiseBelow {FineBond = FineBond} {algebra = algebra} dataSet coarse =
   go (localSupport dataSet coarse)
   where
   go : (support : List FineBond) →
@@ -156,9 +162,11 @@ primaryQkLocalRowSumBelowBudget :
     (rowBudget dataSet coarse)
 primaryQkLocalRowSumBelowBudget {algebra = algebra} dataSet coarse =
   transitive algebra
-    (finiteSumBelowCardinalityScale algebra
-      (primaryEntryBound dataSet)
-      (localKernelValuesPointwiseBelow dataSet coarse))
+    (subst (λ len → LessEqual algebra (finiteSum algebra (localKernelValues dataSet coarse)) (natScale algebra len (primaryEntryBound dataSet)))
+      (mapListLength (kernelAbsoluteValue dataSet coarse) (localSupport dataSet coarse))
+      (finiteSumBelowCardinalityScale algebra
+        (primaryEntryBound dataSet)
+        (localKernelValuesPointwiseBelow dataSet coarse)))
     (localSupportCardinalityBudget dataSet coarse)
 
 record UniformFiniteKernelBudget

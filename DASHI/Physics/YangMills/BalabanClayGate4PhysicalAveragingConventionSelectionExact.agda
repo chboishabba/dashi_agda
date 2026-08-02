@@ -43,8 +43,12 @@ gate4PhysicalAveragingConventionIsCMP109 :
   ≡ Primary.cmp109EuclideanSymmetricAverage
 gate4PhysicalAveragingConventionIsCMP109 = refl
 
+open import Agda.Primitive using (Level; _⊔_; lsuc; lzero)
+
 record Gate4CMP109PhysicalMeaning
-    (LiteralMap Derivative Support Normalization : Set) : Set₁ where
+    {ℓ₁ ℓ₂ ℓ₃ ℓ₄ : Level}
+    (LiteralMap : Set ℓ₁) (Derivative : Set ℓ₂)
+    (Support : Set ℓ₃) (Normalization : Set ℓ₄) : Set (lsuc (ℓ₁ ⊔ ℓ₂ ⊔ ℓ₃ ⊔ ℓ₄)) where
   field
     LiteralMapMatchesCMP109 : LiteralMap → Set
     DerivativeMatchesCMP109 : Derivative → Set
@@ -68,7 +72,8 @@ record Gate4CMP109PhysicalMeaning
 open Gate4CMP109PhysicalMeaning public
 
 asPrimaryPhysicalAveragingConventionMeaning :
-  ∀ {LiteralMap Derivative Support Normalization}
+  ∀ {ℓ₁ ℓ₂ ℓ₃ ℓ₄ : Level} {LiteralMap : Set ℓ₁} {Derivative : Set ℓ₂}
+    {Support : Set ℓ₃} {Normalization : Set ℓ₄}
     (meaning : Gate4CMP109PhysicalMeaning
       LiteralMap Derivative Support Normalization) →
   Primary.PhysicalAveragingConventionMeaning

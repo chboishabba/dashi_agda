@@ -49,11 +49,14 @@ import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 locatorB0Rational : ℚ → ℚ
 locatorB0Rational casimirAdjoint = (+ 11 / 48) * casimirAdjoint
 
+solveLocatorTwiceB0 : ∀ c → (+ 2 / 1) * ((+ 11 / 48) * c) ≡ ((+ 11 / 3) * c) * (+ 1 / 8)
+solveLocatorTwiceB0 = ℚRing.solve-∀
+
 locatorTwiceB0EqualsInverseCouplingCoefficient : ∀ casimirAdjoint →
   (+ 2 / 1) * locatorB0Rational casimirAdjoint
   ≡ Beta.pureYMInverseCouplingCoefficient casimirAdjoint
 locatorTwiceB0EqualsInverseCouplingCoefficient casimirAdjoint =
-  ℚRing.solve-∀ casimirAdjoint
+  solveLocatorTwiceB0 casimirAdjoint
 
 elevenOverTwentyFourEqualsTwiceLocatorB0 : ∀ casimirAdjoint →
   (+ 11 / 24) * casimirAdjoint

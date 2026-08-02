@@ -79,7 +79,7 @@ murrayBishopSetoidOrderedCompleteReal = record
   ; mulZeroLeft = BishopLaws.*-zeroˡ
   ; mulZeroRight = BishopLaws.*-zeroʳ
   ; distribLeft = BishopLaws.*-distribˡ-+
-  ; distribRight = BishopLaws.*-distribʳ-+
+  ; distribRight = λ a b c → BishopLaws.*-distribʳ-+ c a b
   ; subSelf = BishopLaws.+-inverseʳ
 
   ; _≤_ = Bishop._≤_

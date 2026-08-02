@@ -55,9 +55,9 @@ filterDecSound {Predicate = Predicate} decide
   with decide candidate
 ... | yes candidateProof = λ where
       here → candidateProof
-      (there membership) → filterDecSound decide membership
+      (there membership) → filterDecSound {Predicate = Predicate} decide {values = values} membership
 ... | no candidateRefutation = λ membership →
-      filterDecSound decide membership
+      filterDecSound {Predicate = Predicate} decide {values = values} membership
 
 filterDecComplete :
   ∀ {A : Set} {Predicate : A → Set}
@@ -68,13 +68,11 @@ filterDecComplete :
 filterDecComplete decide {values = []} () proof
 filterDecComplete {Predicate = Predicate} decide
   {value = value} {values = candidate ∷ values}
-  membership proof with decide candidate
-... | yes candidateProof with membership
-...   | here = here
-...   | there rest = there (filterDecComplete decide rest proof)
-... | no candidateRefutation with membership
-...   | here = emptyElim (candidateRefutation proof)
-...   | there rest = filterDecComplete decide rest proof
+  membership proof with decide candidate | membership
+... | yes candidateProof | here = here
+... | yes candidateProof | there rest = there (filterDecComplete {Predicate = Predicate} decide {values = values} rest proof)
+... | no candidateRefutation | here = emptyElim (candidateRefutation proof)
+... | no candidateRefutation | there rest = filterDecComplete {Predicate = Predicate} decide {values = values} rest proof
 
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
@@ -121,8 +119,10 @@ rowSupportSound :
     coarse fine →
   fine ∈ rowSupport dataSet coarse →
   Support dataSet coarse fine
-rowSupportSound dataSet coarse fine =
-  filterDecSound (supportDecidable dataSet coarse)
+rowSupportSound dataSet coarse fine membership =
+  filterDecSound {Predicate = Support dataSet coarse}
+    (supportDecidable dataSet coarse) {values = elements (fineFinite dataSet)}
+    membership
 
 rowSupportComplete :
   ∀ {CoarseBond FineBond : Set}
@@ -142,8 +142,10 @@ columnIncidenceSound :
     fine coarse →
   coarse ∈ columnIncidence dataSet fine →
   Support dataSet coarse fine
-columnIncidenceSound dataSet fine coarse =
-  filterDecSound (λ candidate → supportDecidable dataSet candidate fine)
+columnIncidenceSound dataSet fine coarse membership =
+  filterDecSound {Predicate = λ candidate → Support dataSet candidate fine}
+    (λ candidate → supportDecidable dataSet candidate fine) {values = elements (coarseFinite dataSet)}
+    membership
 
 columnIncidenceComplete :
   ∀ {CoarseBond FineBond : Set}

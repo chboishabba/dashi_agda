@@ -54,32 +54,44 @@ pureYMInverseCouplingCoefficient : ℚ → ℚ
 pureYMInverseCouplingCoefficient casimirAdjoint =
   pureYMBetaZero casimirAdjoint * (+ 1 / 8)
 
+solveBetaDerivative : ∀ b → (+ 2 / 1) * (b * (+ 1 / 16)) ≡ b * (+ 1 / 8)
+solveBetaDerivative = ℚRing.solve-∀
+
 inverseCouplingFromBetaDerivative : ∀ casimirAdjoint →
   (+ 2 / 1) * pureYMBetaGCoefficient casimirAdjoint
   ≡ pureYMInverseCouplingCoefficient casimirAdjoint
 inverseCouplingFromBetaDerivative casimirAdjoint =
-  ℚRing.solve-∀ casimirAdjoint
+  solveBetaDerivative (pureYMBetaZero casimirAdjoint)
+
+solveElevenOverTwentyFour : ∀ c → ((+ 11 / 3) * c) * (+ 1 / 8) ≡ (+ 11 / 24) * c
+solveElevenOverTwentyFour = ℚRing.solve-∀
 
 inverseCouplingIsElevenOverTwentyFour : ∀ casimirAdjoint →
   pureYMInverseCouplingCoefficient casimirAdjoint
   ≡ (+ 11 / 24) * casimirAdjoint
 inverseCouplingIsElevenOverTwentyFour casimirAdjoint =
-  ℚRing.solve-∀ casimirAdjoint
+  solveElevenOverTwentyFour casimirAdjoint
+
+solveBetaZeroOverEight : ∀ b → b * (+ 1 / 8) ≡ (+ 1 / 8) * b
+solveBetaZeroOverEight = ℚRing.solve-∀
 
 inverseCouplingIsBetaZeroOverEight : ∀ casimirAdjoint →
   pureYMInverseCouplingCoefficient casimirAdjoint
   ≡ (+ 1 / 8) * pureYMBetaZero casimirAdjoint
 inverseCouplingIsBetaZeroOverEight casimirAdjoint =
-  ℚRing.solve-∀ casimirAdjoint
+  solveBetaZeroOverEight (pureYMBetaZero casimirAdjoint)
 
 elevenCasimirConvention : ℚ → ℚ
 elevenCasimirConvention casimirAdjoint = (+ 11 / 1) * casimirAdjoint
+
+solveElevenConvention : ∀ c → (+ 1 / 24) * ((+ 11 / 1) * c) ≡ ((+ 11 / 3) * c) * (+ 1 / 8)
+solveElevenConvention = ℚRing.solve-∀
 
 inverseCouplingFromElevenConvention : ∀ casimirAdjoint →
   (+ 1 / 24) * elevenCasimirConvention casimirAdjoint
   ≡ pureYMInverseCouplingCoefficient casimirAdjoint
 inverseCouplingFromElevenConvention casimirAdjoint =
-  ℚRing.solve-∀ casimirAdjoint
+  solveElevenConvention casimirAdjoint
 
 record PureYMOneLoopConvention : Set where
   constructor pureYMConvention

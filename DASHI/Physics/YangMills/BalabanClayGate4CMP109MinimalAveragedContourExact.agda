@@ -37,15 +37,15 @@ record MinimalContourGaugeData
 
     leftGauge rightGauge : Field → Group
 
-    pathHolonomyGaugeCovariant : ∀ field path →
-      transformedHolonomy field path
-      ≡ Average.multiply averageAxioms (leftGauge field)
+    pathHolonomyGaugeCovariant : ∀ fld path →
+      transformedHolonomy fld path
+      ≡ Average.multiply averageAxioms (leftGauge fld)
           (Average.multiply averageAxioms
-            (holonomy field path) (rightGauge field))
+            (holonomy fld path) (rightGauge fld))
 
-    contourHolonomiesSmallDiameter : ∀ field →
+    contourHolonomiesSmallDiameter : ∀ fld →
       Average.SmallDiameter averageAxioms
-        (Average.mapList (holonomy field)
+        (Average.mapList (holonomy fld)
           (Contour.minimalContourFamily geometry point))
 
 open MinimalContourGaugeData public

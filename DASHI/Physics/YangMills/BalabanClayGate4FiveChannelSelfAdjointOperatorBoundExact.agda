@@ -93,18 +93,21 @@ fiveChannelAbsoluteFormBelowTotal dataSet state unit =
               (formAbsolute dataSet (chart dataSet) state)
               (add dataSet
                 (formAbsolute dataSet (gauge dataSet) state)
-                (formAbsolute dataSet (constraint dataSet) state))))
+                (formAbsolute dataSet (constraint dataSet) state)))))
         upper)
       (sym (epsilonTotalMeaning dataSet))
+      sumBound)
+  where
+  sumBound =
+    addMonotone dataSet
+      (curvatureFormBound dataSet state unit)
       (addMonotone dataSet
-        (curvatureFormBound dataSet state unit)
+        (transportFormBound dataSet state unit)
         (addMonotone dataSet
-          (transportFormBound dataSet state unit)
+          (chartFormBound dataSet state unit)
           (addMonotone dataSet
-            (chartFormBound dataSet state unit)
-            (addMonotone dataSet
-              (gaugeFormBound dataSet state unit)
-              (constraintFormBound dataSet state unit))))))
+            (gaugeFormBound dataSet state unit)
+            (constraintFormBound dataSet state unit))))
 
 record FiveChannelSelfAdjointNormMeaning
     (Operator State Bound : Set) : Set₁ where

@@ -105,9 +105,8 @@ record RestrictedFormToOperatorNormMeaning
     normData : SelfAdjointFormOperatorNormData Operator State Bound
     selfAdjointData : RestrictedHessianSelfAdjointness Operator
 
-    restrictedOperatorsAgree :
-      restrictedRemainder selfAdjointData
-      ≡ restrictedRemainder selfAdjointData
+    restrictedSelfAdjointMeaning :
+      SelfAdjoint normData (restrictedRemainder selfAdjointData)
 
     epsilonForm : Bound
 
@@ -135,7 +134,7 @@ restrictedSelfAdjointFormBoundImpliesOperatorNormBound meaning =
     (normData meaning)
     (restrictedRemainder (selfAdjointData meaning))
     (epsilonForm meaning)
-    (restrictedRemainderSelfAdjoint (selfAdjointData meaning))
+    (restrictedSelfAdjointMeaning meaning)
     (restrictedQuadraticFormBound meaning)
 
 selfAdjointRayleighCharacterizationLevel : ProofLevel

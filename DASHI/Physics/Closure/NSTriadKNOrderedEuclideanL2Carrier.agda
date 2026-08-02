@@ -89,14 +89,14 @@ record EuclideanComplex3Laws
     (O : OrderedRealExtension F) : Set (lsuc r) where
   field
     selfPairingRealPartIsNormSquared : ∀ value →
-      C3.real (C3.hermitianPairing3 value value)
-      ≡ complex3NormSquared value
+      C3.real {F = F} (C3.hermitianPairing3 {F = F} value value)
+      ≡ complex3NormSquared {F = F} value
 
     normSquaredNonnegative : ∀ value →
-      _≤_ O (C3.zero F) (complex3NormSquared value)
+      _≤_ O (C3.zero F) (complex3NormSquared {F = F} value)
 
     normSquaredZeroImpliesZero : ∀ value →
-      complex3NormSquared value ≡ C3.zero F →
+      complex3NormSquared {F = F} value ≡ C3.zero F →
       value ≡ C3.complex3Zero F
 
 open EuclideanComplex3Laws public
@@ -113,14 +113,14 @@ record FiniteComplexL2Laws
       ∀ left right pairedSumSquared →
       _≤_ O pairedSumSquared
         (C3.multiply F
-          (finiteComplexL2NormSquared support left)
-          (finiteComplexL2NormSquared support right))
+          (finiteComplexL2NormSquared {F = F} support left)
+          (finiteComplexL2NormSquared {F = F} support right))
 
     restrictionDoesNotIncreaseL2 :
       ∀ restricted full →
       _≤_ O
-        (finiteComplexL2NormSquared support restricted)
-        (finiteComplexL2NormSquared support full)
+        (finiteComplexL2NormSquared {F = F} support restricted)
+        (finiteComplexL2NormSquared {F = F} support full)
 
 open FiniteComplexL2Laws public
 

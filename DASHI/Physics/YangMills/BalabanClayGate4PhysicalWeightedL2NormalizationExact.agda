@@ -85,13 +85,13 @@ record PhysicalWeightedL2NormMeaning
     physicalInputNormSq : (Input → Component) → Scalar
     physicalOutputNormSq : (Output → Component) → Scalar
 
-    physicalInputNormSqMeaning : ∀ field →
-      physicalInputNormSq field
-      ≡ weightedInputNormSq algebra inputElements inputWeight field
+    physicalInputNormSqMeaning : ∀ fld →
+      physicalInputNormSq fld
+      ≡ weightedInputNormSq algebra inputElements inputWeight fld
 
-    physicalOutputNormSqMeaning : ∀ field →
-      physicalOutputNormSq field
-      ≡ weightedOutputNormSq algebra outputElements outputWeight field
+    physicalOutputNormSqMeaning : ∀ fld →
+      physicalOutputNormSq fld
+      ≡ weightedOutputNormSq algebra outputElements outputWeight fld
 
 open PhysicalWeightedL2NormMeaning public
 

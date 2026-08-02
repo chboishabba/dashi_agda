@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4HRBetaHalfRemainderDominanceExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -147,25 +147,25 @@ asHRBetaRemainderDominance :
     (algebra : OrderedAdditiveGroupMeaning control)
     (successor : ScaleSuccessorMeaning control) →
   Induction.HRBetaRemainderDominance Scale Scalar
-asHRBetaRemainderDominance {control = control} algebra successor = record
-  { Induction.HRBetaRemainderDominance.inverseCoupling =
+asHRBetaRemainderDominance {control = control} algebra successor = let open Induction.HRBetaRemainderDominance in record
+  { inverseCoupling =
       Dyadic.beta control
-  ; Induction.HRBetaRemainderDominance.nextScale = next successor
-  ; Induction.HRBetaRemainderDominance.leadingIncrement = λ scale →
+  ; nextScale = next successor
+  ; leadingIncrement = λ scale →
       leadingIncrementAt control (next successor scale)
-  ; Induction.HRBetaRemainderDominance.remainder = λ scale →
+  ; remainder = λ scale →
       Dyadic.inverseCouplingRemainder control (next successor scale)
-  ; Induction.HRBetaRemainderDominance.netIncrement = λ scale →
+  ; netIncrement = λ scale →
       Dyadic.add control
         (leadingIncrementAt control (next successor scale))
         (Dyadic.inverseCouplingRemainder control (next successor scale))
-  ; Induction.HRBetaRemainderDominance.betaLower = λ scale →
+  ; betaLower = λ scale →
       Dyadic.halfOf control
         (leadingIncrementAt control (next successor scale))
-  ; Induction.HRBetaRemainderDominance.add = Dyadic.add control
-  ; Induction.HRBetaRemainderDominance.LessEqual = Dyadic.LessEqual control
-  ; Induction.HRBetaRemainderDominance.netIncrementMeaning = λ scale → refl
-  ; Induction.HRBetaRemainderDominance.oneStepMeaning = λ scale →
+  ; add = Dyadic.add control
+  ; LessEqual = Dyadic.LessEqual control
+  ; netIncrementMeaning = λ scale → refl
+  ; oneStepMeaning = λ scale →
       subst
         (λ previousScale →
           Dyadic.beta control (next successor scale)
@@ -177,9 +177,9 @@ asHRBetaRemainderDominance {control = control} algebra successor = record
                   (next successor scale))))
         (previousNext successor scale)
         (Dyadic.exactOneStepRecursion control (next successor scale))
-  ; Induction.HRBetaRemainderDominance.betaDominatesRemainder = λ scale →
+  ; betaDominatesRemainder = λ scale →
       halfIncrementBelowNetIncrement algebra (next successor scale)
-  ; Induction.HRBetaRemainderDominance.addMonotoneLeft =
+  ; addMonotoneLeft =
       addMonotoneLeft algebra
   }
 
@@ -217,18 +217,18 @@ asPrimaryCouplingAdmissibilityInduction :
   LowerIntervalAdmissibility algebra successor →
   Induction.PrimaryCouplingAdmissibilityInduction Scalar
 asPrimaryCouplingAdmissibilityInduction {control = control}
-    {algebra = algebra} {successor = successor} meaning = record
-  { Induction.PrimaryCouplingAdmissibilityInduction.coupling = λ count →
+    {algebra = algebra} {successor = successor} meaning = let open Induction.PrimaryCouplingAdmissibilityInduction in record
+  { coupling = λ count →
       Dyadic.beta control (iterateScale meaning count)
-  ; Induction.PrimaryCouplingAdmissibilityInduction.Admissible = λ value →
+  ; Admissible = λ value →
       Dyadic.LessEqual control (threshold meaning) value
-  ; Induction.PrimaryCouplingAdmissibilityInduction.initialCouplingAdmissible =
+  ; initialCouplingAdmissible =
       subst
         (λ selectedScale → Dyadic.LessEqual control
           (threshold meaning) (Dyadic.beta control selectedScale))
         (sym (iterateZero meaning))
         (initialAboveThreshold meaning)
-  ; Induction.PrimaryCouplingAdmissibilityInduction.oneStepCouplingPreservesAdmissibility =
+  ; oneStepCouplingPreservesAdmissibility =
       λ count admissible →
         subst
           (λ selectedScale → Dyadic.LessEqual control
