@@ -65,6 +65,10 @@ record T3SelfAdjointFormNormInputs
           (T3Restriction.restrictionAt restrictionInputs
             scale volume regime background)
 
+    restrictedSelfAdjointMeaning :
+      FormNorm.SelfAdjoint normData
+        (FormNorm.restrictedRemainder selfAdjointData)
+
     epsilonForm : Bound
 
     restrictedQuadraticFormBound : ∀ fluctuation →
@@ -88,7 +92,7 @@ asRestrictedFormToOperatorNormMeaning :
 asRestrictedFormToOperatorNormMeaning inputs = record
   { normData = normData inputs
   ; selfAdjointData = selfAdjointData inputs
-  ; restrictedOperatorsAgree = refl
+  ; restrictedSelfAdjointMeaning = restrictedSelfAdjointMeaning inputs
   ; epsilonForm = epsilonForm inputs
   ; restrictedQuadraticFormBound = restrictedQuadraticFormBound inputs
   }

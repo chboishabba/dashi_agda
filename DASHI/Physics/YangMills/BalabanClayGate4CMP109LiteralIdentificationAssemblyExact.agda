@@ -124,30 +124,30 @@ asGate4CMP109PhysicalMeaning :
     (CoarseBond → FineBond → Entry)
     (CoarseBond → FineBond → Set)
     Normalization
-asGate4CMP109PhysicalMeaning meaning = record
-  { Convention.Gate4CMP109PhysicalMeaning.LiteralMapMatchesCMP109 =
+asGate4CMP109PhysicalMeaning meaning = let open Convention.Gate4CMP109PhysicalMeaning in record
+  { LiteralMapMatchesCMP109 =
       LiteralMapMatchesCMP109 meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.DerivativeMatchesCMP109 =
+  ; DerivativeMatchesCMP109 =
       DerivativeMatchesCMP109 meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.SupportMatchesCMP109 =
+  ; SupportMatchesCMP109 =
       SupportMatchesCMP109 meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.NormalizationMatchesCMP109 =
+  ; NormalizationMatchesCMP109 =
       NormalizationMatchesCMP109 meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.physicalLiteralMap =
+  ; physicalLiteralMap =
       Locality.average (Locality.localStage (oneStepFormula meaning))
-  ; Convention.Gate4CMP109PhysicalMeaning.physicalDerivative =
+  ; physicalDerivative =
       derivativeEntry meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.physicalSupport =
+  ; physicalSupport =
       ProjectedEndpointSupport (projectedLocality meaning)
-  ; Convention.Gate4CMP109PhysicalMeaning.physicalNormalization =
+  ; physicalNormalization =
       physicalNormalization meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.literalMapMatchesCMP109 =
+  ; literalMapMatchesCMP109 =
       literalMapMatchesCMP109 meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.derivativeMatchesCMP109 =
+  ; derivativeMatchesCMP109 =
       derivativeMatchesCMP109 meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.supportMatchesCMP109 =
+  ; supportMatchesCMP109 =
       supportMatchesCMP109 meaning
-  ; Convention.Gate4CMP109PhysicalMeaning.normalizationMatchesCMP109 =
+  ; normalizationMatchesCMP109 =
       normalizationMatchesCMP109 meaning
   }
 

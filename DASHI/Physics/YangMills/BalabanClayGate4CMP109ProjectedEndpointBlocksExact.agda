@@ -126,10 +126,10 @@ projectedEndpointBlockLists :
   ∀ {fineN coarseN} →
   PeriodicCMP109SiteProjection fineN coarseN →
   Endpoint.PeriodicEndpointBlockLists (suc fineN) (suc coarseN)
-projectedEndpointBlockLists projection = record
-  { Endpoint.PeriodicEndpointBlockLists.sourceEndpointBlock =
+projectedEndpointBlockLists projection = let open Endpoint.PeriodicEndpointBlockLists in record
+  { sourceEndpointBlock =
       projectedSourceEndpointBlock projection
-  ; Endpoint.PeriodicEndpointBlockLists.targetEndpointBlock =
+  ; targetEndpointBlock =
       projectedTargetEndpointBlock projection
   }
 

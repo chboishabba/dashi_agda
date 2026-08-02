@@ -134,36 +134,60 @@ composeGaugeSegments group start middle finish firstSegment secondSegment =
         (cong (λ left → multiply group left (inverse group finish))
           (multiplyAssociative group start firstSegment secondSegment))))
 
+transformedBondBase :
+  ∀ {n Value} (group : ExactLinkGroup Value) →
+  PeriodicBondField n Value → PeriodicSiteGauge n Value → PeriodicBondField n Value
+transformedBondBase group bondField gauge (pair site axis) =
+  multiply group
+    (multiply group (gauge site) (bondField (pair site axis)))
+    (inverse group (gauge (positiveStep site axis)))
+
+orientedLinkBase :
+  ∀ {n Value} (group : ExactLinkGroup Value) →
+  PeriodicBondField n Value → Periodic.PeriodicBlock n → SignedAxis4 → Value
+orientedLinkBase group bondField site (pair axis true) = bondField (pair site axis)
+orientedLinkBase group bondField site (pair axis false) =
+  inverse group (bondField (pair (negativeStep site axis) axis))
+
+transformedOrientedLinkBase :
+  ∀ {n Value} (group : ExactLinkGroup Value) →
+  PeriodicBondField n Value → PeriodicSiteGauge n Value →
+  Periodic.PeriodicBlock n → SignedAxis4 → Value
+transformedOrientedLinkBase group bondField gauge site (pair axis true) =
+  transformedBondBase group bondField gauge (pair site axis)
+transformedOrientedLinkBase group bondField gauge site (pair axis false) =
+  inverse group (transformedBondBase group bondField gauge (pair (negativeStep site axis) axis))
+
 record PeriodicBondGaugeRealization
     (n : Nat) (Value : Set) (group : ExactLinkGroup Value) : Set₁ where
   field
     bondField : PeriodicBondField n Value
     gauge : PeriodicSiteGauge n Value
-
-  transformedBond : PeriodicBondField n Value
-  transformedBond (pair site axis) =
-    multiply group
-      (multiply group (gauge site) (bondField (pair site axis)))
-      (inverse group (gauge (positiveStep site axis)))
-
-  orientedLink : Periodic.PeriodicBlock n → SignedAxis4 → Value
-  orientedLink site (pair axis true) = bondField (pair site axis)
-  orientedLink site (pair axis false) =
-    inverse group (bondField (pair (negativeStep site axis) axis))
-
-  transformedOrientedLink : Periodic.PeriodicBlock n → SignedAxis4 → Value
-  transformedOrientedLink site (pair axis true) = transformedBond (pair site axis)
-  transformedOrientedLink site (pair axis false) =
-    inverse group (transformedBond (pair (negativeStep site axis) axis))
-
-  field
     orientedLinkGaugeCovariant : ∀ site direction →
-      transformedOrientedLink site direction
+      transformedOrientedLinkBase group bondField gauge site direction
       ≡ multiply group
-          (multiply group (gauge site) (orientedLink site direction))
+          (multiply group (gauge site) (orientedLinkBase group bondField site direction))
           (inverse group (gauge (walkStep site direction)))
 
 open PeriodicBondGaugeRealization public
+
+transformedBond :
+  ∀ {n Value} {group : ExactLinkGroup Value} →
+  PeriodicBondGaugeRealization n Value group → PeriodicBondField n Value
+transformedBond {group = group} realization =
+  transformedBondBase group (bondField realization) (gauge realization)
+
+orientedLink :
+  ∀ {n Value} {group : ExactLinkGroup Value} →
+  PeriodicBondGaugeRealization n Value group → Periodic.PeriodicBlock n → SignedAxis4 → Value
+orientedLink {group = group} realization =
+  orientedLinkBase group (bondField realization)
+
+transformedOrientedLink :
+  ∀ {n Value} {group : ExactLinkGroup Value} →
+  PeriodicBondGaugeRealization n Value group → Periodic.PeriodicBlock n → SignedAxis4 → Value
+transformedOrientedLink {group = group} realization =
+  transformedOrientedLinkBase group (bondField realization) (gauge realization)
 
 pathHolonomy :
   ∀ {n Value} {group : ExactLinkGroup Value} →
@@ -207,11 +231,11 @@ pathSiteGaugeCancellation {group = group} realization site
       (orientedLinkGaugeCovariant realization site direction))
     (trans
       (cong
-        (multiply group
+        (λ mid → multiply group
           (multiply group
-            (gauge realization site)
-            (orientedLink realization site direction))
-          (inverse group (gauge realization (walkStep site direction))))
+            (multiply group (gauge realization site) (orientedLink realization site direction))
+            (inverse group (gauge realization (walkStep site direction))))
+          mid)
         (pathSiteGaugeCancellation realization
           (walkStep site direction) directions))
       (composeGaugeSegments group
@@ -235,7 +259,7 @@ plaquetteBoundaryDirections plane =
 record PeriodicPlaquetteClosure (n : Nat) : Set₁ where
   field
     plaquetteCloses : ∀ site plane →
-      walk site (plaquetteBoundaryDirections plane) ≡ site
+      walk {n = n} site (plaquetteBoundaryDirections plane) ≡ site
 
 open PeriodicPlaquetteClosure public
 
@@ -259,8 +283,8 @@ plaquetteGaugeCancellation :
         (gauge realization (first plaquette))
         (plaquetteHolonomyFromBonds realization plaquette))
       (inverse group (gauge realization (first plaquette)))
-plaquetteGaugeCancellation {group = group} closure realization plaquette =
-  subst
+plaquetteGaugeCancellation {n = n} {group = group} closure realization plaquette =
+  subst {A = Periodic.PeriodicBlock n}
     (λ endpoint →
       transformedPathHolonomy realization (first plaquette)
         (plaquetteBoundaryDirections (second plaquette))
@@ -270,7 +294,7 @@ plaquetteGaugeCancellation {group = group} closure realization plaquette =
             (plaquetteHolonomyFromBonds realization plaquette))
           (inverse group (gauge realization endpoint)))
     (plaquetteCloses closure (first plaquette) (second plaquette))
-    (pathSiteGaugeCancellation realization (first plaquette)
+    (pathSiteGaugeCancellation {n = n} realization (first plaquette)
       (plaquetteBoundaryDirections (second plaquette)))
 
 record TransportedCubeBoundaryCertificate

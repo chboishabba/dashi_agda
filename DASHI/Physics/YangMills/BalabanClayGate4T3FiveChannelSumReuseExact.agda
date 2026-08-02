@@ -161,40 +161,40 @@ asFiveChannelOperatorSum :
       Scale Volume PatchRegime Background Fluctuation Tangent Bound) →
   Sum.FiveChannelOperatorSum
     (Fluctuation → Fluctuation) Fluctuation Bound
-asFiveChannelOperatorSum inputs = record
-  { Sum.FiveChannelOperatorSum.algebra = sumAlgebra inputs
-  ; Sum.FiveChannelOperatorSum.total =
+asFiveChannelOperatorSum inputs = let open Sum.FiveChannelOperatorSum in record
+  { algebra = sumAlgebra inputs
+  ; total =
       T3.backgroundHessianRemainder (t3 inputs)
         (T3.makeIndex (t3 inputs)
           (scale inputs) (volume inputs) (regime inputs) (background inputs))
-  ; Sum.FiveChannelOperatorSum.curvature =
+  ; curvature =
       T3.curvatureRemainder (t3 inputs)
         (T3.makeIndex (t3 inputs)
           (scale inputs) (volume inputs) (regime inputs) (background inputs))
-  ; Sum.FiveChannelOperatorSum.transport =
+  ; transport =
       T3.transportRemainder (t3 inputs)
         (T3.makeIndex (t3 inputs)
           (scale inputs) (volume inputs) (regime inputs) (background inputs))
-  ; Sum.FiveChannelOperatorSum.chart =
+  ; chart =
       T3.chartRemainder (t3 inputs)
         (T3.makeIndex (t3 inputs)
           (scale inputs) (volume inputs) (regime inputs) (background inputs))
-  ; Sum.FiveChannelOperatorSum.gauge =
+  ; gauge =
       T3.gaugeRemainder (t3 inputs)
         (T3.makeIndex (t3 inputs)
           (scale inputs) (volume inputs) (regime inputs) (background inputs))
-  ; Sum.FiveChannelOperatorSum.constraint =
+  ; constraint =
       T3.constraintRemainder (t3 inputs)
         (T3.makeIndex (t3 inputs)
           (scale inputs) (volume inputs) (regime inputs) (background inputs))
-  ; Sum.FiveChannelOperatorSum.totalMeaning = totalRemainderSplit inputs
-  ; Sum.FiveChannelOperatorSum.curvatureSelfAdjoint =
+  ; totalMeaning = totalRemainderSplit inputs
+  ; curvatureSelfAdjoint =
       curvatureSelfAdjoint inputs
-  ; Sum.FiveChannelOperatorSum.transportSelfAdjoint =
+  ; transportSelfAdjoint =
       transportSelfAdjoint inputs
-  ; Sum.FiveChannelOperatorSum.chartSelfAdjoint = chartSelfAdjoint inputs
-  ; Sum.FiveChannelOperatorSum.gaugeSelfAdjoint = gaugeSelfAdjoint inputs
-  ; Sum.FiveChannelOperatorSum.constraintSelfAdjoint =
+  ; chartSelfAdjoint = chartSelfAdjoint inputs
+  ; gaugeSelfAdjoint = gaugeSelfAdjoint inputs
+  ; constraintSelfAdjoint =
       constraintSelfAdjoint inputs
   }
 
@@ -271,43 +271,43 @@ asT3FiveChannelSelfAdjointInputs :
       Scale Volume PatchRegime Background Fluctuation Tangent Bound) →
   T3Reuse.T3FiveChannelSelfAdjointInputs
     Scale Volume PatchRegime Background Fluctuation Tangent Bound
-asT3FiveChannelSelfAdjointInputs inputs = record
-  { T3Reuse.T3FiveChannelSelfAdjointInputs.t3 = t3 inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.scale = scale inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.volume = volume inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.regime = regime inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.background = background inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.formAbsolute =
+asT3FiveChannelSelfAdjointInputs inputs = let open T3Reuse.T3FiveChannelSelfAdjointInputs in record
+  { t3 = t3 inputs
+  ; scale = scale inputs
+  ; volume = volume inputs
+  ; regime = regime inputs
+  ; background = background inputs
+  ; formAbsolute =
       Sum.quadraticFormAbsolute (sumAlgebra inputs)
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.UnitState = UnitState inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.lessEqualTransitive =
+  ; UnitState = UnitState inputs
+  ; lessEqualTransitive =
       t3LessEqualTransitive inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.addBoundMonotone =
+  ; addBoundMonotone =
       t3AddBoundMonotone inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.totalFormTriangle =
+  ; totalFormTriangle =
       λ fluctuation unit → derivedTotalFormTriangleInT3Order inputs fluctuation
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.curvatureFormBound =
+  ; curvatureFormBound =
       curvatureFormBound inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.transportFormBound =
+  ; transportFormBound =
       transportFormBound inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.chartFormBound =
+  ; chartFormBound =
       chartFormBound inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.gaugeFormBound =
+  ; gaugeFormBound =
       gaugeFormBound inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.constraintFormBound =
+  ; constraintFormBound =
       constraintFormBound inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.normData = normData inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.totalRemainderSelfAdjoint =
+  ; normData = normData inputs
+  ; totalRemainderSelfAdjoint =
       derivedTotalRemainderSelfAdjoint inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.unitStateMeaning =
+  ; unitStateMeaning =
       unitStateMeaning inputs
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.formAbsoluteMeaning =
+  ; formAbsoluteMeaning =
       formAbsoluteMeaning inputs
         (T3.backgroundHessianRemainder (t3 inputs)
           (T3.makeIndex (t3 inputs)
             (scale inputs) (volume inputs)
             (regime inputs) (background inputs)))
-  ; T3Reuse.T3FiveChannelSelfAdjointInputs.orderMeaning =
+  ; orderMeaning =
       orderMeaning inputs
   }
 

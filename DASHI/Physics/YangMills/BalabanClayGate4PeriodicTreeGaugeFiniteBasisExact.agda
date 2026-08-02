@@ -63,20 +63,20 @@ asFiniteTangentBasis :
   PeriodicTreeGaugeBasisInputs n Scalar Vector →
   Matrix.FiniteTangentBasis
     (PositiveBond (suc n)) Vector Scalar
-asFiniteTangentBasis inputs = record
-  { Matrix.FiniteTangentBasis.indices =
+asFiniteTangentBasis inputs = let open Matrix.FiniteTangentBasis in record
+  { indices =
       Tree.offTreePositiveBonds (Tree.tree (treeCoordinates inputs))
-  ; Matrix.FiniteTangentBasis.basisVector = basisVector inputs
-  ; Matrix.FiniteTangentBasis.coordinates = coordinates inputs
-  ; Matrix.FiniteTangentBasis.linearCombination = linearCombination inputs
-  ; Matrix.FiniteTangentBasis.BasisIndexComplete = λ index → Truth
-  ; Matrix.FiniteTangentBasis.basisIndexComplete = λ index → truth
-  ; Matrix.FiniteTangentBasis.basisComplete = reconstruction inputs
-  ; Matrix.FiniteTangentBasis.LinearlyIndependent = λ selectedBasis →
+  ; basisVector = basisVector inputs
+  ; coordinates = coordinates inputs
+  ; linearCombination = linearCombination inputs
+  ; BasisIndexComplete = λ index → Truth
+  ; basisIndexComplete = λ index → truth
+  ; basisComplete = reconstruction inputs
+  ; LinearlyIndependent = λ selectedBasis →
       LinearlyIndependentOn inputs
         (Tree.offTreePositiveBonds (Tree.tree (treeCoordinates inputs)))
         selectedBasis
-  ; Matrix.FiniteTangentBasis.basisIndependent =
+  ; basisIndependent =
       offTreeBasisIndependent inputs
   }
 

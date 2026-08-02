@@ -144,15 +144,15 @@ badComponentOf :
     {configuration block} →
   BadBlock dataSet configuration block →
   BadComponent dataSet configuration
-badComponentOf {block = block} bad = component block bad
+badComponentOf {dataSet = dataSet} {configuration = configuration} {block = block} bad = component block bad
 
 everyBadBlockAssigned :
   ∀ {Configuration Gauge Block}
     {dataSet : BadBlockGeometry Configuration Gauge Block}
     {configuration block}
     (bad : BadBlock dataSet configuration block) →
-  Contains (badComponentOf bad) block
-everyBadBlockAssigned bad = root bad
+  Contains {dataSet = dataSet} {configuration = configuration} (badComponentOf bad) block
+everyBadBlockAssigned {dataSet = dataSet} {configuration = configuration} bad = root bad
 
 PairwiseConnected :
   ∀ {Configuration Gauge Block}

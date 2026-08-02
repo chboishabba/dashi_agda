@@ -119,16 +119,16 @@ record PhysicalSU2PrincipalLogMeaning
     transportedRelativeBond : Field → CoarseBond → FineBond → Group
     physicalLog : Field → CoarseBond → FineBond → Lie
 
-    smallFieldImage : ∀ field →
-      PhysicalSmallField field →
+    smallFieldImage : ∀ fld →
+      PhysicalSmallField fld →
       ∀ coarse fine →
       InPrincipalImage chart
-        (transportedRelativeBond field coarse fine)
+        (transportedRelativeBond fld coarse fine)
 
-    physicalLogMeaning : ∀ field coarse fine →
-      physicalLog field coarse fine
+    physicalLogMeaning : ∀ fld coarse fine →
+      physicalLog fld coarse fine
       ≡ principalLog chart
-          (transportedRelativeBond field coarse fine)
+          (transportedRelativeBond fld coarse fine)
 
     PhysicalSmallFieldRadiusMatchesSelectedChart : Set
     physicalSmallFieldRadiusMatchesSelectedChart :
@@ -140,16 +140,16 @@ physicalLogExpInverse :
   ∀ {Field CoarseBond FineBond Lie Group Radius}
     (meaning : PhysicalSU2PrincipalLogMeaning
       Field CoarseBond FineBond Lie Group Radius)
-    field →
-  PhysicalSmallField meaning field →
+    fld →
+  PhysicalSmallField meaning fld →
   ∀ coarse fine →
-  expSU2 (chart meaning) (physicalLog meaning field coarse fine)
-  ≡ transportedRelativeBond meaning field coarse fine
-physicalLogExpInverse meaning field small coarse fine
-  rewrite physicalLogMeaning meaning field coarse fine =
+  expSU2 (chart meaning) (physicalLog meaning fld coarse fine)
+  ≡ transportedRelativeBond meaning fld coarse fine
+physicalLogExpInverse meaning fld small coarse fine
+  rewrite physicalLogMeaning meaning fld coarse fine =
   expPrincipalLog (chart meaning)
-    (transportedRelativeBond meaning field coarse fine)
-    (smallFieldImage meaning field small coarse fine)
+    (transportedRelativeBond meaning fld coarse fine)
+    (smallFieldImage meaning fld small coarse fine)
 
 su2PrincipalLogStandardTheoremLevel : ProofLevel
 su2PrincipalLogStandardTheoremLevel = standardImported

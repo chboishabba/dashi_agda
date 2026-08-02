@@ -152,10 +152,10 @@ ownedPlaquettesNoDuplicate :
     (dataSet : LiteralPeriodicPlaquetteOwnership
       n Scale Configuration Gauge)
     block {left right : PositivePlane4} →
-  periodicPlaquetteAt block left ≡ periodicPlaquetteAt block right →
+  periodicPlaquetteAt {n = n} block left ≡ periodicPlaquetteAt {n = n} block right →
   left ≡ right
-ownedPlaquettesNoDuplicate dataSet block =
-  ownedPeriodicPlaquettesNoDuplicate block
+ownedPlaquettesNoDuplicate {n = n} dataSet block =
+  ownedPeriodicPlaquettesNoDuplicate {n = n} block
 
 ------------------------------------------------------------------------
 -- Exact derived threshold and witness bridges.

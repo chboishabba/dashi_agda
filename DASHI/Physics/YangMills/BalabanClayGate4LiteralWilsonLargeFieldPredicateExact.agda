@@ -107,28 +107,39 @@ largePlaquetteDecidable dataSet scale configuration plaquette =
     (Gap.literalChordalDistanceSq
       (plaquetteHolonomy dataSet configuration plaquette))
 
+data LargeFieldBlockInList
+    {Scale Configuration Gauge Block Plaquette : Set}
+    (dataSet : LiteralWilsonLargeFieldData
+      Scale Configuration Gauge Block Plaquette)
+    (scale : Scale) (configuration : Configuration)
+    (plaquettes : List Plaquette) : Set where
+  largeWitnessInList : ∀ plaquette →
+    plaquette ∈ plaquettes →
+    LargePlaquette dataSet scale configuration plaquette →
+    LargeFieldBlockInList dataSet scale configuration plaquettes
+
 anyLargeOwnedPlaquette :
   ∀ {Scale Configuration Gauge Block Plaquette}
     (dataSet : LiteralWilsonLargeFieldData
       Scale Configuration Gauge Block Plaquette)
-    scale configuration block
+    scale configuration
     (plaquettes : List Plaquette) →
-  Dec (LargeFieldBlock dataSet scale configuration block)
-anyLargeOwnedPlaquette dataSet scale configuration block [] =
-  no (λ ())
-anyLargeOwnedPlaquette dataSet scale configuration block (plaquette ∷ plaquettes)
+  Dec (LargeFieldBlockInList dataSet scale configuration plaquettes)
+anyLargeOwnedPlaquette dataSet scale configuration [] =
+  no λ where (largeWitnessInList _ () _)
+anyLargeOwnedPlaquette dataSet scale configuration (plaquette ∷ plaquettes)
   with largePlaquetteDecidable dataSet scale configuration plaquette
-... | yes large = yes (largeWitness plaquette here large)
+... | yes large = yes (largeWitnessInList plaquette here large)
 ... | no notLarge
-  with anyLargeOwnedPlaquette dataSet scale configuration block plaquettes
-... | yes (largeWitness witness member large) =
-      yes (largeWitness witness (there member) large)
+  with anyLargeOwnedPlaquette dataSet scale configuration plaquettes
+... | yes (largeWitnessInList witness member large) =
+      yes (largeWitnessInList witness (there member) large)
 ... | no noTail = no reject
   where
-  reject : LargeFieldBlock dataSet scale configuration block → Empty
-  reject (largeWitness .plaquette here large) = notLarge large
-  reject (largeWitness witness (there member) large) =
-    noTail (largeWitness witness member large)
+  reject : LargeFieldBlockInList dataSet scale configuration (plaquette ∷ plaquettes) → Empty
+  reject (largeWitnessInList .plaquette here large) = notLarge large
+  reject (largeWitnessInList witness (there member) large) =
+    noTail (largeWitnessInList witness member large)
 
 largeFieldBlockDecidable :
   ∀ {Scale Configuration Gauge Block Plaquette}
@@ -136,9 +147,12 @@ largeFieldBlockDecidable :
       Scale Configuration Gauge Block Plaquette)
     scale configuration block →
   Dec (LargeFieldBlock dataSet scale configuration block)
-largeFieldBlockDecidable dataSet scale configuration block =
-  anyLargeOwnedPlaquette dataSet scale configuration block
-    (ownedPlaquettes dataSet block)
+largeFieldBlockDecidable dataSet scale configuration block
+  with anyLargeOwnedPlaquette dataSet scale configuration (ownedPlaquettes dataSet block)
+... | yes (largeWitnessInList witness member large) =
+      yes (largeWitness witness member large)
+... | no notLarge =
+      no λ where (largeWitness witness member large) → notLarge (largeWitnessInList witness member large)
 
 largePlaquetteGaugeForward :
   ∀ {Scale Configuration Gauge Block Plaquette}

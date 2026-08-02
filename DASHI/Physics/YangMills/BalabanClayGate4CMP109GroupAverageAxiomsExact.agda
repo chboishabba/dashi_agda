@@ -121,14 +121,14 @@ record GaugeCovariantPathFamily
 
     leftGauge rightGauge : Field → Group
 
-    pathHolonomyGaugeCovariant : ∀ field path →
-      transformedHolonomy field path
-      ≡ multiply averageAxioms (leftGauge field)
-          (multiply averageAxioms (holonomy field path) (rightGauge field))
+    transformedHolonomyGaugeCovariant : ∀ fld path →
+      transformedHolonomy fld path
+      ≡ multiply averageAxioms (leftGauge fld)
+          (multiply averageAxioms (holonomy fld path) (rightGauge fld))
 
-    pathFamilySmallDiameter : ∀ field →
+    pathFamilySmallDiameter : ∀ fld →
       SmallDiameter averageAxioms
-        (mapList (holonomy field) paths)
+        (mapList (holonomy fld) paths)
 
 open GaugeCovariantPathFamily public
 

@@ -149,8 +149,12 @@ fourDimensionalDyadicPrimaryConvention = fourDimensionalDyadicCMP98Convention
 threeDimensionalDyadicPrimaryConvention : SelectedAveragingConvention
 threeDimensionalDyadicPrimaryConvention = threeDimensionalDyadicCMP98Convention
 
+open import Agda.Primitive using (Level; _⊔_; lsuc; lzero)
+
 record PhysicalAveragingConventionMeaning
-    (LiteralMap Derivative Support Normalization : Set) : Set₁ where
+    {ℓ₁ ℓ₂ ℓ₃ ℓ₄ : Level}
+    (LiteralMap : Set ℓ₁) (Derivative : Set ℓ₂)
+    (Support : Set ℓ₃) (Normalization : Set ℓ₄) : Set (lsuc (ℓ₁ ⊔ ℓ₂ ⊔ ℓ₃ ⊔ ℓ₄)) where
   field
     selectedConvention : AveragingOperatorConvention
 

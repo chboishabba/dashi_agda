@@ -32,7 +32,7 @@ open import Data.Rational.Base as ℚ
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym; cong; cong₂; module ≡-Reasoning)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
@@ -42,9 +42,9 @@ module AddGroup = GroupProperties ℚₚ.+-0-group
 rationalInverse : ℚ → ℚ
 rationalInverse (mkℚ +0 denominator coprime) = 0ℚ
 rationalInverse value@(mkℚ +[1+ numerator ] denominator coprime) =
-  1/ value {{≢-nonZero (λ ())}}
+  (1/_ value {{≢-nonZero (λ ())}})
 rationalInverse value@(mkℚ -[1+ numerator ] denominator coprime) =
-  1/ value {{≢-nonZero (λ ())}}
+  (1/_ value {{≢-nonZero (λ ())}})
 
 rationalRealField : C3.RealField _
 rationalRealField = record
@@ -75,13 +75,13 @@ squareNonnegative value with ℚₚ.≤-total 0ℚ value
 ... | inj₁ nonnegative =
   let
     instance
-      valueNonnegative = ℚₚ.nonNegative nonnegative
+      valueNonnegative = ℚ.nonNegative nonnegative
       productNonnegative = ℚₚ.nonNeg*nonNeg⇒nonNeg value value
   in ℚₚ.nonNegative⁻¹ (value * value)
 ... | inj₂ nonpositive =
   let
     instance
-      valueNonpositive = ℚₚ.nonPositive nonpositive
+      valueNonpositive = ℚ.nonPositive nonpositive
       productNonnegative = ℚₚ.nonPos*nonPos⇒nonNeg value value
   in ℚₚ.nonNegative⁻¹ (value * value)
 
@@ -128,7 +128,7 @@ rationalOrderedExtension = record
   ; zeroBelowAdd = λ {a} {b} → addNonnegative {a} {b}
   ; subtract = _-_
   ; subtractMeaning = λ _ _ → refl
-  ; subtractNonnegativeBelow = subtractNonnegativeBelow
+  ; subtractNonnegativeBelow = λ {a} {b} → subtractNonnegativeBelow a b
   }
 
 Pair : Set
@@ -160,6 +160,12 @@ gramDefect [] = 0ℚ
 gramDefect ((left , right) ∷ rest) =
   crossSquares left right rest + gramDefect rest
 
+crossSquaresStep : ∀ left right nextLeft nextRight LN RN PD →
+  (left * nextRight - right * nextLeft) * (left * nextRight - right * nextLeft) + (left * left * RN + right * right * LN - (left * right * PD + left * right * PD))
+  ≡ left * left * (nextRight * nextRight + RN) + right * right * (nextLeft * nextLeft + LN) - (left * right * (nextLeft * nextRight + PD) + left * right * (nextLeft * nextRight + PD))
+crossSquaresStep left right nextLeft nextRight LN RN PD =
+  solve (left ∷ right ∷ nextLeft ∷ nextRight ∷ LN ∷ RN ∷ PD ∷ [])
+
 crossSquaresExpansion :
   ∀ left right rest →
   crossSquares left right rest
@@ -167,14 +173,32 @@ crossSquaresExpansion :
   square left * rightNormSquared rest
   + square right * leftNormSquared rest
   - ((left * right * pairDot rest) + (left * right * pairDot rest))
-crossSquaresExpansion left right [] =
-  solve (left ∷ right ∷ [])
+crossSquaresExpansion left right [] = sym (begin
+  square left * 0ℚ + square right * 0ℚ - (left * right * 0ℚ + left * right * 0ℚ)
+    ≡⟨ cong₂ _+_ (cong₂ _+_ (ℚₚ.*-zeroʳ (square left)) (ℚₚ.*-zeroʳ (square right)))
+                 (cong -_ (cong₂ _+_ (ℚₚ.*-zeroʳ (left * right)) (ℚₚ.*-zeroʳ (left * right)))) ⟩
+  0ℚ + 0ℚ - (0ℚ + 0ℚ)
+    ≡⟨ refl ⟩
+  0ℚ ∎)
+  where open ≡-Reasoning
 crossSquaresExpansion left right ((nextLeft , nextRight) ∷ rest)
   rewrite crossSquaresExpansion left right rest =
-  solve
-    ( left ∷ right ∷ nextLeft ∷ nextRight
-    ∷ leftNormSquared rest ∷ rightNormSquared rest
-    ∷ pairDot rest ∷ [] )
+  crossSquaresStep left right nextLeft nextRight (leftNormSquared rest) (rightNormSquared rest) (pairDot rest)
+
+finiteGramStepAlgebraic : ∀ left right LN RN PD GD →
+  (left * left + LN) * (right * right + RN)
+  ≡ (left * right + PD) * (left * right + PD) + (left * left * RN + right * right * LN - (left * right * PD + left * right * PD) + GD) + (LN * RN - (PD * PD + GD))
+finiteGramStepAlgebraic left right LN RN PD GD =
+  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ [])
+
+finiteGramStep : ∀ left right LN RN PD GD →
+  LN * RN ≡ PD * PD + GD →
+  (left * left + LN) * (right * right + RN)
+  ≡ (left * right + PD) * (left * right + PD) + (left * left * RN + right * right * LN - (left * right * PD + left * right * PD) + GD)
+finiteGramStep left right LN RN PD GD hyp
+  rewrite finiteGramStepAlgebraic left right LN RN PD GD
+        | hyp =
+  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ [])
 
 finiteGramIdentity :
   ∀ pairs →
@@ -182,12 +206,8 @@ finiteGramIdentity :
   ≡ square (pairDot pairs) + gramDefect pairs
 finiteGramIdentity [] = solve []
 finiteGramIdentity ((left , right) ∷ rest)
-  rewrite finiteGramIdentity rest
-        | crossSquaresExpansion left right rest =
-  solve
-    ( left ∷ right ∷ leftNormSquared rest
-    ∷ rightNormSquared rest ∷ pairDot rest
-    ∷ gramDefect rest ∷ [] )
+  rewrite crossSquaresExpansion left right rest =
+  finiteGramStep left right (leftNormSquared rest) (rightNormSquared rest) (pairDot rest) (gramDefect rest) (finiteGramIdentity rest)
 
 crossSquaresNonnegative :
   ∀ left right rest →
@@ -267,10 +287,10 @@ nonnegativeProductMonotone {a} {b} {c} {d}
   aNonnegative bNonnegative cNonnegative dNonnegative a≤c b≤d =
   let
     instance
-      aNN = ℚₚ.nonNegative aNonnegative
-      bNN = ℚₚ.nonNegative bNonnegative
-      cNN = ℚₚ.nonNegative cNonnegative
-      dNN = ℚₚ.nonNegative dNonnegative
+      aNN = ℚ.nonNegative aNonnegative
+      bNN = ℚ.nonNegative bNonnegative
+      cNN = ℚ.nonNegative cNonnegative
+      dNN = ℚ.nonNegative dNonnegative
 
     first : a * b ≤ c * b
     first = ℚₚ.*-monoʳ-≤-nonNeg b a≤c
