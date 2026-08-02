@@ -31,8 +31,7 @@ import DASHI.Physics.YangMills.BalabanClayLargeFieldVerifiedLiteratureExact as L
 ------------------------------------------------------------------------
 
 data ArchaeologyStatus : Set where
-  existingExact existingConditional newCombinatorial newAnalytic
-  externalExpositionOnly : ArchaeologyStatus
+  existingExact existingConditional newCombinatorial newAnalytic externalExpositionOnly : ArchaeologyStatus
 
 record Gate4Mechanism : Set where
   constructor mechanism
