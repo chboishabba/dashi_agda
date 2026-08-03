@@ -48,6 +48,7 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_<_)
 
 ------------------------------------------------------------------------
 -- Reusable solution-dependent dissipation-wavenumber interface.
