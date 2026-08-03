@@ -8,7 +8,7 @@ open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (_∈_)
+  using (_∈_; Dec; yes; no)
 
 import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact as Typed
 
@@ -41,15 +41,13 @@ import DASHI.Physics.YangMills.BalabanClayGate4TypedReuseAndFiniteGeometryExact 
 localizedExpressionPartition :
   ∀ {Term Region}
     (dataSet : Typed.SupportLargeFieldIntersection Term Region)
-    term region →
+    (term : Term) (region : Region) →
   Typed.ClassifiedLocalizedTerm dataSet term region Typed.firstClass
   ⊎ Typed.ClassifiedLocalizedTerm dataSet term region Typed.secondClass
 localizedExpressionPartition dataSet term region
-  with Typed.classifyLocalizedTermExact dataSet term region
-... | Typed.classifiedFirst notIntersects =
-  inj₁ (Typed.classifiedFirst notIntersects)
-... | Typed.classifiedSecond intersects =
-  inj₂ (Typed.classifiedSecond intersects)
+  with Typed.intersectsDecidable dataSet term region
+... | yes intersects = inj₂ (Typed.classifiedSecond intersects)
+... | no doesNotIntersect = inj₁ (Typed.classifiedFirst doesNotIntersect)
 
 ------------------------------------------------------------------------
 -- Concrete finite R-operation pipeline.
