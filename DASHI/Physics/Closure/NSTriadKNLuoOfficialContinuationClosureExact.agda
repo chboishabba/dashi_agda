@@ -26,6 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact where
 --   * official coefficient-unitary finite Fourier Parseval;
 --   * the concrete normalized-exponential Luo cutoff and periodized kernel;
 --   * exact hard-high physical triad -> Z3 full-shell pair encoding;
+--   * exact hard-high physical triad -> analytic-program pair encoding;
 --   * one rational owner for flux, Schur constant, weighted energy and
 --     low-pass gradient;
 --   * regular Leray--Hopf cutoff energy/dissipation/flux/time identities;
@@ -50,7 +51,9 @@ import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram as Closure
 import DASHI.Physics.Closure.NSCompactGammaFullShellSchur as FullShell
 import DASHI.Physics.Closure.NSZ3CutoffUniformIntegerShellSchur as Z3Shell
 import DASHI.Physics.Closure.NSPairIncidenceKernel as PairKernel
+import DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact as High
 import DASHI.Physics.Closure.NSTriadKNHardHighPhysicalZ3PairEncodingExact as Encoding
+import DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellPhysicalIdentificationExact as ProgramIdentification
 import DASHI.Physics.Closure.NSTriadKNLuoCrossCarrierRationalIdentificationExact as Cross
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
 import DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact as FullShellFlux
@@ -79,6 +82,11 @@ record OfficialLuoContinuationClosure
       Encoding.HardHighPhysicalZ3FullShellPairIdentification
         z3FullShellFamily
         (KAt shell) (NAt shell) shell (cubeCutoffAt shell)
+
+    hardHighProgramPairIdentificationAt :
+      (shell : Nat) →
+      ProgramIdentification.HardHighPhysicalFullShellIdentification
+        program (KAt shell) (NAt shell) shell (cubeCutoffAt shell)
 
     crossCarrierAt :
       (shell : Nat) →
@@ -147,7 +155,7 @@ record OfficialLuoContinuationClosure
 
 open OfficialLuoContinuationClosure public
 
-officialHardHighListMatchesFullShell :
+officialHardHighListMatchesZ3FullShell :
   ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
@@ -159,9 +167,33 @@ officialHardHighListMatchesFullShell :
       (FullShell.pairDataAt
         (z3FullShellFamily C)
         (KAt C shell) (NAt C shell))
-officialHardHighListMatchesFullShell C shell =
+officialHardHighListMatchesZ3FullShell C shell =
   Encoding.encodedHardHighListIsFullShellPairList
     (hardHighPairIdentificationAt C shell)
+
+officialHardHighListMatchesProgramFullShell :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
+  (shell : Nat) →
+  ProgramIdentification.mapList
+    (ProgramIdentification.encodePhysical
+      (hardHighProgramPairIdentificationAt C shell))
+    (High.hardHighPhysicalTriads shell (cubeCutoffAt C shell))
+  ≡ PairKernel.pairs
+      (FullShell.pairDataAt
+        (Closure.fullShellFamily (program C))
+        (KAt C shell) (NAt C shell))
+officialHardHighListMatchesProgramFullShell C shell =
+  ProgramIdentification.selectedPhysicalListIsFullShellPairList
+    (program C)
+    (KAt C shell)
+    (NAt C shell)
+    shell
+    (cubeCutoffAt C shell)
+    (hardHighProgramPairIdentificationAt C shell)
 
 officialPhysicalBridge :
   ∀ {d s t}
@@ -305,6 +337,9 @@ officialLuoContinuation C =
 officialLuoContinuationClosureConstructed : Bool
 officialLuoContinuationClosureConstructed = true
 
+hardHighProgramFullShellIdentificationComposed : Bool
+hardHighProgramFullShellIdentificationComposed = true
+
 allSixOfficialIdentificationTasksComposed : Bool
 allSixOfficialIdentificationTasksComposed = true
 
@@ -314,6 +349,10 @@ localizedRoutePromotedToClay = false
 officialLuoContinuationClosureConstructedIsTrue :
   officialLuoContinuationClosureConstructed ≡ true
 officialLuoContinuationClosureConstructedIsTrue = refl
+
+hardHighProgramFullShellIdentificationComposedIsTrue :
+  hardHighProgramFullShellIdentificationComposed ≡ true
+hardHighProgramFullShellIdentificationComposedIsTrue = refl
 
 allSixOfficialIdentificationTasksComposedIsTrue :
   allSixOfficialIdentificationTasksComposed ≡ true
