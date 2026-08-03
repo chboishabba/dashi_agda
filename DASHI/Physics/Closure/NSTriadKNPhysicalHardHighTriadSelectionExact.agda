@@ -151,7 +151,7 @@ filterHighNoDuplicates shell
 ... | true =
   Cube.unique∷ selectedHeadFresh (filterHighNoDuplicates shell rest)
   where
-  selectedHeadFresh : head Cube.∉ filterHigh shell tail
+  selectedHeadFresh : Cube._∉_ head (filterHigh shell tail)
   selectedHeadFresh member =
     headFresh (filterHighMemberWasOriginal member)
 ... | false = filterHighNoDuplicates shell rest
