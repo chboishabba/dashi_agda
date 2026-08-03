@@ -128,6 +128,15 @@ attributed public view can be generated reproducibly from a declared policy.
 It does not claim cryptographic custody, complete non-leakage, community
 consent, or secure restricted-content handling.
 
+### Current implementation boundary
+
+The current repository closes the semantic and attribution interface only.
+Future confidential deployment may add encryption, threshold custody, clean
+export builds, metadata scrubbing, and recovery exercises behind the same
+`FullArchive` and `ProjectionPolicy` boundary. None of those mechanisms is a
+precondition for ordinary public-domain cuisine formalisation, and domain
+modules do not need to reproduce their boilerplate.
+
 ## Attributed source atlas
 
 `CuisineKnowledgeSourceAtlas` records twenty-two bounded sources spanning:
