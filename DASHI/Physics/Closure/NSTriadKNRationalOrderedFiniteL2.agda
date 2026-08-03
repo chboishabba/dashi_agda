@@ -42,9 +42,9 @@ module AddGroup = GroupProperties ℚₚ.+-0-group
 rationalInverse : ℚ → ℚ
 rationalInverse (mkℚ +0 denominator coprime) = 0ℚ
 rationalInverse value@(mkℚ +[1+ numerator ] denominator coprime) =
-  (1/_ value {{≢-nonZero (λ ())}})
+  (1/_ value {{ℚ.≢-nonZero {p = value} (λ ())}})
 rationalInverse value@(mkℚ -[1+ numerator ] denominator coprime) =
-  (1/_ value {{≢-nonZero (λ ())}})
+  (1/_ value {{ℚ.≢-nonZero {p = value} (λ ())}})
 
 rationalRealField : C3.RealField _
 rationalRealField = record
@@ -110,7 +110,7 @@ subtractNonnegativeBelow total part partNonnegative =
         (ℚₚ.neg-antimono-≤ partNonnegative)
 
     withZero : total + (- part) ≤ total + 0ℚ
-    withZero = ℚₚ.+-mono-≤ ℚₚ.≤-refl negativePartBelowZero
+    withZero = ℚₚ.+-monoʳ-≤ total negativePartBelowZero
   in
   subst
     (λ upper → total - part ≤ upper)
@@ -204,7 +204,7 @@ finiteGramIdentity :
   ∀ pairs →
   leftNormSquared pairs * rightNormSquared pairs
   ≡ square (pairDot pairs) + gramDefect pairs
-finiteGramIdentity [] = solve []
+finiteGramIdentity [] = solve ([] : List ℚ)
 finiteGramIdentity ((left , right) ∷ rest)
   rewrite crossSquaresExpansion left right rest =
   finiteGramStep left right (leftNormSquared rest) (rightNormSquared rest) (pairDot rest) (gramDefect rest) (finiteGramIdentity rest)
@@ -256,8 +256,8 @@ finiteCauchySchwarzSquared pairs =
         (λ lower →
           lower ≤ square (pairDot pairs) + gramDefect pairs)
         (ℚₚ.+-identityʳ (square (pairDot pairs)))
-        (ℚₚ.+-mono-≤
-          ℚₚ.≤-refl
+        (ℚₚ.+-monoʳ-≤
+          (square (pairDot pairs))
           (gramDefectNonnegative pairs))
   in
   subst
