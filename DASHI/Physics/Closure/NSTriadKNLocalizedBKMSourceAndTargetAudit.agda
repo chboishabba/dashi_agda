@@ -47,6 +47,41 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+------------------------------------------------------------------------
+-- Reusable solution-dependent dissipation-wavenumber interface.
+------------------------------------------------------------------------
+
+record DissipationWavenumberInterface : Set₁ where
+  field
+    Time : Set
+
+    DissipationDominated :
+      Time → Nat → Set
+
+    dissipationWavenumber :
+      Time → Nat
+
+    aboveThresholdIsDissipationDominated :
+      (time : Time) →
+      (shell : Nat) →
+      dissipationWavenumber time < shell →
+      DissipationDominated time shell
+
+    thresholdDefinedByBernsteinViscosityComparison : Set
+
+open DissipationWavenumberInterface public
+
+record SourceDefinedTerminalSequence
+    (range : DissipationWavenumberInterface) : Set₁ where
+  field
+    terminalSequence : Nat → Time range
+    terminalTime : Time range
+    terminalSequenceApproachesTerminalTime : Set
+    sequenceDerivedFromDissipationRange : Set
+
+open SourceDefinedTerminalSequence public
 
 ------------------------------------------------------------------------
 -- Source-specific theorem target interfaces.
@@ -64,8 +99,7 @@ record ClassicalBKMContinuationTarget : Set₁ where
 record CheskidovShvydkoyDissipationRangeTarget : Set₁ where
   field
     periodicLittlewoodPaleyProjectors : Set
-    dissipationWavenumberQ : Set
-    qDefinedByBernsteinViscosityThreshold : Set
+    dissipationRange : DissipationWavenumberInterface
     highModesAbsorbedAboveQ : Set
     lowModeBesovIntegralFinite : Set
     lowModeCriterionImpliesContinuation : Set
@@ -73,9 +107,9 @@ record CheskidovShvydkoyDissipationRangeTarget : Set₁ where
 record CheskidovDaiTerminalSequenceTarget : Set₁ where
   field
     periodicLittlewoodPaleyProjectors : Set
-    dissipationWavenumberQ : Set
-    sourceDefinedTerminalSequenceTq : Set
-    terminalSequenceApproachesTerminalTime : Set
+    dissipationRange : DissipationWavenumberInterface
+    sourceDefinedTerminalSequenceTq :
+      SourceDefinedTerminalSequence dissipationRange
     localizedVorticityIntegralSmall : Set
     localizedCriterionImpliesContinuation : Set
 
