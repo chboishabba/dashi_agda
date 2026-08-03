@@ -46,7 +46,7 @@ open import DASHI.Physics.YangMills.BalabanConfiguredRGSide4Certificate
   using (configuredPathCoercivityConstant)
 
 ------------------------------------------------------------------------
--- A field fixed by the axis conditional expectation is translation invariant
+-- A fld fixed by the axis conditional expectation is translation invariant
 -- along that axis.  This turns the fully averaged part into an exact zero mode
 -- of every forward derivative.
 ------------------------------------------------------------------------
@@ -61,79 +61,79 @@ axisTransverseShiftForward (sucᵢ (sucᵢ zeroᵢ))
 axisTransverseShiftForward (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (pair (pair x0 x1) (pair x2 x3)) = refl
 
-axisFixedImpliesShiftInvariant : ∀ axis field →
-  FieldEqual (axisAverage4 field axis) field →
-  ∀ site → field (shiftForward4 axis site) ≡ field site
-axisFixedImpliesShiftInvariant axis field fixed site =
+axisFixedImpliesShiftInvariant : ∀ axis fld →
+  FieldEqual (axisAverage4 fld axis) fld →
+  ∀ site → fld (shiftForward4 axis site) ≡ fld site
+axisFixedImpliesShiftInvariant axis fld fixed site =
   trans
     (sym (fixed (shiftForward4 axis site)))
     (trans
       (cong
         (λ transverse → quarter *
           DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.physicalFibreSum
-            field axis transverse)
+            fld axis transverse)
         (axisTransverseShiftForward axis site))
       (fixed site))
 
-average0123ShiftInvariant : ∀ field axis site →
-  average0123 field (shiftForward4 axis site) ≡ average0123 field site
-average0123ShiftInvariant field axis =
-  axisFixedImpliesShiftInvariant axis (average0123 field)
-    (average0123Fixed field axis)
+average0123ShiftInvariant : ∀ fld axis site →
+  average0123 fld (shiftForward4 axis site) ≡ average0123 fld site
+average0123ShiftInvariant fld axis =
+  axisFixedImpliesShiftInvariant axis (average0123 fld)
+    (average0123Fixed fld axis)
 
-average0123ForwardDifferenceZero : ∀ field axis site →
-  forwardDifference4 axis (average0123 field) site ≡ 0ℚ
-average0123ForwardDifferenceZero field axis site
-  rewrite average0123ShiftInvariant field axis site =
+average0123ForwardDifferenceZero : ∀ fld axis site →
+  forwardDifference4 axis (average0123 fld) site ≡ 0ℚ
+average0123ForwardDifferenceZero fld axis site
+  rewrite average0123ShiftInvariant fld axis site =
   ℚRing.solve-∀
 
-forwardDifferenceResidualExact : ∀ field axis site →
+forwardDifferenceResidualExact : ∀ fld axis site →
   forwardDifference4 axis
-    (subtractField field (average0123 field)) site
-  ≡ forwardDifference4 axis field site
-forwardDifferenceResidualExact field axis site
-  rewrite average0123ShiftInvariant field axis site =
+    (subtractField fld (average0123 fld)) site
+  ≡ forwardDifference4 axis fld site
+forwardDifferenceResidualExact fld axis site
+  rewrite average0123ShiftInvariant fld axis site =
   ℚRing.solve-∀
 
-forwardDerivativeEnergyResidualExact : ∀ field axis →
+forwardDerivativeEnergyResidualExact : ∀ fld axis →
   forwardDerivativeEnergy axis
-    (subtractField field (average0123 field))
-  ≡ forwardDerivativeEnergy axis field
-forwardDerivativeEnergyResidualExact field axis =
+    (subtractField fld (average0123 fld))
+  ≡ forwardDerivativeEnergy axis fld
+forwardDerivativeEnergyResidualExact fld axis =
   siteSum4Cong _ _ (λ site →
     cong₂ _*_
-      (forwardDifferenceResidualExact field axis site)
-      (forwardDifferenceResidualExact field axis site))
+      (forwardDifferenceResidualExact fld axis site)
+      (forwardDifferenceResidualExact fld axis site))
 
 scalarResidualBondField : RationalBondField4 → RationalBondField4
-scalarResidualBondField field (pair site axis) =
-  field (pair site axis) - average0123 (bondComponent field axis) site
+scalarResidualBondField fld (pair site axis) =
+  fld (pair site axis) - average0123 (bondComponent fld axis) site
 
-componentPeriodicDifferenceResidualExact : ∀ field →
-  componentPeriodicDifferenceEnergy (scalarResidualBondField field)
-  ≡ componentPeriodicDifferenceEnergy field
-componentPeriodicDifferenceResidualExact field =
+componentPeriodicDifferenceResidualExact : ∀ fld →
+  componentPeriodicDifferenceEnergy (scalarResidualBondField fld)
+  ≡ componentPeriodicDifferenceEnergy fld
+componentPeriodicDifferenceResidualExact fld =
   sumRationalCong
     (allCyclicIndices four)
     (λ componentAxis →
       sumRational (allCyclicIndices four) (λ derivativeAxis →
         forwardDerivativeEnergy derivativeAxis
-          (bondComponent (scalarResidualBondField field) componentAxis)))
+          (bondComponent (scalarResidualBondField fld) componentAxis)))
     (λ componentAxis →
       sumRational (allCyclicIndices four) (λ derivativeAxis →
-        forwardDerivativeEnergy derivativeAxis (bondComponent field componentAxis)))
+        forwardDerivativeEnergy derivativeAxis (bondComponent fld componentAxis)))
     (λ componentAxis →
       sumRationalCong
         (allCyclicIndices four)
         (λ derivativeAxis →
           forwardDerivativeEnergy derivativeAxis
-            (subtractField (bondComponent field componentAxis)
-              (average0123 (bondComponent field componentAxis))))
+            (subtractField (bondComponent fld componentAxis)
+              (average0123 (bondComponent fld componentAxis))))
         (λ derivativeAxis →
-          forwardDerivativeEnergy derivativeAxis (bondComponent field componentAxis))
+          forwardDerivativeEnergy derivativeAxis (bondComponent fld componentAxis))
         (λ derivativeAxis →
           forwardDerivativeEnergyResidualExact
-            (bondComponent field componentAxis) derivativeAxis))
+            (bondComponent fld componentAxis) derivativeAxis))
 
 physicalPeriodicDifferenceResidualExact : ∀ tangent →
   physicalPeriodicReferenceDifferenceEnergy (fineFluctuation tangent)
@@ -155,13 +155,13 @@ fineProjectionResidualPointwiseZero : ∀ tangent component site axis →
 fineProjectionResidualPointwiseZero tangent component site axis =
   fineFluctuationAverageZero tangent component axis site
 
-globalNormPointwiseZero : ∀ field →
-  (∀ site → field site ≡ 0ℚ) → globalNormSq field ≡ 0ℚ
-globalNormPointwiseZero field fieldZero =
+globalNormPointwiseZero : ∀ fld →
+  (∀ site → fld site ≡ 0ℚ) → globalNormSq fld ≡ 0ℚ
+globalNormPointwiseZero fld fieldZero =
   trans
     (sumRationalCong
       (physicalBlockSites side4)
-      (λ site → field site * field site)
+      (λ site → fld site * fld site)
       (λ _ → 0ℚ)
       (λ site →
         trans
@@ -169,16 +169,16 @@ globalNormPointwiseZero field fieldZero =
           (ℚRing.solve-∀)))
     (sumRationalZero (physicalBlockSites side4))
 
-bondNormPointwiseZero : ∀ field →
-  (∀ axis site → field (pair site axis) ≡ 0ℚ) → bondNormSq field ≡ 0ℚ
-bondNormPointwiseZero field fieldZero =
+bondNormPointwiseZero : ∀ fld →
+  (∀ axis site → fld (pair site axis) ≡ 0ℚ) → bondNormSq fld ≡ 0ℚ
+bondNormPointwiseZero fld fieldZero =
   trans
     (sumRationalCong
       (allCyclicIndices four)
-      (λ axis → globalNormSq (bondComponent field axis))
+      (λ axis → globalNormSq (bondComponent fld axis))
       (λ _ → 0ℚ)
       (λ axis → globalNormPointwiseZero
-        (bondComponent field axis) (fieldZero axis)))
+        (bondComponent fld axis) (fieldZero axis)))
     (sumRationalZero (allCyclicIndices four))
 
 physicalNormPointwiseZero : ∀ tangent →

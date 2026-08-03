@@ -42,7 +42,7 @@ four = + 4 / 1
 half = + 1 / 2
 
 fourTimesOneEighth : four * oneEighth ≡ half
-fourTimesOneEighth = ℚRing.solve []
+fourTimesOneEighth = ℚRing.solve-∀
 powEighth : Nat → ℚ
 powEighth zero = 1ℚ
 powEighth (suc scale) = oneEighth * powEighth scale
@@ -107,6 +107,11 @@ fourResidualNonnegative dataSet scale =
     (fourNonnegative dataSet)
     (residualNonnegative dataSet scale)
 
+weightedResidualStepEquation :
+  ∀ R P →
+  four * R * (oneEighth * P) ≡ half * (R * P)
+weightedResidualStepEquation = ℚRing.solve-∀
+
 weightedResidualStepBelowHalf :
   (dataSet : BlockAveragingResidualEnvelope) →
   ∀ scale →
@@ -115,7 +120,7 @@ weightedResidualStepBelowHalf :
 weightedResidualStepBelowHalf dataSet scale =
   subst
     (λ upper → weightedResidual dataSet (suc scale) ≤ upper)
-    (ℚRing.solve-∀)
+    (weightedResidualStepEquation (residualEnvelope dataSet scale) (powEighth scale))
     (multiplyMonotoneNonnegative dataSet
       (residualNonnegative dataSet (suc scale))
       (fourResidualNonnegative dataSet scale)

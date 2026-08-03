@@ -1,10 +1,12 @@
 module DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (trans; cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -42,9 +44,15 @@ rootedShellTail n = quarterℚ * powHalf n
 powHalfStepExact : ∀ n → powHalf (suc n) ≡ halfℚ * powHalf n
 powHalfStepExact n = refl
 
+rootedShellTailLemma : ∀ p → quarterℚ * (halfℚ * p) ≡ halfℚ * (quarterℚ * p)
+rootedShellTailLemma = ℚRing.solve-∀
+
 rootedShellTailStepExact : ∀ n →
   rootedShellTail (suc n) ≡ halfℚ * rootedShellTail n
-rootedShellTailStepExact n = ℚRing.solve-∀
+rootedShellTailStepExact n =
+  trans
+    (cong (quarterℚ *_) (powHalfStepExact n))
+    (rootedShellTailLemma (powHalf n))
 
 ------------------------------------------------------------------------
 -- Physical cluster-tail instance.  Once the boundary-crossing diameter theorem
@@ -65,17 +73,17 @@ record ConfiguredBoundaryClusterTail
 
     boundaryShellIndex : Cutoff → Volume → Nat
 
-    onlyBoundaryCrossingClustersContribute : ∀ cutoff volume left right → Set
-    boundaryCrossingClusterMinimalDiameter : ∀ cutoff volume → Set
+    onlyBoundaryCrossingClustersContribute : ∀ (cutoff : Cutoff) (volume : Volume) (left right : Observable) → Set
+    boundaryCrossingClusterMinimalDiameter : ∀ (cutoff : Cutoff) (volume : Volume) → Set
 
-    boundaryCrossingClusterExponentialBound : ∀ cutoff volume left right →
+    boundaryCrossingClusterExponentialBound : ∀ (cutoff : Cutoff) (volume : Volume) (left right : Observable) →
       LessEqual
         (Distance
           (expectation cutoff volume (reflectedProduct left right))
           (thermodynamicExpectation cutoff (reflectedProduct left right)))
         (rational (rootedShellTail (boundaryShellIndex cutoff volume)))
 
-    boundaryShellIndexEscapes : ∀ cutoff → Set
+    boundaryShellIndexEscapes : ∀ (cutoff : Cutoff) → Set
     geometricTailVanishes : Set
 
 open ConfiguredBoundaryClusterTail public
@@ -108,7 +116,7 @@ record ConfiguredContinuumStepTail
     nextCutoff : Cutoff → Cutoff
     cutoffDepth : Cutoff → Nat
 
-    oneStepObservableExpectationDifferenceBound : ∀ cutoff observable →
+    oneStepObservableExpectationDifferenceBound : ∀ (cutoff : Cutoff) (observable : Observable) →
       LessEqual
         (Distance (expectation cutoff observable)
           (expectation (nextCutoff cutoff) observable))
@@ -116,8 +124,8 @@ record ConfiguredContinuumStepTail
 
     cutoffDepthEscapes : Set
     geometricSeriesSummable : Set
-    continuumPairTailSummable : ∀ left right → Set
-    diagonalPairTailVanishes : ∀ left right → Set
+    continuumPairTailSummable : ∀ (left right : Observable) → Set
+    diagonalPairTailVanishes : ∀ (left right : Observable) → Set
 
 open ConfiguredContinuumStepTail public
 
@@ -136,20 +144,20 @@ record ConfiguredExponentialMomentTail
     exponentialMomentBound : Observable → Scalar
     RenormalizedObservable : Observable → Set
 
-    uniformExponentialMomentBoundLiteral : ∀ observable →
+    uniformExponentialMomentBoundLiteral : ∀ (observable : Observable) →
       RenormalizedObservable observable → Set
 
-    powerBelowFactorialExponentialLiteral : ∀ degree observable → Set
-    reflectedProductYoungBoundLiteral : ∀ left right → Set
-    reflectedProductExponentialMomentBoundLiteral : ∀ left right → Set
-    uniformIntegrabilityOfReflectedProductsLiteral : ∀ left right → Set
+    powerBelowFactorialExponentialLiteral : ∀ (degree : Nat) (observable : Observable) → Set
+    reflectedProductYoungBoundLiteral : ∀ (left right : Observable) → Set
+    reflectedProductExponentialMomentBoundLiteral : ∀ (left right : Observable) → Set
+    uniformIntegrabilityOfReflectedProductsLiteral : ∀ (left right : Observable) → Set
 
     finiteDimensionalMarginal : Nat → Marginal
     continuumMeasure : Measure
 
-    momentTailBoundImpliesFiniteMarginalTightness : ∀ dimension → Set
-    finiteDimensionalMarginalTightLiteral : ∀ dimension → Set
-    projectiveFamilyConsistencyLiteral : ∀ lower upper → Set
+    momentTailBoundImpliesFiniteMarginalTightness : ∀ (dimension : Nat) → Set
+    finiteDimensionalMarginalTightLiteral : ∀ (dimension : Nat) → Set
+    projectiveFamilyConsistencyLiteral : ∀ (lower upper : Nat) → Set
     prokhorovTightnessForGaugeInvariantMarginalsLiteral : Set
     continuumMeasureSubsequenceExistsLiteral : Set
     clusteringImpliesContinuumMeasureUniqueness : Set

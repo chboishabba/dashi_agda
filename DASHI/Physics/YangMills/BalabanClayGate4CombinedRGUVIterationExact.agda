@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact where
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc)
+import Agda.Builtin.Nat as Nat
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -99,7 +100,7 @@ combinedStepPreservesAdmissibility admissibility state evidence = record
 stateAt :
   ∀ {State Bound} →
   CombinedOneStepPolymerNormData State Bound → State → Nat → State
-stateAt normData initial zero = initial
+stateAt normData initial Nat.zero = initial
 stateAt normData initial (suc scale) =
   next normData (stateAt normData initial scale)
 
@@ -111,7 +112,7 @@ allScaleAdmissible :
   AdmissibleRGState admissibility initial →
   ∀ (scale : Nat) →
   AdmissibleRGState admissibility (stateAt normData initial scale)
-allScaleAdmissible normData admissibility initial initialEvidence zero =
+allScaleAdmissible normData admissibility initial initialEvidence Nat.zero =
   initialEvidence
 allScaleAdmissible normData admissibility initial initialEvidence (suc scale) =
   combinedStepPreservesAdmissibility admissibility
@@ -154,7 +155,7 @@ allScaleUniformlyStable :
     (initial : State) →
   InitialUVStability consequences initial →
   ∀ (scale : Nat) → UniformlyStable consequences (stateAt normData initial scale)
-allScaleUniformlyStable normData consequences initial initialData zero =
+allScaleUniformlyStable normData consequences initial initialData Nat.zero =
   initialUniformlyStable initialData
 allScaleUniformlyStable normData consequences initial initialData (suc scale) =
   stabilityPreserved consequences

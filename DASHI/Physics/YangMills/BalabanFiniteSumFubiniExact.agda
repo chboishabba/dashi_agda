@@ -23,14 +23,17 @@ sumRationalZero [] = refl
 sumRationalZero (value ∷ values)
   rewrite sumRationalZero values = ℚP.+-identityˡ 0ℚ
 
+sumRationalAddLemma : ∀ (a b c d : ℚ) → (a + b) + (c + d) ≡ (a + c) + (b + d)
+sumRationalAddLemma a b c d = ℚRing.solve (a ∷ b ∷ c ∷ d ∷ [])
+
 sumRationalAdd :
   ∀ {A : Set} (values : List A) (left right : A → ℚ) →
   sumRational values (λ value → left value + right value)
   ≡ sumRational values left + sumRational values right
-sumRationalAdd [] left right = ℚRing.solve-∀
+sumRationalAdd [] left right = sym (ℚP.+-identityˡ 0ℚ)
 sumRationalAdd (value ∷ values) left right
   rewrite sumRationalAdd values left right =
-  ℚRing.solve-∀
+  sumRationalAddLemma (left value) (right value) (sumRational values left) (sumRational values right)
 
 sumRationalAppend :
   ∀ {A : Set} (left right : List A) (term : A → ℚ) →

@@ -36,8 +36,8 @@ record AbstractPolymerModel (Polymer : Set) : Set₁ where
     incompatible : Polymer → Polymer → Set
     activity : Polymer → ℚ
     absoluteActivity : Polymer → ℚ
-    activityAbsoluteDefinition : ∀ polymer → Set
-    activityNonnegative : ∀ polymer → 0ℚ ≤ absoluteActivity polymer
+    activityAbsoluteDefinition : ∀ (polymer : Polymer) → Set
+    activityNonnegative : ∀ (polymer : Polymer) → 0ℚ ≤ absoluteActivity polymer
 
 open AbstractPolymerModel public
 
@@ -52,8 +52,8 @@ record KoteckyPreissCriterion (Polymer : Set)
       incompatible model root incompatiblePolymer → Set
 
     kpWeightedNeighborhoodSum : Polymer → ℚ
-    kpWeightedNeighborhoodSumDefinition : ∀ root → Set
-    kpCriterion : ∀ root →
+    kpWeightedNeighborhoodSumDefinition : ∀ (root : Polymer) → Set
+    kpCriterion : ∀ (root : Polymer) →
       kpWeightedNeighborhoodSum root ≤ sizeWeight root
 
 open KoteckyPreissCriterion public
@@ -68,9 +68,9 @@ record FernandezProcacciCriterion (Polymer : Set)
     familyWeight : List Polymer → ℚ
     neighborhoodPartitionFunction : Polymer → ℚ
 
-    familyWeightDefinition : ∀ family → Set
-    compatibleSubfamiliesExact : ∀ root → Set
-    neighborhoodPartitionFunctionDefinition : ∀ root → Set
+    familyWeightDefinition : ∀ (family : List Polymer) → Set
+    compatibleSubfamiliesExact : ∀ (root : Polymer) → Set
+    neighborhoodPartitionFunctionDefinition : ∀ (root : Polymer) → Set
 
     fpCriterion : ∀ polymer →
       absoluteActivity model polymer
@@ -92,25 +92,25 @@ fpSlack = + 1 / 48
 
 onePlusEightMuExact :
   1ℚ + (+ 8 / 1) * mu ≡ fpEightCliquePhi
-onePlusEightMuExact = ℚRing.solve []
+onePlusEightMuExact = ℚRing.solve-∀
 muOverPhiExact :
-  mu / fpEightCliquePhi ≡ rhoFPMax
-muOverPhiExact = ℚRing.solve []
+  mu * (+ 1 / 3) ≡ rhoFPMax
+muOverPhiExact = ℚRing.solve-∀
 baseBelowFPMaximum : rhoBase ≤ rhoFPMax
 baseBelowFPMaximum = ℚP.≤ᵇ⇒≤ tt
 
 fpSlackExact : rhoFPMax - rhoBase ≡ fpSlack
-fpSlackExact = ℚRing.solve []
+fpSlackExact = ℚRing.solve-∀
 record EightCliqueNeighborhood (Polymer : Set) : Set₁ where
   field
     root : Polymer
     extensions : List Polymer
     extensionCountIsEight : Set
-    everyExtensionIncompatibleWithRoot : ∀ extension → Set
+    everyExtensionIncompatibleWithRoot : ∀ (extension : Polymer) → Set
     distinctExtensionsPairwiseIncompatible : Set
 
     compatibleSubfamiliesAreEmptyOrSingleton : Set
-    allMajorantsEqualMu : ∀ extension → Set
+    allMajorantsEqualMu : ∀ (extension : Polymer) → Set
     neighborhoodPartitionFunctionIsOnePlusEightMu : Set
 
 open EightCliqueNeighborhood public
@@ -129,12 +129,12 @@ markedFPSlack = + 1 / 120
 
 markedBaseActivityExact :
   markedInflation * rhoBase ≡ markedActivityMaximum
-markedBaseActivityExact = ℚRing.solve []
+markedBaseActivityExact = ℚRing.solve-∀
 markedActivityBelowFPMaximum : markedActivityMaximum ≤ rhoFPMax
 markedActivityBelowFPMaximum = ℚP.≤ᵇ⇒≤ tt
 
 markedFPSlackExact : rhoFPMax - markedActivityMaximum ≡ markedFPSlack
-markedFPSlackExact = ℚRing.solve []
+markedFPSlackExact = ℚRing.solve-∀
 record MarkedActivityData (Polymer Observable : Set)
     (model : AbstractPolymerModel Polymer) : Set₁ where
   field
@@ -143,8 +143,8 @@ record MarkedActivityData (Polymer Observable : Set)
     absoluteMarkedActivity : Observable → Polymer → ℚ
 
     sourceAdmissible : Observable → Set
-    markedActivityDefinition : ∀ observable polymer → Set
-    markedActivityAbsoluteDefinition : ∀ observable polymer → Set
+    markedActivityDefinition : ∀ (observable : Observable) (polymer : Polymer) → Set
+    markedActivityAbsoluteDefinition : ∀ (observable : Observable) (polymer : Polymer) → Set
 
     baseActivityBelowOneSixteenth : ∀ polymer →
       absoluteActivity model polymer ≤ rhoBase
@@ -196,7 +196,7 @@ record MarkedFernandezProcacciClosure
     fp : FernandezProcacciCriterion Polymer model
     markedNeighborhoodPartitionFunction : Observable → Polymer → ℚ
 
-    markedFPCondition : ∀ observable polymer →
+    markedFPCondition : ∀ (observable : Observable) (polymer : Polymer) →
       sourceAdmissible marked observable → Set
 
     markedClusterExpansionAbsolutelyConvergent : ∀ observable →

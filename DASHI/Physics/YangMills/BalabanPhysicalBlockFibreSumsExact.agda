@@ -251,14 +251,15 @@ scaledCenteredFibreNormSq {L} siteF axis transverse =
 
 centeredSquareInductionAlgebra :
   ∀ (scale total value restSquares restSum tailCount : ℚ) →
-  sq (scale * value - total)
-  + (sq scale * restSquares
+  (scale * value - total) * (scale * value - total)
+  + ((scale * scale) * restSquares
     - (1ℚ + 1ℚ) * scale * total * restSum
-    + tailCount * sq total)
-  ≡ sq scale * (sq value + restSquares)
+    + tailCount * (total * total))
+  ≡ (scale * scale) * ((value * value) + restSquares)
     - (1ℚ + 1ℚ) * scale * total * (value + restSum)
-    + (1ℚ + tailCount) * sq total
-centeredSquareInductionAlgebra = ℚRing.solve-∀
+    + (1ℚ + tailCount) * (total * total)
+centeredSquareInductionAlgebra scale total value restSquares restSum tailCount =
+  ℚRing.solve (scale ∷ total ∷ value ∷ restSquares ∷ restSum ∷ tailCount ∷ [])
 
 sumCenteredSquaresFormula :
   ∀ {A : Set} scale total (values : List A) (term : A → ℚ) →
@@ -279,11 +280,12 @@ sumCenteredSquaresFormula scale total (value ∷ values) term
     (natAsRational (length values))
 
 scaledVarianceNormalization : ∀ scale normSqValue total →
-  sq scale * normSqValue
+  (scale * scale) * normSqValue
     - (1ℚ + 1ℚ) * scale * total * total
-    + scale * sq total
-  ≡ sq scale * normSqValue - scale * sq total
-scaledVarianceNormalization = ℚRing.solve-∀
+    + scale * (total * total)
+  ≡ (scale * scale) * normSqValue - scale * (total * total)
+scaledVarianceNormalization scale normSqValue total =
+  ℚRing.solve (scale ∷ normSqValue ∷ total ∷ [])
 
 scaledCenteredFibreNormExact :
   ∀ {L} siteF axis transverse →
