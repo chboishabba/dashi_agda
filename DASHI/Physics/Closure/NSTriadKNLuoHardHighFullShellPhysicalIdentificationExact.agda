@@ -16,12 +16,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellPhysicalIdentification
 -- DOI: 10.1006/jfan.2001.3804.
 --
 -- PURPOSE
--- Isolate the one repository-specific representation theorem between the
--- literal hard-high physical triad list and the mature compact-Gamma/full-shell
--- Schur owner.  Once one proof-relevant encoding identifies those lists, the
--- existing analytic leaf supplies signed-coefficient domination and the
--- existing triad/full-shell coherence supplies equality with the exact pair
--- fold.  No second Schur theorem is introduced.
+-- Isolate the repository-specific representation theorem between the literal
+-- selected hard-high physical triad list and the mature compact-Gamma/full-
+-- shell Schur owner.  No global bijection between unrelated ambient carriers
+-- is required: the exact mapped-list equality owns completeness and
+-- multiplicity on the selected finite support.  Local coefficient agreements
+-- are required only for triads actually occurring in that support.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -32,6 +32,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact as High
 import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram as Closure
@@ -52,17 +53,6 @@ record HardHighPhysicalFullShellIdentification
     encodePhysical :
       Physical.PhysicalTriadIncidence → Closure.Pair program
 
-    decodePair :
-      Closure.Pair program → Physical.PhysicalTriadIncidence
-
-    encodeDecode :
-      (pair : Closure.Pair program) →
-      encodePhysical (decodePair pair) ≡ pair
-
-    decodeEncode :
-      (triad : Physical.PhysicalTriadIncidence) →
-      decodePair (encodePhysical triad) ≡ triad
-
     selectedPhysicalListIsPairAtoms :
       mapList encodePhysical
         (High.hardHighPhysicalTriads shell cubeCutoff)
@@ -79,6 +69,7 @@ record HardHighPhysicalFullShellIdentification
 
     physicalSignedMagnitudeAgreement :
       (triad : Physical.PhysicalTriadIncidence) →
+      Cube._∈_ triad (High.hardHighPhysicalTriads shell cubeCutoff) →
       physicalSignedMagnitude triad ≡
       Triads.signedTriadMagnitude
         (Closure.differentiatedTriadsAt program K N)
@@ -86,6 +77,7 @@ record HardHighPhysicalFullShellIdentification
 
     physicalIncidenceMajorantAgreement :
       (triad : Physical.PhysicalTriadIncidence) →
+      Cube._∈_ triad (High.hardHighPhysicalTriads shell cubeCutoff) →
       physicalIncidenceMajorant triad ≡
       Triads.triadMajorant
         (Closure.differentiatedTriadsAt program K N)
@@ -115,15 +107,17 @@ physicalSignedCoefficientDominated :
   (I : HardHighPhysicalFullShellIdentification
     program K N shell cubeCutoff) →
   (triad : Physical.PhysicalTriadIncidence) →
+  Cube._∈_ triad (High.hardHighPhysicalTriads shell cubeCutoff) →
   _≤_ (Closure.arithmetic program)
     (physicalSignedMagnitude I triad)
     (physicalIncidenceMajorant I triad)
-physicalSignedCoefficientDominated program K N shell cubeCutoff I triad =
+physicalSignedCoefficientDominated
+  program K N shell cubeCutoff I triad listed =
   subst
     (λ left →
       _≤_ (Closure.arithmetic program)
         left (physicalIncidenceMajorant I triad))
-    (sym (physicalSignedMagnitudeAgreement I triad))
+    (sym (physicalSignedMagnitudeAgreement I triad listed))
     (subst
       (λ right →
         _≤_ (Closure.arithmetic program)
@@ -131,7 +125,7 @@ physicalSignedCoefficientDominated program K N shell cubeCutoff I triad =
             (Closure.differentiatedTriadsAt program K N)
             (encodePhysical I triad))
           right)
-      (sym (physicalIncidenceMajorantAgreement I triad))
+      (sym (physicalIncidenceMajorantAgreement I triad listed))
       (Coherence.coherentLocalMajorization
         (Closure.triadFullShellCoherence program)
         K N (encodePhysical I triad)))
