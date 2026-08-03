@@ -4,6 +4,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
+open import Data.List.Membership.Propositional using (_∈_; Any; here; there)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayGate4WilsonBoltzmannSuppressionExact as Wilson
@@ -30,8 +32,8 @@ record FlatWilsonProductData (Plaquette : Set) : Set₁ where
     productData : Wilson.OrderedPlaquetteProduct Plaquette
     flatPlaquettes : List Plaquette
 
-    flatWeightOne : ∀ plaquette →
-      Wilson._∈_ plaquette flatPlaquettes →
+    flatWeightOne : ∀ (plaquette : Plaquette) →
+      plaquette ∈ flatPlaquettes →
       Wilson.weight productData plaquette ≡ Wilson.one productData
 
     Positive : Wilson.Weight productData → Set
@@ -46,7 +48,7 @@ flatProductExactOnList :
   ∀ {Plaquette}
     (dataSet : FlatWilsonProductData Plaquette)
     (plaquettes : List Plaquette) →
-  (∀ plaquette → Wilson._∈_ plaquette plaquettes →
+  (∀ (plaquette : Plaquette) → plaquette ∈ plaquettes →
     Wilson.weight (productData dataSet) plaquette
     ≡ Wilson.one (productData dataSet)) →
   Wilson.productWeights (productData dataSet) plaquettes
@@ -55,10 +57,10 @@ flatProductExactOnList dataSet [] allOne = refl
 flatProductExactOnList dataSet (plaquette ∷ plaquettes) allOne =
   trans
     (cong₂ (Wilson.multiply (productData dataSet))
-      (allOne plaquette Wilson.here)
+      (allOne plaquette here)
       (flatProductExactOnList dataSet plaquettes
         (λ selected membership →
-          allOne selected (Wilson.there membership))))
+          allOne selected (there membership))))
     (Wilson.multiplyOneLeft (productData dataSet)
       (Wilson.one (productData dataSet)))
 

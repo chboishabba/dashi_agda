@@ -23,6 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNMurrayBishopSobolevElevenFourths where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (List; [])
 import Data.Integer.Base as Int
 open import Data.Rational.Base as Rational
   using (ℚ; 1ℚ; _/_; _+_; _-_; _<_; toℚᵘ)
@@ -90,10 +91,10 @@ gapDecayRational : ℚ
 gapDecayRational = elevenFourths + elevenFourths
 
 lowDecayIsThree : lowDecayRational ≡ threeRational
-lowDecayIsThree = solve []
+lowDecayIsThree = solve ([] : List ℚ)
 
 gapDecayIsElevenHalves : gapDecayRational ≡ elevenHalves
-gapDecayIsElevenHalves = solve []
+gapDecayIsElevenHalves = solve ([] : List ℚ)
 
 record MurrayBishopSobolevElevenFourthsInstance : Set where
   field
