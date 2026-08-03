@@ -36,30 +36,30 @@ record LiteralBadTraversalData
     LiteralBadBlock : Scale → Field → Block → Set
     LiteralBadTraversal : Scale → Field → Traversal → Set
 
-    literalBadBlockPredicateDefinition : ∀ (scale : Scale) (field : Field) (block : Block) →
-      LiteralBadBlock scale field block →
+    literalBadBlockPredicateDefinition : ∀ (scale : Scale) (fld : Field) (block : Block) →
+      LiteralBadBlock scale fld block →
       Gap.squareℚ badThreshold
       ≤ Gap.literalChordalDistanceSq
-          (plaquetteHolonomy field
-            (canonicalBadPlaquette scale field block))
+          (plaquetteHolonomy fld
+            (canonicalBadPlaquette scale fld block))
 
-    badBlockContainsBadPlaquette : ∀ (scale : Scale) (field : Field) (block : Block) →
-      LiteralBadBlock scale field block →
+    badBlockContainsBadPlaquette : ∀ (scale : Scale) (fld : Field) (block : Block) →
+      LiteralBadBlock scale fld block →
       Gap.squareℚ badThreshold
       ≤ Gap.literalChordalDistanceSq
-          (plaquetteHolonomy field
-            (canonicalBadPlaquette scale field block))
+          (plaquetteHolonomy fld
+            (canonicalBadPlaquette scale fld block))
 
-    canonicalWitnessBelongsToTraversal : ∀ (scale : Scale) (field : Field) (traversal : Traversal) (block : Block) →
-      LiteralBadTraversal scale field traversal → Set
+    canonicalWitnessBelongsToTraversal : ∀ (scale : Scale) (fld : Field) (traversal : Traversal) (block : Block) →
+      LiteralBadTraversal scale fld traversal → Set
 
     distinctBadBlocksHaveDistinctWitnessPlaquettes :
-      ∀ (scale : Scale) (field : Field) (traversal : Traversal) (first second : Block) →
-      LiteralBadTraversal scale field traversal → Set
+      ∀ (scale : Scale) (fld : Field) (traversal : Traversal) (first second : Block) →
+      LiteralBadTraversal scale fld traversal → Set
 
     canonicalWitnessAssignmentInjective :
-      ∀ (scale : Scale) (field : Field) (traversal : Traversal) →
-      LiteralBadTraversal scale field traversal → Set
+      ∀ (scale : Scale) (fld : Field) (traversal : Traversal) →
+      LiteralBadTraversal scale fld traversal → Set
 
     localPlaquetteAction : Scale → Field → Plaquette → ℚ
     localWilsonAction : Scale → Field → Traversal → ℚ
@@ -68,19 +68,19 @@ record LiteralBadTraversalData
     halfBetaNonnegative : ∀ (scale : Scale) →
       0ℚ ≤ Gap.halfℚ * couplingBeta scale
 
-    localActionMatchesWilson : ∀ (scale : Scale) (field : Field) (plaquette : Plaquette) →
-      localPlaquetteAction scale field plaquette
+    localActionMatchesWilson : ∀ (scale : Scale) (fld : Field) (plaquette : Plaquette) →
+      localPlaquetteAction scale fld plaquette
       ≡ Gap.wilsonPlaquetteAction (couplingBeta scale)
-          (plaquetteHolonomy field plaquette)
+          (plaquetteHolonomy fld plaquette)
 
     witnessActionSumBelowTotal :
-      ∀ (scale : Scale) (field : Field) (traversal : Traversal) →
-      LiteralBadTraversal scale field traversal →
+      ∀ (scale : Scale) (fld : Field) (traversal : Traversal) →
+      LiteralBadTraversal scale fld traversal →
       Gap.sumMap (badBlocks traversal)
         (λ block →
-          localPlaquetteAction scale field
-            (canonicalBadPlaquette scale field block))
-      ≤ localWilsonAction scale field traversal
+          localPlaquetteAction scale fld
+            (canonicalBadPlaquette scale fld block))
+      ≤ localWilsonAction scale fld traversal
 
 open LiteralBadTraversalData public
 
