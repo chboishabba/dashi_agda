@@ -43,15 +43,15 @@ ninetyFiveNinetySix = + 95 / 96
 
 sineSuccessiveRatioNormalization :
   quarter / six ≡ oneTwentyFourth
-sineSuccessiveRatioNormalization = ℚRing.solve []
+sineSuccessiveRatioNormalization = ℚRing.solve-∀
 
 cosineSuccessiveRatioNormalization :
   quarter / two ≡ oneEighth
-cosineSuccessiveRatioNormalization = ℚRing.solve []
+cosineSuccessiveRatioNormalization = ℚRing.solve-∀
 
 normalizedSineDenominatorLowerConstant :
   1ℚ - (quarter / twentyFour) ≡ ninetyFiveNinetySix
-normalizedSineDenominatorLowerConstant = ℚRing.solve []
+normalizedSineDenominatorLowerConstant = ℚRing.solve-∀
 
 record HalfRadiusSeriesOrderInputs
     (Real : Set) : Set₁ where
