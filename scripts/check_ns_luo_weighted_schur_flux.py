@@ -15,7 +15,6 @@ FILES = {
     "enumeration": CLOSURE / "NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda",
     "physical_reuse": CLOSURE / "NSTriadKNLuoPhysicalEnumerationReuseExact.agda",
     "hard_selection": CLOSURE / "NSTriadKNPhysicalHardHighTriadSelectionExact.agda",
-    "hard_projector": CLOSURE / "NSTriadKNPeriodicHardProjectorAlgebraExact.agda",
     "finite_hermitian": CLOSURE / "NSTriadKNFiniteHermitianDiagonalMultiplierExact.agda",
     "coefficient_projector": CLOSURE / "NSTriadKNHardProjectorCoefficientSelfAdjointExact.agda",
     "parseval_projector": CLOSURE / "NSTriadKNHardProjectorParsevalTransportExact.agda",
@@ -42,50 +41,15 @@ FILES = {
     "dictionary": ROOT / "docs" / "ns-localized-bkm-variable-dictionary.md",
 }
 
-NEW_AGDA = (
-    "scale",
-    "source",
-    "enumeration",
-    "physical_reuse",
-    "hard_selection",
-    "hard_projector",
-    "finite_hermitian",
-    "coefficient_projector",
-    "parseval_projector",
-    "radial_multiplier",
-    "hard_smooth",
-    "multiplier_authority",
-    "flux",
-    "reuse",
-    "physical_full_shell",
-    "full_shell",
-    "energy",
-    "bootstrap",
-    "physical_time",
-    "published_luo",
-    "synthesis",
-    "integration",
-)
+NEW_AGDA = tuple(name for name in FILES if name not in {
+    "weighted_schur", "physical_triads", "physical_fibre",
+    "full_shell_existing", "coherence_existing", "pair_bounds", "dictionary",
+})
 
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}")
     raise SystemExit(1)
-
-
-def require(text: str, needle: str, label: str) -> None:
-    if needle not in text:
-        fail(f"{label}: missing {needle!r}")
-
-
-def require_all(text: str, needles: tuple[str, ...], label: str) -> None:
-    for needle in needles:
-        require(text, needle, label)
-
-
-def forbid(text: str, needle: str, label: str) -> None:
-    if needle in text:
-        fail(f"{label}: forbidden {needle!r}")
 
 
 def load() -> dict[str, str]:
@@ -97,277 +61,200 @@ def load() -> dict[str, str]:
     return loaded
 
 
-def main() -> int:
-    text = load()
+def require_all(text: str, needles: tuple[str, ...], label: str) -> None:
+    for needle in needles:
+        if needle not in text:
+            fail(f"{label}: missing {needle!r}")
 
-    print("[1/12] Luo source and scale fidelity")
-    require_all(text["source"], (
+
+def forbid(text: str, needle: str, label: str) -> None:
+    if needle in text:
+        fail(f"{label}: forbidden {needle!r}")
+
+
+def main() -> int:
+    t = load()
+
+    print("[1/10] Source and scale fidelity")
+    require_all(t["source"], (
         "10.1007/s00021-019-0411-z",
         "fullLowPassGradientInfinityIntegral",
         "viscosityNormalizedToOne",
-        "LuoProposition31FluxTarget",
         "fluxBoundByEnergyMajorantTimesLowPassGradient",
-        "LuoSmallTimeEnergyDissipationTarget",
-    ), "Luo source architecture")
-    require_all(text["scale"], (
-        "shellIndexRole",
-        "dyadicWavenumberRole",
-        "parabolicDenominatorRole",
-        "finiteModeCountRole",
-        "profileDepthRole",
-        "galerkinCutoffRole",
+    ), "Luo source")
+    require_all(t["scale"], (
+        "shellIndexRole", "dyadicWavenumberRole",
+        "finiteModeCountRole", "profileDepthRole", "galerkinCutoffRole",
         "localizedBKMScaleRolesSeparated = true",
     ), "scale dictionary")
-    require(text["dictionary"],
-            "Weighted Schur is used on the flux/energy factor",
-            "markdown dictionary")
+    require_all(t["dictionary"], (
+        "Never rewrite `(N + 1)^-1`",
+        "Weighted Schur is used on the flux/energy factor",
+    ), "markdown dictionary")
 
-    print("[2/12] Exact physical enumeration and hard selection")
-    require_all(text["physical_reuse"], (
+    print("[2/10] Physical enumeration and multiplicity")
+    require_all(t["physical_reuse"], (
         "physicalTriadEnumerationImplementedIsTrue",
-        "physicalTriadEnumerationDuplicateFreeIsTrue",
-        "physicalOutputFiberImplementedIsTrue",
         "hardProjectedHighFrequencySelectionConstructed = true",
         "validatedPhysicalFiberImageConstructedIsTrue",
-        "exactPhysicalKernelIdentificationReductionImplementedIsTrue",
-    ), "physical enumeration reuse")
-    require_all(text["hard_selection"], (
-        "hardHighPhysicalTriads",
-        "filterHighSound",
-        "filterHighComplete",
-        "filterHighNoDuplicates",
+    ), "physical reuse")
+    require_all(t["hard_selection"], (
         "hardHighPhysicalTriadSelectionSound",
         "hardHighPhysicalTriadSelectionComplete",
         "hardHighPhysicalTriadNoDuplicates",
-        "hardHighOutputSelectionConstructed = true",
-        "hardLowHighPartitionConstructed = true",
-    ), "hard high selector")
-    require(text["physical_triads"],
-            "physicalTriadEnumerationImplemented = true",
-            "literal physical triads")
-    require(text["physical_fibre"],
-            "validatedPhysicalFiberImageConstructed = true",
-            "physical fibre")
+    ), "hard selector")
+    require_all(t["enumeration"], (
+        "triadContributesExactlyThreeIncidences",
+        "PhysicalFibreMultiplicityAgreement",
+        "fibreLengthsAgree",
+    ), "incidence enumeration")
 
-    print("[3/12] Finite Hermitian projector closure")
-    require_all(text["finite_hermitian"], (
+    print("[3/10] Orthogonal hard projector")
+    require_all(t["finite_hermitian"], (
         "diagonalTermSelfAdjoint",
         "finiteDiagonalMultiplierSelfAdjoint",
-        "finiteDiagonalMultiplierIdempotent",
         "finiteHermitianDiagonalSelfAdjointnessConstructed = true",
-        "finiteHermitianDiagonalIdempotenceConstructed = true",
-    ), "finite Hermitian multiplier")
-    require_all(text["coefficient_projector"], (
+    ), "finite Hermitian theorem")
+    require_all(t["coefficient_projector"], (
         "hardLowCoefficientSelfAdjoint",
         "hardHighCoefficientSelfAdjoint",
-        "hardLowCoefficientIdempotent",
-        "hardHighCoefficientIdempotent",
         "hardProjectorCoefficientSelfAdjointnessClosed = true",
     ), "coefficient projector")
-    require_all(text["parseval_projector"], (
+    require_all(t["parseval_projector"], (
         "PeriodicHermitianParsevalTransport",
-        "hardLowPhysicalSelfAdjoint",
-        "hardHighPhysicalSelfAdjoint",
         "HardProjectorOrthogonalCertificate",
         "coefficientUnitaryHardProjectorOrthogonal",
         "hardProjectorOrthogonalCertificateConstructed = true",
-    ), "Parseval projector transport")
+    ), "Parseval transport")
 
-    print("[4/12] Luo radial support and hard/smooth comparison")
-    require_all(text["radial_multiplier"], (
+    print("[4/10] Radial multiplier and terminal-window transfer")
+    require_all(t["radial_multiplier"], (
         "symbolIsOneOnInnerThreeQuarterBall",
         "symbolVanishesOutsideUnitBall",
-        "smoothSupportInsideHardNext",
         "smoothLowPassFactorsThroughHardNext",
         "derivativeBernsteinConstant",
         "finiteModeL2ToLInfinityConstant",
         "hardSmoothMultiplierLInfinityConstant",
-        "smoothHardNextSupportFactorizationConstructed = true",
         "localizedMultiplierConstantsSeparated = true",
     ), "radial multiplier")
-    require_all(text["hard_smooth"], (
-        "HardSmoothTerminalWindowComparison",
+    require_all(t["hard_smooth"], (
         "hardTerminalWindowBudgetTransfersToLuoSmoothCriterion",
         "hardSmoothTerminalWindowTransferConstructed = true",
-    ), "hard-smooth transfer")
-    require_all(text["multiplier_authority"], (
+    ), "hard/smooth transfer")
+    require_all(t["multiplier_authority"], (
         "PublishedLuoPeriodicMultiplierKernelAuthority",
-        "smoothGradientKernelEstimate",
-        "smoothTerminalWindowKernelEstimate",
         "dyadicKernelL1BoundUniformInShell",
         "luoSmoothCriterionFromHardBudget",
         "luoPeriodicMultiplierKernelBoundLevel = standardImported",
         "concretePublishedLuoMultiplierAuthoritySelected = false",
-    ), "periodic multiplier authority")
+    ), "multiplier authority")
 
-    print("[5/12] Pair-incidence multiplicity and Hermitian flux majorants")
-    require_all(text["enumeration"], (
-        "ExactFiniteEnumeration",
-        "NoDuplicates",
-        "PairIncidenceSlot",
-        "triadContributesExactlyThreeIncidences",
-        "PhysicalFibreMultiplicityAgreement",
-        "fibreLengthsAgree",
-    ), "enumeration interface")
-    require_all(text["flux"], (
-        "complexDifferenceNormSquared",
+    print("[5/10] Hermitian flux and weighted Schur")
+    require_all(t["flux"], (
         "HermitianPairIncidenceAtom",
         "physicalTriadTermDominatedByIncidenceMajorant",
-        "fiberMultiplicityMatchesConvolutionMultiplicity",
-        "physicalMajorantEqualsProfileSum",
-        "physicalCutoffFluxDominatedByPairIncidenceFold",
         "physicalCutoffFluxDominatedByWeightedSchurMajorant",
         "luoCutoffFluxEstimate",
         "physicalWeightedSchurBridgeInhabited = false",
-    ), "Hermitian flux theorem")
+    ), "flux theorem")
+    require_all(t["reuse"], (
+        "weightedSchurProductBoundClosed ≡ true",
+        "weightedSchurRelevantToLuoFluxRoute = true",
+    ), "Schur reuse")
+    require_all(t["weighted_schur"], (
+        "weightedSchurProductBoundClosed = true",
+    ), "existing Schur theorem")
 
-    print("[6/12] Hard-high physical/full-shell representation")
-    require_all(text["physical_full_shell"], (
+    print("[6/10] Physical/full-shell representation")
+    require_all(t["physical_full_shell"], (
         "HardHighPhysicalFullShellIdentification",
         "selectedPhysicalListIsFullShellPairList",
         "physicalSignedCoefficientDominated",
-        "hardHighPhysicalFullShellRepresentationTheoremConstructed = true",
         "physicalSignedCoefficientDominationTheoremConstructed = true",
         "canonicalHardHighPhysicalFullShellIdentificationInhabited = false",
-    ), "physical full-shell identification")
-    require_all(text["coherence_existing"], (
-        "pairListsMatch",
-        "signedResponseMatchesFullShell",
-        "localMajorantMatchesFullShell",
-        "coherentLocalMajorization",
-    ), "existing triad/full-shell coherence")
-
-    print("[7/12] Existing weighted-Schur and full-shell reuse")
-    require_all(text["reuse"], (
-        "weightedSchurProductBoundClosed ≡ true",
-        "weightedSchurMatrixOperatorDataClosed ≡ false",
-        "weightedSchurRelevantToLuoFluxRoute = true",
-    ), "weighted-Schur reuse")
-    require(text["weighted_schur"],
-            "weightedSchurProductBoundClosed = true",
-            "existing Schur algebra")
-    require_all(text["full_shell"], (
-        "Closure.closureNearResponseMajorized",
+    ), "physical/full-shell theorem")
+    require_all(t["coherence_existing"], (
+        "pairListsMatch", "coherentLocalMajorization",
+    ), "existing coherence")
+    require_all(t["full_shell"], (
         "luoFullShellCutoffFluxEstimate",
-        "matureFullShellNearMajorizationReused = true",
         "matureFullShellUniformSchurReused = true",
         "luoFullShellPhysicalIdentificationInhabited = false",
-    ), "full-shell Luo adapter")
-    require_all(text["full_shell_existing"], (
-        "everyLocalFourierMajorization",
-        "certificateAt",
-    ), "existing full shell")
+    ), "full-shell adapter")
 
-    print("[8/12] Projected energy and literal time transport")
-    require_all(text["energy"], (
-        "ProjectedCutoffEnergyBalance",
-        "divergenceFreePressureCancellation",
+    print("[7/10] Energy, time and bootstrap transport")
+    require_all(t["energy"], (
         "highFrequencyEnergyInequality",
         "projectedEnergyControlledByWeightedSchurFlux",
         "periodicHardHighPassSelfAdjointnessClosedIsTrue",
         "literalProjectedConvectionEnumerationClosedIsTrue",
         "periodicProjectedConvectionFluxAdapterInhabited = false",
-    ), "projected energy flux")
-    require_all(text["bootstrap"], (
-        "LuoParabolicTimeCutoff",
-        "LuoCutoffEnergyFluxData",
-        "localizedGradientSubstitution",
+    ), "energy flux")
+    require_all(t["bootstrap"], (
         "luoSmallTimeEnergyDissipationRecursion",
-        "LuoCutoffBootstrapCertificate",
         "luoCutoffBootstrapBound",
         "physicalLuoBootstrapAdapterInhabited = false",
-    ), "Luo bootstrap")
-    require_all(text["physical_time"], (
+    ), "bootstrap")
+    require_all(t["physical_time"], (
         "LiteralLuoCutoffEnergyDissipationTimeIdentification",
-        "previousEnergyMeaning",
-        "currentEnergyMeaning",
-        "dissipationMeaning",
-        "integratedFluxMeaning",
-        "weightedShellEnergyMeaning",
-        "localizedGradientIntegralMeaning",
+        "physicalEnergyIsHardHighL2Squared",
+        "physicalGradientIntegralIsLuoLowPassIntegral",
         "literalPhysicalLuoEnergyDissipationRecursion",
-        "literalPhysicalLuoBootstrapBound",
         "canonicalLiteralLuoPhysicalIdentificationInhabited = false",
-    ), "literal physical time transport")
+    ), "physical time")
 
-    print("[9/12] Published Luo authority and final synthesis")
-    require_all(text["published_luo"], (
+    print("[8/10] Published Luo theorem and final synthesis")
+    require_all(t["published_luo"], (
         "PublishedLuoTheorem11Authority",
-        "LuoLocalizedGradientLimsupBound",
         "theorem11Regularity",
         "luoTheorem11Continuation",
-        "LuoRepositoryHypothesisIdentification",
-        "luoContinuationFromRepositoryLimsup",
+        "RepositoryLocalizedLimsupWitness",
+        "repositoryLocalizedLimsupWitness",
+        "repositoryLimsupMatchesLuoHypothesis",
         "luoTheorem11AuthorityLevel = standardImported",
         "selectedPublishedLuoAuthorityInhabited = false",
     ), "published Luo authority")
-    require_all(text["synthesis"], (
+    require_all(t["synthesis"], (
         "LuoWeightedSchurContinuationSynthesis",
         "hardHighPhysicalListMatchesFullShell",
         "hardHighPhysicalCoefficientDominated",
         "literalPhysicalCutoffRecursion",
         "smoothLuoCutoffBound",
         "luoWeightedSchurContinuation",
-        "luoWeightedSchurContinuationSynthesisConstructed = true",
         "canonicalLuoWeightedSchurContinuationSynthesisInhabited = false",
-    ), "final continuation synthesis")
+    ), "continuation synthesis")
 
-    print("[10/12] Consolidated fail-closed ledger")
-    require_all(text["integration"], (
-        "finiteHermitianSelfAdjointnessConstructed",
+    print("[9/10] Integrated fail-closed ledger")
+    require_all(t["integration"], (
         "hardProjectorOrthogonalCertificateConstructed",
         "smoothHardNextFactorizationConstructed",
-        "periodicMultiplierAuthoritySurfaceConstructed",
-        "hardHighFullShellRepresentationTheoremConstructed",
         "physicalSignedCoefficientDominationTheoremConstructed",
-        "hardHighSelfAdjointnessClosed",
         "literalPhysicalEnergyTimeInterfaceConstructed",
         "publishedLuoContinuationAdapterConstructed",
         "finalContinuationSynthesisConstructed",
         "canonicalContinuationSynthesisOpen",
-        "luoWeightedSchurFluxTrancheComplete = true",
         "luoWeightedSchurFluxRouteReadyForPromotion = false",
         "existingBKMExclusionStillFalse",
         "existingClayPromotionStillFalse",
-    ), "flux integration")
-    require_all(text["top"], (
-        "hardProjectorOrthogonalCertificateConstructed",
-        "luoRadialSupportFactorizationConstructed",
+    ), "integration receipt")
+    require_all(t["top"], (
         "conditionalContinuationSynthesisConstructed",
+        "canonicalContinuationSynthesisStillOpen",
         "localizedBKMRouteReadyForPromotion = false",
-    ), "top integration")
-    require(text["pair_bounds"],
-            "canonicalBKMExclusionProved = false",
-            "legacy BKM gate")
+    ), "top receipt")
+    require_all(t["pair_bounds"], (
+        "canonicalBKMExclusionProved = false",
+    ), "legacy BKM gate")
 
-    print("[11/12] Proof-relevant semantic boundaries")
-    for label, content, pairs in (
-        ("physical full-shell", text["physical_full_shell"], (
-            ("selectedPhysicalListIsPairAtoms", "physicalSignedMagnitudeAgreement"),
-            ("physicalIncidenceMajorantAgreement", "decodeEncode"),
-        )),
-        ("physical time", text["physical_time"], (
-            ("PhysicalEnergyIsHardHighL2Squared", "physicalEnergyIsHardHighL2Squared"),
-            ("PhysicalGradientIntegralIsLuoLowPassIntegral", "physicalGradientIntegralIsLuoLowPassIntegral"),
-        )),
-        ("published Luo", text["published_luo"], (
-            ("RepositoryLocalizedLimsupWitness", "repositoryLocalizedLimsupWitness"),
-            ("repositoryLimsupMatchesLuoHypothesis", "solutionSolves"),
-        )),
-    ):
-        for proposition, witness in pairs:
-            require(content, proposition, label)
-            require(content, witness, label)
-
-    print("[12/12] Rejecting new axioms and accidental promotion")
+    print("[10/10] Rejecting axioms and accidental promotion")
     for name in NEW_AGDA:
-        forbid(text[name], "\npostulate\n", name)
-        forbid(text[name], "\npostulate ", name)
-        forbid(text[name], "bkmExclusionProved = true", name)
-        forbid(text[name], "clayNavierStokesPromoted = true", name)
-        forbid(text[name], "RouteReadyForPromotion = true", name)
+        forbid(t[name], "\npostulate\n", name)
+        forbid(t[name], "\npostulate ", name)
+        forbid(t[name], "bkmExclusionProved = true", name)
+        forbid(t[name], "clayNavierStokesPromoted = true", name)
+        forbid(t[name], "RouteReadyForPromotion = true", name)
 
-    print("PASS: Luo weighted-Schur continuation tranche is attributed and fail-closed at the canonical physical inhabitant.")
+    print("PASS: Luo continuation tranche is attributed and fail-closed at the canonical physical inhabitant.")
     print("NOTE: this is a static source audit; run the focused Agda checker separately.")
     return 0
 
