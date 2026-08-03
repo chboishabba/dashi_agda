@@ -54,11 +54,12 @@ record OfficialPeriodicLuoSourceCarrier
       LH.solution (lerayHopfSolutionAt initial solution) ≡ solution
 
     SmoothDivergenceFreeFiniteEnergy : InitialDatum → Set (d ⊔ s)
+    LerayHopfAdmissibleInitialDatum : InitialDatum → Set (d ⊔ s)
 
     smoothDataMatchesLerayHopfInitialClass :
       (initial : InitialDatum) →
       SmoothDivergenceFreeFiniteEnergy initial →
-      Set (d ⊔ s)
+      LerayHopfAdmissibleInitialDatum initial
 
     SolvesPeriodicNavierStokesFrom :
       InitialDatum → Solution → Set (d ⊔ s ⊔ t)
@@ -77,7 +78,10 @@ record OfficialPeriodicLuoSourceCarrier
     viscosityIsExactlyOne : ViscosityIsExactlyOne
 
     SourceNormalizationMatchesLuo : Set
-    sourceNormalizationMatchesLuo : SourceNormalizationMatchesLuo
+    sourceNormalizationFromDomainAndViscosity :
+      PeriodicDomainIsThreeTorus →
+      ViscosityIsExactlyOne →
+      SourceNormalizationMatchesLuo
 
     localizedGradientIntegral :
       Solution → Time → Nat → ℚ
@@ -128,6 +132,18 @@ record OfficialPeriodicLuoSourceCarrier
 
 open OfficialPeriodicLuoSourceCarrier public
 
+selectedSourceNormalization :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  (C : OfficialPeriodicLuoSourceCarrier InitialDatum Solution Time) →
+  SourceNormalizationMatchesLuo C
+selectedSourceNormalization C =
+  sourceNormalizationFromDomainAndViscosity C
+    (periodicDomainIsThreeTorus C)
+    (viscosityIsExactlyOne C)
+
 officialPeriodicLuoAuthority :
   ∀ {d s t}
     {InitialDatum : Set d}
@@ -142,8 +158,7 @@ officialPeriodicLuoAuthority C = record
       SolvesPeriodicNavierStokesFrom C
   ; UnitViscosityNormalization =
       SourceNormalizationMatchesLuo C
-  ; periodicDomainMatchesSource =
-      sourceNormalizationMatchesLuo C
+  ; periodicDomainMatchesSource = selectedSourceNormalization C
   ; localizedGradientIntegral = localizedGradientIntegral C
   ; universalDeltaBKM = universalDeltaBKM C
   ; LuoLocalizedGradientLimsupBound =
