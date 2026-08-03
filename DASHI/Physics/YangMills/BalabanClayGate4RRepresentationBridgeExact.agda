@@ -4,6 +4,8 @@ open import Data.Rational using (_*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRationalConstantsExact as BishopConstants
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geometric
 import DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion as ExistingRG
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayGate4CountingAndLocalizationReuseExact as Reuse
@@ -50,9 +52,9 @@ rExpressionRootedCounting :
       GaugeOrbit Polymer Region Coupling Bound Density}
     {shellData : Shell.TraversalShellData Scale Volume Root}
     (bridge : ConcreteRRepresentationBridge rg shellData RExpression)
-    expression →
+    (expression : RExpression) →
   Reuse.familyMass (rootedFamily bridge) (expressionToFamily bridge expression)
-  ≤ Shell.quarter * Shell.halfPower
+  ≤ BishopConstants.quarter * Geometric.halfPower
       (Reuse.depthOf (rootedFamily bridge)
         (expressionToFamily bridge expression))
 rExpressionRootedCounting bridge expression =
