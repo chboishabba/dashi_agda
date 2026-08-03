@@ -12,6 +12,7 @@ REQUIRED = {
         "citationImportsProofIsFalse",
         "citationCreatesAuthorityIsFalse",
         "record AttributedSourceAtlas",
+        "attributedSourceAtlasReceipt",
     ],
     "DASHI/Culture/Preservation/ControlledDisclosureCore.agda": [
         "record FullArchive",
@@ -64,6 +65,12 @@ REQUIRED = {
     "DASHI/EverythingCuisineExtension.agda": [
         "import DASHI.Everything",
         "import DASHI.Culture.Cuisine.Everything",
+    ],
+    "scripts/build_public_projection.py": [
+        "only the fail-closed default 'reject' is supported",
+        "the attribution field cannot be silently removed",
+        "claims_complete_non_leakage",
+        "--self-test",
     ],
 }
 
