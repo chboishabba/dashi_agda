@@ -82,48 +82,69 @@ record SU2HaarLossData
 
     InChart : Link → Set
 
-    su2HaarDensityExponentialCoordinatesExact : ∀ link →
+record SU2HaarLossData
+    (Link Lie Quaternion Scalar Polymer : Set) : Set₁ where
+  field
+    norm : Link → Scalar
+    sinOverX : Scalar → Scalar
+    divide : Scalar → Scalar → Scalar
+    two one : Scalar
+    square : Scalar → Scalar → Scalar
+    log : Scalar → Scalar → Scalar
+    multiply : Scalar → Scalar → Scalar
+    polymerSize : Polymer → Nat
+
+    haarDensity : Link → Scalar
+    haarJacobianProduct : Polymer → Scalar
+    haarLogLoss : Polymer → Scalar
+
+    LessEqual : Scalar → Scalar → Set
+    transitive : ∀ {left middle right} →
+      LessEqual left middle → LessEqual middle right → LessEqual left right
+
+    InChart : Link → Set
+
+    su2HaarDensityExponentialCoordinatesExact : ∀ (link : Link) →
       InChart link →
       haarDensity link
       ≡ square (sinOverX (divide (norm link) two)) one
 
-    su2HaarLogDensityExact : ∀ link →
+    su2HaarLogDensityExact : ∀ (link : Link) →
       InChart link →
       log (haarDensity link) one
       ≡ multiply two
           (log (sinOverX (divide (norm link) two)) one)
 
-    sinOverXLowerBoundOnChart : ∀ link →
+    lowerSinc : Link → Scalar
+    sinOverXLowerBoundOnChart : ∀ (link : Link) →
       InChart link →
       LessEqual (lowerSinc link) (sinOverX (divide (norm link) two))
-    lowerSinc : Link → Scalar
 
-    negativeLogSinOverXQuadraticBound : ∀ link →
+    negativeLogSinc haarQuadraticConstant : Link → Scalar
+    negativeLogSinOverXQuadraticBound : ∀ (link : Link) →
       InChart link →
       LessEqual
         (negativeLogSinc link)
         (multiply (haarQuadraticConstant link)
           (square (norm link) one))
-    negativeLogSinc haarQuadraticConstant : Link → Scalar
 
-    haarLogDensityQuadraticBound : ∀ link →
+    singleLinkHaarLoss singleLinkLossConstant : Link → Scalar
+    haarLogDensityQuadraticBound : ∀ (link : Link) →
       InChart link →
       LessEqual (singleLinkHaarLoss link)
         (multiply (singleLinkLossConstant link)
           (square (norm link) one))
-    singleLinkHaarLoss singleLinkLossConstant : Link → Scalar
 
-    haarJacobianProductOverBondsExact : ∀ polymer → Set
+    haarJacobianProductOverBondsExact : ∀ (polymer : Polymer) → Set
 
-    allPolymerLinksInChart : ∀ polymer link → Set
-    linkNormBelowRadius : ∀ polymer link → Set
+    allPolymerLinksInChart : ∀ (polymer : Polymer) (link : Link) → Set
+    linkNormBelowRadius : ∀ (polymer : Polymer) (link : Link) → Set
 
     polymerLossPerBlock : Scalar
-    haarJacobianPolymerLossBound : ∀ polymer →
+    natScale : Scalar → Nat → Scalar
+    haarJacobianPolymerLossBound : ∀ (polymer : Polymer) →
       LessEqual (haarLogLoss polymer)
         (natScale polymerLossPerBlock (polymerSize polymer))
-
-    natScale : Scalar → Nat → Scalar
 
 open SU2HaarLossData public
 
@@ -152,7 +173,7 @@ record RelativeDeterminantLossData
 
     SmallFieldIndex : Index → Set
 
-    physicalFluctuationHessianRelativeFactorization : ∀ index →
+    physicalFluctuationHessianRelativeFactorization : ∀ (index : Index) →
       SmallFieldIndex index →
       physicalHessian index
       ≡ composeOperator (inverseSquareRoot (referenceHessian index))
@@ -160,58 +181,58 @@ record RelativeDeterminantLossData
             (addOperator identityOperator (relativeHessian index))
             (inverseSquareRoot (referenceHessian index)))
 
-    relativeHessianOperatorDefinition : ∀ index →
+    hessianDifference : Index → Operator
+    relativeHessianOperatorDefinition : ∀ (index : Index) →
       relativeHessian index
       ≡ composeOperator (inverseSquareRoot (referenceHessian index))
           (composeOperator
             (hessianDifference index)
             (inverseSquareRoot (referenceHessian index)))
-    hessianDifference : Index → Operator
 
-    relativeHessianNormBoundFromFormBound : ∀ index →
+    relativeRadius : Index → Scalar
+    relativeHessianNormBoundFromFormBound : ∀ (index : Index) →
       SmallFieldIndex index →
       LessEqual (operatorNorm (relativeHessian index)) (relativeRadius index)
-    relativeRadius : Index → Scalar
 
-    relativeRadiusBelowHalf : ∀ index →
+    relativeRadiusBelowHalf : ∀ (index : Index) →
       SmallFieldIndex index → LessEqual (relativeRadius index) half
 
-    logDetRelativeHessianExact : ∀ index polymer →
+    localizedTraceLog : Index → Polymer → Scalar
+    logDetRelativeHessianExact : ∀ (index : Index) (polymer : Polymer) →
       SmallFieldIndex index →
       logDetRelative index polymer
       ≡ localizedTraceLog index polymer
-    localizedTraceLog : Index → Polymer → Scalar
 
-    traceLogSeriesExact : ∀ index →
+    exactTraceLog : Index → Scalar
+    traceLogSeriesExact : ∀ (index : Index) →
       SmallFieldIndex index →
       traceLogSeries (relativeHessian index)
       ≡ exactTraceLog index
-    exactTraceLog : Index → Scalar
 
-    traceLogSeriesAbsoluteBound : ∀ index →
+    absoluteTraceLog subtractOne : Scalar → Scalar
+    traceLogSeriesAbsoluteBound : ∀ (index : Index) →
       SmallFieldIndex index →
       LessEqual (absoluteTraceLog index)
         (divide (traceNorm (relativeHessian index))
           (subtractOne (operatorNorm (relativeHessian index))))
-    absoluteTraceLog subtractOne : Scalar → Scalar
 
-    finiteRangeTraceLocalization : ∀ index polymer → Set
-    determinantPolymerConnectedDecomposition : ∀ index polymer → Set
+    finiteRangeTraceLocalization : ∀ (index : Index) (polymer : Polymer) → Set
+    determinantPolymerConnectedDecomposition : ∀ (index : Index) (polymer : Polymer) → Set
 
-    traceNormPerPolymerBlockBound : ∀ index polymer →
-      SmallFieldIndex index →
-      LessEqual (localizedTraceNorm index polymer)
-        (natScale (determinantLossPerBlock index) (polymerSize polymer))
     localizedTraceNorm : Index → Polymer → Scalar
     determinantLossPerBlock : Index → Scalar
     polymerSize : Polymer → Nat
     natScale : Scalar → Nat → Scalar
+    traceNormPerPolymerBlockBound : ∀ (index : Index) (polymer : Polymer) →
+      SmallFieldIndex index →
+      LessEqual (localizedTraceNorm index polymer)
+        (natScale (determinantLossPerBlock index) (polymerSize polymer))
 
-    fluctuationDeterminantPolymerLossBound : ∀ index polymer →
+    determinantLogLoss : Index → Polymer → Scalar
+    fluctuationDeterminantPolymerLossBound : ∀ (index : Index) (polymer : Polymer) →
       SmallFieldIndex index →
       LessEqual (determinantLogLoss index polymer)
         (natScale (determinantLossPerBlock index) (polymerSize polymer))
-    determinantLogLoss : Index → Polymer → Scalar
 
 open RelativeDeterminantLossData public
 
@@ -243,43 +264,42 @@ record SU2QuaternionPlaquetteBCHData
     linkRadius : Link → Scalar
 
     fourLinkHolonomy : Link → Link → Link → Link → Quaternion
-    fourLinkHolonomyDefinition : ∀ a b c d →
+    fourLinkHolonomyDefinition : ∀ (a b c d : Link) →
       fourLinkHolonomy a b c d
       ≡ multiplyQ (exponential a)
           (multiplyQ (exponential b)
             (multiplyQ (inverse c) (inverse d)))
 
-    fourLinkPlaquetteBCHSecondOrderExact : ∀ a b c d →
+    fourLinkPlaquetteBCHSecondOrderExact : ∀ (a b c d : Link) →
       logarithm (fourLinkHolonomy a b c d)
       ≡ addLie (linearCurl a b c d)
           (addLie (quadraticCommutator a b c d)
             (cubicRemainder a b c d))
 
-    fourLinkPlaquetteBCHThirdOrderRemainder : ∀ a b c d → Set
+    fourLinkPlaquetteBCHThirdOrderRemainder : ∀ (a b c d : Link) → Set
 
     LessEqual : Scalar → Scalar → Set
-    plaquetteBCHRemainderCubicBound : ∀ a b c d →
+    LinksInChart : Link → Link → Link → Link → Set
+    cubicMajorant : Link → Link → Link → Link → Scalar
+    plaquetteBCHRemainderCubicBound : ∀ (a b c d : Link) →
       LinksInChart a b c d →
       LessEqual (normLie (cubicRemainder a b c d))
         (cubicMajorant a b c d)
-    LinksInChart : Link → Link → Link → Link → Set
-    cubicMajorant : Link → Link → Link → Link → Scalar
 
+    _×4_ : Set → Set → Set
     polymerPlaquettes : Polymer → List (Link ×4 Link)
     polymerSize : Polymer → Nat
     bchLossPerBlock : Scalar
-    polymerBCHRemainderSumBound : ∀ polymer →
-      LessEqual (polymerBCHLoss polymer)
-        (natScale bchLossPerBlock (polymerSize polymer))
-    bchActionExponentialLossBound : ∀ polymer →
-      LessEqual (bchExponentialFactor polymer)
-        (exponentialOfNatScale bchLossPerBlock (polymerSize polymer))
-
     polymerBCHLoss bchExponentialFactor : Polymer → Scalar
     natScale : Scalar → Nat → Scalar
     exponentialOfNatScale : Scalar → Nat → Scalar
 
-    _×4_ : Set → Set → Set
+    polymerBCHRemainderSumBound : ∀ (polymer : Polymer) →
+      LessEqual (polymerBCHLoss polymer)
+        (natScale bchLossPerBlock (polymerSize polymer))
+    bchActionExponentialLossBound : ∀ (polymer : Polymer) →
+      LessEqual (bchExponentialFactor polymer)
+        (exponentialOfNatScale bchLossPerBlock (polymerSize polymer))
 
 open SU2QuaternionPlaquetteBCHData public
 
@@ -298,24 +318,24 @@ record LocalizationLossData
     multiply exp : Scalar → Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
 
-    localizationTaylorProjectorExact : ∀ scale activity →
+    localizationTaylorProjectorExact : ∀ (scale : Scale) (activity : Activity) →
       localization scale activity ≡ TaylorProjector scale activity
-    localizationRemainderIntegralFormula : ∀ scale activity → Set
-    localizationDerivativeOrderGain : ∀ scale polymer activity → Set
-    localizationSupportCollarExact : ∀ scale polymer activity → Set
-    localizationCollarCountingBound : ∀ polymer → Set
-    localizationExponentialWeightGain : ∀ scale polymer activity → Set
+    localizationRemainderIntegralFormula : ∀ (scale : Scale) (activity : Activity) → Set
+    localizationDerivativeOrderGain : ∀ (scale : Scale) (polymer : Polymer) (activity : Activity) → Set
+    localizationSupportCollarExact : ∀ (scale : Scale) (polymer : Polymer) (activity : Activity) → Set
+    localizationCollarCountingBound : ∀ (polymer : Polymer) → Set
+    localizationExponentialWeightGain : ∀ (scale : Scale) (polymer : Polymer) (activity : Activity) → Set
 
-    localizationPolymerLossBound : ∀ scale polymer activity →
+    sucScale : Scale → Scale
+    blockingGain : Scale → Scalar
+    collarGain : Polymer → Scalar
+
+    localizationPolymerLossBound : ∀ (scale : Scale) (polymer : Polymer) (activity : Activity) →
       LessEqual (norm (sucScale scale) polymer (remainder scale activity))
         (multiply localizationConstant
           (multiply (blockingGain scale)
             (multiply (collarGain polymer)
               (norm scale polymer activity))))
-
-    sucScale : Scale → Scale
-    blockingGain : Scale → Scalar
-    collarGain : Polymer → Scalar
 
 open LocalizationLossData public
 
