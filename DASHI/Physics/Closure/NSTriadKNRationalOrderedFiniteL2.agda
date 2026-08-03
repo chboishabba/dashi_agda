@@ -41,10 +41,12 @@ module AddGroup = GroupProperties ℚₚ.+-0-group
 
 rationalInverse : ℚ → ℚ
 rationalInverse (mkℚ +0 denominator coprime) = 0ℚ
-rationalInverse value@(mkℚ +[1+ numerator ] denominator coprime) =
-  (1/_ value {{ℚ.≢-nonZero {p = value} (λ ())}})
-rationalInverse value@(mkℚ -[1+ numerator ] denominator coprime) =
-  (1/_ value {{ℚ.≢-nonZero {p = value} (λ ())}})
+rationalInverse (mkℚ +[1+ numerator ] denominator coprime) =
+  ℚ.1/_ (mkℚ +[1+ numerator ] denominator coprime)
+    {{ℚ.≢-nonZero {p = mkℚ +[1+ numerator ] denominator coprime} (λ ())}}
+rationalInverse (mkℚ -[1+ numerator ] denominator coprime) =
+  ℚ.1/_ (mkℚ -[1+ numerator ] denominator coprime)
+    {{ℚ.≢-nonZero {p = mkℚ -[1+ numerator ] denominator coprime} (λ ())}}
 
 rationalRealField : C3.RealField _
 rationalRealField = record
@@ -164,7 +166,7 @@ crossSquaresStep : ∀ left right nextLeft nextRight LN RN PD →
   (left * nextRight - right * nextLeft) * (left * nextRight - right * nextLeft) + (left * left * RN + right * right * LN - (left * right * PD + left * right * PD))
   ≡ left * left * (nextRight * nextRight + RN) + right * right * (nextLeft * nextLeft + LN) - (left * right * (nextLeft * nextRight + PD) + left * right * (nextLeft * nextRight + PD))
 crossSquaresStep left right nextLeft nextRight LN RN PD =
-  solve (left ∷ right ∷ nextLeft ∷ nextRight ∷ LN ∷ RN ∷ PD ∷ [])
+  solve (left ∷ right ∷ nextLeft ∷ nextRight ∷ LN ∷ RN ∷ PD ∷ ([] : List ℚ))
 
 crossSquaresExpansion :
   ∀ left right rest →
@@ -189,7 +191,7 @@ finiteGramStepAlgebraic : ∀ left right LN RN PD GD →
   (left * left + LN) * (right * right + RN)
   ≡ (left * right + PD) * (left * right + PD) + (left * left * RN + right * right * LN - (left * right * PD + left * right * PD) + GD) + (LN * RN - (PD * PD + GD))
 finiteGramStepAlgebraic left right LN RN PD GD =
-  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ [])
+  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ ([] : List ℚ))
 
 finiteGramStep : ∀ left right LN RN PD GD →
   LN * RN ≡ PD * PD + GD →
@@ -198,7 +200,7 @@ finiteGramStep : ∀ left right LN RN PD GD →
 finiteGramStep left right LN RN PD GD hyp
   rewrite finiteGramStepAlgebraic left right LN RN PD GD
         | hyp =
-  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ [])
+  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ ([] : List ℚ))
 
 finiteGramIdentity :
   ∀ pairs →
