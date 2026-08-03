@@ -96,13 +96,20 @@ def main() -> int:
     periodic = text["periodic_lp"]
     for symbol in (
         "PeriodicHardShellFourierPDE",
+        "shellProjector",
+        "lowProjector",
         "shellProjectorCommutesWithDerivative",
         "shellProjectorCommutesWithCurl",
+        "lowProjectorCommutesWithDerivative",
+        "lowProjectorCommutesWithCurl",
         "ownedShellReconstructsMode",
+        "ownedLowPassReconstructsMode",
         "PeriodicTriadInteraction",
         "decomposeInteraction",
         "eraseDecomposedInteractions",
         "periodicHardShellProjectorConstructed = true",
+        "periodicHardLowPassProjectorConstructed = true",
+        "ownedLowPassPointwiseReconstructionClosed = true",
         "bonyTaoInteractionClassificationClosed = true",
         "finiteInteractionRecompositionClosed = true",
     ):
@@ -153,6 +160,7 @@ def main() -> int:
         "CutoffForcedTailLocalizedOutput",
         "forcedTailIntegralBound",
         "LuoCutoffLocalizedMajorant",
+        "periodicHardShellProjectorConstructed ≡ true",
         "luoLocalizedQuantityBelowThreshold",
         "majorantToLuoExplicitCutoffCriterion",
         "forcedTailOutputControlsLuoCutoffQuantity = true",
@@ -164,6 +172,8 @@ def main() -> int:
     print("[6/10] Checking inventory and generic low/high assembly...")
     inventory = text["inventory"]
     require(inventory, "NSTriadKNPeriodicLittlewoodPaleyBonyExact", "LP inventory")
+    require(inventory, "exactPeriodicHardLowPassProjectorConstructed", "low-pass inventory")
+    require(inventory, "ownedLowPassPointwiseReconstructionClosed", "low-pass reconstruction inventory")
     require(inventory, "exactPeriodicLPBonyPDEInterfaceConstructed = true", "LP construction receipt")
     require(inventory, "fullLocalizedContinuationProjectorInterfaceClosed = false", "LP analytic gate")
     assembly = text["assembly"]
