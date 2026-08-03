@@ -4,30 +4,29 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMRouteIntegration where
 -- Integration receipt for the localized-continuation construction tranche.
 --
 -- Constructively present:
---   * exact finite periodic hard-shell and low-pass projector support;
---   * derivative and curl commutation;
---   * exact resonant Bony/Tao interaction classification and recomposition;
+--   * exact finite periodic hard-shell and low-pass support/Bony structure;
+--   * finite Hermitian hard-projector self-adjointness, coefficient-unitary
+--     Parseval transport and orthogonal-projector certification;
+--   * Luo radial support factorization S_p = M_p H_(p+1), with derivative,
+--     finite-mode and hard/smooth multiplier constants kept distinct;
 --   * cutoff-indexed profile-depth geometry and both FT cross orientations;
---   * an inhabited finite residue/operator/base-gap/error ladder with strict
---     positive margin and ResidueScaleCompatibility;
---   * a proof that the cutoff-scaled forced-tail output controls Luo's
---     explicit-cutoff numerical majorant;
---   * the abstract finite-low/uniform-high assembly theorem;
---   * Hermitian and multiplicity-safe physical cutoff-flux domination;
---   * weighted-Schur-to-Luo flux composition;
---   * projected energy-flux and cutoff-bootstrap algebra.
+--   * finite residue/operator/base-gap/error authority;
+--   * literal physical triad enumeration and hard high-output selection;
+--   * physical/full-shell representation and local signed-majorization theorem
+--     shapes reusing the mature weighted-Schur owner;
+--   * projected energy-flux and cutoff-bootstrap algebra;
+--   * literal physical energy/dissipation/time-identification transports;
+--   * a standard-imported Luo Theorem 1.1 continuation adapter and one final
+--     proof-relevant continuation synthesis.
 --
--- Still open at the physical/continuation layer:
---   * identification of legacy classifier entries with the cutoff-indexed
---     depth carrier;
---   * exact projected-convolution triad enumeration;
---   * physical coefficient domination by the Hermitian incidence majorant;
---   * identification of the canonical finite Schur operator with the physical
---     PDE pair-incidence operator;
---   * physical hard-high-pass self-adjointness and energy identity;
---   * identification of rational localized quantities with actual terminal-
---     window integrals;
---   * recovery of Luo's limsup hypothesis and application of continuation;
+-- Still open at the canonical physical layer:
+--   * the legacy depth-index identification;
+--   * one concrete periodic radial multiplier/kernel authority;
+--   * one concrete hard-high physical/full-shell encoding and weighted-energy
+--     factorization on the official NS carrier;
+--   * literal physical energy, dissipation, flux and terminal-window integral
+--     inhabitants on that same carrier;
+--   * assembly of the uniform cutoff family into Luo's exact limsup witness;
 --   * all existing BKM and Clay promotion gates.
 ------------------------------------------------------------------------
 
@@ -41,6 +40,10 @@ import DASHI.Physics.Closure.NSTriadKNBlockerToLocalizedBKMCompatibility as Comp
 import DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit as Authority
 import DASHI.Physics.Closure.NSTriadKNLuoExplicitCutoffLocalizedCriterionExact as Luo
 import DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration as LuoFlux
+import DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact as Orthogonal
+import DASHI.Physics.Closure.NSTriadKNLuoRadialSmoothMultiplierExact as Radial
+import DASHI.Physics.Closure.NSTriadKNLuoPublishedContinuationAuthorityExact as Published
+import DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurContinuationSynthesisExact as Synthesis
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds as PairBounds
 
 record LocalizedBKMRouteIntegrationReceipt : Set where
@@ -92,11 +95,27 @@ record LocalizedBKMRouteIntegrationReceipt : Set where
     forcedTailOutputControlsLuoCutoffQuantity :
       Luo.forcedTailOutputControlsLuoCutoffQuantity ≡ true
 
+    hardProjectorOrthogonalCertificateConstructed :
+      Orthogonal.hardProjectorOrthogonalCertificateConstructed ≡ true
+
+    luoRadialSupportFactorizationConstructed :
+      Radial.smoothHardNextSupportFactorizationConstructed ≡ true
+
     weightedSchurFluxTrancheConstructed :
       LuoFlux.luoWeightedSchurFluxTrancheComplete ≡ true
 
+    publishedLuoContinuationAdapterConstructed :
+      Published.luoContinuationAdapterConstructed ≡ true
+
+    conditionalContinuationSynthesisConstructed :
+      Synthesis.luoWeightedSchurContinuationSynthesisConstructed ≡ true
+
     weightedSchurFluxRouteStillNotPromoted :
       LuoFlux.luoWeightedSchurFluxRouteReadyForPromotion ≡ false
+
+    canonicalContinuationSynthesisStillOpen :
+      Synthesis.canonicalLuoWeightedSchurContinuationSynthesisInhabited
+        ≡ false
 
     physicalGradientIntegralIdentificationClosed :
       Luo.physicalGradientIntegralIdentificationClosed ≡ false
@@ -144,8 +163,13 @@ localizedBKMRouteIntegrationReceipt = receipt
   Authority.blocker2ResidueScaleCompatibilityConstructedIsTrue
   Authority.blocker2PhysicalPairIncidenceKernelIdentificationClosedIsFalse
   Luo.forcedTailOutputControlsLuoCutoffQuantityIsTrue
+  Orthogonal.hardProjectorOrthogonalCertificateConstructedIsTrue
+  Radial.smoothHardNextSupportFactorizationConstructedIsTrue
   LuoFlux.luoWeightedSchurFluxTrancheCompleteIsTrue
+  Published.luoContinuationAdapterConstructedIsTrue
+  Synthesis.luoWeightedSchurContinuationSynthesisConstructedIsTrue
   LuoFlux.luoWeightedSchurFluxRouteReadyForPromotionIsFalse
+  Synthesis.canonicalLuoWeightedSchurContinuationSynthesisInhabitedIsFalse
   Luo.physicalGradientIntegralIdentificationClosedIsFalse
   Luo.luoLimsupContinuationAuthorityClosedIsFalse
   LP.fullLocalizedContinuationProjectorInterfaceClosedIsFalse
