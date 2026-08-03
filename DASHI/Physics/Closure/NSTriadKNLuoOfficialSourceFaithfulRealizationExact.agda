@@ -12,9 +12,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialSourceFaithfulRealizationExact 
 --
 -- PURPOSE
 -- Build the canonical source-faithful cutset from the existing official Luo
--- continuation closure plus only the new nonlinear source data.  The state
--- carrier is the singleton selected solution, preventing accidental claims of
--- a uniform estimate over the ambient Solution type.
+-- continuation closure plus only the genuinely new nonlinear source data.
+-- The state carrier is the singleton selected solution, preventing accidental
+-- claims of a uniform estimate over the ambient Solution type.
+--
+-- The finite hard-high/full-shell reindexing is now derived automatically from
+-- the official list theorem.  The input package supplies the analytic spatial
+-- increment-kernel identity and pair contribution, not an independently chosen
+-- Fourier fold.  The fixed bootstrap is pinned to alpha=3/2 and the exact
+-- Lemma-3.2 correction exponent 7/4.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -27,9 +33,11 @@ open ℚBase using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Official
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapterExact as KernelAdapter
 import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
+import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact as Alpha
 import DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance as Canonical
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Physical
 
@@ -41,14 +49,14 @@ record OfficialSourceFaithfulNonlinearInputs
     (closure : Official.OfficialLuoContinuationClosure
       InitialDatum Solution Time) : Setω where
   field
-    Tensor Space : Set
+    Tensor Space Contribution : Set
 
     exactFluxKernel :
       FluxKernel.LuoExactFluxKernelDecomposition ⊤ Tensor ℚ
 
-    physicalIncrementKernel :
-      FluxKernel.LuoIncrementKernelPhysicalRealization
-        exactFluxKernel Space
+    incrementKernelAnalyticInputs :
+      KernelAdapter.OfficialIncrementKernelAnalyticInputs
+        closure exactFluxKernel Space Contribution
 
     commonSchurConstant : ℚ
     weightedShellEnergy sourceEnergySum : Nat → ℚ
@@ -108,6 +116,28 @@ record OfficialSourceFaithfulNonlinearInputs
     fixedShiftBootstrap :
       Uniform.LuoFixedShiftUniformBootstrap ℚ
 
+    alphaShift : Alpha.FourAlignedLuoShift
+
+    alphaMatchesThreeHalves :
+      Uniform.alpha fixedShiftBootstrap ≡ Alpha.alphaThreeHalves
+
+    twoMinusAlphaMatchesHalf :
+      Uniform.twoMinusAlpha fixedShiftBootstrap ≡ Alpha.twoMinusAlpha
+
+    halfCorrectionMatchesQuarter :
+      Uniform.halfTwoMinusAlpha fixedShiftBootstrap ≡ Alpha.halfCorrection
+
+    correctedExponentMatchesSevenFourths :
+      Uniform.correctedShiftExponent fixedShiftBootstrap
+      ≡ Alpha.correctedExponent
+
+    blockShiftMatchesFourAligned :
+      Uniform.blockShift fixedShiftBootstrap ≡ Alpha.blockShift alphaShift
+
+    correctedCoefficientMatchesFourAligned :
+      Uniform.correctedShiftCoefficient fixedShiftBootstrap
+      ≡ Alpha.correctedShiftCoefficient alphaShift
+
     alphaAboveOneEntry :
       Uniform.LuoAlphaAboveOneRegularityEntry fixedShiftBootstrap
 
@@ -130,6 +160,20 @@ record OfficialSourceFaithfulNonlinearInputs
       PerModeShellsMatchOfficialLittlewoodPaleyShells
 
 open OfficialSourceFaithfulNonlinearInputs public
+
+officialPhysicalIncrementKernel :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time} →
+  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  FluxKernel.LuoIncrementKernelPhysicalRealization
+    (exactFluxKernel inputs) (Space inputs)
+officialPhysicalIncrementKernel inputs =
+  KernelAdapter.officialIncrementKernelPhysicalRealization
+    (incrementKernelAnalyticInputs inputs)
 
 officialThreePieceAdapter :
   ∀ {d s t}
@@ -183,7 +227,7 @@ officialCanonicalPhysicalRealization {closure = closure} inputs = record
   ; Space = Space inputs
   ; selectedState = tt
   ; exactFluxKernel = exactFluxKernel inputs
-  ; physicalIncrementKernel = physicalIncrementKernel inputs
+  ; physicalIncrementKernel = officialPhysicalIncrementKernel inputs
   ; threePiecePhysicalSchurAdapter = officialThreePieceAdapter inputs
   ; perModeEvolution = perModeEvolution inputs
   ; fixedShiftBootstrap = fixedShiftBootstrap inputs
@@ -237,6 +281,12 @@ officialCanonicalSourceFaithfulCutset inputs =
 officialSourceFaithfulBuilderConstructed : Bool
 officialSourceFaithfulBuilderConstructed = true
 
+finiteIncrementKernelReindexingDerived : Bool
+finiteIncrementKernelReindexingDerived = true
+
+alphaThreeHalvesAndSevenFourthsPinned : Bool
+alphaThreeHalvesAndSevenFourthsPinned = true
+
 officialBridgeInputsNotDuplicated : Bool
 officialBridgeInputsNotDuplicated = true
 
@@ -246,6 +296,14 @@ canonicalOfficialSourceFaithfulInputsInhabited = false
 officialSourceFaithfulBuilderConstructedIsTrue :
   officialSourceFaithfulBuilderConstructed ≡ true
 officialSourceFaithfulBuilderConstructedIsTrue = refl
+
+finiteIncrementKernelReindexingDerivedIsTrue :
+  finiteIncrementKernelReindexingDerived ≡ true
+finiteIncrementKernelReindexingDerivedIsTrue = refl
+
+alphaThreeHalvesAndSevenFourthsPinnedIsTrue :
+  alphaThreeHalvesAndSevenFourthsPinned ≡ true
+alphaThreeHalvesAndSevenFourthsPinnedIsTrue = refl
 
 officialBridgeInputsNotDuplicatedIsTrue :
   officialBridgeInputsNotDuplicated ≡ true
