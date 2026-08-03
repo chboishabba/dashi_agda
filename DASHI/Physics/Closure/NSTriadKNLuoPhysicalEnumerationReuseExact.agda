@@ -3,15 +3,14 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact where
 ------------------------------------------------------------------------
 -- PURPOSE
 -- Reuse the repository's existing exact physical Fourier infrastructure in
--- the Luo cutoff-flux route.  This module corrects the overly broad statement
--- that physical triad enumeration or physical fibre/kernel identification are
--- wholly absent.  The literal cutoff-cube enumeration, output fibres,
--- three-leg energy orbit, conjugation/swap closure, validated fibre image and
--- code/physical kernel equality are already constructive.
+-- the Luo cutoff-flux route.  The literal cutoff-cube enumeration, output
+-- fibres, exact hard high-output selection, three-leg energy orbit,
+-- conjugation/swap closure, validated fibre image and code/physical kernel
+-- equality are already constructive.
 --
--- What remains is narrower: identify the subset contributing to Luo's
--- projected high-frequency energy flux and instantiate the local signed-term
--- majorant and weighted-Schur constants on that subset.
+-- What remains is narrower: compare the repository hard projector with Luo's
+-- smooth low-pass convention, and instantiate the local signed coefficient
+-- majorant and uniform weighted-Schur constants on the selected subset.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -23,6 +22,7 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as OutputFiber
+import DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact as HighSelection
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNPhysicalSymmetryEnumerationClosure as Symmetry
 import DASHI.Physics.Closure.NSTriadKNValidatedPhysicalFiberImage as FiberImage
@@ -83,6 +83,18 @@ record LuoPhysicalEnumerationReuseReceipt : Set where
     literalOutputFiberConstructed :
       OutputFiber.physicalOutputFiberImplemented ≡ true
 
+    hardHighOutputSelectionConstructed :
+      HighSelection.hardHighOutputSelectionConstructed ≡ true
+
+    hardHighSelectionSoundComplete :
+      HighSelection.hardHighSelectionSoundComplete ≡ true
+
+    hardHighSelectionDuplicateFree :
+      HighSelection.hardHighSelectionDuplicateFree ≡ true
+
+    hardLowHighPartitionConstructed :
+      HighSelection.hardLowHighPartitionConstructed ≡ true
+
     threeLegEnergyOrbitConstructed :
       Orbit.physicalTriadEnergyOrbitConstructed ≡ true
 
@@ -103,6 +115,10 @@ luoPhysicalEnumerationReuseReceipt = receipt
   Physical.physicalTriadEnumerationDuplicateFreeIsTrue
   Physical.physicalTriadRealityPolicyImplementedIsTrue
   OutputFiber.physicalOutputFiberImplementedIsTrue
+  HighSelection.hardHighOutputSelectionConstructedIsTrue
+  HighSelection.hardHighSelectionSoundCompleteIsTrue
+  HighSelection.hardHighSelectionDuplicateFreeIsTrue
+  HighSelection.hardLowHighPartitionConstructedIsTrue
   Orbit.physicalTriadEnergyOrbitConstructedIsTrue
   Symmetry.physicalSymmetryEnumerationClosureImplementedIsTrue
   FiberImage.validatedPhysicalFiberImageConstructedIsTrue
@@ -114,6 +130,9 @@ literalPhysicalCutoffEnumerationAvailableToLuoRoute = true
 literalPhysicalOutputFibresAvailableToLuoRoute : Bool
 literalPhysicalOutputFibresAvailableToLuoRoute = true
 
+hardProjectedHighFrequencySelectionConstructed : Bool
+hardProjectedHighFrequencySelectionConstructed = true
+
 validatedPhysicalKernelImageAvailableToLuoRoute : Bool
 validatedPhysicalKernelImageAvailableToLuoRoute = true
 
@@ -123,8 +142,8 @@ fourierBiotSavartKernelDefinedByPairIncidenceFold = true
 finiteTriadMajorizationCompositionAvailable : Bool
 finiteTriadMajorizationCompositionAvailable = true
 
-luoProjectedHighFrequencySelectionIdentified : Bool
-luoProjectedHighFrequencySelectionIdentified = false
+hardProjectorComparedWithLuoSmoothProjector : Bool
+hardProjectorComparedWithLuoSmoothProjector = false
 
 physicalFluxCoefficientMajorantInstantiated : Bool
 physicalFluxCoefficientMajorantInstantiated = false
@@ -140,6 +159,10 @@ literalPhysicalOutputFibresAvailableToLuoRouteIsTrue :
   literalPhysicalOutputFibresAvailableToLuoRoute ≡ true
 literalPhysicalOutputFibresAvailableToLuoRouteIsTrue = refl
 
+hardProjectedHighFrequencySelectionConstructedIsTrue :
+  hardProjectedHighFrequencySelectionConstructed ≡ true
+hardProjectedHighFrequencySelectionConstructedIsTrue = refl
+
 validatedPhysicalKernelImageAvailableToLuoRouteIsTrue :
   validatedPhysicalKernelImageAvailableToLuoRoute ≡ true
 validatedPhysicalKernelImageAvailableToLuoRouteIsTrue = refl
@@ -152,9 +175,9 @@ finiteTriadMajorizationCompositionAvailableIsTrue :
   finiteTriadMajorizationCompositionAvailable ≡ true
 finiteTriadMajorizationCompositionAvailableIsTrue = refl
 
-luoProjectedHighFrequencySelectionIdentifiedIsFalse :
-  luoProjectedHighFrequencySelectionIdentified ≡ false
-luoProjectedHighFrequencySelectionIdentifiedIsFalse = refl
+hardProjectorComparedWithLuoSmoothProjectorIsFalse :
+  hardProjectorComparedWithLuoSmoothProjector ≡ false
+hardProjectorComparedWithLuoSmoothProjectorIsFalse = refl
 
 physicalFluxCoefficientMajorantInstantiatedIsFalse :
   physicalFluxCoefficientMajorantInstantiated ≡ false
