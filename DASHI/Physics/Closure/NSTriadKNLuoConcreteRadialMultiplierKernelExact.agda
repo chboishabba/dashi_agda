@@ -43,7 +43,7 @@ open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicMultiplierKernelBoundExact as Abstract
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -55,8 +55,8 @@ canonicalLuoRadialCutoff : CanonicalLuoRadialCutoff
 canonicalLuoRadialCutoff = normalizedExponentialThreeQuarterToOne
 
 record PeriodizedDyadicKernelL1Theorem
-    {x : Level}
-    (TorusPoint : Set x) : Set (lsuc x) where
+    {st : Level}
+    (TorusPoint : Set st) : Set (lsuc st) where
   field
     periodicKernelL1Norm : Nat → ℚ
     euclideanInverseTransformL1Norm : ℚ
@@ -68,28 +68,28 @@ record PeriodizedDyadicKernelL1Theorem
       (shell : Nat) →
       periodicKernelL1Norm shell ≤ euclideanInverseTransformL1Norm
 
-    PeriodizationFormulaIsCanonical : Set x
+    PeriodizationFormulaIsCanonical : Set st
     periodizationFormulaIsCanonical :
       PeriodizationFormulaIsCanonical
 
-    RadialCutoffIsNormalizedExponentialTransition : Set x
+    RadialCutoffIsNormalizedExponentialTransition : Set st
     radialCutoffIsNormalizedExponentialTransition :
       RadialCutoffIsNormalizedExponentialTransition
 
-    RadialCutoffIsOneOnThreeQuarterBall : Set x
+    RadialCutoffIsOneOnThreeQuarterBall : Set st
     radialCutoffIsOneOnThreeQuarterBall :
       RadialCutoffIsOneOnThreeQuarterBall
 
-    RadialCutoffVanishesOutsideUnitBall : Set x
+    RadialCutoffVanishesOutsideUnitBall : Set st
     radialCutoffVanishesOutsideUnitBall :
       RadialCutoffVanishesOutsideUnitBall
 
 open PeriodizedDyadicKernelL1Theorem public
 
 record CanonicalLuoMultiplierRealization
-    {st x : Level}
+    {st : Level}
     (State : Set st)
-    (TorusPoint : Set x) : Set (lsuc (st ⊔ x)) where
+    (TorusPoint : Set st) : Set (lsuc st) where
   field
     kernelTheorem : PeriodizedDyadicKernelL1Theorem TorusPoint
 
@@ -113,12 +113,12 @@ record CanonicalLuoMultiplierRealization
     smoothGradientYoungEstimate : ∀ shell state →
       smoothGradientInfinity shell state
         ≤ euclideanInverseTransformL1Norm kernelTheorem
-          Abstract.* hardGradientInfinity shell state
+          * hardGradientInfinity shell state
 
     smoothTerminalWindowYoungEstimate : ∀ shell state →
       smoothTerminalWindowIntegral shell state
         ≤ euclideanInverseTransformL1Norm kernelTheorem
-          Abstract.* hardTerminalWindowIntegral shell state
+          * hardTerminalWindowIntegral shell state
 
     SmoothLowPassFactorsThroughHardNext : Set st
     smoothLowPassFactorsThroughHardNext :
@@ -127,9 +127,9 @@ record CanonicalLuoMultiplierRealization
 open CanonicalLuoMultiplierRealization public
 
 canonicalLuoMultiplierAuthority :
-  ∀ {st x}
+  ∀ {st}
     {State : Set st}
-    {TorusPoint : Set x} →
+    {TorusPoint : Set st} →
   CanonicalLuoMultiplierRealization State TorusPoint →
   Abstract.PublishedLuoPeriodicMultiplierKernelAuthority State
 canonicalLuoMultiplierAuthority R = record
