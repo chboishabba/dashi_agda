@@ -34,6 +34,7 @@ open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
+import DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact as HardParseval
 import DASHI.Physics.Closure.NSTriadKNOfficialFiniteFourierHermitianParsevalExact as Parseval
 import DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact as Energy
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact as Bootstrap
@@ -65,9 +66,7 @@ record OfficialLuoPhysicalEnergyTimeIdentification
     timeCutoffUsesOfficialTime :
       Bootstrap.Time timeCutoff ≡ Time
 
-    timeCutoffTerminalMeaning :
-      Set t
-
+    timeCutoffTerminalMeaning : Set t
     timeCutoffTerminalWitness : timeCutoffTerminalMeaning
 
 open OfficialLuoPhysicalEnergyTimeIdentification public
@@ -85,8 +84,7 @@ officialHardProjectorOrthogonal :
     {shell : Nat} →
   OfficialLuoPhysicalEnergyTimeIdentification
     model modes lerayHopf terminalTime regular shell →
-  DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact.HardProjectorOrthogonalCertificate
-    model modes shell
+  HardParseval.HardProjectorOrthogonalCertificate model modes shell
 officialHardProjectorOrthogonal {model = model} {modes = modes} {shell = shell} I =
   Parseval.officialHardProjectorOrthogonal model modes shell
 
@@ -104,8 +102,7 @@ officialCutoffData :
   OfficialLuoPhysicalEnergyTimeIdentification
     model modes lerayHopf terminalTime regular shell →
   Bootstrap.LuoCutoffEnergyFluxData
-officialCutoffData I =
-  LH.officialLuoCutoffData (cutoffQuantities I)
+officialCutoffData I = LH.officialLuoCutoffData (cutoffQuantities I)
 
 officialCurrentEnergyMeaning :
   ∀ {r d s t}
@@ -212,8 +209,7 @@ officialPhysicalEnergyRecursion :
       * (LH.weightedShellEnergyMajorant (cutoffQuantities I)
         * LH.universalGradientThreshold (cutoffQuantities I))
 officialPhysicalEnergyRecursion I =
-  Bootstrap.luoSmallTimeEnergyDissipationRecursion
-    (officialCutoffData I)
+  Bootstrap.luoSmallTimeEnergyDissipationRecursion (officialCutoffData I)
 
 officialPhysicalEnergyTimeCarrierSelected : Bool
 officialPhysicalEnergyTimeCarrierSelected = true
