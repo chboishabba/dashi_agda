@@ -68,6 +68,10 @@ record PeriodizedDyadicKernelL1Theorem
       (shell : Nat) →
       periodicKernelL1Norm shell ≤ euclideanInverseTransformL1Norm
 
+    DyadicKernelL1BoundUniformInShell : Set st
+    dyadicKernelL1BoundUniformInShell :
+      DyadicKernelL1BoundUniformInShell
+
     PeriodizationFormulaIsCanonical : Set st
     periodizationFormulaIsCanonical :
       PeriodizationFormulaIsCanonical
@@ -149,13 +153,13 @@ canonicalLuoMultiplierAuthority R = record
   ; smoothTerminalWindowKernelEstimate =
       smoothTerminalWindowYoungEstimate R
   ; radialCutoffIsOneOnThreeQuarterBall =
-      RadialCutoffIsOneOnThreeQuarterBall (kernelTheorem R)
+      radialCutoffIsOneOnThreeQuarterBall (kernelTheorem R)
   ; radialCutoffVanishesOutsideUnitBall =
-      RadialCutoffVanishesOutsideUnitBall (kernelTheorem R)
+      radialCutoffVanishesOutsideUnitBall (kernelTheorem R)
   ; smoothLowPassFactorsThroughHardNext =
-      SmoothLowPassFactorsThroughHardNext R
+      smoothLowPassFactorsThroughHardNext R
   ; dyadicKernelL1BoundUniformInShell =
-      PeriodizationFormulaIsCanonical (kernelTheorem R)
+      dyadicKernelL1BoundUniformInShell (kernelTheorem R)
   }
 
 canonicalLuoRadialCutoffSelectionLevel : ProofLevel
