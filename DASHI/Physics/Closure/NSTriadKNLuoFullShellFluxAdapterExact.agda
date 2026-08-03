@@ -12,12 +12,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact where
 --
 -- PURPOSE
 -- Reuse the mature compact-Gamma/full-shell weighted-Schur development rather
--- than rebuilding its finite pair-incidence summation.  For a shared
--- `CompactGammaAnalyticClosure`, the repository already proves that the exact
--- near response is bounded by the full-shell majorant action.  Once the Luo
--- cutoff flux is identified below that near response and the majorant action
--- is factored into a cutoff-energy expression times the low-pass gradient,
--- Luo's Proposition-3.1-shaped estimate follows by transitivity.
+-- than rebuilding its finite pair-incidence summation.  `AbsorptionArithmetic`
+-- intentionally owns only addition and order, so the source-specific product
+-- used for Schur constant times energy times low-pass gradient is an explicit
+-- field of this adapter rather than an invented projection of that arithmetic.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -33,6 +31,11 @@ record LuoFullShellFluxAdapter
     (program : Closure.CompactGammaAnalyticClosure)
     (K N : Nat) : Setω where
   field
+    luoProduct :
+      Scalar (Closure.arithmetic program) →
+      Scalar (Closure.arithmetic program) →
+      Scalar (Closure.arithmetic program)
+
     absoluteCutoffFlux : Scalar (Closure.arithmetic program)
     cutoffEnergyMajorant : Scalar (Closure.arithmetic program)
     lowPassGradientInfinity : Scalar (Closure.arithmetic program)
@@ -48,11 +51,9 @@ record LuoFullShellFluxAdapter
       _≤_ (Closure.arithmetic program)
         (Triads.majorantActionOutput
           (Closure.differentiatedTriadsAt program K N))
-        (_*_ (Closure.arithmetic program)
+        (luoProduct
           profileSchurConstant
-          (_*_ (Closure.arithmetic program)
-            cutoffEnergyMajorant
-            lowPassGradientInfinity))
+          (luoProduct cutoffEnergyMajorant lowPassGradientInfinity))
 
 open LuoFullShellFluxAdapter public
 
@@ -62,9 +63,9 @@ luoFullShellCutoffFluxEstimate :
   (adapter : LuoFullShellFluxAdapter program K N) →
   _≤_ (Closure.arithmetic program)
     (absoluteCutoffFlux adapter)
-    (_*_ (Closure.arithmetic program)
+    (luoProduct adapter
       (profileSchurConstant adapter)
-      (_*_ (Closure.arithmetic program)
+      (luoProduct adapter
         (cutoffEnergyMajorant adapter)
         (lowPassGradientInfinity adapter)))
 luoFullShellCutoffFluxEstimate program K N adapter =
