@@ -60,9 +60,11 @@ allShellControl :
   (shell : Nat) →
   ShellProperty shell
 allShellControl control shell
-  with shellDichotomy control shell
-... | inj₁ low = finiteLowControl control shell low
-... | inj₂ high = uniformHighControl control shell high
+  with FiniteLowUniformHighControl.shellDichotomy control shell
+... | inj₁ low =
+  FiniteLowUniformHighControl.finiteLowControl control shell low
+... | inj₂ high =
+  FiniteLowUniformHighControl.uniformHighControl control shell high
 
 ------------------------------------------------------------------------
 -- Solution-dependent dissipation-wavenumber assembly.
@@ -105,9 +107,14 @@ allShellControlAtTime :
   (shell : Nat) →
   ShellProperty time shell
 allShellControlAtTime control time shell
-  with shellDichotomyAtTime control time shell
-... | inj₁ low = lowModeControl control time shell low
-... | inj₂ high = highModeDissipativeControl control time shell high
+  with TimeDependentDissipationSplitControl.shellDichotomyAtTime
+    control time shell
+... | inj₁ low =
+  TimeDependentDissipationSplitControl.lowModeControl
+    control time shell low
+... | inj₂ high =
+  TimeDependentDissipationSplitControl.highModeDissipativeControl
+    control time shell high
 
 ------------------------------------------------------------------------
 -- Quantitative natural-number specialization.
@@ -141,9 +148,11 @@ allShellNatBound :
   (shell : Nat) →
   quantity shell ≤ bound
 allShellNatBound control shell
-  with shellDichotomy control shell
-... | inj₁ low = finiteLowBound control shell low
-... | inj₂ high = uniformHighBound control shell high
+  with FiniteLowUniformHighNatBound.shellDichotomy control shell
+... | inj₁ low =
+  FiniteLowUniformHighNatBound.finiteLowBound control shell low
+... | inj₂ high =
+  FiniteLowUniformHighNatBound.uniformHighBound control shell high
 
 finiteLowUniformHighAssemblyClosed : Bool
 finiteLowUniformHighAssemblyClosed = true
