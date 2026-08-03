@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4HaarDeterminantRelativeLossReuseExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; _≤_)
+open import Data.Rational using (ℚ; _≤_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -51,30 +51,30 @@ record HaarDeterminantRelativeLossReuse
 
     haarMultiplier determinantMultiplier : Scale → Traversal → ℚ
 
-    haarMultiplierMeaning : ∀ scale traversal →
+    haarMultiplierMeaning : ∀ (scale : Scale) (traversal : Traversal) →
       haarMultiplier scale traversal
       ≡ exponential
           (Loss.haarLogLoss haarData (polymerOf scale traversal))
 
-    determinantMultiplierMeaning : ∀ scale traversal →
+    determinantMultiplierMeaning : ∀ (scale : Scale) (traversal : Traversal) →
       determinantMultiplier scale traversal
       ≡ exponential
           (Loss.determinantLogLoss determinantData
             (determinantIndexOf scale traversal)
             (polymerOf scale traversal))
 
-    determinantIndexSmallField : ∀ scale traversal →
+    determinantIndexSmallField : ∀ (scale : Scale) (traversal : Traversal) →
       Loss.SmallFieldIndex determinantData
         (determinantIndexOf scale traversal)
 
     physicalHaar referenceHaar physicalDeterminant referenceDeterminant :
       Scale → Traversal → ℚ
 
-    physicalHaarRelativeMeaning : ∀ scale traversal →
+    physicalHaarRelativeMeaning : ∀ (scale : Scale) (traversal : Traversal) →
       physicalHaar scale traversal
       ≤ haarMultiplier scale traversal * referenceHaar scale traversal
 
-    physicalDeterminantRelativeMeaning : ∀ scale traversal →
+    physicalDeterminantRelativeMeaning : ∀ (scale : Scale) (traversal : Traversal) →
       physicalDeterminant scale traversal
       ≤ determinantMultiplier scale traversal
         * referenceDeterminant scale traversal
