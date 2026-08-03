@@ -222,7 +222,7 @@ decomposeInteraction :
   Geometry.CanonicalGeometryPartition →
   Tao.FrozenLeg →
   PeriodicTriadInteraction model →
-  ClassifiedPeriodicInteraction
+  ClassifiedPeriodicInteraction {model = model}
 decomposeInteraction partition frozen triad
   with interactionRelativeClass partition frozen triad
 ... | Tao.lowHigh = lowHighPiece triad
@@ -267,14 +267,14 @@ decomposeInteractions :
   Geometry.CanonicalGeometryPartition →
   Tao.FrozenLeg →
   List (PeriodicTriadInteraction model) →
-  List ClassifiedPeriodicInteraction
+  List (ClassifiedPeriodicInteraction {model = model})
 decomposeInteractions partition frozen =
   map (decomposeInteraction partition frozen)
 
 eraseInteractions :
   ∀ {r}
     {model : PeriodicHardShellFourierPDE {r}} →
-  List ClassifiedPeriodicInteraction →
+  List (ClassifiedPeriodicInteraction {model = model}) →
   List (PeriodicTriadInteraction model)
 eraseInteractions = map eraseInteraction
 
