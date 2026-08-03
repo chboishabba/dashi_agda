@@ -81,6 +81,14 @@ rehydrateThenFryRouteRegression :
     Process.rehydratedThenFriedChileState
 rehydrateThenFryRouteRegression = Process.rehydrateThenFryRoute
 
+data ImpossibleMoleRouteEndpointEquality : Set where
+
+moleRouteEndpointsDistinct :
+  Process.friedThenRehydratedChileState
+  ≡ Process.rehydratedThenFriedChileState →
+  ImpossibleMoleRouteEndpointEquality
+moleRouteEndpointsDistinct ()
+
 candidateMoleRouteRegression :
   Process.ProcessRoute
     Process.rawComponentAssemblyState
