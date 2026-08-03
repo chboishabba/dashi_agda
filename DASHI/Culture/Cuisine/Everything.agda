@@ -1,7 +1,8 @@
 module DASHI.Culture.Cuisine.Everything where
 
-open import DASHI.Core.AttributedSourceCore public
-open import DASHI.Culture.Preservation.ControlledDisclosureCore public
+import DASHI.Core.AttributedSourceCore
+import DASHI.Culture.Preservation.ControlledDisclosureCore
+
 open import DASHI.Culture.Cuisine.QualitativeSensoryCore public
 open import DASHI.Culture.Cuisine.DishIdentityLineageCore public
 open import DASHI.Culture.Cuisine.CompositionProvenanceCore public
