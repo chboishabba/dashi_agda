@@ -8,19 +8,24 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --     mode count, profile depth and Galerkin cutoff;
 --   * literal cutoff-cube physical triad enumeration and exact output fibres;
 --   * exact hard high-output selection, low/high partition and no duplication;
+--   * exact hard low/high projector idempotence, disjointness and multiplier
+--     commutation;
 --   * validated physical/code fibre-image and kernel equality reductions;
 --   * Hermitian pair-incidence majorants for complex Fourier differences;
 --   * multiplicity-safe fibre equality;
 --   * finite physical-flux-to-positive-incidence domination;
---   * composition of a physical weighted-Schur bridge into Luo's flux shape;
+--   * reuse of mature compact-Gamma/full-shell local majorization and Schur;
+--   * hard-to-smooth terminal-window transfer algebra;
 --   * pressure-cancellation transport at the projected energy boundary;
 --   * nonnegative-rational cutoff energy/dissipation recursion and bootstrap.
 --
 -- Still open:
---   * finite-band comparison of the hard projector with Luo's smooth LP cutoff;
+--   * concrete smooth periodic LP multipliers and a uniform hard/smooth band
+--     comparison constant;
 --   * instantiate the physical signed coefficient/Hermitian majorant theorem;
---   * inhabit the full-cutoff physical weighted-Schur bridge;
---   * periodic hard-high-pass self-adjointness in the physical L2 carrier;
+--   * identify the hard-high physical pair list with the mature full-shell
+--     family and factor its majorant into Luo's weighted energy times gradient;
+--   * periodic hard-high-pass Hermitian L2 self-adjointness;
 --   * identification with actual time-integrated energy, dissipation and flux;
 --   * Luo limsup and continuation authority;
 --   * every BKM and Clay promotion gate.
@@ -31,7 +36,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNLocalizedBKMScaleDictionaryExact as Scale
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact as PhysicalReuse
+import DASHI.Physics.Closure.NSTriadKNPeriodicHardProjectorAlgebraExact as HardProjector
+import DASHI.Physics.Closure.NSTriadKNHardSmoothLittlewoodPaleyTransferExact as HardSmooth
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
+import DASHI.Physics.Closure.NSTriadKNWeightedSchurPhysicalFluxReuseExact as SchurReuse
+import DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact as FullShell
 import DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact as EnergyFlux
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact as Bootstrap
 import DASHI.Physics.Closure.NSTriadKNLuoExplicitCutoffLocalizedCriterionExact as Luo
@@ -59,6 +68,18 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     hardProjectedHighFrequencySelectionConstructed :
       PhysicalReuse.hardProjectedHighFrequencySelectionConstructed ≡ true
 
+    hardLowProjectorIdempotenceConstructed :
+      HardProjector.hardLowProjectorIdempotenceConstructed ≡ true
+
+    hardHighProjectorIdempotenceConstructed :
+      HardProjector.hardHighProjectorIdempotenceConstructed ≡ true
+
+    hardLowHighDisjointnessConstructed :
+      HardProjector.hardLowHighDisjointnessConstructed ≡ true
+
+    hardHighMultiplierCommutationConstructed :
+      HardProjector.hardHighDerivativeCurlCommutationConstructed ≡ true
+
     validatedPhysicalKernelImageAvailable :
       PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRoute ≡ true
 
@@ -80,6 +101,24 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     weightedSchurToLuoFluxCompositionConstructed :
       Flux.weightedSchurToLuoFluxCompositionConstructed ≡ true
 
+    existingWeightedSchurRelevantToLuoFlux :
+      SchurReuse.weightedSchurRelevantToLuoFluxRoute ≡ true
+
+    matureFullShellNearMajorizationReused :
+      FullShell.matureFullShellNearMajorizationReused ≡ true
+
+    matureFullShellUniformSchurReused :
+      FullShell.matureFullShellUniformSchurReused ≡ true
+
+    fullShellLuoFluxCompositionConstructed :
+      FullShell.luoFullShellFluxCompositionConstructed ≡ true
+
+    hardSmoothTransferAlgebraConstructed :
+      HardSmooth.hardSmoothFiniteBandTransferAlgebraConstructed ≡ true
+
+    hardSmoothTerminalWindowTransferConstructed :
+      HardSmooth.hardSmoothTerminalWindowTransferConstructed ≡ true
+
     projectedEnergyFluxAlgebraConstructed :
       EnergyFlux.projectedEnergyFluxAlgebraConstructed ≡ true
 
@@ -95,14 +134,17 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     bootstrapAbsorptionAlgebraConstructed :
       Bootstrap.luoBootstrapAbsorptionAlgebraConstructed ≡ true
 
-    hardSmoothProjectorComparisonOpen :
-      PhysicalReuse.hardProjectorComparedWithLuoSmoothProjector ≡ false
+    concreteSmoothPeriodicMultiplierOpen :
+      HardSmooth.concreteSmoothPeriodicMultiplierFamilyConstructed ≡ false
+
+    uniformHardSmoothBandConstantOpen :
+      HardSmooth.uniformHardSmoothFiniteBandConstantConstructed ≡ false
 
     physicalTriadCoefficientDominationOpen :
       PhysicalReuse.physicalFluxCoefficientMajorantInstantiated ≡ false
 
-    physicalFullCutoffWeightedSchurOpen :
-      PhysicalReuse.physicalFullCutoffWeightedSchurInstantiated ≡ false
+    fullShellPhysicalIdentificationOpen :
+      FullShell.luoFullShellPhysicalIdentificationInhabited ≡ false
 
     physicalWeightedSchurBridgeOpen :
       Flux.physicalWeightedSchurBridgeInhabited ≡ false
@@ -144,6 +186,10 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   PhysicalReuse.literalPhysicalCutoffEnumerationAvailableToLuoRouteIsTrue
   PhysicalReuse.literalPhysicalOutputFibresAvailableToLuoRouteIsTrue
   PhysicalReuse.hardProjectedHighFrequencySelectionConstructedIsTrue
+  HardProjector.hardLowProjectorIdempotenceConstructedIsTrue
+  HardProjector.hardHighProjectorIdempotenceConstructedIsTrue
+  HardProjector.hardLowHighDisjointnessConstructedIsTrue
+  HardProjector.hardHighDerivativeCurlCommutationConstructedIsTrue
   PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRouteIsTrue
   PhysicalReuse.fourierBiotSavartKernelDefinedByPairIncidenceFoldIsTrue
   PhysicalReuse.finiteTriadMajorizationCompositionAvailableIsTrue
@@ -151,14 +197,21 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   Flux.multiplicitySafeFibreTheoremConstructedIsTrue
   Flux.finiteFluxToIncidenceMajorantConstructedIsTrue
   Flux.weightedSchurToLuoFluxCompositionConstructedIsTrue
+  SchurReuse.weightedSchurRelevantToLuoFluxRouteIsTrue
+  FullShell.matureFullShellNearMajorizationReusedIsTrue
+  FullShell.matureFullShellUniformSchurReusedIsTrue
+  FullShell.luoFullShellFluxCompositionConstructedIsTrue
+  HardSmooth.hardSmoothFiniteBandTransferAlgebraConstructedIsTrue
+  HardSmooth.hardSmoothTerminalWindowTransferConstructedIsTrue
   EnergyFlux.projectedEnergyFluxAlgebraConstructedIsTrue
   EnergyFlux.pressureCancellationTransportConstructedIsTrue
   EnergyFlux.weightedSchurFluxEnergyCompositionConstructedIsTrue
   Bootstrap.luoCutoffEnergyFluxAlgebraConstructedIsTrue
   Bootstrap.luoBootstrapAbsorptionAlgebraConstructedIsTrue
-  PhysicalReuse.hardProjectorComparedWithLuoSmoothProjectorIsFalse
+  HardSmooth.concreteSmoothPeriodicMultiplierFamilyConstructedIsFalse
+  HardSmooth.uniformHardSmoothFiniteBandConstantConstructedIsFalse
   PhysicalReuse.physicalFluxCoefficientMajorantInstantiatedIsFalse
-  PhysicalReuse.physicalFullCutoffWeightedSchurInstantiatedIsFalse
+  FullShell.luoFullShellPhysicalIdentificationInhabitedIsFalse
   Flux.physicalWeightedSchurBridgeInhabitedIsFalse
   EnergyFlux.periodicHardHighPassSelfAdjointnessClosedIsFalse
   Bootstrap.physicalCutoffEnergyIdentityClosedIsFalse
