@@ -11,9 +11,9 @@ module DASHI.Physics.Closure.NSTriadKNProjectedConvolutionIncidenceEnumerationEx
 -- The interface is repository-original and has no external DOI.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_; length)
@@ -69,7 +69,6 @@ open ProjectedConvolutionTriad public
 
 record TaggedPairIncidence
     {ℓ : Level}
-    {Mode : Set ℓ}
     (Triad : Set ℓ) : Set ℓ where
   constructor incidence
   field
@@ -79,7 +78,7 @@ record TaggedPairIncidence
 open TaggedPairIncidence public
 
 expandTriad :
-  ∀ {ℓ} {Mode : Set ℓ} →
+  ∀ {ℓ} →
   (Triad : Set ℓ) →
   Triad → List (TaggedPairIncidence Triad)
 expandTriad Triad value =
@@ -92,11 +91,15 @@ three : Nat
 three = suc (suc (suc zero))
 
 triadContributesExactlyThreeIncidences :
-  ∀ {ℓ} {Mode : Set ℓ}
+  ∀ {ℓ}
     (Triad : Set ℓ)
     (value : Triad) →
   length (expandTriad Triad value) ≡ three
 triadContributesExactlyThreeIncidences Triad value = refl
+
+------------------------------------------------------------------------
+-- Exact physical target interfaces.
+------------------------------------------------------------------------
 
 record ExactProjectedConvolutionTriadEnumeration
     {ℓ : Level}
@@ -105,9 +108,16 @@ record ExactProjectedConvolutionTriadEnumeration
     AdmissibleTriad : ProjectedConvolutionTriad Mode → Set ℓ
     enumeration : ExactFiniteEnumeration AdmissibleTriad
 
-    highProjectorCutoffConventionMatches : Set ℓ
-    convolutionResonanceConventionMatches : Set ℓ
-    zeroModeConventionMatches : Set ℓ
+    HighProjectorCutoffConventionMatches : Set ℓ
+    highProjectorCutoffConventionMatches :
+      HighProjectorCutoffConventionMatches
+
+    ConvolutionResonanceConventionMatches : Set ℓ
+    convolutionResonanceConventionMatches :
+      ConvolutionResonanceConventionMatches
+
+    ZeroModeConventionMatches : Set ℓ
+    zeroModeConventionMatches : ZeroModeConventionMatches
 
 open ExactProjectedConvolutionTriadEnumeration public
 
@@ -118,6 +128,7 @@ record ExactProjectedPairIncidenceEnumeration
     triads : ExactProjectedConvolutionTriadEnumeration Mode
 
     Incidence : Set ℓ
+    AdmissibleIncidence : Incidence → Set ℓ
     incidenceValues : List Incidence
 
     sourceMode : Incidence → Mode
@@ -125,8 +136,16 @@ record ExactProjectedPairIncidenceEnumeration
     parent : Incidence → ProjectedConvolutionTriad Mode
     slotOf : Incidence → PairIncidenceSlot
 
-    incidenceSound : Set ℓ
-    incidenceComplete : Set ℓ
+    incidenceSound :
+      (value : Incidence) →
+      value ∈ incidenceValues →
+      AdmissibleIncidence value
+
+    incidenceComplete :
+      (value : Incidence) →
+      AdmissibleIncidence value →
+      value ∈ incidenceValues
+
     incidenceNoDuplicates : NoDuplicates incidenceValues
 
     eachTriadContributesThreeTaggedSlots :
@@ -142,7 +161,7 @@ open ExactProjectedPairIncidenceEnumeration public
 record PhysicalFibreMultiplicityAgreement
     {ℓM ℓI : Level}
     (Mode : Set ℓM)
-    (Incidence : Set ℓI) : Set (lsuc (ℓM)) where
+    (Incidence : Set ℓI) : Set (lsuc (ℓM ⊔ ℓI)) where
   field
     physicalConvolutionFibre : Mode → Mode → List Incidence
     enumeratedPairIncidenceFibre : Mode → Mode → List Incidence
