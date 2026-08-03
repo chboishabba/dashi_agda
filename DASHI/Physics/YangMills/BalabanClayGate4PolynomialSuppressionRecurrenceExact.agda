@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PolynomialSuppressionRecurrenceExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc) renaming (zero to zeroNat)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -135,9 +135,9 @@ record GeometricProductIteration
     productAtZeroBelowMajorant :
       LessEqual stepData
         (multiply stepData
-          (polynomialEnvelope stepData zero)
-          (suppression stepData zero))
-        (majorant zero)
+          (polynomialEnvelope stepData zeroNat)
+          (suppression stepData zeroNat))
+        (majorant zeroNat)
 
     qScaleMonotone : ∀ {left right} →
       LessEqual stepData left right →
@@ -160,7 +160,7 @@ polynomialTimesSuppressionGeometric :
       (polynomialEnvelope stepData scale)
       (suppression stepData scale))
     (majorant iteration scale)
-polynomialTimesSuppressionGeometric iteration zero =
+polynomialTimesSuppressionGeometric iteration zeroNat =
   productAtZeroBelowMajorant iteration
 polynomialTimesSuppressionGeometric {stepData = stepData}
   iteration (suc scale) =
