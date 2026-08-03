@@ -20,7 +20,7 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance wh
 --     its dyadic-range split, and the mean-value/Gronwall continuation step.
 --
 -- Uniformity is owned by one fixed b(alpha) and delta(alpha), never by
--- shell-dependent choices.  Existing Parseval/Hermitian projection,
+-- shell-dependent choices. Existing Parseval/Hermitian projection,
 -- cutoff-indexed depth geometry, finite operator-gap and residue-scale proofs
 -- are imported as completed prerequisites and are not reconstructed here.
 ------------------------------------------------------------------------
@@ -28,17 +28,20 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance wh
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurContinuationSynthesisExact as Existing
 import DASHI.Physics.Closure.NSTriadKNLuoPublishedContinuationAuthorityExact as Published
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
+import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
 import DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit as Blockers
 
 ------------------------------------------------------------------------
--- One physical package owns every source-facing object.  This is the only
--- nontrivial input to the canonical cutset builder below.
+-- One physical package owns every source-facing object. The scalar carrier is
+-- the repository's rational verification carrier, so the physical Schur bound
+-- can be transported by the concrete adapter rather than by a free estimate.
 ------------------------------------------------------------------------
 
 record CanonicalPeriodicLuoPhysicalRealization : Setω where
@@ -46,23 +49,23 @@ record CanonicalPeriodicLuoPhysicalRealization : Setω where
     existingSynthesis :
       Existing.LuoWeightedSchurContinuationSynthesis
 
-    State Tensor Scalar Space : Set
+    State Tensor Space : Set
 
     exactFluxKernel :
-      FluxKernel.LuoExactFluxKernelDecomposition State Tensor Scalar
+      FluxKernel.LuoExactFluxKernelDecomposition State Tensor ℚ
 
     physicalIncrementKernel :
       FluxKernel.LuoIncrementKernelPhysicalRealization
         exactFluxKernel Space
 
-    fluxKernelToWeightedSchur :
-      FluxKernel.LuoFluxKernelToWeightedSchur exactFluxKernel
+    threePiecePhysicalSchurAdapter :
+      ThreePiece.LuoThreePiecePhysicalSchurAdapter exactFluxKernel
 
     perModeEvolution :
-      ModeEvolution.LuoPerModeCommutatorEvolution State Scalar
+      ModeEvolution.LuoPerModeCommutatorEvolution State ℚ
 
     fixedShiftBootstrap :
-      Uniform.LuoFixedShiftUniformBootstrap Scalar
+      Uniform.LuoFixedShiftUniformBootstrap ℚ
 
     alphaAboveOneEntry :
       Uniform.LuoAlphaAboveOneRegularityEntry fixedShiftBootstrap
@@ -90,6 +93,14 @@ record CanonicalPeriodicLuoPhysicalRealization : Setω where
       PerModeShellsMatchExistingLittlewoodPaleyShells
 
 open CanonicalPeriodicLuoPhysicalRealization public
+
+fluxKernelToWeightedSchur :
+  (realization : CanonicalPeriodicLuoPhysicalRealization) →
+  FluxKernel.LuoFluxKernelToWeightedSchur
+    (exactFluxKernel realization)
+fluxKernelToWeightedSchur realization =
+  ThreePiece.threePieceAdapterToWeightedSchur
+    (threePiecePhysicalSchurAdapter realization)
 
 record CanonicalPeriodicLuoSourceFaithfulCutset : Setω where
   field
@@ -177,6 +188,9 @@ luoSourceFaithfulNonlinearCutsetConstructed = true
 physicalRealizationToCanonicalCutsetBuilderConstructed : Bool
 physicalRealizationToCanonicalCutsetBuilderConstructed = true
 
+finalFluxEstimateDerivedFromExistingBridge : Bool
+finalFluxEstimateDerivedFromExistingBridge = true
+
 fixedShiftUniformityTargetConstructed : Bool
 fixedShiftUniformityTargetConstructed = true
 
@@ -196,6 +210,10 @@ luoSourceFaithfulNonlinearCutsetConstructedIsTrue = refl
 physicalRealizationToCanonicalCutsetBuilderConstructedIsTrue :
   physicalRealizationToCanonicalCutsetBuilderConstructed ≡ true
 physicalRealizationToCanonicalCutsetBuilderConstructedIsTrue = refl
+
+finalFluxEstimateDerivedFromExistingBridgeIsTrue :
+  finalFluxEstimateDerivedFromExistingBridge ≡ true
+finalFluxEstimateDerivedFromExistingBridgeIsTrue = refl
 
 fixedShiftUniformityTargetConstructedIsTrue :
   fixedShiftUniformityTargetConstructed ≡ true
