@@ -119,7 +119,7 @@ def main() -> int:
         "cutoffUniformPeriodicKernelL1BoundSelected = true",
     ), "concrete multiplier selection")
 
-    print("[4/9] Exact physical triad to Z3 full-shell pair encoding")
+    print("[4/9] Exact physical triad to mature full-shell pair encodings")
     require_all(t["z3_encoding"], (
         "encodePhysicalPair",
         "encodedPhysicalPairResonates",
@@ -159,7 +159,11 @@ def main() -> int:
     require_all(t["official_energy"], (
         "OfficialLuoPhysicalEnergyTimeIdentification",
         "officialHardProjectorOrthogonal",
+        "embedCutoffTime",
+        "evaluationTimeMeaning",
+        "terminalTimeMeaning",
         "pointwiseProjectedFluxMeaning",
+        "cutoffWindowDenominatorMeaning",
         "officialCurrentEnergyMeaning",
         "officialDissipationMeaning",
         "officialIntegratedFluxMeaning",
@@ -183,6 +187,7 @@ def main() -> int:
         "ViscosityIsExactlyOne",
         "SourceNormalizationMatchesLuo",
         "officialPeriodicLuoAuthority",
+        "selectedRegularBeforeTerminal",
         "selectedLuoAuthorityLevel = standardImported",
         "officialPeriodicLuoCarrierSelected = true",
     ), "official Luo authority")
@@ -190,7 +195,9 @@ def main() -> int:
     print("[8/9] Full official continuation composition")
     require_all(t["official_closure"], (
         "OfficialLuoContinuationClosure",
-        "officialHardHighListMatchesFullShell",
+        "hardHighProgramPairIdentificationAt",
+        "officialHardHighListMatchesZ3FullShell",
+        "officialHardHighListMatchesProgramFullShell",
         "officialFluxCrossCarrierEquality",
         "officialSchurCrossCarrierEquality",
         "officialEnergyCrossCarrierEquality",
@@ -199,6 +206,7 @@ def main() -> int:
         "officialSourceCutoffBound",
         "officialSourceLimsupBound",
         "officialLuoContinuation",
+        "hardHighProgramFullShellIdentificationComposed = true",
         "allSixOfficialIdentificationTasksComposed = true",
         "localizedRoutePromotedToClay = false",
     ), "official continuation closure")
