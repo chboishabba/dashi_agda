@@ -267,16 +267,16 @@ inverseInverse value = rationalUnitQuaternionExtensionality
 rationalSU2ExactLinkGroup :
   Bond.ExactLinkGroup SU2.RationalUnitQuaternion
 rationalSU2ExactLinkGroup = record
-  { Bond.ExactLinkGroup.identity = identityRationalSU2
-  ; Bond.ExactLinkGroup.multiply = multiplyRationalSU2
-  ; Bond.ExactLinkGroup.inverse = inverseRationalSU2
-  ; Bond.ExactLinkGroup.multiplyAssociative = multiplyAssociative
-  ; Bond.ExactLinkGroup.identityLeft = identityLeft
-  ; Bond.ExactLinkGroup.identityRight = identityRight
-  ; Bond.ExactLinkGroup.inverseLeft = inverseLeft
-  ; Bond.ExactLinkGroup.inverseRight = inverseRight
-  ; Bond.ExactLinkGroup.inverseProduct = inverseProduct
-  ; Bond.ExactLinkGroup.inverseInverse = inverseInverse
+  { identity = identityRationalSU2
+  ; multiply = multiplyRationalSU2
+  ; inverse = inverseRationalSU2
+  ; multiplyAssociative = multiplyAssociative
+  ; identityLeft = identityLeft
+  ; identityRight = identityRight
+  ; inverseLeft = inverseLeft
+  ; inverseRight = inverseRight
+  ; inverseProduct = inverseProduct
+  ; inverseInverse = inverseInverse
   }
 
 rationalQuaternionCoordinateAlgebraLevel : ProofLevel
