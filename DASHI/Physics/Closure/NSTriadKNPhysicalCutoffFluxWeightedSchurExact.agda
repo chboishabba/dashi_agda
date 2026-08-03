@@ -66,7 +66,7 @@ sumℚ (value ∷ values) = value + sumℚ values
 sumAppend :
   (left right : List ℚ) →
   sumℚ (left ++ right) ≡ sumℚ left + sumℚ right
-sumAppend [] right = refl
+sumAppend [] right = sym (ℚₚ.+-identityˡ (sumℚ right))
 sumAppend (value ∷ left) right =
   trans
     (cong (value +_) (sumAppend left right))
@@ -188,7 +188,8 @@ sumIncidenceMajorantsAppend :
   (left right : List HermitianPairIncidenceAtom) →
   sumIncidenceMajorants (left ++ right)
     ≡ sumIncidenceMajorants left + sumIncidenceMajorants right
-sumIncidenceMajorantsAppend [] right = refl
+sumIncidenceMajorantsAppend [] right =
+  sym (ℚₚ.+-identityˡ (sumIncidenceMajorants right))
 sumIncidenceMajorantsAppend (atom ∷ left) right =
   trans
     (cong (incidenceMajorant atom +_)
