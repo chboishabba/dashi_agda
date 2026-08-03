@@ -2,6 +2,7 @@ name: Culinary qualitative formalism
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'DASHI/Core/AttributedSourceCore.agda'
       - 'DASHI/Culture/Preservation/**'
