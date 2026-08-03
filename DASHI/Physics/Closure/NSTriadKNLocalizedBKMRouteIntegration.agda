@@ -11,6 +11,7 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMRouteIntegration where
 --
 -- It also records what is not present:
 --   * a complete periodic smooth LP projector package;
+--   * a literal nonlinear Bony decomposition tied to the blocker residuals;
 --   * a solution-dependent dissipation wavenumber Q(t);
 --   * a theorem turning weighted-Schur residues into localized vorticity;
 --   * a postulate-free localized continuation authority.
@@ -45,6 +46,12 @@ record LocalizedBKMRouteIntegrationReceipt : Set where
     fullLocalizedProjectorInterfaceClosed :
       LP.fullLocalizedContinuationProjectorInterfaceClosed ≡ false
 
+    literalNavierStokesBonyDecompositionClosed :
+      Compatibility.literalNavierStokesBonyDecompositionClosed ≡ false
+
+    forcedTailResidualsIdentifiedWithBonyPieces :
+      Compatibility.forcedTailResidualsIdentifiedWithBonyPieces ≡ false
+
     forcedTailToLocalizedVorticityBridgeClosed :
       Compatibility.forcedTailToLocalizedVorticityBridgeClosed ≡ false
 
@@ -75,6 +82,8 @@ localizedBKMRouteIntegrationReceipt = receipt
   Sources.localizedBKMSourceTargetsRecordedIsTrue
   Compatibility.semanticMismatchAuditClosedIsTrue
   LP.fullLocalizedContinuationProjectorInterfaceClosedIsFalse
+  Compatibility.literalNavierStokesBonyDecompositionClosedIsFalse
+  Compatibility.forcedTailResidualsIdentifiedWithBonyPiecesIsFalse
   Compatibility.forcedTailToLocalizedVorticityBridgeClosedIsFalse
   Compatibility.residueScaleToDissipationWavenumberBridgeClosedIsFalse
   Compatibility.blockersToLocalizedBKMBridgeClosedIsFalse
