@@ -29,14 +29,14 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact where
 --
 -- PURPOSE
 -- Construct the literal finite periodic Fourier support interface needed by
--- the localized-regularity lane.  The shell projector acts directly on the
--- repository Z^3 Fourier carrier.  Because differentiation and curl are
--- mode-local multipliers, they commute definitionally with hard-shell
--- restriction.  Resonant triad contributions are then classified through the
--- repository's exact three-leg dyadic geometry and Tao/Bony frozen-leg map.
+-- the localized-regularity lane.  Exact shell and low-pass projectors act
+-- directly on the repository Z^3 Fourier carrier.  Because differentiation
+-- and curl are mode-local multipliers, both projectors commute definitionally
+-- with them.  Resonant triad contributions are classified through the exact
+-- three-leg dyadic geometry and Tao/Bony frozen-leg map.
 --
 -- This file proves support and classification identities.  It does not claim
--- the smooth-multiplier norm estimates, time integration, or continuation
+-- smooth-multiplier norm estimates, time integration, or the continuation
 -- theorem required for a full analytic Littlewood-Paley criterion.
 ------------------------------------------------------------------------
 
@@ -69,10 +69,15 @@ record PeriodicHardShellFourierPDE {r : Level} : Set (lsuc r) where
 
     shellOwner : Z3.FourierMode → Nat
     shellSelect : Nat → Z3.FourierMode → Bool
+    lowSelect : Nat → Z3.FourierMode → Bool
 
     ownerSelected :
       (mode : Z3.FourierMode) →
       shellSelect (shellOwner mode) mode ≡ true
+
+    ownerIncludedInOwnLowPass :
+      (mode : Z3.FourierMode) →
+      lowSelect (shellOwner mode) mode ≡ true
 
     derivativeMultiplier :
       Z3.FourierMode → C3.Complex realField
@@ -94,6 +99,14 @@ shellProjector :
   Nat → FourierField model → FourierField model
 shellProjector model shell field mode
   with shellSelect model shell mode
+... | true = field mode
+... | false = nothing
+
+lowProjector :
+  ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
+  Nat → FourierField model → FourierField model
+lowProjector model cutoff field mode
+  with lowSelect model cutoff mode
 ... | true = field mode
 ... | false = nothing
 
@@ -137,6 +150,32 @@ shellProjectorCommutesWithCurl model shell field mode
 ... | true = refl
 ... | false = refl
 
+lowProjectorCommutesWithDerivative :
+  ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
+  (cutoff : Nat) →
+  (field : FourierField model) →
+  (mode : Z3.FourierMode) →
+  fourierDerivative model (lowProjector model cutoff field) mode
+    ≡
+  lowProjector model cutoff (fourierDerivative model field) mode
+lowProjectorCommutesWithDerivative model cutoff field mode
+  with lowSelect model cutoff mode
+... | true = refl
+... | false = refl
+
+lowProjectorCommutesWithCurl :
+  ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
+  (cutoff : Nat) →
+  (field : FourierField model) →
+  (mode : Z3.FourierMode) →
+  fourierCurl model (lowProjector model cutoff field) mode
+    ≡
+  lowProjector model cutoff (fourierCurl model field) mode
+lowProjectorCommutesWithCurl model cutoff field mode
+  with lowSelect model cutoff mode
+... | true = refl
+... | false = refl
+
 ownedShellReconstructsMode :
   ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
   (field : FourierField model) →
@@ -145,6 +184,15 @@ ownedShellReconstructsMode :
     ≡ field mode
 ownedShellReconstructsMode model field mode
   rewrite ownerSelected model mode = refl
+
+ownedLowPassReconstructsMode :
+  ∀ {r} (model : PeriodicHardShellFourierPDE {r}) →
+  (field : FourierField model) →
+  (mode : Z3.FourierMode) →
+  lowProjector model (shellOwner model mode) field mode
+    ≡ field mode
+ownedLowPassReconstructsMode model field mode
+  rewrite ownerIncludedInOwnLowPass model mode = refl
 
 ------------------------------------------------------------------------
 -- Literal resonant interaction carrier and Bony/Tao classification.
@@ -298,8 +346,14 @@ eraseDecomposedInteractions partition frozen (triad ∷ triads)
 periodicHardShellProjectorConstructed : Bool
 periodicHardShellProjectorConstructed = true
 
+periodicHardLowPassProjectorConstructed : Bool
+periodicHardLowPassProjectorConstructed = true
+
 ownedShellPointwiseReconstructionClosed : Bool
 ownedShellPointwiseReconstructionClosed = true
+
+ownedLowPassPointwiseReconstructionClosed : Bool
+ownedLowPassPointwiseReconstructionClosed = true
 
 derivativeProjectorCommutationClosed : Bool
 derivativeProjectorCommutationClosed = true
@@ -326,9 +380,17 @@ periodicHardShellProjectorConstructedIsTrue :
   periodicHardShellProjectorConstructed ≡ true
 periodicHardShellProjectorConstructedIsTrue = refl
 
+periodicHardLowPassProjectorConstructedIsTrue :
+  periodicHardLowPassProjectorConstructed ≡ true
+periodicHardLowPassProjectorConstructedIsTrue = refl
+
 ownedShellPointwiseReconstructionClosedIsTrue :
   ownedShellPointwiseReconstructionClosed ≡ true
 ownedShellPointwiseReconstructionClosedIsTrue = refl
+
+ownedLowPassPointwiseReconstructionClosedIsTrue :
+  ownedLowPassPointwiseReconstructionClosed ≡ true
+ownedLowPassPointwiseReconstructionClosedIsTrue = refl
 
 derivativeProjectorCommutationClosedIsTrue :
   derivativeProjectorCommutationClosed ≡ true
