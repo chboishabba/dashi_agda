@@ -6,6 +6,8 @@ on:
     branches:
       - agent/balaban-primary-averaging-qstar
     paths:
+      - 'DASHI/Physics/Units/MechanicalDimensionExact.agda'
+      - 'DASHI/Physics/Units/PhysicalNormalizationExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
       - 'DASHI/Physics/Closure/NSTriadKNOfficialFiniteFourierHermitianParsevalExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardHighPhysicalZ3PairEncodingExact.agda'
@@ -28,6 +30,8 @@ on:
     branches:
       - master
     paths:
+      - 'DASHI/Physics/Units/MechanicalDimensionExact.agda'
+      - 'DASHI/Physics/Units/PhysicalNormalizationExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
       - 'DASHI/Physics/Closure/NSTriadKNOfficialFiniteFourierHermitianParsevalExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardHighPhysicalZ3PairEncodingExact.agda'
