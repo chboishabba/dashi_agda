@@ -18,11 +18,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnergyDissipationTimeExact wher
 -- PURPOSE
 -- Own the exact semantic equalities between the rational cutoff quantities
 -- used by the formal bootstrap and the literal periodic Navier--Stokes
--- quantities: hard-high energy, integrated dissipation, absolute cutoff flux,
--- Luo's weighted shell-energy factor, the low-pass gradient terminal-window
--- integral, and the parabolic window.  The already proved rational recursion
--- is transported across those equalities; no Boolean receipt can substitute
--- for a missing physical identification.
+-- quantities.  Pointwise flux and integrated absolute flux are deliberately
+-- distinct: a proof-relevant time-integration witness connects them rather
+-- than a dimensionally false equality.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -56,6 +54,7 @@ record LiteralLuoCutoffEnergyDissipationTimeIdentification
     physicalPreviousHardHighEnergy : ℚ
     physicalCurrentHardHighEnergy : ℚ
     physicalIntegratedHardHighDissipation : ℚ
+    physicalAbsoluteCutoffFluxAtTime : ℚ
     physicalIntegratedAbsoluteCutoffFlux : ℚ
     physicalWeightedShellEnergyMajorant : ℚ
     physicalLocalizedLowPassGradientIntegral : ℚ
@@ -84,9 +83,9 @@ record LiteralLuoCutoffEnergyDissipationTimeIdentification
       Bootstrap.localizedLowPassGradientIntegral cutoffData
         ≡ physicalLocalizedLowPassGradientIntegral
 
-    pointwiseFluxQuantityMatchesIntegratedFlux :
+    pointwiseFluxQuantityMeaning :
       Energy.absoluteCutoffFlux (Energy.balance projectedEnergyFlux)
-        ≡ physicalIntegratedAbsoluteCutoffFlux
+        ≡ physicalAbsoluteCutoffFluxAtTime
 
     parabolicWindowDenominatorMeaning :
       Bootstrap.windowDenominator parabolicTimeCutoff
@@ -106,6 +105,10 @@ record LiteralLuoCutoffEnergyDissipationTimeIdentification
     PhysicalFluxIsProjectedConvectionPairing : Set r
     physicalFluxIsProjectedConvectionPairing :
       PhysicalFluxIsProjectedConvectionPairing
+
+    IntegratedFluxIsTimeIntegralOfPointwiseFlux : Set r
+    integratedFluxIsTimeIntegralOfPointwiseFlux :
+      IntegratedFluxIsTimeIntegralOfPointwiseFlux
 
     PhysicalGradientIntegralIsLuoLowPassIntegral : Set r
     physicalGradientIntegralIsLuoLowPassIntegral :
@@ -153,6 +156,9 @@ literalPhysicalLuoBootstrapBound I certificate
 literalLuoCutoffEnergyDissipationTimeInterfaceConstructed : Bool
 literalLuoCutoffEnergyDissipationTimeInterfaceConstructed = true
 
+pointwiseIntegratedFluxSeparationEnforced : Bool
+pointwiseIntegratedFluxSeparationEnforced = true
+
 literalLuoPhysicalRecursionTransportClosed : Bool
 literalLuoPhysicalRecursionTransportClosed = true
 
@@ -162,6 +168,10 @@ canonicalLiteralLuoPhysicalIdentificationInhabited = false
 literalLuoCutoffEnergyDissipationTimeInterfaceConstructedIsTrue :
   literalLuoCutoffEnergyDissipationTimeInterfaceConstructed ≡ true
 literalLuoCutoffEnergyDissipationTimeInterfaceConstructedIsTrue = refl
+
+pointwiseIntegratedFluxSeparationEnforcedIsTrue :
+  pointwiseIntegratedFluxSeparationEnforced ≡ true
+pointwiseIntegratedFluxSeparationEnforcedIsTrue = refl
 
 literalLuoPhysicalRecursionTransportClosedIsTrue :
   literalLuoPhysicalRecursionTransportClosed ≡ true
