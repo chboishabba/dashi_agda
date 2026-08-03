@@ -56,7 +56,7 @@ record LuoExactFluxKernelDecomposition
       ≡ addTensor
           (subtractTensor
             (incrementKernel shell u)
-            (tensor (highPass shell u) (highPass shell u)))
+            (tensor (highPass shell u) (highPass shell shell u)))
           (tensor (lowPass shell u) (lowPass shell u))
 
     absoluteFlux : Nat → State → Scalar
@@ -110,7 +110,7 @@ record LuoFluxKernelToWeightedSchur
     {Tensor : Set tensorLevel}
     {Scalar : Set scalarLevel}
     (source : LuoExactFluxKernelDecomposition State Tensor Scalar)
-    : Set (lsuc (stateLevel ⊔ scalarLevel)) where
+    : Set (lsuc (stateLevel ⊔ tensorLevel ⊔ scalarLevel)) where
   field
     weightedShellEnergy : Nat → State → Scalar
     schurConstant : Scalar
