@@ -105,7 +105,7 @@ def main() -> int:
         "fibreLengthsAgree",
     ), "incidence enumeration")
 
-    print("[3/10] Orthogonal hard projector")
+    print("[3/10] Coefficient-unitary orthogonality and physical Parseval boundary")
     require_all(t["finite_hermitian"], (
         "diagonalTermSelfAdjoint",
         "finiteDiagonalMultiplierSelfAdjoint",
@@ -120,7 +120,9 @@ def main() -> int:
         "PeriodicHermitianParsevalTransport",
         "HardProjectorOrthogonalCertificate",
         "coefficientUnitaryHardProjectorOrthogonal",
-        "hardProjectorOrthogonalCertificateConstructed = true",
+        "hardProjectorPairingParsevalTransportSurfaceConstructed = true",
+        "coefficientUnitaryHardProjectorOrthogonalConstructed = true",
+        "officialPhysicalHermitianParsevalTransportSelected = false",
     ), "Parseval transport")
 
     print("[4/10] Radial multiplier and terminal-window transfer")
@@ -184,7 +186,8 @@ def main() -> int:
     require_all(t["energy"], (
         "highFrequencyEnergyInequality",
         "projectedEnergyControlledByWeightedSchurFlux",
-        "periodicHardHighPassSelfAdjointnessClosedIsTrue",
+        "coefficientUnitaryHardHighPassSelfAdjointnessClosedIsTrue",
+        "periodicHardHighPassSelfAdjointnessClosedIsFalse",
         "literalProjectedConvectionEnumerationClosedIsTrue",
         "periodicProjectedConvectionFluxAdapterInhabited = false",
     ), "energy flux")
@@ -197,6 +200,8 @@ def main() -> int:
         "LiteralLuoCutoffEnergyDissipationTimeIdentification",
         "physicalEnergyIsHardHighL2Squared",
         "physicalGradientIntegralIsLuoLowPassIntegral",
+        "IntegratedFluxIsTimeIntegralOfPointwiseFlux",
+        "pointwiseIntegratedFluxSeparationEnforced = true",
         "literalPhysicalLuoEnergyDissipationRecursion",
         "canonicalLiteralLuoPhysicalIdentificationInhabited = false",
     ), "physical time")
@@ -218,6 +223,10 @@ def main() -> int:
         "LuoWeightedSchurContinuationSynthesis",
         "hardHighPhysicalListMatchesFullShell",
         "hardHighPhysicalCoefficientDominated",
+        "fullShellFluxMatchesProjectedEnergyFlux",
+        "fullShellSchurConstantMatchesProjectedBridge",
+        "fullShellEnergyMatchesProjectedBridge",
+        "fullShellGradientMatchesProjectedBridge",
         "literalPhysicalCutoffRecursion",
         "smoothLuoCutoffBound",
         "smoothIntegralMatchesSource",
@@ -230,9 +239,14 @@ def main() -> int:
 
     print("[9/10] Integrated fail-closed ledger")
     require_all(t["integration"], (
-        "hardProjectorOrthogonalCertificateConstructed",
+        "coefficientUnitaryOrthogonalCertificateConstructed",
+        "officialPhysicalParsevalTransportOpen",
         "smoothHardNextFactorizationConstructed",
         "physicalSignedCoefficientDominationTheoremConstructed",
+        "coefficientUnitaryHardHighSelfAdjointnessClosed",
+        "officialPhysicalHardHighSelfAdjointnessOpen",
+        "pointwiseIntegratedFluxSeparationEnforced",
+        "pointwiseCutoffToLimsupAssemblyConstructed",
         "literalPhysicalEnergyTimeInterfaceConstructed",
         "publishedLuoContinuationAdapterConstructed",
         "finalContinuationSynthesisConstructed",
@@ -258,7 +272,7 @@ def main() -> int:
         forbid(t[name], "clayNavierStokesPromoted = true", name)
         forbid(t[name], "RouteReadyForPromotion = true", name)
 
-    print("PASS: Luo continuation tranche is attributed and fail-closed at the canonical physical inhabitant.")
+    print("PASS: Luo continuation tranche is attributed and fail-closed at the official physical Parseval and canonical carrier inhabitants.")
     print("NOTE: this is a static source audit; run the focused Agda checker separately.")
     return 0
 
