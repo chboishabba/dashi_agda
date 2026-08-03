@@ -3,8 +3,13 @@ name: Culinary qualitative formalism
 on:
   pull_request:
     paths:
+      - 'DASHI/Core/AttributedSourceCore.agda'
+      - 'DASHI/Culture/Preservation/**'
       - 'DASHI/Culture/Cuisine/**'
+      - 'DASHI/EverythingCuisineExtension.agda'
+      - 'Docs/support/reference/SituatedMolePreservationAttribution.md'
       - '.github/workflows/culinary-qualitative-formalism.yml'
+      - 'scripts/check_situated_mole_preservation.py'
       - 'scripts/run_agda29_parallel_check.sh'
 
 concurrency:
@@ -20,9 +25,14 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+
+      - name: Audit attribution, non-collapse, and fail-closed publication
+        run: python3 scripts/check_situated_mole_preservation.py
+
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Restore Agda 2.9 shadow cache
         uses: actions/cache@v4
         with:
@@ -32,6 +42,7 @@ jobs:
             ns-exact-coherence-agda29-${{ runner.os }}-86a1179-
             ns-coherence-agda29-${{ runner.os }}-86a1179-
             agda29-${{ runner.os }}-86a1179-
+
       - name: Check focused cuisine aggregate with pinned Agda 2.9
         id: focused
         shell: bash
@@ -48,8 +59,9 @@ jobs:
           ) > agda-culinary-formalism.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 200 agda-culinary-formalism.log
+          tail -n 240 agda-culinary-formalism.log
           exit 0
+
       - name: Upload focused Agda log
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,6 +69,7 @@ jobs:
           name: culinary-qualitative-agda-log
           path: agda-culinary-formalism.log
           if-no-files-found: error
+
       - name: Fail on Agda error
         if: steps.focused.outputs.status != '0'
         run: exit 1
