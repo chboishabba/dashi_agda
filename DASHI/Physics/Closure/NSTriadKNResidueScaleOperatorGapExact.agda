@@ -32,9 +32,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _∸_)
 open import Data.Nat using (_≤_; _<_; z≤n; s≤s)
 open import Data.Nat.Properties
   using ( ≤-refl; ≤-trans; ≤-reflexive
-        ; *-identityˡ; m≤m+n; m+n∸m≡n )
+        ; *-identityˡ; +-identityʳ; m≤m+n; m+n∸m≡n )
 open import Data.Product using (_×_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 import DASHI.Physics.Closure.NSTriadKNShellScaleHeadroom as Scale
@@ -54,7 +54,7 @@ two≤two : two ≤ two
 two≤two = s≤s (s≤s z≤n)
 
 twoTimes : (n : Nat) → two * n ≡ n + n
-twoTimes n = refl
+twoTimes n = cong (λ value → n + value) (+-identityʳ n)
 
 ------------------------------------------------------------------------
 -- Canonical carrier and norm/error/base forms.
