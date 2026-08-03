@@ -7,6 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --   * typed separation of shell index, dyadic wavenumber, parabolic window,
 --     mode count, profile depth and Galerkin cutoff;
 --   * literal cutoff-cube physical triad enumeration and exact output fibres;
+--   * exact hard high-output selection, low/high partition and no duplication;
 --   * validated physical/code fibre-image and kernel equality reductions;
 --   * Hermitian pair-incidence majorants for complex Fourier differences;
 --   * multiplicity-safe fibre equality;
@@ -16,8 +17,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --   * nonnegative-rational cutoff energy/dissipation recursion and bootstrap.
 --
 -- Still open:
---   * identify the literal subset selected by Luo's projected high-frequency
---     flux inside the existing cutoff-cube enumeration;
+--   * finite-band comparison of the hard projector with Luo's smooth LP cutoff;
 --   * instantiate the physical signed coefficient/Hermitian majorant theorem;
 --   * inhabit the full-cutoff physical weighted-Schur bridge;
 --   * periodic hard-high-pass self-adjointness in the physical L2 carrier;
@@ -56,6 +56,9 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     literalPhysicalOutputFibresAvailable :
       PhysicalReuse.literalPhysicalOutputFibresAvailableToLuoRoute ≡ true
 
+    hardProjectedHighFrequencySelectionConstructed :
+      PhysicalReuse.hardProjectedHighFrequencySelectionConstructed ≡ true
+
     validatedPhysicalKernelImageAvailable :
       PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRoute ≡ true
 
@@ -92,8 +95,8 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     bootstrapAbsorptionAlgebraConstructed :
       Bootstrap.luoBootstrapAbsorptionAlgebraConstructed ≡ true
 
-    luoProjectedHighFrequencySelectionOpen :
-      PhysicalReuse.luoProjectedHighFrequencySelectionIdentified ≡ false
+    hardSmoothProjectorComparisonOpen :
+      PhysicalReuse.hardProjectorComparedWithLuoSmoothProjector ≡ false
 
     physicalTriadCoefficientDominationOpen :
       PhysicalReuse.physicalFluxCoefficientMajorantInstantiated ≡ false
@@ -140,6 +143,7 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   Scale.luoParabolicWindowScalingRecordedIsTrue
   PhysicalReuse.literalPhysicalCutoffEnumerationAvailableToLuoRouteIsTrue
   PhysicalReuse.literalPhysicalOutputFibresAvailableToLuoRouteIsTrue
+  PhysicalReuse.hardProjectedHighFrequencySelectionConstructedIsTrue
   PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRouteIsTrue
   PhysicalReuse.fourierBiotSavartKernelDefinedByPairIncidenceFoldIsTrue
   PhysicalReuse.finiteTriadMajorizationCompositionAvailableIsTrue
@@ -152,7 +156,7 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   EnergyFlux.weightedSchurFluxEnergyCompositionConstructedIsTrue
   Bootstrap.luoCutoffEnergyFluxAlgebraConstructedIsTrue
   Bootstrap.luoBootstrapAbsorptionAlgebraConstructedIsTrue
-  PhysicalReuse.luoProjectedHighFrequencySelectionIdentifiedIsFalse
+  PhysicalReuse.hardProjectorComparedWithLuoSmoothProjectorIsFalse
   PhysicalReuse.physicalFluxCoefficientMajorantInstantiatedIsFalse
   PhysicalReuse.physicalFullCutoffWeightedSchurInstantiatedIsFalse
   Flux.physicalWeightedSchurBridgeInhabitedIsFalse
