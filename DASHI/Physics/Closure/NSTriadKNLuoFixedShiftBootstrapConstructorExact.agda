@@ -15,14 +15,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapConstructorExact whe
 -- conclusion from the exact block induction theorem.  The caller supplies the
 -- source recursion/correction certificate and literal identifications with the
 -- physical energy/dissipation sequence; it cannot independently assert the
--- final shell-uniform decay.
+-- final shell-uniform decay.  The named bootstrap order is explicitly
+-- identified with the canonical rational order used by the induction theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Rational.Base using (ℚ; _≤_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
 import DASHI.Physics.Closure.NSTriadKNLuoRationalFixedBlockInductionExact as Block
@@ -46,6 +47,9 @@ record LuoFixedShiftBootstrapInputs : Set₁ where
 
     add multiply maximum : ℚ → ℚ → ℚ
     lessOrEqual : ℚ → ℚ → Set
+
+    lessOrEqualMeaning :
+      (left right : ℚ) → lessOrEqual left right ≡ (left ≤ right)
 
     twoMinusAlpha halfTwoMinusAlpha correctedShiftExponent : ℚ
     correctedShiftCoefficient : ℚ
@@ -104,18 +108,15 @@ derivedFixedShiftDecayConclusion :
       (cutoffEnergy inputs shell)
       (cutoffDissipation inputs shell))
     (dyadicDecayTarget inputs shell)
-derivedFixedShiftDecayConclusion inputs shell large =
-  subst
-    (λ left →
-      lessOrEqual inputs left (dyadicDecayTarget inputs shell))
-    (blockSequenceMeaning inputs shell)
-    (subst
-      (λ right →
-        lessOrEqual inputs
-          (Block.sequence (blockDecayCertificate inputs) shell)
-          right)
-      (blockTargetMeaning inputs shell)
-      (Block.fixedBlockDecay (blockDecayCertificate inputs) shell))
+derivedFixedShiftDecayConclusion inputs shell large
+  rewrite lessOrEqualMeaning inputs
+            (maximum inputs
+              (cutoffEnergy inputs shell)
+              (cutoffDissipation inputs shell))
+            (dyadicDecayTarget inputs shell)
+        | sym (blockSequenceMeaning inputs shell)
+        | sym (blockTargetMeaning inputs shell) =
+  Block.fixedBlockDecay (blockDecayCertificate inputs) shell
 
 luoFixedShiftBootstrap :
   LuoFixedShiftBootstrapInputs →
