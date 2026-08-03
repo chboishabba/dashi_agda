@@ -45,8 +45,13 @@ record HaarDeterminantRelativeLossReuse
     polymerOf : Scale → Traversal → Polymer
     determinantIndexOf : Scale → Traversal → Index
 
+    haarLessEqualIsRational : ∀ {left right : ℚ} →
+      Loss.LessEqual haarData left right → left ≤ right
+    determinantLessEqualIsRational : ∀ {left right : ℚ} →
+      Loss.LessEqual determinantData left right → left ≤ right
+
     exponential : ℚ → ℚ
-    exponentialMonotone : ∀ {left right} →
+    exponentialMonotone : ∀ {left right : ℚ} →
       left ≤ right → exponential left ≤ exponential right
 
     haarMultiplier determinantMultiplier : Scale → Traversal → ℚ
@@ -137,7 +142,8 @@ haarMultiplierBound dataSet scale traversal =
           (polymerOf dataSet scale traversal))))
     (sym (haarMultiplierMeaning dataSet scale traversal))
     (exponentialMonotone dataSet
-      (haarLogLossBoundFromExistingOwner dataSet scale traversal))
+      (haarLessEqualIsRational dataSet
+        (haarLogLossBoundFromExistingOwner dataSet scale traversal)))
 
 determinantMultiplierBound :
   ∀ {Scale Traversal Link Polymer Index Operator}
@@ -161,7 +167,8 @@ determinantMultiplierBound dataSet scale traversal =
           (polymerOf dataSet scale traversal))))
     (sym (determinantMultiplierMeaning dataSet scale traversal))
     (exponentialMonotone dataSet
-      (determinantLogLossBoundFromExistingOwner dataSet scale traversal))
+      (determinantLessEqualIsRational dataSet
+        (determinantLogLossBoundFromExistingOwner dataSet scale traversal)))
 
 haarRelativeFactorReuseLevel : ProofLevel
 haarRelativeFactorReuseLevel = machineChecked
