@@ -7,6 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationIntegration where
 --   * selected coefficient-unitary official finite Hermitian pairing;
 --   * hard-projector orthogonality for that selected pairing;
 --   * exact physical-triad -> concrete Z3 resonant-pair encoding;
+--   * exact physical-triad -> analytic-program full-shell pair encoding;
 --   * rational full-shell -> physical bridge constructor;
 --   * four definitional cross-carrier equalities;
 --   * typed regular Leray--Hopf carrier with factor-two dissipation;
@@ -55,6 +56,9 @@ record OfficialLuoContinuationIntegrationReceipt : Set where
 
     hardHighResonanceTransportClosed :
       Encoding.hardHighPhysicalResonanceTransportClosed ≡ true
+
+    hardHighProgramFullShellIdentificationComposed :
+      Closure.hardHighProgramFullShellIdentificationComposed ≡ true
 
     fourCrossCarrierEqualitiesClosed :
       Cross.fourCrossCarrierEqualitiesClosed ≡ true
@@ -117,6 +121,7 @@ officialLuoContinuationIntegrationReceipt = receipt
   Multiplier.cutoffUniformPeriodicKernelL1BoundSelectedIsTrue
   Encoding.hardHighPhysicalToZ3PairEncodingClosedIsTrue
   Encoding.hardHighPhysicalResonanceTransportClosedIsTrue
+  Closure.hardHighProgramFullShellIdentificationComposedIsTrue
   Cross.fourCrossCarrierEqualitiesClosedIsTrue
   Cross.physicalWeightedSchurBridgeConstructorClosedIsTrue
   LH.regularLerayHopfCarrierConstructedIsTrue
