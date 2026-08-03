@@ -43,7 +43,7 @@ safeRationalReciprocal value with value ≟ 0ℚ
 ... | no value≢zero = (1/ value) {{≢-nonZero value≢zero}}
 
 safeRationalReciprocalTimesPositive :
-  ∀ value → Positive value →
+  ∀ (value : ℚ) → Positive value →
   safeRationalReciprocal value * value ≡ 1ℚ
 safeRationalReciprocalTimesPositive value positive with value ≟ 0ℚ
 ... | yes value≡zero =
@@ -58,10 +58,10 @@ record RationalPositiveMassInterpretation
     (referenceAlgebra : Reference.FiniteReferenceFibreAlgebra sumData)
     (positiveAlgebra : PositiveMass.PositiveFiniteFoldAlgebra sumData) : Set₁ where
   field
-    positiveMeansRationalPositive : ∀ {value} →
+    positiveMeansRationalPositive : ∀ {value : ℚ} →
       PositiveMass.Positive positiveAlgebra value → Positive value
 
-    multiplyMeaning : ∀ left right →
+    multiplyMeaning : ∀ (left right : ℚ) →
       Reference.multiply referenceAlgebra left right ≡ left * right
 
     oneMeaning : Reference.one referenceAlgebra ≡ 1ℚ
@@ -77,16 +77,14 @@ rationalPositiveMassReciprocalAlgebra :
   PositiveMass.PositiveMassReciprocalAlgebra
     referenceAlgebra positiveAlgebra
 rationalPositiveMassReciprocalAlgebra interpretation = record
-  { PositiveMass.PositiveMassReciprocalAlgebra.reciprocal =
-      safeRationalReciprocal
-  ; PositiveMass.PositiveMassReciprocalAlgebra.reciprocalTimesPositive =
-      λ value positive →
-        trans
-          (multiplyMeaning interpretation (safeRationalReciprocal value) value)
-          (trans
-            (safeRationalReciprocalTimesPositive value
-              (positiveMeansRationalPositive interpretation positive))
-            (sym (oneMeaning interpretation)))
+  { reciprocal = safeRationalReciprocal
+  ; reciprocalTimesPositive = λ value positive →
+      trans
+        (multiplyMeaning interpretation (safeRationalReciprocal value) value)
+        (trans
+          (safeRationalReciprocalTimesPositive value
+            (positiveMeansRationalPositive interpretation positive))
+          (sym (oneMeaning interpretation)))
   }
 
 safeRationalReciprocalDefinitionLevel : ProofLevel
