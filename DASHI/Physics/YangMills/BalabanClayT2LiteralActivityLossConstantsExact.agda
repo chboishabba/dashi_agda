@@ -63,26 +63,6 @@ quarterBelowHalf =
 ------------------------------------------------------------------------
 
 record SU2HaarLossData
-    (Link Polymer Scalar : Set) : Set₁ where
-  field
-    zero one two : Scalar
-    add multiply divide square exp log sine abs : Scalar → Scalar → Scalar
-    norm radius : Link → Scalar
-    polymerLinks : Polymer → List Link
-    polymerSize : Polymer → Nat
-
-    sinOverX : Scalar → Scalar
-    haarDensity : Link → Scalar
-    haarJacobianProduct : Polymer → Scalar
-    haarLogLoss : Polymer → Scalar
-
-    LessEqual : Scalar → Scalar → Set
-    transitive : ∀ {left middle right} →
-      LessEqual left middle → LessEqual middle right → LessEqual left right
-
-    InChart : Link → Set
-
-record SU2HaarLossData
     (Link Lie Quaternion Scalar Polymer : Set) : Set₁ where
   field
     norm : Link → Scalar
