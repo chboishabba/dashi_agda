@@ -20,7 +20,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoPerModeFiniteAssemblyAdapterExact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Unit using (⊤)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -83,9 +83,9 @@ perModeEvolutionFromFiniteAssembly inputs = record
   ; lowToNearHasLuoDyadicMeaningWitness =
       Assembly.j1DecisionHasSourceMeaning (finiteRangeData inputs)
   ; highTailHasLuoDyadicMeaning =
-      Assembly.J11DecisionHasSourceMeaning (finiteRangeData inputs)
+      Assembly.J2DecisionHasSourceMeaning (finiteRangeData inputs)
   ; highTailHasLuoDyadicMeaningWitness =
-      Assembly.j11DecisionHasSourceMeaning (finiteRangeData inputs)
+      Assembly.j2DecisionHasSourceMeaning (finiteRangeData inputs)
   }
 
 perModeFiniteAssemblyAdapterConstructed : Bool
