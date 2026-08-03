@@ -67,10 +67,10 @@ productNormMultiplicative left right =
     (SU2.realPart right) (SU2.imagI right) (SU2.imagJ right) (SU2.imagK right)
   where
   regroup : (w1 x1 y1 z1 w2 x2 y2 z2 : ℚ) →
-    SU2.squareℚ (w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2)
-    + SU2.squareℚ (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2)
-    + SU2.squareℚ (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2)
-    + SU2.squareℚ (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2)
+    (w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2) * (w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2)
+    + (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2) * (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2)
+    + (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2) * (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2)
+    + (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2) * (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2)
     ≡ (w1 * w1 + x1 * x1 + y1 * y1 + z1 * z1) * (w2 * w2 + x2 * x2 + y2 * y2 + z2 * z2)
   regroup = ℚRing.solve-∀
 
@@ -114,10 +114,10 @@ inverseNormPreserved value =
     (SU2.realPart value) (SU2.imagI value) (SU2.imagJ value) (SU2.imagK value)
   where
   regroup : (w x y zVal : ℚ) →
-    SU2.squareℚ w
-    + SU2.squareℚ (negℚ x)
-    + SU2.squareℚ (negℚ y)
-    + SU2.squareℚ (negℚ zVal)
+    w * w
+    + (negℚ x) * (negℚ x)
+    + (negℚ y) * (negℚ y)
+    + (negℚ zVal) * (negℚ zVal)
     ≡ w * w + x * x + y * y + zVal * zVal
   regroup = ℚRing.solve-∀
 
