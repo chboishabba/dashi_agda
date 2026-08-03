@@ -18,9 +18,16 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit where
 -- range".
 -- Venue/year: Journal of Mathematical Fluid Mechanics 16 (2014).
 -- DOI: 10.1007/s00021-014-0167-4.
--- Relationship: primary candidate for DASHI because it isolates low modes
--- below a solution-dependent dissipation wavenumber Q(t), while viscosity
--- absorbs the modes above Q(t).
+-- Relationship: isolates low modes below a solution-dependent dissipation
+-- wavenumber Q(t), while viscosity absorbs modes above Q(t).
+--
+-- Authors: Alexey Cheskidov; Roman Shvydkoy.
+-- Title: "The Regularity of Weak Solutions of the 3D Navier-Stokes Equations
+-- in B^{-1}_{infinity,infinity}".
+-- Preprint/year: arXiv:0708.3067 (2007).
+-- DOI: 10.48550/arXiv.0708.3067.
+-- Relationship: fallback when the literal paraproduct lane naturally exports
+-- a B^{-1}_{infinity,infinity} bound rather than a dissipation wavenumber.
 --
 -- Authors: Alexey Cheskidov; Mimi Dai.
 -- Title: "Regularity criteria for the 3D Navier-Stokes and MHD equations".
@@ -28,6 +35,7 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit where
 -- Journal/year: Proceedings of the Edinburgh Mathematical Society 68 (2025),
 -- 1262--1296.
 -- DOI: 10.1017/S0013091525100813.
+-- arXiv DOI: 10.48550/arXiv.1507.06611.
 -- Relationship: sharper terminal-shell criterion using a particular
 -- solution-dependent sequence T_q approaching the possible blow-up time.
 -- The sequence is not treated here as arbitrary input data.
@@ -40,6 +48,16 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit where
 -- Relationship: frequency-localized terminal-window criterion for MHD; its
 -- Navier--Stokes use requires an explicit b=0 specialization or a new proof
 -- over DASHI's periodic projector interface.
+--
+-- Author: Xiaoyutao Luo.
+-- Title: "A Beale-Kato-Majda Criterion with Optimal Frequency and Temporal
+-- Localization".
+-- Venue/year: Journal of Mathematical Fluid Mechanics 21 (2019), article 1.
+-- DOI: 10.1007/s00021-019-0411-z.
+-- arXiv DOI: 10.48550/arXiv.1803.05569.
+-- Relationship: the closest current match to DASHI's cutoff-indexed lane.  It
+-- uses the explicit parabolic window [T-c 2^{-2p},T) and the low-frequency
+-- gradient quantity on modes at or below p, on R^3 or T^3.
 --
 -- This module records exact target shapes and route distinctions only.  It
 -- imports no external theorem as an axiom and closes no BKM promotion gate.
@@ -86,8 +104,6 @@ open SourceDefinedTerminalSequence public
 
 ------------------------------------------------------------------------
 -- Source-specific theorem target interfaces.
--- A target is inhabited only when all domain, projector, solution-class and
--- continuation obligations have been supplied constructively.
 ------------------------------------------------------------------------
 
 record ClassicalBKMContinuationTarget : Set₁ where
@@ -105,6 +121,14 @@ record CheskidovShvydkoyDissipationRangeTarget : Set₁ where
     lowModeBesovIntegralFinite : Set
     lowModeCriterionImpliesContinuation : Set
 
+record CheskidovShvydkoyBesovMinusOneTarget : Set₁ where
+  field
+    periodicLittlewoodPaleyProjectors : Set
+    lerayHopfSolutionClass : Set
+    besovMinusOneContinuityOrSmallJump : Set
+    frequencyLocalNonlinearEstimate : Set
+    criterionImpliesRegularity : Set
+
 record CheskidovDaiTerminalSequenceTarget : Set₁ where
   field
     periodicLittlewoodPaleyProjectors : Set
@@ -121,10 +145,21 @@ record ChenMiaoZhangUniformTerminalTarget : Set₁ where
     mhdToNavierStokesSpecializationOrPeriodicReproof : Set
     localizedCriterionImpliesContinuation : Set
 
+record LuoExplicitCutoffTarget : Set₁ where
+  field
+    periodicOrEuclideanSolutionClass : Set
+    periodicLittlewoodPaleyProjectors : Set
+
+    cutoffIndex : Nat
+    explicitParabolicTerminalWindow : Set
+    lowFrequencyGradientIntegral : Set
+    universalThresholdSmallness : Set
+
+    limsupOverCutoffsRecovered : Set
+    criterionImpliesContinuation : Set
+
 ------------------------------------------------------------------------
--- A final authority may be supplied by any complete route.  This sum type
--- prevents the localized lanes from being silently strengthened into the
--- classical global L1_t L-infinity criterion.
+-- A final authority may be supplied by any complete route.
 ------------------------------------------------------------------------
 
 data BKMContinuationAuthority : Set₁ where
@@ -136,12 +171,20 @@ data BKMContinuationAuthority : Set₁ where
     CheskidovShvydkoyDissipationRangeTarget →
     BKMContinuationAuthority
 
+  viaCheskidovShvydkoyBesovMinusOne :
+    CheskidovShvydkoyBesovMinusOneTarget →
+    BKMContinuationAuthority
+
   viaCheskidovDai :
     CheskidovDaiTerminalSequenceTarget →
     BKMContinuationAuthority
 
   viaChenMiaoZhang :
     ChenMiaoZhangUniformTerminalTarget →
+    BKMContinuationAuthority
+
+  viaLuoExplicitCutoff :
+    LuoExplicitCutoffTarget →
     BKMContinuationAuthority
 
 ------------------------------------------------------------------------
@@ -153,18 +196,27 @@ record LocalizedBKMSourceAuditReceipt : Set where
   field
     classicalRouteRecorded : Bool
     cheskidovShvydkoyRouteRecorded : Bool
+    cheskidovShvydkoyBesovMinusOneRouteRecorded : Bool
     cheskidovDaiRouteRecorded : Bool
     chenMiaoZhangRouteRecorded : Bool
+    luoExplicitCutoffRouteRecorded : Bool
 
     cheskidovDaiTerminalSequenceRecognizedAsSolutionDependent : Bool
     chenMiaoZhangRecognizedAsMHDSource : Bool
+    luoRecognizedAsPeriodicCompatible : Bool
+    luoParabolicWindowRecognizedAsCutoffDependent : Bool
 
-    preferredFirstLocalizedTargetIsCheskidovShvydkoy : Bool
+    preferredFirstLocalizedTargetIsLuoExplicitCutoff : Bool
+    dissipationRangeRemainsSecondLocalizedTarget : Bool
+
+    luoCutoffMajorantConstructedInDASHI : Bool
 
     classicalRouteConstructedInDASHI : Bool
     cheskidovShvydkoyRouteConstructedInDASHI : Bool
+    cheskidovShvydkoyBesovMinusOneRouteConstructedInDASHI : Bool
     cheskidovDaiRouteConstructedInDASHI : Bool
     chenMiaoZhangRouteConstructedInDASHI : Bool
+    luoContinuationRouteConstructedInDASHI : Bool
 
 open LocalizedBKMSourceAuditReceipt public
 
@@ -177,6 +229,14 @@ localizedBKMSourceAuditReceipt = receipt
   true
   true
   true
+  true
+  true
+  true
+  true
+  true
+  true
+  false
+  false
   false
   false
   false
@@ -188,6 +248,13 @@ localizedBKMSourceTargetsRecorded = true
 localizedBKMSourceTargetsRecordedIsTrue :
   localizedBKMSourceTargetsRecorded ≡ true
 localizedBKMSourceTargetsRecordedIsTrue = refl
+
+luoExplicitCutoffRoutePreferred : Bool
+luoExplicitCutoffRoutePreferred = true
+
+luoExplicitCutoffRoutePreferredIsTrue :
+  luoExplicitCutoffRoutePreferred ≡ true
+luoExplicitCutoffRoutePreferredIsTrue = refl
 
 anyLocalizedContinuationRouteConstructed : Bool
 anyLocalizedContinuationRouteConstructed = false
