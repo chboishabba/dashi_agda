@@ -150,13 +150,17 @@ record Equation42FiniteRangeData : Set₁ where
 
 open Equation42FiniteRangeData public
 
-j1Contribution : Equation42FiniteRangeData → Nat → Interaction → ℚ
+j1Contribution :
+  (data : Equation42FiniteRangeData) →
+  Nat → Interaction data → ℚ
 j1Contribution data shell =
   maskedContribution
     (isJ1 data shell)
     (contributionAt data shell)
 
-j11Contribution : Equation42FiniteRangeData → Nat → Interaction → ℚ
+j11Contribution :
+  (data : Equation42FiniteRangeData) →
+  Nat → Interaction data → ℚ
 j11Contribution data shell =
   maskedContribution
     (isJ11WithinJ1 data shell)
