@@ -6,6 +6,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 -- Constructively present:
 --   * typed separation of shell index, dyadic wavenumber, parabolic window,
 --     mode count, profile depth and Galerkin cutoff;
+--   * literal cutoff-cube physical triad enumeration and exact output fibres;
+--   * validated physical/code fibre-image and kernel equality reductions;
 --   * Hermitian pair-incidence majorants for complex Fourier differences;
 --   * multiplicity-safe fibre equality;
 --   * finite physical-flux-to-positive-incidence domination;
@@ -14,9 +16,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --   * nonnegative-rational cutoff energy/dissipation recursion and bootstrap.
 --
 -- Still open:
---   * literal projected-convolution triad enumeration;
---   * physical coefficient-to-Hermitian-majorant domination;
---   * physical weighted-Schur bridge inhabitance;
+--   * identify the literal subset selected by Luo's projected high-frequency
+--     flux inside the existing cutoff-cube enumeration;
+--   * instantiate the physical signed coefficient/Hermitian majorant theorem;
+--   * inhabit the full-cutoff physical weighted-Schur bridge;
 --   * periodic hard-high-pass self-adjointness in the physical L2 carrier;
 --   * identification with actual time-integrated energy, dissipation and flux;
 --   * Luo limsup and continuation authority;
@@ -27,6 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNLocalizedBKMScaleDictionaryExact as Scale
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact as PhysicalReuse
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
 import DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact as EnergyFlux
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact as Bootstrap
@@ -45,6 +49,21 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
 
     parabolicWindowScalingRecorded :
       Scale.luoParabolicWindowScalingRecorded ≡ true
+
+    literalPhysicalCutoffEnumerationAvailable :
+      PhysicalReuse.literalPhysicalCutoffEnumerationAvailableToLuoRoute ≡ true
+
+    literalPhysicalOutputFibresAvailable :
+      PhysicalReuse.literalPhysicalOutputFibresAvailableToLuoRoute ≡ true
+
+    validatedPhysicalKernelImageAvailable :
+      PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRoute ≡ true
+
+    FourierBiotSavartKernelDefinedByPairIncidenceFold :
+      PhysicalReuse.fourierBiotSavartKernelDefinedByPairIncidenceFold ≡ true
+
+    finiteTriadMajorizationCompositionAvailable :
+      PhysicalReuse.finiteTriadMajorizationCompositionAvailable ≡ true
 
     hermitianPairIncidenceConstructed :
       Flux.hermitianPairIncidenceAtomConstructed ≡ true
@@ -73,11 +92,14 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     bootstrapAbsorptionAlgebraConstructed :
       Bootstrap.luoBootstrapAbsorptionAlgebraConstructed ≡ true
 
-    exactPhysicalProjectedConvolutionEnumerationOpen :
-      Flux.exactPhysicalProjectedConvolutionEnumerationClosed ≡ false
+    luoProjectedHighFrequencySelectionOpen :
+      PhysicalReuse.luoProjectedHighFrequencySelectionIdentified ≡ false
 
     physicalTriadCoefficientDominationOpen :
-      Flux.physicalTriadCoefficientDominationClosed ≡ false
+      PhysicalReuse.physicalFluxCoefficientMajorantInstantiated ≡ false
+
+    physicalFullCutoffWeightedSchurOpen :
+      PhysicalReuse.physicalFullCutoffWeightedSchurInstantiated ≡ false
 
     physicalWeightedSchurBridgeOpen :
       Flux.physicalWeightedSchurBridgeInhabited ≡ false
@@ -116,6 +138,11 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   Scale.localizedBKMScaleRolesSeparatedIsTrue
   Scale.luoDyadicConventionRecordedIsTrue
   Scale.luoParabolicWindowScalingRecordedIsTrue
+  PhysicalReuse.literalPhysicalCutoffEnumerationAvailableToLuoRouteIsTrue
+  PhysicalReuse.literalPhysicalOutputFibresAvailableToLuoRouteIsTrue
+  PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRouteIsTrue
+  PhysicalReuse.fourierBiotSavartKernelDefinedByPairIncidenceFoldIsTrue
+  PhysicalReuse.finiteTriadMajorizationCompositionAvailableIsTrue
   Flux.hermitianPairIncidenceAtomConstructedIsTrue
   Flux.multiplicitySafeFibreTheoremConstructedIsTrue
   Flux.finiteFluxToIncidenceMajorantConstructedIsTrue
@@ -125,8 +152,9 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   EnergyFlux.weightedSchurFluxEnergyCompositionConstructedIsTrue
   Bootstrap.luoCutoffEnergyFluxAlgebraConstructedIsTrue
   Bootstrap.luoBootstrapAbsorptionAlgebraConstructedIsTrue
-  Flux.exactPhysicalProjectedConvolutionEnumerationClosedIsFalse
-  Flux.physicalTriadCoefficientDominationClosedIsFalse
+  PhysicalReuse.luoProjectedHighFrequencySelectionIdentifiedIsFalse
+  PhysicalReuse.physicalFluxCoefficientMajorantInstantiatedIsFalse
+  PhysicalReuse.physicalFullCutoffWeightedSchurInstantiatedIsFalse
   Flux.physicalWeightedSchurBridgeInhabitedIsFalse
   EnergyFlux.periodicHardHighPassSelfAdjointnessClosedIsFalse
   Bootstrap.physicalCutoffEnergyIdentityClosedIsFalse
