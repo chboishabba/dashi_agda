@@ -42,7 +42,6 @@ import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact as Bootstrap
 import DASHI.Physics.Closure.NSTriadKNLocalizedBKMScaleDictionaryExact as Scale
-open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 two : ℚ
 two = 1ℚ + 1ℚ
@@ -127,6 +126,7 @@ record OfficialLuoCutoffQuantities
     previousHardHighEnergy : ℚ
     currentHardHighEnergy : ℚ
     integratedHardHighGradientL2Squared : ℚ
+    physicalDissipation : ℚ
 
     signedIntegratedProjectedFlux : ℚ
     absoluteCutoffFluxAtTime : Time → ℚ
@@ -141,6 +141,7 @@ record OfficialLuoCutoffQuantities
     currentEnergyNonnegative : 0ℚ ≤ currentHardHighEnergy
     integratedGradientNonnegative :
       0ℚ ≤ integratedHardHighGradientL2Squared
+    physicalDissipationNonnegative : 0ℚ ≤ physicalDissipation
     integratedAbsoluteFluxNonnegative :
       0ℚ ≤ integratedAbsoluteCutoffFlux
     weightedEnergyNonnegative : 0ℚ ≤ weightedShellEnergyMajorant
@@ -150,19 +151,20 @@ record OfficialLuoCutoffQuantities
     universalGradientThresholdNonnegative :
       0ℚ ≤ universalGradientThreshold
 
+    physicalDissipationMeaning :
+      physicalDissipation
+        ≡ two * integratedHardHighGradientL2Squared
+
     preterminalProjectedEnergyIdentity :
-      currentHardHighEnergy
-        + two * integratedHardHighGradientL2Squared
-      ≡ previousHardHighEnergy + signedIntegratedProjectedFlux
+      currentHardHighEnergy + physicalDissipation
+        ≡ previousHardHighEnergy + signedIntegratedProjectedFlux
 
     signedFluxBelowIntegratedAbsoluteFlux :
       signedIntegratedProjectedFlux ≤ integratedAbsoluteCutoffFlux
 
+    IntegratedFluxIsTimeIntegralOfPointwiseFlux : Set (s ⊔ t)
     integratedFluxIsTimeIntegralOfPointwiseFlux :
-      Set (s ⊔ t)
-
-    integratedFluxTimeIntegralWitness :
-      integratedFluxIsTimeIntegralOfPointwiseFlux
+      IntegratedFluxIsTimeIntegralOfPointwiseFlux
 
     integratedFluxWeightedSchurEstimate :
       integratedAbsoluteCutoffFlux
@@ -184,19 +186,6 @@ record OfficialLuoCutoffQuantities
 
 open OfficialLuoCutoffQuantities public
 
-physicalCutoffDissipation :
-  ∀ {d s t}
-    {InitialDatum : Set d}
-    {Solution : Set s}
-    {Time : Set t}
-    {lerayHopf : PeriodicLerayHopfSolution InitialDatum Solution Time}
-    {terminalTime : Time}
-    {regular : RegularLerayHopfBeforeTerminal lerayHopf terminalTime}
-    {shell : Nat} →
-  OfficialLuoCutoffQuantities regular shell → ℚ
-physicalCutoffDissipation Q =
-  two * integratedHardHighGradientL2Squared Q
-
 regularProjectedEnergyInequality :
   ∀ {d s t}
     {InitialDatum : Set d}
@@ -207,19 +196,12 @@ regularProjectedEnergyInequality :
     {regular : RegularLerayHopfBeforeTerminal lerayHopf terminalTime}
     {shell : Nat} →
   (Q : OfficialLuoCutoffQuantities regular shell) →
-  currentHardHighEnergy Q + physicalCutoffDissipation Q
+  currentHardHighEnergy Q + physicalDissipation Q
     ≤ previousHardHighEnergy Q + integratedAbsoluteCutoffFlux Q
-regularProjectedEnergyInequality Q =
-  let
-    exactToSigned :
-      currentHardHighEnergy Q + physicalCutoffDissipation Q
-        ≤ previousHardHighEnergy Q + signedIntegratedProjectedFlux Q
-    exactToSigned =
-      ℚₚ.≤-reflexive (preterminalProjectedEnergyIdentity Q)
-  in
-  ℚₚ.≤-trans exactToSigned
-    (ℚₚ.+-mono-≤ ℚₚ.≤-refl
-      (signedFluxBelowIntegratedAbsoluteFlux Q))
+regularProjectedEnergyInequality Q
+  rewrite preterminalProjectedEnergyIdentity Q =
+  ℚₚ.+-mono-≤ ℚₚ.≤-refl
+    (signedFluxBelowIntegratedAbsoluteFlux Q)
 
 officialLuoCutoffData :
   ∀ {d s t}
@@ -235,7 +217,7 @@ officialLuoCutoffData :
 officialLuoCutoffData Q = Bootstrap.cutoff-data
   (previousHardHighEnergy Q)
   (currentHardHighEnergy Q)
-  (physicalCutoffDissipation Q)
+  (physicalDissipation Q)
   (integratedAbsoluteCutoffFlux Q)
   (weightedShellEnergyMajorant Q)
   (localizedLowPassGradientIntegral Q)
@@ -243,7 +225,7 @@ officialLuoCutoffData Q = Bootstrap.cutoff-data
   (universalGradientThreshold Q)
   (previousEnergyNonnegative Q)
   (currentEnergyNonnegative Q)
-  dissipationNonnegative
+  (physicalDissipationNonnegative Q)
   (integratedAbsoluteFluxNonnegative Q)
   (weightedEnergyNonnegative Q)
   (localizedGradientNonnegative Q)
@@ -252,17 +234,6 @@ officialLuoCutoffData Q = Bootstrap.cutoff-data
   (regularProjectedEnergyInequality Q)
   (integratedFluxWeightedSchurEstimate Q)
   (localizedGradientThresholdSmallness Q)
-  where
-  dissipationNonnegative : 0ℚ ≤ physicalCutoffDissipation Q
-  dissipationNonnegative =
-    let
-      instance
-        twoNN = Data.Rational.Base.nonNegative
-          (ℚₚ.+-mono-≤ ℚₚ.0≤1 ℚₚ.0≤1)
-        gradientNN = Data.Rational.Base.nonNegative
-          (integratedGradientNonnegative Q)
-    in
-    ℚₚ.nonNegative⁻¹ (physicalCutoffDissipation Q)
 
 regularLerayHopfCarrierConstructed : Bool
 regularLerayHopfCarrierConstructed = true
