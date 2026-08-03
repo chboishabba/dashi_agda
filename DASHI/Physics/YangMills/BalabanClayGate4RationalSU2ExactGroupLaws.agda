@@ -115,9 +115,9 @@ inverseNormPreserved value =
   where
   regroup : (w x y zVal : ℚ) →
     w * w
-    + (negℚ x) * (negℚ x)
-    + (negℚ y) * (negℚ y)
-    + (negℚ zVal) * (negℚ zVal)
+    + (0ℚ - x) * (0ℚ - x)
+    + (0ℚ - y) * (0ℚ - y)
+    + (0ℚ - zVal) * (0ℚ - zVal)
     ≡ w * w + x * x + y * y + zVal * zVal
   regroup = ℚRing.solve-∀
 
@@ -264,13 +264,13 @@ inverseLeft value = rationalUnitQuaternionExtensionality
     (SU2.realPart value) (SU2.imagI value)
     (SU2.imagJ value) (SU2.imagK value))
   where
-  regroup1 : (w x y zVal : ℚ) → w * w - (negℚ x) * x - (negℚ y) * y - (negℚ zVal) * zVal ≡ w * w + x * x + y * y + zVal * zVal
+  regroup1 : (w x y zVal : ℚ) → w * w - (0ℚ - x) * x - (0ℚ - y) * y - (0ℚ - zVal) * zVal ≡ w * w + x * x + y * y + zVal * zVal
   regroup1 = ℚRing.solve-∀
-  regroup2 : (w x y zVal : ℚ) → w * x + (negℚ x) * w + (negℚ y) * zVal - (negℚ zVal) * y ≡ 0ℚ
+  regroup2 : (w x y zVal : ℚ) → w * x + (0ℚ - x) * w + (0ℚ - y) * zVal - (0ℚ - zVal) * y ≡ 0ℚ
   regroup2 = ℚRing.solve-∀
-  regroup3 : (w x y zVal : ℚ) → w * y - (negℚ x) * zVal + (negℚ y) * w + (negℚ zVal) * x ≡ 0ℚ
+  regroup3 : (w x y zVal : ℚ) → w * y - (0ℚ - x) * zVal + (0ℚ - y) * w + (0ℚ - zVal) * x ≡ 0ℚ
   regroup3 = ℚRing.solve-∀
-  regroup4 : (w x y zVal : ℚ) → w * zVal + (negℚ x) * y - (negℚ y) * x + (negℚ zVal) * w ≡ 0ℚ
+  regroup4 : (w x y zVal : ℚ) → w * zVal + (0ℚ - x) * y - (0ℚ - y) * x + (0ℚ - zVal) * w ≡ 0ℚ
   regroup4 = ℚRing.solve-∀
 
 inverseRight : ∀ (value : SU2.RationalUnitQuaternion) →
@@ -292,13 +292,13 @@ inverseRight value = rationalUnitQuaternionExtensionality
     (SU2.realPart value) (SU2.imagI value)
     (SU2.imagJ value) (SU2.imagK value))
   where
-  regroup1 : (w x y zVal : ℚ) → w * w - x * (negℚ x) - y * (negℚ y) - zVal * (negℚ zVal) ≡ w * w + x * x + y * y + zVal * zVal
+  regroup1 : (w x y zVal : ℚ) → w * w - x * (0ℚ - x) - y * (0ℚ - y) - zVal * (0ℚ - zVal) ≡ w * w + x * x + y * y + zVal * zVal
   regroup1 = ℚRing.solve-∀
-  regroup2 : (w x y zVal : ℚ) → w * (negℚ x) + x * w + y * (negℚ zVal) - zVal * (negℚ y) ≡ 0ℚ
+  regroup2 : (w x y zVal : ℚ) → w * (0ℚ - x) + x * w + y * (0ℚ - zVal) - zVal * (0ℚ - y) ≡ 0ℚ
   regroup2 = ℚRing.solve-∀
-  regroup3 : (w x y zVal : ℚ) → w * (negℚ y) - x * (negℚ zVal) + y * w + zVal * (negℚ x) ≡ 0ℚ
+  regroup3 : (w x y zVal : ℚ) → w * (0ℚ - y) - x * (0ℚ - zVal) + y * w + zVal * (0ℚ - x) ≡ 0ℚ
   regroup3 = ℚRing.solve-∀
-  regroup4 : (w x y zVal : ℚ) → w * (negℚ zVal) + x * (negℚ y) - y * (negℚ x) + zVal * w ≡ 0ℚ
+  regroup4 : (w x y zVal : ℚ) → w * (0ℚ - zVal) + x * (0ℚ - y) - y * (0ℚ - x) + zVal * w ≡ 0ℚ
   regroup4 = ℚRing.solve-∀
 
 inverseProduct : ∀ (left right : SU2.RationalUnitQuaternion) →
@@ -322,22 +322,22 @@ inverseProduct left right = rationalUnitQuaternionExtensionality
   where
   regroup1 : (w1 x1 y1 z1 w2 x2 y2 z2 : ℚ) →
     w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2
-    ≡ w2 * w1 - (negℚ x2) * (negℚ x1) - (negℚ y2) * (negℚ y1) - (negℚ z2) * (negℚ z1)
+    ≡ w2 * w1 - (0ℚ - x2) * (0ℚ - x1) - (0ℚ - y2) * (0ℚ - y1) - (0ℚ - z2) * (0ℚ - z1)
   regroup1 = ℚRing.solve-∀
 
   regroup2 : (w1 x1 y1 z1 w2 x2 y2 z2 : ℚ) →
-    negℚ (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2)
-    ≡ w2 * (negℚ x1) + (negℚ x2) * w1 + (negℚ y2) * (negℚ z1) - (negℚ z2) * (negℚ y1)
+    0ℚ - (w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2)
+    ≡ w2 * (0ℚ - x1) + (0ℚ - x2) * w1 + (0ℚ - y2) * (0ℚ - z1) - (0ℚ - z2) * (0ℚ - y1)
   regroup2 = ℚRing.solve-∀
 
   regroup3 : (w1 x1 y1 z1 w2 x2 y2 z2 : ℚ) →
-    negℚ (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2)
-    ≡ w2 * (negℚ y1) - (negℚ x2) * (negℚ z1) + (negℚ y2) * w1 + (negℚ z2) * (negℚ x1)
+    0ℚ - (w1 * y2 - x1 * z2 + y1 * w2 + z1 * x2)
+    ≡ w2 * (0ℚ - y1) - (0ℚ - x2) * (0ℚ - z1) + (0ℚ - y2) * w1 + (0ℚ - z2) * (0ℚ - x1)
   regroup3 = ℚRing.solve-∀
 
   regroup4 : (w1 x1 y1 z1 w2 x2 y2 z2 : ℚ) →
-    negℚ (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2)
-    ≡ w2 * (negℚ z1) + (negℚ x2) * (negℚ y1) - (negℚ y2) * (negℚ x1) + (negℚ z2) * w1
+    0ℚ - (w1 * z2 + x1 * y2 - y1 * x2 + z1 * w2)
+    ≡ w2 * (0ℚ - z1) + (0ℚ - x2) * (0ℚ - y1) - (0ℚ - y2) * (0ℚ - x1) + (0ℚ - z2) * w1
   regroup4 = ℚRing.solve-∀
 
 inverseInverse : ∀ (value : SU2.RationalUnitQuaternion) →
@@ -348,7 +348,7 @@ inverseInverse value = rationalUnitQuaternionExtensionality
   (regroup (SU2.imagJ value))
   (regroup (SU2.imagK value))
   where
-  regroup : (x : ℚ) → negℚ (negℚ x) ≡ x
+  regroup : (x : ℚ) → 0ℚ - (0ℚ - x) ≡ x
   regroup = ℚRing.solve-∀
 
 rationalSU2ExactLinkGroup :
