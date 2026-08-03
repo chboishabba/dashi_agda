@@ -8,6 +8,7 @@ open import Data.Rational using (ℚ; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact using (SignedAxis4)
+
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRationalConstantsExact as BishopConstants
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geometric
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryBreadthFirstTreeInstanceExact as BFS
@@ -44,21 +45,45 @@ record RCanonicalRepositoryTrace
     breadthFirstData :
       BFS.RepositoryBreadthFirstTreeData Polymer Block Tree Traversal
 
+    expressionPolymer : RExpression → Polymer
     scaleOf : RExpression → Scale
     volumeOf : RExpression → Volume
-    expressionPolymer : RExpression → Polymer
     familyMass : RExpression → ℚ
 
-    rCanonicalRoot : RExpression → Block
-    rCanonicalTree : RExpression → Tree
-    rCanonicalWord : RExpression → List SignedAxis4
-    rCanonicalDepth : RExpression → Nat
-
-    rCanonicalDecoderExact : ∀ (expression : RExpression) →
-      Extraction.decodeWord (rCanonicalRoot expression) (rCanonicalWord expression)
-      ≡ expressionPolymer expression
-
 open RCanonicalRepositoryTrace public
+
+repositoryCarrier :
+  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
+  RCanonicalRepositoryTrace
+    RExpression Polymer Block Tree Traversal Scale Volume →
+  Extraction.RepositoryConnectedBlockCarrier Polymer Block Tree Traversal
+repositoryCarrier dataSet =
+  BFS.asRepositoryConnectedBlockCarrier (breadthFirstData dataSet)
+
+rCanonicalRoot :
+  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
+  RCanonicalRepositoryTrace
+    RExpression Polymer Block Tree Traversal Scale Volume →
+  RExpression → Block
+rCanonicalRoot dataSet expression =
+  BFS.leastBlock (breadthFirstData dataSet)
+    (expressionPolymer dataSet expression)
+
+rCanonicalWord :
+  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
+  RCanonicalRepositoryTrace
+    RExpression Polymer Block Tree Traversal Scale Volume →
+  RExpression → List SignedAxis4
+rCanonicalWord dataSet expression =
+  BFS.canonicalDirectionWord (breadthFirstData dataSet)
+    (expressionPolymer dataSet expression)
+
+rCanonicalDepth :
+  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
+  RCanonicalRepositoryTrace
+    RExpression Polymer Block Tree Traversal Scale Volume →
+  RExpression → Nat
+rCanonicalDepth dataSet expression = length (rCanonicalWord dataSet expression)
 
 record RCanonicalShellIdentification
     {RExpression Polymer Block Tree Traversal Scale Volume : Set}
