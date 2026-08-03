@@ -25,7 +25,7 @@ record BoundaryGeometry (Block Volume Observable : Set) : Set₁ where
     distanceReflexive : ∀ block → distance block block ≡ 0
     distanceSymmetric : ∀ left right →
       distance left right ≡ distance right left
-    triangleInequality : ∀ left middle right → Set
+    triangleInequality : ∀ (left middle right : Block) → Set
 
     supportDistanceToBoundary : Volume → Observable → Nat
     supportBoundaryDistanceLowerBound : ∀ volume observable supportBlock boundaryBlock →
@@ -94,7 +94,7 @@ record CanonicalRootedTrace
     decoderLeftInverse : ∀ polymer →
       decode (root polymer) (word polymer) ≡ polymer
     shellIndex : Polymer → Nat
-    wordLengthControlsShell : ∀ polymer → Set
+    wordLengthControlsShell : ∀ (polymer : Polymer) → Set
 
 open CanonicalRootedTrace public
 
@@ -129,16 +129,16 @@ record PhysicalRootedShellInjection
     clusterTraceWord : Cluster → List SignedAxis4
     clusterShellIndex : Cluster → Nat
 
-    clusterTraceUsesPolymerRoot : ∀ cluster →
+    clusterTraceUsesPolymerRoot : ∀ (cluster : Cluster) →
       clusterTraceRoot cluster ≡ root trace (polymerOf carrier cluster)
-    clusterTraceUsesPolymerWord : ∀ cluster →
+    clusterTraceUsesPolymerWord : ∀ (cluster : Cluster) →
       clusterTraceWord cluster ≡ word trace (polymerOf carrier cluster)
-    clusterShellUsesPolymerShell : ∀ cluster →
+    clusterShellUsesPolymerShell : ∀ (cluster : Cluster) →
       clusterShellIndex cluster ≡ shellIndex trace (polymerOf carrier cluster)
 
-    shellIndexAtLeastDiameter : ∀ cluster → Set
+    shellIndexAtLeastDiameter : ∀ (cluster : Cluster) → Set
 
-    boundaryClusterToTraceInjective : ∀ left right →
+    boundaryClusterToTraceInjective : ∀ (left right : Cluster) →
       clusterTraceRoot left ≡ clusterTraceRoot right →
       clusterTraceWord left ≡ clusterTraceWord right →
       polymerOf carrier left ≡ polymerOf carrier right
@@ -183,11 +183,11 @@ record BoundaryTailFromRootedShell
       boundaryDifferenceCluster volume observable cluster →
       BoundaryCrossingWitness geometry carrier volume observable cluster
 
-    rootedShellWeightBound : ∀ depth → Set
-    supportDistanceEscapesWithVolume : ∀ observable depth → Set
+    rootedShellWeightBound : ∀ (depth : Nat) → Set
+    supportDistanceEscapesWithVolume : ∀ (observable : Observable) (depth : Nat) → Set
 
-    boundaryDifferenceBoundByRootedTail : ∀ volume observable → Set
-    boundaryConditionIndependence : ∀ observable → Set
+    boundaryDifferenceBoundByRootedTail : ∀ (volume : Volume) (observable : Observable) → Set
+    boundaryConditionIndependence : ∀ (observable : Observable) → Set
 
 open BoundaryTailFromRootedShell public
 

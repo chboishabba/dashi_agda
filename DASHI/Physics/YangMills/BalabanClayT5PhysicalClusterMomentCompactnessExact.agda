@@ -54,7 +54,7 @@ record FiniteVolumeClusterExpansion
     expectation : Volume → Boundary → Observable → ℚ
 
     clusterWeight : Boundary → Observable → Cluster → ℚ
-    clusterWeightDefinition : ∀ boundary observable cluster → Set
+    clusterWeightDefinition : ∀ (boundary : Boundary) (observable : Observable) (cluster : Cluster) → Set
 
     neutralObservable : Observable
 
@@ -66,13 +66,13 @@ record FiniteVolumeClusterExpansion
       observablePartitionFunction volume boundary observable
       ≡ sumℚ (map (clusterWeight boundary observable) (clusters volume))
 
-    expectationAsPartitionRatioExact : ∀ volume boundary observable → Set
+    expectationAsPartitionRatioExact : ∀ (volume : Volume) (boundary : Boundary) (observable : Observable) → Set
 
     fpPolymerModel : FP.AbstractPolymerModel Polymer
     fpCriterion : FP.FernandezProcacciCriterion Polymer fpPolymerModel
-    physicalActivitiesAgreeWithFPModel : ∀ boundary polymer → Set
-    physicalClusterExpansionAbsolutelyConvergent : ∀ volume boundary → Set
-    partitionFunctionNonzero : ∀ volume boundary → Set
+    physicalActivitiesAgreeWithFPModel : ∀ (boundary : Boundary) (polymer : Polymer) → Set
+    physicalClusterExpansionAbsolutelyConvergent : ∀ (volume : Volume) (boundary : Boundary) → Set
+    partitionFunctionNonzero : ∀ (volume : Volume) (boundary : Boundary) → Set
 
 open FiniteVolumeClusterExpansion public
 
@@ -93,13 +93,13 @@ record BoundaryCancellation
       ≡ clusterWeight expansion rightBoundary observable cluster
 
     clusterDifferenceCancelsUnlessBoundaryCrossing :
-      ∀ volume observable cluster leftBoundary rightBoundary → Set
+      ∀ (volume : Volume) (observable : Observable) (cluster : Cluster) (leftBoundary rightBoundary : Boundary) → Set
 
     boundaryDifferenceClusters :
       Volume → Observable → List Cluster
 
     boundaryDifferenceExpansionExact :
-      ∀ volume observable leftBoundary rightBoundary → Set
+      ∀ (volume : Volume) (observable : Observable) (leftBoundary rightBoundary : Boundary) → Set
 
 open BoundaryCancellation public
 
@@ -122,11 +122,11 @@ record BoundaryShellEstimate
       Shell.BoundaryCrossingWitness
         geometry clusterCarrier volume observable cluster
 
-    boundaryClusterWeightInjectionBound : ∀ volume observable depth → Set
+    boundaryClusterWeightInjectionBound : ∀ (volume : Volume) (observable : Observable) (depth : Nat) → Set
     boundaryExpectationDifferenceBelowRootedTail :
-      ∀ volume observable leftBoundary rightBoundary → Set
-    boundaryTailVanishesWithVolume : ∀ observable → Set
-    boundaryConditionIndependence : ∀ observable → Set
+      ∀ (volume : Volume) (observable : Observable) (leftBoundary rightBoundary : Boundary) → Set
+    boundaryTailVanishesWithVolume : ∀ (observable : Observable) → Set
+    boundaryConditionIndependence : ∀ (observable : Observable) → Set
 
 open BoundaryShellEstimate public
 
@@ -142,22 +142,22 @@ record OneStepRGDefect
     defectTermValue : DefectTerm → ℚ
     oneStepDefect : Cutoff → Observable → ℚ
 
-    blockedObservableConsistencyExact : ∀ cutoff observable → Set
-    observableRGTransformExact : ∀ cutoff observable → Set
+    blockedObservableConsistencyExact : ∀ (cutoff : Cutoff) (observable : Observable) → Set
+    observableRGTransformExact : ∀ (cutoff : Cutoff) (observable : Observable) → Set
 
     oneStepDefectPolymerExpansionExact : ∀ cutoff observable →
       oneStepDefect cutoff observable
       ≡ sumℚ (map defectTermValue (defectTerms cutoff observable))
 
-    relevantTermsCancelByRenormalizationCondition : ∀ cutoff observable → Set
-    everyRemainingTermIrrelevant : ∀ cutoff observable term → Set
-    irrelevantNormGainBound : ∀ cutoff observable → Set
+    relevantTermsCancelByRenormalizationCondition : ∀ (cutoff : Cutoff) (observable : Observable) → Set
+    everyRemainingTermIrrelevant : ∀ (cutoff : Cutoff) (observable : Observable) (term : DefectTerm) → Set
+    irrelevantNormGainBound : ∀ (cutoff : Cutoff) (observable : Observable) → Set
 
-    oneStepDefectBelowQuarterHalfPower : ∀ cutoff observable →
+    oneStepDefectBelowQuarterHalfPower : ∀ (cutoff : Cutoff) (observable : Observable) →
       oneStepDefect cutoff observable
       ≤ Tail.rootedShellTail (cutoffDepth cutoff)
 
-    expectationDifferenceIsDefect : ∀ cutoff observable → Set
+    expectationDifferenceIsDefect : ∀ (cutoff : Cutoff) (observable : Observable) → Set
 
 open OneStepRGDefect public
 
@@ -176,14 +176,14 @@ record ContinuumDefectClosure
     (defect : OneStepRGDefect Cutoff Observable DefectTerm) : Set₁ where
   field
     iterateCutoff : Cutoff → Nat → Cutoff
-    telescopingExpectationDifferenceExact : ∀ cutoff count observable → Set
-    finiteTailControlsTelescopingDifference : ∀ cutoff count observable → Set
+    telescopingExpectationDifferenceExact : ∀ (cutoff : Cutoff) (count : Nat) (observable : Observable) → Set
+    finiteTailControlsTelescopingDifference : ∀ (cutoff : Cutoff) (count : Nat) (observable : Observable) → Set
     cutoffDepthEscapes : Set
     geometricTailSummable : Set
-    continuumExpectationCauchy : ∀ observable → Set
-    continuumExpectationLimitExists : ∀ observable → Set
+    continuumExpectationCauchy : ∀ (observable : Observable) → Set
+    continuumExpectationLimitExists : ∀ (observable : Observable) → Set
     diagonalVolumeChoice : Nat → Nat
-    diagonalChoiceDominatesBoundaryAndScaleTails : ∀ observable → Set
+    diagonalChoiceDominatesBoundaryAndScaleTails : ∀ (observable : Observable) → Set
 
 open ContinuumDefectClosure public
 
@@ -198,25 +198,25 @@ record MarkedMomentClosure
     singleScaleMomentBound : Observable → ℚ
     uniformMomentBound : Observable → ℚ
 
-    singleScaleMomentFromMarkedPartitionRatio : ∀ observable → Set
-    singleScaleExponentialMomentBound : ∀ cutoff observable → Set
+    singleScaleMomentFromMarkedPartitionRatio : ∀ (observable : Observable) → Set
+    singleScaleExponentialMomentBound : ∀ (cutoff : Nat) (observable : Observable) → Set
 
     momentCost : Nat → Observable → ℚ
-    momentCostBelowDyadicTail : ∀ cutoff observable →
+    momentCostBelowDyadicTail : ∀ (cutoff : Nat) (observable : Observable) →
       momentCost cutoff observable ≤ Tail.rootedShellTail cutoff
 
-    multiscaleMomentRecursionLiteral : ∀ cutoff observable → Set
-    momentCostsSummable : ∀ observable → Set
-    uniformExponentialMomentBoundLiteral : ∀ observable → Set
+    multiscaleMomentRecursionLiteral : ∀ (cutoff : Nat) (observable : Observable) → Set
+    momentCostsSummable : ∀ (observable : Observable) → Set
+    uniformExponentialMomentBoundLiteral : ∀ (observable : Observable) → Set
 
     factorial : Nat → ℚ
     powerMoment : Nat → Nat → Observable → ℚ
-    powerBelowFactorialExponentialLiteral : ∀ degree observable → Set
+    powerBelowFactorialExponentialLiteral : ∀ (degree : Nat) (observable : Observable) → Set
 
     reflectedProduct : Observable → Observable → Observable
-    reflectedProductYoungBoundLiteral : ∀ left right → Set
-    reflectedProductMomentBoundLiteral : ∀ left right → Set
-    uniformIntegrabilityOfReflectedProductsLiteral : ∀ left right → Set
+    reflectedProductYoungBoundLiteral : ∀ (left right : Observable) → Set
+    reflectedProductMomentBoundLiteral : ∀ (left right : Observable) → Set
+    uniformIntegrabilityOfReflectedProductsLiteral : ∀ (left right : Observable) → Set
 
 open MarkedMomentClosure public
 
@@ -229,9 +229,9 @@ record FiniteMarginalCompactness
     marginalRadius : Dimension → ℚ
     marginalTailProbability : Dimension → ℚ
 
-    finiteFamilyMarkovTailBound : ∀ dimension → Set
-    finiteDimensionalMarginalTightLiteral : ∀ dimension → Set
-    gaugeInvariantMarginalTightLiteral : ∀ dimension → Set
+    finiteFamilyMarkovTailBound : ∀ (dimension : Dimension) → Set
+    finiteDimensionalMarginalTightLiteral : ∀ (dimension : Dimension) → Set
+    gaugeInvariantMarginalTightLiteral : ∀ (dimension : Dimension) → Set
 
     weaklyConvergentSubsequence : Measure
     finiteDimensionalProkhorov : Set
@@ -241,15 +241,15 @@ record FiniteMarginalCompactness
     restriction : Index → Index → Marginal → Marginal
     continuumMeasure : Measure
 
-    finiteMarginalRestrictionExact : ∀ lower upper → Set
-    blockingCompatibilityOfMarginals : ∀ lower upper → Set
-    projectiveFamilyConsistencyLiteral : ∀ lower upper → Set
-    subsequenceLimitPreservesConsistency : ∀ lower upper → Set
+    finiteMarginalRestrictionExact : ∀ (lower upper : Index) → Set
+    blockingCompatibilityOfMarginals : ∀ (lower upper : Index) → Set
+    projectiveFamilyConsistencyLiteral : ∀ (lower upper : Index) → Set
+    subsequenceLimitPreservesConsistency : ∀ (lower upper : Index) → Set
     projectiveLimitMeasureExists : Set
 
     cylinderExpectation : Measure → Observable → ℚ
     continuumCylinderExpectationUnique : Set
-    twoLimitsAgreeOnCylinderFunctions : ∀ left right → Set
+    twoLimitsAgreeOnCylinderFunctions : ∀ (left right : Measure) → Set
     cylinderAlgebraSeparatesMeasures : Set
     continuumMeasureUniquenessLiteral : Set
 
@@ -263,7 +263,7 @@ record PhysicalT5Closure
       FiniteVolumeClusterExpansion
         Volume Boundary Observable Polymer Cluster
     cancellation : BoundaryCancellation clusterExpansion
-    shellEstimate : BoundaryShellEstimate clusterExpansion cancellation
+    shellEstimate : BoundaryShellEstimate {Block = Block} clusterExpansion cancellation
 
     defect : OneStepRGDefect Cutoff Observable DefectTerm
     continuum : ContinuumDefectClosure defect

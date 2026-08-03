@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanFourAxisMartingaleExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -32,9 +33,18 @@ fourMartingaleSum x a0 a01 a012 a0123 =
   + (martingale2 a01 a012
   + martingale3 a012 a0123))
 
+telescopingSumLemma : ∀ (x a0 a01 a012 a0123 : ℚ) →
+  (x - a0) + ((a0 - a01) + ((a01 - a012) + (a012 - a0123))) ≡ x - a0123
+telescopingSumLemma x a0 a01 a012 a0123 =
+  ℚRing.solve (a0123 ∷ a012 ∷ a01 ∷ a0 ∷ x ∷ [])
+
 fourAxisMartingaleTelescopingRaw : ∀ x a0 a01 a012 a0123 →
   fourMartingaleSum x a0 a01 a012 a0123 ≡ x - a0123
-fourAxisMartingaleTelescopingRaw = ℚRing.solve-∀
+fourAxisMartingaleTelescopingRaw x a0 a01 a012 a0123 =
+  telescopingSumLemma x a0 a01 a012 a0123
+
+minusZeroLemma : ∀ (x : ℚ) → x - 0ℚ ≡ x
+minusZeroLemma x = ℚRing.solve (x ∷ [])
 
 fourAxisMartingaleDecomposition : ∀ x a0 a01 a012 a0123 →
   a0123 ≡ 0ℚ →
@@ -44,7 +54,7 @@ fourAxisMartingaleDecomposition x a0 a01 a012 a0123 meanZero =
     (fourAxisMartingaleTelescopingRaw x a0 a01 a012 a0123)
     (trans
       (cong (λ value → x - value) meanZero)
-      (ℚRing.solve-∀))
+      (minusZeroLemma x))
 
 pairCrossSum : ℚ → ℚ → ℚ → ℚ → ℚ
 pairCrossSum p0 p1 p2 p3 =
@@ -56,16 +66,22 @@ pairCrossSum p0 p1 p2 p3 =
 
 fourSquareSum : ℚ → ℚ → ℚ → ℚ → ℚ
 fourSquareSum p0 p1 p2 p3 =
-  sq p0 + (sq p1 + (sq p2 + sq p3))
+  (p0 * p0) + ((p1 * p1) + ((p2 * p2) + (p3 * p3)))
 
 twoℚ : ℚ
 twoℚ = 1ℚ + 1ℚ
 
+fourSquareExpansionLemma : ∀ (p0 p1 p2 p3 : ℚ) →
+  (p0 + (p1 + (p2 + p3))) * (p0 + (p1 + (p2 + p3)))
+  ≡ (p0 * p0 + (p1 * p1 + (p2 * p2 + p3 * p3)))
+    + (1ℚ + 1ℚ) * (p0 * p1 + (p0 * p2 + (p0 * p3 + (p1 * p2 + (p1 * p3 + p2 * p3)))))
+fourSquareExpansionLemma p0 p1 p2 p3 = ℚRing.solve (p3 ∷ p2 ∷ p1 ∷ p0 ∷ [])
+
 fourSquareExpansionRaw : ∀ p0 p1 p2 p3 →
-  sq (p0 + (p1 + (p2 + p3)))
+  (p0 + (p1 + (p2 + p3))) * (p0 + (p1 + (p2 + p3)))
   ≡ fourSquareSum p0 p1 p2 p3
     + twoℚ * pairCrossSum p0 p1 p2 p3
-fourSquareExpansionRaw = ℚRing.solve-∀
+fourSquareExpansionRaw p0 p1 p2 p3 = fourSquareExpansionLemma p0 p1 p2 p3
 
 pairCrossSumZero : ∀ p0 p1 p2 p3 →
   p0 * p1 ≡ 0ℚ →
@@ -76,8 +92,10 @@ pairCrossSumZero : ∀ p0 p1 p2 p3 →
   p2 * p3 ≡ 0ℚ →
   pairCrossSum p0 p1 p2 p3 ≡ 0ℚ
 pairCrossSumZero p0 p1 p2 p3 h01 h02 h03 h12 h13 h23
-  rewrite h01 | h02 | h03 | h12 | h13 | h23 =
-  ℚRing.solve-∀
+  rewrite h01 | h02 | h03 | h12 | h13 | h23 = refl
+
+plusZeroMultLemma : ∀ (s : ℚ) → s + twoℚ * 0ℚ ≡ s
+plusZeroMultLemma s = ℚRing.solve (s ∷ [])
 
 fourAxisMartingaleOrthogonalityImpliesVariance :
   ∀ p0 p1 p2 p3 →
@@ -87,7 +105,7 @@ fourAxisMartingaleOrthogonalityImpliesVariance :
   p1 * p2 ≡ 0ℚ →
   p1 * p3 ≡ 0ℚ →
   p2 * p3 ≡ 0ℚ →
-  sq (p0 + (p1 + (p2 + p3)))
+  (p0 + (p1 + (p2 + p3))) * (p0 + (p1 + (p2 + p3)))
   ≡ fourSquareSum p0 p1 p2 p3
 fourAxisMartingaleOrthogonalityImpliesVariance
     p0 p1 p2 p3 h01 h02 h03 h12 h13 h23 =
@@ -97,7 +115,7 @@ fourAxisMartingaleOrthogonalityImpliesVariance
       (cong
         (λ cross → fourSquareSum p0 p1 p2 p3 + twoℚ * cross)
         (pairCrossSumZero p0 p1 p2 p3 h01 h02 h03 h12 h13 h23))
-      (ℚRing.solve-∀))
+      (plusZeroMultLemma (fourSquareSum p0 p1 p2 p3)))
 
 fourAxisVarianceDecomposition :
   ∀ x p0 p1 p2 p3 →

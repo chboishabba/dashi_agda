@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4AxisAverageExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
@@ -62,7 +62,7 @@ side4AverageOfConstant : ∀ value →
 side4AverageOfConstant value
   rewrite sumRationalConstant (allCyclicIndices side4) value
         | lengthAllCyclicIndices side4 =
-  ℚRing.solve-∀
+  ℚRing.solve (value ∷ [])
 
 quarterDoubleSumSwap :
   ∀ {A B : Set} (left : List A) (right : List B)
@@ -191,7 +191,10 @@ side4CenteredTotalZero : ∀ total →
     - natAsRational (length (allCyclicIndices side4)) * (quarter * total)
   ≡ 0ℚ
 side4CenteredTotalZero total
-  rewrite lengthAllCyclicIndices side4 = ℚRing.solve-∀
+  rewrite lengthAllCyclicIndices side4 = ℚRing.solve (total ∷ [])
+
+oneTimesValueLemma : ∀ (v r : ℚ) → v - r ≡ 1ℚ * v - r
+oneTimesValueLemma v r = ℚRing.solve (r ∷ v ∷ [])
 
 axisCentering4DirectFibreSumZero : ∀ siteF axis transverse →
   sumRational (allCyclicIndices side4)
@@ -210,7 +213,9 @@ axisCentering4DirectFibreSumZero siteF axis transverse =
         1ℚ * siteF (insertAxis axis coordinate transverse)
         - quarter * physicalFibreSum siteF axis transverse)
       (λ coordinate →
-        ℚRing.solve-∀))
+        oneTimesValueLemma
+          (siteF (insertAxis axis coordinate transverse))
+          (quarter * physicalFibreSum siteF axis transverse)))
     (trans
       (sumScaledDifferenceFormula
         1ℚ

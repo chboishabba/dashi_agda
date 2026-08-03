@@ -83,7 +83,7 @@ universalColorCoefficient = + 11 / 24
 
 universalColorCoefficientExact :
   (+ 11 / 3) * betaNormalization ≡ universalColorCoefficient
-universalColorCoefficientExact = ℚRing.solve []
+universalColorCoefficientExact = ℚRing.solve-∀
 canonicalConventionLevel : ProofLevel
 canonicalConventionLevel = machineChecked
 

@@ -123,17 +123,17 @@ physicalAdmissibility :
   ∀ {State Bound} (closure : PhysicalOneStepClosure State Bound) →
   UV.CombinedRGAdmissibility (normData closure)
 physicalAdmissibility closure = record
-  { UV.CombinedRGAdmissibility.AdmissibleCoupling =
+  { AdmissibleCoupling =
       AdmissibleCoupling closure
-  ; UV.CombinedRGAdmissibility.BoundaryAdmissible =
+  ; BoundaryAdmissible =
       BoundaryAdmissible closure
-  ; UV.CombinedRGAdmissibility.PolymerNormAdmissible =
+  ; PolymerNormAdmissible =
       PolymerNormAdmissible closure
-  ; UV.CombinedRGAdmissibility.admissibleCouplingDomainPreserved =
+  ; admissibleCouplingDomainPreserved =
       couplingDomainPreserved closure
-  ; UV.CombinedRGAdmissibility.boundaryTermsRemainAdmissible =
+  ; boundaryTermsRemainAdmissible =
       boundaryReinjectionAdmissible closure
-  ; UV.CombinedRGAdmissibility.combinedPolymerNormCloses =
+  ; combinedPolymerNormCloses =
       strictPolymerNormClosure closure
   }
 
@@ -152,12 +152,12 @@ physicalGate4UVPackage :
   ∀ {State Bound} {closure : PhysicalOneStepClosure State Bound} →
   PhysicalUVInitialData closure → UV.Gate4UVCompletionPackage State Bound
 physicalGate4UVPackage {closure = closure} initialData = record
-  { UV.Gate4UVCompletionPackage.normData = normData closure
-  ; UV.Gate4UVCompletionPackage.admissibility = physicalAdmissibility closure
-  ; UV.Gate4UVCompletionPackage.consequences = consequences initialData
-  ; UV.Gate4UVCompletionPackage.initial = initial initialData
-  ; UV.Gate4UVCompletionPackage.initialAdmissible = initialAdmissible initialData
-  ; UV.Gate4UVCompletionPackage.initialStable = initialStable initialData
+  { normData = normData closure
+  ; admissibility = physicalAdmissibility closure
+  ; consequences = consequences initialData
+  ; initial = initial initialData
+  ; initialAdmissible = initialAdmissible initialData
+  ; initialStable = initialStable initialData
   }
 
 physicalStateCarrierLevel : ProofLevel
