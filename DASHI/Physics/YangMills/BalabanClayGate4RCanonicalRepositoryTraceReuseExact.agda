@@ -8,7 +8,8 @@ open import Data.Rational using (ℚ; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact using (SignedAxis4)
-
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRationalConstantsExact as BishopConstants
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geometric
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryBreadthFirstTreeInstanceExact as BFS
 import DASHI.Physics.YangMills.BalabanClayT2RepositoryConnectedPolymerExtractionExact as Extraction
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
@@ -43,45 +44,21 @@ record RCanonicalRepositoryTrace
     breadthFirstData :
       BFS.RepositoryBreadthFirstTreeData Polymer Block Tree Traversal
 
-    expressionPolymer : RExpression → Polymer
     scaleOf : RExpression → Scale
     volumeOf : RExpression → Volume
+    expressionPolymer : RExpression → Polymer
     familyMass : RExpression → ℚ
 
+    rCanonicalRoot : RExpression → Block
+    rCanonicalTree : RExpression → Tree
+    rCanonicalWord : RExpression → List SignedAxis4
+    rCanonicalDepth : RExpression → Nat
+
+    rCanonicalDecoderExact : ∀ (expression : RExpression) →
+      Extraction.decodeWord (rCanonicalRoot expression) (rCanonicalWord expression)
+      ≡ expressionPolymer expression
+
 open RCanonicalRepositoryTrace public
-
-repositoryCarrier :
-  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
-  RCanonicalRepositoryTrace
-    RExpression Polymer Block Tree Traversal Scale Volume →
-  Extraction.RepositoryConnectedBlockCarrier Polymer Block Tree Traversal
-repositoryCarrier dataSet =
-  BFS.asRepositoryConnectedBlockCarrier (breadthFirstData dataSet)
-
-rCanonicalRoot :
-  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
-  RCanonicalRepositoryTrace
-    RExpression Polymer Block Tree Traversal Scale Volume →
-  RExpression → Block
-rCanonicalRoot dataSet expression =
-  BFS.leastBlock (breadthFirstData dataSet)
-    (expressionPolymer dataSet expression)
-
-rCanonicalWord :
-  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
-  RCanonicalRepositoryTrace
-    RExpression Polymer Block Tree Traversal Scale Volume →
-  RExpression → List SignedAxis4
-rCanonicalWord dataSet expression =
-  BFS.canonicalDirectionWord (breadthFirstData dataSet)
-    (expressionPolymer dataSet expression)
-
-rCanonicalDepth :
-  ∀ {RExpression Polymer Block Tree Traversal Scale Volume} →
-  RCanonicalRepositoryTrace
-    RExpression Polymer Block Tree Traversal Scale Volume →
-  RExpression → Nat
-rCanonicalDepth dataSet expression = length (rCanonicalWord dataSet expression)
 
 record RCanonicalShellIdentification
     {RExpression Polymer Block Tree Traversal Scale Volume : Set}
@@ -89,7 +66,7 @@ record RCanonicalShellIdentification
       RExpression Polymer Block Tree Traversal Scale Volume)
     (shellData : Shell.TraversalShellData Scale Volume Block) : Set₁ where
   field
-    familyMassIsRootedShell : ∀ expression →
+    familyMassIsRootedShell : ∀ (expression : RExpression) →
       familyMass trace expression
       ≡ Shell.rootedShell shellData
           (scaleOf trace expression)
@@ -108,13 +85,13 @@ asExactRootedFamilyRepresentation :
   Reuse.ExactRootedFamilyRepresentation Scale Volume Block shellData
 asExactRootedFamilyRepresentation {RExpression = RExpression}
   {trace = trace} identification = record
-  { Reuse.ExactRootedFamilyRepresentation.Family = RExpression
-  ; Reuse.ExactRootedFamilyRepresentation.scaleOf = scaleOf trace
-  ; Reuse.ExactRootedFamilyRepresentation.volumeOf = volumeOf trace
-  ; Reuse.ExactRootedFamilyRepresentation.rootOf = rCanonicalRoot trace
-  ; Reuse.ExactRootedFamilyRepresentation.depthOf = rCanonicalDepth trace
-  ; Reuse.ExactRootedFamilyRepresentation.familyMass = familyMass trace
-  ; Reuse.ExactRootedFamilyRepresentation.familyMassDefinition =
+  { Family = RExpression
+  ; scaleOf = scaleOf trace
+  ; volumeOf = volumeOf trace
+  ; rootOf = rCanonicalRoot trace
+  ; depthOf = rCanonicalDepth trace
+  ; familyMass = familyMass trace
+  ; familyMassDefinition =
       familyMassIsRootedShell identification
   }
 
@@ -124,9 +101,9 @@ rCanonicalCountingBound :
       RExpression Polymer Block Tree Traversal Scale Volume}
     {shellData : Shell.TraversalShellData Scale Volume Block}
     (identification : RCanonicalShellIdentification trace shellData)
-    expression →
+    (expression : RExpression) →
   familyMass trace expression
-  ≤ Shell.quarter * Shell.halfPower (rCanonicalDepth trace expression)
+  ≤ BishopConstants.quarter * Geometric.halfPower (rCanonicalDepth trace expression)
 rCanonicalCountingBound identification =
   Reuse.exactRootedFamilyCounting
     (asExactRootedFamilyRepresentation identification)

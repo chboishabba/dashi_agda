@@ -136,6 +136,9 @@ rationalOrderedExtension = record
 Pair : Set
 Pair = ℚ × ℚ
 
+emptyℚ : List ℚ
+emptyℚ = []
+
 pairDot : List Pair → ℚ
 pairDot [] = 0ℚ
 pairDot ((left , right) ∷ rest) =
@@ -166,7 +169,7 @@ crossSquaresStep : ∀ left right nextLeft nextRight LN RN PD →
   (left * nextRight - right * nextLeft) * (left * nextRight - right * nextLeft) + (left * left * RN + right * right * LN - (left * right * PD + left * right * PD))
   ≡ left * left * (nextRight * nextRight + RN) + right * right * (nextLeft * nextLeft + LN) - (left * right * (nextLeft * nextRight + PD) + left * right * (nextLeft * nextRight + PD))
 crossSquaresStep left right nextLeft nextRight LN RN PD =
-  solve (left ∷ right ∷ nextLeft ∷ nextRight ∷ LN ∷ RN ∷ PD ∷ ([] : List ℚ))
+  solve (left ∷ right ∷ nextLeft ∷ nextRight ∷ LN ∷ RN ∷ PD ∷ emptyℚ)
 
 crossSquaresExpansion :
   ∀ left right rest →
@@ -191,7 +194,7 @@ finiteGramStepAlgebraic : ∀ left right LN RN PD GD →
   (left * left + LN) * (right * right + RN)
   ≡ (left * right + PD) * (left * right + PD) + (left * left * RN + right * right * LN - (left * right * PD + left * right * PD) + GD) + (LN * RN - (PD * PD + GD))
 finiteGramStepAlgebraic left right LN RN PD GD =
-  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ ([] : List ℚ))
+  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ emptyℚ)
 
 finiteGramStep : ∀ left right LN RN PD GD →
   LN * RN ≡ PD * PD + GD →
@@ -200,13 +203,13 @@ finiteGramStep : ∀ left right LN RN PD GD →
 finiteGramStep left right LN RN PD GD hyp
   rewrite finiteGramStepAlgebraic left right LN RN PD GD
         | hyp =
-  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ ([] : List ℚ))
+  solve (left ∷ right ∷ LN ∷ RN ∷ PD ∷ GD ∷ emptyℚ)
 
 finiteGramIdentity :
   ∀ pairs →
   leftNormSquared pairs * rightNormSquared pairs
   ≡ square (pairDot pairs) + gramDefect pairs
-finiteGramIdentity [] = solve ([] : List ℚ)
+finiteGramIdentity [] = solve emptyℚ
 finiteGramIdentity ((left , right) ∷ rest)
   rewrite crossSquaresExpansion left right rest =
   finiteGramStep left right (leftNormSquared rest) (rightNormSquared rest) (pairDot rest) (gramDefect rest) (finiteGramIdentity rest)
