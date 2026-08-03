@@ -20,6 +20,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact where
 -- Luo's Proposition-3.1-shaped estimate follows by transitivity.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
@@ -30,7 +31,7 @@ import DASHI.Physics.Closure.NSCompactGammaDifferentiatedTriadInstantiation as T
 
 record LuoFullShellFluxAdapter
     (program : Closure.CompactGammaAnalyticClosure)
-    (K N : Nat) : Set₁ where
+    (K N : Nat) : Setω where
   field
     absoluteCutoffFlux : Scalar (Closure.arithmetic program)
     cutoffEnergyMajorant : Scalar (Closure.arithmetic program)
@@ -75,15 +76,29 @@ luoFullShellCutoffFluxEstimate program K N adapter =
 
 record LuoFullShellPhysicalIdentification
     (program : Closure.CompactGammaAnalyticClosure)
-    (K N : Nat) : Set₁ where
+    (K N : Nat) : Setω where
   field
     adapter : LuoFullShellFluxAdapter program K N
 
-    selectedPairListIsHardHighPhysicalTriadImage : Set
-    nearResponseIsLuoProjectedCutoffFlux : Set
-    majorantEnergyIsLuoWeightedShellEnergy : Set
-    lowPassGradientIsPhysicalInfinityNorm : Set
-    profileSchurConstantUniformInCutoff : Set
+    SelectedPairListIsHardHighPhysicalTriadImage : Set
+    selectedPairListIsHardHighPhysicalTriadImage :
+      SelectedPairListIsHardHighPhysicalTriadImage
+
+    NearResponseIsLuoProjectedCutoffFlux : Set
+    nearResponseIsLuoProjectedCutoffFlux :
+      NearResponseIsLuoProjectedCutoffFlux
+
+    MajorantEnergyIsLuoWeightedShellEnergy : Set
+    majorantEnergyIsLuoWeightedShellEnergy :
+      MajorantEnergyIsLuoWeightedShellEnergy
+
+    LowPassGradientIsPhysicalInfinityNorm : Set
+    lowPassGradientIsPhysicalInfinityNorm :
+      LowPassGradientIsPhysicalInfinityNorm
+
+    ProfileSchurConstantUniformInCutoff : Set
+    profileSchurConstantUniformInCutoff :
+      ProfileSchurConstantUniformInCutoff
 
 open LuoFullShellPhysicalIdentification public
 
