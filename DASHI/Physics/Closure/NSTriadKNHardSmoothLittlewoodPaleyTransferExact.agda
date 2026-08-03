@@ -25,11 +25,13 @@ module DASHI.Physics.Closure.NSTriadKNHardSmoothLittlewoodPaleyTransferExact whe
 -- inhabitant, not an assumed equality of projector conventions.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc; _⊔_)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 
@@ -37,22 +39,23 @@ import Data.Rational.Properties as ℚₚ
 -- Support-level finite-band interface.
 ------------------------------------------------------------------------
 
+infix 4 _∈Nat_
+data _∈Nat_ (value : Nat) : List Nat → Set where
+  here : ∀ {values} → value ∈Nat (value ∷ values)
+  there : ∀ {head values} → value ∈Nat values → value ∈Nat (head ∷ values)
+
 record SmoothShellHardBandSupport {m : Level} (Mode : Set m) : Set (lsuc m) where
   field
     smoothShellSupported : Nat → Mode → Set m
     hardShellSupported : Nat → Mode → Set m
     hardBand : Nat → List Nat
 
-    SmoothSupportOccursInBand : Nat → Mode → Set m
     smoothSupportOccursInHardBand :
       ∀ shell mode →
       smoothShellSupported shell mode →
-      SmoothSupportOccursInBand shell mode
-
-    bandOccurrenceProducesHardShell :
-      ∀ shell mode →
-      SmoothSupportOccursInBand shell mode →
-      Set m
+      Σ Nat (λ hardShell →
+        (hardShell ∈Nat hardBand shell)
+          × hardShellSupported hardShell mode)
 
 open SmoothShellHardBandSupport public
 
