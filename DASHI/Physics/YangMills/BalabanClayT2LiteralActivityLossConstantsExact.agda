@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayT2LiteralActivityLossConstantsExact wh
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
