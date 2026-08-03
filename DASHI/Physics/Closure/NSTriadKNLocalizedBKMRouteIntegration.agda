@@ -88,7 +88,7 @@ localizedBKMRouteIntegrationReceipt = receipt
   Compatibility.residueScaleToDissipationWavenumberBridgeClosedIsFalse
   Compatibility.blockersToLocalizedBKMBridgeClosedIsFalse
   Sources.anyLocalizedContinuationRouteConstructedIsFalse
-  Compatibility.currentPairIncidenceBKMExclusionStillFalse
+  refl
   (PairBounds.clayPromotedIsFalse
     PairBounds.canonicalNSTriadKNPairIncidenceProfileBounds)
 
