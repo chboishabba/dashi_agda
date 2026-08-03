@@ -19,7 +19,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNProfileCrossForcedTailRefinement as ForcedTail
 import DASHI.Physics.Closure.NSTriadKNQGapTransfer as QGap
-import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds as PairBounds
 import DASHI.Physics.Closure.NSTriadKNLittlewoodPaleyInfrastructureInventory as LP
 import DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit as Sources
 
@@ -152,10 +151,6 @@ residueScaleToDissipationWavenumberBridgeClosedIsFalse = refl
 blockersToLocalizedBKMBridgeClosedIsFalse :
   blockersToLocalizedBKMBridgeClosed ≡ false
 blockersToLocalizedBKMBridgeClosedIsFalse = refl
-
-currentPairIncidenceBKMExclusionStillFalse :
-  PairBounds.canonicalBKMExclusionProved ≡ false
-currentPairIncidenceBKMExclusionStillFalse = refl
 
 semanticMismatchAuditClosed : Bool
 semanticMismatchAuditClosed = true
