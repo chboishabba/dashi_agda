@@ -24,7 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -216,8 +216,8 @@ rationalLerayCorrectionNonnegative E I O mode value nonzero =
     inverse = C3.inverseNormSquared I mode
     dotValue = C3.bilinearDot3 (C3.modeVector E mode) value
     instance
-      inverseNN = ℚₚ.nonNegative (inverseNormSquaredNonnegative O mode nonzero)
-      dotNN = ℚₚ.nonNegative (Separation.complexModulusSquaredNonnegative dotValue)
+      inverseNN = nonNegative (inverseNormSquaredNonnegative O mode nonzero)
+      dotNN = nonNegative (Separation.complexModulusSquaredNonnegative dotValue)
       productNN = ℚₚ.nonNeg*nonNeg⇒nonNeg inverse
         (L2.complexModulusSquared dotValue)
   in

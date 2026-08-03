@@ -57,32 +57,16 @@ periodicFibreDifferenceDecomposition : ∀ field axis transverse →
 periodicFibreDifferenceDecomposition field zeroᵢ
   (pair x1 (pair x2 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair zeroᵢ x1) (pair x2 x3)))
-    (field (pair (pair (sucᵢ zeroᵢ) x1) (pair x2 x3)))
-    (field (pair (pair (sucᵢ (sucᵢ zeroᵢ)) x1) (pair x2 x3)))
-    (field (pair (pair last4 x1) (pair x2 x3)))
 periodicFibreDifferenceDecomposition field (sucᵢ zeroᵢ)
   (pair x0 (pair x2 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 zeroᵢ) (pair x2 x3)))
-    (field (pair (pair x0 (sucᵢ zeroᵢ)) (pair x2 x3)))
-    (field (pair (pair x0 (sucᵢ (sucᵢ zeroᵢ))) (pair x2 x3)))
-    (field (pair (pair x0 last4) (pair x2 x3)))
 periodicFibreDifferenceDecomposition field (sucᵢ (sucᵢ zeroᵢ))
   (pair x0 (pair x1 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 x1) (pair zeroᵢ x3)))
-    (field (pair (pair x0 x1) (pair (sucᵢ zeroᵢ) x3)))
-    (field (pair (pair x0 x1) (pair (sucᵢ (sucᵢ zeroᵢ)) x3)))
-    (field (pair (pair x0 x1) (pair last4 x3)))
 periodicFibreDifferenceDecomposition field
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (pair x0 (pair x1 x2)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 x1) (pair x2 zeroᵢ)))
-    (field (pair (pair x0 x1) (pair x2 (sucᵢ zeroᵢ))))
-    (field (pair (pair x0 x1) (pair x2 (sucᵢ (sucᵢ zeroᵢ)))))
-    (field (pair (pair x0 x1) (pair x2 last4)))
 
 forwardDerivativeEnergyOpenPlusWrap : ∀ axis field →
   forwardDerivativeEnergy axis field
@@ -128,11 +112,7 @@ componentDerivativeFoldOpenPlusWrap field componentAxis =
         (λ derivativeAxis → periodicWrapEnergy derivativeAxis
           (field componentAxis)))
       (cong₂ _+_
-        (ℚRing.solve-∀
-          (axisDirectionalEnergy axis0 (field componentAxis))
-          (axisDirectionalEnergy axis1 (field componentAxis))
-          (axisDirectionalEnergy axis2 (field componentAxis))
-          (axisDirectionalEnergy axis3 (field componentAxis)))
+        (ℚRing.solve-∀)
         refl))
 
 componentPeriodicDifferenceOpenPlusWrap : ∀ field →
@@ -173,19 +153,7 @@ physicalPeriodicDifferenceOpenPlusWrap tangent =
         (componentPeriodicDifferenceOpenPlusWrap
           (componentScalarBondField tangent component3))))
     (trans
-      (ℚRing.solve-∀
-        (componentOpenDifferenceEnergy
-          (componentScalarBondField tangent component1))
-        (componentOpenDifferenceEnergy
-          (componentScalarBondField tangent component2))
-        (componentOpenDifferenceEnergy
-          (componentScalarBondField tangent component3))
-        (componentPeriodicWrapEnergy
-          (componentScalarBondField tangent component1))
-        (componentPeriodicWrapEnergy
-          (componentScalarBondField tangent component2))
-        (componentPeriodicWrapEnergy
-          (componentScalarBondField tangent component3)))
+      (ℚRing.solve-∀)
       (cong₂ _+_
         (cong₂ _+_
           (componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
@@ -212,7 +180,7 @@ hodgeRightHandSideMatchesPhysicalReferenceDifferenceEnergy tangent wrapZero =
     (physicalPeriodicDifferenceOpenPlusWrap tangent)
     (trans
       (cong₂ _+_ refl wrapZero)
-      (ℚRing.solve-∀ (physicalReferenceDifferenceEnergy tangent)))
+      (ℚRing.solve-∀))
 
 periodicOpenEnergySeamLevel : ProofLevel
 periodicOpenEnergySeamLevel = machineChecked

@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiveHessianDominationExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst)
 

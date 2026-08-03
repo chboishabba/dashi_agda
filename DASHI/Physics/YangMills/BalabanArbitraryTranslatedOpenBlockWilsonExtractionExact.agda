@@ -271,15 +271,9 @@ globalPlaquetteWilsonSecondVariationExact tangent plane site =
       (firstLink links) (secondLink links) (thirdLink links) (fourthLink links))
     (cong normSqV
       (lie3Ext
-        (ℚRing.solve-∀
-          (x (firstLink links)) (x (secondLink links))
-          (x (thirdLink links)) (x (fourthLink links)))
-        (ℚRing.solve-∀
-          (y (firstLink links)) (y (secondLink links))
-          (y (thirdLink links)) (y (fourthLink links)))
-        (ℚRing.solve-∀
-          (z (firstLink links)) (z (secondLink links))
-          (z (thirdLink links)) (z (fourthLink links)))))
+        (ℚRing.solve-∀)
+        (ℚRing.solve-∀)
+        (ℚRing.solve-∀)))
   where
   links = globalPlaquetteFourLinks tangent plane site
 

@@ -51,8 +51,7 @@ configuredHaarUpper =
 
 configuredHalfAngleExact :
   configuredHalfAngle + configuredHalfAngle ≡ Radius.configuredRadius
-configuredHalfAngleExact = ℚRing.solve
-
+configuredHalfAngleExact = ℚRing.solve []
 configuredHaarBelowAllocated :
   configuredHaarUpper ≤ Budget.configuredJacobianLoss
 configuredHaarBelowAllocated = ℚP.≤ᵇ⇒≤ tt
@@ -72,8 +71,7 @@ configuredDeterminantUpper = (+ 2 / 1) * configuredTraceNorm
 
 configuredDeterminantUpperExact :
   configuredDeterminantUpper ≡ Budget.configuredDeterminantLoss
-configuredDeterminantUpperExact = ℚRing.solve
-
+configuredDeterminantUpperExact = ℚRing.solve []
 ------------------------------------------------------------------------
 -- Quaternion/BCH budget.
 --
@@ -109,15 +107,13 @@ configuredLocalizationUpper =
 
 configuredLocalizationUpperExact :
   configuredLocalizationUpper ≡ Budget.configuredLocalizationLoss
-configuredLocalizationUpperExact = ℚRing.solve
-
+configuredLocalizationUpperExact = ℚRing.solve []
 configuredPatchUpper : ℚ
 configuredPatchUpper = + 1 / 8
 
 configuredPatchUpperExact :
   configuredPatchUpper ≡ Budget.configuredPatchLoss
-configuredPatchUpperExact = ℚRing.solve
-
+configuredPatchUpperExact = ℚRing.solve []
 ------------------------------------------------------------------------
 -- Physical component producer.  Only model-specific inequalities remain; all
 -- numeric comparisons with the common 1/16 budget are exact rational theorems.

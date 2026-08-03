@@ -106,30 +106,24 @@ forwardDifferenceAdd : ∀ axis left right site →
   ≡ forwardDifference4 axis left site + forwardDifference4 axis right site
 forwardDifferenceAdd axis left right site =
   ℚRing.solve-∀
-    (left (shiftForward4 axis site)) (left site)
-    (right (shiftForward4 axis site)) (right site)
 
 forwardDifferenceScale : ∀ coefficient axis field site →
   forwardDifference4 axis (scaleSiteField coefficient field) site
   ≡ coefficient * forwardDifference4 axis field site
 forwardDifferenceScale coefficient axis field site =
   ℚRing.solve-∀
-    coefficient (field (shiftForward4 axis site)) (field site)
 
 backwardDifferenceAdd : ∀ axis left right site →
   backwardDifference4 axis (addSiteField left right) site
   ≡ backwardDifference4 axis left site + backwardDifference4 axis right site
 backwardDifferenceAdd axis left right site =
   ℚRing.solve-∀
-    (left site) (left (shiftBackward4 axis site))
-    (right site) (right (shiftBackward4 axis site))
 
 backwardDifferenceScale : ∀ coefficient axis field site →
   backwardDifference4 axis (scaleSiteField coefficient field) site
   ≡ coefficient * backwardDifference4 axis field site
 backwardDifferenceScale coefficient axis field site =
   ℚRing.solve-∀
-    coefficient (field site) (field (shiftBackward4 axis site))
 
 forwardDifferenceRespectsPointwise : ∀ axis {left right} →
   (∀ site → left site ≡ right site) →
@@ -173,9 +167,7 @@ axisAverageAdd left right axis site =
   trans
     (cong (quarter *_) (physicalFibreSumAdd
       left right axis (axisTransverse axis site)))
-    (ℚRing.solve-∀
-      (physicalFibreSum left axis (axisTransverse axis site))
-      (physicalFibreSum right axis (axisTransverse axis site)))
+    (ℚRing.solve-∀)
 
 axisAverageScale : ∀ coefficient field axis site →
   axisAverage4 (scaleSiteField coefficient field) axis site
@@ -184,9 +176,7 @@ axisAverageScale coefficient field axis site =
   trans
     (cong (quarter *_) (physicalFibreSumScale
       coefficient field axis (axisTransverse axis site)))
-    (ℚRing.solve-∀
-      quarter coefficient
-      (physicalFibreSum field axis (axisTransverse axis site)))
+    (ℚRing.solve-∀)
 
 average0Add : ∀ left right site →
   average0 (addSiteField left right) site
@@ -282,14 +272,6 @@ scalarPlaneCurlAdd plane left right site
     (positivePlaneSecond plane) (left (positivePlaneFirst plane))
       (right (positivePlaneFirst plane)) site =
   ℚRing.solve-∀
-    (forwardDifference4 (positivePlaneFirst plane)
-      (left (positivePlaneSecond plane)) site)
-    (forwardDifference4 (positivePlaneFirst plane)
-      (right (positivePlaneSecond plane)) site)
-    (forwardDifference4 (positivePlaneSecond plane)
-      (left (positivePlaneFirst plane)) site)
-    (forwardDifference4 (positivePlaneSecond plane)
-      (right (positivePlaneFirst plane)) site)
 
 scalarPlaneCurlScale : ∀ coefficient plane field site →
   scalarPlaneCurl plane (scaleScalarBond coefficient field) site
@@ -300,11 +282,6 @@ scalarPlaneCurlScale coefficient plane field site
         | forwardDifferenceScale coefficient
     (positivePlaneSecond plane) (field (positivePlaneFirst plane)) site =
   ℚRing.solve-∀
-    coefficient
-    (forwardDifference4 (positivePlaneFirst plane)
-      (field (positivePlaneSecond plane)) site)
-    (forwardDifference4 (positivePlaneSecond plane)
-      (field (positivePlaneFirst plane)) site)
 
 scalarPlaneCurlRespectsPointwise : ∀ plane {left right} →
   (∀ axis site → left axis site ≡ right axis site) →
@@ -358,9 +335,7 @@ planeWilsonContributionAdd plane01 left right zeroᵢ site =
 planeWilsonContributionAdd plane01 left right (sucᵢ zeroᵢ) site =
   trans
     (cong -_ (backwardCurlAdd axis0 plane01 left right site))
-    (ℚRing.solve-∀
-      (backwardDifference4 axis0 (scalarPlaneCurl plane01 left) site)
-      (backwardDifference4 axis0 (scalarPlaneCurl plane01 right) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionAdd plane01 left right (sucᵢ (sucᵢ zeroᵢ)) site =
   ℚRing.solve-∀
 planeWilsonContributionAdd plane01 left right
@@ -373,9 +348,7 @@ planeWilsonContributionAdd plane02 left right (sucᵢ zeroᵢ) site =
 planeWilsonContributionAdd plane02 left right (sucᵢ (sucᵢ zeroᵢ)) site =
   trans
     (cong -_ (backwardCurlAdd axis0 plane02 left right site))
-    (ℚRing.solve-∀
-      (backwardDifference4 axis0 (scalarPlaneCurl plane02 left) site)
-      (backwardDifference4 axis0 (scalarPlaneCurl plane02 right) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionAdd plane02 left right
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   ℚRing.solve-∀
@@ -389,9 +362,7 @@ planeWilsonContributionAdd plane03 left right
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   trans
     (cong -_ (backwardCurlAdd axis0 plane03 left right site))
-    (ℚRing.solve-∀
-      (backwardDifference4 axis0 (scalarPlaneCurl plane03 left) site)
-      (backwardDifference4 axis0 (scalarPlaneCurl plane03 right) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionAdd plane12 left right zeroᵢ site =
   ℚRing.solve-∀
 planeWilsonContributionAdd plane12 left right (sucᵢ zeroᵢ) site =
@@ -399,9 +370,7 @@ planeWilsonContributionAdd plane12 left right (sucᵢ zeroᵢ) site =
 planeWilsonContributionAdd plane12 left right (sucᵢ (sucᵢ zeroᵢ)) site =
   trans
     (cong -_ (backwardCurlAdd axis1 plane12 left right site))
-    (ℚRing.solve-∀
-      (backwardDifference4 axis1 (scalarPlaneCurl plane12 left) site)
-      (backwardDifference4 axis1 (scalarPlaneCurl plane12 right) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionAdd plane12 left right
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   ℚRing.solve-∀
@@ -415,9 +384,7 @@ planeWilsonContributionAdd plane13 left right
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   trans
     (cong -_ (backwardCurlAdd axis1 plane13 left right site))
-    (ℚRing.solve-∀
-      (backwardDifference4 axis1 (scalarPlaneCurl plane13 left) site)
-      (backwardDifference4 axis1 (scalarPlaneCurl plane13 right) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionAdd plane23 left right zeroᵢ site =
   ℚRing.solve-∀
 planeWilsonContributionAdd plane23 left right (sucᵢ zeroᵢ) site =
@@ -428,9 +395,7 @@ planeWilsonContributionAdd plane23 left right
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   trans
     (cong -_ (backwardCurlAdd axis2 plane23 left right site))
-    (ℚRing.solve-∀
-      (backwardDifference4 axis2 (scalarPlaneCurl plane23 left) site)
-      (backwardDifference4 axis2 (scalarPlaneCurl plane23 right) site))
+    (ℚRing.solve-∀)
 
 planeWilsonContributionScale : ∀ coefficient plane field axis site →
   planeWilsonContribution plane (scaleScalarBond coefficient field) axis site
@@ -440,70 +405,65 @@ planeWilsonContributionScale coefficient plane01 field zeroᵢ site =
 planeWilsonContributionScale coefficient plane01 field (sucᵢ zeroᵢ) site =
   trans
     (cong -_ (backwardCurlScale coefficient axis0 plane01 field site))
-    (ℚRing.solve-∀ coefficient
-      (backwardDifference4 axis0 (scalarPlaneCurl plane01 field) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionScale coefficient plane01 field
     (sucᵢ (sucᵢ zeroᵢ)) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane01 field
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane02 field zeroᵢ site =
   backwardCurlScale coefficient axis2 plane02 field site
 planeWilsonContributionScale coefficient plane02 field (sucᵢ zeroᵢ) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane02 field
     (sucᵢ (sucᵢ zeroᵢ)) site =
   trans
     (cong -_ (backwardCurlScale coefficient axis0 plane02 field site))
-    (ℚRing.solve-∀ coefficient
-      (backwardDifference4 axis0 (scalarPlaneCurl plane02 field) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionScale coefficient plane02 field
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane03 field zeroᵢ site =
   backwardCurlScale coefficient axis3 plane03 field site
 planeWilsonContributionScale coefficient plane03 field (sucᵢ zeroᵢ) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane03 field
     (sucᵢ (sucᵢ zeroᵢ)) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane03 field
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   trans
     (cong -_ (backwardCurlScale coefficient axis0 plane03 field site))
-    (ℚRing.solve-∀ coefficient
-      (backwardDifference4 axis0 (scalarPlaneCurl plane03 field) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionScale coefficient plane12 field zeroᵢ site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane12 field (sucᵢ zeroᵢ) site =
   backwardCurlScale coefficient axis2 plane12 field site
 planeWilsonContributionScale coefficient plane12 field
     (sucᵢ (sucᵢ zeroᵢ)) site =
   trans
     (cong -_ (backwardCurlScale coefficient axis1 plane12 field site))
-    (ℚRing.solve-∀ coefficient
-      (backwardDifference4 axis1 (scalarPlaneCurl plane12 field) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionScale coefficient plane12 field
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane13 field zeroᵢ site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane13 field (sucᵢ zeroᵢ) site =
   backwardCurlScale coefficient axis3 plane13 field site
 planeWilsonContributionScale coefficient plane13 field
     (sucᵢ (sucᵢ zeroᵢ)) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane13 field
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   trans
     (cong -_ (backwardCurlScale coefficient axis1 plane13 field site))
-    (ℚRing.solve-∀ coefficient
-      (backwardDifference4 axis1 (scalarPlaneCurl plane13 field) site))
+    (ℚRing.solve-∀)
 planeWilsonContributionScale coefficient plane23 field zeroᵢ site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane23 field (sucᵢ zeroᵢ) site =
-  ℚRing.solve-∀ coefficient
+  ℚRing.solve-∀
 planeWilsonContributionScale coefficient plane23 field
     (sucᵢ (sucᵢ zeroᵢ)) site =
   backwardCurlScale coefficient axis3 plane23 field site
@@ -511,8 +471,7 @@ planeWilsonContributionScale coefficient plane23 field
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) site =
   trans
     (cong -_ (backwardCurlScale coefficient axis2 plane23 field site))
-    (ℚRing.solve-∀ coefficient
-      (backwardDifference4 axis2 (scalarPlaneCurl plane23 field) site))
+    (ℚRing.solve-∀)
 
 planeWilsonContributionRespectsPointwise :
   ∀ plane {left right} →
@@ -765,15 +724,7 @@ literalNegativeForwardGradientAdd left right component (pair site axis) =
             DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact.lie3Component
               component (right current))
           site)))
-    (ℚRing.solve-∀
-      (forwardDifference4 axis
-        (λ current →
-          DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact.lie3Component
-            component (left current)) site)
-      (forwardDifference4 axis
-        (λ current →
-          DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact.lie3Component
-            component (right current)) site))
+    (ℚRing.solve-∀)
 
 literalNegativeForwardGradientScale : ∀ coefficient field component bond →
   literalNegativeForwardGradient (scaleLie3Field coefficient field) component bond
@@ -790,11 +741,7 @@ literalNegativeForwardGradientScale coefficient field component (pair site axis)
             DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact.lie3Component
               component (field current))
           site)))
-    (ℚRing.solve-∀ coefficient
-      (forwardDifference4 axis
-        (λ current →
-          DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact.lie3Component
-            component (field current)) site))
+    (ℚRing.solve-∀)
 
 literalNegativeForwardGradientRespectsPointwise :
   ∀ {left right} →
@@ -901,13 +848,7 @@ configuredGaugeFixedMatrixAdd left right component bond =
           (literalGaugePenaltyAdd left right component bond)
           (fineProjectionAdd left right component bond)))
       (trans
-        (ℚRing.solve-∀
-          (literalWilsonOperator left component bond)
-          (literalWilsonOperator right component bond)
-          (literalGaugePenalty left component bond)
-          (literalGaugePenalty right component bond)
-          (fineProjection left component bond)
-          (fineProjection right component bond))
+        (ℚRing.solve-∀)
         (cong₂ _+_
           (sym (configuredGaugeFixedMatrixPointwise left component bond))
           (sym (configuredGaugeFixedMatrixPointwise right component bond)))))
@@ -926,10 +867,7 @@ configuredGaugeFixedMatrixScale coefficient tangent component bond =
           (literalGaugePenaltyScale coefficient tangent component bond)
           (fineProjectionScale coefficient tangent component bond)))
       (trans
-        (ℚRing.solve-∀ coefficient
-          (literalWilsonOperator tangent component bond)
-          (literalGaugePenalty tangent component bond)
-          (fineProjection tangent component bond))
+        (ℚRing.solve-∀)
         (cong (coefficient *_)
           (sym (configuredGaugeFixedMatrixPointwise tangent component bond)))))
 
@@ -956,12 +894,11 @@ configuredGaugeFixedMatrixZero component bond =
   trans
     (configuredGaugeFixedMatrixRespectsPointwise
       (λ current currentBond →
-        ℚRing.solve-∀ (zeroPhysical current currentBond))
+        ℚRing.solve-∀)
       component bond)
     (trans
       (configuredGaugeFixedMatrixScale 0ℚ zeroPhysical component bond)
-      (ℚRing.solve-∀
-        (configuredGaugeFixedMatrix zeroPhysical component bond)))
+      (ℚRing.solve-∀))
 
 ------------------------------------------------------------------------
 -- Finite basis expansion and literal matrix action.
@@ -1027,9 +964,7 @@ basisExpansionPointwise tangent component bond =
             physicalFiniteRationalCoordinates
             (pair component bond) column
           * tangentToCoordinateVector tangent column)
-        (λ column → ℚRing.solve-∀
-          (tangentToCoordinateVector tangent column)
-          (coordinateBasisTangent column component bond)))
+        (λ column → ℚRing.solve-∀))
       (DASHI.Physics.YangMills.BalabanConstructiveRationalMatrixInverseExact.deltaActsAsIdentity
         physicalFiniteRationalCoordinates
         (tangentToCoordinateVector tangent)
@@ -1054,10 +989,7 @@ configuredMatrixActsExactly tangent (pair component bond) =
         tangentToCoordinateVector tangent column
         * configuredGaugeFixedMatrix
           (coordinateBasisTangent column) component bond)
-      (λ column → ℚRing.solve-∀
-        (configuredGaugeFixedMatrix
-          (coordinateBasisTangent column) component bond)
-        (tangentToCoordinateVector tangent column)))
+      (λ column → ℚRing.solve-∀))
     (trans
       (sumRationalCong
         (coordinates physicalFiniteRationalCoordinates)

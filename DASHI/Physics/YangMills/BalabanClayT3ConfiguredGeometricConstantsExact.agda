@@ -66,8 +66,7 @@ configuredTotalCoefficient =
 
 configuredTotalCoefficientExact :
   configuredTotalCoefficient ≡ twoHundredFiftySixℚ
-configuredTotalCoefficientExact = ℚRing.solve
-
+configuredTotalCoefficientExact = ℚRing.solve []
 ------------------------------------------------------------------------
 -- Literal four-dimensional incidence data.
 ------------------------------------------------------------------------

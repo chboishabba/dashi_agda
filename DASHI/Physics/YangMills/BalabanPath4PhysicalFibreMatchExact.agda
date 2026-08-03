@@ -52,11 +52,11 @@ isolateFourthFromZero : ∀ a b c d →
 isolateFourthFromZero a b c d total =
   let
     isolate : d ≡ (a + (b + (c + (d + 0ℚ)))) - (a + (b + c))
-    isolate = ℚRing.solve-∀ a b c d
+    isolate = ℚRing.solve-∀
 
     zeroReduction :
       0ℚ - (a + (b + c)) ≡ - (a + (b + c))
-    zeroReduction = ℚRing.solve-∀ a b c
+    zeroReduction = ℚRing.solve-∀
   in
   trans isolate
     (trans
@@ -114,11 +114,7 @@ physicalFibre4NormMatchesGenerated field axis transverse =
         + (sq fourth + 0ℚ)))
         ≡ path4NormSq (path4CoordinatesFromPhysicalFibre field axis transverse))
       (physicalFourthCoordinateIsGeneratedLast field axis transverse)
-      (ℚRing.solve-∀
-        (physicalFibre4Coordinate field axis transverse index0)
-        (physicalFibre4Coordinate field axis transverse index1)
-        (physicalFibre4Coordinate field axis transverse index2)
-        (lastCoordinate (path4CoordinatesFromPhysicalFibre field axis transverse))))
+      (ℚRing.solve-∀))
 
 physicalFibre4EnergyMatchesGenerated :
   ∀ field axis transverse →
@@ -141,11 +137,7 @@ physicalFibre4EnergyMatchesGenerated field axis transverse =
           + 0ℚ))
         ≡ path4Energy (path4CoordinatesFromPhysicalFibre field axis transverse))
       (physicalFourthCoordinateIsGeneratedLast field axis transverse)
-      (ℚRing.solve-∀
-        (physicalFibre4Coordinate field axis transverse index0)
-        (physicalFibre4Coordinate field axis transverse index1)
-        (physicalFibre4Coordinate field axis transverse index2)
-        (lastCoordinate (path4CoordinatesFromPhysicalFibre field axis transverse))))
+      (ℚRing.solve-∀))
 
 physicalSide4FibrePoincare :
   ∀ field axis transverse →

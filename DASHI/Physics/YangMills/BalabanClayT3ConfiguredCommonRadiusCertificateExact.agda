@@ -33,13 +33,11 @@ configuredHalfReference = + 1 / 8
 configuredHalfReferenceExact :
   configuredHalfReference + configuredHalfReference
   ≡ configuredReferenceCoercivity
-configuredHalfReferenceExact = ℚRing.solve
-
+configuredHalfReferenceExact = ℚRing.solve []
 configuredRadiusBudgetExact :
   Constants.configuredTotalCoefficient * configuredRadius
   ≡ configuredHalfReference
-configuredRadiusBudgetExact = ℚRing.solve
-
+configuredRadiusBudgetExact = ℚRing.solve []
 configuredRadiusBudgetScaledExact : ∀ norm →
   (Constants.configuredTotalCoefficient * configuredRadius) * norm
   ≡ configuredHalfReference * norm

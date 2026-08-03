@@ -128,14 +128,7 @@ literalDivergencePairingComponentFold tangent gauge =
           literalPeriodicDivergenceScalar
             (componentScalarBondField tangent component3) site * z (gauge site))))
     (sumRationalCong (physicalBlockSites side4) _ _
-      (λ site → ℚRing.solve-∀
-        (literalPeriodicDivergenceScalar
-          (componentScalarBondField tangent component1) site)
-        (literalPeriodicDivergenceScalar
-          (componentScalarBondField tangent component2) site)
-        (literalPeriodicDivergenceScalar
-          (componentScalarBondField tangent component3) site)
-        (x (gauge site)) (y (gauge site)) (z (gauge site))))
+      (λ site → ℚRing.solve-∀))
 
 periodicDivergenceGradientAdjointSU2 : ∀ tangent gauge →
   physicalTangentInner tangent (literalNegativeForwardGradient gauge)
@@ -205,24 +198,6 @@ literalCurlNormSqComponentExpansion : ∀ tangent plane site →
     + componentCurlTerm tangent component3 plane site)
 literalCurlNormSqComponentExpansion tangent plane site =
   ℚRing.solve-∀
-    (forwardDifference4 (positivePlaneFirst plane)
-      (componentScalarBondField tangent component1
-        (positivePlaneSecond plane)) site)
-    (forwardDifference4 (positivePlaneSecond plane)
-      (componentScalarBondField tangent component1
-        (positivePlaneFirst plane)) site)
-    (forwardDifference4 (positivePlaneFirst plane)
-      (componentScalarBondField tangent component2
-        (positivePlaneSecond plane)) site)
-    (forwardDifference4 (positivePlaneSecond plane)
-      (componentScalarBondField tangent component2
-        (positivePlaneFirst plane)) site)
-    (forwardDifference4 (positivePlaneFirst plane)
-      (componentScalarBondField tangent component3
-        (positivePlaneSecond plane)) site)
-    (forwardDifference4 (positivePlaneSecond plane)
-      (componentScalarBondField tangent component3
-        (positivePlaneFirst plane)) site)
 
 literalCurlEnergyComponentFold : ∀ tangent →
   Plaquette.literalDiscreteCurlEnergy tangent
@@ -261,12 +236,6 @@ literalDivergenceNormSqComponentExpansion : ∀ tangent site →
     + componentDivergenceSq tangent component3 site)
 literalDivergenceNormSqComponentExpansion tangent site =
   ℚRing.solve-∀
-    (literalPeriodicDivergenceScalar
-      (componentScalarBondField tangent component1) site)
-    (literalPeriodicDivergenceScalar
-      (componentScalarBondField tangent component2) site)
-    (literalPeriodicDivergenceScalar
-      (componentScalarBondField tangent component3) site)
 
 literalDivergenceEnergyComponentFold : ∀ tangent →
   literalGaugeFixingEnergy tangent
@@ -305,13 +274,7 @@ discreteCurlDivergenceHodgeIdentity tangent =
       (literalCurlEnergyComponentFold tangent)
       (literalDivergenceEnergyComponentFold tangent))
     (trans
-      (ℚRing.solve-∀
-        (componentCurlEnergy (componentScalarBondField tangent component1))
-        (componentCurlEnergy (componentScalarBondField tangent component2))
-        (componentCurlEnergy (componentScalarBondField tangent component3))
-        (componentDivergenceEnergy (componentScalarBondField tangent component1))
-        (componentDivergenceEnergy (componentScalarBondField tangent component2))
-        (componentDivergenceEnergy (componentScalarBondField tangent component3)))
+      (ℚRing.solve-∀)
       (cong₂ _+_
         (componentDiscreteCurlDivergenceHodgeIdentity
           (componentScalarBondField tangent component1))

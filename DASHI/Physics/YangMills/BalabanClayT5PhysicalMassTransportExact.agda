@@ -61,15 +61,12 @@ gapAtDepthBelowInitialPlusDefects :
 gapAtDepthBelowInitialPlusDefects dataSet zero =
   subst
     (λ right → physicalGap dataSet zero ≤ right)
-    (ℚRing.solve-∀ (physicalGap dataSet zero))
+    (ℚRing.solve-∀)
     (reflexive dataSet (physicalGap dataSet zero))
 gapAtDepthBelowInitialPlusDefects dataSet (suc depth) =
   subst
     (λ right → physicalGap dataSet (suc depth) ≤ right)
-    (ℚRing.solve-∀
-      (physicalGap dataSet zero)
-      (partialDefect dataSet depth)
-      (defect dataSet depth))
+    (ℚRing.solve-∀)
     (transitive dataSet
       (oneStepInterlacing dataSet depth)
       (addMonotone dataSet

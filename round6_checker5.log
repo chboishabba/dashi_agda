@@ -1,0 +1,278 @@
+Logging Agda output to: /home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check-20260803-162005-DASHI__Physics__YangMills__BalabanClayGate4SevenGroupResearchAuditExact.agda-plus-86.log
+Checking: DASHI/Physics/YangMills/BalabanClayGate4SevenGroupResearchAuditExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4CMP109ProjectedEndpointBlocksExact.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4CMP109LiteralIdentificationAssemblyExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4LocalityFrechetSupportExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4CMP109ConstantWeightSchurExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteWeightedSchurCertificateExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4KochWittwerContractionResidualExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiveChannelSumSelfAdjointExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4T3FiveChannelSumReuseExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4PeriodicTreeGaugeCoordinatesExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4PeriodicTreeGaugeFiniteBasisExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4T3TreeGaugeSpectralDeterminantExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4HRBetaHalfRemainderDominanceExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4CMP109PrintedPathFormulaExact.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4PeriodicPathWordExact.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4PeriodicWordPathConstructionExact.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4CMP109PrintedMapInstantiationExact.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteHolonomyDerivativeExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4SU2DexpInverseClosedFormExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4CMP109SupportOverlapCompletionExact.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteWeightedAdjointFubiniExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteWeightedAdjointFormulaExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteWeightedSchurCertificateCompletionExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4SpanningTreeGaugeSliceExact.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4PeriodicTreeGaugeCanonicalFreeBasisExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4PeriodicTreeGaugeSU2FreeBasisExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteCoordinateMatrixEquivalenceExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteCoordinateMatrixCompositionExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteDeterminantFactorizationExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteSimilaritySpectrumDeterminantExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteSpectrumDeterminantCompletionExact.agda
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteProofEngineeringCompletionLedger.agda
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+
+———— All done; warnings encountered ————————————————————————
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+Checking: DASHI/Physics/YangMills/BalabanClayGate4FiniteProofEngineeringValidation.agda
+( 54/695) Checking DASHI.Physics.YangMills.BalabanClayBranchHeadReceiptSurface (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayBranchHeadReceiptSurface.agda).
+( 59/695) Checking DASHI.Physics.YangMills.BalabanClayGate4PlaquetteDerivativeCombinatoricsExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4PlaquetteDerivativeCombinatoricsExact.agda).
+( 65/695) Checking DASHI.Physics.YangMills.BalabanClayGate4CombinedRGUVIterationExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4CombinedRGUVIterationExact.agda).
+( 74/695) Checking DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4DimockLargeFieldSuppressionExact.agda).
+( 77/695) Checking DASHI.Physics.YangMills.BalabanClayGate4Attachment252MechanismAuditExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4Attachment252MechanismAuditExact.agda).
+( 82/695) Checking DASHI.Physics.YangMills.BalabanClayNumericalIngredientDependencyAuditExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayNumericalIngredientDependencyAuditExact.agda).
+( 91/695) Checking DASHI.Physics.YangMills.BalabanClayGate4OscillationAnimalInfluenceExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4OscillationAnimalInfluenceExact.agda).
+( 81/695) Checking DASHI.Physics.YangMills.BalabanClayGate4BackgroundPropagatorDecayTheoremsExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4BackgroundPropagatorDecayTheoremsExact.agda).
+( 85/695) Checking DASHI.Physics.YangMills.BalabanClayGate4GaugeCubicTaylorRemainderSumExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4GaugeCubicTaylorRemainderSumExact.agda).
+(102/695) Checking DASHI.Physics.YangMills.BalabanClayGate4July2026ResearchUpdateExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateExact.agda).
+(118/695) Checking DASHI.Physics.YangMills.BalabanClayGate4July2026ResearchUpdateLedger (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateLedger.agda).
+(118/695) Checking DASHI.Physics.YangMills.BalabanClayGate4July2026ResearchUpdateExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4July2026ResearchUpdateExact.agda).
+(288/695) Checking DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4CMP109ShortestContourEnumerationExact.agda).
+(290/695) Checking DASHI.Physics.YangMills.BalabanClayGate4NearContractionSummableSlackExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4NearContractionSummableSlackExact.agda).
+(287/695) Checking DASHI.Physics.YangMills.BalabanClayGate4AnalyticityRadiusCouplingControlExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4AnalyticityRadiusCouplingControlExact.agda).
+(296/695) Checking DASHI.Physics.YangMills.BalabanClayGate4SeriesLipschitzAssemblyExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4SeriesLipschitzAssemblyExact.agda).
+(311/695) Checking DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4QuantitativeImplicitFunctionCommonExact.agda).
+(293/695) Checking DASHI.Physics.YangMills.BalabanClayGate4HRBetaLocalToUniformExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4HRBetaLocalToUniformExact.agda).
+(321/695) Checking DASHI.Physics.YangMills.BalabanClayGate4TreeBackgroundSliceTransitionExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4TreeBackgroundSliceTransitionExact.agda).
+(358/695) Checking DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayT5PhysicalMeasureGramContinuityExact.agda).
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4FiniteEnlargementCollarOwnershipExact.agda:166.20-29: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+badComponentRegion component
+(410/695) Checking DASHI.Physics.YangMills.BalabanClayGate4CMP109ContourMultiplicityExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4CMP109ContourMultiplicityExact.agda).
+(410/695) Checking DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4CMP109ShortestContourEnumerationExact.agda).
+(523/695) Checking DASHI.Physics.YangMills.BalabanClayT5PhysicalRootedShellInjectionExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayT5PhysicalRootedShellInjectionExact.agda).
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:1259.51-62: warning: -W[no]UserWarning
+Warning: <-transʳ was deprecated in v2.0. Please use ≤-<-trans instead. 
+when scope checking ℕP.<-transʳ
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:1327.58-69: warning: -W[no]UserWarning
+Warning: <-transʳ was deprecated in v2.0. Please use ≤-<-trans instead. 
+when scope checking ℕP.<-transʳ
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:1329.69-80: warning: -W[no]UserWarning
+Warning: <-transʳ was deprecated in v2.0. Please use ≤-<-trans instead. 
+when scope checking ℕP.<-transʳ
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:1333.46-57: warning: -W[no]UserWarning
+Warning: <-transʳ was deprecated in v2.0. Please use ≤-<-trans instead. 
+when scope checking ℕP.<-transʳ
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:1842.31-42: warning: -W[no]UserWarning
+Warning: <-transʳ was deprecated in v2.0. Please use ≤-<-trans instead. 
+when scope checking ℕP.<-transʳ
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:1908.72-83: warning: -W[no]UserWarning
+Warning: <-transʳ was deprecated in v2.0. Please use ≤-<-trans instead. 
+when scope checking ℕP.<-transʳ
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:1908.102-113: warning: -W[no]UserWarning
+Warning: <-transˡ was deprecated in v2.0. Please use <-≤-trans instead. 
+when scope checking ℕP.<-transˡ
+
+/home/c/.cache/dashi-agda29/dashi-shadow/vendor/bishop/Sequence.agda:2206.62-73: warning: -W[no]UserWarning
+Warning: ↥[p/q]≡p was deprecated in v2.0.
+Please use ↥[n/d]≡n instead.
+when scope checking ℚP.↥[p/q]≡p
+(537/695) Checking DASHI.Physics.YangMills.BalabanClayT5PhysicalMassTransportExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayT5PhysicalMassTransportExact.agda).
+(535/695) Checking DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayT5MarkedFernandezProcacciExact.agda).
+(536/695) Checking DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayT5ConfiguredGeometricTailExact.agda).
+(533/695) Checking DASHI.Physics.YangMills.BalabanClayGate4BlockAveragingResidualSummabilityExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4BlockAveragingResidualSummabilityExact.agda).
+
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.agda:218.31-40: warning: -W[no]PatternShadowsConstructor
+The pattern variable component has the same name as the constructor
+Geometry.component
+when checking the clause left hand side
+literalBadComponentAgreesWithLargeFieldReachability dataSet scale
+  configuration
+  component
+  block
+(580/695) Checking DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact.agda).
+(589/695) Checking DASHI.Physics.YangMills.BalabanClayGate4P0RunningCompatibilityAuditExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4P0RunningCompatibilityAuditExact.agda).
+(580/695) Checking DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationExact (/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4CMP109ShortestContourEnumerationExact.agda).
+/home/c/.cache/dashi-agda29/dashi-shadow/DASHI/Physics/YangMills/BalabanClayGate4P0RunningCompatibilityAuditExact.agda:29.3-63: error: [Syntax.WrongContentBlock]
+A data definition can only contain type signatures, possibly under
+keyword instance
+when scope checking the declaration
+  import DASHI.Physics.YangMills.BalabanClayGate4P0RunningCompatibilityAuditExact
+Agda failed for: DASHI/Physics/YangMills/BalabanClayGate4FiniteProofEngineeringValidation.agda

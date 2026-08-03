@@ -35,18 +35,15 @@ configuredGainFactor = (+ 1 / 2) * configuredBadChordalRadiusSq
 configuredBadRadiusSquareExact :
   configuredBadChordalRadius * configuredBadChordalRadius
   ≡ configuredBadChordalRadiusSq
-configuredBadRadiusSquareExact = ℚRing.solve
-
+configuredBadRadiusSquareExact = ℚRing.solve []
 configuredGainFactorExact : configuredGainFactor ≡ + 1 / 32
-configuredGainFactorExact = ℚRing.solve
-
+configuredGainFactorExact = ℚRing.solve []
 configuredLocalWilsonGapAtThreshold : ℚ
 configuredLocalWilsonGapAtThreshold = configuredGainFactor * configuredBetaThreshold
 
 configuredLocalGapFillsActionSlot :
   configuredLocalWilsonGapAtThreshold ≡ Budget.configuredActionGain
-configuredLocalGapFillsActionSlot = ℚRing.solve
-
+configuredLocalGapFillsActionSlot = ℚRing.solve []
 configuredGainFactorNonnegative : 0ℚ ≤ configuredGainFactor
 configuredGainFactorNonnegative = ℚP.≤ᵇ⇒≤ tt
 

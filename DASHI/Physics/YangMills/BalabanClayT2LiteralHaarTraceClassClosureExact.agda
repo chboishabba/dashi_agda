@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT2LiteralHaarTraceClassClosureExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_; _≤ᵇ_; _/_)
@@ -31,8 +31,7 @@ configuredSixtyFourLinkHaarUpper = + 1 / 1024
 configuredHaarSumExact :
   (+ 64 / 1) * configuredSingleLinkHaarUpper
   ≡ configuredSixtyFourLinkHaarUpper
-configuredHaarSumExact = ℚRing.solve
-
+configuredHaarSumExact = ℚRing.solve []
 configuredHaarBelowOneSixteenth :
   configuredSixtyFourLinkHaarUpper ≤ + 1 / 16
 configuredHaarBelowOneSixteenth = ℚP.≤ᵇ⇒≤ tt
@@ -45,8 +44,7 @@ configuredTraceLogQuarter = + 1 / 4
 configuredTraceRatioExact :
   configuredTraceEighth / (+ 1 / 1 - configuredOperatorHalf)
   ≡ configuredTraceLogQuarter
-configuredTraceRatioExact = ℚRing.solve
-
+configuredTraceRatioExact = ℚRing.solve []
 sumℚ : List ℚ → ℚ
 sumℚ [] = 0ℚ
 sumℚ (x ∷ xs) = x + sumℚ xs

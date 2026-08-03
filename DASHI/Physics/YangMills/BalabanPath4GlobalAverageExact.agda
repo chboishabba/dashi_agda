@@ -60,7 +60,7 @@ average01Explicit field x0 x1 x2 x3 =
       (cong (quarter *_)
         (sumRationalScale quarter (allCyclicIndices four)
           (λ coordinate → sum0 field coordinate x2 x3)))
-      (ℚRing.solve-∀ quarter (sum10 field x2 x3)))
+      (ℚRing.solve-∀))
 
 average012Explicit : ∀ field x0 x1 x2 x3 →
   average012 field (pair (pair x0 x1) (pair x2 x3))
@@ -75,7 +75,7 @@ average012Explicit field x0 x1 x2 x3 =
       (cong (quarter *_)
         (sumRationalScale quarter2 (allCyclicIndices four)
           (λ coordinate → sum10 field coordinate x3)))
-      (ℚRing.solve-∀ quarter (sum210 field x3)))
+      (ℚRing.solve-∀))
 
 average0123Explicit : ∀ field x0 x1 x2 x3 →
   average0123 field (pair (pair x0 x1) (pair x2 x3))
@@ -90,7 +90,7 @@ average0123Explicit field x0 x1 x2 x3 =
       (cong (quarter *_)
         (sumRationalScale quarter3 (allCyclicIndices four)
           (sum210 field)))
-      (ℚRing.solve-∀ quarter (reverseSiteSum field)))
+      (ℚRing.solve-∀))
 
 ------------------------------------------------------------------------
 -- Reverse the four finite sums by six adjacent Fubini swaps.

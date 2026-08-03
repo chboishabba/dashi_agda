@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4BlockAveragingResidualSummabilityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _/_)
@@ -41,8 +42,7 @@ four = + 4 / 1
 half = + 1 / 2
 
 fourTimesOneEighth : four * oneEighth ≡ half
-fourTimesOneEighth = ℚRing.solve
-
+fourTimesOneEighth = ℚRing.solve []
 powEighth : Nat → ℚ
 powEighth zero = 1ℚ
 powEighth (suc scale) = oneEighth * powEighth scale
@@ -115,9 +115,7 @@ weightedResidualStepBelowHalf :
 weightedResidualStepBelowHalf dataSet scale =
   subst
     (λ upper → weightedResidual dataSet (suc scale) ≤ upper)
-    (ℚRing.solve-∀
-      (residualEnvelope dataSet scale)
-      (powEighth scale))
+    (ℚRing.solve-∀)
     (multiplyMonotoneNonnegative dataSet
       (residualNonnegative dataSet (suc scale))
       (fourResidualNonnegative dataSet scale)

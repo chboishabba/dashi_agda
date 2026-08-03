@@ -213,8 +213,6 @@ fibreMultiplicityFour field axis predecessor transverse =
           current currentAxis currentPredecessor currentTransverse)
   lengthFour current currentAxis currentPredecessor currentTransverse
     rewrite lengthAllCyclicIndices side4 = ℚRing.solve-∀
-      (sq (edgeDifferenceAtTransverse
-        current currentAxis currentPredecessor currentTransverse))
 
 globalEdgeDifferenceNormFourfold : ∀ field axis predecessor →
   globalNormSq (edgeDifferenceField field axis predecessor)

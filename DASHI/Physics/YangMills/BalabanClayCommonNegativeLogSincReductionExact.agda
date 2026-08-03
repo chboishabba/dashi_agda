@@ -30,8 +30,7 @@ sixFifths = + 6 / 5
 
 sixFifthsTimesOneSixth :
   sixFifths * oneSixth ≡ oneFifth
-sixFifthsTimesOneSixth = ℚRing.solve
-
+sixFifthsTimesOneSixth = ℚRing.solve []
 record NegativeLogSincReductionData (Point Scalar : Set) : Set₁ where
   field
     zero one : Scalar

@@ -22,7 +22,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
@@ -53,6 +53,10 @@ sumToNonnegative values (suc cutoff) pointwise =
     (pointwise (suc cutoff))
     (sumToNonnegative values cutoff pointwise)
 
+scaleSumAux : ∀ scale p s →
+  scale * p + scale * s ≡ scale * (p + s)
+scaleSumAux scale p s = solve (scale ∷ p ∷ s ∷ [])
+
 scaleSum : ∀ scale values cutoff →
   sumTo (λ index → scale * values index) cutoff
   ≡ scale * sumTo values cutoff
@@ -64,10 +68,15 @@ scaleSum scale values (suc cutoff) =
        (λ rest → scale * values (suc cutoff) + rest)
        (scaleSum scale values cutoff) ⟩
     scale * values (suc cutoff) + scale * sumTo values cutoff
-  ≡⟨ solve
-       (scale ∷ values (suc cutoff) ∷ sumTo values cutoff ∷ []) ⟩
+  ≡⟨ scaleSumAux scale (values (suc cutoff)) (sumTo values cutoff) ⟩
+    scale * (values (suc cutoff) + sumTo values cutoff)
+  ≡⟨ refl ⟩
     scale * sumTo values (suc cutoff)
   ∎
+
+rightScaleSumAux : ∀ p s scale →
+  p * scale + s * scale ≡ (p + s) * scale
+rightScaleSumAux p s scale = solve (p ∷ s ∷ scale ∷ [])
 
 rightScaleSum : ∀ values scale cutoff →
   sumTo (λ index → values index * scale) cutoff
@@ -80,8 +89,9 @@ rightScaleSum values scale (suc cutoff) =
        (λ rest → values (suc cutoff) * scale + rest)
        (rightScaleSum values scale cutoff) ⟩
     values (suc cutoff) * scale + sumTo values cutoff * scale
-  ≡⟨ solve
-       (values (suc cutoff) ∷ sumTo values cutoff ∷ scale ∷ []) ⟩
+  ≡⟨ rightScaleSumAux (values (suc cutoff)) (sumTo values cutoff) scale ⟩
+    (values (suc cutoff) + sumTo values cutoff) * scale
+  ≡⟨ refl ⟩
     sumTo values (suc cutoff) * scale
   ∎
 
@@ -228,7 +238,7 @@ factorProductBound K lowCutoff gapCutoff =
     firstStep =
       let
         instance
-          gapSumIsNonnegative = ℚₚ.nonNegative gapSumNonnegative
+          gapSumIsNonnegative = nonNegative gapSumNonnegative
       in
       ℚₚ.*-monoʳ-≤-nonNeg
         (sumTo (gapFactor K) gapCutoff)
@@ -241,7 +251,7 @@ factorProductBound K lowCutoff gapCutoff =
       let
         instance
           fourThirdsIsNonnegative =
-            ℚₚ.nonNegative Geo.fourThirdsNonnegative
+            nonNegative Geo.fourThirdsNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         Geo.fourThirds
@@ -282,8 +292,12 @@ canonicalKernelNonnegative lowShell gap =
       Geo.powNonnegative
         Geo.thirtySecond gap Geo.thirtySecondNonnegative
     instance
-      lowIsNonnegative = ℚₚ.nonNegative lowNonnegative
-      gapIsNonnegative = ℚₚ.nonNegative gapNonnegative
+      lowIsNonnegative = nonNegative lowNonnegative
+      gapIsNonnegative = nonNegative gapNonnegative
+      productIsNonnegative =
+        ℚₚ.nonNeg*nonNeg⇒nonNeg
+          (Geo.pow Geo.quarter lowShell)
+          (Geo.pow Geo.thirtySecond gap)
   in
   ℚₚ.nonNegative⁻¹
     (Geo.pow Geo.quarter lowShell * Geo.pow Geo.thirtySecond gap)

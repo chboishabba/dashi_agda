@@ -70,7 +70,7 @@ crossNormLagrangeExact : ∀ a b →
   ≡ normSqV a * normSqV b
 crossNormLagrangeExact
   (lie3 ax ay az) (lie3 bx by bz) =
-  ℚRing.solve-∀ ax ay az bx by bz
+  ℚRing.solve-∀
 
 crossNormSqBound : ∀ a b →
   normSqV (crossV a b) ≤ normSqV a * normSqV b
@@ -88,7 +88,7 @@ su2BracketNormSqExact : ∀ a b →
   ≡ fourℚ * normSqV (crossV a b)
 su2BracketNormSqExact
   (lie3 ax ay az) (lie3 bx by bz) =
-  ℚRing.solve-∀ ax ay az bx by bz
+  ℚRing.solve-∀
 
 su2BracketNormSqBound :
   (order : Gap.RationalWilsonGapOrder) → ∀ a b →
@@ -105,18 +105,18 @@ su2BracketNormSqBound order a b =
 su2BracketOrthogonalLeft : ∀ a b → a ·v su2BracketV a b ≡ 0ℚ
 su2BracketOrthogonalLeft
   (lie3 ax ay az) (lie3 bx by bz) =
-  ℚRing.solve-∀ ax ay az bx by bz
+  ℚRing.solve-∀
 
 su2BracketOrthogonalRight : ∀ a b → b ·v su2BracketV a b ≡ 0ℚ
 su2BracketOrthogonalRight
   (lie3 ax ay az) (lie3 bx by bz) =
-  ℚRing.solve-∀ ax ay az bx by bz
+  ℚRing.solve-∀
 
 su2TripleProductAlternating : ∀ a b →
   a ·v su2BracketV b a ≡ 0ℚ
 su2TripleProductAlternating
   (lie3 ax ay az) (lie3 bx by bz) =
-  ℚRing.solve-∀ ax ay az bx by bz
+  ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- Correctly normalized adjoint exponential and dexp/right-Jacobian surface.

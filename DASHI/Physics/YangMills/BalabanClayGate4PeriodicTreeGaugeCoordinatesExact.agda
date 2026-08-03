@@ -1,8 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PeriodicTreeGaugeCoordinatesExact where
 
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 

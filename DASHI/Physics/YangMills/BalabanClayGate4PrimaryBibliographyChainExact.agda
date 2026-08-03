@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PrimaryBibliographyChainExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)

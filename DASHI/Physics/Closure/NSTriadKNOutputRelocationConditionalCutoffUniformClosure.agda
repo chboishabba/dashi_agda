@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNOutputRelocationConditionalCutoffUniformCl
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; -_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; -_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -68,9 +68,9 @@ bridgeMajorantNonnegative bridge lowShell gap =
   let
     instance
       lowIsNonnegative =
-        ℚₚ.nonNegative (lowFactorNonnegative bridge lowShell)
+        nonNegative (lowFactorNonnegative bridge lowShell)
       gapIsNonnegative =
-        ℚₚ.nonNegative (gapFactorNonnegative bridge gap)
+        nonNegative (gapFactorNonnegative bridge gap)
   in
   ℚₚ.nonNegative⁻¹
     (lowFactor bridge lowShell * gapFactor bridge gap)

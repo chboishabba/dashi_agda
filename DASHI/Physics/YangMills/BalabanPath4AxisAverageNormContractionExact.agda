@@ -56,7 +56,7 @@ twoFieldSquareExpansion left right =
       (λ site →
         sq (left site)
         + (sq (right site) + twoℚ * (left site * right site)))
-      (λ site → ℚRing.solve-∀ (left site) (right site)))
+      (λ site → ℚRing.solve-∀))
     (trans
       (sumRationalAdd
         (physicalBlockSites side4)
@@ -82,7 +82,7 @@ axisResidualPlusAverage : ∀ siteField axis →
     (addField (axisResidual siteField axis) (axisAverage4 siteField axis))
     siteField
 axisResidualPlusAverage siteField axis site =
-  ℚRing.solve-∀ (siteField site) (axisAverage4 siteField axis site)
+  ℚRing.solve-∀
 
 axisAveragePythagoras : ∀ siteField axis →
   globalNormSq siteField
@@ -112,8 +112,6 @@ axisAveragePythagoras siteField axis =
       (axisAverage4 current currentAxis)
       (projectedFixedPointwise currentAxis current) =
     ℚRing.solve-∀
-      (globalNormSq (axisResidual current currentAxis))
-      (globalNormSq (axisAverage4 current currentAxis))
 
 axisAverageNormContraction : ∀ siteField axis →
   globalNormSq (axisAverage4 siteField axis) ≤ globalNormSq siteField
@@ -133,9 +131,7 @@ axisAverageNormContraction siteField axis =
   averageFirstPythagoras current currentAxis =
     trans
       (axisAveragePythagoras current currentAxis)
-      (ℚRing.solve-∀
-        (globalNormSq (axisResidual current currentAxis))
-        (globalNormSq (axisAverage4 current currentAxis)))
+      (ℚRing.solve-∀)
 
 path4AxisAveragePythagorasLevel : ProofLevel
 path4AxisAveragePythagorasLevel = machineChecked

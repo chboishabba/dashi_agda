@@ -49,8 +49,7 @@ configuredWeightedPerturbationBelowHalfGap = ℚP.≤ᵇ⇒≤ tt
 
 configuredGapTwiceHalfExact :
   configuredHalfGap + configuredHalfGap ≡ configuredGreenGap
-configuredGapTwiceHalfExact = ℚRing.solve
-
+configuredGapTwiceHalfExact = ℚRing.solve []
 record ConfiguredGreenScalarAuthority (Scalar : Set) : Set₁ where
   field
     rational : ℚ → Scalar

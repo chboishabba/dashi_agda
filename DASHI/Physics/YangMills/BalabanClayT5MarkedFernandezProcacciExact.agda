@@ -92,18 +92,15 @@ fpSlack = + 1 / 48
 
 onePlusEightMuExact :
   1ℚ + (+ 8 / 1) * mu ≡ fpEightCliquePhi
-onePlusEightMuExact = ℚRing.solve
-
+onePlusEightMuExact = ℚRing.solve []
 muOverPhiExact :
   mu / fpEightCliquePhi ≡ rhoFPMax
-muOverPhiExact = ℚRing.solve
-
+muOverPhiExact = ℚRing.solve []
 baseBelowFPMaximum : rhoBase ≤ rhoFPMax
 baseBelowFPMaximum = ℚP.≤ᵇ⇒≤ tt
 
 fpSlackExact : rhoFPMax - rhoBase ≡ fpSlack
-fpSlackExact = ℚRing.solve
-
+fpSlackExact = ℚRing.solve []
 record EightCliqueNeighborhood (Polymer : Set) : Set₁ where
   field
     root : Polymer
@@ -132,14 +129,12 @@ markedFPSlack = + 1 / 120
 
 markedBaseActivityExact :
   markedInflation * rhoBase ≡ markedActivityMaximum
-markedBaseActivityExact = ℚRing.solve
-
+markedBaseActivityExact = ℚRing.solve []
 markedActivityBelowFPMaximum : markedActivityMaximum ≤ rhoFPMax
 markedActivityBelowFPMaximum = ℚP.≤ᵇ⇒≤ tt
 
 markedFPSlackExact : rhoFPMax - markedActivityMaximum ≡ markedFPSlack
-markedFPSlackExact = ℚRing.solve
-
+markedFPSlackExact = ℚRing.solve []
 record MarkedActivityData (Polymer Observable : Set)
     (model : AbstractPolymerModel Polymer) : Set₁ where
   field

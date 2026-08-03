@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNSetoidDirectCanonicalEnvelopeClosure where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -73,7 +73,7 @@ open SetoidOrderedRationalEnvelopeCarrier public
 
 sumTo : ∀ {s e} (C : SetoidOrderedRationalEnvelopeCarrier {s} {e}) →
   (Nat → Scalar C) → Nat → Scalar C
-sumTo C values zero = values zero
+sumTo C values Nat.zero = values Nat.zero
 sumTo C values (suc cutoff) =
   add C (values (suc cutoff)) (sumTo C values cutoff)
 
@@ -81,7 +81,7 @@ sumToCong : ∀ {s e} (C : SetoidOrderedRationalEnvelopeCarrier {s} {e})
     left right cutoff →
   (∀ index → _≈_ C (left index) (right index)) →
   _≈_ C (sumTo C left cutoff) (sumTo C right cutoff)
-sumToCong C left right zero pointwise = pointwise zero
+sumToCong C left right Nat.zero pointwise = pointwise Nat.zero
 sumToCong C left right (suc cutoff) pointwise =
   addCongruent C
     (pointwise (suc cutoff))
@@ -91,7 +91,7 @@ sumToMonotone : ∀ {s e} (C : SetoidOrderedRationalEnvelopeCarrier {s} {e})
     left right cutoff →
   (∀ index → leq C (left index) (right index)) →
   leq C (sumTo C left cutoff) (sumTo C right cutoff)
-sumToMonotone C left right zero pointwise = pointwise zero
+sumToMonotone C left right Nat.zero pointwise = pointwise Nat.zero
 sumToMonotone C left right (suc cutoff) pointwise =
   addMonotone C
     (pointwise (suc cutoff))
@@ -102,7 +102,7 @@ sumEmbedMeaning : ∀ {s e}
   _≈_ C
     (sumTo C (λ index → rationalEmbed C (values index)) cutoff)
     (rationalEmbed C (Rational.sumTo values cutoff))
-sumEmbedMeaning C values zero = approxReflexive C _
+sumEmbedMeaning C values Nat.zero = approxReflexive C _
 sumEmbedMeaning C values (suc cutoff) =
   approxTransitive C
     (addCongruent C
@@ -199,7 +199,7 @@ sumToNeg : ∀ {s e}
   _≈_ C
     (sumTo C (λ index → negate C (values index)) cutoff)
     (negate C (sumTo C values cutoff))
-sumToNeg C values zero = approxReflexive C _
+sumToNeg C values Nat.zero = approxReflexive C _
 sumToNeg C values (suc cutoff) =
   approxTransitive C
     (addCongruent C

@@ -48,15 +48,13 @@ expFourteenFifthsSixthPartialSum =
 
 expFourteenFifthsSixthPartialSumExact :
   expFourteenFifthsSixthPartialSum ≡ + 11280391 / 703125
-expFourteenFifthsSixthPartialSumExact = ℚRing.solve
-
+expFourteenFifthsSixthPartialSumExact = ℚRing.solve []
 sixteenBelowExpFourteenFifthsPartialSum :
   sixteenℚ ≤ expFourteenFifthsSixthPartialSum
 sixteenBelowExpFourteenFifthsPartialSum = ℚP.≤ᵇ⇒≤ tt
 
 configuredSharpSlackExact : threeℚ - fourteenFifths ≡ oneFifth
-configuredSharpSlackExact = ℚRing.solve
-
+configuredSharpSlackExact = ℚRing.solve []
 record SharpLogSixteenAnalyticAuthority (Scalar : Set) : Set₁ where
   field
     rational : ℚ → Scalar

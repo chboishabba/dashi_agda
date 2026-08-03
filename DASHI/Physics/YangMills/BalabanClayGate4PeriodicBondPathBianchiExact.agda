@@ -1,8 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact where
 
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 

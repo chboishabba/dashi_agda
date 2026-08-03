@@ -268,10 +268,6 @@ physicalMartingaleVarianceDecomposition blockField meanZero =
           | martingale13Zero current
           | martingale23Zero current =
     ℚRing.solve-∀
-      (globalNormSq (martingaleField0 current))
-      (globalNormSq (martingaleField1 current))
-      (globalNormSq (martingaleField2 current))
-      (globalNormSq (martingaleField3 current))
 
 path4PhysicalVarianceDecompositionLevel : ProofLevel
 path4PhysicalVarianceDecompositionLevel = machineChecked

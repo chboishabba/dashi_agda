@@ -84,7 +84,7 @@ siteSumProductZero : ∀ field →
   siteSum4 (λ site → field site * 0ℚ) ≡ 0ℚ
 siteSumProductZero field =
   trans
-    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀ (field site)))
+    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
     siteSum4Zero
 
 firstBackwardPairing : ∀ secondAxis field curvature →
@@ -93,9 +93,7 @@ firstBackwardPairing : ∀ secondAxis field curvature →
       forwardDifference4 secondAxis field site * curvature site)
 firstBackwardPairing secondAxis field curvature =
   trans
-    (ℚRing.solve-∀
-      (siteSum4 (λ site →
-        field site * backwardDifference4 secondAxis curvature site)))
+    (ℚRing.solve-∀)
     (sym
       (cong (λ value → - value)
         (periodicForwardBackwardSummationByParts
@@ -108,15 +106,12 @@ secondNegativeBackwardPairing : ∀ firstAxis field curvature →
       forwardDifference4 firstAxis field site * curvature site)
 secondNegativeBackwardPairing firstAxis field curvature =
   trans
-    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-      (field site) (backwardDifference4 firstAxis curvature site)))
+    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
     (trans
       (siteSum4Scale (- 1ℚ)
         (λ site → field site * backwardDifference4 firstAxis curvature site))
       (trans
-        (ℚRing.solve-∀
-          (siteSum4 (λ site →
-            field site * backwardDifference4 firstAxis curvature site)))
+        (ℚRing.solve-∀)
         (sym
           (periodicForwardBackwardSummationByParts
             firstAxis field curvature))))
@@ -142,11 +137,7 @@ planeTwoAxisPairingExact plane field =
           (field (positivePlaneFirst plane)) site * scalarPlaneCurl plane field site))
         (λ site → forwardDifference4 (positivePlaneFirst plane)
           (field (positivePlaneSecond plane)) site * scalarPlaneCurl plane field site)))
-      (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-        (forwardDifference4 (positivePlaneFirst plane)
-          (field (positivePlaneSecond plane)) site)
-        (forwardDifference4 (positivePlaneSecond plane)
-          (field (positivePlaneFirst plane)) site))))
+      (siteSum4Cong _ _ (λ site → ℚRing.solve-∀)))
 
 scalarPlanePairingExact : ∀ plane field →
   scalarBondInner field (planeWilsonContribution plane field)
@@ -154,56 +145,32 @@ scalarPlanePairingExact : ∀ plane field →
 scalarPlanePairingExact plane01 field
   rewrite siteSumProductZero (field axis2)
         | siteSumProductZero (field axis3) =
-  trans (ℚRing.solve-∀
-    (siteSum4 (λ site → field axis0 site *
-      backwardDifference4 axis1 (scalarPlaneCurl plane01 field) site))
-    (siteSum4 (λ site → field axis1 site *
-      (- backwardDifference4 axis0 (scalarPlaneCurl plane01 field) site))))
+  trans (ℚRing.solve-∀)
     (planeTwoAxisPairingExact plane01 field)
 scalarPlanePairingExact plane02 field
   rewrite siteSumProductZero (field axis1)
         | siteSumProductZero (field axis3) =
-  trans (ℚRing.solve-∀
-    (siteSum4 (λ site → field axis0 site *
-      backwardDifference4 axis2 (scalarPlaneCurl plane02 field) site))
-    (siteSum4 (λ site → field axis2 site *
-      (- backwardDifference4 axis0 (scalarPlaneCurl plane02 field) site))))
+  trans (ℚRing.solve-∀)
     (planeTwoAxisPairingExact plane02 field)
 scalarPlanePairingExact plane03 field
   rewrite siteSumProductZero (field axis1)
         | siteSumProductZero (field axis2) =
-  trans (ℚRing.solve-∀
-    (siteSum4 (λ site → field axis0 site *
-      backwardDifference4 axis3 (scalarPlaneCurl plane03 field) site))
-    (siteSum4 (λ site → field axis3 site *
-      (- backwardDifference4 axis0 (scalarPlaneCurl plane03 field) site))))
+  trans (ℚRing.solve-∀)
     (planeTwoAxisPairingExact plane03 field)
 scalarPlanePairingExact plane12 field
   rewrite siteSumProductZero (field axis0)
         | siteSumProductZero (field axis3) =
-  trans (ℚRing.solve-∀
-    (siteSum4 (λ site → field axis1 site *
-      backwardDifference4 axis2 (scalarPlaneCurl plane12 field) site))
-    (siteSum4 (λ site → field axis2 site *
-      (- backwardDifference4 axis1 (scalarPlaneCurl plane12 field) site))))
+  trans (ℚRing.solve-∀)
     (planeTwoAxisPairingExact plane12 field)
 scalarPlanePairingExact plane13 field
   rewrite siteSumProductZero (field axis0)
         | siteSumProductZero (field axis2) =
-  trans (ℚRing.solve-∀
-    (siteSum4 (λ site → field axis1 site *
-      backwardDifference4 axis3 (scalarPlaneCurl plane13 field) site))
-    (siteSum4 (λ site → field axis3 site *
-      (- backwardDifference4 axis1 (scalarPlaneCurl plane13 field) site))))
+  trans (ℚRing.solve-∀)
     (planeTwoAxisPairingExact plane13 field)
 scalarPlanePairingExact plane23 field
   rewrite siteSumProductZero (field axis0)
         | siteSumProductZero (field axis1) =
-  trans (ℚRing.solve-∀
-    (siteSum4 (λ site → field axis2 site *
-      backwardDifference4 axis3 (scalarPlaneCurl plane23 field) site))
-    (siteSum4 (λ site → field axis3 site *
-      (- backwardDifference4 axis2 (scalarPlaneCurl plane23 field) site))))
+  trans (ℚRing.solve-∀)
     (planeTwoAxisPairingExact plane23 field)
 
 scalarWilsonPlaneRieszLevel : ProofLevel

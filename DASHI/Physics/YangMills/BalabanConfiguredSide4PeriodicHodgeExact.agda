@@ -64,7 +64,7 @@ backwardDifferenceAsForwardAtBackward : ∀ axis field site →
   ≡ forwardDifference4 axis field (shiftBackward4 axis site)
 backwardDifferenceAsForwardAtBackward axis field site
   rewrite forwardAfterBackward4 axis site =
-  ℚRing.solve-∀ (field site) (field (shiftBackward4 axis site))
+  ℚRing.solve-∀
 
 forwardBackwardNormSqExact : ∀ axis field →
   backwardDerivativeEnergy axis field ≡ forwardDerivativeEnergy axis field
@@ -97,11 +97,7 @@ positivePlaneSquareExpansion : ∀ plane field →
         (field (positivePlaneSecond plane)))
 positivePlaneSquareExpansion plane field =
   trans
-    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-      (forwardDifference4 (positivePlaneFirst plane)
-        (field (positivePlaneSecond plane)) site)
-      (forwardDifference4 (positivePlaneSecond plane)
-        (field (positivePlaneFirst plane)) site)))
+    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
     (trans
       (siteSum4ThreeTerms
         (λ site → sq (forwardDifference4 (positivePlaneFirst plane)
@@ -122,15 +118,7 @@ positivePlaneSquareExpansion plane field =
                   (field (positivePlaneSecond plane)) site
                 * forwardDifference4 (positivePlaneSecond plane)
                   (field (positivePlaneFirst plane)) site))))
-        (ℚRing.solve-∀
-          (forwardDerivativeEnergy (positivePlaneFirst plane)
-            (field (positivePlaneSecond plane)))
-          (forwardDerivativeEnergy (positivePlaneSecond plane)
-            (field (positivePlaneFirst plane)))
-          (mixedForwardEnergy
-            (positivePlaneFirst plane) (positivePlaneSecond plane)
-            (field (positivePlaneFirst plane))
-            (field (positivePlaneSecond plane))))))
+        (ℚRing.solve-∀)))
 
 componentCurlExpanded : ScalarBondField4 → ℚ
 componentCurlExpanded field =
@@ -163,24 +151,6 @@ componentCurlEnergyExpansion field
         | positivePlaneSquareExpansion plane13 field
         | positivePlaneSquareExpansion plane23 field =
   ℚRing.solve-∀
-    (forwardDerivativeEnergy axis0 (field axis1))
-    (forwardDerivativeEnergy axis1 (field axis0))
-    (mixedForwardEnergy axis0 axis1 (field axis0) (field axis1))
-    (forwardDerivativeEnergy axis0 (field axis2))
-    (forwardDerivativeEnergy axis2 (field axis0))
-    (mixedForwardEnergy axis0 axis2 (field axis0) (field axis2))
-    (forwardDerivativeEnergy axis0 (field axis3))
-    (forwardDerivativeEnergy axis3 (field axis0))
-    (mixedForwardEnergy axis0 axis3 (field axis0) (field axis3))
-    (forwardDerivativeEnergy axis1 (field axis2))
-    (forwardDerivativeEnergy axis2 (field axis1))
-    (mixedForwardEnergy axis1 axis2 (field axis1) (field axis2))
-    (forwardDerivativeEnergy axis1 (field axis3))
-    (forwardDerivativeEnergy axis3 (field axis1))
-    (mixedForwardEnergy axis1 axis3 (field axis1) (field axis3))
-    (forwardDerivativeEnergy axis2 (field axis3))
-    (forwardDerivativeEnergy axis3 (field axis2))
-    (mixedForwardEnergy axis2 axis3 (field axis2) (field axis3))
 
 siteSum4TenTerms : ∀ t0 t1 t2 t3 t4 t5 t6 t7 t8 t9 →
   siteSum4 (λ site →
@@ -227,11 +197,7 @@ componentDivergenceEnergyExpansion : ∀ field →
   componentDivergenceEnergy field ≡ componentDivergenceExpanded field
 componentDivergenceEnergyExpansion field =
   trans
-    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-      (backwardDifference4 axis0 (field axis0) site)
-      (backwardDifference4 axis1 (field axis1) site)
-      (backwardDifference4 axis2 (field axis2) site)
-      (backwardDifference4 axis3 (field axis3) site)))
+    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
     (trans
       (siteSum4TenTerms
         (λ site → sq (backwardDifference4 axis0 (field axis0) site))
@@ -300,22 +266,6 @@ componentPeriodicDifferenceEnergyExpansion : ∀ field →
   ≡ componentPeriodicDifferenceExpanded field
 componentPeriodicDifferenceEnergyExpansion field =
   ℚRing.solve-∀
-    (forwardDerivativeEnergy axis0 (field axis0))
-    (forwardDerivativeEnergy axis1 (field axis0))
-    (forwardDerivativeEnergy axis2 (field axis0))
-    (forwardDerivativeEnergy axis3 (field axis0))
-    (forwardDerivativeEnergy axis0 (field axis1))
-    (forwardDerivativeEnergy axis1 (field axis1))
-    (forwardDerivativeEnergy axis2 (field axis1))
-    (forwardDerivativeEnergy axis3 (field axis1))
-    (forwardDerivativeEnergy axis0 (field axis2))
-    (forwardDerivativeEnergy axis1 (field axis2))
-    (forwardDerivativeEnergy axis2 (field axis2))
-    (forwardDerivativeEnergy axis3 (field axis2))
-    (forwardDerivativeEnergy axis0 (field axis3))
-    (forwardDerivativeEnergy axis1 (field axis3))
-    (forwardDerivativeEnergy axis2 (field axis3))
-    (forwardDerivativeEnergy axis3 (field axis3))
 
 fourAxisDiagonalOffDiagonalPartition : ∀ field →
   componentCurlExpanded field + componentDivergenceExpanded field
@@ -338,28 +288,6 @@ fourAxisDiagonalOffDiagonalPartition field
         | curlCrossTermEqualsDivergenceCrossTerm
             axis2 axis3 (field axis2) (field axis3) =
   ℚRing.solve-∀
-    (forwardDerivativeEnergy axis0 (field axis0))
-    (forwardDerivativeEnergy axis1 (field axis0))
-    (forwardDerivativeEnergy axis2 (field axis0))
-    (forwardDerivativeEnergy axis3 (field axis0))
-    (forwardDerivativeEnergy axis0 (field axis1))
-    (forwardDerivativeEnergy axis1 (field axis1))
-    (forwardDerivativeEnergy axis2 (field axis1))
-    (forwardDerivativeEnergy axis3 (field axis1))
-    (forwardDerivativeEnergy axis0 (field axis2))
-    (forwardDerivativeEnergy axis1 (field axis2))
-    (forwardDerivativeEnergy axis2 (field axis2))
-    (forwardDerivativeEnergy axis3 (field axis2))
-    (forwardDerivativeEnergy axis0 (field axis3))
-    (forwardDerivativeEnergy axis1 (field axis3))
-    (forwardDerivativeEnergy axis2 (field axis3))
-    (forwardDerivativeEnergy axis3 (field axis3))
-    (mixedBackwardEnergy axis0 axis1 (field axis0) (field axis1))
-    (mixedBackwardEnergy axis0 axis2 (field axis0) (field axis2))
-    (mixedBackwardEnergy axis0 axis3 (field axis0) (field axis3))
-    (mixedBackwardEnergy axis1 axis2 (field axis1) (field axis2))
-    (mixedBackwardEnergy axis1 axis3 (field axis1) (field axis3))
-    (mixedBackwardEnergy axis2 axis3 (field axis2) (field axis3))
 
 componentDiscreteCurlDivergenceHodgeIdentity : ∀ field →
   componentCurlEnergy field + componentDivergenceEnergy field

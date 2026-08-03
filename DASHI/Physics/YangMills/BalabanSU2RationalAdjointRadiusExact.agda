@@ -89,8 +89,6 @@ adjointDisplacementWithUnitDefectExact : ∀ q v →
     + squareℚ (unitDefect q) * vectorNormSq v
 adjointDisplacementWithUnitDefectExact q v =
   ℚRing.solve-∀
-    (realPart q) (imagI q) (imagJ q) (imagK q)
-    (x v) (y v) (z v)
 
 unitDefectVanishes : ∀ q → unitDefect q ≡ 0ℚ
 unitDefectVanishes q =
@@ -107,14 +105,13 @@ adjointDisplacementUnitExact q v =
       (cong
         (λ defect → adjointMain q v + squareℚ defect * vectorNormSq v)
         (unitDefectVanishes q))
-      (ℚRing.solve-∀ (adjointMain q v) (vectorNormSq v)))
+      (ℚRing.solve-∀))
 
 adjointMainPlusDiscardedSquareExact : ∀ q v →
   adjointMain q v + fourℚ * squareℚ (imaginaryDot q v)
   ≡ fourℚ * (imaginaryNormSq q * vectorNormSq v)
 adjointMainPlusDiscardedSquareExact q v =
   ℚRing.solve-∀
-    (imaginaryNormSq q) (vectorNormSq v) (imaginaryDot q v)
 
 adjointDisplacementPlusDiscardedSquareExact : ∀ q v →
   adjointDisplacementSq q v

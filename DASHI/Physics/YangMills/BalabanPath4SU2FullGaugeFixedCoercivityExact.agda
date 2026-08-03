@@ -85,7 +85,7 @@ average0123ForwardDifferenceZero : ∀ field axis site →
   forwardDifference4 axis (average0123 field) site ≡ 0ℚ
 average0123ForwardDifferenceZero field axis site
   rewrite average0123ShiftInvariant field axis site =
-  ℚRing.solve-∀ (average0123 field site)
+  ℚRing.solve-∀
 
 forwardDifferenceResidualExact : ∀ field axis site →
   forwardDifference4 axis
@@ -94,9 +94,6 @@ forwardDifferenceResidualExact : ∀ field axis site →
 forwardDifferenceResidualExact field axis site
   rewrite average0123ShiftInvariant field axis site =
   ℚRing.solve-∀
-    (field (shiftForward4 axis site))
-    (field site)
-    (average0123 field site)
 
 forwardDerivativeEnergyResidualExact : ∀ field axis →
   forwardDerivativeEnergy axis
@@ -235,8 +232,7 @@ residualGaugeFixedEqualsPeriodicDifference tangent =
       concreteLiteralCoarseBlockData (fineFluctuation tangent))
     (trans
       (cong₂ _+_ refl (residualBlockPenaltyZero tangent))
-      (ℚRing.solve-∀
-        (physicalPeriodicReferenceDifferenceEnergy (fineFluctuation tangent))))
+      (ℚRing.solve-∀))
 
 fullGaugeFixedResidualDecompositionExact : ∀ tangent →
   gaugeFixedHessianQuadraticForm concreteGaugeFixedHessianData tangent

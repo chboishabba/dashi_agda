@@ -183,12 +183,7 @@ path4MartingalePoincareBeforeEnergyContraction field meanZero =
     trans
       (cong (oneSixteenth *_)
         (physicalMartingaleVarianceDecomposition current currentMeanZero))
-      (ℚRing.solve-∀
-        oneSixteenth
-        (globalNormSq (martingaleField0 current))
-        (globalNormSq (martingaleField1 current))
-        (globalNormSq (martingaleField2 current))
-        (globalNormSq (martingaleField3 current)))
+      (ℚRing.solve-∀)
 
 path4GlobalComponentPoincareLevel : ProofLevel
 path4GlobalComponentPoincareLevel = machineChecked

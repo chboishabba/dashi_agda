@@ -62,7 +62,7 @@ side4AverageOfConstant : ∀ value →
 side4AverageOfConstant value
   rewrite sumRationalConstant (allCyclicIndices side4) value
         | lengthAllCyclicIndices side4 =
-  ℚRing.solve-∀ value
+  ℚRing.solve-∀
 
 quarterDoubleSumSwap :
   ∀ {A B : Set} (left : List A) (right : List B)
@@ -191,7 +191,7 @@ side4CenteredTotalZero : ∀ total →
     - natAsRational (length (allCyclicIndices side4)) * (quarter * total)
   ≡ 0ℚ
 side4CenteredTotalZero total
-  rewrite lengthAllCyclicIndices side4 = ℚRing.solve-∀ total
+  rewrite lengthAllCyclicIndices side4 = ℚRing.solve-∀
 
 axisCentering4DirectFibreSumZero : ∀ siteF axis transverse →
   sumRational (allCyclicIndices side4)
@@ -210,9 +210,7 @@ axisCentering4DirectFibreSumZero siteF axis transverse =
         1ℚ * siteF (insertAxis axis coordinate transverse)
         - quarter * physicalFibreSum siteF axis transverse)
       (λ coordinate →
-        ℚRing.solve-∀
-          (siteF (insertAxis axis coordinate transverse))
-          (physicalFibreSum siteF axis transverse)))
+        ℚRing.solve-∀))
     (trans
       (sumScaledDifferenceFormula
         1ℚ

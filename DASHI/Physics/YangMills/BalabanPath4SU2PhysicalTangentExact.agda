@@ -114,10 +114,6 @@ physicalTangentNormComponentExpansionExact : ∀ latticeWeight tangent →
       + bondNormSq (encodeTangent tangent component3))
 physicalTangentNormComponentExpansionExact latticeWeight tangent =
   ℚRing.solve-∀
-    latticeWeight
-    (bondNormSq (tangent component1))
-    (bondNormSq (tangent component2))
-    (bondNormSq (tangent component3))
 
 ------------------------------------------------------------------------
 -- The literal configured-side block map is the normalized four-axis average
@@ -149,9 +145,6 @@ scaledPhysicalNormIsComponentFold : ∀ tangent →
     + configuredPathCoercivityConstant * bondNormSq (tangent component3))
 scaledPhysicalNormIsComponentFold tangent =
   ℚRing.solve-∀
-    (bondNormSq (tangent component1))
-    (bondNormSq (tangent component2))
-    (bondNormSq (tangent component3))
 
 physicalBlockConstrainedDifferencePoincare :
   ∀ tangent → PhysicalBlockAverageZero tangent →

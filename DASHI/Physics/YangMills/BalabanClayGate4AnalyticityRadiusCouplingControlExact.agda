@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4AnalyticityRadiusCouplingControlExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc) renaming (zero to zeroNat)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -89,16 +89,16 @@ record InverseCouplingIteration
       LessEqual stepData (addStep left common) (addStep right common)
 
     baseIdentity :
-      addStep (inverseCoupling zero)
-        (natScale zero (b0Half stepData))
-      ≡ inverseCoupling zero
+      addStep (inverseCoupling zeroNat)
+        (natScale zeroNat (b0Half stepData))
+      ≡ inverseCoupling zeroNat
 
     iterationIdentity : ∀ scale →
       addStep
-        (addStep (inverseCoupling zero)
+        (addStep (inverseCoupling zeroNat)
           (natScale scale (b0Half stepData)))
         (b0Half stepData)
-      ≡ addStep (inverseCoupling zero)
+      ≡ addStep (inverseCoupling zeroNat)
           (natScale (suc scale) (b0Half stepData))
 
 open InverseCouplingIteration public
@@ -108,14 +108,14 @@ inverseCouplingGrowsLinearly :
     (iteration : InverseCouplingIteration stepData) scale →
   LessEqual stepData
     (addStep iteration
-      (inverseCoupling iteration zero)
+      (inverseCoupling iteration zeroNat)
       (natScale iteration scale (b0Half stepData)))
     (inverseCoupling iteration scale)
-inverseCouplingGrowsLinearly {stepData = stepData} iteration zero =
+inverseCouplingGrowsLinearly {stepData = stepData} iteration zeroNat =
   subst
-    (λ lower → LessEqual stepData lower (inverseCoupling iteration zero))
+    (λ lower → LessEqual stepData lower (inverseCoupling iteration zeroNat))
     (sym (baseIdentity iteration))
-    (reflexive stepData (inverseCoupling iteration zero))
+    (reflexive stepData (inverseCoupling iteration zeroNat))
 inverseCouplingGrowsLinearly {stepData = stepData} iteration (suc scale) =
   subst
     (λ lower → LessEqual stepData lower
@@ -128,11 +128,11 @@ inverseCouplingGrowsLinearly {stepData = stepData} iteration (suc scale) =
 
 infix 4 _≤ᴺ_
 data _≤ᴺ_ : Nat → Nat → Set where
-  zero≤ : ∀ {upper} → zero ≤ᴺ upper
+  zero≤ : ∀ {upper} → zeroNat ≤ᴺ upper
   suc≤suc : ∀ {lower upper} → lower ≤ᴺ upper → suc lower ≤ᴺ suc upper
 
 natLessEqualReflexive : ∀ value → value ≤ᴺ value
-natLessEqualReflexive zero = zero≤
+natLessEqualReflexive zeroNat = zero≤
 natLessEqualReflexive (suc value) = suc≤suc (natLessEqualReflexive value)
 
 natLessEqualTransitive : ∀ {left middle right} →

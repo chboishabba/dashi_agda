@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT2QuaternionCubicEnumerationExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
@@ -38,8 +38,7 @@ configuredPolymerCubicUpper =
 
 configuredPolymerCubicExact :
   configuredPolymerCubicUpper ≡ + 3 / 262144
-configuredPolymerCubicExact = ℚRing.solve
-
+configuredPolymerCubicExact = ℚRing.solve []
 configuredPolymerCubicBelowEighth :
   configuredPolymerCubicUpper ≤ + 1 / 8
 configuredPolymerCubicBelowEighth = ℚP.≤ᵇ⇒≤ tt

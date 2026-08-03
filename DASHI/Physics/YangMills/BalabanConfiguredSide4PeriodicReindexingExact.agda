@@ -22,10 +22,10 @@ sumRationalAppend :
   ∀ {A : Set} (left right : List A) (term : A → ℚ) →
   sumRational (left ++ right) term
   ≡ sumRational left term + sumRational right term
-sumRationalAppend [] right term = sym (ℚRing.solve-∀ (sumRational right term))
+sumRationalAppend [] right term = sym (ℚRing.solve-∀)
 sumRationalAppend (value ∷ values) right term
   rewrite sumRationalAppend values right term =
-  ℚRing.solve-∀ (term value) (sumRational values term) (sumRational right term)
+  ℚRing.solve-∀
 
 sumRationalMap :
   ∀ {A B : Set} (f : A → B) (values : List A) (term : B → ℚ) →
@@ -81,20 +81,12 @@ sumNext4Invariant : ∀ (term : CyclicIndex four → ℚ) →
   ≡ sumRational (allCyclicIndices four) term
 sumNext4Invariant term =
   ℚRing.solve-∀
-    (term zeroᵢ)
-    (term (sucᵢ zeroᵢ))
-    (term (sucᵢ (sucᵢ zeroᵢ)))
-    (term (sucᵢ (sucᵢ (sucᵢ zeroᵢ))))
 
 sumPrevious4Invariant : ∀ (term : CyclicIndex four → ℚ) →
   sumRational (allCyclicIndices four) (λ coordinate → term (previous4 coordinate))
   ≡ sumRational (allCyclicIndices four) term
 sumPrevious4Invariant term =
   ℚRing.solve-∀
-    (term zeroᵢ)
-    (term (sucᵢ zeroᵢ))
-    (term (sucᵢ (sucᵢ zeroᵢ)))
-    (term (sucᵢ (sucᵢ (sucᵢ zeroᵢ))))
 
 ------------------------------------------------------------------------
 -- Periodic translations of the literal four-torus.
@@ -260,8 +252,7 @@ periodicForwardBackwardSummationByParts axis f g =
         (λ site → f site * g (shiftBackward4 axis site)))
       refl)
     (sumRationalCong (physicalBlockSites side4) _ _
-      (λ site → ℚRing.solve-∀
-        (f site) (g site) (g (shiftBackward4 axis site))))
+      (λ site → ℚRing.solve-∀))
 
 configuredSide4PeriodicReindexingLevel : ProofLevel
 configuredSide4PeriodicReindexingLevel = machineChecked

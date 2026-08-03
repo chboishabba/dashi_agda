@@ -1,8 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayT2GeneratedQuaternionJetExact where
 
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)

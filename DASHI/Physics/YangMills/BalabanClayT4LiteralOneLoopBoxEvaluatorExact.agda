@@ -1,8 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact where
 
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _≤_)
 
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopConventionExact as Convention

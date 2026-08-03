@@ -52,11 +52,10 @@ sumRationalRightScale :
   ∀ {A : Set} (values : List A) (term : A → ℚ) coefficient →
   sumRational values (λ value → term value * coefficient)
   ≡ sumRational values term * coefficient
-sumRationalRightScale [] term coefficient = ℚRing.solve-∀ coefficient
+sumRationalRightScale [] term coefficient = ℚRing.solve-∀
 sumRationalRightScale (value ∷ values) term coefficient
   rewrite sumRationalRightScale values term coefficient =
   ℚRing.solve-∀
-    (term value) (sumRational values term) coefficient
 
 matrixProductActionExact :
   ∀ {Index}
@@ -106,8 +105,7 @@ matrixProductActionExact carrier left right vector row =
                 (left row middle * right middle column) * vector column)
               (λ column →
                 left row middle * (right middle column * vector column))
-              (λ column → ℚRing.solve-∀
-                (left row middle) (right middle column) (vector column)))
+              (λ column → ℚRing.solve-∀))
             (sumRationalScale
               (left row middle)
               (coordinates carrier)

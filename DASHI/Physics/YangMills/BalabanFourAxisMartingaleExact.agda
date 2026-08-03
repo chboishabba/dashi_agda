@@ -44,7 +44,7 @@ fourAxisMartingaleDecomposition x a0 a01 a012 a0123 meanZero =
     (fourAxisMartingaleTelescopingRaw x a0 a01 a012 a0123)
     (trans
       (cong (λ value → x - value) meanZero)
-      (ℚRing.solve-∀ x))
+      (ℚRing.solve-∀))
 
 pairCrossSum : ℚ → ℚ → ℚ → ℚ → ℚ
 pairCrossSum p0 p1 p2 p3 =
@@ -97,7 +97,7 @@ fourAxisMartingaleOrthogonalityImpliesVariance
       (cong
         (λ cross → fourSquareSum p0 p1 p2 p3 + twoℚ * cross)
         (pairCrossSumZero p0 p1 p2 p3 h01 h02 h03 h12 h13 h23))
-      (ℚRing.solve-∀ (fourSquareSum p0 p1 p2 p3)))
+      (ℚRing.solve-∀))
 
 fourAxisVarianceDecomposition :
   ∀ x p0 p1 p2 p3 →

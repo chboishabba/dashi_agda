@@ -252,8 +252,6 @@ fineProjectionReconstruction : ∀ tangent component bond →
   ≡ tangent component bond
 fineProjectionReconstruction tangent component bond =
   ℚRing.solve-∀
-    (tangent component bond)
-    (fineProjection tangent component bond)
 
 average0123ResidualOrthogonal : ∀ siteField fixedField →
   (∀ axis site → axisAverage4 fixedField axis site ≡ fixedField site) →

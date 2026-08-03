@@ -84,11 +84,6 @@ backwardForwardDifferenceCommutes : ∀ backwardAxis forwardAxis field site →
 backwardForwardDifferenceCommutes backwardAxis forwardAxis field site
   rewrite shiftForwardBackwardCommutes forwardAxis backwardAxis site =
   ℚRing.solve-∀
-    (field (shiftForward4 forwardAxis site))
-    (field site)
-    (field (shiftBackward4 backwardAxis site))
-    (field (shiftForward4 forwardAxis
-      (shiftBackward4 backwardAxis site)))
 
 ------------------------------------------------------------------------
 -- Useful finite-fold algebra on the configured site carrier.
@@ -141,24 +136,18 @@ axisNegativeGradientAdjoint : ∀ axis field gauge →
   ≡ siteSum4 (λ site → backwardDifference4 axis field site * gauge site)
 axisNegativeGradientAdjoint axis field gauge =
   trans
-    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-      (field site) (forwardDifference4 axis gauge site)))
+    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
     (trans
       (siteSum4Scale (- 1ℚ)
         (λ site → forwardDifference4 axis gauge site * field site))
       (trans
-        (ℚRing.solve-∀
-          (siteSum4 (λ site →
-            forwardDifference4 axis gauge site * field site)))
+        (ℚRing.solve-∀)
         (trans
           (cong (λ value → - value)
             (periodicForwardBackwardSummationByParts axis gauge field))
           (trans
-            (ℚRing.solve-∀
-              (siteSum4 (λ site →
-                gauge site * backwardDifference4 axis field site)))
-            (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-              (gauge site) (backwardDifference4 axis field site)))))))
+            (ℚRing.solve-∀)
+            (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))))))
 
 axisFoldTimesRight : ∀ field gauge site →
   sumRational (allCyclicIndices four)
@@ -167,14 +156,11 @@ axisFoldTimesRight : ∀ field gauge site →
 axisFoldTimesRight field gauge site =
   trans
     (sumRationalCong (allCyclicIndices four) _ _
-      (λ axis → ℚRing.solve-∀
-        (backwardDifference4 axis (field axis) site) (gauge site)))
+      (λ axis → ℚRing.solve-∀))
     (trans
       (sumRationalScale (gauge site) (allCyclicIndices four)
         (λ axis → backwardDifference4 axis (field axis) site))
-      (ℚRing.solve-∀
-        (gauge site)
-        (literalPeriodicDivergenceScalar field site)))
+      (ℚRing.solve-∀))
 
 periodicDivergenceGradientAdjoint : ∀ field gauge →
   scalarBondInner field (literalNegativeForwardGradientScalar gauge)
@@ -241,18 +227,12 @@ curlCrossTermEqualsDivergenceCrossTerm firstAxis secondAxis hFirst hSecond =
               firstAxis secondAxis hFirst site))))
       (trans
         (cong (λ value → - value)
-          (siteSum4Cong _ _ (λ site → ℚRing.solve-∀
-            (hSecond site)
-            (forwardDifference4 secondAxis
-              (backwardDifference4 firstAxis hFirst) site))))
+          (siteSum4Cong _ _ (λ site → ℚRing.solve-∀)))
         (trans
           (cong (λ value → - value)
             (periodicForwardBackwardSummationByParts
               secondAxis (backwardDifference4 firstAxis hFirst) hSecond))
-          (ℚRing.solve-∀
-            (siteSum4 (λ site →
-              backwardDifference4 firstAxis hFirst site
-              * backwardDifference4 secondAxis hSecond site))))))
+          (ℚRing.solve-∀))))
 
 configuredSide4ShiftCommutationLevel : ProofLevel
 configuredSide4ShiftCommutationLevel = machineChecked

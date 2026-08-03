@@ -146,7 +146,7 @@ configuredPhysicalGreenZero : ∀ component bond →
 configuredPhysicalGreenZero component bond =
   trans
     (configuredPhysicalGreenScale 0ℚ zeroPhysical component bond)
-    (ℚRing.solve-∀ (configuredPhysicalGreen zeroPhysical component bond))
+    (ℚRing.solve-∀)
 
 configuredPhysicalGreenSum :
   ∀ {Index : Set} (values : List Index)
@@ -185,9 +185,7 @@ configuredGreenMatrixActsExactly tangent (pair component bond) =
       (λ column →
         tangentToCoordinateVector tangent column
         * configuredPhysicalGreen (coordinateBasisTangent column) component bond)
-      (λ column → ℚRing.solve-∀
-        (configuredPhysicalGreen (coordinateBasisTangent column) component bond)
-        (tangentToCoordinateVector tangent column)))
+      (λ column → ℚRing.solve-∀))
     (trans
       (sumRationalCong
         (coordinates physicalFiniteRationalCoordinates)
