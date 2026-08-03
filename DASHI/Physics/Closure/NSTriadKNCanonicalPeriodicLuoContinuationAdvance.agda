@@ -11,48 +11,45 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance wh
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Strengthen the existing weighted-Schur continuation synthesis with the two
--- distinct nonlinear engines actually used in Luo's paper:
+-- Extend the official periodic Luo continuation closure by the two distinct
+-- nonlinear engines actually used in the source proof:
 --
 --   * Proposition 3.1: exact r_p increment-kernel flux decomposition and
 --     weighted cutoff-energy control;
 --   * Section 4, equation (4.2): per-mode paraproduct/commutator evolution,
 --     its dyadic-range split, and the mean-value/Gronwall continuation step.
 --
--- Uniformity is owned by one fixed b(alpha) and delta(alpha), never by
--- shell-dependent choices. Existing Parseval/Hermitian projection,
--- cutoff-indexed depth geometry, finite operator-gap and residue-scale proofs
--- are imported as completed prerequisites and are not reconstructed here.
+-- The official closure already owns Parseval/Hermitian projection, hard-high
+-- enumeration, full-shell identification, the rational weighted-Schur bridge,
+-- physical energy/time data, the radial multiplier, and Luo's published
+-- authority. This module does not create a second parallel synthesis.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Level; Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ)
 
-import DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurContinuationSynthesisExact as Existing
-import DASHI.Physics.Closure.NSTriadKNLuoPublishedContinuationAuthorityExact as Published
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Official
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
 import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
 import DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit as Blockers
 
-------------------------------------------------------------------------
--- One physical package owns every source-facing object. The scalar carrier is
--- the repository's rational verification carrier, so the physical Schur bound
--- can be transported by the concrete adapter rather than by a free estimate.
-------------------------------------------------------------------------
-
-record CanonicalPeriodicLuoPhysicalRealization : Setω where
+record CanonicalPeriodicLuoPhysicalRealization
+    {d s t : Level}
+    (InitialDatum : Set d)
+    (Solution : Set s)
+    (Time : Set t) : Setω where
   field
-    existingSynthesis :
-      Existing.LuoWeightedSchurContinuationSynthesis
+    officialClosure :
+      Official.OfficialLuoContinuationClosure InitialDatum Solution Time
 
-    State Tensor Space : Set
+    Tensor Space : Set
 
     exactFluxKernel :
-      FluxKernel.LuoExactFluxKernelDecomposition State Tensor ℚ
+      FluxKernel.LuoExactFluxKernelDecomposition Solution Tensor ℚ
 
     physicalIncrementKernel :
       FluxKernel.LuoIncrementKernelPhysicalRealization
@@ -62,7 +59,7 @@ record CanonicalPeriodicLuoPhysicalRealization : Setω where
       ThreePiece.LuoThreePiecePhysicalSchurAdapter exactFluxKernel
 
     perModeEvolution :
-      ModeEvolution.LuoPerModeCommutatorEvolution State ℚ
+      ModeEvolution.LuoPerModeCommutatorEvolution Solution ℚ
 
     fixedShiftBootstrap :
       Uniform.LuoFixedShiftUniformBootstrap ℚ
@@ -73,49 +70,68 @@ record CanonicalPeriodicLuoPhysicalRealization : Setω where
     section4Continuity :
       ModeEvolution.LuoSection4ContinuityBootstrap perModeEvolution
 
-    SamePhysicalSolutionCarrier : Set
-    samePhysicalSolutionCarrier : SamePhysicalSolutionCarrier
+    FluxKernelMatchesOfficialProjectedFlux : Set
+    fluxKernelMatchesOfficialProjectedFlux :
+      FluxKernelMatchesOfficialProjectedFlux
 
-    FluxKernelMatchesExistingProjectedFlux : Set
-    fluxKernelMatchesExistingProjectedFlux :
-      FluxKernelMatchesExistingProjectedFlux
+    WeightedShellEnergyMatchesOfficialSchurMajorant : Set
+    weightedShellEnergyMatchesOfficialSchurMajorant :
+      WeightedShellEnergyMatchesOfficialSchurMajorant
 
-    WeightedShellEnergyMatchesExistingSchurMajorant : Set
-    weightedShellEnergyMatchesExistingSchurMajorant :
-      WeightedShellEnergyMatchesExistingSchurMajorant
+    FixedShiftDecayMatchesOfficialCutoffEnergy : Set
+    fixedShiftDecayMatchesOfficialCutoffEnergy :
+      FixedShiftDecayMatchesOfficialCutoffEnergy
 
-    FixedShiftDecayMatchesExistingCutoffEnergy : Set
-    fixedShiftDecayMatchesExistingCutoffEnergy :
-      FixedShiftDecayMatchesExistingCutoffEnergy
+    PerModeShellsMatchOfficialLittlewoodPaleyShells : Set
+    perModeShellsMatchOfficialLittlewoodPaleyShells :
+      PerModeShellsMatchOfficialLittlewoodPaleyShells
 
-    PerModeShellsMatchExistingLittlewoodPaleyShells : Set
-    perModeShellsMatchExistingLittlewoodPaleyShells :
-      PerModeShellsMatchExistingLittlewoodPaleyShells
+    Section4StateIsOfficialSolution : Set
+    section4StateIsOfficialSolution : Section4StateIsOfficialSolution
 
 open CanonicalPeriodicLuoPhysicalRealization public
 
 fluxKernelToWeightedSchur :
-  (realization : CanonicalPeriodicLuoPhysicalRealization) →
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  (realization :
+    CanonicalPeriodicLuoPhysicalRealization InitialDatum Solution Time) →
   FluxKernel.LuoFluxKernelToWeightedSchur
     (exactFluxKernel realization)
 fluxKernelToWeightedSchur realization =
   ThreePiece.threePieceAdapterToWeightedSchur
     (threePiecePhysicalSchurAdapter realization)
 
-record CanonicalPeriodicLuoSourceFaithfulCutset : Setω where
+record CanonicalPeriodicLuoSourceFaithfulCutset
+    {d s t : Level}
+    (InitialDatum : Set d)
+    (Solution : Set s)
+    (Time : Set t) : Setω where
   field
-    physicalRealization : CanonicalPeriodicLuoPhysicalRealization
+    physicalRealization :
+      CanonicalPeriodicLuoPhysicalRealization InitialDatum Solution Time
 
 open CanonicalPeriodicLuoSourceFaithfulCutset public
 
 canonicalPeriodicLuoSourceFaithfulCutset :
-  CanonicalPeriodicLuoPhysicalRealization →
-  CanonicalPeriodicLuoSourceFaithfulCutset
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  CanonicalPeriodicLuoPhysicalRealization InitialDatum Solution Time →
+  CanonicalPeriodicLuoSourceFaithfulCutset InitialDatum Solution Time
 canonicalPeriodicLuoSourceFaithfulCutset realization = record
   { physicalRealization = realization }
 
 canonicalDissipationCriterion41 :
-  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset) →
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset
+    InitialDatum Solution Time) →
   Uniform.DissipationCriterion41
     (alphaAboveOneEntry (physicalRealization cutset))
 canonicalDissipationCriterion41 cutset =
@@ -123,7 +139,12 @@ canonicalDissipationCriterion41 cutset =
     (alphaAboveOneEntry (physicalRealization cutset))
 
 canonicalSection4Continuity :
-  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset) →
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset
+    InitialDatum Solution Time) →
   ModeEvolution.GronwallContinuityConclusion
     (section4Continuity (physicalRealization cutset))
 canonicalSection4Continuity cutset =
@@ -131,17 +152,22 @@ canonicalSection4Continuity cutset =
     (section4Continuity (physicalRealization cutset))
 
 continuationFromSourceFaithfulCutset :
-  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset) →
-  Published.ContinuesBeyond
-    (Existing.continuationAuthority
-      (existingSynthesis (physicalRealization cutset)))
-    (Existing.initialDatum
-      (existingSynthesis (physicalRealization cutset)))
-    (Existing.terminalTime
-      (existingSynthesis (physicalRealization cutset)))
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset
+    InitialDatum Solution Time) →
+  Official.OfficialLuo.ContinuesBeyond
+    (Official.sourceCarrier
+      (officialClosure (physicalRealization cutset)))
+    (Official.initial
+      (officialClosure (physicalRealization cutset)))
+    (Official.terminal
+      (officialClosure (physicalRealization cutset)))
 continuationFromSourceFaithfulCutset cutset =
-  Existing.luoWeightedSchurContinuation
-    (existingSynthesis (physicalRealization cutset))
+  Official.officialLuoContinuation
+    (officialClosure (physicalRealization cutset))
 
 ------------------------------------------------------------------------
 -- Existing completed prerequisites: references to current authoritative
@@ -185,6 +211,9 @@ residueScalePrerequisiteAvailableIsTrue =
 luoSourceFaithfulNonlinearCutsetConstructed : Bool
 luoSourceFaithfulNonlinearCutsetConstructed = true
 
+officialClosureReusedDirectly : Bool
+officialClosureReusedDirectly = true
+
 physicalRealizationToCanonicalCutsetBuilderConstructed : Bool
 physicalRealizationToCanonicalCutsetBuilderConstructed = true
 
@@ -206,6 +235,10 @@ canonicalBKMExclusionProvedHere = false
 luoSourceFaithfulNonlinearCutsetConstructedIsTrue :
   luoSourceFaithfulNonlinearCutsetConstructed ≡ true
 luoSourceFaithfulNonlinearCutsetConstructedIsTrue = refl
+
+officialClosureReusedDirectlyIsTrue :
+  officialClosureReusedDirectly ≡ true
+officialClosureReusedDirectlyIsTrue = refl
 
 physicalRealizationToCanonicalCutsetBuilderConstructedIsTrue :
   physicalRealizationToCanonicalCutsetBuilderConstructed ≡ true
