@@ -21,13 +21,16 @@ module DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact whe
 -- identified with the source flux, energy and low-gradient quantities, the
 -- Proposition-3.1 weighted-Schur estimate is derived by rewriting the already
 -- proved physical theorem; it is not supplied as a fresh estimate field.
+-- Source multiplication and order are identified explicitly as well: matching
+-- only the four scalar values is not enough to transport an inequality.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+import Data.Rational.Base as ℚBase
+open ℚBase using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as Luo
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Physical
@@ -81,10 +84,15 @@ record LuoThreePiecePhysicalSchurAdapter
       Luo.lowGradientInfinity source shell u
       ≡ Physical.lowPassGradientInfinity (bridgeAt shell u)
 
+    sourceMultiplyIsRationalMultiply :
+      (left right : ℚ) →
+      Luo.multiply source left right
+      ≡ ℚBase._*_ left right
+
     sourceOrderIsRationalOrder :
       (left right : ℚ) →
       Luo.lessOrEqual source left right
-      ≡ (left Data.Rational.Base.≤ right)
+      ≡ ℚBase._≤_ left right
 
 open LuoThreePiecePhysicalSchurAdapter public
 
@@ -108,10 +116,18 @@ physicalFluxBoundFromExistingBridge {source = source} adapter shell u
         | commonSchurConstantMatchesBridge adapter shell u
         | weightedEnergyMatchesBridge adapter shell u
         | sourceLowGradientMatchesBridge adapter shell u
+        | sourceMultiplyIsRationalMultiply adapter
+            (Physical.profileSchurConstant (bridgeAt adapter shell u))
+            (Physical.cutoffEnergyMajorant (bridgeAt adapter shell u))
+        | sourceMultiplyIsRationalMultiply adapter
+            (ℚBase._*_
+              (Physical.profileSchurConstant (bridgeAt adapter shell u))
+              (Physical.cutoffEnergyMajorant (bridgeAt adapter shell u)))
+            (Physical.lowPassGradientInfinity (bridgeAt adapter shell u))
         | sourceOrderIsRationalOrder adapter
             (Physical.absoluteCutoffFlux (bridgeAt adapter shell u))
-            (Luo.multiply source
-              (Luo.multiply source
+            (ℚBase._*_
+              (ℚBase._*_
                 (Physical.profileSchurConstant (bridgeAt adapter shell u))
                 (Physical.cutoffEnergyMajorant (bridgeAt adapter shell u)))
               (Physical.lowPassGradientInfinity (bridgeAt adapter shell u))) =
