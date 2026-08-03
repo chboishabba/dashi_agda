@@ -143,7 +143,8 @@ record LuoCutoffLocalizedMajorant
     (cutoff : Nat) : Set where
   constructor majorant
   field
-    periodicHardShellInterface : Set
+    periodicHardShellInterface :
+      PeriodicLP.periodicHardShellProjectorConstructed ≡ true
 
     retainedLowModeGradientIntegral : Nat
     retainedLowModeBudget : Nat
