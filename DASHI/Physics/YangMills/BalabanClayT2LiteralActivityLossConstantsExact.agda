@@ -71,7 +71,7 @@ record SU2HaarLossData
     norm : Link → Scalar
     sinOverX : Scalar → Scalar
     divide : Scalar → Scalar → Scalar
-    two one : Scalar
+    zero one two : Scalar
     square : Scalar → Scalar → Scalar
     log : Scalar → Scalar → Scalar
     multiply : Scalar → Scalar → Scalar
