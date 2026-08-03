@@ -18,11 +18,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoScalingExact where
 --
 -- PURPOSE
 -- Connect the official periodic Luo source carrier to a general (L,U)
--- normalization.  The scale identity
+-- normalization. The scale identity
 --
 --   (U/L) (L/U) = 1
 --
 -- proves that the localized integral of ||grad u_{<=p}||_infinity is unchanged.
+-- Independently, the mechanical-dimension algebra proves
+--
+--   [grad u] [dt] = T^-1 T = 1.
+--
 -- The unit-viscosity source is represented as the special viscous/Re=1 scale
 -- selection U = nu/L, rather than being baked into the foundational algebra.
 ------------------------------------------------------------------------
@@ -34,8 +38,15 @@ open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialLerayHopfAuthorityExact as Official
+import DASHI.Physics.Units.MechanicalDimensionExact as Dimension
 import DASHI.Physics.Units.PhysicalNormalizationExact as Normalize
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+localizedGradientIntegralIsDimensionless :
+  Dimension.velocityGradientDimension ⊗ᴰ Dimension.timeDimension
+  ≡ Dimension.dimensionless
+localizedGradientIntegralIsDimensionless =
+  Dimension.velocityGradientTimesTime
 
 record OfficialLuoPhysicalScaling
     {d s t : Level}
@@ -130,6 +141,9 @@ luoSourceNormalizationStillUsesOfficialCarrier :
   Official.SourceNormalizationMatchesLuo carrier
 luoSourceNormalizationStillUsesOfficialCarrier =
   Official.selectedSourceNormalization
+
+luoMechanicalDimensionLevel : ProofLevel
+luoMechanicalDimensionLevel = machineChecked
 
 luoScalingAlgebraLevel : ProofLevel
 luoScalingAlgebraLevel = machineChecked
