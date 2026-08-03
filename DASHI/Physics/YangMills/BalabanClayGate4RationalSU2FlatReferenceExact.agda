@@ -41,8 +41,8 @@ identitySiteGauge n site = Group.identityRationalSU2
 
 flatReferenceBondData : ∀ n → RationalBond.RationalSU2BondData n
 flatReferenceBondData n = record
-  { RationalBond.RationalSU2BondData.links = identityLinks n
-  ; RationalBond.RationalSU2BondData.siteGauge = identitySiteGauge n
+  { links = identityLinks n
+  ; siteGauge = identitySiteGauge n
   }
 
 flatOrientedLinkIdentity :
