@@ -25,6 +25,8 @@ module DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
+open import Data.Nat using (_≤_)
 
 import DASHI.Physics.Closure.NSTriadKNProfileCrossWeightBridge as WeightBridge
 import DASHI.Physics.Closure.NSTriadKNProfileDepthGeometryCutoffIndexedExact
@@ -43,21 +45,17 @@ record ExactAnalyticBlockerAuthority : Set₁ where
       CutoffDepth.CutoffIndexedProfileDepthGeometry
 
     ftAdvOrientation :
-      (N : _) →
+      (N : Nat) →
       (incidence : CutoffDepth.FTToAdversarialIncidence N) →
-      Agda.Builtin.Nat.suc N
-        Agda.Builtin.Nat.*
-        CutoffDepth.weightOf N (CutoffDepth.ftAdvTarget incidence)
-        Data.Nat.≤
+      suc N * CutoffDepth.weightOf N (CutoffDepth.ftAdvTarget incidence)
+        ≤
       CutoffDepth.weightOf N (CutoffDepth.ftAdvSource incidence)
 
     ftTransOrientation :
-      (N : _) →
+      (N : Nat) →
       (incidence : CutoffDepth.FTToTransitionIncidence N) →
-      Agda.Builtin.Nat.suc N
-        Agda.Builtin.Nat.*
-        CutoffDepth.weightOf N (CutoffDepth.ftTransTarget incidence)
-        Data.Nat.≤
+      suc N * CutoffDepth.weightOf N (CutoffDepth.ftTransTarget incidence)
+        ≤
       CutoffDepth.weightOf N (CutoffDepth.ftTransSource incidence)
 
     residueScaleOperatorGap :
