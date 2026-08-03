@@ -8,6 +8,8 @@ on:
     paths:
       - 'DASHI/Physics/Units/MechanicalDimensionExact.agda'
       - 'DASHI/Physics/Units/PhysicalNormalizationExact.agda'
+      - 'DASHI/Physics/Limits/PhysicsLimitCommutingSquare.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNNavierStokesNormalizationTransportExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
       - 'DASHI/Physics/Closure/NSTriadKNOfficialFiniteFourierHermitianParsevalExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardHighPhysicalZ3PairEncodingExact.agda'
@@ -32,6 +34,8 @@ on:
     paths:
       - 'DASHI/Physics/Units/MechanicalDimensionExact.agda'
       - 'DASHI/Physics/Units/PhysicalNormalizationExact.agda'
+      - 'DASHI/Physics/Limits/PhysicsLimitCommutingSquare.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNNavierStokesNormalizationTransportExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
       - 'DASHI/Physics/Closure/NSTriadKNOfficialFiniteFourierHermitianParsevalExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardHighPhysicalZ3PairEncodingExact.agda'
