@@ -23,8 +23,8 @@ module DASHI.Physics.Closure.NSTriadKNLittlewoodPaleyInfrastructureInventory whe
 -- present in DASHI before selecting a frequency-localized continuation
 -- theorem.  The inventory deliberately distinguishes the existing exact
 -- periodic hard-shell calculus from the still-missing smooth-projector,
--- reconstruction, curl-commutation and time-dependent dissipation-wavenumber
--- interfaces required by the Cheskidov--Shvydkoy / Cheskidov--Dai routes.
+-- reconstruction, curl-commutation, literal nonlinear Bony decomposition and
+-- time-dependent dissipation-wavenumber interfaces.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -73,6 +73,19 @@ record HardShellToSmoothProjectorComparison
 
 open HardShellToSmoothProjectorComparison public
 
+record LiteralNavierStokesBonyDecomposition : Set₁ where
+  field
+    VelocityField : Set
+    lowHighTerm : VelocityField → VelocityField
+    highLowTerm : VelocityField → VelocityField
+    resonantTerm : VelocityField → VelocityField
+
+    nonlinearTermEqualsThreeWaySplit : Set
+    advectiveResidualIdentified : Set
+    transverseResidualIdentified : Set
+
+open LiteralNavierStokesBonyDecomposition public
+
 ------------------------------------------------------------------------
 -- Proven existing infrastructure and honest open interfaces.
 ------------------------------------------------------------------------
@@ -105,6 +118,8 @@ record LittlewoodPaleyInfrastructureReceipt : Set where
     shellReconstructionClosed : Bool
     curlProjectorCommutationClosed : Bool
     hardSmoothProjectorComparisonClosed : Bool
+    literalNavierStokesBonyDecompositionClosed : Bool
+    blockerResidualsIdentifiedWithBonyPieces : Bool
     timeDependentDissipationWavenumberClosed : Bool
 
 open LittlewoodPaleyInfrastructureReceipt public
@@ -123,6 +138,8 @@ littlewoodPaleyInfrastructureReceipt = receipt
   false
   false
   false
+  false
+  false
 
 existingHardShellLPInfrastructureRecorded : Bool
 existingHardShellLPInfrastructureRecorded = true
@@ -130,6 +147,13 @@ existingHardShellLPInfrastructureRecorded = true
 existingHardShellLPInfrastructureRecordedIsTrue :
   existingHardShellLPInfrastructureRecorded ≡ true
 existingHardShellLPInfrastructureRecordedIsTrue = refl
+
+literalNavierStokesBonyDecompositionClosed : Bool
+literalNavierStokesBonyDecompositionClosed = false
+
+literalNavierStokesBonyDecompositionClosedIsFalse :
+  literalNavierStokesBonyDecompositionClosed ≡ false
+literalNavierStokesBonyDecompositionClosedIsFalse = refl
 
 fullLocalizedContinuationProjectorInterfaceClosed : Bool
 fullLocalizedContinuationProjectorInterfaceClosed = false
