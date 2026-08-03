@@ -30,17 +30,27 @@ open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 record MultiplierCoefficientAction
     {c s : Level}
     (Coefficient : Set c)
     (Scalar : Set s) : Set (lsuc (c ⊔ s)) where
   field
+    zeroScalar oneScalar : Scalar
     zeroCoefficient : Coefficient
     scale : Scalar → Coefficient → Coefficient
+
     scaleZeroCoefficient :
       (scalar : Scalar) → scale scalar zeroCoefficient ≡ zeroCoefficient
+
+    scaleByZero :
+      (coefficient : Coefficient) →
+      scale zeroScalar coefficient ≡ zeroCoefficient
+
+    scaleByOne :
+      (coefficient : Coefficient) →
+      scale oneScalar coefficient ≡ coefficient
 
 open MultiplierCoefficientAction public
 
@@ -62,23 +72,19 @@ record LuoRadialLatticeMultiplier
       (shell : Nat) →
       (mode : Mode) →
       InnerThreeQuarterBall shell mode →
-      Set s
+      chiSymbol shell mode ≡ oneScalar A
 
     symbolVanishesOutsideUnitBall :
       (shell : Nat) →
       (mode : Mode) →
       OutsideUnitBall shell mode →
-      (coefficient : Coefficient) →
-      scale A (chiSymbol shell mode) coefficient
-        ≡ zeroCoefficient A
+      chiSymbol shell mode ≡ zeroScalar A
 
     smoothSupportInsideHardNext :
       (shell : Nat) →
       (mode : Mode) →
       hardLowSelect (suc shell) mode ≡ false →
-      (coefficient : Coefficient) →
-      scale A (chiSymbol shell mode) coefficient
-        ≡ zeroCoefficient A
+      chiSymbol shell mode ≡ zeroScalar A
 
     symbolRealValued : Nat → Mode → Set s
     symbolBetweenZeroAndOne : Nat → Mode → Set s
@@ -138,9 +144,15 @@ smoothLowPassFactorsThroughHardNext {A = A} M shell field mode
 ... | false =
   trans
     (scaleZeroCoefficient A (chiSymbol M shell mode))
-    (sym (smoothSupportInsideHardNext M shell mode refl (field mode)))
+    (sym
+      (trans
+        (cong (λ scalar → scale A scalar (field mode))
+          (smoothSupportInsideHardNext M shell mode refl))
+        (scaleByZero A (field mode))))
 
-record LocalizedMultiplierConstants (Scalar : Set) : Set₁ where
+record LocalizedMultiplierConstants
+    {s : Level}
+    (Scalar : Set s) : Set (lsuc s) where
   field
     derivativeBernsteinConstant : Scalar
     finiteModeL2ToLInfinityConstant : Scalar
@@ -151,11 +163,11 @@ open LocalizedMultiplierConstants public
 record MultiplierConstantSeparation
     {s : Level}
     {Scalar : Set s}
-    (C : LocalizedMultiplierConstants Scalar) : Set s where
+    (C : LocalizedMultiplierConstants Scalar) : Set (lsuc s) where
   field
-    derivativeConstantHasDerivativeRole : Set
-    finiteModeConstantHasLebesgueChangeRole : Set
-    hardSmoothConstantHasKernelL1Role : Set
+    derivativeConstantHasDerivativeRole : Set s
+    finiteModeConstantHasLebesgueChangeRole : Set s
+    hardSmoothConstantHasKernelL1Role : Set s
 
 open MultiplierConstantSeparation public
 
