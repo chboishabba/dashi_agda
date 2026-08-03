@@ -16,7 +16,8 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance wh
 --
 --   * Proposition 3.1: exact r_p increment-kernel flux decomposition and
 --     weighted cutoff-energy control;
---   * Section 4, equation (4.2): per-mode paraproduct/commutator evolution.
+--   * Section 4, equation (4.2): per-mode paraproduct/commutator evolution,
+--     its dyadic-range split, and the mean-value/Gronwall continuation step.
 --
 -- Uniformity is owned by one fixed b(alpha) and delta(alpha), never by
 -- shell-dependent choices.  Existing Parseval/Hermitian projection,
@@ -33,18 +34,26 @@ import DASHI.Physics.Closure.NSTriadKNLuoPublishedContinuationAuthorityExact as 
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
-import DASHI.Physics.Closure.NSTriadKNOfficialFiniteFourierHermitianParsevalExact as Parseval
 import DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit as Blockers
 
-record CanonicalPeriodicLuoSourceFaithfulCutset : Setω where
+------------------------------------------------------------------------
+-- One physical package owns every source-facing object.  This is the only
+-- nontrivial input to the canonical cutset builder below.
+------------------------------------------------------------------------
+
+record CanonicalPeriodicLuoPhysicalRealization : Setω where
   field
     existingSynthesis :
       Existing.LuoWeightedSchurContinuationSynthesis
 
-    State Tensor Scalar : Set
+    State Tensor Scalar Space : Set
 
     exactFluxKernel :
       FluxKernel.LuoExactFluxKernelDecomposition State Tensor Scalar
+
+    physicalIncrementKernel :
+      FluxKernel.LuoIncrementKernelPhysicalRealization
+        exactFluxKernel Space
 
     fluxKernelToWeightedSchur :
       FluxKernel.LuoFluxKernelToWeightedSchur exactFluxKernel
@@ -80,20 +89,52 @@ record CanonicalPeriodicLuoSourceFaithfulCutset : Setω where
     perModeShellsMatchExistingLittlewoodPaleyShells :
       PerModeShellsMatchExistingLittlewoodPaleyShells
 
+open CanonicalPeriodicLuoPhysicalRealization public
+
+record CanonicalPeriodicLuoSourceFaithfulCutset : Setω where
+  field
+    physicalRealization : CanonicalPeriodicLuoPhysicalRealization
+
 open CanonicalPeriodicLuoSourceFaithfulCutset public
+
+canonicalPeriodicLuoSourceFaithfulCutset :
+  CanonicalPeriodicLuoPhysicalRealization →
+  CanonicalPeriodicLuoSourceFaithfulCutset
+canonicalPeriodicLuoSourceFaithfulCutset realization = record
+  { physicalRealization = realization }
+
+canonicalDissipationCriterion41 :
+  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset) →
+  Uniform.DissipationCriterion41
+    (alphaAboveOneEntry (physicalRealization cutset))
+canonicalDissipationCriterion41 cutset =
+  Uniform.condition41FromAlphaAboveOneDecay
+    (alphaAboveOneEntry (physicalRealization cutset))
+
+canonicalSection4Continuity :
+  (cutset : CanonicalPeriodicLuoSourceFaithfulCutset) →
+  ModeEvolution.GronwallContinuityConclusion
+    (section4Continuity (physicalRealization cutset))
+canonicalSection4Continuity cutset =
+  ModeEvolution.section4ContinuityConclusion
+    (section4Continuity (physicalRealization cutset))
 
 continuationFromSourceFaithfulCutset :
   (cutset : CanonicalPeriodicLuoSourceFaithfulCutset) →
   Published.ContinuesBeyond
-    (Existing.continuationAuthority (existingSynthesis cutset))
-    (Existing.initialDatum (existingSynthesis cutset))
-    (Existing.terminalTime (existingSynthesis cutset))
+    (Existing.continuationAuthority
+      (existingSynthesis (physicalRealization cutset)))
+    (Existing.initialDatum
+      (existingSynthesis (physicalRealization cutset)))
+    (Existing.terminalTime
+      (existingSynthesis (physicalRealization cutset)))
 continuationFromSourceFaithfulCutset cutset =
-  Existing.luoWeightedSchurContinuation (existingSynthesis cutset)
+  Existing.luoWeightedSchurContinuation
+    (existingSynthesis (physicalRealization cutset))
 
 ------------------------------------------------------------------------
--- Existing completed prerequisites: these are references to the current
--- authoritative theorem surfaces, not newly claimed re-proofs.
+-- Existing completed prerequisites: references to current authoritative
+-- theorem surfaces, not newly claimed re-proofs.
 ------------------------------------------------------------------------
 
 parsevalHermitianPrerequisiteAvailable : Bool
@@ -133,6 +174,9 @@ residueScalePrerequisiteAvailableIsTrue =
 luoSourceFaithfulNonlinearCutsetConstructed : Bool
 luoSourceFaithfulNonlinearCutsetConstructed = true
 
+physicalRealizationToCanonicalCutsetBuilderConstructed : Bool
+physicalRealizationToCanonicalCutsetBuilderConstructed = true
+
 fixedShiftUniformityTargetConstructed : Bool
 fixedShiftUniformityTargetConstructed = true
 
@@ -148,6 +192,10 @@ canonicalBKMExclusionProvedHere = false
 luoSourceFaithfulNonlinearCutsetConstructedIsTrue :
   luoSourceFaithfulNonlinearCutsetConstructed ≡ true
 luoSourceFaithfulNonlinearCutsetConstructedIsTrue = refl
+
+physicalRealizationToCanonicalCutsetBuilderConstructedIsTrue :
+  physicalRealizationToCanonicalCutsetBuilderConstructed ≡ true
+physicalRealizationToCanonicalCutsetBuilderConstructedIsTrue = refl
 
 fixedShiftUniformityTargetConstructedIsTrue :
   fixedShiftUniformityTargetConstructed ≡ true
