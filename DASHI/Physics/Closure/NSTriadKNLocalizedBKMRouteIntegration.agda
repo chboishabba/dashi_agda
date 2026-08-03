@@ -1,25 +1,29 @@
 module DASHI.Physics.Closure.NSTriadKNLocalizedBKMRouteIntegration where
 
 ------------------------------------------------------------------------
--- Integration receipt for the localized-continuation reconnaissance tranche.
+-- Integration receipt for the localized-continuation construction tranche.
 --
--- This receipt records what is now constructively present:
---   * an inventory of existing periodic hard-shell LP/Bony infrastructure;
---   * exact source-specific continuation target interfaces;
---   * fixed-cutoff and time-dependent low/high assembly theorems;
---   * an explicit semantic adapter boundary from the two live blockers;
---   * an authority audit separating assembled routes from postulate-free
---     analytic constructions.
+-- Constructively present:
+--   * exact finite periodic hard-shell projector support;
+--   * derivative and curl commutation;
+--   * exact resonant Bony/Tao interaction classification and recomposition;
+--   * cutoff-indexed profile-depth geometry and both FT cross orientations;
+--   * an inhabited finite residue/operator/base-gap/error ladder with strict
+--     positive margin and ResidueScaleCompatibility;
+--   * a proof that the cutoff-scaled forced-tail output controls Luo's
+--     explicit-cutoff localized quantity;
+--   * the abstract finite-low/uniform-high assembly theorem.
 --
--- It also records what is not present:
---   * a complete periodic smooth LP projector package;
---   * a literal nonlinear Bony decomposition tied to the blocker residuals;
---   * a solution-dependent dissipation wavenumber Q(t);
---   * a theorem turning weighted-Schur residues into localized vorticity;
---   * postulate-free constructions of the two live analytic blockers;
---   * a postulate-free localized continuation authority.
---
--- No BKM or Clay promotion gate is changed by this module.
+-- Still open at the physical/continuation layer:
+--   * identification of legacy classifier entries with the cutoff-indexed
+--     depth carrier;
+--   * identification of the canonical finite Schur operator with the physical
+--     PDE pair-incidence operator;
+--   * identification of Nat-valued localized quantities with the actual
+--     terminal-window integral;
+--   * recovery of Luo's limsup hypothesis and application of the external
+--     continuation theorem;
+--   * all existing BKM and Clay promotion gates.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit as Source
 import DASHI.Physics.Closure.NSTriadKNFiniteLowUniformHighAssembly as Assembly
 import DASHI.Physics.Closure.NSTriadKNBlockerToLocalizedBKMCompatibility as Compatibility
 import DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit as Authority
+import DASHI.Physics.Closure.NSTriadKNLuoExplicitCutoffLocalizedCriterionExact as Luo
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds as PairBounds
 
 record LocalizedBKMRouteIntegrationReceipt : Set where
@@ -38,11 +43,17 @@ record LocalizedBKMRouteIntegrationReceipt : Set where
     existingHardShellLPInfrastructureRecorded :
       LP.existingHardShellLPInfrastructureRecorded ≡ true
 
+    exactPeriodicLPBonyPDEInterfaceConstructed :
+      LP.exactPeriodicLPBonyPDEInterfaceConstructed ≡ true
+
     finiteLowUniformHighAssemblyClosed :
       Assembly.finiteLowUniformHighAssemblyClosed ≡ true
 
     localizedBKMSourceTargetsRecorded :
       Sources.localizedBKMSourceTargetsRecorded ≡ true
+
+    luoExplicitCutoffRoutePreferred :
+      Sources.luoExplicitCutoffRoutePreferred ≡ true
 
     blockerSemanticMismatchAuditClosed :
       Compatibility.semanticMismatchAuditClosed ≡ true
@@ -50,29 +61,42 @@ record LocalizedBKMRouteIntegrationReceipt : Set where
     blockerAuthorityBoundaryAudited :
       Authority.analyticBlockerAuthorityBoundaryAudited ≡ true
 
-    blocker1RestrictedRowRouteAssembled :
-      Authority.blocker1RestrictedRowRouteAssembled ≡ true
+    blocker1LegacyRestrictedRowRouteAssembled :
+      Authority.blocker1LegacyRestrictedRowRouteAssembled ≡ true
 
-    blocker1PostulateFreeAuthorityClosed :
-      Authority.blocker1PostulateFreeAuthorityClosed ≡ false
+    blocker1CutoffIndexedDepthGeometryConstructed :
+      Authority.blocker1CutoffIndexedDepthGeometryConstructed ≡ true
+
+    blocker1BothWeightOrientationsConstructed :
+      Authority.blocker1BothWeightOrientationsConstructed ≡ true
+
+    blocker1LegacyNatEntryIdentificationClosed :
+      Authority.blocker1LegacyNatEntryIdentificationClosed ≡ false
+
+    blocker2FiniteCanonicalOperatorGapAuthorityConstructed :
+      Authority.blocker2FiniteCanonicalOperatorGapAuthorityConstructed ≡ true
 
     blocker2ResidueScaleCompatibilityConstructed :
-      Authority.blocker2ResidueScaleCompatibilityConstructed ≡ false
+      Authority.blocker2ResidueScaleCompatibilityConstructed ≡ true
+
+    blocker2PhysicalPairIncidenceKernelIdentificationClosed :
+      Authority.blocker2PhysicalPairIncidenceKernelIdentificationClosed
+        ≡ false
+
+    forcedTailOutputControlsLuoCutoffQuantity :
+      Luo.forcedTailOutputControlsLuoCutoffQuantity ≡ true
+
+    physicalGradientIntegralIdentificationClosed :
+      Luo.physicalGradientIntegralIdentificationClosed ≡ false
+
+    luoLimsupContinuationAuthorityClosed :
+      Luo.luoLimsupContinuationAuthorityClosed ≡ false
 
     fullLocalizedProjectorInterfaceClosed :
       LP.fullLocalizedContinuationProjectorInterfaceClosed ≡ false
 
-    literalNavierStokesBonyDecompositionClosed :
-      Compatibility.literalNavierStokesBonyDecompositionClosed ≡ false
-
     forcedTailResidualsIdentifiedWithBonyPieces :
       Compatibility.forcedTailResidualsIdentifiedWithBonyPieces ≡ false
-
-    forcedTailToLocalizedVorticityBridgeClosed :
-      Compatibility.forcedTailToLocalizedVorticityBridgeClosed ≡ false
-
-    residueScaleToDissipationWavenumberBridgeClosed :
-      Compatibility.residueScaleToDissipationWavenumberBridgeClosed ≡ false
 
     blockersToLocalizedBKMBridgeClosed :
       Compatibility.blockersToLocalizedBKMBridgeClosed ≡ false
@@ -94,30 +118,36 @@ localizedBKMRouteIntegrationReceipt :
   LocalizedBKMRouteIntegrationReceipt
 localizedBKMRouteIntegrationReceipt = receipt
   LP.existingHardShellLPInfrastructureRecordedIsTrue
+  LP.exactPeriodicLPBonyPDEInterfaceConstructedIsTrue
   Assembly.finiteLowUniformHighAssemblyClosedIsTrue
   Sources.localizedBKMSourceTargetsRecordedIsTrue
+  Sources.luoExplicitCutoffRoutePreferredIsTrue
   Compatibility.semanticMismatchAuditClosedIsTrue
   Authority.analyticBlockerAuthorityBoundaryAuditedIsTrue
-  Authority.blocker1RestrictedRowRouteAssembledIsTrue
-  Authority.blocker1PostulateFreeAuthorityClosedIsFalse
-  Authority.blocker2ResidueScaleCompatibilityConstructedIsFalse
+  Authority.blocker1LegacyRestrictedRowRouteAssembledIsTrue
+  Authority.blocker1CutoffIndexedDepthGeometryConstructedIsTrue
+  Authority.blocker1BothWeightOrientationsConstructedIsTrue
+  Authority.blocker1LegacyNatEntryIdentificationClosedIsFalse
+  Authority.blocker2FiniteCanonicalOperatorGapAuthorityConstructedIsTrue
+  Authority.blocker2ResidueScaleCompatibilityConstructedIsTrue
+  Authority.blocker2PhysicalPairIncidenceKernelIdentificationClosedIsFalse
+  Luo.forcedTailOutputControlsLuoCutoffQuantityIsTrue
+  Luo.physicalGradientIntegralIdentificationClosedIsFalse
+  Luo.luoLimsupContinuationAuthorityClosedIsFalse
   LP.fullLocalizedContinuationProjectorInterfaceClosedIsFalse
-  Compatibility.literalNavierStokesBonyDecompositionClosedIsFalse
   Compatibility.forcedTailResidualsIdentifiedWithBonyPiecesIsFalse
-  Compatibility.forcedTailToLocalizedVorticityBridgeClosedIsFalse
-  Compatibility.residueScaleToDissipationWavenumberBridgeClosedIsFalse
   Compatibility.blockersToLocalizedBKMBridgeClosedIsFalse
   Sources.anyLocalizedContinuationRouteConstructedIsFalse
   refl
   (PairBounds.clayPromotedIsFalse
     PairBounds.canonicalNSTriadKNPairIncidenceProfileBounds)
 
-localizedBKMReconnaissanceComplete : Bool
-localizedBKMReconnaissanceComplete = true
+localizedBKMConstructionTrancheComplete : Bool
+localizedBKMConstructionTrancheComplete = true
 
-localizedBKMReconnaissanceCompleteIsTrue :
-  localizedBKMReconnaissanceComplete ≡ true
-localizedBKMReconnaissanceCompleteIsTrue = refl
+localizedBKMConstructionTrancheCompleteIsTrue :
+  localizedBKMConstructionTrancheComplete ≡ true
+localizedBKMConstructionTrancheCompleteIsTrue = refl
 
 localizedBKMRouteReadyForPromotion : Bool
 localizedBKMRouteReadyForPromotion = false
