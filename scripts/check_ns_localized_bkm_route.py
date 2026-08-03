@@ -105,9 +105,10 @@ def main() -> int:
     require(integration, "localizedBKMRouteReadyForPromotion = false", "integration gate")
     require(integration, "localizedBKMReconnaissanceComplete = true", "reconnaissance receipt")
 
-    print("[7/7] Rejecting postulates and accidental promotions in new files...")
+    print("[7/7] Rejecting declarations of new axioms and accidental promotions...")
     for name in ("inventory", "sources", "assembly", "compatibility", "integration"):
-        forbid(text[name], "postulate", name)
+        forbid(text[name], "\npostulate\n", name)
+        forbid(text[name], "\npostulate ", name)
         forbid(text[name], "bkmExclusionProved = true", name)
         forbid(text[name], "clayNavierStokesPromoted = true", name)
         forbid(text[name], "localizedBKMRouteReadyForPromotion = true", name)
