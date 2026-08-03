@@ -142,6 +142,9 @@ record Equation42FiniteRangeData : Set₁ where
     J1DecisionHasSourceMeaning : Set
     j1DecisionHasSourceMeaning : J1DecisionHasSourceMeaning
 
+    J2DecisionHasSourceMeaning : Set
+    j2DecisionHasSourceMeaning : J2DecisionHasSourceMeaning
+
     J11DecisionHasSourceMeaning : Set
     j11DecisionHasSourceMeaning : J11DecisionHasSourceMeaning
 
