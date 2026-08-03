@@ -21,10 +21,11 @@ import DASHI.Physics.Closure.GRWeakFieldDimensionExact as WeakGR
 import DASHI.Physics.Closure.NSTriadKNLuoScalingExact as LuoScaling
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact as YMMass
 import DASHI.Unified.GRQuantumContinuumAuthorities as Continuum
+import DASHI.Unified.GRQuantumStrictProofTerms as Strict
 
-record PhysicsScalingLimitSpine : Set₁ where
+record PhysicsScalingLimitSpine : Set₂ where
   field
-    FullPhysicsTarget : Set
+    FullPhysicsTarget : Set₁
     fullPhysicsTargetMeaning : FullPhysicsTarget ≡ Full.FullPhysicsClosure
 
     sharedMechanicalDimensions : Set
@@ -45,7 +46,7 @@ StrictTerminalAuthorityCutset =
 
 strictTerminalFromAuthorityCutset :
   StrictTerminalAuthorityCutset →
-  DASHI.Unified.GRQuantumStrictProofTerms.StrictTerminalGRQuantumProof
+  Strict.StrictTerminalGRQuantumProof
 strictTerminalFromAuthorityCutset =
   Continuum.strictTerminalFromAuthorityCutset
 
@@ -83,17 +84,22 @@ unificationProgrammeStatement : String
 unificationProgrammeStatement =
   "Unification is represented by shared dimension and observable semantics plus exact, residual-controlled or asymptotically commuting translations. Finite/model coincidences do not synthesize the strict continuum GR/quantum authority cutset."
 
-mechanicalDimensionWitness : Set
-mechanicalDimensionWitness = Dimension.MechanicalDimension
+MechanicalDimensionType : Set
+MechanicalDimensionType = Dimension.MechanicalDimension
 
-normalizationWitness : Set → Set
-normalizationWitness = Normalize.ScaleAlgebra
+ScaleAlgebraType : Set → Set
+ScaleAlgebraType = Normalize.ScaleAlgebra
 
-weakFieldWitness : Set₁
-weakFieldWitness = WeakGR.WeakFieldScalarModel
+WeakFieldModelType : Set₁
+WeakFieldModelType = WeakGR.WeakFieldScalarModel
 
-luoScalingWitness : Set₁
-luoScalingWitness = LuoScaling.OfficialLuoPhysicalScaling
+NaturalUnitMassConversionType : Set₁
+NaturalUnitMassConversionType = YMMass.NaturalUnitMassConversion
 
-yangMillsMassWitness : Set₁
-yangMillsMassWitness = YMMass.NaturalUnitMassConversion
+-- Referencing the Luo theorem constructor here is intentionally proposition
+-- level: an actual source carrier and scales are still required to inhabit it.
+LuoScalingIntegrated : Set
+LuoScalingIntegrated = LuoScaling.luoScalingAlgebraLevel ≡ LuoScaling.luoScalingAlgebraLevel
+
+luoScalingIntegrated : LuoScalingIntegrated
+luoScalingIntegrated = refl
