@@ -144,8 +144,7 @@ officialPeriodicLuoAuthority C = record
       SourceNormalizationMatchesLuo C
   ; periodicDomainMatchesSource =
       sourceNormalizationMatchesLuo C
-  ; localizedGradientIntegral =
-      localizedGradientIntegral C
+  ; localizedGradientIntegral = localizedGradientIntegral C
   ; universalDeltaBKM = universalDeltaBKM C
   ; LuoLocalizedGradientLimsupBound =
       LuoLocalizedGradientLimsupBound C
@@ -175,14 +174,29 @@ record OfficialLuoSolutionSelection
     solvesFromInitialData :
       SolvesPeriodicNavierStokesFrom carrier initial solution
 
-    regularBeforeTerminal :
-      LH.RegularLerayHopfBeforeTerminal
-        (lerayHopfSolutionAt carrier initial solution) terminal
-
     regularityMatchesSource :
       RegularOnOpenTerminalInterval carrier solution terminal
 
 open OfficialLuoSolutionSelection public
+
+selectedRegularBeforeTerminal :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {carrier : OfficialPeriodicLuoSourceCarrier InitialDatum Solution Time}
+    {initial : InitialDatum}
+    {solution : Solution}
+    {terminal : Time} →
+  OfficialLuoSolutionSelection carrier initial solution terminal →
+  LH.RegularLerayHopfBeforeTerminal
+    (lerayHopfSolutionAt carrier initial solution) terminal
+selectedRegularBeforeTerminal {carrier = carrier}
+  {initial = initial} {solution = solution} {terminal = terminal} S =
+  regularityMatchesRegularLerayHopf carrier
+    initial solution terminal
+    (solvesFromInitialData S)
+    (regularityMatchesSource S)
 
 selectedLuoAuthorityLevel : ProofLevel
 selectedLuoAuthorityLevel = standardImported
