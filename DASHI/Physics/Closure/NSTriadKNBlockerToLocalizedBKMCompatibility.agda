@@ -8,9 +8,10 @@ module DASHI.Physics.Closure.NSTriadKNBlockerToLocalizedBKMCompatibility where
 -- The forced-tail records are weighted-Schur restricted-row witnesses.
 -- ResidueScaleCompatibility is a weak/strong quadratic-form and gap-
 -- absorption witness.  Neither type is definitionally a Littlewood--Paley
--- vorticity norm or a time-dependent dissipation wavenumber.  This module
--- therefore refuses the unsound shortcut of treating either blocker as an
--- already-proved localized BKM estimate.
+-- vorticity norm or a time-dependent dissipation wavenumber.  Likewise, the
+-- existing Bony/Tao modules provide a trichotomy and permutation template,
+-- not yet a literal decomposition identifying these residuals with the
+-- low-high, high-low or resonant terms of u dot grad u / u dot grad omega.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -50,6 +51,9 @@ record ForcedTailToLocalizedVorticityBridge : Set₁ where
     transitionRestrictedRow :
       ForcedTail.ForcedTailToTransitionRestrictedRowN1
 
+    literalNavierStokesBonyDecomposition :
+      LP.LiteralNavierStokesBonyDecomposition
+
     cutoffIndexIdentifiedWithDyadicShellScale : Set
 
     restrictedWeightedRowsControlShellVorticity : Set
@@ -72,7 +76,8 @@ record ResidueScaleToDissipationWavenumberBridge : Set₁ where
     periodicProjectorInterface :
       LP.PeriodicLittlewoodPaleyProjectorInterface
 
-    dissipationWavenumberConstructed : Set
+    dissipationRange :
+      Sources.DissipationWavenumberInterface
 
     bernsteinViscosityThresholdVerified : Set
 
@@ -113,6 +118,12 @@ blockersToContinuationAuthority bridge =
 -- Honest route status.
 ------------------------------------------------------------------------
 
+literalNavierStokesBonyDecompositionClosed : Bool
+literalNavierStokesBonyDecompositionClosed = false
+
+forcedTailResidualsIdentifiedWithBonyPieces : Bool
+forcedTailResidualsIdentifiedWithBonyPieces = false
+
 forcedTailToLocalizedVorticityBridgeClosed : Bool
 forcedTailToLocalizedVorticityBridgeClosed = false
 
@@ -121,6 +132,14 @@ residueScaleToDissipationWavenumberBridgeClosed = false
 
 blockersToLocalizedBKMBridgeClosed : Bool
 blockersToLocalizedBKMBridgeClosed = false
+
+literalNavierStokesBonyDecompositionClosedIsFalse :
+  literalNavierStokesBonyDecompositionClosed ≡ false
+literalNavierStokesBonyDecompositionClosedIsFalse = refl
+
+forcedTailResidualsIdentifiedWithBonyPiecesIsFalse :
+  forcedTailResidualsIdentifiedWithBonyPieces ≡ false
+forcedTailResidualsIdentifiedWithBonyPiecesIsFalse = refl
 
 forcedTailToLocalizedVorticityBridgeClosedIsFalse :
   forcedTailToLocalizedVorticityBridgeClosed ≡ false
