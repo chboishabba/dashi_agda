@@ -13,13 +13,21 @@ FILES = {
     "scale": CLOSURE / "NSTriadKNLocalizedBKMScaleDictionaryExact.agda",
     "source": CLOSURE / "NSTriadKNLuoPrimarySourceProofArchitectureExact.agda",
     "enumeration": CLOSURE / "NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda",
+    "physical_reuse": CLOSURE / "NSTriadKNLuoPhysicalEnumerationReuseExact.agda",
+    "hard_selection": CLOSURE / "NSTriadKNPhysicalHardHighTriadSelectionExact.agda",
+    "hard_projector": CLOSURE / "NSTriadKNPeriodicHardProjectorAlgebraExact.agda",
+    "hard_smooth": CLOSURE / "NSTriadKNHardSmoothLittlewoodPaleyTransferExact.agda",
     "flux": CLOSURE / "NSTriadKNPhysicalCutoffFluxWeightedSchurExact.agda",
     "reuse": CLOSURE / "NSTriadKNWeightedSchurPhysicalFluxReuseExact.agda",
+    "full_shell": CLOSURE / "NSTriadKNLuoFullShellFluxAdapterExact.agda",
     "energy": CLOSURE / "NSTriadKNProjectedConvectionEnergyFluxExact.agda",
     "bootstrap": CLOSURE / "NSTriadKNLuoCutoffEnergyBootstrapExact.agda",
     "integration": CLOSURE / "NSTriadKNLuoWeightedSchurFluxIntegration.agda",
     "top": CLOSURE / "NSTriadKNLocalizedBKMRouteIntegration.agda",
     "weighted_schur": CLOSURE / "NSTriadKNWeightedSchurProductBound.agda",
+    "physical_triads": CLOSURE / "NSTriadKNPhysicalTriadEnumeration.agda",
+    "physical_fibre": CLOSURE / "NSTriadKNValidatedPhysicalFiberImage.agda",
+    "full_shell_existing": CLOSURE / "NSCompactGammaFullShellSchur.agda",
     "pair_bounds": CLOSURE / "NSTriadKNPairIncidenceProfileBounds.agda",
     "dictionary": ROOT / "docs" / "ns-localized-bkm-variable-dictionary.md",
 }
@@ -28,8 +36,13 @@ NEW_AGDA = (
     "scale",
     "source",
     "enumeration",
+    "physical_reuse",
+    "hard_selection",
+    "hard_projector",
+    "hard_smooth",
     "flux",
     "reuse",
+    "full_shell",
     "energy",
     "bootstrap",
     "integration",
@@ -63,7 +76,7 @@ def load() -> dict[str, str]:
 def main() -> int:
     text = load()
 
-    print("[1/9] Checking Luo source fidelity...")
+    print("[1/13] Checking Luo source fidelity...")
     source = text["source"]
     for token in (
         "10.1007/s00021-019-0411-z",
@@ -76,7 +89,7 @@ def main() -> int:
     ):
         require(source, token, "Luo source architecture")
 
-    print("[2/9] Checking scale-role separation...")
+    print("[2/13] Checking scale-role separation...")
     scale = text["scale"]
     for token in (
         "shellIndexRole",
@@ -93,7 +106,38 @@ def main() -> int:
     require(dictionary, "Never rewrite `(N + 1)^-1`", "markdown dictionary")
     require(dictionary, "Weighted Schur is used on the flux/energy factor", "markdown dictionary")
 
-    print("[3/9] Checking multiplicity-safe enumeration...")
+    print("[3/13] Checking exact physical triad/fibre reuse...")
+    physical_reuse = text["physical_reuse"]
+    for token in (
+        "physicalTriadEnumerationImplementedIsTrue",
+        "physicalTriadEnumerationDuplicateFreeIsTrue",
+        "physicalOutputFiberImplementedIsTrue",
+        "hardProjectedHighFrequencySelectionConstructed = true",
+        "validatedPhysicalFiberImageConstructedIsTrue",
+        "exactPhysicalKernelIdentificationReductionImplementedIsTrue",
+        "hardProjectorComparedWithLuoSmoothProjector = false",
+    ):
+        require(physical_reuse, token, "physical enumeration reuse")
+    require(text["physical_triads"], "physicalTriadEnumerationImplemented = true", "literal physical triads")
+    require(text["physical_fibre"], "validatedPhysicalFiberImageConstructed = true", "validated physical fibre")
+
+    print("[4/13] Checking hard projected high-output selection...")
+    hard_selection = text["hard_selection"]
+    for token in (
+        "hardHighPhysicalTriads",
+        "filterHighMemberWasOriginal",
+        "filterHighSound",
+        "filterHighComplete",
+        "filterHighNoDuplicates",
+        "hardHighPhysicalTriadSelectionSound",
+        "hardHighPhysicalTriadSelectionComplete",
+        "hardHighPhysicalTriadNoDuplicates",
+        "hardHighOutputSelectionConstructed = true",
+        "hardLowHighPartitionConstructed = true",
+    ):
+        require(hard_selection, token, "hard high selector")
+
+    print("[5/13] Checking multiplicity-safe enumeration interfaces...")
     enumeration = text["enumeration"]
     for token in (
         "ExactFiniteEnumeration",
@@ -104,9 +148,33 @@ def main() -> int:
         "fibreLengthsAgree",
         "physicalProjectedConvolutionTriadEnumerationInhabited = false",
     ):
-        require(enumeration, token, "projected enumeration")
+        require(enumeration, token, "projected enumeration interface")
 
-    print("[4/9] Checking Hermitian physical-flux domination...")
+    print("[6/13] Checking hard projector and hard/smooth transfer algebra...")
+    hard_projector = text["hard_projector"]
+    for token in (
+        "highProjector",
+        "lowProjectorIdempotent",
+        "highProjectorIdempotent",
+        "lowAfterHighIsZero",
+        "highAfterLowIsZero",
+        "highProjectorCommutesWithDerivative",
+        "highProjectorCommutesWithCurl",
+        "hardLowHighDisjointnessConstructed = true",
+    ):
+        require(hard_projector, token, "hard projector algebra")
+    hard_smooth = text["hard_smooth"]
+    for token in (
+        "HardBandWitness",
+        "smoothSupportOccursInHardBand",
+        "HardSmoothTerminalWindowComparison",
+        "hardTerminalWindowBudgetTransfersToLuoSmoothCriterion",
+        "hardSmoothTerminalWindowTransferConstructed = true",
+        "concreteSmoothPeriodicMultiplierFamilyConstructed = false",
+    ):
+        require(hard_smooth, token, "hard smooth transfer")
+
+    print("[7/13] Checking Hermitian physical-flux domination...")
     flux = text["flux"]
     for token in (
         "complexDifferenceNormSquared",
@@ -121,43 +189,64 @@ def main() -> int:
         require(flux, token, "physical flux theorem")
     require(flux, "physicalWeightedSchurBridgeInhabited = false", "physical flux gate")
 
-    print("[5/9] Checking existing weighted-Schur reuse...")
+    print("[8/13] Checking existing weighted-Schur and full-shell reuse...")
     reuse = text["reuse"]
     require(reuse, "weightedSchurProductBoundClosed ≡ true", "Schur reuse")
     require(reuse, "weightedSchurMatrixOperatorDataClosed ≡ false", "Schur concrete gate")
     require(reuse, "weightedSchurRelevantToLuoFluxRoute = true", "Schur relevance")
     require(text["weighted_schur"], "weightedSchurProductBoundClosed = true", "existing Schur algebra")
+    full_shell = text["full_shell"]
+    for token in (
+        "Closure.closureNearResponseMajorized",
+        "luoFullShellCutoffFluxEstimate",
+        "matureFullShellNearMajorizationReused = true",
+        "matureFullShellUniformSchurReused = true",
+        "luoFullShellPhysicalIdentificationInhabited = false",
+    ):
+        require(full_shell, token, "full-shell Luo adapter")
+    require(text["full_shell_existing"], "everyLocalFourierMajorization", "existing full shell")
+    require(text["full_shell_existing"], "certificateAt", "existing full-shell Schur")
 
-    print("[6/9] Checking projected energy-flux composition...")
+    print("[9/13] Checking projected energy-flux composition...")
     energy = text["energy"]
     for token in (
         "ProjectedCutoffEnergyBalance",
         "divergenceFreePressureCancellation",
         "highFrequencyEnergyInequality",
         "PeriodicProjectedConvectionFluxAdapter",
+        "HardHighPassProjectorSelfAdjoint",
         "hardHighPassProjectorSelfAdjoint",
         "projectedEnergyControlledByWeightedSchurFlux",
     ):
         require(energy, token, "projected energy flux")
     require(energy, "periodicProjectedConvectionFluxAdapterInhabited = false", "projected physical gate")
 
-    print("[7/9] Checking Luo bootstrap algebra...")
+    print("[10/13] Checking Luo bootstrap algebra...")
     bootstrap = text["bootstrap"]
     for token in (
         "LuoParabolicTimeCutoff",
+        "SupportInShiftedParabolicWindow",
+        "supportInShiftedParabolicWindow",
         "LuoCutoffEnergyFluxData",
         "localizedGradientSubstitution",
         "luoSmallTimeEnergyDissipationRecursion",
         "LuoCutoffBootstrapCertificate",
         "luoCutoffBootstrapBound",
+        "BootstrapDecayImpliesRegularity",
+        "bootstrapDecayImpliesRegularity",
     ):
         require(bootstrap, token, "Luo bootstrap")
     require(bootstrap, "physicalLuoBootstrapAdapterInhabited = false", "bootstrap physical gate")
 
-    print("[8/9] Checking integrated fail-closed ledger...")
+    print("[11/13] Checking integrated fail-closed ledger...")
     integration = text["integration"]
     for token in (
+        "literalPhysicalCutoffEnumerationAvailable",
+        "hardProjectedHighFrequencySelectionConstructed",
+        "validatedPhysicalKernelImageAvailable",
         "luoWeightedSchurFluxTrancheComplete = true",
+        "hardSmoothProjectorComparisonOpen",
+        "physicalTriadCoefficientDominationOpen",
         "luoWeightedSchurFluxRouteReadyForPromotion = false",
         "existingBKMExclusionStillFalse",
         "existingClayPromotionStillFalse",
@@ -166,7 +255,26 @@ def main() -> int:
     require(text["top"], "weightedSchurFluxTrancheConstructed", "top integration")
     require(text["pair_bounds"], "canonicalBKMExclusionProved = false", "legacy BKM gate")
 
-    print("[9/9] Rejecting axioms and accidental promotion...")
+    print("[12/13] Checking proof-relevant semantic adapters...")
+    for label, content, pairs in (
+        ("energy adapter", energy, (
+            ("HardHighPassProjectorSelfAdjoint", "hardHighPassProjectorSelfAdjoint"),
+            ("ProjectedConvectionTriadsExactlyEnumerated", "projectedConvectionTriadsExactlyEnumerated"),
+        )),
+        ("bootstrap adapter", bootstrap, (
+            ("PhysicalEnergyIdentityMatchesCutoffData", "physicalEnergyIdentityMatchesCutoffData"),
+            ("BootstrapDecayImpliesRegularity", "bootstrapDecayImpliesRegularity"),
+        )),
+        ("full-shell adapter", full_shell, (
+            ("SelectedPairListIsHardHighPhysicalTriadImage", "selectedPairListIsHardHighPhysicalTriadImage"),
+            ("ProfileSchurConstantUniformInCutoff", "profileSchurConstantUniformInCutoff"),
+        )),
+    ):
+        for proposition, witness in pairs:
+            require(content, proposition, label)
+            require(content, witness, label)
+
+    print("[13/13] Rejecting axioms and accidental promotion...")
     for name in NEW_AGDA:
         forbid(text[name], "\npostulate\n", name)
         forbid(text[name], "\npostulate ", name)
@@ -174,7 +282,7 @@ def main() -> int:
         forbid(text[name], "clayNavierStokesPromoted = true", name)
         forbid(text[name], "RouteReadyForPromotion = true", name)
 
-    print("PASS: Luo weighted-Schur flux tranche is attributed and fail-closed at the physical seam.")
+    print("PASS: Luo weighted-Schur flux tranche is attributed and fail-closed at the remaining physical seam.")
     print("NOTE: this is a static source audit; run the focused Agda checker separately.")
     return 0
 
