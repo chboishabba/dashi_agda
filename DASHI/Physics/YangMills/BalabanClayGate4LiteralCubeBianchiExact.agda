@@ -159,8 +159,8 @@ cancellableBoundaryIdentity :
   (site : Periodic.PeriodicBlock n) →
   BoundaryIdentity realization site word
 cancellableBoundaryIdentity stepLaws realization boundaryEmpty site = record
-  { BoundaryIdentity.boundaryCloses = refl
-  ; BoundaryIdentity.boundaryHolonomyIdentity = refl
+  { boundaryCloses = refl
+  ; boundaryHolonomyIdentity = refl
   }
 cancellableBoundaryIdentity {group = group} stepLaws realization
   (boundaryWrap direction {inside = inside} {rest = rest}
@@ -176,7 +176,7 @@ cancellableBoundaryIdentity {group = group} stepLaws realization
     tailHolonomy =
       wrappedTailHolonomy stepLaws realization site direction rest restIdentity
   in record
-  { BoundaryIdentity.boundaryCloses =
+  { boundaryCloses =
       trans
         (Path.walkAppend stepped inside tail)
         (trans
@@ -186,7 +186,7 @@ cancellableBoundaryIdentity {group = group} stepLaws realization
             (cong (λ intermediate → Bond.walk intermediate rest)
               (Path.walkOppositeStep stepLaws site direction))
             (boundaryCloses restIdentity)))
-  ; BoundaryIdentity.boundaryHolonomyIdentity =
+  ; boundaryHolonomyIdentity =
       trans
         (cong
           (Bond.multiply group
