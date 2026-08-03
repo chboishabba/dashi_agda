@@ -109,6 +109,61 @@ canonicalCMSBelowZDrellYanEmpiricalContact = record
   ; projectionDigestMatchesSource = refl
   }
 
+------------------------------------------------------------------------
+-- The user's stronger early claim is represented as an explicit promotion
+-- target, rather than being discarded or silently asserted.
+------------------------------------------------------------------------
+
+record ZeroFittedParameterAuthority : Set₁ where
+  field
+    PredictionFrozenBeforeCMSComparison : Set
+    predictionFrozenBeforeCMSComparison :
+      PredictionFrozenBeforeCMSComparison
+
+    NoT43OrT44Calibration : Set
+    noT43OrT44Calibration : NoT43OrT44Calibration
+
+    CanonicalParameterInventoryComplete : Set
+    canonicalParameterInventoryComplete :
+      CanonicalParameterInventoryComplete
+
+    parameterInventoryDigest : String
+
+open ZeroFittedParameterAuthority public
+
+record CanonicalSpineRecoveryAuthority : Set₁ where
+  field
+    OneCanonicalSpine : Set
+    oneCanonicalSpine : OneCanonicalSpine
+
+    SpacetimeGeometryRecovered : Set
+    spacetimeGeometryRecovered : SpacetimeGeometryRecovered
+
+    SpinorFieldsRecovered : Set
+    spinorFieldsRecovered : SpinorFieldsRecovered
+
+    GaugeRepresentationRecovered : Set
+    gaugeRepresentationRecovered : GaugeRepresentationRecovered
+
+    WaveDynamicsRecovered : Set
+    waveDynamicsRecovered : WaveDynamicsRecovered
+
+    StressEnergyRecovered : Set
+    stressEnergyRecovered : StressEnergyRecovered
+
+    AllRecoveriesShareTheSameSpine : Set
+    allRecoveriesShareTheSameSpine : AllRecoveriesShareTheSameSpine
+
+open CanonicalSpineRecoveryAuthority public
+
+record StrongEarlyClaimAuthority : Set₁ where
+  field
+    empiricalContact : CMSBelowZDrellYanEmpiricalContact
+    canonicalRecovery : CanonicalSpineRecoveryAuthority
+    zeroFittedParameters : ZeroFittedParameterAuthority
+
+open StrongEarlyClaimAuthority public
+
 boundedBelowZComparisonLawPromoted : Bool
 boundedBelowZComparisonLawPromoted = true
 
@@ -127,6 +182,9 @@ zeroFittedParametersProved = false
 cmsContactProvesWholeCanonicalSpine : Bool
 cmsContactProvesWholeCanonicalSpine = false
 
+strongEarlyClaimAuthorityConstructed : Bool
+strongEarlyClaimAuthorityConstructed = false
+
 boundedBelowZComparisonLawPromotedIsTrue :
   boundedBelowZComparisonLawPromoted ≡ true
 boundedBelowZComparisonLawPromotedIsTrue = refl
@@ -143,6 +201,14 @@ cmsContactProvesWholeCanonicalSpineIsFalse :
   cmsContactProvesWholeCanonicalSpine ≡ false
 cmsContactProvesWholeCanonicalSpineIsFalse = refl
 
+strongEarlyClaimAuthorityConstructedIsFalse :
+  strongEarlyClaimAuthorityConstructed ≡ false
+strongEarlyClaimAuthorityConstructedIsFalse = refl
+
 recommendedBoundedClaim : String
 recommendedBoundedClaim =
   "DASHI has a bounded empirical contact with CMS-SMP-20-003 t43. The frozen t43/t44 covariance comparison for the 50--76 / 76--106 GeV Drell-Yan ratio gives chi2/dof=2.1565191176 and mean prediction/data=0.9941233097 at commit 3205d746639568762c9e97adf4a3672c356bd491. Agda verifies the typed receipt, source binding, digests and claim boundary; the external numerical fit is byte-replayable but is not itself recomputed by the Agda kernel."
+
+strongEarlyClaimTarget : String
+strongEarlyClaimTarget =
+  "After constructing StrongEarlyClaimAuthority, DASHI may state that one canonical spine recovers spacetime geometry, spinor fields, gauge representation, wave dynamics and stress-energy, and that a prediction frozen before CMS comparison with zero fitted t43/t44 parameters attains the recorded below-Z covariance metrics."
