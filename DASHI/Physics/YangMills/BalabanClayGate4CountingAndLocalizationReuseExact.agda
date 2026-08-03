@@ -7,6 +7,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRationalConstantsExact as BishopConstants
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanCriticalMapRGCutsetCompletion as ExistingRG
 
@@ -51,7 +52,7 @@ componentFamilyCountingBound :
     (dataSet : RootedComponentFamilyCounting Scale Volume Root)
     scale volume root depth →
   componentFamilyMass dataSet scale volume root depth
-  ≤ Shell.quarter * Shell.halfPower depth
+  ≤ BishopConstants.quarter * BishopConstants.halfPower depth
 componentFamilyCountingBound dataSet scale volume root depth =
   Shell.transitive (shellData dataSet)
     (componentFamilyEmbedsInRootedShell dataSet scale volume root depth)
@@ -82,11 +83,11 @@ exactRootedFamilyCounting :
       Scale Volume Root shellData)
     family →
   familyMass representation family
-  ≤ Shell.quarter * Shell.halfPower (depthOf representation family)
+  ≤ BishopConstants.quarter * BishopConstants.halfPower (depthOf representation family)
 exactRootedFamilyCounting {shellData = shellData} representation family =
   subst
     (λ lower → lower
-      ≤ Shell.quarter * Shell.halfPower (depthOf representation family))
+      ≤ BishopConstants.quarter * BishopConstants.halfPower (depthOf representation family))
     (sym (familyMassDefinition representation family))
     (Shell.rootedShellBelowQuarterHalfPower shellData
       (scaleOf representation family)
