@@ -58,7 +58,7 @@ flatProductExactOnList dataSet [] allOne = refl
 flatProductExactOnList dataSet (plaquette ∷ plaquettes) allOne =
   trans
     (cong₂ (Wilson.multiply (productData dataSet))
-      (allOne plaquette here)
+      (allOne plaquette (here refl))
       (flatProductExactOnList dataSet plaquettes
         (λ selected membership →
           allOne selected (there membership))))
