@@ -3,7 +3,8 @@ module DASHI.Physics.Closure.NSTriadKNLittlewoodPaleyInfrastructureInventory whe
 ------------------------------------------------------------------------
 -- PROVENANCE
 -- Authors: Jean-Michel Bony; Hajer Bahouri; Jean-Yves Chemin;
--- Raphael Danchin; Terence Tao; Dong Li; DASHI repository contributors.
+-- Raphael Danchin; Terence Tao; Dong Li; Xiaoyutao Luo;
+-- DASHI repository contributors.
 -- Titles:
 --   * "Calcul symbolique et propagation des singularites pour les
 --      equations aux derivees partielles non lineaires";
@@ -11,20 +12,23 @@ module DASHI.Physics.Closure.NSTriadKNLittlewoodPaleyInfrastructureInventory whe
 --   * "Lecture Notes 6 for 247B: Paradifferential calculus, fractional
 --      chain and Leibnitz rules";
 --   * "On a Frequency Localized Bernstein Inequality and Some Generalized
---      Poincare-Type Inequalities".
+--      Poincare-Type Inequalities";
+--   * "A Beale-Kato-Majda Criterion with Optimal Frequency and Temporal
+--      Localization".
 -- DOI:
 --   * 10.24033/asens.1404;
 --   * 10.1007/978-3-642-16830-7;
 --   * Tao's lecture notes have no DOI;
---   * 10.48550/arXiv.1212.0183.
+--   * 10.48550/arXiv.1212.0183;
+--   * 10.1007/s00021-019-0411-z.
 --
 -- PURPOSE
 -- Inventory the Littlewood--Paley/paradifferential infrastructure already
--- present in DASHI before selecting a frequency-localized continuation
--- theorem.  The inventory deliberately distinguishes the existing exact
--- periodic hard-shell calculus from the still-missing smooth-projector,
--- reconstruction, curl-commutation, literal nonlinear Bony decomposition and
--- time-dependent dissipation-wavenumber interfaces.
+-- present in DASHI.  The exact finite periodic hard-shell projector, its
+-- derivative/curl commutation, resonant triad carrier, and Bony/Tao
+-- classification are now constructed.  Smooth-projector norm comparison,
+-- literal time-integral identification, and the continuation theorem remain
+-- separate analytic obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -37,10 +41,12 @@ import DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein as Bernstein
 import DASHI.Physics.Closure.NSTriadKNTaoFrozenLegParaproductProgram as Tao
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationKatoPonceBonyScopeAudit as Bony
 import DASHI.Physics.Closure.NSTriadKNDongLiFrequencyLocalizedCoercivityAudit as DongLi
+import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as ExactLP
 
 ------------------------------------------------------------------------
--- Abstract projector interface required by localized continuation criteria.
--- No canonical inhabitant is asserted here.
+-- Abstract smooth/analytic projector interface required by the external
+-- continuation criteria.  The exact hard-shell module supplies the algebraic
+-- support interface but not these continuous norm fields.
 ------------------------------------------------------------------------
 
 record PeriodicLittlewoodPaleyProjectorInterface : Set₁ where
@@ -87,7 +93,7 @@ record LiteralNavierStokesBonyDecomposition : Set₁ where
 open LiteralNavierStokesBonyDecomposition public
 
 ------------------------------------------------------------------------
--- Proven existing infrastructure and honest open interfaces.
+-- Proven infrastructure and honest open interfaces.
 ------------------------------------------------------------------------
 
 record LittlewoodPaleyInfrastructureReceipt : Set where
@@ -114,11 +120,27 @@ record LittlewoodPaleyInfrastructureReceipt : Set where
     periodicFrequencyLocalizedCoercivityRecorded :
       DongLi.dongLiFrequencyLocalizedCoercivityRecorded ≡ true
 
+    exactPeriodicHardShellProjectorConstructed :
+      ExactLP.periodicHardShellProjectorConstructed ≡ true
+
+    ownedShellPointwiseReconstructionClosed :
+      ExactLP.ownedShellPointwiseReconstructionClosed ≡ true
+
+    exactDerivativeProjectorCommutationClosed :
+      ExactLP.derivativeProjectorCommutationClosed ≡ true
+
+    exactCurlProjectorCommutationClosed :
+      ExactLP.curlProjectorCommutationClosed ≡ true
+
+    exactBonyTaoInteractionClassificationClosed :
+      ExactLP.bonyTaoInteractionClassificationClosed ≡ true
+
+    exactFiniteInteractionRecompositionClosed :
+      ExactLP.finiteInteractionRecompositionClosed ≡ true
+
     smoothPeriodicProjectorFamilyClosed : Bool
-    shellReconstructionClosed : Bool
-    curlProjectorCommutationClosed : Bool
-    hardSmoothProjectorComparisonClosed : Bool
-    literalNavierStokesBonyDecompositionClosed : Bool
+    smoothHardProjectorNormComparisonClosed : Bool
+    physicalTimeIntegralIdentificationClosed : Bool
     blockerResidualsIdentifiedWithBonyPieces : Bool
     timeDependentDissipationWavenumberClosed : Bool
 
@@ -133,8 +155,12 @@ littlewoodPaleyInfrastructureReceipt = receipt
   Tao.taoTransposeAndTrichotomySourceRepresentedIsTrue
   Bony.bonyParaproductMechanismRecordedIsTrue
   DongLi.dongLiFrequencyLocalizedCoercivityRecordedIsTrue
-  false
-  false
+  ExactLP.periodicHardShellProjectorConstructedIsTrue
+  ExactLP.ownedShellPointwiseReconstructionClosedIsTrue
+  ExactLP.derivativeProjectorCommutationClosedIsTrue
+  ExactLP.curlProjectorCommutationClosedIsTrue
+  ExactLP.bonyTaoInteractionClassificationClosedIsTrue
+  ExactLP.finiteInteractionRecompositionClosedIsTrue
   false
   false
   false
@@ -144,19 +170,26 @@ littlewoodPaleyInfrastructureReceipt = receipt
 existingHardShellLPInfrastructureRecorded : Bool
 existingHardShellLPInfrastructureRecorded = true
 
+exactPeriodicLPBonyPDEInterfaceConstructed : Bool
+exactPeriodicLPBonyPDEInterfaceConstructed = true
+
+literalNavierStokesBonyNormDecompositionClosed : Bool
+literalNavierStokesBonyNormDecompositionClosed = false
+
+fullLocalizedContinuationProjectorInterfaceClosed : Bool
+fullLocalizedContinuationProjectorInterfaceClosed = false
+
 existingHardShellLPInfrastructureRecordedIsTrue :
   existingHardShellLPInfrastructureRecorded ≡ true
 existingHardShellLPInfrastructureRecordedIsTrue = refl
 
-literalNavierStokesBonyDecompositionClosed : Bool
-literalNavierStokesBonyDecompositionClosed = false
+exactPeriodicLPBonyPDEInterfaceConstructedIsTrue :
+  exactPeriodicLPBonyPDEInterfaceConstructed ≡ true
+exactPeriodicLPBonyPDEInterfaceConstructedIsTrue = refl
 
-literalNavierStokesBonyDecompositionClosedIsFalse :
-  literalNavierStokesBonyDecompositionClosed ≡ false
-literalNavierStokesBonyDecompositionClosedIsFalse = refl
-
-fullLocalizedContinuationProjectorInterfaceClosed : Bool
-fullLocalizedContinuationProjectorInterfaceClosed = false
+literalNavierStokesBonyNormDecompositionClosedIsFalse :
+  literalNavierStokesBonyNormDecompositionClosed ≡ false
+literalNavierStokesBonyNormDecompositionClosedIsFalse = refl
 
 fullLocalizedContinuationProjectorInterfaceClosedIsFalse :
   fullLocalizedContinuationProjectorInterfaceClosed ≡ false
