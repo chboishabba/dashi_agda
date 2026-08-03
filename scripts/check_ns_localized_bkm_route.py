@@ -2,8 +2,9 @@
 """Fail-closed static audit for the localized BKM reconnaissance tranche.
 
 This checker verifies source attribution, existing LP/Bony reuse, constructive
-low/high assembly, explicit semantic adapter boundaries, and preservation of
-all BKM/Clay fail-closed gates.  It is not an Agda typecheck.
+low/high assembly, explicit semantic and authority boundaries for the live
+blockers, and preservation of all BKM/Clay fail-closed gates.  It is not an
+Agda typecheck.
 """
 
 from __future__ import annotations
@@ -19,8 +20,11 @@ FILES = {
     "sources": CLOSURE / "NSTriadKNLocalizedBKMSourceAndTargetAudit.agda",
     "assembly": CLOSURE / "NSTriadKNFiniteLowUniformHighAssembly.agda",
     "compatibility": CLOSURE / "NSTriadKNBlockerToLocalizedBKMCompatibility.agda",
+    "authority": CLOSURE / "NSTriadKNAnalyticBlockerAuthorityAudit.agda",
     "integration": CLOSURE / "NSTriadKNLocalizedBKMRouteIntegration.agda",
     "forced_tail": CLOSURE / "NSTriadKNProfileCrossForcedTailRefinement.agda",
+    "depth_base": CLOSURE / "NSTriadKNProfileDepthGeometryBase.agda",
+    "weight_bridge": CLOSURE / "NSTriadKNProfileCrossWeightBridge.agda",
     "pair_bounds": CLOSURE / "NSTriadKNPairIncidenceProfileBounds.agda",
 }
 
@@ -52,7 +56,7 @@ def load_files() -> dict[str, str]:
 def main() -> int:
     text = load_files()
 
-    print("[1/7] Checking primary-source provenance and route semantics...")
+    print("[1/8] Checking primary-source provenance and route semantics...")
     sources = text["sources"]
     for doi in (
         "10.1007/BF01212349",
@@ -66,7 +70,7 @@ def main() -> int:
     require(sources, "sequenceDerivedFromDissipationRange", "Cheskidov-Dai sequence semantics")
     require(sources, "mhdToNavierStokesSpecializationOrPeriodicReproof", "Chen-Miao-Zhang scope")
 
-    print("[2/7] Checking reuse and limits of existing LP/Bony infrastructure...")
+    print("[2/8] Checking reuse and limits of existing LP/Bony infrastructure...")
     inventory = text["inventory"]
     for module in (
         "NSTriadKNExactDyadicShellGeometry",
@@ -81,14 +85,14 @@ def main() -> int:
     require(inventory, "literalNavierStokesBonyDecompositionClosed = false", "Bony inventory gate")
     require(inventory, "fullLocalizedContinuationProjectorInterfaceClosed = false", "LP inventory gate")
 
-    print("[3/7] Checking constructive low/high assembly...")
+    print("[3/8] Checking constructive low/high assembly...")
     assembly = text["assembly"]
     require(assembly, "allShellControl", "fixed-cutoff assembly")
     require(assembly, "allShellControlAtTime", "time-dependent assembly")
     require(assembly, "allShellNatBound", "quantitative assembly")
     require(assembly, "finiteLowUniformHighAssemblyClosed = true", "assembly receipt")
 
-    print("[4/7] Checking blocker semantics and explicit adapters...")
+    print("[4/8] Checking blocker semantics and explicit adapters...")
     compatibility = text["compatibility"]
     require(compatibility, "forcedTailBlockerSemanticKind = weightedSchurRestrictedRow", "forced-tail semantics")
     require(compatibility, "residueScaleBlockerSemanticKind = weakStrongQuadraticGapCompatibility", "residue semantics")
@@ -99,14 +103,30 @@ def main() -> int:
     require(compatibility, "forcedTailResidualsIdentifiedWithBonyPieces = false", "Bony identification gate")
     require(compatibility, "blockersToLocalizedBKMBridgeClosed = false", "compatibility gate")
 
-    print("[5/7] Checking that the original blockers remain visible...")
+    print("[5/8] Checking theorem-shape versus constructive authority...")
+    require(text["weight_bridge"], "blocker1DepthRouteClosed = true", "assembled Blocker 1 route")
+    require(text["depth_base"], "postulate\n  entryDepth", "Blocker 1 depth authority")
+    authority = text["authority"]
+    require(authority, "ConstructiveProfileDepthGeometry", "Blocker 1 replacement target")
+    require(authority, "CurrentDepthBaseRealization", "Blocker 1 realization target")
+    require(authority, "ConstructiveResidueScaleCompatibilityAuthority", "Blocker 2 authority target")
+    require(authority, "blocker1RestrictedRowRouteAssembled =", "Blocker 1 packaged status")
+    require(authority, "blocker1PostulateFreeAuthorityClosed = false", "Blocker 1 authority gate")
+    require(authority, "blocker2ResidueScaleCompatibilityConstructed = false", "Blocker 2 authority gate")
+    require(authority, "analyticBlockerAuthorityBoundaryAudited = true", "authority audit receipt")
+
+    print("[6/8] Checking that the original blockers remain visible...")
     require(text["forced_tail"], "ForcedTailToAdversarialRestrictedRowN1", "forced-tail blocker")
     require(text["forced_tail"], "ForcedTailToTransitionRestrictedRowN1", "forced-tail blocker")
     require(text["pair_bounds"], "QGap.ResidueScaleCompatibility", "residue-scale blocker")
     require(text["pair_bounds"], "canonicalBKMExclusionProved = false", "BKM gate")
 
-    print("[6/7] Checking fail-closed integration receipt...")
+    print("[7/8] Checking fail-closed integration receipt...")
     integration = text["integration"]
+    require(integration, "blockerAuthorityBoundaryAudited", "integration receipt")
+    require(integration, "blocker1RestrictedRowRouteAssembled", "integration receipt")
+    require(integration, "blocker1PostulateFreeAuthorityClosed", "integration receipt")
+    require(integration, "blocker2ResidueScaleCompatibilityConstructed", "integration receipt")
     require(integration, "literalNavierStokesBonyDecompositionClosed", "integration receipt")
     require(integration, "forcedTailResidualsIdentifiedWithBonyPieces", "integration receipt")
     require(integration, "existingBKMExclusionStillFalse", "integration receipt")
@@ -114,8 +134,8 @@ def main() -> int:
     require(integration, "localizedBKMRouteReadyForPromotion = false", "integration gate")
     require(integration, "localizedBKMReconnaissanceComplete = true", "reconnaissance receipt")
 
-    print("[7/7] Rejecting declarations of new axioms and accidental promotions...")
-    for name in ("inventory", "sources", "assembly", "compatibility", "integration"):
+    print("[8/8] Rejecting declarations of new axioms and accidental promotions...")
+    for name in ("inventory", "sources", "assembly", "compatibility", "authority", "integration"):
         forbid(text[name], "\npostulate\n", name)
         forbid(text[name], "\npostulate ", name)
         forbid(text[name], "bkmExclusionProved = true", name)
