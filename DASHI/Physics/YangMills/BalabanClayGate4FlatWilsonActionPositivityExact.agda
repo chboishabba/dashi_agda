@@ -4,7 +4,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
-open import Data.List.Membership.Propositional using (_∈_; Any; here; there)
+open import Data.List.Relation.Unary.Any using (here; there)
+open import Data.List.Membership.Propositional using (_∈_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
