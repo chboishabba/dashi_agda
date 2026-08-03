@@ -50,9 +50,10 @@ import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram as Closure
 import DASHI.Physics.Closure.NSCompactGammaFullShellSchur as FullShell
 import DASHI.Physics.Closure.NSZ3CutoffUniformIntegerShellSchur as Z3Shell
 import DASHI.Physics.Closure.NSPairIncidenceKernel as PairKernel
-import DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact as High
 import DASHI.Physics.Closure.NSTriadKNHardHighPhysicalZ3PairEncodingExact as Encoding
 import DASHI.Physics.Closure.NSTriadKNLuoCrossCarrierRationalIdentificationExact as Cross
+import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
+import DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact as FullShellFlux
 import DASHI.Physics.Closure.NSTriadKNRegularLerayHopfPeriodicSolutionExact as LH
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialPhysicalEnergyTimeExact as EnergyTime
 import DASHI.Physics.Closure.NSTriadKNLuoConcreteRadialMultiplierKernelExact as Multiplier
@@ -61,7 +62,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoOfficialLerayHopfAuthorityExact as Offi
 import DASHI.Physics.Closure.NSTriadKNLuoPublishedContinuationAuthorityExact as Luo
 
 record OfficialLuoContinuationClosure
-    {r d s t : Level}
+    {d s t : Level}
     (InitialDatum : Set d)
     (Solution : Set s)
     (Time : Set t) : Setω where
@@ -147,12 +148,11 @@ record OfficialLuoContinuationClosure
 open OfficialLuoContinuationClosure public
 
 officialHardHighListMatchesFullShell :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
   Encoding.hardHighPhysicalZ3Pairs shell (cubeCutoffAt C shell)
   ≡ PairKernel.pairs
@@ -164,102 +164,88 @@ officialHardHighListMatchesFullShell C shell =
     (hardHighPairIdentificationAt C shell)
 
 officialPhysicalBridge :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
-  DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact.PhysicalCutoffFluxWeightedSchurBridge
+  Flux.PhysicalCutoffFluxWeightedSchurBridge
 officialPhysicalBridge C shell =
   Cross.physicalBridgeFromFullShell
     (program C) (KAt C shell) (NAt C shell)
     (crossCarrierAt C shell)
 
 officialFluxCrossCarrierEquality :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
   Cross.scalarToRational (crossCarrierAt C shell)
-    (DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact.absoluteCutoffFlux
+    (FullShellFlux.absoluteCutoffFlux
       (Cross.fullShellAdapter (crossCarrierAt C shell)))
-  ≡
-  DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact.absoluteCutoffFlux
-    (officialPhysicalBridge C shell)
+  ≡ Flux.absoluteCutoffFlux (officialPhysicalBridge C shell)
 officialFluxCrossCarrierEquality C shell =
   Cross.fullShellFluxMatchesPhysicalBridge
     (program C) (KAt C shell) (NAt C shell)
     (crossCarrierAt C shell)
 
 officialSchurCrossCarrierEquality :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
   Cross.scalarToRational (crossCarrierAt C shell)
-    (DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact.profileSchurConstant
+    (FullShellFlux.profileSchurConstant
       (Cross.fullShellAdapter (crossCarrierAt C shell)))
-  ≡
-  DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact.profileSchurConstant
-    (officialPhysicalBridge C shell)
+  ≡ Flux.profileSchurConstant (officialPhysicalBridge C shell)
 officialSchurCrossCarrierEquality C shell =
   Cross.fullShellSchurConstantMatchesPhysicalBridge
     (program C) (KAt C shell) (NAt C shell)
     (crossCarrierAt C shell)
 
 officialEnergyCrossCarrierEquality :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
   Cross.scalarToRational (crossCarrierAt C shell)
-    (DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact.cutoffEnergyMajorant
+    (FullShellFlux.cutoffEnergyMajorant
       (Cross.fullShellAdapter (crossCarrierAt C shell)))
-  ≡
-  DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact.cutoffEnergyMajorant
-    (officialPhysicalBridge C shell)
+  ≡ Flux.cutoffEnergyMajorant (officialPhysicalBridge C shell)
 officialEnergyCrossCarrierEquality C shell =
   Cross.fullShellEnergyMatchesPhysicalBridge
     (program C) (KAt C shell) (NAt C shell)
     (crossCarrierAt C shell)
 
 officialGradientCrossCarrierEquality :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
   Cross.scalarToRational (crossCarrierAt C shell)
-    (DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact.lowPassGradientInfinity
+    (FullShellFlux.lowPassGradientInfinity
       (Cross.fullShellAdapter (crossCarrierAt C shell)))
-  ≡
-  DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact.lowPassGradientInfinity
-    (officialPhysicalBridge C shell)
+  ≡ Flux.lowPassGradientInfinity (officialPhysicalBridge C shell)
 officialGradientCrossCarrierEquality C shell =
   Cross.fullShellGradientMatchesPhysicalBridge
     (program C) (KAt C shell) (NAt C shell)
     (crossCarrierAt C shell)
 
 officialSmoothCutoffBound :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
   MultiplierAbstract.smoothTerminalWindowIntegral
     (Multiplier.canonicalLuoMultiplierAuthority
@@ -273,12 +259,11 @@ officialSmoothCutoffBound C shell =
     shell (solution C) (terminalBudgetAt C shell)
 
 officialSourceCutoffBound :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   (shell : Nat) →
   OfficialLuo.localizedGradientIntegral
     (sourceCarrier C) (solution C) (terminal C) shell
@@ -289,12 +274,11 @@ officialSourceCutoffBound C shell
   officialSmoothCutoffBound C shell
 
 officialSourceLimsupBound :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   OfficialLuo.LuoLocalizedGradientLimsupBound
     (sourceCarrier C) (solution C) (terminal C)
 officialSourceLimsupBound C =
@@ -303,12 +287,11 @@ officialSourceLimsupBound C =
     (officialSourceCutoffBound C)
 
 officialLuoContinuation :
-  ∀ {r d s t}
+  ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t} →
-  (C : OfficialLuoContinuationClosure
-    {r = r} InitialDatum Solution Time) →
+  (C : OfficialLuoContinuationClosure InitialDatum Solution Time) →
   OfficialLuo.ContinuesBeyond
     (sourceCarrier C) (initial C) (terminal C)
 officialLuoContinuation C =
