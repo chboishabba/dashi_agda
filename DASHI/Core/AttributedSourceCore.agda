@@ -126,6 +126,27 @@ mkSourceAtlas label owner entries scope =
     false
     refl
 
+attributedSourceAtlasReceipt :
+  AttributedSourceAtlas →
+  String →
+  GenericReceipt.GenericReceipt
+attributedSourceAtlasReceipt atlas validation =
+  GenericReceipt.mkNonPromotingReceipt
+    (atlasLabel atlas)
+    (atlasOwner atlas)
+    "attributed source atlas"
+    (atlasScope atlas)
+    "source identity does not import proof, agreement, endorsement, exhaustive coverage, or domain authority"
+    validation
+
+attributedSourceAtlasReceiptNonPromoting :
+  (atlas : AttributedSourceAtlas) →
+  (validation : String) →
+  GenericReceipt.promotesClaim
+    (attributedSourceAtlasReceipt atlas validation)
+  ≡ false
+attributedSourceAtlasReceiptNonPromoting atlas validation = refl
+
 record AttributionProjection
     (source : AttributedSource) : Set where
   constructor attributionProjection
@@ -157,7 +178,7 @@ canonicalAttributedSourceCoreReceipt =
     "reusable attributed source core"
     "DASHI.Core.AttributedSourceCore"
     "AttributedSource / AttributedSourceAtlas / AttributionProjection"
-    "centralises author, title, publication, DOI state, canonical URL, source kind, relationship, and attribution visibility"
+    "centralises author, title, publication, DOI state, canonical URL, source kind, relationship, attribution visibility, and a generic atlas receipt adapter"
     "a source citation does not import proof, agreement, endorsement, cultural authority, scientific authority, legal authority, or political authority"
     "agda -i . DASHI/Core/AttributedSourceCore.agda"
 
