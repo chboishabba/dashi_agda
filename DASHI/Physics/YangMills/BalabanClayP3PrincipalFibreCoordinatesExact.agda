@@ -56,11 +56,11 @@ reconstruct dataSet coarse fluctuation =
 fluctuationOf :
   ∀ {Coarse Fine Jacobian} →
   PrincipalFibreCoordinateData Coarse Fine Jacobian → Fine → Fine
-fluctuationOf dataSet field =
+fluctuationOf dataSet fld =
   multiply (group dataSet)
     (inverse (group dataSet)
-      (backgroundFine dataSet (coarseOf dataSet field)))
-    field
+      (backgroundFine dataSet (coarseOf dataSet fld)))
+    fld
 
 FluctuationConstraint :
   ∀ {Coarse Fine Jacobian} →
@@ -72,38 +72,38 @@ FluctuationConstraint dataSet coarse fluctuation =
 reconstructs :
   ∀ {Coarse Fine Jacobian}
     (dataSet : PrincipalFibreCoordinateData Coarse Fine Jacobian)
-    field →
-  reconstruct dataSet (coarseOf dataSet field) (fluctuationOf dataSet field)
-  ≡ field
-reconstructs dataSet field =
+    (fld : Fine) →
+  reconstruct dataSet (coarseOf dataSet fld) (fluctuationOf dataSet fld)
+  ≡ fld
+reconstructs dataSet fld =
   let
     groupData = group dataSet
-    background = backgroundFine dataSet (coarseOf dataSet field)
+    background = backgroundFine dataSet (coarseOf dataSet fld)
   in
   trans
-    (sym (associative groupData background (inverse groupData background) field))
+    (sym (associative groupData background (inverse groupData background) fld))
     (trans
-      (cong (λ value → multiply groupData value field)
+      (cong (λ value → multiply groupData value fld)
         (rightInverse groupData background))
-      (leftIdentity groupData field))
+      (leftIdentity groupData fld))
 
 fluctuationSatisfiesConstraint :
   ∀ {Coarse Fine Jacobian}
     (dataSet : PrincipalFibreCoordinateData Coarse Fine Jacobian)
-    field →
-  FluctuationConstraint dataSet (coarseOf dataSet field)
-    (fluctuationOf dataSet field)
-fluctuationSatisfiesConstraint dataSet field =
-  cong (coarseOf dataSet) (reconstructs dataSet field)
+    (fld : Fine) →
+  FluctuationConstraint dataSet (coarseOf dataSet fld)
+    (fluctuationOf dataSet fld)
+fluctuationSatisfiesConstraint dataSet fld =
+  cong (coarseOf dataSet) (reconstructs dataSet fld)
 
 backgroundUnique :
   ∀ {Coarse Fine Jacobian}
     (dataSet : PrincipalFibreCoordinateData Coarse Fine Jacobian)
-    field coarse fluctuation →
-  reconstruct dataSet coarse fluctuation ≡ field →
+    (fld : Fine) coarse fluctuation →
+  reconstruct dataSet coarse fluctuation ≡ fld →
   FluctuationConstraint dataSet coarse fluctuation →
-  coarse ≡ coarseOf dataSet field
-backgroundUnique dataSet field coarse fluctuation reconstruction constraint =
+  coarse ≡ coarseOf dataSet fld
+backgroundUnique dataSet fld coarse fluctuation reconstruction constraint =
   trans (sym constraint) (cong (coarseOf dataSet) reconstruction)
 
 fluctuationRecovers :
@@ -142,11 +142,11 @@ fluctuationRecovers dataSet coarse fluctuation constraint =
 fluctuationUnique :
   ∀ {Coarse Fine Jacobian}
     (dataSet : PrincipalFibreCoordinateData Coarse Fine Jacobian)
-    field coarse fluctuation →
-  reconstruct dataSet coarse fluctuation ≡ field →
+    (fld : Fine) coarse fluctuation →
+  reconstruct dataSet coarse fluctuation ≡ fld →
   FluctuationConstraint dataSet coarse fluctuation →
-  fluctuation ≡ fluctuationOf dataSet field
-fluctuationUnique dataSet field coarse fluctuation reconstruction constraint =
+  fluctuation ≡ fluctuationOf dataSet fld
+fluctuationUnique dataSet fld coarse fluctuation reconstruction constraint =
   trans
     (sym (fluctuationRecovers dataSet coarse fluctuation constraint))
     (cong (fluctuationOf dataSet) reconstruction)
@@ -155,16 +155,16 @@ coordinateJacobian :
   ∀ {Coarse Fine Jacobian} →
   PrincipalFibreCoordinateData Coarse Fine Jacobian →
   Fine → Jacobian
-coordinateJacobian dataSet field =
-  jacobianOf dataSet (coarseOf dataSet field) (fluctuationOf dataSet field)
+coordinateJacobian dataSet fld =
+  jacobianOf dataSet (coarseOf dataSet fld) (fluctuationOf dataSet fld)
 
 jacobianExact :
   ∀ {Coarse Fine Jacobian}
     (dataSet : PrincipalFibreCoordinateData Coarse Fine Jacobian)
-    field →
-  jacobianOf dataSet (coarseOf dataSet field) (fluctuationOf dataSet field)
-  ≡ coordinateJacobian dataSet field
-jacobianExact dataSet field = refl
+    (fld : Fine) →
+  jacobianOf dataSet (coarseOf dataSet fld) (fluctuationOf dataSet fld)
+  ≡ coordinateJacobian dataSet fld
+jacobianExact dataSet fld = refl
 
 p3PrincipalFibreReconstructionLevel : ProofLevel
 p3PrincipalFibreReconstructionLevel = machineChecked
