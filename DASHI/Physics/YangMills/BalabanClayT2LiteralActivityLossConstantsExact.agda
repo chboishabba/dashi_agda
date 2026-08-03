@@ -66,7 +66,7 @@ quarterBelowHalf =
 ------------------------------------------------------------------------
 
 record SU2HaarLossData
-    (Link Lie Quaternion Scalar Polymer : Set) : Set₁ where
+    (Link Polymer Scalar : Set) : Set₁ where
   field
     norm : Link → Scalar
     sinOverX : Scalar → Scalar
