@@ -1,7 +1,10 @@
 name: Physics scaling and limit spine
 
 on:
-  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/balaban-primary-averaging-qstar
     paths:
       - 'DASHI/Physics/Units/**'
       - 'DASHI/Physics/Limits/**'
@@ -11,35 +14,67 @@ on:
       - 'DASHI/Physics/YangMills/BalabanClayT5MassScaleDimensionExact.agda'
       - 'DASHI/Unified/QuantumClassicalGravityBoundaryIntegration.agda'
       - 'DASHI/Physics/PhysicsScalingLimitSpineValidation.agda'
+      - 'Docs/papers/PhysicsScalingLimitSpine.md'
       - 'scripts/check_physics_scaling_limit_spine.sh'
       - '.github/workflows/physics-scaling-limit-spine.yml'
-  workflow_dispatch:
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'DASHI/Physics/Units/**'
+      - 'DASHI/Physics/Limits/**'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoScalingExact.agda'
+      - 'DASHI/Physics/Closure/GRWeakFieldDimensionExact.agda'
+      - 'DASHI/Physics/Closure/HEPDataCMSBelowZDrellYanClaimExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5MassScaleDimensionExact.agda'
+      - 'DASHI/Unified/QuantumClassicalGravityBoundaryIntegration.agda'
+      - 'DASHI/Physics/PhysicsScalingLimitSpineValidation.agda'
+      - 'Docs/papers/PhysicsScalingLimitSpine.md'
+      - 'scripts/check_physics_scaling_limit_spine.sh'
+      - '.github/workflows/physics-scaling-limit-spine.yml'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
 
 permissions:
   contents: read
 
+concurrency:
+  group: physics-scaling-limit-spine-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  agda-typecheck:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 45
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
 
-      - name: Install Agda and writable standard library
-        run: |
-          sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install \
-            --yes --quiet agda-bin agda-stdlib >/tmp/agda-install.log
-          cp -a /usr/share/agda-stdlib /tmp/agda-stdlib
-          chmod -R u+w /tmp/agda-stdlib
-          agda --version
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check physics scaling and limit spine
+      - name: Restore Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Run focused scaling and limit spine checker
+        shell: bash
         run: |
-          chmod +x scripts/check_physics_scaling_limit_spine.sh
-          ./scripts/check_physics_scaling_limit_spine.sh \
-            2>&1 | tee /tmp/physics-scaling-limit-spine.log
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            export AGDA_BIN="$(command -v agda)"
+            export AGDA_ARGS="-i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library"
+            bash scripts/check_physics_scaling_limit_spine.sh
+          ' 2>&1 | tee /tmp/physics-scaling-limit-spine.log
 
       - name: Upload diagnostic
         if: always()
