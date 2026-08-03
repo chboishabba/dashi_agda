@@ -24,12 +24,12 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance wh
 -- are imported as completed prerequisites and are not reconstructed here.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; _⊔_; lsuc; Setω)
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurContinuationSynthesisExact as Existing
+import DASHI.Physics.Closure.NSTriadKNLuoPublishedContinuationAuthorityExact as Published
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
@@ -84,7 +84,7 @@ open CanonicalPeriodicLuoSourceFaithfulCutset public
 
 continuationFromSourceFaithfulCutset :
   (cutset : CanonicalPeriodicLuoSourceFaithfulCutset) →
-  Existing.Published.ContinuesBeyond
+  Published.ContinuesBeyond
     (Existing.continuationAuthority (existingSynthesis cutset))
     (Existing.initialDatum (existingSynthesis cutset))
     (Existing.terminalTime (existingSynthesis cutset))
