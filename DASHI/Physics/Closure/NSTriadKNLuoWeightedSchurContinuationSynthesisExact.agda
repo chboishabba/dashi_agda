@@ -30,11 +30,17 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (_≤_)
+open import Data.Rational.Base using (_+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption as Absorption
+import DASHI.Physics.Closure.NSPairIncidenceKernel as PairKernel
+import DASHI.Physics.Closure.NSCompactGammaFullShellSchur as FullShell
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact as High
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram as Closure
+import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact as Bootstrap
 import DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellPhysicalIdentificationExact as PhysicalFullShell
 import DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact as FullShellFlux
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnergyDissipationTimeExact as PhysicalTime
@@ -124,11 +130,10 @@ hardHighPhysicalListMatchesFullShell :
   PhysicalFullShell.mapList
     (PhysicalFullShell.encodePhysical
       (hardHighPhysicalFullShellAt S shell))
-    (DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact.hardHighPhysicalTriads
-      shell (cubeCutoffAt S shell))
+    (High.hardHighPhysicalTriads shell (cubeCutoffAt S shell))
   ≡
-  DASHI.Physics.Closure.NSPairIncidenceKernel.pairs
-    (DASHI.Physics.Closure.NSCompactGammaFullShellSchur.pairDataAt
+  PairKernel.pairs
+    (FullShell.pairDataAt
       (Closure.fullShellFamily (program S))
       (KAt S shell) (NAt S shell))
 hardHighPhysicalListMatchesFullShell S shell =
@@ -140,8 +145,8 @@ hardHighPhysicalListMatchesFullShell S shell =
 hardHighPhysicalCoefficientDominated :
   (S : LuoWeightedSchurContinuationSynthesis) →
   (shell : Nat) →
-  (triad : DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration.PhysicalTriadIncidence) →
-  DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption._≤_
+  (triad : Physical.PhysicalTriadIncidence) →
+  Absorption._≤_
     (Closure.arithmetic (program S))
     (PhysicalFullShell.physicalSignedMagnitude
       (hardHighPhysicalFullShellAt S shell) triad)
@@ -158,20 +163,20 @@ literalPhysicalCutoffRecursion :
   (shell : Nat) →
   PhysicalTime.physicalCurrentHardHighEnergy
       (physicalEnergyTimeAt S shell)
-    Data.Rational.Base.+
+    +
   PhysicalTime.physicalIntegratedHardHighDissipation
       (physicalEnergyTimeAt S shell)
-  Data.Rational.Base.≤
+  ≤
   PhysicalTime.physicalPreviousHardHighEnergy
       (physicalEnergyTimeAt S shell)
-    Data.Rational.Base.+
-  DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact.profileSchurConstant
+    +
+  Bootstrap.profileSchurConstant
       (PhysicalTime.cutoffData (physicalEnergyTimeAt S shell))
-    Data.Rational.Base.*
+    *
   (PhysicalTime.physicalWeightedShellEnergyMajorant
       (physicalEnergyTimeAt S shell)
-    Data.Rational.Base.*
-   DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact.universalGradientThreshold
+    *
+   Bootstrap.universalGradientThreshold
       (PhysicalTime.cutoffData (physicalEnergyTimeAt S shell)))
 literalPhysicalCutoffRecursion S shell =
   PhysicalTime.literalPhysicalLuoEnergyDissipationRecursion
