@@ -1,0 +1,44 @@
+module DASHI.Physics.YangMills.YangMillsSubmissionRound7Validation where
+
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
+import DASHI.Physics.YangMills.YangMillsSubmissionPrimarySourceLedger
+import DASHI.Physics.YangMills.BalabanP06OwnedGraphCombinatoricsExact as P06
+import DASHI.Physics.YangMills.BalabanP11UniformAbsorptionReductionExact as P11
+import DASHI.Physics.YangMills.BalabanBishopHalfBallSquareReductionExact
+import DASHI.Physics.YangMills.YangMillsSubmissionTypedLimitEndpointExact
+import DASHI.Physics.YangMills.YangMillsSubmissionExactCutset
+import DASHI.Physics.YangMills.YangMillsSubmissionRound7Ledger
+import DASHI.Physics.YangMills.YangMillsSubmissionRound7Receipt as Receipt
+import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+submissionTheoremSpineCountValidated :
+  Counts.theoremSpineObligationCount ≡ 191
+submissionTheoremSpineCountValidated =
+  Counts.theoremSpineObligationCountExact
+
+submissionFullCountValidated :
+  Counts.fullSubmissionObligationCount ≡ 219
+submissionFullCountValidated =
+  Counts.fullSubmissionObligationCountExact
+
+ownedP06GraphKernelValidated :
+  P06.OwnedP06GraphCombinatorics
+ownedP06GraphKernelValidated =
+  P06.currentOwnedP06GraphCombinatorics
+
+p11UniformAbsorptionReducerValidated :
+  P11.P11UniformAbsorptionInputs →
+  LargeField.ImportedAbsorptionCondition
+p11UniformAbsorptionReducerValidated =
+  P11.p11AbsorptionConditionFromUniformMinimum
+
+submissionRound7ReceiptValidated :
+  Receipt.SubmissionRound7Receipt
+submissionRound7ReceiptValidated =
+  Receipt.currentSubmissionRound7Receipt
+
+submissionRound7ValidationLevel : ProofLevel
+submissionRound7ValidationLevel = machineChecked
