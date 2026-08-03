@@ -11,6 +11,7 @@ import DASHI.Physics.Units.MechanicalDimensionExact
 import DASHI.Physics.Units.PhysicalNormalizationExact
 import DASHI.Physics.Units.QuantumVacuumQuantityBridgeExact
 import DASHI.Physics.Limits.PhysicsLimitCommutingSquare
+import DASHI.Physics.Closure.NSTriadKNNavierStokesNormalizationTransportExact
 import DASHI.Physics.Closure.NSTriadKNLuoScalingExact
 import DASHI.Physics.Closure.GRWeakFieldDimensionExact
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact
