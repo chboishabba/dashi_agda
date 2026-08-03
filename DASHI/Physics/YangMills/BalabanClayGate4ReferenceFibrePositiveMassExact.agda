@@ -57,15 +57,15 @@ foldNonnegative :
     {sumData : Integral.FiniteConstrainedSum Fine SlowField Scalar}
     (algebra : PositiveFiniteFoldAlgebra sumData)
     selector slow fields →
-  (∀ field → Nonnegative algebra (selector field)) →
+  (∀ (fld : Fine) → Nonnegative algebra (selector fld)) →
   Nonnegative algebra
     (Integral.foldSelected sumData selector slow fields)
 foldNonnegative algebra selector slow [] pointwise =
   zeroNonnegative algebra
 foldNonnegative {sumData = sumData} algebra selector slow
-  (field ∷ fields) pointwise =
+  (fld ∷ fields) pointwise =
   addNonnegative algebra
-    (pointwise field)
+    (pointwise fld)
     (foldNonnegative algebra selector slow fields pointwise)
 
 foldPositiveAtMember :
@@ -74,7 +74,7 @@ foldPositiveAtMember :
     (algebra : PositiveFiniteFoldAlgebra sumData)
     selector slow fields witness →
   witness ∈ fields →
-  (∀ field → Nonnegative algebra (selector field)) →
+  (∀ (fld : Fine) → Nonnegative algebra (selector fld)) →
   Positive algebra (selector witness) →
   Positive algebra
     (Integral.foldSelected sumData selector slow fields)
@@ -84,9 +84,9 @@ foldPositiveAtMember {sumData = sumData} algebra selector slow
   addPositiveLeft algebra positive
     (foldNonnegative algebra selector slow fields pointwise)
 foldPositiveAtMember {sumData = sumData} algebra selector slow
-  (field ∷ fields) witness (there membership) pointwise positive =
+  (fld ∷ fields) witness (there membership) pointwise positive =
   addPositiveRight algebra
-    (pointwise field)
+    (pointwise fld)
     (foldPositiveAtMember algebra selector slow fields witness
       membership pointwise positive)
 
@@ -98,8 +98,8 @@ record PositiveSelectedReferenceFibre
     (slow : SlowField)
     (fields : List Fine) : Set₁ where
   field
-    selectedWeightNonnegative : ∀ field →
-      Nonnegative algebra (selector field)
+    selectedWeightNonnegative : ∀ (fld : Fine) →
+      Nonnegative algebra (selector fld)
 
     witness : Fine
     witnessInFibre : witness ∈ fields
@@ -141,7 +141,7 @@ record PositiveMassReciprocalAlgebra
     (positiveAlgebra : PositiveFiniteFoldAlgebra sumData) : Set₁ where
   field
     reciprocal : Scalar → Scalar
-    reciprocalTimesPositive : ∀ value →
+    reciprocalTimesPositive : ∀ (value : Scalar) →
       Positive positiveAlgebra value →
       Reference.multiply referenceAlgebra (reciprocal value) value
       ≡ Reference.one referenceAlgebra
@@ -164,16 +164,13 @@ reciprocalReferenceMassFromPositiveWitness
   {positiveAlgebra = positiveAlgebra}
   reciprocalAlgebra {selector = selector} {slow = slow} {fields = fields}
   positiveFibre = record
-  { Reference.ReciprocalReferenceMass.mass =
-      Integral.foldSelected sumData selector slow fields
-  ; Reference.ReciprocalReferenceMass.reciprocalMass =
-      reciprocal reciprocalAlgebra
-        (Integral.foldSelected sumData selector slow fields)
-  ; Reference.ReciprocalReferenceMass.massDefinition = refl
-  ; Reference.ReciprocalReferenceMass.reciprocalTimesMass =
-      reciprocalTimesPositive reciprocalAlgebra
-        (Integral.foldSelected sumData selector slow fields)
-        (selectedReferenceMassPositive positiveFibre)
+  { mass = Integral.foldSelected sumData selector slow fields
+  ; reciprocalMass = reciprocal reciprocalAlgebra
+      (Integral.foldSelected sumData selector slow fields)
+  ; massDefinition = refl
+  ; reciprocalTimesMass = reciprocalTimesPositive reciprocalAlgebra
+      (Integral.foldSelected sumData selector slow fields)
+      (selectedReferenceMassPositive positiveFibre)
   }
 
 finiteReferenceMassNonnegativeFoldLevel : ProofLevel
