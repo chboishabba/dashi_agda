@@ -133,10 +133,8 @@ negativeAfterPositiveBlock (pair (pair c0 c1) (pair c2 c3))
 
 periodicStepInverseLaws : ∀ n → Covariance.PeriodicStepInverseLaws n
 periodicStepInverseLaws n = record
-  { Covariance.PeriodicStepInverseLaws.positiveAfterNegative =
-      positiveAfterNegativeBlock
-  ; Covariance.PeriodicStepInverseLaws.negativeAfterPositive =
-      negativeAfterPositiveBlock
+  { positiveAfterNegative = positiveAfterNegativeBlock
+  ; negativeAfterPositive = negativeAfterPositiveBlock
   }
 
 literalPlaquetteCloses :
@@ -174,7 +172,7 @@ literalPlaquetteCloses (pair (pair c0 c1) (pair c2 c3))
 
 periodicPlaquetteClosure : ∀ n → Bond.PeriodicPlaquetteClosure n
 periodicPlaquetteClosure n = record
-  { Bond.PeriodicPlaquetteClosure.plaquetteCloses = literalPlaquetteCloses }
+  { plaquetteCloses = literalPlaquetteCloses }
 
 cyclicSuccessorPredecessorInverseLevel : ProofLevel
 cyclicSuccessorPredecessorInverseLevel = machineChecked
