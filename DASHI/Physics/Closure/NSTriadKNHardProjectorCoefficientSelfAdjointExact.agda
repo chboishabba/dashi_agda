@@ -15,7 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNHardProjectorCoefficientSelfAdjointExact w
 -- Parseval or a continuum function-space realization.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
@@ -58,7 +58,7 @@ hardLowCoefficientFieldMatchesLiteralProjector :
 hardLowCoefficientFieldMatchesLiteralProjector model cutoff field mode
   with LP.lowSelect model cutoff mode
 ... | true = refl
-... | _ = refl
+... | false = refl
 
 hardHighCoefficientFieldMatchesLiteralProjector :
   ∀ {r} (model : LP.PeriodicHardShellFourierPDE {r}) →
@@ -70,7 +70,7 @@ hardHighCoefficientFieldMatchesLiteralProjector :
 hardHighCoefficientFieldMatchesLiteralProjector model cutoff field mode
   with LP.lowSelect model cutoff mode
 ... | true = refl
-... | _ = refl
+... | false = refl
 
 coefficientHermitianPairing :
   ∀ {r} (model : LP.PeriodicHardShellFourierPDE {r}) →
