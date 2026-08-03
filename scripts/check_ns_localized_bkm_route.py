@@ -52,7 +52,7 @@ def load_files() -> dict[str, str]:
 def main() -> int:
     text = load_files()
 
-    print("[1/7] Checking primary-source provenance...")
+    print("[1/7] Checking primary-source provenance and route semantics...")
     sources = text["sources"]
     for doi in (
         "10.1007/BF01212349",
@@ -61,10 +61,12 @@ def main() -> int:
         "10.1007/s00220-007-0319-y",
     ):
         require(sources, doi, "localized source audit")
+    require(sources, "DissipationWavenumberInterface", "dissipation-range interface")
     require(sources, "sourceDefinedTerminalSequenceTq", "Cheskidov-Dai scope")
+    require(sources, "sequenceDerivedFromDissipationRange", "Cheskidov-Dai sequence semantics")
     require(sources, "mhdToNavierStokesSpecializationOrPeriodicReproof", "Chen-Miao-Zhang scope")
 
-    print("[2/7] Checking reuse of existing LP/Bony infrastructure...")
+    print("[2/7] Checking reuse and limits of existing LP/Bony infrastructure...")
     inventory = text["inventory"]
     for module in (
         "NSTriadKNExactDyadicShellGeometry",
@@ -75,7 +77,9 @@ def main() -> int:
         "NSTriadKNDongLiFrequencyLocalizedCoercivityAudit",
     ):
         require(inventory, module, "LP inventory")
-    require(inventory, "fullLocalizedContinuationProjectorInterfaceClosed = false", "LP inventory")
+    require(inventory, "LiteralNavierStokesBonyDecomposition", "literal Bony target")
+    require(inventory, "literalNavierStokesBonyDecompositionClosed = false", "Bony inventory gate")
+    require(inventory, "fullLocalizedContinuationProjectorInterfaceClosed = false", "LP inventory gate")
 
     print("[3/7] Checking constructive low/high assembly...")
     assembly = text["assembly"]
@@ -89,7 +93,10 @@ def main() -> int:
     require(compatibility, "forcedTailBlockerSemanticKind = weightedSchurRestrictedRow", "forced-tail semantics")
     require(compatibility, "residueScaleBlockerSemanticKind = weakStrongQuadraticGapCompatibility", "residue semantics")
     require(compatibility, "ForcedTailToLocalizedVorticityBridge", "forced-tail adapter")
+    require(compatibility, "literalNavierStokesBonyDecomposition", "Bony adapter")
     require(compatibility, "ResidueScaleToDissipationWavenumberBridge", "residue-scale adapter")
+    require(compatibility, "dissipationRange", "Q(t) adapter")
+    require(compatibility, "forcedTailResidualsIdentifiedWithBonyPieces = false", "Bony identification gate")
     require(compatibility, "blockersToLocalizedBKMBridgeClosed = false", "compatibility gate")
 
     print("[5/7] Checking that the original blockers remain visible...")
@@ -100,6 +107,8 @@ def main() -> int:
 
     print("[6/7] Checking fail-closed integration receipt...")
     integration = text["integration"]
+    require(integration, "literalNavierStokesBonyDecompositionClosed", "integration receipt")
+    require(integration, "forcedTailResidualsIdentifiedWithBonyPieces", "integration receipt")
     require(integration, "existingBKMExclusionStillFalse", "integration receipt")
     require(integration, "existingClayPromotionStillFalse", "integration receipt")
     require(integration, "localizedBKMRouteReadyForPromotion = false", "integration gate")
