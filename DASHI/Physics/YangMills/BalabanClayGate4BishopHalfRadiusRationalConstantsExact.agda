@@ -13,8 +13,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- Zachary Murray,
 -- "Constructive Analysis in the Agda Proof Assistant",
--- Master's thesis, University of Canterbury (2022).
--- arXiv:2205.08354. No DOI recorded.
+-- B.Sc. Honours thesis, Dalhousie University (2022).
+-- arXiv:2205.08354. No DOI assigned.
 --
 -- Since x^2 <= 1/4, the successive absolute series-term ratios satisfy the
 -- fixed targets
