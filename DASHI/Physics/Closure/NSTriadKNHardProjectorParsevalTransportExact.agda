@@ -8,16 +8,16 @@ module DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact where
 -- Springer, 2011. DOI: 10.1007/978-3-642-16830-7.
 --
 -- PURPOSE
--- Transport finite coefficient-space self-adjointness to the selected
--- periodic physical Hermitian pairing.  The repository's frozen
--- coefficient-unitary convention represents the physical L2 pairing by the
--- same finite Fourier pairing, so Parseval is definitional for that
--- convention.  Combining self-adjointness with the already proved pointwise
--- idempotence gives the exact orthogonal-projector certificate.
+-- Transport finite coefficient-space self-adjointness across an explicitly
+-- supplied Hermitian Parseval identification.  The coefficient-unitary model
+-- is inhabited by taking the selected pairing to be the finite Fourier
+-- pairing itself.  Identifying that selected pairing with the repository's
+-- official physical L2 carrier remains a separate finite-sum/norm leaf and is
+-- therefore not marked closed in this module.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
@@ -33,7 +33,7 @@ record PeriodicHermitianParsevalTransport
     (model : LP.PeriodicHardShellFourierPDE {r})
     (modes : List Z3.FourierMode) : Set (lsuc r) where
   field
-    physicalHermitianPairing :
+    selectedHermitianPairing :
       LP.FourierField model →
       LP.FourierField model →
       C3.Complex (LP.realField model)
@@ -41,7 +41,7 @@ record PeriodicHermitianParsevalTransport
     pairingParseval :
       (left right : LP.FourierField model) →
       Coefficient.coefficientHermitianPairing model modes left right
-        ≡ physicalHermitianPairing left right
+        ≡ selectedHermitianPairing left right
 
 open PeriodicHermitianParsevalTransport public
 
@@ -51,24 +51,24 @@ coefficientUnitaryHermitianParseval :
     (modes : List Z3.FourierMode) →
   PeriodicHermitianParsevalTransport model modes
 coefficientUnitaryHermitianParseval model modes = record
-  { physicalHermitianPairing =
+  { selectedHermitianPairing =
       Coefficient.coefficientHermitianPairing model modes
   ; pairingParseval = λ left right → refl
   }
 
-hardLowPhysicalSelfAdjoint :
+hardLowSelectedPairingSelfAdjoint :
   ∀ {r}
     {model : LP.PeriodicHardShellFourierPDE {r}}
     {modes : List Z3.FourierMode} →
   (P : PeriodicHermitianParsevalTransport model modes) →
   (cutoff : Nat) →
   (left right : LP.FourierField model) →
-  physicalHermitianPairing P
+  selectedHermitianPairing P
     (Coefficient.hardLowCoefficientField model cutoff left) right
     ≡
-  physicalHermitianPairing P
+  selectedHermitianPairing P
     left (Coefficient.hardLowCoefficientField model cutoff right)
-hardLowPhysicalSelfAdjoint {model = model} {modes = modes}
+hardLowSelectedPairingSelfAdjoint {model = model} {modes = modes}
   P cutoff left right =
   trans
     (sym (pairingParseval P
@@ -80,19 +80,19 @@ hardLowPhysicalSelfAdjoint {model = model} {modes = modes}
       (pairingParseval P left
         (Coefficient.hardLowCoefficientField model cutoff right)))
 
-hardHighPhysicalSelfAdjoint :
+hardHighSelectedPairingSelfAdjoint :
   ∀ {r}
     {model : LP.PeriodicHardShellFourierPDE {r}}
     {modes : List Z3.FourierMode} →
   (P : PeriodicHermitianParsevalTransport model modes) →
   (cutoff : Nat) →
   (left right : LP.FourierField model) →
-  physicalHermitianPairing P
+  selectedHermitianPairing P
     (Coefficient.hardHighCoefficientField model cutoff left) right
     ≡
-  physicalHermitianPairing P
+  selectedHermitianPairing P
     left (Coefficient.hardHighCoefficientField model cutoff right)
-hardHighPhysicalSelfAdjoint {model = model} {modes = modes}
+hardHighSelectedPairingSelfAdjoint {model = model} {modes = modes}
   P cutoff left right =
   trans
     (sym (pairingParseval P
@@ -114,18 +114,18 @@ record HardProjectorOrthogonalCertificate
 
     lowSelfAdjoint :
       (left right : LP.FourierField model) →
-      physicalHermitianPairing parseval
+      selectedHermitianPairing parseval
         (Coefficient.hardLowCoefficientField model cutoff left) right
         ≡
-      physicalHermitianPairing parseval
+      selectedHermitianPairing parseval
         left (Coefficient.hardLowCoefficientField model cutoff right)
 
     highSelfAdjoint :
       (left right : LP.FourierField model) →
-      physicalHermitianPairing parseval
+      selectedHermitianPairing parseval
         (Coefficient.hardHighCoefficientField model cutoff left) right
         ≡
-      physicalHermitianPairing parseval
+      selectedHermitianPairing parseval
         left (Coefficient.hardHighCoefficientField model cutoff right)
 
     lowIdempotent :
@@ -152,9 +152,9 @@ coefficientUnitaryHardProjectorOrthogonal :
   HardProjectorOrthogonalCertificate model modes cutoff
 coefficientUnitaryHardProjectorOrthogonal model modes cutoff = record
   { parseval = coefficientUnitaryHermitianParseval model modes
-  ; lowSelfAdjoint = hardLowPhysicalSelfAdjoint
+  ; lowSelfAdjoint = hardLowSelectedPairingSelfAdjoint
       (coefficientUnitaryHermitianParseval model modes) cutoff
-  ; highSelfAdjoint = hardHighPhysicalSelfAdjoint
+  ; highSelfAdjoint = hardHighSelectedPairingSelfAdjoint
       (coefficientUnitaryHermitianParseval model modes) cutoff
   ; lowIdempotent =
       Coefficient.hardLowCoefficientIdempotent model cutoff
@@ -162,16 +162,44 @@ coefficientUnitaryHardProjectorOrthogonal model modes cutoff = record
       Coefficient.hardHighCoefficientIdempotent model cutoff
   }
 
+hardProjectorPairingParsevalTransportSurfaceConstructed : Bool
+hardProjectorPairingParsevalTransportSurfaceConstructed = true
+
+coefficientUnitaryHardProjectorOrthogonalConstructed : Bool
+coefficientUnitaryHardProjectorOrthogonalConstructed = true
+
+officialPhysicalHermitianParsevalTransportSelected : Bool
+officialPhysicalHermitianParsevalTransportSelected = false
+
+hardProjectorPairingParsevalTransportSurfaceConstructedIsTrue :
+  hardProjectorPairingParsevalTransportSurfaceConstructed ≡ true
+hardProjectorPairingParsevalTransportSurfaceConstructedIsTrue = refl
+
+coefficientUnitaryHardProjectorOrthogonalConstructedIsTrue :
+  coefficientUnitaryHardProjectorOrthogonalConstructed ≡ true
+coefficientUnitaryHardProjectorOrthogonalConstructedIsTrue = refl
+
+officialPhysicalHermitianParsevalTransportSelectedIsFalse :
+  officialPhysicalHermitianParsevalTransportSelected ≡ false
+officialPhysicalHermitianParsevalTransportSelectedIsFalse = refl
+
+-- Compatibility aliases retained for the focused integration lane.  They refer
+-- to the supplied/selected pairing, not an independently identified official
+-- physical L2 pairing.
 hardProjectorPairingParsevalTransportClosed : Bool
-hardProjectorPairingParsevalTransportClosed = true
+hardProjectorPairingParsevalTransportClosed =
+  hardProjectorPairingParsevalTransportSurfaceConstructed
 
 hardProjectorOrthogonalCertificateConstructed : Bool
-hardProjectorOrthogonalCertificateConstructed = true
+hardProjectorOrthogonalCertificateConstructed =
+  coefficientUnitaryHardProjectorOrthogonalConstructed
 
 hardProjectorPairingParsevalTransportClosedIsTrue :
   hardProjectorPairingParsevalTransportClosed ≡ true
-hardProjectorPairingParsevalTransportClosedIsTrue = refl
+hardProjectorPairingParsevalTransportClosedIsTrue =
+  hardProjectorPairingParsevalTransportSurfaceConstructedIsTrue
 
 hardProjectorOrthogonalCertificateConstructedIsTrue :
   hardProjectorOrthogonalCertificateConstructed ≡ true
-hardProjectorOrthogonalCertificateConstructedIsTrue = refl
+hardProjectorOrthogonalCertificateConstructedIsTrue =
+  coefficientUnitaryHardProjectorOrthogonalConstructedIsTrue
