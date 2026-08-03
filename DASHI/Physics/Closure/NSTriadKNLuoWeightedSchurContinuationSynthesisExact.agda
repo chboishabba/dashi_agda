@@ -18,10 +18,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurContinuationSynthesisExact
 -- PURPOSE
 -- Assemble the exact theorem chain built in the localized Luo lane.  One
 -- inhabitant owns the same hard-high physical triads, mature full-shell Schur
--- family, orthogonal projector, literal cutoff energy/dissipation data,
--- hard/smooth terminal-window authority and published Luo continuation
--- theorem.  Pointwise smooth cutoff bounds are transported to the source
--- integral/threshold and assembled into Luo's limsup hypothesis internally.
+-- family, rational projected-energy bridge, orthogonal projector, literal
+-- cutoff energy/dissipation data, hard/smooth terminal-window authority and
+-- published Luo continuation theorem.  The cross-carrier flux, Schur constant,
+-- weighted energy and low-pass-gradient identifications are literal
+-- equalities, not generic proposition markers.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -29,7 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (_+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -41,6 +42,8 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact as High
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
 import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram as Closure
+import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
+import DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact as Energy
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact as Bootstrap
 import DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellPhysicalIdentificationExact as PhysicalFullShell
 import DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact as FullShellFlux
@@ -74,6 +77,53 @@ record LuoWeightedSchurContinuationSynthesis : Setω where
       PhysicalTime.LiteralLuoCutoffEnergyDissipationTimeIdentification
         projectorModel physicalModes shell
 
+    scalarToRational :
+      Absorption.Scalar (Closure.arithmetic program) → ℚ
+
+    fullShellFluxMatchesProjectedEnergyFlux :
+      (shell : Nat) →
+      scalarToRational
+        (FullShellFlux.absoluteCutoffFlux
+          (FullShellFlux.adapter (fullShellFluxAt shell)))
+      ≡
+      Flux.absoluteCutoffFlux
+        (Energy.weightedFluxBridge
+          (PhysicalTime.projectedEnergyFlux
+            (physicalEnergyTimeAt shell)))
+
+    fullShellSchurConstantMatchesProjectedBridge :
+      (shell : Nat) →
+      scalarToRational
+        (FullShellFlux.profileSchurConstant
+          (FullShellFlux.adapter (fullShellFluxAt shell)))
+      ≡
+      Flux.profileSchurConstant
+        (Energy.weightedFluxBridge
+          (PhysicalTime.projectedEnergyFlux
+            (physicalEnergyTimeAt shell)))
+
+    fullShellEnergyMatchesProjectedBridge :
+      (shell : Nat) →
+      scalarToRational
+        (FullShellFlux.cutoffEnergyMajorant
+          (FullShellFlux.adapter (fullShellFluxAt shell)))
+      ≡
+      Flux.cutoffEnergyMajorant
+        (Energy.weightedFluxBridge
+          (PhysicalTime.projectedEnergyFlux
+            (physicalEnergyTimeAt shell)))
+
+    fullShellGradientMatchesProjectedBridge :
+      (shell : Nat) →
+      scalarToRational
+        (FullShellFlux.lowPassGradientInfinity
+          (FullShellFlux.adapter (fullShellFluxAt shell)))
+      ≡
+      Flux.lowPassGradientInfinity
+        (Energy.weightedFluxBridge
+          (PhysicalTime.projectedEnergyFlux
+            (physicalEnergyTimeAt shell)))
+
     State InitialDatum Solution Time : Set
 
     multiplierAuthority :
@@ -92,11 +142,6 @@ record LuoWeightedSchurContinuationSynthesis : Setω where
       ≡
       PhysicalTime.physicalLocalizedLowPassGradientIntegral
         (physicalEnergyTimeAt shell)
-
-    FullShellFluxMatchesProjectedEnergyFlux : Nat → Set
-    fullShellFluxMatchesProjectedEnergyFlux :
-      (shell : Nat) →
-      FullShellFluxMatchesProjectedEnergyFlux shell
 
     continuationAuthority :
       Published.PublishedLuoTheorem11Authority
