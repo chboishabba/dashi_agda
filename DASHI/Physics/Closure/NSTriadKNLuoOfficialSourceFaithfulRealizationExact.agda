@@ -16,12 +16,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialSourceFaithfulRealizationExact 
 -- The state carrier is the singleton selected solution, preventing accidental
 -- claims of a uniform estimate over the ambient Solution type.
 --
--- The finite hard-high/full-shell reindexing is derived automatically from the
--- official list theorem.  The shell-uniform decay is derived automatically
--- from the rational fixed-block induction certificate.  The input package
--- supplies the analytic spatial increment identity, equation-(4.2) estimates,
--- and the physical recursion/correction budgets; neither the Fourier fold nor
--- the final decay conclusion can be chosen independently.
+-- The finite hard-high/full-shell reindexing, equation-(4.2) J-range assembly,
+-- and shell-uniform decay are all derived automatically.  The input package
+-- supplies the analytic spatial increment identity, the physical per-mode
+-- inequality against one finite interaction fold, the Step-1/Gronwall bounds,
+-- and the physical recursion/correction budgets; no final Fourier fold,
+-- equation-(4.2) decomposition, or decay conclusion can be chosen separately.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -37,6 +37,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as Fl
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapterExact as KernelAdapter
 import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
+import DASHI.Physics.Closure.NSTriadKNLuoPerModeFiniteAssemblyAdapterExact as PerModeAdapter
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapConstructorExact as BootstrapConstructor
 import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact as Alpha
@@ -112,8 +113,8 @@ record OfficialSourceFaithfulNonlinearInputs
       FluxKernel.lessOrEqual exactFluxKernel left right
       ≡ ℚBase._≤_ left right
 
-    perModeEvolution :
-      ModeEvolution.LuoPerModeCommutatorEvolution ⊤ ℚ
+    perModeFiniteInputs :
+      PerModeAdapter.LuoPerModeFinitePhysicalInputs
 
     fixedShiftBootstrapInputs :
       BootstrapConstructor.LuoFixedShiftBootstrapInputs
@@ -162,7 +163,9 @@ record OfficialSourceFaithfulNonlinearInputs
           fixedShiftBootstrapInputs)
 
     section4Continuity :
-      ModeEvolution.LuoSection4ContinuityBootstrap perModeEvolution
+      ModeEvolution.LuoSection4ContinuityBootstrap
+        (PerModeAdapter.perModeEvolutionFromFiniteAssembly
+          perModeFiniteInputs)
 
     section4UsesSelectedState :
       ModeEvolution.state section4Continuity ≡ tt
@@ -194,6 +197,19 @@ officialPhysicalIncrementKernel :
 officialPhysicalIncrementKernel inputs =
   KernelAdapter.officialIncrementKernelPhysicalRealization
     (incrementKernelAnalyticInputs inputs)
+
+officialPerModeEvolution :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time} →
+  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  ModeEvolution.LuoPerModeCommutatorEvolution ⊤ ℚ
+officialPerModeEvolution inputs =
+  PerModeAdapter.perModeEvolutionFromFiniteAssembly
+    (perModeFiniteInputs inputs)
 
 officialFixedShiftBootstrap :
   ∀ {d s t}
@@ -262,7 +278,7 @@ officialCanonicalPhysicalRealization {closure = closure} inputs = record
   ; exactFluxKernel = exactFluxKernel inputs
   ; physicalIncrementKernel = officialPhysicalIncrementKernel inputs
   ; threePiecePhysicalSchurAdapter = officialThreePieceAdapter inputs
-  ; perModeEvolution = perModeEvolution inputs
+  ; perModeEvolution = officialPerModeEvolution inputs
   ; fixedShiftBootstrap = officialFixedShiftBootstrap inputs
   ; alphaAboveOneEntry = alphaAboveOneEntry inputs
   ; section4Continuity = section4Continuity inputs
@@ -317,6 +333,9 @@ officialSourceFaithfulBuilderConstructed = true
 finiteIncrementKernelReindexingDerived : Bool
 finiteIncrementKernelReindexingDerived = true
 
+finiteEquation42RangeAssemblyDerived : Bool
+finiteEquation42RangeAssemblyDerived = true
+
 fixedShiftDecayDerivedByBlockInduction : Bool
 fixedShiftDecayDerivedByBlockInduction = true
 
@@ -336,6 +355,10 @@ officialSourceFaithfulBuilderConstructedIsTrue = refl
 finiteIncrementKernelReindexingDerivedIsTrue :
   finiteIncrementKernelReindexingDerived ≡ true
 finiteIncrementKernelReindexingDerivedIsTrue = refl
+
+finiteEquation42RangeAssemblyDerivedIsTrue :
+  finiteEquation42RangeAssemblyDerived ≡ true
+finiteEquation42RangeAssemblyDerivedIsTrue = refl
 
 fixedShiftDecayDerivedByBlockInductionIsTrue :
   fixedShiftDecayDerivedByBlockInduction ≡ true
