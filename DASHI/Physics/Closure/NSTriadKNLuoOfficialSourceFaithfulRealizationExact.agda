@@ -1,0 +1,256 @@
+module DASHI.Physics.Closure.NSTriadKNLuoOfficialSourceFaithfulRealizationExact where
+
+------------------------------------------------------------------------
+-- PROVENANCE
+--
+-- Author: Xiaoyutao Luo.
+-- Title: "A Beale--Kato--Majda Criterion with Optimal Frequency and Temporal
+-- Localization".
+-- Journal of Mathematical Fluid Mechanics 21 (2019), article 1.
+-- DOI: 10.1007/s00021-019-0411-z.
+-- arXiv DOI: 10.48550/arXiv.1803.05569.
+--
+-- PURPOSE
+-- Build the canonical source-faithful cutset from the existing official Luo
+-- continuation closure plus only the new nonlinear source data.  The state
+-- carrier is the singleton selected solution, preventing accidental claims of
+-- a uniform estimate over the ambient Solution type.
+------------------------------------------------------------------------
+
+open import Agda.Primitive using (Level; Setω)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Unit using (⊤; tt)
+import Data.Rational.Base as ℚBase
+open ℚBase using (ℚ)
+
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Official
+import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
+import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
+import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
+import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
+import DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance as Canonical
+import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Physical
+
+record OfficialSourceFaithfulNonlinearInputs
+    {d s t : Level}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    (closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time) : Setω where
+  field
+    Tensor Space : Set
+
+    exactFluxKernel :
+      FluxKernel.LuoExactFluxKernelDecomposition ⊤ Tensor ℚ
+
+    physicalIncrementKernel :
+      FluxKernel.LuoIncrementKernelPhysicalRealization
+        exactFluxKernel Space
+
+    commonSchurConstant : ℚ
+    weightedShellEnergy sourceEnergySum : Nat → ℚ
+
+    sourceEnergySumMeaning :
+      (shell : Nat) →
+      sourceEnergySum shell
+      ≡ FluxKernel.addScalar exactFluxKernel
+          (FluxKernel.lowShellEnergy exactFluxKernel shell tt)
+          (FluxKernel.highShellEnergy exactFluxKernel shell tt)
+
+    weightedSchurDominatesSourceEnergy :
+      (shell : Nat) →
+      FluxKernel.lessOrEqual exactFluxKernel
+        (sourceEnergySum shell)
+        (FluxKernel.multiply exactFluxKernel
+          commonSchurConstant
+          (weightedShellEnergy shell))
+
+    sourceAbsoluteFluxMatchesOfficial :
+      (shell : Nat) →
+      FluxKernel.absoluteHighFlux exactFluxKernel shell tt
+      ≡ Physical.absoluteCutoffFlux
+          (Official.officialPhysicalBridge closure shell)
+
+    commonSchurConstantMatchesOfficial :
+      (shell : Nat) →
+      commonSchurConstant
+      ≡ Physical.profileSchurConstant
+          (Official.officialPhysicalBridge closure shell)
+
+    weightedEnergyMatchesOfficial :
+      (shell : Nat) →
+      weightedShellEnergy shell
+      ≡ Physical.cutoffEnergyMajorant
+          (Official.officialPhysicalBridge closure shell)
+
+    sourceLowGradientMatchesOfficial :
+      (shell : Nat) →
+      FluxKernel.lowGradientInfinity exactFluxKernel shell tt
+      ≡ Physical.lowPassGradientInfinity
+          (Official.officialPhysicalBridge closure shell)
+
+    sourceMultiplyIsRationalMultiply :
+      (left right : ℚ) →
+      FluxKernel.multiply exactFluxKernel left right
+      ≡ ℚBase._*_ left right
+
+    sourceOrderIsRationalOrder :
+      (left right : ℚ) →
+      FluxKernel.lessOrEqual exactFluxKernel left right
+      ≡ ℚBase._≤_ left right
+
+    perModeEvolution :
+      ModeEvolution.LuoPerModeCommutatorEvolution ⊤ ℚ
+
+    fixedShiftBootstrap :
+      Uniform.LuoFixedShiftUniformBootstrap ℚ
+
+    alphaAboveOneEntry :
+      Uniform.LuoAlphaAboveOneRegularityEntry fixedShiftBootstrap
+
+    section4Continuity :
+      ModeEvolution.LuoSection4ContinuityBootstrap perModeEvolution
+
+    section4UsesSelectedState :
+      ModeEvolution.state section4Continuity ≡ tt
+
+    SelectedStateRepresentsOfficialSolution : Set
+    selectedStateRepresentsOfficialSolution :
+      SelectedStateRepresentsOfficialSolution
+
+    FixedShiftDecayMatchesOfficialCutoffEnergy : Set
+    fixedShiftDecayMatchesOfficialCutoffEnergy :
+      FixedShiftDecayMatchesOfficialCutoffEnergy
+
+    PerModeShellsMatchOfficialLittlewoodPaleyShells : Set
+    perModeShellsMatchOfficialLittlewoodPaleyShells :
+      PerModeShellsMatchOfficialLittlewoodPaleyShells
+
+open OfficialSourceFaithfulNonlinearInputs public
+
+officialThreePieceAdapter :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time} →
+  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  ThreePiece.LuoThreePiecePhysicalSchurAdapter
+    (exactFluxKernel inputs)
+officialThreePieceAdapter {closure = closure} inputs = record
+  { bridgeAt = λ shell state →
+      Official.officialPhysicalBridge closure shell
+  ; commonSchurConstant = commonSchurConstant inputs
+  ; weightedShellEnergy = λ shell state →
+      weightedShellEnergy inputs shell
+  ; sourceEnergySum = λ shell state →
+      sourceEnergySum inputs shell
+  ; sourceEnergySumMeaning = λ shell state →
+      sourceEnergySumMeaning inputs shell
+  ; weightedSchurDominatesSourceEnergy = λ shell state →
+      weightedSchurDominatesSourceEnergy inputs shell
+  ; sourceAbsoluteFluxMatchesBridge = λ shell state →
+      sourceAbsoluteFluxMatchesOfficial inputs shell
+  ; commonSchurConstantMatchesBridge = λ shell state →
+      commonSchurConstantMatchesOfficial inputs shell
+  ; weightedEnergyMatchesBridge = λ shell state →
+      weightedEnergyMatchesOfficial inputs shell
+  ; sourceLowGradientMatchesBridge = λ shell state →
+      sourceLowGradientMatchesOfficial inputs shell
+  ; sourceMultiplyIsRationalMultiply =
+      sourceMultiplyIsRationalMultiply inputs
+  ; sourceOrderIsRationalOrder = sourceOrderIsRationalOrder inputs
+  }
+
+officialCanonicalPhysicalRealization :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time} →
+  OfficialSourceFaithfulNonlinearInputs closure →
+  Canonical.CanonicalPeriodicLuoPhysicalRealization
+    InitialDatum Solution Time
+officialCanonicalPhysicalRealization {closure = closure} inputs = record
+  { officialClosure = closure
+  ; State = ⊤
+  ; Tensor = Tensor inputs
+  ; Space = Space inputs
+  ; selectedState = tt
+  ; exactFluxKernel = exactFluxKernel inputs
+  ; physicalIncrementKernel = physicalIncrementKernel inputs
+  ; threePiecePhysicalSchurAdapter = officialThreePieceAdapter inputs
+  ; perModeEvolution = perModeEvolution inputs
+  ; fixedShiftBootstrap = fixedShiftBootstrap inputs
+  ; alphaAboveOneEntry = alphaAboveOneEntry inputs
+  ; section4Continuity = section4Continuity inputs
+  ; SelectedStateRepresentsOfficialSolution =
+      SelectedStateRepresentsOfficialSolution inputs
+  ; selectedStateRepresentsOfficialSolution =
+      selectedStateRepresentsOfficialSolution inputs
+  ; FluxKernelMatchesOfficialProjectedFlux =
+      (shell : Nat) →
+      FluxKernel.absoluteHighFlux (exactFluxKernel inputs) shell tt
+      ≡ Physical.absoluteCutoffFlux
+          (Official.officialPhysicalBridge closure shell)
+  ; fluxKernelMatchesOfficialProjectedFlux =
+      sourceAbsoluteFluxMatchesOfficial inputs
+  ; WeightedShellEnergyMatchesOfficialSchurMajorant =
+      (shell : Nat) →
+      weightedShellEnergy inputs shell
+      ≡ Physical.cutoffEnergyMajorant
+          (Official.officialPhysicalBridge closure shell)
+  ; weightedShellEnergyMatchesOfficialSchurMajorant =
+      weightedEnergyMatchesOfficial inputs
+  ; FixedShiftDecayMatchesOfficialCutoffEnergy =
+      FixedShiftDecayMatchesOfficialCutoffEnergy inputs
+  ; fixedShiftDecayMatchesOfficialCutoffEnergy =
+      fixedShiftDecayMatchesOfficialCutoffEnergy inputs
+  ; PerModeShellsMatchOfficialLittlewoodPaleyShells =
+      PerModeShellsMatchOfficialLittlewoodPaleyShells inputs
+  ; perModeShellsMatchOfficialLittlewoodPaleyShells =
+      perModeShellsMatchOfficialLittlewoodPaleyShells inputs
+  ; Section4UsesSelectedState =
+      ModeEvolution.state (section4Continuity inputs) ≡ tt
+  ; section4UsesSelectedState = section4UsesSelectedState inputs
+  }
+
+officialCanonicalSourceFaithfulCutset :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time} →
+  OfficialSourceFaithfulNonlinearInputs closure →
+  Canonical.CanonicalPeriodicLuoSourceFaithfulCutset
+    InitialDatum Solution Time
+officialCanonicalSourceFaithfulCutset inputs =
+  Canonical.canonicalPeriodicLuoSourceFaithfulCutset
+    (officialCanonicalPhysicalRealization inputs)
+
+officialSourceFaithfulBuilderConstructed : Bool
+officialSourceFaithfulBuilderConstructed = true
+
+officialBridgeInputsNotDuplicated : Bool
+officialBridgeInputsNotDuplicated = true
+
+canonicalOfficialSourceFaithfulInputsInhabited : Bool
+canonicalOfficialSourceFaithfulInputsInhabited = false
+
+officialSourceFaithfulBuilderConstructedIsTrue :
+  officialSourceFaithfulBuilderConstructed ≡ true
+officialSourceFaithfulBuilderConstructedIsTrue = refl
+
+officialBridgeInputsNotDuplicatedIsTrue :
+  officialBridgeInputsNotDuplicated ≡ true
+officialBridgeInputsNotDuplicatedIsTrue = refl
+
+canonicalOfficialSourceFaithfulInputsInhabitedIsFalse :
+  canonicalOfficialSourceFaithfulInputsInhabited ≡ false
+canonicalOfficialSourceFaithfulInputsInhabitedIsFalse = refl
