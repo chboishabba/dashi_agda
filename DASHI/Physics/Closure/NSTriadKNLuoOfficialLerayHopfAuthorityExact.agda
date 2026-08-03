@@ -70,11 +70,14 @@ record OfficialPeriodicLuoSourceCarrier
       LH.SolvesPeriodicNavierStokesDistributionally
         (lerayHopfSolutionAt initial solution)
 
-    PeriodicDomainIsThreeTorus : Set t
+    PeriodicDomainIsThreeTorus : Set
     periodicDomainIsThreeTorus : PeriodicDomainIsThreeTorus
 
-    ViscosityIsExactlyOne : Set t
+    ViscosityIsExactlyOne : Set
     viscosityIsExactlyOne : ViscosityIsExactlyOne
+
+    SourceNormalizationMatchesLuo : Set
+    sourceNormalizationMatchesLuo : SourceNormalizationMatchesLuo
 
     localizedGradientIntegral :
       Solution → Time → Nat → ℚ
@@ -138,9 +141,9 @@ officialPeriodicLuoAuthority C = record
   ; SolvesPeriodicNavierStokesFrom =
       SolvesPeriodicNavierStokesFrom C
   ; UnitViscosityNormalization =
-      ViscosityIsExactlyOne C
+      SourceNormalizationMatchesLuo C
   ; periodicDomainMatchesSource =
-      viscosityIsExactlyOne C
+      sourceNormalizationMatchesLuo C
   ; localizedGradientIntegral =
       localizedGradientIntegral C
   ; universalDeltaBKM = universalDeltaBKM C
