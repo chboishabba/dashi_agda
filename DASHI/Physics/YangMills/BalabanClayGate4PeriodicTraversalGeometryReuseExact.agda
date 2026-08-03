@@ -20,7 +20,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4PeriodicCoordinateClosureExact as
 
 periodicDirectionInverseLaw : ∀ n → Decoder.DirectionInverseLaw n
 periodicDirectionInverseLaw n = record
-  { Decoder.DirectionInverseLaw.forwardThenReverse =
+  { forwardThenReverse =
       λ { block (pair axis true) →
             Geometry.negativeAfterPositiveBlock block axis
         ; block (pair axis false) →
