@@ -48,10 +48,6 @@ import DASHI.Physics.Closure.NSTriadKNProfileDepthGeometryCutoffIndexedExact
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact
   as PeriodicLP
 
-------------------------------------------------------------------------
--- Exact dyadic/parabolic window scale.
-------------------------------------------------------------------------
-
 pow2 : Nat → Nat
 pow2 zero = suc zero
 pow2 (suc exponent) = suc (suc zero) * pow2 exponent
@@ -69,17 +65,12 @@ record LuoParabolicTerminalWindow : Set₁ where
     Time : Set
     terminalTime : Time
     inTerminalWindow : Nat → Time → Set
-
     windowDenominator : Nat → Nat
     windowDenominatorIsParabolic :
       (cutoff : Nat) →
       windowDenominator cutoff ≡ parabolicWindowDenominator cutoff
 
 open LuoParabolicTerminalWindow public
-
-------------------------------------------------------------------------
--- Concrete forced-tail output at a cutoff.
-------------------------------------------------------------------------
 
 record CutoffForcedTailLocalizedOutput
     (cutoff : Nat) : Set where
@@ -135,16 +126,12 @@ forcedTailIntegralBound cutoff tail =
         (≤-refl {forcedTailIntegral tail})))
     (scaledForcedTailBound tail)
 
-------------------------------------------------------------------------
--- Localized Luo quantity and majorant theorem.
-------------------------------------------------------------------------
-
 record LuoCutoffLocalizedMajorant
     (cutoff : Nat) : Set where
   constructor majorant
   field
-    periodicHardShellInterface :
-      PeriodicLP.periodicHardShellProjectorConstructed ≡ true
+    periodicHardLowPassInterface :
+      PeriodicLP.periodicHardLowPassProjectorConstructed ≡ true
 
     retainedLowModeGradientIntegral : Nat
     retainedLowModeBudget : Nat
@@ -209,24 +196,19 @@ majorantToLuoExplicitCutoffCriterion cutoff window control =
     control
     (luoLocalizedQuantityBelowThreshold cutoff control)
 
-------------------------------------------------------------------------
--- Honest analytic boundary.
-------------------------------------------------------------------------
-
 record LuoPeriodicContinuationAuthority : Set₁ where
   field
     explicitCutoffWitness : LuoExplicitCutoffCriterionWitness
-
-    periodicHardShellQuantityEqualsLuoLowFrequencyGradientIntegral : Set
+    periodicHardLowPassQuantityEqualsLuoLowFrequencyGradientIntegral : Set
     thresholdMatchesLuoUniversalThreshold : Set
     limsupConditionRecoveredFromCutoffWitnesses : Set
     continuationPastTerminalTime : Set
 
 open LuoPeriodicContinuationAuthority public
 
-periodicHardShellSupportInterfaceConstructed : Bool
-periodicHardShellSupportInterfaceConstructed =
-  PeriodicLP.periodicHardShellProjectorConstructed
+periodicHardLowPassSupportInterfaceConstructed : Bool
+periodicHardLowPassSupportInterfaceConstructed =
+  PeriodicLP.periodicHardLowPassProjectorConstructed
 
 cutoffIndexedForcedTailOutputConstructed : Bool
 cutoffIndexedForcedTailOutputConstructed = true
