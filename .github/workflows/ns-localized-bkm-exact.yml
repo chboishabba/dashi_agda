@@ -20,6 +20,24 @@ on:
       - '.github/workflows/ns-localized-bkm-exact.yml'
       - 'flake.nix'
       - 'flake.lock'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNPeriodicLittlewoodPaleyBonyExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProfileDepthGeometryCutoffIndexedExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNResidueScaleOperatorGapExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoExplicitCutoffLocalizedCriterionExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLittlewoodPaleyInfrastructureInventory.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMSourceAndTargetAudit.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNBlockerToLocalizedBKMCompatibility.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNAnalyticBlockerAuthorityAudit.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMRouteIntegration.agda'
+      - 'scripts/check_ns_localized_bkm_route.py'
+      - 'scripts/check_ns_localized_bkm_exact.sh'
+      - '.github/workflows/ns-localized-bkm-exact.yml'
+      - 'flake.nix'
+      - 'flake.lock'
 
 permissions:
   contents: read
