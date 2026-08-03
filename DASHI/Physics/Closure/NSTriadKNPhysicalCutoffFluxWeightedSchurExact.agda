@@ -48,7 +48,7 @@ open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Rational.Base
   using (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNRationalDirectConvolutionBound as Direct
@@ -71,12 +71,6 @@ sumAppend (value ∷ left) right =
   trans
     (cong (value +_) (sumAppend left right))
     (sym (ℚₚ.+-assoc value (sumℚ left) (sumℚ right)))
-
-sumPointwiseMonotone :
-  (left right : List ℚ) →
-  ((index : Nat) → Set) →
-  Set
-sumPointwiseMonotone left right _ = Set
 
 ------------------------------------------------------------------------
 -- Hermitian pair-incidence atom.
@@ -108,8 +102,7 @@ record HermitianPairIncidenceAtom : Set where
 
     signedPhysicalTriadTerm : ℚ
     absolutePhysicalTriadTerm : ℚ
-    absolutePhysicalTermNonnegative :
-      0ℚ ≤ absolutePhysicalTriadTerm
+    absolutePhysicalTermNonnegative : 0ℚ ≤ absolutePhysicalTriadTerm
 
     signedTermUpper :
       signedPhysicalTriadTerm
@@ -191,6 +184,21 @@ sumAbsoluteFluxTerms atoms = sumℚ (absoluteFluxTerms atoms)
 sumIncidenceMajorants : List HermitianPairIncidenceAtom → ℚ
 sumIncidenceMajorants atoms = sumℚ (incidenceMajorants atoms)
 
+sumIncidenceMajorantsAppend :
+  (left right : List HermitianPairIncidenceAtom) →
+  sumIncidenceMajorants (left ++ right)
+    ≡ sumIncidenceMajorants left + sumIncidenceMajorants right
+sumIncidenceMajorantsAppend [] right = refl
+sumIncidenceMajorantsAppend (atom ∷ left) right =
+  trans
+    (cong (incidenceMajorant atom +_)
+      (sumIncidenceMajorantsAppend left right))
+    (sym
+      (ℚₚ.+-assoc
+        (incidenceMajorant atom)
+        (sumIncidenceMajorants left)
+        (sumIncidenceMajorants right)))
+
 finitePhysicalFluxAtomsDominatedByIncidenceMajorants :
   (atoms : List HermitianPairIncidenceAtom) →
   sumAbsoluteFluxTerms atoms ≤ sumIncidenceMajorants atoms
@@ -260,18 +268,16 @@ physicalMajorantEqualsProfileSum :
           + sumIncidenceMajorants (residualAtoms partition)))
 physicalMajorantEqualsProfileSum partition
   rewrite allAtomsAreProfileConcatenation partition
-        | sumAppend
-            (incidenceMajorants (forcedTailAtoms partition))
-            (incidenceMajorants
-              (adversarialAtoms partition
-                ++ (transitionAtoms partition ++ residualAtoms partition)))
-        | sumAppend
-            (incidenceMajorants (adversarialAtoms partition))
-            (incidenceMajorants
-              (transitionAtoms partition ++ residualAtoms partition))
-        | sumAppend
-            (incidenceMajorants (transitionAtoms partition))
-            (incidenceMajorants (residualAtoms partition)) = refl
+        | sumIncidenceMajorantsAppend
+            (forcedTailAtoms partition)
+            (adversarialAtoms partition
+              ++ (transitionAtoms partition ++ residualAtoms partition))
+        | sumIncidenceMajorantsAppend
+            (adversarialAtoms partition)
+            (transitionAtoms partition ++ residualAtoms partition)
+        | sumIncidenceMajorantsAppend
+            (transitionAtoms partition)
+            (residualAtoms partition) = refl
 
 ------------------------------------------------------------------------
 -- Weighted-Schur flux bridge.
@@ -294,8 +300,7 @@ record PhysicalCutoffFluxWeightedSchurBridge : Set₁ where
     lowPassGradientNonnegative : 0ℚ ≤ lowPassGradientInfinity
     schurConstantNonnegative : 0ℚ ≤ profileSchurConstant
 
-    partitionUsesBridgeAtoms :
-      allAtoms profilePartition ≡ atoms
+    partitionUsesBridgeAtoms : allAtoms profilePartition ≡ atoms
 
     physicalFluxTriangleBound :
       absoluteCutoffFlux ≤ sumAbsoluteFluxTerms atoms
