@@ -7,7 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --   * scale-role separation and exact parabolic dyadic convention;
 --   * literal physical triad enumeration and hard high-output selection;
 --   * finite Hermitian diagonal self-adjointness and idempotence;
---   * coefficient-unitary Parseval transport and an orthogonal-projector
+--   * coefficient-unitary Hermitian transport and an orthogonal-projector
 --     certificate for hard low/high projectors;
 --   * Luo's radial support convention and exact S_p = M_p H_(p+1)
 --     coefficient factorization;
@@ -25,6 +25,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --   * one final proof-relevant continuation synthesis.
 --
 -- Still open:
+--   * select the coefficient/official-physical Parseval identification;
 --   * select a concrete periodic radial multiplier/kernel authority;
 --   * inhabit the canonical hard-high physical/full-shell encoding;
 --   * inhabit the full physical weighted-Schur flux bridge and exact physical
@@ -98,11 +99,17 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     coefficientProjectorSelfAdjointnessClosed :
       CoefficientProjector.hardProjectorCoefficientSelfAdjointnessClosed ≡ true
 
-    coefficientParsevalTransportClosed :
-      OrthogonalProjector.hardProjectorPairingParsevalTransportClosed ≡ true
+    coefficientPairingTransportSurfaceConstructed :
+      OrthogonalProjector.hardProjectorPairingParsevalTransportSurfaceConstructed
+        ≡ true
 
-    hardProjectorOrthogonalCertificateConstructed :
-      OrthogonalProjector.hardProjectorOrthogonalCertificateConstructed ≡ true
+    coefficientUnitaryOrthogonalCertificateConstructed :
+      OrthogonalProjector.coefficientUnitaryHardProjectorOrthogonalConstructed
+        ≡ true
+
+    officialPhysicalParsevalTransportOpen :
+      OrthogonalProjector.officialPhysicalHermitianParsevalTransportSelected
+        ≡ false
 
     radialSupportConventionRecorded :
       RadialMultiplier.luoRadialSupportConventionRecorded ≡ true
@@ -167,8 +174,11 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     fullShellLuoFluxCompositionConstructed :
       FullShell.luoFullShellFluxCompositionConstructed ≡ true
 
-    hardHighSelfAdjointnessClosed :
-      EnergyFlux.periodicHardHighPassSelfAdjointnessClosed ≡ true
+    coefficientUnitaryHardHighSelfAdjointnessClosed :
+      EnergyFlux.coefficientUnitaryHardHighPassSelfAdjointnessClosed ≡ true
+
+    officialPhysicalHardHighSelfAdjointnessOpen :
+      EnergyFlux.periodicHardHighPassSelfAdjointnessClosed ≡ false
 
     hardProjectedConvectionEnumerationClosed :
       EnergyFlux.literalProjectedConvectionEnumerationClosed ≡ true
@@ -267,8 +277,9 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   HardProjector.hardHighDerivativeCurlCommutationConstructedIsTrue
   FiniteHermitian.finiteHermitianDiagonalSelfAdjointnessConstructedIsTrue
   CoefficientProjector.hardProjectorCoefficientSelfAdjointnessClosedIsTrue
-  OrthogonalProjector.hardProjectorPairingParsevalTransportClosedIsTrue
-  OrthogonalProjector.hardProjectorOrthogonalCertificateConstructedIsTrue
+  OrthogonalProjector.hardProjectorPairingParsevalTransportSurfaceConstructedIsTrue
+  OrthogonalProjector.coefficientUnitaryHardProjectorOrthogonalConstructedIsTrue
+  OrthogonalProjector.officialPhysicalHermitianParsevalTransportSelectedIsFalse
   RadialMultiplier.luoRadialSupportConventionRecordedIsTrue
   RadialMultiplier.smoothHardNextSupportFactorizationConstructedIsTrue
   RadialMultiplier.localizedMultiplierConstantsSeparatedIsTrue
@@ -289,7 +300,8 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   FullShell.matureFullShellNearMajorizationReusedIsTrue
   FullShell.matureFullShellUniformSchurReusedIsTrue
   FullShell.luoFullShellFluxCompositionConstructedIsTrue
-  EnergyFlux.periodicHardHighPassSelfAdjointnessClosedIsTrue
+  EnergyFlux.coefficientUnitaryHardHighPassSelfAdjointnessClosedIsTrue
+  EnergyFlux.periodicHardHighPassSelfAdjointnessClosedIsFalse
   EnergyFlux.literalProjectedConvectionEnumerationClosedIsTrue
   EnergyFlux.projectedEnergyFluxAlgebraConstructedIsTrue
   EnergyFlux.weightedSchurFluxEnergyCompositionConstructedIsTrue
