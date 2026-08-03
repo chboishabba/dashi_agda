@@ -37,7 +37,6 @@ record LuoExactFluxKernelDecomposition
 
     projectedTensor : Nat → State → Tensor
 
-    -- Literal Constantin--E--Titi/Luo increment kernel
     incrementKernel : Nat → State → Tensor
     lowIncrementKernel highIncrementKernel : Nat → State → Tensor
 
@@ -48,15 +47,13 @@ record LuoExactFluxKernelDecomposition
           (lowIncrementKernel shell u)
           (highIncrementKernel shell u)
 
-    -- Δ_{≤p}(u⊗u)
-    --   = r_p(u,u) - u_{>p}⊗u_{>p} + u_{≤p}⊗u_{≤p}.
     luoProjectedTensorIdentity :
       (shell : Nat) → (u : State) →
       projectedTensor shell u
       ≡ addTensor
           (subtractTensor
             (incrementKernel shell u)
-            (tensor (highPass shell u) (highPass shell shell u)))
+            (tensor (highPass shell u) (highPass shell u)))
           (tensor (lowPass shell u) (lowPass shell u))
 
     absoluteFlux : Nat → State → Scalar
@@ -77,7 +74,6 @@ record LuoExactFluxKernelDecomposition
     multiply : Scalar → Scalar → Scalar
     lessOrEqual : Scalar → Scalar → Set scalarLevel
 
-    -- Source-shaped bounds corresponding to r_{p,1}, r_{p,2}, and u_{>p}².
     fluxPiece1Bound :
       (shell : Nat) → (u : State) →
       lessOrEqual
