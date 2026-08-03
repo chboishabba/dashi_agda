@@ -17,12 +17,11 @@ module DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact where
 --
 -- PURPOSE
 -- Isolate the exact energy-flux algebra used before Luo's small-time
--- bootstrap.  A physical proof must show that the periodic high-pass is an
--- orthogonal self-adjoint Fourier projector, pressure pairs to zero against a
--- divergence-free projected velocity, and the projected convection pairing
--- equals the enumerated cutoff flux.  Once those identities are supplied,
--- the high-frequency energy inequality and the weighted-Schur flux bound
--- compose without further PDE assumptions.
+-- bootstrap.  The hard high-pass is now known to be idempotent and Hermitian
+-- self-adjoint under the repository's coefficient-unitary Parseval convention,
+-- and its hard high-output triad selector is exact.  The remaining physical
+-- adapter must identify pressure cancellation, signed coefficients, incidence
+-- multiplicity and the literal energy/flux quantities on one common carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -33,6 +32,10 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact
   as Flux
+import DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact
+  as Orthogonal
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact
+  as PhysicalReuse
 
 record ProjectedCutoffEnergyBalance : Set where
   constructor energy-balance
@@ -135,10 +138,12 @@ weightedSchurFluxEnergyCompositionConstructed : Bool
 weightedSchurFluxEnergyCompositionConstructed = true
 
 periodicHardHighPassSelfAdjointnessClosed : Bool
-periodicHardHighPassSelfAdjointnessClosed = false
+periodicHardHighPassSelfAdjointnessClosed =
+  Orthogonal.hardProjectorOrthogonalCertificateConstructed
 
 literalProjectedConvectionEnumerationClosed : Bool
-literalProjectedConvectionEnumerationClosed = false
+literalProjectedConvectionEnumerationClosed =
+  PhysicalReuse.hardProjectedHighFrequencySelectionConstructed
 
 periodicProjectedConvectionFluxAdapterInhabited : Bool
 periodicProjectedConvectionFluxAdapterInhabited = false
@@ -155,13 +160,15 @@ weightedSchurFluxEnergyCompositionConstructedIsTrue :
   weightedSchurFluxEnergyCompositionConstructed ≡ true
 weightedSchurFluxEnergyCompositionConstructedIsTrue = refl
 
-periodicHardHighPassSelfAdjointnessClosedIsFalse :
-  periodicHardHighPassSelfAdjointnessClosed ≡ false
-periodicHardHighPassSelfAdjointnessClosedIsFalse = refl
+periodicHardHighPassSelfAdjointnessClosedIsTrue :
+  periodicHardHighPassSelfAdjointnessClosed ≡ true
+periodicHardHighPassSelfAdjointnessClosedIsTrue =
+  Orthogonal.hardProjectorOrthogonalCertificateConstructedIsTrue
 
-literalProjectedConvectionEnumerationClosedIsFalse :
-  literalProjectedConvectionEnumerationClosed ≡ false
-literalProjectedConvectionEnumerationClosedIsFalse = refl
+literalProjectedConvectionEnumerationClosedIsTrue :
+  literalProjectedConvectionEnumerationClosed ≡ true
+literalProjectedConvectionEnumerationClosedIsTrue =
+  PhysicalReuse.hardProjectedHighFrequencySelectionConstructedIsTrue
 
 periodicProjectedConvectionFluxAdapterInhabitedIsFalse :
   periodicProjectedConvectionFluxAdapterInhabited ≡ false
