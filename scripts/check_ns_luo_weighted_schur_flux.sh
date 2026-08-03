@@ -12,6 +12,8 @@ check() {
 
 check DASHI/Physics/Units/MechanicalDimensionExact.agda
 check DASHI/Physics/Units/PhysicalNormalizationExact.agda
+check DASHI/Physics/Limits/PhysicsLimitCommutingSquare.agda
+check DASHI/Physics/Closure/NSTriadKNNavierStokesNormalizationTransportExact.agda
 check DASHI/Physics/Closure/NSTriadKNLocalizedBKMScaleDictionaryExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoPrimarySourceProofArchitectureExact.agda
 check DASHI/Physics/Closure/NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda
