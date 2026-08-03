@@ -26,8 +26,12 @@ import DASHI.Physics.YangMills.BalabanClayGate4PolynomialSuppressionRecurrenceEx
 ------------------------------------------------------------------------
 
 data ScaleDecayRegime : Set where
-  subPolynomial polynomial superPolynomial fixedRatioGeometric
-  finiteWindowOnly unknownRegime : ScaleDecayRegime
+  subPolynomial       : ScaleDecayRegime
+  polynomial          : ScaleDecayRegime
+  superPolynomial     : ScaleDecayRegime
+  fixedRatioGeometric : ScaleDecayRegime
+  finiteWindowOnly    : ScaleDecayRegime
+  unknownRegime       : ScaleDecayRegime
 
 record RunningSuppressionAudit : Set where
   constructor runningAudit
