@@ -19,6 +19,7 @@ REQUIRED = {
         "record ProjectionPolicy",
         "record PublicArtifact",
         "record PublicationReceipt",
+        "restrictedContentOmittedByDeclaredProjection",
         "publicViewDoesNotImplyCompleteRepresentation",
         "completeNonLeakageClaimIsFalse",
     ],
@@ -58,8 +59,8 @@ REQUIRED = {
         "archiveIsNotPublicViewClaimIsTrue",
     ],
     "DASHI/Culture/Cuisine/Everything.agda": [
-        "DASHI.Core.AttributedSourceCore",
-        "DASHI.Culture.Preservation.ControlledDisclosureCore",
+        "import DASHI.Core.AttributedSourceCore",
+        "import DASHI.Culture.Preservation.ControlledDisclosureCore",
         "DASHI.Culture.Cuisine.CuisineKnowledgeEcology",
     ],
     "DASHI/EverythingCuisineExtension.agda": [
@@ -69,6 +70,7 @@ REQUIRED = {
     "scripts/build_public_projection.py": [
         "only the fail-closed default 'reject' is supported",
         "the attribution field cannot be silently removed",
+        "missing required attribution",
         "claims_complete_non_leakage",
         "--self-test",
     ],
