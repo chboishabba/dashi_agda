@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
-open import Relation.Binary.PropositionalEquality.WithK using (≡-irrelevance)
+open import Relation.Binary.PropositionalEquality.WithK using (≡-irrelevant)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -139,7 +139,7 @@ rationalUnitQuaternionExtensionality
   {SU2.rationalUnitQuaternion .a .b .c .d normRight}
   refl refl refl refl =
   cong (SU2.rationalUnitQuaternion a b c d)
-    (≡-irrelevance normLeft normRight)
+    (≡-irrelevant normLeft normRight)
 
 multiplyAssociative : ∀ left middle right →
   multiplyRationalSU2 (multiplyRationalSU2 left middle) right
