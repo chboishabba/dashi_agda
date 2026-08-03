@@ -54,9 +54,12 @@ quarterBelowHalf : quarter ≤ halfRational
 quarterBelowHalf =
   subst
     (λ upper → quarter ≤ upper)
-    (ℚRing.solve-∀ {x = quarter + quarter})
+    regroup
     (baseBelowBasePlusRemainder quarter quarter
       (let instance _ = ℚP.normalize-nonNeg 1 4 in ℚP.nonNegative⁻¹ quarter))
+  where
+  regroup : quarter + quarter ≡ halfRational
+  regroup = ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- Haar density in the exponential chart.
