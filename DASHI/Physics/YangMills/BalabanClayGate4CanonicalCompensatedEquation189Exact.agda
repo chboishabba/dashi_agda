@@ -104,16 +104,16 @@ canonicalTOperationSmallFactor :
       Scale Fine SlowField Component Functional ℚ}
     (dataSet : CanonicalCompensatedEquation189Data
       Scale Fine SlowField Component Functional Traversal tData)
-    scale
+    (scale : Scale)
     (selected : T.SecondClassComponent (T.classData tData) scale)
-    slow →
+    (slow : SlowField) →
   T.LessEqual (order dataSet)
     (T.localizedTOperation tData scale selected slow
       (T.oneFunctional tData))
     (Canonical.suppression (canonicalReference dataSet) scale)
-canonicalTOperationSmallFactor dataSet =
+canonicalTOperationSmallFactor dataSet scale selected slow =
   Equation189.physicalTOperationSmallFactor
-    (asPhysicalEquation189Data dataSet)
+    (asPhysicalEquation189Data dataSet) scale selected slow
 
 canonicalTOperationSmallFactorInResidualConvention :
   ∀ {Scale Fine SlowField Component Functional Traversal}
@@ -121,14 +121,14 @@ canonicalTOperationSmallFactorInResidualConvention :
       Scale Fine SlowField Component Functional ℚ}
     (dataSet : CanonicalCompensatedEquation189Data
       Scale Fine SlowField Component Functional Traversal tData)
-    scale
+    (scale : Scale)
     (selected : T.SecondClassComponent (T.classData tData) scale)
-    slow →
+    (slow : SlowField) →
   T.LessEqual (order dataSet)
     (T.localizedTOperation tData scale selected slow
       (T.oneFunctional tData))
     (Compensated.residualSuppression (comparison dataSet) scale)
-canonicalTOperationSmallFactorInResidualConvention dataSet scale selected slow =
+canonicalTOperationSmallFactorInResidualConvention {tData = tData} dataSet scale selected slow =
   subst
     (λ upper → T.LessEqual (order dataSet)
       (T.localizedTOperation tData scale selected slow
