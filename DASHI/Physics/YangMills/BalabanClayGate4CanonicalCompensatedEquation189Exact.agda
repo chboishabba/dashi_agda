@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4CanonicalCompensatedEquation189Exact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; _≤_)
+open import Data.Rational using (ℚ; _≤_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -49,20 +49,20 @@ record CanonicalCompensatedEquation189Data
 
     traversalOf : Scale → Component → SlowField → Fine → Traversal
 
-    oneIntegrandMeaning : ∀ scale component slow fine →
+    oneIntegrandMeaning : ∀ (scale : Scale) (component : Component) (slow : SlowField) (fine : Fine) →
       T.localIntegrand tData scale component slow
         (T.oneFunctional tData) fine
       ≡ Factors.activity (Compensated.physical comparison) scale
           (traversalOf scale component slow fine)
 
-    referenceIntegrandFactorMeaning : ∀ scale component slow fine →
+    referenceIntegrandFactorMeaning : ∀ (scale : Scale) (component : Component) (slow : SlowField) (fine : Fine) →
       Canonical.referenceIntegrand canonicalReference
         scale component slow fine
       ≡ Compensated.residualSuppression comparison scale
         * Compensated.referenceProduct comparison
           scale (traversalOf scale component slow fine)
 
-    suppressionConvention : ∀ scale →
+    suppressionConvention : ∀ (scale : Scale) →
       Canonical.suppression canonicalReference scale
       ≡ Compensated.residualSuppression comparison scale
 
