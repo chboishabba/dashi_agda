@@ -24,9 +24,9 @@ module DASHI.Physics.Closure.NSTriadKNLittlewoodPaleyInfrastructureInventory whe
 --
 -- PURPOSE
 -- Inventory the Littlewood--Paley/paradifferential infrastructure already
--- present in DASHI.  The exact finite periodic hard-shell projector, its
--- derivative/curl commutation, resonant triad carrier, and Bony/Tao
--- classification are now constructed.  Smooth-projector norm comparison,
+-- present in DASHI.  The exact finite periodic hard-shell and hard low-pass
+-- projectors, derivative/curl commutation, resonant triad carrier, and
+-- Bony/Tao classification are constructed.  Smooth-projector norm comparison,
 -- literal time-integral identification, and the continuation theorem remain
 -- separate analytic obligations.
 ------------------------------------------------------------------------
@@ -43,27 +43,17 @@ import DASHI.Physics.Closure.NSTriadKNOutputRelocationKatoPonceBonyScopeAudit as
 import DASHI.Physics.Closure.NSTriadKNDongLiFrequencyLocalizedCoercivityAudit as DongLi
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as ExactLP
 
-------------------------------------------------------------------------
--- Abstract smooth/analytic projector interface required by the external
--- continuation criteria.  The exact hard-shell module supplies the algebraic
--- support interface but not these continuous norm fields.
-------------------------------------------------------------------------
-
 record PeriodicLittlewoodPaleyProjectorInterface : Set₁ where
   field
     Field : Set
-
     shellProjector : Nat → Field → Field
     lowProjector : Nat → Field → Field
-
     exactShellSupport : Set
     finiteNeighbourOverlap : Set
     reconstructionFromShells : Set
     lowProjectorIsShellSum : Set
-
     curlCommutesWithShellProjector : Set
     derivativeCommutesWithShellProjector : Set
-
     shellBernsteinL2ToLInfinity : Set
     shellVorticityVelocityComparison : Set
 
@@ -85,56 +75,44 @@ record LiteralNavierStokesBonyDecomposition : Set₁ where
     lowHighTerm : VelocityField → VelocityField
     highLowTerm : VelocityField → VelocityField
     resonantTerm : VelocityField → VelocityField
-
     nonlinearTermEqualsThreeWaySplit : Set
     advectiveResidualIdentified : Set
     transverseResidualIdentified : Set
 
 open LiteralNavierStokesBonyDecomposition public
 
-------------------------------------------------------------------------
--- Proven infrastructure and honest open interfaces.
-------------------------------------------------------------------------
-
 record LittlewoodPaleyInfrastructureReceipt : Set where
   constructor receipt
   field
     exactThreeLegDyadicGeometryDefined :
       Geometry.canonicalAbsolutePredicatesDefined ≡ true
-
     hardDyadicShellConventionDefined :
       HardShell.hardDyadicShellConventionDefined ≡ true
-
     radiusEqualityShellTransportClosed :
       HardShell.radiusEqualityTransportClosed ≡ true
-
     finiteSupportBernsteinClosed :
       Bernstein.finiteBernsteinCountingClosed ≡ true
-
     frozenLegParaproductTrichotomyRecorded :
       Tao.taoTransposeAndTrichotomySourceRepresented ≡ true
-
     bonyParaproductMechanismRecorded :
       Bony.bonyParaproductMechanismRecorded ≡ true
-
     periodicFrequencyLocalizedCoercivityRecorded :
       DongLi.dongLiFrequencyLocalizedCoercivityRecorded ≡ true
 
     exactPeriodicHardShellProjectorConstructed :
       ExactLP.periodicHardShellProjectorConstructed ≡ true
-
+    exactPeriodicHardLowPassProjectorConstructed :
+      ExactLP.periodicHardLowPassProjectorConstructed ≡ true
     ownedShellPointwiseReconstructionClosed :
       ExactLP.ownedShellPointwiseReconstructionClosed ≡ true
-
+    ownedLowPassPointwiseReconstructionClosed :
+      ExactLP.ownedLowPassPointwiseReconstructionClosed ≡ true
     exactDerivativeProjectorCommutationClosed :
       ExactLP.derivativeProjectorCommutationClosed ≡ true
-
     exactCurlProjectorCommutationClosed :
       ExactLP.curlProjectorCommutationClosed ≡ true
-
     exactBonyTaoInteractionClassificationClosed :
       ExactLP.bonyTaoInteractionClassificationClosed ≡ true
-
     exactFiniteInteractionRecompositionClosed :
       ExactLP.finiteInteractionRecompositionClosed ≡ true
 
@@ -156,16 +134,14 @@ littlewoodPaleyInfrastructureReceipt = receipt
   Bony.bonyParaproductMechanismRecordedIsTrue
   DongLi.dongLiFrequencyLocalizedCoercivityRecordedIsTrue
   ExactLP.periodicHardShellProjectorConstructedIsTrue
+  ExactLP.periodicHardLowPassProjectorConstructedIsTrue
   ExactLP.ownedShellPointwiseReconstructionClosedIsTrue
+  ExactLP.ownedLowPassPointwiseReconstructionClosedIsTrue
   ExactLP.derivativeProjectorCommutationClosedIsTrue
   ExactLP.curlProjectorCommutationClosedIsTrue
   ExactLP.bonyTaoInteractionClassificationClosedIsTrue
   ExactLP.finiteInteractionRecompositionClosedIsTrue
-  false
-  false
-  false
-  false
-  false
+  false false false false false
 
 existingHardShellLPInfrastructureRecorded : Bool
 existingHardShellLPInfrastructureRecorded = true
