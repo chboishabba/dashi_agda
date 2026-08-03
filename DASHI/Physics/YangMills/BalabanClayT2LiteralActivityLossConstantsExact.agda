@@ -334,30 +334,30 @@ record PatchActivityLossData
     multiply : Scalar → Scalar → Scalar
     LessEqual : Scalar → Scalar → Set
 
-    boundaryActivityExtensionExact : ∀ activity → Set
-    interfaceActivityExtensionExact : ∀ activity → Set
-    cornerActivityExtensionExact : ∀ activity → Set
-    nestedActivityExtensionExact : ∀ activity → Set
+    boundaryActivityExtensionExact : ∀ (activity : Activity) → Set
+    interfaceActivityExtensionExact : ∀ (activity : Activity) → Set
+    cornerActivityExtensionExact : ∀ (activity : Activity) → Set
+    nestedActivityExtensionExact : ∀ (activity : Activity) → Set
 
-    boundaryPatchNormComparison : ∀ polymer activity →
+    boundaryPatchNormComparison : ∀ (polymer : Polymer) (activity : Activity) →
       LessEqual (norm boundary polymer (extend boundary activity))
         (multiply (patchConstant boundary) (norm boundary polymer activity))
-    interfacePatchNormComparison : ∀ polymer activity →
+    interfacePatchNormComparison : ∀ (polymer : Polymer) (activity : Activity) →
       LessEqual (norm interface polymer (extend interface activity))
         (multiply (patchConstant interface) (norm interface polymer activity))
-    cornerPatchNormComparison : ∀ polymer activity →
+    cornerPatchNormComparison : ∀ (polymer : Polymer) (activity : Activity) →
       LessEqual (norm corner polymer (extend corner activity))
         (multiply (patchConstant corner) (norm corner polymer activity))
-    nestedPatchNormComparison : ∀ polymer activity →
+    nestedPatchNormComparison : ∀ (polymer : Polymer) (activity : Activity) →
       LessEqual (norm nested polymer (extend nested activity))
         (multiply (patchConstant nested) (norm nested polymer activity))
 
-    transferCutCollarExcessBound : ∀ regime polymer → Set
-    transferCutActivityPenalty : ∀ regime polymer activity → Set
-    nestedLocalizationCommutesWithRestriction : ∀ polymer activity → Set
+    transferCutCollarExcessBound : ∀ (regime : Regime) (polymer : Polymer) → Set
+    transferCutActivityPenalty : ∀ (regime : Regime) (polymer : Polymer) (activity : Activity) → Set
+    nestedLocalizationCommutesWithRestriction : ∀ (polymer : Polymer) (activity : Activity) → Set
 
     commonPatchLoss : Scalar
-    patchLossUniformAcrossRegimes : ∀ regime polymer activity →
+    patchLossUniformAcrossRegimes : ∀ (regime : Regime) (polymer : Polymer) (activity : Activity) →
       LessEqual (norm regime polymer (extend regime activity))
         (multiply commonPatchLoss (norm regime polymer activity))
 
@@ -381,7 +381,7 @@ record LiteralActivityNetGainData
     transitive : ∀ {left middle right} →
       LessEqual left middle → LessEqual middle right → LessEqual left right
 
-    totalLossDefinition : ∀ scale polymer →
+    totalLossDefinition : ∀ (scale : Scale) (polymer : Polymer) →
       totalLoss scale polymer
       ≡ add (jacobianLoss scale polymer)
           (add (determinantLoss scale polymer)
@@ -389,17 +389,17 @@ record LiteralActivityNetGainData
               (add (localizationLoss scale polymer)
                 (patchLoss scale polymer))))
 
-    netGainDefinition : ∀ scale polymer →
+    netGainDefinition : ∀ (scale : Scale) (polymer : Polymer) →
       netGain scale polymer
       ≡ subtract (actionGain scale polymer) (totalLoss scale polymer)
 
-    literalWilsonActivityLogBound : ∀ scale polymer →
+    literalWilsonActivityLogBound : ∀ (scale : Scale) (polymer : Polymer) →
       LessEqual (activity scale polymer) (factorProduct scale polymer)
 
-    physicalNetGainAtLeastLogSixteen : ∀ scale polymer →
+    physicalNetGainAtLeastLogSixteen : ∀ (scale : Scale) (polymer : Polymer) →
       LessEqual (logSixteen scale polymer) (netGain scale polymer)
 
-    logGainImpliesFactorProductBelow : ∀ scale polymer →
+    logGainImpliesFactorProductBelow : ∀ (scale : Scale) (polymer : Polymer) →
       LessEqual (logSixteen scale polymer) (netGain scale polymer) →
       LessEqual (factorProduct scale polymer) (oneSixteenth scale polymer)
 
