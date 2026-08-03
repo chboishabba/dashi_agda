@@ -18,6 +18,7 @@ import DASHI.Physics.Limits.PhysicsLimitCommutingSquare as Limits
 import DASHI.Physics.Units.MechanicalDimensionExact as Dimension
 import DASHI.Physics.Units.PhysicalNormalizationExact as Normalize
 import DASHI.Physics.Closure.GRWeakFieldDimensionExact as WeakGR
+import DASHI.Physics.Closure.NSTriadKNNavierStokesNormalizationTransportExact as NSNormalize
 import DASHI.Physics.Closure.NSTriadKNLuoScalingExact as LuoScaling
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact as YMMass
 import DASHI.Unified.GRQuantumContinuumAuthorities as Continuum
@@ -32,6 +33,7 @@ record PhysicsScalingLimitSpine : Set₂ where
     generalNormalizationMaps : Set
     exactResidualAndAsymptoticLimits : Set
 
+    navierStokesEquationEnergyWindowTransport : Set
     navierStokesLuoScaling : Set
     weakFieldGRDimensionAndCutset : Set
     yangMillsMassScaleDimension : Set
@@ -56,6 +58,9 @@ continuumCutsetStillRequired = Continuum.continuumAuthorityRequired
 
 sharedMechanicalDimensionCoreImplemented : Bool
 sharedMechanicalDimensionCoreImplemented = true
+
+generalNavierStokesDimensionTransportImplemented : Bool
+generalNavierStokesDimensionTransportImplemented = true
 
 luoScalingInvariantImplemented : Bool
 luoScalingInvariantImplemented = true
@@ -82,7 +87,7 @@ theoryOfEverythingPromotedIsFalse = refl
 
 unificationProgrammeStatement : String
 unificationProgrammeStatement =
-  "Unification is represented by shared dimension and observable semantics plus exact, residual-controlled or asymptotically commuting translations. Finite/model coincidences do not synthesize the strict continuum GR/quantum authority cutset."
+  "Unification is represented by shared dimension and observable semantics plus exact, residual-controlled or asymptotically commuting translations. General Navier-Stokes normalization precedes Luo's Re=1 specialization, and finite/model coincidences do not synthesize the strict continuum GR/quantum authority cutset."
 
 MechanicalDimensionType : Set
 MechanicalDimensionType = Dimension.MechanicalDimension
@@ -95,6 +100,14 @@ WeakFieldModelType = WeakGR.WeakFieldScalarModel
 
 NaturalUnitMassConversionType : Set₁
 NaturalUnitMassConversionType = YMMass.NaturalUnitMassConversion
+
+NavierStokesTermDimensionReceiptType : Set
+NavierStokesTermDimensionReceiptType = NSNormalize.NavierStokesTermDimensionReceipt
+
+canonicalNavierStokesTermDimensions :
+  NavierStokesTermDimensionReceiptType
+canonicalNavierStokesTermDimensions =
+  NSNormalize.canonicalNavierStokesTermDimensionReceipt
 
 -- Referencing the Luo theorem constructor here is intentionally proposition
 -- level: an actual source carrier and scales are still required to inhabit it.
