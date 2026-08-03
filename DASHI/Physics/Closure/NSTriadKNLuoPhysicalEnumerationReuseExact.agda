@@ -17,6 +17,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -29,12 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNExactPhysicalKernelIdentification as Exact
 import DASHI.Physics.Closure.NSFourierBiotSavartTriadKernel as FourierKernel
 import DASHI.Physics.Closure.NSCompactGammaOffPacketTriadMajorization as Majorization
 
-------------------------------------------------------------------------
--- Literal cutoff enumeration aliases.
-------------------------------------------------------------------------
-
-literalPhysicalTriads : Nat →
-  Agda.Builtin.List.List Physical.PhysicalTriadIncidence
+literalPhysicalTriads : Nat → List Physical.PhysicalTriadIncidence
 literalPhysicalTriads = Physical.physicalTriadEnumeration
 
 literalPhysicalTriadSound :
@@ -56,8 +52,7 @@ literalPhysicalTriadNoDuplicates =
   Physical.physicalTriadEnumerationNoDuplicates
 
 literalOutputFiber :
-  Nat → Z3.FourierMode →
-  Agda.Builtin.List.List Physical.PhysicalTriadIncidence
+  Nat → Z3.FourierMode → List Physical.PhysicalTriadIncidence
 literalOutputFiber = OutputFiber.physicalOutputFiber
 
 literalOutputFiberSound :
@@ -72,16 +67,6 @@ literalOutputFiberComplete :
   Physical.k triad ≡ output →
   Cube._∈_ triad (literalOutputFiber cutoff output)
 literalOutputFiberComplete = OutputFiber.physicalOutputFiberComplete
-
-------------------------------------------------------------------------
--- Existing exact local-to-global majorization theorem re-export.
-------------------------------------------------------------------------
-
-finiteTriadMajorization = Majorization.triadMajorization
-
-------------------------------------------------------------------------
--- Honest reuse ledger.
-------------------------------------------------------------------------
 
 record LuoPhysicalEnumerationReuseReceipt : Set where
   constructor receipt
