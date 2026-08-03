@@ -39,7 +39,7 @@ record PhysicalPositiveReferenceConstruction
 
     rawSelectedReference : Scale → Component → SlowField → Fine → Scalar
 
-    positiveSelectedFibre : ∀ scale component slow →
+    positiveSelectedFibre : ∀ (scale : Scale) (component : Component) (slow : SlowField) →
       PositiveMass.PositiveSelectedReferenceFibre
         positiveAlgebra
         (rawSelectedReference scale component slow)
@@ -50,7 +50,7 @@ record PhysicalPositiveReferenceConstruction
     referenceIntegrand : Scale → Component → SlowField → Fine → Scalar
 
     selectedReferenceIntegrandMeaning :
-      ∀ scale component slow fine →
+      ∀ (scale : Scale) (component : Component) (slow : SlowField) (fine : Fine) →
       Integral.selectedWith (T.sumData dataSet)
         (referenceIntegrand scale component slow) slow fine
       ≡ Reference.scaledSelector referenceAlgebra (suppression scale)
@@ -68,20 +68,20 @@ asTReferenceReciprocalConstruction :
   PhysicalPositiveReferenceConstruction dataSet →
   Reference.TReferenceReciprocalConstruction dataSet
 asTReferenceReciprocalConstruction construction = record
-  { Reference.TReferenceReciprocalConstruction.algebra =
+  { algebra =
       referenceAlgebra construction
-  ; Reference.TReferenceReciprocalConstruction.rawSelectedReference =
+  ; rawSelectedReference =
       rawSelectedReference construction
-  ; Reference.TReferenceReciprocalConstruction.reciprocalReference =
+  ; reciprocalReference =
       λ scale component slow →
         PositiveMass.reciprocalReferenceMassFromPositiveWitness
           (reciprocalAlgebra construction)
           (positiveSelectedFibre construction scale component slow)
-  ; Reference.TReferenceReciprocalConstruction.suppression =
+  ; suppression =
       suppression construction
-  ; Reference.TReferenceReciprocalConstruction.referenceIntegrand =
+  ; referenceIntegrand =
       referenceIntegrand construction
-  ; Reference.TReferenceReciprocalConstruction.selectedReferenceIntegrandMeaning =
+  ; selectedReferenceIntegrandMeaning =
       selectedReferenceIntegrandMeaning construction
   }
 
