@@ -33,6 +33,7 @@ open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (_+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSCompactGammaReplenishmentAbsorption as Absorption
 import DASHI.Physics.Closure.NSPairIncidenceKernel as PairKernel
 import DASHI.Physics.Closure.NSCompactGammaFullShellSchur as FullShell
@@ -146,17 +147,19 @@ hardHighPhysicalCoefficientDominated :
   (S : LuoWeightedSchurContinuationSynthesis) →
   (shell : Nat) →
   (triad : Physical.PhysicalTriadIncidence) →
+  Cube._∈_ triad
+    (High.hardHighPhysicalTriads shell (cubeCutoffAt S shell)) →
   Absorption._≤_
     (Closure.arithmetic (program S))
     (PhysicalFullShell.physicalSignedMagnitude
       (hardHighPhysicalFullShellAt S shell) triad)
     (PhysicalFullShell.physicalIncidenceMajorant
       (hardHighPhysicalFullShellAt S shell) triad)
-hardHighPhysicalCoefficientDominated S shell triad =
+hardHighPhysicalCoefficientDominated S shell triad listed =
   PhysicalFullShell.physicalSignedCoefficientDominated
     (program S) (KAt S shell) (NAt S shell)
     shell (cubeCutoffAt S shell)
-    (hardHighPhysicalFullShellAt S shell) triad
+    (hardHighPhysicalFullShellAt S shell) triad listed
 
 literalPhysicalCutoffRecursion :
   (S : LuoWeightedSchurContinuationSynthesis) →
