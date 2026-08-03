@@ -34,10 +34,6 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact
   as Flux
 
-------------------------------------------------------------------------
--- Projected energy balance with explicit pressure cancellation.
-------------------------------------------------------------------------
-
 record ProjectedCutoffEnergyBalance : Set where
   constructor energy-balance
   field
@@ -74,23 +70,35 @@ highFrequencyEnergyInequality balance =
       (divergenceFreePressureCancellation balance)
       (projectedEnergyInequalityWithPressure balance))
 
-------------------------------------------------------------------------
--- Source-faithful physical adapter.
-------------------------------------------------------------------------
-
 record PeriodicProjectedConvectionFluxAdapter : Set₁ where
   constructor projected-flux-adapter
   field
     balance : ProjectedCutoffEnergyBalance
     weightedFluxBridge : Flux.PhysicalCutoffFluxWeightedSchurBridge
 
-    hardHighPassProjectorIdempotent : Set
-    hardHighPassProjectorSelfAdjoint : Set
-    hardHighPassCommutesWithDerivative : Set
-    periodicVelocityDivergenceFree : Set
-    pressurePairingIsLiteralPeriodicPairing : Set
-    projectedConvectionTriadsExactlyEnumerated : Set
-    incidenceMultiplicityMatchesConvolution : Set
+    HardHighPassProjectorIdempotent : Set
+    hardHighPassProjectorIdempotent : HardHighPassProjectorIdempotent
+
+    HardHighPassProjectorSelfAdjoint : Set
+    hardHighPassProjectorSelfAdjoint : HardHighPassProjectorSelfAdjoint
+
+    HardHighPassCommutesWithDerivative : Set
+    hardHighPassCommutesWithDerivative : HardHighPassCommutesWithDerivative
+
+    PeriodicVelocityDivergenceFree : Set
+    periodicVelocityDivergenceFree : PeriodicVelocityDivergenceFree
+
+    PressurePairingIsLiteralPeriodicPairing : Set
+    pressurePairingIsLiteralPeriodicPairing :
+      PressurePairingIsLiteralPeriodicPairing
+
+    ProjectedConvectionTriadsExactlyEnumerated : Set
+    projectedConvectionTriadsExactlyEnumerated :
+      ProjectedConvectionTriadsExactlyEnumerated
+
+    IncidenceMultiplicityMatchesConvolution : Set
+    incidenceMultiplicityMatchesConvolution :
+      IncidenceMultiplicityMatchesConvolution
 
     energyFluxQuantityAgreement :
       absoluteCutoffFlux balance
