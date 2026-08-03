@@ -19,15 +19,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNHardDyadicShellOwner as HardShell
 import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm as ModeNorm
-
-------------------------------------------------------------------------
--- Boolean hard low/high ownership.
-------------------------------------------------------------------------
 
 not : Bool → Bool
 not true = false
@@ -48,14 +45,14 @@ record HardLowOutputSelected
     (triad : Physical.PhysicalTriadIncidence) : Set where
   constructor low-selected
   field
-    selected : hardLowOutputSelect shell triad ≡ true
+    lowSelection : hardLowOutputSelect shell triad ≡ true
 
 record HardHighOutputSelected
     (shell : Nat)
     (triad : Physical.PhysicalTriadIncidence) : Set where
   constructor high-selected
   field
-    selected : hardHighOutputSelect shell triad ≡ true
+    highSelection : hardHighOutputSelect shell triad ≡ true
 
 open HardLowOutputSelected public
 open HardHighOutputSelected public
@@ -64,13 +61,12 @@ lowHighDisjoint :
   ∀ {shell triad} →
   HardLowOutputSelected shell triad →
   HardHighOutputSelected shell triad →
-  Cube.⊥
+  ⊥
 lowHighDisjoint {shell} {triad} low high
   with hardLowOutputSelect shell triad
-... | true with HardLowOutputSelected.selected low
-               | HardHighOutputSelected.selected high
-...   | refl | ()
-... | false with HardLowOutputSelected.selected low
+... | true with highSelection high
+...   | ()
+... | false with lowSelection low
 ...   | ()
 
 data LowOrHigh
@@ -86,10 +82,6 @@ lowOrHigh :
 lowOrHigh shell triad with hardLowOutputSelect shell triad
 ... | true = low (low-selected refl)
 ... | false = high (high-selected refl)
-
-------------------------------------------------------------------------
--- Exact list filtering.
-------------------------------------------------------------------------
 
 filterHigh :
   Nat →
@@ -140,7 +132,7 @@ filterHighComplete {shell} {triads = head ∷ tail}
   (Cube.here refl) selected
   with hardHighOutputSelect shell head
 ... | true = Cube.here refl
-... | false with HardHighOutputSelected.selected selected
+... | false with highSelection selected
 ...   | ()
 filterHighComplete {shell} {triads = head ∷ tail}
   (Cube.there member) selected
