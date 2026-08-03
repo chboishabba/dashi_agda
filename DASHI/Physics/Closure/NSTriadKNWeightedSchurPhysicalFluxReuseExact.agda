@@ -18,7 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNWeightedSchurPhysicalFluxReuseExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (_≤_)
+open import Data.Rational.Base using (_≤_; _*_)
 
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound as WeightedSchur
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
