@@ -10,6 +10,7 @@ on:
       - 'DASHI/EverythingCuisineExtension.agda'
       - 'Docs/support/reference/SituatedMolePreservationAttribution.md'
       - '.github/workflows/culinary-qualitative-formalism.yml'
+      - 'scripts/build_public_projection.py'
       - 'scripts/check_situated_mole_preservation.py'
       - 'scripts/run_agda29_parallel_check.sh'
 
@@ -28,7 +29,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Audit attribution, non-collapse, and fail-closed publication
-        run: python3 scripts/check_situated_mole_preservation.py
+        run: |
+          python3 scripts/check_situated_mole_preservation.py
+          python3 scripts/build_public_projection.py --self-test
 
       - uses: cachix/install-nix-action@v31
         with:
