@@ -1,33 +1,33 @@
 module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 
 ------------------------------------------------------------------------
--- Integration receipt for the source-faithful Luo cutoff-flux tranche.
+-- Integration receipt for the source-faithful Luo cutoff-flux route.
 --
 -- Constructively present:
---   * typed separation of shell index, dyadic wavenumber, parabolic window,
---     mode count, profile depth and Galerkin cutoff;
---   * literal cutoff-cube physical triad enumeration and exact output fibres;
---   * exact hard high-output selection, low/high partition and no duplication;
---   * exact hard low/high projector idempotence, disjointness and multiplier
---     commutation;
---   * validated physical/code fibre-image and kernel equality reductions;
---   * Hermitian pair-incidence majorants for complex Fourier differences;
---   * multiplicity-safe fibre equality;
---   * finite physical-flux-to-positive-incidence domination;
---   * reuse of mature compact-Gamma/full-shell local majorization and Schur;
---   * hard-to-smooth terminal-window transfer algebra;
---   * pressure-cancellation transport at the projected energy boundary;
---   * nonnegative-rational cutoff energy/dissipation recursion and bootstrap.
+--   * scale-role separation and exact parabolic dyadic convention;
+--   * literal physical triad enumeration and hard high-output selection;
+--   * finite Hermitian diagonal self-adjointness and idempotence;
+--   * coefficient-unitary Parseval transport and an orthogonal-projector
+--     certificate for hard low/high projectors;
+--   * Luo's radial support convention and exact S_p = M_p H_(p+1)
+--     coefficient factorization;
+--   * separated derivative, finite-mode and hard/smooth multiplier constants;
+--   * a source-attributed periodic kernel-L1 multiplier authority and terminal
+--     window transfer theorem;
+--   * exact physical/full-shell representation and signed-coefficient
+--     domination theorem shapes;
+--   * Hermitian pair-incidence, multiplicity-safe fibre and weighted-Schur
+--     cutoff-flux composition;
+--   * literal energy/dissipation/time-identification and recursion transports;
+--   * a source-faithful imported Luo Theorem 1.1 continuation adapter;
+--   * one final proof-relevant continuation synthesis.
 --
 -- Still open:
---   * concrete smooth periodic LP multipliers and a uniform hard/smooth band
---     comparison constant;
---   * instantiate the physical signed coefficient/Hermitian majorant theorem;
---   * identify the hard-high physical pair list with the mature full-shell
---     family and factor its majorant into Luo's weighted energy times gradient;
---   * periodic hard-high-pass Hermitian L2 self-adjointness;
---   * identification with actual time-integrated energy, dissipation and flux;
---   * Luo limsup and continuation authority;
+--   * select a concrete periodic radial multiplier/kernel authority;
+--   * inhabit the canonical hard-high physical/full-shell encoding;
+--   * inhabit the full physical weighted-Schur flux bridge and exact physical
+--     energy/dissipation/time-integral identification on one carrier;
+--   * derive the exact Luo limsup witness from the uniform cutoff family;
 --   * every BKM and Clay promotion gate.
 ------------------------------------------------------------------------
 
@@ -37,12 +37,21 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNLocalizedBKMScaleDictionaryExact as Scale
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact as PhysicalReuse
 import DASHI.Physics.Closure.NSTriadKNPeriodicHardProjectorAlgebraExact as HardProjector
+import DASHI.Physics.Closure.NSTriadKNFiniteHermitianDiagonalMultiplierExact as FiniteHermitian
+import DASHI.Physics.Closure.NSTriadKNHardProjectorCoefficientSelfAdjointExact as CoefficientProjector
+import DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact as OrthogonalProjector
+import DASHI.Physics.Closure.NSTriadKNLuoRadialSmoothMultiplierExact as RadialMultiplier
 import DASHI.Physics.Closure.NSTriadKNHardSmoothLittlewoodPaleyTransferExact as HardSmooth
+import DASHI.Physics.Closure.NSTriadKNLuoPeriodicMultiplierKernelBoundExact as MultiplierAuthority
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurPhysicalFluxReuseExact as SchurReuse
+import DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellPhysicalIdentificationExact as PhysicalFullShell
 import DASHI.Physics.Closure.NSTriadKNLuoFullShellFluxAdapterExact as FullShell
 import DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact as EnergyFlux
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyBootstrapExact as Bootstrap
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnergyDissipationTimeExact as PhysicalTime
+import DASHI.Physics.Closure.NSTriadKNLuoPublishedContinuationAuthorityExact as PublishedLuo
+import DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurContinuationSynthesisExact as Synthesis
 import DASHI.Physics.Closure.NSTriadKNLuoExplicitCutoffLocalizedCriterionExact as Luo
 import DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit as Sources
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds as PairBounds
@@ -80,6 +89,40 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     hardHighMultiplierCommutationConstructed :
       HardProjector.hardHighDerivativeCurlCommutationConstructed ≡ true
 
+    finiteHermitianSelfAdjointnessConstructed :
+      FiniteHermitian.finiteHermitianDiagonalSelfAdjointnessConstructed ≡ true
+
+    coefficientProjectorSelfAdjointnessClosed :
+      CoefficientProjector.hardProjectorCoefficientSelfAdjointnessClosed ≡ true
+
+    coefficientParsevalTransportClosed :
+      OrthogonalProjector.hardProjectorPairingParsevalTransportClosed ≡ true
+
+    hardProjectorOrthogonalCertificateConstructed :
+      OrthogonalProjector.hardProjectorOrthogonalCertificateConstructed ≡ true
+
+    radialSupportConventionRecorded :
+      RadialMultiplier.luoRadialSupportConventionRecorded ≡ true
+
+    smoothHardNextFactorizationConstructed :
+      RadialMultiplier.smoothHardNextSupportFactorizationConstructed ≡ true
+
+    multiplierConstantsSeparated :
+      RadialMultiplier.localizedMultiplierConstantsSeparated ≡ true
+
+    hardSmoothTransferAlgebraConstructed :
+      HardSmooth.hardSmoothFiniteBandTransferAlgebraConstructed ≡ true
+
+    hardSmoothTerminalWindowTransferConstructed :
+      HardSmooth.hardSmoothTerminalWindowTransferConstructed ≡ true
+
+    periodicMultiplierAuthoritySurfaceConstructed :
+      MultiplierAuthority.publishedLuoPeriodicMultiplierAuthoritySurfaceConstructed
+        ≡ true
+
+    periodicMultiplierTerminalTransferClosed :
+      MultiplierAuthority.hardSmoothTerminalCriterionTransportClosed ≡ true
+
     validatedPhysicalKernelImageAvailable :
       PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRoute ≡ true
 
@@ -88,6 +131,14 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
 
     finiteTriadMajorizationCompositionAvailable :
       PhysicalReuse.finiteTriadMajorizationCompositionAvailable ≡ true
+
+    hardHighFullShellRepresentationTheoremConstructed :
+      PhysicalFullShell.hardHighPhysicalFullShellRepresentationTheoremConstructed
+        ≡ true
+
+    physicalSignedCoefficientDominationTheoremConstructed :
+      PhysicalFullShell.physicalSignedCoefficientDominationTheoremConstructed
+        ≡ true
 
     hermitianPairIncidenceConstructed :
       Flux.hermitianPairIncidenceAtomConstructed ≡ true
@@ -113,17 +164,14 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     fullShellLuoFluxCompositionConstructed :
       FullShell.luoFullShellFluxCompositionConstructed ≡ true
 
-    hardSmoothTransferAlgebraConstructed :
-      HardSmooth.hardSmoothFiniteBandTransferAlgebraConstructed ≡ true
+    hardHighSelfAdjointnessClosed :
+      EnergyFlux.periodicHardHighPassSelfAdjointnessClosed ≡ true
 
-    hardSmoothTerminalWindowTransferConstructed :
-      HardSmooth.hardSmoothTerminalWindowTransferConstructed ≡ true
+    hardProjectedConvectionEnumerationClosed :
+      EnergyFlux.literalProjectedConvectionEnumerationClosed ≡ true
 
     projectedEnergyFluxAlgebraConstructed :
       EnergyFlux.projectedEnergyFluxAlgebraConstructed ≡ true
-
-    pressureCancellationTransportConstructed :
-      EnergyFlux.pressureCancellationTransportConstructed ≡ true
 
     weightedSchurFluxEnergyCompositionConstructed :
       EnergyFlux.weightedSchurFluxEnergyCompositionConstructed ≡ true
@@ -134,14 +182,29 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     bootstrapAbsorptionAlgebraConstructed :
       Bootstrap.luoBootstrapAbsorptionAlgebraConstructed ≡ true
 
-    concreteSmoothPeriodicMultiplierOpen :
-      HardSmooth.concreteSmoothPeriodicMultiplierFamilyConstructed ≡ false
+    literalPhysicalEnergyTimeInterfaceConstructed :
+      PhysicalTime.literalLuoCutoffEnergyDissipationTimeInterfaceConstructed
+        ≡ true
 
-    uniformHardSmoothBandConstantOpen :
-      HardSmooth.uniformHardSmoothFiniteBandConstantConstructed ≡ false
+    literalPhysicalRecursionTransportClosed :
+      PhysicalTime.literalLuoPhysicalRecursionTransportClosed ≡ true
 
-    physicalTriadCoefficientDominationOpen :
-      PhysicalReuse.physicalFluxCoefficientMajorantInstantiated ≡ false
+    publishedLuoAuthoritySurfaceConstructed :
+      PublishedLuo.publishedLuoTheorem11AuthoritySurfaceConstructed ≡ true
+
+    publishedLuoContinuationAdapterConstructed :
+      PublishedLuo.luoContinuationAdapterConstructed ≡ true
+
+    finalContinuationSynthesisConstructed :
+      Synthesis.luoWeightedSchurContinuationSynthesisConstructed ≡ true
+
+    concreteMultiplierAuthorityOpen :
+      MultiplierAuthority.concretePublishedLuoMultiplierAuthoritySelected
+        ≡ false
+
+    canonicalHardHighFullShellIdentificationOpen :
+      PhysicalFullShell.canonicalHardHighPhysicalFullShellIdentificationInhabited
+        ≡ false
 
     fullShellPhysicalIdentificationOpen :
       FullShell.luoFullShellPhysicalIdentificationInhabited ≡ false
@@ -149,11 +212,14 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
     physicalWeightedSchurBridgeOpen :
       Flux.physicalWeightedSchurBridgeInhabited ≡ false
 
-    periodicHighPassSelfAdjointnessOpen :
-      EnergyFlux.periodicHardHighPassSelfAdjointnessClosed ≡ false
+    canonicalPhysicalEnergyTimeIdentificationOpen :
+      PhysicalTime.canonicalLiteralLuoPhysicalIdentificationInhabited ≡ false
 
-    physicalEnergyIdentityOpen :
-      Bootstrap.physicalCutoffEnergyIdentityClosed ≡ false
+    selectedPublishedLuoAuthorityOpen :
+      PublishedLuo.selectedPublishedLuoAuthorityInhabited ≡ false
+
+    canonicalContinuationSynthesisOpen :
+      Synthesis.canonicalLuoWeightedSchurContinuationSynthesisInhabited ≡ false
 
     physicalBootstrapAdapterOpen :
       Bootstrap.physicalLuoBootstrapAdapterInhabited ≡ false
@@ -190,9 +256,22 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   HardProjector.hardHighProjectorIdempotenceConstructedIsTrue
   HardProjector.hardLowHighDisjointnessConstructedIsTrue
   HardProjector.hardHighDerivativeCurlCommutationConstructedIsTrue
+  FiniteHermitian.finiteHermitianDiagonalSelfAdjointnessConstructedIsTrue
+  CoefficientProjector.hardProjectorCoefficientSelfAdjointnessClosedIsTrue
+  OrthogonalProjector.hardProjectorPairingParsevalTransportClosedIsTrue
+  OrthogonalProjector.hardProjectorOrthogonalCertificateConstructedIsTrue
+  RadialMultiplier.luoRadialSupportConventionRecordedIsTrue
+  RadialMultiplier.smoothHardNextSupportFactorizationConstructedIsTrue
+  RadialMultiplier.localizedMultiplierConstantsSeparatedIsTrue
+  HardSmooth.hardSmoothFiniteBandTransferAlgebraConstructedIsTrue
+  HardSmooth.hardSmoothTerminalWindowTransferConstructedIsTrue
+  MultiplierAuthority.publishedLuoPeriodicMultiplierAuthoritySurfaceConstructedIsTrue
+  MultiplierAuthority.hardSmoothTerminalCriterionTransportClosedIsTrue
   PhysicalReuse.validatedPhysicalKernelImageAvailableToLuoRouteIsTrue
   PhysicalReuse.fourierBiotSavartKernelDefinedByPairIncidenceFoldIsTrue
   PhysicalReuse.finiteTriadMajorizationCompositionAvailableIsTrue
+  PhysicalFullShell.hardHighPhysicalFullShellRepresentationTheoremConstructedIsTrue
+  PhysicalFullShell.physicalSignedCoefficientDominationTheoremConstructedIsTrue
   Flux.hermitianPairIncidenceAtomConstructedIsTrue
   Flux.multiplicitySafeFibreTheoremConstructedIsTrue
   Flux.finiteFluxToIncidenceMajorantConstructedIsTrue
@@ -201,20 +280,24 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   FullShell.matureFullShellNearMajorizationReusedIsTrue
   FullShell.matureFullShellUniformSchurReusedIsTrue
   FullShell.luoFullShellFluxCompositionConstructedIsTrue
-  HardSmooth.hardSmoothFiniteBandTransferAlgebraConstructedIsTrue
-  HardSmooth.hardSmoothTerminalWindowTransferConstructedIsTrue
+  EnergyFlux.periodicHardHighPassSelfAdjointnessClosedIsTrue
+  EnergyFlux.literalProjectedConvectionEnumerationClosedIsTrue
   EnergyFlux.projectedEnergyFluxAlgebraConstructedIsTrue
-  EnergyFlux.pressureCancellationTransportConstructedIsTrue
   EnergyFlux.weightedSchurFluxEnergyCompositionConstructedIsTrue
   Bootstrap.luoCutoffEnergyFluxAlgebraConstructedIsTrue
   Bootstrap.luoBootstrapAbsorptionAlgebraConstructedIsTrue
-  HardSmooth.concreteSmoothPeriodicMultiplierFamilyConstructedIsFalse
-  HardSmooth.uniformHardSmoothFiniteBandConstantConstructedIsFalse
-  PhysicalReuse.physicalFluxCoefficientMajorantInstantiatedIsFalse
+  PhysicalTime.literalLuoCutoffEnergyDissipationTimeInterfaceConstructedIsTrue
+  PhysicalTime.literalLuoPhysicalRecursionTransportClosedIsTrue
+  PublishedLuo.publishedLuoTheorem11AuthoritySurfaceConstructedIsTrue
+  PublishedLuo.luoContinuationAdapterConstructedIsTrue
+  Synthesis.luoWeightedSchurContinuationSynthesisConstructedIsTrue
+  MultiplierAuthority.concretePublishedLuoMultiplierAuthoritySelectedIsFalse
+  PhysicalFullShell.canonicalHardHighPhysicalFullShellIdentificationInhabitedIsFalse
   FullShell.luoFullShellPhysicalIdentificationInhabitedIsFalse
   Flux.physicalWeightedSchurBridgeInhabitedIsFalse
-  EnergyFlux.periodicHardHighPassSelfAdjointnessClosedIsFalse
-  Bootstrap.physicalCutoffEnergyIdentityClosedIsFalse
+  PhysicalTime.canonicalLiteralLuoPhysicalIdentificationInhabitedIsFalse
+  PublishedLuo.selectedPublishedLuoAuthorityInhabitedIsFalse
+  Synthesis.canonicalLuoWeightedSchurContinuationSynthesisInhabitedIsFalse
   Bootstrap.physicalLuoBootstrapAdapterInhabitedIsFalse
   Luo.physicalGradientIntegralIdentificationClosedIsFalse
   Luo.luoLimsupContinuationAuthorityClosedIsFalse
