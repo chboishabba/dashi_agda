@@ -130,9 +130,9 @@ record PublicationReceipt
       artifact ≡ buildProjection policy archive
     attributionClassified : Bool
     attributionClassifiedIsTrue : attributionClassified ≡ true
-    restrictedContentAbsentByConstruction : Bool
-    restrictedContentAbsentByConstructionIsTrue :
-      restrictedContentAbsentByConstruction ≡ true
+    restrictedContentOmittedByDeclaredProjection : Bool
+    restrictedContentOmittedByDeclaredProjectionIsTrue :
+      restrictedContentOmittedByDeclaredProjection ≡ true
     metadataAudited : Bool
     metadataAuditedIsTrue : metadataAudited ≡ true
     receiptReading : String
