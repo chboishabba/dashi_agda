@@ -23,6 +23,10 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance wh
 -- enumeration, full-shell identification, the rational weighted-Schur bridge,
 -- physical energy/time data, the radial multiplier, and Luo's published
 -- authority. This module does not create a second parallel synthesis.
+--
+-- The nonlinear source carrier is an explicit selected-state carrier.  The
+-- proof is required for the official selected solution, not uniformly for all
+-- possible values of the repository's ambient Solution type.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -31,6 +35,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Official
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialLerayHopfAuthorityExact as Authority
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
 import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
@@ -46,10 +51,11 @@ record CanonicalPeriodicLuoPhysicalRealization
     officialClosure :
       Official.OfficialLuoContinuationClosure InitialDatum Solution Time
 
-    Tensor Space : Set
+    State Tensor Space : Set
+    selectedState : State
 
     exactFluxKernel :
-      FluxKernel.LuoExactFluxKernelDecomposition Solution Tensor ℚ
+      FluxKernel.LuoExactFluxKernelDecomposition State Tensor ℚ
 
     physicalIncrementKernel :
       FluxKernel.LuoIncrementKernelPhysicalRealization
@@ -59,7 +65,7 @@ record CanonicalPeriodicLuoPhysicalRealization
       ThreePiece.LuoThreePiecePhysicalSchurAdapter exactFluxKernel
 
     perModeEvolution :
-      ModeEvolution.LuoPerModeCommutatorEvolution Solution ℚ
+      ModeEvolution.LuoPerModeCommutatorEvolution State ℚ
 
     fixedShiftBootstrap :
       Uniform.LuoFixedShiftUniformBootstrap ℚ
@@ -69,6 +75,10 @@ record CanonicalPeriodicLuoPhysicalRealization
 
     section4Continuity :
       ModeEvolution.LuoSection4ContinuityBootstrap perModeEvolution
+
+    SelectedStateRepresentsOfficialSolution : Set
+    selectedStateRepresentsOfficialSolution :
+      SelectedStateRepresentsOfficialSolution
 
     FluxKernelMatchesOfficialProjectedFlux : Set
     fluxKernelMatchesOfficialProjectedFlux :
@@ -86,8 +96,8 @@ record CanonicalPeriodicLuoPhysicalRealization
     perModeShellsMatchOfficialLittlewoodPaleyShells :
       PerModeShellsMatchOfficialLittlewoodPaleyShells
 
-    Section4StateIsOfficialSolution : Set
-    section4StateIsOfficialSolution : Section4StateIsOfficialSolution
+    Section4UsesSelectedState : Set
+    section4UsesSelectedState : Section4UsesSelectedState
 
 open CanonicalPeriodicLuoPhysicalRealization public
 
@@ -158,7 +168,7 @@ continuationFromSourceFaithfulCutset :
     {Time : Set t} →
   (cutset : CanonicalPeriodicLuoSourceFaithfulCutset
     InitialDatum Solution Time) →
-  Official.OfficialLuo.ContinuesBeyond
+  Authority.ContinuesBeyond
     (Official.sourceCarrier
       (officialClosure (physicalRealization cutset)))
     (Official.initial
@@ -214,6 +224,9 @@ luoSourceFaithfulNonlinearCutsetConstructed = true
 officialClosureReusedDirectly : Bool
 officialClosureReusedDirectly = true
 
+selectedSolutionCarrierEnforced : Bool
+selectedSolutionCarrierEnforced = true
+
 physicalRealizationToCanonicalCutsetBuilderConstructed : Bool
 physicalRealizationToCanonicalCutsetBuilderConstructed = true
 
@@ -239,6 +252,10 @@ luoSourceFaithfulNonlinearCutsetConstructedIsTrue = refl
 officialClosureReusedDirectlyIsTrue :
   officialClosureReusedDirectly ≡ true
 officialClosureReusedDirectlyIsTrue = refl
+
+selectedSolutionCarrierEnforcedIsTrue :
+  selectedSolutionCarrierEnforced ≡ true
+selectedSolutionCarrierEnforcedIsTrue = refl
 
 physicalRealizationToCanonicalCutsetBuilderConstructedIsTrue :
   physicalRealizationToCanonicalCutsetBuilderConstructed ≡ true
