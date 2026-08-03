@@ -8,6 +8,7 @@ on:
     paths:
       - 'DASHI/Physics/Units/**'
       - 'DASHI/Physics/Limits/**'
+      - 'DASHI/Physics/Closure/NSTriadKNNavierStokesNormalizationTransportExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLuoScalingExact.agda'
       - 'DASHI/Physics/Closure/GRWeakFieldDimensionExact.agda'
       - 'DASHI/Physics/Closure/HEPDataCMSBelowZDrellYanClaimExact.agda'
@@ -26,6 +27,7 @@ on:
     paths:
       - 'DASHI/Physics/Units/**'
       - 'DASHI/Physics/Limits/**'
+      - 'DASHI/Physics/Closure/NSTriadKNNavierStokesNormalizationTransportExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLuoScalingExact.agda'
       - 'DASHI/Physics/Closure/GRWeakFieldDimensionExact.agda'
       - 'DASHI/Physics/Closure/HEPDataCMSBelowZDrellYanClaimExact.agda'
