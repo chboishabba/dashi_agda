@@ -2,139 +2,169 @@ module DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit where
 
 ------------------------------------------------------------------------
 -- PURPOSE
--- Distinguish theorem-shape / route assembly from constructive analytic
--- authority for the two live Stage-3 blockers.
+-- Distinguish three levels for the two Stage-3 blockers:
 --
--- Blocker 1:
---   `NSTriadKNProfileCrossWeightBridge` constructs the restricted-row records
---   from depth-separation arithmetic.  However, the shared depth base still
---   declares `entryDepth`, `maxDepth`, `entryDepthBound` and
---   `forcedTailSourceDepthCap` as postulates.  Thus the active route is
---   assembled but its repository-specific profile geometry is not yet a
---   postulate-free theorem.
+--   1. exact finite/cutoff-indexed mathematics;
+--   2. identification with the repository's legacy or physical NS objects;
+--   3. promotion authority.
 --
--- Blocker 2:
---   `ResidueScaleCompatibility` has a typed construction surface, but the
---   current pair-incidence integration still assumes the actual Stage-3
---   operator identification, scaled operator error, base-gap coercivity and
---   positive margin fields needed to inhabit it.
+-- Blocker 1 now has a postulate-free cutoff-indexed depth carrier and exact
+-- FT->adv / FT->trans weight orientation.  The old globally bounded
+-- Nat-indexed depth API is not used by this replacement because it cannot
+-- support arbitrary cutoff-dependent separation.  The remaining seam is the
+-- classifier/index identification from the legacy Stage-3 entries to the new
+-- cutoff-indexed carrier.
 --
--- This audit introduces no new axioms and changes no promotion gate.
+-- Blocker 2 now has an inhabited exact unit-shell operator/error/base-gap
+-- ladder and a strict positive margin.  The remaining seam is the equality of
+-- the canonical finite weighted-Schur operator with the physical PDE
+-- pair-incidence operator.
+--
+-- No BKM or Clay promotion gate is changed here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat.Base using (_≤_)
 
-import DASHI.Physics.Closure.NSTriadKNProfileDepthGeometryBase as DepthBase
 import DASHI.Physics.Closure.NSTriadKNProfileCrossWeightBridge as WeightBridge
-import DASHI.Physics.Closure.NSTriadKNQGapTransfer as QGap
+import DASHI.Physics.Closure.NSTriadKNProfileDepthGeometryCutoffIndexedExact
+  as CutoffDepth
+import DASHI.Physics.Closure.NSTriadKNResidueScaleOperatorGapExact
+  as ResidueGap
 
 ------------------------------------------------------------------------
--- Replacement target for the postulated profile-depth base.
+-- Strong authority receipt carrying proof terms from both exact lanes.
 ------------------------------------------------------------------------
 
-record ConstructiveProfileDepthGeometry : Set₁ where
+record ExactAnalyticBlockerAuthority : Set₁ where
+  constructor authority
   field
-    entryDepth : Nat → Nat
-    maxDepth : Nat
-    entryDepthBound :
-      (entry : Nat) → entryDepth entry ≤ maxDepth
+    cutoffIndexedDepthGeometry :
+      CutoffDepth.CutoffIndexedProfileDepthGeometry
 
-    forcedTailSourceDepthCap : Nat → Nat
+    ftAdvOrientation :
+      (N : _) →
+      (incidence : CutoffDepth.FTToAdversarialIncidence N) →
+      Agda.Builtin.Nat.suc N
+        Agda.Builtin.Nat.*
+        CutoffDepth.weightOf N (CutoffDepth.ftAdvTarget incidence)
+        Data.Nat.≤
+      CutoffDepth.weightOf N (CutoffDepth.ftAdvSource incidence)
 
-    forcedTailSourceDepthTheorem : Set
-    adversarialTargetDepthTheorem : Set
-    transitionTargetDepthTheorem : Set
+    ftTransOrientation :
+      (N : _) →
+      (incidence : CutoffDepth.FTToTransitionIncidence N) →
+      Agda.Builtin.Nat.suc N
+        Agda.Builtin.Nat.*
+        CutoffDepth.weightOf N (CutoffDepth.ftTransTarget incidence)
+        Data.Nat.≤
+      CutoffDepth.weightOf N (CutoffDepth.ftTransSource incidence)
 
-    agreesWithClassifierProfileLabels : Set
-    uniformInGalerkinCutoff : Set
+    residueScaleOperatorGap :
+      ResidueGap.ExactResidueScaleOperatorGapAuthority
 
-open ConstructiveProfileDepthGeometry public
+open ExactAnalyticBlockerAuthority public
 
-record CurrentDepthBaseRealization : Set₁ where
-  field
-    constructiveGeometry : ConstructiveProfileDepthGeometry
-
-    entryDepthAgreement :
-      (entry : Nat) →
-      ConstructiveProfileDepthGeometry.entryDepth constructiveGeometry entry
-        ≡ DepthBase.entryDepth entry
-
-    maxDepthAgreement :
-      ConstructiveProfileDepthGeometry.maxDepth constructiveGeometry
-        ≡ DepthBase.maxDepth
-
-    sourceDepthCapAgreement :
-      (N : Nat) →
-      ConstructiveProfileDepthGeometry.forcedTailSourceDepthCap
-        constructiveGeometry N
-        ≡ DepthBase.forcedTailSourceDepthCap N
-
-open CurrentDepthBaseRealization public
-
-------------------------------------------------------------------------
--- Constructive-authority target for ResidueScaleCompatibility.
-------------------------------------------------------------------------
-
-record ConstructiveResidueScaleCompatibilityAuthority : Set₁ where
-  field
-    compatibility : QGap.ResidueScaleCompatibility
-
-    actualStage3PairIncidenceOperatorExposed : Set
-    actualWeakQuadraticFormIdentified : Set
-    weakStrongNormScalingConstructed : Set
-    scaledOperatorErrorConstructed : Set
-    baseGapCoercivityConstructed : Set
-    errorStrictlyBelowBaseGap : Set
-    positiveGapMarginConstructed : Set
-    perturbationAbsorptionConstructed : Set
-
-    constructedWithoutUntrackedPostulates : Set
-
-open ConstructiveResidueScaleCompatibilityAuthority public
+exactAnalyticBlockerAuthority : ExactAnalyticBlockerAuthority
+exactAnalyticBlockerAuthority =
+  authority
+    CutoffDepth.canonicalCutoffIndexedProfileDepthGeometry
+    CutoffDepth.ftAdvWeightOrientation
+    CutoffDepth.ftTransWeightOrientation
+    ResidueGap.exactResidueScaleOperatorGapAuthority
 
 ------------------------------------------------------------------------
 -- Honest closed/open ledger.
 ------------------------------------------------------------------------
 
-blocker1RestrictedRowRouteAssembled : Bool
-blocker1RestrictedRowRouteAssembled =
+blocker1LegacyRestrictedRowRouteAssembled : Bool
+blocker1LegacyRestrictedRowRouteAssembled =
   WeightBridge.blocker1DepthRouteClosed
 
-blocker1RestrictedRowRouteAssembledIsTrue :
-  blocker1RestrictedRowRouteAssembled ≡ true
-blocker1RestrictedRowRouteAssembledIsTrue =
+blocker1LegacyRestrictedRowRouteAssembledIsTrue :
+  blocker1LegacyRestrictedRowRouteAssembled ≡ true
+blocker1LegacyRestrictedRowRouteAssembledIsTrue =
   WeightBridge.blocker1DepthRouteClosedIsTrue
 
-blocker1ProfileDepthGeometryConstructed : Bool
-blocker1ProfileDepthGeometryConstructed = false
+blocker1CutoffIndexedDepthGeometryConstructed : Bool
+blocker1CutoffIndexedDepthGeometryConstructed =
+  CutoffDepth.cutoffIndexedProfileDepthGeometryConstructed
 
-blocker1ProfileDepthGeometryConstructedIsFalse :
-  blocker1ProfileDepthGeometryConstructed ≡ false
-blocker1ProfileDepthGeometryConstructedIsFalse = refl
+blocker1CutoffIndexedDepthGeometryConstructedIsTrue :
+  blocker1CutoffIndexedDepthGeometryConstructed ≡ true
+blocker1CutoffIndexedDepthGeometryConstructedIsTrue =
+  CutoffDepth.cutoffIndexedProfileDepthGeometryConstructedIsTrue
 
-blocker1PostulateFreeAuthorityClosed : Bool
-blocker1PostulateFreeAuthorityClosed = false
+blocker1BothWeightOrientationsConstructed : Bool
+blocker1BothWeightOrientationsConstructed = true
 
-blocker1PostulateFreeAuthorityClosedIsFalse :
-  blocker1PostulateFreeAuthorityClosed ≡ false
-blocker1PostulateFreeAuthorityClosedIsFalse = refl
+blocker1BothWeightOrientationsConstructedIsTrue :
+  blocker1BothWeightOrientationsConstructed ≡ true
+blocker1BothWeightOrientationsConstructedIsTrue = refl
+
+blocker1LegacyNatEntryIdentificationClosed : Bool
+blocker1LegacyNatEntryIdentificationClosed =
+  CutoffDepth.legacyNatEntryIdentificationClosed
+
+blocker1LegacyNatEntryIdentificationClosedIsFalse :
+  blocker1LegacyNatEntryIdentificationClosed ≡ false
+blocker1LegacyNatEntryIdentificationClosedIsFalse =
+  CutoffDepth.legacyNatEntryIdentificationClosedIsFalse
+
+blocker1PhysicalAuthorityClosed : Bool
+blocker1PhysicalAuthorityClosed = false
+
+blocker1PhysicalAuthorityClosedIsFalse :
+  blocker1PhysicalAuthorityClosed ≡ false
+blocker1PhysicalAuthorityClosedIsFalse = refl
+
+blocker2FiniteCanonicalOperatorGapAuthorityConstructed : Bool
+blocker2FiniteCanonicalOperatorGapAuthorityConstructed =
+  ResidueGap.finiteCanonicalOperatorGapAuthorityConstructed
+
+blocker2FiniteCanonicalOperatorGapAuthorityConstructedIsTrue :
+  blocker2FiniteCanonicalOperatorGapAuthorityConstructed ≡ true
+blocker2FiniteCanonicalOperatorGapAuthorityConstructedIsTrue =
+  ResidueGap.finiteCanonicalOperatorGapAuthorityConstructedIsTrue
 
 blocker2ResidueScaleCompatibilityConstructed : Bool
-blocker2ResidueScaleCompatibilityConstructed = false
+blocker2ResidueScaleCompatibilityConstructed =
+  ResidueGap.residueScaleCompatibilityConstructed
 
-blocker2ResidueScaleCompatibilityConstructedIsFalse :
-  blocker2ResidueScaleCompatibilityConstructed ≡ false
-blocker2ResidueScaleCompatibilityConstructedIsFalse = refl
+blocker2ResidueScaleCompatibilityConstructedIsTrue :
+  blocker2ResidueScaleCompatibilityConstructed ≡ true
+blocker2ResidueScaleCompatibilityConstructedIsTrue =
+  ResidueGap.residueScaleCompatibilityConstructedIsTrue
 
-bothAnalyticBlockersPostulateFree : Bool
-bothAnalyticBlockersPostulateFree = false
+blocker2PhysicalPairIncidenceKernelIdentificationClosed : Bool
+blocker2PhysicalPairIncidenceKernelIdentificationClosed =
+  ResidueGap.physicalPairIncidenceKernelIdentificationClosed
 
-bothAnalyticBlockersPostulateFreeIsFalse :
-  bothAnalyticBlockersPostulateFree ≡ false
-bothAnalyticBlockersPostulateFreeIsFalse = refl
+blocker2PhysicalPairIncidenceKernelIdentificationClosedIsFalse :
+  blocker2PhysicalPairIncidenceKernelIdentificationClosed ≡ false
+blocker2PhysicalPairIncidenceKernelIdentificationClosedIsFalse =
+  ResidueGap.physicalPairIncidenceKernelIdentificationClosedIsFalse
+
+blocker2PhysicalAuthorityClosed : Bool
+blocker2PhysicalAuthorityClosed = false
+
+blocker2PhysicalAuthorityClosedIsFalse :
+  blocker2PhysicalAuthorityClosed ≡ false
+blocker2PhysicalAuthorityClosedIsFalse = refl
+
+bothFiniteAnalyticCoresConstructed : Bool
+bothFiniteAnalyticCoresConstructed = true
+
+bothFiniteAnalyticCoresConstructedIsTrue :
+  bothFiniteAnalyticCoresConstructed ≡ true
+bothFiniteAnalyticCoresConstructedIsTrue = refl
+
+bothPhysicalAnalyticBlockersClosed : Bool
+bothPhysicalAnalyticBlockersClosed = false
+
+bothPhysicalAnalyticBlockersClosedIsFalse :
+  bothPhysicalAnalyticBlockersClosed ≡ false
+bothPhysicalAnalyticBlockersClosedIsFalse = refl
 
 analyticBlockerAuthorityBoundaryAudited : Bool
 analyticBlockerAuthorityBoundaryAudited = true
