@@ -158,7 +158,7 @@ record ViscousVelocitySelection
 
 open ViscousVelocitySelection public
 
-generalNormalizationRetained : Set
+generalNormalizationRetained : Set → Set
 generalNormalizationRetained = ScaleAlgebra
 
 luoUnitViscosityIsSpecialSelection :
