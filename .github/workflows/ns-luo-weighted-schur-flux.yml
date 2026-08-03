@@ -1,0 +1,81 @@
+name: NS Luo weighted-Schur flux tranche
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/balaban-primary-averaging-qstar
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMScaleDictionaryExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoPrimarySourceProofArchitectureExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCutoffFluxWeightedSchurExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNWeightedSchurPhysicalFluxReuseExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProjectedConvectionEnergyFluxExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyBootstrapExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMRouteIntegration.agda'
+      - 'docs/ns-localized-bkm-variable-dictionary.md'
+      - 'scripts/check_ns_luo_weighted_schur_flux.py'
+      - 'scripts/check_ns_luo_weighted_schur_flux.sh'
+      - '.github/workflows/ns-luo-weighted-schur-flux.yml'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMScaleDictionaryExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoPrimarySourceProofArchitectureExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCutoffFluxWeightedSchurExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNWeightedSchurPhysicalFluxReuseExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNProjectedConvectionEnergyFluxExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyBootstrapExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMRouteIntegration.agda'
+      - 'docs/ns-localized-bkm-variable-dictionary.md'
+      - 'scripts/check_ns_luo_weighted_schur_flux.py'
+      - 'scripts/check_ns_luo_weighted_schur_flux.sh'
+      - '.github/workflows/ns-luo-weighted-schur-flux.yml'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ns-luo-weighted-schur-flux-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Run focused Luo weighted-Schur flux checker
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            export AGDA_BIN="$(command -v agda)"
+            export AGDA_ARGS="-i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library"
+            bash scripts/check_ns_luo_weighted_schur_flux.sh
+          '
