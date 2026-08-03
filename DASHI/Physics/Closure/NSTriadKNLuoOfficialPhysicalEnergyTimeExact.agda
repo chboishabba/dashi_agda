@@ -30,7 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (_+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
@@ -57,17 +57,30 @@ record OfficialLuoPhysicalEnergyTimeIdentification
     cutoffQuantities : LH.OfficialLuoCutoffQuantities regular shell
 
     timeCutoff : Bootstrap.LuoParabolicTimeCutoff
+
+    embedCutoffTime : Bootstrap.Time timeCutoff → Time
+    evaluationCutoffTime : Bootstrap.Time timeCutoff
+    terminalCutoffTime : Bootstrap.Time timeCutoff
+
     evaluationTime : Time
+
+    evaluationTimeMeaning :
+      embedCutoffTime evaluationCutoffTime ≡ evaluationTime
+
+    terminalTimeMeaning :
+      embedCutoffTime terminalCutoffTime ≡ terminalTime
 
     pointwiseProjectedFluxMeaning :
       Energy.absoluteCutoffFlux (Energy.balance projectedEnergyFlux)
       ≡ LH.absoluteCutoffFluxAtTime cutoffQuantities evaluationTime
 
-    timeCutoffUsesOfficialTime :
-      Bootstrap.Time timeCutoff ≡ Time
+    cutoffWindowDenominatorMeaning :
+      Bootstrap.windowDenominator timeCutoff
+      ≡ LH.parabolicWindowDenominator cutoffQuantities
 
-    timeCutoffTerminalMeaning : Set t
-    timeCutoffTerminalWitness : timeCutoffTerminalMeaning
+    TimeEmbeddingPreservesLuoTerminalWindow : Set t
+    timeEmbeddingPreservesLuoTerminalWindow :
+      TimeEmbeddingPreservesLuoTerminalWindow
 
 open OfficialLuoPhysicalEnergyTimeIdentification public
 
