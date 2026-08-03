@@ -2,9 +2,9 @@ module DASHI.Physics.Limits.PhysicsLimitCommutingSquare where
 
 ------------------------------------------------------------------------
 -- PURPOSE
--- A reusable theory-translation spine.  Exact unification means path
--- independence.  Effective or limiting recovery must instead own a residual
--- and a theorem that controls or removes it.  Merely naming both paths is not a
+-- A reusable theory-translation spine. Exact unification means path
+-- independence. Effective or limiting recovery must instead own a residual
+-- and a theorem that controls or removes it. Merely naming both paths is not a
 -- commuting-square proof.
 ------------------------------------------------------------------------
 
@@ -92,6 +92,12 @@ record ResidualControlledCommutation
 
 open ResidualControlledCommutation public
 
+------------------------------------------------------------------------
+-- An asymptotic recovery is a genuinely scale-indexed family of controlled
+-- comparisons. The previous draft equated every scale residual to one fixed
+-- residual and therefore made nontrivial decay impossible.
+------------------------------------------------------------------------
+
 record AsymptoticCommutation
     {a b c d residualLevel : Level}
     {A : Set a} {B : Set b} {C : Set c} {D : Set d}
@@ -99,8 +105,8 @@ record AsymptoticCommutation
     (Residual : Set residualLevel)
     : Set (lsuc (a ⊔ d ⊔ residualLevel)) where
   field
-    approximation :
-      ResidualControlledCommutation square Residual
+    approximationAtScale :
+      Nat → ResidualControlledCommutation square Residual
 
     zeroResidual : Residual
     residualAtScale : Nat → A → Residual
@@ -109,11 +115,13 @@ record AsymptoticCommutation
       (scale : Nat) →
       (input : A) →
       residualAtScale scale input
-      ≡ ResidualControlledCommutation.residual approximation input
+      ≡ ResidualControlledCommutation.residual
+          (approximationAtScale scale) input
 
-    Vanishes : (Nat → Residual) → Set residualLevel
-    residualVanishes :
-      (input : A) → Vanishes (λ scale → residualAtScale scale input)
+    VanishesTo : Residual → (Nat → Residual) → Set residualLevel
+    residualVanishesToZero :
+      (input : A) →
+      VanishesTo zeroResidual (λ scale → residualAtScale scale input)
 
 open AsymptoticCommutation public
 
