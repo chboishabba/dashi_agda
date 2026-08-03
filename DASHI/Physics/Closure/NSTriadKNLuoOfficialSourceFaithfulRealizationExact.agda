@@ -16,11 +16,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialSourceFaithfulRealizationExact 
 -- The state carrier is the singleton selected solution, preventing accidental
 -- claims of a uniform estimate over the ambient Solution type.
 --
--- The finite hard-high/full-shell reindexing is now derived automatically from
--- the official list theorem.  The input package supplies the analytic spatial
--- increment-kernel identity and pair contribution, not an independently chosen
--- Fourier fold.  The fixed bootstrap is pinned to alpha=3/2 and the exact
--- Lemma-3.2 correction exponent 7/4.
+-- The finite hard-high/full-shell reindexing is derived automatically from the
+-- official list theorem.  The shell-uniform decay is derived automatically
+-- from the rational fixed-block induction certificate.  The input package
+-- supplies the analytic spatial increment identity, equation-(4.2) estimates,
+-- and the physical recursion/correction budgets; neither the Fourier fold nor
+-- the final decay conclusion can be chosen independently.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -37,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapter
 import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
+import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapConstructorExact as BootstrapConstructor
 import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact as Alpha
 import DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance as Canonical
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Physical
@@ -113,33 +115,51 @@ record OfficialSourceFaithfulNonlinearInputs
     perModeEvolution :
       ModeEvolution.LuoPerModeCommutatorEvolution ⊤ ℚ
 
-    fixedShiftBootstrap :
-      Uniform.LuoFixedShiftUniformBootstrap ℚ
+    fixedShiftBootstrapInputs :
+      BootstrapConstructor.LuoFixedShiftBootstrapInputs
 
     alphaShift : Alpha.FourAlignedLuoShift
 
     alphaMatchesThreeHalves :
-      Uniform.alpha fixedShiftBootstrap ≡ Alpha.alphaThreeHalves
+      Uniform.alpha
+        (BootstrapConstructor.luoFixedShiftBootstrap
+          fixedShiftBootstrapInputs)
+      ≡ Alpha.alphaThreeHalves
 
     twoMinusAlphaMatchesHalf :
-      Uniform.twoMinusAlpha fixedShiftBootstrap ≡ Alpha.twoMinusAlpha
+      Uniform.twoMinusAlpha
+        (BootstrapConstructor.luoFixedShiftBootstrap
+          fixedShiftBootstrapInputs)
+      ≡ Alpha.twoMinusAlpha
 
     halfCorrectionMatchesQuarter :
-      Uniform.halfTwoMinusAlpha fixedShiftBootstrap ≡ Alpha.halfCorrection
+      Uniform.halfTwoMinusAlpha
+        (BootstrapConstructor.luoFixedShiftBootstrap
+          fixedShiftBootstrapInputs)
+      ≡ Alpha.halfCorrection
 
     correctedExponentMatchesSevenFourths :
-      Uniform.correctedShiftExponent fixedShiftBootstrap
+      Uniform.correctedShiftExponent
+        (BootstrapConstructor.luoFixedShiftBootstrap
+          fixedShiftBootstrapInputs)
       ≡ Alpha.correctedExponent
 
     blockShiftMatchesFourAligned :
-      Uniform.blockShift fixedShiftBootstrap ≡ Alpha.blockShift alphaShift
+      Uniform.blockShift
+        (BootstrapConstructor.luoFixedShiftBootstrap
+          fixedShiftBootstrapInputs)
+      ≡ Alpha.blockShift alphaShift
 
     correctedCoefficientMatchesFourAligned :
-      Uniform.correctedShiftCoefficient fixedShiftBootstrap
+      Uniform.correctedShiftCoefficient
+        (BootstrapConstructor.luoFixedShiftBootstrap
+          fixedShiftBootstrapInputs)
       ≡ Alpha.correctedShiftCoefficient alphaShift
 
     alphaAboveOneEntry :
-      Uniform.LuoAlphaAboveOneRegularityEntry fixedShiftBootstrap
+      Uniform.LuoAlphaAboveOneRegularityEntry
+        (BootstrapConstructor.luoFixedShiftBootstrap
+          fixedShiftBootstrapInputs)
 
     section4Continuity :
       ModeEvolution.LuoSection4ContinuityBootstrap perModeEvolution
@@ -174,6 +194,19 @@ officialPhysicalIncrementKernel :
 officialPhysicalIncrementKernel inputs =
   KernelAdapter.officialIncrementKernelPhysicalRealization
     (incrementKernelAnalyticInputs inputs)
+
+officialFixedShiftBootstrap :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time} →
+  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  Uniform.LuoFixedShiftUniformBootstrap ℚ
+officialFixedShiftBootstrap inputs =
+  BootstrapConstructor.luoFixedShiftBootstrap
+    (fixedShiftBootstrapInputs inputs)
 
 officialThreePieceAdapter :
   ∀ {d s t}
@@ -230,7 +263,7 @@ officialCanonicalPhysicalRealization {closure = closure} inputs = record
   ; physicalIncrementKernel = officialPhysicalIncrementKernel inputs
   ; threePiecePhysicalSchurAdapter = officialThreePieceAdapter inputs
   ; perModeEvolution = perModeEvolution inputs
-  ; fixedShiftBootstrap = fixedShiftBootstrap inputs
+  ; fixedShiftBootstrap = officialFixedShiftBootstrap inputs
   ; alphaAboveOneEntry = alphaAboveOneEntry inputs
   ; section4Continuity = section4Continuity inputs
   ; SelectedStateRepresentsOfficialSolution =
@@ -284,6 +317,9 @@ officialSourceFaithfulBuilderConstructed = true
 finiteIncrementKernelReindexingDerived : Bool
 finiteIncrementKernelReindexingDerived = true
 
+fixedShiftDecayDerivedByBlockInduction : Bool
+fixedShiftDecayDerivedByBlockInduction = true
+
 alphaThreeHalvesAndSevenFourthsPinned : Bool
 alphaThreeHalvesAndSevenFourthsPinned = true
 
@@ -300,6 +336,10 @@ officialSourceFaithfulBuilderConstructedIsTrue = refl
 finiteIncrementKernelReindexingDerivedIsTrue :
   finiteIncrementKernelReindexingDerived ≡ true
 finiteIncrementKernelReindexingDerivedIsTrue = refl
+
+fixedShiftDecayDerivedByBlockInductionIsTrue :
+  fixedShiftDecayDerivedByBlockInduction ≡ true
+fixedShiftDecayDerivedByBlockInductionIsTrue = refl
 
 alphaThreeHalvesAndSevenFourthsPinnedIsTrue :
   alphaThreeHalvesAndSevenFourthsPinned ≡ true
