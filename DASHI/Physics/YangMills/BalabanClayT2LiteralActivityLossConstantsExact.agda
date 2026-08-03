@@ -45,12 +45,12 @@ import DASHI.Physics.YangMills.BalabanClayT2WilsonActivityFactorProductExact as 
 -- it does not force a generic infinite BCH-series estimate.
 ------------------------------------------------------------------------
 
-quarter half oneSixteenth : ℚ
+quarter halfRational oneSixteenth : ℚ
 quarter = + 1 / 4
-half = + 1 / 2
+halfRational = + 1 / 2
 oneSixteenth = + 1 / 16
 
-quarterBelowHalf : quarter ≤ half
+quarterBelowHalf : quarter ≤ halfRational
 quarterBelowHalf =
   subst
     (λ upper → quarter ≤ upper)
