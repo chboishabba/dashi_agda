@@ -19,6 +19,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --   * Hermitian pair-incidence, multiplicity-safe fibre and weighted-Schur
 --     cutoff-flux composition;
 --   * literal energy/dissipation/time-identification and recursion transports;
+--   * enforced separation of pointwise flux from its time integral;
+--   * pointwise cutoff bounds assembled into Luo's limsup hypothesis;
 --   * a source-faithful imported Luo Theorem 1.1 continuation adapter;
 --   * one final proof-relevant continuation synthesis.
 --
@@ -27,7 +29,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurFluxIntegration where
 --   * inhabit the canonical hard-high physical/full-shell encoding;
 --   * inhabit the full physical weighted-Schur flux bridge and exact physical
 --     energy/dissipation/time-integral identification on one carrier;
---   * derive the exact Luo limsup witness from the uniform cutoff family;
+--   * select the published Luo authority on the official solution carrier and
+--     prove the remaining source/repository integral identities;
 --   * every BKM and Clay promotion gate.
 ------------------------------------------------------------------------
 
@@ -186,11 +189,17 @@ record LuoWeightedSchurFluxIntegrationReceipt : Set where
       PhysicalTime.literalLuoCutoffEnergyDissipationTimeInterfaceConstructed
         ≡ true
 
+    pointwiseIntegratedFluxSeparationEnforced :
+      PhysicalTime.pointwiseIntegratedFluxSeparationEnforced ≡ true
+
     literalPhysicalRecursionTransportClosed :
       PhysicalTime.literalLuoPhysicalRecursionTransportClosed ≡ true
 
     publishedLuoAuthoritySurfaceConstructed :
       PublishedLuo.publishedLuoTheorem11AuthoritySurfaceConstructed ≡ true
+
+    pointwiseCutoffToLimsupAssemblyConstructed :
+      PublishedLuo.pointwiseCutoffToLimsupAssemblyConstructed ≡ true
 
     publishedLuoContinuationAdapterConstructed :
       PublishedLuo.luoContinuationAdapterConstructed ≡ true
@@ -287,8 +296,10 @@ luoWeightedSchurFluxIntegrationReceipt = receipt
   Bootstrap.luoCutoffEnergyFluxAlgebraConstructedIsTrue
   Bootstrap.luoBootstrapAbsorptionAlgebraConstructedIsTrue
   PhysicalTime.literalLuoCutoffEnergyDissipationTimeInterfaceConstructedIsTrue
+  PhysicalTime.pointwiseIntegratedFluxSeparationEnforcedIsTrue
   PhysicalTime.literalLuoPhysicalRecursionTransportClosedIsTrue
   PublishedLuo.publishedLuoTheorem11AuthoritySurfaceConstructedIsTrue
+  PublishedLuo.pointwiseCutoffToLimsupAssemblyConstructedIsTrue
   PublishedLuo.luoContinuationAdapterConstructedIsTrue
   Synthesis.luoWeightedSchurContinuationSynthesisConstructedIsTrue
   MultiplierAuthority.concretePublishedLuoMultiplierAuthoritySelectedIsFalse
