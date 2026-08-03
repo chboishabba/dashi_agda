@@ -21,6 +21,7 @@ module DASHI.Physics.Closure.GRWeakFieldDimensionExact where
 -- may be reduced to the Newtonian Poisson equation.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
@@ -64,7 +65,8 @@ record WeakFieldScalarModel : Set₁ where
     Scalar : Set
     zero one two : Scalar
     _+_ _*_ : Scalar → Scalar → Scalar
-    negate divide : Scalar → Scalar → Scalar
+    negate : Scalar → Scalar
+    divide : Scalar → Scalar → Scalar
 
     potential :
       Dimension.Quantity Scalar Dimension.newtonianPotentialDimension
@@ -87,7 +89,7 @@ record WeakFieldScalarModel : Set₁ where
     -- g_00 = -(1 + 2 Phi/c^2).
     metric00Meaning :
       metric00
-      ≡ negate one
+      ≡ negate
           (one +
             (two * Dimension.magnitude potentialOverLightSpeedSquared))
 
@@ -158,8 +160,12 @@ metricSignatureSelectionLevel = machineChecked
 linearizedEinsteinPoissonAuthorityLevel : ProofLevel
 linearizedEinsteinPoissonAuthorityLevel = standardImported
 
-schwarzschildBirkhoffRecoveredHere : Set
-schwarzschildBirkhoffRecoveredHere = String
+schwarzschildBirkhoffRecoveredHere : Bool
+schwarzschildBirkhoffRecoveredHere = false
+
+schwarzschildBirkhoffRecoveredHereIsFalse :
+  schwarzschildBirkhoffRecoveredHere ≡ false
+schwarzschildBirkhoffRecoveredHereIsFalse = refl
 
 schwarzschildBirkhoffBoundary : String
 schwarzschildBirkhoffBoundary =
