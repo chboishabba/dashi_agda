@@ -10,6 +10,8 @@ check() {
   scripts/run_agda29_parallel_check.sh "$1"
 }
 
+check DASHI/Physics/Units/MechanicalDimensionExact.agda
+check DASHI/Physics/Units/PhysicalNormalizationExact.agda
 check DASHI/Physics/Closure/NSTriadKNLocalizedBKMScaleDictionaryExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoPrimarySourceProofArchitectureExact.agda
 check DASHI/Physics/Closure/NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda
@@ -37,6 +39,7 @@ check DASHI/Physics/Closure/NSTriadKNLuoPhysicalEnergyDissipationTimeExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoOfficialPhysicalEnergyTimeExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoPublishedContinuationAuthorityExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoOfficialLerayHopfAuthorityExact.agda
+check DASHI/Physics/Closure/NSTriadKNLuoScalingExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurContinuationSynthesisExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoOfficialContinuationClosureExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda
