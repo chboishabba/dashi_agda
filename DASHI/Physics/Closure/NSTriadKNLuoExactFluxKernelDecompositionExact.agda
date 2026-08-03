@@ -10,13 +10,24 @@ module DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact where
 -- DOI: 10.1007/s00021-019-0411-z.
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
+-- Authors: Peter Constantin; Weinan E; Edriss S. Titi.
+-- Title: "Onsager's Conjecture on the Energy Conservation for Solutions of
+-- Euler's Equation".
+-- Communications in Mathematical Physics 165 (1994), 207--209.
+-- DOI: 10.1007/BF02099744.
+--
 -- PURPOSE
 -- Record the literal nonlinear identity used in Proposition 3.1.  This is not
 -- a generic Bony label: it is Luo's finite-difference commutator kernel r_p,
--- its low/high projector split, and the three resulting flux pieces.  The
--- repository's already-constructed Hermitian projectors, Parseval transport,
--- cutoff-indexed geometry, operator gap and residue-scale authority are inputs
--- to later consumers and are not reconstructed here.
+-- its low/high projector split, and the three resulting flux pieces.
+--
+-- The high-flux sign identity is explicitly grounded in
+--
+--   integral (u dot grad)u dot u = 0,
+--
+-- which is available on the interval where the Leray--Hopf solution is already
+-- regular and divergence-free.  It is not promoted from the global weak energy
+-- inequality alone.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
@@ -37,6 +48,7 @@ record LuoExactFluxKernelDecomposition
 
     projectedTensor : Nat → State → Tensor
 
+    -- Literal Constantin--E--Titi/Luo increment kernel.
     incrementKernel : Nat → State → Tensor
     lowIncrementKernel highIncrementKernel : Nat → State → Tensor
 
@@ -47,6 +59,9 @@ record LuoExactFluxKernelDecomposition
           (lowIncrementKernel shell u)
           (highIncrementKernel shell u)
 
+    -- Delta_{<=p}(u tensor u)
+    --   = r_p(u,u) - u_{>p} tensor u_{>p}
+    --     + u_{<=p} tensor u_{<=p}.
     luoProjectedTensorIdentity :
       (shell : Nat) → (u : State) →
       projectedTensor shell u
@@ -56,13 +71,47 @@ record LuoExactFluxKernelDecomposition
             (tensor (highPass shell u) (highPass shell u)))
           (tensor (lowPass shell u) (lowPass shell u))
 
-    absoluteFlux : Nat → State → Scalar
+    signedLowFlux signedHighFlux crossFlux : Nat → State → Scalar
+    absoluteHighFlux : Nat → State → Scalar
     fluxPiece1 fluxPiece2 fluxPiece3 : Nat → State → Scalar
-    addScalar : Scalar → Scalar → Scalar
+
+    zeroScalar : Scalar
+    addScalar subtractScalar negateScalar twoTimes : Scalar → Scalar → Scalar
+    absoluteValue : Scalar → Scalar
+
+    previousShell : Nat → Nat
+
+    RegularBeforeTerminal : State → Set stateLevel
+    DivergenceFree : State → Set stateLevel
+
+    nonlinearFullVelocityPairing : State → Scalar
+
+    divergenceFreeCancellationOnRegularInterval :
+      (u : State) →
+      RegularBeforeTerminal u →
+      DivergenceFree u →
+      nonlinearFullVelocityPairing u ≡ zeroScalar
+
+    -- Luo's identity preceding (3.2):
+    -- Pi_{>=p} = -Pi_{<=p-1} - 2 cross_p.
+    highFluxSignIdentity :
+      (shell : Nat) → (u : State) →
+      RegularBeforeTerminal u →
+      DivergenceFree u →
+      signedHighFlux shell u
+      ≡ subtractScalar
+          (negateScalar zeroScalar
+            (signedLowFlux (previousShell shell) u))
+          (twoTimes zeroScalar (crossFlux shell u))
+
+    absoluteHighFluxMeaning :
+      (shell : Nat) → (u : State) →
+      absoluteHighFlux shell u
+      ≡ absoluteValue (signedHighFlux shell u)
 
     fluxThreePieceIdentity :
       (shell : Nat) → (u : State) →
-      absoluteFlux shell u
+      absoluteHighFlux shell u
       ≡ addScalar
           (addScalar
             (fluxPiece1 shell u)
@@ -74,6 +123,7 @@ record LuoExactFluxKernelDecomposition
     multiply : Scalar → Scalar → Scalar
     lessOrEqual : Scalar → Scalar → Set scalarLevel
 
+    -- Source-shaped bounds corresponding to r_{p,1}, r_{p,2}, and u_{>p}^2.
     fluxPiece1Bound :
       (shell : Nat) → (u : State) →
       lessOrEqual
@@ -99,6 +149,53 @@ record LuoExactFluxKernelDecomposition
           (lowGradientInfinity shell u))
 
 open LuoExactFluxKernelDecomposition public
+
+record LuoIncrementKernelPhysicalRealization
+    {stateLevel tensorLevel scalarLevel spaceLevel : Level}
+    {State : Set stateLevel}
+    {Tensor : Set tensorLevel}
+    {Scalar : Set scalarLevel}
+    (source : LuoExactFluxKernelDecomposition State Tensor Scalar)
+    (Space : Set spaceLevel)
+    : Set (lsuc (stateLevel ⊔ tensorLevel ⊔ scalarLevel ⊔ spaceLevel)) where
+  field
+    translate : Space → State → State
+    subtractState : State → State → State
+    incrementTensor : State → State → Tensor
+    kernelWeight : Nat → Space → Scalar
+    integrateTensor : (Space → Tensor) → Tensor
+
+    literalIncrementKernelMeaning :
+      (shell : Nat) → (u : State) →
+      incrementKernel source shell u
+      ≡ integrateTensor
+          (λ displacement →
+            incrementTensor
+              (subtractState (translate displacement u) u)
+              (subtractState (translate displacement u) u))
+
+    FourierTerm : Set
+    physicalTriadTerms : Nat → State → FourierTerm
+    fullShellIncidenceTerms : Nat → State → FourierTerm
+
+    incrementKernelFourierExpansion :
+      (shell : Nat) → (u : State) →
+      physicalTriadTerms shell u
+      ≡ fullShellIncidenceTerms shell u
+
+    lowIncrementPieceMatchesPhysicalTriads : Set
+    lowIncrementPieceMatchesPhysicalTriadsWitness :
+      lowIncrementPieceMatchesPhysicalTriads
+
+    highIncrementPieceMatchesPhysicalTriads : Set
+    highIncrementPieceMatchesPhysicalTriadsWitness :
+      highIncrementPieceMatchesPhysicalTriads
+
+    highTailSquareMatchesPhysicalTriads : Set
+    highTailSquareMatchesPhysicalTriadsWitness :
+      highTailSquareMatchesPhysicalTriads
+
+open LuoIncrementKernelPhysicalRealization public
 
 record LuoFluxKernelToWeightedSchur
     {stateLevel tensorLevel scalarLevel : Level}
@@ -130,7 +227,7 @@ record LuoFluxKernelToWeightedSchur
     physicalFluxDominatedByWeightedSchur :
       (shell : Nat) → (u : State) →
       lessOrEqual source
-        (absoluteFlux source shell u)
+        (absoluteHighFlux source shell u)
         (multiply source
           (multiply source
             schurConstant
@@ -142,6 +239,9 @@ open LuoFluxKernelToWeightedSchur public
 luoExactIncrementKernelTargetConstructed : Bool
 luoExactIncrementKernelTargetConstructed = true
 
+luoHighFluxCancellationIdentityRecorded : Bool
+luoHighFluxCancellationIdentityRecorded = true
+
 luoThreePieceFluxTargetConstructed : Bool
 luoThreePieceFluxTargetConstructed = true
 
@@ -151,6 +251,10 @@ luoExactFluxKernelPhysicallyInhabited = false
 luoExactIncrementKernelTargetConstructedIsTrue :
   luoExactIncrementKernelTargetConstructed ≡ true
 luoExactIncrementKernelTargetConstructedIsTrue = refl
+
+luoHighFluxCancellationIdentityRecordedIsTrue :
+  luoHighFluxCancellationIdentityRecorded ≡ true
+luoHighFluxCancellationIdentityRecordedIsTrue = refl
 
 luoThreePieceFluxTargetConstructedIsTrue :
   luoThreePieceFluxTargetConstructed ≡ true
