@@ -9,6 +9,7 @@ files=(
   DASHI/Physics/Units/PhysicalNormalizationExact.agda
   DASHI/Physics/Units/QuantumVacuumQuantityBridgeExact.agda
   DASHI/Physics/Limits/PhysicsLimitCommutingSquare.agda
+  DASHI/Physics/Closure/NSTriadKNNavierStokesNormalizationTransportExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoScalingExact.agda
   DASHI/Physics/Closure/GRWeakFieldDimensionExact.agda
   DASHI/Physics/YangMills/BalabanClayT5MassScaleDimensionExact.agda
@@ -30,6 +31,8 @@ grep -q '10.1103/PhysRev.4.345' \
   DASHI/Physics/Units/MechanicalDimensionExact.agda
 grep -q '10.1007/s00021-019-0411-z' \
   DASHI/Physics/Closure/NSTriadKNLuoScalingExact.agda
+grep -q '10.1007/BF02547354' \
+  DASHI/Physics/Closure/NSTriadKNNavierStokesNormalizationTransportExact.agda
 grep -q '10.1002/andp.19163540702' \
   DASHI/Physics/Closure/GRWeakFieldDimensionExact.agda
 grep -q '10.1103/PhysRevLett.30.1343' \
@@ -38,6 +41,8 @@ grep -q '10.1140/epjc/s10052-023-11631-7' \
   DASHI/Physics/Closure/HEPDataCMSBelowZDrellYanClaimExact.agda
 
 grep -q 'zeroFittedParametersProved = false' \
+  DASHI/Physics/Closure/HEPDataCMSBelowZDrellYanClaimExact.agda
+grep -q 'strongEarlyClaimAuthorityConstructed = false' \
   DASHI/Physics/Closure/HEPDataCMSBelowZDrellYanClaimExact.agda
 grep -q 'strictQuantumGravityTerminalProofSynthesized = false' \
   DASHI/Unified/QuantumClassicalGravityBoundaryIntegration.agda
