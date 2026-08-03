@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayLiteralFrontierQuarantinedClaims where
 
-open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------

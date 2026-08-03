@@ -31,14 +31,10 @@ sumDifferenceSquaresFormula : ∀ value values →
   ≡ natAsRational (length values) * sq value
     - (1ℚ + 1ℚ) * value * sumRational values (λ item → item)
     + sumSquares values
-sumDifferenceSquaresFormula value [] = ℚRing.solve-∀ value
+sumDifferenceSquaresFormula value [] = ℚRing.solve-∀
 sumDifferenceSquaresFormula value (other ∷ values)
   rewrite sumDifferenceSquaresFormula value values =
   ℚRing.solve-∀
-    value other
-    (natAsRational (length values))
-    (sumRational values (λ item → item))
-    (sumSquares values)
 
 pairDifferenceIdentity : ∀ values →
   natAsRational (length values) * sumSquares values
@@ -49,10 +45,6 @@ pairDifferenceIdentity (value ∷ values)
   rewrite sumDifferenceSquaresFormula value values
         | pairDifferenceIdentity values =
   ℚRing.solve-∀
-    value
-    (natAsRational (length values))
-    (sumRational values (λ item → item))
-    (sumSquares values)
 
 sumNonnegative : ∀ values term →
   (∀ value → 0ℚ ≤ term value) →
@@ -94,10 +86,7 @@ finiteCauchyRemainderExact values =
       (λ remainder →
         sq (sumRational values (λ item → item)) + remainder)
       (sym (pairDifferenceIdentity values)))
-    (ℚRing.solve-∀
-      (natAsRational (length values))
-      (sumSquares values)
-      (sumRational values (λ item → item)))
+    (ℚRing.solve-∀)
 
 finiteRationalCauchy : ∀ values →
   sq (sumRational values (λ item → item))

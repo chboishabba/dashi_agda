@@ -52,7 +52,7 @@ finiteDyadicTailStep depth count = refl
 configuredTailMajorantStep : ∀ depth →
   configuredInfiniteTailMajorant depth
   ≡ Tail.rootedShellTail depth + configuredInfiniteTailMajorant (suc depth)
-configuredTailMajorantStep depth = ℚRing.solve-∀ (Tail.powHalf depth)
+configuredTailMajorantStep depth = ℚRing.solve-∀
 
 record PhysicalBoundaryCrossingInstance
     (Cutoff Volume Observable Cluster : Set) : Set₁ where

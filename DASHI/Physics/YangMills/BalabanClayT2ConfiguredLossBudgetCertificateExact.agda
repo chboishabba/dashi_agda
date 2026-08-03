@@ -65,14 +65,11 @@ configuredLogSixteenUpper = threeℚ
 configuredNetSlack = configuredNetGain - configuredLogSixteenUpper
 
 configuredTotalLossExact : configuredTotalLoss ≡ + 11 / 16
-configuredTotalLossExact = ℚRing.solve
-
+configuredTotalLossExact = ℚRing.solve []
 configuredNetGainExact : configuredNetGain ≡ threeℚ
-configuredNetGainExact = ℚRing.solve
-
+configuredNetGainExact = ℚRing.solve []
 configuredNetSlackExact : configuredNetSlack ≡ 0ℚ
-configuredNetSlackExact = ℚRing.solve
-
+configuredNetSlackExact = ℚRing.solve []
 record ConfiguredPhysicalLossDomination
     (Scale Polymer Scalar : Set) : Set₁ where
   field

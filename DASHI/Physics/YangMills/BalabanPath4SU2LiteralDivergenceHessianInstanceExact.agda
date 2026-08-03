@@ -67,7 +67,7 @@ siteInnerAddRight : ∀ left right first →
 siteInnerAddRight left right first =
   trans
     (sumRationalCong (physicalBlockSites side4) _ _
-      (λ site → ℚRing.solve-∀ (first site) (left site) (right site)))
+      (λ site → ℚRing.solve-∀))
     (sumRationalAdd (physicalBlockSites side4)
       (λ site → first site * left site)
       (λ site → first site * right site))
@@ -101,24 +101,6 @@ physicalTangentInnerAddRight first left right
     (componentScalarBondField left component3)
     (componentScalarBondField right component3) =
   ℚRing.solve-∀
-    (scalarBondInner
-      (componentScalarBondField first component1)
-      (componentScalarBondField left component1))
-    (scalarBondInner
-      (componentScalarBondField first component1)
-      (componentScalarBondField right component1))
-    (scalarBondInner
-      (componentScalarBondField first component2)
-      (componentScalarBondField left component2))
-    (scalarBondInner
-      (componentScalarBondField first component2)
-      (componentScalarBondField right component2))
-    (scalarBondInner
-      (componentScalarBondField first component3)
-      (componentScalarBondField left component3))
-    (scalarBondInner
-      (componentScalarBondField first component3)
-      (componentScalarBondField right component3))
 
 ------------------------------------------------------------------------
 -- Literal gauge inner-product positivity and zero laws.

@@ -61,7 +61,7 @@ deltaSumAbsent decide (value ∷ values) row notMember vector
           (sym equality) here))
         | deltaSumAbsent decide values row
             (λ membership → notMember (there membership)) vector =
-  ℚRing.solve-∀ (vector value)
+  ℚRing.solve-∀
 
 deltaSumIdentity :
   ∀ {A : Set}
@@ -77,14 +77,14 @@ deltaSumIdentity decide []-free row () vector
 deltaSumIdentity decide (notTail ∷-free tailFree) row here vector
   rewrite kroneckerSelf decide row
         | deltaSumAbsent decide _ row notTail vector =
-  ℚRing.solve-∀ (vector row)
+  ℚRing.solve-∀
 deltaSumIdentity decide {values = value ∷ values}
     (notTail ∷-free tailFree) row (there membership) vector
   rewrite kroneckerDifferent decide
     (λ equality →
       notTail (subst (λ candidate → candidate ∈ values) equality membership))
         | deltaSumIdentity decide tailFree row membership vector =
-  ℚRing.solve-∀ (vector value) (vector row)
+  ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- Literal three-colour tangent component enumeration.

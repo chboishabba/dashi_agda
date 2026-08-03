@@ -39,9 +39,6 @@ axisCenteringEdgeDifferenceExact field axis transverse predecessor
   rewrite axisCentering4OnFibre field axis transverse (sucᵢ predecessor)
         | axisCentering4OnFibre field axis transverse (weakenIndex predecessor) =
   ℚRing.solve-∀
-    (field (insertAxis axis (sucᵢ predecessor) transverse))
-    (field (insertAxis axis (weakenIndex predecessor) transverse))
-    (physicalFibreSum field axis transverse)
 
 axisCenteringFibreEnergyExact : ∀ field axis transverse →
   physicalFibreEdgeEnergy (axisCentering4 field axis) axis transverse

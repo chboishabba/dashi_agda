@@ -98,7 +98,7 @@ square value = value * value
 reversePlaquetteCurlSqExact : ∀ forward reverse →
   reverse ≡ (0ℚ - forward) → square reverse ≡ square forward
 reversePlaquetteCurlSqExact forward .(0ℚ - forward) refl =
-  ℚRing.solve-∀ forward
+  ℚRing.solve-∀
 
 positivePlaquetteMultiplicity : ℚ
 positivePlaquetteMultiplicity = 1ℚ

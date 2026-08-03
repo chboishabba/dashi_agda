@@ -50,7 +50,7 @@ globalNormAddExpansion left right =
       (λ site →
         left site * left site
         + (twoℚ * (left site * right site) + right site * right site))
-      (λ site → ℚRing.solve-∀ (left site) (right site)))
+      (λ site → ℚRing.solve-∀))
     (trans
       (sumRationalAdd
         (physicalBlockSites side4)
@@ -75,7 +75,7 @@ scalarProjectionReconstruction : ∀ field →
       (average0123 field))
     field
 scalarProjectionReconstruction field site =
-  ℚRing.solve-∀ (field site) (average0123 field site)
+  ℚRing.solve-∀
 
 scalarProjectionPythagoras : ∀ field →
   globalNormSq field
@@ -95,9 +95,7 @@ scalarProjectionPythagoras field =
             + (twoℚ * cross + globalNormSq (average0123 field)))
           (average0123ResidualOrthogonal
             field (average0123 field) (average0123Fixed field)))
-        (ℚRing.solve-∀
-          (globalNormSq (subtractField field (average0123 field)))
-          (globalNormSq (average0123 field)))))
+        (ℚRing.solve-∀)))
 
 bondProjection : RationalBondField4 → RationalBondField4
 bondProjection = scalarBlockProjection
@@ -139,13 +137,7 @@ physicalNormProjectionPythagoras tangent =
       (cong₂ _+_
         (bondProjectionPythagoras (tangent component2))
         (bondProjectionPythagoras (tangent component3))))
-    (ℚRing.solve-∀
-      (bondNormSq (bondFluctuation (tangent component1)))
-      (bondNormSq (bondProjection (tangent component1)))
-      (bondNormSq (bondFluctuation (tangent component2)))
-      (bondNormSq (bondProjection (tangent component2)))
-      (bondNormSq (bondFluctuation (tangent component3)))
-      (bondNormSq (bondProjection (tangent component3))))
+    (ℚRing.solve-∀)
 
 coarseFineNormSqExact : ∀ tangent →
   physicalUnweightedNormSq tangent
@@ -154,9 +146,7 @@ coarseFineNormSqExact : ∀ tangent →
 coarseFineNormSqExact tangent =
   trans
     (physicalNormProjectionPythagoras tangent)
-    (ℚRing.solve-∀
-      (physicalUnweightedNormSq (fineFluctuation tangent))
-      (physicalUnweightedNormSq (fineProjection tangent)))
+    (ℚRing.solve-∀)
 
 physicalNormMatchesInner : ∀ tangent →
   physicalUnweightedNormSq tangent ≡ physicalTangentInner tangent tangent
@@ -206,9 +196,6 @@ coarsePenalizedCoercivity tangent fluctuationEnergy fineLower coarseLower =
   scaleSplitting current
     rewrite physicalNormProjectionPythagoras current =
     ℚRing.solve-∀
-      configuredPathCoercivityConstant
-      (physicalUnweightedNormSq (fineFluctuation current))
-      (physicalUnweightedNormSq (fineProjection current))
 
 concreteCoarseFineNormSplittingLevel : ProofLevel
 concreteCoarseFineNormSplittingLevel = machineChecked

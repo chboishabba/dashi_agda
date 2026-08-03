@@ -48,10 +48,7 @@ configuredPhysicalGreenNormBound source =
       (ℚP.+-mono-≤
         (configuredGreenBondNormBound source component2)
         (configuredGreenBondNormBound source component3)))
-    (ℚRing.solve-∀
-      (bondNormSq (source component1))
-      (bondNormSq (source component2))
-      (bondNormSq (source component3)))
+    (ℚRing.solve-∀)
 
 configuredPhysicalGreenNormLevel : ProofLevel
 configuredPhysicalGreenNormLevel = machineChecked

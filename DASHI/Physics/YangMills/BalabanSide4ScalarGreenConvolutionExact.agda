@@ -109,10 +109,6 @@ kernelLaplacianFoldExact : ∀ offset →
   kernelLaplacianFold offset ≡ scalarKernelLaplacian offset
 kernelLaplacianFoldExact offset =
   ℚRing.solve-∀
-    (kernelAxisLaplacian axis0 offset)
-    (kernelAxisLaplacian axis1 offset)
-    (kernelAxisLaplacian axis2 offset)
-    (kernelAxisLaplacian axis3 offset)
 
 siteLocalLaplacian : SiteField side4 → SiteField side4
 siteLocalLaplacian field site =
@@ -176,10 +172,6 @@ sumStencilDistribute [] center forward backward weight = ℚRing.solve-∀
 sumStencilDistribute (value ∷ values) center forward backward weight
   rewrite sumStencilDistribute values center forward backward weight =
   ℚRing.solve-∀
-    (center value) (forward value) (backward value) (weight value)
-    (sumRational values (λ item → center item * weight item))
-    (sumRational values (λ item → forward item * weight item))
-    (sumRational values (λ item → backward item * weight item))
 
 kernelAxisStencilAtDifference : ∀ axis row column →
   ((scalarGreenKernel (subtractSite4 row column)
@@ -245,8 +237,7 @@ kernelLaplacianTimesExact : ∀ offset value →
   ≡ (scalarDeltaAtZero offset - oneTwoFiftySix) * value
 kernelLaplacianTimesExact offset value =
   trans
-    (ℚRing.solve-∀
-      (scalarKernelLaplacian offset) oneTwoFiftySix value)
+    (ℚRing.solve-∀)
     (cong (λ equationLeft → (equationLeft - oneTwoFiftySix) * value)
       (scalarGreenKernelEquation offset))
 
@@ -256,13 +247,10 @@ sumDeltaMinusConstant :
     (delta value - constant) * source value)
   ≡ sumRational values (λ value → delta value * source value)
     - constant * sumRational values source
-sumDeltaMinusConstant [] delta source constant = ℚRing.solve-∀ constant
+sumDeltaMinusConstant [] delta source constant = ℚRing.solve-∀
 sumDeltaMinusConstant (value ∷ values) delta source constant
   rewrite sumDeltaMinusConstant values delta source constant =
   ℚRing.solve-∀
-    (delta value) (source value) constant
-    (sumRational values (λ item → delta item * source item))
-    (sumRational values source)
 
 siteDeltaEqualsKronecker : ∀ left right →
   siteDelta4 left right
@@ -324,7 +312,7 @@ siteSumGreenExact source =
         (trans
           (cong (λ value → value * source column)
             (translatedKernelTotal column))
-          (ℚRing.solve-∀ (source column)))))
+          (ℚRing.solve-∀))))
 
 averageScalarGreenExact : ∀ source row →
   average0123 (scalarGreen source) row
@@ -345,7 +333,7 @@ configuredSiteGreenRightInverse source row =
     (cong₂ _+_
       (siteGreenLaplacianIdentity source row)
       (averageScalarGreenExact source row))
-    (ℚRing.solve-∀ (source row) oneTwoFiftySix (siteSum4 source))
+    (ℚRing.solve-∀)
 
 ------------------------------------------------------------------------
 -- Input-side shifts and commutation, giving the left inverse as well.
@@ -364,9 +352,7 @@ scalarGreenAdd : ∀ left right row →
   ≡ scalarGreen left row + scalarGreen right row
 scalarGreenAdd left right row =
   trans
-    (siteSum4Cong _ _ (λ column → ℚRing.solve-∀
-      (scalarGreenKernel (subtractSite4 row column))
-      (left column) (right column)))
+    (siteSum4Cong _ _ (λ column → ℚRing.solve-∀))
     (sumRationalAdd (physicalBlockSites side4)
       (λ column → scalarGreenKernel (subtractSite4 row column) * left column)
       (λ column → scalarGreenKernel (subtractSite4 row column) * right column))
@@ -381,7 +367,7 @@ scalarGreenConstantExact constant row =
       constant)
     (trans
       (cong (λ value → value * constant) (kernelRowTotal row))
-      (ℚRing.solve-∀ constant))
+      (ℚRing.solve-∀))
 
 shiftedInputForwardSum : ∀ axis source row →
   scalarGreen (λ site → source (shiftForward4 axis site)) row
@@ -431,10 +417,6 @@ sumStencilWeightLeft [] weight center forward backward = ℚRing.solve-∀
 sumStencilWeightLeft (value ∷ values) weight center forward backward
   rewrite sumStencilWeightLeft values weight center forward backward =
   ℚRing.solve-∀
-    (weight value) (center value) (forward value) (backward value)
-    (sumRational values (λ item → weight item * center item))
-    (sumRational values (λ item → weight item * forward item))
-    (sumRational values (λ item → weight item * backward item))
 
 axisInputLaplacianGreenExact : ∀ axis source row →
   scalarGreen (λ site →

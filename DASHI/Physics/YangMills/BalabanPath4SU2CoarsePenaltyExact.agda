@@ -151,7 +151,7 @@ average0123ResidualZero field site =
         (λ value → average0123 field site - value)
         (average0123OfFixed
           (average0123 field) (average0123Fixed field) site))
-      (ℚRing.solve-∀ (average0123 field site)))
+      (ℚRing.solve-∀))
 
 fineFluctuationAverageZero : ∀ tangent →
   CoarseAverageZero (fineFluctuation tangent)

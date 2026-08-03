@@ -103,11 +103,11 @@ rightAssociatedPlaquetteJetExact
   (lie3 ax ay az) (lie3 bx by bz)
   (lie3 cx cy cz) (lie3 dx dy dz) =
   jetExt
-    (ℚRing.solve-∀ ax ay az bx by bz cx cy cz dx dy dz)
+    (ℚRing.solve-∀)
     (lie3Ext
-      (ℚRing.solve-∀ ax bx cx dx)
-      (ℚRing.solve-∀ ay by cy dy)
-      (ℚRing.solve-∀ az bz cz dz))
+      (ℚRing.solve-∀)
+      (ℚRing.solve-∀)
+      (ℚRing.solve-∀))
 
 physicalPlaquetteHolonomyMatrixExact : ∀ tangent plane site →
   matrix
@@ -136,8 +136,6 @@ genericPlaquetteSecondDerivativeUnfold :
       (matrix (loopObservable physicalJetLattice jetSUNGroup loop field)))
 genericPlaquetteSecondDerivativeUnfold loop field =
   ℚRing.solve-∀
-    (realSecond (matrix
-      (loopObservable physicalJetLattice jetSUNGroup loop field)))
 
 physicalPlaquetteWilsonSecondVariationExact : ∀ tangent plane site →
   scalarSecondDerivative
@@ -151,8 +149,7 @@ physicalPlaquetteWilsonSecondVariationExact tangent plane site =
     (trans
       (cong (λ path → - (twoR * realSecond path))
         (physicalPlaquetteHolonomyMatrixExact tangent plane site))
-      (ℚRing.solve-∀
-        (realSecond (literalPlaquetteJet tangent plane site))))
+      (ℚRing.solve-∀))
 
 ------------------------------------------------------------------------
 -- Second differentiation commutes with the generic finite Wilson-action fold.

@@ -24,7 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNRationalDirectConvolutionBound where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -45,7 +45,7 @@ multiplierTimesCauchySchwarz :
 multiplierTimesCauchySchwarz multiplier pairs =
   let
     instance multiplierSquaredNN =
-      ℚₚ.nonNegative (L2.squareNonnegative multiplier)
+      nonNegative (L2.squareNonnegative multiplier)
     multiplied = ℚₚ.*-monoˡ-≤-nonNeg
       (L2.square multiplier)
       (L2.finiteCauchySchwarzSquared pairs)
@@ -95,8 +95,8 @@ fibreMajorantSquared
     pairProductNonnegative =
       let
         instance
-          leftNN = ℚₚ.nonNegative (L2.leftNormSquaredNonnegative pairs)
-          rightNN = ℚₚ.nonNegative (L2.rightNormSquaredNonnegative pairs)
+          leftNN = nonNegative (L2.leftNormSquaredNonnegative pairs)
+          rightNN = nonNegative (L2.rightNormSquaredNonnegative pairs)
           productNN = ℚₚ.nonNeg*nonNeg⇒nonNeg
             (L2.leftNormSquared pairs) (L2.rightNormSquared pairs)
       in ℚₚ.nonNegative⁻¹
@@ -108,7 +108,7 @@ fibreMajorantSquared
       ≤ multiplierBoundSquared
         * (L2.leftNormSquared pairs * L2.rightNormSquared pairs)
     multiplierStage =
-      let instance pairProductNN = ℚₚ.nonNegative pairProductNonnegative
+      let instance pairProductNN = nonNegative pairProductNonnegative
       in ℚₚ.*-monoʳ-≤-nonNeg
         (L2.leftNormSquared pairs * L2.rightNormSquared pairs)
         (multiplierSquaredBound majorant)
@@ -119,7 +119,7 @@ fibreMajorantSquared
       ≤ multiplierBoundSquared * (fullLeftNorm * fullRightNorm)
     fullStage =
       let instance multiplierNN =
-        ℚₚ.nonNegative (multiplierBoundNonnegative majorant)
+        nonNegative (multiplierBoundNonnegative majorant)
       in ℚₚ.*-monoˡ-≤-nonNeg multiplierBoundSquared restrictedProduct
   in
   ℚₚ.≤-trans cauchy (ℚₚ.≤-trans multiplierStage fullStage)

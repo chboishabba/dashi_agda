@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4AnisotropyBlockAndCriterionProvenanceExact where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel

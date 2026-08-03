@@ -1,8 +1,8 @@
 module DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact where
 
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List; []; _∷_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 

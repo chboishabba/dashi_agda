@@ -26,7 +26,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Integer.Base as Int
 open import Data.List.Base using ([]; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _-_; _≤_; _<_)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _-_; _≤_; _<_; nonNegative; positive)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_; _<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -49,30 +49,42 @@ partialSum ratio zero = 1ℚ
 partialSum ratio (suc cutoff) =
   pow ratio (suc cutoff) + partialSum ratio cutoff
 
+geometricIdentityAux : ∀ ratio p s →
+  (1ℚ - ratio) * s ≡ 1ℚ - p →
+  (1ℚ - ratio) * (p + s) ≡ 1ℚ - ratio * p
+geometricIdentityAux ratio p s ih =
+  begin
+    (1ℚ - ratio) * (p + s)
+  ≡⟨ solve (ratio ∷ p ∷ s ∷ []) ⟩
+    (1ℚ - ratio) * p + (1ℚ - ratio) * s
+  ≡⟨ cong ((1ℚ - ratio) * p +_) ih ⟩
+    (1ℚ - ratio) * p + (1ℚ - p)
+  ≡⟨ solve (ratio ∷ p ∷ []) ⟩
+    1ℚ - ratio * p
+  ∎
+
 geometricIdentity : ∀ ratio cutoff →
   (1ℚ - ratio) * partialSum ratio cutoff
   ≡ 1ℚ - pow ratio (suc cutoff)
-geometricIdentity ratio zero = solve (ratio ∷ [])
-geometricIdentity ratio (suc cutoff) =
+geometricIdentity ratio zero =
   begin
-    (1ℚ - ratio) * partialSum ratio (suc cutoff)
-  ≡⟨ solve
-       (ratio ∷ pow ratio (suc cutoff)
-        ∷ partialSum ratio cutoff ∷ []) ⟩
-    (1ℚ - ratio) * pow ratio (suc cutoff)
-      + (1ℚ - ratio) * partialSum ratio cutoff
-  ≡⟨ cong
-       (λ value →
-         (1ℚ - ratio) * pow ratio (suc cutoff) + value)
-       (geometricIdentity ratio cutoff) ⟩
-    (1ℚ - ratio) * pow ratio (suc cutoff)
-      + (1ℚ - pow ratio (suc cutoff))
-  ≡⟨ solve (ratio ∷ pow ratio (suc cutoff) ∷ []) ⟩
-    1ℚ - pow ratio (suc (suc cutoff))
+    (1ℚ - ratio) * partialSum ratio zero
+  ≡⟨ refl ⟩
+    (1ℚ - ratio) * 1ℚ
+  ≡⟨ solve (ratio ∷ []) ⟩
+    1ℚ - ratio * 1ℚ
+  ≡⟨ refl ⟩
+    1ℚ - pow ratio (suc zero)
   ∎
+geometricIdentity ratio (suc cutoff) =
+  geometricIdentityAux
+    ratio
+    (pow ratio (suc cutoff))
+    (partialSum ratio cutoff)
+    (geometricIdentity ratio cutoff)
 
 zeroBelowOne : 0ℚ ≤ 1ℚ
-zeroBelowOne = toWitness (0ℚ ≤? 1ℚ)
+zeroBelowOne = toWitness {a? = 0ℚ ≤? 1ℚ} _
 
 powNonnegative : ∀ ratio exponent →
   0ℚ ≤ ratio → 0ℚ ≤ pow ratio exponent
@@ -80,9 +92,11 @@ powNonnegative ratio zero ratioNonnegative = zeroBelowOne
 powNonnegative ratio (suc exponent) ratioNonnegative =
   let
     instance
-      ratioIsNonnegative = ℚₚ.nonNegative ratioNonnegative
+      ratioIsNonnegative = nonNegative ratioNonnegative
       restIsNonnegative =
-        ℚₚ.nonNegative (powNonnegative ratio exponent ratioNonnegative)
+        nonNegative (powNonnegative ratio exponent ratioNonnegative)
+      productIsNonnegative =
+        ℚₚ.nonNeg*nonNeg⇒nonNeg ratio (pow ratio exponent)
   in
   ℚₚ.nonNegative⁻¹ (ratio * pow ratio exponent)
 
@@ -97,8 +111,8 @@ partialSumNonnegative ratio (suc cutoff) ratioNonnegative =
       partialSumNonnegative ratio cutoff ratioNonnegative
     instance
       currentPowerIsNonnegative =
-        ℚₚ.nonNegative currentPowerNonnegative
-      restIsNonnegative = ℚₚ.nonNegative restNonnegative
+        nonNegative currentPowerNonnegative
+      restIsNonnegative = nonNegative restNonnegative
       sumIsNonnegative =
         ℚₚ.nonNeg+nonNeg⇒nonNeg
           (pow ratio (suc cutoff)) (partialSum ratio cutoff)
@@ -139,7 +153,7 @@ geometricPartialSumBound ratio bound cutoff
 
     instance
       oneMinusRatioIsPositive =
-        ℚₚ.positive oneMinusRatioPositive
+        positive oneMinusRatioPositive
   in
   ℚₚ.*-cancelˡ-≤-pos (1ℚ - ratio) scaledBound
 
@@ -152,24 +166,24 @@ thirtyTwoThirtyFirsts = Int.+ 32 / 31
 oneTwentyEightNinetyThirds = Int.+ 128 / 93
 
 quarterNonnegative : 0ℚ ≤ quarter
-quarterNonnegative = toWitness (0ℚ ≤? quarter)
+quarterNonnegative = toWitness {a? = 0ℚ ≤? quarter} _
 
 thirtySecondNonnegative : 0ℚ ≤ thirtySecond
-thirtySecondNonnegative = toWitness (0ℚ ≤? thirtySecond)
+thirtySecondNonnegative = toWitness {a? = 0ℚ ≤? thirtySecond} _
 
 oneMinusQuarterPositive : 0ℚ < 1ℚ - quarter
-oneMinusQuarterPositive = toWitness (0ℚ <? 1ℚ - quarter)
+oneMinusQuarterPositive = toWitness {a? = 0ℚ <? 1ℚ - quarter} _
 
 oneMinusThirtySecondPositive : 0ℚ < 1ℚ - thirtySecond
 oneMinusThirtySecondPositive =
-  toWitness (0ℚ <? 1ℚ - thirtySecond)
+  toWitness {a? = 0ℚ <? 1ℚ - thirtySecond} _
 
 fourThirdsNonnegative : 0ℚ ≤ fourThirds
-fourThirdsNonnegative = toWitness (0ℚ ≤? fourThirds)
+fourThirdsNonnegative = toWitness {a? = 0ℚ ≤? fourThirds} _
 
 thirtyTwoThirtyFirstsNonnegative : 0ℚ ≤ thirtyTwoThirtyFirsts
 thirtyTwoThirtyFirstsNonnegative =
-  toWitness (0ℚ ≤? thirtyTwoThirtyFirsts)
+  toWitness {a? = 0ℚ ≤? thirtyTwoThirtyFirsts} _
 
 quarterBoundIdentity :
   (1ℚ - quarter) * fourThirds ≡ 1ℚ
@@ -210,7 +224,7 @@ rectanglePartialSumBound lowCutoff gapCutoff =
     firstStep =
       let
         instance
-          gapSumIsNonnegative = ℚₚ.nonNegative gapSumNonnegative
+          gapSumIsNonnegative = nonNegative gapSumNonnegative
       in
       ℚₚ.*-monoʳ-≤-nonNeg
         (partialSum thirtySecond gapCutoff)
@@ -223,7 +237,7 @@ rectanglePartialSumBound lowCutoff gapCutoff =
       let
         instance
           fourThirdsIsNonnegative =
-            ℚₚ.nonNegative fourThirdsNonnegative
+            nonNegative fourThirdsNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         fourThirds

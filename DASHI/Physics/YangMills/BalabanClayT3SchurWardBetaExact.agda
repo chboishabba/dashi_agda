@@ -60,9 +60,7 @@ scalarSchurEnergyExact coarseHessian mixed fluctuationHessian
           * (inverseFluctuation * mixed * mixed * coarse * coarse)
         ≡ scalarSchurHessian coarseHessian mixed inverseFluctuation * coarse * coarse)
       (sym inverseProduct)
-      (ℚRing.solve-∀
-        (scalarSchurHessian coarseHessian mixed inverseFluctuation)
-        coarse inverseFluctuation mixed))
+      (ℚRing.solve-∀))
 
 ------------------------------------------------------------------------
 -- T3B/T4A: gauge invariance is produced from exact reindexing of the actual
@@ -145,7 +143,7 @@ couplingFourthEnvelope depth =
 couplingFourthStep : ∀ depth →
   couplingFourthEnvelope (suc depth)
   ≡ quarter * couplingFourthEnvelope depth
-couplingFourthStep depth = ℚRing.solve-∀ (couplingSqEnvelope depth)
+couplingFourthStep depth = ℚRing.solve-∀
 
 quarticPartialSum : Nat → ℚ
 quarticPartialSum zero = 0ℚ
@@ -165,8 +163,7 @@ quarticGeometricIdentity (suc depth) =
           + fourThirds * nextPower)
       (couplingFourthStep depth))
     (trans
-      (ℚRing.solve-∀
-        (quarticPartialSum depth) (couplingFourthEnvelope depth))
+      (ℚRing.solve-∀)
       (quarticGeometricIdentity depth))
 
 couplingSqNonnegative : ∀ depth → 0ℚ ≤ couplingSqEnvelope depth
@@ -277,10 +274,7 @@ quarticRemainderPartialBound dataSet (suc depth) =
         partialAbsoluteRemainder dataSet depth
           + absoluteRemainder dataSet depth
         ≤ upper)
-      (ℚRing.solve-∀
-        (coefficient dataSet)
-        (quarticPartialSum depth)
-        (couplingFourthEnvelope depth))
+      (ℚRing.solve-∀)
       (addMonotone dataSet
         (quarticRemainderPartialBound dataSet depth)
         (remainderControlled dataSet depth)))

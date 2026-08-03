@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4FiniteHermitianRayleighSpectrumExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel

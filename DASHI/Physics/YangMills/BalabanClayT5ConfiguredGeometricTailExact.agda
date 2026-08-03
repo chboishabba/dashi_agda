@@ -44,7 +44,7 @@ powHalfStepExact n = refl
 
 rootedShellTailStepExact : ∀ n →
   rootedShellTail (suc n) ≡ halfℚ * rootedShellTail n
-rootedShellTailStepExact n = ℚRing.solve-∀ (powHalf n)
+rootedShellTailStepExact n = ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- Physical cluster-tail instance.  Once the boundary-crossing diameter theorem

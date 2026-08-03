@@ -186,9 +186,7 @@ doubleKernelSquareExact : ∀ source →
 doubleKernelSquareExact source =
   trans
     (siteSum4Cong _ _ (λ row →
-      siteSum4Cong _ _ (λ column → ℚRing.solve-∀
-        (scalarGreenKernel (subtractSite4 row column))
-        (source column))))
+      siteSum4Cong _ _ (λ column → ℚRing.solve-∀)))
     (trans
       (sumSwap (physicalBlockSites side4) (physicalBlockSites side4)
         (λ row column →
@@ -244,7 +242,7 @@ scalarGreenCoefficientBound source =
     (ℚP.*-monoˡ-≤-nonNeg twoFiftySix
       (ℚP.*-monoʳ-≤-nonNeg (globalNormSq source)
         kernelSquareSumBelowOneSixteenth))
-    (ℚRing.solve-∀ (globalNormSq source))
+    (ℚRing.solve-∀)
 
 scalarGreenNormBound : ∀ source →
   globalNormSq (scalarGreen source) ≤ sixteen * globalNormSq source

@@ -305,7 +305,7 @@ scalarSecondDerivativeAdd : ∀ left right →
   scalarSecondDerivative (addScalarJet left right)
   ≡ scalarSecondDerivative left + scalarSecondDerivative right
 scalarSecondDerivativeAdd (scalarJet lc lq) (scalarJet rc rq) =
-  ℚRing.solve-∀ lq rq
+  ℚRing.solve-∀
 
 su2SecondJetSUNTheoryLevel : ProofLevel
 su2SecondJetSUNTheoryLevel = machineChecked

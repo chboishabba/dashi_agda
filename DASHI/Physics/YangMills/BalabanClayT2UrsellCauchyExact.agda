@@ -29,7 +29,7 @@ rationalReflexive : ∀ value → value ≤ value
 rationalReflexive value =
   subst
     (λ upper → value ≤ upper)
-    (ℚRing.solve-∀ value)
+    (ℚRing.solve-∀)
     (baseBelowBasePlusRemainder value 0ℚ zeroNonnegative)
 
 geometricTailPartial : Nat → Nat → ℚ
@@ -74,7 +74,7 @@ geometricTailBelow start (suc count) =
         quarter * halfPower start
           + half * halfPower (suc start)
         ≤ right)
-      (ℚRing.solve-∀ (halfPower start))
+      (ℚRing.solve-∀)
       (rationalReflexive (half * halfPower start)))
 
 record UrsellDepthMajorant : Set₁ where

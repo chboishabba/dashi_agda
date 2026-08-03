@@ -32,12 +32,10 @@ sampleSincLower = 1ℚ - (+ 1 / 6) * (sampleHalfTheta * sampleHalfTheta)
 sampleInverseUpper = + 96 / 95
 
 sampleSincLowerExact : sampleSincLower ≡ + 95 / 96
-sampleSincLowerExact = ℚRing.solve
-
+sampleSincLowerExact = ℚRing.solve []
 sampleInverseUpperExact :
   sampleSincLower * sampleInverseUpper ≡ 1ℚ
-sampleInverseUpperExact = ℚRing.solve
-
+sampleInverseUpperExact = ℚRing.solve []
 sampleSincLowerPositive : + 0 / 1 ≤ sampleSincLower
 sampleSincLowerPositive = ℚP.≤ᵇ⇒≤ tt
 

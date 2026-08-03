@@ -33,8 +33,7 @@ remainderBudget = + 1 / 8
 physicalGap = + 1 / 8
 
 physicalGapArithmetic : referenceGap - remainderBudget ≡ physicalGap
-physicalGapArithmetic = ℚRing.solve
-
+physicalGapArithmetic = ℚRing.solve []
 physicalGapPositive : + 0 / 1 ≤ physicalGap
 physicalGapPositive = ℚP.≤ᵇ⇒≤ tt
 

@@ -93,11 +93,7 @@ zeroMeanPhysicalNormMatchesGenerated field axis transverse meanZero =
         + (sq fourth + 0ℚ)))
         ≡ path4NormSq (zeroMeanPath4Coordinates field axis transverse))
       (zeroMeanFourthCoordinate field axis transverse meanZero)
-      (ℚRing.solve-∀
-        (field (insertAxis axis index0 transverse))
-        (field (insertAxis axis index1 transverse))
-        (field (insertAxis axis index2 transverse))
-        (lastCoordinate (zeroMeanPath4Coordinates field axis transverse))))
+      (ℚRing.solve-∀))
 
 zeroMeanPhysicalEnergyMatchesGenerated :
   ∀ field axis transverse →
@@ -120,11 +116,7 @@ zeroMeanPhysicalEnergyMatchesGenerated field axis transverse meanZero =
           + 0ℚ))
         ≡ path4Energy (zeroMeanPath4Coordinates field axis transverse))
       (zeroMeanFourthCoordinate field axis transverse meanZero)
-      (ℚRing.solve-∀
-        (field (insertAxis axis index0 transverse))
-        (field (insertAxis axis index1 transverse))
-        (field (insertAxis axis index2 transverse))
-        (lastCoordinate (zeroMeanPath4Coordinates field axis transverse))))
+      (ℚRing.solve-∀))
 
 zeroMeanPhysicalFibrePoincare :
   ∀ field axis transverse →

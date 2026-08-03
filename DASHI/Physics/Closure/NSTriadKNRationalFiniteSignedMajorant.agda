@@ -40,6 +40,9 @@ sumToCong left right (suc cutoff) pointwise =
     (pointwise (suc cutoff))
     (sumToCong left right cutoff pointwise)
 
+negSumAux : ∀ p s → - p + - s ≡ - (p + s)
+negSumAux p s = solve (p ∷ s ∷ [])
+
 sumToNeg : ∀ values cutoff →
   Majorant.sumTo (λ index → - values index) cutoff
   ≡ - Majorant.sumTo values cutoff
@@ -51,7 +54,9 @@ sumToNeg values (suc cutoff) =
        (λ rest → - values (suc cutoff) + rest)
        (sumToNeg values cutoff) ⟩
     - values (suc cutoff) + (- Majorant.sumTo values cutoff)
-  ≡⟨ solve (values (suc cutoff) ∷ Majorant.sumTo values cutoff ∷ []) ⟩
+  ≡⟨ negSumAux (values (suc cutoff)) (Majorant.sumTo values cutoff) ⟩
+    - (values (suc cutoff) + Majorant.sumTo values cutoff)
+  ≡⟨ refl ⟩
     - Majorant.sumTo values (suc cutoff)
   ∎
 

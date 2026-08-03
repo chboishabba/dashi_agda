@@ -101,10 +101,7 @@ gaugeFixedHessianPhysicalDecompositionExact dataSet tangent =
         (gaugeFixingNormSq (quadraticData dataSet) tangent)
         (blockAverageNormSq (quadraticData dataSet) tangent))
       (trans
-        (ℚRing.solve-∀
-          (wilsonHessianQuadraticForm (quadraticData dataSet) tangent)
-          (gaugeFixingNormSq (quadraticData dataSet) tangent)
-          (blockAverageNormSq (quadraticData dataSet) tangent))
+        (ℚRing.solve-∀)
         (cong₂ _+_
           (referenceWilsonGaugeEnergyMatchesDifferenceEnergy dataSet tangent)
           refl)))

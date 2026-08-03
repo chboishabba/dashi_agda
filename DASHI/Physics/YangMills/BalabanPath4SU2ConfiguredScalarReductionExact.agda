@@ -48,9 +48,6 @@ backwardDifferenceSubtract : ∀ axis left right site →
     - backwardDifference4 axis right site
 backwardDifferenceSubtract axis left right site =
   ℚRing.solve-∀
-    (left site) (right site)
-    (left (shiftBackward4 axis site))
-    (right (shiftBackward4 axis site))
 
 backwardPlaneCurlExpand : ∀ backwardAxis plane field site →
   backwardDifference4 backwardAxis (scalarPlaneCurl plane field) site
@@ -151,9 +148,6 @@ negativeForwardBackwardStencil : ∀ axis field site →
 negativeForwardBackwardStencil axis field site
   rewrite shiftBackwardAfterForward axis site =
   ℚRing.solve-∀
-    (field site)
-    (field (shiftForward4 axis site))
-    (field (shiftBackward4 axis site))
 
 scalarLocalLaplacian : ScalarBondField4 → ScalarBondField4
 scalarLocalLaplacian field componentAxis site =
@@ -173,34 +167,14 @@ scalarForwardBackwardEqualsLocal : ∀ field componentAxis site →
   ≡ scalarLocalLaplacian field componentAxis site
 scalarForwardBackwardEqualsLocal field componentAxis site =
   trans
-    (ℚRing.solve-∀
-      (forwardDifference4 axis0
-        (backwardDifference4 axis0 (field componentAxis)) site)
-      (forwardDifference4 axis1
-        (backwardDifference4 axis1 (field componentAxis)) site)
-      (forwardDifference4 axis2
-        (backwardDifference4 axis2 (field componentAxis)) site)
-      (forwardDifference4 axis3
-        (backwardDifference4 axis3 (field componentAxis)) site))
+    (ℚRing.solve-∀)
     (trans
       (fourTermCong
         (negativeForwardBackwardStencil axis0 (field componentAxis) site)
         (negativeForwardBackwardStencil axis1 (field componentAxis) site)
         (negativeForwardBackwardStencil axis2 (field componentAxis) site)
         (negativeForwardBackwardStencil axis3 (field componentAxis) site))
-      (ℚRing.solve-∀
-        ((field componentAxis site + field componentAxis site)
-          - (field componentAxis (shiftForward4 axis0 site)
-            + field componentAxis (shiftBackward4 axis0 site)))
-        ((field componentAxis site + field componentAxis site)
-          - (field componentAxis (shiftForward4 axis1 site)
-            + field componentAxis (shiftBackward4 axis1 site)))
-        ((field componentAxis site + field componentAxis site)
-          - (field componentAxis (shiftForward4 axis2 site)
-            + field componentAxis (shiftBackward4 axis2 site)))
-        ((field componentAxis site + field componentAxis site)
-          - (field componentAxis (shiftForward4 axis3 site)
-            + field componentAxis (shiftBackward4 axis3 site)))))
+      (ℚRing.solve-∀))
 
 configuredGaugeFixedMatrixEqualsLaplacianPlusMean :
   ∀ tangent component site bondAxis →
@@ -214,12 +188,7 @@ configuredGaugeFixedMatrixEqualsLaplacianPlusMean
   trans
     (configuredGaugeFixedMatrixPointwise tangent component (pair site bondAxis))
     (trans
-      (ℚRing.solve-∀
-        (scalarWilsonOperator
-          (componentScalarBondField tangent component) bondAxis site)
-        (scalarGaugePenalty
-          (componentScalarBondField tangent component) bondAxis site)
-        (fineProjection tangent component (pair site bondAxis)))
+      (ℚRing.solve-∀)
       (trans
         (cong
           (λ wilsonGauge → wilsonGauge

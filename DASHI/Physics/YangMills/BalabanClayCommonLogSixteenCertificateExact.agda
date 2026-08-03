@@ -36,8 +36,7 @@ expThreeFourthPartialSum =
 
 expThreeFourthPartialSumExact :
   expThreeFourthPartialSum ≡ + 131 / 8
-expThreeFourthPartialSumExact = ℚRing.solve
-
+expThreeFourthPartialSumExact = ℚRing.solve []
 sixteenBelowExpThreePartialSum :
   sixteenℚ ≤ expThreeFourthPartialSum
 sixteenBelowExpThreePartialSum = ℚP.≤ᵇ⇒≤ tt

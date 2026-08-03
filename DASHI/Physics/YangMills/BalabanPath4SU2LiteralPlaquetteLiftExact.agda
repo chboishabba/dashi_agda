@@ -104,15 +104,9 @@ literalPlaquetteLinearCurlEqualsForwardDifferenceCurl :
   ≡ literalForwardDifferenceCurl tangent plane site
 literalPlaquetteLinearCurlEqualsForwardDifferenceCurl tangent plane site =
   lie3Ext
-    (ℚRing.solve-∀
-      (x (firstLink links)) (x (secondLink links))
-      (x (thirdLink links)) (x (fourthLink links)))
-    (ℚRing.solve-∀
-      (y (firstLink links)) (y (secondLink links))
-      (y (thirdLink links)) (y (fourthLink links)))
-    (ℚRing.solve-∀
-      (z (firstLink links)) (z (secondLink links))
-      (z (thirdLink links)) (z (fourthLink links)))
+    (ℚRing.solve-∀)
+    (ℚRing.solve-∀)
+    (ℚRing.solve-∀)
   where
   links = literalPlaquetteFourLinks tangent plane site
 

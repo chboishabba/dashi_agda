@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayT4LiteralMomentumDiagramBoxDataExact where
 
-open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_; _/_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel

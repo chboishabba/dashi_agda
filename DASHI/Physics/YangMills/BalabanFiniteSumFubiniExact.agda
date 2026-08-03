@@ -31,8 +31,6 @@ sumRationalAdd [] left right = ℚRing.solve-∀
 sumRationalAdd (value ∷ values) left right
   rewrite sumRationalAdd values left right =
   ℚRing.solve-∀
-    (left value) (right value)
-    (sumRational values left) (sumRational values right)
 
 sumRationalAppend :
   ∀ {A : Set} (left right : List A) (term : A → ℚ) →
