@@ -20,9 +20,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoWeightedSchurContinuationSynthesisExact
 -- inhabitant owns the same hard-high physical triads, mature full-shell Schur
 -- family, orthogonal projector, literal cutoff energy/dissipation data,
 -- hard/smooth terminal-window authority and published Luo continuation
--- theorem.  The final implication is theorem-complete; the canonical physical
--- inhabitant remains fail-closed until the repository-specific identifications
--- are supplied on one common Navier--Stokes carrier.
+-- theorem.  Pointwise smooth cutoff bounds are transported to the source
+-- integral/threshold and assembled into Luo's limsup hypothesis internally.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -31,6 +30,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (_+_; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -114,14 +114,18 @@ record LuoWeightedSchurContinuationSynthesis : Setω where
       Published.SolvesPeriodicNavierStokesFrom
         continuationAuthority initialDatum solution
 
-    cutoffBoundsGiveLuoLimsup :
-      ((shell : Nat) →
-        Multiplier.smoothTerminalWindowIntegral
-          multiplierAuthority shell (stateAt shell)
-        ≤
-        Multiplier.universalThreshold (terminalBudgetAt shell)) →
-      Published.LuoLocalizedGradientLimsupBound
-        continuationAuthority solution terminalTime
+    smoothIntegralMatchesSource :
+      (shell : Nat) →
+      Multiplier.smoothTerminalWindowIntegral
+        multiplierAuthority shell (stateAt shell)
+      ≡
+      Published.localizedGradientIntegral
+        continuationAuthority solution terminalTime shell
+
+    multiplierThresholdMatchesLuoDelta :
+      (shell : Nat) →
+      Multiplier.universalThreshold (terminalBudgetAt shell)
+      ≡ Published.universalDeltaBKM continuationAuthority
 
 open LuoWeightedSchurContinuationSynthesis public
 
@@ -199,6 +203,28 @@ smoothLuoCutoffBound S shell =
     (stateAt S shell)
     (terminalBudgetAt S shell)
 
+sourceLuoCutoffBound :
+  (S : LuoWeightedSchurContinuationSynthesis) →
+  (shell : Nat) →
+  Published.localizedGradientIntegral
+    (continuationAuthority S) (solution S) (terminalTime S) shell
+  ≤ Published.universalDeltaBKM (continuationAuthority S)
+sourceLuoCutoffBound S shell
+  rewrite sym (smoothIntegralMatchesSource S shell)
+        | sym (multiplierThresholdMatchesLuoDelta S shell) =
+  smoothLuoCutoffBound S shell
+
+sourceLuoLimsupBound :
+  (S : LuoWeightedSchurContinuationSynthesis) →
+  Published.LuoLocalizedGradientLimsupBound
+    (continuationAuthority S) (solution S) (terminalTime S)
+sourceLuoLimsupBound S =
+  Published.pointwiseThresholdImpliesLimsupBound
+    (continuationAuthority S)
+    (solution S)
+    (terminalTime S)
+    (sourceLuoCutoffBound S)
+
 luoWeightedSchurContinuation :
   (S : LuoWeightedSchurContinuationSynthesis) →
   Published.ContinuesBeyond
@@ -213,7 +239,7 @@ luoWeightedSchurContinuation S =
     (terminalTime S)
     (smoothInitialDatum S)
     (solutionSolves S)
-    (cutoffBoundsGiveLuoLimsup S (smoothLuoCutoffBound S))
+    (sourceLuoLimsupBound S)
 
 luoWeightedSchurContinuationSynthesisConstructed : Bool
 luoWeightedSchurContinuationSynthesisConstructed = true
