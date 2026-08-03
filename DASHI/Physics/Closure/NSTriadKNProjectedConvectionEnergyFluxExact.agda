@@ -17,11 +17,10 @@ module DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact where
 --
 -- PURPOSE
 -- Isolate the exact energy-flux algebra used before Luo's small-time
--- bootstrap.  The hard high-pass is now known to be idempotent and Hermitian
--- self-adjoint under the repository's coefficient-unitary Parseval convention,
--- and its hard high-output triad selector is exact.  The remaining physical
--- adapter must identify pressure cancellation, signed coefficients, incidence
--- multiplicity and the literal energy/flux quantities on one common carrier.
+-- bootstrap.  Hard high-pass idempotence and self-adjointness are closed for
+-- the selected coefficient-unitary Hermitian pairing.  The official physical
+-- L2 identification remains fail-closed until the repository's finite-sum
+-- norm adapter supplies that Parseval leaf on the same carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -137,9 +136,13 @@ pressureCancellationTransportConstructed = true
 weightedSchurFluxEnergyCompositionConstructed : Bool
 weightedSchurFluxEnergyCompositionConstructed = true
 
+coefficientUnitaryHardHighPassSelfAdjointnessClosed : Bool
+coefficientUnitaryHardHighPassSelfAdjointnessClosed =
+  Orthogonal.coefficientUnitaryHardProjectorOrthogonalConstructed
+
 periodicHardHighPassSelfAdjointnessClosed : Bool
 periodicHardHighPassSelfAdjointnessClosed =
-  Orthogonal.hardProjectorOrthogonalCertificateConstructed
+  Orthogonal.officialPhysicalHermitianParsevalTransportSelected
 
 literalProjectedConvectionEnumerationClosed : Bool
 literalProjectedConvectionEnumerationClosed =
@@ -160,10 +163,15 @@ weightedSchurFluxEnergyCompositionConstructedIsTrue :
   weightedSchurFluxEnergyCompositionConstructed ≡ true
 weightedSchurFluxEnergyCompositionConstructedIsTrue = refl
 
-periodicHardHighPassSelfAdjointnessClosedIsTrue :
-  periodicHardHighPassSelfAdjointnessClosed ≡ true
-periodicHardHighPassSelfAdjointnessClosedIsTrue =
-  Orthogonal.hardProjectorOrthogonalCertificateConstructedIsTrue
+coefficientUnitaryHardHighPassSelfAdjointnessClosedIsTrue :
+  coefficientUnitaryHardHighPassSelfAdjointnessClosed ≡ true
+coefficientUnitaryHardHighPassSelfAdjointnessClosedIsTrue =
+  Orthogonal.coefficientUnitaryHardProjectorOrthogonalConstructedIsTrue
+
+periodicHardHighPassSelfAdjointnessClosedIsFalse :
+  periodicHardHighPassSelfAdjointnessClosed ≡ false
+periodicHardHighPassSelfAdjointnessClosedIsFalse =
+  Orthogonal.officialPhysicalHermitianParsevalTransportSelectedIsFalse
 
 literalProjectedConvectionEnumerationClosedIsTrue :
   literalProjectedConvectionEnumerationClosed ≡ true
