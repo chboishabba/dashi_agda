@@ -13,8 +13,13 @@ check() {
 check DASHI/Physics/Closure/NSTriadKNLocalizedBKMScaleDictionaryExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoPrimarySourceProofArchitectureExact.agda
 check DASHI/Physics/Closure/NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda
+check DASHI/Physics/Closure/NSTriadKNPhysicalHardHighTriadSelectionExact.agda
+check DASHI/Physics/Closure/NSTriadKNLuoPhysicalEnumerationReuseExact.agda
+check DASHI/Physics/Closure/NSTriadKNPeriodicHardProjectorAlgebraExact.agda
+check DASHI/Physics/Closure/NSTriadKNHardSmoothLittlewoodPaleyTransferExact.agda
 check DASHI/Physics/Closure/NSTriadKNPhysicalCutoffFluxWeightedSchurExact.agda
 check DASHI/Physics/Closure/NSTriadKNWeightedSchurPhysicalFluxReuseExact.agda
+check DASHI/Physics/Closure/NSTriadKNLuoFullShellFluxAdapterExact.agda
 check DASHI/Physics/Closure/NSTriadKNProjectedConvectionEnergyFluxExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyBootstrapExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda
