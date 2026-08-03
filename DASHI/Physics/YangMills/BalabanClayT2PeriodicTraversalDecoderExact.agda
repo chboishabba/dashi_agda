@@ -65,7 +65,7 @@ replayAppendTerminal root (direction ∷ left) right =
 
 record DirectionInverseLaw (n : Nat) : Set₁ where
   field
-    forwardThenReverse : ∀ block direction →
+    forwardThenReverse : ∀ (block : Carrier.PeriodicBlock n) (direction : SignedAxis4) →
       Periodic.signedStep
         (Periodic.signedStep block direction)
         (reverseDirection direction)
@@ -128,11 +128,11 @@ record ParentDistanceTermination {n}
     (bfs : Periodic.CertifiedPeriodicBreadthFirstData n polymer) : Set₁ where
   field
     parentChain : Carrier.PeriodicBlock n → List (Carrier.PeriodicBlock n)
-    chainBeginsAtBlock : ∀ block → Set
-    everySuccessorIsParent : ∀ block → Set
-    distanceStrictlyDecreasesAtEveryStep : ∀ block → Set
-    chainEndsAtRoot : ∀ block → Set
-    noRepeatedNonRootBlock : ∀ block → Set
+    chainBeginsAtBlock : ∀ (block : Carrier.PeriodicBlock n) → Set
+    everySuccessorIsParent : ∀ (block : Carrier.PeriodicBlock n) → Set
+    distanceStrictlyDecreasesAtEveryStep : ∀ (block : Carrier.PeriodicBlock n) → Set
+    chainEndsAtRoot : ∀ (block : Carrier.PeriodicBlock n) → Set
+    noRepeatedNonRootBlock : ∀ (block : Carrier.PeriodicBlock n) → Set
 
 open ParentDistanceTermination public
 
