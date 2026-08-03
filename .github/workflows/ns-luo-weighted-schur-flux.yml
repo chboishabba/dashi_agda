@@ -6,28 +6,16 @@ on:
     branches:
       - agent/balaban-primary-averaging-qstar
     paths:
-      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMScaleDictionaryExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPrimarySourceProofArchitectureExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalHardHighTriadSelectionExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPhysicalEnumerationReuseExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPeriodicHardProjectorAlgebraExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNOfficialFiniteFourierHermitianParsevalExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNHardHighPhysicalZ3PairEncodingExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNRegularLerayHopfPeriodicSolutionExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFiniteHermitianDiagonalMultiplierExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardProjectorCoefficientSelfAdjointExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardProjectorParsevalTransportExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoRadialSmoothMultiplierExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNHardSmoothLittlewoodPaleyTransferExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPeriodicMultiplierKernelBoundExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalHardHighTriadSelectionExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCutoffFluxWeightedSchurExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNWeightedSchurPhysicalFluxReuseExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoHardHighFullShellPhysicalIdentificationExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoFullShellFluxAdapterExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNProjectedConvectionEnergyFluxExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyBootstrapExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPhysicalEnergyDissipationTimeExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPublishedContinuationAuthorityExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurContinuationSynthesisExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMRouteIntegration.agda'
       - 'docs/ns-localized-bkm-variable-dictionary.md'
       - 'scripts/check_ns_luo_weighted_schur_flux.py'
@@ -40,28 +28,16 @@ on:
     branches:
       - master
     paths:
-      - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMScaleDictionaryExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPrimarySourceProofArchitectureExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNProjectedConvolutionIncidenceEnumerationExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalHardHighTriadSelectionExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPhysicalEnumerationReuseExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPeriodicHardProjectorAlgebraExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNOfficialFiniteFourierHermitianParsevalExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNHardHighPhysicalZ3PairEncodingExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNRegularLerayHopfPeriodicSolutionExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFiniteHermitianDiagonalMultiplierExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardProjectorCoefficientSelfAdjointExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNHardProjectorParsevalTransportExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoRadialSmoothMultiplierExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNHardSmoothLittlewoodPaleyTransferExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPeriodicMultiplierKernelBoundExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalHardHighTriadSelectionExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCutoffFluxWeightedSchurExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNWeightedSchurPhysicalFluxReuseExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoHardHighFullShellPhysicalIdentificationExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoFullShellFluxAdapterExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNProjectedConvectionEnergyFluxExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyBootstrapExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPhysicalEnergyDissipationTimeExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoPublishedContinuationAuthorityExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurContinuationSynthesisExact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda'
       - 'DASHI/Physics/Closure/NSTriadKNLocalizedBKMRouteIntegration.agda'
       - 'docs/ns-localized-bkm-variable-dictionary.md'
       - 'scripts/check_ns_luo_weighted_schur_flux.py'
@@ -98,7 +74,7 @@ jobs:
       - name: Restore Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@v9
 
-      - name: Run focused Luo weighted-Schur continuation checker
+      - name: Run focused official Luo continuation checker
         shell: bash
         run: |
           nix develop --accept-flake-config --command bash -lc '
