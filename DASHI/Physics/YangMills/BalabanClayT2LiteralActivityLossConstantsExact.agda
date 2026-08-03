@@ -192,7 +192,8 @@ record RelativeDeterminantLossData
       traceLogSeries (relativeHessian index)
       ≡ exactTraceLog index
 
-    absoluteTraceLog subtractOne : Scalar → Scalar
+    absoluteTraceLog : Index → Scalar
+    subtractOne : Scalar → Scalar
     traceLogSeriesAbsoluteBound : ∀ (index : Index) →
       SmallFieldIndex index →
       LessEqual (absoluteTraceLog index)
