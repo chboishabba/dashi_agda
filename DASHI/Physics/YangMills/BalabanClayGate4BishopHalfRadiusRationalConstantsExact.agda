@@ -42,15 +42,15 @@ oneEighth = + 1 / 8
 ninetyFiveNinetySix = + 95 / 96
 
 sineSuccessiveRatioNormalization :
-  quarter / six ≡ oneTwentyFourth
+  quarter * (+ 1 / 6) ≡ oneTwentyFourth
 sineSuccessiveRatioNormalization = ℚRing.solve-∀
 
 cosineSuccessiveRatioNormalization :
-  quarter / two ≡ oneEighth
+  quarter * (+ 1 / 2) ≡ oneEighth
 cosineSuccessiveRatioNormalization = ℚRing.solve-∀
 
 normalizedSineDenominatorLowerConstant :
-  1ℚ - (quarter / twentyFour) ≡ ninetyFiveNinetySix
+  1ℚ - (quarter * (+ 1 / 24)) ≡ ninetyFiveNinetySix
 normalizedSineDenominatorLowerConstant = ℚRing.solve-∀
 
 record HalfRadiusSeriesOrderInputs
