@@ -56,18 +56,16 @@ physicalTData :
   PhysicalTConstruction Scale Fine SlowField Component Functional →
   T.FiniteLocalTOperationData Scale Fine SlowField Component Functional ℚ
 physicalTData construction = record
-  { T.FiniteLocalTOperationData.sumData = sumData construction
-  ; T.FiniteLocalTOperationData.classData = classData construction
-  ; T.FiniteLocalTOperationData.fastFibre = fastFibre construction
-  ; T.FiniteLocalTOperationData.localDensity = λ scale component slow fine →
+  { sumData = sumData construction
+  ; classData = classData construction
+  ; fastFibre = fastFibre construction
+  ; localDensity = λ scale component slow fine →
       Six.activity (sixFactors construction) scale
         (traversalOf construction component slow fine)
-  ; T.FiniteLocalTOperationData.evaluateFunctional =
-      evaluateFunctional construction
-  ; T.FiniteLocalTOperationData.multiply = multiply construction
-  ; T.FiniteLocalTOperationData.oneFunctional = oneFunctional construction
-  ; T.FiniteLocalTOperationData.largeFieldIndicator =
-      largeFieldIndicator construction
+  ; evaluateFunctional = evaluateFunctional construction
+  ; multiply = multiply construction
+  ; oneFunctional = oneFunctional construction
+  ; largeFieldIndicator = largeFieldIndicator construction
   }
 
 record PhysicalTDensityIdentification
@@ -91,11 +89,10 @@ physicalTDensityIdentificationFromConstruction :
       Scale Fine SlowField Component Functional) →
   PhysicalTDensityIdentification (physicalTData construction)
 physicalTDensityIdentificationFromConstruction construction = record
-  { PhysicalTDensityIdentification.Traversal = Traversal construction
-  ; PhysicalTDensityIdentification.sixFactors = sixFactors construction
-  ; PhysicalTDensityIdentification.traversalOf = traversalOf construction
-  ; PhysicalTDensityIdentification.densityIsExistingActivity =
-      λ scale component slow fine → refl
+  { Traversal = Traversal construction
+  ; sixFactors = sixFactors construction
+  ; traversalOf = traversalOf construction
+  ; densityIsExistingActivity = λ scale component slow fine → refl
   }
 
 physicalTDensityBelowOneSixteenth :
