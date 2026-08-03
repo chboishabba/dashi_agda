@@ -226,24 +226,52 @@ multiplyAssociative left middle right =
 identityLeft : ∀ (value : SU2.RationalUnitQuaternion) →
   multiplyRationalSU2 identityRationalSU2 value ≡ value
 identityLeft value = rationalUnitQuaternionExtensionality
-  (regroup (SU2.realPart value))
-  (regroup (SU2.imagI value))
-  (regroup (SU2.imagJ value))
-  (regroup (SU2.imagK value))
+  (regroup1
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
+  (regroup2
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
+  (regroup3
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
+  (regroup4
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
   where
-  regroup : (v : ℚ) → 1ℚ * v ≡ v
-  regroup = ℚRing.solve-∀
+  regroup1 : (w x y zVal : ℚ) → 1ℚ * w - 0ℚ * x - 0ℚ * y - 0ℚ * zVal ≡ w
+  regroup1 = ℚRing.solve-∀
+  regroup2 : (w x y zVal : ℚ) → 1ℚ * x + 0ℚ * w + 0ℚ * zVal - 0ℚ * y ≡ x
+  regroup2 = ℚRing.solve-∀
+  regroup3 : (w x y zVal : ℚ) → 1ℚ * y - 0ℚ * zVal + 0ℚ * w + 0ℚ * x ≡ y
+  regroup3 = ℚRing.solve-∀
+  regroup4 : (w x y zVal : ℚ) → 1ℚ * zVal + 0ℚ * y - 0ℚ * x + 0ℚ * w ≡ zVal
+  regroup4 = ℚRing.solve-∀
 
 identityRight : ∀ (value : SU2.RationalUnitQuaternion) →
   multiplyRationalSU2 value identityRationalSU2 ≡ value
 identityRight value = rationalUnitQuaternionExtensionality
-  (regroup (SU2.realPart value))
-  (regroup (SU2.imagI value))
-  (regroup (SU2.imagJ value))
-  (regroup (SU2.imagK value))
+  (regroup1
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
+  (regroup2
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
+  (regroup3
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
+  (regroup4
+    (SU2.realPart value) (SU2.imagI value)
+    (SU2.imagJ value) (SU2.imagK value))
   where
-  regroup : (v : ℚ) → v * 1ℚ ≡ v
-  regroup = ℚRing.solve-∀
+  regroup1 : (w x y zVal : ℚ) → w * 1ℚ - x * 0ℚ - y * 0ℚ - zVal * 0ℚ ≡ w
+  regroup1 = ℚRing.solve-∀
+  regroup2 : (w x y zVal : ℚ) → w * 0ℚ + x * 1ℚ + y * 0ℚ - zVal * 0ℚ ≡ x
+  regroup2 = ℚRing.solve-∀
+  regroup3 : (w x y zVal : ℚ) → w * 0ℚ - x * 0ℚ + y * 1ℚ + zVal * 0ℚ ≡ y
+  regroup3 = ℚRing.solve-∀
+  regroup4 : (w x y zVal : ℚ) → w * 0ℚ + x * 0ℚ - y * 0ℚ + zVal * 1ℚ ≡ zVal
+  regroup4 = ℚRing.solve-∀
 
 inverseLeft : ∀ (value : SU2.RationalUnitQuaternion) →
   multiplyRationalSU2 (inverseRationalSU2 value) value
