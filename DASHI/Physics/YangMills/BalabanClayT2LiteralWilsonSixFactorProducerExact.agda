@@ -36,45 +36,45 @@ record LiteralBadTraversalData
     LiteralBadBlock : Scale → Field → Block → Set
     LiteralBadTraversal : Scale → Field → Traversal → Set
 
-    literalBadBlockPredicateDefinition : ∀ scale field block →
+    literalBadBlockPredicateDefinition : ∀ (scale : Scale) (field : Field) (block : Block) →
       LiteralBadBlock scale field block →
       Gap.squareℚ badThreshold
       ≤ Gap.literalChordalDistanceSq
           (plaquetteHolonomy field
             (canonicalBadPlaquette scale field block))
 
-    badBlockContainsBadPlaquette : ∀ scale field block →
+    badBlockContainsBadPlaquette : ∀ (scale : Scale) (field : Field) (block : Block) →
       LiteralBadBlock scale field block →
       Gap.squareℚ badThreshold
       ≤ Gap.literalChordalDistanceSq
           (plaquetteHolonomy field
             (canonicalBadPlaquette scale field block))
 
-    canonicalWitnessBelongsToTraversal : ∀ scale field traversal block →
+    canonicalWitnessBelongsToTraversal : ∀ (scale : Scale) (field : Field) (traversal : Traversal) (block : Block) →
       LiteralBadTraversal scale field traversal → Set
 
     distinctBadBlocksHaveDistinctWitnessPlaquettes :
-      ∀ scale field traversal first second →
+      ∀ (scale : Scale) (field : Field) (traversal : Traversal) (first second : Block) →
       LiteralBadTraversal scale field traversal → Set
 
     canonicalWitnessAssignmentInjective :
-      ∀ scale field traversal →
+      ∀ (scale : Scale) (field : Field) (traversal : Traversal) →
       LiteralBadTraversal scale field traversal → Set
 
     localPlaquetteAction : Scale → Field → Plaquette → ℚ
     localWilsonAction : Scale → Field → Traversal → ℚ
 
     order : Gap.RationalWilsonGapOrder
-    halfBetaNonnegative : ∀ scale →
+    halfBetaNonnegative : ∀ (scale : Scale) →
       0ℚ ≤ Gap.halfℚ * couplingBeta scale
 
-    localActionMatchesWilson : ∀ scale field plaquette →
+    localActionMatchesWilson : ∀ (scale : Scale) (field : Field) (plaquette : Plaquette) →
       localPlaquetteAction scale field plaquette
       ≡ Gap.wilsonPlaquetteAction (couplingBeta scale)
           (plaquetteHolonomy field plaquette)
 
     witnessActionSumBelowTotal :
-      ∀ scale field traversal →
+      ∀ (scale : Scale) (field : Field) (traversal : Traversal) →
       LiteralBadTraversal scale field traversal →
       Gap.sumMap (badBlocks traversal)
         (λ block →
@@ -139,7 +139,7 @@ record LiteralBadTraversalWitnesses
     (scale : Scale) (field : Field) (traversal : Traversal) : Set₁ where
   field
     traversalBad : LiteralBadTraversal dataSet scale field traversal
-    everyListedBlockBad : ∀ block →
+    everyListedBlockBad : ∀ (block : Block) →
       LiteralBadBlock dataSet scale field block
 
 open LiteralBadTraversalWitnesses public
@@ -224,7 +224,7 @@ record LiteralWilsonSixFactorData (Scale Traversal : Set) : Set₁ where
       localizationUpper patchUpper : ℚ
 
     factorProduct : Scale → Traversal → ℚ
-    factorProductDefinition : ∀ scale traversal →
+    factorProductDefinition : ∀ (scale : Scale) (traversal : Traversal) →
       factorProduct scale traversal
       ≡ actionFactor scale traversal
         * (jacobianFactor scale traversal
@@ -233,10 +233,10 @@ record LiteralWilsonSixFactorData (Scale Traversal : Set) : Set₁ where
         * (localizationFactor scale traversal
         * patchFactor scale traversal))))
 
-    literalWilsonActivityFactorization : ∀ scale traversal →
+    literalWilsonActivityFactorization : ∀ (scale : Scale) (traversal : Traversal) →
       activity scale traversal ≤ factorProduct scale traversal
 
-    factorNonnegative : ∀ scale traversal →
+    factorNonnegative : ∀ (scale : Scale) (traversal : Traversal) →
       0ℚ ≤ actionFactor scale traversal
       × (0ℚ ≤ jacobianFactor scale traversal
       × (0ℚ ≤ determinantFactor scale traversal
@@ -252,65 +252,65 @@ record LiteralWilsonSixFactorData (Scale Traversal : Set) : Set₁ where
       × (0ℚ ≤ localizationUpper
       × 0ℚ ≤ patchUpper))))
 
-    wilsonActionFactorExact : ∀ scale traversal →
+    wilsonActionFactorExact : ∀ (scale : Scale) (traversal : Traversal) →
       actionFactor scale traversal ≤ actionUpper
 
-    haarDensityInExponentialCoordinatesExact : ∀ scale traversal →
+    haarDensityInExponentialCoordinatesExact : ∀ (scale : Scale) (traversal : Traversal) →
       jacobianFactor scale traversal ≤ jacobianUpper
-    dexpDeterminantFormula : ∀ scale traversal →
+    dexpDeterminantFormula : ∀ (scale : Scale) (traversal : Traversal) →
       jacobianFactor scale traversal ≡ jacobianFactor scale traversal
-    logHaarDensitySecondOrderBound : ∀ scale traversal →
+    logHaarDensitySecondOrderBound : ∀ (scale : Scale) (traversal : Traversal) →
       jacobianFactor scale traversal ≤ jacobianUpper
-    haarJacobianPolymerLossBound : ∀ scale traversal →
+    haarJacobianPolymerLossBound : ∀ (scale : Scale) (traversal : Traversal) →
       jacobianFactor scale traversal ≤ jacobianUpper
 
-    fluctuationHessianDeterminantRatioExact : ∀ scale traversal →
+    fluctuationHessianDeterminantRatioExact : ∀ (scale : Scale) (traversal : Traversal) →
       determinantFactor scale traversal ≡ determinantFactor scale traversal
-    referenceFluctuationHessianPositiveOnGaugeSlice : ∀ scale traversal → Set
-    physicalFluctuationHessianPositiveOnSmallField : ∀ scale traversal → Set
-    relativeFluctuationHessianDefinition : ∀ scale traversal →
+    referenceFluctuationHessianPositiveOnGaugeSlice : ∀ (scale : Scale) (traversal : Traversal) → Set
+    physicalFluctuationHessianPositiveOnSmallField : ∀ (scale : Scale) (traversal : Traversal) → Set
+    relativeFluctuationHessianDefinition : ∀ (scale : Scale) (traversal : Traversal) →
       determinantFactor scale traversal ≡ determinantFactor scale traversal
-    relativeFluctuationHessianNormBelowOne : ∀ scale traversal → Set
-    traceLogSeriesConverges : ∀ scale traversal → Set
-    traceLogDeterminantIdentity : ∀ scale traversal →
+    relativeFluctuationHessianNormBelowOne : ∀ (scale : Scale) (traversal : Traversal) → Set
+    traceLogSeriesConverges : ∀ (scale : Scale) (traversal : Traversal) → Set
+    traceLogDeterminantIdentity : ∀ (scale : Scale) (traversal : Traversal) →
       determinantFactor scale traversal ≡ determinantFactor scale traversal
-    traceLogPolymerLossBound : ∀ scale traversal →
+    traceLogPolymerLossBound : ∀ (scale : Scale) (traversal : Traversal) →
       determinantFactor scale traversal ≤ determinantUpper
-    fluctuationDeterminantPolymerLossBound : ∀ scale traversal →
+    fluctuationDeterminantPolymerLossBound : ∀ (scale : Scale) (traversal : Traversal) →
       determinantFactor scale traversal ≤ determinantUpper
 
-    plaquetteHolonomyBCHExpansionExact : ∀ scale traversal →
+    plaquetteHolonomyBCHExpansionExact : ∀ (scale : Scale) (traversal : Traversal) →
       bchFactor scale traversal ≡ bchFactor scale traversal
-    plaquetteBCHRemainderCubic : ∀ scale traversal →
+    plaquetteBCHRemainderCubic : ∀ (scale : Scale) (traversal : Traversal) →
       bchFactor scale traversal ≤ bchUpper
-    traversalBCHRemainderSumBound : ∀ scale traversal →
+    traversalBCHRemainderSumBound : ∀ (scale : Scale) (traversal : Traversal) →
       bchFactor scale traversal ≤ bchUpper
-    bchPolymerLossBound : ∀ scale traversal →
+    bchPolymerLossBound : ∀ (scale : Scale) (traversal : Traversal) →
       bchFactor scale traversal ≤ bchUpper
 
-    localizationSupportContainedInCollar : ∀ scale traversal → Set
-    localizationTaylorRemainderBound : ∀ scale traversal →
+    localizationSupportContainedInCollar : ∀ (scale : Scale) (traversal : Traversal) → Set
+    localizationTaylorRemainderBound : ∀ (scale : Scale) (traversal : Traversal) →
       localizationFactor scale traversal ≤ localizationUpper
-    localizationExponentialCollarDecay : ∀ scale traversal →
+    localizationExponentialCollarDecay : ∀ (scale : Scale) (traversal : Traversal) →
       localizationFactor scale traversal ≤ localizationUpper
-    localizationPolymerLossBound : ∀ scale traversal →
+    localizationPolymerLossBound : ∀ (scale : Scale) (traversal : Traversal) →
       localizationFactor scale traversal ≤ localizationUpper
 
-    bulkToBoundaryActivityNormBound : ∀ scale traversal →
+    bulkToBoundaryActivityNormBound : ∀ (scale : Scale) (traversal : Traversal) →
       patchFactor scale traversal ≤ patchUpper
-    bulkToInterfaceActivityNormBound : ∀ scale traversal →
+    bulkToInterfaceActivityNormBound : ∀ (scale : Scale) (traversal : Traversal) →
       patchFactor scale traversal ≤ patchUpper
-    bulkToCornerActivityNormBound : ∀ scale traversal →
+    bulkToCornerActivityNormBound : ∀ (scale : Scale) (traversal : Traversal) →
       patchFactor scale traversal ≤ patchUpper
-    bulkToNestedActivityNormBound : ∀ scale traversal →
+    bulkToNestedActivityNormBound : ∀ (scale : Scale) (traversal : Traversal) →
       patchFactor scale traversal ≤ patchUpper
-    transferCutActivityLossBound : ∀ scale traversal →
+    transferCutActivityLossBound : ∀ (scale : Scale) (traversal : Traversal) →
       patchFactor scale traversal ≤ patchUpper
-    nestedPatchActivityCompatibility : ∀ scale traversal → Set
-    patchPolymerLossBound : ∀ scale traversal →
+    nestedPatchActivityCompatibility : ∀ (scale : Scale) (traversal : Traversal) → Set
+    patchPolymerLossBound : ∀ (scale : Scale) (traversal : Traversal) →
       patchFactor scale traversal ≤ patchUpper
 
-    physicalFactorProductBelowOneSixteenth : ∀ scale traversal →
+    physicalFactorProductBelowOneSixteenth : ∀ (scale : Scale) (traversal : Traversal) →
       factorProduct scale traversal ≤ Product.oneSixteenth
 
     transitive : ∀ {left middle right} →
