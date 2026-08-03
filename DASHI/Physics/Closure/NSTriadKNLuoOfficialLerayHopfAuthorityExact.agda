@@ -198,6 +198,22 @@ selectedRegularBeforeTerminal {carrier = carrier}
     (solvesFromInitialData S)
     (regularityMatchesSource S)
 
+-- Compatibility theorem: this is not a second regularity field.  It is exactly
+-- the single source-to-Leray--Hopf derivation above.
+regularBeforeTerminal :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {carrier : OfficialPeriodicLuoSourceCarrier InitialDatum Solution Time}
+    {initial : InitialDatum}
+    {solution : Solution}
+    {terminal : Time} →
+  OfficialLuoSolutionSelection carrier initial solution terminal →
+  LH.RegularLerayHopfBeforeTerminal
+    (lerayHopfSolutionAt carrier initial solution) terminal
+regularBeforeTerminal = selectedRegularBeforeTerminal
+
 selectedLuoAuthorityLevel : ProofLevel
 selectedLuoAuthorityLevel = standardImported
 
