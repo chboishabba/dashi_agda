@@ -50,6 +50,9 @@ timeDimension = dimension (+ zero) (+ zero) (+ (suc zero))
 inverseLengthDimension : MechanicalDimension
 inverseLengthDimension = dimension (+ zero) -[1+ zero ] (+ zero)
 
+inverseAreaDimension : MechanicalDimension
+inverseAreaDimension = dimension (+ zero) -[1+ suc zero ] (+ zero)
+
 frequencyDimension : MechanicalDimension
 frequencyDimension = dimension (+ zero) (+ zero) -[1+ zero ]
 
@@ -96,6 +99,14 @@ newtonianPotentialDimension = speedSquaredDimension
 velocityGradientDimension : MechanicalDimension
 velocityGradientDimension = frequencyDimension
 
+laplacianVelocityDimension : MechanicalDimension
+laplacianVelocityDimension =
+  dimension (+ zero) -[1+ zero ] -[1+ zero ]
+
+specificDissipationRateDimension : MechanicalDimension
+specificDissipationRateDimension =
+  dimension (+ zero) (+ (suc (suc zero))) -[1+ suc (suc zero) ]
+
 actionDimension : MechanicalDimension
 actionDimension =
   dimension (+ (suc zero)) (+ (suc (suc zero))) -[1+ zero ]
@@ -127,6 +138,29 @@ potentialMatchesSpeedSquared = refl
 viscosityMatchesLengthVelocity :
   lengthDimension ⊗ᴰ velocityDimension ≡ kinematicViscosityDimension
 viscosityMatchesLengthVelocity = refl
+
+velocityTimeDerivativeIsAcceleration :
+  velocityDimension ⊗ᴰ frequencyDimension ≡ accelerationDimension
+velocityTimeDerivativeIsAcceleration = refl
+
+advectionIsAcceleration :
+  velocityDimension ⊗ᴰ velocityGradientDimension ≡ accelerationDimension
+advectionIsAcceleration = refl
+
+viscousLaplacianIsAcceleration :
+  kinematicViscosityDimension ⊗ᴰ laplacianVelocityDimension
+  ≡ accelerationDimension
+viscousLaplacianIsAcceleration = refl
+
+pressureGradientMatchesDensityAcceleration :
+  pressureDimension ⊗ᴰ inverseLengthDimension
+  ≡ massDensityDimension ⊗ᴰ accelerationDimension
+pressureGradientMatchesDensityAcceleration = refl
+
+specificDissipationIntegratedInTimeIsSpecificEnergy :
+  specificDissipationRateDimension ⊗ᴰ timeDimension
+  ≡ speedSquaredDimension
+specificDissipationIntegratedInTimeIsSpecificEnergy = refl
 
 ------------------------------------------------------------------------
 -- Dimension-indexed quantities.  The scalar carrier is intentionally
