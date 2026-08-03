@@ -3,8 +3,9 @@
 
 This is a compact reference implementation of the Agda disclosure boundary.
 It is not an encryption, consent, access-control, or irreversible-publication
-solution.  The builder fails closed when a field is unclassified or an action
-is unknown, and it refuses to silently remove the reserved attribution field.
+solution. The builder requires every source record to carry attribution, fails
+closed when a field is unclassified or an action is unknown, and refuses to
+silently remove the reserved attribution field.
 """
 
 from __future__ import annotations
@@ -99,6 +100,8 @@ def build_projection(source: dict[str, Any], policy: dict[str, Any]) -> dict[str
         fields = record.get("fields")
         if not isinstance(fields, dict):
             raise ProjectionError(f"record {index}.fields must be an object")
+        if "attribution" not in fields:
+            raise ProjectionError(f"record {index} is missing required attribution")
 
         projected_fields: dict[str, Any] = {}
         for field_name, value in fields.items():
@@ -181,19 +184,33 @@ def self_test() -> None:
     assert fields["process"] == "order-sensitive culinary process"
     assert artifact["publication_receipt"]["claims_complete_non_leakage"] is False
 
-    bad_policy = {
+    removal_policy = {
         "default": "reject",
         "rules": {"attribution": {"action": "remove"}},
     }
     try:
         build_projection(
             {"records": [{"fields": {"attribution": "source"}}]},
-            bad_policy,
+            removal_policy,
         )
     except ProjectionError:
         pass
     else:
         raise AssertionError("attribution removal did not fail closed")
+
+    missing_attribution_policy = {
+        "default": "reject",
+        "rules": {"process": {"action": "retain"}},
+    }
+    try:
+        build_projection(
+            {"records": [{"fields": {"process": "candidate route"}}]},
+            missing_attribution_policy,
+        )
+    except ProjectionError:
+        pass
+    else:
+        raise AssertionError("missing attribution did not fail closed")
 
     print("public projection self-test passed")
 
