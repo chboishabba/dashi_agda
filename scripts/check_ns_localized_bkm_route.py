@@ -160,7 +160,7 @@ def main() -> int:
         "CutoffForcedTailLocalizedOutput",
         "forcedTailIntegralBound",
         "LuoCutoffLocalizedMajorant",
-        "periodicHardShellProjectorConstructed ≡ true",
+        "periodicHardLowPassProjectorConstructed ≡ true",
         "luoLocalizedQuantityBelowThreshold",
         "majorantToLuoExplicitCutoffCriterion",
         "forcedTailOutputControlsLuoCutoffQuantity = true",
