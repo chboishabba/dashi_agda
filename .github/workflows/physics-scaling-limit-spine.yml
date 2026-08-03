@@ -1,0 +1,50 @@
+name: Physics scaling and limit spine
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Units/**'
+      - 'DASHI/Physics/Limits/**'
+      - 'DASHI/Physics/Closure/NSTriadKNLuoScalingExact.agda'
+      - 'DASHI/Physics/Closure/GRWeakFieldDimensionExact.agda'
+      - 'DASHI/Physics/Closure/HEPDataCMSBelowZDrellYanClaimExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5MassScaleDimensionExact.agda'
+      - 'DASHI/Unified/QuantumClassicalGravityBoundaryIntegration.agda'
+      - 'DASHI/Physics/PhysicsScalingLimitSpineValidation.agda'
+      - 'scripts/check_physics_scaling_limit_spine.sh'
+      - '.github/workflows/physics-scaling-limit-spine.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda-typecheck:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and writable standard library
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install \
+            --yes --quiet agda-bin agda-stdlib >/tmp/agda-install.log
+          cp -a /usr/share/agda-stdlib /tmp/agda-stdlib
+          chmod -R u+w /tmp/agda-stdlib
+          agda --version
+
+      - name: Check physics scaling and limit spine
+        run: |
+          chmod +x scripts/check_physics_scaling_limit_spine.sh
+          ./scripts/check_physics_scaling_limit_spine.sh \
+            2>&1 | tee /tmp/physics-scaling-limit-spine.log
+
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: physics-scaling-limit-spine-diagnostic
+          path: /tmp/physics-scaling-limit-spine.log
+          if-no-files-found: ignore
