@@ -140,10 +140,11 @@ record NewtonianPoissonLimitAuthority
 open NewtonianPoissonLimitAuthority public
 
 selectedPoissonLimit :
-  ∀ {model hypotheses} →
+  (model : WeakFieldScalarModel) →
+  (hypotheses : LinearizedEinsteinPoissonHypotheses model) →
   (authority : NewtonianPoissonLimitAuthority model hypotheses) →
   Einstein00ReducesToPoisson authority
-selectedPoissonLimit {hypotheses = hypotheses} authority =
+selectedPoissonLimit model hypotheses authority =
   poissonLimitImported authority
     (weakMetricPerturbation hypotheses)
     (traceReversedLinearization hypotheses)
