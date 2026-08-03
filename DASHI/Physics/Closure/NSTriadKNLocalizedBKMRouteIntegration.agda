@@ -7,13 +7,16 @@ module DASHI.Physics.Closure.NSTriadKNLocalizedBKMRouteIntegration where
 --   * an inventory of existing periodic hard-shell LP/Bony infrastructure;
 --   * exact source-specific continuation target interfaces;
 --   * fixed-cutoff and time-dependent low/high assembly theorems;
---   * an explicit semantic adapter boundary from the two live blockers.
+--   * an explicit semantic adapter boundary from the two live blockers;
+--   * an authority audit separating assembled routes from postulate-free
+--     analytic constructions.
 --
 -- It also records what is not present:
 --   * a complete periodic smooth LP projector package;
 --   * a literal nonlinear Bony decomposition tied to the blocker residuals;
 --   * a solution-dependent dissipation wavenumber Q(t);
 --   * a theorem turning weighted-Schur residues into localized vorticity;
+--   * postulate-free constructions of the two live analytic blockers;
 --   * a postulate-free localized continuation authority.
 --
 -- No BKM or Clay promotion gate is changed by this module.
@@ -26,6 +29,7 @@ import DASHI.Physics.Closure.NSTriadKNLittlewoodPaleyInfrastructureInventory as 
 import DASHI.Physics.Closure.NSTriadKNLocalizedBKMSourceAndTargetAudit as Sources
 import DASHI.Physics.Closure.NSTriadKNFiniteLowUniformHighAssembly as Assembly
 import DASHI.Physics.Closure.NSTriadKNBlockerToLocalizedBKMCompatibility as Compatibility
+import DASHI.Physics.Closure.NSTriadKNAnalyticBlockerAuthorityAudit as Authority
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds as PairBounds
 
 record LocalizedBKMRouteIntegrationReceipt : Set where
@@ -42,6 +46,18 @@ record LocalizedBKMRouteIntegrationReceipt : Set where
 
     blockerSemanticMismatchAuditClosed :
       Compatibility.semanticMismatchAuditClosed ≡ true
+
+    blockerAuthorityBoundaryAudited :
+      Authority.analyticBlockerAuthorityBoundaryAudited ≡ true
+
+    blocker1RestrictedRowRouteAssembled :
+      Authority.blocker1RestrictedRowRouteAssembled ≡ true
+
+    blocker1PostulateFreeAuthorityClosed :
+      Authority.blocker1PostulateFreeAuthorityClosed ≡ false
+
+    blocker2ResidueScaleCompatibilityConstructed :
+      Authority.blocker2ResidueScaleCompatibilityConstructed ≡ false
 
     fullLocalizedProjectorInterfaceClosed :
       LP.fullLocalizedContinuationProjectorInterfaceClosed ≡ false
@@ -81,6 +97,10 @@ localizedBKMRouteIntegrationReceipt = receipt
   Assembly.finiteLowUniformHighAssemblyClosedIsTrue
   Sources.localizedBKMSourceTargetsRecordedIsTrue
   Compatibility.semanticMismatchAuditClosedIsTrue
+  Authority.analyticBlockerAuthorityBoundaryAuditedIsTrue
+  Authority.blocker1RestrictedRowRouteAssembledIsTrue
+  Authority.blocker1PostulateFreeAuthorityClosedIsFalse
+  Authority.blocker2ResidueScaleCompatibilityConstructedIsFalse
   LP.fullLocalizedContinuationProjectorInterfaceClosedIsFalse
   Compatibility.literalNavierStokesBonyDecompositionClosedIsFalse
   Compatibility.forcedTailResidualsIdentifiedWithBonyPiecesIsFalse
