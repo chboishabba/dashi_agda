@@ -95,12 +95,12 @@ badPlaquetteTraceDeficitLowerBound :
   ∀ {Scale Traversal Block Plaquette Field}
     (dataSet : LiteralBadTraversalData
       Scale Traversal Block Plaquette Field)
-    scale field block →
-  LiteralBadBlock dataSet scale field block →
+    (scale : Scale) (fld : Field) (block : Block) →
+  LiteralBadBlock dataSet scale fld block →
   Gap.squareℚ (badThreshold dataSet)
   ≤ Gap.literalChordalDistanceSq
-      (plaquetteHolonomy dataSet field
-        (canonicalBadPlaquette dataSet scale field block))
+      (plaquetteHolonomy dataSet fld
+        (canonicalBadPlaquette dataSet scale fld block))
 badPlaquetteTraceDeficitLowerBound dataSet =
   badBlockContainsBadPlaquette dataSet
 
@@ -108,39 +108,39 @@ witnessPlaquetteActionLowerBound :
   ∀ {Scale Traversal Block Plaquette Field}
     (dataSet : LiteralBadTraversalData
       Scale Traversal Block Plaquette Field)
-    scale field block →
-  LiteralBadBlock dataSet scale field block →
+    (scale : Scale) (fld : Field) (block : Block) →
+  LiteralBadBlock dataSet scale fld block →
   (Gap.halfℚ * couplingBeta dataSet scale)
     * Gap.squareℚ (badThreshold dataSet)
-  ≤ localPlaquetteAction dataSet scale field
-      (canonicalBadPlaquette dataSet scale field block)
-witnessPlaquetteActionLowerBound dataSet scale field block bad =
+  ≤ localPlaquetteAction dataSet scale fld
+      (canonicalBadPlaquette dataSet scale fld block)
+witnessPlaquetteActionLowerBound dataSet scale fld block bad =
   subst
     (λ right →
       (Gap.halfℚ * couplingBeta dataSet scale)
         * Gap.squareℚ (badThreshold dataSet)
       ≤ right)
-    (sym (localActionMatchesWilson dataSet scale field
-      (canonicalBadPlaquette dataSet scale field block)))
+    (sym (localActionMatchesWilson dataSet scale fld
+      (canonicalBadPlaquette dataSet scale fld block)))
     (Gap.localWilsonActionGap
       (order dataSet)
       (couplingBeta dataSet scale)
       (badThreshold dataSet)
-      (plaquetteHolonomy dataSet field
-        (canonicalBadPlaquette dataSet scale field block))
+      (plaquetteHolonomy dataSet fld
+        (canonicalBadPlaquette dataSet scale fld block))
       (halfBetaNonnegative dataSet scale)
       (badPlaquetteTraceDeficitLowerBound dataSet
-        scale field block bad))
+        scale fld block bad))
 
 record LiteralBadTraversalWitnesses
     {Scale Traversal Block Plaquette Field : Set}
     (dataSet : LiteralBadTraversalData
       Scale Traversal Block Plaquette Field)
-    (scale : Scale) (field : Field) (traversal : Traversal) : Set₁ where
+    (scale : Scale) (fld : Field) (traversal : Traversal) : Set₁ where
   field
-    traversalBad : LiteralBadTraversal dataSet scale field traversal
+    traversalBad : LiteralBadTraversal dataSet scale fld traversal
     everyListedBlockBad : ∀ (block : Block) →
-      LiteralBadBlock dataSet scale field block
+      LiteralBadBlock dataSet scale fld block
 
 open LiteralBadTraversalWitnesses public
 
@@ -148,67 +148,67 @@ badTraversalHasDuplicateFreePlaquetteWitnessLiteral :
   ∀ {Scale Traversal Block Plaquette Field}
     (dataSet : LiteralBadTraversalData
       Scale Traversal Block Plaquette Field)
-    scale field traversal →
-  LiteralBadTraversalWitnesses dataSet scale field traversal → Set
-badTraversalHasDuplicateFreePlaquetteWitnessLiteral dataSet scale field traversal witnesses =
-  canonicalWitnessAssignmentInjective dataSet scale field traversal
+    (scale : Scale) (fld : Field) (traversal : Traversal) →
+  LiteralBadTraversalWitnesses dataSet scale fld traversal → Set
+badTraversalHasDuplicateFreePlaquetteWitnessLiteral dataSet scale fld traversal witnesses =
+  canonicalWitnessAssignmentInjective dataSet scale fld traversal
     (traversalBad witnesses)
 
 duplicateFreeWitnessSumBelowLocalWilsonAction :
   ∀ {Scale Traversal Block Plaquette Field}
     (dataSet : LiteralBadTraversalData
       Scale Traversal Block Plaquette Field)
-    scale field traversal →
-  LiteralBadTraversalWitnesses dataSet scale field traversal →
+    (scale : Scale) (fld : Field) (traversal : Traversal) →
+  LiteralBadTraversalWitnesses dataSet scale fld traversal →
   Gap.sumMap (badBlocks dataSet traversal)
     (λ block →
-      localPlaquetteAction dataSet scale field
-        (canonicalBadPlaquette dataSet scale field block))
-  ≤ localWilsonAction dataSet scale field traversal
-duplicateFreeWitnessSumBelowLocalWilsonAction dataSet scale field traversal witnesses =
-  witnessActionSumBelowTotal dataSet scale field traversal
+      localPlaquetteAction dataSet scale fld
+        (canonicalBadPlaquette dataSet scale fld block))
+  ≤ localWilsonAction dataSet scale fld traversal
+duplicateFreeWitnessSumBelowLocalWilsonAction dataSet scale fld traversal witnesses =
+  witnessActionSumBelowTotal dataSet scale fld traversal
     (traversalBad witnesses)
 
 literalLargeFieldWitnessSystem :
   ∀ {Scale Traversal Block Plaquette Field}
     (dataSet : LiteralBadTraversalData
       Scale Traversal Block Plaquette Field)
-    scale field traversal →
-  LiteralBadTraversalWitnesses dataSet scale field traversal →
+    (scale : Scale) (fld : Field) (traversal : Traversal) →
+  LiteralBadTraversalWitnesses dataSet scale fld traversal →
   Gap.LargeFieldWitnessSystem Block Plaquette
-literalLargeFieldWitnessSystem dataSet scale field traversal witnesses = record
+literalLargeFieldWitnessSystem dataSet scale fld traversal witnesses = record
   { order = order dataSet
   ; badBlocks = badBlocks dataSet traversal
-  ; witnessPlaquette = canonicalBadPlaquette dataSet scale field
-  ; localAction = localPlaquetteAction dataSet scale field
-  ; totalAction = localWilsonAction dataSet scale field traversal
+  ; witnessPlaquette = canonicalBadPlaquette dataSet scale fld
+  ; localAction = localPlaquetteAction dataSet scale fld
+  ; totalAction = localWilsonAction dataSet scale fld traversal
   ; localGap =
       (Gap.halfℚ * couplingBeta dataSet scale)
       * Gap.squareℚ (badThreshold dataSet)
   ; witnessHasGap =
       λ block →
-        witnessPlaquetteActionLowerBound dataSet scale field block
+        witnessPlaquetteActionLowerBound dataSet scale fld block
           (everyListedBlockBad witnesses block)
   ; witnessActionSumBelowTotal =
       duplicateFreeWitnessSumBelowLocalWilsonAction dataSet
-        scale field traversal witnesses
+        scale fld traversal witnesses
   }
 
 traversalActionGainLowerBound :
   ∀ {Scale Traversal Block Plaquette Field}
     (dataSet : LiteralBadTraversalData
       Scale Traversal Block Plaquette Field)
-    scale field traversal →
+    (scale : Scale) (fld : Field) (traversal : Traversal) →
   (witnesses : LiteralBadTraversalWitnesses
-    dataSet scale field traversal) →
+    dataSet scale fld traversal) →
   Gap.natScale
     (Gap.length (badBlocks dataSet traversal))
     ((Gap.halfℚ * couplingBeta dataSet scale)
       * Gap.squareℚ (badThreshold dataSet))
-  ≤ localWilsonAction dataSet scale field traversal
-traversalActionGainLowerBound dataSet scale field traversal witnesses =
+  ≤ localWilsonAction dataSet scale fld traversal
+traversalActionGainLowerBound dataSet scale fld traversal witnesses =
   Gap.largeFieldActionLowerBoundFromWitnesses
-    (literalLargeFieldWitnessSystem dataSet scale field traversal witnesses)
+    (literalLargeFieldWitnessSystem dataSet scale fld traversal witnesses)
 
 ------------------------------------------------------------------------
 -- Six literal activity owners and common-norm bounds.
