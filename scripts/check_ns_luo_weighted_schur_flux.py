@@ -33,17 +33,13 @@ FILES = {
     "integration": CLOSURE / "NSTriadKNLuoWeightedSchurFluxIntegration.agda",
     "top": CLOSURE / "NSTriadKNLocalizedBKMRouteIntegration.agda",
     "weighted_schur": CLOSURE / "NSTriadKNWeightedSchurProductBound.agda",
-    "physical_triads": CLOSURE / "NSTriadKNPhysicalTriadEnumeration.agda",
-    "physical_fibre": CLOSURE / "NSTriadKNValidatedPhysicalFiberImage.agda",
-    "full_shell_existing": CLOSURE / "NSCompactGammaFullShellSchur.agda",
     "coherence_existing": CLOSURE / "NSCompactGammaTriadFullShellCoherence.agda",
     "pair_bounds": CLOSURE / "NSTriadKNPairIncidenceProfileBounds.agda",
     "dictionary": ROOT / "docs" / "ns-localized-bkm-variable-dictionary.md",
 }
 
 NEW_AGDA = tuple(name for name in FILES if name not in {
-    "weighted_schur", "physical_triads", "physical_fibre",
-    "full_shell_existing", "coherence_existing", "pair_bounds", "dictionary",
+    "weighted_schur", "coherence_existing", "pair_bounds", "dictionary",
 })
 
 
@@ -169,6 +165,8 @@ def main() -> int:
     require_all(t["physical_full_shell"], (
         "HardHighPhysicalFullShellIdentification",
         "selectedPhysicalListIsFullShellPairList",
+        "physicalSignedMagnitudeAgreement",
+        "physicalIncidenceMajorantAgreement",
         "physicalSignedCoefficientDominated",
         "physicalSignedCoefficientDominationTheoremConstructed = true",
         "canonicalHardHighPhysicalFullShellIdentificationInhabited = false",
@@ -203,14 +201,16 @@ def main() -> int:
         "canonicalLiteralLuoPhysicalIdentificationInhabited = false",
     ), "physical time")
 
-    print("[8/10] Published Luo theorem and final synthesis")
+    print("[8/10] Published Luo theorem and internal limsup synthesis")
     require_all(t["published_luo"], (
         "PublishedLuoTheorem11Authority",
-        "theorem11Regularity",
-        "luoTheorem11Continuation",
-        "RepositoryLocalizedLimsupWitness",
-        "repositoryLocalizedLimsupWitness",
-        "repositoryLimsupMatchesLuoHypothesis",
+        "localizedGradientIntegral",
+        "universalDeltaBKM",
+        "pointwiseThresholdImpliesLimsupBound",
+        "repositoryPointwiseSourceBound",
+        "repositoryLuoLimsupBound",
+        "luoContinuationFromRepositoryCutoffBounds",
+        "pointwiseCutoffToLimsupAssemblyConstructed = true",
         "luoTheorem11AuthorityLevel = standardImported",
         "selectedPublishedLuoAuthorityInhabited = false",
     ), "published Luo authority")
@@ -220,6 +220,10 @@ def main() -> int:
         "hardHighPhysicalCoefficientDominated",
         "literalPhysicalCutoffRecursion",
         "smoothLuoCutoffBound",
+        "smoothIntegralMatchesSource",
+        "multiplierThresholdMatchesLuoDelta",
+        "sourceLuoCutoffBound",
+        "sourceLuoLimsupBound",
         "luoWeightedSchurContinuation",
         "canonicalLuoWeightedSchurContinuationSynthesisInhabited = false",
     ), "continuation synthesis")
