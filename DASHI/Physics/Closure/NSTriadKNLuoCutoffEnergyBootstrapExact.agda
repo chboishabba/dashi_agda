@@ -31,8 +31,14 @@ record LuoParabolicTimeCutoff : Set₁ where
     Time : Set
     terminalTime : Time
     cutoffWeight : Time → ℚ
-    supportInShiftedParabolicWindow : Set
-    cutoffDerivativeBoundByShiftedLambdaSquared : Set
+
+    SupportInShiftedParabolicWindow : Set
+    supportInShiftedParabolicWindow : SupportInShiftedParabolicWindow
+
+    CutoffDerivativeBoundByShiftedLambdaSquared : Set
+    cutoffDerivativeBoundByShiftedLambdaSquared :
+      CutoffDerivativeBoundByShiftedLambdaSquared
+
     windowDenominator : Nat
     windowDenominatorMeaning :
       windowDenominator ≡ Scale.parabolicWindowDenominator shellIndex
@@ -142,14 +148,35 @@ record LuoPhysicalEnergyBootstrapAdapter : Set₁ where
     timeCutoff : LuoParabolicTimeCutoff
     cutoffData : LuoCutoffEnergyFluxData
     bootstrap : LuoCutoffBootstrapCertificate cutoffData
-    hardLowPassEqualsSourceLowPass : Set
-    hardHighPassIsOrthogonalSelfAdjointProjection : Set
-    divergenceFreePressureCancellation : Set
-    physicalEnergyIdentityMatchesCutoffData : Set
-    physicalDissipationMatchesCutoffData : Set
-    physicalFluxMatchesIntegratedAbsoluteCutoffFlux : Set
-    universalThresholdMatchesLuoDeltaBKMAtUnitViscosity : Set
-    bootstrapDecayImpliesRegularity : Set
+
+    HardLowPassEqualsSourceLowPass : Set
+    hardLowPassEqualsSourceLowPass : HardLowPassEqualsSourceLowPass
+
+    HardHighPassIsOrthogonalSelfAdjointProjection : Set
+    hardHighPassIsOrthogonalSelfAdjointProjection :
+      HardHighPassIsOrthogonalSelfAdjointProjection
+
+    DivergenceFreePressureCancellation : Set
+    divergenceFreePressureCancellation : DivergenceFreePressureCancellation
+
+    PhysicalEnergyIdentityMatchesCutoffData : Set
+    physicalEnergyIdentityMatchesCutoffData :
+      PhysicalEnergyIdentityMatchesCutoffData
+
+    PhysicalDissipationMatchesCutoffData : Set
+    physicalDissipationMatchesCutoffData :
+      PhysicalDissipationMatchesCutoffData
+
+    PhysicalFluxMatchesIntegratedAbsoluteCutoffFlux : Set
+    physicalFluxMatchesIntegratedAbsoluteCutoffFlux :
+      PhysicalFluxMatchesIntegratedAbsoluteCutoffFlux
+
+    UniversalThresholdMatchesLuoDeltaBKMAtUnitViscosity : Set
+    universalThresholdMatchesLuoDeltaBKMAtUnitViscosity :
+      UniversalThresholdMatchesLuoDeltaBKMAtUnitViscosity
+
+    BootstrapDecayImpliesRegularity : Set
+    bootstrapDecayImpliesRegularity : BootstrapDecayImpliesRegularity
 
 open LuoPhysicalEnergyBootstrapAdapter public
 
