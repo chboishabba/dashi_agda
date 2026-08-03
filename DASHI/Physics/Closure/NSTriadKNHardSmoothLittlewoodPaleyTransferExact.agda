@@ -30,8 +30,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 
@@ -44,6 +42,20 @@ data _∈Nat_ (value : Nat) : List Nat → Set where
   here : ∀ {values} → value ∈Nat (value ∷ values)
   there : ∀ {head values} → value ∈Nat values → value ∈Nat (head ∷ values)
 
+record HardBandWitness
+    {m : Level}
+    (Mode : Set m)
+    (hardShellSupported : Nat → Mode → Set m)
+    (band : List Nat)
+    (mode : Mode) : Set m where
+  constructor hard-band-witness
+  field
+    hardShellIndex : Nat
+    indexOccursInBand : hardShellIndex ∈Nat band
+    modeOccursInHardShell : hardShellSupported hardShellIndex mode
+
+open HardBandWitness public
+
 record SmoothShellHardBandSupport {m : Level} (Mode : Set m) : Set (lsuc m) where
   field
     smoothShellSupported : Nat → Mode → Set m
@@ -53,9 +65,7 @@ record SmoothShellHardBandSupport {m : Level} (Mode : Set m) : Set (lsuc m) wher
     smoothSupportOccursInHardBand :
       ∀ shell mode →
       smoothShellSupported shell mode →
-      Σ Nat (λ hardShell →
-        (hardShell ∈Nat hardBand shell)
-          × hardShellSupported hardShell mode)
+      HardBandWitness Mode hardShellSupported (hardBand shell) mode
 
 open SmoothShellHardBandSupport public
 
