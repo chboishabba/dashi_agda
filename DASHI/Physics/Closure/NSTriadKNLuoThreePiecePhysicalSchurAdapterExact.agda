@@ -17,12 +17,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact whe
 --
 -- PURPOSE
 -- Specialize Luo's exact three-piece flux decomposition to the repository's
--- rational Hermitian pair-incidence bridge.  Once the physical atom bridge is
+-- rational Hermitian pair-incidence bridge. Once the physical atom bridge is
 -- identified with the source flux, energy and low-gradient quantities, the
 -- Proposition-3.1 weighted-Schur estimate is derived by rewriting the already
 -- proved physical theorem; it is not supplied as a fresh estimate field.
--- Source multiplication and order are identified explicitly as well: matching
--- only the four scalar values is not enough to transport an inequality.
+-- Source multiplication, associativity and order are transported explicitly.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
@@ -31,6 +30,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Rational.Base as ℚBase
 open ℚBase using (ℚ)
+import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as Luo
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Physical
@@ -124,13 +124,17 @@ physicalFluxBoundFromExistingBridge {source = source} adapter shell u
               (Physical.profileSchurConstant (bridgeAt adapter shell u))
               (Physical.cutoffEnergyMajorant (bridgeAt adapter shell u)))
             (Physical.lowPassGradientInfinity (bridgeAt adapter shell u))
+        | ℚₚ.*-assoc
+            (Physical.profileSchurConstant (bridgeAt adapter shell u))
+            (Physical.cutoffEnergyMajorant (bridgeAt adapter shell u))
+            (Physical.lowPassGradientInfinity (bridgeAt adapter shell u))
         | sourceOrderIsRationalOrder adapter
             (Physical.absoluteCutoffFlux (bridgeAt adapter shell u))
             (ℚBase._*_
+              (Physical.profileSchurConstant (bridgeAt adapter shell u))
               (ℚBase._*_
-                (Physical.profileSchurConstant (bridgeAt adapter shell u))
-                (Physical.cutoffEnergyMajorant (bridgeAt adapter shell u)))
-              (Physical.lowPassGradientInfinity (bridgeAt adapter shell u))) =
+                (Physical.cutoffEnergyMajorant (bridgeAt adapter shell u))
+                (Physical.lowPassGradientInfinity (bridgeAt adapter shell u)))) =
   Physical.luoCutoffFluxEstimate (bridgeAt adapter shell u)
 
 threePieceAdapterToWeightedSchur :
