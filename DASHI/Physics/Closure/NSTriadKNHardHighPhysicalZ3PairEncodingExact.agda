@@ -23,12 +23,12 @@ module DASHI.Physics.Closure.NSTriadKNHardHighPhysicalZ3PairEncodingExact where
 -- those belong to the separate atom/majorant layer.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; sym)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -96,8 +96,8 @@ encodedHardHighMemberResonates :
   Z3Shell.Z3Resonant
     (Physical.k triad)
     (encodePhysicalPair triad)
-encodedHardHighMemberResonates member =
-  encodedPhysicalPairResonates _
+encodedHardHighMemberResonates {triad = triad} member =
+  encodedPhysicalPairResonates triad
 
 record HardHighPhysicalZ3FullShellPairIdentification
     {s i : Level}
