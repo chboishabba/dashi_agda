@@ -131,8 +131,8 @@ GardenOfEden :
   LocalRuleSystem Configuration →
   Configuration →
   Set
-GardenOfEden system target =
-  ¬ Σ _ λ source → LocalRuleSystem.step system source ≡ target
+GardenOfEden {Configuration} system target =
+  ¬ Σ Configuration λ source → LocalRuleSystem.step system source ≡ target
 
 record Contractible (A : Set) : Set₁ where
   field
