@@ -1,0 +1,21 @@
+module DASHI.Reasoning.KantLacanEverything where
+
+import DASHI.Cognition.PNF.KantApperceptionLearningBridge
+import DASHI.Foundations.JPlusOneScaleBridge
+import DASHI.Foundations.StageCantorScaleRecursion
+import DASHI.Foundations.StageAtlasZeroToTwelve
+import DASHI.Reasoning.KantAntinomyCore
+import DASHI.Reasoning.KantCopjecSexuationBridge
+import DASHI.Reasoning.KantCriticalCompiler
+import DASHI.Reasoning.KantPNFBridge
+import DASHI.Reasoning.KantLacanRegression
+import DASHI.Reasoning.KantLacanSourceAtlas
+import DASHI.Reasoning.KantLacanZizekRuntime
+import DASHI.Reasoning.LacanCapitalistDiscourseMutation
+import DASHI.Reasoning.LacanDiscourseMatheme
+import DASHI.Reasoning.LacanFantasyDriveCore
+import DASHI.Reasoning.LacanPNFBridge
+import DASHI.Reasoning.LacanRegisterSinthomeHyperfabric
+import DASHI.Reasoning.LacanSignifierSubjectCore
+import DASHI.Reasoning.LacanZizekIdeologyBridge
+import DASHI.Reasoning.StageZeroToTwelveKantLacanZizekBridge
