@@ -8,6 +8,10 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
       - 'scripts/check_ns_luo_physical_analytic_frontier.sh'
+      - 'scripts/check_ns_luo_full_lemma_inventory.py'
+      - 'scripts/check_ns_luo_submission_audit.sh'
+      - 'scripts/generate_ns_luo_submission_audit.py'
+      - 'scripts/test_generate_ns_luo_submission_audit.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
       - 'flake.lock'
@@ -16,6 +20,10 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNLuo*.agda'
       - 'scripts/check_ns_luo_physical_analytic_frontier.sh'
+      - 'scripts/check_ns_luo_full_lemma_inventory.py'
+      - 'scripts/check_ns_luo_submission_audit.sh'
+      - 'scripts/generate_ns_luo_submission_audit.py'
+      - 'scripts/test_generate_ns_luo_submission_audit.py'
       - 'scripts/run_agda29_parallel_check.sh'
       - 'flake.nix'
       - 'flake.lock'
