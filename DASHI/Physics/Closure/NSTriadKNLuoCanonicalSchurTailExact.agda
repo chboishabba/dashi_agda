@@ -44,7 +44,9 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality as Eq
+  using (cong; subst; sym; trans)
+open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Sum
@@ -54,9 +56,9 @@ powAdd :
   (left right : Nat) →
   Geo.pow ratio (left + right)
   ≡ Geo.pow ratio left * Geo.pow ratio right
-powAdd ratio left zero =
-  solve (Geo.pow ratio left ∷ [])
-powAdd ratio left (suc right)
+powAdd ratio zero right =
+  solve (Geo.pow ratio right ∷ [])
+powAdd ratio (suc left) right
   rewrite powAdd ratio left right =
   solve
     ( ratio
@@ -109,7 +111,7 @@ shiftedTailBound :
 shiftedTailBound ratio bound ratioNonnegative prefixBound start cutoff =
   subst
     (λ left → left ≤ Geo.pow ratio start * bound)
-    (shiftedPowerSumFactorization ratio start cutoff)
+    (sym (shiftedPowerSumFactorization ratio start cutoff))
     (let instance startPowerIsNonnegative =
        nonNegative (Geo.powNonnegative ratio start ratioNonnegative)
      in
@@ -207,14 +209,24 @@ lowExteriorStripBound start lowTailCutoff gapCutoff =
         * Geo.thirtyTwoThirtyFirsts
       ≡ Geo.pow Geo.quarter start
         * Geo.oneTwentyEightNinetyThirds
-    targetMeaning
-      rewrite Geo.productConstantIdentity =
-      solve
-        ( Geo.pow Geo.quarter start
-        ∷ Geo.fourThirds
-        ∷ Geo.thirtyTwoThirtyFirsts
-        ∷ []
-        )
+    targetMeaning =
+      begin
+        (Geo.pow Geo.quarter start * Geo.fourThirds)
+          * Geo.thirtyTwoThirtyFirsts
+      ≡⟨ solve
+          ( Geo.pow Geo.quarter start
+          ∷ Geo.fourThirds
+          ∷ Geo.thirtyTwoThirtyFirsts
+          ∷ []
+          ) ⟩
+        Geo.pow Geo.quarter start
+          * (Geo.fourThirds * Geo.thirtyTwoThirtyFirsts)
+      ≡⟨ cong
+          (Geo.pow Geo.quarter start *_)
+          Geo.productConstantIdentity ⟩
+        Geo.pow Geo.quarter start
+          * Geo.oneTwentyEightNinetyThirds
+      ∎
   in
   ℚₚ.≤-trans first
     (subst
@@ -273,14 +285,25 @@ gapExteriorStripBound start gapTailCutoff lowCutoff =
           * Geo.thirtyTwoThirtyFirsts)
       ≡ Geo.pow Geo.thirtySecond start
         * Geo.oneTwentyEightNinetyThirds
-    targetMeaning
-      rewrite Geo.productConstantIdentity =
-      solve
-        ( Geo.pow Geo.thirtySecond start
-        ∷ Geo.fourThirds
-        ∷ Geo.thirtyTwoThirtyFirsts
-        ∷ []
-        )
+    targetMeaning =
+      begin
+        Geo.fourThirds
+          * (Geo.pow Geo.thirtySecond start
+            * Geo.thirtyTwoThirtyFirsts)
+      ≡⟨ solve
+          ( Geo.pow Geo.thirtySecond start
+          ∷ Geo.fourThirds
+          ∷ Geo.thirtyTwoThirtyFirsts
+          ∷ []
+          ) ⟩
+        Geo.pow Geo.thirtySecond start
+          * (Geo.fourThirds * Geo.thirtyTwoThirtyFirsts)
+      ≡⟨ cong
+          (Geo.pow Geo.thirtySecond start *_)
+          Geo.productConstantIdentity ⟩
+        Geo.pow Geo.thirtySecond start
+          * Geo.oneTwentyEightNinetyThirds
+      ∎
   in
   ℚₚ.≤-trans first
     (subst
