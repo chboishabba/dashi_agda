@@ -65,7 +65,7 @@ prependMinimum :
   ∀ {tail} →
   SelectedMinimum tail →
   SelectedMinimum (head ∷ tail)
-prependMinimum head minimum
+prependMinimum head {tail} minimum
   with ℚₚ.≤-total head (value minimum)
 ... | inj₁ head≤minimum =
   selected-minimum
@@ -75,7 +75,7 @@ prependMinimum head minimum
   where
     below :
       (candidate : ℚ) →
-      Occurs candidate (head ∷ _) →
+      Occurs candidate (head ∷ tail) →
       head ≤ candidate
     below candidate here = ℚₚ.≤-refl
     below candidate (there occurrence) =
@@ -90,7 +90,7 @@ prependMinimum head minimum
   where
     below :
       (candidate : ℚ) →
-      Occurs candidate (head ∷ _) →
+      Occurs candidate (head ∷ tail) →
       value minimum ≤ candidate
     below candidate here = minimum≤head
     below candidate (there occurrence) =
