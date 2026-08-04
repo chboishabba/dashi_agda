@@ -71,6 +71,10 @@ grep -q '10.59161/AUEZ1291' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound9SourceAudit.agda
 grep -q '10.1007/BF01209071' \
   DASHI/Physics/YangMills/BalabanFederbushPairedContourCancellationExact.agda
+grep -q '10.1007/BF01215753' \
+  DASHI/Physics/YangMills/BalabanP10P33PhysicalCutsetExact.agda
+grep -q '10.1007/BF01215753' \
+  DASHI/Physics/YangMills/YangMillsSubmissionRound9SourceAudit.agda
 
 # Every attached lane must be represented in one typed local/Step-V/global cutset.
 grep -q 'record Round9CompleteCutset' \
