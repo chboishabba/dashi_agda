@@ -14,6 +14,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP06DiameterComplexityAuditExact.agda
   DASHI/Physics/YangMills/BalabanP11LightweightCanonicalPaymentExact.agda
   DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda
+  DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound11ExactCutset.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound11SourceAudit.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound11Ledger.agda
@@ -58,6 +59,10 @@ grep -q 'record P33CoerciveInversePackage' \
   DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda
 grep -q 'record Gate4SevenPackageSpine' \
   DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda
+grep -q 'record FixedLatticeDLRLSIGapPackage' \
+  DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda
+grep -q 'record OsterwalderSchraderPhysicalGapPackage' \
+  DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda
 
 # Source provenance and fail-closed accounting.
 grep -q '10.1007/BF01211762' \
@@ -66,6 +71,10 @@ grep -q '10.1007/BF01215753' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound11SourceAudit.agda
 grep -q '10.1063/1.4821275' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound11SourceAudit.agda
+grep -q '10.1007/BF01645738' \
+  DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda
+grep -q 'arXiv:math-ph/0505008' \
+  DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda
 grep -q 'configuredTermIdentificationReducedToDefinitions = true' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound11Receipt.agda
 grep -q 'configuredTermDefinitionsDischarged = false' \
@@ -95,6 +104,7 @@ roots=(
   DASHI/Physics/YangMills/BalabanP06DiameterComplexityAuditExact.agda
   DASHI/Physics/YangMills/BalabanP11LightweightCanonicalPaymentExact.agda
   DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda
+  DASHI/Physics/YangMills/YangMillsFixedLatticeToContinuumDependencySpineExact.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound11LightValidation.agda
 )
 
