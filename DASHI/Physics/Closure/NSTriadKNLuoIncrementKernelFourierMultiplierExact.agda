@@ -27,18 +27,17 @@ module DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelFourierMultiplierExact w
 --   hatPhi_p(k+l) - hatPhi_p(k) - hatPhi_p(l) + hatPhi_p(0).
 --
 -- The theorem below closes its rational algebra, symmetry, zero-mode
--- cancellation and coefficient multiplication.  The remaining analytic leaf
+-- cancellation and coefficient multiplication. The remaining analytic leaf
 -- is the Fourier/integration theorem identifying the literal spatial integral
 -- with this multiplier on the official periodic carrier.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 incrementKernelMultiplier : ℚ → ℚ → ℚ → ℚ → ℚ
 incrementKernelMultiplier transformSum transformLeft transformRight transformZero =
@@ -55,7 +54,9 @@ normalizedMultiplierMeaning :
     transformSum transformLeft transformRight transformZero
   ≡ normalizedIncrementKernelMultiplier
       transformSum transformLeft transformRight
-normalizedMultiplierMeaning transformSum transformLeft transformRight .1ℚ refl = refl
+normalizedMultiplierMeaning
+  transformSum transformLeft transformRight transformZero transformZeroIsOne
+  rewrite transformZeroIsOne = refl
 
 incrementKernelMultiplierSymmetric :
   ∀ transformSum transformLeft transformRight transformZero →
