@@ -186,19 +186,19 @@ basisZCoordinate (su2Lie x y z) =
 basisXNormSq : su2NormSq basisX ≡ oneR
 basisXNormSq =
   solveComputed 0
-    (λ → dotP oneP zeroP zeroP oneP zeroP zeroP := oneP)
+    (dotP oneP zeroP zeroP oneP zeroP zeroP := oneP)
     computed
 
 basisYNormSq : su2NormSq basisY ≡ oneR
 basisYNormSq =
   solveComputed 0
-    (λ → dotP zeroP oneP zeroP zeroP oneP zeroP := oneP)
+    (dotP zeroP oneP zeroP zeroP oneP zeroP := oneP)
     computed
 
 basisZNormSq : su2NormSq basisZ ≡ oneR
 basisZNormSq =
   solveComputed 0
-    (λ → dotP zeroP zeroP oneP zeroP zeroP oneP := oneP)
+    (dotP zeroP zeroP oneP zeroP zeroP oneP := oneP)
     computed
 
 su2EuclideanGramIdentityLevel : ProofLevel
