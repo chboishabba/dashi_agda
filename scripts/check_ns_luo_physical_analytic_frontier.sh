@@ -13,6 +13,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePeriodicMultiplierRealizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPointwisePairFoldReductionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCanonicalSourceSchurIdentificationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoEquation42PhysicalIdentityAdapterExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSection4PhysicalBoundsAdapterExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact.agda
