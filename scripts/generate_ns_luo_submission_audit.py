@@ -7,9 +7,9 @@ markers, and the finite/infinite and rational/real boundary vocabulary. In
 strict mode it fails on holes, standalone code metavariables, postulates,
 unsafe options, or permission for unsolved metas.
 
-Question marks in comments and ordinary Agda identifiers such as `_≤?_` are
-not treated as metavariables. Only a standalone `?` token in non-comment code
-is forbidden.
+The scanner removes nested Agda block comments and line comments before
+checking code. Thus question marks in prose and ordinary identifiers such as
+`_≤?_` are not confused with unresolved metavariables.
 """
 
 from __future__ import annotations
@@ -98,31 +98,63 @@ def line_number(text: str, offset: int) -> int:
     return text.count("\n", 0, offset) + 1
 
 
-def code_before_line_comment(line: str) -> str:
-    """Return the code prefix before Agda's `--` line comment marker."""
+def strip_agda_comments(text: str) -> str:
+    """Remove nested `{- -}` comments and `--` comments, preserving newlines."""
 
-    marker = line.find("--")
-    return line if marker < 0 else line[:marker]
+    output: list[str] = []
+    index = 0
+    block_depth = 0
+    length = len(text)
+
+    while index < length:
+        pair = text[index : index + 2]
+
+        if block_depth == 0 and pair == "--":
+            while index < length and text[index] != "\n":
+                output.append(" ")
+                index += 1
+            continue
+
+        if pair == "{-":
+            block_depth += 1
+            output.extend((" ", " "))
+            index += 2
+            continue
+
+        if block_depth > 0 and pair == "-}":
+            block_depth -= 1
+            output.extend((" ", " "))
+            index += 2
+            continue
+
+        character = text[index]
+        if block_depth > 0:
+            output.append("\n" if character == "\n" else " ")
+        else:
+            output.append(character)
+        index += 1
+
+    return "".join(output)
 
 
 def findings_for(path: Path, text: str, root: Path) -> list[Finding]:
     rel = str(path.relative_to(root))
     findings: list[Finding] = []
+    code = strip_agda_comments(text)
 
     for kind, pattern in FORBIDDEN_PATTERNS.items():
-        for match in pattern.finditer(text):
+        for match in pattern.finditer(code):
             findings.append(
                 Finding(
                     kind=kind,
                     file=rel,
-                    line=line_number(text, match.start()),
+                    line=line_number(code, match.start()),
                     text=match.group(0),
                 )
             )
 
-    for number, line in enumerate(text.splitlines(), start=1):
-        code = code_before_line_comment(line)
-        match = STANDALONE_QUESTION_RE.search(code)
+    for number, line in enumerate(code.splitlines(), start=1):
+        match = STANDALONE_QUESTION_RE.search(line)
         if match:
             findings.append(
                 Finding(
@@ -219,7 +251,7 @@ def report(root: Path) -> dict[str, object]:
     ]
 
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "repository_revision": git_revision(root),
         "file_count": len(files),
         "module_count": sum(item.module is not None for item in files),
