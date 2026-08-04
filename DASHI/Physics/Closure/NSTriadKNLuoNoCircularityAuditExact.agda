@@ -25,8 +25,8 @@ record LuoNoCircularityAudit : Set where
     continuationDerivedFromCanonicalInputs : Bool
     maximalityContradictionDerivedFromPhysicalLeaves : Bool
 
-    globalSmoothnessNotMarkedAsProved : Bool
-    bkmExclusionNotMarkedAsProved : Bool
+    globalSmoothnessProved : Bool
+    bkmExclusionProved : Bool
     completeTransitiveDependencyAuditGenerated : Bool
 
 open LuoNoCircularityAudit public
@@ -84,8 +84,13 @@ maximalityCompositionIsMachineChecked =
   Critical.physicalLeavesToMaximalityContradictionCompositionClosedIsTrue
 
 globalSmoothnessRemainsUnproved :
-  globalSmoothnessNotMarkedAsProved luoNoCircularityAudit ≡ false
+  globalSmoothnessProved luoNoCircularityAudit ≡ false
 globalSmoothnessRemainsUnproved = refl
+
+bkmExclusionRemainsUnproved :
+  bkmExclusionProved luoNoCircularityAudit ≡ false
+bkmExclusionRemainsUnproved =
+  Analytic.canonicalBKMExclusionRemainsFalse
 
 completeDependencyAuditRemainsOpen :
   completeTransitiveDependencyAuditGenerated luoNoCircularityAudit ≡ false
