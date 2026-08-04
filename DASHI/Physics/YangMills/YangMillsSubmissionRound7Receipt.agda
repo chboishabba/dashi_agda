@@ -6,6 +6,9 @@ open import Data.Nat.Base using (ℕ)
 import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
 import DASHI.Physics.YangMills.BalabanP06OwnedGraphCombinatoricsExact as P06
 import DASHI.Physics.YangMills.BalabanP11UniformAbsorptionReductionExact as P11
+import DASHI.Physics.YangMills.LocalLatticeP11SubmissionBridgeExact as P11Bridge
+import DASHI.Physics.YangMills.LocalLatticeDischargePipeline as Local
+import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
 import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -23,6 +26,11 @@ record SubmissionRound7Receipt : Set₁ where
       P11.P11UniformAbsorptionInputs →
       LargeField.ImportedAbsorptionCondition
 
+    localLatticeStepVWithoutPostulatedP11 :
+      (package : Local.LocalLatticeAnalyticDischargePackage) →
+      P11.P11UniformAbsorptionInputs →
+      Assembly.StepVSpatialKPCertificate
+
     countAuditLevel : ProofLevel
     p06GraphKernelLevel : ProofLevel
     p11ReducerLevel : ProofLevel
@@ -39,6 +47,8 @@ currentSubmissionRound7Receipt = record
   ; fullSubmissionCountExact = Counts.fullSubmissionObligationCountExact
   ; ownedP06GraphKernel = P06.currentOwnedP06GraphCombinatorics
   ; p11AbsorptionReducer = P11.p11AbsorptionConditionFromUniformMinimum
+  ; localLatticeStepVWithoutPostulatedP11 =
+      P11Bridge.localLatticeStepVFromUniformP0Minimum
   ; countAuditLevel = machineChecked
   ; p06GraphKernelLevel = machineChecked
   ; p11ReducerLevel = machineChecked
