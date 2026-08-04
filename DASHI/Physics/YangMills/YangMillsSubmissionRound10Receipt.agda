@@ -13,11 +13,12 @@ record Round10Receipt : Set where
     transformedConvergenceReducedToTermParity : Bool
     alternatingOrderClosureDischarged : Bool
     ordinaryFiniteGeometricBoundDischarged : Bool
+    polynomialFiniteSummationReducedToPointwiseDomination : Bool
     lightweightP06LeafAdded : Bool
 
     concreteSineCosineInterlacingDischarged : Bool
     physicalP06InhabitantsDischarged : Bool
-    polynomialWeightedShellBoundDischarged : Bool
+    polynomialPointwiseDominationDischarged : Bool
     globalYangMillsEndpointDischarged : Bool
 
     verificationBoundary : String
@@ -33,13 +34,14 @@ round10Receipt = record
   ; transformedConvergenceReducedToTermParity = true
   ; alternatingOrderClosureDischarged = true
   ; ordinaryFiniteGeometricBoundDischarged = true
+  ; polynomialFiniteSummationReducedToPointwiseDomination = true
   ; lightweightP06LeafAdded = true
   ; concreteSineCosineInterlacingDischarged = false
   ; physicalP06InhabitantsDischarged = false
-  ; polynomialWeightedShellBoundDischarged = false
+  ; polynomialPointwiseDominationDischarged = false
   ; globalYangMillsEndpointDischarged = false
   ; verificationBoundary =
-      "The round-ten source tranche contains no explicit postulate or hole. Kernel acceptance is asserted only after the focused Agda 2.9 checker succeeds; physical and global inhabitants remain fail-closed."
+      "The round-ten source tranche contains no explicit postulate or hole. Kernel acceptance is asserted only after the focused Agda 2.9 checker succeeds; concrete interlacing, pointwise polynomial domination, physical and global inhabitants remain fail-closed."
   }
 
 round10ReciprocalFactorialIsDischarged :
@@ -49,6 +51,10 @@ round10ReciprocalFactorialIsDischarged = refl
 round10TermParityIsDischarged :
   concreteSineCosineTermParityDischarged round10Receipt ≡ true
 round10TermParityIsDischarged = refl
+
+round10PolynomialSummationIsReduced :
+  polynomialFiniteSummationReducedToPointwiseDomination round10Receipt ≡ true
+round10PolynomialSummationIsReduced = refl
 
 round10GlobalEndpointRemainsOpen :
   globalYangMillsEndpointDischarged round10Receipt ≡ false
