@@ -23,6 +23,7 @@ files=(
   DASHI/EverythingZizekPNFExtension.agda
 
   DASHI/Foundations/StageAtlasZeroToTwelve.agda
+  DASHI/Foundations/StageZeroToTwelveTransitionCore.agda
   DASHI/Foundations/JPlusOneScaleBridge.agda
   DASHI/Foundations/StageCantorScaleRecursion.agda
   DASHI/Reasoning/KantCriticalCompiler.agda
@@ -94,6 +95,8 @@ grep -q 'discoursePlacementProvesPoliticalEconomy = false' DASHI/Reasoning/Lacan
 
 # Stage 0..12, j-basis and Cantor recursion.
 grep -q 'stage12OpensRelationAtNewScale' DASHI/Foundations/StageAtlasZeroToTwelve.agda
+grep -q 'openCrossScaleRelation' DASHI/Foundations/StageZeroToTwelveTransitionCore.agda
+grep -q 'stage12ReachedByNumeralAlone = false' DASHI/Foundations/StageZeroToTwelveTransitionCore.agda
 grep -q 'elevenJIsTenJPlusJ' DASHI/Foundations/JPlusOneScaleBridge.agda
 grep -q 'twelveJIsTenJPlusTwoJ' DASHI/Foundations/JPlusOneScaleBridge.agda
 grep -q 'moonshineCoefficientIsRepresentationPlusOne' DASHI/Foundations/JPlusOneScaleBridge.agda
