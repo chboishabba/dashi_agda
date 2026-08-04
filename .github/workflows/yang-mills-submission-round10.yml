@@ -9,6 +9,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP06PhysicalModelLeafLightweightExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionRound10*.agda'
       - 'scripts/check_yang_mills_submission_round10.sh'
