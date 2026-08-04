@@ -3,10 +3,10 @@ module DASHI.Physics.YangMills.BalabanFederbushPairedContourCancellationExact wh
 ------------------------------------------------------------------------
 -- PROVENANCE
 --
--- Paul Federbush,
--- "A Mass Zero Cluster Expansion",
+-- Paul G. Federbush,
+-- "A Mass Zero Cluster Expansion. Part 1: The Expansion",
 -- Communications in Mathematical Physics 81 (1981), 327--340.
--- DOI: 10.1007/BF01208900.
+-- DOI: 10.1007/BF01209071.
 --
 -- Tadeusz Bałaban,
 -- "Renormalization Group Approach to Lattice Gauge Field Theories. I",
