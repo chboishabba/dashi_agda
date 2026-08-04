@@ -1,7 +1,8 @@
 module DASHI.Physics.Closure.NSTriadKNLuoPhysicalAnalyticFrontierValidation where
 
 ------------------------------------------------------------------------
--- Focused validation root for the physical-analytic Luo frontier advance.
+-- Focused validation root for the physical-analytic and submission-grade Luo
+-- frontier advance.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -25,6 +26,17 @@ import DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticInputsBuilderExact
 import DASHI.Physics.Closure.NSTriadKNLuoMaximalTimeGlobalizationExact
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalAnalyticTaskLedger
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticFrontierReceipt
+
+import DASHI.Physics.Closure.NSTriadKNLuoWeightedIncrementFourierIntegrationCutsetExact
+import DASHI.Physics.Closure.NSTriadKNLuoThreePairCoefficientCutsetExact
+import DASHI.Physics.Closure.NSTriadKNLuoMultiplierReceiptAndSourceSchurCutsetExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteInfiniteRealPromotionExact
+import DASHI.Physics.Closure.NSTriadKNLuoSubmissionDependencyCutsetExact
+import DASHI.Physics.Closure.NSTriadKNPeriodicNavierStokesSubmissionTheoremExact
+import DASHI.Physics.Closure.NSTriadKNLuoSubmissionAuditReceiptExact
+import DASHI.Physics.Closure.NSTriadKNLuoCoreSourceFidelityInventoryExact
+import DASHI.Physics.Closure.NSTriadKNLuoCriticalPathCompositionExact
+import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionFrontierReceipt
 
 physicalAnalyticFrontierValidationRootConstructed : Bool
 physicalAnalyticFrontierValidationRootConstructed = true
