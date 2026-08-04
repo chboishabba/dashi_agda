@@ -15,6 +15,20 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
 open import DASHI.Physics.YangMills.BalabanRationalLDLCertificate
 
 ------------------------------------------------------------------------
+-- PRIMARY SOURCE AND REPOSITORY CONTRIBUTION
+--
+-- Roger A. Horn and Charles R. Johnson,
+-- "Matrix Analysis", second edition, Cambridge University Press, 2012.
+-- DOI: 10.1017/CBO9781139020411.
+--
+-- The source supplies the standard finite LDL^T positivity method.  The
+-- coordinates, rational pivots, linear forms and exact polynomial identity
+-- below are DASHI-owned.  In particular, the reconstruction is now checked by
+-- Agda's rational ring normalizer rather than admitted as a generated
+-- postulate.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 -- Generated exact LDL^T certificate for the mean-zero path P4.
 --
 -- The independent coordinates represent
@@ -92,11 +106,11 @@ path4Terms =
   ∷ ldlTerm pivot2 form2 (nonnegativeFraction 13919 5516)
   ∷ []
 
-postulate
-  path4LDLDecompositionRaw : ∀ a b c →
-    path4Energy (path4Coordinates a b c)
-    ≡ oneSixteenth * path4NormSq (path4Coordinates a b c)
-      + sumTermValues path4Terms (path4Coordinates a b c)
+path4LDLDecompositionRaw : ∀ a b c →
+  path4Energy (path4Coordinates a b c)
+  ≡ oneSixteenth * path4NormSq (path4Coordinates a b c)
+    + sumTermValues path4Terms (path4Coordinates a b c)
+path4LDLDecompositionRaw = ℚRing.solve-∀
 
 path4LDLDecomposition : ∀ coordinate →
   path4Energy coordinate
@@ -119,7 +133,7 @@ path4Poincare : ∀ coordinate →
 path4Poincare = ldlCertificatePoincare path4LDLCertificate
 
 path4GeneratedLDLReconstructionLevel : ProofLevel
-path4GeneratedLDLReconstructionLevel = computed
+path4GeneratedLDLReconstructionLevel = machineChecked
 
 path4GeneratedLDLConsumptionLevel : ProofLevel
 path4GeneratedLDLConsumptionLevel = machineChecked
