@@ -132,20 +132,12 @@ productNonnegative left right leftNonnegative rightNonnegative =
   ℚP.nonNegative⁻¹ (left * right)
 
 ------------------------------------------------------------------------
--- A fixed primitive data set, restricted to the configured P33 radius.
+-- A fixed one-point background carrier.  The configured-radius equality is a
+-- theorem argument, rather than being hidden in the background universe.
 ------------------------------------------------------------------------
 
-data ConfiguredBackground
-    (dataSet : Primitive.PrimitivePhysicalOperatorNorms Cells.BondCell4) : Set where
-  configuredBackground :
-    Primitive.radius dataSet ≡ P33.p33SmallFieldRadius →
-    ConfiguredBackground dataSet
-
-configuredRadiusExact :
-  ∀ {dataSet : Primitive.PrimitivePhysicalOperatorNorms Cells.BondCell4} →
-  ConfiguredBackground dataSet →
-  Primitive.radius dataSet ≡ P33.p33SmallFieldRadius
-configuredRadiusExact (configuredBackground exact) = exact
+data ConfiguredBackground : Set where
+  configuredBackground : ConfiguredBackground
 
 localCharge : Hodge.RationalBondField4 → Cells.BondCell4 → ℚ
 localCharge state cell = Cells.bondCellCharge state cell
@@ -169,7 +161,7 @@ literalSignedFamily :
       (localCoefficient cell)
       (configuredCoefficient * Primitive.radius dataSet)) →
   Signed.FiniteSignedRemainderFamily
-    (ConfiguredBackground dataSet)
+    ConfiguredBackground
     Hodge.RationalBondField4
     Cells.BondCell4
 literalSignedFamily dataSet configuredCoefficient coefficientNN
@@ -220,9 +212,7 @@ literalSignedFamily dataSet configuredCoefficient coefficientNN
 curvatureFamily :
   ∀ dataSet →
   Signed.FiniteSignedRemainderFamily
-    (ConfiguredBackground dataSet)
-    Hodge.RationalBondField4
-    Cells.BondCell4
+    ConfiguredBackground Hodge.RationalBondField4 Cells.BondCell4
 curvatureFamily dataSet =
   literalSignedFamily
     dataSet
@@ -234,9 +224,7 @@ curvatureFamily dataSet =
 transportFamily :
   ∀ dataSet →
   Signed.FiniteSignedRemainderFamily
-    (ConfiguredBackground dataSet)
-    Hodge.RationalBondField4
-    Cells.BondCell4
+    ConfiguredBackground Hodge.RationalBondField4 Cells.BondCell4
 transportFamily dataSet =
   literalSignedFamily
     dataSet
@@ -248,9 +236,7 @@ transportFamily dataSet =
 chartFamily :
   ∀ dataSet →
   Signed.FiniteSignedRemainderFamily
-    (ConfiguredBackground dataSet)
-    Hodge.RationalBondField4
-    Cells.BondCell4
+    ConfiguredBackground Hodge.RationalBondField4 Cells.BondCell4
 chartFamily dataSet =
   literalSignedFamily
     dataSet
@@ -262,9 +248,7 @@ chartFamily dataSet =
 gaugeFamily :
   ∀ dataSet →
   Signed.FiniteSignedRemainderFamily
-    (ConfiguredBackground dataSet)
-    Hodge.RationalBondField4
-    Cells.BondCell4
+    ConfiguredBackground Hodge.RationalBondField4 Cells.BondCell4
 gaugeFamily dataSet =
   literalSignedFamily
     dataSet
@@ -276,9 +260,7 @@ gaugeFamily dataSet =
 constraintFamily :
   ∀ dataSet →
   Signed.FiniteSignedRemainderFamily
-    (ConfiguredBackground dataSet)
-    Hodge.RationalBondField4
-    Cells.BondCell4
+    ConfiguredBackground Hodge.RationalBondField4 Cells.BondCell4
 constraintFamily dataSet =
   literalSignedFamily
     dataSet
@@ -292,12 +274,13 @@ constraintFamily dataSet =
 ------------------------------------------------------------------------
 
 literalFiveChannelData :
-  ∀ dataSet →
+  ∀ (dataSet : Primitive.PrimitivePhysicalOperatorNorms Cells.BondCell4) →
+  Primitive.radius dataSet ≡ P33.p33SmallFieldRadius →
   Five.FiveChannelPath4Data
-    (ConfiguredBackground dataSet)
+    ConfiguredBackground
     Cells.BondCell4 Cells.BondCell4 Cells.BondCell4
     Cells.BondCell4 Cells.BondCell4
-literalFiveChannelData dataSet = record
+literalFiveChannelData dataSet radiusExact = record
   { Five.FiveChannelPath4Data.curvature = curvatureFamily dataSet
   ; Five.FiveChannelPath4Data.transport = transportFamily dataSet
   ; Five.FiveChannelPath4Data.chart = chartFamily dataSet
@@ -316,12 +299,12 @@ literalFiveChannelData dataSet = record
   ; Five.FiveChannelPath4Data.gaugeNormExact = λ _ _ → refl
   ; Five.FiveChannelPath4Data.constraintNormExact = λ _ _ → refl
   ; Five.FiveChannelPath4Data.radiusIsConfigured =
-      λ background _ → configuredRadiusExact background
+      λ _ _ → radiusExact
   }
 
 literalFiveMechanismsGivePath4PhysicalCoercivity :
   ∀ (dataSet : Primitive.PrimitivePhysicalOperatorNorms Cells.BondCell4)
-    (background : ConfiguredBackground dataSet)
+    (radiusExact : Primitive.radius dataSet ≡ P33.p33SmallFieldRadius)
     state gaugeFixingEnergy blockPenaltyEnergy →
   Hodge.BondComponentMeanZero state →
   0ℚ ≤ gaugeFixingEnergy →
@@ -331,13 +314,14 @@ literalFiveMechanismsGivePath4PhysicalCoercivity :
       (Hodge.referenceHodgeEnergy
         state gaugeFixingEnergy blockPenaltyEnergy)
       (Five.totalSignedRemainder
-        (literalFiveChannelData dataSet) background state)
+        (literalFiveChannelData dataSet radiusExact)
+        configuredBackground state)
 literalFiveMechanismsGivePath4PhysicalCoercivity
-    dataSet background state gaugeFixingEnergy blockPenaltyEnergy
+    dataSet radiusExact state gaugeFixingEnergy blockPenaltyEnergy
     meanZero gaugeNonnegative blockNonnegative =
   Five.fiveLocalChannelsGivePath4PhysicalCoercivity
-    (literalFiveChannelData dataSet)
-    background state gaugeFixingEnergy blockPenaltyEnergy
+    (literalFiveChannelData dataSet radiusExact)
+    configuredBackground state gaugeFixingEnergy blockPenaltyEnergy
     meanZero gaugeNonnegative blockNonnegative
 
 literalFiveLocalFunctionsLevel : ProofLevel
