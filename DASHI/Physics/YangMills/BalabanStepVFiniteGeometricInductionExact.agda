@@ -15,8 +15,8 @@ module DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact where
 -- an ordered field is supplied by B = (1-q)^(-1).
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; cong₂; sym; trans)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Nat using (zero; suc)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
@@ -36,16 +36,6 @@ record GeometricSemiringLaws
     addIdentityRight : ∀ value →
       StepV.add kernel value (StepV.zero kernel) ≡ value
 
-    multiplyAssociative : ∀ left middle right →
-      StepV.multiply kernel (StepV.multiply kernel left middle) right
-      ≡ StepV.multiply kernel left (StepV.multiply kernel middle right)
-
-    multiplyIdentityLeft : ∀ value →
-      StepV.multiply kernel (StepV.one kernel) value ≡ value
-
-    multiplyIdentityRight : ∀ value →
-      StepV.multiply kernel value (StepV.one kernel) ≡ value
-
     multiplyZeroRight : ∀ value →
       StepV.multiply kernel value (StepV.zero kernel)
       ≡ StepV.zero kernel
@@ -64,15 +54,6 @@ record GeometricSemiringLaws
 
 open GeometricSemiringLaws public
 
-powerSuccessor :
-  ∀ {Scalar}
-    {kernel : StepV.OrderedSemiringKernel Scalar}
-    ratio exponent →
-  StepV.power kernel ratio (suc exponent)
-  ≡ StepV.multiply kernel ratio
-      (StepV.power kernel ratio exponent)
-powerSuccessor ratio exponent = refl
-
 powerNonnegative :
   ∀ {Scalar}
     {kernel : StepV.OrderedSemiringKernel Scalar} →
@@ -86,21 +67,17 @@ powerNonnegative :
 powerNonnegative laws ratioNonnegative zero =
   oneNonnegative laws
 powerNonnegative {kernel = kernel} laws ratioNonnegative (suc exponent) =
-  StepV.transitive kernel
-    (subst
-      (λ value →
-        StepV.LessEqual kernel value
-          (StepV.multiply kernel ratio
-            (StepV.power kernel ratio exponent)))
-      (sym (multiplyZeroRight laws (StepV.zero kernel)))
-      (StepV.multiplyMonotoneNonnegative kernel
-        (zeroNonnegative laws)
-        (zeroNonnegative laws)
-        ratioNonnegative
-        (powerNonnegative laws ratioNonnegative exponent)))
-    (StepV.reflexive kernel
-      (StepV.multiply kernel ratio
-        (StepV.power kernel ratio exponent)))
+  subst
+    (λ value →
+      StepV.LessEqual kernel value
+        (StepV.multiply kernel ratio
+          (StepV.power kernel ratio exponent)))
+    (multiplyZeroRight laws (StepV.zero kernel))
+    (StepV.multiplyMonotoneNonnegative kernel
+      (zeroNonnegative laws)
+      (zeroNonnegative laws)
+      ratioNonnegative
+      (powerNonnegative laws ratioNonnegative exponent))
 
 geometricPartialSumNonnegative :
   ∀ {Scalar}
@@ -121,7 +98,7 @@ geometricPartialSumNonnegative {kernel = kernel} laws ratioNonnegative (suc coun
         (StepV.add kernel
           (StepV.geometricPartialSum kernel ratio count)
           (StepV.power kernel ratio count)))
-    (sym (addIdentityLeft laws (StepV.zero kernel)))
+    (addIdentityLeft laws (StepV.zero kernel))
     (StepV.addMonotone kernel
       (geometricPartialSumNonnegative laws ratioNonnegative count)
       (powerNonnegative laws ratioNonnegative count))
@@ -149,16 +126,13 @@ geometricPartialSumAffineRecurrence {kernel = kernel} laws ratio (suc count) =
   let
     sum = StepV.geometricPartialSum kernel ratio count
     powerAt = StepV.power kernel ratio count
-
-    induction =
-      geometricPartialSumAffineRecurrence laws ratio count
   in
   trans
     (cong
       (λ prefix →
         StepV.add kernel prefix
           (StepV.multiply kernel ratio powerAt))
-      induction)
+      (geometricPartialSumAffineRecurrence laws ratio count))
     (trans
       (addAssociative laws
         (StepV.one kernel)
