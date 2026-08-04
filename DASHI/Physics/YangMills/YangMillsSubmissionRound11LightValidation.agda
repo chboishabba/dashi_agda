@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.YangMillsSubmissionRound11LightValidation where
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.YangMills.BalabanBishopConfiguredTermIdentificationExact
