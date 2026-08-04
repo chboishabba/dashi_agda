@@ -14,6 +14,18 @@ on:
       - 'flake.nix'
       - 'flake.lock'
       - '.github/workflows/yang-mills-submission-round8.yml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'DASHI/Analysis/**'
+      - 'DASHI/Foundations/**'
+      - 'DASHI/Physics/YangMills/**'
+      - 'scripts/check_yang_mills_submission_round8.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/yang-mills-submission-round8.yml'
 
 permissions:
   contents: read
