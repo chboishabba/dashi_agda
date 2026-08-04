@@ -15,20 +15,20 @@ module DASHI.Physics.Closure.NSTriadKNLuoResidueGapHardWindowBudgetExact where
 -- majorant route into the rational hard-terminal-window budget consumed by the
 -- non-circular official Luo closure.
 --
--- This module proves the budget algebra.  It deliberately keeps visible the
+-- This module proves the budget algebra. It deliberately keeps visible the
 -- only load-bearing semantic seam: the Nat-valued cutoff majorant must be
 -- identified with the actual hard low-pass gradient integral of the official
 -- periodic solution, and its threshold must include the hard/smooth multiplier
--- constant.  No terminal criterion is assumed as part of the physical carrier.
+-- constant. No terminal criterion is assumed as part of the physical carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat using (_≤_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+import Data.Nat as ℕ
+import Data.Rational.Base as ℚBase
+open ℚBase using (ℚ; 0ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNResidueScaleOperatorGapExact as Gap
 import DASHI.Physics.Closure.NSTriadKNLuoExplicitCutoffLocalizedCriterionExact as Cutoff
@@ -42,10 +42,12 @@ record NatToRationalOrderEmbedding : Set₁ where
     embed : Nat → ℚ
 
     embedNonnegative :
-      (value : Nat) → 0ℚ ≤ embed value
+      (value : Nat) → ℚBase._≤_ 0ℚ (embed value)
 
     embedMonotone :
-      {left right : Nat} → left ≤ right → embed left ≤ embed right
+      {left right : Nat} →
+      ℕ._≤_ left right →
+      ℚBase._≤_ (embed left) (embed right)
 
 open NatToRationalOrderEmbedding public
 
@@ -62,8 +64,6 @@ record ResidueGapHardWindowIdentification
     cutoffControlAt :
       (shell : Nat) → Cutoff.LuoCutoffLocalizedMajorant shell
 
-    -- The finite operator/gap authority is the exact in-repo owner, not a new
-    -- abstract copy.
     residueGapAuthority : Gap.ExactResidueScaleOperatorGapAuthority
     residueGapAuthorityMeaning :
       residueGapAuthority ≡ Gap.exactResidueScaleOperatorGapAuthority
@@ -95,19 +95,20 @@ record ResidueGapHardWindowIdentification
           (Cutoff.bkmThreshold (cutoffControlAt shell))
 
     universalDeltaNonnegative :
-      0ℚ ≤ OfficialLuo.universalDeltaBKM
-        (PreBudget.sourceCarrier data)
+      ℚBase._≤_ 0ℚ
+        (OfficialLuo.universalDeltaBKM
+          (PreBudget.sourceCarrier data))
 
-    -- The selected Nat threshold is the hard budget.  The final comparison
-    -- includes the scale-uniform hard/smooth multiplier constant.
     scaledBudgetBelowLuoDelta :
       (shell : Nat) →
-      MultiplierAbstract.hardSmoothMultiplierLInfinityConstant
-        (Multiplier.canonicalLuoMultiplierAuthority
-          (PreBudget.multiplierRealization data))
-        * hardBudgetAt shell
-      ≤ OfficialLuo.universalDeltaBKM
-          (PreBudget.sourceCarrier data)
+      ℚBase._≤_
+        (ℚBase._*_
+          (MultiplierAbstract.hardSmoothMultiplierLInfinityConstant
+            (Multiplier.canonicalLuoMultiplierAuthority
+              (PreBudget.multiplierRealization data)))
+          (hardBudgetAt shell))
+        (OfficialLuo.universalDeltaBKM
+          (PreBudget.sourceCarrier data))
 
 open ResidueGapHardWindowIdentification public
 
@@ -120,7 +121,7 @@ hardBudgetNonnegativeFromIdentification :
       InitialDatum Solution Time} →
   (identification : ResidueGapHardWindowIdentification data) →
   (shell : Nat) →
-  0ℚ ≤ hardBudgetAt identification shell
+  ℚBase._≤_ 0ℚ (hardBudgetAt identification shell)
 hardBudgetNonnegativeFromIdentification identification shell
   rewrite hardBudgetMeaning identification shell =
   embedNonnegative
@@ -136,11 +137,12 @@ hardIntegralBelowBudgetFromResidueGap :
       InitialDatum Solution Time} →
   (identification : ResidueGapHardWindowIdentification data) →
   (shell : Nat) →
-  MultiplierAbstract.hardTerminalWindowIntegral
-    (Multiplier.canonicalLuoMultiplierAuthority
-      (PreBudget.multiplierRealization data))
-    shell (PreBudget.solution data)
-  ≤ hardBudgetAt identification shell
+  ℚBase._≤_
+    (MultiplierAbstract.hardTerminalWindowIntegral
+      (Multiplier.canonicalLuoMultiplierAuthority
+        (PreBudget.multiplierRealization data))
+      shell (PreBudget.solution data))
+    (hardBudgetAt identification shell)
 hardIntegralBelowBudgetFromResidueGap identification shell
   rewrite hardIntegralMeaning identification shell
         | hardBudgetMeaning identification shell =
