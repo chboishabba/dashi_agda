@@ -151,7 +151,7 @@ complexIntegralWeightedIncrement :
   ∀ {r} {F : C3.RealField r}
     (system : ComplexIntegralCharacterSystem F) →
   Mode system → Mode system → C3.Complex F
-complexIntegralWeightedIncrement system left right =
+complexIntegralWeightedIncrement {F = F} system left right =
   integrate (integral system)
     (λ sample →
       C3.complexMultiply
@@ -228,7 +228,7 @@ complexLinearIntegralWeightedIncrementIdentity :
         (complexIntegralKernelTransformAt system right))
       (complexIntegralKernelTransformAt system (zeroMode system))
 complexLinearIntegralWeightedIncrementIdentity
-  system left right =
+  {F = F} system left right =
   let
     I = integral system
     A = λ sample →
@@ -257,10 +257,10 @@ complexLinearIntegralWeightedIncrementIdentity
            (C3.complexMultiply
              (C3.complexSubtract
                (character system left sample)
-               (C3.complexOne _))
+               (C3.complexOne F))
              (C3.complexSubtract
                (character system right sample)
-               (C3.complexOne _))))
+               (C3.complexOne F))))
        (λ sample →
          C3.complexAdd
            (C3.complexSubtract
