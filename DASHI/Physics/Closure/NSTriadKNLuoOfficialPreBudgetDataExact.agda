@@ -17,11 +17,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact where
 --
 -- PURPOSE
 -- Remove both localized-criterion circularities from the official continuation
--- architecture.  Pre-budget physical data owns energy, dissipation, flux,
+-- architecture. Pre-budget physical data owns energy, dissipation, flux,
 -- weighted energy, gradient integral, multiplier and source mappings, but owns
 -- neither terminalBudgetAt nor localizedGradientThresholdSmallness.
 --
--- A derived budget family subsequently supplies the hard-window estimate.  It
+-- A derived budget family subsequently supplies the hard-window estimate. It
 -- is then used to complete the historical cutoff quantities, physical
 -- energy/time record and official continuation closure.
 ------------------------------------------------------------------------
@@ -32,6 +32,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
