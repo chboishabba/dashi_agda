@@ -1,0 +1,54 @@
+name: Yang-Mills submission round 8
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/balaban-primary-averaging-qstar
+    paths:
+      - 'DASHI/Analysis/**'
+      - 'DASHI/Foundations/**'
+      - 'DASHI/Physics/YangMills/**'
+      - 'scripts/check_yang_mills_submission_round8.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/yang-mills-submission-round8.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yang-mills-submission-round8-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-agda-29:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Run focused Yang-Mills submission round-eight checker
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            export AGDA_BIN="$(command -v agda)"
+            export AGDA_ARGS="-i . -i DCHoTT-Agda -i cubical -l standard-library"
+            export AGDA_JOBS="$(nproc)"
+            bash scripts/check_yang_mills_submission_round8.sh
+          '
