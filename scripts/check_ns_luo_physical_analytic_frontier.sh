@@ -13,6 +13,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterWeightedIncrementExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterMultiplierBridgeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteThreePairCoefficientExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoThreeWayPairPartitionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalYoungSameConstantExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePeriodicMultiplierRealizationExact.agda
