@@ -37,7 +37,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -67,6 +67,11 @@ reassociateWeightedProduct : ∀ kernelAbs majorant weightValue →
   kernelAbs * (majorant * weightValue)
   ≡ majorant * (kernelAbs * weightValue)
 reassociateWeightedProduct = ℚRing.solve-∀
+
+majorantRowScale : ∀ majorant contraction weightValue →
+  majorant * (contraction * weightValue)
+  ≡ contraction * majorant * weightValue
+majorantRowScale = ℚRing.solve-∀
 
 sumKernelScale :
   ∀ {Site : Set} (sites : List Site)
@@ -190,7 +195,7 @@ weightedKernelContraction dataSet vector majorant
         majorant * weightedRowSum
           (sites dataSet) (kernel dataSet) (weight dataSet) left
         ≤ upper)
-      (ℚRing.solve-∀
+      (majorantRowScale
         majorant (contractionFactor dataSet) (weight dataSet left))
       (ℚP.*-monoˡ-≤-nonNeg majorant
         (rowBound dataSet left)))
