@@ -8,6 +8,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalAnalyticFrontierValidation wher
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSTriadKNIntegerFourierModeAddExact
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact
 import DASHI.Physics.Closure.NSTriadKNLuoIncrementTensorPolarizationExact
 import DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelFourierMultiplierExact
@@ -18,6 +19,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteLinearIntegralRealizationExact
 import DASHI.Physics.Closure.NSTriadKNLuoComplexLinearIntegralWeightedIncrementExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteComplexWeightedIncrementExact
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicComplexCharacterMultiplierExact
+import DASHI.Physics.Closure.NSTriadKNLuoPeriodicComplexMultiplierCancellationExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteTranslationTensorConvolutionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteComplexTranslationTensorConvolutionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteResonantPairFoldExact
