@@ -5,6 +5,7 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 
 files=(
+  DASHI/Physics/YangMills/BalabanBishopConcreteHalfBallSquareExact.agda
   DASHI/Physics/YangMills/BalabanBishopRatioMonotoneTermsExact.agda
   DASHI/Physics/YangMills/BalabanBishopAlternatingFirstOmittedExact.agda
   DASHI/Physics/YangMills/BalabanP06CanonicalAnimalConstantExact.agda
@@ -37,6 +38,11 @@ grep -q 'recent26020072AuditLead' \
 grep -q 'mayInhabitImportedTheorem = false' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound8SourceAudit.agda
 
+# The Bishop half-ball estimate must be instantiated on the actual constructed
+# real carrier, not remain solely as a generic ordered-square socket.
+grep -q 'bishopHalfBallMagnitudeSquareBelowQuarter' \
+  DASHI/Physics/YangMills/BalabanBishopConcreteHalfBallSquareExact.agda
+
 # The numerical Step-V interface must be the canonical animal constant together
 # with a strict logarithmic decay margin, rather than a generic smallness flag.
 grep -q 'canonicalAnimalConstant' \
@@ -44,6 +50,8 @@ grep -q 'canonicalAnimalConstant' \
 grep -q 'logMarginImpliesWeightedRatioBelowOne' \
   DASHI/Physics/YangMills/BalabanStepVCanonicalAnimalMarginExact.agda
 
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/YangMills/BalabanBishopConcreteHalfBallSquareExact.agda
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanBishopRatioMonotoneTermsExact.agda
 scripts/run_agda29_parallel_check.sh \
