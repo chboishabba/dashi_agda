@@ -22,6 +22,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoEquation42PhysicalIdentityAdapterExact 
 import DASHI.Physics.Closure.NSTriadKNLuoSection4PhysicalBoundsAdapterExact as Section4
 import DASHI.Physics.Closure.NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact as Summability
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as FixedReduction
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialFixedShiftCoreExact as OfficialFixed
 import DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact as ParsevalUpgrade
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyOfficialUpgradeExact as CutoffUpgrade
 import DASHI.Physics.Closure.NSTriadKNLuoMaximalTimeGlobalizationExact as Globalization
@@ -59,9 +60,16 @@ record LuoPhysicalAnalyticTaskLedger : Set where
 
     projectedConvectionOfficialParsevalUpgradeConstructed : Bool
     officialProjectedHardHighOrthogonalityClosed : Bool
+    hardHighDerivativeCommutationReused : Bool
+    literalProjectedTriadEnumerationReused : Bool
+
     officialCutoffEnergyUpgradeConstructed : Bool
     officialCutoffEnergyDissipationIdentificationClosed : Bool
+
     fixedShiftOrderReductionConstructed : Bool
+    officialFixedShiftCoreConstructorConstructed : Bool
+    officialFixedShiftEnergyCoherenceDefinitional : Bool
+    officialFixedShiftDissipationCoherenceDefinitional : Bool
 
     meanValueGronwallPhysicalDataInhabited : Bool
     fixedShiftPhysicalRecursionAndCorrectionInhabited : Bool
@@ -99,9 +107,14 @@ luoPhysicalAnalyticTaskLedger = ledger
   false
   ParsevalUpgrade.projectedConvectionOfficialParsevalUpgradeConstructed
   ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonality
+  ParsevalUpgrade.hardHighDerivativeCommutationReused
+  ParsevalUpgrade.literalProjectedTriadEnumerationReused
   CutoffUpgrade.officialCutoffEnergyUpgradeConstructed
   CutoffUpgrade.officialCutoffEnergyDissipationIdentificationClosed
   FixedReduction.fixedShiftOrderReductionClosed
+  OfficialFixed.officialFixedShiftCoreConstructorClosed
+  OfficialFixed.officialFixedShiftEnergyCoherenceDefinitional
+  OfficialFixed.officialFixedShiftDissipationCoherenceDefinitional
   false
   false
   false
@@ -171,6 +184,16 @@ officialProjectedHardHighOrthogonalityIsTrue :
 officialProjectedHardHighOrthogonalityIsTrue =
   ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonalityIsTrue
 
+hardHighDerivativeCommutationReusedIsTrue :
+  hardHighDerivativeCommutationReused luoPhysicalAnalyticTaskLedger ≡ true
+hardHighDerivativeCommutationReusedIsTrue =
+  ParsevalUpgrade.hardHighDerivativeCommutationReusedIsTrue
+
+literalProjectedTriadEnumerationReusedIsTrue :
+  literalProjectedTriadEnumerationReused luoPhysicalAnalyticTaskLedger ≡ true
+literalProjectedTriadEnumerationReusedIsTrue =
+  ParsevalUpgrade.literalProjectedTriadEnumerationReusedIsTrue
+
 officialCutoffEnergyUpgradeIsTrue :
   officialCutoffEnergyUpgradeConstructed luoPhysicalAnalyticTaskLedger ≡ true
 officialCutoffEnergyUpgradeIsTrue =
@@ -187,6 +210,25 @@ fixedShiftOrderReductionIsTrue :
   fixedShiftOrderReductionConstructed luoPhysicalAnalyticTaskLedger ≡ true
 fixedShiftOrderReductionIsTrue =
   FixedReduction.fixedShiftOrderReductionClosedIsTrue
+
+officialFixedShiftCoreConstructorIsTrue :
+  officialFixedShiftCoreConstructorConstructed luoPhysicalAnalyticTaskLedger
+  ≡ true
+officialFixedShiftCoreConstructorIsTrue =
+  OfficialFixed.officialFixedShiftCoreConstructorClosedIsTrue
+
+officialFixedShiftEnergyCoherenceIsDefinitional :
+  officialFixedShiftEnergyCoherenceDefinitional luoPhysicalAnalyticTaskLedger
+  ≡ true
+officialFixedShiftEnergyCoherenceIsDefinitional =
+  OfficialFixed.officialFixedShiftEnergyCoherenceDefinitionalIsTrue
+
+officialFixedShiftDissipationCoherenceIsDefinitional :
+  officialFixedShiftDissipationCoherenceDefinitional
+    luoPhysicalAnalyticTaskLedger
+  ≡ true
+officialFixedShiftDissipationCoherenceIsDefinitional =
+  OfficialFixed.officialFixedShiftDissipationCoherenceDefinitionalIsTrue
 
 maximalTimeLogicalReducerIsTrue :
   maximalTimeLogicalReducerConstructed luoPhysicalAnalyticTaskLedger
