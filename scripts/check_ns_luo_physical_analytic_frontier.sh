@@ -41,17 +41,20 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoCoreSourceFidelityInventoryExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSubmissionLemmaCrosswalkExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCriticalPathCompositionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoNoCircularityAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionCompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionFrontierReceipt.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
 )
 
 for file in "${FILES[@]}"; do
-  if grep -nE '\{!!\}|\?($|[^[:alnum:]_])|^[[:space:]]*postulate([[:space:]]|$)' "$file"; then
-    echo "forbidden hole, metavariable marker, or postulate in $file" >&2
+  if grep -nE '\{!!\}|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--unsafe' "$file"; then
+    echo "forbidden hole, postulate, unsolved-meta option, or unsafe option in $file" >&2
     exit 1
   fi
 done
+
+bash scripts/check_ns_luo_submission_audit.sh
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
