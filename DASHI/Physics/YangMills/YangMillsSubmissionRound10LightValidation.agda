@@ -1,0 +1,21 @@
+module DASHI.Physics.YangMills.YangMillsSubmissionRound10LightValidation where
+
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischargeExact
+import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact
+import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact
+import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact
+import DASHI.Physics.YangMills.BalabanStepVBishopFiniteGeometricExact
+import DASHI.Physics.YangMills.BalabanP06PhysicalModelLeafLightweightExact
+import DASHI.Physics.YangMills.YangMillsSubmissionRound10SourceAudit
+import DASHI.Physics.YangMills.YangMillsSubmissionRound10Ledger
+import DASHI.Physics.YangMills.YangMillsSubmissionRound10Receipt
+
+round10LightValidationRootPresent : Bool
+round10LightValidationRootPresent = true
+
+round10LightValidationRootPresentIsTrue :
+  round10LightValidationRootPresent ≡ true
+round10LightValidationRootPresentIsTrue = refl
