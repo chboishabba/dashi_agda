@@ -39,59 +39,59 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteWeightedJensenExact as Jensen
 record NormalizedWeightedWindow : Set where
   constructor normalized-weighted-window
   field
-    samples : List Jensen.WeightedValue
-    massIsOne : Jensen.mass samples ≡ 1ℚ
+    normalizedSamples : List Jensen.WeightedValue
+    massIsOne : Jensen.mass normalizedSamples ≡ 1ℚ
 
 open NormalizedWeightedWindow public
 
 normalizedWeightedJensen :
   (window : NormalizedWeightedWindow) →
-  L2.square (Jensen.firstMoment (samples window))
-  ≤ Jensen.secondMoment (samples window)
+  L2.square (Jensen.firstMoment (normalizedSamples window))
+  ≤ Jensen.secondMoment (normalizedSamples window)
 normalizedWeightedJensen window =
   let
     unitMassBound :
-      L2.square (Jensen.firstMoment (samples window))
-      ≤ 1ℚ * Jensen.secondMoment (samples window)
+      L2.square (Jensen.firstMoment (normalizedSamples window))
+      ≤ 1ℚ * Jensen.secondMoment (normalizedSamples window)
     unitMassBound =
       subst
         (λ massValue →
-          L2.square (Jensen.firstMoment (samples window))
-          ≤ massValue * Jensen.secondMoment (samples window))
+          L2.square (Jensen.firstMoment (normalizedSamples window))
+          ≤ massValue * Jensen.secondMoment (normalizedSamples window))
         (massIsOne window)
-        (Jensen.finiteWeightedJensenSquare (samples window))
+        (Jensen.finiteWeightedJensenSquare (normalizedSamples window))
 
     unitMeaning :
-      1ℚ * Jensen.secondMoment (samples window)
-      ≡ Jensen.secondMoment (samples window)
-    unitMeaning = solve (Jensen.secondMoment (samples window) ∷ [])
+      1ℚ * Jensen.secondMoment (normalizedSamples window)
+      ≡ Jensen.secondMoment (normalizedSamples window)
+    unitMeaning = solve (Jensen.secondMoment (normalizedSamples window) ∷ [])
   in
   subst
     (λ upper →
-      L2.square (Jensen.firstMoment (samples window)) ≤ upper)
+      L2.square (Jensen.firstMoment (normalizedSamples window)) ≤ upper)
     unitMeaning
     unitMassBound
 
 record WeightedIntervalWindow : Set where
   constructor weighted-interval-window
   field
-    samples : List Jensen.WeightedValue
+    intervalSamples : List Jensen.WeightedValue
     intervalMass : ℚ
-    intervalMassMeaning : Jensen.mass samples ≡ intervalMass
+    intervalMassMeaning : Jensen.mass intervalSamples ≡ intervalMass
 
 open WeightedIntervalWindow public
 
 intervalWeightedJensen :
   (window : WeightedIntervalWindow) →
-  L2.square (Jensen.firstMoment (samples window))
-  ≤ intervalMass window * Jensen.secondMoment (samples window)
+  L2.square (Jensen.firstMoment (intervalSamples window))
+  ≤ intervalMass window * Jensen.secondMoment (intervalSamples window)
 intervalWeightedJensen window =
   subst
     (λ massValue →
-      L2.square (Jensen.firstMoment (samples window))
-      ≤ massValue * Jensen.secondMoment (samples window))
+      L2.square (Jensen.firstMoment (intervalSamples window))
+      ≤ massValue * Jensen.secondMoment (intervalSamples window))
     (intervalMassMeaning window)
-    (Jensen.finiteWeightedJensenSquare (samples window))
+    (Jensen.finiteWeightedJensenSquare (intervalSamples window))
 
 finiteNormalizedWeightedJensenClosed : Bool
 finiteNormalizedWeightedJensenClosed = true
