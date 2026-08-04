@@ -157,10 +157,26 @@ weightedMeanValueNonuniformGronwall data =
         mass
         (massNonnegative (weightedWindow data))
         (pathFromSelectedMinimum data)
+
+    initialScaleCommutative :
+      Mean.selected selection * mass
+      ≡ mass * Mean.selected selection
+    initialScaleCommutative =
+      solve (Mean.selected selection ∷ mass ∷ [])
+
+    initialScaledBound :
+      mass * Mean.selected selection
+      ≤ Weighted.firstMoment (weightedWindow data)
+    initialScaledBound =
+      subst
+        (λ left →
+          left ≤ Weighted.firstMoment (weightedWindow data))
+        initialScaleCommutative
+        (Mean.selectedTimesMassBelowMoment selection)
   in
   Gronwall.finiteNonuniformGronwall
     scaledPath
-    (Mean.selectedTimesMassBelowMoment selection)
+    initialScaledBound
 
 finiteWeightedMeanValueGronwallClosed : Bool
 finiteWeightedMeanValueGronwallClosed = true
