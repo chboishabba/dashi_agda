@@ -21,6 +21,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoOfficialFixedShiftCoreExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyOfficialUpgradeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCanonicalAnalyticInputsBuilderExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoMaximalTimeGlobalizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticTaskLedger.agda
   DASHI/Physics/Closure/NSTriadKNLuoCanonicalAnalyticFrontierReceipt.agda
