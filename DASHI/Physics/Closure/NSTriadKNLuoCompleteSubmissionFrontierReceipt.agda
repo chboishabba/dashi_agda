@@ -4,7 +4,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionFrontierReceipt where
 -- PURPOSE
 -- Authoritative receipt extending the current physical-analytic Luo ledger
 -- through the finite-to-infinite, rational-to-real, global-solution and
--- submission-audit stages.  Constructed reducers are separated from inhabited
+-- submission-audit stages. Constructed reducers are separated from inhabited
 -- analytic propositions and from the final global theorem.
 ------------------------------------------------------------------------
 
@@ -14,9 +14,18 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalAnalyticTaskLedger as Analytic
 import DASHI.Physics.Closure.NSTriadKNLuoWeightedIncrementFourierIntegrationCutsetExact as Increment
 import DASHI.Physics.Closure.NSTriadKNLuoThreePairCoefficientCutsetExact as Pairs
+import DASHI.Physics.Closure.NSTriadKNLuoMultiplierReceiptAndSourceSchurCutsetExact as StageB
+import DASHI.Physics.Closure.NSTriadKNLuoAnalyticFractionalPowerIdentificationExact as Fractional
+import DASHI.Physics.Closure.NSTriadKNLuoMeanValueGronwallReductionExact as Gronwall
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalBlockDecayReductionExact as BlockDecay
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteInfiniteRealPromotionExact as Promotion
 import DASHI.Physics.Closure.NSTriadKNLuoSubmissionDependencyCutsetExact as Dependency
 import DASHI.Physics.Closure.NSTriadKNPeriodicNavierStokesSubmissionTheoremExact as Submission
+import DASHI.Physics.Closure.NSTriadKNLuoGlobalPhysicalSolutionReductionExact as Global
+import DASHI.Physics.Closure.NSTriadKNLuoSubmissionAuditReceiptExact as Audit
+import DASHI.Physics.Closure.NSTriadKNLuoCoreSourceFidelityInventoryExact as Sources
+import DASHI.Physics.Closure.NSTriadKNLuoSubmissionLemmaCrosswalkExact as Crosswalk
+import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionCompositionExact as Final
 
 record CompleteLuoSubmissionFrontierReceipt : Set where
   constructor receipt
@@ -26,6 +35,12 @@ record CompleteLuoSubmissionFrontierReceipt : Set where
     threePairCoefficientCutsetConstructed : Bool
     threeWholeFoldIdentitiesDerivedPointwise : Bool
 
+    multiplierReceiptConstructorConstructed : Bool
+    sourceSchurConstructorConstructed : Bool
+    analyticFractionalPowerReductionConstructed : Bool
+    meanValueGronwallReductionConstructed : Bool
+    physicalBlockDecayReductionConstructed : Bool
+
     finiteBoundLimitReducerConstructed : Bool
     finiteEqualityLimitReducerConstructed : Bool
     orderedEmbeddingReducerConstructed : Bool
@@ -34,6 +49,13 @@ record CompleteLuoSubmissionFrontierReceipt : Set where
     allSubmissionObligationsIndividuallyNamed : Bool
     submissionTheoremStatementConstructed : Bool
     maximalTimeDichotomyReducerConstructed : Bool
+    globalPhysicalSolutionReductionConstructed : Bool
+    uniformDatumToSubmissionTheoremReductionConstructed : Bool
+
+    sourceFidelitySchemaConstructed : Bool
+    coreSourceFidelityInventoryConstructed : Bool
+    submissionLemmaCrosswalkConstructed : Bool
+    submissionReadyTheoremCompositionConstructed : Bool
 
     incrementFourierIntegrationIdentityInhabited : Bool
     threePhysicalPairCoefficientIdentificationsInhabited : Bool
@@ -64,6 +86,11 @@ completeLuoSubmissionFrontierReceipt = receipt
   Increment.coefficientToFieldUpgradeConstructed
   Pairs.threePairCoefficientCutsetConstructed
   Pairs.threeWholeFoldIdentitiesDerivedPointwise
+  StageB.multiplierReceiptConstructorClosed
+  StageB.sourceSchurConstructorClosed
+  Fractional.analyticFractionalPowerReductionConstructed
+  Gronwall.meanValueGronwallReductionConstructed
+  BlockDecay.physicalBlockDecayReductionConstructed
   Promotion.finiteBoundLimitReducerConstructed
   Promotion.finiteEqualityLimitReducerConstructed
   Promotion.orderedEmbeddingReducerConstructed
@@ -71,6 +98,12 @@ completeLuoSubmissionFrontierReceipt = receipt
   Dependency.allSubmissionObligationsIndividuallyNamed
   Submission.submissionTheoremStatementConstructed
   Submission.maximalTimeDichotomyReducerConstructed
+  Global.globalPhysicalSolutionReductionConstructed
+  Global.uniformDatumToSubmissionTheoremReductionConstructed
+  Audit.sourceFidelitySchemaConstructed
+  Sources.coreSourceFidelityInventoryConstructed
+  Crosswalk.submissionLemmaCrosswalkConstructed
+  Final.submissionReadyTheoremCompositionConstructed
   (Analytic.incrementFourierIntegrationIdentityInhabited
     Analytic.luoPhysicalAnalyticTaskLedger)
   (Analytic.threePhysicalPairCoefficientIdentificationsInhabited
@@ -109,6 +142,24 @@ threePairCoefficientCutsetIsConstructed :
 threePairCoefficientCutsetIsConstructed =
   Pairs.threePairCoefficientCutsetConstructedIsTrue
 
+analyticFractionalPowerReductionIsConstructed :
+  analyticFractionalPowerReductionConstructed
+    completeLuoSubmissionFrontierReceipt ≡ true
+analyticFractionalPowerReductionIsConstructed =
+  Fractional.analyticFractionalPowerReductionConstructedIsTrue
+
+meanValueGronwallReductionIsConstructed :
+  meanValueGronwallReductionConstructed
+    completeLuoSubmissionFrontierReceipt ≡ true
+meanValueGronwallReductionIsConstructed =
+  Gronwall.meanValueGronwallReductionConstructedIsTrue
+
+physicalBlockDecayReductionIsConstructed :
+  physicalBlockDecayReductionConstructed
+    completeLuoSubmissionFrontierReceipt ≡ true
+physicalBlockDecayReductionIsConstructed =
+  BlockDecay.physicalBlockDecayReductionConstructedIsTrue
+
 finiteLimitReducersAreConstructed :
   finiteBoundLimitReducerConstructed
     completeLuoSubmissionFrontierReceipt ≡ true
@@ -126,6 +177,12 @@ submissionTheoremStatementIsConstructed :
     completeLuoSubmissionFrontierReceipt ≡ true
 submissionTheoremStatementIsConstructed =
   Submission.submissionTheoremStatementConstructedIsTrue
+
+submissionReadyCompositionIsConstructed :
+  submissionReadyTheoremCompositionConstructed
+    completeLuoSubmissionFrontierReceipt ≡ true
+submissionReadyCompositionIsConstructed =
+  Final.submissionReadyTheoremCompositionConstructedIsTrue
 
 incrementFourierIntegrationRemainsOpen :
   incrementFourierIntegrationIdentityInhabited
