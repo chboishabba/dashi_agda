@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.YangMillsSubmissionRound9SourceAudit where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
@@ -23,7 +23,7 @@ murrayConstructiveAnalysis = record
   ; locator = "constructive real arithmetic, order, sequences and completeness"
   ; persistentIdentifier = "arXiv:2205.08354; no DOI assigned"
   ; relationshipToDASHI =
-      "Concrete Bishop carrier and completeness; DASHI owns the new sine/cosine coefficient, parity and tail specializations."
+      "Concrete Bishop carrier and completeness; DASHI owns the sine/cosine coefficient, parity and tail specializations."
   ; authorityLevel = standardImported
   ; mayInhabitImportedTheorem = true
   }
@@ -80,8 +80,8 @@ dimockLargeFields = record
   ; mayInhabitImportedTheorem = true
   }
 
-diestedGraphTheory : SourceAuditEntry
-diestedGraphTheory = record
+diestelGraphTheory : SourceAuditEntry
+diestelGraphTheory = record
   { authors = "Reinhard Diestel"
   ; title = "Graph Theory"
   ; publication = "Graduate Texts in Mathematics 173, fifth edition, Springer, 2017"
@@ -106,6 +106,19 @@ koteckyPreiss = record
   ; mayInhabitImportedTheorem = true
   }
 
+federbushMassZeroI : SourceAuditEntry
+federbushMassZeroI = record
+  { authors = "Paul G. Federbush"
+  ; title = "A Mass Zero Cluster Expansion. Part 1: The Expansion"
+  ; publication = "Communications in Mathematical Physics 81 (1981), 327--340"
+  ; locator = "paired cluster and block-spin expansion architecture"
+  ; persistentIdentifier = "DOI: 10.1007/BF01209071"
+  ; relationshipToDASHI =
+      "Historical source context only; DASHI proves the abstract weighted odd-pair cancellation internally."
+  ; authorityLevel = standardImported
+  ; mayInhabitImportedTheorem = true
+  }
+
 osterwalderSchraderI : SourceAuditEntry
 osterwalderSchraderI = record
   { authors = "Konrad Osterwalder and Robert Schrader"
@@ -123,9 +136,9 @@ bipmSI : SourceAuditEntry
 bipmSI = record
   { authors = "Bureau International des Poids et Mesures"
   ; title = "The International System of Units (SI)"
-  ; publication = "Ninth edition, 2019, updated 2022"
+  ; publication = "Ninth edition (2019), current version 4.01, June 2026"
   ; locator = "SI base quantities, dimensions and unit conventions"
-  ; persistentIdentifier = "BIPM SI Brochure; no DOI assigned"
+  ; persistentIdentifier = "DOI: 10.59161/AUEZ1291"
   ; relationshipToDASHI =
       "Metrology authority; inverse correlation length is not silently identified with SI mass or energy."
   ; authorityLevel = standardImported
