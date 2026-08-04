@@ -44,6 +44,12 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoNoCircularityAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionCompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionFrontierReceipt.agda
+
+  DASHI/Physics/Closure/NSTriadKNLuoLemmaFamilyExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCompletionLemmaInventoryAExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCompletionLemmaInventoryBExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCompletionLemmaInventoryCExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFullCompletionLemmaInventoryExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
 )
 
@@ -54,6 +60,7 @@ for file in "${FILES[@]}"; do
   fi
 done
 
+python3 scripts/check_ns_luo_full_lemma_inventory.py
 bash scripts/check_ns_luo_submission_audit.sh
 
 scripts/run_agda29_parallel_check.sh \
