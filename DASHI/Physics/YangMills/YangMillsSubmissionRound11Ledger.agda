@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.YangMillsSubmissionRound11Ledger where
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11Receipt as Receipt
 open import DASHI.Physics.YangMills.CompactLieProofLevel
