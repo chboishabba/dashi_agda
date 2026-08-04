@@ -59,24 +59,24 @@ gluingUpgrade : DependencyUpgradeSite
 gluingUpgrade = record
   { domain = gluingDomain
   ; legacySurface = "actualGluingWitnessAvailable : Bool"
-  ; typedReplacement = "GlobalSection with restriction compatibility proof"
+  ; typedReplacement = "TypedClosureGluing with GlobalSection and compatibility proof"
   ; sourceModule = "DASHI.Reasoning.PNFZizekOperator"
-  ; targetModule = "DASHI.Reasoning.TypedHyperfabricCore"
+  ; targetModule = "DASHI.Reasoning.PNFTypedDependencyAdapters"
   ; implementedInThisTranche = true
   ; promotionBlockedWithoutWitness = true
-  ; upgradeReceipt = "A closure narrative cannot stand in for an indexed compatible section."
+  ; upgradeReceipt = "A closure narrative or true flag cannot stand in for an indexed compatible section."
   }
 
 memoryUpgrade : DependencyUpgradeSite
 memoryUpgrade = record
   { domain = memoryDomain
   ; legacySurface = "rememberedEventPreservedForThisMode : Bool"
-  ; typedReplacement = "MemoryPreserved before after proof family"
-  ; sourceModule = "DASHI.Reasoning.PNFZizekOperator"
-  ; targetModule = "DASHI.Reasoning.SinthomeTypedStabilisation"
+  ; typedReplacement = "MemoryEventPreserved update memory equality and path-indexed MemoryPreserved family"
+  ; sourceModule = "DASHI.Cognition.PNF.MemoryFibre and DASHI.Reasoning.PNFZizekOperator"
+  ; targetModule = "DASHI.Reasoning.PNFTypedDependencyAdapters and DASHI.Reasoning.SinthomeTypedStabilisation"
   ; implementedInThisTranche = true
   ; promotionBlockedWithoutWitness = true
-  ; upgradeReceipt = "Path-indexed stabilisation must carry memory preservation evidence."
+  ; upgradeReceipt = "Existing preservation theorems are reused for revaluation, habituation and inhibitory extinction; other modes remain separately obligated."
   }
 
 verificationUpgrade : DependencyUpgradeSite
