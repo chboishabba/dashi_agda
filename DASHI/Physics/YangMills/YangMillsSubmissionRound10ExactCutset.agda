@@ -14,6 +14,7 @@ import DASHI.Physics.YangMills.BalabanP06PhysicalModelLeafLightweightExact as P0
 import DASHI.Physics.YangMills.BalabanP11PhysicalPrefixTailEntropyExact as P11
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
 import DASHI.Physics.YangMills.BalabanStepVBishopFiniteGeometricExact as BishopGeometric
+import DASHI.Physics.YangMills.BalabanStepVPolynomialWeightedDominationExact as Polynomial
 import DASHI.Physics.YangMills.BalabanP10P33PhysicalCutsetExact as P10P33
 import DASHI.Physics.YangMills.BalabanGate4ParityIntegrationExact as Gate4
 import DASHI.Physics.YangMills.YangMillsRGParitySISpineExact as Endpoint
@@ -27,7 +28,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- * transformed sine/cosine convergence once the elementary terms are
 --   identified with those concrete terms;
 -- * order closure once alternating subsequence interlacing is known;
--- * ordinary finite geometric summation once 0 <= q < 1 is known.
+-- * ordinary finite geometric summation once 0 <= q < 1 is known;
+-- * polynomially weighted finite summation once one pointwise domination by a
+--   larger geometric ratio is supplied.
 ------------------------------------------------------------------------
 
 round10FactorialCoefficientSteps :
@@ -112,9 +115,10 @@ record Round10StepVCutset : Set₁ where
     geometricRatio : BishopGeometric.BishopGeometricRatio
 
     polynomialDegree : Nat
-    polynomialWeightedBound :
-      StepV.PolynomiallyWeightedGeometricBound
+    polynomialDomination :
+      Polynomial.PolynomialGeometricDomination
         BishopGeometric.bishopOrderedSemiringKernel
+        BishopGeometric.bishopGeometricSemiringLaws
         (BishopGeometric.ratio geometricRatio)
         polynomialDegree
 
@@ -143,6 +147,16 @@ round10FiniteGeometricBound :
 round10FiniteGeometricBound inputs =
   BishopGeometric.bishopFiniteGeometricUniformBound
     (geometricRatio inputs)
+
+round10PolynomialWeightedBound :
+  (inputs : Round10StepVCutset) →
+  StepV.PolynomiallyWeightedGeometricBound
+    BishopGeometric.bishopOrderedSemiringKernel
+    (BishopGeometric.ratio (geometricRatio inputs))
+    (polynomialDegree inputs)
+round10PolynomialWeightedBound inputs =
+  Polynomial.polynomiallyWeightedGeometricBoundFromDomination
+    (polynomialDomination inputs)
 
 record Round10GlobalEndpointCutset : Set₁ where
   field
@@ -206,6 +220,9 @@ round10BishopCoefficientParityAndTransportLevel = machineChecked
 round10OrdinaryFiniteGeometricBoundLevel : ProofLevel
 round10OrdinaryFiniteGeometricBoundLevel = machineChecked
 
+round10PolynomialFiniteSummationReducerLevel : ProofLevel
+round10PolynomialFiniteSummationReducerLevel = machineChecked
+
 round10ElementaryTermIdentificationLevel : ProofLevel
 round10ElementaryTermIdentificationLevel = conditional
 
@@ -215,5 +232,5 @@ round10ConcreteInterlacingInputsLevel = conditional
 round10P06P11P10P33PhysicalInputsLevel : ProofLevel
 round10P06P11P10P33PhysicalInputsLevel = conditional
 
-round10PolynomialShellAndGlobalEndpointLevel : ProofLevel
-round10PolynomialShellAndGlobalEndpointLevel = conditional
+round10PolynomialDominationAndGlobalEndpointLevel : ProofLevel
+round10PolynomialDominationAndGlobalEndpointLevel = conditional
