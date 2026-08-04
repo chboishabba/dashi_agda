@@ -33,7 +33,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat.Base using (NonZero)
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; sym; trans)
+  (cong₂; subst; sym; trans)
 
 import Tactic.RingSolver as Solver
 
@@ -41,13 +41,13 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using
   (Cube4; Axis4)
 open import DASHI.Physics.YangMills.BalabanPeriodicLatticeBonds using
-  (DirectedBond4)
+  (DirectedBond4; positiveBond)
 open import DASHI.Physics.YangMills.BalabanPeriodicLatticePaths using
   (LatticePath4; empty; _▷_; reverseSingle)
 open import DASHI.Physics.YangMills.BalabanPeriodicLatticeEnumeration using
   (allAxes)
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
-  (unit; unitLeft)
+  (unitLeft)
 open import DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance using
   (DirectedGaugeField4; directedPathTransport)
 import DASHI.Physics.YangMills.BalabanLatticeCovariantDivergence as Divergence
@@ -59,7 +59,7 @@ open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   (SU2LieAlgebra; su2Lie; su2LieExt; lieZero; lieAdd; lieSubtract
   ; su2Adjoint; su2AdjointUnit; su2AdjointLinearModule)
 open import DASHI.Physics.YangMills.BalabanP33LiteralCovariantDerivativeDifferenceExact using
-  (unitDirectedGauge; adjointDefect)
+  (unitDirectedGauge)
 
 lieSubtractCommonLeft :
   ∀ left middle right →
@@ -170,7 +170,7 @@ axisDivergenceDifferenceExact :
 axisDivergenceDifferenceExact gaugeField bondField site axis
   rewrite flatTransportIncomingExact bondField site axis =
   lieSubtractCommonLeft
-    (bondField (Divergence.positiveBond site axis))
+    (bondField (positiveBond site axis))
     (Divergence.transportIncoming
       su2QuaternionGroup su2AdjointLinearModule
       gaugeField bondField site axis)
@@ -264,6 +264,8 @@ record NormedIncomingDefectSum (Bound : Set) : Set₁ where
     LessEqual : Bound → Bound → Set
 
     reflexive : ∀ value → LessEqual value value
+    transitive : ∀ {left middle right} →
+      LessEqual left middle → LessEqual middle right → LessEqual left right
     addMonotone : ∀ {left lower right upper} →
       LessEqual left lower → LessEqual right upper →
       LessEqual (addBound left right) (addBound lower upper)
@@ -325,7 +327,7 @@ sumIncomingTransportDefectsNormBound
     (reflexive normed (zeroBound normed))
 sumIncomingTransportDefectsNormBound
     normed gaugeField bondField site (axis ∷ axes) =
-  LessEqual-trans
+  transitive normed
     (normTriangle normed
       (incomingTransportDefect gaugeField bondField site axis)
       (sumIncomingTransportDefects gaugeField bondField site axes))
@@ -335,13 +337,6 @@ sumIncomingTransportDefectsNormBound
         (bondField (Divergence.incomingPositiveBond site axis)))
       (sumIncomingTransportDefectsNormBound
         normed gaugeField bondField site axes))
-  where
-    LessEqual-trans : ∀ {left middle right} →
-      LessEqual normed left middle →
-      LessEqual normed middle right →
-      LessEqual normed left right
-    LessEqual-trans first second =
-      NormedIncomingDefectSum.transitive normed first second
 
 covariantDivergenceDifferenceNormBound :
   ∀ {N : Nat} {{_ : NonZero N}} {Bound}
