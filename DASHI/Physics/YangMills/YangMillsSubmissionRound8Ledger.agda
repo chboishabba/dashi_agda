@@ -7,8 +7,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record SubmissionRound8Ledger : Set where
   field
-    bishopRatioMonotonicityStatus : Round7.SubmissionGroupStatus
-    bishopFirstOmittedReductionStatus : Round7.SubmissionGroupStatus
+    bishopConcreteHalfBallStatus : Round7.SubmissionGroupStatus
+    bishopConcreteRatioBoundsStatus : Round7.SubmissionGroupStatus
+    bishopSetoidRatioMonotonicityStatus : Round7.SubmissionGroupStatus
+    bishopSetoidFirstOmittedReductionStatus : Round7.SubmissionGroupStatus
+    bishopConcreteCoefficientRecurrenceStatus : Round7.SubmissionGroupStatus
     bishopConcreteBracketStatus : Round7.SubmissionGroupStatus
 
     p06CanonicalAnimalConstantStatus : Round7.SubmissionGroupStatus
@@ -29,8 +32,11 @@ open SubmissionRound8Ledger public
 
 currentSubmissionRound8Ledger : SubmissionRound8Ledger
 currentSubmissionRound8Ledger = record
-  { bishopRatioMonotonicityStatus = Round7.ownedReducerAvailable
-  ; bishopFirstOmittedReductionStatus = Round7.ownedReducerAvailable
+  { bishopConcreteHalfBallStatus = Round7.ownedReducerAvailable
+  ; bishopConcreteRatioBoundsStatus = Round7.ownedReducerAvailable
+  ; bishopSetoidRatioMonotonicityStatus = Round7.ownedReducerAvailable
+  ; bishopSetoidFirstOmittedReductionStatus = Round7.ownedReducerAvailable
+  ; bishopConcreteCoefficientRecurrenceStatus = Round7.physicalInputsConditional
   ; bishopConcreteBracketStatus = Round7.physicalInputsConditional
   ; p06CanonicalAnimalConstantStatus = Round7.ownedReducerAvailable
   ; p06PhysicalModelLeafStatus = Round7.openAnalyticFrontier
@@ -42,7 +48,7 @@ currentSubmissionRound8Ledger = record
   ; stepVPhysicalLogExpStatus = Round7.physicalInputsConditional
   ; recentInfluenceManuscriptStatus = Round7.externalAuditGate
   ; boundary =
-      "Round eight proves ratio-to-monotone coefficient transport, alternating-bracket-to-first-omitted-tail transport, canonical extraction of P06 skeleton/decoration/animal constants, finite A1/A2/A3 influence assembly, P11 prefix/tail minimum recombination, logarithmic animal-margin transport, and finite-to-uniform influence composition from an explicit geometric kernel. Physical coefficient brackets, P06 model leaves, P11 prefix/tail estimates, log/exp laws and scalar summation remain explicit inputs."
+      "Round eight instantiates the half-ball square and exact 1/24, 1/8 ratio bounds on Bishop reals; proves setoid ratio-to-monotone and alternating-bracket-to-first-omitted transports; extracts canonical P06 skeleton/decoration/animal constants; assembles finite A1/A2/A3 influence; recombines P11 prefix/tail minima; transports the logarithmic animal margin; and composes finite activity bounds with an explicit scalar geometric kernel. Concrete sine/cosine coefficient recurrences and partial-sum brackets, the P06 physical model leaf, P11 prefix/tail estimates, log/exp laws and scalar summation remain explicit inputs."
   }
 
 submissionRound8LedgerLevel : ProofLevel
