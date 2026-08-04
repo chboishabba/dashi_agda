@@ -6,8 +6,11 @@ cd "$root"
 
 files=(
   DASHI/Physics/YangMills/BalabanBishopConcreteHalfBallSquareExact.agda
+  DASHI/Physics/YangMills/BalabanBishopConcreteHalfRadiusRatiosExact.agda
   DASHI/Physics/YangMills/BalabanBishopRatioMonotoneTermsExact.agda
+  DASHI/Physics/YangMills/BalabanBishopSetoidRatioMonotoneExact.agda
   DASHI/Physics/YangMills/BalabanBishopAlternatingFirstOmittedExact.agda
+  DASHI/Physics/YangMills/BalabanBishopSetoidAlternatingFirstOmittedExact.agda
   DASHI/Physics/YangMills/BalabanP06CanonicalAnimalConstantExact.agda
   DASHI/Physics/YangMills/BalabanP06A1A2A3InfluenceExact.agda
   DASHI/Physics/YangMills/BalabanP11PrefixTailMinimumExact.agda
@@ -38,10 +41,16 @@ grep -q 'recent26020072AuditLead' \
 grep -q 'mayInhabitImportedTheorem = false' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound8SourceAudit.agda
 
-# The Bishop half-ball estimate must be instantiated on the actual constructed
-# real carrier, not remain solely as a generic ordered-square socket.
+# The Bishop half-radius lane must be instantiated on the actual constructed
+# real carrier, including its setoid equality and exact 1/24, 1/8 ratios.
 grep -q 'bishopHalfBallMagnitudeSquareBelowQuarter' \
   DASHI/Physics/YangMills/BalabanBishopConcreteHalfBallSquareExact.agda
+grep -q 'bishopSineRatioBelowTwentyFourth' \
+  DASHI/Physics/YangMills/BalabanBishopConcreteHalfRadiusRatiosExact.agda
+grep -q 'bishopSetoidOrderedRatioKernel' \
+  DASHI/Physics/YangMills/BalabanBishopSetoidRatioMonotoneExact.agda
+grep -q 'bishopSetoidOrderedDifferenceKernel' \
+  DASHI/Physics/YangMills/BalabanBishopSetoidAlternatingFirstOmittedExact.agda
 
 # The numerical Step-V interface must be the canonical animal constant together
 # with a strict logarithmic decay margin, rather than a generic smallness flag.
@@ -53,9 +62,11 @@ grep -q 'logMarginImpliesWeightedRatioBelowOne' \
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanBishopConcreteHalfBallSquareExact.agda
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/YangMills/BalabanBishopRatioMonotoneTermsExact.agda
+  DASHI/Physics/YangMills/BalabanBishopConcreteHalfRadiusRatiosExact.agda
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/YangMills/BalabanBishopAlternatingFirstOmittedExact.agda
+  DASHI/Physics/YangMills/BalabanBishopSetoidRatioMonotoneExact.agda
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/YangMills/BalabanBishopSetoidAlternatingFirstOmittedExact.agda
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanP06CanonicalAnimalConstantExact.agda
 scripts/run_agda29_parallel_check.sh \
