@@ -21,6 +21,7 @@ files=(
   DASHI/Physics/YangMills/BalabanGate4ParityIntegrationExact.agda
   DASHI/Physics/YangMills/YangMillsSIScalingEndpointExact.agda
   DASHI/Physics/YangMills/YangMillsRGParitySISpineExact.agda
+  DASHI/Physics/YangMills/YangMillsSubmissionRound9ExactCutset.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound9SourceAudit.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound9Ledger.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound9Receipt.agda
@@ -60,11 +61,22 @@ grep -q 'periodicConcreteBoundedDegreeEight' \
 grep -q 'legacyCountNeighboursCompatibilityLevel = conditional' \
   DASHI/Physics/YangMills/BalabanP06FiniteNeighbourGraphExact.agda
 
-# SI integration must keep inverse length distinct from mass and energy.
+# SI integration must keep inverse length distinct from mass and energy and use
+# the current BIPM persistent identifier.
 grep -q 'inverseLengthSilentlyIdentifiedWithSIMass = false' \
   DASHI/Physics/YangMills/YangMillsSIScalingEndpointExact.agda
 grep -q 'mechanicalToSI' \
   DASHI/Physics/YangMills/YangMillsSIScalingEndpointExact.agda
+grep -q '10.59161/AUEZ1291' \
+  DASHI/Physics/YangMills/YangMillsSubmissionRound9SourceAudit.agda
+grep -q '10.1007/BF01209071' \
+  DASHI/Physics/YangMills/BalabanFederbushPairedContourCancellationExact.agda
+
+# Every attached lane must be represented in one typed local/Step-V/global cutset.
+grep -q 'record Round9CompleteCutset' \
+  DASHI/Physics/YangMills/YangMillsSubmissionRound9ExactCutset.agda
+grep -q 'positivePhysicalSIMassGap' \
+  DASHI/Physics/YangMills/YangMillsSubmissionRound9ExactCutset.agda
 
 roots=(
   DASHI/Physics/YangMills/PhysicalInvolutionParityExact.agda
@@ -79,6 +91,7 @@ roots=(
   DASHI/Physics/YangMills/BalabanP11PhysicalPrefixTailEntropyExact.agda
   DASHI/Physics/YangMills/BalabanStepVFiniteGeometricBackendExact.agda
   DASHI/Physics/YangMills/YangMillsSIScalingEndpointExact.agda
+  DASHI/Physics/YangMills/YangMillsSubmissionRound9ExactCutset.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound9Validation.agda
   DASHI/Physics/PhysicsScalingLimitSpineValidation.agda
   DASHI/Physics/YangMills/BalabanClayConstructiveProducerSevenGroupAdvance.agda
