@@ -11,8 +11,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticFrontierReceipt where
 -- action, exact increment-multiplier algebra, finite signed Young summation,
 -- pointwise-pair fold reduction, equation-(4.2) identity transport,
 -- four-aligned alpha=3/2 summability, fixed-shift order reduction,
--- source-named Section-4 bound transport, official projected Parseval reuse
--- and the logical maximal-time step.
+-- source-named Section-4 bound transport, official projected Parseval and
+-- cutoff-energy reuse, and the logical maximal-time step.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityE
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as FixedReduction
 import DASHI.Physics.Closure.NSTriadKNLuoSection4PhysicalBoundsAdapterExact as Section4Physical
 import DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact as ParsevalUpgrade
+import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyOfficialUpgradeExact as CutoffUpgrade
 import DASHI.Physics.Closure.NSTriadKNLuoMaximalTimeGlobalizationExact as Globalization
 
 record CanonicalLuoAnalyticFrontierReceipt : Set where
@@ -71,6 +72,8 @@ record CanonicalLuoAnalyticFrontierReceipt : Set where
     section4PhysicalBoundsAdapterConstructed : Bool
     projectedConvectionOfficialParsevalUpgradeConstructed : Bool
     officialProjectedHardHighOrthogonalityClosed : Bool
+    officialCutoffEnergyUpgradeConstructed : Bool
+    officialCutoffEnergyDissipationIdentificationClosed : Bool
     maximalTimeLogicalReducerConstructed : Bool
 
     spatialIncrementFourierTheoremInhabited : Bool
@@ -115,6 +118,8 @@ canonicalLuoAnalyticFrontierReceipt = receipt
   Section4Physical.section4PhysicalToFiniteRangeAdapterClosed
   ParsevalUpgrade.projectedConvectionOfficialParsevalUpgradeConstructed
   ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonality
+  CutoffUpgrade.officialCutoffEnergyUpgradeConstructed
+  CutoffUpgrade.officialCutoffEnergyDissipationIdentificationClosed
   Globalization.maximalTimeLogicalGlobalizationReducerClosed
   false
   false
@@ -205,6 +210,19 @@ officialProjectedHardHighOrthogonalityRemainsClosed :
   ≡ true
 officialProjectedHardHighOrthogonalityRemainsClosed =
   ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonalityIsTrue
+
+officialCutoffEnergyUpgradeIsClosed :
+  officialCutoffEnergyUpgradeConstructed canonicalLuoAnalyticFrontierReceipt
+  ≡ true
+officialCutoffEnergyUpgradeIsClosed =
+  CutoffUpgrade.officialCutoffEnergyUpgradeConstructedIsTrue
+
+officialCutoffEnergyDissipationIdentificationRemainsClosed :
+  officialCutoffEnergyDissipationIdentificationClosed
+    canonicalLuoAnalyticFrontierReceipt
+  ≡ true
+officialCutoffEnergyDissipationIdentificationRemainsClosed =
+  CutoffUpgrade.officialCutoffEnergyDissipationIdentificationClosedIsTrue
 
 maximalTimeLogicalReducerIsClosed :
   maximalTimeLogicalReducerConstructed canonicalLuoAnalyticFrontierReceipt
