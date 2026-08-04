@@ -17,18 +17,19 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapter
 -- DOI: 10.1007/BF02099744.
 --
 -- PURPOSE
--- Separate the analytic increment-kernel identity from finite reindexing.  The
+-- Separate the analytic increment-kernel identity from finite reindexing. The
 -- caller supplies the spatial translation/integration formula and a concrete
--- contribution attached to every mature full-shell pair.  The equality of the
--- physical hard-high fold and the full-shell fold is then derived from the
--- official exact list equality, preserving order and multiplicity.
+-- contribution attached to every mature full-shell pair. The equality of the
+-- physical hard-high fold and full-shell fold is derived from the pre-budget
+-- exact list identification, preserving order and multiplicity and using no
+-- terminal localized-gradient budget.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
-import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Official
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact as PreBudget
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
 import DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellTermFoldExact as Fold
 import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram as Closure
@@ -41,7 +42,7 @@ record OfficialIncrementKernelAnalyticInputs
     {State : Set stateLevel}
     {Tensor : Set tensorLevel}
     {Scalar : Set scalarLevel}
-    (official : Official.OfficialLuoContinuationClosure
+    (data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time)
     (source : FluxKernel.LuoExactFluxKernelDecomposition
       State Tensor Scalar)
@@ -68,7 +69,7 @@ record OfficialIncrementKernelAnalyticInputs
 
     pairContribution :
       Nat → State →
-      Closure.Pair (Official.program official) → Contribution
+      Closure.Pair (PreBudget.program data) → Contribution
 
     combineContribution : Contribution → Contribution → Contribution
     zeroContribution : Contribution
@@ -95,17 +96,17 @@ officialIncrementKernelPhysicalRealization :
     {State : Set stateLevel}
     {Tensor : Set tensorLevel}
     {Scalar : Set scalarLevel}
-    {official : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time}
     {source : FluxKernel.LuoExactFluxKernelDecomposition
       State Tensor Scalar}
     {Space : Set spaceLevel}
     {Contribution : Set contributionLevel} →
   OfficialIncrementKernelAnalyticInputs
-    official source Space Contribution →
+    data source Space Contribution →
   FluxKernel.LuoIncrementKernelPhysicalRealization source Space
 officialIncrementKernelPhysicalRealization
-  {official = official} {source = source} inputs = record
+  {data = data} {source = source} inputs = record
   { translate = translate inputs
   ; subtractState = subtractState inputs
   ; incrementTensor = incrementTensor inputs
@@ -118,16 +119,16 @@ officialIncrementKernelPhysicalRealization
         (combineContribution inputs)
         (zeroContribution inputs)
         (Fold.hardHighPairContributionList
-          official shell (pairContribution inputs shell state))
+          data shell (pairContribution inputs shell state))
   ; fullShellIncidenceTerms = λ shell state →
       Fold.foldList
         (combineContribution inputs)
         (zeroContribution inputs)
         (Fold.fullShellPairContributionList
-          official shell (pairContribution inputs shell state))
+          data shell (pairContribution inputs shell state))
   ; incrementKernelFourierExpansion = λ shell state →
       Fold.hardHighContributionFoldMatchesFullShell
-        official shell
+        data shell
         (pairContribution inputs shell state)
         (combineContribution inputs)
         (zeroContribution inputs)
