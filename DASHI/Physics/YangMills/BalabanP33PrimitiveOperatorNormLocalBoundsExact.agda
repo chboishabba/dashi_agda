@@ -63,6 +63,9 @@ import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as
 ------------------------------------------------------------------------
 
 instance
+  onePositive : Positive 1ℚ
+  onePositive = pos
+
   twoPositive : Positive Constants.twoℚ
   twoPositive = ℚP.pos+pos⇒pos 1ℚ 1ℚ
 
