@@ -12,10 +12,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesFourShiftBootstrapExact
 --
 -- PURPOSE
 -- Instantiate alpha=3/2 and b=4.  The corrected predecessor coefficient is
--- 2^{-4(7/4)}=1/128.  With the exact four-piece constant 512/93 and the
--- concrete smallness delta=1/16, the nonlinear coefficient is 32/93.  Thus
+-- 2^{-4(7/4)}=1/128.  The target four-shell ratio for the weighted criterion
+-- quantity is 2^{4(1-alpha)}=1/4.  With the exact four-piece constant 512/93
+-- and the concrete smallness delta=1/32, the nonlinear coefficient is 16/93.
+-- Therefore
 --
---   1/128 + 32/93 = 4189/11904 <= 1/2 < 1.
+--   1/128 + 16/93 = 2141/11904 <= 1/4 < 1.
 --
 -- Absorption and the fixed-block recurrence are constructed from primitive
 -- boundary and weighted-energy comparisons; the contraction coefficient is
@@ -48,12 +50,12 @@ blockShiftIsFourTimesOne = refl
 
 boundaryCoefficient smallness absorbedCoefficient : ℚ
 boundaryCoefficient = Int.+ 1 / 128
-smallness = Int.+ 1 / 16
-absorbedCoefficient = Int.+ 32 / 93
+smallness = Int.+ 1 / 32
+absorbedCoefficient = Int.+ 16 / 93
 
 combinedCoefficient targetCoefficient : ℚ
 combinedCoefficient = boundaryCoefficient + absorbedCoefficient
-targetCoefficient = Int.+ 1 / 2
+targetCoefficient = Int.+ 1 / 4
 
 correctedCoefficientExact :
   boundaryCoefficient ≡ Alpha.dyadicReciprocalSeventhPower one
@@ -69,11 +71,11 @@ aggregateSmallnessBelowAbsorption
   rewrite aggregateSmallnessExact = ℚₚ.≤-refl
 
 combinedCoefficientExact :
-  combinedCoefficient ≡ Int.+ 4189 / 11904
+  combinedCoefficient ≡ Int.+ 2141 / 11904
 combinedCoefficientExact = solve []
 
-combinedCoefficientBelowHalf : combinedCoefficient ≤ targetCoefficient
-combinedCoefficientBelowHalf =
+combinedCoefficientBelowQuarter : combinedCoefficient ≤ targetCoefficient
+combinedCoefficientBelowQuarter =
   toWitness {a? = combinedCoefficient ≤? targetCoefficient} _
 
 boundaryCoefficientNonnegative : 0ℚ ≤ boundaryCoefficient
@@ -124,7 +126,7 @@ fixedFourAlignedSummability =
 record ExplicitFourShiftAbsorptionData : Set₁ where
   field
     cutoffData : Cutoff.FiniteCutoffSection4Data
-    lowGradientBelowOneSixteenth :
+    lowGradientBelowOneThirtySecond :
       Four.lowGradient (Cutoff.interactions cutoffData) ≤ smallness
 
 open ExplicitFourShiftAbsorptionData public
@@ -136,7 +138,7 @@ explicitAbsorbedCutoff data = record
   ; smallness = smallness
   ; absorptionCoefficient = absorbedCoefficient
   ; absorptionCoefficientNonnegative = absorbedCoefficientNonnegative
-  ; lowGradientBelowSmallness = lowGradientBelowOneSixteenth data
+  ; lowGradientBelowSmallness = lowGradientBelowOneThirtySecond data
   ; aggregateSmallnessBelowAbsorption =
       aggregateSmallnessBelowAbsorption
   }
@@ -180,7 +182,7 @@ asBlockRecursionData data = record
   ; boundaryEnergyBelowPredecessor =
       boundaryEnergyBelowCorrectedPredecessor data
   ; weightedEnergyBelowPredecessor = weightedEnergyBelowPredecessor data
-  ; combinedCoefficientBelowTarget = combinedCoefficientBelowHalf
+  ; combinedCoefficientBelowTarget = combinedCoefficientBelowQuarter
   }
 
 explicitFourShiftContraction :
