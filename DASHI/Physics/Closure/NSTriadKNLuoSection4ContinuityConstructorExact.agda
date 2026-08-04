@@ -11,8 +11,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoSection4ContinuityConstructorExact wher
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Remove two opaque Section-4 tokens.  The Step-1 conclusion is the literal
--- package of the J11 lower/upper, J12 and J2 bounds.  The final continuity
+-- Remove two opaque Section-4 tokens. The Step-1 conclusion is the literal
+-- package of the J11 lower/upper, J12 and J2 bounds. The final continuity
 -- conclusion is exactly the terminal-continuity proposition produced by the
 -- mean-value/Gronwall stage, rather than an unrelated proposition selected by
 -- the caller.
@@ -71,6 +71,8 @@ step1DyadicBookkeeping :
     evolution state lowModeBound highModeBound →
   Evolution.LuoSection4Step1DyadicRangeBookkeeping evolution state
 step1DyadicBookkeeping
+  {evolution = evolution}
+  {state = state}
   {lowModeBound = low}
   {highModeBound = high}
   bounds = record
@@ -81,17 +83,17 @@ step1DyadicBookkeeping
     ; J12Bound = J12Bound bounds
     ; J2Bound = J2Bound bounds
     ; Step1LowModesBounded =
-        LuoStep1ComponentBounds _ _ low high
+        LuoStep1ComponentBounds evolution state low high
     ; step1LowModesBounded = bounds
     }
 
 record LuoSection4ContinuityInputs
-    {stateLevel scalarLevel timeLevel : Level}
+    {stateLevel scalarLevel : Level}
     {State : Set stateLevel}
     {Scalar : Set scalarLevel}
     (evolution : Evolution.LuoPerModeCommutatorEvolution State Scalar)
-    (Time : Set timeLevel)
-    : Set (lsuc (stateLevel ⊔ scalarLevel ⊔ timeLevel)) where
+    (Time : Set)
+    : Set (lsuc (stateLevel ⊔ scalarLevel)) where
   field
     state : State
     alpha : Scalar
@@ -119,11 +121,11 @@ record LuoSection4ContinuityInputs
 open LuoSection4ContinuityInputs public
 
 section4ContinuityBootstrap :
-  ∀ {stateLevel scalarLevel timeLevel}
+  ∀ {stateLevel scalarLevel}
     {State : Set stateLevel}
     {Scalar : Set scalarLevel}
     {evolution : Evolution.LuoPerModeCommutatorEvolution State Scalar}
-    {Time : Set timeLevel} →
+    {Time : Set} →
   LuoSection4ContinuityInputs evolution Time →
   Evolution.LuoSection4ContinuityBootstrap evolution
 section4ContinuityBootstrap {Time = Time} inputs = record
