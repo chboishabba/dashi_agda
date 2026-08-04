@@ -30,6 +30,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoThreeWayPairPartitionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalYoungSameConstantExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSection4TerminalYoungClosureExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteCutoffEnergyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteTerminalCutoffExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDiscreteGronwallExact.agda
