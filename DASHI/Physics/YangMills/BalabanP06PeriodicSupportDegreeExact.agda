@@ -16,6 +16,8 @@ module DASHI.Physics.YangMills.BalabanP06PeriodicSupportDegreeExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; _≤_)
+open import Data.List.Base using (length)
+open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -42,24 +44,22 @@ periodicNeighbourEnumeration block =
 
 periodicNeighbourEnumerationLength :
   ∀ {n} (block : Periodic.PeriodicBlock n) →
-  Data.List.Base.length (periodicNeighbourEnumeration block) ≡ eight
+  length (periodicNeighbourEnumeration block) ≡ eight
 periodicNeighbourEnumerationLength block =
   trans
     (lengthMap (Adjacency.signedStep block) signedDirectionEnumeration)
     signedDirectionEnumerationLength
-  where
-  import Data.List.Base
 
 forwardNeighbourEnumerated :
   ∀ {n} {left right : Periodic.PeriodicBlock n} →
   Adjacency.PeriodicNearestNeighbour left right →
   right ∈ periodicNeighbourEnumeration left
-forwardNeighbourEnumerated witness =
+forwardNeighbourEnumerated {left = left} witness =
   subst
-    (λ target → target ∈ periodicNeighbourEnumeration _)
+    (λ target → target ∈ periodicNeighbourEnumeration left)
     (Adjacency.directionWitnessExact witness)
     (mapMembership
-      (Adjacency.signedStep _)
+      (Adjacency.signedStep left)
       (signedDirectionEnumerationComplete
         (Adjacency.directionFromWitness witness)))
 
@@ -72,8 +72,7 @@ reverseStepReconstructs :
 reverseStepReconstructs {n} {left} {right} witness =
   let direction = Adjacency.directionFromWitness witness
       forward = Adjacency.directionWitnessExact witness
-      inverse =
-        Geometry.periodicDirectionInverseLaw n
+      inverse = Geometry.periodicDirectionInverseLaw n
       roundTrip =
         Decoder.DirectionInverseLaw.forwardThenReverse
           inverse right direction
@@ -89,12 +88,12 @@ backwardNeighbourEnumerated :
   ∀ {n} {left right : Periodic.PeriodicBlock n} →
   Adjacency.PeriodicNearestNeighbour right left →
   right ∈ periodicNeighbourEnumeration left
-backwardNeighbourEnumerated witness =
+backwardNeighbourEnumerated {left = left} witness =
   subst
-    (λ target → target ∈ periodicNeighbourEnumeration _)
+    (λ target → target ∈ periodicNeighbourEnumeration left)
     (reverseStepReconstructs witness)
     (mapMembership
-      (Adjacency.signedStep _)
+      (Adjacency.signedStep left)
       (signedDirectionEnumerationComplete
         (Decoder.reverseDirection
           (Adjacency.directionFromWitness witness))))
@@ -103,12 +102,10 @@ physicalNeighbourEnumerated :
   ∀ {n} {left right : Periodic.PeriodicBlock n} →
   Physical.PeriodicPhysicalAdjacent left right →
   right ∈ periodicNeighbourEnumeration left
-physicalNeighbourEnumerated (Data.Sum.Base.inj₁ forward) =
+physicalNeighbourEnumerated (inj₁ forward) =
   forwardNeighbourEnumerated forward
-physicalNeighbourEnumerated (Data.Sum.Base.inj₂ backward) =
+physicalNeighbourEnumerated (inj₂ backward) =
   backwardNeighbourEnumerated backward
-  where
-  import Data.Sum.Base
 
 periodicDistinctNeighbourCount :
   ∀ {n} → Periodic.PeriodicBlock n → Nat
@@ -120,7 +117,7 @@ periodicDistinctNeighbourCountBelowEight :
   periodicDistinctNeighbourCount block ≤ eight
 periodicDistinctNeighbourCountBelowEight block =
   subst
-    (λ length → periodicDistinctNeighbourCount block ≤ length)
+    (λ count → periodicDistinctNeighbourCount block ≤ count)
     (periodicNeighbourEnumerationLength block)
     (Graph.countUnique-bound (periodicNeighbourEnumeration block))
 
@@ -134,7 +131,7 @@ record PeriodicSupportDegreeCertificate (n : Nat) : Set₁ where
       right ∈ neighbours left
 
     enumerationLengthEight :
-      ∀ block → Data.List.Base.length (neighbours block) ≡ eight
+      ∀ block → length (neighbours block) ≡ eight
 
     distinctNeighbourCount : Periodic.PeriodicBlock n → Nat
     distinctNeighbourCountDefinition :
@@ -144,8 +141,6 @@ record PeriodicSupportDegreeCertificate (n : Nat) : Set₁ where
 
     degreeAtMostEight :
       ∀ block → distinctNeighbourCount block ≤ eight
-  where
-  import Data.List.Base
 
 open PeriodicSupportDegreeCertificate public
 
