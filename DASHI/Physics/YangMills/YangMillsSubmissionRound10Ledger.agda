@@ -39,10 +39,17 @@ alternatingOrderClosure = record
   ; level = machineChecked
   }
 
-concreteSineCosineInterlacing : Round10LedgerEntry
-concreteSineCosineInterlacing = record
-  { name = "Concrete sine/cosine interlacing"
-  ; statement = "The actual signed factorial partial sums must inhabit the monotone lower/upper subsequence data and adjacent omitted-term identities."
+concreteHalfBallInterlacing : Round10LedgerEntry
+concreteHalfBallInterlacing = record
+  { name = "Concrete sine/cosine half-ball interlacing"
+  ; statement = "For nonnegative |x| <= 1/2, the concrete factorial magnitude recurrences prove increasing even partial sums, decreasing odd partial sums, common represented limits and exact omitted-term differences."
+  ; level = machineChecked
+  }
+
+elementarySeriesIdentification : Round10LedgerEntry
+elementarySeriesIdentification = record
+  { name = "Elementary-series term identification"
+  ; statement = "The configured Bishop elementary sine/cosine term fields must be identified pointwise with the concrete signed factorial terms before the interlacing theorem inhabits those configured series."
   ; level = conditional
   }
 
