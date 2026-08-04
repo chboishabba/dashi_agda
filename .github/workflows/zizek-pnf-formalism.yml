@@ -5,6 +5,7 @@ on:
     paths:
       - 'DASHI/Foundations/CantorDiagonalCore.agda'
       - 'DASHI/Foundations/StageAtlasZeroToTwelve.agda'
+      - 'DASHI/Foundations/StageZeroToTwelveTransitionCore.agda'
       - 'DASHI/Foundations/JPlusOneScaleBridge.agda'
       - 'DASHI/Foundations/StageCantorScaleRecursion.agda'
       - 'DASHI/Combinatorics/MemeDiagonal.agda'
