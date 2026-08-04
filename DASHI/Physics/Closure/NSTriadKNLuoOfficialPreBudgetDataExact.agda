@@ -16,17 +16,14 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact where
 -- DOI: 10.1007/BF02547354.
 --
 -- PURPOSE
--- Remove a circularity from the official continuation architecture. The
--- previous aggregate owned terminalBudgetAt, which is already Luo's localized
--- hypothesis. This module separates:
+-- Remove both localized-criterion circularities from the official continuation
+-- architecture.  Pre-budget physical data owns energy, dissipation, flux,
+-- weighted energy, gradient integral, multiplier and source mappings, but owns
+-- neither terminalBudgetAt nor localizedGradientThresholdSmallness.
 --
---   1. pre-budget physical data and exact carrier identifications;
---   2. a derived hard-terminal-window budget family;
---   3. completion of the existing official continuation closure.
---
--- Thus a canonical NS route must construct the budget from its flux/bootstrap
--- estimates; it cannot receive the desired continuation criterion as part of
--- the physical-data input.
+-- A derived budget family subsequently supplies the hard-window estimate.  It
+-- is then used to complete the historical cutoff quantities, physical
+-- energy/time record and official continuation closure.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -46,6 +43,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellPhysicalIdentification
 import DASHI.Physics.Closure.NSTriadKNLuoCrossCarrierRationalIdentificationExact as Cross
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
 import DASHI.Physics.Closure.NSTriadKNRegularLerayHopfPeriodicSolutionExact as LH
+import DASHI.Physics.Closure.NSTriadKNLuoPreThresholdCutoffQuantitiesExact as PreQ
+import DASHI.Physics.Closure.NSTriadKNLuoPreThresholdPhysicalEnergyTimeExact as PreTime
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialPhysicalEnergyTimeExact as EnergyTime
 import DASHI.Physics.Closure.NSTriadKNLuoConcreteRadialMultiplierKernelExact as Multiplier
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicMultiplierKernelBoundExact as MultiplierAbstract
@@ -97,9 +96,9 @@ record OfficialLuoPreBudgetData
     projectorModel : LP.PeriodicHardShellFourierPDE {r = realLevel}
     physicalModes : List Z3.FourierMode
 
-    physicalEnergyTimeAt :
+    preThresholdEnergyTimeAt :
       (shell : Nat) →
-      EnergyTime.OfficialLuoPhysicalEnergyTimeIdentification
+      PreTime.PreThresholdLuoPhysicalEnergyTimeIdentification
         projectorModel
         physicalModes
         (OfficialLuo.lerayHopfSolutionAt sourceCarrier initial solution)
@@ -118,8 +117,8 @@ record OfficialLuoPreBudgetData
         (Multiplier.canonicalLuoMultiplierAuthority multiplierRealization)
         shell solution
       ≡
-      LH.localizedLowPassGradientIntegral
-        (EnergyTime.cutoffQuantities (physicalEnergyTimeAt shell))
+      PreQ.localizedLowPassGradientIntegral
+        (PreTime.cutoffQuantities (preThresholdEnergyTimeAt shell))
 
     smoothIntegralMatchesSource :
       (shell : Nat) →
@@ -198,6 +197,125 @@ derivedTerminalBudgetAt {data = data} budgets shell = record
   ; scaledBudgetBelowThreshold = scaledBudgetBelowLuoDelta budgets shell
   }
 
+localizedGradientBelowHardBudget :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {data : OfficialLuoPreBudgetData InitialDatum Solution Time} →
+  (budgets : DerivedLuoTerminalBudgetFamily data) →
+  (shell : Nat) →
+  PreQ.localizedLowPassGradientIntegral
+    (PreTime.cutoffQuantities (preThresholdEnergyTimeAt data shell))
+  ≤ hardBudgetAt budgets shell
+localizedGradientBelowHardBudget {data = data} budgets shell
+  rewrite sym (hardIntegralMatchesOfficialGradient data shell) =
+  hardIntegralBelowBudget budgets shell
+
+completedCutoffQuantities :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {data : OfficialLuoPreBudgetData InitialDatum Solution Time} →
+  (budgets : DerivedLuoTerminalBudgetFamily data) →
+  (shell : Nat) →
+  LH.OfficialLuoCutoffQuantities
+    (OfficialLuo.regularBeforeTerminal (sourceSelection data)) shell
+completedCutoffQuantities {data = data} budgets shell =
+  let Q = PreTime.cutoffQuantities (preThresholdEnergyTimeAt data shell)
+  in record
+    { previousHardHighEnergy = PreQ.previousHardHighEnergy Q
+    ; currentHardHighEnergy = PreQ.currentHardHighEnergy Q
+    ; integratedHardHighGradientL2Squared =
+        PreQ.integratedHardHighGradientL2Squared Q
+    ; physicalDissipation = PreQ.physicalDissipation Q
+    ; signedIntegratedProjectedFlux =
+        PreQ.signedIntegratedProjectedFlux Q
+    ; absoluteCutoffFluxAtTime = PreQ.absoluteCutoffFluxAtTime Q
+    ; integratedAbsoluteCutoffFlux =
+        PreQ.integratedAbsoluteCutoffFlux Q
+    ; weightedShellEnergyMajorant =
+        PreQ.weightedShellEnergyMajorant Q
+    ; localizedLowPassGradientIntegral =
+        PreQ.localizedLowPassGradientIntegral Q
+    ; profileSchurConstant = PreQ.profileSchurConstant Q
+    ; universalGradientThreshold = hardBudgetAt budgets shell
+    ; previousEnergyNonnegative = PreQ.previousEnergyNonnegative Q
+    ; currentEnergyNonnegative = PreQ.currentEnergyNonnegative Q
+    ; integratedGradientNonnegative =
+        PreQ.integratedGradientNonnegative Q
+    ; physicalDissipationNonnegative =
+        PreQ.physicalDissipationNonnegative Q
+    ; integratedAbsoluteFluxNonnegative =
+        PreQ.integratedAbsoluteFluxNonnegative Q
+    ; weightedEnergyNonnegative = PreQ.weightedEnergyNonnegative Q
+    ; localizedGradientNonnegative =
+        PreQ.localizedGradientNonnegative Q
+    ; profileSchurConstantNonnegative =
+        PreQ.profileSchurConstantNonnegative Q
+    ; universalGradientThresholdNonnegative =
+        hardBudgetNonnegative budgets shell
+    ; physicalDissipationMeaning = PreQ.physicalDissipationMeaning Q
+    ; preterminalProjectedEnergyIdentity =
+        PreQ.preterminalProjectedEnergyIdentity Q
+    ; signedFluxBelowIntegratedAbsoluteFlux =
+        PreQ.signedFluxBelowIntegratedAbsoluteFlux Q
+    ; IntegratedFluxIsTimeIntegralOfPointwiseFlux =
+        PreQ.IntegratedFluxIsTimeIntegralOfPointwiseFlux Q
+    ; integratedFluxIsTimeIntegralOfPointwiseFlux =
+        PreQ.integratedFluxIsTimeIntegralOfPointwiseFlux Q
+    ; integratedFluxWeightedSchurEstimate =
+        PreQ.integratedFluxWeightedSchurEstimate Q
+    ; localizedGradientThresholdSmallness =
+        localizedGradientBelowHardBudget budgets shell
+    ; parabolicWindowDenominator = PreQ.parabolicWindowDenominator Q
+    ; parabolicWindowDenominatorMeaning =
+        PreQ.parabolicWindowDenominatorMeaning Q
+    ; TerminalWindowIsLuoParabolicWindow =
+        PreQ.TerminalWindowIsLuoParabolicWindow Q
+    ; terminalWindowIsLuoParabolicWindow =
+        PreQ.terminalWindowIsLuoParabolicWindow Q
+    }
+
+completedPhysicalEnergyTimeAt :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {data : OfficialLuoPreBudgetData InitialDatum Solution Time} →
+  (budgets : DerivedLuoTerminalBudgetFamily data) →
+  (shell : Nat) →
+  EnergyTime.OfficialLuoPhysicalEnergyTimeIdentification
+    (projectorModel data)
+    (physicalModes data)
+    (OfficialLuo.lerayHopfSolutionAt
+      (sourceCarrier data) (initial data) (solution data))
+    (terminal data)
+    (OfficialLuo.regularBeforeTerminal (sourceSelection data))
+    shell
+completedPhysicalEnergyTimeAt {data = data} budgets shell =
+  let I = preThresholdEnergyTimeAt data shell
+  in record
+    { projectedEnergyFlux = PreTime.projectedEnergyFlux I
+    ; cutoffQuantities = completedCutoffQuantities budgets shell
+    ; timeCutoff = PreTime.timeCutoff I
+    ; embedCutoffTime = PreTime.embedCutoffTime I
+    ; evaluationCutoffTime = PreTime.evaluationCutoffTime I
+    ; terminalCutoffTime = PreTime.terminalCutoffTime I
+    ; evaluationTime = PreTime.evaluationTime I
+    ; evaluationTimeMeaning = PreTime.evaluationTimeMeaning I
+    ; terminalTimeMeaning = PreTime.terminalTimeMeaning I
+    ; pointwiseProjectedFluxMeaning =
+        PreTime.pointwiseProjectedFluxMeaning I
+    ; cutoffWindowDenominatorMeaning =
+        PreTime.cutoffWindowDenominatorMeaning I
+    ; TimeEmbeddingPreservesLuoTerminalWindow =
+        PreTime.TimeEmbeddingPreservesLuoTerminalWindow I
+    ; timeEmbeddingPreservesLuoTerminalWindow =
+        PreTime.timeEmbeddingPreservesLuoTerminalWindow I
+    }
+
 completeOfficialLuoClosure :
   ∀ {d s t}
     {InitialDatum : Set d}
@@ -224,7 +342,7 @@ completeOfficialLuoClosure data budgets = record
   ; realLevel = realLevel data
   ; projectorModel = projectorModel data
   ; physicalModes = physicalModes data
-  ; physicalEnergyTimeAt = physicalEnergyTimeAt data
+  ; physicalEnergyTimeAt = completedPhysicalEnergyTimeAt budgets
   ; TorusPoint = TorusPoint data
   ; multiplierRealization = multiplierRealization data
   ; terminalBudgetAt = derivedTerminalBudgetAt budgets
@@ -240,6 +358,9 @@ preBudgetArchitectureConstructed = true
 terminalBudgetNoLongerPhysicalDataInput : Bool
 terminalBudgetNoLongerPhysicalDataInput = true
 
+localizedThresholdNoLongerPhysicalDataInput : Bool
+localizedThresholdNoLongerPhysicalDataInput = true
+
 preBudgetArchitectureConstructedIsTrue :
   preBudgetArchitectureConstructed ≡ true
 preBudgetArchitectureConstructedIsTrue = refl
@@ -247,3 +368,7 @@ preBudgetArchitectureConstructedIsTrue = refl
 terminalBudgetNoLongerPhysicalDataInputIsTrue :
   terminalBudgetNoLongerPhysicalDataInput ≡ true
 terminalBudgetNoLongerPhysicalDataInputIsTrue = refl
+
+localizedThresholdNoLongerPhysicalDataInputIsTrue :
+  localizedThresholdNoLongerPhysicalDataInput ≡ true
+localizedThresholdNoLongerPhysicalDataInputIsTrue = refl
