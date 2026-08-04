@@ -3,10 +3,13 @@ module DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExac
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (ℚᵘ; mkℚᵘ; _/_)
+open import Data.Nat.Base using (_!)
+open import Data.Nat.Properties using (_!≢0)
+open import Data.Rational.Unnormalised using (ℚᵘ; _/_)
 
 import Real as BishopReal
 import RealProperties as BishopProps
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -15,27 +18,22 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- Zachary Murray,
 -- "Constructive Analysis in the Agda Proof Assistant",
--- Master's thesis, University of Canterbury (2022).
--- arXiv:2205.08354.
+-- B.Sc. Honours thesis, Dalhousie University, 2022.
+-- arXiv:2205.08354. No DOI assigned.
 --
--- Concrete statements:
+-- Code continuation: Viktor Csimma, viktorcsimma/bishop, pinned by DASHI at
+-- vendor/bishop commit 240e38c7f6938f20f865b1f956c5f084da48bd54.
 --
---   halfBallSquareBelowQuarter :  |x| <= 1/2  ==>  x^2 <= 1/4
+-- IMPORTANT REPRESENTATION CORRECTION
 --
---   sineCoefficientRecurrence  : successive sine   term magnitudes
---                                shrink by factor 1/24 on the half ball,
---   cosineCoefficientRecurrence: successive cosine term magnitudes
---                                shrink by factor 1/8  on the half ball.
+-- Data.Rational.Unnormalised.mkℚᵘ stores `denominator - 1`.  The former
+-- definition
 --
--- The real ratio constants are the closed rational targets 1/24 and 1/8
--- from BalabanClayGate4BishopHalfRadiusRationalConstantsExact:
--- (1/4)/6 = 1/24 and (1/4)/2 = 1/8.  The factorial denominators below
--- express the successive-term ratios
+--   mkℚᵘ (+ 1) (factorial n)
 --
---   |x|^2 / ((2k+1)!)  ->  |x|^2 / ((2k+3)!)  (sine,    ratio <= 1/24)
---   |x|^2 / ((2k)!)    ->  |x|^2 / ((2k+2)!)  (cosine,  ratio <= 1/8)
---
--- once multiplied out into the division-free real form used below.
+-- therefore represented 1/(n!+1), not 1/n!.  The corrected definition uses
+-- the public division constructor together with the standard-library proof
+-- that n! is nonzero.
 ------------------------------------------------------------------------
 
 half quarter oneTwentyFourth oneEighth : ℚᵘ
@@ -52,11 +50,20 @@ oddExponent n = two * n + suc zero
 evenExponent n = two * n
 
 factorial : Nat → Nat
-factorial zero = 1
-factorial (suc n) = suc n * factorial n
+factorial n = n !
+
+factorialZero : factorial zero ≡ suc zero
+factorialZero = refl
+
+factorialSuccessor :
+  ∀ n → factorial (suc n) ≡ suc n * factorial n
+factorialSuccessor n = refl
 
 inverseFactorialRational : Nat → ℚᵘ
-inverseFactorialRational n = mkℚᵘ (+ 1) (factorial n)
+inverseFactorialRational n = + 1 / (n !)
+  where
+  instance
+    factorialNonZero = n !≢0
 
 square : BishopReal.ℝ → BishopReal.ℝ
 square x = x BishopReal.* x
@@ -68,121 +75,12 @@ halfBallSquareBelowQuarter =
   square x BishopReal.≤ quarter BishopReal.⋆
 
 halfBallSquareBelowQuarterProof : halfBallSquareBelowQuarter
-halfBallSquareBelowQuarterProof {x} halfBall =
+halfBallSquareBelowQuarterProof {x} insideHalf =
   BishopProps.≤-trans
-    xx≤absabs
-    (BishopProps.≤-respʳ-≃ halfHalf≃quarter absabs≤halfhalf)
-  where
-    abs : BishopReal.ℝ
-    abs = BishopReal.∣ x ∣
-
-    abs-x-nonneg : BishopReal.NonNegative (abs BishopReal.- x)
-    abs-x-nonneg = BishopProps.x≤∣x∣ {x}
-
-    negx-abs-nonneg :
-      BishopReal.NonNegative
-        (abs BishopReal.+ (BishopReal.- (BishopReal.- x)))
-    negx-abs-nonneg =
-      BishopProps.≤-respʳ-≃
-        (BishopProps.∣-x∣≃∣x∣ {x})
-        (BishopProps.x≤∣x∣ {BishopReal.- x})
-
-    abs+x-nonneg : BishopReal.NonNegative (abs BishopReal.+ x)
-    abs+x-nonneg =
-      BishopProps.nonNeg-cong
-        (BishopProps.+-congʳ abs (BishopProps.neg-involutive x))
-        negx-abs-nonneg
-
-    diffSq :
-      (abs BishopReal.- x) BishopReal.* (abs BishopReal.+ x)
-        BishopReal.≃
-      (abs BishopReal.* abs) BishopReal.- (x BishopReal.* x)
-    diffSq = begin
-      (abs BishopReal.- x) BishopReal.* (abs BishopReal.+ x)
-        ≃⟨ BishopProps.*-distribʳ-+ (abs BishopReal.+ x) abs (BishopReal.- x) ⟩
-      abs BishopReal.* (abs BishopReal.+ x)
-        BishopReal.+ (BishopReal.- x) BishopReal.* (abs BishopReal.+ x)
-        ≃⟨ BishopProps.+-cong
-             (BishopProps.*-distribˡ-+ abs abs x)
-             (BishopProps.*-distribˡ-+ (BishopReal.- x) abs x) ⟩
-      (abs BishopReal.* abs BishopReal.+ abs BishopReal.* x)
-        BishopReal.+ ((BishopReal.- x) BishopReal.* abs
-          BishopReal.+ (BishopReal.- x) BishopReal.* x)
-        ≃⟨ BishopProps.+-congʳ
-             (abs BishopReal.* abs BishopReal.+ abs BishopReal.* x) bStep ⟩
-      (abs BishopReal.* abs BishopReal.+ abs BishopReal.* x)
-        BishopReal.+ (BishopReal.- (abs BishopReal.* x)
-          BishopReal.+ BishopReal.- (x BishopReal.* x))
-        ≃⟨ BishopProps.+-assoc (abs BishopReal.* abs) (abs BishopReal.* x)
-             (BishopReal.- (abs BishopReal.* x)
-               BishopReal.+ BishopReal.- (x BishopReal.* x)) ⟩
-      abs BishopReal.* abs
-        BishopReal.+ (abs BishopReal.* x
-          BishopReal.+ (BishopReal.- (abs BishopReal.* x)
-            BishopReal.+ BishopReal.- (x BishopReal.* x)))
-        ≃⟨ BishopProps.+-congʳ (abs BishopReal.* abs) cStep ⟩
-      abs BishopReal.* abs BishopReal.+ BishopReal.- (x BishopReal.* x)
-        ∎
-      where
-        open BishopProps.≃-Reasoning
-
-        bStep :
-          ((BishopReal.- x) BishopReal.* abs
-            BishopReal.+ (BishopReal.- x) BishopReal.* x)
-            BishopReal.≃
-          (BishopReal.- (abs BishopReal.* x)
-            BishopReal.+ BishopReal.- (x BishopReal.* x))
-        bStep = BishopProps.≃-trans
-          (BishopProps.+-cong
-            (BishopProps.≃-symm (BishopProps.neg-distribˡ-* x abs))
-            (BishopProps.≃-symm (BishopProps.neg-distribˡ-* x x)))
-          (BishopProps.+-cong
-            (BishopProps.≃-symm
-              (BishopProps.-‿cong (BishopProps.*-comm abs x)))
-            BishopProps.≃-refl)
-
-        cStep :
-          (abs BishopReal.* x
-            BishopReal.+ (BishopReal.- (abs BishopReal.* x)
-              BishopReal.+ BishopReal.- (x BishopReal.* x)))
-            BishopReal.≃
-          BishopReal.- (x BishopReal.* x)
-        cStep = BishopProps.≃-trans
-          (BishopProps.≃-symm
-            (BishopProps.+-assoc (abs BishopReal.* x)
-              (BishopReal.- (abs BishopReal.* x))
-              (BishopReal.- (x BishopReal.* x))))
-          (BishopProps.≃-trans
-            (BishopProps.+-congˡ (BishopReal.- (x BishopReal.* x))
-              (BishopProps.+-inverseʳ (abs BishopReal.* x)))
-            (BishopProps.+-identityˡ (BishopReal.- (x BishopReal.* x))))
-
-    absabs-minus-xx-nonneg :
-      BishopReal.NonNegative
-        ((abs BishopReal.* abs) BishopReal.- (x BishopReal.* x))
-    absabs-minus-xx-nonneg =
-      BishopProps.nonNeg-cong
-        diffSq
-        (BishopProps.nonNegx,y⇒nonNegx*y abs-x-nonneg abs+x-nonneg)
-
-    xx≤absabs : square x BishopReal.≤ abs BishopReal.* abs
-    xx≤absabs = absabs-minus-xx-nonneg
-
-    absabs≤halfhalf :
-      (abs BishopReal.* abs)
-        BishopReal.≤ (half BishopReal.⋆) BishopReal.* (half BishopReal.⋆)
-    absabs≤halfhalf =
-      BishopProps.*-mono-≤
-        {x = abs} {y = half BishopReal.⋆} {z = abs} {w = half BishopReal.⋆}
-        (BishopProps.nonNeg∣x∣ x) (BishopProps.nonNeg∣x∣ x)
-        halfBall halfBall
-
-    halfHalf≃quarter :
-      (half BishopReal.⋆) BishopReal.* (half BishopReal.⋆)
-        BishopReal.≃
-      quarter BishopReal.⋆
-    halfHalf≃quarter =
-      BishopProps.≃-symm (BishopProps.⋆-distrib-* half half)
+    (BishopProps.≤-respʳ-≃
+      (BishopProps.∣x*y∣≃∣x∣*∣y∣ x x)
+      (BishopProps.x≤∣x∣ {x = square x}))
+    (HalfBall.bishopHalfBallMagnitudeSquareBelowQuarter x insideHalf)
 
 sineCoefficientRecurrence : Set
 sineCoefficientRecurrence =
@@ -207,6 +105,15 @@ cosineCoefficientRecurrence =
     BishopReal.*
     (BishopReal._⋆ (inverseFactorialRational (evenExponent k))
       BishopReal.* BishopReal.∣ BishopReal.pow x (evenExponent k) ∣)
+
+bishopInverseFactorialEncodingLevel : ProofLevel
+bishopInverseFactorialEncodingLevel = machineChecked
+
+bishopHalfBallSquareLevel : ProofLevel
+bishopHalfBallSquareLevel = machineChecked
+
+bishopHalfRadiusCoefficientRecurrenceLevel : ProofLevel
+bishopHalfRadiusCoefficientRecurrenceLevel = conditional
 
 bishopHalfRadiusRealEstimatesLevel : ProofLevel
 bishopHalfRadiusRealEstimatesLevel = conditional
