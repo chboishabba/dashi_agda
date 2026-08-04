@@ -29,7 +29,6 @@ import Sequence as BishopSequence
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.PhysicalInvolutionParityExact as Parity
-import DASHI.Physics.YangMills.SetoidPhysicalInvolutionParityExact as SetoidParity
 import DASHI.Physics.YangMills.BalabanBishopSetoidAlternatingFirstOmittedExact as Alternating
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -110,9 +109,10 @@ oddPartialSumNegation {term = term} family point (suc count) =
     (BishopProperties.+-cong
       (oddPartialSumNegation family point count)
       (termOdd family point count))
-    (BishopProperties.neg-distrib-+
-      (partialSum (term point) count)
-      (term point count))
+    (BishopProperties.≃-symm
+      (BishopProperties.neg-distrib-+
+        (partialSum (term point) count)
+        (term point count)))
 
 evenPartialSumNegation :
   ∀ {term : BishopReal.ℝ → Nat → BishopReal.ℝ} →
@@ -159,9 +159,9 @@ bishopSinNeg :
   BishopReal._≃_
     (Elementary.bishopSin dataSet (BishopReal.- point))
     (BishopReal.- (Elementary.bishopSin dataSet point))
-bishopSinNeg inputs point =
+bishopSinNeg {dataSet = dataSet} inputs point =
   Elementary.seriesValueUnique
-    (Elementary.sineSeries _ (BishopReal.- point))
+    (Elementary.sineSeries dataSet (BishopReal.- point))
     (sineSeriesAtNegConvergesToNegatedValue inputs point)
 
 bishopCosNeg :
@@ -171,9 +171,9 @@ bishopCosNeg :
   BishopReal._≃_
     (Elementary.bishopCos dataSet (BishopReal.- point))
     (Elementary.bishopCos dataSet point)
-bishopCosNeg inputs point =
+bishopCosNeg {dataSet = dataSet} inputs point =
   Elementary.seriesValueUnique
-    (Elementary.cosineSeries _ (BishopReal.- point))
+    (Elementary.cosineSeries dataSet (BishopReal.- point))
     (cosineSeriesAtNegConvergesToSameValue inputs point)
 
 record OrderClosedSequenceKernel (Scalar : Set) : Set₁ where
