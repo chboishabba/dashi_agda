@@ -74,71 +74,71 @@ physicalHessianEnergy referenceEnergy signedRemainder =
   referenceEnergy + signedRemainder
 
 path4SignedRemainderCoercive :
-  ∀ field gaugeFixingEnergy blockPenaltyEnergy signedRemainder →
-  Hodge.BondComponentMeanZero field →
+  ∀ fld gaugeFixingEnergy blockPenaltyEnergy signedRemainder →
+  Hodge.BondComponentMeanZero fld →
   0ℚ ≤ gaugeFixingEnergy →
   0ℚ ≤ blockPenaltyEnergy →
-  - (p33PhysicalFloor * Hodge.bondNormSq field) ≤ signedRemainder →
-  p33PhysicalFloor * Hodge.bondNormSq field
+  - (p33PhysicalFloor * Hodge.bondNormSq fld) ≤ signedRemainder →
+  p33PhysicalFloor * Hodge.bondNormSq fld
   ≤ physicalHessianEnergy
       (Hodge.referenceHodgeEnergy
-        field gaugeFixingEnergy blockPenaltyEnergy)
+        fld gaugeFixingEnergy blockPenaltyEnergy)
       signedRemainder
 path4SignedRemainderCoercive
-    field gaugeFixingEnergy blockPenaltyEnergy signedRemainder
+    fld gaugeFixingEnergy blockPenaltyEnergy signedRemainder
     meanZero gaugeNonnegative blockNonnegative remainderLower =
   subst
     (λ lower → lower ≤
       physicalHessianEnergy
         (Hodge.referenceHodgeEnergy
-          field gaugeFixingEnergy blockPenaltyEnergy)
+          fld gaugeFixingEnergy blockPenaltyEnergy)
         signedRemainder)
-    (sym (p33HalfFloorCancellationIdentity (Hodge.bondNormSq field)))
+    (sym (p33HalfFloorCancellationIdentity (Hodge.bondNormSq fld)))
     (ℚP.+-mono-≤
       (Hodge.path4BondReferenceHodgeCoercivity
-        field gaugeFixingEnergy blockPenaltyEnergy
+        fld gaugeFixingEnergy blockPenaltyEnergy
         meanZero gaugeNonnegative blockNonnegative)
       remainderLower)
 
 path4ConfiguredRadiusRemainderLowerImpliesPhysicalLower :
-  ∀ field signedRemainder →
+  ∀ fld signedRemainder →
   - (Constants.configuredTotalCoefficient
       * p33SmallFieldRadius
-      * Hodge.bondNormSq field)
+      * Hodge.bondNormSq fld)
   ≤ signedRemainder →
-  - (p33PhysicalFloor * Hodge.bondNormSq field)
+  - (p33PhysicalFloor * Hodge.bondNormSq fld)
   ≤ signedRemainder
 path4ConfiguredRadiusRemainderLowerImpliesPhysicalLower
-    field signedRemainder configuredLower =
+    fld signedRemainder configuredLower =
   subst
     (λ lower → lower ≤ signedRemainder)
     (cong -_
       (p33RadiusSpendsHalfReferenceScaledExactly
-        (Hodge.bondNormSq field)))
+        (Hodge.bondNormSq fld)))
     configuredLower
 
 path4ConfiguredRadiusPhysicalCoercive :
-  ∀ field gaugeFixingEnergy blockPenaltyEnergy signedRemainder →
-  Hodge.BondComponentMeanZero field →
+  ∀ fld gaugeFixingEnergy blockPenaltyEnergy signedRemainder →
+  Hodge.BondComponentMeanZero fld →
   0ℚ ≤ gaugeFixingEnergy →
   0ℚ ≤ blockPenaltyEnergy →
   - (Constants.configuredTotalCoefficient
       * p33SmallFieldRadius
-      * Hodge.bondNormSq field)
+      * Hodge.bondNormSq fld)
   ≤ signedRemainder →
-  p33PhysicalFloor * Hodge.bondNormSq field
+  p33PhysicalFloor * Hodge.bondNormSq fld
   ≤ physicalHessianEnergy
       (Hodge.referenceHodgeEnergy
-        field gaugeFixingEnergy blockPenaltyEnergy)
+        fld gaugeFixingEnergy blockPenaltyEnergy)
       signedRemainder
 path4ConfiguredRadiusPhysicalCoercive
-    field gaugeFixingEnergy blockPenaltyEnergy signedRemainder
+    fld gaugeFixingEnergy blockPenaltyEnergy signedRemainder
     meanZero gaugeNonnegative blockNonnegative configuredLower =
   path4SignedRemainderCoercive
-    field gaugeFixingEnergy blockPenaltyEnergy signedRemainder
+    fld gaugeFixingEnergy blockPenaltyEnergy signedRemainder
     meanZero gaugeNonnegative blockNonnegative
     (path4ConfiguredRadiusRemainderLowerImpliesPhysicalLower
-      field signedRemainder configuredLower)
+      fld signedRemainder configuredLower)
 
 p33Path4ReferenceFloorLevel : ProofLevel
 p33Path4ReferenceFloorLevel = machineChecked
