@@ -11,6 +11,8 @@ files=(
   DASHI/Physics/YangMills/BalabanBishopSetoidRatioMonotoneExact.agda
   DASHI/Physics/YangMills/BalabanBishopAlternatingFirstOmittedExact.agda
   DASHI/Physics/YangMills/BalabanBishopSetoidAlternatingFirstOmittedExact.agda
+  DASHI/Physics/YangMills/BalabanP06PeriodicSupportDegreeExact.agda
+  DASHI/Physics/YangMills/BalabanP06PeriodicGraphAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP06CanonicalAnimalConstantExact.agda
   DASHI/Physics/YangMills/BalabanP06A1A2A3InfluenceExact.agda
   DASHI/Physics/YangMills/BalabanP11PrefixTailMinimumExact.agda
@@ -52,6 +54,13 @@ grep -q 'bishopSetoidOrderedRatioKernel' \
 grep -q 'bishopSetoidOrderedDifferenceKernel' \
   DASHI/Physics/YangMills/BalabanBishopSetoidAlternatingFirstOmittedExact.agda
 
+# P06 must use the literal eight signed periodic directions and preserve the
+# legacy countNeighbors identification as a separate compatibility boundary.
+grep -q 'periodicDistinctNeighbourCountBelowEight' \
+  DASHI/Physics/YangMills/BalabanP06PeriodicSupportDegreeExact.agda
+grep -q 'PeriodicCountNeighborsIdentification' \
+  DASHI/Physics/YangMills/BalabanP06PeriodicGraphAdapterExact.agda
+
 # The numerical Step-V interface must be the canonical animal constant together
 # with a strict logarithmic decay margin, rather than a generic smallness flag.
 grep -q 'canonicalAnimalConstant' \
@@ -67,6 +76,10 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanBishopSetoidRatioMonotoneExact.agda
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanBishopSetoidAlternatingFirstOmittedExact.agda
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/YangMills/BalabanP06PeriodicSupportDegreeExact.agda
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/YangMills/BalabanP06PeriodicGraphAdapterExact.agda
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanP06CanonicalAnimalConstantExact.agda
 scripts/run_agda29_parallel_check.sh \
