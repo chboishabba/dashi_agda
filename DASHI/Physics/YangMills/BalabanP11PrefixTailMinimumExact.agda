@@ -130,30 +130,30 @@ prefixTailInputsFromAnalytic :
   P11PrefixTailAnalyticInputs →
   P11PrefixTailMinimumInputs
 prefixTailInputsFromAnalytic inputs = record
-  { P11PrefixTailMinimumInputs.transitionScale =
+  { transitionScale =
       P11PrefixTailAnalyticInputs.transitionScale inputs
-  ; P11PrefixTailMinimumInputs.prefixMinimum =
+  ; prefixMinimum =
       P11PrefixTailAnalyticInputs.prefixMinimum inputs
-  ; P11PrefixTailMinimumInputs.tailMinimum =
+  ; tailMinimum =
       P11PrefixTailAnalyticInputs.tailMinimum inputs
-  ; P11PrefixTailMinimumInputs.globalMinimum =
+  ; globalMinimum =
       P11PrefixTailAnalyticInputs.globalMinimum inputs
-  ; P11PrefixTailMinimumInputs.scaleIsPrefixOrTail = λ scale →
+  ; scaleIsPrefixOrTail = λ scale →
       scalePrefixOrTail scale
         (P11PrefixTailAnalyticInputs.transitionScale inputs)
-  ; P11PrefixTailMinimumInputs.globalMinimumBelowPrefixMinimum =
+  ; globalMinimumBelowPrefixMinimum =
       P11PrefixTailAnalyticInputs.globalMinimumBelowPrefixMinimum inputs
-  ; P11PrefixTailMinimumInputs.globalMinimumBelowTailMinimum =
+  ; globalMinimumBelowTailMinimum =
       P11PrefixTailAnalyticInputs.globalMinimumBelowTailMinimum inputs
-  ; P11PrefixTailMinimumInputs.prefixMinimumBelowP0 =
+  ; prefixMinimumBelowP0 =
       P11PrefixTailAnalyticInputs.prefixMinimumBelowP0 inputs
-  ; P11PrefixTailMinimumInputs.tailMinimumBelowP0 =
+  ; tailMinimumBelowP0 =
       P11PrefixTailAnalyticInputs.tailMinimumBelowP0 inputs
-  ; P11PrefixTailMinimumInputs.globalMinimumNonnegative =
+  ; globalMinimumNonnegative =
       P11PrefixTailAnalyticInputs.globalMinimumNonnegative inputs
-  ; P11PrefixTailMinimumInputs.globalCAbsNonnegative =
+  ; globalCAbsNonnegative =
       P11PrefixTailAnalyticInputs.globalCAbsNonnegative inputs
-  ; P11PrefixTailMinimumInputs.entropyThresholdPaidAtGlobalMinimum =
+  ; entropyThresholdPaidAtGlobalMinimum =
       P11PrefixTailAnalyticInputs.entropyThresholdPaidAtGlobalMinimum inputs
   }
 
