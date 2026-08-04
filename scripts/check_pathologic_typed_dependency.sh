@@ -15,6 +15,7 @@ files=(
   DASHI/Reasoning/SinthomeTypedStabilisation.agda
   DASHI/Reasoning/SinthomeFiniteWitness.agda
   DASHI/Reasoning/PNFTypedDependencyAdapters.agda
+  DASHI/Reasoning/SFMVerificationDependency.agda
   DASHI/Reasoning/TypedDependencyUpgradeAtlas.agda
   DASHI/Reasoning/PathologicConstraintSystem.agda
   DASHI/Reasoning/PathologicPerspectiveHyperfabric.agda
@@ -50,6 +51,9 @@ grep -q 'finiteSinthomeNotErasure' DASHI/Reasoning/SinthomeFiniteWitness.agda
 grep -q 'memoryUpdatePreservesEvent' DASHI/Reasoning/PNFTypedDependencyAdapters.agda
 grep -q 'record TypedClosureGluing' DASHI/Reasoning/PNFTypedDependencyAdapters.agda
 grep -q 'availabilityBooleanReconstructsSection = false' DASHI/Reasoning/PNFTypedDependencyAdapters.agda
+grep -q 'record CheckedReceipt' DASHI/Reasoning/SFMVerificationDependency.agda
+grep -q 'record CheckedTheoremCard' DASHI/Reasoning/SFMVerificationDependency.agda
+grep -q 'targetVerifiedBooleanReconstructsReceipt = false' DASHI/Reasoning/SFMVerificationDependency.agda
 
 # Marked unit extension and the corrected hyphen reading.
 grep -q 'predecessorSubtractionRequired = false' DASHI/Foundations/MarkedUnitExtensionCore.agda
@@ -73,6 +77,7 @@ grep -q 'fictionalityImpliesMeaninglessness = false' DASHI/Reasoning/PathologicT
 # Upgrade atlas must state what is and is not migrated.
 grep -q 'allLegacySitesAlreadyMigrated = false' DASHI/Reasoning/TypedDependencyUpgradeAtlas.agda
 grep -q 'pathologicUpgrade' DASHI/Reasoning/TypedDependencyUpgradeAtlas.agda
+grep -q 'verificationUpgrade' DASHI/Reasoning/TypedDependencyUpgradeAtlas.agda
 
 # Attribution requirements.
 grep -q 'Harris Brewis (hbomberguy)' DASHI/Reasoning/PathologicSourceAtlas.agda
