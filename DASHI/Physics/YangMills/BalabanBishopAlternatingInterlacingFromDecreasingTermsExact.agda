@@ -171,7 +171,7 @@ lowerPartialIncreasing dataSet index =
       BishopProperties.≤-respˡ-≃
         (BishopProperties.≃-symm
           (BishopProperties.+-identityʳ partial))
-        (BishopProperties.+-monoˡ-≤ partial differenceNonnegative)
+        (BishopProperties.+-monoʳ-≤ partial differenceNonnegative)
   in
   BishopProperties.≤-respʳ-≃
     (BishopProperties.≃-symm
@@ -196,7 +196,7 @@ upperPartialDecreasing dataSet index =
           (BishopReal._-_ currentUpper oddMagnitude)
           oddMagnitude)
     rawBound =
-      BishopProperties.+-monoˡ-≤
+      BishopProperties.+-monoʳ-≤
         (BishopReal._-_ currentUpper oddMagnitude)
         (magnitudeDecreasing dataSet (suc (double index)))
 
@@ -288,17 +288,27 @@ upperMinusLowerIsEvenMagnitude :
       (lowerPartial dataSet index))
     (magnitude dataSet (double index))
 upperMinusLowerIsEvenMagnitude dataSet index =
-  let partial = lowerPartial dataSet index
-      magnitudeAt = magnitude dataSet (double index)
-  in BishopProperties.≃-trans
-      (BishopProperties.+-congʳ
-        (BishopReal.- partial)
-        (evenTermIsPositiveMagnitude dataSet index))
-      (let open BishopProperties.ℝ-Solver
-       in solve 2
-          (λ s a → (s ⊕ a) ⊖ s ⊜ a)
-          BishopProperties.≃-refl
-          partial magnitudeAt)
+  let
+    partial = lowerPartial dataSet index
+    magnitudeAt = magnitude dataSet (double index)
+
+    upperExpansion :
+      BishopReal._≃_
+        (upperPartial dataSet index)
+        (BishopReal._+_ partial magnitudeAt)
+    upperExpansion =
+      BishopProperties.+-congʳ partial
+        (evenTermIsPositiveMagnitude dataSet index)
+  in
+  BishopProperties.≃-trans
+    (BishopProperties.+-congˡ
+      (BishopReal.- partial)
+      upperExpansion)
+    (let open BishopProperties.ℝ-Solver
+     in solve 2
+        (λ s a → (s ⊕ a) ⊖ s ⊜ a)
+        BishopProperties.≃-refl
+        partial magnitudeAt)
 
 upperMinusNextLowerIsOddMagnitude :
   (dataSet : AlternatingDecreasingSeriesData) →
@@ -309,20 +319,22 @@ upperMinusNextLowerIsOddMagnitude :
       (nextLowerPartial dataSet index))
     (magnitude dataSet (suc (double index)))
 upperMinusNextLowerIsOddMagnitude dataSet index =
-  let currentUpper = upperPartial dataSet index
-      oddMagnitude = magnitude dataSet (suc (double index))
-  in BishopProperties.≃-trans
-      (BishopProperties.+-congʳ
+  let
+    currentUpper = upperPartial dataSet index
+    oddMagnitude = magnitude dataSet (suc (double index))
+  in
+  BishopProperties.≃-trans
+    (BishopProperties.+-congʳ
+      currentUpper
+      (BishopProperties.-‿cong
+        (lowerSuccessorExpansion dataSet index)))
+    (let open BishopProperties.ℝ-Solver
+     in solve 3
+        (λ u a b → u ⊖ (u ⊕ (a ⊖ b)) ⊜ b)
+        BishopProperties.≃-refl
         currentUpper
-        (BishopProperties.-‿cong
-          (lowerSuccessorExpansion dataSet index)))
-      (let open BishopProperties.ℝ-Solver
-       in solve 3
-          (λ u a b → u ⊖ (u ⊕ (a ⊖ b)) ⊜ b)
-          BishopProperties.≃-refl
-          currentUpper
-          (magnitude dataSet (double index))
-          oddMagnitude)
+        (magnitude dataSet (double index))
+        oddMagnitude)
 
 alternatingInterlacingData :
   (dataSet : AlternatingDecreasingSeriesData) →
