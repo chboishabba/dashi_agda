@@ -29,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoSourceJ12CriterionExact where
 open import Agda.Builtin.List using (List; []; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -55,6 +55,14 @@ nonnegativeProduct {left} {right} leftNonnegative rightNonnegative =
       productIsNonnegative = ℚₚ.nonNeg*nonNeg⇒nonNeg left right
   in
   ℚₚ.nonNegative⁻¹ (left * right)
+
+sumSquaresNonnegative :
+  (values : List ℚ) → 0ℚ ≤ Jensen.sumSquares values
+sumSquaresNonnegative [] = ℚₚ.≤-refl
+sumSquaresNonnegative (value ∷ values) =
+  L2.addNonnegative
+    (L2.squareNonnegative value)
+    (sumSquaresNonnegative values)
 
 record SourceJ12CriterionData (Time : Set) : Set₁ where
   field
@@ -91,7 +99,7 @@ nearEnergyNonnegative {Time} data = go (Five.times (window data))
   nearSquareNonnegative :
     (time : Time) → 0ℚ ≤ Five.nearSquareSum (values time)
   nearSquareNonnegative time =
-    Jensen.sumSquaresNonnegative (Five.fiveShellValues (values time))
+    sumSquaresNonnegative (Five.fiveShellValues (values time))
 
   go :
     (remaining : List Time) →
