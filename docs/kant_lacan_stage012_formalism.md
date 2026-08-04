@@ -48,7 +48,7 @@ The local basis unit is `j = 1`, while the decimal carry contains ten such units
 12j = 10j + 2j
 ```
 
-Thus Stage 10 carries a completed local bundle, Stage 11 adds a fresh local unit, and Stage 12 opens the first relation at the new scale.
+Thus Stage 10 carries a completed local bundle, Stage 11 adds a fresh local unit, and Stage 12 opens the first relation at the new scale. The guarded extension adds an explicit `11 -> 12` relation edge while preserving the earlier loops, arrests, restarts, valuation, memory and residual conditions.
 
 This local basis `j` is not the modular j-invariant. A separate bridge imports the exact repository arithmetic
 
