@@ -35,6 +35,7 @@ module DASHI.Physics.YangMills.BalabanP33BishopSU2AdDexpNumeratorBoundsExact whe
 -- trigonometric assumptions.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
 
@@ -43,6 +44,8 @@ import RealProperties as BishopProperties
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
+import DASHI.Physics.YangMills.BalabanBishopAlternatingInterlacingFromDecreasingTermsExact as Alternating
+import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Interlacing
 import DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact as Taylor
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -149,11 +152,9 @@ adScalarNumeratorNonnegative inputs =
   in
   BishopProperties.+-mono-≤
     (BishopProperties.≤-trans
-      (DASHI.Physics.YangMills.BalabanBishopAlternatingInterlacingFromDecreasingTermsExact.lowerPartialNonnegative
-        sineData (Data.Nat.Base.suc Data.Nat.Base.zero))
-      (DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact.lowerPartialBelowRepresentedLimit
-        (DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact.sineInterlacing concrete)
-        (Data.Nat.Base.suc Data.Nat.Base.zero)))
+      (Alternating.lowerPartialNonnegative sineData (suc zero))
+      (Interlacing.lowerPartialBelowRepresentedLimit
+        (Interlacing.sineInterlacing concrete) (suc zero)))
     (Taylor.cosineDefectNonnegative defects)
 
 dexpScalarNumeratorNonnegative :
