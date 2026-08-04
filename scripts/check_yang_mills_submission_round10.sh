@@ -14,6 +14,8 @@ files=(
   DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda
   DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda
   DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda
+  DASHI/Physics/YangMills/BalabanBishopAlternatingInterlacingFromDecreasingTermsExact.agda
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineInterlacingExact.agda
   DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda
   DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda
   DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda
@@ -36,7 +38,7 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}' "${files[@]}"; the
   exit 1
 fi
 
-# Concrete Bishop arithmetic, term parity, and convergence transport.
+# Concrete Bishop arithmetic, term parity, convergence and interlacing.
 grep -q 'oddInverseFactorialStep' \
   DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda
 grep -q 'evenInverseFactorialStep' \
@@ -53,6 +55,10 @@ grep -q 'seriesNegationConvergence' \
   DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda
 grep -q 'bishopSeriesLimitParityInputsFromTermParity' \
   DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda
+grep -q 'alternatingInterlacingData' \
+  DASHI/Physics/YangMills/BalabanBishopAlternatingInterlacingFromDecreasingTermsExact.agda
+grep -q 'concreteSineCosineInterlacing' \
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineInterlacingExact.agda
 grep -q 'concreteBishopAlternatingBracketsFromInterlacing' \
   DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda
 
@@ -75,9 +81,11 @@ grep -q '10.1007/BF01211762' \
 # Exact frontier accounting must remain fail-closed.
 grep -q 'concreteSineCosineTermParityDischarged = true' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound10Receipt.agda
+grep -q 'concreteHalfBallInterlacingReducerDischarged = true' \
+  DASHI/Physics/YangMills/YangMillsSubmissionRound10Receipt.agda
 grep -q 'polynomialFiniteSummationReducedToPointwiseDomination = true' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound10Receipt.agda
-grep -q 'concreteSineCosineInterlacingDischarged = false' \
+grep -q 'elementarySeriesTermIdentificationDischarged = false' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound10Receipt.agda
 grep -q 'polynomialPointwiseDominationDischarged = false' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound10Receipt.agda
@@ -91,6 +99,8 @@ roots=(
   DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda
   DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda
   DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda
+  DASHI/Physics/YangMills/BalabanBishopAlternatingInterlacingFromDecreasingTermsExact.agda
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineInterlacingExact.agda
   DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda
   DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda
   DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda
