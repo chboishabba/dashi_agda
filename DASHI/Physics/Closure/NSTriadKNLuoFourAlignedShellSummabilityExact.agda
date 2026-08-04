@@ -37,8 +37,10 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Majorant
@@ -48,7 +50,7 @@ four = Int.+ 4 / 1
 sixteenThirds = Int.+ 16 / 3
 
 fourNonnegative : 0ℚ ≤ four
-fourNonnegative = ℚₚ.0≤⇒nonNegative⁻¹ four
+fourNonnegative = toWitness {a? = 0ℚ ≤? four} _
 
 record FourAlignedShellDecay : Set where
   constructor four-aligned-shell-decay
@@ -187,8 +189,6 @@ fourClassPrefixToGeometric data cutoff =
     (trans scaledPowerMeaning
       (cong (fourConstant data *_) partialSumMeaning))
     termwise
-  where
-    open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 fourClassPrefixBound :
   (data : FourAlignedShellDecay) →
