@@ -35,7 +35,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 
@@ -149,8 +149,11 @@ homogeneousAsInhomogeneous data = record
   ; oneStepBound = λ step →
       ℚₚ.≤-trans
         (homogeneousStepBound data step)
-        (ℚₚ.≤-reflexive
-          (ℚₚ.+-identityʳ (growth data * energy data step)))
+        (subst
+          (λ upper →
+            growth data * energy data step ≤ upper)
+          (sym (ℚₚ.+-identityʳ (growth data * energy data step)))
+          ℚₚ.≤-refl)
   }
 
 finiteHomogeneousGronwall :
@@ -159,17 +162,13 @@ finiteHomogeneousGronwall :
   energy data step
   ≤ Geo.pow (growth data) step * initialBound data
 finiteHomogeneousGronwall data step =
-  let
-    recursiveBound =
-      finiteDiscreteGronwall (homogeneousAsInhomogeneous data) step
-  in
-  ℚₚ.≤-trans
-    recursiveBound
-    (ℚₚ.≤-reflexive
-      (homogeneousEnvelopeMeaning
-        (growth data)
-        (initialBound data)
-        step))
+  subst
+    (λ upper → energy data step ≤ upper)
+    (homogeneousEnvelopeMeaning
+      (growth data)
+      (initialBound data)
+      step)
+    (finiteDiscreteGronwall (homogeneousAsInhomogeneous data) step)
 
 finiteDiscreteGronwallClosed : Bool
 finiteDiscreteGronwallClosed = true
