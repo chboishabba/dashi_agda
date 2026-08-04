@@ -53,10 +53,17 @@ ordinaryFiniteGeometricBound = record
   ; level = machineChecked
   }
 
-polynomialWeightedShellBound : Round10LedgerEntry
-polynomialWeightedShellBound = record
-  { name = "Polynomially weighted shell bound"
-  ; statement = "The finite-prefix plus larger-ratio absorption theorem for n^p q^n remains to be inhabited on the concrete carrier."
+polynomialFiniteSummationReducer : Round10LedgerEntry
+polynomialFiniteSummationReducer = record
+  { name = "Polynomially weighted finite summation reducer"
+  ; statement = "A pointwise domination n^p q^n <= M (q')^n plus a finite geometric q' bound yields every finite weighted shell bound by induction."
+  ; level = machineChecked
+  }
+
+polynomialPointwiseDomination : Round10LedgerEntry
+polynomialPointwiseDomination = record
+  { name = "Polynomial pointwise geometric domination"
+  ; statement = "Choose q < q' < 1 and construct M absorbing the finite prefix and eventual n^p growth on the concrete carrier."
   ; level = conditional
   }
 
