@@ -19,9 +19,9 @@ module DASHI.Physics.YangMills.BalabanContourWordInverseExact where
 -- and edge order, and its holonomy is proved to be the group inverse.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; cong₂)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.YangMills.PhysicalInvolutionParityExact as Parity
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -66,6 +66,13 @@ record GroupKernel (Group : Set) : Set₁ where
     inverseInvolutive : ∀ value → inverse (inverse value) ≡ value
 
 open GroupKernel public
+
+record UnitalGroupKernel (Group : Set) : Set₁ where
+  field
+    group : GroupKernel Group
+    inverseOne : inverse group (one group) ≡ one group
+
+open UnitalGroupKernel public
 
 record OrientedEdgeData (Edge Group : Set)
     (group : GroupKernel Group) : Set₁ where
@@ -163,28 +170,6 @@ wordProductAppend {group = group} dataSet (edge ∷ rest) right =
         (edgeValue dataSet edge)
         (wordProduct dataSet rest)
         (wordProduct dataSet right)))
-
-holonomyInverseWord :
-  ∀ {Edge Group}
-    {group : GroupKernel Group}
-    (dataSet : OrientedEdgeData Edge Group group)
-    (word : List Edge) →
-  wordProduct dataSet (inverseWord dataSet word)
-  ≡ inverse group (wordProduct dataSet word)
-holonomyInverseWord {group = group} dataSet [] =
-  sym (inverseInvolutive group (one group))
-    where
-    -- The empty-word case needs inverse(1)=1.  It follows from the supplied
-    -- group laws through the following explicit compatibility field in the
-    -- strengthened theorem below; this weak theorem is not exported.
-    -- This local branch is intentionally replaced by the certified theorem.
-    
-record UnitalGroupKernel (Group : Set) : Set₁ where
-  field
-    group : GroupKernel Group
-    inverseOne : inverse group (one group) ≡ one group
-
-open UnitalGroupKernel public
 
 holonomyInverseContour :
   ∀ {Edge Group}
