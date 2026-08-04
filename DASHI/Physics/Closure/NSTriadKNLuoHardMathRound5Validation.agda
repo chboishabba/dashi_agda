@@ -8,9 +8,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoHardMathRound5Validation where
 -- source Section-4 nonlinear square bound, terminal-window propagation,
 -- alpha=3/2 and b=4 absorption, four-residue induction, and Schur completion.
 --
--- The focused pull-request checker is installed on the round-four base, so
--- this root is elaborated against the exact merge candidate rather than a
--- detached interface inventory.
+-- The focused pull-request checker is installed on the default branch and
+-- filtered to this round-four base, so this root is elaborated against the
+-- exact merge candidate rather than a detached interface inventory.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
