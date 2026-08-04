@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Generate a machine-readable audit for the Navier--Stokes Luo lane.
 
-The report is intentionally syntactic.  It inventories modules, imports,
+The report is intentionally syntactic. It inventories modules, imports,
 top-level declarations, source metadata, file hashes, explicit proof-level
-markers, and the finite/infinite and rational/real boundary vocabulary.  It
-also fails closed on holes, question-mark metavariable markers, postulates, or
-unsafe/unsolved-meta options when --strict is supplied.
+markers, and the finite/infinite and rational/real boundary vocabulary. In
+strict mode it fails on holes, standalone code metavariables, postulates,
+unsafe options, or permission for unsolved metas.
+
+Question marks in comments and ordinary Agda identifiers such as `_≤?_` are
+not treated as metavariables. Only a standalone `?` token in non-comment code
+is forbidden.
 """
 
 from __future__ import annotations
@@ -16,7 +20,7 @@ import json
 import re
 import subprocess
 import sys
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Iterable
 
@@ -26,13 +30,13 @@ DECL_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_\-′₀-₉]*)\s*:")
 PROVENANCE_RE = re.compile(
     r"^--\s*(Author|Authors|Title|DOI|arXiv DOI|Venue/year|Springer|Relationship):\s*(.*)$"
 )
+STANDALONE_QUESTION_RE = re.compile(r"(?<![A-Za-z0-9_])\?(?![A-Za-z0-9_])")
 
 FORBIDDEN_PATTERNS = {
     "hole": re.compile(r"\{!!\}"),
     "postulate": re.compile(r"^\s*postulate(?:\s|$)", re.MULTILINE),
     "unsolved_metas": re.compile(r"--allow-unsolved-metas"),
     "unsafe": re.compile(r"\{\-#\s*OPTIONS[^#]*--unsafe"),
-    "question_marker": re.compile(r"\?(?:$|[^A-Za-z0-9_])", re.MULTILINE),
 }
 
 BOUNDARY_TERMS = {
@@ -82,9 +86,11 @@ def git_revision(root: Path) -> str | None:
 def selected_files(root: Path) -> list[Path]:
     closure = root / "DASHI" / "Physics" / "Closure"
     files = sorted(closure.glob("NSTriadKNLuo*.agda"))
-    final_statement = closure / "NSTriadKNPeriodicNavierStokesSubmissionTheoremExact.agda"
-    if final_statement.exists():
-        files.append(final_statement)
+
+    additional_roots = [
+        closure / "NSTriadKNPeriodicNavierStokesSubmissionTheoremExact.agda",
+    ]
+    files.extend(path for path in additional_roots if path.exists())
     return sorted(set(files))
 
 
@@ -92,9 +98,17 @@ def line_number(text: str, offset: int) -> int:
     return text.count("\n", 0, offset) + 1
 
 
+def code_before_line_comment(line: str) -> str:
+    """Return the code prefix before Agda's `--` line comment marker."""
+
+    marker = line.find("--")
+    return line if marker < 0 else line[:marker]
+
+
 def findings_for(path: Path, text: str, root: Path) -> list[Finding]:
     rel = str(path.relative_to(root))
     findings: list[Finding] = []
+
     for kind, pattern in FORBIDDEN_PATTERNS.items():
         for match in pattern.finditer(text):
             findings.append(
@@ -105,6 +119,20 @@ def findings_for(path: Path, text: str, root: Path) -> list[Finding]:
                     text=match.group(0),
                 )
             )
+
+    for number, line in enumerate(text.splitlines(), start=1):
+        code = code_before_line_comment(line)
+        match = STANDALONE_QUESTION_RE.search(code)
+        if match:
+            findings.append(
+                Finding(
+                    kind="standalone_question_metavariable",
+                    file=rel,
+                    line=number,
+                    text=match.group(0),
+                )
+            )
+
     return findings
 
 
@@ -113,7 +141,9 @@ def provenance_for(lines: Iterable[str]) -> list[dict[str, str]]:
     for line in lines:
         match = PROVENANCE_RE.match(line)
         if match:
-            result.append({"field": match.group(1), "value": match.group(2).strip()})
+            result.append(
+                {"field": match.group(1), "value": match.group(2).strip()}
+            )
     return result
 
 
@@ -181,14 +211,23 @@ def report(root: Path) -> dict[str, object]:
         for name in BOUNDARY_TERMS
     }
 
+    files_without_provenance = [
+        item.path for item in files if not item.provenance
+    ]
+    files_without_module_header = [
+        item.path for item in files if item.module is None
+    ]
+
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "repository_revision": git_revision(root),
         "file_count": len(files),
         "module_count": sum(item.module is not None for item in files),
         "declaration_count": sum(len(item.declarations) for item in files),
         "dependency_edges": dependency_edges(files),
         "provenance_inventory": provenance_entries,
+        "files_without_provenance": files_without_provenance,
+        "files_without_module_header": files_without_module_header,
         "boundary_summary": boundary_summary,
         "findings": findings,
         "files": [
@@ -245,7 +284,8 @@ def main() -> int:
         "generated Luo submission audit: "
         f"{payload['file_count']} files, "
         f"{payload['declaration_count']} declarations, "
-        f"{len(payload['dependency_edges'])} internal dependency edges"
+        f"{len(payload['dependency_edges'])} internal dependency edges, "
+        f"{len(findings)} forbidden findings"
     )
     return 0
 
