@@ -1,0 +1,3 @@
+module DASHI.EverythingZizekPNFExtension where
+
+import DASHI.Reasoning.ZizekPNFEverything

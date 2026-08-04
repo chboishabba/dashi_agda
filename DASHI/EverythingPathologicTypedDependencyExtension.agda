@@ -1,0 +1,4 @@
+module DASHI.EverythingPathologicTypedDependencyExtension where
+
+import DASHI.EverythingKantLacanPNFExtension
+import DASHI.Reasoning.PathologicEverything
