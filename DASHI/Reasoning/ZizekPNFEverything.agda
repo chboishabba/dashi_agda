@@ -2,6 +2,7 @@ module DASHI.Reasoning.ZizekPNFEverything where
 
 import DASHI.Combinatorics.MemeDiagonal
 import DASHI.Dynamics.LogisticDecimalPNFBridge
+import DASHI.Dynamics.PNFOperatorLocalityResolution
 import DASHI.Foundations.CantorDiagonalCore
 import DASHI.Geometry.TwistedCycleOrientationCover
 import DASHI.Reasoning.ExceptionalAndNonAllClosure
