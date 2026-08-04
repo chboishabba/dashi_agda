@@ -13,11 +13,14 @@ files=(
   DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralCovariantDerivativeDifferenceExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralCovariantDivergenceDifferenceExact.agda
+  DASHI/Physics/YangMills/BalabanP33FourStageOperatorDifferenceExact.agda
+  DASHI/Physics/YangMills/BalabanP33CMP109DerivativeDifferencePrimitiveExact.agda
   DASHI/Physics/YangMills/BalabanP33SignedFiniteAtomExpansionExact.agda
   DASHI/Physics/YangMills/BalabanP33AbsoluteFiniteAtomAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda
   DASHI/Physics/YangMills/BalabanP33FiveSandwichSignedFormExact.agda
   DASHI/Physics/YangMills/BalabanP33SandwichLocalFamilyExact.agda
+  DASHI/Physics/YangMills/BalabanP33FiveSandwichLocalCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda
   DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda
@@ -46,6 +49,10 @@ grep -q 'covariantDerivativeDifferenceExact' \
   DASHI/Physics/YangMills/BalabanP33LiteralCovariantDerivativeDifferenceExact.agda
 grep -q 'covariantDivergenceDifferenceExact' \
   DASHI/Physics/YangMills/BalabanP33LiteralCovariantDivergenceDifferenceExact.agda
+grep -q 'fourStageDifferenceExact' \
+  DASHI/Physics/YangMills/BalabanP33FourStageOperatorDifferenceExact.agda
+grep -q 'blockDerivativeDifferenceNormBelowRadius' \
+  DASHI/Physics/YangMills/BalabanP33CMP109DerivativeDifferencePrimitiveExact.agda
 grep -q 'sumMappedTwoSided' \
   DASHI/Physics/YangMills/BalabanP33SignedFiniteAtomExpansionExact.agda
 grep -q 'fromAbsoluteFixedAtomExpansion' \
@@ -56,6 +63,8 @@ grep -q 'constraintSignedFormBound' \
   DASHI/Physics/YangMills/BalabanP33FiveSandwichSignedFormExact.agda
 grep -q 'localSandwichRemainderBound' \
   DASHI/Physics/YangMills/BalabanP33SandwichLocalFamilyExact.agda
+grep -q 'fiveSandwichLocalChannelsGiveP33Floor' \
+  DASHI/Physics/YangMills/BalabanP33FiveSandwichLocalCoercivityExact.agda
 grep -q 'identityCurvatureCellExact' \
   DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda
 grep -q 'literalFiveMechanismsGivePath4PhysicalCoercivity' \
@@ -72,9 +81,11 @@ grep -q '10.1007/BF01211042' \
 grep -q '10.1007/978-3-319-13467-3' \
   DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda
 grep -q '10.1007/978-3-642-66282-9' \
-  DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda
+  DASHI/Physics/YangMills/BalabanP33FourStageOperatorDifferenceExact.agda
 grep -q '10.1017/CBO9781139020411' \
-  DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda
+  DASHI/Physics/YangMills/BalabanP33FiveSandwichLocalCoercivityExact.agda
+grep -q '10.1007/BF01215223' \
+  DASHI/Physics/YangMills/BalabanP33CMP109DerivativeDifferencePrimitiveExact.agda
 grep -q '10.1103/PhysRevD.10.2445' \
   DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda
 
