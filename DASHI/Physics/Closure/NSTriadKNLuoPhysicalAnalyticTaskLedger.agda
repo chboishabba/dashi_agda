@@ -17,6 +17,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelFourierMultiplierExact a
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSignedConvolutionYoungExact as FiniteYoung
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePeriodicMultiplierRealizationExact as FiniteMultiplier
 import DASHI.Physics.Closure.NSTriadKNLuoPointwisePairFoldReductionExact as PairFold
+import DASHI.Physics.Closure.NSTriadKNLuoCanonicalSourceSchurIdentificationExact as SourceSchur
 import DASHI.Physics.Closure.NSTriadKNLuoEquation42PhysicalIdentityAdapterExact as Equation42
 import DASHI.Physics.Closure.NSTriadKNLuoSection4PhysicalBoundsAdapterExact as Section4
 import DASHI.Physics.Closure.NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact as Summability
@@ -41,6 +42,9 @@ record LuoPhysicalAnalyticTaskLedger : Set where
     pointwisePairFoldReductionConstructed : Bool
     threePhysicalPairCoefficientIdentificationsInhabited : Bool
 
+    canonicalSourceSchurConstructorConstructed : Bool
+    canonicalSourceEnergyMeaningDefinitional : Bool
+    canonicalWeightedEnergyMeaningDefinitional : Bool
     sourceToSchurQuantityIdentificationsInhabited : Bool
 
     equation42PhysicalIdentityAdapterConstructed : Bool
@@ -82,6 +86,9 @@ luoPhysicalAnalyticTaskLedger = ledger
   false
   PairFold.pointwisePairToWholeFoldReductionClosed
   false
+  SourceSchur.canonicalSourceSchurConstructorClosed
+  SourceSchur.canonicalSourceEnergyMeaningDefinitional
+  SourceSchur.canonicalWeightedEnergyMeaningDefinitional
   false
   Equation42.equation42IdentityAdapterClosed
   false
@@ -119,6 +126,24 @@ finiteMultiplierConstructorIsTrue :
   ≡ true
 finiteMultiplierConstructorIsTrue =
   FiniteMultiplier.finitePeriodicMultiplierReducerClosedIsTrue
+
+canonicalSourceSchurConstructorIsTrue :
+  canonicalSourceSchurConstructorConstructed luoPhysicalAnalyticTaskLedger
+  ≡ true
+canonicalSourceSchurConstructorIsTrue =
+  SourceSchur.canonicalSourceSchurConstructorClosedIsTrue
+
+canonicalSourceEnergyMeaningIsDefinitional :
+  canonicalSourceEnergyMeaningDefinitional luoPhysicalAnalyticTaskLedger
+  ≡ true
+canonicalSourceEnergyMeaningIsDefinitional =
+  SourceSchur.canonicalSourceEnergyMeaningDefinitionalIsTrue
+
+canonicalWeightedEnergyMeaningIsDefinitional :
+  canonicalWeightedEnergyMeaningDefinitional luoPhysicalAnalyticTaskLedger
+  ≡ true
+canonicalWeightedEnergyMeaningIsDefinitional =
+  SourceSchur.canonicalWeightedEnergyMeaningDefinitionalIsTrue
 
 equation42AdapterIsTrue :
   equation42PhysicalIdentityAdapterConstructed luoPhysicalAnalyticTaskLedger
