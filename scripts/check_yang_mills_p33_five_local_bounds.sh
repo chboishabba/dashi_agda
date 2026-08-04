@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP33SU2EuclideanGeometryExact.agda
   DASHI/Physics/YangMills/BalabanP33BishopLowOrderTaylorBracketsExact.agda
+  DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
   DASHI/Physics/YangMills/BalabanP33SU2Radius8192EnvelopeExact.agda
   DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralCovariantDerivativeDifferenceExact.agda
@@ -54,6 +55,8 @@ grep -q 'adNormSqIsFourGramGap' DASHI/Physics/YangMills/BalabanP33SU2EuclideanGe
 grep -q 'adCubicGammaTwoExact' DASHI/Physics/YangMills/BalabanP33SU2EuclideanGeometryExact.agda
 grep -q 'lowOrderTaylorBrackets' DASHI/Physics/YangMills/BalabanP33BishopLowOrderTaylorBracketsExact.agda
 grep -q 'sineFirstOmittedTail' DASHI/Physics/YangMills/BalabanP33BishopLowOrderTaylorBracketsExact.agda
+grep -q 'polynomialTaylorBounds' DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
+grep -q 'defectTaylorBounds' DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
 grep -q 'adEnvelopeAtHalfRadiusBelowConfiguredRadius' DASHI/Physics/YangMills/BalabanP33SU2Radius8192EnvelopeExact.agda
 grep -q 'dexpPairEnvelopeAtRadiusBelowTwiceRadius' DASHI/Physics/YangMills/BalabanP33SU2Radius8192EnvelopeExact.agda
 grep -q 'dexpPairNormBelowTwoRadius' DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda
@@ -83,6 +86,7 @@ grep -q 'asHalfWeightedRowContraction' DASHI/Physics/YangMills/BalabanP33FiniteW
 grep -q 'weightedResidualHalfPowerBound' DASHI/Physics/YangMills/BalabanP33WeightedNeumannHalfContractionExact.agda
 
 grep -q 'arXiv:2205.08354' DASHI/Physics/YangMills/BalabanP33BishopLowOrderTaylorBracketsExact.agda
+grep -q 'arXiv:2205.08354' DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
 grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanP33CurvatureAtomGeometryExact.agda
 grep -q '10.1007/BF01211042' DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda
 grep -q '10.1007/978-3-319-13467-3' DASHI/Physics/YangMills/BalabanP33SU2EuclideanGeometryExact.agda
