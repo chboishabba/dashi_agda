@@ -40,6 +40,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayGate4OperatorNormPipelineExact as Pipeline
 import DASHI.Physics.YangMills.BalabanClayGate4SandwichOperatorToFormBoundExact as Sandwich
 import DASHI.Physics.YangMills.BalabanP33FiveSandwichSignedFormExact as SignedForm
+import DASHI.Physics.YangMills.BalabanP33PrimitiveOperatorNormLocalBoundsExact as Primitive
 import DASHI.Physics.YangMills.BalabanP33LiteralFiveMechanismFamiliesExact as Literal
 import DASHI.Physics.YangMills.BalabanP33FiniteSignedRemainderSummationExact as Signed
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -112,7 +113,7 @@ localUnitFormConfiguredBound :
     (dataSet : SandwichLocalFamilyData
       Operator LocalState Background GlobalState Cell)
     background globalState cell →
-  DASHI.Physics.YangMills.BalabanP33PrimitiveOperatorNormLocalBoundsExact.TwoSided
+  Primitive.TwoSided
     (localUnitForm dataSet background globalState cell)
     (coefficient dataSet * radius dataSet background globalState)
 localUnitFormConfiguredBound dataSet background globalState cell =
@@ -130,7 +131,7 @@ localSandwichRemainderBound :
     (dataSet : SandwichLocalFamilyData
       Operator LocalState Background GlobalState Cell)
     background globalState cell →
-  DASHI.Physics.YangMills.BalabanP33PrimitiveOperatorNormLocalBoundsExact.TwoSided
+  Primitive.TwoSided
     (localSandwichRemainder dataSet background globalState cell)
     (coefficient dataSet * radius dataSet background globalState
       * localCharge dataSet background globalState cell)
@@ -179,12 +180,12 @@ asFiniteSignedRemainderFamily dataSet = record
           (coefficient dataSet * radius dataSet background globalState)
   ; Signed.FiniteSignedRemainderFamily.pointwiseUpper =
       λ background globalState cell →
-        DASHI.Physics.YangMills.BalabanP33PrimitiveOperatorNormLocalBoundsExact.upper
+        Primitive.upper
           (localSandwichRemainderBound
             dataSet background globalState cell)
   ; Signed.FiniteSignedRemainderFamily.pointwiseLower =
       λ background globalState cell →
-        DASHI.Physics.YangMills.BalabanP33PrimitiveOperatorNormLocalBoundsExact.lower
+        Primitive.lower
           (localSandwichRemainderBound
             dataSet background globalState cell)
   ; Signed.FiniteSignedRemainderFamily.incidenceNormBound =
