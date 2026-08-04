@@ -26,7 +26,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 record GeometricInfluenceSummationKernel
     {Scale Bound : Set}
     (algebra : Influence.InfluenceAlgebra Bound)
-    (inputs : A123.PhysicalA1A2A3InfluenceInputs algebra) : Set₁ where
+    (inputs :
+      A123.PhysicalA1A2A3InfluenceInputs
+        {Scale = Scale} {Bound = Bound} algebra) : Set₁ where
   field
     transitive :
       ∀ {left middle right} →
@@ -71,9 +73,13 @@ open UniformInfluenceBoundCertificate public
 uniformInfluenceBoundFromGeometricSummation :
   ∀ {Scale Bound : Set}
     {algebra : Influence.InfluenceAlgebra Bound}
-    {inputs : A123.PhysicalA1A2A3InfluenceInputs algebra} →
-  GeometricInfluenceSummationKernel algebra inputs →
-  UniformInfluenceBoundCertificate algebra
+    {inputs :
+      A123.PhysicalA1A2A3InfluenceInputs
+        {Scale = Scale} {Bound = Bound} algebra} →
+  GeometricInfluenceSummationKernel
+    {Scale = Scale} {Bound = Bound} algebra inputs →
+  UniformInfluenceBoundCertificate
+    {Scale = Scale} {Bound = Bound} algebra
 uniformInfluenceBoundFromGeometricSummation
   {inputs = inputs} summation =
   let uniform = A123.canonicalUniformPolymerInfluence inputs
