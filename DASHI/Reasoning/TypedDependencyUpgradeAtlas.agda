@@ -82,13 +82,13 @@ memoryUpgrade = record
 verificationUpgrade : DependencyUpgradeSite
 verificationUpgrade = record
   { domain = verificationDomain
-  ; legacySurface = "verification/checker availability Boolean"
-  ; typedReplacement = "receipt carrying checker, context, claim and source authority"
+  ; legacySurface = "verification receipt/card/targetVerified inhabitation or Boolean"
+  ; typedReplacement = "CheckedReceipt, CheckedTheoremCard and VerifiedMemeTranslation"
   ; sourceModule = "DASHI.Reasoning.SFMVerifiedClaimPresentation"
-  ; targetModule = "existing SFM formal artefact and checker receipt types"
-  ; implementedInThisTranche = false
+  ; targetModule = "DASHI.Reasoning.SFMVerificationDependency"
+  ; implementedInThisTranche = true
   ; promotionBlockedWithoutWitness = true
-  ; upgradeReceipt = "The repository already contains the richer target; remaining Boolean call sites can be adapted incrementally."
+  ; upgradeReceipt = "Kernel status, placeholder absence and card faithfulness are consumed as indexed equality witnesses; targetVerified cannot reconstruct a receipt."
   }
 
 stageUpgrade : DependencyUpgradeSite
