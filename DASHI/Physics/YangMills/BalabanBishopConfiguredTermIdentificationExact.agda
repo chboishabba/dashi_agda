@@ -18,8 +18,7 @@ module DASHI.Physics.YangMills.BalabanBishopConfiguredTermIdentificationExact wh
 -- by all parity/interlacing consumers follows without a new analytic proof.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -41,17 +40,24 @@ record ConfiguredConcreteTermDefinitions
 
 open ConfiguredConcreteTermDefinitions public
 
+propositionalEqualityImpliesBishopEquivalence :
+  ∀ {left right : BishopReal.ℝ} →
+  left ≡ right →
+  BishopReal._≃_ left right
+propositionalEqualityImpliesBishopEquivalence refl =
+  BishopProperties.≃-refl
+
 configuredConcreteTermIdentification :
   ∀ {dataSet} →
   ConfiguredConcreteTermDefinitions dataSet →
   Concrete.ConcreteSineCosineTermIdentification dataSet
 configuredConcreteTermIdentification definitions = record
   { sineTermIsConcrete = λ point index →
-      rewrite sineTermDefinition definitions point index =
-        BishopProperties.≃-refl
+      propositionalEqualityImpliesBishopEquivalence
+        (sineTermDefinition definitions point index)
   ; cosineTermIsConcrete = λ point index →
-      rewrite cosineTermDefinition definitions point index =
-        BishopProperties.≃-refl
+      propositionalEqualityImpliesBishopEquivalence
+        (cosineTermDefinition definitions point index)
   }
 
 configuredTermDefinitionReducerLevel : ProofLevel
