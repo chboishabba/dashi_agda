@@ -31,6 +31,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
+import Data.Rational.Base as ℚBase
 
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact as PreBudget
 import DASHI.Physics.Closure.NSTriadKNLuoResidueGapHardWindowBudgetExact as GapBudget
@@ -60,8 +61,7 @@ record CanonicalAnalyticPhysicalLeaves
     Tensor Space Contribution : Set
 
     exactFluxKernel :
-      FluxKernel.LuoExactFluxKernelDecomposition ⊤ Tensor
-        Data.Rational.Base.ℚ
+      FluxKernel.LuoExactFluxKernelDecomposition ⊤ Tensor ℚBase.ℚ
 
     incrementKernelAnalyticInputs :
       KernelAdapter.OfficialIncrementKernelAnalyticInputs
