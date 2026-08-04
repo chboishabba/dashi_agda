@@ -4,6 +4,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+python3 scripts/test_generate_ns_luo_submission_audit.py
+
 REPORT="$(mktemp --suffix=.ns-luo-submission-audit.json)"
 trap 'rm -f "$REPORT"' EXIT
 
