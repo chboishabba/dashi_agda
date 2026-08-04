@@ -61,23 +61,23 @@ asFiveActivityTenthAllocation :
   FiveActivityAnalyticEngines order →
   Allocation.FiveActivityTenthAllocation order
 asFiveActivityTenthAllocation engines = record
-  { Allocation.FiveActivityTenthAllocation.delta = delta engines
-  ; Allocation.FiveActivityTenthAllocation.determinant = determinant engines
-  ; Allocation.FiveActivityTenthAllocation.interaction = interaction engines
-  ; Allocation.FiveActivityTenthAllocation.chart = chart engines
-  ; Allocation.FiveActivityTenthAllocation.gauge = gauge engines
-  ; Allocation.FiveActivityTenthAllocation.localization = localization engines
-  ; Allocation.FiveActivityTenthAllocation.total = total engines
-  ; Allocation.FiveActivityTenthAllocation.totalMeaning = totalMeaning engines
-  ; Allocation.FiveActivityTenthAllocation.determinantBelowTenth =
+  { delta = delta engines
+  ; determinant = determinant engines
+  ; interaction = interaction engines
+  ; chart = chart engines
+  ; gauge = gauge engines
+  ; localization = localization engines
+  ; total = total engines
+  ; totalMeaning = totalMeaning engines
+  ; determinantBelowTenth =
       determinantBelowTenth engines
-  ; Allocation.FiveActivityTenthAllocation.interactionBelowTenth =
+  ; interactionBelowTenth =
       interactionBelowTenth engines
-  ; Allocation.FiveActivityTenthAllocation.chartBelowTenth =
+  ; chartBelowTenth =
       chartBelowTenth engines
-  ; Allocation.FiveActivityTenthAllocation.gaugeBelowTenth =
+  ; gaugeBelowTenth =
       gaugeBelowTenth engines
-  ; Allocation.FiveActivityTenthAllocation.localizationBelowTenth =
+  ; localizationBelowTenth =
       localizationBelowTenth engines
   }
 

@@ -84,17 +84,17 @@ asPatchRetract :
       certificate index bulkOperator bulkConstant →
     Patch.PatchRetract PatchState State Bound
 asPatchRetract {certificate = certificate} dataSet = record
-  { Patch.extension = extension dataSet
-  ; Patch.restriction = restriction dataSet
-  ; Patch.patchNorm = patchNorm dataSet
-  ; Patch.bulkNorm = Bulk.weightedNorm certificate
-  ; Patch.LessEqual = Bulk.LessEqual certificate
-  ; Patch.multiply = Bulk.multiplyBound certificate
-  ; Patch.CE = CE dataSet
-  ; Patch.CR = CR dataSet
-  ; Patch.restrictionAfterExtension = restrictionAfterExtension dataSet
-  ; Patch.extensionNormBound = extensionNormBound dataSet
-  ; Patch.restrictionNormBound = restrictionNormBound dataSet
+  { extension = extension dataSet
+  ; restriction = restriction dataSet
+  ; patchNorm = patchNorm dataSet
+  ; bulkNorm = Bulk.weightedNorm certificate
+  ; LessEqual = Bulk.LessEqual certificate
+  ; multiply = Bulk.multiplyBound certificate
+  ; CE = CE dataSet
+  ; CR = CR dataSet
+  ; restrictionAfterExtension = restrictionAfterExtension dataSet
+  ; extensionNormBound = extensionNormBound dataSet
+  ; restrictionNormBound = restrictionNormBound dataSet
   }
 
 asExactOperatorTransfer :
@@ -106,10 +106,10 @@ asExactOperatorTransfer :
       certificate index bulkOperator bulkConstant) →
     Patch.ExactGreenPatchTransfer PatchState State Bound
 asExactOperatorTransfer {bulkOperator = bulkOperator} dataSet = record
-  { Patch.retract = asPatchRetract dataSet
-  ; Patch.bulkGreen = bulkOperator
-  ; Patch.patchGreen = patchOperator dataSet
-  ; Patch.greenTransferIdentity = operatorTransferIdentity dataSet
+  { retract = asPatchRetract dataSet
+  ; bulkGreen = bulkOperator
+  ; patchGreen = patchOperator dataSet
+  ; greenTransferIdentity = operatorTransferIdentity dataSet
   }
 
 asPatchBoundTransport :
@@ -121,14 +121,14 @@ asPatchBoundTransport :
       certificate index bulkOperator bulkConstant) →
     Patch.GreenPatchBoundTransport PatchState State Bound
 asPatchBoundTransport {bulkConstant = bulkConstant} dataSet = record
-  { Patch.transfer = asExactOperatorTransfer dataSet
-  ; Patch.transitive = lessEqualTransitive dataSet
-  ; Patch.equalityLeft = equalityLeft dataSet
-  ; Patch.multiplyMonotoneLeft = multiplyMonotoneLeft dataSet
-  ; Patch.Cbulk = bulkConstant
-  ; Patch.Cpatch = Cpatch dataSet
-  ; Patch.bulkGreenBound = bulkOperatorBound dataSet
-  ; Patch.constantTransport = constantTransport dataSet
+  { transfer = asExactOperatorTransfer dataSet
+  ; transitive = lessEqualTransitive dataSet
+  ; equalityLeft = equalityLeft dataSet
+  ; multiplyMonotoneLeft = multiplyMonotoneLeft dataSet
+  ; Cbulk = bulkConstant
+  ; Cpatch = Cpatch dataSet
+  ; bulkGreenBound = bulkOperatorBound dataSet
+  ; constantTransport = constantTransport dataSet
   }
 
 physicalPatchOperatorBound :

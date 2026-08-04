@@ -95,66 +95,66 @@ asPhysicalHessianFiveChannelDecomposition :
   PhysicalHessianFactorizedInputs Operator State Bound →
   Hessian.PhysicalHessianFiveChannelDecomposition Operator State Bound
 asPhysicalHessianFiveChannelDecomposition inputs = record
-  { Hessian.PhysicalHessianFiveChannelDecomposition.algebra =
+  { algebra =
       formAlgebra inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.referenceHessian =
+  ; referenceHessian =
       referenceHessian inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.fullHessian =
+  ; fullHessian =
       fullHessian inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.totalRemainder =
+  ; totalRemainder =
       totalRemainder inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.curvature =
+  ; curvature =
       Factor.curvature (factorizations inputs)
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.transport =
+  ; transport =
       Factor.transport (factorizations inputs)
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.chart =
+  ; chart =
       Factor.chart (factorizations inputs)
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.gauge =
+  ; gauge =
       Factor.gauge (factorizations inputs)
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.constraint =
+  ; constraint =
       Factor.constraint (factorizations inputs)
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.totalRemainderMeaning =
+  ; totalRemainderMeaning =
       totalRemainderMeaning inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.fullHessianMeaning =
+  ; fullHessianMeaning =
       fullHessianMeaning inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.referenceSelfAdjoint =
+  ; referenceSelfAdjoint =
       referenceSelfAdjoint inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.curvatureSelfAdjoint =
+  ; curvatureSelfAdjoint =
       transportFactorSelfAdjoint inputs
         (Factor.curvature (factorizations inputs))
         (Factor.curvatureSelfAdjointFromFactorization
           (factorizations inputs))
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.transportSelfAdjoint =
+  ; transportSelfAdjoint =
       transportFactorSelfAdjoint inputs
         (Factor.transport (factorizations inputs))
         (Factor.transportSelfAdjointFromFactorization
           (factorizations inputs))
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.chartSelfAdjoint =
+  ; chartSelfAdjoint =
       transportFactorSelfAdjoint inputs
         (Factor.chart (factorizations inputs))
         (Factor.chartSelfAdjointFromFactorization
           (factorizations inputs))
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.gaugeSelfAdjoint =
+  ; gaugeSelfAdjoint =
       transportFactorSelfAdjoint inputs
         (Factor.gauge (factorizations inputs))
         (Factor.gaugeSelfAdjointFromFactorization
           (factorizations inputs))
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.constraintSelfAdjoint =
+  ; constraintSelfAdjoint =
       transportFactorSelfAdjoint inputs
         (Factor.constraint (factorizations inputs))
         (Factor.constraintSelfAdjointFromFactorization
           (factorizations inputs))
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.channelIdentification =
+  ; channelIdentification =
       channelIdentification inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.curvatureChannelMeaning =
+  ; curvatureChannelMeaning =
       curvatureChannelMeaning inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.transportChannelMeaning =
+  ; transportChannelMeaning =
       transportChannelMeaning inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.chartChannelMeaning =
+  ; chartChannelMeaning =
       chartChannelMeaning inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.gaugeChannelMeaning =
+  ; gaugeChannelMeaning =
       gaugeChannelMeaning inputs
-  ; Hessian.PhysicalHessianFiveChannelDecomposition.constraintChannelMeaning =
+  ; constraintChannelMeaning =
       constraintChannelMeaning inputs
   }
 

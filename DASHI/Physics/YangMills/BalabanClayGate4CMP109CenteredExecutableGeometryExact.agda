@@ -54,7 +54,7 @@ record CenteredExecutableGeometry (radius : Nat) : Set where
     BlockCertificate.EmbeddedCenteredBlockEndpointCertificate
       (Bijection.centeredTorusParameter radius) radius embedding
   embeddedEndpointCertificate = record
-    { BlockCertificate.EmbeddedCenteredBlockEndpointCertificate.blockCertificate =
+    { blockCertificate =
         allEndpoints
     }
 

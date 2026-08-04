@@ -19,56 +19,56 @@ periodicFiniteFourierHodgeData :
     (gapData : PeriodicBlockGapData constraints) →
     Hodge.FiniteFourierHodgeData Index State Frequency Bound
 periodicFiniteFourierHodgeData symbolData kernelData constraints gapData = record
-  { Hodge.fourier = fourier symbolData
-  ; Hodge.referenceEnergy = referenceEnergy symbolData
-  ; Hodge.normSq = normSq symbolData
-  ; Hodge.frequencyNormSq = frequencyNormSq symbolData
-  ; Hodge.symbolEnergy = symbolEnergy symbolData
-  ; Hodge.scale = scale (ordered symbolData)
-  ; Hodge.LessEqual = LessEqual (ordered symbolData)
-  ; Hodge.Positive = Positive (ordered symbolData)
-  ; Hodge.Nonnegative = Nonnegative (ordered symbolData)
-  ; Hodge.cBulk = cBulk gapData
-  ; Hodge.cBulkPositive = cBulkPositive gapData
-  ; Hodge.GaugeFixedTangent = GaugeFixedTangent constraints
-  ; Hodge.SymbolKernel = SymbolKernel kernelData
-  ; Hodge.ConstantMode = ConstantMode kernelData
-  ; Hodge.SymbolKernelRemoved = SymbolKernelRemoved constraints
-  ; Hodge.finiteFourierDiagonalizesReferenceLaplacian =
+  { fourier = fourier symbolData
+  ; referenceEnergy = referenceEnergy symbolData
+  ; normSq = normSq symbolData
+  ; frequencyNormSq = frequencyNormSq symbolData
+  ; symbolEnergy = symbolEnergy symbolData
+  ; scale = scale (ordered symbolData)
+  ; LessEqual = LessEqual (ordered symbolData)
+  ; Positive = Positive (ordered symbolData)
+  ; Nonnegative = Nonnegative (ordered symbolData)
+  ; cBulk = cBulk gapData
+  ; cBulkPositive = cBulkPositive gapData
+  ; GaugeFixedTangent = GaugeFixedTangent constraints
+  ; SymbolKernel = SymbolKernel kernelData
+  ; ConstantMode = ConstantMode kernelData
+  ; SymbolKernelRemoved = SymbolKernelRemoved constraints
+  ; finiteFourierDiagonalizesReferenceLaplacian =
       finiteFourierDiagonalizesReferenceLaplacian symbolData
-  ; Hodge.fourierParsevalForBondFields =
+  ; fourierParsevalForBondFields =
       fourierParsevalForBondFields symbolData
-  ; Hodge.referenceSymbolNonnegative =
+  ; referenceSymbolNonnegative =
       referenceSymbolNonnegative symbolData
-  ; Hodge.referenceSymbolKernelCharacterization =
+  ; referenceSymbolKernelCharacterization =
       referenceSymbolKernelCharacterization kernelData
-  ; Hodge.constraintsRemoveReferenceSymbolKernel =
+  ; constraintsRemoveReferenceSymbolKernel =
       constraintsRemoveReferenceSymbolKernel constraints
-  ; Hodge.constrainedReferenceSymbolHasPositiveGap =
+  ; constrainedReferenceSymbolHasPositiveGap =
       constrainedReferenceSymbolHasPositiveGap gapData
-  ; Hodge.CBulkIndependentOfVolume =
+  ; CBulkIndependentOfVolume =
       ∀ volume₁ volume₂ spacing scaleValue background →
       cBulkAt gapData volume₁ spacing scaleValue background ≡
       cBulkAt gapData volume₂ spacing scaleValue background
-  ; Hodge.CBulkIndependentOfLatticeSpacing =
+  ; CBulkIndependentOfLatticeSpacing =
       ∀ volume spacing₁ spacing₂ scaleValue background →
       cBulkAt gapData volume spacing₁ scaleValue background ≡
       cBulkAt gapData volume spacing₂ scaleValue background
-  ; Hodge.CBulkIndependentOfScale =
+  ; CBulkIndependentOfScale =
       ∀ volume spacing scale₁ scale₂ background →
       cBulkAt gapData volume spacing scale₁ background ≡
       cBulkAt gapData volume spacing scale₂ background
-  ; Hodge.CBulkUniformOverAdmissibleBackgrounds =
+  ; CBulkUniformOverAdmissibleBackgrounds =
       ∀ volume spacing scaleValue background₁ background₂ →
       cBulkAt gapData volume spacing scaleValue background₁ ≡
       cBulkAt gapData volume spacing scaleValue background₂
-  ; Hodge.cBulkIndependentOfVolume =
+  ; cBulkIndependentOfVolume =
       constrainedSymbolGapIndependentOfVolume gapData
-  ; Hodge.cBulkIndependentOfLatticeSpacing =
+  ; cBulkIndependentOfLatticeSpacing =
       constrainedSymbolGapIndependentOfSpacing gapData
-  ; Hodge.cBulkIndependentOfScale =
+  ; cBulkIndependentOfScale =
       constrainedSymbolGapIndependentOfRGScale gapData
-  ; Hodge.cBulkUniformOverAdmissibleBackgrounds =
+  ; cBulkUniformOverAdmissibleBackgrounds =
       constrainedSymbolGapUniformInAdmissibleBackground gapData
   }
 

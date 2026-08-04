@@ -124,38 +124,38 @@ asT3TwoFamilyChannelInputs :
   T3Reuse.T3TwoFamilyChannelInputs
     Scale Volume PatchRegime Background Fluctuation Tangent Bound
 asT3TwoFamilyChannelInputs inputs = record
-  { T3Reuse.T3TwoFamilyChannelInputs.t3 = t3 inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.scale = scale inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.volume = volume inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.regime = regime inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.background = background inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.sumAlgebra = sumAlgebra inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.family =
+  { t3 = t3 inputs
+  ; scale = scale inputs
+  ; volume = volume inputs
+  ; regime = regime inputs
+  ; background = background inputs
+  ; sumAlgebra = sumAlgebra inputs
+  ; family =
       Resolved.asTwoFamilyChannelMajorant (resolved inputs)
-  ; T3Reuse.T3TwoFamilyChannelInputs.UnitState =
+  ; UnitState =
       Resolved.UnitState (resolved inputs)
-  ; T3Reuse.T3TwoFamilyChannelInputs.unitStateToFamily =
+  ; unitStateToFamily =
       λ fluctuation unit → unit
-  ; T3Reuse.T3TwoFamilyChannelInputs.orderMeaning = orderMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.curvatureFormMeaning =
+  ; orderMeaning = orderMeaning inputs
+  ; curvatureFormMeaning =
       curvatureFormMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.transportFormMeaning =
+  ; transportFormMeaning =
       transportFormMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.chartFormMeaning =
+  ; chartFormMeaning =
       chartFormMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.gaugeFormMeaning =
+  ; gaugeFormMeaning =
       gaugeFormMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.constraintFormMeaning =
+  ; constraintFormMeaning =
       constraintFormMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.curvatureBudgetMeaning =
+  ; curvatureBudgetMeaning =
       curvatureBudgetMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.transportBudgetMeaning =
+  ; transportBudgetMeaning =
       transportBudgetMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.chartBudgetMeaning =
+  ; chartBudgetMeaning =
       chartBudgetMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.gaugeBudgetMeaning =
+  ; gaugeBudgetMeaning =
       gaugeBudgetMeaning inputs
-  ; T3Reuse.T3TwoFamilyChannelInputs.constraintBudgetMeaning =
+  ; constraintBudgetMeaning =
       constraintBudgetMeaning inputs
   }
 

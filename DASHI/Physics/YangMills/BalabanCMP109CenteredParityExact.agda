@@ -42,8 +42,8 @@ negateCenteredOffsetInvolutive (Centered.negative index) = refl
 centeredOffsetInvolution :
   ∀ radius → Parity.Involution (Centered.CenteredOffset radius)
 centeredOffsetInvolution radius = record
-  { Parity.Involution.reverse = negateCenteredOffset
-  ; Parity.Involution.reverseInvolutive =
+  { reverse = negateCenteredOffset
+  ; reverseInvolutive =
       negateCenteredOffsetInvolutive
   }
 
@@ -76,8 +76,8 @@ negateCenteredBlock4Involutive
 centeredBlockInvolution :
   ∀ radius → Parity.Involution (Centered.CenteredBlockPoint4 radius)
 centeredBlockInvolution radius = record
-  { Parity.Involution.reverse = negateCenteredBlock4
-  ; Parity.Involution.reverseInvolutive =
+  { reverse = negateCenteredBlock4
+  ; reverseInvolutive =
       negateCenteredBlock4Involutive
   }
 

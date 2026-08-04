@@ -156,7 +156,7 @@ dyadicCMP109SiteProjection :
   ∀ coarseN →
   Endpoint.PeriodicCMP109SiteProjection (dyadicFineN coarseN) coarseN
 dyadicCMP109SiteProjection coarseN = record
-  { Endpoint.PeriodicCMP109SiteProjection.coarseOfFineSite =
+  { coarseOfFineSite =
       projectDyadicSite
   }
 

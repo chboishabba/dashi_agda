@@ -61,16 +61,16 @@ asFederbushQuantitativeClosure :
   FederbushNewtonClosure Input Centre Correction Residual Bound →
   Reuse.FederbushQuantitativeClosure Input Centre Residual Bound
 asFederbushQuantitativeClosure closure = record
-  { Reuse.FederbushQuantitativeClosure.implicitFunction =
+  { implicitFunction =
       Newton.asQuantitativeImplicitFunctionData (newtonInputs closure)
-  ; Reuse.FederbushQuantitativeClosure.differential = differential closure
-  ; Reuse.FederbushQuantitativeClosure.physicalDifferential =
+  ; differential = differential closure
+  ; physicalDifferential =
       physicalDifferential closure
-  ; Reuse.FederbushQuantitativeClosure.physicalDifferentialUsesSelectedData =
+  ; physicalDifferentialUsesSelectedData =
       physicalDifferentialUsesSelectedData closure
-  ; Reuse.FederbushQuantitativeClosure.QuantitativeResidualIsFederbushEquation =
+  ; QuantitativeResidualIsFederbushEquation =
       QuantitativeResidualIsFederbushEquation closure
-  ; Reuse.FederbushQuantitativeClosure.quantitativeResidualIsFederbushEquation =
+  ; quantitativeResidualIsFederbushEquation =
       quantitativeResidualIsFederbushEquation closure
   }
 
@@ -107,14 +107,14 @@ asBackgroundSliceQuantitativeClosure :
   Reuse.BackgroundSliceQuantitativeClosure
     TreeSlice BackgroundSlice TreeTangent BackgroundTangent Bound
 asBackgroundSliceQuantitativeClosure closure = record
-  { Reuse.BackgroundSliceQuantitativeClosure.implicitFunction =
+  { implicitFunction =
       Newton.asQuantitativeImplicitFunctionData (newtonInputs closure)
-  ; Reuse.BackgroundSliceQuantitativeClosure.transition = transition closure
-  ; Reuse.BackgroundSliceQuantitativeClosure.implicitSolutionIsTransition =
+  ; transition = transition closure
+  ; implicitSolutionIsTransition =
       implicitSolutionIsTransition closure
-  ; Reuse.BackgroundSliceQuantitativeClosure.QuantitativeResidualIsBackgroundGaugeCondition =
+  ; QuantitativeResidualIsBackgroundGaugeCondition =
       QuantitativeResidualIsBackgroundGaugeCondition closure
-  ; Reuse.BackgroundSliceQuantitativeClosure.quantitativeResidualIsBackgroundGaugeCondition =
+  ; quantitativeResidualIsBackgroundGaugeCondition =
       quantitativeResidualIsBackgroundGaugeCondition closure
   }
 
@@ -150,17 +150,17 @@ asSharedQuantitativeIFTApplications :
     FederbushInput FederbushCentre FederbushResidual
     TreeSlice BackgroundSlice TreeTangent BackgroundTangent Bound
 asSharedQuantitativeIFTApplications applications = record
-  { Reuse.SharedQuantitativeIFTApplications.federbush =
+  { federbush =
       asFederbushQuantitativeClosure (federbush applications)
-  ; Reuse.SharedQuantitativeIFTApplications.backgroundSlice =
+  ; backgroundSlice =
       asBackgroundSliceQuantitativeClosure (backgroundSlice applications)
-  ; Reuse.SharedQuantitativeIFTApplications.federbushRadiusBudget =
+  ; federbushRadiusBudget =
       federbushRadiusBudget applications
-  ; Reuse.SharedQuantitativeIFTApplications.backgroundSliceRadiusBudget =
+  ; backgroundSliceRadiusBudget =
       backgroundSliceRadiusBudget applications
-  ; Reuse.SharedQuantitativeIFTApplications.CommonNormAndScalarConvention =
+  ; CommonNormAndScalarConvention =
       CommonNormAndScalarConvention applications
-  ; Reuse.SharedQuantitativeIFTApplications.commonNormAndScalarConvention =
+  ; commonNormAndScalarConvention =
       commonNormAndScalarConvention applications
   }
 

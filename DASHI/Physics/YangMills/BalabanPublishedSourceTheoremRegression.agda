@@ -30,57 +30,57 @@ oneBinary left right = one
 propagatorSource :
   Source.PublishedPropagatorTheorems31And33 One One One One One
 propagatorSource = record
-  { Source.M = one
-  ; Source.M1 = one
-  ; Source.epsilon0 = one
-  ; Source.a0 = one
-  ; Source.beta = one
-  ; Source.beta0 = one
-  ; Source.LessEqual = λ left right → Holds
-  ; Source.StrictLess = λ left right → Holds
-  ; Source.DomainSequenceSatisfies21And22 = always
-  ; Source.BackgroundSatisfiesRegularity35 = always
-  ; Source.MAtLeastM1 = always
-  ; Source.MEpsilon0BelowA0 = always
-  ; Source.BetaInAdmissibleRange = always
-  ; Source.ExactPropagatorHypotheses = always
-  ; Source.hypothesesContainDomainSequence = λ index hypotheses → holds
-  ; Source.hypothesesContainBackgroundRegularity =
+  { M = one
+  ; M1 = one
+  ; epsilon0 = one
+  ; a0 = one
+  ; beta = one
+  ; beta0 = one
+  ; LessEqual = λ left right → Holds
+  ; StrictLess = λ left right → Holds
+  ; DomainSequenceSatisfies21And22 = always
+  ; BackgroundSatisfiesRegularity35 = always
+  ; MAtLeastM1 = always
+  ; MEpsilon0BelowA0 = always
+  ; BetaInAdmissibleRange = always
+  ; ExactPropagatorHypotheses = always
+  ; hypothesesContainDomainSequence = λ index hypotheses → holds
+  ; hypothesesContainBackgroundRegularity =
       λ index hypotheses → holds
-  ; Source.hypothesesContainMThreshold = λ index hypotheses → holds
-  ; Source.hypothesesContainSmallness = λ index hypotheses → holds
-  ; Source.hypothesesContainBetaRange = λ index hypotheses → holds
-  ; Source.greenPrime = λ index source → one
-  ; Source.green = λ index source → one
-  ; Source.gradientGreen = λ index source → one
-  ; Source.secondGradientGreen = λ index source → one
-  ; Source.sourceNorm = λ source → one
-  ; Source.propagatedStateNorm = λ state → one
-  ; Source.multiply = oneBinary
-  ; Source.CG = one
-  ; Source.CGradG = one
-  ; Source.CSecondG = one
-  ; Source.theorem31GreenPrimeBound =
+  ; hypothesesContainMThreshold = λ index hypotheses → holds
+  ; hypothesesContainSmallness = λ index hypotheses → holds
+  ; hypothesesContainBetaRange = λ index hypotheses → holds
+  ; greenPrime = λ index source → one
+  ; green = λ index source → one
+  ; gradientGreen = λ index source → one
+  ; secondGradientGreen = λ index source → one
+  ; sourceNorm = λ source → one
+  ; propagatedStateNorm = λ state → one
+  ; multiply = oneBinary
+  ; CG = one
+  ; CGradG = one
+  ; CSecondG = one
+  ; theorem31GreenPrimeBound =
       λ index source hypotheses → holds
-  ; Source.theorem33GreenBound = λ index source hypotheses → holds
-  ; Source.theorem33GradientGreenBound =
+  ; theorem33GreenBound = λ index source hypotheses → holds
+  ; theorem33GradientGreenBound =
       λ index source hypotheses → holds
-  ; Source.theorem33SecondGradientGreenBound =
+  ; theorem33SecondGradientGreenBound =
       λ index source hypotheses → holds
-  ; Source.greenKernel = λ index → one
-  ; Source.gradientKernel = λ index → one
-  ; Source.secondGradientKernel = λ index → one
-  ; Source.KernelExponentialDecay = always
-  ; Source.theorem33GreenKernelDecay = λ index hypotheses → holds
-  ; Source.theorem33GradientKernelDecay = λ index hypotheses → holds
-  ; Source.theorem33SecondGradientKernelDecay =
+  ; greenKernel = λ index → one
+  ; gradientKernel = λ index → one
+  ; secondGradientKernel = λ index → one
+  ; KernelExponentialDecay = always
+  ; theorem33GreenKernelDecay = λ index hypotheses → holds
+  ; theorem33GradientKernelDecay = λ index hypotheses → holds
+  ; theorem33SecondGradientKernelDecay =
       λ index hypotheses → holds
-  ; Source.GaugeCovariant = λ operator → Holds
-  ; Source.theorem33GaugeCovariance = holds
-  ; Source.AnalyticInBackground = λ operator → Holds
-  ; Source.publishedBackgroundAnalyticity = holds
-  ; Source.publishedGradientBackgroundAnalyticity = holds
-  ; Source.publishedSecondGradientBackgroundAnalyticity = holds
+  ; GaugeCovariant = λ operator → Holds
+  ; theorem33GaugeCovariance = holds
+  ; AnalyticInBackground = λ operator → Holds
+  ; publishedBackgroundAnalyticity = holds
+  ; publishedGradientBackgroundAnalyticity = holds
+  ; publishedSecondGradientBackgroundAnalyticity = holds
   }
 
 propagatorAuthority :
@@ -95,45 +95,45 @@ propagatorSourceConversionRegression =
 variationalSource :
   Source.PublishedVariationalTheorem1Exact One One One One
 variationalSource = record
-  { Source.epsilon0 = one
-  ; Source.epsilon1 = one
-  ; Source.a0 = one
-  ; Source.a1 = one
-  ; Source.B3 = one
-  ; Source.LessEqual = λ left right → Holds
-  ; Source.StrictLess = λ left right → Holds
-  ; Source.NestedDomainGeometry = always
-  ; Source.CoarseRegularityCondition7 = always2
-  ; Source.Epsilon1BelowA1 = Holds
-  ; Source.B3Epsilon1BelowEpsilon0 = Holds
-  ; Source.Epsilon0BelowA0 = Holds
-  ; Source.epsilon1BelowA1 = holds
-  ; Source.b3Epsilon1BelowEpsilon0 = holds
-  ; Source.epsilon0BelowA0 = holds
-  ; Source.ExactVariationalHypotheses = always2
-  ; Source.hypothesesContainNestedGeometry =
+  { epsilon0 = one
+  ; epsilon1 = one
+  ; a0 = one
+  ; a1 = one
+  ; B3 = one
+  ; LessEqual = λ left right → Holds
+  ; StrictLess = λ left right → Holds
+  ; NestedDomainGeometry = always
+  ; CoarseRegularityCondition7 = always2
+  ; Epsilon1BelowA1 = Holds
+  ; B3Epsilon1BelowEpsilon0 = Holds
+  ; Epsilon0BelowA0 = Holds
+  ; epsilon1BelowA1 = holds
+  ; b3Epsilon1BelowEpsilon0 = holds
+  ; epsilon0BelowA0 = holds
+  ; ExactVariationalHypotheses = always2
+  ; hypothesesContainNestedGeometry =
       λ index coarse hypotheses → holds
-  ; Source.hypothesesContainCoarseRegularity =
+  ; hypothesesContainCoarseRegularity =
       λ index coarse hypotheses → holds
-  ; Source.backgroundFluctuation = λ index coarse → one
-  ; Source.Critical = always3
-  ; Source.Minimizer = always3
-  ; Source.GaugeEquivalent = always2
-  ; Source.theorem1BackgroundCritical =
+  ; backgroundFluctuation = λ index coarse → one
+  ; Critical = always3
+  ; Minimizer = always3
+  ; GaugeEquivalent = always2
+  ; theorem1BackgroundCritical =
       λ index coarse hypotheses → holds
-  ; Source.theorem1BackgroundMinimizes =
+  ; theorem1BackgroundMinimizes =
       λ index coarse hypotheses → holds
-  ; Source.theorem1BackgroundUniqueModuloGauge =
+  ; theorem1BackgroundUniqueModuloGauge =
       λ index coarse fluctuation hypotheses critical → holds
-  ; Source.AnalyticBackgroundMap = Holds
-  ; Source.ExponentiallyLocalBackgroundMap = Holds
-  ; Source.BackgroundDerivativeExponentiallyDecays = Holds
-  ; Source.theorem1BackgroundAnalytic = holds
-  ; Source.theorem1BackgroundExponentiallyLocal = holds
-  ; Source.theorem1BackgroundDerivativeDecay = holds
-  ; Source.norm = λ fluctuation → one
-  ; Source.radius = one
-  ; Source.backgroundInsideUniformRadius =
+  ; AnalyticBackgroundMap = Holds
+  ; ExponentiallyLocalBackgroundMap = Holds
+  ; BackgroundDerivativeExponentiallyDecays = Holds
+  ; theorem1BackgroundAnalytic = holds
+  ; theorem1BackgroundExponentiallyLocal = holds
+  ; theorem1BackgroundDerivativeDecay = holds
+  ; norm = λ fluctuation → one
+  ; radius = one
+  ; backgroundInsideUniformRadius =
       λ index coarse hypotheses → holds
   }
 
@@ -148,25 +148,25 @@ variationalSourceConversionRegression =
 smallFieldSource :
   Source.PublishedSmallFieldTheorems1And3Exact One One One One
 smallFieldSource = record
-  { Source.coupling = λ scale → one
-  ; Source.gamma = one
-  ; Source.absCoupling = λ coupling → one
-  ; Source.LessEqual = λ left right → Holds
-  ; Source.StrictLess = λ left right → Holds
-  ; Source.DimensionIsFour = Holds
-  ; Source.GaugeGroupCompactSemisimpleSubgroupOfUnitary = Holds
-  ; Source.RenormalizationTransformationsAreSmallField = Holds
-  ; Source.EffectiveCouplingsInZeroGamma = Holds
-  ; Source.dimensionIsFour = holds
-  ; Source.gaugeGroupCompactSemisimpleSubgroupOfUnitary = holds
-  ; Source.renormalizationTransformationsAreSmallField = holds
-  ; Source.effectiveCouplingsInZeroGamma = holds
-  ; Source.CouplingPositive = always
-  ; Source.couplingPositive = λ scale → holds
-  ; Source.couplingBelowGamma = λ scale → holds
-  ; Source.effectiveAction = λ scale → one
-  ; Source.InductiveAssumptions11Through122 = always2
-  ; Source.theorem3InductiveControl = λ scale → holds
+  { coupling = λ scale → one
+  ; gamma = one
+  ; absCoupling = λ coupling → one
+  ; LessEqual = λ left right → Holds
+  ; StrictLess = λ left right → Holds
+  ; DimensionIsFour = Holds
+  ; GaugeGroupCompactSemisimpleSubgroupOfUnitary = Holds
+  ; RenormalizationTransformationsAreSmallField = Holds
+  ; EffectiveCouplingsInZeroGamma = Holds
+  ; dimensionIsFour = holds
+  ; gaugeGroupCompactSemisimpleSubgroupOfUnitary = holds
+  ; renormalizationTransformationsAreSmallField = holds
+  ; effectiveCouplingsInZeroGamma = holds
+  ; CouplingPositive = always
+  ; couplingPositive = λ scale → holds
+  ; couplingBelowGamma = λ scale → holds
+  ; effectiveAction = λ scale → one
+  ; InductiveAssumptions11Through122 = always2
+  ; theorem3InductiveControl = λ scale → holds
   }
 
 smallFieldAuthority : Published.PublishedSmallFieldRGAuthority One One One One

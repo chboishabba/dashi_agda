@@ -149,19 +149,19 @@ asInvariantContractionBall :
   ContractionBallConstruction triangle →
   Quantitative.InvariantContractionBall (metric triangle)
 asInvariantContractionBall construction = record
-  { Quantitative.InvariantContractionBall.centre = centre construction
-  ; Quantitative.InvariantContractionBall.radius = radius construction
-  ; Quantitative.InvariantContractionBall.contractionFactor =
+  { centre = centre construction
+  ; radius = radius construction
+  ; contractionFactor =
       contractionFactor construction
-  ; Quantitative.InvariantContractionBall.map = map construction
-  ; Quantitative.InvariantContractionBall.InBall = InBall construction
-  ; Quantitative.InvariantContractionBall.inBallMeaning =
+  ; map = map construction
+  ; InBall = InBall construction
+  ; inBallMeaning =
       inBallMeaning construction
-  ; Quantitative.InvariantContractionBall.mapPreservesBall =
+  ; mapPreservesBall =
       mapPreservesConstructedBall construction
-  ; Quantitative.InvariantContractionBall.mapContractive =
+  ; mapContractive =
       contractionEstimate construction
-  ; Quantitative.InvariantContractionBall.contractionFactorBelowOne =
+  ; contractionFactorBelowOne =
       contractionFactorBelowOne construction
   }
 

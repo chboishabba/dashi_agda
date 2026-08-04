@@ -240,13 +240,13 @@ asHRBetaDimockLocalizationInputs :
   Adapter.HRBetaDimockLocalizationInputs Cell Polymer Scalar
 asHRBetaDimockLocalizationInputs
     {normalization = normalization} {connected = connected} inputs = record
-  { Adapter.HRBetaDimockLocalizationInputs.normalization = normalization
-  ; Adapter.HRBetaDimockLocalizationInputs.connected = connected
-  ; Adapter.HRBetaDimockLocalizationInputs.absoluteTotalMeaning =
+  { normalization = normalization
+  ; connected = connected
+  ; absoluteTotalMeaning =
       absoluteTotalMeaning inputs
-  ; Adapter.HRBetaDimockLocalizationInputs.orderTransport =
+  ; orderTransport =
       orderTransport inputs
-  ; Adapter.HRBetaDimockLocalizationInputs.couplingVolumeBelowHalfIncrement =
+  ; couplingVolumeBelowHalfIncrement =
       subst
         (λ upper → HRBase.LessEqual
           (Five.algebra (Five.channels normalization))

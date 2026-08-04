@@ -99,15 +99,15 @@ dyadicCanonicalStageInputs :
     Field (FineBond coarseN) (CoarseBond coarseN) (FineSite coarseN)
     Group Lie Scalar
 dyadicCanonicalStageInputs inputs = record
-  { Instantiation.CanonicalEquation012StageInputs.printedData =
+  { printedData =
       printedData inputs
-  ; Instantiation.CanonicalEquation012StageInputs.inputValue =
+  ; inputValue =
       inputValue inputs
-  ; Instantiation.CanonicalEquation012StageInputs.ProjectedEndpointSupport =
+  ; ProjectedEndpointSupport =
       DyadicEndpointSupport _
-  ; Instantiation.CanonicalEquation012StageInputs.printedMapLocalDependence =
+  ; printedMapLocalDependence =
       printedMapLocalDependence inputs
-  ; Instantiation.CanonicalEquation012StageInputs.transportedLog =
+  ; transportedLog =
       PrincipalLog.physicalLog (principalLogMeaning inputs)
   }
 
@@ -119,17 +119,17 @@ dyadicCanonicalPrintedIdentificationInputs :
     Field (FineBond coarseN) (CoarseBond coarseN) (FineSite coarseN)
     Group Lie Scalar Radius Entry Dyadic.CMP109Dyadic4Normalization
 dyadicCanonicalPrintedIdentificationInputs inputs = record
-  { Instantiation.CanonicalCMP109PrintedIdentificationInputs.stageInputs =
+  { stageInputs =
       dyadicCanonicalStageInputs inputs
-  ; Instantiation.CanonicalCMP109PrintedIdentificationInputs.principalLogMeaning =
+  ; principalLogMeaning =
       principalLogMeaning inputs
-  ; Instantiation.CanonicalCMP109PrintedIdentificationInputs.derivativeEntry =
+  ; derivativeEntry =
       derivativeEntry inputs
-  ; Instantiation.CanonicalCMP109PrintedIdentificationInputs.zeroDerivativeEntry =
+  ; zeroDerivativeEntry =
       zeroDerivativeEntry inputs
-  ; Instantiation.CanonicalCMP109PrintedIdentificationInputs.derivativeVanishesOutsideProjectedSupport =
+  ; derivativeVanishesOutsideProjectedSupport =
       derivativeVanishesOutsideDyadicSupport inputs
-  ; Instantiation.CanonicalCMP109PrintedIdentificationInputs.physicalNormalization =
+  ; physicalNormalization =
       Dyadic.canonicalCMP109Dyadic4Normalization
   }
 

@@ -135,22 +135,22 @@ open CanonicalClayParameterDomain public
 canonicalDomainIsCommon :
   CanonicalClayParameterDomain → CommonClayParameterDomain
 canonicalDomainIsCommon witness = record
-  { CommonClayParameterDomain.parameters = canonicalClayParameters
-  ; CommonClayParameterDomain.BackgroundConstraint =
+  { parameters = canonicalClayParameters
+  ; BackgroundConstraint =
       CanonicalClayParameterDomain.BackgroundConstraint witness
-  ; CommonClayParameterDomain.LargeFieldConstraint =
+  ; LargeFieldConstraint =
       CanonicalClayParameterDomain.LargeFieldConstraint witness
-  ; CommonClayParameterDomain.OneStepConstraint =
+  ; OneStepConstraint =
       CanonicalClayParameterDomain.OneStepConstraint witness
-  ; CommonClayParameterDomain.ContinuumConstraint =
+  ; ContinuumConstraint =
       CanonicalClayParameterDomain.ContinuumConstraint witness
-  ; CommonClayParameterDomain.backgroundConstraint =
+  ; backgroundConstraint =
       backgroundAtCanonical witness
-  ; CommonClayParameterDomain.largeFieldConstraint =
+  ; largeFieldConstraint =
       largeFieldAtCanonical witness
-  ; CommonClayParameterDomain.oneStepConstraint =
+  ; oneStepConstraint =
       oneStepAtCanonical witness
-  ; CommonClayParameterDomain.continuumConstraint =
+  ; continuumConstraint =
       continuumAtCanonical witness
   }
 

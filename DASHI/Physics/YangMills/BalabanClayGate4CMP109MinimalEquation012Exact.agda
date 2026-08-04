@@ -73,30 +73,30 @@ minimalEquation012PrintedData :
     Field Minimal.RepositoryCoarseBond Minimal.RepositoryFineSite
     Group Lie ℚ
 minimalEquation012PrintedData inputs = record
-  { Printed.PrintedCMP109Equation012Data.blockSites =
+  { blockSites =
       λ coarseBond →
         Physical.physicalBlockElements
           (geometry inputs) (Carrier.first coarseBond)
-  ; Printed.PrintedCMP109Equation012Data.blockWeight =
+  ; blockWeight =
       λ coarseBond → Minimal.siteWeightℚ
-  ; Printed.PrintedCMP109Equation012Data.zeroLie = zeroLie inputs
-  ; Printed.PrintedCMP109Equation012Data.addLie = addLie inputs
-  ; Printed.PrintedCMP109Equation012Data.scaleLie = scaleLie inputs
-  ; Printed.PrintedCMP109Equation012Data.multiplyGroup =
+  ; zeroLie = zeroLie inputs
+  ; addLie = addLie inputs
+  ; scaleLie = scaleLie inputs
+  ; multiplyGroup =
       multiplyGroup inputs
-  ; Printed.PrintedCMP109Equation012Data.sourceAveragedContour =
+  ; sourceAveragedContour =
       sourceAveragedContour inputs
-  ; Printed.PrintedCMP109Equation012Data.crossingValue =
+  ; crossingValue =
       crossingValue inputs
-  ; Printed.PrintedCMP109Equation012Data.targetAveragedContourReverse =
+  ; targetAveragedContourReverse =
       targetAveragedContourReverse inputs
-  ; Printed.PrintedCMP109Equation012Data.reversedCoarseBondValue =
+  ; reversedCoarseBondValue =
       reversedCoarseBondValue inputs
-  ; Printed.PrintedCMP109Equation012Data.coarseBondValue =
+  ; coarseBondValue =
       coarseBondValue inputs
-  ; Printed.PrintedCMP109Equation012Data.antiHermitianLogCoordinate =
+  ; antiHermitianLogCoordinate =
       antiHermitianLogCoordinate inputs
-  ; Printed.PrintedCMP109Equation012Data.outerExponential =
+  ; outerExponential =
       outerExponential inputs
   }
 

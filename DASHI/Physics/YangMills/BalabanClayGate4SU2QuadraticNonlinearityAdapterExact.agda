@@ -80,32 +80,32 @@ asSU2NonlinearityDefectData :
   SU2QuadraticNonlinearityInputs Operator Vector Bound →
   Defect.SU2NonlinearityDefectData Operator Vector Bound
 asSU2NonlinearityDefectData inputs = record
-  { Defect.SU2NonlinearityDefectData.algebra = vectorAlgebra inputs
-  ; Defect.SU2NonlinearityDefectData.adDefectOperator =
+  { algebra = vectorAlgebra inputs
+  ; adDefectOperator =
       Quadratic.adMinusIdentity (quadratic inputs)
-  ; Defect.SU2NonlinearityDefectData.dexpDefectOperator =
+  ; dexpDefectOperator =
       Quadratic.dexpMinusIdentity (quadratic inputs)
-  ; Defect.SU2NonlinearityDefectData.dexpInverseDefectOperator =
+  ; dexpInverseDefectOperator =
       Quadratic.dexpInverseMinusIdentity (quadratic inputs)
-  ; Defect.SU2NonlinearityDefectData.adDefectBound =
+  ; adDefectBound =
       Quadratic.coefficientBudget
         (Quadratic.algebra (quadratic inputs))
         (Quadratic.adLinearCoefficient (quadratic inputs))
         (Quadratic.adQuadraticCoefficient (quadratic inputs))
         (Quadratic.adBound (quadratic inputs))
-  ; Defect.SU2NonlinearityDefectData.dexpDefectBound =
+  ; dexpDefectBound =
       Quadratic.coefficientBudget
         (Quadratic.algebra (quadratic inputs))
         (Quadratic.dexpLinearCoefficient (quadratic inputs))
         (Quadratic.dexpQuadraticCoefficient (quadratic inputs))
         (Quadratic.adBound (quadratic inputs))
-  ; Defect.SU2NonlinearityDefectData.dexpInverseDefectBound =
+  ; dexpInverseDefectBound =
       Quadratic.coefficientBudget
         (Quadratic.algebra (quadratic inputs))
         (Quadratic.dexpInverseLinearCoefficient (quadratic inputs))
         (Quadratic.dexpInverseQuadraticCoefficient (quadratic inputs))
         (Quadratic.adBound (quadratic inputs))
-  ; Defect.SU2NonlinearityDefectData.adDefectEstimate =
+  ; adDefectEstimate =
       transportQuadraticOperatorEstimate inputs
         (Quadratic.adMinusIdentity (quadratic inputs))
         (Quadratic.coefficientBudget
@@ -114,7 +114,7 @@ asSU2NonlinearityDefectData inputs = record
           (Quadratic.adQuadraticCoefficient (quadratic inputs))
           (Quadratic.adBound (quadratic inputs)))
         (Quadratic.adMinusIdentityBoundFromQuadratic (quadratic inputs))
-  ; Defect.SU2NonlinearityDefectData.dexpDefectEstimate =
+  ; dexpDefectEstimate =
       transportQuadraticOperatorEstimate inputs
         (Quadratic.dexpMinusIdentity (quadratic inputs))
         (Quadratic.coefficientBudget
@@ -123,7 +123,7 @@ asSU2NonlinearityDefectData inputs = record
           (Quadratic.dexpQuadraticCoefficient (quadratic inputs))
           (Quadratic.adBound (quadratic inputs)))
         (Quadratic.dexpMinusIdentityBoundFromQuadratic (quadratic inputs))
-  ; Defect.SU2NonlinearityDefectData.dexpInverseDefectEstimate =
+  ; dexpInverseDefectEstimate =
       transportQuadraticOperatorEstimate inputs
         (Quadratic.dexpInverseMinusIdentity (quadratic inputs))
         (Quadratic.coefficientBudget
@@ -133,11 +133,11 @@ asSU2NonlinearityDefectData inputs = record
           (Quadratic.adBound (quadratic inputs)))
         (Quadratic.dexpInverseMinusIdentityBoundFromQuadratic
           (quadratic inputs))
-  ; Defect.SU2NonlinearityDefectData.UnitState = UnitState inputs
-  ; Defect.SU2NonlinearityDefectData.one = one inputs
-  ; Defect.SU2NonlinearityDefectData.unitNormBelowOne =
+  ; UnitState = UnitState inputs
+  ; one = one inputs
+  ; unitNormBelowOne =
       unitNormBelowOne inputs
-  ; Defect.SU2NonlinearityDefectData.multiplyRightIdentity =
+  ; multiplyRightIdentity =
       multiplyRightIdentity inputs
   }
 

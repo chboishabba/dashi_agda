@@ -186,17 +186,17 @@ asLocalHRBetaAbsorption :
   FiveLocalHRBetaChannels Cell Scalar →
   HR.LocalHRBetaAbsorption Cell Scalar
 asLocalHRBetaAbsorption dataSet = record
-  { HR.LocalHRBetaAbsorption.algebra = algebra dataSet
-  ; HR.LocalHRBetaAbsorption.cells = cells dataSet
-  ; HR.LocalHRBetaAbsorption.localRemainder = localRemainder dataSet
-  ; HR.LocalHRBetaAbsorption.localHalfIncrement = localHalfIncrement dataSet
-  ; HR.LocalHRBetaAbsorption.totalRemainder = totalRemainder dataSet
-  ; HR.LocalHRBetaAbsorption.totalHalfIncrement = totalHalfIncrement dataSet
-  ; HR.LocalHRBetaAbsorption.totalRemainderMeaning =
+  { algebra = algebra dataSet
+  ; cells = cells dataSet
+  ; localRemainder = localRemainder dataSet
+  ; localHalfIncrement = localHalfIncrement dataSet
+  ; totalRemainder = totalRemainder dataSet
+  ; totalHalfIncrement = totalHalfIncrement dataSet
+  ; totalRemainderMeaning =
       totalRemainderMeaning dataSet
-  ; HR.LocalHRBetaAbsorption.totalHalfIncrementMeaning =
+  ; totalHalfIncrementMeaning =
       totalHalfIncrementMeaning dataSet
-  ; HR.LocalHRBetaAbsorption.localAbsorption =
+  ; localAbsorption =
       localFiveChannelAbsorption dataSet
   }
 
@@ -228,14 +228,14 @@ asPhysicalHRBetaNormalization :
   PhysicalFiveChannelHRBetaNormalization Cell Scalar →
   HR.PhysicalHRBetaNormalization Cell Scalar
 asPhysicalHRBetaNormalization dataSet = record
-  { HR.PhysicalHRBetaNormalization.local =
+  { local =
       asLocalHRBetaAbsorption (channels dataSet)
-  ; HR.PhysicalHRBetaNormalization.Delta = Delta dataSet
-  ; HR.PhysicalHRBetaNormalization.halfDelta = halfDelta dataSet
-  ; HR.PhysicalHRBetaNormalization.halfDeltaMeaning =
+  ; Delta = Delta dataSet
+  ; halfDelta = halfDelta dataSet
+  ; halfDeltaMeaning =
       halfDeltaMeaning dataSet
-  ; HR.PhysicalHRBetaNormalization.PhysicalHalf = PhysicalHalf dataSet
-  ; HR.PhysicalHRBetaNormalization.physicalHalfMeaning =
+  ; PhysicalHalf = PhysicalHalf dataSet
+  ; physicalHalfMeaning =
       physicalHalfMeaning dataSet
   }
 

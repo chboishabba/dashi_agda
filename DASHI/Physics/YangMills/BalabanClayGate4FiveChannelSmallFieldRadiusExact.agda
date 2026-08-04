@@ -155,20 +155,20 @@ asFiveChannelSixteenthAllocation :
   FiveChannelSmallFieldRadius dataSet budget →
   Sixteenth.FiveChannelSixteenthAllocation dataSet
 asFiveChannelSixteenthAllocation {budget = budget} radius = record
-  { Sixteenth.FiveChannelSixteenthAllocation.budget = budget
-  ; Sixteenth.FiveChannelSixteenthAllocation.physicalNestedFiveMeaning =
+  { budget = budget
+  ; physicalNestedFiveMeaning =
       physicalNestedFiveMeaning radius
-  ; Sixteenth.FiveChannelSixteenthAllocation.physicalFiveBelowHalf =
+  ; physicalFiveBelowHalf =
       physicalFiveBelowHalf radius
-  ; Sixteenth.FiveChannelSixteenthAllocation.curvatureBelowSixteenth =
+  ; curvatureBelowSixteenth =
       curvatureBelowSixteenth radius
-  ; Sixteenth.FiveChannelSixteenthAllocation.transportBelowSixteenth =
+  ; transportBelowSixteenth =
       transportBelowSixteenth radius
-  ; Sixteenth.FiveChannelSixteenthAllocation.chartBelowSixteenth =
+  ; chartBelowSixteenth =
       chartBelowSixteenth radius
-  ; Sixteenth.FiveChannelSixteenthAllocation.gaugeBelowSixteenth =
+  ; gaugeBelowSixteenth =
       gaugeBelowSixteenth radius
-  ; Sixteenth.FiveChannelSixteenthAllocation.constraintBelowSixteenth =
+  ; constraintBelowSixteenth =
       constraintBelowSixteenth radius
   }
 

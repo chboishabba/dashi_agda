@@ -149,36 +149,36 @@ asTwoFamilyChannelMajorant :
     SU2Operator ResolventOperator Vector Bound →
   Family.TwoFamilyChannelMajorant Vector Bound
 asTwoFamilyChannelMajorant inputs = record
-  { Family.TwoFamilyChannelMajorant.algebra = algebra inputs
-  ; Family.TwoFamilyChannelMajorant.forms = forms inputs
-  ; Family.TwoFamilyChannelMajorant.UnitState = UnitState inputs
-  ; Family.TwoFamilyChannelMajorant.su2Defect =
+  { algebra = algebra inputs
+  ; forms = forms inputs
+  ; UnitState = UnitState inputs
+  ; su2Defect =
       SU2.su2NonlinearityDefect (su2Data inputs)
-  ; Family.TwoFamilyChannelMajorant.resolventDefect =
+  ; resolventDefect =
       UnitResolvent.resolventVectorDefect (resolventData inputs)
-  ; Family.TwoFamilyChannelMajorant.su2DefectBudget =
+  ; su2DefectBudget =
       SU2.su2NonlinearityBudget (su2Data inputs)
-  ; Family.TwoFamilyChannelMajorant.resolventDefectBudget =
+  ; resolventDefectBudget =
       Resolvent.differenceBudget
         (UnitResolvent.resolvent (resolventData inputs))
-  ; Family.TwoFamilyChannelMajorant.curvatureCoefficient =
+  ; curvatureCoefficient =
       curvatureCoefficient inputs
-  ; Family.TwoFamilyChannelMajorant.transportCoefficient =
+  ; transportCoefficient =
       transportCoefficient inputs
-  ; Family.TwoFamilyChannelMajorant.chartCoefficient = chartCoefficient inputs
-  ; Family.TwoFamilyChannelMajorant.gaugeCoefficient = gaugeCoefficient inputs
-  ; Family.TwoFamilyChannelMajorant.constraintCoefficient =
+  ; chartCoefficient = chartCoefficient inputs
+  ; gaugeCoefficient = gaugeCoefficient inputs
+  ; constraintCoefficient =
       constraintCoefficient inputs
-  ; Family.TwoFamilyChannelMajorant.curvatureToSU2 = curvatureToSU2 inputs
-  ; Family.TwoFamilyChannelMajorant.transportToSU2 = transportToSU2 inputs
-  ; Family.TwoFamilyChannelMajorant.chartToSU2 = chartToSU2 inputs
-  ; Family.TwoFamilyChannelMajorant.gaugeToResolvent =
+  ; curvatureToSU2 = curvatureToSU2 inputs
+  ; transportToSU2 = transportToSU2 inputs
+  ; chartToSU2 = chartToSU2 inputs
+  ; gaugeToResolvent =
       gaugeToResolvent inputs
-  ; Family.TwoFamilyChannelMajorant.constraintToResolvent =
+  ; constraintToResolvent =
       constraintToResolvent inputs
-  ; Family.TwoFamilyChannelMajorant.su2DefectUniform =
+  ; su2DefectUniform =
       su2DefectUniformInFamilyOrder inputs
-  ; Family.TwoFamilyChannelMajorant.resolventDefectUniform =
+  ; resolventDefectUniform =
       resolventDefectUniformInFamilyOrder inputs
   }
 

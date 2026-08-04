@@ -103,41 +103,41 @@ asFiveLocalHRBetaChannels :
   FiveChannelsWithSpectralDeterminantInputs Cell Mode Scalar →
   Five.FiveLocalHRBetaChannels Cell Scalar
 asFiveLocalHRBetaChannels inputs = record
-  { Five.FiveLocalHRBetaChannels.algebra =
+  { algebra =
       Determinant.algebra (determinant inputs)
-  ; Five.FiveLocalHRBetaChannels.cells = cells inputs
-  ; Five.FiveLocalHRBetaChannels.determinantRemainder =
+  ; cells = cells inputs
+  ; determinantRemainder =
       Determinant.determinantRemainder (determinant inputs)
-  ; Five.FiveLocalHRBetaChannels.interactionRemainder =
+  ; interactionRemainder =
       interactionRemainder inputs
-  ; Five.FiveLocalHRBetaChannels.chartRemainder = chartRemainder inputs
-  ; Five.FiveLocalHRBetaChannels.gaugeRemainder = gaugeRemainder inputs
-  ; Five.FiveLocalHRBetaChannels.localizationRemainder =
+  ; chartRemainder = chartRemainder inputs
+  ; gaugeRemainder = gaugeRemainder inputs
+  ; localizationRemainder =
       localizationRemainder inputs
-  ; Five.FiveLocalHRBetaChannels.determinantBudget =
+  ; determinantBudget =
       Determinant.determinantBudget (determinant inputs)
-  ; Five.FiveLocalHRBetaChannels.interactionBudget = interactionBudget inputs
-  ; Five.FiveLocalHRBetaChannels.chartBudget = chartBudget inputs
-  ; Five.FiveLocalHRBetaChannels.gaugeBudget = gaugeBudget inputs
-  ; Five.FiveLocalHRBetaChannels.localizationBudget = localizationBudget inputs
-  ; Five.FiveLocalHRBetaChannels.determinantEstimate =
+  ; interactionBudget = interactionBudget inputs
+  ; chartBudget = chartBudget inputs
+  ; gaugeBudget = gaugeBudget inputs
+  ; localizationBudget = localizationBudget inputs
+  ; determinantEstimate =
       Determinant.localDeterminantRemainderEstimate (determinant inputs)
-  ; Five.FiveLocalHRBetaChannels.interactionEstimate =
+  ; interactionEstimate =
       interactionEstimate inputs
-  ; Five.FiveLocalHRBetaChannels.chartEstimate = chartEstimate inputs
-  ; Five.FiveLocalHRBetaChannels.gaugeEstimate = gaugeEstimate inputs
-  ; Five.FiveLocalHRBetaChannels.localizationEstimate =
+  ; chartEstimate = chartEstimate inputs
+  ; gaugeEstimate = gaugeEstimate inputs
+  ; localizationEstimate =
       localizationEstimate inputs
-  ; Five.FiveLocalHRBetaChannels.localHalfIncrement =
+  ; localHalfIncrement =
       localHalfIncrement inputs
-  ; Five.FiveLocalHRBetaChannels.localHalfIncrementMeaning =
+  ; localHalfIncrementMeaning =
       localHalfIncrementMeaning inputs
-  ; Five.FiveLocalHRBetaChannels.totalRemainder = totalRemainder inputs
-  ; Five.FiveLocalHRBetaChannels.totalHalfIncrement =
+  ; totalRemainder = totalRemainder inputs
+  ; totalHalfIncrement =
       totalHalfIncrement inputs
-  ; Five.FiveLocalHRBetaChannels.totalRemainderMeaning =
+  ; totalRemainderMeaning =
       totalRemainderMeaning inputs
-  ; Five.FiveLocalHRBetaChannels.totalHalfIncrementMeaning =
+  ; totalHalfIncrementMeaning =
       totalHalfIncrementMeaning inputs
   }
 

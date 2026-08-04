@@ -87,61 +87,61 @@ asFiveChannelFormBoundData :
   FiveSandwichChannelAssembly Operator State Bound →
   Five.FiveChannelFormBoundData Operator State Bound
 asFiveChannelFormBoundData assembly = record
-  { Five.FiveChannelFormBoundData.total = total assembly
-  ; Five.FiveChannelFormBoundData.curvature =
+  { total = total assembly
+  ; curvature =
       Sandwich.channel (curvatureBudget assembly)
-  ; Five.FiveChannelFormBoundData.transport =
+  ; transport =
       Sandwich.channel (transportBudget assembly)
-  ; Five.FiveChannelFormBoundData.chart =
+  ; chart =
       Sandwich.channel (chartBudget assembly)
-  ; Five.FiveChannelFormBoundData.gauge =
+  ; gauge =
       Sandwich.channel (gaugeBudget assembly)
-  ; Five.FiveChannelFormBoundData.constraint =
+  ; constraint =
       Sandwich.channel (constraintBudget assembly)
-  ; Five.FiveChannelFormBoundData.formAbsolute =
+  ; formAbsolute =
       λ operator state →
         Sandwich.absolute (formAlgebra assembly)
           (Sandwich.inner (formAlgebra assembly) state
             (Sandwich.apply (formAlgebra assembly) operator state))
-  ; Five.FiveChannelFormBoundData.epsilonCurvature =
+  ; epsilonCurvature =
       Sandwich.epsilon (curvatureBudget assembly)
-  ; Five.FiveChannelFormBoundData.epsilonTransport =
+  ; epsilonTransport =
       Sandwich.epsilon (transportBudget assembly)
-  ; Five.FiveChannelFormBoundData.epsilonChart =
+  ; epsilonChart =
       Sandwich.epsilon (chartBudget assembly)
-  ; Five.FiveChannelFormBoundData.epsilonGauge =
+  ; epsilonGauge =
       Sandwich.epsilon (gaugeBudget assembly)
-  ; Five.FiveChannelFormBoundData.epsilonConstraint =
+  ; epsilonConstraint =
       Sandwich.epsilon (constraintBudget assembly)
-  ; Five.FiveChannelFormBoundData.epsilonTotal = epsilonTotal assembly
-  ; Five.FiveChannelFormBoundData.add = addBound assembly
-  ; Five.FiveChannelFormBoundData.LessEqual =
+  ; epsilonTotal = epsilonTotal assembly
+  ; add = addBound assembly
+  ; LessEqual =
       Pipeline.LessEqual (operatorAlgebra assembly)
-  ; Five.FiveChannelFormBoundData.UnitState =
+  ; UnitState =
       Sandwich.UnitState (formAlgebra assembly)
-  ; Five.FiveChannelFormBoundData.transitive =
+  ; transitive =
       Pipeline.transitive (operatorAlgebra assembly)
-  ; Five.FiveChannelFormBoundData.addMonotone = addMonotone assembly
-  ; Five.FiveChannelFormBoundData.epsilonTotalMeaning =
+  ; addMonotone = addMonotone assembly
+  ; epsilonTotalMeaning =
       epsilonTotalMeaning assembly
-  ; Five.FiveChannelFormBoundData.totalFormTriangle =
+  ; totalFormTriangle =
       totalFormTriangle assembly
-  ; Five.FiveChannelFormBoundData.curvatureFormBound =
+  ; curvatureFormBound =
       Sandwich.sandwichChannelUnitFormBound
         (curvatureBudget assembly)
-  ; Five.FiveChannelFormBoundData.transportFormBound =
+  ; transportFormBound =
       Sandwich.sandwichChannelUnitFormBound
         (transportBudget assembly)
-  ; Five.FiveChannelFormBoundData.chartFormBound =
+  ; chartFormBound =
       Sandwich.sandwichChannelUnitFormBound (chartBudget assembly)
-  ; Five.FiveChannelFormBoundData.gaugeFormBound =
+  ; gaugeFormBound =
       Sandwich.sandwichChannelUnitFormBound (gaugeBudget assembly)
-  ; Five.FiveChannelFormBoundData.constraintFormBound =
+  ; constraintFormBound =
       Sandwich.sandwichChannelUnitFormBound
         (constraintBudget assembly)
-  ; Five.FiveChannelFormBoundData.TotalRemainderMeaning =
+  ; TotalRemainderMeaning =
       TotalRemainderMeaning assembly
-  ; Five.FiveChannelFormBoundData.totalRemainderMeaning =
+  ; totalRemainderMeaning =
       totalRemainderMeaning assembly
   }
 

@@ -20,39 +20,39 @@ oneBinary left right = one
 
 hodgeData : Hodge.FiniteFourierHodgeData One One One One
 hodgeData = record
-  { Hodge.fourier = λ state → one
-  ; Hodge.referenceEnergy = λ index state → one
-  ; Hodge.normSq = λ state → one
-  ; Hodge.frequencyNormSq = λ frequency → one
-  ; Hodge.symbolEnergy = λ index frequency → one
-  ; Hodge.scale = oneBinary
-  ; Hodge.LessEqual = λ left right → Holds
-  ; Hodge.Positive = λ value → Holds
-  ; Hodge.Nonnegative = λ value → Holds
-  ; Hodge.cBulk = one
-  ; Hodge.cBulkPositive = holds
-  ; Hodge.GaugeFixedTangent = λ index state → Holds
-  ; Hodge.SymbolKernel = λ index frequency → Holds
-  ; Hodge.ConstantMode = λ frequency → Holds
-  ; Hodge.SymbolKernelRemoved = λ index frequency → Holds
-  ; Hodge.finiteFourierDiagonalizesReferenceLaplacian =
+  { fourier = λ state → one
+  ; referenceEnergy = λ index state → one
+  ; normSq = λ state → one
+  ; frequencyNormSq = λ frequency → one
+  ; symbolEnergy = λ index frequency → one
+  ; scale = oneBinary
+  ; LessEqual = λ left right → Holds
+  ; Positive = λ value → Holds
+  ; Nonnegative = λ value → Holds
+  ; cBulk = one
+  ; cBulkPositive = holds
+  ; GaugeFixedTangent = λ index state → Holds
+  ; SymbolKernel = λ index frequency → Holds
+  ; ConstantMode = λ frequency → Holds
+  ; SymbolKernelRemoved = λ index frequency → Holds
+  ; finiteFourierDiagonalizesReferenceLaplacian =
       λ index state → refl
-  ; Hodge.fourierParsevalForBondFields = λ state → refl
-  ; Hodge.referenceSymbolNonnegative = λ index frequency → holds
-  ; Hodge.referenceSymbolKernelCharacterization =
+  ; fourierParsevalForBondFields = λ state → refl
+  ; referenceSymbolNonnegative = λ index frequency → holds
+  ; referenceSymbolKernelCharacterization =
       λ index frequency kernel → holds
-  ; Hodge.constraintsRemoveReferenceSymbolKernel =
+  ; constraintsRemoveReferenceSymbolKernel =
       λ index state tangent → holds
-  ; Hodge.constrainedReferenceSymbolHasPositiveGap =
+  ; constrainedReferenceSymbolHasPositiveGap =
       λ index frequency removed → holds
-  ; Hodge.CBulkIndependentOfVolume = Holds
-  ; Hodge.CBulkIndependentOfLatticeSpacing = Holds
-  ; Hodge.CBulkIndependentOfScale = Holds
-  ; Hodge.CBulkUniformOverAdmissibleBackgrounds = Holds
-  ; Hodge.cBulkIndependentOfVolume = holds
-  ; Hodge.cBulkIndependentOfLatticeSpacing = holds
-  ; Hodge.cBulkIndependentOfScale = holds
-  ; Hodge.cBulkUniformOverAdmissibleBackgrounds = holds
+  ; CBulkIndependentOfVolume = Holds
+  ; CBulkIndependentOfLatticeSpacing = Holds
+  ; CBulkIndependentOfScale = Holds
+  ; CBulkUniformOverAdmissibleBackgrounds = Holds
+  ; cBulkIndependentOfVolume = holds
+  ; cBulkIndependentOfLatticeSpacing = holds
+  ; cBulkIndependentOfScale = holds
+  ; cBulkUniformOverAdmissibleBackgrounds = holds
   }
 
 bulkHodgeRegression : Holds

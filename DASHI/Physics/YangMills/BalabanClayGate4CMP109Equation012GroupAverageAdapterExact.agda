@@ -79,28 +79,28 @@ asPrintedEquation012Data :
   Printed.PrintedCMP109Equation012Data
     Field CoarseBond FineSite Group Lie Scalar
 asPrintedEquation012Data inputs = record
-  { Printed.PrintedCMP109Equation012Data.blockSites = blockSites inputs
-  ; Printed.PrintedCMP109Equation012Data.blockWeight = blockWeight inputs
-  ; Printed.PrintedCMP109Equation012Data.zeroLie =
+  { blockSites = blockSites inputs
+  ; blockWeight = blockWeight inputs
+  ; zeroLie =
       Average.zeroLie (groupAverage inputs)
-  ; Printed.PrintedCMP109Equation012Data.addLie =
+  ; addLie =
       Average.addLie (groupAverage inputs)
-  ; Printed.PrintedCMP109Equation012Data.scaleLie =
+  ; scaleLie =
       Average.scaleLie (groupAverage inputs)
-  ; Printed.PrintedCMP109Equation012Data.multiplyGroup =
+  ; multiplyGroup =
       Average.multiply (groupAverage inputs)
-  ; Printed.PrintedCMP109Equation012Data.sourceAveragedContour =
+  ; sourceAveragedContour =
       sourceContourAverage inputs
-  ; Printed.PrintedCMP109Equation012Data.crossingValue = crossingValue inputs
-  ; Printed.PrintedCMP109Equation012Data.targetAveragedContourReverse =
+  ; crossingValue = crossingValue inputs
+  ; targetAveragedContourReverse =
       targetReverseContourAverage inputs
-  ; Printed.PrintedCMP109Equation012Data.reversedCoarseBondValue =
+  ; reversedCoarseBondValue =
       reversedCoarseBondValue inputs
-  ; Printed.PrintedCMP109Equation012Data.coarseBondValue =
+  ; coarseBondValue =
       coarseBondValue inputs
-  ; Printed.PrintedCMP109Equation012Data.antiHermitianLogCoordinate =
+  ; antiHermitianLogCoordinate =
       antiHermitianLogCoordinate inputs
-  ; Printed.PrintedCMP109Equation012Data.outerExponential =
+  ; outerExponential =
       outerExponential inputs
   }
 

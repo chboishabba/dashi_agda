@@ -135,8 +135,8 @@ contourInvolution :
   OrientedEdgeData Edge Group group →
   Parity.Involution (List Edge)
 contourInvolution dataSet = record
-  { Parity.Involution.reverse = inverseWord dataSet
-  ; Parity.Involution.reverseInvolutive =
+  { reverse = inverseWord dataSet
+  ; reverseInvolutive =
       inverseWordInvolutive dataSet
   }
 

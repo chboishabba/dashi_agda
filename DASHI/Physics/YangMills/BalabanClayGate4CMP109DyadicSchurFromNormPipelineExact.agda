@@ -176,16 +176,16 @@ asDyadicEnvelopeKernelData :
   DyadicPipelineSchurInputs coarseN Operator Bound →
   Schur.DyadicEnvelopeKernelData coarseN Bound
 asDyadicEnvelopeKernelData inputs = record
-  { Schur.DyadicEnvelopeKernelData.algebra = scalarAlgebra inputs
-  ; Schur.DyadicEnvelopeKernelData.kernelAbsolute = kernelAbsolute inputs
-  ; Schur.DyadicEnvelopeKernelData.adjointKernelAbsolute =
+  { algebra = scalarAlgebra inputs
+  ; kernelAbsolute = kernelAbsolute inputs
+  ; adjointKernelAbsolute =
       adjointKernelAbsolute inputs
-  ; Schur.DyadicEnvelopeKernelData.entryBound = globalEntryBound inputs
-  ; Schur.DyadicEnvelopeKernelData.kernelEntryBelow =
+  ; entryBound = globalEntryBound inputs
+  ; kernelEntryBelow =
       kernelEntryBelowGlobalBound inputs
-  ; Schur.DyadicEnvelopeKernelData.adjointEntryBelow =
+  ; adjointEntryBelow =
       adjointEntryBelowGlobalBound inputs
-  ; Schur.DyadicEnvelopeKernelData.stepInverseCertificate =
+  ; stepInverseCertificate =
       stepInverseCertificate inputs
   }
 

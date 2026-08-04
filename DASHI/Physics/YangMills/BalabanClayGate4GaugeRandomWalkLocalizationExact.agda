@@ -68,7 +68,7 @@ asGaugeNeumannAsymptoticResidual :
   GaugeRandomWalkLocalizationInputs family →
   Asymptotic.UniformNeumannAsymptoticResidual family
 asGaugeNeumannAsymptoticResidual {family = family} inputs = record
-  { Asymptotic.UniformNeumannAsymptoticResidual.powerVanishing =
+  { powerVanishing =
       Geometric.coveragePowerVanishing family
         (orderLaws inputs) (powerCoverage inputs)
   }

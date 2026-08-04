@@ -85,19 +85,19 @@ dexpDefectData :
   SU2QuadraticFullOperatorInputs Operator Bound →
   IdentityDefect.OperatorFromIdentityDefect Operator Bound
 dexpDefectData inputs = record
-  { IdentityDefect.OperatorFromIdentityDefect.algebra = identityAlgebra inputs
-  ; IdentityDefect.OperatorFromIdentityDefect.operator = dexp inputs
-  ; IdentityDefect.OperatorFromIdentityDefect.defect =
+  { algebra = identityAlgebra inputs
+  ; operator = dexp inputs
+  ; defect =
       Quadratic.dexpMinusIdentity (quadratic inputs)
-  ; IdentityDefect.OperatorFromIdentityDefect.defectBound =
+  ; defectBound =
       Quadratic.coefficientBudget
         (Quadratic.algebra (quadratic inputs))
         (Quadratic.dexpLinearCoefficient (quadratic inputs))
         (Quadratic.dexpQuadraticCoefficient (quadratic inputs))
         (Quadratic.adBound (quadratic inputs))
-  ; IdentityDefect.OperatorFromIdentityDefect.operatorMeaning =
+  ; operatorMeaning =
       dexpMeaning inputs
-  ; IdentityDefect.OperatorFromIdentityDefect.defectEstimate =
+  ; defectEstimate =
       transportQuadraticDefectEstimate inputs
         (Quadratic.dexpMinusIdentity (quadratic inputs))
         (Quadratic.coefficientBudget
@@ -114,19 +114,19 @@ dexpInverseDefectData :
   SU2QuadraticFullOperatorInputs Operator Bound →
   IdentityDefect.OperatorFromIdentityDefect Operator Bound
 dexpInverseDefectData inputs = record
-  { IdentityDefect.OperatorFromIdentityDefect.algebra = identityAlgebra inputs
-  ; IdentityDefect.OperatorFromIdentityDefect.operator = dexpInverse inputs
-  ; IdentityDefect.OperatorFromIdentityDefect.defect =
+  { algebra = identityAlgebra inputs
+  ; operator = dexpInverse inputs
+  ; defect =
       Quadratic.dexpInverseMinusIdentity (quadratic inputs)
-  ; IdentityDefect.OperatorFromIdentityDefect.defectBound =
+  ; defectBound =
       Quadratic.coefficientBudget
         (Quadratic.algebra (quadratic inputs))
         (Quadratic.dexpInverseLinearCoefficient (quadratic inputs))
         (Quadratic.dexpInverseQuadraticCoefficient (quadratic inputs))
         (Quadratic.adBound (quadratic inputs))
-  ; IdentityDefect.OperatorFromIdentityDefect.operatorMeaning =
+  ; operatorMeaning =
       dexpInverseMeaning inputs
-  ; IdentityDefect.OperatorFromIdentityDefect.defectEstimate =
+  ; defectEstimate =
       transportQuadraticDefectEstimate inputs
         (Quadratic.dexpInverseMinusIdentity (quadratic inputs))
         (Quadratic.coefficientBudget

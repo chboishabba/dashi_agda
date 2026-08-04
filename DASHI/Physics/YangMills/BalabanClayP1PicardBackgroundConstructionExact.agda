@@ -225,37 +225,37 @@ picardRegularBackgroundConstruction :
   PicardBackgroundData Coarse State Tangent Bound →
   P1.RegularBackgroundConstruction Coarse Tangent State Bound
 picardRegularBackgroundConstruction dataSet = record
-  { P1.RegularBackgroundConstruction.blockMap = blockMap dataSet
-  ; P1.RegularBackgroundConstruction.backgroundOf = picardBackground dataSet
-  ; P1.RegularBackgroundConstruction.reconstructFine = reconstructFine dataSet
-  ; P1.RegularBackgroundConstruction.zeroBound = zeroBound dataSet
-  ; P1.RegularBackgroundConstruction.actionFirstVariation =
+  { blockMap = blockMap dataSet
+  ; backgroundOf = picardBackground dataSet
+  ; reconstructFine = reconstructFine dataSet
+  ; zeroBound = zeroBound dataSet
+  ; actionFirstVariation =
       actionFirstVariation dataSet
-  ; P1.RegularBackgroundConstruction.ConstraintTangent =
+  ; ConstraintTangent =
       ConstraintTangent dataSet
-  ; P1.RegularBackgroundConstruction.GaugeFixedBackground =
+  ; GaugeFixedBackground =
       GaugeFixedBackground dataSet
-  ; P1.RegularBackgroundConstruction.CandidateStationary =
+  ; CandidateStationary =
       CandidateStationary dataSet
-  ; P1.RegularBackgroundConstruction.backgroundSatisfiesConstraint =
+  ; backgroundSatisfiesConstraint =
       backgroundSatisfiesConstraint dataSet
-  ; P1.RegularBackgroundConstruction.backgroundGaugeFixed =
+  ; backgroundGaugeFixed =
       backgroundGaugeFixed dataSet
-  ; P1.RegularBackgroundConstruction.backgroundStationary =
+  ; backgroundStationary =
       backgroundStationary dataSet
-  ; P1.RegularBackgroundConstruction.backgroundCandidateStationary =
+  ; backgroundCandidateStationary =
       backgroundCandidateStationary dataSet
-  ; P1.RegularBackgroundConstruction.BackgroundEquivalent =
+  ; BackgroundEquivalent =
       BackgroundEquivalent dataSet
-  ; P1.RegularBackgroundConstruction.minimizerUniqueModuloGauge =
+  ; minimizerUniqueModuloGauge =
       minimizerUniqueModuloGauge dataSet
-  ; P1.RegularBackgroundConstruction.regularitySize = regularitySize dataSet
-  ; P1.RegularBackgroundConstruction.coarseSmallness = coarseSmallness dataSet
-  ; P1.RegularBackgroundConstruction.regularityConstant =
+  ; regularitySize = regularitySize dataSet
+  ; coarseSmallness = coarseSmallness dataSet
+  ; regularityConstant =
       regularityConstant dataSet
-  ; P1.RegularBackgroundConstruction.scale = scale (core dataSet)
-  ; P1.RegularBackgroundConstruction.LessEqual = LessEqual (core dataSet)
-  ; P1.RegularBackgroundConstruction.backgroundRegularity =
+  ; scale = scale (core dataSet)
+  ; LessEqual = LessEqual (core dataSet)
+  ; backgroundRegularity =
       backgroundRegularity dataSet
   }
 

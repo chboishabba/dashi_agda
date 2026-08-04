@@ -18,8 +18,11 @@ module DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact where
 -- |x|^2/2 multiple of the current term.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (NonZero)
+open import Data.Nat.Properties using (_!≢0)
+open import Data.Integer.Base using (+_; nonNeg)
+open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ; _/_)
 import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
@@ -109,6 +112,14 @@ cosineMagnitudeTerm value index =
     (BishopReal.∣_∣
       (BishopReal.pow value (Estimates.evenExponent index)))
 
+factorialNonnegative : ∀ (w : Nat) .{{_ : NonZero w}} → ℚ.NonNegative (+ 1 / w)
+factorialNonnegative (suc k) = nonNeg
+
+inverseFactorialNonnegative : ∀ n → ℚ.NonNegative (Estimates.inverseFactorialRational n)
+inverseFactorialNonnegative n =
+  let instance _ = _!≢0 n in
+  factorialNonnegative (Estimates.factorial n)
+
 embeddedInverseFactorialNonnegative :
   ∀ index →
   BishopReal.NonNegative
@@ -119,7 +130,8 @@ embeddedInverseFactorialNonnegative index =
       0ℚᵘ
       (Estimates.inverseFactorialRational index)
       (ℚP.nonNegative⁻¹
-        (Estimates.inverseFactorialRational index)))
+        (Estimates.inverseFactorialRational index)
+        ⦃ inverseFactorialNonnegative index ⦄))
 
 sineMagnitudeTermNonnegative :
   ∀ value index →
