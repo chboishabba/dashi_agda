@@ -1,0 +1,31 @@
+module DASHI.Physics.YangMills.YangMillsSubmissionRound9Validation where
+
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Physics.YangMills.PhysicalInvolutionParityExact
+import DASHI.Physics.YangMills.SetoidPhysicalInvolutionParityExact
+import DASHI.Physics.YangMills.BalabanCMP109CenteredParityExact
+import DASHI.Physics.YangMills.BalabanContourWordInverseExact
+import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact
+import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact
+import DASHI.Physics.YangMills.BalabanSU2AdjointParityExact
+import DASHI.Physics.YangMills.BalabanFederbushPairedContourCancellationExact
+import DASHI.Physics.YangMills.BalabanP06FiniteNeighbourGraphExact
+import DASHI.Physics.YangMills.BalabanP06PhysicalModelLeafExact
+import DASHI.Physics.YangMills.BalabanP11PhysicalPrefixTailEntropyExact
+import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact
+import DASHI.Physics.YangMills.BalabanP10P33PhysicalCutsetExact
+import DASHI.Physics.YangMills.BalabanGate4ParityIntegrationExact
+import DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact
+import DASHI.Physics.YangMills.YangMillsRGParitySISpineExact
+import DASHI.Physics.YangMills.YangMillsSubmissionRound9SourceAudit
+import DASHI.Physics.YangMills.YangMillsSubmissionRound9Ledger
+import DASHI.Physics.YangMills.YangMillsSubmissionRound9Receipt
+
+round9ValidationRootPresent : Bool
+round9ValidationRootPresent = true
+
+round9ValidationRootPresentIsTrue :
+  round9ValidationRootPresent ≡ true
+round9ValidationRootPresentIsTrue = refl
