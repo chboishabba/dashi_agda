@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientExact where
 -- DASHI CONTRIBUTION
 --
 -- Close the removable-singularity part of the inverse-dexp coefficient without
--- dividing constructive reals.  Put
+-- dividing constructive reals. Put
 --
 --   n(t) = 2 sin t - t(1+cos t),
 --   d(t) = 2 t^2 sin t.
@@ -30,28 +30,18 @@ module DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientExact where
 --   (1/12) d(t) <= n(t) <= (1/6) d(t).
 --
 -- For t>0, d(t)>0 and ordinary positive-denominator cancellation therefore
--- gives
+-- gives 1/12 <= beta(t) <= 1/6. The proof uses the exact gaps
 --
---   1/12 <= beta(t) <= 1/6,
---
--- where beta(t)=n(t)/d(t).  The stronger asymptotic upper endpoint is not
--- required by the P33 norm budget; 1/6 already leaves a large exact slack at
--- radius 1/8192.
---
--- The proof uses two explicit polynomial gaps:
---
---   lower envelope - (t^2/6) sine-upper
+--   lower - (t^2/6) sine-upper
 --     = t^5 [47/20160 + (1/560)(1/4-t^2)],
 --
---   (t^2/3) sine-lower - upper envelope
+--   (t^2/3) sine-lower - upper
 --     = t^3 [1831/11520
 --              + (11/360)(1/4-t^2)
 --              + (1/720)(1/16-t^4)].
---
--- Every term on the right is constructively nonnegative on |t|<=1/2.
 ------------------------------------------------------------------------
 
-open import Data.Integer.Base using (+_)
+open import Data.Integer.Base using (+_; nonNeg)
 open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; 0ℚᵘ; _/_)
 import Data.Rational.Unnormalised.Properties as ℚP
 
@@ -59,7 +49,7 @@ import Real as BishopReal
 import RealProperties as BishopProperties
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
-import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
 import DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact as Low
 import DASHI.Physics.YangMills.BalabanP33BishopHigherOrderTaylorExact as Higher
@@ -101,26 +91,29 @@ embeddedRationalNonnegative rational rationalNonnegative =
       (ℚP.nonNegative⁻¹ rational
         ⦃ rationalNonnegative ⦄))
 
-oneTwelfthNonnegative : BishopReal.NonNegative (embed oneTwelfth)
-oneTwelfthNonnegative = embeddedRationalNonnegative oneTwelfth _
 oneSixthNonnegative : BishopReal.NonNegative (embed oneSixth)
-oneSixthNonnegative = embeddedRationalNonnegative oneSixth _
+oneSixthNonnegative = embeddedRationalNonnegative oneSixth nonNeg
 oneThirdNonnegative : BishopReal.NonNegative (embed oneThird)
-oneThirdNonnegative = embeddedRationalNonnegative oneThird _
+oneThirdNonnegative = embeddedRationalNonnegative oneThird nonNeg
 oneFiveSixtiethNonnegative : BishopReal.NonNegative (embed oneFiveSixtieth)
-oneFiveSixtiethNonnegative = embeddedRationalNonnegative oneFiveSixtieth _
+oneFiveSixtiethNonnegative =
+  embeddedRationalNonnegative oneFiveSixtieth nonNeg
 elevenThreeSixtiethNonnegative :
   BishopReal.NonNegative (embed elevenThreeSixtieth)
 elevenThreeSixtiethNonnegative =
-  embeddedRationalNonnegative elevenThreeSixtieth _
-oneSevenTwentiethNonnegative : BishopReal.NonNegative (embed oneSevenTwentieth)
-oneSevenTwentiethNonnegative = embeddedRationalNonnegative oneSevenTwentieth _
-fortySevenPositive : BishopReal.NonNegative (embed fortySevenTwentyOneSixtieth)
-fortySevenPositive = embeddedRationalNonnegative fortySevenTwentyOneSixtieth _
+  embeddedRationalNonnegative elevenThreeSixtieth nonNeg
+oneSevenTwentiethNonnegative :
+  BishopReal.NonNegative (embed oneSevenTwentieth)
+oneSevenTwentiethNonnegative =
+  embeddedRationalNonnegative oneSevenTwentieth nonNeg
+fortySevenPositive :
+  BishopReal.NonNegative (embed fortySevenTwentyOneSixtieth)
+fortySevenPositive =
+  embeddedRationalNonnegative fortySevenTwentyOneSixtieth nonNeg
 eighteenThirtyOnePositive :
   BishopReal.NonNegative (embed eighteenThirtyOneElevenFiveTwenty)
 eighteenThirtyOnePositive =
-  embeddedRationalNonnegative eighteenThirtyOneElevenFiveTwenty _
+  embeddedRationalNonnegative eighteenThirtyOneElevenFiveTwenty nonNeg
 
 nonnegativeDifferenceGivesOrder :
   ∀ {left right} →
@@ -136,16 +129,6 @@ nonnegativeDifferenceGivesOrder {left} {right} differenceNonnegative =
       (BishopProperties.≃-symm
         (BishopProperties.+-identityʳ left))
       (BishopProperties.+-monoʳ-≤ left differenceNonnegative))
-
-squareNonnegative :
-  ∀ value → BishopReal.NonNegative (square value)
-squareNonnegative value =
-  BishopProperties.nonNegx,y⇒nonNegx*y
-    (BishopProperties.nonNeg∣x∣ value)
-    (BishopProperties.nonNeg∣x∣ value)
-  where
-  -- The square is setoid-equal to |x||x|; convert through the ordered cone.
-  -- This local definition is used only through the explicit proof below.
 
 squareNonnegativeFromInput :
   ∀ value → BishopReal.NonNegative value →
@@ -178,11 +161,11 @@ fifthNonnegative value valueNonnegative =
     valueNonnegative
 
 squareBelowQuarter :
-  ∀ {value} →
-  Concrete.ConcreteHalfBallSeriesInputs _ value →
+  ∀ {dataSet value} →
+  Concrete.ConcreteHalfBallSeriesInputs dataSet value →
   BishopReal._≤_ (square value) (embed oneQuarter)
-squareBelowQuarter {value} inputs =
-  DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.halfBallSquareBelowQuarterProof
+squareBelowQuarter inputs =
+  Estimates.halfBallSquareBelowQuarterProof
     (Concrete.insideHalf inputs)
 
 squareGapNonnegative :
@@ -203,8 +186,10 @@ fourthBelowSixteenth {value = value} inputs =
     (BishopProperties.≃-symm
       (BishopProperties.⋆-distrib-* oneQuarter oneQuarter))
     (BishopProperties.*-mono-≤
-      (squareNonnegativeFromInput value (Concrete.valueNonnegative inputs))
-      (squareNonnegativeFromInput value (Concrete.valueNonnegative inputs))
+      (squareNonnegativeFromInput value
+        (Concrete.valueNonnegative inputs))
+      (squareNonnegativeFromInput value
+        (Concrete.valueNonnegative inputs))
       (squareBelowQuarter inputs)
       (squareBelowQuarter inputs))
 
@@ -271,7 +256,7 @@ lowerCoefficientPolynomialIdentity : ∀ value →
         (embed oneSixth)
         (BishopReal._*_
           (square value)
-          (Higher.sineQuinticUpperPolynomial value))))
+          (Numerator.sineQuinticUpperPolynomial value))))
     (BishopReal._*_ (fifth value) (lowerGapFactor value))
 lowerCoefficientPolynomialIdentity value =
   let open BishopProperties.ℝ-Solver
@@ -279,16 +264,20 @@ lowerCoefficientPolynomialIdentity value =
     (λ t →
       ((Κ (+ 2 / 1) ⊗
           ((t ⊖ (Κ (+ 1 / 6) ⊗ ((t ⊗ t) ⊗ t)))
-            ⊕ ((Κ (+ 1 / 120) ⊗ BishopReal.pow t 5)
-              ⊖ (Κ (+ 1 / 5040) ⊗ BishopReal.pow t 7))))
+            ⊕ ((Κ (+ 1 / 120) ⊗
+                  ((((t ⊗ t) ⊗ t) ⊗ t) ⊗ t))
+              ⊖ (Κ (+ 1 / 5040) ⊗
+                  ((((((t ⊗ t) ⊗ t) ⊗ t) ⊗ t) ⊗ t) ⊗ t))))
         ⊖ (t ⊗
           (Κ (+ 1 / 1) ⊕
             ((Κ (+ 1 / 1) ⊖ (Κ (+ 1 / 2) ⊗ (t ⊗ t)))
-              ⊕ (Κ (+ 1 / 24) ⊗ BishopReal.pow t 4)))))
+              ⊕ (Κ (+ 1 / 24) ⊗
+                  (((t ⊗ t) ⊗ t) ⊗ t))))))
         ⊖ (Κ (+ 1 / 6) ⊗
           ((t ⊗ t) ⊗
             ((t ⊖ (Κ (+ 1 / 6) ⊗ ((t ⊗ t) ⊗ t)))
-              ⊕ (Κ (+ 1 / 120) ⊗ BishopReal.pow t 5))))
+              ⊕ (Κ (+ 1 / 120) ⊗
+                  ((((t ⊗ t) ⊗ t) ⊗ t) ⊗ t)))))
       ⊜ (((((t ⊗ t) ⊗ t) ⊗ t) ⊗ t) ⊗
         (Κ (+ 47 / 20160)
           ⊕ (Κ (+ 1 / 560) ⊗
@@ -315,18 +304,22 @@ upperCoefficientPolynomialIdentity value =
         ⊖
         ((Κ (+ 2 / 1) ⊗
           ((t ⊖ (Κ (+ 1 / 6) ⊗ ((t ⊗ t) ⊗ t)))
-            ⊕ (Κ (+ 1 / 120) ⊗ BishopReal.pow t 5)))
+            ⊕ (Κ (+ 1 / 120) ⊗
+                ((((t ⊗ t) ⊗ t) ⊗ t) ⊗ t))))
           ⊖ (t ⊗
             (Κ (+ 1 / 1) ⊕
               ((Κ (+ 1 / 1) ⊖ (Κ (+ 1 / 2) ⊗ (t ⊗ t)))
-                ⊕ ((Κ (+ 1 / 24) ⊗ BishopReal.pow t 4)
-                  ⊖ (Κ (+ 1 / 720) ⊗ BishopReal.pow t 6)))))))
+                ⊕ ((Κ (+ 1 / 24) ⊗
+                      (((t ⊗ t) ⊗ t) ⊗ t))
+                  ⊖ (Κ (+ 1 / 720) ⊗
+                      (((((t ⊗ t) ⊗ t) ⊗ t) ⊗ t) ⊗ t)))))))
       ⊜ (((t ⊗ t) ⊗ t) ⊗
         (Κ (+ 1831 / 11520)
           ⊕ ((Κ (+ 11 / 360) ⊗
               (Κ (+ 1 / 4) ⊖ (t ⊗ t)))
             ⊕ (Κ (+ 1 / 720) ⊗
-              (Κ (+ 1 / 16) ⊖ ((t ⊗ t) ⊗ (t ⊗ t))))))))
+              (Κ (+ 1 / 16) ⊖
+                ((t ⊗ t) ⊗ (t ⊗ t))))))))
     BishopProperties.≃-refl value
 
 lowerEnvelopeDominatesOneSixthSquareSineUpper :
@@ -337,7 +330,7 @@ lowerEnvelopeDominatesOneSixthSquareSineUpper :
       (embed oneSixth)
       (BishopReal._*_
         (square value)
-        (Higher.sineQuinticUpperPolynomial value)))
+        (Numerator.sineQuinticUpperPolynomial value)))
     (Numerator.inverseDexpNumeratorLowerEnvelope value)
 lowerEnvelopeDominatesOneSixthSquareSineUpper {value = value} inputs =
   nonnegativeDifferenceGivesOrder
@@ -466,16 +459,15 @@ crossMultipliedInverseDexpCoefficientBounds {dataSet} {value} inputs = record
   { oneTwelfthDenominatorBelowNumerator =
       BishopProperties.≤-respˡ-≃
         (let open BishopProperties.ℝ-Solver
-         in solve 2
-            (λ denominatorBase sinValue →
+         in solve 1
+            (λ denominatorBase →
               Κ (+ 1 / 12) ⊗
                 (Κ (+ 2 / 1) ⊗ denominatorBase)
               ⊜ Κ (+ 1 / 6) ⊗ denominatorBase)
             BishopProperties.≃-refl
             (BishopReal._*_
               (square value)
-              (Elementary.bishopSin dataSet value))
-            (Elementary.bishopSin dataSet value))
+              (Elementary.bishopSin dataSet value)))
         (oneSixthSquareSinBelowNumerator inputs)
   ; numeratorBelowOneSixthDenominator =
       BishopProperties.≤-respʳ-≃
