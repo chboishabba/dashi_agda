@@ -6,9 +6,11 @@ on:
       - 'agent/ym-round11-ratio-p06-audit'
     paths:
       - 'DASHI/Physics/YangMills/BalabanBishopConfiguredTermIdentificationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopFullHalfBallParityChartExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVPolynomialDirectRatioExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP06PeriodicSupportBridgeExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP06DiameterComplexityAuditExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP11LightweightCanonicalPaymentExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionRound11*.agda'
       - 'DASHI/Physics/YangMills/BalabanClayConstructiveProducerSubmissionRound11Advance.agda'
@@ -17,9 +19,11 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanBishopConfiguredTermIdentificationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopFullHalfBallParityChartExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVPolynomialDirectRatioExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP06PeriodicSupportBridgeExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP06DiameterComplexityAuditExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP11LightweightCanonicalPaymentExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33P10Gate4DependencySpineExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionRound11*.agda'
       - 'DASHI/Physics/YangMills/BalabanClayConstructiveProducerSubmissionRound11Advance.agda'
@@ -38,5 +42,5 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
-      - name: Check direct-ratio, P06 audit and P33-P10-Gate4 roots
+      - name: Check Bishop full-ball, direct-ratio, P06/P11 and P33-P10-Gate4 roots
         run: nix develop --command bash scripts/check_yang_mills_submission_round11.sh
