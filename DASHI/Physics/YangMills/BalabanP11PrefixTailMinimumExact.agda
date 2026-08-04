@@ -24,10 +24,18 @@ open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
   ; _≤ℝ_
+  ; _*ℝ_
   ; 0ℝ
   )
 import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
 import DASHI.Physics.YangMills.BalabanP11UniformAbsorptionReductionExact as P11
+open P11.P11UniformAbsorptionInputs using
+  ( p0Minimum
+  ; p0MinimumNonnegative
+  ; cAbsNonnegative
+  ; entropyThresholdPaidAtMinimum
+  ; p0MinimumBelowEveryScale
+  )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record P11PrefixTailMinimumInputs : Set₁ where
@@ -61,21 +69,14 @@ record P11PrefixTailMinimumInputs : Set₁ where
     globalMinimumNonnegative :
       0ℝ ≤ℝ globalMinimum
 
-    cAbsNonnegative :
+    globalCAbsNonnegative :
       0ℝ ≤ℝ LargeField.c-abs
 
     entropyThresholdPaidAtGlobalMinimum :
       P11.p11EntropyThreshold ≤ℝ
-        (LargeField.c-abs LargeField.*ℝ globalMinimum)
+        (LargeField.c-abs *ℝ globalMinimum)
 
 open P11PrefixTailMinimumInputs public
-
-globalMinimumBelowEveryScale :
-  P11PrefixTailMinimumInputs →
-  ∀ scale →
-  globalMinimum → Set
-globalMinimumBelowEveryScale inputs scale =
-  globalMinimum inputs ≤ℝ LargeField.p0 scale
 
 proveGlobalMinimumBelowEveryScale :
   (inputs : P11PrefixTailMinimumInputs) →
@@ -104,15 +105,12 @@ p11UniformInputsFromPrefixTail :
   P11PrefixTailMinimumInputs →
   P11.P11UniformAbsorptionInputs
 p11UniformInputsFromPrefixTail inputs = record
-  { P11.P11UniformAbsorptionInputs.p0Minimum =
-      globalMinimum inputs
-  ; P11.P11UniformAbsorptionInputs.p0MinimumNonnegative =
-      globalMinimumNonnegative inputs
-  ; P11.P11UniformAbsorptionInputs.cAbsNonnegative =
-      cAbsNonnegative inputs
-  ; P11.P11UniformAbsorptionInputs.entropyThresholdPaidAtMinimum =
+  { p0Minimum = globalMinimum inputs
+  ; p0MinimumNonnegative = globalMinimumNonnegative inputs
+  ; cAbsNonnegative = globalCAbsNonnegative inputs
+  ; entropyThresholdPaidAtMinimum =
       entropyThresholdPaidAtGlobalMinimum inputs
-  ; P11.P11UniformAbsorptionInputs.p0MinimumBelowEveryScale =
+  ; p0MinimumBelowEveryScale =
       proveGlobalMinimumBelowEveryScale inputs
   }
 
