@@ -26,6 +26,17 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoMaximalTimeGlobalizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticTaskLedger.agda
   DASHI/Physics/Closure/NSTriadKNLuoCanonicalAnalyticFrontierReceipt.agda
+
+  DASHI/Physics/Closure/NSTriadKNLuoWeightedIncrementFourierIntegrationCutsetExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoThreePairCoefficientCutsetExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoMultiplierReceiptAndSourceSchurCutsetExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteInfiniteRealPromotionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSubmissionDependencyCutsetExact.agda
+  DASHI/Physics/Closure/NSTriadKNPeriodicNavierStokesSubmissionTheoremExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSubmissionAuditReceiptExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCoreSourceFidelityInventoryExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCriticalPathCompositionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionFrontierReceipt.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
 )
 
