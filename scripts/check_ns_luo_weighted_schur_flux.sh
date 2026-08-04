@@ -47,3 +47,11 @@ check DASHI/Physics/Closure/NSTriadKNLuoOfficialContinuationClosureExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda
 check DASHI/Physics/Closure/NSTriadKNLuoOfficialContinuationIntegration.agda
 check DASHI/Physics/Closure/NSTriadKNLocalizedBKMRouteIntegration.agda
+
+# Physical-analytic and submission-grade frontier: weighted increment kernel,
+# finite Young/Schur reducers, equation (4.2), Section 4, fixed-shift decay,
+# finite/infinite and rational/real promotion, maximal time, final theorem type
+# and audit receipts.
+check DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
+
+echo "NS Luo analytic and submission frontier check completed"
