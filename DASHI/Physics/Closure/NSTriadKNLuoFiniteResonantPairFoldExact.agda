@@ -19,14 +19,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteResonantPairFoldExact where
 -- Put the finite pair calculation on a genuine resonant output fibre.  Every
 -- element carries the equation k+l=m, and the source weighted-increment fold
 -- is proved equal to the multiplier fold whose first transform is evaluated
--- at the fixed output m.  The whole-fold theorem is obtained by induction;
--- it is not stored as a field of the fibre.
+-- at the fixed output m.  The whole-fold theorem and the exact three-piece
+-- resonant split are obtained by induction; neither is stored as a field.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCharacterWeightedIncrementExact as Character
@@ -157,6 +158,85 @@ eraseClassificationPreservesResonance :
 eraseClassificationPreservesResonance classified =
   closes (pair classified)
 
+record ResonantThreeWaySplit
+    (system : Character.FiniteCharacterSystem)
+    (output : Character.Mode system) : Set where
+  constructor resonant-three-way-split
+  field
+    rp1Pairs rp2Pairs hardTailPairs :
+      List (ResonantPair system output)
+
+open ResonantThreeWaySplit public
+
+splitClassifiedResonantPairs :
+  ∀ {system output} →
+  List (ClassifiedResonantPair system output) →
+  ResonantThreeWaySplit system output
+splitClassifiedResonantPairs [] =
+  resonant-three-way-split [] [] []
+splitClassifiedResonantPairs (classified ∷ classifiedPairs)
+  with piece classified | splitClassifiedResonantPairs classifiedPairs
+... | rp1Piece | resonant-three-way-split rp1 rp2 tail =
+  resonant-three-way-split (pair classified ∷ rp1) rp2 tail
+... | rp2Piece | resonant-three-way-split rp1 rp2 tail =
+  resonant-three-way-split rp1 (pair classified ∷ rp2) tail
+... | hardTailPiece | resonant-three-way-split rp1 rp2 tail =
+  resonant-three-way-split rp1 rp2 (pair classified ∷ tail)
+
+classifiedPairFold :
+  ∀ {system output} →
+  (ResonantPair system output → ℚ) →
+  List (ClassifiedResonantPair system output) →
+  ℚ
+classifiedPairFold coefficient [] = 0ℚ
+classifiedPairFold coefficient (classified ∷ classifiedPairs) =
+  coefficient (pair classified)
+  + classifiedPairFold coefficient classifiedPairs
+
+resonantThreeWaySplitReconstructsFold :
+  ∀ {system output}
+    (coefficient : ResonantPair system output → ℚ)
+    (classifiedPairs : List (ClassifiedResonantPair system output)) →
+  classifiedPairFold coefficient classifiedPairs
+  ≡ sumPairCoefficients coefficient
+      (rp1Pairs (splitClassifiedResonantPairs classifiedPairs))
+    + sumPairCoefficients coefficient
+        (rp2Pairs (splitClassifiedResonantPairs classifiedPairs))
+    + sumPairCoefficients coefficient
+        (hardTailPairs (splitClassifiedResonantPairs classifiedPairs))
+resonantThreeWaySplitReconstructsFold coefficient [] = solve []
+resonantThreeWaySplitReconstructsFold
+  coefficient (classified ∷ classifiedPairs)
+  with piece classified | splitClassifiedResonantPairs classifiedPairs
+     | resonantThreeWaySplitReconstructsFold coefficient classifiedPairs
+... | rp1Piece | resonant-three-way-split rp1 rp2 tail | induction =
+  rewrite induction =
+  solve
+    ( coefficient (pair classified)
+    ∷ sumPairCoefficients coefficient rp1
+    ∷ sumPairCoefficients coefficient rp2
+    ∷ sumPairCoefficients coefficient tail
+    ∷ []
+    )
+... | rp2Piece | resonant-three-way-split rp1 rp2 tail | induction =
+  rewrite induction =
+  solve
+    ( coefficient (pair classified)
+    ∷ sumPairCoefficients coefficient rp1
+    ∷ sumPairCoefficients coefficient rp2
+    ∷ sumPairCoefficients coefficient tail
+    ∷ []
+    )
+... | hardTailPiece | resonant-three-way-split rp1 rp2 tail | induction =
+  rewrite induction =
+  solve
+    ( coefficient (pair classified)
+    ∷ sumPairCoefficients coefficient rp1
+    ∷ sumPairCoefficients coefficient rp2
+    ∷ sumPairCoefficients coefficient tail
+    ∷ []
+    )
+
 finiteResonantOutputFiberConstructed : Bool
 finiteResonantOutputFiberConstructed = true
 
@@ -168,6 +248,9 @@ resonantWholeFoldIdentityClosed = true
 
 classificationErasurePreservesResonance : Bool
 classificationErasurePreservesResonance = true
+
+resonantThreeWaySplitReconstructionClosed : Bool
+resonantThreeWaySplitReconstructionClosed = true
 
 finiteResonantOutputFiberConstructedIsTrue :
   finiteResonantOutputFiberConstructed ≡ true
@@ -184,3 +267,7 @@ resonantWholeFoldIdentityClosedIsTrue = refl
 classificationErasurePreservesResonanceIsTrue :
   classificationErasurePreservesResonance ≡ true
 classificationErasurePreservesResonanceIsTrue = refl
+
+resonantThreeWaySplitReconstructionClosedIsTrue :
+  resonantThreeWaySplitReconstructionClosed ≡ true
+resonantThreeWaySplitReconstructionClosedIsTrue = refl
