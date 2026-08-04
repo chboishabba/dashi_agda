@@ -1,0 +1,34 @@
+name: Yang-Mills submission round ten
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopAlternatingInterlacingFromDecreasingTermsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineInterlacingExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanStepVPolynomialPrefixTailDominationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP06PhysicalModelLeafLightweightExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSubmissionRound10*.agda'
+      - 'scripts/check_yang_mills_submission_round10.sh'
+      - '.github/workflows/yang-mills-submission-round10.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - name: Check concrete Bishop, finite Step-V and lightweight P06 roots
+        run: nix develop --command bash scripts/check_yang_mills_submission_round10.sh

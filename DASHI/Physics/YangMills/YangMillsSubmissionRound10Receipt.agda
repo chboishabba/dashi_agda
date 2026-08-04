@@ -1,0 +1,71 @@
+module DASHI.Physics.YangMills.YangMillsSubmissionRound10Receipt where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+
+record Round10Receipt : Set where
+  field
+    branchName baseCommit : String
+
+    reciprocalFactorialDischarged : Bool
+    concreteSineCosineTermParityDischarged : Bool
+    transformedConvergenceReducedToTermParity : Bool
+    alternatingOrderClosureDischarged : Bool
+    concreteHalfBallInterlacingReducerDischarged : Bool
+    ordinaryFiniteGeometricBoundDischarged : Bool
+    polynomialFiniteSummationReducedToPointwiseDomination : Bool
+    lightweightP06LeafAdded : Bool
+
+    elementarySeriesTermIdentificationDischarged : Bool
+    physicalP06InhabitantsDischarged : Bool
+    polynomialPointwiseDominationDischarged : Bool
+    globalYangMillsEndpointDischarged : Bool
+
+    verificationBoundary : String
+
+open Round10Receipt public
+
+round10Receipt : Round10Receipt
+round10Receipt = record
+  { branchName = "agent/ym-round10-concrete-bishop-stepv"
+  ; baseCommit = "cbb606fdaab09557320164f1bb3b7744b7ebcd5c"
+  ; reciprocalFactorialDischarged = true
+  ; concreteSineCosineTermParityDischarged = true
+  ; transformedConvergenceReducedToTermParity = true
+  ; alternatingOrderClosureDischarged = true
+  ; concreteHalfBallInterlacingReducerDischarged = true
+  ; ordinaryFiniteGeometricBoundDischarged = true
+  ; polynomialFiniteSummationReducedToPointwiseDomination = true
+  ; lightweightP06LeafAdded = true
+  ; elementarySeriesTermIdentificationDischarged = false
+  ; physicalP06InhabitantsDischarged = false
+  ; polynomialPointwiseDominationDischarged = false
+  ; globalYangMillsEndpointDischarged = false
+  ; verificationBoundary =
+      "The round-ten source tranche contains no explicit postulate or hole. Kernel acceptance is asserted only after the focused Agda 2.9 checker succeeds; elementary-series identification, physical P06/P11/P10/P33/Gate-4 inputs, concrete polynomial prefix/tail estimates and global endpoint hypotheses remain fail-closed."
+  }
+
+round10ReciprocalFactorialIsDischarged :
+  reciprocalFactorialDischarged round10Receipt ≡ true
+round10ReciprocalFactorialIsDischarged = refl
+
+round10TermParityIsDischarged :
+  concreteSineCosineTermParityDischarged round10Receipt ≡ true
+round10TermParityIsDischarged = refl
+
+round10InterlacingReducerIsDischarged :
+  concreteHalfBallInterlacingReducerDischarged round10Receipt ≡ true
+round10InterlacingReducerIsDischarged = refl
+
+round10PolynomialSummationIsReduced :
+  polynomialFiniteSummationReducedToPointwiseDomination round10Receipt ≡ true
+round10PolynomialSummationIsReduced = refl
+
+round10ElementaryIdentificationRemainsOpen :
+  elementarySeriesTermIdentificationDischarged round10Receipt ≡ false
+round10ElementaryIdentificationRemainsOpen = refl
+
+round10GlobalEndpointRemainsOpen :
+  globalYangMillsEndpointDischarged round10Receipt ≡ false
+round10GlobalEndpointRemainsOpen = refl
