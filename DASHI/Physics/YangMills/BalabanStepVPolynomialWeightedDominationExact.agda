@@ -106,8 +106,8 @@ weightedPartialSumNonnegative :
   StepV.LessEqual kernel
     (StepV.zero kernel)
     (weightedPartialSum kernel (weightedTerm inputs) count)
-weightedPartialSumNonnegative inputs zero =
-  Geometric.zeroNonnegative _
+weightedPartialSumNonnegative {laws = laws} inputs zero =
+  Geometric.zeroNonnegative laws
 weightedPartialSumNonnegative
     {kernel = kernel} {laws = laws} inputs (suc count) =
   Geometric.lessEqualRespectLeft laws
@@ -133,13 +133,11 @@ weightedPartialSumDominatedByScaledGeometric :
         (chosenLargerRatio inputs) count))
 weightedPartialSumDominatedByScaledGeometric
     {kernel = kernel} {laws = laws} inputs zero =
-  Geometric.lessEqualRespectLeft laws
-    (Geometric.equivalentRefl laws (StepV.zero kernel))
-    (Geometric.lessEqualRespectLeft laws
-      (Geometric.equivalentSym laws
-        (Geometric.multiplyZeroRight laws
-          (dominationConstant inputs)))
-      (Geometric.zeroNonnegative laws))
+  Geometric.lessEqualRespectRight laws
+    (Geometric.equivalentSym laws
+      (Geometric.multiplyZeroRight laws
+        (dominationConstant inputs)))
+    (Geometric.zeroNonnegative laws)
 weightedPartialSumDominatedByScaledGeometric
     {kernel = kernel} {laws = laws} inputs (suc count) =
   let
@@ -171,7 +169,7 @@ weightedPartialSumDominatedByScaledGeometric
       Geometric.multiplyDistributesOverAddLeft laws
         constant oldGeometric newPower
   in
-  Geometric.lessEqualRespectLeft laws
+  Geometric.lessEqualRespectRight laws
     (Geometric.equivalentSym laws distributed)
     summedBound
 
@@ -189,12 +187,12 @@ allFinitePolynomialWeightedSumsBounded :
       (dominationConstant inputs)
       (StepV.uniformBound (largerRatioBound inputs)))
 allFinitePolynomialWeightedSumsBounded
-    {kernel = kernel} inputs count =
+    {kernel = kernel} {laws = laws} inputs count =
   StepV.transitive kernel
     (weightedPartialSumDominatedByScaledGeometric inputs count)
     (StepV.multiplyMonotoneNonnegative kernel
       (dominationConstantNonnegative inputs)
-      (Geometric.geometricPartialSumNonnegative _
+      (Geometric.geometricPartialSumNonnegative laws
         (StepV.ratioNonnegative (largerRatioBound inputs)) count)
       (StepV.reflexive kernel (dominationConstant inputs))
       (StepV.allFinitePartialSumsBounded
@@ -208,18 +206,18 @@ polynomiallyWeightedGeometricBoundFromDomination :
   PolynomialGeometricDomination kernel laws ratio polynomialDegree →
   StepV.PolynomiallyWeightedGeometricBound
     kernel ratio polynomialDegree
-polynomiallyWeightedGeometricBoundFromDomination inputs = record
+polynomiallyWeightedGeometricBoundFromDomination {kernel = kernel} inputs = record
   { natural = natural inputs
   ; naturalPower = naturalPower inputs
   ; weightedTerm = weightedTerm inputs
   ; weightedTermDefinition = weightedTermDefinition inputs
   ; weightedPartialSum =
-      weightedPartialSum _ (weightedTerm inputs)
+      weightedPartialSum kernel (weightedTerm inputs)
   ; weightedPartialSumDefinition = λ count →
-      weightedPartialSum _ (weightedTerm inputs) count
-      ≡ weightedPartialSum _ (weightedTerm inputs) count
+      weightedPartialSum kernel (weightedTerm inputs) count
+      ≡ weightedPartialSum kernel (weightedTerm inputs) count
   ; uniformWeightedBound =
-      StepV.multiply _
+      StepV.multiply kernel
         (dominationConstant inputs)
         (StepV.uniformBound (largerRatioBound inputs))
   ; allFiniteWeightedSumsBounded =
@@ -230,11 +228,11 @@ polynomiallyWeightedGeometricBoundFromDomination inputs = record
       StepV.ratioBelowOne (largerRatioBound inputs)
   ; eventualPolynomialAbsorption =
       ∀ index →
-      StepV.LessEqual _
+      StepV.LessEqual kernel
         (weightedTerm inputs index)
-        (StepV.multiply _
+        (StepV.multiply kernel
           (dominationConstant inputs)
-          (StepV.power _ (chosenLargerRatio inputs) index))
+          (StepV.power kernel (chosenLargerRatio inputs) index))
   ; eventualPolynomialAbsorptionEvidence =
       pointwisePolynomialGeometricDomination inputs
   }
