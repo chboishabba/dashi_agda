@@ -30,13 +30,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using ([]; _∷_)
 open import Data.Nat.Base using (NonZero)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import Tactic.RingSolver as Solver
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicLatticeBonds using
-  (DirectedBond4; target)
+  (DirectedBond4; source; target)
 open import DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance using
   (DirectedGaugeField4)
 import DASHI.Physics.YangMills.BalabanLatticeAdjointCovariantDerivative as Derivative
@@ -100,7 +100,7 @@ covariantDerivativeDifferenceExact gaugeField pointField bond
   lieSubtractCommonRight
     (su2Adjoint (gaugeField bond) (pointField (target bond)))
     (pointField (target bond))
-    (pointField (Derivative.source bond))
+    (pointField (source bond))
 
 record NormedAdjointDefectApplication (Bound : Set) : Set₁ where
   field
