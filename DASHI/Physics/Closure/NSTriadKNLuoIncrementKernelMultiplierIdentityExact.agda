@@ -24,18 +24,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelMultiplierIdentityExact 
 --   highHigh    = (1-chiK)(1-chiL),
 --   lowLow      = chiK chiL,
 --
--- and
---
---   rMultiplier - highHigh + lowLow = chiOutput.
---
--- Thus the remaining analytic Fourier theorem only needs to identify the
--- spatial increment integral with rMultiplier.  The projected-tensor identity
--- is an exact rational ring consequence, not a separate analytic assumption.
+-- and rMultiplier - highHigh + lowLow = chiOutput.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([])
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational using (ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
@@ -57,7 +51,7 @@ luoIncrementMultiplierIdentity :
     + lowLowMultiplier chiK chiL
   ≡ chiOutput
 luoIncrementMultiplierIdentity chiK chiL chiOutput =
-  ℚRing.solve-∀
+  ℚRing.solve (chiK ∷ chiL ∷ chiOutput ∷ [])
 
 record ResonantMultiplierData : Set where
   field
@@ -129,7 +123,13 @@ spatialIncrementGivesProjectedProductCoefficient identification
         | highHighProductCoefficientMeaning identification
         | lowLowProductCoefficientMeaning identification
         | projectedProductCoefficientMeaning identification =
-  ℚRing.solve-∀
+  ℚRing.solve
+    (incrementKernelCoefficient (multiplierData identification)
+      ∷ highHighCoefficient (multiplierData identification)
+      ∷ lowLowCoefficient (multiplierData identification)
+      ∷ projectedProductMultiplier (multiplierData identification)
+      ∷ triadCoefficient identification
+      ∷ [])
 
 incrementMultiplierAlgebraClosed : Bool
 incrementMultiplierAlgebraClosed = true
