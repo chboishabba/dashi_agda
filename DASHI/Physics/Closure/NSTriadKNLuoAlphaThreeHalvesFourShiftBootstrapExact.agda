@@ -45,7 +45,7 @@ one = suc zero
 four : Nat
 four = suc (suc (suc (suc zero)))
 
-blockShiftIsFourTimesOne : Alpha.fourTimes one ≡ four
+blockShiftIsFourTimesOne : four ≡ Alpha.fourTimes one
 blockShiftIsFourTimesOne = refl
 
 boundaryCoefficient smallness absorbedCoefficient : ℚ
