@@ -15,12 +15,18 @@ module DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact where
 -- DOI: 10.1007/s00021-019-0411-z.
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
+-- Authors: Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin.
+-- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
+-- Springer, 2011.
+-- DOI: 10.1007/978-3-642-16830-7.
+--
 -- PURPOSE
 -- Isolate the exact energy-flux algebra used before Luo's small-time
--- bootstrap.  Hard high-pass idempotence and self-adjointness are closed for
--- the selected coefficient-unitary Hermitian pairing.  The official physical
--- L2 identification remains fail-closed until the repository's finite-sum
--- norm adapter supplies that Parseval leaf on the same carrier.
+-- bootstrap. Hard high-pass idempotence and self-adjointness are closed for
+-- the repository's selected official finite Hermitian/Parseval convention.
+-- The remaining physical adapter fields concern derivative commutation,
+-- divergence-free pressure cancellation, exact convection enumeration and
+-- quantity agreement on the same official solution carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -33,6 +39,8 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact
   as Flux
 import DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact
   as Orthogonal
+import DASHI.Physics.Closure.NSTriadKNOfficialFiniteFourierHermitianParsevalExact
+  as OfficialParseval
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact
   as PhysicalReuse
 
@@ -85,7 +93,8 @@ record PeriodicProjectedConvectionFluxAdapter : Set₁ where
     hardHighPassProjectorSelfAdjoint : HardHighPassProjectorSelfAdjoint
 
     HardHighPassCommutesWithDerivative : Set
-    hardHighPassCommutesWithDerivative : HardHighPassCommutesWithDerivative
+    hardHighPassCommutesWithDerivative :
+      HardHighPassCommutesWithDerivative
 
     PeriodicVelocityDivergenceFree : Set
     periodicVelocityDivergenceFree : PeriodicVelocityDivergenceFree
@@ -142,7 +151,7 @@ coefficientUnitaryHardHighPassSelfAdjointnessClosed =
 
 periodicHardHighPassSelfAdjointnessClosed : Bool
 periodicHardHighPassSelfAdjointnessClosed =
-  Orthogonal.officialPhysicalHermitianParsevalTransportSelected
+  OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructed
 
 literalProjectedConvectionEnumerationClosed : Bool
 literalProjectedConvectionEnumerationClosed =
@@ -168,10 +177,10 @@ coefficientUnitaryHardHighPassSelfAdjointnessClosedIsTrue :
 coefficientUnitaryHardHighPassSelfAdjointnessClosedIsTrue =
   Orthogonal.coefficientUnitaryHardProjectorOrthogonalConstructedIsTrue
 
-periodicHardHighPassSelfAdjointnessClosedIsFalse :
-  periodicHardHighPassSelfAdjointnessClosed ≡ false
-periodicHardHighPassSelfAdjointnessClosedIsFalse =
-  Orthogonal.officialPhysicalHermitianParsevalTransportSelectedIsFalse
+periodicHardHighPassSelfAdjointnessClosedIsTrue :
+  periodicHardHighPassSelfAdjointnessClosed ≡ true
+periodicHardHighPassSelfAdjointnessClosedIsTrue =
+  OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructedIsTrue
 
 literalProjectedConvectionEnumerationClosedIsTrue :
   literalProjectedConvectionEnumerationClosed ≡ true
