@@ -14,6 +14,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterMultiplierBridgeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTranslationTensorConvolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteResonantPairFoldExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedIncrementFubiniExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteThreePairCoefficientExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreeWayPairPartitionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
