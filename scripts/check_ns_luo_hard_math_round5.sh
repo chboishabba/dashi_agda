@@ -11,6 +11,15 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFinitePhysicalSection4BudgetDerivationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteJ12CommutatorDerivativeGainExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteJ2HighHighGapExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceWeightedJ11Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedCauchyExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ1J2CombinationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ12FiveShellExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ11HalfRangeDerivedExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ12CriterionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ2CriterionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ1CriterionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceSection4NonlinearExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalWindowPropagationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoAlphaThreeHalvesFourShiftBootstrapExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFourResidueBlockDecayExact.agda
