@@ -16,6 +16,8 @@ concurrency:
 
 permissions:
   contents: read
+  issues: write
+  pull-requests: write
 
 jobs:
   ns-luo-agda:
@@ -23,9 +25,31 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+
+      - name: Package exact checked source
+        shell: bash
+        run: git archive --format=tar.gz --output=dashi-round5-source.tar.gz HEAD
+
+      - name: Upload exact checked source
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-round5-source-${{ github.sha }}
+          path: dashi-round5-source.tar.gz
+          if-no-files-found: error
+
+      - name: Publish focused run id
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/issues/376/comments" \
+            -f body="Round-five focused validation run: ${GITHUB_RUN_ID}; head: ${GITHUB_SHA}"
+
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Check Luo round-five hard math with Agda 2.9
         id: check
         shell: bash
@@ -44,6 +68,7 @@ jobs:
           echo "status=$status" >> "$GITHUB_OUTPUT"
           tail -n 220 ns-luo-round5-check.log
           exit 0
+
       - name: Upload Luo round-five check log
         if: always()
         uses: actions/upload-artifact@v4
@@ -51,6 +76,7 @@ jobs:
           name: ns-luo-round5-check-log
           path: ns-luo-round5-check.log
           if-no-files-found: error
+
       - name: Fail on Agda error
         if: steps.check.outputs.status != '0'
         run: exit 1
