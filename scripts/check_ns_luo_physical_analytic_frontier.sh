@@ -18,6 +18,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoSection4PhysicalBoundsAdapterExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFixedShiftRecursionReductionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoOfficialFixedShiftCoreExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyOfficialUpgradeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoMaximalTimeGlobalizationExact.agda
