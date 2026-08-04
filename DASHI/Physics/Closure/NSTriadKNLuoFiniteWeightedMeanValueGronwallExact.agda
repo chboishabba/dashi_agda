@@ -67,12 +67,13 @@ scaleOneStepBound :
   scale * next
   ≤ (1ℚ + Gronwall.growth stepValue) * (scale * current)
     + scale * Gronwall.forcing stepValue
-scaleOneStepBound scale scaleNonnegative stepValue originalBound =
+scaleOneStepBound
+  scale scaleNonnegative stepValue {current} {next} originalBound =
   let
     scaledRaw :
-      scale * nextValue
+      scale * next
       ≤ scale
-        * ((1ℚ + Gronwall.growth stepValue) * currentValue
+        * ((1ℚ + Gronwall.growth stepValue) * current
           + Gronwall.forcing stepValue)
     scaledRaw =
       let instance scaleIsNonnegative = nonNegative scaleNonnegative
@@ -80,26 +81,23 @@ scaleOneStepBound scale scaleNonnegative stepValue originalBound =
 
     targetMeaning :
       scale
-        * ((1ℚ + Gronwall.growth stepValue) * currentValue
+        * ((1ℚ + Gronwall.growth stepValue) * current
           + Gronwall.forcing stepValue)
-      ≡ (1ℚ + Gronwall.growth stepValue) * (scale * currentValue)
+      ≡ (1ℚ + Gronwall.growth stepValue) * (scale * current)
         + scale * Gronwall.forcing stepValue
     targetMeaning =
       solve
         ( scale
         ∷ Gronwall.growth stepValue
-        ∷ currentValue
+        ∷ current
         ∷ Gronwall.forcing stepValue
         ∷ []
         )
   in
   subst
-    (λ upper → scale * nextValue ≤ upper)
+    (λ upper → scale * next ≤ upper)
     targetMeaning
     scaledRaw
-  where
-  currentValue = _
-  nextValue = _
 
 scalePath :
   (scale : ℚ) →
