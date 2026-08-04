@@ -29,6 +29,8 @@ open import Relation.Binary.PropositionalEquality using
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRationalCong)
+open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
+  (sq)
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 
@@ -75,14 +77,12 @@ coordinateNormEncodeDecodeExact vector =
       (sumRationalCong
         Coordinates.physicalSU2Coordinates4
         (λ coordinate →
-          DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact.sq
+          sq
             (Coordinates.encodePhysicalSU2
               (Coordinates.decodePhysicalSU2 vector) coordinate))
+        (λ coordinate → sq (vector coordinate))
         (λ coordinate →
-          DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact.sq
-            (vector coordinate))
-        (λ coordinate →
-          cong DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact.sq
+          cong sq
             (Coordinates.encodeAfterDecodePointwise vector coordinate))))
     (Coordinates.encodePhysicalSU2NormSqExact
       (Coordinates.decodePhysicalSU2 vector))
