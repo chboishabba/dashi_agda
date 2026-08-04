@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact where
 
 open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
+open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_; 0ℚᵘ)
 import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
@@ -195,6 +195,33 @@ polynomialTaylorBounds {value = value} inputs =
           (Taylor.cosineUpper brackets)
     }
 
+orderGivesNonnegativeDifference :
+  ∀ {left right} →
+  BishopReal._≤_ left right →
+  BishopReal._≤_ BishopReal.0ℝ (BishopReal._-_ right left)
+orderGivesNonnegativeDifference {left} {right} leftBelowRight =
+  BishopProperties.≤-respˡ-≃
+    (let open BishopProperties.ℝ-Solver
+     in solve 1
+        (λ x → Κ 0ℚᵘ ⊜ x ⊖ x)
+        BishopProperties.≃-refl left)
+    (BishopProperties.+-monoˡ-≤
+      (BishopReal.- left) leftBelowRight)
+
+lowerTaylorGivesDefectUpper :
+  ∀ {center error value} →
+  BishopReal._≤_ (BishopReal._-_ center error) value →
+  BishopReal._≤_ (BishopReal._-_ center value) error
+lowerTaylorGivesDefectUpper {center} {error} {value} lowerBound =
+  BishopProperties.≤-respʳ-≃
+    (let open BishopProperties.ℝ-Solver
+     in solve 2
+        (λ center error →
+          center ⊕ (⊝ (center ⊖ error)) ⊜ error)
+        BishopProperties.≃-refl center error)
+    (BishopProperties.+-monoʳ-≤ center
+      (BishopProperties.neg-mono-≤ lowerBound))
+
 record DefectTaylorBounds
     (dataSet : Elementary.BishopElementaryPowerSeriesData)
     (value : BishopReal.ℝ) : Set₁ where
@@ -225,19 +252,17 @@ defectTaylorBounds :
   ∀ {dataSet value} →
   Concrete.ConcreteHalfBallSeriesInputs dataSet value →
   DefectTaylorBounds dataSet value
-defectTaylorBounds {dataSet} {value} inputs =
+defectTaylorBounds inputs =
   let bounds = polynomialTaylorBounds inputs
   in record
     { sineDefectNonnegative =
-        BishopProperties.x≤y⇒0≤y-x (sineLinearUpper bounds)
+        orderGivesNonnegativeDifference (sineLinearUpper bounds)
     ; sineDefectBelowCubic =
-        BishopProperties.x-y≤z⇒x-z≤y
-          (sineCubicLower bounds)
+        lowerTaylorGivesDefectUpper (sineCubicLower bounds)
     ; cosineDefectNonnegative =
-        BishopProperties.x≤y⇒0≤y-x (cosineOneUpper bounds)
+        orderGivesNonnegativeDifference (cosineOneUpper bounds)
     ; cosineDefectBelowQuadratic =
-        BishopProperties.x-y≤z⇒x-z≤y
-          (cosineQuadraticLower bounds)
+        lowerTaylorGivesDefectUpper (cosineQuadraticLower bounds)
     }
 
 p33BishopPolynomialTaylorLevel : ProofLevel
