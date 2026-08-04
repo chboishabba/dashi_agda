@@ -4,8 +4,9 @@ module DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact where
 -- PROVENANCE
 --
 -- Bureau International des Poids et Mesures,
--- "The International System of Units (SI)", ninth edition, 2019,
--- updated in 2022. No DOI assigned by BIPM.
+-- "The International System of Units (SI)", ninth edition (2019),
+-- current version 4.01, June 2026.
+-- DOI: 10.59161/AUEZ1291.
 --
 -- Edgar Buckingham,
 -- "On Physically Similar Systems; Illustrations of the Use of Dimensional
@@ -36,7 +37,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.Units.MechanicalDimensionExact as Mechanical
 import DASHI.Physics.Units.PhysicalNormalizationExact as Normalization
-import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact as T5Dimension
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 mechanicalToSI : Mechanical.MechanicalDimension → SI.Dimension
