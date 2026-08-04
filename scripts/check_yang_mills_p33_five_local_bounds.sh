@@ -13,6 +13,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33SU2EuclideanGeometryExact.agda
   DASHI/Physics/YangMills/BalabanP33BishopLowOrderTaylorBracketsExact.agda
   DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
+  DASHI/Physics/YangMills/BalabanP33BishopSU2AdDexpNumeratorBoundsExact.agda
   DASHI/Physics/YangMills/BalabanP33SU2Radius8192EnvelopeExact.agda
   DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralCovariantDerivativeDifferenceExact.agda
@@ -24,6 +25,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33AbsoluteFiniteAtomAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda
   DASHI/Physics/YangMills/BalabanP33CurvatureAtomGeometryExact.agda
+  DASHI/Physics/YangMills/BalabanP33WilsonPlaquetteSecondVariationPlacementsExact.agda
   DASHI/Physics/YangMills/BalabanP33FiveSandwichSignedFormExact.agda
   DASHI/Physics/YangMills/BalabanP33SandwichLocalFamilyExact.agda
   DASHI/Physics/YangMills/BalabanP33FiveSandwichLocalCoercivityExact.agda
@@ -32,6 +34,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33PhysicalSU2FiniteCoordinatesExact.agda
   DASHI/Physics/YangMills/BalabanP33ThreeComponentCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalSU2MatrixCoercivityExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalSU2CauchyInverseSquaredExact.agda
   DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda
   DASHI/Physics/YangMills/BalabanP33FiniteWeightedRowSumContractionExact.agda
   DASHI/Physics/YangMills/BalabanP33FiniteWeightedSupportCountHalfExact.agda
@@ -44,7 +47,7 @@ for file in "${files[@]}"; do
 done
 
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}' "${files[@]}"; then
-  echo "Five-local-bound tranche contains an explicit postulate or hole" >&2
+  echo "P33 hard-math tranche contains an explicit postulate or hole" >&2
   exit 1
 fi
 
@@ -57,6 +60,8 @@ grep -q 'lowOrderTaylorBrackets' DASHI/Physics/YangMills/BalabanP33BishopLowOrde
 grep -q 'sineFirstOmittedTail' DASHI/Physics/YangMills/BalabanP33BishopLowOrderTaylorBracketsExact.agda
 grep -q 'polynomialTaylorBounds' DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
 grep -q 'defectTaylorBounds' DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
+grep -q 'adScalarNumeratorBelowTaylorEnvelope' DASHI/Physics/YangMills/BalabanP33BishopSU2AdDexpNumeratorBoundsExact.agda
+grep -q 'dexpScalarNumeratorBelowTaylorEnvelope' DASHI/Physics/YangMills/BalabanP33BishopSU2AdDexpNumeratorBoundsExact.agda
 grep -q 'adEnvelopeAtHalfRadiusBelowConfiguredRadius' DASHI/Physics/YangMills/BalabanP33SU2Radius8192EnvelopeExact.agda
 grep -q 'dexpPairEnvelopeAtRadiusBelowTwiceRadius' DASHI/Physics/YangMills/BalabanP33SU2Radius8192EnvelopeExact.agda
 grep -q 'dexpPairNormBelowTwoRadius' DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda
@@ -70,6 +75,8 @@ grep -q 'fromAbsoluteFixedAtomExpansion' DASHI/Physics/YangMills/BalabanP33Absol
 grep -q 'configuredSignedAtomsGivePath4PhysicalCoercivity' DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda
 grep -q 'curvatureAtomsAreGeometricDecomposition' DASHI/Physics/YangMills/BalabanP33CurvatureAtomGeometryExact.agda
 grep -q 'curvatureAtomCountExact' DASHI/Physics/YangMills/BalabanP33CurvatureAtomGeometryExact.agda
+grep -q 'plaquetteSecondVariationPlacementCountExact' DASHI/Physics/YangMills/BalabanP33WilsonPlaquetteSecondVariationPlacementsExact.agda
+grep -q 'orderedPairsAreSixTwoOrientationFibres' DASHI/Physics/YangMills/BalabanP33WilsonPlaquetteSecondVariationPlacementsExact.agda
 grep -q 'constraintSignedFormBound' DASHI/Physics/YangMills/BalabanP33FiveSandwichSignedFormExact.agda
 grep -q 'localSandwichRemainderBound' DASHI/Physics/YangMills/BalabanP33SandwichLocalFamilyExact.agda
 grep -q 'fiveSandwichLocalChannelsGiveP33Floor' DASHI/Physics/YangMills/BalabanP33FiveSandwichLocalCoercivityExact.agda
@@ -79,6 +86,8 @@ grep -q 'encodePhysicalSU2NormSqExact' DASHI/Physics/YangMills/BalabanP33Physica
 grep -q 'physicalMatrixQuadraticRealizationExact' DASHI/Physics/YangMills/BalabanP33PhysicalSU2FiniteCoordinatesExact.agda
 grep -q 'threeComponentP33Floor' DASHI/Physics/YangMills/BalabanP33ThreeComponentCoercivityExact.agda
 grep -q 'physicalP33FloorTransfersToEveryCoordinate' DASHI/Physics/YangMills/BalabanP33PhysicalSU2MatrixCoercivityExact.agda
+grep -q 'physicalCoordinateCauchySchwarzSquared' DASHI/Physics/YangMills/BalabanP33PhysicalSU2CauchyInverseSquaredExact.agda
+grep -q 'p33PhysicalInverseSquaredBoundForPositivePreimage' DASHI/Physics/YangMills/BalabanP33PhysicalSU2CauchyInverseSquaredExact.agda
 grep -q 'p33InverseNormAtMostThirtyTwo' DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda
 grep -q 'weightedKernelContraction' DASHI/Physics/YangMills/BalabanP33FiniteWeightedRowSumContractionExact.agda
 grep -q 'weightedRowBelowHalf' DASHI/Physics/YangMills/BalabanP33FiniteWeightedSupportCountHalfExact.agda
@@ -87,12 +96,14 @@ grep -q 'weightedResidualHalfPowerBound' DASHI/Physics/YangMills/BalabanP33Weigh
 
 grep -q 'arXiv:2205.08354' DASHI/Physics/YangMills/BalabanP33BishopLowOrderTaylorBracketsExact.agda
 grep -q 'arXiv:2205.08354' DASHI/Physics/YangMills/BalabanP33BishopTaylorPolynomialFormExact.agda
+grep -q 'arXiv:2205.08354' DASHI/Physics/YangMills/BalabanP33BishopSU2AdDexpNumeratorBoundsExact.agda
 grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanP33CurvatureAtomGeometryExact.agda
 grep -q '10.1007/BF01211042' DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda
 grep -q '10.1007/978-3-319-13467-3' DASHI/Physics/YangMills/BalabanP33SU2EuclideanGeometryExact.agda
 grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/YangMills/BalabanP33CMP109FourStageAllocatedBudgetExact.agda
 grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanP33PhysicalSU2MatrixCoercivityExact.agda
+grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanP33PhysicalSU2CauchyInverseSquaredExact.agda
 grep -q '10.1007/BF01215223' DASHI/Physics/YangMills/BalabanP33CMP109FourStageAllocatedBudgetExact.agda
-grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanP33CurvatureAtomGeometryExact.agda
+grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanP33WilsonPlaquetteSecondVariationPlacementsExact.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda
