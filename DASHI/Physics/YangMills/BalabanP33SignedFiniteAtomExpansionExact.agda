@@ -37,10 +37,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; -_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT3LiteralPointwiseHessianEstimatesExact as Pointwise
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33PrimitiveOperatorNormLocalBoundsExact as Primitive
 import DASHI.Physics.YangMills.BalabanP33FiniteSignedRemainderSummationExact as Signed
 
@@ -72,6 +73,14 @@ sumMappedTwoSided (atom ∷ atoms) value majorant atomBound =
     (sumMapped atoms majorant)
     (atomBound atom)
     (sumMappedTwoSided atoms value majorant atomBound)
+
+mappedSumEqualsLiteralSum :
+  ∀ {Cell : Set} (cells : List Cell) (charge : Cell → ℚ) →
+  Pointwise.sumℚ (map charge cells)
+  ≡ Sums.sumRational cells charge
+mappedSumEqualsLiteralSum [] charge = refl
+mappedSumEqualsLiteralSum (cell ∷ cells) charge
+  rewrite mappedSumEqualsLiteralSum cells charge = refl
 
 record SignedFixedAtomExpansion
     (Background State Cell Atom : Set)
@@ -210,7 +219,13 @@ asFiniteSignedRemainderFamily
           (Primitive.lower
             (signedFiniteAtomExpansionBound local background state cell))
   ; Signed.FiniteSignedRemainderFamily.incidenceNormBound =
-      incidenceNormBound globalization
+      λ background state →
+        subst
+          (λ lower → lower ≤ globalNormSq globalization background state)
+          (mappedSumEqualsLiteralSum
+            (cells globalization background)
+            (localCharge local background state))
+          (incidenceNormBound globalization background state)
   }
 
 signedAtomFiniteInductionLevel : ProofLevel
