@@ -26,7 +26,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; _≤_)
-import Data.Rational.Properties as ℚₚ
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Sum
@@ -90,16 +90,55 @@ weightedJ2 data =
     (λ step → sourceWeight data step * J2 data step)
     (Nonuniform.lastStep (cutoffEnergy data))
 
+associatedWeightedFlux : NonuniformEquation42SourceData → ℚ
+associatedWeightedFlux data =
+  Sum.sumTo
+    (λ step → sourceWeight data step * (J1 data step + J2 data step))
+    (Nonuniform.lastStep (cutoffEnergy data))
+
+sumToCong :
+  (left right : Nat → ℚ) →
+  (cutoff : Nat) →
+  ((step : Nat) → left step ≡ right step) →
+  Sum.sumTo left cutoff ≡ Sum.sumTo right cutoff
+sumToCong left right zero pointwise = pointwise zero
+sumToCong left right (suc cutoff) pointwise
+  rewrite pointwise (suc cutoff)
+        | sumToCong left right cutoff pointwise = refl
+
+weightedFluxAssociation :
+  (data : NonuniformEquation42SourceData) →
+  Nonuniform.nonuniformWeightedFlux (sourceResolvedCutoffData data)
+  ≡ associatedWeightedFlux data
+weightedFluxAssociation data =
+  sumToCong
+    (λ step →
+      Nonuniform.cutoff (cutoffEnergy data) step
+      * (Nonuniform.stepLength (cutoffEnergy data) step
+        * (J1 data step + J2 data step)))
+    (λ step → sourceWeight data step * (J1 data step + J2 data step))
+    (Nonuniform.lastStep (cutoffEnergy data))
+    (λ step →
+      solve
+        ( Nonuniform.cutoff (cutoffEnergy data) step
+        ∷ Nonuniform.stepLength (cutoffEnergy data) step
+        ∷ J1 data step
+        ∷ J2 data step
+        ∷ []
+        ))
+
 sourceResolvedWeightedFluxSplit :
   (data : NonuniformEquation42SourceData) →
   Nonuniform.nonuniformWeightedFlux (sourceResolvedCutoffData data)
   ≡ weightedJ1 data + weightedJ2 data
 sourceResolvedWeightedFluxSplit data =
-  Cutoff.sumWeightedAdditiveSplit
-    (sourceWeight data)
-    (J1 data)
-    (J2 data)
-    (Nonuniform.lastStep (cutoffEnergy data))
+  trans
+    (weightedFluxAssociation data)
+    (Cutoff.sumWeightedAdditiveSplit
+      (sourceWeight data)
+      (J1 data)
+      (J2 data)
+      (Nonuniform.lastStep (cutoffEnergy data)))
 
 finiteNonuniformEquation42SourceBound :
   (data : NonuniformEquation42SourceData) →
