@@ -6,6 +6,8 @@ import DASHI.Foundations.JPlusOneMarkedUnitExtension
 import DASHI.Reasoning.TypedHyperfabricCore
 import DASHI.Reasoning.RSITypedDependencyHyperfabric
 import DASHI.Reasoning.SinthomeTypedStabilisation
+import DASHI.Reasoning.SinthomeFiniteWitness
+import DASHI.Reasoning.PNFTypedDependencyAdapters
 import DASHI.Reasoning.TypedDependencyUpgradeAtlas
 import DASHI.Reasoning.PathologicConstraintSystem
 import DASHI.Reasoning.PathologicPerspectiveHyperfabric
