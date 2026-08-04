@@ -35,6 +35,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNPeriodicNavierStokesSubmissionTheoremExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSubmissionAuditReceiptExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCoreSourceFidelityInventoryExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSubmissionLemmaCrosswalkExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCriticalPathCompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionFrontierReceipt.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
