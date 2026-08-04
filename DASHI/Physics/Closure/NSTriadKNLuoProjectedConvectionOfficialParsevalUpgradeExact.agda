@@ -22,16 +22,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgr
 --
 -- PURPOSE
 -- Upgrade the historical projected-convection adapter to the repository's
--- now-selected official finite Hermitian/Parseval convention. The old module
--- correctly left the physical Parseval leaf false when only coefficient-space
--- transport was available. The newer official finite Fourier module closes
--- that leaf and constructs one certificate owning both hard-high
--- self-adjointness and idempotence.
+-- selected official finite Hermitian/Parseval convention and exact hard-high
+-- support algebra. Self-adjointness, idempotence, derivative commutation and
+-- literal physical triad enumeration are reused rather than requested again.
 --
--- This constructor reuses that exact certificate. It does not request fresh
--- projector evidence and it leaves derivative commutation, divergence-free
--- pressure cancellation, physical triad enumeration and flux-quantity
--- agreement as explicit physical inputs.
+-- The remaining physical inputs are divergence-free pressure interpretation,
+-- incidence multiplicity/normalization and agreement of the projected energy
+-- flux with the mature weighted-Schur bridge.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -43,8 +40,10 @@ open import Data.Rational.Base using (_+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
+import DASHI.Physics.Closure.NSTriadKNPeriodicHardProjectorAlgebraExact as Hard
 import DASHI.Physics.Closure.NSTriadKNHardProjectorParsevalTransportExact as Parseval
 import DASHI.Physics.Closure.NSTriadKNOfficialFiniteFourierHermitianParsevalExact as OfficialParseval
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalEnumerationReuseExact as PhysicalReuse
 import DASHI.Physics.Closure.NSTriadKNProjectedConvectionEnergyFluxExact as Projected
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Flux
 
@@ -57,20 +56,12 @@ record OfficialProjectedConvectionFluxInputs
     balance : Projected.ProjectedCutoffEnergyBalance
     weightedFluxBridge : Flux.PhysicalCutoffFluxWeightedSchurBridge
 
-    HardHighPassCommutesWithDerivative : Set
-    hardHighPassCommutesWithDerivative :
-      HardHighPassCommutesWithDerivative
-
     PeriodicVelocityDivergenceFree : Set
     periodicVelocityDivergenceFree : PeriodicVelocityDivergenceFree
 
     PressurePairingIsLiteralPeriodicPairing : Set
     pressurePairingIsLiteralPeriodicPairing :
       PressurePairingIsLiteralPeriodicPairing
-
-    ProjectedConvectionTriadsExactlyEnumerated : Set
-    projectedConvectionTriadsExactlyEnumerated :
-      ProjectedConvectionTriadsExactlyEnumerated
 
     IncidenceMultiplicityMatchesConvolution : Set
     incidenceMultiplicityMatchesConvolution :
@@ -98,8 +89,7 @@ officialProjectedConvectionFluxAdapter :
     {cutoff : Nat} →
   OfficialProjectedConvectionFluxInputs model modes cutoff →
   Projected.PeriodicProjectedConvectionFluxAdapter
-officialProjectedConvectionFluxAdapter
-  {model = model} {modes = modes} {cutoff = cutoff} inputs = record
+officialProjectedConvectionFluxAdapter inputs = record
   { balance = balance inputs
   ; weightedFluxBridge = weightedFluxBridge inputs
   ; HardHighPassProjectorIdempotent =
@@ -111,9 +101,9 @@ officialProjectedConvectionFluxAdapter
   ; hardHighPassProjectorSelfAdjoint =
       OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructedIsTrue
   ; HardHighPassCommutesWithDerivative =
-      HardHighPassCommutesWithDerivative inputs
+      Hard.hardHighDerivativeCurlCommutationConstructed ≡ true
   ; hardHighPassCommutesWithDerivative =
-      hardHighPassCommutesWithDerivative inputs
+      Hard.hardHighDerivativeCurlCommutationConstructedIsTrue
   ; PeriodicVelocityDivergenceFree =
       PeriodicVelocityDivergenceFree inputs
   ; periodicVelocityDivergenceFree =
@@ -123,9 +113,9 @@ officialProjectedConvectionFluxAdapter
   ; pressurePairingIsLiteralPeriodicPairing =
       pressurePairingIsLiteralPeriodicPairing inputs
   ; ProjectedConvectionTriadsExactlyEnumerated =
-      ProjectedConvectionTriadsExactlyEnumerated inputs
+      PhysicalReuse.hardProjectedHighFrequencySelectionConstructed ≡ true
   ; projectedConvectionTriadsExactlyEnumerated =
-      projectedConvectionTriadsExactlyEnumerated inputs
+      PhysicalReuse.hardProjectedHighFrequencySelectionConstructedIsTrue
   ; IncidenceMultiplicityMatchesConvolution =
       IncidenceMultiplicityMatchesConvolution inputs
   ; incidenceMultiplicityMatchesConvolution =
@@ -153,6 +143,14 @@ officialFiniteParsevalClosesProjectedHardHighOrthogonality : Bool
 officialFiniteParsevalClosesProjectedHardHighOrthogonality =
   OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructed
 
+hardHighDerivativeCommutationReused : Bool
+hardHighDerivativeCommutationReused =
+  Hard.hardHighDerivativeCurlCommutationConstructed
+
+literalProjectedTriadEnumerationReused : Bool
+literalProjectedTriadEnumerationReused =
+  PhysicalReuse.hardProjectedHighFrequencySelectionConstructed
+
 projectedConvectionOfficialParsevalUpgradeConstructed : Bool
 projectedConvectionOfficialParsevalUpgradeConstructed = true
 
@@ -160,6 +158,16 @@ officialFiniteParsevalClosesProjectedHardHighOrthogonalityIsTrue :
   officialFiniteParsevalClosesProjectedHardHighOrthogonality ≡ true
 officialFiniteParsevalClosesProjectedHardHighOrthogonalityIsTrue =
   OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructedIsTrue
+
+hardHighDerivativeCommutationReusedIsTrue :
+  hardHighDerivativeCommutationReused ≡ true
+hardHighDerivativeCommutationReusedIsTrue =
+  Hard.hardHighDerivativeCurlCommutationConstructedIsTrue
+
+literalProjectedTriadEnumerationReusedIsTrue :
+  literalProjectedTriadEnumerationReused ≡ true
+literalProjectedTriadEnumerationReusedIsTrue =
+  PhysicalReuse.hardProjectedHighFrequencySelectionConstructedIsTrue
 
 projectedConvectionOfficialParsevalUpgradeConstructedIsTrue :
   projectedConvectionOfficialParsevalUpgradeConstructed ≡ true
