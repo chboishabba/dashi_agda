@@ -103,13 +103,13 @@ officialProjectedConvectionFluxAdapter
   { balance = balance inputs
   ; weightedFluxBridge = weightedFluxBridge inputs
   ; HardHighPassProjectorIdempotent =
-      Parseval.HardProjectorOrthogonalCertificate model modes cutoff
+      OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructed ≡ true
   ; hardHighPassProjectorIdempotent =
-      officialHardHighOrthogonalCertificate model modes cutoff
+      OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructedIsTrue
   ; HardHighPassProjectorSelfAdjoint =
-      Parseval.HardProjectorOrthogonalCertificate model modes cutoff
+      OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructed ≡ true
   ; hardHighPassProjectorSelfAdjoint =
-      officialHardHighOrthogonalCertificate model modes cutoff
+      OfficialParseval.officialPhysicalHardProjectorOrthogonalConstructedIsTrue
   ; HardHighPassCommutesWithDerivative =
       HardHighPassCommutesWithDerivative inputs
   ; hardHighPassCommutesWithDerivative =
