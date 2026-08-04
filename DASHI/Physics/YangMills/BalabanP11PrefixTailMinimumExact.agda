@@ -126,8 +126,6 @@ record P11PrefixTailAnalyticInputs : Set₁ where
       P11.p11EntropyThreshold ≤ℝ
         (LargeField.c-abs *ℝ globalMinimum)
 
-open P11PrefixTailAnalyticInputs public
-
 prefixTailInputsFromAnalytic :
   P11PrefixTailAnalyticInputs →
   P11PrefixTailMinimumInputs
