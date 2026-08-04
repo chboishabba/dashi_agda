@@ -45,6 +45,12 @@ import DASHI.Physics.Closure.NSTriadKNLuoNoCircularityAuditExact
 import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionCompositionExact
 import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionFrontierReceipt
 
+import DASHI.Physics.Closure.NSTriadKNLuoLemmaFamilyExact
+import DASHI.Physics.Closure.NSTriadKNLuoCompletionLemmaInventoryAExact
+import DASHI.Physics.Closure.NSTriadKNLuoCompletionLemmaInventoryBExact
+import DASHI.Physics.Closure.NSTriadKNLuoCompletionLemmaInventoryCExact
+import DASHI.Physics.Closure.NSTriadKNLuoFullCompletionLemmaInventoryExact
+
 physicalAnalyticFrontierValidationRootConstructed : Bool
 physicalAnalyticFrontierValidationRootConstructed = true
 
