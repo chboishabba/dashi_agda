@@ -39,7 +39,7 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; -_; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
-open ℚₚ using (_≤?_; _<?_)
+open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -52,12 +52,6 @@ three = Int.+ 3 / 1
 
 twoNonnegative : 0ℚ ≤ two
 twoNonnegative = toWitness {a? = 0ℚ ≤? two} _
-
-twoPositive : 0ℚ ℚₚ.< two
-twoPositive = toWitness {a? = 0ℚ <? two} _
-
-threeNonnegative : 0ℚ ≤ three
-threeNonnegative = toWitness {a? = 0ℚ ≤? three} _
 
 square : ℚ → ℚ
 square value = value * value
