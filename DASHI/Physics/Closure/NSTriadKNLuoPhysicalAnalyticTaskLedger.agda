@@ -20,6 +20,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoPointwisePairFoldReductionExact as Pair
 import DASHI.Physics.Closure.NSTriadKNLuoEquation42PhysicalIdentityAdapterExact as Equation42
 import DASHI.Physics.Closure.NSTriadKNLuoSection4PhysicalBoundsAdapterExact as Section4
 import DASHI.Physics.Closure.NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact as Summability
+import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as FixedReduction
+import DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact as ParsevalUpgrade
 import DASHI.Physics.Closure.NSTriadKNLuoMaximalTimeGlobalizationExact as Globalization
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalContinuationFromAnalyticInputsExact as Continuation
 
@@ -49,6 +51,10 @@ record LuoPhysicalAnalyticTaskLedger : Set where
 
     fourAlignedAlphaThreeHalvesRationalSummabilityConstructed : Bool
     analyticFractionalPowerIdentificationInhabited : Bool
+
+    projectedConvectionOfficialParsevalUpgradeConstructed : Bool
+    officialProjectedHardHighOrthogonalityClosed : Bool
+    fixedShiftOrderReductionConstructed : Bool
 
     meanValueGronwallPhysicalDataInhabited : Bool
     fixedShiftPhysicalRecursionAndCorrectionInhabited : Bool
@@ -81,6 +87,9 @@ luoPhysicalAnalyticTaskLedger = ledger
   false
   Summability.alphaThreeHalvesFourAlignedGeometricSummabilityClosed
   false
+  ParsevalUpgrade.projectedConvectionOfficialParsevalUpgradeConstructed
+  ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonality
+  FixedReduction.fixedShiftOrderReductionClosed
   false
   false
   false
@@ -117,6 +126,25 @@ section4AdapterIsTrue :
   ≡ true
 section4AdapterIsTrue =
   Section4.section4PhysicalToFiniteRangeAdapterClosedIsTrue
+
+projectedConvectionParsevalUpgradeIsTrue :
+  projectedConvectionOfficialParsevalUpgradeConstructed
+    luoPhysicalAnalyticTaskLedger
+  ≡ true
+projectedConvectionParsevalUpgradeIsTrue =
+  ParsevalUpgrade.projectedConvectionOfficialParsevalUpgradeConstructedIsTrue
+
+officialProjectedHardHighOrthogonalityIsTrue :
+  officialProjectedHardHighOrthogonalityClosed
+    luoPhysicalAnalyticTaskLedger
+  ≡ true
+officialProjectedHardHighOrthogonalityIsTrue =
+  ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonalityIsTrue
+
+fixedShiftOrderReductionIsTrue :
+  fixedShiftOrderReductionConstructed luoPhysicalAnalyticTaskLedger ≡ true
+fixedShiftOrderReductionIsTrue =
+  FixedReduction.fixedShiftOrderReductionClosedIsTrue
 
 maximalTimeLogicalReducerIsTrue :
   maximalTimeLogicalReducerConstructed luoPhysicalAnalyticTaskLedger
