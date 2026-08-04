@@ -1,8 +1,10 @@
 module DASHI.Physics.YangMills.YangMillsSubmissionRound10ExactCutset where
 
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
+import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact as Recurrence
 import DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischargeExact as Factorial
 import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as BishopParity
 import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact as SeriesTransport
@@ -29,7 +31,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 round10FactorialCoefficientSteps :
-  DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact.ConcreteFactorialCoefficientStepBounds
+  Recurrence.ConcreteFactorialCoefficientStepBounds
 round10FactorialCoefficientSteps =
   Factorial.concreteFactorialCoefficientStepBounds
 
@@ -98,7 +100,7 @@ record Round10StepVCutset : Set₁ where
   field
     geometricRatio : BishopGeometric.BishopGeometricRatio
 
-    polynomialDegree : Agda.Builtin.Nat.Nat
+    polynomialDegree : Nat
     polynomialWeightedBound :
       StepV.PolynomiallyWeightedGeometricBound
         BishopGeometric.bishopOrderedSemiringKernel
