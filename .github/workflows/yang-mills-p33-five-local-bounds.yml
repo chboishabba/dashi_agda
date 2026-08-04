@@ -7,6 +7,7 @@ on:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33LiteralBondCellIncidenceExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda'
       - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
@@ -15,6 +16,7 @@ on:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33LiteralBondCellIncidenceExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda'
       - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
