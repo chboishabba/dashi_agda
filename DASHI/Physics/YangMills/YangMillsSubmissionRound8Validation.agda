@@ -2,6 +2,8 @@ module DASHI.Physics.YangMills.YangMillsSubmissionRound8Validation where
 
 open import Agda.Builtin.Nat using (Nat; suc)
 
+import Real as BishopReal
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as ConcreteHalf
 import DASHI.Physics.YangMills.BalabanBishopRatioMonotoneTermsExact as Ratio
 import DASHI.Physics.YangMills.BalabanBishopAlternatingFirstOmittedExact as Alternating
 import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
@@ -15,6 +17,15 @@ import DASHI.Physics.YangMills.BalabanStepVGeometricInfluenceSummationExact as S
 import DASHI.Physics.YangMills.YangMillsSubmissionRound8Ledger as Ledger
 import DASHI.Physics.YangMills.YangMillsSubmissionRound8Receipt as Receipt
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+concreteBishopHalfBallValidated :
+  (value : BishopReal.ℝ) →
+  BishopReal._≤_ (BishopReal.∣_∣ value) ConcreteHalf.bishopHalf →
+  BishopReal._≤_
+    (ConcreteHalf.bishopMagnitudeSquare value)
+    ConcreteHalf.bishopQuarter
+concreteBishopHalfBallValidated =
+  ConcreteHalf.bishopHalfBallMagnitudeSquareBelowQuarter
 
 ratioMonotonicityReducerValidated :
   ∀ {Scalar : Set}
@@ -64,7 +75,7 @@ canonicalAnimalMarginValidated =
 geometricInfluenceCompositionValidated :
   ∀ {Scale Bound : Set}
     {algebra : Influence.InfluenceAlgebra Bound}
-    {inputs : A123.PhysicalA1A2A3InfluenceInputs algebra} →
+    {inputs : A123.PhysicalA1A2A3InfluenceInputs {Scale = Scale} algebra} →
   Summation.GeometricInfluenceSummationKernel algebra inputs →
   Summation.UniformInfluenceBoundCertificate algebra
 geometricInfluenceCompositionValidated =
