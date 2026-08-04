@@ -82,7 +82,8 @@ record P11LightweightCanonicalPayment
 open P11LightweightCanonicalPayment public
 
 p11LightweightWeightedShellBound :
-  (inputs : P11LightweightCanonicalPayment _) →
+  ∀ {leaf} →
+  (inputs : P11LightweightCanonicalPayment leaf) →
   StepV.PolynomiallyWeightedGeometricBound
     (kernel inputs)
     (combinedAnimalActivityRatio inputs)
