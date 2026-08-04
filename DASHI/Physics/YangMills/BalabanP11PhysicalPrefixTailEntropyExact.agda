@@ -12,13 +12,9 @@ module DASHI.Physics.YangMills.BalabanP11PhysicalPrefixTailEntropyExact where
 -- "Cluster Expansion for Abstract Polymer Models",
 -- Communications in Mathematical Physics 103 (1986), 491--498.
 -- DOI: 10.1007/BF01211762.
---
--- PURPOSE
--- Couple the physical P11 startup/tail estimates to the canonical P06 animal
--- constant.  The natural-number prefix/tail dichotomy and scale-independent
--- absorption transport are already proved in the imported reducers.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
@@ -33,14 +29,11 @@ record P11AnimalEntropyAccounting
   field
     boundaryOverhead : Nat
     decorationOverhead : Nat
-
     canonicalAnimalConstantIsUsed : Set
     canonicalAnimalConstantIsUsedEvidence :
       canonicalAnimalConstantIsUsed
-
     logarithmicAnimalEntropy : Set
     logarithmicAnimalEntropyEvidence : logarithmicAnimalEntropy
-
     entropyThresholdEqualsAnimalBoundaryDecorationCost : Set
     entropyThresholdEqualsAnimalBoundaryDecorationCostEvidence :
       entropyThresholdEqualsAnimalBoundaryDecorationCost
@@ -51,20 +44,15 @@ record P11PhysicalPrefixTailInputs : Set₁ where
   field
     modelLeaf : Entropy.P06ModelLeafDischargePackage
     entropyAccounting : P11AnimalEntropyAccounting modelLeaf
-
     analyticPrefixTail : P11.P11PrefixTailAnalyticInputs
-
     finitePrefixBoundsAreExact : Set
     finitePrefixBoundsAreExactEvidence : finitePrefixBoundsAreExact
-
     asymptoticTailBoundUsesRunningCoupling : Set
     asymptoticTailBoundUsesRunningCouplingEvidence :
       asymptoticTailBoundUsesRunningCoupling
-
     noGeometricGainInferredFromPolylogGrowth : Set
     noGeometricGainInferredFromPolylogGrowthEvidence :
       noGeometricGainInferredFromPolylogGrowth
-
     entropyPaymentUsesCanonicalAnimalConstant : Set
     entropyPaymentUsesCanonicalAnimalConstantEvidence :
       entropyPaymentUsesCanonicalAnimalConstant
@@ -94,7 +82,6 @@ record P11PhysicalReceipt
     animalConstant : Nat
     animalConstantIsCanonical :
       animalConstant ≡ canonicalAnimalConstantForP11 inputs
-
     absorption : LargeField.ImportedAbsorptionCondition
     theoremBoundary : String
 
@@ -110,17 +97,12 @@ p11PhysicalReceipt inputs = record
   ; theoremBoundary =
       "P11 physical receipt: exact startup bounds, asymptotic p0 lower bound and one scalar entropy payment using the canonical P06 animal constant produce the non-postulated absorption witness."
   }
-  where
-  open import Agda.Builtin.Equality using (_≡_; refl)
 
 p11PhysicalAssemblyLevel : ProofLevel
 p11PhysicalAssemblyLevel = machineChecked
-
 p11FinitePrefixEstimateLevel : ProofLevel
 p11FinitePrefixEstimateLevel = conditional
-
 p11AsymptoticTailEstimateLevel : ProofLevel
 p11AsymptoticTailEstimateLevel = conditional
-
 p11CanonicalEntropyPaymentLevel : ProofLevel
 p11CanonicalEntropyPaymentLevel = conditional
