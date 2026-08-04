@@ -68,15 +68,7 @@ upperZeroEquivalentFirstMagnitude dataSet =
         (λ upper → upper ⊜ upper ⊖ Κ 0ℚᵘ)
         BishopProperties.≃-refl
         (Alternating.upperPartial dataSet zero))
-    (BishopProperties.≃-trans
-      (BishopProperties.+-congˡ
-        (BishopReal.- (Alternating.lowerPartial dataSet zero))
-        BishopProperties.≃-refl)
-      (BishopProperties.≃-trans
-        (BishopProperties.+-congˡ
-          (BishopReal.- (Alternating.lowerPartial dataSet zero))
-          BishopProperties.≃-refl)
-        (Alternating.upperMinusLowerIsEvenMagnitude dataSet zero)))
+    (Alternating.upperMinusLowerIsEvenMagnitude dataSet zero)
 
 lowerOneEquivalentFirstMinusSecondMagnitude :
   (dataSet : Alternating.AlternatingDecreasingSeriesData) →
@@ -88,17 +80,13 @@ lowerOneEquivalentFirstMinusSecondMagnitude :
 lowerOneEquivalentFirstMinusSecondMagnitude dataSet =
   BishopProperties.≃-trans
     (Alternating.lowerSuccessorExpansion dataSet zero)
-    (BishopProperties.≃-trans
-      (BishopProperties.+-congʳ
-        (Alternating.lowerPartial dataSet zero)
-        BishopProperties.≃-refl)
-      (let open BishopProperties.ℝ-Solver
-       in solve 2
-          (λ first second →
-            Κ 0ℚᵘ ⊕ (first ⊖ second) ⊜ first ⊖ second)
-          BishopProperties.≃-refl
-          (Alternating.magnitude dataSet zero)
-          (Alternating.magnitude dataSet (suc zero))))
+    (let open BishopProperties.ℝ-Solver
+     in solve 2
+        (λ first second →
+          Κ 0ℚᵘ ⊕ (first ⊖ second) ⊜ first ⊖ second)
+        BishopProperties.≃-refl
+        (Alternating.magnitude dataSet zero)
+        (Alternating.magnitude dataSet (suc zero)))
 
 ------------------------------------------------------------------------
 -- Concrete Taylor brackets for represented sine and cosine.
