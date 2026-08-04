@@ -9,8 +9,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record SubmissionRound8Receipt : Set where
   field
-    bishopRatioReductionLevel : ProofLevel
-    bishopTailReductionLevel : ProofLevel
+    bishopConcreteHalfBallLevel : ProofLevel
+    bishopConcreteRatioBoundsLevel : ProofLevel
+    bishopSetoidRatioReductionLevel : ProofLevel
+    bishopSetoidTailReductionLevel : ProofLevel
     p06CanonicalConstantLevel : ProofLevel
     a1a2a3FiniteAssemblyLevel : ProofLevel
     p11PrefixTailReductionLevel : ProofLevel
@@ -31,8 +33,10 @@ open SubmissionRound8Receipt public
 
 currentSubmissionRound8Receipt : SubmissionRound8Receipt
 currentSubmissionRound8Receipt = record
-  { bishopRatioReductionLevel = machineChecked
-  ; bishopTailReductionLevel = machineChecked
+  { bishopConcreteHalfBallLevel = machineChecked
+  ; bishopConcreteRatioBoundsLevel = machineChecked
+  ; bishopSetoidRatioReductionLevel = machineChecked
+  ; bishopSetoidTailReductionLevel = machineChecked
   ; p06CanonicalConstantLevel = machineChecked
   ; a1a2a3FiniteAssemblyLevel = machineChecked
   ; p11PrefixTailReductionLevel = machineChecked
