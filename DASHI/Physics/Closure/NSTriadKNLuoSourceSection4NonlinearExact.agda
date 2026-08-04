@@ -17,10 +17,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoSourceSection4NonlinearExact where
 --
 --   (J1+J2)^2 <= 20992 delta^2 Q.
 --
--- The constant is deliberately explicit rather than hidden by \lesssim:
--- 2*(6400+4096)=20992.  This is the complete square-safe nonlinear estimate
--- behind Luo's (4.3)--(4.10), obtained from the literal weighted J11/J12
--- split and the high-tail J2 criterion.  No total nonlinear budget is a field.
+-- The constant is explicit: 2*(6400+4096)=20992.  This is the complete
+-- square-safe nonlinear estimate behind Luo's (4.3)--(4.10), obtained from
+-- the literal weighted J11/J12 split and the high-tail J2 criterion.  No
+-- total nonlinear budget is a field.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using ([]; _∷_)
@@ -31,11 +31,12 @@ import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; subst₂; sym)
+  (subst; subst₂; sym)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicHalfSplitExact as SquareSum
+import DASHI.Physics.Closure.NSTriadKNLuoSourceJ11HalfRangeDerivedExact as J11
 import DASHI.Physics.Closure.NSTriadKNLuoSourceJ1CriterionExact as J1
 import DASHI.Physics.Closure.NSTriadKNLuoSourceJ2CriterionExact as J2
 
@@ -65,7 +66,7 @@ record SourceSection4NonlinearData (Time : Set) : Set₁ where
 
     commonDelta :
       J2.delta j2Data
-      ≡ J1.J11.delta (J1.j11Data j1Data)
+      ≡ J11.delta (J1.j11Data j1Data)
 
 open SourceSection4NonlinearData public
 
@@ -79,8 +80,7 @@ commonScale : ∀ {Time} → SourceSection4NonlinearData Time → ℚ
 commonScale data = J1.outputScale (j1Data data)
 
 commonSmallness : ∀ {Time} → SourceSection4NonlinearData Time → ℚ
-commonSmallness data =
-  J1.J11.delta (J1.j11Data (j1Data data))
+commonSmallness data = J11.delta (J1.j11Data (j1Data data))
 
 sourceJ1SquareBelowScale :
   ∀ {Time} (data : SourceSection4NonlinearData Time) →
@@ -101,17 +101,24 @@ sourceJ1SquareBelowScale data =
         (toWitness {a? = 0ℚ ≤? (Int.+ 6400 / 1)} _)
         (L2.squareNonnegative (commonSmallness data))
 
-    scaleByShell : coefficient ≤ coefficient * commonScale data
-    scaleByShell =
+    rawScale : coefficient * 1ℚ ≤ coefficient * commonScale data
+    rawScale =
       let instance coefficientIsNonnegative =
         nonNegative coefficientNonnegative
       in
+      ℚₚ.*-monoˡ-≤-nonNeg
+        coefficient
+        (J1.outputScaleAtLeastOne (j1Data data))
+
+    leftMeaning : coefficient * 1ℚ ≡ coefficient
+    leftMeaning = solve (coefficient ∷ [])
+
+    scaleByShell : coefficient ≤ coefficient * commonScale data
+    scaleByShell =
       subst
         (λ left → left ≤ coefficient * commonScale data)
-        (solve (coefficient ∷ []))
-        (ℚₚ.*-monoˡ-≤-nonNeg
-          coefficient
-          (J1.outputScaleAtLeastOne (j1Data data)))
+        leftMeaning
+        rawScale
   in
   ℚₚ.≤-trans base scaleByShell
 
