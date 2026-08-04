@@ -1,0 +1,3 @@
+module DASHI.Physics.YangMills.YangMillsSubmissionRound8CITrigger4 where
+
+import DASHI.Physics.YangMills.YangMillsSubmissionRound8Validation
