@@ -10,6 +10,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticInputsBuilderExact whe
 -- DOI: 10.1007/s00021-019-0411-z.
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
+-- Authors: Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin.
+-- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
+-- Springer, 2011.
+-- DOI: 10.1007/978-3-642-16830-7.
+--
 -- PURPOSE
 -- Build the canonical analytic-input record from the irreducible physical
 -- leaves while making all canonical choices definitionally:
@@ -18,7 +23,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticInputsBuilderExact whe
 -- * weighted energy is literally the mature physical Schur majorant;
 -- * the selected singleton state decodes directly to the official solution;
 -- * fixed-shift energy and dissipation are literally the official physical
---   cutoff quantities.
+--   cutoff quantities;
+-- * the per-mode shell convention is a typed three-quantity identification,
+--   not an opaque proposition token.
 --
 -- This removes duplicated coherence obligations without weakening the
 -- remaining PDE estimates. The constructor still requires the physical
@@ -39,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as Fl
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapterExact as KernelAdapter
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalSourceSchurIdentificationExact as SourceSchur
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeFiniteAssemblyAdapterExact as PerMode
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialPerModeShellMeaningExact as ShellMeaning
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapFromDerivedBudgetExact as Fixed
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialFixedShiftCoreExact as OfficialFixed
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapConstructorExact as FixedConstructor
@@ -73,6 +81,9 @@ record CanonicalAnalyticPhysicalLeaves
 
     perModeFiniteInputs :
       PerMode.LuoPerModeFinitePhysicalInputs
+
+    officialPerModeShellMeaning :
+      ShellMeaning.OfficialPerModeShellMeaning perModeFiniteInputs
 
     officialFixedShiftLeaves :
       OfficialFixed.OfficialFixedShiftCoreLeaves data
@@ -161,10 +172,6 @@ record CanonicalAnalyticPhysicalLeaves
               fixedShiftBudgetIdentification))
           shell
 
-    PerModeShellsMatchOfficialLittlewoodPaleyShells : Set
-    perModeShellsMatchOfficialLittlewoodPaleyShells :
-      PerModeShellsMatchOfficialLittlewoodPaleyShells
-
 open CanonicalAnalyticPhysicalLeaves public
 
 canonicalAnalyticInputsFromPhysicalLeaves :
@@ -242,9 +249,9 @@ canonicalAnalyticInputsFromPhysicalLeaves {data = data} leaves = record
       OfficialFixed.officialFixedShiftDissipationMeaning
         (officialFixedShiftLeaves leaves)
   ; PerModeShellsMatchOfficialLittlewoodPaleyShells =
-      PerModeShellsMatchOfficialLittlewoodPaleyShells leaves
+      ShellMeaning.OfficialPerModeShellMeaning (perModeFiniteInputs leaves)
   ; perModeShellsMatchOfficialLittlewoodPaleyShells =
-      perModeShellsMatchOfficialLittlewoodPaleyShells leaves
+      officialPerModeShellMeaning leaves
   }
 
 canonicalSelectedStateCoherenceDefinitional : Bool
@@ -252,6 +259,10 @@ canonicalSelectedStateCoherenceDefinitional = true
 
 canonicalFixedShiftCoherenceDefinitional : Bool
 canonicalFixedShiftCoherenceDefinitional = true
+
+canonicalPerModeShellMeaningTyped : Bool
+canonicalPerModeShellMeaningTyped =
+  ShellMeaning.officialPerModeShellMeaningTyped
 
 canonicalAnalyticInputsBuilderConstructed : Bool
 canonicalAnalyticInputsBuilderConstructed = true
@@ -263,6 +274,11 @@ canonicalSelectedStateCoherenceDefinitionalIsTrue = refl
 canonicalFixedShiftCoherenceDefinitionalIsTrue :
   canonicalFixedShiftCoherenceDefinitional ≡ true
 canonicalFixedShiftCoherenceDefinitionalIsTrue = refl
+
+canonicalPerModeShellMeaningTypedIsTrue :
+  canonicalPerModeShellMeaningTyped ≡ true
+canonicalPerModeShellMeaningTypedIsTrue =
+  ShellMeaning.officialPerModeShellMeaningTypedIsTrue
 
 canonicalAnalyticInputsBuilderConstructedIsTrue :
   canonicalAnalyticInputsBuilderConstructed ≡ true
