@@ -19,7 +19,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat.Base using (_<_; _≤_; z≤n; s≤s)
-open import Data.Nat.Properties using (+-suc)
+open import Data.Nat.Properties using (+-identityʳ; +-suc)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
@@ -140,7 +140,10 @@ tailBoundAtOffset :
       kernel laws ratio polynomialDegree) →
   ∀ offset →
   TailBound inputs (transitionIndex inputs + offset)
-tailBoundAtOffset inputs zero = tailSeed inputs
+tailBoundAtOffset inputs zero =
+  subst (TailBound inputs)
+    (sym (+-identityʳ (transitionIndex inputs)))
+    (tailSeed inputs)
 tailBoundAtOffset inputs (suc offset) =
   subst (TailBound inputs)
     (sym (+-suc (transitionIndex inputs) offset))
