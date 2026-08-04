@@ -1,12 +1,15 @@
-name: Kant Lacan Zizek PNF formalism
+name: Kant Lacan Zizek Pathologic PNF formalism
 
 on:
   pull_request:
     paths:
+      - 'DASHI/Core/TypedDependencyCore.agda'
       - 'DASHI/Foundations/CantorDiagonalCore.agda'
       - 'DASHI/Foundations/StageAtlasZeroToTwelve.agda'
       - 'DASHI/Foundations/StageZeroToTwelveTransitionCore.agda'
       - 'DASHI/Foundations/JPlusOneScaleBridge.agda'
+      - 'DASHI/Foundations/JPlusOneMarkedUnitExtension.agda'
+      - 'DASHI/Foundations/MarkedUnitExtensionCore.agda'
       - 'DASHI/Foundations/StageCantorScaleRecursion.agda'
       - 'DASHI/Combinatorics/MemeDiagonal.agda'
       - 'DASHI/Geometry/TwistedCycleOrientationCover.agda'
@@ -15,8 +18,11 @@ on:
       - 'DASHI/Reasoning/**'
       - 'DASHI/EverythingZizekPNFExtension.agda'
       - 'DASHI/EverythingKantLacanPNFExtension.agda'
+      - 'DASHI/EverythingPathologicTypedDependencyExtension.agda'
+      - 'docs/pathologic_typed_dependency_formalism.md'
       - 'scripts/check_zizek_pnf_formalism.sh'
       - 'scripts/check_kant_lacan_extension.sh'
+      - 'scripts/check_pathologic_typed_dependency.sh'
       - '.github/workflows/zizek-pnf-formalism.yml'
   workflow_dispatch:
 
@@ -29,5 +35,5 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
-      - name: Check constructive, critical, discourse, stage and authority boundaries
-        run: nix develop --command bash scripts/check_kant_lacan_extension.sh
+      - name: Check constructive, critical, discourse, stage, dependency and authority boundaries
+        run: nix develop --command bash scripts/check_pathologic_typed_dependency.sh
