@@ -66,9 +66,11 @@ record PhysicalA1A2A3InfluenceInputs
 open PhysicalA1A2A3InfluenceInputs public
 
 canonicalP06Certificate :
-  ∀ {Scale Bound}
+  ∀ {Scale Bound : Set}
     {algebra : Influence.InfluenceAlgebra Bound} →
-  (inputs : PhysicalA1A2A3InfluenceInputs algebra) →
+  (inputs :
+    PhysicalA1A2A3InfluenceInputs
+      {Scale = Scale} {Bound = Bound} algebra) →
   P06.CanonicalP06AnimalConstantCertificate
     (PhysicalA1A2A3InfluenceInputs.p06ModelLeaf inputs)
 canonicalP06Certificate inputs =
@@ -76,9 +78,11 @@ canonicalP06Certificate inputs =
     (PhysicalA1A2A3InfluenceInputs.p06ModelLeaf inputs)
 
 finiteRootedInfluenceAssembly :
-  ∀ {Scale Bound}
+  ∀ {Scale Bound : Set}
     {algebra : Influence.InfluenceAlgebra Bound} →
-  (inputs : PhysicalA1A2A3InfluenceInputs algebra) →
+  (inputs :
+    PhysicalA1A2A3InfluenceInputs
+      {Scale = Scale} {Bound = Bound} algebra) →
   ∀ (scale : Scale) (cutoff : Nat) →
   Influence.InfluenceAlgebra.LessEqual algebra
     (Influence.partialSum algebra
@@ -95,9 +99,10 @@ finiteRootedInfluenceAssembly inputs scale cutoff =
     cutoff
 
 canonicalUniformPolymerInfluence :
-  ∀ {Scale Bound}
+  ∀ {Scale Bound : Set}
     {algebra : Influence.InfluenceAlgebra Bound} →
-  PhysicalA1A2A3InfluenceInputs algebra →
+  PhysicalA1A2A3InfluenceInputs
+    {Scale = Scale} {Bound = Bound} algebra →
   Influence.UniformPolymerInfluence Scale Bound algebra
 canonicalUniformPolymerInfluence inputs = record
   { shellsAt = PhysicalA1A2A3InfluenceInputs.shellsAt inputs
@@ -116,7 +121,9 @@ record CanonicalA1A2A3InfluenceCertificate
     {Scale Bound : Set}
     (algebra : Influence.InfluenceAlgebra Bound) : Set₁ where
   field
-    inputs : PhysicalA1A2A3InfluenceInputs algebra
+    inputs :
+      PhysicalA1A2A3InfluenceInputs
+        {Scale = Scale} {Bound = Bound} algebra
 
     p06AnimalConstant :
       P06.CanonicalP06AnimalConstantCertificate
@@ -140,10 +147,13 @@ record CanonicalA1A2A3InfluenceCertificate
 open CanonicalA1A2A3InfluenceCertificate public
 
 canonicalA1A2A3InfluenceCertificate :
-  ∀ {Scale Bound}
+  ∀ {Scale Bound : Set}
     {algebra : Influence.InfluenceAlgebra Bound} →
-  (inputs : PhysicalA1A2A3InfluenceInputs algebra) →
-  CanonicalA1A2A3InfluenceCertificate algebra
+  (inputs :
+    PhysicalA1A2A3InfluenceInputs
+      {Scale = Scale} {Bound = Bound} algebra) →
+  CanonicalA1A2A3InfluenceCertificate
+    {Scale = Scale} {Bound = Bound} algebra
 canonicalA1A2A3InfluenceCertificate inputs = record
   { inputs = inputs
   ; p06AnimalConstant = canonicalP06Certificate inputs
