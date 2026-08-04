@@ -17,8 +17,9 @@ import DASHI.Foundations.StageValuationBundleAtlas as LegacyBundle
 -- Exact +1 and place-value facts already present in the repository.
 --
 -- The shared algebraic shape "carrier plus fresh unit" is formalised, while
--- local j-basis notation, decimal place value, Monster representation dimension, the modular j-function and
--- observation semantics remain distinct typed surfaces.
+-- local j-basis notation, decimal place value, Monster representation
+-- dimension, the modular j-function and observation semantics remain distinct
+-- typed surfaces.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -102,6 +103,26 @@ stage12JPlusTwo :
   Stage12.decimalCarryUnit + 2 * Stage12.localJUnit ≡ Stage12.toNat Stage12.stage-12
 stage12JPlusTwo = refl
 
+------------------------------------------------------------------------
+-- Exact reuse of the existing unbounded DecimalStageAddress carrier.
+------------------------------------------------------------------------
+
+toLegacyDecimalAddress :
+  Stage12.JScaleAddress →
+  LegacyBundle.DecimalStageAddress
+toLegacyDecimalAddress address = record
+  { coarseBundles = Stage12.JScaleAddress.coarseJUnits address
+  ; localOffset = Stage12.JScaleAddress.localOffset address
+  ; globalIndex = Stage12.JScaleAddress.globalIndex address
+  ; decomposition = Stage12.JScaleAddress.decomposition address
+  }
+
+stage12LegacyDecimalGlobalIndex :
+  LegacyBundle.DecimalStageAddress.globalIndex
+    (toLegacyDecimalAddress (Stage12.jAddress Stage12.stage-12))
+  ≡ 12
+stage12LegacyDecimalGlobalIndex = refl
+
 moonshineCoefficientIsRepresentationPlusOne :
   Moon.rep-dim + 1 ≡ Moon.j-coefficient
 moonshineCoefficientIsRepresentationPlusOne = Moon.mckay
@@ -135,6 +156,7 @@ record JPlusOneAuthorityBoundary : Set where
     exactStageArithmeticAvailable : Bool
     exactMcKayArithmeticAvailable : Bool
     unitObservationArithmeticAvailable : Bool
+    existingDecimalAddressCarrierReused : Bool
     modularJEqualsLocalJUnitClaimed : Bool
     observerCreatesModularInvariantClaimed : Bool
     constantStackProvesAnalyticAttractorClaimed : Bool
@@ -147,11 +169,12 @@ canonicalJPlusOneAuthorityBoundary = record
   { exactStageArithmeticAvailable = true
   ; exactMcKayArithmeticAvailable = true
   ; unitObservationArithmeticAvailable = true
+  ; existingDecimalAddressCarrierReused = true
   ; modularJEqualsLocalJUnitClaimed = false
   ; observerCreatesModularInvariantClaimed = false
   ; constantStackProvesAnalyticAttractorClaimed = false
   ; representationDimensionEqualsStageTenClaimed = false
   ; sharedShapeMaySeedCandidateInterpretation = true
   ; boundaryNote =
-      "The bridge imports exact arithmetic from Moonshine and JFixedPoint but does not promote legacy observer, heat, convergence or ontology commentary."
+      "The bridge reuses the existing DecimalStageAddress and imports exact arithmetic from Moonshine and JFixedPoint, but does not promote legacy observer, heat, convergence or ontology commentary."
   }
