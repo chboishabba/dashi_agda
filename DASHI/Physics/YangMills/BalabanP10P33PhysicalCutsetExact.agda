@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanP10P33PhysicalCutsetExact where
 -- "Propagators and Renormalization Transformations for Lattice Gauge
 -- Theories. I",
 -- Communications in Mathematical Physics 95 (1984), 17--40.
--- DOI: 10.1007/BF01211042.
+-- DOI: 10.1007/BF01215753.
 --
 -- PURPOSE
 -- Preserve the physical order of proof.  P10 is not one exponential token and
