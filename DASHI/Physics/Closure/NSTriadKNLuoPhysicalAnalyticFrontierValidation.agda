@@ -51,6 +51,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoCompletionLemmaInventoryBExact
 import DASHI.Physics.Closure.NSTriadKNLuoCompletionLemmaInventoryCExact
 import DASHI.Physics.Closure.NSTriadKNLuoFullCompletionLemmaInventoryExact
 
+import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaFiniteFourierFoundationExact
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaCriticalCutsetExact
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaPathCompositionExact
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaFrontierReceipt
