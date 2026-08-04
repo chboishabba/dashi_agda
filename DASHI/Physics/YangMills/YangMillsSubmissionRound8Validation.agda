@@ -4,8 +4,11 @@ open import Agda.Builtin.Nat using (Nat; suc)
 
 import Real as BishopReal
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as ConcreteHalf
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfRadiusRatiosExact as ConcreteRatios
 import DASHI.Physics.YangMills.BalabanBishopRatioMonotoneTermsExact as Ratio
+import DASHI.Physics.YangMills.BalabanBishopSetoidRatioMonotoneExact as SetoidRatio
 import DASHI.Physics.YangMills.BalabanBishopAlternatingFirstOmittedExact as Alternating
+import DASHI.Physics.YangMills.BalabanBishopSetoidAlternatingFirstOmittedExact as SetoidAlternating
 import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
 import DASHI.Physics.YangMills.BalabanP06CanonicalAnimalConstantExact as P06
 import DASHI.Physics.YangMills.BalabanP06A1A2A3InfluenceExact as A123
@@ -27,6 +30,13 @@ concreteBishopHalfBallValidated :
 concreteBishopHalfBallValidated =
   ConcreteHalf.bishopHalfBallMagnitudeSquareBelowQuarter
 
+concreteBishopRatioCertificateValidated :
+  (value : BishopReal.ℝ) →
+  BishopReal._≤_ (BishopReal.∣_∣ value) ConcreteHalf.bishopHalf →
+  ConcreteRatios.ConcreteBishopHalfRadiusRatioCertificate value
+concreteBishopRatioCertificateValidated =
+  ConcreteRatios.concreteBishopHalfRadiusRatioCertificate
+
 ratioMonotonicityReducerValidated :
   ∀ {Scalar : Set}
     {kernel : Ratio.OrderedRatioKernel Scalar} →
@@ -38,6 +48,17 @@ ratioMonotonicityReducerValidated :
 ratioMonotonicityReducerValidated =
   Ratio.successiveRatioGivesDecreasing
 
+bishopSetoidRatioReducerValidated :
+  (dataSet :
+    SetoidRatio.SetoidSuccessiveRatioTerms
+      SetoidRatio.bishopSetoidOrderedRatioKernel) →
+  ∀ index →
+  BishopReal._≤_
+    (SetoidRatio.SetoidSuccessiveRatioTerms.term dataSet (suc index))
+    (SetoidRatio.SetoidSuccessiveRatioTerms.term dataSet index)
+bishopSetoidRatioReducerValidated =
+  SetoidRatio.bishopSuccessiveRatioGivesDecreasing
+
 alternatingTailReducerValidated :
   ∀ {Scalar : Set}
     {kernel : Alternating.OrderedDifferenceKernel Scalar} →
@@ -45,6 +66,15 @@ alternatingTailReducerValidated :
   Alternating.SignedFirstOmittedTail kernel
 alternatingTailReducerValidated =
   Alternating.alternatingBracketsGiveFirstOmittedTail
+
+bishopSetoidAlternatingTailValidated :
+  (brackets :
+    SetoidAlternating.SetoidAlternatingPartialSumBrackets
+      SetoidAlternating.bishopSetoidOrderedDifferenceKernel) →
+  SetoidAlternating.SetoidSignedFirstOmittedTail
+    SetoidAlternating.bishopSetoidOrderedDifferenceKernel
+bishopSetoidAlternatingTailValidated =
+  SetoidAlternating.bishopAlternatingBracketsGiveFirstOmittedTail
 
 canonicalP06ConstantValidated :
   (package : Entropy.P06ModelLeafDischargePackage) →
@@ -75,9 +105,13 @@ canonicalAnimalMarginValidated =
 geometricInfluenceCompositionValidated :
   ∀ {Scale Bound : Set}
     {algebra : Influence.InfluenceAlgebra Bound}
-    {inputs : A123.PhysicalA1A2A3InfluenceInputs {Scale = Scale} algebra} →
-  Summation.GeometricInfluenceSummationKernel algebra inputs →
-  Summation.UniformInfluenceBoundCertificate algebra
+    {inputs :
+      A123.PhysicalA1A2A3InfluenceInputs
+        {Scale = Scale} {Bound = Bound} algebra} →
+  Summation.GeometricInfluenceSummationKernel
+    {Scale = Scale} {Bound = Bound} algebra inputs →
+  Summation.UniformInfluenceBoundCertificate
+    {Scale = Scale} {Bound = Bound} algebra
 geometricInfluenceCompositionValidated =
   Summation.uniformInfluenceBoundFromGeometricSummation
 
