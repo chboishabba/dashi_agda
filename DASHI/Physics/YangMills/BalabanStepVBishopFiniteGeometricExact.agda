@@ -66,6 +66,7 @@ bishopGeometricSemiringLaws = record
   ; equivalentSym = BishopProperties.≃-symm
   ; equivalentTrans = BishopProperties.≃-trans
   ; lessEqualRespectLeft = BishopProperties.≤-respˡ-≃
+  ; lessEqualRespectRight = BishopProperties.≤-respʳ-≃
   ; addCongruent = BishopProperties.+-cong
   ; multiplyCongruent = BishopProperties.*-cong
   ; addAssociative = BishopProperties.+-assoc
