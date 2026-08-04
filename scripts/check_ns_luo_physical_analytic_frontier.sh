@@ -51,6 +51,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoCompletionLemmaInventoryCExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFullCompletionLemmaInventoryExact.agda
 
+  DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaFiniteFourierFoundationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaCriticalCutsetExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaPathCompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaFrontierReceipt.agda
