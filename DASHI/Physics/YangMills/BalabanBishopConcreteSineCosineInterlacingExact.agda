@@ -21,13 +21,14 @@ module DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact w
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (z≤n; s≤s)
-open import Data.Rational.Unnormalised as ℚ using (1ℚᵘ)
+open import Data.Rational.Unnormalised using (1ℚᵘ)
 
 import ExtraProperties as Extra
 import Real as BishopReal
 import RealProperties as BishopProperties
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischargeExact as Factorial
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfRadiusRatiosExact as Ratios
@@ -39,8 +40,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 bishopOneNonnegative : BishopReal.NonNegative BishopReal.1ℝ
 bishopOneNonnegative =
-  BishopProperties.0≤x⇒nonNegx
-    (BishopProperties.≤-refl)
+  BishopProperties.0≤x⇒nonNegx BishopProperties.≤-refl
 
 powNonnegative :
   ∀ {value} →
@@ -62,15 +62,19 @@ alternatingSignEven zero = BishopProperties.≃-refl
 alternatingSignEven (suc index) =
   let
     exponent = Alternating.double index
-    oldSign = Terms.alternatingSign exponent
+    squareOfMinusOne =
+      Terms.negatedSquareEquivalentSquare BishopReal.1ℝ
   in
   BishopProperties.≃-trans
     (Recurrence.powTwoStep Terms.bishopMinusOne exponent)
-    (let open BishopProperties.ℝ-Solver
-     in solve 1
-        (λ sign → sign ⊗ ((⊝ Κ 1ℚᵘ) ⊗ (⊝ Κ 1ℚᵘ)) ⊜ Κ 1ℚᵘ)
+    (BishopProperties.≃-trans
+      (BishopProperties.*-cong
         (alternatingSignEven index)
-        oldSign)
+        squareOfMinusOne)
+      (BishopProperties.≃-trans
+        (BishopProperties.*-identityˡ
+          (BishopReal._*_ BishopReal.1ℝ BishopReal.1ℝ))
+        (BishopProperties.*-identityˡ BishopReal.1ℝ)))
 
 alternatingSignOdd :
   ∀ index →
@@ -78,14 +82,10 @@ alternatingSignOdd :
     (Terms.alternatingSign (suc (Alternating.double index)))
     (BishopReal.- BishopReal.1ℝ)
 alternatingSignOdd index =
-  let
-    evenSign = Terms.alternatingSign (Alternating.double index)
-  in
-  let open BishopProperties.ℝ-Solver
-  in solve 1
-      (λ sign → sign ⊗ (⊝ Κ 1ℚᵘ) ⊜ ⊝ Κ 1ℚᵘ)
-      (alternatingSignEven index)
-      evenSign
+  BishopProperties.≃-trans
+    (BishopProperties.*-congʳ
+      (alternatingSignEven index))
+    (BishopProperties.*-identityˡ Terms.bishopMinusOne)
 
 sineSignedEvenIsMagnitude :
   ∀ value →
@@ -98,13 +98,11 @@ sineSignedEvenIsMagnitude value valueNonnegative index =
   let
     termIndex = Alternating.double index
     coefficient = BishopReal._⋆
-      (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.inverseFactorialRational
-        (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.oddExponent termIndex))
-    power = BishopReal.pow value
-      (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.oddExponent termIndex)
+      (Estimates.inverseFactorialRational
+        (Estimates.oddExponent termIndex))
+    power = BishopReal.pow value (Estimates.oddExponent termIndex)
     powerNonnegativeAtIndex =
-      powNonnegative valueNonnegative
-        (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.oddExponent termIndex)
+      powNonnegative valueNonnegative (Estimates.oddExponent termIndex)
   in
   BishopProperties.≃-trans
     (BishopProperties.*-cong
@@ -128,11 +126,9 @@ sineSignedOddIsNegativeMagnitude :
 sineSignedOddIsNegativeMagnitude value valueNonnegative index =
   let
     termIndex = suc (Alternating.double index)
-    power = BishopReal.pow value
-      (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.oddExponent termIndex)
+    power = BishopReal.pow value (Estimates.oddExponent termIndex)
     powerNonnegativeAtIndex =
-      powNonnegative valueNonnegative
-        (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.oddExponent termIndex)
+      powNonnegative valueNonnegative (Estimates.oddExponent termIndex)
   in
   BishopProperties.≃-trans
     (BishopProperties.*-cong
@@ -158,13 +154,11 @@ cosineSignedEvenIsMagnitude value valueNonnegative index =
   let
     termIndex = Alternating.double index
     coefficient = BishopReal._⋆
-      (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.inverseFactorialRational
-        (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.evenExponent termIndex))
-    power = BishopReal.pow value
-      (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.evenExponent termIndex)
+      (Estimates.inverseFactorialRational
+        (Estimates.evenExponent termIndex))
+    power = BishopReal.pow value (Estimates.evenExponent termIndex)
     powerNonnegativeAtIndex =
-      powNonnegative valueNonnegative
-        (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.evenExponent termIndex)
+      powNonnegative valueNonnegative (Estimates.evenExponent termIndex)
   in
   BishopProperties.≃-trans
     (BishopProperties.*-cong
@@ -188,11 +182,9 @@ cosineSignedOddIsNegativeMagnitude :
 cosineSignedOddIsNegativeMagnitude value valueNonnegative index =
   let
     termIndex = suc (Alternating.double index)
-    power = BishopReal.pow value
-      (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.evenExponent termIndex)
+    power = BishopReal.pow value (Estimates.evenExponent termIndex)
     powerNonnegativeAtIndex =
-      powNonnegative valueNonnegative
-        (DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact.evenExponent termIndex)
+      powNonnegative valueNonnegative (Estimates.evenExponent termIndex)
   in
   BishopProperties.≃-trans
     (BishopProperties.*-cong
