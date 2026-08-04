@@ -15,6 +15,7 @@ files=(
   DASHI/Reasoning/SFMVerifiedClaimPresentation.agda
   DASHI/Reasoning/TypedMemeCompiler.agda
   DASHI/Dynamics/LogisticDecimalPNFBridge.agda
+  DASHI/Dynamics/PNFOperatorLocalityResolution.agda
   DASHI/Reasoning/PNFZizekOperator.agda
   DASHI/Reasoning/ZizekPNFSourceAtlas.agda
   DASHI/Reasoning/ZizekPNFRegression.agda
@@ -38,6 +39,12 @@ grep -q 'noGlobalOrientationSection' DASHI/Geometry/TwistedCycleOrientationCover
 grep -q 'mobiusTransportFlipsOrientationSign' DASHI/Reasoning/ParallaxHolonomyBridge.agda
 grep -q 'everyNonAllFieldIsPowerSetClaimed = false' DASHI/Reasoning/ExceptionalAndNonAllClosure.agda
 grep -q 'strictCardinalityIncreaseClaimed' DASHI/Reasoning/SurplusChannelCore.agda
+
+# Product-lane locality and irreversible resolution remain separately scoped.
+grep -q 'disjointCoordinateUpdatesCommute' DASHI/Dynamics/PNFOperatorLocalityResolution.agda
+grep -q 'nontrivialIdempotentProjectionNotInvolutive' DASHI/Dynamics/PNFOperatorLocalityResolution.agda
+grep -q 'commutationImpliesMetricOrthogonality = false' DASHI/Dynamics/PNFOperatorLocalityResolution.agda
+grep -q 'commutationImpliesSpectralIndependence = false' DASHI/Dynamics/PNFOperatorLocalityResolution.agda
 
 # PNF, learning, trauma and hyperfabric integration must remain non-diagnostic.
 grep -q 'record RelationalLearningTraumaHyperfabric' DASHI/Reasoning/PNFZizekOperator.agda
