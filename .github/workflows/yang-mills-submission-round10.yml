@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda'
       - 'DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda'
