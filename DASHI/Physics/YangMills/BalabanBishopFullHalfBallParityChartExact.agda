@@ -46,6 +46,16 @@ ChartRelation directNonnegative value representative =
 ChartRelation reflectedNegative value representative =
   value ≡ BishopReal.- representative
 
+orientedSineValue :
+  Elementary.BishopElementaryPowerSeriesData →
+  HalfBallOrientation →
+  BishopReal.ℝ →
+  BishopReal.ℝ
+orientedSineValue dataSet directNonnegative representative =
+  Elementary.bishopSin dataSet representative
+orientedSineValue dataSet reflectedNegative representative =
+  BishopReal.- (Elementary.bishopSin dataSet representative)
+
 record FullHalfBallParityChart
     (dataSet : Elementary.BishopElementaryPowerSeriesData)
     (value : BishopReal.ℝ) : Set₁ where
@@ -79,8 +89,9 @@ nonnegativeHalfBallChart :
   BishopReal.NonNegative value →
   BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
   FullHalfBallParityChart dataSet value
-nonnegativeHalfBallChart identification parity nonnegative inside = record
-  { representative = _
+nonnegativeHalfBallChart {value = value}
+    identification parity nonnegative inside = record
+  { representative = value
   ; orientation = directNonnegative
   ; representativeNonnegative = nonnegative
   ; representativeInsideHalf = inside
@@ -99,8 +110,9 @@ reflectedNegativeHalfBallChart :
     HalfBall.bishopHalf →
   FullHalfBallParityChart
     dataSet (BishopReal.- representative)
-reflectedNegativeHalfBallChart identification parity nonnegative inside = record
-  { representative = _
+reflectedNegativeHalfBallChart {representative = representative}
+    identification parity nonnegative inside = record
+  { representative = representative
   ; orientation = reflectedNegative
   ; representativeNonnegative = nonnegative
   ; representativeInsideHalf = inside
@@ -123,15 +135,10 @@ representativeSineCosineInterlacing chart =
 sineValueFromRepresentative :
   ∀ {dataSet value} →
   (chart : FullHalfBallParityChart dataSet value) →
-  let representativeValue = representative chart
-  in BishopReal._≃_
-       (Elementary.bishopSin dataSet value)
-       (case orientation chart of λ where
-          directNonnegative →
-            Elementary.bishopSin dataSet representativeValue
-          reflectedNegative →
-            BishopReal.-
-              (Elementary.bishopSin dataSet representativeValue))
+  BishopReal._≃_
+    (Elementary.bishopSin dataSet value)
+    (orientedSineValue
+      dataSet (orientation chart) (representative chart))
 sineValueFromRepresentative chart
   with orientation chart
 ... | directNonnegative
@@ -172,15 +179,10 @@ record OrientedFullHalfBallBrackets
       ≡ representativeSineCosineInterlacing chart
 
     sineValueRelation :
-      let representativeValue = representative chart
-      in BishopReal._≃_
-           (Elementary.bishopSin dataSet value)
-           (case orientation chart of λ where
-              directNonnegative →
-                Elementary.bishopSin dataSet representativeValue
-              reflectedNegative →
-                BishopReal.-
-                  (Elementary.bishopSin dataSet representativeValue))
+      BishopReal._≃_
+        (Elementary.bishopSin dataSet value)
+        (orientedSineValue
+          dataSet (orientation chart) (representative chart))
 
     cosineValueRelation :
       BishopReal._≃_
