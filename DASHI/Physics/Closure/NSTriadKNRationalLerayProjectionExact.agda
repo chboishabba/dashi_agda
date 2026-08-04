@@ -25,7 +25,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
-  using (cong; subst; sym)
+  using (cong; subst; sym; trans)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
