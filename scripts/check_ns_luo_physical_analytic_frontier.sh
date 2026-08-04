@@ -23,6 +23,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteResonantPairFoldExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteComplexResonantPairFoldExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedIncrementFubiniExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteComplexFubiniExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteThreePairCoefficientExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreeWayPairPartitionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
