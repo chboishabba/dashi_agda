@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanStepVPolynomialPrefixTailDominationExact a
 import DASHI.Physics.YangMills.BalabanP06PhysicalModelLeafLightweightExact as P06
 import DASHI.Physics.YangMills.BalabanP06PeriodicSupportBridgeExact as PeriodicSupport
 import DASHI.Physics.YangMills.BalabanP06DiameterComplexityAuditExact as DiameterAudit
+import DASHI.Physics.YangMills.BalabanP11LightweightCanonicalPaymentExact as P11
 import DASHI.Physics.YangMills.BalabanP33P10Gate4DependencySpineExact as Physical
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -103,6 +104,25 @@ round11PeriodicSupportModel inputs =
     (latticeSize inputs)
     (periodicSupportSemantics inputs)
 
+------------------------------------------------------------------------
+-- P11 lane: consume exactly the canonical animal constant owned by the
+-- lightweight P06 receipt and the direct-ratio weighted-shell theorem.
+------------------------------------------------------------------------
+
+record Round11P11Cutset : Set₁ where
+  field
+    lightweightLeaf : P06.P06LightweightPhysicalModelLeaf
+    canonicalPayment :
+      P11.P11LightweightCanonicalPayment lightweightLeaf
+
+open Round11P11Cutset public
+
+round11P11CanonicalReceipt :
+  (inputs : Round11P11Cutset) →
+  P11.P11LightweightCanonicalReceipt (canonicalPayment inputs)
+round11P11CanonicalReceipt inputs =
+  P11.p11LightweightCanonicalReceipt (canonicalPayment inputs)
+
 record Round11PhysicalCutset : Set₁ where
   field
     dependencySpine : Physical.Gate4SevenPackageSpine
@@ -114,6 +134,7 @@ record Round11CompleteCutset : Set₁ where
     bishop : Round11BishopCutset
     stepV : Round11StepVCutset
     p06 : Round11P06Cutset
+    p11 : Round11P11Cutset
     physical : Round11PhysicalCutset
 
     negativeHalfBallParityTransport : Set
@@ -123,9 +144,9 @@ record Round11CompleteCutset : Set₁ where
     p06LegacyConsumerBridge : Set
     p06LegacyConsumerBridgeEvidence : p06LegacyConsumerBridge
 
-    p11CanonicalPrefixTailPayment : Set
-    p11CanonicalPrefixTailPaymentEvidence :
-      p11CanonicalPrefixTailPayment
+    p06AndP11UseSamePhysicalPolymerModel : Set
+    p06AndP11UseSamePhysicalPolymerModelEvidence :
+      p06AndP11UseSamePhysicalPolymerModel
 
     fixedLatticeDLRLSIGapChain : Set
     fixedLatticeDLRLSIGapChainEvidence :
@@ -147,6 +168,9 @@ round11DirectRatioTailReducerLevel = machineChecked
 
 round11PeriodicGraphRootDegreeLevel : ProofLevel
 round11PeriodicGraphRootDegreeLevel = machineChecked
+
+round11LightweightP11CanonicalPaymentReducerLevel : ProofLevel
+round11LightweightP11CanonicalPaymentReducerLevel = machineChecked
 
 round11P33P10Gate4DependencyLevel : ProofLevel
 round11P33P10Gate4DependencyLevel = machineChecked
