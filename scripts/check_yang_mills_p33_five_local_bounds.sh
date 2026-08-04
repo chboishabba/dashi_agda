@@ -24,6 +24,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda
   DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda
+  DASHI/Physics/YangMills/BalabanP33FiniteWeightedRowSumContractionExact.agda
   DASHI/Physics/YangMills/BalabanP33WeightedNeumannHalfContractionExact.agda
   DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda
 )
@@ -71,6 +72,8 @@ grep -q 'literalFiveMechanismsGivePath4PhysicalCoercivity' \
   DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda
 grep -q 'p33InverseNormAtMostThirtyTwo' \
   DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda
+grep -q 'weightedKernelContraction' \
+  DASHI/Physics/YangMills/BalabanP33FiniteWeightedRowSumContractionExact.agda
 grep -q 'weightedResidualHalfPowerBound' \
   DASHI/Physics/YangMills/BalabanP33WeightedNeumannHalfContractionExact.agda
 
