@@ -82,38 +82,56 @@ complexThreeWayPartitionReconstructsFold {F = F}
   classify value (x ∷ xs)
   with classify x | Piece.partitionPairs classify xs
      | complexThreeWayPartitionReconstructsFold classify value xs
-... | Piece.rp1Piece | Piece.partition low high tail | induction
-  rewrite induction =
+... | Piece.rp1Piece | Piece.partition low high tail | induction =
+  let
+    h : C3.Complex F
+    h = value x
+    a : C3.Complex F
+    a = complexPairSum low value
+    b : C3.Complex F
+    b = complexPairSum high value
+    c : C3.Complex F
+    c = complexPairSum tail value
+  in
   R.solve 4
-    (λ head a b c →
-      (head R.⊕ (a R.⊕ (b R.⊕ c)))
-      R.⊜ ((head R.⊕ a) R.⊕ (b R.⊕ c)))
-    refl (value x)
-    (complexPairSum low value)
-    (complexPairSum high value)
-    (complexPairSum tail value)
+    (λ h′ a′ b′ c′ →
+      (h′ R.⊕ (a′ R.⊕ (b′ R.⊕ c′)))
+      R.⊜ ((h′ R.⊕ a′) R.⊕ (b′ R.⊕ c′)))
+    induction h a b c
   where module R = Ring.Solver F
-... | Piece.rp2Piece | Piece.partition low high tail | induction
-  rewrite induction =
+... | Piece.rp2Piece | Piece.partition low high tail | induction =
+  let
+    h : C3.Complex F
+    h = value x
+    a : C3.Complex F
+    a = complexPairSum low value
+    b : C3.Complex F
+    b = complexPairSum high value
+    c : C3.Complex F
+    c = complexPairSum tail value
+  in
   R.solve 4
-    (λ head a b c →
-      (head R.⊕ (a R.⊕ (b R.⊕ c)))
-      R.⊜ (a R.⊕ ((head R.⊕ b) R.⊕ c)))
-    refl (value x)
-    (complexPairSum low value)
-    (complexPairSum high value)
-    (complexPairSum tail value)
+    (λ h′ a′ b′ c′ →
+      (h′ R.⊕ (a′ R.⊕ (b′ R.⊕ c′)))
+      R.⊜ (a′ R.⊕ ((h′ R.⊕ b′) R.⊕ c′)))
+    induction h a b c
   where module R = Ring.Solver F
-... | Piece.hardTailPiece | Piece.partition low high tail | induction
-  rewrite induction =
+... | Piece.hardTailPiece | Piece.partition low high tail | induction =
+  let
+    h : C3.Complex F
+    h = value x
+    a : C3.Complex F
+    a = complexPairSum low value
+    b : C3.Complex F
+    b = complexPairSum high value
+    c : C3.Complex F
+    c = complexPairSum tail value
+  in
   R.solve 4
-    (λ head a b c →
-      (head R.⊕ (a R.⊕ (b R.⊕ c)))
-      R.⊜ (a R.⊕ (b R.⊕ (head R.⊕ c))))
-    refl (value x)
-    (complexPairSum low value)
-    (complexPairSum high value)
-    (complexPairSum tail value)
+    (λ h′ a′ b′ c′ →
+      (h′ R.⊕ (a′ R.⊕ (b′ R.⊕ c′)))
+      R.⊜ (a′ R.⊕ (b′ R.⊕ (h′ R.⊕ c′))))
+    induction h a b c
   where module R = Ring.Solver F
 
 record FiniteLiteralIncrementKernel
@@ -134,88 +152,88 @@ open FiniteLiteralIncrementKernel public
 literalPairContribution :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  Pair data → C3.Complex F
-literalPairContribution {system = system} data pair =
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  FiniteLiteralIncrementKernel.Pair kernel → C3.Complex F
+literalPairContribution {system = system} kernel pair =
   Tensor.finiteComplexIncrementTensorPairCoefficient
-    system (leftCoefficient data) (rightCoefficient data)
-    (leftMode data pair) (rightMode data pair)
+    system (leftCoefficient kernel) (rightCoefficient kernel)
+    (leftMode kernel pair) (rightMode kernel pair)
 
 multiplierPairContribution :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  Pair data → C3.Complex F
-multiplierPairContribution {system = system} data pair =
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  FiniteLiteralIncrementKernel.Pair kernel → C3.Complex F
+multiplierPairContribution {system = system} kernel pair =
   Tensor.finiteComplexMultiplierTensorPairCoefficient
-    system (leftCoefficient data) (rightCoefficient data)
-    (leftMode data pair) (rightMode data pair)
+    system (leftCoefficient kernel) (rightCoefficient kernel)
+    (leftMode kernel pair) (rightMode kernel pair)
 
 literalPairCoefficientIdentification :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system)
-    (pair : Pair data) →
-  literalPairContribution data pair
-  ≡ multiplierPairContribution data pair
-literalPairCoefficientIdentification {system = system} data pair =
+    (kernel : FiniteLiteralIncrementKernel F system)
+    (pair : FiniteLiteralIncrementKernel.Pair kernel) →
+  literalPairContribution kernel pair
+  ≡ multiplierPairContribution kernel pair
+literalPairCoefficientIdentification {system = system} kernel pair =
   Tensor.finiteComplexTranslationTensorConvolutionIdentity
-    system (leftCoefficient data) (rightCoefficient data)
-    (leftMode data pair) (rightMode data pair)
+    system (leftCoefficient kernel) (rightCoefficient kernel)
+    (leftMode kernel pair) (rightMode kernel pair)
 
 literalWholeFoldIdentification :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system)
-    (selected : List (Pair data)) →
-  complexPairSum selected (literalPairContribution data)
-  ≡ complexPairSum selected (multiplierPairContribution data)
-literalWholeFoldIdentification data selected =
+    (kernel : FiniteLiteralIncrementKernel F system)
+    (selected : List (FiniteLiteralIncrementKernel.Pair kernel)) →
+  complexPairSum selected (literalPairContribution kernel)
+  ≡ complexPairSum selected (multiplierPairContribution kernel)
+literalWholeFoldIdentification kernel selected =
   complexPairSumCongruent selected
-    (literalPairContribution data)
-    (multiplierPairContribution data)
-    (literalPairCoefficientIdentification data)
+    (literalPairContribution kernel)
+    (multiplierPairContribution kernel)
+    (literalPairCoefficientIdentification kernel)
 
 partitionAt :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  Piece.ThreeWayPartition (Pair data)
-partitionAt data = Piece.partitionPairs (classify data) (pairs data)
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  Piece.ThreeWayPartition (FiniteLiteralIncrementKernel.Pair kernel)
+partitionAt kernel = Piece.partitionPairs (classify kernel) (pairs kernel)
 
 rp1SelectedPairs rp2SelectedPairs hardTailSelectedPairs :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  List (Pair data)
-rp1SelectedPairs data = Piece.rp1Pairs (partitionAt data)
-rp2SelectedPairs data = Piece.rp2Pairs (partitionAt data)
-hardTailSelectedPairs data = Piece.hardTailPairs (partitionAt data)
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  List (FiniteLiteralIncrementKernel.Pair kernel)
+rp1SelectedPairs kernel = Piece.rp1Pairs (partitionAt kernel)
+rp2SelectedPairs kernel = Piece.rp2Pairs (partitionAt kernel)
+hardTailSelectedPairs kernel = Piece.hardTailPairs (partitionAt kernel)
 
-RP1Owned RP2Owned HardTailOwned :
+rp1Owned rp2Owned hardTailOwned :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  Pair data → Set
-RP1Owned data pair = classify data pair ≡ Piece.rp1Piece
-RP2Owned data pair = classify data pair ≡ Piece.rp2Piece
-HardTailOwned data pair = classify data pair ≡ Piece.hardTailPiece
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  FiniteLiteralIncrementKernel.Pair kernel → Set
+rp1Owned kernel pair = classify kernel pair ≡ Piece.rp1Piece
+rp2Owned kernel pair = classify kernel pair ≡ Piece.rp2Piece
+hardTailOwned kernel pair = classify kernel pair ≡ Piece.hardTailPiece
 
 data PairOwnership
     {r : Level} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system)
-    (pair : Pair data) : Set where
-  ownsRP1 : RP1Owned data pair → PairOwnership data pair
-  ownsRP2 : RP2Owned data pair → PairOwnership data pair
-  ownsHardTail : HardTailOwned data pair → PairOwnership data pair
+    (kernel : FiniteLiteralIncrementKernel F system)
+    (pair : FiniteLiteralIncrementKernel.Pair kernel) : Set where
+  ownsRP1 : rp1Owned kernel pair → PairOwnership kernel pair
+  ownsRP2 : rp2Owned kernel pair → PairOwnership kernel pair
+  ownsHardTail : hardTailOwned kernel pair → PairOwnership kernel pair
 
 pairHasExactlyOneOwner :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system)
-    (pair : Pair data) → PairOwnership data pair
-pairHasExactlyOneOwner data pair with classify data pair
+    (kernel : FiniteLiteralIncrementKernel F system)
+    (pair : FiniteLiteralIncrementKernel.Pair kernel) → PairOwnership kernel pair
+pairHasExactlyOneOwner kernel pair with classify kernel pair
 ... | Piece.rp1Piece = ownsRP1 refl
 ... | Piece.rp2Piece = ownsRP2 refl
 ... | Piece.hardTailPiece = ownsHardTail refl
@@ -223,111 +241,111 @@ pairHasExactlyOneOwner data pair with classify data pair
 rp1AndRp2Impossible :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    {data : FiniteLiteralIncrementKernel F system}
-    {pair : Pair data} →
-  RP1Owned data pair → RP2Owned data pair → ⊥
+    {kernel : FiniteLiteralIncrementKernel F system}
+    {pair : FiniteLiteralIncrementKernel.Pair kernel} →
+  rp1Owned kernel pair → rp2Owned kernel pair → ⊥
 rp1AndRp2Impossible refl ()
 
 rp1AndHardTailImpossible :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    {data : FiniteLiteralIncrementKernel F system}
-    {pair : Pair data} →
-  RP1Owned data pair → HardTailOwned data pair → ⊥
+    {kernel : FiniteLiteralIncrementKernel F system}
+    {pair : FiniteLiteralIncrementKernel.Pair kernel} →
+  rp1Owned kernel pair → hardTailOwned kernel pair → ⊥
 rp1AndHardTailImpossible refl ()
 
 rp2AndHardTailImpossible :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    {data : FiniteLiteralIncrementKernel F system}
-    {pair : Pair data} →
-  RP2Owned data pair → HardTailOwned data pair → ⊥
+    {kernel : FiniteLiteralIncrementKernel F system}
+    {pair : FiniteLiteralIncrementKernel.Pair kernel} →
+  rp2Owned kernel pair → hardTailOwned kernel pair → ⊥
 rp2AndHardTailImpossible refl ()
 
 literalThreePieceReconstruction :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  complexPairSum (pairs data) (literalPairContribution data)
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  complexPairSum (pairs kernel) (literalPairContribution kernel)
   ≡ C3.complexAdd
-      (complexPairSum (rp1SelectedPairs data)
-        (literalPairContribution data))
+      (complexPairSum (rp1SelectedPairs kernel)
+        (literalPairContribution kernel))
       (C3.complexAdd
-        (complexPairSum (rp2SelectedPairs data)
-          (literalPairContribution data))
-        (complexPairSum (hardTailSelectedPairs data)
-          (literalPairContribution data)))
-literalThreePieceReconstruction data =
+        (complexPairSum (rp2SelectedPairs kernel)
+          (literalPairContribution kernel))
+        (complexPairSum (hardTailSelectedPairs kernel)
+          (literalPairContribution kernel)))
+literalThreePieceReconstruction kernel =
   complexThreeWayPartitionReconstructsFold
-    (classify data) (literalPairContribution data) (pairs data)
+    (classify kernel) (literalPairContribution kernel) (pairs kernel)
 
 rp1WholeFoldIdentification :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  complexPairSum (rp1SelectedPairs data) (literalPairContribution data)
-  ≡ complexPairSum (rp1SelectedPairs data)
-      (multiplierPairContribution data)
-rp1WholeFoldIdentification data =
-  literalWholeFoldIdentification data (rp1SelectedPairs data)
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  complexPairSum (rp1SelectedPairs kernel) (literalPairContribution kernel)
+  ≡ complexPairSum (rp1SelectedPairs kernel)
+      (multiplierPairContribution kernel)
+rp1WholeFoldIdentification kernel =
+  literalWholeFoldIdentification kernel (rp1SelectedPairs kernel)
 
 rp2WholeFoldIdentification :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  complexPairSum (rp2SelectedPairs data) (literalPairContribution data)
-  ≡ complexPairSum (rp2SelectedPairs data)
-      (multiplierPairContribution data)
-rp2WholeFoldIdentification data =
-  literalWholeFoldIdentification data (rp2SelectedPairs data)
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  complexPairSum (rp2SelectedPairs kernel) (literalPairContribution kernel)
+  ≡ complexPairSum (rp2SelectedPairs kernel)
+      (multiplierPairContribution kernel)
+rp2WholeFoldIdentification kernel =
+  literalWholeFoldIdentification kernel (rp2SelectedPairs kernel)
 
 tailWholeFoldIdentification :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  complexPairSum (hardTailSelectedPairs data)
-      (literalPairContribution data)
-  ≡ complexPairSum (hardTailSelectedPairs data)
-      (multiplierPairContribution data)
-tailWholeFoldIdentification data =
-  literalWholeFoldIdentification data (hardTailSelectedPairs data)
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  complexPairSum (hardTailSelectedPairs kernel)
+      (literalPairContribution kernel)
+  ≡ complexPairSum (hardTailSelectedPairs kernel)
+      (multiplierPairContribution kernel)
+tailWholeFoldIdentification kernel =
+  literalWholeFoldIdentification kernel (hardTailSelectedPairs kernel)
 
 literalIncrementKernelThreePieceMultiplierIdentity :
   ∀ {r} {F : C3.RealField r}
     {system : Complex.FiniteComplexCharacterSystem F}
-    (data : FiniteLiteralIncrementKernel F system) →
-  complexPairSum (pairs data) (literalPairContribution data)
+    (kernel : FiniteLiteralIncrementKernel F system) →
+  complexPairSum (pairs kernel) (literalPairContribution kernel)
   ≡ C3.complexAdd
-      (complexPairSum (rp1SelectedPairs data)
-        (multiplierPairContribution data))
+      (complexPairSum (rp1SelectedPairs kernel)
+        (multiplierPairContribution kernel))
       (C3.complexAdd
-        (complexPairSum (rp2SelectedPairs data)
-          (multiplierPairContribution data))
-        (complexPairSum (hardTailSelectedPairs data)
-          (multiplierPairContribution data)))
-literalIncrementKernelThreePieceMultiplierIdentity data =
+        (complexPairSum (rp2SelectedPairs kernel)
+          (multiplierPairContribution kernel))
+        (complexPairSum (hardTailSelectedPairs kernel)
+          (multiplierPairContribution kernel)))
+literalIncrementKernelThreePieceMultiplierIdentity kernel =
   begin
-    complexPairSum (pairs data) (literalPairContribution data)
-  ≡⟨ literalThreePieceReconstruction data ⟩
+    complexPairSum (pairs kernel) (literalPairContribution kernel)
+  ≡⟨ literalThreePieceReconstruction kernel ⟩
     C3.complexAdd
-      (complexPairSum (rp1SelectedPairs data)
-        (literalPairContribution data))
+      (complexPairSum (rp1SelectedPairs kernel)
+        (literalPairContribution kernel))
       (C3.complexAdd
-        (complexPairSum (rp2SelectedPairs data)
-          (literalPairContribution data))
-        (complexPairSum (hardTailSelectedPairs data)
-          (literalPairContribution data)))
+        (complexPairSum (rp2SelectedPairs kernel)
+          (literalPairContribution kernel))
+        (complexPairSum (hardTailSelectedPairs kernel)
+          (literalPairContribution kernel)))
   ≡⟨ cong₂ C3.complexAdd
-       (rp1WholeFoldIdentification data)
+       (rp1WholeFoldIdentification kernel)
        (cong₂ C3.complexAdd
-         (rp2WholeFoldIdentification data)
-         (tailWholeFoldIdentification data)) ⟩
+         (rp2WholeFoldIdentification kernel)
+         (tailWholeFoldIdentification kernel)) ⟩
     C3.complexAdd
-      (complexPairSum (rp1SelectedPairs data)
-        (multiplierPairContribution data))
+      (complexPairSum (rp1SelectedPairs kernel)
+        (multiplierPairContribution kernel))
       (C3.complexAdd
-        (complexPairSum (rp2SelectedPairs data)
-          (multiplierPairContribution data))
-        (complexPairSum (hardTailSelectedPairs data)
-          (multiplierPairContribution data)))
+        (complexPairSum (rp2SelectedPairs kernel)
+          (multiplierPairContribution kernel))
+        (complexPairSum (hardTailSelectedPairs kernel)
+          (multiplierPairContribution kernel)))
   ∎
