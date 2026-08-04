@@ -4,13 +4,24 @@ on:
   push:
     branches:
       - 'agent/ym-round12-p33-hard-math'
+      - 'agent/ym-round13-five-local-physical-bounds'
     paths:
       - 'DASHI/Physics/YangMills/BalabanPath4GeneratedLDLCertificate.agda'
       - 'DASHI/Physics/YangMills/BalabanP33FiniteSignedRemainderSummationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33Path4SignedRemainderCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33FiveChannelPath4CoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33HardMathValidation.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralBondCellIncidenceExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33SignedFiniteAtomExpansionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda'
       - 'scripts/check_yang_mills_p33_hard_math.sh'
+      - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
       - '.github/workflows/yang-mills-p33-hard-math.yml'
   pull_request:
     paths:
@@ -19,7 +30,17 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33Path4SignedRemainderCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33FiveChannelPath4CoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33HardMathValidation.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralBondCellIncidenceExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33SignedFiniteAtomExpansionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda'
       - 'scripts/check_yang_mills_p33_hard_math.sh'
+      - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
       - '.github/workflows/yang-mills-p33-hard-math.yml'
   workflow_dispatch:
 
@@ -34,5 +55,7 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
-      - name: Check exact LDL, signed finite sums, and concrete P33 coercivity
-        run: nix develop --command bash scripts/check_yang_mills_p33_hard_math.sh
+      - name: Check exact LDL, signed sums, local channels, and P33 coercivity
+        run: |
+          nix develop --command bash scripts/check_yang_mills_p33_hard_math.sh
+          nix develop --command bash scripts/check_yang_mills_p33_five_local_bounds.sh
