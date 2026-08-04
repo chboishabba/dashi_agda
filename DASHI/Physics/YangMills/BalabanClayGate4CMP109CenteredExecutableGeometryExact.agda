@@ -76,8 +76,7 @@ centeredExecutableGeometryDecision radius
   notEndpoints (allEndpoints geometry)
 
 executableCenteredGeometryEndpointExact :
-  ∀ {radius} →
-  CenteredExecutableGeometry radius →
+  ∀ {radius} (geometry : CenteredExecutableGeometry radius) →
   ∀ point order →
   Contours._∈_ order
     (Contours.cmp109ShortestContourOrders

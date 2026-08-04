@@ -2,12 +2,12 @@ module DASHI.Physics.YangMills.BalabanClayGate4CMP109MinimalAdmissibleRepository
 
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Nat.Base using (_≤ᵇ_)
 open import Data.Rational using (ℚ; 1ℚ; _*_; _/_)
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Data.Rational.Properties using (*-assoc; *-identityˡ)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -45,7 +45,7 @@ volume = 28561
 sideIsOddRadius : Centered.oddSide radius ≡ side
 sideIsOddRadius = refl
 
-sideAboveEleven : 12 ≤ᵇ side ≡ true
+sideAboveEleven : (12 ≤ᵇ side) ≡ true
 sideAboveEleven = refl
 
 volumeExact :
@@ -112,20 +112,9 @@ minimalAdmissiblePhysicalGeometry executable = record
       repositoryEmbedInjective
   ; fineSpacing = 1
   ; coarseSpacing = side
-  ; scaleSpacing = _*_
+  ; scaleSpacing = Data.Nat.Base._*_
   ; coarseSpacingMeaning = refl
   }
-
-minimalAdmissibleGeometryDecision :
-  Carrier.Dec
-    (Physical.CMP109PhysicalScaleGeometry
-      radius RepositoryFineSite RepositoryCoarseSite Nat)
-minimalAdmissibleGeometryDecision
-  with Executable.centeredExecutableGeometryDecision radius
-... | Carrier.yes executable =
-      Carrier.yes (minimalAdmissiblePhysicalGeometry executable)
-... | Carrier.no notExecutable = Carrier.no λ geometry →
-      notExecutable (Physical.executableGeometry geometry)
 
 RepositoryCoarseBond : Set
 RepositoryCoarseBond = Carrier.Product RepositoryCoarseSite RepositoryCoarseSite
@@ -161,12 +150,17 @@ volumeℚ siteWeightℚ : ℚ
 volumeℚ = + 28561 / 1
 siteWeightℚ = + 1 / 28561
 
+minimalSiteWeightIsReciprocal : siteWeightℚ * volumeℚ ≡ 1ℚ
+minimalSiteWeightIsReciprocal = refl
+
 minimalSiteWeightCancelsVolume : ∀ value →
   siteWeightℚ * (volumeℚ * value) ≡ value
-minimalSiteWeightCancelsVolume = ℚRing.solve-∀
-
-minimalSiteWeightIsReciprocal : siteWeightℚ * volumeℚ ≡ 1ℚ
-minimalSiteWeightIsReciprocal = minimalSiteWeightCancelsVolume 1ℚ
+minimalSiteWeightCancelsVolume value =
+  trans
+    (sym (*-assoc siteWeightℚ volumeℚ value))
+    (trans
+      (cong (_* value) minimalSiteWeightIsReciprocal)
+      (*-identityˡ value))
 
 cmp109MinimalOddScaleAdmissibilityLevel : ProofLevel
 cmp109MinimalOddScaleAdmissibilityLevel = computed

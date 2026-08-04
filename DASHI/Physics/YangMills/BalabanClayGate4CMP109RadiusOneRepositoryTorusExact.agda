@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4CMP109RadiusOneRepositoryTorusExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -26,53 +26,53 @@ joinIndex :
   ∀ {leftSize rightSize} →
   Bijection.IndexSplit leftSize rightSize →
   Carrier.CyclicIndex (leftSize + rightSize)
-joinIndex (Bijection.fromLeft index) = Bijection.injectLeftIndex index
-joinIndex (Bijection.fromRight index) = Bijection.injectRightIndex index
+joinIndex {leftSize} {rightSize} (Bijection.fromLeft index) =
+  Bijection.injectLeftIndex {leftSize} {rightSize} index
+joinIndex {leftSize} {rightSize} (Bijection.fromRight index) =
+  Bijection.injectRightIndex {leftSize} {rightSize} index
 
 joinSplitIndex :
   ∀ {leftSize rightSize}
     (index : Carrier.CyclicIndex (leftSize + rightSize)) →
-  joinIndex (Bijection.splitIndex index) ≡ index
+  joinIndex {leftSize} {rightSize} (Bijection.splitIndex {leftSize} {rightSize} index) ≡ index
 joinSplitIndex {zero} index = refl
 joinSplitIndex {suc leftSize} Carrier.zeroᵢ = refl
-joinSplitIndex {suc leftSize} (Carrier.sucᵢ index)
+joinSplitIndex {suc leftSize} {rightSize} (Carrier.sucᵢ index)
   with Bijection.splitIndex {leftSize} {rightSize} index
-... | Bijection.fromLeft left
-  rewrite joinSplitIndex {leftSize} {rightSize} index = refl
-... | Bijection.fromRight right
-  rewrite joinSplitIndex {leftSize} {rightSize} index = refl
+    | joinSplitIndex {leftSize} {rightSize} index
+... | Bijection.fromLeft left | refl = refl
+... | Bijection.fromRight right | refl = refl
 
 centeredOffsetEncodeDecode :
   ∀ {radius}
     (index : Carrier.CyclicIndex (suc (radius + radius))) →
-  Bijection.centeredOffsetIndex
-    (Bijection.centeredOffsetFromIndex index)
+  Bijection.centeredOffsetIndex {radius}
+    (Bijection.centeredOffsetFromIndex {radius} index)
   ≡ index
 centeredOffsetEncodeDecode Carrier.zeroᵢ = refl
 centeredOffsetEncodeDecode {radius} (Carrier.sucᵢ index)
   with Bijection.splitIndex {radius} {radius} index
-... | Bijection.fromLeft left
-  rewrite joinSplitIndex {radius} {radius} index = refl
-... | Bijection.fromRight right
-  rewrite Bijection.reverseFiniteIndexInvolutive right
-        | joinSplitIndex {radius} {radius} index = refl
+    | joinSplitIndex {radius} {radius} index
+... | Bijection.fromLeft left | refl = refl
+... | Bijection.fromRight right | refl
+  rewrite Bijection.reverseFiniteIndexInvolutive right = refl
 
 directCenteredEncodeDecode :
   ∀ {radius}
     (site : Blocks.PeriodicBlock (Bijection.centeredTorusParameter radius)) →
-  Bijection.directCenteredEmbed
-    (Bijection.directCenteredDecode site)
+  Bijection.directCenteredEmbed {radius}
+    (Bijection.directCenteredDecode {radius} site)
   ≡ site
-directCenteredEncodeDecode
+directCenteredEncodeDecode {radius}
     (Carrier.pair (Carrier.pair index0 index1)
       (Carrier.pair index2 index3)) =
   Bijection.pairCong
     (Bijection.pairCong
-      (centeredOffsetEncodeDecode index0)
-      (centeredOffsetEncodeDecode index1))
+      (centeredOffsetEncodeDecode {radius} index0)
+      (centeredOffsetEncodeDecode {radius} index1))
     (Bijection.pairCong
-      (centeredOffsetEncodeDecode index2)
-      (centeredOffsetEncodeDecode index3))
+      (centeredOffsetEncodeDecode {radius} index2)
+      (centeredOffsetEncodeDecode {radius} index3))
 
 RepositoryCoarseSite : Set
 RepositoryCoarseSite = Carrier.periodicTorus4Definition (suc zero)
