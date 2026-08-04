@@ -15,6 +15,8 @@ import DASHI.Physics.Closure.NSTriadKNNavierStokesNormalizationTransportExact
 import DASHI.Physics.Closure.NSTriadKNLuoScalingExact
 import DASHI.Physics.Closure.GRWeakFieldDimensionExact
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact
+import DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact
+import DASHI.Physics.YangMills.YangMillsRGParitySISpineExact
 import DASHI.Physics.Closure.HEPDataCMSBelowZDrellYanClaimExact
 import DASHI.Unified.QuantumClassicalGravityBoundaryIntegration
 
@@ -23,6 +25,9 @@ physicsScalingLimitSpineImplemented = true
 
 allRequestedCrossTheoryOwnersImported : Bool
 allRequestedCrossTheoryOwnersImported = true
+
+yangMillsSIGapEndpointImported : Bool
+yangMillsSIGapEndpointImported = true
 
 strictTerminalPromotionStillBlocked : Bool
 strictTerminalPromotionStillBlocked = true
@@ -34,6 +39,10 @@ physicsScalingLimitSpineImplementedIsTrue = refl
 allRequestedCrossTheoryOwnersImportedIsTrue :
   allRequestedCrossTheoryOwnersImported ≡ true
 allRequestedCrossTheoryOwnersImportedIsTrue = refl
+
+yangMillsSIGapEndpointImportedIsTrue :
+  yangMillsSIGapEndpointImported ≡ true
+yangMillsSIGapEndpointImportedIsTrue = refl
 
 strictTerminalPromotionStillBlockedIsTrue :
   strictTerminalPromotionStillBlocked ≡ true
