@@ -15,8 +15,8 @@ module DASHI.Physics.YangMills.BalabanStepVPolynomialPrefixTailDominationExact w
 -- spent on deciding whether an index is before or after the transition.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _<_ ; _≤_)
-open import Data.Nat.Base using (z≤n; s≤s)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_<_; _≤_; z≤n; s≤s)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
