@@ -26,6 +26,7 @@ import Real as BishopReal
 import RealProperties as BishopProperties
 
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfRadiusRatiosExact as Ratios
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -163,7 +164,7 @@ open ConcreteFactorialCoefficientStepBounds public
 sineMagnitudeTermRecurrence :
   ConcreteFactorialCoefficientStepBounds →
   ∀ value index →
-  BishopReal._≤_ (BishopReal.∣_∣ value) Ratios.HalfBall.bishopHalf →
+  BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
   BishopReal._≤_
     (sineMagnitudeTerm value (suc index))
     (BishopReal._*_
@@ -179,7 +180,7 @@ sineMagnitudeTermRecurrence inputs value index insideHalf =
 cosineMagnitudeTermRecurrence :
   ConcreteFactorialCoefficientStepBounds →
   ∀ value index →
-  BishopReal._≤_ (BishopReal.∣_∣ value) Ratios.HalfBall.bishopHalf →
+  BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
   BishopReal._≤_
     (cosineMagnitudeTerm value (suc index))
     (BishopReal._*_
