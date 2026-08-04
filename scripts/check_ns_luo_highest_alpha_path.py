@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+FOUNDATION = ROOT / "DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaFiniteFourierFoundationExact.agda"
 CUTSET = ROOT / "DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaCriticalCutsetExact.agda"
 COMPOSITION = ROOT / "DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaPathCompositionExact.agda"
 
@@ -53,6 +54,20 @@ EXPECTED_PHASES = {
     **{name: 9 for name in EXPECTED[24:27]},
     EXPECTED[27]: 10,
 }
+
+REQUIRED_FOUNDATION_REUSE = [
+    "Official.officialHardProjectorOrthogonal",
+    "Hard.lowProjectorIdempotent",
+    "Hard.highProjectorIdempotent",
+    "Hard.lowAfterHighIsZero",
+    "Hard.highAfterLowIsZero",
+    "Hard.highProjectorCommutesWithDerivative",
+    "Hard.highProjectorCommutesWithCurl",
+    "finiteHermitianParsevalFoundationClosed = true",
+    "hardProjectorOrthogonalityFoundationClosed = true",
+    "hardProjectorDifferentialCommutationFoundationClosed = true",
+    "continuumTorusIntegralIdentificationClosed = false",
+]
 
 REQUIRED_COMPOSITIONS = [
     "Weighted.weightedIncrementFourierRealization",
@@ -118,11 +133,16 @@ def parse_predecessors(text: str) -> dict[str, list[str]]:
 
 
 def main() -> int:
-    if not CUTSET.exists() or not COMPOSITION.exists():
+    if not FOUNDATION.exists() or not CUTSET.exists() or not COMPOSITION.exists():
         raise SystemExit("highest-alpha modules are missing")
 
+    foundation_text = FOUNDATION.read_text(encoding="utf-8")
     cutset_text = CUTSET.read_text(encoding="utf-8")
     composition_text = COMPOSITION.read_text(encoding="utf-8")
+
+    for declaration in REQUIRED_FOUNDATION_REUSE:
+        if declaration not in foundation_text:
+            raise SystemExit(f"missing finite Fourier foundation reuse: {declaration}")
 
     constructors = parse_constructors(cutset_text)
     if constructors != EXPECTED:
@@ -178,9 +198,9 @@ def main() -> int:
         )
 
     print(
-        "Highest-alpha Luo path verified: "
-        "28 declarations, 10 phases, topological predecessors, "
-        "existing-repository coverage, closed reducers, fail-closed frontier."
+        "Highest-alpha Luo path verified: finite Fourier foundation reused; "
+        "28 declarations; 10 phases; topological predecessors; "
+        "existing-repository coverage; closed reducers; fail-closed frontier."
     )
     return 0
 
