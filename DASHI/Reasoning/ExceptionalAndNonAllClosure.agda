@@ -44,7 +44,7 @@ record NonAllClosure
   field
     localCoverage : ∀ x → LocalPredicate x
     noCertifiedGlobalTotalisation :
-      ¬ GlobalTotalisation A Code LocalPredicate
+      Cantor.Not₁ (GlobalTotalisation A Code LocalPredicate)
     exceptionRequiredForLocalCoverage : Bool
     openFieldTemporallyLaterThanExceptionClosureClaimed : Bool
 
