@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoBlockDecayToFourShellSummabilityExact w
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Relation.Binary.PropositionalEquality using (subst)
 
