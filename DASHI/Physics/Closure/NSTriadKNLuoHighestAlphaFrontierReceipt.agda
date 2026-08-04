@@ -3,14 +3,16 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaFrontierReceipt where
 ------------------------------------------------------------------------
 -- PURPOSE
 -- Authoritative status receipt for the highest-alpha route.  It distinguishes
--- the closed cross-stage compositions from the still-uninhabited physical,
--- infinite-dimensional, arbitrary-data and audit leaves.
+-- the closed finite Fourier foundation and cross-stage compositions from the
+-- still-uninhabited continuum, physical, infinite-dimensional, arbitrary-data
+-- and audit leaves.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaFiniteFourierFoundationExact as Foundation
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaCriticalCutsetExact as Cutset
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaPathCompositionExact as Path
 import DASHI.Physics.Closure.NSTriadKNLuoFullCompletionLemmaInventoryExact as Full
@@ -24,12 +26,16 @@ record HighestAlphaFrontierReceipt : Set where
     criticalPhaseCount : Nat
 
     fullCompletionInventoryConstructed : Bool
+    finiteHermitianParsevalFoundationClosed : Bool
+    hardProjectorOrthogonalityFoundationClosed : Bool
+    hardProjectorDifferentialCommutationFoundationClosed : Bool
     highestAlphaCriticalCutsetConstructed : Bool
     finiteAnalyticCompositionClosed : Bool
     sourceSchurCompositionClosed : Bool
     canonicalContradictionCompositionClosed : Bool
     submissionCompositionClosed : Bool
 
+    continuumTorusIntegralIdentificationClosed : Bool
     highestAlphaCriticalCutsetInhabited : Bool
     canonicalAnalyticPhysicalLeavesInhabited : Bool
     periodicNavierStokesGlobalRegularityProved : Bool
@@ -44,15 +50,31 @@ highestAlphaFrontierReceipt = receipt
   Cutset.criticalLemmaCount
   Cutset.criticalPhaseCount
   Full.fullCompletionLemmaInventoryConstructed
+  Foundation.finiteHermitianParsevalFoundationClosed
+  Foundation.hardProjectorOrthogonalityFoundationClosed
+  Foundation.hardProjectorDifferentialCommutationFoundationClosed
   Cutset.highestAlphaCriticalCutsetConstructed
   Path.highestAlphaFiniteAnalyticCompositionClosed
   Path.highestAlphaSourceSchurCompositionClosed
   Path.highestAlphaCanonicalContradictionCompositionClosed
   Path.highestAlphaSubmissionCompositionClosed
+  Foundation.continuumTorusIntegralIdentificationClosed
   Cutset.highestAlphaCriticalCutsetInhabited
   Cutset.canonicalAnalyticPhysicalLeavesInhabited
   Cutset.periodicNavierStokesGlobalRegularityProved
   Cutset.submissionPackageComplete
+
+finiteFourierFoundationIsClosed :
+  finiteHermitianParsevalFoundationClosed
+    highestAlphaFrontierReceipt ≡ true
+finiteFourierFoundationIsClosed =
+  Foundation.finiteHermitianParsevalFoundationClosedIsTrue
+
+hardProjectorOrthogonalityIsClosed :
+  hardProjectorOrthogonalityFoundationClosed
+    highestAlphaFrontierReceipt ≡ true
+hardProjectorOrthogonalityIsClosed =
+  Foundation.hardProjectorOrthogonalityFoundationClosedIsTrue
 
 highestAlphaCutsetIsConstructed :
   highestAlphaCriticalCutsetConstructed
@@ -83,6 +105,11 @@ submissionCompositionIsClosed :
     highestAlphaFrontierReceipt ≡ true
 submissionCompositionIsClosed =
   Path.highestAlphaSubmissionCompositionClosedIsTrue
+
+continuumIntegralIdentificationRemainsOpen :
+  continuumTorusIntegralIdentificationClosed
+    highestAlphaFrontierReceipt ≡ false
+continuumIntegralIdentificationRemainsOpen = refl
 
 highestAlphaCutsetRemainsOpen :
   highestAlphaCriticalCutsetInhabited
