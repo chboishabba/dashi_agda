@@ -8,6 +8,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNProjectedConvectionEnergyFluxExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoExactFluxKernelDecompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoOfficialIncrementKernelFullShellAdapterExact.agda
+  DASHI/Physics/Closure/NSTriadKNIntegerFourierModeAddExact.agda
   DASHI/Physics/Closure/NSTriadKNComplexCommutativeRingExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIncrementTensorPolarizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIncrementKernelFourierMultiplierExact.agda
@@ -18,6 +19,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoComplexLinearIntegralWeightedIncrementExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteComplexWeightedIncrementExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPeriodicComplexCharacterMultiplierExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoPeriodicComplexMultiplierCancellationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTranslationTensorConvolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteComplexTranslationTensorConvolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteResonantPairFoldExact.agda
