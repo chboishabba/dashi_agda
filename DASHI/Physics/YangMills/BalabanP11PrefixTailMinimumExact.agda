@@ -18,7 +18,8 @@ module DASHI.Physics.YangMills.BalabanP11PrefixTailMinimumExact where
 -- reintroducing a scale-by-scale absorption postulate.
 ------------------------------------------------------------------------
 
-open import Data.Nat.Base using (ℕ; _<_; _≤_)
+open import Data.Nat.Base using
+  (ℕ; zero; suc; _<_; _≤_; z≤n; s≤s)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -37,6 +38,17 @@ open P11.P11UniformAbsorptionInputs using
   ; p0MinimumBelowEveryScale
   )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+
+scalePrefixOrTail :
+  ∀ (scale transition : ℕ) →
+  (scale < transition) ⊎ (transition ≤ scale)
+scalePrefixOrTail zero zero = inj₂ z≤n
+scalePrefixOrTail zero (suc transition) = inj₁ (s≤s z≤n)
+scalePrefixOrTail (suc scale) zero = inj₂ z≤n
+scalePrefixOrTail (suc scale) (suc transition)
+  with scalePrefixOrTail scale transition
+... | inj₁ prefix = inj₁ (s≤s prefix)
+... | inj₂ tail = inj₂ (s≤s tail)
 
 record P11PrefixTailMinimumInputs : Set₁ where
   field
@@ -78,6 +90,75 @@ record P11PrefixTailMinimumInputs : Set₁ where
 
 open P11PrefixTailMinimumInputs public
 
+-- The physical analysis does not need to supply decidability or totality of
+-- the scale order.  This reduced input record contains only analytic facts.
+record P11PrefixTailAnalyticInputs : Set₁ where
+  field
+    transitionScale : ℕ
+
+    prefixMinimum : ℝ
+    tailMinimum : ℝ
+    globalMinimum : ℝ
+
+    globalMinimumBelowPrefixMinimum :
+      globalMinimum ≤ℝ prefixMinimum
+
+    globalMinimumBelowTailMinimum :
+      globalMinimum ≤ℝ tailMinimum
+
+    prefixMinimumBelowP0 :
+      ∀ scale →
+      scale < transitionScale →
+      prefixMinimum ≤ℝ LargeField.p0 scale
+
+    tailMinimumBelowP0 :
+      ∀ scale →
+      transitionScale ≤ scale →
+      tailMinimum ≤ℝ LargeField.p0 scale
+
+    globalMinimumNonnegative :
+      0ℝ ≤ℝ globalMinimum
+
+    globalCAbsNonnegative :
+      0ℝ ≤ℝ LargeField.c-abs
+
+    entropyThresholdPaidAtGlobalMinimum :
+      P11.p11EntropyThreshold ≤ℝ
+        (LargeField.c-abs *ℝ globalMinimum)
+
+open P11PrefixTailAnalyticInputs public
+
+prefixTailInputsFromAnalytic :
+  P11PrefixTailAnalyticInputs →
+  P11PrefixTailMinimumInputs
+prefixTailInputsFromAnalytic inputs = record
+  { P11PrefixTailMinimumInputs.transitionScale =
+      P11PrefixTailAnalyticInputs.transitionScale inputs
+  ; P11PrefixTailMinimumInputs.prefixMinimum =
+      P11PrefixTailAnalyticInputs.prefixMinimum inputs
+  ; P11PrefixTailMinimumInputs.tailMinimum =
+      P11PrefixTailAnalyticInputs.tailMinimum inputs
+  ; P11PrefixTailMinimumInputs.globalMinimum =
+      P11PrefixTailAnalyticInputs.globalMinimum inputs
+  ; P11PrefixTailMinimumInputs.scaleIsPrefixOrTail = λ scale →
+      scalePrefixOrTail scale
+        (P11PrefixTailAnalyticInputs.transitionScale inputs)
+  ; P11PrefixTailMinimumInputs.globalMinimumBelowPrefixMinimum =
+      P11PrefixTailAnalyticInputs.globalMinimumBelowPrefixMinimum inputs
+  ; P11PrefixTailMinimumInputs.globalMinimumBelowTailMinimum =
+      P11PrefixTailAnalyticInputs.globalMinimumBelowTailMinimum inputs
+  ; P11PrefixTailMinimumInputs.prefixMinimumBelowP0 =
+      P11PrefixTailAnalyticInputs.prefixMinimumBelowP0 inputs
+  ; P11PrefixTailMinimumInputs.tailMinimumBelowP0 =
+      P11PrefixTailAnalyticInputs.tailMinimumBelowP0 inputs
+  ; P11PrefixTailMinimumInputs.globalMinimumNonnegative =
+      P11PrefixTailAnalyticInputs.globalMinimumNonnegative inputs
+  ; P11PrefixTailMinimumInputs.globalCAbsNonnegative =
+      P11PrefixTailAnalyticInputs.globalCAbsNonnegative inputs
+  ; P11PrefixTailMinimumInputs.entropyThresholdPaidAtGlobalMinimum =
+      P11PrefixTailAnalyticInputs.entropyThresholdPaidAtGlobalMinimum inputs
+  }
+
 proveGlobalMinimumBelowEveryScale :
   (inputs : P11PrefixTailMinimumInputs) →
   ∀ scale →
@@ -114,12 +195,29 @@ p11UniformInputsFromPrefixTail inputs = record
       proveGlobalMinimumBelowEveryScale inputs
   }
 
+p11UniformInputsFromAnalyticPrefixTail :
+  P11PrefixTailAnalyticInputs →
+  P11.P11UniformAbsorptionInputs
+p11UniformInputsFromAnalyticPrefixTail inputs =
+  p11UniformInputsFromPrefixTail
+    (prefixTailInputsFromAnalytic inputs)
+
 p11AbsorptionConditionFromPrefixTail :
   P11PrefixTailMinimumInputs →
   LargeField.ImportedAbsorptionCondition
 p11AbsorptionConditionFromPrefixTail inputs =
   P11.p11AbsorptionConditionFromUniformMinimum
     (p11UniformInputsFromPrefixTail inputs)
+
+p11AbsorptionConditionFromAnalyticPrefixTail :
+  P11PrefixTailAnalyticInputs →
+  LargeField.ImportedAbsorptionCondition
+p11AbsorptionConditionFromAnalyticPrefixTail inputs =
+  p11AbsorptionConditionFromPrefixTail
+    (prefixTailInputsFromAnalytic inputs)
+
+p11ScaleSplitLevel : ProofLevel
+p11ScaleSplitLevel = machineChecked
 
 p11PrefixTailMinimumReductionLevel : ProofLevel
 p11PrefixTailMinimumReductionLevel = machineChecked
