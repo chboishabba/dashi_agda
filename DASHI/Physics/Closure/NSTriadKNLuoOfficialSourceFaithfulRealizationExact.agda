@@ -11,18 +11,23 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialSourceFaithfulRealizationExact 
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Build the canonical source-faithful cutset from the existing official Luo
--- continuation closure plus only the genuinely new nonlinear source data.
--- The state carrier is the singleton selected solution, preventing accidental
--- claims of a uniform estimate over the ambient Solution type.
+-- Build the canonical source-faithful continuation cutset without accepting
+-- the desired localized criterion as input. The dependency order is now:
 --
--- The finite hard-high/full-shell reindexing, equation-(4.2) J-range assembly,
--- fixed-block decay, and final Section-4 composition are all derived. The input
--- package supplies the analytic spatial increment identity, the physical
--- per-mode inequality, the four explicit Step-1 bounds, mean-value/Gronwall
--- data, and the physical recursion/correction budgets. No final Fourier fold,
--- equation-(4.2) decomposition, decay conclusion, or opaque continuity theorem
--- can be chosen independently.
+--   pre-budget physical data
+--     -> residue/gap cutoff majorants
+--     -> derived hard terminal-window budgets
+--     -> hard/smooth localized criterion
+--     -> fixed-b decay bootstrap
+--     -> completed official Luo closure
+--     -> source-faithful continuation cutset.
+--
+-- Finite hard-high/full-shell reindexing, equation-(4.2) J-range assembly,
+-- fixed-block decay, and final Section-4 composition are all derived. The
+-- remaining inputs are the genuinely analytic/semantic obligations: spatial
+-- increment Fourier identification, physical pair-kernel equality, physical
+-- equation-(4.2) estimates, four Step-1 bounds, mean-value/Gronwall data, and
+-- the physical recursion/correction budgets.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -33,7 +38,9 @@ open import Agda.Builtin.Unit using (⊤; tt)
 import Data.Rational.Base as ℚBase
 open ℚBase using (ℚ)
 
-import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Official
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact as PreBudget
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Completed
+import DASHI.Physics.Closure.NSTriadKNLuoResidueGapHardWindowBudgetExact as GapBudget
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapterExact as KernelAdapter
 import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
@@ -42,6 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoPerModeFiniteAssemblyAdapterExact as Pe
 import DASHI.Physics.Closure.NSTriadKNLuoSection4ContinuityConstructorExact as Section4Constructor
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapConstructorExact as BootstrapConstructor
+import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapFromDerivedBudgetExact as BudgetBootstrap
 import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact as Alpha
 import DASHI.Physics.Closure.NSTriadKNCanonicalPeriodicLuoContinuationAdvance as Canonical
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffFluxWeightedSchurExact as Physical
@@ -51,9 +59,12 @@ record OfficialSourceFaithfulNonlinearInputs
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    (closure : Official.OfficialLuoContinuationClosure
+    (data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time) : Setω where
   field
+    residueGapBudgetIdentification :
+      GapBudget.ResidueGapHardWindowIdentification data
+
     Tensor Space Contribution : Set
 
     exactFluxKernel :
@@ -61,7 +72,7 @@ record OfficialSourceFaithfulNonlinearInputs
 
     incrementKernelAnalyticInputs :
       KernelAdapter.OfficialIncrementKernelAnalyticInputs
-        closure exactFluxKernel Space Contribution
+        data exactFluxKernel Space Contribution
 
     commonSchurConstant : ℚ
     weightedShellEnergy sourceEnergySum : Nat → ℚ
@@ -81,29 +92,29 @@ record OfficialSourceFaithfulNonlinearInputs
           commonSchurConstant
           (weightedShellEnergy shell))
 
-    sourceAbsoluteFluxMatchesOfficial :
+    sourceAbsoluteFluxMatchesPreBudgetBridge :
       (shell : Nat) →
       FluxKernel.absoluteHighFlux exactFluxKernel shell tt
       ≡ Physical.absoluteCutoffFlux
-          (Official.officialPhysicalBridge closure shell)
+          (PreBudget.preBudgetPhysicalBridge data shell)
 
-    commonSchurConstantMatchesOfficial :
+    commonSchurConstantMatchesPreBudgetBridge :
       (shell : Nat) →
       commonSchurConstant
       ≡ Physical.profileSchurConstant
-          (Official.officialPhysicalBridge closure shell)
+          (PreBudget.preBudgetPhysicalBridge data shell)
 
-    weightedEnergyMatchesOfficial :
+    weightedEnergyMatchesPreBudgetBridge :
       (shell : Nat) →
       weightedShellEnergy shell
       ≡ Physical.cutoffEnergyMajorant
-          (Official.officialPhysicalBridge closure shell)
+          (PreBudget.preBudgetPhysicalBridge data shell)
 
-    sourceLowGradientMatchesOfficial :
+    sourceLowGradientMatchesPreBudgetBridge :
       (shell : Nat) →
       FluxKernel.lowGradientInfinity exactFluxKernel shell tt
       ≡ Physical.lowPassGradientInfinity
-          (Official.officialPhysicalBridge closure shell)
+          (PreBudget.preBudgetPhysicalBridge data shell)
 
     sourceMultiplyIsRationalMultiply :
       (left right : ℚ) →
@@ -118,51 +129,65 @@ record OfficialSourceFaithfulNonlinearInputs
     perModeFiniteInputs :
       PerModeAdapter.LuoPerModeFinitePhysicalInputs
 
-    fixedShiftBootstrapInputs :
-      BootstrapConstructor.LuoFixedShiftBootstrapInputs
+    fixedShiftCoreInputs :
+      BudgetBootstrap.LuoFixedShiftCoreInputs
+
+    fixedShiftBudgetIdentification :
+      BudgetBootstrap.FixedShiftBudgetIdentification
+        data
+        (GapBudget.residueGapDerivedTerminalBudgetFamily
+          residueGapBudgetIdentification)
+        fixedShiftCoreInputs
 
     alphaShift : Alpha.FourAlignedLuoShift
 
     alphaMatchesThreeHalves :
       Uniform.alpha
         (BootstrapConstructor.luoFixedShiftBootstrap
-          fixedShiftBootstrapInputs)
+          (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+            fixedShiftCoreInputs fixedShiftBudgetIdentification))
       ≡ Alpha.alphaThreeHalves
 
     twoMinusAlphaMatchesHalf :
       Uniform.twoMinusAlpha
         (BootstrapConstructor.luoFixedShiftBootstrap
-          fixedShiftBootstrapInputs)
+          (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+            fixedShiftCoreInputs fixedShiftBudgetIdentification))
       ≡ Alpha.twoMinusAlpha
 
     halfCorrectionMatchesQuarter :
       Uniform.halfTwoMinusAlpha
         (BootstrapConstructor.luoFixedShiftBootstrap
-          fixedShiftBootstrapInputs)
+          (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+            fixedShiftCoreInputs fixedShiftBudgetIdentification))
       ≡ Alpha.halfCorrection
 
     correctedExponentMatchesSevenFourths :
       Uniform.correctedShiftExponent
         (BootstrapConstructor.luoFixedShiftBootstrap
-          fixedShiftBootstrapInputs)
+          (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+            fixedShiftCoreInputs fixedShiftBudgetIdentification))
       ≡ Alpha.correctedExponent
 
     blockShiftMatchesFourAligned :
       Uniform.blockShift
         (BootstrapConstructor.luoFixedShiftBootstrap
-          fixedShiftBootstrapInputs)
+          (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+            fixedShiftCoreInputs fixedShiftBudgetIdentification))
       ≡ Alpha.blockShift alphaShift
 
     correctedCoefficientMatchesFourAligned :
       Uniform.correctedShiftCoefficient
         (BootstrapConstructor.luoFixedShiftBootstrap
-          fixedShiftBootstrapInputs)
+          (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+            fixedShiftCoreInputs fixedShiftBudgetIdentification))
       ≡ Alpha.correctedShiftCoefficient alphaShift
 
     alphaAboveOneEntry :
       Uniform.LuoAlphaAboveOneRegularityEntry
         (BootstrapConstructor.luoFixedShiftBootstrap
-          fixedShiftBootstrapInputs)
+          (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+            fixedShiftCoreInputs fixedShiftBudgetIdentification))
 
     Section4Time : Set
 
@@ -189,14 +214,40 @@ record OfficialSourceFaithfulNonlinearInputs
 
 open OfficialSourceFaithfulNonlinearInputs public
 
+derivedTerminalBudgets :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {data : PreBudget.OfficialLuoPreBudgetData
+      InitialDatum Solution Time} →
+  (inputs : OfficialSourceFaithfulNonlinearInputs data) →
+  PreBudget.DerivedLuoTerminalBudgetFamily data
+derivedTerminalBudgets inputs =
+  GapBudget.residueGapDerivedTerminalBudgetFamily
+    (residueGapBudgetIdentification inputs)
+
+completedOfficialClosure :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {data : PreBudget.OfficialLuoPreBudgetData
+      InitialDatum Solution Time} →
+  OfficialSourceFaithfulNonlinearInputs data →
+  Completed.OfficialLuoContinuationClosure InitialDatum Solution Time
+completedOfficialClosure {data = data} inputs =
+  PreBudget.completeOfficialLuoClosure data
+    (derivedTerminalBudgets inputs)
+
 officialPhysicalIncrementKernel :
   ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    {closure : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time} →
-  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  (inputs : OfficialSourceFaithfulNonlinearInputs data) →
   FluxKernel.LuoIncrementKernelPhysicalRealization
     (exactFluxKernel inputs) (Space inputs)
 officialPhysicalIncrementKernel inputs =
@@ -208,9 +259,9 @@ officialPerModeEvolution :
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    {closure : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time} →
-  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  (inputs : OfficialSourceFaithfulNonlinearInputs data) →
   ModeEvolution.LuoPerModeCommutatorEvolution ⊤ ℚ
 officialPerModeEvolution inputs =
   PerModeAdapter.perModeEvolutionFromFiniteAssembly
@@ -221,22 +272,24 @@ officialFixedShiftBootstrap :
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    {closure : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time} →
-  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  (inputs : OfficialSourceFaithfulNonlinearInputs data) →
   Uniform.LuoFixedShiftUniformBootstrap ℚ
 officialFixedShiftBootstrap inputs =
   BootstrapConstructor.luoFixedShiftBootstrap
-    (fixedShiftBootstrapInputs inputs)
+    (BudgetBootstrap.fixedShiftBootstrapInputsFromDerivedBudget
+      (fixedShiftCoreInputs inputs)
+      (fixedShiftBudgetIdentification inputs))
 
 officialSection4Continuity :
   ∀ {d s t}
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    {closure : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time} →
-  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  (inputs : OfficialSourceFaithfulNonlinearInputs data) →
   ModeEvolution.LuoSection4ContinuityBootstrap
     (officialPerModeEvolution inputs)
 officialSection4Continuity inputs =
@@ -248,14 +301,14 @@ officialThreePieceAdapter :
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    {closure : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time} →
-  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  (inputs : OfficialSourceFaithfulNonlinearInputs data) →
   ThreePiece.LuoThreePiecePhysicalSchurAdapter
     (exactFluxKernel inputs)
-officialThreePieceAdapter {closure = closure} inputs = record
+officialThreePieceAdapter {data = data} inputs = record
   { bridgeAt = λ shell state →
-      Official.officialPhysicalBridge closure shell
+      PreBudget.preBudgetPhysicalBridge data shell
   ; commonSchurConstant = commonSchurConstant inputs
   ; weightedShellEnergy = λ shell state →
       weightedShellEnergy inputs shell
@@ -266,13 +319,13 @@ officialThreePieceAdapter {closure = closure} inputs = record
   ; weightedSchurDominatesSourceEnergy = λ shell state →
       weightedSchurDominatesSourceEnergy inputs shell
   ; sourceAbsoluteFluxMatchesBridge = λ shell state →
-      sourceAbsoluteFluxMatchesOfficial inputs shell
+      sourceAbsoluteFluxMatchesPreBudgetBridge inputs shell
   ; commonSchurConstantMatchesBridge = λ shell state →
-      commonSchurConstantMatchesOfficial inputs shell
+      commonSchurConstantMatchesPreBudgetBridge inputs shell
   ; weightedEnergyMatchesBridge = λ shell state →
-      weightedEnergyMatchesOfficial inputs shell
+      weightedEnergyMatchesPreBudgetBridge inputs shell
   ; sourceLowGradientMatchesBridge = λ shell state →
-      sourceLowGradientMatchesOfficial inputs shell
+      sourceLowGradientMatchesPreBudgetBridge inputs shell
   ; sourceMultiplyIsRationalMultiply =
       sourceMultiplyIsRationalMultiply inputs
   ; sourceOrderIsRationalOrder = sourceOrderIsRationalOrder inputs
@@ -283,13 +336,13 @@ officialCanonicalPhysicalRealization :
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    {closure : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time} →
-  OfficialSourceFaithfulNonlinearInputs closure →
+  OfficialSourceFaithfulNonlinearInputs data →
   Canonical.CanonicalPeriodicLuoPhysicalRealization
     InitialDatum Solution Time
-officialCanonicalPhysicalRealization {closure = closure} inputs = record
-  { officialClosure = closure
+officialCanonicalPhysicalRealization {data = data} inputs = record
+  { officialClosure = completedOfficialClosure inputs
   ; State = ⊤
   ; Tensor = Tensor inputs
   ; Space = Space inputs
@@ -309,16 +362,16 @@ officialCanonicalPhysicalRealization {closure = closure} inputs = record
       (shell : Nat) →
       FluxKernel.absoluteHighFlux (exactFluxKernel inputs) shell tt
       ≡ Physical.absoluteCutoffFlux
-          (Official.officialPhysicalBridge closure shell)
+          (PreBudget.preBudgetPhysicalBridge data shell)
   ; fluxKernelMatchesOfficialProjectedFlux =
-      sourceAbsoluteFluxMatchesOfficial inputs
+      sourceAbsoluteFluxMatchesPreBudgetBridge inputs
   ; WeightedShellEnergyMatchesOfficialSchurMajorant =
       (shell : Nat) →
       weightedShellEnergy inputs shell
       ≡ Physical.cutoffEnergyMajorant
-          (Official.officialPhysicalBridge closure shell)
+          (PreBudget.preBudgetPhysicalBridge data shell)
   ; weightedShellEnergyMatchesOfficialSchurMajorant =
-      weightedEnergyMatchesOfficial inputs
+      weightedEnergyMatchesPreBudgetBridge inputs
   ; FixedShiftDecayMatchesOfficialCutoffEnergy =
       FixedShiftDecayMatchesOfficialCutoffEnergy inputs
   ; fixedShiftDecayMatchesOfficialCutoffEnergy =
@@ -337,17 +390,23 @@ officialCanonicalSourceFaithfulCutset :
     {InitialDatum : Set d}
     {Solution : Set s}
     {Time : Set t}
-    {closure : Official.OfficialLuoContinuationClosure
+    {data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time} →
-  OfficialSourceFaithfulNonlinearInputs closure →
+  OfficialSourceFaithfulNonlinearInputs data →
   Canonical.CanonicalPeriodicLuoSourceFaithfulCutset
     InitialDatum Solution Time
 officialCanonicalSourceFaithfulCutset inputs =
   Canonical.canonicalPeriodicLuoSourceFaithfulCutset
     (officialCanonicalPhysicalRealization inputs)
 
-officialSourceFaithfulBuilderConstructed : Bool
-officialSourceFaithfulBuilderConstructed = true
+nonCircularOfficialSourceFaithfulBuilderConstructed : Bool
+nonCircularOfficialSourceFaithfulBuilderConstructed = true
+
+terminalBudgetDerivedFromResidueGap : Bool
+terminalBudgetDerivedFromResidueGap = true
+
+localizedCriterionDerivedFromTerminalBudget : Bool
+localizedCriterionDerivedFromTerminalBudget = true
 
 finiteIncrementKernelReindexingDerived : Bool
 finiteIncrementKernelReindexingDerived = true
@@ -364,15 +423,20 @@ fixedShiftDecayDerivedByBlockInduction = true
 alphaThreeHalvesAndSevenFourthsPinned : Bool
 alphaThreeHalvesAndSevenFourthsPinned = true
 
-officialBridgeInputsNotDuplicated : Bool
-officialBridgeInputsNotDuplicated = true
-
 canonicalOfficialSourceFaithfulInputsInhabited : Bool
 canonicalOfficialSourceFaithfulInputsInhabited = false
 
-officialSourceFaithfulBuilderConstructedIsTrue :
-  officialSourceFaithfulBuilderConstructed ≡ true
-officialSourceFaithfulBuilderConstructedIsTrue = refl
+nonCircularOfficialSourceFaithfulBuilderConstructedIsTrue :
+  nonCircularOfficialSourceFaithfulBuilderConstructed ≡ true
+nonCircularOfficialSourceFaithfulBuilderConstructedIsTrue = refl
+
+terminalBudgetDerivedFromResidueGapIsTrue :
+  terminalBudgetDerivedFromResidueGap ≡ true
+terminalBudgetDerivedFromResidueGapIsTrue = refl
+
+localizedCriterionDerivedFromTerminalBudgetIsTrue :
+  localizedCriterionDerivedFromTerminalBudget ≡ true
+localizedCriterionDerivedFromTerminalBudgetIsTrue = refl
 
 finiteIncrementKernelReindexingDerivedIsTrue :
   finiteIncrementKernelReindexingDerived ≡ true
@@ -393,10 +457,6 @@ fixedShiftDecayDerivedByBlockInductionIsTrue = refl
 alphaThreeHalvesAndSevenFourthsPinnedIsTrue :
   alphaThreeHalvesAndSevenFourthsPinned ≡ true
 alphaThreeHalvesAndSevenFourthsPinnedIsTrue = refl
-
-officialBridgeInputsNotDuplicatedIsTrue :
-  officialBridgeInputsNotDuplicated ≡ true
-officialBridgeInputsNotDuplicatedIsTrue = refl
 
 canonicalOfficialSourceFaithfulInputsInhabitedIsFalse :
   canonicalOfficialSourceFaithfulInputsInhabited ≡ false
