@@ -25,7 +25,7 @@ module DASHI.Physics.YangMills.BalabanP33IdentityCurvatureLocalExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Rational using (ℚ)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
@@ -111,8 +111,7 @@ identityCurvatureMatchesLiteralWilsonAndCurl : ∀ tangent →
   ≡ Wilson.literalDiscreteCurlEnergy tangent
 identityCurvatureMatchesLiteralWilsonAndCurl tangent =
   trans
-    (Relation.Binary.PropositionalEquality.sym
-      (identityCurvatureHessianCellFoldExact tangent))
+    (sym (identityCurvatureHessianCellFoldExact tangent))
     (trans
       (identityCurvatureCellFoldEquality tangent)
       (identityCurvatureChargeCellFoldExact tangent))
