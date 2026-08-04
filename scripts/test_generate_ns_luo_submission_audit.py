@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +14,7 @@ SPEC = importlib.util.spec_from_file_location("ns_luo_submission_audit", SCRIPT)
 if SPEC is None or SPEC.loader is None:
     raise RuntimeError(f"could not load {SCRIPT}")
 AUDIT = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = AUDIT
 SPEC.loader.exec_module(AUDIT)
 
 
