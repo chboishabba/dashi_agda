@@ -42,7 +42,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -51,8 +51,7 @@ import DASHI.Physics.YangMills.BalabanP33FiniteWeightedRowSumContractionExact as
 oneHalf : ℚ
 oneHalf = + 1 / 2
 
-zeroRepeatedBudget : ∀ budget →
-  0ℚ ≡ Sums.natAsRational (length {A = ℚ} []) * budget
+zeroRepeatedBudget : ∀ budget → 0ℚ ≡ 0ℚ * budget
 zeroRepeatedBudget = ℚRing.solve-∀
 
 repeatedBudgetStep :
@@ -100,7 +99,7 @@ record FiniteWeightedSupportCountHalf
 
     supportCountBudget : ∀ left →
       Sums.natAsRational (length sites)
-        * (epsilon * weightInflation) * weight left
+        * ((epsilon * weightInflation) * weight left)
       ≤ oneHalf * weight left
 
 open FiniteWeightedSupportCountHalf public
