@@ -11,6 +11,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFinitePhysicalSection4BudgetDerivationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteJ12CommutatorDerivativeGainExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteJ2HighHighGapExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalWindowPropagationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoAlphaThreeHalvesFourShiftBootstrapExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFourResidueBlockDecayExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCanonicalSchurInfiniteCompletionExact.agda
