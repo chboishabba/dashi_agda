@@ -149,7 +149,7 @@ bishopGeometricAffineFixedPoint inputs =
     gap = oneMinusRatio inputs
     bound = bishopGeometricUniformBound inputs
     inverseLaw =
-      BishopInverse.*-inverseˡ gap (oneMinusRatioNonzero inputs)
+      BishopInverse.*-inverseʳ gap (oneMinusRatioNonzero inputs)
   in
   BishopProperties.≃-trans
     (BishopProperties.+-cong
