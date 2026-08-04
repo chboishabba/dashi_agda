@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanP33FiveLocalPhysicalBoundsValidation where
 
+-- Focused no-postulate validation root for the concrete P33 hard-math surface.
+
 import DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact
 import DASHI.Physics.YangMills.BalabanP33PrimitiveOperatorNormLocalBoundsExact
 import DASHI.Physics.YangMills.BalabanP33PrimitiveAbsoluteOperatorAdapterExact
