@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 FILES=(
+  DASHI/Physics/Closure/NSTriadKNProjectedConvectionEnergyFluxExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoExactFluxKernelDecompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoOfficialIncrementKernelFullShellAdapterExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIncrementTensorPolarizationExact.agda
@@ -17,6 +18,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFixedShiftRecursionReductionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCutoffEnergyOfficialUpgradeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoMaximalTimeGlobalizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticTaskLedger.agda
   DASHI/Physics/Closure/NSTriadKNLuoCanonicalAnalyticFrontierReceipt.agda
