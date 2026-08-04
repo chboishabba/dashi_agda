@@ -212,12 +212,12 @@ insertionPreservesEndpoint :
   ≡ follow action (step action point value) source
 insertionPreservesEndpoint action insertHere point = refl
 insertionPreservesEndpoint {value = value}
-    action (insertThere {other = other} insertion) point =
+    action (insertThere {other = other} {values = values} insertion) point =
   trans
     (insertionPreservesEndpoint action insertion
       (step action point other))
     (cong
-      (λ start → follow action start _)
+      (λ start → follow action start values)
       (distinctSegmentsCommute action point other value))
 
 generatedPermutationPreservesEndpoint :
