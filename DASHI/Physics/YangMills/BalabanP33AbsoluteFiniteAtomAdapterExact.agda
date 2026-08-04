@@ -25,12 +25,30 @@ module DASHI.Physics.YangMills.BalabanP33AbsoluteFiniteAtomAdapterExact where
 -- finite atom sum are then derived rather than supplied independently.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (∣_∣; _≤_)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT3LiteralPointwiseHessianEstimatesExact as Pointwise
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredFiniteAtomListsExact as Atoms
 import DASHI.Physics.YangMills.BalabanP33SignedFiniteAtomExpansionExact as SignedAtoms
 import DASHI.Physics.YangMills.BalabanP33PrimitiveAbsoluteOperatorAdapterExact as Absolute
+
+mapAgreement :
+  ∀ {A B : Set} (function : A → B) (values : List A) →
+  SignedAtoms.map function values ≡ Atoms.map function values
+mapAgreement function [] = refl
+mapAgreement function (value ∷ values)
+  rewrite mapAgreement function values = refl
+
+sumMappedAgreement :
+  ∀ {Atom : Set} (atoms : List Atom) (value : Atom → Data.Rational.ℚ) →
+  SignedAtoms.sumMapped atoms value
+  ≡ Pointwise.sumℚ (Atoms.map value atoms)
+sumMappedAgreement atoms value =
+  cong Pointwise.sumℚ (mapAgreement value atoms)
 
 fromAbsoluteFixedAtomExpansion :
   ∀ {Background State Cell Atom fixedAtoms fixedCoefficient}
@@ -41,7 +59,8 @@ fromAbsoluteFixedAtomExpansion :
     ≤ Atoms.atomMajorant dataSet background state cell atom) →
   SignedAtoms.SignedFixedAtomExpansion
     Background State Cell Atom fixedAtoms fixedCoefficient
-fromAbsoluteFixedAtomExpansion dataSet absoluteBound = record
+fromAbsoluteFixedAtomExpansion
+    {fixedAtoms = fixedAtoms} dataSet absoluteBound = record
   { SignedAtoms.SignedFixedAtomExpansion.atomValue =
       Atoms.atomValue dataSet
   ; SignedAtoms.SignedFixedAtomExpansion.atomMajorant =
@@ -53,7 +72,12 @@ fromAbsoluteFixedAtomExpansion dataSet absoluteBound = record
   ; SignedAtoms.SignedFixedAtomExpansion.radius =
       Atoms.radius dataSet
   ; SignedAtoms.SignedFixedAtomExpansion.expansionExact =
-      Atoms.expansionExact dataSet
+      λ background state cell →
+        trans
+          (Atoms.expansionExact dataSet background state cell)
+          (sym
+            (sumMappedAgreement fixedAtoms
+              (Atoms.atomValue dataSet background state cell)))
   ; SignedAtoms.SignedFixedAtomExpansion.atomTwoSided =
       λ background state cell atom →
         Absolute.operatorNormDominatesCoordinate
@@ -61,7 +85,16 @@ fromAbsoluteFixedAtomExpansion dataSet absoluteBound = record
           (Atoms.atomMajorant dataSet background state cell atom)
           (absoluteBound background state cell atom)
   ; SignedAtoms.SignedFixedAtomExpansion.majorantSumBelowConfiguredCharge =
-      Atoms.majorantSumBelowConfiguredCharge dataSet
+      λ background state cell →
+        subst
+          (λ lower → lower
+            ≤ fixedCoefficient * Atoms.radius dataSet background state cell
+              * Atoms.localCharge dataSet background state cell)
+          (sym
+            (sumMappedAgreement fixedAtoms
+              (Atoms.atomMajorant dataSet background state cell)))
+          (Atoms.majorantSumBelowConfiguredCharge
+            dataSet background state cell)
   }
 
 absoluteAtomToSignedAtomLevel : ProofLevel
