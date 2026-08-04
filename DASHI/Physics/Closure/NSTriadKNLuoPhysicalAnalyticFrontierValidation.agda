@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoSubmissionAuditReceiptExact
 import DASHI.Physics.Closure.NSTriadKNLuoCoreSourceFidelityInventoryExact
 import DASHI.Physics.Closure.NSTriadKNLuoSubmissionLemmaCrosswalkExact
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalPathCompositionExact
+import DASHI.Physics.Closure.NSTriadKNLuoNoCircularityAuditExact
 import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionCompositionExact
 import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionFrontierReceipt
 
