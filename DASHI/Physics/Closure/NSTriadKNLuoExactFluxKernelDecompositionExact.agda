@@ -28,6 +28,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact where
 -- which is available on the interval where the Leray--Hopf solution is already
 -- regular and divergence-free.  It is not promoted from the global weak energy
 -- inequality alone.
+--
+-- SOURCE-FIDELITY CORRECTION
+-- The physical realization now carries an explicit scalar action on tensors
+-- and uses kernelWeight inside the integrand.  The former unweighted formula
+-- stored kernelWeight but never applied it, and therefore did not literally
+-- represent Luo's r_p integral.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
@@ -163,6 +169,7 @@ record LuoIncrementKernelPhysicalRealization
     subtractState : State → State → State
     incrementTensor : State → State → Tensor
     kernelWeight : Nat → Space → Scalar
+    scaleTensor : Scalar → Tensor → Tensor
     integrateTensor : (Space → Tensor) → Tensor
 
     literalIncrementKernelMeaning :
@@ -170,9 +177,11 @@ record LuoIncrementKernelPhysicalRealization
       incrementKernel source shell u
       ≡ integrateTensor
           (λ displacement →
-            incrementTensor
-              (subtractState (translate displacement u) u)
-              (subtractState (translate displacement u) u))
+            scaleTensor
+              (kernelWeight shell displacement)
+              (incrementTensor
+                (subtractState (translate displacement u) u)
+                (subtractState (translate displacement u) u)))
 
     FourierTerm : Set
     physicalTriadTerms : Nat → State → FourierTerm
@@ -245,6 +254,9 @@ luoHighFluxCancellationIdentityRecorded = true
 luoThreePieceFluxTargetConstructed : Bool
 luoThreePieceFluxTargetConstructed = true
 
+weightedIncrementKernelFormulaCorrected : Bool
+weightedIncrementKernelFormulaCorrected = true
+
 luoExactFluxKernelPhysicallyInhabited : Bool
 luoExactFluxKernelPhysicallyInhabited = false
 
@@ -259,6 +271,10 @@ luoHighFluxCancellationIdentityRecordedIsTrue = refl
 luoThreePieceFluxTargetConstructedIsTrue :
   luoThreePieceFluxTargetConstructed ≡ true
 luoThreePieceFluxTargetConstructedIsTrue = refl
+
+weightedIncrementKernelFormulaCorrectedIsTrue :
+  weightedIncrementKernelFormulaCorrected ≡ true
+weightedIncrementKernelFormulaCorrectedIsTrue = refl
 
 luoExactFluxKernelPhysicallyInhabitedIsFalse :
   luoExactFluxKernelPhysicallyInhabited ≡ false
