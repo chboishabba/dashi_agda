@@ -26,8 +26,9 @@ module DASHI.Physics.YangMills.BalabanP33LiteralBondCellIncidenceExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
-open import Data.Rational using (ℚ)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Rational using (ℚ; _≤_)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -69,10 +70,10 @@ bondCellChargeSumExact bondF =
 
 bondCellIncidenceBound : ∀ bondF →
   sumRational bondCells4 (bondCellCharge bondF)
-  Data.Rational._≤_ Hodge.bondNormSq bondF
+  ≤ Hodge.bondNormSq bondF
 bondCellIncidenceBound bondF
   rewrite bondCellChargeSumExact bondF =
-  Data.Rational.Properties.≤-refl
+  ℚP.≤-refl
 
 bondCellCarrierLevel : ProofLevel
 bondCellCarrierLevel = machineChecked
