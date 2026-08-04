@@ -27,12 +27,14 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteIndexedSourceJ1Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSchurEnvelopeRefinementExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCanonicalSchurTailExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteSchurTailDominationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformCutoffEnergyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformEquation42SourceExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallProductExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallVariationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedMeanValueGronwallExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceFaithfulRound4Validation.agda
 )
 
 for file in "${FILES[@]}"; do
@@ -43,4 +45,4 @@ for file in "${FILES[@]}"; do
 done
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceFaithfulRound4Validation.agda
