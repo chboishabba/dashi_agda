@@ -9,6 +9,8 @@ import DASHI.Physics.YangMills.BalabanBishopRatioMonotoneTermsExact as Ratio
 import DASHI.Physics.YangMills.BalabanBishopSetoidRatioMonotoneExact as SetoidRatio
 import DASHI.Physics.YangMills.BalabanBishopAlternatingFirstOmittedExact as Alternating
 import DASHI.Physics.YangMills.BalabanBishopSetoidAlternatingFirstOmittedExact as SetoidAlternating
+import DASHI.Physics.YangMills.BalabanP06PeriodicSupportDegreeExact as PeriodicDegree
+import DASHI.Physics.YangMills.BalabanP06PeriodicGraphAdapterExact as PeriodicGraph
 import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
 import DASHI.Physics.YangMills.BalabanP06CanonicalAnimalConstantExact as P06
 import DASHI.Physics.YangMills.BalabanP06A1A2A3InfluenceExact as A123
@@ -75,6 +77,18 @@ bishopSetoidAlternatingTailValidated :
     SetoidAlternating.bishopSetoidOrderedDifferenceKernel
 bishopSetoidAlternatingTailValidated =
   SetoidAlternating.bishopAlternatingBracketsGiveFirstOmittedTail
+
+periodicSupportDegreeValidated :
+  ∀ n → PeriodicDegree.PeriodicSupportDegreeCertificate n
+periodicSupportDegreeValidated =
+  PeriodicDegree.periodicSupportDegreeCertificate
+
+periodicGraphDegreeReducerValidated :
+  ∀ {n} →
+  PeriodicGraph.PeriodicCountNeighborsIdentification n →
+  PeriodicGraph.PeriodicSupportGraphCertificate n
+periodicGraphDegreeReducerValidated =
+  PeriodicGraph.periodicSupportGraphCertificate
 
 canonicalP06ConstantValidated :
   (package : Entropy.P06ModelLeafDischargePackage) →
