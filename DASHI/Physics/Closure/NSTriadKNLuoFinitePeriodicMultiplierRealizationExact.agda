@@ -23,9 +23,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoFinitePeriodicMultiplierRealizationExac
 -- convolution receipts. The finite Young reducer proves the scalar bounds;
 -- the caller identifies those sums with the smooth observables and their
 -- majorants with C_chi times the hard observables.
+--
+-- The official pre-budget carrier places Solution and TorusPoint in the same
+-- universe. This reducer preserves that source interface explicitly.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
@@ -37,10 +40,9 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteSignedConvolutionYoungExact as Yo
 import DASHI.Physics.Closure.NSTriadKNLuoConcreteRadialMultiplierKernelExact as Multiplier
 
 record FinitePeriodicMultiplierInputs
-    {stateLevel pointLevel : Level}
-    (State : Set stateLevel)
-    (TorusPoint : Set pointLevel)
-    : Set (lsuc (stateLevel ⊔ pointLevel)) where
+    {st : Level}
+    (State TorusPoint : Set st)
+    : Set (lsuc st) where
   field
     kernelTheorem : Multiplier.PeriodizedDyadicKernelL1Theorem TorusPoint
 
@@ -89,16 +91,15 @@ record FinitePeriodicMultiplierInputs
       ≡ Multiplier.euclideanInverseTransformL1Norm kernelTheorem
           * hardTerminalWindowIntegral shell state
 
-    SmoothLowPassFactorsThroughHardNext : Set stateLevel
+    SmoothLowPassFactorsThroughHardNext : Set st
     smoothLowPassFactorsThroughHardNext :
       SmoothLowPassFactorsThroughHardNext
 
 open FinitePeriodicMultiplierInputs public
 
 gradientYoungEstimate :
-  ∀ {stateLevel pointLevel}
-    {State : Set stateLevel}
-    {TorusPoint : Set pointLevel} →
+  ∀ {st}
+    {State TorusPoint : Set st} →
   (inputs : FinitePeriodicMultiplierInputs State TorusPoint) →
   (shell : Nat) → (state : State) →
   smoothGradientInfinity inputs shell state
@@ -115,9 +116,8 @@ gradientYoungEstimate inputs shell state =
       (Young.finiteConvolutionUpper (gradientConvolution inputs shell state)))
 
 terminalYoungEstimate :
-  ∀ {stateLevel pointLevel}
-    {State : Set stateLevel}
-    {TorusPoint : Set pointLevel} →
+  ∀ {st}
+    {State TorusPoint : Set st} →
   (inputs : FinitePeriodicMultiplierInputs State TorusPoint) →
   (shell : Nat) → (state : State) →
   smoothTerminalWindowIntegral inputs shell state
@@ -134,9 +134,8 @@ terminalYoungEstimate inputs shell state =
       (Young.finiteConvolutionUpper (terminalConvolution inputs shell state)))
 
 finitePeriodicMultiplierRealization :
-  ∀ {stateLevel pointLevel}
-    {State : Set stateLevel}
-    {TorusPoint : Set pointLevel} →
+  ∀ {st}
+    {State TorusPoint : Set st} →
   FinitePeriodicMultiplierInputs State TorusPoint →
   Multiplier.CanonicalLuoMultiplierRealization State TorusPoint
 finitePeriodicMultiplierRealization inputs = record
