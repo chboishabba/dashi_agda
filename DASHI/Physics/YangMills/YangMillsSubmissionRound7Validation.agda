@@ -6,6 +6,9 @@ import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as 
 import DASHI.Physics.YangMills.YangMillsSubmissionPrimarySourceLedger
 import DASHI.Physics.YangMills.BalabanP06OwnedGraphCombinatoricsExact as P06
 import DASHI.Physics.YangMills.BalabanP11UniformAbsorptionReductionExact as P11
+import DASHI.Physics.YangMills.LocalLatticeP11SubmissionBridgeExact as P11Bridge
+import DASHI.Physics.YangMills.LocalLatticeDischargePipeline as Local
+import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
 import DASHI.Physics.YangMills.BalabanBishopHalfBallSquareReductionExact
 import DASHI.Physics.YangMills.YangMillsSubmissionTypedLimitEndpointExact
 import DASHI.Physics.YangMills.YangMillsSubmissionExactCutset
@@ -34,6 +37,13 @@ p11UniformAbsorptionReducerValidated :
   LargeField.ImportedAbsorptionCondition
 p11UniformAbsorptionReducerValidated =
   P11.p11AbsorptionConditionFromUniformMinimum
+
+localLatticeP11SubmissionBridgeValidated :
+  (package : Local.LocalLatticeAnalyticDischargePackage) →
+  P11.P11UniformAbsorptionInputs →
+  Assembly.StepVSpatialKPCertificate
+localLatticeP11SubmissionBridgeValidated =
+  P11Bridge.localLatticeStepVFromUniformP0Minimum
 
 submissionRound7ReceiptValidated :
   Receipt.SubmissionRound7Receipt
