@@ -4,6 +4,7 @@ import DASHI.Cognition.PNF.KantApperceptionLearningBridge
 import DASHI.Foundations.JPlusOneScaleBridge
 import DASHI.Foundations.StageCantorScaleRecursion
 import DASHI.Foundations.StageAtlasZeroToTwelve
+import DASHI.Foundations.StageZeroToTwelveTransitionCore
 import DASHI.Reasoning.KantAntinomyCore
 import DASHI.Reasoning.KantCopjecSexuationBridge
 import DASHI.Reasoning.KantCriticalCompiler
