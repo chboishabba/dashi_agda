@@ -45,6 +45,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteCutoffEnergyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteTerminalCutoffExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDiscreteGronwallExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteMeanValueSelectionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteMeanValueGronwallExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDyadicMultiplierMagnitudeExact.agda
