@@ -9,6 +9,7 @@ import DASHI.Reasoning.KantAntinomyCore
 import DASHI.Reasoning.KantCopjecSexuationBridge
 import DASHI.Reasoning.KantCriticalCompiler
 import DASHI.Reasoning.KantPNFBridge
+import DASHI.Reasoning.KantZizekTranscendentalIllusionBridge
 import DASHI.Reasoning.KantLacanRegression
 import DASHI.Reasoning.KantLacanSourceAtlas
 import DASHI.Reasoning.KantLacanZizekRuntime
