@@ -1,0 +1,3 @@
+module DASHI.Physics.YangMills.YangMillsSubmissionRound10PRValidationTrigger where
+
+import DASHI.Physics.YangMills.YangMillsSubmissionRound10LightValidation
