@@ -19,6 +19,8 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; _≤_)
 
 import DASHI.Physics.YangMills.GraphCombinatorics as Graph
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
+import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact as WordEntropy
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPhysicalAdjacencyAndBadReachExact as Physical
 import DASHI.Physics.YangMills.BalabanP06PeriodicSupportDegreeExact as PeriodicDegree
@@ -30,10 +32,11 @@ record FiniteNeighbourGraph : Set₁ where
     Vertex : Set
     Edge : Set
     Adjacent : Vertex → Vertex → Set
+    Member : Vertex → List Vertex → Set
     neighbours : Vertex → List Vertex
     everyAdjacentEnumerated : ∀ {left right} →
       Adjacent left right →
-      Graph._∈_ right (neighbours left)
+      Member right (neighbours left)
 
 open FiniteNeighbourGraph public
 
@@ -56,9 +59,9 @@ ConcreteBoundedDegree finite bound =
 periodicFiniteNeighbourGraph : Nat → FiniteNeighbourGraph
 periodicFiniteNeighbourGraph n = record
   { Vertex = Periodic.PeriodicBlock n
-  ; Edge =
-      DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact.SignedAxis4
+  ; Edge = WordEntropy.SignedAxis4
   ; Adjacent = Physical.PeriodicPhysicalAdjacent
+  ; Member = Carrier._∈_
   ; neighbours = PeriodicDegree.periodicNeighbourEnumeration
   ; everyAdjacentEnumerated =
       PeriodicDegree.physicalNeighbourEnumerated
