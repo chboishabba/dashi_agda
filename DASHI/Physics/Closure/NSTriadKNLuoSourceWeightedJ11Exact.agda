@@ -37,7 +37,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; subst₂; sym)
+  (cong; cong₂; subst; subst₂)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Sum
