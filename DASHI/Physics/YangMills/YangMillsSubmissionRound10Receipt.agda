@@ -9,6 +9,7 @@ record Round10Receipt : Set where
     branchName baseCommit : String
 
     reciprocalFactorialDischarged : Bool
+    concreteSineCosineTermParityDischarged : Bool
     transformedConvergenceReducedToTermParity : Bool
     alternatingOrderClosureDischarged : Bool
     ordinaryFiniteGeometricBoundDischarged : Bool
@@ -28,6 +29,7 @@ round10Receipt = record
   { branchName = "agent/ym-round10-concrete-bishop-stepv"
   ; baseCommit = "cbb606fdaab09557320164f1bb3b7744b7ebcd5c"
   ; reciprocalFactorialDischarged = true
+  ; concreteSineCosineTermParityDischarged = true
   ; transformedConvergenceReducedToTermParity = true
   ; alternatingOrderClosureDischarged = true
   ; ordinaryFiniteGeometricBoundDischarged = true
@@ -43,6 +45,10 @@ round10Receipt = record
 round10ReciprocalFactorialIsDischarged :
   reciprocalFactorialDischarged round10Receipt ≡ true
 round10ReciprocalFactorialIsDischarged = refl
+
+round10TermParityIsDischarged :
+  concreteSineCosineTermParityDischarged round10Receipt ≡ true
+round10TermParityIsDischarged = refl
 
 round10GlobalEndpointRemainsOpen :
   globalYangMillsEndpointDischarged round10Receipt ≡ false
