@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.PhysicalInvolutionParityExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
