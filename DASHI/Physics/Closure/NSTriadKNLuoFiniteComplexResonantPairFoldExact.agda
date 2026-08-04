@@ -31,6 +31,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteComplexWeightedIncrementExact as Complex
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteComplexTranslationTensorConvolutionExact as Tensor
 
