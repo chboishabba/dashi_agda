@@ -11,7 +11,9 @@ import DASHI.Reasoning.PathologicPerspectiveHyperfabric as Perspective
 import DASHI.Reasoning.PathologicSourceAtlas as Sources
 import DASHI.Reasoning.PathologicTheatreMetaRuntime as Theatre
 import DASHI.Reasoning.RSITypedDependencyHyperfabric as RSI
+import DASHI.Reasoning.SinthomeFiniteWitness as FiniteSinthome
 import DASHI.Reasoning.TypedDependencyUpgradeAtlas as Upgrade
+import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 
 ------------------------------------------------------------------------
 -- Exact regression anchors for the typed-dependency and Pathologic tranche.
@@ -39,6 +41,21 @@ rsiRelationalNotTopological :
     RSI.canonicalRSITypedDependencyAuthorityBoundary
   ≡ false
 rsiRelationalNotTopological = refl
+
+rsiCompatibleSectionAvailable :
+  Hyperfabric.GlobalSection RSI.canonicalRSITypedHyperfabric
+rsiCompatibleSectionAvailable = RSI.canonicalRSIGlobalSection
+
+finiteSinthomeRetainsCoherence :
+  FiniteSinthome.Coherent FiniteSinthome.integratedState
+finiteSinthomeRetainsCoherence = FiniteSinthome.finiteSinthomeCoherent
+
+finiteSinthomeNotErasureRegression :
+  ¬ FiniteSinthome.Equivalent
+      FiniteSinthome.integratedState
+      FiniteSinthome.erasedState
+finiteSinthomeNotErasureRegression =
+  FiniteSinthome.finiteSinthomeNotErasure
 
 metaRevealRetainsTrace :
   Theatre.MetaReveal.traceAfterReveal Theatre.canonicalDeveloperMetaReveal
