@@ -35,7 +35,8 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality
+  using (cong; subst; subst₂; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -213,8 +214,6 @@ finitePrefixJensen values cutoff =
         )
   in
   subst₂ _≤_ leftMeaning rightMeaning listBound
-  where
-  open import Relation.Binary.PropositionalEquality using (subst₂)
 
 finiteDyadicPrefixJensen :
   (values : Nat → ℚ) →
