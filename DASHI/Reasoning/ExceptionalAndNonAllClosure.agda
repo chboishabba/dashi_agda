@@ -69,13 +69,10 @@ record PredicateCompactification (A : Set) : Set₁ where
     closedPresentation : Cantor.Pred A
     compactify : Cantor.Pred A → Cantor.Pred A
     presentationProducedByCompactification :
-      closedPresentation ≈ₚ compactify openGround
+      Cantor._≈ₚ_ closedPresentation (compactify openGround)
     distinguishedExceptionLabel : String
     groundLogicallyPrior : Bool
     compactificationCreatesGroundClaimed : Bool
-  where
-  infix 4 _≈ₚ_
-  _≈ₚ_ = Cantor._≈ₚ_
 
 record ClosureAuthorityBoundary : Set where
   field
