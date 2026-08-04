@@ -13,6 +13,8 @@ files=(
   DASHI/Reasoning/TypedHyperfabricCore.agda
   DASHI/Reasoning/RSITypedDependencyHyperfabric.agda
   DASHI/Reasoning/SinthomeTypedStabilisation.agda
+  DASHI/Reasoning/SinthomeFiniteWitness.agda
+  DASHI/Reasoning/PNFTypedDependencyAdapters.agda
   DASHI/Reasoning/TypedDependencyUpgradeAtlas.agda
   DASHI/Reasoning/PathologicConstraintSystem.agda
   DASHI/Reasoning/PathologicPerspectiveHyperfabric.agda
@@ -43,6 +45,11 @@ grep -q 'canonicalIrreducibleRSIDependency' DASHI/Reasoning/RSITypedDependencyHy
 grep -q 'topologicalBorromeanLinkProved = false' DASHI/Reasoning/RSITypedDependencyHyperfabric.agda
 grep -q 'notEquivalentToErasure' DASHI/Reasoning/SinthomeTypedStabilisation.agda
 grep -q 'minimalityAutomaticallyAvailable = false' DASHI/Reasoning/SinthomeTypedStabilisation.agda
+grep -q 'canonicalFiniteSinthome' DASHI/Reasoning/SinthomeFiniteWitness.agda
+grep -q 'finiteSinthomeNotErasure' DASHI/Reasoning/SinthomeFiniteWitness.agda
+grep -q 'memoryUpdatePreservesEvent' DASHI/Reasoning/PNFTypedDependencyAdapters.agda
+grep -q 'record TypedClosureGluing' DASHI/Reasoning/PNFTypedDependencyAdapters.agda
+grep -q 'availabilityBooleanReconstructsSection = false' DASHI/Reasoning/PNFTypedDependencyAdapters.agda
 
 # Marked unit extension and the corrected hyphen reading.
 grep -q 'predecessorSubtractionRequired = false' DASHI/Foundations/MarkedUnitExtensionCore.agda
