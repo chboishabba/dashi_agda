@@ -17,13 +17,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialPerModeShellMeaningExact where
 --
 -- PURPOSE
 -- Replace the former opaque statement that equation-(4.2) uses the official
--- Littlewood--Paley shells by a typed semantic package.  The package owns the
+-- Littlewood--Paley shells by a typed semantic package. The package owns the
 -- official shell energy, dissipation and time derivative and identifies all
 -- three with the per-mode finite physical input at each shell.
 --
--- The definitions of the official quantities remain physical analytic data;
--- the shell-index and quantity agreements can no longer be hidden in an
--- unstructured proposition token.
+-- All data live in Set, so this record can inhabit the historical Set-valued
+-- compatibility field without a universe-raising placeholder.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -34,20 +33,11 @@ open import Data.Rational.Base using (ℚ)
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeFiniteAssemblyAdapterExact as PerMode
 
 record OfficialPerModeShellMeaning
-    (inputs : PerMode.LuoPerModeFinitePhysicalInputs) : Set₁ where
+    (inputs : PerMode.LuoPerModeFinitePhysicalInputs) : Set where
   field
     officialShellL2Squared : Nat → ℚ
     officialShellDissipation : Nat → ℚ
     officialTimeDerivativeShellL2Squared : Nat → ℚ
-
-    OfficialShellProjectorMeaning : Set
-    officialShellProjectorMeaning : OfficialShellProjectorMeaning
-
-    OfficialViscousMultiplierMeaning : Set
-    officialViscousMultiplierMeaning : OfficialViscousMultiplierMeaning
-
-    OfficialTimeDerivativeMeaning : Set
-    officialTimeDerivativeMeaning : OfficialTimeDerivativeMeaning
 
     shellL2SquaredAgreement :
       (shell : Nat) →
