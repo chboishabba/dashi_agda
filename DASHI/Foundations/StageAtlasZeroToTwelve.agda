@@ -13,10 +13,11 @@ import DASHI.Foundations.StageAtlasZeroToEleven as Legacy
 -- Two coordinate systems are kept separate:
 --
 --   * the inherited four-position residue/revolution chart;
---   * the decimal j-scale address q * 10 + r.
+--   * the decimal carry address q * 10 + r.
 --
--- Here "j-scale unit" is a place-value name for ten fine units.  It is not
--- identified with the classical modular j-invariant.
+-- The local j-basis unit is one fine unit.  A decimal carry contains ten
+-- local j-units.  Neither notation is identified with the classical modular
+-- j-invariant.
 ------------------------------------------------------------------------
 
 data StageAtlasZeroToTwelve : Set where
