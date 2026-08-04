@@ -22,13 +22,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgr
 --
 -- PURPOSE
 -- Upgrade the historical projected-convection adapter to the repository's
--- now-selected official finite Hermitian/Parseval convention.  The old module
+-- now-selected official finite Hermitian/Parseval convention. The old module
 -- correctly left the physical Parseval leaf false when only coefficient-space
--- transport was available.  The newer official finite Fourier module closes
+-- transport was available. The newer official finite Fourier module closes
 -- that leaf and constructs one certificate owning both hard-high
 -- self-adjointness and idempotence.
 --
--- This constructor reuses that exact certificate.  It does not request fresh
+-- This constructor reuses that exact certificate. It does not request fresh
 -- projector evidence and it leaves derivative commutation, divergence-free
 -- pressure cancellation, physical triad enumeration and flux-quantity
 -- agreement as explicit physical inputs.
@@ -39,6 +39,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (_+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPeriodicLittlewoodPaleyBonyExact as LP
