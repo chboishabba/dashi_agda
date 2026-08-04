@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact as Recurrence
 import DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischargeExact as Factorial
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as TermParity
 import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as BishopParity
 import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact as SeriesTransport
 import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Brackets
@@ -19,15 +20,14 @@ import DASHI.Physics.YangMills.YangMillsRGParitySISpineExact as Endpoint
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- Round ten removes four formerly independent leaves:
+-- Round ten removes formerly independent leaves:
 --
 -- * reciprocal-factorial coefficient comparison;
--- * transformed sine/cosine convergence once term parity is known;
+-- * concrete odd/even parity of the signed factorial terms;
+-- * transformed sine/cosine convergence once the elementary terms are
+--   identified with those concrete terms;
 -- * order closure once alternating subsequence interlacing is known;
 -- * ordinary finite geometric summation once 0 <= q < 1 is known.
---
--- The remaining fields below are therefore the exact post-round-ten physical
--- frontier rather than a repetition of already owned reducers.
 ------------------------------------------------------------------------
 
 round10FactorialCoefficientSteps :
@@ -39,13 +39,8 @@ record Round10BishopPhysicalCutset : Set₁ where
   field
     elementarySeries : Elementary.BishopElementaryPowerSeriesData
 
-    sineTermsOdd :
-      BishopParity.BishopOddTermFamily
-        (Elementary.sineTerm elementarySeries)
-
-    cosineTermsEven :
-      BishopParity.BishopEvenTermFamily
-        (Elementary.cosineTerm elementarySeries)
+    concreteTermIdentification :
+      TermParity.ConcreteSineCosineTermIdentification elementarySeries
 
     sineCosineInterlacing :
       Brackets.BishopSineCosineInterlacingData
@@ -56,14 +51,30 @@ record Round10BishopPhysicalCutset : Set₁ where
 
 open Round10BishopPhysicalCutset public
 
+round10SineOddTerms :
+  (inputs : Round10BishopPhysicalCutset) →
+  BishopParity.BishopOddTermFamily
+    (Elementary.sineTerm (elementarySeries inputs))
+round10SineOddTerms inputs =
+  TermParity.identifiedSineOddTermFamily
+    (concreteTermIdentification inputs)
+
+round10CosineEvenTerms :
+  (inputs : Round10BishopPhysicalCutset) →
+  BishopParity.BishopEvenTermFamily
+    (Elementary.cosineTerm (elementarySeries inputs))
+round10CosineEvenTerms inputs =
+  TermParity.identifiedCosineEvenTermFamily
+    (concreteTermIdentification inputs)
+
 round10ParityInputs :
   (inputs : Round10BishopPhysicalCutset) →
   BishopParity.BishopSeriesLimitParityInputs
     (elementarySeries inputs)
 round10ParityInputs inputs =
   SeriesTransport.bishopSeriesLimitParityInputsFromTermParity
-    (sineTermsOdd inputs)
-    (cosineTermsEven inputs)
+    (round10SineOddTerms inputs)
+    (round10CosineEvenTerms inputs)
 
 round10AlternatingBrackets :
   Round10BishopPhysicalCutset →
@@ -189,11 +200,14 @@ open Round10CompleteCutset public
 round10ExactCutsetDefinitionLevel : ProofLevel
 round10ExactCutsetDefinitionLevel = machineChecked
 
-round10BishopCoefficientAndTransportLevel : ProofLevel
-round10BishopCoefficientAndTransportLevel = machineChecked
+round10BishopCoefficientParityAndTransportLevel : ProofLevel
+round10BishopCoefficientParityAndTransportLevel = machineChecked
 
 round10OrdinaryFiniteGeometricBoundLevel : ProofLevel
 round10OrdinaryFiniteGeometricBoundLevel = machineChecked
+
+round10ElementaryTermIdentificationLevel : ProofLevel
+round10ElementaryTermIdentificationLevel = conditional
 
 round10ConcreteInterlacingInputsLevel : ProofLevel
 round10ConcreteInterlacingInputsLevel = conditional
