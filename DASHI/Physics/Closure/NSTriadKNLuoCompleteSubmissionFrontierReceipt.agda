@@ -25,6 +25,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoGlobalPhysicalSolutionReductionExact as
 import DASHI.Physics.Closure.NSTriadKNLuoSubmissionAuditReceiptExact as Audit
 import DASHI.Physics.Closure.NSTriadKNLuoCoreSourceFidelityInventoryExact as Sources
 import DASHI.Physics.Closure.NSTriadKNLuoSubmissionLemmaCrosswalkExact as Crosswalk
+import DASHI.Physics.Closure.NSTriadKNLuoNoCircularityAuditExact as NoCircularity
 import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionCompositionExact as Final
 
 record CompleteLuoSubmissionFrontierReceipt : Set where
@@ -55,6 +56,8 @@ record CompleteLuoSubmissionFrontierReceipt : Set where
     sourceFidelitySchemaConstructed : Bool
     coreSourceFidelityInventoryConstructed : Bool
     submissionLemmaCrosswalkConstructed : Bool
+    noCircularityAuditSchemaConstructed : Bool
+    machineVisibleCircularityBarriersConstructed : Bool
     submissionReadyTheoremCompositionConstructed : Bool
 
     incrementFourierIntegrationIdentityInhabited : Bool
@@ -103,6 +106,8 @@ completeLuoSubmissionFrontierReceipt = receipt
   Audit.sourceFidelitySchemaConstructed
   Sources.coreSourceFidelityInventoryConstructed
   Crosswalk.submissionLemmaCrosswalkConstructed
+  NoCircularity.noCircularityAuditSchemaConstructed
+  NoCircularity.machineVisibleCircularityBarriersConstructed
   Final.submissionReadyTheoremCompositionConstructed
   (Analytic.incrementFourierIntegrationIdentityInhabited
     Analytic.luoPhysicalAnalyticTaskLedger)
@@ -177,6 +182,12 @@ submissionTheoremStatementIsConstructed :
     completeLuoSubmissionFrontierReceipt ≡ true
 submissionTheoremStatementIsConstructed =
   Submission.submissionTheoremStatementConstructedIsTrue
+
+noCircularityAuditSchemaIsConstructed :
+  noCircularityAuditSchemaConstructed
+    completeLuoSubmissionFrontierReceipt ≡ true
+noCircularityAuditSchemaIsConstructed =
+  NoCircularity.noCircularityAuditSchemaConstructedIsTrue
 
 submissionReadyCompositionIsConstructed :
   submissionReadyTheoremCompositionConstructed
