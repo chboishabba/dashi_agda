@@ -38,6 +38,11 @@ record GeometricSemiringLaws
       StepV.LessEqual kernel current upper →
       StepV.LessEqual kernel desired upper
 
+    lessEqualRespectRight : ∀ {lower current desired} →
+      Equivalent current desired →
+      StepV.LessEqual kernel lower current →
+      StepV.LessEqual kernel lower desired
+
     addCongruent : ∀ {left left′ right right′} →
       Equivalent left left′ → Equivalent right right′ →
       Equivalent
