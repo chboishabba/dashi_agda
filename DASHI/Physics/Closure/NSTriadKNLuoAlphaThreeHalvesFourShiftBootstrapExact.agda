@@ -11,33 +11,29 @@ module DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesFourShiftBootstrapExact
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Make the fixed high-alpha choice alpha=3/2 and b=4 completely explicit.
--- The corrected predecessor exponent is 7/4, so the four-shell coefficient is
---
---   2^{-4(7/4)} = 2^{-7} = 1/128.
---
--- The four-piece Section-4 Schur constant is 512/93.  Choosing the concrete
--- smallness delta=1/16 gives the absorbed coefficient 32/93.  Hence
+-- Instantiate alpha=3/2 and b=4.  The corrected predecessor coefficient is
+-- 2^{-4(7/4)}=1/128.  With the exact four-piece constant 512/93 and the
+-- concrete smallness delta=1/16, the nonlinear coefficient is 32/93.  Thus
 --
 --   1/128 + 32/93 = 4189/11904 <= 1/2 < 1.
 --
--- The module constructs the corresponding absorption and fixed-block
--- recurrence data from primitive boundary/weighted-energy comparisons.  The
--- contraction coefficient is calculated, not assumed.
+-- Absorption and the fixed-block recurrence are constructed from primitive
+-- boundary and weighted-energy comparisons; the contraction coefficient is
+-- calculated rather than supplied.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational using (ℚ; _+_; _*_; _≤_; _/_)
+import Data.Integer.Base as Int
+open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
-open import Data.Rational.Tactic.RingSolver as Ring using (solve)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact as Alpha
 import DASHI.Physics.Closure.NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact as Summability
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteFourInteractionSchurBoundsExact as Four
-import DASHI.Physics.Closure.NSTriadKNLuoFiniteSmallGradientAbsorptionExact as Absorb
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCutoffSection4RecursionExact as Cutoff
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteAbsorbedBlockRecursionExact as Block
 
@@ -51,13 +47,13 @@ blockShiftIsFourTimesOne : Alpha.fourTimes one ≡ four
 blockShiftIsFourTimesOne = refl
 
 boundaryCoefficient smallness absorbedCoefficient : ℚ
-boundaryCoefficient = + 1 / 128
-smallness = + 1 / 16
-absorbedCoefficient = + 32 / 93
+boundaryCoefficient = Int.+ 1 / 128
+smallness = Int.+ 1 / 16
+absorbedCoefficient = Int.+ 32 / 93
 
 combinedCoefficient targetCoefficient : ℚ
 combinedCoefficient = boundaryCoefficient + absorbedCoefficient
-targetCoefficient = + 1 / 2
+targetCoefficient = Int.+ 1 / 2
 
 correctedCoefficientExact :
   boundaryCoefficient ≡ Alpha.dyadicReciprocalSeventhPower one
@@ -73,28 +69,27 @@ aggregateSmallnessBelowAbsorption
   rewrite aggregateSmallnessExact = ℚₚ.≤-refl
 
 combinedCoefficientExact :
-  combinedCoefficient ≡ + 4189 / 11904
+  combinedCoefficient ≡ Int.+ 4189 / 11904
 combinedCoefficientExact = solve []
 
 combinedCoefficientBelowHalf : combinedCoefficient ≤ targetCoefficient
 combinedCoefficientBelowHalf =
   toWitness {a? = combinedCoefficient ≤? targetCoefficient} _
 
-boundaryCoefficientNonnegative : + 0 / 1 ≤ boundaryCoefficient
+boundaryCoefficientNonnegative : 0ℚ ≤ boundaryCoefficient
 boundaryCoefficientNonnegative =
-  toWitness {a? = (+ 0 / 1) ≤? boundaryCoefficient} _
+  toWitness {a? = 0ℚ ≤? boundaryCoefficient} _
 
-smallnessNonnegative : + 0 / 1 ≤ smallness
-smallnessNonnegative =
-  toWitness {a? = (+ 0 / 1) ≤? smallness} _
+smallnessNonnegative : 0ℚ ≤ smallness
+smallnessNonnegative = toWitness {a? = 0ℚ ≤? smallness} _
 
-absorbedCoefficientNonnegative : + 0 / 1 ≤ absorbedCoefficient
+absorbedCoefficientNonnegative : 0ℚ ≤ absorbedCoefficient
 absorbedCoefficientNonnegative =
-  toWitness {a? = (+ 0 / 1) ≤? absorbedCoefficient} _
+  toWitness {a? = 0ℚ ≤? absorbedCoefficient} _
 
-targetCoefficientNonnegative : + 0 / 1 ≤ targetCoefficient
+targetCoefficientNonnegative : 0ℚ ≤ targetCoefficient
 targetCoefficientNonnegative =
-  toWitness {a? = (+ 0 / 1) ≤? targetCoefficient} _
+  toWitness {a? = 0ℚ ≤? targetCoefficient} _
 
 fixedFourAlignedShift : Alpha.FourAlignedLuoShift
 fixedFourAlignedShift = record
@@ -124,8 +119,7 @@ fixedFourAlignedSummability :
   Summability.FourAlignedAlphaThreeHalvesSummability fixedFourAlignedShift
 fixedFourAlignedSummability =
   Summability.fourAlignedSummability
-    fixedFourAlignedShift
-    fixedFourShellRatioIdentification
+    fixedFourAlignedShift fixedFourShellRatioIdentification
 
 record ExplicitFourShiftAbsorptionData : Set₁ where
   field
@@ -162,8 +156,7 @@ record ExplicitFourShiftRecursionData : Set₁ where
   field
     absorptionData : ExplicitFourShiftAbsorptionData
     predecessorMajorant : ℚ
-    predecessorMajorantNonnegative :
-      (+ 0 / 1) ≤ predecessorMajorant
+    predecessorMajorantNonnegative : 0ℚ ≤ predecessorMajorant
 
     boundaryEnergyBelowCorrectedPredecessor :
       Cutoff.boundaryEnergy (cutoffData absorptionData)
@@ -183,21 +176,17 @@ asBlockRecursionData data = record
   ; predecessorMajorant = predecessorMajorant data
   ; boundaryCoefficient = boundaryCoefficient
   ; targetCoefficient = targetCoefficient
-  ; predecessorMajorantNonnegative =
-      predecessorMajorantNonnegative data
+  ; predecessorMajorantNonnegative = predecessorMajorantNonnegative data
   ; boundaryEnergyBelowPredecessor =
       boundaryEnergyBelowCorrectedPredecessor data
-  ; weightedEnergyBelowPredecessor =
-      weightedEnergyBelowPredecessor data
+  ; weightedEnergyBelowPredecessor = weightedEnergyBelowPredecessor data
   ; combinedCoefficientBelowTarget = combinedCoefficientBelowHalf
   }
 
 explicitFourShiftContraction :
   (data : ExplicitFourShiftRecursionData) →
-  Cutoff.outputEnergy
-      (cutoffData (absorptionData data))
-    + Cutoff.dissipation
-        (cutoffData (absorptionData data))
+  Cutoff.outputEnergy (cutoffData (absorptionData data))
+    + Cutoff.dissipation (cutoffData (absorptionData data))
   ≤ targetCoefficient * predecessorMajorant data
 explicitFourShiftContraction data =
   Block.finiteTargetBlockRecursion (asBlockRecursionData data)
