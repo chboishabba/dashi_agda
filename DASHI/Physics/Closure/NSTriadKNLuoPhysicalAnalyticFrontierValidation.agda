@@ -8,6 +8,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNLuoIncrementTensorPolarizationExact
+import DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelFourierMultiplierExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSignedConvolutionYoungExact
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePeriodicMultiplierRealizationExact
 import DASHI.Physics.Closure.NSTriadKNLuoPointwisePairFoldReductionExact
