@@ -1,6 +1,6 @@
 # Pathologic, typed dependencies, RSI hyperedges and marked unit extension
 
-This tranche adds four connected formal layers while keeping game criticism,
+This tranche adds connected formal layers while keeping game criticism,
 mathematics, psychoanalytic interpretation and empirical claims in separate
 authority lanes.
 
@@ -23,7 +23,14 @@ ActionDependency state action
 ```
 
 The same pattern upgrades Boolean gluing, memory-preservation, stage and RSI
-surfaces without deleting their existing Boolean projections.
+surfaces without deleting their existing Boolean projections. The projection
+from a witness to `true` is available, but the reverse reconstruction is
+explicitly blocked.
+
+`PNFTypedDependencyAdapters.agda` reuses the repository's exact preservation
+theorems for revaluation, habituation and inhibitory extinction. It also
+requires an actual `GlobalSection` for closure gluing; a closure narrative or
+availability flag cannot manufacture that section.
 
 ## Pathologic constraint field
 
@@ -80,6 +87,10 @@ The sinthome is path-indexed and proof-bearing. An admissible stabiliser must
 supply witnesses for coherence after stabilisation, residual retention, memory
 preservation and non-equivalence to erasure. Minimality requires a separately
 declared cost model.
+
+`SinthomeFiniteWitness.agda` supplies a concrete finite model in which the
+integrated state is coherent, retains the residual, preserves the rupture trace
+and is propositionally not equivalent to the erasure state.
 
 ## Marked unit extension
 
