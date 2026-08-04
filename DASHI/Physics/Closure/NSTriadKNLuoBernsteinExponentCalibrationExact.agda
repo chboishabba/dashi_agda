@@ -44,19 +44,19 @@ five = Int.+ 5 / 1
 
 threeDimensionalBernsteinExponent :
   three * half ≡ threeHalves
-threeDimensionalBernsteinExponent = refl
+threeDimensionalBernsteinExponent = solve []
 
 derivativeAddsOneExponent :
   threeHalves + one ≡ fiveHalves
-derivativeAddsOneExponent = refl
+derivativeAddsOneExponent = solve []
 
 squaredBernsteinExponent :
   two * threeHalves ≡ three
-squaredBernsteinExponent = refl
+squaredBernsteinExponent = solve []
 
 squaredDerivativeBernsteinExponent :
   two * fiveHalves ≡ five
-squaredDerivativeBernsteinExponent = refl
+squaredDerivativeBernsteinExponent = solve []
 
 combinedExponentCalibration :
   two * (three * half + one) ≡ five
