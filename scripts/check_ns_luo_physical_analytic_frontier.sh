@@ -12,6 +12,8 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoIncrementKernelFourierMultiplierExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterWeightedIncrementExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterMultiplierBridgeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteTranslationTensorConvolutionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteResonantPairFoldExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteThreePairCoefficientExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreeWayPairPartitionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
@@ -19,11 +21,16 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteCutoffEnergyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteTerminalCutoffExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDiscreteGronwallExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteDyadicMultiplierMagnitudeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFinitePointwiseSchurFactorizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePhysicalSchurSummationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteFourInteractionSchurBoundsExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteFourInteractionFactorizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCutoffSection4RecursionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSmallGradientAbsorptionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteAbsorbedBlockRecursionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFourAlignedShellSummabilityExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoBlockDecayToFourShellSummabilityExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePeriodicMultiplierRealizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPointwisePairFoldReductionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCanonicalSourceSchurIdentificationExact.agda
