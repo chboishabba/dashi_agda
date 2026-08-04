@@ -213,9 +213,8 @@ polynomiallyWeightedGeometricBoundFromDomination {kernel = kernel} inputs = reco
   ; weightedTermDefinition = weightedTermDefinition inputs
   ; weightedPartialSum =
       weightedPartialSum kernel (weightedTerm inputs)
-  ; weightedPartialSumDefinition = λ count →
-      weightedPartialSum kernel (weightedTerm inputs) count
-      ≡ weightedPartialSum kernel (weightedTerm inputs) count
+  ; weightedPartialSumDefinition =
+      weightedPartialSumSuccessor kernel (weightedTerm inputs)
   ; uniformWeightedBound =
       StepV.multiply kernel
         (dominationConstant inputs)
