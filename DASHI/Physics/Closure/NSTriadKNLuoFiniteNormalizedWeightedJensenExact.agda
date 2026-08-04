@@ -28,8 +28,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteNormalizedWeightedJensenExact whe
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _≤_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -48,12 +49,28 @@ normalizedWeightedJensen :
   L2.square (Jensen.firstMoment (samples window))
   ≤ Jensen.secondMoment (samples window)
 normalizedWeightedJensen window =
-  subst
-    (λ massValue →
+  let
+    unitMassBound :
       L2.square (Jensen.firstMoment (samples window))
-      ≤ massValue * Jensen.secondMoment (samples window))
-    (massIsOne window)
-    (Jensen.finiteWeightedJensenSquare (samples window))
+      ≤ 1ℚ * Jensen.secondMoment (samples window)
+    unitMassBound =
+      subst
+        (λ massValue →
+          L2.square (Jensen.firstMoment (samples window))
+          ≤ massValue * Jensen.secondMoment (samples window))
+        (massIsOne window)
+        (Jensen.finiteWeightedJensenSquare (samples window))
+
+    unitMeaning :
+      1ℚ * Jensen.secondMoment (samples window)
+      ≡ Jensen.secondMoment (samples window)
+    unitMeaning = solve (Jensen.secondMoment (samples window) ∷ [])
+  in
+  subst
+    (λ upper →
+      L2.square (Jensen.firstMoment (samples window)) ≤ upper)
+    unitMeaning
+    unitMassBound
 
 record WeightedIntervalWindow : Set where
   constructor weighted-interval-window
