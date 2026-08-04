@@ -30,7 +30,7 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; _*_; _+_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
@@ -186,11 +186,9 @@ physicalMatrixQuadraticRealizationExact matrix fld =
       encodePhysicalSU2 fld coordinate
       * physicalMatrixApply matrix (encodePhysicalSU2 fld) coordinate)
     (λ coordinate →
-      let equality =
-        encodePhysicalOperatorFromMatrixPointwise matrix fld coordinate
-      in
-      DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.cong
-        (encodePhysicalSU2 fld coordinate *_) equality)
+      cong
+        (encodePhysicalSU2 fld coordinate *_)
+        (encodePhysicalOperatorFromMatrixPointwise matrix fld coordinate))
 
 physicalSU2CoordinateRoundTripLevel : ProofLevel
 physicalSU2CoordinateRoundTripLevel = machineChecked
