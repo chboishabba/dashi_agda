@@ -22,6 +22,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoSection4PhysicalBoundsAdapterExact as S
 import DASHI.Physics.Closure.NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact as Summability
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as FixedReduction
 import DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact as ParsevalUpgrade
+import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyOfficialUpgradeExact as CutoffUpgrade
 import DASHI.Physics.Closure.NSTriadKNLuoMaximalTimeGlobalizationExact as Globalization
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalContinuationFromAnalyticInputsExact as Continuation
 
@@ -54,6 +55,8 @@ record LuoPhysicalAnalyticTaskLedger : Set where
 
     projectedConvectionOfficialParsevalUpgradeConstructed : Bool
     officialProjectedHardHighOrthogonalityClosed : Bool
+    officialCutoffEnergyUpgradeConstructed : Bool
+    officialCutoffEnergyDissipationIdentificationClosed : Bool
     fixedShiftOrderReductionConstructed : Bool
 
     meanValueGronwallPhysicalDataInhabited : Bool
@@ -89,6 +92,8 @@ luoPhysicalAnalyticTaskLedger = ledger
   false
   ParsevalUpgrade.projectedConvectionOfficialParsevalUpgradeConstructed
   ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonality
+  CutoffUpgrade.officialCutoffEnergyUpgradeConstructed
+  CutoffUpgrade.officialCutoffEnergyDissipationIdentificationClosed
   FixedReduction.fixedShiftOrderReductionClosed
   false
   false
@@ -140,6 +145,18 @@ officialProjectedHardHighOrthogonalityIsTrue :
   ≡ true
 officialProjectedHardHighOrthogonalityIsTrue =
   ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonalityIsTrue
+
+officialCutoffEnergyUpgradeIsTrue :
+  officialCutoffEnergyUpgradeConstructed luoPhysicalAnalyticTaskLedger ≡ true
+officialCutoffEnergyUpgradeIsTrue =
+  CutoffUpgrade.officialCutoffEnergyUpgradeConstructedIsTrue
+
+officialCutoffEnergyDissipationIdentificationIsTrue :
+  officialCutoffEnergyDissipationIdentificationClosed
+    luoPhysicalAnalyticTaskLedger
+  ≡ true
+officialCutoffEnergyDissipationIdentificationIsTrue =
+  CutoffUpgrade.officialCutoffEnergyDissipationIdentificationClosedIsTrue
 
 fixedShiftOrderReductionIsTrue :
   fixedShiftOrderReductionConstructed luoPhysicalAnalyticTaskLedger ≡ true
