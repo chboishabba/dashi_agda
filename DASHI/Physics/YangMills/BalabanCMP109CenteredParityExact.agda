@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.BalabanCMP109CenteredParityExact where
 -- before an odd block observable may be cancelled by pairing x with -x.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
@@ -66,10 +66,6 @@ negateCenteredBlock4
 negateCenteredBlock4Involutive :
   ∀ {radius} (point : Centered.CenteredBlockPoint4 radius) →
   negateCenteredBlock4 (negateCenteredBlock4 point) ≡ point
-negateCenteredBlock4Involutive
-  (Carrier.pair
-    (Carrier.pair Centered.centre Centered.centre)
-    (Carrier.pair Centered.centre Centered.centre)) = refl
 negateCenteredBlock4Involutive
   (Carrier.pair (Carrier.pair x0 x1) (Carrier.pair x2 x3))
   rewrite negateCenteredOffsetInvolutive x0
