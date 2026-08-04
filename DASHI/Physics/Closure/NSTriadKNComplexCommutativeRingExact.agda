@@ -48,9 +48,9 @@ complexAddInverseRight value =
 complexMultiplyOneRight :
   ∀ {r} {F : C3.RealField r} (value : C3.Complex F) →
   C3.complexMultiply value (C3.complexOne F) ≡ value
-complexMultiplyOneRight value =
+complexMultiplyOneRight {F = F} value =
   trans
-    (Algebra.complexMultiplyCommutative value (C3.complexOne _))
+    (Algebra.complexMultiplyCommutative value (C3.complexOne F))
     (Algebra.complexOneMultiply value)
 
 complexDistributeLeft :
