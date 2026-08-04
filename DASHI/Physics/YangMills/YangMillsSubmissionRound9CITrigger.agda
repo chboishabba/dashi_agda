@@ -1,0 +1,5 @@
+module DASHI.Physics.YangMills.YangMillsSubmissionRound9CITrigger where
+
+import DASHI.Physics.YangMills.YangMillsSubmissionRound9Validation
+import DASHI.Physics.YangMills.BalabanClayConstructiveProducerSevenGroupAdvance
+import DASHI.Physics.PhysicsScalingLimitSpineValidation
