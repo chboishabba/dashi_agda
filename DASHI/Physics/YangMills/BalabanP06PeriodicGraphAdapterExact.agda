@@ -16,8 +16,9 @@ module DASHI.Physics.YangMills.BalabanP06PeriodicGraphAdapterExact where
 -- concrete duplicate-free neighbour count.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
@@ -30,9 +31,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 periodicSupportGraph : Nat → Graph.Graph
 periodicSupportGraph n = record
-  { Graph.Graph.Vertex = Periodic.PeriodicBlock n
-  ; Graph.Graph.Edge = SignedAxis4
-  ; Graph.Graph.Adj = Physical.PeriodicPhysicalAdjacent
+  { Vertex = Periodic.PeriodicBlock n
+  ; Edge = SignedAxis4
+  ; Adj = Physical.PeriodicPhysicalAdjacent
   }
 
 record PeriodicCountNeighborsIdentification (n : Nat) : Set₁ where
@@ -50,11 +51,9 @@ periodicSupportGraphBoundedDegreeEight :
   Graph.BoundedDegree (periodicSupportGraph n) eight
 periodicSupportGraphBoundedDegreeEight identification block =
   subst
-    (λ count → count Graph.≤ eight)
+    (λ count → count ≤ eight)
     (sym (countNeighborsMatchesConcrete identification block))
     (Degree.periodicDistinctNeighbourCountBelowEight block)
-  where
-  open import Data.Nat.Base using (_≤_)
 
 record PeriodicSupportGraphCertificate (n : Nat) : Set₁ where
   field
@@ -71,13 +70,11 @@ periodicSupportGraphCertificate :
   PeriodicSupportGraphCertificate n
 periodicSupportGraphCertificate {n} identification = record
   { graph = periodicSupportGraph n
-  ; graphIsLiteral = Relation.Binary.PropositionalEquality.refl
+  ; graphIsLiteral = refl
   ; degreeIdentification = identification
   ; boundedDegreeEight =
       periodicSupportGraphBoundedDegreeEight identification
   }
-  where
-  import Relation.Binary.PropositionalEquality
 
 periodicSupportGraphDefinitionLevel : ProofLevel
 periodicSupportGraphDefinitionLevel = machineChecked
