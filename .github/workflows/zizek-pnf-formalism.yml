@@ -1,0 +1,26 @@
+name: Zizek PNF formalism
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Foundations/CantorDiagonalCore.agda'
+      - 'DASHI/Combinatorics/MemeDiagonal.agda'
+      - 'DASHI/Geometry/TwistedCycleOrientationCover.agda'
+      - 'DASHI/Dynamics/LogisticDecimalPNFBridge.agda'
+      - 'DASHI/Reasoning/**'
+      - 'DASHI/EverythingZizekPNFExtension.agda'
+      - 'scripts/check_zizek_pnf_formalism.sh'
+      - '.github/workflows/zizek-pnf-formalism.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - name: Check constructive, PNF, learning and authority boundaries
+        run: nix develop --command bash scripts/check_zizek_pnf_formalism.sh
