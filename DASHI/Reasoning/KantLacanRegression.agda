@@ -7,6 +7,7 @@ import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Foundations.JPlusOneScaleBridge as JPlus
 import DASHI.Foundations.StageAtlasZeroToTwelve as Stage
 import DASHI.Foundations.StageCantorScaleRecursion as StageCantor
+import DASHI.Foundations.StageZeroToTwelveTransitionCore as Transition
 import DASHI.Reasoning.KantCriticalCompiler as Kant
 import DASHI.Reasoning.KantLacanSourceAtlas as Sources
 import DASHI.Reasoning.KantLacanZizekRuntime as Runtime
@@ -31,6 +32,12 @@ stage11IsJPlusOne = Stage.stage11IsOneJPlusOne
 stage12IsJPlusTwo :
   Stage.decimalCarryUnit + 2 * Stage.localJUnit ≡ Stage.toNat Stage.stage-12
 stage12IsJPlusTwo = Stage.stage12IsOneJPlusTwo
+
+stage11To12GuardedTarget :
+  Transition.GuardedStage012Transition.target
+    Transition.canonicalStage11To12Transition
+  ≡ Stage.stage-12
+stage11To12GuardedTarget = refl
 
 mckayArithmeticStillExact :
   Moon.rep-dim + 1 ≡ Moon.j-coefficient
