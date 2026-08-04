@@ -22,14 +22,14 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicNavierStokesSubmissionTheoremExact
 --
 -- PURPOSE
 -- State the final periodic Navier--Stokes theorem as a typed witness package
--- and close the purely logical maximal-time dichotomy.  The theorem package
+-- and close the purely logical maximal-time dichotomy. The theorem package
 -- requires velocity, pressure, equation, initial trace, uniqueness, energy,
 -- divergence-free and mean-zero evidence separately.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 
 record PeriodicNavierStokesSubmissionCarrier : Set₁ where
   field
@@ -132,7 +132,7 @@ maximalTimeMustBeInfinite :
 maximalTimeMustBeInfinite inputs
   with maximalTimeDichotomy inputs
 ... | finiteAlternative finite =
-  Data.Empty.⊥-elim (finiteMaximalTimeContradiction inputs finite)
+  ⊥-elim (finiteMaximalTimeContradiction inputs finite)
 ... | infiniteAlternative infinite = infinite
 
 record SelectedSolutionToSubmissionInputs
