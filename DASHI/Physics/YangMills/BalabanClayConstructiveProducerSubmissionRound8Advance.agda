@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayConstructiveProducerSubmissionRound8Advance where
 
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact
 import DASHI.Physics.YangMills.BalabanBishopRatioMonotoneTermsExact
 import DASHI.Physics.YangMills.BalabanBishopAlternatingFirstOmittedExact
 import DASHI.Physics.YangMills.BalabanP06CanonicalAnimalConstantExact
