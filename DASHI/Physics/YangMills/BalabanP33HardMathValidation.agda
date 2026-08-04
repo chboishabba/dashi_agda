@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanP33HardMathValidation where
 
+-- Focused theorem aggregate only: no receipt, ledger or endpoint interface.
 import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact
 import DASHI.Physics.YangMills.BalabanP33FiniteSignedRemainderSummationExact
