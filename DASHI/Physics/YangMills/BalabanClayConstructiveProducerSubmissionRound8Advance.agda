@@ -6,6 +6,8 @@ import DASHI.Physics.YangMills.BalabanBishopRatioMonotoneTermsExact
 import DASHI.Physics.YangMills.BalabanBishopSetoidRatioMonotoneExact
 import DASHI.Physics.YangMills.BalabanBishopAlternatingFirstOmittedExact
 import DASHI.Physics.YangMills.BalabanBishopSetoidAlternatingFirstOmittedExact
+import DASHI.Physics.YangMills.BalabanP06PeriodicSupportDegreeExact
+import DASHI.Physics.YangMills.BalabanP06PeriodicGraphAdapterExact
 import DASHI.Physics.YangMills.BalabanP06CanonicalAnimalConstantExact
 import DASHI.Physics.YangMills.BalabanP06A1A2A3InfluenceExact
 import DASHI.Physics.YangMills.BalabanP11PrefixTailMinimumExact
