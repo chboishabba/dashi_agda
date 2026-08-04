@@ -23,6 +23,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapter
 -- physical hard-high fold and full-shell fold is derived from the pre-budget
 -- exact list identification, preserving order and multiplicity and using no
 -- terminal localized-gradient budget.
+--
+-- SOURCE-FIDELITY CORRECTION
+-- The literal formula applies kernelWeight through scaleTensor before
+-- integration.  This matches r_p's weighted increment integral.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
@@ -56,6 +60,7 @@ record OfficialIncrementKernelAnalyticInputs
     subtractState : State → State → State
     incrementTensor : State → State → Tensor
     kernelWeight : Nat → Space → Scalar
+    scaleTensor : Scalar → Tensor → Tensor
     integrateTensor : (Space → Tensor) → Tensor
 
     literalIncrementKernelMeaning :
@@ -63,9 +68,11 @@ record OfficialIncrementKernelAnalyticInputs
       FluxKernel.incrementKernel source shell u
       ≡ integrateTensor
           (λ displacement →
-            incrementTensor
-              (subtractState (translate displacement u) u)
-              (subtractState (translate displacement u) u))
+            scaleTensor
+              (kernelWeight shell displacement)
+              (incrementTensor
+                (subtractState (translate displacement u) u)
+                (subtractState (translate displacement u) u)))
 
     pairContribution :
       Nat → State →
@@ -111,6 +118,7 @@ officialIncrementKernelPhysicalRealization
   ; subtractState = subtractState inputs
   ; incrementTensor = incrementTensor inputs
   ; kernelWeight = kernelWeight inputs
+  ; scaleTensor = scaleTensor inputs
   ; integrateTensor = integrateTensor inputs
   ; literalIncrementKernelMeaning = literalIncrementKernelMeaning inputs
   ; FourierTerm = Contribution
