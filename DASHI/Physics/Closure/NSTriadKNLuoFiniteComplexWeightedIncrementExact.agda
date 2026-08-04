@@ -33,8 +33,10 @@ open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNLuoComplexLinearIntegralWeightedIncrementExact as Integral
 
@@ -66,11 +68,7 @@ complexSumAdd :
       (complexSum samples left)
       (complexSum samples right)
 complexSumAdd {F = F} [] left right =
-  R.solve 0
-    (λ → R.Κ (C3.complexZero F)
-      R.⊜ (R.Κ (C3.complexZero F) R.⊕ R.Κ (C3.complexZero F)))
-    refl
-  where module R = Ring.Solver F
+  sym (Algebra.complexAddZeroLeft (C3.complexZero F))
 complexSumAdd {F = F} (sample ∷ samples) left right
   rewrite complexSumAdd samples left right =
   R.solve 4
@@ -91,12 +89,8 @@ complexSumNegate :
     (value : Sample → C3.Complex F) →
   complexSum samples (λ sample → C3.complexNegate (value sample))
   ≡ C3.complexNegate (complexSum samples value)
-complexSumNegate {F = F} [] value =
-  R.solve 0
-    (λ → R.Κ (C3.complexZero F)
-      R.⊜ R.⊝ (R.Κ (C3.complexZero F)))
-    refl
-  where module R = Ring.Solver F
+complexSumNegate {F = F} [] value
+  rewrite C3.negateZero F = refl
 complexSumNegate {F = F} (sample ∷ samples) value
   rewrite complexSumNegate samples value =
   R.solve 2
