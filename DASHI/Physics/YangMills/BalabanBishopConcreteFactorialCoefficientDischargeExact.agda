@@ -20,12 +20,12 @@ module DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischarg
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Integer.Base as ℤ using (ℤ; +_)
-open import Data.Nat.Base as ℕ using
-  (NonZero; _≤_; _*_; z≤n; s≤s)
+open import Data.Integer.Base using (+_)
+import Data.Nat.Base as ℕ
+open ℕ using (NonZero; _≤_; _*_; z≤n; s≤s)
 import Data.Nat.Properties as ℕP
 open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; _/_; _*_; _≤_)
+  (_/_; _*_; _≤_)
 import Data.Rational.Unnormalised.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -37,10 +37,6 @@ import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExac
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfRadiusRatiosExact as Ratios
 import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact as Recurrence
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-
-------------------------------------------------------------------------
--- Small natural-number lower bounds for the two factorial step factors.
-------------------------------------------------------------------------
 
 oddExponentPositive :
   ∀ index → suc zero ≤ Estimates.oddExponent index
@@ -148,10 +144,6 @@ evenFactorialDenominatorGrowth index =
     (sym (Estimates.evenFactorialSuccessor index))
     associated
 
-------------------------------------------------------------------------
--- Exact positive-fraction multiplication and reciprocal antitonicity.
-------------------------------------------------------------------------
-
 positiveUnitFractionProduct :
   (leftDenominator rightDenominator : Nat)
   .{{_ : NonZero leftDenominator}}
@@ -178,18 +170,18 @@ oddInverseFactorialStep index =
 
     instance
       oldFactorialNonZero : NonZero oldFactorial
-      oldFactorialNonZero = ℕ.≢-nonZero (ℕP._!≢0 oldExponent)
+      oldFactorialNonZero =
+        ℕ.≢-nonZero (ℕP._!≢0 oldExponent)
 
       newFactorialNonZero : NonZero newFactorial
-      newFactorialNonZero = ℕ.≢-nonZero (ℕP._!≢0 newExponent)
+      newFactorialNonZero =
+        ℕ.≢-nonZero (ℕP._!≢0 newExponent)
 
       sixNonZero : NonZero six
       sixNonZero = _
 
       sixTimesOldNonZero : NonZero (six * oldFactorial)
-      sixTimesOldNonZero =
-        ℕ.≢-nonZero
-          (Extra.m,n≢0⇒mn≢0 six oldFactorial)
+      sixTimesOldNonZero = ℕP.m*n≢0 six oldFactorial
 
     reciprocalBound :
       (+ 1 / newFactorial) ℚ.≤ (+ 1 / (six * oldFactorial))
@@ -227,18 +219,18 @@ evenInverseFactorialStep index =
 
     instance
       oldFactorialNonZero : NonZero oldFactorial
-      oldFactorialNonZero = ℕ.≢-nonZero (ℕP._!≢0 oldExponent)
+      oldFactorialNonZero =
+        ℕ.≢-nonZero (ℕP._!≢0 oldExponent)
 
       newFactorialNonZero : NonZero newFactorial
-      newFactorialNonZero = ℕ.≢-nonZero (ℕP._!≢0 newExponent)
+      newFactorialNonZero =
+        ℕ.≢-nonZero (ℕP._!≢0 newExponent)
 
       twoNonZero : NonZero two
       twoNonZero = _
 
       twoTimesOldNonZero : NonZero (two * oldFactorial)
-      twoTimesOldNonZero =
-        ℕ.≢-nonZero
-          (Extra.m,n≢0⇒mn≢0 two oldFactorial)
+      twoTimesOldNonZero = ℕP.m*n≢0 two oldFactorial
 
     reciprocalBound :
       (+ 1 / newFactorial) ℚ.≤ (+ 1 / (two * oldFactorial))
@@ -308,10 +300,6 @@ embeddedEvenInverseFactorialStep index =
         Estimates.inverseFactorialRational
           (Estimates.evenExponent index))
       (evenInverseFactorialStep index))
-
-------------------------------------------------------------------------
--- Reassociate the two monotone products into the exact physical ratios.
-------------------------------------------------------------------------
 
 open BishopProperties.ℝ-Solver
 
