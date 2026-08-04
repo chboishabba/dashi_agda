@@ -65,9 +65,8 @@ powerAbsoluteEquivalentPower :
     (BishopReal.∣_∣ (Recurrence.pow value exponent))
     (Recurrence.pow value exponent)
 powerAbsoluteEquivalentPower value exponent valueNonnegative =
-  BishopProperties.0≤x⇒∣x∣≃x
-    (BishopProperties.nonNegx⇒0≤x
-      (Recurrence.powerNonnegative value exponent valueNonnegative))
+  BishopProperties.nonNegx⇒∣x∣≃x
+    (Recurrence.powerNonnegative value exponent valueNonnegative)
 
 sineMagnitudeZeroEquivalentValue :
   ∀ value →
