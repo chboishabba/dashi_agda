@@ -24,7 +24,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoFourResidueBlockDecayExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+import Data.Nat.Base as Nat
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
@@ -87,7 +88,8 @@ quarterContractionPathBound
     (subst (λ right → quarter * current ≤ right) reassociate scaled)
 
 alignedShell : Nat → Nat → Nat
-alignedShell residue block = residue + Alpha.fourTimes block
+alignedShell residue block =
+  Nat._+_ residue (Alpha.fourTimes block)
 
 recursionOutput :
   Bootstrap.ExplicitFourShiftRecursionData → ℚ
