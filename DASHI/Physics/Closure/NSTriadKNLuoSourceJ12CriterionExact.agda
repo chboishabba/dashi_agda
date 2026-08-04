@@ -31,10 +31,13 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteJensenSquareExact as Jensen
 import DASHI.Physics.Closure.NSTriadKNLuoSourceJ12FiveShellExact as Five
 
 pow2 pow3 : ℚ → ℚ
@@ -80,21 +83,18 @@ open SourceJ12CriterionData public
 nearEnergyNonnegative :
   ∀ {Time} (data : SourceJ12CriterionData Time) →
   0ℚ ≤ Five.nearEnergyIntegral (window data)
-nearEnergyNonnegative data = go (Five.times (window data))
+nearEnergyNonnegative {Time} data = go (Five.times (window data))
   where
   values = Five.amplitudes (window data)
   weights = Five.timeWeight (window data)
 
   nearSquareNonnegative :
-    (time : _) → 0ℚ ≤ Five.nearSquareSum (values time)
+    (time : Time) → 0ℚ ≤ Five.nearSquareSum (values time)
   nearSquareNonnegative time =
-    let open import DASHI.Physics.Closure.NSTriadKNLuoFiniteJensenSquareExact
-          using (sumSquaresNonnegative)
-    in
-    sumSquaresNonnegative (Five.fiveShellValues (values time))
+    Jensen.sumSquaresNonnegative (Five.fiveShellValues (values time))
 
   go :
-    (remaining : List _) →
+    (remaining : List Time) →
     0ℚ ≤ Five.weightedTimeSum remaining weights
       (λ time → Five.nearSquareSum (values time))
   go [] = ℚₚ.≤-refl
@@ -152,13 +152,13 @@ sourceJ12Square data = Five.J12SquareIntegral (window data)
 sourceJ12SquareNonnegative :
   ∀ {Time} (data : SourceJ12CriterionData Time) →
   0ℚ ≤ sourceJ12Square data
-sourceJ12SquareNonnegative data = go (Five.times (window data))
+sourceJ12SquareNonnegative {Time} data = go (Five.times (window data))
   where
   values = Five.amplitudes (window data)
   weights = Five.timeWeight (window data)
 
   go :
-    (remaining : List _) →
+    (remaining : List Time) →
     0ℚ ≤ Five.weightedTimeSum remaining weights
       (λ time → L2.square (Five.nearSum (values time)))
   go [] = ℚₚ.≤-refl
@@ -213,10 +213,7 @@ sourceJ12CriterionScaling data =
 
     coefficientNonnegative : 0ℚ ≤ (Int.+ 320 / 1)
     coefficientNonnegative =
-      let open import Data.Rational.Properties using (_≤?_)
-          open import Relation.Nullary.Decidable.Core using (toWitness)
-      in
-      toWitness {a? = 0ℚ ℚₚ.≤? (Int.+ 320 / 1)} _
+      toWitness {a? = 0ℚ ≤? (Int.+ 320 / 1)} _
 
     criterionScaled :
       (Int.+ 320 / 1)
