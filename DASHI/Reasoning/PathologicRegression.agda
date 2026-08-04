@@ -7,6 +7,7 @@ import DASHI.Foundations.JPlusOneMarkedUnitExtension as JMarked
 import DASHI.Foundations.MarkedUnitExtensionCore as Marked
 import DASHI.Foundations.StageAtlasZeroToTwelve as Stage
 import DASHI.Reasoning.PathologicConstraintSystem as Constraint
+import DASHI.Reasoning.PathologicKantLacanZizekBridge as KLZ
 import DASHI.Reasoning.PathologicPerspectiveHyperfabric as Perspective
 import DASHI.Reasoning.PathologicSourceAtlas as Sources
 import DASHI.Reasoning.PathologicTheatreMetaRuntime as Theatre
@@ -56,6 +57,12 @@ finiteSinthomeNotErasureRegression :
       FiniteSinthome.erasedState
 finiteSinthomeNotErasureRegression =
   FiniteSinthome.finiteSinthomeNotErasure
+
+pathologicLensDoesNotExhaustCharacter :
+  KLZ.PathologicKLZAuthorityBoundary.oneDiscourseExhaustsCharacter
+    KLZ.canonicalPathologicKLZAuthorityBoundary
+  ≡ false
+pathologicLensDoesNotExhaustCharacter = refl
 
 metaRevealRetainsTrace :
   Theatre.MetaReveal.traceAfterReveal Theatre.canonicalDeveloperMetaReveal
