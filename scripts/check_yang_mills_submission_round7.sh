@@ -9,6 +9,7 @@ files=(
   DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
   DASHI/Physics/YangMills/BalabanP06OwnedGraphCombinatoricsExact.agda
   DASHI/Physics/YangMills/BalabanP11UniformAbsorptionReductionExact.agda
+  DASHI/Physics/YangMills/LocalLatticeP11SubmissionBridgeExact.agda
   DASHI/Physics/YangMills/BalabanBishopHalfBallSquareReductionExact.agda
   DASHI/Physics/YangMills/YangMillsSubmissionTypedLimitEndpointExact.agda
   DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda
@@ -38,6 +39,8 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanP06OwnedGraphCombinatoricsExact.agda
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanP11UniformAbsorptionReductionExact.agda
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/YangMills/LocalLatticeP11SubmissionBridgeExact.agda
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanBishopHalfBallSquareReductionExact.agda
 scripts/run_agda29_parallel_check.sh \
