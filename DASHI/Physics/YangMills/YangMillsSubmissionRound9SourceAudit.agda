@@ -60,7 +60,7 @@ balabanPropagatorsI = record
   ; title = "Propagators and Renormalization Transformations for Lattice Gauge Theories. I"
   ; publication = "Communications in Mathematical Physics 95 (1984), 17--40"
   ; locator = "background-gauge propagator and local coercivity architecture"
-  ; persistentIdentifier = "DOI: 10.1007/BF01211042"
+  ; persistentIdentifier = "DOI: 10.1007/BF01215753"
   ; relationshipToDASHI =
       "Primary source for the P33 local metric and propagator lane; physical constants remain explicit inputs."
   ; authorityLevel = standardImported
