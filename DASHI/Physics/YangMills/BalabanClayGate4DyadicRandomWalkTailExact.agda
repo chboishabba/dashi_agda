@@ -45,9 +45,9 @@ open DyadicRandomWalkOrder public
 
 asDyadicTailOrder : DyadicRandomWalkOrder → Dyadic.DyadicTailOrder
 asDyadicTailOrder order = record
-  { Dyadic.DyadicTailOrder.LessEqual = LessEqual order
-  ; Dyadic.DyadicTailOrder.tailNonnegative = tailNonnegative order
-  ; Dyadic.DyadicTailOrder.leftBelowTotalFromNonnegativeTail =
+  { LessEqual = LessEqual order
+  ; tailNonnegative = tailNonnegative order
+  ; leftBelowTotalFromNonnegativeTail =
       leftBelowTotalFromNonnegativeTail order
   }
 

@@ -135,23 +135,23 @@ asContractionBallConstruction :
   HalfContractionBall budget →
   Construction.ContractionBallConstruction triangle
 asContractionBallConstruction {triangle = triangle} {budget = budget} ball = record
-  { Construction.ContractionBallConstruction.centre = centre ball
-  ; Construction.ContractionBallConstruction.radius = radius ball
-  ; Construction.ContractionBallConstruction.contractionFactor = contraction ball
-  ; Construction.ContractionBallConstruction.forcing = forcing ball
-  ; Construction.ContractionBallConstruction.map = map ball
-  ; Construction.ContractionBallConstruction.InBall = InBall ball
-  ; Construction.ContractionBallConstruction.inBallMeaning = inBallMeaning ball
-  ; Construction.ContractionBallConstruction.centreInBall = centreInBall ball
-  ; Construction.ContractionBallConstruction.centreDisplacement =
+  { centre = centre ball
+  ; radius = radius ball
+  ; contractionFactor = contraction ball
+  ; forcing = forcing ball
+  ; map = map ball
+  ; InBall = InBall ball
+  ; inBallMeaning = inBallMeaning ball
+  ; centreInBall = centreInBall ball
+  ; centreDisplacement =
       centreDisplacement ball
-  ; Construction.ContractionBallConstruction.contractionEstimate =
+  ; contractionEstimate =
       contractionEstimate ball
-  ; Construction.ContractionBallConstruction.contractionFactorBelowOne =
+  ; contractionFactorBelowOne =
       belowHalfBelowOne budget (contractionBelowHalf ball)
-  ; Construction.ContractionBallConstruction.multiplyRadiusMonotone =
+  ; multiplyRadiusMonotone =
       multiplyRadiusMonotone ball
-  ; Construction.ContractionBallConstruction.contractedRadiusPlusForcingFits =
+  ; contractedRadiusPlusForcingFits =
       halfContractionForcingFits budget
         (contraction ball) (forcing ball) (radius ball)
         (contractionBelowHalf ball) (forcingBelowHalfRadius ball)

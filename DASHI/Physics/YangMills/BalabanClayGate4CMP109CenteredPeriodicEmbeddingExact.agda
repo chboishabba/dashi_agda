@@ -114,9 +114,9 @@ periodicSegmentAction :
   Contours.CommutingSegmentAction
     (Blocks.PeriodicBlock n) Contours.AxisSegment
 periodicSegmentAction commutation = record
-  { Contours.CommutingSegmentAction.step =
+  { step =
       λ point segment → Bond.walk point (Periodic.segmentWord segment)
-  ; Contours.CommutingSegmentAction.distinctSegmentsCommute =
+  ; distinctSegmentsCommute =
       translationsCommute commutation
   }
 

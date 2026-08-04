@@ -173,42 +173,42 @@ asOrderedAbsoluteAlgebra :
   ∀ {Scalar} {core : SU2HalfRadiusScalarCore Scalar} →
   CoreOrderedAbsoluteLaws core → Taylor.OrderedAbsoluteAlgebra Scalar
 asOrderedAbsoluteAlgebra {core = core} laws = record
-  { Taylor.OrderedAbsoluteAlgebra.zero =
+  { zero =
       HalfRadius.zero (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.add =
+  ; add =
       HalfRadius.add (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.subtract =
+  ; subtract =
       HalfRadius.subtract (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.negate =
+  ; negate =
       HalfRadius.negate (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.absolute =
+  ; absolute =
       HalfRadius.absolute (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.Equivalent =
+  ; Equivalent =
       HalfRadius.Equivalent (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.LessEqual =
+  ; LessEqual =
       HalfRadius.LessEqual (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.equivalentRefl =
+  ; equivalentRefl =
       HalfRadius.equivalentRefl (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.equivalentSym =
+  ; equivalentSym =
       HalfRadius.equivalentSym (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.equivalentTrans =
+  ; equivalentTrans =
       HalfRadius.equivalentTrans (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.reflexive =
+  ; reflexive =
       HalfRadius.reflexive (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.transitive =
+  ; transitive =
       HalfRadius.transitive (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.lessEqualResp =
+  ; lessEqualResp =
       HalfRadius.lessEqualResp (coreScalar core)
-  ; Taylor.OrderedAbsoluteAlgebra.absoluteCong = coreAbsoluteCong laws
-  ; Taylor.OrderedAbsoluteAlgebra.absoluteNegate = coreAbsoluteNegate laws
-  ; Taylor.OrderedAbsoluteAlgebra.absoluteOfNonnegative =
+  ; absoluteCong = coreAbsoluteCong laws
+  ; absoluteNegate = coreAbsoluteNegate laws
+  ; absoluteOfNonnegative =
       coreAbsoluteOfNonnegative laws
-  ; Taylor.OrderedAbsoluteAlgebra.subtractNonnegative =
+  ; subtractNonnegative =
       coreSubtractNonnegative laws
-  ; Taylor.OrderedAbsoluteAlgebra.subtractBelowLeft =
+  ; subtractBelowLeft =
       coreSubtractBelowLeft laws
-  ; Taylor.OrderedAbsoluteAlgebra.addNonnegative = coreAddNonnegative laws
-  ; Taylor.OrderedAbsoluteAlgebra.addMonotone = coreAddMonotone laws
+  ; addNonnegative = coreAddNonnegative laws
+  ; addMonotone = coreAddMonotone laws
   }
 
 record SU2HalfRadiusSignedTailInputs
@@ -289,19 +289,19 @@ sincCertificate :
   Taylor.AlternatingFirstOmittedCertificate
     (asOrderedAbsoluteAlgebra (absoluteLaws tails))
 sincCertificate {core = core} tails theta inside = record
-  { Taylor.AlternatingFirstOmittedCertificate.value = coreSinc core theta
-  ; Taylor.AlternatingFirstOmittedCertificate.centre =
+  { value = coreSinc core theta
+  ; centre =
       HalfRadius.one (coreScalar core)
-  ; Taylor.AlternatingFirstOmittedCertificate.leading =
+  ; leading =
       HalfRadius.multiply (coreScalar core) (coreOneSixth core)
         (HalfRadius.multiply (coreScalar core) theta theta)
-  ; Taylor.AlternatingFirstOmittedCertificate.remainder =
+  ; remainder =
       sincRemainder tails theta
-  ; Taylor.AlternatingFirstOmittedCertificate.remainderNonnegative =
+  ; remainderNonnegative =
       sincRemainderNonnegative tails theta inside
-  ; Taylor.AlternatingFirstOmittedCertificate.remainderBelowLeading =
+  ; remainderBelowLeading =
       sincRemainderBelowLeading tails theta inside
-  ; Taylor.AlternatingFirstOmittedCertificate.signedDifferenceMeaning =
+  ; signedDifferenceMeaning =
       sincSignedDifference tails theta inside
   }
 
@@ -312,18 +312,18 @@ coscCertificate :
   Taylor.AlternatingFirstOmittedCertificate
     (asOrderedAbsoluteAlgebra (absoluteLaws tails))
 coscCertificate {core = core} tails theta inside = record
-  { Taylor.AlternatingFirstOmittedCertificate.value = coreCosc core theta
-  ; Taylor.AlternatingFirstOmittedCertificate.centre = coreOneHalf core
-  ; Taylor.AlternatingFirstOmittedCertificate.leading =
+  { value = coreCosc core theta
+  ; centre = coreOneHalf core
+  ; leading =
       HalfRadius.multiply (coreScalar core) (coreOneTwentyFourth core)
         (HalfRadius.multiply (coreScalar core) theta theta)
-  ; Taylor.AlternatingFirstOmittedCertificate.remainder =
+  ; remainder =
       coscRemainder tails theta
-  ; Taylor.AlternatingFirstOmittedCertificate.remainderNonnegative =
+  ; remainderNonnegative =
       coscRemainderNonnegative tails theta inside
-  ; Taylor.AlternatingFirstOmittedCertificate.remainderBelowLeading =
+  ; remainderBelowLeading =
       coscRemainderBelowLeading tails theta inside
-  ; Taylor.AlternatingFirstOmittedCertificate.signedDifferenceMeaning =
+  ; signedDifferenceMeaning =
       coscSignedDifference tails theta inside
   }
 
@@ -334,19 +334,19 @@ inverseCertificate :
   Taylor.PositiveTaylorTailCertificate
     (asOrderedAbsoluteAlgebra (absoluteLaws tails))
 inverseCertificate {core = core} tails theta inside = record
-  { Taylor.PositiveTaylorTailCertificate.value =
+  { value =
       coreInverseDexpQuadratic core theta
-  ; Taylor.PositiveTaylorTailCertificate.centre = coreOneTwelfth core
-  ; Taylor.PositiveTaylorTailCertificate.leading = inverseLeading tails theta
-  ; Taylor.PositiveTaylorTailCertificate.remainder = inverseRemainder tails theta
-  ; Taylor.PositiveTaylorTailCertificate.tailBudget = inverseTailBudget tails theta
-  ; Taylor.PositiveTaylorTailCertificate.leadingNonnegative =
+  ; centre = coreOneTwelfth core
+  ; leading = inverseLeading tails theta
+  ; remainder = inverseRemainder tails theta
+  ; tailBudget = inverseTailBudget tails theta
+  ; leadingNonnegative =
       inverseLeadingNonnegative tails theta inside
-  ; Taylor.PositiveTaylorTailCertificate.remainderNonnegative =
+  ; remainderNonnegative =
       inverseRemainderNonnegative tails theta inside
-  ; Taylor.PositiveTaylorTailCertificate.remainderBelowTailBudget =
+  ; remainderBelowTailBudget =
       inverseRemainderBelowTail tails theta inside
-  ; Taylor.PositiveTaylorTailCertificate.positiveDifferenceMeaning =
+  ; positiveDifferenceMeaning =
       inversePositiveDifference tails theta inside
   }
 
@@ -355,75 +355,75 @@ halfRadiusEnvelopeFromSignedTails :
   SU2HalfRadiusSignedTailInputs core →
   HalfRadius.SU2HalfRadiusScalarEnvelope Scalar
 halfRadiusEnvelopeFromSignedTails {core = core} tails = record
-  { HalfRadius.SU2HalfRadiusScalarEnvelope.scalar = coreScalar core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.half = coreHalf core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneHalf = coreOneHalf core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneSixth = coreOneSixth core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneTwelfth = coreOneTwelfth core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneTwentyFourth =
+  { scalar = coreScalar core
+  ; half = coreHalf core
+  ; oneHalf = coreOneHalf core
+  ; oneSixth = coreOneSixth core
+  ; oneTwelfth = coreOneTwelfth core
+  ; oneTwentyFourth =
       coreOneTwentyFourth core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.halfMeaning = coreHalfMeaning core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneHalfMeaning =
+  ; halfMeaning = coreHalfMeaning core
+  ; oneHalfMeaning =
       coreOneHalfMeaning core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneSixthMeaning =
+  ; oneSixthMeaning =
       coreOneSixthMeaning core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneTwelfthMeaning =
+  ; oneTwelfthMeaning =
       coreOneTwelfthMeaning core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.oneTwentyFourthMeaning =
+  ; oneTwentyFourthMeaning =
       coreOneTwentyFourthMeaning core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.InsideHalfBall =
+  ; InsideHalfBall =
       CoreInsideHalfBall core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.insideImpliesNonnegative =
+  ; insideImpliesNonnegative =
       coreInsideNonnegative core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.insideImpliesBelowHalf =
+  ; insideImpliesBelowHalf =
       coreInsideBelowHalf core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.sinc = coreSinc core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.cosc = coreCosc core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.inverseDexpQuadratic =
+  ; sinc = coreSinc core
+  ; cosc = coreCosc core
+  ; inverseDexpQuadratic =
       coreInverseDexpQuadratic core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.sincAtZero = coreSincAtZero core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.coscAtZero = coreCoscAtZero core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.inverseDexpQuadraticAtZero =
+  ; sincAtZero = coreSincAtZero core
+  ; coscAtZero = coreCoscAtZero core
+  ; inverseDexpQuadraticAtZero =
       coreInverseDexpQuadraticAtZero core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.sincMeaningAwayFromZero =
+  ; sincMeaningAwayFromZero =
       coreSincAwayFromZero core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.coscMeaningAwayFromZero =
+  ; coscMeaningAwayFromZero =
       coreCoscAwayFromZero core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.inverseDexpQuadraticMeaningAwayFromZero =
+  ; inverseDexpQuadraticMeaningAwayFromZero =
       coreInverseDexpAwayFromZero core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.sincTaylorBound =
+  ; sincTaylorBound =
       λ theta inside →
         Taylor.alternatingFirstOmittedAbsoluteBound
           (sincCertificate tails theta inside)
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.coscTaylorBound =
+  ; coscTaylorBound =
       λ theta inside →
         Taylor.alternatingFirstOmittedAbsoluteBound
           (coscCertificate tails theta inside)
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.inverseDexpQuadraticSlack =
+  ; inverseDexpQuadraticSlack =
       coreInverseDexpSlack core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.inverseDexpQuadraticTaylorBound =
+  ; inverseDexpQuadraticTaylorBound =
       λ theta inside →
         HalfRadius.transitive (coreScalar core)
           (Taylor.positiveTailAbsoluteBound
             (inverseCertificate tails theta inside))
           (inverseLeadingAndTailBelowSlack tails theta inside)
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.adCoefficientLipschitz =
+  ; adCoefficientLipschitz =
       coreAdLipschitz core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.dexpCoefficientLipschitz =
+  ; dexpCoefficientLipschitz =
       coreDexpLipschitz core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.dexpInverseCoefficientLipschitz =
+  ; dexpInverseCoefficientLipschitz =
       coreDexpInverseLipschitz core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.AdCoefficientDifference =
+  ; AdCoefficientDifference =
       CoreAdDifference core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.DexpCoefficientDifference =
+  ; DexpCoefficientDifference =
       CoreDexpDifference core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.DexpInverseCoefficientDifference =
+  ; DexpInverseCoefficientDifference =
       CoreDexpInverseDifference core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.adCoefficientDifferenceBound =
+  ; adCoefficientDifferenceBound =
       coreAdDifferenceBound core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.dexpCoefficientDifferenceBound =
+  ; dexpCoefficientDifferenceBound =
       coreDexpDifferenceBound core
-  ; HalfRadius.SU2HalfRadiusScalarEnvelope.dexpInverseCoefficientDifferenceBound =
+  ; dexpInverseCoefficientDifferenceBound =
       coreDexpInverseDifferenceBound core
   }
 

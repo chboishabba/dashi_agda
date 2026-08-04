@@ -170,26 +170,26 @@ asContractionBallConstruction :
   Construction.ContractionBallConstruction triangle
 asContractionBallConstruction {triangle = triangle}
     {constants = constants} dataSet = record
-  { Construction.ContractionBallConstruction.centre = centre dataSet
-  ; Construction.ContractionBallConstruction.radius = radius dataSet
-  ; Construction.ContractionBallConstruction.contractionFactor =
+  { centre = centre dataSet
+  ; radius = radius dataSet
+  ; contractionFactor =
       contractionFactor dataSet
-  ; Construction.ContractionBallConstruction.forcing = forcing dataSet
-  ; Construction.ContractionBallConstruction.map = map dataSet
-  ; Construction.ContractionBallConstruction.InBall = InBall dataSet
-  ; Construction.ContractionBallConstruction.inBallMeaning =
+  ; forcing = forcing dataSet
+  ; map = map dataSet
+  ; InBall = InBall dataSet
+  ; inBallMeaning =
       inBallMeaning dataSet
-  ; Construction.ContractionBallConstruction.centreInBall =
+  ; centreInBall =
       centreInBall dataSet
-  ; Construction.ContractionBallConstruction.centreDisplacement =
+  ; centreDisplacement =
       centreDisplacement dataSet
-  ; Construction.ContractionBallConstruction.contractionEstimate =
+  ; contractionEstimate =
       contractionEstimate dataSet
-  ; Construction.ContractionBallConstruction.contractionFactorBelowOne =
+  ; contractionFactorBelowOne =
       belowQuarterBelowOne constants (contractionBelowQuarter dataSet)
-  ; Construction.ContractionBallConstruction.multiplyRadiusMonotone =
+  ; multiplyRadiusMonotone =
       multiplyRadiusMonotone dataSet
-  ; Construction.ContractionBallConstruction.contractedRadiusPlusForcingFits =
+  ; contractedRadiusPlusForcingFits =
       dyadicContractionForcingFits constants
         (contractionFactor dataSet)
         (forcing dataSet)

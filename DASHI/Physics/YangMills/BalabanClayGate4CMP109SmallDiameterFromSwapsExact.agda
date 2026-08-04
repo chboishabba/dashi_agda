@@ -72,14 +72,14 @@ asMinimalContourGaugeData :
   MinimalAverage.MinimalContourGaugeData
     Field Group Lie Scalar geometry point averageAxioms
 asMinimalContourGaugeData dataSet = record
-  { MinimalAverage.MinimalContourGaugeData.holonomy = holonomy dataSet
-  ; MinimalAverage.MinimalContourGaugeData.transformedHolonomy =
+  { holonomy = holonomy dataSet
+  ; transformedHolonomy =
       transformedHolonomy dataSet
-  ; MinimalAverage.MinimalContourGaugeData.leftGauge = leftGauge dataSet
-  ; MinimalAverage.MinimalContourGaugeData.rightGauge = rightGauge dataSet
-  ; MinimalAverage.MinimalContourGaugeData.pathHolonomyGaugeCovariant =
+  ; leftGauge = leftGauge dataSet
+  ; rightGauge = rightGauge dataSet
+  ; pathHolonomyGaugeCovariant =
       pathHolonomyGaugeCovariant dataSet
-  ; MinimalAverage.MinimalContourGaugeData.contourHolonomiesSmallDiameter =
+  ; contourHolonomiesSmallDiameter =
       λ field →
         smallDiameterFromSixSwapBound dataSet field
           (Swaps.contourFamilyInsidePrincipalLogDiameter

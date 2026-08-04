@@ -42,8 +42,8 @@ open LieNegationKernel public
 lieNegationInvolution :
   ∀ {Lie} → LieNegationKernel Lie → Parity.Involution Lie
 lieNegationInvolution kernel = record
-  { Parity.Involution.reverse = negate kernel
-  ; Parity.Involution.reverseInvolutive = negateInvolutive kernel
+  { reverse = negate kernel
+  ; reverseInvolutive = negateInvolutive kernel
   }
 
 adAction :

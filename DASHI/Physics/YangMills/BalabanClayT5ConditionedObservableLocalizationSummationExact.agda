@@ -147,18 +147,18 @@ asConditionedObservableLocalization :
   Clustering.ConditionedObservableLocalization
     Observable LocalTerm Region Bound
 asConditionedObservableLocalization {dataSet = dataSet} meaning = record
-  { Clustering.ConditionedObservableLocalization.conditioned =
+  { conditioned =
       conditioned dataSet
-  ; Clustering.ConditionedObservableLocalization.localTerms =
+  ; localTerms =
       localTerms meaning
-  ; Clustering.ConditionedObservableLocalization.localTermNorm =
+  ; localTermNorm =
       localTermNormByRegion meaning
-  ; Clustering.ConditionedObservableLocalization.localizationDecay =
+  ; localizationDecay =
       localizationDecayByRegion meaning
-  ; Clustering.ConditionedObservableLocalization.LessEqual = LessEqual dataSet
-  ; Clustering.ConditionedObservableLocalization.localizationExpansionExact =
+  ; LessEqual = LessEqual dataSet
+  ; localizationExpansionExact =
       localizationExpansionExact dataSet
-  ; Clustering.ConditionedObservableLocalization.localTermExponentiallyLocalized =
+  ; localTermExponentiallyLocalized =
       λ observable region →
         subst
           (λ normValue → LessEqual dataSet normValue

@@ -35,14 +35,14 @@ p₁NotP₂ ()
 canonicalTriple : Collision.ThreePointCollision witnessMap
 canonicalTriple =
   record
-    { Collision.first = p₀
-    ; Collision.second = p₁
-    ; Collision.third = p₂
-    ; Collision.firstSecondDistinct = p₀NotP₁
-    ; Collision.firstThirdDistinct = p₀NotP₂
-    ; Collision.secondThirdDistinct = p₁NotP₂
-    ; Collision.firstSecondImage = refl
-    ; Collision.firstThirdImage = refl
+    { first = p₀
+    ; second = p₁
+    ; third = p₂
+    ; firstSecondDistinct = p₀NotP₁
+    ; firstThirdDistinct = p₀NotP₂
+    ; secondThirdDistinct = p₁NotP₂
+    ; firstSecondImage = refl
+    ; firstThirdImage = refl
     }
 
 kernelNoninjectivityRegression :

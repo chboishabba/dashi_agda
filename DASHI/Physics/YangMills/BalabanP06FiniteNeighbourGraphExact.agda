@@ -16,7 +16,8 @@ module DASHI.Physics.YangMills.BalabanP06FiniteNeighbourGraphExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat; _≤_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_≤_)
 
 import DASHI.Physics.YangMills.GraphCombinatorics as Graph
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Carrier
@@ -42,9 +43,9 @@ open FiniteNeighbourGraph public
 
 underlyingGraph : FiniteNeighbourGraph → Graph.Graph
 underlyingGraph finite = record
-  { Graph.Graph.Vertex = Vertex finite
-  ; Graph.Graph.Edge = Edge finite
-  ; Graph.Graph.Adj = Adjacent finite
+  { Vertex = Vertex finite
+  ; Edge = Edge finite
+  ; Adj = Adjacent finite
   }
 
 concreteDegree :

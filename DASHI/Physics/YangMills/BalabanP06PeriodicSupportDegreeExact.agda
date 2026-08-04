@@ -15,7 +15,8 @@ module DASHI.Physics.YangMills.BalabanP06PeriodicSupportDegreeExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat; _≤_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_≤_)
 open import Data.List.Base using (length)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)

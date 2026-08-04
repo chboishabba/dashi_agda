@@ -22,10 +22,10 @@ data Coordinate : Set where
 pointChart : Chart.InvertibleChart Point Coordinate
 pointChart =
   record
-    { Chart.normalise = λ _ → coordinate
-    ; Chart.denormalise = λ _ → point
-    ; Chart.denormaliseAfterNormalise = λ _ → refl
-    ; Chart.normaliseAfterDenormalise = λ _ → refl
+    { normalise = λ _ → coordinate
+    ; denormalise = λ _ → point
+    ; denormaliseAfterNormalise = λ _ → refl
+    ; normaliseAfterDenormalise = λ _ → refl
     }
 
 chartIdentityRegression :

@@ -17,22 +17,22 @@ greenTransfer :
     certificate Base.one
     (Bulk.green certificate Base.one) (Bulk.CG certificate)
 greenTransfer = record
-  { Transfer.extension = λ patch → Base.one
-  ; Transfer.restriction = λ bulk → Base.one
-  ; Transfer.patchNorm = λ patch → Base.one
-  ; Transfer.CE = Base.one
-  ; Transfer.CR = Base.one
-  ; Transfer.Cpatch = Base.one
-  ; Transfer.restrictionAfterExtension = λ patch → refl
-  ; Transfer.extensionNormBound = λ patch → Base.holds
-  ; Transfer.restrictionNormBound = λ bulk → Base.holds
-  ; Transfer.patchOperator = λ patch → Base.one
-  ; Transfer.operatorTransferIdentity = λ patch → refl
-  ; Transfer.lessEqualTransitive = λ left≤middle middle≤right → Base.holds
-  ; Transfer.equalityLeft = λ equality below → Base.holds
-  ; Transfer.multiplyMonotoneLeft = λ constant below → Base.holds
-  ; Transfer.bulkOperatorBound = Bulk.weightedGreenBound certificate Base.one
-  ; Transfer.constantTransport = λ patch → Base.holds
+  { extension = λ patch → Base.one
+  ; restriction = λ bulk → Base.one
+  ; patchNorm = λ patch → Base.one
+  ; CE = Base.one
+  ; CR = Base.one
+  ; Cpatch = Base.one
+  ; restrictionAfterExtension = λ patch → refl
+  ; extensionNormBound = λ patch → Base.holds
+  ; restrictionNormBound = λ bulk → Base.holds
+  ; patchOperator = λ patch → Base.one
+  ; operatorTransferIdentity = λ patch → refl
+  ; lessEqualTransitive = λ left≤middle middle≤right → Base.holds
+  ; equalityLeft = λ equality below → Base.holds
+  ; multiplyMonotoneLeft = λ constant below → Base.holds
+  ; bulkOperatorBound = Bulk.weightedGreenBound certificate Base.one
+  ; constantTransport = λ patch → Base.holds
   }
 
 gradientTransfer :
@@ -41,22 +41,22 @@ gradientTransfer :
     certificate Base.one
     (Bulk.gradientGreen certificate Base.one) (Bulk.CGradG certificate)
 gradientTransfer = record
-  { Transfer.extension = λ patch → Base.one
-  ; Transfer.restriction = λ bulk → Base.one
-  ; Transfer.patchNorm = λ patch → Base.one
-  ; Transfer.CE = Base.one
-  ; Transfer.CR = Base.one
-  ; Transfer.Cpatch = Base.one
-  ; Transfer.restrictionAfterExtension = λ patch → refl
-  ; Transfer.extensionNormBound = λ patch → Base.holds
-  ; Transfer.restrictionNormBound = λ bulk → Base.holds
-  ; Transfer.patchOperator = λ patch → Base.one
-  ; Transfer.operatorTransferIdentity = λ patch → refl
-  ; Transfer.lessEqualTransitive = λ left≤middle middle≤right → Base.holds
-  ; Transfer.equalityLeft = λ equality below → Base.holds
-  ; Transfer.multiplyMonotoneLeft = λ constant below → Base.holds
-  ; Transfer.bulkOperatorBound = Bulk.weightedGradientGreenBound certificate Base.one
-  ; Transfer.constantTransport = λ patch → Base.holds
+  { extension = λ patch → Base.one
+  ; restriction = λ bulk → Base.one
+  ; patchNorm = λ patch → Base.one
+  ; CE = Base.one
+  ; CR = Base.one
+  ; Cpatch = Base.one
+  ; restrictionAfterExtension = λ patch → refl
+  ; extensionNormBound = λ patch → Base.holds
+  ; restrictionNormBound = λ bulk → Base.holds
+  ; patchOperator = λ patch → Base.one
+  ; operatorTransferIdentity = λ patch → refl
+  ; lessEqualTransitive = λ left≤middle middle≤right → Base.holds
+  ; equalityLeft = λ equality below → Base.holds
+  ; multiplyMonotoneLeft = λ constant below → Base.holds
+  ; bulkOperatorBound = Bulk.weightedGradientGreenBound certificate Base.one
+  ; constantTransport = λ patch → Base.holds
   }
 
 secondGradientTransfer :
@@ -66,32 +66,32 @@ secondGradientTransfer :
     (Bulk.secondGradientGreen certificate Base.one)
     (Bulk.CSecondGradG certificate)
 secondGradientTransfer = record
-  { Transfer.extension = λ patch → Base.one
-  ; Transfer.restriction = λ bulk → Base.one
-  ; Transfer.patchNorm = λ patch → Base.one
-  ; Transfer.CE = Base.one
-  ; Transfer.CR = Base.one
-  ; Transfer.Cpatch = Base.one
-  ; Transfer.restrictionAfterExtension = λ patch → refl
-  ; Transfer.extensionNormBound = λ patch → Base.holds
-  ; Transfer.restrictionNormBound = λ bulk → Base.holds
-  ; Transfer.patchOperator = λ patch → Base.one
-  ; Transfer.operatorTransferIdentity = λ patch → refl
-  ; Transfer.lessEqualTransitive = λ left≤middle middle≤right → Base.holds
-  ; Transfer.equalityLeft = λ equality below → Base.holds
-  ; Transfer.multiplyMonotoneLeft = λ constant below → Base.holds
-  ; Transfer.bulkOperatorBound =
+  { extension = λ patch → Base.one
+  ; restriction = λ bulk → Base.one
+  ; patchNorm = λ patch → Base.one
+  ; CE = Base.one
+  ; CR = Base.one
+  ; Cpatch = Base.one
+  ; restrictionAfterExtension = λ patch → refl
+  ; extensionNormBound = λ patch → Base.holds
+  ; restrictionNormBound = λ bulk → Base.holds
+  ; patchOperator = λ patch → Base.one
+  ; operatorTransferIdentity = λ patch → refl
+  ; lessEqualTransitive = λ left≤middle middle≤right → Base.holds
+  ; equalityLeft = λ equality below → Base.holds
+  ; multiplyMonotoneLeft = λ constant below → Base.holds
+  ; bulkOperatorBound =
       Bulk.weightedSecondGradientGreenBound certificate Base.one
-  ; Transfer.constantTransport = λ patch → Base.holds
+  ; constantTransport = λ patch → Base.holds
   }
 
 tripleTransfer :
   Transfer.PhysicalPatchTripleTransfer
     Base.One Base.One Base.One Base.One Base.One certificate Base.one
 tripleTransfer = record
-  { Transfer.greenTransfer = greenTransfer
-  ; Transfer.gradientGreenTransfer = gradientTransfer
-  ; Transfer.secondGradientGreenTransfer = secondGradientTransfer
+  { greenTransfer = greenTransfer
+  ; gradientGreenTransfer = gradientTransfer
+  ; secondGradientGreenTransfer = secondGradientTransfer
   }
 
 tripleBounds :
@@ -108,8 +108,8 @@ fourRegimeFamily :
     Base.One Base.One Base.One Base.One
     Base.One Base.One Base.One Base.One certificate Base.one
 fourRegimeFamily = record
-  { Transfer.boundary = tripleTransfer
-  ; Transfer.interface = tripleTransfer
-  ; Transfer.corner = tripleTransfer
-  ; Transfer.nested = tripleTransfer
+  { boundary = tripleTransfer
+  ; interface = tripleTransfer
+  ; corner = tripleTransfer
+  ; nested = tripleTransfer
   }

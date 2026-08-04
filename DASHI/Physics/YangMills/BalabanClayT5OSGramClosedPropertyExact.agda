@@ -82,8 +82,8 @@ reflectionPositiveSequentiallyClosed :
   Limit.SequentiallyClosedProperty Measure
     (MeasureReflectionPositive dataSet)
 reflectionPositiveSequentiallyClosed dataSet = record
-  { Limit.SequentiallyClosedProperty.limits = measureLimit dataSet
-  ; Limit.SequentiallyClosedProperty.closedUnderLimit =
+  { limits = measureLimit dataSet
+  ; closedUnderLimit =
       measureReflectionPositiveClosed dataSet
   }
 

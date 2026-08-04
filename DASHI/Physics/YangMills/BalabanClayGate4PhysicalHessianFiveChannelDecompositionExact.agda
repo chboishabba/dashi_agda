@@ -79,21 +79,21 @@ asFiveChannelOperatorSum :
   PhysicalHessianFiveChannelDecomposition Operator State Bound →
   Five.FiveChannelOperatorSum Operator State Bound
 asFiveChannelOperatorSum dataSet = record
-  { Five.FiveChannelOperatorSum.algebra = algebra dataSet
-  ; Five.FiveChannelOperatorSum.total = totalRemainder dataSet
-  ; Five.FiveChannelOperatorSum.curvature = curvature dataSet
-  ; Five.FiveChannelOperatorSum.transport = transport dataSet
-  ; Five.FiveChannelOperatorSum.chart = chart dataSet
-  ; Five.FiveChannelOperatorSum.gauge = gauge dataSet
-  ; Five.FiveChannelOperatorSum.constraint = constraint dataSet
-  ; Five.FiveChannelOperatorSum.totalMeaning = totalRemainderMeaning dataSet
-  ; Five.FiveChannelOperatorSum.curvatureSelfAdjoint =
+  { algebra = algebra dataSet
+  ; total = totalRemainder dataSet
+  ; curvature = curvature dataSet
+  ; transport = transport dataSet
+  ; chart = chart dataSet
+  ; gauge = gauge dataSet
+  ; constraint = constraint dataSet
+  ; totalMeaning = totalRemainderMeaning dataSet
+  ; curvatureSelfAdjoint =
       curvatureSelfAdjoint dataSet
-  ; Five.FiveChannelOperatorSum.transportSelfAdjoint =
+  ; transportSelfAdjoint =
       transportSelfAdjoint dataSet
-  ; Five.FiveChannelOperatorSum.chartSelfAdjoint = chartSelfAdjoint dataSet
-  ; Five.FiveChannelOperatorSum.gaugeSelfAdjoint = gaugeSelfAdjoint dataSet
-  ; Five.FiveChannelOperatorSum.constraintSelfAdjoint =
+  ; chartSelfAdjoint = chartSelfAdjoint dataSet
+  ; gaugeSelfAdjoint = gaugeSelfAdjoint dataSet
+  ; constraintSelfAdjoint =
       constraintSelfAdjoint dataSet
   }
 

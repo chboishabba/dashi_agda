@@ -82,20 +82,20 @@ splitPhysicalScaleGeometry :
   Physical.CMP109PhysicalScaleGeometry
     radius (SplitFineSite radius CoarseSite) CoarseSite Nat
 splitPhysicalScaleGeometry {radius} executable fineSpacing = record
-  { Physical.CMP109PhysicalScaleGeometry.executableGeometry = executable
-  ; Physical.CMP109PhysicalScaleGeometry.projectSite = splitProject
-  ; Physical.CMP109PhysicalScaleGeometry.embedAt = splitEmbed
-  ; Physical.CMP109PhysicalScaleGeometry.embedProjectsToCentre =
+  { executableGeometry = executable
+  ; projectSite = splitProject
+  ; embedAt = splitEmbed
+  ; embedProjectsToCentre =
       splitEmbedProjects
-  ; Physical.CMP109PhysicalScaleGeometry.projectionFibreComplete =
+  ; projectionFibreComplete =
       splitProjectionFibreComplete
-  ; Physical.CMP109PhysicalScaleGeometry.embedAtInjective =
+  ; embedAtInjective =
       splitEmbedInjective
-  ; Physical.CMP109PhysicalScaleGeometry.fineSpacing = fineSpacing
-  ; Physical.CMP109PhysicalScaleGeometry.coarseSpacing =
+  ; fineSpacing = fineSpacing
+  ; coarseSpacing =
       Centered.oddSide radius * fineSpacing
-  ; Physical.CMP109PhysicalScaleGeometry.scaleSpacing = splitScaleSpacing
-  ; Physical.CMP109PhysicalScaleGeometry.coarseSpacingMeaning = refl
+  ; scaleSpacing = splitScaleSpacing
+  ; coarseSpacingMeaning = refl
   }
 
 radiusOneSplitPhysicalScaleDecision :
@@ -139,19 +139,19 @@ splitEndpointIdentification :
     {CoarseBond = SplitCoarseBond CoarseSite}
     geometry
 splitEndpointIdentification geometry = record
-  { Physical.CMP109EndpointBlockIdentification.source = Carrier.first
-  ; Physical.CMP109EndpointBlockIdentification.target = Carrier.second
-  ; Physical.CMP109EndpointBlockIdentification.fineSource = Carrier.first
-  ; Physical.CMP109EndpointBlockIdentification.fineTarget = Carrier.second
-  ; Physical.CMP109EndpointBlockIdentification.CrossingFineBond =
+  { source = Carrier.first
+  ; target = Carrier.second
+  ; fineSource = Carrier.first
+  ; fineTarget = Carrier.second
+  ; CrossingFineBond =
       λ coarse fine → Carrier.Product
         (Physical.projectSite geometry (Carrier.first fine)
           ≡ Carrier.first coarse)
         (Physical.projectSite geometry (Carrier.second fine)
           ≡ Carrier.second coarse)
-  ; Physical.CMP109EndpointBlockIdentification.crossingSourceProjects =
+  ; crossingSourceProjects =
       λ coarse fine crossing → Carrier.first crossing
-  ; Physical.CMP109EndpointBlockIdentification.crossingTargetProjects =
+  ; crossingTargetProjects =
       λ coarse fine crossing → Carrier.second crossing
   }
 

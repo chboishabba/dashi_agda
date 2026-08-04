@@ -136,26 +136,26 @@ asQuantitativeImplicitFunctionData :
   QuantitativeNewtonIFTInputs Input Output Correction Residual Bound →
   Quantitative.QuantitativeImplicitFunctionData Input Output Bound
 asQuantitativeImplicitFunctionData inputs = record
-  { Quantitative.QuantitativeImplicitFunctionData.metric = metric inputs
-  ; Quantitative.QuantitativeImplicitFunctionData.AdmissibleInput =
+  { metric = metric inputs
+  ; AdmissibleInput =
       AdmissibleInput inputs
-  ; Quantitative.QuantitativeImplicitFunctionData.contractionBall =
+  ; contractionBall =
       contractionBall inputs
-  ; Quantitative.QuantitativeImplicitFunctionData.ResidualZero =
+  ; ResidualZero =
       ResidualZero (newton inputs)
-  ; Quantitative.QuantitativeImplicitFunctionData.fixedPointImpliesResidualZero =
+  ; fixedPointImpliesResidualZero =
       λ input output inBall fixed →
         newtonFixedImpliesResidualZero (newton inputs) input output
           (trans
             (sym (ballMapMeaning inputs input output))
             fixed)
-  ; Quantitative.QuantitativeImplicitFunctionData.residualZeroImpliesFixedPoint =
+  ; residualZeroImpliesFixedPoint =
       λ input output inBall residualZero →
         trans
           (ballMapMeaning inputs input output)
           (residualZeroImpliesNewtonFixed
             (newton inputs) input output residualZero)
-  ; Quantitative.QuantitativeImplicitFunctionData.fixedPointExists =
+  ; fixedPointExists =
       fixedPointExists inputs
   }
 

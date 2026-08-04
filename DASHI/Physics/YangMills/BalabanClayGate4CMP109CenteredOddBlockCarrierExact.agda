@@ -115,8 +115,8 @@ allCenteredOffsetsComplete {radius} (negative index) =
 centeredOffsetFinite :
   ∀ radius → Carrier.FiniteEnumeration (CenteredOffset radius)
 centeredOffsetFinite radius = record
-  { Carrier.FiniteEnumeration.elements = allCenteredOffsets radius
-  ; Carrier.FiniteEnumeration.complete = allCenteredOffsetsComplete
+  { elements = allCenteredOffsets radius
+  ; complete = allCenteredOffsetsComplete
   }
 
 CenteredBlockPoint4 : Nat → Set

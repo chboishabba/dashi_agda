@@ -151,32 +151,32 @@ asHalfContractionBall :
 asHalfContractionBall
     {source = source} {triangle = triangle} {halfBudget = halfBudget}
     bridge = record
-  { HalfBall.HalfContractionBall.centre = centre bridge
-  ; HalfBall.HalfContractionBall.radius = radius bridge
-  ; HalfBall.HalfContractionBall.contraction = Proposition5.half source
-  ; HalfBall.HalfContractionBall.forcing = forcing bridge
-  ; HalfBall.HalfContractionBall.map =
+  { centre = centre bridge
+  ; radius = radius bridge
+  ; contraction = Proposition5.half source
+  ; forcing = forcing bridge
+  ; map =
       Proposition5.fixedPointMap source (configuration bridge)
-  ; HalfBall.HalfContractionBall.InBall =
+  ; InBall =
       Proposition5.InQuarterDomain source
-  ; HalfBall.HalfContractionBall.inBallMeaning =
+  ; inBallMeaning =
       quarterDomainIsMetricBall bridge
-  ; HalfBall.HalfContractionBall.centreInBall =
+  ; centreInBall =
       centreInQuarterDomain bridge
-  ; HalfBall.HalfContractionBall.centreDisplacement =
+  ; centreDisplacement =
       centreDisplacement bridge
-  ; HalfBall.HalfContractionBall.contractionEstimate =
+  ; contractionEstimate =
       sourceHalfContractionAsMetric bridge
-  ; HalfBall.HalfContractionBall.contractionBelowHalf =
+  ; contractionBelowHalf =
       subst
         (λ upper → Quantitative.LessEqual
           (Construction.metric triangle) (Proposition5.half source) upper)
         (sym (halfMeaning bridge))
         (Quantitative.reflexive
           (Construction.metric triangle) (Proposition5.half source))
-  ; HalfBall.HalfContractionBall.forcingBelowHalfRadius =
+  ; forcingBelowHalfRadius =
       forcingBelowHalfRadius bridge
-  ; HalfBall.HalfContractionBall.multiplyRadiusMonotone =
+  ; multiplyRadiusMonotone =
       multiplyRadiusMonotone bridge
   }
 

@@ -1024,7 +1024,7 @@ configuredMatrixActsExactly tangent (pair component bond) =
 literalConfiguredMatrixActionCertificate :
   ConfiguredMatrixActionCertificate
 literalConfiguredMatrixActionCertificate = record
-  { DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact.configuredMatrixActsExactly =
+  { configuredMatrixActsExactly =
       configuredMatrixActsExactly
   }
 

@@ -134,23 +134,23 @@ asConfiguredBoundaryClusterTail :
   Tail.ConfiguredBoundaryClusterTail Scale Volume Observable ℚ
 asConfiguredBoundaryClusterTail dataSet = record
   { rational = λ value → value
-  ; Tail.ConfiguredBoundaryClusterTail.Distance = distance dataSet
-  ; Tail.ConfiguredBoundaryClusterTail.LessEqual = _≤_
-  ; Tail.ConfiguredBoundaryClusterTail.expectation =
+  ; Distance = distance dataSet
+  ; LessEqual = _≤_
+  ; expectation =
       finiteExpectation (rootedData dataSet)
-  ; Tail.ConfiguredBoundaryClusterTail.thermodynamicExpectation =
+  ; thermodynamicExpectation =
       thermodynamicExpectation (rootedData dataSet)
-  ; Tail.ConfiguredBoundaryClusterTail.reflectedProduct = reflectedProduct dataSet
-  ; Tail.ConfiguredBoundaryClusterTail.boundaryShellIndex =
+  ; reflectedProduct = reflectedProduct dataSet
+  ; boundaryShellIndex =
       boundaryShellIndex (rootedData dataSet)
-  ; Tail.ConfiguredBoundaryClusterTail.onlyBoundaryCrossingClustersContribute =
+  ; onlyBoundaryCrossingClustersContribute =
       λ scale volume left right →
         onlyBoundaryCrossingClustersContribute (rootedData dataSet)
           scale volume (reflectedProduct dataSet left right)
           (reflectedProductAdmissible dataSet left right)
-  ; Tail.ConfiguredBoundaryClusterTail.boundaryCrossingClusterMinimalDiameter =
+  ; boundaryCrossingClusterMinimalDiameter =
       boundaryCrossingClusterMinimalDiameter (rootedData dataSet)
-  ; Tail.ConfiguredBoundaryClusterTail.boundaryCrossingClusterExponentialBound =
+  ; boundaryCrossingClusterExponentialBound =
       λ scale volume left right →
         subst
           (λ lower → lower
@@ -165,9 +165,9 @@ asConfiguredBoundaryClusterTail dataSet = record
             (rootedData dataSet) scale volume
             (reflectedProduct dataSet left right)
             (reflectedProductAdmissible dataSet left right))
-  ; Tail.ConfiguredBoundaryClusterTail.boundaryShellIndexEscapes =
+  ; boundaryShellIndexEscapes =
       λ scale → indexEventuallyBeyond (distanceEscapes dataSet) scale
-  ; Tail.ConfiguredBoundaryClusterTail.geometricTailVanishes =
+  ; geometricTailVanishes =
       halfPowerVanishes (distanceEscapes dataSet)
   }
 

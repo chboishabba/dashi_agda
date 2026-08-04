@@ -80,34 +80,34 @@ asResolventIdentityData :
   ConstraintNormalInversePerturbation Operator Bound →
   Resolvent.ResolventIdentityData Operator Bound
 asResolventIdentityData dataSet = record
-  { Resolvent.ResolventIdentityData.algebra = algebra dataSet
-  ; Resolvent.ResolventIdentityData.referenceInverse =
+  { algebra = algebra dataSet
+  ; referenceInverse =
       referenceInverse dataSet
-  ; Resolvent.ResolventIdentityData.perturbedInverse =
+  ; perturbedInverse =
       physicalInverse dataSet
-  ; Resolvent.ResolventIdentityData.perturbation =
+  ; perturbation =
       normalPerturbation dataSet
-  ; Resolvent.ResolventIdentityData.difference =
+  ; difference =
       inverseDifference dataSet
-  ; Resolvent.ResolventIdentityData.differenceMeaning =
+  ; differenceMeaning =
       inverseDifferenceMeaning dataSet
-  ; Resolvent.ResolventIdentityData.secondResolventIdentity =
+  ; secondResolventIdentity =
       secondResolventIdentity dataSet
-  ; Resolvent.ResolventIdentityData.perturbedInverseBound =
+  ; perturbedInverseBound =
       physicalInverseBound dataSet
-  ; Resolvent.ResolventIdentityData.perturbationBound =
+  ; perturbationBound =
       perturbationBound dataSet
-  ; Resolvent.ResolventIdentityData.referenceInverseBound =
+  ; referenceInverseBound =
       referenceInverseBound dataSet
-  ; Resolvent.ResolventIdentityData.differenceBudget =
+  ; differenceBudget =
       inverseDifferenceBudget dataSet
-  ; Resolvent.ResolventIdentityData.perturbedInverseEstimate =
+  ; perturbedInverseEstimate =
       physicalInverseEstimate dataSet
-  ; Resolvent.ResolventIdentityData.perturbationEstimate =
+  ; perturbationEstimate =
       perturbationEstimate dataSet
-  ; Resolvent.ResolventIdentityData.referenceInverseEstimate =
+  ; referenceInverseEstimate =
       referenceInverseEstimate dataSet
-  ; Resolvent.ResolventIdentityData.differenceBudgetMeaning =
+  ; differenceBudgetMeaning =
       inverseDifferenceBudgetMeaning dataSet
   }
 

@@ -304,14 +304,14 @@ canonicalCenteredNoWrapEmbedding :
   Embedding.CenteredPeriodicNoWrapEmbedding
     (centeredTorusParameter radius) radius
 canonicalCenteredNoWrapEmbedding certificate = record
-  { Embedding.CenteredPeriodicNoWrapEmbedding.embeddingCentre =
+  { embeddingCentre =
       directCenteredOrigin
-  ; Embedding.CenteredPeriodicNoWrapEmbedding.embed = directCenteredEmbed
-  ; Embedding.CenteredPeriodicNoWrapEmbedding.embedMeaning =
+  ; embed = directCenteredEmbed
+  ; embedMeaning =
       directEmbeddingAgreesWithWalk certificate
-  ; Embedding.CenteredPeriodicNoWrapEmbedding.embedInjective =
+  ; embedInjective =
       directCenteredEmbedInjective
-  ; Embedding.CenteredPeriodicNoWrapEmbedding.originMeaning =
+  ; originMeaning =
       directCenteredOriginExact
   }
 

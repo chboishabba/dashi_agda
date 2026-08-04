@@ -34,30 +34,30 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 bishopParityCodomain : Parity.ParityCodomain BishopReal.ℝ
 bishopParityCodomain = record
-  { Parity.ParityCodomain.Equivalent = BishopReal._≃_
-  ; Parity.ParityCodomain.equivalentRefl = λ value →
+  { Equivalent = BishopReal._≃_
+  ; equivalentRefl = λ value →
       BishopProperties.≃-refl
-  ; Parity.ParityCodomain.equivalentSym = BishopProperties.≃-symm
-  ; Parity.ParityCodomain.equivalentTrans = BishopProperties.≃-trans
-  ; Parity.ParityCodomain.zero = BishopReal.0ℝ
-  ; Parity.ParityCodomain.add = BishopReal._+_
-  ; Parity.ParityCodomain.negate = BishopReal.-_
-  ; Parity.ParityCodomain.addCongruent = BishopProperties.+-cong
-  ; Parity.ParityCodomain.addInverseRight = BishopProperties.+-inverseʳ
-  ; Parity.ParityCodomain.addInverseLeft = BishopProperties.+-inverseˡ
-  ; Parity.ParityCodomain.negateCongruent = BishopProperties.-‿cong
+  ; equivalentSym = BishopProperties.≃-symm
+  ; equivalentTrans = BishopProperties.≃-trans
+  ; zero = BishopReal.0ℝ
+  ; add = BishopReal._+_
+  ; negate = BishopReal.-_
+  ; addCongruent = BishopProperties.+-cong
+  ; addInverseRight = BishopProperties.+-inverseʳ
+  ; addInverseLeft = BishopProperties.+-inverseˡ
+  ; negateCongruent = BishopProperties.-‿cong
   }
 
 bishopNegationInvolution : Parity.SetoidInvolution BishopReal.ℝ
 bishopNegationInvolution = record
-  { Parity.SetoidInvolution.Equivalent = BishopReal._≃_
-  ; Parity.SetoidInvolution.equivalentRefl = λ value →
+  { Equivalent = BishopReal._≃_
+  ; equivalentRefl = λ value →
       BishopProperties.≃-refl
-  ; Parity.SetoidInvolution.equivalentSym = BishopProperties.≃-symm
-  ; Parity.SetoidInvolution.equivalentTrans = BishopProperties.≃-trans
-  ; Parity.SetoidInvolution.reverse = BishopReal.-_
-  ; Parity.SetoidInvolution.reverseCongruent = BishopProperties.-‿cong
-  ; Parity.SetoidInvolution.reverseInvolutive =
+  ; equivalentSym = BishopProperties.≃-symm
+  ; equivalentTrans = BishopProperties.≃-trans
+  ; reverse = BishopReal.-_
+  ; reverseCongruent = BishopProperties.-‿cong
+  ; reverseInvolutive =
       BishopProperties.neg-involutive
   }
 

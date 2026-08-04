@@ -58,12 +58,12 @@ padCollision :
   Collision.Collision (padMap padding)
 padCollision {padding = padding} {extra = extra} collision =
   record
-    { Collision.left = Collision.left collision , extra
-    ; Collision.right = Collision.right collision , extra
-    ; Collision.distinct = λ equality →
+    { left = Collision.left collision , extra
+    ; right = Collision.right collision , extra
+    ; distinct = λ equality →
         Collision.distinct collision
           (cong firstProjection equality)
-    ; Collision.commonImage =
+    ; commonImage =
         cong
           (λ image → image , extraMap padding extra)
           (Collision.commonImage collision)

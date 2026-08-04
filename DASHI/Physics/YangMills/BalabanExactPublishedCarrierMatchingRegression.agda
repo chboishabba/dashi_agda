@@ -33,35 +33,35 @@ always3 first second third = Holds
 publishedPropagator :
   Published.PublishedBackgroundPropagatorAuthority One One One One
 publishedPropagator = record
-  { Published.RegularBackground = always
-  ; Published.green = λ index source → one
-  ; Published.gradientGreen = λ index source → one
-  ; Published.secondGradientGreen = λ index source → one
-  ; Published.sourceNorm = λ source → one
-  ; Published.stateNorm = λ state → one
-  ; Published.multiply = oneBinary
-  ; Published.LessEqual = λ left right → Holds
-  ; Published.CG = one
-  ; Published.CGradG = one
-  ; Published.CSecondG = one
-  ; Published.theorem31GreenBound = λ index source regular → holds
-  ; Published.theorem31GradientGreenBound = λ index source regular → holds
-  ; Published.theorem31SecondGradientGreenBound =
+  { RegularBackground = always
+  ; green = λ index source → one
+  ; gradientGreen = λ index source → one
+  ; secondGradientGreen = λ index source → one
+  ; sourceNorm = λ source → one
+  ; stateNorm = λ state → one
+  ; multiply = oneBinary
+  ; LessEqual = λ left right → Holds
+  ; CG = one
+  ; CGradG = one
+  ; CSecondG = one
+  ; theorem31GreenBound = λ index source regular → holds
+  ; theorem31GradientGreenBound = λ index source regular → holds
+  ; theorem31SecondGradientGreenBound =
       λ index source regular → holds
-  ; Published.Kernel = One
-  ; Published.greenKernel = λ index → one
-  ; Published.gradientKernel = λ index → one
-  ; Published.secondGradientKernel = λ index → one
-  ; Published.KernelExponentialDecay = always
-  ; Published.theorem31GreenKernelDecay = λ index regular → holds
-  ; Published.theorem31GradientKernelDecay = λ index regular → holds
-  ; Published.theorem31SecondGradientKernelDecay = λ index regular → holds
-  ; Published.GaugeCovariant = λ operator → Holds
-  ; Published.theorem31GaugeCovariance = holds
-  ; Published.AnalyticInBackground = λ operator → Holds
-  ; Published.theorem34GreenAnalytic = holds
-  ; Published.theorem34GradientGreenAnalytic = holds
-  ; Published.theorem34SecondGradientGreenAnalytic = holds
+  ; Kernel = One
+  ; greenKernel = λ index → one
+  ; gradientKernel = λ index → one
+  ; secondGradientKernel = λ index → one
+  ; KernelExponentialDecay = always
+  ; theorem31GreenKernelDecay = λ index regular → holds
+  ; theorem31GradientKernelDecay = λ index regular → holds
+  ; theorem31SecondGradientKernelDecay = λ index regular → holds
+  ; GaugeCovariant = λ operator → Holds
+  ; theorem31GaugeCovariance = holds
+  ; AnalyticInBackground = λ operator → Holds
+  ; theorem34GreenAnalytic = holds
+  ; theorem34GradientGreenAnalytic = holds
+  ; theorem34SecondGradientGreenAnalytic = holds
   }
 
 exactPropagatorMatch :
@@ -73,40 +73,40 @@ exactPropagatorMatch :
     {PatchGeometry = One}
     publishedPropagator always
 exactPropagatorMatch = record
-  { Exact.dashiPeriodicLattice = λ index → one
-  ; Exact.balabanPeriodicLattice = λ index → one
-  ; Exact.dashiPeriodicLatticeMatchesBalabanLattice = λ index → refl
-  ; Exact.dashiBondField = λ index → one
-  ; Exact.balabanOneForm = λ index → one
-  ; Exact.dashiBondFieldMatchesBalabanOneForm = λ index → refl
-  ; Exact.dashiGaugeAction = one
-  ; Exact.balabanGaugeAction = one
-  ; Exact.dashiGaugeActionMatchesBalabanGaugeAction = refl
-  ; Exact.dashiReferenceOperator = λ index → one
-  ; Exact.balabanReferenceOperator = λ index → one
-  ; Exact.dashiReferenceOperatorMatchesBalabanOperator = λ index → refl
-  ; Exact.dashiFullHessian = λ index → one
-  ; Exact.balabanBackgroundHessian = λ index → one
-  ; Exact.dashiFullHessianMatchesBalabanBackgroundHessian = λ index → refl
-  ; Exact.repositoryGreen = λ index source → one
-  ; Exact.repositoryGradientGreen = λ index source → one
-  ; Exact.repositorySecondGradientGreen = λ index source → one
-  ; Exact.dashiGreenMatchesBalabanPropagator = λ index source → refl
-  ; Exact.dashiGradientGreenMatchesBalabanGradientPropagator =
+  { dashiPeriodicLattice = λ index → one
+  ; balabanPeriodicLattice = λ index → one
+  ; dashiPeriodicLatticeMatchesBalabanLattice = λ index → refl
+  ; dashiBondField = λ index → one
+  ; balabanOneForm = λ index → one
+  ; dashiBondFieldMatchesBalabanOneForm = λ index → refl
+  ; dashiGaugeAction = one
+  ; balabanGaugeAction = one
+  ; dashiGaugeActionMatchesBalabanGaugeAction = refl
+  ; dashiReferenceOperator = λ index → one
+  ; balabanReferenceOperator = λ index → one
+  ; dashiReferenceOperatorMatchesBalabanOperator = λ index → refl
+  ; dashiFullHessian = λ index → one
+  ; balabanBackgroundHessian = λ index → one
+  ; dashiFullHessianMatchesBalabanBackgroundHessian = λ index → refl
+  ; repositoryGreen = λ index source → one
+  ; repositoryGradientGreen = λ index source → one
+  ; repositorySecondGradientGreen = λ index source → one
+  ; dashiGreenMatchesBalabanPropagator = λ index source → refl
+  ; dashiGradientGreenMatchesBalabanGradientPropagator =
       λ index source → refl
-  ; Exact.dashiSecondGradientGreenMatchesBalabanSecondGradientPropagator =
+  ; dashiSecondGradientGreenMatchesBalabanSecondGradientPropagator =
       λ index source → refl
-  ; Exact.repositorySourceNorm = λ source → one
-  ; Exact.repositoryStateNorm = λ state → one
-  ; Exact.dashiWeightedNormMatchesBalabanWeightedNorm = λ source → refl
-  ; Exact.dashiDerivativeNormMatchesBalabanDerivativeNorm = λ state → refl
-  ; Exact.dashiSecondDerivativeNormMatchesBalabanSecondDerivativeNorm =
+  ; repositorySourceNorm = λ source → one
+  ; repositoryStateNorm = λ state → one
+  ; dashiWeightedNormMatchesBalabanWeightedNorm = λ source → refl
+  ; dashiDerivativeNormMatchesBalabanDerivativeNorm = λ state → refl
+  ; dashiSecondDerivativeNormMatchesBalabanSecondDerivativeNorm =
       λ state → refl
-  ; Exact.dashiPatchGeometry = λ index → one
-  ; Exact.balabanPatchGeometry = λ index → one
-  ; Exact.dashiPatchGeometryImpliesBalabanDomainHypotheses =
+  ; dashiPatchGeometry = λ index → one
+  ; balabanPatchGeometry = λ index → one
+  ; dashiPatchGeometryImpliesBalabanDomainHypotheses =
       λ index admissible → refl
-  ; Exact.dashiSmallFieldImpliesBalabanSmallField =
+  ; dashiSmallFieldImpliesBalabanSmallField =
       λ index admissible → holds
   }
 
@@ -124,27 +124,27 @@ propagatorBoundRegression =
 publishedVariational :
   Published.PublishedVariationalBackgroundAuthority One One One One
 publishedVariational = record
-  { Published.AdmissibleCoarseField = λ index coarse → Holds
-  ; Published.backgroundFluctuation = λ index coarse → one
-  ; Published.Critical = always3
-  ; Published.Minimizer = always3
-  ; Published.GaugeEquivalent = always2
-  ; Published.theorem1BackgroundCritical =
+  { AdmissibleCoarseField = λ index coarse → Holds
+  ; backgroundFluctuation = λ index coarse → one
+  ; Critical = always3
+  ; Minimizer = always3
+  ; GaugeEquivalent = always2
+  ; theorem1BackgroundCritical =
       λ index coarse admissible → holds
-  ; Published.theorem1BackgroundMinimizes =
+  ; theorem1BackgroundMinimizes =
       λ index coarse admissible → holds
-  ; Published.theorem1BackgroundUniqueModuloGauge =
+  ; theorem1BackgroundUniqueModuloGauge =
       λ index coarse fluctuation admissible critical → holds
-  ; Published.AnalyticBackgroundMap = Holds
-  ; Published.ExponentiallyLocalBackgroundMap = Holds
-  ; Published.BackgroundDerivativeExponentiallyDecays = Holds
-  ; Published.backgroundAnalytic = holds
-  ; Published.backgroundExponentiallyLocal = holds
-  ; Published.backgroundDerivativeDecay = holds
-  ; Published.norm = λ fluctuation → one
-  ; Published.radius = one
-  ; Published.LessEqual = λ left right → Holds
-  ; Published.backgroundInsideUniformRadius =
+  ; AnalyticBackgroundMap = Holds
+  ; ExponentiallyLocalBackgroundMap = Holds
+  ; BackgroundDerivativeExponentiallyDecays = Holds
+  ; backgroundAnalytic = holds
+  ; backgroundExponentiallyLocal = holds
+  ; backgroundDerivativeDecay = holds
+  ; norm = λ fluctuation → one
+  ; radius = one
+  ; LessEqual = λ left right → Holds
+  ; backgroundInsideUniformRadius =
       λ index coarse admissible → holds
   }
 
@@ -158,24 +158,24 @@ exactVariationalMatch :
     always3
     always2
 exactVariationalMatch = record
-  { Exact.dashiBackgroundMap = one
-  ; Exact.balabanVariationalBackgroundMap = one
-  ; Exact.dashiBackgroundMapMatchesBalabanVariationalBackground = refl
-  ; Exact.dashiRGCoordinates = one
-  ; Exact.balabanRGCoordinates = one
-  ; Exact.dashiRGCoordinatesMatchBalabanRGCoordinates = refl
-  ; Exact.repositoryBackgroundFluctuation = λ index coarse → one
-  ; Exact.dashiBackgroundFluctuationMatchesPublished =
+  { dashiBackgroundMap = one
+  ; balabanVariationalBackgroundMap = one
+  ; dashiBackgroundMapMatchesBalabanVariationalBackground = refl
+  ; dashiRGCoordinates = one
+  ; balabanRGCoordinates = one
+  ; dashiRGCoordinatesMatchBalabanRGCoordinates = refl
+  ; repositoryBackgroundFluctuation = λ index coarse → one
+  ; dashiBackgroundFluctuationMatchesPublished =
       λ index coarse → refl
-  ; Exact.dashiAdmissibleImpliesBalabanAdmissible =
+  ; dashiAdmissibleImpliesBalabanAdmissible =
       λ index coarse admissible → holds
-  ; Exact.publishedCriticalImpliesRepositoryCritical =
+  ; publishedCriticalImpliesRepositoryCritical =
       λ index coarse fluctuation critical → holds
-  ; Exact.repositoryCriticalImpliesPublishedCritical =
+  ; repositoryCriticalImpliesPublishedCritical =
       λ index coarse fluctuation critical → holds
-  ; Exact.publishedMinimizerImpliesRepositoryMinimizer =
+  ; publishedMinimizerImpliesRepositoryMinimizer =
       λ index coarse fluctuation minimizer → holds
-  ; Exact.publishedGaugeEquivalentImpliesRepositoryGaugeEquivalent =
+  ; publishedGaugeEquivalentImpliesRepositoryGaugeEquivalent =
       λ left right equivalent → holds
   }
 
@@ -197,17 +197,17 @@ backgroundCriticalRegression =
 
 publishedRG : Published.PublishedSmallFieldRGAuthority One One One One
 publishedRG = record
-  { Published.coupling = λ scale → one
-  ; Published.smallCouplingThreshold = one
-  ; Published.absCoupling = λ coupling → one
-  ; Published.LessEqual = λ left right → Holds
-  ; Published.RunningCouplingsRemainSmall = Holds
-  ; Published.runningCouplingsRemainSmall = holds
-  ; Published.couplingBelowThreshold = λ scale → holds
-  ; Published.effectiveAction = λ scale → one
-  ; Published.SmallFieldEffectiveActionControlled =
+  { coupling = λ scale → one
+  ; smallCouplingThreshold = one
+  ; absCoupling = λ coupling → one
+  ; LessEqual = λ left right → Holds
+  ; RunningCouplingsRemainSmall = Holds
+  ; runningCouplingsRemainSmall = holds
+  ; couplingBelowThreshold = λ scale → holds
+  ; effectiveAction = λ scale → one
+  ; SmallFieldEffectiveActionControlled =
       λ scale action → Holds
-  ; Published.theorem1And3SmallFieldControl = λ scale → holds
+  ; theorem1And3SmallFieldControl = λ scale → holds
   }
 
 exactRGMatch :
@@ -216,12 +216,12 @@ exactRGMatch :
     publishedRG
     (λ scale action → Holds)
 exactRGMatch = record
-  { Exact.dashiRGCoordinates = one
-  ; Exact.balabanRGCoordinates = one
-  ; Exact.dashiRGCoordinatesMatchBalabanRGCoordinates = refl
-  ; Exact.repositoryEffectiveAction = λ scale → one
-  ; Exact.repositoryEffectiveActionMatchesPublished = λ scale → refl
-  ; Exact.publishedControlImpliesRepositoryControl =
+  { dashiRGCoordinates = one
+  ; balabanRGCoordinates = one
+  ; dashiRGCoordinatesMatchBalabanRGCoordinates = refl
+  ; repositoryEffectiveAction = λ scale → one
+  ; repositoryEffectiveActionMatchesPublished = λ scale → refl
+  ; publishedControlImpliesRepositoryControl =
       λ scale action controlled → holds
   }
 

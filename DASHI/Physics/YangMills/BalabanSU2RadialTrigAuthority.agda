@@ -133,19 +133,19 @@ trigRadialExponentialChartData :
   SU2RadialParameterBridge radius trig →
   Chart.SU2RadialExponentialChartData radius
 trigRadialExponentialChartData {trig = trig} bridge = record
-  { Chart.radialOrderLaws = radialOrderLaws bridge
-  ; Chart.radialParameter = Parameter bridge
-  ; Chart.radialParameterX = parameterX bridge
-  ; Chart.radialParameterY = parameterY bridge
-  ; Chart.radialParameterZ = parameterZ bridge
-  ; Chart.radialCosine = λ parameter →
+  { radialOrderLaws = radialOrderLaws bridge
+  ; radialParameter = Parameter bridge
+  ; radialParameterX = parameterX bridge
+  ; radialParameterY = parameterY bridge
+  ; radialParameterZ = parameterZ bridge
+  ; radialCosine = λ parameter →
       cosine trig (parameterRadius bridge parameter)
-  ; Chart.radialScale = λ parameter →
+  ; radialScale = λ parameter →
       sinOverArgument trig (parameterRadius bridge parameter)
-  ; Chart.radialInChartBall = inChartBall bridge
-  ; Chart.radialUnitIdentity = λ parameter inBall →
+  ; radialInChartBall = inChartBall bridge
+  ; radialUnitIdentity = λ parameter inBall →
       trigRadialUnitIdentity bridge parameter
-  ; Chart.radialImaginarySqBelowRadiusSq =
+  ; radialImaginarySqBelowRadiusSq =
       trigRadialImaginarySqBelowRadiusSq bridge
   }
 

@@ -110,52 +110,52 @@ configuredPhysicalLossDominationInstance :
   ConfiguredEmbeddedPhysicalLossData Scale Polymer Scalar →
   Budget.ConfiguredPhysicalLossDomination Scale Polymer Scalar
 configuredPhysicalLossDominationInstance dataSet = record
-  { Budget.ConfiguredPhysicalLossDomination.logAuthority = logAuthority dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.actionGain = actionGain dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.jacobianLoss =
+  { logAuthority = logAuthority dataSet
+  ; actionGain = actionGain dataSet
+  ; jacobianLoss =
       embeddedJacobianLoss dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.determinantLoss =
+  ; determinantLoss =
       embeddedDeterminantLoss dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.bchLoss = embeddedBCHLoss dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.localizationLoss =
+  ; bchLoss = embeddedBCHLoss dataSet
+  ; localizationLoss =
       embeddedLocalizationLoss dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.patchLoss = embeddedPatchLoss dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.add = add dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.subtract = subtract dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.addMonotone = addMonotone dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.subtractMonotoneAntitone =
+  ; patchLoss = embeddedPatchLoss dataSet
+  ; add = add dataSet
+  ; subtract = subtract dataSet
+  ; addMonotone = addMonotone dataSet
+  ; subtractMonotoneAntitone =
       subtractMonotoneAntitone dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.actionGainDominatesConfigured =
+  ; actionGainDominatesConfigured =
       actionGainDominatesConfigured dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.jacobianLossBelowConfigured =
+  ; jacobianLossBelowConfigured =
       λ scale polymer → rationalOrderEmbedding dataSet
         (Components.haarLossBelowConfigured
           (componentLosses dataSet) scale polymer)
-  ; Budget.ConfiguredPhysicalLossDomination.determinantLossBelowConfigured =
+  ; determinantLossBelowConfigured =
       λ scale polymer → rationalOrderEmbedding dataSet
         (Components.determinantLossBelowConfigured
           (componentLosses dataSet) scale polymer)
-  ; Budget.ConfiguredPhysicalLossDomination.bchLossBelowConfigured =
+  ; bchLossBelowConfigured =
       λ scale polymer → rationalOrderEmbedding dataSet
         (Components.bchLossBelowConfigured
           (componentLosses dataSet) scale polymer)
-  ; Budget.ConfiguredPhysicalLossDomination.localizationLossBelowConfigured =
+  ; localizationLossBelowConfigured =
       λ scale polymer → rationalOrderEmbedding dataSet
         (Components.localizationLossBelowConfigured
           (componentLosses dataSet) scale polymer)
-  ; Budget.ConfiguredPhysicalLossDomination.patchLossBelowConfigured =
+  ; patchLossBelowConfigured =
       λ scale polymer → rationalOrderEmbedding dataSet
         (Components.patchLossBelowConfigured
           (componentLosses dataSet) scale polymer)
-  ; Budget.ConfiguredPhysicalLossDomination.totalLoss = embeddedTotalLoss dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.netGain = embeddedNetGain dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.totalLossDefinition =
+  ; totalLoss = embeddedTotalLoss dataSet
+  ; netGain = embeddedNetGain dataSet
+  ; totalLossDefinition =
       λ scale polymer → refl
-  ; Budget.ConfiguredPhysicalLossDomination.netGainDefinition =
+  ; netGainDefinition =
       λ scale polymer → refl
-  ; Budget.ConfiguredPhysicalLossDomination.configuredTotalLossEmbeddingExact =
+  ; configuredTotalLossEmbeddingExact =
       rationalNestedLossExact dataSet
-  ; Budget.ConfiguredPhysicalLossDomination.configuredNetGainEmbeddingExact =
+  ; configuredNetGainEmbeddingExact =
       rationalNetGainExact dataSet
   }
 

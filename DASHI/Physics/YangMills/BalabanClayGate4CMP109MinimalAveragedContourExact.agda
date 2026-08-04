@@ -64,16 +64,16 @@ asGaugeCovariantPathFamily :
       (Contour.minimalContourStart geometry))
     Group Lie Scalar averageAxioms
 asGaugeCovariantPathFamily {geometry = geometry} {point = point} dataSet = record
-  { Average.GaugeCovariantPathFamily.paths =
+  { paths =
       Contour.minimalContourFamily geometry point
-  ; Average.GaugeCovariantPathFamily.holonomy = holonomy dataSet
-  ; Average.GaugeCovariantPathFamily.transformedHolonomy =
+  ; holonomy = holonomy dataSet
+  ; transformedHolonomy =
       transformedHolonomy dataSet
-  ; Average.GaugeCovariantPathFamily.leftGauge = leftGauge dataSet
-  ; Average.GaugeCovariantPathFamily.rightGauge = rightGauge dataSet
-  ; Average.GaugeCovariantPathFamily.pathHolonomyGaugeCovariant =
+  ; leftGauge = leftGauge dataSet
+  ; rightGauge = rightGauge dataSet
+  ; pathHolonomyGaugeCovariant =
       pathHolonomyGaugeCovariant dataSet
-  ; Average.GaugeCovariantPathFamily.pathFamilySmallDiameter =
+  ; pathFamilySmallDiameter =
       contourHolonomiesSmallDiameter dataSet
   }
 

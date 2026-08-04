@@ -91,23 +91,23 @@ asDyadicPrintedPhysicalInputs :
   DyadicPrinted.DyadicCMP109PrintedPhysicalInputs
     coarseN Field Group Lie Scalar Radius Entry
 asDyadicPrintedPhysicalInputs inputs = record
-  { DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.printedData =
+  { printedData =
       GroupAdapter.asPrintedEquation012Data (equation012 inputs)
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.inputValue =
+  ; inputValue =
       inputValue inputs
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.printedMapLocalDependence =
+  ; printedMapLocalDependence =
       printedMapLocalDependence inputs
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.principalLogMeaning =
+  ; principalLogMeaning =
       principalLogMeaning inputs
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.crossingFineBond =
+  ; crossingFineBond =
       crossingFineBond inputs
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.printedRelativeProductUsesPhysicalPrincipalLog =
+  ; printedRelativeProductUsesPhysicalPrincipalLog =
       printedRelativeProductUsesPhysicalPrincipalLog inputs
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.derivativeEntry =
+  ; derivativeEntry =
       derivativeEntry inputs
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.zeroDerivativeEntry =
+  ; zeroDerivativeEntry =
       zeroDerivativeEntry inputs
-  ; DyadicPrinted.DyadicCMP109PrintedPhysicalInputs.derivativeVanishesOutsideDyadicSupport =
+  ; derivativeVanishesOutsideDyadicSupport =
       derivativeVanishesOutsideDyadicSupport inputs
   }
 

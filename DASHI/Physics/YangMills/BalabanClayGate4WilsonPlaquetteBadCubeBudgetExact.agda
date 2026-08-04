@@ -29,12 +29,12 @@ import DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact 
 rationalOrderedAdditiveBudget :
   Gap.RationalWilsonGapOrder → LargeField.OrderedAdditiveBudget ℚ
 rationalOrderedAdditiveBudget order = record
-  { LargeField.OrderedAdditiveBudget.zero = 0ℚ
-  ; LargeField.OrderedAdditiveBudget.add = _+_
-  ; LargeField.OrderedAdditiveBudget.LessEqual = _≤_
-  ; LargeField.OrderedAdditiveBudget.reflexive = Gap.reflexive order
-  ; LargeField.OrderedAdditiveBudget.transitive = Gap.transitive order
-  ; LargeField.OrderedAdditiveBudget.addMonotone = Gap.addMonotone order
+  { zero = 0ℚ
+  ; add = _+_
+  ; LessEqual = _≤_
+  ; reflexive = Gap.reflexive order
+  ; transitive = Gap.transitive order
+  ; addMonotone = Gap.addMonotone order
   }
 
 record WilsonPlaquetteBadCubeBudget
@@ -72,15 +72,15 @@ asLargeFieldCubeBudget :
   (budget : WilsonPlaquetteBadCubeBudget largeField cost) →
   LargeField.LargeFieldCubeBudget ℚ
 asLargeFieldCubeBudget {cost = cost} budget = record
-  { LargeField.LargeFieldCubeBudget.algebra =
+  { algebra =
       rationalOrderedAdditiveBudget (Wilson.order cost)
-  ; LargeField.LargeFieldCubeBudget.entropyPerBadCube =
+  ; entropyPerBadCube =
       entropyPerBadCube budget
-  ; LargeField.LargeFieldCubeBudget.reservedSlackPerBadCube =
+  ; reservedSlackPerBadCube =
       reservedSlackPerBadCube budget
-  ; LargeField.LargeFieldCubeBudget.penaltyPerBadCube =
+  ; penaltyPerBadCube =
       wilsonPenaltyPerBadCube budget
-  ; LargeField.LargeFieldCubeBudget.penaltyPaysEntropyAndSlack =
+  ; penaltyPaysEntropyAndSlack =
       entropyAndSlackBelowWilsonPenalty budget
   }
 

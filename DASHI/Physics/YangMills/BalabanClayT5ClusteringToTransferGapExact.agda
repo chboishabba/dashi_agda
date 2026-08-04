@@ -113,9 +113,9 @@ positiveTransferGapFromClusteringCutset :
   PositiveEnergy dataSet (gapCandidate dataSet) →
   PositiveTransferGap dataSet
 positiveTransferGapFromClusteringCutset dataSet upper positiveGap = record
-  { PositiveTransferGap.clusteringUpperBound = upper
-  ; PositiveTransferGap.gapCandidatePositive = positiveGap
-  ; PositiveTransferGap.noPositiveSubgapMode =
+  { clusteringUpperBound = upper
+  ; gapCandidatePositive = positiveGap
+  ; noPositiveSubgapMode =
       exponentialClusteringExcludesPositiveSubgapMode dataSet upper
   }
 

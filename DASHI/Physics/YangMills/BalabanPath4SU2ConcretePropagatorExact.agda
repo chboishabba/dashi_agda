@@ -56,17 +56,17 @@ configuredGaugeFixedMatrixPositive = fullGaugeFixedCoercivity
 configuredGaugeFixedOperatorData :
   Green.CoerciveFiniteOperator PhysicalSU2Tangent4 ℚ ℚ
 configuredGaugeFixedOperatorData = record
-  { Green.operator = configuredGaugeFixedMatrix
-  ; Green.inner = physicalTangentInner
-  ; Green.vectorNorm = physicalUnweightedNormSq
-  ; Green.energy = configuredGaugeFixedEnergy
-  ; Green.coercivityConstant = configuredPathCoercivityConstant
-  ; Green.LessEqual = _≤_
-  ; Green.Positive = λ value → 0ℚ < value
-  ; Green.positiveCoercivity = configuredPathCoercivityConstantPositive
-  ; Green.energyDefinition = λ tangent → refl
-  ; Green.Coercive = ConfiguredGaugeFixedCoercive
-  ; Green.coercive = configuredGaugeFixedMatrixPositive
+  { operator = configuredGaugeFixedMatrix
+  ; inner = physicalTangentInner
+  ; vectorNorm = physicalUnweightedNormSq
+  ; energy = configuredGaugeFixedEnergy
+  ; coercivityConstant = configuredPathCoercivityConstant
+  ; LessEqual = _≤_
+  ; Positive = λ value → 0ℚ < value
+  ; positiveCoercivity = configuredPathCoercivityConstantPositive
+  ; energyDefinition = λ tangent → refl
+  ; Coercive = ConfiguredGaugeFixedCoercive
+  ; coercive = configuredGaugeFixedMatrixPositive
   }
 
 ------------------------------------------------------------------------

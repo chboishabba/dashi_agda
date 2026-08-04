@@ -55,12 +55,12 @@ asWilsonPlaquetteBadCubeBudget :
   WilsonAnimalEntropyInputs largeField cost →
   WilsonBudget.WilsonPlaquetteBadCubeBudget largeField cost
 asWilsonPlaquetteBadCubeBudget inputs = record
-  { WilsonBudget.WilsonPlaquetteBadCubeBudget.scale = scale inputs
-  ; WilsonBudget.WilsonPlaquetteBadCubeBudget.entropyPerBadCube =
+  { scale = scale inputs
+  ; entropyPerBadCube =
       entropyWithDecay inputs
-  ; WilsonBudget.WilsonPlaquetteBadCubeBudget.reservedSlackPerBadCube =
+  ; reservedSlackPerBadCube =
       reservedSlack inputs
-  ; WilsonBudget.WilsonPlaquetteBadCubeBudget.entropyAndSlackBelowWilsonPenalty =
+  ; entropyAndSlackBelowWilsonPenalty =
       entropyDecaySlackBelowPenalty inputs
   }
 

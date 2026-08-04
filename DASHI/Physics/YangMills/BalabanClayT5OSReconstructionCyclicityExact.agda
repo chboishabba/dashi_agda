@@ -171,27 +171,27 @@ asReconstructedClusteringSpectrum :
   CyclicReconstructedClusteringSpectrum Observable Energy Bound Vector →
   Gap.ReconstructedClusteringSpectrum Observable Energy Bound
 asReconstructedClusteringSpectrum dataSet = record
-  { Gap.ReconstructedClusteringSpectrum.zeroEnergy = zeroEnergy dataSet
-  ; Gap.ReconstructedClusteringSpectrum.gapCandidate = gapCandidate dataSet
-  ; Gap.ReconstructedClusteringSpectrum.PositiveEnergy = PositiveEnergy dataSet
-  ; Gap.ReconstructedClusteringSpectrum.StrictlyBelow = StrictlyBelow dataSet
-  ; Gap.ReconstructedClusteringSpectrum.connectedCorrelation =
+  { zeroEnergy = zeroEnergy dataSet
+  ; gapCandidate = gapCandidate dataSet
+  ; PositiveEnergy = PositiveEnergy dataSet
+  ; StrictlyBelow = StrictlyBelow dataSet
+  ; connectedCorrelation =
       connectedCorrelation dataSet
-  ; Gap.ReconstructedClusteringSpectrum.clusteringEnvelope =
+  ; clusteringEnvelope =
       clusteringEnvelope dataSet
-  ; Gap.ReconstructedClusteringSpectrum.subgapSpectralEnvelope =
+  ; subgapSpectralEnvelope =
       subgapSpectralEnvelope dataSet
-  ; Gap.ReconstructedClusteringSpectrum.LessEqual = LessEqual dataSet
-  ; Gap.ReconstructedClusteringSpectrum.SubgapMode =
+  ; LessEqual = LessEqual dataSet
+  ; SubgapMode =
       SubgapMode (subgapVectors dataSet)
-  ; Gap.ReconstructedClusteringSpectrum.modeObservable =
+  ; modeObservable =
       modeObservableFromCyclicity (subgapMeaning dataSet)
-  ; Gap.ReconstructedClusteringSpectrum.spectralRepresentationLowerBound =
+  ; spectralRepresentationLowerBound =
       λ energy mode time →
         spectralRepresentationLowerBoundFromOverlap dataSet energy mode time
           (modeObservableOverlapsSubgapVector
             (subgapMeaning dataSet) energy mode)
-  ; Gap.ReconstructedClusteringSpectrum.slowSubgapEnvelopeContradictsFastClustering =
+  ; slowSubgapEnvelopeContradictsFastClustering =
       slowSubgapEnvelopeContradictsFastClustering dataSet
   }
 

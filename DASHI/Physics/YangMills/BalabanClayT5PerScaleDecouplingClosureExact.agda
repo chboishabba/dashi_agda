@@ -116,13 +116,13 @@ asPerScaleCorrelatorDecoupling :
   FiniteScaleDecouplingData Observable Bound →
   Clustering.PerScaleCorrelatorDecoupling Observable Bound
 asPerScaleCorrelatorDecoupling dataSet = record
-  { Clustering.PerScaleCorrelatorDecoupling.covariance = covariance dataSet
-  ; Clustering.PerScaleCorrelatorDecoupling.scaleRemainder =
+  { covariance = covariance dataSet
+  ; scaleRemainder =
       scaleRemainder dataSet
-  ; Clustering.PerScaleCorrelatorDecoupling.scaleDecay =
+  ; scaleDecay =
       scaleDecay dataSet
-  ; Clustering.PerScaleCorrelatorDecoupling.LessEqual = LessEqual dataSet
-  ; Clustering.PerScaleCorrelatorDecoupling.singleScaleDecoupling =
+  ; LessEqual = LessEqual dataSet
+  ; singleScaleDecoupling =
       singleScaleDecoupling dataSet
   }
 
@@ -161,32 +161,32 @@ asConditionalClusteringAssembly :
   ConditionalClusteringFromScaleSums Observable Bound →
   Clustering.ConditionalClusteringAssembly Observable Bound
 asConditionalClusteringAssembly dataSet = record
-  { Clustering.ConditionalClusteringAssembly.covariance =
+  { covariance =
       covariance (scaleData dataSet)
-  ; Clustering.ConditionalClusteringAssembly.terminalContribution =
+  ; terminalContribution =
       terminalContribution dataSet
-  ; Clustering.ConditionalClusteringAssembly.ultravioletContribution =
+  ; ultravioletContribution =
       ultravioletContribution (uvMajorant dataSet)
-  ; Clustering.ConditionalClusteringAssembly.irClusteringBound =
+  ; irClusteringBound =
       irClusteringBound dataSet
-  ; Clustering.ConditionalClusteringAssembly.uvSummedBound =
+  ; uvSummedBound =
       uvSummedBound (uvMajorant dataSet)
-  ; Clustering.ConditionalClusteringAssembly.targetClusteringBound =
+  ; targetClusteringBound =
       targetClusteringBound dataSet
-  ; Clustering.ConditionalClusteringAssembly.add = add (scaleData dataSet)
-  ; Clustering.ConditionalClusteringAssembly.LessEqual =
+  ; add = add (scaleData dataSet)
+  ; LessEqual =
       LessEqual (scaleData dataSet)
-  ; Clustering.ConditionalClusteringAssembly.transitive =
+  ; transitive =
       transitive (scaleData dataSet)
-  ; Clustering.ConditionalClusteringAssembly.addMonotone =
+  ; addMonotone =
       addMonotone (scaleData dataSet)
-  ; Clustering.ConditionalClusteringAssembly.multiscaleCovarianceSplit =
+  ; multiscaleCovarianceSplit =
       multiscaleCovarianceSplit dataSet
-  ; Clustering.ConditionalClusteringAssembly.terminalKPAndLocalizationGiveIR =
+  ; terminalKPAndLocalizationGiveIR =
       terminalKPAndLocalizationGiveIR dataSet
-  ; Clustering.ConditionalClusteringAssembly.perScaleDecouplingSumsToUV =
+  ; perScaleDecouplingSumsToUV =
       perScaleDecouplingSumsToUV (uvMajorant dataSet)
-  ; Clustering.ConditionalClusteringAssembly.combineIRAndUVDecay =
+  ; combineIRAndUVDecay =
       combineIRAndUVDecay dataSet
   }
 
