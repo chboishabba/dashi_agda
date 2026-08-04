@@ -1,0 +1,38 @@
+name: Yang-Mills P33 hard mathematics
+
+on:
+  push:
+    branches:
+      - 'agent/ym-round12-p33-hard-math'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanPath4GeneratedLDLCertificate.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiniteSignedRemainderSummationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33Path4SignedRemainderCoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiveChannelPath4CoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33HardMathValidation.agda'
+      - 'scripts/check_yang_mills_p33_hard_math.sh'
+      - '.github/workflows/yang-mills-p33-hard-math.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanPath4GeneratedLDLCertificate.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiniteSignedRemainderSummationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33Path4SignedRemainderCoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiveChannelPath4CoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33HardMathValidation.agda'
+      - 'scripts/check_yang_mills_p33_hard_math.sh'
+      - '.github/workflows/yang-mills-p33-hard-math.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - name: Check exact LDL, signed finite sums, and concrete P33 coercivity
+        run: nix develop --command bash scripts/check_yang_mills_p33_hard_math.sh
