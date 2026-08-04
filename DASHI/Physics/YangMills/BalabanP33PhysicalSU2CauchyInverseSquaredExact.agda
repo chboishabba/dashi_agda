@@ -25,24 +25,26 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalSU2CauchyInverseSquaredExact wh
 --
 -- Taking x = H^{-1}y and lambda = 1/32 gives the squared inverse estimate
 --
---   ||H^{-1}y||^2 <= 32^2 ||y||^2
+--   ||H^{-1}y||^2 <= 32^2 ||y||^2.
 --
--- after one exact rational rescaling.  This route does not require an
--- eigenbasis or a separately supplied spectral decomposition.
+-- This route does not require an eigenbasis or a separately supplied spectral
+-- decomposition.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Integer.Base using (+_)
 open import Data.List.Base using (map)
 open import Data.Product.Base using (_,_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; Positive; NonNegative)
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; _/_; Positive; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 
@@ -59,8 +61,7 @@ pairDotMapExact :
     (left right : Index → ℚ) →
   FiniteL2.pairDot
     (map (λ index → left index , right index) indices)
-  ≡ DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRational
-      indices (λ index → left index * right index)
+  ≡ Sums.sumRational indices (λ index → left index * right index)
 pairDotMapExact [] left right = refl
 pairDotMapExact (index ∷ indices) left right
   rewrite pairDotMapExact indices left right = refl
@@ -70,8 +71,7 @@ leftNormMapExact :
     (left right : Index → ℚ) →
   FiniteL2.leftNormSquared
     (map (λ index → left index , right index) indices)
-  ≡ DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRational
-      indices (λ index → left index * left index)
+  ≡ Sums.sumRational indices (λ index → left index * left index)
 leftNormMapExact [] left right = refl
 leftNormMapExact (index ∷ indices) left right
   rewrite leftNormMapExact indices left right = refl
@@ -81,8 +81,7 @@ rightNormMapExact :
     (left right : Index → ℚ) →
   FiniteL2.rightNormSquared
     (map (λ index → left index , right index) indices)
-  ≡ DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRational
-      indices (λ index → right index * right index)
+  ≡ Sums.sumRational indices (λ index → right index * right index)
 rightNormMapExact [] left right = refl
 rightNormMapExact (index ∷ indices) left right
   rewrite rightNormMapExact indices left right = refl
@@ -243,7 +242,7 @@ physicalInverseSquaredBoundForPositivePreimage
           * Coordinates.physicalSU2CoordinateNormSq
               (Coordinates.physicalMatrixApply inverse vector)
         ≤ right)
-      (DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRationalCong
+      (Sums.sumRationalCong
         Coordinates.physicalSU2Coordinates4
         (λ coordinate →
           Coordinates.physicalMatrixApply inverse vector coordinate
@@ -260,8 +259,76 @@ physicalInverseSquaredBoundForPositivePreimage
     (physicalCoordinateCauchySchwarzSquared
       (Coordinates.physicalMatrixApply inverse vector) vector)
 
+thirtyTwoSquared : ℚ
+thirtyTwoSquared = + 1024 / 1
+
+thirtyTwoSquaredNonnegative : 0ℚ ≤ thirtyTwoSquared
+thirtyTwoSquaredNonnegative = ℚP.nonNegative⁻¹ thirtyTwoSquared
+
+p33SquaredRescalingExact : ∀ normSq →
+  thirtyTwoSquared
+    * ((P33.p33PhysicalFloor * P33.p33PhysicalFloor) * normSq)
+  ≡ normSq
+p33SquaredRescalingExact = ℚRing.solve-∀
+
+rescaleP33SquaredInverseBound : ∀ inverseNormSq vectorNormSq →
+  (P33.p33PhysicalFloor * P33.p33PhysicalFloor) * inverseNormSq
+    ≤ vectorNormSq →
+  inverseNormSq ≤ thirtyTwoSquared * vectorNormSq
+rescaleP33SquaredInverseBound inverseNormSq vectorNormSq bound =
+  let
+    instance
+      scaleNN : NonNegative thirtyTwoSquared
+      scaleNN = ℚ.nonNegative thirtyTwoSquaredNonnegative
+
+    scaled :
+      thirtyTwoSquared
+        * ((P33.p33PhysicalFloor * P33.p33PhysicalFloor) * inverseNormSq)
+      ≤ thirtyTwoSquared * vectorNormSq
+    scaled = ℚP.*-monoˡ-≤-nonNeg thirtyTwoSquared bound
+  in
+  subst
+    (λ lower → lower ≤ thirtyTwoSquared * vectorNormSq)
+    (p33SquaredRescalingExact inverseNormSq)
+    scaled
+
+p33PhysicalInverseSquaredBoundForPositivePreimage :
+  ∀ matrix inverse vector →
+  (∀ coordinate →
+    Coordinates.physicalMatrixApply matrix
+      (Coordinates.physicalMatrixApply inverse vector) coordinate
+    ≡ vector coordinate) →
+  0ℚ < Coordinates.physicalSU2CoordinateNormSq
+    (Coordinates.physicalMatrixApply inverse vector) →
+  P33.p33PhysicalFloor
+    * Coordinates.physicalSU2CoordinateNormSq
+        (Coordinates.physicalMatrixApply inverse vector)
+  ≤ Coordinates.physicalCoordinateDot
+      (Coordinates.physicalMatrixApply inverse vector)
+      (Coordinates.physicalMatrixApply matrix
+        (Coordinates.physicalMatrixApply inverse vector)) →
+  Coordinates.physicalSU2CoordinateNormSq
+      (Coordinates.physicalMatrixApply inverse vector)
+  ≤ thirtyTwoSquared
+      * Coordinates.physicalSU2CoordinateNormSq vector
+p33PhysicalInverseSquaredBoundForPositivePreimage
+    matrix inverse vector inverseRight inverseVectorPositive coercivity =
+  rescaleP33SquaredInverseBound
+    (Coordinates.physicalSU2CoordinateNormSq
+      (Coordinates.physicalMatrixApply inverse vector))
+    (Coordinates.physicalSU2CoordinateNormSq vector)
+    (physicalInverseSquaredBoundForPositivePreimage
+      matrix inverse P33.p33PhysicalFloor vector
+      inverseRight
+      (ℚP.nonNegative⁻¹ P33.p33PhysicalFloor)
+      inverseVectorPositive
+      coercivity)
+
 physicalSU2FiniteCauchySchwarzLevel : ProofLevel
 physicalSU2FiniteCauchySchwarzLevel = machineChecked
 
 physicalSU2DirectInverseSquaredLevel : ProofLevel
 physicalSU2DirectInverseSquaredLevel = machineChecked
+
+physicalSU2P33InverseFactor32SquaredLevel : ProofLevel
+physicalSU2P33InverseFactor32SquaredLevel = machineChecked
