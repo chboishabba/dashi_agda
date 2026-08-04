@@ -22,7 +22,7 @@ murrayConstructiveAnalysis = record
   ; publication = "B.Sc. Honours thesis, Dalhousie University, 2022"
   ; persistentIdentifier = "arXiv:2205.08354; no DOI assigned"
   ; theoremUse =
-      "Bishop-real setoid arithmetic and sequence infrastructure. Round eleven proves only the repository-specific reducer from exact configured term definitions to the concrete signed-factorial identification."
+      "Bishop-real setoid arithmetic and sequence infrastructure. Round eleven proves the repository-specific reducers from exact configured term definitions to signed-factorial identification and from oriented half-ball charts to parity-transported represented values."
   ; authorityLevel = standardImported
   ; importedResultRequiresTypedHypotheses = true
   }
@@ -46,7 +46,7 @@ koteckyPreiss = record
   ; publication = "Communications in Mathematical Physics 103 (1986), 491--498"
   ; persistentIdentifier = "DOI: 10.1007/BF01211762"
   ; theoremUse =
-      "Abstract polymer convergence criterion. DASHI proves the finite direct-ratio induction and must separately prove the physical activity and counting hypotheses."
+      "Abstract polymer convergence criterion. DASHI proves the finite direct-ratio induction, wires the canonical lightweight P06 animal constant into P11, and must separately prove the physical activity and counting hypotheses."
   ; authorityLevel = standardImported
   ; importedResultRequiresTypedHypotheses = true
   }
@@ -95,6 +95,42 @@ balabanROperation = record
   ; persistentIdentifier = "DOI: 10.1007/BF01238433"
   ; theoremUse =
       "Connected-activity and R-operation provenance. Round eleven exposes locality, connectedness preservation and weighted-norm control as separate Gate-4 fields."
+  ; authorityLevel = standardImported
+  ; importedResultRequiresTypedHypotheses = true
+  }
+
+mitterExactRG : Round11Source
+mitterExactRG = record
+  { authors = "P. K. Mitter"
+  ; title = "The Exact Renormalization Group"
+  ; publication = "Contribution to the Encyclopedia of Mathematical Physics, 2006"
+  ; persistentIdentifier = "arXiv:math-ph/0505008; no DOI assigned in the cited manuscript"
+  ; theoremUse =
+      "General exact-RG scale decomposition and iterative-semigroup background. Round eleven owns the dependency-indexed fixed-lattice, cross-scale and limiting interfaces and imports no Yang--Mills endpoint theorem."
+  ; authorityLevel = standardImported
+  ; importedResultRequiresTypedHypotheses = true
+  }
+
+osterwalderSchraderOne : Round11Source
+osterwalderSchraderOne = record
+  { authors = "Konrad Osterwalder and Robert Schrader"
+  ; title = "Axioms for Euclidean Green's Functions"
+  ; publication = "Communications in Mathematical Physics 31 (1973), 83--112"
+  ; persistentIdentifier = "DOI: 10.1007/BF01645738"
+  ; theoremUse =
+      "OS reconstruction framework. Round eleven exposes OS0--OS4, reconstruction and gap transfer as typed downstream obligations."
+  ; authorityLevel = standardImported
+  ; importedResultRequiresTypedHypotheses = true
+  }
+
+osterwalderSchraderTwo : Round11Source
+osterwalderSchraderTwo = record
+  { authors = "Konrad Osterwalder and Robert Schrader"
+  ; title = "Axioms for Euclidean Green's Functions II"
+  ; publication = "Communications in Mathematical Physics 42 (1975), 281--305"
+  ; persistentIdentifier = "DOI: 10.1007/BF01608978"
+  ; theoremUse =
+      "Refined OS axiomatic and reconstruction background. The lattice-to-continuum and positive SI mass-gap hypotheses remain fail-closed."
   ; authorityLevel = standardImported
   ; importedResultRequiresTypedHypotheses = true
   }
