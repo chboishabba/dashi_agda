@@ -11,6 +11,7 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 
 files=(
   DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda
   DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda
   DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda
   DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda
@@ -32,13 +33,19 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}' "${files[@]}"; the
   exit 1
 fi
 
-# Concrete Bishop arithmetic and convergence transport.
+# Concrete Bishop arithmetic, term parity, and convergence transport.
 grep -q 'oddInverseFactorialStep' \
   DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda
 grep -q 'evenInverseFactorialStep' \
   DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda
 grep -q 'concreteFactorialCoefficientStepBounds' \
   DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda
+grep -q 'oddPowerNegation' \
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda
+grep -q 'concreteSineOddTermFamily' \
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda
+grep -q 'concreteCosineEvenTermFamily' \
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda
 grep -q 'seriesNegationConvergence' \
   DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda
 grep -q 'bishopSeriesLimitParityInputsFromTermParity' \
@@ -57,6 +64,8 @@ grep -q '10.1007/BF01211762' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound10SourceAudit.agda
 
 # Exact frontier accounting must remain fail-closed.
+grep -q 'concreteSineCosineTermParityDischarged = true' \
+  DASHI/Physics/YangMills/YangMillsSubmissionRound10Receipt.agda
 grep -q 'concreteSineCosineInterlacingDischarged = false' \
   DASHI/Physics/YangMills/YangMillsSubmissionRound10Receipt.agda
 grep -q 'globalYangMillsEndpointDischarged = false' \
@@ -66,6 +75,7 @@ grep -q 'record Round10CompleteCutset' \
 
 roots=(
   DASHI/Physics/YangMills/BalabanBishopConcreteFactorialCoefficientDischargeExact.agda
+  DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda
   DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda
   DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda
   DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda
