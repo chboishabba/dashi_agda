@@ -22,7 +22,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoCriticalPathCompositionExact where
 -- contradiction remains an independent obligation.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; Setω)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -40,7 +40,7 @@ record LuoCriticalPathInputs
     {Solution : Set s}
     {Time : Set t}
     (data : PreBudget.OfficialLuoPreBudgetData
-      InitialDatum Solution Time) : Set (lsuc (d ⊔ s ⊔ t)) where
+      InitialDatum Solution Time) : Setω where
   field
     physicalLeaves : Builder.CanonicalAnalyticPhysicalLeaves data
 
@@ -96,7 +96,7 @@ record CriticalPathReceipt
     {Time : Set t}
     (data : PreBudget.OfficialLuoPreBudgetData
       InitialDatum Solution Time)
-    (inputs : LuoCriticalPathInputs data) : Set (lsuc (d ⊔ s ⊔ t)) where
+    (inputs : LuoCriticalPathInputs data) : Setω where
   field
     canonicalInputs : Canonical.CanonicalAnalyticInputs data
     continuation :
