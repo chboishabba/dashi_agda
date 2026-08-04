@@ -24,6 +24,7 @@ open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
   (sumRational; sumRationalScale)
 open import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExact using
   (sumRationalMonotone)
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 
@@ -36,24 +37,18 @@ scaledThreeComponentNormExact : ∀ fld →
   P33.p33PhysicalFloor * Coordinates.physicalSU2BondNormSq fld
   ≡ sumRational Coordinates.lieCoordinates3
       (λ coordinate →
-        P33.p33PhysicalFloor
-        * DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact.bondNormSq
-            (fld coordinate))
+        P33.p33PhysicalFloor * Hodge.bondNormSq (fld coordinate))
 scaledThreeComponentNormExact fld =
   sym
     (sumRationalScale
       P33.p33PhysicalFloor
       Coordinates.lieCoordinates3
-      (λ coordinate →
-        DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact.bondNormSq
-          (fld coordinate)))
+      (λ coordinate → Hodge.bondNormSq (fld coordinate)))
 
 threeComponentP33Floor :
   ∀ fld componentEnergy →
   (∀ coordinate →
-    P33.p33PhysicalFloor
-      * DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact.bondNormSq
-          (fld coordinate)
+    P33.p33PhysicalFloor * Hodge.bondNormSq (fld coordinate)
     ≤ componentEnergy coordinate) →
   P33.p33PhysicalFloor * Coordinates.physicalSU2BondNormSq fld
   ≤ threeComponentEnergy componentEnergy
@@ -64,9 +59,7 @@ threeComponentP33Floor fld componentEnergy componentFloor =
     (sumRationalMonotone
       Coordinates.lieCoordinates3
       (λ coordinate →
-        P33.p33PhysicalFloor
-          * DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact.bondNormSq
-              (fld coordinate))
+        P33.p33PhysicalFloor * Hodge.bondNormSq (fld coordinate))
       componentEnergy
       componentFloor)
 
