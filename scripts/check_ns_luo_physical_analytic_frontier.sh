@@ -13,6 +13,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterWeightedIncrementExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterMultiplierBridgeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoLinearIntegralWeightedIncrementExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteLinearIntegralRealizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTranslationTensorConvolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteResonantPairFoldExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedIncrementFubiniExact.agda
