@@ -25,29 +25,27 @@ module DASHI.Physics.YangMills.BalabanP06PhysicalModelLeafLightweightExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_; _^_; _≤_)
-open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.YangMills.BalabanP06FiniteNeighbourGraphExact as FiniteGraph
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-------------------------------------------------------------------------
--- Literal physical polymer support.
-------------------------------------------------------------------------
-
 record PhysicalPolymerSupportModel : Set₁ where
   field
-    Polymer Block : Set
-
     graph : FiniteGraph.FiniteNeighbourGraph
-    graphVertexIsBlock : FiniteGraph.Vertex graph ≡ Block
+    Polymer : Set
 
-    support : Polymer → List Block
-    root : Polymer → Block
+    support : Polymer → List (FiniteGraph.Vertex graph)
+    root : Polymer → FiniteGraph.Vertex graph
 
-    Member : Block → List Block → Set
-    NoDuplicates : List Block → Set
-    Connected : List Block → Set
+    Member :
+      FiniteGraph.Vertex graph →
+      List (FiniteGraph.Vertex graph) → Set
+    NoDuplicates : List (FiniteGraph.Vertex graph) → Set
+    Connected : List (FiniteGraph.Vertex graph) → Set
+    PhysicalAdjacent :
+      FiniteGraph.Vertex graph →
+      FiniteGraph.Vertex graph → Set
 
     rootBelongsToSupport :
       ∀ polymer → Member (root polymer) (support polymer)
@@ -58,19 +56,21 @@ record PhysicalPolymerSupportModel : Set₁ where
     supportIsConnected :
       ∀ polymer → Connected (support polymer)
 
-    supportAdjacencyIsPhysical :
+    supportAdjacencyForward :
       ∀ {left right} →
-      FiniteGraph.Adjacent graph left right → Set
+      FiniteGraph.Adjacent graph left right →
+      PhysicalAdjacent left right
+
+    supportAdjacencyBackward :
+      ∀ {left right} →
+      PhysicalAdjacent left right →
+      FiniteGraph.Adjacent graph left right
 
     concreteDegreeBound : Nat
     concreteDegreeUniform :
       FiniteGraph.ConcreteBoundedDegree graph concreteDegreeBound
 
 open PhysicalPolymerSupportModel public
-
-------------------------------------------------------------------------
--- Reduced skeleton and the essential complexity-versus-diameter theorem.
-------------------------------------------------------------------------
 
 record ReducedSkeletonGeometry
     (physical : PhysicalPolymerSupportModel) : Set₁ where
@@ -81,7 +81,7 @@ record ReducedSkeletonGeometry
       Polymer physical → ReducedSkeleton
 
     reducedVertices :
-      ReducedSkeleton → List (Block physical)
+      ReducedSkeleton → List (FiniteGraph.Vertex (graph physical))
 
     reducedComplexity : ReducedSkeleton → Nat
     supportDiameter : Polymer physical → Nat
@@ -89,14 +89,18 @@ record ReducedSkeletonGeometry
     branchVertexCount segmentCount :
       ReducedSkeleton → Nat
 
+    BranchVerticesSeparated : ReducedSkeleton → Set
+    ReducedSegmentsInternallyDisjoint : ReducedSkeleton → Set
+    EveryReducedSegmentHasPositiveLength : ReducedSkeleton → Set
+
     branchVerticesSeparated :
-      ∀ skeleton → Set
+      ∀ skeleton → BranchVerticesSeparated skeleton
 
     reducedSegmentsInternallyDisjoint :
-      ∀ skeleton → Set
+      ∀ skeleton → ReducedSegmentsInternallyDisjoint skeleton
 
     eachReducedSegmentPositiveLength :
-      ∀ skeleton → Set
+      ∀ skeleton → EveryReducedSegmentHasPositiveLength skeleton
 
     segmentCountControlledByBranchCount :
       ∀ skeleton →
@@ -121,10 +125,6 @@ record ReducedSkeletonGeometry
 
 open ReducedSkeletonGeometry public
 
-------------------------------------------------------------------------
--- Decorations, canonical encoding, and bounded fibres.
-------------------------------------------------------------------------
-
 record PhysicalDecorationGeometry
     (physical : PhysicalPolymerSupportModel)
     (skeleton : ReducedSkeletonGeometry physical) : Set₁ where
@@ -137,11 +137,15 @@ record PhysicalDecorationGeometry
     localChoiceBound : Nat
     decorationLength : Decoration → Nat
 
+    LocalDecorationChoicesAtMost :
+      FiniteGraph.Vertex (graph physical) → Nat → Set
+    DecorationOwnedByReducedSkeleton : Polymer physical → Set
+
     localDecorationChoicesUniformlyBounded :
-      ∀ block → Set
+      ∀ block → LocalDecorationChoicesAtMost block localChoiceBound
 
     decorationSupportOwnedBySkeletonVertex :
-      ∀ polymer → Set
+      ∀ polymer → DecorationOwnedByReducedSkeleton polymer
 
     decorationEncodingInjective :
       ∀ {left right} →
@@ -197,7 +201,6 @@ record PhysicalPolymerDecomposition
     decodeEncodePolymer :
       ∀ polymer → decode (encode polymer) ≡ polymer
 
-    FibreMember : Polymer physical → Encoding → Set
     fibreCardinality : Encoding → Nat
     fibreBound : Nat
 
@@ -205,10 +208,6 @@ record PhysicalPolymerDecomposition
       ∀ code → fibreCardinality code ≤ fibreBound
 
 open PhysicalPolymerDecomposition public
-
-------------------------------------------------------------------------
--- One lightweight physical leaf and its exact counting output.
-------------------------------------------------------------------------
 
 record P06LightweightPhysicalModelLeaf : Set₁ where
   field
