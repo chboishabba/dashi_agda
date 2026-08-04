@@ -198,7 +198,7 @@ pairedScaledCoordinateFromNormBudget
     (scale * finalBudget)
     (subst
       (λ lowerBudget → lowerBudget ≤ scale * finalBudget)
-      (sym (ℚP.*-distribˡ-+ scale leftNorm rightNorm))
+      (ℚP.*-distribˡ-+ scale leftNorm rightNorm)
       (ℚP.*-monoˡ-≤-nonNeg scale normBound))
     (addTwoSided
       (scale * left)
@@ -215,6 +215,7 @@ pairedScaledCoordinateFromNormBudget
 record PrimitivePhysicalOperatorNorms (Cell : Set) : Set₁ where
   field
     radius : ℚ
+    radiusNonnegative : 0ℚ ≤ radius
 
     adDefect dexpDefect inverseDexpDefect : Cell → ℚ
     covariantDefect covariantAdjointDefect blockDerivativeDefect : Cell → ℚ
