@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanP06PeriodicSupportBridgeExact
 import DASHI.Physics.YangMills.BalabanP06DiameterComplexityAuditExact
 import DASHI.Physics.YangMills.BalabanP11LightweightCanonicalPaymentExact
 import DASHI.Physics.YangMills.BalabanP33P10Gate4DependencySpineExact
+import DASHI.Physics.YangMills.YangMillsFixedLatticeToContinuumDependencySpineExact
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11SourceAudit
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11Ledger
@@ -49,6 +50,10 @@ record Round11ValidationReceipt : Set where
       Receipt.lightweightP11CanonicalConstantWired
         Receipt.round11Receipt ≡ true
 
+    globalDependencySpineAccepted :
+      Receipt.fixedLatticeToContinuumDependencySpineAdded
+        Receipt.round11Receipt ≡ true
+
     continuumEndpointStillFailClosed :
       Receipt.continuumOSAndSIMassGapDischarged
         Receipt.round11Receipt ≡ false
@@ -73,6 +78,8 @@ round11FocusedRootAccepted = record
       Receipt.round11UnrestrictedDiameterInferenceRejected
   ; p11CanonicalConstantAccepted =
       Receipt.round11P11CanonicalConstantWired
+  ; globalDependencySpineAccepted =
+      Receipt.round11GlobalDependencySpineAdded
   ; continuumEndpointStillFailClosed =
       Receipt.round11PhysicalEndpointRemainsOpen
   }
