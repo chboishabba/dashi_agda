@@ -13,6 +13,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
 import DASHI.Physics.Closure.NSTriadKNLuoIncrementTensorPolarizationExact as Polarization
+import DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelFourierMultiplierExact as IncrementMultiplier
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSignedConvolutionYoungExact as FiniteYoung
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePeriodicMultiplierRealizationExact as FiniteMultiplier
 import DASHI.Physics.Closure.NSTriadKNLuoPointwisePairFoldReductionExact as PairFold
@@ -27,6 +28,8 @@ record LuoPhysicalAnalyticTaskLedger : Set where
   field
     weightedIncrementFormulaCorrected : Bool
     incrementPolarizationAlgebraConstructed : Bool
+    incrementFourierMultiplierAlgebraConstructed : Bool
+    incrementFourierIntegrationIdentityInhabited : Bool
 
     finiteSignedYoungSummationConstructed : Bool
     finitePeriodicMultiplierConstructorConstructed : Bool
@@ -63,6 +66,8 @@ luoPhysicalAnalyticTaskLedger : LuoPhysicalAnalyticTaskLedger
 luoPhysicalAnalyticTaskLedger = ledger
   FluxKernel.weightedIncrementKernelFormulaCorrected
   Polarization.incrementTensorPolarizationAlgebraClosed
+  IncrementMultiplier.incrementKernelFourierMultiplierAlgebraClosed
+  false
   FiniteYoung.finiteSignedConvolutionSummationClosed
   FiniteMultiplier.finitePeriodicMultiplierReducerClosed
   false
@@ -88,6 +93,12 @@ weightedIncrementFormulaCorrectedIsTrue :
   weightedIncrementFormulaCorrected luoPhysicalAnalyticTaskLedger ≡ true
 weightedIncrementFormulaCorrectedIsTrue =
   FluxKernel.weightedIncrementKernelFormulaCorrectedIsTrue
+
+incrementFourierMultiplierAlgebraConstructedIsTrue :
+  incrementFourierMultiplierAlgebraConstructed luoPhysicalAnalyticTaskLedger
+  ≡ true
+incrementFourierMultiplierAlgebraConstructedIsTrue =
+  IncrementMultiplier.incrementKernelFourierMultiplierAlgebraClosedIsTrue
 
 finiteMultiplierConstructorIsTrue :
   finitePeriodicMultiplierConstructorConstructed luoPhysicalAnalyticTaskLedger
