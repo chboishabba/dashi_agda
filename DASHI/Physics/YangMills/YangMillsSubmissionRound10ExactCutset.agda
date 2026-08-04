@@ -3,13 +3,17 @@ module DASHI.Physics.YangMills.YangMillsSubmissionRound10ExactCutset where
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import Real as BishopReal
+
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact as Recurrence
 import DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischargeExact as Factorial
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as TermParity
 import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as BishopParity
 import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact as SeriesTransport
 import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Brackets
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as ConcreteInterlacing
 import DASHI.Physics.YangMills.BalabanP06PhysicalModelLeafLightweightExact as P06Light
 import DASHI.Physics.YangMills.BalabanP11PhysicalPrefixTailEntropyExact as P11
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
@@ -27,7 +31,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- * concrete odd/even parity of the signed factorial terms;
 -- * transformed sine/cosine convergence once the elementary terms are
 --   identified with those concrete terms;
--- * order closure once alternating subsequence interlacing is known;
+-- * concrete nonnegative-half-ball alternating interlacing and order closure;
 -- * ordinary finite geometric summation once 0 <= q < 1 is known;
 -- * polynomially weighted finite summation once finite-prefix and eventual-tail
 --   pointwise domination by one larger geometric ratio are supplied.
@@ -44,13 +48,6 @@ record Round10BishopPhysicalCutset : Set₁ where
 
     concreteTermIdentification :
       TermParity.ConcreteSineCosineTermIdentification elementarySeries
-
-    sineCosineInterlacing :
-      Brackets.BishopSineCosineInterlacingData
-
-    interlacingUsesTheElementarySeries : Set
-    interlacingUsesTheElementarySeriesEvidence :
-      interlacingUsesTheElementarySeries
 
 open Round10BishopPhysicalCutset public
 
@@ -79,12 +76,39 @@ round10ParityInputs inputs =
     (round10SineOddTerms inputs)
     (round10CosineEvenTerms inputs)
 
+round10HalfBallSeriesInputs :
+  (inputs : Round10BishopPhysicalCutset) →
+  (value : BishopReal.ℝ) →
+  BishopReal.NonNegative value →
+  BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
+  ConcreteInterlacing.ConcreteHalfBallSeriesInputs
+    (elementarySeries inputs) value
+round10HalfBallSeriesInputs inputs value valueNonnegative insideHalf = record
+  { termIdentification = concreteTermIdentification inputs
+  ; valueNonnegative = valueNonnegative
+  ; insideHalf = insideHalf
+  }
+
+round10SineCosineInterlacing :
+  (inputs : Round10BishopPhysicalCutset) →
+  (value : BishopReal.ℝ) →
+  BishopReal.NonNegative value →
+  BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
+  Brackets.BishopSineCosineInterlacingData
+round10SineCosineInterlacing inputs value nonnegative inside =
+  ConcreteInterlacing.concreteSineCosineInterlacing
+    (round10HalfBallSeriesInputs inputs value nonnegative inside)
+
 round10AlternatingBrackets :
-  Round10BishopPhysicalCutset →
+  (inputs : Round10BishopPhysicalCutset) →
+  (value : BishopReal.ℝ) →
+  BishopReal.NonNegative value →
+  BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
   BishopParity.ConcreteBishopAlternatingBrackets
-round10AlternatingBrackets inputs =
+round10AlternatingBrackets inputs value nonnegative inside =
   Brackets.concreteBishopAlternatingBracketsFromInterlacing
-    (sineCosineInterlacing inputs)
+    (round10SineCosineInterlacing
+      inputs value nonnegative inside)
 
 record Round10LocalPhysicalCutset : Set₁ where
   field
@@ -214,8 +238,8 @@ open Round10CompleteCutset public
 round10ExactCutsetDefinitionLevel : ProofLevel
 round10ExactCutsetDefinitionLevel = machineChecked
 
-round10BishopCoefficientParityAndTransportLevel : ProofLevel
-round10BishopCoefficientParityAndTransportLevel = machineChecked
+round10BishopCoefficientParityTransportInterlacingLevel : ProofLevel
+round10BishopCoefficientParityTransportInterlacingLevel = machineChecked
 
 round10OrdinaryFiniteGeometricBoundLevel : ProofLevel
 round10OrdinaryFiniteGeometricBoundLevel = machineChecked
@@ -225,9 +249,6 @@ round10PolynomialFiniteSummationReducerLevel = machineChecked
 
 round10ElementaryTermIdentificationLevel : ProofLevel
 round10ElementaryTermIdentificationLevel = conditional
-
-round10ConcreteInterlacingInputsLevel : ProofLevel
-round10ConcreteInterlacingInputsLevel = conditional
 
 round10P06P11P10P33PhysicalInputsLevel : ProofLevel
 round10P06P11P10P33PhysicalInputsLevel = conditional
