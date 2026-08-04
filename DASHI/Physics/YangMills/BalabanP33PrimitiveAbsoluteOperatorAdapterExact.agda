@@ -66,21 +66,19 @@ valueBelowAbsolute value with ℚP.≤-total 0ℚ value
     (sym absoluteIsNegative)
     (ℚP.≤-trans nonpositive negativeNonnegative)
 
+doubleNegation : ∀ value → - (- value) ≡ value
+doubleNegation = ℚRing.solve-∀
+
 negativeAbsoluteBelowValue : ∀ value → - ∣ value ∣ ≤ value
 negativeAbsoluteBelowValue value =
   subst
-    (λ lower → lower ≤ value)
-    (negAbsoluteNegate value)
+    (λ upper → - ∣ value ∣ ≤ upper)
+    (doubleNegation value)
     (ℚP.neg-antimono-≤
       (subst
         (λ upper → - value ≤ upper)
         (ℚP.∣-p∣≡∣p∣ value)
         (valueBelowAbsolute (- value))))
-  where
-  negAbsoluteNegate : ∀ selected →
-    - ∣ selected ∣ ≡ - ∣ - selected ∣
-  negAbsoluteNegate selected =
-    ℚRing.solve-∀
 
 absoluteTwoSided : ∀ value →
   Primitive.TwoSided value ∣ value ∣
