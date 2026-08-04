@@ -35,6 +35,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoSubmissionDependencyCutsetExact
 import DASHI.Physics.Closure.NSTriadKNPeriodicNavierStokesSubmissionTheoremExact
 import DASHI.Physics.Closure.NSTriadKNLuoSubmissionAuditReceiptExact
 import DASHI.Physics.Closure.NSTriadKNLuoCoreSourceFidelityInventoryExact
+import DASHI.Physics.Closure.NSTriadKNLuoSubmissionLemmaCrosswalkExact
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalPathCompositionExact
 import DASHI.Physics.Closure.NSTriadKNLuoCompleteSubmissionFrontierReceipt
 
