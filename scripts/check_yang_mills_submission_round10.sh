@@ -17,6 +17,7 @@ files=(
   DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda
   DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda
   DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda
+  DASHI/Physics/YangMills/BalabanStepVPolynomialPrefixTailDominationExact.agda
   DASHI/Physics/YangMills/BalabanP06PhysicalModelLeafLightweightExact.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound10ExactCutset.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound10SourceAudit.agda
@@ -62,6 +63,10 @@ grep -q 'bishopFiniteGeometricUniformBound' \
   DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda
 grep -q 'polynomiallyWeightedGeometricBoundFromDomination' \
   DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda
+grep -q 'polynomialWeightedBoundFromPrefixTail' \
+  DASHI/Physics/YangMills/BalabanStepVPolynomialPrefixTailDominationExact.agda
+grep -q 'indexPrefixOrTail' \
+  DASHI/Physics/YangMills/BalabanStepVPolynomialPrefixTailDominationExact.agda
 grep -q 'reducedSkeletonComplexityLinearInDiameter' \
   DASHI/Physics/YangMills/BalabanP06PhysicalModelLeafLightweightExact.agda
 grep -q '10.1007/BF01211762' \
@@ -89,6 +94,7 @@ roots=(
   DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda
   DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda
   DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda
+  DASHI/Physics/YangMills/BalabanStepVPolynomialPrefixTailDominationExact.agda
   DASHI/Physics/YangMills/BalabanP06PhysicalModelLeafLightweightExact.agda
   DASHI/Physics/YangMills/YangMillsSubmissionRound10LightValidation.agda
 )
