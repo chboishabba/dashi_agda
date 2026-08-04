@@ -20,6 +20,7 @@ files=(
   DASHI/Reasoning/PathologicConstraintSystem.agda
   DASHI/Reasoning/PathologicPerspectiveHyperfabric.agda
   DASHI/Reasoning/PathologicTheatreMetaRuntime.agda
+  DASHI/Reasoning/PathologicKantLacanZizekBridge.agda
   DASHI/Reasoning/PathologicSourceAtlas.agda
   DASHI/Reasoning/PathologicRegression.agda
   DASHI/Reasoning/PathologicEverything.agda
@@ -61,7 +62,7 @@ grep -q 'previousSubfibreHyphenParsedAsSubtraction = false' DASHI/Foundations/JP
 grep -q 'moonshineInternal196882SubrepresentationClaimed = false' DASHI/Foundations/JPlusOneMarkedUnitExtension.agda
 grep -q 'stageAndMoonshineSharePlusOneShape' DASHI/Foundations/JPlusOneMarkedUnitExtension.agda
 
-# Pathologic constraint, perspective and theatre surfaces.
+# Pathologic constraint, perspective, theatre and philosophical lenses.
 grep -q 'record ActionDependency' DASHI/Reasoning/PathologicConstraintSystem.agda
 grep -q 'dayTwoPriceMultiplierIsTen' DASHI/Reasoning/PathologicConstraintSystem.agda
 grep -q 'everyUnpleasantMechanicIsIntentional = false' DASHI/Reasoning/PathologicConstraintSystem.agda
@@ -73,6 +74,11 @@ grep -q 'comparisonIsNoTypedMeet' DASHI/Reasoning/PathologicPerspectiveHyperfabr
 grep -q 'record MutualPlayDependency' DASHI/Reasoning/PathologicTheatreMetaRuntime.agda
 grep -q 'traceAfterReveal = causalTraceRetained' DASHI/Reasoning/PathologicTheatreMetaRuntime.agda
 grep -q 'fictionalityImpliesMeaninglessness = false' DASHI/Reasoning/PathologicTheatreMetaRuntime.agda
+grep -q 'bachelorLensEvidence' DASHI/Reasoning/PathologicKantLacanZizekBridge.agda
+grep -q 'haruspexLensEvidence' DASHI/Reasoning/PathologicKantLacanZizekBridge.agda
+grep -q 'changelingLensEvidence' DASHI/Reasoning/PathologicKantLacanZizekBridge.agda
+grep -q 'oneDiscourseExhaustsCharacter = false' DASHI/Reasoning/PathologicKantLacanZizekBridge.agda
+grep -q 'reviewInterpretationEqualsGameSource = false' DASHI/Reasoning/PathologicKantLacanZizekBridge.agda
 
 # Upgrade atlas must state what is and is not migrated.
 grep -q 'allLegacySitesAlreadyMigrated = false' DASHI/Reasoning/TypedDependencyUpgradeAtlas.agda
