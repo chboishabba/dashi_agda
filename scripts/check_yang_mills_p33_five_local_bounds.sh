@@ -9,6 +9,7 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 files=(
   DASHI/Physics/YangMills/BalabanP33LiteralBondCellIncidenceExact.agda
   DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda
+  DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda
   DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda
 )
@@ -28,6 +29,10 @@ grep -q 'curvatureCoefficient dataSet cell' \
   DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda
 grep -q 'transportCoefficientBound' \
   DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda
+grep -q 'operatorNormDominatesCoordinate' \
+  DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda
+grep -q 'asPrimitivePhysicalOperatorNorms' \
+  DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda
 grep -q 'literalFiveMechanismsGivePath4PhysicalCoercivity' \
   DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda
 
@@ -37,6 +42,11 @@ grep -q '10.1007/BF01211042' \
   DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda
 grep -q '10.1007/978-3-319-13467-3' \
   DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda
+grep -q '10.1007/978-3-642-66282-9' \
+  DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda
+
+grep -q '10.1017/CBO9781139020411' \
+  DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda
