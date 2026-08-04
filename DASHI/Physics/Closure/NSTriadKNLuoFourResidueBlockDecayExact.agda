@@ -12,29 +12,29 @@ module DASHI.Physics.Closure.NSTriadKNLuoFourResidueBlockDecayExact where
 --
 -- PURPOSE
 -- Carry the explicit b=4 contraction through all four residue classes.  A
--- proof-relevant path stores only the one-block inequalities
---
---   E_{r+4(k+1)} <= (1/2) E_{r+4k}.
---
--- Induction derives
---
---   E_{r+4k} <= (1/2)^k E_r
---
--- for each r=0,1,2,3.  The terminal decay theorem is therefore not a field of
--- the input package.
+-- proof-relevant path stores only E_{r+4(k+1)} <= (1/2)E_{r+4k}; induction
+-- derives E_{r+4k} <= (1/2)^k E_r.  Terminal decay is not an input field.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Data.Rational using (ℚ; 1ℚ; _*_; _≤_; _/_)
+import Data.Integer.Base as Int
+open import Data.Rational using
+  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _/_; nonNegative)
 import Data.Rational.Properties as ℚₚ
-open import Relation.Binary.PropositionalEquality using (subst)
+open ℚₚ using (_≤?_)
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact as Alpha
 import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesFourShiftBootstrapExact as Bootstrap
 
 half : ℚ
-half = + 1 / 2
+half = Int.+ 1 / 2
+
+halfNonnegative : 0ℚ ≤ half
+halfNonnegative = toWitness {a? = 0ℚ ≤? half} _
 
 halfPower : Nat → ℚ
 halfPower zero = 1ℚ
@@ -53,35 +53,31 @@ halfContractionPathBound :
   ∀ {initial steps terminal} →
   HalfContractionPath initial steps terminal →
   terminal ≤ halfPower steps * initial
-halfContractionPathBound (start energy) =
-  subst
-    (λ right → energy ≤ right)
-    (ℚₚ.*-identityˡ energy)
-    ℚₚ.≤-refl
+halfContractionPathBound {initial = initial} (start .initial) =
+  let identity : halfPower zero * initial ≡ initial
+      identity = solve (initial ∷ [])
+  in
+  subst (λ right → initial ≤ right) (sym identity) ℚₚ.≤-refl
 halfContractionPathBound
+  {initial = initial} {steps = suc steps} {terminal = next}
   (contract {current = current} path nextBound) =
   let
+    induction : current ≤ halfPower steps * initial
     induction = halfContractionPathBound path
 
-    scaledInduction :
-      half * current
-      ≤ half * (halfPower _ * _)
-    scaledInduction =
-      ℚₚ.*-monoˡ-≤-nonNeg
-        half
-        induction
+    scaled :
+      half * current ≤ half * (halfPower steps * initial)
+    scaled =
+      let instance halfIsNonnegative = nonNegative halfNonnegative
+      in ℚₚ.*-monoˡ-≤-nonNeg half induction
 
     reassociate :
-      half * (halfPower _ * _)
-      ≡ halfPower (suc _) * _
-    reassociate = refl
+      half * (halfPower steps * initial)
+      ≡ halfPower (suc steps) * initial
+    reassociate = solve (half ∷ halfPower steps ∷ initial ∷ [])
   in
-  ℚₚ.≤-trans
-    nextBound
-    (subst
-      (λ right → half * current ≤ right)
-      reassociate
-      scaledInduction)
+  ℚₚ.≤-trans nextBound
+    (subst (λ right → half * current ≤ right) reassociate scaled)
 
 alignedShell : Nat → Nat → Nat
 alignedShell residue block = residue + Alpha.fourTimes block
