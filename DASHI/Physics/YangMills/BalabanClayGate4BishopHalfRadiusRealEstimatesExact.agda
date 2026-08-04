@@ -34,6 +34,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- therefore represented 1/(n!+1), not 1/n!.  The corrected definition uses
 -- the public division constructor together with the standard-library proof
 -- that n! is nonzero.
+--
+-- The odd/even index functions are recursive rather than solver-normalized.
+-- This makes the two-step exponent and factorial recurrences definitionally
+-- visible to Agda while retaining exactly the sequences 2k+1 and 2k.
 ------------------------------------------------------------------------
 
 half quarter oneTwentyFourth oneEighth : ℚᵘ
@@ -46,8 +50,18 @@ two : Nat
 two = suc (suc zero)
 
 oddExponent evenExponent : Nat → Nat
-oddExponent n = two * n + suc zero
-evenExponent n = two * n
+oddExponent zero = suc zero
+oddExponent (suc n) = suc (suc (oddExponent n))
+evenExponent zero = zero
+evenExponent (suc n) = suc (suc (evenExponent n))
+
+oddExponentSuccessor : ∀ n →
+  oddExponent (suc n) ≡ suc (suc (oddExponent n))
+oddExponentSuccessor n = refl
+
+evenExponentSuccessor : ∀ n →
+  evenExponent (suc n) ≡ suc (suc (evenExponent n))
+evenExponentSuccessor n = refl
 
 factorial : Nat → Nat
 factorial n = n !
@@ -58,6 +72,26 @@ factorialZero = refl
 factorialSuccessor :
   ∀ n → factorial (suc n) ≡ suc n * factorial n
 factorialSuccessor n = refl
+
+factorialTwoStep :
+  ∀ n →
+  factorial (suc (suc n))
+  ≡ suc (suc n) * (suc n * factorial n)
+factorialTwoStep n = refl
+
+oddFactorialSuccessor :
+  ∀ n →
+  factorial (oddExponent (suc n))
+  ≡ suc (suc (oddExponent n))
+      * (suc (oddExponent n) * factorial (oddExponent n))
+oddFactorialSuccessor n = refl
+
+evenFactorialSuccessor :
+  ∀ n →
+  factorial (evenExponent (suc n))
+  ≡ suc (suc (evenExponent n))
+      * (suc (evenExponent n) * factorial (evenExponent n))
+evenFactorialSuccessor n = refl
 
 inverseFactorialRational : Nat → ℚᵘ
 inverseFactorialRational n = + 1 / (n !)
@@ -108,6 +142,12 @@ cosineCoefficientRecurrence =
 
 bishopInverseFactorialEncodingLevel : ProofLevel
 bishopInverseFactorialEncodingLevel = machineChecked
+
+bishopOddEvenExponentRecurrenceLevel : ProofLevel
+bishopOddEvenExponentRecurrenceLevel = machineChecked
+
+bishopFactorialTwoStepRecurrenceLevel : ProofLevel
+bishopFactorialTwoStepRecurrenceLevel = machineChecked
 
 bishopHalfBallSquareLevel : ProofLevel
 bishopHalfBallSquareLevel = machineChecked
