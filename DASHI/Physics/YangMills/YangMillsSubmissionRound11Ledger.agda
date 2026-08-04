@@ -72,6 +72,14 @@ p11CanonicalConstantClaim = namedClaim
   machineChecked
   (checkedEvidence Receipt.round11P11CanonicalConstantWired)
 
+globalDependencySpineClaim : NamedClaim
+globalDependencySpineClaim = namedClaim
+  "Round 11: the downstream programme is typed as fixed-lattice gap, cross-scale control, limits, OS reconstruction and SI scaling"
+  (Receipt.fixedLatticeToContinuumDependencySpineAdded
+    Receipt.round11Receipt ≡ true)
+  machineChecked
+  (checkedEvidence Receipt.round11GlobalDependencySpineAdded)
+
 physicalEndpointOpenClaim : NamedClaim
 physicalEndpointOpenClaim = namedClaim
   "Round 11: the continuum Osterwalder-Schrader and positive SI mass-gap endpoint remains open"
