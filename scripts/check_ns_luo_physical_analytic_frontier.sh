@@ -17,6 +17,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalYoungSameConstantExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteCutoffEnergyExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoDiscreteTerminalCutoffExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDiscreteGronwallExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePeriodicMultiplierRealizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPointwisePairFoldReductionExact.agda
