@@ -50,6 +50,10 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoCompletionLemmaInventoryBExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompletionLemmaInventoryCExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFullCompletionLemmaInventoryExact.agda
+
+  DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaCriticalCutsetExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaPathCompositionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaFrontierReceipt.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
 )
 
@@ -61,6 +65,7 @@ for file in "${FILES[@]}"; do
 done
 
 python3 scripts/check_ns_luo_full_lemma_inventory.py
+python3 scripts/check_ns_luo_highest_alpha_path.py
 bash scripts/check_ns_luo_submission_audit.sh
 
 scripts/run_agda29_parallel_check.sh \
