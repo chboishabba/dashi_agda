@@ -19,9 +19,7 @@ module DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact where
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised as ℚ using
-  (ℚᵘ; _/_; 0ℚᵘ; _*_)
-import Data.Rational.Unnormalised.Properties as ℚP
+open import Data.Rational.Unnormalised using (ℚᵘ; _/_)
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -42,51 +40,26 @@ bishopMagnitudeSquare value =
     (BishopReal.∣_∣ value)
     (BishopReal.∣_∣ value)
 
-bishopHalfNonnegative : BishopReal.NonNegative bishopHalf
-bishopHalfNonnegative =
-  BishopProperties.0≤x⇒nonNegx
-    (BishopProperties.p≤q⇒p⋆≤q⋆
-      0ℚᵘ
-      half
-      (ℚP.nonNegative⁻¹ half))
-
-bishopAbsHalfEquivalentHalf :
-  BishopReal._≃_ (BishopReal.∣_∣ bishopHalf) bishopHalf
-bishopAbsHalfEquivalentHalf =
-  BishopProperties.nonNegx⇒∣x∣≃x bishopHalfNonnegative
-
-bishopHalfMagnitudeSquareEquivalentQuarter :
+bishopHalfSquareEquivalentQuarter :
   BishopReal._≃_
-    (bishopMagnitudeSquare bishopHalf)
+    (BishopReal._*_ bishopHalf bishopHalf)
     bishopQuarter
-bishopHalfMagnitudeSquareEquivalentQuarter =
-  BishopProperties.≃-trans
-    (BishopProperties.*-cong
-      bishopAbsHalfEquivalentHalf
-      bishopAbsHalfEquivalentHalf)
-    (BishopProperties.≃-trans
-      (BishopProperties.≃-symm
-        (BishopProperties.⋆-distrib-* half half))
-      (BishopProperties.⋆-cong ℚP.≃-refl))
+bishopHalfSquareEquivalentQuarter =
+  BishopProperties.≃-symm
+    (BishopProperties.⋆-distrib-* half half)
 
 bishopHalfBallMagnitudeSquareBelowQuarter :
   (value : BishopReal.ℝ) →
   BishopReal._≤_ (BishopReal.∣_∣ value) bishopHalf →
   BishopReal._≤_ (bishopMagnitudeSquare value) bishopQuarter
 bishopHalfBallMagnitudeSquareBelowQuarter value insideHalf =
-  let absoluteValueBelowAbsoluteHalf =
-        BishopProperties.≤-trans
-          insideHalf
-          (BishopProperties.x≤∣x∣ {x = bishopHalf})
-      magnitudeSquareBelowHalfMagnitudeSquare =
-        BishopProperties.*-mono-≤
-          (BishopProperties.nonNeg∣x∣ value)
-          (BishopProperties.nonNeg∣x∣ value)
-          absoluteValueBelowAbsoluteHalf
-          absoluteValueBelowAbsoluteHalf
-  in BishopProperties.≤-respʳ-≃
-       bishopHalfMagnitudeSquareEquivalentQuarter
-       magnitudeSquareBelowHalfMagnitudeSquare
+  BishopProperties.≤-respʳ-≃
+    bishopHalfSquareEquivalentQuarter
+    (BishopProperties.*-mono-≤
+      (BishopProperties.nonNeg∣x∣ value)
+      (BishopProperties.nonNeg∣x∣ value)
+      insideHalf
+      insideHalf)
 
 record ConcreteBishopHalfBallSquareCertificate
     (value : BishopReal.ℝ) : Set where
