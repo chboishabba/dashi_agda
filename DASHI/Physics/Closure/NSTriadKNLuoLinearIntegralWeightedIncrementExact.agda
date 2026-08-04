@@ -42,7 +42,7 @@ open import Data.Rational.Base using
   (ℚ; 1ℚ; -_; _+_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
-  using (cong; cong₂; trans)
+  using (cong; trans)
 open Eq.≡-Reasoning
 
 record RationalLinearIntegral (Sample : Set) : Set₁ where
@@ -81,7 +81,7 @@ integralSubtract integral left right =
     integrate integral left
       + integrate integral (λ sample → - right sample)
   ≡⟨ cong
-       (integrate integral left +_)
+       (λ value → integrate integral left + value)
        (integralNegate integral right) ⟩
     integrate integral left + (- integrate integral right)
   ≡⟨ refl ⟩
@@ -190,7 +190,7 @@ linearIntegralWeightedIncrementIdentity system left right =
     integrate I (λ sample → (A sample - B sample) - C sample)
       + integrate I D
   ≡⟨ cong
-       (_+ integrate I D)
+       (λ value → value + integrate I D)
        (integralSubtract I (λ sample → A sample - B sample) C) ⟩
     (integrate I (λ sample → A sample - B sample) - integrate I C)
       + integrate I D
@@ -219,7 +219,8 @@ linearIntegralKernelZeroMeaning system =
     (kernelWeight system)
     (λ sample →
       trans
-        (cong (kernelWeight system sample *_)
+        (cong
+          (λ value → kernelWeight system sample * value)
           (zeroCharacter system sample))
         (solve (kernelWeight system sample ∷ [])))
 
