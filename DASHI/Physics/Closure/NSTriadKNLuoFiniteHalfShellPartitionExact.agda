@@ -26,7 +26,7 @@ open import Data.Nat.Base using (_≤_)
 open import Data.Nat.Properties using (_≤?_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Nullary.Decidable.Core using (yes; no)
+open import Relation.Nullary using (¬_; yes; no)
 
 record IndexedShellValue : Set where
   constructor indexed-shell
@@ -39,18 +39,18 @@ open IndexedShellValue public
 record LowerHalfSample (outputShell : Nat) : Set where
   constructor lower-half-sample
   field
-    sample : IndexedShellValue
+    lowerSample : IndexedShellValue
     twiceIndexAtMostOutput :
-      shellIndex sample + shellIndex sample ≤ outputShell
+      shellIndex lowerSample + shellIndex lowerSample ≤ outputShell
 
 open LowerHalfSample public
 
 record UpperHalfSample (outputShell : Nat) : Set where
   constructor upper-half-sample
   field
-    sample : IndexedShellValue
+    upperSample : IndexedShellValue
     twiceIndexNotAtMostOutput :
-      ¬ (shellIndex sample + shellIndex sample ≤ outputShell)
+      ¬ (shellIndex upperSample + shellIndex upperSample ≤ outputShell)
 
 open UpperHalfSample public
 
@@ -89,14 +89,14 @@ sumLower :
   List (LowerHalfSample outputShell) → ℚ
 sumLower [] = 0ℚ
 sumLower (wrapped ∷ samples) =
-  amplitude (LowerHalfSample.sample wrapped) + sumLower samples
+  amplitude (lowerSample wrapped) + sumLower samples
 
 sumUpper :
   ∀ {outputShell} →
   List (UpperHalfSample outputShell) → ℚ
 sumUpper [] = 0ℚ
 sumUpper (wrapped ∷ samples) =
-  amplitude (UpperHalfSample.sample wrapped) + sumUpper samples
+  amplitude (upperSample wrapped) + sumUpper samples
 
 halfSplitReconstructsFold :
   (outputShell : Nat) →
@@ -125,22 +125,6 @@ halfSplitReconstructsFold outputShell (sampleValue ∷ samples)
     ∷ sumUpper upper
     ∷ []
     )
-
-lowerClassificationSound :
-  (outputShell : Nat) →
-  (samples : List IndexedShellValue) →
-  (wrapped : LowerHalfSample outputShell) →
-  twiceIndexAtMostOutput wrapped
-  ≡ twiceIndexAtMostOutput wrapped
-lowerClassificationSound outputShell samples wrapped = refl
-
-upperClassificationSound :
-  (outputShell : Nat) →
-  (samples : List IndexedShellValue) →
-  (wrapped : UpperHalfSample outputShell) →
-  twiceIndexNotAtMostOutput wrapped
-  ≡ twiceIndexNotAtMostOutput wrapped
-upperClassificationSound outputShell samples wrapped = refl
 
 finiteHalfShellPartitionClosed : Bool
 finiteHalfShellPartitionClosed = true
