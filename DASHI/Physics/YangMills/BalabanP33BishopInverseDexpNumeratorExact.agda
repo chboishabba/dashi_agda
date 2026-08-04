@@ -36,11 +36,14 @@ module DASHI.Physics.YangMills.BalabanP33BishopInverseDexpNumeratorExact where
 -- radius.  No cotangent, division, or trigonometric bound is postulated.
 ------------------------------------------------------------------------
 
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
+
 import Real as BishopReal
 import RealProperties as BishopProperties
 
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
+import DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact as Low
 import DASHI.Physics.YangMills.BalabanP33BishopHigherOrderTaylorExact as Higher
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -72,16 +75,14 @@ sineSepticLowerPolynomial sineQuinticUpperPolynomial :
   BishopReal.ℝ → BishopReal.ℝ
 sineSepticLowerPolynomial radius =
   BishopReal._+_
-    (BishopReal._-_ radius
-      (DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact.sineCubicTerm radius))
+    (BishopReal._-_ radius (Low.sineCubicTerm radius))
     (BishopReal._-_
       (Higher.sineQuinticTerm radius)
       (Higher.sineSepticTerm radius))
 
 sineQuinticUpperPolynomial radius =
   BishopReal._+_
-    (BishopReal._-_ radius
-      (DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact.sineCubicTerm radius))
+    (BishopReal._-_ radius (Low.sineCubicTerm radius))
     (Higher.sineQuinticTerm radius)
 
 cosineQuarticUpperPolynomial cosineSexticLowerPolynomial :
@@ -89,13 +90,13 @@ cosineQuarticUpperPolynomial cosineSexticLowerPolynomial :
 cosineQuarticUpperPolynomial radius =
   BishopReal._+_
     (BishopReal._-_ BishopReal.1ℝ
-      (DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact.cosineQuadraticTerm radius))
+      (Low.cosineQuadraticTerm radius))
     (Higher.cosineQuarticTerm radius)
 
 cosineSexticLowerPolynomial radius =
   BishopReal._+_
     (BishopReal._-_ BishopReal.1ℝ
-      (DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact.cosineQuadraticTerm radius))
+      (Low.cosineQuadraticTerm radius))
     (BishopReal._-_
       (Higher.cosineQuarticTerm radius)
       (Higher.cosineSexticTerm radius))
@@ -205,8 +206,8 @@ inverseDexpNumeratorBounds {dataSet} {radius} inputs =
       (Higher.cosineQuarticUpper bounds)
   in
   record
-    { lowerEnvelopeBelowNumerator = Data.Product.Base.proj₁ interval
-    ; numeratorBelowUpperEnvelope = Data.Product.Base.proj₂ interval
+    { lowerEnvelopeBelowNumerator = proj₁ interval
+    ; numeratorBelowUpperEnvelope = proj₂ interval
     }
 
 p33BishopInverseDexpNumeratorIntervalLevel : ProofLevel
