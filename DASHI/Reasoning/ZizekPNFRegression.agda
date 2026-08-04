@@ -9,6 +9,7 @@ import DASHI.Combinatorics.MemeDiagonal as Meme
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Dynamics.LogisticDecimalPNFBridge as Logistic
+import DASHI.Dynamics.PNFOperatorLocalityResolution as Locality
 import DASHI.Foundations.Base369MobiusTransport as Mobius
 import DASHI.Foundations.CantorDiagonalCore as Cantor
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
@@ -129,3 +130,15 @@ zizekBoundaryDoesNotDiagnoseFromResidual :
     Zizek.canonicalPNFZizekAuthorityBoundary
   ≡ false
 zizekBoundaryDoesNotDiagnoseFromResidual = refl
+
+localityBoundaryDoesNotPromoteMetricOrthogonality :
+  Locality.OperatorLocalityResolutionBoundary.commutationImpliesMetricOrthogonality
+    Locality.canonicalOperatorLocalityResolutionBoundary
+  ≡ false
+localityBoundaryDoesNotPromoteMetricOrthogonality = refl
+
+resolutionBoundaryProvesNonInvolutiveProjection :
+  Locality.OperatorLocalityResolutionBoundary.nontrivialIdempotentCannotBeInvolution
+    Locality.canonicalOperatorLocalityResolutionBoundary
+  ≡ true
+resolutionBoundaryProvesNonInvolutiveProjection = refl
