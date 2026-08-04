@@ -51,7 +51,11 @@ record UniformInfluenceBoundCertificate
     {Scale Bound : Set}
     (algebra : Influence.InfluenceAlgebra Bound) : Set₁ where
   field
+    uniformInfluence :
+      Influence.UniformPolymerInfluence Scale Bound algebra
+
     bound : Scale → Bound
+
     activityPartialSumsBounded :
       ∀ (scale : Scale) (cutoff : Nat) →
       Influence.InfluenceAlgebra.LessEqual algebra
@@ -61,8 +65,6 @@ record UniformInfluenceBoundCertificate
               uniformInfluence scale))
           cutoff)
         (bound scale)
-    uniformInfluence :
-      Influence.UniformPolymerInfluence Scale Bound algebra
 
 open UniformInfluenceBoundCertificate public
 
@@ -76,14 +78,14 @@ uniformInfluenceBoundFromGeometricSummation
   {inputs = inputs} summation =
   let uniform = A123.canonicalUniformPolymerInfluence inputs
   in record
-       { bound =
+       { uniformInfluence = uniform
+       ; bound =
            GeometricInfluenceSummationKernel.uniformBound summation
        ; activityPartialSumsBounded = λ scale cutoff →
            GeometricInfluenceSummationKernel.transitive summation
              (A123.finiteRootedInfluenceAssembly inputs scale cutoff)
              (GeometricInfluenceSummationKernel.majorantPartialSumsUniformlyBounded
                summation scale cutoff)
-       ; uniformInfluence = uniform
        }
 
 stepVGeometricInfluenceCompositionLevel : ProofLevel
