@@ -7,6 +7,8 @@ on:
       - 'DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanBishopConcreteSeriesConvergenceTransportExact.agda'
       - 'DASHI/Physics/YangMills/BalabanBishopAlternatingBracketFromMonotoneLimitsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopAlternatingInterlacingFromDecreasingTermsExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineInterlacingExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVFiniteGeometricInductionExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVBishopFiniteGeometricExact.agda'
       - 'DASHI/Physics/YangMills/BalabanStepVPolynomialWeightedDominationExact.agda'
