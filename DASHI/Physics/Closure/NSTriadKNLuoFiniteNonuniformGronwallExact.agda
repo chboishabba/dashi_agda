@@ -49,16 +49,16 @@ record GronwallStep : Set where
 open GronwallStep public
 
 onePlusGrowthNonnegative :
-  (step : GronwallStep) →
-  0ℚ ≤ 1ℚ + growth step
-onePlusGrowthNonnegative step =
-  L2.addNonnegative oneNonnegative (growthNonnegative step)
+  (stepValue : GronwallStep) →
+  0ℚ ≤ 1ℚ + growth stepValue
+onePlusGrowthNonnegative stepValue =
+  L2.addNonnegative oneNonnegative (growthNonnegative stepValue)
 
 envelope : ℚ → List GronwallStep → ℚ
 envelope initial [] = initial
-envelope initial (step ∷ steps) =
+envelope initial (stepValue ∷ steps) =
   envelope
-    ((1ℚ + growth step) * initial + forcing step)
+    ((1ℚ + growth stepValue) * initial + forcing stepValue)
     steps
 
 data GronwallPath : ℚ → List GronwallStep → ℚ → Set where
@@ -68,24 +68,24 @@ data GronwallPath : ℚ → List GronwallStep → ℚ → Set where
 
   advance :
     ∀ {current next terminal steps} →
-    (step : GronwallStep) →
-    next ≤ (1ℚ + growth step) * current + forcing step →
+    (stepValue : GronwallStep) →
+    next ≤ (1ℚ + growth stepValue) * current + forcing stepValue →
     GronwallPath next steps terminal →
-    GronwallPath current (step ∷ steps) terminal
+    GronwallPath current (stepValue ∷ steps) terminal
 
 oneStepEnvelopeMonotone :
-  (step : GronwallStep) →
+  (stepValue : GronwallStep) →
   ∀ {current bound} →
   current ≤ bound →
-  (1ℚ + growth step) * current + forcing step
-  ≤ (1ℚ + growth step) * bound + forcing step
-oneStepEnvelopeMonotone step current≤bound =
+  (1ℚ + growth stepValue) * current + forcing stepValue
+  ≤ (1ℚ + growth stepValue) * bound + forcing stepValue
+oneStepEnvelopeMonotone stepValue current≤bound =
   ℚₚ.+-mono-≤
     (let instance factorIsNonnegative =
-       nonNegative (onePlusGrowthNonnegative step)
+       nonNegative (onePlusGrowthNonnegative stepValue)
      in
      ℚₚ.*-monoˡ-≤-nonNeg
-       (1ℚ + growth step)
+       (1ℚ + growth stepValue)
        current≤bound)
     ℚₚ.≤-refl
 
@@ -96,37 +96,41 @@ finiteNonuniformGronwall :
   terminal ≤ envelope bound steps
 finiteNonuniformGronwall (finished energy) initial≤bound = initial≤bound
 finiteNonuniformGronwall
-  (advance step nextBound restPath) initial≤bound =
+  (advance stepValue nextBound restPath) initial≤bound =
   finiteNonuniformGronwall
     restPath
     (ℚₚ.≤-trans
       nextBound
-      (oneStepEnvelopeMonotone step initial≤bound))
+      (oneStepEnvelopeMonotone stepValue initial≤bound))
 
 record NonnegativeGronwallStep : Set where
   constructor nonnegative-gronwall-step
   field
-    step : GronwallStep
-    forcingNonnegative : 0ℚ ≤ forcing step
+    underlyingStep : GronwallStep
+    forcingNonnegative : 0ℚ ≤ forcing underlyingStep
 
 open NonnegativeGronwallStep public
+
+unwrapSteps :
+  List NonnegativeGronwallStep → List GronwallStep
+unwrapSteps [] = []
+unwrapSteps (wrapped ∷ rest) =
+  underlyingStep wrapped ∷ unwrapSteps rest
 
 nonnegativeEnvelope :
   (initial : ℚ) →
   0ℚ ≤ initial →
   (steps : List NonnegativeGronwallStep) →
-  0ℚ ≤ envelope initial (mapSteps steps)
-  where
-  mapSteps : List NonnegativeGronwallStep → List GronwallStep
-  mapSteps [] = []
-  mapSteps (wrapped ∷ rest) = step wrapped ∷ mapSteps rest
+  0ℚ ≤ envelope initial (unwrapSteps steps)
 nonnegativeEnvelope initial initialNonnegative [] = initialNonnegative
 nonnegativeEnvelope initial initialNonnegative (wrapped ∷ rest) =
   nonnegativeEnvelope
-    ((1ℚ + growth (step wrapped)) * initial + forcing (step wrapped))
+    ((1ℚ + growth (underlyingStep wrapped)) * initial
+      + forcing (underlyingStep wrapped))
     (L2.addNonnegative
       (let
-        factorNonnegative = onePlusGrowthNonnegative (step wrapped)
+        factorNonnegative =
+          onePlusGrowthNonnegative (underlyingStep wrapped)
        in
        let
         instance
@@ -134,10 +138,10 @@ nonnegativeEnvelope initial initialNonnegative (wrapped ∷ rest) =
           initialIsNonnegative = nonNegative initialNonnegative
           productIsNonnegative =
             ℚₚ.nonNeg*nonNeg⇒nonNeg
-              (1ℚ + growth (step wrapped)) initial
+              (1ℚ + growth (underlyingStep wrapped)) initial
        in
        ℚₚ.nonNegative⁻¹
-         ((1ℚ + growth (step wrapped)) * initial))
+         ((1ℚ + growth (underlyingStep wrapped)) * initial))
       (forcingNonnegative wrapped))
     rest
 
