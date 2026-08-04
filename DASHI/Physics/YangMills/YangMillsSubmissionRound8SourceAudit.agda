@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.YangMillsSubmissionRound8SourceAudit where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import DASHI.Core.Prelude using (_×_; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -93,11 +94,12 @@ recent26020072AuditLead = record
   }
 
 recentAuditLeadsCannotInhabit :
-  Round8SourceEntry.mayInhabitImportedTheorem recent26020070AuditLead ≡ false
-  × Round8SourceEntry.mayInhabitImportedTheorem recent26020072AuditLead ≡ false
+  (Round8SourceEntry.mayInhabitImportedTheorem recent26020070AuditLead
+    ≡ false)
+  ×
+  (Round8SourceEntry.mayInhabitImportedTheorem recent26020072AuditLead
+    ≡ false)
 recentAuditLeadsCannotInhabit = refl , refl
-  where
-  open import DASHI.Core.Prelude using (_×_; _,_)
 
 round8SourceAuditLevel : ProofLevel
 round8SourceAuditLevel = machineChecked
