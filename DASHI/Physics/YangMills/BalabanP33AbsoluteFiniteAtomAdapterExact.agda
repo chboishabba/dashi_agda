@@ -27,7 +27,7 @@ module DASHI.Physics.YangMills.BalabanP33AbsoluteFiniteAtomAdapterExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (∣_∣; _≤_)
+open import Data.Rational.Base using (ℚ; _*_; ∣_∣; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -44,7 +44,7 @@ mapAgreement function (value ∷ values)
   rewrite mapAgreement function values = refl
 
 sumMappedAgreement :
-  ∀ {Atom : Set} (atoms : List Atom) (value : Atom → Data.Rational.ℚ) →
+  ∀ {Atom : Set} (atoms : List Atom) (value : Atom → ℚ) →
   SignedAtoms.sumMapped atoms value
   ≡ Pointwise.sumℚ (Atoms.map value atoms)
 sumMappedAgreement atoms value =
