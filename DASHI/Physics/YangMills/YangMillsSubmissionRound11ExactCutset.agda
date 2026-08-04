@@ -3,9 +3,15 @@ module DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset where
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import Real as BishopReal
+
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as HalfBall
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as ConcreteTerms
 import DASHI.Physics.YangMills.BalabanBishopConfiguredTermIdentificationExact as ConfiguredTerms
+import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact as SeriesTransport
+import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as ParityLimit
+import DASHI.Physics.YangMills.BalabanBishopFullHalfBallParityChartExact as FullBall
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact as Geometric
 import DASHI.Physics.YangMills.BalabanStepVPolynomialDirectRatioExact as DirectRatio
@@ -19,7 +25,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
 -- Bishop lane: the analytic identification record is now a consequence of
--- literal configured term definitions.
+-- literal configured term definitions.  The two oriented half-ball chart
+-- constructors are concrete; only selection of an orientation for an arbitrary
+-- Bishop real remains a separate constructive input.
 ------------------------------------------------------------------------
 
 record Round11BishopCutset : Set₁ where
@@ -37,6 +45,47 @@ round11ConcreteTermIdentification :
 round11ConcreteTermIdentification inputs =
   ConfiguredTerms.configuredConcreteTermIdentification
     (configuredDefinitions inputs)
+
+round11ParityInputs :
+  (inputs : Round11BishopCutset) →
+  ParityLimit.BishopSeriesLimitParityInputs
+    (elementarySeries inputs)
+round11ParityInputs inputs =
+  SeriesTransport.bishopSeriesLimitParityInputsFromTermParity
+    (ConcreteTerms.identifiedSineOddTermFamily
+      (round11ConcreteTermIdentification inputs))
+    (ConcreteTerms.identifiedCosineEvenTermFamily
+      (round11ConcreteTermIdentification inputs))
+
+round11NonnegativeHalfBallChart :
+  (inputs : Round11BishopCutset) →
+  (value : BishopReal.ℝ) →
+  BishopReal.NonNegative value →
+  BishopReal._≤_ (BishopReal.∣_∣ value) HalfBall.bishopHalf →
+  FullBall.FullHalfBallParityChart
+    (elementarySeries inputs) value
+round11NonnegativeHalfBallChart inputs value nonnegative inside =
+  FullBall.nonnegativeHalfBallChart
+    (round11ConcreteTermIdentification inputs)
+    (round11ParityInputs inputs)
+    nonnegative inside
+
+round11ReflectedNegativeHalfBallChart :
+  (inputs : Round11BishopCutset) →
+  (representative : BishopReal.ℝ) →
+  BishopReal.NonNegative representative →
+  BishopReal._≤_
+    (BishopReal.∣_∣ representative)
+    HalfBall.bishopHalf →
+  FullBall.FullHalfBallParityChart
+    (elementarySeries inputs)
+    (BishopReal.- representative)
+round11ReflectedNegativeHalfBallChart
+    inputs representative nonnegative inside =
+  FullBall.reflectedNegativeHalfBallChart
+    (round11ConcreteTermIdentification inputs)
+    (round11ParityInputs inputs)
+    nonnegative inside
 
 ------------------------------------------------------------------------
 -- Step-V lane: direct successor absorption replaces the former independent
@@ -137,9 +186,9 @@ record Round11CompleteCutset : Set₁ where
     p11 : Round11P11Cutset
     physical : Round11PhysicalCutset
 
-    negativeHalfBallParityTransport : Set
-    negativeHalfBallParityTransportEvidence :
-      negativeHalfBallParityTransport
+    constructiveFullBallChartSelection : Set
+    constructiveFullBallChartSelectionEvidence :
+      constructiveFullBallChartSelection
 
     p06LegacyConsumerBridge : Set
     p06LegacyConsumerBridgeEvidence : p06LegacyConsumerBridge
@@ -162,6 +211,9 @@ open Round11CompleteCutset public
 
 round11ConfiguredIdentificationReducerLevel : ProofLevel
 round11ConfiguredIdentificationReducerLevel = machineChecked
+
+round11FullHalfBallOrientedChartReducerLevel : ProofLevel
+round11FullHalfBallOrientedChartReducerLevel = machineChecked
 
 round11DirectRatioTailReducerLevel : ProofLevel
 round11DirectRatioTailReducerLevel = machineChecked
