@@ -44,22 +44,22 @@ SplitFineSite radius CoarseSite =
   Carrier.Product CoarseSite (Centered.CenteredBlockPoint4 radius)
 
 splitProject :
-  ∀ {radius CoarseSite} → SplitFineSite radius CoarseSite → CoarseSite
+  ∀ {radius} {CoarseSite : Set} → SplitFineSite radius CoarseSite → CoarseSite
 splitProject (Carrier.pair coarse point) = coarse
 
 splitEmbed :
-  ∀ {radius CoarseSite} →
+  ∀ {radius} {CoarseSite : Set} →
   CoarseSite → Centered.CenteredBlockPoint4 radius →
   SplitFineSite radius CoarseSite
 splitEmbed coarse point = Carrier.pair coarse point
 
 splitEmbedProjects :
-  ∀ {radius CoarseSite} coarse point →
-  splitProject (splitEmbed {radius = radius} coarse point) ≡ coarse
+  ∀ {radius} {CoarseSite : Set} coarse point →
+  splitProject (splitEmbed {radius = radius} {CoarseSite = CoarseSite} coarse point) ≡ coarse
 splitEmbedProjects coarse point = refl
 
 splitProjectionFibreComplete :
-  ∀ {radius CoarseSite}
+  ∀ {radius} {CoarseSite : Set}
     (coarse : CoarseSite) (site : SplitFineSite radius CoarseSite) →
   splitProject site ≡ coarse →
   Physical.CenteredPreimage (splitEmbed coarse) site
@@ -67,30 +67,30 @@ splitProjectionFibreComplete coarse (Carrier.pair .coarse point) refl =
   Physical.centredPreimage point refl
 
 splitEmbedInjective :
-  ∀ {radius CoarseSite} coarse
+  ∀ {radius} {CoarseSite : Set} coarse
     {left right : Centered.CenteredBlockPoint4 radius} →
-  splitEmbed coarse left ≡ splitEmbed coarse right → left ≡ right
+  splitEmbed {radius = radius} {CoarseSite = CoarseSite} coarse left ≡ splitEmbed {radius = radius} {CoarseSite = CoarseSite} coarse right → left ≡ right
 splitEmbedInjective coarse = Carrier.productSecondInjective
 
 splitScaleSpacing : Nat → Nat → Nat
 splitScaleSpacing side spacing = side * spacing
 
 splitPhysicalScaleGeometry :
-  ∀ {radius CoarseSite} →
+  ∀ {radius} {CoarseSite : Set} →
   Executable.CenteredExecutableGeometry radius →
   (fineSpacing : Nat) →
   Physical.CMP109PhysicalScaleGeometry
     radius (SplitFineSite radius CoarseSite) CoarseSite Nat
-splitPhysicalScaleGeometry {radius} executable fineSpacing = record
+splitPhysicalScaleGeometry {radius} {CoarseSite} executable fineSpacing = record
   { executableGeometry = executable
-  ; projectSite = splitProject
-  ; embedAt = splitEmbed
+  ; projectSite = splitProject {radius} {CoarseSite}
+  ; embedAt = splitEmbed {radius} {CoarseSite}
   ; embedProjectsToCentre =
-      splitEmbedProjects
+      splitEmbedProjects {radius} {CoarseSite}
   ; projectionFibreComplete =
-      splitProjectionFibreComplete
+      splitProjectionFibreComplete {radius} {CoarseSite}
   ; embedAtInjective =
-      splitEmbedInjective
+      splitEmbedInjective {radius} {CoarseSite}
   ; fineSpacing = fineSpacing
   ; coarseSpacing =
       Centered.oddSide radius * fineSpacing
@@ -99,7 +99,7 @@ splitPhysicalScaleGeometry {radius} executable fineSpacing = record
   }
 
 radiusOneSplitPhysicalScaleDecision :
-  ∀ {CoarseSite} (fineSpacing : Nat) →
+  ∀ {CoarseSite : Set} (fineSpacing : Nat) →
   Carrier.Dec
     (Physical.CMP109PhysicalScaleGeometry
       one (SplitFineSite one CoarseSite) CoarseSite Nat)
@@ -111,7 +111,7 @@ radiusOneSplitPhysicalScaleDecision fineSpacing
       notExecutable (Physical.executableGeometry geometry)
 
 radiusOnePhysicalBlockHasEightyOneSites :
-  ∀ {CoarseSite}
+  ∀ {CoarseSite : Set}
     (geometry : Physical.CMP109PhysicalScaleGeometry
       one (SplitFineSite one CoarseSite) CoarseSite Nat)
     coarse →

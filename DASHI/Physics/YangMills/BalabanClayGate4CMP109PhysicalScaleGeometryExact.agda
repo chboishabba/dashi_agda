@@ -46,7 +46,7 @@ record CenteredPreimage
 open CenteredPreimage public
 
 record CMP109PhysicalScaleGeometry
-    (radius : Nat) (FineSite CoarseSite Spacing : Set) : Set₁ where
+    (radius : Nat) (FineSite CoarseSite Spacing : Set) : Set where
   field
     executableGeometry : Executable.CenteredExecutableGeometry radius
 

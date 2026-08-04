@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanClayGate4QuantitativeImplicitFunctionCommonExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -105,10 +105,15 @@ fixedPointDistanceContractsItself :
     (distance metric left right)
     (multiply metric (contractionFactor ball)
       (distance metric left right))
-fixedPointDistanceContractsItself ball left right leftIn rightIn
-    leftFixed rightFixed
-  rewrite leftFixed | rightFixed =
-  mapContractive ball left right leftIn rightIn
+fixedPointDistanceContractsItself {metric = metric} ball left right
+    leftIn rightIn leftFixed rightFixed =
+  subst
+    (λ distanceAfter →
+      LessEqual metric distanceAfter
+        (multiply metric (contractionFactor ball)
+          (distance metric left right)))
+    (cong₂ (distance metric) leftFixed rightFixed)
+    (mapContractive ball left right leftIn rightIn)
 
 fixedPointUniqueInInvariantBall :
   ∀ {Point Bound}
@@ -280,9 +285,13 @@ relativeInverseKernelTrivial dataSet vector kernel =
       (relativeFactor dataSet)
       (norm dataSet vector)
       (relativeFactorBelowOne dataSet)
-      (substLower
-        (cong (norm dataSet)
-          (kernelImpliesDefectFixedPoint dataSet vector kernel))
+      (subst
+        (λ normed →
+          LessEqual (metric dataSet) normed
+            (multiply (metric dataSet) (relativeFactor dataSet)
+              (norm dataSet vector)))
+        (sym (cong (norm dataSet)
+          (kernelImpliesDefectFixedPoint dataSet vector kernel)))
         (defectNormBound dataSet vector)))
 
 record FiniteSquareInverseUpgrade

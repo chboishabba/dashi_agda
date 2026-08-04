@@ -75,20 +75,20 @@ splitIndex {suc leftSize} (Carrier.sucᵢ index)
 splitInjectedLeft :
   ∀ {leftSize rightSize}
     (index : Carrier.CyclicIndex leftSize) →
-  splitIndex (injectLeftIndex {leftSize} {rightSize} index)
+  splitIndex {leftSize} {rightSize} (injectLeftIndex {leftSize} {rightSize} index)
   ≡ fromLeft index
 splitInjectedLeft {zero} ()
 splitInjectedLeft {suc leftSize} Carrier.zeroᵢ = refl
-splitInjectedLeft {suc leftSize} (Carrier.sucᵢ index)
+splitInjectedLeft {suc leftSize} {rightSize} (Carrier.sucᵢ index)
   rewrite splitInjectedLeft {leftSize} {rightSize} index = refl
 
 splitInjectedRight :
   ∀ {leftSize rightSize}
     (index : Carrier.CyclicIndex rightSize) →
-  splitIndex (injectRightIndex {leftSize} {rightSize} index)
+  splitIndex {leftSize} {rightSize} (injectRightIndex {leftSize} {rightSize} index)
   ≡ fromRight index
 splitInjectedRight {zero} index = refl
-splitInjectedRight {suc leftSize} index
+splitInjectedRight {suc leftSize} {rightSize} index
   rewrite splitInjectedRight {leftSize} {rightSize} index = refl
 
 weakenFiniteIndex :
@@ -145,8 +145,8 @@ centeredOffsetFromIndex :
   Carrier.CyclicIndex (suc (radius + radius)) →
   Centered.CenteredOffset radius
 centeredOffsetFromIndex Carrier.zeroᵢ = Centered.centre
-centeredOffsetFromIndex (Carrier.sucᵢ index)
-  with splitIndex index
+centeredOffsetFromIndex {radius} (Carrier.sucᵢ index)
+  with splitIndex {radius} {radius} index
 ... | fromLeft left = Centered.positive left
 ... | fromRight right = Centered.negative (reverseFiniteIndex right)
 
@@ -154,11 +154,15 @@ centeredOffsetDecodeEncode :
   ∀ {radius} (offset : Centered.CenteredOffset radius) →
   centeredOffsetFromIndex (centeredOffsetIndex offset) ≡ offset
 centeredOffsetDecodeEncode Centered.centre = refl
-centeredOffsetDecodeEncode (Centered.positive index)
-  rewrite splitInjectedLeft index = refl
-centeredOffsetDecodeEncode (Centered.negative index)
-  rewrite splitInjectedRight (reverseFiniteIndex index)
-        | reverseFiniteIndexInvolutive index = refl
+centeredOffsetDecodeEncode {radius} (Centered.positive index)
+  with splitIndex {radius} {radius} (injectLeftIndex {radius} {radius} index)
+    | splitInjectedLeft {radius} {radius} index
+... | .(fromLeft index) | refl = refl
+centeredOffsetDecodeEncode {radius} (Centered.negative index)
+  with splitIndex {radius} {radius} (injectRightIndex {radius} {radius} (reverseFiniteIndex index))
+    | splitInjectedRight {radius} {radius} (reverseFiniteIndex index)
+... | .(fromRight (reverseFiniteIndex index)) | refl
+  rewrite reverseFiniteIndexInvolutive index = refl
 
 centeredOffsetIndexInjective :
   ∀ {radius} {left right : Centered.CenteredOffset radius} →
@@ -253,14 +257,14 @@ directCenteredOrigin =
 
 directCenteredOriginExact : ∀ {radius} →
   directCenteredEmbed (Centered.centeredOrigin4 {radius})
-  ≡ directCenteredOrigin
+  ≡ directCenteredOrigin {radius}
 directCenteredOriginExact = refl
 
 directWalkAgreementPredicate :
   ∀ {radius} → Centered.CenteredBlockPoint4 radius → Set
 directWalkAgreementPredicate {radius} point =
   directCenteredEmbed point
-  ≡ Embedding.centeredTargetSite directCenteredOrigin point
+  ≡ Embedding.centeredTargetSite (directCenteredOrigin {radius}) point
 
 record CenteredTorusWalkAgreementCertificate (radius : Nat) : Set where
   field
@@ -277,7 +281,7 @@ directWalkAgreementDecision {radius} point =
   Carrier.periodicTorus4DecidableEquality
     (centeredTorusWidth radius)
     (directCenteredEmbed point)
-    (Embedding.centeredTargetSite directCenteredOrigin point)
+    (Embedding.centeredTargetSite (directCenteredOrigin {radius}) point)
 
 centeredTorusWalkAgreementCertificateDecision :
   ∀ radius → Carrier.Dec (CenteredTorusWalkAgreementCertificate radius)
@@ -303,16 +307,16 @@ canonicalCenteredNoWrapEmbedding :
   CenteredTorusWalkAgreementCertificate radius →
   Embedding.CenteredPeriodicNoWrapEmbedding
     (centeredTorusParameter radius) radius
-canonicalCenteredNoWrapEmbedding certificate = record
+canonicalCenteredNoWrapEmbedding {radius} certificate = record
   { embeddingCentre =
-      directCenteredOrigin
+      directCenteredOrigin {radius}
   ; embed = directCenteredEmbed
   ; embedMeaning =
       directEmbeddingAgreesWithWalk certificate
   ; embedInjective =
       directCenteredEmbedInjective
   ; originMeaning =
-      directCenteredOriginExact
+      directCenteredOriginExact {radius}
   }
 
 cmp109CenteredFiniteIndexReversalLevel : ProofLevel

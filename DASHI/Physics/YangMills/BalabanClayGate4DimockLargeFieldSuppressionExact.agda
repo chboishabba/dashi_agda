@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayGate4DimockLargeFieldSuppressionExact where
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -42,8 +42,8 @@ open OrderedAdditiveBudget public
 
 natScale :
   ∀ {Scalar} → OrderedAdditiveBudget Scalar → Scalar → Nat → Scalar
-natScale algebra value zero = zero algebra
-natScale algebra value (suc count) =
+natScale algebra value Nat.zero = zero algebra
+natScale algebra value (Nat.suc count) =
   add algebra value (natScale algebra value count)
 
 natScaleMonotone :
@@ -55,9 +55,9 @@ natScaleMonotone :
   LessEqual algebra
     (natScale algebra lower count)
     (natScale algebra upper count)
-natScaleMonotone algebra estimate zero =
+natScaleMonotone algebra estimate Nat.zero =
   reflexive algebra (zero algebra)
-natScaleMonotone algebra estimate (suc count) =
+natScaleMonotone algebra estimate (Nat.suc count) =
   addMonotone algebra estimate
     (natScaleMonotone algebra estimate count)
 
