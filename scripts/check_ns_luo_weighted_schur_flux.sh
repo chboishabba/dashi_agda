@@ -47,3 +47,7 @@ check DASHI/Physics/Closure/NSTriadKNLuoOfficialContinuationClosureExact.agda
 check DASHI/Physics/Closure/NSTriadKNLuoWeightedSchurFluxIntegration.agda
 check DASHI/Physics/Closure/NSTriadKNLuoOfficialContinuationIntegration.agda
 check DASHI/Physics/Closure/NSTriadKNLocalizedBKMRouteIntegration.agda
+
+# Physical-analytic frontier: weighted increment kernel, finite Young reducer,
+# exact equation-(4.2) transport, Section-4 bounds and maximal-time reducer.
+check DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
