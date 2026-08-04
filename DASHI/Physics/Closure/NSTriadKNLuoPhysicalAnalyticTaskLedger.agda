@@ -25,6 +25,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as Fi
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialFixedShiftCoreExact as OfficialFixed
 import DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact as ParsevalUpgrade
 import DASHI.Physics.Closure.NSTriadKNLuoCutoffEnergyOfficialUpgradeExact as CutoffUpgrade
+import DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticInputsBuilderExact as CanonicalBuilder
 import DASHI.Physics.Closure.NSTriadKNLuoMaximalTimeGlobalizationExact as Globalization
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalContinuationFromAnalyticInputsExact as Continuation
 
@@ -75,6 +76,9 @@ record LuoPhysicalAnalyticTaskLedger : Set where
     fixedShiftPhysicalRecursionAndCorrectionInhabited : Bool
     officialCarrierCoherenceInhabited : Bool
 
+    canonicalAnalyticInputsBuilderConstructed : Bool
+    canonicalSelectedStateCoherenceDefinitional : Bool
+    canonicalFixedShiftCoherenceDefinitional : Bool
     canonicalAnalyticInputsInhabited : Bool
 
     maximalTimeLogicalReducerConstructed : Bool
@@ -118,6 +122,9 @@ luoPhysicalAnalyticTaskLedger = ledger
   false
   false
   false
+  CanonicalBuilder.canonicalAnalyticInputsBuilderConstructed
+  CanonicalBuilder.canonicalSelectedStateCoherenceDefinitional
+  CanonicalBuilder.canonicalFixedShiftCoherenceDefinitional
   Continuation.canonicalAnalyticInputsInhabited
   Globalization.maximalTimeLogicalGlobalizationReducerClosed
   false
@@ -229,6 +236,24 @@ officialFixedShiftDissipationCoherenceIsDefinitional :
   ≡ true
 officialFixedShiftDissipationCoherenceIsDefinitional =
   OfficialFixed.officialFixedShiftDissipationCoherenceDefinitionalIsTrue
+
+canonicalAnalyticInputsBuilderIsTrue :
+  canonicalAnalyticInputsBuilderConstructed luoPhysicalAnalyticTaskLedger
+  ≡ true
+canonicalAnalyticInputsBuilderIsTrue =
+  CanonicalBuilder.canonicalAnalyticInputsBuilderConstructedIsTrue
+
+canonicalSelectedStateCoherenceIsDefinitional :
+  canonicalSelectedStateCoherenceDefinitional luoPhysicalAnalyticTaskLedger
+  ≡ true
+canonicalSelectedStateCoherenceIsDefinitional =
+  CanonicalBuilder.canonicalSelectedStateCoherenceDefinitionalIsTrue
+
+canonicalFixedShiftCoherenceIsDefinitional :
+  canonicalFixedShiftCoherenceDefinitional luoPhysicalAnalyticTaskLedger
+  ≡ true
+canonicalFixedShiftCoherenceIsDefinitional =
+  CanonicalBuilder.canonicalFixedShiftCoherenceDefinitionalIsTrue
 
 maximalTimeLogicalReducerIsTrue :
   maximalTimeLogicalReducerConstructed luoPhysicalAnalyticTaskLedger
