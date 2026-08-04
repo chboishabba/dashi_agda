@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.BalabanBishopConcreteFactorialCoefficientDischargeExact
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact
 import DASHI.Physics.YangMills.BalabanBishopConcreteSeriesConvergenceTransportExact
 import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact
