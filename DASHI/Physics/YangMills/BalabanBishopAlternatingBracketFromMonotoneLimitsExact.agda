@@ -107,7 +107,8 @@ representedLimitBelowUpperPartial :
     (upperPartial dataSet index)
 representedLimitBelowUpperPartial dataSet index =
   BishopProperties.≤-respˡ-≃
-    (upperLimitIsRepresentedLimit dataSet)
+    (BishopProperties.≃-symm
+      (upperLimitIsRepresentedLimit dataSet))
     (BishopSequence.xₙisDecreasing⇒limxₙ≤xₙ
       (upperDecreasing dataSet)
       (upperConverges dataSet)
@@ -121,8 +122,7 @@ nextLowerPartialBelowRepresentedLimit :
     (representedLimit dataSet)
 nextLowerPartialBelowRepresentedLimit dataSet index =
   BishopProperties.≤-respˡ-≃
-    (BishopProperties.≃-symm
-      (nextLowerIsSuccessorLower dataSet index))
+    (nextLowerIsSuccessorLower dataSet index)
     (lowerPartialBelowRepresentedLimit dataSet (suc index))
 
 bishopAlternatingBracketsFromInterlacing :
