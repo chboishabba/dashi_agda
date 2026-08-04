@@ -28,8 +28,8 @@ module DASHI.Physics.YangMills.BalabanP33FiniteSignedRemainderSummationExact whe
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using
-  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; NonNegative; nonNegative)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -131,7 +131,7 @@ globalRemainderUpperBound dataSet background state =
     instance
       coefficientNonnegative : NonNegative coefficient
       coefficientNonnegative =
-        nonNegative (weightNonnegative dataSet background state)
+        ℚ.nonNegative (weightNonnegative dataSet background state)
   in
   ℚP.≤-trans
     (finitePointwiseUpperBound
@@ -159,7 +159,7 @@ globalRemainderLowerBound dataSet background state =
     instance
       coefficientNonnegative : NonNegative coefficient
       coefficientNonnegative =
-        nonNegative (weightNonnegative dataSet background state)
+        ℚ.nonNegative (weightNonnegative dataSet background state)
 
     scaledIncidence :
       coefficient * localChargeSum
