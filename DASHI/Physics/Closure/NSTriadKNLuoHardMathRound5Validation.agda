@@ -7,6 +7,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoHardMathRound5Validation where
 -- exact source-weighted J11/J12/J2 analysis, weighted time Cauchy, the full
 -- source Section-4 nonlinear square bound, terminal-window propagation,
 -- alpha=3/2 and b=4 absorption, four-residue induction, and Schur completion.
+--
+-- The focused pull-request checker is installed on the round-four base, so
+-- this root is elaborated against the exact merge candidate rather than a
+-- detached interface inventory.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
