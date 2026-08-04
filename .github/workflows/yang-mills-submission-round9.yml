@@ -1,0 +1,23 @@
+name: Yang-Mills submission round nine
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/**'
+      - 'DASHI/Physics/Units/**'
+      - 'DASHI/Physics/PhysicsScalingLimitSpineValidation.agda'
+      - 'scripts/check_yang_mills_submission_round9.sh'
+      - '.github/workflows/yang-mills-submission-round9.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - name: Check round-nine parity, P06/P11, Step-V and SI roots
+        run: nix develop --command bash scripts/check_yang_mills_submission_round9.sh
