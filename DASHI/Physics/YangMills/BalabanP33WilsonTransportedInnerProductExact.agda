@@ -35,23 +35,26 @@ module DASHI.Physics.YangMills.BalabanP33WilsonTransportedInnerProductExact wher
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
-  (_*R_; _+R_; -R_; zeroR)
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using (-R_)
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
-  (module RealPolynomialSolver)
+  (module RealPolynomialSolver; zeroCoefficient)
 open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
   (solveComputed; computed)
 open RealPolynomialSolver using
-  (_:=_; _:+_; _:*_; :-_)
+  (Polynomial; con; _:=_; _:+_; _:*_; :-_)
+open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
+  (q0P)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (Quaternion; SU2Quaternion; quaternion; conjugateQ; _*q_; q0)
+  (quaternion; conjugateQ; _*q_; q0)
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
-  (SU2LieAlgebra; su2Lie; lieQuaternion; su2Adjoint
-  ; adjointQuaternion; lieQuaternionAdjoint)
+  (su2Lie; lieQuaternion; su2Adjoint; lieQuaternionAdjoint)
 open import DASHI.Physics.YangMills.BalabanSU2AdjointInnerProduct using
   (su2Dot)
+open import DASHI.Physics.YangMills.BalabanSU2LieBracket using (dotP)
+
+zeroP : ∀ {n} → Polynomial n
+zeroP = con zeroCoefficient
 
 pureImaginaryScalarProduct : ∀ X Y →
   -R (q0 (lieQuaternion X *q lieQuaternion Y))
@@ -60,11 +63,8 @@ pureImaginaryScalarProduct
     (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) =
   solveComputed 6
     (λ x₁ y₁ z₁ x₂ y₂ z₂ →
-      :- (((zeroR :* zeroR)
-        :+ (:- (x₁ :* x₂)))
-        :+ (:- (y₁ :* y₂))
-        :+ (:- (z₁ :* z₂)))
-      := ((x₁ :* x₂) :+ (y₁ :* y₂)) :+ (z₁ :* z₂))
+      :- (q0P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂)
+      := dotP x₁ y₁ z₁ x₂ y₂ z₂)
     computed x₁ y₁ z₁ x₂ y₂ z₂
 
 transportedPureImaginaryScalarProduct :
