@@ -11,15 +11,9 @@ module DASHI.Physics.YangMills.BalabanP06PhysicalModelLeafExact where
 -- "Cluster Expansion for Abstract Polymer Models",
 -- Communications in Mathematical Physics 103 (1986), 491--498.
 -- DOI: 10.1007/BF01211762.
---
--- PURPOSE
--- Name the exact physical inhabitants needed to construct the repository's
--- P06ModelLeafDischargePackage.  Generic spanning-tree, DFS, walk-count and
--- recombination reducers are already owned elsewhere; this file prevents them
--- from being requested again as physical assumptions.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
@@ -29,19 +23,14 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 record PhysicalPolymerSupportAdapter : Set₁ where
   field
     graphAdapter : Entropy.BalabanGraphAdapter
-
     supportVerticesAreLiteralPolymerSupport : Set
     supportVerticesAreLiteralPolymerSupportEvidence :
       supportVerticesAreLiteralPolymerSupport
-
     supportRootBelongsToSupport : Set
-    supportRootBelongsToSupportEvidence :
-      supportRootBelongsToSupport
-
+    supportRootBelongsToSupportEvidence : supportRootBelongsToSupport
     supportHasNoDuplicatePhysicalBlocks : Set
     supportHasNoDuplicatePhysicalBlocksEvidence :
       supportHasNoDuplicatePhysicalBlocks
-
     physicalAdjacencyAgreesWithSupportGraph : Set
     physicalAdjacencyAgreesWithSupportGraphEvidence :
       physicalAdjacencyAgreesWithSupportGraph
@@ -54,22 +43,17 @@ record ReducedSkeletonGeometryInputs
     reducedComplexity :
       Entropy.BalabanReducedSkeletonComplexityAdapter
         (graphAdapter support)
-
     branchVerticesSeparated : Set
     branchVerticesSeparatedEvidence : branchVerticesSeparated
-
     reducedSegmentsInternallyDisjoint : Set
     reducedSegmentsInternallyDisjointEvidence :
       reducedSegmentsInternallyDisjoint
-
     eachReducedSegmentPositiveLength : Set
     eachReducedSegmentPositiveLengthEvidence :
       eachReducedSegmentPositiveLength
-
     segmentCountControlledByBranchCount : Set
     segmentCountControlledByBranchCountEvidence :
       segmentCountControlledByBranchCount
-
     branchCountControlledByDiameter : Set
     branchCountControlledByDiameterEvidence :
       branchCountControlledByDiameter
@@ -82,19 +66,14 @@ record PhysicalDecorationInputs
     decorationMultiplicity :
       Entropy.BalabanDecorationMultiplicityAdapter
         (graphAdapter support)
-
     localDecorationChoicesUniformlyBounded : Set
     localDecorationChoicesUniformlyBoundedEvidence :
       localDecorationChoicesUniformlyBounded
-
     decorationSupportOwnedBySkeletonVertex : Set
     decorationSupportOwnedBySkeletonVertexEvidence :
       decorationSupportOwnedBySkeletonVertex
-
     decorationEncodingInjective : Set
-    decorationEncodingInjectiveEvidence :
-      decorationEncodingInjective
-
+    decorationEncodingInjectiveEvidence : decorationEncodingInjective
     decorationWordLengthLinearInReducedComplexity : Set
     decorationWordLengthLinearInReducedComplexityEvidence :
       decorationWordLengthLinearInReducedComplexity
@@ -104,24 +83,19 @@ open PhysicalDecorationInputs public
 record PhysicalPolymerDecompositionInputs
     (support : PhysicalPolymerSupportAdapter) : Set₁ where
   field
-    decomposition :
+    decompositionAdapter :
       Entropy.BalabanPolymerDecompositionAdapter
         (graphAdapter support)
-
     polymerHasCanonicalReducedSkeleton : Set
     polymerHasCanonicalReducedSkeletonEvidence :
       polymerHasCanonicalReducedSkeleton
-
     polymerHasCanonicalDecoration : Set
     polymerHasCanonicalDecorationEvidence :
       polymerHasCanonicalDecoration
-
     decodeSkeletonDecoration : Set
     decodeSkeletonDecorationEvidence : decodeSkeletonDecoration
-
     decodeEncodePolymer : Set
     decodeEncodePolymerEvidence : decodeEncodePolymer
-
     encodePolymerInjectiveOrBoundedFibre : Set
     encodePolymerInjectiveOrBoundedFibreEvidence :
       encodePolymerInjectiveOrBoundedFibre
@@ -133,11 +107,9 @@ record P06PhysicalModelLeafInputs : Set₁ where
     support : PhysicalPolymerSupportAdapter
     reducedSkeleton : ReducedSkeletonGeometryInputs support
     decorations : PhysicalDecorationInputs support
-    decomposition : PhysicalPolymerDecompositionInputs support
-
+    polymerDecomposition : PhysicalPolymerDecompositionInputs support
     finiteRangeExponentialSummation :
       Entropy.LinearRangeExponentialSum
-
     concreteNeighbourGraph : FiniteGraph.FiniteNeighbourGraph
     concreteNeighbourGraphMatchesSupport : Set
     concreteNeighbourGraphMatchesSupportEvidence :
@@ -149,16 +121,14 @@ p06ModelLeafFromPhysicalInputs :
   P06PhysicalModelLeafInputs →
   Entropy.P06ModelLeafDischargePackage
 p06ModelLeafFromPhysicalInputs inputs = record
-  { Entropy.P06ModelLeafDischargePackage.graphAdapter =
-      graphAdapter (support inputs)
-  ; Entropy.P06ModelLeafDischargePackage.reducedSkeletonComplexityAdapter =
+  { graphAdapter = graphAdapter (support inputs)
+  ; reducedSkeletonComplexityAdapter =
       reducedComplexity (reducedSkeleton inputs)
-  ; Entropy.P06ModelLeafDischargePackage.decorationMultiplicityAdapter =
+  ; decorationMultiplicityAdapter =
       decorationMultiplicity (decorations inputs)
-  ; Entropy.P06ModelLeafDischargePackage.polymerDecompositionAdapter =
-      decomposition (decomposition inputs)
-  ; Entropy.P06ModelLeafDischargePackage.linearRangeSum =
-      finiteRangeExponentialSummation inputs
+  ; polymerDecompositionAdapter =
+      decompositionAdapter (polymerDecomposition inputs)
+  ; linearRangeSum = finiteRangeExponentialSummation inputs
   }
 
 record P06PhysicalModelLeafReceipt
@@ -180,17 +150,12 @@ p06PhysicalModelLeafReceipt inputs = record
   ; theoremBoundary =
       "P06 physical leaf: literal support, reduced-skeleton complexity linear in diameter, decoration multiplicity, canonical decomposition, and finite-range summation are sufficient for the existing P06 mixed reducer."
   }
-  where
-  open import Agda.Builtin.Equality using (refl)
 
 p06PhysicalModelLeafAssemblyLevel : ProofLevel
 p06PhysicalModelLeafAssemblyLevel = machineChecked
-
 p06PhysicalSupportIdentificationLevel : ProofLevel
 p06PhysicalSupportIdentificationLevel = conditional
-
 p06ReducedSkeletonGeometryLevel : ProofLevel
 p06ReducedSkeletonGeometryLevel = conditional
-
 p06PhysicalDecorationAndDecompositionLevel : ProofLevel
 p06PhysicalDecorationAndDecompositionLevel = conditional
