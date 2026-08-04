@@ -13,8 +13,9 @@ module DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact wh
 --
 -- PURPOSE
 -- Define the actual signed factorial terms for sine and cosine and prove their
--- parity on the concrete Bishop-real carrier.  This supplies the term-family
--- hypotheses consumed by the round-ten transformed-convergence theorem.
+-- parity on the concrete Bishop-real carrier.  An explicit identification
+-- record transports those results to the elementary-series data used by the
+-- represented sine/cosine limits.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -23,6 +24,7 @@ open import Data.Rational.Unnormalised using (1ℚᵘ)
 import Real as BishopReal
 import RealProperties as BishopProperties
 
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact as Recurrence
 import DASHI.Physics.YangMills.BalabanBishopSeriesParityAndLimitExact as ParityLimit
@@ -208,8 +210,74 @@ concreteCosineEvenTermFamily = record
   ; termEven = cosineSignedTermNegation
   }
 
+record ConcreteSineCosineTermIdentification
+    (dataSet : Elementary.BishopElementaryPowerSeriesData) : Set₁ where
+  field
+    sineTermIsConcrete : ∀ point index →
+      BishopReal._≃_
+        (Elementary.sineTerm dataSet point index)
+        (sineSignedTerm point index)
+
+    cosineTermIsConcrete : ∀ point index →
+      BishopReal._≃_
+        (Elementary.cosineTerm dataSet point index)
+        (cosineSignedTerm point index)
+
+open ConcreteSineCosineTermIdentification public
+
+identifiedSineOddTermFamily :
+  ∀ {dataSet : Elementary.BishopElementaryPowerSeriesData} →
+  ConcreteSineCosineTermIdentification dataSet →
+  ParityLimit.BishopOddTermFamily
+    (Elementary.sineTerm dataSet)
+identifiedSineOddTermFamily {dataSet = dataSet} identification = record
+  { termCongruent = λ {left} {right} leftEquivalentRight index →
+      BishopProperties.≃-trans
+        (sineTermIsConcrete identification left index)
+        (BishopProperties.≃-trans
+          (sineSignedTermCongruent leftEquivalentRight index)
+          (BishopProperties.≃-symm
+            (sineTermIsConcrete identification right index)))
+  ; termOdd = λ point index →
+      BishopProperties.≃-trans
+        (sineTermIsConcrete identification (BishopReal.- point) index)
+        (BishopProperties.≃-trans
+          (sineSignedTermNegation point index)
+          (BishopProperties.-‿cong
+            (BishopProperties.≃-symm
+              (sineTermIsConcrete identification point index))))
+  }
+
+identifiedCosineEvenTermFamily :
+  ∀ {dataSet : Elementary.BishopElementaryPowerSeriesData} →
+  ConcreteSineCosineTermIdentification dataSet →
+  ParityLimit.BishopEvenTermFamily
+    (Elementary.cosineTerm dataSet)
+identifiedCosineEvenTermFamily {dataSet = dataSet} identification = record
+  { termCongruent = λ {left} {right} leftEquivalentRight index →
+      BishopProperties.≃-trans
+        (cosineTermIsConcrete identification left index)
+        (BishopProperties.≃-trans
+          (cosineSignedTermCongruent leftEquivalentRight index)
+          (BishopProperties.≃-symm
+            (cosineTermIsConcrete identification right index)))
+  ; termEven = λ point index →
+      BishopProperties.≃-trans
+        (cosineTermIsConcrete identification (BishopReal.- point) index)
+        (BishopProperties.≃-trans
+          (cosineSignedTermNegation point index)
+          (BishopProperties.≃-symm
+            (cosineTermIsConcrete identification point index)))
+  }
+
 bishopOddEvenPowerNegationLevel : ProofLevel
 bishopOddEvenPowerNegationLevel = machineChecked
 
 bishopConcreteSineCosineTermParityLevel : ProofLevel
 bishopConcreteSineCosineTermParityLevel = machineChecked
+
+bishopElementaryTermIdentificationLevel : ProofLevel
+bishopElementaryTermIdentificationLevel = conditional
+
+bishopIdentifiedElementaryTermParityLevel : ProofLevel
+bishopIdentifiedElementaryTermParityLevel = machineChecked
