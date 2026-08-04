@@ -138,7 +138,7 @@ record EmbeddedCenteredEndpointCertificate
     (embedding : Embedding.CenteredPeriodicNoWrapEmbedding n radius)
     (point : Centered.CenteredBlockPoint4 radius) : Set where
   field
-    computed : CenteredEndpointCertificate n radius
+    computedCertificate : CenteredEndpointCertificate n radius
       (Embedding.embeddingCentre embedding) point
 
 open EmbeddedCenteredEndpointCertificate public
@@ -161,7 +161,7 @@ certifiedEmbeddedPrintedEndpointExact
     certificate order membership =
   trans
     (certifiedCenteredContourEndpointExact
-      (computed certificate) order membership)
+      (computedCertificate certificate) order membership)
     (sym (Embedding.embedMeaning embedding point))
 
 cmp109CenteredEndpointDecisionLevel : ProofLevel
