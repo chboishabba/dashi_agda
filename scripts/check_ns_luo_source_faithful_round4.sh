@@ -7,20 +7,28 @@ cd "$ROOT"
 FILES=(
   DASHI/Physics/Closure/NSTriadKNRationalLerayProjectionExact.agda
   DASHI/Physics/Closure/NSTriadKNRationalLeraySelfAdjointExact.agda
+  DASHI/Physics/Closure/NSTriadKNRationalLerayFiniteConvolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoBernsteinExponentCalibrationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteJensenSquareExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedJensenExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNormalizedWeightedJensenExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFinitePrefixJensenExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteJ11PrefixEnergyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedMeanValueSelectionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDyadicHalfSplitExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteHalfShellPartitionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteHalfShellEnergyPartitionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSourceFaithfulSection4Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedSourceSection4Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteIndexedSourceSection4Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteJ11HalfBudgetExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSourceJ11J12ProductExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedSourceJ11J12ProductExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteIndexedSourceJ1Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSchurEnvelopeRefinementExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCanonicalSchurTailExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformCutoffEnergyExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformEquation42SourceExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallProductExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallVariationExact.agda
