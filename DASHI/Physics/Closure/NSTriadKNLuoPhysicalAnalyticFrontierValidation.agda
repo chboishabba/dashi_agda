@@ -10,7 +10,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNLuoIncrementTensorPolarizationExact
 import DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelFourierMultiplierExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCharacterWeightedIncrementExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCharacterMultiplierBridgeExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteThreePairCoefficientExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSignedConvolutionYoungExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteTerminalYoungSameConstantExact
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePeriodicMultiplierRealizationExact
 import DASHI.Physics.Closure.NSTriadKNLuoPointwisePairFoldReductionExact
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalSourceSchurIdentificationExact
