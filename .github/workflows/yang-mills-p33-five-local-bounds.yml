@@ -5,50 +5,12 @@ on:
     branches:
       - 'agent/ym-round13-five-local-physical-bounds'
     paths:
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralBondCellIncidenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralCovariantDerivativeDifferenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralCovariantDivergenceDifferenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FourStageOperatorDifferenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33CMP109DerivativeDifferencePrimitiveExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33SignedFiniteAtomExpansionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33AbsoluteFiniteAtomAdapterExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiveSandwichSignedFormExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33SandwichLocalFamilyExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiveSandwichLocalCoercivityExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiniteWeightedRowSumContractionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33WeightedNeumannHalfContractionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33*.agda'
       - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
       - '.github/workflows/yang-mills-p33-five-local-bounds.yml'
   pull_request:
     paths:
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralBondCellIncidenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveOperatorNormLocalBoundsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33PrimitiveAbsoluteOperatorAdapterExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33SU2QuadraticPrimitiveNormAdapterExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralCovariantDerivativeDifferenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralCovariantDivergenceDifferenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FourStageOperatorDifferenceExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33CMP109DerivativeDifferencePrimitiveExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33SignedFiniteAtomExpansionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33AbsoluteFiniteAtomAdapterExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33ConfiguredSignedAtomListsExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiveSandwichSignedFormExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33SandwichLocalFamilyExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiveSandwichLocalCoercivityExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33IdentityCurvatureLocalExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33LiteralFiveMechanismFamiliesExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33RationalInverseNorm32Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiniteWeightedRowSumContractionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33WeightedNeumannHalfContractionExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33FiveLocalPhysicalBoundsValidation.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33*.agda'
       - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
       - '.github/workflows/yang-mills-p33-five-local-bounds.yml'
   workflow_dispatch:
@@ -64,5 +26,5 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
-      - name: Check literal five-channel P33 local bounds
+      - name: Check concrete SU2, Wilson, CMP109, spectral and weighted P33 math
         run: nix develop --command bash scripts/check_yang_mills_p33_five_local_bounds.sh
