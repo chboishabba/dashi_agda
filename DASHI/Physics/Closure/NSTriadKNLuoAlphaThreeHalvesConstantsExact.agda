@@ -11,19 +11,18 @@ module DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact where
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Select the convenient source-admissible value alpha=3/2.  The correction in
--- Lemma 3.2 is then
---
---   alpha + (2-alpha)/2 = 7/4.
+-- Select the convenient source-admissible value alpha=3/2. The correction in
+-- Lemma 3.2 is then alpha + (2-alpha)/2 = 7/4.
 --
 -- A block shift chosen as four times a natural base turns the corresponding
--- dyadic coefficient into an integer dyadic reciprocal power.  Identifying the
+-- dyadic coefficient into an integer dyadic reciprocal power. Identifying the
 -- rational coefficient below with the analytic real fractional-power notation
 -- remains a separate source/repository scalar-embedding theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([])
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; 1ℚ; _+_; _-_; _*_; _/_; -_)
@@ -38,22 +37,22 @@ correctedExponent = + 7 / 4
 
 twoMinusAlphaExact :
   twoRational - alphaThreeHalves ≡ twoMinusAlpha
-twoMinusAlphaExact = ℚRing.solve-∀
+twoMinusAlphaExact = ℚRing.solve []
 
 halfCorrectionExact :
   twoMinusAlpha * (+ 1 / 2) ≡ halfCorrection
-halfCorrectionExact = ℚRing.solve-∀
+halfCorrectionExact = ℚRing.solve []
 
 correctedExponentExact :
   alphaThreeHalves + halfCorrection ≡ correctedExponent
-correctedExponentExact = ℚRing.solve-∀
+correctedExponentExact = ℚRing.solve []
 
 oneMinusAlpha : ℚ
 oneMinusAlpha = - (+ 1 / 2)
 
 oneMinusAlphaExact :
   1ℚ - alphaThreeHalves ≡ oneMinusAlpha
-oneMinusAlphaExact = ℚRing.solve-∀
+oneMinusAlphaExact = ℚRing.solve []
 
 fourTimes : Nat → Nat
 fourTimes zero = zero
