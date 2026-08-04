@@ -41,10 +41,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109ShortestContourEnumerationE
 -- the selected CMP109 block endpoint remains physical.
 ------------------------------------------------------------------------
 
-infixr 5 _++_
-_++_ : ∀ {A : Set} → List A → List A → List A
-[] ++ right = right
-(left ∷ lefts) ++ right = left ∷ (lefts ++ right)
+open import Data.List.Base using (_++_)
 
 axisToPeriodic : Contours.Axis4 → Carrier.Axis4
 axisToPeriodic Contours.axis0 = Carrier.zeroᵢ
