@@ -15,6 +15,9 @@ open import Agda.Builtin.String using (String)
 Pred : Set → Set₁
 Pred A = A → Set
 
+Not₁ : Set₁ → Set₁
+Not₁ A = A → ⊥
+
 infix 4 _≈ₚ_
 
 _≈ₚ_ : ∀ {A} → Pred A → Pred A → Set
@@ -71,7 +74,7 @@ diagonalNotInImage enumeration index equivalence =
 
 cantorNotSurjective :
   ∀ {A} (enumeration : A → Pred A) →
-  ¬ SurjectiveUpToPredicateEquivalence enumeration
+  Not₁ (SurjectiveUpToPredicateEquivalence enumeration)
 cantorNotSurjective enumeration surjective =
   diagonalNotInImage enumeration
     (fst diagonalPreimage)
