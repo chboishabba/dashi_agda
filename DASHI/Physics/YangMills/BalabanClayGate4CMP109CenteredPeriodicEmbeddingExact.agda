@@ -82,10 +82,7 @@ centeredTargetPath :
 centeredTargetPath start point =
   WordPath.wordToPeriodicPath start (canonicalCenteredContourWord point)
 
-infixr 5 _++_
-_++_ : ∀ {A : Set} → List A → List A → List A
-[] ++ right = right
-(left ∷ lefts) ++ right = left ∷ (lefts ++ right)
+open import Data.List.Base using (_++_)
 
 walkAppend :
   ∀ {n} (start : Blocks.PeriodicBlock n) left right →
@@ -98,7 +95,7 @@ walkAppend start (direction ∷ directions) right =
 record PeriodicSegmentCommutation (n : Nat) : Set₁ where
   field
     translationsCommute :
-      ∀ point left right →
+      ∀ (point : Blocks.PeriodicBlock n) left right →
       Bond.walk
         (Bond.walk point (Periodic.segmentWord left))
         (Periodic.segmentWord right)
@@ -113,11 +110,11 @@ periodicSegmentAction :
   ∀ {n} → PeriodicSegmentCommutation n →
   Contours.CommutingSegmentAction
     (Blocks.PeriodicBlock n) Contours.AxisSegment
-periodicSegmentAction commutation = record
+periodicSegmentAction {n} commutation = record
   { step =
       λ point segment → Bond.walk point (Periodic.segmentWord segment)
   ; distinctSegmentsCommute =
-      translationsCommute commutation
+      translationsCommute {n} commutation
   }
 
 followSegmentsEqualsWalkWord :
