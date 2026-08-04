@@ -22,20 +22,16 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteJ2HighHighGapExact where
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Specialise the mature factorised Schur machinery to the J2 high-high to
--- low lane with no freely supplied shell profiles.  The low-shell and
--- output-gap factors are definitionally
---
---   (1/4)^j and (1/32)^d.
---
--- Only the physical tensor-energy comparison remains primitive.  Pointwise
--- J2 domination, the complete 128/93 rectangle bound, and quantitative low
--- and gap exterior tails are all derived.
+-- Specialise the Schur machinery to J2 with definitionally fixed shell
+-- profiles (1/4)^j and (1/32)^d.  Only the physical tensor-energy comparison
+-- remains primitive.  Pointwise domination, the complete rectangle bound,
+-- and both exterior-tail estimates are derived.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
+import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Majorant
@@ -69,8 +65,8 @@ canonicalJ2MultiplierProfile data = record
   ; gapFactorNonnegative = λ gap →
       Geo.powNonnegative Geo.thirtySecond gap Geo.thirtySecondNonnegative
   ; lowGradientNonnegative = lowGradientNonnegative data
-  ; lowFactorBound = λ lowShell → _≤_.refl
-  ; gapFactorBound = λ gap → _≤_.refl
+  ; lowFactorBound = λ lowShell → ℚₚ.≤-refl
+  ; gapFactorBound = λ gap → ℚₚ.≤-refl
   }
 
 j2FactorizedInteraction :
@@ -86,8 +82,7 @@ j2FactorizedInteraction data = record
 
 j2PairMagnitude :
   FiniteJ2HighHighGapData → Nat → Nat → ℚ
-j2PairMagnitude data =
-  Factor.pairMagnitude (j2FactorizedInteraction data)
+j2PairMagnitude data = Factor.pairMagnitude (j2FactorizedInteraction data)
 
 j2PointwisePositiveKernelMajorant :
   (data : FiniteJ2HighHighGapData) →
@@ -109,22 +104,25 @@ j2RectangleBound data =
   Factor.factorizedInteractionRectangleBound
     (j2FactorizedInteraction data)
 
-j2TailData :
-  FiniteJ2HighHighGapData → Tail.FiniteSchurTailData
+j2CommonFactorNonnegative :
+  (data : FiniteJ2HighHighGapData) →
+  0ℚ ≤ lowGradient data * weightedEnergy data
+j2CommonFactorNonnegative data =
+  let
+    instance
+      gradientIsNonnegative = nonNegative (lowGradientNonnegative data)
+      energyIsNonnegative = nonNegative (weightedEnergyNonnegative data)
+      productIsNonnegative =
+        ℚₚ.nonNeg*nonNeg⇒nonNeg
+          (lowGradient data) (weightedEnergy data)
+  in
+  ℚₚ.nonNegative⁻¹ (lowGradient data * weightedEnergy data)
+
+j2TailData : FiniteJ2HighHighGapData → Tail.FiniteSchurTailData
 j2TailData data = record
   { pairMagnitude = j2PairMagnitude data
   ; commonFactor = lowGradient data * weightedEnergy data
-  ; commonFactorNonnegative =
-      let open import Data.Rational.Base using (nonNegative)
-          import Data.Rational.Properties as ℚₚ
-          instance
-            gradientIsNonnegative = nonNegative (lowGradientNonnegative data)
-            energyIsNonnegative = nonNegative (weightedEnergyNonnegative data)
-            productIsNonnegative =
-              ℚₚ.nonNeg*nonNeg⇒nonNeg
-                (lowGradient data) (weightedEnergy data)
-      in
-      ℚₚ.nonNegative⁻¹ (lowGradient data * weightedEnergy data)
+  ; commonFactorNonnegative = j2CommonFactorNonnegative data
   ; pointwiseTailDomination = j2PointwisePositiveKernelMajorant data
   }
 
