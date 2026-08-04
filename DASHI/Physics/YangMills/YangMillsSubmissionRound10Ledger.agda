@@ -18,6 +18,13 @@ factorialCoefficientDischarge = record
   ; level = machineChecked
   }
 
+concreteSineCosineTermParity : Round10LedgerEntry
+concreteSineCosineTermParity = record
+  { name = "Concrete Bishop sine/cosine term parity"
+  ; statement = "The signed factorial sine terms are odd and the signed factorial cosine terms are even under Bishop-real negation."
+  ; level = machineChecked
+  }
+
 transformedSeriesConvergence : Round10LedgerEntry
 transformedSeriesConvergence = record
   { name = "Bishop transformed-series convergence"
