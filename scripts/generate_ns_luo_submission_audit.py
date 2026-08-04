@@ -8,8 +8,9 @@ strict mode it fails on holes, standalone code metavariables, postulates,
 unsafe options, or permission for unsolved metas.
 
 The scanner removes nested Agda block comments and line comments before
-checking code. Thus question marks in prose and ordinary identifiers such as
-`_≤?_` are not confused with unresolved metavariables.
+checking ordinary code. Agda OPTIONS pragmas are audited separately in the
+original text, so `_≤?_` identifiers and prose punctuation are not confused
+with unresolved metavariables while unsafe compiler permissions remain visible.
 """
 
 from __future__ import annotations
@@ -32,10 +33,13 @@ PROVENANCE_RE = re.compile(
 )
 STANDALONE_QUESTION_RE = re.compile(r"(?<![A-Za-z0-9_])\?(?![A-Za-z0-9_])")
 
-FORBIDDEN_PATTERNS = {
+CODE_FORBIDDEN_PATTERNS = {
     "hole": re.compile(r"\{!!\}"),
     "postulate": re.compile(r"^\s*postulate(?:\s|$)", re.MULTILINE),
-    "unsolved_metas": re.compile(r"--allow-unsolved-metas"),
+}
+
+RAW_FORBIDDEN_PATTERNS = {
+    "unsolved_metas": re.compile(r"\{\-#\s*OPTIONS[^#]*--allow-unsolved-metas"),
     "unsafe": re.compile(r"\{\-#\s*OPTIONS[^#]*--unsafe"),
 }
 
@@ -137,21 +141,31 @@ def strip_agda_comments(text: str) -> str:
     return "".join(output)
 
 
+def append_pattern_findings(
+    findings: list[Finding],
+    patterns: dict[str, re.Pattern[str]],
+    source: str,
+    rel: str,
+) -> None:
+    for kind, pattern in patterns.items():
+        for match in pattern.finditer(source):
+            findings.append(
+                Finding(
+                    kind=kind,
+                    file=rel,
+                    line=line_number(source, match.start()),
+                    text=match.group(0),
+                )
+            )
+
+
 def findings_for(path: Path, text: str, root: Path) -> list[Finding]:
     rel = str(path.relative_to(root))
     findings: list[Finding] = []
     code = strip_agda_comments(text)
 
-    for kind, pattern in FORBIDDEN_PATTERNS.items():
-        for match in pattern.finditer(code):
-            findings.append(
-                Finding(
-                    kind=kind,
-                    file=rel,
-                    line=line_number(code, match.start()),
-                    text=match.group(0),
-                )
-            )
+    append_pattern_findings(findings, RAW_FORBIDDEN_PATTERNS, text, rel)
+    append_pattern_findings(findings, CODE_FORBIDDEN_PATTERNS, code, rel)
 
     for number, line in enumerate(code.splitlines(), start=1):
         match = STANDALONE_QUESTION_RE.search(line)
@@ -251,7 +265,7 @@ def report(root: Path) -> dict[str, object]:
     ]
 
     return {
-        "schema_version": 3,
+        "schema_version": 4,
         "repository_revision": git_revision(root),
         "file_count": len(files),
         "module_count": sum(item.module is not None for item in files),
