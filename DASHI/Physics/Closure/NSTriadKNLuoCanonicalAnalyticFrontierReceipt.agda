@@ -8,9 +8,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticFrontierReceipt where
 -- composition are separated from the genuinely uninhabited PDE estimates.
 --
 -- The physical-analytic advance additionally closes the missing kernel-weight
--- action, finite signed Young summation, pointwise-pair fold reduction,
--- equation-(4.2) identity transport, four-aligned alpha=3/2 summability,
--- source-named Section-4 bound transport and the logical maximal-time step.
+-- action, exact increment-multiplier algebra, finite signed Young summation,
+-- pointwise-pair fold reduction, equation-(4.2) identity transport,
+-- four-aligned alpha=3/2 summability, fixed-shift order reduction,
+-- source-named Section-4 bound transport, official projected Parseval reuse
+-- and the logical maximal-time step.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,11 +30,14 @@ import DASHI.Physics.Closure.NSTriadKNLuoCanonicalAnalyticInputsExact as Inputs
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalContinuationFromAnalyticInputsExact as Continuation
 
 import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as FluxKernel
+import DASHI.Physics.Closure.NSTriadKNLuoIncrementKernelFourierMultiplierExact as IncrementMultiplier
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSignedConvolutionYoungExact as FiniteYoung
 import DASHI.Physics.Closure.NSTriadKNLuoPointwisePairFoldReductionExact as PairFold
 import DASHI.Physics.Closure.NSTriadKNLuoEquation42PhysicalIdentityAdapterExact as Equation42Physical
 import DASHI.Physics.Closure.NSTriadKNLuoFourAlignedAlphaThreeHalvesSummabilityExact as AlphaSummability
+import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftRecursionReductionExact as FixedReduction
 import DASHI.Physics.Closure.NSTriadKNLuoSection4PhysicalBoundsAdapterExact as Section4Physical
+import DASHI.Physics.Closure.NSTriadKNLuoProjectedConvectionOfficialParsevalUpgradeExact as ParsevalUpgrade
 import DASHI.Physics.Closure.NSTriadKNLuoMaximalTimeGlobalizationExact as Globalization
 
 record CanonicalLuoAnalyticFrontierReceipt : Set where
@@ -57,11 +62,15 @@ record CanonicalLuoAnalyticFrontierReceipt : Set where
     continuationTheoremConstructed : Bool
 
     weightedIncrementKernelFormulaCorrected : Bool
+    incrementFourierMultiplierAlgebraConstructed : Bool
     finiteSignedYoungReducerConstructed : Bool
     pointwisePairFoldReducerConstructed : Bool
     equation42PhysicalIdentityAdapterConstructed : Bool
     fourAlignedAlphaThreeHalvesSummabilityConstructed : Bool
+    fixedShiftOrderReductionConstructed : Bool
     section4PhysicalBoundsAdapterConstructed : Bool
+    projectedConvectionOfficialParsevalUpgradeConstructed : Bool
+    officialProjectedHardHighOrthogonalityClosed : Bool
     maximalTimeLogicalReducerConstructed : Bool
 
     spatialIncrementFourierTheoremInhabited : Bool
@@ -97,11 +106,15 @@ canonicalLuoAnalyticFrontierReceipt = receipt
   Inputs.parserSafeCanonicalOwnerConstructed
   Continuation.canonicalContinuationFromAnalyticInputsConstructed
   FluxKernel.weightedIncrementKernelFormulaCorrected
+  IncrementMultiplier.incrementKernelFourierMultiplierAlgebraClosed
   FiniteYoung.finiteYoungTwoSidedReducerClosed
   PairFold.pointwisePairToWholeFoldReductionClosed
   Equation42Physical.equation42IdentityAdapterClosed
   AlphaSummability.alphaThreeHalvesFourAlignedGeometricSummabilityClosed
+  FixedReduction.fixedShiftOrderReductionClosed
   Section4Physical.section4PhysicalToFiniteRangeAdapterClosed
+  ParsevalUpgrade.projectedConvectionOfficialParsevalUpgradeConstructed
+  ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonality
   Globalization.maximalTimeLogicalGlobalizationReducerClosed
   false
   false
@@ -136,6 +149,12 @@ weightedIncrementKernelFormulaRemainsCorrected :
 weightedIncrementKernelFormulaRemainsCorrected =
   FluxKernel.weightedIncrementKernelFormulaCorrectedIsTrue
 
+incrementFourierMultiplierAlgebraIsClosed :
+  incrementFourierMultiplierAlgebraConstructed canonicalLuoAnalyticFrontierReceipt
+  ≡ true
+incrementFourierMultiplierAlgebraIsClosed =
+  IncrementMultiplier.incrementKernelFourierMultiplierAlgebraClosedIsTrue
+
 finiteSignedYoungReducerIsClosed :
   finiteSignedYoungReducerConstructed canonicalLuoAnalyticFrontierReceipt
   ≡ true
@@ -162,11 +181,30 @@ fourAlignedSummabilityIsClosed :
 fourAlignedSummabilityIsClosed =
   AlphaSummability.alphaThreeHalvesFourAlignedGeometricSummabilityClosedIsTrue
 
+fixedShiftOrderReductionIsClosed :
+  fixedShiftOrderReductionConstructed canonicalLuoAnalyticFrontierReceipt
+  ≡ true
+fixedShiftOrderReductionIsClosed =
+  FixedReduction.fixedShiftOrderReductionClosedIsTrue
+
 section4PhysicalBoundsAdapterIsClosed :
   section4PhysicalBoundsAdapterConstructed canonicalLuoAnalyticFrontierReceipt
   ≡ true
 section4PhysicalBoundsAdapterIsClosed =
   Section4Physical.section4PhysicalToFiniteRangeAdapterClosedIsTrue
+
+projectedConvectionOfficialParsevalUpgradeIsClosed :
+  projectedConvectionOfficialParsevalUpgradeConstructed
+    canonicalLuoAnalyticFrontierReceipt
+  ≡ true
+projectedConvectionOfficialParsevalUpgradeIsClosed =
+  ParsevalUpgrade.projectedConvectionOfficialParsevalUpgradeConstructedIsTrue
+
+officialProjectedHardHighOrthogonalityRemainsClosed :
+  officialProjectedHardHighOrthogonalityClosed canonicalLuoAnalyticFrontierReceipt
+  ≡ true
+officialProjectedHardHighOrthogonalityRemainsClosed =
+  ParsevalUpgrade.officialFiniteParsevalClosesProjectedHardHighOrthogonalityIsTrue
 
 maximalTimeLogicalReducerIsClosed :
   maximalTimeLogicalReducerConstructed canonicalLuoAnalyticFrontierReceipt
