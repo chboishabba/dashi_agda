@@ -24,9 +24,13 @@ module DASHI.Physics.YangMills.BalabanP33QuaternionScalarCyclicityExact where
 --
 -- The two-factor identity is a checked polynomial equality on all eight real
 -- coordinates.  The three- and four-factor rotations follow from the existing
--- quaternion associativity theorem.  This allows prefixes and suffixes in the
--- sixteen ordered Wilson atoms to be rotated without introducing a matrix
--- trace axiom.
+-- quaternion associativity theorem.  For a unit quaternion u, cyclicity and
+-- the proved inverse law also give
+--
+--   q0(u a u^-1) = q0(a).
+--
+-- Thus Wilson atoms may be cyclically transported and conjugated without a
+-- matrix trace axiom.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -41,7 +45,12 @@ open RealPolynomialSolver using (_:=_)
 open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
   (q0P)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (Quaternion; quat; _*q_; q0; quaternionMultiplyAssociative)
+  ( Quaternion; quat; SU2Quaternion; quaternion; conjugateQ
+  ; _*q_; q0; oneQ
+  ; quaternionMultiplyAssociative; quaternionMultiplyConjugateLeft
+  ; scaleOneQ; quaternionOneRight
+  ; unitNormSquared; scaleRealQ
+  )
 
 scalarPartTwoFactorCyclic : ∀ a b →
   q0 (a *q b) ≡ q0 (b *q a)
@@ -72,6 +81,32 @@ scalarPartFourFactorCyclic a b c d =
       (cong q0 (quaternionMultiplyAssociative a (b *q c) d))
       (scalarPartTwoFactorCyclic a ((b *q c) *q d)))
 
+unitConjugateProductIsOne : ∀ u →
+  conjugateQ (quaternion u) *q quaternion u ≡ oneQ
+unitConjugateProductIsOne u =
+  trans
+    (quaternionMultiplyConjugateLeft (quaternion u))
+    (trans
+      (cong (λ norm → scaleRealQ norm oneQ)
+        (unitNormSquared u))
+      scaleOneQ)
+
+scalarPartUnitConjugationInvariant : ∀ u value →
+  q0 ((quaternion u *q value) *q conjugateQ (quaternion u))
+  ≡ q0 value
+scalarPartUnitConjugationInvariant u value =
+  trans
+    (scalarPartThreeFactorCyclic
+      (quaternion u) value (conjugateQ (quaternion u)))
+    (trans
+      (cong q0
+        (quaternionMultiplyAssociative
+          value (conjugateQ (quaternion u)) (quaternion u)))
+      (trans
+        (cong (λ selected → q0 (value *q selected))
+          (unitConjugateProductIsOne u))
+        (cong q0 (quaternionOneRight value))))
+
 scalarPartTwoFactorCyclicityLevel : ProofLevel
 scalarPartTwoFactorCyclicityLevel = machineChecked
 
@@ -80,3 +115,6 @@ scalarPartThreeFactorCyclicityLevel = machineChecked
 
 scalarPartFourFactorCyclicityLevel : ProofLevel
 scalarPartFourFactorCyclicityLevel = machineChecked
+
+scalarPartUnitConjugationInvarianceLevel : ProofLevel
+scalarPartUnitConjugationInvarianceLevel = machineChecked
