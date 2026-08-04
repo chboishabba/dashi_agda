@@ -14,8 +14,9 @@ module DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact where
 -- infinite series as an optional later consequence rather than a hidden input.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (lzero)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -43,13 +44,13 @@ open OrderedSemiringKernel public
 
 power :
   ∀ {Scalar} → OrderedSemiringKernel Scalar → Scalar → Nat → Scalar
-power kernel ratio zero = one kernel
+power kernel ratio 0 = one kernel
 power kernel ratio (suc exponent) =
   multiply kernel ratio (power kernel ratio exponent)
 
 geometricPartialSum :
   ∀ {Scalar} → OrderedSemiringKernel Scalar → Scalar → Nat → Scalar
-geometricPartialSum kernel ratio zero = zero kernel
+geometricPartialSum kernel ratio 0 = zero kernel
 geometricPartialSum kernel ratio (suc count) =
   add kernel
     (geometricPartialSum kernel ratio count)
@@ -57,7 +58,7 @@ geometricPartialSum kernel ratio (suc count) =
 
 geometricPartialSumZero :
   ∀ {Scalar} (kernel : OrderedSemiringKernel Scalar) ratio →
-  geometricPartialSum kernel ratio zero ≡ zero kernel
+  geometricPartialSum kernel ratio 0 ≡ zero kernel
 geometricPartialSumZero kernel ratio = refl
 
 geometricPartialSumSuccessor :
@@ -101,7 +102,9 @@ record PolynomiallyWeightedGeometricBound
           (power kernel ratio index)
 
     weightedPartialSum : Nat → Scalar
-    weightedPartialSumDefinition : ∀ count → Set
+    weightedPartialSumDefinition : ∀ count →
+      weightedPartialSum (suc count)
+      ≡ add kernel (weightedPartialSum count) (weightedTerm count)
 
     uniformWeightedBound : Scalar
     allFiniteWeightedSumsBounded : ∀ count →

@@ -107,95 +107,95 @@ posQ n = quantity false n
 -- of unlike physical kind even when their numeric carriers coincide.
 
 record Unit (d : Dimension) : Set where
-  constructor unit
+  constructor mkUnit
   field symbol name : String
 
 metre : Unit Length
-metre = unit "m" "metre"
+metre = mkUnit "m" "metre"
 
 kilogram : Unit Mass
-kilogram = unit "kg" "kilogram"
+kilogram = mkUnit "kg" "kilogram"
 
 second : Unit Time
-second = unit "s" "second"
+second = mkUnit "s" "second"
 
 ampere : Unit Current
-ampere = unit "A" "ampere"
+ampere = mkUnit "A" "ampere"
 
 kelvin : Unit Temperature
-kelvin = unit "K" "kelvin"
+kelvin = mkUnit "K" "kelvin"
 
 mole : Unit Amount
-mole = unit "mol" "mole"
+mole = mkUnit "mol" "mole"
 
 candela : Unit LuminousIntensity
-candela = unit "cd" "candela"
+candela = mkUnit "cd" "candela"
 
 hertz : Unit Frequency
-hertz = unit "Hz" "hertz"
+hertz = mkUnit "Hz" "hertz"
 
 newton : Unit Force
-newton = unit "N" "newton"
+newton = mkUnit "N" "newton"
 
 pascal : Unit Pressure
-pascal = unit "Pa" "pascal"
+pascal = mkUnit "Pa" "pascal"
 
 joule : Unit Energy
-joule = unit "J" "joule"
+joule = mkUnit "J" "joule"
 
 watt : Unit Power
-watt = unit "W" "watt"
+watt = mkUnit "W" "watt"
 
 coulomb : Unit Charge
-coulomb = unit "C" "coulomb"
+coulomb = mkUnit "C" "coulomb"
 
 volt : Unit Voltage
-volt = unit "V" "volt"
+volt = mkUnit "V" "volt"
 
 farad : Unit Capacitance
-farad = unit "F" "farad"
+farad = mkUnit "F" "farad"
 
 ohm : Unit Resistance
-ohm = unit "Ω" "ohm"
+ohm = mkUnit "Ω" "ohm"
 
 siemens : Unit Conductance
-siemens = unit "S" "siemens"
+siemens = mkUnit "S" "siemens"
 
 weber : Unit MagneticFlux
-weber = unit "Wb" "weber"
+weber = mkUnit "Wb" "weber"
 
 tesla : Unit MagneticFluxDensity
-tesla = unit "T" "tesla"
+tesla = mkUnit "T" "tesla"
 
 henry : Unit Inductance
-henry = unit "H" "henry"
+henry = mkUnit "H" "henry"
 
 lumen : Unit LuminousFlux
-lumen = unit "lm" "lumen"
+lumen = mkUnit "lm" "lumen"
 
 lux : Unit Illuminance
-lux = unit "lx" "lux"
+lux = mkUnit "lx" "lux"
 
 becquerel : Unit Activity
-becquerel = unit "Bq" "becquerel"
+becquerel = mkUnit "Bq" "becquerel"
 
 gray : Unit AbsorbedDose
-gray = unit "Gy" "gray"
+gray = mkUnit "Gy" "gray"
 
 sievert : Unit AbsorbedDose
-sievert = unit "Sv" "sievert"
+sievert = mkUnit "Sv" "sievert"
 
 katal : Unit CatalyticActivity
-katal = unit "kat" "katal"
+katal = mkUnit "kat" "katal"
 
 joulePerMole : Unit MolarEnergy
-joulePerMole = unit "J mol⁻¹" "joule per mole"
+joulePerMole = mkUnit "J mol⁻¹" "joule per mole"
 
 joulePerMoleKelvin : Unit MolarEntropy
-joulePerMoleKelvin = unit "J mol⁻¹ K⁻¹" "joule per mole kelvin"
+joulePerMoleKelvin = mkUnit "J mol⁻¹ K⁻¹" "joule per mole kelvin"
 
 molePerCubicMetre : Unit MolarConcentration
-molePerCubicMetre = unit "mol m⁻³" "mole per cubic metre"
+molePerCubicMetre = mkUnit "mol m⁻³" "mole per cubic metre"
 
 ------------------------------------------------------------------------
 -- Typed measurement and authority metadata.
