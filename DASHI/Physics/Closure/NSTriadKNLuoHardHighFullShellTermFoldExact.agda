@@ -11,11 +11,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellTermFoldExact where
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Close the finite reindexing part of the r_p Fourier realization.  The
--- official closure already proves that the encoded hard-high physical triad
--- list is exactly the mature analytic-program full-shell pair list.  Mapping
--- any pair contribution over those equal lists, and folding the resulting
--- contribution lists, therefore preserves the exact result and multiplicity.
+-- Close the finite reindexing part of the r_p Fourier realization. The
+-- pre-budget physical owner already contains the exact hard-high physical
+-- triad to mature analytic-program full-shell pair identification. Mapping any
+-- pair contribution over those equal lists, and folding the resulting lists,
+-- therefore preserves the exact result, order and multiplicity. No terminal
+-- localized-gradient budget is used by this theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level)
@@ -24,7 +25,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
-import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Official
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact as PreBudget
 import DASHI.Physics.Closure.NSTriadKNLuoHardHighFullShellPhysicalIdentificationExact as Identification
 import DASHI.Physics.Closure.NSTriadKNPhysicalHardHighTriadSelectionExact as High
 import DASHI.Physics.Closure.NSCompactGammaAnalyticClosureProgram as Closure
@@ -51,18 +52,19 @@ hardHighPairContributionList :
     {Solution : Set s}
     {Time : Set t}
     {Contribution : Set contributionLevel} →
-  (official : Official.OfficialLuoContinuationClosure
+  (data : PreBudget.OfficialLuoPreBudgetData
     InitialDatum Solution Time) →
   (shell : Nat) →
-  (pairContribution : Closure.Pair (Official.program official) → Contribution) →
+  (pairContribution :
+    Closure.Pair (PreBudget.program data) → Contribution) →
   List Contribution
-hardHighPairContributionList official shell pairContribution =
+hardHighPairContributionList data shell pairContribution =
   mapList pairContribution
     (Identification.mapList
       (Identification.encodePhysical
-        (Official.hardHighProgramPairIdentificationAt official shell))
+        (PreBudget.hardHighProgramPairIdentificationAt data shell))
       (High.hardHighPhysicalTriads
-        shell (Official.cubeCutoffAt official shell)))
+        shell (PreBudget.cubeCutoffAt data shell)))
 
 fullShellPairContributionList :
   ∀ {d s t contributionLevel}
@@ -70,18 +72,47 @@ fullShellPairContributionList :
     {Solution : Set s}
     {Time : Set t}
     {Contribution : Set contributionLevel} →
-  (official : Official.OfficialLuoContinuationClosure
+  (data : PreBudget.OfficialLuoPreBudgetData
     InitialDatum Solution Time) →
   (shell : Nat) →
-  (pairContribution : Closure.Pair (Official.program official) → Contribution) →
+  (pairContribution :
+    Closure.Pair (PreBudget.program data) → Contribution) →
   List Contribution
-fullShellPairContributionList official shell pairContribution =
+fullShellPairContributionList data shell pairContribution =
   mapList pairContribution
     (PairKernel.pairs
       (FullShell.pairDataAt
-        (Closure.fullShellFamily (Official.program official))
-        (Official.KAt official shell)
-        (Official.NAt official shell)))
+        (Closure.fullShellFamily (PreBudget.program data))
+        (PreBudget.KAt data shell)
+        (PreBudget.NAt data shell)))
+
+preBudgetHardHighListMatchesProgramFullShell :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t} →
+  (data : PreBudget.OfficialLuoPreBudgetData
+    InitialDatum Solution Time) →
+  (shell : Nat) →
+  Identification.mapList
+    (Identification.encodePhysical
+      (PreBudget.hardHighProgramPairIdentificationAt data shell))
+    (High.hardHighPhysicalTriads
+      shell (PreBudget.cubeCutoffAt data shell))
+  ≡
+  PairKernel.pairs
+    (FullShell.pairDataAt
+      (Closure.fullShellFamily (PreBudget.program data))
+      (PreBudget.KAt data shell)
+      (PreBudget.NAt data shell))
+preBudgetHardHighListMatchesProgramFullShell data shell =
+  Identification.selectedPhysicalListIsFullShellPairList
+    (PreBudget.program data)
+    (PreBudget.KAt data shell)
+    (PreBudget.NAt data shell)
+    shell
+    (PreBudget.cubeCutoffAt data shell)
+    (PreBudget.hardHighProgramPairIdentificationAt data shell)
 
 hardHighContributionListMatchesFullShell :
   ∀ {d s t contributionLevel}
@@ -89,15 +120,16 @@ hardHighContributionListMatchesFullShell :
     {Solution : Set s}
     {Time : Set t}
     {Contribution : Set contributionLevel} →
-  (official : Official.OfficialLuoContinuationClosure
+  (data : PreBudget.OfficialLuoPreBudgetData
     InitialDatum Solution Time) →
   (shell : Nat) →
-  (pairContribution : Closure.Pair (Official.program official) → Contribution) →
-  hardHighPairContributionList official shell pairContribution
-  ≡ fullShellPairContributionList official shell pairContribution
-hardHighContributionListMatchesFullShell official shell pairContribution =
+  (pairContribution :
+    Closure.Pair (PreBudget.program data) → Contribution) →
+  hardHighPairContributionList data shell pairContribution
+  ≡ fullShellPairContributionList data shell pairContribution
+hardHighContributionListMatchesFullShell data shell pairContribution =
   cong (mapList pairContribution)
-    (Official.officialHardHighListMatchesProgramFullShell official shell)
+    (preBudgetHardHighListMatchesProgramFullShell data shell)
 
 hardHighContributionFoldMatchesFullShell :
   ∀ {d s t contributionLevel}
@@ -105,19 +137,20 @@ hardHighContributionFoldMatchesFullShell :
     {Solution : Set s}
     {Time : Set t}
     {Contribution : Set contributionLevel} →
-  (official : Official.OfficialLuoContinuationClosure
+  (data : PreBudget.OfficialLuoPreBudgetData
     InitialDatum Solution Time) →
   (shell : Nat) →
-  (pairContribution : Closure.Pair (Official.program official) → Contribution) →
+  (pairContribution :
+    Closure.Pair (PreBudget.program data) → Contribution) →
   (combine : Contribution → Contribution → Contribution) →
   (zero : Contribution) →
   foldList combine zero
-    (hardHighPairContributionList official shell pairContribution)
+    (hardHighPairContributionList data shell pairContribution)
   ≡
   foldList combine zero
-    (fullShellPairContributionList official shell pairContribution)
+    (fullShellPairContributionList data shell pairContribution)
 hardHighContributionFoldMatchesFullShell
-  official shell pairContribution combine zero =
+  data shell pairContribution combine zero =
   cong (foldList combine zero)
     (hardHighContributionListMatchesFullShell
-      official shell pairContribution)
+      data shell pairContribution)
