@@ -44,7 +44,7 @@ payloadFromModelLeaf :
 payloadFromModelLeaf = Entropy.P06FromModelLeafDischargePackage
 
 SkeletonCountingResult :
-  Entropy.P06ModelLeafDischargePackage → Set₁
+  Entropy.P06ModelLeafDischargePackage → Set
 SkeletonCountingResult package =
   let payload = payloadFromModelLeaf package
       graphAdapter =
@@ -57,7 +57,7 @@ SkeletonCountingResult package =
            ≤ C-skeleton ^ diameter)
 
 DecorationCountingResult :
-  Entropy.P06ModelLeafDischargePackage → Set₁
+  Entropy.P06ModelLeafDischargePackage → Set
 DecorationCountingResult package =
   let payload = payloadFromModelLeaf package
       graphAdapter =
@@ -80,7 +80,7 @@ DecorationCountingResult package =
            ≤ C-decoration ^ diameter)
 
 AnimalCountingResult :
-  Entropy.P06ModelLeafDischargePackage → Set₁
+  Entropy.P06ModelLeafDischargePackage → Set
 AnimalCountingResult package =
   let payload = payloadFromModelLeaf package
       graphAdapter =
