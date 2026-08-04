@@ -53,6 +53,15 @@ sumReal : List ℝ → ℝ
 sumReal [] = zeroR
 sumReal (value ∷ values) = value +R sumReal values
 
+mapComposeExact :
+  ∀ {A B C : Set} (outer : B → C) (inner : A → B) values →
+  map outer (map inner values)
+  ≡ map (λ value → outer (inner value)) values
+mapComposeExact outer inner [] = refl
+mapComposeExact outer inner (value ∷ values) =
+  cong (outer (inner value) ∷_)
+    (mapComposeExact outer inner values)
+
 scalarPartSumQuaternion : ∀ values →
   q0 (Product.sumQuaternion values)
   ≡ sumReal (map q0 values)
@@ -106,8 +115,12 @@ wilsonSecondVariationIsAtomSum factors =
       (cong -R_
         (scalarPartSumQuaternion
           (Product.secondVariationTerms factors)))
-      (negativeFiniteSum
-        (map q0 (Product.secondVariationTerms factors))))
+      (trans
+        (negativeFiniteSum
+          (map q0 (Product.secondVariationTerms factors)))
+        (cong sumReal
+          (mapComposeExact -R_ q0
+            (Product.secondVariationTerms factors)))))
 
 fourLinkWilsonScalarAtomCountExact :
   ∀ first second third fourth →
