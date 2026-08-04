@@ -71,14 +71,6 @@ centeredOffsetSignedCount (Centered.negative index) =
   Contours.signedCount Contours.negative
     (suc (Centered.centeredOffsetRank index))
 
-signedCountMagnitudeExact :
-  ∀ {radius} (offset : Centered.CenteredOffset radius) →
-  Contours.count (centeredOffsetSignedCount offset)
-  ≡ Centered.centeredOffsetMagnitude offset
-signedCountMagnitudeExact Centered.centre = refl
-signedCountMagnitudeExact (Centered.positive index) = refl
-signedCountMagnitudeExact (Centered.negative index) = refl
-
 centeredPointDisplacement :
   ∀ {radius} →
   Centered.CenteredBlockPoint4 radius → Contours.Displacement4
@@ -127,107 +119,39 @@ activeSegmentsCountExact : ∀ displacement →
       (Length.addNat (Contours.count (Contours.coordinate1 displacement))
         (Length.addNat (Contours.count (Contours.coordinate2 displacement))
           (Contours.count (Contours.coordinate3 displacement))))
-activeSegmentsCountExact displacement =
-  trans
-    (segmentCountSumAppend
-      (Contours.activeSegment Contours.axis0
-        (Contours.coordinate0 displacement))
+activeSegmentsCountExact displacement
+  rewrite segmentCountSumAppend
+    (Contours.activeSegment Contours.axis0
+      (Contours.coordinate0 displacement))
+    (Contours._++_
       (Contours.activeSegment Contours.axis1
-        (Contours.coordinate1 displacement)
-       Contours.++
-       (Contours.activeSegment Contours.axis2
-          (Contours.coordinate2 displacement)
-        Contours.++
-        Contours.activeSegment Contours.axis3
+        (Contours.coordinate1 displacement))
+      (Contours._++_
+        (Contours.activeSegment Contours.axis2
+          (Contours.coordinate2 displacement))
+        (Contours.activeSegment Contours.axis3
           (Contours.coordinate3 displacement))))
-    (trans
-      (cong
-        (λ tail → Length.addNat
-          (Length.segmentCountSum
-            (Contours.activeSegment Contours.axis0
-              (Contours.coordinate0 displacement))) tail)
-        (trans
-          (segmentCountSumAppend
-            (Contours.activeSegment Contours.axis1
-              (Contours.coordinate1 displacement))
-            (Contours.activeSegment Contours.axis2
-              (Contours.coordinate2 displacement)
-             Contours.++
-             Contours.activeSegment Contours.axis3
-              (Contours.coordinate3 displacement)))
-          (cong
-            (Length.addNat
-              (Length.segmentCountSum
-                (Contours.activeSegment Contours.axis1
-                  (Contours.coordinate1 displacement))))
-            (segmentCountSumAppend
-              (Contours.activeSegment Contours.axis2
-                (Contours.coordinate2 displacement))
-              (Contours.activeSegment Contours.axis3
-                (Contours.coordinate3 displacement)))))))
-      (cong
-        (λ first → Length.addNat first
-          (Length.addNat
-            (Length.segmentCountSum
-              (Contours.activeSegment Contours.axis1
-                (Contours.coordinate1 displacement)))
-            (Length.addNat
-              (Length.segmentCountSum
-                (Contours.activeSegment Contours.axis2
-                  (Contours.coordinate2 displacement)))
-              (Length.segmentCountSum
-                (Contours.activeSegment Contours.axis3
-                  (Contours.coordinate3 displacement))))))
-        (activeSegmentCountExact Contours.axis0
-          (Contours.coordinate0 displacement)))
-      |> λ firstRewrite →
-        trans firstRewrite
-          (cong
-            (Length.addNat
-              (Contours.count (Contours.coordinate0 displacement)))
-            (cong
-              (λ second → Length.addNat second
-                (Length.addNat
-                  (Length.segmentCountSum
-                    (Contours.activeSegment Contours.axis2
-                      (Contours.coordinate2 displacement)))
-                  (Length.segmentCountSum
-                    (Contours.activeSegment Contours.axis3
-                      (Contours.coordinate3 displacement)))))
-              (activeSegmentCountExact Contours.axis1
-                (Contours.coordinate1 displacement))))
-      |> λ secondRewrite →
-        trans secondRewrite
-          (cong
-            (Length.addNat
-              (Contours.count (Contours.coordinate0 displacement)))
-            (cong
-              (Length.addNat
-                (Contours.count (Contours.coordinate1 displacement)))
-              (cong
-                (λ third → Length.addNat third
-                  (Length.segmentCountSum
-                    (Contours.activeSegment Contours.axis3
-                      (Contours.coordinate3 displacement))))
-                (activeSegmentCountExact Contours.axis2
-                  (Contours.coordinate2 displacement)))))
-      |> λ thirdRewrite →
-        trans thirdRewrite
-          (cong
-            (Length.addNat
-              (Contours.count (Contours.coordinate0 displacement)))
-            (cong
-              (Length.addNat
-                (Contours.count (Contours.coordinate1 displacement)))
-              (cong
-                (Length.addNat
-                  (Contours.count (Contours.coordinate2 displacement)))
-                (activeSegmentCountExact Contours.axis3
-                  (Contours.coordinate3 displacement))))))
-  where
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    value |> function = function value
+  | segmentCountSumAppend
+      (Contours.activeSegment Contours.axis1
+        (Contours.coordinate1 displacement))
+      (Contours._++_
+        (Contours.activeSegment Contours.axis2
+          (Contours.coordinate2 displacement))
+        (Contours.activeSegment Contours.axis3
+          (Contours.coordinate3 displacement)))
+  | segmentCountSumAppend
+      (Contours.activeSegment Contours.axis2
+        (Contours.coordinate2 displacement))
+      (Contours.activeSegment Contours.axis3
+        (Contours.coordinate3 displacement))
+  | activeSegmentCountExact Contours.axis0
+      (Contours.coordinate0 displacement)
+  | activeSegmentCountExact Contours.axis1
+      (Contours.coordinate1 displacement)
+  | activeSegmentCountExact Contours.axis2
+      (Contours.coordinate2 displacement)
+  | activeSegmentCountExact Contours.axis3
+      (Contours.coordinate3 displacement) = refl
 
 centeredPointCountSumBound :
   ∀ {radius} (point : Centered.CenteredBlockPoint4 radius) →
@@ -236,17 +160,13 @@ centeredPointCountSumBound :
   ≤ Length.addNat radius
       (Length.addNat radius (Length.addNat radius radius))
 centeredPointCountSumBound
-    (Carrier.pair (Carrier.pair offset0 offset1)
+    point@(Carrier.pair (Carrier.pair offset0 offset1)
       (Carrier.pair offset2 offset3)) =
   subst
     (λ selected →
       selected
       ≤ Length.addNat _ (Length.addNat _ (Length.addNat _ _)))
-    (sym
-      (activeSegmentsCountExact
-        (centeredPointDisplacement
-          (Carrier.pair (Carrier.pair offset0 offset1)
-            (Carrier.pair offset2 offset3)))))
+    (sym (activeSegmentsCountExact (centeredPointDisplacement point)))
     (NatP.+-mono-≤
       (centeredOffsetMagnitudeBound offset0)
       (NatP.+-mono-≤
