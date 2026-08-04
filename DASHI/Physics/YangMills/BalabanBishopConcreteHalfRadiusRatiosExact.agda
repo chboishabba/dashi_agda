@@ -45,13 +45,19 @@ bishopOneHalf = BishopReal._⋆ oneHalf
 bishopOneTwentyFourth = BishopReal._⋆ oneTwentyFourth
 bishopOneEighth = BishopReal._⋆ oneEighth
 
-embeddedPositiveRationalNonnegative :
-  (positive : ℚᵘ) →
-  BishopReal.NonNegative (BishopReal._⋆ positive)
-embeddedPositiveRationalNonnegative positive =
+bishopOneSixthNonnegative :
+  BishopReal.NonNegative bishopOneSixth
+bishopOneSixthNonnegative =
   BishopProperties.0≤x⇒nonNegx
     (BishopProperties.p≤q⇒p⋆≤q⋆
-      0ℚᵘ positive (ℚP.nonNegative⁻¹ positive))
+      0ℚᵘ oneSixth (ℚP.nonNegative⁻¹ oneSixth))
+
+bishopOneHalfNonnegative :
+  BishopReal.NonNegative bishopOneHalf
+bishopOneHalfNonnegative =
+  BishopProperties.0≤x⇒nonNegx
+    (BishopProperties.p≤q⇒p⋆≤q⋆
+      0ℚᵘ oneHalf (ℚP.nonNegative⁻¹ oneHalf))
 
 bishopQuarterTimesSixthEquivalentTwentyFourth :
   BishopReal._≃_
@@ -103,7 +109,7 @@ bishopSineRatioBelowTwentyFourth value insideHalf =
       multipliedBound =
         BishopProperties.*-monoʳ-≤-nonNeg
           squareBelowQuarter
-          (embeddedPositiveRationalNonnegative oneSixth)
+          bishopOneSixthNonnegative
   in BishopProperties.≤-respʳ-≃
        bishopQuarterTimesSixthEquivalentTwentyFourth
        multipliedBound
@@ -120,7 +126,7 @@ bishopCosineRatioBelowEighth value insideHalf =
       multipliedBound =
         BishopProperties.*-monoʳ-≤-nonNeg
           squareBelowQuarter
-          (embeddedPositiveRationalNonnegative oneHalf)
+          bishopOneHalfNonnegative
   in BishopProperties.≤-respʳ-≃
        bishopQuarterTimesHalfEquivalentEighth
        multipliedBound
