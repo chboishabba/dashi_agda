@@ -16,9 +16,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact where
 -- DOI: 10.1007/BF02547354.
 --
 -- PURPOSE
--- Remove a circularity from the official continuation architecture.  The
+-- Remove a circularity from the official continuation architecture. The
 -- previous aggregate owned terminalBudgetAt, which is already Luo's localized
--- hypothesis.  This module separates:
+-- hypothesis. This module separates:
 --
 --   1. pre-budget physical data and exact carrier identifications;
 --   2. a derived hard-terminal-window budget family;
@@ -156,6 +156,9 @@ record DerivedLuoTerminalBudgetFamily
     hardBudgetNonnegative :
       (shell : Nat) → 0ℚ ≤ hardBudgetAt shell
 
+    universalDeltaNonnegative :
+      0ℚ ≤ OfficialLuo.universalDeltaBKM (sourceCarrier data)
+
     hardIntegralBelowBudget :
       (shell : Nat) →
       MultiplierAbstract.hardTerminalWindowIntegral
@@ -190,8 +193,7 @@ derivedTerminalBudgetAt {data = data} budgets shell = record
   { hardBudget = hardBudgetAt budgets shell
   ; universalThreshold = OfficialLuo.universalDeltaBKM (sourceCarrier data)
   ; hardBudgetNonnegative = hardBudgetNonnegative budgets shell
-  ; universalThresholdNonnegative =
-      OfficialLuo.universalDeltaNonnegative (sourceCarrier data)
+  ; universalThresholdNonnegative = universalDeltaNonnegative budgets
   ; hardIntegralBelowBudget = hardIntegralBelowBudget budgets shell
   ; scaledBudgetBelowThreshold = scaledBudgetBelowLuoDelta budgets shell
   }
