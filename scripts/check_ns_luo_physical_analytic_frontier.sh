@@ -30,13 +30,18 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoWeightedIncrementFourierIntegrationCutsetExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreePairCoefficientCutsetExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoMultiplierReceiptAndSourceSchurCutsetExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoAnalyticFractionalPowerIdentificationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoMeanValueGronwallReductionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoPhysicalBlockDecayReductionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteInfiniteRealPromotionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSubmissionDependencyCutsetExact.agda
   DASHI/Physics/Closure/NSTriadKNPeriodicNavierStokesSubmissionTheoremExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGlobalPhysicalSolutionReductionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSubmissionAuditReceiptExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCoreSourceFidelityInventoryExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSubmissionLemmaCrosswalkExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCriticalPathCompositionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionCompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompleteSubmissionFrontierReceipt.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalAnalyticFrontierValidation.agda
 )
