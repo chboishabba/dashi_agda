@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.BalabanP33ConfiguredSignedAtomListsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ)
+open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -228,11 +228,10 @@ configuredSignedAtomsGivePath4PhysicalCoercivity :
       Background CurvatureCell TransportCell ChartCell GaugeCell ConstraintCell)
     background state gaugeFixingEnergy blockPenaltyEnergy →
   Hodge.BondComponentMeanZero state →
-  Data.Rational._≤_ Data.Rational.0ℚ gaugeFixingEnergy →
-  Data.Rational._≤_ Data.Rational.0ℚ blockPenaltyEnergy →
-  P33.p33PhysicalFloor Data.Rational._*_ Hodge.bondNormSq state
-  Data.Rational._≤_
-    P33.physicalHessianEnergy
+  0ℚ ≤ gaugeFixingEnergy →
+  0ℚ ≤ blockPenaltyEnergy →
+  P33.p33PhysicalFloor * Hodge.bondNormSq state
+  ≤ P33.physicalHessianEnergy
       (Hodge.referenceHodgeEnergy
         state gaugeFixingEnergy blockPenaltyEnergy)
       (Five.totalSignedRemainder
