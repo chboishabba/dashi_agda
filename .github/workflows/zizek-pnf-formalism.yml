@@ -16,6 +16,7 @@ on:
       - 'DASHI/EverythingZizekPNFExtension.agda'
       - 'DASHI/EverythingKantLacanPNFExtension.agda'
       - 'scripts/check_zizek_pnf_formalism.sh'
+      - 'scripts/check_kant_lacan_extension.sh'
       - '.github/workflows/zizek-pnf-formalism.yml'
   workflow_dispatch:
 
@@ -29,4 +30,4 @@ jobs:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
       - name: Check constructive, critical, discourse, stage and authority boundaries
-        run: nix develop --command bash scripts/check_zizek_pnf_formalism.sh
+        run: nix develop --command bash scripts/check_kant_lacan_extension.sh
