@@ -21,14 +21,14 @@ module DASHI.Physics.Closure.NSTriadKNLuoMultiplierReceiptAndSourceSchurCutsetEx
 -- arXiv DOI: 10.48550/arXiv.1803.05569.
 --
 -- PURPOSE
--- Expose the exact two constructor boundaries for Stage B.  Concrete finite
+-- Expose the exact two constructor boundaries for Stage B. Concrete finite
 -- convolution receipts produce the official periodic multiplier realization;
 -- concrete source/physical identifications produce the weighted-Schur theorem.
 -- Neither final estimate is requested independently once its physical leaves
 -- are supplied.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤)
@@ -41,7 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoExactFluxKernelDecompositionExact as So
 import DASHI.Physics.Closure.NSTriadKNLuoCanonicalSourceSchurIdentificationExact as SourceSchur
 
 OfficialMultiplierObservableReceipts :
-  ∀ {st} → Set st → Set st → Set (Agda.Primitive.lsuc st)
+  ∀ {st} → Set st → Set st → Set (lsuc st)
 OfficialMultiplierObservableReceipts =
   FiniteMultiplier.FinitePeriodicMultiplierInputs
 
