@@ -124,10 +124,9 @@ spatialIncrementGivesProjectedProductCoefficient identification
         | lowLowProductCoefficientMeaning identification
         | projectedProductCoefficientMeaning identification =
   ℚRing.solve
-    (incrementKernelCoefficient (multiplierData identification)
-      ∷ highHighCoefficient (multiplierData identification)
-      ∷ lowLowCoefficient (multiplierData identification)
-      ∷ projectedProductMultiplier (multiplierData identification)
+    (chiLeft (multiplierData identification)
+      ∷ chiRight (multiplierData identification)
+      ∷ chiOutput (multiplierData identification)
       ∷ triadCoefficient identification
       ∷ [])
 
