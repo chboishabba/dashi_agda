@@ -21,8 +21,8 @@ open import Agda.Primitive using (Level; Setω)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (sym)
+import Data.Rational.Base as ℚBase
+open ℚBase using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNLuoOfficialPreBudgetDataExact as PreBudget
 import DASHI.Physics.Closure.NSTriadKNLuoConcreteRadialMultiplierKernelExact as Multiplier
@@ -53,7 +53,7 @@ record LuoFixedShiftCoreInputs : Set₁ where
 
     lessOrEqualMeaning :
       (left right : ℚ) →
-      lessOrEqual left right ≡ Data.Rational.Base._≤_ left right
+      lessOrEqual left right ≡ ℚBase._≤_ left right
 
     twoMinusAlpha halfTwoMinusAlpha correctedShiftExponent : ℚ
     correctedShiftCoefficient : ℚ
