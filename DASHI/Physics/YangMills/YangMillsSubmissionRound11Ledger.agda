@@ -15,6 +15,22 @@ configuredIdentificationReducerClaim = namedClaim
   machineChecked
   (checkedEvidence Receipt.round11TermIdentificationReducerClosed)
 
+fullHalfBallChartReducerClaim : NamedClaim
+fullHalfBallChartReducerClaim = namedClaim
+  "Round 11: direct and reflected half-ball charts transport sine oddly, cosine evenly and retain representative interlacing"
+  (Receipt.orientedFullHalfBallChartReducerDischarged
+    Receipt.round11Receipt ≡ true)
+  machineChecked
+  (checkedEvidence Receipt.round11FullHalfBallChartReducerClosed)
+
+constructiveSignSelectionOpenClaim : NamedClaim
+constructiveSignSelectionOpenClaim = namedClaim
+  "Round 11: selecting an oriented chart for an arbitrary Bishop real remains an explicit constructive input"
+  (Receipt.constructiveSignChartSelectionDischarged
+    Receipt.round11Receipt ≡ false)
+  machineChecked
+  (checkedEvidence Receipt.round11SignChartSelectionRemainsOpen)
+
 directRatioTailReducerClaim : NamedClaim
 directRatioTailReducerClaim = namedClaim
   "Round 11: tail seed plus direct successor absorption gives all-index polynomial domination"
@@ -47,6 +63,14 @@ diameterNoGoClaim = namedClaim
     Receipt.round11Receipt ≡ true)
   machineChecked
   (checkedEvidence Receipt.round11UnrestrictedDiameterInferenceRejected)
+
+p11CanonicalConstantClaim : NamedClaim
+p11CanonicalConstantClaim = namedClaim
+  "Round 11: the lightweight P11 lane consumes the canonical P06 skeleton-decoration-fibre animal constant"
+  (Receipt.lightweightP11CanonicalConstantWired
+    Receipt.round11Receipt ≡ true)
+  machineChecked
+  (checkedEvidence Receipt.round11P11CanonicalConstantWired)
 
 physicalEndpointOpenClaim : NamedClaim
 physicalEndpointOpenClaim = namedClaim
