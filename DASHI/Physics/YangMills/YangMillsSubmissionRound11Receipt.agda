@@ -31,6 +31,7 @@ record Round11Receipt : Set where
     gate4SevenPackageDecompositionDischarged : Bool
     p33P10Gate4PhysicalInputsDischarged : Bool
 
+    fixedLatticeToContinuumDependencySpineAdded : Bool
     fixedLatticeGapChainDischarged : Bool
     continuumOSAndSIMassGapDischarged : Bool
 
@@ -59,10 +60,11 @@ round11Receipt = record
   ; p33BeforeP10DependencyEnforced = true
   ; gate4SevenPackageDecompositionDischarged = true
   ; p33P10Gate4PhysicalInputsDischarged = false
+  ; fixedLatticeToContinuumDependencySpineAdded = true
   ; fixedLatticeGapChainDischarged = false
   ; continuumOSAndSIMassGapDischarged = false
   ; verificationBoundary =
-      "Round eleven proves structural reducers and dependency order only: exact configured term definitions imply the Bishop setoid identification; direct and reflected half-ball charts transport represented sine oddly and cosine evenly while retaining concrete representative interlacing; a tail seed plus direct successor absorption implies the complete polynomial prefix/tail bound; the periodic support graph owns its root and degree-eight enumeration; superlinear families refute unrestricted affine diameter complexity; the lightweight P11 lane consumes only the canonical P06 animal constant; and P33 is required before P10 and seven Gate-4 packages. Literal configured definitions, constructive sign-chart selection for an arbitrary Bishop real, physical support semantics, a valid thin/direct P06 counting route, physical startup/activity/neighbourhood estimates, P33/P10/Gate-4 estimates, the P11 entropy payment, fixed-lattice gap and continuum OS/SI endpoint remain fail-closed until separately inhabited and kernel-validated."
+      "Round eleven proves structural reducers and dependency order only: exact configured term definitions imply the Bishop setoid identification; direct and reflected half-ball charts transport represented sine oddly and cosine evenly while retaining concrete representative interlacing; a tail seed plus direct successor absorption implies the complete polynomial prefix/tail bound; the periodic support graph owns its root and degree-eight enumeration; superlinear families refute unrestricted affine diameter complexity; the lightweight P11 lane consumes only the canonical P06 animal constant; P33 is required before P10 and seven Gate-4 packages; and the global programme is split into fixed-lattice DLR/LSI/gap, cross-scale Cauchy control, thermodynamic/cutoff limits, OS reconstruction and physical SI scaling. Literal configured definitions, constructive sign-chart selection for an arbitrary Bishop real, physical support semantics, a valid thin/direct P06 counting route, physical startup/activity/neighbourhood estimates, P33/P10/Gate-4 estimates, the P11 entropy payment, fixed-lattice gap and continuum OS/SI endpoint remain fail-closed until separately inhabited and kernel-validated."
   }
 
 round11TermIdentificationReducerClosed :
@@ -96,6 +98,10 @@ round11UnrestrictedDiameterInferenceRejected = refl
 round11P11CanonicalConstantWired :
   lightweightP11CanonicalConstantWired round11Receipt ≡ true
 round11P11CanonicalConstantWired = refl
+
+round11GlobalDependencySpineAdded :
+  fixedLatticeToContinuumDependencySpineAdded round11Receipt ≡ true
+round11GlobalDependencySpineAdded = refl
 
 round11PhysicalEndpointRemainsOpen :
   continuumOSAndSIMassGapDischarged round11Receipt ≡ false
