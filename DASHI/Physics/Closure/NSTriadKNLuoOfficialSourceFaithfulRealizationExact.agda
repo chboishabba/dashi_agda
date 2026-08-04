@@ -17,11 +17,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoOfficialSourceFaithfulRealizationExact 
 -- claims of a uniform estimate over the ambient Solution type.
 --
 -- The finite hard-high/full-shell reindexing, equation-(4.2) J-range assembly,
--- and shell-uniform decay are all derived automatically.  The input package
--- supplies the analytic spatial increment identity, the physical per-mode
--- inequality against one finite interaction fold, the Step-1/Gronwall bounds,
--- and the physical recursion/correction budgets; no final Fourier fold,
--- equation-(4.2) decomposition, or decay conclusion can be chosen separately.
+-- fixed-block decay, and final Section-4 composition are all derived. The input
+-- package supplies the analytic spatial increment identity, the physical
+-- per-mode inequality, the four explicit Step-1 bounds, mean-value/Gronwall
+-- data, and the physical recursion/correction budgets. No final Fourier fold,
+-- equation-(4.2) decomposition, decay conclusion, or opaque continuity theorem
+-- can be chosen independently.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; Setω)
@@ -38,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoOfficialIncrementKernelFullShellAdapter
 import DASHI.Physics.Closure.NSTriadKNLuoThreePiecePhysicalSchurAdapterExact as ThreePiece
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeCommutatorEvolutionExact as ModeEvolution
 import DASHI.Physics.Closure.NSTriadKNLuoPerModeFiniteAssemblyAdapterExact as PerModeAdapter
+import DASHI.Physics.Closure.NSTriadKNLuoSection4ContinuityConstructorExact as Section4Constructor
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftUniformBootstrapExact as Uniform
 import DASHI.Physics.Closure.NSTriadKNLuoFixedShiftBootstrapConstructorExact as BootstrapConstructor
 import DASHI.Physics.Closure.NSTriadKNLuoAlphaThreeHalvesConstantsExact as Alpha
@@ -162,13 +164,16 @@ record OfficialSourceFaithfulNonlinearInputs
         (BootstrapConstructor.luoFixedShiftBootstrap
           fixedShiftBootstrapInputs)
 
-    section4Continuity :
-      ModeEvolution.LuoSection4ContinuityBootstrap
+    Section4Time : Set
+
+    section4ContinuityInputs :
+      Section4Constructor.LuoSection4ContinuityInputs
         (PerModeAdapter.perModeEvolutionFromFiniteAssembly
           perModeFiniteInputs)
+        Section4Time
 
     section4UsesSelectedState :
-      ModeEvolution.state section4Continuity ≡ tt
+      Section4Constructor.state section4ContinuityInputs ≡ tt
 
     SelectedStateRepresentsOfficialSolution : Set
     selectedStateRepresentsOfficialSolution :
@@ -223,6 +228,20 @@ officialFixedShiftBootstrap :
 officialFixedShiftBootstrap inputs =
   BootstrapConstructor.luoFixedShiftBootstrap
     (fixedShiftBootstrapInputs inputs)
+
+officialSection4Continuity :
+  ∀ {d s t}
+    {InitialDatum : Set d}
+    {Solution : Set s}
+    {Time : Set t}
+    {closure : Official.OfficialLuoContinuationClosure
+      InitialDatum Solution Time} →
+  (inputs : OfficialSourceFaithfulNonlinearInputs closure) →
+  ModeEvolution.LuoSection4ContinuityBootstrap
+    (officialPerModeEvolution inputs)
+officialSection4Continuity inputs =
+  Section4Constructor.section4ContinuityBootstrap
+    (section4ContinuityInputs inputs)
 
 officialThreePieceAdapter :
   ∀ {d s t}
@@ -281,7 +300,7 @@ officialCanonicalPhysicalRealization {closure = closure} inputs = record
   ; perModeEvolution = officialPerModeEvolution inputs
   ; fixedShiftBootstrap = officialFixedShiftBootstrap inputs
   ; alphaAboveOneEntry = alphaAboveOneEntry inputs
-  ; section4Continuity = section4Continuity inputs
+  ; section4Continuity = officialSection4Continuity inputs
   ; SelectedStateRepresentsOfficialSolution =
       SelectedStateRepresentsOfficialSolution inputs
   ; selectedStateRepresentsOfficialSolution =
@@ -309,7 +328,7 @@ officialCanonicalPhysicalRealization {closure = closure} inputs = record
   ; perModeShellsMatchOfficialLittlewoodPaleyShells =
       perModeShellsMatchOfficialLittlewoodPaleyShells inputs
   ; Section4UsesSelectedState =
-      ModeEvolution.state (section4Continuity inputs) ≡ tt
+      ModeEvolution.state (officialSection4Continuity inputs) ≡ tt
   ; section4UsesSelectedState = section4UsesSelectedState inputs
   }
 
@@ -336,6 +355,9 @@ finiteIncrementKernelReindexingDerived = true
 finiteEquation42RangeAssemblyDerived : Bool
 finiteEquation42RangeAssemblyDerived = true
 
+section4FinalCompositionDerived : Bool
+section4FinalCompositionDerived = true
+
 fixedShiftDecayDerivedByBlockInduction : Bool
 fixedShiftDecayDerivedByBlockInduction = true
 
@@ -359,6 +381,10 @@ finiteIncrementKernelReindexingDerivedIsTrue = refl
 finiteEquation42RangeAssemblyDerivedIsTrue :
   finiteEquation42RangeAssemblyDerived ≡ true
 finiteEquation42RangeAssemblyDerivedIsTrue = refl
+
+section4FinalCompositionDerivedIsTrue :
+  section4FinalCompositionDerived ≡ true
+section4FinalCompositionDerivedIsTrue = refl
 
 fixedShiftDecayDerivedByBlockInductionIsTrue :
   fixedShiftDecayDerivedByBlockInduction ≡ true
