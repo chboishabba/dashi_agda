@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanP10P33PhysicalCutsetExact
 import DASHI.Physics.YangMills.BalabanGate4ParityIntegrationExact
 import DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact
 import DASHI.Physics.YangMills.YangMillsRGParitySISpineExact
+import DASHI.Physics.YangMills.YangMillsSubmissionRound9ExactCutset
 import DASHI.Physics.YangMills.YangMillsSubmissionRound9SourceAudit
 import DASHI.Physics.YangMills.YangMillsSubmissionRound9Ledger
 import DASHI.Physics.YangMills.YangMillsSubmissionRound9Receipt
