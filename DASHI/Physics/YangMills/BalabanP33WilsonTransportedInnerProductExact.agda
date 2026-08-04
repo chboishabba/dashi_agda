@@ -15,21 +15,26 @@ module DASHI.Physics.YangMills.BalabanP33WilsonTransportedInnerProductExact wher
 --
 -- DASHI CONTRIBUTION
 --
--- Identify the scalar part of a product of two pure-imaginary quaternions with
--- the negative Euclidean su(2) inner product:
+-- The scalar part of a pure-imaginary quaternion multiplied by an arbitrary
+-- quaternion depends only on the latter's imaginary part:
 --
---   -q0(X Y) = <X,Y>.
+--   -q0(X Q) = <X, Im(Q)>.
 --
--- Combining this polynomial identity with the repository's literal
--- quaternion-conjugation definition of Ad proves the transported Wilson atom
--- factorisation
+-- Hence every ordered first/first Wilson atom
 --
---   -q0(X (u Y u^-1)) = <X, Ad_u Y>.
+--   -q0(P X M Y S)
 --
--- This is the concrete trace/inner-product step needed to turn the ordered
--- first/first quaternion atoms in the nonzero-background Wilson Hessian into
--- factorised adjoint-transport quadratic forms.  No trace pairing or
--- factorisation premise remains at this leaf.
+-- is, after exact five-factor cyclicity, the concrete bilinear form
+--
+--   <X, Im(M Y S P)>.
+--
+-- The familiar transported identity
+--
+--   -q0(X (u Y u^-1)) = <X, Ad_u Y>
+--
+-- is recovered as a special case.  This closes the trace-to-factorised-form
+-- step for all twelve ordered cross placements without assuming a matrix trace
+-- or an abstract atom factorisation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -42,30 +47,40 @@ open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
 open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
   (solveComputed; computed)
 open RealPolynomialSolver using
-  (Polynomial; con; _:=_; _:+_; _:*_; :-_)
+  (Polynomial; con; _:=_; :-_)
 open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
   (q0P)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (quaternion; conjugateQ; _*q_; q0)
+  (Quaternion; quat; quaternion; conjugateQ; _*q_; q0)
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
-  (su2Lie; lieQuaternion; su2Adjoint; lieQuaternionAdjoint)
+  (SU2LieAlgebra; su2Lie; lieQuaternion; su2Adjoint; lieQuaternionAdjoint)
 open import DASHI.Physics.YangMills.BalabanSU2AdjointInnerProduct using
   (su2Dot)
 open import DASHI.Physics.YangMills.BalabanSU2LieBracket using (dotP)
+import DASHI.Physics.YangMills.BalabanP33QuaternionScalarCyclicityExact as Cyclic
 
 zeroP : ∀ {n} → Polynomial n
 zeroP = con zeroCoefficient
 
+quaternionImaginaryPart : Quaternion → SU2LieAlgebra
+quaternionImaginaryPart (quat scalar x y z) = su2Lie x y z
+
+pureImaginaryArbitraryRightScalarProduct : ∀ X value →
+  -R (q0 (lieQuaternion X *q value))
+  ≡ su2Dot X (quaternionImaginaryPart value)
+pureImaginaryArbitraryRightScalarProduct
+    (su2Lie x₁ y₁ z₁) (quat scalar x₂ y₂ z₂) =
+  solveComputed 7
+    (λ x₁ y₁ z₁ scalar x₂ y₂ z₂ →
+      :- (q0P zeroP x₁ y₁ z₁ scalar x₂ y₂ z₂)
+      := dotP x₁ y₁ z₁ x₂ y₂ z₂)
+    computed x₁ y₁ z₁ scalar x₂ y₂ z₂
+
 pureImaginaryScalarProduct : ∀ X Y →
   -R (q0 (lieQuaternion X *q lieQuaternion Y))
   ≡ su2Dot X Y
-pureImaginaryScalarProduct
-    (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) =
-  solveComputed 6
-    (λ x₁ y₁ z₁ x₂ y₂ z₂ →
-      :- (q0P zeroP x₁ y₁ z₁ zeroP x₂ y₂ z₂)
-      := dotP x₁ y₁ z₁ x₂ y₂ z₂)
-    computed x₁ y₁ z₁ x₂ y₂ z₂
+pureImaginaryScalarProduct X Y =
+  pureImaginaryArbitraryRightScalarProduct X (lieQuaternion Y)
 
 transportedPureImaginaryScalarProduct :
   ∀ X u Y →
@@ -88,11 +103,39 @@ explicitConjugationScalarProduct X u Y =
       (sym (lieQuaternionAdjoint u Y)))
     (transportedPureImaginaryScalarProduct X u Y)
 
+orderedWilsonCrossAtomOperator :
+  Quaternion → Quaternion → Quaternion →
+  SU2LieAlgebra → SU2LieAlgebra
+orderedWilsonCrossAtomOperator prefix middle suffix Y =
+  quaternionImaginaryPart
+    (((middle *q lieQuaternion Y) *q suffix) *q prefix)
+
+orderedWilsonCrossAtomFactorisation :
+  ∀ prefix X middle Y suffix →
+  -R (q0
+    ((((prefix *q lieQuaternion X) *q middle)
+      *q lieQuaternion Y) *q suffix))
+  ≡ su2Dot X
+      (orderedWilsonCrossAtomOperator prefix middle suffix Y)
+orderedWilsonCrossAtomFactorisation prefix X middle Y suffix =
+  trans
+    (cong -R_
+      (Cyclic.scalarPartFiveFactorCyclic
+        prefix (lieQuaternion X) middle (lieQuaternion Y) suffix))
+    (pureImaginaryArbitraryRightScalarProduct X
+      (((middle *q lieQuaternion Y) *q suffix) *q prefix))
+
 wilsonPureImaginaryTracePairingLevel : ProofLevel
 wilsonPureImaginaryTracePairingLevel = machineChecked
+
+wilsonArbitraryRightFactorisationLevel : ProofLevel
+wilsonArbitraryRightFactorisationLevel = machineChecked
 
 wilsonTransportedAdjointPairingLevel : ProofLevel
 wilsonTransportedAdjointPairingLevel = machineChecked
 
 wilsonExplicitConjugationFactorisationLevel : ProofLevel
 wilsonExplicitConjugationFactorisationLevel = machineChecked
+
+wilsonOrderedCrossAtomFactorisationLevel : ProofLevel
+wilsonOrderedCrossAtomFactorisationLevel = machineChecked
