@@ -24,9 +24,9 @@ module DASHI.Physics.YangMills.BalabanP33QuaternionProductSecondVariationExact w
 --     + n(n-1) ordered first/first terms.
 --
 -- For n=4 this gives 4+12=16 concrete quaternion atoms.  The equality is not
--- a count-only receipt: finite-list induction, quaternion distributivity and
--- the ordered product rule prove that the sum of the generated atoms equals
--- the recursively differentiated quaternion product.
+-- a count-only receipt: finite-list induction, concrete quaternion
+-- distributivity and the ordered product rule prove that the generated atom
+-- sum equals the recursively differentiated quaternion product.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -35,40 +35,44 @@ open import Data.List.Base using (map; _++_; length)
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
 
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
+  (_+R_; zeroR)
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
-  (module RealPolynomialSolver)
+  (module RealPolynomialSolver; zeroCoefficient)
 open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
   (solveComputed; computed)
 open RealPolynomialSolver using
-  (Polynomial; _:=_; _:+_; _:*_; :-_)
+  (Polynomial; con; _:=_; _:+_)
 open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
-  (q0P; q1P; q2P; q3P)
+  (q0R; q1R; q2R; q3R; q0P; q1P; q2P; q3P)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  ( Quaternion; quat; q0; q1; q2; q3
+  ( Quaternion; quat
   ; zeroQ; oneQ; _+q_; _*q_; quaternionExt
-  ; quaternionMultiplyAssociative
   )
+
+zeroP : ∀ {n} → Polynomial n
+zeroP = con zeroCoefficient
 
 ------------------------------------------------------------------------
 -- Concrete quaternion additive/distributive laws.
 ------------------------------------------------------------------------
 
 realAddAssociative : ∀ a b c →
-  DASHI.Physics.YangMills.BalabanRealPolynomialRing._+R_
-    (DASHI.Physics.YangMills.BalabanRealPolynomialRing._+R_ a b) c
-  ≡ DASHI.Physics.YangMills.BalabanRealPolynomialRing._+R_
-      a (DASHI.Physics.YangMills.BalabanRealPolynomialRing._+R_ b c)
+  (a +R b) +R c ≡ a +R (b +R c)
 realAddAssociative =
   solveComputed 3
     (λ a b c → (a :+ b) :+ c := a :+ (b :+ c))
     computed
 
-realAddCommutative : ∀ a b →
-  DASHI.Physics.YangMills.BalabanRealPolynomialRing._+R_ a b
-  ≡ DASHI.Physics.YangMills.BalabanRealPolynomialRing._+R_ b a
+realAddCommutative : ∀ a b → a +R b ≡ b +R a
 realAddCommutative =
   solveComputed 2 (λ a b → a :+ b := b :+ a) computed
+
+realZeroAdd : ∀ a → zeroR +R a ≡ a
+realZeroAdd =
+  solveComputed 1 (λ a → zeroP :+ a := a) computed
 
 quaternionAddAssociative : ∀ a b c →
   (a +q b) +q c ≡ a +q (b +q c)
@@ -92,21 +96,20 @@ quaternionAddCommutative
 quaternionAddZeroLeft : ∀ a → zeroQ +q a ≡ a
 quaternionAddZeroLeft (quat a0 a1 a2 a3) =
   quaternionExt
-    (solveComputed 1 (λ a → a := a) computed a0)
-    (solveComputed 1 (λ a → a := a) computed a1)
-    (solveComputed 1 (λ a → a := a) computed a2)
-    (solveComputed 1 (λ a → a := a) computed a3)
+    (realZeroAdd a0)
+    (realZeroAdd a1)
+    (realZeroAdd a2)
+    (realZeroAdd a3)
 
 quaternionAddZeroRight : ∀ a → a +q zeroQ ≡ a
 quaternionAddZeroRight a =
   trans (quaternionAddCommutative a zeroQ) (quaternionAddZeroLeft a)
 
 leftDistributes0 : ∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
-  q0P a0 a1 a2 a3
-    (b0 :+ c0) (b1 :+ c1) (b2 :+ c2) (b3 :+ c3)
-  ≡ q0P a0 a1 a2 a3 b0 b1 b2 b3
-      DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.:+
-     q0P a0 a1 a2 a3 c0 c1 c2 c3
+  q0R a0 a1 a2 a3
+    (b0 +R c0) (b1 +R c1) (b2 +R c2) (b3 +R c3)
+  ≡ q0R a0 a1 a2 a3 b0 b1 b2 b3
+      +R q0R a0 a1 a2 a3 c0 c1 c2 c3
 leftDistributes0 =
   solveComputed 12
     (λ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
@@ -117,11 +120,10 @@ leftDistributes0 =
     computed
 
 leftDistributes1 : ∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
-  q1P a0 a1 a2 a3
-    (b0 :+ c0) (b1 :+ c1) (b2 :+ c2) (b3 :+ c3)
-  ≡ q1P a0 a1 a2 a3 b0 b1 b2 b3
-      DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.:+
-     q1P a0 a1 a2 a3 c0 c1 c2 c3
+  q1R a0 a1 a2 a3
+    (b0 +R c0) (b1 +R c1) (b2 +R c2) (b3 +R c3)
+  ≡ q1R a0 a1 a2 a3 b0 b1 b2 b3
+      +R q1R a0 a1 a2 a3 c0 c1 c2 c3
 leftDistributes1 =
   solveComputed 12
     (λ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
@@ -132,11 +134,10 @@ leftDistributes1 =
     computed
 
 leftDistributes2 : ∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
-  q2P a0 a1 a2 a3
-    (b0 :+ c0) (b1 :+ c1) (b2 :+ c2) (b3 :+ c3)
-  ≡ q2P a0 a1 a2 a3 b0 b1 b2 b3
-      DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.:+
-     q2P a0 a1 a2 a3 c0 c1 c2 c3
+  q2R a0 a1 a2 a3
+    (b0 +R c0) (b1 +R c1) (b2 +R c2) (b3 +R c3)
+  ≡ q2R a0 a1 a2 a3 b0 b1 b2 b3
+      +R q2R a0 a1 a2 a3 c0 c1 c2 c3
 leftDistributes2 =
   solveComputed 12
     (λ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
@@ -147,11 +148,10 @@ leftDistributes2 =
     computed
 
 leftDistributes3 : ∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
-  q3P a0 a1 a2 a3
-    (b0 :+ c0) (b1 :+ c1) (b2 :+ c2) (b3 :+ c3)
-  ≡ q3P a0 a1 a2 a3 b0 b1 b2 b3
-      DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.:+
-     q3P a0 a1 a2 a3 c0 c1 c2 c3
+  q3R a0 a1 a2 a3
+    (b0 +R c0) (b1 +R c1) (b2 +R c2) (b3 +R c3)
+  ≡ q3R a0 a1 a2 a3 b0 b1 b2 b3
+      +R q3R a0 a1 a2 a3 c0 c1 c2 c3
 leftDistributes3 =
   solveComputed 12
     (λ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
@@ -171,61 +171,41 @@ quaternionMultiplyDistributesLeft
     (leftDistributes2 a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
     (leftDistributes3 a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3)
 
+multiplyZero0 : ∀ a0 a1 a2 a3 →
+  q0R a0 a1 a2 a3 zeroR zeroR zeroR zeroR ≡ zeroR
+multiplyZero0 =
+  solveComputed 4
+    (λ a0 a1 a2 a3 → q0P a0 a1 a2 a3 zeroP zeroP zeroP zeroP := zeroP)
+    computed
+
+multiplyZero1 : ∀ a0 a1 a2 a3 →
+  q1R a0 a1 a2 a3 zeroR zeroR zeroR zeroR ≡ zeroR
+multiplyZero1 =
+  solveComputed 4
+    (λ a0 a1 a2 a3 → q1P a0 a1 a2 a3 zeroP zeroP zeroP zeroP := zeroP)
+    computed
+
+multiplyZero2 : ∀ a0 a1 a2 a3 →
+  q2R a0 a1 a2 a3 zeroR zeroR zeroR zeroR ≡ zeroR
+multiplyZero2 =
+  solveComputed 4
+    (λ a0 a1 a2 a3 → q2P a0 a1 a2 a3 zeroP zeroP zeroP zeroP := zeroP)
+    computed
+
+multiplyZero3 : ∀ a0 a1 a2 a3 →
+  q3R a0 a1 a2 a3 zeroR zeroR zeroR zeroR ≡ zeroR
+multiplyZero3 =
+  solveComputed 4
+    (λ a0 a1 a2 a3 → q3P a0 a1 a2 a3 zeroP zeroP zeroP zeroP := zeroP)
+    computed
+
 quaternionMultiplyZeroRight : ∀ a → a *q zeroQ ≡ zeroQ
 quaternionMultiplyZeroRight (quat a0 a1 a2 a3) =
   quaternionExt
-    (solveComputed 4 (λ a0 a1 a2 a3 →
-      q0P a0 a1 a2 a3
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      := DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      computed a0 a1 a2 a3)
-    (solveComputed 4 (λ a0 a1 a2 a3 →
-      q1P a0 a1 a2 a3
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      := DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      computed a0 a1 a2 a3)
-    (solveComputed 4 (λ a0 a1 a2 a3 →
-      q2P a0 a1 a2 a3
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      := DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      computed a0 a1 a2 a3)
-    (solveComputed 4 (λ a0 a1 a2 a3 →
-      q3P a0 a1 a2 a3
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-        (DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      := DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.RealPolynomialSolver.con
-          DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver.zeroCoefficient)
-      computed a0 a1 a2 a3)
+    (multiplyZero0 a0 a1 a2 a3)
+    (multiplyZero1 a0 a1 a2 a3)
+    (multiplyZero2 a0 a1 a2 a3)
+    (multiplyZero3 a0 a1 a2 a3)
 
 ------------------------------------------------------------------------
 -- Ordered second-jet products and literal atom generation.
@@ -320,16 +300,21 @@ sumSecondVariationTermsExact : ∀ factors →
   ≡ orderedSecondProduct factors
 sumSecondVariationTermsExact [] = refl
 sumSecondVariationTermsExact (factor ∷ factors) =
+  let
+    diagonal = factorSecond factor *q orderedValueProduct factors
+    firstTerm = factorFirst factor *q orderedFirstProduct factors
+    inherited = factorValue factor *q orderedSecondProduct factors
+  in
   trans
     (cong
-      (factorSecond factor *q orderedValueProduct factors +q_)
+      (diagonal +q_)
       (sumQuaternionAppend
         (map (factorFirst factor *q_) (firstVariationTerms factors))
         (map (factorFirst factor *q_) (firstVariationTerms factors)
           ++ map (factorValue factor *q_) (secondVariationTerms factors))))
     (trans
       (cong
-        (factorSecond factor *q orderedValueProduct factors +q_)
+        (diagonal +q_)
         (cong₂ _+q_
           (sumQuaternionMapLeftMultiply
             (factorFirst factor) (firstVariationTerms factors))
@@ -342,16 +327,19 @@ sumSecondVariationTermsExact (factor ∷ factors) =
                 (factorFirst factor) (firstVariationTerms factors))
               (sumQuaternionMapLeftMultiply
                 (factorValue factor) (secondVariationTerms factors))))))
-      (cong
-        (factorSecond factor *q orderedValueProduct factors +q_)
-        (cong₂ _+q_
-          (cong (factorFirst factor *q_)
-            (sumFirstVariationTermsExact factors))
+      (trans
+        (cong
+          (diagonal +q_)
           (cong₂ _+q_
             (cong (factorFirst factor *q_)
               (sumFirstVariationTermsExact factors))
-            (cong (factorValue factor *q_)
-              (sumSecondVariationTermsExact factors)))))))
+            (cong₂ _+q_
+              (cong (factorFirst factor *q_)
+                (sumFirstVariationTermsExact factors))
+              (cong (factorValue factor *q_)
+                (sumSecondVariationTermsExact factors)))))
+        (cong (diagonal +q_)
+          (sym (quaternionAddAssociative firstTerm firstTerm inherited)))))
 
 fourFactorJets :
   QuaternionFactorJet → QuaternionFactorJet →
