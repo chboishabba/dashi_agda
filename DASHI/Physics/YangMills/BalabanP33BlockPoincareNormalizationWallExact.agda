@@ -39,9 +39,16 @@ module DASHI.Physics.YangMills.BalabanP33BlockPoincareNormalizationWallExact whe
 --
 --     forces L^2 <= CP.
 --
--- (2) Fluctuation low-mode wall.  If a nonzero fluctuation mode has Rayleigh
---     numerator at most (9/(2M)) times its norm, then any quotient Poincare
---     inequality forces 2M/9 <= CP.
+-- (2) Fluctuation low-mode wall.  The quotient Rayleigh estimate is kept in
+--     the exact cross-multiplied form
+--
+--       (2M) numerator <= 9 normSq.
+--
+--     Together with normSq <= CP numerator it forces
+--
+--       2M <= 9 CP,
+--
+--     i.e. CP >= 2M/9, without introducing a variable rational denominator.
 --
 -- Both are one-sided falsifiers for one unscaled normalization.  Neither says
 -- that interacting-Hessian coercivity, weighted block norms, or rescaled
@@ -50,11 +57,13 @@ module DASHI.Physics.YangMills.BalabanP33BlockPoincareNormalizationWallExact whe
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
+open import Data.Product.Base using (Σ; _,_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; _/_; Positive; NonNegative)
+  (ℚ; 0ℚ; _*_; _≤_; _<_; _/_; Positive; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Negation using (¬_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -118,124 +127,131 @@ fourDimensionalUnscaledConstantWall =
 -- Wall 2: fluctuation-sector square-wave Rayleigh estimate.
 ------------------------------------------------------------------------
 
-quotientLowModeForcesReciprocalRayleighConstant :
-  ∀ normSq numerator poincareConstant rayleighCoefficient →
+nine : ℚ
+nine = + 9 / 1
+
+fluctuationSquareModeForcesLinearCrossBound :
+  ∀ twoM normSq numerator poincareConstant →
+  0ℚ ≤ twoM →
   0ℚ < normSq →
   0ℚ ≤ poincareConstant →
-  numerator ≤ rayleighCoefficient * normSq →
+  twoM * numerator ≤ nine * normSq →
   normSq ≤ poincareConstant * numerator →
-  1ℚ ≤ poincareConstant * rayleighCoefficient
-quotientLowModeForcesReciprocalRayleighConstant
-    normSq numerator poincareConstant rayleighCoefficient
-    normPositive constantNonnegative numeratorBound poincare =
+  twoM ≤ nine * poincareConstant
+fluctuationSquareModeForcesLinearCrossBound
+    twoM normSq numerator poincareConstant
+    twoMNonnegative normPositive constantNonnegative
+    rayleighCrossBound poincare =
   let
     instance
+      twoMNN : NonNegative twoM
+      twoMNN = ℚ.nonNegative twoMNonnegative
       constantNN : NonNegative poincareConstant
       constantNN = ℚ.nonNegative constantNonnegative
 
-    chained :
-      normSq
-      ≤ poincareConstant * (rayleighCoefficient * normSq)
-    chained =
-      ℚP.≤-trans
-        poincare
-        (ℚP.*-monoˡ-≤-nonNeg poincareConstant numeratorBound)
+    leftStep :
+      twoM * normSq
+      ≤ twoM * (poincareConstant * numerator)
+    leftStep =
+      ℚP.*-monoˡ-≤-nonNeg twoM poincare
 
-    factored :
-      1ℚ * normSq
-      ≤ (poincareConstant * rayleighCoefficient) * normSq
-    factored =
+    rayleighScaled :
+      poincareConstant * (twoM * numerator)
+      ≤ poincareConstant * (nine * normSq)
+    rayleighScaled =
+      ℚP.*-monoˡ-≤-nonNeg
+        poincareConstant rayleighCrossBound
+
+    middleStep :
+      twoM * (poincareConstant * numerator)
+      ≤ (nine * poincareConstant) * normSq
+    middleStep =
       subst
         (λ lower →
-          lower
-          ≤ (poincareConstant * rayleighCoefficient) * normSq)
-        (ℚRing.solve-∀ normSq)
+          lower ≤ (nine * poincareConstant) * normSq)
+        (ℚRing.solve-∀ twoM poincareConstant numerator)
         (subst
-          (λ upper → normSq ≤ upper)
+          (λ upper →
+            poincareConstant * (twoM * numerator) ≤ upper)
           (sym
             (ℚRing.solve-∀
-              poincareConstant rayleighCoefficient normSq))
-          chained)
+              poincareConstant twoM numerator normSq))
+          rayleighScaled)
+
+    productBound :
+      twoM * normSq
+      ≤ (nine * poincareConstant) * normSq
+    productBound = ℚP.≤-trans leftStep middleStep
   in
   cancelPositiveRightFactor
-    1ℚ (poincareConstant * rayleighCoefficient)
-    normSq normPositive factored
-
-fluctuationSquareModeForcesLinearConstant :
-  ∀ twoM normSq numerator poincareConstant →
-  0ℚ < twoM →
-  0ℚ < normSq →
-  0ℚ ≤ poincareConstant →
-  0ℚ ≤ twoM / (+ 9 / 1) →
-  numerator ≤ ((+ 9 / 1) / twoM) * normSq →
-  normSq ≤ poincareConstant * numerator →
-  twoM / (+ 9 / 1) ≤ poincareConstant
-fluctuationSquareModeForcesLinearConstant
-    twoM normSq numerator poincareConstant
-    twoMPositive normPositive constantNonnegative scaleNonnegative
-    numeratorBound poincare =
-  let
-    reciprocalRayleigh :
-      1ℚ ≤ poincareConstant * ((+ 9 / 1) / twoM)
-    reciprocalRayleigh =
-      quotientLowModeForcesReciprocalRayleighConstant
-        normSq numerator poincareConstant ((+ 9 / 1) / twoM)
-        normPositive constantNonnegative numeratorBound poincare
-
-    instance
-      scaleNN : NonNegative (twoM / (+ 9 / 1))
-      scaleNN = ℚ.nonNegative scaleNonnegative
-
-    scaled :
-      (twoM / (+ 9 / 1)) * 1ℚ
-      ≤ (twoM / (+ 9 / 1))
-          * (poincareConstant * ((+ 9 / 1) / twoM))
-    scaled =
-      ℚP.*-monoˡ-≤-nonNeg
-        (twoM / (+ 9 / 1)) reciprocalRayleigh
-  in
-  subst
-    (λ lower → lower ≤ poincareConstant)
-    (ℚRing.solve-∀ twoM)
-    (subst
-      (λ upper →
-        (twoM / (+ 9 / 1)) * 1ℚ ≤ upper)
-      (sym (ℚRing.solve-∀ twoM poincareConstant))
-      scaled)
+    twoM (nine * poincareConstant) normSq
+    normPositive productBound
 
 ------------------------------------------------------------------------
--- One exact visible witness: M=100 forces CP >= 200/9.
+-- Generic quantifier-level wall.
 ------------------------------------------------------------------------
 
-squareModeScale200Over9 : ℚ
-squareModeScale200Over9 = + 200 / 9
+UnboundedAbove : ∀ {Scale : Set} → (Scale → ℚ) → Set
+UnboundedAbove lower =
+  ∀ bound → Σ _ (λ scale → bound < lower scale)
 
-squareModeAtM100Forces :
+NoUniformUpperBound : ∀ {Scale : Set} → (Scale → ℚ) → Set
+NoUniformUpperBound lower =
+  ¬ (Σ ℚ (λ uniform → ∀ scale → lower scale ≤ uniform))
+
+unboundedLowerBoundsRefuteUniformConstant :
+  ∀ {Scale : Set} (lower : Scale → ℚ) →
+  UnboundedAbove lower →
+  NoUniformUpperBound lower
+unboundedLowerBoundsRefuteUniformConstant lower unbounded
+    (uniform , dominates) with unbounded uniform
+... | scale , uniformBelowScale =
+  ℚP.<-irrefl
+    (ℚP.<-≤-trans uniformBelowScale (dominates scale))
+
+constantSectorUniformGateFalse :
+  ∀ {Scale : Set}
+    (scaleSquared : Scale → ℚ) →
+  UnboundedAbove scaleSquared →
+  NoUniformUpperBound scaleSquared
+constantSectorUniformGateFalse =
+  unboundedLowerBoundsRefuteUniformConstant
+
+fluctuationSectorUniformGateFalse :
+  ∀ {Scale : Set}
+    (linearLowerBound : Scale → ℚ) →
+  UnboundedAbove linearLowerBound →
+  NoUniformUpperBound linearLowerBound
+fluctuationSectorUniformGateFalse =
+  unboundedLowerBoundsRefuteUniformConstant
+
+------------------------------------------------------------------------
+-- One exact visible cross-multiplied witness: M=100 forces 200 <= 9 CP.
+------------------------------------------------------------------------
+
+squareModeAtM100ForcesCrossBound :
   ∀ normSq numerator poincareConstant →
   0ℚ < normSq →
   0ℚ ≤ poincareConstant →
-  numerator ≤ (+ 9 / 200) * normSq →
+  (+ 200 / 1) * numerator ≤ nine * normSq →
   normSq ≤ poincareConstant * numerator →
-  squareModeScale200Over9 ≤ poincareConstant
-squareModeAtM100Forces
+  (+ 200 / 1) ≤ nine * poincareConstant
+squareModeAtM100ForcesCrossBound
     normSq numerator poincareConstant
-    normPositive constantNonnegative numeratorBound poincare =
-  fluctuationSquareModeForcesLinearConstant
+    normPositive constantNonnegative rayleigh poincare =
+  fluctuationSquareModeForcesLinearCrossBound
     (+ 200 / 1) normSq numerator poincareConstant
-    (ℚP.positive⁻¹ (+ 200 / 1))
-    normPositive constantNonnegative
-    (ℚP.nonNegative⁻¹ squareModeScale200Over9)
-    (subst
-      (λ coefficient → numerator ≤ coefficient * normSq)
-      (ℚRing.solve [])
-      numeratorBound)
-    poincare
+    (ℚP.nonNegative⁻¹ (+ 200 / 1))
+    normPositive constantNonnegative rayleigh poincare
 
 blockPoincareConstantSectorWallLevel : ProofLevel
 blockPoincareConstantSectorWallLevel = machineChecked
 
 blockPoincareFluctuationLowModeWallLevel : ProofLevel
 blockPoincareFluctuationLowModeWallLevel = machineChecked
+
+blockPoincareUniformQuantifierWallLevel : ProofLevel
+blockPoincareUniformQuantifierWallLevel = machineChecked
 
 interactingHessianRouteUnaffectedLevel : ProofLevel
 interactingHessianRouteUnaffectedLevel = machineChecked
