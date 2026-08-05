@@ -25,9 +25,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteStrainTransverseDecompositionExac
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (1ℚ; _*_)
+open import Data.Rational.Base using
+  (0ℚ; 1ℚ; _+_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 
@@ -43,10 +44,9 @@ projectionData : UnitDirectionAction → V.ProjectionMode
 projectionData inputs = V.projection-mode
   (direction inputs)
   1ℚ
-  (subst
-    (λ norm → 1ℚ * norm ≡ 1ℚ)
-    (directionUnit inputs)
-    (solve []))
+  (trans
+    (solve (V.normSquared (direction inputs) ∷ []))
+    (directionUnit inputs))
 
 parallelAction : UnitDirectionAction → V.Vector3
 parallelAction inputs = V.longitudinal (projectionData inputs) (action inputs)
@@ -75,7 +75,7 @@ strainActionReconstructs inputs =
 
 transverseOrthogonalToDirection :
   (inputs : UnitDirectionAction) →
-  V.dot (direction inputs) (transverseAction inputs) ≡ V.0ℚ
+  V.dot (direction inputs) (transverseAction inputs) ≡ 0ℚ
 transverseOrthogonalToDirection inputs =
   V.projectTransverse (projectionData inputs) (action inputs)
 
@@ -83,13 +83,13 @@ strainPythagorean :
   (inputs : UnitDirectionAction) →
   V.normSquared (action inputs)
   ≡ V.normSquared (transverseAction inputs)
-    V.+ V.normSquared (parallelAction inputs)
+    + V.normSquared (parallelAction inputs)
 strainPythagorean inputs =
   V.projectPythagorean (projectionData inputs) (action inputs)
 
 transverseContractionSquared :
   (inputs : UnitDirectionAction) →
   V.normSquared (transverseAction inputs)
-  V.≤ V.normSquared (action inputs)
+  ≤ V.normSquared (action inputs)
 transverseContractionSquared inputs =
   V.projectContractionSquared (projectionData inputs) (action inputs)
