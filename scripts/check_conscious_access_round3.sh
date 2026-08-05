@@ -14,8 +14,18 @@ FILES=(
   DASHI/Biology/PostAcuteVisualAdaptation.agda
   DASHI/Biology/HallOfHallsCoalition.agda
   DASHI/Biology/PsychedelicMorphogeneticGeometryBoundary.agda
+  DASHI/Biology/NaturalGrowthAlgorithmAtlas.agda
+  DASHI/Biology/SignedDistanceBooleanGeometry.agda
+  DASHI/Biology/HallHybridManifoldTreeCarrier.agda
+  DASHI/Biology/VisualPathBraidResidual.agda
+  DASHI/Biology/QuantitativeStateDynamics.agda
+  DASHI/Biology/SymbolicCompromiseMinimizer.agda
+  DASHI/Biology/StableUnconsciousInvariantRegime.agda
+  DASHI/Biology/DynamicCoalitionPhaseEmergence.agda
+  DASHI/Biology/ConsciousAccessRound3FullBoundary.agda
   DASHI/Biology/ConsciousAccessRound3SourceAtlas.agda
   DASHI/Biology/ConsciousAccessRound3Regression.agda
+  DASHI/Biology/ConsciousAccessRound3ExtendedRegression.agda
 )
 
 for file in "${FILES[@]}"; do
@@ -26,4 +36,4 @@ for file in "${FILES[@]}"; do
 done
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Biology/ConsciousAccessRound3Regression.agda
+  DASHI/Biology/ConsciousAccessRound3ExtendedRegression.agda
