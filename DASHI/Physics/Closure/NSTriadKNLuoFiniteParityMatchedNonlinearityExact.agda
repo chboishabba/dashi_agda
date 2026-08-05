@@ -163,17 +163,17 @@ quadraticParityIndependentOfComponentIndices
     (fourXorCancel iz jz az bz)
 
 matchedNonlinearParity :
-  (axisI axisJ realLeft realRight imaginaryLeft imaginaryRight : Parity3) →
-  realLeft ⊕₃ realRight ≡ imaginaryLeft ⊕₃ imaginaryRight →
-  quadraticDifferentiatedParity axisI axisJ realLeft realRight
-  ≡ quadraticDifferentiatedParity axisI axisJ imaginaryLeft imaginaryRight
+  (axisI axisJ firstLeft firstRight secondLeft secondRight : Parity3) →
+  firstLeft ⊕₃ firstRight ≡ secondLeft ⊕₃ secondRight →
+  quadraticDifferentiatedParity axisI axisJ firstLeft firstRight
+  ≡ quadraticDifferentiatedParity axisI axisJ secondLeft secondRight
 matchedNonlinearParity
-  axisI axisJ realLeft realRight imaginaryLeft imaginaryRight matched =
+  axisI axisJ firstLeft firstRight secondLeft secondRight matched =
   trans
     (quadraticParityIndependentOfComponentIndices
-      axisI axisJ realLeft realRight)
+      axisI axisJ firstLeft firstRight)
     (trans
       matched
       (sym
         (quadraticParityIndependentOfComponentIndices
-          axisI axisJ imaginaryLeft imaginaryRight)))
+          axisI axisJ secondLeft secondRight)))
