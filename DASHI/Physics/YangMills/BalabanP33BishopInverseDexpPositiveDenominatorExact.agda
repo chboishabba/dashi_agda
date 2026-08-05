@@ -73,14 +73,14 @@ positiveEmbeddedTwentyThreeTwentyFourth :
 positiveEmbeddedTwentyThreeTwentyFourth =
   BishopProperties.p<q⇒p⋆<q⋆
     0ℚᵘ twentyThreeTwentyFourth
-    (ℚP.negative⁻¹ (ℚ.- twentyThreeTwentyFourth))
+    (ℚP.positive⁻¹ twentyThreeTwentyFourth)
 
 positiveEmbeddedTwo : BishopReal.Positive (embed two)
 positiveEmbeddedTwo =
   BishopProperties.0<x⇒posx
     (BishopProperties.p<q⇒p⋆<q⋆
       0ℚᵘ two
-      (ℚP.negative⁻¹ (ℚ.- two)))
+      (ℚP.positive⁻¹ two))
 
 oneMinusSixthSquare : BishopReal.ℝ → BishopReal.ℝ
 oneMinusSixthSquare value =
@@ -186,7 +186,7 @@ inverseDexpDenominatorPositive :
 inverseDexpDenominatorPositive {dataSet} {value} inputs valuePositive =
   BishopProperties.posx⇒0<x
     (BishopProperties.posx,y⇒posx*y
-      positiveEmbeddedTwo
+a      positiveEmbeddedTwo
       (BishopProperties.posx,y⇒posx*y
         (positiveSquare valuePositive)
         (BishopProperties.0<x⇒posx
@@ -261,9 +261,8 @@ positiveInverseDexpCoefficientBounds {dataSet} {value} inputs valuePositive =
         (embed oneTwelfth)
     cancelLeft =
       BishopProperties.≃-trans
-        (BishopProperties.≃-symm
-          (BishopProperties.*-assoc
-            (embed oneTwelfth) denominator denominatorInverse))
+        (BishopProperties.*-assoc
+          (embed oneTwelfth) denominator denominatorInverse)
         (BishopProperties.≃-trans
           (BishopProperties.*-congˡ
             (BishopInverse.*-inverseʳ denominator denominatorNonzero))
@@ -276,9 +275,8 @@ positiveInverseDexpCoefficientBounds {dataSet} {value} inputs valuePositive =
         (embed oneSixth)
     cancelRight =
       BishopProperties.≃-trans
-        (BishopProperties.≃-symm
-          (BishopProperties.*-assoc
-            (embed oneSixth) denominator denominatorInverse))
+        (BishopProperties.*-assoc
+          (embed oneSixth) denominator denominatorInverse)
         (BishopProperties.≃-trans
           (BishopProperties.*-congˡ
             (BishopInverse.*-inverseʳ denominator denominatorNonzero))
