@@ -1,9 +1,9 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound15Validation where
 
 -- Focused validation root for the physical-units and external-attempt audit.
--- It imports actual countermodels, telescoping proofs, exact OS pullback,
--- dense-core spectral exclusion, the separated M1--M6 gates, and the new P33
--- reduced inverse-dexp/product-distance/chart-radius mathematics.
+-- It imports actual countermodels, telescoping and strict-budget proofs, exact
+-- OS pullback, dense-core spectral exclusion, the separated M1--M6 gates, and
+-- the new P33 reduced inverse-dexp/product-distance/chart-radius mathematics.
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound14Validation
 import DASHI.Physics.YangMills.BalabanClayLowerBoundCountermodelExact
