@@ -68,6 +68,7 @@ capPowerNonnegative growthCap growthCapNonnegative (suc n) =
     factorNonnegative =
       L2.addNonnegative Gronwall.oneNonnegative growthCapNonnegative
     restNonnegative = capPowerNonnegative growthCap growthCapNonnegative n
+
     instance
       factorIsNonnegative = nonNegative factorNonnegative
       restIsNonnegative = nonNegative restNonnegative
@@ -86,6 +87,7 @@ stepProductNonnegative (stepValue ∷ steps) =
   let
     factorNonnegative = Gronwall.onePlusGrowthNonnegative stepValue
     restNonnegative = stepProductNonnegative steps
+
     instance
       factorIsNonnegative = nonNegative factorNonnegative
       restIsNonnegative = nonNegative restNonnegative
@@ -136,8 +138,9 @@ growthProductBelowCapPower
         * Product.growthProduct steps
       ≤ (1ℚ + growthCap) * Product.growthProduct steps
     first =
-      let instance restIsNonnegative =
-        nonNegative restProductNonnegative
+      let
+        instance
+          restIsNonnegative = nonNegative restProductNonnegative
       in
       ℚₚ.*-monoʳ-≤-nonNeg
         (Product.growthProduct steps) factorBelow
@@ -147,8 +150,9 @@ growthProductBelowCapPower
       ≤ (1ℚ + growthCap)
           * capPower growthCap (listLength steps)
     second =
-      let instance capFactorIsNonnegative =
-        nonNegative capFactorNonnegative
+      let
+        instance
+          capFactorIsNonnegative = nonNegative capFactorNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         (1ℚ + growthCap)
@@ -181,7 +185,9 @@ forcingConvolutionBelowCapGeometric
       ≤ capPower growthCap (listLength steps)
           * Gronwall.forcing stepValue
     firstProduct =
-      let instance forcingIsNonnegative = nonNegative forcingNonnegative
+      let
+        instance
+          forcingIsNonnegative = nonNegative forcingNonnegative
       in
       ℚₚ.*-monoʳ-≤-nonNeg
         (Gronwall.forcing stepValue) productBound
@@ -191,7 +197,9 @@ forcingConvolutionBelowCapGeometric
           * Gronwall.forcing stepValue
       ≤ capPower growthCap (listLength steps) * forcingCap
     secondProduct =
-      let instance capPowerIsNonnegative = nonNegative capPowerNonneg
+      let
+        instance
+          capPowerIsNonnegative = nonNegative capPowerNonneg
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         (capPower growthCap (listLength steps)) forcingBelow
@@ -249,20 +257,20 @@ record FiniteTerminalWindowPropagationData : Set₁ where
 open FiniteTerminalWindowPropagationData public
 
 weightedTerminalVariationBound :
-  (data : FiniteTerminalWindowPropagationData) →
+  (propagationData : FiniteTerminalWindowPropagationData) →
   Weighted.mass
-      (MeanGronwall.weightedWindow (meanValuePath data))
-    * MeanGronwall.terminalEnergy (meanValuePath data)
+      (MeanGronwall.weightedWindow (meanValuePath propagationData))
+    * MeanGronwall.terminalEnergy (meanValuePath propagationData)
   ≤ Variation.explicitEnvelope
       (Weighted.firstMoment
-        (MeanGronwall.weightedWindow (meanValuePath data)))
+        (MeanGronwall.weightedWindow (meanValuePath propagationData)))
       (MeanGronwall.scaleSteps
         (Weighted.mass
-          (MeanGronwall.weightedWindow (meanValuePath data)))
-        (MeanGronwall.steps (meanValuePath data)))
-weightedTerminalVariationBound data =
+          (MeanGronwall.weightedWindow (meanValuePath propagationData)))
+        (MeanGronwall.steps (meanValuePath propagationData)))
+weightedTerminalVariationBound propagationData =
   let
-    path = meanValuePath data
+    path = meanValuePath propagationData
     scaledSteps =
       MeanGronwall.scaleSteps
         (Weighted.mass (MeanGronwall.weightedWindow path))
@@ -279,9 +287,9 @@ weightedTerminalVariationBound data =
     (MeanGronwall.weightedMeanValueNonuniformGronwall path)
 
 weightedTerminalUniformBound :
-  (data : FiniteTerminalWindowPropagationData) →
+  (propagationData : FiniteTerminalWindowPropagationData) →
   let
-    path = meanValuePath data
+    path = meanValuePath propagationData
     scaledSteps =
       MeanGronwall.scaleSteps
         (Weighted.mass (MeanGronwall.weightedWindow path))
@@ -289,13 +297,14 @@ weightedTerminalUniformBound :
   in
   Weighted.mass (MeanGronwall.weightedWindow path)
       * MeanGronwall.terminalEnergy path
-  ≤ capPower (growthCap data) (listLength scaledSteps)
+  ≤ capPower (growthCap propagationData) (listLength scaledSteps)
       * Weighted.firstMoment (MeanGronwall.weightedWindow path)
-    + forcingCap data
-      * capGeometricPrefix (growthCap data) (listLength scaledSteps)
-weightedTerminalUniformBound data =
+    + forcingCap propagationData
+      * capGeometricPrefix
+          (growthCap propagationData) (listLength scaledSteps)
+weightedTerminalUniformBound propagationData =
   let
-    path = meanValuePath data
+    path = meanValuePath propagationData
     scaledSteps =
       MeanGronwall.scaleSteps
         (Weighted.mass (MeanGronwall.weightedWindow path))
@@ -304,29 +313,36 @@ weightedTerminalUniformBound data =
 
     productBound =
       growthProductBelowCapPower
-        (growthCapNonnegative data)
-        (uniformScaledStepBounds data)
+        (growthCapNonnegative propagationData)
+        (uniformScaledStepBounds propagationData)
 
     productScaled :
       Product.growthProduct scaledSteps * firstMoment
-      ≤ capPower (growthCap data) (listLength scaledSteps) * firstMoment
+      ≤ capPower (growthCap propagationData) (listLength scaledSteps)
+          * firstMoment
     productScaled =
-      let instance momentIsNonnegative =
-        nonNegative (firstMomentNonnegative data)
+      let
+        instance
+          momentIsNonnegative =
+            nonNegative (firstMomentNonnegative propagationData)
       in
       ℚₚ.*-monoʳ-≤-nonNeg firstMoment productBound
 
     forcingBound =
       forcingConvolutionBelowCapGeometric
-        (growthCapNonnegative data)
-        (forcingCapNonnegative data)
-        (uniformScaledStepBounds data)
+        (growthCapNonnegative propagationData)
+        (forcingCapNonnegative propagationData)
+        (uniformScaledStepBounds propagationData)
 
     envelopeBound :
       Variation.explicitEnvelope firstMoment scaledSteps
-      ≤ capPower (growthCap data) (listLength scaledSteps) * firstMoment
-        + forcingCap data
-          * capGeometricPrefix (growthCap data) (listLength scaledSteps)
+      ≤ capPower (growthCap propagationData) (listLength scaledSteps)
+          * firstMoment
+        + forcingCap propagationData
+          * capGeometricPrefix
+              (growthCap propagationData) (listLength scaledSteps)
     envelopeBound = ℚₚ.+-mono-≤ productScaled forcingBound
   in
-  ℚₚ.≤-trans (weightedTerminalVariationBound data) envelopeBound
+  ℚₚ.≤-trans
+    (weightedTerminalVariationBound propagationData)
+    envelopeBound
