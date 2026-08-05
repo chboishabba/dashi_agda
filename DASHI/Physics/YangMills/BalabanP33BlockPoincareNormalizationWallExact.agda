@@ -55,7 +55,7 @@ module DASHI.Physics.YangMills.BalabanP33BlockPoincareNormalizationWallExact whe
 -- averages fail.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Product.Base using (Σ; _,_)
 open import Data.Rational.Base as ℚ using
@@ -192,8 +192,8 @@ fluctuationSquareModeForcesLinearCrossBound
 ------------------------------------------------------------------------
 
 UnboundedAbove : ∀ {Scale : Set} → (Scale → ℚ) → Set
-UnboundedAbove lower =
-  ∀ bound → Σ _ (λ scale → bound < lower scale)
+UnboundedAbove {Scale} lower =
+  ∀ bound → Σ Scale (λ scale → bound < lower scale)
 
 NoUniformUpperBound : ∀ {Scale : Set} → (Scale → ℚ) → Set
 NoUniformUpperBound lower =
@@ -206,7 +206,7 @@ unboundedLowerBoundsRefuteUniformConstant :
 unboundedLowerBoundsRefuteUniformConstant lower unbounded
     (uniform , dominates) with unbounded uniform
 ... | scale , uniformBelowScale =
-  ℚP.<-irrefl
+  ℚP.<-irrefl refl
     (ℚP.<-≤-trans uniformBelowScale (dominates scale))
 
 constantSectorUniformGateFalse :
