@@ -71,3 +71,17 @@ import DASHI.Biology.ParentAllyshipMultiObserverBridge
 import DASHI.Biology.InterpretiveCodingSystem
 import DASHI.Biology.CrossPaperDialecticalDevelopment
 import DASHI.Biology.AliceBrownCorpusLoom
+
+------------------------------------------------------------------------
+-- Stateful multiplex conscious-access / psychedelic reweighting tranche.
+
+import DASHI.Biology.StateDependentMultiplexTransducer
+import DASHI.Biology.ProductiveTransformCoherence
+import DASHI.Biology.ConsciousAccessCoalition
+import DASHI.Biology.PsychedelicAttractorReweightingBoundary
+import DASHI.Biology.ConsciousAccessNetworkSourceAtlas
+import DASHI.Biology.UnconsciousAccessRegime
+import DASHI.Biology.SymbolicTransformWithoutHomunculus
+import DASHI.Biology.DeterministicCoarseGrainingBoundary
+import DASHI.Biology.SparseExpertRoutingCoalition
+import DASHI.Biology.ConsciousAccessNetworkRegression
