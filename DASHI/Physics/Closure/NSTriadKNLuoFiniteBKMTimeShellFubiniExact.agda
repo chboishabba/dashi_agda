@@ -34,6 +34,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteBKMTimeShellFubiniExact where
 -- genuine L-infinity norm and from rational time cells to Lebesgue time.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _≤_)
 import Data.Rational.Properties as ℚₚ
