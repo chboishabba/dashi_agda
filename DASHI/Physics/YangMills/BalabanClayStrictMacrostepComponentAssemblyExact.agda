@@ -30,15 +30,12 @@ module DASHI.Physics.YangMills.BalabanClayStrictMacrostepComponentAssemblyExact 
 -- finite monotonicity proves
 --
 --   ||K'|| <= (1/2)||K|| + perturbativeError.
---
--- Hence strict contraction is no longer a separately supplied conclusion once
--- the five physical component estimates are available.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; _+_; _-_; -_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -148,10 +145,15 @@ scaledHessianFloorIsRetainedFloor : ∀ normValue →
   ≡ retainedGaussianFloor * normValue
 scaledHessianFloorIsRetainedFloor = ℚRing.solve-∀
 
-halfMinusQuarterIsQuarter : ∀ energy →
-  (+ 1 / 2) * energy - (+ 1 / 4) * energy
+halfPlusNegativeQuarterIsQuarter : ∀ energy →
+  (+ 1 / 2) * energy + (- ((+ 1 / 4) * energy))
   ≡ (+ 1 / 4) * energy
-halfMinusQuarterIsQuarter = ℚRing.solve-∀
+halfPlusNegativeQuarterIsQuarter = ℚRing.solve-∀
+
+halfPlusNegativeInteractionIsRetained : ∀ energy interaction →
+  (+ 1 / 2) * energy + (- interaction)
+  ≡ (+ 1 / 2) * energy - interaction
+halfPlusNegativeInteractionIsRetained = ℚRing.solve-∀
 
 quarterEnergyBelowRetainedExponent :
   (dataSet : LargeFieldAbsorption) →
@@ -159,28 +161,26 @@ quarterEnergyBelowRetainedExponent :
   ≤ retainedQuadraticExponent dataSet
 quarterEnergyBelowRetainedExponent dataSet =
   let
+    shifted :
+      (+ 1 / 2) * quadraticEnergy dataSet
+        + (- ((+ 1 / 4) * quadraticEnergy dataSet))
+      ≤ (+ 1 / 2) * quadraticEnergy dataSet
+        + (- interactionAbs dataSet)
     shifted =
       ℚP.+-mono-≤
         ℚP.≤-refl
         (ℚP.neg-mono-≤ (interactionAbsorbed dataSet))
-    leftEquality =
-      halfMinusQuarterIsQuarter (quadraticEnergy dataSet)
-    rightEquality :
-      (+ 1 / 2) * quadraticEnergy dataSet
-        + (- ((+ 1 / 1) * interactionAbs dataSet))
-      ≡ retainedQuadraticExponent dataSet
-    rightEquality = ℚRing.solve-∀
-      (quadraticEnergy dataSet) (interactionAbs dataSet)
   in
   subst
     (λ lower → lower ≤ retainedQuadraticExponent dataSet)
-    leftEquality
+    (halfPlusNegativeQuarterIsQuarter (quadraticEnergy dataSet))
     (subst
       (λ upper →
         (+ 1 / 2) * quadraticEnergy dataSet
-          - (+ 1 / 4) * quadraticEnergy dataSet
+          + (- ((+ 1 / 4) * quadraticEnergy dataSet))
         ≤ upper)
-      rightEquality
+      (halfPlusNegativeInteractionIsRetained
+        (quadraticEnergy dataSet) (interactionAbs dataSet))
       shifted)
 
 largeFieldLeavesPositiveGaussian :
