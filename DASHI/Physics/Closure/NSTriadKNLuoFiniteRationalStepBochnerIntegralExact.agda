@@ -67,7 +67,10 @@ stepIntegralAppend :
   stepIntegral (appendCells left right)
   ≡ V.add (stepIntegral left) (stepIntegral right)
 stepIntegralAppend [] right =
-  V.vectorExt (solve []) (solve []) (solve [])
+  V.vectorExt
+    (solve (V.x (stepIntegral right) ∷ []))
+    (solve (V.y (stepIntegral right) ∷ []))
+    (solve (V.z (stepIntegral right) ∷ []))
 stepIntegralAppend (vector-step-cell cellWidth (V.v3 vx vy vz) widthNonnegative ∷ cells) right
   rewrite stepIntegralAppend cells right =
   V.vectorExt
