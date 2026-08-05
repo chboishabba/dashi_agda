@@ -28,9 +28,9 @@ module DASHI.Physics.Closure.NSTriadKNMaxwellFluidBiotSavartBridgeExact where
 -- surfaces; sharing the elliptic kernel does not transfer a regularity result.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _*_; 0ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -45,7 +45,7 @@ coupledBiotSavart coupling modeData source =
 
 fluidVelocityFromVorticity :
   V.ProjectionMode → V.Vector3 → V.Vector3
-fluidVelocityFromVorticity = coupledBiotSavart (Data.Rational.Base.1ℚ)
+fluidVelocityFromVorticity = coupledBiotSavart 1ℚ
 
 magneticFieldFromCurrent :
   ℚ → V.ProjectionMode → V.Vector3 → V.Vector3
