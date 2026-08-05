@@ -13,12 +13,14 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound22Validation where
 --   * the open-versus-periodic boundary defect and positivity;
 --   * the concrete flat Wilson=curl and flat gauge=divergence identities;
 --   * the physical right-exponential background plaquette jets;
+--   * the literal six-plaquette bond incidence and sharp W9 aggregation;
 --   * the corrected boundary-assisted Wilson-plus-gauge coercivity reduction;
 --   * the same-h producer interface stripped of duplicated scalar receipts.
 --
--- The root does not assert the remaining nonzero-background Wilson and gauge
--- defect inequalities, the literal Hessian matrix/stencil producer, a finite
--- inverse construction, a continuum limit, or a Clay completion.
+-- The root does not assert the remaining local nonzero-background Wilson atom
+-- inequality or gauge defect inequality, the literal Hessian matrix/stencil
+-- producer, a finite inverse construction, a continuum limit, or a Clay
+-- completion.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound20Validation
@@ -34,4 +36,5 @@ open import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintCancellation
 open import DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonPlaquetteIncidenceExact
 open import DASHI.Physics.YangMills.BalabanP33LiteralPhysicalPerturbationAdapterExact
