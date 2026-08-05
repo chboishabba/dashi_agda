@@ -230,11 +230,32 @@ scaledPolymerSquareBound dataSet =
       (cK2 dataSet)
       (polymerSquareBelowConeFourth dataSet))
 
-fifthTermAsCoefficientCube :
-  ∀ coefficient value →
-  coefficient * fifth value
-  ≡ (coefficient * square value) * cube value
-fifthTermAsCoefficientCube = ℚRing.solve-∀
+rawBudgetExpansion :
+  (dataSet : CoupledPolymerFlowStep) →
+  rawCoupledRemainderBudget dataSet
+  ≡ (c5 dataSet * square (coupling dataSet))
+      * cube (coupling dataSet)
+    + (cgK dataSet * coupling dataSet * polymerNorm dataSet
+      + cK2 dataSet * square (polymerNorm dataSet))
+rawBudgetExpansion dataSet =
+  ℚRing.solve-∀
+    (c5 dataSet) (cgK dataSet) (cK2 dataSet)
+    (coupling dataSet) (polymerNorm dataSet)
+
+reducedCoefficientCubeExpansion :
+  (dataSet : CoupledPolymerFlowStep) →
+  reducedCoupledCoefficient dataSet * cube (coupling dataSet)
+  ≡ (c5 dataSet * square (coupling dataSet))
+      * cube (coupling dataSet)
+    + ((cgK dataSet * coneSlope dataSet)
+        * cube (coupling dataSet)
+      + (cK2 dataSet * square (coneSlope dataSet)
+          * coupling dataSet)
+        * cube (coupling dataSet))
+reducedCoefficientCubeExpansion dataSet =
+  ℚRing.solve-∀
+    (c5 dataSet) (cgK dataSet) (cK2 dataSet)
+    (coneSlope dataSet) (coupling dataSet)
 
 rawBudgetBelowReducedCoefficientCube :
   (dataSet : CoupledPolymerFlowStep) →
@@ -242,11 +263,9 @@ rawBudgetBelowReducedCoefficientCube :
   ≤ reducedCoupledCoefficient dataSet * cube (coupling dataSet)
 rawBudgetBelowReducedCoefficientCube dataSet =
   subst
-    (λ lower → lower
-      ≤ reducedCoupledCoefficient dataSet * cube (coupling dataSet))
-    (sym
-      (fifthTermAsCoefficientCube
-        (c5 dataSet) (coupling dataSet)))
+    (λ lower →
+      lower ≤ reducedCoupledCoefficient dataSet * cube (coupling dataSet))
+    (sym (rawBudgetExpansion dataSet))
     (subst
       (λ upper →
         (c5 dataSet * square (coupling dataSet))
@@ -254,9 +273,7 @@ rawBudgetBelowReducedCoefficientCube dataSet =
         + (cgK dataSet * coupling dataSet * polymerNorm dataSet
           + cK2 dataSet * square (polymerNorm dataSet))
         ≤ upper)
-      (ℚRing.solve-∀
-        (c5 dataSet) (cgK dataSet) (cK2 dataSet)
-        (coneSlope dataSet) (coupling dataSet))
+      (sym (reducedCoefficientCubeExpansion dataSet))
       (ℚP.+-mono-≤
         ℚP.≤-refl
         (ℚP.+-mono-≤
