@@ -39,10 +39,9 @@ module DASHI.Physics.YangMills.BalabanP33LiteralHessianFiveChannelPromotionExact
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _≤_)
-import Data.Rational.Properties as ℚP
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
@@ -120,13 +119,12 @@ literalReferencePlusRemainder dataSet background state =
       (gaugeFixingEnergy dataSet background state)
       (blockPenaltyEnergy dataSet background state)
     literal = literalHessianEnergy dataSet background state
-    remainder = Five.totalSignedRemainder
-      (fiveChannels dataSet) background state
     rearrange : literal ≡ reference + (literal - reference)
-    rearrange = ℚRing.solve literal reference
+    rearrange = ℚRing.solve-∀ literal reference
   in
   trans rearrange
-    (cong (reference +_)
+    (cong
+      (λ remainder → reference + remainder)
       (literalRemainderIdentification dataSet background state))
 
 literalHessianCoerciveOneThirtySecond :
