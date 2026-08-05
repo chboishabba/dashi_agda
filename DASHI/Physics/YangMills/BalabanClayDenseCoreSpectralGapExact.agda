@@ -81,20 +81,22 @@ denseLocalClusteringImpliesGap dataSet clustered =
 
 record PositiveDenseCoreGap
     {CoreVector HilbertVector : Set}
-    (dataSet : DenseCoreProjectionData CoreVector HilbertVector) : Set₁ where
+    (dataSet : DenseCoreProjectionData CoreVector HilbertVector)
+    (CandidateGapPositive : Set) : Set₁ where
   field
-    candidateGapPositive : Set
+    candidateGapPositive : CandidateGapPositive
     noPositiveSubgapSpectrum : DenseCoreSpectralExclusion dataSet
 
 open PositiveDenseCoreGap public
 
 positiveDenseCoreGapFromClustering :
-  ∀ {CoreVector HilbertVector}
+  ∀ {CoreVector HilbertVector CandidateGapPositive}
     (dataSet : DenseCoreProjectionData CoreVector HilbertVector) →
   UniformDenseCoreClustering dataSet →
-  Set →
-  PositiveDenseCoreGap dataSet
-positiveDenseCoreGapFromClustering dataSet clustered positiveGap = record
+  CandidateGapPositive →
+  PositiveDenseCoreGap dataSet CandidateGapPositive
+positiveDenseCoreGapFromClustering
+    dataSet clustered positiveGap = record
   { candidateGapPositive = positiveGap
   ; noPositiveSubgapSpectrum =
       denseLocalClusteringImpliesGap dataSet clustered
