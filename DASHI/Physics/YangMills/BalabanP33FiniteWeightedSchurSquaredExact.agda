@@ -4,8 +4,7 @@ module DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact where
 -- PRIMARY SOURCES
 --
 -- Issai Schur,
--- classical matrix norm test (1911).  No DOI applies to the original
--- nineteenth/early-twentieth-century result.
+-- classical matrix norm test (1911).  No DOI applies to the original result.
 --
 -- Roger A. Horn and Charles R. Johnson,
 -- "Matrix Analysis", second edition, Cambridge University Press, 2012.
@@ -14,7 +13,7 @@ module DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact where
 -- Lin Lin and Jianfeng Lu,
 -- "Decay Estimates of Discretized Green's Functions for Schrödinger Type
 -- Operators", Science China Mathematics 59 (2016), 1561--1578.
--- DOI: 10.1007/s11425-016-0295-x.
+-- DOI: 10.1007/s11425-016-0311-4.
 --
 -- DASHI CONTRIBUTION
 --
@@ -24,21 +23,19 @@ module DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact where
 --   ||A v||_2^2 <= R C ||v||_2^2,
 --
 -- where every absolute row sum is at most R and every absolute column sum is
--- at most C.  The proof is literal finite-list algebra.  Its load-bearing
--- weighted Cauchy step is proved without square roots from the identity
+-- at most C.  The load-bearing weighted Cauchy step follows from the exact
+-- identity
 --
 --   (sum w)(sum w x^2)
 --     = (sum w x)^2 + sum_{i<j} w_i w_j (x_i-x_j)^2.
 --
--- For a symmetric matrix, the absolute column mass equals the corresponding
--- absolute row mass, so one uniform row bound B yields
---
---   ||A v||_2^2 <= B^2 ||v||_2^2.
+-- No square-root operation is used.  For a symmetric matrix, one row bound B
+-- controls both orientations and gives ||A v||^2 <= B^2 ||v||^2.
 --
 -- The later tilted defect D H D^-1-H is not itself symmetric.  Its row and
--- column estimates must therefore be derived separately from symmetry of H
--- and the two orientation bounds on the weight ratio; this module does not
--- silently identify those two matrices.
+-- column estimates must be derived separately from symmetry of H and the two
+-- orientation bounds on the weight ratio; this module does not silently
+-- identify those two matrices.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -78,17 +75,13 @@ sumNonnegative :
 sumNonnegative [] term termNonnegative = ℚP.≤-refl
 sumNonnegative (index ∷ indices) term termNonnegative =
   let
-    tailNonnegative :
-      0ℚ ≤ Sums.sumRational indices term
-    tailNonnegative =
-      sumNonnegative indices term termNonnegative
+    tailNonnegative : 0ℚ ≤ Sums.sumRational indices term
+    tailNonnegative = sumNonnegative indices term termNonnegative
   in
   subst
     (λ lower → lower ≤ term index + Sums.sumRational indices term)
     (sym (ℚP.+-identityˡ 0ℚ))
-    (ℚP.+-mono-≤
-      (termNonnegative index)
-      tailNonnegative)
+    (ℚP.+-mono-≤ (termNonnegative index) tailNonnegative)
 
 productNonnegative :
   ∀ left right →
@@ -180,7 +173,7 @@ weightedCrossExpansion
   ℚRing.solve []
 
 weightedGramStepAlgebraic :
-  ∀ headWeight headValue tailWeight tailValue tailSquare tailDefect →
+  ∀ headWeight headValue tailWeight tailValue tailSquare →
   (headWeight + tailWeight)
     * (headWeight * FiniteL2.square headValue + tailSquare)
   ≡ FiniteL2.square (headWeight * headValue + tailValue)
@@ -216,38 +209,76 @@ weightedGramIdentity :
 weightedGramIdentity [] weight value = ℚRing.solve []
 weightedGramIdentity (index ∷ indices) weight value =
   let
+    headWeight = weight index
+    headValue = value index
+    tailWeight = weightSum indices weight
+    tailValue = weightedValueSum indices weight value
+    tailSquare = weightedSquareSum indices weight value
+    tailDefect = weightedGramDefect indices weight value
+
+    expandedCross =
+      headWeight
+        * (FiniteL2.square headValue * tailWeight
+          + tailSquare
+          - ((+ 2 / 1) * headValue * tailValue))
+
+    step :
+      (headWeight + tailWeight)
+        * (headWeight * FiniteL2.square headValue + tailSquare)
+      ≡ FiniteL2.square (headWeight * headValue + tailValue)
+        + expandedCross
+        + (tailWeight * tailSquare - FiniteL2.square tailValue)
     step =
       weightedGramStepAlgebraic
-        (weight index)
-        (value index)
-        (weightSum indices weight)
-        (weightedValueSum indices weight value)
-        (weightedSquareSum indices weight value)
-        (weightedGramDefect indices weight value)
+        headWeight headValue tailWeight tailValue tailSquare
 
-    tailDefect =
+    tailExact :
+      tailWeight * tailSquare - FiniteL2.square tailValue
+      ≡ tailDefect
+    tailExact =
       weightedTailDefectExact
-        (weightSum indices weight)
-        (weightedValueSum indices weight value)
-        (weightedSquareSum indices weight value)
-        (weightedGramDefect indices weight value)
+        tailWeight tailValue tailSquare tailDefect
         (weightedGramIdentity indices weight value)
+
+    afterTail :
+      FiniteL2.square (headWeight * headValue + tailValue)
+        + expandedCross
+        + (tailWeight * tailSquare - FiniteL2.square tailValue)
+      ≡ FiniteL2.square (headWeight * headValue + tailValue)
+        + expandedCross + tailDefect
+    afterTail =
+      cong
+        (λ selected →
+          FiniteL2.square (headWeight * headValue + tailValue)
+            + expandedCross + selected)
+        tailExact
+
+    crossExact :
+      weightedCross headWeight headValue indices weight value
+      ≡ expandedCross
+    crossExact =
+      weightedCrossExpansion
+        headWeight headValue indices weight value
+
+    afterCross :
+      FiniteL2.square (headWeight * headValue + tailValue)
+        + expandedCross + tailDefect
+      ≡ FiniteL2.square (headWeight * headValue + tailValue)
+        + weightedCross headWeight headValue indices weight value
+        + tailDefect
+    afterCross =
+      subst
+        (λ selected →
+          FiniteL2.square (headWeight * headValue + tailValue)
+            + expandedCross + tailDefect
+          ≡ FiniteL2.square (headWeight * headValue + tailValue)
+            + selected + tailDefect)
+        (sym crossExact)
+        (ℚRing.solve [])
   in
-  trans
-    step
-    (cong
-      (λ selected →
-        FiniteL2.square
-          (weight index * value index
-            + weightedValueSum indices weight value)
-        + weight index
-          * (FiniteL2.square (value index)
-              * weightSum indices weight
-            + weightedSquareSum indices weight value
-            - ((+ 2 / 1) * value index
-              * weightedValueSum indices weight value))
-        + selected)
-      tailDefect)
+  trans step
+    (trans afterTail
+      (trans afterCross (ℚRing.solve [])))
 
 weightedCrossNonnegative :
   ∀ {Index : Set}
@@ -441,10 +472,7 @@ matrixApplyAbsoluteBound indices matrix vector row =
   subst
     (λ upper →
       ∣ matrixApply indices matrix vector row ∣ ≤ upper)
-    (sumAbsoluteProductsExact
-      indices
-      (matrix row)
-      vector)
+    (sumAbsoluteProductsExact indices (matrix row) vector)
     (sumAbsoluteTriangle
       indices
       (λ column → matrix row column * vector column))
@@ -734,13 +762,19 @@ finiteSchurSquared
           rowNN = ℚ.nonNegative rowBoundNonnegative
       in
       ℚP.*-monoˡ-≤-nonNeg rowBound energyBound
+
+    combined :
+      vectorNormSq indices (matrixApply indices matrix vector)
+      ≤ rowBound * (columnBound * vectorNormSq indices vector)
+    combined = ℚP.≤-trans rowsSummed scaledEnergyBound
   in
   subst
     (λ upper →
       vectorNormSq indices (matrixApply indices matrix vector)
       ≤ upper)
-    (ℚP.*-assoc rowBound columnBound (vectorNormSq indices vector))
-    (ℚP.≤-trans rowsSummed scaledEnergyBound)
+    (ℚRing.solve-∀
+      rowBound columnBound (vectorNormSq indices vector))
+    combined
 
 ------------------------------------------------------------------------
 -- Symmetric specialization: one row bound controls both sides.
