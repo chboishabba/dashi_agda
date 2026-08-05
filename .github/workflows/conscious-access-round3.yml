@@ -1,6 +1,9 @@
 name: conscious-access-round3
 
 on:
+  push:
+    branches:
+      - 'agent/conscious-access-round3-visual-morphogenesis'
   pull_request:
     paths:
       - 'DASHI/Biology/PsychedelicVisualOperatorAlgebra.agda'
