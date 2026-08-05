@@ -1,6 +1,7 @@
 module DASHI.Biology.ConsciousAccessRound4FullBoundary where
 
 open import DASHI.Core.Prelude
+open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Lift
 import DASHI.Biology.TriadicCarryResidualExact as Carry
@@ -35,10 +36,10 @@ record ConsciousAccessRound4Boundary : Set where
     exactNineSheetRoundTrip :
       Lift.splitNine
         (Lift.liftNine
-          (Lift.positiveTrit Data.Vec.∷ Data.Vec.[])
+          (Lift.positiveTrit vcons vnil)
           (Lift.negativeTrit , Lift.positiveTrit))
       ≡
-      ((Lift.positiveTrit Data.Vec.∷ Data.Vec.[]) ,
+      ((Lift.positiveTrit vcons vnil) ,
        (Lift.negativeTrit , Lift.positiveTrit))
 
     positiveCarryIsLifted :
