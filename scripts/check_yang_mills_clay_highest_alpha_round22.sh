@@ -19,6 +19,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33WilsonSharpBudgetCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalRationalWilsonPlaquetteJetExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound22Validation.agda
 )
@@ -54,7 +55,12 @@ checks=(
   'BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact.agda:coupledRemainderWithBoundaryExact'
   'BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact.agda:literalHessianCoerciveFromPhysicalWilsonGaugeDefects'
   'BalabanP33PhysicalRationalWilsonPlaquetteJetExact.agda:physicalWilsonSecondVariationIsSixteenAtomSum'
+  'BalabanP33PhysicalRationalWilsonPlaquetteJetExact.agda:identityPhysicalWilsonIsFlatCurl'
   'BalabanP33PhysicalRationalWilsonPlaquetteJetExact.agda:physicalWilsonDefectIsAtomDifference'
+  'BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda:sumPlaquetteDiagonalChargeIsSixNorm'
+  'BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda:sumPlaquetteOrderedCrossChargeIsEighteenNorm'
+  'BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda:sumAllocatedCostIsSharpBudget'
+  'BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda:sharpPhysicalWilsonDefectFromPointwisePlaquettes'
   'BalabanP33LiteralPhysicalPerturbationAdapterExact.agda:literalHessianCoerciveFromSamePhysicalPerturbation'
 )
 
@@ -64,7 +70,6 @@ for check in "${checks[@]}"; do
   grep -q "$theorem" "DASHI/Physics/YangMills/$file"
 done
 
-# Provenance and scope discipline.
 grep -q '10.1103/PhysRevD.10.2445' \
   DASHI/Physics/YangMills/BalabanP33RationalQuaternionWilsonSecondVariationExact.agda
 grep -q '10.1007/BF01466594' \
@@ -81,6 +86,10 @@ grep -q 'carrier mismatch' \
   DASHI/Physics/YangMills/BalabanP33RationalQuaternionWilsonSecondVariationExact.agda
 grep -q 'boundary term is positive' \
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact.agda
+grep -q 'sum_p q_p(h)=6||h||^2' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda
+grep -q 'sum_p crossCharge_p(h)=18||h||^2' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound22Validation.agda
