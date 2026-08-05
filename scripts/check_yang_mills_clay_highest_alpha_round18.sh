@@ -14,6 +14,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda
   DASHI/Physics/YangMills/BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact.agda
   DASHI/Physics/YangMills/BalabanP33CMP109LiteralPathDerivativeKernelExact.agda
+  DASHI/Physics/YangMills/BalabanP33CMP109PeriodicContourEdgeKernelExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintSecondVariationExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralHessianFiveChannelPromotionExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralResidualKernelNumericalCalibrationExact.agda
@@ -44,6 +45,9 @@ checks=(
   'BalabanP33QuaternionDuhamelIntegrandTelescopeExact.agda:orderedDuhamelIntegrandTelescopeExact'
   'BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact.agda:finiteSymmetricSimpleIntegralTelescopeExact'
   'BalabanP33CMP109LiteralPathDerivativeKernelExact.agda:cmp109PathDerivativeVanishesOutsideLiteralOccurrence'
+  'BalabanP33CMP109PeriodicContourEdgeKernelExact.agda:orientationInsertion'
+  'BalabanP33CMP109PeriodicContourEdgeKernelExact.agda:occurrenceHolonomyEqualsPeriodicWordHolonomy'
+  'BalabanP33CMP109PeriodicContourEdgeKernelExact.agda:orientedContourDerivativeZeroOutsideUnderlyingSupport'
   'BalabanP33LiteralGaugeConstraintSecondVariationExact.agda:literalTotalSecondVariationAtExactBackground'
   'BalabanP33LiteralHessianFiveChannelPromotionExact.agda:literalHessianCoerciveOneThirtySecond'
   'BalabanP33LiteralResidualKernelNumericalCalibrationExact.agda:literalResidualEntryExact'
@@ -73,7 +77,7 @@ grep -q '10.1007/978-3-0348-5567-9' \
 grep -q 'Bochner-integral Duhamel' \
   DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda
 grep -q '10.1007/BF01211042' \
-  DASHI/Physics/YangMills/BalabanP33CMP109LiteralPathDerivativeKernelExact.agda
+  DASHI/Physics/YangMills/BalabanP33CMP109PeriodicContourEdgeKernelExact.agda
 grep -q '10.1007/BF01466594' \
   DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintSecondVariationExact.agda
 grep -q '3072' \
