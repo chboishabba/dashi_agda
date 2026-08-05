@@ -27,6 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFinitePeriodicHighHighLowProducerExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
@@ -38,7 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFinitePeriodicBernsteinSupportExact as 
 record PeriodicHighHighLowProducerData : Set₁ where
   constructor periodic-high-high-low-producer-data
   field
-    lerayModes : Agda.Builtin.List.List Leray.PeriodicLerayMode
+    lerayModes : List Leray.PeriodicLerayMode
     bernsteinData : Bernstein.FinitePeriodicBernsteinData
     leftL2Squared rightL2Squared : ℚ
 
