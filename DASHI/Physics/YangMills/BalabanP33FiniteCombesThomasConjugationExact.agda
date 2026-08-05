@@ -112,8 +112,40 @@ conjugatedProductTerm :
       * ((left row middle * right middle column)
         * inverseWeight column)
 conjugatedProductTerm
-    weight inverseWeight left right row middle column inverseLaw
-  rewrite inverseLaw = ℚRing.solve []
+    weight inverseWeight left right row middle column inverseLaw =
+  let
+    rearrange :
+      diagonalConjugate weight inverseWeight left row middle
+        * diagonalConjugate weight inverseWeight right middle column
+      ≡ weight row
+          * ((left row middle
+              * (inverseWeight middle * weight middle)
+              * right middle column)
+            * inverseWeight column)
+    rearrange = ℚRing.solve []
+
+    collapse :
+      weight row
+        * ((left row middle
+            * (inverseWeight middle * weight middle)
+            * right middle column)
+          * inverseWeight column)
+      ≡ weight row
+          * ((left row middle * right middle column)
+            * inverseWeight column)
+    collapse =
+      subst
+        (λ selected →
+          weight row
+            * ((left row middle * selected * right middle column)
+              * inverseWeight column)
+          ≡ weight row
+              * ((left row middle * right middle column)
+                * inverseWeight column))
+        (sym inverseLaw)
+        (ℚRing.solve [])
+  in
+  trans rearrange collapse
 
 conjugateCommutesWithComposition :
   ∀ {Site : Set}
@@ -240,9 +272,46 @@ untwistConjugatedEntry :
       * weight right)
   ≡ kernel left right
 untwistConjugatedEntry
-    weight inverseWeight inverseLaw kernel left right
-  rewrite inverseLaw left
-  | inverseLaw right = ℚRing.solve []
+    weight inverseWeight inverseLaw kernel left right =
+  let
+    rearrange :
+      inverseWeight left
+        * (diagonalConjugate weight inverseWeight kernel left right
+          * weight right)
+      ≡ (inverseWeight left * weight left)
+          * (kernel left right
+            * (inverseWeight right * weight right))
+    rearrange = ℚRing.solve []
+
+    collapseRight :
+      kernel left right * (inverseWeight right * weight right)
+      ≡ kernel left right
+    collapseRight =
+      subst
+        (λ selected → kernel left right * selected ≡ kernel left right)
+        (sym (inverseLaw right))
+        (ℚRing.solve [])
+
+    afterRight :
+      (inverseWeight left * weight left)
+        * (kernel left right
+          * (inverseWeight right * weight right))
+      ≡ (inverseWeight left * weight left) * kernel left right
+    afterRight =
+      cong
+        ((inverseWeight left * weight left) *_)
+        collapseRight
+
+    collapseLeft :
+      (inverseWeight left * weight left) * kernel left right
+      ≡ kernel left right
+    collapseLeft =
+      subst
+        (λ selected → selected * kernel left right ≡ kernel left right)
+        (sym (inverseLaw left))
+        (ℚRing.solve [])
+  in
+  trans rearrange (trans afterRight collapseLeft)
 
 rootUntwistConjugatedEntry :
   ∀ {Site : Set}
@@ -256,15 +325,28 @@ rootUntwistConjugatedEntry :
   ≡ kernel root target
 rootUntwistConjugatedEntry
     weight inverseWeight inverseLaw kernel root target rootInverseOne =
-  subst
-    (λ selected →
-      selected
+  let
+    withOne :
+      1ℚ
         * (diagonalConjugate weight inverseWeight kernel root target
           * weight target)
-      ≡ kernel root target)
-    (sym rootInverseOne)
-    (untwistConjugatedEntry
-      weight inverseWeight inverseLaw kernel root target)
+      ≡ kernel root target
+    withOne =
+      subst
+        (λ selected →
+          selected
+            * (diagonalConjugate weight inverseWeight kernel root target
+              * weight target)
+          ≡ kernel root target)
+        rootInverseOne
+        (untwistConjugatedEntry
+          weight inverseWeight inverseLaw kernel root target)
+  in
+  trans
+    (ℚRing.solve-∀
+      (diagonalConjugate weight inverseWeight kernel root target)
+      (weight target))
+    withOne
 
 rootEntryAbsoluteUntwist :
   ∀ {Site : Set}
@@ -323,9 +405,10 @@ combesThomasKernelDecayFromTiltedEntry
   in
   subst
     (λ lower → lower ≤ majorant * weight target)
-    (rootEntryAbsoluteUntwist
-      weight inverseWeight inverseLaw green root target
-      rootInverseOne weightAbsolute)
+    (sym
+      (rootEntryAbsoluteUntwist
+        weight inverseWeight inverseLaw green root target
+        rootInverseOne weightAbsolute))
     scaled
 
 finiteCombesThomasConjugationLevel : ProofLevel
