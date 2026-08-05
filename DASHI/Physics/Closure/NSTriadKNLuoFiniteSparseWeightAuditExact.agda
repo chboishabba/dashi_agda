@@ -3,9 +3,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSparseWeightAuditExact where
 ------------------------------------------------------------------------
 -- PROVENANCE
 --
--- Source examined: arXiv:2601.15685,
--- "Global Regularity for the Navier--Stokes Equations with Application to
--- Global Solvability for the Euler Equations".
+-- Author: Myong-Hwan Ri.
+-- Title: "Global Regularity for the Navier--Stokes Equations with
+-- Application to Global Solvability for the Euler Equations".
+-- arXiv:2601.15685.
 -- DOI: none assigned in the cited preprint version.
 --
 -- PURPOSE
