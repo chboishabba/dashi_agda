@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalFourClassClosureExact whe
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact as Bony
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalTerminalScaleExact as Critical
@@ -71,7 +71,7 @@ criticalFourClassTerminalClosure closureData =
         (λ root →
           Bony.coefficientSum currentBudget * root
           ≤ Critical.oneSixtyFourth)
-        (budgetUsesCriticalRoot closureData)
+        (sym (budgetUsesCriticalRoot closureData))
         (coefficientCriticalSmallness closureData)
 
     scaled :
