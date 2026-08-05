@@ -25,7 +25,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteHighHighLowCriticalAssemblyExact 
 -- every cellwise analytic estimate remains an explicit input field.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
@@ -72,6 +72,20 @@ sumScaledCoefficients (cell ∷ cells) criticalRoot outputEnergy =
   gapCoefficient cell * criticalRoot * outputEnergy
   + sumScaledCoefficients cells criticalRoot outputEnergy
 
+sumCellBoundsFrom :
+  (budget : FiniteHighHighLowBudget) →
+  (remaining : List HighHighLowCell) →
+  sumInteraction remaining
+  ≤ sumScaledCoefficients
+      remaining
+      (criticalRoot budget)
+      (outputEnergy budget)
+sumCellBoundsFrom budget [] = ℚₚ.≤-refl
+sumCellBoundsFrom budget (cell ∷ remaining) =
+  ℚₚ.+-mono-≤
+    (cellBound budget cell)
+    (sumCellBoundsFrom budget remaining)
+
 sumCellBounds :
   (budget : FiniteHighHighLowBudget) →
   sumInteraction (cells budget)
@@ -79,20 +93,7 @@ sumCellBounds :
       (cells budget)
       (criticalRoot budget)
       (outputEnergy budget)
-sumCellBounds budget = go (cells budget)
-  where
-  go :
-    (remaining : List HighHighLowCell) →
-    sumInteraction remaining
-    ≤ sumScaledCoefficients
-        remaining
-        (criticalRoot budget)
-        (outputEnergy budget)
-  go [] = ℚₚ.≤-refl
-  go (cell ∷ remaining) =
-    ℚₚ.+-mono-≤
-      (cellBound budget cell)
-      (go remaining)
+sumCellBounds budget = sumCellBoundsFrom budget (cells budget)
 
 sumScaledCoefficientsFactor :
   (cells : List HighHighLowCell) →
