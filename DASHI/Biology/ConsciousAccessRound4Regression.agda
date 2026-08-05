@@ -7,6 +7,9 @@ import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
 import DASHI.Biology.CausalHierarchicalChartResidualExact as Chart
 import DASHI.Biology.FiniteCrystallisationModeSelectionExact as Modes
+import DASHI.Biology.FiniteWaveShellGradientExact as Shell
+import DASHI.Biology.FiniteSymmetryStabiliserExact as Symmetry
+import DASHI.Biology.FinitePadicCollapseExact as Collapse
 import DASHI.Biology.ResourceLimitedCrystallisationExact as Resource
 import DASHI.Biology.ReasoningFieldRenderBridgeExact as Render
 import DASHI.Biology.PadicCrystallisationResidueExact as PadicCrystal
@@ -59,6 +62,26 @@ modeCompetitionRegression :
   ≡
   1
 modeCompetitionRegression = refl , refl
+
+waveShellRegression :
+  Shell.shellPenalty Shell.zeroWaveNumber ≡ 1
+  ×
+  Shell.shellPenalty Shell.selectedWaveNumber ≡ 0
+  ×
+  Shell.shellPenalty Shell.highWaveNumber ≡ 9
+waveShellRegression = refl , (refl , refl)
+
+stabiliserRegression :
+  Symmetry.stabiliserSize Symmetry.constantPattern ≡ 2
+  ×
+  Symmetry.stabiliserSize Symmetry.asymmetricPattern ≡ 1
+stabiliserRegression = refl , refl
+
+collapseRegression :
+  Collapse.weightedThickness Collapse.unstructuredResidual ≡ 58
+  ×
+  Collapse.weightedThickness Collapse.collapsedResidual ≡ 7
+collapseRegression = refl , refl
 
 freezeOutRegression :
   Resource.mobility (Resource.resource Resource.afterFreezeOut) ≡ 0
