@@ -94,17 +94,36 @@ halfGapCoercivitySurvives
       ℚP.+-mono-≤
         doubledHalfBelow
         ℚP.≤-refl
+
+    leftCancels :
+      (((+ 2 / 1) * halfGap) * normX)
+        + (0ℚ - halfGap * normX)
+      ≡ halfGap * normX
+    leftCancels = ℚRing.solve []
+
+    rightCancels :
+      (normTiltedX + halfGap * normX)
+        + (0ℚ - halfGap * normX)
+      ≡ normTiltedX
+    rightCancels = ℚRing.solve []
+
+    rightReduced :
+      (((+ 2 / 1) * halfGap) * normX)
+        + (0ℚ - halfGap * normX)
+      ≤ normTiltedX
+    rightReduced =
+      subst
+        (λ upper →
+          (((+ 2 / 1) * halfGap) * normX)
+            + (0ℚ - halfGap * normX)
+          ≤ upper)
+        rightCancels
+        shifted
   in
   subst
     (λ lower → lower ≤ normTiltedX)
-    (ℚRing.solve-∀ halfGap normX)
-    (subst
-      (λ upper →
-        (((+ 2 / 1) * halfGap) * normX)
-          + (0ℚ - halfGap * normX)
-        ≤ upper)
-      (sym (ℚRing.solve-∀ normTiltedX halfGap normX))
-      shifted)
+    leftCancels
+    rightReduced
 
 ------------------------------------------------------------------------
 -- P33 calibration delta=1/32, half-gap=1/64.
