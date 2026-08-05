@@ -12,10 +12,24 @@ module DASHI.Physics.YangMills.BalabanP33DuhamelSecondDerivativeMajorantExact wh
 -- "Derivative of the Exponential Map", technical note, 2018 revision.
 -- No DOI recorded.
 --
+-- Joseph Diestel and John J. Uhl, Jr.,
+-- "Vector Measures", Mathematical Surveys 15, American Mathematical Society,
+-- 1977. DOI: 10.1090/SURV/015.
+--
+-- Jan Mikusinski,
+-- "The Bochner Integral", Birkhaeuser, 1978.
+-- DOI: 10.1007/978-3-0348-5567-9.
+--
 -- Tadeusz Bałaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
+--
+-- TERMINOLOGY
+--
+-- The outstanding analytic theorem is the Bochner-integral Duhamel formula
+-- for a Banach-algebra-valued integrand.  It is unrelated to the Riemannian
+-- geometric "Bochner identity" involving the Laplacian and Ricci curvature.
 --
 -- DASHI CONTRIBUTION
 --
@@ -30,9 +44,10 @@ module DASHI.Physics.YangMills.BalabanP33DuhamelSecondDerivativeMajorantExact wh
 --
 -- The simplex has area 1/2 and there are two H/K orderings, so the sharp
 -- scalar majorant is ||X||||H||||K||, not 6||X||||H||||K||.  The physical
--- Bochner/Duhamel identification remains a separate analytic producer, but all
--- noncommutative telescope coefficients and P33 budget arithmetic are closed
--- here exactly.
+-- Bochner-integral Duhamel identification remains a separate analytic
+-- producer, but all scalar telescope coefficients and P33 budget arithmetic
+-- are closed here exactly.  The concrete noncommutative quaternion telescope
+-- is proved in BalabanP33QuaternionDuhamelIntegrandTelescopeExact.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -118,5 +133,11 @@ simplexDuhamelCoefficientLevel = machineChecked
 sharpSecondDerivativeMajorantArithmeticLevel : ProofLevel
 sharpSecondDerivativeMajorantArithmeticLevel = machineChecked
 
+physicalDuhamelBochnerIntegralIdentificationLevel : ProofLevel
+physicalDuhamelBochnerIntegralIdentificationLevel = conditional
+
+-- Compatibility alias retained for downstream imports written before the
+-- terminology correction.
 physicalDuhamelBochnerIdentificationLevel : ProofLevel
-physicalDuhamelBochnerIdentificationLevel = conditional
+physicalDuhamelBochnerIdentificationLevel =
+  physicalDuhamelBochnerIntegralIdentificationLevel
