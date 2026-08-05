@@ -16,6 +16,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteZenoCascadeBudgetExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalFarNearSplitExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDyadicHeatDampingExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFinitePeriodicHeatKernelYoungExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteEnergyControlledFarTailExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteExponentialPolynomialAbsorptionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNearWindowHalfKernelExact.agda
