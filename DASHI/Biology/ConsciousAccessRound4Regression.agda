@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Lift
 import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
+import DASHI.Biology.HallHybridManifoldTreeCarrier as Hall
 import DASHI.Biology.HybridPadicReasoningFieldBridgeExact as Hybrid
 import DASHI.Biology.CausalHierarchicalChartResidualExact as Chart
 import DASHI.Biology.FiniteCrystallisationModeSelectionExact as Modes
@@ -47,7 +48,7 @@ lodParentMassRegression :
 lodParentMassRegression = refl
 
 hybridCarrierCrossPollinationRegression :
-  Hybrid.hybridVoxel3 Hybrid.Hall.habitualChartNeighbour
+  Hybrid.hybridVoxel3 Hall.habitualChartNeighbour
   ≡
   LOD.voxel3 0 0 1
 hybridCarrierCrossPollinationRegression = refl
