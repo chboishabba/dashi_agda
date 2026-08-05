@@ -18,6 +18,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNYuFiniteAdjointLocalizationCancellationExact.agda
   DASHI/Physics/Closure/NSTriadKNYuFiniteFarFieldAnnularGainExact.agda
   DASHI/Physics/Closure/NSTriadKNGrujicLocalizedVorticityCoherenceSourceAuditExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteHighHighLowProjectedProductChainExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteHighHighLowNormConversionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteHighHighLowCriticalAssemblyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteHighLowDerivativeRatioExact.agda
