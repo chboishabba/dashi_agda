@@ -15,6 +15,7 @@ FILES=(
   DASHI/Biology/HallOfHallsCoalition.agda
   DASHI/Biology/PsychedelicMorphogeneticGeometryBoundary.agda
   DASHI/Biology/NaturalGrowthAlgorithmAtlas.agda
+  DASHI/Biology/SquareApollonianPackingComparison.agda
   DASHI/Biology/SignedDistanceBooleanGeometry.agda
   DASHI/Biology/HallHybridManifoldTreeCarrier.agda
   DASHI/Biology/VisualPathBraidResidual.agda
