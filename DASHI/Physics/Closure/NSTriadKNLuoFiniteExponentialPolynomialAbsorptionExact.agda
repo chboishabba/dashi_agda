@@ -19,13 +19,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteExponentialPolynomialAbsorptionEx
 --
 --   (n+1) (1/4)^n <= (1/2)^n.
 --
--- Squaring the same estimate gives
---
---   (n+1)^2 (1/16)^n <= (1/4)^n.
---
--- These exact rational bounds let a damped far-history term pay finite shell
--- multiplicity.  They are a dyadic model of exponential absorption, not an
--- identification with the continuum exponential function.
+-- This exact rational bound lets a damped far-history term pay one linear
+-- shell-multiplicity factor.  It is a dyadic model of exponential absorption,
+-- not an identification with the continuum exponential function.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -40,11 +36,9 @@ open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePrefixJensenExact as Prefix
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
-half sixteenth : ℚ
+half : ℚ
 half = Int.+ 1 / 2
-sixteenth = Int.+ 1 / 16
 
 powerProduct :
   (left right : ℚ) →
@@ -99,105 +93,3 @@ linearMultiplicityAbsorbed exponent =
       ≤ upper)
     (twoQuarterPowerIsHalfPower exponent)
     scaled
-
-squareLinearMultiplicityAbsorbed :
-  (exponent : Nat) →
-  L2.square (Prefix.prefixCount exponent)
-    * Geo.pow sixteenth exponent
-  ≤ Geo.pow Geo.quarter exponent
-squareLinearMultiplicityAbsorbed exponent =
-  let
-    first = linearMultiplicityAbsorbed exponent
-
-    squared :
-      L2.square
-        (Prefix.prefixCount exponent * Geo.pow Geo.quarter exponent)
-      ≤ L2.square (Geo.pow half exponent)
-    squared =
-      let
-        leftNonnegative :
-          0ℚ ≤ Prefix.prefixCount exponent
-              * Geo.pow Geo.quarter exponent
-        leftNonnegative =
-          let
-            prefixNonnegative : 0ℚ ≤ Prefix.prefixCount exponent
-            prefixNonnegative =
-              Prefix.prefixSquareSumNonnegative
-                (λ index → Int.+ 1 / 1)
-                exponent
-
-            quarterNonnegative =
-              Geo.powNonnegative
-                Geo.quarter exponent Geo.quarterNonnegative
-
-            instance
-              prefixIsNonnegative = nonNegative prefixNonnegative
-              quarterIsNonnegative = nonNegative quarterNonnegative
-              productIsNonnegative =
-                ℚₚ.nonNeg*nonNeg⇒nonNeg
-                  (Prefix.prefixCount exponent)
-                  (Geo.pow Geo.quarter exponent)
-          in
-          ℚₚ.nonNegative⁻¹
-            (Prefix.prefixCount exponent * Geo.pow Geo.quarter exponent)
-      in
-      squareMonotone leftNonnegative first
-
-    leftMeaning :
-      L2.square
-        (Prefix.prefixCount exponent * Geo.pow Geo.quarter exponent)
-      ≡ L2.square (Prefix.prefixCount exponent)
-          * Geo.pow sixteenth exponent
-    leftMeaning =
-      beginLeft exponent
-
-    rightMeaning :
-      L2.square (Geo.pow half exponent)
-      ≡ Geo.pow Geo.quarter exponent
-    rightMeaning =
-      powerProduct half half exponent
-  in
-  subst₂ _≤_ leftMeaning rightMeaning squared
-  where
-  squareMonotone :
-    ∀ {left right : ℚ} →
-    0ℚ ≤ left → left ≤ right →
-    L2.square left ≤ L2.square right
-  squareMonotone {left} {right} leftNonnegative leftBelowRight =
-    let
-      rightNonnegative = ℚₚ.≤-trans leftNonnegative leftBelowRight
-      first =
-        let instance leftIsNonnegative = nonNegative leftNonnegative
-        in ℚₚ.*-monoʳ-≤-nonNeg left leftBelowRight
-      second =
-        let instance rightIsNonnegative = nonNegative rightNonnegative
-        in ℚₚ.*-monoˡ-≤-nonNeg right leftBelowRight
-    in
-    ℚₚ.≤-trans first second
-
-  beginLeft :
-    (exponent : Nat) →
-    L2.square
-      (Prefix.prefixCount exponent * Geo.pow Geo.quarter exponent)
-    ≡ L2.square (Prefix.prefixCount exponent)
-        * Geo.pow sixteenth exponent
-  beginLeft exponent =
-    let
-      quarterSquare :
-        Geo.pow Geo.quarter exponent * Geo.pow Geo.quarter exponent
-        ≡ Geo.pow sixteenth exponent
-      quarterSquare = powerProduct Geo.quarter Geo.quarter exponent
-    in
-    subst
-      (λ power →
-        L2.square
-          (Prefix.prefixCount exponent * Geo.pow Geo.quarter exponent)
-        ≡ L2.square (Prefix.prefixCount exponent) * power)
-      quarterSquare
-      (solve
-        ( Prefix.prefixCount exponent
-        ∷ Geo.pow Geo.quarter exponent
-        ∷ []
-        ))
-
-  open import Relation.Binary.PropositionalEquality using (subst₂)
