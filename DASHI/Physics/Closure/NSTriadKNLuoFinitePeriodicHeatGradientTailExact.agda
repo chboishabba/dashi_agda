@@ -37,7 +37,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _-_; _≤_)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _-_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_; _<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -148,8 +148,7 @@ finiteGradientHeatTailBound :
   ≤ two * Scale.dyadicScale cutoff
 finiteGradientHeatTailBound cutoff terminalOffset =
   subst
-    (λ lower →
-      lower ≤ two * Scale.dyadicScale cutoff)
+    (λ lower → lower ≤ two * Scale.dyadicScale cutoff)
     (sym (finiteGradientHeatTailMeaning cutoff terminalOffset))
     (subst
       (λ upper →
@@ -166,7 +165,7 @@ finiteGradientHeatTailBound cutoff terminalOffset =
     let
       instance
         cutoffNonnegative =
-          Data.Rational.Base.nonNegative (dyadicScaleNonnegative cutoff)
+          nonNegative (dyadicScaleNonnegative cutoff)
     in
     ℚₚ.*-monoˡ-≤-nonNeg
       (Scale.dyadicScale cutoff)
