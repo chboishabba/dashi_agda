@@ -38,16 +38,17 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (Axis4; CyclicIndex; Product; pair; allCyclicIndices; four)
+  (Axis4; CyclicIndex; pair; allCyclicIndices; four)
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
@@ -55,9 +56,9 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact as Partition
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact as Match
 import DASHI.Physics.YangMills.BalabanPath4PhysicalComponentPoincareExact as Component
 import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact as Variance
-import DASHI.Physics.YangMills.BalabanPath4GlobalPoincareExact as Global
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as ScalarHodge
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -65,7 +66,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSU2HodgeCoercivityExact as Phys
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33OpenPeriodicBoundaryEnergyAuditExact as Boundary
 
-axes4 : Agda.Builtin.List.List Axis4
+axes4 : List Axis4
 axes4 = allCyclicIndices four
 
 sumAxes : (Axis4 → ℚ) → ℚ
@@ -75,10 +76,6 @@ sumAxesAdd : ∀ left right →
   sumAxes (λ axis → left axis + right axis)
   ≡ sumAxes left + sumAxes right
 sumAxesAdd left right = Fubini.sumRationalAdd axes4 left right
-
-------------------------------------------------------------------------
--- Nested periodic sum and repository global-site sum are the same fold.
-------------------------------------------------------------------------
 
 sumSitesMatchesCoordinateSum4 : ∀ term →
   Periodic.sumSites term ≡ Partition.coordinateSum4 term
@@ -90,10 +87,6 @@ sumSitesMatchesGlobalSiteSum term =
   trans
     (sumSitesMatchesCoordinateSum4 term)
     (sym (Partition.globalSiteSumMatchesCoordinateSum4 term))
-
-------------------------------------------------------------------------
--- One derivative direction: periodic = open + wrap.
-------------------------------------------------------------------------
 
 periodicFibreDifferenceSum :
   Sums.SiteField Path4.side4 → Axis4 →
@@ -115,31 +108,31 @@ periodicFibreDifferenceSumSplits :
 periodicFibreDifferenceSumSplits field Periodic.axis0
     (pair x1 (pair x2 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair Periodic.index0 x1) (pair x2 x3)))
-    (field (pair (pair Periodic.index1 x1) (pair x2 x3)))
-    (field (pair (pair Periodic.index2 x1) (pair x2 x3)))
-    (field (pair (pair Periodic.index3 x1) (pair x2 x3)))
+    (field (pair (pair Match.index0 x1) (pair x2 x3)))
+    (field (pair (pair Match.index1 x1) (pair x2 x3)))
+    (field (pair (pair Match.index2 x1) (pair x2 x3)))
+    (field (pair (pair Match.index3 x1) (pair x2 x3)))
 periodicFibreDifferenceSumSplits field Periodic.axis1
     (pair x0 (pair x2 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 Periodic.index0) (pair x2 x3)))
-    (field (pair (pair x0 Periodic.index1) (pair x2 x3)))
-    (field (pair (pair x0 Periodic.index2) (pair x2 x3)))
-    (field (pair (pair x0 Periodic.index3) (pair x2 x3)))
+    (field (pair (pair x0 Match.index0) (pair x2 x3)))
+    (field (pair (pair x0 Match.index1) (pair x2 x3)))
+    (field (pair (pair x0 Match.index2) (pair x2 x3)))
+    (field (pair (pair x0 Match.index3) (pair x2 x3)))
 periodicFibreDifferenceSumSplits field Periodic.axis2
     (pair x0 (pair x1 x3)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 x1) (pair Periodic.index0 x3)))
-    (field (pair (pair x0 x1) (pair Periodic.index1 x3)))
-    (field (pair (pair x0 x1) (pair Periodic.index2 x3)))
-    (field (pair (pair x0 x1) (pair Periodic.index3 x3)))
+    (field (pair (pair x0 x1) (pair Match.index0 x3)))
+    (field (pair (pair x0 x1) (pair Match.index1 x3)))
+    (field (pair (pair x0 x1) (pair Match.index2 x3)))
+    (field (pair (pair x0 x1) (pair Match.index3 x3)))
 periodicFibreDifferenceSumSplits field Periodic.axis3
     (pair x0 (pair x1 x2)) =
   ℚRing.solve-∀
-    (field (pair (pair x0 x1) (pair x2 Periodic.index0)))
-    (field (pair (pair x0 x1) (pair x2 Periodic.index1)))
-    (field (pair (pair x0 x1) (pair x2 Periodic.index2)))
-    (field (pair (pair x0 x1) (pair x2 Periodic.index3)))
+    (field (pair (pair x0 x1) (pair x2 Match.index0)))
+    (field (pair (pair x0 x1) (pair x2 Match.index1)))
+    (field (pair (pair x0 x1) (pair x2 Match.index2)))
+    (field (pair (pair x0 x1) (pair x2 Match.index3)))
 
 axisBoundaryWrapEnergy :
   Axis4 → Sums.SiteField Path4.side4 → ℚ
@@ -191,10 +184,6 @@ axisPeriodicDifferenceSplitsOpenAndBoundary axis field =
           (Boundary.physicalFibreWrapEnergy field axis))
   in
   trans asGlobal (trans asPartition splitFibres)
-
-------------------------------------------------------------------------
--- Double-axis scalar sums.
-------------------------------------------------------------------------
 
 scalarPeriodicGradientByAxes : Periodic.BondField4 → ℚ
 scalarPeriodicGradientByAxes field =
@@ -282,10 +271,6 @@ scalarPeriodicGradientSplitsOpenAndBoundary field =
             (_+ scalarBoundaryWrapEnergy field)
             (sym (openReferenceMatchesDoubleAxisSum field))))))
 
-------------------------------------------------------------------------
--- Physical three-component lift and positivity.
-------------------------------------------------------------------------
-
 asPeriodicField :
   Physical.PhysicalSU2BondField4 → Periodic.PhysicalBondField4
 asPeriodicField field coordinate axis site =
@@ -330,8 +315,8 @@ axisBoundaryWrapEnergyNonnegative axis field =
     (Boundary.physicalFibreWrapEnergy field axis)
     (λ transverse →
       FiniteL2.squareNonnegative
-        (field (Block.insertAxis axis Periodic.index0 transverse)
-        - field (Block.insertAxis axis Periodic.index3 transverse)))
+        (field (Block.insertAxis axis Match.index0 transverse)
+        - field (Block.insertAxis axis Match.index3 transverse)))
 
 scalarBoundaryWrapEnergyNonnegative : ∀ field →
   0ℚ ≤ scalarBoundaryWrapEnergy field
