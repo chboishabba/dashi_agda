@@ -20,6 +20,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoEnergyInterpolationDeficitExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCriticalTerminalScaleExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCriticalShellFunctionalExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteHighHighLowBernsteinGainExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCriticalInteractionKernelExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCriticalFourClassClosureExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoResonantAuditRound11Validation.agda
