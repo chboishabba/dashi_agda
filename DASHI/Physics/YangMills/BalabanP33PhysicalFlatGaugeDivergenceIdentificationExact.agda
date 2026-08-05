@@ -16,29 +16,17 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificati
 -- DASHI CONTRIBUTION
 --
 -- Construct the exact flat-background gauge residual jet on the repository's
--- literal physical perturbation.  The coordinate set is
---
---   LieCoordinate3 x sideFourSite,
---
--- and the first jet is the backward periodic divergence
---
---   D F_0[h](a,x) = sum_mu delta_mu h_mu^a(x).
---
--- The residual value and second jet are zero.  Therefore the generic squared
--- residual chain rule reduces definitionally to the sum of first-jet squares.
--- This module proves that finite sum is exactly the physical periodic
--- divergence energy used in the Hodge theorem.
---
--- Hence both flat halves of the Hodge decomposition are now literal:
--- the rational Wilson plaquette Hessian is curl squared and the rational gauge
--- Hessian is divergence squared for the same PhysicalSU2BondField4 h.
+-- literal physical perturbation.  Its first jet is the backward periodic
+-- divergence `sum_mu delta_mu h_mu^a(x)`, while its value and second jet vanish.
+-- The generic squared-residual chain rule therefore reduces to the first-jet
+-- square, and the finite coordinate sum is proved equal to the physical
+-- periodic divergence energy.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (map)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _+_)
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; trans)
 
@@ -89,6 +77,15 @@ flatGaugeFirstNormSquared : Physical.PhysicalSU2BondField4 → ℚ
 flatGaugeFirstNormSquared field =
   Jets.residualFirstNormSquared (flatGaugeResidual field)
 
+literalMapSumEqualsIndexedSum :
+  ∀ {A : Set} (values : List A) (term : A → ℚ) →
+  Jets.sumRational (map term values)
+  ≡ Sums.sumRational values term
+literalMapSumEqualsIndexedSum [] term = refl
+literalMapSumEqualsIndexedSum (value ∷ values) term =
+  cong (term value +_)
+    (literalMapSumEqualsIndexedSum values term)
+
 flatGaugeFirstNormAsCoordinateSiteSum : ∀ field →
   flatGaugeFirstNormSquared field
   ≡ Sums.sumRational Physical.lieCoordinates3
@@ -100,30 +97,24 @@ flatGaugeFirstNormAsCoordinateSiteSum : ∀ field →
             * Periodic.periodicDivergence
               (Bridge.asPeriodicField field coordinate) site))
 flatGaugeFirstNormAsCoordinateSiteSum field =
+  let
+    squareFirst : GaugeCoordinate4 → ℚ
+    squareFirst coordinate =
+      flatGaugeFirst field coordinate * flatGaugeFirst field coordinate
+  in
   trans
-    (Fubini.sumRationalMap
-      (λ coordinateSite → coordinateSite)
-      flatGaugeCoordinates
-      (λ coordinateSite →
-        let jet = Jets.componentJet (flatGaugeResidual field) coordinateSite
-        in Jets.jetFirst jet * Jets.jetFirst jet))
-    (trans
-      (Fubini.sumCartesian
-        Physical.lieCoordinates3
-        (Block.physicalBlockSites Path4.side4)
-        (λ coordinateSite →
-          let jet = Jets.componentJet (flatGaugeResidual field) coordinateSite
-          in Jets.jetFirst jet * Jets.jetFirst jet))
-      refl)
+    (literalMapSumEqualsIndexedSum flatGaugeCoordinates squareFirst)
+    (Fubini.sumCartesian
+      Physical.lieCoordinates3
+      (Block.physicalBlockSites Path4.side4)
+      squareFirst)
 
 flatGaugeFirstNormIsPeriodicDivergence : ∀ field →
   flatGaugeFirstNormSquared field
   ≡ Periodic.physicalPeriodicDivergenceEnergy
       (Bridge.asPeriodicField field)
 flatGaugeFirstNormIsPeriodicDivergence field =
-  trans
-    (flatGaugeFirstNormAsCoordinateSiteSum field)
-    refl
+  flatGaugeFirstNormAsCoordinateSiteSum field
 
 flatGaugeSecondVariationIsPeriodicDivergence : ∀ field →
   Jets.residualSecondVariation (flatGaugeResidual field)
