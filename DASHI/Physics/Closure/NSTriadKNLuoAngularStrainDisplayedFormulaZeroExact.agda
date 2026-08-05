@@ -10,22 +10,28 @@ module DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact 
 -- DOI: 10.17504/protocols.io.j8nlk15m5g5r/v1.
 --
 -- PURPOSE
--- Audit the displayed angular-symbol formula before importing its topological
--- conclusion.  The supplied text contracts the Levi--Civita tensor against
--- the symmetric product theta_k theta_l.  That contraction is the self-cross
--- product
+-- Audit Definition 2.1 exactly as displayed before importing its topological
+-- conclusion.  Its repeated-index core is
 --
---   theta cross theta,
+--   c_i(theta) = epsilon_{ikl} theta_k theta_l.
 --
--- and vanishes identically.  Consequently the natural symmetrized tensor
--- built from that displayed core is the zero matrix for every direction; it
--- has no distinguished maximal eigenline and cannot support the claimed
--- non-orientable maximal-eigenline bundle without a corrected symbol.
+-- This is theta cross theta and therefore vanishes identically.  Consequently
+-- both the matrix printed in the protocol,
 --
--- This theorem concerns the formula as displayed in the cited protocol
--- excerpt.  It does not assert that every possible angular strain symbol is
--- zero; a corrected formula containing the intended additional vector/index
--- may define a nontrivial object and would need a fresh derivation.
+--   M_ij(theta) = 1/2 (c_i(theta)+c_j(theta)) theta_i,
+--
+-- and the natural symmetric repair
+--
+--   1/2 (c_i(theta) theta_j + theta_i c_j(theta))
+--
+-- are the zero matrix for every direction.  The displayed definition has no
+-- distinguished maximal eigenline and cannot instantiate the claimed
+-- non-orientable maximal-eigenline bundle without a nontrivial corrected
+-- symbol.
+--
+-- This theorem concerns the cited displayed formula.  It does not assert that
+-- every possible angular strain symbol is zero; a corrected formula containing
+-- the intended additional vector/index would need a fresh derivation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -77,8 +83,42 @@ leviCivitaSelfContractionZero (V.v3 tx ty tz) =
 half : ℚ
 half = Int.+ 1 / 2
 
-displayedSymmetrizedSymbol : V.Vector3 → Matrix3
-displayedSymmetrizedSymbol theta =
+-- Literal transcription of the displayed Definition 2.1:
+-- M_ij = 1/2 (c_i+c_j) theta_i.
+displayedFormulaSymbol : V.Vector3 → Matrix3
+displayedFormulaSymbol theta =
+  let
+    core = leviCivitaSelfContraction theta
+  in
+  matrix3
+    (half * (V.x core + V.x core) * V.x theta)
+    (half * (V.x core + V.y core) * V.x theta)
+    (half * (V.x core + V.z core) * V.x theta)
+    (half * (V.y core + V.x core) * V.y theta)
+    (half * (V.y core + V.y core) * V.y theta)
+    (half * (V.y core + V.z core) * V.y theta)
+    (half * (V.z core + V.x core) * V.z theta)
+    (half * (V.z core + V.y core) * V.z theta)
+    (half * (V.z core + V.z core) * V.z theta)
+
+displayedFormulaSymbolZero :
+  (theta : V.Vector3) →
+  displayedFormulaSymbol theta ≡ zeroMatrix
+displayedFormulaSymbolZero (V.v3 tx ty tz) =
+  matrixExt
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+    (solve (tx ∷ ty ∷ tz ∷ []))
+
+-- The most obvious symmetric repair still uses the same zero core.
+naturalSymmetrizedSymbol : V.Vector3 → Matrix3
+naturalSymmetrizedSymbol theta =
   let
     core = leviCivitaSelfContraction theta
   in
@@ -93,10 +133,10 @@ displayedSymmetrizedSymbol theta =
     (half * (V.z core * V.y theta + V.z theta * V.y core))
     (half * (V.z core * V.z theta + V.z theta * V.z core))
 
-displayedSymmetrizedSymbolZero :
+naturalSymmetrizedSymbolZero :
   (theta : V.Vector3) →
-  displayedSymmetrizedSymbol theta ≡ zeroMatrix
-displayedSymmetrizedSymbolZero (V.v3 tx ty tz) =
+  naturalSymmetrizedSymbol theta ≡ zeroMatrix
+naturalSymmetrizedSymbolZero (V.v3 tx ty tz) =
   matrixExt
     (solve (tx ∷ ty ∷ tz ∷ []))
     (solve (tx ∷ ty ∷ tz ∷ []))
