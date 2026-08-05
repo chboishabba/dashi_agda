@@ -8,35 +8,37 @@ module DASHI.Physics.YangMills.BalabanP33LiteralPhysicalPerturbationAdapterExact
 -- DOI: 10.1103/PhysRevD.10.2445.
 --
 -- Tadeusz Bałaban,
+-- "Spaces of Regular Gauge Field Configurations on a Lattice and Gauge
+-- Fixing Conditions", Communications in Mathematical Physics 99 (1985),
+-- 75--102. DOI: 10.1007/BF01466594.
+--
+-- Tadeusz Bałaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
--- DASHI CONTRIBUTION
+-- DASHI CORRECTION AND CONTRIBUTION
 --
--- Bind every representation used by the cancellation theorem to one physical
--- perturbation h.  A model owns functions which send the same h to:
+-- Bind every representation in the corrected Hodge comparison to the same
+-- physical perturbation h.  In addition to the literal bond field and residual
+-- jets, the model owns the flat curl and flat divergence energies separately.
+-- Their sum is identified pointwise with the repository's full reference
+-- difference energy.
 --
---   * its literal side-four bond field;
---   * its literal Wilson/gauge/CMP109 second-variation data;
---   * its physical norm, reference-difference and Wilson-second-variation
---     scalars.
+-- The two physical defects are therefore
 --
--- The model also owns exact pointwise identifications between those physical
--- scalars and the values computed from the bond field and jet data.  The index
--- h is therefore not phantom: every component in the theorem is obtained by
--- applying one declared producer family to that same h.
+--   WilsonDefect(h) = H_W(A)[h,h] - H_curl(0)[h,h],
+--   GaugeDefect(h)  = H_gf(A)[h,h] - H_div(0)[h,h].
 --
--- This prevents an arbitrary bond field from being paired with unrelated jet
--- data.  Once a physical implementation constructs this model, the exact
--- cancellation theorem transports a physical Wilson-minus-difference estimate
--- to the literal Hessian without any additional compatibility premise.
+-- The final theorem consumes separate sharp bounds on these two defects and
+-- transports them to the literal Hessian generated from the same non-phantom
+-- h.  An invalid Wilson-minus-full-gradient quantity is no longer present.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; 0ℚ; _*_; -_; _-_; _≤_)
+open import Data.Rational using (ℚ; _*_; -_; _-_; _≤_)
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; sym)
+  (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
@@ -62,6 +64,9 @@ record LiteralPhysicalPerturbationModel
     physicalNormSqOf : Perturbation → ℚ
     physicalReferenceDifferenceOf : Perturbation → ℚ
     physicalWilsonSecondVariationOf : Perturbation → ℚ
+    physicalGaugeSecondVariationOf : Perturbation → ℚ
+    physicalFlatCurlEnergyOf : Perturbation → ℚ
+    physicalFlatDivergenceEnergyOf : Perturbation → ℚ
 
     bondNormMatchesPhysical : ∀ h →
       Hodge.bondNormSq (bondFieldOf h) ≡ physicalNormSqOf h
@@ -70,9 +75,18 @@ record LiteralPhysicalPerturbationModel
       Hodge.bondReferenceDifferenceEnergy (bondFieldOf h)
       ≡ physicalReferenceDifferenceOf h
 
+    flatHodgeMatchesReference : ∀ h →
+      physicalReferenceDifferenceOf h
+      ≡ physicalFlatCurlEnergyOf h
+        + physicalFlatDivergenceEnergyOf h
+
     wilsonSecondVariationMatchesPhysical : ∀ h →
       Jets.wilsonSecondVariation (secondVariationOf h)
       ≡ physicalWilsonSecondVariationOf h
+
+    gaugeSecondVariationMatchesPhysical : ∀ h →
+      Cancel.gaugeFirstEnergy (secondVariationOf h)
+      ≡ physicalGaugeSecondVariationOf h
 
     componentMeanZero : ∀ h →
       Hodge.BondComponentMeanZero (bondFieldOf h)
@@ -87,77 +101,121 @@ record LiteralPhysicalPerturbationModel
 
 open LiteralPhysicalPerturbationModel public
 
-physicalWilsonDifference :
+physicalWilsonDefect :
   ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex} →
   LiteralPhysicalPerturbationModel
     Perturbation Plaquette GaugeIndex ConstraintIndex →
   Perturbation → ℚ
-physicalWilsonDifference model h =
+physicalWilsonDefect model h =
   physicalWilsonSecondVariationOf model h
-  - physicalReferenceDifferenceOf model h
+  - physicalFlatCurlEnergyOf model h
 
-literalWilsonDifferenceMatchesPhysical :
+physicalGaugeDefect :
+  ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex} →
+  LiteralPhysicalPerturbationModel
+    Perturbation Plaquette GaugeIndex ConstraintIndex →
+  Perturbation → ℚ
+physicalGaugeDefect model h =
+  physicalGaugeSecondVariationOf model h
+  - physicalFlatDivergenceEnergyOf model h
+
+physicalReferenceIsFlatHodge :
   ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex}
     (model : LiteralPhysicalPerturbationModel
       Perturbation Plaquette GaugeIndex ConstraintIndex)
     h →
-  Jets.wilsonSecondVariation (secondVariationOf model h)
-    - Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h)
-  ≡ physicalWilsonDifference model h
-literalWilsonDifferenceMatchesPhysical model h =
-  cong₂ _-_
-    (wilsonSecondVariationMatchesPhysical model h)
+  Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h)
+  ≡ physicalFlatCurlEnergyOf model h
+    + physicalFlatDivergenceEnergyOf model h
+physicalReferenceIsFlatHodge model h =
+  Relation.Binary.PropositionalEquality.trans
     (referenceDifferenceMatchesPhysical model h)
+    (flatHodgeMatchesReference model h)
 
 ------------------------------------------------------------------------
--- Physical 1/32 Wilson comparison to the literal Hessian.
+-- Physical sharp Wilson and gauge bounds to the literal Hessian.
 ------------------------------------------------------------------------
 
-literalHessianCoerciveFromPhysicalWilsonDifference :
+literalHessianCoerciveFromPhysicalSharpWilsonGaugeBudgets :
   ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex}
     (model : LiteralPhysicalPerturbationModel
       Perturbation Plaquette GaugeIndex ConstraintIndex)
     h →
-  - (P33.p33PhysicalFloor * physicalNormSqOf model h)
-    ≤ physicalWilsonDifference model h →
+  - (Sharp.sharpSixteenAtomBudget * physicalNormSqOf model h)
+    ≤ physicalWilsonDefect model h →
+  - (SharpPromotion.configuredGaugeHodgeBudget
+      * physicalNormSqOf model h)
+    ≤ physicalGaugeDefect model h →
   P33.p33PhysicalFloor * physicalNormSqOf model h
     ≤ Jets.literalTotalSecondVariation (secondVariationOf model h)
-literalHessianCoerciveFromPhysicalWilsonDifference
-    model h physicalLower =
+literalHessianCoerciveFromPhysicalSharpWilsonGaugeBudgets
+    model h physicalWilsonLower physicalGaugeLower =
   let
-    internalLower :
-      - (P33.p33PhysicalFloor
+    internalWilsonLower :
+      - (Sharp.sharpSixteenAtomBudget
           * Hodge.bondNormSq (bondFieldOf model h))
       ≤ Jets.wilsonSecondVariation (secondVariationOf model h)
-          - Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h)
-    internalLower =
+          - physicalFlatCurlEnergyOf model h
+    internalWilsonLower =
       subst
         (λ lower →
           lower
           ≤ Jets.wilsonSecondVariation (secondVariationOf model h)
-              - Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h))
+              - physicalFlatCurlEnergyOf model h)
         (cong
-          (λ normSq → - (P33.p33PhysicalFloor * normSq))
+          (λ normSq → - (Sharp.sharpSixteenAtomBudget * normSq))
           (sym (bondNormMatchesPhysical model h)))
         (subst
           (λ upper →
-            - (P33.p33PhysicalFloor * physicalNormSqOf model h)
+            - (Sharp.sharpSixteenAtomBudget * physicalNormSqOf model h)
             ≤ upper)
-          (sym (literalWilsonDifferenceMatchesPhysical model h))
-          physicalLower)
+          (sym
+            (cong
+              (_- physicalFlatCurlEnergyOf model h)
+              (wilsonSecondVariationMatchesPhysical model h)))
+          physicalWilsonLower)
+
+    internalGaugeLower :
+      - (SharpPromotion.configuredGaugeHodgeBudget
+          * Hodge.bondNormSq (bondFieldOf model h))
+      ≤ Cancel.gaugeFirstEnergy (secondVariationOf model h)
+          - physicalFlatDivergenceEnergyOf model h
+    internalGaugeLower =
+      subst
+        (λ lower →
+          lower
+          ≤ Cancel.gaugeFirstEnergy (secondVariationOf model h)
+              - physicalFlatDivergenceEnergyOf model h)
+        (cong
+          (λ normSq →
+            - (SharpPromotion.configuredGaugeHodgeBudget * normSq))
+          (sym (bondNormMatchesPhysical model h)))
+        (subst
+          (λ upper →
+            - (SharpPromotion.configuredGaugeHodgeBudget
+                * physicalNormSqOf model h)
+            ≤ upper)
+          (sym
+            (cong
+              (_- physicalFlatDivergenceEnergyOf model h)
+              (gaugeSecondVariationMatchesPhysical model h)))
+          physicalGaugeLower)
 
     internalCoercive :
       P33.p33PhysicalFloor
         * Hodge.bondNormSq (bondFieldOf model h)
       ≤ Jets.literalTotalSecondVariation (secondVariationOf model h)
     internalCoercive =
-      Cancel.literalHessianCoerciveFromWilsonDifference
+      SharpPromotion.literalHessianCoerciveFromSharpWilsonGaugeBudgets
         (bondFieldOf model h)
         (secondVariationOf model h)
+        (physicalFlatCurlEnergyOf model h)
+        (physicalFlatDivergenceEnergyOf model h)
         (componentMeanZero model h)
         (gaugeExact model h)
         (constraintExact model h)
-        internalLower
+        (physicalReferenceIsFlatHodge model h)
+        internalWilsonLower internalGaugeLower
   in
   subst
     (λ lower →
@@ -166,37 +224,11 @@ literalHessianCoerciveFromPhysicalWilsonDifference
       (bondNormMatchesPhysical model h))
     internalCoercive
 
-------------------------------------------------------------------------
--- Sharp sixteen-atom physical Wilson comparison to the literal Hessian.
-------------------------------------------------------------------------
-
-literalHessianCoerciveFromPhysicalSharpWilsonBudget :
-  ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex}
-    (model : LiteralPhysicalPerturbationModel
-      Perturbation Plaquette GaugeIndex ConstraintIndex)
-    h →
-  - (Sharp.sharpSixteenAtomBudget * physicalNormSqOf model h)
-    ≤ physicalWilsonDifference model h →
-  P33.p33PhysicalFloor * physicalNormSqOf model h
-    ≤ Jets.literalTotalSecondVariation (secondVariationOf model h)
-literalHessianCoerciveFromPhysicalSharpWilsonBudget
-    model h physicalSharpLower =
-  literalHessianCoerciveFromPhysicalWilsonDifference
-    model h
-    (SharpPromotion.sharpSignedLowerImpliesPhysicalSignedLower
-      (physicalNormSqOf model h)
-      (physicalWilsonDifference model h)
-      (subst
-        (λ normSq → 0ℚ ≤ normSq)
-        (bondNormMatchesPhysical model h)
-        (SharpPromotion.bondNormSqNonnegative (bondFieldOf model h)))
-      physicalSharpLower)
-
 literalPhysicalPerturbationAdapterLevel : ProofLevel
 literalPhysicalPerturbationAdapterLevel = machineChecked
 
-literalPhysicalWilsonDifferenceLevel : ProofLevel
-literalPhysicalWilsonDifferenceLevel = machineChecked
+literalPhysicalFlatHodgeCompatibilityLevel : ProofLevel
+literalPhysicalFlatHodgeCompatibilityLevel = machineChecked
 
-literalPhysicalSharpWilsonCoercivityLevel : ProofLevel
-literalPhysicalSharpWilsonCoercivityLevel = machineChecked
+literalPhysicalSharpWilsonGaugeCoercivityLevel : ProofLevel
+literalPhysicalSharpWilsonGaugeCoercivityLevel = machineChecked
