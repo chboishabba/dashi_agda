@@ -13,6 +13,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33CMP109LiteralPathDerivativeKernelExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33CMP109PeriodicContourEdgeKernelExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintSecondVariationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralHessianFiveChannelPromotionExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralResidualKernelNumericalCalibrationExact.agda'
@@ -40,5 +41,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check literal exponential, chord metric, Duhamel, Hessian and residual lane
+      - name: Check literal exponential, chord metric, oriented CMP109, Hessian and residual lane
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round18.sh
