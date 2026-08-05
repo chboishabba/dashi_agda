@@ -1,6 +1,7 @@
 module DASHI.Biology.QuasiperiodicInternalSpaceBoundaryExact where
 
 open import DASHI.Core.Prelude
+open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 open import DASHI.Biology.TriadicKernelLiftQuotientExact
 
 ------------------------------------------------------------------------
@@ -57,7 +58,7 @@ bothCanonicalPointsAccepted = refl , refl
 -- Refining an internal code by one nine-sheet uses the exact product lift.
 
 baseInternalKernel : Kernel 2
-baseInternalKernel = positiveTrit Data.Vec.∷ zeroTrit Data.Vec.∷ Data.Vec.[]
+baseInternalKernel = positiveTrit vcons zeroTrit vcons vnil
 
 refinedInternalKernel : Kernel 4
 refinedInternalKernel =
