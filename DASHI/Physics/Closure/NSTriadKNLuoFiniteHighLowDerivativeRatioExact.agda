@@ -38,6 +38,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_; _<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -83,15 +84,21 @@ highLowRatioPrefixBound :
   highLowRatioPrefix cutoff ≤ half
 highLowRatioPrefixBound cutoff =
   let
-    instance
-      quarterIsNonnegative = nonNegative quarterNonnegative
+    scaled :
+      quarter * Geo.partialSum half cutoff ≤ quarter * two
+    scaled =
+      let
+        instance
+          quarterIsNonnegative = nonNegative quarterNonnegative
+      in
+      ℚₚ.*-monoˡ-≤-nonNeg
+        quarter
+        (unshiftedHalfPrefixBound cutoff)
+
+    endpointMeaning : quarter * two ≡ half
+    endpointMeaning = solve []
   in
-  ℚₚ.≤-trans
-    (ℚₚ.*-monoˡ-≤-nonNeg
-      quarter
-      (unshiftedHalfPrefixBound cutoff))
-    (let
-       equality : quarter * two ≡ half
-       equality = solve []
-     in
-     ℚₚ.≤-reflexive equality)
+  subst
+    (λ upper → highLowRatioPrefix cutoff ≤ upper)
+    endpointMeaning
+    scaled
