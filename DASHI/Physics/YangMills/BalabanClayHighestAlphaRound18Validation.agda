@@ -5,6 +5,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound18Validation where
 --
 --   * actual Bishop sine/cosine squared-chord control;
 --   * endpoint-safe literal quaternion exponential and sinc cancellation;
+--   * four-dimensional Lagrange, Cauchy--Schwarz and chord-triangle algebra
+--       from one explicit Bishop square-root backend;
 --   * concrete noncommutative Duhamel telescoping and finite simple integrals;
 --   * literal CMP109 path derivative support;
 --   * literal Wilson + gauge + constraint second variation;
@@ -16,12 +18,14 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound18Validation where
 --   * exact dyadic physical clustering exponent transport;
 --   * explicit 1/64 continuum plaquette noncollapse calibration.
 --
--- The root does not turn the remaining physical entry, atom, RG, clustering or
--- cutoff estimates into axioms.  Their proof levels remain conditional.
+-- The root does not turn the remaining square-root construction, physical
+-- entry/atom/RG/clustering/cutoff estimates or Bochner completion into axioms.
+-- Their proof levels remain conditional.
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound17Validation
 import DASHI.Physics.YangMills.BalabanP33BishopQuaternionExponentialSquaredChordExact
 import DASHI.Physics.YangMills.BalabanP33BishopLiteralQuaternionExponentialChordExact
+import DASHI.Physics.YangMills.BalabanP33BishopR4ChordMetricFromSquareRootExact
 import DASHI.Physics.YangMills.BalabanP33QuaternionDuhamelIntegrandTelescopeExact
 import DASHI.Physics.YangMills.BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact
 import DASHI.Physics.YangMills.BalabanP33CMP109LiteralPathDerivativeKernelExact
