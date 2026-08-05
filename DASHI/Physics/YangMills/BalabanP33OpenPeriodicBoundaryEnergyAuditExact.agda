@@ -17,9 +17,7 @@ module DASHI.Physics.YangMills.BalabanP33OpenPeriodicBoundaryEnergyAuditExact wh
 --
 -- Audit the boundary convention of the current side-four reference energy.
 -- The carrier is cyclic, but `physicalFibreEdgeEnergy` deliberately sums only
--- the three open path edges
---
---   0--1, 1--2, 2--3.
+-- the three open path edges 0--1, 1--2, 2--3.
 --
 -- A periodic Wilson/Hodge comparison also contains the wrap edge 3--0.  This
 -- module proves exactly
@@ -28,12 +26,11 @@ module DASHI.Physics.YangMills.BalabanP33OpenPeriodicBoundaryEnergyAuditExact wh
 --
 -- on every physical fibre and exhibits the concrete witness
 --
---   f=(0,0,0,1):  E_open=1, E_cycle=2.
+--   f=(0,0,0,1): E_open=1, E_cycle=2.
 --
 -- Therefore a periodic flat curl-plus-divergence identity cannot be identified
 -- with the present open reference difference energy without a boundary/collar
--- term or an explicit boundary condition killing the wrap square.  This is a
--- kernel-visible mathematical obstruction, not a documentation caveat.
+-- term or an explicit boundary condition killing the wrap square.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -48,16 +45,14 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
   (Axis4; CyclicIndex)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
-  (Triple; SiteField; insertAxis)
+  (Triple; insertAxis)
+open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
+  (SiteField)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
 open import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact using
   (index0; index1; index2; index3)
 open import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact using
   (physicalFibreEdgeEnergy)
-
-------------------------------------------------------------------------
--- Exact one-fibre arithmetic.
-------------------------------------------------------------------------
 
 openPathEnergy4 : ℚ → ℚ → ℚ → ℚ → ℚ
 openPathEnergy4 f0 f1 f2 f3 =
@@ -94,10 +89,6 @@ unitBoundaryPeriodicMinusOpen :
     - openPathEnergy4 0ℚ 0ℚ 0ℚ (+ 1 / 1)
   ≡ + 1 / 1
 unitBoundaryPeriodicMinusOpen = ℚRing.solve []
-
-------------------------------------------------------------------------
--- Literal physical fibre specialization.
-------------------------------------------------------------------------
 
 physicalFibreWrapEnergy :
   SiteField side4 → Axis4 → Triple (CyclicIndex side4) → ℚ
