@@ -9,6 +9,7 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 files=(
   DASHI/Physics/YangMills/BalabanP33BishopQuaternionExponentialSquaredChordExact.agda
   DASHI/Physics/YangMills/BalabanP33BishopLiteralQuaternionExponentialChordExact.agda
+  DASHI/Physics/YangMills/BalabanP33BishopR4ChordMetricFromSquareRootExact.agda
   DASHI/Physics/YangMills/BalabanP33QuaternionDuhamelIntegrandTelescopeExact.agda
   DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda
   DASHI/Physics/YangMills/BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact.agda
@@ -36,6 +37,10 @@ checks=(
   'BalabanP33BishopQuaternionExponentialSquaredChordExact.agda:actualSquaredChordBelowRadiusSquared'
   'BalabanP33BishopLiteralQuaternionExponentialChordExact.agda:sincExtendedCancellation'
   'BalabanP33BishopLiteralQuaternionExponentialChordExact.agda:literalExponentialSquaredChordBelowRadiusSquared'
+  'BalabanP33BishopR4ChordMetricFromSquareRootExact.agda:lagrangeIdentity4'
+  'BalabanP33BishopR4ChordMetricFromSquareRootExact.agda:cauchySchwarzSquared4'
+  'BalabanP33BishopR4ChordMetricFromSquareRootExact.agda:literalChordDistanceTriangle'
+  'BalabanP33BishopR4ChordMetricFromSquareRootExact.agda:literalExponentialChordDistanceBelowRadius'
   'BalabanP33QuaternionDuhamelIntegrandTelescopeExact.agda:orderedDuhamelIntegrandTelescopeExact'
   'BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact.agda:finiteSymmetricSimpleIntegralTelescopeExact'
   'BalabanP33CMP109LiteralPathDerivativeKernelExact.agda:cmp109PathDerivativeVanishesOutsideLiteralOccurrence'
@@ -59,6 +64,8 @@ done
 
 # Provenance and terminology checks.  In particular, do not regress to the
 # unrelated geometric "Bochner identity" as the name of the Duhamel producer.
+grep -q '10.1007/978-3-642-61667-9' \
+  DASHI/Physics/YangMills/BalabanP33BishopR4ChordMetricFromSquareRootExact.agda
 grep -q '10.1090/SURV/015' \
   DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda
 grep -q '10.1007/978-3-0348-5567-9' \
