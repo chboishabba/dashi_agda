@@ -19,30 +19,32 @@ module DASHI.Physics.YangMills.BalabanP33LiteralPhysicalPerturbationAdapterExact
 --
 -- DASHI CORRECTION AND CONTRIBUTION
 --
--- Bind every representation in the corrected Hodge comparison to the same
--- physical perturbation h.  In addition to the literal bond field and residual
--- jets, the model owns the flat curl and flat divergence energies separately.
--- Their sum is identified pointwise with the repository's full reference
--- difference energy.
+-- Bind every representation in the corrected Hodge comparison to one actual
+-- three-component SU(2) perturbation h.  The former adapter used a scalar bond
+-- field even though the Wilson second variation and the 3072-coordinate norm
+-- are physical three-component quantities.
 --
--- The two physical defects are therefore
+-- A model now maps the same h to:
 --
---   WilsonDefect(h) = H_W(A)[h,h] - H_curl(0)[h,h],
---   GaugeDefect(h)  = H_gf(A)[h,h] - H_div(0)[h,h].
+--   * its literal PhysicalSU2BondField4;
+--   * its rational Wilson/gauge/CMP109 second-variation data;
+--   * its physical norm and open reference difference energy;
+--   * its selected flat curl and flat divergence energies.
 --
--- The final theorem consumes separate sharp bounds on these two defects and
--- transports them to the literal Hessian generated from the same non-phantom
--- h.  An invalid Wilson-minus-full-gradient quantity is no longer present.
+-- Pointwise exact laws identify those values.  The final theorem consumes
+-- separate sharp Wilson and gauge defect estimates and transports them to the
+-- literal total Hessian generated from the same non-phantom h.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; _*_; -_; _-_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; -_; _-_; _≤_)
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym)
+  (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2HodgeCoercivityExact as PhysicalHodge
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintCancellationExact as Cancel
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
@@ -55,7 +57,7 @@ import DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact as Sha
 record LiteralPhysicalPerturbationModel
     (Perturbation Plaquette GaugeIndex ConstraintIndex : Set) : Set₁ where
   field
-    bondFieldOf : Perturbation → Hodge.RationalBondField4
+    physicalFieldOf : Perturbation → Physical.PhysicalSU2BondField4
 
     secondVariationOf : Perturbation →
       Jets.LiteralPhysicalSecondVariation
@@ -68,11 +70,12 @@ record LiteralPhysicalPerturbationModel
     physicalFlatCurlEnergyOf : Perturbation → ℚ
     physicalFlatDivergenceEnergyOf : Perturbation → ℚ
 
-    bondNormMatchesPhysical : ∀ h →
-      Hodge.bondNormSq (bondFieldOf h) ≡ physicalNormSqOf h
+    normMatchesPhysicalField : ∀ h →
+      Physical.physicalSU2BondNormSq (physicalFieldOf h)
+      ≡ physicalNormSqOf h
 
-    referenceDifferenceMatchesPhysical : ∀ h →
-      Hodge.bondReferenceDifferenceEnergy (bondFieldOf h)
+    referenceDifferenceMatchesPhysicalField : ∀ h →
+      PhysicalHodge.physicalReferenceDifferenceEnergy (physicalFieldOf h)
       ≡ physicalReferenceDifferenceOf h
 
     flatHodgeMatchesReference : ∀ h →
@@ -89,7 +92,7 @@ record LiteralPhysicalPerturbationModel
       ≡ physicalGaugeSecondVariationOf h
 
     componentMeanZero : ∀ h →
-      Hodge.BondComponentMeanZero (bondFieldOf h)
+      PhysicalHodge.PhysicalBondComponentMeanZero (physicalFieldOf h)
 
     gaugeExact : ∀ h →
       Jets.ExactResidualBackground
@@ -124,12 +127,12 @@ physicalReferenceIsFlatHodge :
     (model : LiteralPhysicalPerturbationModel
       Perturbation Plaquette GaugeIndex ConstraintIndex)
     h →
-  Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h)
+  PhysicalHodge.physicalReferenceDifferenceEnergy (physicalFieldOf model h)
   ≡ physicalFlatCurlEnergyOf model h
     + physicalFlatDivergenceEnergyOf model h
 physicalReferenceIsFlatHodge model h =
-  Relation.Binary.PropositionalEquality.trans
-    (referenceDifferenceMatchesPhysical model h)
+  trans
+    (referenceDifferenceMatchesPhysicalField model h)
     (flatHodgeMatchesReference model h)
 
 ------------------------------------------------------------------------
@@ -151,20 +154,23 @@ literalHessianCoerciveFromPhysicalSharpWilsonGaugeBudgets :
 literalHessianCoerciveFromPhysicalSharpWilsonGaugeBudgets
     model h physicalWilsonLower physicalGaugeLower =
   let
+    field = physicalFieldOf model h
+    dataSet = secondVariationOf model h
+
     internalWilsonLower :
       - (Sharp.sharpSixteenAtomBudget
-          * Hodge.bondNormSq (bondFieldOf model h))
-      ≤ Jets.wilsonSecondVariation (secondVariationOf model h)
+          * Physical.physicalSU2BondNormSq field)
+      ≤ Jets.wilsonSecondVariation dataSet
           - physicalFlatCurlEnergyOf model h
     internalWilsonLower =
       subst
         (λ lower →
           lower
-          ≤ Jets.wilsonSecondVariation (secondVariationOf model h)
+          ≤ Jets.wilsonSecondVariation dataSet
               - physicalFlatCurlEnergyOf model h)
         (cong
           (λ normSq → - (Sharp.sharpSixteenAtomBudget * normSq))
-          (sym (bondNormMatchesPhysical model h)))
+          (sym (normMatchesPhysicalField model h)))
         (subst
           (λ upper →
             - (Sharp.sharpSixteenAtomBudget * physicalNormSqOf model h)
@@ -177,19 +183,19 @@ literalHessianCoerciveFromPhysicalSharpWilsonGaugeBudgets
 
     internalGaugeLower :
       - (SharpPromotion.configuredGaugeHodgeBudget
-          * Hodge.bondNormSq (bondFieldOf model h))
-      ≤ Cancel.gaugeFirstEnergy (secondVariationOf model h)
+          * Physical.physicalSU2BondNormSq field)
+      ≤ Cancel.gaugeFirstEnergy dataSet
           - physicalFlatDivergenceEnergyOf model h
     internalGaugeLower =
       subst
         (λ lower →
           lower
-          ≤ Cancel.gaugeFirstEnergy (secondVariationOf model h)
+          ≤ Cancel.gaugeFirstEnergy dataSet
               - physicalFlatDivergenceEnergyOf model h)
         (cong
           (λ normSq →
             - (SharpPromotion.configuredGaugeHodgeBudget * normSq))
-          (sym (bondNormMatchesPhysical model h)))
+          (sym (normMatchesPhysicalField model h)))
         (subst
           (λ upper →
             - (SharpPromotion.configuredGaugeHodgeBudget
@@ -202,13 +208,11 @@ literalHessianCoerciveFromPhysicalSharpWilsonGaugeBudgets
           physicalGaugeLower)
 
     internalCoercive :
-      P33.p33PhysicalFloor
-        * Hodge.bondNormSq (bondFieldOf model h)
-      ≤ Jets.literalTotalSecondVariation (secondVariationOf model h)
+      P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+      ≤ Jets.literalTotalSecondVariation dataSet
     internalCoercive =
       SharpPromotion.literalHessianCoerciveFromSharpWilsonGaugeBudgets
-        (bondFieldOf model h)
-        (secondVariationOf model h)
+        field dataSet
         (physicalFlatCurlEnergyOf model h)
         (physicalFlatDivergenceEnergyOf model h)
         (componentMeanZero model h)
@@ -218,10 +222,9 @@ literalHessianCoerciveFromPhysicalSharpWilsonGaugeBudgets
         internalWilsonLower internalGaugeLower
   in
   subst
-    (λ lower →
-      lower ≤ Jets.literalTotalSecondVariation (secondVariationOf model h))
+    (λ lower → lower ≤ Jets.literalTotalSecondVariation dataSet)
     (cong (P33.p33PhysicalFloor *_)
-      (bondNormMatchesPhysical model h))
+      (normMatchesPhysicalField model h))
     internalCoercive
 
 literalPhysicalPerturbationAdapterLevel : ProofLevel
