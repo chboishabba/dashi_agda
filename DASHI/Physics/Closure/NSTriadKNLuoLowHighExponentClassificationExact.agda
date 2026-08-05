@@ -37,9 +37,10 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
-zero half one threeHalves two fiveHalves : ℚ
+zero half minusHalf one threeHalves two fiveHalves : ℚ
 zero = Int.+ 0 / 1
 half = Int.+ 1 / 2
+minusHalf = Int.-[1+ 0 ] / 2
 one = Int.+ 1 / 1
 threeHalves = Int.+ 3 / 2
 two = Int.+ 2 / 1
@@ -140,5 +141,5 @@ twoInfinityFirstGap : firstGapDegree pairTwoInfinity ≡ half
 twoInfinityFirstGap = solve []
 
 twoInfinitySecondGap :
-  secondGapDegree pairTwoInfinity ≡ Int.-[1+ 1 ] / 2
+  secondGapDegree pairTwoInfinity ≡ minusHalf
 twoInfinitySecondGap = solve []
