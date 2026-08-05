@@ -33,13 +33,18 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; -_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNOutputRelocationPositiveKernelMajorant as Sum
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSignedConvolutionYoungExact as Young
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicHeatDampingExact as Heat
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
+
+halfNonnegative : 0ℚ ≤ Heat.half
+halfNonnegative = toWitness {a? = 0ℚ ≤? Heat.half} _
 
 record FinitePeriodicHeatKernelData : Set where
   constructor finite-periodic-heat-kernel
@@ -67,13 +72,7 @@ heatFactorNonnegative inputs =
   Geo.powNonnegative
     Heat.half
     (terminalGap inputs)
-    (let
-      open import Data.Rational.Properties as RationalProperties
-      open import Data.Rational.Base using (0ℚ)
-      open import Relation.Nullary.Decidable.Core using (toWitness)
-      open RationalProperties using (_≤?_)
-     in
-     toWitness {a? = 0ℚ ≤? Heat.half} _)
+    halfNonnegative
 
 dampedTermUpper :
   (inputs : FinitePeriodicHeatKernelData) →
