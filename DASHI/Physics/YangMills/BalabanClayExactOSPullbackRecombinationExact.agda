@@ -85,7 +85,9 @@ blockedPositiveTimeHasOriginalPositiveTimeRepresentative dataSet blocked =
 -- A signed label may fail positivity even though the exact recombination is
 -- positive.  Thus demanding positivity label-by-label is stronger than OS
 -- positivity of the physical measure and can incorrectly reject exact RG
--- decompositions.
+-- decompositions.  The operation below is deliberately argument-sensitive:
+-- the mixed physical pair is positive, while a pair of two negative labelled
+-- pieces remains negative.
 ------------------------------------------------------------------------
 
 data LabelValue : Set where
@@ -100,11 +102,19 @@ negativeLabelIsNotNonnegative ()
 
 recombineTwoLabels : LabelValue → LabelValue → LabelValue
 recombineTwoLabels negativeLabel positiveLabel = recombinedValue
-recombineTwoLabels first second = recombinedValue
+recombineTwoLabels positiveLabel negativeLabel = recombinedValue
+recombineTwoLabels negativeLabel negativeLabel = negativeLabel
+recombineTwoLabels positiveLabel positiveLabel = positiveLabel
+recombineTwoLabels recombinedValue second = recombinedValue
+recombineTwoLabels first recombinedValue = recombinedValue
 
 physicalRecombinationIsNonnegative :
   LabelNonnegative (recombineTwoLabels negativeLabel positiveLabel)
 physicalRecombinationIsNonnegative = recombinedIsNonnegative
+
+negativePairDoesNotRecombinePositively :
+  LabelNonnegative (recombineTwoLabels negativeLabel negativeLabel) → Empty
+negativePairDoesNotRecombinePositively = negativeLabelIsNotNonnegative
 
 exactOSPullbackLevel : ProofLevel
 exactOSPullbackLevel = machineChecked
