@@ -27,11 +27,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteNearCenteredCommutatorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Agda.Builtin.List using ([]; _∷_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearWindowHalfKernelExact as Window
@@ -45,7 +45,6 @@ record NearCenteredCommutatorData : Set where
     halfKernelNonnegative :
       0ℚ ≤ Window.halfKernelMass windowExponent
 
-    secondMomentNonnegative : 0ℚ ≤ secondMoment
     curvatureNonnegative : 0ℚ ≤ curvature
 
     centeredRemainderBound :
@@ -109,23 +108,20 @@ nearCenteredWithMomentEnvelope inputs momentEnvelope momentBound =
   let
     first = nearCenteredCommutatorBound inputs
 
-    commonNonnegative :
-      0ℚ ≤ Window.halfKernelMass (windowExponent inputs)
-          * curvature inputs
-    commonNonnegative =
+    halfScaled :
+      Window.halfKernelMass (windowExponent inputs)
+        * secondMoment inputs
+      ≤ Window.halfKernelMass (windowExponent inputs)
+        * momentEnvelope
+    halfScaled =
       let
         instance
           halfKernelIsNonnegative =
             nonNegative (halfKernelNonnegative inputs)
-          curvatureIsNonnegative =
-            nonNegative (curvatureNonnegative inputs)
-          productIsNonnegative =
-            ℚₚ.nonNeg*nonNeg⇒nonNeg
-              (Window.halfKernelMass (windowExponent inputs))
-              (curvature inputs)
       in
-      ℚₚ.nonNegative⁻¹
-        (Window.halfKernelMass (windowExponent inputs) * curvature inputs)
+      ℚₚ.*-monoˡ-≤-nonNeg
+        (Window.halfKernelMass (windowExponent inputs))
+        momentBound
 
     scaledMoment :
       Window.halfKernelMass (windowExponent inputs)
@@ -134,34 +130,12 @@ nearCenteredWithMomentEnvelope inputs momentEnvelope momentBound =
         * momentEnvelope * curvature inputs
     scaledMoment =
       let
-        instance commonIsNonnegative = nonNegative commonNonnegative
-        raw =
-          ℚₚ.*-monoˡ-≤-nonNeg
-            (Window.halfKernelMass (windowExponent inputs)
-              * curvature inputs)
-            momentBound
+        instance
+          curvatureIsNonnegative =
+            nonNegative (curvatureNonnegative inputs)
       in
-      subst
-        (λ lower → lower
-          ≤ Window.halfKernelMass (windowExponent inputs)
-              * momentEnvelope * curvature inputs)
-        (solve
-          ( Window.halfKernelMass (windowExponent inputs)
-          ∷ secondMoment inputs
-          ∷ curvature inputs
-          ∷ []
-          ))
-        (subst
-          (λ upper →
-            (Window.halfKernelMass (windowExponent inputs)
-              * curvature inputs) * secondMoment inputs
-            ≤ upper)
-          (solve
-            ( Window.halfKernelMass (windowExponent inputs)
-            ∷ momentEnvelope
-            ∷ curvature inputs
-            ∷ []
-            ))
-          raw)
+      ℚₚ.*-monoʳ-≤-nonNeg
+        (curvature inputs)
+        halfScaled
   in
   ℚₚ.≤-trans first scaledMoment
