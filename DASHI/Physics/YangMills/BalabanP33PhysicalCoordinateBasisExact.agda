@@ -49,6 +49,7 @@ open import Relation.Binary.PropositionalEquality using
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
@@ -188,15 +189,15 @@ productKroneckerFactorExact
     decideA decideB leftA rightA leftB rightB
   with decideA leftA rightA | decideB leftB rightB
 ... | yes refl | yes refl = ℚRing.solve []
-... | yes _ | no _ = ℚRing.solve []
-... | no _ | yes _ = ℚRing.solve []
+... | yes refl | no _ = ℚRing.solve []
+... | no _ | yes refl = ℚRing.solve []
 ... | no _ | no _ = ℚRing.solve []
 
 productFiniteSelector :
   ∀ {A B : Set} →
   FiniteSelector A → FiniteSelector B →
   FiniteSelector (Product A B)
-productFiniteSelector selectorA selectorB = record
+productFiniteSelector {A} {B} selectorA selectorB = record
   { elements = cartesian (elements selectorA) (elements selectorB)
   ; decide = productDecidableEquality
       (decide selectorA) (decide selectorB)
@@ -318,7 +319,7 @@ lieCoordinateFiniteSelector = record
 axis4FiniteSelector : FiniteSelector Axis4
 axis4FiniteSelector = cyclicFiniteSelector four
 
-site4FiniteSelector : FiniteSelector (Block.PhysicalBlockL Block.side4)
+site4FiniteSelector : FiniteSelector (Block.PhysicalBlockL Path4.side4)
 site4FiniteSelector =
   productFiniteSelector
     (productFiniteSelector axis4FiniteSelector axis4FiniteSelector)
