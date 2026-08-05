@@ -17,19 +17,26 @@ module DASHI.Physics.Closure.NSTriadKNYuFiniteNearFieldCoercivityExact where
 --
 -- PURPOSE
 -- Prove the exact algebraic composition of Yu's Theorems 2.1 and 2.2.
--- From
+-- The literal source coefficient 3/(8 pi) is not rational.  Therefore the
+-- field geometricCoefficient below is an explicitly supplied nonnegative
+-- rational majorant for the source coefficient, together with the already
+-- transported bound
 --
---   V_near <= g A_pair
+--   V_near <= geometricCoefficient * A_pair.
+--
+-- From that rationalized source bound and
+--
 --   A_pair <= eta P + c_res O
 --
--- with g nonnegative, derive
+-- derive
 --
 --   V_near <= (g eta) P + (g c_res) O.
 --
 -- A second theorem substitutes a chosen retained-diffusion coefficient
--- 1-epsilon.  The continuum singular-integral and difference-quotient
--- estimates remain the source producers; their coercive composition is fully
--- closed here.
+-- 1-epsilon.  The continuum singular-integral estimate, the comparison of
+-- 3/(8 pi) with the chosen rational majorant, and the difference-quotient
+-- estimate remain visible source producers; their rational coercive
+-- composition is fully closed here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
