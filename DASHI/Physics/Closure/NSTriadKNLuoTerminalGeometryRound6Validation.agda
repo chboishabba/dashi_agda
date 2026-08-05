@@ -1,14 +1,14 @@
 module DASHI.Physics.Closure.NSTriadKNLuoTerminalGeometryRound6Validation where
 
 ------------------------------------------------------------------------
--- Focused validation root for the terminal far/near, centered-cancellation,
--- cyclic-triad, geometric-alignment, monodromy, scaling-gap,
--- relative-energy uniqueness and diagnostic-iteration hard mathematics.  The
--- root deliberately imports the source-faithful round-four validation rather
--- than treating a receipt or endpoint ledger as evidence.
+-- Focused cumulative validation root for the complete source-faithful Luo
+-- round-five stack plus terminal far/near, centered-cancellation, cyclic-
+-- triad, geometric-alignment, monodromy, scaling-gap, relative-energy
+-- uniqueness and diagnostic-iteration hard mathematics.  This root imports
+-- the actual theorem aggregate rather than an endpoint ledger.
 ------------------------------------------------------------------------
 
-import DASHI.Physics.Closure.NSTriadKNLuoSourceFaithfulRound4Validation
+import DASHI.Physics.Closure.NSTriadKNLuoHardMathRound5Validation
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEvenKernelCenteredTaylorExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact
