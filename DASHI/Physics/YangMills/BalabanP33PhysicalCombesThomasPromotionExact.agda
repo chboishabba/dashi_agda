@@ -41,12 +41,14 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasPromotionExact wher
 -- half-gap coercivity theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _-_; _*_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+open import Relation.Nullary using (yes; no)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -174,6 +176,22 @@ physicalWeightAbsolute geometry coordinate =
     (root geometry)
     coordinate
 
+physicalIdentityStable :
+  ∀ {hessian}
+    (geometry : PhysicalCombesThomasGeometry hessian)
+    left right →
+  CT.diagonalConjugate
+    (physicalWeight geometry)
+    (physicalInverseWeight geometry)
+    Calibration.identityEntry left right
+  ≡ Calibration.identityEntry left right
+physicalIdentityStable geometry left right
+  with Calibration.physicalCoordinateDecidableEquality left right
+... | yes refl
+  rewrite physicalWeightInverseLaw geometry left =
+  ℚRing.solve []
+... | no _ = ℚRing.solve []
+
 physicalSupportedRatioBound :
   ∀ {hessian}
     (geometry : PhysicalCombesThomasGeometry hessian)
@@ -293,13 +311,6 @@ record PhysicalCombesThomasResolvent
         Calibration.identityEntry
         hessian green
 
-    identityStable : ∀ left right →
-      CT.diagonalConjugate
-        (physicalWeight geometry)
-        (physicalInverseWeight geometry)
-        Calibration.identityEntry left right
-      ≡ Calibration.identityEntry left right
-
     tiltedGreenEntryBound : ∀ target →
       ∣ CT.diagonalConjugate
           (physicalWeight geometry)
@@ -332,7 +343,7 @@ physicalTiltedRightInverse {hessian} {green} resolvent =
     (physicalInverseWeight (geometry resolvent))
     (physicalWeightInverseLaw (geometry resolvent))
     (hessianGreenRightInverse resolvent)
-    (identityStable resolvent)
+    (physicalIdentityStable (geometry resolvent))
 
 physicalGreenKernelDecay :
   ∀ {hessian green}
@@ -357,6 +368,9 @@ physicalGreenKernelDecay {green = green} resolvent target =
 
 physicalCombesThomasTiltBudgetLevel : ProofLevel
 physicalCombesThomasTiltBudgetLevel = machineChecked
+
+physicalCombesThomasIdentityStabilityLevel : ProofLevel
+physicalCombesThomasIdentityStabilityLevel = machineChecked
 
 physicalCombesThomasInverseTransportLevel : ProofLevel
 physicalCombesThomasInverseTransportLevel = machineChecked
