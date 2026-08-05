@@ -27,6 +27,8 @@ on:
       - 'DASHI/Biology/ConsciousAccessRound3ExtendedRegression.agda'
       - 'DASHI/Biology/ConsciousAccessRound3CompleteRegression.agda'
       - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessRound3VisualMorphogenesis.md'
+      - 'Docs/support/reference/ConsciousAccessRound3ExtendedMathematics.md'
       - 'scripts/check_conscious_access_round3.sh'
       - '.github/workflows/conscious-access-round3.yml'
   workflow_dispatch:
