@@ -272,6 +272,39 @@ neuralAndBiologicalMechanismsRemainDistinct :
   neuralFieldCarrier ≡ biologicalMorphogenCarrier → ⊥
 neuralAndBiologicalMechanismsRemainDistinct ()
 
+------------------------------------------------------------------------
+-- Existing repository authority boundaries are consumed directly.
+
+canonicalLocalGlobalAuthorityBoundary :
+  LocalGlobal.LocalGlobalAuthorityBoundary
+canonicalLocalGlobalAuthorityBoundary =
+  record
+    { noSingleMasterCode = ⊤
+    ; localCompetenceIsNotGlobalOmniscience = ⊤
+    ; globalPatternIsNotCentralControllerByDefinition = ⊤
+    ; modelControllabilityIsNotEmpiricalRegeneration = ⊤
+    }
+
+canonicalMorphologicalGoalAuthorityBoundary :
+  Goal.MorphologicalGoalAuthorityBoundary
+canonicalMorphologicalGoalAuthorityBoundary =
+  record
+    { goalIsNotFutureCause = ⊤
+    ; quotientIsNotSemanticRepresentationByDefinition = ⊤
+    ; anatomicalAttractorIsNotConsciousness = ⊤
+    ; repairGoalIsNotUniversalTeleology = ⊤
+    }
+
+noSingleMasterCodeWitness :
+  LocalGlobal.LocalGlobalAuthorityBoundary.noSingleMasterCode
+    canonicalLocalGlobalAuthorityBoundary
+noSingleMasterCodeWitness = tt
+
+goalIsNotFutureCauseWitness :
+  Goal.MorphologicalGoalAuthorityBoundary.goalIsNotFutureCause
+    canonicalMorphologicalGoalAuthorityBoundary
+goalIsNotFutureCauseWitness = tt
+
 record MorphogeneticVisualBoundary : Set where
   constructor morphogeneticVisualBoundary
   field
@@ -287,8 +320,19 @@ record MorphogeneticVisualBoundary : Set where
     oneGrowthLawExplainsAllNaturalGeometryIsFalse :
       oneGrowthLawExplainsAllNaturalGeometry ≡ false
 
+    localGlobalAuthorityBoundary :
+      LocalGlobal.LocalGlobalAuthorityBoundary
+
+    morphologicalGoalAuthorityBoundary :
+      Goal.MorphologicalGoalAuthorityBoundary
+
 open MorphogeneticVisualBoundary public
 
 canonicalMorphogeneticVisualBoundary : MorphogeneticVisualBoundary
 canonicalMorphogeneticVisualBoundary =
-  morphogeneticVisualBoundary false refl false refl false refl
+  morphogeneticVisualBoundary
+    false refl
+    false refl
+    false refl
+    canonicalLocalGlobalAuthorityBoundary
+    canonicalMorphologicalGoalAuthorityBoundary
