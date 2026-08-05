@@ -5,13 +5,6 @@ on:
     branches:
       - 'agent/ym-clay-alpha-round16-local-chart-engine'
   pull_request:
-    paths:
-      - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpPositiveDenominatorExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33InverseDexpEndpointModulusExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33QuaternionChordalSquaredExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound16Validation.agda'
-      - 'scripts/check_yang_mills_clay_highest_alpha_round16.sh'
-      - '.github/workflows/yang-mills-clay-highest-alpha-round16.yml'
   workflow_dispatch:
 
 permissions:
@@ -29,5 +22,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check positive denominator, endpoint modulus and SU2 chord invariance
+      - name: Check inverse-dexp, SU2 geometry, Duhamel, RG and cutoff mathematics
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round16.sh
