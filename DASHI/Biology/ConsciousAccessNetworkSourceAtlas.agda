@@ -24,6 +24,7 @@ data SourceRole : Set where
   multilayerBrainNetworkRole : SourceRole
   psychedelicPriorReweightingRole : SourceRole
   psychedelicEntropyRole : SourceRole
+  psychedelicRepertoireRole : SourceRole
   grokkingAnalogyRole : SourceRole
 
 record SourceRecord : Set where
@@ -145,6 +146,19 @@ entropicBrainSource =
     "The tranche records increased repertoire and entropy as candidate dynamical readings."
     "Entropy is not treated as a settled standalone biomarker of consciousness or therapeutic outcome."
 
+tagliazucchiRepertoireSource : SourceRecord
+tagliazucchiRepertoireSource =
+  sourceRecord
+    "Enzo Tagliazucchi; Robin L. Carhart-Harris; Robert Leech; David Nutt; Dante R. Chialvo"
+    "Enhanced repertoire of brain dynamical states during the psychedelic experience"
+    "Human Brain Mapping"
+    2014
+    doiIdentifier
+    "10.1002/hbm.22562"
+    psychedelicRepertoireRole
+    "The tranche records a broadened dynamical repertoire as a candidate state-space effect."
+    "A broader repertoire is not identified with truth, health, treatment success, or a complete consciousness measure."
+
 grokkingSource : SourceRecord
 grokkingSource =
   sourceRecord
@@ -168,6 +182,7 @@ canonicalConsciousAccessSources =
   ∷ battistonMultilayerSource
   ∷ rebusSource
   ∷ entropicBrainSource
+  ∷ tagliazucchiRepertoireSource
   ∷ grokkingSource
   ∷ []
 
@@ -179,6 +194,6 @@ canonicalConsciousAccessSourceCount : Nat
 canonicalConsciousAccessSourceCount =
   listCount canonicalConsciousAccessSources
 
-canonicalConsciousAccessSourceCountIsNine :
-  canonicalConsciousAccessSourceCount ≡ 9
-canonicalConsciousAccessSourceCountIsNine = refl
+canonicalConsciousAccessSourceCountIsTen :
+  canonicalConsciousAccessSourceCount ≡ 10
+canonicalConsciousAccessSourceCountIsTen = refl
