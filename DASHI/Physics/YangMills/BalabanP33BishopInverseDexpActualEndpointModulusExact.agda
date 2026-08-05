@@ -26,28 +26,19 @@ module DASHI.Physics.YangMills.BalabanP33BishopInverseDexpActualEndpointModulusE
 --   d(t) = 2 t^2 sin t,
 --   E(t) = n(t) - d(t)/12.
 --
--- The alternating Taylor brackets give the exact upper envelope
+-- The alternating Taylor brackets give
 --
 --   E(t) <= t^5 (1/360 + t^4/30240).
 --
--- On t^2 <= 1/4, hence t^4 <= 1/16, the parenthesis is at most
--- 269/96768.  The constructive sine lower bound
---
---   sin t >= (23/24)t
---
--- gives
+-- On t^2 <= 1/4 the parenthesis is at most 269/96768, while
+-- sin t >= (23/24)t gives
 --
 --   (t^2/100)d(t) >= (23/1200)t^5.
 --
--- Since 269/96768 < 23/1200, this proves on the entire nonnegative Bishop
--- half-ball
+-- Since 269/96768 < 23/1200, this proves on the entire nonnegative
+-- constructive half-ball
 --
 --   0 <= E(t) <= (t^2/100)d(t).
---
--- Unlike the earlier rational truncation theorem, this statement includes the
--- actual Taylor remainders and therefore closes the removable-endpoint modulus
--- for the literal constructive coefficient before positive-denominator
--- cancellation.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_; nonNeg)
@@ -227,7 +218,9 @@ actualDefectBelowTaylorDefect {dataSet} {value} inputs =
   in
   BishopProperties.≤-respʳ-≃
     (upperEnvelopeMinusLowerSineIdentity value)
-    (BishopProperties.≤-respˡ-≃ leftMeaning rawUpper)
+    (BishopProperties.≤-respˡ-≃
+      (BishopProperties.≃-symm leftMeaning)
+      rawUpper)
 
 upperFactorAtSixteenth : BishopReal.ℝ
 upperFactorAtSixteenth =
