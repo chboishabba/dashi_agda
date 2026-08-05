@@ -42,31 +42,31 @@ periodicPairMultiplier :
   ∀ {r} {F : C3.RealField r} →
   Periodic.PeriodicComplexCharacterData F →
   Z3.FourierMode → Z3.FourierMode → C3.Complex F
-periodicPairMultiplier data left right =
+periodicPairMultiplier characterData left right =
   C3.complexAdd
     (C3.complexSubtract
       (C3.complexSubtract
-        (Periodic.periodicKernelTransform data (Z3.addMode left right))
-        (Periodic.periodicKernelTransform data left))
-      (Periodic.periodicKernelTransform data right))
-    (Periodic.periodicKernelTransform data Z3.zeroMode)
+        (Periodic.periodicKernelTransform characterData (Z3.addMode left right))
+        (Periodic.periodicKernelTransform characterData left))
+      (Periodic.periodicKernelTransform characterData right))
+    (Periodic.periodicKernelTransform characterData Z3.zeroMode)
 
 periodicPairMultiplierMeaning :
   ∀ {r} {F : C3.RealField r}
-    (data : Periodic.PeriodicComplexCharacterData F)
+    (characterData : Periodic.PeriodicComplexCharacterData F)
     (left right : Z3.FourierMode) →
-  Periodic.periodicWeightedIncrement data left right
-  ≡ periodicPairMultiplier data left right
+  Periodic.periodicWeightedIncrement characterData left right
+  ≡ periodicPairMultiplier characterData left right
 periodicPairMultiplierMeaning =
   Periodic.periodicWeightedIncrementMultiplierIdentity
 
 periodicPairMultiplierSymmetric :
   ∀ {r} {F : C3.RealField r}
-    (data : Periodic.PeriodicComplexCharacterData F)
+    (characterData : Periodic.PeriodicComplexCharacterData F)
     (left right : Z3.FourierMode) →
-  periodicPairMultiplier data left right
-  ≡ periodicPairMultiplier data right left
-periodicPairMultiplierSymmetric {F = F} data left right
+  periodicPairMultiplier characterData left right
+  ≡ periodicPairMultiplier characterData right left
+periodicPairMultiplierSymmetric {F = F} characterData left right
   rewrite Z3Alg.addCommutative left right =
   R.solve 4
     (λ outputTransform leftTransform rightTransform zeroTransform →
@@ -78,19 +78,19 @@ periodicPairMultiplierSymmetric {F = F} data left right
           R.⊕ (R.⊝ leftTransform))
           R.⊕ zeroTransform))
     refl
-    (Periodic.periodicKernelTransform data (Z3.addMode right left))
-    (Periodic.periodicKernelTransform data left)
-    (Periodic.periodicKernelTransform data right)
-    (Periodic.periodicKernelTransform data Z3.zeroMode)
+    (Periodic.periodicKernelTransform characterData (Z3.addMode right left))
+    (Periodic.periodicKernelTransform characterData left)
+    (Periodic.periodicKernelTransform characterData right)
+    (Periodic.periodicKernelTransform characterData Z3.zeroMode)
   where module R = Ring.Solver F
 
 periodicPairMultiplierLeftZero :
   ∀ {r} {F : C3.RealField r}
-    (data : Periodic.PeriodicComplexCharacterData F)
+    (characterData : Periodic.PeriodicComplexCharacterData F)
     (right : Z3.FourierMode) →
-  periodicPairMultiplier data Z3.zeroMode right
+  periodicPairMultiplier characterData Z3.zeroMode right
   ≡ C3.complexZero F
-periodicPairMultiplierLeftZero {F = F} data right
+periodicPairMultiplierLeftZero {F = F} characterData right
   rewrite Z3Alg.addZeroLeft right =
   R.solve 2
     (λ rightTransform zeroTransform →
@@ -99,17 +99,17 @@ periodicPairMultiplierLeftZero {F = F} data right
           R.⊕ zeroTransform)
       R.⊜ R.Κ (C3.complexZero F))
     refl
-    (Periodic.periodicKernelTransform data right)
-    (Periodic.periodicKernelTransform data Z3.zeroMode)
+    (Periodic.periodicKernelTransform characterData right)
+    (Periodic.periodicKernelTransform characterData Z3.zeroMode)
   where module R = Ring.Solver F
 
 periodicPairMultiplierRightZero :
   ∀ {r} {F : C3.RealField r}
-    (data : Periodic.PeriodicComplexCharacterData F)
+    (characterData : Periodic.PeriodicComplexCharacterData F)
     (left : Z3.FourierMode) →
-  periodicPairMultiplier data left Z3.zeroMode
+  periodicPairMultiplier characterData left Z3.zeroMode
   ≡ C3.complexZero F
-periodicPairMultiplierRightZero {F = F} data left
+periodicPairMultiplierRightZero {F = F} characterData left
   rewrite Z3Alg.addZeroRight left =
   R.solve 2
     (λ leftTransform zeroTransform →
@@ -118,44 +118,44 @@ periodicPairMultiplierRightZero {F = F} data left
           R.⊕ zeroTransform)
       R.⊜ R.Κ (C3.complexZero F))
     refl
-    (Periodic.periodicKernelTransform data left)
-    (Periodic.periodicKernelTransform data Z3.zeroMode)
+    (Periodic.periodicKernelTransform characterData left)
+    (Periodic.periodicKernelTransform characterData Z3.zeroMode)
   where module R = Ring.Solver F
 
 periodicWeightedIncrementSymmetric :
   ∀ {r} {F : C3.RealField r}
-    (data : Periodic.PeriodicComplexCharacterData F)
+    (characterData : Periodic.PeriodicComplexCharacterData F)
     (left right : Z3.FourierMode) →
-  Periodic.periodicWeightedIncrement data left right
-  ≡ Periodic.periodicWeightedIncrement data right left
-periodicWeightedIncrementSymmetric data left right =
+  Periodic.periodicWeightedIncrement characterData left right
+  ≡ Periodic.periodicWeightedIncrement characterData right left
+periodicWeightedIncrementSymmetric characterData left right =
   trans
-    (periodicPairMultiplierMeaning data left right)
+    (periodicPairMultiplierMeaning characterData left right)
     (trans
-      (periodicPairMultiplierSymmetric data left right)
-      (sym (periodicPairMultiplierMeaning data right left)))
+      (periodicPairMultiplierSymmetric characterData left right)
+      (sym (periodicPairMultiplierMeaning characterData right left)))
 
 periodicWeightedIncrementLeftZero :
   ∀ {r} {F : C3.RealField r}
-    (data : Periodic.PeriodicComplexCharacterData F)
+    (characterData : Periodic.PeriodicComplexCharacterData F)
     (right : Z3.FourierMode) →
-  Periodic.periodicWeightedIncrement data Z3.zeroMode right
+  Periodic.periodicWeightedIncrement characterData Z3.zeroMode right
   ≡ C3.complexZero F
-periodicWeightedIncrementLeftZero data right =
+periodicWeightedIncrementLeftZero characterData right =
   trans
-    (periodicPairMultiplierMeaning data Z3.zeroMode right)
-    (periodicPairMultiplierLeftZero data right)
+    (periodicPairMultiplierMeaning characterData Z3.zeroMode right)
+    (periodicPairMultiplierLeftZero characterData right)
 
 periodicWeightedIncrementRightZero :
   ∀ {r} {F : C3.RealField r}
-    (data : Periodic.PeriodicComplexCharacterData F)
+    (characterData : Periodic.PeriodicComplexCharacterData F)
     (left : Z3.FourierMode) →
-  Periodic.periodicWeightedIncrement data left Z3.zeroMode
+  Periodic.periodicWeightedIncrement characterData left Z3.zeroMode
   ≡ C3.complexZero F
-periodicWeightedIncrementRightZero data left =
+periodicWeightedIncrementRightZero characterData left =
   trans
-    (periodicPairMultiplierMeaning data left Z3.zeroMode)
-    (periodicPairMultiplierRightZero data left)
+    (periodicPairMultiplierMeaning characterData left Z3.zeroMode)
+    (periodicPairMultiplierRightZero characterData left)
 
 periodicComplexMultiplierSymmetryClosed : Bool
 periodicComplexMultiplierSymmetryClosed = true
