@@ -12,8 +12,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCutoffTimeDiagonalNoGoExact where
 -- PURPOSE
 -- Exhibit the precise limit failure that a Clay-path proof must exclude.
 -- Define an error which is one only on the cutoff/time diagonal.  For every
--- fixed terminal index t, moving the cutoff to t+1 kills the error exactly;
--- nevertheless the diagonal error remains one at every scale.
+-- fixed terminal index t, every strictly larger cutoff kills the error
+-- exactly; nevertheless the diagonal error remains one at every scale.
 --
 -- Hence pointwise cutoff convergence at each fixed time does not imply the
 -- uniform control needed as q -> infinity and t approaches a candidate
@@ -39,9 +39,33 @@ diagonalNeverVanishes zero = refl
 diagonalNeverVanishes (suc index) =
   diagonalNeverVanishes index
 
+data StrictlyAbove : Nat → Nat → Set where
+  aboveZero :
+    (extra : Nat) →
+    StrictlyAbove (suc extra) zero
+
+  bothSuccessors :
+    ∀ {cutoff time} →
+    StrictlyAbove cutoff time →
+    StrictlyAbove (suc cutoff) (suc time)
+
+strictlyLargerCutoffVanishes :
+  ∀ {cutoff time} →
+  StrictlyAbove cutoff time →
+  cutoffTimeSpike cutoff time ≡ 0ℚ
+strictlyLargerCutoffVanishes (aboveZero extra) = refl
+strictlyLargerCutoffVanishes (bothSuccessors above) =
+  strictlyLargerCutoffVanishes above
+
+oneCutoffPastFixedTime :
+  (time : Nat) →
+  StrictlyAbove (suc time) time
+oneCutoffPastFixedTime zero = aboveZero zero
+oneCutoffPastFixedTime (suc time) =
+  bothSuccessors (oneCutoffPastFixedTime time)
+
 oneCutoffPastFixedTimeVanishes :
   (time : Nat) →
   cutoffTimeSpike (suc time) time ≡ 0ℚ
-oneCutoffPastFixedTimeVanishes zero = refl
-oneCutoffPastFixedTimeVanishes (suc time) =
-  oneCutoffPastFixedTimeVanishes time
+oneCutoffPastFixedTimeVanishes time =
+  strictlyLargerCutoffVanishes (oneCutoffPastFixedTime time)
