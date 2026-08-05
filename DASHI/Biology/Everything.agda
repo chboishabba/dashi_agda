@@ -129,6 +129,7 @@ import DASHI.Biology.ConsciousAccessRound3CompleteRegression
 import DASHI.Biology.TriadicKernelLiftQuotientExact
 import DASHI.Biology.TriadicCarryResidualExact
 import DASHI.Biology.PadicCylinderLODReasoningField
+import DASHI.Biology.HybridPadicReasoningFieldBridgeExact
 import DASHI.Biology.CausalHierarchicalChartResidualExact
 import DASHI.Biology.FiniteCrystallisationModeSelectionExact
 import DASHI.Biology.FiniteWaveShellGradientExact
