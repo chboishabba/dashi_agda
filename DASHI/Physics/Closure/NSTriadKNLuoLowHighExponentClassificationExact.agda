@@ -36,14 +36,17 @@ open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality as Eq using (cong)
+open Eq.≡-Reasoning
 
-zero half minusHalf one threeHalves two fiveHalves : ℚ
+zero half minusHalf one threeHalves two four fiveHalves : ℚ
 zero = Int.+ 0 / 1
 half = Int.+ 1 / 2
 minusHalf = Int.-[1+ 0 ] / 2
 one = Int.+ 1 / 1
 threeHalves = Int.+ 3 / 2
 two = Int.+ 2 / 1
+four = Int.+ 4 / 1
 fiveHalves = Int.+ 5 / 2
 
 oneThird oneSixth : ℚ
@@ -78,16 +81,34 @@ secondHighDegree pair =
 firstTotalDegree :
   (pair : HolderReciprocalPair) →
   firstLowDegree pair + firstHighDegree pair ≡ fiveHalves
-firstTotalDegree pair
-  rewrite holderBalance pair =
-  solve (lowReciprocal pair ∷ [])
+firstTotalDegree pair =
+  begin
+    firstLowDegree pair + firstHighDegree pair
+  ≡⟨ solve (lowReciprocal pair ∷ highReciprocal pair ∷ []) ⟩
+    four - Int.+ 3 / 1
+      * (lowReciprocal pair + highReciprocal pair)
+  ≡⟨ cong (λ sum → four - Int.+ 3 / 1 * sum)
+       (holderBalance pair) ⟩
+    four - Int.+ 3 / 1 * half
+  ≡⟨ solve [] ⟩
+    fiveHalves
+  ∎
 
 secondTotalDegree :
   (pair : HolderReciprocalPair) →
   secondLowDegree pair + secondHighDegree pair ≡ fiveHalves
-secondTotalDegree pair
-  rewrite holderBalance pair =
-  solve (lowReciprocal pair ∷ [])
+secondTotalDegree pair =
+  begin
+    secondLowDegree pair + secondHighDegree pair
+  ≡⟨ solve (lowReciprocal pair ∷ highReciprocal pair ∷ []) ⟩
+    four - Int.+ 3 / 1
+      * (lowReciprocal pair + highReciprocal pair)
+  ≡⟨ cong (λ sum → four - Int.+ 3 / 1 * sum)
+       (holderBalance pair) ⟩
+    four - Int.+ 3 / 1 * half
+  ≡⟨ solve [] ⟩
+    fiveHalves
+  ∎
 
 firstGapDegree : HolderReciprocalPair → ℚ
 firstGapDegree pair = firstLowDegree pair - threeHalves
