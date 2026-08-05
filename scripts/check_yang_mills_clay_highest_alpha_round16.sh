@@ -10,6 +10,12 @@ files=(
   DASHI/Physics/YangMills/BalabanP33BishopInverseDexpPositiveDenominatorExact.agda
   DASHI/Physics/YangMills/BalabanP33InverseDexpEndpointModulusExact.agda
   DASHI/Physics/YangMills/BalabanP33QuaternionChordalSquaredExact.agda
+  DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda
+  DASHI/Physics/YangMills/BalabanP33CMP109LocalLeafCalibrationExact.agda
+  DASHI/Physics/YangMills/BalabanP33WilsonSharpDuhamelBudgetExact.agda
+  DASHI/Physics/YangMills/BalabanClayStrictMacrostepComponentAssemblyExact.agda
+  DASHI/Physics/YangMills/BalabanClayDyadicCutoffTailExact.agda
+  DASHI/Physics/YangMills/BalabanClayOneLoopFlowRemainderExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound16Validation.agda
 )
 
@@ -32,6 +38,16 @@ checks=(
   'BalabanP33QuaternionChordalSquaredExact.agda:quaternionMultiplyDistributesRight'
   'BalabanP33QuaternionChordalSquaredExact.agda:chordSquaredLeftInvariant'
   'BalabanP33QuaternionChordalSquaredExact.agda:chordSquaredRightInvariant'
+  'BalabanP33DuhamelSecondDerivativeMajorantExact.agda:threeExponentialDefectMajorantExact'
+  'BalabanP33DuhamelSecondDerivativeMajorantExact.agda:secondDerivativeDuhamelMajorantExact'
+  'BalabanP33CMP109LocalLeafCalibrationExact.agda:completeCMP109AllocationIsRadius'
+  'BalabanP33WilsonSharpDuhamelBudgetExact.agda:sharpBudgetPlusSlackIsRadius'
+  'BalabanClayStrictMacrostepComponentAssemblyExact.agda:strictMacrostepFromFiveMechanisms'
+  'BalabanClayStrictMacrostepComponentAssemblyExact.agda:largeFieldLeavesPositiveGaussian'
+  'BalabanClayDyadicCutoffTailExact.agda:finiteDistanceBelowDoubleDyadic'
+  'BalabanClayOneLoopFlowRemainderExact.agda:nextNonnegative'
+  'BalabanClayOneLoopFlowRemainderExact.agda:nextBelowCurrent'
+  'BalabanClayOneLoopFlowRemainderExact.agda:crossMultipliedReciprocalGain'
 )
 
 for check in "${checks[@]}"; do
@@ -46,6 +62,12 @@ grep -q 'arXiv:2205.08354' \
   DASHI/Physics/YangMills/BalabanP33BishopInverseDexpPositiveDenominatorExact.agda
 grep -q '10.1017/CBO9781139020411' \
   DASHI/Physics/YangMills/BalabanP33QuaternionChordalSquaredExact.agda
+grep -q '10.1103/PhysRevD.10.2445' \
+  DASHI/Physics/YangMills/BalabanP33WilsonSharpDuhamelBudgetExact.agda
+grep -q '10.1007/BF01238433' \
+  DASHI/Physics/YangMills/BalabanClayStrictMacrostepComponentAssemblyExact.agda
+grep -q '10.1103/PhysRevLett.30.1343' \
+  DASHI/Physics/YangMills/BalabanClayOneLoopFlowRemainderExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound16Validation.agda
