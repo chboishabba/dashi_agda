@@ -82,15 +82,25 @@ cancelPositiveRightFactor left right factor factorPositive bound =
       factorPositiveInstance : Positive factor
       factorPositiveInstance = ℚ.positive factorPositive
 
+    leftCommuted : left * factor ≡ factor * left
+    leftCommuted = ℚRing.solve []
+
+    rightCommuted : right * factor ≡ factor * right
+    rightCommuted = ℚRing.solve []
+
+    rightReduced : left * factor ≤ factor * right
+    rightReduced =
+      subst
+        (λ upper → left * factor ≤ upper)
+        rightCommuted
+        bound
+
     commuted : factor * left ≤ factor * right
     commuted =
       subst
         (λ lower → lower ≤ factor * right)
-        (ℚRing.solve-∀ left factor)
-        (subst
-          (λ upper → left * factor ≤ upper)
-          (sym (ℚRing.solve-∀ right factor))
-          bound)
+        leftCommuted
+        rightReduced
   in
   ℚP.*-cancelˡ-≤-pos factor commuted
 
@@ -162,21 +172,34 @@ fluctuationSquareModeForcesLinearCrossBound
       ℚP.*-monoˡ-≤-nonNeg
         poincareConstant rayleighCrossBound
 
+    leftRearranged :
+      twoM * (poincareConstant * numerator)
+      ≡ poincareConstant * (twoM * numerator)
+    leftRearranged = ℚRing.solve []
+
+    rightRearranged :
+      poincareConstant * (nine * normSq)
+      ≡ (nine * poincareConstant) * normSq
+    rightRearranged = ℚRing.solve []
+
+    rightReduced :
+      poincareConstant * (twoM * numerator)
+      ≤ (nine * poincareConstant) * normSq
+    rightReduced =
+      subst
+        (λ upper →
+          poincareConstant * (twoM * numerator) ≤ upper)
+        rightRearranged
+        rayleighScaled
+
     middleStep :
       twoM * (poincareConstant * numerator)
       ≤ (nine * poincareConstant) * normSq
     middleStep =
       subst
-        (λ lower →
-          lower ≤ (nine * poincareConstant) * normSq)
-        (ℚRing.solve-∀ twoM poincareConstant numerator)
-        (subst
-          (λ upper →
-            poincareConstant * (twoM * numerator) ≤ upper)
-          (sym
-            (ℚRing.solve-∀
-              poincareConstant twoM numerator normSq))
-          rayleighScaled)
+        (λ lower → lower ≤ (nine * poincareConstant) * normSq)
+        (sym leftRearranged)
+        rightReduced
 
     productBound :
       twoM * normSq
