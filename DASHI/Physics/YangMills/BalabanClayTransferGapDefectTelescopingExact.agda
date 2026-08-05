@@ -14,8 +14,9 @@ module DASHI.Physics.YangMills.BalabanClayTransferGapDefectTelescopingExact wher
 -- Interlacing inequalities telescope additively.  Summability of defects is
 -- not by itself enough to leave a positive gap: the total defect must be
 -- strictly smaller than the initial gap.  This module proves the finite
--- telescope in an arbitrary ordered commutative additive monoid and gives a
--- closed one-step counterexample to the weaker inference.
+-- telescope in an arbitrary ordered commutative additive monoid, proves the
+-- strict-budget positivity theorem for natural gaps, and gives a closed
+-- one-step counterexample to the weaker inference.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -92,21 +93,42 @@ finiteDefectChainTelescopes
       liftedTail)
 
 ------------------------------------------------------------------------
--- A finite, completely explicit failure of "summable implies positive".
+-- Natural-number strict budget theorem and counterexample.
 ------------------------------------------------------------------------
 
 infixl 6 _+ᴺ_
 _+ᴺ_ : Nat → Nat → Nat
-zero +ᴺ right = right
-suc left +ᴺ right = suc (left +ᴺ right)
+left +ᴺ zero = left
+left +ᴺ suc right = suc (left +ᴺ right)
 
 infix 4 _≤ᴺ_
 data _≤ᴺ_ : Nat → Nat → Set where
   zero≤ : ∀ {n} → zero ≤ᴺ n
   suc≤suc : ∀ {m n} → m ≤ᴺ n → suc m ≤ᴺ suc n
 
+≤ᴺ-transitive : ∀ {a b c} → a ≤ᴺ b → b ≤ᴺ c → a ≤ᴺ c
+≤ᴺ-transitive zero≤ second = zero≤
+≤ᴺ-transitive (suc≤suc first) (suc≤suc second) =
+  suc≤suc (≤ᴺ-transitive first second)
+
+cancelCommonRightSummand : ∀ left right common →
+  (left +ᴺ common) ≤ᴺ (right +ᴺ common) → left ≤ᴺ right
+cancelCommonRightSummand left right zero proof = proof
+cancelCommonRightSummand left right (suc common) (suc≤suc proof) =
+  cancelCommonRightSummand left right common proof
+
 one : Nat
 one = suc zero
+
+strictTotalDefectBudgetForcesPositiveFinalGap :
+  ∀ initialGap finalGap totalDefect →
+  (one +ᴺ totalDefect) ≤ᴺ initialGap →
+  initialGap ≤ᴺ (finalGap +ᴺ totalDefect) →
+  one ≤ᴺ finalGap
+strictTotalDefectBudgetForcesPositiveFinalGap
+    initialGap finalGap totalDefect strictBudget telescoped =
+  cancelCommonRightSummand one finalGap totalDefect
+    (≤ᴺ-transitive strictBudget telescoped)
 
 oneStepInterlacingWithTotalLoss :
   one ≤ᴺ (zero +ᴺ one)
@@ -132,6 +154,9 @@ summabilityWithoutStrictBudgetCounterexample = record
 
 finiteInterlacingTelescopeLevel : ProofLevel
 finiteInterlacingTelescopeLevel = machineChecked
+
+strictDefectBudgetPositivityLevel : ProofLevel
+strictDefectBudgetPositivityLevel = machineChecked
 
 strictDefectBudgetNecessityLevel : ProofLevel
 strictDefectBudgetNecessityLevel = machineChecked
