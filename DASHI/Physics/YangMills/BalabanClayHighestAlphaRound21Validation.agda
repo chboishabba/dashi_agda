@@ -1,20 +1,21 @@
 module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound21Validation where
 
 ------------------------------------------------------------------------
--- Focused validation root for the literal Hessian cancellation tranche.
+-- Compatibility validation root for the corrected exact-background tranche.
 --
--- Importing this module elaborates the complete round-twenty finite
--- Combes--Thomas endgame together with:
+-- Round twenty-two discovered that the former Wilson-minus-full-gradient
+-- shortcut was not the physical Hodge decomposition: gauge divergence was
+-- counted inside the full gradient and then cancelled a second time.  The
+-- imported modules now expose the corrected statements:
 --
---   * positivity of the literal gauge and CMP109 first-derivative squares;
---   * exact cancellation of those squares against the matched Hodge reference;
---   * reduction of the 1/32 Hessian theorem to Wilson-minus-difference;
---   * exact promotion of the sharp sixteen-atom Wilson budget;
---   * a non-phantom producer model binding field, jets and physical scalars to
---     the same physical perturbation h.
+--   * only the independent CMP109 constraint square cancels;
+--   * gauge remains paired with flat divergence;
+--   * Wilson remains paired with flat curl;
+--   * all values are generated from the same full three-component perturbation.
 --
--- This root does not assert the remaining physical Wilson atom estimate, the
--- literal stencil/row-mass producer, or a Clay completion.
+-- The complete periodic Hodge, boundary and rational Wilson constructions are
+-- validated by the round-twenty-two root.  This root remains as a compatibility
+-- import for downstream branches and makes no claim of the superseded shortcut.
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound20Validation
