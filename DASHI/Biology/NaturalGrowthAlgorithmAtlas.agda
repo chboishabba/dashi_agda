@@ -280,12 +280,10 @@ availableForGrowth b =
   capturedResource b ∸ maintenanceCost b
 
 canAffordGrowth : ResourceBudget → Bool
-canAffordGrowth (resourceBudget capture maintenance growth) with
-  capture ∸ maintenance
-... | zero = false
-... | suc available with growth
-...   | zero = true
-...   | suc growthCost = true
+canAffordGrowth (resourceBudget zero maintenance growth) = false
+canAffordGrowth (resourceBudget (suc capture) zero growth) = true
+canAffordGrowth (resourceBudget (suc capture) (suc maintenance) growth) =
+  canAffordGrowth (resourceBudget capture maintenance growth)
 
 productiveBudget : ResourceBudget
 productiveBudget = resourceBudget 5 2 2
@@ -337,7 +335,7 @@ lSystemAndSpaceColonisationRemainDistinct :
   lSystemAlgorithm ≡ spaceColonisationAlgorithm → ⊥
 lSystemAndSpaceColonisationRemainDistinct ()
 
-record NaturalGrowthAlgorithmBoundary : Set where
+record NaturalGrowthAlgorithmBoundary : Set₁ where
   constructor naturalGrowthAlgorithmBoundary
   field
     morphologyDeterminesGrowthMechanism : Bool
