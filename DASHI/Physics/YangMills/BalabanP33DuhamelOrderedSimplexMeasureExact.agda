@@ -39,7 +39,7 @@ module DASHI.Physics.YangMills.BalabanP33DuhamelOrderedSimplexMeasureExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; _+_; _-_; _*_; _/_)
+  (ℚ; _+_; _-_; -_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
