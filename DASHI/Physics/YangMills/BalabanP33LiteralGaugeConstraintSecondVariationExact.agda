@@ -19,26 +19,27 @@ module DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationEx
 --
 -- DASHI CONTRIBUTION
 --
--- Compute the finite-coordinate second variation of a squared residual rather
--- than accepting the gauge and block-constraint Hessians as unrelated
--- operators.  For a second jet
+-- Compute the finite-coordinate second variation of squared gauge and block
+-- residuals and combine them with the literal rational Wilson plaquette
+-- Hessian.
+--
+-- For a scalar second jet
 --
 --   F(t) = F0 + t F1 + t^2 F2 / 2,
 --
--- direct polynomial expansion gives
+-- direct rational polynomial expansion gives
 --
 --   d^2/dt^2 [ ||F(t)||^2 / 2 ] at 0
 --     = ||F1||^2 + <F0,F2>.
 --
--- Pointwise exact gauge fixing F0=0 and exact block constraint C0=0 therefore
--- remove the residual/second-derivative terms and leave the positive squares
+-- Exact gauge fixing F0=0 and exact block constraint Q0=0 therefore leave the
+-- positive squares ||DF[h]||^2 and ||DQ[h]||^2.
 --
---   ||DF[h]||^2 + ||DQ[h]||^2.
---
--- The module composes these exact finite formulas with the existing literal
--- sixteen-atom Wilson plaquette second variation.  What remains physical is
--- identification of the selected background jets and the five quantitative
--- remainder bounds, not Hessian additivity or the squared-residual chain rule.
+-- Earlier versions attempted to insert the axiomatic-real quaternion Wilson
+-- numerator into this rational Hessian.  Since the postulated real carrier is
+-- not definitionally the rational carrier, that was not a valid typed bridge.
+-- The plaquette jets below now use the concrete rational quaternion module,
+-- whose four-link product rule and sixteen-atom scalar identity are exact.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -51,8 +52,7 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanP33QuaternionProductSecondVariationExact as Product
-import DASHI.Physics.YangMills.BalabanP33WilsonPlaquetteScalarSecondVariationExact as Wilson
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Wilson
 
 sumRational : List ℚ → ℚ
 sumRational [] = 0ℚ
@@ -88,11 +88,6 @@ secondVariationContribution : ScalarSecondJet → ℚ
 secondVariationContribution jet =
   jetFirst jet * jetFirst jet
   + jetValue jet * jetSecond jet
-
-------------------------------------------------------------------------
--- Exact coefficient calculation.  The left side is the coefficient of t^2 in
--- the expanded half square; multiplying it by two gives the second variation.
-------------------------------------------------------------------------
 
 halfSquareQuadraticCoefficient : ScalarSecondJet → ℚ
 halfSquareQuadraticCoefficient jet =
@@ -258,22 +253,33 @@ residualSecondVariationAtExactBackground residual exact =
       (ℚRing.solve-∀ (residualFirstNormSquared residual)))
 
 ------------------------------------------------------------------------
--- Literal Wilson + gauge-fixing + block-constraint second variation.
+-- Literal rational Wilson + gauge-fixing + block-constraint second variation.
 ------------------------------------------------------------------------
 
 record PlaquetteSecondJet : Set where
   constructor plaquetteJet
   field
-    link0 link1 link2 link3 : Product.QuaternionFactorJet
+    link0 link1 link2 link3 : Wilson.QuaternionFactorJet
 
 open PlaquetteSecondJet public
 
 plaquetteWilsonSecondVariation : PlaquetteSecondJet → ℚ
 plaquetteWilsonSecondVariation plaquette =
   Wilson.wilsonSecondVariationNumerator
-    (Product.fourFactorJets
+    (Wilson.fourFactorJets
       (link0 plaquette) (link1 plaquette)
       (link2 plaquette) (link3 plaquette))
+
+plaquetteWilsonIsSixteenAtomSum : ∀ plaquette →
+  plaquetteWilsonSecondVariation plaquette
+  ≡ Wilson.wilsonSecondVariationAtomSum
+      (Wilson.fourFactorJets
+        (link0 plaquette) (link1 plaquette)
+        (link2 plaquette) (link3 plaquette))
+plaquetteWilsonIsSixteenAtomSum plaquette =
+  Wilson.fourLinkWilsonSecondVariationIsSixteenScalarAtoms
+    (link0 plaquette) (link1 plaquette)
+    (link2 plaquette) (link3 plaquette)
 
 record LiteralPhysicalSecondVariation
     (Plaquette GaugeIndex ConstraintIndex : Set) : Set₁ where
@@ -294,6 +300,37 @@ wilsonSecondVariation dataSet =
       (λ plaquette →
         plaquetteWilsonSecondVariation (plaquetteJetData dataSet plaquette))
       (plaquettes dataSet))
+
+wilsonSecondVariationIsPlaquetteAtomSum :
+  ∀ {Plaquette GaugeIndex ConstraintIndex}
+    (dataSet : LiteralPhysicalSecondVariation
+      Plaquette GaugeIndex ConstraintIndex) →
+  wilsonSecondVariation dataSet
+  ≡ sumRational
+      (map
+        (λ plaquette →
+          Wilson.wilsonSecondVariationAtomSum
+            (Wilson.fourFactorJets
+              (link0 (plaquetteJetData dataSet plaquette))
+              (link1 (plaquetteJetData dataSet plaquette))
+              (link2 (plaquetteJetData dataSet plaquette))
+              (link3 (plaquetteJetData dataSet plaquette))))
+        (plaquettes dataSet))
+wilsonSecondVariationIsPlaquetteAtomSum dataSet =
+  sumRationalCong
+    (λ plaquette →
+      plaquetteWilsonSecondVariation (plaquetteJetData dataSet plaquette))
+    (λ plaquette →
+      Wilson.wilsonSecondVariationAtomSum
+        (Wilson.fourFactorJets
+          (link0 (plaquetteJetData dataSet plaquette))
+          (link1 (plaquetteJetData dataSet plaquette))
+          (link2 (plaquetteJetData dataSet plaquette))
+          (link3 (plaquetteJetData dataSet plaquette))))
+    (plaquettes dataSet)
+    (λ plaquette →
+      plaquetteWilsonIsSixteenAtomSum
+        (plaquetteJetData dataSet plaquette))
 
 literalTotalSecondVariation :
   ∀ {Plaquette GaugeIndex ConstraintIndex} →
@@ -352,6 +389,9 @@ literalSquaredResidualSecondVariationLevel = machineChecked
 
 literalGaugeConstraintBackgroundCollapseLevel : ProofLevel
 literalGaugeConstraintBackgroundCollapseLevel = machineChecked
+
+literalRationalWilsonSixteenAtomAssemblyLevel : ProofLevel
+literalRationalWilsonSixteenAtomAssemblyLevel = machineChecked
 
 literalWilsonGaugeConstraintHessianAssemblyLevel : ProofLevel
 literalWilsonGaugeConstraintHessianAssemblyLevel = machineChecked
