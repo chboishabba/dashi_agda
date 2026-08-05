@@ -24,8 +24,10 @@ FILES=(
   DASHI/Biology/DynamicCoalitionPhaseEmergence.agda
   DASHI/Biology/ConsciousAccessRound3FullBoundary.agda
   DASHI/Biology/ConsciousAccessRound3SourceAtlas.agda
+  DASHI/Biology/ConsciousAccessRound3ExtendedSourceAtlas.agda
   DASHI/Biology/ConsciousAccessRound3Regression.agda
   DASHI/Biology/ConsciousAccessRound3ExtendedRegression.agda
+  DASHI/Biology/ConsciousAccessRound3CompleteRegression.agda
 )
 
 for file in "${FILES[@]}"; do
@@ -36,4 +38,4 @@ for file in "${FILES[@]}"; do
 done
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Biology/ConsciousAccessRound3ExtendedRegression.agda
+  DASHI/Biology/ConsciousAccessRound3CompleteRegression.agda
