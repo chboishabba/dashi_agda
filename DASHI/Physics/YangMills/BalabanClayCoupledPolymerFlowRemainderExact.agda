@@ -411,7 +411,7 @@ nextCouplingNonnegative dataSet =
         (λ lower → lower
           ≤ coupling dataSet - beta dataSet * cube (coupling dataSet)
             + remainder dataSet)
-        (coupledLowerEnvelopeExpansion dataSet)
+        (sym (coupledLowerEnvelopeExpansion dataSet))
         (ℚP.+-monoˡ-≤
           (coupling dataSet - beta dataSet * cube (coupling dataSet))
           (minusHalfBetaCubeBelowRemainder dataSet))))
