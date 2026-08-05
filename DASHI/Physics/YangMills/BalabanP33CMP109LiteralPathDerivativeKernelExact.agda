@@ -41,10 +41,10 @@ module DASHI.Physics.YangMills.BalabanP33CMP109LiteralPathDerivativeKernelExact 
 -- finite derivative formula are discharged here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong; subst; trans)
 open import Relation.Nullary using (Dec; yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
