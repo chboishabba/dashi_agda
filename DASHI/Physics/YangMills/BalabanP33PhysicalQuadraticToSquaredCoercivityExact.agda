@@ -83,7 +83,8 @@ originalSquaredLowerFromQuadratic :
   ≤ Physical.physicalSU2CoordinateNormSq
       (Physical.physicalMatrixApply hessian vector)
 originalSquaredLowerFromQuadratic {hessian} coercivity vector
-  with Physical.physicalSU2CoordinateNormSq vector ℚFull.≟ 0ℚ
+  with ℚFull._≟_
+    (Physical.physicalSU2CoordinateNormSq vector) 0ℚ
 ... | yes normZero =
   subst
     (λ coefficient →
