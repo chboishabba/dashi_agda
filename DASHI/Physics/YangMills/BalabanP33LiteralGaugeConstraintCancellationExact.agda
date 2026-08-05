@@ -50,12 +50,13 @@ module DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintCancellationExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (map)
 open import Data.Rational using
   (ℚ; 0ℚ; _+_; _*_; -_; _-_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
@@ -89,7 +90,7 @@ residualFirstNormSquaredNonnegative residual =
   where
   sumSquaresNonnegative : ∀ indices →
     0ℚ ≤ Jets.sumRational
-      (Agda.Builtin.List.map
+      (map
         (λ index →
           Jets.jetFirst (Jets.componentJet residual index)
           * Jets.jetFirst (Jets.componentJet residual index))
@@ -112,7 +113,7 @@ residualFirstNormSquaredNonnegative residual =
           Jets.jetFirst (Jets.componentJet residual index)
             * Jets.jetFirst (Jets.componentJet residual index)
           + Jets.sumRational
-              (Agda.Builtin.List.map
+              (map
                 (λ later →
                   Jets.jetFirst (Jets.componentJet residual later)
                     * Jets.jetFirst (Jets.componentJet residual later))
