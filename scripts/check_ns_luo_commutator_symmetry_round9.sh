@@ -10,6 +10,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTransportCommutatorIdentityExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTransportCommutatorMomentBoundExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePairedCommutatorSecondOrderExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCommutatorScaleAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTriadMultiplierDifferenceExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteParityMatchedNonlinearityExact.agda
