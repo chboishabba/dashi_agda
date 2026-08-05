@@ -60,7 +60,7 @@ open import Data.List.Base using (length)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
@@ -291,6 +291,11 @@ collar21SpendsThreeEighths = ℚRing.solve []
 
 threeEighthsBelowHalf : (+ 3 / 8) ≤ (+ 1 / 2)
 threeEighthsBelowHalf =
+  let
+    instance
+      oneEighthNN : NonNegative (+ 1 / 8)
+      oneEighthNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ (+ 1 / 8))
+  in
   subst
     (λ upper → (+ 3 / 8) ≤ upper)
     (ℚRing.solve [])
