@@ -91,11 +91,15 @@ sameTrit zeroTrit zeroTrit = true
 sameTrit positiveTrit positiveTrit = true
 sameTrit _ _ = false
 
+andBool : Bool → Bool → Bool
+andBool true true = true
+andBool _ _ = false
+
 fixedBy : Reflection2 → Pattern2 → Bool
 fixedBy g pattern =
-  sameTrit (actPattern g pattern leftSite) (pattern leftSite)
-  ∧
-  sameTrit (actPattern g pattern rightSite) (pattern rightSite)
+  andBool
+    (sameTrit (actPattern g pattern leftSite) (pattern leftSite))
+    (sameTrit (actPattern g pattern rightSite) (pattern rightSite))
 
 boolToNat : Bool → Nat
 boolToNat false = 0
