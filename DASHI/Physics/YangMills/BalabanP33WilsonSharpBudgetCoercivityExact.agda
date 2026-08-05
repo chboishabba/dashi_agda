@@ -27,11 +27,12 @@ module DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact where
 --
 --   epsilon_gf = 64 rho = 1536/196608.
 --
--- The correct Hodge remainder is coupled:
+-- The correct physical Hodge remainder is
 --
---   [H_W-H_curl] + [H_gf-H_div].
+--   [H_W-H_curl] + [H_gf-H_div],
 --
--- It is not H_W-H_gradient.  The combined exact budget is
+-- measured with the literal three-component SU(2) norm.  Its combined budget
+-- is
 --
 --   epsilon_W + epsilon_gf = 1549/196608,
 --
@@ -39,20 +40,19 @@ module DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact where
 --
 --   1/32 - (epsilon_W+epsilon_gf) = 4595/196608 > 0.
 --
--- This module proves the complete rational aggregation, the decomposition from
--- a flat Hodge identity H_gradient=H_curl+H_div, and the final literal Hessian
--- coercivity promotion.  The remaining analytic producers are now accurately
--- separated: the physical sixteen-atom Wilson estimate and the physical gauge
--- perturbation estimate.  No Wilson-only shortcut is retained.
+-- This module proves the exact rational aggregation and the final physical
+-- coercivity promotion.  The still-open analytic producers are accurately
+-- separated: a physical sixteen-atom Wilson estimate and a physical gauge
+-- perturbation estimate.  No Wilson-only or one-component shortcut remains.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using
+open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym)
+  (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
@@ -64,7 +64,9 @@ import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schu
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
 import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as Constants
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
-import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as ScalarHodge
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2HodgeCoercivityExact as PhysicalHodge
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintCancellationExact as Cancel
 
@@ -179,25 +181,35 @@ sharpCoupledLowerImpliesPhysicalSignedLower
   ℚP.≤-trans reversed sharpLower
 
 ------------------------------------------------------------------------
--- The literal bond norm is a finite sum of finite sums of squares.
+-- Nonnegativity of the literal scalar and physical norms.
 ------------------------------------------------------------------------
 
-globalNormSqNonnegative :
+scalarGlobalNormSqNonnegative :
   ∀ field → 0ℚ ≤ Variance.globalNormSq field
-globalNormSqNonnegative field =
+scalarGlobalNormSqNonnegative field =
   Schur.sumNonnegative
     (Block.physicalBlockSites Path4.side4)
     (λ site → field site * field site)
     (λ site → FiniteL2.squareNonnegative (field site))
 
-bondNormSqNonnegative :
-  ∀ field → 0ℚ ≤ Hodge.bondNormSq field
-bondNormSqNonnegative field =
+scalarBondNormSqNonnegative :
+  ∀ field → 0ℚ ≤ ScalarHodge.bondNormSq field
+scalarBondNormSqNonnegative field =
   Schur.sumNonnegative
     (Torus.allCyclicIndices Torus.four)
-    (λ axis → Variance.globalNormSq (Hodge.bondComponent field axis))
+    (λ axis → Variance.globalNormSq (ScalarHodge.bondComponent field axis))
     (λ axis →
-      globalNormSqNonnegative (Hodge.bondComponent field axis))
+      scalarGlobalNormSqNonnegative
+        (ScalarHodge.bondComponent field axis))
+
+physicalBondNormSqNonnegative :
+  ∀ field → 0ℚ ≤ Physical.physicalSU2BondNormSq field
+physicalBondNormSqNonnegative field =
+  ℚP.+-mono-≤
+    (ℚP.+-mono-≤
+      (scalarBondNormSqNonnegative (field Physical.coordinateX))
+      (scalarBondNormSqNonnegative (field Physical.coordinateY)))
+    (scalarBondNormSqNonnegative (field Physical.coordinateZ))
 
 ------------------------------------------------------------------------
 -- Exact Hodge decomposition of the coupled remainder.
@@ -229,25 +241,25 @@ physicalReferenceTurnsCoupledRemainderIntoLiteralOne
     (ℚRing.solve [])
 
 ------------------------------------------------------------------------
--- Separate Wilson and gauge estimates imply literal 1/32 coercivity.
+-- Separate physical Wilson and gauge estimates imply 1/32 coercivity.
 ------------------------------------------------------------------------
 
 literalHessianCoerciveFromSharpWilsonGaugeBudgets :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Hodge.RationalBondField4)
+    (field : Physical.PhysicalSU2BondField4)
     (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex)
     flatCurlEnergy flatDivergenceEnergy →
-  Hodge.BondComponentMeanZero field →
+  PhysicalHodge.PhysicalBondComponentMeanZero field →
   Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
   Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
-  Hodge.bondReferenceDifferenceEnergy field
+  PhysicalHodge.physicalReferenceDifferenceEnergy field
     ≡ flatCurlEnergy + flatDivergenceEnergy →
-  - (Sharp.sharpSixteenAtomBudget * Hodge.bondNormSq field)
+  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq field)
     ≤ Jets.wilsonSecondVariation dataSet - flatCurlEnergy →
-  - (configuredGaugeHodgeBudget * Hodge.bondNormSq field)
+  - (configuredGaugeHodgeBudget * Physical.physicalSU2BondNormSq field)
     ≤ Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy →
-  P33.p33PhysicalFloor * Hodge.bondNormSq field
+  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
     ≤ Jets.literalTotalSecondVariation dataSet
 literalHessianCoerciveFromSharpWilsonGaugeBudgets
     field dataSet flatCurlEnergy flatDivergenceEnergy
@@ -255,34 +267,36 @@ literalHessianCoerciveFromSharpWilsonGaugeBudgets
     wilsonLower gaugeLower =
   let
     splitLower :
-      - (sharpWilsonGaugeBudget * Hodge.bondNormSq field)
+      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
       ≤ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy)
         + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy)
     splitLower =
       coupledSignedLowerFromSeparateBudgets
-        (Hodge.bondNormSq field)
+        (Physical.physicalSU2BondNormSq field)
         (Jets.wilsonSecondVariation dataSet - flatCurlEnergy)
         (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy)
         wilsonLower gaugeLower
 
     coupledLower :
-      - (sharpWilsonGaugeBudget * Hodge.bondNormSq field)
+      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
       ≤ Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - Hodge.bondReferenceDifferenceEnergy field
+          - PhysicalHodge.physicalReferenceDifferenceEnergy field
     coupledLower =
       subst
         (λ upper →
-          - (sharpWilsonGaugeBudget * Hodge.bondNormSq field) ≤ upper)
+          - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+          ≤ upper)
         (sym
           (physicalReferenceTurnsCoupledRemainderIntoLiteralOne
             (Jets.wilsonSecondVariation dataSet)
             (Cancel.gaugeFirstEnergy dataSet)
-            (Hodge.bondReferenceDifferenceEnergy field)
+            (PhysicalHodge.physicalReferenceDifferenceEnergy field)
             flatCurlEnergy flatDivergenceEnergy referenceExact))
         (subst
           (λ upper →
-            - (sharpWilsonGaugeBudget * Hodge.bondNormSq field) ≤ upper)
+            - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+            ≤ upper)
           (sym
             (coupledHodgeRemainderSplits
               (Jets.wilsonSecondVariation dataSet)
@@ -291,17 +305,17 @@ literalHessianCoerciveFromSharpWilsonGaugeBudgets
           splitLower)
 
     physicalLower :
-      - (P33.p33PhysicalFloor * Hodge.bondNormSq field)
+      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field)
       ≤ Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - Hodge.bondReferenceDifferenceEnergy field
+          - PhysicalHodge.physicalReferenceDifferenceEnergy field
     physicalLower =
       sharpCoupledLowerImpliesPhysicalSignedLower
-        (Hodge.bondNormSq field)
+        (Physical.physicalSU2BondNormSq field)
         (Jets.wilsonSecondVariation dataSet
           + Cancel.gaugeFirstEnergy dataSet
-          - Hodge.bondReferenceDifferenceEnergy field)
-        (bondNormSqNonnegative field)
+          - PhysicalHodge.physicalReferenceDifferenceEnergy field)
+        (physicalBondNormSqNonnegative field)
         coupledLower
   in
   Cancel.literalHessianCoerciveFromWilsonGaugeHodgeDifference
@@ -313,8 +327,8 @@ sharpWilsonGaugeBudgetGapLevel = machineChecked
 coupledWilsonGaugeSignedPromotionLevel : ProofLevel
 coupledWilsonGaugeSignedPromotionLevel = machineChecked
 
-literalBondNormNonnegativeLevel : ProofLevel
-literalBondNormNonnegativeLevel = machineChecked
+literalPhysicalNormNonnegativeLevel : ProofLevel
+literalPhysicalNormNonnegativeLevel = machineChecked
 
 flatHodgeRemainderDecompositionLevel : ProofLevel
 flatHodgeRemainderDecompositionLevel = machineChecked
