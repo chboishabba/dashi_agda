@@ -69,96 +69,96 @@ asIntegralCharacterSystem :
   ∀ {r} {F : C3.RealField r} →
   PeriodicComplexCharacterData F →
   Integral.ComplexIntegralCharacterSystem F
-asIntegralCharacterSystem data = record
-  { Sample = TorusPoint data
+asIntegralCharacterSystem characterData = record
+  { Sample = TorusPoint characterData
   ; Mode = Z3.FourierMode
-  ; integral = integral data
+  ; integral = integral characterData
   ; zeroMode = Z3.zeroMode
   ; addMode = Z3.addMode
-  ; kernelWeight = kernelWeight data
-  ; character = character data
-  ; characterProduct = characterAdd data
-  ; zeroCharacter = characterZero data
+  ; kernelWeight = kernelWeight characterData
+  ; character = character characterData
+  ; characterProduct = characterAdd characterData
+  ; zeroCharacter = characterZero characterData
   }
 
 periodicKernelTransform :
   ∀ {r} {F : C3.RealField r} →
   PeriodicComplexCharacterData F →
   Z3.FourierMode → C3.Complex F
-periodicKernelTransform data =
+periodicKernelTransform characterData =
   Integral.complexIntegralKernelTransformAt
-    (asIntegralCharacterSystem data)
+    (asIntegralCharacterSystem characterData)
 
 periodicKernelMass :
   ∀ {r} {F : C3.RealField r} →
   PeriodicComplexCharacterData F → C3.Complex F
-periodicKernelMass data =
+periodicKernelMass characterData =
   Integral.complexIntegralKernelTransform
-    (asIntegralCharacterSystem data)
+    (asIntegralCharacterSystem characterData)
 
 periodicWeightedIncrement :
   ∀ {r} {F : C3.RealField r} →
   PeriodicComplexCharacterData F →
   Z3.FourierMode → Z3.FourierMode → C3.Complex F
-periodicWeightedIncrement data =
+periodicWeightedIncrement characterData =
   Integral.complexIntegralWeightedIncrement
-    (asIntegralCharacterSystem data)
+    (asIntegralCharacterSystem characterData)
 
 periodicWeightedIncrementMultiplierIdentity :
   ∀ {r} {F : C3.RealField r}
-    (data : PeriodicComplexCharacterData F)
+    (characterData : PeriodicComplexCharacterData F)
     (left right : Z3.FourierMode) →
-  periodicWeightedIncrement data left right
+  periodicWeightedIncrement characterData left right
   ≡ C3.complexAdd
       (C3.complexSubtract
         (C3.complexSubtract
-          (periodicKernelTransform data (Z3.addMode left right))
-          (periodicKernelTransform data left))
-        (periodicKernelTransform data right))
-      (periodicKernelTransform data Z3.zeroMode)
-periodicWeightedIncrementMultiplierIdentity data left right =
+          (periodicKernelTransform characterData (Z3.addMode left right))
+          (periodicKernelTransform characterData left))
+        (periodicKernelTransform characterData right))
+      (periodicKernelTransform characterData Z3.zeroMode)
+periodicWeightedIncrementMultiplierIdentity characterData left right =
   Integral.complexLinearIntegralWeightedIncrementIdentity
-    (asIntegralCharacterSystem data)
+    (asIntegralCharacterSystem characterData)
     left
     right
 
 periodicZeroTransformEqualsKernelMass :
   ∀ {r} {F : C3.RealField r}
-    (data : PeriodicComplexCharacterData F) →
-  periodicKernelTransform data Z3.zeroMode
-  ≡ periodicKernelMass data
-periodicZeroTransformEqualsKernelMass data =
+    (characterData : PeriodicComplexCharacterData F) →
+  periodicKernelTransform characterData Z3.zeroMode
+  ≡ periodicKernelMass characterData
+periodicZeroTransformEqualsKernelMass characterData =
   Integral.complexIntegralZeroTransformEqualsKernelMass
-    (asIntegralCharacterSystem data)
+    (asIntegralCharacterSystem characterData)
 
 periodicNormalizedWeightedIncrementMultiplierIdentity :
   ∀ {r} {F : C3.RealField r}
-    (data : PeriodicComplexCharacterData F) →
-  periodicKernelMass data ≡ C3.complexOne F →
+    (characterData : PeriodicComplexCharacterData F) →
+  periodicKernelMass characterData ≡ C3.complexOne F →
   (left right : Z3.FourierMode) →
-  periodicWeightedIncrement data left right
+  periodicWeightedIncrement characterData left right
   ≡ C3.complexAdd
       (C3.complexSubtract
         (C3.complexSubtract
-          (periodicKernelTransform data (Z3.addMode left right))
-          (periodicKernelTransform data left))
-        (periodicKernelTransform data right))
+          (periodicKernelTransform characterData (Z3.addMode left right))
+          (periodicKernelTransform characterData left))
+        (periodicKernelTransform characterData right))
       (C3.complexOne F)
 periodicNormalizedWeightedIncrementMultiplierIdentity
-  data normalizedMass left right =
+  characterData normalizedMass left right =
   trans
-    (periodicWeightedIncrementMultiplierIdentity data left right)
+    (periodicWeightedIncrementMultiplierIdentity characterData left right)
     (cong
       (λ zeroTransform →
         C3.complexAdd
           (C3.complexSubtract
             (C3.complexSubtract
-              (periodicKernelTransform data (Z3.addMode left right))
-              (periodicKernelTransform data left))
-            (periodicKernelTransform data right))
+              (periodicKernelTransform characterData (Z3.addMode left right))
+              (periodicKernelTransform characterData left))
+            (periodicKernelTransform characterData right))
           zeroTransform)
       (trans
-        (periodicZeroTransformEqualsKernelMass data)
+        (periodicZeroTransformEqualsKernelMass characterData)
         normalizedMass))
 
 periodicComplexMultiplierAlgebraClosed : Bool
