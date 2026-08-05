@@ -32,9 +32,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _-_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; 1ℚ; _*_; _-_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -61,15 +62,14 @@ powReciprocalProduct base inverseBase inverseLaw (suc exponent)
 
 powNonnegative :
   ∀ base → 0ℚ ≤ base → ∀ exponent → 0ℚ ≤ pow base exponent
-powNonnegative base baseNonnegative zero = ℚP.0≤1
+powNonnegative base baseNonnegative zero = ℚP.nonNegative⁻¹ 1ℚ
 powNonnegative base baseNonnegative (suc exponent) =
   let
-    open import Data.Rational.Base as ℚB using (NonNegative)
     instance
-      prefixNN : ℚB.NonNegative (pow base exponent)
-      prefixNN = ℚB.nonNegative (powNonnegative base baseNonnegative exponent)
-      baseNN : ℚB.NonNegative base
-      baseNN = ℚB.nonNegative baseNonnegative
+      prefixNN : NonNegative (pow base exponent)
+      prefixNN = ℚ.nonNegative (powNonnegative base baseNonnegative exponent)
+      baseNN : NonNegative base
+      baseNN = ℚ.nonNegative baseNonnegative
   in
   ℚP.nonNegative⁻¹ (pow base exponent * base)
 
@@ -78,7 +78,7 @@ powAbsolute :
   ∣ base ∣ ≡ base →
   ∀ exponent →
   ∣ pow base exponent ∣ ≡ pow base exponent
-powAbsolute base baseAbsolute zero = ℚP.∣1∣≡1
+powAbsolute base baseAbsolute zero = refl
 powAbsolute base baseAbsolute (suc exponent) =
   trans
     (ℚP.∣p*q∣≡∣p∣*∣q∣ (pow base exponent) base)
@@ -175,12 +175,9 @@ unitShellRatioExact base inverseBase inverseLaw (sameShell shell) =
       (ℚRing.solve-∀
         (pow inverseBase shell) (pow base shell))
       (powReciprocalProduct base inverseBase inverseLaw shell))
-  where
-    open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 unitShellRatioExact base inverseBase inverseLaw (leftOneFarther shell) =
   inj₂ (inj₁ ratio)
   where
-    open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
     ratio :
       unitShellRatio base inverseBase (suc shell) shell ≡ inverseBase
     ratio
@@ -189,7 +186,6 @@ unitShellRatioExact base inverseBase inverseLaw (leftOneFarther shell) =
 unitShellRatioExact base inverseBase inverseLaw (rightOneFarther shell) =
   inj₂ (inj₂ ratio)
   where
-    open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
     ratio :
       unitShellRatio base inverseBase shell (suc shell) ≡ base
     ratio
@@ -228,8 +224,6 @@ unitShellDistortionBound
     (λ selected → ∣ selected - 1ℚ ∣ ≤ distortion)
     (sym ratio)
     baseBound
-  where
-    open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
 rationalGeometricWeightLevel : ProofLevel
 rationalGeometricWeightLevel = machineChecked
