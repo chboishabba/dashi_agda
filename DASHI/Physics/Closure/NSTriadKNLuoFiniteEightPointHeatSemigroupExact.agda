@@ -30,7 +30,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _/_; _≤_)
+  (ℚ; 0ℚ; _/_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
