@@ -35,7 +35,7 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEnergyCriticalScalingGapExact as Scale
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearWindowHalfKernelExact as Near
@@ -80,5 +80,4 @@ massPreservedAcrossConcentration :
 massPreservedAcrossConcentration shell =
   trans
     (weakTypeProductIsOne (suc shell))
-    (Relation.Binary.PropositionalEquality.sym
-      (weakTypeProductIsOne shell))
+    (sym (weakTypeProductIsOne shell))
