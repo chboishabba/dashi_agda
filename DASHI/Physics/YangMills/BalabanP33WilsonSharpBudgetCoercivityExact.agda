@@ -39,8 +39,9 @@ module DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact where
 --
 -- is much stronger than the lower bound required for 1/32 literal Hessian
 -- coercivity after the exact gauge and constraint squares cancel.  This module
--- proves the complete ordered-rational promotion; the physical identification
--- and estimate of the sixteen Wilson atoms remains the sole analytic producer.
+-- proves the complete ordered-rational promotion, including nonnegativity of
+-- the literal bond norm.  The physical identification and estimate of the
+-- sixteen Wilson atoms remains the sole analytic producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -52,6 +53,12 @@ open import Relation.Binary.PropositionalEquality using
   (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
+import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
+import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact as Variance
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
@@ -141,6 +148,27 @@ sharpSignedLowerImpliesPhysicalSignedLower
   ℚP.≤-trans reversed sharpLower
 
 ------------------------------------------------------------------------
+-- The literal bond norm is a finite sum of finite sums of squares.
+------------------------------------------------------------------------
+
+globalNormSqNonnegative :
+  ∀ field → 0ℚ ≤ Variance.globalNormSq field
+globalNormSqNonnegative field =
+  Schur.sumNonnegative
+    (Block.physicalBlockSites Path4.side4)
+    (λ site → field site * field site)
+    (λ site → FiniteL2.squareNonnegative (field site))
+
+bondNormSqNonnegative :
+  ∀ field → 0ℚ ≤ Hodge.bondNormSq field
+bondNormSqNonnegative field =
+  Schur.sumNonnegative
+    (Torus.allCyclicIndices Torus.four)
+    (λ axis → Variance.globalNormSq (Hodge.bondComponent field axis))
+    (λ axis →
+      globalNormSqNonnegative (Hodge.bondComponent field axis))
+
+------------------------------------------------------------------------
 -- Sharp Wilson estimate implies the literal 1/32 Hessian theorem.
 ------------------------------------------------------------------------
 
@@ -152,27 +180,30 @@ literalHessianCoerciveFromSharpWilsonBudget :
   Hodge.BondComponentMeanZero field →
   Jets.ExactResidualBackground (Jets.gaugeResidual data) →
   Jets.ExactResidualBackground (Jets.constraintResidual data) →
-  0ℚ ≤ Hodge.bondNormSq field →
   - (Sharp.sharpSixteenAtomBudget * Hodge.bondNormSq field)
     ≤ Jets.wilsonSecondVariation data
         - Hodge.bondReferenceDifferenceEnergy field →
   P33.p33PhysicalFloor * Hodge.bondNormSq field
     ≤ Jets.literalTotalSecondVariation data
 literalHessianCoerciveFromSharpWilsonBudget
-    field data meanZero gaugeExact constraintExact normNonnegative sharpLower =
+    field data meanZero gaugeExact constraintExact sharpLower =
   Cancel.literalHessianCoerciveFromWilsonDifference
     field data meanZero gaugeExact constraintExact
     (sharpSignedLowerImpliesPhysicalSignedLower
       (Hodge.bondNormSq field)
       (Jets.wilsonSecondVariation data
         - Hodge.bondReferenceDifferenceEnergy field)
-      normNonnegative sharpLower)
+      (bondNormSqNonnegative field)
+      sharpLower)
 
 sharpWilsonBudgetGapLevel : ProofLevel
 sharpWilsonBudgetGapLevel = machineChecked
 
 sharpWilsonSignedPromotionLevel : ProofLevel
 sharpWilsonSignedPromotionLevel = machineChecked
+
+literalBondNormNonnegativeLevel : ProofLevel
+literalBondNormNonnegativeLevel = machineChecked
 
 literalSharpWilsonCoercivityLevel : ProofLevel
 literalSharpWilsonCoercivityLevel = machineChecked
