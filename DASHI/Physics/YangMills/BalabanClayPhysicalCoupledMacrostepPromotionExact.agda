@@ -46,8 +46,9 @@ module DASHI.Physics.YangMills.BalabanClayPhysicalCoupledMacrostepPromotionExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Product.Base using (_×_; _,_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -128,9 +129,9 @@ physicalCoupledMacrostepConclusions :
 physicalCoupledMacrostepConclusions dataSet = record
   { strictPolymer = physicalStrictPolymerStep dataSet
   ; nextCouplingNonnegative =
-      Data.Product.Base.proj₁ (physicalCouplingNonnegativeAndMonotone dataSet)
+      proj₁ (physicalCouplingNonnegativeAndMonotone dataSet)
   ; nextCouplingBelowCurrent =
-      Data.Product.Base.proj₂ (physicalCouplingNonnegativeAndMonotone dataSet)
+      proj₂ (physicalCouplingNonnegativeAndMonotone dataSet)
   ; invariantCone = physicalCoupledConePreserved dataSet
   }
 
