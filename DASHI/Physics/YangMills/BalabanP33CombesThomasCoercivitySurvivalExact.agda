@@ -46,7 +46,7 @@ module DASHI.Physics.YangMills.BalabanP33CombesThomasCoercivitySurvivalExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer.Base using (+_; -[1+_])
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
@@ -76,7 +76,7 @@ halfGapCoercivitySurvives
       ℚP.≤-trans
         reverseTriangle
         (ℚP.+-mono-≤
-          (ℚP.≤-refl {x = normTiltedX})
+          ℚP.≤-refl
           perturbationUpper)
 
     doubledHalfBelow :
@@ -93,7 +93,7 @@ halfGapCoercivitySurvives
     shifted =
       ℚP.+-mono-≤
         doubledHalfBelow
-        (ℚP.≤-refl {x = 0ℚ - halfGap * normX})
+        ℚP.≤-refl
   in
   subst
     (λ lower → lower ≤ normTiltedX)
