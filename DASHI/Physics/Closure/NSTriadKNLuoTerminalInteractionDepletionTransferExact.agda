@@ -29,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoTerminalInteractionDepletionTransferExa
 ------------------------------------------------------------------------
 
 open import Data.Nat.Base using (ℕ; _≤_)
-open import Data.Rational.Base using (ℚ; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚₚ
 
 record EventuallyBelow
