@@ -6,6 +6,7 @@ on:
       - 'agent/ym-clay-alpha-round17-coupled-rg-duhamel'
   pull_request:
     paths:
+      - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpActualEndpointModulusExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33DuhamelOrderedSimplexMeasureExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayCoupledPolymerFlowRemainderExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayCoupledRGInvariantConeExact.agda'
@@ -30,5 +31,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check Duhamel measure and coupled RG cone
-        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round17.sh
+      - name: Check actual endpoint, Duhamel measure and coupled RG cone
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest-alpha-round17.sh
