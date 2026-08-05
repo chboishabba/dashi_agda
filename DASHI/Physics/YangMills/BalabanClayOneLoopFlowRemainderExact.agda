@@ -41,7 +41,7 @@ module DASHI.Physics.YangMills.BalabanClayOneLoopFlowRemainderExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_; NonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -69,16 +69,22 @@ record OneLoopStep : Set₁ where
       ≤ (+ 1 / 2) * betaCoefficient * square current
 
     smallCoupling :
-      (+ 3 / 2) * betaCoefficient * current ≤ (+ 1 / 1)
+      (+ 3 / 2) * betaCoefficient * current ≤ 1ℚ
 
 open OneLoopStep public
+
+betaSquare : OneLoopStep → ℚ
+betaSquare dataSet =
+  betaCoefficient dataSet * square (current dataSet)
+
+halfBetaSquare : OneLoopStep → ℚ
+halfBetaSquare dataSet = (+ 1 / 2) * betaSquare dataSet
 
 squareNonnegative : ∀ value → 0ℚ ≤ square value
 squareNonnegative value = ℚP.nonNegative⁻¹ (square value)
 
 betaSquareNonnegative :
-  (dataSet : OneLoopStep) →
-  0ℚ ≤ betaCoefficient dataSet * square (current dataSet)
+  (dataSet : OneLoopStep) → 0ℚ ≤ betaSquare dataSet
 betaSquareNonnegative dataSet =
   let
     instance
@@ -86,8 +92,61 @@ betaSquareNonnegative dataSet =
       betaNN = ℚ.nonNegative (betaNonnegative dataSet)
       squareNN : NonNegative (square (current dataSet))
       squareNN = ℚ.nonNegative (squareNonnegative (current dataSet))
-  in ℚP.nonNegative⁻¹
-      (betaCoefficient dataSet * square (current dataSet))
+  in ℚP.nonNegative⁻¹ (betaSquare dataSet)
+
+halfBetaSquareNonnegative :
+  (dataSet : OneLoopStep) → 0ℚ ≤ halfBetaSquare dataSet
+halfBetaSquareNonnegative dataSet =
+  let
+    instance
+      halfNN : NonNegative (+ 1 / 2)
+      halfNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ (+ 1 / 2))
+      betaSquareNN : NonNegative (betaSquare dataSet)
+      betaSquareNN = ℚ.nonNegative (betaSquareNonnegative dataSet)
+  in ℚP.nonNegative⁻¹ (halfBetaSquare dataSet)
+
+halfBetaSquareBelowBetaSquare :
+  (dataSet : OneLoopStep) →
+  halfBetaSquare dataSet ≤ betaSquare dataSet
+halfBetaSquareBelowBetaSquare dataSet =
+  let
+    instance
+      halfBetaNN : NonNegative (halfBetaSquare dataSet)
+      halfBetaNN = ℚ.nonNegative (halfBetaSquareNonnegative dataSet)
+  in
+  subst
+    (λ upper → halfBetaSquare dataSet ≤ upper)
+    (ℚRing.solve-∀ (betaSquare dataSet))
+    (ℚP.p≤p+q
+      (halfBetaSquare dataSet) (halfBetaSquare dataSet))
+
+subtractNonnegativeBelow : ∀ value loss →
+  0ℚ ≤ loss → value - loss ≤ value
+subtractNonnegativeBelow value loss lossNonnegative =
+  subst
+    (λ upper → value + (- loss) ≤ upper)
+    (ℚRing.solve-∀ value)
+    (ℚP.+-mono-≤
+      ℚP.≤-refl
+      (subst
+        (λ upper → - loss ≤ upper)
+        (ℚRing.solve [])
+        (ℚP.neg-mono-≤ lossNonnegative)))
+
+stepUpperEnvelope :
+  (dataSet : OneLoopStep) →
+  current dataSet - betaSquare dataSet + remainder dataSet
+  ≤ current dataSet - halfBetaSquare dataSet
+stepUpperEnvelope dataSet =
+  ℚP.≤-trans
+    (ℚP.+-monoˡ-≤
+      (current dataSet - betaSquare dataSet)
+      (remainderUpper dataSet))
+    (subst
+      (λ left → left ≤ current dataSet - halfBetaSquare dataSet)
+      (ℚRing.solve-∀
+        (current dataSet) (betaSquare dataSet))
+      ℚP.≤-refl)
 
 nextBelowCurrent :
   (dataSet : OneLoopStep) → next dataSet ≤ current dataSet
@@ -96,90 +155,101 @@ nextBelowCurrent dataSet =
     (λ left → left ≤ current dataSet)
     (sym (stepEquation dataSet))
     (ℚP.≤-trans
-      (ℚP.+-monoˡ-≤
-        (current dataSet - betaCoefficient dataSet * square (current dataSet))
-        (remainderUpper dataSet))
-      (subst
-        (λ left → left ≤ current dataSet)
-        (ℚRing.solve-∀
-          (current dataSet)
-          (betaCoefficient dataSet * square (current dataSet)))
-        (ℚP.+-monoʳ-≤ (current dataSet)
-          (ℚP.neg-mono-≤
-            (ℚP.≤-trans
-              (ℚP.*-monoˡ-≤-nonNeg (+ 1 / 2)
-                (betaSquareNonnegative dataSet))
-              (betaSquareNonnegative dataSet))))))
+      (stepUpperEnvelope dataSet)
+      (subtractNonnegativeBelow
+        (current dataSet) (halfBetaSquare dataSet)
+        (halfBetaSquareNonnegative dataSet)))
 
 oneMinusThreeHalvesBetaCurrentNonnegative :
   (dataSet : OneLoopStep) →
-  0ℚ ≤ (+ 1 / 1)
+  0ℚ ≤ 1ℚ
     - (+ 3 / 2) * betaCoefficient dataSet * current dataSet
 oneMinusThreeHalvesBetaCurrentNonnegative dataSet =
   ℚP.p≤q⇒0≤q-p (smallCoupling dataSet)
+
+lowerEnvelope : OneLoopStep → ℚ
+lowerEnvelope dataSet =
+  current dataSet
+    * (1ℚ - (+ 3 / 2)
+      * betaCoefficient dataSet * current dataSet)
+
+lowerEnvelopeNonnegative :
+  (dataSet : OneLoopStep) → 0ℚ ≤ lowerEnvelope dataSet
+lowerEnvelopeNonnegative dataSet =
+  let
+    instance
+      currentNN : NonNegative (current dataSet)
+      currentNN = ℚ.nonNegative (currentNonnegative dataSet)
+      bracketNN : NonNegative
+        (1ℚ - (+ 3 / 2)
+          * betaCoefficient dataSet * current dataSet)
+      bracketNN = ℚ.nonNegative
+        (oneMinusThreeHalvesBetaCurrentNonnegative dataSet)
+  in ℚP.nonNegative⁻¹ (lowerEnvelope dataSet)
+
+lowerEnvelopeExpansion :
+  (dataSet : OneLoopStep) →
+  lowerEnvelope dataSet
+  ≡ current dataSet - betaSquare dataSet
+      + (- halfBetaSquare dataSet)
+lowerEnvelopeExpansion dataSet =
+  ℚRing.solve-∀
+    (current dataSet) (betaCoefficient dataSet)
+
+stepLowerEnvelope :
+  (dataSet : OneLoopStep) →
+  lowerEnvelope dataSet
+  ≤ current dataSet - betaSquare dataSet + remainder dataSet
+stepLowerEnvelope dataSet =
+  subst
+    (λ lower → lower
+      ≤ current dataSet - betaSquare dataSet + remainder dataSet)
+    (lowerEnvelopeExpansion dataSet)
+    (ℚP.+-monoˡ-≤
+      (current dataSet - betaSquare dataSet)
+      (remainderLower dataSet))
 
 nextNonnegative :
   (dataSet : OneLoopStep) → 0ℚ ≤ next dataSet
 nextNonnegative dataSet =
   subst
     (λ right → 0ℚ ≤ right)
-    (stepEquation dataSet)
+    (sym (stepEquation dataSet))
     (ℚP.≤-trans
-      (subst
-        (λ left → left
-          ≤ current dataSet
-            - betaCoefficient dataSet * square (current dataSet)
-            + remainder dataSet)
-        (ℚRing.solve-∀
-          (current dataSet)
-          (betaCoefficient dataSet))
-        (let
-          instance
-            currentNN : NonNegative (current dataSet)
-            currentNN = ℚ.nonNegative (currentNonnegative dataSet)
-            bracketNN : NonNegative
-              ((+ 1 / 1)
-                - (+ 3 / 2) * betaCoefficient dataSet * current dataSet)
-            bracketNN = ℚ.nonNegative
-              (oneMinusThreeHalvesBetaCurrentNonnegative dataSet)
-         in ℚP.nonNegative⁻¹
-              (current dataSet
-                * ((+ 1 / 1)
-                  - (+ 3 / 2) * betaCoefficient dataSet * current dataSet)))
-      (subst
-        (λ lower → lower
-          ≤ current dataSet
-            - betaCoefficient dataSet * square (current dataSet)
-            + remainder dataSet)
-        (ℚRing.solve-∀
-          (current dataSet)
-          (betaCoefficient dataSet))
-        (ℚP.+-monoˡ-≤
-          (current dataSet
-            - betaCoefficient dataSet * square (current dataSet))
-          (remainderLower dataSet))))
+      (lowerEnvelopeNonnegative dataSet)
+      (stepLowerEnvelope dataSet))
 
 halfOneLoopDecrease :
   (dataSet : OneLoopStep) →
-  (+ 1 / 2) * betaCoefficient dataSet * square (current dataSet)
-  ≤ current dataSet - next dataSet
+  halfBetaSquare dataSet ≤ current dataSet - next dataSet
 halfOneLoopDecrease dataSet =
   subst
     (λ right →
-      (+ 1 / 2) * betaCoefficient dataSet * square (current dataSet)
-      ≤ current dataSet - right)
-    (stepEquation dataSet)
+      halfBetaSquare dataSet ≤ current dataSet - right)
+    (sym (stepEquation dataSet))
     (subst
-      (λ right →
-        (+ 1 / 2) * betaCoefficient dataSet * square (current dataSet)
-        ≤ right)
+      (λ right → halfBetaSquare dataSet ≤ right)
       (ℚRing.solve-∀
-        (current dataSet)
-        (betaCoefficient dataSet * square (current dataSet))
+        (current dataSet) (betaSquare dataSet)
         (remainder dataSet))
       (ℚP.+-monoʳ-≤
-        (betaCoefficient dataSet * square (current dataSet))
+        (betaSquare dataSet)
         (ℚP.neg-mono-≤ (remainderUpper dataSet))))
+
+halfBetaCurrentNonnegative :
+  (dataSet : OneLoopStep) →
+  0ℚ ≤ (+ 1 / 2) * betaCoefficient dataSet * current dataSet
+halfBetaCurrentNonnegative dataSet =
+  let
+    instance
+      halfNN : NonNegative (+ 1 / 2)
+      halfNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ (+ 1 / 2))
+      betaNN : NonNegative (betaCoefficient dataSet)
+      betaNN = ℚ.nonNegative (betaNonnegative dataSet)
+      currentNN : NonNegative (current dataSet)
+      currentNN = ℚ.nonNegative (currentNonnegative dataSet)
+  in ℚP.nonNegative⁻¹
+      ((+ 1 / 2) * betaCoefficient dataSet * current dataSet)
 
 crossMultipliedReciprocalGain :
   (dataSet : OneLoopStep) →
@@ -190,19 +260,10 @@ crossMultipliedReciprocalGain dataSet =
   ℚP.≤-trans
     (let
       instance
-        halfBetaCurrentNN : NonNegative
+        multiplierNN : NonNegative
           ((+ 1 / 2) * betaCoefficient dataSet * current dataSet)
-        halfBetaCurrentNN = ℚ.nonNegative
-          (let
-            instance
-              halfNN : NonNegative (+ 1 / 2)
-              halfNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ (+ 1 / 2))
-              betaNN : NonNegative (betaCoefficient dataSet)
-              betaNN = ℚ.nonNegative (betaNonnegative dataSet)
-              currentNN : NonNegative (current dataSet)
-              currentNN = ℚ.nonNegative (currentNonnegative dataSet)
-           in ℚP.nonNegative⁻¹
-                ((+ 1 / 2) * betaCoefficient dataSet * current dataSet))
+        multiplierNN = ℚ.nonNegative
+          (halfBetaCurrentNonnegative dataSet)
      in ℚP.*-monoˡ-≤-nonNeg
           ((+ 1 / 2) * betaCoefficient dataSet * current dataSet)
           (nextBelowCurrent dataSet))
