@@ -47,7 +47,7 @@ open import Relation.Binary.PropositionalEquality using
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (yes; no)
+  (Empty; yes; no)
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
@@ -66,6 +66,9 @@ Coordinate = Physical.PhysicalSU2Coordinate4
 
 PhysicalMatrix : Set
 PhysicalMatrix = Physical.PhysicalSU2Matrix4
+
+emptyElim : ∀ {A : Set} → Empty → A
+emptyElim ()
 
 ------------------------------------------------------------------------
 -- Exact finite action/composition algebra.
@@ -131,13 +134,37 @@ physicalMatrixApplyCompositionExact left right vector row =
         (λ middle column →
           left row middle * (right middle column * vector column))
 
+    collectedColumn : ∀ column →
+      Sums.sumRational Physical.physicalSU2Coordinates4
+        (λ middle →
+          left row middle * (right middle column * vector column))
+      ≡ CT.composeMatrix Physical.physicalSU2Coordinates4
+          left right row column * vector column
+    collectedColumn column =
+      trans
+        (Sums.sumRationalCong
+          Physical.physicalSU2Coordinates4
+          (λ middle →
+            left row middle * (right middle column * vector column))
+          (λ middle →
+            vector column * (left row middle * right middle column))
+          (λ middle → ℚRing.solve []))
+        (trans
+          (Sums.sumRationalScale
+            (vector column)
+            Physical.physicalSU2Coordinates4
+            (λ middle → left row middle * right middle column))
+          (ℚRing.solve-∀
+            (CT.composeMatrix Physical.physicalSU2Coordinates4
+              left right row column)
+            (vector column)))
+
     collectedColumns :
       Sums.sumRational Physical.physicalSU2Coordinates4
         (λ column →
           Sums.sumRational Physical.physicalSU2Coordinates4
             (λ middle →
-              left row middle
-                * (right middle column * vector column)))
+              left row middle * (right middle column * vector column)))
       ≡ Sums.sumRational Physical.physicalSU2Coordinates4
           (λ column →
             CT.composeMatrix Physical.physicalSU2Coordinates4
@@ -148,26 +175,11 @@ physicalMatrixApplyCompositionExact left right vector row =
         (λ column →
           Sums.sumRational Physical.physicalSU2Coordinates4
             (λ middle →
-              left row middle
-                * (right middle column * vector column)))
+              left row middle * (right middle column * vector column)))
         (λ column →
           CT.composeMatrix Physical.physicalSU2Coordinates4
             left right row column * vector column)
-        (λ column →
-          trans
-            (Sums.sumRationalCong
-              Physical.physicalSU2Coordinates4
-              (λ middle →
-                left row middle
-                  * (right middle column * vector column))
-              (λ middle →
-                (left row middle * right middle column)
-                  * vector column)
-              (λ middle → ℚRing.solve []))
-            (Sums.sumRationalScale
-              (vector column)
-              Physical.physicalSU2Coordinates4
-              (λ middle → left row middle * right middle column)))
+        collectedColumn
   in
   trans expandedRows (trans swapped collectedColumns)
 
@@ -178,9 +190,10 @@ identityEntrySymmetric left right
   with Calibration.physicalCoordinateDecidableEquality left right
      | Calibration.physicalCoordinateDecidableEquality right left
 ... | yes refl | yes refl = refl
-... | yes refl | no rightNotLeft = rightNotLeft refl
+... | yes refl | no rightNotLeft =
+  emptyElim (rightNotLeft refl)
 ... | no leftNotRight | yes rightEqualsLeft =
-  leftNotRight (sym rightEqualsLeft)
+  emptyElim (leftNotRight (sym rightEqualsLeft))
 ... | no _ | no _ = refl
 
 physicalIdentityApplyExact : ∀ vector row →
