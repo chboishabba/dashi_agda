@@ -24,41 +24,32 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact
 --
 --   U_b(t)=U_b exp(t X_b),
 --
--- its two-jet at zero is
+-- its two-jet at zero is `(U_b,U_b X_b,U_b X_b^2)`.  For an inverse occurrence
 --
---   (U_b, U_b X_b, U_b X_b^2).
+--   U_b(t)^-1=exp(-t X_b)U_b^-1,
 --
--- For an inverse plaquette occurrence,
+-- the jet is `(U_b^-1,-X_b U_b^-1,X_b^2 U_b^-1)`.
 --
---   U_b(t)^-1=exp(-t X_b) U_b^-1,
---
--- the jet is
---
---   (U_b^-1, -X_b U_b^-1, X_b^2 U_b^-1).
---
--- The module constructs the six oriented axis-pair plaquettes at every one of
--- the 4^4 sites, feeds their four literal factor jets to the rational
--- quaternion product rule, and proves that the Wilson second variation is
--- exactly the finite sum of the four diagonal and twelve ordered cross atoms.
---
--- At the identity background the same concrete jet reduces to the previously
--- proved plaquette curl square for the same physical perturbation h.  Thus the
--- nonzero-background Wilson defect is now a literal difference between two
--- computed finite expressions, rather than an abstract atom-family premise.
+-- The six oriented axis-pair plaquettes at every one of the 4^4 sites are fed
+-- directly to the rational four-factor product rule.  The resulting physical
+-- Wilson Hessian is exactly the finite sum of four diagonal and twelve ordered
+-- cross atoms per plaquette.  A separate finite Fubini calculation proves that
+-- the identity-background value of this same construction is the concrete
+-- physical periodic curl energy.  The nonzero-background Wilson defect is
+-- therefore a literal difference of computed sixteen-atom sums.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.List.Base using (map; length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; sym; trans)
+  (cong; cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
-  (Product; pair; PositiveBond; cartesian; physicalBlockSites; four)
+  (Product; pair; PositiveBond; cartesian; Axis4)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier as Block
 import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -68,6 +59,7 @@ import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExa
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatWilsonCurlIdentificationExact as Flat
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
+import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact as Partition
 
 ------------------------------------------------------------------------
 -- Rational SU(2) unit quaternions.
@@ -141,12 +133,12 @@ identityBackground = record
 
 insertionAt :
   Physical.PhysicalSU2BondField4 →
-  Hodge4.Axis4 → Hodge4.Site4 → Wilson.RationalVector3
+  Axis4 → Hodge4.Site4 → Wilson.RationalVector3
 insertionAt = Flat.insertionAt
 
 positiveLinkJet :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
-  Hodge4.Site4 → Hodge4.Axis4 → Wilson.QuaternionFactorJet
+  Hodge4.Site4 → Axis4 → Wilson.QuaternionFactorJet
 positiveLinkJet background field site axis =
   let
     backgroundValue = link background (pair site axis)
@@ -159,7 +151,7 @@ positiveLinkJet background field site axis =
 
 inverseLinkJet :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
-  Hodge4.Site4 → Hodge4.Axis4 → Wilson.QuaternionFactorJet
+  Hodge4.Site4 → Axis4 → Wilson.QuaternionFactorJet
 inverseLinkJet background field site axis =
   let
     backgroundInverse = inverseLink background (pair site axis)
@@ -180,7 +172,7 @@ data AxisPair6 : Set where
 axisPairs6 : List AxisPair6
 axisPairs6 = pair01 ∷ pair02 ∷ pair03 ∷ pair12 ∷ pair13 ∷ pair23 ∷ []
 
-pairLeft : AxisPair6 → Hodge4.Axis4
+pairLeft : AxisPair6 → Axis4
 pairLeft pair01 = Hodge4.axis0
 pairLeft pair02 = Hodge4.axis0
 pairLeft pair03 = Hodge4.axis0
@@ -188,7 +180,7 @@ pairLeft pair12 = Hodge4.axis1
 pairLeft pair13 = Hodge4.axis1
 pairLeft pair23 = Hodge4.axis2
 
-pairRight : AxisPair6 → Hodge4.Axis4
+pairRight : AxisPair6 → Axis4
 pairRight pair01 = Hodge4.axis1
 pairRight pair02 = Hodge4.axis2
 pairRight pair03 = Hodge4.axis3
@@ -202,15 +194,15 @@ Plaquette4 = Product Hodge4.Site4 AxisPair6
 plaquettes4 : List Plaquette4
 plaquettes4 = cartesian (Block.physicalBlockSites Path4.side4) axisPairs6
 
-plaquetteFactorJets :
+plaquetteJetData :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
-  Plaquette4 → List Wilson.QuaternionFactorJet
-plaquetteFactorJets background field (pair site axes) =
+  Plaquette4 → Jets.PlaquetteSecondJet
+plaquetteJetData background field (pair site axes) =
   let
     left = pairLeft axes
     right = pairRight axes
   in
-  Wilson.fourFactorJets
+  Jets.plaquetteJet
     (positiveLinkJet background field site left)
     (positiveLinkJet background field
       (Hodge4.shiftForward left site) right)
@@ -218,13 +210,14 @@ plaquetteFactorJets background field (pair site axes) =
       (Hodge4.shiftForward right site) left)
     (inverseLinkJet background field site right)
 
-plaquetteJetData :
+plaquetteFactorJets :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
-  Plaquette4 → Jets.PlaquetteSecondJet
-plaquetteJetData background field plaquette
-  with plaquetteFactorJets background field plaquette
-... | first ∷ second ∷ third ∷ fourth ∷ [] =
-  Jets.plaquetteJet first second third fourth
+  Plaquette4 → List Wilson.QuaternionFactorJet
+plaquetteFactorJets background field plaquette =
+  let dataSet = plaquetteJetData background field plaquette
+  in Wilson.fourFactorJets
+      (Jets.link0 dataSet) (Jets.link1 dataSet)
+      (Jets.link2 dataSet) (Jets.link3 dataSet)
 
 plaquetteWilsonSecondVariation :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 →
@@ -273,16 +266,6 @@ physicalWilsonSecondVariationIsSixteenAtomSum background field =
 -- Identity-background specialization to the concrete flat curl energy.
 ------------------------------------------------------------------------
 
-identityPositiveJetIsFlat : ∀ field site axis →
-  positiveLinkJet identityBackground field site axis
-  ≡ Wilson.flatExponentialJet (insertionAt field axis site)
-identityPositiveJetIsFlat field site axis = refl
-
-identityInverseJetIsFlatNegative : ∀ field site axis →
-  inverseLinkJet identityBackground field site axis
-  ≡ Wilson.flatExponentialJet (Wilson.negV (insertionAt field axis site))
-identityInverseJetIsFlatNegative field site axis = refl
-
 identityPlaquetteSecondVariationIsCurlSquare : ∀ field site axes →
   plaquetteWilsonSecondVariation
     identityBackground field (pair site axes)
@@ -294,14 +277,109 @@ identityPlaquetteSecondVariationIsCurlSquare : ∀ field site axes →
         (insertionAt field (pairLeft axes)
           (Hodge4.shiftForward (pairRight axes) site))
         (insertionAt field (pairRight axes) site))
-identityPlaquetteSecondVariationIsCurlSquare field site axes =
-  Wilson.flatPlaquetteWilsonIsCurlSquare
-    (insertionAt field (pairLeft axes) site)
-    (insertionAt field (pairRight axes)
-      (Hodge4.shiftForward (pairLeft axes) site))
-    (insertionAt field (pairLeft axes)
-      (Hodge4.shiftForward (pairRight axes) site))
-    (insertionAt field (pairRight axes) site)
+identityPlaquetteSecondVariationIsCurlSquare
+    field site axes =
+  ℚRing.solve-∀
+    (field Physical.coordinateX (pair site (pairLeft axes)))
+    (field Physical.coordinateY (pair site (pairLeft axes)))
+    (field Physical.coordinateZ (pair site (pairLeft axes)))
+    (field Physical.coordinateX
+      (pair (Hodge4.shiftForward (pairLeft axes) site) (pairRight axes)))
+    (field Physical.coordinateY
+      (pair (Hodge4.shiftForward (pairLeft axes) site) (pairRight axes)))
+    (field Physical.coordinateZ
+      (pair (Hodge4.shiftForward (pairLeft axes) site) (pairRight axes)))
+    (field Physical.coordinateX
+      (pair (Hodge4.shiftForward (pairRight axes) site) (pairLeft axes)))
+    (field Physical.coordinateY
+      (pair (Hodge4.shiftForward (pairRight axes) site) (pairLeft axes)))
+    (field Physical.coordinateZ
+      (pair (Hodge4.shiftForward (pairRight axes) site) (pairLeft axes)))
+    (field Physical.coordinateX (pair site (pairRight axes)))
+    (field Physical.coordinateY (pair site (pairRight axes)))
+    (field Physical.coordinateZ (pair site (pairRight axes)))
+
+identityPairEnergy :
+  Physical.PhysicalSU2BondField4 → AxisPair6 → ℚ
+identityPairEnergy field axes =
+  Sums.sumRational (Block.physicalBlockSites Path4.side4)
+    (λ site →
+      plaquetteWilsonSecondVariation
+        identityBackground field (pair site axes))
+
+identityPairEnergyIsFlatPair : ∀ field axes →
+  identityPairEnergy field axes
+  ≡ Flat.flatPlaquettePairEnergy field (pairLeft axes) (pairRight axes)
+identityPairEnergyIsFlatPair field axes =
+  trans
+    (Sums.sumRationalCong
+      (Block.physicalBlockSites Path4.side4)
+      (λ site →
+        plaquetteWilsonSecondVariation
+          identityBackground field (pair site axes))
+      (λ site →
+        Flat.flatPlaquetteSecondVariation
+          field (pairLeft axes) (pairRight axes) site)
+      (λ site →
+        trans
+          (identityPlaquetteSecondVariationIsCurlSquare field site axes)
+          (sym
+            (Wilson.flatPlaquetteWilsonIsCurlSquare
+              (Flat.insertionAt field (pairLeft axes) site)
+              (Flat.insertionAt field (pairRight axes)
+                (Hodge4.shiftForward (pairLeft axes) site))
+              (Flat.insertionAt field (pairLeft axes)
+                (Hodge4.shiftForward (pairRight axes) site))
+              (Flat.insertionAt field (pairRight axes) site)))))
+    (trans
+      (Partition.globalSiteSumMatchesCoordinateSum4
+        (Flat.flatPlaquetteSecondVariation
+          field (pairLeft axes) (pairRight axes)))
+      refl)
+
+identityPhysicalWilsonIsFlatCurl : ∀ field →
+  physicalWilsonSecondVariation identityBackground field
+  ≡ Flat.flatWilsonEnergy field
+identityPhysicalWilsonIsFlatCurl field =
+  trans
+    (Fubini.sumCartesian
+      (Block.physicalBlockSites Path4.side4) axisPairs6
+      (plaquetteWilsonSecondVariation identityBackground field))
+    (trans
+      (Sums.sumRationalCong
+        (Block.physicalBlockSites Path4.side4)
+        (λ site →
+          Sums.sumRational axisPairs6
+            (λ axes →
+              plaquetteWilsonSecondVariation
+                identityBackground field (pair site axes)))
+        (λ site →
+          Sums.sumRational axisPairs6
+            (λ axes →
+              plaquetteWilsonSecondVariation
+                identityBackground field (pair site axes)))
+        (λ _ → refl))
+      (trans
+        (Fubini.sumSwap
+          (Block.physicalBlockSites Path4.side4) axisPairs6
+          (λ site axes →
+            plaquetteWilsonSecondVariation
+              identityBackground field (pair site axes)))
+        (trans
+          (Sums.sumRationalCong
+            axisPairs6
+            (identityPairEnergy field)
+            (λ axes →
+              Flat.flatPlaquettePairEnergy field
+                (pairLeft axes) (pairRight axes))
+            (identityPairEnergyIsFlatPair field))
+          (ℚRing.solve-∀
+            (Flat.flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis1)
+            (Flat.flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis2)
+            (Flat.flatPlaquettePairEnergy field Hodge4.axis0 Hodge4.axis3)
+            (Flat.flatPlaquettePairEnergy field Hodge4.axis1 Hodge4.axis2)
+            (Flat.flatPlaquettePairEnergy field Hodge4.axis1 Hodge4.axis3)
+            (Flat.flatPlaquettePairEnergy field Hodge4.axis2 Hodge4.axis3))))))
 
 physicalWilsonDefect :
   RationalSU2Background4 → Physical.PhysicalSU2BondField4 → ℚ
@@ -318,6 +396,15 @@ physicalWilsonDefectIsAtomDifference background field =
     (physicalWilsonSecondVariationIsSixteenAtomSum background field)
     (physicalWilsonSecondVariationIsSixteenAtomSum identityBackground field)
 
+physicalWilsonDefectIsBackgroundMinusFlatCurl : ∀ background field →
+  physicalWilsonDefect background field
+  ≡ physicalWilsonSecondVariation background field
+    - Flat.flatWilsonEnergy field
+physicalWilsonDefectIsBackgroundMinusFlatCurl background field =
+  cong
+    (physicalWilsonSecondVariation background field -_)
+    (identityPhysicalWilsonIsFlatCurl field)
+
 rationalSU2InverseLevel : ProofLevel
 rationalSU2InverseLevel = machineChecked
 
@@ -329,6 +416,9 @@ physicalWilsonPlaquetteEnumerationLevel = machineChecked
 
 physicalWilsonSixteenAtomIdentificationLevel : ProofLevel
 physicalWilsonSixteenAtomIdentificationLevel = machineChecked
+
+physicalIdentityWilsonCurlLevel : ProofLevel
+physicalIdentityWilsonCurlLevel = machineChecked
 
 physicalWilsonDefectAtomDifferenceLevel : ProofLevel
 physicalWilsonDefectAtomDifferenceLevel = machineChecked
