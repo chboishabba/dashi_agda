@@ -99,8 +99,8 @@ from pathlib import Path
 import re
 import sys
 
-patterns = {
-    'postulate': re.compile(r'(^|\s)postulate(\s|$)'),
+postulate_pattern = re.compile(r'(^|\s)postulate(\s|$)')
+unsafe_patterns = {
     'left hole': re.compile(r'\{!'),
     'right hole': re.compile(r'!\}'),
     'TERMINATING': re.compile(r'(^|\s)TERMINATING(\s|$)'),
@@ -115,14 +115,32 @@ patterns = {
 }
 
 failed = False
+authority_files = []
 for name in sys.argv[1:]:
     path = Path(name)
     text = path.read_text(encoding='utf-8', errors='replace')
-    for label, pattern in patterns.items():
+    postulates = list(postulate_pattern.finditer(text))
+    if postulates:
+        declared_authority = (
+            path.name.endswith('Axioms.agda')
+            and 'authority boundary' in text[:5000].lower()
+        )
+        if declared_authority:
+            authority_files.append((path, len(postulates)))
+        else:
+            for match in postulates:
+                line = text.count('\n', 0, match.start()) + 1
+                print(f'{path}:{line}: undeclared postulate in validation closure', file=sys.stderr)
+                failed = True
+    for label, pattern in unsafe_patterns.items():
         for match in pattern.finditer(text):
             line = text.count('\n', 0, match.start()) + 1
             print(f'{path}:{line}: forbidden {label}', file=sys.stderr)
             failed = True
+
+for path, count in authority_files:
+    print(f'round15 declared authority boundary: {path} ({count} postulate block(s))', file=sys.stderr)
+
 if failed:
     raise SystemExit(1)
 PY
