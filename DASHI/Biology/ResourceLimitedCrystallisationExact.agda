@@ -39,7 +39,7 @@ thresholdFavoursOrder resourceExhausted = true
 
 nextMaterialState : MaterialState → MaterialState
 nextMaterialState (materialState resourceHigh homogeneousStage defects) =
-  materialState resourceMedium nucleatedStage defects
+  materialState resourceHigh nucleatedStage defects
 nextMaterialState (materialState resourceHigh nucleatedStage zero) =
   materialState resourceMedium coarseningStage zero
 nextMaterialState (materialState resourceHigh nucleatedStage (suc defects)) =
@@ -51,7 +51,7 @@ nextMaterialState (materialState resourceHigh coarseningStage (suc defects)) =
 nextMaterialState (materialState resourceHigh frozenStage defects) =
   materialState resourceMedium frozenStage defects
 nextMaterialState (materialState resourceMedium homogeneousStage defects) =
-  materialState resourceExhausted nucleatedStage defects
+  materialState resourceMedium nucleatedStage defects
 nextMaterialState (materialState resourceMedium nucleatedStage zero) =
   materialState resourceExhausted frozenStage zero
 nextMaterialState (materialState resourceMedium nucleatedStage (suc defects)) =
