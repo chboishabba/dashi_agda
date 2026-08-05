@@ -21,6 +21,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteExponentialPolynomialAbsorptionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNearWindowHalfKernelExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNearCenteredCommutatorExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalFarNearBudgetExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoMitrovicDiagnosticIterationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSparseWeightAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeakStrongUniquenessExact.agda
