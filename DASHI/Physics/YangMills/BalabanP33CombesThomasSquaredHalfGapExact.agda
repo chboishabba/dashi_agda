@@ -44,11 +44,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_; NonNegative)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_; _/_; NonNegative; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
@@ -72,6 +72,19 @@ halfGapSquaredSurvives
     halfGapSquared normX normHX normEX normTiltedX
     originalLower perturbationUpper reverseTriangleSquared =
   let
+    twoNonnegative : 0ℚ ≤ (+ 2 / 1)
+    twoNonnegative = ℚP.nonNegative⁻¹ (+ 2 / 1)
+
+    instance
+      twoNN : NonNegative (+ 2 / 1)
+      twoNN = ℚ.nonNegative twoNonnegative
+
+    defectScaled :
+      (+ 2 / 1) * normEX
+      ≤ (+ 2 / 1) * (halfGapSquared * normX)
+    defectScaled =
+      ℚP.*-monoˡ-≤-nonNeg (+ 2 / 1) perturbationUpper
+
     defectSubstituted :
       normHX
       ≤ (+ 2 / 1) * normTiltedX
@@ -79,16 +92,7 @@ halfGapSquaredSurvives
     defectSubstituted =
       ℚP.≤-trans
         reverseTriangleSquared
-        (ℚP.+-mono-≤
-          ℚP.≤-refl
-          (let
-            twoNonnegative : 0ℚ ≤ (+ 2 / 1)
-            twoNonnegative = ℚP.nonNegative⁻¹ (+ 2 / 1)
-            instance
-              twoNN : NonNegative (+ 2 / 1)
-              twoNN = ℚ.nonNegative twoNonnegative
-           in
-           ℚP.*-monoˡ-≤-nonNeg (+ 2 / 1) perturbationUpper))
+        (ℚP.+-mono-≤ ℚP.≤-refl defectScaled)
 
     originalIntoTilt :
       ((+ 4 / 1) * halfGapSquared) * normX
@@ -121,19 +125,23 @@ halfGapSquaredSurvives
           (ℚRing.solve-∀ normTiltedX halfGapSquared normX)
           shifted)
 
-    halfScalePositive : 0ℚ < (+ 2 / 1)
-    halfScalePositive = ℚP.positive⁻¹ (+ 2 / 1)
+    cancelledShape :
+      (+ 2 / 1) * (halfGapSquared * normX)
+      ≤ (+ 2 / 1) * normTiltedX
+    cancelledShape =
+      subst
+        (λ lower → lower ≤ (+ 2 / 1) * normTiltedX)
+        (ℚRing.solve-∀ halfGapSquared normX)
+        reduced
+
+    twoPositiveProof : 0ℚ < (+ 2 / 1)
+    twoPositiveProof = ℚP.positive⁻¹ (+ 2 / 1)
 
     instance
-      twoPositive : ℚ.Positive (+ 2 / 1)
-      twoPositive = ℚ.positive halfScalePositive
+      twoPositive : Positive (+ 2 / 1)
+      twoPositive = ℚ.positive twoPositiveProof
   in
-  ℚP.*-cancelˡ-≤-pos
-    (+ 2 / 1)
-    (subst
-      (λ lower → lower ≤ (+ 2 / 1) * normTiltedX)
-      (ℚRing.solve-∀ halfGapSquared normX)
-      reduced)
+  ℚP.*-cancelˡ-≤-pos (+ 2 / 1) cancelledShape
 
 ------------------------------------------------------------------------
 -- The exact P33 calibration.
@@ -222,6 +230,15 @@ matrixDifference :
 matrixDifference tilted original row column =
   tilted row column - original row column
 
+sumNegate :
+  ∀ {Index : Set}
+    (indices : List Index) (term : Index → ℚ) →
+  Sums.sumRational indices (λ index → 0ℚ - term index)
+  ≡ 0ℚ - Sums.sumRational indices term
+sumNegate [] term = refl
+sumNegate (index ∷ indices) term
+  rewrite sumNegate indices term = ℚRing.solve []
+
 matrixDifferenceApplyExact :
   ∀ {Index : Set}
     (indices : List Index)
@@ -247,27 +264,15 @@ matrixDifferenceApplyExact indices tilted original vector row =
         indices
         (λ column → tilted row column * vector column)
         (λ column → 0ℚ - original row column * vector column))
-      (subst
-        (λ selected →
-          Schur.matrixApply indices tilted vector row + selected
-          ≡ Schur.matrixApply indices tilted vector row
-            - Schur.matrixApply indices original vector row)
-        (trans
-          (Sums.sumRationalCong
+      (trans
+        (cong
+          (Schur.matrixApply indices tilted vector row +_)
+          (sumNegate
             indices
-            (λ column → 0ℚ - original row column * vector column)
-            (λ column →
-              (0ℚ - (+ 1 / 1))
-                * (original row column * vector column))
-            (λ column → ℚRing.solve []))
-          (trans
-            (Sums.sumRationalScale
-              (0ℚ - (+ 1 / 1))
-              indices
-              (λ column → original row column * vector column))
-            (ℚRing.solve-∀
-              (Schur.matrixApply indices original vector row))))
-        refl))
+            (λ column → original row column * vector column)))
+        (ℚRing.solve-∀
+          (Schur.matrixApply indices tilted vector row)
+          (Schur.matrixApply indices original vector row))))
 
 sameVectorTiltDecomposition :
   ∀ {Index : Set}
@@ -281,15 +286,17 @@ sameVectorTiltDecomposition :
         (matrixDifference tilted original) vector row
 sameVectorTiltDecomposition
     indices tilted original vector row =
+  let
+    differenceExact =
+      matrixDifferenceApplyExact indices tilted original vector row
+  in
   trans
-    (sym
-      (cong
-        (Schur.matrixApply indices original vector row +_)
-        (matrixDifferenceApplyExact
-          indices tilted original vector row)))
     (ℚRing.solve-∀
       (Schur.matrixApply indices tilted vector row)
       (Schur.matrixApply indices original vector row))
+    (cong
+      (Schur.matrixApply indices original vector row +_)
+      (sym differenceExact))
 
 scalarDifferenceSquareBelowDouble : ∀ left right →
   FiniteL2.square (left - right)
@@ -377,13 +384,18 @@ sameVectorReverseTriangleSquared
         - Schur.matrixApply indices
             (matrixDifference tilted original) vector row
     originalAsDifference row =
-      trans
-        (cong
-          (λ selected → selected
+      let
+        decomposition =
+          sameVectorTiltDecomposition
+            indices tilted original vector row
+      in
+      subst
+        (λ selected →
+          Schur.matrixApply indices original vector row
+          ≡ selected
             - Schur.matrixApply indices
                 (matrixDifference tilted original) vector row)
-          (sameVectorTiltDecomposition
-            indices tilted original vector row))
+        (sym decomposition)
         (ℚRing.solve-∀
           (Schur.matrixApply indices original vector row)
           (Schur.matrixApply indices
