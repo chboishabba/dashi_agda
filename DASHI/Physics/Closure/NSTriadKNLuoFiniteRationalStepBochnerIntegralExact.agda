@@ -175,20 +175,13 @@ constantStepIntegral :
   stepIntegral cells ≡ V.scale (totalDuration cells) constant
 constantStepIntegral [] (V.v3 cx cy cz) pointwise =
   V.vectorExt (solve (cx ∷ [])) (solve (cy ∷ [])) (solve (cz ∷ []))
-constantStepIntegral (cell ∷ cells) constant pointwise =
-  let
-    headMeaning : value cell ≡ constant
-    headMeaning = pointwise cell (here refl)
-
-    tailPointwise :
-      (tailCell : VectorStepCell) →
-      tailCell ∈ cells →
-      value tailCell ≡ constant
-    tailPointwise tailCell membership =
-      pointwise tailCell (there membership)
-  in
-  rewrite headMeaning
-        | constantStepIntegral cells constant tailPointwise =
+constantStepIntegral (cell ∷ cells) constant pointwise
+  rewrite pointwise cell (here refl)
+        | constantStepIntegral
+            cells
+            constant
+            (λ tailCell membership →
+              pointwise tailCell (there membership)) =
   let
     constantCoordinates = constant
   in
