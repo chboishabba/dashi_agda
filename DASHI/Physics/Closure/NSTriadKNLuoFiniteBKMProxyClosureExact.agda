@@ -31,7 +31,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteBKMProxyClosureExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSTriadKNLuoFourResidueBlockDecayExact as Four
