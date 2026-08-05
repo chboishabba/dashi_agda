@@ -16,6 +16,8 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoSmoothLPMomentScalingExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoParabolicCutoffTimeModulusExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteBKMTimeShellFubiniExact.agda
+  DASHI/Physics/Closure/NSTriadKNWeakTypeVolumeStarvationNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNAirWaterTangentialStressAsymmetryExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoBiotSavartContinuumRound8Validation.agda
 )
 
