@@ -14,7 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoMitrovicDiagnosticIterationExact where
 -- diagnostic.  The hypotheses remain visible:
 --
 --   farHistory <= seed/2,
---   0 <= theta <= 1/2,
+--   0 <= theta <= 1/4,
 --   w(0)=seed,
 --   w(n+1)=farHistory+theta*w(n).
 --
@@ -24,19 +24,27 @@ module DASHI.Physics.Closure.NSTriadKNLuoMitrovicDiagnosticIterationExact where
 -- unconditional Navier--Stokes regularity theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
-half two : ℚ
+half quarter two : ℚ
 half = Int.+ 1 / 2
+quarter = Int.+ 1 / 4
 two = Int.+ 2 / 1
+
+quarterNonnegative : 0ℚ ≤ quarter
+quarterNonnegative = toWitness {a? = 0ℚ ≤? quarter} _
+
+twoNonnegative : 0ℚ ≤ two
+twoNonnegative = toWitness {a? = 0ℚ ≤? two} _
 
 record DiagnosticIterationData : Set where
   constructor diagnostic-iteration-data
@@ -44,11 +52,10 @@ record DiagnosticIterationData : Set where
     seed farHistory theta : ℚ
 
     seedNonnegative : 0ℚ ≤ seed
-    farHistoryNonnegative : 0ℚ ≤ farHistory
     thetaNonnegative : 0ℚ ≤ theta
 
     farHistoryBelowHalfSeed : farHistory ≤ half * seed
-    thetaBelowHalf : theta ≤ half
+    thetaBelowQuarter : theta ≤ quarter
 
 open DiagnosticIterationData public
 
@@ -57,19 +64,32 @@ diagnosticIterate inputs zero = seed inputs
 diagnosticIterate inputs (suc iteration) =
   farHistory inputs + theta inputs * diagnosticIterate inputs iteration
 
+seedBelowTwoSeed :
+  (inputs : DiagnosticIterationData) →
+  seed inputs ≤ two * seed inputs
+seedBelowTwoSeed inputs =
+  let
+    shifted : seed inputs + 0ℚ ≤ seed inputs + seed inputs
+    shifted =
+      ℚₚ.+-monoʳ-≤
+        (seed inputs)
+        (seedNonnegative inputs)
+
+    leftMeaning : seed inputs + 0ℚ ≡ seed inputs
+    leftMeaning = solve (seed inputs ∷ [])
+
+    rightMeaning : seed inputs + seed inputs ≡ two * seed inputs
+    rightMeaning = solve (seed inputs ∷ [])
+  in
+  subst₂ _≤_ leftMeaning rightMeaning shifted
+  where
+  open import Relation.Binary.PropositionalEquality using (subst₂)
+
 twoSeedNonnegative :
   (inputs : DiagnosticIterationData) →
   0ℚ ≤ two * seed inputs
 twoSeedNonnegative inputs =
   let
-    twoNonnegative : 0ℚ ≤ two
-    twoNonnegative =
-      ℚₚ.≤-trans (seedNonnegative inputs)
-        (subst
-          (λ upper → seed inputs ≤ upper)
-          (solve (seed inputs ∷ []))
-          ℚₚ.≤-refl)
-
     instance
       twoIsNonnegative = nonNegative twoNonnegative
       seedIsNonnegative = nonNegative (seedNonnegative inputs)
@@ -82,18 +102,7 @@ diagnosticIterationUniformBound :
   (inputs : DiagnosticIterationData) →
   (iteration : Nat) →
   diagnosticIterate inputs iteration ≤ two * seed inputs
-diagnosticIterationUniformBound inputs zero =
-  let
-    target : seed inputs ≤ two * seed inputs
-    target =
-      subst
-        (λ upper → seed inputs ≤ upper)
-        (solve (seed inputs ∷ []))
-        (ℚₚ.+-monoʳ-≤
-          (seed inputs)
-          (seedNonnegative inputs))
-  in
-  target
+diagnosticIterationUniformBound inputs zero = seedBelowTwoSeed inputs
 diagnosticIterationUniformBound inputs (suc iteration) =
   let
     oldBound = diagnosticIterationUniformBound inputs iteration
@@ -110,7 +119,7 @@ diagnosticIterationUniformBound inputs (suc iteration) =
 
     thetaTimesTwoSeed :
       theta inputs * (two * seed inputs)
-      ≤ half * (two * seed inputs)
+      ≤ quarter * (two * seed inputs)
     thetaTimesTwoSeed =
       let
         instance twoSeedIsNonnegative =
@@ -118,11 +127,11 @@ diagnosticIterationUniformBound inputs (suc iteration) =
       in
       ℚₚ.*-monoʳ-≤-nonNeg
         (two * seed inputs)
-        (thetaBelowHalf inputs)
+        (thetaBelowQuarter inputs)
 
     nearBound :
       theta inputs * diagnosticIterate inputs iteration
-      ≤ seed inputs
+      ≤ half * seed inputs
     nearBound =
       ℚₚ.≤-trans
         thetaTimesOld
@@ -135,42 +144,20 @@ diagnosticIterationUniformBound inputs (suc iteration) =
     combined :
       farHistory inputs
         + theta inputs * diagnosticIterate inputs iteration
-      ≤ half * seed inputs + seed inputs
+      ≤ half * seed inputs + half * seed inputs
     combined =
       ℚₚ.+-mono-≤
         (farHistoryBelowHalfSeed inputs)
         nearBound
 
-    targetMeaning :
-      half * seed inputs + seed inputs
-      ≤ two * seed inputs
-    targetMeaning =
-      let
-        halfSeedNonnegative : 0ℚ ≤ half * seed inputs
-        halfSeedNonnegative =
-          let
-            halfNonnegative : 0ℚ ≤ half
-            halfNonnegative =
-              subst
-                (λ lower → lower ≤ half)
-                (solve [])
-                (seedNonnegative inputs)
-            instance
-              halfIsNonnegative = nonNegative halfNonnegative
-              seedIsNonnegative = nonNegative (seedNonnegative inputs)
-              productIsNonnegative =
-                ℚₚ.nonNeg*nonNeg⇒nonNeg half (seed inputs)
-          in
-          ℚₚ.nonNegative⁻¹ (half * seed inputs)
-      in
+    combinedToSeed :
+      half * seed inputs + half * seed inputs ≤ seed inputs
+    combinedToSeed =
       subst
-        (λ upper → half * seed inputs + seed inputs ≤ upper)
+        (λ lower → lower ≤ seed inputs)
         (solve (seed inputs ∷ []))
-        (ℚₚ.+-monoˡ-≤
-          (seed inputs)
-          (subst
-            (λ lower → lower ≤ seed inputs)
-            (solve (seed inputs ∷ []))
-            halfSeedNonnegative))
+        ℚₚ.≤-refl
   in
-  ℚₚ.≤-trans combined targetMeaning
+  ℚₚ.≤-trans
+    (ℚₚ.≤-trans combined combinedToSeed)
+    (seedBelowTwoSeed inputs)
