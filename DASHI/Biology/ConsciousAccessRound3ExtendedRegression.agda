@@ -6,6 +6,7 @@ open import Agda.Primitive using (Setω)
 import DASHI.Biology.ConsciousAccessRound3Regression as CoreRegression
 import DASHI.Biology.ConsciousAccessRound3FullBoundary as Full
 import DASHI.Biology.NaturalGrowthAlgorithmAtlas as Growth
+import DASHI.Biology.SquareApollonianPackingComparison as Packing
 import DASHI.Biology.SignedDistanceBooleanGeometry as SDF
 import DASHI.Biology.HallHybridManifoldTreeCarrier as Hybrid
 import DASHI.Biology.PsychedelicAttractorReweightingBoundary as Attractor
@@ -55,6 +56,36 @@ record ConsciousAccessRound3ExtendedRegression : Setω where
         Growth.seedAggregate
       ≡
       Growth.grownAggregate
+
+    squareAndApollonianSignaturesDiffer :
+      Packing.packingSignatureOf Packing.squarePackingFamily
+      ≡
+      Packing.packingSignatureOf Packing.apollonianSphereFamily
+      →
+      ⊥
+
+    descartesIdentity :
+      Packing.squareNat Packing.descartesSignedSum
+      ≡
+      2 * Packing.descartesSquareSum
+
+    soddyGossetIdentity :
+      Packing.squareNat Packing.soddyGossetSignedSum
+      ≡
+      3 * Packing.soddyGossetSquareSum
+
+    hybridCarriesSquareAndTangency :
+      Packing.globalTranslationPeriodicity
+        (Packing.packingSignatureOf
+          Packing.squareSeededApollonianFamily)
+      ≡
+      true
+      ×
+      Packing.localTangencyLaw
+        (Packing.packingSignatureOf
+          Packing.squareSeededApollonianFamily)
+      ≡
+      true
 
     sphereInteriorIsBooleanRemoved :
       SDF.perforatedRoomSign SDF.sphereInteriorSample
@@ -159,6 +190,14 @@ canonicalConsciousAccessRound3ExtendedRegression =
         Growth.selectedEdenCellIsMaximal
     ; diffusionWalkerSticks =
         Growth.firstContactGrowsAggregate
+    ; squareAndApollonianSignaturesDiffer =
+        Packing.squareAndApollonianSignaturesDiffer
+    ; descartesIdentity =
+        Packing.descartesCircleIdentity
+    ; soddyGossetIdentity =
+        Packing.soddyGossetSphereIdentity
+    ; hybridCarriesSquareAndTangency =
+        Packing.hybridCarriesBothSignatureFamilies
     ; sphereInteriorIsBooleanRemoved =
         SDF.sphereInteriorBecomesOutside
     ; repeatedDomainReturnsOriginCell =
