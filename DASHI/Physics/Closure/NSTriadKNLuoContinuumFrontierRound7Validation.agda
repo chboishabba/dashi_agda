@@ -4,12 +4,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoContinuumFrontierRound7Validation where
 -- Cumulative validation root for the seventh Luo/Clay frontier tranche.
 --
 -- The root imports the complete round-six theorem surface, then the concrete
--- eight-point Haar/Fourier/heat models, finite Bochner/Fubini layer, literal
--- increment multiplier, Littlewood--Paley moment instance, near-window
--- scaling obstruction, cutoff/time uniformity no-go and positive modulus,
--- arbitrary polynomial absorption, fractional-dissipation convention audit,
--- angular-symbol formula audit, projective eigenline prototype, real-space
--- boundary-layer tilt, four-residue summability, and finite BKM proxy closure.
+-- eight-point Haar/Fourier/heat models, finite Bochner/Fubini and rational
+-- step-function time-integration layers, literal increment multiplier,
+-- Littlewood--Paley moment instance, near-window scaling obstruction,
+-- cutoff/time uniformity no-go and positive modulus, arbitrary polynomial
+-- absorption, fractional-dissipation convention audit, angular-symbol formula
+-- audit, projective eigenline prototype, real-space boundary-layer tilt,
+-- four-residue summability, and finite BKM proxy closure.
 --
 -- No continuum T^3 completion or unconditional Navier--Stokes regularity
 -- theorem is represented by this aggregate.
@@ -22,6 +23,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoTerminalGeometryRound6Validation
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointTorusHaarExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointHaarBochnerExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteBochnerFubiniExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalStepBochnerIntegralExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointIncrementMultiplierExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteLittlewoodPaleyMomentIdentificationExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearWindowScalingObstructionExact
