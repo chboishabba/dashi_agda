@@ -40,11 +40,13 @@ checks=(
   'BalabanP33CombesThomasCoercivitySurvivalExact.agda:halfGapCoercivitySurvives'
   'BalabanP33CombesThomasCoercivitySurvivalExact.agda:p33TiltedCoercivityFromHalfGap'
   'BalabanP33CombesThomasCoercivitySurvivalExact.agda:p33TiltedInverseNormBound'
+  'BalabanP33PhysicalCombesThomasPromotionExact.agda:physicalIdentityStable'
   'BalabanP33PhysicalCombesThomasPromotionExact.agda:physicalTiltDefectBelowHalfGap'
   'BalabanP33PhysicalCombesThomasPromotionExact.agda:physicalTiltedRightInverse'
   'BalabanP33PhysicalCombesThomasPromotionExact.agda:physicalGreenKernelDecay'
   'BalabanP33BlockPoincareNormalizationWallExact.agda:fourDimensionalUnscaledConstantWall'
-  'BalabanP33BlockPoincareNormalizationWallExact.agda:fluctuationSquareModeForcesLinearConstant'
+  'BalabanP33BlockPoincareNormalizationWallExact.agda:fluctuationSquareModeForcesLinearCrossBound'
+  'BalabanP33BlockPoincareNormalizationWallExact.agda:unboundedLowerBoundsRefuteUniformConstant'
   'BalabanP33AugmentedYangMillsHessianStructureExact.agda:augmentedHessianSymmetric'
   'BalabanP33AugmentedYangMillsHessianStructureExact.agda:augmentedCoercivityFromWilson'
 )
@@ -65,6 +67,8 @@ grep -q '10.1016/j.matpur.2012.02.001' \
 grep -q 'ai.viXra:2607.0042' \
   DASHI/Physics/YangMills/BalabanP33BlockPoincareNormalizationWallExact.agda
 grep -q 'not used as an authority' \
+  DASHI/Physics/YangMills/BalabanP33BlockPoincareNormalizationWallExact.agda
+grep -q 'without introducing a variable rational denominator' \
   DASHI/Physics/YangMills/BalabanP33BlockPoincareNormalizationWallExact.agda
 grep -q 'No collar M=21' \
   DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasPromotionExact.agda
