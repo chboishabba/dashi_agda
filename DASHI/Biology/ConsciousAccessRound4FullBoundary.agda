@@ -6,6 +6,7 @@ open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Lift
 import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
+import DASHI.Biology.HybridPadicReasoningFieldBridgeExact as Hybrid
 import DASHI.Biology.CausalHierarchicalChartResidualExact as Chart
 import DASHI.Biology.FiniteCrystallisationModeSelectionExact as Modes
 import DASHI.Biology.FiniteWaveShellGradientExact as Shell
@@ -28,6 +29,7 @@ record ConsciousAccessRound4Boundary : Set where
     kernelBoundary : Lift.TriadicKernelLiftBoundary
     carryBoundary : Carry.TriadicCarryBoundary
     lodBoundary : LOD.PadicLODReasoningBoundary
+    hybridBoundary : Hybrid.HybridPadicReasoningBoundary
     chartBoundary : Chart.CausalChartBoundary
     modeBoundary : Modes.CrystallisationModeBoundary
     shellBoundary : Shell.WaveShellBoundary
@@ -55,6 +57,11 @@ record ConsciousAccessRound4Boundary : Set where
 
     parentMassIsNine :
       LOD.aggregateNat LOD.canonicalChildMasses ≡ 9
+
+    hybridLocalChartGetsSeparateVoxelAxis :
+      Hybrid.hybridVoxel3 Hybrid.Hall.habitualChartNeighbour
+      ≡
+      LOD.voxel3 0 0 1
 
     causalRefinedObjectiveIsThree :
       Chart.candidateObjective Chart.refinedCandidate ≡ 3
@@ -101,6 +108,7 @@ canonicalConsciousAccessRound4Boundary =
     Lift.canonicalTriadicKernelLiftBoundary
     Carry.canonicalTriadicCarryBoundary
     LOD.canonicalPadicLODReasoningBoundary
+    Hybrid.canonicalHybridPadicReasoningBoundary
     Chart.canonicalCausalChartBoundary
     Modes.canonicalCrystallisationModeBoundary
     Shell.canonicalWaveShellBoundary
@@ -111,6 +119,7 @@ canonicalConsciousAccessRound4Boundary =
     PadicCrystal.canonicalPadicCrystallisationBoundary
     Coupled.canonicalCoupledOrderBoundary
     Quasi.canonicalQuasiperiodicInternalSpaceBoundary
+    refl
     refl
     refl
     refl
