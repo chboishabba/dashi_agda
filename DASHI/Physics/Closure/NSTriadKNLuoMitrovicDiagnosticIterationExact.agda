@@ -24,6 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoMitrovicDiagnosticIterationExact where
 -- unconditional Navier--Stokes regularity theorem.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
@@ -32,7 +33,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; subst₂)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 half quarter two : ℚ
@@ -82,8 +83,6 @@ seedBelowTwoSeed inputs =
     rightMeaning = solve (seed inputs ∷ [])
   in
   subst₂ _≤_ leftMeaning rightMeaning shifted
-  where
-  open import Relation.Binary.PropositionalEquality using (subst₂)
 
 twoSeedNonnegative :
   (inputs : DiagnosticIterationData) →
