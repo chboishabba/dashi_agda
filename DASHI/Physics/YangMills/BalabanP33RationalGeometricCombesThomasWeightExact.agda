@@ -55,10 +55,31 @@ powReciprocalProduct :
   pow base exponent * pow inverseBase exponent ≡ 1ℚ
 powReciprocalProduct base inverseBase inverseLaw zero =
   ℚRing.solve []
-powReciprocalProduct base inverseBase inverseLaw (suc exponent)
-  rewrite powReciprocalProduct base inverseBase inverseLaw exponent
-  | inverseLaw =
-  ℚRing.solve []
+powReciprocalProduct base inverseBase inverseLaw (suc exponent) =
+  let
+    prefixLaw :
+      pow base exponent * pow inverseBase exponent ≡ 1ℚ
+    prefixLaw =
+      powReciprocalProduct base inverseBase inverseLaw exponent
+
+    rearrange :
+      pow base (suc exponent) * pow inverseBase (suc exponent)
+      ≡ (pow base exponent * pow inverseBase exponent)
+          * (base * inverseBase)
+    rearrange = ℚRing.solve []
+
+    collapsePrefix :
+      (pow base exponent * pow inverseBase exponent)
+        * (base * inverseBase)
+      ≡ 1ℚ * (base * inverseBase)
+    collapsePrefix =
+      cong (_* (base * inverseBase)) prefixLaw
+
+    removeOne : 1ℚ * (base * inverseBase) ≡ base * inverseBase
+    removeOne = ℚRing.solve []
+  in
+  trans rearrange
+    (trans collapsePrefix (trans removeOne inverseLaw))
 
 powNonnegative :
   ∀ base → 0ℚ ≤ base → ∀ exponent → 0ℚ ≤ pow base exponent
@@ -178,19 +199,45 @@ unitShellRatioExact base inverseBase inverseLaw (sameShell shell) =
 unitShellRatioExact base inverseBase inverseLaw (leftOneFarther shell) =
   inj₂ (inj₁ ratio)
   where
+    prefixLaw :
+      pow base shell * pow inverseBase shell ≡ 1ℚ
+    prefixLaw =
+      powReciprocalProduct base inverseBase inverseLaw shell
+
+    rearrange :
+      unitShellRatio base inverseBase (suc shell) shell
+      ≡ (pow base shell * pow inverseBase shell) * inverseBase
+    rearrange = ℚRing.solve []
+
+    collapse :
+      (pow base shell * pow inverseBase shell) * inverseBase
+      ≡ 1ℚ * inverseBase
+    collapse = cong (_* inverseBase) prefixLaw
+
     ratio :
       unitShellRatio base inverseBase (suc shell) shell ≡ inverseBase
-    ratio
-      rewrite powReciprocalProduct base inverseBase inverseLaw shell =
-      ℚRing.solve []
+    ratio = trans rearrange (trans collapse (ℚRing.solve []))
 unitShellRatioExact base inverseBase inverseLaw (rightOneFarther shell) =
   inj₂ (inj₂ ratio)
   where
+    prefixLaw :
+      pow base shell * pow inverseBase shell ≡ 1ℚ
+    prefixLaw =
+      powReciprocalProduct base inverseBase inverseLaw shell
+
+    rearrange :
+      unitShellRatio base inverseBase shell (suc shell)
+      ≡ (pow base shell * pow inverseBase shell) * base
+    rearrange = ℚRing.solve []
+
+    collapse :
+      (pow base shell * pow inverseBase shell) * base
+      ≡ 1ℚ * base
+    collapse = cong (_* base) prefixLaw
+
     ratio :
       unitShellRatio base inverseBase shell (suc shell) ≡ base
-    ratio
-      rewrite powReciprocalProduct base inverseBase inverseLaw shell =
-      ℚRing.solve []
+    ratio = trans rearrange (trans collapse (ℚRing.solve []))
 
 unitShellDistortionBound :
   ∀ base inverseBase distortion →
