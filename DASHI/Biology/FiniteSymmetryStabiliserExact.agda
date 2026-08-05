@@ -74,8 +74,14 @@ patternActionComposition :
   actPattern (composeReflection g h) pattern x
   ≡
   actPattern g (actPattern h pattern) x
-patternActionComposition g h pattern x =
-  cong pattern (siteActionComposition g h x)
+patternActionComposition identityReflection identityReflection pattern leftSite = refl
+patternActionComposition identityReflection identityReflection pattern rightSite = refl
+patternActionComposition identityReflection swapReflection pattern leftSite = refl
+patternActionComposition identityReflection swapReflection pattern rightSite = refl
+patternActionComposition swapReflection identityReflection pattern leftSite = refl
+patternActionComposition swapReflection identityReflection pattern rightSite = refl
+patternActionComposition swapReflection swapReflection pattern leftSite = refl
+patternActionComposition swapReflection swapReflection pattern rightSite = refl
 
 constantPattern : Pattern2
 constantPattern leftSite = positiveTrit
