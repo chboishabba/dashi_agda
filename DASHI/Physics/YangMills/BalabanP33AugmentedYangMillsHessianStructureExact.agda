@@ -46,10 +46,11 @@ module DASHI.Physics.YangMills.BalabanP33AugmentedYangMillsHessianStructureExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _≤_)
+  (ℚ; 0ℚ; _+_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -78,13 +79,9 @@ addFormSymmetric :
   Symmetric right →
   Symmetric (addForm left right)
 addFormSymmetric left right leftSymmetric rightSymmetric x y =
-  trans
-    (cong₂ _+_
-      (leftSymmetric x y)
-      (rightSymmetric x y))
-    refl
-  where
-    open import Relation.Binary.PropositionalEquality using (cong₂)
+  cong₂ _+_
+    (leftSymmetric x y)
+    (rightSymmetric x y)
 
 augmentedHessianSymmetric :
   ∀ {Carrier}
@@ -97,22 +94,11 @@ augmentedHessianSymmetric
     wilson gauge constraint
     wilsonSymmetric gaugeSymmetric constraintSymmetric
     x y =
-  trans
-    (cong
-      (λ selected →
-        selected + (gauge x y + constraint x y))
-      (wilsonSymmetric x y))
-    (trans
-      (cong
-        (wilson y x +_)
-        (trans
-          (cong₂ _+_
-            (gaugeSymmetric x y)
-            (constraintSymmetric x y))
-          refl))
-      refl)
-  where
-    open import Relation.Binary.PropositionalEquality using (cong₂)
+  cong₂ _+_
+    (wilsonSymmetric x y)
+    (cong₂ _+_
+      (gaugeSymmetric x y)
+      (constraintSymmetric x y))
 
 augmentedDiagonalExact :
   ∀ {Carrier}
@@ -124,39 +110,53 @@ augmentedDiagonalExact :
 augmentedDiagonalExact wilson gauge constraint field = refl
 
 positiveSectorsPreserveLowerBound :
-  ∀ normSq wilsonValue gaugeValue constraintValue lower →
+  ∀ wilsonValue gaugeValue constraintValue lower →
   lower ≤ wilsonValue →
   0ℚ ≤ gaugeValue →
   0ℚ ≤ constraintValue →
   lower ≤ wilsonValue + (gaugeValue + constraintValue)
 positiveSectorsPreserveLowerBound
-    normSq wilsonValue gaugeValue constraintValue lower
+    wilsonValue gaugeValue constraintValue lower
     wilsonLower gaugeNonnegative constraintNonnegative =
+  let
+    instance
+      gaugeNN : NonNegative gaugeValue
+      gaugeNN = ℚ.nonNegative gaugeNonnegative
+      constraintNN : NonNegative constraintValue
+      constraintNN = ℚ.nonNegative constraintNonnegative
+
+    wilsonToGauge : wilsonValue ≤ wilsonValue + gaugeValue
+    wilsonToGauge = ℚP.p≤p+q wilsonValue gaugeValue
+
+    addConstraint :
+      wilsonValue + gaugeValue
+      ≤ (wilsonValue + gaugeValue) + constraintValue
+    addConstraint =
+      ℚP.p≤p+q (wilsonValue + gaugeValue) constraintValue
+  in
   ℚP.≤-trans
     wilsonLower
     (ℚP.≤-trans
-      (ℚP.p≤p+q wilsonValue gaugeValue)
-      (ℚP.+-mono-≤
-        (ℚP.≤-refl {x = wilsonValue + gaugeValue})
-        constraintNonnegative))
+      wilsonToGauge
+      (subst
+        (λ upper → wilsonValue + gaugeValue ≤ upper)
+        (ℚRing.solve-∀ wilsonValue gaugeValue constraintValue)
+        addConstraint))
 
 augmentedCoercivityFromWilson :
   ∀ {Carrier}
-    (normSq : Carrier → ℚ)
     (wilson gauge constraint : BilinearForm Carrier)
     (coerciveFloor : ℚ) →
-  (∀ field →
-    coerciveFloor ≤ wilson field field) →
+  (∀ field → coerciveFloor ≤ wilson field field) →
   (∀ field → 0ℚ ≤ gauge field field) →
   (∀ field → 0ℚ ≤ constraint field field) →
   ∀ field →
   coerciveFloor
   ≤ augmentedHessian wilson gauge constraint field field
 augmentedCoercivityFromWilson
-    normSq wilson gauge constraint coerciveFloor
+    wilson gauge constraint coerciveFloor
     wilsonLower gaugeNonnegative constraintNonnegative field =
   positiveSectorsPreserveLowerBound
-    (normSq field)
     (wilson field field)
     (gauge field field)
     (constraint field field)
@@ -176,7 +176,7 @@ signedWilsonRemainderWithPositiveSectors
     reference remainder gaugeValue constraintValue lower
     wilsonLower gaugeNonnegative constraintNonnegative =
   positiveSectorsPreserveLowerBound
-    0ℚ (reference + remainder) gaugeValue constraintValue lower
+    (reference + remainder) gaugeValue constraintValue lower
     wilsonLower gaugeNonnegative constraintNonnegative
 
 augmentedYangMillsHessianSymmetryLevel : ProofLevel
