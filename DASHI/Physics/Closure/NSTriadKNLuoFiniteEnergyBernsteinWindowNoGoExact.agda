@@ -35,7 +35,7 @@ open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality as Eq using (cong)
+open import Relation.Binary.PropositionalEquality as Eq using (cong; sym)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEnergyCriticalScalingGapExact as Scale
