@@ -94,7 +94,7 @@ oneMinusSixthSquareAboveTwentyThreeTwentyFourth :
 oneMinusSixthSquareAboveTwentyThreeTwentyFourth {value = value} inputs =
   let
     scaledSquare =
-      BishopProperties.*-monoʳ-≤-nonNeg
+      BishopProperties.*-monoˡ-≤-nonNeg
         (Cross.squareBelowQuarter inputs)
         Cross.oneSixthNonnegative
     shifted =
