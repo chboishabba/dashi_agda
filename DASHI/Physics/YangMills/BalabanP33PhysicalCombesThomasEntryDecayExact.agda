@@ -46,6 +46,9 @@ open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
+  (yes; no)
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -168,6 +171,18 @@ physicalMatrixApplyCompositionExact left right vector row =
   in
   trans expandedRows (trans swapped collectedColumns)
 
+identityEntrySymmetric : ∀ left right →
+  Calibration.identityEntry left right
+  ≡ Calibration.identityEntry right left
+identityEntrySymmetric left right
+  with Calibration.physicalCoordinateDecidableEquality left right
+     | Calibration.physicalCoordinateDecidableEquality right left
+... | yes refl | yes refl = refl
+... | yes refl | no rightNotLeft = rightNotLeft refl
+... | no leftNotRight | yes rightEqualsLeft =
+  leftNotRight (sym rightEqualsLeft)
+... | no _ | no _ = refl
+
 physicalIdentityApplyExact : ∀ vector row →
   Physical.physicalMatrixApply Calibration.identityEntry vector row
   ≡ vector row
@@ -181,7 +196,7 @@ physicalIdentityApplyExact vector row =
         trans
           (cong
             (_* vector column)
-            (Calibration.identityEntrySymmetric row column))
+            (identityEntrySymmetric row column))
           (ℚRing.solve [])))
     (Basis.physicalIdentitySelectorExact vector row)
 
@@ -222,12 +237,12 @@ rightInverseActsNormExact operator inverse rightInverse vector =
   Sums.sumRationalCong
     Physical.physicalSU2Coordinates4
     (λ row →
-      Schur.FiniteL2.square
+      FiniteL2.square
         (Physical.physicalMatrixApply operator
           (Physical.physicalMatrixApply inverse vector) row))
-    (λ row → Schur.FiniteL2.square (vector row))
+    (λ row → FiniteL2.square (vector row))
     (λ row →
-      cong Schur.FiniteL2.square
+      cong FiniteL2.square
         (rightInverseActsPointwise
           operator inverse rightInverse vector row))
 
