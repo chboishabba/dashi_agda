@@ -24,6 +24,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteHighLowDerivativeRatioExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteLowHighSecondMomentBridgeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteComparableFilteredBridgeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoTerminalInteractionDepletionTransferExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGeometricDepletionRound12Validation.agda
 )
 
