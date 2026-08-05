@@ -75,11 +75,5 @@ parallelMisalignmentZero :
   (a : V.Vector3) →
   (scale : ℚ) →
   misalignment a (V.scale scale a) ≡ 0ℚ
-parallelMisalignmentZero a scale =
-  let
-    crossZero = crossWithScaledParallelZero a scale
-  in
-  subst
-    (λ value → misalignment a (V.scale scale a) ≡ V.normSquared value)
-    crossZero
-    (lagrangeIdentity a (V.scale scale a))
+parallelMisalignmentZero (V.v3 ax ay az) scale =
+  solve (ax ∷ ay ∷ az ∷ scale ∷ [])
