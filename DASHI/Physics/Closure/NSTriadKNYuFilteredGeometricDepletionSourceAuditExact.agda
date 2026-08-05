@@ -17,16 +17,28 @@ module DASHI.Physics.Closure.NSTriadKNYuFilteredGeometricDepletionSourceAuditExa
 --
 -- PURPOSE
 -- Record the exact scope of Yu's finite-scale theorem without promoting the
--- paper to a full comparable-shell closure.  The source proves a universal
--- near-field geometric estimate and a diffusion coercivity inequality at a
--- fixed relative filter scale.  It explicitly leaves three positive residual
--- classes: far-field strain, differentiated commutator forcing, and
--- localization budgets.
+-- paper to a full comparable-shell closure.  The source proves
 --
--- This is directly relevant to the comparable-shell lane because
--- ell = sigma r with fixed sigma is scale-uniform.  It is not yet an estimate
--- for the complete Littlewood--Paley CC interaction and it does not prove
--- terminal critical depletion.
+--   V^(+,near)_(r,ell)[chi]
+--     <= (3/(8 pi)) A^pair_(r,ell)[chi]
+--
+-- and, for every eta>0,
+--
+--   A^pair_(r,ell)[chi]
+--     <= eta P^rho_(r,ell)[chi]
+--       + (C_vartheta^2 C_varphi^2 rho^2 / eta)
+--         M_(r,rho)(u) (r/ell)^5 O_(r,ell)[chi].
+--
+-- At a fixed relative filter ell=sigma r, the physical-scale dependence drops
+-- out of the second coefficient and the remaining relative loss is sigma^-5.
+-- Corollary 2.3 then absorbs the singular near field into retained diffusion
+-- plus a lower-order reservoir.
+--
+-- The complete localized filtered balance still contains three positive
+-- residual classes: far-field strain, differentiated commutator forcing, and
+-- localization/annular budgets.  Hence the universal theorem closes only the
+-- singular near field, not the complete Littlewood--Paley comparable class and
+-- not terminal critical depletion.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
