@@ -9,6 +9,8 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33FiniteWeightedSchurSquaredExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33CombesThomasSquaredHalfGapExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasSchurExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalCoordinateBasisExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasEntryDecayExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound20Validation.agda'
       - 'scripts/check_yang_mills_clay_highest_alpha_round20.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round20.yml'
@@ -29,5 +31,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check weighted Schur, squared half-gap and physical promotion
+      - name: Check weighted Schur, squared half-gap and physical decay closure
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round20.sh
