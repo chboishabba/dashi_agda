@@ -1,7 +1,7 @@
 module DASHI.Biology.PsychedelicAttractorReweightingBoundary where
 
 open import DASHI.Core.Prelude
-open import Data.Vec using (Vec) renaming ([] to v[]; _∷_ to _v∷_)
+open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Geometry.SSP369Ultrametric as U369
 import DASHI.Core.RelationalHypervoxelBraidCore as Hypervoxel
@@ -36,15 +36,15 @@ DepthTwoAddress = U369.Address (suc (suc zero))
 
 habitualAddress : DepthTwoAddress
 habitualAddress =
-  U369.digit3 v∷ U369.digit3 v∷ v[]
+  U369.digit3 vcons U369.digit3 vcons vnil
 
 nearbyAddress : DepthTwoAddress
 nearbyAddress =
-  U369.digit3 v∷ U369.digit6 v∷ v[]
+  U369.digit3 vcons U369.digit6 vcons vnil
 
 crossBranchAddress : DepthTwoAddress
 crossBranchAddress =
-  U369.digit9 v∷ U369.digit9 v∷ v[]
+  U369.digit9 vcons U369.digit9 vcons vnil
 
 habitualSelfDistanceZero :
   U369.distance habitualAddress habitualAddress ≡ zero
