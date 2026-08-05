@@ -8,6 +8,9 @@ import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
 import DASHI.Biology.CausalHierarchicalChartResidualExact as Chart
 import DASHI.Biology.FiniteCrystallisationModeSelectionExact as Modes
+import DASHI.Biology.FiniteWaveShellGradientExact as Shell
+import DASHI.Biology.FiniteSymmetryStabiliserExact as Symmetry
+import DASHI.Biology.FinitePadicCollapseExact as Collapse
 import DASHI.Biology.ResourceLimitedCrystallisationExact as Resource
 import DASHI.Biology.ReasoningFieldRenderBridgeExact as Render
 import DASHI.Biology.PadicCrystallisationResidueExact as PadicCrystal
@@ -27,6 +30,9 @@ record ConsciousAccessRound4Boundary : Set where
     lodBoundary : LOD.PadicLODReasoningBoundary
     chartBoundary : Chart.CausalChartBoundary
     modeBoundary : Modes.CrystallisationModeBoundary
+    shellBoundary : Shell.WaveShellBoundary
+    symmetryBoundary : Symmetry.SymmetryStabiliserBoundary
+    collapseBoundary : Collapse.PadicCollapseBoundary
     resourceBoundary : Resource.ResourceLimitedCrystallisationBoundary
     renderBoundary : Render.ReasoningFieldRenderBoundary
     padicCrystalBoundary : PadicCrystal.PadicCrystallisationBoundary
@@ -60,6 +66,15 @@ record ConsciousAccessRound4Boundary : Set where
       ≡
       1
 
+    selectedWaveShellHasZeroPenalty :
+      Shell.shellPenalty Shell.selectedWaveNumber ≡ 0
+
+    symmetricPatternHasFullFiniteStabiliser :
+      Symmetry.stabiliserSize Symmetry.constantPattern ≡ 2
+
+    collapsedResidualThicknessIsSeven :
+      Collapse.weightedThickness Collapse.collapsedResidual ≡ 7
+
     freezeOutRetainsOneDefect :
       Resource.defectCount Resource.afterFreezeOut ≡ 1
 
@@ -88,11 +103,17 @@ canonicalConsciousAccessRound4Boundary =
     LOD.canonicalPadicLODReasoningBoundary
     Chart.canonicalCausalChartBoundary
     Modes.canonicalCrystallisationModeBoundary
+    Shell.canonicalWaveShellBoundary
+    Symmetry.canonicalSymmetryStabiliserBoundary
+    Collapse.canonicalPadicCollapseBoundary
     Resource.canonicalResourceLimitedCrystallisationBoundary
     Render.canonicalReasoningFieldRenderBoundary
     PadicCrystal.canonicalPadicCrystallisationBoundary
     Coupled.canonicalCoupledOrderBoundary
     Quasi.canonicalQuasiperiodicInternalSpaceBoundary
+    refl
+    refl
+    refl
     refl
     refl
     refl
