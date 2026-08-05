@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound20Validation where
 --   * squared half-gap survival and inverse factor 4096;
 --   * literal 3072-coordinate row/column promotion;
 --   * exact Kronecker basis and norm-to-entry extraction;
+--   * quadratic-to-squared coercivity;
 --   * tilted inverse entry 64 and physical Green-kernel decay.
 --
 -- This root does not assert the still-open physical five-channel Hessian
@@ -22,4 +23,6 @@ open import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact
 open import DASHI.Physics.YangMills.BalabanP33CombesThomasSquaredHalfGapExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasSchurExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateBasisExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalQuadraticToSquaredCoercivityExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasEntryDecayExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasQuadraticEndgameExact
