@@ -36,7 +36,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
-  using (cong; sym; trans)
+  using (cong; trans)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
@@ -189,7 +189,6 @@ biotSavartNormGainSquared modeData omega transverse =
     V.inverseNormSquared modeData * V.normSquared omega
   ∎
 
--- The Fourier curl contributes the second factor i, hence the minus sign.
 phaseCorrectedCurl : V.Vector3 → V.Vector3 → V.Vector3
 phaseCorrectedCurl mode value =
   V.scale (- 1ℚ) (cross mode value)
@@ -248,9 +247,24 @@ phaseCorrectedCurlBiotSavart modeData omega transverse =
           (V.scale (V.normSquared modeValue) omega)))
     ≡ omega
   finalCoordinates
-    (V.v3 kx ky kz) inverse (V.v3 wx wy wz) inverseLaw
-    rewrite inverseLaw =
+    (V.v3 kx ky kz) inverse (V.v3 wx wy wz) inverseLaw =
     V.vectorExt
-      (solve (kx ∷ ky ∷ kz ∷ wx ∷ inverse ∷ []))
-      (solve (kx ∷ ky ∷ kz ∷ wy ∷ inverse ∷ []))
-      (solve (kx ∷ ky ∷ kz ∷ wz ∷ inverse ∷ []))
+      (coordinateFinal wx)
+      (coordinateFinal wy)
+      (coordinateFinal wz)
+    where
+    normMode : ℚ
+    normMode = kx * kx + ky * ky + kz * kz
+
+    coordinateFinal :
+      (coordinate : ℚ) →
+      (- 1ℚ) *
+        (inverse *
+          (0ℚ - normMode * coordinate))
+      ≡ coordinate
+    coordinateFinal coordinate =
+      trans
+        (solve (inverse ∷ normMode ∷ coordinate ∷ []))
+        (trans
+          (cong (_* coordinate) inverseLaw)
+          (solve (coordinate ∷ [])))
