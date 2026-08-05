@@ -22,30 +22,36 @@ module DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintCancellationExact
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
--- DASHI CONTRIBUTION
+-- DASHI CORRECTION AND CONTRIBUTION
 --
--- The literal exact-background gauge-fixing and CMP109 constraint Hessians are
--- the positive first-derivative squares
+-- At an exact residual background the literal gauge-fixing and CMP109
+-- constraint Hessians are the positive first-derivative squares
 --
---   ||D F[h]||^2,  ||D Q[h]||^2.
+--   g(h) = ||D F_A[h]||^2,
+--   q(h) = ||D Q_A[h]||^2.
 --
--- The reference Hodge form already accepts arbitrary nonnegative gauge and
--- block-penalty energies.  Selecting those two literal squares as the reference
--- penalties makes them cancel exactly in the signed Hessian remainder:
+-- The side-four reference difference energy is the full componentwise
+-- gradient energy.  In the flat Hodge identity it is completed jointly by the
+-- Wilson curl energy and the gauge divergence energy.  Therefore gauge energy
+-- must NOT be added once more to the reference and then cancelled: doing so
+-- would leave Wilson - fullGradient, which equals -divergenceEnergy already at
+-- the flat background.
 --
---   [H_W + ||DF||^2 + ||DQ||^2]
---     - [H_diff + ||DF||^2 + ||DQ||^2]
---   = H_W - H_diff.
+-- The correct matched reference is
 --
--- Consequently the physical 1/32 coercivity producer no longer needs five
--- independently bounded remainder channels.  At an exact gauge/constraint
--- background it suffices to prove the one signed Wilson comparison
+--   H_ref(h) = H_diff(h) + q(h),
 --
---   -(1/32)||h||^2 <= H_W''[h,h] - H_diff[h,h].
+-- so only the independent CMP109 penalty cancels.  The exact signed remainder
+-- is
 --
--- This is an exact cancellation theorem, not an estimate and not a change of
--- normalization.  It materially reduces the remaining coercivity cut while
--- preserving the literal Wilson, gauge-fixing and CMP109 second variations.
+--   [H_W(h) + g(h) + q(h)] - [H_diff(h) + q(h)]
+--     = H_W(h) + g(h) - H_diff(h).
+--
+-- Thus the load-bearing estimate is a coupled Wilson-plus-gauge Hodge
+-- comparison.  This module proves that exact cancellation, the coercivity
+-- promotion, and an explicit scalar counter-audit of the former overmatched
+-- reference.  No estimate or normalization convention is hidden in the
+-- repair.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -72,15 +78,15 @@ gaugeFirstEnergy :
   ∀ {Plaquette GaugeIndex ConstraintIndex} →
   Jets.LiteralPhysicalSecondVariation
     Plaquette GaugeIndex ConstraintIndex → ℚ
-gaugeFirstEnergy data =
-  Jets.residualFirstNormSquared (Jets.gaugeResidual data)
+gaugeFirstEnergy dataSet =
+  Jets.residualFirstNormSquared (Jets.gaugeResidual dataSet)
 
 constraintFirstEnergy :
   ∀ {Plaquette GaugeIndex ConstraintIndex} →
   Jets.LiteralPhysicalSecondVariation
     Plaquette GaugeIndex ConstraintIndex → ℚ
-constraintFirstEnergy data =
-  Jets.residualFirstNormSquared (Jets.constraintResidual data)
+constraintFirstEnergy dataSet =
+  Jets.residualFirstNormSquared (Jets.constraintResidual dataSet)
 
 residualFirstNormSquaredNonnegative :
   ∀ {Index} (residual : Jets.FiniteResidualSecondJet Index) →
@@ -123,22 +129,22 @@ residualFirstNormSquaredNonnegative residual =
 
 gaugeFirstEnergyNonnegative :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (data : Jets.LiteralPhysicalSecondVariation
+    (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  0ℚ ≤ gaugeFirstEnergy data
-gaugeFirstEnergyNonnegative data =
-  residualFirstNormSquaredNonnegative (Jets.gaugeResidual data)
+  0ℚ ≤ gaugeFirstEnergy dataSet
+gaugeFirstEnergyNonnegative dataSet =
+  residualFirstNormSquaredNonnegative (Jets.gaugeResidual dataSet)
 
 constraintFirstEnergyNonnegative :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (data : Jets.LiteralPhysicalSecondVariation
+    (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  0ℚ ≤ constraintFirstEnergy data
-constraintFirstEnergyNonnegative data =
-  residualFirstNormSquaredNonnegative (Jets.constraintResidual data)
+  0ℚ ≤ constraintFirstEnergy dataSet
+constraintFirstEnergyNonnegative dataSet =
+  residualFirstNormSquaredNonnegative (Jets.constraintResidual dataSet)
 
 ------------------------------------------------------------------------
--- Matched reference form and exact cancellation.
+-- Correct matched reference: the constraint square cancels, gauge does not.
 ------------------------------------------------------------------------
 
 matchedReferenceEnergy :
@@ -146,135 +152,194 @@ matchedReferenceEnergy :
   Hodge.RationalBondField4 →
   Jets.LiteralPhysicalSecondVariation
     Plaquette GaugeIndex ConstraintIndex → ℚ
-matchedReferenceEnergy field data =
+matchedReferenceEnergy field dataSet =
   Hodge.referenceHodgeEnergy
-    field (gaugeFirstEnergy data) (constraintFirstEnergy data)
+    field 0ℚ (constraintFirstEnergy dataSet)
 
 matchedExactHessian :
   ∀ {Plaquette GaugeIndex ConstraintIndex} →
   Jets.LiteralPhysicalSecondVariation
     Plaquette GaugeIndex ConstraintIndex → ℚ
-matchedExactHessian data =
-  Jets.wilsonSecondVariation data
-  + (gaugeFirstEnergy data + constraintFirstEnergy data)
+matchedExactHessian dataSet =
+  Jets.wilsonSecondVariation dataSet
+  + (gaugeFirstEnergy dataSet + constraintFirstEnergy dataSet)
 
 matchedSignedRemainder :
   ∀ {Plaquette GaugeIndex ConstraintIndex} →
   Hodge.RationalBondField4 →
   Jets.LiteralPhysicalSecondVariation
     Plaquette GaugeIndex ConstraintIndex → ℚ
-matchedSignedRemainder field data =
-  matchedExactHessian data - matchedReferenceEnergy field data
+matchedSignedRemainder field dataSet =
+  matchedExactHessian dataSet - matchedReferenceEnergy field dataSet
 
-matchedGaugeConstraintCancellationExact :
+constraintCancellationLeavesWilsonGaugeHodgeExact :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
     (field : Hodge.RationalBondField4)
-    (data : Jets.LiteralPhysicalSecondVariation
+    (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  matchedSignedRemainder field data
-  ≡ Jets.wilsonSecondVariation data
+  matchedSignedRemainder field dataSet
+  ≡ Jets.wilsonSecondVariation dataSet
+      + gaugeFirstEnergy dataSet
       - Hodge.bondReferenceDifferenceEnergy field
-matchedGaugeConstraintCancellationExact field data =
+constraintCancellationLeavesWilsonGaugeHodgeExact field dataSet =
   ℚRing.solve-∀
-    (Jets.wilsonSecondVariation data)
+    (Jets.wilsonSecondVariation dataSet)
     (Hodge.bondReferenceDifferenceEnergy field)
-    (gaugeFirstEnergy data)
-    (constraintFirstEnergy data)
+    (gaugeFirstEnergy dataSet)
+    (constraintFirstEnergy dataSet)
 
 matchedReferenceRecomposesExactHessian :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
     (field : Hodge.RationalBondField4)
-    (data : Jets.LiteralPhysicalSecondVariation
+    (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
   P33.physicalHessianEnergy
-    (matchedReferenceEnergy field data)
-    (matchedSignedRemainder field data)
-  ≡ matchedExactHessian data
-matchedReferenceRecomposesExactHessian field data =
+    (matchedReferenceEnergy field dataSet)
+    (matchedSignedRemainder field dataSet)
+  ≡ matchedExactHessian dataSet
+matchedReferenceRecomposesExactHessian field dataSet =
   ℚRing.solve-∀
-    (matchedReferenceEnergy field data)
-    (matchedExactHessian data)
+    (matchedReferenceEnergy field dataSet)
+    (matchedExactHessian dataSet)
 
 literalTotalEqualsMatchedExactHessian :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (data : Jets.LiteralPhysicalSecondVariation
+    (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
-  Jets.ExactResidualBackground (Jets.gaugeResidual data) →
-  Jets.ExactResidualBackground (Jets.constraintResidual data) →
-  Jets.literalTotalSecondVariation data ≡ matchedExactHessian data
-literalTotalEqualsMatchedExactHessian data gaugeExact constraintExact =
+  Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
+  Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
+  Jets.literalTotalSecondVariation dataSet ≡ matchedExactHessian dataSet
+literalTotalEqualsMatchedExactHessian dataSet gaugeExact constraintExact =
   Jets.literalTotalSecondVariationAtExactBackground
-    data gaugeExact constraintExact
+    dataSet gaugeExact constraintExact
 
 ------------------------------------------------------------------------
--- Coercivity now depends only on the Wilson-minus-difference remainder.
+-- Counter-audit of the former overmatched reference.
 ------------------------------------------------------------------------
 
-literalHessianCoerciveFromWilsonDifference :
+oldOvermatchedReference : ℚ → ℚ → ℚ → ℚ
+oldOvermatchedReference fullGradient gaugeEnergy constraintEnergy =
+  fullGradient + (gaugeEnergy + constraintEnergy)
+
+literalExactScalarHessian : ℚ → ℚ → ℚ → ℚ
+literalExactScalarHessian wilsonEnergy gaugeEnergy constraintEnergy =
+  wilsonEnergy + (gaugeEnergy + constraintEnergy)
+
+oldOvermatchedRemainder : ℚ → ℚ → ℚ → ℚ → ℚ
+oldOvermatchedRemainder wilsonEnergy fullGradient gaugeEnergy constraintEnergy =
+  literalExactScalarHessian wilsonEnergy gaugeEnergy constraintEnergy
+  - oldOvermatchedReference fullGradient gaugeEnergy constraintEnergy
+
+oldOvermatchedRemainderCancelsGaugeAlgebraically :
+  ∀ wilsonEnergy fullGradient gaugeEnergy constraintEnergy →
+  oldOvermatchedRemainder
+    wilsonEnergy fullGradient gaugeEnergy constraintEnergy
+  ≡ wilsonEnergy - fullGradient
+oldOvermatchedRemainderCancelsGaugeAlgebraically = ℚRing.solve-∀
+
+flatHodgeOldRemainderIsNegativeGauge :
+  ∀ curlEnergy gaugeEnergy constraintEnergy →
+  oldOvermatchedRemainder
+    curlEnergy (curlEnergy + gaugeEnergy) gaugeEnergy constraintEnergy
+  ≡ - gaugeEnergy
+flatHodgeOldRemainderIsNegativeGauge = ℚRing.solve-∀
+
+oldShortcutUnitGaugeWitness :
+  oldOvermatchedRemainder
+    0ℚ (+ 1 / 1) (+ 1 / 1) 0ℚ
+  ≡ - (+ 1 / 1)
+oldShortcutUnitGaugeWitness = ℚRing.solve []
+
+correctMatchedReference : ℚ → ℚ → ℚ
+correctMatchedReference fullGradient constraintEnergy =
+  fullGradient + constraintEnergy
+
+correctMatchedRemainder : ℚ → ℚ → ℚ → ℚ → ℚ
+correctMatchedRemainder wilsonEnergy fullGradient gaugeEnergy constraintEnergy =
+  literalExactScalarHessian wilsonEnergy gaugeEnergy constraintEnergy
+  - correctMatchedReference fullGradient constraintEnergy
+
+flatHodgeCorrectRemainderIsZero :
+  ∀ curlEnergy gaugeEnergy constraintEnergy →
+  correctMatchedRemainder
+    curlEnergy (curlEnergy + gaugeEnergy) gaugeEnergy constraintEnergy
+  ≡ 0ℚ
+flatHodgeCorrectRemainderIsZero = ℚRing.solve-∀
+
+------------------------------------------------------------------------
+-- Coercivity depends on the coupled Wilson-plus-gauge Hodge remainder.
+------------------------------------------------------------------------
+
+literalHessianCoerciveFromWilsonGaugeHodgeDifference :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
     (field : Hodge.RationalBondField4)
-    (data : Jets.LiteralPhysicalSecondVariation
+    (dataSet : Jets.LiteralPhysicalSecondVariation
       Plaquette GaugeIndex ConstraintIndex) →
   Hodge.BondComponentMeanZero field →
-  Jets.ExactResidualBackground (Jets.gaugeResidual data) →
-  Jets.ExactResidualBackground (Jets.constraintResidual data) →
+  Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
+  Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
   - (P33.p33PhysicalFloor * Hodge.bondNormSq field)
-    ≤ Jets.wilsonSecondVariation data
+    ≤ Jets.wilsonSecondVariation dataSet
+        + gaugeFirstEnergy dataSet
         - Hodge.bondReferenceDifferenceEnergy field →
   P33.p33PhysicalFloor * Hodge.bondNormSq field
-    ≤ Jets.literalTotalSecondVariation data
-literalHessianCoerciveFromWilsonDifference
-    field data meanZero gaugeExact constraintExact wilsonDifferenceLower =
+    ≤ Jets.literalTotalSecondVariation dataSet
+literalHessianCoerciveFromWilsonGaugeHodgeDifference
+    field dataSet meanZero gaugeExact constraintExact coupledLower =
   let
     matchedLower :
       - (P33.p33PhysicalFloor * Hodge.bondNormSq field)
-      ≤ matchedSignedRemainder field data
+      ≤ matchedSignedRemainder field dataSet
     matchedLower =
       subst
         (λ remainder →
           - (P33.p33PhysicalFloor * Hodge.bondNormSq field)
           ≤ remainder)
-        (sym (matchedGaugeConstraintCancellationExact field data))
-        wilsonDifferenceLower
+        (sym (constraintCancellationLeavesWilsonGaugeHodgeExact
+          field dataSet))
+        coupledLower
 
     referenceCoercive :
       P33.p33PhysicalFloor * Hodge.bondNormSq field
       ≤ P33.physicalHessianEnergy
-          (matchedReferenceEnergy field data)
-          (matchedSignedRemainder field data)
+          (matchedReferenceEnergy field dataSet)
+          (matchedSignedRemainder field dataSet)
     referenceCoercive =
       P33.path4SignedRemainderCoercive
         field
-        (gaugeFirstEnergy data)
-        (constraintFirstEnergy data)
-        (matchedSignedRemainder field data)
+        0ℚ
+        (constraintFirstEnergy dataSet)
+        (matchedSignedRemainder field dataSet)
         meanZero
-        (gaugeFirstEnergyNonnegative data)
-        (constraintFirstEnergyNonnegative data)
+        ℚP.≤-refl
+        (constraintFirstEnergyNonnegative dataSet)
         matchedLower
 
     matchedCoercive :
       P33.p33PhysicalFloor * Hodge.bondNormSq field
-      ≤ matchedExactHessian data
+      ≤ matchedExactHessian dataSet
     matchedCoercive =
       subst
         (λ upper →
           P33.p33PhysicalFloor * Hodge.bondNormSq field ≤ upper)
-        (matchedReferenceRecomposesExactHessian field data)
+        (matchedReferenceRecomposesExactHessian field dataSet)
         referenceCoercive
   in
   subst
     (λ upper →
       P33.p33PhysicalFloor * Hodge.bondNormSq field ≤ upper)
     (sym (literalTotalEqualsMatchedExactHessian
-      data gaugeExact constraintExact))
+      dataSet gaugeExact constraintExact))
     matchedCoercive
 
-literalGaugeConstraintCancellationLevel : ProofLevel
-literalGaugeConstraintCancellationLevel = machineChecked
+literalConstraintCancellationLevel : ProofLevel
+literalConstraintCancellationLevel = machineChecked
 
-literalWilsonOnlyRemainderLevel : ProofLevel
-literalWilsonOnlyRemainderLevel = machineChecked
+literalGaugeMustRemainInHodgeRemainderLevel : ProofLevel
+literalGaugeMustRemainInHodgeRemainderLevel = machineChecked
 
-literalWilsonDifferenceCoercivityLevel : ProofLevel
-literalWilsonDifferenceCoercivityLevel = machineChecked
+oldOvermatchedReferenceCounterAuditLevel : ProofLevel
+oldOvermatchedReferenceCounterAuditLevel = machineChecked
+
+literalWilsonGaugeHodgeCoercivityLevel : ProofLevel
+literalWilsonGaugeHodgeCoercivityLevel = machineChecked
