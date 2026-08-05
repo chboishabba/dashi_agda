@@ -17,6 +17,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoResonantAuditRound11Validation where
 -- * corrected wide+narrow assembly by a sum rather than a minimum;
 -- * the interpolation-line half-derivative deficit;
 -- * the corrected critical terminal identity A_q^2=lambda_q D_q;
+-- * the finite equality between eta lambda |grad u_p|^2 and
+--   eta lambda^3 |u_p|^2 shell representations;
 -- * a uniformly summable three-sector interaction kernel; and
 -- * the critical four-class conditional 1/64 closure.
 --
@@ -41,6 +43,7 @@ import DASHI.Physics.Closure.NSTriadKNCherevanFiniteOrthogonalityAuditExact
 import DASHI.Physics.Closure.NSTriadKNCherevanWideNarrowAssemblyExact
 import DASHI.Physics.Closure.NSTriadKNLuoEnergyInterpolationDeficitExact
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalTerminalScaleExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalShellFunctionalExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalInteractionKernelExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCriticalFourClassClosureExact
 
