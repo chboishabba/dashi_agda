@@ -83,157 +83,187 @@ open FiniteJ12CommutatorData public
 
 commutatorMagnitude :
   ∀ {Sample} → FiniteJ12CommutatorData Sample → Sample → ℚ
-commutatorMagnitude data sample =
-  kernelMagnitude data sample
-  * lowDifferenceMagnitude data sample
-  * highMagnitude data sample
+commutatorMagnitude commutatorData sample =
+  kernelMagnitude commutatorData sample
+  * lowDifferenceMagnitude commutatorData sample
+  * highMagnitude commutatorData sample
 
 kernelDistance :
   ∀ {Sample} → FiniteJ12CommutatorData Sample → Sample → ℚ
-kernelDistance data sample =
-  kernelMagnitude data sample * distance data sample
+kernelDistance commutatorData sample =
+  kernelMagnitude commutatorData sample * distance commutatorData sample
 
 commutatorPointwiseDerivativeGain :
   ∀ {Sample}
-    (data : FiniteJ12CommutatorData Sample)
+    (commutatorData : FiniteJ12CommutatorData Sample)
     (sample : Sample) →
-  commutatorMagnitude data sample
-  ≤ kernelDistance data sample
-      * (lowGradient data * highSup data)
-commutatorPointwiseDerivativeGain data sample =
+  commutatorMagnitude commutatorData sample
+  ≤ kernelDistance commutatorData sample
+      * (lowGradient commutatorData * highSup commutatorData)
+commutatorPointwiseDerivativeGain commutatorData sample =
   let
-    kernel = kernelMagnitude data sample
-    dist = distance data sample
-    difference = lowDifferenceMagnitude data sample
-    high = highMagnitude data sample
+    kernel = kernelMagnitude commutatorData sample
+    dist = distance commutatorData sample
+    difference = lowDifferenceMagnitude commutatorData sample
+    high = highMagnitude commutatorData sample
 
-    first : kernel * difference ≤ kernel * (dist * lowGradient data)
+    first : kernel * difference
+      ≤ kernel * (dist * lowGradient commutatorData)
     first =
-      let instance kernelIsNonnegative =
-        nonNegative (kernelNonnegative data sample)
+      let
+        instance
+          kernelIsNonnegative =
+            nonNegative (kernelNonnegative commutatorData sample)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         kernel
-        (firstOrderIncrementBound data sample)
+        (firstOrderIncrementBound commutatorData sample)
 
     highIsNonnegative : 0ℚ ≤ high
-    highIsNonnegative = highMagnitudeNonnegative data sample
+    highIsNonnegative = highMagnitudeNonnegative commutatorData sample
 
     second :
       (kernel * difference) * high
-      ≤ (kernel * (dist * lowGradient data)) * high
+      ≤ (kernel * (dist * lowGradient commutatorData)) * high
     second =
-      let instance highIsNonnegativeInstance = nonNegative highIsNonnegative
+      let
+        instance
+          highIsNonnegativeInstance = nonNegative highIsNonnegative
       in
       ℚₚ.*-monoʳ-≤-nonNeg high first
 
     kernelDistanceGradientNonnegative :
-      0ℚ ≤ (kernel * dist) * lowGradient data
+      0ℚ ≤ (kernel * dist) * lowGradient commutatorData
     kernelDistanceGradientNonnegative =
       let
         instance
-          kernelIsNonnegative = nonNegative (kernelNonnegative data sample)
-          distanceIsNonnegative = nonNegative (distanceNonnegative data sample)
+          kernelIsNonnegative =
+            nonNegative (kernelNonnegative commutatorData sample)
+          distanceIsNonnegative =
+            nonNegative (distanceNonnegative commutatorData sample)
           kernelDistanceIsNonnegative =
             ℚₚ.nonNeg*nonNeg⇒nonNeg kernel dist
-          gradientIsNonnegative = nonNegative (lowGradientNonnegative data)
+          gradientIsNonnegative =
+            nonNegative (lowGradientNonnegative commutatorData)
           productIsNonnegative =
             ℚₚ.nonNeg*nonNeg⇒nonNeg
               (kernel * dist)
-              (lowGradient data)
+              (lowGradient commutatorData)
       in
-      ℚₚ.nonNegative⁻¹ ((kernel * dist) * lowGradient data)
+      ℚₚ.nonNegative⁻¹
+        ((kernel * dist) * lowGradient commutatorData)
 
     third :
-      ((kernel * dist) * lowGradient data) * high
-      ≤ ((kernel * dist) * lowGradient data) * highSup data
+      ((kernel * dist) * lowGradient commutatorData) * high
+      ≤ ((kernel * dist) * lowGradient commutatorData)
+          * highSup commutatorData
     third =
-      let instance coefficientIsNonnegative =
-        nonNegative kernelDistanceGradientNonnegative
+      let
+        instance
+          coefficientIsNonnegative =
+            nonNegative kernelDistanceGradientNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
-        ((kernel * dist) * lowGradient data)
-        (highMagnitudeBound data sample)
+        ((kernel * dist) * lowGradient commutatorData)
+        (highMagnitudeBound commutatorData sample)
 
     leftAssociation :
-      (kernel * (dist * lowGradient data)) * high
-      ≡ ((kernel * dist) * lowGradient data) * high
+      (kernel * (dist * lowGradient commutatorData)) * high
+      ≡ ((kernel * dist) * lowGradient commutatorData) * high
     leftAssociation =
-      solve (kernel ∷ dist ∷ lowGradient data ∷ high ∷ [])
+      solve (kernel ∷ dist ∷ lowGradient commutatorData ∷ high ∷ [])
 
     targetAssociation :
-      ((kernel * dist) * lowGradient data) * highSup data
-      ≡ (kernel * dist) * (lowGradient data * highSup data)
+      ((kernel * dist) * lowGradient commutatorData)
+        * highSup commutatorData
+      ≡ (kernel * dist)
+          * (lowGradient commutatorData * highSup commutatorData)
     targetAssociation =
       solve
-        (kernel ∷ dist ∷ lowGradient data ∷ highSup data ∷ [])
+        ( kernel
+        ∷ dist
+        ∷ lowGradient commutatorData
+        ∷ highSup commutatorData
+        ∷ []
+        )
   in
   ℚₚ.≤-trans second
     (subst
-      (λ lower → lower ≤ kernelDistance data sample
-        * (lowGradient data * highSup data))
+      (λ lower → lower ≤ kernelDistance commutatorData sample
+        * (lowGradient commutatorData * highSup commutatorData))
       (sym leftAssociation)
       (subst
         (λ upper →
-          ((kernel * dist) * lowGradient data) * high ≤ upper)
+          ((kernel * dist) * lowGradient commutatorData) * high ≤ upper)
         targetAssociation
         third))
 
 finiteJ12DerivativeGain :
   ∀ {Sample}
-    (data : FiniteJ12CommutatorData Sample) →
-  Finite.sumList (samples data) (commutatorMagnitude data)
-  ≤ kernelFirstMoment data * (lowGradient data * highSup data)
-finiteJ12DerivativeGain data =
+    (commutatorData : FiniteJ12CommutatorData Sample) →
+  Finite.sumList (samples commutatorData)
+    (commutatorMagnitude commutatorData)
+  ≤ kernelFirstMoment commutatorData
+      * (lowGradient commutatorData * highSup commutatorData)
+finiteJ12DerivativeGain commutatorData =
   let
     pointwise :
-      Finite.sumList (samples data) (commutatorMagnitude data)
-      ≤ Finite.sumList (samples data)
+      Finite.sumList (samples commutatorData)
+        (commutatorMagnitude commutatorData)
+      ≤ Finite.sumList (samples commutatorData)
           (λ sample →
-            kernelDistance data sample
-            * (lowGradient data * highSup data))
+            kernelDistance commutatorData sample
+            * (lowGradient commutatorData * highSup commutatorData))
     pointwise =
       Finite.sumListMonotone
-        (samples data)
-        (commutatorMagnitude data)
+        (samples commutatorData)
+        (commutatorMagnitude commutatorData)
         (λ sample →
-          kernelDistance data sample
-          * (lowGradient data * highSup data))
-        (commutatorPointwiseDerivativeGain data)
+          kernelDistance commutatorData sample
+          * (lowGradient commutatorData * highSup commutatorData))
+        (commutatorPointwiseDerivativeGain commutatorData)
 
     scaleNonnegative :
-      0ℚ ≤ lowGradient data * highSup data
+      0ℚ ≤ lowGradient commutatorData * highSup commutatorData
     scaleNonnegative =
       let
         instance
-          gradientIsNonnegative = nonNegative (lowGradientNonnegative data)
-          highSupIsNonnegative = nonNegative (highSupNonnegative data)
+          gradientIsNonnegative =
+            nonNegative (lowGradientNonnegative commutatorData)
+          highSupIsNonnegative =
+            nonNegative (highSupNonnegative commutatorData)
           productIsNonnegative =
             ℚₚ.nonNeg*nonNeg⇒nonNeg
-              (lowGradient data)
-              (highSup data)
+              (lowGradient commutatorData)
+              (highSup commutatorData)
       in
-      ℚₚ.nonNegative⁻¹ (lowGradient data * highSup data)
+      ℚₚ.nonNegative⁻¹
+        (lowGradient commutatorData * highSup commutatorData)
 
     momentScaled :
-      Finite.sumList (samples data) (kernelDistance data)
-        * (lowGradient data * highSup data)
-      ≤ kernelFirstMoment data * (lowGradient data * highSup data)
+      Finite.sumList (samples commutatorData)
+        (kernelDistance commutatorData)
+        * (lowGradient commutatorData * highSup commutatorData)
+      ≤ kernelFirstMoment commutatorData
+          * (lowGradient commutatorData * highSup commutatorData)
     momentScaled =
-      let instance scaleIsNonnegative = nonNegative scaleNonnegative
+      let
+        instance
+          scaleIsNonnegative = nonNegative scaleNonnegative
       in
       ℚₚ.*-monoʳ-≤-nonNeg
-        (lowGradient data * highSup data)
-        (firstMomentBound data)
+        (lowGradient commutatorData * highSup commutatorData)
+        (firstMomentBound commutatorData)
   in
   ℚₚ.≤-trans pointwise
     (subst
       (λ lower →
         lower
-        ≤ kernelFirstMoment data * (lowGradient data * highSup data))
+        ≤ kernelFirstMoment commutatorData
+          * (lowGradient commutatorData * highSup commutatorData))
       (sym
         (Finite.sumListScaleRight
-          (lowGradient data * highSup data)
-          (samples data)
-          (kernelDistance data)))
+          (lowGradient commutatorData * highSup commutatorData)
+          (samples commutatorData)
+          (kernelDistance commutatorData)))
       momentScaled)
