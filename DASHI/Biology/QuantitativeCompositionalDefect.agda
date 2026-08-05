@@ -3,6 +3,7 @@ module DASHI.Biology.QuantitativeCompositionalDefect where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.ProductiveTransformCoherence as Coherence
+import DASHI.Biology.StateDependentMultiplexTransducer as Stateful
 
 ------------------------------------------------------------------------
 -- Quantitative compositional defect.
@@ -38,10 +39,6 @@ open TypedDefect public
 weightedMagnitude : TypedDefect → Nat
 weightedMagnitude d = weight d * magnitude d
 
-listSum : List Nat → Nat
-listSum [] = zero
-listSum (x ∷ xs) = x + listSum xs
-
 totalDefect : List TypedDefect → Nat
 totalDefect [] = zero
 totalDefect (d ∷ ds) = weightedMagnitude d + totalDefect ds
@@ -59,11 +56,21 @@ productiveCredit : TypedDefect → Nat
 productiveCredit (typedDefect productiveOpposition m w) = w * m
 productiveCredit _ = zero
 
+sumIncompatible : List TypedDefect → Nat
+sumIncompatible [] = zero
+sumIncompatible (d ∷ ds) = incompatibleCharge d + sumIncompatible ds
+
+sumUnresolved : List TypedDefect → Nat
+sumUnresolved [] = zero
+sumUnresolved (d ∷ ds) = unresolvedCharge d + sumUnresolved ds
+
+sumProductive : List TypedDefect → Nat
+sumProductive [] = zero
+sumProductive (d ∷ ds) = productiveCredit d + sumProductive ds
+
 netDefect : List TypedDefect → Nat
 netDefect ds =
-  (listSum (map incompatibleCharge ds) + listSum (map unresolvedCharge ds))
-  ∸
-  listSum (map productiveCredit ds)
+  (sumIncompatible ds + sumUnresolved ds) ∸ sumProductive ds
 
 ------------------------------------------------------------------------
 -- Finite triangle/cycle surfaces.
@@ -111,7 +118,7 @@ canonicalOrderTriangle =
     { Carrier = Bool
     ; direct = Coherence.inhibitThenSaturate
     ; first = Coherence.setTrue
-    ; second = Coherence.Stateful.boolNot
+    ; second = Stateful.boolNot
     ; distance = boolDistance
     ; witness = false
     }
@@ -156,8 +163,7 @@ canonicalNetDefectIsTwo = refl
 -- Extension/restriction witnesses.
 
 baseCoalitionDefects : List TypedDefect
-baseCoalitionDefects =
-  destructiveTypedDefect ∷ []
+baseCoalitionDefects = destructiveTypedDefect ∷ []
 
 extendedCoalitionDefects : List TypedDefect
 extendedCoalitionDefects =
