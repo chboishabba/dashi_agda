@@ -20,6 +20,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteZenoCascadeBudgetExact where
 -- only that the scalar budget objection to a Zeno cascade is insufficient.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
