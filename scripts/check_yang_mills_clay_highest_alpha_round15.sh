@@ -31,10 +31,101 @@ for file in "${files[@]}"; do
   test -f "$file"
 done
 
-if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas' "${files[@]}"; then
-  echo "Clay highest-alpha round fifteen contains a postulate, hole, unsafe escape, or unsolved-meta option" >&2
+validation_root="DASHI/Physics/YangMills/BalabanClayHighestAlphaRound15Validation.agda"
+
+# Build the complete repository-local import closure from module declarations,
+# rather than scanning only the newly listed files.  Imports supplied by the
+# Agda installation rather than the repository are reported but are outside
+# this repository-local safety scan.
+mapfile -t closure_files < <(
+  python3 - "$validation_root" <<'PY'
+from collections import deque
+from pathlib import Path
+import re
+import sys
+
+root_path = Path(sys.argv[1])
+module_re = re.compile(r'^\s*module\s+([A-Za-z0-9_.]+)\b', re.MULTILINE)
+import_re = re.compile(r'^\s*(?:open\s+)?import\s+([A-Za-z0-9_.]+)\b', re.MULTILINE)
+
+index = {}
+for path in Path('.').rglob('*.agda'):
+    if any(part in {'.git', '.direnv', '_build'} for part in path.parts):
+        continue
+    text = path.read_text(encoding='utf-8', errors='replace')
+    match = module_re.search(text)
+    if match and match.group(1) not in index:
+        index[match.group(1)] = path
+
+root_text = root_path.read_text(encoding='utf-8', errors='replace')
+root_match = module_re.search(root_text)
+if not root_match:
+    raise SystemExit(f'cannot read module declaration from {root_path}')
+
+queue = deque([root_match.group(1)])
+seen_modules = set()
+seen_paths = set()
+unresolved = set()
+
+while queue:
+    module = queue.popleft()
+    if module in seen_modules:
+        continue
+    seen_modules.add(module)
+    path = index.get(module)
+    if path is None:
+        unresolved.add(module)
+        continue
+    seen_paths.add(path)
+    text = path.read_text(encoding='utf-8', errors='replace')
+    for imported in import_re.findall(text):
+        if imported not in seen_modules:
+            queue.append(imported)
+
+for module in sorted(unresolved):
+    print(f'round15 import supplied outside repository index: {module}', file=sys.stderr)
+for path in sorted(seen_paths, key=lambda p: str(p)):
+    print(path)
+PY
+)
+
+if ((${#closure_files[@]} == 0)); then
+  echo "failed to construct the round-fifteen import closure" >&2
   exit 1
 fi
+
+python3 - "${closure_files[@]}" <<'PY'
+from pathlib import Path
+import re
+import sys
+
+patterns = {
+    'postulate': re.compile(r'(^|\s)postulate(\s|$)'),
+    'left hole': re.compile(r'\{!'),
+    'right hole': re.compile(r'!\}'),
+    'TERMINATING': re.compile(r'(^|\s)TERMINATING(\s|$)'),
+    'NO_TERMINATION_CHECK': re.compile(r'(^|\s)NO_TERMINATION_CHECK(\s|$)'),
+    'allow-unsolved-metas': re.compile(r'allow-unsolved-metas'),
+    '--no-positivity-check': re.compile(r'--no-positivity-check'),
+    '--no-termination-check': re.compile(r'--no-termination-check'),
+    'NON_COVERING': re.compile(r'(^|\s)NON_COVERING(\s|$)'),
+    '--type-in-type': re.compile(r'--type-in-type'),
+    'trustMe': re.compile(r'\btrustMe\b'),
+    'primTrustMe': re.compile(r'\bprimTrustMe\b'),
+}
+
+failed = False
+for name in sys.argv[1:]:
+    path = Path(name)
+    text = path.read_text(encoding='utf-8', errors='replace')
+    for label, pattern in patterns.items():
+        for match in pattern.finditer(text):
+            line = text.count('\n', 0, match.start()) + 1
+            print(f'{path}:{line}: forbidden {label}', file=sys.stderr)
+            failed = True
+if failed:
+    raise SystemExit(1)
+PY
 
 checks=(
   'BalabanClayLowerBoundCountermodelExact.agda:factorMismatchCountermodel'
@@ -46,12 +137,13 @@ checks=(
   'BalabanClayNormingFamilyOperatorBoundExact.agda:oneObservableDoesNotControlOperatorNorm'
   'BalabanClayTransferHamiltonianGapSeparationExact.agda:positiveTransferGapRequiresExplicitPhysicalConversion'
   'BalabanClayExactOSPullbackRecombinationExact.agda:exactPullbackPreservesReflectionPositivity'
+  'BalabanClayExactOSPullbackRecombinationExact.agda:negativePairDoesNotRecombinePositively'
   'BalabanClayDenseCoreSpectralGapExact.agda:denseLocalClusteringImpliesGap'
   'BalabanClayLocalNoncollapseExact.agda:localPositiveOSNormForcesNonzeroVector'
   'BalabanClayObservableGapEdgeExact.agda:observableGapEdgeDetection'
   'BalabanClaySpectralUVCompatibilityExact.agda:assembleSpectralUVCompatibility'
   'BalabanClayMassGapGatePackageExact.agda:assembleMandatoryClayMassGapGates'
-  'BalabanClayMirShabirScopeAuditExact.agda:part2ContainsScalingTransportInPublishedComponent'
+  'BalabanClayMirShabirScopeAuditExact.agda:part2TransportReadingDoesNotSelfPromote'
   'BalabanClayExternalAttemptStressTestsExact.agda:finiteConeDiameterDoesNotGiveUniformDiameter'
   'BalabanP33InverseDexpReducedOperatorExact.agda:inverseDexpActsAsTwoSidedInverse'
   'BalabanP33GroupProductDistanceTelescopingExact.agda:productDistanceTelescoping'
@@ -81,4 +173,4 @@ grep -q '10.1103/PhysRevD.10.2445' \
   DASHI/Physics/YangMills/BalabanP33GroupProductDistanceTelescopingExact.agda
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/YangMills/BalabanClayHighestAlphaRound15Validation.agda
+  "$validation_root"
