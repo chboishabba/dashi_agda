@@ -10,6 +10,8 @@ files=(
   DASHI/Physics/YangMills/BalabanP33FiniteWeightedSchurSquaredExact.agda
   DASHI/Physics/YangMills/BalabanP33CombesThomasSquaredHalfGapExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasSchurExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalCoordinateBasisExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasEntryDecayExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound20Validation.agda
 )
 
@@ -36,6 +38,15 @@ checks=(
   'BalabanP33PhysicalCombesThomasSchurExact.agda:physicalTiltDefectSchurSquared'
   'BalabanP33PhysicalCombesThomasSchurExact.agda:physicalTiltedSquaredLower'
   'BalabanP33PhysicalCombesThomasSchurExact.agda:rowMassFromStencilDegreeBudget'
+  'BalabanP33PhysicalCoordinateBasisExact.agda:physicalIdentitySelectorExact'
+  'BalabanP33PhysicalCoordinateBasisExact.agda:physicalBasisNormSqExact'
+  'BalabanP33PhysicalCoordinateBasisExact.agda:physicalMatrixApplyBasisExact'
+  'BalabanP33PhysicalCoordinateBasisExact.agda:physicalMatrixEntrySquaredFromOperatorBound'
+  'BalabanP33PhysicalCoordinateBasisExact.agda:squareBound4096ImpliesAbsoluteBound64'
+  'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalMatrixApplyCompositionExact'
+  'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalTiltedInverseSquaredOperatorBound'
+  'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalTiltedGreenEntryBound'
+  'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalGreenKernelDecayFromSquaredData'
 )
 
 for check in "${checks[@]}"; do
@@ -59,6 +70,8 @@ grep -q 'stencil degree and coefficient size enter' \
   DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasSchurExact.agda
 grep -q 'trace-ideal and faster-than-polynomial' \
   DASHI/Physics/YangMills/BalabanP33CombesThomasSquaredHalfGapExact.agda
+grep -q 'tilted entry bound is produced' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasEntryDecayExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound20Validation.agda
