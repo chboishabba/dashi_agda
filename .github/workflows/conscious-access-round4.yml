@@ -1,0 +1,40 @@
+name: conscious-access-round4
+
+on:
+  push:
+    branches:
+      - 'agent/conscious-access-round4-padic-reasoning-field'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/TriadicKernelLiftQuotientExact.agda'
+      - 'DASHI/Biology/TriadicCarryResidualExact.agda'
+      - 'DASHI/Biology/PadicCylinderLODReasoningField.agda'
+      - 'DASHI/Biology/CausalHierarchicalChartResidualExact.agda'
+      - 'DASHI/Biology/FiniteCrystallisationModeSelectionExact.agda'
+      - 'DASHI/Biology/FiniteWaveShellGradientExact.agda'
+      - 'DASHI/Biology/FiniteSymmetryStabiliserExact.agda'
+      - 'DASHI/Biology/FinitePadicCollapseExact.agda'
+      - 'DASHI/Biology/ResourceLimitedCrystallisationExact.agda'
+      - 'DASHI/Biology/ReasoningFieldRenderBridgeExact.agda'
+      - 'DASHI/Biology/PadicCrystallisationResidueExact.agda'
+      - 'DASHI/Biology/CoupledWaveTriadicOrderExact.agda'
+      - 'DASHI/Biology/QuasiperiodicInternalSpaceBoundaryExact.agda'
+      - 'DASHI/Biology/ConsciousAccessRound4SourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound4FullBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessRound4Regression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessRound4PadicReasoningField.md'
+      - 'scripts/check_conscious_access_round4.sh'
+      - '.github/workflows/conscious-access-round4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check conscious-access round four
+        run: bash scripts/check_conscious_access_round4.sh
