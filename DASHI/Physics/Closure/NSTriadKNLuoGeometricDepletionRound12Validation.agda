@@ -19,8 +19,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoGeometricDepletionRound12Validation whe
 -- * high--high critical norm conversion and finite interaction assembly;
 -- * the shared 2^(-3m/2) far-field/high--high annular arithmetic;
 -- * the high--low derivative-ratio prefix bound 1/2;
--- * the low--high centered-second-moment critical bridge; and
--- * the complete filtered-to-comparable-shell bridge.
+-- * the low--high centered-second-moment critical bridge;
+-- * the complete filtered-to-comparable-shell bridge; and
+-- * the exact transfer from weighted critical-root depletion to normalized
+--   interaction depletion.
 --
 -- The root does not assert a missing continuum Fourier-product theorem, does
 -- not discard far-field/commutator/localization residuals, does not derive
@@ -48,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighHighLowCriticalAssemblyExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighLowDerivativeRatioExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteLowHighSecondMomentBridgeExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteComparableFilteredBridgeExact
+import DASHI.Physics.Closure.NSTriadKNLuoTerminalInteractionDepletionTransferExact
 
 round12GeometricDepletionRoot : Set
 round12GeometricDepletionRoot = ⊤
