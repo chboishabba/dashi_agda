@@ -27,6 +27,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 waterViscosity : ℚ
 waterViscosity = Int.+ 50 / 1
@@ -64,5 +65,4 @@ noForcedSignInversion :
   airTangentialStress (requiredAirGradient unitWaterGradient)
   ≡ waterTangentialStress unitWaterGradient
 noForcedSignInversion =
-  Relation.Binary.PropositionalEquality.sym
-    (stressTransmissionCloses unitWaterGradient)
+  sym (stressTransmissionCloses unitWaterGradient)
