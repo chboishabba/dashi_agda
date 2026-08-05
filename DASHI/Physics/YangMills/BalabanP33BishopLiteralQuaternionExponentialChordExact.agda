@@ -250,6 +250,34 @@ scaledVectorNormIdentity scale (Quaternion.vec3B x y z) =
         ((x ⊗ x) ⊕ ((y ⊗ y) ⊕ (z ⊗ z))))
     BishopProperties.≃-refl scale x y z
 
+literalChordCoordinateExpansion :
+  ∀ scalarValue scaleValue (value : Quaternion.Vec3B) →
+  BishopReal._≃_
+    (chordSquared
+      (Quaternion.quaternionB scalarValue
+        (Quaternion.scaleVecB scaleValue value))
+      oneQuaternion)
+    (BishopReal._+_
+      (square (BishopReal._-_ scalarValue BishopReal.1ℝ))
+      (vectorNormSquared (Quaternion.scaleVecB scaleValue value)))
+literalChordCoordinateExpansion scalarValue scaleValue
+    (Quaternion.vec3B x y z) =
+  let open BishopProperties.ℝ-Solver
+  in solve 5
+    (λ c a x y z →
+      (((c ⊖ Κ (+ 1 / 1)) ⊗ (c ⊖ Κ (+ 1 / 1)))
+        ⊕ (((a ⊗ x) ⊖ Κ (+ 0 / 1))
+              ⊗ ((a ⊗ x) ⊖ Κ (+ 0 / 1))
+          ⊕ ((((a ⊗ y) ⊖ Κ (+ 0 / 1))
+                ⊗ ((a ⊗ y) ⊖ Κ (+ 0 / 1)))
+            ⊕ (((a ⊗ z) ⊖ Κ (+ 0 / 1))
+                ⊗ ((a ⊗ z) ⊖ Κ (+ 0 / 1))))))
+      ⊜ (((c ⊖ Κ (+ 1 / 1)) ⊗ (c ⊖ Κ (+ 1 / 1)))
+        ⊕ (((a ⊗ x) ⊗ (a ⊗ x))
+          ⊕ (((a ⊗ y) ⊗ (a ⊗ y))
+            ⊕ ((a ⊗ z) ⊗ (a ⊗ z))))))
+    BishopProperties.≃-refl scalarValue scaleValue x y z
+
 literalExponentialChordSquaredExact :
   ∀ {dataSet radius}
     (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet radius)
@@ -269,16 +297,9 @@ literalExponentialChordSquaredExact {dataSet} {radius}
     scaledNorm = scaledVectorNormIdentity scale (direction radial)
     radiusMeaning = directionNormSquared radial
     sincMeaning = sincExtendedCancellation inputs radiusCase
-    coordinateExpansion :
-      BishopReal._≃_
-        (chordSquared
-          (literalPureQuaternionExponential inputs radiusCase radial)
-          oneQuaternion)
-        (BishopReal._+_
-          (square (BishopReal._-_ cosineValue BishopReal.1ℝ))
-          (vectorNormSquared
-            (Quaternion.scaleVecB scale (direction radial))))
-    coordinateExpansion = BishopProperties.≃-refl
+    coordinateExpansion =
+      literalChordCoordinateExpansion
+        cosineValue scale (direction radial)
     scalarOrientation :
       BishopReal._≃_
         (square (BishopReal._-_ cosineValue BishopReal.1ℝ))
