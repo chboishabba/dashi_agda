@@ -7,8 +7,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoBiotSavartContinuumRound8Validation whe
 -- exact Fourier Biot--Savart inversion, Maxwell/fluid common-kernel bridge,
 -- corrected nonzero Fourier angular strain, near-window critical gain,
 -- finite periodic heat-gradient tail, dyadic Haar refinement consistency,
--- smooth LP moment scaling, parabolic cutoff/time modulus, and finite BKM
--- time-shell Fubini identification.
+-- smooth LP moment scaling, parabolic cutoff/time modulus, finite BKM
+-- time-shell Fubini identification, weak-type spike no-go, and asymmetric
+-- two-fluid tangential-stress transmission theorem.
 --
 -- This aggregate does not assert continuum T^3 measure completion or global
 -- regularity of three-dimensional Navier--Stokes.
@@ -27,6 +28,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoDyadicHaarRefinementExact
 import DASHI.Physics.Closure.NSTriadKNLuoSmoothLPMomentScalingExact
 import DASHI.Physics.Closure.NSTriadKNLuoParabolicCutoffTimeModulusExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteBKMTimeShellFubiniExact
+import DASHI.Physics.Closure.NSTriadKNWeakTypeVolumeStarvationNoGoExact
+import DASHI.Physics.Closure.NSTriadKNAirWaterTangentialStressAsymmetryExact
 
 round8BiotSavartContinuumRoot : Set
 round8BiotSavartContinuumRoot = ⊤
