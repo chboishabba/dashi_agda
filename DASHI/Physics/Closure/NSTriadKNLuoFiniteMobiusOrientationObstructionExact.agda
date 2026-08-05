@@ -24,9 +24,14 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteMobiusOrientationObstructionExact
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; -_)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; _/_; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+
+half : ℚ
+half = Int.+ 1 / 2
 
 flipTransport : Nat → ℚ → ℚ
 flipTransport zero value = value
@@ -56,9 +61,19 @@ valueEqualsNegativeImpliesZero :
   (value : ℚ) →
   value ≡ - value →
   value ≡ 0ℚ
-valueEqualsNegativeImpliesZero value equalsNegative
-  rewrite equalsNegative =
-  solve (value ∷ [])
+valueEqualsNegativeImpliesZero value equalsNegative =
+  let
+    doubledZero : value + value ≡ 0ℚ
+    doubledZero =
+      trans
+        (cong (λ right → value + right) equalsNegative)
+        (solve (value ∷ []))
+  in
+  trans
+    (solve (value ∷ []))
+    (trans
+      (cong (λ doubled → half * doubled) doubledZero)
+      (solve []))
 
 closedOddMonodromyForcesZero :
   (count : Nat) →
