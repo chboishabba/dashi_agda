@@ -92,8 +92,17 @@ reflectionPreservesTriadResonance
     xZero = cong V.x resonance
     yZero = cong V.y resonance
     zZero = cong V.z resonance
+
+    reflectedXZero : -(kx + px + qx) ≡ 0ℚ
+    reflectedXZero = trans (cong -_ xZero) (solve [])
+
+    reflectedYZero : -(ky + py + qy) ≡ 0ℚ
+    reflectedYZero = trans (cong -_ yZero) (solve [])
+
+    reflectedZZero : -(kz + pz + qz) ≡ 0ℚ
+    reflectedZZero = trans (cong -_ zZero) (solve [])
   in
   V.vectorExt
-    (trans (solve (kx ∷ px ∷ qx ∷ [])) (cong -_ xZero))
-    (trans (solve (ky ∷ py ∷ qy ∷ [])) (cong -_ yZero))
-    (trans (solve (kz ∷ pz ∷ qz ∷ [])) (cong -_ zZero))
+    (trans (solve (kx ∷ px ∷ qx ∷ [])) reflectedXZero)
+    (trans (solve (ky ∷ py ∷ qy ∷ [])) reflectedYZero)
+    (trans (solve (kz ∷ pz ∷ qz ∷ [])) reflectedZZero)
