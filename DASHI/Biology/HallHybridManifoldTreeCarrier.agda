@@ -125,11 +125,7 @@ data SemanticRoot : Set where
   biologicalRoot : SemanticRoot
 
 semanticRoot : HybridVisualPoint → SemanticRoot
-semanticRoot habitualChartOrigin = architecturalRoot
-semanticRoot habitualChartNeighbour = architecturalRoot
-semanticRoot nearbyBranchOrigin = architecturalRoot
-semanticRoot crossBranchNeighbour = biologicalRoot
-semanticRoot _ = architecturalRoot
+semanticRoot point = architecturalRoot
 
 sameRootCanHaveNonzeroHybridDistance :
   semanticRoot habitualChartOrigin
