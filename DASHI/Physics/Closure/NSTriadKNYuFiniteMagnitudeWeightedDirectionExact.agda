@@ -148,97 +148,125 @@ anchorMinimumWeightedDirectionBound dataSet =
 record OtherMinimumData : Set where
   constructor other-minimum-data
   field
-    anchor other directionGap increment upper : ℚ
-    squareAnchorNonnegative : 0ℚ ≤ anchor * anchor
-    upperMultiplierNonnegative : 0ℚ ≤ two * anchor * increment
+    otherBranchAnchor otherBranchOther : ℚ
+    otherBranchDirectionGap otherBranchIncrement otherBranchUpper : ℚ
+    otherSquareAnchorNonnegative :
+      0ℚ ≤ otherBranchAnchor * otherBranchAnchor
+    otherUpperMultiplierNonnegative :
+      0ℚ ≤ two * otherBranchAnchor * otherBranchIncrement
     otherDirectionBound :
-      other * directionGap ≤ two * increment
-    anchorMagnitudeBound : anchor ≤ upper
+      otherBranchOther * otherBranchDirectionGap
+      ≤ two * otherBranchIncrement
+    otherAnchorMagnitudeBound :
+      otherBranchAnchor ≤ otherBranchUpper
 
 open OtherMinimumData public
 
 otherMinimumWeightedDirectionBound :
   (dataSet : OtherMinimumData) →
   weightedDirectionDefect
-    (anchor dataSet) (other dataSet) (directionGap dataSet)
+    (otherBranchAnchor dataSet)
+    (otherBranchOther dataSet)
+    (otherBranchDirectionGap dataSet)
   ≤ weightedIncrementEnvelope
-      (upper dataSet) (anchor dataSet) (increment dataSet)
+      (otherBranchUpper dataSet)
+      (otherBranchAnchor dataSet)
+      (otherBranchIncrement dataSet)
 otherMinimumWeightedDirectionBound dataSet =
   let
     firstRaw :
-      (anchor dataSet * anchor dataSet)
-        * (other dataSet * directionGap dataSet)
-      ≤ (anchor dataSet * anchor dataSet)
-        * (two * increment dataSet)
+      (otherBranchAnchor dataSet * otherBranchAnchor dataSet)
+        * (otherBranchOther dataSet * otherBranchDirectionGap dataSet)
+      ≤ (otherBranchAnchor dataSet * otherBranchAnchor dataSet)
+        * (two * otherBranchIncrement dataSet)
     firstRaw =
       let
         instance
-          squareAnchorIsNonnegative =
-            nonNegative (squareAnchorNonnegative dataSet)
+          otherSquareAnchorIsNonnegative =
+            nonNegative (otherSquareAnchorNonnegative dataSet)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
-        (anchor dataSet * anchor dataSet)
+        (otherBranchAnchor dataSet * otherBranchAnchor dataSet)
         (otherDirectionBound dataSet)
 
     first :
       weightedDirectionDefect
-        (anchor dataSet) (other dataSet) (directionGap dataSet)
-      ≤ two * anchor dataSet * anchor dataSet * increment dataSet
+        (otherBranchAnchor dataSet)
+        (otherBranchOther dataSet)
+        (otherBranchDirectionGap dataSet)
+      ≤ two
+        * otherBranchAnchor dataSet
+        * otherBranchAnchor dataSet
+        * otherBranchIncrement dataSet
     first =
       subst
         (λ lower →
-          lower ≤ two * anchor dataSet * anchor dataSet * increment dataSet)
+          lower
+          ≤ two
+            * otherBranchAnchor dataSet
+            * otherBranchAnchor dataSet
+            * otherBranchIncrement dataSet)
         (solve
-          ( anchor dataSet
-          ∷ other dataSet
-          ∷ directionGap dataSet
+          ( otherBranchAnchor dataSet
+          ∷ otherBranchOther dataSet
+          ∷ otherBranchDirectionGap dataSet
           ∷ []))
         (subst
           (λ upperValue →
-            (anchor dataSet * anchor dataSet)
-              * (other dataSet * directionGap dataSet)
+            (otherBranchAnchor dataSet * otherBranchAnchor dataSet)
+              * (otherBranchOther dataSet * otherBranchDirectionGap dataSet)
             ≤ upperValue)
           (solve
-            ( anchor dataSet
-            ∷ increment dataSet
+            ( otherBranchAnchor dataSet
+            ∷ otherBranchIncrement dataSet
             ∷ []))
           firstRaw)
 
     secondRaw :
-      (two * anchor dataSet * increment dataSet) * anchor dataSet
-      ≤ (two * anchor dataSet * increment dataSet) * upper dataSet
+      (two * otherBranchAnchor dataSet * otherBranchIncrement dataSet)
+        * otherBranchAnchor dataSet
+      ≤ (two * otherBranchAnchor dataSet * otherBranchIncrement dataSet)
+        * otherBranchUpper dataSet
     secondRaw =
       let
         instance
-          upperMultiplierIsNonnegative =
-            nonNegative (upperMultiplierNonnegative dataSet)
+          otherUpperMultiplierIsNonnegative =
+            nonNegative (otherUpperMultiplierNonnegative dataSet)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
-        (two * anchor dataSet * increment dataSet)
-        (anchorMagnitudeBound dataSet)
+        (two * otherBranchAnchor dataSet * otherBranchIncrement dataSet)
+        (otherAnchorMagnitudeBound dataSet)
 
     second :
-      two * anchor dataSet * anchor dataSet * increment dataSet
+      two
+        * otherBranchAnchor dataSet
+        * otherBranchAnchor dataSet
+        * otherBranchIncrement dataSet
       ≤ weightedIncrementEnvelope
-          (upper dataSet) (anchor dataSet) (increment dataSet)
+          (otherBranchUpper dataSet)
+          (otherBranchAnchor dataSet)
+          (otherBranchIncrement dataSet)
     second =
       subst
         (λ lower →
           lower
           ≤ weightedIncrementEnvelope
-              (upper dataSet) (anchor dataSet) (increment dataSet))
+              (otherBranchUpper dataSet)
+              (otherBranchAnchor dataSet)
+              (otherBranchIncrement dataSet))
         (solve
-          ( anchor dataSet
-          ∷ increment dataSet
+          ( otherBranchAnchor dataSet
+          ∷ otherBranchIncrement dataSet
           ∷ []))
         (subst
           (λ upperValue →
-            (two * anchor dataSet * increment dataSet) * anchor dataSet
+            (two * otherBranchAnchor dataSet * otherBranchIncrement dataSet)
+              * otherBranchAnchor dataSet
             ≤ upperValue)
           (solve
-            ( upper dataSet
-            ∷ anchor dataSet
-            ∷ increment dataSet
+            ( otherBranchUpper dataSet
+            ∷ otherBranchAnchor dataSet
+            ∷ otherBranchIncrement dataSet
             ∷ []))
           secondRaw)
   in
