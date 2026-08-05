@@ -30,7 +30,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoAngularStrainDisplayedFormulaZeroExact 
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _+_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 import Data.Integer.Base as Int
 
