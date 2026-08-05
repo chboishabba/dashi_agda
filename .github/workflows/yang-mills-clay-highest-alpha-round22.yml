@@ -1,9 +1,10 @@
 name: Yang-Mills Clay highest-alpha round 22
 
 on:
-  pull_request:
+  push:
     branches:
-      - 'agent/ym-clay-alpha-round21-literal-hessian-cancellation'
+      - 'agent/ym-clay-alpha-round22-hodge-wilson-repair'
+  pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33RationalQuaternionWilsonSecondVariationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintSecondVariationExact.agda'
@@ -17,7 +18,6 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33WilsonSharpBudgetCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalRationalWilsonPlaquetteJetExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound22Validation.agda'
       - 'scripts/check_yang_mills_clay_highest_alpha_round22.sh'
@@ -39,5 +39,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check rational Wilson, physical W9, periodic Hodge and boundary coercivity
+      - name: Check rational Wilson, periodic Hodge and boundary-aware coercivity
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round22.sh
