@@ -56,20 +56,17 @@ collapsedThicknessIs7 :
   weightedThickness collapsedResidual ≡ 7
 collapsedThicknessIs7 = refl
 
-collapsedNoThickerThanPartial :
-  weightedThickness collapsedResidual
-  ≤
+collapsedPlusTwelveIsPartial :
+  weightedThickness collapsedResidual + 12
+  ≡
   weightedThickness partiallyCollapsedResidual
-collapsedNoThickerThanPartial =
-  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))))
+collapsedPlusTwelveIsPartial = refl
 
-partialNoThickerThanUnstructured :
-  weightedThickness partiallyCollapsedResidual
-  ≤
+partialPlusThirtyNineIsUnstructured :
+  weightedThickness partiallyCollapsedResidual + 39
+  ≡
   weightedThickness unstructuredResidual
-partialNoThickerThanUnstructured =
-  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s z≤n))))))))))))))))))
+partialPlusThirtyNineIsUnstructured = refl
 
 collapsedHighDepthTailIsZero :
   highDepthTail collapsedResidual ≡ 0
