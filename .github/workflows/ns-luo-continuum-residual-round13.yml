@@ -1,0 +1,49 @@
+name: NS Luo continuum residual round 13
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/**'
+      - 'scripts/check_ns_luo_continuum_residual_round13.sh'
+      - 'scripts/check_ns_luo_geometric_depletion_round12.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/ns-luo-continuum-residual-round13.yml'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check continuum residual round thirteen
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/ns-luo-round13-agda.log"
+            export AGDA_JOBS=4
+            bash scripts/check_ns_luo_continuum_residual_round13.sh
+          ) > ns-luo-round13-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 300 ns-luo-round13-check.log
+          exit 0
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-luo-round13-logs
+          path: |
+            ns-luo-round13-check.log
+            ns-luo-round13-agda.log
+          if-no-files-found: warn
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
