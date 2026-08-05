@@ -175,7 +175,8 @@ replaceHeadByRefinement :
       (map (weightedOrderedDefect h k) fine)
       +q finiteOrderedSimpleIntegral h k tail
 replaceHeadByRefinement h k coarse fine tail refinement =
-  cong (_+q finiteOrderedSimpleIntegral h k tail)
+  cong
+    (λ head → head +q finiteOrderedSimpleIntegral h k tail)
     (integrandRefinement refinement)
 
 finiteQuaternionSimpleDuhamelLevel : ProofLevel
