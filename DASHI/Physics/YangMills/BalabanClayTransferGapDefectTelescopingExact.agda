@@ -21,7 +21,7 @@ module DASHI.Physics.YangMills.BalabanClayTransferGapDefectTelescopingExact wher
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -68,20 +68,26 @@ finiteDefectChainTelescopes :
   DefectChain algebra initial errors final →
   LessEqual algebra initial
     (addValue algebra final (sumDefects algebra errors))
-finiteDefectChainTelescopes {algebra} stop =
+finiteDefectChainTelescopes
+    {algebra} {initial = gap} stop =
   subst
-    (λ upper → LessEqual algebra _ upper)
-    (sym (addIdentityRight algebra _))
-    (lessEqualReflexive algebra _)
-finiteDefectChainTelescopes {algebra} (step firstStep tail) =
+    (λ upper → LessEqual algebra gap upper)
+    (sym (addIdentityRight algebra gap))
+    (lessEqualReflexive algebra gap)
+finiteDefectChainTelescopes
+    {algebra}
+    (step {next = next} {final = final}
+      {error = error} {errors = errors} firstStep tail) =
   let
     tailBound = finiteDefectChainTelescopes tail
-    liftedTail = addMonotoneRight algebra _ tailBound
-    associated = addAssociative algebra _ _ _
+    liftedTail = addMonotoneRight algebra error tailBound
+    associated = addAssociative algebra
+      final (sumDefects algebra errors) error
   in
   lessEqualTransitive algebra firstStep
     (subst
-      (λ upper → LessEqual algebra _ upper)
+      (λ upper →
+        LessEqual algebra (addValue algebra next error) upper)
       associated
       liftedTail)
 
