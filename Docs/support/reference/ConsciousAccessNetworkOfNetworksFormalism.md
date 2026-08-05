@@ -207,6 +207,7 @@ Thus deterministic microdynamics need not induce closed deterministic macrodynam
 - Battiston, Nicosia, Chavez and Latora, *Multilayer motif analysis of brain networks*, DOI `10.1063/1.4979282`;
 - Carhart-Harris and Friston, *REBUS and the Anarchic Brain*, DOI `10.1124/pr.118.017160`;
 - Carhart-Harris et al., *The entropic brain*, DOI `10.3389/fnhum.2014.00020`;
+- Tagliazucchi et al., *Enhanced repertoire of brain dynamical states during the psychedelic experience*, DOI `10.1002/hbm.22562`;
 - Power et al., *Grokking*, arXiv DOI `10.48550/arXiv.2201.02177`.
 
 The atlas records how each source motivates a limited bridge and what is not promoted from it.
