@@ -41,13 +41,13 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasPromotionExact wher
 -- half-gap coercivity theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _*_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; _-_; _*_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -205,7 +205,7 @@ physicalTiltDefectEntryBound :
       (physicalInverseWeight geometry)
       hessian left right ∣
   ≤ distortion geometry * ∣ hessian left right ∣
-physicalTiltDefectEntryBound geometry left right
+physicalTiltDefectEntryBound {hessian} geometry left right
   with supportedShell geometry left right
 ... | inj₁ zeroEntry
   rewrite zeroEntry = ℚP.≤-refl
@@ -213,7 +213,7 @@ physicalTiltDefectEntryBound geometry left right
   Tilt.tiltDefectEntryAbsoluteBound
     (physicalWeight geometry)
     (physicalInverseWeight geometry)
-    _
+    hessian
     (distortion geometry)
     left right
     (physicalSupportedRatioBound
@@ -231,27 +231,27 @@ physicalTiltDefectRowMassBound :
   ≤ distortion geometry
       * Tilt.absoluteRowMass
           Physical.physicalSU2Coordinates4 hessian left
-physicalTiltDefectRowMassBound geometry left =
+physicalTiltDefectRowMassBound {hessian} geometry left =
   subst
     (λ upper →
       Tilt.tiltDefectAbsoluteRowMass
         Physical.physicalSU2Coordinates4
         (physicalWeight geometry)
         (physicalInverseWeight geometry)
-        _ left
+        hessian left
       ≤ upper)
     (Tilt.sumScale
       Physical.physicalSU2Coordinates4
       (distortion geometry)
-      (λ right → ∣ _ left right ∣))
+      (λ right → ∣ hessian left right ∣))
     (Tilt.sumPointwiseBelow
       Physical.physicalSU2Coordinates4
       (λ right →
         ∣ CT.diagonalTiltDefect
             (physicalWeight geometry)
             (physicalInverseWeight geometry)
-            _ left right ∣)
-      (λ right → distortion geometry * ∣ _ left right ∣)
+            hessian left right ∣)
+      (λ right → distortion geometry * ∣ hessian left right ∣)
       (physicalTiltDefectEntryBound geometry left))
 
 physicalTiltDefectBelowHalfGap :
@@ -266,10 +266,9 @@ physicalTiltDefectBelowHalfGap :
   ≤ Tilt.p33HalfGap
 physicalTiltDefectBelowHalfGap geometry left =
   let
-    open import Data.Rational.Base as ℚB using (NonNegative)
     instance
-      distortionNN : ℚB.NonNegative (distortion geometry)
-      distortionNN = ℚB.nonNegative (distortionNonnegative geometry)
+      distortionNN : NonNegative (distortion geometry)
+      distortionNN = ℚ.nonNegative (distortionNonnegative geometry)
   in
   ℚP.≤-trans
     (physicalTiltDefectRowMassBound geometry left)
@@ -324,11 +323,11 @@ physicalTiltedRightInverse :
       (physicalWeight (geometry resolvent))
       (physicalInverseWeight (geometry resolvent))
       green)
-physicalTiltedRightInverse resolvent =
+physicalTiltedRightInverse {hessian} {green} resolvent =
   CT.conjugatedRightInverseWithStableIdentity
     Physical.physicalSU2Coordinates4
     Calibration.identityEntry
-    _ _
+    hessian green
     (physicalWeight (geometry resolvent))
     (physicalInverseWeight (geometry resolvent))
     (physicalWeightInverseLaw (geometry resolvent))
@@ -342,12 +341,12 @@ physicalGreenKernelDecay :
   ∣ green (root (geometry resolvent)) target ∣
   ≤ Survival.p33InverseScale
       * physicalWeight (geometry resolvent) target
-physicalGreenKernelDecay resolvent target =
+physicalGreenKernelDecay {green = green} resolvent target =
   CT.combesThomasKernelDecayFromTiltedEntry
     (physicalWeight (geometry resolvent))
     (physicalInverseWeight (geometry resolvent))
     (physicalWeightInverseLaw (geometry resolvent))
-    _
+    green
     (root (geometry resolvent))
     target
     Survival.p33InverseScale
