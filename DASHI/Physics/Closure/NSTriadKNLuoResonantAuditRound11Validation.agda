@@ -10,6 +10,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoResonantAuditRound11Validation where
 -- * a literal two-index high--high to low carrier;
 -- * packet, kernel-diagonal and L2-normalization scale audits;
 -- * separation of wave-packet and parabolic time windows;
+-- * the Schur/Young mapping-exponent audit for the TT* step;
+-- * the periodic sub-unit-cutoff geometry audit;
 -- * the finite convolution support-loss witness;
 -- * the exact cross-term obstruction to global Pythagoras;
 -- * corrected wide+narrow assembly by a sum rather than a minimum;
@@ -32,6 +34,8 @@ import DASHI.Physics.Closure.NSTriadKNCherevanScaleCovarianceNoGoExact
 import DASHI.Physics.Closure.NSTriadKNCherevanTwoIndexHighHighLowExact
 import DASHI.Physics.Closure.NSTriadKNCherevanPacketScaleAuditExact
 import DASHI.Physics.Closure.NSTriadKNCherevanWindowScaleNoGoExact
+import DASHI.Physics.Closure.NSTriadKNCherevanSchurYoungLaneAuditExact
+import DASHI.Physics.Closure.NSTriadKNCherevanPeriodicCutoffAuditExact
 import DASHI.Physics.Closure.NSTriadKNCherevanFiniteConvolutionSupportLossExact
 import DASHI.Physics.Closure.NSTriadKNCherevanFiniteOrthogonalityAuditExact
 import DASHI.Physics.Closure.NSTriadKNCherevanWideNarrowAssemblyExact
