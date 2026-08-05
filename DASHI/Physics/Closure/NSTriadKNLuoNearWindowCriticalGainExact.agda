@@ -18,9 +18,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoNearWindowCriticalGainExact where
 -- PURPOSE
 -- The round-seven no-go proves that the energy-only newest-layer model is
 -- exactly 2 lambda_q.  This module computes, rather than merely names, the
--- missing scale-sensitive gain.  The factor
+-- missing scale-sensitive gain.  The factor represented constructively by
 --
---   gamma_q = 1 / (128 lambda_q)
+--   gamma_q = (1/128) 2^{-q} = 1 / (128 lambda_q)
 --
 -- turns the obstruction into the desired half-budget:
 --
@@ -38,7 +38,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEnergyCriticalScalingGapExact as Scale
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearWindowHalfKernelExact as Near
@@ -53,16 +53,6 @@ oneSixtyFourth = Int.+ 1 / 64
 requiredCrossModeGain : Nat → ℚ
 requiredCrossModeGain shell =
   oneHundredTwentyEighth * Near.windowRoot shell
-
-gainMeaning :
-  (shell : Nat) →
-  requiredCrossModeGain shell
-  ≡ oneHundredTwentyEighth / Scale.dyadicScale shell
-gainMeaning shell =
-  solve
-    ( Near.windowRoot shell
-    ∷ Scale.dyadicScale shell
-    ∷ [])
 
 requiredGainClosesNearHalfBudget :
   (shell : Nat) →
