@@ -23,12 +23,8 @@ module DASHI.Physics.Closure.NSTriadKNYuFiniteFilteredSurplusAssemblyExact where
 -- being mistaken for complete comparable-shell closure.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
-open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNYuFiniteNearFieldCoercivityExact as Near
 
@@ -40,6 +36,18 @@ record FilteredSurplusBudget : Set where
 
 open FilteredSurplusBudget public
 
+nearFieldEnvelope : FilteredSurplusBudget → ℚ
+nearFieldEnvelope budget =
+  Near.retainedDiffusionCoefficient (absorbedNearField budget)
+    * Near.diffusion
+        (Near.coercivity (absorbedNearField budget))
+  + (Near.geometricCoefficient
+      (Near.coercivity (absorbedNearField budget))
+      * Near.reservoirCoefficient
+          (Near.coercivity (absorbedNearField budget)))
+    * Near.reservoir
+        (Near.coercivity (absorbedNearField budget))
+
 totalPositiveSurplus : FilteredSurplusBudget → ℚ
 totalPositiveSurplus budget =
   Near.positiveNearField
@@ -50,15 +58,7 @@ totalPositiveSurplus budget =
 
 coerciveSurplusEnvelope : FilteredSurplusBudget → ℚ
 coerciveSurplusEnvelope budget =
-  Near.retainedDiffusionCoefficient (absorbedNearField budget)
-    * Near.diffusion
-        (Near.coercivity (absorbedNearField budget))
-  + (Near.geometricCoefficient
-      (Near.coercivity (absorbedNearField budget))
-      * Near.reservoirCoefficient
-          (Near.coercivity (absorbedNearField budget)))
-    * Near.reservoir
-        (Near.coercivity (absorbedNearField budget))
+  nearFieldEnvelope budget
   + farFieldStrain budget
   + commutatorForcing budget
   + localizationBudget budget
@@ -67,64 +67,10 @@ filteredSurplusAssembly :
   (budget : FilteredSurplusBudget) →
   totalPositiveSurplus budget ≤ coerciveSurplusEnvelope budget
 filteredSurplusAssembly budget =
-  let
-    nearBound =
-      Near.absorbedNearFieldCoercivity (absorbedNearField budget)
-
-    firstAddition :
-      Near.positiveNearField
-        (Near.coercivity (absorbedNearField budget))
-        + farFieldStrain budget
-      ≤ (Near.retainedDiffusionCoefficient (absorbedNearField budget)
-          * Near.diffusion
-              (Near.coercivity (absorbedNearField budget))
-        + (Near.geometricCoefficient
-            (Near.coercivity (absorbedNearField budget))
-            * Near.reservoirCoefficient
-                (Near.coercivity (absorbedNearField budget)))
-          * Near.reservoir
-              (Near.coercivity (absorbedNearField budget)))
-        + farFieldStrain budget
-    firstAddition =
-      ℚₚ.+-mono-≤ nearBound ℚₚ.≤-refl
-
-    secondAddition =
-      ℚₚ.+-mono-≤ firstAddition ℚₚ.≤-refl
-
-    thirdAddition =
-      ℚₚ.+-mono-≤ secondAddition ℚₚ.≤-refl
-
-    targetMeaning :
-      ((Near.retainedDiffusionCoefficient (absorbedNearField budget)
-          * Near.diffusion
-              (Near.coercivity (absorbedNearField budget))
-        + (Near.geometricCoefficient
-            (Near.coercivity (absorbedNearField budget))
-            * Near.reservoirCoefficient
-                (Near.coercivity (absorbedNearField budget)))
-          * Near.reservoir
-              (Near.coercivity (absorbedNearField budget)))
-        + farFieldStrain budget)
-        + commutatorForcing budget)
-        + localizationBudget budget
-      ≡ coerciveSurplusEnvelope budget
-    targetMeaning =
-      solve
-        ( Near.retainedDiffusionCoefficient (absorbedNearField budget)
-        ∷ Near.diffusion
-            (Near.coercivity (absorbedNearField budget))
-        ∷ Near.geometricCoefficient
-            (Near.coercivity (absorbedNearField budget))
-        ∷ Near.reservoirCoefficient
-            (Near.coercivity (absorbedNearField budget))
-        ∷ Near.reservoir
-            (Near.coercivity (absorbedNearField budget))
-        ∷ farFieldStrain budget
-        ∷ commutatorForcing budget
-        ∷ localizationBudget budget
-        ∷ [])
-  in
-  subst
-    (λ upper → totalPositiveSurplus budget ≤ upper)
-    targetMeaning
-    thirdAddition
+  ℚₚ.+-mono-≤
+    (ℚₚ.+-mono-≤
+      (ℚₚ.+-mono-≤
+        (Near.absorbedNearFieldCoercivity (absorbedNearField budget))
+        ℚₚ.≤-refl)
+      ℚₚ.≤-refl)
+    ℚₚ.≤-refl
