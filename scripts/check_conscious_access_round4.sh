@@ -14,6 +14,7 @@ FILES=(
   DASHI/Biology/TriadicKernelLiftQuotientExact.agda
   DASHI/Biology/TriadicCarryResidualExact.agda
   DASHI/Biology/PadicCylinderLODReasoningField.agda
+  DASHI/Biology/HybridPadicReasoningFieldBridgeExact.agda
   DASHI/Biology/CausalHierarchicalChartResidualExact.agda
   DASHI/Biology/FiniteCrystallisationModeSelectionExact.agda
   DASHI/Biology/FiniteWaveShellGradientExact.agda
