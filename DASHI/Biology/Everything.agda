@@ -107,5 +107,15 @@ import DASHI.Biology.VisualMotifTransitionOperator
 import DASHI.Biology.PostAcuteVisualAdaptation
 import DASHI.Biology.HallOfHallsCoalition
 import DASHI.Biology.PsychedelicMorphogeneticGeometryBoundary
+import DASHI.Biology.NaturalGrowthAlgorithmAtlas
+import DASHI.Biology.SignedDistanceBooleanGeometry
+import DASHI.Biology.HallHybridManifoldTreeCarrier
+import DASHI.Biology.VisualPathBraidResidual
+import DASHI.Biology.QuantitativeStateDynamics
+import DASHI.Biology.SymbolicCompromiseMinimizer
+import DASHI.Biology.StableUnconsciousInvariantRegime
+import DASHI.Biology.DynamicCoalitionPhaseEmergence
+import DASHI.Biology.ConsciousAccessRound3FullBoundary
 import DASHI.Biology.ConsciousAccessRound3SourceAtlas
 import DASHI.Biology.ConsciousAccessRound3Regression
+import DASHI.Biology.ConsciousAccessRound3ExtendedRegression
