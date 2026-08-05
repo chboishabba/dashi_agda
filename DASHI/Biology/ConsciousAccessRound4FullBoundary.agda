@@ -6,6 +6,7 @@ open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Lift
 import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
+import DASHI.Biology.HallHybridManifoldTreeCarrier as Hall
 import DASHI.Biology.HybridPadicReasoningFieldBridgeExact as Hybrid
 import DASHI.Biology.CausalHierarchicalChartResidualExact as Chart
 import DASHI.Biology.FiniteCrystallisationModeSelectionExact as Modes
@@ -59,7 +60,7 @@ record ConsciousAccessRound4Boundary : Set where
       LOD.aggregateNat LOD.canonicalChildMasses ≡ 9
 
     hybridLocalChartGetsSeparateVoxelAxis :
-      Hybrid.hybridVoxel3 Hybrid.Hall.habitualChartNeighbour
+      Hybrid.hybridVoxel3 Hall.habitualChartNeighbour
       ≡
       LOD.voxel3 0 0 1
 
