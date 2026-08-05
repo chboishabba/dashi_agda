@@ -8,7 +8,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound18Validation where
 --   * four-dimensional Lagrange, Cauchy--Schwarz and chord-triangle algebra
 --       from one explicit Bishop square-root backend;
 --   * concrete noncommutative Duhamel telescoping and finite simple integrals;
---   * literal CMP109 path derivative support;
+--   * literal CMP109 path derivative support, including orientation-sensitive
+--       positive/negative periodic bond occurrences;
 --   * literal Wilson + gauge + constraint second variation;
 --   * promotion through the five configured Hessian channels to 1/32;
 --   * the explicit side-four residual R=I-HG* and numerical calibration
@@ -29,6 +30,7 @@ import DASHI.Physics.YangMills.BalabanP33BishopR4ChordMetricFromSquareRootExact
 import DASHI.Physics.YangMills.BalabanP33QuaternionDuhamelIntegrandTelescopeExact
 import DASHI.Physics.YangMills.BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact
 import DASHI.Physics.YangMills.BalabanP33CMP109LiteralPathDerivativeKernelExact
+import DASHI.Physics.YangMills.BalabanP33CMP109PeriodicContourEdgeKernelExact
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact
 import DASHI.Physics.YangMills.BalabanP33LiteralHessianFiveChannelPromotionExact
 import DASHI.Physics.YangMills.BalabanP33LiteralResidualKernelNumericalCalibrationExact
