@@ -26,6 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalStepBochnerIntegralExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_; here; there)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -170,13 +171,24 @@ splitCellIntegralInvariant
 constantStepIntegral :
   (cells : List VectorStepCell) →
   (constant : V.Vector3) →
-  ((cell : VectorStepCell) → value cell ≡ constant) →
+  ((cell : VectorStepCell) → cell ∈ cells → value cell ≡ constant) →
   stepIntegral cells ≡ V.scale (totalDuration cells) constant
 constantStepIntegral [] (V.v3 cx cy cz) pointwise =
   V.vectorExt (solve (cx ∷ [])) (solve (cy ∷ [])) (solve (cz ∷ []))
-constantStepIntegral (cell ∷ cells) constant pointwise
-  rewrite pointwise cell
-        | constantStepIntegral cells constant pointwise =
+constantStepIntegral (cell ∷ cells) constant pointwise =
+  let
+    headMeaning : value cell ≡ constant
+    headMeaning = pointwise cell (here refl)
+
+    tailPointwise :
+      (tailCell : VectorStepCell) →
+      tailCell ∈ cells →
+      value tailCell ≡ constant
+    tailPointwise tailCell membership =
+      pointwise tailCell (there membership)
+  in
+  rewrite headMeaning
+        | constantStepIntegral cells constant tailPointwise =
   let
     constantCoordinates = constant
   in
