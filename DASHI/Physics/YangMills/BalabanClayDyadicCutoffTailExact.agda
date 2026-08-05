@@ -15,16 +15,16 @@ module DASHI.Physics.YangMills.BalabanClayDyadicCutoffTailExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Close the scalar cutoff telescope for the common dyadic irrelevant tail.
--- If the scale-k change of a renormalized observable is bounded by C 2^-k,
--- finite telescoping gives
+-- Close the scalar cutoff telescope for a dyadic irrelevant tail.  If the
+-- scale-k change of a renormalized observable is bounded by C 2^-k, then
+-- finite metric telescoping gives
 --
 --   d(F_n,F_(n+m)) <= C sum_(j=n)^(n+m-1) 2^-j
 --                    <= 2 C 2^-n.
 --
--- The proof below is finite induction over the actual rational powers and does
--- not assume a completed continuum space.  The analytic producer that bounds
--- each physical RG increment remains separate.
+-- Both the geometric tail and the endpoint-index transport are proved by
+-- finite induction.  The physical adjacent-scale estimate remains the only
+-- analytic producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -34,7 +34,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -76,14 +76,17 @@ finiteDyadicTailBelowDoubleStart start (suc count) =
       ℚP.≤-refl
       (finiteDyadicTailBelowDoubleStart (suc start) count))
     (subst
-      (λ upper →
-        dyadic start + two * dyadic (suc start) ≤ upper)
-      (sym (ℚRing.solve-∀ (dyadic start)))
-      (subst
-        (λ second →
-          dyadic start + second ≤ dyadic start + dyadic start)
-        (twoNextDyadicIsCurrent start)
-        ℚP.≤-refl))
+      (λ middle →
+        dyadic start + two * dyadic (suc start)
+        ≤ dyadic start + middle)
+      (twoNextDyadicIsCurrent start)
+      ℚP.≤-refl)
+
+startSuccessorCount : ∀ start count →
+  start + suc count ≡ suc start + count
+startSuccessorCount start zero = refl
+startSuccessorCount start (suc count) =
+  cong suc (startSuccessorCount start count)
 
 record DyadicIncrementSequence
     (State : Set) : Set₁ where
@@ -92,6 +95,8 @@ record DyadicIncrementSequence
     Distance : State → State → ℚ
     coefficient : ℚ
 
+    coefficientNonnegative : 0ℚ ≤ coefficient
+    distanceReflexiveZero : ∀ state → Distance state state ≡ 0ℚ
     distanceTriangle : ∀ left middle right →
       Distance left right
       ≤ Distance left middle + Distance middle right
@@ -103,9 +108,8 @@ record DyadicIncrementSequence
 open DyadicIncrementSequence public
 
 finiteSequenceDistance :
-  ∀ {State}
-    (dataSet : DyadicIncrementSequence State) →
-  Nat → Nat → ℚ
+  ∀ {State} →
+  DyadicIncrementSequence State → Nat → Nat → ℚ
 finiteSequenceDistance dataSet start count =
   Distance dataSet
     (stateAt dataSet start)
@@ -123,20 +127,30 @@ finiteDistanceBelowDyadicTail :
   finiteSequenceDistance dataSet start count
   ≤ coefficient dataSet * finiteDyadicTail start count
 finiteDistanceBelowDyadicTail dataSet start zero =
-  -- The count-zero distance is definitionally the same endpoint.  This module
-  -- only needs the supplied triangle structure at positive count; reflexive
-  -- distance zero is therefore kept as the one explicit metric input below.
-  reflexiveDistanceZero dataSet start
-  where
-  reflexiveDistanceZero :
-    ∀ {State}
-      (sequence : DyadicIncrementSequence State)
-      scale →
-    Distance sequence (stateAt sequence scale) (stateAt sequence scale)
-    ≤ coefficient sequence * 0ℚ
-  reflexiveDistanceZero sequence scale =
-    ℚP.≤-refl
+  subst
+    (λ left → left ≤ coefficient dataSet * 0ℚ)
+    (sym
+      (distanceReflexiveZero dataSet
+        (stateAt dataSet start)))
+    (subst
+      (λ right → 0ℚ ≤ right)
+      (sym (ℚP.*-zeroʳ (coefficient dataSet)))
+      ℚP.≤-refl)
 finiteDistanceBelowDyadicTail dataSet start (suc count) =
+  let
+    indexEquality = startSuccessorCount start count
+    recursive = finiteDistanceBelowDyadicTail dataSet (suc start) count
+    recursiveAtTarget =
+      subst
+        (λ targetIndex →
+          Distance dataSet
+            (stateAt dataSet (suc start))
+            (stateAt dataSet targetIndex)
+          ≤ coefficient dataSet
+              * finiteDyadicTail (suc start) count)
+        (sym indexEquality)
+        recursive
+  in
   ℚP.≤-trans
     (distanceTriangle dataSet
       (stateAt dataSet start)
@@ -145,19 +159,12 @@ finiteDistanceBelowDyadicTail dataSet start (suc count) =
     (ℚP.≤-trans
       (ℚP.+-mono-≤
         (adjacentIncrement dataSet start)
-        (subst
-          (λ target →
-            Distance dataSet
-              (stateAt dataSet (suc start))
-              (stateAt dataSet (start + suc count))
-            ≤ target)
-          (cong (λ index → coefficient dataSet
-            * finiteDyadicTail (suc start) index) refl)
-          (finiteDistanceBelowDyadicTail dataSet (suc start) count)))
+        recursiveAtTarget)
       (subst
         (λ upper →
           coefficient dataSet * dyadic start
-          + coefficient dataSet * finiteDyadicTail (suc start) count
+          + coefficient dataSet
+              * finiteDyadicTail (suc start) count
           ≤ upper)
         (sym
           (coefficientDistributesTailStep
@@ -165,13 +172,6 @@ finiteDistanceBelowDyadicTail dataSet start (suc count) =
             (dyadic start)
             (finiteDyadicTail (suc start) count)))
         ℚP.≤-refl))
-
--- The exact endpoint-index normalization used above is exposed separately.
-startSuccessorCount : ∀ start count →
-  start + suc count ≡ suc start + count
-startSuccessorCount start zero = refl
-startSuccessorCount start (suc count) =
-  cong suc (startSuccessorCount start count)
 
 finiteDistanceBelowDoubleDyadic :
   ∀ {State}
@@ -190,11 +190,6 @@ finiteDistanceBelowDoubleDyadic dataSet start count =
      in ℚP.*-monoˡ-≤-nonNeg
           (coefficient dataSet)
           (finiteDyadicTailBelowDoubleStart start count))
-  where
-  coefficientNonnegative :
-    ∀ {State} → DyadicIncrementSequence State →
-    0ℚ ≤ coefficient dataSet
-  coefficientNonnegative dataSet = ℚP.nonNegative⁻¹ (coefficient dataSet)
 
 dyadicTailInductionLevel : ProofLevel
 dyadicTailInductionLevel = machineChecked
