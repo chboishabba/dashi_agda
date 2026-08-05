@@ -28,10 +28,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoBiotSavartLerayFactorisationExact where
 -- factorisation needed before any Hilbert-space compactness theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
 import DASHI.Physics.Closure.NSTriadKNFourierBiotSavartExact as BS
@@ -88,7 +88,9 @@ biotSavartLerayFactorisation :
   V.project modeData
     (BS.biotSavart modeData (V.project modeData omega))
   ≡ BS.biotSavart modeData omega
-biotSavartLerayFactorisation modeData omega
-  rewrite biotSavartIgnoresLongitudinalSource modeData omega
-        | biotSavartRangeAlreadyProjected modeData omega =
-  refl
+biotSavartLerayFactorisation modeData omega =
+  trans
+    (cong
+      (V.project modeData)
+      (biotSavartIgnoresLongitudinalSource modeData omega))
+    (biotSavartRangeAlreadyProjected modeData omega)
