@@ -133,26 +133,28 @@ open ExplicitFourShiftAbsorptionData public
 
 explicitAbsorbedCutoff :
   ExplicitFourShiftAbsorptionData → Block.FiniteAbsorbedCutoffData
-explicitAbsorbedCutoff data = record
-  { cutoffData = cutoffData data
+explicitAbsorbedCutoff absorptionData = record
+  { cutoffData = cutoffData absorptionData
   ; smallness = smallness
   ; absorptionCoefficient = absorbedCoefficient
   ; absorptionCoefficientNonnegative = absorbedCoefficientNonnegative
-  ; lowGradientBelowSmallness = lowGradientBelowOneThirtySecond data
+  ; lowGradientBelowSmallness =
+      lowGradientBelowOneThirtySecond absorptionData
   ; aggregateSmallnessBelowAbsorption =
       aggregateSmallnessBelowAbsorption
   }
 
 explicitFourPieceAbsorption :
-  (data : ExplicitFourShiftAbsorptionData) →
-  Cutoff.outputEnergy (cutoffData data)
-    + Cutoff.dissipation (cutoffData data)
-  ≤ Cutoff.boundaryEnergy (cutoffData data)
+  (absorptionData : ExplicitFourShiftAbsorptionData) →
+  Cutoff.outputEnergy (cutoffData absorptionData)
+    + Cutoff.dissipation (cutoffData absorptionData)
+  ≤ Cutoff.boundaryEnergy (cutoffData absorptionData)
       + absorbedCoefficient
           * Four.weightedEnergy
-              (Cutoff.interactions (cutoffData data))
-explicitFourPieceAbsorption data =
-  Block.finiteAbsorbedCutoffInequality (explicitAbsorbedCutoff data)
+              (Cutoff.interactions (cutoffData absorptionData))
+explicitFourPieceAbsorption absorptionData =
+  Block.finiteAbsorbedCutoffInequality
+    (explicitAbsorbedCutoff absorptionData)
 
 record ExplicitFourShiftRecursionData : Set₁ where
   field
@@ -173,22 +175,24 @@ open ExplicitFourShiftRecursionData public
 
 asBlockRecursionData :
   ExplicitFourShiftRecursionData → Block.FiniteBlockRecursionData
-asBlockRecursionData data = record
-  { absorbedCutoff = explicitAbsorbedCutoff (absorptionData data)
-  ; predecessorMajorant = predecessorMajorant data
+asBlockRecursionData recursionData = record
+  { absorbedCutoff = explicitAbsorbedCutoff (absorptionData recursionData)
+  ; predecessorMajorant = predecessorMajorant recursionData
   ; boundaryCoefficient = boundaryCoefficient
   ; targetCoefficient = targetCoefficient
-  ; predecessorMajorantNonnegative = predecessorMajorantNonnegative data
+  ; predecessorMajorantNonnegative =
+      predecessorMajorantNonnegative recursionData
   ; boundaryEnergyBelowPredecessor =
-      boundaryEnergyBelowCorrectedPredecessor data
-  ; weightedEnergyBelowPredecessor = weightedEnergyBelowPredecessor data
+      boundaryEnergyBelowCorrectedPredecessor recursionData
+  ; weightedEnergyBelowPredecessor =
+      weightedEnergyBelowPredecessor recursionData
   ; combinedCoefficientBelowTarget = combinedCoefficientBelowQuarter
   }
 
 explicitFourShiftContraction :
-  (data : ExplicitFourShiftRecursionData) →
-  Cutoff.outputEnergy (cutoffData (absorptionData data))
-    + Cutoff.dissipation (cutoffData (absorptionData data))
-  ≤ targetCoefficient * predecessorMajorant data
-explicitFourShiftContraction data =
-  Block.finiteTargetBlockRecursion (asBlockRecursionData data)
+  (recursionData : ExplicitFourShiftRecursionData) →
+  Cutoff.outputEnergy (cutoffData (absorptionData recursionData))
+    + Cutoff.dissipation (cutoffData (absorptionData recursionData))
+  ≤ targetCoefficient * predecessorMajorant recursionData
+explicitFourShiftContraction recursionData =
+  Block.finiteTargetBlockRecursion (asBlockRecursionData recursionData)
