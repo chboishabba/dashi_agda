@@ -1,0 +1,28 @@
+name: conscious-access-round3
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Biology/PsychedelicVisualOperatorAlgebra.agda'
+      - 'DASHI/Biology/MorphogeneticVisualGenerator.agda'
+      - 'DASHI/Biology/RecursiveSpherePerforation.agda'
+      - 'DASHI/Biology/NestedApertureVisibility.agda'
+      - 'DASHI/Biology/LogPolarRetinotopyBridge.agda'
+      - 'DASHI/Biology/VisualMotifTransitionOperator.agda'
+      - 'DASHI/Biology/PostAcuteVisualAdaptation.agda'
+      - 'DASHI/Biology/HallOfHallsCoalition.agda'
+      - 'DASHI/Biology/PsychedelicMorphogeneticGeometryBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3SourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3Regression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'scripts/check_conscious_access_round3.sh'
+      - '.github/workflows/conscious-access-round3.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check conscious-access round three
+        run: bash scripts/check_conscious_access_round3.sh
