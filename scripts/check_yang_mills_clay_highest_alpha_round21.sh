@@ -30,6 +30,8 @@ checks=(
   'BalabanP33WilsonSharpBudgetCoercivityExact.agda:sharpWilsonBudgetBelowPhysicalFloor'
   'BalabanP33WilsonSharpBudgetCoercivityExact.agda:negateOrderReverse'
   'BalabanP33WilsonSharpBudgetCoercivityExact.agda:sharpSignedLowerImpliesPhysicalSignedLower'
+  'BalabanP33WilsonSharpBudgetCoercivityExact.agda:globalNormSqNonnegative'
+  'BalabanP33WilsonSharpBudgetCoercivityExact.agda:bondNormSqNonnegative'
   'BalabanP33WilsonSharpBudgetCoercivityExact.agda:literalHessianCoerciveFromSharpWilsonBudget'
 )
 
