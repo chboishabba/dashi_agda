@@ -39,7 +39,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -91,7 +91,8 @@ latticeExponentIsPhysicalExponent cutoff physicalMass physicalSeparation =
       physicalMass
       (dyadicSpacing cutoff)
       (refinedLatticeSeparation cutoff physicalSeparation))
-    (cong (physicalMass *_)
+    (cong
+      (λ distance → physicalMass * distance)
       (dyadicSpacingTimesRefinedSeparation cutoff physicalSeparation))
 
 record DyadicClusteringBound
