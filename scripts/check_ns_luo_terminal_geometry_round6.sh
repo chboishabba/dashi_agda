@@ -11,9 +11,11 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCancellationAbsoluteValueNoGoExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteAlignmentGramExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTraceFreeStretchCompressionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteStrainTransverseDecompositionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteMobiusOrientationObstructionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteEnergyCriticalScalingGapExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteZenoCascadeBudgetExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteCascadeEventCostExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalFarNearSplitExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDyadicHeatDampingExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePeriodicHeatKernelYoungExact.agda
