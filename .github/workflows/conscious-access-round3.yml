@@ -38,6 +38,10 @@ on:
       - '.github/workflows/conscious-access-round3.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   agda:
     runs-on: ubuntu-latest
@@ -45,3 +49,17 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check conscious-access round three
         run: bash scripts/check_conscious_access_round3.sh
+      - name: Report successful kernel check
+        if: success() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh pr comment 389 --body
+          "Round 3 Agda 2.9 kernel check passed on `${{ github.sha }}` (workflow run `${{ github.run_id }}`)."
+      - name: Report failed kernel check
+        if: failure() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh pr comment 389 --body
+          "Round 3 Agda 2.9 kernel check failed on `${{ github.sha }}` (workflow run `${{ github.run_id }}`)."
