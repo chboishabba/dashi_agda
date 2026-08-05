@@ -27,7 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteTensorHolderExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using (List)
 open import Data.Rational.Base using (ℚ; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
@@ -53,18 +53,38 @@ finiteTensorHolderSquare :
   tensorL1Squared dataSet
   ≤ leftL2Squared dataSet * rightL2Squared dataSet
 finiteTensorHolderSquare dataSet =
-  subst
-    (λ lower →
-      lower ≤ leftL2Squared dataSet * rightL2Squared dataSet)
-    (tensorMeaning dataSet)
-    (subst
-      (λ leftNorm →
-        L2.square (L2.pairDot (pointwisePairs dataSet))
-        ≤ leftNorm * rightL2Squared dataSet)
-      (leftNormMeaning dataSet)
-      (subst
+  let
+    cauchy :
+      L2.square (L2.pairDot (pointwisePairs dataSet))
+      ≤ L2.leftNormSquared (pointwisePairs dataSet)
+        * L2.rightNormSquared (pointwisePairs dataSet)
+    cauchy = L2.finiteCauchySchwarzSquared (pointwisePairs dataSet)
+
+    rightAdjusted :
+      L2.square (L2.pairDot (pointwisePairs dataSet))
+      ≤ L2.leftNormSquared (pointwisePairs dataSet)
+        * rightL2Squared dataSet
+    rightAdjusted =
+      subst
         (λ rightNorm →
           L2.square (L2.pairDot (pointwisePairs dataSet))
           ≤ L2.leftNormSquared (pointwisePairs dataSet) * rightNorm)
-        (rightNormMeaning dataSet)
-        (L2.finiteCauchySchwarzSquared (pointwisePairs dataSet))))
+        (sym (rightNormMeaning dataSet))
+        cauchy
+
+    bothAdjusted :
+      L2.square (L2.pairDot (pointwisePairs dataSet))
+      ≤ leftL2Squared dataSet * rightL2Squared dataSet
+    bothAdjusted =
+      subst
+        (λ leftNorm →
+          L2.square (L2.pairDot (pointwisePairs dataSet))
+          ≤ leftNorm * rightL2Squared dataSet)
+        (sym (leftNormMeaning dataSet))
+        rightAdjusted
+  in
+  subst
+    (λ lower →
+      lower ≤ leftL2Squared dataSet * rightL2Squared dataSet)
+    (sym (tensorMeaning dataSet))
+    bothAdjusted
