@@ -203,10 +203,12 @@ sourceWeightedJ11SquareBound normalizedAmplitude outputShell =
               (sourceSquareEnergy normalizedAmplitude)
               outputShell
     massScaled =
-      let instance energyIsNonnegative =
-        nonNegative
-          (prefixSourceSquareEnergyNonnegative
-            normalizedAmplitude outputShell)
+      let
+        instance
+          energyIsNonnegative =
+            nonNegative
+              (prefixSourceSquareEnergyNonnegative
+                normalizedAmplitude outputShell)
       in
       ℚₚ.*-monoʳ-≤-nonNeg
         (Sum.sumTo
