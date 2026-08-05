@@ -117,5 +117,7 @@ import DASHI.Biology.StableUnconsciousInvariantRegime
 import DASHI.Biology.DynamicCoalitionPhaseEmergence
 import DASHI.Biology.ConsciousAccessRound3FullBoundary
 import DASHI.Biology.ConsciousAccessRound3SourceAtlas
+import DASHI.Biology.ConsciousAccessRound3ExtendedSourceAtlas
 import DASHI.Biology.ConsciousAccessRound3Regression
 import DASHI.Biology.ConsciousAccessRound3ExtendedRegression
+import DASHI.Biology.ConsciousAccessRound3CompleteRegression
