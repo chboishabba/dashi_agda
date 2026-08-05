@@ -348,6 +348,13 @@ negativeFiniteSum (value ∷ values) =
 wilsonAtomContribution : RationalQuaternion → ℚ
 wilsonAtomContribution atom = - q0 atom
 
+mapNegatedScalarParts : ∀ values →
+  map -_ (map q0 values)
+  ≡ map wilsonAtomContribution values
+mapNegatedScalarParts [] = refl
+mapNegatedScalarParts (value ∷ values) =
+  cong ((- q0 value) ∷_) (mapNegatedScalarParts values)
+
 wilsonSecondVariationNumerator :
   List QuaternionFactorJet → ℚ
 wilsonSecondVariationNumerator factors =
@@ -367,7 +374,11 @@ wilsonSecondVariationIsAtomSum factors =
     (cong -_ (sym (sumSecondVariationTermsExact factors)))
     (trans
       (cong -_ (scalarPartSumQuaternion (secondVariationTerms factors)))
-      (negativeFiniteSum (map q0 (secondVariationTerms factors))))
+      (trans
+        (negativeFiniteSum
+          (map q0 (secondVariationTerms factors)))
+        (cong sumRational
+          (mapNegatedScalarParts (secondVariationTerms factors)))))
 
 fourLinkWilsonSecondVariationIsSixteenScalarAtoms :
   ∀ first second third fourth →
