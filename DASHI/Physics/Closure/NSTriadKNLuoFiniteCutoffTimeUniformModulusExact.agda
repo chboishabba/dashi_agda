@@ -15,9 +15,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCutoffTimeUniformModulusExact whe
 --
 --   2^{-q} + 2^{-n},
 --
--- then on the shifted diagonal q=n+1 it obeys the computable bound 2^{-n}.
--- This is the form of joint cutoff/terminal-time modulus that must be supplied
--- by the continuum estimates before either limiting operation is promoted.
+-- then the cutoff-shifted path (q,n)=(m+1,m) is bounded by
+--
+--   (3/2) 2^{-m},
+--
+-- while the next diagonal point (m+1,m+1) is bounded by 2^{-m}.  These are
+-- computable joint cutoff/terminal-time moduli of the kind required before
+-- either limiting operation is promoted.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -31,8 +35,9 @@ open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 
-half : ℚ
+half threeHalves : ℚ
 half = Int.+ 1 / 2
+threeHalves = Int.+ 3 / 2
 
 record GeometricCutoffTimeModulus : Set₁ where
   field
@@ -55,12 +60,23 @@ diagonalBound modulus index =
     (solve (Geo.pow half index ∷ []))
     (errorBound modulus index index)
 
-shiftedDiagonalModulus :
+cutoffShiftedModulus :
+  (modulus : GeometricCutoffTimeModulus) →
+  (index : Nat) →
+  error modulus (suc index) index
+  ≤ threeHalves * Geo.pow half index
+cutoffShiftedModulus modulus index =
+  subst
+    (λ upper → error modulus (suc index) index ≤ upper)
+    (solve (Geo.pow half index ∷ []))
+    (errorBound modulus (suc index) index)
+
+nextDiagonalModulus :
   (modulus : GeometricCutoffTimeModulus) →
   (index : Nat) →
   error modulus (suc index) (suc index)
   ≤ Geo.pow half index
-shiftedDiagonalModulus modulus index =
+nextDiagonalModulus modulus index =
   subst
     (λ upper → error modulus (suc index) (suc index) ≤ upper)
     (solve (Geo.pow half index ∷ []))
