@@ -33,7 +33,9 @@ factorMismatchDoesNotForceGapCollapse = Lower.factorMismatchCountermodel
 finiteConeDiameterDoesNotGiveUniformDiameter :
   ∀ proposedBound →
   (∀ extent →
-    Perron.finiteVolumeProjectiveDiameter extent Perron.≤ᴺ proposedBound) →
+    Perron._≤ᴺ_
+      (Perron.finiteVolumeProjectiveDiameter extent)
+      proposedBound) →
   Perron.Empty
 finiteConeDiameterDoesNotGiveUniformDiameter = Perron.noUniformDiameterBound
 
