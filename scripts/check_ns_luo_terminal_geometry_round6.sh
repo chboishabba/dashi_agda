@@ -20,7 +20,10 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNearCenteredCommutatorExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoMitrovicDiagnosticIterationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSparseWeightAuditExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteWeakStrongUniquenessExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoTerminalGeometryRound6Validation.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFinitePhysicalSection4BudgetDerivationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteSmoothHardMultiplierFactorExact.agda
 )
 
 for file in "${FILES[@]}"; do
