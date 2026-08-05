@@ -12,6 +12,8 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNCherevanTwoIndexHighHighLowExact.agda
   DASHI/Physics/Closure/NSTriadKNCherevanPacketScaleAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNCherevanWindowScaleNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNCherevanSchurYoungLaneAuditExact.agda
+  DASHI/Physics/Closure/NSTriadKNCherevanPeriodicCutoffAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNCherevanFiniteConvolutionSupportLossExact.agda
   DASHI/Physics/Closure/NSTriadKNCherevanFiniteOrthogonalityAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNCherevanWideNarrowAssemblyExact.agda
