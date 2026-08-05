@@ -88,7 +88,7 @@ canonicalDoubleInhibitionTriangle =
     ; direct = identity
     ; first = Stateful.boolNot
     ; second = Stateful.boolNot
-    ; zeroDefect = Stateful.boolNotInvolutive
+    ; zeroDefect = λ x → sym (Stateful.boolNotInvolutive x)
     }
 
 canonicalDoubleInhibitionIsProductive :
