@@ -55,11 +55,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: >-
           gh pr comment 389 --body
-          "Round 3 Agda 2.9 kernel check passed on `${{ github.sha }}` (workflow run `${{ github.run_id }}`)."
+          'Round 3 Agda 2.9 kernel check passed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
       - name: Report failed kernel check
         if: failure() && github.event_name == 'push'
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
           gh pr comment 389 --body
-          "Round 3 Agda 2.9 kernel check failed on `${{ github.sha }}` (workflow run `${{ github.run_id }}`)."
+          'Round 3 Agda 2.9 kernel check failed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
