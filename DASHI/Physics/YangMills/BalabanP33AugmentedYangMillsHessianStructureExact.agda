@@ -50,7 +50,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; sym; trans)
+  (cong₂; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -133,15 +133,24 @@ positiveSectorsPreserveLowerBound
       ≤ (wilsonValue + gaugeValue) + constraintValue
     addConstraint =
       ℚP.p≤p+q (wilsonValue + gaugeValue) constraintValue
+
+    reassociate :
+      (wilsonValue + gaugeValue) + constraintValue
+      ≡ wilsonValue + (gaugeValue + constraintValue)
+    reassociate = ℚRing.solve []
+
+    gaugeToAugmented :
+      wilsonValue + gaugeValue
+      ≤ wilsonValue + (gaugeValue + constraintValue)
+    gaugeToAugmented =
+      subst
+        (λ upper → wilsonValue + gaugeValue ≤ upper)
+        reassociate
+        addConstraint
   in
   ℚP.≤-trans
     wilsonLower
-    (ℚP.≤-trans
-      wilsonToGauge
-      (subst
-        (λ upper → wilsonValue + gaugeValue ≤ upper)
-        (ℚRing.solve-∀ wilsonValue gaugeValue constraintValue)
-        addConstraint))
+    (ℚP.≤-trans wilsonToGauge gaugeToAugmented)
 
 augmentedCoercivityFromWilson :
   ∀ {Carrier}
