@@ -98,7 +98,7 @@ exactTaylorKernelSplit sample =
     ∷ displacement sample
     ∷ [])
 
-record SecondCommutationDeliverables : Set where
+record SecondCommutationDeliverables : Set₁ where
   constructor second-commutation-deliverables
   field
     principalPoissonSymbol : Set
