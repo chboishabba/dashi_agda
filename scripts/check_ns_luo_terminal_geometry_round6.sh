@@ -4,6 +4,10 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+# The round-six root is cumulative.  Validate and scan the complete repaired
+# round-five tranche before checking the new terminal-geometry mathematics.
+bash scripts/check_ns_luo_hard_math_round5.sh
+
 FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteEvenKernelCenteredTaylorExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCenteredCommutatorBudgetExact.agda
@@ -28,8 +32,20 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSparseWeightAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteWeakStrongUniquenessExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoTerminalGeometryRound6Validation.agda
+
+  # Round-five files repaired on this head after static review.
   DASHI/Physics/Closure/NSTriadKNLuoFinitePhysicalSection4BudgetDerivationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSmoothHardMultiplierFactorExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteJ2HighHighGapExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteJ12CommutatorDerivativeGainExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteProjectedShellEquation42Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFourResidueBlockDecayExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ11HalfRangeDerivedExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ12FiveShellExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ12CriterionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ1CriterionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceJ2CriterionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSourceSection4NonlinearExact.agda
 )
 
 for file in "${FILES[@]}"; do
