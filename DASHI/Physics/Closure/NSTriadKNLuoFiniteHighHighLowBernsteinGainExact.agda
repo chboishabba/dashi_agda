@@ -38,11 +38,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _/_; _*_; _-_; _≤_; _<_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _/_; _*_; _-_; _≤_; _<_)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_; _<?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality as Eq using (subst)
+open Eq.≡-Reasoning
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -65,14 +66,20 @@ squaredBernsteinGapCalibration :
   (gap : Nat) →
   squaredBernsteinGapGain gap * cubicInputGapScale gap ≡ 1ℚ
 squaredBernsteinGapCalibration zero = refl
-squaredBernsteinGapCalibration (suc gap)
-  rewrite squaredBernsteinGapCalibration gap =
-  solve
-    ( oneEighth
-    ∷ Scale.two
-    ∷ squaredBernsteinGapGain gap
-    ∷ Scale.dyadicScale gap
-    ∷ [])
+squaredBernsteinGapCalibration (suc gap) =
+  begin
+    squaredBernsteinGapGain (suc gap)
+      * cubicInputGapScale (suc gap)
+  ≡⟨ solve
+       ( oneEighth
+       ∷ Scale.two
+       ∷ squaredBernsteinGapGain gap
+       ∷ Scale.dyadicScale gap
+       ∷ []) ⟩
+    squaredBernsteinGapGain gap * cubicInputGapScale gap
+  ≡⟨ squaredBernsteinGapCalibration gap ⟩
+    1ℚ
+  ∎
 
 oneEighthNonnegative : 0ℚ ≤ oneEighth
 oneEighthNonnegative = toWitness {a? = 0ℚ ≤? oneEighth} _
