@@ -49,7 +49,7 @@ import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Nullary using (yes; no)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
@@ -138,6 +138,20 @@ physicalWeightInverseLaw geometry coordinate =
     (root geometry)
     coordinate
 
+physicalWeightInverseLawCommuted :
+  ∀ {hessian}
+    (geometry : PhysicalCombesThomasGeometry hessian)
+    coordinate →
+  physicalWeight geometry coordinate
+    * physicalInverseWeight geometry coordinate
+  ≡ + 1 / 1
+physicalWeightInverseLawCommuted geometry coordinate =
+  trans
+    (ℚP.*-comm
+      (physicalWeight geometry coordinate)
+      (physicalInverseWeight geometry coordinate))
+    (physicalWeightInverseLaw geometry coordinate)
+
 physicalInverseWeightAtRoot :
   ∀ {hessian}
     (geometry : PhysicalCombesThomasGeometry hessian) →
@@ -188,7 +202,7 @@ physicalIdentityStable :
 physicalIdentityStable geometry left right
   with Calibration.physicalCoordinateDecidableEquality left right
 ... | yes refl
-  rewrite physicalWeightInverseLaw geometry left =
+  rewrite physicalWeightInverseLawCommuted geometry left =
   ℚRing.solve []
 ... | no _ = ℚRing.solve []
 
