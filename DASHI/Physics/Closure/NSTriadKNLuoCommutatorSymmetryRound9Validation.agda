@@ -4,10 +4,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoCommutatorSymmetryRound9Validation wher
 -- Cumulative validation root for the ninth Luo/Clay frontier tranche.
 --
 -- The root imports the complete round-eight theorem surface and then the
--- exact finite transport commutator, paired second-order defect, dyadic scale
--- audit, cyclic multiplier-difference identity, Yang parity/matched-sector
--- algebra, eight-sector reconstruction, periodic Leray/Laplacian commutation,
--- terminal dissipation closure, and Biot--Savart/Leray factorisation.
+-- exact finite transport commutator, its first-moment majorant, paired
+-- second-order defect, dyadic scale audit, cyclic multiplier-difference
+-- identity, Yang parity/matched-sector algebra, eight-sector reconstruction,
+-- periodic Leray/Laplacian commutation, terminal dissipation closure, and
+-- Biot--Savart/Leray factorisation.
 --
 -- This aggregate does not assert the missing continuum off-diagonal estimate
 -- or global regularity of three-dimensional Navier--Stokes.
@@ -18,6 +19,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Physics.Closure.NSTriadKNLuoBiotSavartContinuumRound8Validation
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteTransportCommutatorIdentityExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteTransportCommutatorMomentBoundExact
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondOrderExact
 import DASHI.Physics.Closure.NSTriadKNLuoCommutatorScaleAuditExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteTriadMultiplierDifferenceExact
