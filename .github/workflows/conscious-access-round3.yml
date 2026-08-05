@@ -40,6 +40,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
   pull-requests: write
 
 jobs:
@@ -54,12 +55,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
-          gh pr comment 389 --body
+          gh pr comment 389 --repo chboishabba/dashi_agda --body
           'Round 3 Agda 2.9 kernel check passed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
       - name: Report failed kernel check
         if: failure() && github.event_name == 'push'
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
-          gh pr comment 389 --body
+          gh pr comment 389 --repo chboishabba/dashi_agda --body
           'Round 3 Agda 2.9 kernel check failed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
