@@ -305,7 +305,7 @@ goalIsNotFutureCauseWitness :
     canonicalMorphologicalGoalAuthorityBoundary
 goalIsNotFutureCauseWitness = tt
 
-record MorphogeneticVisualBoundary : Set where
+record MorphogeneticVisualBoundary : Set₁ where
   constructor morphogeneticVisualBoundary
   field
     visualSimilarityImpliesMechanismIdentity : Bool
