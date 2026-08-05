@@ -7,6 +7,7 @@ cd "$root"
 export AGDA_JOBS="${AGDA_JOBS:-1}"
 
 files=(
+  DASHI/Physics/YangMills/BalabanP33BishopInverseDexpActualEndpointModulusExact.agda
   DASHI/Physics/YangMills/BalabanP33DuhamelOrderedSimplexMeasureExact.agda
   DASHI/Physics/YangMills/BalabanClayCoupledPolymerFlowRemainderExact.agda
   DASHI/Physics/YangMills/BalabanClayCoupledRGInvariantConeExact.agda
@@ -24,6 +25,9 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
 fi
 
 checks=(
+  'BalabanP33BishopInverseDexpActualEndpointModulusExact.agda:actualDefectBelowTaylorDefect'
+  'BalabanP33BishopInverseDexpActualEndpointModulusExact.agda:actualEndpointDefectNonnegative'
+  'BalabanP33BishopInverseDexpActualEndpointModulusExact.agda:actualEndpointDefectQuadraticModulus'
   'BalabanP33DuhamelOrderedSimplexMeasureExact.agda:firstSegmentIntegralExact'
   'BalabanP33DuhamelOrderedSimplexMeasureExact.agda:middleSegmentIntegralExact'
   'BalabanP33DuhamelOrderedSimplexMeasureExact.agda:lastSegmentIntegralExact'
@@ -43,6 +47,10 @@ for check in "${checks[@]}"; do
   grep -q "$theorem" "DASHI/Physics/YangMills/$file"
 done
 
+grep -q 'arXiv:2205.08354' \
+  DASHI/Physics/YangMills/BalabanP33BishopInverseDexpActualEndpointModulusExact.agda
+grep -q '10.1007/978-3-319-13467-3' \
+  DASHI/Physics/YangMills/BalabanP33BishopInverseDexpActualEndpointModulusExact.agda
 grep -q 'arXiv:2606.19362v1' \
   DASHI/Physics/YangMills/BalabanClayCoupledPolymerFlowRemainderExact.agda
 grep -q '10.1007/BF01215223' \
