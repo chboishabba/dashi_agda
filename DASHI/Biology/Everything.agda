@@ -131,6 +131,9 @@ import DASHI.Biology.TriadicCarryResidualExact
 import DASHI.Biology.PadicCylinderLODReasoningField
 import DASHI.Biology.CausalHierarchicalChartResidualExact
 import DASHI.Biology.FiniteCrystallisationModeSelectionExact
+import DASHI.Biology.FiniteWaveShellGradientExact
+import DASHI.Biology.FiniteSymmetryStabiliserExact
+import DASHI.Biology.FinitePadicCollapseExact
 import DASHI.Biology.ResourceLimitedCrystallisationExact
 import DASHI.Biology.ReasoningFieldRenderBridgeExact
 import DASHI.Biology.PadicCrystallisationResidueExact
