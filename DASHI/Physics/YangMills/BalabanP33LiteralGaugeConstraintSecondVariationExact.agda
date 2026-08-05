@@ -104,7 +104,7 @@ secondVariationIsTwiceQuadraticCoefficient : ∀ jet →
   secondVariationContribution jet
   ≡ (+ 2 / 1) * halfSquareQuadraticCoefficient jet
 secondVariationIsTwiceQuadraticCoefficient (scalarJet value first second) =
-  ℚRing.solve value first second
+  ℚRing.solve-∀ value first second
 
 halfSquareExpansionExact : ∀ jet time →
   halfSquaredCurve jet time
@@ -116,7 +116,7 @@ halfSquareExpansionExact : ∀ jet time →
           + (time * time * time * time
             * ((+ 1 / 8) * jetSecond jet * jetSecond jet)))))
 halfSquareExpansionExact (scalarJet value first second) time =
-  ℚRing.solve value first second time
+  ℚRing.solve-∀ value first second time
 
 record FiniteResidualSecondJet (Index : Set) : Set₁ where
   field
@@ -191,7 +191,7 @@ residualSecondVariationSplitExact residual =
             + jetValue (componentJet residual index)
               * jetSecond (componentJet residual index)) + tail)
           (distribute indices))
-        (ℚRing.solve
+        (ℚRing.solve-∀
           (jetFirst (componentJet residual index)
             * jetFirst (componentJet residual index))
           (jetValue (componentJet residual index)
@@ -237,7 +237,7 @@ residualPairingVanishesAtExactBackground residual exact =
       trans
         (cong₂ _+_
           (cong
-            (_* jetSecond (componentJet residual index))
+            (λ value → value * jetSecond (componentJet residual index))
             (residualZero exact index))
           (vanish indices))
         (ℚRing.solve [])
@@ -253,9 +253,9 @@ residualSecondVariationAtExactBackground residual exact =
     (residualSecondVariationSplitExact residual)
     (trans
       (cong
-        (residualFirstNormSquared residual +_)
+        (λ remainder → residualFirstNormSquared residual + remainder)
         (residualPairingVanishesAtExactBackground residual exact))
-      (ℚRing.solve (residualFirstNormSquared residual)))
+      (ℚRing.solve-∀ (residualFirstNormSquared residual)))
 
 ------------------------------------------------------------------------
 -- Literal Wilson + gauge-fixing + block-constraint second variation.
@@ -319,7 +319,7 @@ literalTotalSecondVariationSplitExact dataSet =
       (cong₂ _+_
         (residualSecondVariationSplitExact (gaugeResidual dataSet))
         (residualSecondVariationSplitExact (constraintResidual dataSet))))
-    (ℚRing.solve
+    (ℚRing.solve-∀
       (wilsonSecondVariation dataSet)
       (residualFirstNormSquared (gaugeResidual dataSet))
       (residualPairingWithSecond (gaugeResidual dataSet))
