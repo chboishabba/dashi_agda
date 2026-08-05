@@ -60,8 +60,9 @@ record UniformConeContractionCertificate
     everyStageUsesCommonBound : ∀ stage →
       DiameterAtMost (projectiveDiameter stage) commonDiameterBound
     contractionCoefficient : Modulus
-    StrictlyBelowIdentity : Modulus → Set
-    commonContractionStrict : StrictlyBelowIdentity contractionCoefficient
+    UniformStrictlyBelowIdentity : Modulus → Set
+    commonContractionStrict :
+      UniformStrictlyBelowIdentity contractionCoefficient
 
 open UniformConeContractionCertificate public
 
@@ -69,9 +70,9 @@ record PerStageStrictContraction
     (Stage Modulus : Set) : Set₁ where
   field
     stageCoefficient : Stage → Modulus
-    StrictlyBelowIdentity : Modulus → Set
+    StageStrictlyBelowIdentity : Modulus → Set
     eachStageStrict : ∀ stage →
-      StrictlyBelowIdentity (stageCoefficient stage)
+      StageStrictlyBelowIdentity (stageCoefficient stage)
 
 open PerStageStrictContraction public
 
@@ -84,7 +85,7 @@ uniformCertificateGivesPerStageStrictness :
   PerStageStrictContraction Stage Modulus
 uniformCertificateGivesPerStageStrictness uniform = record
   { stageCoefficient = λ stage → contractionCoefficient uniform
-  ; StrictlyBelowIdentity = StrictlyBelowIdentity uniform
+  ; StageStrictlyBelowIdentity = UniformStrictlyBelowIdentity uniform
   ; eachStageStrict = λ stage → commonContractionStrict uniform
   }
 
