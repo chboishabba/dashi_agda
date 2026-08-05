@@ -8,6 +8,7 @@ import DASHI.Biology.ConsciousAccessRound3FullBoundary as Full
 import DASHI.Biology.NaturalGrowthAlgorithmAtlas as Growth
 import DASHI.Biology.SignedDistanceBooleanGeometry as SDF
 import DASHI.Biology.HallHybridManifoldTreeCarrier as Hybrid
+import DASHI.Biology.PsychedelicAttractorReweightingBoundary as Attractor
 import DASHI.Biology.VisualPathBraidResidual as Braid
 import DASHI.Biology.QuantitativeStateDynamics as Quantitative
 import DASHI.Biology.SymbolicCompromiseMinimizer as Symbolic
@@ -78,7 +79,7 @@ record ConsciousAccessRound3ExtendedRegression : Setω where
           Hybrid.localDeformationTransition
           Hybrid.habitualChartOrigin)
       ≡
-      Hybrid.Attractor.habitualAddress
+      Attractor.habitualAddress
 
     visualHistoryResidualIsOne :
       Braid.historyResidual
