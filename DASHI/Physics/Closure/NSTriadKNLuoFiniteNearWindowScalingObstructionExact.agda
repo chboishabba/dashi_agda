@@ -112,10 +112,8 @@ nearEnergyOnlyDoubles shell =
     (trans
       (cong (Scale.two *_)
         (Scale.dyadicScaleSuccessor shell))
-      (trans
-        (solve (Scale.dyadicScale shell ∷ []))
-        (cong (Scale.two *_)
-          (Eq.sym (nearEnergyOnlyMeaning shell)))))
+      (cong (Scale.two *_)
+        (Eq.sym (nearEnergyOnlyMeaning shell))))
 
 oneSixtyFourth : ℚ
 oneSixtyFourth = Int.+ 1 / 64
