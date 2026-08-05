@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoSourceSection4NonlinearExact where
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -71,142 +71,152 @@ record SourceSection4NonlinearData (Time : Set) : Set₁ where
 open SourceSection4NonlinearData public
 
 sourceJ1 : ∀ {Time} → SourceSection4NonlinearData Time → ℚ
-sourceJ1 data = J1.sourceJ1 (j1Data data)
+sourceJ1 nonlinearData = J1.sourceJ1 (j1Data nonlinearData)
 
 sourceJ2 : ∀ {Time} → SourceSection4NonlinearData Time → ℚ
 sourceJ2 = j2Value
 
 commonScale : ∀ {Time} → SourceSection4NonlinearData Time → ℚ
-commonScale data = J1.outputScale (j1Data data)
+commonScale nonlinearData = J1.outputScale (j1Data nonlinearData)
 
 commonSmallness : ∀ {Time} → SourceSection4NonlinearData Time → ℚ
-commonSmallness data = J11.delta (J1.j11Data (j1Data data))
+commonSmallness nonlinearData =
+  J11.delta (J1.j11Data (j1Data nonlinearData))
 
 sourceJ1SquareBelowScale :
-  ∀ {Time} (data : SourceSection4NonlinearData Time) →
-  L2.square (sourceJ1 data)
+  ∀ {Time} (nonlinearData : SourceSection4NonlinearData Time) →
+  L2.square (sourceJ1 nonlinearData)
   ≤ (Int.+ 6400 / 1)
-      * L2.square (commonSmallness data)
-      * commonScale data
-sourceJ1SquareBelowScale data =
+      * L2.square (commonSmallness nonlinearData)
+      * commonScale nonlinearData
+sourceJ1SquareBelowScale nonlinearData =
   let
     coefficient =
-      (Int.+ 6400 / 1) * L2.square (commonSmallness data)
+      (Int.+ 6400 / 1)
+      * L2.square (commonSmallness nonlinearData)
 
-    base = J1.sourceJ1CriterionBound (j1Data data)
+    base = J1.sourceJ1CriterionBound (j1Data nonlinearData)
 
     coefficientNonnegative : 0ℚ ≤ coefficient
     coefficientNonnegative =
       nonnegativeProduct
         (toWitness {a? = 0ℚ ≤? (Int.+ 6400 / 1)} _)
-        (L2.squareNonnegative (commonSmallness data))
+        (L2.squareNonnegative (commonSmallness nonlinearData))
 
-    rawScale : coefficient * 1ℚ ≤ coefficient * commonScale data
+    rawScale :
+      coefficient * 1ℚ ≤ coefficient * commonScale nonlinearData
     rawScale =
-      let instance coefficientIsNonnegative =
-        nonNegative coefficientNonnegative
+      let
+        instance
+          coefficientIsNonnegative =
+            nonNegative coefficientNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         coefficient
-        (J1.outputScaleAtLeastOne (j1Data data))
+        (J1.outputScaleAtLeastOne (j1Data nonlinearData))
 
     leftMeaning : coefficient * 1ℚ ≡ coefficient
     leftMeaning = solve (coefficient ∷ [])
 
-    scaleByShell : coefficient ≤ coefficient * commonScale data
+    scaleByShell :
+      coefficient ≤ coefficient * commonScale nonlinearData
     scaleByShell =
       subst
-        (λ left → left ≤ coefficient * commonScale data)
+        (λ left → left ≤ coefficient * commonScale nonlinearData)
         leftMeaning
         rawScale
   in
   ℚₚ.≤-trans base scaleByShell
 
 sourceJ2SquareBelowScale :
-  ∀ {Time} (data : SourceSection4NonlinearData Time) →
-  L2.square (sourceJ2 data)
+  ∀ {Time} (nonlinearData : SourceSection4NonlinearData Time) →
+  L2.square (sourceJ2 nonlinearData)
   ≤ (Int.+ 4096 / 1)
-      * L2.square (commonSmallness data)
-      * commonScale data
-sourceJ2SquareBelowScale data =
+      * L2.square (commonSmallness nonlinearData)
+      * commonScale nonlinearData
+sourceJ2SquareBelowScale nonlinearData =
   let
-    raw = J2.sourceJ2CriterionSquareBound (j2Data data)
+    raw = J2.sourceJ2CriterionSquareBound (j2Data nonlinearData)
 
     leftMeaning :
-      J2.sourceJ2Square (j2Data data)
-      ≡ L2.square (sourceJ2 data)
-    leftMeaning = sym (j2ValueMeaning data)
+      J2.sourceJ2Square (j2Data nonlinearData)
+      ≡ L2.square (sourceJ2 nonlinearData)
+    leftMeaning = sym (j2ValueMeaning nonlinearData)
 
     rightMeaning :
       J2.fourThousandNinetySix
-        * L2.square (J2.delta (j2Data data))
-        * J2.outputScale (j2Data data)
+        * L2.square (J2.delta (j2Data nonlinearData))
+        * J2.outputScale (j2Data nonlinearData)
       ≡ (Int.+ 4096 / 1)
-        * L2.square (commonSmallness data)
-        * commonScale data
+        * L2.square (commonSmallness nonlinearData)
+        * commonScale nonlinearData
     rightMeaning
-      rewrite commonDelta data
-            | commonOutputScale data = refl
+      rewrite commonDelta nonlinearData
+            | commonOutputScale nonlinearData = refl
   in
   subst₂ _≤_ leftMeaning rightMeaning raw
 
 sourceSection4NonlinearSquareBound :
-  ∀ {Time} (data : SourceSection4NonlinearData Time) →
-  L2.square (sourceJ1 data + sourceJ2 data)
+  ∀ {Time} (nonlinearData : SourceSection4NonlinearData Time) →
+  L2.square (sourceJ1 nonlinearData + sourceJ2 nonlinearData)
   ≤ (Int.+ 20992 / 1)
-      * L2.square (commonSmallness data)
-      * commonScale data
-sourceSection4NonlinearSquareBound data =
+      * L2.square (commonSmallness nonlinearData)
+      * commonScale nonlinearData
+sourceSection4NonlinearSquareBound nonlinearData =
   let
     algebra =
       SquareSum.squareOfSumBelowTwiceSquares
-        (sourceJ1 data)
-        (sourceJ2 data)
+        (sourceJ1 nonlinearData)
+        (sourceJ2 nonlinearData)
 
     component :
-      L2.square (sourceJ1 data) + L2.square (sourceJ2 data)
+      L2.square (sourceJ1 nonlinearData)
+        + L2.square (sourceJ2 nonlinearData)
       ≤ (Int.+ 6400 / 1)
-          * L2.square (commonSmallness data)
-          * commonScale data
+          * L2.square (commonSmallness nonlinearData)
+          * commonScale nonlinearData
         + (Int.+ 4096 / 1)
-          * L2.square (commonSmallness data)
-          * commonScale data
+          * L2.square (commonSmallness nonlinearData)
+          * commonScale nonlinearData
     component =
       ℚₚ.+-mono-≤
-        (sourceJ1SquareBelowScale data)
-        (sourceJ2SquareBelowScale data)
+        (sourceJ1SquareBelowScale nonlinearData)
+        (sourceJ2SquareBelowScale nonlinearData)
 
     scaled :
       SquareSum.two
-        * (L2.square (sourceJ1 data) + L2.square (sourceJ2 data))
+        * (L2.square (sourceJ1 nonlinearData)
+          + L2.square (sourceJ2 nonlinearData))
       ≤ SquareSum.two
         * ( (Int.+ 6400 / 1)
-              * L2.square (commonSmallness data)
-              * commonScale data
+              * L2.square (commonSmallness nonlinearData)
+              * commonScale nonlinearData
           + (Int.+ 4096 / 1)
-              * L2.square (commonSmallness data)
-              * commonScale data)
+              * L2.square (commonSmallness nonlinearData)
+              * commonScale nonlinearData)
     scaled =
-      let instance twoIsNonnegative =
-        nonNegative SquareSum.twoNonnegative
+      let
+        instance
+          twoIsNonnegative =
+            nonNegative SquareSum.twoNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg SquareSum.two component
 
     targetMeaning :
       SquareSum.two
         * ( (Int.+ 6400 / 1)
-              * L2.square (commonSmallness data)
-              * commonScale data
+              * L2.square (commonSmallness nonlinearData)
+              * commonScale nonlinearData
           + (Int.+ 4096 / 1)
-              * L2.square (commonSmallness data)
-              * commonScale data)
+              * L2.square (commonSmallness nonlinearData)
+              * commonScale nonlinearData)
       ≡ (Int.+ 20992 / 1)
-          * L2.square (commonSmallness data)
-          * commonScale data
+          * L2.square (commonSmallness nonlinearData)
+          * commonScale nonlinearData
     targetMeaning =
       solve
-        ( L2.square (commonSmallness data)
-        ∷ commonScale data
+        ( L2.square (commonSmallness nonlinearData)
+        ∷ commonScale nonlinearData
         ∷ []
         )
   in
@@ -214,7 +224,8 @@ sourceSection4NonlinearSquareBound data =
     (subst
       (λ upper →
         SquareSum.two
-          * (L2.square (sourceJ1 data) + L2.square (sourceJ2 data))
+          * (L2.square (sourceJ1 nonlinearData)
+            + L2.square (sourceJ2 nonlinearData))
         ≤ upper)
       targetMeaning
       scaled)
