@@ -32,13 +32,12 @@ module DASHI.Physics.Closure.NSTriadKNCorrectedFourierAngularStrainExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Empty using (⊥)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; -_; _-_; _≢_)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; -_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality as Eq
-  using (cong; trans)
+  using (_≢_; cong; trans)
 open Eq.≡-Reasoning
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
