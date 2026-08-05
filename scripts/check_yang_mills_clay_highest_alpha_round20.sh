@@ -11,7 +11,9 @@ files=(
   DASHI/Physics/YangMills/BalabanP33CombesThomasSquaredHalfGapExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasSchurExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalCoordinateBasisExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalQuadraticToSquaredCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasEntryDecayExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound20Validation.agda
 )
 
@@ -43,10 +45,14 @@ checks=(
   'BalabanP33PhysicalCoordinateBasisExact.agda:physicalMatrixApplyBasisExact'
   'BalabanP33PhysicalCoordinateBasisExact.agda:physicalMatrixEntrySquaredFromOperatorBound'
   'BalabanP33PhysicalCoordinateBasisExact.agda:squareBound4096ImpliesAbsoluteBound64'
+  'BalabanP33PhysicalQuadraticToSquaredCoercivityExact.agda:originalSquaredLowerFromQuadratic'
+  'BalabanP33PhysicalQuadraticToSquaredCoercivityExact.agda:physicalOriginalSquaredCoercivityFromQuadratic'
   'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalMatrixApplyCompositionExact'
   'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalTiltedInverseSquaredOperatorBound'
   'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalTiltedGreenEntryBound'
   'BalabanP33PhysicalCombesThomasEntryDecayExact.agda:physicalGreenKernelDecayFromSquaredData'
+  'BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda:squaredResolventFromQuadratic'
+  'BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda:physicalGreenKernelDecayFromQuadraticCoercivity'
 )
 
 for check in "${checks[@]}"; do
@@ -72,6 +78,8 @@ grep -q 'trace-ideal and faster-than-polynomial' \
   DASHI/Physics/YangMills/BalabanP33CombesThomasSquaredHalfGapExact.agda
 grep -q 'tilted entry bound is produced' \
   DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasEntryDecayExact.agda
+grep -q 'No independent squared-coercivity premise' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound20Validation.agda
