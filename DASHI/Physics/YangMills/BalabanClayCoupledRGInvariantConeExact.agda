@@ -46,6 +46,7 @@ module DASHI.Physics.YangMills.BalabanClayCoupledRGInvariantConeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; NonNegative)
 import Data.Rational.Properties as ℚP
@@ -149,7 +150,7 @@ coupledLowerEnvelopeBelowNext dataSet =
           - Flow.beta (flow dataSet)
             * Flow.cube (Flow.coupling (flow dataSet))
           + Flow.remainder (flow dataSet))
-      (Flow.coupledLowerEnvelopeExpansion (flow dataSet))
+      (sym (Flow.coupledLowerEnvelopeExpansion (flow dataSet)))
       (ℚP.+-monoˡ-≤
         (Flow.coupling (flow dataSet)
           - Flow.beta (flow dataSet)
