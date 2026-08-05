@@ -26,20 +26,24 @@ module DASHI.Physics.Closure.NSTriadKNLuoNearWindowCriticalGainExact where
 --
 --   (2 lambda_q) gamma_q = 1/64.
 --
--- The corrected Fourier strain theorem proves exact cancellation of the
--- diagonal single-mode stretching contribution.  Consequently the required
--- gamma_q must be paid by the off-diagonal/cross-mode coherence defect.  No
--- unconditional estimate of that defect is asserted here.
+-- The corrected Fourier strain theorem is imported and composed here: the
+-- diagonal transverse single-mode stretching term vanishes exactly.  Hence
+-- any remaining near-window estimate is genuinely off-diagonal/cross-mode,
+-- and the required gamma_q must be paid by a coherence, angular, commutator
+-- or other cross-mode depletion theorem.  No unconditional estimate of that
+-- defect is asserted here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; trans)
 
+import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as V
+import DASHI.Physics.Closure.NSTriadKNCorrectedFourierAngularStrainExact as Strain
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEnergyCriticalScalingGapExact as Scale
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearWindowHalfKernelExact as Near
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearWindowScalingObstructionExact as Obstruction
@@ -49,6 +53,14 @@ oneHundredTwentyEighth = Int.+ 1 / 128
 
 oneSixtyFourth : ℚ
 oneSixtyFourth = Int.+ 1 / 64
+
+diagonalSelfModeStretchingEliminated :
+  (theta omega : V.Vector3) →
+  V.dot theta omega ≡ 0ℚ →
+  Strain.apply (Strain.angularStrain theta omega) omega
+  ≡ V.v3 0ℚ 0ℚ 0ℚ
+diagonalSelfModeStretchingEliminated =
+  Strain.singleModeStretchingVanishes
 
 requiredCrossModeGain : Nat → ℚ
 requiredCrossModeGain shell =
