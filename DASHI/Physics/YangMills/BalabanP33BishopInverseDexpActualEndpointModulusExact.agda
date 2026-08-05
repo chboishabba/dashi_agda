@@ -254,7 +254,7 @@ upperTaylorFactorBelowCeiling :
 upperTaylorFactorBelowCeiling {value = value} inputs =
   let
     scaledFourth =
-      BishopProperties.*-monoʳ-≤-nonNeg
+      BishopProperties.*-monoˡ-≤-nonNeg
         (Cross.fourthBelowSixteenth inputs)
         (Cross.embeddedRationalNonnegative
           oneThirtyThousandTwoFortieth nonNeg)
