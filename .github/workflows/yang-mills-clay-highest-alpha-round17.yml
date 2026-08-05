@@ -32,4 +32,4 @@ jobs:
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
       - name: Check actual endpoint, Duhamel measure and coupled RG cone
-        run: nix develop --command bash scripts/check_yang_mills_clay_highest-alpha-round17.sh
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round17.sh
