@@ -2,10 +2,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoTerminalGeometryRound6Validation where
 
 ------------------------------------------------------------------------
 -- Focused validation root for the terminal far/near, centered-cancellation,
--- cyclic-triad, geometric-alignment, scaling-gap, relative-energy uniqueness
--- and diagnostic-iteration hard mathematics.  The root deliberately imports
--- the source-faithful round-four validation rather than treating a receipt or
--- endpoint ledger as evidence.
+-- cyclic-triad, geometric-alignment, monodromy, scaling-gap,
+-- relative-energy uniqueness and diagnostic-iteration hard mathematics.  The
+-- root deliberately imports the source-faithful round-four validation rather
+-- than treating a receipt or endpoint ledger as evidence.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNLuoSourceFaithfulRound4Validation
@@ -13,8 +13,10 @@ import DASHI.Physics.Closure.NSTriadKNLuoSourceFaithfulRound4Validation
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEvenKernelCenteredTaylorExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCyclicTriadEnergyCancellationExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCancellationAbsoluteValueNoGoExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteAlignmentGramExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteTraceFreeStretchCompressionExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteMobiusOrientationObstructionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEnergyCriticalScalingGapExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteZenoCascadeBudgetExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteTerminalFarNearSplitExact
