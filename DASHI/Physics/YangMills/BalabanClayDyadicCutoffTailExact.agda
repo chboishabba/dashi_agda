@@ -58,6 +58,16 @@ dyadicNonnegative (suc n) =
       tailNN = ℚ.nonNegative (dyadicNonnegative n)
   in ℚP.nonNegative⁻¹ (half * dyadic n)
 
+twoDyadicNonnegative : ∀ n → 0ℚ ≤ two * dyadic n
+twoDyadicNonnegative n =
+  let
+    instance
+      twoNN : NonNegative two
+      twoNN = ℚ.nonNegative (ℚP.nonNegative⁻¹ two)
+      dyadicNN : NonNegative (dyadic n)
+      dyadicNN = ℚ.nonNegative (dyadicNonnegative n)
+  in ℚP.nonNegative⁻¹ (two * dyadic n)
+
 twoNextDyadicIsCurrent : ∀ n →
   two * dyadic (suc n) ≡ dyadic n
 twoNextDyadicIsCurrent n = ℚRing.solve-∀ (dyadic n)
@@ -77,7 +87,7 @@ dyadicPlusDoubleNextIsDoubleCurrent start
 finiteDyadicTailBelowDoubleStart : ∀ start count →
   finiteDyadicTail start count ≤ two * dyadic start
 finiteDyadicTailBelowDoubleStart start zero =
-  ℚP.nonNegative⁻¹ (two * dyadic start)
+  twoDyadicNonnegative start
 finiteDyadicTailBelowDoubleStart start (suc count) =
   ℚP.≤-trans
     (ℚP.+-mono-≤
