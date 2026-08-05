@@ -25,11 +25,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoParabolicCutoffTimeModulusExact where
 -- closed here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _+_; _≤_)
+open import Data.Rational.Base using (ℚ; _/_; _+_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
@@ -58,13 +58,25 @@ open ParabolicCutoffTimeError public
 doubleIndex : Nat → Nat
 doubleIndex index = index + index
 
+halfPowerSquaredIsQuarterPower :
+  (index : Nat) →
+  Geo.pow half index * Geo.pow half index
+  ≡ Geo.pow quarter index
+halfPowerSquaredIsQuarterPower zero = solve []
+halfPowerSquaredIsQuarterPower (suc index)
+  rewrite halfPowerSquaredIsQuarterPower index =
+  solve
+    ( Geo.pow half index
+    ∷ Geo.pow quarter index
+    ∷ [])
+
 halfDoubleIsQuarter :
   (index : Nat) →
   Geo.pow half (doubleIndex index) ≡ Geo.pow quarter index
-halfDoubleIsQuarter zero = refl
-halfDoubleIsQuarter (suc index)
-  rewrite halfDoubleIsQuarter index =
-  solve (Geo.pow quarter index ∷ [])
+halfDoubleIsQuarter index =
+  trans
+    (Heat.powAdd half index index)
+    (halfPowerSquaredIsQuarterPower index)
 
 parabolicDiagonalModulus :
   (dataSet : ParabolicCutoffTimeError) →
