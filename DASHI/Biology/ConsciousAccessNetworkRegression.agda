@@ -111,8 +111,8 @@ record ConsciousAccessNetworkRegression : Setω where
       ≡
       Psychedelic.geometricMotif
 
-    sourceCountIsNine :
-      Sources.canonicalConsciousAccessSourceCount ≡ 9
+    sourceCountIsTen :
+      Sources.canonicalConsciousAccessSourceCount ≡ 10
 
     blockedTraceRemainsCausallyEffective :
       Unconscious.actionReadout Unconscious.canonicalAccessAvoidanceRegime
@@ -202,8 +202,8 @@ canonicalConsciousAccessNetworkRegression =
         Psychedelic.reachableRepertoireIsLarger
     ; motifRecurs =
         Psychedelic.motifCycleReturns
-    ; sourceCountIsNine =
-        Sources.canonicalConsciousAccessSourceCountIsNine
+    ; sourceCountIsTen =
+        Sources.canonicalConsciousAccessSourceCountIsTen
     ; blockedTraceRemainsCausallyEffective =
         Unconscious.canonicalBlockedRepresentationCausallyEffective
     ; transformedSymbolPreservesInvariant =
