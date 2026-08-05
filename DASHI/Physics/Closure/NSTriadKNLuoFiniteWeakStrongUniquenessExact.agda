@@ -5,8 +5,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteWeakStrongUniquenessExact where
 --
 -- Author: Emil Wiedemann.
 -- Title: "Weak-Strong Uniqueness in Fluid Dynamics".
--- Partial Differential Equations in Applied Mathematics 5 (2022), 100212.
--- DOI: 10.1016/j.padiff.2021.100212.
+-- In: Partial Differential Equations in Fluid Mechanics, Cambridge
+-- University Press, 2019, pp. 289--326.
+-- DOI: 10.1017/9781108610575.012.
+-- arXiv DOI: 10.48550/arXiv.1705.04220.
 --
 -- PURPOSE
 -- Prove the finite relative-energy core of weak--strong uniqueness rather
