@@ -33,8 +33,8 @@ boolAnd true b = b
 record AccessRelation : Set₁ where
   field
     Representation : Set
-    Context : Set
-    available : Context → Representation → Bool
+    AccessContext : Set
+    available : AccessContext → Representation → Bool
 
 open AccessRelation public
 
@@ -51,7 +51,7 @@ canonicalAccessRelation : AccessRelation
 canonicalAccessRelation =
   record
     { Representation = Bool
-    ; Context = CanonicalAccessContext
+    ; AccessContext = CanonicalAccessContext
     ; available = canonicalAvailability
     }
 
