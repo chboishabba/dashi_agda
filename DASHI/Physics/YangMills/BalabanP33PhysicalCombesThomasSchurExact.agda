@@ -46,12 +46,12 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasSchurExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _*_; _≤_; NonNegative)
+  (ℚ; 0ℚ; _*_; _≤_; _/_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (subst; sym; trans)
+  (cong; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -83,20 +83,20 @@ open PhysicalCombesThomasSchurData public
 physicalTiltedHessian :
   ∀ {hessian} →
   PhysicalCombesThomasSchurData hessian → PhysicalMatrix
-physicalTiltedHessian data =
+physicalTiltedHessian {hessian} data =
   CT.diagonalConjugate
     (Promotion.physicalWeight (geometry data))
     (Promotion.physicalInverseWeight (geometry data))
-    _
+    hessian
 
 physicalTiltDefect :
   ∀ {hessian} →
   PhysicalCombesThomasSchurData hessian → PhysicalMatrix
-physicalTiltDefect data =
+physicalTiltDefect {hessian} data =
   CT.diagonalTiltDefect
     (Promotion.physicalWeight (geometry data))
     (Promotion.physicalInverseWeight (geometry data))
-    _
+    hessian
 
 physicalTiltDefectIsMatrixDifference :
   ∀ {hessian}
@@ -163,10 +163,10 @@ physicalHessianColumnMassEqualsRowMass :
     Physical.physicalSU2Coordinates4 hessian coordinate
   ≡ Schur.absoluteRowMass
       Physical.physicalSU2Coordinates4 hessian coordinate
-physicalHessianColumnMassEqualsRowMass data coordinate =
+physicalHessianColumnMassEqualsRowMass {hessian} data coordinate =
   Schur.symmetricColumnMassEqualsRowMass
     Physical.physicalSU2Coordinates4
-    _
+    hessian
     (hessianSymmetric data)
     coordinate
 
@@ -211,15 +211,30 @@ physicalTiltDefectColumnBelowHalfGap {hessian} data column =
       ℚP.*-monoˡ-≤-nonNeg
         (Promotion.distortion geometryData)
         (Promotion.hessianAbsoluteRowMass geometryData column)
+
+    rowToHalfGap :
+      Promotion.distortion geometryData
+        * Schur.absoluteRowMass
+            Physical.physicalSU2Coordinates4 hessian column
+      ≤ Tilt.p33HalfGap
+    rowToHalfGap =
+      ℚP.≤-trans rowMassScaled
+        (Promotion.scalarTiltBudget geometryData)
+
+    columnToHalfGap :
+      Promotion.distortion geometryData
+        * Schur.absoluteColumnMass
+            Physical.physicalSU2Coordinates4 hessian column
+      ≤ Tilt.p33HalfGap
+    columnToHalfGap =
+      subst
+        (λ selected → selected ≤ Tilt.p33HalfGap)
+        (sym columnToRow)
+        rowToHalfGap
   in
   ℚP.≤-trans
     (physicalTiltDefectColumnMassBound data column)
-    (subst
-      (λ lower → lower ≤ Tilt.p33HalfGap)
-      (sym columnToRow)
-      (ℚP.≤-trans
-        rowMassScaled
-        (Promotion.scalarTiltBudget geometryData)))
+    columnToHalfGap
 
 ------------------------------------------------------------------------
 -- Exact physical squared Schur estimate.
@@ -331,31 +346,10 @@ physicalTiltedSquaredLower {hessian} coercivity vector =
     (originalSquaredLower coercivity vector)
     (physicalTiltDefectSchurSquared
       (schurData coercivity) vector)
-    (subst
-      (λ defect →
-        Schur.vectorNormSq
-          Physical.physicalSU2Coordinates4
-          (Schur.matrixApply
-            Physical.physicalSU2Coordinates4 hessian vector)
-        ≤ (+ 2 / 1)
-            * Schur.vectorNormSq
-                Physical.physicalSU2Coordinates4
-                (Schur.matrixApply
-                  Physical.physicalSU2Coordinates4
-                  (physicalTiltedHessian (schurData coercivity))
-                  vector)
-          + (+ 2 / 1)
-            * Schur.vectorNormSq
-                Physical.physicalSU2Coordinates4
-                (Schur.matrixApply
-                  Physical.physicalSU2Coordinates4 defect vector))
-      (funext (λ left → funext (λ right →
-        sym (physicalTiltDefectIsMatrixDifference
-          (schurData coercivity) left right))))
-      (Squared.sameVectorReverseTriangleSquared
-        Physical.physicalSU2Coordinates4
-        (physicalTiltedHessian (schurData coercivity))
-        hessian vector))
+    (Squared.sameVectorReverseTriangleSquared
+      Physical.physicalSU2Coordinates4
+      (physicalTiltedHessian (schurData coercivity))
+      hessian vector)
 
 ------------------------------------------------------------------------
 -- Explicit stencil-degree/rate dependence.
