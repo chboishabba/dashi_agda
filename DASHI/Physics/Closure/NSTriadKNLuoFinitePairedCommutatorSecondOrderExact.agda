@@ -106,6 +106,7 @@ pairedEqualDerivativePureRemainder sample derivativeEquality
   solve
     ( weight sample
     ∷ linearIncrement sample
+    ∷ plusDerivative sample
     ∷ minusDerivative sample
     ∷ plusRemainder sample
     ∷ minusRemainder sample
