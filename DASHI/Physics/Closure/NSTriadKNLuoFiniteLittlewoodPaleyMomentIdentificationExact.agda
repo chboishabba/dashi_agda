@@ -15,16 +15,26 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteLittlewoodPaleyMomentIdentificati
 -- DOI: 10.1007/BF02099744.
 --
 -- PURPOSE
--- Instantiate the round-six centered-kernel theorem with a canonical dyadic
--- two-point Littlewood--Paley prototype.  The kernel puts mass 1/2 at the
--- opposite displacements +/- 2^{-q}.  Its mass is one, its first moment is
--- exactly zero, its second moment is exactly 4^{-q}, and the second moment
--- quarters under q -> q+1.
+-- Instantiate the round-six centered-kernel theorem with the canonical signed
+-- three-point dyadic bandpass stencil
 --
--- The resulting centered Taylor sample is then sent through the existing
--- exact cancellation theorem.  This is a literal finite kernel
--- identification, not a declaration that the continuum LP kernel has already
--- been constructed.
+--   K_q = 1/2 delta_{h_q} + 1/2 delta_{-h_q} - delta_0,
+--   h_q = 2^{-q}.
+--
+-- Unlike a positive mollifier, this stencil has the cancellation required of
+-- a Littlewood--Paley bandpass prototype:
+--
+--   mass(K_q)=0,
+--   firstMoment(K_q)=0,
+--   secondMoment(K_q)=4^{-q}.
+--
+-- Its action is exactly one half of the centered second difference, so the
+-- existing paired Taylor theorem removes the linear term and leaves only the
+-- second-order remainder.  The second moment quarters under q -> q+1.
+--
+-- This is a literal finite bandpass stencil.  Identification with a selected
+-- smooth continuum LP kernel still requires its Fourier support, scaling and
+-- moment integrals on the official torus carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -44,45 +54,63 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 half : ℚ
 half = Int.+ 1 / 2
 
-kernelMass : ℚ
-kernelMass = half + half
+centerWeight : ℚ
+centerWeight = - 1ℚ
 
-kernelMassOne : kernelMass ≡ 1ℚ
-kernelMassOne = refl
+bandpassMass : ℚ
+bandpassMass = half + half + centerWeight
 
-firstMomentAt : Nat → ℚ
-firstMomentAt shell =
-  Even.firstMomentPair half (Near.windowRoot shell)
+bandpassMassZero : bandpassMass ≡ 0ℚ
+bandpassMassZero = solve []
 
-firstMomentAtZero :
+bandpassFirstMoment : Nat → ℚ
+bandpassFirstMoment shell =
+  half * Near.windowRoot shell
+  + half * (- Near.windowRoot shell)
+  + centerWeight * 0ℚ
+
+bandpassFirstMomentZero :
   (shell : Nat) →
-  firstMomentAt shell ≡ 0ℚ
-firstMomentAtZero shell =
-  Even.firstMomentPairCancels half (Near.windowRoot shell)
-
-secondMomentAt : Nat → ℚ
-secondMomentAt shell =
-  half * L2.square (Near.windowRoot shell)
-  + half * L2.square (- Near.windowRoot shell)
-
-secondMomentMeaning :
-  (shell : Nat) →
-  secondMomentAt shell ≡ Near.windowLength shell
-secondMomentMeaning shell =
+  bandpassFirstMoment shell ≡ 0ℚ
+bandpassFirstMomentZero shell =
   solve (Near.windowRoot shell ∷ [])
 
-secondMomentQuarters :
+bandpassSecondMoment : Nat → ℚ
+bandpassSecondMoment shell =
+  half * L2.square (Near.windowRoot shell)
+  + half * L2.square (- Near.windowRoot shell)
+  + centerWeight * L2.square 0ℚ
+
+bandpassSecondMomentMeaning :
   (shell : Nat) →
-  secondMomentAt (suc shell)
-  ≡ Geo.quarter * secondMomentAt shell
-secondMomentQuarters shell =
+  bandpassSecondMoment shell ≡ Near.windowLength shell
+bandpassSecondMomentMeaning shell =
+  solve (Near.windowRoot shell ∷ [])
+
+bandpassSecondMomentQuarters :
+  (shell : Nat) →
+  bandpassSecondMoment (suc shell)
+  ≡ Geo.quarter * bandpassSecondMoment shell
+bandpassSecondMomentQuarters shell =
   trans
-    (secondMomentMeaning (suc shell))
+    (bandpassSecondMomentMeaning (suc shell))
     (trans
       (Near.windowLengthQuarters shell)
       (cong
         (Geo.quarter *_)
-        (sym (secondMomentMeaning shell))))
+        (sym (bandpassSecondMomentMeaning shell))))
+
+bandpassAction : ℚ → ℚ → ℚ → ℚ
+bandpassAction center plusValue minusValue =
+  half * plusValue + half * minusValue + centerWeight * center
+
+bandpassActionCenteredMeaning :
+  (center plusValue minusValue : ℚ) →
+  bandpassAction center plusValue minusValue
+  ≡ half * (plusValue + (- center))
+    + half * (minusValue + (- center))
+bandpassActionCenteredMeaning center plusValue minusValue =
+  solve (center ∷ plusValue ∷ minusValue ∷ [])
 
 canonicalPairedTaylorSample :
   (center linear plusRemainder minusRemainder : ℚ) →
@@ -104,15 +132,33 @@ canonicalPairedTaylorSample center linear plusRemainder minusRemainder =
       ∷ []
       ))
 
-canonicalCenteredCancellation :
+bandpassActionIsPairedCenteredIncrement :
   (center linear plusRemainder minusRemainder : ℚ) →
-  Even.pairedCenteredIncrement
-    (canonicalPairedTaylorSample
-      center linear plusRemainder minusRemainder)
+  bandpassAction
+    center
+    (center + linear + plusRemainder)
+    (center + (- linear) + minusRemainder)
+  ≡ Even.pairedCenteredIncrement
+      (canonicalPairedTaylorSample
+        center linear plusRemainder minusRemainder)
+bandpassActionIsPairedCenteredIncrement
+  center linear plusRemainder minusRemainder =
+  solve (center ∷ linear ∷ plusRemainder ∷ minusRemainder ∷ [])
+
+canonicalBandpassRemainderIdentity :
+  (center linear plusRemainder minusRemainder : ℚ) →
+  bandpassAction
+    center
+    (center + linear + plusRemainder)
+    (center + (- linear) + minusRemainder)
   ≡ Even.pairedRemainderContribution
-    (canonicalPairedTaylorSample
+      (canonicalPairedTaylorSample
+        center linear plusRemainder minusRemainder)
+canonicalBandpassRemainderIdentity
+  center linear plusRemainder minusRemainder =
+  trans
+    (bandpassActionIsPairedCenteredIncrement
       center linear plusRemainder minusRemainder)
-canonicalCenteredCancellation center linear plusRemainder minusRemainder =
-  Even.pairedTaylorLinearCancellation
-    (canonicalPairedTaylorSample
-      center linear plusRemainder minusRemainder)
+    (Even.pairedTaylorLinearCancellation
+      (canonicalPairedTaylorSample
+        center linear plusRemainder minusRemainder))
