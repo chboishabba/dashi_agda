@@ -15,6 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGeometricDepletionRound12Validation whe
 -- * explicit filtered-surplus assembly with all residual classes retained;
 -- * adjoint-localization cancellation;
 -- * the classical Grujic localized one-half-Holder coherence criterion;
+-- * the projected-product/Bernstein/Holder high--high inequality chain;
 -- * high--high critical norm conversion and finite interaction assembly;
 -- * the shared 2^(-3m/2) far-field/high--high annular arithmetic;
 -- * the high--low derivative-ratio prefix bound 1/2;
@@ -41,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNYuFiniteFilteredSurplusAssemblyExact
 import DASHI.Physics.Closure.NSTriadKNYuFiniteAdjointLocalizationCancellationExact
 import DASHI.Physics.Closure.NSTriadKNYuFiniteFarFieldAnnularGainExact
 import DASHI.Physics.Closure.NSTriadKNGrujicLocalizedVorticityCoherenceSourceAuditExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighHighLowProjectedProductChainExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighHighLowNormConversionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighHighLowCriticalAssemblyExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteHighLowDerivativeRatioExact
