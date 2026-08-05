@@ -10,6 +10,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteEightPointTorusHaarExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteEightPointHaarBochnerExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteBochnerFubiniExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteRationalStepBochnerIntegralExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteEightPointIncrementMultiplierExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteLittlewoodPaleyMomentIdentificationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteNearWindowScalingObstructionExact.agda
