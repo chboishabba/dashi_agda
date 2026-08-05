@@ -22,21 +22,14 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCascadeEventCostExact where
 -- geometrically vanishing cost evades this argument.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_; here; there)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List as BuiltinList using (List)
-open import Agda.Builtin.Unit using (⊤; tt)
-open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (zero; suc)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 sumCosts : List ℚ → ℚ
 sumCosts [] = 0ℚ
@@ -75,9 +68,6 @@ uniformCostLowerBound epsilon (cost ∷ costs) pointwise =
     (λ lower → lower ≤ sumCosts (cost ∷ costs))
     (solve (rationalCount costs ∷ epsilon ∷ []))
     combined
-  where
-  open import Data.List.Membership.Propositional using (_∈_; here; there)
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 finiteCascadeCountPaidByBudget :
   (epsilon totalBudget : ℚ) →
@@ -89,5 +79,3 @@ finiteCascadeCountPaidByBudget epsilon totalBudget costs pointwise totalBound =
   ℚₚ.≤-trans
     (uniformCostLowerBound epsilon costs pointwise)
     totalBound
-  where
-  open import Data.List.Membership.Propositional using (_∈_)
