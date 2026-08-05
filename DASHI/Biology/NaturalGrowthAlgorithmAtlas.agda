@@ -264,7 +264,8 @@ threeContractionsHaveDepthThree :
 threeContractionsHaveDepthThree = refl
 
 ------------------------------------------------------------------------
--- Functional-structural growth: resource capture must exceed maintenance.
+-- Functional-structural growth: resource capture must cover maintenance and
+-- the selected growth cost.
 
 record ResourceBudget : Set where
   constructor resourceBudget
@@ -279,11 +280,15 @@ availableForGrowth : ResourceBudget → Nat
 availableForGrowth b =
   capturedResource b ∸ maintenanceCost b
 
+canPay : Nat → Nat → Bool
+canPay available zero = true
+canPay zero (suc cost) = false
+canPay (suc available) (suc cost) =
+  canPay available cost
+
 canAffordGrowth : ResourceBudget → Bool
-canAffordGrowth (resourceBudget zero maintenance growth) = false
-canAffordGrowth (resourceBudget (suc capture) zero growth) = true
-canAffordGrowth (resourceBudget (suc capture) (suc maintenance) growth) =
-  canAffordGrowth (resourceBudget capture maintenance growth)
+canAffordGrowth b =
+  canPay (availableForGrowth b) (growthCost b)
 
 productiveBudget : ResourceBudget
 productiveBudget = resourceBudget 5 2 2
