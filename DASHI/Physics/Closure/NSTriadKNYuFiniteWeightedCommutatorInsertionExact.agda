@@ -26,10 +26,13 @@ module DASHI.Physics.Closure.NSTriadKNYuFiniteWeightedCommutatorInsertionExact w
 -- producing the pointwise scale inequality remains a visible analytic input.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 record WeightedCommutatorCell : Set where
   constructor weighted-commutator-cell
@@ -69,12 +72,43 @@ weightedCellInsertion :
     + weightedLocalization cell
 weightedCellInsertion cell =
   let
-    instance
-      shellWeightIsNonnegative = nonNegative (weightNonnegative cell)
+    raw :
+      weight cell * forcing cell
+      ≤ weight cell
+        * (diffusionCoefficient cell * diffusion cell
+          + incrementCoefficient cell * incrementDefect cell
+          + localizationBudget cell)
+    raw =
+      let
+        instance
+          shellWeightIsNonnegative = nonNegative (weightNonnegative cell)
+      in
+      ℚₚ.*-monoˡ-≤-nonNeg
+        (weight cell)
+        (commutatorInsertionBound cell)
+
+    targetMeaning :
+      weight cell
+        * (diffusionCoefficient cell * diffusion cell
+          + incrementCoefficient cell * incrementDefect cell
+          + localizationBudget cell)
+      ≡ weightedDiffusion cell
+        + weightedIncrement cell
+        + weightedLocalization cell
+    targetMeaning =
+      solve
+        ( weight cell
+        ∷ diffusionCoefficient cell
+        ∷ diffusion cell
+        ∷ incrementCoefficient cell
+        ∷ incrementDefect cell
+        ∷ localizationBudget cell
+        ∷ [])
   in
-  ℚₚ.*-monoˡ-≤-nonNeg
-    (weight cell)
-    (commutatorInsertionBound cell)
+  subst
+    (λ upper → weightedForcing cell ≤ upper)
+    targetMeaning
+    raw
 
 sumBy :
   {A : Set} →
@@ -107,5 +141,29 @@ finiteWeightedCommutatorInsertion (cell ∷ cells) =
       ℚₚ.+-mono-≤
         (weightedCellInsertion cell)
         tailBound
+
+    targetMeaning :
+      (weightedDiffusion cell
+        + weightedIncrement cell
+        + weightedLocalization cell)
+        + (sumBy cells weightedDiffusion
+          + sumBy cells weightedIncrement
+          + sumBy cells weightedLocalization)
+      ≡ (weightedDiffusion cell + sumBy cells weightedDiffusion)
+        + (weightedIncrement cell + sumBy cells weightedIncrement)
+        + (weightedLocalization cell + sumBy cells weightedLocalization)
+    targetMeaning =
+      solve
+        ( weightedDiffusion cell
+        ∷ weightedIncrement cell
+        ∷ weightedLocalization cell
+        ∷ sumBy cells weightedDiffusion
+        ∷ sumBy cells weightedIncrement
+        ∷ sumBy cells weightedLocalization
+        ∷ [])
   in
-  assembled
+  subst
+    (λ upper →
+      weightedForcing cell + sumBy cells weightedForcing ≤ upper)
+    targetMeaning
+    assembled
