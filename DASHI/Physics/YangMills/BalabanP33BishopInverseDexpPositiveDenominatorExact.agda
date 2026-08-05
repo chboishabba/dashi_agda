@@ -19,24 +19,24 @@ module DASHI.Physics.YangMills.BalabanP33BishopInverseDexpPositiveDenominatorExa
 --
 -- DASHI CONTRIBUTION
 --
--- The earlier P33 module proved only the cross-multiplied inequalities for
+-- Put
 --
 --   n(t) = 2 sin t - t(1 + cos t),
 --   d(t) = 2 t^2 sin t.
 --
--- This file closes the constructive positive-denominator step.  On the
--- strictly positive half ball, the already proved cubic sine lower bound gives
+-- The previous P33 theorem proved
+--
+--   (1/12)d(t) <= n(t) <= (1/6)d(t)
+--
+-- without division.  This module proves constructively that d(t)>0 on the
+-- strictly positive half ball.  Indeed,
 --
 --   sin t >= t(1-t^2/6) >= (23/24)t > 0.
 --
--- Hence d(t)>0, the Bishop inverse exists, and multiplication by its positive
--- inverse turns the cross-multiplied bounds into the literal coefficient
--- estimate
---
---   1/12 <= n(t)/d(t) <= 1/6.
---
--- No trichotomy or decidable equality on constructive reals is used.  The
--- endpoint t=0 and the positive branch are represented explicitly below.
+-- The Bishop inverse of d(t) therefore exists and is positive, so the literal
+-- quotient beta(t)=n(t)d(t)^-1 satisfies 1/12 <= beta(t) <= 1/6.  The t=0
+-- branch is defined separately as 1/12; no equality decision or trichotomy on
+-- constructive reals is assumed.
 ------------------------------------------------------------------------
 
 open import Data.Integer.Base using (+_)
@@ -55,10 +55,9 @@ import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpNumeratorExact as Nume
 import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpCoefficientExact as Cross
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
-oneTwelfth oneSixth oneQuarter twentyThreeTwentyFourth two : ℚᵘ
+oneTwelfth oneSixth twentyThreeTwentyFourth two : ℚᵘ
 oneTwelfth = + 1 / 12
 oneSixth = + 1 / 6
-oneQuarter = + 1 / 4
 twentyThreeTwentyFourth = + 23 / 24
 two = + 2 / 1
 
@@ -68,19 +67,18 @@ embed = BishopReal._⋆
 square : BishopReal.ℝ → BishopReal.ℝ
 square value = BishopReal._*_ value value
 
-positiveEmbeddedTwentyThreeTwentyFourth :
+positiveTwentyThreeTwentyFourth :
   BishopReal._<_ BishopReal.0ℝ (embed twentyThreeTwentyFourth)
-positiveEmbeddedTwentyThreeTwentyFourth =
+positiveTwentyThreeTwentyFourth =
   BishopProperties.p<q⇒p⋆<q⋆
     0ℚᵘ twentyThreeTwentyFourth
     (ℚP.positive⁻¹ twentyThreeTwentyFourth)
 
-positiveEmbeddedTwo : BishopReal.Positive (embed two)
-positiveEmbeddedTwo =
+positiveTwo : BishopReal.Positive (embed two)
+positiveTwo =
   BishopProperties.0<x⇒posx
     (BishopProperties.p<q⇒p⋆<q⋆
-      0ℚᵘ two
-      (ℚP.positive⁻¹ two))
+      0ℚᵘ two (ℚP.positive⁻¹ two))
 
 oneMinusSixthSquare : BishopReal.ℝ → BishopReal.ℝ
 oneMinusSixthSquare value =
@@ -95,13 +93,13 @@ oneMinusSixthSquareAboveTwentyThreeTwentyFourth :
     (oneMinusSixthSquare value)
 oneMinusSixthSquareAboveTwentyThreeTwentyFourth {value = value} inputs =
   let
-    squareBelowQuarter = Cross.squareBelowQuarter inputs
-    oneSixthNonnegative = Cross.oneSixthNonnegative
     scaledSquare =
       BishopProperties.*-monoʳ-≤-nonNeg
-        squareBelowQuarter oneSixthNonnegative
-    negated = BishopProperties.neg-mono-≤ scaledSquare
-    shifted = BishopProperties.+-monoʳ-≤ BishopReal.1ℝ negated
+        (Cross.squareBelowQuarter inputs)
+        Cross.oneSixthNonnegative
+    shifted =
+      BishopProperties.+-monoʳ-≤ BishopReal.1ℝ
+        (BishopProperties.neg-mono-≤ scaledSquare)
   in
   BishopProperties.≤-respˡ-≃
     (let open BishopProperties.ℝ-Solver
@@ -113,9 +111,9 @@ oneMinusSixthSquareAboveTwentyThreeTwentyFourth {value = value} inputs =
     (BishopProperties.≤-respʳ-≃
       (let open BishopProperties.ℝ-Solver
        in solve 1
-         (λ squareValue →
-           Κ (+ 1 / 1) ⊕ (⊝ (Κ (+ 1 / 6) ⊗ squareValue))
-           ⊜ Κ (+ 1 / 1) ⊖ (Κ (+ 1 / 6) ⊗ squareValue))
+         (λ s →
+           Κ (+ 1 / 1) ⊕ (⊝ (Κ (+ 1 / 6) ⊗ s))
+           ⊜ Κ (+ 1 / 1) ⊖ (Κ (+ 1 / 6) ⊗ s))
          BishopProperties.≃-refl
          (square value))
       shifted)
@@ -127,7 +125,7 @@ oneMinusSixthSquarePositive :
 oneMinusSixthSquarePositive inputs =
   BishopProperties.0<x⇒posx
     (BishopProperties.<-≤-trans
-      positiveEmbeddedTwentyThreeTwentyFourth
+      positiveTwentyThreeTwentyFourth
       (oneMinusSixthSquareAboveTwentyThreeTwentyFourth inputs))
 
 cubicSineLowerPolynomial : BishopReal.ℝ → BishopReal.ℝ
@@ -164,10 +162,10 @@ positiveSineOnPositiveHalfBall :
   BishopReal._<_ BishopReal.0ℝ value →
   BishopReal._<_ BishopReal.0ℝ (Elementary.bishopSin dataSet value)
 positiveSineOnPositiveHalfBall inputs valuePositive =
-  let low = Low.polynomialTaylorBounds inputs
-  in BishopProperties.<-≤-trans
-      (BishopProperties.posx⇒0<x (cubicSineLowerPositive inputs valuePositive))
-      (Low.sineCubicLower low)
+  BishopProperties.<-≤-trans
+    (BishopProperties.posx⇒0<x
+      (cubicSineLowerPositive inputs valuePositive))
+    (Low.sineCubicLower (Low.polynomialTaylorBounds inputs))
 
 positiveSquare : ∀ {value} →
   BishopReal._<_ BishopReal.0ℝ value →
@@ -183,10 +181,10 @@ inverseDexpDenominatorPositive :
   BishopReal._<_ BishopReal.0ℝ value →
   BishopReal._<_ BishopReal.0ℝ
     (Cross.inverseDexpDenominator dataSet value)
-inverseDexpDenominatorPositive {dataSet} {value} inputs valuePositive =
+inverseDexpDenominatorPositive inputs valuePositive =
   BishopProperties.posx⇒0<x
     (BishopProperties.posx,y⇒posx*y
-a      positiveEmbeddedTwo
+      positiveTwo
       (BishopProperties.posx,y⇒posx*y
         (positiveSquare valuePositive)
         (BishopProperties.0<x⇒posx
@@ -196,7 +194,9 @@ positiveDenominatorNonzero :
   ∀ {dataSet value} →
   Concrete.ConcreteHalfBallSeriesInputs dataSet value →
   BishopReal._<_ BishopReal.0ℝ value →
-  Cross.inverseDexpDenominator dataSet value BishopReal.≄ BishopReal.0ℝ
+  BishopReal._≄_
+    (Cross.inverseDexpDenominator dataSet value)
+    BishopReal.0ℝ
 positiveDenominatorNonzero inputs valuePositive =
   inj₂ (inverseDexpDenominatorPositive inputs valuePositive)
 
@@ -292,9 +292,7 @@ positiveInverseDexpCoefficientBounds {dataSet} {value} inputs valuePositive =
 -- Constructive endpoint split.  No equality decision is assumed.
 ------------------------------------------------------------------------
 
-data NonnegativeRadiusCase
-    {dataSet : Elementary.BishopElementaryPowerSeriesData}
-    (value : BishopReal.ℝ) : Set where
+data NonnegativeRadiusCase (value : BishopReal.ℝ) : Set where
   zeroRadius : BishopReal._≃_ value BishopReal.0ℝ →
     NonnegativeRadiusCase value
   positiveRadius : BishopReal._<_ BishopReal.0ℝ value →
@@ -303,7 +301,7 @@ data NonnegativeRadiusCase
 inverseDexpCoefficientExtended :
   ∀ {dataSet value} →
   (inputs : Concrete.ConcreteHalfBallSeriesInputs dataSet value) →
-  NonnegativeRadiusCase {dataSet} value →
+  NonnegativeRadiusCase value →
   BishopReal.ℝ
 inverseDexpCoefficientExtended inputs (zeroRadius valueZero) =
   embed oneTwelfth
