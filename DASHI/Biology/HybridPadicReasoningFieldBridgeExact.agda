@@ -22,9 +22,9 @@ chartDigit Hall.chartPoint1 = U369.digit6
 chartDigit Hall.chartPoint2 = U369.digit9
 
 hybridAddress3 : Hall.HybridVisualPoint → LOD.DepthThreeAddress
-hybridAddress3 point with Hall.branchAddress point
-... | a vcons b vcons vnil =
-  a vcons b vcons chartDigit (Hall.localChart point) vcons vnil
+hybridAddress3
+  (Hall.hybridVisualPoint (a vcons b vcons vnil) chart) =
+  a vcons b vcons chartDigit chart vcons vnil
 
 hybridVoxel3 : Hall.HybridVisualPoint → LOD.Voxel3
 hybridVoxel3 point = LOD.embedDepthThree (hybridAddress3 point)
