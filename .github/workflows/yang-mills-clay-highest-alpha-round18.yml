@@ -8,6 +8,7 @@ on:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33BishopQuaternionExponentialSquaredChordExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33BishopLiteralQuaternionExponentialChordExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BishopR4ChordMetricFromSquareRootExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33QuaternionDuhamelIntegrandTelescopeExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact.agda'
@@ -39,5 +40,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check literal exponential, Duhamel, Hessian, residual and coupled RG lane
+      - name: Check literal exponential, chord metric, Duhamel, Hessian and residual lane
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round18.sh
