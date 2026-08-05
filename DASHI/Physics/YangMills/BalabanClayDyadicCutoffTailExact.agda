@@ -27,14 +27,15 @@ module DASHI.Physics.YangMills.BalabanClayDyadicCutoffTailExact where
 -- analytic producer.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+import Data.Nat.Properties as ℕP
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -66,6 +67,13 @@ finiteDyadicTail start zero = 0ℚ
 finiteDyadicTail start (suc count) =
   dyadic start + finiteDyadicTail (suc start) count
 
+dyadicPlusDoubleNextIsDoubleCurrent : ∀ start →
+  dyadic start + two * dyadic (suc start)
+  ≡ two * dyadic start
+dyadicPlusDoubleNextIsDoubleCurrent start
+  rewrite twoNextDyadicIsCurrent start =
+  ℚRing.solve-∀ (dyadic start)
+
 finiteDyadicTailBelowDoubleStart : ∀ start count →
   finiteDyadicTail start count ≤ two * dyadic start
 finiteDyadicTailBelowDoubleStart start zero =
@@ -76,17 +84,17 @@ finiteDyadicTailBelowDoubleStart start (suc count) =
       ℚP.≤-refl
       (finiteDyadicTailBelowDoubleStart (suc start) count))
     (subst
-      (λ middle →
-        dyadic start + two * dyadic (suc start)
-        ≤ dyadic start + middle)
-      (twoNextDyadicIsCurrent start)
+      (λ upper →
+        dyadic start + two * dyadic (suc start) ≤ upper)
+      (dyadicPlusDoubleNextIsDoubleCurrent start)
       ℚP.≤-refl)
+
+startPlusZero : ∀ start → start + zero ≡ start
+startPlusZero = ℕP.+-identityʳ
 
 startSuccessorCount : ∀ start count →
   start + suc count ≡ suc start + count
-startSuccessorCount start zero = refl
-startSuccessorCount start (suc count) =
-  cong suc (startSuccessorCount start count)
+startSuccessorCount = ℕP.+-suc
 
 record DyadicIncrementSequence
     (State : Set) : Set₁ where
@@ -120,6 +128,21 @@ coefficientDistributesTailStep : ∀ coefficient first rest →
   ≡ coefficient * (first + rest)
 coefficientDistributesTailStep = ℚRing.solve-∀
 
+finiteDistanceAtZeroIsZero :
+  ∀ {State}
+    (dataSet : DyadicIncrementSequence State)
+    start →
+  finiteSequenceDistance dataSet start zero ≡ 0ℚ
+finiteDistanceAtZeroIsZero dataSet start =
+  subst
+    (λ endpoint →
+      Distance dataSet
+        (stateAt dataSet start)
+        (stateAt dataSet endpoint)
+      ≡ 0ℚ)
+    (sym (startPlusZero start))
+    (distanceReflexiveZero dataSet (stateAt dataSet start))
+
 finiteDistanceBelowDyadicTail :
   ∀ {State}
     (dataSet : DyadicIncrementSequence State)
@@ -129,9 +152,7 @@ finiteDistanceBelowDyadicTail :
 finiteDistanceBelowDyadicTail dataSet start zero =
   subst
     (λ left → left ≤ coefficient dataSet * 0ℚ)
-    (sym
-      (distanceReflexiveZero dataSet
-        (stateAt dataSet start)))
+    (sym (finiteDistanceAtZeroIsZero dataSet start))
     (subst
       (λ right → 0ℚ ≤ right)
       (sym (ℚP.*-zeroʳ (coefficient dataSet)))
@@ -166,11 +187,10 @@ finiteDistanceBelowDyadicTail dataSet start (suc count) =
           + coefficient dataSet
               * finiteDyadicTail (suc start) count
           ≤ upper)
-        (sym
-          (coefficientDistributesTailStep
-            (coefficient dataSet)
-            (dyadic start)
-            (finiteDyadicTail (suc start) count)))
+        (coefficientDistributesTailStep
+          (coefficient dataSet)
+          (dyadic start)
+          (finiteDyadicTail (suc start) count))
         ℚP.≤-refl))
 
 finiteDistanceBelowDoubleDyadic :
