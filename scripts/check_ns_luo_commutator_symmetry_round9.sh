@@ -8,6 +8,7 @@ bash scripts/check_ns_luo_biotsavart_continuum_round8.sh
 
 FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTransportCommutatorIdentityExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteTransportCommutatorMomentBoundExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePairedCommutatorSecondOrderExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCommutatorScaleAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTriadMultiplierDifferenceExact.agda
