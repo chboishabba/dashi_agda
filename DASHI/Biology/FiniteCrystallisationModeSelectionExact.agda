@@ -9,7 +9,8 @@ open import DASHI.Core.Prelude
 -- Source-facing precedents are recorded in the round-four source atlas:
 -- Swift--Hohenberg for finite-wavenumber instability and Cross--Hohenberg for
 -- amplitude-equation pattern competition.  This module imports only the
--- combinatorial mode-star and objective comparison, not a continuum PDE.
+-- combinatorial mode-star and a finite reduced-potential comparison, not a
+-- continuum PDE.
 
 data Direction6 : Set where
   direction0 : Direction6
@@ -77,9 +78,13 @@ canonicalOppositeTriad =
   resonantModeTriad direction3 direction5 direction1 refl refl refl
 
 ------------------------------------------------------------------------
--- Pattern selection is coefficient-dependent.  A reflection-symmetric model
--- without effective triad coupling need not select the hexagonal branch.  A
--- triad-coupled regime may reverse the ordering.
+-- Finite reduced amplitude potential.
+--
+-- Occupations are restricted here to zero/one amplitudes.  The quartic regime
+-- charges one unit per occupied mode.  The resonant regime additionally
+-- penalises an incomplete triad and rewards a closed triad.  The resulting
+-- numbers are not fitted physical coefficients, but the branch ordering is
+-- derived from one explicit formula rather than stored as a lookup table.
 
 data PatternBranch : Set where
   stripeBranch : PatternBranch
@@ -89,11 +94,75 @@ data CouplingRegime : Set where
   reflectionSymmetricQuarticRegime : CouplingRegime
   resonantTriadCoupledRegime : CouplingRegime
 
+record ModeOccupation : Set where
+  constructor modeOccupation
+  field
+    firstOccupied : Bool
+    secondOccupied : Bool
+    thirdOccupied : Bool
+
+open ModeOccupation public
+
+occupationFor : PatternBranch → ModeOccupation
+occupationFor stripeBranch = modeOccupation true false false
+occupationFor hexagonalBranch = modeOccupation true true true
+
+boolToNat : Bool → Nat
+boolToNat false = 0
+boolToNat true = 1
+
+andBool : Bool → Bool → Bool
+andBool true true = true
+andBool _ _ = false
+
+allThreeOccupied : ModeOccupation → Bool
+allThreeOccupied occupation =
+  andBool
+    (firstOccupied occupation)
+    (andBool (secondOccupied occupation) (thirdOccupied occupation))
+
+activeModeCount : ModeOccupation → Nat
+activeModeCount occupation =
+  boolToNat (firstOccupied occupation)
+  + boolToNat (secondOccupied occupation)
+  + boolToNat (thirdOccupied occupation)
+
+missingTriadPenalty : CouplingRegime → ModeOccupation → Nat
+missingTriadPenalty reflectionSymmetricQuarticRegime occupation = 0
+missingTriadPenalty resonantTriadCoupledRegime occupation with allThreeOccupied occupation
+... | true = 0
+... | false = 2
+
+closedTriadReward : CouplingRegime → ModeOccupation → Nat
+closedTriadReward reflectionSymmetricQuarticRegime occupation = 0
+closedTriadReward resonantTriadCoupledRegime occupation with allThreeOccupied occupation
+... | true = 2
+... | false = 0
+
+reducedModeScore : CouplingRegime → ModeOccupation → Nat
+reducedModeScore regime occupation =
+  (activeModeCount occupation + missingTriadPenalty regime occupation)
+  ∸
+  closedTriadReward regime occupation
+
 branchScore : CouplingRegime → PatternBranch → Nat
-branchScore reflectionSymmetricQuarticRegime stripeBranch = 1
-branchScore reflectionSymmetricQuarticRegime hexagonalBranch = 3
-branchScore resonantTriadCoupledRegime stripeBranch = 3
-branchScore resonantTriadCoupledRegime hexagonalBranch = 1
+branchScore regime branch = reducedModeScore regime (occupationFor branch)
+
+quarticStripeScoreIsOne :
+  branchScore reflectionSymmetricQuarticRegime stripeBranch ≡ 1
+quarticStripeScoreIsOne = refl
+
+quarticHexagonScoreIsThree :
+  branchScore reflectionSymmetricQuarticRegime hexagonalBranch ≡ 3
+quarticHexagonScoreIsThree = refl
+
+resonantStripeScoreIsThree :
+  branchScore resonantTriadCoupledRegime stripeBranch ≡ 3
+resonantStripeScoreIsThree = refl
+
+resonantHexagonScoreIsOne :
+  branchScore resonantTriadCoupledRegime hexagonalBranch ≡ 1
+resonantHexagonScoreIsOne = refl
 
 stripeWinsWithoutTriadCoupling :
   (branch : PatternBranch) →
