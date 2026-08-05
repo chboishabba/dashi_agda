@@ -5,7 +5,10 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 # Round four is stacked on the complete round-three visual/morphogenetic lane.
-bash scripts/check_conscious_access_round3.sh
+# The parent checker can also cascade into this script in pull-request CI.
+if [[ "${ROUND4_SKIP_ROUND3:-0}" != "1" ]]; then
+  ROUND4_DISABLE_CASCADE=1 bash scripts/check_conscious_access_round3.sh
+fi
 
 FILES=(
   DASHI/Biology/TriadicKernelLiftQuotientExact.agda
