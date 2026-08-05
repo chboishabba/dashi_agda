@@ -2,10 +2,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoTerminalGeometryRound6Validation where
 
 ------------------------------------------------------------------------
 -- Focused validation root for the terminal far/near, centered-cancellation,
--- cyclic-triad, geometric-alignment, scaling-gap and diagnostic-iteration
--- hard mathematics.  The root deliberately imports the source-faithful
--- round-four validation rather than treating a receipt or endpoint ledger as
--- evidence.
+-- cyclic-triad, geometric-alignment, scaling-gap, relative-energy uniqueness
+-- and diagnostic-iteration hard mathematics.  The root deliberately imports
+-- the source-faithful round-four validation rather than treating a receipt or
+-- endpoint ledger as evidence.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNLuoSourceFaithfulRound4Validation
@@ -25,6 +25,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearWindowHalfKernelExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteNearCenteredCommutatorExact
 import DASHI.Physics.Closure.NSTriadKNLuoMitrovicDiagnosticIterationExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSparseWeightAuditExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteWeakStrongUniquenessExact
 
 -- Existing literal complex multiplier symmetry and zero-mode cancellation.
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicComplexMultiplierCancellationExact
