@@ -21,7 +21,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong)
+import Data.Rational.Properties as ℚₚ
+open import Relation.Binary.PropositionalEquality as Eq
+  using (cong; sym; trans)
 
 _++_ : ∀ {A : Set} → List A → List A → List A
 [] ++ right = right
@@ -61,10 +63,15 @@ sumAppend :
     (value : A → ℚ) →
   sumBy (left ++ right) value
   ≡ sumBy left value + sumBy right value
-sumAppend [] right value = refl
+sumAppend [] right value =
+  sym (ℚₚ.+-identityˡ (sumBy right value))
 sumAppend (sample ∷ samples) right value
   rewrite sumAppend samples right value =
-  cong (value sample +_) refl
+  sym
+    (ℚₚ.+-assoc
+      (value sample)
+      (sumBy samples value)
+      (sumBy right value))
 
 farNearFoldIdentity :
   ∀ {A : Set}
@@ -75,15 +82,12 @@ farNearFoldIdentity :
   ≡ sumBy (farPart cutoff samples) value
     + sumBy (nearPart cutoff samples) value
 farNearFoldIdentity cutoff samples value =
-  let
-    reconstructed = farNearReconstruct cutoff samples
-    appended = sumAppend
+  trans
+    (sym
+      (cong
+        (λ xs → sumBy xs value)
+        (farNearReconstruct cutoff samples)))
+    (sumAppend
       (farPart cutoff samples)
       (nearPart cutoff samples)
-      value
-  in
-  trans
-    (sym (cong (λ xs → sumBy xs value) reconstructed))
-    appended
-  where
-  open import Relation.Binary.PropositionalEquality using (sym; trans)
+      value)
