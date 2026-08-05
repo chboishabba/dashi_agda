@@ -38,7 +38,7 @@ module DASHI.Physics.YangMills.BalabanClayStrictMacrostepComponentAssemblyExact 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -143,28 +143,58 @@ retainedQuadraticExponent : LargeFieldAbsorption → ℚ
 retainedQuadraticExponent dataSet =
   (+ 1 / 2) * quadraticEnergy dataSet - interactionAbs dataSet
 
+scaledHessianFloorIsRetainedFloor : ∀ normValue →
+  (+ 1 / 4) * (hessianFloor * normValue)
+  ≡ retainedGaussianFloor * normValue
+scaledHessianFloorIsRetainedFloor = ℚRing.solve-∀
+
+halfMinusQuarterIsQuarter : ∀ energy →
+  (+ 1 / 2) * energy - (+ 1 / 4) * energy
+  ≡ (+ 1 / 4) * energy
+halfMinusQuarterIsQuarter = ℚRing.solve-∀
+
+quarterEnergyBelowRetainedExponent :
+  (dataSet : LargeFieldAbsorption) →
+  (+ 1 / 4) * quadraticEnergy dataSet
+  ≤ retainedQuadraticExponent dataSet
+quarterEnergyBelowRetainedExponent dataSet =
+  let
+    shifted =
+      ℚP.+-mono-≤
+        ℚP.≤-refl
+        (ℚP.neg-mono-≤ (interactionAbsorbed dataSet))
+    leftEquality =
+      halfMinusQuarterIsQuarter (quadraticEnergy dataSet)
+    rightEquality :
+      (+ 1 / 2) * quadraticEnergy dataSet
+        + (- ((+ 1 / 1) * interactionAbs dataSet))
+      ≡ retainedQuadraticExponent dataSet
+    rightEquality = ℚRing.solve-∀
+      (quadraticEnergy dataSet) (interactionAbs dataSet)
+  in
+  subst
+    (λ lower → lower ≤ retainedQuadraticExponent dataSet)
+    leftEquality
+    (subst
+      (λ upper →
+        (+ 1 / 2) * quadraticEnergy dataSet
+          - (+ 1 / 4) * quadraticEnergy dataSet
+        ≤ upper)
+      rightEquality
+      shifted)
+
 largeFieldLeavesPositiveGaussian :
   (dataSet : LargeFieldAbsorption) →
   retainedGaussianFloor * normSq dataSet
   ≤ retainedQuadraticExponent dataSet
 largeFieldLeavesPositiveGaussian dataSet =
   ℚP.≤-trans
-    (ℚP.*-monoˡ-≤-nonNeg (+ 1 / 4)
-      (hessianFloorBound dataSet))
-    (ℚP.≤-trans
-      (subst
-        (λ lower → lower
-          ≤ (+ 1 / 2) * quadraticEnergy dataSet
-            - interactionAbs dataSet)
-        (ℚRing.solve-∀ (quadraticEnergy dataSet))
-        (ℚP.+-monoʳ-≤
-          ((+ 1 / 2) * quadraticEnergy dataSet)
-          (ℚP.neg-mono-≤ (interactionAbsorbed dataSet))))
-      (subst
-        (λ lower → retainedGaussianFloor * normSq dataSet ≤ lower)
-        (ℚRing.solve-∀
-          (quadraticEnergy dataSet) (interactionAbs dataSet))
-        ℚP.≤-refl))
+    (subst
+      (λ lower → lower ≤ (+ 1 / 4) * quadraticEnergy dataSet)
+      (scaledHessianFloorIsRetainedFloor (normSq dataSet))
+      (ℚP.*-monoˡ-≤-nonNeg (+ 1 / 4)
+        (hessianFloorBound dataSet)))
+    (quarterEnergyBelowRetainedExponent dataSet)
 
 strictMacrostepAssemblyLevel : ProofLevel
 strictMacrostepAssemblyLevel = machineChecked
