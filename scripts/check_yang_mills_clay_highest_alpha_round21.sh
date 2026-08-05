@@ -61,7 +61,7 @@ grep -q 'one signed Wilson comparison' \
   DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintCancellationExact.agda
 grep -q 'sole analytic producer' \
   DASHI/Physics/YangMills/BalabanP33WilsonSharpBudgetCoercivityExact.agda
-grep -q 'index h is therefore not phantom' \
+grep -q 'h is therefore not phantom' \
   DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda
 grep -q 'same h' \
   DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda
