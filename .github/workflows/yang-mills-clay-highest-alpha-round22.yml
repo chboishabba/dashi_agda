@@ -18,8 +18,10 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33WilsonSharpBudgetCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalRationalWilsonPlaquetteJetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound22Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round21.sh'
       - 'scripts/check_yang_mills_clay_highest_alpha_round22.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round22.yml'
   workflow_dispatch:
@@ -39,5 +41,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check rational Wilson, periodic Hodge and boundary-aware coercivity
+      - name: Check rational Wilson, physical W9, periodic Hodge and boundary coercivity
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round22.sh
