@@ -8,6 +8,7 @@ on:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintCancellationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33WilsonSharpBudgetCoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound21Validation.agda'
       - 'scripts/check_yang_mills_clay_highest_alpha_round21.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round21.yml'
@@ -28,5 +29,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check literal gauge-constraint cancellation and Wilson promotion
+      - name: Check cancellation, same-h adapter and Wilson promotion
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round21.sh
