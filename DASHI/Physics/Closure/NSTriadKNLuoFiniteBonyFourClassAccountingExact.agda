@@ -23,16 +23,112 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact wher
 --   comparable triads,
 --   high--high to low backscatter.
 --
--- This module proves only the exact finite assembly.  Each classwise bound is
--- an explicit field of the input record, so no continuum estimate is hidden
--- inside the bookkeeping theorem.
+-- The first theorem is a literal finite partition of a tagged interaction
+-- list.  The second theorem assembles four classwise estimates.  Every
+-- analytic bound remains an explicit field of the input record, so no
+-- continuum estimate is hidden inside the bookkeeping theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
+
+data InteractionClass : Set where
+  lowHighClass highLowClass comparableClass highHighToLowClass :
+    InteractionClass
+
+record TaggedInteraction : Set where
+  constructor tagged-interaction
+  field
+    interactionClass : InteractionClass
+    interactionValue : ℚ
+
+open TaggedInteraction public
+
+allInteractionSum : List TaggedInteraction → ℚ
+allInteractionSum [] = 0ℚ
+allInteractionSum (interaction ∷ interactions) =
+  interactionValue interaction + allInteractionSum interactions
+
+lowHighSum : List TaggedInteraction → ℚ
+lowHighSum [] = 0ℚ
+lowHighSum
+  (tagged-interaction lowHighClass value ∷ interactions) =
+  value + lowHighSum interactions
+lowHighSum (_ ∷ interactions) = lowHighSum interactions
+
+highLowSum : List TaggedInteraction → ℚ
+highLowSum [] = 0ℚ
+highLowSum
+  (tagged-interaction highLowClass value ∷ interactions) =
+  value + highLowSum interactions
+highLowSum (_ ∷ interactions) = highLowSum interactions
+
+comparableSum : List TaggedInteraction → ℚ
+comparableSum [] = 0ℚ
+comparableSum
+  (tagged-interaction comparableClass value ∷ interactions) =
+  value + comparableSum interactions
+comparableSum (_ ∷ interactions) = comparableSum interactions
+
+highHighToLowSum : List TaggedInteraction → ℚ
+highHighToLowSum [] = 0ℚ
+highHighToLowSum
+  (tagged-interaction highHighToLowClass value ∷ interactions) =
+  value + highHighToLowSum interactions
+highHighToLowSum (_ ∷ interactions) = highHighToLowSum interactions
+
+fourClassPartitionExact :
+  (interactions : List TaggedInteraction) →
+  allInteractionSum interactions
+  ≡ lowHighSum interactions
+    + highLowSum interactions
+    + comparableSum interactions
+    + highHighToLowSum interactions
+fourClassPartitionExact [] = solve []
+fourClassPartitionExact
+  (tagged-interaction lowHighClass value ∷ interactions)
+  rewrite fourClassPartitionExact interactions =
+  solve
+    ( value
+    ∷ lowHighSum interactions
+    ∷ highLowSum interactions
+    ∷ comparableSum interactions
+    ∷ highHighToLowSum interactions
+    ∷ [])
+fourClassPartitionExact
+  (tagged-interaction highLowClass value ∷ interactions)
+  rewrite fourClassPartitionExact interactions =
+  solve
+    ( value
+    ∷ lowHighSum interactions
+    ∷ highLowSum interactions
+    ∷ comparableSum interactions
+    ∷ highHighToLowSum interactions
+    ∷ [])
+fourClassPartitionExact
+  (tagged-interaction comparableClass value ∷ interactions)
+  rewrite fourClassPartitionExact interactions =
+  solve
+    ( value
+    ∷ lowHighSum interactions
+    ∷ highLowSum interactions
+    ∷ comparableSum interactions
+    ∷ highHighToLowSum interactions
+    ∷ [])
+fourClassPartitionExact
+  (tagged-interaction highHighToLowClass value ∷ interactions)
+  rewrite fourClassPartitionExact interactions =
+  solve
+    ( value
+    ∷ lowHighSum interactions
+    ∷ highLowSum interactions
+    ∷ comparableSum interactions
+    ∷ highHighToLowSum interactions
+    ∷ [])
 
 record FourClassTerminalBudget : Set where
   constructor four-class-terminal-budget
