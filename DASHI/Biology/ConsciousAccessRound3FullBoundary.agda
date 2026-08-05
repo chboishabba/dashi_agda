@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.PsychedelicMorphogeneticGeometryBoundary as Core
 import DASHI.Biology.NaturalGrowthAlgorithmAtlas as Growth
+import DASHI.Biology.SquareApollonianPackingComparison as Packing
 import DASHI.Biology.SignedDistanceBooleanGeometry as SDF
 import DASHI.Biology.HallHybridManifoldTreeCarrier as Hybrid
 import DASHI.Biology.VisualPathBraidResidual as Braid
@@ -15,10 +16,10 @@ import DASHI.Biology.DynamicCoalitionPhaseEmergence as Phases
 ------------------------------------------------------------------------
 -- Complete round-three integration boundary.
 --
--- This record ensures that the attached visual, natural-growth, CSG,
--- hybrid-geometry, path-history, quantitative-dynamics, symbolic-minimizer,
--- unconscious-stability, and phase-emergence tranches are all consumers of
--- one common boundary rather than disconnected examples.
+-- This record ensures that the attached visual, natural-growth, packing,
+-- CSG, hybrid-geometry, path-history, quantitative-dynamics,
+-- symbolic-minimizer, unconscious-stability, and phase-emergence tranches are
+-- all consumers of one common boundary rather than disconnected examples.
 
 record ConsciousAccessRound3FullBoundary : Set₁ where
   constructor consciousAccessRound3FullBoundary
@@ -28,6 +29,19 @@ record ConsciousAccessRound3FullBoundary : Set₁ where
 
     naturalGrowthAlgorithms :
       Growth.NaturalGrowthAlgorithmBoundary
+
+    squareApollonianComparison :
+      Packing.PackingComparisonBoundary
+
+    descartesCircleIdentity :
+      Packing.squareNat Packing.descartesSignedSum
+      ≡
+      2 * Packing.descartesSquareSum
+
+    soddyGossetSphereIdentity :
+      Packing.squareNat Packing.soddyGossetSignedSum
+      ≡
+      3 * Packing.soddyGossetSquareSum
 
     signedDistancePerforation :
       SDF.SignedDistancePerforationWitness
@@ -81,6 +95,9 @@ canonicalConsciousAccessRound3FullBoundary =
   consciousAccessRound3FullBoundary
     Core.canonicalPsychedelicMorphogeneticGeometryBoundary
     Growth.canonicalNaturalGrowthAlgorithmBoundary
+    Packing.canonicalPackingComparisonBoundary
+    Packing.descartesCircleIdentity
+    Packing.soddyGossetSphereIdentity
     SDF.canonicalSignedDistancePerforationWitness
     SDF.canonicalSignedDistanceBoundary
     Hybrid.canonicalHybridCarrierBoundary
