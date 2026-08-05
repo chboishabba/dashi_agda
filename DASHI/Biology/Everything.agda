@@ -108,6 +108,7 @@ import DASHI.Biology.PostAcuteVisualAdaptation
 import DASHI.Biology.HallOfHallsCoalition
 import DASHI.Biology.PsychedelicMorphogeneticGeometryBoundary
 import DASHI.Biology.NaturalGrowthAlgorithmAtlas
+import DASHI.Biology.SquareApollonianPackingComparison
 import DASHI.Biology.SignedDistanceBooleanGeometry
 import DASHI.Biology.HallHybridManifoldTreeCarrier
 import DASHI.Biology.VisualPathBraidResidual
