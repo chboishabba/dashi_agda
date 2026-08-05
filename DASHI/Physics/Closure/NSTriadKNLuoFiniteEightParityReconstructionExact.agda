@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightParityReconstructionExact wh
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -54,63 +54,32 @@ reconstructEightParitySectors value point =
   + paritySector value Haar.p110 point
   + paritySector value Haar.p111 point
 
+reconstructionAtoms :
+  (Haar.BitTorus3 → ℚ) → List ℚ
+reconstructionAtoms value =
+    value Haar.p000 ∷ value Haar.p001
+  ∷ value Haar.p010 ∷ value Haar.p011
+  ∷ value Haar.p100 ∷ value Haar.p101
+  ∷ value Haar.p110 ∷ value Haar.p111
+  ∷ []
+
 finiteEightParityReconstruction :
   (value : Haar.BitTorus3 → ℚ) →
   (point : Haar.BitTorus3) →
   reconstructEightParitySectors value point ≡ value point
 finiteEightParityReconstruction value (Haar.bit3 false false false) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
 finiteEightParityReconstruction value (Haar.bit3 false false true) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
 finiteEightParityReconstruction value (Haar.bit3 false true false) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
 finiteEightParityReconstruction value (Haar.bit3 false true true) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
 finiteEightParityReconstruction value (Haar.bit3 true false false) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
 finiteEightParityReconstruction value (Haar.bit3 true false true) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
 finiteEightParityReconstruction value (Haar.bit3 true true false) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
 finiteEightParityReconstruction value (Haar.bit3 true true true) =
-  solve
-    ( value Haar.p000 ∷ value Haar.p001
-    ∷ value Haar.p010 ∷ value Haar.p011
-    ∷ value Haar.p100 ∷ value Haar.p101
-    ∷ value Haar.p110 ∷ value Haar.p111
-    ∷ [])
+  solve (reconstructionAtoms value)
