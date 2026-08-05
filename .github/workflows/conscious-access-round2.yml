@@ -1,0 +1,22 @@
+name: conscious-access-round2
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Biology/QuantitativeCompositionalDefect.agda'
+      - 'DASHI/Biology/DynamicEffectiveTopology.agda'
+      - 'DASHI/Biology/FiniteCoalitionConstruction.agda'
+      - 'DASHI/Biology/ConsciousAccessRound2SourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound2Regression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'scripts/check_conscious_access_round2.sh'
+      - '.github/workflows/conscious-access-round2.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check conscious-access round two
+        run: bash scripts/check_conscious_access_round2.sh
