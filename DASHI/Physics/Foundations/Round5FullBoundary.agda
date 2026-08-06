@@ -13,6 +13,7 @@ import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as Geometry
 import DASHI.Physics.Foundations.KernelQFTEmergenceObligations as Quantum
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Unified
 import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
+import DASHI.Papers.Unification.TheoremInterface as ExistingUnification
 
 ------------------------------------------------------------------------
 -- Cumulative exact finite theorem surface.
@@ -74,8 +75,8 @@ record Round5FullBoundary : Set where
       Quantum.triangleHolonomy ≡ Quantum.gaugeTwist
 
     terminalUnificationRemainsFalse :
-      Unified.ExistingUnification.terminalUnificationPromoted
-        Unified.ExistingUnification.canonicalUnificationPaperTheoremInterface
+      ExistingUnification.terminalUnificationPromoted
+        ExistingUnification.canonicalUnificationPaperTheoremInterface
       ≡
       false
 
@@ -126,7 +127,7 @@ canonicalRound5FullBoundary =
     ; graphLoopHasTwistHolonomy =
         refl
     ; terminalUnificationRemainsFalse =
-        Unified.existingUnificationTerminalStillFalse
+        ExistingUnification.unificationPaperInterfaceTerminalFalse
     ; sourceCountIsFourteen =
         refl
     }
