@@ -82,7 +82,7 @@ combinedWinnerScore :
 combinedWinnerScore = refl
 
 compactCombinedScore :
-  combinedObjective Search.compactIslandCandidate ≡ 36
+  combinedObjective Search.compactIslandCandidate ≡ 33
 compactCombinedScore = refl
 
 activityAndDiversitySelectDifferentPlanes :
