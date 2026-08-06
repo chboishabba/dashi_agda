@@ -31,7 +31,8 @@ module DASHI.Physics.Closure.NSTriadKNYuIncrementDefectCriticalKernelExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_+_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Relation.Nullary.Decidable.Core using (toWitness)
@@ -48,13 +49,17 @@ incrementWeight offset = Geo.quarter * Geo.pow Geo.quarter offset
 incrementWeightNonnegative :
   (offset : Nat) → 0ℚ ≤ incrementWeight offset
 incrementWeightNonnegative offset =
-  L2.nonnegativeProductMonotone
-    Geo.quarterNonnegative
-    (Geo.powNonnegative Geo.quarter offset Geo.quarterNonnegative)
-    Geo.quarterNonnegative
-    (Geo.powNonnegative Geo.quarter offset Geo.quarterNonnegative)
-    ℚₚ.≤-refl
-    ℚₚ.≤-refl
+  let
+    powerNN = Geo.powNonnegative Geo.quarter offset Geo.quarterNonnegative
+    instance
+      quarterNNI = nonNegative Geo.quarterNonnegative
+      powerNNI = nonNegative powerNN
+      productNN =
+        ℚₚ.nonNeg*nonNeg⇒nonNeg
+          Geo.quarter
+          (Geo.pow Geo.quarter offset)
+  in
+  ℚₚ.nonNegative⁻¹ (incrementWeight offset)
 
 quarterBelowHalf : Geo.quarter ≤ HL.half
 quarterBelowHalf = toWitness {a? = Geo.quarter ≤? HL.half} _
