@@ -2,6 +2,7 @@ module DASHI.Biology.ConsciousAccessRound5FullBoundary where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 import DASHI.Biology.DialecticalSheetSpiralExact as Spiral
@@ -80,9 +81,9 @@ record ConsciousAccessRound5Boundary : Set where
 
     contextualClassicalUpdatesNeedNotCommute :
       ¬ (QuantumLike.contextA
-            (QuantumLike.contextB Yijing.Triadic.negativeTrit)
+            (QuantumLike.contextB Triadic.negativeTrit)
          ≡ QuantumLike.contextB
-            (QuantumLike.contextA Yijing.Triadic.negativeTrit))
+            (QuantumLike.contextA Triadic.negativeTrit))
 
     associativePNFDoesNotManufactureExternalPrediction :
       Divination.compileAssociationPNF Divination.canonicalFreeAssociationTrace
