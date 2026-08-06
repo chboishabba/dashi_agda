@@ -1,0 +1,38 @@
+name: Yang-Mills Clay highest-alpha round 26
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round26-physical-scale-uniformity'
+  pull_request:
+    branches:
+      - 'agent/ym-clay-cross-pollination-round25'
+      - 'agent/ym-clay-alpha-round26-physical-scale-uniformity'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalGapScaleInvarianceExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33KernelDecayToSchurExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33UniformSchurFeedbackFromDecayExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33StageIStageIISpectralBoundaryExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound26Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round26.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round26.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check parameterized gauge, physical scale and uniform Schur algebra
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round26.sh

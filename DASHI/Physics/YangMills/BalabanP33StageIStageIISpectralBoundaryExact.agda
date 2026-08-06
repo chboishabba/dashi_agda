@@ -19,6 +19,11 @@ module DASHI.Physics.YangMills.BalabanP33StageIStageIISpectralBoundaryExact wher
 -- Theories. II", Communications in Mathematical Physics 96 (1984), 223--250.
 -- DOI: 10.1007/BF01240221.
 --
+-- John Cardy,
+-- "Scaling and Renormalization in Statistical Physics",
+-- Cambridge University Press, 1996.
+-- DOI: 10.1017/CBO9781316036440.
+--
 -- DASHI CONTRIBUTION
 --
 -- Make the Stage-I / Stage-II distinction type-visible.  The Cubitt--
@@ -29,16 +34,26 @@ module DASHI.Physics.YangMills.BalabanP33StageIStageIISpectralBoundaryExact wher
 --
 -- Stage I is fixed-volume physical Hessian coercivity and its finite
 -- Combes--Thomas consequences.  Stage II is a separate structure-specific RG
--- theorem.  Its named producers are:
+-- theorem.  Its hard producers are:
 --
 --   1. exact effective-action second derivative / block Hessian;
---   2. a uniform fluctuation inverse C^-1;
---   3. a uniform coarse--fine coupling B bound;
---   4. explicit norm/scaling normalization;
+--   2. a scale-uniform fluctuation inverse C^-1;
+--   3. a scale-uniform coarse--fine coupling B bound;
+--   4. compatibility of the physical transfer/Hessian gap with dyadic
+--      blocking, including the actual one-step loss relation;
 --   5. a signed effective remainder estimate;
 --   6. a strict discounted loss margin.
 --
--- In particular, B is not hidden inside the remainder.
+-- The rational corollary
+--
+--   m_coarse = 2 m_fine,
+--   a_coarse = 2 a_fine
+--     => m_coarse/a_coarse = m_fine/a_fine
+--
+-- is no longer classified as a conditional producer: its division-free form is
+-- checked in BalabanP33PhysicalGapScaleInvarianceExact.  The conditional content
+-- is proving the simultaneous physical doubling/transfer relation for the
+-- actual RG construction.  In particular, B is not hidden inside the remainder.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -59,7 +74,7 @@ data StageIIProducer : Set where
   effectiveActionSecondDerivative : StageIIProducer
   fluctuationInverseControl : StageIIProducer
   coarseFineCouplingControl : StageIIProducer
-  scalingNormalization : StageIIProducer
+  physicalDyadicGapCompatibility : StageIIProducer
   signedEffectiveRemainder : StageIIProducer
   strictDiscountedMargin : StageIIProducer
 
@@ -67,13 +82,12 @@ producerCount : StageIIProducer → Bool
 producerCount effectiveActionSecondDerivative = true
 producerCount fluctuationInverseControl = true
 producerCount coarseFineCouplingControl = true
-producerCount scalingNormalization = true
+producerCount physicalDyadicGapCompatibility = true
 producerCount signedEffectiveRemainder = true
 producerCount strictDiscountedMargin = true
 
 ------------------------------------------------------------------------
--- Authority boundary.  These fields are deliberately negative claims about
--- what the already checked finite-volume algebra does not establish.
+-- Authority boundary.
 ------------------------------------------------------------------------
 
 record StageIStageIIBoundary : Set where
@@ -99,6 +113,10 @@ record StageIStageIIBoundary : Set where
     coarseFineCouplingMayBeHiddenInRemainderIsFalse :
       coarseFineCouplingMayBeHiddenInRemainder ≡ false
 
+    scaleAlgebraAutomaticallyProvesPhysicalDoubling : Bool
+    scaleAlgebraAutomaticallyProvesPhysicalDoublingIsFalse :
+      scaleAlgebraAutomaticallyProvesPhysicalDoubling ≡ false
+
     nonStrictGapSurvivalImpliesPositiveLimitGap : Bool
     nonStrictGapSurvivalImpliesPositiveLimitGapIsFalse :
       nonStrictGapSurvivalImpliesPositiveLimitGap ≡ false
@@ -112,6 +130,7 @@ canonicalStageIStageIIBoundary =
     false refl
     false refl
     true refl
+    false refl
     false refl
     false refl
 
@@ -134,8 +153,11 @@ stageIIFluctuationInverseUniformityLevel = conditional
 stageIICoarseFineCouplingUniformityLevel : ProofLevel
 stageIICoarseFineCouplingUniformityLevel = conditional
 
-stageIIScalingNormalizationLevel : ProofLevel
-stageIIScalingNormalizationLevel = conditional
+stageIIScaleNormalizationAlgebraLevel : ProofLevel
+stageIIScaleNormalizationAlgebraLevel = machineChecked
+
+stageIIPhysicalDyadicCompatibilityLevel : ProofLevel
+stageIIPhysicalDyadicCompatibilityLevel = conditional
 
 stageIISignedRemainderLevel : ProofLevel
 stageIISignedRemainderLevel = conditional
