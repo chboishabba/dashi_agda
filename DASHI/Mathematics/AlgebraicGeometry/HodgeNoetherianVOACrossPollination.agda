@@ -53,10 +53,17 @@ record HodgeVOABridge
     cycleClassCompatibility : Set
 
 hodgeConjectureRepresentativeReused :
-  ∀ {variety comparison hodge cycleMap codimension}
-    (conjecture : H.HodgeConjectureAtCodimension
-      {variety} {comparison} {hodge} cycleMap codimension)
-    (hodgeClass : H.RationalHodgeClass hodge codimension) →
+  ∀ {variety : H.SmoothProjectiveComplexVariety}
+    {comparison : H.SingularDeRhamComparison variety}
+    {hodge : H.HodgeDecomposition variety comparison}
+    {cycleMap : H.CycleClassMap variety comparison hodge}
+    {codimension : Nat} →
+  (conjecture : H.HodgeConjectureAtCodimension
+    {variety = variety}
+    {comparison = comparison}
+    {hodge = hodge}
+    cycleMap codimension) →
+  (hodgeClass : H.RationalHodgeClass hodge codimension) →
   H.cycleClass cycleMap codimension
     (H.everyRationalHodgeClassHasCycle conjecture hodgeClass)
   ≡ H.hodgeClassValue hodgeClass
