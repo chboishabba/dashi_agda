@@ -142,7 +142,7 @@ canonicalWeightedRateIsHalfBakry
             * selected
         ≡ (+ 1 / 2)
             * Group.bakryEmeryRate family rankN betaMagnitude dMinusOne)
-      inverseLaw
+      (sym inverseLaw)
       (solve
         (Group.bakryEmeryRate family rankN betaMagnitude dMinusOne ∷ [])))
 
