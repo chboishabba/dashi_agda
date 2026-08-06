@@ -66,11 +66,14 @@ record ProjectionMode : Set where
 open ProjectionMode public
 
 longitudinal : ProjectionMode → Vector3 → Vector3
-longitudinal data value =
-  scale (inverseNormSquared data * dot (mode data) value) (mode data)
+longitudinal projectionData value =
+  scale
+    (inverseNormSquared projectionData * dot (mode projectionData) value)
+    (mode projectionData)
 
 project : ProjectionMode → Vector3 → Vector3
-project data value = subtract value (longitudinal data value)
+project projectionData value =
+  subtract value (longitudinal projectionData value)
 
 dotCommutative : (a b : Vector3) → dot a b ≡ dot b a
 dotCommutative (v3 ax ay az) (v3 bx by bz) =
@@ -81,77 +84,94 @@ dotScaleRight : (a b : Vector3) (c : ℚ) →
 dotScaleRight (v3 ax ay az) (v3 bx by bz) c =
   solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ c ∷ [])
 
-projectTransverse : (data : ProjectionMode) (value : Vector3) →
-  dot (mode data) (project data value) ≡ 0ℚ
-projectTransverse data value =
+projectTransverse : (projectionData : ProjectionMode) (value : Vector3) →
+  dot (mode projectionData) (project projectionData value) ≡ 0ℚ
+projectTransverse projectionData value =
   begin
-    dot (mode data) (project data value)
+    dot (mode projectionData) (project projectionData value)
   ≡⟨ componentExpansion ⟩
-    dot (mode data) value
-      * (1ℚ - inverseNormSquared data * normSquared (mode data))
+    dot (mode projectionData) value
+      * (1ℚ - inverseNormSquared projectionData
+          * normSquared (mode projectionData))
   ≡⟨ cong
-       (λ factor → dot (mode data) value * (1ℚ - factor))
-       (inverseLaw data) ⟩
-    dot (mode data) value * (1ℚ - 1ℚ)
-  ≡⟨ solve (dot (mode data) value ∷ []) ⟩
+       (λ factor → dot (mode projectionData) value * (1ℚ - factor))
+       (inverseLaw projectionData) ⟩
+    dot (mode projectionData) value * (1ℚ - 1ℚ)
+  ≡⟨ solve (dot (mode projectionData) value ∷ []) ⟩
     0ℚ
   ∎
   where
   componentExpansion :
-    dot (mode data) (project data value)
-    ≡ dot (mode data) value
-      * (1ℚ - inverseNormSquared data * normSquared (mode data))
-  componentExpansion with mode data | value
+    dot (mode projectionData) (project projectionData value)
+    ≡ dot (mode projectionData) value
+      * (1ℚ - inverseNormSquared projectionData
+          * normSquared (mode projectionData))
+  componentExpansion with mode projectionData | value
   ... | v3 mx my mz | v3 vx vy vz =
     solve (mx ∷ my ∷ mz ∷ vx ∷ vy ∷ vz
-      ∷ inverseNormSquared data ∷ [])
+      ∷ inverseNormSquared projectionData ∷ [])
 
-projectFixesTransverse : (data : ProjectionMode) (value : Vector3) →
-  dot (mode data) value ≡ 0ℚ → project data value ≡ value
-projectFixesTransverse data value transverse
-  with mode data | value
+projectFixesTransverse :
+  (projectionData : ProjectionMode) (value : Vector3) →
+  dot (mode projectionData) value ≡ 0ℚ →
+  project projectionData value ≡ value
+projectFixesTransverse projectionData value transverse
+  with mode projectionData | value
 ... | v3 mx my mz | v3 vx vy vz
   rewrite transverse =
   vectorExt
-    (solve (vx ∷ mx ∷ inverseNormSquared data ∷ []))
-    (solve (vy ∷ my ∷ inverseNormSquared data ∷ []))
-    (solve (vz ∷ mz ∷ inverseNormSquared data ∷ []))
+    (solve (vx ∷ mx ∷ inverseNormSquared projectionData ∷ []))
+    (solve (vy ∷ my ∷ inverseNormSquared projectionData ∷ []))
+    (solve (vz ∷ mz ∷ inverseNormSquared projectionData ∷ []))
 
-projectIdempotent : (data : ProjectionMode) (value : Vector3) →
-  project data (project data value) ≡ project data value
-projectIdempotent data value =
-  projectFixesTransverse data (project data value)
-    (projectTransverse data value)
+projectIdempotent : (projectionData : ProjectionMode) (value : Vector3) →
+  project projectionData (project projectionData value)
+  ≡ project projectionData value
+projectIdempotent projectionData value =
+  projectFixesTransverse projectionData (project projectionData value)
+    (projectTransverse projectionData value)
 
-projectPlusLongitudinal : (data : ProjectionMode) (value : Vector3) →
-  add (project data value) (longitudinal data value) ≡ value
-projectPlusLongitudinal data value
-  with mode data | value
+projectPlusLongitudinal :
+  (projectionData : ProjectionMode) (value : Vector3) →
+  add (project projectionData value) (longitudinal projectionData value)
+  ≡ value
+projectPlusLongitudinal projectionData value
+  with mode projectionData | value
 ... | v3 mx my mz | v3 vx vy vz =
   vectorExt
     (solve (vx ∷ mx ∷ my ∷ mz ∷ vy ∷ vz
-      ∷ inverseNormSquared data ∷ []))
+      ∷ inverseNormSquared projectionData ∷ []))
     (solve (vy ∷ mx ∷ my ∷ mz ∷ vx ∷ vz
-      ∷ inverseNormSquared data ∷ []))
+      ∷ inverseNormSquared projectionData ∷ []))
     (solve (vz ∷ mx ∷ my ∷ mz ∷ vx ∷ vy
-      ∷ inverseNormSquared data ∷ []))
+      ∷ inverseNormSquared projectionData ∷ []))
 
-projectLongitudinalOrthogonal : (data : ProjectionMode) (value : Vector3) →
-  dot (project data value) (longitudinal data value) ≡ 0ℚ
-projectLongitudinalOrthogonal data value =
+projectLongitudinalOrthogonal :
+  (projectionData : ProjectionMode) (value : Vector3) →
+  dot (project projectionData value) (longitudinal projectionData value)
+  ≡ 0ℚ
+projectLongitudinalOrthogonal projectionData value =
   begin
-    dot (project data value) (longitudinal data value)
-  ≡⟨ dotScaleRight (project data value) (mode data)
-       (inverseNormSquared data * dot (mode data) value) ⟩
-    (inverseNormSquared data * dot (mode data) value)
-      * dot (project data value) (mode data)
+    dot (project projectionData value) (longitudinal projectionData value)
+  ≡⟨ dotScaleRight
+       (project projectionData value)
+       (mode projectionData)
+       (inverseNormSquared projectionData
+         * dot (mode projectionData) value) ⟩
+    (inverseNormSquared projectionData * dot (mode projectionData) value)
+      * dot (project projectionData value) (mode projectionData)
   ≡⟨ cong
-       ((inverseNormSquared data * dot (mode data) value) *_)
+       ((inverseNormSquared projectionData
+         * dot (mode projectionData) value) *_)
        (Eq.trans
-         (dotCommutative (project data value) (mode data))
-         (projectTransverse data value)) ⟩
-    (inverseNormSquared data * dot (mode data) value) * 0ℚ
-  ≡⟨ solve (inverseNormSquared data ∷ dot (mode data) value ∷ []) ⟩
+         (dotCommutative (project projectionData value) (mode projectionData))
+         (projectTransverse projectionData value)) ⟩
+    (inverseNormSquared projectionData * dot (mode projectionData) value)
+      * 0ℚ
+  ≡⟨ solve
+       (inverseNormSquared projectionData
+       ∷ dot (mode projectionData) value
+       ∷ []) ⟩
     0ℚ
   ∎
 
@@ -161,48 +181,66 @@ normAddExpansion : (a b : Vector3) →
 normAddExpansion (v3 ax ay az) (v3 bx by bz) =
   solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ [])
 
-projectPythagorean : (data : ProjectionMode) (value : Vector3) →
+projectPythagorean :
+  (projectionData : ProjectionMode) (value : Vector3) →
   normSquared value
-  ≡ normSquared (project data value) + normSquared (longitudinal data value)
-projectPythagorean data value =
+  ≡ normSquared (project projectionData value)
+    + normSquared (longitudinal projectionData value)
+projectPythagorean projectionData value =
   begin
     normSquared value
-  ≡⟨ cong normSquared (sym (projectPlusLongitudinal data value)) ⟩
-    normSquared (add (project data value) (longitudinal data value))
-  ≡⟨ normAddExpansion (project data value) (longitudinal data value) ⟩
-    normSquared (project data value) + normSquared (longitudinal data value)
-      + (dot (project data value) (longitudinal data value)
-        + dot (project data value) (longitudinal data value))
+  ≡⟨ cong normSquared (sym (projectPlusLongitudinal projectionData value)) ⟩
+    normSquared
+      (add (project projectionData value) (longitudinal projectionData value))
+  ≡⟨ normAddExpansion
+       (project projectionData value)
+       (longitudinal projectionData value) ⟩
+    normSquared (project projectionData value)
+      + normSquared (longitudinal projectionData value)
+      + (dot (project projectionData value)
+          (longitudinal projectionData value)
+        + dot (project projectionData value)
+          (longitudinal projectionData value))
   ≡⟨ cong
-       (λ cross → normSquared (project data value)
-         + normSquared (longitudinal data value) + (cross + cross))
-       (projectLongitudinalOrthogonal data value) ⟩
-    normSquared (project data value) + normSquared (longitudinal data value)
+       (λ cross → normSquared (project projectionData value)
+         + normSquared (longitudinal projectionData value)
+         + (cross + cross))
+       (projectLongitudinalOrthogonal projectionData value) ⟩
+    normSquared (project projectionData value)
+      + normSquared (longitudinal projectionData value)
       + (0ℚ + 0ℚ)
-  ≡⟨ solve (normSquared (project data value)
-      ∷ normSquared (longitudinal data value) ∷ []) ⟩
-    normSquared (project data value) + normSquared (longitudinal data value)
+  ≡⟨ solve
+       (normSquared (project projectionData value)
+       ∷ normSquared (longitudinal projectionData value)
+       ∷ []) ⟩
+    normSquared (project projectionData value)
+      + normSquared (longitudinal projectionData value)
   ∎
 
 normSquaredNonnegative : (value : Vector3) → 0ℚ ≤ normSquared value
 normSquaredNonnegative (v3 vx vy vz) =
   L2.addNonnegative
-    (L2.addNonnegative (L2.squareNonnegative vx) (L2.squareNonnegative vy))
+    (L2.addNonnegative
+      (L2.squareNonnegative vx)
+      (L2.squareNonnegative vy))
     (L2.squareNonnegative vz)
 
-projectContractionSquared : (data : ProjectionMode) (value : Vector3) →
-  normSquared (project data value) ≤ normSquared value
-projectContractionSquared data value =
+projectContractionSquared :
+  (projectionData : ProjectionMode) (value : Vector3) →
+  normSquared (project projectionData value) ≤ normSquared value
+projectContractionSquared projectionData value =
   subst
-    (λ upper → normSquared (project data value) ≤ upper)
-    (sym (projectPythagorean data value))
+    (λ upper → normSquared (project projectionData value) ≤ upper)
+    (sym (projectPythagorean projectionData value))
     (subst
-      (λ lower → lower ≤ normSquared (project data value)
-        + normSquared (longitudinal data value))
-      (ℚₚ.+-identityʳ (normSquared (project data value)))
+      (λ lower →
+        lower
+        ≤ normSquared (project projectionData value)
+          + normSquared (longitudinal projectionData value))
+      (ℚₚ.+-identityʳ (normSquared (project projectionData value)))
       (ℚₚ.+-monoʳ-≤
-        (normSquared (project data value))
-        (normSquaredNonnegative (longitudinal data value))))
+        (normSquared (project projectionData value))
+        (normSquaredNonnegative (longitudinal projectionData value))))
 
 rationalLerayProjectionClosed : Bool
 rationalLerayProjectionClosed = true

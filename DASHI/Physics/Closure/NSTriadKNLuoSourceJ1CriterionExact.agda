@@ -30,7 +30,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoSourceJ1CriterionExact where
 open import Agda.Builtin.List using (List; []; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _/_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -86,29 +86,33 @@ record SourceJ1CriterionData (TimeIndex : Set) : Set₁ where
 open SourceJ1CriterionData public
 
 outputScale : ∀ {TimeIndex} → SourceJ1CriterionData TimeIndex → ℚ
-outputScale data = Source.lambda (J11.outputShell (j11Data data))
+outputScale criterionData =
+  Source.lambda (J11.outputShell (j11Data criterionData))
 
 sourceJ1 : ∀ {TimeIndex} → SourceJ1CriterionData TimeIndex → ℚ
-sourceJ1 data = Product.J1 (j1Window data)
+sourceJ1 criterionData = Product.J1 (j1Window criterionData)
 
 outputScaleNonnegative :
-  ∀ {TimeIndex} (data : SourceJ1CriterionData TimeIndex) →
-  0ℚ ≤ outputScale data
-outputScaleNonnegative data =
-  Prefix.powTwoNonnegative (J11.outputShell (j11Data data))
+  ∀ {TimeIndex} (criterionData : SourceJ1CriterionData TimeIndex) →
+  0ℚ ≤ outputScale criterionData
+outputScaleNonnegative criterionData =
+  Prefix.powTwoNonnegative
+    (J11.outputShell (j11Data criterionData))
 
 outputScaleAtLeastOne :
-  ∀ {TimeIndex} (data : SourceJ1CriterionData TimeIndex) →
-  1ℚ ≤ outputScale data
-outputScaleAtLeastOne data =
+  ∀ {TimeIndex} (criterionData : SourceJ1CriterionData TimeIndex) →
+  1ℚ ≤ outputScale criterionData
+outputScaleAtLeastOne criterionData =
   let
-    j12 = j12Data data
+    j12 = j12Data criterionData
     lower = J12.lowerScale j12
 
     raw : 1ℚ * lower ≤ (Int.+ 4 / 1) * lower
     raw =
-      let instance lowerIsNonnegative =
-        nonNegative (J12.lowerScaleNonnegative j12)
+      let
+        instance
+          lowerIsNonnegative =
+            nonNegative (J12.lowerScaleNonnegative j12)
       in
       ℚₚ.*-monoʳ-≤-nonNeg lower oneBelowFour
 
@@ -133,16 +137,16 @@ outputScaleAtLeastOne data =
   in
   subst
     (λ right → 1ℚ ≤ right)
-    (commonOutputScale data)
+    (commonOutputScale criterionData)
     oneBelowJ12Output
 
 sourceJ11SquareNonnegative :
-  ∀ {TimeIndex} (data : SourceJ1CriterionData TimeIndex) →
-  0ℚ ≤ J11.sourceJ11Squared (j11Data data)
-sourceJ11SquareNonnegative {TimeIndex} data =
-  go (J11.times (j11Data data))
+  ∀ {TimeIndex} (criterionData : SourceJ1CriterionData TimeIndex) →
+  0ℚ ≤ J11.sourceJ11Squared (j11Data criterionData)
+sourceJ11SquareNonnegative {TimeIndex} criterionData =
+  go (J11.times (j11Data criterionData))
   where
-  j11 = j11Data data
+  j11 = j11Data criterionData
 
   go :
     (remaining : List TimeIndex) →
@@ -168,33 +172,36 @@ sourceJ11SquareNonnegative {TimeIndex} data =
       (go remaining)
 
 sourceJ1Cauchy :
-  ∀ {TimeIndex} (data : SourceJ1CriterionData TimeIndex) →
-  L2.square (sourceJ1 data)
-  ≤ J11.sourceJ11Squared (j11Data data)
-      * J12.sourceJ12Square (j12Data data)
-sourceJ1Cauchy data =
+  ∀ {TimeIndex} (criterionData : SourceJ1CriterionData TimeIndex) →
+  L2.square (sourceJ1 criterionData)
+  ≤ J11.sourceJ11Squared (j11Data criterionData)
+      * J12.sourceJ12Square (j12Data criterionData)
+sourceJ1Cauchy criterionData =
   subst
-    (λ upper → L2.square (sourceJ1 data) ≤ upper)
+    (λ upper → L2.square (sourceJ1 criterionData) ≤ upper)
     (cong₂ _*_
-      (j11FactorMeaning data)
-      (j12FactorMeaning data))
-    (Product.J1SquareBelowJ11J12 (j1Window data))
+      (j11FactorMeaning criterionData)
+      (j12FactorMeaning criterionData))
+    (Product.J1SquareBelowJ11J12 (j1Window criterionData))
 
 outputSquaredBelowCubed :
-  ∀ {TimeIndex} (data : SourceJ1CriterionData TimeIndex) →
-  L2.square (outputScale data)
-  ≤ J12.pow3 (outputScale data)
-outputSquaredBelowCubed data =
+  ∀ {TimeIndex} (criterionData : SourceJ1CriterionData TimeIndex) →
+  L2.square (outputScale criterionData)
+  ≤ J12.pow3 (outputScale criterionData)
+outputSquaredBelowCubed criterionData =
   let
-    q = outputScale data
+    q = outputScale criterionData
     qSquare = L2.square q
 
     scaled : qSquare * 1ℚ ≤ qSquare * q
     scaled =
-      let instance squareIsNonnegative =
-        nonNegative (L2.squareNonnegative q)
+      let
+        instance
+          squareIsNonnegative =
+            nonNegative (L2.squareNonnegative q)
       in
-      ℚₚ.*-monoˡ-≤-nonNeg qSquare (outputScaleAtLeastOne data)
+      ℚₚ.*-monoˡ-≤-nonNeg
+        qSquare (outputScaleAtLeastOne criterionData)
 
     leftMeaning : qSquare * 1ℚ ≡ qSquare
     leftMeaning = solve (qSquare ∷ [])
@@ -205,41 +212,43 @@ outputSquaredBelowCubed data =
   subst₂ _≤_ leftMeaning rightMeaning scaled
 
 sourceJ12ScaledToCommon :
-  ∀ {TimeIndex} (data : SourceJ1CriterionData TimeIndex) →
-  J12.pow3 (outputScale data)
-    * J12.sourceJ12Square (j12Data data)
-  ≤ (Int.+ 640 / 1) * J11.delta (j11Data data)
-sourceJ12ScaledToCommon data =
+  ∀ {TimeIndex} (criterionData : SourceJ1CriterionData TimeIndex) →
+  J12.pow3 (outputScale criterionData)
+    * J12.sourceJ12Square (j12Data criterionData)
+  ≤ (Int.+ 640 / 1) * J11.delta (j11Data criterionData)
+sourceJ12ScaledToCommon criterionData =
   let
-    j12 = j12Data data
+    j12 = j12Data criterionData
     raw = J12.sourceJ12CriterionScaling j12
 
     leftMeaning :
       J12.pow3 (J12.outputScale j12)
         * J12.sourceJ12Square j12
-      ≡ J12.pow3 (outputScale data)
+      ≡ J12.pow3 (outputScale criterionData)
         * J12.sourceJ12Square j12
     leftMeaning =
       cong
         (λ scale → J12.pow3 scale * J12.sourceJ12Square j12)
-        (commonOutputScale data)
+        (commonOutputScale criterionData)
 
     rightMeaning :
       (Int.+ 640 / 1) * J12.delta j12
-      ≡ (Int.+ 640 / 1) * J11.delta (j11Data data)
-    rightMeaning = cong ((Int.+ 640 / 1) *_) (commonDelta data)
+      ≡ (Int.+ 640 / 1) * J11.delta (j11Data criterionData)
+    rightMeaning =
+      cong ((Int.+ 640 / 1) *_) (commonDelta criterionData)
   in
   subst₂ _≤_ leftMeaning rightMeaning raw
 
 sourceJ1CriterionBound :
-  ∀ {TimeIndex} (data : SourceJ1CriterionData TimeIndex) →
-  L2.square (sourceJ1 data)
-  ≤ (Int.+ 6400 / 1) * L2.square (J11.delta (j11Data data))
-sourceJ1CriterionBound data =
+  ∀ {TimeIndex} (criterionData : SourceJ1CriterionData TimeIndex) →
+  L2.square (sourceJ1 criterionData)
+  ≤ (Int.+ 6400 / 1)
+      * L2.square (J11.delta (j11Data criterionData))
+sourceJ1CriterionBound criterionData =
   let
-    j11 = j11Data data
-    j12 = j12Data data
-    q = outputScale data
+    j11 = j11Data criterionData
+    j12 = j12Data criterionData
+    q = outputScale criterionData
     delta = J11.delta j11
     j12Square = J12.sourceJ12Square j12
 
@@ -252,8 +261,10 @@ sourceJ1CriterionBound data =
       J11.sourceJ11Squared j11 * j12Square
       ≤ ((Int.+ 10 / 1) * delta * L2.square q) * j12Square
     scaleByJ12 =
-      let instance j12IsNonnegative =
-        nonNegative (J12.sourceJ12SquareNonnegative j12)
+      let
+        instance
+          j12IsNonnegative =
+            nonNegative (J12.sourceJ12SquareNonnegative j12)
       in
       ℚₚ.*-monoʳ-≤-nonNeg j12Square j11Bound
 
@@ -261,10 +272,13 @@ sourceJ1CriterionBound data =
       L2.square q * j12Square
       ≤ J12.pow3 q * j12Square
     squareJ12BelowCubeJ12 =
-      let instance j12IsNonnegative =
-        nonNegative (J12.sourceJ12SquareNonnegative j12)
+      let
+        instance
+          j12IsNonnegative =
+            nonNegative (J12.sourceJ12SquareNonnegative j12)
       in
-      ℚₚ.*-monoʳ-≤-nonNeg j12Square (outputSquaredBelowCubed data)
+      ℚₚ.*-monoʳ-≤-nonNeg
+        j12Square (outputSquaredBelowCubed criterionData)
 
     coefficientNonnegative : 0ℚ ≤ (Int.+ 10 / 1) * delta
     coefficientNonnegative =
@@ -278,20 +292,23 @@ sourceJ1CriterionBound data =
       ≤ ((Int.+ 10 / 1) * delta)
         * ((Int.+ 640 / 1) * delta)
     scaledCriterion =
-      let instance coefficientIsNonnegative =
-        nonNegative coefficientNonnegative
+      let
+        instance
+          coefficientIsNonnegative =
+            nonNegative coefficientNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         ((Int.+ 10 / 1) * delta)
         (ℚₚ.≤-trans
           squareJ12BelowCubeJ12
-          (sourceJ12ScaledToCommon data))
+          (sourceJ12ScaledToCommon criterionData))
 
     reassociateLeft :
       ((Int.+ 10 / 1) * delta * L2.square q) * j12Square
       ≡ ((Int.+ 10 / 1) * delta)
           * (L2.square q * j12Square)
-    reassociateLeft = solve (delta ∷ L2.square q ∷ j12Square ∷ [])
+    reassociateLeft =
+      solve (delta ∷ L2.square q ∷ j12Square ∷ [])
 
     targetMeaning :
       ((Int.+ 10 / 1) * delta)
@@ -316,4 +333,4 @@ sourceJ1CriterionBound data =
             targetMeaning
             scaledCriterion))
   in
-  ℚₚ.≤-trans (sourceJ1Cauchy data) productBound
+  ℚₚ.≤-trans (sourceJ1Cauchy criterionData) productBound

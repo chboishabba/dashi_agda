@@ -114,102 +114,102 @@ open FiniteProjectedShellDynamics public
 
 shellEnergyDerivative :
   FiniteProjectedShellDynamics → Nat → ℚ
-shellEnergyDerivative data shell =
-  Leray.dot (velocity data shell) (velocityDerivative data shell)
+shellEnergyDerivative dynamics shell =
+  Leray.dot (velocity dynamics shell) (velocityDerivative dynamics shell)
 
 shellDissipation :
   FiniteProjectedShellDynamics → Nat → ℚ
-shellDissipation data shell =
-  viscosityFrequency data shell
-  * Leray.normSquared (velocity data shell)
+shellDissipation dynamics shell =
+  viscosityFrequency dynamics shell
+  * Leray.normSquared (velocity dynamics shell)
 
 signedTriadContribution :
   FiniteProjectedShellDynamics → Nat → Leray.Vector3 → ℚ
-signedTriadContribution data shell triad =
-  - Leray.dot (velocity data shell) triad
+signedTriadContribution dynamics shell triad =
+  - Leray.dot (velocity dynamics shell) triad
 
 totalSignedTriadFold :
   FiniteProjectedShellDynamics → Nat → ℚ
-totalSignedTriadFold data shell =
+totalSignedTriadFold dynamics shell =
   Assembly.sumℚ
     (Assembly.mapContribution
-      (signedTriadContribution data shell)
-      (triadVectorsAt data shell))
+      (signedTriadContribution dynamics shell)
+      (triadVectorsAt dynamics shell))
 
 projectedShellEnergyIdentity :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  shellEnergyDerivative data shell + shellDissipation data shell
+  shellEnergyDerivative dynamics shell + shellDissipation dynamics shell
   ≡ - Leray.dot
-      (velocity data shell)
-      (Convolution.vectorSum (triadVectorsAt data shell))
-projectedShellEnergyIdentity data shell
-  rewrite shellProjectedEquation data shell
+      (velocity dynamics shell)
+      (Convolution.vectorSum (triadVectorsAt dynamics shell))
+projectedShellEnergyIdentity dynamics shell
+  rewrite shellProjectedEquation dynamics shell
         | vectorDotAddRight
-            (velocity data shell)
+            (velocity dynamics shell)
             (Leray.scale
-              (- viscosityFrequency data shell)
-              (velocity data shell))
+              (- viscosityFrequency dynamics shell)
+              (velocity dynamics shell))
             (Leray.scale
               (- 1ℚ)
               (Leray.project
-                (projectionAt data shell)
-                (Convolution.vectorSum (triadVectorsAt data shell))))
+                (projectionAt dynamics shell)
+                (Convolution.vectorSum (triadVectorsAt dynamics shell))))
         | Leray.dotScaleRight
-            (velocity data shell)
-            (velocity data shell)
-            (- viscosityFrequency data shell)
+            (velocity dynamics shell)
+            (velocity dynamics shell)
+            (- viscosityFrequency dynamics shell)
         | Leray.dotScaleRight
-            (velocity data shell)
+            (velocity dynamics shell)
             (Leray.project
-              (projectionAt data shell)
-              (Convolution.vectorSum (triadVectorsAt data shell)))
+              (projectionAt dynamics shell)
+              (Convolution.vectorSum (triadVectorsAt dynamics shell)))
             (- 1ℚ)
         | SelfAdjoint.removeProjectorAgainstTransverseTest
-            (projectionAt data shell)
-            (velocity data shell)
-            (Convolution.vectorSum (triadVectorsAt data shell))
-            (velocityTransverse data shell) =
+            (projectionAt dynamics shell)
+            (velocity dynamics shell)
+            (Convolution.vectorSum (triadVectorsAt dynamics shell))
+            (velocityTransverse dynamics shell) =
   solve
-    ( viscosityFrequency data shell
-    ∷ Leray.normSquared (velocity data shell)
+    ( viscosityFrequency dynamics shell
+    ∷ Leray.normSquared (velocity dynamics shell)
     ∷ Leray.dot
-        (velocity data shell)
-        (Convolution.vectorSum (triadVectorsAt data shell))
+        (velocity dynamics shell)
+        (Convolution.vectorSum (triadVectorsAt dynamics shell))
     ∷ []
     )
 
 physicalRHSMatchesTotalInteractionFold :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
   - Leray.dot
-      (velocity data shell)
-      (Convolution.vectorSum (triadVectorsAt data shell))
-  ≡ totalSignedTriadFold data shell
-physicalRHSMatchesTotalInteractionFold data shell =
+      (velocity dynamics shell)
+      (Convolution.vectorSum (triadVectorsAt dynamics shell))
+  ≡ totalSignedTriadFold dynamics shell
+physicalRHSMatchesTotalInteractionFold dynamics shell =
   negativeDotFiniteVectorSum
-    (velocity data shell)
-    (triadVectorsAt data shell)
+    (velocity dynamics shell)
+    (triadVectorsAt dynamics shell)
 
 shellEquationAgainstTotalInteractionFold :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  shellEnergyDerivative data shell + shellDissipation data shell
-  ≡ totalSignedTriadFold data shell
-shellEquationAgainstTotalInteractionFold data shell =
+  shellEnergyDerivative dynamics shell + shellDissipation dynamics shell
+  ≡ totalSignedTriadFold dynamics shell
+shellEquationAgainstTotalInteractionFold dynamics shell =
   trans
-    (projectedShellEnergyIdentity data shell)
-    (physicalRHSMatchesTotalInteractionFold data shell)
+    (projectedShellEnergyIdentity dynamics shell)
+    (physicalRHSMatchesTotalInteractionFold dynamics shell)
 
 finiteRangeData :
   FiniteProjectedShellDynamics → Assembly.Equation42FiniteRangeData
-finiteRangeData data = record
+finiteRangeData dynamics = record
   { Interaction = Leray.Vector3
-  ; interactionsAt = triadVectorsAt data
-  ; contributionAt = signedTriadContribution data
-  ; isJ1 = isJ1 data
-  ; isJ11WithinJ1 = isJ11WithinJ1 data
-  ; isLowerHalfWithinJ11 = isLowerHalfWithinJ11 data
+  ; interactionsAt = triadVectorsAt dynamics
+  ; contributionAt = signedTriadContribution dynamics
+  ; isJ1 = isJ1 dynamics
+  ; isJ11WithinJ1 = isJ11WithinJ1 dynamics
+  ; isLowerHalfWithinJ11 = isLowerHalfWithinJ11 dynamics
   ; J1DecisionHasSourceMeaning = ⊤
   ; j1DecisionHasSourceMeaning = tt
   ; J2DecisionHasSourceMeaning = ⊤
@@ -221,60 +221,60 @@ finiteRangeData data = record
   }
 
 totalInteractionMeaning :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  totalSignedTriadFold data shell
-  ≡ Assembly.totalInteractionSum (finiteRangeData data) shell
-totalInteractionMeaning data shell = refl
+  totalSignedTriadFold dynamics shell
+  ≡ Assembly.totalInteractionSum (finiteRangeData dynamics) shell
+totalInteractionMeaning dynamics shell = refl
 
 officialFiniteEquation42Equality :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  shellEnergyDerivative data shell + shellDissipation data shell
-  ≡ Assembly.J1 (finiteRangeData data) shell
-    + Assembly.J2 (finiteRangeData data) shell
-officialFiniteEquation42Equality data shell =
+  shellEnergyDerivative dynamics shell + shellDissipation dynamics shell
+  ≡ Assembly.J1 (finiteRangeData dynamics) shell
+    + Assembly.J2 (finiteRangeData dynamics) shell
+officialFiniteEquation42Equality dynamics shell =
   trans
-    (shellEquationAgainstTotalInteractionFold data shell)
-    (Assembly.J1J2Meaning (finiteRangeData data) shell)
+    (shellEquationAgainstTotalInteractionFold dynamics shell)
+    (Assembly.J1J2Meaning (finiteRangeData dynamics) shell)
 
 officialFiniteEquation42 :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  shellEnergyDerivative data shell + shellDissipation data shell
-  ≤ Assembly.J1 (finiteRangeData data) shell
-    + Assembly.J2 (finiteRangeData data) shell
-officialFiniteEquation42 data shell =
+  shellEnergyDerivative dynamics shell + shellDissipation dynamics shell
+  ≤ Assembly.J1 (finiteRangeData dynamics) shell
+    + Assembly.J2 (finiteRangeData dynamics) shell
+officialFiniteEquation42 dynamics shell =
   subst
     (λ right →
-      shellEnergyDerivative data shell + shellDissipation data shell
+      shellEnergyDerivative dynamics shell + shellDissipation dynamics shell
       ≤ right)
-    (officialFiniteEquation42Equality data shell)
+    (officialFiniteEquation42Equality dynamics shell)
     ℚₚ.≤-refl
 
 physicalTriadPartitionIntoJ1J2 :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  Assembly.totalInteractionSum (finiteRangeData data) shell
-  ≡ Assembly.J1 (finiteRangeData data) shell
-    + Assembly.J2 (finiteRangeData data) shell
-physicalTriadPartitionIntoJ1J2 data shell =
-  Assembly.J1J2Meaning (finiteRangeData data) shell
+  Assembly.totalInteractionSum (finiteRangeData dynamics) shell
+  ≡ Assembly.J1 (finiteRangeData dynamics) shell
+    + Assembly.J2 (finiteRangeData dynamics) shell
+physicalTriadPartitionIntoJ1J2 dynamics shell =
+  Assembly.J1J2Meaning (finiteRangeData dynamics) shell
 
 J1PartitionIntoJ11J12 :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  Assembly.J1 (finiteRangeData data) shell
-  ≡ Assembly.J11 (finiteRangeData data) shell
-    + Assembly.J12 (finiteRangeData data) shell
-J1PartitionIntoJ11J12 data shell =
-  Assembly.J11J12Meaning (finiteRangeData data) shell
+  Assembly.J1 (finiteRangeData dynamics) shell
+  ≡ Assembly.J11 (finiteRangeData dynamics) shell
+    + Assembly.J12 (finiteRangeData dynamics) shell
+J1PartitionIntoJ11J12 dynamics shell =
+  Assembly.J11J12Meaning (finiteRangeData dynamics) shell
 
 J11PartitionIntoLowerUpper :
-  (data : FiniteProjectedShellDynamics) →
+  (dynamics : FiniteProjectedShellDynamics) →
   (shell : Nat) →
-  Assembly.J11 (finiteRangeData data) shell
-  ≡ Assembly.lowerHalfJ11 (finiteRangeData data) shell
-    + Assembly.upperHalfJ11 (finiteRangeData data) shell
-J11PartitionIntoLowerUpper data shell =
-  Assembly.J11RangeMeaning (finiteRangeData data) shell
+  Assembly.J11 (finiteRangeData dynamics) shell
+  ≡ Assembly.lowerHalfJ11 (finiteRangeData dynamics) shell
+    + Assembly.upperHalfJ11 (finiteRangeData dynamics) shell
+J11PartitionIntoLowerUpper dynamics shell =
+  Assembly.J11RangeMeaning (finiteRangeData dynamics) shell

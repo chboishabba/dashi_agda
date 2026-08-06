@@ -29,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoSourceJ12CriterionExact where
 open import Agda.Builtin.List using (List; []; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -89,12 +89,13 @@ record SourceJ12CriterionData (Time : Set) : Set₁ where
 open SourceJ12CriterionData public
 
 nearEnergyNonnegative :
-  ∀ {Time} (data : SourceJ12CriterionData Time) →
-  0ℚ ≤ Five.nearEnergyIntegral (window data)
-nearEnergyNonnegative {Time} data = go (Five.times (window data))
+  ∀ {Time} (criterionData : SourceJ12CriterionData Time) →
+  0ℚ ≤ Five.nearEnergyIntegral (window criterionData)
+nearEnergyNonnegative {Time} criterionData =
+  go (Five.times (window criterionData))
   where
-  values = Five.amplitudes (window data)
-  weights = Five.timeWeight (window data)
+  values = Five.amplitudes (window criterionData)
+  weights = Five.timeWeight (window criterionData)
 
   nearSquareNonnegative :
     (time : Time) → 0ℚ ≤ Five.nearSquareSum (values time)
@@ -109,61 +110,67 @@ nearEnergyNonnegative {Time} data = go (Five.times (window data))
   go (time ∷ remaining) =
     L2.addNonnegative
       (nonnegativeProduct
-        (Five.timeWeightNonnegative (window data) time)
+        (Five.timeWeightNonnegative (window criterionData) time)
         (nearSquareNonnegative time))
       (go remaining)
 
 lowerCubedNearEnergyBound :
-  ∀ {Time} (data : SourceJ12CriterionData Time) →
-  pow3 (lowerScale data)
-    * Five.nearEnergyIntegral (window data)
-  ≤ (Int.+ 2 / 1) * delta data
-lowerCubedNearEnergyBound data =
+  ∀ {Time} (criterionData : SourceJ12CriterionData Time) →
+  pow3 (lowerScale criterionData)
+    * Five.nearEnergyIntegral (window criterionData)
+  ≤ (Int.+ 2 / 1) * delta criterionData
+lowerCubedNearEnergyBound criterionData =
   let
     scaled :
-      lowerScale data
-        * (pow2 (lowerScale data)
-            * Five.nearEnergyIntegral (window data))
-      ≤ lowerScale data * weightedTailIntegral data
+      lowerScale criterionData
+        * (pow2 (lowerScale criterionData)
+            * Five.nearEnergyIntegral (window criterionData))
+      ≤ lowerScale criterionData * weightedTailIntegral criterionData
     scaled =
-      let instance lowerIsNonnegative =
-        nonNegative (lowerScaleNonnegative data)
+      let
+        instance
+          lowerIsNonnegative =
+            nonNegative (lowerScaleNonnegative criterionData)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
-        (lowerScale data)
-        (unweightedNearEnergyBelowWeightedTail data)
+        (lowerScale criterionData)
+        (unweightedNearEnergyBelowWeightedTail criterionData)
 
     leftMeaning :
-      lowerScale data
-        * (pow2 (lowerScale data)
-            * Five.nearEnergyIntegral (window data))
-      ≡ pow3 (lowerScale data)
-          * Five.nearEnergyIntegral (window data)
+      lowerScale criterionData
+        * (pow2 (lowerScale criterionData)
+            * Five.nearEnergyIntegral (window criterionData))
+      ≡ pow3 (lowerScale criterionData)
+          * Five.nearEnergyIntegral (window criterionData)
     leftMeaning =
       solve
-        ( lowerScale data
-        ∷ Five.nearEnergyIntegral (window data)
+        ( lowerScale criterionData
+        ∷ Five.nearEnergyIntegral (window criterionData)
         ∷ []
         )
   in
   ℚₚ.≤-trans
     (subst
-      (λ left → left ≤ lowerScale data * weightedTailIntegral data)
+      (λ left →
+        left
+        ≤ lowerScale criterionData * weightedTailIntegral criterionData)
       leftMeaning
       scaled)
-    (localizedCriterionTailBound data)
+    (localizedCriterionTailBound criterionData)
 
 sourceJ12Square :
   ∀ {Time} → SourceJ12CriterionData Time → ℚ
-sourceJ12Square data = Five.J12SquareIntegral (window data)
+sourceJ12Square criterionData =
+  Five.J12SquareIntegral (window criterionData)
 
 sourceJ12SquareNonnegative :
-  ∀ {Time} (data : SourceJ12CriterionData Time) →
-  0ℚ ≤ sourceJ12Square data
-sourceJ12SquareNonnegative {Time} data = go (Five.times (window data))
+  ∀ {Time} (criterionData : SourceJ12CriterionData Time) →
+  0ℚ ≤ sourceJ12Square criterionData
+sourceJ12SquareNonnegative {Time} criterionData =
+  go (Five.times (window criterionData))
   where
-  values = Five.amplitudes (window data)
-  weights = Five.timeWeight (window data)
+  values = Five.amplitudes (window criterionData)
+  weights = Five.timeWeight (window criterionData)
 
   go :
     (remaining : List Time) →
@@ -173,49 +180,52 @@ sourceJ12SquareNonnegative {Time} data = go (Five.times (window data))
   go (time ∷ remaining) =
     L2.addNonnegative
       (nonnegativeProduct
-        (Five.timeWeightNonnegative (window data) time)
+        (Five.timeWeightNonnegative (window criterionData) time)
         (L2.squareNonnegative (Five.nearSum (values time))))
       (go remaining)
 
 sourceJ12CriterionScaling :
-  ∀ {Time} (data : SourceJ12CriterionData Time) →
-  pow3 (outputScale data) * sourceJ12Square data
-  ≤ (Int.+ 640 / 1) * delta data
-sourceJ12CriterionScaling data =
+  ∀ {Time} (criterionData : SourceJ12CriterionData Time) →
+  pow3 (outputScale criterionData) * sourceJ12Square criterionData
+  ≤ (Int.+ 640 / 1) * delta criterionData
+sourceJ12CriterionScaling criterionData =
   let
     j12ToNear :
-      sourceJ12Square data
-      ≤ Five.five * Five.nearEnergyIntegral (window data)
-    j12ToNear = Five.sourceJ12FiveShellBound (window data)
+      sourceJ12Square criterionData
+      ≤ Five.five * Five.nearEnergyIntegral (window criterionData)
+    j12ToNear = Five.sourceJ12FiveShellBound (window criterionData)
 
-    outputCubeNonnegative : 0ℚ ≤ pow3 (outputScale data)
+    outputCubeNonnegative : 0ℚ ≤ pow3 (outputScale criterionData)
     outputCubeNonnegative =
       nonnegativeProduct
         (nonnegativeProduct
-          (outputScaleNonnegative data)
-          (outputScaleNonnegative data))
-        (outputScaleNonnegative data)
+          (outputScaleNonnegative criterionData)
+          (outputScaleNonnegative criterionData))
+        (outputScaleNonnegative criterionData)
 
     scaled :
-      pow3 (outputScale data) * sourceJ12Square data
-      ≤ pow3 (outputScale data)
-          * (Five.five * Five.nearEnergyIntegral (window data))
+      pow3 (outputScale criterionData) * sourceJ12Square criterionData
+      ≤ pow3 (outputScale criterionData)
+          * (Five.five * Five.nearEnergyIntegral (window criterionData))
     scaled =
-      let instance cubeIsNonnegative = nonNegative outputCubeNonnegative
+      let
+        instance
+          cubeIsNonnegative = nonNegative outputCubeNonnegative
       in
-      ℚₚ.*-monoˡ-≤-nonNeg (pow3 (outputScale data)) j12ToNear
+      ℚₚ.*-monoˡ-≤-nonNeg
+        (pow3 (outputScale criterionData)) j12ToNear
 
     rewriteOutput :
-      pow3 (outputScale data)
-        * (Five.five * Five.nearEnergyIntegral (window data))
+      pow3 (outputScale criterionData)
+        * (Five.five * Five.nearEnergyIntegral (window criterionData))
       ≡ (Int.+ 320 / 1)
-          * (pow3 (lowerScale data)
-              * Five.nearEnergyIntegral (window data))
+          * (pow3 (lowerScale criterionData)
+              * Five.nearEnergyIntegral (window criterionData))
     rewriteOutput
-      rewrite outputScaleMeaning data =
+      rewrite outputScaleMeaning criterionData =
       solve
-        ( lowerScale data
-        ∷ Five.nearEnergyIntegral (window data)
+        ( lowerScale criterionData
+        ∷ Five.nearEnergyIntegral (window criterionData)
         ∷ []
         )
 
@@ -225,31 +235,33 @@ sourceJ12CriterionScaling data =
 
     criterionScaled :
       (Int.+ 320 / 1)
-        * (pow3 (lowerScale data)
-            * Five.nearEnergyIntegral (window data))
-      ≤ (Int.+ 320 / 1) * ((Int.+ 2 / 1) * delta data)
+        * (pow3 (lowerScale criterionData)
+            * Five.nearEnergyIntegral (window criterionData))
+      ≤ (Int.+ 320 / 1) * ((Int.+ 2 / 1) * delta criterionData)
     criterionScaled =
-      let instance coefficientIsNonnegative =
-        nonNegative coefficientNonnegative
+      let
+        instance
+          coefficientIsNonnegative =
+            nonNegative coefficientNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         (Int.+ 320 / 1)
-        (lowerCubedNearEnergyBound data)
+        (lowerCubedNearEnergyBound criterionData)
 
     targetMeaning :
-      (Int.+ 320 / 1) * ((Int.+ 2 / 1) * delta data)
-      ≡ (Int.+ 640 / 1) * delta data
-    targetMeaning = solve (delta data ∷ [])
+      (Int.+ 320 / 1) * ((Int.+ 2 / 1) * delta criterionData)
+      ≡ (Int.+ 640 / 1) * delta criterionData
+    targetMeaning = solve (delta criterionData ∷ [])
   in
   ℚₚ.≤-trans scaled
     (subst
-      (λ lower → lower ≤ (Int.+ 640 / 1) * delta data)
+      (λ lower → lower ≤ (Int.+ 640 / 1) * delta criterionData)
       rewriteOutput
       (subst
         (λ upper →
           (Int.+ 320 / 1)
-            * (pow3 (lowerScale data)
-                * Five.nearEnergyIntegral (window data))
+            * (pow3 (lowerScale criterionData)
+                * Five.nearEnergyIntegral (window criterionData))
           ≤ upper)
         targetMeaning
         criterionScaled))

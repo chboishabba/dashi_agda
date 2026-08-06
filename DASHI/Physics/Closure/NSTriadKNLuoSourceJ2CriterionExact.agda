@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoSourceJ2CriterionExact where
 open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _/_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -102,13 +102,19 @@ squareMonotoneNonnegative {left} {right} leftNonnegative leftBelowRight =
 
     first : left * left ≤ right * left
     first =
-      let instance leftIsNonnegative = nonNegative leftNonnegative
-      in ℚₚ.*-monoʳ-≤-nonNeg left leftBelowRight
+      let
+        instance
+          leftIsNonnegative = nonNegative leftNonnegative
+      in
+      ℚₚ.*-monoʳ-≤-nonNeg left leftBelowRight
 
     second : right * left ≤ right * right
     second =
-      let instance rightIsNonnegative = nonNegative rightNonnegative
-      in ℚₚ.*-monoˡ-≤-nonNeg right leftBelowRight
+      let
+        instance
+          rightIsNonnegative = nonNegative rightNonnegative
+      in
+      ℚₚ.*-monoˡ-≤-nonNeg right leftBelowRight
   in
   ℚₚ.≤-trans first second
 
@@ -135,107 +141,130 @@ record SourceJ2CriterionData : Set where
 open SourceJ2CriterionData public
 
 lowerCubedTailBound :
-  (data : SourceJ2CriterionData) →
-  pow3 (lowerScale data) * tailIntegral data
-  ≤ (Int.+ 2 / 1) * delta data
-lowerCubedTailBound data =
+  (criterionData : SourceJ2CriterionData) →
+  pow3 (lowerScale criterionData) * tailIntegral criterionData
+  ≤ (Int.+ 2 / 1) * delta criterionData
+lowerCubedTailBound criterionData =
   let
     raw :
-      lowerScale data
-        * (pow2 (lowerScale data) * tailIntegral data)
-      ≤ lowerScale data * weightedTailIntegral data
+      lowerScale criterionData
+        * (pow2 (lowerScale criterionData) * tailIntegral criterionData)
+      ≤ lowerScale criterionData * weightedTailIntegral criterionData
     raw =
-      let instance lowerIsNonnegative =
-        nonNegative (lowerScaleNonnegative data)
+      let
+        instance
+          lowerIsNonnegative =
+            nonNegative (lowerScaleNonnegative criterionData)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
-        (lowerScale data)
-        (unweightedTailBelowWeightedTail data)
+        (lowerScale criterionData)
+        (unweightedTailBelowWeightedTail criterionData)
 
     leftMeaning :
-      lowerScale data
-        * (pow2 (lowerScale data) * tailIntegral data)
-      ≡ pow3 (lowerScale data) * tailIntegral data
-    leftMeaning = solve (lowerScale data ∷ tailIntegral data ∷ [])
+      lowerScale criterionData
+        * (pow2 (lowerScale criterionData) * tailIntegral criterionData)
+      ≡ pow3 (lowerScale criterionData) * tailIntegral criterionData
+    leftMeaning =
+      solve
+        (lowerScale criterionData ∷ tailIntegral criterionData ∷ [])
   in
   ℚₚ.≤-trans
     (subst
-      (λ left → left ≤ lowerScale data * weightedTailIntegral data)
+      (λ left →
+        left
+        ≤ lowerScale criterionData * weightedTailIntegral criterionData)
       leftMeaning
       raw)
-    (localizedCriterionTailBound data)
+    (localizedCriterionTailBound criterionData)
 
 lowerSixthTailSquareBound :
-  (data : SourceJ2CriterionData) →
-  pow6 (lowerScale data) * L2.square (tailIntegral data)
-  ≤ four * L2.square (delta data)
-lowerSixthTailSquareBound data =
+  (criterionData : SourceJ2CriterionData) →
+  pow6 (lowerScale criterionData)
+    * L2.square (tailIntegral criterionData)
+  ≤ four * L2.square (delta criterionData)
+lowerSixthTailSquareBound criterionData =
   let
-    left = pow3 (lowerScale data) * tailIntegral data
-    right = (Int.+ 2 / 1) * delta data
+    left = pow3 (lowerScale criterionData) * tailIntegral criterionData
+    right = (Int.+ 2 / 1) * delta criterionData
 
     leftNonnegative : 0ℚ ≤ left
     leftNonnegative =
       nonnegativeProduct
-        (pow3Nonnegative (lowerScaleNonnegative data))
-        (tailIntegralNonnegative data)
+        (pow3Nonnegative (lowerScaleNonnegative criterionData))
+        (tailIntegralNonnegative criterionData)
 
     squared =
       squareMonotoneNonnegative
         leftNonnegative
-        (lowerCubedTailBound data)
+        (lowerCubedTailBound criterionData)
 
     leftMeaning :
       L2.square left
-      ≡ pow6 (lowerScale data) * L2.square (tailIntegral data)
-    leftMeaning = solve (lowerScale data ∷ tailIntegral data ∷ [])
+      ≡ pow6 (lowerScale criterionData)
+          * L2.square (tailIntegral criterionData)
+    leftMeaning =
+      solve
+        (lowerScale criterionData ∷ tailIntegral criterionData ∷ [])
 
     rightMeaning :
-      L2.square right ≡ four * L2.square (delta data)
-    rightMeaning = solve (delta data ∷ [])
+      L2.square right ≡ four * L2.square (delta criterionData)
+    rightMeaning = solve (delta criterionData ∷ [])
   in
   subst₂ _≤_ leftMeaning rightMeaning squared
 
 lowerFifthTailBelowSixth :
-  (data : SourceJ2CriterionData) →
-  pow5 (lowerScale data) * L2.square (tailIntegral data)
-  ≤ pow6 (lowerScale data) * L2.square (tailIntegral data)
-lowerFifthTailBelowSixth data =
+  (criterionData : SourceJ2CriterionData) →
+  pow5 (lowerScale criterionData)
+    * L2.square (tailIntegral criterionData)
+  ≤ pow6 (lowerScale criterionData)
+      * L2.square (tailIntegral criterionData)
+lowerFifthTailBelowSixth criterionData =
   let
-    common = pow5 (lowerScale data) * L2.square (tailIntegral data)
+    common =
+      pow5 (lowerScale criterionData)
+      * L2.square (tailIntegral criterionData)
 
     commonNonnegative : 0ℚ ≤ common
     commonNonnegative =
       nonnegativeProduct
-        (pow5Nonnegative (lowerScaleNonnegative data))
-        (L2.squareNonnegative (tailIntegral data))
+        (pow5Nonnegative (lowerScaleNonnegative criterionData))
+        (L2.squareNonnegative (tailIntegral criterionData))
 
-    raw : common * 1ℚ ≤ common * lowerScale data
+    raw : common * 1ℚ ≤ common * lowerScale criterionData
     raw =
-      let instance commonIsNonnegative = nonNegative commonNonnegative
+      let
+        instance
+          commonIsNonnegative = nonNegative commonNonnegative
       in
-      ℚₚ.*-monoˡ-≤-nonNeg common (oneBelowLowerScale data)
+      ℚₚ.*-monoˡ-≤-nonNeg
+        common (oneBelowLowerScale criterionData)
 
     leftMeaning : common * 1ℚ ≡ common
     leftMeaning = solve (common ∷ [])
 
     rightMeaning :
-      common * lowerScale data
-      ≡ pow6 (lowerScale data) * L2.square (tailIntegral data)
-    rightMeaning = solve (lowerScale data ∷ tailIntegral data ∷ [])
+      common * lowerScale criterionData
+      ≡ pow6 (lowerScale criterionData)
+          * L2.square (tailIntegral criterionData)
+    rightMeaning =
+      solve
+        (lowerScale criterionData ∷ tailIntegral criterionData ∷ [])
   in
   subst₂ _≤_ leftMeaning rightMeaning raw
 
 outputScaleAtLeastOne :
-  (data : SourceJ2CriterionData) → 1ℚ ≤ outputScale data
-outputScaleAtLeastOne data =
+  (criterionData : SourceJ2CriterionData) →
+  1ℚ ≤ outputScale criterionData
+outputScaleAtLeastOne criterionData =
   let
-    lower = lowerScale data
+    lower = lowerScale criterionData
 
     raw : 1ℚ * lower ≤ four * lower
     raw =
-      let instance lowerIsNonnegative =
-        nonNegative (lowerScaleNonnegative data)
+      let
+        instance
+          lowerIsNonnegative =
+            nonNegative (lowerScaleNonnegative criterionData)
       in
       ℚₚ.*-monoʳ-≤-nonNeg lower oneBelowFour
 
@@ -252,89 +281,102 @@ outputScaleAtLeastOne data =
     oneBelowOutputExpression : 1ℚ ≤ four * lower
     oneBelowOutputExpression =
       ℚₚ.≤-trans
-        (oneBelowLowerScale data)
+        (oneBelowLowerScale criterionData)
         lowerBelowOutputExpression
   in
   subst
     (λ right → 1ℚ ≤ right)
-    (sym (outputScaleMeaning data))
+    (sym (outputScaleMeaning criterionData))
     oneBelowOutputExpression
 
 sourceJ2Square : SourceJ2CriterionData → ℚ
-sourceJ2Square data =
-  pow5 (outputScale data) * L2.square (tailIntegral data)
+sourceJ2Square criterionData =
+  pow5 (outputScale criterionData)
+  * L2.square (tailIntegral criterionData)
 
 sourceJ2CriterionSquareBound :
-  (data : SourceJ2CriterionData) →
-  sourceJ2Square data
+  (criterionData : SourceJ2CriterionData) →
+  sourceJ2Square criterionData
   ≤ fourThousandNinetySix
-      * L2.square (delta data) * outputScale data
-sourceJ2CriterionSquareBound data =
+      * L2.square (delta criterionData)
+      * outputScale criterionData
+sourceJ2CriterionSquareBound criterionData =
   let
     lowerFive =
-      pow5 (lowerScale data) * L2.square (tailIntegral data)
+      pow5 (lowerScale criterionData)
+      * L2.square (tailIntegral criterionData)
     lowerSix =
-      pow6 (lowerScale data) * L2.square (tailIntegral data)
+      pow6 (lowerScale criterionData)
+      * L2.square (tailIntegral criterionData)
 
-    lowerBound : lowerFive ≤ four * L2.square (delta data)
+    lowerBound : lowerFive ≤ four * L2.square (delta criterionData)
     lowerBound =
       ℚₚ.≤-trans
-        (lowerFifthTailBelowSixth data)
-        (lowerSixthTailSquareBound data)
+        (lowerFifthTailBelowSixth criterionData)
+        (lowerSixthTailSquareBound criterionData)
 
     scaledLower :
       thousandTwentyFour * lowerFive
-      ≤ thousandTwentyFour * (four * L2.square (delta data))
+      ≤ thousandTwentyFour * (four * L2.square (delta criterionData))
     scaledLower =
-      let instance constantIsNonnegative =
-        nonNegative thousandTwentyFourNonnegative
+      let
+        instance
+          constantIsNonnegative =
+            nonNegative thousandTwentyFourNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg thousandTwentyFour lowerBound
 
     sourceMeaning :
-      sourceJ2Square data ≡ thousandTwentyFour * lowerFive
+      sourceJ2Square criterionData
+      ≡ thousandTwentyFour * lowerFive
     sourceMeaning
-      rewrite outputScaleMeaning data =
-      solve (lowerScale data ∷ tailIntegral data ∷ [])
+      rewrite outputScaleMeaning criterionData =
+      solve
+        (lowerScale criterionData ∷ tailIntegral criterionData ∷ [])
 
     constantMeaning :
-      thousandTwentyFour * (four * L2.square (delta data))
-      ≡ fourThousandNinetySix * L2.square (delta data)
-    constantMeaning = solve (delta data ∷ [])
+      thousandTwentyFour * (four * L2.square (delta criterionData))
+      ≡ fourThousandNinetySix * L2.square (delta criterionData)
+    constantMeaning = solve (delta criterionData ∷ [])
 
     baseBound :
-      sourceJ2Square data
-      ≤ fourThousandNinetySix * L2.square (delta data)
+      sourceJ2Square criterionData
+      ≤ fourThousandNinetySix * L2.square (delta criterionData)
     baseBound =
       subst₂ _≤_
         (sym sourceMeaning)
         constantMeaning
         scaledLower
 
-    coefficient = fourThousandNinetySix * L2.square (delta data)
+    coefficient =
+      fourThousandNinetySix * L2.square (delta criterionData)
 
     coefficientNonnegative : 0ℚ ≤ coefficient
     coefficientNonnegative =
       nonnegativeProduct
         fourThousandNinetySixNonnegative
-        (L2.squareNonnegative (delta data))
+        (L2.squareNonnegative (delta criterionData))
 
-    rawOutput : coefficient * 1ℚ ≤ coefficient * outputScale data
+    rawOutput :
+      coefficient * 1ℚ ≤ coefficient * outputScale criterionData
     rawOutput =
-      let instance coefficientIsNonnegative =
-        nonNegative coefficientNonnegative
+      let
+        instance
+          coefficientIsNonnegative =
+            nonNegative coefficientNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         coefficient
-        (outputScaleAtLeastOne data)
+        (outputScaleAtLeastOne criterionData)
 
     leftIdentity : coefficient * 1ℚ ≡ coefficient
     leftIdentity = solve (coefficient ∷ [])
 
-    scaleByOutput : coefficient ≤ coefficient * outputScale data
+    scaleByOutput :
+      coefficient ≤ coefficient * outputScale criterionData
     scaleByOutput =
       subst
-        (λ left → left ≤ coefficient * outputScale data)
+        (λ left → left ≤ coefficient * outputScale criterionData)
         leftIdentity
         rawOutput
   in

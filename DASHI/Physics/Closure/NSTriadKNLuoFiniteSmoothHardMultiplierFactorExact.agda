@@ -104,41 +104,42 @@ open FiniteSmoothHardSymbolFactorization public
 
 smoothCoefficient :
   ∀ {Mode} → FiniteSmoothHardSymbolFactorization Mode → Mode → ℚ
-smoothCoefficient data mode =
-  smoothSymbol data mode * coefficient data mode
+smoothCoefficient symbolData mode =
+  smoothSymbol symbolData mode * coefficient symbolData mode
 
 factorAppliedToHardCoefficient :
   ∀ {Mode} → FiniteSmoothHardSymbolFactorization Mode → Mode → ℚ
-factorAppliedToHardCoefficient data mode =
-  factorSymbol data mode
-  * (hardSymbol data mode * coefficient data mode)
+factorAppliedToHardCoefficient symbolData mode =
+  factorSymbol symbolData mode
+  * (hardSymbol symbolData mode * coefficient symbolData mode)
 
 smoothCoefficientFactorsPointwise :
   ∀ {Mode}
-    (data : FiniteSmoothHardSymbolFactorization Mode)
+    (symbolData : FiniteSmoothHardSymbolFactorization Mode)
     (mode : Mode) →
-  smoothCoefficient data mode
-  ≡ factorAppliedToHardCoefficient data mode
-smoothCoefficientFactorsPointwise data mode
-  rewrite smoothFactorsThroughHard data mode =
+  smoothCoefficient symbolData mode
+  ≡ factorAppliedToHardCoefficient symbolData mode
+smoothCoefficientFactorsPointwise symbolData mode
+  rewrite smoothFactorsThroughHard symbolData mode =
   solve
-    ( factorSymbol data mode
-    ∷ hardSymbol data mode
-    ∷ coefficient data mode
+    ( factorSymbol symbolData mode
+    ∷ hardSymbol symbolData mode
+    ∷ coefficient symbolData mode
     ∷ []
     )
 
 smoothFourierFoldFactorsThroughHard :
   ∀ {Mode}
-    (data : FiniteSmoothHardSymbolFactorization Mode) →
-  sumList (modes data) (smoothCoefficient data)
-  ≡ sumList (modes data) (factorAppliedToHardCoefficient data)
-smoothFourierFoldFactorsThroughHard data =
+    (symbolData : FiniteSmoothHardSymbolFactorization Mode) →
+  sumList (modes symbolData) (smoothCoefficient symbolData)
+  ≡ sumList (modes symbolData)
+      (factorAppliedToHardCoefficient symbolData)
+smoothFourierFoldFactorsThroughHard symbolData =
   sumListExtensional
-    (modes data)
-    (smoothCoefficient data)
-    (factorAppliedToHardCoefficient data)
-    (smoothCoefficientFactorsPointwise data)
+    (modes symbolData)
+    (smoothCoefficient symbolData)
+    (factorAppliedToHardCoefficient symbolData)
+    (smoothCoefficientFactorsPointwise symbolData)
 
 record FiniteSmoothHardMagnitudeData (Mode : Set) : Set where
   field
@@ -167,103 +168,115 @@ open FiniteSmoothHardMagnitudeData public
 
 smoothMagnitude :
   ∀ {Mode} → FiniteSmoothHardMagnitudeData Mode → Mode → ℚ
-smoothMagnitude data mode =
-  factorMagnitude data mode * hardMagnitude data mode
+smoothMagnitude magnitudeData mode =
+  factorMagnitude magnitudeData mode * hardMagnitude magnitudeData mode
 
 smoothMagnitudeNonnegative :
   ∀ {Mode}
-    (data : FiniteSmoothHardMagnitudeData Mode)
+    (magnitudeData : FiniteSmoothHardMagnitudeData Mode)
     (mode : Mode) →
-  0ℚ ≤ smoothMagnitude data mode
-smoothMagnitudeNonnegative data mode =
+  0ℚ ≤ smoothMagnitude magnitudeData mode
+smoothMagnitudeNonnegative magnitudeData mode =
   let
     instance
       factorIsNonnegative =
-        nonNegative (factorNonnegative data mode)
+        nonNegative (factorNonnegative magnitudeData mode)
       hardIsNonnegative =
-        nonNegative (hardNonnegative data mode)
+        nonNegative (hardNonnegative magnitudeData mode)
       productIsNonnegative =
         ℚₚ.nonNeg*nonNeg⇒nonNeg
-          (factorMagnitude data mode)
-          (hardMagnitude data mode)
+          (factorMagnitude magnitudeData mode)
+          (hardMagnitude magnitudeData mode)
   in
-  ℚₚ.nonNegative⁻¹ (smoothMagnitude data mode)
+  ℚₚ.nonNegative⁻¹ (smoothMagnitude magnitudeData mode)
 
 smoothMagnitudePointwiseYoung :
   ∀ {Mode}
-    (data : FiniteSmoothHardMagnitudeData Mode)
+    (magnitudeData : FiniteSmoothHardMagnitudeData Mode)
     (mode : Mode) →
-  smoothMagnitude data mode
-  ≤ kernelMagnitude data mode * hardSup data
-smoothMagnitudePointwiseYoung data mode =
+  smoothMagnitude magnitudeData mode
+  ≤ kernelMagnitude magnitudeData mode * hardSup magnitudeData
+smoothMagnitudePointwiseYoung magnitudeData mode =
   let
     first :
-      factorMagnitude data mode * hardMagnitude data mode
-      ≤ kernelMagnitude data mode * hardMagnitude data mode
+      factorMagnitude magnitudeData mode * hardMagnitude magnitudeData mode
+      ≤ kernelMagnitude magnitudeData mode * hardMagnitude magnitudeData mode
     first =
-      let instance hardIsNonnegative =
-        nonNegative (hardNonnegative data mode)
+      let
+        instance
+          hardIsNonnegative =
+            nonNegative (hardNonnegative magnitudeData mode)
       in
       ℚₚ.*-monoʳ-≤-nonNeg
-        (hardMagnitude data mode)
-        (factorBelowKernel data mode)
+        (hardMagnitude magnitudeData mode)
+        (factorBelowKernel magnitudeData mode)
 
     second :
-      kernelMagnitude data mode * hardMagnitude data mode
-      ≤ kernelMagnitude data mode * hardSup data
+      kernelMagnitude magnitudeData mode * hardMagnitude magnitudeData mode
+      ≤ kernelMagnitude magnitudeData mode * hardSup magnitudeData
     second =
-      let instance kernelIsNonnegative =
-        nonNegative (kernelNonnegative data mode)
+      let
+        instance
+          kernelIsNonnegative =
+            nonNegative (kernelNonnegative magnitudeData mode)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
-        (kernelMagnitude data mode)
-        (hardBelowSup data mode)
+        (kernelMagnitude magnitudeData mode)
+        (hardBelowSup magnitudeData mode)
   in
   ℚₚ.≤-trans first second
 
 finiteSmoothHardYoungBound :
   ∀ {Mode}
-    (data : FiniteSmoothHardMagnitudeData Mode) →
-  sumList (modes data) (smoothMagnitude data)
-  ≤ kernelL1 data * hardSup data
-finiteSmoothHardYoungBound data =
+    (magnitudeData : FiniteSmoothHardMagnitudeData Mode) →
+  sumList (modes magnitudeData) (smoothMagnitude magnitudeData)
+  ≤ kernelL1 magnitudeData * hardSup magnitudeData
+finiteSmoothHardYoungBound magnitudeData =
   let
     pointwiseSum :
-      sumList (modes data) (smoothMagnitude data)
-      ≤ sumList (modes data)
-          (λ mode → kernelMagnitude data mode * hardSup data)
+      sumList (modes magnitudeData) (smoothMagnitude magnitudeData)
+      ≤ sumList (modes magnitudeData)
+          (λ mode →
+            kernelMagnitude magnitudeData mode * hardSup magnitudeData)
     pointwiseSum =
       sumListMonotone
-        (modes data)
-        (smoothMagnitude data)
-        (λ mode → kernelMagnitude data mode * hardSup data)
-        (smoothMagnitudePointwiseYoung data)
+        (modes magnitudeData)
+        (smoothMagnitude magnitudeData)
+        (λ mode →
+          kernelMagnitude magnitudeData mode * hardSup magnitudeData)
+        (smoothMagnitudePointwiseYoung magnitudeData)
 
     scaledKernel :
-      sumList (modes data)
-        (λ mode → kernelMagnitude data mode * hardSup data)
-      ≡ sumList (modes data) (kernelMagnitude data) * hardSup data
+      sumList (modes magnitudeData)
+        (λ mode →
+          kernelMagnitude magnitudeData mode * hardSup magnitudeData)
+      ≡ sumList (modes magnitudeData) (kernelMagnitude magnitudeData)
+          * hardSup magnitudeData
     scaledKernel =
       sumListScaleRight
-        (hardSup data)
-        (modes data)
-        (kernelMagnitude data)
+        (hardSup magnitudeData)
+        (modes magnitudeData)
+        (kernelMagnitude magnitudeData)
 
     scaledL1 :
-      sumList (modes data) (kernelMagnitude data) * hardSup data
-      ≤ kernelL1 data * hardSup data
+      sumList (modes magnitudeData) (kernelMagnitude magnitudeData)
+        * hardSup magnitudeData
+      ≤ kernelL1 magnitudeData * hardSup magnitudeData
     scaledL1 =
-      let instance hardSupIsNonnegative =
-        nonNegative (hardSupNonnegative data)
+      let
+        instance
+          hardSupIsNonnegative =
+            nonNegative (hardSupNonnegative magnitudeData)
       in
       ℚₚ.*-monoʳ-≤-nonNeg
-        (hardSup data)
-        (kernelL1Bound data)
+        (hardSup magnitudeData)
+        (kernelL1Bound magnitudeData)
   in
   ℚₚ.≤-trans
     pointwiseSum
     (subst
-      (λ lower → lower ≤ kernelL1 data * hardSup data)
+      (λ lower →
+        lower ≤ kernelL1 magnitudeData * hardSup magnitudeData)
       (sym scaledKernel)
       scaledL1)
 
