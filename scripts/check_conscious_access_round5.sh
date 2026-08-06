@@ -37,8 +37,10 @@ FILES=(
   DASHI/Biology/ConsciousAccessRound5Regression.agda
   DASHI/Biology/ReducedFiftyThreeFibreExact.agda
   DASHI/Biology/SignedSSPFRACTRANWeaveExact.agda
+  DASHI/Biology/SSPHyperfibreSymmetryTowerExact.agda
   DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda
   DASHI/Biology/EquivariantLaplacianSectorExact.agda
+  DASHI/Biology/D4IrrepPhysicalRoleExact.agda
   DASHI/Biology/OrientedZeroJetTransitionExact.agda
   DASHI/Biology/ReachableSectorEntropyExact.agda
   DASHI/Biology/ExceptionalLatticeGrokkingProtocolExact.agda
