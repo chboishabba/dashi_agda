@@ -33,6 +33,7 @@ import DASHI.Mathematics.Topology.RoundThreeSphereRicciFlowExact
 import DASHI.Mathematics.Topology.PoincareGeometrizationExactBoundary
 import DASHI.Mathematics.Topology.QuaternionS3PoincareCrossPollination
 
+import DASHI.Moonshine.TrivialRationalGradedVertexAlgebraExact
 import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary
 import DASHI.Moonshine.MonsterGradedVOABridgeExact
 
