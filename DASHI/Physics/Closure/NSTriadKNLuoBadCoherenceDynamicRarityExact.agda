@@ -25,6 +25,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceDynamicRarityExact where
 -- It isolates that estimate as the genuinely new geometric producer.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as ℕ using (_≤_)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
