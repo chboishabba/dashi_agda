@@ -27,8 +27,8 @@ module DASHI.Mathematics.Complexity.PolynomialReductionExact where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Product using (Σ; _×_; _,_)
 
 record Iff (left right : Set) : Set where
   constructor iff
@@ -62,6 +62,8 @@ record PolynomialCostModel (Word : Set) : Set₁ where
       (Word → Certificate → Bool) → Set
     polynomialCertificateBound : ∀ {Certificate : Set} →
       (Word → Certificate → Set) → Set
+    identityMapPolynomial :
+      polynomialTimeMap (λ word → word)
     deciderClosedUnderPrecomposition :
       ∀ (map : Word → Word) (decider : Word → Bool) →
       polynomialTimeMap map →
@@ -93,7 +95,9 @@ record InNP {Word : Set}
       verifies word certificate ≡ true →
       accepts language word
     complete : ∀ word → accepts language word →
-      Certificate × Set
+      Σ Certificate (λ certificate →
+        certificateAdmissible word certificate
+        × verifies word certificate ≡ true)
     polynomialVerification : polynomialTimeVerifier cost verifies
     polynomialCertificateSize :
       polynomialCertificateBound cost certificateAdmissible
@@ -118,7 +122,7 @@ identityReduction :
 identityReduction cost language = record
   { reduce = λ word → word
   ; preservesLanguage = λ word → iffReflexive (accepts language word)
-  ; polynomialReduction = polynomialTimeMap cost (λ word → word)
+  ; polynomialReduction = identityMapPolynomial cost
   }
 
 record PolynomialMapComposition
@@ -159,7 +163,7 @@ pullbackPAlongReduction :
   PolynomialManyOneReduction cost source target →
   InP cost target →
   InP cost source
-pullbackPAlongReduction reduction targetP = record
+pullbackPAlongReduction {cost = cost} reduction targetP = record
   { decide = λ word → decide targetP (reduce reduction word)
   ; sound = λ word accepted →
       backward (preservesLanguage reduction word)
@@ -168,7 +172,7 @@ pullbackPAlongReduction reduction targetP = record
       complete targetP (reduce reduction word)
         (forward (preservesLanguage reduction word) sourceProof)
   ; polynomialDecision =
-      deciderClosedUnderPrecomposition _
+      deciderClosedUnderPrecomposition cost
         (reduce reduction) (decide targetP)
         (polynomialReduction reduction)
         (polynomialDecision targetP)
