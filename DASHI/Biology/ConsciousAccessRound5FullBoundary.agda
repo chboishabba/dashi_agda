@@ -6,7 +6,9 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 import DASHI.Biology.DialecticalSheetSpiralExact as Spiral
+import DASHI.Biology.TriadicBraidDialecticExact as Braid
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Biology.TernaryCantorWheelDiffusionExact as Cantor
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Monster
 import DASHI.Biology.FRACTRANSSPTransitionExact as FRACTRAN
 import DASHI.Biology.SpectralGrokkingLatticeExact as Grokking
@@ -16,7 +18,7 @@ import DASHI.Biology.NaturalSystemsHyperfabricExact as Natural
 import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as NSYM
 import DASHI.Biology.DASHIQuantumLikeEntropyOscillatorExact as Entropy
-import DASHI.Biology.ConsciousAccessRound5SourceAtlas as Sources
+import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as Sources
 
 ------------------------------------------------------------------------
 -- Complete exact finite theorem surface for the DASHI/Yijing, oriented-zero,
@@ -28,7 +30,9 @@ record ConsciousAccessRound5Boundary : Set where
     ternaryDivinationBoundary : Yijing.TernaryDivinationBoundary
     orientedZeroBoundary : Zero.OrientedZeroBoundary
     dialecticalSpiralBoundary : Spiral.DialecticalSpiralBoundary
+    triadicBraidBoundary : Braid.TriadicBraidBoundary
     hyperfabricBoundary : Hyper.HyperfabricBoundary
+    cantorWheelBoundary : Cantor.CantorWheelBoundary
     moonshineBoundary : Monster.MoonshinePromotionBoundary
     fractranSSPBoundary : FRACTRAN.FRACTRANSSPBoundary
     spectralGrokkingBoundary : Grokking.SpectralGrokkingBoundary
@@ -61,6 +65,30 @@ record ConsciousAccessRound5Boundary : Set where
       (state : Spiral.SpiralState) →
       Spiral.historicalHeight (Spiral.fourLiftRotations state)
       ≡ suc (suc (suc (suc (Spiral.historicalHeight state))))
+
+    braidYangBaxterEndpointsAgree :
+      (triple : Braid.TritTriple) →
+      Braid.leftYangBaxter triple ≡ Braid.rightYangBaxter triple
+
+    braidEquivalentEndpointsRetainDistinctWords :
+      ¬ (Braid.wordKind Braid.leftBraidResidual
+         ≡ Braid.wordKind Braid.rightBraidResidual)
+
+    polarCantorDepthThreeHasEightStates :
+      Cantor.polarAddressCount 3 ≡ 8
+
+    wheelRotationHasPeriodThree :
+      (x : Triadic.KernelTrit) →
+      Cantor.nextWheelPhase
+        (Cantor.nextWheelPhase
+          (Cantor.nextWheelPhase x))
+      ≡ x
+
+    rawNineCellRepresentationHasDimensionNine :
+      Monster.rawNineRepresentationDimension ≡ 9
+
+    rawNineCellA2MultiplicityIsZero :
+      Monster.rawNineMultiplicity Monster.A2 ≡ 0
 
     tenSymmetryFibresPlusResidualHaveMonsterCandidateDimension :
       Monster.monsterCandidateDimension ≡ 196883
@@ -106,7 +134,8 @@ record ConsciousAccessRound5Boundary : Set where
         Entropy.binaryCapacityFifteen
       ≡ true
 
-    sourceCountIsEighteen : Sources.canonicalRound5SourceCount ≡ 18
+    extendedSourceCountIsTwentyTwo :
+      Sources.canonicalRound5ExtendedSourceCount ≡ 22
 
 open ConsciousAccessRound5Boundary public
 
@@ -116,7 +145,9 @@ canonicalConsciousAccessRound5Boundary =
     Yijing.canonicalTernaryDivinationBoundary
     Zero.canonicalOrientedZeroBoundary
     Spiral.canonicalDialecticalSpiralBoundary
+    Braid.canonicalTriadicBraidBoundary
     Hyper.canonicalHyperfabricBoundary
+    Cantor.canonicalCantorWheelBoundary
     Monster.canonicalMoonshinePromotionBoundary
     FRACTRAN.canonicalFRACTRANSSPBoundary
     Grokking.canonicalSpectralGrokkingBoundary
@@ -132,6 +163,12 @@ canonicalConsciousAccessRound5Boundary =
     Zero.negativeAndPositiveZeroCoarseAgree
     Spiral.projectedReturnAfterFour
     Spiral.historicalLiftAfterFour
+    Braid.yangBaxterEndpointEquality
+    Braid.leftAndRightWordKindsDiffer
+    Cantor.polarDepthThreeCount
+    Cantor.nextWheelPhaseThree
+    Monster.rawNineRepresentationDimensionIsNine
+    Monster.rawA2MultiplicityIsZero
     Monster.monsterCandidateDimensionIs196883
     Monster.largestThreeOggPrimesMultiplyTo196883
     Monster.fiftyThreeIsNotAnOggPrime
@@ -143,7 +180,7 @@ canonicalConsciousAccessRound5Boundary =
     Neural.fmriProjectionCollision
     NSYM.finiteMassGapIsOne
     Entropy.fifteenBitsCoverTernaryNineSheet
-    Sources.canonicalRound5SourceCountIsEighteen
+    Sources.canonicalRound5ExtendedSourceCountIsTwentyTwo
 
 ------------------------------------------------------------------------
 -- Unified authority boundary.  The exact finite constructions are reusable
