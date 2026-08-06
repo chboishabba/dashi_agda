@@ -1,9 +1,10 @@
 name: Yang-Mills Clay highest-alpha round 22
 
 on:
-  pull_request:
+  push:
     branches:
-      - 'agent/ym-clay-alpha-round21-literal-hessian-cancellation'
+      - 'agent/ym-clay-alpha-round22-hodge-wilson-repair'
+  pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33RationalQuaternionWilsonSecondVariationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintSecondVariationExact.agda'
@@ -20,6 +21,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlaquetteIncidenceExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound22Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round21.sh'
       - 'scripts/check_yang_mills_clay_highest_alpha_round22.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round22.yml'
   workflow_dispatch:

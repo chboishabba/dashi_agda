@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.List.Base using (length)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
@@ -66,6 +66,14 @@ sumRationalScale coefficient [] term =
 sumRationalScale coefficient (value ∷ values) term
   rewrite sumRationalScale coefficient values term =
   sym (scalePlus coefficient (term value) (sumRational values term))
+
+sumRationalNegate :
+  ∀ {A : Set} (values : List A) (term : A → ℚ) →
+  sumRational values (λ value → - term value)
+  ≡ - sumRational values term
+sumRationalNegate [] term = refl
+sumRationalNegate (value ∷ values) term
+  rewrite sumRationalNegate values term = ℚRing.solve []
 
 scaledDifferenceSumAlgebra : ∀ scale value rest total count →
   (scale * value - total)

@@ -17,36 +17,38 @@ module DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact where
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
--- DASHI CONTRIBUTION
+-- DASHI CORRECTION AND CONTRIBUTION
 --
--- Connect the sharp sixteen-atom Wilson budget to the exact gauge/constraint
--- cancellation theorem.  At rho=1/8192 the available sharp Wilson coefficient
+-- The sharp sixteen-atom Wilson perturbation budget is
+--
+--   epsilon_W = (13/24) rho = 13/196608,
+--
+-- while the configured gauge/divergence perturbation budget is
+--
+--   epsilon_gf = 64 rho = 1536/196608.
+--
+-- The correct physical Hodge remainder is
+--
+--   [H_W-H_curl] + [H_gf-H_div],
+--
+-- measured with the literal three-component SU(2) norm.  Its combined budget
 -- is
 --
---   epsilon_W = (13/24) rho = 13/196608.
+--   epsilon_W + epsilon_gf = 1549/196608,
 --
--- The physical coercivity budget is
+-- leaving
 --
---   1/32 = 6144/196608,
+--   1/32 - (epsilon_W+epsilon_gf) = 4595/196608 > 0.
 --
--- leaving the exact positive gap
---
---   1/32 - epsilon_W = 6131/196608.
---
--- Hence the signed Wilson estimate
---
---   -epsilon_W ||h||^2 <= H_W''[h,h]-H_diff[h,h]
---
--- is much stronger than the lower bound required for 1/32 literal Hessian
--- coercivity after the exact gauge and constraint squares cancel.  This module
--- proves the complete ordered-rational promotion, including nonnegativity of
--- the literal bond norm.  The physical identification and estimate of the
--- sixteen Wilson atoms remains the sole analytic producer.
+-- This module proves the exact rational aggregation and the final physical
+-- coercivity promotion.  The still-open analytic producers are accurately
+-- separated: a physical sixteen-atom Wilson estimate and a physical gauge
+-- perturbation estimate.  No Wilson-only or one-component shortcut remains.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using
-  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; _/_; NonNegative)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
@@ -60,43 +62,59 @@ import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanPath4PhysicalVarianceDecompositionExact as Variance
 import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
+import DASHI.Physics.YangMills.BalabanClayT3ConfiguredGeometricConstantsExact as Constants
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
-import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
+import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as ScalarHodge
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2HodgeCoercivityExact as PhysicalHodge
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintCancellationExact as Cancel
 
 ------------------------------------------------------------------------
--- Exact scalar budget comparison.
+-- Exact scalar budgets.
 ------------------------------------------------------------------------
 
-sharpWilsonGap : ℚ
-sharpWilsonGap = + 6131 / 196608
+configuredGaugeHodgeBudget : ℚ
+configuredGaugeHodgeBudget =
+  Constants.configuredGaugeCoefficient * Sharp.rho
 
-sharpWilsonGapNonnegative : 0ℚ ≤ sharpWilsonGap
-sharpWilsonGapNonnegative = ℚP.nonNegative⁻¹ sharpWilsonGap
+sharpWilsonGaugeBudget : ℚ
+sharpWilsonGaugeBudget =
+  Sharp.sharpSixteenAtomBudget + configuredGaugeHodgeBudget
 
-sharpBudgetPlusGapIsPhysicalFloor :
-  Sharp.sharpSixteenAtomBudget + sharpWilsonGap
+sharpWilsonGaugeBudgetExact :
+  sharpWilsonGaugeBudget ≡ + 1549 / 196608
+sharpWilsonGaugeBudgetExact = ℚRing.solve []
+
+sharpWilsonGaugeGap : ℚ
+sharpWilsonGaugeGap = + 4595 / 196608
+
+sharpWilsonGaugeGapNonnegative : 0ℚ ≤ sharpWilsonGaugeGap
+sharpWilsonGaugeGapNonnegative =
+  ℚP.nonNegative⁻¹ sharpWilsonGaugeGap
+
+sharpWilsonGaugeBudgetPlusGapIsPhysicalFloor :
+  sharpWilsonGaugeBudget + sharpWilsonGaugeGap
   ≡ P33.p33PhysicalFloor
-sharpBudgetPlusGapIsPhysicalFloor = ℚRing.solve []
+sharpWilsonGaugeBudgetPlusGapIsPhysicalFloor = ℚRing.solve []
 
-sharpWilsonBudgetBelowPhysicalFloor :
-  Sharp.sharpSixteenAtomBudget ≤ P33.p33PhysicalFloor
-sharpWilsonBudgetBelowPhysicalFloor =
+sharpWilsonGaugeBudgetBelowPhysicalFloor :
+  sharpWilsonGaugeBudget ≤ P33.p33PhysicalFloor
+sharpWilsonGaugeBudgetBelowPhysicalFloor =
   let
     instance
-      gapNN : NonNegative sharpWilsonGap
-      gapNN = ℚ.nonNegative sharpWilsonGapNonnegative
+      gapNN : NonNegative sharpWilsonGaugeGap
+      gapNN = ℚ.nonNegative sharpWilsonGaugeGapNonnegative
 
     beforeRewrite :
-      Sharp.sharpSixteenAtomBudget
-      ≤ Sharp.sharpSixteenAtomBudget + sharpWilsonGap
+      sharpWilsonGaugeBudget
+      ≤ sharpWilsonGaugeBudget + sharpWilsonGaugeGap
     beforeRewrite =
-      ℚP.p≤p+q Sharp.sharpSixteenAtomBudget sharpWilsonGap
+      ℚP.p≤p+q sharpWilsonGaugeBudget sharpWilsonGaugeGap
   in
   subst
-    (λ upper → Sharp.sharpSixteenAtomBudget ≤ upper)
-    sharpBudgetPlusGapIsPhysicalFloor
+    (λ upper → sharpWilsonGaugeBudget ≤ upper)
+    sharpWilsonGaugeBudgetPlusGapIsPhysicalFloor
     beforeRewrite
 
 negateOrderReverse : ∀ left right →
@@ -117,12 +135,27 @@ negateOrderReverse left right leftBelowRight =
       (ℚRing.solve-∀ left right)
       shifted)
 
-sharpSignedLowerImpliesPhysicalSignedLower :
+coupledSignedLowerFromSeparateBudgets :
+  ∀ normSq wilsonDefect gaugeDefect →
+  - (Sharp.sharpSixteenAtomBudget * normSq) ≤ wilsonDefect →
+  - (configuredGaugeHodgeBudget * normSq) ≤ gaugeDefect →
+  - (sharpWilsonGaugeBudget * normSq)
+    ≤ wilsonDefect + gaugeDefect
+coupledSignedLowerFromSeparateBudgets
+    normSq wilsonDefect gaugeDefect wilsonLower gaugeLower =
+  subst
+    (λ lower → lower ≤ wilsonDefect + gaugeDefect)
+    (ℚRing.solve-∀
+      Sharp.sharpSixteenAtomBudget
+      configuredGaugeHodgeBudget normSq)
+    (ℚP.+-mono-≤ wilsonLower gaugeLower)
+
+sharpCoupledLowerImpliesPhysicalSignedLower :
   ∀ normSq remainder →
   0ℚ ≤ normSq →
-  - (Sharp.sharpSixteenAtomBudget * normSq) ≤ remainder →
+  - (sharpWilsonGaugeBudget * normSq) ≤ remainder →
   - (P33.p33PhysicalFloor * normSq) ≤ remainder
-sharpSignedLowerImpliesPhysicalSignedLower
+sharpCoupledLowerImpliesPhysicalSignedLower
     normSq remainder normNonnegative sharpLower =
   let
     instance
@@ -130,83 +163,181 @@ sharpSignedLowerImpliesPhysicalSignedLower
       normNN = ℚ.nonNegative normNonnegative
 
     scaledBudget :
-      Sharp.sharpSixteenAtomBudget * normSq
+      sharpWilsonGaugeBudget * normSq
       ≤ P33.p33PhysicalFloor * normSq
     scaledBudget =
       ℚP.*-monoʳ-≤-nonNeg
-        normSq sharpWilsonBudgetBelowPhysicalFloor
+        normSq sharpWilsonGaugeBudgetBelowPhysicalFloor
 
     reversed :
       - (P33.p33PhysicalFloor * normSq)
-      ≤ - (Sharp.sharpSixteenAtomBudget * normSq)
+      ≤ - (sharpWilsonGaugeBudget * normSq)
     reversed =
       negateOrderReverse
-        (Sharp.sharpSixteenAtomBudget * normSq)
+        (sharpWilsonGaugeBudget * normSq)
         (P33.p33PhysicalFloor * normSq)
         scaledBudget
   in
   ℚP.≤-trans reversed sharpLower
 
 ------------------------------------------------------------------------
--- The literal bond norm is a finite sum of finite sums of squares.
+-- Nonnegativity of the literal scalar and physical norms.
 ------------------------------------------------------------------------
 
-globalNormSqNonnegative :
+scalarGlobalNormSqNonnegative :
   ∀ field → 0ℚ ≤ Variance.globalNormSq field
-globalNormSqNonnegative field =
+scalarGlobalNormSqNonnegative field =
   Schur.sumNonnegative
     (Block.physicalBlockSites Path4.side4)
     (λ site → field site * field site)
     (λ site → FiniteL2.squareNonnegative (field site))
 
-bondNormSqNonnegative :
-  ∀ field → 0ℚ ≤ Hodge.bondNormSq field
-bondNormSqNonnegative field =
+scalarBondNormSqNonnegative :
+  ∀ field → 0ℚ ≤ ScalarHodge.bondNormSq field
+scalarBondNormSqNonnegative field =
   Schur.sumNonnegative
     (Torus.allCyclicIndices Torus.four)
-    (λ axis → Variance.globalNormSq (Hodge.bondComponent field axis))
+    (λ axis → Variance.globalNormSq (ScalarHodge.bondComponent field axis))
     (λ axis →
-      globalNormSqNonnegative (Hodge.bondComponent field axis))
+      scalarGlobalNormSqNonnegative
+        (ScalarHodge.bondComponent field axis))
+
+physicalBondNormSqNonnegative :
+  ∀ field → 0ℚ ≤ Physical.physicalSU2BondNormSq field
+physicalBondNormSqNonnegative field =
+  ℚP.+-mono-≤
+    (ℚP.+-mono-≤
+      (scalarBondNormSqNonnegative (field Physical.coordinateX))
+      (scalarBondNormSqNonnegative (field Physical.coordinateY)))
+    (scalarBondNormSqNonnegative (field Physical.coordinateZ))
 
 ------------------------------------------------------------------------
--- Sharp Wilson estimate implies the literal 1/32 Hessian theorem.
+-- Exact Hodge decomposition of the coupled remainder.
 ------------------------------------------------------------------------
 
-literalHessianCoerciveFromSharpWilsonBudget :
+coupledHodgeRemainder :
+  ℚ → ℚ → ℚ → ℚ → ℚ
+coupledHodgeRemainder wilson gauge flatCurl flatDivergence =
+  (wilson + gauge) - (flatCurl + flatDivergence)
+
+coupledHodgeRemainderSplits :
+  ∀ wilson gauge flatCurl flatDivergence →
+  coupledHodgeRemainder wilson gauge flatCurl flatDivergence
+  ≡ (wilson - flatCurl) + (gauge - flatDivergence)
+coupledHodgeRemainderSplits = ℚRing.solve-∀
+
+physicalReferenceTurnsCoupledRemainderIntoLiteralOne :
+  ∀ wilson gauge physicalReference flatCurl flatDivergence →
+  physicalReference ≡ flatCurl + flatDivergence →
+  wilson + gauge - physicalReference
+  ≡ coupledHodgeRemainder wilson gauge flatCurl flatDivergence
+physicalReferenceTurnsCoupledRemainderIntoLiteralOne
+    wilson gauge physicalReference flatCurl flatDivergence referenceExact =
+  subst
+    (λ selected →
+      wilson + gauge - selected
+      ≡ coupledHodgeRemainder wilson gauge flatCurl flatDivergence)
+    (sym referenceExact)
+    (ℚRing.solve [])
+
+------------------------------------------------------------------------
+-- Separate physical Wilson and gauge estimates imply 1/32 coercivity.
+------------------------------------------------------------------------
+
+literalHessianCoerciveFromSharpWilsonGaugeBudgets :
   ∀ {Plaquette GaugeIndex ConstraintIndex}
-    (field : Hodge.RationalBondField4)
-    (data : Jets.LiteralPhysicalSecondVariation
-      Plaquette GaugeIndex ConstraintIndex) →
-  Hodge.BondComponentMeanZero field →
-  Jets.ExactResidualBackground (Jets.gaugeResidual data) →
-  Jets.ExactResidualBackground (Jets.constraintResidual data) →
-  - (Sharp.sharpSixteenAtomBudget * Hodge.bondNormSq field)
-    ≤ Jets.wilsonSecondVariation data
-        - Hodge.bondReferenceDifferenceEnergy field →
-  P33.p33PhysicalFloor * Hodge.bondNormSq field
-    ≤ Jets.literalTotalSecondVariation data
-literalHessianCoerciveFromSharpWilsonBudget
-    field data meanZero gaugeExact constraintExact sharpLower =
-  Cancel.literalHessianCoerciveFromWilsonDifference
-    field data meanZero gaugeExact constraintExact
-    (sharpSignedLowerImpliesPhysicalSignedLower
-      (Hodge.bondNormSq field)
-      (Jets.wilsonSecondVariation data
-        - Hodge.bondReferenceDifferenceEnergy field)
-      (bondNormSqNonnegative field)
-      sharpLower)
+    (field : Physical.PhysicalSU2BondField4)
+    (dataSet : Jets.LiteralPhysicalSecondVariation
+      Plaquette GaugeIndex ConstraintIndex)
+    flatCurlEnergy flatDivergenceEnergy →
+  PhysicalHodge.PhysicalBondComponentMeanZero field →
+  Jets.ExactResidualBackground (Jets.gaugeResidual dataSet) →
+  Jets.ExactResidualBackground (Jets.constraintResidual dataSet) →
+  PhysicalHodge.physicalReferenceDifferenceEnergy field
+    ≡ flatCurlEnergy + flatDivergenceEnergy →
+  - (Sharp.sharpSixteenAtomBudget * Physical.physicalSU2BondNormSq field)
+    ≤ Jets.wilsonSecondVariation dataSet - flatCurlEnergy →
+  - (configuredGaugeHodgeBudget * Physical.physicalSU2BondNormSq field)
+    ≤ Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy →
+  P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field
+    ≤ Jets.literalTotalSecondVariation dataSet
+literalHessianCoerciveFromSharpWilsonGaugeBudgets
+    field dataSet flatCurlEnergy flatDivergenceEnergy
+    meanZero gaugeExact constraintExact referenceExact
+    wilsonLower gaugeLower =
+  let
+    splitLower :
+      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+      ≤ (Jets.wilsonSecondVariation dataSet - flatCurlEnergy)
+        + (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy)
+    splitLower =
+      coupledSignedLowerFromSeparateBudgets
+        (Physical.physicalSU2BondNormSq field)
+        (Jets.wilsonSecondVariation dataSet - flatCurlEnergy)
+        (Cancel.gaugeFirstEnergy dataSet - flatDivergenceEnergy)
+        wilsonLower gaugeLower
 
-sharpWilsonBudgetGapLevel : ProofLevel
-sharpWilsonBudgetGapLevel = machineChecked
+    coupledLower :
+      - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+      ≤ Jets.wilsonSecondVariation dataSet
+          + Cancel.gaugeFirstEnergy dataSet
+          - PhysicalHodge.physicalReferenceDifferenceEnergy field
+    coupledLower =
+      subst
+        (λ upper →
+          - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+          ≤ upper)
+        (sym
+          (physicalReferenceTurnsCoupledRemainderIntoLiteralOne
+            (Jets.wilsonSecondVariation dataSet)
+            (Cancel.gaugeFirstEnergy dataSet)
+            (PhysicalHodge.physicalReferenceDifferenceEnergy field)
+            flatCurlEnergy flatDivergenceEnergy referenceExact))
+        (subst
+          (λ upper →
+            - (sharpWilsonGaugeBudget * Physical.physicalSU2BondNormSq field)
+            ≤ upper)
+          (sym
+            (coupledHodgeRemainderSplits
+              (Jets.wilsonSecondVariation dataSet)
+              (Cancel.gaugeFirstEnergy dataSet)
+              flatCurlEnergy flatDivergenceEnergy))
+          splitLower)
 
-sharpWilsonSignedPromotionLevel : ProofLevel
-sharpWilsonSignedPromotionLevel = machineChecked
+    physicalLower :
+      - (P33.p33PhysicalFloor * Physical.physicalSU2BondNormSq field)
+      ≤ Jets.wilsonSecondVariation dataSet
+          + Cancel.gaugeFirstEnergy dataSet
+          - PhysicalHodge.physicalReferenceDifferenceEnergy field
+    physicalLower =
+      sharpCoupledLowerImpliesPhysicalSignedLower
+        (Physical.physicalSU2BondNormSq field)
+        (Jets.wilsonSecondVariation dataSet
+          + Cancel.gaugeFirstEnergy dataSet
+          - PhysicalHodge.physicalReferenceDifferenceEnergy field)
+        (physicalBondNormSqNonnegative field)
+        coupledLower
+  in
+  Cancel.literalHessianCoerciveFromWilsonGaugeHodgeDifference
+    field dataSet meanZero gaugeExact constraintExact physicalLower
 
-literalBondNormNonnegativeLevel : ProofLevel
-literalBondNormNonnegativeLevel = machineChecked
+sharpWilsonGaugeBudgetGapLevel : ProofLevel
+sharpWilsonGaugeBudgetGapLevel = machineChecked
 
-literalSharpWilsonCoercivityLevel : ProofLevel
-literalSharpWilsonCoercivityLevel = machineChecked
+coupledWilsonGaugeSignedPromotionLevel : ProofLevel
+coupledWilsonGaugeSignedPromotionLevel = machineChecked
+
+literalPhysicalNormNonnegativeLevel : ProofLevel
+literalPhysicalNormNonnegativeLevel = machineChecked
+
+flatHodgeRemainderDecompositionLevel : ProofLevel
+flatHodgeRemainderDecompositionLevel = machineChecked
+
+literalSharpWilsonGaugeCoercivityLevel : ProofLevel
+literalSharpWilsonGaugeCoercivityLevel = machineChecked
 
 physicalSharpWilsonAtomEstimateLevel : ProofLevel
 physicalSharpWilsonAtomEstimateLevel = conditional
+
+physicalGaugeHodgeEstimateLevel : ProofLevel
+physicalGaugeHodgeEstimateLevel = conditional
