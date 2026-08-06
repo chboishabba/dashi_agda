@@ -12,8 +12,13 @@ import DASHI.Physics.DarkSector.DisplacedVertex as Vertex
 import DASHI.Physics.DarkSector.TriggerCensoring as Trigger
 import DASHI.Visualisation.AttachedVisualisationBoundary as Visualisation
 import DASHI.Physics.Foundations.TriToBiSingularJunctionExact as Junction
+import DASHI.Physics.Foundations.TriToBiPhaseDialecticExact as Phase
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Visualisation.CoarseSliceSearchExact as Search
+import DASHI.Visualisation.SliceObjectiveExact as Objective
 import DASHI.Visualisation.RendererParityExact as Parity
+import DASHI.Visualisation.RendererReceiptExact as Receipt
+import DASHI.Visualisation.MeasureFieldAdapterExact as Adapter
 
 record Round5CompleteBoundary : Set where
   field
@@ -55,14 +60,42 @@ record Round5CompleteBoundary : Set where
       ≡
       3
 
+    phaseCancellationReachesNeutral :
+      Phase.phaseResultToTrit
+        (Phase.phaseResultant
+          Phase.phaseZero
+          Phase.phaseOne
+          Phase.phaseTwo)
+      ≡
+      Triadic.zeroTrit
+
     lowPrecisionShortlistRetainsExactWinner :
       Search.InShortlist Search.floatWinner Search.coarseProposal
+
+    combinedSliceObjectiveSelectsBroadPlane :
+      Objective.combinedObjective Objective.combinedWinner
+      ≡
+      79
 
     optimisedRendererPreservesReference :
       (input : Parity.RenderInput) →
       Parity.optimisedRenderer input
       ≡
       Parity.referenceRenderer input
+
+    rendererSourceReceiptDoesNotClaimExecution :
+      Receipt.benchmarkExecuted Receipt.canonicalSourceReceipt ≡ false
+
+    distinctSourcesCanShareCoarseImage :
+      Adapter.coarseColour
+        (Adapter.restrictField Adapter.leftCellSlice
+          (Adapter.convolveScaled
+            (Adapter.extractMeasure Adapter.sourceA)))
+      ≡
+      Adapter.coarseColour
+        (Adapter.restrictField Adapter.leftCellSlice
+          (Adapter.convolveScaled
+            (Adapter.extractMeasure Adapter.sourceB)))
 
 open Round5CompleteBoundary public
 
@@ -87,8 +120,16 @@ canonicalRound5CompleteBoundary =
         Trigger.canonicalLLPTriggerAcceptsDisplacedSignal
     ; connectedThreeToTwoNeedsThreeSaddles =
         Junction.connectedGenusZeroNeedsThreeSaddles
+    ; phaseCancellationReachesNeutral =
+        Phase.cancellationMapsToTernaryNeutral
     ; lowPrecisionShortlistRetainsExactWinner =
         Search.trueWinnerSurvivesShortlist
+    ; combinedSliceObjectiveSelectsBroadPlane =
+        Objective.combinedWinnerScore
     ; optimisedRendererPreservesReference =
         Parity.optimisedParity
+    ; rendererSourceReceiptDoesNotClaimExecution =
+        Receipt.sourceReceiptDoesNotClaimExecutedBenchmark
+    ; distinctSourcesCanShareCoarseImage =
+        Adapter.differentSourcesSameCoarseImage
     }
