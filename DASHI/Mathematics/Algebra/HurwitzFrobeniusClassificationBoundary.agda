@@ -44,60 +44,60 @@ open import DASHI.Mathematics.Algebra.HurwitzFrobeniusLawProfileExact
 
 record FrobeniusHypotheses : Set₁ where
   field
-    Carrier : Set
-    realVectorSpaceStructure : Set
-    dimension : Nat
-    finiteDimensional : Set
-    multiplication : Carrier → Carrier → Carrier
-    unitElement : Carrier
-    associativeMultiplication : Set
-    distributiveRealAlgebraLaws : Set
-    nonzeroElementsInvertible : Set
+    fCarrier : Set
+    fRealVectorSpaceStructure : Set
+    fDimension : Nat
+    fFiniteDimensional : Set
+    fMultiplication : fCarrier → fCarrier → fCarrier
+    fUnitElement : fCarrier
+    fAssociativeMultiplication : Set
+    fDistributiveRealAlgebraLaws : Set
+    fNonzeroElementsInvertible : Set
 
 open FrobeniusHypotheses public
 
 record FrobeniusConclusion
     (hypotheses : FrobeniusHypotheses) : Set₁ where
   field
-    allowedDimension :
-      FrobeniusDimension (dimension hypotheses)
-    classifiedAsRealComplexOrQuaternion : Set
-    classificationIsRealAlgebraIsomorphism : Set
+    fAllowedDimension :
+      FrobeniusDimension (fDimension hypotheses)
+    fClassifiedAsRealComplexOrQuaternion : Set
+    fClassificationIsRealAlgebraIsomorphism : Set
 
 record HurwitzHypotheses : Set₁ where
   field
-    Carrier : Set
-    realVectorSpaceStructure : Set
-    dimension : Nat
-    finiteDimensional : Set
-    multiplication : Carrier → Carrier → Carrier
-    unitElement : Carrier
-    distributiveRealAlgebraLaws : Set
-    quadraticNorm : Carrier → Set
-    normIsRealValued : Set
-    normPositiveDefinite : Set
-    normMultiplicative : Set
-    nonzeroElementsInvertible : Set
+    hCarrier : Set
+    hRealVectorSpaceStructure : Set
+    hDimension : Nat
+    hFiniteDimensional : Set
+    hMultiplication : hCarrier → hCarrier → hCarrier
+    hUnitElement : hCarrier
+    hDistributiveRealAlgebraLaws : Set
+    hQuadraticNorm : hCarrier → Set
+    hNormIsRealValued : Set
+    hNormPositiveDefinite : Set
+    hNormMultiplicative : Set
+    hNonzeroElementsInvertible : Set
 
 open HurwitzHypotheses public
 
 record HurwitzConclusion
     (hypotheses : HurwitzHypotheses) : Set₁ where
   field
-    allowedDimension :
-      HurwitzDimension (dimension hypotheses)
-    classifiedAsRealComplexQuaternionOrOctonion : Set
-    classificationPreservesAlgebraAndNorm : Set
+    hAllowedDimension :
+      HurwitzDimension (hDimension hypotheses)
+    hClassifiedAsRealComplexQuaternionOrOctonion : Set
+    hClassificationPreservesAlgebraAndNorm : Set
 
 record FrobeniusClassificationTheorem : Set₂ where
   field
-    classify :
+    classifyFrobenius :
       (hypotheses : FrobeniusHypotheses) →
       FrobeniusConclusion hypotheses
 
 record HurwitzClassificationTheorem : Set₂ where
   field
-    classify :
+    classifyHurwitz :
       (hypotheses : HurwitzHypotheses) →
       HurwitzConclusion hypotheses
 
