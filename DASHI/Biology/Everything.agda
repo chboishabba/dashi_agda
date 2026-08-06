@@ -189,7 +189,7 @@ import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas
 import DASHI.Biology.ConsciousAccessRound5CompletionBoundary
 import DASHI.Biology.ConsciousAccessRound5CompletionRegression
 
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 -- Sections 756--835 continuation: cyclic/dialectical type separation, soft
 -- carry and logic, and a renderable mass-consistent p-adic reasoning field.
 
@@ -199,3 +199,15 @@ import DASHI.Biology.TernaryLogicRelaxationSourceAtlas
 import DASHI.Biology.RenderablePadicReasoningFieldExact
 import DASHI.Biology.PadicLODConsistencyExact
 import DASHI.Biology.PadicRenderModeCorrectionExact
+
+-----------------------------------------------------------------------
+-- Conscious-access round six: cross-pollination of ternary, visual,
+-- morphogenetic, neural-observation, braid-history, and hall coalitions.
+
+import DASHI.Biology.TernaryVisualMotifSemiconjugacyExact
+import DASHI.Biology.TernaryMorphogeneticVisualFieldExact
+import DASHI.Biology.TernaryMotifNeuralObservationQuotientExact
+import DASHI.Biology.TriadicVisualBraidCrossPollinationExact
+import DASHI.Biology.TernaryHallTransitionCoalitionExact
+import DASHI.Biology.ConsciousAccessRound6CrossSourceBridge
+import DASHI.Biology.ConsciousAccessRound6CrossPollinationRegression
