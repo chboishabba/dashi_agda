@@ -8,7 +8,7 @@ bash scripts/check_ns_luo_galerkin_kernel_round15.sh
 
 FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoLowHighExponentBookkeepingCorrectedExact.agda
-  DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeHolderConstantOneExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeHolderConstantOneV2Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeHolderDimensionFreeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCenteredDifferenceSixThreeExact.agda
