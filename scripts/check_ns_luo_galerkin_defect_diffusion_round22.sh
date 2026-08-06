@@ -14,6 +14,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoTwoPointCrossDefectDiffusionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPairFrequencyDefectDiffusionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierModePairExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierVorticityConvolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinPairDefectEvolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiveSourceDefectCriticalTaxExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoBadExcursionHysteresisTaxExact.agda
@@ -62,6 +63,9 @@ grep -q 'highHighLowOutputMissesTwoUnits' DASHI/Physics/Closure/NSTriadKNLuoPair
 grep -q 'fourierModePairShellDamping' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierModePairExact.agda
 grep -q 'oppositePairOutputZero' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierModePairExact.agda
 grep -q 'oppositePairDefectAmplitudeOne' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierModePairExact.agda
+grep -q 'velocityTransverse' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierVorticityConvolutionExact.agda
+grep -q 'orderedVorticityInteraction' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierVorticityConvolutionExact.agda
+grep -q 'symmetrizedVorticityInteractionTransverse' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierVorticityConvolutionExact.agda
 
 grep -q 'localPairDefectDampedEvolution' DASHI/Physics/Closure/NSTriadKNLuoGalerkinPairDefectEvolutionExact.agda
 grep -q 'finiteWeightedPairDefectDampedEvolution' DASHI/Physics/Closure/NSTriadKNLuoGalerkinPairDefectEvolutionExact.agda
@@ -95,6 +99,7 @@ grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNLuoGalerkinCriticalFil
 grep -q '10.1007/BF01174182' DASHI/Physics/Closure/NSTriadKNLuoCriticalRestartContradictionExact.agda
 
 grep -q 'fullGalerkinConvolutionEnumerationConstructed' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierModePairExact.agda
+grep -q 'finiteGalerkinModeEnumerationConstructed' DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierVorticityConvolutionExact.agda
 grep -q 'actualPeriodicFourierCellsConstructed' DASHI/Physics/Closure/NSTriadKNLuoGalerkinPairDefectEvolutionExact.agda
 grep -q 'fiveSourceCriticalTaxProduced' DASHI/Physics/Closure/NSTriadKNLuoGalerkinPairDefectEvolutionExact.agda
 grep -q 'navierStokesPositiveVariationBoundProduced' DASHI/Physics/Closure/NSTriadKNLuoBadExcursionHysteresisTaxExact.agda
