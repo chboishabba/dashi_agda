@@ -62,17 +62,28 @@ jobs:
           DASHI_AGDA29_EPHEMERAL: '1'
           AGDA_LOG_PATH: ${{ runner.temp }}/conscious-access-round5-agda.log
         run: bash scripts/check_conscious_access_round5.sh
-      - name: Report successful kernel check
-        if: success() && github.event_name == 'push'
+      - name: Report kernel-check status to the active pull request
+        if: always() && github.event_name == 'push'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh pr comment 399 --repo chboishabba/dashi_agda --body
-          'Round 5 repository-flake Agda kernel check passed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
-      - name: Report failed kernel check
-        if: failure() && github.event_name == 'push'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh pr comment 399 --repo chboishabba/dashi_agda --body
-          'Round 5 repository-flake Agda kernel check failed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
+          CHECK_STATUS: ${{ job.status }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pr_number="$(
+            gh pr list \
+              --repo "$GITHUB_REPOSITORY" \
+              --head "$GITHUB_REF_NAME" \
+              --state open \
+              --json number \
+              --jq '.[0].number // empty'
+          )"
+
+          if [[ -z "$pr_number" ]]; then
+            echo "No open pull request found for $GITHUB_REF_NAME; skipping comment."
+            exit 0
+          fi
+
+          gh pr comment "$pr_number" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Round 5 repository-flake Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
