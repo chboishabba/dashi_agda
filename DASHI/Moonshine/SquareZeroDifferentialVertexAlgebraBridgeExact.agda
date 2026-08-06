@@ -13,6 +13,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Moonshine.FiniteDifferentialVertexAlgebraExact as Generic
 import DASHI.Moonshine.SquareZeroDifferentialVertexAlgebraExact as Concrete
+open Generic.SquareZeroDifferentialAlgebra
 
 squareZeroDifferentialAlgebra : Generic.SquareZeroDifferentialAlgebra
 squareZeroDifferentialAlgebra = record
