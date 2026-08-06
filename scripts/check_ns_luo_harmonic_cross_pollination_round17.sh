@@ -13,6 +13,7 @@ files=(
   DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
   DASHI/Physics/Common/FiniteWreathRefinementExact.agda
   DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFourInteractionSeparatingProbeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinScaledFiltrationCrossPollinationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
@@ -32,11 +33,14 @@ grep -q 'pairProbesSeparate' DASHI/Physics/Common/SeparatingProbeFamilyExact.agd
 grep -q 'localPermutationStepTwiceAt' DASHI/Physics/Common/FiniteWreathRefinementExact.agda
 grep -q 'translationsCommute' DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
 grep -q 'pullbacksCommuteAt' DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
+grep -q 'interactionProbesSeparate' DASHI/Physics/Closure/NSTriadKNLuoFourInteractionSeparatingProbeExact.agda
+grep -q 'fourInteractionProbeSystem' DASHI/Physics/Closure/NSTriadKNLuoFourInteractionSeparatingProbeExact.agda
 grep -q 'branchProbeExact' DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
 grep -q 'weakBranchMatchesDisplayedHalfGap' DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
 grep -q 'selectedGalerkinDefectTendsToZero' DASHI/Physics/Closure/NSTriadKNLuoGalerkinScaledFiltrationCrossPollinationExact.agda
 grep -q 'velocityTranslationsCommuteAt' DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
 grep -q 'firstTranslationHasOrderThreeAt' DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
+grep -q '10.24033/asens.1404' DASHI/Physics/Closure/NSTriadKNLuoFourInteractionSeparatingProbeExact.agda
 grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
 grep -q '10.2140/pjm.1982.98.333' DASHI/Physics/Closure/NSTriadKNLuoGalerkinScaledFiltrationCrossPollinationExact.agda
 grep -q '10.1017/CBO9780511626265' DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
