@@ -1,7 +1,6 @@
 module DASHI.Biology.TernaryHallTransitionCoalitionExact where
 
 open import DASHI.Core.Prelude
-open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Biology.HallOfHallsCoalition as Hall
 import DASHI.Biology.DASHIYijingRelationalOperatorsExact as Yijing
@@ -50,9 +49,15 @@ integratedTernaryHallCandidate =
     Triadic.zeroTrit
 
 transitionPenalty : TernaryHallCandidate → Nat
-transitionPenalty staticArchitectureCandidate = 2
-transitionPenalty movingProjectionCandidate = 1
-transitionPenalty integratedTernaryHallCandidate = 0
+transitionPenalty
+  (ternaryHallCandidate
+    Hall.architectureOnlyCandidate false false Triadic.negativeTrit) = 2
+transitionPenalty
+  (ternaryHallCandidate
+    Hall.projectionOnlyCandidate true true Triadic.positiveTrit) = 1
+transitionPenalty
+  (ternaryHallCandidate
+    Hall.integratedHallCandidate true true Triadic.zeroTrit) = 0
 transitionPenalty candidate = 3
 
 jointObjective : TernaryHallCandidate → Nat
