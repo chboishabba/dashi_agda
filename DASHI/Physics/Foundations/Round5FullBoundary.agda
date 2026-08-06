@@ -158,8 +158,8 @@ record Round5FullBoundary : Set where
       ≡
       false
 
-    sourceCountIsFourteen :
-      Sources.canonicalRound5SourceCount ≡ 14
+    sourceCountIsSeventeen :
+      Sources.canonicalRound5SourceCount ≡ 17
 
 open Round5FullBoundary public
 
@@ -250,6 +250,6 @@ canonicalRound5FullBoundary =
         refl
     ; terminalUnificationRemainsFalse =
         ExistingUnification.unificationPaperInterfaceTerminalFalse
-    ; sourceCountIsFourteen =
+    ; sourceCountIsSeventeen =
         refl
     }
