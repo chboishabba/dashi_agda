@@ -6,7 +6,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGoodCoherenceWeightedDefectExact where
 -- Authors: Peter Constantin; Charles Fefferman.
 -- Title: "Direction of Vorticity and the Problem of Global Regularity for
 -- the Navier--Stokes Equations".
--- DOI: 10.1512/iumj.1993.42.42014.
+-- DOI: 10.1512/iumj.1993.42.42034.
 --
 -- PURPOSE
 -- Prove the complementary finite good-coherence estimate. On every good cell
