@@ -34,6 +34,14 @@ worldWarTwoAndColdWarDoNotCollapse :
 worldWarTwoAndColdWarDoNotCollapse =
   History.japanIsNotColdWarCommunism
 
+signalsLineageReachesBorneoRegression :
+  History.nextSignalsLineageStage
+    (History.nextSignalsLineageStage
+      History.wartimeSpecialWirelessStage)
+  ≡ History.borneoOperationalStage
+signalsLineageReachesBorneoRegression =
+  History.wartimeLineageReachesBorneoInTwo
+
 ------------------------------------------------------------------------
 -- Loss and abstraction regressions.
 
@@ -62,9 +70,9 @@ pineGapAndBorneoRemainDistinct =
   Circuit.pineGapIsNotBorneoBarracks
 
 pineGapDemandPairRegression :
-  Circuit.hasReturnDemand Circuit.pineGapPalestineDemands ≡ true
+  (Circuit.hasReturnDemand Circuit.pineGapPalestineDemands ≡ true)
   ×
-  Circuit.hasPalestineDemand Circuit.pineGapPalestineDemands ≡ true
+  (Circuit.hasPalestineDemand Circuit.pineGapPalestineDemands ≡ true)
 pineGapDemandPairRegression =
   Circuit.pineGapProtestHasReturnDemand
   , Circuit.pineGapProtestHasPalestineDemand
@@ -80,11 +88,11 @@ specificStrikeLinkRemainsUnverified =
 -- Generic frontier and source regressions.
 
 frontierParadoxRegression :
-  Persistence.includedInProtectedCore Persistence.canonicalFrontierParadox
-  ≡ false
+  (Persistence.includedInProtectedCore Persistence.canonicalFrontierParadox
+  ≡ false)
   ×
-  Persistence.requiredForCoreSecurity Persistence.canonicalFrontierParadox
-  ≡ true
+  (Persistence.requiredForCoreSecurity Persistence.canonicalFrontierParadox
+  ≡ true)
 frontierParadoxRegression =
   Persistence.frontierExcludedFromCore
   , Persistence.frontierRequiredForSecurity
@@ -96,9 +104,9 @@ permanentEnemyEffectRegression =
   Persistence.categoryPersistsAfterFirstDefeat
 
 sourceCountRegression :
-  Sources.canonicalCabarlahPalestineSourceCount ≡ 9
+  Sources.canonicalCabarlahPalestineSourceCount ≡ 10
 sourceCountRegression =
-  Sources.canonicalCabarlahPalestineSourceCountIsNine
+  Sources.canonicalCabarlahPalestineSourceCountIsTen
 
 integratedBoundaryRegression : Boundary.CabarlahPalestineFormalBoundary
 integratedBoundaryRegression =
