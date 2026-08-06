@@ -161,9 +161,9 @@ record TriadicBraidBoundary : Set where
     mediatingStrandAlwaysResolvesOppositionIsFalse :
       mediatingStrandAlwaysResolvesOpposition ≡ false
 
-    braidWordDiagnosesA person : Bool
-    braidWordDiagnosesA personIsFalse :
-      braidWordDiagnosesA person ≡ false
+    braidWordDiagnosesPerson : Bool
+    braidWordDiagnosesPersonIsFalse :
+      braidWordDiagnosesPerson ≡ false
 
 open TriadicBraidBoundary public
 
