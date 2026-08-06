@@ -26,6 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 record HodgeTriple : Set where
   constructor hodgeTriple
@@ -152,12 +153,19 @@ laplacianFixesCoexact (hodgeTriple e h c) =
 laplacianKernelIsHarmonic : ∀ x →
   hodgeLaplacian x ≡ zeroTriple → x ≡ harmonicProjection x
 laplacianKernelIsHarmonic (hodgeTriple e h c) equality =
-  kernelCoordinates equality
+  tripleExtensionality eIsZero refl cIsZero
   where
-    kernelCoordinates :
-      hodgeTriple e 0ℚ c ≡ hodgeTriple 0ℚ 0ℚ 0ℚ →
-      hodgeTriple e h c ≡ hodgeTriple 0ℚ h 0ℚ
-    kernelCoordinates refl = refl
+    exactCoordinateEquation : e + 0ℚ ≡ 0ℚ
+    exactCoordinateEquation = cong exactCoordinate equality
+
+    coexactCoordinateEquation : 0ℚ + c ≡ 0ℚ
+    coexactCoordinateEquation = cong coexactCoordinate equality
+
+    eIsZero : e ≡ 0ℚ
+    eIsZero = trans (sym (solve (e ∷ []))) exactCoordinateEquation
+
+    cIsZero : c ≡ 0ℚ
+    cIsZero = trans (sym (solve (c ∷ []))) coexactCoordinateEquation
 
 record HodgeDecompositionCertificate : Set where
   field
