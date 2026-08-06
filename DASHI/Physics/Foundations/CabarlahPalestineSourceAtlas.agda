@@ -74,6 +74,17 @@ brisbaneLineAWMSource =
     "Supports describing the Brisbane Line as an alleged and politically consequential plan associated with Japanese invasion, while recording that the Royal Commission did not find it to have been official policy."
     "The alleged line is not promoted to a verified fixed boundary through Cabarlah or to a Cold War communist concession line."
 
+blaxlandSignalsHistorySource : Sources.SourceRecord
+blaxlandSignalsHistorySource =
+  Sources.sourceRecord
+    "John Blaxland"
+    "The Role of Signals Intelligence in Australian Military Operations, 1939-72"
+    "Australian Army Journal 2(2)"
+    2005
+    "No DOI assigned; Australian Army Research Centre journal article"
+    "Supports the institutional lineage from wartime special wireless units through the permanent Cabarlah base and later operational experience in Malaya, Borneo and Vietnam."
+    "Institutional continuity is not promoted to identity of the Japanese, Indonesian, communist, Viet Cong, or North Vietnamese adversaries."
+
 malayanSIGINTSource : Sources.SourceRecord
 malayanSIGINTSource =
   Sources.sourceRecord
@@ -115,6 +126,7 @@ canonicalCabarlahPalestineSources =
   ∷ jarowairStateLibrarySource
   ∷ aiatsisAustLangSource
   ∷ brisbaneLineAWMSource
+  ∷ blaxlandSignalsHistorySource
   ∷ malayanSIGINTSource
   ∷ pineGapPalestine2025Source
   ∷ pineGapMarch2026Source
@@ -128,6 +140,6 @@ canonicalCabarlahPalestineSourceCount : Nat
 canonicalCabarlahPalestineSourceCount =
   sourceCount canonicalCabarlahPalestineSources
 
-canonicalCabarlahPalestineSourceCountIsNine :
-  canonicalCabarlahPalestineSourceCount ≡ 9
-canonicalCabarlahPalestineSourceCountIsNine = refl
+canonicalCabarlahPalestineSourceCountIsTen :
+  canonicalCabarlahPalestineSourceCount ≡ 10
+canonicalCabarlahPalestineSourceCountIsTen = refl
