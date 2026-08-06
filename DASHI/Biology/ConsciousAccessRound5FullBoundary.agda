@@ -9,6 +9,7 @@ import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 import DASHI.Biology.DialecticalSheetSpiralExact as Spiral
 import DASHI.Biology.TriadicBraidDialecticExact as Braid
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Biology.TernaryCubeStrataExact as Strata
 import DASHI.Biology.TernaryCantorWheelDiffusionExact as Cantor
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Monster
 import DASHI.Biology.FRACTRANSSPTransitionExact as FRACTRAN
@@ -34,6 +35,7 @@ record ConsciousAccessRound5Boundary : Set where
     dialecticalSpiralBoundary : Spiral.DialecticalSpiralBoundary
     triadicBraidBoundary : Braid.TriadicBraidBoundary
     hyperfabricBoundary : Hyper.HyperfabricBoundary
+    ternaryCubeStrataBoundary : Strata.TernaryCubeStrataBoundary
     cantorWheelBoundary : Cantor.CantorWheelBoundary
     moonshineBoundary : Monster.MoonshinePromotionBoundary
     fractranSSPBoundary : FRACTRAN.FRACTRANSSPBoundary
@@ -115,6 +117,13 @@ record ConsciousAccessRound5Boundary : Set where
       ¬ (Braid.wordKind Braid.leftBraidResidual
          ≡ Braid.wordKind Braid.rightBraidResidual)
 
+    ternaryCubeStrataSumToTwentySeven :
+      Strata.vertexCount
+      + Strata.edgeMidpointCount
+      + Strata.faceCentreCount
+      + Strata.cubeCentreCount
+      ≡ 27
+
     polarCantorDepthThreeHasEightStates :
       Cantor.polarAddressCount 3 ≡ 8
 
@@ -189,6 +198,7 @@ canonicalConsciousAccessRound5Boundary =
     Spiral.canonicalDialecticalSpiralBoundary
     Braid.canonicalTriadicBraidBoundary
     Hyper.canonicalHyperfabricBoundary
+    Strata.canonicalTernaryCubeStrataBoundary
     Cantor.canonicalCantorWheelBoundary
     Monster.canonicalMoonshinePromotionBoundary
     FRACTRAN.canonicalFRACTRANSSPBoundary
@@ -213,6 +223,7 @@ canonicalConsciousAccessRound5Boundary =
     Spiral.historicalLiftAfterFour
     Braid.yangBaxterEndpointEquality
     Braid.leftAndRightWordKindsDiffer
+    Strata.strataSumToTwentySeven
     Cantor.polarDepthThreeCount
     Cantor.nextWheelPhaseThree
     Monster.rawNineRepresentationDimensionIsNine
