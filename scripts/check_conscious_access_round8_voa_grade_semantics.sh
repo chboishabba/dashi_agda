@@ -14,6 +14,7 @@ files=(
   DASHI/Biology/FiniteGradedModeCarrierExact.agda
   DASHI/Biology/MoonshineWeightTwoGriessProductSchemaExact.agda
   DASHI/Biology/MoonshineGradedTraceProbeExact.agda
+  DASHI/Biology/MoonshineShiftedJCoefficientBoundaryExact.agda
   DASHI/Biology/MonsterLieAlgebraGradeBoundaryExact.agda
   DASHI/Biology/ConsciousAccessRound8VOAGradeSemanticsValidation.agda
 )
@@ -41,6 +42,8 @@ checks=(
   'MoonshineGradedTraceProbeExact.agda:identityTraceProbesSeparate'
   'MoonshineGradedTraceProbeExact.agda:moonshineWeightTwoTraceExact'
   'MoonshineGradedTraceProbeExact.agda:bothRoutesRequireGriessWeightTwo'
+  'MoonshineShiftedJCoefficientBoundaryExact.agda:centralChargeShiftExact'
+  'MoonshineShiftedJCoefficientBoundaryExact.agda:traceProfileMatchesShiftedCoefficients'
   'MonsterLieAlgebraGradeBoundaryExact.agda:voaZeroIsNotMonsterLieOrigin'
 )
 
@@ -57,11 +60,13 @@ done
 grep -q '10.1007/978-0-8176-8186-9' DASHI/Biology/FiniteGradedModeCarrierExact.agda
 grep -q '10.1353/ajm.2007.0009' DASHI/Biology/MoonshineGradedTraceProbeExact.agda
 grep -q '10.1007/BF01389186' DASHI/Biology/MoonshineWeightTwoGriessProductSchemaExact.agda
+grep -q '10.1112/blms/11.3.308' DASHI/Biology/MoonshineShiftedJCoefficientBoundaryExact.agda
 grep -q '10.1007/BF01614075' DASHI/Biology/MonsterLieAlgebraGradeBoundaryExact.agda
 grep -q 'weightTwoOneIsNotVacuumLine' DASHI/Biology/MoonshineVacuumConformalLineBoundaryExact.agda
 grep -q 'concreteLinesNotIdentified' DASHI/Biology/MoonshineConformalReductionVsFiftyFourReductionExact.agda
 grep -q 'constituentOnlyIsNotDeclaredFullGriessAlgebra' DASHI/Biology/MoonshineWeightTwoGriessProductSchemaExact.agda
 grep -q 'truncatedIdentityTraceDoesNotDetermineVOA' DASHI/Biology/MoonshineGradedTraceProbeExact.agda
+grep -q 'threeInitialCoefficientsDoNotProveGenusZero' DASHI/Biology/MoonshineShiftedJCoefficientBoundaryExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/ConsciousAccessRound8VOAGradeSemanticsValidation.agda
