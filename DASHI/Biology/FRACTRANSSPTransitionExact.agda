@@ -5,11 +5,14 @@ open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Geometry.SSP369Ultrametric as SSP
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 
 ------------------------------------------------------------------------
--- FRACTRAN-style guarded valuation transport attached to the existing SSP
--- 3/6/9 address carrier.  Prime valuations act as control state; the SSP
--- address remains the hierarchical location/type index.
+-- Legacy four-coordinate projection retained for backwards compatibility.
+-- The complete machine is SignedSSPFRACTRANWeaveExact: all fifteen SSP lanes,
+-- signed denominator/numerator orientation, 3/6/9 addresses, and the canonical
+-- reduced-fibre 53 construction.  The local 53 -> 47 rule below is only a
+-- finite projection example and is not the canonical interpretation of 53.
 
 record PrimeValuationState : Set where
   constructor primeValuationState
@@ -116,6 +119,22 @@ firstEnabledStep state with ruleEnabled transfer47To59 state
 canonicalPriorityUses47To59 :
   firstEnabledStep canonicalPrimeState ≡ firstCanonicalTransfer
 canonicalPriorityUses47To59 = refl
+
+------------------------------------------------------------------------
+-- Completion bridge to the full fifteen-lane signed weave.
+
+completeSignedSSPBoundary : Signed.SignedSSPWeaveBoundary
+completeSignedSSPBoundary = Signed.canonicalSignedSSPWeaveBoundary
+
+completeSignedSSPPrimeCountIsFifteen :
+  Signed.listCount Signed.canonicalSSPPrimes ≡ 15
+completeSignedSSPPrimeCountIsFifteen =
+  Signed.canonicalSSPPrimeCountIsFifteen
+
+canonicalReducedFiftyThreeProgramLengthIsTwo :
+  Signed.listCount Signed.canonicalGeometricFiftyThreeProgram ≡ 2
+canonicalReducedFiftyThreeProgramLengthIsTwo =
+  Signed.geometricProgramLengthIsTwo
 
 record FRACTRANSSPBoundary : Set where
   constructor fractranSSPBoundary
