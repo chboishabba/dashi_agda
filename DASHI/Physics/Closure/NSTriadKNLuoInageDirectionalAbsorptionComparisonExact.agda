@@ -157,13 +157,20 @@ record DirectionalToIntegratedAbsorption
   field
     cells : List (DirectionalAbsorptionCell parameters)
 
-  pointwise :
-    (cell : DirectionalAbsorptionCell parameters) →
-    PointwiseHHAbsorption parameters cell
-  pointwise = directionalBoundImpliesPointwiseAbsorption parameters
-
-  integrated : IntegratedHHAbsorption parameters cells
-  integrated =
-    pointwiseAbsorptionImpliesIntegratedAbsorption parameters cells
-
 open DirectionalToIntegratedAbsorption public
+
+comparisonPointwiseAbsorption :
+  (parameters : StrictAbsorptionParameters) →
+  (comparison : DirectionalToIntegratedAbsorption parameters) →
+  (cell : DirectionalAbsorptionCell parameters) →
+  PointwiseHHAbsorption parameters cell
+comparisonPointwiseAbsorption parameters comparison =
+  directionalBoundImpliesPointwiseAbsorption parameters
+
+comparisonIntegratedAbsorption :
+  (parameters : StrictAbsorptionParameters) →
+  (comparison : DirectionalToIntegratedAbsorption parameters) →
+  IntegratedHHAbsorption parameters (cells comparison)
+comparisonIntegratedAbsorption parameters comparison =
+  pointwiseAbsorptionImpliesIntegratedAbsorption
+    parameters (cells comparison)
