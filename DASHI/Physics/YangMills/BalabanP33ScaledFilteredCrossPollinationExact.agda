@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.BalabanP33ScaledFilteredCrossPollinationExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat using (_*_)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Common.ScaledFilteredEstimateExact as Shared
@@ -80,7 +81,6 @@ record ScaledFilteredYMBoundary : Set where
     commonRescalingProvesPhysicalRGCompatibility : Set
     commonRescalingDoesNotProvePhysicalRGCompatibility :
       commonRescalingProvesPhysicalRGCompatibility → Set
-
     commonRescalingProvesInfiniteVolumeGap : Set
     commonRescalingDoesNotProveInfiniteVolumeGap :
       commonRescalingProvesInfiniteVolumeGap → Set
