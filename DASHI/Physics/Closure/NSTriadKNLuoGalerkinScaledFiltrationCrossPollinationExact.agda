@@ -19,8 +19,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinScaledFiltrationCrossPollinatio
 -- projection-error producer.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _*_)
 
 import DASHI.Physics.Common.ScaledFilteredEstimateExact as Scaled
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinDiagonalSelectionExact as Galerkin
@@ -70,7 +71,6 @@ record GalerkinScaledBoundary : Set where
     diagonalSelectionSuppliesPhysicalSobolevError : Set
     diagonalSelectionDoesNotSupplyPhysicalSobolevError :
       diagonalSelectionSuppliesPhysicalSobolevError → Set
-
     filteredViewProvesGlobalRegularity : Set
     filteredViewDoesNotProveGlobalRegularity :
       filteredViewProvesGlobalRegularity → Set
