@@ -10,20 +10,21 @@ module DASHI.Physics.Closure.NSTriadKNYuFiniteFarFieldConvolutionC0Exact where
 --
 -- PURPOSE
 -- Prove the finite-Galerkin version of the standard l1*c0 -> c0 fact for the
--- explicit annular kernel h_m=2^{-(m+1)}.  Every finite convolution prefix has
--- total weight at most one, uniformly in the annular cutoff.  Therefore the
+-- explicit annular kernel h_m=2^{-(m+1)}. Every finite convolution prefix has
+-- total weight at most one, uniformly in the annular cutoff. Therefore the
 -- same c0 cutoff for Q controls every finite annular prefix.
 --
--- This is the exact statement needed before the Galerkin/annular limits are
--- taken.  No exterior compactness is inferred from the energy inequality.
+-- This is the exact statement needed before Galerkin/annular limits are
+-- taken. No exterior compactness is inferred from the energy inequality.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_+_; _≤_)
+open import Data.Nat.Base using (_+_; z≤n; s≤s)
+import Data.Nat.Base as ℕ using (_≤_)
 import Data.Nat.Properties as ℕₚ
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _≤_; _<_; nonNegative; positive)
+  (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -39,51 +40,46 @@ annularWeight : Nat → ℚ
 annularWeight offset = half * Geo.pow half offset
 
 annularWeightNonnegative :
-  (offset : Nat) →
-  0ℚ ≤ annularWeight offset
+  (offset : Nat) → 0ℚ ≤ annularWeight offset
 annularWeightNonnegative offset =
   let
     instance
       halfNN = nonNegative HL.halfNonnegative
       powerNN =
         nonNegative (Geo.powNonnegative half offset HL.halfNonnegative)
-      productNN =
-        ℚₚ.nonNeg*nonNeg⇒nonNeg half (Geo.pow half offset)
+      productNN = ℚₚ.nonNeg*nonNeg⇒nonNeg half (Geo.pow half offset)
   in
   ℚₚ.nonNegative⁻¹ (annularWeight offset)
 
 annularWeightPrefix : Nat → ℚ
-annularWeightPrefix cutoff =
-  half * Geo.partialSum half cutoff
+annularWeightPrefix cutoff = half * Geo.partialSum half cutoff
 
 annularWeightPrefixBound :
-  (cutoff : Nat) →
-  annularWeightPrefix cutoff ≤ 1ℚ
+  (cutoff : Nat) → annularWeightPrefix cutoff ≤ 1ℚ
 annularWeightPrefixBound cutoff =
   let
     scaled :
       half * Geo.partialSum half cutoff ≤ half * HL.two
     scaled =
-      let
-        instance halfNN = nonNegative HL.halfNonnegative
+      let instance halfNN = nonNegative HL.halfNonnegative
       in
-      ℚₚ.*-monoˡ-≤-nonNeg
-        half
-        (HL.unshiftedHalfPrefixBound cutoff)
+      ℚₚ.*-monoˡ-≤-nonNeg half (HL.unshiftedHalfPrefixBound cutoff)
 
     endpoint : half * HL.two ≡ 1ℚ
     endpoint = solve []
   in
-  subst
-    (λ upper → annularWeightPrefix cutoff ≤ upper)
-    endpoint
-    scaled
+  subst (λ upper → annularWeightPrefix cutoff ≤ upper) endpoint scaled
+
+selfBelowSuccessor : (value : Nat) → value ℕ.≤ suc value
+selfBelowSuccessor zero = z≤n
+selfBelowSuccessor (suc value) = s≤s (selfBelowSuccessor value)
+
+leftBelowAddition : (left right : Nat) → left ℕ.≤ left + right
+leftBelowAddition zero right = z≤n
+leftBelowAddition (suc left) right = s≤s (leftBelowAddition left right)
 
 finiteAnnularConvolution :
-  (Q : Nat → ℚ) →
-  Nat →
-  Nat →
-  ℚ
+  (Q : Nat → ℚ) → Nat → Nat → ℚ
 finiteAnnularConvolution Q shell zero =
   annularWeight zero * Q shell
 finiteAnnularConvolution Q shell (suc cutoff) =
@@ -91,14 +87,10 @@ finiteAnnularConvolution Q shell (suc cutoff) =
   + annularWeight (suc cutoff) * Q (shell + suc cutoff)
 
 allShiftedBelow :
-  (Q : Nat → ℚ) →
-  Nat →
-  Nat →
-  ℚ →
-  Set
+  (Q : Nat → ℚ) → Nat → Nat → ℚ → Set
 allShiftedBelow Q shell cutoff epsilon =
   (offset : Nat) →
-  offset ≤ cutoff →
+  offset ℕ.≤ cutoff →
   Q (shell + offset) ≤ epsilon
 
 finiteConvolutionBelowWeightedEpsilon :
@@ -116,9 +108,7 @@ finiteConvolutionBelowWeightedEpsilon
       annularWeight zero * Q (shell + zero)
       ≤ annularWeight zero * epsilon
     weightStep =
-      let
-        instance weightNN =
-          nonNegative (annularWeightNonnegative zero)
+      let instance weightNN = nonNegative (annularWeightNonnegative zero)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         (annularWeight zero)
@@ -138,7 +128,8 @@ finiteConvolutionBelowWeightedEpsilon
   let
     previousShifted : allShiftedBelow Q shell cutoff epsilon
     previousShifted offset offset≤cutoff =
-      shifted offset (ℕₚ.≤-trans offset≤cutoff (ℕₚ.n≤1+n cutoff))
+      shifted offset
+        (ℕₚ.≤-trans offset≤cutoff (selfBelowSuccessor cutoff))
 
     previous =
       finiteConvolutionBelowWeightedEpsilon
@@ -190,15 +181,11 @@ finiteAnnularConvolutionBelowEpsilon
         Q shell cutoff epsilon epsilonNN shifted
 
     prefixStep :
-      epsilon * annularWeightPrefix cutoff
-      ≤ epsilon * 1ℚ
+      epsilon * annularWeightPrefix cutoff ≤ epsilon * 1ℚ
     prefixStep =
-      let
-        instance epsilonNNI = nonNegative epsilonNN
+      let instance epsilonNNI = nonNegative epsilonNN
       in
-      ℚₚ.*-monoˡ-≤-nonNeg
-        epsilon
-        (annularWeightPrefixBound cutoff)
+      ℚₚ.*-monoˡ-≤-nonNeg epsilon (annularWeightPrefixBound cutoff)
 
     endpoint : epsilon * 1ℚ ≡ epsilon
     endpoint = solve (epsilon ∷ [])
@@ -206,21 +193,9 @@ finiteAnnularConvolutionBelowEpsilon
   ℚₚ.≤-trans
     weighted
     (subst
-      (λ upper →
-        epsilon * annularWeightPrefix cutoff ≤ upper)
+      (λ upper → epsilon * annularWeightPrefix cutoff ≤ upper)
       endpoint
       prefixStep)
-
-shiftedTailFromTail :
-  (Q : Nat → ℚ)
-  (tail : Limit.EventuallyBelow Q 1ℚ)
-  (shell offset : Nat) →
-  Limit.cutoff tail ≤ shell →
-  Q (shell + offset) ≤ 1ℚ
-shiftedTailFromTail Q tail shell offset cutoff≤shell =
-  Limit.tailBound tail
-    (shell + offset)
-    (ℕₚ.≤-trans cutoff≤shell (ℕₚ.m≤m+n shell offset))
 
 finiteAnnularConvolutionVanishing :
   (Q : Nat → ℚ) →
@@ -248,4 +223,4 @@ finiteAnnularConvolutionVanishing Q QNN Qvanishing cutoff =
                 (shell + offset)
                 (ℕₚ.≤-trans
                   cutoff≤shell
-                  (ℕₚ.m≤m+n shell offset)))))
+                  (leftBelowAddition shell offset)))))
