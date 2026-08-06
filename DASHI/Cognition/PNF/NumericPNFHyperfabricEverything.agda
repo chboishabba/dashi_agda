@@ -4,6 +4,7 @@ open import DASHI.Cognition.PNF.ComplexityArithmetic public
 open import DASHI.Cognition.PNF.NumericAuthority public
 open import DASHI.Cognition.PNF.SpacyNumericProjection public
 open import DASHI.Cognition.PNF.NumericHyperfabric public
+open import DASHI.Cognition.PNF.DemandResolutionState public
 open import DASHI.Cognition.PNF.AdjacentReconciliationWork public
 open import DASHI.Cognition.PNF.BoundedMDLPlanner public
 open import DASHI.Cognition.PNF.BoundedInterfaceSketch public
