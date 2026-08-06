@@ -39,6 +39,9 @@ FILES=(
   DASHI/Biology/SignedSSPFRACTRANWeaveExact.agda
   DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda
   DASHI/Biology/EquivariantLaplacianSectorExact.agda
+  DASHI/Biology/OrientedZeroJetTransitionExact.agda
+  DASHI/Biology/ReachableSectorEntropyExact.agda
+  DASHI/Biology/ExceptionalLatticeGrokkingProtocolExact.agda
   DASHI/Biology/MoonshineGradedStageBridgeExact.agda
   DASHI/Biology/ClayCrossPollinationInterfaceExact.agda
   DASHI/Biology/ConsciousAccessRound5CompletionSourceAtlas.agda
