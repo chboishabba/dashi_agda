@@ -53,6 +53,17 @@ informationGeometrySource =
     "Supports treating parameterisations geometrically and using Fisher-type invariant metrics."
     "No physical constant is selected merely by naming a statistical metric."
 
+kolmogorovComplexitySource : SourceRecord
+kolmogorovComplexitySource =
+  sourceRecord
+    "Ming Li; Paul Vitanyi"
+    "An Introduction to Kolmogorov Complexity and Its Applications"
+    "Texts in Computer Science, Springer"
+    2019
+    "10.1007/978-3-030-11298-1"
+    "Supports machine-relative description length, invariance up to additive translation constants, and precision-sensitive coding."
+    "A finite candidate score is not promoted to an absolute machine-independent law of the universe."
+
 causalSetSource : SourceRecord
 causalSetSource =
   sourceRecord
@@ -108,6 +119,17 @@ haxelJensenSuessSource =
     "Supports the operator-dependent shell explanation of nuclear magic numbers."
     "The finite closure witness is not a full nuclear mean-field calculation."
 
+bcsPairingSource : SourceRecord
+bcsPairingSource =
+  sourceRecord
+    "J. Bardeen; L. N. Cooper; J. R. Schrieffer"
+    "Theory of Superconductivity"
+    "Physical Review"
+    1957
+    "10.1103/PhysRev.108.1175"
+    "Supports pairing as a dynamical consequence of an attractive channel rather than of exclusion alone."
+    "The finite nuclear pairing parity model is not identified with microscopic BCS nuclear theory."
+
 bohrWheelerSource : SourceRecord
 bohrWheelerSource =
   sourceRecord
@@ -140,6 +162,17 @@ yangMillsSource =
     "10.1103/PhysRev.96.191"
     "Supports local non-Abelian gauge redundancy, connection data, and curvature targets."
     "A finite graph holonomy witness is not promoted to continuum Yang-Mills theory."
+
+fockSecondQuantisationSource : SourceRecord
+fockSecondQuantisationSource =
+  sourceRecord
+    "V. A. Fock"
+    "Konfigurationsraum und zweite Quantelung"
+    "Zeitschrift fuer Physik"
+    1932
+    "10.1007/BF01344458"
+    "Supports variable-particle-number state spaces and bosonic/fermionic occupation sectors."
+    "The finite truncated occupation tables are not promoted to a completed Fock representation or canonical field algebra."
 
 osterwalderSchraderSource : SourceRecord
 osterwalderSchraderSource =
@@ -179,14 +212,17 @@ canonicalRound5Sources =
   buckinghamSource
   ∷ wilsonRGSource
   ∷ informationGeometrySource
+  ∷ kolmogorovComplexitySource
   ∷ causalSetSource
   ∷ hohenbergKohnSource
   ∷ kohnShamSource
   ∷ mayerShellSource
   ∷ haxelJensenSuessSource
+  ∷ bcsPairingSource
   ∷ bohrWheelerSource
   ∷ cabacSource
   ∷ yangMillsSource
+  ∷ fockSecondQuantisationSource
   ∷ osterwalderSchraderSource
   ∷ weinbergLeptonsSource
   ∷ planckCosmologySource
@@ -199,6 +235,6 @@ sourceCount (_ ∷ sources) = suc (sourceCount sources)
 canonicalRound5SourceCount : Nat
 canonicalRound5SourceCount = sourceCount canonicalRound5Sources
 
-canonicalRound5SourceCountIsFourteen :
-  canonicalRound5SourceCount ≡ 14
-canonicalRound5SourceCountIsFourteen = refl
+canonicalRound5SourceCountIsSeventeen :
+  canonicalRound5SourceCount ≡ 17
+canonicalRound5SourceCountIsSeventeen = refl
