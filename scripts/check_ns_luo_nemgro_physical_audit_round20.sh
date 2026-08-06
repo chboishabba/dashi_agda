@@ -29,6 +29,7 @@ for file in "${files[@]}"; do test -f "$file"; done
 audit_targets=(
   "${files[@]}"
   docs/ns-luo-nemgro-physical-audit-round20.md
+  docs/ns-luo-nemgro-additional-audit-closures-round20.md
 )
 
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|TODO|FIXME' "${audit_targets[@]}"; then
@@ -92,6 +93,7 @@ grep -q 'physicalContinuumKernelProducerProved' DASHI/Physics/Closure/NSTriadKNL
 grep -q 'L2ConvergenceSuppliesUniformInitialH1' DASHI/Physics/Closure/NSTriadKNLuoHighFrequencyApproximationUniformGradientNoGoExact.agda
 
 test -f docs/ns-luo-nemgro-physical-audit-round20.md
+test -f docs/ns-luo-nemgro-additional-audit-closures-round20.md
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoNEMGROPhysicalAuditRound20Validation.agda
