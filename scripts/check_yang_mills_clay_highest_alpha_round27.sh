@@ -25,8 +25,8 @@ done
 
 test -f .github/workflows/yang-mills-clay-highest-alpha-round27.yml
 
-if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe' "${files[@]}"; then
-  echo "round twenty-seven contains a hole, postulate, unsafe escape, or trust primitive" >&2
+if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|standardImported' "${files[@]}"; then
+  echo "round twenty-seven contains a hole, imported receipt, unsafe escape, or trust primitive" >&2
   exit 1
 fi
 
