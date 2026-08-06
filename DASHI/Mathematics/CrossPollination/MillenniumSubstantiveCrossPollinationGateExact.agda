@@ -18,6 +18,7 @@ import DASHI.Analysis.RiemannMaassMoonshineCrossPollinationExact
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHodgeDiamondExact
 import DASHI.Mathematics.AlgebraicGeometry.HodgeNoetherianVOACrossPollination
+import DASHI.Mathematics.Arithmetic.EllipticCurveF5PointEnumerationExact
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact
 import DASHI.Mathematics.Arithmetic.BirchSwinnertonDyerBoundary
 import DASHI.Mathematics.Arithmetic.EllipticCurveHodgeFrobeniusCrossPollination
@@ -28,6 +29,7 @@ import DASHI.Mathematics.NumberTheory.RiemannCompletedZetaBoundary
 import DASHI.Mathematics.Topology.RoundThreeSphereRicciFlowExact
 import DASHI.Mathematics.Topology.PoincareGeometrizationExactBoundary
 import DASHI.Mathematics.Topology.QuaternionS3PoincareCrossPollination
+import DASHI.Moonshine.TrivialRationalGradedVertexAlgebraExact
 import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary
 import DASHI.Moonshine.MonsterGradedVOABridgeExact
 
@@ -100,7 +102,7 @@ poincareHistoricalStatus = laneStatus
 gradedVOAStatus : LaneStatus
 gradedVOAStatus = laneStatus
   gradedVOAMoonshineLane
-  proofBearingGenericTheorem
+  exactFiniteCore
   analyticOrGeometricBoundary
   proofBearingGenericTheorem
   analyticOrGeometricBoundary
@@ -111,6 +113,10 @@ allOpenLanesRemainUncompleted :
   × finalClosureStatus bsdStatus ≡ analyticOrGeometricBoundary
   × finalClosureStatus pVersusNPStatus ≡ analyticOrGeometricBoundary
 allOpenLanesRemainUncompleted = refl , refl , refl , refl
+
+gradedVOANowHasExactFiniteCore :
+  exactCorePresent gradedVOAStatus ≡ exactFiniteCore
+gradedVOANowHasExactFiniteCore = refl
 
 poincareUsesExternalSolvedTheoremBoundary :
   finalClosureStatus poincareHistoricalStatus
