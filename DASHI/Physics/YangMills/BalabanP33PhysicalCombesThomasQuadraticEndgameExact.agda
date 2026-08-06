@@ -13,21 +13,29 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasQuadraticEndgameExa
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
--- DASHI CONTRIBUTION
+-- DASHI CONTRIBUTION AND SCOPE
 --
--- Package the completed finite-volume Priority-3 implication in the exact
--- language produced by the literal Hessian lane.  Given:
+-- Package the finite-volume Priority-3 implication in the exact language
+-- produced by the literal Hessian lane.  Given, on the literal side-four
+-- 3072-coordinate carrier,
 --
 --   (1/32)||v||^2 <= <v,Hv>,
 --
 -- the physical support-graph/row-mass data owned by the same Hessian, and a
--- literal right inverse H G = I, the preceding machine-checked modules derive
+-- literal right inverse H G = I, the preceding exact modules derive
 --
 --   |G(root,target)| <= 64 t^d(root,target).
 --
 -- No independent squared-coercivity premise and no independent tilted-entry
--- premise remains in this interface.  The open cut is now exactly upstream:
--- produce the literal five-channel 1/32 Hessian theorem and its stencil budget.
+-- premise remains in this interface.  The exact upstream finite-volume cut is:
+--
+--   * prove the boundary-aware Wilson/curl and gauge/divergence defect bounds;
+--   * construct the literal Hessian matrix and its stencil/row-mass budget;
+--   * derive the finite right inverse.
+--
+-- This theorem is not a bare volume-uniform spectral gap.  Promotion beyond
+-- the fixed carrier requires a separate physical RG gap-transfer theorem and
+-- an admissible accumulated loss budget, as made explicit in round twenty-three.
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (∣_∣; _≤_; _*_)
