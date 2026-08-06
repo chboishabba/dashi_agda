@@ -4,15 +4,16 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.ReducedFiftyThreeFibreExact as Reduced
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSPWeave
+import DASHI.Biology.SSPHyperfibreSymmetryTowerExact as SSPTower
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as SelfIndexing
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Biology.EquivariantLaplacianSectorExact as Equivariant
+import DASHI.Biology.D4IrrepPhysicalRoleExact as D4Roles
 import DASHI.Biology.MoonshineGradedStageBridgeExact as Moonshine
 import DASHI.Biology.ClayCrossPollinationInterfaceExact as Clay
 import DASHI.Biology.OrientedZeroJetTransitionExact as Jet
 import DASHI.Biology.ReachableSectorEntropyExact as Reachable
 import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact as Exceptional
-import DASHI.Biology.SpectralGrokkingLatticeExact as Grokking
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas as Sources
 
 record ConsciousAccessRound5CompletionBoundary : Set where
@@ -20,8 +21,10 @@ record ConsciousAccessRound5CompletionBoundary : Set where
   field
     reducedFiftyThreeBoundary : Reduced.ReducedFiftyThreeBoundary
     signedSSPWeaveBoundary : SSPWeave.SignedSSPWeaveBoundary
+    sspHyperfibreTowerBoundary : SSPTower.SSPHyperfibreTowerBoundary
     selfIndexingBoundary : SelfIndexing.SelfIndexingHyperfabricBoundary
     equivariantSectorBoundary : Equivariant.EquivariantSectorBoundary
+    d4IrrepPhysicalRoleBoundary : D4Roles.D4IrrepPhysicalRoleBoundary
     moonshineStageBoundary : Moonshine.MoonshineStageBoundary
     clayCrossPollinationBoundary : Clay.ClayCrossPollinationBoundary
     orientedZeroJetBoundary : Jet.OrientedZeroJetBoundary
@@ -54,6 +57,24 @@ record ConsciousAccessRound5CompletionBoundary : Set where
       × SSPWeave.removedInvariantModes
           SSPWeave.canonicalGeometricProgramEffect ≡ 1
 
+    smallestMiddleLargestSSPResolutionsAreThreeSixNine :
+      SSPTower.resolution SSPTower.canonicalSSPHyperfibreAtlas SSPWeave.ssp2
+        ≡ SelfIndexing.resolution3
+      × SSPTower.resolution SSPTower.canonicalSSPHyperfibreAtlas SSPWeave.ssp19
+        ≡ SelfIndexing.resolution6
+      × SSPTower.resolution SSPTower.canonicalSSPHyperfibreAtlas SSPWeave.ssp71
+        ≡ SelfIndexing.resolution9
+
+    inverseSSPTransportReversesPolarityAndRetainsResidual :
+      SSPTower.transport SSPTower.canonicalSSPHyperfibreAtlas
+        (SSPTower.inverseLanePath SSPWeave.ssp59 SSPWeave.ssp7)
+        SSPTower.positiveLaneState
+        ≡ SSPTower.negativeLaneState
+      × SSPTower.residualAfter SSPTower.canonicalSSPHyperfibreAtlas
+          (SSPTower.inverseLanePath SSPWeave.ssp59 SSPWeave.ssp7)
+          SSPTower.positiveLaneState
+          ≡ SSPWeave.inverseOrientation
+
     selfIndexedTowerAgreesWithNineTetration :
       (n : Nat) →
       SelfIndexing.selfIndexedSiteCount n
@@ -67,6 +88,17 @@ record ConsciousAccessRound5CompletionBoundary : Set where
           Equivariant.canonicalEquivariantModeSystem
           Equivariant.polarityReflection
           Equivariant.evenState)
+
+    D4RoleDimensionsMatchIrrepDimensions :
+      (kind : D4Roles.Symmetry.D4IrrepKind) →
+      D4Roles.roleDimension (D4Roles.modeRole kind)
+      ≡ D4Roles.Symmetry.irrepDimension kind
+
+    positiveAndNegativeNSCandidatesUseOppositeOrientations :
+      D4Roles.orientation D4Roles.navierStokesPositiveHelicityCandidate
+        ≡ D4Roles.Symmetry.positiveOrientation
+      × D4Roles.orientation D4Roles.navierStokesNegativeHelicityCandidate
+        ≡ D4Roles.Symmetry.negativeOrientation
 
     ternaryExpansionOfFirstCoefficient :
       Hyper.powNat 3 11
@@ -118,8 +150,10 @@ canonicalConsciousAccessRound5CompletionBoundary =
   consciousAccessRound5CompletionBoundary
     Reduced.canonicalReducedFiftyThreeBoundary
     SSPWeave.canonicalSignedSSPWeaveBoundary
+    SSPTower.canonicalSSPHyperfibreTowerBoundary
     SelfIndexing.canonicalSelfIndexingHyperfabricBoundary
     Equivariant.canonicalEquivariantSectorBoundary
+    D4Roles.canonicalD4IrrepPhysicalRoleBoundary
     Moonshine.canonicalMoonshineStageBoundary
     Clay.canonicalClayCrossPollinationBoundary
     Jet.canonicalOrientedZeroJetBoundary
@@ -132,8 +166,15 @@ canonicalConsciousAccessRound5CompletionBoundary =
     SSPWeave.fiftyThreeAsFiftyNineMinusSevenPlusUnit
     SSPWeave.canonicalPresentationIsCostMinimal
     SSPWeave.canonicalGeometricProgramBuildsFiftyFourAndRemovesOne
+    (SSPTower.smallestLaneUsesResolutionThree
+      , (SSPTower.middleLaneUsesResolutionSix
+        , SSPTower.largestLaneUsesResolutionNine))
+    (SSPTower.inverseTransportReversesPolarity
+      , SSPTower.inversePathRetainsInverseResidual)
     SelfIndexing.selfIndexedCountEqualsNineTetration
     Equivariant.reflectedEvenRemainsEigenstate
+    D4Roles.roleDimensionMatchesIrrep
+    D4Roles.positiveAndNegativeHelicityUseOppositeOrientations
     Moonshine.ternaryExpansionOf196884
     Moonshine.ternaryDigitsEvaluateTo196884
     Jet.oppositeApproachesShareCoarseZero
