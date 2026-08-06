@@ -6,7 +6,8 @@ cd "$ROOT"
 
 # This physics/constants tranche is stacked directly on PR #399.  Validate the
 # complete biology/Yijing/natural-system Round Five before checking the added
-# foundations, attached-formalism, collider, junction, and visualisation paths.
+# foundations, attached-formalism, collider, junction, renderer, and p-adic
+# continuation paths.
 if [[ "${UNIFICATION_ROUND5_SKIP_BIOLOGY:-0}" != "1" ]]; then
   bash scripts/check_conscious_access_round5.sh
 fi
@@ -66,6 +67,8 @@ FILES=(
   DASHI/Physics/DarkSector/DarkSectorColliderBoundary.agda
   DASHI/Physics/DarkSector/DarkSectorColliderRegression.agda
   DASHI/Physics/DarkSector/Everything.agda
+  DASHI/Biology/TernaryCyclicDialecticExact.agda
+  DASHI/Biology/RenderablePadicReasoningFieldExact.agda
   DASHI/Visualisation/AffinePlaneSliceExact.agda
   DASHI/Visualisation/FiveClassSimplexColourExact.agda
   DASHI/Visualisation/SliceObjectiveExact.agda
@@ -80,6 +83,11 @@ FILES=(
   DASHI/Visualisation/AttachedVisualisationSourceAtlas.agda
   DASHI/Visualisation/AttachedVisualisationBoundary.agda
   DASHI/Visualisation/AttachedVisualisationRegression.agda
+  DASHI/Visualisation/EventFilamentFieldExact.agda
+  DASHI/Visualisation/SelfConsistentEventRendererExact.agda
+  DASHI/Visualisation/EventPadicSourceAtlas.agda
+  DASHI/Visualisation/EventPadicContinuationBoundary.agda
+  DASHI/Visualisation/EventPadicContinuationRegression.agda
   DASHI/Visualisation/Everything.agda
   DASHI/Physics/Foundations/Round5SourceAtlas.agda
   DASHI/Physics/Foundations/Round5CombinedSourceBoundary.agda
@@ -88,6 +96,7 @@ FILES=(
   DASHI/Physics/Foundations/Round5CompleteBoundary.agda
   DASHI/Physics/Foundations/Round5Regression.agda
   DASHI/Physics/Foundations/Everything.agda
+  DASHI/Biology/Everything.agda
   DASHI/Unified/Everything.agda
 )
 
@@ -109,10 +118,12 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Foundations/Round5AttachedFormalismRegression.agda \
   DASHI/Physics/Foundations/Round5AttachedCompletionRegression.agda \
   DASHI/Visualisation/AttachedVisualisationRegression.agda \
+  DASHI/Visualisation/EventPadicContinuationRegression.agda \
   DASHI/Visualisation/Everything.agda \
   DASHI/Physics/Foundations/Round5CompleteBoundary.agda \
   DASHI/Physics/DarkSector/DarkSectorColliderRegression.agda \
   DASHI/Physics/DarkSector/Everything.agda \
   DASHI/Physics/Foundations/Round5Regression.agda \
   DASHI/Physics/Foundations/Everything.agda \
+  DASHI/Biology/Everything.agda \
   DASHI/Unified/Everything.agda
