@@ -34,19 +34,11 @@ module DASHI.Biology.MonsterSubgroupBranchingBenchmarksExact where
 -- arXiv DOI: 10.48550/arXiv.2412.09313.
 --
 -- DASHI CONTRIBUTION
---
 -- Record genuine subgroup-level decomposition templates and strengthen the
 -- candidate protocol from dimension matching to character-value matching on a
--- declared separating family of conjugacy classes.
---
--- The 2-local benchmark is stated in both unreduced and reduced form:
---
---   196884 = 98304 + 98280 + 300,
---   196883 = 98304 + 98280 + 299.
---
--- The difference is exactly the global trivial line.  The module also keeps
--- 3A, 3B and 3C as distinct candidate lanes; no generic "the 3-local
--- subgroup" is admitted.
+-- declared separating family of conjugacy classes.  The 2-local benchmark is
+-- stated in both trivial-inclusive and reduced form; 3A, 3B and 3C remain
+-- distinct candidate lanes.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -98,6 +90,11 @@ conwayTwoLocalUnreducedBenchmark : TensorBranchingBenchmark
 conwayTwoLocalUnreducedBenchmark =
   tensorBranchingBenchmark 196884 4096 24 98280 300 refl
 
+-- Compatibility name retained for earlier clients: it denotes the
+-- trivial-inclusive 196884-dimensional benchmark.
+conwayTwoLocalBenchmark : TensorBranchingBenchmark
+conwayTwoLocalBenchmark = conwayTwoLocalUnreducedBenchmark
+
 conwayTwoLocalReducedBenchmark : TensorBranchingBenchmark
 conwayTwoLocalReducedBenchmark =
   tensorBranchingBenchmark 196883 4096 24 98280 299 refl
@@ -110,6 +107,15 @@ conwayTwoLocalUnreducedDimensionExact :
     + residualSecond conwayTwoLocalUnreducedBenchmark
 conwayTwoLocalUnreducedDimensionExact =
   tensorPiecesSum conwayTwoLocalUnreducedBenchmark
+
+conwayTwoLocalDimensionExact :
+  ambientTensorDimension conwayTwoLocalBenchmark
+  ≡ tensorLeft conwayTwoLocalBenchmark
+    * tensorRight conwayTwoLocalBenchmark
+    + residualFirst conwayTwoLocalBenchmark
+    + residualSecond conwayTwoLocalBenchmark
+conwayTwoLocalDimensionExact =
+  conwayTwoLocalUnreducedDimensionExact
 
 conwayTwoLocalReducedDimensionExact :
   ambientTensorDimension conwayTwoLocalReducedBenchmark
@@ -126,10 +132,6 @@ trivialInclusiveResidualIsReducedPlusOne = refl
 trivialInclusiveAmbientIsReducedPlusOne : 196884 ≡ 196883 + 1
 trivialInclusiveAmbientIsReducedPlusOne = refl
 
-------------------------------------------------------------------------
--- Falsifiable subgroup-candidate protocol.
-------------------------------------------------------------------------
-
 record CandidateSubgroupTest : Set₁ where
   constructor candidateSubgroupTest
   field
@@ -143,10 +145,6 @@ record CandidateSubgroupTest : Set₁ where
     associatedGradedDimensionsMatched : Set
     outsideElementMixingChecked : Set
     dimensionMatchUsedOnlyAsNecessaryCondition : Set
-
-------------------------------------------------------------------------
--- Distinct order-three lanes.
-------------------------------------------------------------------------
 
 data OrderThreeClass : Set where
   class3A : OrderThreeClass
