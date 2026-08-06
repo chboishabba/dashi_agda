@@ -70,6 +70,7 @@ FILES=(
   DASHI/Physics/DarkSector/Everything.agda
   DASHI/Biology/TernaryCyclicDialecticExact.agda
   DASHI/Biology/TernarySoftCarryLogicExact.agda
+  DASHI/Biology/TernaryLogicRelaxationSourceAtlas.agda
   DASHI/Biology/RenderablePadicReasoningFieldExact.agda
   DASHI/Biology/PadicLODConsistencyExact.agda
   DASHI/Biology/PadicRenderModeCorrectionExact.agda
