@@ -30,13 +30,27 @@ on:
 
 permissions:
   contents: read
+  issues: write
+  pull-requests: write
 
 jobs:
   agda:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
       - name: Check conscious-access round five
         run: bash scripts/check_conscious_access_round5.sh
+      - name: Report successful kernel check
+        if: success() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh pr comment 399 --repo chboishabba/dashi_agda --body
+          'Round 5 Agda 2.9 kernel check passed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
+      - name: Report failed kernel check
+        if: failure() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh pr comment 399 --repo chboishabba/dashi_agda --body
+          'Round 5 Agda 2.9 kernel check failed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
