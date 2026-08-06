@@ -30,21 +30,23 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLocalToSharpDefectExact w
 -- is an equality of actual finite sums, not a fresh scalar bound.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; -_; _≤_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; -_; _-_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatWilsonCurlIdentificationExact as Flat
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Global
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact as GaugeBudget
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
 
 sharpWilsonCoefficientFromRho :
-  (+ 13 / 24) * Global.GaugeBudget.rho
+  (+ 13 / 24) * GaugeBudget.rho
   ≡ Sharp.sharpSixteenAtomBudget
 sharpWilsonCoefficientFromRho = ℚRing.solve []
 
@@ -53,19 +55,10 @@ physicalWilsonDefectIsBackgroundMinusFlat : ∀ background field →
   ≡ Physical.physicalWilsonSecondVariation background field
       - Flat.flatWilsonEnergy field
 physicalWilsonDefectIsBackgroundMinusFlat background field =
-  trans
-    (ℚRing.solve-∀
-      (Physical.physicalWilsonSecondVariation background field)
-      (Physical.physicalWilsonSecondVariation
-        Physical.identityBackground field))
-    (subst
-      (λ identityEnergy →
-        Physical.physicalWilsonSecondVariation background field
-          - identityEnergy
-        ≡ Physical.physicalWilsonSecondVariation background field
-          - Flat.flatWilsonEnergy field)
-      (Physical.identityPhysicalWilsonIsFlatCurl field)
-      (ℚRing.solve []))
+  trans refl
+    (cong
+      (Physical.physicalWilsonSecondVariation background field -_)
+      (Physical.identityPhysicalWilsonIsFlatCurl field))
 
 physicalWilsonLocalImpliesSharpDefect :
   ∀ background field →
