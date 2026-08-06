@@ -6,7 +6,7 @@ cd "$ROOT"
 
 # This physics/constants tranche is stacked directly on PR #399.  Validate the
 # complete biology/Yijing/natural-system Round Five before checking the added
-# foundations surface.
+# foundations and collider surfaces.
 if [[ "${UNIFICATION_ROUND5_SKIP_BIOLOGY:-0}" != "1" ]]; then
   bash scripts/check_conscious_access_round5.sh
 fi
@@ -36,6 +36,27 @@ FILES=(
   DASHI/Physics/Foundations/KernelEmergenceHypothesesExact.agda
   DASHI/Physics/Foundations/PR399FoundationsCrossPollinationExact.agda
   DASHI/Physics/Foundations/UnifiedEffectiveActionBoundary.agda
+  DASHI/Physics/Foundations/FiniteHistoryOrientationExact.agda
+  DASHI/Physics/Foundations/HistoryWeightFiltrationExact.agda
+  DASHI/Physics/Foundations/FormalReceiptBoundaryExact.agda
+  DASHI/Physics/Foundations/FiniteWeightedTernaryKernelExact.agda
+  DASHI/Physics/Foundations/TernaryKernelQuotientLyapunovExact.agda
+  DASHI/Physics/Foundations/FiniteStatisticalFiltrationExact.agda
+  DASHI/Physics/Foundations/ProbabilityDecoratedReebExact.agda
+  DASHI/Physics/Foundations/AttachedFormalismSourceAtlas.agda
+  DASHI/Physics/Foundations/Round5AttachedFormalismBoundary.agda
+  DASHI/Physics/Foundations/Round5AttachedFormalismRegression.agda
+  DASHI/Physics/DarkSector/SectorCarrier.agda
+  DASHI/Physics/DarkSector/GaugeSingletPortal.agda
+  DASHI/Physics/DarkSector/HiggsPortalDecay.agda
+  DASHI/Physics/DarkSector/MetastableLifetime.agda
+  DASHI/Physics/DarkSector/BoostedDecayGeometry.agda
+  DASHI/Physics/DarkSector/DisplacedVertex.agda
+  DASHI/Physics/DarkSector/TriggerCensoring.agda
+  DASHI/Physics/DarkSector/DarkSectorColliderSourceAtlas.agda
+  DASHI/Physics/DarkSector/DarkSectorColliderBoundary.agda
+  DASHI/Physics/DarkSector/DarkSectorColliderRegression.agda
+  DASHI/Physics/DarkSector/Everything.agda
   DASHI/Physics/Foundations/Round5SourceAtlas.agda
   DASHI/Physics/Foundations/Round5CombinedSourceBoundary.agda
   DASHI/Physics/Foundations/Round5CompletionRegression.agda
@@ -60,6 +81,9 @@ for file in "${FILES[@]}"; do
 done
 
 scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/Foundations/Round5AttachedFormalismRegression.agda \
+  DASHI/Physics/DarkSector/DarkSectorColliderRegression.agda \
+  DASHI/Physics/DarkSector/Everything.agda \
   DASHI/Physics/Foundations/Round5Regression.agda \
   DASHI/Physics/Foundations/Everything.agda \
   DASHI/Unified/Everything.agda
