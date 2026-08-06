@@ -1,0 +1,34 @@
+name: Self-hosted runner smoke test
+
+on:
+  push:
+    branches:
+      - runner-smoke-test-20260807
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    name: Verify self-hosted runner
+    runs-on: self-hosted
+    timeout-minutes: 10
+    steps:
+      - name: Runner identity
+        shell: bash
+        run: |
+          set -euxo pipefail
+          echo "runner_name=${RUNNER_NAME:-unknown}"
+          echo "runner_os=${RUNNER_OS:-unknown}"
+          echo "runner_arch=${RUNNER_ARCH:-unknown}"
+          uname -a || true
+          pwd
+      - name: Repository checkout
+        uses: actions/checkout@v4
+      - name: Repository smoke check
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git rev-parse --short HEAD
+          echo "Self-hosted runner successfully executed dashi_agda smoke test."
