@@ -45,7 +45,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoThreeLaneCriticalClosureExact where
 
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst)
@@ -157,7 +157,44 @@ strictFiniteCriticalEstimate balanceData =
     assembled = ℚₚ.≤-trans (balance balanceData) withEnergy
 
     shift = - (etaTotal dataSet * viscosity dataSet)
-    shifted = ℚₚ.+-monoʳ-≤ shift assembled
+
+    shiftedLeft :
+      shift + (energyOut balanceData + viscosity dataSet)
+      ≤
+      shift
+      + (energyIn balanceData
+        + (etaTotal dataSet * viscosity dataSet
+          + totalResidual dataSet))
+    shiftedLeft = ℚₚ.+-monoʳ-≤ shift assembled
+
+    shifted :
+      (energyOut balanceData + viscosity dataSet) + shift
+      ≤
+      (energyIn balanceData
+        + (etaTotal dataSet * viscosity dataSet
+          + totalResidual dataSet))
+      + shift
+    shifted =
+      subst
+        (λ left →
+          left
+          ≤
+          (energyIn balanceData
+            + (etaTotal dataSet * viscosity dataSet
+              + totalResidual dataSet))
+          + shift)
+        (solve
+          ( shift ∷ energyOut balanceData
+          ∷ viscosity dataSet ∷ []))
+        (subst
+          (λ right →
+            shift + (energyOut balanceData + viscosity dataSet)
+            ≤ right)
+          (solve
+            ( shift ∷ energyIn balanceData
+            ∷ etaTotal dataSet ∷ viscosity dataSet
+            ∷ totalResidual dataSet ∷ []))
+          shiftedLeft)
 
     leftMeaning :
       (energyOut balanceData + viscosity dataSet) + shift
