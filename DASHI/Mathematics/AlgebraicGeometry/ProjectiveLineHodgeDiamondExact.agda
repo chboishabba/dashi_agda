@@ -21,8 +21,9 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHodgeDiamondExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as H
 
@@ -79,8 +80,6 @@ p1Betti2 = p1HodgeNumber degree11
 p1BettiNumbers :
   p1Betti0 ≡ 1 × p1Betti1 ≡ 0 × p1Betti2 ≡ 1
 p1BettiNumbers = refl , refl , refl
-  where
-    open import Data.Product using (_×_; _,_)
 
 record ProjectiveLineGeometricIdentification : Set₁ where
   field
