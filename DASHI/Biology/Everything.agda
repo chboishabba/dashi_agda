@@ -190,8 +190,10 @@ import DASHI.Biology.ConsciousAccessRound5CompletionBoundary
 import DASHI.Biology.ConsciousAccessRound5CompletionRegression
 
 ------------------------------------------------------------------------
--- Sections 756--835 continuation: cyclic/dialectical type separation and a
--- renderable finite-prefix p-adic reasoning field.
+-- Sections 756--835 continuation: cyclic/dialectical type separation, soft
+-- carry and logic, and a renderable mass-consistent p-adic reasoning field.
 
 import DASHI.Biology.TernaryCyclicDialecticExact
+import DASHI.Biology.TernarySoftCarryLogicExact
 import DASHI.Biology.RenderablePadicReasoningFieldExact
+import DASHI.Biology.PadicLODConsistencyExact
