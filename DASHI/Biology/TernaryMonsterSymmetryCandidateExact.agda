@@ -19,6 +19,47 @@ data D4IrrepKind : Set where
   B2 : D4IrrepKind
   E2 : D4IrrepKind
 
+irrepDimension : D4IrrepKind → Nat
+irrepDimension A1 = 1
+irrepDimension A2 = 1
+irrepDimension B1 = 1
+irrepDimension B2 = 1
+irrepDimension E2 = 2
+
+------------------------------------------------------------------------
+-- Raw permutation representation of D4 on the nine cells:
+--
+--   R^9 = 3 A1 + B1 + B2 + 2 E.
+--
+-- The reflection-odd A2 species is absent from the bare cell permutation
+-- representation and requires an orientation/pseudoscalar/braid refinement.
+
+rawNineMultiplicity : D4IrrepKind → Nat
+rawNineMultiplicity A1 = 3
+rawNineMultiplicity A2 = 0
+rawNineMultiplicity B1 = 1
+rawNineMultiplicity B2 = 1
+rawNineMultiplicity E2 = 2
+
+rawContribution : D4IrrepKind → Nat
+rawContribution kind =
+  rawNineMultiplicity kind * irrepDimension kind
+
+rawNineRepresentationDimension : Nat
+rawNineRepresentationDimension =
+  rawContribution A1
+  + rawContribution A2
+  + rawContribution B1
+  + rawContribution B2
+  + rawContribution E2
+
+rawNineRepresentationDimensionIsNine :
+  rawNineRepresentationDimension ≡ 9
+rawNineRepresentationDimensionIsNine = refl
+
+rawA2MultiplicityIsZero : rawNineMultiplicity A2 ≡ 0
+rawA2MultiplicityIsZero = refl
+
 data DialecticalOrientation : Set where
   positiveOrientation : DialecticalOrientation
   negativeOrientation : DialecticalOrientation
@@ -76,6 +117,14 @@ monsterCandidateDimensionIs196883 = refl
 ------------------------------------------------------------------------
 -- Ogg-prime arithmetic.
 
+canonicalOggPrimes : List Nat
+canonicalOggPrimes =
+  2 ∷ 3 ∷ 5 ∷ 7 ∷ 11 ∷ 13 ∷ 17 ∷ 19
+  ∷ 23 ∷ 29 ∷ 31 ∷ 41 ∷ 47 ∷ 59 ∷ 71 ∷ []
+
+canonicalOggPrimeCountIsFifteen : listCount canonicalOggPrimes ≡ 15
+canonicalOggPrimeCountIsFifteen = refl
+
 isOggPrime : Nat → Bool
 isOggPrime 2 = true
 isOggPrime 3 = true
@@ -108,6 +157,27 @@ seventyOneIsOggPrime = refl
 
 fiftyThreeIsNotAnOggPrime : isOggPrime 53 ≡ false
 fiftyThreeIsNotAnOggPrime = refl
+
+------------------------------------------------------------------------
+-- Finite trial-division data for 53.  This records the only prime candidates
+-- not exceeding sqrt(53); the module does not equate prime cardinality with an
+-- irreducible representation.
+
+record FiftyThreeTrialDivisionData : Set where
+  constructor fiftyThreeTrialDivisionData
+  field
+    afterTwo : 2 * 26 + 1 ≡ 53
+    afterThree : 3 * 17 + 2 ≡ 53
+    afterFive : 5 * 10 + 3 ≡ 53
+    afterSeven : 7 * 7 + 4 ≡ 53
+    sevenSquared : 7 * 7 ≡ 49
+    eightSquared : 8 * 8 ≡ 64
+
+open FiftyThreeTrialDivisionData public
+
+canonicalFiftyThreeTrialDivisionData : FiftyThreeTrialDivisionData
+canonicalFiftyThreeTrialDivisionData =
+  fiftyThreeTrialDivisionData refl refl refl refl refl refl
 
 ------------------------------------------------------------------------
 -- Candidate restriction shape.  Dimensions alone do not construct module
@@ -149,6 +219,10 @@ record MoonshinePromotionBoundary : Set where
     oggPrimeFactorisationSuppliesTheMissingActionIsFalse :
       oggPrimeFactorisationSuppliesTheMissingAction ≡ false
 
+    rawNineCellRepresentationContainsA2 : Bool
+    rawNineCellRepresentationContainsA2IsFalse :
+      rawNineCellRepresentationContainsA2 ≡ false
+
     gradedCharactersAndModularityRemainRequired : Bool
     gradedCharactersAndModularityRemainRequiredIsTrue :
       gradedCharactersAndModularityRemainRequired ≡ true
@@ -157,4 +231,10 @@ open MoonshinePromotionBoundary public
 
 canonicalMoonshinePromotionBoundary : MoonshinePromotionBoundary
 canonicalMoonshinePromotionBoundary =
-  moonshinePromotionBoundary false refl false refl false refl false refl true refl
+  moonshinePromotionBoundary
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
