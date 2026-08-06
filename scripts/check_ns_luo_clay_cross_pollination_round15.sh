@@ -11,6 +11,7 @@ bash scripts/check_ns_luo_commutator_continuum_round14.sh
 files=(
   DASHI/Physics/Common/FiniteProjectionOffDiagonalExact.agda
   DASHI/Physics/Common/ReducedModeProjectionExact.agda
+  DASHI/Physics/Common/FiftyThreeTypedBoundaryExact.agda
   DASHI/Physics/Common/WeightedStrictLossTransportExact.agda
   DASHI/Physics/Common/CoarseDynamicsCommutatorExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoProjectionLeakageCrossPollinationExact.agda
@@ -34,6 +35,8 @@ checks=(
   'ReducedModeProjectionExact.agda:fieldReconstructsFromConstantAndMeanZero'
   'ReducedModeProjectionExact.agda:constantMeanZeroOrthogonal'
   'ReducedModeProjectionExact.agda:sixByNineReducedModeCount'
+  'FiftyThreeTypedBoundaryExact.agda:highLowKernelPartitionExact'
+  'FiftyThreeTypedBoundaryExact.agda:fiftyThreeOccurrencesRemainTypeDistinct'
   'WeightedStrictLossTransportExact.agda:pullBackClosedForm'
   'WeightedStrictLossTransportExact.agda:strictMarginBelowPullBack'
   'CoarseDynamicsCommutatorExact.agda:neutralResidualImpliesExactAt'
