@@ -32,7 +32,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality
-  using (cong; subst; sym)
+  using (_≡_; cong; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
