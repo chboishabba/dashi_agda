@@ -1,0 +1,199 @@
+module DASHI.Biology.ConsciousAccessNetworkSourceAtlas where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
+
+------------------------------------------------------------------------
+-- Attributed source atlas for the conscious-access / stateful-network tranche.
+--
+-- A source row records provenance and the limited bridge role used here.  It
+-- does not import the paper's empirical claims as Agda theorems and it does
+-- not assign a DOI where none is recorded by this atlas.
+
+data IdentifierKind : Set where
+  doiIdentifier : IdentifierKind
+  arxivDoiIdentifier : IdentifierKind
+  noDoiRecorded : IdentifierKind
+
+data SourceRole : Set where
+  articleIntakeRole : SourceRole
+  globalWorkspaceRole : SourceRole
+  adversarialTheoryTestRole : SourceRole
+  singleNeuronTransformRole : SourceRole
+  dendriticComputationRole : SourceRole
+  multilayerBrainNetworkRole : SourceRole
+  psychedelicPriorReweightingRole : SourceRole
+  psychedelicEntropyRole : SourceRole
+  psychedelicRepertoireRole : SourceRole
+  grokkingAnalogyRole : SourceRole
+
+record SourceRecord : Set where
+  constructor sourceRecord
+  field
+    authors : String
+    title : String
+    publication : String
+    year : Nat
+    identifierKind : IdentifierKind
+    identifier : String
+    role : SourceRole
+    importedReading : String
+    excludedPromotion : String
+
+open SourceRecord public
+
+brooksConversationSource : SourceRecord
+brooksConversationSource =
+  sourceRecord
+    "Samantha Brooks"
+    "How your conscious and unconscious mind interact"
+    "The Conversation"
+    2026
+    noDoiRecorded
+    "no DOI recorded"
+    articleIntakeRole
+    "Conscious and nonconscious processes are treated as interacting access regimes rather than separate substances."
+    "The article does not establish a complete neural theory or a one-to-one Freud-to-brain map."
+
+mashourWorkspaceSource : SourceRecord
+mashourWorkspaceSource =
+  sourceRecord
+    "George A. Mashour; Pieter Roelfsema; Jean-Pierre Changeux; Stanislas Dehaene"
+    "Conscious Processing and the Global Neuronal Workspace Hypothesis"
+    "Neuron"
+    2020
+    doiIdentifier
+    "10.1016/j.neuron.2020.01.026"
+    globalWorkspaceRole
+    "Recurrent widespread availability is used as an access-consciousness hypothesis."
+    "Global workspace is not promoted as a complete account of phenomenal consciousness."
+
+cogitateAdversarialSource : SourceRecord
+cogitateAdversarialSource =
+  sourceRecord
+    "Cogitate Consortium; Oscar Ferrante; Urszula Gorska-Klimowska; Simon Henin; Rony Hirschhorn; Aya Khalaf; Alex Lepauvre; Ling Liu; David Richter; Yamil Vidal; and collaborators"
+    "Adversarial testing of global neuronal workspace and integrated information theories of consciousness"
+    "Nature"
+    2025
+    doiIdentifier
+    "10.1038/s41586-025-08888-1"
+    adversarialTheoryTestRole
+    "The aggregate keeps multiple consciousness theories under empirical underdetermination."
+    "No single temporal or anatomical ignition signature is promoted as settled."
+
+beniaguevNeuronSource : SourceRecord
+beniaguevNeuronSource =
+  sourceRecord
+    "David Beniaguev; Idan Segev; Michael London"
+    "Single cortical neurons as deep artificial neural networks"
+    "Neuron"
+    2021
+    doiIdentifier
+    "10.1016/j.neuron.2021.07.002"
+    singleNeuronTransformRole
+    "A neuron is represented as a stateful nonlinear transform rather than a timeless scalar activation."
+    "An artificial surrogate is not identified with a complete biological neuron."
+
+londonHausserSource : SourceRecord
+londonHausserSource =
+  sourceRecord
+    "Michael London; Michael Hausser"
+    "Dendritic computation"
+    "Annual Review of Neuroscience"
+    2005
+    doiIdentifier
+    "10.1146/annurev.neuro.28.061604.135703"
+    dendriticComputationRole
+    "Dendritic state and location are retained as computation-bearing context."
+    "No single dendritic mechanism is promoted as the sole basis of consciousness."
+
+battistonMultilayerSource : SourceRecord
+battistonMultilayerSource =
+  sourceRecord
+    "Federico Battiston; Vincenzo Nicosia; Mario Chavez; Vito Latora"
+    "Multilayer motif analysis of brain networks"
+    "Chaos"
+    2017
+    doiIdentifier
+    "10.1063/1.4979282"
+    multilayerBrainNetworkRole
+    "Structural and functional connectivity are retained as interacting but non-identical network layers."
+    "A multiplex graph is not promoted as a complete mechanistic explanation of cognition."
+
+rebusSource : SourceRecord
+rebusSource =
+  sourceRecord
+    "Robin L. Carhart-Harris; Karl J. Friston"
+    "REBUS and the Anarchic Brain: Toward a Unified Model of the Brain Action of Psychedelics"
+    "Pharmacological Reviews"
+    2019
+    doiIdentifier
+    "10.1124/pr.118.017160"
+    psychedelicPriorReweightingRole
+    "Psychedelic perturbation is represented as candidate relaxation of high-level precision and routing constraints."
+    "The model is not promoted as a treatment protocol or universal pharmacological law."
+
+entropicBrainSource : SourceRecord
+entropicBrainSource =
+  sourceRecord
+    "Robin L. Carhart-Harris; Robert Leech; Peter J. Hellyer; Murray Shanahan; Amanda Feilding; Enzo Tagliazucchi; Dante R. Chialvo; David Nutt"
+    "The entropic brain: a theory of conscious states informed by neuroimaging research with psychedelic drugs"
+    "Frontiers in Human Neuroscience"
+    2014
+    doiIdentifier
+    "10.3389/fnhum.2014.00020"
+    psychedelicEntropyRole
+    "The tranche records increased repertoire and entropy as candidate dynamical readings."
+    "Entropy is not treated as a settled standalone biomarker of consciousness or therapeutic outcome."
+
+tagliazucchiRepertoireSource : SourceRecord
+tagliazucchiRepertoireSource =
+  sourceRecord
+    "Enzo Tagliazucchi; Robin L. Carhart-Harris; Robert Leech; David Nutt; Dante R. Chialvo"
+    "Enhanced repertoire of brain dynamical states during the psychedelic experience"
+    "Human Brain Mapping"
+    2014
+    doiIdentifier
+    "10.1002/hbm.22562"
+    psychedelicRepertoireRole
+    "The tranche records a broadened dynamical repertoire as a candidate state-space effect."
+    "A broader repertoire is not identified with truth, health, treatment success, or a complete consciousness measure."
+
+grokkingSource : SourceRecord
+grokkingSource =
+  sourceRecord
+    "Alethea Power; Yuri Burda; Harri Edwards; Igor Babuschkin; Vedant Misra"
+    "Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets"
+    "arXiv"
+    2022
+    arxivDoiIdentifier
+    "10.48550/arXiv.2201.02177"
+    grokkingAnalogyRole
+    "Grokking supplies an analogy for learned latent geometry becoming reusable across tasks."
+    "Slow parameter-space grokking is not identified with rapid conscious access dynamics."
+
+canonicalConsciousAccessSources : List SourceRecord
+canonicalConsciousAccessSources =
+  brooksConversationSource
+  ∷ mashourWorkspaceSource
+  ∷ cogitateAdversarialSource
+  ∷ beniaguevNeuronSource
+  ∷ londonHausserSource
+  ∷ battistonMultilayerSource
+  ∷ rebusSource
+  ∷ entropicBrainSource
+  ∷ tagliazucchiRepertoireSource
+  ∷ grokkingSource
+  ∷ []
+
+listCount : ∀ {A : Set} → List A → Nat
+listCount [] = zero
+listCount (_ ∷ xs) = suc (listCount xs)
+
+canonicalConsciousAccessSourceCount : Nat
+canonicalConsciousAccessSourceCount =
+  listCount canonicalConsciousAccessSources
+
+canonicalConsciousAccessSourceCountIsTen :
+  canonicalConsciousAccessSourceCount ≡ 10
+canonicalConsciousAccessSourceCountIsTen = refl

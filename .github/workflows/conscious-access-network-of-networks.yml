@@ -1,0 +1,46 @@
+name: conscious-access-network-of-networks
+
+on:
+  push:
+    branches:
+      - 'agent/conscious-access-network-of-networks'
+    paths:
+      - 'DASHI/Biology/StateDependentMultiplexTransducer.agda'
+      - 'DASHI/Biology/ProductiveTransformCoherence.agda'
+      - 'DASHI/Biology/SparseExpertRoutingCoalition.agda'
+      - 'DASHI/Biology/ConsciousAccessCoalition.agda'
+      - 'DASHI/Biology/UnconsciousAccessRegime.agda'
+      - 'DASHI/Biology/SymbolicTransformWithoutHomunculus.agda'
+      - 'DASHI/Biology/DeterministicCoarseGrainingBoundary.agda'
+      - 'DASHI/Biology/PsychedelicAttractorReweightingBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessNetworkSourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessNetworkRegression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessNetworkOfNetworksFormalism.md'
+      - 'scripts/check_conscious_access_network_of_networks.sh'
+      - '.github/workflows/conscious-access-network-of-networks.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/StateDependentMultiplexTransducer.agda'
+      - 'DASHI/Biology/ProductiveTransformCoherence.agda'
+      - 'DASHI/Biology/SparseExpertRoutingCoalition.agda'
+      - 'DASHI/Biology/ConsciousAccessCoalition.agda'
+      - 'DASHI/Biology/UnconsciousAccessRegime.agda'
+      - 'DASHI/Biology/SymbolicTransformWithoutHomunculus.agda'
+      - 'DASHI/Biology/DeterministicCoarseGrainingBoundary.agda'
+      - 'DASHI/Biology/PsychedelicAttractorReweightingBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessNetworkSourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessNetworkRegression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessNetworkOfNetworksFormalism.md'
+      - 'scripts/check_conscious_access_network_of_networks.sh'
+      - '.github/workflows/conscious-access-network-of-networks.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check conscious-access network-of-networks tranche
+        run: bash scripts/check_conscious_access_network_of_networks.sh
