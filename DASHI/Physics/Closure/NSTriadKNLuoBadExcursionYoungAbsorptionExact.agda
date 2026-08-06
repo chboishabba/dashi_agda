@@ -41,6 +41,23 @@ open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym; tran
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
+addSameRight :
+  ∀ {left upper} right →
+  left ≤ upper →
+  left + right ≤ upper + right
+addSameRight {left} {upper} right inequality =
+  let
+    raw : right + left ≤ right + upper
+    raw = ℚₚ.+-monoʳ-≤ right inequality
+  in
+  subst
+    (λ normalizedLeft → normalizedLeft ≤ upper + right)
+    (solve (right ∷ left ∷ []))
+    (subst
+      (λ normalizedRight → right + left ≤ normalizedRight)
+      (solve (right ∷ upper ∷ []))
+      raw)
+
 record QuarterYoungParameter : Set where
   constructor quarterYoungParameter
   field
@@ -257,8 +274,7 @@ badExcursionAmplitudeAbsorption {parameter} budget =
       (epsilon parameter * L2.square (defectFactor budget)
         + quarterInverse parameter * L2.square (amplitudeFactor budget))
       + transferResidual budget
-    youngPlusResidual =
-      ℚₚ.+-monoʳ-≤ (transferResidual budget) young
+    youngPlusResidual = addSameRight (transferResidual budget) young
 
     transferToYoung :
       transfer budget
@@ -298,8 +314,7 @@ badExcursionAmplitudeAbsorption {parameter} budget =
         (amplitudeCoefficient budget * viscosity budget
           + amplitudeResidual budget))
       + transferResidual budget
-    withTransferResidual =
-      ℚₚ.+-monoʳ-≤ (transferResidual budget) budgetsCombined
+    withTransferResidual = addSameRight (transferResidual budget) budgetsCombined
 
     targetMeaning :
       (epsilon parameter
