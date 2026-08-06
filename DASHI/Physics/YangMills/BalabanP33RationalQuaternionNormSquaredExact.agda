@@ -34,8 +34,9 @@ module DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; NonNegative)
+  (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -174,7 +175,7 @@ normSqSum4Bound first second third fourth =
       first Q.+q (second Q.+q (third Q.+q fourth))
       ≡ leftPair Q.+q rightPair
     reassociate =
-      Q.quaternionAddAssociative first second (third Q.+q fourth)
+      sym (Q.quaternionAddAssociative first second (third Q.+q fourth))
 
     outer :
       normSq (leftPair Q.+q rightPair)
