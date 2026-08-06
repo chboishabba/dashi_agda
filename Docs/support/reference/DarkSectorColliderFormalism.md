@@ -88,7 +88,7 @@ typed separately. The canonical scaled witness is
 2 * 1 * 4 = 8.
 ```
 
-`DisplacedVertex.agda` then checks:
+`DisplacedVertex.agda` checks:
 
 ```text
 minimum displacement <= reconstructed displacement <= maximum displacement;
@@ -119,41 +119,50 @@ recordedSignalCount 9 1 0
 
 Thus a recorded null at zero acceptance cannot identify the underlying production rate. In experimental notation, a null result constrains a production-times-branching-times-acceptance product, not production alone.
 
-## Cross-pollination with the attached formalism
+## Cross-pollination with the complete attached formalism
 
 The same branch adds:
 
 ```text
 FiniteHistoryOrientationExact.agda
 HistoryWeightFiltrationExact.agda
+FiniteHistoryFunctionalExact.agda
 FormalReceiptBoundaryExact.agda
+FiniteResidueCycleReachabilityExact.agda
 FiniteWeightedTernaryKernelExact.agda
 TernaryKernelQuotientLyapunovExact.agda
+FiniteMultiscaleKernelCompatibilityExact.agda
 FiniteStatisticalFiltrationExact.agda
-ProbabilityDecoratedReebExact.agda.
+ProbabilityDecoratedReebExact.agda
+FiniteUltrametricReebFlowExact.agda
+Round5AttachedFormalismBoundary.agda
+Round5AttachedCompletionBoundary.agda
+Round5CompleteBoundary.agda.
 ```
 
 These modules implement:
 
-- history reversal distinct from internal sign conjugation;
+- primitive admissible histories, a reversible subsystem, action as a history functional, stationary finite candidates, two-boundary pruning, and charge conjugation distinct from order reversal;
 - filtering distinct from future-boundary smoothing;
 - Gibbs, quantum-phase, and MDL weights as separate types;
 - formal source, kernel theorem, and reproducible receipt as separate levels;
+- exact six- and nine-residue cycles, bounded reachability, finite geometric-series identities, and explicit remaining p-adic-completion obligations;
 - symmetry-compatible and symmetry-breaking finite ternary kernels;
 - exact quotient descent, an explicit period-two counterexample, and strict finite-rank convergence;
+- exact, defective, and quotient-valued multiscale kernel compatibility;
 - physical states, probability laws, and statistical coordinates as separate carriers;
-- a probability-decorated split/merge Reeb analogue with mass conservation, typed transition semantics, preservation maps, and finite MDL model selection.
+- a probability-decorated split/merge Reeb analogue with mass conservation, typed transition semantics, preservation maps, finite MDL model selection, ultrametric addresses, normalised transition rows, history weights, temporal thickness, and topological currents.
 
 ## Source records
 
-`DarkSectorColliderSourceAtlas.agda` records author, title, venue, year, DOI or explicit arXiv/no-DOI marker, imported role, and excluded promotion for:
+`DarkSectorColliderSourceAtlas.agda` records author, title, venue, year, persistent DOI, imported role, and excluded promotion for:
 
 - Silveira and Zee, *Scalar Phantoms*, DOI `10.1016/0370-2693(85)90624-0`;
 - Schabinger and Wells, *A Minimal Spontaneously Broken Hidden Sector and its Impact on Higgs Boson Physics at the Large Hadron Collider*, DOI `10.1103/PhysRevD.72.093007`;
-- Patt and Wilczek, *Higgs-field Portal into Hidden Sectors*, `arXiv:hep-ph/0605188`;
+- Patt and Wilczek, *Higgs-field Portal into Hidden Sectors*, DOI `10.48550/arXiv.hep-ph/0605188`;
 - Alimena et al., *Searching for Long-Lived Particles beyond the Standard Model at the Large Hadron Collider*, DOI `10.1088/1361-6471/ab4574`;
 - CMS, displaced dimuon LLP search, DOI `10.1007/JHEP05(2024)047`;
-- CMS, LLP trigger strategy and performance, `arXiv:2601.17544`.
+- CMS, LLP trigger strategy and performance, DOI `10.48550/arXiv.2601.17544`, CMS-EXO-23-016, submitted to *Physics Reports*.
 
 ## Authority boundary
 
