@@ -6,6 +6,7 @@ import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact as History
 import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact as Residue
 import DASHI.Physics.Foundations.FiniteMultiscaleKernelCompatibilityExact as Multiscale
 import DASHI.Physics.Foundations.FiniteUltrametricReebFlowExact as Ultrametric
+import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact as Reeb
 import DASHI.Physics.Foundations.Round5AttachedCompletionBoundary as Boundary
 
 completionBoundaryExists : Boundary.Round5AttachedCompletionBoundary
@@ -74,9 +75,9 @@ ultrametricRegression :
 ultrametricRegression = refl , refl
 
 stochasticFlowRegression :
-  Ultrametric.transitionWeight Ultrametric.Reeb.sourceToLeft
+  Ultrametric.transitionWeight Reeb.sourceToLeft
   +
-  Ultrametric.transitionWeight Ultrametric.Reeb.sourceToRight
+  Ultrametric.transitionWeight Reeb.sourceToRight
   ≡
   6
 stochasticFlowRegression = refl
