@@ -9,8 +9,8 @@ module DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact where
 -- DOI: 10.1090/S0273-0979-01-00934-X.
 --
 -- Richard D. Schafer,
--- "An Introduction to Nonassociative Algebras".
--- DOI: 10.1016/C2013-0-11166-7.
+-- "An Introduction to Nonassociative Algebras" (Academic Press, 1966).
+-- No DOI assigned or verified for the original book.
 --
 -- DASHI CONTRIBUTION
 --
@@ -27,7 +27,8 @@ module DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact where
 --   (e1 e2)e4 =  e7,
 --   e1(e2 e4) = -e7
 --
--- records the concrete loss of associativity under the repository convention.
+-- supplies an explicit checked failure of associativity under the repository
+-- convention.
 --
 -- This is an exact rational polynomial formalisation.  It does not prove the
 -- analytic real division property, positivity/completeness over R, the full
@@ -36,9 +37,11 @@ module DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as CD
@@ -115,6 +118,7 @@ octonionConjugateReversesProduct
     (Q.quaternionExt
       (solve vars) (solve vars) (solve vars) (solve vars))
   where
+    vars : List ℚ
     vars =
       a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
       c0 ∷ c1 ∷ c2 ∷ c3 ∷ d0 ∷ d1 ∷ d2 ∷ d3 ∷ []
@@ -144,6 +148,7 @@ octonionLeftAlternative
     (Q.quaternionExt
       (solve vars) (solve vars) (solve vars) (solve vars))
   where
+    vars : List ℚ
     vars =
       a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
       c0 ∷ c1 ∷ c2 ∷ c3 ∷ d0 ∷ d1 ∷ d2 ∷ d3 ∷ []
@@ -159,6 +164,7 @@ octonionRightAlternative
     (Q.quaternionExt
       (solve vars) (solve vars) (solve vars) (solve vars))
   where
+    vars : List ℚ
     vars =
       a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
       c0 ∷ c1 ∷ c2 ∷ c3 ∷ d0 ∷ d1 ∷ d2 ∷ d3 ∷ []
@@ -174,6 +180,7 @@ octonionFlexible
     (Q.quaternionExt
       (solve vars) (solve vars) (solve vars) (solve vars))
   where
+    vars : List ℚ
     vars =
       a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
       c0 ∷ c1 ∷ c2 ∷ c3 ∷ d0 ∷ d1 ∷ d2 ∷ d3 ∷ []
@@ -201,3 +208,21 @@ rightAssociatedE124 =
   octonionExt
     (Q.quaternionExt (solve []) (solve []) (solve []) (solve []))
     (Q.quaternionExt (solve []) (solve []) (solve []) (solve []))
+
+seventhCoordinate : RationalOctonion → ℚ
+seventhCoordinate (oct _ (Q.quat _ _ _ coordinate)) = coordinate
+
+oneIsNotNegativeOne : 1ℚ ≡ - 1ℚ → ⊥
+oneIsNotNegativeOne ()
+
+e7IsNotNegativeE7 : e7 ≡ negO e7 → ⊥
+e7IsNotNegativeE7 equality =
+  oneIsNotNegativeOne (cong seventhCoordinate equality)
+
+e124AssociativityFails :
+  ((e1 *o e2) *o e4 ≡ e1 *o (e2 *o e4)) → ⊥
+e124AssociativityFails equality =
+  e7IsNotNegativeE7
+    (trans
+      (sym leftAssociatedE124)
+      (trans equality rightAssociatedE124))
