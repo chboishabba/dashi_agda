@@ -46,6 +46,24 @@ Program length, execution length, normal-form length, type-witness length, and
 residual-witness length are separate quantities. The finite cost is not
 promoted to exact Kolmogorov complexity.
 
+## Fifteen-SSP hyperfibre symmetry atlas
+
+The SSPs now index an actual dependent family rather than only arithmetic
+coordinates. Each lane has its own:
+
+- fibre carrier;
+- symmetry carrier and action;
+- residual carrier;
+- path type and transport;
+- `3/6/9` resolution;
+- declared structural-complexity rank.
+
+The finite witness assigns lower lanes to resolution 3, middle lanes to
+resolution 6, and upper lanes to resolution 9. Inverse transport reverses
+polarity while retaining an inverse-path residual. The generic atlas permits
+heterogeneous fibres; numerical prime size alone is not promoted to a theorem
+of physical complexity.
+
 ## Self-indexing hyperfabric
 
 The strong tower is represented at the type level:
@@ -66,6 +84,21 @@ stable under any symmetry action commuting with both the operator and scalar
 action. The interface is reusable in grokking, neural, diffusion, NS, YM, and
 quantum-excitation lanes, but it does not replace their concrete operators,
 support geometry, coefficients, or analytic estimates.
+
+The five `D4` species have explicit role labels:
+
+```text
+A1  invariant/global;
+A2  orientation/pseudoscalar;
+B1  axial contrast;
+B2  diagonal contrast;
+E   two-dimensional directional pair.
+```
+
+Candidate application records type an `A1` global/vacuum-like lane, opposite
+`A2` orientations for positive/negative NS helicity, an `A1` gauge-invariant
+candidate, and an `E` neural directional pair. These are reusable mode roles,
+not identifications of concrete physics across domains.
 
 ## Oriented-zero jets
 

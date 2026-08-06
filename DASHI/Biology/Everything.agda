@@ -176,8 +176,10 @@ import DASHI.Biology.ConsciousAccessRound5Regression
 
 import DASHI.Biology.ReducedFiftyThreeFibreExact
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact
+import DASHI.Biology.SSPHyperfibreSymmetryTowerExact
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact
 import DASHI.Biology.EquivariantLaplacianSectorExact
+import DASHI.Biology.D4IrrepPhysicalRoleExact
 import DASHI.Biology.OrientedZeroJetTransitionExact
 import DASHI.Biology.ReachableSectorEntropyExact
 import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact
