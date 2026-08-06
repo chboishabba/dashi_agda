@@ -149,6 +149,7 @@ import DASHI.Biology.ConsciousAccessRound4Regression
 -- exceptional-lattice candidates, natural systems, and Clay-facing bridges.
 
 import DASHI.Biology.DASHIYijingTernaryDivinationExact
+import DASHI.Biology.DASHIYijingRelationalOperatorsExact
 import DASHI.Biology.OrientedZeroWaveTransitionExact
 import DASHI.Biology.DialecticalSheetSpiralExact
 import DASHI.Biology.TriadicBraidDialecticExact
