@@ -35,7 +35,8 @@ sheetKernelRespectsGlobalInversion :
   sheetKernel (Triadic.negateNine sheet) ≡ sheetKernel sheet
 sheetKernelRespectsGlobalInversion sheet =
   cong
-    (Triadic.canonicalNineRepresentative ∘ quotientKernel)
+    (λ orbit →
+      Triadic.canonicalNineRepresentative (quotientKernel orbit))
     (Triadic.quotientNineNegationInvariant sheet)
 
 ------------------------------------------------------------------------
