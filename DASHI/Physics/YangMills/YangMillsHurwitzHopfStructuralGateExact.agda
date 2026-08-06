@@ -36,11 +36,13 @@ module DASHI.Physics.YangMills.YangMillsHurwitzHopfStructuralGateExact where
 -- analytic or quantum result.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([])
 open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; _/_)
+open import Data.Product using (_×_; _,_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as CD
@@ -69,8 +71,8 @@ quaternionHopfRadiusIdentityReused : ∀ a b →
 quaternionHopfRadiusIdentityReused = H.quaternionHopfRadiusIdentity
 
 quaternionIsFrobeniusAndHurwitzCandidate :
-  HF.frobeniusCandidate HF.quaternion ≡ Agda.Builtin.Bool.true
-  × HF.hurwitzCandidate HF.quaternion ≡ Agda.Builtin.Bool.true
+  HF.frobeniusCandidate HF.quaternion ≡ true
+  × HF.hurwitzCandidate HF.quaternion ≡ true
 quaternionIsFrobeniusAndHurwitzCandidate =
   HF.quaternionIsBothCandidates
 
