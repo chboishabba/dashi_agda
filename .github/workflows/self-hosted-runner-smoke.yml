@@ -32,3 +32,5 @@ jobs:
           set -euxo pipefail
           git rev-parse --short HEAD
           echo "Self-hosted runner successfully executed dashi_agda smoke test."
+
+# Triggered after merge to verify the registered self-hosted runner.
