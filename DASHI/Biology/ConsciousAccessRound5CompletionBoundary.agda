@@ -7,6 +7,7 @@ import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSPWeave
 import DASHI.Biology.SSPHyperfibreSymmetryTowerExact as SSPTower
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as SelfIndexing
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Symmetry
 import DASHI.Biology.EquivariantLaplacianSectorExact as Equivariant
 import DASHI.Biology.D4IrrepPhysicalRoleExact as D4Roles
 import DASHI.Biology.MoonshineGradedStageBridgeExact as Moonshine
@@ -90,15 +91,15 @@ record ConsciousAccessRound5CompletionBoundary : Set where
           Equivariant.evenState)
 
     D4RoleDimensionsMatchIrrepDimensions :
-      (kind : D4Roles.Symmetry.D4IrrepKind) →
+      (kind : Symmetry.D4IrrepKind) →
       D4Roles.roleDimension (D4Roles.modeRole kind)
-      ≡ D4Roles.Symmetry.irrepDimension kind
+      ≡ Symmetry.irrepDimension kind
 
     positiveAndNegativeNSCandidatesUseOppositeOrientations :
       D4Roles.orientation D4Roles.navierStokesPositiveHelicityCandidate
-        ≡ D4Roles.Symmetry.positiveOrientation
+        ≡ Symmetry.positiveOrientation
       × D4Roles.orientation D4Roles.navierStokesNegativeHelicityCandidate
-        ≡ D4Roles.Symmetry.negativeOrientation
+        ≡ Symmetry.negativeOrientation
 
     ternaryExpansionOfFirstCoefficient :
       Hyper.powNat 3 11
