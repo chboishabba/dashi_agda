@@ -33,10 +33,15 @@ module DASHI.Physics.YangMills.BalabanStrongCouplingSU2ActionNormalizationExact 
 --
 --   4 beta q0(U) = 4 beta - 4 beta (1-q0(U)).
 --
+-- Summed over P plaquettes this becomes
+--
+--   4 beta sum_p q0(U_p)
+--     = 4 beta P - 4 beta sum_p (1-q0(U_p)).
+--
 -- Thus the two finite-volume densities differ only by a configuration-
--- independent factor per plaquette, absorbed by the partition function.  The
--- second variations have opposite signs because one object is the Gibbs
--- exponent and the other is the positive action penalty.
+-- independent factor, absorbed by the partition function.  The second
+-- variations have opposite signs because one object is the Gibbs exponent and
+-- the other is the positive action penalty.
 --
 -- This identifies beta's action normalization for the existing rational
 -- quaternion convention.  It does not identify beta with the small-field
@@ -68,6 +73,23 @@ su2ExponentIsConstantMinusWilsonPenalty :
   ≡ (+ 4 / 1) * beta - dashiSU2WilsonPenalty beta value
 su2ExponentIsConstantMinusWilsonPenalty beta value =
   solve (beta ∷ Q.q0 value ∷ [])
+
+paperFiniteVolumeExponent : ℚ → ℚ → ℚ
+paperFiniteVolumeExponent beta scalarPartSum =
+  (+ 4 / 1) * beta * scalarPartSum
+
+finiteVolumeWilsonPenalty : ℚ → ℚ → ℚ → ℚ
+finiteVolumeWilsonPenalty beta plaquetteCount scalarPartSum =
+  (+ 4 / 1) * beta * (plaquetteCount - scalarPartSum)
+
+finiteVolumeExponentIsConstantMinusPenalty :
+  ∀ beta plaquetteCount scalarPartSum →
+  paperFiniteVolumeExponent beta scalarPartSum
+  ≡ (+ 4 / 1) * beta * plaquetteCount
+    - finiteVolumeWilsonPenalty beta plaquetteCount scalarPartSum
+finiteVolumeExponentIsConstantMinusPenalty
+    beta plaquetteCount scalarPartSum =
+  solve (beta ∷ plaquetteCount ∷ scalarPartSum ∷ [])
 
 su2ActionCoefficientFromPaperBeta : ℚ → ℚ
 su2ActionCoefficientFromPaperBeta beta = (+ 4 / 1) * beta
