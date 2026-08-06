@@ -90,7 +90,7 @@ scalarPartSquareBelowNormSq (Q.quat q0 q1 q2 q3) =
   in
   subst
     (λ lower → lower ≤ q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3)
-    (sym (ℚP.+-identityʳ (q0 * q0)))
+    (ℚP.+-identityʳ (q0 * q0))
     (ℚP.+-monoʳ-≤ (q0 * q0) tailNonnegative)
 
 nonnegativeDifferenceImpliesBelow : ∀ {lower upper} →
