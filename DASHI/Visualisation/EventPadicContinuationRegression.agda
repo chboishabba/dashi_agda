@@ -3,6 +3,7 @@ module DASHI.Visualisation.EventPadicContinuationRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Visualisation.EventFilamentFieldExact as Event
+import DASHI.Visualisation.EventLabelGeometryExact as Labels
 import DASHI.Visualisation.FiniteAnisotropicKernelExact as Anisotropic
 import DASHI.Visualisation.EventFilamentPersistenceExact as Persistence
 import DASHI.Visualisation.SelfConsistentEventRendererExact as Renderer
@@ -22,6 +23,25 @@ continuationBoundaryExists = Boundary.canonicalEventPadicContinuationBoundary
 
 eventFieldRegression : Event.scalarFieldSample ≡ 10
 eventFieldRegression = refl
+
+labelProductDistanceRegression :
+  Labels.productLabelDistance Labels.labelA Labels.labelB ≡ 2
+labelProductDistanceRegression = Labels.labelABDistanceIsTwo
+
+labelFactorIndependenceRegression :
+  Labels.binaryHammingDistance
+    (Event.binaryLabel Labels.labelA)
+    (Event.binaryLabel Labels.sameBinaryDifferentHierarchy)
+  ≡
+  0
+  ×
+  Labels.prefixDistanceCode
+    (Event.hierarchyLabel Labels.labelA)
+    (Event.hierarchyLabel Labels.sameBinaryDifferentHierarchy)
+  ≡
+  3
+labelFactorIndependenceRegression =
+  Labels.binaryDistanceCanVanishWhileHierarchyDiffers
 
 anisotropicRadiusRegression :
   Anisotropic.mahalanobisNumerator
