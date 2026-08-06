@@ -9,6 +9,7 @@ bash scripts/check_ns_luo_unconditional_absorption_round19.sh
 
 files=(
   DASHI/Physics/Closure/NSTriadKNLuoPositiveStrainGradientSignExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoVorticityStretchingSignExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoLocalizedProjectedKornAffineCounterexampleExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCompactSupportPositiveStrainCoreExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoAmplitudeScalingStaticRigidityNoGoExact.agda
@@ -40,6 +41,10 @@ fi
 grep -q 'integratedPointwiseGradientIdentity' DASHI/Physics/Closure/NSTriadKNLuoPositiveStrainGradientSignExact.agda
 grep -q 'antisymmetricGradientCubicCancels' DASHI/Physics/Closure/NSTriadKNLuoPositiveStrainGradientSignExact.agda
 grep -q 'positiveStrainIsFavourableForGradientEnergy' DASHI/Physics/Closure/NSTriadKNLuoPositiveStrainGradientSignExact.agda
+
+grep -q 'twiceVorticityGradientEqualsSymmetricNumerator' DASHI/Physics/Closure/NSTriadKNLuoVorticityStretchingSignExact.agda
+grep -q 'vorticityAntisymmetricContractionCancels' DASHI/Physics/Closure/NSTriadKNLuoVorticityStretchingSignExact.agda
+grep -q 'negativeStrainIsFavourableForEnstrophy' DASHI/Physics/Closure/NSTriadKNLuoVorticityStretchingSignExact.agda
 
 grep -q 'localizedProjectedKornFailsForEveryCoefficient' DASHI/Physics/Closure/NSTriadKNLuoLocalizedProjectedKornAffineCounterexampleExact.agda
 grep -q 'positiveStrainContractionIsEight' DASHI/Physics/Closure/NSTriadKNLuoLocalizedProjectedKornAffineCounterexampleExact.agda
@@ -80,6 +85,7 @@ grep -q 'finiteDirectionalHHSquaredBridge' DASHI/Physics/Closure/NSTriadKNLuoFin
 grep -q 'finiteDirectionalHHAbsorption' DASHI/Physics/Closure/NSTriadKNLuoFiniteDirectionalHHBridgeExact.agda
 
 grep -q '10.1007/s00205-019-01419-z' DASHI/Physics/Closure/NSTriadKNLuoPositiveStrainGradientSignExact.agda
+grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNLuoVorticityStretchingSignExact.agda
 grep -q '10.1017/CBO9780511608803' DASHI/Physics/Closure/NSTriadKNLuoThreeDimensionalGradientL4InterpolationExact.agda
 grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/Closure/NSTriadKNLuoSpectralProjectorGapDependenceExact.agda
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNLuoDirectionalKernelTripleProductExact.agda
