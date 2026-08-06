@@ -22,6 +22,34 @@ It proves:
 
 Yin/yang is a context-indexed observation. The same trit can reverse observed polarity under a reversed view. Zero remains unresolved rather than being assigned a universal meaning such as synthesis. Moving positions form a Boolean mask; a moving position applies sign inversion, which fixes zero. A reading retains question context, initial state, moving mask, resulting state, PNF atoms, and authority type.
 
+## Received Yijing relational operators
+
+`DASHIYijingRelationalOperatorsExact.agda` preserves the received four-valued casting surface:
+
+```text
+6 = old / changing yin
+7 = young / stable yang
+8 = young / stable yin
+9 = old / changing yang
+```
+
+Each casting value has an exact primary polarity, moving-line flag, and resulting polarity. A six-line cast compiles to an initial ternary hexagram, a moving mask, and a resulting hexagram.
+
+The module also includes:
+
+- lower and upper trigram decomposition with exact recomposition;
+- the eight received images: heaven, earth, thunder, wind/wood, water, fire, mountain, and lake/marsh;
+- an explicit `ternaryBeyondReceivedEight` result for zero-containing DASHI trigrams;
+- positions 1 through 6 and their entry, inner-development, threshold, outer-entry, governing-centre, and culmination stages;
+- centrality at positions 2 and 5;
+- conventional odd/yang and even/yin positional expectations without identifying positional correctness with moral goodness;
+- the correspondence involution `1 <-> 4`, `2 <-> 5`, and `3 <-> 6`;
+- nonzero opposition, so two zero lines are not falsely classified as opposed;
+- reversal, whole-state complement, trigram exchange, and their involution proofs;
+- later nuclear extraction `(x1,x2,x3,x4,x5,x6) -> (x2,x3,x4,x3,x4,x5)`.
+
+The nuclear operator is typed as a later interpretive construction rather than asserted to belong to the earliest Zhouyi layer.
+
 ## Oriented zero and continuous approach
 
 `OrientedZeroWaveTransitionExact.agda` refines the transition state to
@@ -89,6 +117,19 @@ It records the scale spine:
 ```
 
 Mediated-path, unrestricted-Hamming, and cyclic-phase transition geometries are separate types. Product growth is kept distinct from fixed-base tetration. Principled fibre transitions retain source type, target type, transition kind, and residual preservation.
+
+`TernaryCubeStrataExact.agda` makes the resulting three-dimensional shape exact:
+
+```text
+8 vertices
+12 edge midpoints
+6 face centres
+1 cube centre
+----------------
+27 ternary points
+```
+
+Binary points occupy the vertex stratum. Ternary points have the same cubical convex hull but a richer stratified combinatorics containing boundaries, intermediates, and centre.
 
 ## Cantor restriction, wheel phase, and diffusion
 
@@ -229,8 +270,11 @@ The focused checker is:
 bash scripts/check_conscious_access_round5.sh
 ```
 
-It first runs the complete round-four checker, scans every round-five Agda module for holes, postulates, unsafe options, unsolved metas, and placeholder right-hand sides, then invokes the pinned Agda 2.9 checker on:
+It first runs the complete round-four checker, scans every round-five Agda module for holes, postulates, unsafe options, unsolved metas, and placeholder right-hand sides, then kernel-checks both:
 
 ```text
 DASHI/Biology/ConsciousAccessRound5Regression.agda
+DASHI/Biology/Everything.agda
 ```
+
+The workflow installs Nix, resolves `.#agda-with-dashi-deps` from the committed `flake.lock`, prints the actual Agda version, and supplies that exact executable to the checker.
