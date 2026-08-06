@@ -37,13 +37,14 @@ module DASHI.Physics.Closure.NSTriadKNLuoThreeDimensionalGradientL4Interpolation
 -- linear absorption by Laplacian dissipation alone.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Nat.Base using (ℕ)
+open import Data.Nat.Base using (ℕ; _+_) renaming (_+_ to _+ℕ_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; cong; subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
@@ -62,11 +63,9 @@ manuscriptDisplayedExponents = quarterExponentPair 1 1 1
 
 correctLowPlusHighNumerator :
   lowNumerator threeDimensionalL4Exponents
-  + highNumerator threeDimensionalL4Exponents
+  +ℕ highNumerator threeDimensionalL4Exponents
   ≡ denominator threeDimensionalL4Exponents
 correctLowPlusHighNumerator = refl
-  where
-  open import Agda.Builtin.Equality using (refl)
 
 square : ℚ → ℚ
 square = L2.square
@@ -174,12 +173,7 @@ threeDimensionalYoungClosure model =
         (gradientThreeHalfRoot model)
       ≡ 4 * nonlinearProduct model
     leftMeaning =
-      solve
-        ( cubicYoungMonomial
-            (laplacianQuarterRoot model)
-            (gradientThreeHalfRoot model)
-        ∷ nonlinearProduct model
-        ∷ [])
+      cong (λ value → 4 * value) (nonlinearMeaning model)
 
     rightMeaning :
       3 * fourth (laplacianQuarterRoot model)
@@ -188,8 +182,6 @@ threeDimensionalYoungClosure model =
     rightMeaning
       rewrite laplacianFourthMeaning model
             | gradientFourthMeaning model = refl
-      where
-      open import Agda.Builtin.Equality using (refl)
 
     normalizedLeft :
       4 * nonlinearProduct model
