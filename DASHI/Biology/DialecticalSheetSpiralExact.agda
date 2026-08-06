@@ -104,7 +104,7 @@ fourLiftRotations state =
 projectedReturnAfterFour :
   (state : SpiralState) →
   projectedSheet (fourLiftRotations state) ≡ projectedSheet state
-projectedReturnAfterFour (spiralState (sheet3 a b c d e f g h i) h sense) = refl
+projectedReturnAfterFour (spiralState (sheet3 a b c d e f g h i) _ sense) = refl
 
 historicalLiftAfterFour :
   (state : SpiralState) →
