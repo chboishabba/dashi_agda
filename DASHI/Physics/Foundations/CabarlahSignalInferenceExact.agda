@@ -40,9 +40,9 @@ SignalInferenceInjective =
   x ≡ y
 
 signalInferenceIsNotInjective : ¬ SignalInferenceInjective
-signalInferenceIsNotInjective injective
-  with injective firstRadioTrace secondRadioTrace refl
-... | ()
+signalInferenceIsNotInjective injective =
+  firstAndSecondRadioTracesDistinct
+    (injective firstRadioTrace secondRadioTrace refl)
 
 ------------------------------------------------------------------------
 -- Observation, identification, policy, and moral authority are distinct
