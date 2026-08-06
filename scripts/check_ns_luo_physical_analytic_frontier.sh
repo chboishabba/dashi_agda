@@ -10,6 +10,9 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoOfficialIncrementKernelFullShellAdapterExact.agda
   DASHI/Physics/Closure/NSTriadKNIntegerFourierModeAddExact.agda
   DASHI/Physics/Closure/NSTriadKNComplexCommutativeRingExact.agda
+  DASHI/Physics/Closure/NSTriadKNRationalLerayProjectionExact.agda
+  DASHI/Physics/Closure/NSTriadKNRationalLeraySelfAdjointExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoBernsteinExponentCalibrationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIncrementTensorPolarizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIncrementKernelFourierMultiplierExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCharacterWeightedIncrementExact.agda
@@ -30,13 +33,23 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoThreeWayPairPartitionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSignedConvolutionYoungExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteTerminalYoungSameConstantExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteJensenSquareExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedJensenExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteNormalizedWeightedJensenExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteDyadicHalfSplitExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteSourceFaithfulSection4Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedSourceSection4Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteSourceJ11J12ProductExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteWeightedSourceJ11J12ProductExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSection4TerminalYoungClosureExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteCutoffEnergyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDiscreteTerminalCutoffExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDiscreteGronwallExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteNonuniformGronwallExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteMeanValueSelectionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteMeanValueGronwallExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDyadicMultiplierMagnitudeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoSchurEnvelopeRefinementExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePointwiseSchurFactorizationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFinitePhysicalSchurSummationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteFourInteractionSchurBoundsExact.agda
