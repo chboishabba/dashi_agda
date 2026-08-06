@@ -21,6 +21,7 @@ import DASHI.Visualisation.AttachedVisualisationRegression
 
 import DASHI.Visualisation.EventFilamentFieldExact
 import DASHI.Visualisation.EventSeparationQuantisationExact
+import DASHI.Visualisation.EventSeparationQuantisationRegression
 import DASHI.Visualisation.EventLabelGeometryExact
 import DASHI.Visualisation.FiniteAnisotropicKernelExact
 import DASHI.Visualisation.EventFilamentPersistenceExact
