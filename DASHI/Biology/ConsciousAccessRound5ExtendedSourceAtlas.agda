@@ -50,6 +50,17 @@ reserAboriginalMemorySource =
     "Supports a bounded example of narrative-place indexing improving finite recall in a medical-education setting."
     "The result is not generalized to all Indigenous traditions or used to reduce Indigenous knowledge to memory technique."
 
+stametsMyceliumSource : R4.SourceRecord
+stametsMyceliumSource =
+  R4.sourceRecord
+    "Paul Stamets"
+    "Mycelium Running: How Mushrooms Can Help Save the World"
+    "Ten Speed Press"
+    2005
+    "no DOI recorded; ISBN 9781580085793"
+    "Supplies architectural and ecological provenance for mycelial transport, decomposition, mycofiltration, mycoremediation, and restoration-oriented hyperfabric hypotheses."
+    "The book is not treated as proof of forest-wide intention, universal optimization, or every popular wood-wide-web claim."
+
 canonicalRound5ExtendedSources : List R4.SourceRecord
 canonicalRound5ExtendedSources =
   R5.canonicalRound5Sources
@@ -58,12 +69,13 @@ canonicalRound5ExtendedSources =
     ∷ falconerFractalSource
     ∷ freudDreamInterpretationSource
     ∷ reserAboriginalMemorySource
+    ∷ stametsMyceliumSource
     ∷ [])
 
 canonicalRound5ExtendedSourceCount : Nat
 canonicalRound5ExtendedSourceCount =
   R4.listCount canonicalRound5ExtendedSources
 
-canonicalRound5ExtendedSourceCountIsTwentyTwo :
-  canonicalRound5ExtendedSourceCount ≡ 22
-canonicalRound5ExtendedSourceCountIsTwentyTwo = refl
+canonicalRound5ExtendedSourceCountIsTwentyThree :
+  canonicalRound5ExtendedSourceCount ≡ 23
+canonicalRound5ExtendedSourceCountIsTwentyThree = refl
