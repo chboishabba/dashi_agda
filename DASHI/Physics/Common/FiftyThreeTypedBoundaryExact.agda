@@ -16,6 +16,7 @@ module DASHI.Physics.Common.FiftyThreeTypedBoundaryExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Nat.Base using (ℕ; _+_) renaming (ℕ to Nat)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
   (ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -76,5 +77,3 @@ fiftyThreeOccurrencesRemainTypeDistinct :
   × kindOfKernelMass navierStokesHighLowFiftyThreeSixths
     ≡ analyticKernelQuantity
 fiftyThreeOccurrencesRemainTypeDistinct = refl , refl
-  where
-  open import Data.Product using (_×_; _,_)
