@@ -93,8 +93,12 @@ amplitudePhase history with historyAction history
 ... | n = phaseThreeQuarter
 
 observedProbability : History3 → ProbabilityWeight
-observedProbability historyABC = probabilityHalf
-observedProbability historyACB = probabilityHalf
+observedProbability
+  (configurationA , (configurationB , configurationC)) =
+  probabilityHalf
+observedProbability
+  (configurationA , (configurationC , configurationB)) =
+  probabilityHalf
 observedProbability history = probabilityZero
 
 interferingPhaseLabelsCanShareProbability :
@@ -143,8 +147,16 @@ data BoundaryCompatibility : Set where
 
 compatibleWithBoundaries :
   InitialBoundary → FinalBoundary → History3 → BoundaryCompatibility
-compatibleWithBoundaries initialA finalC historyABC = compatible
-compatibleWithBoundaries initialA finalB historyACB = compatible
+compatibleWithBoundaries
+  initialA
+  finalC
+  (configurationA , (configurationB , configurationC)) =
+  compatible
+compatibleWithBoundaries
+  initialA
+  finalB
+  (configurationA , (configurationC , configurationB)) =
+  compatible
 compatibleWithBoundaries initial final history = incompatible
 
 prunedHistory : FinalBoundary → History3
