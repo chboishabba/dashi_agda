@@ -1,0 +1,51 @@
+name: Yang-Mills Clay highest-alpha round 24
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round24-wilson-schur-gap'
+  pull_request:
+    branches:
+      - 'agent/ym-clay-alpha-round23-terminal-scale-gap'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33QuaternionFourFactorTelescopeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33RationalQuaternionNormSquaredExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33QuaternionTelescopeNormSquaredExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementTelescopeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalLinkJetSelectedFactorNormExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonNamedAtomSumExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33QuaternionAdjointPerturbationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33QuaternionAdjointNormSquaredExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeFirstExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeDefectNormSquaredExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeGlobalDefectExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PeriodicDivergenceUpperExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeResidualExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33StrictTerminalGapMarginExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33CoarseFineSchurCouplingExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33EffectiveSchurGapStepExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33StageIStageIISpectralBoundaryExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound24Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round24.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round24.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check Wilson atoms, literal gauge residual and RG Schur gap algebra
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round24.sh
