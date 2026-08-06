@@ -16,8 +16,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinDiagonalSelectionExact where
 --
 -- PURPOSE
 -- Close the order-theoretic diagonal-selection step that is required when the
--- shell q and Galerkin cutoff N both tend to infinity.  Fixed-q convergence
--- alone does not provide one cutoff uniform in all q.  Instead choose, for
+-- shell q and Galerkin cutoff N both tend to infinity. Fixed-q convergence
+-- alone does not provide one cutoff uniform in all q. Instead choose, for
 -- every q, a positive tolerance tau_q and a cutoff N(q) at which
 --
 --   error(q,N(q)) <= tau_q.
@@ -28,8 +28,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinDiagonalSelectionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat.Properties using (≤-refl)
-open import Data.Rational.Base using (ℚ; _≤_; _<_)
+import Data.Nat.Properties as ℕₚ
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_; _<_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoTerminalInteractionDepletionTransferExact as Limit
 
@@ -44,7 +44,7 @@ record PointwiseGalerkinErrorData : Set where
     tolerance : Nat → ℚ
     tolerancePositive :
       (shell : Nat) →
-      (Data.Rational.Base.0ℚ) < tolerance shell
+      0ℚ < tolerance shell
     toleranceTendsToZero :
       Limit.TendsToZero tolerance
 
@@ -76,7 +76,7 @@ diagonalErrorBelowTolerance dataSet shell =
   in
   Limit.tailBound witness
     (Limit.cutoff witness)
-    ≤-refl
+    ℕₚ.≤-refl
 
 diagonalErrorTendsToZero :
   (dataSet : PointwiseGalerkinErrorData) →
