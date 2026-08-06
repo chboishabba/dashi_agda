@@ -63,6 +63,42 @@ periodsDoNotCollapse :
 periodsDoNotCollapse ()
 
 ------------------------------------------------------------------------
+-- Borneo Barracks is represented as an institutional-lineage hinge, not as a
+-- proof that the World-War-II and Cold-War enemies were identical.
+
+data SignalsLineageStage : Set where
+  wartimeSpecialWirelessStage : SignalsLineageStage
+  permanentCabarlahSignalsStage : SignalsLineageStage
+  borneoOperationalStage : SignalsLineageStage
+  vietnamOperationalStage : SignalsLineageStage
+
+nextSignalsLineageStage : SignalsLineageStage → SignalsLineageStage
+nextSignalsLineageStage wartimeSpecialWirelessStage =
+  permanentCabarlahSignalsStage
+nextSignalsLineageStage permanentCabarlahSignalsStage =
+  borneoOperationalStage
+nextSignalsLineageStage borneoOperationalStage =
+  vietnamOperationalStage
+nextSignalsLineageStage vietnamOperationalStage =
+  vietnamOperationalStage
+
+wartimeLineageReachesBorneoInTwo :
+  nextSignalsLineageStage
+    (nextSignalsLineageStage wartimeSpecialWirelessStage)
+  ≡ borneoOperationalStage
+wartimeLineageReachesBorneoInTwo = refl
+
+cabarlahLineageReachesVietnamInTwo :
+  nextSignalsLineageStage
+    (nextSignalsLineageStage permanentCabarlahSignalsStage)
+  ≡ vietnamOperationalStage
+cabarlahLineageReachesVietnamInTwo = refl
+
+wartimeStageIsNotBorneoStage :
+  wartimeSpecialWirelessStage ≡ borneoOperationalStage → ⊥
+wartimeStageIsNotBorneoStage ()
+
+------------------------------------------------------------------------
 -- Terminal-frontier language is represented as a claim carrying its status,
 -- not as a total function that manufactures a historical boundary for every
 -- enemy.
@@ -118,11 +154,16 @@ record HistoricalLayerBoundary : Set where
     signalsRoleProvesTerritorialConcessionIsFalse :
       signalsRoleProvesTerritorialConcession ≡ false
 
+    institutionalLineageMakesEnemiesIdentical : Bool
+    institutionalLineageMakesEnemiesIdenticalIsFalse :
+      institutionalLineageMakesEnemiesIdentical ≡ false
+
 open HistoricalLayerBoundary public
 
 canonicalHistoricalLayerBoundary : HistoricalLayerBoundary
 canonicalHistoricalLayerBoundary =
   historicalLayerBoundary
+    false refl
     false refl
     false refl
     false refl
