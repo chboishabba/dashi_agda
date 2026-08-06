@@ -3,9 +3,11 @@ module DASHI.Physics.Foundations.Round5FullBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.ConsciousAccessRound5FullBoundary as BiologyRound5
+import DASHI.Biology.ConsciousAccessRound5CompletionBoundary as BiologyCompletion
+import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
+import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas as BiologyCompletionSources
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as BiologyYijing
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as BiologyNSYM
-import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as BiologyHyperfabric
 import DASHI.Biology.TriadicCarryResidualExact as TriadicCarry
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
@@ -33,17 +35,21 @@ import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact as Hypotheses
 import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact as Cross399
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Unified
 import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
+import DASHI.Physics.Foundations.Round5CombinedSourceBoundary as CombinedSources
 import DASHI.Papers.Unification.TheoremInterface as ExistingUnification
 
 ------------------------------------------------------------------------
--- Cumulative exact finite theorem surface.  The first fields import the full
--- PR #399 biology/Yijing/natural-system boundary, so this tranche extends that
--- theorem surface rather than creating a competing sibling Round Five.
+-- Cumulative exact finite theorem surface.  The opening fields import both the
+-- original and completion boundaries from PR #399, so the constants/physics
+-- tranche extends the latest stacked theorem surface rather than an earlier
+-- snapshot of it.
 
 record Round5FullBoundary : Set where
   field
     biologyRound5Boundary : BiologyRound5.ConsciousAccessRound5Boundary
     biologyRound5PromotionBoundary : BiologyRound5.Round5PromotionBoundary
+    biologyRound5CompletionBoundary :
+      BiologyCompletion.ConsciousAccessRound5CompletionBoundary
     parameterScaleBoundary : Parameter.ParameterScaleBoundary
     parameterInformationBoundary : Information.ParameterInformationGeometryBoundary
     scaleTheoryBoundary : ScaleTheory.ScaleInvariantTheorySelectionBoundary
@@ -70,6 +76,7 @@ record Round5FullBoundary : Set where
     pr399CrossPollinationBoundary :
       Cross399.PR399FoundationsCrossPollinationBoundary
     unifiedEffectiveActionBoundary : Unified.UnifiedEffectiveActionBoundary
+    combinedSourceBoundary : CombinedSources.Round5CombinedSourceBoundary
 
     biologyTernaryNineSheetCountIs19683 :
       BiologyYijing.ternaryStateCount 9 ≡ 19683
@@ -193,6 +200,15 @@ record Round5FullBoundary : Set where
       ≡
       ScaleTheory.scaleAtDepth 1 ScaleTheory.depth0
 
+    pr399ReducedDimensionIsFiftyThree :
+      Cross399.Reduced.reducedDimension ≡ 53
+
+    pr399NontrivialMoonshineCandidateIs196883 :
+      Cross399.Reduced.moonshineNontrivialDimensionCandidate ≡ 196883
+
+    pr399LargestOggPrimeProductIs196883 :
+      47 * 59 * 71 ≡ 196883
+
     macroscopicQFTCorrectionVanishes :
       Hypotheses.qftIrrelevantCorrection Hypotheses.macroscopicScale ≡ 0
 
@@ -208,6 +224,9 @@ record Round5FullBoundary : Set where
     biologySourceCountIsTwentyThree :
       BiologySources.canonicalRound5ExtendedSourceCount ≡ 23
 
+    biologyCompletionSourceCountIsTwentyNine :
+      BiologyCompletionSources.canonicalRound5CompletionSourceCount ≡ 29
+
 open Round5FullBoundary public
 
 canonicalRound5FullBoundary : Round5FullBoundary
@@ -217,6 +236,8 @@ canonicalRound5FullBoundary =
         BiologyRound5.canonicalConsciousAccessRound5Boundary
     ; biologyRound5PromotionBoundary =
         BiologyRound5.canonicalRound5PromotionBoundary
+    ; biologyRound5CompletionBoundary =
+        BiologyCompletion.canonicalConsciousAccessRound5CompletionBoundary
     ; parameterScaleBoundary =
         Parameter.canonicalParameterScaleBoundary
     ; parameterInformationBoundary =
@@ -265,6 +286,8 @@ canonicalRound5FullBoundary =
         Cross399.canonicalPR399FoundationsCrossPollinationBoundary
     ; unifiedEffectiveActionBoundary =
         Unified.canonicalUnifiedEffectiveActionBoundary
+    ; combinedSourceBoundary =
+        CombinedSources.canonicalRound5CombinedSourceBoundary
     ; biologyTernaryNineSheetCountIs19683 =
         refl
     ; scaleOrbitCannotCollapse =
@@ -317,12 +340,20 @@ canonicalRound5FullBoundary =
         BiologyNSYM.finiteMassGapIsOne
     ; pr399TwentySevenMatchesTriadicDepth =
         Cross399.hyperfabricTwentySevenMatchesTriadicRelativeScale
+    ; pr399ReducedDimensionIsFiftyThree =
+        Cross399.reducedFiftyThreeIsExact
+    ; pr399NontrivialMoonshineCandidateIs196883 =
+        Cross399.nontrivialMoonshineCandidateIs196883
+    ; pr399LargestOggPrimeProductIs196883 =
+        Cross399.largestThreeOggPrimeProductIs196883
     ; macroscopicQFTCorrectionVanishes =
         refl
     ; terminalUnificationRemainsFalse =
         ExistingUnification.unificationPaperInterfaceTerminalFalse
     ; sourceCountIsSeventeen =
-        refl
+        Sources.canonicalRound5SourceCountIsSeventeen
     ; biologySourceCountIsTwentyThree =
         BiologySources.canonicalRound5ExtendedSourceCountIsTwentyThree
+    ; biologyCompletionSourceCountIsTwentyNine =
+        BiologyCompletionSources.canonicalRound5CompletionSourceCountIsTwentyNine
     }
