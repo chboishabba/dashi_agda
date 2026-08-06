@@ -96,7 +96,8 @@ isotropicSwapEquivariance :
   convolveScaled (swapMeasure measure)
   ≡
   swapField (convolveScaled measure)
-isotropicSwapEquivariance (finiteMeasure left right) = refl
+isotropicSwapEquivariance (finiteMeasure left right) =
+  cong (λ mass → field2 mass mass) (+-comm right left)
 
 ------------------------------------------------------------------------
 -- Slice and colour projections can erase distinctions.
