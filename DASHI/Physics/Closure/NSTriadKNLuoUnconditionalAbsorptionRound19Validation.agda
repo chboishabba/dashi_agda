@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoUnconditionalAbsorptionRound19Validatio
 
 ------------------------------------------------------------------------
 -- Cumulative validation root.
+-- Round-nineteen pinned checker trigger.
 --
 -- Imports Round Eighteen and checks the new hard audit mathematics:
 --
