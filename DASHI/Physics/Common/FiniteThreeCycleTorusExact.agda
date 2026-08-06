@@ -12,7 +12,8 @@ module DASHI.Physics.Common.FiniteThreeCycleTorusExact where
 -- shifts, a fixed completion channel and pullback on fields.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 data Residue3 : Set where
   residueMinus : Residue3
@@ -72,7 +73,7 @@ completedTranslateSecond (ordinaryTorusChannel point) =
   ordinaryTorusChannel (translateSecond point)
 completedTranslateSecond completionChannel = completionChannel
 
-Field : Set → Set₁
+Field : Set → Set
 Field State = CompletedTorusChannel → State
 
 pullbackFirst : ∀ {State : Set} → Field State → Field State
