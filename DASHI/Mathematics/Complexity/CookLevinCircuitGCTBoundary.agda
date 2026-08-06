@@ -25,12 +25,11 @@ module DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Bool using (Bool; false; true; if_then_else_)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact as K
@@ -117,16 +116,6 @@ record CircuitLowerBound (family : BooleanCircuitFamily) : Set₁ where
     lowerBound : Nat → Nat
     everyCorrectCircuitLarge : Set
     lowerBoundSuperPolynomial : Set
-
-invariantSeparatesWitnessedOrbits :
-  ∀ action observable →
-  K.Invariant action observable →
-  ∀ {left right} →
-  observable left ≡ observable right → ⊥ →
-  K.SameOrbit action left right → ⊥
-invariantSeparatesWitnessedOrbits action observable invariant
-    valuesDifferAsContradiction impossible sameOrbit =
-  impossible
 
 invariantInequalitySeparatesWitnessedOrbits :
   ∀ action observable →
