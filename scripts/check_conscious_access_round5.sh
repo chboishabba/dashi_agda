@@ -35,6 +35,15 @@ FILES=(
   DASHI/Biology/ConsciousAccessRound5ExtendedSourceAtlas.agda
   DASHI/Biology/ConsciousAccessRound5FullBoundary.agda
   DASHI/Biology/ConsciousAccessRound5Regression.agda
+  DASHI/Biology/ReducedFiftyThreeFibreExact.agda
+  DASHI/Biology/SignedSSPFRACTRANWeaveExact.agda
+  DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda
+  DASHI/Biology/EquivariantLaplacianSectorExact.agda
+  DASHI/Biology/MoonshineGradedStageBridgeExact.agda
+  DASHI/Biology/ClayCrossPollinationInterfaceExact.agda
+  DASHI/Biology/ConsciousAccessRound5CompletionSourceAtlas.agda
+  DASHI/Biology/ConsciousAccessRound5CompletionBoundary.agda
+  DASHI/Biology/ConsciousAccessRound5CompletionRegression.agda
 )
 
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
@@ -53,4 +62,5 @@ done
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/ConsciousAccessRound5Regression.agda \
+  DASHI/Biology/ConsciousAccessRound5CompletionRegression.agda \
   DASHI/Biology/Everything.agda
