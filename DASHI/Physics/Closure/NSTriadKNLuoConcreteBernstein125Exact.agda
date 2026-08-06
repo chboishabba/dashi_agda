@@ -13,8 +13,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoConcreteBernstein125Exact where
 --
 -- PURPOSE
 -- Specialize the finite Fourier-coefficient Bernstein producer to the
--- concrete integer-cube support constant.  If the base enumeration has mass
--- at most 125, then
+-- concrete integer-cube support constant. If the base enumeration has mass at
+-- most 125, then
 --
 --   outputL2Squared <= 125 * 8^q * inputL1Squared.
 --
@@ -24,12 +24,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoConcreteBernstein125Exact where
 
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicBernsteinRealizationExact as Bernstein
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicSupportCountExact as Support
 import DASHI.Physics.Closure.NSTriadKNLuoConcreteDyadicSupportCount125Exact as Concrete
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
 record ConcreteBernstein125Data (Slot : Set) : Set₁ where
   constructor concrete-bernstein-125-data
