@@ -157,17 +157,11 @@ vectorPartNormSqBelowNormSq : ∀ value →
     + Q.q3 value * Q.q3 value
   ≤ Norm.normSq value
 vectorPartNormSqBelowNormSq (Q.quat q0 q1 q2 q3) =
-  let
-    scalarNonnegative : 0ℚ ≤ q0 * q0
-    scalarNonnegative = FiniteL2.squareNonnegative q0
-  in
-  subst
-    (λ upper →
-      q1 * q1 + q2 * q2 + q3 * q3 ≤ upper)
-    (ℚRing.solve-∀ q0 q1 q2 q3)
-    (ℚP.+-monoˡ-≤
-      (q1 * q1 + q2 * q2 + q3 * q3)
-      scalarNonnegative)
+  Norm.nonnegativeDifferenceImpliesBelow
+    (subst
+      (λ selected → 0ℚ ≤ selected)
+      (ℚRing.solve-∀ q0 q1 q2 q3)
+      (FiniteL2.squareNonnegative q0))
 
 pointwiseGaugeDefectEnergyBelowQuaternionSum :
   ∀ background field site →
