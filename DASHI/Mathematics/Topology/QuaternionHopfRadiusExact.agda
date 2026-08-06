@@ -34,7 +34,7 @@ module DASHI.Mathematics.Topology.QuaternionHopfRadiusExact where
 -- instanton connections and Chern-number integrality remain separate results.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
@@ -111,12 +111,13 @@ unitPairMapsToTargetUnitQuadric a b unitPair
 
 hopfAtOneZero :
   hopfQuaternion Q.oneQ Q.zeroQ ≡ Q.zeroQ
-hopfAtOneZero = refl
+hopfAtOneZero =
+  Q.quaternionExt (solve []) (solve []) (solve []) (solve [])
 
 hopfScalarAtOneZero :
   hopfScalar Q.oneQ Q.zeroQ ≡ 1ℚ
-hopfScalarAtOneZero = refl
+hopfScalarAtOneZero = solve []
 
 hopfTargetNormAtOneZero :
   hopfTargetNormSq Q.oneQ Q.zeroQ ≡ 1ℚ
-hopfTargetNormAtOneZero = refl
+hopfTargetNormAtOneZero = solve []
