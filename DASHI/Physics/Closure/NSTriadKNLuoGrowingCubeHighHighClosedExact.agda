@@ -29,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGrowingCubeHighHighClosedExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Relation.Binary.PropositionalEquality using (subst)
 
