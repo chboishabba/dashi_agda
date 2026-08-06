@@ -1,0 +1,18 @@
+module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound27Validation where
+
+------------------------------------------------------------------------
+-- Focused validation root for the round-27 finite-coercivity continuation:
+-- signed scalar Wilson reduction; literal 18/6 incidence; exact W-local to
+-- W-global and sharp-flat-Wilson transport; the 10739/196608 terminal literal-
+-- Hessian coefficient; cubic Combes--Thomas shell arithmetic; and discounted
+-- RG loss tails.
+------------------------------------------------------------------------
+
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound26Validation
+import DASHI.Physics.YangMills.BalabanP33WilsonAtomSignedPerturbationExact
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonIncidenceExact
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLocalToSharpDefectExact
+import DASHI.Physics.YangMills.BalabanP33PhysicalTerminalHessianCoercivityExact
+import DASHI.Physics.YangMills.BalabanP33CubicShellSeriesExact
+import DASHI.Physics.YangMills.BalabanP33PhysicalInfiniteDiscountedLossExact

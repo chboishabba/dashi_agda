@@ -1,0 +1,39 @@
+name: Yang-Mills Clay highest-alpha round 27
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round27-signed-wilson-finite-propagator'
+  pull_request:
+    branches:
+      - 'agent/ym-clay-alpha-round26-physical-scale-uniformity'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33WilsonAtomSignedPerturbationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonSignedGlobalExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33CubicShellSeriesExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound27Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round27.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round27.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check signed Wilson, terminal Hessian and exact finite tails
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round27.sh
