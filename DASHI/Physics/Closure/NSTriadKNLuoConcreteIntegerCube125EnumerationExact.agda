@@ -28,6 +28,7 @@ open import Data.Product.Base using (_×_; _,_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _*_) 
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicSupportCountExact as Support
 
@@ -81,29 +82,29 @@ countCartesianAxis5 :
   ≡ five * Support.countMass second
 countCartesianAxis5 second
   rewrite Support.countAppend
-            (map (minusTwo ,_) second)
-            (concatMap (λ left → map (left ,_) second)
+            (map (λ right → minusTwo , right) second)
+            (concatMap (λ left → map (λ right → left , right) second)
               (minusOne ∷ origin ∷ plusOne ∷ plusTwo ∷ []))
         | Support.countAppend
-            (map (minusOne ,_) second)
-            (concatMap (λ left → map (left ,_) second)
+            (map (λ right → minusOne , right) second)
+            (concatMap (λ left → map (λ right → left , right) second)
               (origin ∷ plusOne ∷ plusTwo ∷ []))
         | Support.countAppend
-            (map (origin ,_) second)
-            (concatMap (λ left → map (left ,_) second)
+            (map (λ right → origin , right) second)
+            (concatMap (λ left → map (λ right → left , right) second)
               (plusOne ∷ plusTwo ∷ []))
         | Support.countAppend
-            (map (plusOne ,_) second)
-            (concatMap (λ left → map (left ,_) second)
+            (map (λ right → plusOne , right) second)
+            (concatMap (λ left → map (λ right → left , right) second)
               (plusTwo ∷ []))
         | Support.countAppend
-            (map (plusTwo ,_) second)
+            (map (λ right → plusTwo , right) second)
             []
-        | countMap (minusTwo ,_) second
-        | countMap (minusOne ,_) second
-        | countMap (origin ,_) second
-        | countMap (plusOne ,_) second
-        | countMap (plusTwo ,_) second =
+        | countMap (λ right → minusTwo , right) second
+        | countMap (λ right → minusOne , right) second
+        | countMap (λ right → origin , right) second
+        | countMap (λ right → plusOne , right) second
+        | countMap (λ right → plusTwo , right) second =
   solve (Support.countMass second ∷ [])
 
 Plane25 : Set
