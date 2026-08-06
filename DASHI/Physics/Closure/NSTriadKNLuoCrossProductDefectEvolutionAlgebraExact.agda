@@ -34,11 +34,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoCrossProductDefectEvolutionAlgebraExact
 -- the product rule and source bookkeeping are no longer assumptions.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≡_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
 
@@ -66,7 +66,6 @@ vecExt
   {left = Gram.vec3 lx ly lz}
   {right = Gram.vec3 .lx .ly .lz}
   refl refl refl = refl
-  where open import Agda.Builtin.Equality using (refl)
 
 crossFirstVariation :
   Gram.Vec3 → Gram.Vec3 → Gram.Vec3 → Gram.Vec3 → Gram.Vec3
@@ -215,16 +214,9 @@ defectRateFiniteSourceSplit left right [] = solve []
 defectRateFiniteSourceSplit left right (pair ∷ pairs) =
   trans
     (defectRateAdditive left right pair (sumDerivativePairs pairs))
-    (solve
-      ( defectRate left right pair
-      ∷ defectRate left right (sumDerivativePairs pairs)
-      ∷ sumDefectRates left right pairs
-      ∷ []))
-  where
-  tailMeaning :
-    defectRate left right (sumDerivativePairs pairs)
-    ≡ sumDefectRates left right pairs
-  tailMeaning = defectRateFiniteSourceSplit left right pairs
+    (cong
+      (λ tailRate → defectRate left right pair + tailRate)
+      (defectRateFiniteSourceSplit left right pairs))
 
 record FiveSourceDefectJet : Set where
   constructor fiveSourceDefectJet
