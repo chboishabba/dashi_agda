@@ -16,6 +16,7 @@ files=(
   DASHI/Mathematics/Algebra/NoetherianityMeaningSeparationExact.agda
   DASHI/Mathematics/Algebra/RationalC2HopfAlgebraExact.agda
   DASHI/Mathematics/Symmetry/KleinGroupActionInvariantExact.agda
+  DASHI/Mathematics/Symmetry/NoetherDiscreteVariationalExact.agda
   DASHI/Mathematics/Symmetry/NoetherDissipationDefectExact.agda
   DASHI/Mathematics/Topology/HopfInvariantOneDimensionGateExact.agda
   DASHI/Mathematics/Topology/QuaternionHopfRadiusExact.agda
@@ -57,6 +58,10 @@ checks=(
   'DASHI/Mathematics/Algebra/RationalC2HopfAlgebraExact.agda:leftAntipodeIdentity'
   'DASHI/Mathematics/Algebra/RationalC2HopfAlgebraExact.agda:hopfAlgebraIsNotHopfFibration'
   'DASHI/Mathematics/Symmetry/KleinGroupActionInvariantExact.agda:invariantOnOrbit'
+  'DASHI/Mathematics/Symmetry/NoetherDiscreteVariationalExact.agda:discreteNoetherConservation'
+  'DASHI/Mathematics/Symmetry/NoetherDiscreteVariationalExact.agda:discreteNoetherDefect'
+  'DASHI/Mathematics/Symmetry/NoetherDiscreteVariationalExact.agda:stepDefectLedger'
+  'DASHI/Mathematics/Symmetry/NoetherDiscreteVariationalExact.agda:exactStepConservesMomentum'
   'DASHI/Mathematics/Symmetry/NoetherDissipationDefectExact.agda:coupledNonlinearCancellation'
   'DASHI/Mathematics/Topology/HopfInvariantOneDimensionGateExact.agda:hurwitzDimensionToHopfDimension'
   'DASHI/Mathematics/Topology/QuaternionHopfRadiusExact.agda:quaternionHopfRadiusIdentity'
@@ -89,6 +94,7 @@ grep -q '10.1080/03081087.2020.1761281' DASHI/Mathematics/Algebra/HurwitzFrobeni
 grep -q '10.1007/BF01464225' DASHI/Mathematics/Algebra/NoetherianityMeaningSeparationExact.agda
 grep -q '10.1007/978-1-4612-0783-2' DASHI/Mathematics/Algebra/RationalC2HopfAlgebraExact.agda
 grep -q '10.1007/BFb0101433' DASHI/Mathematics/Algebra/RationalC2HopfAlgebraExact.agda
+grep -q '10.1017/S096249290100006X' DASHI/Mathematics/Symmetry/NoetherDiscreteVariationalExact.agda
 grep -q '10.48550/arXiv.physics/0503066' DASHI/Mathematics/Symmetry/NoetherDissipationDefectExact.agda
 grep -q '10.2307/1970147' DASHI/Mathematics/Topology/HopfInvariantOneDimensionGateExact.agda
 grep -q '10.1007/BF01457962' DASHI/Mathematics/Topology/QuaternionHopfUnitOrbitExact.agda
@@ -101,6 +107,7 @@ grep -q 'does not prove the analytic real division property' DASHI/Mathematics/A
 grep -q 'do not manufacture the real analytic' DASHI/Mathematics/Algebra/CompositionAlgebraCoreExact.agda
 grep -q 'No inhabitant of the theorem records is supplied' DASHI/Mathematics/Algebra/HurwitzFrobeniusClassificationBoundary.agda
 grep -q 'does not identify this finite cocommutative example' DASHI/Mathematics/Algebra/RationalC2HopfAlgebraExact.agda
+grep -q 'does not construct a configuration manifold' DASHI/Mathematics/Symmetry/NoetherDiscreteVariationalExact.agda
 grep -q 'does not prove Adams' DASHI/Mathematics/Topology/HopfInvariantOneDimensionGateExact.agda
 grep -q 'does not prove that every geometric fibre is exactly one such orbit' DASHI/Mathematics/Topology/QuaternionHopfUnitOrbitExact.agda
 grep -q 'No topological identity is promoted' DASHI/Physics/YangMills/YangMillsHurwitzHopfStructuralGateExact.agda
