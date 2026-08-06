@@ -188,7 +188,7 @@ conjugateHistory (first , (middle , last)) =
   (chargeConjugation middle , chargeConjugation last)
 
 conjugationDiffersFromReversal :
-  conjugateHistory historyABC ≡ reverseOrder historyABC → ⊥
+  conjugateHistory historyACB ≡ reverseOrder historyACB → ⊥
 conjugationDiffersFromReversal ()
 
 record FiniteHistoryFunctionalBoundary : Set where
