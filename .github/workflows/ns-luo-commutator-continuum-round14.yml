@@ -19,6 +19,10 @@ on:
       - '.github/workflows/ns-luo-commutator-continuum-round14.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  statuses: write
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -53,6 +57,24 @@ jobs:
             ns-luo-round14-check.log
             ns-luo-round14-agda.log
           if-no-files-found: warn
+      - name: Publish checker status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ steps.check.outputs.status }}
+        shell: bash
+        run: |
+          state=success
+          description='Round 14 Agda checker passed'
+          if [[ "$CHECK_STATUS" != '0' ]]; then
+            state=failure
+            description='Round 14 Agda checker failed'
+          fi
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$state" \
+            -f context='round14-agda' \
+            -f description="$description"
       - name: Fail on checker error
         if: steps.check.outputs.status != '0'
         run: exit 1
