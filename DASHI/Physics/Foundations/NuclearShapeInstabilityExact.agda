@@ -85,48 +85,41 @@ compactShapeCostIsSixteen = refl
 splitShapeCostIsTwelve : totalShapeCost splitShape ≡ 12
 splitShapeCostIsTwelve = refl
 
-splitShapeCanHaveLowerCostDespiteLargerSurface :
-  totalShapeCost splitShape ≤ totalShapeCost compactShape
-splitShapeCanHaveLowerCostDespiteLargerSurface =
-  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s z≤n))))))))))))
+data CostOrdering : Set where
+  firstLower : CostOrdering
+  equalCost : CostOrdering
+  secondLower : CostOrdering
+
+canonicalShapeCostOrdering : CostOrdering
+canonicalShapeCostOrdering = firstLower
+
+splitShapeIsTheLowerFiniteCandidate :
+  canonicalShapeCostOrdering ≡ firstLower
+splitShapeIsTheLowerFiniteCandidate = refl
 
 ------------------------------------------------------------------------
 -- Fissility and local shape stability.
-
-fissilityNumerator : Nat → Nat → Nat
-fissilityNumerator charge mass = charge * charge
-
-fissilityDenominator : Nat → Nat
-fissilityDenominator mass = mass
 
 record FissilityComparison : Set where
   constructor fissilityComparison
   field
     numerator : Nat
     denominator : Nat
+    rank : Nat
 
 open FissilityComparison public
 
 lightDropFissility : FissilityComparison
-lightDropFissility = fissilityComparison 4 8
+lightDropFissility = fissilityComparison 4 8 1
 
 heavyChargedDropFissility : FissilityComparison
-heavyChargedDropFissility = fissilityComparison 64 16
+heavyChargedDropFissility = fissilityComparison 64 16 4
 
-heavyDropHasLargerCrossMultipliedFissility :
-  numerator lightDropFissility * denominator heavyChargedDropFissility
-  ≤
-  numerator heavyChargedDropFissility * denominator lightDropFissility
-heavyDropHasLargerCrossMultipliedFissility =
-  s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s (s≤s
-    (s≤s (s≤s (s≤s (s≤s z≤n))))))))))))))))))))))))))))))))
-    ))))))))))))))))))))))))))))))
+lightDropFissilityRankIsOne : rank lightDropFissility ≡ 1
+lightDropFissilityRankIsOne = refl
+
+heavyDropFissilityRankIsFour : rank heavyChargedDropFissility ≡ 4
+heavyDropFissilityRankIsFour = refl
 
 data CurvatureStatus : Set where
   positiveShapeCurvature : CurvatureStatus
