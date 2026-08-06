@@ -10,6 +10,7 @@ bash scripts/check_yang_mills_clay_highest_alpha_round29.sh
 files=(
   DASHI/Physics/YangMills/BalabanStrongCouplingSUFourDimensionalMarginExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingSU2ActionNormalizationExact.agda
+  DASHI/Physics/YangMills/BalabanStrongCouplingSU4DHessianAssemblyExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingBetaRhoSeparationExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingPoincareBudgetExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda
@@ -36,6 +37,9 @@ checks=(
   'BalabanStrongCouplingSU2ActionNormalizationExact.agda:finiteVolumeExponentIsConstantMinusPenalty'
   'BalabanStrongCouplingSU2ActionNormalizationExact.agda:configuredInteriorActionCoefficientExact'
   'BalabanStrongCouplingSU2ActionNormalizationExact.agda:exponentAndPenaltySecondVariationsOppose'
+  'BalabanStrongCouplingSU4DHessianAssemblyExact.agda:diagonalPlusCrossBudgetExact'
+  'BalabanStrongCouplingSU4DHessianAssemblyExact.agda:assemblePublishedHessianUpper'
+  'BalabanStrongCouplingSU4DHessianAssemblyExact.agda:configuredSU2InteriorTotalBudgetExact'
   'BalabanStrongCouplingBetaRhoSeparationExact.agda:rhoAgainstThresholdSlackExact'
   'BalabanStrongCouplingBetaRhoSeparationExact.agda:rhoSubstitutedNormalizedMarginExact'
   'BalabanStrongCouplingPoincareBudgetExact.agda:logSobolevIsTwicePoincare'
@@ -59,6 +63,7 @@ done
 
 grep -q '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/BalabanStrongCouplingSUFourDimensionalMarginExact.agda
 grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanStrongCouplingSU2ActionNormalizationExact.agda
+grep -q 'Lemma 4.1' DASHI/Physics/YangMills/BalabanStrongCouplingSU4DHessianAssemblyExact.agda
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanStrongCouplingBetaRhoSeparationExact.agda
 grep -q '10.1007/978-3-540-36107-7_1' DASHI/Physics/YangMills/BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda
 grep -q 'No canonical inhabitant' DASHI/Physics/YangMills/BalabanStrongCouplingBetaRhoSeparationExact.agda
