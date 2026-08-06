@@ -38,6 +38,7 @@ FILES=(
   DASHI/Physics/Foundations/UnifiedEffectiveActionBoundary.agda
   DASHI/Physics/Foundations/Round5SourceAtlas.agda
   DASHI/Physics/Foundations/Round5CombinedSourceBoundary.agda
+  DASHI/Physics/Foundations/Round5CompletionRegression.agda
   DASHI/Physics/Foundations/Round5FullBoundary.agda
   DASHI/Physics/Foundations/Round5Regression.agda
   DASHI/Physics/Foundations/Everything.agda
