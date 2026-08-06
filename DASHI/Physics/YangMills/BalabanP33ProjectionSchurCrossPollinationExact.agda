@@ -32,9 +32,11 @@ module DASHI.Physics.YangMills.BalabanP33ProjectionSchurCrossPollinationExact wh
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Bool using (Bool; true; false)
 open import Data.Rational.Base as ℚ using
-  (ℚ; _*_; _-_; _≤_)
+  (ℚ; _+_; _*_; _-_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst₂)
 
 import DASHI.Physics.Common.FiniteProjectionOffDiagonalExact as Projection
 import DASHI.Physics.Common.WeightedStrictLossTransportExact as Loss
@@ -85,27 +87,35 @@ sharedStrictMarginBelowYMOneStep :
   ≤ Pullback.half * coarse →
   margin ≤ Pullback.half * (coarse - loss)
 sharedStrictMarginBelowYMOneStep margin coarse loss admissible =
-  Loss.strictMarginBelowPullBack
-    margin
-    coarse
-    (halfLossStep loss ∷ [])
-    admissible
+  let
+    steps = halfLossStep loss ∷ []
+
+    leftTransport :
+      margin + Pullback.half * loss
+      ≡ margin + Loss.discountedLoss steps
+    leftTransport = ℚRing.solve-∀ margin coarse loss
+
+    rightTransport :
+      Pullback.half * coarse
+      ≡ Loss.terminalWeight steps * coarse
+    rightTransport = ℚRing.solve-∀ margin coarse loss
+
+    sharedBudget : Loss.StrictMarginAdmissible margin coarse steps
+    sharedBudget =
+      subst₂ _≤_ leftTransport rightTransport admissible
+  in
+  Loss.strictMarginBelowPullBack margin coarse steps sharedBudget
 
 record YMClayCrossPollinationBoundary : Set where
   constructor ymClayCrossPollinationBoundary
   field
-    projectionLeakageAndSchurShareCoupling : Set
-    projectionLeakageAndSchurShareCouplingWitness :
-      projectionLeakageAndSchurShareCoupling
-    sharedAlgebraSuppliesPhysicalBAndCInverseBounds : Set
-    sharedAlgebraDoesNotSupplyPhysicalBAndCInverseBounds :
-      sharedAlgebraSuppliesPhysicalBAndCInverseBounds → Set
+    projectionLeakageAndSchurShareCoupling : Bool
+    projectionLeakageAndSchurShareCouplingIsTrue :
+      projectionLeakageAndSchurShareCoupling ≡ true
+    sharedAlgebraSuppliesPhysicalBAndCInverseBounds : Bool
+    sharedAlgebraSuppliesPhysicalBAndCInverseBoundsIsFalse :
+      sharedAlgebraSuppliesPhysicalBAndCInverseBounds ≡ false
 
 canonicalYMClayCrossPollinationBoundary : YMClayCrossPollinationBoundary
 canonicalYMClayCrossPollinationBoundary =
-  ymClayCrossPollinationBoundary
-    ⊤ tt
-    ⊥ (λ impossible → ⊥)
-  where
-  open import Data.Unit using (⊤; tt)
-  open import Data.Empty using (⊥)
+  ymClayCrossPollinationBoundary true refl false refl
