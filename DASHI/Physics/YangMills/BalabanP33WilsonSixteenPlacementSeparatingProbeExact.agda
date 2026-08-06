@@ -9,7 +9,6 @@ module DASHI.Physics.YangMills.BalabanP33WilsonSixteenPlacementSeparatingProbeEx
 -- DOI: 10.1007/BF01240221.
 --
 -- DASHI CONTRIBUTION
---
 -- Make the four diagonal second-jet placements and twelve ordered first--first
 -- placements into a literal separating audit family.  Agreement of the total
 -- Wilson defect is not enough; agreement on all sixteen probes determines the
@@ -18,6 +17,8 @@ module DASHI.Physics.YangMills.BalabanP33WilsonSixteenPlacementSeparatingProbeEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_+_)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Common.SeparatingProbeFamilyExact as Common
@@ -142,16 +143,14 @@ sixteenPlacementProbeSystem =
     observePlacement
     placementProbesSeparate
 
-diagonalPlacementCount : ℚ
+diagonalPlacementCount : Nat
 diagonalPlacementCount = 4
 
-orderedCrossPlacementCount : ℚ
+orderedCrossPlacementCount : Nat
 orderedCrossPlacementCount = 12
 
-totalPlacementCount : ℚ
+totalPlacementCount : Nat
 totalPlacementCount = diagonalPlacementCount + orderedCrossPlacementCount
-  where
-  open import Data.Rational.Base using (_+_)
 
 totalPlacementCountIsSixteen : totalPlacementCount ≡ 16
 totalPlacementCountIsSixteen = refl
