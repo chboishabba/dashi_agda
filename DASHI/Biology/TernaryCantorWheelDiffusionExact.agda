@@ -101,8 +101,8 @@ record WheelMass : Set where
 open WheelMass public
 
 rotateMassClockwise : WheelMass → WheelMass
-rotateMassClockwise (wheelMass negative zero positive) =
-  wheelMass positive negative zero
+rotateMassClockwise (wheelMass negativeMass zeroMass positiveMass) =
+  wheelMass positiveMass negativeMass zeroMass
 
 rotateMassClockwiseThree :
   (mass : WheelMass) →
@@ -110,13 +110,13 @@ rotateMassClockwiseThree :
     (rotateMassClockwise
       (rotateMassClockwise mass))
   ≡ mass
-rotateMassClockwiseThree (wheelMass negative zero positive) = refl
+rotateMassClockwiseThree (wheelMass negativeMass zeroMass positiveMass) = refl
 
 moveOneNegativeToZero : WheelMass → WheelMass
-moveOneNegativeToZero (wheelMass zero middle positive) =
-  wheelMass zero middle positive
-moveOneNegativeToZero (wheelMass (suc negative) middle positive) =
-  wheelMass negative (suc middle) positive
+moveOneNegativeToZero (wheelMass zero zeroMass positiveMass) =
+  wheelMass zero zeroMass positiveMass
+moveOneNegativeToZero (wheelMass (suc negativeMass) zeroMass positiveMass) =
+  wheelMass negativeMass (suc zeroMass) positiveMass
 
 canonicalWheelGradient : WheelMass
 canonicalWheelGradient = wheelMass 3 0 0
