@@ -37,6 +37,7 @@ import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact
 import DASHI.Physics.Foundations.FiniteUltrametricReebFlowExact
 import DASHI.Physics.Foundations.TriToBiSingularJunctionExact
 import DASHI.Physics.Foundations.TriToBiTransportExact
+import DASHI.Physics.Foundations.TriToBiPhaseDialecticExact
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas
 import DASHI.Physics.Foundations.Round5AttachedFormalismBoundary
 import DASHI.Physics.Foundations.Round5AttachedFormalismRegression
