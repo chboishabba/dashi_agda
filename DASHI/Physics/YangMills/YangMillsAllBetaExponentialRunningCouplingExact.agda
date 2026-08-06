@@ -31,7 +31,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.YangMills.YangMillsLatticeGapScaleCompatibilityExact as Scale
 
@@ -43,24 +43,9 @@ rescaledGeometricGapIsRatioPower :
   ∀ inverseSpacingBase gapBase depth →
   geometricPhysicalGapLower inverseSpacingBase gapBase depth
   ≡ Scale.pow (inverseSpacingBase * gapBase) depth
-rescaledGeometricGapIsRatioPower
-    inverseSpacingBase gapBase depth =
-  let
-    product = Scale.powProduct inverseSpacingBase gapBase depth
-  in
-  trans
-    (solve
-      (Scale.pow inverseSpacingBase depth
-      ∷ Scale.pow gapBase depth
-      ∷ []))
-    (solve
-      (Scale.pow inverseSpacingBase depth
-      ∷ Scale.pow gapBase depth
-      ∷ Scale.pow (inverseSpacingBase * gapBase) depth
-      ∷ []))
+rescaledGeometricGapIsRatioPower inverseSpacingBase gapBase depth =
+  sym (Scale.powProduct inverseSpacingBase gapBase depth)
 
--- The previous theorem is also available directly by symmetry of powProduct;
--- this separately named proof makes the physical interpretation explicit.
 rescaledGeometricGapRatioExact :
   ∀ inverseSpacingBase gapBase depth →
   Scale.pow (inverseSpacingBase * gapBase) depth
