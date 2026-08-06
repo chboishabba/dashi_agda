@@ -126,9 +126,9 @@ finiteErrorAgainstClosedForm :
   oneMinusFourth ratio
     * (total - cubicShellPartialSum ratio count)
   ≡ power ratio count * cubicShellTail count ratio
-finiteErrorAgainstClosedForm ratio total witness count =
-  let finite = cubicShellFiniteClosedForm count ratio
-  in
+finiteErrorAgainstClosedForm ratio total witness count
+  rewrite scaledClosedForm witness
+        | cubicShellFiniteClosedForm count ratio =
   ℚRing.solve-∀
     (oneMinusFourth ratio)
     total
@@ -136,8 +136,6 @@ finiteErrorAgainstClosedForm ratio total witness count =
     (cubicShellNumerator ratio)
     (power ratio count)
     (cubicShellTail count ratio)
-    (scaledClosedForm witness)
-    finite
 
 cubicShellFiniteIdentityLevel : ProofLevel
 cubicShellFiniteIdentityLevel = machineChecked
