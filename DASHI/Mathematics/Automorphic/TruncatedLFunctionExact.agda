@@ -121,11 +121,6 @@ localFactorAgreement agreement prime T
     with coefficientsAgree agreement prime
 ... | refl = refl
 
-productOfPointwiseEqualLists :
-  ∀ first second →
-  (∀ index → Set) → Set
-productOfPointwiseEqualLists first second witness = Set
-
 truncatedEulerProductsAgree :
   ∀ {first second} → CoefficientAgreement first second →
   ∀ T primes →
