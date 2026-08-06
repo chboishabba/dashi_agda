@@ -29,6 +29,8 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteFourierFromUniqueResolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteFourierRestrictionContractiveExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteModeRestrictionContractiveExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGalerkinInteractionDifferenceExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGalerkinTensorDifferenceExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinDiagonalSelectionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalCarrierRound16Validation.agda
 )
