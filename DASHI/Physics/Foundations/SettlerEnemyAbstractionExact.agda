@@ -51,9 +51,9 @@ CompressionInjective =
   x ≡ y
 
 rhetoricalCompressionIsNotInjective : ¬ CompressionInjective
-rhetoricalCompressionIsNotInjective injective
-  with injective hamasActor palestinianCivilianPopulation refl
-... | ()
+rhetoricalCompressionIsNotInjective injective =
+  hamasActorIsNotCivilianPopulation
+    (injective hamasActor palestinianCivilianPopulation refl)
 
 ------------------------------------------------------------------------
 -- Explicit lexical use and structural comparison are separate authorities.
