@@ -11,6 +11,7 @@ fi
 
 FILES=(
   DASHI/Biology/DASHIYijingTernaryDivinationExact.agda
+  DASHI/Biology/DASHIYijingRelationalOperatorsExact.agda
   DASHI/Biology/OrientedZeroWaveTransitionExact.agda
   DASHI/Biology/DialecticalSheetSpiralExact.agda
   DASHI/Biology/TriadicBraidDialecticExact.agda
