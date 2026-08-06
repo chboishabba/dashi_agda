@@ -8,7 +8,8 @@ import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as R5
 
 ------------------------------------------------------------------------
 -- Sources added by the SSP-weave, reduced-53, self-indexing, equivariant-
--- Laplacian, modular-stage, and Clay-interface completion.
+-- Laplacian, modular-stage, Clay-interface, jet, reachability, and exceptional-
+-- lattice protocol completion.
 
 borcherdsMoonshineProofSource : R4.SourceRecord
 borcherdsMoonshineProofSource =
@@ -76,6 +77,28 @@ hessChildsTransportCommutatorSource =
     "Supplies a recent sharpness and regularity audit for Riesz-type transport commutators, useful as a comparison for the dedicated NS continuum producer."
     "The Riesz-interaction results are not treated as a direct proof of the repository's Navier--Stokes Littlewood--Paley commutator."
 
+viazovskaE8Source : R4.SourceRecord
+viazovskaE8Source =
+  R4.sourceRecord
+    "Maryna S. Viazovska"
+    "The Sphere Packing Problem in Dimension 8"
+    "Annals of Mathematics"
+    2017
+    "10.4007/annals.2017.185.3.7"
+    "Supplies the rigorous E8 sphere-packing benchmark underlying the fixed eight-dimensional comparison protocol."
+    "An embedding with dimension eight or 240 apparent directions is not thereby proved isometric to E8."
+
+cohnLeechPackingSource : R4.SourceRecord
+cohnLeechPackingSource =
+  R4.sourceRecord
+    "Henry Cohn; Abhinav Kumar; Stephen D. Miller; Danylo Radchenko; Maryna Viazovska"
+    "The Sphere Packing Problem in Dimension 24"
+    "Annals of Mathematics"
+    2017
+    "10.4007/annals.2017.185.3.8"
+    "Supplies the rigorous Leech-lattice sphere-packing benchmark underlying the fixed twenty-four-dimensional comparison protocol."
+    "An embedding with dimension twenty-four or 196560 apparent directions is not thereby proved isometric to the Leech lattice."
+
 canonicalRound5CompletionSources : List R4.SourceRecord
 canonicalRound5CompletionSources =
   R5.canonicalRound5ExtendedSources
@@ -86,12 +109,14 @@ canonicalRound5CompletionSources =
     ∷ conwayFRACTRANDOISource
     ∷ dAnconaCommutatorSource
     ∷ hessChildsTransportCommutatorSource
+    ∷ viazovskaE8Source
+    ∷ cohnLeechPackingSource
     ∷ [])
 
 canonicalRound5CompletionSourceCount : Nat
 canonicalRound5CompletionSourceCount =
   R4.listCount canonicalRound5CompletionSources
 
-canonicalRound5CompletionSourceCountIsTwentyNine :
-  canonicalRound5CompletionSourceCount ≡ 29
-canonicalRound5CompletionSourceCountIsTwentyNine = refl
+canonicalRound5CompletionSourceCountIsThirtyOne :
+  canonicalRound5CompletionSourceCount ≡ 31
+canonicalRound5CompletionSourceCountIsThirtyOne = refl
