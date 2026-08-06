@@ -43,8 +43,6 @@ import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
-
 record HystereticReentry : Set where
   constructor hystereticReentry
   field
@@ -90,17 +88,7 @@ localHysteresisEntryTax reentry =
     leftMeaning
     scaled
 
-record UniformHysteresisFamily : Set where
-  constructor uniformHysteresisFamily
-  field
-    commonThreshold commonGap : ℚ
-    commonThresholdNonnegative : 0ℚ ≤ commonThreshold
-    commonGapNonnegative : 0ℚ ≤ commonGap
-    rises : List ℚ
-    everyRisePaysGap :
-      ListRiseCertificate commonGap rises
-
-and data ListRiseCertificate (gap : ℚ) : List ℚ → Set where
+data ListRiseCertificate (gap : ℚ) : List ℚ → Set where
   noRises : ListRiseCertificate gap []
   nextRise :
     ∀ {rise rises} →
@@ -108,6 +96,15 @@ and data ListRiseCertificate (gap : ℚ) : List ℚ → Set where
     gap ≤ rise →
     ListRiseCertificate gap rises →
     ListRiseCertificate gap (rise ∷ rises)
+
+record UniformHysteresisFamily : Set where
+  constructor uniformHysteresisFamily
+  field
+    commonThreshold commonGap : ℚ
+    commonThresholdNonnegative : 0ℚ ≤ commonThreshold
+    commonGapNonnegative : 0ℚ ≤ commonGap
+    rises : List ℚ
+    everyRisePaysGap : ListRiseCertificate commonGap rises
 
 open UniformHysteresisFamily public
 
@@ -131,107 +128,77 @@ finiteGapCountBelowRise gap (rise ∷ rises)
     gapBelowRise
     (finiteGapCountBelowRise gap rises tailCertificate)
 
+finiteUniformHysteresisEntryTax :
+  ∀ threshold gap rises →
+  0ℚ ≤ threshold →
+  ListRiseCertificate gap rises →
+  gap * numberWeightedBy threshold rises
+  ≤ threshold * totalRise rises
+finiteUniformHysteresisEntryTax threshold gap [] thresholdNN noRises =
+  ℚₚ.≤-refl
+finiteUniformHysteresisEntryTax threshold gap (rise ∷ rises)
+  thresholdNN
+  (nextRise riseNonnegative gapBelowRise tailCertificate) =
+  let
+    localRaw : threshold * gap ≤ threshold * rise
+    localRaw =
+      ℚₚ.*-monoˡ-≤-nonNeg threshold gapBelowRise
+      where
+      instance
+        thresholdNonnegativeInstance = nonNegative thresholdNN
+
+    local : gap * threshold ≤ threshold * rise
+    local =
+      subst
+        (λ left → left ≤ threshold * rise)
+        (solve (threshold ∷ gap ∷ []))
+        localRaw
+
+    tail =
+      finiteUniformHysteresisEntryTax
+        threshold gap rises thresholdNN tailCertificate
+
+    summed = ℚₚ.+-mono-≤ local tail
+
+    leftMeaning :
+      gap * threshold
+        + gap * numberWeightedBy threshold rises
+      ≡ gap * numberWeightedBy threshold (rise ∷ rises)
+    leftMeaning =
+      solve
+        ( gap ∷ threshold
+        ∷ numberWeightedBy threshold rises
+        ∷ [])
+
+    rightMeaning :
+      threshold * rise + threshold * totalRise rises
+      ≡ threshold * totalRise (rise ∷ rises)
+    rightMeaning =
+      solve (threshold ∷ rise ∷ totalRise rises ∷ [])
+  in
+  subst
+    (λ left → left ≤ threshold * totalRise (rise ∷ rises))
+    leftMeaning
+    (subst
+      (λ right →
+        gap * threshold
+          + gap * numberWeightedBy threshold rises
+        ≤ right)
+      rightMeaning
+      summed)
+
 uniformHysteresisEntryTax :
   ∀ family →
   commonGap family
     * numberWeightedBy (commonThreshold family) (rises family)
-  ≤
-  commonThreshold family * totalRise (rises family)
+  ≤ commonThreshold family * totalRise (rises family)
 uniformHysteresisEntryTax family =
-  let
-    countBound =
-      finiteGapCountBelowRise
-        (commonGap family)
-        (rises family)
-        (everyRisePaysGap family)
-
-    leftCount =
-      numberWeightedBy (commonGap family) (rises family)
-
-    leftCountNonnegative : 0ℚ ≤ leftCount
-    leftCountNonnegative =
-      let
-        prove : ∀ rises → 0ℚ ≤ numberWeightedBy (commonGap family) rises
-        prove [] = ℚₚ.≤-refl
-        prove (_ ∷ tail) =
-          L2.addNonnegative
-            (commonGapNonnegative family)
-            (prove tail)
-      in
-      prove (rises family)
-
-    totalRiseNonnegative : 0ℚ ≤ totalRise (rises family)
-    totalRiseNonnegative =
-      let
-        prove :
-          ∀ rises →
-          ListRiseCertificate (commonGap family) rises →
-          0ℚ ≤ totalRise rises
-        prove [] noRises = ℚₚ.≤-refl
-        prove (rise ∷ tail)
-          (nextRise riseNN gapBelow tailCertificate) =
-          L2.addNonnegative riseNN (prove tail tailCertificate)
-      in
-      prove (rises family) (everyRisePaysGap family)
-
-    multiplied =
-      L2.nonnegativeProductMonotone
-        (commonThresholdNonnegative family)
-        leftCountNonnegative
-        (commonThresholdNonnegative family)
-        totalRiseNonnegative
-        ℚₚ.≤-refl
-        countBound
-
-    leftMeaning :
-      commonThreshold family * leftCount
-      ≡
-      commonGap family
-        * numberWeightedBy (commonThreshold family) (rises family)
-    leftMeaning =
-      let
-        count : ℚ
-        count = numberWeightedBy 1 (rises family)
-
-        thresholdCount :
-          numberWeightedBy (commonThreshold family) (rises family)
-          ≡ commonThreshold family * count
-        thresholdCount = weightedCountFactor (commonThreshold family) (rises family)
-
-        gapCount :
-          numberWeightedBy (commonGap family) (rises family)
-          ≡ commonGap family * count
-        gapCount = weightedCountFactor (commonGap family) (rises family)
-      in
-      subst
-        (λ thresholdWeighted →
-          commonThreshold family * leftCount
-          ≡ commonGap family * thresholdWeighted)
-        (sym thresholdCount)
-        (subst
-          (λ gapWeighted →
-            commonThreshold family * gapWeighted
-            ≡ commonGap family * (commonThreshold family * count))
-          (sym gapCount)
-          (solve
-            ( commonThreshold family
-            ∷ commonGap family
-            ∷ count
-            ∷ [])))
-  in
-  subst
-    (λ left → left ≤ commonThreshold family * totalRise (rises family))
-    leftMeaning
-    multiplied
-  where
-  weightedCountFactor :
-    ∀ weight rises →
-    numberWeightedBy weight rises
-    ≡ weight * numberWeightedBy 1 rises
-  weightedCountFactor weight [] = solve (weight ∷ [])
-  weightedCountFactor weight (_ ∷ tail)
-    rewrite weightedCountFactor weight tail =
-    solve (weight ∷ numberWeightedBy 1 tail ∷ [])
+  finiteUniformHysteresisEntryTax
+    (commonThreshold family)
+    (commonGap family)
+    (rises family)
+    (commonThresholdNonnegative family)
+    (everyRisePaysGap family)
 
 zeroGapPaysNothing :
   ∀ threshold rise →
