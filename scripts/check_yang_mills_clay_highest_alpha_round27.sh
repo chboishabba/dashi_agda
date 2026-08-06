@@ -13,6 +13,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33WilsonAtomSignedPerturbationExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonSignedGlobalExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33CubicShellSeriesExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda
@@ -40,6 +41,10 @@ checks=(
   'BalabanP33PhysicalWilsonSignedGlobalExact.agda:physicalWilsonSignedGlobalBeforeIncidence'
   'BalabanP33PhysicalWilsonSignedGlobalExact.agda:physicalWilsonGlobalCoefficientExact'
   'BalabanP33PhysicalWilsonSignedGlobalExact.agda:physicalWilsonSignedGlobalThirteenTwentyFourths'
+  'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:sharpWilsonCoefficientFromRho'
+  'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:physicalWilsonDefectIsBackgroundMinusFlat'
+  'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:physicalWilsonLocalImpliesSharpDefect'
+  'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:literalWilsonLocalImpliesSharpDefect'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:terminalPhysicalCoefficientExact'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:terminalCoefficientSplitsAtOneThirtySecond'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:literalHessianCoerciveAtTerminalCoefficient'
@@ -62,7 +67,7 @@ done
 grep -q '10.1103/PhysRevD.10.2445' \
   DASHI/Physics/YangMills/BalabanP33WilsonAtomSignedPerturbationExact.agda
 grep -q '10.1007/BF01240355' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonSignedGlobalExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda
 grep -q '10.1007/BF01211042' \
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda
 grep -q '10.1007/BF01466594' \
