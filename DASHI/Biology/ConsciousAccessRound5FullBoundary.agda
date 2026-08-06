@@ -134,8 +134,8 @@ record ConsciousAccessRound5Boundary : Set where
         Entropy.binaryCapacityFifteen
       ≡ true
 
-    extendedSourceCountIsTwentyTwo :
-      Sources.canonicalRound5ExtendedSourceCount ≡ 22
+    extendedSourceCountIsTwentyThree :
+      Sources.canonicalRound5ExtendedSourceCount ≡ 23
 
 open ConsciousAccessRound5Boundary public
 
@@ -180,7 +180,7 @@ canonicalConsciousAccessRound5Boundary =
     Neural.fmriProjectionCollision
     NSYM.finiteMassGapIsOne
     Entropy.fifteenBitsCoverTernaryNineSheet
-    Sources.canonicalRound5ExtendedSourceCountIsTwentyTwo
+    Sources.canonicalRound5ExtendedSourceCountIsTwentyThree
 
 ------------------------------------------------------------------------
 -- Unified authority boundary.  The exact finite constructions are reusable
