@@ -40,4 +40,5 @@ for file in "${FILES[@]}"; do
 done
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Biology/ConsciousAccessRound5Regression.agda
+  DASHI/Biology/ConsciousAccessRound5Regression.agda \
+  DASHI/Biology/Everything.agda
