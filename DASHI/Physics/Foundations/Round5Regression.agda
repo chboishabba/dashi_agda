@@ -6,9 +6,13 @@ import DASHI.Biology.ConsciousAccessRound5FullBoundary as BiologyRound5
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as BiologyNSYM
+import DASHI.Biology.TernaryHypercubeHyperfabricExact as BiologyHyperfabric
+import DASHI.Biology.TriadicCarryResidualExact as TriadicCarry
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact as Information
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact as ScaleTheory
+import DASHI.Physics.Foundations.PadicCausalChartLosslessExact as PadicLossless
+import DASHI.Physics.Foundations.ModularProjectionQuantisationExact as Modular
 import DASHI.Physics.Foundations.RGMDLExhaustionChambersExact as Flow
 import DASHI.Physics.Foundations.DimensionPowerCountingBoundaryExact as Dimension
 import DASHI.Physics.Foundations.DiscreteLorentzEmergenceBoundaryExact as Lorentz
@@ -26,6 +30,7 @@ import DASHI.Physics.Foundations.FiniteGraphGaugeScalarExact as FiniteGauge
 import DASHI.Physics.Foundations.FiniteFockExcitationExact as Fock
 import DASHI.Physics.Foundations.KernelQFTEmergenceObligations as Quantum
 import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact as Hypotheses
+import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact as Cross399
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Unified
 import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
 import DASHI.Physics.Foundations.Round5FullBoundary as Full
@@ -65,6 +70,13 @@ triadicScaleRegression :
   3 * ScaleTheory.scaleAtDepth 1 ScaleTheory.depth1
 triadicScaleRegression = refl
 
+pr399ScaleCrossPollinationRegression :
+  BiologyHyperfabric.siteCount BiologyHyperfabric.sheetThreeByNine
+  ≡
+  ScaleTheory.scaleAtDepth 1 ScaleTheory.depth0
+pr399ScaleCrossPollinationRegression =
+  Cross399.hyperfabricTwentySevenMatchesTriadicRelativeScale
+
 globalTheorySelectionRegression :
   ScaleTheory.posteriorDescriptionScore
     ScaleTheory.selectedUniverse
@@ -72,6 +84,49 @@ globalTheorySelectionRegression :
   ≡
   5
 globalTheorySelectionRegression = refl
+
+padicResidualPacketRegression :
+  PadicLossless.decodePacket
+    (PadicLossless.encodePacket
+      TriadicCarry.residue2
+      TriadicCarry.residue1)
+  ≡
+  TriadicCarry.residue1
+padicResidualPacketRegression =
+  PadicLossless.packetLossless
+    TriadicCarry.residue2
+    TriadicCarry.residue1
+
+padicSheetResidualRegression :
+  PadicLossless.decodeSheetResidual
+    (TriadicCarry.residue1 , TriadicCarry.residue2)
+    (PadicLossless.encodeSheetResidual
+      (TriadicCarry.residue1 , TriadicCarry.residue2)
+      (TriadicCarry.residue2 , TriadicCarry.residue0))
+  ≡
+  (TriadicCarry.residue2 , TriadicCarry.residue0)
+padicSheetResidualRegression =
+  PadicLossless.decodeEncodeSheetResidual
+    (TriadicCarry.residue1 , TriadicCarry.residue2)
+    (TriadicCarry.residue2 , TriadicCarry.residue0)
+
+padicSourceAtlasRegression :
+  PadicLossless.PadicSources.canonicalRound4SourceCount ≡ 8
+padicSourceAtlasRegression = PadicLossless.existingPadicSourceCountIsEight
+
+modularProjectionRegression :
+  Modular.axisProjection Modular.pointA
+  ≡
+  Modular.axisProjection Modular.pointB
+  ×
+  Modular.separationScore Modular.selectedProjection ≡ 1
+modularProjectionRegression = refl , refl
+
+coarseQuantisationRegression :
+  Modular.quantiseCoarse Modular.fine0
+  ≡
+  Modular.quantiseCoarse Modular.fine1
+coarseQuantisationRegression = refl
 
 informationGeometryRegression :
   Information.tangentNormSquare Information.lambdaChart
