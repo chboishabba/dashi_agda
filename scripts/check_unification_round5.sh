@@ -63,6 +63,7 @@ FILES=(
   DASHI/Physics/DarkSector/BoostedDecayGeometry.agda
   DASHI/Physics/DarkSector/DisplacedVertex.agda
   DASHI/Physics/DarkSector/TriggerCensoring.agda
+  DASHI/Physics/DarkSector/LinkedColliderChainExact.agda
   DASHI/Physics/DarkSector/DarkSectorColliderSourceAtlas.agda
   DASHI/Physics/DarkSector/DarkSectorColliderBoundary.agda
   DASHI/Physics/DarkSector/DarkSectorColliderRegression.agda
