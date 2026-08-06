@@ -6,6 +6,7 @@ import DASHI.Physics.Foundations.CabarlahClaimStatusExact as Status
 import DASHI.Physics.Foundations.CabarlahEvidenceWitnessExact as Witness
 import DASHI.Physics.Foundations.CabarlahHistoricalLayerExact as History
 import DASHI.Physics.Foundations.CabarlahToponymTranscriptionExact as Toponym
+import DASHI.Physics.Foundations.CabarlahPhonologyEnvelopeExact as Phonology
 import DASHI.Physics.Foundations.CabarlahSignalInferenceExact as Signal
 import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact as Circuit
@@ -45,6 +46,7 @@ record CabarlahPalestineFormalBoundary : Set where
     evidenceWitnessBoundary : Witness.EvidenceWitnessBoundary
     historicalLayerBoundary : History.HistoricalLayerBoundary
     toponymBoundary : Toponym.ToponymTranscriptionBoundary
+    phonologyEnvelopeBoundary : Phonology.PhonologyEnvelopeBoundary
     signalInferenceBoundary : Signal.SignalInferenceBoundary
     enemyAbstractionBoundary : Enemy.EnemyAbstractionBoundary
     intelligenceCircuitBoundary : Circuit.IntelligenceCircuitBoundary
@@ -76,6 +78,12 @@ record CabarlahPalestineFormalBoundary : Set where
 
     colonialToponymRenderNonInjective :
       ¬ Toponym.InjectiveColonialRender
+
+    phonologyEnvelopeHasThirtyTwoCoordinates :
+      Phonology.envelopeProductCount ≡ 32
+
+    phonologyEnvelopeRenderNonInjective :
+      ¬ Phonology.EnvelopeRenderInjective
 
     signalInferenceNonInjective :
       ¬ Signal.SignalInferenceInjective
@@ -140,6 +148,8 @@ canonicalCabarlahPalestineFormalBoundary =
     ; evidenceWitnessBoundary = Witness.canonicalEvidenceWitnessBoundary
     ; historicalLayerBoundary = History.canonicalHistoricalLayerBoundary
     ; toponymBoundary = Toponym.canonicalToponymTranscriptionBoundary
+    ; phonologyEnvelopeBoundary =
+        Phonology.canonicalPhonologyEnvelopeBoundary
     ; signalInferenceBoundary = Signal.canonicalSignalInferenceBoundary
     ; enemyAbstractionBoundary = Enemy.canonicalEnemyAbstractionBoundary
     ; intelligenceCircuitBoundary =
@@ -159,6 +169,10 @@ canonicalCabarlahPalestineFormalBoundary =
         History.communistCabarlahClaimIsRefuted
     ; colonialToponymRenderNonInjective =
         Toponym.colonialRenderIsNotInjective
+    ; phonologyEnvelopeHasThirtyTwoCoordinates =
+        Phonology.envelopeProductCountIsThirtyTwo
+    ; phonologyEnvelopeRenderNonInjective =
+        Phonology.envelopeRenderIsNotInjective
     ; signalInferenceNonInjective =
         Signal.signalInferenceIsNotInjective
     ; crossDomainInterpretationStructuralOnly =
