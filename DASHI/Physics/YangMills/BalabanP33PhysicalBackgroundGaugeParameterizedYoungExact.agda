@@ -34,6 +34,7 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYou
 --
 -- rather than delta = rho^2.  The radius premise remains attached to the
 -- literal background links; no arbitrary gauge-energy scalar is introduced.
+-- Periodic divergence terms use the explicit positive-bond/axis-site bridge.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -50,6 +51,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
@@ -386,14 +388,16 @@ backgroundGaugeResidualSignedLowerSixtyFourRelaxed :
       * Coordinates.physicalSU2BondNormSq field)
   ≤ Jets.residualSecondVariation
       (Residual.backgroundGaugeResidual background field)
-      - Periodic.physicalPeriodicDivergenceEnergy field
+      - Periodic.physicalPeriodicDivergenceEnergy
+          (Bridge.asPeriodicField field)
 backgroundGaugeResidualSignedLowerSixtyFourRelaxed
     background field radius =
   subst
     (λ left →
       - ((+ 64 / 1) * Signed.rho
           * Coordinates.physicalSU2BondNormSq field)
-      ≤ left - Periodic.physicalPeriodicDivergenceEnergy field)
+      ≤ left - Periodic.physicalPeriodicDivergenceEnergy
+          (Bridge.asPeriodicField field))
     (sym
       (Residual.backgroundGaugeResidualSecondVariationIsEnergy
         background field))
