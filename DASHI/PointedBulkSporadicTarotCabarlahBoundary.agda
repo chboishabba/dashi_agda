@@ -7,7 +7,10 @@ import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
 import DASHI.Biology.PointedBulkSporadicTarotSourceAtlas as Sources
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Symmetry
 import DASHI.Governance.CabarlahTraumaProjectionBridgeExact as Cabarlah
+import DASHI.Governance.TraumaMemorySublationBoundary as Trauma
+import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact as Circuit
 
 record PointedBulkSporadicTarotCabarlahBoundary : Set where
   field
@@ -23,9 +26,7 @@ record PointedBulkSporadicTarotCabarlahBoundary : Set where
       Bulk.pointedBulkDimension ≡ Bulk.unpointedPlusPointedDimension
     pointedD4DimensionIsTen : Bulk.pointedRepresentationDimension ≡ 10
     pointedA2RemainsAbsent :
-      Bulk.pointedMultiplicity
-        DASHI.Biology.TernaryMonsterSymmetryCandidateExact.A2
-      ≡ 0
+      Bulk.pointedMultiplicity Symmetry.A2 ≡ 0
 
     candidateResidualCountIs53 : Orbit.candidateR53Dimension ≡ 53
     candidateInvolutionSquaresToIdentity :
@@ -44,13 +45,10 @@ record PointedBulkSporadicTarotCabarlahBoundary : Set where
       Tarot.canonicalDependencyEdgeCount ≡ 16
 
     reflectingPoolMotiveBlocked :
-      DASHI.Governance.TraumaMemorySublationBoundary.motiveInferredAsFact
-        DASHI.Governance.TraumaMemorySublationBoundary.reflectingPoolObservation
-      ≡ false
+      Trauma.motiveInferredAsFact Trauma.reflectingPoolObservation ≡ false
     pineGapSpecificStrikePromotionBlocked :
-      DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact.openSourceOperationalStatus
-      ≡
-      DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact.publiclyVerifiedSpecificStrikeLink
+      Circuit.openSourceOperationalStatus
+      ≡ Circuit.publiclyVerifiedSpecificStrikeLink
       → ⊥
 
     sourceCountIsFour : Sources.canonicalSourceCount ≡ 4
