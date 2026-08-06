@@ -78,8 +78,8 @@ texNoncommutativeRegression = Cyclic.texIsNotCommutative
 softConvolutionRegression :
   Carry.cyclicConvolution Cyclic.softInputP Cyclic.softInputQ
   ≡
-  Carry.mass3 1 1 2
-softConvolutionRegression = refl
+  Carry.mass3 2 1 1
+softConvolutionRegression = Cyclic.softConvolutionSample
 
 carryRegression :
   Carry.addCarry3
