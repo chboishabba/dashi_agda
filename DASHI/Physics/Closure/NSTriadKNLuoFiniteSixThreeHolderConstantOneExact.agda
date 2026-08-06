@@ -37,7 +37,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -139,33 +139,6 @@ sum3 value first second third =
   sumBy
     (λ a → sumBy (λ b → sumBy (value a b) third) second)
     first
-
-sum3Cong :
-  ∀ {A B C : Set}
-    (firstValue secondValue : A → B → C → ℚ)
-    (first : List A)
-    (second : List B)
-    (third : List C) →
-  ((a : A) → (b : B) → (c : C) →
-    firstValue a b c ≡ secondValue a b c) →
-  sum3 firstValue first second third
-  ≡ sum3 secondValue first second third
-sum3Cong firstValue secondValue first second third pointwise =
-  sumByCong
-    (λ a → sumBy (λ b → sumBy (firstValue a b) third) second)
-    (λ a → sumBy (λ b → sumBy (secondValue a b) third) second)
-    first
-    (λ a →
-      sumByCong
-        (λ b → sumBy (firstValue a b) third)
-        (λ b → sumBy (secondValue a b) third)
-        second
-        (λ b →
-          sumByCong
-            (firstValue a b)
-            (secondValue a b)
-            third
-            (pointwise a b)))
 
 sum3Monotone :
   ∀ {A B C : Set}
@@ -491,39 +464,18 @@ finiteSixThreeHolderRadicalFree items =
         items items items
         tripleAMGM
 
-    leftScale =
-      sum3ScaleLeft three tripleTarget items items items
-
-    targetFactor =
-      sum3ProductFactorizes
-        productMass productMass productMass items items items
-
     leftEndpoint :
-      sum3 (λ i j k → three * tripleTarget i j k) items items items
+      sum3 (λ i j k → three * tripleTarget i j k)
+        items items items
       ≡ three * cube (sumBy productMass items)
     leftEndpoint =
-      trans leftScale
+      trans
+        (sum3ScaleLeft three tripleTarget items items items)
         (cong (three *_)
-          (trans targetFactor
+          (trans
+            (sum3ProductFactorizes
+              productMass productMass productMass items items items)
             (solve (sumBy productMass items ∷ []))))
-
-    upperFirstSplit =
-      sum3Add
-        (λ i j k → xTerm i j k + yTerm i j k)
-        zTerm items items items
-
-    upperSecondSplit =
-      sum3Add xTerm yTerm items items items
-
-    xFactor =
-      sum3ProductFactorizes
-        leftSixthMass rightCubeMass rightCubeMass items items items
-    yFactor =
-      sum3ProductFactorizes
-        rightCubeMass leftSixthMass rightCubeMass items items items
-    zFactor =
-      sum3ProductFactorizes
-        rightCubeMass rightCubeMass leftSixthMass items items items
 
     upperEndpoint :
       sum3
@@ -532,23 +484,21 @@ finiteSixThreeHolderRadicalFree items =
       ≡ three
         * (sumBy leftSixthMass items
           * (sumBy rightCubeMass items * sumBy rightCubeMass items))
-    upperEndpoint =
-      trans upperFirstSplit
-        (trans
-          (cong (_+ sum3 zTerm items items items) upperSecondSplit)
-          (trans
-            (cong₂ _+_
-              (trans xFactor refl)
-              yFactor)
-            (trans
-              (cong
-                (sumBy leftSixthMass items
-                  * sumBy rightCubeMass items
-                  * sumBy rightCubeMass items +_)
-                zFactor)
-              (solve
-                (sumBy leftSixthMass items
-                ∷ sumBy rightCubeMass items ∷ []))))))
+    upperEndpoint
+      rewrite sum3Add
+                (λ i j k → xTerm i j k + yTerm i j k)
+                zTerm items items items
+            | sum3Add xTerm yTerm items items items
+            | sum3ProductFactorizes
+                leftSixthMass rightCubeMass rightCubeMass
+                items items items
+            | sum3ProductFactorizes
+                rightCubeMass leftSixthMass rightCubeMass
+                items items items
+            | sum3ProductFactorizes
+                rightCubeMass rightCubeMass leftSixthMass
+                items items items =
+      solve (sumBy leftSixthMass items ∷ sumBy rightCubeMass items ∷ [])
 
     threeBound :
       three * cube (sumBy productMass items)
