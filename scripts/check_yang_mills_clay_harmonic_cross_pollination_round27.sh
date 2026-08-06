@@ -12,8 +12,10 @@ files=(
   DASHI/Physics/Common/ScaledFilteredEstimateExact.agda
   DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
   DASHI/Physics/Common/FiniteWreathRefinementExact.agda
+  DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
   DASHI/Physics/YangMills/BalabanP33ScaledFilteredCrossPollinationExact.agda
   DASHI/Physics/YangMills/BalabanP33WreathBlockSpinCrossPollinationExact.agda
+  DASHI/Physics/YangMills/BalabanP33ThreeCycleBlockTorusCrossPollinationExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound27HarmonicCrossPollinationValidation.agda
 )
 
@@ -28,11 +30,16 @@ grep -q 'triadicNineDualityExact' DASHI/Physics/Common/FiniteRingScaleDualityExa
 grep -q 'lossCorrectedTransportExact' DASHI/Physics/Common/ScaledFilteredEstimateExact.agda
 grep -q 'pairProbesSeparate' DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
 grep -q 'localPermutationStepTwiceAt' DASHI/Physics/Common/FiniteWreathRefinementExact.agda
+grep -q 'translationsCommute' DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
+grep -q 'pullbacksCommuteAt' DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
 grep -q 'physicalStateAsSharedScale' DASHI/Physics/YangMills/BalabanP33ScaledFilteredCrossPollinationExact.agda
 grep -q 'dyadicSharedPhysicalQuantityStable' DASHI/Physics/YangMills/BalabanP33ScaledFilteredCrossPollinationExact.agda
 grep -q 'prototypeBlockSpinActionTwiceAt' DASHI/Physics/YangMills/BalabanP33WreathBlockSpinCrossPollinationExact.agda
+grep -q 'blockTranslationsCommuteAt' DASHI/Physics/YangMills/BalabanP33ThreeCycleBlockTorusCrossPollinationExact.agda
+grep -q 'blockFirstTranslationOrderThreeAt' DASHI/Physics/YangMills/BalabanP33ThreeCycleBlockTorusCrossPollinationExact.agda
 grep -q '10.1017/CBO9781316036440' DASHI/Physics/YangMills/BalabanP33ScaledFilteredCrossPollinationExact.agda
 grep -q '10.1007/978-1-4612-0731-3' DASHI/Physics/YangMills/BalabanP33WreathBlockSpinCrossPollinationExact.agda
+grep -q '10.1017/CBO9780511626265' DASHI/Physics/YangMills/BalabanP33ThreeCycleBlockTorusCrossPollinationExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound27HarmonicCrossPollinationValidation.agda
