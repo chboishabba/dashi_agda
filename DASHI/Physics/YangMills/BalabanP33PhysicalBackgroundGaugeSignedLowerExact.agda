@@ -37,10 +37,10 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact
 --
 --   H_gf(A;h)-H_div^0(h) >= -64 rho ||h||^2.
 --
--- No square root, abstract Cauchy--Schwarz premise, or independent gauge
--- Hessian is supplied.  The only remaining physical producer is the concrete
--- proof that the selected small-field background satisfies the stated inverse
--- link-radius inequality.
+-- The physical field is stored on positive bonds `(site,axis)`.  Every use of
+-- the periodic divergence now passes through the repository's explicit
+-- carrier bridge to the curried representation `axis -> site`; the two
+-- representations are isomorphic but not definitionally equal.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -57,6 +57,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as FiniteL2
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact as Gauge
@@ -177,12 +178,18 @@ flatGaugePointIsPeriodicDivergence :
   ∀ field site →
   flatGaugePointEnergy field site
   ≡
-    Periodic.periodicDivergence (field Coordinates.coordinateX) site
-      * Periodic.periodicDivergence (field Coordinates.coordinateX) site
-    + Periodic.periodicDivergence (field Coordinates.coordinateY) site
-      * Periodic.periodicDivergence (field Coordinates.coordinateY) site
-    + Periodic.periodicDivergence (field Coordinates.coordinateZ) site
-      * Periodic.periodicDivergence (field Coordinates.coordinateZ) site
+    Periodic.periodicDivergence
+      (Bridge.asPeriodicField field Coordinates.coordinateX) site
+      * Periodic.periodicDivergence
+          (Bridge.asPeriodicField field Coordinates.coordinateX) site
+    + Periodic.periodicDivergence
+        (Bridge.asPeriodicField field Coordinates.coordinateY) site
+      * Periodic.periodicDivergence
+          (Bridge.asPeriodicField field Coordinates.coordinateY) site
+    + Periodic.periodicDivergence
+        (Bridge.asPeriodicField field Coordinates.coordinateZ) site
+      * Periodic.periodicDivergence
+          (Bridge.asPeriodicField field Coordinates.coordinateZ) site
 flatGaugePointIsPeriodicDivergence field site
   rewrite Gauge.flatGaugeFirstFromAxesIsPeriodicDivergence
       field Coordinates.coordinateX site
@@ -194,7 +201,8 @@ flatGaugePointIsPeriodicDivergence field site
 
 flatGaugeEnergyIsPhysicalDivergence : ∀ field →
   flatGaugeEnergy field
-  ≡ Periodic.physicalPeriodicDivergenceEnergy field
+  ≡ Periodic.physicalPeriodicDivergenceEnergy
+      (Bridge.asPeriodicField field)
 flatGaugeEnergyIsPhysicalDivergence field =
   trans
     (Periodic.sumSitesCong _ _
@@ -202,21 +210,31 @@ flatGaugeEnergyIsPhysicalDivergence field =
     (trans
       (Periodic.sumSitesAdd
         (λ site →
-          Periodic.periodicDivergence (field Coordinates.coordinateX) site
-          * Periodic.periodicDivergence (field Coordinates.coordinateX) site)
+          Periodic.periodicDivergence
+            (Bridge.asPeriodicField field Coordinates.coordinateX) site
+          * Periodic.periodicDivergence
+            (Bridge.asPeriodicField field Coordinates.coordinateX) site)
         (λ site →
-          Periodic.periodicDivergence (field Coordinates.coordinateY) site
-            * Periodic.periodicDivergence (field Coordinates.coordinateY) site
-          + Periodic.periodicDivergence (field Coordinates.coordinateZ) site
-            * Periodic.periodicDivergence (field Coordinates.coordinateZ) site))
+          Periodic.periodicDivergence
+            (Bridge.asPeriodicField field Coordinates.coordinateY) site
+            * Periodic.periodicDivergence
+              (Bridge.asPeriodicField field Coordinates.coordinateY) site
+          + Periodic.periodicDivergence
+              (Bridge.asPeriodicField field Coordinates.coordinateZ) site
+            * Periodic.periodicDivergence
+              (Bridge.asPeriodicField field Coordinates.coordinateZ) site))
       (cong₂ _+_ refl
         (Periodic.sumSitesAdd
           (λ site →
-            Periodic.periodicDivergence (field Coordinates.coordinateY) site
-            * Periodic.periodicDivergence (field Coordinates.coordinateY) site)
+            Periodic.periodicDivergence
+              (Bridge.asPeriodicField field Coordinates.coordinateY) site
+            * Periodic.periodicDivergence
+              (Bridge.asPeriodicField field Coordinates.coordinateY) site)
           (λ site →
-            Periodic.periodicDivergence (field Coordinates.coordinateZ) site
-            * Periodic.periodicDivergence (field Coordinates.coordinateZ) site))))
+            Periodic.periodicDivergence
+              (Bridge.asPeriodicField field Coordinates.coordinateZ) site
+            * Periodic.periodicDivergence
+              (Bridge.asPeriodicField field Coordinates.coordinateZ) site))))
 
 ------------------------------------------------------------------------
 -- Weighted scalar Young inequality at the configured rational radius.
