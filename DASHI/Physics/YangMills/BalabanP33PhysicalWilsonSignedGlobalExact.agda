@@ -52,6 +52,7 @@ import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact as Partition
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact as GaugeBudget
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonIncidenceExact as Incidence
@@ -180,17 +181,17 @@ plaquetteDiagonalGlobalIsIncidence field =
           (pairDiagonalFromPlaquettesExact field))
         (ℚRing.solve-∀
           (Incidence.pairDiagonalIncidence field
-            Physical.Hodge4.axis0 Physical.Hodge4.axis1)
+            Periodic.axis0 Periodic.axis1)
           (Incidence.pairDiagonalIncidence field
-            Physical.Hodge4.axis0 Physical.Hodge4.axis2)
+            Periodic.axis0 Periodic.axis2)
           (Incidence.pairDiagonalIncidence field
-            Physical.Hodge4.axis0 Physical.Hodge4.axis3)
+            Periodic.axis0 Periodic.axis3)
           (Incidence.pairDiagonalIncidence field
-            Physical.Hodge4.axis1 Physical.Hodge4.axis2)
+            Periodic.axis1 Periodic.axis2)
           (Incidence.pairDiagonalIncidence field
-            Physical.Hodge4.axis1 Physical.Hodge4.axis3)
+            Periodic.axis1 Periodic.axis3)
           (Incidence.pairDiagonalIncidence field
-            Physical.Hodge4.axis2 Physical.Hodge4.axis3))))
+            Periodic.axis2 Periodic.axis3))))
 
 plaquetteCrossGlobalIsIncidence : ∀ field →
   plaquetteCrossGlobal field
@@ -216,17 +217,17 @@ plaquetteCrossGlobalIsIncidence field =
           (pairCrossFromPlaquettesExact field))
         (ℚRing.solve-∀
           (Incidence.pairCrossIncidence field
-            Physical.Hodge4.axis0 Physical.Hodge4.axis1)
+            Periodic.axis0 Periodic.axis1)
           (Incidence.pairCrossIncidence field
-            Physical.Hodge4.axis0 Physical.Hodge4.axis2)
+            Periodic.axis0 Periodic.axis2)
           (Incidence.pairCrossIncidence field
-            Physical.Hodge4.axis0 Physical.Hodge4.axis3)
+            Periodic.axis0 Periodic.axis3)
           (Incidence.pairCrossIncidence field
-            Physical.Hodge4.axis1 Physical.Hodge4.axis2)
+            Periodic.axis1 Periodic.axis2)
           (Incidence.pairCrossIncidence field
-            Physical.Hodge4.axis1 Physical.Hodge4.axis3)
+            Periodic.axis1 Periodic.axis3)
           (Incidence.pairCrossIncidence field
-            Physical.Hodge4.axis2 Physical.Hodge4.axis3))))
+            Periodic.axis2 Periodic.axis3))))
 
 rhoOverThirtySix rhoOverOneFortyFour : ℚ
 rhoOverThirtySix = (+ 1 / 36) * GaugeBudget.rho
