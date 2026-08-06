@@ -35,12 +35,15 @@ import DASHI.Physics.Foundations.FiniteMultiscaleKernelCompatibilityExact
 import DASHI.Physics.Foundations.FiniteStatisticalFiltrationExact
 import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact
 import DASHI.Physics.Foundations.FiniteUltrametricReebFlowExact
+import DASHI.Physics.Foundations.TriToBiSingularJunctionExact
+import DASHI.Physics.Foundations.TriToBiTransportExact
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas
 import DASHI.Physics.Foundations.Round5AttachedFormalismBoundary
 import DASHI.Physics.Foundations.Round5AttachedFormalismRegression
 import DASHI.Physics.Foundations.Round5AttachedCompletionBoundary
 import DASHI.Physics.Foundations.Round5AttachedCompletionRegression
 import DASHI.Physics.DarkSector.Everything
+import DASHI.Visualisation.Everything
 import DASHI.Physics.Foundations.Round5SourceAtlas
 import DASHI.Physics.Foundations.Round5CombinedSourceBoundary
 import DASHI.Physics.Foundations.Round5CompletionRegression
