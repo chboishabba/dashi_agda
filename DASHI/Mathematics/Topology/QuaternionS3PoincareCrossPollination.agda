@@ -22,7 +22,7 @@ module DASHI.Mathematics.Topology.QuaternionS3PoincareCrossPollination where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 import DASHI.Mathematics.Topology.QuaternionHopfUnitOrbitExact as Hopf
@@ -40,9 +40,13 @@ record QuaternionSmoothThreeSphereBridge : Setω where
   field
     smoothContext : P.ThreeManifoldContext
     threeSphere : P.ThreeManifold smoothContext
-    unitQuaternionToSphere : Hopf.UnitQuaternion → P.ThreeManifold smoothContext
-    sphereToUnitQuaternion : P.ThreeManifold smoothContext → Hopf.UnitQuaternion
-    carrierIdentification : Set
+    SpherePoint : Set
+    unitQuaternionToSpherePoint : Hopf.UnitQuaternion → SpherePoint
+    spherePointToUnitQuaternion : SpherePoint → Hopf.UnitQuaternion
+    leftCarrierInverse : ∀ unit →
+      spherePointToUnitQuaternion (unitQuaternionToSpherePoint unit) ≡ unit
+    rightCarrierInverse : ∀ point →
+      unitQuaternionToSpherePoint (spherePointToUnitQuaternion point) ≡ point
     multiplicationIsLieGroupLaw : Set
     smoothStructureCompatibility : Set
     roundMetricCompatibility : Set
