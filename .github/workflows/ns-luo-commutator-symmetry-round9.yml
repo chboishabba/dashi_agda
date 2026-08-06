@@ -1,0 +1,49 @@
+name: NS Luo commutator symmetry round 9
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/**'
+      - 'scripts/check_ns_luo_commutator_symmetry_round9.sh'
+      - 'scripts/check_ns_luo_biotsavart_continuum_round8.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - '.github/workflows/ns-luo-commutator-symmetry-round9.yml'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check commutator and symmetry round nine
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/ns-luo-round9-agda.log"
+            export AGDA_JOBS=4
+            bash scripts/check_ns_luo_commutator_symmetry_round9.sh
+          ) > ns-luo-round9-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 300 ns-luo-round9-check.log
+          exit 0
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-luo-round9-logs
+          path: |
+            ns-luo-round9-check.log
+            ns-luo-round9-agda.log
+          if-no-files-found: warn
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
