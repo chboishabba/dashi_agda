@@ -9,6 +9,7 @@ import DASHI.Physics.Foundations.Round5SourceAtlas as PhysicsSources
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas as AttachedSources
 import DASHI.Physics.DarkSector.DarkSectorColliderSourceAtlas as ColliderSources
 import DASHI.Visualisation.AttachedVisualisationSourceAtlas as VisualisationSources
+import DASHI.Visualisation.EventPadicSourceAtlas as EventPadicSources
 
 ------------------------------------------------------------------------
 -- Source populations are retained as separate typed atlases because their
@@ -39,6 +40,9 @@ record Round5CombinedSourceBoundary : Set where
     visualisationSourceCountIsEight :
       VisualisationSources.canonicalAttachedVisualisationSourceCount ≡ 8
 
+    eventPadicSourceCountIsTen :
+      EventPadicSources.canonicalEventPadicSourceCount ≡ 10
+
 open Round5CombinedSourceBoundary public
 
 canonicalRound5CombinedSourceBoundary : Round5CombinedSourceBoundary
@@ -51,3 +55,4 @@ canonicalRound5CombinedSourceBoundary =
     AttachedSources.canonicalAttachedFormalismSourceCountIsSix
     ColliderSources.canonicalDarkSectorColliderSourceCountIsSix
     VisualisationSources.canonicalAttachedVisualisationSourceCountIsEight
+    EventPadicSources.canonicalEventPadicSourceCountIsTen
