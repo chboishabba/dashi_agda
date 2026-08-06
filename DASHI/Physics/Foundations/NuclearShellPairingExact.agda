@@ -22,6 +22,7 @@ record ShellProfile : Set where
     degeneracy : Nat
     occupancy : Nat
     occupancyBound : occupancy ≤ degeneracy
+    fullyOccupied : Bool
     gapClass : GapClass
 
 open ShellProfile public
@@ -32,25 +33,22 @@ data ClosureStatus : Set where
   magicClosure : ClosureStatus
 
 closureStatus : ShellProfile → ClosureStatus
-closureStatus (shellProfile sector zero zero bound gap) with gap
-... | smallGap = closedWithoutLargeGap
-... | largeGap = magicClosure
-closureStatus (shellProfile sector (suc capacity) zero bound gap) = openShell
-closureStatus (shellProfile sector (suc capacity) (suc occupied') bound gap)
-  with capacity | occupied' | gap
-... | zero | zero | smallGap = closedWithoutLargeGap
-... | zero | zero | largeGap = magicClosure
-... | zero | suc occupied'' | gap' = openShell
-... | suc capacity' | zero | gap' = openShell
-... | suc capacity' | suc occupied'' | gap' = openShell
+closureStatus
+  (shellProfile sector capacity occupied bound false gap) = openShell
+closureStatus
+  (shellProfile sector capacity occupied bound true smallGap) =
+  closedWithoutLargeGap
+closureStatus
+  (shellProfile sector capacity occupied bound true largeGap) =
+  magicClosure
 
 canonicalProtonClosure : ShellProfile
 canonicalProtonClosure =
-  shellProfile protonSector 2 2 ≤-refl largeGap
+  shellProfile protonSector 2 2 ≤-refl true largeGap
 
 canonicalNeutronClosure : ShellProfile
 canonicalNeutronClosure =
-  shellProfile neutronSector 2 2 ≤-refl largeGap
+  shellProfile neutronSector 2 2 ≤-refl true largeGap
 
 protonClosureIsMagic :
   closureStatus canonicalProtonClosure ≡ magicClosure
@@ -169,20 +167,19 @@ oddOddPairingPenaltyIsTwo = refl
 ------------------------------------------------------------------------
 -- Observable odd-even staggering and separation-energy curvature.
 
+natDistance : Nat → Nat → Nat
+natDistance x y = (x ∸ y) + (y ∸ x)
+
 threePointStaggering : Nat → Nat → Nat → Nat
 threePointStaggering previous current next =
   natDistance (previous + next) (2 * current)
-  where
-    natDistance : Nat → Nat → Nat
-    natDistance x y = (x ∸ y) + (y ∸ x)
 
 canonicalPairingStaggering :
   threePointStaggering 4 3 4 ≡ 2
 canonicalPairingStaggering = refl
 
 secondSeparationCurvature : Nat → Nat → Nat
-secondSeparationCurvature below above =
-  (below ∸ above) + (above ∸ below)
+secondSeparationCurvature below above = natDistance below above
 
 canonicalMagicCurvature :
   secondSeparationCurvature 6 2 ≡ 4
