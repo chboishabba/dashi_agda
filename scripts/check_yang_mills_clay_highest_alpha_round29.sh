@@ -9,6 +9,7 @@ bash scripts/check_yang_mills_clay_highest_alpha_round28.sh
 
 files=(
   DASHI/Physics/YangMills/BalabanP33PlaquetteLinearClosureScalingExact.agda
+  DASHI/Physics/YangMills/BalabanP33PlaquetteLinearCurlIdentificationExact.agda
   DASHI/Physics/YangMills/BalabanP33SelectedCorrelationToWLocalExact.agda
   DASHI/Physics/YangMills/BalabanP33QuadraticPolarizationTwoCoordinateExact.agda
   DASHI/Physics/YangMills/BalabanP33SymmetricTwoByTwoInverseExact.agda
@@ -33,6 +34,12 @@ checks=(
   'BalabanP33PlaquetteLinearClosureScalingExact.agda:linearClosureRemovesFirstOrder'
   'BalabanP33PlaquetteLinearClosureScalingExact.agda:unbalancedSingleLinkDefectExact'
   'BalabanP33PlaquetteLinearClosureScalingExact.agda:balancedOppositeLinkDefectExact'
+  'BalabanP33PlaquetteLinearCurlIdentificationExact.agda:plaquetteLinearEqualsDiscreteCurl'
+  'BalabanP33PlaquetteLinearCurlIdentificationExact.agda:curvatureLowerTransfersToPlaquetteLinear'
+  'BalabanP33PlaquetteLinearCurlIdentificationExact.agda:exactGradientHasZeroDiscreteCurl'
+  'BalabanP33PlaquetteLinearCurlIdentificationExact.agda:exactGradientHasZeroPlaquetteLinearTerm'
+  'BalabanP33SelectedCorrelationToWLocalExact.agda:negativeBudgetSumExact'
+  'BalabanP33SelectedCorrelationToWLocalExact.agda:correlatedControlTransfersLowerBound'
   'BalabanP33SelectedCorrelationToWLocalExact.agda:closedDefectEqualsRemainder'
   'BalabanP33SelectedCorrelationToWLocalExact.agda:correlatedCancellationTransfersLowerBound'
   'BalabanP33SelectedCorrelationToWLocalExact.agda:physicalInputsImplyWLocalScalar'
@@ -58,6 +65,7 @@ for check in "${checks[@]}"; do
 done
 
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanP33PlaquetteLinearClosureScalingExact.agda
+grep -q '10.1007/BF01466594' DASHI/Physics/YangMills/BalabanP33PlaquetteLinearCurlIdentificationExact.agda
 grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanP33SelectedCorrelationToWLocalExact.agda
 grep -q '10.1017/CBO9781139020411' DASHI/Physics/YangMills/BalabanP33QuadraticPolarizationTwoCoordinateExact.agda
 grep -q '10.1007/BF01646473' DASHI/Physics/YangMills/BalabanP33SymmetricTwoByTwoInverseExact.agda
@@ -66,6 +74,7 @@ grep -q 'Rules for the Millennium Prize Problems' DASHI/Physics/YangMills/YangMi
 grep -q '10.1007/BF01608978' DASHI/Physics/YangMills/YangMillsHighestAlphaGateDependencyExact.agda
 
 grep -q 'physical SU(2) theorem must prove' DASHI/Physics/YangMills/BalabanP33PlaquetteLinearClosureScalingExact.agda
+grep -q 'discrete-Stokes identity is fully proved' DASHI/Physics/YangMills/BalabanP33PlaquetteLinearCurlIdentificationExact.agda
 grep -q 'does not fabricate' DASHI/Physics/YangMills/BalabanP33SelectedCorrelationToWLocalExact.agda
 grep -q 'physical 3072-coordinate inverse' DASHI/Physics/YangMills/BalabanP33SymmetricTwoByTwoInverseExact.agda
 grep -q 'No canonical inhabitant' DASHI/Physics/YangMills/YangMillsHighestAlphaGateDependencyExact.agda
