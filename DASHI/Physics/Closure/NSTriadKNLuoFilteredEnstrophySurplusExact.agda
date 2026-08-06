@@ -167,6 +167,57 @@ filteredEnstrophySurplusBound :
   ∀ scale → filteredScaleLeft scale ≤ filteredScaleRight scale
 filteredEnstrophySurplusBound scale =
   let
+    groupedSourceReplacement :
+      (nearField scale + farField scale)
+        + (commutator scale + localization scale)
+      ≤
+      ((etaNear scale * diffusion scale + lowerEnstrophy scale)
+        + farField scale)
+      +
+      ((etaCommutator scale * diffusion scale
+        + incrementDefect scale + commutatorLocalization scale)
+        + localization scale)
+    groupedSourceReplacement =
+      ℚₚ.+-mono-≤
+        (ℚₚ.+-mono-≤
+          (nearFieldCoercivity scale)
+          ℚₚ.≤-refl)
+        (ℚₚ.+-mono-≤
+          (derivativeCompatibleCommutator scale)
+          ℚₚ.≤-refl)
+
+    sourceLeftMeaning :
+      (nearField scale + farField scale)
+        + (commutator scale + localization scale)
+      ≡
+      nearField scale + farField scale
+        + commutator scale + localization scale
+    sourceLeftMeaning =
+      solve
+        ( nearField scale ∷ farField scale
+        ∷ commutator scale ∷ localization scale ∷ [])
+
+    sourceRightMeaning :
+      ((etaNear scale * diffusion scale + lowerEnstrophy scale)
+        + farField scale)
+      +
+      ((etaCommutator scale * diffusion scale
+        + incrementDefect scale + commutatorLocalization scale)
+        + localization scale)
+      ≡
+      (etaNear scale * diffusion scale + lowerEnstrophy scale)
+      + farField scale
+      +
+      (etaCommutator scale * diffusion scale
+        + incrementDefect scale + commutatorLocalization scale)
+      + localization scale
+    sourceRightMeaning =
+      solve
+        ( etaNear scale ∷ etaCommutator scale ∷ diffusion scale
+        ∷ lowerEnstrophy scale ∷ farField scale
+        ∷ incrementDefect scale ∷ commutatorLocalization scale
+        ∷ localization scale ∷ [])
+
     sourceReplacement :
       nearField scale + farField scale
         + commutator scale + localization scale
@@ -178,13 +229,24 @@ filteredEnstrophySurplusBound scale =
         + incrementDefect scale + commutatorLocalization scale)
       + localization scale
     sourceReplacement =
-      ℚₚ.+-mono-≤
-        (ℚₚ.+-mono-≤
-          (nearFieldCoercivity scale)
-          ℚₚ.≤-refl)
-        (ℚₚ.+-mono-≤
-          (derivativeCompatibleCommutator scale)
-          ℚₚ.≤-refl)
+      subst
+        (λ left →
+          left
+          ≤
+          (etaNear scale * diffusion scale + lowerEnstrophy scale)
+          + farField scale
+          +
+          (etaCommutator scale * diffusion scale
+            + incrementDefect scale + commutatorLocalization scale)
+          + localization scale)
+        sourceLeftMeaning
+        (subst
+          (λ right →
+            (nearField scale + farField scale)
+              + (commutator scale + localization scale)
+            ≤ right)
+          sourceRightMeaning
+          groupedSourceReplacement)
 
     withEndpoint :
       endpointIn scale
@@ -233,7 +295,59 @@ filteredEnstrophySurplusBound scale =
       - (etaNear scale * diffusion scale
         + etaCommutator scale * diffusion scale)
 
-    shifted = ℚₚ.+-monoʳ-≤ shift assembled
+    shiftedLeft :
+      shift + (endpointOut scale + diffusion scale)
+      ≤
+      shift
+      +
+      (endpointIn scale
+        +
+        ((etaNear scale * diffusion scale + lowerEnstrophy scale)
+          + farField scale
+          +
+          (etaCommutator scale * diffusion scale
+            + incrementDefect scale + commutatorLocalization scale)
+          + localization scale))
+    shiftedLeft = ℚₚ.+-monoʳ-≤ shift assembled
+
+    shifted :
+      (endpointOut scale + diffusion scale) + shift
+      ≤
+      (endpointIn scale
+        +
+        ((etaNear scale * diffusion scale + lowerEnstrophy scale)
+          + farField scale
+          +
+          (etaCommutator scale * diffusion scale
+            + incrementDefect scale + commutatorLocalization scale)
+          + localization scale))
+      + shift
+    shifted =
+      subst
+        (λ left →
+          left
+          ≤
+          (endpointIn scale
+            +
+            ((etaNear scale * diffusion scale + lowerEnstrophy scale)
+              + farField scale
+              +
+              (etaCommutator scale * diffusion scale
+                + incrementDefect scale + commutatorLocalization scale)
+              + localization scale))
+          + shift)
+        (solve
+          ( shift ∷ endpointOut scale ∷ diffusion scale ∷ []))
+        (subst
+          (λ right →
+            shift + (endpointOut scale + diffusion scale) ≤ right)
+          (solve
+            ( shift ∷ endpointIn scale
+            ∷ etaNear scale ∷ etaCommutator scale ∷ diffusion scale
+            ∷ lowerEnstrophy scale ∷ farField scale
+            ∷ incrementDefect scale ∷ commutatorLocalization scale
+            ∷ localization scale ∷ []))
+          shiftedLeft)
 
     leftMeaning :
       (endpointOut scale + diffusion scale) + shift
