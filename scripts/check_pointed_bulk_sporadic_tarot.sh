@@ -12,6 +12,7 @@ fi
 FILES=(
   DASHI/Biology/PointedTernaryBulkExact.agda
   DASHI/Biology/DecimalTenTernaryPresentationExact.agda
+  DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
   DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda
   DASHI/Biology/SporadicTarotDependencyExact.agda
   DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda
@@ -51,6 +52,12 @@ grep -q 'decimalAndPointedBulkDimensionsAgree' \
   DASHI/Biology/DecimalTenTernaryPresentationExact.agda
 grep -q 'tenSectorListIsRawD4IsotypicDecompositionIsFalse' \
   DASHI/Biology/DecimalTenTernaryPresentationExact.agda
+grep -q 'fiftyFourIsTwoTimesThreeCubed' \
+  DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
+grep -q 'tenIrrepOrientationMatchesSectorCount' \
+  DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
+grep -q 'arithmeticEqualityTransfersGroupActionIsFalse' \
+  DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda
 
 # Reduced-53 promotion guards.
 grep -q 'candidateR53DimensionIsFiftyThree' \
