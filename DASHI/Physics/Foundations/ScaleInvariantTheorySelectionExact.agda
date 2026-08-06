@@ -5,9 +5,10 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 -- Finite Buckingham-style dimension kernel.
 --
--- Ratios are represented by numerator and denominator dimension vectors.  A
--- ratio is dimensionless when the aggregate vectors agree.  This avoids
--- assigning invariant meaning to a numerical representative in chosen units.
+-- A physical dimension is represented as a fraction of nonnegative exponent
+-- vectors.  Two quantities have the same dimension when cross-multiplication
+-- of their numerator/denominator vectors agrees.  This permits exact negative
+-- powers without importing a numerical value for any physical scale.
 
 record DimensionVector : Set where
   constructor dimensionVector
@@ -22,53 +23,68 @@ _⊕dim_ : DimensionVector → DimensionVector → DimensionVector
 dimensionVector l₁ t₁ m₁ ⊕dim dimensionVector l₂ t₂ m₂ =
   dimensionVector (l₁ + l₂) (t₁ + t₂) (m₁ + m₂)
 
+zeroDimension : DimensionVector
+zeroDimension = dimensionVector 0 0 0
+
 lengthDimension : DimensionVector
 lengthDimension = dimensionVector 1 0 0
 
 timeDimension : DimensionVector
 timeDimension = dimensionVector 0 1 0
 
-speedTimesTimeDimension : DimensionVector
-speedTimesTimeDimension =
-  dimensionVector 1 0 0
+record QuantityDimension : Set where
+  constructor quantityDimension
+  field
+    numeratorDimension : DimensionVector
+    denominatorDimension : DimensionVector
+
+open QuantityDimension public
+
+multiplyDimension : QuantityDimension → QuantityDimension → QuantityDimension
+multiplyDimension x y =
+  quantityDimension
+    (numeratorDimension x ⊕dim numeratorDimension y)
+    (denominatorDimension x ⊕dim denominatorDimension y)
+
+sameDimension : QuantityDimension → QuantityDimension → Set
+sameDimension x y =
+  numeratorDimension x ⊕dim denominatorDimension y
+  ≡
+  numeratorDimension y ⊕dim denominatorDimension x
+
+lengthQuantityDimension : QuantityDimension
+lengthQuantityDimension =
+  quantityDimension lengthDimension zeroDimension
+
+timeQuantityDimension : QuantityDimension
+timeQuantityDimension =
+  quantityDimension timeDimension zeroDimension
+
+speedQuantityDimension : QuantityDimension
+speedQuantityDimension =
+  quantityDimension lengthDimension timeDimension
+
+speedTimesTimeHasLengthDimension :
+  sameDimension
+    (multiplyDimension speedQuantityDimension timeQuantityDimension)
+    lengthQuantityDimension
+speedTimesTimeHasLengthDimension = refl
 
 record DimensionlessRatioWitness : Set where
   constructor dimensionlessRatioWitness
   field
-    numeratorDimension : DimensionVector
-    denominatorDimension : DimensionVector
-    dimensionsCancel : numeratorDimension ≡ denominatorDimension
+    numeratorQuantity : QuantityDimension
+    denominatorQuantity : QuantityDimension
+    dimensionsCancel : sameDimension numeratorQuantity denominatorQuantity
 
 open DimensionlessRatioWitness public
 
 speedTimeOverLength : DimensionlessRatioWitness
 speedTimeOverLength =
   dimensionlessRatioWitness
-    speedTimesTimeDimension
-    lengthDimension
+    (multiplyDimension speedQuantityDimension timeQuantityDimension)
+    lengthQuantityDimension
     refl
-
-speedTimeOverLengthIsDimensionless :
-  numeratorDimension speedTimeOverLength
-  ≡
-  denominatorDimension speedTimeOverLength
-speedTimeOverLengthIsDimensionless = refl
-
-record ThreeQuantityDimensionMatrix : Set where
-  constructor threeQuantityDimensionMatrix
-  field
-    firstColumn : DimensionVector
-    secondColumn : DimensionVector
-    thirdColumn : DimensionVector
-
-open ThreeQuantityDimensionMatrix public
-
-lengthTimeSpeedMatrix : ThreeQuantityDimensionMatrix
-lengthTimeSpeedMatrix =
-  threeQuantityDimensionMatrix
-    lengthDimension
-    timeDimension
-    (dimensionVector 1 0 0)
 
 ------------------------------------------------------------------------
 -- Spontaneous scale breaking: the laws preserve a scale orbit, while a chosen
