@@ -12,7 +12,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderDimensionFreeExact 
 -- DOI: 10.1007/978-3-642-16830-7.
 --
 -- PURPOSE
--- Promote the dependency-ordered arbitrary-list theorem as the uniform finite
+-- Promote the explicit nested-sum arbitrary-list theorem as the uniform finite
 -- carrier used by the Galerkin lane. For every finite list of nonnegative
 -- pairs,
 --
@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderDimensionFreeExact 
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (_*_; _≤_)
 
-import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneExact as Holder
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneV2Exact as Holder
 
 finiteSixThreeHolderConstantOne :
   (items : List Holder.NonnegativePair) →
