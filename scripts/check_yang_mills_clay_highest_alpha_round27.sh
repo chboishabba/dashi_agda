@@ -14,7 +14,12 @@ files=(
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonSignedGlobalExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda
+  DASHI/Physics/YangMills/BalabanP33PeriodicDivergenceUpperExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeResidualExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
+  DASHI/Physics/YangMills/BalabanP33SelectedBackgroundFiniteCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33CubicShellSeriesExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda
   DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda
@@ -46,10 +51,20 @@ checks=(
   'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:physicalWilsonDefectIsBackgroundMinusFlat'
   'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:physicalWilsonLocalImpliesSharpDefect'
   'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:samePhysicalPerturbationWLocalImpliesSharpDefect'
+  'BalabanP33PeriodicDivergenceUpperExact.agda:physicalPeriodicDivergenceUpper'
+  'BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda:flatGaugeEnergyIsPhysicalDivergence'
+  'BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda:backgroundGaugeSignedLowerSixtyFour'
+  'BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.agda:backgroundGaugeResidualSignedLowerSixtyFourRelaxed'
+  'BalabanP33PhysicalBackgroundGaugeResidualExact.agda:backgroundGaugeResidualSignedLowerSixtyFour'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:terminalPhysicalCoefficientExact'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:terminalCoefficientSplitsAtOneThirtySecond'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:literalHessianCoerciveAtTerminalCoefficient'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:literalHessianCoerciveAtOneThirtySecond'
+  'BalabanP33SelectedBackgroundFiniteCoercivityExact.agda:configuredGaugeCoefficientExact'
+  'BalabanP33SelectedBackgroundFiniteCoercivityExact.agda:selectedGaugeFirstLower'
+  'BalabanP33SelectedBackgroundFiniteCoercivityExact.agda:selectedWilsonLower'
+  'BalabanP33SelectedBackgroundFiniteCoercivityExact.agda:selectedBackgroundLiteralHessianTerminalCoefficient'
+  'BalabanP33SelectedBackgroundFiniteCoercivityExact.agda:selectedBackgroundLiteralHessianOneThirtySecond'
   'BalabanP33CubicShellSeriesExact.agda:cubicShellTailRecurrence'
   'BalabanP33CubicShellSeriesExact.agda:cubicShellFiniteClosedForm'
   'BalabanP33CubicShellSeriesExact.agda:finiteErrorAgainstClosedForm'
@@ -78,6 +93,8 @@ grep -q '10.1007/BF01211042' \
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda
 grep -q '10.1007/BF01466594' \
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
+grep -q '10.1007/BF01229381' \
+  DASHI/Physics/YangMills/BalabanP33SelectedBackgroundFiniteCoercivityExact.agda
 grep -q '10.1017/CBO9781139020411' \
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
 grep -q '10.1007/BF01240221' \
@@ -93,6 +110,15 @@ grep -q 'cubicShellInfiniteLimitProducerLevel = conditional' \
 grep -q 'physicalGeometricLossProducerLevel = conditional' \
   DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda
 
+grep -q 'Bridge.asPeriodicField' \
+  DASHI/Physics/YangMills/BalabanP33PeriodicDivergenceUpperExact.agda
+grep -q 'Bridge.asPeriodicField' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda
+grep -q 'Bridge.asPeriodicField' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.agda
+grep -q 'Bridge.asPeriodicField' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeResidualExact.agda
+
 grep -q 'sum_p q_p(h) = 6' \
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda
 grep -q 'sum_p C_p(h) = 18' \
@@ -101,6 +127,8 @@ grep -q '10739/196608' \
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
 grep -q '4595/196608' \
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
+grep -q 'same perturbation object' \
+  DASHI/Physics/YangMills/BalabanP33SelectedBackgroundFiniteCoercivityExact.agda
 grep -q '35167404019/158329674989568' \
   DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda
 grep -q 'A2 cannot be discharged from A1 alone' \
