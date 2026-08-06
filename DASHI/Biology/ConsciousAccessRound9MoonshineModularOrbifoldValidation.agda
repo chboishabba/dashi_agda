@@ -1,0 +1,8 @@
+module DASHI.Biology.ConsciousAccessRound9MoonshineModularOrbifoldValidation where
+
+open import DASHI.Biology.ConsciousAccessRound8VOAGradeSemanticsValidation
+open import DASHI.Biology.MoonshineModularFormCoefficientExact
+open import DASHI.Biology.MoonshineOrbifoldSectorProjectorExact
+open import DASHI.Biology.MoonshineMonsterLieStringBigradingExact
+open import DASHI.Biology.MoonshineGriessAutomorphismClassificationExact
+open import DASHI.Biology.MonsterConstructionRouteComparisonExact
