@@ -37,7 +37,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
@@ -85,15 +85,28 @@ scaledYoungIdentity parameter x y =
     normalization
       rewrite quarterInverseLaw parameter =
       solve []
-  in
-  subst
-    (λ zeroTerm →
+
+    withZero :
       epsilon parameter * L2.square x
         + quarterInverse parameter * L2.square y
-      ≡ x * y + youngDefect parameter x y
-        + zeroTerm * x * (epsilon parameter * x - y))
-    normalization
-    raw
+      ≡
+      x * y + youngDefect parameter x y
+        + 0ℚ * x * (epsilon parameter * x - y)
+    withZero =
+      subst
+        (λ zeroTerm →
+          epsilon parameter * L2.square x
+            + quarterInverse parameter * L2.square y
+          ≡ x * y + youngDefect parameter x y
+            + zeroTerm * x * (epsilon parameter * x - y))
+        normalization
+        raw
+  in
+  trans
+    withZero
+    (solve
+      ( x ∷ y ∷ epsilon parameter
+      ∷ youngDefect parameter x y ∷ []))
 
 scaledYoungProductBound :
   ∀ parameter x y →
