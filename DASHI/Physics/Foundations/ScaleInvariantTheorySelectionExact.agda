@@ -155,7 +155,7 @@ baseCalibrationChangesEveryAbsoluteScale :
 baseCalibrationChangesEveryAbsoluteScale = refl , refl
 
 existingTriadicScaleCarrier : Set
-existingTriadicScaleCarrier = ExistingHyperfabric.HyperfabricScale
+existingTriadicScaleCarrier = ExistingHyperfabric.CarrierScale
 
 ------------------------------------------------------------------------
 -- Global MDL/Bayesian theory selection over a declared finite candidate class.
