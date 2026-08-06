@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.Round5Regression where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.ConsciousAccessRound5FullBoundary as BiologyRound5
+import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as BiologyNSYM
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
@@ -272,6 +273,6 @@ sourceAtlasRegression : Sources.canonicalRound5SourceCount ≡ 17
 sourceAtlasRegression = refl
 
 biologySourceAtlasRegression :
-  Sources.ExistingRound5Sources.canonicalRound5ExtendedSourceCount ≡ 23
+  BiologySources.canonicalRound5ExtendedSourceCount ≡ 23
 biologySourceAtlasRegression =
-  Sources.existingBiologyRound5SourceCountIsTwentyThree
+  BiologySources.canonicalRound5ExtendedSourceCountIsTwentyThree
