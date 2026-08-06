@@ -32,6 +32,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 record Matrix2 : Set where
   constructor matrix2
@@ -73,8 +74,10 @@ leftInverse00 :
       (symmetricInverseCandidate a b c inverseDeterminant)
       (symmetricMatrix a b c))
   ≡ 1ℚ
-leftInverse00 a b c inverseDeterminant inverseLaw
-  rewrite inverseLaw = solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ [])
+leftInverse00 a b c inverseDeterminant inverseLaw =
+  trans
+    (solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ []))
+    inverseLaw
 
 leftInverse01 :
   ∀ a b c inverseDeterminant →
@@ -104,8 +107,10 @@ leftInverse11 :
       (symmetricInverseCandidate a b c inverseDeterminant)
       (symmetricMatrix a b c))
   ≡ 1ℚ
-leftInverse11 a b c inverseDeterminant inverseLaw
-  rewrite inverseLaw = solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ [])
+leftInverse11 a b c inverseDeterminant inverseLaw =
+  trans
+    (solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ []))
+    inverseLaw
 
 rightInverse00 :
   ∀ a b c inverseDeterminant →
@@ -115,8 +120,10 @@ rightInverse00 :
       (symmetricMatrix a b c)
       (symmetricInverseCandidate a b c inverseDeterminant))
   ≡ 1ℚ
-rightInverse00 a b c inverseDeterminant inverseLaw
-  rewrite inverseLaw = solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ [])
+rightInverse00 a b c inverseDeterminant inverseLaw =
+  trans
+    (solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ []))
+    inverseLaw
 
 rightInverse01 :
   ∀ a b c inverseDeterminant →
@@ -146,5 +153,7 @@ rightInverse11 :
       (symmetricMatrix a b c)
       (symmetricInverseCandidate a b c inverseDeterminant))
   ≡ 1ℚ
-rightInverse11 a b c inverseDeterminant inverseLaw
-  rewrite inverseLaw = solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ [])
+rightInverse11 a b c inverseDeterminant inverseLaw =
+  trans
+    (solve (a ∷ b ∷ c ∷ inverseDeterminant ∷ []))
+    inverseLaw
