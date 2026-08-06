@@ -15,7 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNYuIncrementDefectCriticalKernelExact where
 --
 -- PURPOSE
 -- Implement the finite critical-kernel form requested for the derivative-
--- compatible increment defect.  The explicit kernel
+-- compatible increment defect. The explicit kernel
 --
 --   kappa_m = (1/4)(1/4)^m
 --
@@ -24,7 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNYuIncrementDefectCriticalKernelExact where
 --   h_m = (1/2)(1/2)^m.
 --
 -- Hence every finite increment convolution is dominated by the already
--- proved l1*c0 annular convolution, uniformly in the cutoff.  A defect bounded
+-- proved l1*c0 annular convolution, uniformly in the cutoff. A defect bounded
 -- by this critical convolution therefore vanishes whenever the critical shell
 -- source does.
 ------------------------------------------------------------------------
@@ -34,7 +34,9 @@ open import Data.Nat.Base using (_+_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open ℚₚ using (_≤?_)
 open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
@@ -46,9 +48,8 @@ incrementWeight : Nat → ℚ
 incrementWeight offset = Geo.quarter * Geo.pow Geo.quarter offset
 
 quarterBelowHalf : Geo.quarter ≤ HL.half
-quarterBelowHalf = ℚₚ.<⇒≤ (record {})
+quarterBelowHalf = toWitness {a? = Geo.quarter ≤? HL.half} _
 
--- Written recursively to avoid any appeal to real exponent monotonicity.
 quarterPowerBelowHalfPower :
   (offset : Nat) →
   Geo.pow Geo.quarter offset ≤ Geo.pow HL.half offset
@@ -75,10 +76,7 @@ incrementWeightBelowAnnularWeight offset =
     (quarterPowerBelowHalfPower offset)
 
 finiteIncrementConvolution :
-  (criticalShell : Nat → ℚ) →
-  Nat →
-  Nat →
-  ℚ
+  (criticalShell : Nat → ℚ) → Nat → Nat → ℚ
 finiteIncrementConvolution criticalShell shell zero =
   incrementWeight zero * criticalShell shell
 finiteIncrementConvolution criticalShell shell (suc cutoff) =
@@ -93,9 +91,7 @@ finiteIncrementBelowAnnular :
   finiteIncrementConvolution criticalShell shell cutoff
   ≤ Far.finiteAnnularConvolution criticalShell shell cutoff
 finiteIncrementBelowAnnular criticalShell criticalNN shell zero =
-  let
-    instance
-      massNN = nonNegative (criticalNN shell)
+  let instance massNN = nonNegative (criticalNN shell)
   in
   ℚₚ.*-monoʳ-≤-nonNeg
     (criticalShell shell)
@@ -105,8 +101,7 @@ finiteIncrementBelowAnnular criticalShell criticalNN shell (suc cutoff) =
     (finiteIncrementBelowAnnular criticalShell criticalNN shell cutoff)
     (let
        instance
-         massNN =
-           nonNegative (criticalNN (shell + suc cutoff))
+         massNN = nonNegative (criticalNN (shell + suc cutoff))
      in
      ℚₚ.*-monoʳ-≤-nonNeg
        (criticalShell (shell + suc cutoff))
@@ -124,8 +119,7 @@ record IncrementDefectCriticalKernelData : Set where
     incrementDefectBound :
       (shell : Nat) →
       incrementDefect shell
-      ≤ finiteIncrementConvolution
-          criticalShell shell annularCutoff
+      ≤ finiteIncrementConvolution criticalShell shell annularCutoff
 
 open IncrementDefectCriticalKernelData public
 
