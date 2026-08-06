@@ -6,7 +6,9 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 import DASHI.Biology.DialecticalSheetSpiralExact as Spiral
+import DASHI.Biology.TriadicBraidDialecticExact as Braid
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Biology.TernaryCantorWheelDiffusionExact as Cantor
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Monster
 import DASHI.Biology.FRACTRANSSPTransitionExact as FRACTRAN
 import DASHI.Biology.SpectralGrokkingLatticeExact as Grokking
@@ -16,7 +18,7 @@ import DASHI.Biology.NaturalSystemsHyperfabricExact as Natural
 import DASHI.Biology.NeuralRepresentationLaplacianExact as Neural
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as NSYM
 import DASHI.Biology.DASHIQuantumLikeEntropyOscillatorExact as Entropy
-import DASHI.Biology.ConsciousAccessRound5SourceAtlas as Sources
+import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as Sources
 import DASHI.Biology.ConsciousAccessRound5FullBoundary as Full
 
 ------------------------------------------------------------------------
@@ -53,16 +55,33 @@ spiralRegression :
   ≡ Spiral.projectedSheet state
 spiralRegression = Spiral.projectedReturnAfterFour
 
+braidRegression :
+  Braid.endpoint Braid.leftTransition ≡ Braid.endpoint Braid.rightTransition
+  ×
+  ¬ (Braid.wordKind Braid.leftBraidResidual
+     ≡ Braid.wordKind Braid.rightBraidResidual)
+braidRegression = refl , Braid.leftAndRightWordKindsDiffer
+
 hyperfabricScaleRegression :
   Hyper.siteCount Hyper.sheetNineByNine ≡ 81
   × Hyper.siteCount Hyper.voxelNineByNineByThree ≡ 243
 hyperfabricScaleRegression = refl , refl
 
+cantorWheelRegression :
+  Cantor.ternaryAddressCount 3 ≡ 27
+  × Cantor.polarAddressCount 3 ≡ 8
+  × Cantor.moveOneNegativeToZero Cantor.canonicalWheelGradient
+    ≡ Cantor.wheelMass 2 1 0
+cantorWheelRegression = refl , (refl , refl)
+
 monsterDimensionRegression :
-  Monster.monsterCandidateDimension ≡ 196883
+  Monster.rawNineRepresentationDimension ≡ 9
+  × Monster.rawNineMultiplicity Monster.A2 ≡ 0
+  × Monster.monsterCandidateDimension ≡ 196883
   × 47 * 59 * 71 ≡ 196883
   × Monster.isOggPrime 53 ≡ false
-monsterDimensionRegression = refl , (refl , refl)
+monsterDimensionRegression =
+  refl , (refl , (refl , (refl , refl)))
 
 fractranSSPRegression :
   FRACTRAN.exponent47 FRACTRAN.thirdCanonicalTransfer ≡ 1
@@ -115,5 +134,6 @@ entropyOscillatorRegression :
   × Entropy.oscillatorEnergy Entropy.firstOddMode ≡ 4
 entropyOscillatorRegression = refl , (refl , refl)
 
-round5SourceRegression : Sources.canonicalRound5SourceCount ≡ 18
+round5SourceRegression :
+  Sources.canonicalRound5ExtendedSourceCount ≡ 22
 round5SourceRegression = refl
