@@ -28,7 +28,8 @@ module DASHI.Physics.Common.ReducedModeProjectionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Data.Bool using (Bool; true; false)
+open import Data.Nat.Base using (ℕ; _+_) renaming (ℕ to Nat)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
@@ -154,20 +155,13 @@ data ReducedModeApplication : Set where
 record ReducedModeBoundary : Set where
   constructor reducedModeBoundary
   field
-    commonModeRemovalAlgebraIsReusable : Set
-    commonModeRemovalAlgebraIsReusableWitness :
-      commonModeRemovalAlgebraIsReusable
-    commonModeCountIdentifiesPhysicalOperators : Set
-    commonModeCountDoesNotIdentifyPhysicalOperators :
-      commonModeCountIdentifiesPhysicalOperators → Set
+    commonModeRemovalAlgebraIsReusable : Bool
+    commonModeRemovalAlgebraIsReusableIsTrue :
+      commonModeRemovalAlgebraIsReusable ≡ true
+    commonModeCountIdentifiesPhysicalOperators : Bool
+    commonModeCountIdentifiesPhysicalOperatorsIsFalse :
+      commonModeCountIdentifiesPhysicalOperators ≡ false
 
 canonicalReducedModeBoundary : ReducedModeBoundary
 canonicalReducedModeBoundary =
-  reducedModeBoundary
-    (⊤)
-    tt
-    (⊥)
-    (λ impossible → ⊥)
-  where
-  open import Data.Unit using (⊤; tt)
-  open import Data.Empty using (⊥)
+  reducedModeBoundary true refl false refl
