@@ -15,7 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNYuLocalizationCaccioppoliTailExact where
 --
 -- PURPOSE
 -- Supply the exact algebraic absorption step behind a localized Caccioppoli
--- estimate.  For epsilon>0 and epsilonInv satisfying epsilon*epsilonInv=1,
+-- estimate. For epsilon>0 and epsilonInv satisfying epsilon*epsilonInv=1,
 --
 --   2 a b <= epsilon a^2 + epsilonInv b^2.
 --
@@ -32,7 +32,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Nat.Base using (ℕ)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; _<_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -133,11 +133,8 @@ record LocalizationCaccioppoliCell : Set where
           + gradientFactor * cutoffFactor)
         + observation
 
-    diffusionMeaning :
-      L2.square gradientFactor ≡ diffusion
-
-    remainderMeaning :
-      L2.square cutoffFactor ≡ remainder
+    diffusionMeaning : L2.square gradientFactor ≡ diffusion
+    remainderMeaning : L2.square cutoffFactor ≡ remainder
 
 open LocalizationCaccioppoliCell public
 
@@ -218,8 +215,7 @@ record LocalizationTailTransferData : Set where
   field
     localization controllingTail : ℕ → ℚ
     pointwiseBound :
-      (shell : ℕ) →
-      localization shell ≤ controllingTail shell
+      (shell : ℕ) → localization shell ≤ controllingTail shell
 
 open LocalizationTailTransferData public
 
