@@ -11,6 +11,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33WilsonAtomSignedPerturbationExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonSignedGlobalExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33CubicShellSeriesExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda'
