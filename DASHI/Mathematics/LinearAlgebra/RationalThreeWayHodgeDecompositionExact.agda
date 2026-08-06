@@ -23,6 +23,7 @@ module DASHI.Mathematics.LinearAlgebra.RationalThreeWayHodgeDecompositionExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
