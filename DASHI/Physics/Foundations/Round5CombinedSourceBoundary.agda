@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.ConsciousAccessRound4SourceAtlas as PadicSources
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologyExtended
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas as BiologyCompletion
+import DASHI.Biology.TernaryLogicRelaxationSourceAtlas as LogicRelaxationSources
 import DASHI.Physics.Foundations.Round5SourceAtlas as PhysicsSources
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas as AttachedSources
 import DASHI.Physics.DarkSector.DarkSectorColliderSourceAtlas as ColliderSources
@@ -43,6 +44,9 @@ record Round5CombinedSourceBoundary : Set where
     eventPadicSourceCountIsTen :
       EventPadicSources.canonicalEventPadicSourceCount ≡ 10
 
+    ternaryLogicRelaxationSourceCountIsThree :
+      LogicRelaxationSources.canonicalTernaryLogicRelaxationSourceCount ≡ 3
+
 open Round5CombinedSourceBoundary public
 
 canonicalRound5CombinedSourceBoundary : Round5CombinedSourceBoundary
@@ -56,3 +60,4 @@ canonicalRound5CombinedSourceBoundary =
     ColliderSources.canonicalDarkSectorColliderSourceCountIsSix
     VisualisationSources.canonicalAttachedVisualisationSourceCountIsEight
     EventPadicSources.canonicalEventPadicSourceCountIsTen
+    LogicRelaxationSources.canonicalTernaryLogicRelaxationSourceCountIsThree
