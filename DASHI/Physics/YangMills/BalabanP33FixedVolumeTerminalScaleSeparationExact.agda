@@ -39,12 +39,13 @@ module DASHI.Physics.YangMills.BalabanP33FixedVolumeTerminalScaleSeparationExact
 --
 -- The terminal scalar is not independently supplied.  The Combes--Thomas data
 -- already carry the literal P33 quadratic floor, so the transfer chain is
--- definitionally terminated at P33.p33PhysicalFloor = 1/32.  This removes the
--- possibility of pairing terminal propagator data with an unrelated claimed
--- terminal gap.
+-- definitionally terminated at P33.p33PhysicalFloor = 1/32.  Positivity is not
+-- accepted as a separate receipt either: the model must prove the exact budget
 --
--- A completed terminal route must still provide a genuine physical
--- GapTransferChain and prove that the discounted pulled-back floor is positive.
+--   discountedLossBudget(losses)
+--     <= discountFactor(length losses) * (1/32).
+--
+-- The pulled-back and fine-scale nonnegative floors are then derived.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
@@ -81,8 +82,9 @@ record TerminalScalePriorityThreeData
       Pullback.GapTransferChain
         fineGap losses P33.p33PhysicalFloor
 
-    pulledBackFloorNonnegative :
-      0ℚ ≤ Pullback.pullBackGap P33.p33PhysicalFloor losses
+    discountedPhysicalLossBudget :
+      Pullback.discountedLossBudgetAdmissible
+        P33.p33PhysicalFloor losses
 
 open TerminalScalePriorityThreeData public
 
@@ -103,15 +105,24 @@ terminalScaleGreenKernelDecay data target =
   CT.physicalGreenKernelDecayFromQuadraticCoercivity
     (terminalCombesThomasData data) target
 
+pulledBackPhysicalFloorNonnegative :
+  ∀ {fineGap losses hessian green}
+    (data : TerminalScalePriorityThreeData
+      fineGap losses hessian green) →
+  0ℚ ≤ Pullback.pullBackGap P33.p33PhysicalFloor losses
+pulledBackPhysicalFloorNonnegative data =
+  Pullback.admissibleBudgetImpliesPulledBackNonnegative
+    P33.p33PhysicalFloor _ (discountedPhysicalLossBudget data)
+
 fineScaleGapNonnegativeFromTerminalChain :
   ∀ {fineGap losses hessian green}
     (data : TerminalScalePriorityThreeData
       fineGap losses hessian green) →
   0ℚ ≤ fineGap
 fineScaleGapNonnegativeFromTerminalChain data =
-  Pullback.pulledBackNonnegativeImpliesFineNonnegative
+  Pullback.admissibleBudgetImpliesFineNonnegative
     (physicalGapTransferChain data)
-    (pulledBackFloorNonnegative data)
+    (discountedPhysicalLossBudget data)
 
 terminalDecayAndFineGapFloor :
   ∀ {fineGap losses hessian green}
