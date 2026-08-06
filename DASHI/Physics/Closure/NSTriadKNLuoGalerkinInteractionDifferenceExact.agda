@@ -43,13 +43,18 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _/_; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
 two : ℚ
 two = Int.+ 2 / 1
+
+twoNonnegative : 0ℚ ≤ two
+twoNonnegative = toWitness {a? = 0ℚ ≤? two} _
 
 interaction : ℚ → ℚ → ℚ
 interaction nonlinear block = nonlinear * block
@@ -219,10 +224,6 @@ interactionDifferenceSquaredBound dataSet =
 
     sumProducts =
       ℚₚ.+-mono-≤ firstProductBound secondProductBound
-
-    twoNonnegative : 0ℚ ≤ two
-    twoNonnegative =
-      ℚₚ.<⇒≤ (Data.Rational.Properties.positive 2)
 
     scaledProducts :
       two * (L2.square firstTerm + L2.square secondTerm)
