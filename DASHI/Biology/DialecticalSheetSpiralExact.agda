@@ -56,31 +56,16 @@ reflectionIsInvolutive (sheet3 a b c d e f g h i) = refl
 
 negationIsInvolutive :
   (x : Sheet3) → negateSheet (negateSheet x) ≡ x
-negationIsInvolutive (sheet3 a b c d e f g h i) =
-  cong
-    (λ z → sheet3
-      (Triadic.negateTrit (Triadic.negateTrit a))
-      (Triadic.negateTrit (Triadic.negateTrit b))
-      (Triadic.negateTrit (Triadic.negateTrit c))
-      (Triadic.negateTrit (Triadic.negateTrit d))
-      (Triadic.negateTrit (Triadic.negateTrit e))
-      (Triadic.negateTrit (Triadic.negateTrit f))
-      (Triadic.negateTrit (Triadic.negateTrit g))
-      (Triadic.negateTrit (Triadic.negateTrit h))
-      z)
-    (Triadic.negateTritInvolutive i)
-
-------------------------------------------------------------------------
--- The above proof only rewrites one coordinate explicitly.  A direct
--- constructor proof packages the complete pointwise involution and is the
--- theorem used by the regression surface.
-
-negationIsInvolutiveDirect :
-  (x : Sheet3) → negateSheet (negateSheet x) ≡ x
-negationIsInvolutiveDirect (sheet3 Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit) = refl
-negationIsInvolutiveDirect (sheet3 Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.zeroTrit) = refl
-negationIsInvolutiveDirect (sheet3 Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.negativeTrit Triadic.positiveTrit) = refl
-negationIsInvolutiveDirect (sheet3 a b c d e f g h i) with Triadic.negateTritInvolutive a | Triadic.negateTritInvolutive b | Triadic.negateTritInvolutive c | Triadic.negateTritInvolutive d | Triadic.negateTritInvolutive e | Triadic.negateTritInvolutive f | Triadic.negateTritInvolutive g | Triadic.negateTritInvolutive h | Triadic.negateTritInvolutive i
+negationIsInvolutive (sheet3 a b c d e f g h i)
+  with Triadic.negateTritInvolutive a
+     | Triadic.negateTritInvolutive b
+     | Triadic.negateTritInvolutive c
+     | Triadic.negateTritInvolutive d
+     | Triadic.negateTritInvolutive e
+     | Triadic.negateTritInvolutive f
+     | Triadic.negateTritInvolutive g
+     | Triadic.negateTritInvolutive h
+     | Triadic.negateTritInvolutive i
 ... | refl | refl | refl | refl | refl | refl | refl | refl | refl = refl
 
 ------------------------------------------------------------------------
