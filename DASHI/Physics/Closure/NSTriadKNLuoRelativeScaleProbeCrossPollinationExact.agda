@@ -59,9 +59,8 @@ branchProbeExact weakDisplayedBranch = LH.branchTwoIsWeakGap
 
 weakBranchMatchesDisplayedHalfGap :
   ∀ q r →
-  LH.minusHalf * (q LH.- r) + LH.threeHalves * r + q
-  ≡ branchExponent weakDisplayedBranch q r
-weakBranchMatchesDisplayedHalfGap = LH.finalDisplayedTargetMatchesBranchTwo
+  branchExponent weakDisplayedBranch q r ≡ LH.weakGapExponent q r
+weakBranchMatchesDisplayedHalfGap = LH.branchTwoIsWeakGap
 
 record BranchProbeVector : Set where
   constructor branchProbeVector
