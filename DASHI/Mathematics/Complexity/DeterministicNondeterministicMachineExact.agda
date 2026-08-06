@@ -32,46 +32,49 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
-open import Data.Product using (Σ; _×_; _,_)
+open import Data.Nat.Base using (_≤_)
 
 record DeterministicMachine : Set₁ where
   field
-    Input : Set
-    Configuration : Set
-    initial : Input → Configuration
-    next : Configuration → Maybe Configuration
-    accepting : Configuration → Set
+    dInput : Set
+    dConfiguration : Set
+    dInitial : dInput → dConfiguration
+    dNext : dConfiguration → Maybe dConfiguration
+    dAccepting : dConfiguration → Set
 
 open DeterministicMachine public
 
 iterateDeterministic :
   (machine : DeterministicMachine) →
-  Nat → Configuration machine → Maybe (Configuration machine)
+  Nat → dConfiguration machine → Maybe (dConfiguration machine)
 iterateDeterministic machine zero configuration = just configuration
-iterateDeterministic machine (suc steps) configuration with next machine configuration
+iterateDeterministic machine (suc steps) configuration
+    with dNext machine configuration
 ... | nothing = nothing
 ... | just successor = iterateDeterministic machine steps successor
 
 record DeterministicAcceptsWithin
     (machine : DeterministicMachine)
-    (input : Input machine)
+    (input : dInput machine)
     (bound : Nat) : Set₁ where
   field
-    steps : Nat
-    withinBound : Set
-    finalConfiguration : Configuration machine
-    runResult :
-      iterateDeterministic machine steps (initial machine input)
-      ≡ just finalConfiguration
-    finalAccepting : accepting machine finalConfiguration
+    dSteps : Nat
+    dWithinBound : dSteps ≤ bound
+    dFinalConfiguration : dConfiguration machine
+    dRunResult :
+      iterateDeterministic machine dSteps (dInitial machine input)
+      ≡ just dFinalConfiguration
+    dFinalAccepting : dAccepting machine dFinalConfiguration
+
+open DeterministicAcceptsWithin public
 
 record NondeterministicMachine : Set₁ where
   field
-    Input : Set
-    Configuration : Set
-    initial : Input → Configuration
-    successors : Configuration → List Configuration
-    accepting : Configuration → Set
+    nInput : Set
+    nConfiguration : Set
+    nInitial : nInput → nConfiguration
+    nSuccessors : nConfiguration → List nConfiguration
+    nAccepting : nConfiguration → Set
 
 open NondeterministicMachine public
 
@@ -86,25 +89,27 @@ data Member {A : Set} (value : A) : List A → Set where
 
 data NDReach
     (machine : NondeterministicMachine) :
-    Nat → Configuration machine → Configuration machine → Set where
+    Nat → nConfiguration machine → nConfiguration machine → Set where
   ndRefl : ∀ {configuration} →
     NDReach machine zero configuration configuration
   ndStep : ∀ {steps start middle finish} →
-    Member middle (successors machine start) →
+    Member middle (nSuccessors machine start) →
     NDReach machine steps middle finish →
     NDReach machine (suc steps) start finish
 
 record NondeterministicAcceptsWithin
     (machine : NondeterministicMachine)
-    (input : Input machine)
+    (input : nInput machine)
     (bound : Nat) : Set₁ where
   field
-    steps : Nat
-    withinBound : Set
-    finalConfiguration : Configuration machine
-    reachable :
-      NDReach machine steps (initial machine input) finalConfiguration
-    finalAccepting : accepting machine finalConfiguration
+    nSteps : Nat
+    nWithinBound : nSteps ≤ bound
+    nFinalConfiguration : nConfiguration machine
+    nReachable :
+      NDReach machine nSteps (nInitial machine input) nFinalConfiguration
+    nFinalAccepting : nAccepting machine nFinalConfiguration
+
+open NondeterministicAcceptsWithin public
 
 ------------------------------------------------------------------------
 -- Deterministic machine as singleton-branching nondeterministic machine.
@@ -117,12 +122,12 @@ singletonSuccessors (just value) = value ∷ []
 deterministicAsNondeterministic :
   DeterministicMachine → NondeterministicMachine
 deterministicAsNondeterministic machine = record
-  { Input = Input machine
-  ; Configuration = Configuration machine
-  ; initial = initial machine
-  ; successors = λ configuration →
-      singletonSuccessors (next machine configuration)
-  ; accepting = accepting machine
+  { nInput = dInput machine
+  ; nConfiguration = dConfiguration machine
+  ; nInitial = dInitial machine
+  ; nSuccessors = λ configuration →
+      singletonSuccessors (dNext machine configuration)
+  ; nAccepting = dAccepting machine
   }
 
 deterministicRunGivesNDReach :
@@ -132,7 +137,7 @@ deterministicRunGivesNDReach :
 deterministicRunGivesNDReach machine zero start finish runResult with runResult
 ... | refl = ndRefl
 deterministicRunGivesNDReach machine (suc steps) start finish runResult
-    with next machine start
+    with dNext machine start
 ... | nothing = impossible runResult
   where
     impossible : nothing ≡ just finish →
@@ -149,38 +154,34 @@ boundedDeterministicAcceptanceEmbeds :
   NondeterministicAcceptsWithin
     (deterministicAsNondeterministic machine) input bound
 boundedDeterministicAcceptanceEmbeds machine input bound acceptance = record
-  { NondeterministicAcceptsWithin.steps =
-      DeterministicAcceptsWithin.steps acceptance
-  ; NondeterministicAcceptsWithin.withinBound =
-      DeterministicAcceptsWithin.withinBound acceptance
-  ; NondeterministicAcceptsWithin.finalConfiguration =
-      DeterministicAcceptsWithin.finalConfiguration acceptance
-  ; NondeterministicAcceptsWithin.reachable =
+  { nSteps = dSteps acceptance
+  ; nWithinBound = dWithinBound acceptance
+  ; nFinalConfiguration = dFinalConfiguration acceptance
+  ; nReachable =
       deterministicRunGivesNDReach machine
-        (DeterministicAcceptsWithin.steps acceptance)
-        (initial machine input)
-        (DeterministicAcceptsWithin.finalConfiguration acceptance)
-        (DeterministicAcceptsWithin.runResult acceptance)
-  ; NondeterministicAcceptsWithin.finalAccepting =
-      DeterministicAcceptsWithin.finalAccepting acceptance
+        (dSteps acceptance)
+        (dInitial machine input)
+        (dFinalConfiguration acceptance)
+        (dRunResult acceptance)
+  ; nFinalAccepting = dFinalAccepting acceptance
   }
 
 record PolynomialClockedDeterministicMachine : Setω where
   field
-    machine : DeterministicMachine
-    inputLength : Input machine → Nat
-    clock : Nat → Nat
-    clockPolynomiallyBounded : Set
-    decidesLanguageWithinClock : Set
+    dMachine : DeterministicMachine
+    dInputLength : dInput dMachine → Nat
+    dClock : Nat → Nat
+    dClockPolynomiallyBounded : Set
+    dDecidesLanguageWithinClock : Set
 
 record PolynomialClockedNondeterministicMachine : Setω where
   field
-    machine : NondeterministicMachine
-    inputLength : Input machine → Nat
-    clock : Nat → Nat
-    clockPolynomiallyBounded : Set
-    acceptsLanguageWithinClock : Set
-    branchDescriptionPolynomiallyBounded : Set
+    nMachine : NondeterministicMachine
+    nInputLength : nInput nMachine → Nat
+    nClock : Nat → Nat
+    nClockPolynomiallyBounded : Set
+    nAcceptsLanguageWithinClock : Set
+    nBranchDescriptionPolynomiallyBounded : Set
 
 record MachineVerifierEquivalence : Setω where
   field
