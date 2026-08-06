@@ -33,7 +33,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoCompactSupportPositiveStrainCoreExact w
 -- fully checked here rather than assumed.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_; positive; nonNegative)
 import Data.Rational.Properties as ℚₚ
@@ -140,8 +142,6 @@ matrix3Ext
   {left = Sign.matrix3 l11 l12 l13 l21 l22 l23 l31 l32 l33}
   {right = Sign.matrix3 .l11 .l12 .l13 .l21 .l22 .l23 .l31 .l32 .l33}
   refl refl refl refl refl refl refl refl refl = refl
-  where
-  open import Agda.Builtin.Equality using (refl)
 
 plateauCurlVelocity :
   ∀ x y z →
@@ -152,8 +152,6 @@ plateauCurlVelocity x y z =
   solve (x ∷ y ∷ z ∷ []) ,
   solve (x ∷ y ∷ z ∷ []) ,
   solve (x ∷ y ∷ z ∷ [])
-  where
-  open import Data.Product.Base using (_×_; _,_)
 
 plateauGradientEqualsAffine :
   ∀ x y z →
