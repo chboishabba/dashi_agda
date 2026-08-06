@@ -169,3 +169,20 @@ import DASHI.Biology.ConsciousAccessRound5SourceAtlas
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas
 import DASHI.Biology.ConsciousAccessRound5FullBoundary
 import DASHI.Biology.ConsciousAccessRound5Regression
+
+------------------------------------------------------------------------
+-- Round-five completion: reduced 53-fibre, signed SSP weave, self-indexing
+-- tetration, equivariant sectors, jets, reachability, moonshine, and Clay joins.
+
+import DASHI.Biology.ReducedFiftyThreeFibreExact
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact
+import DASHI.Biology.SelfIndexingHyperfabricTetrationExact
+import DASHI.Biology.EquivariantLaplacianSectorExact
+import DASHI.Biology.OrientedZeroJetTransitionExact
+import DASHI.Biology.ReachableSectorEntropyExact
+import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact
+import DASHI.Biology.MoonshineGradedStageBridgeExact
+import DASHI.Biology.ClayCrossPollinationInterfaceExact
+import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas
+import DASHI.Biology.ConsciousAccessRound5CompletionBoundary
+import DASHI.Biology.ConsciousAccessRound5CompletionRegression
