@@ -7,6 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoClayCrossPollinationRound15Validation w
 --
 --   * exact projection/off-diagonal block calculus;
 --   * invariant plus mean-zero mode splitting and the 54 = 1 + 53 count;
+--   * the typed distinction between dimension 53 and kernel mass 53/6;
 --   * arbitrary-factor weighted strict-loss pullback;
 --   * defect-controlled coarse-dynamics squares;
 --   * exact identification of every finite NS transport-commutator sample
@@ -27,6 +28,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 import DASHI.Physics.Closure.NSTriadKNLuoCommutatorContinuumRound14Validation
 import DASHI.Physics.Common.FiniteProjectionOffDiagonalExact
 import DASHI.Physics.Common.ReducedModeProjectionExact
+import DASHI.Physics.Common.FiftyThreeTypedBoundaryExact
 import DASHI.Physics.Common.WeightedStrictLossTransportExact
 import DASHI.Physics.Common.CoarseDynamicsCommutatorExact
 import DASHI.Physics.Closure.NSTriadKNLuoProjectionLeakageCrossPollinationExact
