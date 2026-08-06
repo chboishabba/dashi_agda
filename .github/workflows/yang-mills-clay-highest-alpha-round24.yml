@@ -9,8 +9,12 @@ on:
       - 'agent/ym-clay-alpha-round23-terminal-scale-gap'
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33QuaternionFourFactorTelescopeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33RationalQuaternionNormSquaredExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33QuaternionTelescopeNormSquaredExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementTelescopeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33QuaternionAdjointPerturbationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33QuaternionAdjointNormSquaredExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeFirstExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33StrictTerminalGapMarginExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33CoarseFineSchurCouplingExact.agda'
@@ -35,5 +39,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check Wilson telescopes, background gauge derivative, and RG Schur gap algebra
+      - name: Check Wilson and gauge norm bounds plus RG Schur gap algebra
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round24.sh
