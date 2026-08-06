@@ -355,13 +355,23 @@ singleModeParseval dataSet oneTerm
     (torusFiniteParseval dataSet (oneTerm ∷ []))
     (trans
       (cong
-        (λ diagonal → C3.complexAdd diagonal (C3.complexZero _))
+        (λ diagonal →
+          C3.complexAdd
+            (C3.complexAdd diagonal (C3.complexZero _))
+            (C3.complexZero _))
         (Ring.complexMultiplyOneRight
           (C3.complexMultiply
             (Torus.coefficient oneTerm)
             (C3.complexConjugate (Torus.coefficient oneTerm)))))
-      (Algebra.complexAddZeroRight
-        (C3.complexMultiply
-          (Torus.coefficient oneTerm)
-          (C3.complexConjugate (Torus.coefficient oneTerm)))))
+      (trans
+        (cong
+          (λ inner → C3.complexAdd inner (C3.complexZero _))
+          (Algebra.complexAddZeroRight
+            (C3.complexMultiply
+              (Torus.coefficient oneTerm)
+              (C3.complexConjugate (Torus.coefficient oneTerm)))))
+        (Algebra.complexAddZeroRight
+          (C3.complexMultiply
+            (Torus.coefficient oneTerm)
+            (C3.complexConjugate (Torus.coefficient oneTerm))))))
 ... | no inequality = ⊥-elim (inequality refl)
