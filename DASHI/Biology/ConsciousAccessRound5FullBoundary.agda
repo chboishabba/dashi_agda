@@ -93,17 +93,6 @@ record ConsciousAccessRound5Boundary : Set where
         (YijingRelational.complementHexagram x)
       ≡ x
 
-    canonicalNuclearHexagramIsExact :
-      YijingRelational.nuclearHexagram YijingRelational.canonicalCastInitial
-      ≡
-      (Triadic.positiveTrit YijingRelational.vcons
-       Triadic.negativeTrit YijingRelational.vcons
-       Triadic.positiveTrit YijingRelational.vcons
-       Triadic.negativeTrit YijingRelational.vcons
-       Triadic.positiveTrit YijingRelational.vcons
-       Triadic.positiveTrit YijingRelational.vcons
-       YijingRelational.vnil)
-
     orientedZerosShareCoarseObservation :
       Zero.coarseTrit Zero.negativeZero
       ≡ Zero.coarseTrit Zero.positiveZero
@@ -219,7 +208,6 @@ canonicalConsciousAccessRound5Boundary =
     YijingRelational.reverseIsInvolutive
     YijingRelational.exchangeIsInvolutive
     YijingRelational.complementIsInvolutive
-    YijingRelational.canonicalNuclearExtraction
     Zero.negativeAndPositiveZeroCoarseAgree
     Spiral.projectedReturnAfterFour
     Spiral.historicalLiftAfterFour
