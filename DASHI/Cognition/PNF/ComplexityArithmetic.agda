@@ -42,7 +42,7 @@ right-summand≤ zero right = ≤ᶜ-refl right
 right-summand≤ (suc left) right = ≤ᶜ-step (right-summand≤ left right)
 
 +ᶜ-monotone-right : ∀ {a b} → a ≤ᶜ b → ∀ c → (a +ᶜ c) ≤ᶜ (b +ᶜ c)
-+ᶜ-monotone-right z≤n c = right-summand≤ _ c
++ᶜ-monotone-right {b = b} z≤n c = right-summand≤ b c
 +ᶜ-monotone-right (s≤s proof) c = s≤s (+ᶜ-monotone-right proof c)
 
 +ᶜ-monotone-left : ∀ {a b} → a ≤ᶜ b → ∀ c → (c +ᶜ a) ≤ᶜ (c +ᶜ b)
