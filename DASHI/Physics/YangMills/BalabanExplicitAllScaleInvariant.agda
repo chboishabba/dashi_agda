@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanExplicitAllScaleInvariant where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 ------------------------------------------------------------------------
 -- Explicit I1--I9 invariant-domain closure.
 --

@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanStepVPolynomialPrefixTailDominationExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 ------------------------------------------------------------------------
 -- PROVENANCE
 --

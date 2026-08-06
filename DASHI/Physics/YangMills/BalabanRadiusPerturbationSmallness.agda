@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanRadiusPerturbationSmallness where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
