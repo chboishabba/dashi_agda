@@ -45,7 +45,11 @@ module DASHI.Physics.YangMills.BalabanP33FixedVolumeTerminalScaleSeparationExact
 --   discountedLossBudget(losses)
 --     <= discountFactor(length losses) * (1/32).
 --
--- For four RG steps the inherited floor is exposed literally as
+-- For four RG steps this is reduced to the literal arithmetic condition
+--
+--   loss0/2 + loss1/4 + loss2/8 + loss3/16 <= 1/512,
+--
+-- and the inherited floor is
 --
 --   1/512 - loss0/2 - loss1/4 - loss2/8 - loss3/16.
 ------------------------------------------------------------------------
@@ -57,7 +61,7 @@ open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; ∣_∣; _+_; _-_; _≤_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
@@ -78,26 +82,79 @@ bareUniformOneThirtySecondBlocked =
   Wall.oneThirtySecondNotUniformUnscaled
 
 ------------------------------------------------------------------------
--- Concrete four-step terminal floor.
+-- Concrete four-step terminal floor and admissible loss budget.
 ------------------------------------------------------------------------
 
 p33FourStepTerminalContributionExact :
   (+ 1 / 16) * P33.p33PhysicalFloor ≡ + 1 / 512
 p33FourStepTerminalContributionExact = ℚRing.solve []
 
+fourStepWeightedLoss : ℚ → ℚ → ℚ → ℚ → ℚ
+fourStepWeightedLoss loss0 loss1 loss2 loss3 =
+  (+ 1 / 2) * loss0
+  + (+ 1 / 4) * loss1
+  + (+ 1 / 8) * loss2
+  + (+ 1 / 16) * loss3
+
 p33FourStepPullbackExact : ∀ loss0 loss1 loss2 loss3 →
   Pullback.pullBackGap P33.p33PhysicalFloor
     (loss0 ∷ loss1 ∷ loss2 ∷ loss3 ∷ [])
-  ≡ (+ 1 / 512)
-    - ((+ 1 / 2) * loss0
-      + (+ 1 / 4) * loss1
-      + (+ 1 / 8) * loss2
-      + (+ 1 / 16) * loss3)
+  ≡ (+ 1 / 512) - fourStepWeightedLoss loss0 loss1 loss2 loss3
 p33FourStepPullbackExact loss0 loss1 loss2 loss3 =
   trans
     (Pullback.fourStepPullbackExact
       P33.p33PhysicalFloor loss0 loss1 loss2 loss3)
     (ℚRing.solve-∀ loss0 loss1 loss2 loss3)
+
+fourStepDiscountedLossExact : ∀ loss0 loss1 loss2 loss3 →
+  Pullback.discountedLossBudget
+    (loss0 ∷ loss1 ∷ loss2 ∷ loss3 ∷ [])
+  ≡ fourStepWeightedLoss loss0 loss1 loss2 loss3
+fourStepDiscountedLossExact loss0 loss1 loss2 loss3 =
+  ℚRing.solve-∀ loss0 loss1 loss2 loss3
+
+p33FourStepDiscountedTerminalExact : ∀ loss0 loss1 loss2 loss3 →
+  Pullback.discountFactor
+      (Pullback.listLength (loss0 ∷ loss1 ∷ loss2 ∷ loss3 ∷ []))
+    * P33.p33PhysicalFloor
+  ≡ + 1 / 512
+p33FourStepDiscountedTerminalExact loss0 loss1 loss2 loss3 =
+  ℚRing.solve []
+
+FourStepPhysicalLossBudget : ℚ → ℚ → ℚ → ℚ → Set
+FourStepPhysicalLossBudget loss0 loss1 loss2 loss3 =
+  fourStepWeightedLoss loss0 loss1 loss2 loss3 ≤ + 1 / 512
+
+fourStepPhysicalBudgetAdmissible : ∀ loss0 loss1 loss2 loss3 →
+  FourStepPhysicalLossBudget loss0 loss1 loss2 loss3 →
+  Pullback.discountedLossBudgetAdmissible
+    P33.p33PhysicalFloor
+    (loss0 ∷ loss1 ∷ loss2 ∷ loss3 ∷ [])
+fourStepPhysicalBudgetAdmissible
+    loss0 loss1 loss2 loss3 weightedBelowTerminal =
+  let
+    losses = loss0 ∷ loss1 ∷ loss2 ∷ loss3 ∷ []
+
+    weightedBelowDiscountedTerminal :
+      fourStepWeightedLoss loss0 loss1 loss2 loss3
+      ≤ Pullback.discountFactor (Pullback.listLength losses)
+          * P33.p33PhysicalFloor
+    weightedBelowDiscountedTerminal =
+      subst
+        (λ upper →
+          fourStepWeightedLoss loss0 loss1 loss2 loss3 ≤ upper)
+        (sym
+          (p33FourStepDiscountedTerminalExact
+            loss0 loss1 loss2 loss3))
+        weightedBelowTerminal
+  in
+  subst
+    (λ lower →
+      lower
+      ≤ Pullback.discountFactor (Pullback.listLength losses)
+          * P33.p33PhysicalFloor)
+    (sym (fourStepDiscountedLossExact loss0 loss1 loss2 loss3))
+    weightedBelowDiscountedTerminal
 
 record TerminalScalePriorityThreeData
     (fineGap : ℚ)
