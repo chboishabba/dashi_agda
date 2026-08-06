@@ -27,10 +27,9 @@ module DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 record RationalVectorSpace : Set₁ where
   field
@@ -204,10 +203,17 @@ record HodgeConjectureAtCodimension
 open HodgeConjectureAtCodimension public
 
 hodgeConjectureGivesCycleRepresentative :
-  ∀ {variety comparison hodge cycleMap codimension}
-    (conjecture : HodgeConjectureAtCodimension
-      {variety} {comparison} {hodge} cycleMap codimension)
-    (hodgeClass : RationalHodgeClass hodge codimension) →
+  ∀ {variety : SmoothProjectiveComplexVariety}
+    {comparison : SingularDeRhamComparison variety}
+    {hodge : HodgeDecomposition variety comparison}
+    {cycleMap : CycleClassMap variety comparison hodge}
+    {codimension : Nat} →
+  (conjecture : HodgeConjectureAtCodimension
+    {variety = variety}
+    {comparison = comparison}
+    {hodge = hodge}
+    cycleMap codimension) →
+  (hodgeClass : RationalHodgeClass hodge codimension) →
   cycleClass cycleMap codimension
     (everyRationalHodgeClassHasCycle conjecture hodgeClass)
   ≡ hodgeClassValue hodgeClass
