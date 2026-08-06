@@ -64,10 +64,10 @@ tripleSignal : Signal4 → Signal4 → Signal4 → Signal4
 tripleSignal first second third point =
   first point * second point * third point
 
-alternatingMode : Signal4
 minusOne : ℚ
 minusOne = - 1ℚ
 
+alternatingMode : Signal4
 alternatingMode point0 = 1ℚ
 alternatingMode point1 = minusOne
 alternatingMode point2 = 1ℚ
