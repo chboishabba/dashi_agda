@@ -21,6 +21,8 @@ for file in "${files[@]}"; do
   test -f "$file"
 done
 
+test -f .github/workflows/yang-mills-clay-highest-alpha-round24.yml
+
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe' "${files[@]}"; then
   echo "round twenty-four contains a hole, postulate, unsafe escape, or trust primitive" >&2
   exit 1
