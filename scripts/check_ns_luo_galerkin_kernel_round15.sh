@@ -25,6 +25,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoPeriodicGalerkinFourClassContinuationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinUniformLimitContinuationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoBadCoherenceDynamicRarityExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoBadCoherenceWeightedMarkovExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinKernelRound15Validation.agda
 )
 
