@@ -42,18 +42,19 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; _+_; _*_; _≤_; _/_)
-import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (PositiveBond)
-import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact as Path4
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
 import DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact as Telescope
 import DASHI.Physics.YangMills.BalabanP33QuaternionAdjointPerturbationExact as Adjoint
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+
+normSqMatchesPhysicalNormSq : ∀ value →
+  Norm.normSq value ≡ Physical.quaternionNormSq value
+normSqMatchesPhysicalNormSq (Q.quat q0 q1 q2 q3) = refl
 
 physicalConjugateNormSqExact : ∀ value →
   Norm.normSq (Physical.quaternionConjugate value) ≡ Norm.normSq value
@@ -164,7 +165,9 @@ physicalLinkNormSqExact :
   ∀ background bond →
   Norm.normSq (Physical.link background bond) ≡ + 1 / 1
 physicalLinkNormSqExact background bond =
-  Physical.unitNorm background bond
+  trans
+    (normSqMatchesPhysicalNormSq (Physical.link background bond))
+    (Physical.unitNorm background bond)
 
 physicalInverseLinkNormSqExact :
   ∀ background bond →
@@ -172,7 +175,7 @@ physicalInverseLinkNormSqExact :
 physicalInverseLinkNormSqExact background bond =
   trans
     (physicalConjugateNormSqExact (Physical.link background bond))
-    (Physical.unitNorm background bond)
+    (physicalLinkNormSqExact background bond)
 
 physicalLinkAdjointDefectNormSqBound :
   ∀ background bond value →
