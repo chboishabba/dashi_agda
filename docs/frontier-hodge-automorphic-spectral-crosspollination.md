@@ -190,23 +190,32 @@ Its three-row tableau has separate initial, transition and acceptance constraint
 
 ## 5. Vertex algebra and Fock grading
 
-`DualNumberDifferentialVertexAlgebraExact.agda` uses
+`SquareZeroDifferentialVertexAlgebraExact.agda` uses the commutative algebra
 
 ```text
-A=Q[epsilon]/(epsilon^2),
-D(a+b epsilon)=b epsilon.
+A = Q + Q x + Q y,
+(Q x + Q y)^2 = 0,
+D(x)=y,
+D(y)=0.
 ```
 
-It proves:
+Thus
 
 ```text
+D(a+b x+c y)=b y.
+```
+
+The file proves:
+
+```text
+D is nonzero,
 D^2=0,
-D(xy)=D(x)y+xD(y),
-a_(-1)b=ab,
-a_(-2)b=(Da)b,
+D(uv)=D(u)v+uD(v),
+u_(-1)v=uv,
+u_(-2)v=(Du)v,
 ```
 
-as well as vacuum, creation, translation-mode identities and exact commutation of the truncated bivariate fields.
+as well as vacuum, creation, translation-mode identities and exact commutation of the truncated bivariate fields. The earlier proposed dual-number model was deleted because its nonzero derivation was not square-zero in characteristic zero.
 
 `RankOneFockPartitionGradingExact.agda` constructs oscillator bases in grades zero through five with dimensions
 
