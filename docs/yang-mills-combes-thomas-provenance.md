@@ -99,6 +99,6 @@ Wilson-fermion hopping-parameter expansions control a fermionic determinant in a
 
 A future paper or README should describe DASHI's result as:
 
-> an exact finite-volume rational Combes–Thomas implementation, independently checked against an external public Lean programme and explicitly prevented from being promoted to a bare volume-uniform gap without an RG-scale transfer theorem.
+> an exact finite-volume rational Combes–Thomas implementation, cross-checked against an external public Lean programme and explicitly prevented from being promoted to a bare volume-uniform gap without an RG-scale transfer theorem.
 
 It should not claim independent discovery solely from public dates, should not imply that the external negative result proves a universal Yang–Mills no-go theorem, and should not cite self-published stress tests in place of Combes–Thomas, Bałaban, or peer-reviewed RG sources.
