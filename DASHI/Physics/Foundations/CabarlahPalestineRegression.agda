@@ -6,6 +6,7 @@ import DASHI.Physics.Foundations.CabarlahClaimStatusExact as Status
 import DASHI.Physics.Foundations.CabarlahEvidenceWitnessExact as Witness
 import DASHI.Physics.Foundations.CabarlahHistoricalLayerExact as History
 import DASHI.Physics.Foundations.CabarlahToponymTranscriptionExact as Toponym
+import DASHI.Physics.Foundations.CabarlahPhonologyEnvelopeExact as Phonology
 import DASHI.Physics.Foundations.CabarlahSignalInferenceExact as Signal
 import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact as Circuit
@@ -57,12 +58,22 @@ signalsLineageReachesBorneoRegression =
   History.wartimeLineageReachesBorneoInTwo
 
 ------------------------------------------------------------------------
--- Loss, interpretation, and abstraction regressions.
+-- Loss, phonology, interpretation, and abstraction regressions.
 
 toponymTranscriptionRemainsNonInjective :
   ¬ Toponym.InjectiveColonialRender
 toponymTranscriptionRemainsNonInjective =
   Toponym.colonialRenderIsNotInjective
+
+phonologyEnvelopeCountRegression :
+  Phonology.envelopeProductCount ≡ 32
+phonologyEnvelopeCountRegression =
+  Phonology.envelopeProductCountIsThirtyTwo
+
+phonologyEnvelopeRenderRemainsNonInjective :
+  ¬ Phonology.EnvelopeRenderInjective
+phonologyEnvelopeRenderRemainsNonInjective =
+  Phonology.envelopeRenderIsNotInjective
 
 signalInferenceRemainsNonInjective :
   ¬ Signal.SignalInferenceInjective
