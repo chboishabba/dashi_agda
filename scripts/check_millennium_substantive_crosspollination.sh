@@ -21,6 +21,7 @@ files=(
   DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
   DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
   DASHI/Mathematics/Arithmetic/EllipticCurveHodgeFrobeniusCrossPollination.agda
+  DASHI/Mathematics/Complexity/DeterministicNondeterministicMachineExact.agda
   DASHI/Mathematics/Complexity/PolynomialReductionExact.agda
   DASHI/Mathematics/Complexity/CookLevinCircuitGCTBoundary.agda
   DASHI/Mathematics/Topology/RoundThreeSphereRicciFlowExact.agda
@@ -80,6 +81,10 @@ checks=(
   'DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda:localFactorDoesNotGiveBSD'
   'DASHI/Mathematics/Arithmetic/EllipticCurveHodgeFrobeniusCrossPollination.agda:ellipticHodgeConjugationSymmetry'
   'DASHI/Mathematics/Arithmetic/EllipticCurveHodgeFrobeniusCrossPollination.agda:ellipticBettiNumbers'
+  'DASHI/Mathematics/Complexity/DeterministicNondeterministicMachineExact.agda:deterministicAsNondeterministic'
+  'DASHI/Mathematics/Complexity/DeterministicNondeterministicMachineExact.agda:deterministicRunGivesNDReach'
+  'DASHI/Mathematics/Complexity/DeterministicNondeterministicMachineExact.agda:boundedDeterministicAcceptanceEmbeds'
+  'DASHI/Mathematics/Complexity/DeterministicNondeterministicMachineExact.agda:machineModelIsNotCookLevinProof'
   'DASHI/Mathematics/Complexity/PolynomialReductionExact.agda:composeReduction'
   'DASHI/Mathematics/Complexity/PolynomialReductionExact.agda:pullbackPAlongReduction'
   'DASHI/Mathematics/Complexity/PolynomialReductionExact.agda:npCompleteInPImpliesPEqualsNP'
@@ -91,6 +96,7 @@ checks=(
   'DASHI/Mathematics/Topology/PoincareGeometrizationExactBoundary.agda:existingGeometrizationAuthorityIsFalse'
   'DASHI/Mathematics/Topology/QuaternionS3PoincareCrossPollination.agda:poincareConclusionFromQuaternionBridge'
   'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollinationGateExact.agda:allOpenLanesRemainUncompleted'
+  'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollinationGateExact.agda:gradedVOANowHasExactFiniteCore'
 )
 
 for check in "${checks[@]}"; do
@@ -107,6 +113,7 @@ grep -Fq '10.1017/CBO9780511615344' DASHI/Mathematics/AlgebraicGeometry/HodgeDec
 grep -Fq '10.1007/978-0-387-09494-6' DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
 grep -Fq '10.1007/978-0-387-09494-6' DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
 grep -Fq '10.1515/crll.1965.218.79' DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
+grep -Fq '10.1145/800157.805047' DASHI/Mathematics/Complexity/DeterministicNondeterministicMachineExact.agda
 grep -Fq '10.1145/800157.805047' DASHI/Mathematics/Complexity/PolynomialReductionExact.agda
 grep -Fq '10.1137/S009753970038715X' DASHI/Mathematics/Complexity/CookLevinCircuitGCTBoundary.agda
 grep -Fq '10.4310/jdg/1214436922' DASHI/Mathematics/Topology/RoundThreeSphereRicciFlowExact.agda
@@ -121,6 +128,7 @@ grep -Fq 'No Hodge-conjecture solution' DASHI/Mathematics/AlgebraicGeometry/Hodg
 grep -Fq 'Enumerate the affine F_5-points' DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
 grep -Fq 'finite row is a checked arithmetic witness' DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
 grep -Fq 'No canonical inhabitant' DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
+grep -Fq 'Polynomial clocks, tape encodings' DASHI/Mathematics/Complexity/DeterministicNondeterministicMachineExact.agda
 grep -Fq 'clock polynomials and circuit lower' DASHI/Mathematics/Complexity/PolynomialReductionExact.agda
 grep -Fq 'No Cook--Levin tableau construction' DASHI/Mathematics/Complexity/CookLevinCircuitGCTBoundary.agda
 grep -Fq 'finite ODE calculation is not short-time existence' DASHI/Mathematics/Topology/RoundThreeSphereRicciFlowExact.agda
