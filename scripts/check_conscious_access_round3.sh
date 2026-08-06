@@ -40,3 +40,11 @@ done
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/ConsciousAccessRound3CompleteRegression.agda
+
+# A stacked continuation can extend the regression surface without changing
+# the workflow definition on the parent branch.  Direct round-four checks set
+# ROUND4_DISABLE_CASCADE to avoid recursion.
+if [[ -f scripts/check_conscious_access_round4.sh \
+      && "${ROUND4_DISABLE_CASCADE:-0}" != "1" ]]; then
+  ROUND4_SKIP_ROUND3=1 bash scripts/check_conscious_access_round4.sh
+fi
