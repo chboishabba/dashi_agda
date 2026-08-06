@@ -12,6 +12,7 @@ import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Cognition.PNF.ExtractorBoundary
 import DASHI.Cognition.PNF.AttractorMeasurementValidation
 import DASHI.Cognition.PNF.NashiDecisionProofBridge
+import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
 import DASHI.Foundations.InverseLimitClopenRefinement
 import DASHI.Foundations.DerivedCoarseDynamics
 import DASHI.NumberTheory.ThreeAdicCompletionCutset
