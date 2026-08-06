@@ -62,8 +62,9 @@ quarterContractionPathBound :
   QuarterContractionPath initial steps terminal →
   terminal ≤ quarterPower steps * initial
 quarterContractionPathBound {initial = initial} (start .initial) =
-  let identity : quarterPower zero * initial ≡ initial
-      identity = solve (initial ∷ [])
+  let
+    identity : quarterPower zero * initial ≡ initial
+    identity = solve (initial ∷ [])
   in
   subst (λ right → initial ≤ right) (sym identity) ℚₚ.≤-refl
 quarterContractionPathBound
@@ -76,8 +77,11 @@ quarterContractionPathBound
     scaled :
       quarter * current ≤ quarter * (quarterPower steps * initial)
     scaled =
-      let instance quarterIsNonnegative = nonNegative quarterNonnegative
-      in ℚₚ.*-monoˡ-≤-nonNeg quarter induction
+      let
+        instance
+          quarterIsNonnegative = nonNegative quarterNonnegative
+      in
+      ℚₚ.*-monoˡ-≤-nonNeg quarter induction
 
     reassociate :
       quarter * (quarterPower steps * initial)
@@ -93,11 +97,11 @@ alignedShell residue block =
 
 recursionOutput :
   Bootstrap.ExplicitFourShiftRecursionData → ℚ
-recursionOutput data =
+recursionOutput recursionData =
   Cutoff.outputEnergy
-      (Bootstrap.cutoffData (Bootstrap.absorptionData data))
+      (Bootstrap.cutoffData (Bootstrap.absorptionData recursionData))
     + Cutoff.dissipation
-        (Bootstrap.cutoffData (Bootstrap.absorptionData data))
+        (Bootstrap.cutoffData (Bootstrap.absorptionData recursionData))
 
 record FourResidueBlockRecursionFamily : Set₁ where
   field
@@ -129,13 +133,13 @@ targetCoefficientIsQuarter : Bootstrap.targetCoefficient ≡ quarter
 targetCoefficientIsQuarter = refl
 
 oneBlockQuarterContraction :
-  (data : FourResidueBlockRecursionFamily) →
+  (family : FourResidueBlockRecursionFamily) →
   (residue block : Nat) →
-  weightedCriterionAt data (alignedShell residue (suc block))
-  ≤ quarter * weightedCriterionAt data (alignedShell residue block)
-oneBlockQuarterContraction data residue block =
+  weightedCriterionAt family (alignedShell residue (suc block))
+  ≤ quarter * weightedCriterionAt family (alignedShell residue block)
+oneBlockQuarterContraction family residue block =
   let
-    recurrence = recursionAt data residue block
+    recurrence = recursionAt family residue block
 
     raw :
       recursionOutput recurrence
@@ -147,7 +151,7 @@ oneBlockQuarterContraction data residue block =
       Bootstrap.targetCoefficient
         * Bootstrap.predecessorMajorant recurrence
       ≡ quarter
-          * weightedCriterionAt data (alignedShell residue block)
+          * weightedCriterionAt family (alignedShell residue block)
     rightMeaning =
       trans
         (cong
@@ -156,68 +160,68 @@ oneBlockQuarterContraction data residue block =
           targetCoefficientIsQuarter)
         (cong
           (quarter *_)
-          (predecessorMeaning data residue block))
+          (predecessorMeaning family residue block))
   in
   subst₂ _≤_
-    (outputMeaning data residue block)
+    (outputMeaning family residue block)
     rightMeaning
     raw
 
 constructedQuarterPath :
-  (data : FourResidueBlockRecursionFamily) →
+  (family : FourResidueBlockRecursionFamily) →
   (residue block : Nat) →
   QuarterContractionPath
-    (baseCriterion data residue)
+    (baseCriterion family residue)
     block
-    (weightedCriterionAt data (alignedShell residue block))
-constructedQuarterPath data residue zero =
+    (weightedCriterionAt family (alignedShell residue block))
+constructedQuarterPath family residue zero =
   subst
     (λ terminal →
       QuarterContractionPath
-        (baseCriterion data residue) zero terminal)
-    (sym (baseMeaning data residue))
-    (start (baseCriterion data residue))
-constructedQuarterPath data residue (suc block) =
+        (baseCriterion family residue) zero terminal)
+    (sym (baseMeaning family residue))
+    (start (baseCriterion family residue))
+constructedQuarterPath family residue (suc block) =
   contract
-    (constructedQuarterPath data residue block)
-    (oneBlockQuarterContraction data residue block)
+    (constructedQuarterPath family residue block)
+    (oneBlockQuarterContraction family residue block)
 
 alignedBlockDecay :
-  (data : FourResidueBlockRecursionFamily) →
+  (family : FourResidueBlockRecursionFamily) →
   (residue block : Nat) →
-  weightedCriterionAt data (alignedShell residue block)
-  ≤ quarterPower block * baseCriterion data residue
-alignedBlockDecay data residue block =
+  weightedCriterionAt family (alignedShell residue block)
+  ≤ quarterPower block * baseCriterion family residue
+alignedBlockDecay family residue block =
   quarterContractionPathBound
-    (constructedQuarterPath data residue block)
+    (constructedQuarterPath family residue block)
 
 zeroResidueDecay :
-  (data : FourResidueBlockRecursionFamily) →
+  (family : FourResidueBlockRecursionFamily) →
   (block : Nat) →
-  weightedCriterionAt data (alignedShell zero block)
-  ≤ quarterPower block * baseCriterion data zero
-zeroResidueDecay data = alignedBlockDecay data zero
+  weightedCriterionAt family (alignedShell zero block)
+  ≤ quarterPower block * baseCriterion family zero
+zeroResidueDecay family = alignedBlockDecay family zero
 
 oneResidueDecay :
-  (data : FourResidueBlockRecursionFamily) →
+  (family : FourResidueBlockRecursionFamily) →
   (block : Nat) →
-  weightedCriterionAt data (alignedShell (suc zero) block)
-  ≤ quarterPower block * baseCriterion data (suc zero)
-oneResidueDecay data = alignedBlockDecay data (suc zero)
+  weightedCriterionAt family (alignedShell (suc zero) block)
+  ≤ quarterPower block * baseCriterion family (suc zero)
+oneResidueDecay family = alignedBlockDecay family (suc zero)
 
 twoResidueDecay :
-  (data : FourResidueBlockRecursionFamily) →
+  (family : FourResidueBlockRecursionFamily) →
   (block : Nat) →
-  weightedCriterionAt data (alignedShell (suc (suc zero)) block)
-  ≤ quarterPower block * baseCriterion data (suc (suc zero))
-twoResidueDecay data = alignedBlockDecay data (suc (suc zero))
+  weightedCriterionAt family (alignedShell (suc (suc zero)) block)
+  ≤ quarterPower block * baseCriterion family (suc (suc zero))
+twoResidueDecay family = alignedBlockDecay family (suc (suc zero))
 
 threeResidueDecay :
-  (data : FourResidueBlockRecursionFamily) →
+  (family : FourResidueBlockRecursionFamily) →
   (block : Nat) →
-  weightedCriterionAt data (alignedShell (suc (suc (suc zero))) block)
-  ≤ quarterPower block * baseCriterion data (suc (suc (suc zero)))
-threeResidueDecay data = alignedBlockDecay data (suc (suc (suc zero)))
+  weightedCriterionAt family (alignedShell (suc (suc (suc zero))) block)
+  ≤ quarterPower block * baseCriterion family (suc (suc (suc zero)))
+threeResidueDecay family = alignedBlockDecay family (suc (suc (suc zero)))
 
 explicitBootstrapCoefficientFitsQuarter :
   Bootstrap.combinedCoefficient ≤ quarter

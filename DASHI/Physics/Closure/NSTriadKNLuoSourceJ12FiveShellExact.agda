@@ -25,7 +25,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
@@ -103,8 +103,10 @@ weightedTimeSumMonotone [] weight lower upper weightNonnegative pointwise =
 weightedTimeSumMonotone
   (time ∷ times) weight lower upper weightNonnegative pointwise =
   ℚₚ.+-mono-≤
-    (let instance timeWeightIsNonnegative =
-       nonNegative (weightNonnegative time)
+    (let
+       instance
+         timeWeightIsNonnegative =
+           nonNegative (weightNonnegative time)
      in
      ℚₚ.*-monoˡ-≤-nonNeg (weight time) (pointwise time))
     (weightedTimeSumMonotone
@@ -139,44 +141,44 @@ open FiniteJ12FiveShellWindow public
 
 J12SquareIntegral :
   ∀ {Time} → FiniteJ12FiveShellWindow Time → ℚ
-J12SquareIntegral data =
+J12SquareIntegral window =
   weightedTimeSum
-    (times data)
-    (timeWeight data)
-    (λ time → L2.square (nearSum (amplitudes data time)))
+    (times window)
+    (timeWeight window)
+    (λ time → L2.square (nearSum (amplitudes window time)))
 
 nearEnergyIntegral :
   ∀ {Time} → FiniteJ12FiveShellWindow Time → ℚ
-nearEnergyIntegral data =
+nearEnergyIntegral window =
   weightedTimeSum
-    (times data)
-    (timeWeight data)
-    (λ time → nearSquareSum (amplitudes data time))
+    (times window)
+    (timeWeight window)
+    (λ time → nearSquareSum (amplitudes window time))
 
 sourceJ12FiveShellBound :
-  ∀ {Time} (data : FiniteJ12FiveShellWindow Time) →
-  J12SquareIntegral data ≤ five * nearEnergyIntegral data
-sourceJ12FiveShellBound data =
+  ∀ {Time} (window : FiniteJ12FiveShellWindow Time) →
+  J12SquareIntegral window ≤ five * nearEnergyIntegral window
+sourceJ12FiveShellBound window =
   let
     pointwise :
-      J12SquareIntegral data
+      J12SquareIntegral window
       ≤ weightedTimeSum
-          (times data)
-          (timeWeight data)
-          (λ time → five * nearSquareSum (amplitudes data time))
+          (times window)
+          (timeWeight window)
+          (λ time → five * nearSquareSum (amplitudes window time))
     pointwise =
       weightedTimeSumMonotone
-        (times data)
-        (timeWeight data)
-        (λ time → L2.square (nearSum (amplitudes data time)))
-        (λ time → five * nearSquareSum (amplitudes data time))
-        (timeWeightNonnegative data)
-        (λ time → fiveShellPointwiseSquareBound (amplitudes data time))
+        (times window)
+        (timeWeight window)
+        (λ time → L2.square (nearSum (amplitudes window time)))
+        (λ time → five * nearSquareSum (amplitudes window time))
+        (timeWeightNonnegative window)
+        (λ time → fiveShellPointwiseSquareBound (amplitudes window time))
   in
   subst
-    (λ upper → J12SquareIntegral data ≤ upper)
+    (λ upper → J12SquareIntegral window ≤ upper)
     (weightedTimeSumFiveScale
-      (times data)
-      (timeWeight data)
-      (λ time → nearSquareSum (amplitudes data time)))
+      (times window)
+      (timeWeight window)
+      (λ time → nearSquareSum (amplitudes window time)))
     pointwise

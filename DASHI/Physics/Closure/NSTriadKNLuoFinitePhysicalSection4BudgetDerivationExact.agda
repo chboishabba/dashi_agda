@@ -90,128 +90,130 @@ record FinitePhysicalSection4BudgetData : Set₁ where
 open FinitePhysicalSection4BudgetData public
 
 j11LowerValue : FinitePhysicalSection4BudgetData → ℚ
-j11LowerValue data =
+j11LowerValue budgetData =
   Sum.sumTo
-    (Prefix.j11Amplitude (shellL2 data))
-    (outputShell data)
+    (Prefix.j11Amplitude (shellL2 budgetData))
+    (outputShell budgetData)
 
 j11UpperValue : FinitePhysicalSection4BudgetData → ℚ
-j11UpperValue data = Jensen.sumValues (j11UpperSamples data)
+j11UpperValue budgetData = Jensen.sumValues (j11UpperSamples budgetData)
 
 j12Value : FinitePhysicalSection4BudgetData → ℚ
-j12Value data = Jensen.sumValues (j12Samples data)
+j12Value budgetData = Jensen.sumValues (j12Samples budgetData)
 
 j2Value : FinitePhysicalSection4BudgetData → ℚ
-j2Value data = Jensen.sumValues (j2Samples data)
+j2Value budgetData = Jensen.sumValues (j2Samples budgetData)
 
 j11LowerBudget : FinitePhysicalSection4BudgetData → ℚ
-j11LowerBudget data =
-  Prefix.lambda (outputShell data)
+j11LowerBudget budgetData =
+  Prefix.lambda (outputShell budgetData)
   * Sum.sumTo
-      (Prefix.j11EnergyDensity (shellL2 data))
-      (outputShell data)
+      (Prefix.j11EnergyDensity (shellL2 budgetData))
+      (outputShell budgetData)
 
 j11UpperBudgetTotal : FinitePhysicalSection4BudgetData → ℚ
-j11UpperBudgetTotal data =
-  Jensen.rationalLength (j11UpperSamples data)
-  * sumBudget (j11UpperBudget data) (j11UpperSamples data)
+j11UpperBudgetTotal budgetData =
+  Jensen.rationalLength (j11UpperSamples budgetData)
+  * sumBudget (j11UpperBudget budgetData) (j11UpperSamples budgetData)
 
 j12BudgetTotal : FinitePhysicalSection4BudgetData → ℚ
-j12BudgetTotal data =
-  Jensen.rationalLength (j12Samples data)
-  * sumBudget (j12Budget data) (j12Samples data)
+j12BudgetTotal budgetData =
+  Jensen.rationalLength (j12Samples budgetData)
+  * sumBudget (j12Budget budgetData) (j12Samples budgetData)
 
 j2BudgetTotal : FinitePhysicalSection4BudgetData → ℚ
-j2BudgetTotal data =
-  Jensen.rationalLength (j2Samples data)
-  * sumBudget (j2Budget data) (j2Samples data)
+j2BudgetTotal budgetData =
+  Jensen.rationalLength (j2Samples budgetData)
+  * sumBudget (j2Budget budgetData) (j2Samples budgetData)
 
 physicalJ11LowerBound :
-  (data : FinitePhysicalSection4BudgetData) →
-  L2.square (j11LowerValue data) ≤ j11LowerBudget data
-physicalJ11LowerBound data =
+  (budgetData : FinitePhysicalSection4BudgetData) →
+  L2.square (j11LowerValue budgetData) ≤ j11LowerBudget budgetData
+physicalJ11LowerBound budgetData =
   Prefix.finiteJ11PrefixEnergyBound
-    (shellL2 data)
-    (outputShell data)
+    (shellL2 budgetData)
+    (outputShell budgetData)
 
 physicalJ11UpperBound :
-  (data : FinitePhysicalSection4BudgetData) →
-  L2.square (j11UpperValue data) ≤ j11UpperBudgetTotal data
-physicalJ11UpperBound data =
+  (budgetData : FinitePhysicalSection4BudgetData) →
+  L2.square (j11UpperValue budgetData) ≤ j11UpperBudgetTotal budgetData
+physicalJ11UpperBound budgetData =
   finiteSampleFoldBudget
-    (j11UpperSamples data)
-    (j11UpperBudget data)
-    (j11UpperPointwise data)
+    (j11UpperSamples budgetData)
+    (j11UpperBudget budgetData)
+    (j11UpperPointwise budgetData)
 
 physicalJ12Bound :
-  (data : FinitePhysicalSection4BudgetData) →
-  L2.square (j12Value data) ≤ j12BudgetTotal data
-physicalJ12Bound data =
+  (budgetData : FinitePhysicalSection4BudgetData) →
+  L2.square (j12Value budgetData) ≤ j12BudgetTotal budgetData
+physicalJ12Bound budgetData =
   finiteSampleFoldBudget
-    (j12Samples data)
-    (j12Budget data)
-    (j12Pointwise data)
+    (j12Samples budgetData)
+    (j12Budget budgetData)
+    (j12Pointwise budgetData)
 
 physicalJ2Bound :
-  (data : FinitePhysicalSection4BudgetData) →
-  L2.square (j2Value data) ≤ j2BudgetTotal data
-physicalJ2Bound data =
+  (budgetData : FinitePhysicalSection4BudgetData) →
+  L2.square (j2Value budgetData) ≤ j2BudgetTotal budgetData
+physicalJ2Bound budgetData =
   finiteSampleFoldBudget
-    (j2Samples data)
-    (j2Budget data)
-    (j2Pointwise data)
+    (j2Samples budgetData)
+    (j2Budget budgetData)
+    (j2Pointwise budgetData)
 
 physicalJ11Bound :
-  (data : FinitePhysicalSection4BudgetData) →
-  L2.square (j11LowerValue data + j11UpperValue data)
+  (budgetData : FinitePhysicalSection4BudgetData) →
+  L2.square (j11LowerValue budgetData + j11UpperValue budgetData)
   ≤ Half.two
-      * (j11LowerBudget data + j11UpperBudgetTotal data)
-physicalJ11Bound data =
+      * (j11LowerBudget budgetData + j11UpperBudgetTotal budgetData)
+physicalJ11Bound budgetData =
   let
     splitSquare :
-      L2.square (j11LowerValue data + j11UpperValue data)
+      L2.square (j11LowerValue budgetData + j11UpperValue budgetData)
       ≤ Half.two
-        * ( L2.square (j11LowerValue data)
-          + L2.square (j11UpperValue data))
+        * ( L2.square (j11LowerValue budgetData)
+          + L2.square (j11UpperValue budgetData))
     splitSquare =
       Half.squareOfSumBelowTwiceSquares
-        (j11LowerValue data)
-        (j11UpperValue data)
+        (j11LowerValue budgetData)
+        (j11UpperValue budgetData)
 
     component :
-      L2.square (j11LowerValue data)
-        + L2.square (j11UpperValue data)
-      ≤ j11LowerBudget data + j11UpperBudgetTotal data
+      L2.square (j11LowerValue budgetData)
+        + L2.square (j11UpperValue budgetData)
+      ≤ j11LowerBudget budgetData + j11UpperBudgetTotal budgetData
     component =
       ℚₚ.+-mono-≤
-        (physicalJ11LowerBound data)
-        (physicalJ11UpperBound data)
+        (physicalJ11LowerBound budgetData)
+        (physicalJ11UpperBound budgetData)
 
     scaled :
       Half.two
-        * ( L2.square (j11LowerValue data)
-          + L2.square (j11UpperValue data))
+        * ( L2.square (j11LowerValue budgetData)
+          + L2.square (j11UpperValue budgetData))
       ≤ Half.two
-        * (j11LowerBudget data + j11UpperBudgetTotal data)
+        * (j11LowerBudget budgetData + j11UpperBudgetTotal budgetData)
     scaled =
-      let instance twoIsNonnegative = nonNegative Half.twoNonnegative
+      let
+        instance
+          twoIsNonnegative = nonNegative Half.twoNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg Half.two component
   in
   ℚₚ.≤-trans splitSquare scaled
 
 fourSection4SquareBoundsCombine :
-  (data : FinitePhysicalSection4BudgetData) →
-  L2.square (j11LowerValue data + j11UpperValue data)
-    + L2.square (j12Value data)
-    + L2.square (j2Value data)
+  (budgetData : FinitePhysicalSection4BudgetData) →
+  L2.square (j11LowerValue budgetData + j11UpperValue budgetData)
+    + L2.square (j12Value budgetData)
+    + L2.square (j2Value budgetData)
   ≤ Half.two
-      * (j11LowerBudget data + j11UpperBudgetTotal data)
-    + j12BudgetTotal data
-    + j2BudgetTotal data
-fourSection4SquareBoundsCombine data =
+      * (j11LowerBudget budgetData + j11UpperBudgetTotal budgetData)
+    + j12BudgetTotal budgetData
+    + j2BudgetTotal budgetData
+fourSection4SquareBoundsCombine budgetData =
   ℚₚ.+-mono-≤
     (ℚₚ.+-mono-≤
-      (physicalJ11Bound data)
-      (physicalJ12Bound data))
-    (physicalJ2Bound data)
+      (physicalJ11Bound budgetData)
+      (physicalJ12Bound budgetData))
+    (physicalJ2Bound budgetData)

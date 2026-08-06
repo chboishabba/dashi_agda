@@ -56,94 +56,94 @@ open FiniteJ2HighHighGapData public
 
 canonicalJ2MultiplierProfile :
   FiniteJ2HighHighGapData → Dyadic.FiniteDyadicMultiplierProfile
-canonicalJ2MultiplierProfile data = record
+canonicalJ2MultiplierProfile gapData = record
   { lowFactor = Geo.pow Geo.quarter
   ; gapFactor = Geo.pow Geo.thirtySecond
-  ; lowGradient = lowGradient data
+  ; lowGradient = lowGradient gapData
   ; lowFactorNonnegative = λ lowShell →
       Geo.powNonnegative Geo.quarter lowShell Geo.quarterNonnegative
   ; gapFactorNonnegative = λ gap →
       Geo.powNonnegative Geo.thirtySecond gap Geo.thirtySecondNonnegative
-  ; lowGradientNonnegative = lowGradientNonnegative data
+  ; lowGradientNonnegative = lowGradientNonnegative gapData
   ; lowFactorBound = λ lowShell → ℚₚ.≤-refl
   ; gapFactorBound = λ gap → ℚₚ.≤-refl
   }
 
 j2FactorizedInteraction :
   FiniteJ2HighHighGapData → Factor.FiniteFactorizedInteraction
-j2FactorizedInteraction data = record
-  { multiplierProfile = canonicalJ2MultiplierProfile data
-  ; tensorMagnitude = tensorMagnitude data
-  ; weightedEnergy = weightedEnergy data
-  ; tensorMagnitudeNonnegative = tensorMagnitudeNonnegative data
-  ; weightedEnergyNonnegative = weightedEnergyNonnegative data
-  ; tensorMagnitudeBound = tensorMagnitudeBelowWeightedEnergy data
+j2FactorizedInteraction gapData = record
+  { multiplierProfile = canonicalJ2MultiplierProfile gapData
+  ; tensorMagnitude = tensorMagnitude gapData
+  ; weightedEnergy = weightedEnergy gapData
+  ; tensorMagnitudeNonnegative = tensorMagnitudeNonnegative gapData
+  ; weightedEnergyNonnegative = weightedEnergyNonnegative gapData
+  ; tensorMagnitudeBound = tensorMagnitudeBelowWeightedEnergy gapData
   }
 
 j2PairMagnitude :
   FiniteJ2HighHighGapData → Nat → Nat → ℚ
-j2PairMagnitude data = Factor.pairMagnitude (j2FactorizedInteraction data)
+j2PairMagnitude gapData = Factor.pairMagnitude (j2FactorizedInteraction gapData)
 
 j2PointwisePositiveKernelMajorant :
-  (data : FiniteJ2HighHighGapData) →
+  (gapData : FiniteJ2HighHighGapData) →
   (lowShell gap : Nat) →
-  j2PairMagnitude data lowShell gap
+  j2PairMagnitude gapData lowShell gap
   ≤ Majorant.canonicalKernel lowShell gap
-      * (lowGradient data * weightedEnergy data)
-j2PointwisePositiveKernelMajorant data =
-  Factor.pointwiseFactorizedSchur (j2FactorizedInteraction data)
+      * (lowGradient gapData * weightedEnergy gapData)
+j2PointwisePositiveKernelMajorant gapData =
+  Factor.pointwiseFactorizedSchur (j2FactorizedInteraction gapData)
 
 j2RectangleBound :
-  (data : FiniteJ2HighHighGapData) →
+  (gapData : FiniteJ2HighHighGapData) →
   (lowCutoff gapCutoff : Nat) →
   Majorant.rectangleSum
-    (j2PairMagnitude data) lowCutoff gapCutoff
+    (j2PairMagnitude gapData) lowCutoff gapCutoff
   ≤ Geo.oneTwentyEightNinetyThirds
-      * (lowGradient data * weightedEnergy data)
-j2RectangleBound data =
+      * (lowGradient gapData * weightedEnergy gapData)
+j2RectangleBound gapData =
   Factor.factorizedInteractionRectangleBound
-    (j2FactorizedInteraction data)
+    (j2FactorizedInteraction gapData)
 
 j2CommonFactorNonnegative :
-  (data : FiniteJ2HighHighGapData) →
-  0ℚ ≤ lowGradient data * weightedEnergy data
-j2CommonFactorNonnegative data =
+  (gapData : FiniteJ2HighHighGapData) →
+  0ℚ ≤ lowGradient gapData * weightedEnergy gapData
+j2CommonFactorNonnegative gapData =
   let
     instance
-      gradientIsNonnegative = nonNegative (lowGradientNonnegative data)
-      energyIsNonnegative = nonNegative (weightedEnergyNonnegative data)
+      gradientIsNonnegative = nonNegative (lowGradientNonnegative gapData)
+      energyIsNonnegative = nonNegative (weightedEnergyNonnegative gapData)
       productIsNonnegative =
         ℚₚ.nonNeg*nonNeg⇒nonNeg
-          (lowGradient data) (weightedEnergy data)
+          (lowGradient gapData) (weightedEnergy gapData)
   in
-  ℚₚ.nonNegative⁻¹ (lowGradient data * weightedEnergy data)
+  ℚₚ.nonNegative⁻¹ (lowGradient gapData * weightedEnergy gapData)
 
 j2TailData : FiniteJ2HighHighGapData → Tail.FiniteSchurTailData
-j2TailData data = record
-  { pairMagnitude = j2PairMagnitude data
-  ; commonFactor = lowGradient data * weightedEnergy data
-  ; commonFactorNonnegative = j2CommonFactorNonnegative data
-  ; pointwiseTailDomination = j2PointwisePositiveKernelMajorant data
+j2TailData gapData = record
+  { pairMagnitude = j2PairMagnitude gapData
+  ; commonFactor = lowGradient gapData * weightedEnergy gapData
+  ; commonFactorNonnegative = j2CommonFactorNonnegative gapData
+  ; pointwiseTailDomination = j2PointwisePositiveKernelMajorant gapData
   }
 
 j2LowExteriorTailBound :
-  (data : FiniteJ2HighHighGapData) →
+  (gapData : FiniteJ2HighHighGapData) →
   (start lowTailCutoff gapCutoff : Nat) →
-  Tail.lowExteriorRectangle (j2PairMagnitude data)
+  Tail.lowExteriorRectangle (j2PairMagnitude gapData)
     start lowTailCutoff gapCutoff
   ≤ (Geo.pow Geo.quarter start
       * Geo.oneTwentyEightNinetyThirds)
-      * (lowGradient data * weightedEnergy data)
-j2LowExteriorTailBound data =
-  Tail.finiteLowExteriorTailBound (j2TailData data)
+      * (lowGradient gapData * weightedEnergy gapData)
+j2LowExteriorTailBound gapData =
+  Tail.finiteLowExteriorTailBound (j2TailData gapData)
 
 j2GapExteriorTailBound :
-  (data : FiniteJ2HighHighGapData) →
+  (gapData : FiniteJ2HighHighGapData) →
   (start gapTailCutoff lowCutoff : Nat) →
-  Tail.gapExteriorRectangle (j2PairMagnitude data)
+  Tail.gapExteriorRectangle (j2PairMagnitude gapData)
     start gapTailCutoff lowCutoff
   ≤ (Geo.pow Geo.thirtySecond start
       * Geo.oneTwentyEightNinetyThirds)
-      * (lowGradient data * weightedEnergy data)
-j2GapExteriorTailBound data =
-  Tail.finiteGapExteriorTailBound (j2TailData data)
+      * (lowGradient gapData * weightedEnergy gapData)
+j2GapExteriorTailBound gapData =
+  Tail.finiteGapExteriorTailBound (j2TailData gapData)

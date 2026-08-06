@@ -34,7 +34,7 @@ import Data.Integer.Base as Int
 import Data.Nat.Base as ℕ
 open import Data.Nat.Properties using (_≤?_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; _/_; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using
@@ -175,114 +175,116 @@ open SourceJ11HalfRangeData public
 
 shellContribution :
   ∀ {T} → SourceJ11HalfRangeData T → Nat → ℚ
-shellContribution data shell =
+shellContribution rangeData shell =
   Time.weightedTimeSum
-    (times data)
-    (timeWeight data)
+    (times rangeData)
+    (timeWeight rangeData)
     (λ time →
       Source.sourceSquareEnergy
-        (normalizedAmplitude data time) shell)
+        (normalizedAmplitude rangeData time) shell)
 
 lowerContribution :
   ∀ {T} → SourceJ11HalfRangeData T → Nat → ℚ
-lowerContribution data shell
-  with ℕ._+_ shell shell ≤? outputShell data
-... | yes proof = shellContribution data shell
+lowerContribution rangeData shell
+  with ℕ._+_ shell shell ≤? outputShell rangeData
+... | yes proof = shellContribution rangeData shell
 ... | no refutation = 0ℚ
 
 upperContribution :
   ∀ {T} → SourceJ11HalfRangeData T → Nat → ℚ
-upperContribution data shell
-  with ℕ._+_ shell shell ≤? outputShell data
+upperContribution rangeData shell
+  with ℕ._+_ shell shell ≤? outputShell rangeData
 ... | yes proof = 0ℚ
-... | no refutation = shellContribution data shell
+... | no refutation = shellContribution rangeData shell
 
 contributionSplitPointwise :
   ∀ {T}
-    (data : SourceJ11HalfRangeData T)
+    (rangeData : SourceJ11HalfRangeData T)
     (shell : Nat) →
-  shellContribution data shell
-  ≡ lowerContribution data shell + upperContribution data shell
-contributionSplitPointwise data shell
-  with ℕ._+_ shell shell ≤? outputShell data
-... | yes proof = solve (shellContribution data shell ∷ [])
-... | no refutation = solve (shellContribution data shell ∷ [])
+  shellContribution rangeData shell
+  ≡ lowerContribution rangeData shell + upperContribution rangeData shell
+contributionSplitPointwise rangeData shell
+  with ℕ._+_ shell shell ≤? outputShell rangeData
+... | yes proof = solve (shellContribution rangeData shell ∷ [])
+... | no refutation = solve (shellContribution rangeData shell ∷ [])
 
 sourceHalfSplitReconstructs :
-  ∀ {T} (data : SourceJ11HalfRangeData T) →
-  Sum.sumTo (shellContribution data) (outputShell data)
-  ≡ Sum.sumTo (lowerContribution data) (outputShell data)
-    + Sum.sumTo (upperContribution data) (outputShell data)
-sourceHalfSplitReconstructs data =
+  ∀ {T} (rangeData : SourceJ11HalfRangeData T) →
+  Sum.sumTo (shellContribution rangeData) (outputShell rangeData)
+  ≡ Sum.sumTo (lowerContribution rangeData) (outputShell rangeData)
+    + Sum.sumTo (upperContribution rangeData) (outputShell rangeData)
+sourceHalfSplitReconstructs rangeData =
   trans
     (sumToCong
-      (shellContribution data)
-      (λ shell → lowerContribution data shell + upperContribution data shell)
-      (outputShell data)
-      (contributionSplitPointwise data))
+      (shellContribution rangeData)
+      (λ shell →
+        lowerContribution rangeData shell + upperContribution rangeData shell)
+      (outputShell rangeData)
+      (contributionSplitPointwise rangeData))
     (sumToAdd
-      (lowerContribution data)
-      (upperContribution data)
-      (outputShell data))
+      (lowerContribution rangeData)
+      (upperContribution rangeData)
+      (outputShell rangeData))
 
 lowerContributionBelowReference :
   ∀ {T}
-    (data : SourceJ11HalfRangeData T)
+    (rangeData : SourceJ11HalfRangeData T)
     (shell : Nat) →
-  lowerContribution data shell ≤ referenceEnergy data shell
-lowerContributionBelowReference data shell
-  with ℕ._+_ shell shell ≤? outputShell data
-... | yes proof = lowerLocalPhysicalBound data shell proof
-... | no refutation = referenceEnergyNonnegative data shell
+  lowerContribution rangeData shell ≤ referenceEnergy rangeData shell
+lowerContributionBelowReference rangeData shell
+  with ℕ._+_ shell shell ≤? outputShell rangeData
+... | yes proof = lowerLocalPhysicalBound rangeData shell proof
+... | no refutation = referenceEnergyNonnegative rangeData shell
 
 criterionCoefficientNonnegative :
-  ∀ {T} (data : SourceJ11HalfRangeData T) →
-  0ℚ ≤ Prefix.two * delta data
-criterionCoefficientNonnegative data =
+  ∀ {T} (rangeData : SourceJ11HalfRangeData T) →
+  0ℚ ≤ Prefix.two * delta rangeData
+criterionCoefficientNonnegative rangeData =
   let
     instance
       twoIsNonnegative = nonNegative Prefix.twoNonnegative
-      deltaIsNonnegative = nonNegative (deltaNonnegative data)
+      deltaIsNonnegative = nonNegative (deltaNonnegative rangeData)
       productIsNonnegative =
-        ℚₚ.nonNeg*nonNeg⇒nonNeg Prefix.two (delta data)
+        ℚₚ.nonNeg*nonNeg⇒nonNeg Prefix.two (delta rangeData)
   in
-  ℚₚ.nonNegative⁻¹ (Prefix.two * delta data)
+  ℚₚ.nonNegative⁻¹ (Prefix.two * delta rangeData)
 
 upperContributionBelowCriterion :
   ∀ {T}
-    (data : SourceJ11HalfRangeData T)
+    (rangeData : SourceJ11HalfRangeData T)
     (shell : Nat) →
-  upperContribution data shell
-  ≤ Prefix.two * delta data * Source.lambda shell
-upperContributionBelowCriterion data shell
-  with ℕ._+_ shell shell ≤? outputShell data
+  upperContribution rangeData shell
+  ≤ Prefix.two * delta rangeData * Source.lambda shell
+upperContributionBelowCriterion rangeData shell
+  with ℕ._+_ shell shell ≤? outputShell rangeData
 ... | yes proof =
   let
     instance
       coefficientIsNonnegative =
-        nonNegative (criterionCoefficientNonnegative data)
+        nonNegative (criterionCoefficientNonnegative rangeData)
       lambdaIsNonnegative =
         nonNegative (Prefix.powTwoNonnegative shell)
       productIsNonnegative =
         ℚₚ.nonNeg*nonNeg⇒nonNeg
-          (Prefix.two * delta data) (Source.lambda shell)
+          (Prefix.two * delta rangeData) (Source.lambda shell)
   in
   ℚₚ.nonNegative⁻¹
-    ((Prefix.two * delta data) * Source.lambda shell)
-... | no refutation = upperLocalCriterionBound data shell refutation
+    ((Prefix.two * delta rangeData) * Source.lambda shell)
+... | no refutation =
+  upperLocalCriterionBound rangeData shell refutation
 
 lowerRangeBound :
-  ∀ {T} (data : SourceJ11HalfRangeData T) →
-  Sum.sumTo (lowerContribution data) (outputShell data)
-  ≤ globalEnergy data
-lowerRangeBound data =
+  ∀ {T} (rangeData : SourceJ11HalfRangeData T) →
+  Sum.sumTo (lowerContribution rangeData) (outputShell rangeData)
+  ≤ globalEnergy rangeData
+lowerRangeBound rangeData =
   ℚₚ.≤-trans
     (Sum.sumToMonotone
-      (lowerContribution data)
-      (referenceEnergy data)
-      (outputShell data)
-      (lowerContributionBelowReference data))
-    (totalReferenceEnergyBound data)
+      (lowerContribution rangeData)
+      (referenceEnergy rangeData)
+      (outputShell rangeData)
+      (lowerContributionBelowReference rangeData))
+    (totalReferenceEnergyBound rangeData)
 
 dyadicMassAgreement :
   (cutoff : Nat) →
@@ -292,65 +294,70 @@ dyadicMassAgreement (suc cutoff)
   rewrite dyadicMassAgreement cutoff = refl
 
 upperRangeBound :
-  ∀ {T} (data : SourceJ11HalfRangeData T) →
-  Sum.sumTo (upperContribution data) (outputShell data)
-  ≤ (Int.+ 4 / 1) * delta data * Source.lambda (outputShell data)
-upperRangeBound data =
+  ∀ {T} (rangeData : SourceJ11HalfRangeData T) →
+  Sum.sumTo (upperContribution rangeData) (outputShell rangeData)
+  ≤ (Int.+ 4 / 1)
+      * delta rangeData * Source.lambda (outputShell rangeData)
+upperRangeBound rangeData =
   let
-    coefficient = Prefix.two * delta data
-    lambdaQ = Source.lambda (outputShell data)
+    coefficient = Prefix.two * delta rangeData
+    lambdaQ = Source.lambda (outputShell rangeData)
 
     pointwise :
-      Sum.sumTo (upperContribution data) (outputShell data)
+      Sum.sumTo (upperContribution rangeData) (outputShell rangeData)
       ≤ Sum.sumTo
           (λ shell → coefficient * Source.lambda shell)
-          (outputShell data)
+          (outputShell rangeData)
     pointwise =
       Sum.sumToMonotone
-        (upperContribution data)
+        (upperContribution rangeData)
         (λ shell → coefficient * Source.lambda shell)
-        (outputShell data)
-        (upperContributionBelowCriterion data)
+        (outputShell rangeData)
+        (upperContributionBelowCriterion rangeData)
 
     factor :
       Sum.sumTo
         (λ shell → coefficient * Source.lambda shell)
-        (outputShell data)
-      ≡ coefficient * Source.dyadicPrefixMass (outputShell data)
+        (outputShell rangeData)
+      ≡ coefficient * Source.dyadicPrefixMass (outputShell rangeData)
     factor =
       trans
-        (Sum.scaleSum coefficient Source.lambda (outputShell data))
-        (cong (coefficient *_) (dyadicMassAgreement (outputShell data)))
+        (Sum.scaleSum coefficient Source.lambda (outputShell rangeData))
+        (cong
+          (coefficient *_)
+          (dyadicMassAgreement (outputShell rangeData)))
 
     massScaled :
-      coefficient * Source.dyadicPrefixMass (outputShell data)
+      coefficient * Source.dyadicPrefixMass (outputShell rangeData)
       ≤ coefficient * (Prefix.two * lambdaQ)
     massScaled =
-      let instance coefficientIsNonnegative =
-        nonNegative (criterionCoefficientNonnegative data)
+      let
+        instance
+          coefficientIsNonnegative =
+            nonNegative (criterionCoefficientNonnegative rangeData)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
         coefficient
-        (Source.dyadicPrefixMassBelowTwiceTop (outputShell data))
+        (Source.dyadicPrefixMassBelowTwiceTop (outputShell rangeData))
 
     targetMeaning :
       coefficient * (Prefix.two * lambdaQ)
-      ≡ (Int.+ 4 / 1) * delta data * lambdaQ
-    targetMeaning = solve (delta data ∷ lambdaQ ∷ [])
+      ≡ (Int.+ 4 / 1) * delta rangeData * lambdaQ
+    targetMeaning = solve (delta rangeData ∷ lambdaQ ∷ [])
 
     factorToTarget :
       Sum.sumTo
         (λ shell → coefficient * Source.lambda shell)
-        (outputShell data)
-      ≤ (Int.+ 4 / 1) * delta data * lambdaQ
+        (outputShell rangeData)
+      ≤ (Int.+ 4 / 1) * delta rangeData * lambdaQ
     factorToTarget =
       subst
         (λ lower →
-          lower ≤ (Int.+ 4 / 1) * delta data * lambdaQ)
+          lower ≤ (Int.+ 4 / 1) * delta rangeData * lambdaQ)
         (sym factor)
         (subst
           (λ upper →
-            coefficient * Source.dyadicPrefixMass (outputShell data)
+            coefficient * Source.dyadicPrefixMass (outputShell rangeData)
             ≤ upper)
           targetMeaning
           massScaled)
@@ -359,162 +366,164 @@ upperRangeBound data =
 
 sourceJ11Squared :
   ∀ {T} → SourceJ11HalfRangeData T → ℚ
-sourceJ11Squared data =
+sourceJ11Squared rangeData =
   Time.weightedTimeSum
-    (times data)
-    (timeWeight data)
+    (times rangeData)
+    (timeWeight rangeData)
     (λ time →
       L2.square
         (Sum.sumTo
           (Source.sourceAmplitude
-            (normalizedAmplitude data time))
-          (outputShell data)))
+            (normalizedAmplitude rangeData time))
+          (outputShell rangeData)))
 
 sourceJ11ToTotalShellContribution :
-  ∀ {T} (data : SourceJ11HalfRangeData T) →
-  sourceJ11Squared data
-  ≤ (Prefix.two * Source.lambda (outputShell data))
-      * Sum.sumTo (shellContribution data) (outputShell data)
-sourceJ11ToTotalShellContribution data =
+  ∀ {T} (rangeData : SourceJ11HalfRangeData T) →
+  sourceJ11Squared rangeData
+  ≤ (Prefix.two * Source.lambda (outputShell rangeData))
+      * Sum.sumTo (shellContribution rangeData) (outputShell rangeData)
+sourceJ11ToTotalShellContribution rangeData =
   let
-    scale = Prefix.two * Source.lambda (outputShell data)
+    scale = Prefix.two * Source.lambda (outputShell rangeData)
 
     pointwise :
-      sourceJ11Squared data
+      sourceJ11Squared rangeData
       ≤ Time.weightedTimeSum
-          (times data)
-          (timeWeight data)
+          (times rangeData)
+          (timeWeight rangeData)
           (λ time →
             scale
             * Sum.sumTo
                 (Source.sourceSquareEnergy
-                  (normalizedAmplitude data time))
-                (outputShell data))
+                  (normalizedAmplitude rangeData time))
+                (outputShell rangeData))
     pointwise =
       Time.weightedTimeSumMonotone
-        (times data)
-        (timeWeight data)
+        (times rangeData)
+        (timeWeight rangeData)
         (λ time →
           L2.square
             (Sum.sumTo
               (Source.sourceAmplitude
-                (normalizedAmplitude data time))
-              (outputShell data)))
+                (normalizedAmplitude rangeData time))
+              (outputShell rangeData)))
         (λ time →
           scale
           * Sum.sumTo
               (Source.sourceSquareEnergy
-                (normalizedAmplitude data time))
-              (outputShell data))
-        (timeWeightNonnegative data)
+                (normalizedAmplitude rangeData time))
+              (outputShell rangeData))
+        (timeWeightNonnegative rangeData)
         (λ time →
           Source.sourceWeightedJ11SquareBound
-            (normalizedAmplitude data time)
-            (outputShell data))
+            (normalizedAmplitude rangeData time)
+            (outputShell rangeData))
 
     scaleOut :
       Time.weightedTimeSum
-        (times data)
-        (timeWeight data)
+        (times rangeData)
+        (timeWeight rangeData)
         (λ time →
           scale
           * Sum.sumTo
               (Source.sourceSquareEnergy
-                (normalizedAmplitude data time))
-              (outputShell data))
+                (normalizedAmplitude rangeData time))
+              (outputShell rangeData))
       ≡ scale
         * Time.weightedTimeSum
-            (times data)
-            (timeWeight data)
+            (times rangeData)
+            (timeWeight rangeData)
             (λ time →
               Sum.sumTo
                 (Source.sourceSquareEnergy
-                  (normalizedAmplitude data time))
-                (outputShell data))
+                  (normalizedAmplitude rangeData time))
+                (outputShell rangeData))
     scaleOut =
       weightedTimeSumScale
-        (times data)
-        (timeWeight data)
+        (times rangeData)
+        (timeWeight rangeData)
         (λ time →
           Sum.sumTo
             (Source.sourceSquareEnergy
-              (normalizedAmplitude data time))
-            (outputShell data))
+              (normalizedAmplitude rangeData time))
+            (outputShell rangeData))
         scale
 
     fubini :
       Time.weightedTimeSum
-        (times data)
-        (timeWeight data)
+        (times rangeData)
+        (timeWeight rangeData)
         (λ time →
           Sum.sumTo
             (Source.sourceSquareEnergy
-              (normalizedAmplitude data time))
-            (outputShell data))
-      ≡ Sum.sumTo (shellContribution data) (outputShell data)
+              (normalizedAmplitude rangeData time))
+            (outputShell rangeData))
+      ≡ Sum.sumTo (shellContribution rangeData) (outputShell rangeData)
     fubini =
       weightedTimeShellFubini
-        (times data)
-        (timeWeight data)
+        (times rangeData)
+        (timeWeight rangeData)
         (λ time shell →
           Source.sourceSquareEnergy
-            (normalizedAmplitude data time) shell)
-        (outputShell data)
+            (normalizedAmplitude rangeData time) shell)
+        (outputShell rangeData)
   in
   subst
-    (λ upper → sourceJ11Squared data ≤ upper)
+    (λ upper → sourceJ11Squared rangeData ≤ upper)
     (trans scaleOut (cong (scale *_) fubini))
     pointwise
 
 sourceJ11HalfRangeBound :
-  ∀ {T} (data : SourceJ11HalfRangeData T) →
-  sourceJ11Squared data
-  ≤ (Int.+ 10 / 1) * delta data
-      * L2.square (Source.lambda (outputShell data))
-sourceJ11HalfRangeBound data =
+  ∀ {T} (rangeData : SourceJ11HalfRangeData T) →
+  sourceJ11Squared rangeData
+  ≤ (Int.+ 10 / 1) * delta rangeData
+      * L2.square (Source.lambda (outputShell rangeData))
+sourceJ11HalfRangeBound rangeData =
   let
-    lambdaQ = Source.lambda (outputShell data)
-    total = Sum.sumTo (shellContribution data) (outputShell data)
-    low = Sum.sumTo (lowerContribution data) (outputShell data)
-    upper = Sum.sumTo (upperContribution data) (outputShell data)
+    lambdaQ = Source.lambda (outputShell rangeData)
+    total = Sum.sumTo (shellContribution rangeData) (outputShell rangeData)
+    low = Sum.sumTo (lowerContribution rangeData) (outputShell rangeData)
+    upper = Sum.sumTo (upperContribution rangeData) (outputShell rangeData)
 
     rangeComponents :
       low + upper
-      ≤ globalEnergy data
-        + (Int.+ 4 / 1) * delta data * lambdaQ
+      ≤ globalEnergy rangeData
+        + (Int.+ 4 / 1) * delta rangeData * lambdaQ
     rangeComponents =
-      ℚₚ.+-mono-≤ (lowerRangeBound data) (upperRangeBound data)
+      ℚₚ.+-mono-≤
+        (lowerRangeBound rangeData)
+        (upperRangeBound rangeData)
 
     ranges :
       total
-      ≤ globalEnergy data
-        + (Int.+ 4 / 1) * delta data * lambdaQ
+      ≤ globalEnergy rangeData
+        + (Int.+ 4 / 1) * delta rangeData * lambdaQ
     ranges =
       subst
         (λ left →
           left
-          ≤ globalEnergy data
-            + (Int.+ 4 / 1) * delta data * lambdaQ)
-        (sym (sourceHalfSplitReconstructs data))
+          ≤ globalEnergy rangeData
+            + (Int.+ 4 / 1) * delta rangeData * lambdaQ)
+        (sym (sourceHalfSplitReconstructs rangeData))
         rangeComponents
 
     absorbedRanges :
-      globalEnergy data
-        + (Int.+ 4 / 1) * delta data * lambdaQ
-      ≤ (Int.+ 5 / 1) * delta data * lambdaQ
+      globalEnergy rangeData
+        + (Int.+ 4 / 1) * delta rangeData * lambdaQ
+      ≤ (Int.+ 5 / 1) * delta rangeData * lambdaQ
     absorbedRanges =
       subst
         (λ upperBound →
-          globalEnergy data
-            + (Int.+ 4 / 1) * delta data * lambdaQ
+          globalEnergy rangeData
+            + (Int.+ 4 / 1) * delta rangeData * lambdaQ
           ≤ upperBound)
-        (solve (delta data ∷ lambdaQ ∷ []))
+        (solve (delta rangeData ∷ lambdaQ ∷ []))
         (ℚₚ.+-mono-≤
-          (highShellEnergyAbsorption data)
+          (highShellEnergyAbsorption rangeData)
           ℚₚ.≤-refl)
 
     totalBound :
-      total ≤ (Int.+ 5 / 1) * delta data * lambdaQ
+      total ≤ (Int.+ 5 / 1) * delta rangeData * lambdaQ
     totalBound = ℚₚ.≤-trans ranges absorbedRanges
 
     scale = Prefix.two * lambdaQ
@@ -524,7 +533,7 @@ sourceJ11HalfRangeBound data =
         instance
           twoIsNonnegative = nonNegative Prefix.twoNonnegative
           lambdaIsNonnegative =
-            nonNegative (Prefix.powTwoNonnegative (outputShell data))
+            nonNegative (Prefix.powTwoNonnegative (outputShell rangeData))
           productIsNonnegative =
             ℚₚ.nonNeg*nonNeg⇒nonNeg Prefix.two lambdaQ
       in
@@ -532,18 +541,21 @@ sourceJ11HalfRangeBound data =
 
     scaled :
       scale * total
-      ≤ scale * ((Int.+ 5 / 1) * delta data * lambdaQ)
+      ≤ scale * ((Int.+ 5 / 1) * delta rangeData * lambdaQ)
     scaled =
-      let instance scaleIsNonnegative = nonNegative scaleNonnegative
-      in ℚₚ.*-monoˡ-≤-nonNeg scale totalBound
+      let
+        instance
+          scaleIsNonnegative = nonNegative scaleNonnegative
+      in
+      ℚₚ.*-monoˡ-≤-nonNeg scale totalBound
 
     targetMeaning :
-      scale * ((Int.+ 5 / 1) * delta data * lambdaQ)
-      ≡ (Int.+ 10 / 1) * delta data * L2.square lambdaQ
-    targetMeaning = solve (delta data ∷ lambdaQ ∷ [])
+      scale * ((Int.+ 5 / 1) * delta rangeData * lambdaQ)
+      ≡ (Int.+ 10 / 1) * delta rangeData * L2.square lambdaQ
+    targetMeaning = solve (delta rangeData ∷ lambdaQ ∷ [])
   in
   ℚₚ.≤-trans
-    (sourceJ11ToTotalShellContribution data)
+    (sourceJ11ToTotalShellContribution rangeData)
     (subst
       (λ upperBound → scale * total ≤ upperBound)
       targetMeaning

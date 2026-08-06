@@ -45,32 +45,33 @@ open FiniteSourceJ1Window public
 
 weightedPairs :
   ∀ {Time} → FiniteSourceJ1Window Time → List Cauchy.WeightedPair
-weightedPairs data = build (times data)
+weightedPairs windowData = build (times windowData)
   where
   build : List Time → List Cauchy.WeightedPair
   build [] = []
   build (time ∷ remaining) =
     Cauchy.weighted-pair
-      (timeWeight data time)
-      (leftFactor data time)
-      (rightFactor data time)
-      (timeWeightNonnegative data time)
+      (timeWeight windowData time)
+      (leftFactor windowData time)
+      (rightFactor windowData time)
+      (timeWeightNonnegative windowData time)
     ∷ build remaining
 
 J1 : ∀ {Time} → FiniteSourceJ1Window Time → ℚ
-J1 data = Cauchy.weightedPairing (weightedPairs data)
+J1 windowData = Cauchy.weightedPairing (weightedPairs windowData)
 
 J11Squared : ∀ {Time} → FiniteSourceJ1Window Time → ℚ
-J11Squared data = Cauchy.leftEnergy (weightedPairs data)
+J11Squared windowData = Cauchy.leftEnergy (weightedPairs windowData)
 
 J12Squared : ∀ {Time} → FiniteSourceJ1Window Time → ℚ
-J12Squared data = Cauchy.rightEnergy (weightedPairs data)
+J12Squared windowData = Cauchy.rightEnergy (weightedPairs windowData)
 
 J1SquareBelowJ11J12 :
-  ∀ {Time} (data : FiniteSourceJ1Window Time) →
-  L2.square (J1 data) ≤ J11Squared data * J12Squared data
-J1SquareBelowJ11J12 data =
-  Cauchy.finiteWeightedCauchy (weightedPairs data)
+  ∀ {Time} (windowData : FiniteSourceJ1Window Time) →
+  L2.square (J1 windowData)
+  ≤ J11Squared windowData * J12Squared windowData
+J1SquareBelowJ11J12 windowData =
+  Cauchy.finiteWeightedCauchy (weightedPairs windowData)
 
 weightedSquareEnergyNonnegative :
   (samples : List Cauchy.WeightedPair) →
@@ -133,72 +134,79 @@ record FiniteSourceJ1J2Budgets (Time : Set) : Set where
 open FiniteSourceJ1J2Budgets public
 
 J1SquareBudget :
-  ∀ {Time} (data : FiniteSourceJ1J2Budgets Time) →
-  L2.square (J1 (j1Window data))
-  ≤ j11Budget data * j12Budget data
-J1SquareBudget data =
+  ∀ {Time} (budgetData : FiniteSourceJ1J2Budgets Time) →
+  L2.square (J1 (j1Window budgetData))
+  ≤ j11Budget budgetData * j12Budget budgetData
+J1SquareBudget budgetData =
   let
-    window = j1Window data
+    window = j1Window budgetData
     samples = weightedPairs window
 
     first :
       J11Squared window * J12Squared window
-      ≤ j11Budget data * J12Squared window
+      ≤ j11Budget budgetData * J12Squared window
     first =
-      let instance rightEnergyIsNonnegative =
-        nonNegative (weightedRightSquareEnergyNonnegative samples)
+      let
+        instance
+          rightEnergyIsNonnegative =
+            nonNegative (weightedRightSquareEnergyNonnegative samples)
       in
       ℚₚ.*-monoʳ-≤-nonNeg
         (J12Squared window)
-        (j11SquaredBound data)
+        (j11SquaredBound budgetData)
 
     second :
-      j11Budget data * J12Squared window
-      ≤ j11Budget data * j12Budget data
+      j11Budget budgetData * J12Squared window
+      ≤ j11Budget budgetData * j12Budget budgetData
     second =
-      let instance leftBudgetIsNonnegative =
-        nonNegative (j11BudgetNonnegative data)
+      let
+        instance
+          leftBudgetIsNonnegative =
+            nonNegative (j11BudgetNonnegative budgetData)
       in
       ℚₚ.*-monoˡ-≤-nonNeg
-        (j11Budget data)
-        (j12SquaredBound data)
+        (j11Budget budgetData)
+        (j12SquaredBound budgetData)
   in
   ℚₚ.≤-trans
     (J1SquareBelowJ11J12 window)
     (ℚₚ.≤-trans first second)
 
 sourceJ1J2SquareBudget :
-  ∀ {Time} (data : FiniteSourceJ1J2Budgets Time) →
-  L2.square (J1 (j1Window data) + j2 data)
+  ∀ {Time} (budgetData : FiniteSourceJ1J2Budgets Time) →
+  L2.square (J1 (j1Window budgetData) + j2 budgetData)
   ≤ SquareSum.two
-      * ( j11Budget data * j12Budget data
-        + j2SquareBudget data)
-sourceJ1J2SquareBudget data =
+      * ( j11Budget budgetData * j12Budget budgetData
+        + j2SquareBudget budgetData)
+sourceJ1J2SquareBudget budgetData =
   let
     algebra =
       SquareSum.squareOfSumBelowTwiceSquares
-        (J1 (j1Window data))
-        (j2 data)
+        (J1 (j1Window budgetData))
+        (j2 budgetData)
 
     component :
-      L2.square (J1 (j1Window data)) + L2.square (j2 data)
-      ≤ j11Budget data * j12Budget data
-          + j2SquareBudget data
+      L2.square (J1 (j1Window budgetData))
+        + L2.square (j2 budgetData)
+      ≤ j11Budget budgetData * j12Budget budgetData
+          + j2SquareBudget budgetData
     component =
       ℚₚ.+-mono-≤
-        (J1SquareBudget data)
-        (j2SquaredBound data)
+        (J1SquareBudget budgetData)
+        (j2SquaredBound budgetData)
 
     scaled :
       SquareSum.two
-        * ( L2.square (J1 (j1Window data))
-          + L2.square (j2 data))
+        * ( L2.square (J1 (j1Window budgetData))
+          + L2.square (j2 budgetData))
       ≤ SquareSum.two
-        * ( j11Budget data * j12Budget data
-          + j2SquareBudget data)
+        * ( j11Budget budgetData * j12Budget budgetData
+          + j2SquareBudget budgetData)
     scaled =
-      let instance twoIsNonnegative =
-        nonNegative SquareSum.twoNonnegative
+      let
+        instance
+          twoIsNonnegative =
+            nonNegative SquareSum.twoNonnegative
       in
       ℚₚ.*-monoˡ-≤-nonNeg SquareSum.two component
   in
