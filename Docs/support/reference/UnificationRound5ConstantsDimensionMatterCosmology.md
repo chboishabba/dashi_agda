@@ -1,10 +1,10 @@
 # Unification Round Five: Constants, Dimension, Matter, and Cosmological Emergence
 
-This tranche is stacked directly on PR #399 (`agent/conscious-access-round5-dashi-yijing-moonshine`). It extends that finite exact biology/Yijing/natural-system theorem surface instead of creating a competing Round Five.
+This tranche is stacked directly on PR #399 (`agent/conscious-access-round5-dashi-yijing-moonshine`). The current PR #399 head has been merged into the feature branch, so the implementation extends its latest completion surface rather than an earlier snapshot or a competing Round Five.
 
-The replacement A--P constants text supersedes the earlier Sections 46--76 wherever the two conflict. The implementation reuses the repository's constants registry, candidate-functional boundary, resource-limited crystallisation, Grassmann and odd/even trit lanes, the existing p-adic chart/residual/collapse modules, PR #399 hyperfabric/coarse-graining/spectral/NS--YM modules, dimension/signature interfaces, GR clarification index, gauge/QFT parity surfaces, Standard-Model conformance interfaces, and paper-facing unification boundary.
+The replacement A--P constants text supersedes the earlier Sections 46--76 wherever the two conflict. The implementation reuses the repository's constants registry, candidate-functional boundary, resource-limited crystallisation, Grassmann and odd/even trit lanes, existing p-adic chart/residual/collapse modules, PR #399 hyperfabric/coarse-graining/spectral/NS--YM/SSP/moonshine modules, dimension/signature interfaces, GR clarification index, gauge/QFT parity surfaces, Standard-Model conformance interfaces, and paper-facing unification boundary.
 
-It does **not** promote a numerical constants theory, a proof that spacetime is four-dimensional, a first-principles periodic table, a calibrated nuclear model, a literal cosmological codec, continuum general relativity, the Standard Model, either Clay problem, or terminal unification.
+It does **not** promote a numerical constants theory, a proof that spacetime is four-dimensional, a first-principles periodic table, a calibrated nuclear model, a literal cosmological codec, continuum general relativity, the Standard Model, a Monster representation, either Clay problem, or terminal unification.
 
 ## Constants, scale, and parameter geometry
 
@@ -20,19 +20,19 @@ numerical representatives in chosen units
 
 It links `DASHI.Constants.Registry.ConstantsRegistryLink`, separates law/vacuum/boundary/calibration origins, proves a finite nonzero scale-orbit obstruction, records explicit/spontaneous/anomalous/boundary/finite-size/calibration scale breaking, and keeps dimensional transmutation dependent on a reference datum.
 
-`ParameterInformationGeometryExact.agda` gives two coordinate charts with different components and metric weights but equal tangent norm. It also provides one declared finite gradient-flow/Lyapunov example without identifying every RG flow with MDL.
+`ParameterInformationGeometryExact.agda` gives two coordinate charts with different components and metric weights but equal tangent norm. It also gives one declared finite gradient-flow/Lyapunov example without identifying every RG flow with MDL.
 
 `ScaleInvariantTheorySelectionExact.agda` adds a Buckingham-style dimension kernel, exact dimensional cancellation, spontaneous vacuum selection, triadic relative scales with a free base calibration, finite global MDL/Bayesian selection over a declared theory class, reference-machine offsets, and a joint RG/selection/exhaustion flow. It imports PR #399's `CarrierScale` surface rather than inventing a second hyperfabric scale type.
 
-`RGMDLExhaustionChambersExact.agda` separates RG flow, model selection, and resource exhaustion. It intersects static viability, reachability before freeze-out, and robustness; implements qualitative phase chambers; corrects the bound-state condition to a discrete level below continuum; and checks the avoided-crossing gap square
+`RGMDLExhaustionChambersExact.agda` separates RG flow, model selection, and resource exhaustion. It intersects static viability, reachability before freeze-out, and robustness; implements qualitative phase chambers; corrects the bound-state condition to a discrete level below continuum; and checks
 
 ```text
-(E_old - E_new)^2 + 4 |v|^2.
+gap² = (E_old - E_new)² + 4 |v|².
 ```
 
 ## Causal p-adic charts and exact residual recovery
 
-`PadicCausalChartLosslessExact.agda` implements the mathematical content of the attached p-adic hierarchy while deliberately excluding AV1, container, and engineering claims.
+`PadicCausalChartLosslessExact.agda` implements the mathematical content of the p-adic hierarchy while deliberately excluding AV1, container, and engineering-performance claims.
 
 It reuses:
 
@@ -50,26 +50,26 @@ r = x - x_hat
 decode(x_hat,r) = x_hat + r,
 ```
 
-and the module proves the round trip for every predictor/target pair. The result is lifted componentwise to a nine-sheet residual, then packaged as a causal residual packet whose predictor is supplied independently of the current target.
+and proves the round trip for every predictor/target pair. The theorem is lifted componentwise to a sheet residual and packaged as a causal residual packet whose predictor is supplied independently of the current target.
 
 The module also proves the existing support/orientation fold/unfold round trip, defines nested depth-one/depth-two/depth-three cylinders, reuses the existing chart-objective minimiser, and imports the surviving coarse residual from the finite collapse lane.
 
-Losslessness is kept separate from rate optimality. A matched coder requires only `decode (encode x) = x`; probability modelling, context adequacy, side-information cost, and optimal expected length remain distinct obligations. The existing eight-source p-adic atlas is reused instead of duplicated.
+Losslessness remains separate from rate optimality: `decode (encode x) = x` does not by itself prove probability-model adequacy, side-information optimality, or minimal expected code length. The existing eight-source p-adic atlas is reused rather than copied.
 
 ## Modular projection and coarse quantisation
 
 `ModularProjectionQuantisationExact.agda` formalises the mathematical content visible in the two attached projection comparisons without treating rendered images as proofs.
 
-A four-dimensional witness pair has identical axis-aligned projection but different angled projection. This proves only that the angled chart retains one distinction lost by that axis chart. A finite declared objective therefore selects the angled candidate for that witness set.
+A four-dimensional witness pair has identical axis-aligned projection but different angled projection. Thus the angled chart retains one distinction lost by that axis chart, and a declared finite witness objective selects the angled candidate for that witness set.
 
-The module separately proves that coarse quantisation is non-injective: two distinct fine coordinates map to one coarse coordinate. A triadic angled projection is then defined using the existing exact cyclic addition on `Z/3Z`, rather than silently identifying modular and Euclidean arithmetic.
+Coarse quantisation is separately proved non-injective: two distinct fine coordinates map to one coarse coordinate. A triadic angled projection uses the existing exact cyclic addition on `Z/3Z`, rather than identifying modular and Euclidean arithmetic.
 
-The authority boundary blocks four stronger inferences:
+The authority boundary blocks:
 
 ```text
 one visual comparison -> global optimum
 4D-to-2D angled map -> injectivity
-coarse integer search -> preservation of all fine distinctions
+coarse integer search -> preservation of every fine distinction
 modular residue chart -> ordinary Euclidean projection.
 ```
 
@@ -145,46 +145,64 @@ Bitstreams, physical initial states, boundary data, law syntax, CMB observations
 
 `KernelEmergenceHypothesesExact.agda` types the geometry and QFT bridges explicitly as conjectural hypotheses. Finite correction tables decrease from microscopic to macroscopic scales, but are not promoted to continuum suppression theorems.
 
-## Explicit PR #399 cross-pollination
+## Latest PR #399 completion cross-pollination
 
-`PR399FoundationsCrossPollinationExact.agda` makes the reuse executable rather than documentary. It checks:
+`PR399FoundationsCrossPollinationExact.agda` imports both PR #399's original Round Five boundary and its completion boundary. It checks:
 
 ```text
 3^9 = 19683
 siteCount(sheetThreeByNine) = 27 = scaleAtDepth(1,depth0)
 siteCount(sheetThreeByThree) = 9 = scaleAtDepth(1,depth1)
+54 = 1 + 53
+196884 = 10 * 3^9 + 54
+196883 = 10 * 3^9 + 53
+47 * 59 * 71 = 196883
+complete SSP/Ogg lane count = 15
+geometric 54-1 presentation is minimal in the declared finite family
 spectral cleanup component count = 3
 finite NS--YM gap = 1
-finite Fock mass-shell witness
 Born-rule derivation remains false.
 ```
 
-The equal finite cardinalities are not identified with calibrated physical scales, and PR #399's finite gauge gap is not promoted to the Yang--Mills Clay mass gap.
+These are exact finite arithmetic and minimisation statements. They do not construct a Monster representation, prove irreducibility of the 53-carrier, turn an Ogg-prime product into a group action, or promote the finite gauge gap to the Yang--Mills Clay mass gap.
+
+`Round5CompletionRegression.agda` independently regresses the `54/53`, `196884/196883`, Ogg-prime product, SSP-lane count, canonical 53-presentation minimality, completion boundary, and completion source count.
 
 ## Combined Round Five root
 
-`Round5FullBoundary.agda` contains both:
+`Round5FullBoundary.agda` contains:
 
 ```text
 DASHI.Biology.ConsciousAccessRound5FullBoundary
+DASHI.Biology.ConsciousAccessRound5CompletionBoundary
 DASHI.Physics.Foundations.Round5FullBoundary
 ```
 
-The cumulative surface therefore carries PR #399's ternary/Yijing, braid, hyperfabric, Monster/FRACTRAN, natural-system, neural, and finite NS--YM results together with the p-adic, projection, constants, dimension, atomic, nuclear, cosmology, and GR--QFT tranche.
+The cumulative surface therefore carries PR #399's ternary/Yijing, braid, hyperfabric, Monster/FRACTRAN/SSP candidate arithmetic, natural-system, neural, and finite NS--YM results together with the p-adic, projection, constants, dimension, atomic, nuclear, cosmology, and GR--QFT tranche.
 
-The unified root is wired through:
+The feature branch was explicitly synchronized with the current PR #399 head before final validation. The unified roots are:
 
 ```text
 DASHI/Physics/Foundations/Everything.agda
 DASHI/Physics/Foundations/Round5Regression.agda
+DASHI/Physics/Foundations/Round5CompletionRegression.agda
 DASHI/Unified/Everything.agda.
 ```
 
 ## Provenance
 
-`Round5SourceAtlas.agda` records authors, full titles, venues, years, DOIs, imported roles, and excluded promotions for seventeen additional sources covering Buckingham dimensional analysis, Wilson RG, information geometry, Kolmogorov complexity, causal sets, electronic structure, nuclear shells, pairing, fission, CABAC, Yang--Mills, Fock space, Osterwalder--Schrader reconstruction, electroweak theory, and Planck cosmology.
+`Round5SourceAtlas.agda` records authors, full titles, venues, years, DOIs, imported roles, and excluded promotions for seventeen additional sources covering dimensional analysis, RG, information geometry, Kolmogorov complexity, causal sets, electronic structure, nuclear shells, pairing, fission, CABAC, Yang--Mills, Fock space, Osterwalder--Schrader reconstruction, electroweak theory, and Planck cosmology.
 
-It also imports and checks PR #399's twenty-three-source extended atlas. The p-adic tranche imports and checks the existing eight-source Round Four atlas. Repository-original finite lemmas are not assigned invented identifiers.
+`Round5CombinedSourceBoundary.agda` checks four source populations without copying them:
+
+```text
+17  new physics/foundations records
+23  PR #399 extended records
+29  PR #399 completion records
+ 8  reused Round Four p-adic records.
+```
+
+The PR #399 completion atlas includes title/author/venue/year/DOI or explicit no-DOI/ISBN markers for the added moonshine, exceptional-lattice, SSP, and analytic sources. Repository-original finite lemmas are not assigned invented identifiers.
 
 ## Validation
 
@@ -194,7 +212,7 @@ The focused command is:
 bash scripts/check_unification_round5.sh
 ```
 
-It first runs `scripts/check_conscious_access_round5.sh`, then rejects holes, postulates, unsafe options, unsolved metas, and placeholders in the added foundations files, and invokes the pinned Agda 2.9 checker on:
+It first runs `scripts/check_conscious_access_round5.sh`, then rejects missing files, holes, postulates, unsafe options, unsolved metas, and placeholder right-hand sides in every added module. It invokes the repository-flake Agda 2.9 checker on:
 
 ```text
 DASHI/Physics/Foundations/Round5Regression.agda
@@ -202,4 +220,4 @@ DASHI/Physics/Foundations/Everything.agda
 DASHI/Unified/Everything.agda.
 ```
 
-The workflow resolves `.#agda-with-dashi-deps` from the repository flake before checking. No successful kernel result is claimed until the workflow or an equivalent pinned-toolchain run has actually passed.
+The workflow resolves `.#agda-with-dashi-deps` from the repository lock file. A kernel pass is not claimed until an actual workflow or equivalent pinned-toolchain run has completed successfully.
