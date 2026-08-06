@@ -23,7 +23,7 @@ Toponymy:
   unknown Indigenous spoken form / lossy colonial transcription / conventional Cabarlah spelling
 ```
 
-No theorem identifies these layers.  Their exact interaction is a typed palimpsest with explicit evidence status and non-collapse proofs.
+No theorem identifies these layers. Their exact interaction is a typed palimpsest with explicit evidence status and non-collapse proofs.
 
 ## Claim-status algebra
 
@@ -34,7 +34,7 @@ EvidenceStatus =
   documented | conventional | derived | contested | underdetermined | refuted
 ```
 
-and assigns status to the central claims.  In particular:
+and assigns status to the central claims. In particular:
 
 ```text
 Capbarlah as a historical spelling                    = refuted
@@ -58,16 +58,27 @@ The correction is machine-visible rather than left as prose.
 
 The second equality corresponds to `4.9284 km` when the coordinate unit is one ten-thousandth of a degree and the declared approximation is `111 km/degree`.
 
-This is a coordinate calibration only.  It does not prove that an official line passed through Cabarlah.
+This is a coordinate calibration only. It does not prove that an official line passed through Cabarlah.
 
-The module then distinguishes:
+The module distinguishes:
 
 ```text
 worldWarTwoTrainingPeriod -> imperialJapan
 postwarSignalsPeriod      -> coldWarCommunistForces
 ```
 
-and proves the periods and enemies are not equal.  The alleged Brisbane Line claim carries `contested` status; the communist-Cabarlah territorial claim carries `refuted` status.
+and proves the periods and enemies are not equal. The alleged Brisbane Line claim carries `contested` status; the communist-Cabarlah territorial claim carries `refuted` status.
+
+It separately models the institutional signals lineage:
+
+```text
+wartime special wireless
+-> permanent Cabarlah signals base
+-> Borneo operational stage
+-> Vietnam operational stage
+```
+
+and proves the exact two-step transitions from the wartime stage to Borneo and from the permanent Cabarlah stage to Vietnam. Institutional continuity is therefore retained without identifying Imperial Japan, Indonesian forces, Malayan communist forces, the Viet Cong, or North Vietnamese forces as one enemy.
 
 ## Lossy toponym transcription
 
@@ -79,7 +90,7 @@ Four orthography-based hypotheses are retained:
 /kabala/  /kabarla/  /gabala/  /gabarla/
 ```
 
-They are explicitly not certified Jarowair or Wakka lexical forms.  All four map to the conventional English spelling `Cabarlah`, and the map is proved non-injective.
+They are explicitly not certified Jarowair or Wakka lexical forms. All four map to the conventional English spelling `Cabarlah`, and the map is proved non-injective.
 
 ```text
 source sound candidate -> colonial rendering
@@ -100,7 +111,7 @@ with proofs that Country, spoken source, and conventional name are distinct carr
 
 ## Enemy abstraction and Amalek
 
-`SettlerEnemyAbstractionExact.agda` models the information loss created by an absolute-enemy category.  In the declared rhetorical model:
+`SettlerEnemyAbstractionExact.agda` models the information loss created by an absolute-enemy category. In the declared rhetorical model:
 
 ```text
 Hamas actor + Palestinian civilian population -> Amalek category
@@ -108,7 +119,7 @@ Malayan communist forces + heterogeneous anti-colonial movements
   -> global communism category
 ```
 
-The module proves the compression is non-injective.  This is a theorem about the danger of the rhetoric, not an endorsement of either classification.
+The module proves the compression is non-injective. This is a theorem about the danger of the rhetoric, not an endorsement of either classification.
 
 It also distinguishes:
 
@@ -118,7 +129,7 @@ explicit lexical use
 structural homology only
 ```
 
-The Palestine/Amalek lane is represented as explicit political-theological rhetoric.  The Indigenous-Australian comparison is structural only: the repository does not claim that settlers at Cabarlah literally used the word `Amalek`.
+The Palestine/Amalek lane is represented as explicit political-theological rhetoric. The Indigenous-Australian comparison is structural only: the repository does not claim that settlers at Cabarlah literally used the word `Amalek`.
 
 The finite eliminatory framing is:
 
@@ -168,7 +179,7 @@ includedInProtectedCore = false
 requiredForCoreSecurity = true
 ```
 
-The permanent-enemy effect distinguishes a concrete actor from an abstract recurring category.  Two different concrete epochs can map to the same abstract category, so defeating one actor does not definitionally dissolve the category.
+The permanent-enemy effect distinguishes a concrete actor from an abstract recurring category. Two different concrete epochs can map to the same abstract category, so defeating one actor does not definitionally dissolve the category.
 
 ```text
 abstract enemy
@@ -177,11 +188,11 @@ abstract enemy
 -> permanent mobilisation
 ```
 
-is implemented as a finite transition system.  No concrete historical instance follows automatically from this generic carrier.
+is implemented as a finite transition system. No concrete historical instance follows automatically from this generic carrier.
 
 ## Provenance
 
-`CabarlahPalestineSourceAtlas.agda` records nine bounded sources with authors, titles, venues, years, identifiers, imported roles, and excluded promotions.
+`CabarlahPalestineSourceAtlas.agda` records ten bounded sources with authors, titles, venues, years, identifiers, imported roles, and excluded promotions.
 
 DOIs are attached where assigned:
 
@@ -189,7 +200,7 @@ DOIs are attached where assigned:
 - Abed Azzam, *Blot Out the Memory of Amalek from Under Heaven: The Gaza Genocide and the Political Theological Legacy of the Biblical Amalek*, DOI `10.1515/auk-2025-2018`;
 - Suzanne Kite and S. A. Wurm, *The Duungidjawu Language of Southeast Queensland: Grammar, Texts and Vocabulary*, DOI `10.15144/PL-553`.
 
-Government, library, database, and journalism sources carry explicit no-DOI markers rather than fabricated identifiers.
+The atlas also records John Blaxland's *The Role of Signals Intelligence in Australian Military Operations, 1939–72* as the bounded source for the special-wireless/Cabarlah/Borneo/Vietnam institutional lineage. Government, library, database, military-history, and journalism sources carry explicit no-DOI markers rather than fabricated identifiers.
 
 ## Integrated authority boundary
 
@@ -199,6 +210,7 @@ Government, library, database, and journalism sources carry explicit no-DOI mark
 Capbarlah typo -> semantic etymology
 latitude coincidence -> official military line
 postwar SIGINT role -> communist territorial concession
+institutional lineage -> identity of historical enemies
 conventional name -> preserved Indigenous authority
 structural analogy -> identical histories
 protest concern -> verified strike-level intelligence chain
