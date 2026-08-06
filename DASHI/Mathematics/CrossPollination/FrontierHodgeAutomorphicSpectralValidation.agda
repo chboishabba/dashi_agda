@@ -30,7 +30,7 @@ import DASHI.Mathematics.Complexity.PSubsetNPTrivialCertificateExact
 import DASHI.Mathematics.Complexity.MachineRunCertificateExact
 import DASHI.Mathematics.Complexity.FiniteCookLevinTableauExact
 
-import DASHI.Moonshine.DualNumberDifferentialVertexAlgebraExact
+import DASHI.Moonshine.SquareZeroDifferentialVertexAlgebraExact
 import DASHI.Moonshine.RankOneFockPartitionGradingExact
 import DASHI.Moonshine.RankOneFockEulerProductPrefixExact
 
