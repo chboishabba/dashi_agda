@@ -3,13 +3,16 @@ module DASHI.Physics.Foundations.Round5Regression where
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
+import DASHI.Physics.Foundations.ParameterInformationGeometryExact as Information
 import DASHI.Physics.Foundations.RGMDLExhaustionChambersExact as Flow
 import DASHI.Physics.Foundations.DimensionPowerCountingBoundaryExact as Dimension
 import DASHI.Physics.Foundations.AtomicFermionShellExact as Atomic
+import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as AtomicBridge
 import DASHI.Physics.Foundations.NuclearShellPairingExact as NuclearShell
 import DASHI.Physics.Foundations.NuclearShapeInstabilityExact as NuclearShape
 import DASHI.Physics.Foundations.CausalCodingCosmologyBoundaryExact as Coding
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as Geometry
+import DASHI.Physics.Foundations.FiniteGraphGaugeScalarExact as FiniteGauge
 import DASHI.Physics.Foundations.KernelQFTEmergenceObligations as Quantum
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Unified
 import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
@@ -31,6 +34,19 @@ ratioRegression :
     Parameter.ratioTwoFour
     Parameter.ratioThreeSix
 ratioRegression = refl
+
+informationGeometryRegression :
+  Information.tangentNormSquare Information.lambdaChart
+  ≡
+  Information.tangentNormSquare Information.etaChart
+informationGeometryRegression = refl
+
+lyapunovRegression :
+  Information.lyapunovValue
+    (Information.flowStep Information.fixedLossPoint)
+  ≡
+  Information.lyapunovValue Information.fixedLossPoint
+lyapunovRegression = refl
 
 parameterViabilityRegression :
   Flow.fullyViable Flow.viableParameter ≡ true
@@ -65,6 +81,19 @@ atomicInteractionRegression :
   ×
   Atomic.totalConfigurationEnergy Atomic.promotedConfiguration ≡ 6
 atomicInteractionRegression = refl , refl
+
+fermionicExchangeRegression :
+  AtomicBridge.swapFermions
+    (AtomicBridge.swapFermions AtomicBridge.canonicalAntisymmetricPair)
+  ≡
+  AtomicBridge.canonicalAntisymmetricPair
+fermionicExchangeRegression = refl
+
+valenceEquivalenceRegression :
+  AtomicBridge.valenceClass AtomicBridge.twoActivePStates
+  ≡
+  AtomicBridge.valenceClass AtomicBridge.sixActivePStates
+valenceEquivalenceRegression = refl
 
 nuclearClosureRegression :
   NuclearShell.closureStatus NuclearShell.canonicalProtonClosure
@@ -101,6 +130,21 @@ geometryUnderdeterminationRegression :
   ≡
   Geometry.energyDensity Geometry.stressProfileB
 geometryUnderdeterminationRegression = refl
+
+finiteGaugeRegression :
+  FiniteGauge.loopHolonomy FiniteGauge.transformedConnection
+  ≡
+  FiniteGauge.loopHolonomy FiniteGauge.canonicalConnection
+  ×
+  FiniteGauge.edgeMismatch
+    FiniteGauge.transformedConnection
+    (FiniteGauge.transformField
+      FiniteGauge.canonicalLocalGauge
+      FiniteGauge.canonicalField)
+    FiniteGauge.edge01
+  ≡
+  false
+finiteGaugeRegression = refl , refl
 
 graphCurvatureRegression :
   Quantum.triangleHolonomy ≡ Quantum.gaugeTwist
