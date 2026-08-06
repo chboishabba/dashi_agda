@@ -34,6 +34,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -66,12 +67,13 @@ discountedGeometricLossClosedForm : ∀ envelope theta count →
   ((+ 2 / 1) - theta)
     * discountedGeometricLoss envelope theta count
   ≡ envelope * (1ℚ - power (half * theta) count)
-discountedGeometricLossClosedForm envelope theta count
-  rewrite geometricPartialSumClosedForm (half * theta) count =
-  ℚRing.solve-∀
-    envelope theta
-    (geometricPartialSum (half * theta) count)
-    (power (half * theta) count)
+discountedGeometricLossClosedForm envelope theta count =
+  trans
+    (ℚRing.solve-∀
+      envelope theta
+      (geometricPartialSum (half * theta) count))
+    (cong (envelope *_)
+      (geometricPartialSumClosedForm (half * theta) count))
 
 record InfiniteDiscountedLossBudget
     (envelope theta budget : ℚ) : Set where
@@ -88,13 +90,17 @@ discountedLossTailExact :
   ((+ 2 / 1) - theta)
     * (budget - discountedGeometricLoss envelope theta count)
   ≡ envelope * power (half * theta) count
-discountedLossTailExact envelope theta budget witness count
-  rewrite budgetEquation witness
-        | discountedGeometricLossClosedForm envelope theta count =
-  ℚRing.solve-∀
-    envelope theta budget
-    (discountedGeometricLoss envelope theta count)
-    (power (half * theta) count)
+discountedLossTailExact envelope theta budget witness count =
+  trans
+    (ℚRing.solve-∀
+      ((+ 2 / 1) - theta)
+      budget
+      (discountedGeometricLoss envelope theta count))
+    (trans
+      (cong₂ _-_
+        (budgetEquation witness)
+        (discountedGeometricLossClosedForm envelope theta count))
+      (ℚRing.solve-∀ envelope (power (half * theta) count)))
 
 record StrictPhysicalLossBudget
     (envelope theta initialPhysicalGap budget : ℚ) : Set where
