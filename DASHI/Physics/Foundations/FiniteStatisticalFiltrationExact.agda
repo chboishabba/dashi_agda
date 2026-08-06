@@ -25,8 +25,25 @@ parameterisedLaw parameterZero = balancedLaw
 parameterisedLaw parameterLeft = leftBiasedLaw
 parameterisedLaw parameterRight = rightBiasedLaw
 
-physicalStateIsNotProbabilityLaw : PhysicalState → ProbabilityLaw → Set
-physicalStateIsNotProbabilityLaw state law = ⊤
+-- A tagged coproduct makes the three levels disjoint by construction.  The
+-- distinction is therefore an actual no-confusion theorem, not a proposition
+-- inhabited trivially by unit.
+data StatisticalObject : Set where
+  physicalObject : PhysicalState → StatisticalObject
+  lawObject : ProbabilityLaw → StatisticalObject
+  parameterObject : ModelParameter → StatisticalObject
+
+physicalObjectCannotEqualLawObject :
+  (state : PhysicalState) →
+  (law : ProbabilityLaw) →
+  physicalObject state ≡ lawObject law → ⊥
+physicalObjectCannotEqualLawObject state law ()
+
+lawObjectCannotEqualParameterObject :
+  (law : ProbabilityLaw) →
+  (parameter : ModelParameter) →
+  lawObject law ≡ parameterObject parameter → ⊥
+lawObjectCannotEqualParameterObject law parameter ()
 
 ------------------------------------------------------------------------
 -- Finite Fisher-like distinguishability table on the parameter carrier.  It
