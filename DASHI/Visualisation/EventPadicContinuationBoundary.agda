@@ -3,6 +3,7 @@ module DASHI.Visualisation.EventPadicContinuationBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Visualisation.EventFilamentFieldExact as Event
+import DASHI.Visualisation.EventLabelGeometryExact as Labels
 import DASHI.Visualisation.FiniteAnisotropicKernelExact as Anisotropic
 import DASHI.Visualisation.EventFilamentPersistenceExact as Persistence
 import DASHI.Visualisation.SelfConsistentEventRendererExact as Renderer
@@ -20,6 +21,7 @@ import DASHI.Visualisation.EventPadicSourceAtlas as Sources
 record EventPadicContinuationBoundary : Set where
   field
     eventFieldBoundary : Event.EventFilamentFieldBoundary
+    eventLabelGeometryBoundary : Labels.EventLabelGeometryBoundary
     finiteAnisotropicKernelBoundary :
       Anisotropic.FiniteAnisotropicKernelBoundary
     eventPersistenceBoundary : Persistence.EventFilamentPersistenceBoundary
@@ -34,6 +36,22 @@ record EventPadicContinuationBoundary : Set where
 
     additiveEventFieldWitness :
       Event.scalarFieldSample ≡ 10
+
+    labelProductDistanceWitness :
+      Labels.productLabelDistance Labels.labelA Labels.labelB ≡ 2
+
+    labelFactorIndependenceWitness :
+      Labels.binaryHammingDistance
+        (Event.binaryLabel Labels.labelA)
+        (Event.binaryLabel Labels.sameBinaryDifferentHierarchy)
+      ≡
+      0
+      ×
+      Labels.prefixDistanceCode
+        (Event.hierarchyLabel Labels.labelA)
+        (Event.hierarchyLabel Labels.sameBinaryDifferentHierarchy)
+      ≡
+      3
 
     anisotropicRadiusWitness :
       Anisotropic.mahalanobisNumerator
@@ -188,6 +206,7 @@ canonicalEventPadicContinuationBoundary :
 canonicalEventPadicContinuationBoundary =
   record
     { eventFieldBoundary = Event.canonicalEventFilamentFieldBoundary
+    ; eventLabelGeometryBoundary = Labels.canonicalEventLabelGeometryBoundary
     ; finiteAnisotropicKernelBoundary =
         Anisotropic.canonicalFiniteAnisotropicKernelBoundary
     ; eventPersistenceBoundary =
@@ -205,6 +224,9 @@ canonicalEventPadicContinuationBoundary =
     ; padicRenderModeCorrectionBoundary =
         RenderCorrection.canonicalPadicRenderModeCorrectionBoundary
     ; additiveEventFieldWitness = Event.scalarFieldSampleIsTen
+    ; labelProductDistanceWitness = Labels.labelABDistanceIsTwo
+    ; labelFactorIndependenceWitness =
+        Labels.binaryDistanceCanVanishWhileHierarchyDiffers
     ; anisotropicRadiusWitness =
         Anisotropic.canonicalSquaredRadiusIsTwo
     ; finiteTubeQuadratureWitness =
