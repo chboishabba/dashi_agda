@@ -13,7 +13,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoConcreteDyadicSupportCount125Exact wher
 --
 -- PURPOSE
 -- Combine the repository's explicit dyadic-octant enumeration with the
--- concrete integer-cube constant 125.  Once a base enumeration has counting
+-- concrete integer-cube constant 125. Once a base enumeration has counting
 -- mass at most 125, every Boolean Littlewood--Paley/Galerkin intersection at
 -- shell q has mass at most
 --
@@ -30,6 +30,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _/_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
