@@ -69,7 +69,9 @@ FILES=(
   DASHI/Physics/DarkSector/DarkSectorColliderRegression.agda
   DASHI/Physics/DarkSector/Everything.agda
   DASHI/Biology/TernaryCyclicDialecticExact.agda
+  DASHI/Biology/TernarySoftCarryLogicExact.agda
   DASHI/Biology/RenderablePadicReasoningFieldExact.agda
+  DASHI/Biology/PadicLODConsistencyExact.agda
   DASHI/Visualisation/AffinePlaneSliceExact.agda
   DASHI/Visualisation/FiveClassSimplexColourExact.agda
   DASHI/Visualisation/SliceObjectiveExact.agda
@@ -85,7 +87,9 @@ FILES=(
   DASHI/Visualisation/AttachedVisualisationBoundary.agda
   DASHI/Visualisation/AttachedVisualisationRegression.agda
   DASHI/Visualisation/EventFilamentFieldExact.agda
+  DASHI/Visualisation/EventFilamentPersistenceExact.agda
   DASHI/Visualisation/SelfConsistentEventRendererExact.agda
+  DASHI/Visualisation/RendererStabilityExact.agda
   DASHI/Visualisation/EventPadicSourceAtlas.agda
   DASHI/Visualisation/EventPadicContinuationBoundary.agda
   DASHI/Visualisation/EventPadicContinuationRegression.agda
