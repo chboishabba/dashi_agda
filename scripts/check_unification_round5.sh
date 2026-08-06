@@ -72,6 +72,7 @@ FILES=(
   DASHI/Biology/TernarySoftCarryLogicExact.agda
   DASHI/Biology/RenderablePadicReasoningFieldExact.agda
   DASHI/Biology/PadicLODConsistencyExact.agda
+  DASHI/Biology/PadicRenderModeCorrectionExact.agda
   DASHI/Visualisation/AffinePlaneSliceExact.agda
   DASHI/Visualisation/FiveClassSimplexColourExact.agda
   DASHI/Visualisation/SliceObjectiveExact.agda
