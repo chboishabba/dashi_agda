@@ -30,8 +30,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinUniformLimitContinuationExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+import Data.Integer.Base as Int
 import Data.Nat.Properties as ℕₚ
-open import Data.Rational.Base using (ℚ; _+_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; _/_; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSTriadKNLuoTerminalInteractionDepletionTransferExact as Limit
