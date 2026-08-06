@@ -23,17 +23,17 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeResidualExact wh
 --
 -- The module proves, by finite Fubini and the side-four site enumeration, that
 -- the generic `residualFirstNormSquared` is exactly the background gauge energy
--- used by the signed `-32 rho` and `-64 rho` theorems.  Thus those estimates can
--- feed the literal Wilson+gauge+CMP109 Hessian without an independently supplied
--- gauge scalar.
+-- used by the signed `-32 rho` and `-64 rho` theorems.  The flat comparison is
+-- transported through the explicit positive-bond/periodic-field bridge.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (map)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; -_; _-_; _≤_; _/_)
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; sym; trans)
+  (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
@@ -45,6 +45,7 @@ import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact as Partition
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
+import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
 import DASHI.Physics.YangMills.BalabanP33PhysicalFlatGaugeDivergenceIdentificationExact as Flat
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
@@ -177,7 +178,8 @@ backgroundGaugeResidualSignedLowerSixtyFour :
       * Coordinates.physicalSU2BondNormSq field)
   ≤ Jets.residualSecondVariation
       (backgroundGaugeResidual background field)
-      - Periodic.physicalPeriodicDivergenceEnergy field
+      - Periodic.physicalPeriodicDivergenceEnergy
+          (Bridge.asPeriodicField field)
 backgroundGaugeResidualSignedLowerSixtyFour background field radius =
   let
     signed = Signed.backgroundGaugeSignedLowerSixtyFour
@@ -187,7 +189,8 @@ backgroundGaugeResidualSignedLowerSixtyFour background field radius =
     (λ left →
       - ((+ 64 / 1) * Signed.rho
           * Coordinates.physicalSU2BondNormSq field)
-      ≤ left - Periodic.physicalPeriodicDivergenceEnergy field)
+      ≤ left - Periodic.physicalPeriodicDivergenceEnergy
+          (Bridge.asPeriodicField field))
     (sym (backgroundGaugeResidualSecondVariationIsEnergy background field))
     (subst
       (λ right →
