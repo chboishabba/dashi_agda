@@ -20,6 +20,7 @@ on:
       - 'DASHI/PointedBulkSporadicTarotCabarlahRegression.agda'
       - 'DASHI/EverythingPointedBulkSporadicTarot.agda'
       - 'Docs/support/reference/PointedBulkSporadicTarotCabarlah.md'
+      - 'Docs/support/reference/ThreeSixNineMoonshineScaleLedger.md'
       - 'scripts/check_pointed_bulk_sporadic_tarot.sh'
       - '.github/workflows/pointed-bulk-sporadic-tarot.yml'
   workflow_dispatch:
