@@ -50,10 +50,14 @@ checks=(
   'BalancedTernaryTorusWreathBridgeExact.agda:completionJFixedByFirstTranslation'
   'BalancedTernaryTorusWreathBridgeExact.agda:completionJFixedBySecondTranslation'
   'BalancedTernaryTetrationHarmonicBridgeExact.agda:jFineEvaluation'
+  'BalancedTernaryTetrationHarmonicBridgeExact.agda:jFineEvaluationFibreMatchesRelativeScale'
   'BalancedTernaryTetrationHarmonicBridgeExact.agda:existingTowerLevelTwoHasNineToNineSites'
   'BalancedTernaryTetrationHarmonicBridgeExact.agda:recursiveSelfIndexingTetration'
+  'JFineCoarseRelativeScaleExact.agda:jAbsoluteFineIsCoarseTimesJFine'
   'JFineCoarseRelativeScaleExact.agda:jFineIsCoarseTimesRelative'
   'JFineCoarseRelativeScaleExact.agda:jNineStepDualProductIsOne'
+  'JCompletionTrivialLineSeparationExact.agda:unitRolesHaveEqualMultiplicity'
+  'JCompletionTrivialLineSeparationExact.agda:unitRolesAreDistinct'
   'JCompletionTrivialLineSeparationExact.agda:coarseChannelCountExact'
   'JCompletionTrivialLineSeparationExact.agda:completionFineContributionExact'
   'JCompletionTrivialLineSeparationExact.agda:unreducedCarrierDimensionExact'
@@ -88,7 +92,8 @@ grep -q 'tenIsPrimitiveSymmetryMultiplicityIsFalse' DASHI/Biology/MonsterFiltere
 grep -q 'elementaryChannelCarrierDoesNotEqualFullAssignmentSpace' DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda
 grep -q 'jIsNotTenthOrdinaryTorusResidue' DASHI/Biology/BalancedTernaryTorusWreathBridgeExact.agda
 grep -q 'elementaryChannelsAreNotFullConfigurations' DASHI/Biology/BalancedTernaryTetrationHarmonicBridgeExact.agda
-grep -q 'includedCompletionIsNotRemovedTrivialLine' DASHI/Biology/JCompletionTrivialLineSeparationExact.agda
+grep -q 'jFineIsNotAbsoluteFineCarrier' DASHI/Biology/JFineCoarseRelativeScaleExact.agda
+grep -q 'unitRolesAreDistinct' DASHI/Biology/JCompletionTrivialLineSeparationExact.agda
 grep -q 'structuredChannelsAreNotClaimedMonsterInvariantSummands' DASHI/Biology/MonsterStructuredBulkCarrierExact.agda
 
 scripts/run_agda29_parallel_check.sh \
