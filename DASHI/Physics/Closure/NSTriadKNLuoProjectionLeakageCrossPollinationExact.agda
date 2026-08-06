@@ -34,6 +34,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoProjectionLeakageCrossPollinationExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Bool using (Bool; true; false)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; -_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -135,24 +137,17 @@ positiveAndNegativeHelicityHaveOppositeOrientations :
   orientationOfHelicity positiveHelicity ≡ positiveOrientation
   × orientationOfHelicity negativeHelicity ≡ negativeOrientation
 positiveAndNegativeHelicityHaveOppositeOrientations = refl , refl
-  where
-  open import Data.Product using (_×_; _,_)
 
 record NSClayCrossPollinationBoundary : Set where
   constructor nsClayCrossPollinationBoundary
   field
-    finiteCommutatorIsOffDiagonalLeakage : Set
-    finiteCommutatorIsOffDiagonalLeakageWitness :
-      finiteCommutatorIsOffDiagonalLeakage
-    projectionIdentitySuppliesContinuumSixThreeBound : Set
-    projectionIdentityDoesNotSupplyContinuumSixThreeBound :
-      projectionIdentitySuppliesContinuumSixThreeBound → Set
+    finiteCommutatorIsOffDiagonalLeakage : Bool
+    finiteCommutatorIsOffDiagonalLeakageIsTrue :
+      finiteCommutatorIsOffDiagonalLeakage ≡ true
+    projectionIdentitySuppliesContinuumSixThreeBound : Bool
+    projectionIdentitySuppliesContinuumSixThreeBoundIsFalse :
+      projectionIdentitySuppliesContinuumSixThreeBound ≡ false
 
 canonicalNSClayCrossPollinationBoundary : NSClayCrossPollinationBoundary
 canonicalNSClayCrossPollinationBoundary =
-  nsClayCrossPollinationBoundary
-    ⊤ tt
-    ⊥ (λ impossible → ⊥)
-  where
-  open import Data.Unit using (⊤; tt)
-  open import Data.Empty using (⊥)
+  nsClayCrossPollinationBoundary true refl false refl
