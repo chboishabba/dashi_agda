@@ -24,16 +24,11 @@ module DASHI.Physics.YangMills.BalabanP33PeriodicDivergenceUpperExact where
 --
 --   sum_x |f(x)-f(x-mu)|^2 <= 4 sum_x |f(x)|^2.
 --
--- Hence for a scalar four-bond field
---
---   H_div^0(h) <= 16 sum_mu ||h_mu||^2,
---
--- and after the exact three-coordinate physical lift
---
---   H_div^0(h) <= 16 ||h||^2_SU(2).
---
--- This is the missing flat-divergence upper estimate needed to turn the global
--- derivative-defect norm bound into a signed gauge-energy lower bound.
+-- Hence H_div^0(h) <= 16 ||h||^2.  The physical lift explicitly converts the
+-- repository's positive-bond carrier `(site,axis) -> Q` into the periodic
+-- axis-indexed carrier `axis -> site -> Q`; these function spaces are
+-- isomorphic but not definitionally equal, so the conversion is part of the
+-- theorem rather than being hidden by an invalid unification.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -51,6 +46,7 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariation
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import DASHI.Physics.YangMills.BalabanP33PeriodicFourDimensionalHodgeIdentityExact as Periodic
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
+import DASHI.Physics.YangMills.BalabanP33PhysicalPeriodicOpenReferenceBridgeExact as Bridge
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeGlobalDefectExact as GlobalGauge
 
 scalarDifferenceSquareBound : ∀ left right →
@@ -58,8 +54,7 @@ scalarDifferenceSquareBound : ∀ left right →
   ≤ (+ 2 / 1) * (left * left + right * right)
 scalarDifferenceSquareBound left right =
   subst
-    (λ lower →
-      lower ≤ (+ 2 / 1) * (left * left + right * right))
+    (λ lower → lower ≤ (+ 2 / 1) * (left * left + right * right))
     (ℚRing.solve-∀ left right)
     (subst
       (λ upper →
@@ -79,7 +74,6 @@ scalarSum4SquareBound first second third fourth =
     q1 = Q.quat second 0ℚ 0ℚ 0ℚ
     q2 = Q.quat third 0ℚ 0ℚ 0ℚ
     q3 = Q.quat fourth 0ℚ 0ℚ 0ℚ
-
     raw = Norm.normSqSum4Bound q0 q1 q2 q3
   in
   subst
@@ -111,14 +105,6 @@ backwardDifferenceNormSqBound axis field =
       scalarDifferenceSquareBound
         (field site) (field (Periodic.shiftBackward axis site))
 
-    raw :
-      Periodic.fieldNormSq (Periodic.backwardDifference axis field)
-      ≤ Periodic.sumSites
-          (λ site →
-            (+ 2 / 1)
-              * (field site * field site
-                + field (Periodic.shiftBackward axis site)
-                  * field (Periodic.shiftBackward axis site)))
     raw = GlobalGauge.sumSitesMonotone _ _ pointwise
 
     expanded :
@@ -207,9 +193,8 @@ periodicDivergenceEnergyBelowBackwardNorms : ∀ field →
           (Periodic.backwardDifference Periodic.axis3 (field Periodic.axis3)))
 periodicDivergenceEnergyBelowBackwardNorms field =
   let
-    raw =
-      GlobalGauge.sumSitesMonotone _ _
-        (periodicDivergencePointwiseSquareBound field)
+    raw = GlobalGauge.sumSitesMonotone _ _
+      (periodicDivergencePointwiseSquareBound field)
 
     expanded =
       trans
@@ -321,25 +306,26 @@ periodicDivergenceUpper field =
       (Periodic.fieldNormSq (field Periodic.axis3)))
     combined
 
-physicalPeriodicDivergenceUpper : ∀ field →
-  Periodic.physicalPeriodicDivergenceEnergy field
+physicalPeriodicDivergenceUpper :
+  ∀ (field : Coordinates.PhysicalSU2BondField4) →
+  Periodic.physicalPeriodicDivergenceEnergy (Bridge.asPeriodicField field)
   ≤ (+ 16 / 1) * Coordinates.physicalSU2BondNormSq field
 physicalPeriodicDivergenceUpper field =
   let
-    xBound = periodicDivergenceUpper (field Coordinates.coordinateX)
-    yBound = periodicDivergenceUpper (field Coordinates.coordinateY)
-    zBound = periodicDivergenceUpper (field Coordinates.coordinateZ)
+    xField = Bridge.asPeriodicField field Coordinates.coordinateX
+    yField = Bridge.asPeriodicField field Coordinates.coordinateY
+    zField = Bridge.asPeriodicField field Coordinates.coordinateZ
 
-    combined =
-      ℚP.+-mono-≤ xBound (ℚP.+-mono-≤ yBound zBound)
+    xBound = periodicDivergenceUpper xField
+    yBound = periodicDivergenceUpper yField
+    zBound = periodicDivergenceUpper zField
+
+    combined = ℚP.+-mono-≤ xBound (ℚP.+-mono-≤ yBound zBound)
 
     toPeriodicPhysical :
-      (+ 16 / 1)
-        * scalarBondNormSq (field Coordinates.coordinateX)
-      + ((+ 16 / 1)
-        * scalarBondNormSq (field Coordinates.coordinateY)
-      + (+ 16 / 1)
-        * scalarBondNormSq (field Coordinates.coordinateZ))
+      (+ 16 / 1) * scalarBondNormSq xField
+      + ((+ 16 / 1) * scalarBondNormSq yField
+      + (+ 16 / 1) * scalarBondNormSq zField)
       ≡ (+ 16 / 1) * GlobalGauge.periodicPhysicalBondNormSq field
     toPeriodicPhysical
       rewrite GlobalGauge.axisInsertionNormSqExact field Periodic.axis0
@@ -373,7 +359,9 @@ physicalPeriodicDivergenceUpper field =
           (λ site → field Coordinates.coordinateZ (Periodic.pair site Periodic.axis3)))
   in
   subst
-    (λ upper → Periodic.physicalPeriodicDivergenceEnergy field ≤ upper)
+    (λ upper →
+      Periodic.physicalPeriodicDivergenceEnergy (Bridge.asPeriodicField field)
+      ≤ upper)
     (trans toPeriodicPhysical
       (cong ((+ 16 / 1) *_)
         (GlobalGauge.periodicPhysicalBondNormSqExact field)))
