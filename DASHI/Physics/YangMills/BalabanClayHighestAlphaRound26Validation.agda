@@ -20,6 +20,11 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound26Validation where
 --   * the corrected Stage-I / Stage-II boundary in which scale algebra is
 --       checked but physical transfer/Hessian compatibility remains conditional.
 --
+-- On continuation branches this root is also the existing-workflow entry point
+-- for the next payload.  The imports below therefore exercise the signed
+-- Wilson reducer, literal 18/6 incidence theorem, cubic shell finite-tail
+-- identity and exact geometric discounted-loss formula in the Agda kernel.
+--
 -- The root does not assert the selected-background radius, W-local, terminal
 -- physical coercivity, a scale-uniform physical C^-1 or B estimate, the actual
 -- effective-action Hessian identity, transfer-matrix compatibility, an
@@ -32,3 +37,8 @@ open import DASHI.Physics.YangMills.BalabanP33PhysicalGapScaleInvarianceExact
 open import DASHI.Physics.YangMills.BalabanP33KernelDecayToSchurExact
 open import DASHI.Physics.YangMills.BalabanP33UniformSchurFeedbackFromDecayExact
 open import DASHI.Physics.YangMills.BalabanP33StageIStageIISpectralBoundaryExact
+
+open import DASHI.Physics.YangMills.BalabanP33WilsonAtomSignedPerturbationExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonIncidenceExact
+open import DASHI.Physics.YangMills.BalabanP33CubicShellSeriesExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalInfiniteDiscountedLossExact
