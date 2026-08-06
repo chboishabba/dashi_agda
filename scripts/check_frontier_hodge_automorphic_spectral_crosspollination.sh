@@ -23,7 +23,7 @@ files=(
   DASHI/Mathematics/Complexity/PSubsetNPTrivialCertificateExact.agda
   DASHI/Mathematics/Complexity/MachineRunCertificateExact.agda
   DASHI/Mathematics/Complexity/FiniteCookLevinTableauExact.agda
-  DASHI/Moonshine/DualNumberDifferentialVertexAlgebraExact.agda
+  DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda
   DASHI/Moonshine/RankOneFockPartitionGradingExact.agda
   DASHI/Moonshine/RankOneFockEulerProductPrefixExact.agda
   DASHI/Analysis/SharedFiniteSpectralCertificationExact.agda
@@ -37,6 +37,7 @@ files=(
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
+test ! -e DASHI/Moonshine/DualNumberDifferentialVertexAlgebraExact.agda
 
 if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|standardImported' "${files[@]}"; then
   echo "frontier tranche contains a hole, postulate, unsafe escape, trust primitive, or imported theorem receipt" >&2
@@ -70,8 +71,10 @@ checks=(
   'DASHI/Mathematics/Complexity/MachineRunCertificateExact.agda:reachabilityToCertificate'
   'DASHI/Mathematics/Complexity/MachineRunCertificateExact.agda:finiteCertificateGivesBoundedAcceptance'
   'DASHI/Mathematics/Complexity/FiniteCookLevinTableauExact.agda:satisfyingTableauGivesAcceptingRun'
-  'DASHI/Moonshine/DualNumberDifferentialVertexAlgebraExact.agda:derivativeLeibniz'
-  'DASHI/Moonshine/DualNumberDifferentialVertexAlgebraExact.agda:truncatedVertexFieldsCommute'
+  'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda:derivativeOnX'
+  'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda:derivativeSquareZero'
+  'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda:derivativeLeibniz'
+  'DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda:truncatedVertexFieldsCommute'
   'DASHI/Moonshine/RankOneFockPartitionGradingExact.agda:canonicalFockPrefixCertificate'
   'DASHI/Moonshine/RankOneFockEulerProductPrefixExact.agda:fockPrefixEqualsEulerProductPrefix'
   'DASHI/Analysis/SharedFiniteSpectralCertificationExact.agda:maassTheoremToSharedEnclosure'
@@ -100,7 +103,7 @@ grep -Fq '10.1007/978-1-4684-9884-4' DASHI/Mathematics/NumberTheory/FiniteEulerP
 grep -Fq '10.1007/978-0-387-27226-9' DASHI/Mathematics/Automorphic/TruncatedLFunctionExact.agda
 grep -Fq '10.1007/978-0-387-09494-6' DASHI/Mathematics/Arithmetic/EllipticCurveSmallPrimeFrobeniusExact.agda
 grep -Fq '10.1145/800157.805047' DASHI/Mathematics/Complexity/PSubsetNPTrivialCertificateExact.agda
-grep -Fq '10.1073/pnas.83.10.3068' DASHI/Moonshine/DualNumberDifferentialVertexAlgebraExact.agda
+grep -Fq '10.1073/pnas.83.10.3068' DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda
 grep -Fq '10.1073/pnas.81.10.3256' DASHI/Moonshine/RankOneFockEulerProductPrefixExact.agda
 grep -Fq '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/YangMillsHodgeCoercivityFrontierExact.agda
 grep -Fq '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NavierStokesFiniteVorticityDepletionExact.agda
@@ -111,7 +114,8 @@ grep -Fq 'does not assume analytic elliptic' DASHI/Mathematics/LinearAlgebra/Fin
 grep -Fq 'No convergence or' DASHI/Mathematics/NumberTheory/FiniteEulerProductExact.agda
 grep -Fq 'Modularity, convergence, analytic' DASHI/Mathematics/Automorphic/TruncatedLFunctionExact.agda
 grep -Fq 'general tape alphabet' DASHI/Mathematics/Complexity/FiniteCookLevinTableauExact.agda
-grep -Fq 'not the Heisenberg or Monster VOA' DASHI/Moonshine/DualNumberDifferentialVertexAlgebraExact.agda
+grep -Fq 'genuinely nonzero, square-zero and' DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda
+grep -Fq 'not the Heisenberg or Monster VOA' DASHI/Moonshine/SquareZeroDifferentialVertexAlgebraExact.agda
 grep -Fq 'do not identify the' DASHI/Analysis/SharedFiniteSpectralCertificationExact.agda
 grep -Fq 'Nonabelian commutators' DASHI/Physics/YangMills/FiniteAbelianGaugeHodgeExact.agda
 grep -Fq 'not a continuum regularity theorem' DASHI/Physics/Closure/NavierStokesFiniteVorticityDepletionExact.agda
