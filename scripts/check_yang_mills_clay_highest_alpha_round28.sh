@@ -28,6 +28,7 @@ grep -q 'twoPointCurvatureIdentity' DASHI/Physics/YangMills/BalabanP33TwoPointMo
 grep -q 'twoPointCurvatureNonnegative' DASHI/Physics/YangMills/BalabanP33TwoPointMomentCurvatureExact.agda
 grep -q 'twoPointCurvatureVanishesOnDiagonal' DASHI/Physics/YangMills/BalabanP33TwoPointMomentCurvatureExact.agda
 grep -q 'preserveGoodClass' DASHI/Physics/YangMills/BalabanP33RGGoodClassPreservationExact.agda
+grep -q 'remainderClosedForm' DASHI/Physics/YangMills/BalabanP33RGGoodClassPreservationExact.agda
 grep -q 'twoStepRemainderContractionDirect' DASHI/Physics/YangMills/BalabanP33RGGoodClassPreservationExact.agda
 grep -q 'twoStepRemainderContraction' DASHI/Physics/YangMills/BalabanP33RGGoodClassPreservationExact.agda
 

@@ -23,16 +23,18 @@ module DASHI.Physics.YangMills.BalabanP33RGGoodClassPreservationExact where
 -- A producer for one scale contains the next values and proofs that every cap
 -- is retained. Preservation is therefore an actual dependent construction.
 --
--- The remainder contraction is checked exactly for two steps:
--- delta1 = theta delta0 and delta2 = theta delta1 imply
--- delta2 = theta^2 delta0. Physical producers for the caps and theta<2 are
--- not fabricated.
+-- Exact remainder recurrences are solved at every finite depth:
+--
+--   delta_(n+1) = theta delta_n
+--   implies delta_n = theta^n delta_0.
+--
+-- Physical producers for the caps, positivity and theta<2 are not fabricated.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _*_; _≤_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 data ScaleLabel : Set where
@@ -110,12 +112,48 @@ preserveGoodClass parameters scale current step =
     (nextCouplingAmplitudeControlled step)
     (nextRemainderControlled step)
 
+pow : ℚ → Nat → ℚ
+pow theta zero = 1ℚ
+pow theta (suc depth) = theta * pow theta depth
+
+record ExactRemainderTrajectory : Set where
+  constructor exactRemainderTrajectory
+  field
+    theta : ℚ
+    initialRemainder : ℚ
+    remainderAt : Nat → ℚ
+    remainderAtZero : remainderAt zero ≡ initialRemainder
+    remainderStep :
+      ∀ depth →
+      remainderAt (suc depth) ≡ theta * remainderAt depth
+
+open ExactRemainderTrajectory public
+
+remainderClosedForm :
+  (trajectory : ExactRemainderTrajectory) →
+  ∀ depth →
+  remainderAt trajectory depth
+  ≡ pow (theta trajectory) depth * initialRemainder trajectory
+remainderClosedForm trajectory zero
+  rewrite remainderAtZero trajectory =
+  solve (initialRemainder trajectory ∷ [])
+remainderClosedForm trajectory (suc depth)
+  rewrite remainderStep trajectory depth
+        | remainderClosedForm trajectory depth =
+  solve
+    ( theta trajectory
+    ∷ pow (theta trajectory) depth
+    ∷ initialRemainder trajectory
+    ∷ [])
+
 record ExactRemainderContraction : Set where
   constructor exactRemainderContraction
   field
-    theta deltaZero deltaOne deltaTwo : ℚ
-    firstContraction : deltaOne ≡ theta * deltaZero
-    secondContraction : deltaTwo ≡ theta * deltaOne
+    contractionTheta deltaZero deltaOne deltaTwo : ℚ
+    firstContraction :
+      deltaOne ≡ contractionTheta * deltaZero
+    secondContraction :
+      deltaTwo ≡ contractionTheta * deltaOne
 
 open ExactRemainderContraction public
 
@@ -132,10 +170,10 @@ twoStepRemainderContractionDirect
 twoStepRemainderContraction :
   (chain : ExactRemainderContraction) →
   deltaTwo chain
-  ≡ (theta chain * theta chain) * deltaZero chain
+  ≡ (contractionTheta chain * contractionTheta chain) * deltaZero chain
 twoStepRemainderContraction chain =
   twoStepRemainderContractionDirect
-    (theta chain)
+    (contractionTheta chain)
     (deltaZero chain)
     (deltaOne chain)
     (deltaTwo chain)
