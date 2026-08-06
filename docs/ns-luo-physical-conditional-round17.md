@@ -8,13 +8,19 @@ route.
 
 1. **Direct torus trigonometric-polynomial carrier.** A finite polynomial is a
    list of physical character modes and complex coefficients. Character
-   orthogonality and linearity of the normalized integral now imply coefficient
-   extraction by an explicit induction over that list. The result no longer
-   asks an arbitrary cyclic primitive root to stand in for the continuum torus.
+   orthogonality and linearity of the normalized integral imply coefficient
+   extraction by an explicit induction over that list. A second induction
+   expands the physical quadratic energy, applies character orthogonality to
+   every term pair and proves finite Parseval as the exact double Kronecker
+   coefficient sum. The result no longer asks an arbitrary cyclic primitive
+   root to stand in for the continuum torus.
 
-2. **Fourier differentiation.** The exact complex multiplier algebra proves
-   that two applications of `i k_j` give `-k_j²`, and summing the three second
-   derivatives gives the Laplacian multiplier `-|k|²`.
+2. **Fourier differentiation and Leray projection.** The exact complex
+   multiplier algebra proves that two applications of `i k_j` give `-k_j²`,
+   and summing the three second derivatives gives the Laplacian multiplier
+   `-|k|²`. The torus boundary reuses the repository's literal rational
+   orthogonal-decomposition proof of `|P_k v|² <= |v|²` and transversality; it
+   does not accept projection contractivity from the caller.
 
 3. **Centered commutator assembly.** The paired second-difference and
    derivative-variation branches are summed against the kernel second moment.
@@ -56,20 +62,33 @@ The integrated absorption lane records both:
   Navier–Stokes Equations*, DOI `10.3390/math14091410`.
 
 The code keeps pointwise absorption, integrated absorption, and the
-Constantin–Fefferman directional defect as distinct theorem strengths.
+Constantin–Fefferman directional defect as distinct theorem strengths. The
+Constantin–Fefferman DOI is normalized throughout the touched good/bad
+coherence modules to `10.1512/iumj.1993.42.42034`. The Lions 1969 nonlinear
+methods reference is recorded without inventing a DOI for the cited Dunod
+edition.
 
 ## Remaining frontier
 
 The conditional physical route now has an exact formal endpoint. Unconditional
 regularity still requires physical producers for the analytic inputs, especially:
 
-- normalized Haar realization of the direct torus carrier;
-- the continuum Hölder–Minkowski and Sobolev product estimates behind the
-  centered commutator envelopes;
+- a concrete normalized Haar measure and exponential-character realization of
+  the direct torus carrier; coefficient extraction and Parseval then apply
+  without further finite algebra;
+- the continuum Taylor, Hölder and Minkowski estimates producing the two
+  centered commutator branch envelopes, rather than only their checked finite
+  assembly and `2^{-2q}` scaling;
+- the physical Sobolev multiplication estimates that turn the checked Fourier
+  tails and tensor decomposition into the complete nonlinear projection-error
+  bound;
+- the periodic principal-value Biot–Savart/strain representation connecting
+  the exact physical directional-defect identity to the actual vortex-
+  stretching integral;
 - a Navier–Stokes proof of residence-time compression or an equivalent
   integrated high–high absorption theorem;
-- compactness or compensated structure strong enough to identify the cubic
-  transfer in the Galerkin limit.
+- compactness, compensated structure or a strong–weak product theorem strong
+  enough to identify the cubic transfer in the Galerkin limit.
 
 Those obligations are exposed at their genuine analytic boundaries rather than
 being reported as already proved.
