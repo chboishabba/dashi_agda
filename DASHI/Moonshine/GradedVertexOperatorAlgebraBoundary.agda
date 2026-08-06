@@ -125,7 +125,8 @@ identityTraceCoefficientIsDimension :
     grade →
   traceCoefficient traceData (GR.identity (group actionData)) grade
   ≡ gradeDimensionAsScalar dimensionLaw grade
-identityTraceCoefficientIsDimension actionData traceData dimensionLaw grade =
+identityTraceCoefficientIsDimension {G} {K}
+    actionData traceData dimensionLaw grade =
   let
     representation = GR.grade (gradedRepresentation actionData) grade
   in
@@ -141,9 +142,10 @@ identityTraceCoefficientIsDimension actionData traceData dimensionLaw grade =
       x ≡ y → y ≡ z → x ≡ z
     transEquality refl second = second
 
-    congTrace : ∀ {G K : Set}
-      (representation : GR.FiniteDimensionalRepresentation G K (group actionData))
-      {left right} → left ≡ right →
+    congTrace :
+      (representation :
+        GR.FiniteDimensionalRepresentation G K (group actionData)) →
+      ∀ {left right} → left ≡ right →
       GR.trace representation left ≡ GR.trace representation right
     congTrace representation refl = refl
 
