@@ -2,11 +2,15 @@ module DASHI.Physics.Foundations.Round5AttachedCompletionBoundary where
 
 open import DASHI.Core.Prelude
 
-import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact as History
-import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact as Residue
-import DASHI.Physics.Foundations.FiniteMultiscaleKernelCompatibilityExact as Multiscale
+import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact as HistoryInternal
+import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact as ResidueInternal
+import DASHI.Physics.Foundations.FiniteMultiscaleKernelCompatibilityExact as MultiscaleInternal
 import DASHI.Physics.Foundations.FiniteUltrametricReebFlowExact as Ultrametric
 import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact as Reeb
+
+module History = HistoryInternal
+module Residue = ResidueInternal
+module Multiscale = MultiscaleInternal
 
 record Round5AttachedCompletionBoundary : Set where
   field
