@@ -25,8 +25,11 @@ import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact
 import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact
+import DASHI.Physics.Foundations.HistoryWeightFiltrationExact
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact
+import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact
 import DASHI.Physics.Foundations.TernaryKernelQuotientLyapunovExact
+import DASHI.Physics.Foundations.FiniteStatisticalFiltrationExact
 import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas
 import DASHI.Physics.Foundations.Round5AttachedFormalismBoundary
