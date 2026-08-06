@@ -20,8 +20,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeKernelEstimateExact where
 --
 -- PURPOSE
 -- Combine the centered two-branch identity, a finite second-moment kernel
--- bound, and the concrete eight-point (L6,L3)->L2 theorem.  To avoid roots,
--- the result is stated at the sixth-power level.  If each branch satisfies
+-- bound, and the concrete eight-point (L6,L3)->L2 theorem. To avoid roots,
+-- the result is stated at the sixth-power level. If each branch satisfies
 --
 --   branchL2^2 <= M2^2 productL2^2,
 --
@@ -34,7 +34,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact as Holder
@@ -43,54 +43,38 @@ record FiniteSixThreeKernelData : Set where
   constructor finite-six-three-kernel-data
   field
     firstHolder secondHolder : Holder.EightSixThreeData
-
     kernelSecondMomentSquared : ℚ
     firstBranchL2Squared secondBranchL2Squared : ℚ
 
-    kernelSecondMomentSquaredNonnegative :
-      0ℚ ≤ kernelSecondMomentSquared
+    kernelSecondMomentSquaredNonnegative : 0ℚ ≤ kernelSecondMomentSquared
     firstBranchNonnegative : 0ℚ ≤ firstBranchL2Squared
     secondBranchNonnegative : 0ℚ ≤ secondBranchL2Squared
 
     firstKernelBound :
       firstBranchL2Squared
-      ≤ kernelSecondMomentSquared
-        * Holder.productL2Squared firstHolder
+      ≤ kernelSecondMomentSquared * Holder.productL2Squared firstHolder
 
     secondKernelBound :
       secondBranchL2Squared
-      ≤ kernelSecondMomentSquared
-        * Holder.productL2Squared secondHolder
+      ≤ kernelSecondMomentSquared * Holder.productL2Squared secondHolder
 
 open FiniteSixThreeKernelData public
 
 cubeMonotone :
   ∀ {left right : ℚ} →
-  0ℚ ≤ left →
-  left ≤ right →
+  0ℚ ≤ left → left ≤ right →
   Holder.cube left ≤ Holder.cube right
 cubeMonotone {left} {right} leftNN left≤right =
   let
-    rightNN : 0ℚ ≤ right
     rightNN = ℚₚ.≤-trans leftNN left≤right
-
-    squareBound : left * left ≤ right * right
     squareBound =
       L2.nonnegativeProductMonotone
         leftNN leftNN rightNN rightNN left≤right left≤right
-
-    cubeBound :
-      (left * left) * left ≤ (right * right) * right
-    cubeBound =
-      L2.nonnegativeProductMonotone
-        (L2.squareNonnegative left)
-        leftNN
-        (L2.squareNonnegative right)
-        rightNN
-        squareBound
-        left≤right
   in
-  cubeBound
+  L2.nonnegativeProductMonotone
+    (L2.squareNonnegative left) leftNN
+    (L2.squareNonnegative right) rightNN
+    squareBound left≤right
 
 productL2SquaredNonnegative :
   (dataSet : Holder.EightSixThreeData) →
@@ -130,28 +114,10 @@ branchCubeBound :
   ≤ Holder.sixtyFour
     * Holder.cube momentSquared
     * Holder.lowSixthMass holderData
-    * (Holder.highCubeMass holderData
-      * Holder.highCubeMass holderData)
+    * (Holder.highCubeMass holderData * Holder.highCubeMass holderData)
 branchCubeBound holderData momentSquared branchSquared
   momentNN branchNN branchBound =
   let
-    productNN = productL2SquaredNonnegative holderData
-
-    momentProductNN :
-      0ℚ ≤ momentSquared * Holder.productL2Squared holderData
-    momentProductNN =
-      let
-        instance
-          momentNNI = nonNegative momentNN
-          productNNI = nonNegative productNN
-          totalNN =
-            ℚₚ.nonNeg*nonNeg⇒nonNeg
-              momentSquared
-              (Holder.productL2Squared holderData)
-      in
-      ℚₚ.nonNegative⁻¹
-        (momentSquared * Holder.productL2Squared holderData)
-
     monotone :
       Holder.cube branchSquared
       ≤ Holder.cube
@@ -161,7 +127,6 @@ branchCubeBound holderData momentSquared branchSquared
     holderBound =
       Holder.eightPointSixThreeHolderRadicalFree holderData
 
-    momentCubeNN : 0ℚ ≤ Holder.cube momentSquared
     momentCubeNN = Holder.cubeNonnegative momentSquared momentNN
 
     scaledHolder :
@@ -230,8 +195,7 @@ branchCubeBound holderData momentSquared branchSquared
 centeredSixThreeKernelSixthPowerBound :
   (dataSet : FiniteSixThreeKernelData) →
   Holder.cube
-    (firstBranchL2Squared dataSet
-      + secondBranchL2Squared dataSet)
+    (firstBranchL2Squared dataSet + secondBranchL2Squared dataSet)
   ≤ (Holder.four * Holder.sixtyFour)
     * Holder.cube (kernelSecondMomentSquared dataSet)
     * ( Holder.lowSixthMass (firstHolder dataSet)
@@ -265,26 +229,10 @@ centeredSixThreeKernelSixthPowerBound dataSet =
       (secondBranchNonnegative dataSet)
       (secondKernelBound dataSet)
 
-    summed :
-      Holder.cube (firstBranchL2Squared dataSet)
-        + Holder.cube (secondBranchL2Squared dataSet)
-      ≤ Holder.sixtyFour
-          * Holder.cube (kernelSecondMomentSquared dataSet)
-          * Holder.lowSixthMass (firstHolder dataSet)
-          * (Holder.highCubeMass (firstHolder dataSet)
-            * Holder.highCubeMass (firstHolder dataSet))
-        + Holder.sixtyFour
-          * Holder.cube (kernelSecondMomentSquared dataSet)
-          * Holder.lowSixthMass (secondHolder dataSet)
-          * (Holder.highCubeMass (secondHolder dataSet)
-            * Holder.highCubeMass (secondHolder dataSet))
     summed = ℚₚ.+-mono-≤ first second
 
     scaled = Holder.scaleBound
-      Holder.four
-      _ _
-      Holder.fourNonnegative
-      summed
+      Holder.four _ _ Holder.fourNonnegative summed
 
     endpoint = solve
       ( Holder.cube (kernelSecondMomentSquared dataSet)
