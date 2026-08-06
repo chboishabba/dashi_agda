@@ -211,8 +211,12 @@ inverseSelectedFactorNormSqExact unit insertion Placement.firstSelection =
         (Norm.normSqMultiplyExact insertion
           (Telescope._-q_
             (Physical.quaternionConjugate unit) Q.oneQ))
-        (cong (Norm.normSq insertion *_)
-          (AdjointNorm.inverseDifferenceNormSqExact unit))))
+        (trans
+          (cong (Norm.normSq insertion *_)
+            (AdjointNorm.inverseDifferenceNormSqExact unit))
+          (ℚRing.solve-∀
+            (Norm.normSq (Telescope._-q_ unit Q.oneQ))
+            (Norm.normSq insertion)))))
 inverseSelectedFactorNormSqExact unit insertion Placement.secondSelection =
   trans
     (cong Norm.normSq
