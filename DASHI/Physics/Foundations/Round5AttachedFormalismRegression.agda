@@ -113,11 +113,22 @@ lyapunovConvergenceRegression :
   Triadic.zeroOrbit
 lyapunovConvergenceRegression = refl
 
-statisticalSeparationRegression :
+statisticalCarrierSeparationRegression :
+  Statistics.physicalObject Statistics.physicalLeft
+  ≡
+  Statistics.lawObject Statistics.balancedLaw
+  →
+  ⊥
+statisticalCarrierSeparationRegression =
+  Statistics.physicalObjectCannotEqualLawObject
+    Statistics.physicalLeft
+    Statistics.balancedLaw
+
+statisticalDistanceRegression :
   Statistics.parameterDistance Statistics.parameterLeft Statistics.parameterRight
   ≡
   Statistics.parameterDistance Statistics.parameterRight Statistics.parameterLeft
-statisticalSeparationRegression = refl
+statisticalDistanceRegression = refl
 
 coarseProjectionRegression :
   Statistics.coarseProjection Statistics.fineLeftLow
