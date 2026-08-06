@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
+import DASHI.Biology.DASHIYijingRelationalOperatorsExact as YijingRelational
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 import DASHI.Biology.DialecticalSheetSpiralExact as Spiral
 import DASHI.Biology.TriadicBraidDialecticExact as Braid
@@ -28,6 +29,7 @@ record ConsciousAccessRound5Boundary : Set where
   constructor consciousAccessRound5Boundary
   field
     ternaryDivinationBoundary : Yijing.TernaryDivinationBoundary
+    yijingRelationalBoundary : YijingRelational.YijingRelationalBoundary
     orientedZeroBoundary : Zero.OrientedZeroBoundary
     dialecticalSpiralBoundary : Spiral.DialecticalSpiralBoundary
     triadicBraidBoundary : Braid.TriadicBraidBoundary
@@ -51,6 +53,56 @@ record ConsciousAccessRound5Boundary : Set where
 
     ternaryNineSheetHasNineteenThousandSixHundredEightyThreeStates :
       Yijing.ternaryStateCount 9 ≡ 19683
+
+    classicalCastCompilesExactly :
+      YijingRelational.compileCast YijingRelational.canonicalClassicalCast
+      ≡ YijingRelational.castTransformation
+          YijingRelational.canonicalClassicalCast
+          YijingRelational.canonicalCastInitial
+          YijingRelational.canonicalCastMask
+          YijingRelational.canonicalCastResulting
+
+    trigramSplitRecomposesHexagram :
+      (x : Yijing.TernaryHexagram) →
+      YijingRelational.composeTrigrams
+        (YijingRelational.lowerTrigram x)
+        (YijingRelational.upperTrigram x)
+      ≡ x
+
+    correspondencePairingIsInvolutive :
+      (position : YijingRelational.LinePosition) →
+      YijingRelational.correspondingPosition
+        (YijingRelational.correspondingPosition position)
+      ≡ position
+
+    reversalIsInvolutive :
+      (x : Yijing.TernaryHexagram) →
+      YijingRelational.reverseHexagram
+        (YijingRelational.reverseHexagram x)
+      ≡ x
+
+    trigramExchangeIsInvolutive :
+      (x : Yijing.TernaryHexagram) →
+      YijingRelational.exchangeTrigrams
+        (YijingRelational.exchangeTrigrams x)
+      ≡ x
+
+    complementIsInvolutive :
+      (x : Yijing.TernaryHexagram) →
+      YijingRelational.complementHexagram
+        (YijingRelational.complementHexagram x)
+      ≡ x
+
+    canonicalNuclearHexagramIsExact :
+      YijingRelational.nuclearHexagram YijingRelational.canonicalCastInitial
+      ≡
+      (Triadic.positiveTrit YijingRelational.vcons
+       Triadic.negativeTrit YijingRelational.vcons
+       Triadic.positiveTrit YijingRelational.vcons
+       Triadic.negativeTrit YijingRelational.vcons
+       Triadic.positiveTrit YijingRelational.vcons
+       Triadic.positiveTrit YijingRelational.vcons
+       YijingRelational.vnil)
 
     orientedZerosShareCoarseObservation :
       Zero.coarseTrit Zero.negativeZero
@@ -143,6 +195,7 @@ canonicalConsciousAccessRound5Boundary : ConsciousAccessRound5Boundary
 canonicalConsciousAccessRound5Boundary =
   consciousAccessRound5Boundary
     Yijing.canonicalTernaryDivinationBoundary
+    YijingRelational.canonicalYijingRelationalBoundary
     Zero.canonicalOrientedZeroBoundary
     Spiral.canonicalDialecticalSpiralBoundary
     Braid.canonicalTriadicBraidBoundary
@@ -160,6 +213,13 @@ canonicalConsciousAccessRound5Boundary =
     refl
     refl
     refl
+    YijingRelational.canonicalCastCompilesExactly
+    YijingRelational.splitThenCompose
+    YijingRelational.correspondenceIsInvolutive
+    YijingRelational.reverseIsInvolutive
+    YijingRelational.exchangeIsInvolutive
+    YijingRelational.complementIsInvolutive
+    YijingRelational.canonicalNuclearExtraction
     Zero.negativeAndPositiveZeroCoarseAgree
     Spiral.projectedReturnAfterFour
     Spiral.historicalLiftAfterFour
