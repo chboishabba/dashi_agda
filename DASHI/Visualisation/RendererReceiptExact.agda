@@ -212,8 +212,8 @@ record RendererReceipt : Set where
     rgbDifference : BufferDifference
     encodedDifference : BufferDifference
     bitwiseFloatEqual : Bool
-    timingProtocol : TimingProtocol
-    performanceSummary : PerformanceSummary
+    receiptTimingProtocol : TimingProtocol
+    receiptPerformanceSummary : PerformanceSummary
     benchmarkExecuted : Bool
     ciKernelCheckSucceeded : Bool
 
