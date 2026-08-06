@@ -171,6 +171,34 @@ tieHasStrongestSuppression :
   nonnegativeAttenuation exactTie ≡ 0
 tieHasStrongestSuppression = refl
 
+------------------------------------------------------------------------
+-- Sign correction for the proposed GELU(-gamma gap) ambiguity factor.  A
+-- negative ambiguity value inserted into 1-lambda*tau amplifies instead of
+-- suppressing a positive-gap pixel.
+
+data TieFactorEffect : Set where
+  suppressesActivity : TieFactorEffect
+  leavesActivityUnchanged : TieFactorEffect
+  amplifiesActivity : TieFactorEffect
+
+legacySignedTieEffect : AmbiguityLevel → TieFactorEffect
+legacySignedTieEffect exactTie = leavesActivityUnchanged
+legacySignedTieEffect smallGap = amplifiesActivity
+legacySignedTieEffect largeGap = amplifiesActivity
+
+correctedNonnegativeTieEffect : AmbiguityLevel → TieFactorEffect
+correctedNonnegativeTieEffect exactTie = suppressesActivity
+correctedNonnegativeTieEffect smallGap = suppressesActivity
+correctedNonnegativeTieEffect largeGap = leavesActivityUnchanged
+
+legacyPositiveGapAmplifies :
+  legacySignedTieEffect smallGap ≡ amplifiesActivity
+legacyPositiveGapAmplifies = refl
+
+correctedTieSuppresses :
+  correctedNonnegativeTieEffect exactTie ≡ suppressesActivity
+correctedTieSuppresses = refl
+
 data ColourBasisMode : Set where
   localPCABasis : ColourBasisMode
   globalPCABasis : ColourBasisMode
