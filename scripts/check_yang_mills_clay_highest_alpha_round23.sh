@@ -36,9 +36,14 @@ checks=(
   'BalabanP33TerminalScaleGapPullbackExact.agda:pullBackGapBelowFine'
   'BalabanP33TerminalScaleGapPullbackExact.agda:pullBackGapClosedForm'
   'BalabanP33TerminalScaleGapPullbackExact.agda:fourStepPullbackExact'
-  'BalabanP33TerminalScaleGapPullbackExact.agda:pulledBackNonnegativeImpliesFineNonnegative'
+  'BalabanP33TerminalScaleGapPullbackExact.agda:differenceNonnegative'
+  'BalabanP33TerminalScaleGapPullbackExact.agda:discountedLossBudgetAdmissible'
+  'BalabanP33TerminalScaleGapPullbackExact.agda:admissibleBudgetImpliesPulledBackNonnegative'
+  'BalabanP33TerminalScaleGapPullbackExact.agda:admissibleBudgetImpliesFineNonnegative'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:bareUniformOneThirtySecondBlocked'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:discountedPhysicalLossBudget'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:terminalScaleGreenKernelDecay'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:pulledBackPhysicalFloorNonnegative'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:fineScaleGapNonnegativeFromTerminalChain'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:terminalDecayAndFineGapFloor'
 )
@@ -65,12 +70,17 @@ grep -q 'Public dates alone cannot establish either dependence or independence' 
 grep -q 'Hopping-parameter expansion' \
   docs/yang-mills-combes-thomas-provenance.md
 
-# Exact arithmetic/scope guards: the concrete obstruction is 16 <= 8, and the
-# terminal lane assumes neither a dynamic doubling law nor a bare uniform gap.
+# Exact arithmetic/scope guards: the concrete obstruction is 16 <= 8, the
+# terminal chain ends at the literal 1/32 P33 floor, and positivity is derived
+# from a discounted-loss inequality rather than inserted as an opaque field.
 grep -q 'squareWave256LeftExact' \
   DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
 grep -q 'squareWave256EnergyExact' \
   DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
+grep -q 'fineGap losses P33.p33PhysicalFloor' \
+  DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
+grep -q 'discountedLossBudgetAdmissible' \
+  DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
 grep -q 'physicalRGGapTransferProducerLevel = conditional' \
   DASHI/Physics/YangMills/BalabanP33TerminalScaleGapPullbackExact.agda
 grep -q 'physicalOneStepRGGapEstimateLevel = conditional' \
