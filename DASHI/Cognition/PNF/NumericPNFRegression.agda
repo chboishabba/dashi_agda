@@ -5,6 +5,7 @@ open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Empty using (⊥)
 
 open import DASHI.Cognition.PNF.BoundedMDLPlanner
+open import DASHI.Cognition.PNF.BoundedInterfaceSketch
 open import DASHI.Cognition.PNF.ComplexityArithmetic
 open import DASHI.Cognition.PNF.DirectDemandLookup
 open import DASHI.Cognition.PNF.NumericAuthority
@@ -64,6 +65,19 @@ copiedPlannerCannotClaimCanonicalLinearStorage : ∀ n window beam →
     pathStorage (canonicalPlannerComplexityCertificate n window beam) → ⊥
 copiedPlannerCannotClaimCanonicalLinearStorage =
   copiedImplementationCannotUseCanonicalCertificate
+
+boundedSketchPlannerFormula : ∀ n window beam capacity →
+  boundedPlannerWork n window beam capacity ≡
+    n *ᶜ (window *ᶜ (sketchJoinWork capacity +ᶜ beam))
+boundedSketchPlannerFormula = boundedPlannerWorkClosed
+
+unboundedSketchCannotClaimBoundedEndToEndWork :
+  ∀ n window beam capacity →
+  unboundedExactKeys ≡
+    sketchStorage
+      (canonicalBoundedPlannerCertificate n window beam capacity) → ⊥
+unboundedSketchCannotClaimBoundedEndToEndWork =
+  unboundedRuntimeCannotUseBoundedCertificate
 
 exampleProbe : ProbeContract
 exampleProbe = probeContract zero zero z≤n
