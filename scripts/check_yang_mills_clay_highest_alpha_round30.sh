@@ -33,6 +33,7 @@ checks=(
   'BalabanStrongCouplingSUFourDimensionalMarginExact.agda:marginFactorsThroughThresholdSlack'
   'BalabanStrongCouplingSUFourDimensionalMarginExact.agda:configuredNormalizedMarginPositive'
   'BalabanStrongCouplingSU2ActionNormalizationExact.agda:su2ExponentIsConstantMinusWilsonPenalty'
+  'BalabanStrongCouplingSU2ActionNormalizationExact.agda:finiteVolumeExponentIsConstantMinusPenalty'
   'BalabanStrongCouplingSU2ActionNormalizationExact.agda:configuredInteriorActionCoefficientExact'
   'BalabanStrongCouplingSU2ActionNormalizationExact.agda:exponentAndPenaltySecondVariationsOppose'
   'BalabanStrongCouplingBetaRhoSeparationExact.agda:rhoAgainstThresholdSlackExact'
