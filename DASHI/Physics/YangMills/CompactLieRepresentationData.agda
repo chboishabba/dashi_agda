@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.CompactLieRepresentationData where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 -- Finite-dimensional structure data needed to replace SU(2)-specific
 -- coefficient expansions in large-field, gauge-fixing, and character bounds.
 

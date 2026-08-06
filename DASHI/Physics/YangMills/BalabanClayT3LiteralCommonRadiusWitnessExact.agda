@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.BalabanClayT3LiteralCommonRadiusWitnessExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT3LiteralBackgroundHessianRemaindersExact as Remainder
 import DASHI.Physics.YangMills.BalabanClayT3LiteralFiveRemainderConstantsExact as Constants

@@ -1,5 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPatchResidualSmallness where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------

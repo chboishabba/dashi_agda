@@ -1,5 +1,6 @@
 module DASHI.Physics.YangMills.YMSupportGraphDistance where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (length)

@@ -78,7 +78,7 @@ record SelectedSmallnessWitness {Bound : Set}
         (add window
           (displacement window (candidate window))
           (multiply window (rho window (candidate window)) (candidate window)))
-        (candidate window)
+        (displacementThreshold window)
 
 open SelectedSmallnessWitness public
 
@@ -110,6 +110,12 @@ record StrictTransport {Bound : Set}
             (rho window (displacementThreshold window))
             (displacementThreshold window)))
 
+    addMonotoneRight : ∀ {left right} →
+      LessEqual window left right →
+      LessEqual window
+        (add window (cH window) left)
+        (add window (cH window) right)
+
 open StrictTransport public
 
 selectCommonRadius :
@@ -136,9 +142,7 @@ selectCommonRadius window transport = record
   ; displacementAtCandidate =
       transitive window
         (displacementBudgetAtCandidateBelowThreshold transport)
-        (transitive window
-          (displacementAtThreshold window)
-          (candidateBelowDisplacement window))
+        (displacementAtThreshold window)
   }
   where
   transportCoercivity :
@@ -148,14 +152,7 @@ selectCommonRadius window transport = record
     LessEqual window
       (add window (cH window) (perturbation window (candidate window)))
       (add window (cH window) (perturbation window (coercivityThreshold window)))
-  transportCoercivity p = addMonotoneRight p
-
-  addMonotoneRight : ∀ {left right} →
-    LessEqual window left right →
-    LessEqual window
-      (add window (cH window) left)
-      (add window (cH window) right)
-  addMonotoneRight = addMonotoneRight
+  transportCoercivity p = addMonotoneRight transport p
 
 explicitSmallnessWindowAssemblyLevel : ProofLevel
 explicitSmallnessWindowAssemblyLevel = machineChecked
