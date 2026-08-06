@@ -16,6 +16,7 @@ files=(
   DASHI/Mathematics/NumberTheory/RiemannCompletedZetaBoundary.agda
   DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda
   DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineHodgeDiamondExact.agda
+  DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda
   DASHI/Mathematics/AlgebraicGeometry/HodgeNoetherianVOACrossPollination.agda
   DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
   DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
@@ -65,6 +66,10 @@ checks=(
   'DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda:hodgeConjectureGivesCycleRepresentative'
   'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineHodgeDiamondExact.agda:p1HodgeConjugationSymmetry'
   'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineHodgeDiamondExact.agda:p1BettiNumbers'
+  'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda:p1CycleClassAdditive'
+  'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda:p1CycleClassHomogeneous'
+  'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda:p1CycleClassSurjective'
+  'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda:p1CycleClassCertificate'
   'DASHI/Mathematics/AlgebraicGeometry/HodgeNoetherianVOACrossPollination.agda:noetherianityDoesNotProveHodgeDecomposition'
   'DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda:fibreCountVector'
   'DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda:affinePointCountIsSeven'
@@ -110,6 +115,7 @@ grep -Fq '10.1073/pnas.83.10.3068' DASHI/Moonshine/TrivialRationalGradedVertexAl
 grep -Fq '10.1007/BF01232032' DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda
 grep -Fq '10.1186/s40687-015-0029-6' DASHI/Moonshine/MonsterGradedVOABridgeExact.agda
 grep -Fq '10.1017/CBO9780511615344' DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda
+grep -Fq '10.1017/CBO9780511615344' DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda
 grep -Fq '10.1007/978-0-387-09494-6' DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
 grep -Fq '10.1007/978-0-387-09494-6' DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
 grep -Fq '10.1515/crll.1965.218.79' DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
@@ -125,6 +131,7 @@ grep -Fq 'construct V^natural' DASHI/Moonshine/GradedVertexOperatorAlgebraBounda
 grep -Fq 'analytic continuation, Gamma factors' DASHI/Mathematics/NumberTheory/RiemannXiSymmetryExact.agda
 grep -Fq 'the analytic fields is filled' DASHI/Mathematics/NumberTheory/RiemannCompletedZetaBoundary.agda
 grep -Fq 'No Hodge-conjecture solution' DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda
+grep -Fq 'closes the finite P^1 example only' DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda
 grep -Fq 'Enumerate the affine F_5-points' DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
 grep -Fq 'finite row is a checked arithmetic witness' DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
 grep -Fq 'No canonical inhabitant' DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
