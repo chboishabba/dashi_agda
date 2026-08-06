@@ -21,8 +21,8 @@ record Round5CombinedSourceBoundary : Set where
     biologyExtendedSourceCountIsTwentyThree :
       BiologyExtended.canonicalRound5ExtendedSourceCount ≡ 23
 
-    biologyCompletionSourceCountIsTwentyNine :
-      BiologyCompletion.canonicalRound5CompletionSourceCount ≡ 29
+    biologyCompletionSourceCountIsThirtyOne :
+      BiologyCompletion.canonicalRound5CompletionSourceCount ≡ 31
 
     reusedPadicSourceCountIsEight :
       PadicSources.canonicalRound4SourceCount ≡ 8
@@ -34,5 +34,5 @@ canonicalRound5CombinedSourceBoundary =
   round5CombinedSourceBoundary
     PhysicsSources.canonicalRound5SourceCountIsSeventeen
     BiologyExtended.canonicalRound5ExtendedSourceCountIsTwentyThree
-    BiologyCompletion.canonicalRound5CompletionSourceCountIsTwentyNine
+    BiologyCompletion.canonicalRound5CompletionSourceCountIsThirtyOne
     PadicSources.canonicalRound4SourceCountIsEight
