@@ -32,8 +32,9 @@ module DASHI.Biology.MoonshineOrbifoldSectorProjectorExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _/_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; -_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 record RationalPair : Set where
@@ -127,8 +128,6 @@ data OrbifoldSector : Set where
 orbifoldSectorsDistinct :
   untwistedFixedSector ≡ twistedPositiveSector → ⊥
 orbifoldSectorsDistinct ()
-  where
-  open import Data.Empty using (⊥)
 
 record MoonshineOrbifoldAssemblyBoundary : Set where
   constructor moonshineOrbifoldAssemblyBoundary
