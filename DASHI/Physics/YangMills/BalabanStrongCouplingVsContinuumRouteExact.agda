@@ -34,8 +34,8 @@ module DASHI.Physics.YangMills.BalabanStrongCouplingVsContinuumRouteExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Integer.Base using (+_; -[1+_])
-open import Data.Rational.Base using (ℚ; _/_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base using (ℚ; -_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.YangMills.BalabanStrongCouplingSUFourDimensionalMarginExact as Strong
@@ -96,7 +96,7 @@ unitInverseCoupling = + 1 / 1
 
 unitInverseCouplingMarginExact :
   Strong.suNormalizedBakryEmeryMargin unitInverseCoupling
-  ≡ -[1+ 46 ] / 2
+  ≡ - (+ 47 / 2)
 unitInverseCouplingMarginExact = solve []
 
 record StochasticRouteImportBridge : Set₁ where
