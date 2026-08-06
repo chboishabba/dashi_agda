@@ -32,14 +32,18 @@ module DASHI.Physics.YangMills.BalabanP33TerminalScaleGapPullbackExact where
 --
 -- Chaining N such steps gives a fine-scale lower floor obtained by repeatedly
 -- halving the coarse floor and subtracting the corresponding loss.  The module
--- proves the recursion, its closed exact-rational decomposition into a
--- discounted terminal term minus a discounted loss budget, and the theorem
--- that a nonnegative pulled-back floor is inherited by the actual fine gap.
+-- proves the recursion and its closed exact-rational decomposition
 --
--- This is the honest terminal-scale escape interface: the finite-volume
--- terminal gap and every one-step loss estimate must be proved elsewhere.  The
--- algebra neither assumes a bare volume-uniform Poincare constant nor claims
--- that RG dynamically generates a gap without those producers.
+--   2^{-N} m_N - sum_j 2^{-(j+1)} epsilon_j.
+--
+-- Positivity is not stored as an unrelated receipt: it is derived from the
+-- explicit discounted-loss inequality
+--
+--   discountedLossBudget <= discountFactor(N) * terminalGap.
+--
+-- The finite-volume terminal gap and every one-step physical estimate must be
+-- proved elsewhere.  Nothing here assumes a bare volume-uniform Poincare
+-- constant or claims that RG dynamically generates a gap.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -51,7 +55,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+  (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -200,13 +204,44 @@ fourStepPullbackExact : ∀ terminalGap loss0 loss1 loss2 loss3 →
 fourStepPullbackExact terminalGap loss0 loss1 loss2 loss3 =
   ℚRing.solve-∀ terminalGap loss0 loss1 loss2 loss3
 
-pulledBackNonnegativeImpliesFineNonnegative :
+------------------------------------------------------------------------
+-- Exact loss-budget criterion for a nonnegative inherited floor.
+------------------------------------------------------------------------
+
+differenceNonnegative : ∀ {lower upper} →
+  lower ≤ upper → 0ℚ ≤ upper - lower
+differenceNonnegative {lower} {upper} lowerBelowUpper =
+  subst
+    (λ left → left ≤ upper - lower)
+    (ℚRing.solve-∀ lower)
+    (subtractRightMonotone lower lowerBelowUpper)
+
+discountedLossBudgetAdmissible : ℚ → List ℚ → Set
+discountedLossBudgetAdmissible terminalGap losses =
+  discountedLossBudget losses
+  ≤ discountFactor (listLength losses) * terminalGap
+
+admissibleBudgetImpliesPulledBackNonnegative :
+  ∀ terminalGap losses →
+  discountedLossBudgetAdmissible terminalGap losses →
+  0ℚ ≤ pullBackGap terminalGap losses
+admissibleBudgetImpliesPulledBackNonnegative
+    terminalGap losses budgetAdmissible =
+  subst
+    (λ selected → 0ℚ ≤ selected)
+    (sym (pullBackGapClosedForm terminalGap losses))
+    (differenceNonnegative budgetAdmissible)
+
+admissibleBudgetImpliesFineNonnegative :
   ∀ {fine losses terminalGap} →
   GapTransferChain fine losses terminalGap →
-  0ℚ ≤ pullBackGap terminalGap losses →
+  discountedLossBudgetAdmissible terminalGap losses →
   0ℚ ≤ fine
-pulledBackNonnegativeImpliesFineNonnegative chain pulledBackNonnegative =
-  ℚP.≤-trans pulledBackNonnegative (pullBackGapBelowFine chain)
+admissibleBudgetImpliesFineNonnegative chain budgetAdmissible =
+  ℚP.≤-trans
+    (admissibleBudgetImpliesPulledBackNonnegative
+      _ _ budgetAdmissible)
+    (pullBackGapBelowFine chain)
 
 terminalGapPullbackStepLevel : ProofLevel
 terminalGapPullbackStepLevel = machineChecked
