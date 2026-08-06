@@ -90,18 +90,28 @@ machineArtifactIsNotGlobalAcceptance :
   machineVerificationArtifact ≡ globalAcceptanceEvidence → ⊥
 machineArtifactIsNotGlobalAcceptance ()
 
+data AuditStatus : Set where
+  observedClaim : AuditStatus
+  notEstablishedByCurrentAudit : AuditStatus
+  independentlyEstablished : AuditStatus
+
 record ExternalClaimAudit : Set where
   constructor externalClaimAudit
   field
     channel : PublicationEvidence
-    theoremContentIndependentlyChecked : Bool
-    proofArtifactsPubliclyReproducible : Bool
-    qualifyingOutletEstablished : Bool
-    globalAcceptanceEstablished : Bool
+    theoremContentStatus : AuditStatus
+    proofArtifactReproducibilityStatus : AuditStatus
+    qualifyingOutletStatus : AuditStatus
+    globalAcceptanceStatus : AuditStatus
 
 currentYangMillsDevAudit : ExternalClaimAudit
 currentYangMillsDevAudit =
-  externalClaimAudit selfHostedWebClaim false false false false
+  externalClaimAudit
+    selfHostedWebClaim
+    notEstablishedByCurrentAudit
+    notEstablishedByCurrentAudit
+    notEstablishedByCurrentAudit
+    notEstablishedByCurrentAudit
 
 record ClaimAuthorityBoundary : Set where
   constructor claimAuthorityBoundary
