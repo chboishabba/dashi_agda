@@ -10,6 +10,10 @@ import DASHI.Physics.Foundations.FiniteMultiscaleKernelCompatibilityExact as Mul
 import DASHI.Physics.DarkSector.DarkSectorColliderBoundary as Collider
 import DASHI.Physics.DarkSector.DisplacedVertex as Vertex
 import DASHI.Physics.DarkSector.TriggerCensoring as Trigger
+import DASHI.Visualisation.AttachedVisualisationBoundary as Visualisation
+import DASHI.Physics.Foundations.TriToBiSingularJunctionExact as Junction
+import DASHI.Visualisation.CoarseSliceSearchExact as Search
+import DASHI.Visualisation.RendererParityExact as Parity
 
 record Round5CompleteBoundary : Set where
   field
@@ -17,6 +21,8 @@ record Round5CompleteBoundary : Set where
     attachedCompletionBoundary :
       AttachedCompletion.Round5AttachedCompletionBoundary
     colliderBoundary : Collider.DarkSectorColliderBoundary
+    attachedVisualisationBoundary :
+      Visualisation.AttachedVisualisationBoundary
 
     reversibleHistorySubsystem :
       (configuration : History.Configuration) →
@@ -43,6 +49,21 @@ record Round5CompleteBoundary : Set where
       ≡
       Trigger.acceptEvent
 
+    connectedThreeToTwoNeedsThreeSaddles :
+      Junction.ordinarySaddleCount
+        Junction.threeSimultaneousSaddles
+      ≡
+      3
+
+    lowPrecisionShortlistRetainsExactWinner :
+      Search.InShortlist Search.floatWinner Search.coarseProposal
+
+    optimisedRendererPreservesReference :
+      (input : Parity.RenderInput) →
+      Parity.optimisedRenderer input
+      ≡
+      Parity.referenceRenderer input
+
 open Round5CompleteBoundary public
 
 canonicalRound5CompleteBoundary : Round5CompleteBoundary
@@ -52,6 +73,8 @@ canonicalRound5CompleteBoundary =
     ; attachedCompletionBoundary =
         AttachedCompletion.canonicalRound5AttachedCompletionBoundary
     ; colliderBoundary = Collider.canonicalDarkSectorColliderBoundary
+    ; attachedVisualisationBoundary =
+        Visualisation.canonicalAttachedVisualisationBoundary
     ; reversibleHistorySubsystem =
         History.reversibleStepInvolutive
     ; residueSixReturns =
@@ -62,4 +85,10 @@ canonicalRound5CompleteBoundary =
         Multiscale.exactKernelCompatibility
     ; displacedColliderTriggerAccepts =
         Trigger.canonicalLLPTriggerAcceptsDisplacedSignal
+    ; connectedThreeToTwoNeedsThreeSaddles =
+        Junction.connectedGenusZeroNeedsThreeSaddles
+    ; lowPrecisionShortlistRetainsExactWinner =
+        Search.trueWinnerSurvivesShortlist
+    ; optimisedRendererPreservesReference =
+        Parity.optimisedParity
     }
