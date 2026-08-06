@@ -7,7 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteKroneckerEnumerationExact where
 -- DOI: not applicable.
 --
 -- PURPOSE
--- Remove the free delta-action field from finite Fourier inversion.  Given a
+-- Remove the free delta-action field from finite Fourier inversion. Given a
 -- decidable point equality and a proof that a target occurs exactly once in a
 -- finite point list, the Kronecker kernel satisfies
 --
@@ -16,9 +16,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteKroneckerEnumerationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
-import Data.Rational.Properties as ℚₚ
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (sym)
 open import Relation.Nullary using (Dec; yes; no)
 
@@ -61,7 +61,7 @@ kroneckerSelf :
   kronecker decide value value ≡ 1ℚ
 kroneckerSelf decide value with decide value value
 ... | yes proof = refl
-... | no contradiction = Data.Empty.⊥-elim (contradiction refl)
+... | no contradiction = ⊥-elim (contradiction refl)
 
 kroneckerDistinct :
   ∀ {A : Set}
@@ -70,7 +70,7 @@ kroneckerDistinct :
   left ≢ right →
   kronecker decide left right ≡ 0ℚ
 kroneckerDistinct decide left right distinct with decide left right
-... | yes proof = Data.Empty.⊥-elim (distinct proof)
+... | yes proof = ⊥-elim (distinct proof)
 ... | no _ = refl
 
 allKroneckerZero :
@@ -91,7 +91,7 @@ allKroneckerZero decide target (item ∷ items)
   in
   rewrite kroneckerDistinct decide item target itemNotTarget
         | allKroneckerZero decide target items restDistinct value =
-  ℚₚ.+-identityˡ 0ℚ
+  solve (value item ∷ [])
 
 kroneckerActsAsIdentity :
   ∀ {A : Set}
@@ -106,7 +106,7 @@ kroneckerActsAsIdentity decide target .(target ∷ items)
   (occursHere {items} restDistinct) value
   rewrite kroneckerSelf decide target
         | allKroneckerZero decide target items restDistinct value =
-  ℚₚ.+-identityʳ (value target)
+  solve (value target ∷ [])
 kroneckerActsAsIdentity decide target (item ∷ items)
   (occursThere targetNotItem occurrence) value =
   let
@@ -115,4 +115,4 @@ kroneckerActsAsIdentity decide target (item ∷ items)
   in
   rewrite kroneckerDistinct decide item target itemNotTarget
         | kroneckerActsAsIdentity decide target items occurrence value =
-  ℚₚ.+-identityˡ (value target)
+  solve (value item ∷ value target ∷ [])
