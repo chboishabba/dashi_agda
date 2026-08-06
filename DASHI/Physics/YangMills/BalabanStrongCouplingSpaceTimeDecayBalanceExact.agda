@@ -40,6 +40,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 decayDenominator : ℚ → ℚ → ℚ → ℚ
 decayDenominator curvature spatialRate propagationSpeed =
@@ -57,13 +58,33 @@ spatialExponent : ℚ → ℚ → ℚ → ℚ → ℚ
 spatialExponent spatialRate distance propagationSpeed time =
   spatialRate * (distance - propagationSpeed * time)
 
+commonBalancedExponent : ℚ → ℚ → ℚ → ℚ
+commonBalancedExponent curvature spatialRate distance inverseDenominator =
+  inverseDenominator
+    * ((+ 2 / 1) * curvature * spatialRate * distance)
+
 balancedTemporalExponentExact :
   ∀ curvature spatialRate propagationSpeed distance inverseDenominator →
   temporalExponent curvature
     (balancedTime inverseDenominator spatialRate distance)
-  ≡ inverseDenominator
-      * ((+ 2 / 1) * curvature * spatialRate * distance)
+  ≡ commonBalancedExponent
+      curvature spatialRate distance inverseDenominator
 balancedTemporalExponentExact
+    curvature spatialRate propagationSpeed distance inverseDenominator =
+  solve
+    (curvature ∷ spatialRate ∷ propagationSpeed ∷
+     distance ∷ inverseDenominator ∷ [])
+
+balancedSpatialDecompositionExact :
+  ∀ curvature spatialRate propagationSpeed distance inverseDenominator →
+  spatialExponent spatialRate distance propagationSpeed
+    (balancedTime inverseDenominator spatialRate distance)
+  ≡ commonBalancedExponent
+      curvature spatialRate distance inverseDenominator
+    + spatialRate * distance
+      * (1ℚ - inverseDenominator
+          * decayDenominator curvature spatialRate propagationSpeed)
+balancedSpatialDecompositionExact
     curvature spatialRate propagationSpeed distance inverseDenominator =
   solve
     (curvature ∷ spatialRate ∷ propagationSpeed ∷
@@ -76,14 +97,23 @@ balancedSpatialExponentExact :
   ≡ 1ℚ →
   spatialExponent spatialRate distance propagationSpeed
     (balancedTime inverseDenominator spatialRate distance)
-  ≡ inverseDenominator
-      * ((+ 2 / 1) * curvature * spatialRate * distance)
+  ≡ commonBalancedExponent
+      curvature spatialRate distance inverseDenominator
 balancedSpatialExponentExact
-    curvature spatialRate propagationSpeed distance inverseDenominator inverseLaw
-  rewrite inverseLaw =
-  solve
-    (curvature ∷ spatialRate ∷ propagationSpeed ∷
-     distance ∷ inverseDenominator ∷ [])
+    curvature spatialRate propagationSpeed distance inverseDenominator inverseLaw =
+  trans
+    (balancedSpatialDecompositionExact
+      curvature spatialRate propagationSpeed distance inverseDenominator)
+    (trans
+      (cong
+        (λ selected →
+          commonBalancedExponent
+            curvature spatialRate distance inverseDenominator
+          + spatialRate * distance * (1ℚ - selected))
+        inverseLaw)
+      (solve
+        (curvature ∷ spatialRate ∷ propagationSpeed ∷
+         distance ∷ inverseDenominator ∷ [])))
 
 balancedExponentsAgree :
   ∀ curvature spatialRate propagationSpeed distance inverseDenominator →
@@ -95,11 +125,14 @@ balancedExponentsAgree :
   ≡ spatialExponent spatialRate distance propagationSpeed
       (balancedTime inverseDenominator spatialRate distance)
 balancedExponentsAgree
-    curvature spatialRate propagationSpeed distance inverseDenominator inverseLaw
-  rewrite inverseLaw =
-  solve
-    (curvature ∷ spatialRate ∷ propagationSpeed ∷
-     distance ∷ inverseDenominator ∷ [])
+    curvature spatialRate propagationSpeed distance inverseDenominator inverseLaw =
+  trans
+    (balancedTemporalExponentExact
+      curvature spatialRate propagationSpeed distance inverseDenominator)
+    (sym
+      (balancedSpatialExponentExact
+        curvature spatialRate propagationSpeed distance inverseDenominator
+        inverseLaw))
 
 configuredCurvature configuredSpatialRate configuredSpeed : ℚ
 configuredCurvature = + 1 / 2
