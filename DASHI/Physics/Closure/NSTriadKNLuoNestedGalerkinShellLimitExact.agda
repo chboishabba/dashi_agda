@@ -38,7 +38,7 @@ record NestedGalerkinShellLimitData : Set where
   constructor nestedGalerkinShellLimitData
   field
     finiteApproximation : Nat → Nat → ℚ
-    galerkinCritical physicalCritical uniformFiniteBound : ℚ
+    physicalCritical uniformFiniteBound : ℚ
 
     galerkinCriticalAt : Nat → ℚ
 
