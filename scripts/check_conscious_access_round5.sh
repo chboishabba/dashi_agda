@@ -6,7 +6,11 @@ cd "$ROOT"
 
 # Round five is stacked on the complete round-four p-adic reasoning-field lane.
 if [[ "${ROUND5_SKIP_ROUND4:-0}" != "1" ]]; then
-  ROUND5_DISABLE_CASCADE=1 bash scripts/check_conscious_access_round4.sh
+  if [[ "${ROUND5_DISABLE_CASCADE:-0}" == "1" ]]; then
+    ROUND4_SKIP_ROUND3=1 bash scripts/check_conscious_access_round4.sh
+  else
+    bash scripts/check_conscious_access_round4.sh
+  fi
 fi
 
 FILES=(
@@ -33,8 +37,15 @@ FILES=(
   DASHI/Biology/ConsciousAccessRound5Regression.agda
 )
 
+FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
+
 for file in "${FILES[@]}"; do
-  if grep -nE '\{!!\}|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--unsafe|=[[:space:]]*_[[:space:]]*$' "$file"; then
+  if [[ ! -f "$file" ]]; then
+    echo "required round-five source is missing: $file" >&2
+    exit 1
+  fi
+
+  if grep -nE "$FORBIDDEN_PATTERN" "$file"; then
     echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
     exit 1
   fi
