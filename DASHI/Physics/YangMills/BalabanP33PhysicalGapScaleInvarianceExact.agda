@@ -57,9 +57,8 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalGapScaleInvarianceExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -68,7 +67,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33TerminalScaleGapPullbackExact as Pullback
 import DASHI.Physics.YangMills.BalabanP33EffectiveSchurGapStepExact as Effective
 import DASHI.Physics.YangMills.BalabanP33CoarseFineSchurCouplingExact as Coupling
-import DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact as ExistingScale
 
 ------------------------------------------------------------------------
 -- Lattice and physical mass are deliberately different quantities.
@@ -248,67 +246,6 @@ lossCorrectedPhysicalCrossProduct
       ≤ coarseSpacing * latticeGap fine)
     (sym (coarseSpacingDoubles physicalStep))
     normalized
-
-zeroLossExactStepAsPhysicalSplit :
-  ∀ {fine coarse} →
-  ExactDyadicScaleStep fine coarse →
-  0ℚ ≤ latticeSpacing fine →
-  PhysicalSplitRGStep fine coarse 0ℚ 0ℚ
-zeroLossExactStepAsPhysicalSplit {fine} {coarse} step spacingNonnegative =
-  record
-    { splitGapStep = record
-        { Effective.SplitRGGapStep.coarseControlledByFineWithSplitLoss =
-            subst
-              (λ upper → latticeGap coarse ≤ upper)
-              (sym (gapDoubles step))
-              ℚP.≤-refl
-        }
-    ; coarseSpacingDoubles = spacingDoubles step
-    ; fineSpacingNonnegative = spacingNonnegative
-    }
-
-exactStepCrossProductRecoveredFromLossCorrected :
-  ∀ {fine coarse} →
-  ExactDyadicScaleStep fine coarse →
-  0ℚ ≤ latticeSpacing fine →
-  latticeSpacing fine * latticeGap coarse
-  ≤ latticeSpacing coarse * latticeGap fine
-exactStepCrossProductRecoveredFromLossCorrected step spacingNonnegative =
-  subst
-    (λ lower →
-      lower ≤ latticeSpacing _ * latticeGap _)
-    (ℚRing.solve [])
-    (lossCorrectedPhysicalCrossProduct
-      (zeroLossExactStepAsPhysicalSplit step spacingNonnegative))
-
-------------------------------------------------------------------------
--- Connection to the existing physical exponent theorem.
-------------------------------------------------------------------------
-
-rationalOrderedScaleAlgebra : ExistingScale.OrderedScaleAlgebra
-rationalOrderedScaleAlgebra = record
-  { ExistingScale.OrderedScaleAlgebra.Carrier = ℚ
-  ; ExistingScale.OrderedScaleAlgebra.multiply = _*_
-  ; ExistingScale.OrderedScaleAlgebra.LessEqual = _≤_
-  ; ExistingScale.OrderedScaleAlgebra.lessEqualTransitive = ℚP.≤-trans
-  ; ExistingScale.OrderedScaleAlgebra.multiplyRightMonotone =
-      λ right {left} {upper} leftBelowUpper →
-        let
-          rightNonnegativeOrNot = right
-        in
-        -- This concrete field is not used below because rational multiplication
-        -- is monotone only for nonnegative right factors.  The physical bridge
-        -- remains supplied by the already existing ordered instance chosen by
-        -- its caller.
-        subst (λ selected → left * right ≤ selected) refl leftBelowUpper
-  ; ExistingScale.OrderedScaleAlgebra.multiplyAssociative = ℚP.*-assoc
-  }
-
--- The generic existing module intentionally asks its caller to choose an
--- ordered scale algebra with a valid monotonicity law.  The exact dyadic and
--- loss-corrected results above avoid pretending unrestricted rational
--- multiplication is monotone; they carry every needed nonnegativity premise
--- explicitly.
 
 physicalGapScaleInvarianceAlgebraLevel : ProofLevel
 physicalGapScaleInvarianceAlgebraLevel = machineChecked
