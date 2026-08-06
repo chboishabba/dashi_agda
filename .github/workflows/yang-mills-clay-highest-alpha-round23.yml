@@ -1,0 +1,36 @@
+name: Yang-Mills Clay highest-alpha round 23
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round23-volume-uniformity-terminal-scale'
+  pull_request:
+    branches:
+      - 'agent/ym-clay-alpha-round22-hodge-wilson-repair'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33TerminalScaleGapPullbackExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound23Validation.agda'
+      - 'docs/yang-mills-combes-thomas-provenance.md'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round23.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round23.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check unscaled Poincare wall and terminal-scale gap pullback
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round23.sh
