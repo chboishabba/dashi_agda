@@ -18,8 +18,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact whe
 --   (sum_i (a_i b_i)^2)^3
 --     <= 64 (sum_i a_i^6) (sum_i b_i^3)^2.
 --
--- This is a radical-free finite (L6,L3)->L2 estimate.  The factor 64 comes
--- from the elementary eight-value cubic power-mean bound.  The remaining
+-- This is a radical-free finite (L6,L3)->L2 estimate. The factor 64 comes
+-- from the elementary eight-value cubic power-mean bound. The remaining
 -- steps are diagonal <= product of sums and sum of squares <= square of sum.
 ------------------------------------------------------------------------
 
@@ -548,7 +548,10 @@ cubeProductSumMeaning dataSet =
 pairLeftMeaning :
   (dataSet : EightSixThreeData) →
   pairSumLeft (sixthPairs dataSet) ≡ lowSixthMass dataSet
-pairLeftMeaning dataSet = solve []
+pairLeftMeaning dataSet =
+  solve
+    ( a0 dataSet ∷ a1 dataSet ∷ a2 dataSet ∷ a3 dataSet
+    ∷ a4 dataSet ∷ a5 dataSet ∷ a6 dataSet ∷ a7 dataSet ∷ [])
 
 pairRightMeaning :
   (dataSet : EightSixThreeData) →
@@ -562,7 +565,10 @@ pairRightMeaning dataSet =
 highCubeListSumMeaning :
   (dataSet : EightSixThreeData) →
   sum (highCubeList dataSet) ≡ highCubeMass dataSet
-highCubeListSumMeaning dataSet = solve []
+highCubeListSumMeaning dataSet =
+  solve
+    ( b0 dataSet ∷ b1 dataSet ∷ b2 dataSet ∷ b3 dataSet
+    ∷ b4 dataSet ∷ b5 dataSet ∷ b6 dataSet ∷ b7 dataSet ∷ [])
 
 eightPointSixThreeHolderRadicalFree :
   (dataSet : EightSixThreeData) →
