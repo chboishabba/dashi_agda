@@ -35,6 +35,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; -_; _≤_; _/_)
+import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
@@ -161,8 +162,8 @@ bilinearPerturbationSignedLower
     third = weightedYoungLower
       (defectDefect parameters) defectLeft defectRight
 
-    combined = FiniteL2.addMonotone
-      (FiniteL2.addMonotone first second) third
+    combined = ℚP.+-mono-≤
+      (ℚP.+-mono-≤ first second) third
 
     scaledCombined :
       (+ 1 / 2)
@@ -183,9 +184,9 @@ bilinearPerturbationSignedLower
           + (+ 2 / 1) * baseRight * defectLeft)
           + (+ 2 / 1) * defectLeft * defectRight)
     scaledCombined =
-      Norm.scaleMonotoneNonnegative
+      Norm.scaleNonnegative
         (+ 1 / 2)
-        (ℚ.nonNegative _)
+        (ℚP.nonNegative⁻¹ (+ 1 / 2))
         combined
   in
   subst
