@@ -25,9 +25,9 @@ module DASHI.Mathematics.NumberTheory.RiemannCompletedZetaBoundary where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact as RX
 
@@ -72,7 +72,7 @@ completedZetaZeroSymmetry data = record
         zeroAtPoint
   ; RX.conjugationPreservesZero = λ point zeroAtPoint →
       zeroTransport data
-        (conjugationLaw data point)
+        (sym (conjugationLaw data point))
         (conjugatePreservesZero data (completedXi data point) zeroAtPoint)
   }
 
@@ -89,11 +89,13 @@ record NontrivialZeroData (data : CompletedZetaData) : Set₁ where
     xiZero : RX.isXiZero (completedZetaZeroSymmetry data) coordinate
     inCriticalStrip : RX.CriticalStrip coordinate
 
+open NontrivialZeroData public
+
 record RiemannHypothesis (data : CompletedZetaData) : Set₁ where
   field
     everyNontrivialZeroOnCriticalLine :
-      NontrivialZeroData data → RX.CriticalLine
-        (NontrivialZeroData.coordinate)
+      (zero : NontrivialZeroData data) →
+      RX.CriticalLine (coordinate zero)
 
 record RiemannZeroCounting (data : CompletedZetaData) : Set₁ where
   field
