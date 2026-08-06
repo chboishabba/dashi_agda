@@ -22,13 +22,14 @@ module DASHI.Mathematics.Complexity.FiniteCookLevinTableauExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
-open import Agda.Builtin.Maybe using ()
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact as Machine
+open Machine.NondeterministicMachine
 
 data ToyState : Set where
   startState workState acceptState rejectState : ToyState
@@ -36,7 +37,7 @@ data ToyState : Set where
 data AcceptingToyState : ToyState → Set where
   acceptingState : AcceptingToyState acceptState
 
-toySuccessors : ToyState → Agda.Builtin.List.List ToyState
+toySuccessors : ToyState → List ToyState
 toySuccessors startState = workState ∷ []
 toySuccessors workState = acceptState ∷ []
 toySuccessors acceptState = []
@@ -44,11 +45,11 @@ toySuccessors rejectState = []
 
 toyMachine : Machine.NondeterministicMachine
 toyMachine = record
-  { Machine.NondeterministicMachine.nInput = ⊤
-  ; Machine.NondeterministicMachine.nConfiguration = ToyState
-  ; Machine.NondeterministicMachine.nInitial = λ input → startState
-  ; Machine.NondeterministicMachine.nSuccessors = toySuccessors
-  ; Machine.NondeterministicMachine.nAccepting = AcceptingToyState
+  { nInput = ⊤
+  ; nConfiguration = ToyState
+  ; nInitial = λ input → startState
+  ; nSuccessors = toySuccessors
+  ; nAccepting = AcceptingToyState
   }
 
 canonicalTwoStepAcceptingRun :
@@ -122,8 +123,6 @@ canonicalLocalClausesAreSatisfied :
   × LocalClauseFamily.secondTransitionClause canonicalLocalClauseFamily
   × LocalClauseFamily.acceptingClause canonicalLocalClauseFamily
 canonicalLocalClausesAreSatisfied = refl , refl , refl , acceptingState
-  where
-    open import Data.Product using (_×_; _,_)
 
 record GeneralCookLevinBoundary : Set₁ where
   field
