@@ -6,6 +6,9 @@ import DASHI.Biology.ConsciousAccessRound4SourceAtlas as PadicSources
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologyExtended
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas as BiologyCompletion
 import DASHI.Physics.Foundations.Round5SourceAtlas as PhysicsSources
+import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas as AttachedSources
+import DASHI.Physics.DarkSector.DarkSectorColliderSourceAtlas as ColliderSources
+import DASHI.Visualisation.AttachedVisualisationSourceAtlas as VisualisationSources
 
 ------------------------------------------------------------------------
 -- Source populations are retained as separate typed atlases because their
@@ -27,6 +30,15 @@ record Round5CombinedSourceBoundary : Set where
     reusedPadicSourceCountIsEight :
       PadicSources.canonicalRound4SourceCount ≡ 8
 
+    attachedFormalismSourceCountIsSix :
+      AttachedSources.canonicalAttachedFormalismSourceCount ≡ 6
+
+    colliderSourceCountIsSix :
+      ColliderSources.canonicalDarkSectorColliderSourceCount ≡ 6
+
+    visualisationSourceCountIsEight :
+      VisualisationSources.canonicalAttachedVisualisationSourceCount ≡ 8
+
 open Round5CombinedSourceBoundary public
 
 canonicalRound5CombinedSourceBoundary : Round5CombinedSourceBoundary
@@ -36,3 +48,6 @@ canonicalRound5CombinedSourceBoundary =
     BiologyExtended.canonicalRound5ExtendedSourceCountIsTwentyThree
     BiologyCompletion.canonicalRound5CompletionSourceCountIsThirtyOne
     PadicSources.canonicalRound4SourceCountIsEight
+    AttachedSources.canonicalAttachedFormalismSourceCountIsSix
+    ColliderSources.canonicalDarkSectorColliderSourceCountIsSix
+    VisualisationSources.canonicalAttachedVisualisationSourceCountIsEight
