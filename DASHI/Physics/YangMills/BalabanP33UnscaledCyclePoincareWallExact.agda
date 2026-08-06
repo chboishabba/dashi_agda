@@ -98,7 +98,7 @@ constantRunLength (suc n) value =
 
 sumValuesAppend : ∀ left right →
   sumValues (left ++ right) ≡ sumValues left + sumValues right
-sumValuesAppend [] right = sym (ℚRing.solve-∀ (sumValues right))
+sumValuesAppend [] right = ℚRing.solve-∀ (sumValues right)
 sumValuesAppend (value ∷ values) right =
   trans
     (cong (value +_) (sumValuesAppend values right))
@@ -106,7 +106,7 @@ sumValuesAppend (value ∷ values) right =
 
 sumSquaresAppend : ∀ left right →
   sumSquares (left ++ right) ≡ sumSquares left + sumSquares right
-sumSquaresAppend [] right = sym (ℚRing.solve-∀ (sumSquares right))
+sumSquaresAppend [] right = ℚRing.solve-∀ (sumSquares right)
 sumSquaresAppend (value ∷ values) right =
   trans
     (cong (sq value +_) (sumSquaresAppend values right))
@@ -183,7 +183,7 @@ pathEnergyAppend : ∀ previous left right →
   ≡ pathEnergyFrom previous left
     + pathEnergyFrom (lastOr previous left) right
 pathEnergyAppend previous [] right =
-  sym (ℚRing.solve-∀ (pathEnergyFrom previous right))
+  ℚRing.solve-∀ (pathEnergyFrom previous right)
 pathEnergyAppend previous (value ∷ values) right
   rewrite pathEnergyAppend value values right =
   ℚRing.solve-∀
@@ -258,7 +258,7 @@ halfPeriodSquareWaveCycleEnergyExact n =
               (λ start →
                 pathEnergyFrom start negativeRun
                 ≡ sq ((- 1ℚ) - 1ℚ))
-              (lastOrConstantSame n 1ℚ)
+              (sym (lastOrConstantSame n 1ℚ))
               (pathEnergyConstantDifferent n 1ℚ (- 1ℚ))))
           (ℚRing.solve []))
 
