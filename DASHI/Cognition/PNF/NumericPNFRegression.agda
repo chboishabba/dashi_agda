@@ -11,6 +11,7 @@ open import DASHI.Cognition.PNF.DirectDemandLookup
 open import DASHI.Cognition.PNF.NumericAuthority
 open import DASHI.Cognition.PNF.NumericHyperfabric
 open import DASHI.Cognition.PNF.NumericPNFCompilation
+open import DASHI.Cognition.PNF.SetBasedDemandPlanning
 open import DASHI.Cognition.PNF.SpacyNumericProjection
 
 data ExampleDigest : Set where
@@ -79,8 +80,33 @@ unboundedSketchCannotClaimBoundedEndToEndWork :
 unboundedSketchCannotClaimBoundedEndToEndWork =
   unboundedRuntimeCannotUseBoundedCertificate
 
+setBasedKeyRowsFormula : ∀ demands keysPerDemand →
+  normalizedKeyRows demands keysPerDemand ≡
+    demands *ᶜ keysPerDemand
+setBasedKeyRowsFormula = normalizedKeyRowsClosed
+
+setBasedCandidateRowsFormula : ∀ demands maximumCandidates →
+  candidateRowCapacity demands maximumCandidates ≡
+    demands *ᶜ maximumCandidates
+setBasedCandidateRowsFormula = candidateRowCapacityClosed
+
 exampleProbe : ProbeContract
 exampleProbe = probeContract zero zero z≤n
+
+exampleSetBasedPlanningCertificate :
+  SetBasedPlanningCertificate zero zero zero
+exampleSetBasedPlanningCertificate =
+  canonicalSetBasedPlanningCertificate zero zero zero exampleProbe
+
+proceduralPlanningCannotClaimSetBasedExecution :
+  perDemandProcedural ≡ execution exampleSetBasedPlanningCertificate → ⊥
+proceduralPlanningCannotClaimSetBasedExecution =
+  proceduralLoopIsNotSetBased
+
+recursiveCandidateTriggerCannotClaimSetBasedValidation :
+  perCandidateRecursive ≡ validation exampleSetBasedPlanningCertificate → ⊥
+recursiveCandidateTriggerCannotClaimSetBasedValidation =
+  recursiveTriggerIsNotSetBasedValidation
 
 exampleCandidates : CandidateBound
 exampleCandidates = candidateBound zero zero z≤n
