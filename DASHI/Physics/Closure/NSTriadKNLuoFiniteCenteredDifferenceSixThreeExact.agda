@@ -15,7 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredDifferenceSixThreeExact w
 --
 -- PURPOSE
 -- Construct, rather than request, the finite centered-difference branch
--- masses used by the (L6,L3) commutator estimate.  The first list represents
+-- masses used by the (L6,L3) commutator estimate. The first list represents
 --
 --   |delta_y^2 a| times |grad g|,
 --
@@ -30,7 +30,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredDifferenceSixThreeExact w
 --
 -- The dimension-free Holder theorem then yields the complete two-branch
 -- sixth-power estimate with no branch-bound producer and no cardinality
--- constant.
+-- constant, by applying
+--
+--   Kernel.centeredSixThreeKernelDimensionFree (centeredKernelData dataSet).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (refl)
@@ -114,8 +116,3 @@ centeredKernelData dataSet =
       (kernelSecondMomentSquaredNonnegative dataSet)
       (secondDifferencePairs dataSet))
     refl
-
-finiteCenteredDifferenceSixThreeBound =
-  λ dataSet →
-    Kernel.centeredSixThreeKernelDimensionFree
-      (centeredKernelData dataSet)
