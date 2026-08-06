@@ -33,6 +33,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 terminalGap : ℚ
 terminalGap = + 1 / 32
@@ -54,9 +55,16 @@ strictMarginFactorization :
   discountDenominator theta
     * survivingMargin theta inverseDenominator errorAmplitude
   ≡ crossMultipliedBudgetGap theta errorAmplitude
-strictMarginFactorization theta inverseDenominator errorAmplitude inverseLaw
-  rewrite inverseLaw =
-  solve (theta ∷ inverseDenominator ∷ errorAmplitude ∷ [])
+strictMarginFactorization theta inverseDenominator errorAmplitude inverseLaw =
+  trans
+    (solve (theta ∷ inverseDenominator ∷ errorAmplitude ∷ []))
+    (trans
+      (cong
+        (λ selected →
+          discountDenominator theta * terminalGap
+          - selected * errorAmplitude)
+        inverseLaw)
+      (solve (theta ∷ errorAmplitude ∷ [])))
 
 configuredBudgetGapExpanded :
   ∀ theta errorAmplitude →
