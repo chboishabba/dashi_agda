@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoNEMGROPhysicalAuditRound20Validation wh
 ------------------------------------------------------------------------
 -- Cumulative validation root.
 -- Round-twenty pinned checker trigger.
+-- Complete stacked validation trigger.
 --
 -- Imports Round Nineteen and checks the concrete NEMGRO audit tranche:
 --
