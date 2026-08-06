@@ -19,12 +19,12 @@ module DASHI.Biology.BalancedTernaryTetrationHarmonicBridgeExact where
 -- recursively makes an entire level the index type of the next field.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Fin using (Fin)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Tower
+import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 
 ElementaryChannelCarrier : Set
 ElementaryChannelCarrier = Harmonic.ElementaryHarmonicChannel
@@ -42,17 +42,23 @@ existingTowerLevelOneHasNineSites : Tower.selfIndexedSiteCount 1 ≡ 9
 existingTowerLevelOneHasNineSites = Tower.selfIndexedLevelOneHasNineSites
 
 existingTowerLevelTwoHasNineToNineSites :
-  Tower.selfIndexedSiteCount 2 ≡
-  DASHI.Biology.TernaryHypercubeHyperfabricExact.powNat 9 9
+  Tower.selfIndexedSiteCount 2 ≡ Hyper.powNat 9 9
 existingTowerLevelTwoHasNineToNineSites =
   Tower.selfIndexedLevelTwoHasNineToNineSites
-  where
-  import DASHI.Biology.TernaryHypercubeHyperfabricExact
 
 data CarrierGrowthKind : Set where
   elementaryProductGrowth : CarrierGrowthKind
   fullAssignmentExponentiation : CarrierGrowthKind
   recursiveSelfIndexingTetration : CarrierGrowthKind
+
+channelGrowthKind : CarrierGrowthKind
+channelGrowthKind = elementaryProductGrowth
+
+configurationGrowthKind : CarrierGrowthKind
+configurationGrowthKind = fullAssignmentExponentiation
+
+towerGrowthKind : CarrierGrowthKind
+towerGrowthKind = recursiveSelfIndexingTetration
 
 record TetrationHarmonicBoundary : Set where
   constructor tetrationHarmonicBoundary
