@@ -3,6 +3,7 @@ module DASHI.PointedBulkSporadicTarotCabarlahBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.PointedTernaryBulkExact as Bulk
+import DASHI.Biology.DecimalTenTernaryPresentationExact as Decimal
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
@@ -15,16 +16,23 @@ import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact as C
 record PointedBulkSporadicTarotCabarlahBoundary : Set where
   field
     pointedBulkBoundary : Bulk.PointedTernaryBulkBoundary
+    decimalPresentationBoundary : Decimal.DecimalTenTernaryPresentationBoundary
     residualOrbitBoundary : Orbit.ReducedFiftyThreeOrbitBoundary
     sporadicTarotBoundary : Tarot.SporadicTarotBoundary
     moonshineBoundary : Moonshine.PointedBulkReducedMoonshineBoundary
     cabarlahProjectionBoundary : Cabarlah.CabarlahTraumaProjectionBoundary
 
     markerCountIsTen : Bulk.markerCount ≡ 10
+    decimalBulkCountIs196830 :
+      Decimal.decimalTernaryBulkDimension ≡ 196830
+    decimalAndPointedBulkCountsAgree :
+      Decimal.decimalTernaryBulkDimension ≡ Bulk.pointedBulkDimension
     bulkCountIs196830 : Bulk.pointedBulkDimension ≡ 196830
     bulkIsUnpointedPlusPointed :
       Bulk.pointedBulkDimension ≡ Bulk.unpointedPlusPointedDimension
     pointedD4DimensionIsTen : Bulk.pointedRepresentationDimension ≡ 10
+    irrepOrientationSectorCountIsTen :
+      Decimal.irrepOrientationSectorCount ≡ 10
     pointedA2RemainsAbsent :
       Bulk.pointedMultiplicity Symmetry.A2 ≡ 0
 
@@ -60,16 +68,24 @@ canonicalPointedBulkSporadicTarotCabarlahBoundary :
 canonicalPointedBulkSporadicTarotCabarlahBoundary =
   record
     { pointedBulkBoundary = Bulk.canonicalPointedTernaryBulkBoundary
+    ; decimalPresentationBoundary =
+        Decimal.canonicalDecimalTenTernaryPresentationBoundary
     ; residualOrbitBoundary = Orbit.canonicalReducedFiftyThreeOrbitBoundary
     ; sporadicTarotBoundary = Tarot.canonicalSporadicTarotBoundary
     ; moonshineBoundary = Moonshine.canonicalPointedBulkReducedMoonshineBoundary
     ; cabarlahProjectionBoundary =
         Cabarlah.canonicalCabarlahTraumaProjectionBoundary
     ; markerCountIsTen = Bulk.markerCountIsTen
+    ; decimalBulkCountIs196830 =
+        Decimal.decimalTernaryBulkDimensionIs196830
+    ; decimalAndPointedBulkCountsAgree =
+        Decimal.decimalAndPointedBulkDimensionsAgree
     ; bulkCountIs196830 = Bulk.pointedBulkDimensionIs196830
     ; bulkIsUnpointedPlusPointed =
         Bulk.pointedBulkEqualsUnpointedPlusPointed
     ; pointedD4DimensionIsTen = Bulk.pointedRepresentationDimensionIsTen
+    ; irrepOrientationSectorCountIsTen =
+        Decimal.irrepOrientationSectorCountIsTen
     ; pointedA2RemainsAbsent = Bulk.pointedA2MultiplicityIsZero
     ; candidateResidualCountIs53 = Orbit.candidateR53DimensionIsFiftyThree
     ; candidateInvolutionSquaresToIdentity =
