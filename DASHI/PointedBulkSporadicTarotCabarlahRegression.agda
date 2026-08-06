@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.PointedTernaryBulkExact as Bulk
 import DASHI.Biology.DecimalTenTernaryPresentationExact as Decimal
+import DASHI.Biology.ThreeSixNineMoonshineScaleExact as Scale
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
@@ -25,6 +26,21 @@ decimalPointedCountRegression =
 irrepOrientationTenRegression :
   Decimal.irrepOrientationSectorCount ≡ 10
 irrepOrientationTenRegression = Decimal.irrepOrientationSectorCountIsTen
+
+threeSixNineScaleRegression :
+  Scale.sixScale ≡ 6
+  × Scale.nineScale ≡ 9
+  × Scale.tenScaleFromPointing ≡ 10
+  × Scale.tenScaleFromIrrepOrientation ≡ 10
+  × Scale.fiftyFourScale ≡ 54
+threeSixNineScaleRegression =
+  refl , refl , refl , refl , refl
+
+fiftyFourTriadicRegression :
+  Scale.fiftyFourScale
+  ≡ Scale.binaryOrientationCount
+    * DASHI.Biology.TernaryHypercubeHyperfabricExact.ternaryLatticeCount 3
+fiftyFourTriadicRegression = Scale.fiftyFourIsTwoTimesThreeCubed
 
 pointedBulkAlternativeRegression :
   Bulk.pointedBulkDimension
