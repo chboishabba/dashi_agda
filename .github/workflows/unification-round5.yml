@@ -7,6 +7,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Foundations/**'
+      - 'DASHI/Unified/Everything.agda'
       - 'Docs/support/reference/UnificationRound5ConstantsDimensionMatterCosmology.md'
       - 'scripts/check_unification_round5.sh'
       - '.github/workflows/unification-round5.yml'
