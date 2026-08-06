@@ -69,7 +69,7 @@ siSpeedNumberQuantity =
     calibrationOrigin
 
 existingRegistryCarrier : Set₁
-existingRegistryCarrier = Registry.ConstantsRegistry
+existingRegistryCarrier = Registry.ConstantsRegistryLink
 
 existingCandidateFunctionalCarrier : Set
 existingCandidateFunctionalCarrier = Candidate.CandidateFunctionalSurface
