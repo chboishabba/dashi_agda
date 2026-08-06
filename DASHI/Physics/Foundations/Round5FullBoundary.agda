@@ -8,6 +8,7 @@ import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas as BiologyCompletionSources
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as BiologyYijing
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as BiologyNSYM
+import DASHI.Biology.ReducedFiftyThreeFibreExact as BiologyReduced
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as BiologyHyperfabric
 import DASHI.Biology.TriadicCarryResidualExact as TriadicCarry
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
@@ -201,10 +202,10 @@ record Round5FullBoundary : Set where
       ScaleTheory.scaleAtDepth 1 ScaleTheory.depth0
 
     pr399ReducedDimensionIsFiftyThree :
-      Cross399.Reduced.reducedDimension ≡ 53
+      BiologyReduced.reducedDimension ≡ 53
 
     pr399NontrivialMoonshineCandidateIs196883 :
-      Cross399.Reduced.moonshineNontrivialDimensionCandidate ≡ 196883
+      BiologyReduced.moonshineNontrivialDimensionCandidate ≡ 196883
 
     pr399LargestOggPrimeProductIs196883 :
       47 * 59 * 71 ≡ 196883
