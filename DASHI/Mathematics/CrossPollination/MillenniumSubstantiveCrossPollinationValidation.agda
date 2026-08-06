@@ -23,6 +23,7 @@ import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact
 import DASHI.Mathematics.Arithmetic.BirchSwinnertonDyerBoundary
 import DASHI.Mathematics.Arithmetic.EllipticCurveHodgeFrobeniusCrossPollination
 
+import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact
 import DASHI.Mathematics.Complexity.PolynomialReductionExact
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary
 
