@@ -4,16 +4,24 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact as Information
+import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact as ScaleTheory
 import DASHI.Physics.Foundations.RGMDLExhaustionChambersExact as Flow
 import DASHI.Physics.Foundations.DimensionPowerCountingBoundaryExact as Dimension
+import DASHI.Physics.Foundations.DiscreteLorentzEmergenceBoundaryExact as Lorentz
 import DASHI.Physics.Foundations.AtomicFermionShellExact as Atomic
 import DASHI.Physics.Foundations.AtomicValenceFermionBridgeExact as AtomicBridge
+import DASHI.Physics.Foundations.AtomicGenerationPipelineExact as AtomicPipeline
 import DASHI.Physics.Foundations.NuclearShellPairingExact as NuclearShell
 import DASHI.Physics.Foundations.NuclearShapeInstabilityExact as NuclearShape
+import DASHI.Physics.Foundations.NuclearResponseComplexityExact as NuclearResponse
 import DASHI.Physics.Foundations.CausalCodingCosmologyBoundaryExact as Coding
+import DASHI.Physics.Foundations.CMBInformationChannelExact as CMBChannel
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as Geometry
+import DASHI.Physics.Foundations.FiniteStressConservationGeodesicExact as FiniteGeometry
 import DASHI.Physics.Foundations.FiniteGraphGaugeScalarExact as FiniteGauge
+import DASHI.Physics.Foundations.FiniteFockExcitationExact as Fock
 import DASHI.Physics.Foundations.KernelQFTEmergenceObligations as Quantum
+import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact as Hypotheses
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Unified
 import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
 import DASHI.Physics.Foundations.Round5FullBoundary as Full
@@ -30,10 +38,30 @@ scaleObstructionRegression :
 scaleObstructionRegression = Parameter.unitAndDoubledScaleAreDistinct
 
 ratioRegression :
-  Parameter.sameRatio
-    Parameter.ratioTwoFour
-    Parameter.ratioThreeSix
+  Parameter.sameRatio Parameter.ratioTwoFour Parameter.ratioThreeSix
 ratioRegression = refl
+
+buckinghamRegression :
+  ScaleTheory.sameDimension
+    (ScaleTheory.multiplyDimension
+      ScaleTheory.speedQuantityDimension
+      ScaleTheory.timeQuantityDimension)
+    ScaleTheory.lengthQuantityDimension
+buckinghamRegression = refl
+
+triadicScaleRegression :
+  ScaleTheory.scaleAtDepth 1 ScaleTheory.depth0
+  ≡
+  3 * ScaleTheory.scaleAtDepth 1 ScaleTheory.depth1
+triadicScaleRegression = refl
+
+globalTheorySelectionRegression :
+  ScaleTheory.posteriorDescriptionScore
+    ScaleTheory.selectedUniverse
+    ScaleTheory.canonicalDataset
+  ≡
+  5
+globalTheorySelectionRegression = refl
 
 informationGeometryRegression :
   Information.tangentNormSquare Information.lambdaChart
@@ -68,6 +96,12 @@ powerCountingRegression :
   Dimension.yangMillsClass Dimension.dimension4 ≡ Dimension.marginalClass
 powerCountingRegression = refl , (refl , refl)
 
+lorentzEmergenceRegression :
+  Lorentz.relativisticResidual Lorentz.canonicalInfraredDispersion ≡ 0
+  ×
+  Lorentz.relativisticResidual Lorentz.canonicalUltravioletDispersion ≡ 2
+lorentzEmergenceRegression = refl , refl
+
 atomicCapacityRegression :
   Atomic.subshellCapacity 0 ≡ 2
   ×
@@ -95,6 +129,19 @@ valenceEquivalenceRegression :
   AtomicBridge.valenceClass AtomicBridge.sixActivePStates
 valenceEquivalenceRegression = refl
 
+atomicPipelineRegression :
+  Atomic.protonNumber
+    (AtomicPipeline.species AtomicPipeline.canonicalFiniteAtomPipeline)
+  ≡
+  18
+  ×
+  Atomic.totalConfigurationEnergy
+    (AtomicPipeline.configurationCandidate
+      AtomicPipeline.canonicalFiniteAtomPipeline)
+  ≡
+  4
+atomicPipelineRegression = refl , refl
+
 nuclearClosureRegression :
   NuclearShell.closureStatus NuclearShell.canonicalProtonClosure
   ≡
@@ -115,6 +162,17 @@ nuclearShapeRegression :
   NuclearShape.totalShapeCost NuclearShape.splitShape ≡ 12
 nuclearShapeRegression = refl , (refl , refl)
 
+nuclearResponseRegression :
+  NuclearResponse.asymmetryNumerator 6 2 ≡ 16
+  ×
+  NuclearResponse.responseBound NuclearResponse.gapFour ≡ 1
+  ×
+  NuclearResponse.totalNuclearComplexity
+    NuclearResponse.pairedSphericalProfile
+  ≡
+  3
+nuclearResponseRegression = refl , (refl , refl)
+
 causalCodingRegression :
   Coding.decodeFirst (Coding.offlineEncoder Coding.canonicalSourcePair)
   ≡
@@ -125,11 +183,33 @@ causalCodingRegression :
   Coding.observeCMB Coding.earlyStateB
 causalCodingRegression = refl , refl
 
+cmbChannelRegression :
+  CMBChannel.cmbChannel CMBChannel.earlyDensityA
+  ≡
+  CMBChannel.cmbChannel CMBChannel.earlyDensityB
+  ×
+  CMBChannel.reducedDistinguishability
+    (CMBChannel.cmbChannel CMBChannel.earlyDensityA)
+    (CMBChannel.cmbChannel CMBChannel.earlyDensityB)
+  ≡
+  0
+cmbChannelRegression = refl , refl
+
 geometryUnderdeterminationRegression :
   Geometry.energyDensity Geometry.stressProfileA
   ≡
   Geometry.energyDensity Geometry.stressProfileB
 geometryUnderdeterminationRegression = refl
+
+finiteConservationRegression :
+  FiniteGeometry.vertex0Divergence FiniteGeometry.canonicalCycleCurrent
+  ≡
+  FiniteGeometry.divergenceZero
+  ×
+  FiniteGeometry.selectPath FiniteGeometry.upperPathLoadedGeometry
+  ≡
+  FiniteGeometry.lowerSelected
+finiteConservationRegression = refl , refl
 
 finiteGaugeRegression :
   FiniteGauge.loopHolonomy FiniteGauge.transformedConnection
@@ -146,9 +226,29 @@ finiteGaugeRegression :
   false
 finiteGaugeRegression = refl , refl
 
+fockExcitationRegression :
+  Fock.onMassShell Fock.canonicalMassShellDatum
+  ×
+  Fock.classifyExcitation
+    Fock.isolatedMassShell
+    Fock.noKinematicallyOpenDecayChannel
+  ≡
+  Fock.stableParticleCandidate
+fockExcitationRegression = refl , refl
+
 graphCurvatureRegression :
   Quantum.triangleHolonomy ≡ Quantum.gaugeTwist
 graphCurvatureRegression = refl
+
+correctionSuppressionRegression :
+  Hypotheses.qftIrrelevantCorrection Hypotheses.macroscopicScale ≡ 0
+  ×
+  Hypotheses.termWeight
+    Hypotheses.macroscopicScale
+    Hypotheses.correctionTerm
+  ≡
+  1
+correctionSuppressionRegression = refl , refl
 
 unificationBoundaryRegression :
   Unified.currentEffectiveRecoveryReceipt
