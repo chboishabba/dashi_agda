@@ -143,3 +143,48 @@ import DASHI.Biology.QuasiperiodicInternalSpaceBoundaryExact
 import DASHI.Biology.ConsciousAccessRound4SourceAtlas
 import DASHI.Biology.ConsciousAccessRound4FullBoundary
 import DASHI.Biology.ConsciousAccessRound4Regression
+
+------------------------------------------------------------------------
+-- Conscious-access round five: ternary divination, oriented zero, symmetry,
+-- exceptional-lattice candidates, natural systems, and Clay-facing bridges.
+
+import DASHI.Biology.DASHIYijingTernaryDivinationExact
+import DASHI.Biology.DASHIYijingRelationalOperatorsExact
+import DASHI.Biology.OrientedZeroWaveTransitionExact
+import DASHI.Biology.DialecticalSheetSpiralExact
+import DASHI.Biology.TriadicBraidDialecticExact
+import DASHI.Biology.TernaryHypercubeHyperfabricExact
+import DASHI.Biology.TernaryCubeStrataExact
+import DASHI.Biology.TernaryCantorWheelDiffusionExact
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact
+import DASHI.Biology.FRACTRANSSPTransitionExact
+import DASHI.Biology.SpectralGrokkingLatticeExact
+import DASHI.Biology.ClassicalQuantumLikeCoarseGrainingExact
+import DASHI.Biology.AssociativeDivinationPNFExact
+import DASHI.Biology.NaturalSystemsHyperfabricExact
+import DASHI.Biology.NeuralRepresentationLaplacianExact
+import DASHI.Biology.NSYMDialecticalFieldBridgeExact
+import DASHI.Biology.DASHIQuantumLikeEntropyOscillatorExact
+import DASHI.Biology.ConsciousAccessRound5SourceAtlas
+import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas
+import DASHI.Biology.ConsciousAccessRound5FullBoundary
+import DASHI.Biology.ConsciousAccessRound5Regression
+
+------------------------------------------------------------------------
+-- Round-five completion: reduced 53-fibre, signed SSP weave, self-indexing
+-- tetration, equivariant sectors, jets, reachability, moonshine, and Clay joins.
+
+import DASHI.Biology.ReducedFiftyThreeFibreExact
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact
+import DASHI.Biology.SSPHyperfibreSymmetryTowerExact
+import DASHI.Biology.SelfIndexingHyperfabricTetrationExact
+import DASHI.Biology.EquivariantLaplacianSectorExact
+import DASHI.Biology.D4IrrepPhysicalRoleExact
+import DASHI.Biology.OrientedZeroJetTransitionExact
+import DASHI.Biology.ReachableSectorEntropyExact
+import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact
+import DASHI.Biology.MoonshineGradedStageBridgeExact
+import DASHI.Biology.ClayCrossPollinationInterfaceExact
+import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas
+import DASHI.Biology.ConsciousAccessRound5CompletionBoundary
+import DASHI.Biology.ConsciousAccessRound5CompletionRegression
