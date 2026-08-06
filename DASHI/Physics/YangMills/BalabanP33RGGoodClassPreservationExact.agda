@@ -17,24 +17,23 @@ module DASHI.Physics.YangMills.BalabanP33RGGoodClassPreservationExact where
 -- DOI: 10.1016/S0022-1236(03)00057-0.
 --
 -- DASHI CONTRIBUTION
--- Make the intended scale-uniform induction object literal.  A good scale
+-- Make the intended scale-uniform induction object literal. A good scale
 -- records a coercive floor, Hessian row mass, normalized stencil range,
 -- coarse--fine coupling amplitude and remainder size under fixed caps.
 -- A producer for one scale contains the next values and proofs that every cap
--- is retained.  Preservation is therefore an actual dependent construction.
+-- is retained. Preservation is therefore an actual dependent construction.
 --
--- The remainder contraction is kept separate and checked exactly for two
--- steps: delta1 = theta delta0 and delta2 = theta delta1 imply
--- delta2 = theta^2 delta0.  Physical producers for the caps and theta<2 are
+-- The remainder contraction is checked exactly for two steps:
+-- delta1 = theta delta0 and delta2 = theta delta1 imply
+-- delta2 = theta^2 delta0. Physical producers for the caps and theta<2 are
 -- not fabricated.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 data ScaleLabel : Set where
   scaleZero : ScaleLabel
@@ -120,27 +119,6 @@ record ExactRemainderContraction : Set where
 
 open ExactRemainderContraction public
 
-twoStepRemainderContraction :
-  (chain : ExactRemainderContraction) →
-  deltaTwo chain
-  ≡ (theta chain * theta chain) * deltaZero chain
-twoStepRemainderContraction chain =
-  let
-    algebra :
-      theta chain * (theta chain * deltaZero chain)
-      ≡ (theta chain * theta chain) * deltaZero chain
-    algebra =
-      solve (theta chain ∷ deltaZero chain ∷ [])
-  in
-  subst
-    (λ middle → deltaTwo chain ≡ theta chain * middle)
-    (sym (firstContraction chain))
-    (secondContraction chain)
-  Relation.Binary.PropositionalEquality.≡-trans algebra
-  where
-  open import Relation.Binary.PropositionalEquality
-
--- A direct form avoids relying on the preceding calculational presentation.
 twoStepRemainderContractionDirect :
   ∀ theta deltaZero deltaOne deltaTwo →
   deltaOne ≡ theta * deltaZero →
@@ -150,6 +128,19 @@ twoStepRemainderContractionDirect
   theta deltaZero .(theta * deltaZero)
   .(theta * (theta * deltaZero)) refl refl =
   solve (theta ∷ deltaZero ∷ [])
+
+twoStepRemainderContraction :
+  (chain : ExactRemainderContraction) →
+  deltaTwo chain
+  ≡ (theta chain * theta chain) * deltaZero chain
+twoStepRemainderContraction chain =
+  twoStepRemainderContractionDirect
+    (theta chain)
+    (deltaZero chain)
+    (deltaOne chain)
+    (deltaTwo chain)
+    (firstContraction chain)
+    (secondContraction chain)
 
 record RGGoodClassBoundary : Set where
   constructor rgGoodClassBoundary
