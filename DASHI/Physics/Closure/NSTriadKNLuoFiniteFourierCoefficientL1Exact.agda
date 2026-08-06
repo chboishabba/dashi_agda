@@ -136,7 +136,7 @@ addNonnegativeFromNegativeLower {value} {radius} lower =
   let
     translated :
       radius + (- radius) ≤ radius + value
-    translated = ℚₚ.+-monoˡ-≤ radius lower
+    translated = ℚₚ.+-monoʳ-≤ radius lower
 
     lowerMeaning : radius + (- radius) ≡ 0ℚ
     lowerMeaning = solve (radius ∷ [])
