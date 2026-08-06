@@ -31,6 +31,7 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.AbelZeta as Abel
 import DASHI.Analysis.MaassFourierCarrier as MFC
 import DASHI.Analysis.MaassSpectralCertification as MSC
+import DASHI.Core.Q as Q
 import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact as RX
 import DASHI.Mathematics.NumberTheory.RiemannCompletedZetaBoundary as RZ
 import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary as GVOA
@@ -78,12 +79,10 @@ record VOARiemannBridge
 
 record AbelZetaReuse : Set where
   field
-    zetaAtZero : DASHI.Core.Q.ℚ
-    zetaAtMinusOne : DASHI.Core.Q.ℚ
+    zetaAtZero : Q.ℚ
+    zetaAtMinusOne : Q.ℚ
     zeroValueReused : zetaAtZero ≡ Abel.zeta0
     minusOneValueReused : zetaAtMinusOne ≡ Abel.zetaMinus1
-  where
-    open import DASHI.Core.Q
 
 data AnalyticOwner : Set where
   abelRegularisedSpecialValue
