@@ -8,6 +8,7 @@ on:
     paths:
       - 'DASHI/Biology/PointedTernaryBulkExact.agda'
       - 'DASHI/Biology/DecimalTenTernaryPresentationExact.agda'
+      - 'DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda'
       - 'DASHI/Biology/ReducedFiftyThreeOrbitCandidateExact.agda'
       - 'DASHI/Biology/SporadicTarotDependencyExact.agda'
       - 'DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda'
