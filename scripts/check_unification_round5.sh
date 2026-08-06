@@ -88,6 +88,7 @@ FILES=(
   DASHI/Visualisation/AttachedVisualisationBoundary.agda
   DASHI/Visualisation/AttachedVisualisationRegression.agda
   DASHI/Visualisation/EventFilamentFieldExact.agda
+  DASHI/Visualisation/EventLabelGeometryExact.agda
   DASHI/Visualisation/FiniteAnisotropicKernelExact.agda
   DASHI/Visualisation/EventFilamentPersistenceExact.agda
   DASHI/Visualisation/SelfConsistentEventRendererExact.agda
