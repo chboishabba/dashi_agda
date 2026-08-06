@@ -12,16 +12,24 @@ fi
 FILES=(
   DASHI/Physics/Foundations/ParameterScaleTaxonomyExact.agda
   DASHI/Physics/Foundations/ParameterInformationGeometryExact.agda
+  DASHI/Physics/Foundations/ScaleInvariantTheorySelectionExact.agda
   DASHI/Physics/Foundations/RGMDLExhaustionChambersExact.agda
   DASHI/Physics/Foundations/DimensionPowerCountingBoundaryExact.agda
+  DASHI/Physics/Foundations/DiscreteLorentzEmergenceBoundaryExact.agda
   DASHI/Physics/Foundations/AtomicFermionShellExact.agda
   DASHI/Physics/Foundations/AtomicValenceFermionBridgeExact.agda
+  DASHI/Physics/Foundations/AtomicGenerationPipelineExact.agda
   DASHI/Physics/Foundations/NuclearShellPairingExact.agda
   DASHI/Physics/Foundations/NuclearShapeInstabilityExact.agda
+  DASHI/Physics/Foundations/NuclearResponseComplexityExact.agda
   DASHI/Physics/Foundations/CausalCodingCosmologyBoundaryExact.agda
+  DASHI/Physics/Foundations/CMBInformationChannelExact.agda
   DASHI/Physics/Foundations/KernelGeometryEmergenceObligations.agda
+  DASHI/Physics/Foundations/FiniteStressConservationGeodesicExact.agda
   DASHI/Physics/Foundations/FiniteGraphGaugeScalarExact.agda
+  DASHI/Physics/Foundations/FiniteFockExcitationExact.agda
   DASHI/Physics/Foundations/KernelQFTEmergenceObligations.agda
+  DASHI/Physics/Foundations/KernelEmergenceHypothesesExact.agda
   DASHI/Physics/Foundations/UnifiedEffectiveActionBoundary.agda
   DASHI/Physics/Foundations/Round5SourceAtlas.agda
   DASHI/Physics/Foundations/Round5FullBoundary.agda
