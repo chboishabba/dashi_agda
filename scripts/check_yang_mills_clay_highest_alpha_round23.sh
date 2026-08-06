@@ -7,6 +7,7 @@ cd "$root"
 export AGDA_JOBS="${AGDA_JOBS:-1}"
 
 files=(
+  DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda
   DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
   DASHI/Physics/YangMills/BalabanP33TerminalScaleGapPullbackExact.agda
   DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
@@ -25,6 +26,8 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
 fi
 
 checks=(
+  'BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda:physicalGreenKernelDecayFromQuadraticCoercivity'
+  'BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda:physicalPriorityThreeFiniteVolumeLevel'
   'BalabanP33UnscaledCyclePoincareWallExact.agda:halfPeriodSquareWaveMeanZero'
   'BalabanP33UnscaledCyclePoincareWallExact.agda:halfPeriodSquareWaveNormExact'
   'BalabanP33UnscaledCyclePoincareWallExact.agda:halfPeriodSquareWaveCycleEnergyExact'
@@ -85,6 +88,8 @@ grep -q 'fineGap losses P33.p33PhysicalFloor' \
   DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
 grep -q 'discountedLossBudgetAdmissible' \
   DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
+grep -q 'not a bare volume-uniform spectral gap' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasQuadraticEndgameExact.agda
 grep -q 'physicalRGGapTransferProducerLevel = conditional' \
   DASHI/Physics/YangMills/BalabanP33TerminalScaleGapPullbackExact.agda
 grep -q 'physicalOneStepRGGapEstimateLevel = conditional' \
