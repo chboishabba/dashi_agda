@@ -121,14 +121,23 @@ amplitudeScalePositive candidate =
     (ℚₚ.+-identityˡ 0ℚ)
     shifted
 
+sevenNonnegative : 0ℚ ≤ 7
+sevenNonnegative =
+  let
+    sevenPositive : 0ℚ < 7
+    sevenPositive = ℚₚ.positive⁻¹ 7
+
+    instance
+      sevenPositiveInstance = positive sevenPositive
+      sevenNonnegativeInstance = ℚₚ.pos⇒nonNeg 7
+  in
+  ℚₚ.nonNegative⁻¹ 7
+
 sevenProductNonnegative :
   ∀ candidate →
   0ℚ ≤ 7 * coefficient candidate * baseDissipation candidate
 sevenProductNonnegative candidate =
   let
-    sevenNonnegative : 0ℚ ≤ 7
-    sevenNonnegative = ℚₚ.≤-trans ℚₚ.≤-refl (ℚₚ.positive⇒nonNegative (ℚₚ.positive⁻¹ 7))
-
     instance
       sevenNN = nonNegative sevenNonnegative
       coefficientNN = nonNegative (coefficientNonnegative candidate)
