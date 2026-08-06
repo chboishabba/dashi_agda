@@ -18,6 +18,7 @@ files=(
   DASHI/Biology/BalancedTernaryTorusWreathBridgeExact.agda
   DASHI/Biology/BalancedTernaryTetrationHarmonicBridgeExact.agda
   DASHI/Biology/JFineCoarseRelativeScaleExact.agda
+  DASHI/Biology/JCompletionTrivialLineSeparationExact.agda
   DASHI/Biology/MonsterStructuredBulkCarrierExact.agda
   DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
   DASHI/Biology/RestrictedGeneratorExpressionSymmetryExact.agda
@@ -53,6 +54,9 @@ checks=(
   'BalancedTernaryTetrationHarmonicBridgeExact.agda:recursiveSelfIndexingTetration'
   'JFineCoarseRelativeScaleExact.agda:jFineIsCoarseTimesRelative'
   'JFineCoarseRelativeScaleExact.agda:jNineStepDualProductIsOne'
+  'JCompletionTrivialLineSeparationExact.agda:coarseChannelCountExact'
+  'JCompletionTrivialLineSeparationExact.agda:completionFineContributionExact'
+  'JCompletionTrivialLineSeparationExact.agda:unreducedCarrierDimensionExact'
   'MonsterStructuredBulkCarrierExact.agda:structuredTotalDimensionExact'
   'MonsterStructuredBulkCarrierExact.agda:threePowerElevenPlusThreePowerNinePlusFiftyThree'
   'MonsterSubgroupBranchingBenchmarksExact.agda:characterValuesMatchedOnRepresentatives'
@@ -77,12 +81,14 @@ grep -q '10.1017/CBO9780511626265' DASHI/Physics/Common/FiniteThreeCycleTorusExa
 grep -q '10.1137/1.9781611970104' DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda
 grep -q '10.1090/surv/117' DASHI/Biology/BalancedTernaryTetrationHarmonicBridgeExact.agda
 grep -q '10.1007/978-1-4612-0731-3' DASHI/Physics/Common/FiniteWreathRefinementExact.agda
+grep -q '10.1007/978-1-4612-0979-9' DASHI/Biology/JCompletionTrivialLineSeparationExact.agda
 grep -q '10.1017/S1446788700031323' DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
 grep -q '10.48550/arXiv.2412.12182' DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
 grep -q 'tenIsPrimitiveSymmetryMultiplicityIsFalse' DASHI/Biology/MonsterFilteredCarrierExact.agda
 grep -q 'elementaryChannelCarrierDoesNotEqualFullAssignmentSpace' DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda
 grep -q 'jIsNotTenthOrdinaryTorusResidue' DASHI/Biology/BalancedTernaryTorusWreathBridgeExact.agda
 grep -q 'elementaryChannelsAreNotFullConfigurations' DASHI/Biology/BalancedTernaryTetrationHarmonicBridgeExact.agda
+grep -q 'includedCompletionIsNotRemovedTrivialLine' DASHI/Biology/JCompletionTrivialLineSeparationExact.agda
 grep -q 'structuredChannelsAreNotClaimedMonsterInvariantSummands' DASHI/Biology/MonsterStructuredBulkCarrierExact.agda
 
 scripts/run_agda29_parallel_check.sh \
