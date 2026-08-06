@@ -1,0 +1,24 @@
+name: unification-round5
+
+on:
+  push:
+    branches:
+      - 'agent/unification-round5-constants-dimension-matter-cosmology'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/**'
+      - 'Docs/support/reference/UnificationRound5ConstantsDimensionMatterCosmology.md'
+      - 'scripts/check_unification_round5.sh'
+      - '.github/workflows/unification-round5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check unification round five
+        run: bash scripts/check_unification_round5.sh
