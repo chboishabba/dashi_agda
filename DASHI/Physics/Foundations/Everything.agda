@@ -51,3 +51,12 @@ import DASHI.Physics.Foundations.Round5CompletionRegression
 import DASHI.Physics.Foundations.Round5FullBoundary
 import DASHI.Physics.Foundations.Round5CompleteBoundary
 import DASHI.Physics.Foundations.Round5Regression
+import DASHI.Physics.Foundations.CabarlahClaimStatusExact
+import DASHI.Physics.Foundations.CabarlahHistoricalLayerExact
+import DASHI.Physics.Foundations.CabarlahToponymTranscriptionExact
+import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact
+import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact
+import DASHI.Physics.Foundations.FrontierEnemyPersistenceExact
+import DASHI.Physics.Foundations.CabarlahPalestineSourceAtlas
+import DASHI.Physics.Foundations.CabarlahPalestineBoundary
+import DASHI.Physics.Foundations.CabarlahPalestineRegression
