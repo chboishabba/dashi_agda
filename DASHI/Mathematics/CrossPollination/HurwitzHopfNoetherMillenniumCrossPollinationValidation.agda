@@ -27,6 +27,7 @@ import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact
 import DASHI.Mathematics.Symmetry.NoetherDissipationDefectExact
 import DASHI.Mathematics.Topology.HopfInvariantOneDimensionGateExact
 import DASHI.Mathematics.Topology.QuaternionHopfRadiusExact
+import DASHI.Mathematics.CrossPollination.MillenniumProblemStructuralRelevanceGateExact
 
 import DASHI.Physics.YangMills.YangMillsKleinNoetherGaugeInvariantBridgeExact
 import DASHI.Physics.YangMills.YangMillsHurwitzHopfStructuralGateExact
