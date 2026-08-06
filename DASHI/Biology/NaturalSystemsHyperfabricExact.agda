@@ -45,24 +45,69 @@ open NaturalHyperfabricCell public
 
 ------------------------------------------------------------------------
 -- Logistic population map at carrying-capacity normalization four.
+--
+-- The invariant carrier is explicit, so truncated subtraction cannot create
+-- spurious values outside the intended interval.
 
-logisticFour : Nat → Nat
-logisticFour x = x * (4 ∸ x)
+data LogisticPopulationState : Set where
+  populationZero : LogisticPopulationState
+  populationOne : LogisticPopulationState
+  populationTwo : LogisticPopulationState
+  populationThree : LogisticPopulationState
+  populationFour : LogisticPopulationState
 
-logisticAtZero : logisticFour 0 ≡ 0
+populationIndex : LogisticPopulationState → Nat
+populationIndex populationZero = 0
+populationIndex populationOne = 1
+populationIndex populationTwo = 2
+populationIndex populationThree = 3
+populationIndex populationFour = 4
+
+logisticPolynomialValue : LogisticPopulationState → Nat
+logisticPolynomialValue state =
+  populationIndex state * (4 ∸ populationIndex state)
+
+logisticFour : LogisticPopulationState → LogisticPopulationState
+logisticFour populationZero = populationZero
+logisticFour populationOne = populationThree
+logisticFour populationTwo = populationFour
+logisticFour populationThree = populationThree
+logisticFour populationFour = populationZero
+
+logisticAtZero : logisticFour populationZero ≡ populationZero
 logisticAtZero = refl
 
-logisticAtOne : logisticFour 1 ≡ 3
+logisticAtOne : logisticFour populationOne ≡ populationThree
 logisticAtOne = refl
 
-logisticAtTwo : logisticFour 2 ≡ 4
+logisticAtTwo : logisticFour populationTwo ≡ populationFour
 logisticAtTwo = refl
 
-logisticAtThree : logisticFour 3 ≡ 3
+logisticAtThree : logisticFour populationThree ≡ populationThree
 logisticAtThree = refl
 
-logisticAtFour : logisticFour 4 ≡ 0
+logisticAtFour : logisticFour populationFour ≡ populationZero
 logisticAtFour = refl
+
+logisticPolynomialAgreesAtZero :
+  logisticPolynomialValue populationZero ≡ populationIndex populationZero
+logisticPolynomialAgreesAtZero = refl
+
+logisticPolynomialAgreesAtOne :
+  logisticPolynomialValue populationOne ≡ populationIndex populationThree
+logisticPolynomialAgreesAtOne = refl
+
+logisticPolynomialAgreesAtTwo :
+  logisticPolynomialValue populationTwo ≡ populationIndex populationFour
+logisticPolynomialAgreesAtTwo = refl
+
+logisticPolynomialAgreesAtThree :
+  logisticPolynomialValue populationThree ≡ populationIndex populationThree
+logisticPolynomialAgreesAtThree = refl
+
+logisticPolynomialAgreesAtFour :
+  logisticPolynomialValue populationFour ≡ populationIndex populationZero
+logisticPolynomialAgreesAtFour = refl
 
 ------------------------------------------------------------------------
 -- Finite diffusion and reaction witnesses.
