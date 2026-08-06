@@ -38,7 +38,7 @@ pattWilczekSource =
     "Higgs-field Portal into Hidden Sectors"
     "arXiv high energy phenomenology"
     2006
-    "arXiv:hep-ph/0605188; no journal DOI"
+    "10.48550/arXiv.hep-ph/0605188"
     "Supports the gauge-invariant Higgs portal as an interaction between visible and hidden singlet operators."
     "Portal admissibility alone does not establish a realised dark sector or branching fraction."
 
@@ -69,9 +69,9 @@ cmsLLPTriggerSource =
   Sources.sourceRecord
     "CMS Collaboration"
     "Strategy and Performance of the CMS Long-Lived Particle Trigger Program in Proton-Proton Collisions at sqrt(s) = 13.6 TeV"
-    "Submitted collider-trigger performance study"
+    "CMS-EXO-23-016; submitted to Physics Reports"
     2026
-    "arXiv:2601.17544; DOI not assigned at source date"
+    "10.48550/arXiv.2601.17544"
     "Supports treating prompt and displaced online selections as distinct lossy observation channels."
     "The finite prompt-versus-LLP trigger table is not a model of the complete CMS trigger menu or performance."
 
