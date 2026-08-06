@@ -24,6 +24,7 @@ files=(
   DASHI/Physics/Closure/NavierStokesKleinCriticalScalingExact.agda
   DASHI/Physics/Closure/NavierStokesHopfNoetherContinuationGateExact.agda
   DASHI/Mathematics/CrossPollination/HurwitzHopfNoetherMillenniumCrossPollinationValidation.agda
+  DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
@@ -92,5 +93,8 @@ grep -q 'No topological identity is promoted' DASHI/Physics/YangMills/YangMillsH
 grep -q 'does not identify every vortex field with a Hopf field' DASHI/Physics/Closure/NavierStokesHopfNoetherContinuationGateExact.agda
 grep -q 'proves no Millennium problem' DASHI/Mathematics/CrossPollination/MillenniumProblemStructuralRelevanceGateExact.agda
 
+grep -q 'import DASHI.Everything' DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda
+grep -q 'HurwitzHopfNoetherMillenniumCrossPollinationValidation' DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda
+
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Mathematics/CrossPollination/HurwitzHopfNoetherMillenniumCrossPollinationValidation.agda
+  DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda
