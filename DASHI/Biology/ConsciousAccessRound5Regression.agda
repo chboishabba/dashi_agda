@@ -135,5 +135,5 @@ entropyOscillatorRegression :
 entropyOscillatorRegression = refl , (refl , refl)
 
 round5SourceRegression :
-  Sources.canonicalRound5ExtendedSourceCount ≡ 22
+  Sources.canonicalRound5ExtendedSourceCount ≡ 23
 round5SourceRegression = refl
