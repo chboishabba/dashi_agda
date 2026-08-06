@@ -24,6 +24,7 @@ module DASHI.Mathematics.Complexity.PSubsetNPTrivialCertificateExact where
 -- Cook--Levin, NP-completeness of SAT, or P=NP.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_)
@@ -36,7 +37,7 @@ record TrivialCertificateCostClosure
     (cost : Complexity.PolynomialCostModel Word) : Set₁ where
   field
     deciderAsUnitVerifierPolynomial :
-      (decider : Word → Agda.Builtin.Bool.Bool) →
+      (decider : Word → Bool) →
       Complexity.polynomialTimeDecider cost decider →
       Complexity.polynomialTimeVerifier cost
         (λ word (_ : ⊤) → decider word)
@@ -91,7 +92,7 @@ unitCertificateCompletenessWitness :
     Complexity.InNP.verifies
       (promotePToNPWithUnitCertificate closure language languageInP)
       word certificate
-    ≡ Agda.Builtin.Bool.true)
+    ≡ true)
 unitCertificateCompletenessWitness closure language languageInP word accepted =
   Complexity.InNP.complete
     (promotePToNPWithUnitCertificate closure language languageInP)
