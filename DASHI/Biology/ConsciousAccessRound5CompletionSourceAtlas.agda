@@ -70,9 +70,9 @@ hessChildsTransportCommutatorSource =
   R4.sourceRecord
     "Elias Hess-Childs; Matthew Rosenzweig; Sylvia Serfaty"
     "Another Look at Regularity in Transport-Commutator Estimates"
-    "arXiv preprint"
+    "Comptes Rendus Mathematique"
     2026
-    "10.48550/arXiv.2601.02326"
+    "10.5802/crmath.837; preprint 10.48550/arXiv.2601.02326"
     "Supplies a recent sharpness and regularity audit for Riesz-type transport commutators, useful as a comparison for the dedicated NS continuum producer."
     "The Riesz-interaction results are not treated as a direct proof of the repository's Navier--Stokes Littlewood--Paley commutator."
 
