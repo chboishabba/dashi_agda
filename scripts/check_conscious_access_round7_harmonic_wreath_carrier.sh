@@ -14,6 +14,7 @@ files=(
   DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
   DASHI/Physics/Common/FiniteWreathRefinementExact.agda
   DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda
+  DASHI/Biology/BalancedTernaryTetrationHarmonicBridgeExact.agda
   DASHI/Biology/JFineCoarseRelativeScaleExact.agda
   DASHI/Biology/MonsterStructuredBulkCarrierExact.agda
   DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
@@ -40,6 +41,9 @@ checks=(
   'BalancedTernaryHarmonicCarrierExact.agda:coarseChannelCountIsTen'
   'BalancedTernaryHarmonicCarrierExact.agda:jFine'
   'BalancedTernaryHarmonicCarrierExact.agda:elementaryHarmonicDimensionIs196830'
+  'BalancedTernaryTetrationHarmonicBridgeExact.agda:jFineEvaluation'
+  'BalancedTernaryTetrationHarmonicBridgeExact.agda:existingTowerLevelTwoHasNineToNineSites'
+  'BalancedTernaryTetrationHarmonicBridgeExact.agda:recursiveSelfIndexingTetration'
   'JFineCoarseRelativeScaleExact.agda:jFineIsCoarseTimesRelative'
   'JFineCoarseRelativeScaleExact.agda:jNineStepDualProductIsOne'
   'MonsterStructuredBulkCarrierExact.agda:structuredTotalDimensionExact'
@@ -63,12 +67,13 @@ done
 
 grep -q '10.1017/CBO9780511626265' DASHI/Physics/Common/FiniteRingScaleDualityExact.agda
 grep -q '10.1137/1.9781611970104' DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda
+grep -q '10.1090/surv/117' DASHI/Biology/BalancedTernaryTetrationHarmonicBridgeExact.agda
 grep -q '10.1007/978-1-4612-0731-3' DASHI/Physics/Common/FiniteWreathRefinementExact.agda
-grep -q '10.1090/surv/117' DASHI/Physics/Common/FiniteWreathRefinementExact.agda
 grep -q '10.1017/S1446788700031323' DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
 grep -q '10.48550/arXiv.2412.12182' DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
 grep -q 'tenIsPrimitiveSymmetryMultiplicityIsFalse' DASHI/Biology/MonsterFilteredCarrierExact.agda
 grep -q 'elementaryChannelCarrierDoesNotEqualFullAssignmentSpace' DASHI/Biology/BalancedTernaryHarmonicCarrierExact.agda
+grep -q 'elementaryChannelsAreNotFullConfigurations' DASHI/Biology/BalancedTernaryTetrationHarmonicBridgeExact.agda
 grep -q 'structuredChannelsAreNotClaimedMonsterInvariantSummands' DASHI/Biology/MonsterStructuredBulkCarrierExact.agda
 
 scripts/run_agda29_parallel_check.sh \
