@@ -1,0 +1,80 @@
+name: Conscious access round 10 psychogeography
+
+on:
+  push:
+    branches:
+      - 'agent/conscious-access-round10-psychogeography-yijing-hyperfabric'
+    paths:
+      - 'DASHI/Biology/**'
+      - 'Docs/support/reference/PsychogeographyYijingHyperfabric.md'
+      - 'scripts/check_conscious_access_round10_psychogeography.sh'
+      - '.github/workflows/conscious-access-round10-psychogeography.yml'
+  pull_request:
+    branches:
+      - 'agent/conscious-access-round9-moonshine-modular-orbifold-lie'
+    paths:
+      - 'DASHI/Biology/**'
+      - 'Docs/support/reference/PsychogeographyYijingHyperfabric.md'
+      - 'scripts/check_conscious_access_round10_psychogeography.sh'
+      - '.github/workflows/conscious-access-round10-psychogeography.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check psychogeography round ten
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/conscious-access-round10-agda.log"
+            export AGDA_JOBS=4
+            bash scripts/check_conscious_access_round10_psychogeography.sh
+          ) > conscious-access-round10-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 400 conscious-access-round10-check.log
+          exit 0
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: conscious-access-round10-logs
+          path: |
+            conscious-access-round10-check.log
+            conscious-access-round10-agda.log
+          if-no-files-found: warn
+      - name: Publish checker status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ steps.check.outputs.status }}
+        shell: bash
+        run: |
+          state=success
+          description='Round 10 psychogeography checker passed'
+          if [[ "$CHECK_STATUS" != '0' ]]; then
+            state=failure
+            description='Round 10 psychogeography checker failed'
+          fi
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$state" \
+            -f context='conscious-round10-agda' \
+            -f description="$description"
+      - name: Fail on checker error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
