@@ -4,6 +4,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinKernelRound15Validation where
 -- PURPOSE
 -- Cumulative validation root for the round-fifteen periodic Galerkin,
 -- centered-kernel, residual-tail and continuation tranche.
+-- This root is the single pinned Agda entry point used by the round-15 CI.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNLuoCommutatorContinuumRound14Validation
