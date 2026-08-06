@@ -40,6 +40,10 @@ firstAndThirdRenderEqually :
   colonialRender kabalaCandidate ≡ colonialRender gabalaCandidate
 firstAndThirdRenderEqually = refl
 
+kabalaAndGabalaCandidatesDistinct :
+  kabalaCandidate ≡ gabalaCandidate → ⊥
+kabalaAndGabalaCandidatesDistinct ()
+
 InjectiveColonialRender : Set
 InjectiveColonialRender =
   (x y : SourceSoundCandidate) →
@@ -47,9 +51,9 @@ InjectiveColonialRender =
   x ≡ y
 
 colonialRenderIsNotInjective : ¬ InjectiveColonialRender
-colonialRenderIsNotInjective injective
-  with injective kabalaCandidate gabalaCandidate refl
-... | ()
+colonialRenderIsNotInjective injective =
+  kabalaAndGabalaCandidatesDistinct
+    (injective kabalaCandidate gabalaCandidate refl)
 
 ------------------------------------------------------------------------
 -- Three levels prevent a conventional English name from being identified with
