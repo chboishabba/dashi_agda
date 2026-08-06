@@ -55,14 +55,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
-import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact as Relaxed
+import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact as Signed
 
 ------------------------------------------------------------------------
 -- Exact rational unit link and tangent insertions.
 ------------------------------------------------------------------------
-
-stereographicDenominator : ℚ
-stereographicDenominator = + 268435457 / 1
 
 counterLink : Q.RationalQuaternion
 counterLink = Q.quat
@@ -87,9 +84,6 @@ counterLinkInverseUnitNorm = ℚRing.solve []
 counterInsertion0 counterInsertion1 : Q.RationalQuaternion
 counterInsertion0 = Q.quat 0ℚ 0ℚ (+ 1 / 1) 0ℚ
 counterInsertion1 = Q.quat 0ℚ 0ℚ 0ℚ (- (+ 1 / 1))
-
-zeroInsertion : Q.RationalQuaternion
-zeroInsertion = Q.zeroQ
 
 positiveJet : Q.RationalQuaternion → Q.RationalQuaternion → Q.QuaternionFactorJet
 positiveJet background insertion = Q.factorJet
@@ -130,7 +124,7 @@ counterInverseLinkDefectSqExact :
 counterInverseLinkDefectSqExact = ℚRing.solve []
 
 relaxedRadiusSquare : ℚ
-relaxedRadiusSquare = (+ 4 / 1) * Relaxed.rho * Relaxed.rho
+relaxedRadiusSquare = (+ 4 / 1) * Signed.rho * Signed.rho
 
 relaxedRadiusSlack : ℚ
 relaxedRadiusSlack =
@@ -197,8 +191,8 @@ counterWilsonDefectExact =
 
 counterProposedLocalBudget : ℚ
 counterProposedLocalBudget =
-  (+ 1 / 36) * Relaxed.rho * counterCrossCharge
-  + (+ 1 / 144) * Relaxed.rho * counterDiagonalCharge
+  (+ 1 / 36) * Signed.rho * counterCrossCharge
+  + (+ 1 / 144) * Signed.rho * counterDiagonalCharge
 
 counterProposedLocalBudgetExact :
   counterProposedLocalBudget ≡ + 13 / 589824
