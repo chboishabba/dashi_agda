@@ -14,11 +14,14 @@ module DASHI.Biology.JFineCoarseRelativeScaleExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Type jFine/jCoarse as relative harmonic scale rather than literal
--- self-division.  For the balanced-ternary 11-trit fine carrier over the
--- 2-trit coarse carrier, the relative frequency multiplicity is 3^9.
--- Spatial refinement is reciprocal, represented division-free by the exact
--- spatial-frequency product identity.
+-- Type jFine as the relative harmonic factor rather than the absolute fine
+-- carrier.  The absolute 11-trit frequency scale factors as
+--
+--   jAbsoluteFine = jCoarse * jFine
+--                 = 3^2 * 3^9 = 3^11.
+--
+-- The spatial refinement is reciprocal and is represented without division by
+-- the exact spatial-frequency product identity.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -31,14 +34,25 @@ jCoarseFrequency : Nat
 jCoarseFrequency = 9
 
 jFineFrequency : Nat
-jFineFrequency = 177147
+jFineFrequency = 19683
 
+jAbsoluteFineFrequency : Nat
+jAbsoluteFineFrequency = 177147
+
+-- Compatibility alias for earlier prose and clients.
 jRelativeFrequency : Nat
-jRelativeFrequency = 19683
+jRelativeFrequency = jFineFrequency
+
+jAbsoluteFineIsCoarseTimesJFine :
+  jAbsoluteFineFrequency ≡ jCoarseFrequency * jFineFrequency
+jAbsoluteFineIsCoarseTimesJFine = refl
 
 jFineIsCoarseTimesRelative :
-  jFineFrequency ≡ jCoarseFrequency * jRelativeFrequency
-jFineIsCoarseTimesRelative = refl
+  jAbsoluteFineFrequency ≡ jCoarseFrequency * jRelativeFrequency
+jFineIsCoarseTimesRelative = jAbsoluteFineIsCoarseTimesJFine
+
+jFineIsThreePowerNine : jFineFrequency ≡ 19683
+jFineIsThreePowerNine = refl
 
 jRelativeIsThreePowerNine : jRelativeFrequency ≡ 19683
 jRelativeIsThreePowerNine = refl
@@ -58,9 +72,9 @@ record RelativeAddressFibre : Set where
   constructor relativeAddressFibre
   field
     coarseDepth : Nat
-    fineDepth : Nat
-    relativeDepth : Nat
-    depthReconstruction : fineDepth ≡ coarseDepth + relativeDepth
+    absoluteFineDepth : Nat
+    jFineDepth : Nat
+    depthReconstruction : absoluteFineDepth ≡ coarseDepth + jFineDepth
 
 open RelativeAddressFibre public
 
@@ -70,9 +84,13 @@ canonicalTwoToElevenFibre = relativeAddressFibre 2 11 9 refl
 record JRelativeScaleBoundary : Set where
   constructor jRelativeScaleBoundary
   field
-    jRelativeIsLiteralSelfDivision : Set
-    jRelativeIsNotLiteralSelfDivision :
-      jRelativeIsLiteralSelfDivision → Set
+    jFineIsLiteralSelfDivision : Set
+    jFineIsNotLiteralSelfDivision :
+      jFineIsLiteralSelfDivision → Set
+
+    jFineIsAbsoluteFineCarrier : Set
+    jFineIsNotAbsoluteFineCarrier :
+      jFineIsAbsoluteFineCarrier → Set
 
     relativeScaleConstructsContinuumWaveletTheory : Set
     relativeScaleDoesNotConstructContinuumWaveletTheory :
@@ -81,6 +99,7 @@ record JRelativeScaleBoundary : Set where
 canonicalJRelativeScaleBoundary : JRelativeScaleBoundary
 canonicalJRelativeScaleBoundary =
   jRelativeScaleBoundary
+    ⊥ (λ impossible → ⊥)
     ⊥ (λ impossible → ⊥)
     ⊥ (λ impossible → ⊥)
   where
