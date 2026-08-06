@@ -22,13 +22,11 @@ successor6 residue6Three = residue6Four
 successor6 residue6Four = residue6Five
 successor6 residue6Five = residue6Zero
 
+successor6Three : Residue6 → Residue6
+successor6Three x = successor6 (successor6 (successor6 x))
+
 successor6Six : Residue6 → Residue6
-successor6Six x =
-  successor6
-    (successor6
-      (successor6
-        (successor6
-          (successor6 (successor6 x)))))
+successor6Six x = successor6Three (successor6Three x)
 
 sixCycleReturns : (x : Residue6) → successor6Six x ≡ x
 sixCycleReturns residue6Zero = refl
@@ -60,16 +58,14 @@ successor9 residue9Six = residue9Seven
 successor9 residue9Seven = residue9Eight
 successor9 residue9Eight = residue9Zero
 
+successor9Three : Residue9 → Residue9
+successor9Three x = successor9 (successor9 (successor9 x))
+
+successor9Six : Residue9 → Residue9
+successor9Six x = successor9Three (successor9Three x)
+
 successor9Nine : Residue9 → Residue9
-successor9Nine x =
-  successor9
-    (successor9
-      (successor9
-        (successor9
-          (successor9
-            (successor9
-              (successor9
-                (successor9 (successor9 x))))))))
+successor9Nine x = successor9Three (successor9Six x)
 
 nineCycleReturns : (x : Residue9) → successor9Nine x ≡ x
 nineCycleReturns residue9Zero = refl
