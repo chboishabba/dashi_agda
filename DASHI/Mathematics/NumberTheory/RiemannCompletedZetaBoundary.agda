@@ -62,15 +62,16 @@ record CompletedZetaData : Setω where
       isZeroValue value → isZeroValue (conjugateValue value)
 
 open CompletedZetaData public
+open RX.XiZeroSymmetry
 
 completedZetaZeroSymmetry : CompletedZetaData → RX.XiZeroSymmetry
 completedZetaZeroSymmetry data = record
-  { RX.isXiZero = λ point → isZeroValue data (completedXi data point)
-  ; RX.functionalEquationPreservesZero = λ point zeroAtPoint →
+  { isXiZero = λ point → isZeroValue data (completedXi data point)
+  ; functionalEquationPreservesZero = λ point zeroAtPoint →
       zeroTransport data
         (functionalEquation data point)
         zeroAtPoint
-  ; RX.conjugationPreservesZero = λ point zeroAtPoint →
+  ; conjugationPreservesZero = λ point zeroAtPoint →
       zeroTransport data
         (sym (conjugationLaw data point))
         (conjugatePreservesZero data (completedXi data point) zeroAtPoint)
