@@ -20,6 +20,7 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHodgeDiamondExact where
 -- variety; the table itself does not construct de Rham cohomology.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
@@ -81,7 +82,7 @@ p1BettiNumbers :
   p1Betti0 ≡ 1 × p1Betti1 ≡ 0 × p1Betti2 ≡ 1
 p1BettiNumbers = refl , refl , refl
 
-record ProjectiveLineGeometricIdentification : Set₁ where
+record ProjectiveLineGeometricIdentification : Setω where
   field
     projectiveLine : H.SmoothProjectiveComplexVariety
     complexDimensionIsOne : H.complexDimension projectiveLine ≡ 1
