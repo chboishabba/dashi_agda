@@ -7,6 +7,7 @@ import DASHI.Physics.DarkSector.MetastableLifetime
 import DASHI.Physics.DarkSector.BoostedDecayGeometry
 import DASHI.Physics.DarkSector.DisplacedVertex
 import DASHI.Physics.DarkSector.TriggerCensoring
+import DASHI.Physics.DarkSector.LinkedColliderChainExact
 import DASHI.Physics.DarkSector.DarkSectorColliderSourceAtlas
 import DASHI.Physics.DarkSector.DarkSectorColliderBoundary
 import DASHI.Physics.DarkSector.DarkSectorColliderRegression
