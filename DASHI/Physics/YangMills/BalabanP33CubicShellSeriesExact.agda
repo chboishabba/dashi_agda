@@ -39,6 +39,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -108,10 +109,6 @@ cubicShellFiniteClosedForm (suc count) ratio
     (cubicShellTail (suc count) ratio)
     (cubicShellNumerator ratio)
 
--- The familiar infinite-series statement is exposed without division: any
--- candidate limit whose scaled value is the numerator agrees with the
--- zero-tail endpoint.  Analytic convergence/tail-vanishing remains a separate
--- constructive-real theorem.
 record CubicShellClosedFormWitness (ratio total : ℚ) : Set where
   field
     scaledClosedForm :
@@ -126,16 +123,20 @@ finiteErrorAgainstClosedForm :
   oneMinusFourth ratio
     * (total - cubicShellPartialSum ratio count)
   ≡ power ratio count * cubicShellTail count ratio
-finiteErrorAgainstClosedForm ratio total witness count
-  rewrite scaledClosedForm witness
-        | cubicShellFiniteClosedForm count ratio =
-  ℚRing.solve-∀
-    (oneMinusFourth ratio)
-    total
-    (cubicShellPartialSum ratio count)
-    (cubicShellNumerator ratio)
-    (power ratio count)
-    (cubicShellTail count ratio)
+finiteErrorAgainstClosedForm ratio total witness count =
+  trans
+    (ℚRing.solve-∀
+      (oneMinusFourth ratio)
+      total
+      (cubicShellPartialSum ratio count))
+    (trans
+      (cong₂ _-_
+        (scaledClosedForm witness)
+        (cubicShellFiniteClosedForm count ratio))
+      (ℚRing.solve-∀
+        (cubicShellNumerator ratio)
+        (power ratio count)
+        (cubicShellTail count ratio)))
 
 cubicShellFiniteIdentityLevel : ProofLevel
 cubicShellFiniteIdentityLevel = machineChecked
