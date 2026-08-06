@@ -135,8 +135,8 @@ canonicalGeometryObligationReceipts =
 existingSignatureAxiomSurface : Set₁
 existingSignatureAxiomSurface = Signature.SignatureDerivationAxioms
 
-existingGRBoundarySurface : Set
-existingGRBoundarySurface = ExistingGRBoundary.GRBoundaryClarification
+existingGRBoundarySurface : Set₁
+existingGRBoundarySurface = ExistingGRBoundary.GRBoundaryClarificationIndex
 
 ------------------------------------------------------------------------
 -- Joint adapter boundary.
