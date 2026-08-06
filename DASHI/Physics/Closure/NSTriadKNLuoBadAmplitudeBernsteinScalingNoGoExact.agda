@@ -37,7 +37,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoBadAmplitudeBernsteinScalingNoGoExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _-_)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
@@ -75,7 +76,7 @@ scaledEnergyBernsteinGapIdentity coefficient energy =
 
 bernsteinGapNonnegative :
   ∀ coefficient →
-  0 Data.Rational.Base.≤ bernsteinAmplitudeGap coefficient
+  0ℚ ≤ bernsteinAmplitudeGap coefficient
 bernsteinGapNonnegative coefficient
   rewrite bernsteinSupercriticalGapIdentity coefficient =
   L2.squareNonnegative (counterScale coefficient)
