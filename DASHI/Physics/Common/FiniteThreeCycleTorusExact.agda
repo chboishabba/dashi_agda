@@ -13,18 +13,15 @@ module DASHI.Physics.Common.FiniteThreeCycleTorusExact where
 -- DOI: 10.1007/978-1-4612-0731-3.
 --
 -- DASHI CONTRIBUTION
---
 -- Give the exact finite translation algebra of the two-dimensional
 -- three-cycle torus.  Each coordinate translation has order three, the two
 -- coordinate translations commute, and a distinguished completion channel is
--- fixed.  Pullback on fields is then the exact index-permutation ingredient of
--- a wreath-style action.
---
--- This finite carrier is not the continuous torus and does not supply a
--- physical Fourier, gauge or RG theorem.
+-- fixed.  Pullback on fields is the exact index-permutation ingredient of a
+-- wreath-style action.  No continuous-torus or physical theorem is asserted.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 data Residue3 : Set where
   residueMinus : Residue3
@@ -56,20 +53,17 @@ translateSecond : Torus3x3 → Torus3x3
 translateSecond (torusPoint first second) = torusPoint first (next3 second)
 
 translateFirstCubed :
-  ∀ point →
-  translateFirst (translateFirst (translateFirst point)) ≡ point
+  ∀ point → translateFirst (translateFirst (translateFirst point)) ≡ point
 translateFirstCubed (torusPoint first second)
   rewrite next3Cubed first = refl
 
 translateSecondCubed :
-  ∀ point →
-  translateSecond (translateSecond (translateSecond point)) ≡ point
+  ∀ point → translateSecond (translateSecond (translateSecond point)) ≡ point
 translateSecondCubed (torusPoint first second)
   rewrite next3Cubed second = refl
 
 translationsCommute :
-  ∀ point →
-  translateFirst (translateSecond point)
+  ∀ point → translateFirst (translateSecond point)
   ≡ translateSecond (translateFirst point)
 translationsCommute (torusPoint first second) = refl
 
@@ -95,7 +89,7 @@ completionFixedBySecondTranslation :
   completedTranslateSecond completionChannel ≡ completionChannel
 completionFixedBySecondTranslation = refl
 
-Field : Set → Set₁
+Field : Set → Set
 Field State = CompletedTorusChannel → State
 
 pullbackFirst : ∀ {State : Set} → Field State → Field State
@@ -132,7 +126,6 @@ record FiniteTorusBoundary : Set where
     completedTorusIsContinuousTorus : Set
     completedTorusIsNotContinuousTorus :
       completedTorusIsContinuousTorus → Set
-
     fixedCompletionChannelIsAutomaticallyInvariantUnderExternalAction : Set
     fixedCompletionChannelIsNotAutomaticallyInvariantUnderExternalAction :
       fixedCompletionChannelIsAutomaticallyInvariantUnderExternalAction → Set
