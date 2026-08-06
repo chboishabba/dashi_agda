@@ -24,7 +24,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoTorusFourierDifferentiationExact where
 
 open import Agda.Primitive using (Level)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Relation.Binary.PropositionalEquality
+  using (cong; cong₂; trans; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
