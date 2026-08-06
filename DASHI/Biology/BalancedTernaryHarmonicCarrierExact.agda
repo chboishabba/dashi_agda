@@ -17,27 +17,17 @@ module DASHI.Biology.BalancedTernaryHarmonicCarrierExact where
 -- DOI: 10.1090/surv/117.
 --
 -- DASHI CONTRIBUTION
---
--- Replace an unexplained tenfold multiplicity by the structured coarse index
---
---   T^2 disjoint-union {j},
---
--- where T is balanced ternary and j is a distinguished completion/global
--- channel.  Every coarse channel has a 3^9 fine-frequency coordinate.  The
--- resulting 10 * 3^9 object counts elementary coarse-site/fine-frequency
--- channels, while the full fine assignment is the function space
---
---   CoarseChannel -> Fin 19683.
---
--- Product-channel count and function-space/tetrational growth are kept
--- definitionally separate.
+-- Replace an unexplained tenfold multiplicity by T^2 disjoint-union {j}.
+-- Every coarse channel has a 3^9 fine-frequency coordinate.  The elementary
+-- channel product is kept distinct from the full function-space assignment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Nat using (_+_; _*_)
 open import Data.Fin using (Fin)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_)
 
 data BalancedTrit : Set where
   negativeTrit : BalancedTrit
@@ -73,8 +63,6 @@ canonicalCoarseChannels =
 listCount : ∀ {A : Set} → List A → Nat
 listCount [] = 0
 listCount (_ ∷ rest) = 1 + listCount rest
-  where
-  open import Data.Nat using (_+_)
 
 coarseChannelCountIsTen : listCount canonicalCoarseChannels ≡ 10
 coarseChannelCountIsTen = refl
@@ -105,20 +93,14 @@ fineFrequencyDimension = 19683
 
 ordinaryHarmonicDimension : Nat
 ordinaryHarmonicDimension = ordinaryCoarseDimension * fineFrequencyDimension
-  where
-  open import Data.Nat using (_*_)
 
 completionHarmonicDimension : Nat
 completionHarmonicDimension =
   completionCoarseDimension * fineFrequencyDimension
-  where
-  open import Data.Nat using (_*_)
 
 elementaryHarmonicDimension : Nat
 elementaryHarmonicDimension =
   ordinaryHarmonicDimension + completionHarmonicDimension
-  where
-  open import Data.Nat using (_+_)
 
 ordinaryHarmonicDimensionIsThreePowerEleven :
   ordinaryHarmonicDimension ≡ 177147
@@ -138,11 +120,9 @@ record HarmonicCarrierBoundary : Set where
     completionJIsOrdinaryBalancedPair : Set
     completionJIsNotOrdinaryBalancedPair :
       completionJIsOrdinaryBalancedPair → Set
-
     elementaryChannelCarrierEqualsFullAssignmentSpace : Set
     elementaryChannelCarrierDoesNotEqualFullAssignmentSpace :
       elementaryChannelCarrierEqualsFullAssignmentSpace → Set
-
     harmonicCarrierConstructsMonsterAction : Set
     harmonicCarrierDoesNotConstructMonsterAction :
       harmonicCarrierConstructsMonsterAction → Set
