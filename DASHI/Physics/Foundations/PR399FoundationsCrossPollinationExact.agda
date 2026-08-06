@@ -81,10 +81,10 @@ quantumLikeBornRuleRemainsBlocked :
   false
 quantumLikeBornRuleRemainsBlocked = refl
 
-completionSourceCountIsTwentyNine :
-  CompletionSources.canonicalRound5CompletionSourceCount ≡ 29
-completionSourceCountIsTwentyNine =
-  CompletionSources.canonicalRound5CompletionSourceCountIsTwentyNine
+completionSourceCountIsThirtyOne :
+  CompletionSources.canonicalRound5CompletionSourceCount ≡ 31
+completionSourceCountIsThirtyOne =
+  CompletionSources.canonicalRound5CompletionSourceCountIsThirtyOne
 
 record PR399FoundationsCrossPollinationBoundary : Set where
   constructor pr399FoundationsCrossPollinationBoundary
