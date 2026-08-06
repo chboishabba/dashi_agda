@@ -14,10 +14,11 @@ module DASHI.Mathematics.NumberTheory.FiniteMultiplicativeDirichletExact where
 -- DASHI CONTRIBUTION
 --
 -- Add the finite Dirichlet-monomial layer beneath Euler products.  A formal
--- prime-power factor carries a local coefficient and a local analytic weight.
--- Coefficients, weights and their Dirichlet monomial are products over a
--- factorisation list.  Concatenating disjoint prime supports multiplies all
--- three quantities exactly.
+-- prime-power factor carries a natural prime label, a natural exponent, a
+-- local coefficient and a local analytic weight.  Coefficients, weights and
+-- their Dirichlet monomial are products over a factorisation list.
+-- Concatenating disjoint prime supports multiplies all three quantities
+-- exactly.
 --
 -- This is the finite algebraic content of
 --
@@ -29,22 +30,22 @@ module DASHI.Mathematics.NumberTheory.FiniteMultiplicativeDirichletExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Mathematics.NumberTheory.FiniteEulerProductExact as Euler
 
 record FormalPrimePower
-    (semiring : Euler.CommutativeSemiring) : Set₁ where
+    (semiring : Euler.CommutativeSemiring) : Set where
   constructor primePowerFactor
   field
-    PrimeLabel : Set
-    prime : PrimeLabel
-    exponent : PrimeLabel
+    prime : Nat
+    exponent : Nat
     localCoefficient : Euler.Carrier semiring
     localWeight : Euler.Carrier semiring
 
 open FormalPrimePower public
 
-Factorisation : Euler.CommutativeSemiring → Set₁
+Factorisation : Euler.CommutativeSemiring → Set
 Factorisation semiring = List (FormalPrimePower semiring)
 
 mapList : ∀ {A B : Set} → (A → B) → List A → List B
@@ -183,7 +184,7 @@ monomialOfAppend semiring left right =
 
 record CoprimeFactorisationPair
     (semiring : Euler.CommutativeSemiring)
-    (left right : Factorisation semiring) : Set₁ where
+    (left right : Factorisation semiring) : Set where
   field
     supportsDisjoint : Set
 
