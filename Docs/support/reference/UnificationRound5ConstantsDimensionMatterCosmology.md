@@ -1,0 +1,146 @@
+# Unification Round Five: Constants, Dimension, Matter, and Cosmological Emergence
+
+This tranche is stacked directly on PR #399 (`agent/conscious-access-round5-dashi-yijing-moonshine`). It extends that finite exact biology/Yijing/natural-system theorem surface instead of creating a competing Round Five.
+
+The replacement A--P constants text supersedes the earlier Sections 46--76 wherever the two conflict. The implementation reuses the repository's constants registry, candidate-functional boundary, resource-limited crystallisation, Grassmann and odd/even trit lanes, PR #399 hyperfabric/coarse-graining/spectral/NS--YM modules, dimension/signature interfaces, GR clarification index, gauge/QFT parity surfaces, Standard-Model conformance interfaces, and paper-facing unification boundary.
+
+It does **not** promote a numerical constants theory, a proof that spacetime is four-dimensional, a first-principles periodic table, a calibrated nuclear model, a literal cosmological codec, continuum general relativity, the Standard Model, either Clay problem, or terminal unification.
+
+## Constants, scale, and parameter geometry
+
+`ParameterScaleTaxonomyExact.agda` implements five levels:
+
+```text
+structural invariants
+dimensionless dynamical parameters
+dimensionful scales
+conversion constants
+numerical representatives in chosen units
+```
+
+It links `DASHI.Constants.Registry.ConstantsRegistryLink`, separates law/vacuum/boundary/calibration origins, proves a finite nonzero scale-orbit obstruction, records explicit/spontaneous/anomalous/boundary/finite-size/calibration scale breaking, and keeps dimensional transmutation dependent on a reference datum.
+
+`ParameterInformationGeometryExact.agda` gives two coordinate charts with different components and metric weights but equal tangent norm. It also provides one declared finite gradient-flow/Lyapunov example without identifying every RG flow with MDL.
+
+`ScaleInvariantTheorySelectionExact.agda` adds a Buckingham-style dimension kernel, exact dimensional cancellation, spontaneous vacuum selection, triadic relative scales with a free base calibration, finite global MDL/Bayesian selection over a declared theory class, reference-machine offsets, and a joint RG/selection/exhaustion flow. It imports PR #399's `CarrierScale` surface rather than inventing a second hyperfabric scale type.
+
+`RGMDLExhaustionChambersExact.agda` separates RG flow, model selection, and resource exhaustion. It intersects static viability, reachability before freeze-out, and robustness; implements qualitative phase chambers; corrects the bound-state condition to a discrete level below continuum; and checks the avoided-crossing gap square
+
+```text
+(E_old - E_new)^2 + 4 |v|^2.
+```
+
+## Dimension and Lorentz emergence
+
+`DimensionPowerCountingBoundaryExact.agda` contains a concrete countermodel to the claim that local finiteness, Lorentz candidacy, and dimension-relative boundary scaling uniquely select `D=4`: two- and four-dimensional profiles share those premises.
+
+It keeps estimation distinct from selection, makes four-volume conditional on a four-dimensional Lorentzian completion, and checks interaction-specific marginal dimensions:
+
+```text
+phi^4                -> D = 4
+phi^3                -> D = 6
+ordinary Yang-Mills  -> D = 4
+```
+
+`DiscreteLorentzEmergenceBoundaryExact.agda` separates a finite internal alphabet from spacetime discreteness. A regular-lattice toy model is direction-independent in its declared infrared sector and direction-dependent in its ultraviolet sector. Its exact dispersion residual is `0` in the infrared datum and `2` in the ultraviolet datum; this is not a Poincare-invariance theorem.
+
+## Atomic construction
+
+`AtomicFermionShellExact.agda` separates nuclear charge from electronic configuration and proves, after supplying the rotational/spin representation,
+
+```text
+subshell capacity(l) = 2(2l + 1)
+shell capacity(n)    = 2n^2.
+```
+
+It checks the standard finite capacities, explicit fermionic occupancy bounds, the corrected `Z=18` signature `[0,0,1,1,1,1,1,1]`, a parameter-dependent `3d`/`4s` order reversal, interaction-dependent configuration selection, and energy-window valence.
+
+`AtomicValenceFermionBridgeExact.agda` cross-pollinates the existing Grassmann lane with antisymmetric exchange, duplicate-state vanishing, and valence equivalence classes while refusing to promote the existing Grassmann receipt to a completed exterior algebra.
+
+`AtomicGenerationPipelineExact.agda` records the dependency chain
+
+```text
+nuclear charge
+nuclear stability
+one-particle representation
+antisymmetric many-electron space
+interacting energy
+state selection
+valence equivalence
+observable prediction.
+```
+
+A concrete argon-like finite pipeline is checked. Enumeration remains distinct from Hamiltonian solution and quantitative chemistry.
+
+## Nuclear structure
+
+`NuclearShellPairingExact.agda` treats proton and neutron closures separately. Magicity requires saturation plus a large gap. Pairing requires an attractive channel. Blocked-sector counts are exactly `0/1/1/2` for even-even, the two odd-mass sectors, and odd-odd.
+
+`NuclearResponseComplexityExact.agda` adds `(N-Z)^2` asymmetry data, gap-suppressed finite response, pair-locking under an explicit pairing model, a shell/unpaired/shape/correlation complexity profile, and an explicitly weighted energy-complexity score.
+
+`NuclearShapeInstabilityExact.agda` proves the leading finite-density Fermi term is extensive under equal splitting. The split candidate has larger surface and smaller electrostatic witnesses; the joint finite costs are `16` for the compact candidate and `12` for the split candidate. This encodes deformation-energy competition and barrier crossing, not relief of Pauli pressure.
+
+## Causal coding and CMB observation
+
+`CausalCodingCosmologyBoundaryExact.agda` types context from decoded history plus shared side information. Offline source search is compatible with forward decoding; global admissibility does not imply retrocausal signalling.
+
+Bitstreams, physical initial states, boundary data, law syntax, CMB observations, and visible histories are distinct types. Two distinct early states map to the same observation.
+
+`CMBInformationChannelExact.agda` strengthens this into a finite information channel and checks a distinguishability contraction from `2` to `0`. Coding factorisation and physical transition factorisation remain distinct, and deterministic decoding does not determine the ontology of physical law.
+
+## Geometry and QFT emergence
+
+`KernelGeometryEmergenceObligations.agda` proves scalar density underdetermines pressure, anisotropic stress, and momentum flux. It constructs a ten-component symmetric tensor carrier and records the manifold/metric/tensor/Bianchi/conservation/diffeomorphism/equivalence/geodesic/radiation/Einstein/correction cutset.
+
+`FiniteStressConservationGeodesicExact.agda` adds an exactly conserved cycle current, geometry-dependent path selection, and a closed finite backreaction step, while refusing promotion to continuum GR.
+
+`FiniteGraphGaugeScalarExact.agda` constructs an exact local `Z2` graph gauge model with group laws, transformed connection and field, loop-holonomy invariance, and preservation of a covariant mismatch observable.
+
+`FiniteFockExcitationExact.agda` constructs truncated bosonic and fermionic occupation sectors, blocked one-mode fermion creation, an exact `5^2 = 3^2 + 4^2` mass-shell datum, stable/metastable/transient excitation classes, and an isolated finite spectral-weight analogue.
+
+`KernelQFTEmergenceObligations.agda` directly imports PR #399's classical quantum-like coarse-graining, spectral-grokking, and finite NS--YM gauge-gap surfaces. It also imports the repository's QFT parity, Lie/gauge, gauge-group, spin/Clifford, and Standard-Model conformance interfaces. The remaining cutset includes Hilbert completion, Lorentz covariance, spinors, local gauge connection, Fock construction, stable particles, spectral poles, exact Standard-Model representations, Higgs/Yukawa data, anomaly cancellation, reflection positivity, and a controlled continuum limit.
+
+`KernelEmergenceHypothesesExact.agda` types the geometry and QFT bridges explicitly as conjectural hypotheses. Finite correction tables decrease from microscopic to macroscopic scales, but are not promoted to continuum suppression theorems.
+
+## Combined Round Five root
+
+`Round5FullBoundary.agda` contains both:
+
+```text
+DASHI.Biology.ConsciousAccessRound5FullBoundary
+DASHI.Physics.Foundations.Round5FullBoundary
+```
+
+The cumulative surface therefore carries PR #399's ternary/Yijing, braid, hyperfabric, Monster/FRACTRAN, natural-system, neural, and finite NS--YM results together with the constants/dimension/atomic/nuclear/cosmology/GR--QFT tranche.
+
+The unified root is wired through:
+
+```text
+DASHI/Physics/Foundations/Everything.agda
+DASHI/Physics/Foundations/Round5Regression.agda
+DASHI/Unified/Everything.agda.
+```
+
+## Provenance
+
+`Round5SourceAtlas.agda` records authors, full titles, venues, years, DOIs, imported roles, and excluded promotions for seventeen additional sources covering Buckingham dimensional analysis, Wilson RG, information geometry, Kolmogorov complexity, causal sets, electronic structure, nuclear shells, pairing, fission, CABAC, Yang--Mills, Fock space, Osterwalder--Schrader reconstruction, electroweak theory, and Planck cosmology.
+
+It also imports and checks PR #399's twenty-three-source extended atlas. Repository-original finite lemmas are not assigned invented identifiers.
+
+## Validation
+
+The focused command is:
+
+```bash
+bash scripts/check_unification_round5.sh
+```
+
+It first runs `scripts/check_conscious_access_round5.sh`, then rejects holes, postulates, unsafe options, unsolved metas, and placeholders in the added foundations files, and invokes the pinned Agda 2.9 checker on:
+
+```text
+DASHI/Physics/Foundations/Round5Regression.agda
+DASHI/Physics/Foundations/Everything.agda
+DASHI/Unified/Everything.agda.
+```
+
+The workflow resolves `.#agda-with-dashi-deps` from the repository flake before checking. No successful kernel result is claimed until the workflow or an equivalent pinned-toolchain run has actually passed.
