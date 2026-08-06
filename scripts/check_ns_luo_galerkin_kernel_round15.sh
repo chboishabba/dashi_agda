@@ -24,6 +24,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNYuLocalizationCaccioppoliTailExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPeriodicGalerkinFourClassContinuationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinUniformLimitContinuationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoDirectionalDefectGramExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoBadCoherenceDynamicRarityExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoBadCoherenceWeightedMarkovExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoBadCoherenceWeightedDefectTransferExact.agda
