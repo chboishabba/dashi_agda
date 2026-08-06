@@ -56,7 +56,7 @@ done
 
 grep -q '10.1073/pnas.81.10.3256' DASHI/Biology/MoonshineModularFormCoefficientExact.agda
 grep -q '10.1007/s002200000242' DASHI/Biology/MoonshineOrbifoldSectorProjectorExact.agda
-grep -q '10.1215/S0012-7094-98-09312-6' DASHI/Biology/MoonshineOrbifoldModularSectorActionExact.agda
+grep -q '10.1215/S0012-7094-97-08609-9' DASHI/Biology/MoonshineOrbifoldModularSectorActionExact.agda
 grep -q '10.1016/0001-8708(90)90067-W' DASHI/Biology/MoonshineMonsterLieStringBigradingExact.agda
 grep -q '10.1007/BF01389186' DASHI/Biology/MoonshineGriessAutomorphismClassificationExact.agda
 grep -q '10.1112/blms/11.3.308' DASHI/Biology/MonsterConstructionRouteComparisonExact.agda
