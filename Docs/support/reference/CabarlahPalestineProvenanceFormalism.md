@@ -137,6 +137,25 @@ Country
 
 with proofs that Country, spoken source, and conventional name are distinct carriers.
 
+## Bounded phonology envelope
+
+`CabarlahPhonologyEnvelopeExact.agda` represents the dimensions of uncertainty that a Wakka-chain/Jarowair investigation would have to resolve:
+
+```text
+initial velar:  k-like | g-like
+medial labial:  p-like | b-like
+rhotic:         absent | apical tap | apical trill | retroflex approximant
+final vowel:    short a | long a
+```
+
+The raw product has exact cardinality:
+
+```text
+2 * 2 * 4 * 2 = 32
+```
+
+This is an uncertainty-coordinate count, not a claim that 32 words are attested or phonotactically licensed. Every envelope point renders to the single conventional English toponym, and the rendering is proved non-injective. Boundary fields explicitly deny that written `C`, `b`, `r`, or `-ah` uniquely determine Indigenous voicing, rhotic manner, vowel length, or a final `/h/`, and deny that the finite envelope is a recovered lexicon.
+
 ## Signal inference and interpretive authority
 
 `CabarlahSignalInferenceExact.agda` models military interpretation as a lossy map:
@@ -259,6 +278,7 @@ Capbarlah typo -> semantic etymology
 latitude coincidence -> official military line
 postwar SIGINT role -> communist territorial concession
 institutional lineage -> identity of historical enemies
+phonology envelope -> recovered Jarowair/Wakka lexicon
 signal observation -> exact world reconstruction
 network hypothesis -> military authorisation
 military capability -> moral justification
