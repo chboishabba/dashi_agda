@@ -45,12 +45,20 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_)
 import Data.Rational.Properties as RationalProperties
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact as Physical
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicBiotSavartMultiplierExact as Biot
 import DASHI.Physics.Closure.NSTriadKNLuoPairFrequencyDefectDiffusionExact as Pair
+
+oneNonnegative : 0ℚ ≤ 1ℚ
+oneNonnegative =
+  subst
+    (λ value → 0ℚ ≤ value)
+    (solve [])
+    (L2.squareNonnegative 1ℚ)
 
 addVec : Gram.Vec3 → Gram.Vec3 → Gram.Vec3
 addVec left right =
@@ -144,8 +152,8 @@ oppositeHighHighPair =
   galerkinVorticityModePair
     leftWitnessMode rightWitnessMode
     1ℚ 1ℚ
-    RationalProperties.≤-refl
-    RationalProperties.≤-refl
+    oneNonnegative
+    oneNonnegative
     RationalProperties.≤-refl
     RationalProperties.≤-refl
 
