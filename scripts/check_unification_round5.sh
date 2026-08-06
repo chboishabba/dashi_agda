@@ -49,6 +49,7 @@ FILES=(
   DASHI/Physics/Foundations/FiniteUltrametricReebFlowExact.agda
   DASHI/Physics/Foundations/TriToBiSingularJunctionExact.agda
   DASHI/Physics/Foundations/TriToBiTransportExact.agda
+  DASHI/Physics/Foundations/TriToBiPhaseDialecticExact.agda
   DASHI/Physics/Foundations/AttachedFormalismSourceAtlas.agda
   DASHI/Physics/Foundations/Round5AttachedFormalismBoundary.agda
   DASHI/Physics/Foundations/Round5AttachedFormalismRegression.agda
@@ -67,10 +68,15 @@ FILES=(
   DASHI/Physics/DarkSector/Everything.agda
   DASHI/Visualisation/AffinePlaneSliceExact.agda
   DASHI/Visualisation/FiveClassSimplexColourExact.agda
+  DASHI/Visualisation/SliceObjectiveExact.agda
+  DASHI/Visualisation/ColourProjectionDiagnosticsExact.agda
   DASHI/Visualisation/CoarseSliceSearchExact.agda
+  DASHI/Visualisation/QuantisedSearchBoundsExact.agda
   DASHI/Visualisation/RendererParityExact.agda
+  DASHI/Visualisation/RendererReceiptExact.agda
   DASHI/Visualisation/GraphSeriesSemanticExact.agda
   DASHI/Visualisation/MeasureFieldAdapterExact.agda
+  DASHI/Visualisation/AdapterCommutationExact.agda
   DASHI/Visualisation/AttachedVisualisationSourceAtlas.agda
   DASHI/Visualisation/AttachedVisualisationBoundary.agda
   DASHI/Visualisation/AttachedVisualisationRegression.agda
