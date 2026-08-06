@@ -16,6 +16,7 @@ files=(
   DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda
   DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineHodgeDiamondExact.agda
   DASHI/Mathematics/AlgebraicGeometry/HodgeNoetherianVOACrossPollination.agda
+  DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
   DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
   DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
   DASHI/Mathematics/Arithmetic/EllipticCurveHodgeFrobeniusCrossPollination.agda
@@ -57,7 +58,12 @@ checks=(
   'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineHodgeDiamondExact.agda:p1HodgeConjugationSymmetry'
   'DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineHodgeDiamondExact.agda:p1BettiNumbers'
   'DASHI/Mathematics/AlgebraicGeometry/HodgeNoetherianVOACrossPollination.agda:noetherianityDoesNotProveHodgeDecomposition'
+  'DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda:fibreCountVector'
+  'DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda:affinePointCountIsSeven'
+  'DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda:projectivePointCountIsEight'
+  'DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda:sampleNonPoint'
   'DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda:curveDiscriminantIsSixtyFour'
+  'DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda:p5FibreCountVectorChecked'
   'DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda:p5ProjectivePointCountIsEight'
   'DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda:frobeniusTraceAtFiveIsMinusTwo'
   'DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda:localFactorAtFiveCoefficients'
@@ -90,6 +96,7 @@ done
 grep -Fq '10.1007/BF01232032' DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda
 grep -Fq '10.1186/s40687-015-0029-6' DASHI/Moonshine/MonsterGradedVOABridgeExact.agda
 grep -Fq '10.1017/CBO9780511615344' DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda
+grep -Fq '10.1007/978-0-387-09494-6' DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
 grep -Fq '10.1007/978-0-387-09494-6' DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
 grep -Fq '10.1515/crll.1965.218.79' DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
 grep -Fq '10.1145/800157.805047' DASHI/Mathematics/Complexity/PolynomialReductionExact.agda
@@ -102,6 +109,7 @@ grep -Fq 'construct V^natural' DASHI/Moonshine/GradedVertexOperatorAlgebraBounda
 grep -Fq 'analytic continuation, Gamma factors' DASHI/Mathematics/NumberTheory/RiemannXiSymmetryExact.agda
 grep -Fq 'the analytic fields is filled' DASHI/Mathematics/NumberTheory/RiemannCompletedZetaBoundary.agda
 grep -Fq 'No Hodge-conjecture solution' DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda
+grep -Fq 'Enumerate the affine F_5-points' DASHI/Mathematics/Arithmetic/EllipticCurveF5PointEnumerationExact.agda
 grep -Fq 'finite row is a checked arithmetic witness' DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda
 grep -Fq 'No canonical inhabitant' DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda
 grep -Fq 'clock polynomials and circuit lower' DASHI/Mathematics/Complexity/PolynomialReductionExact.agda
