@@ -103,7 +103,12 @@ plaquetteDiagonalChargeExpanded : ∀ field left right site →
     + linkInsertionCharge field right (Periodic.shiftForward left site)
     + linkInsertionCharge field left (Periodic.shiftForward right site)
     + linkInsertionCharge field right site
-plaquetteDiagonalChargeExpanded field left right site = refl
+plaquetteDiagonalChargeExpanded field left right site =
+  ℚRing.solve-∀
+    (linkInsertionCharge field left site)
+    (linkInsertionCharge field right (Periodic.shiftForward left site))
+    (linkInsertionCharge field left (Periodic.shiftForward right site))
+    (linkInsertionCharge field right site)
 
 plaquetteCrossChargeIsThreeDiagonal : ∀ field left right site →
   plaquetteCrossCharge field left right site
