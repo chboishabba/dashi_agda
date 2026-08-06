@@ -24,6 +24,8 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteFilterIncrementJensenExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteGeometricResidualTailExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCriticalProductionGronwallClosureExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoNestedGalerkinShellLimitExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoCriticalRestartContradictionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinDefectDiffusionRound22Validation.agda
 )
 
@@ -74,6 +76,8 @@ grep -q 'sphericalKernelMeanZero' DASHI/Physics/Closure/NSTriadKNLuoStrainKernel
 grep -q 'normalizedFiniteFilterIncrementJensen' DASHI/Physics/Closure/NSTriadKNLuoFiniteFilterIncrementJensenExact.agda
 grep -q 'finiteGeometricIdentity' DASHI/Physics/Closure/NSTriadKNLuoFiniteGeometricResidualTailExact.agda
 grep -q 'criticalProductionAbsorptionWithGronwallReservoir' DASHI/Physics/Closure/NSTriadKNLuoCriticalProductionGronwallClosureExact.agda
+grep -q 'nestedGalerkinShellLimitBelowThreshold' DASHI/Physics/Closure/NSTriadKNLuoNestedGalerkinShellLimitExact.agda
+grep -q 'criticalRestartContradictsFiniteMaximality' DASHI/Physics/Closure/NSTriadKNLuoCriticalRestartContradictionExact.agda
 
 grep -q '10.1016/S0065-2687(08)60464-1' DASHI/Physics/Closure/NSTriadKNLuoFilteredVorticitySubfilterStressExact.agda
 grep -q '10.1007/s00021-014-0167-4' DASHI/Physics/Closure/NSTriadKNLuoPairFrequencyDefectDiffusionExact.agda
@@ -81,6 +85,7 @@ grep -q '10.48550/arXiv.2606.27560' DASHI/Physics/Closure/NSTriadKNLuoGalerkinPa
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNLuoStrainKernelSphericalMeanZeroExact.agda
 grep -q '10.24033/asens.1404' DASHI/Physics/Closure/NSTriadKNLuoFiniteParaproductRangePartitionExact.agda
 grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNLuoGalerkinCriticalFilteredEnstrophyExact.agda
+grep -q '10.1007/BF01174182' DASHI/Physics/Closure/NSTriadKNLuoCriticalRestartContradictionExact.agda
 
 grep -q 'actualPeriodicFourierCellsConstructed' DASHI/Physics/Closure/NSTriadKNLuoGalerkinPairDefectEvolutionExact.agda
 grep -q 'fiveSourceCriticalTaxProduced' DASHI/Physics/Closure/NSTriadKNLuoGalerkinPairDefectEvolutionExact.agda
@@ -88,6 +93,8 @@ grep -q 'navierStokesPositiveVariationBoundProduced' DASHI/Physics/Closure/NSTri
 grep -q 'navierStokesDissipationWavenumberBoundProduced' DASHI/Physics/Closure/NSTriadKNLuoDissipationWavenumberAmplitudeRepairExact.agda
 grep -q 'periodicPrincipalValueDistributionConstructed' DASHI/Physics/Closure/NSTriadKNLuoStrainKernelSphericalMeanZeroExact.agda
 grep -q 'infiniteCutoffPassageProved' DASHI/Physics/Closure/NSTriadKNLuoCriticalProductionGronwallClosureExact.agda
+grep -q 'shellConvergenceProducedAnalytically' DASHI/Physics/Closure/NSTriadKNLuoNestedGalerkinShellLimitExact.agda
+grep -q 'fujitaKatoRestartProduced' DASHI/Physics/Closure/NSTriadKNLuoCriticalRestartContradictionExact.agda
 
 test -f docs/ns-luo-galerkin-defect-diffusion-round22.md
 
