@@ -42,9 +42,9 @@ geometricFiftyThreeNormalFormRegression =
     SSPWeave.virtualFiftyNineSevenUnit
 
 completionSourceAtlasRegression :
-  CompletionSources.canonicalRound5CompletionSourceCount ≡ 29
+  CompletionSources.canonicalRound5CompletionSourceCount ≡ 31
 completionSourceAtlasRegression =
-  CompletionSources.canonicalRound5CompletionSourceCountIsTwentyNine
+  CompletionSources.canonicalRound5CompletionSourceCountIsThirtyOne
 
 combinedSourceBoundaryRegression :
   CombinedSources.Round5CombinedSourceBoundary
