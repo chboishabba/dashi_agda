@@ -1,6 +1,7 @@
 module DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas where
 
 open import DASHI.Core.Prelude
+open import Data.List using (_++_)
 
 import DASHI.Biology.ConsciousAccessRound4SourceAtlas as R4
 import DASHI.Biology.ConsciousAccessRound5SourceAtlas as R5
