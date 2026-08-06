@@ -11,6 +11,7 @@ bash scripts/check_yang_mills_clay_highest_alpha_round24.sh
 files=(
   DASHI/Physics/Common/FiniteProjectionOffDiagonalExact.agda
   DASHI/Physics/Common/ReducedModeProjectionExact.agda
+  DASHI/Physics/Common/FiftyThreeTypedBoundaryExact.agda
   DASHI/Physics/Common/WeightedStrictLossTransportExact.agda
   DASHI/Physics/Common/CoarseDynamicsCommutatorExact.agda
   DASHI/Physics/YangMills/BalabanP33ProjectionSchurCrossPollinationExact.agda
@@ -32,6 +33,8 @@ checks=(
   'FiniteProjectionOffDiagonalExact.agda:projectionCommutatorNormSqExact'
   'ReducedModeProjectionExact.agda:meanZeroProjectionIdempotent'
   'ReducedModeProjectionExact.agda:sixByNineReducedModeCount'
+  'FiftyThreeTypedBoundaryExact.agda:highLowKernelPartitionExact'
+  'FiftyThreeTypedBoundaryExact.agda:fiftyThreeOccurrencesRemainTypeDistinct'
   'WeightedStrictLossTransportExact.agda:strictMarginBelowPullBack'
   'CoarseDynamicsCommutatorExact.agda:neutralResidualImpliesExactAt'
   'BalabanP33ProjectionSchurCrossPollinationExact.agda:schurCoefficientFactorsThroughProjectionLeakage'
