@@ -27,6 +27,7 @@ FILES=(
   DASHI/Physics/Foundations/Round5FullBoundary.agda
   DASHI/Physics/Foundations/Round5Regression.agda
   DASHI/Physics/Foundations/Everything.agda
+  DASHI/Unified/Everything.agda
 )
 
 for file in "${FILES[@]}"; do
@@ -37,4 +38,5 @@ for file in "${FILES[@]}"; do
 done
 
 scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/Foundations/Round5Regression.agda
+  DASHI/Physics/Foundations/Round5Regression.agda \
+  DASHI/Unified/Everything.agda
