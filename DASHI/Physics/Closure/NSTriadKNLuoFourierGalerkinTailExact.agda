@@ -8,9 +8,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoFourierGalerkinTailExact where
 -- DOI: 10.1090/chel/343.
 --
 -- Author: John G. Heywood.
--- Title: "The Navier-Stokes Equations: On the Existence, Regularity and
--- Decay of Solutions".
--- DOI: 10.1512/iumj.1980.29.29036.
+-- Title: "An Error Estimate Uniform in Time for Spectral Galerkin
+-- Approximations of the Navier-Stokes Problem".
+-- DOI: 10.2140/pjm.1982.98.333.
 --
 -- Authors: Hajer Bahouri; Jean-Yves Chemin; Raphaël Danchin.
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
