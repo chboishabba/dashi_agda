@@ -13,7 +13,9 @@ FILES=(
   DASHI/Biology/DASHIYijingTernaryDivinationExact.agda
   DASHI/Biology/OrientedZeroWaveTransitionExact.agda
   DASHI/Biology/DialecticalSheetSpiralExact.agda
+  DASHI/Biology/TriadicBraidDialecticExact.agda
   DASHI/Biology/TernaryHypercubeHyperfabricExact.agda
+  DASHI/Biology/TernaryCantorWheelDiffusionExact.agda
   DASHI/Biology/TernaryMonsterSymmetryCandidateExact.agda
   DASHI/Biology/FRACTRANSSPTransitionExact.agda
   DASHI/Biology/SpectralGrokkingLatticeExact.agda
@@ -24,6 +26,7 @@ FILES=(
   DASHI/Biology/NSYMDialecticalFieldBridgeExact.agda
   DASHI/Biology/DASHIQuantumLikeEntropyOscillatorExact.agda
   DASHI/Biology/ConsciousAccessRound5SourceAtlas.agda
+  DASHI/Biology/ConsciousAccessRound5ExtendedSourceAtlas.agda
   DASHI/Biology/ConsciousAccessRound5FullBoundary.agda
   DASHI/Biology/ConsciousAccessRound5Regression.agda
 )
