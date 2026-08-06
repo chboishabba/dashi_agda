@@ -13,6 +13,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinDefectDiffusionRound22Validatio
 -- * exact physical-space two-point diffusion product rule;
 -- * sign-indefinite mixed-gradient obstruction;
 -- * pair-input-frequency defect damping, including high-high-to-low outputs;
+-- * physical periodic Fourier mode-pair construction and zero-output witness;
 -- * five-source Galerkin pair-defect evolution;
 -- * named five-source critical taxation algebra;
 -- * hysteretic re-entry tax and zero-gap obstruction;
@@ -22,15 +23,17 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinDefectDiffusionRound22Validatio
 -- * periodic low-transport skew cancellation;
 -- * full isotropic spherical strain-kernel mean-zero algebra;
 -- * finite filtered-increment Jensen contraction;
+-- * finite path difference-to-gradient energy estimate;
 -- * exact finite geometric residual-tail identity;
 -- * two-cutoff critical absorption with an admissible Gronwall reservoir;
 -- * nested shell/Galerkin limit transport with separate margins;
 -- * exact maximal-time contradiction from a critical restart interface.
 --
 -- No periodic principal-value distribution, Calderon--Zygmund theorem,
--- physical Fourier-cell producer, Navier--Stokes five-source tax, positive
--- variation bound, universal strict coefficient, analytic cutoff convergence,
--- Fujita--Kato restart proof or unconditional regularity theorem is asserted.
+-- full Galerkin convolution enumeration, Navier--Stokes five-source tax,
+-- positive-variation bound, universal strict coefficient, analytic cutoff
+-- convergence, Fujita--Kato restart proof or unconditional regularity theorem
+-- is asserted.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.NSTriadKNLuoFilteredDefectExcursionRound21Validation
@@ -39,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteParaproductRangePartitionExact
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinCriticalFilteredEnstrophyExact
 import DASHI.Physics.Closure.NSTriadKNLuoTwoPointCrossDefectDiffusionExact
 import DASHI.Physics.Closure.NSTriadKNLuoPairFrequencyDefectDiffusionExact
+import DASHI.Physics.Closure.NSTriadKNLuoGalerkinFourierModePairExact
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinPairDefectEvolutionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiveSourceDefectCriticalTaxExact
 import DASHI.Physics.Closure.NSTriadKNLuoBadExcursionHysteresisTaxExact
@@ -48,6 +52,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteDissipationWavenumberSplitExact
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicLowTransportSkewCancellationExact
 import DASHI.Physics.Closure.NSTriadKNLuoStrainKernelSphericalMeanZeroExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteFilterIncrementJensenExact
+import DASHI.Physics.Closure.NSTriadKNLuoFinitePathDifferenceDiffusionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGeometricResidualTailExact
 import DASHI.Physics.Closure.NSTriadKNLuoCriticalProductionGronwallClosureExact
 import DASHI.Physics.Closure.NSTriadKNLuoNestedGalerkinShellLimitExact
