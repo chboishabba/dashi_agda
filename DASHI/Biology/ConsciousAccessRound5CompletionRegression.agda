@@ -4,9 +4,12 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.ReducedFiftyThreeFibreExact as Reduced
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSPWeave
+import DASHI.Biology.SSPHyperfibreSymmetryTowerExact as SSPTower
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as SelfIndexing
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Symmetry
 import DASHI.Biology.EquivariantLaplacianSectorExact as Equivariant
+import DASHI.Biology.D4IrrepPhysicalRoleExact as D4Roles
 import DASHI.Biology.MoonshineGradedStageBridgeExact as Moonshine
 import DASHI.Biology.ClayCrossPollinationInterfaceExact as Clay
 import DASHI.Biology.OrientedZeroJetTransitionExact as Jet
@@ -44,6 +47,26 @@ fiftyThreeProgramEffectRegression :
       SSPWeave.canonicalGeometricProgramEffect ≡ 1
 fiftyThreeProgramEffectRegression = refl , refl
 
+sspHyperfibreRegression :
+  SSPTower.resolution SSPTower.canonicalSSPHyperfibreAtlas SSPWeave.ssp2
+    ≡ SelfIndexing.resolution3
+  × SSPTower.resolution SSPTower.canonicalSSPHyperfibreAtlas SSPWeave.ssp19
+    ≡ SelfIndexing.resolution6
+  × SSPTower.resolution SSPTower.canonicalSSPHyperfibreAtlas SSPWeave.ssp71
+    ≡ SelfIndexing.resolution9
+sspHyperfibreRegression = refl , (refl , refl)
+
+sspInverseTransportRegression :
+  SSPTower.transport SSPTower.canonicalSSPHyperfibreAtlas
+    (SSPTower.inverseLanePath SSPWeave.ssp59 SSPWeave.ssp7)
+    SSPTower.positiveLaneState
+    ≡ SSPTower.negativeLaneState
+  × SSPTower.residualAfter SSPTower.canonicalSSPHyperfibreAtlas
+      (SSPTower.inverseLanePath SSPWeave.ssp59 SSPWeave.ssp7)
+      SSPTower.positiveLaneState
+      ≡ SSPWeave.inverseOrientation
+sspInverseTransportRegression = refl , refl
+
 selfIndexingRegression :
   SelfIndexing.selfIndexedSiteCount 1 ≡ 9
   × SelfIndexing.selfIndexedSiteCount 2
@@ -59,6 +82,14 @@ equivariantRegression :
       Equivariant.polarityReflection
       Equivariant.evenState)
 equivariantRegression = Equivariant.reflectedEvenRemainsEigenstate
+
+d4RoleRegression :
+  D4Roles.roleDimension (D4Roles.modeRole Symmetry.E2) ≡ 2
+  × D4Roles.orientation D4Roles.navierStokesPositiveHelicityCandidate
+    ≡ Symmetry.positiveOrientation
+  × D4Roles.orientation D4Roles.navierStokesNegativeHelicityCandidate
+    ≡ Symmetry.negativeOrientation
+d4RoleRegression = refl , (refl , refl)
 
 moonshineStageRegression :
   Moonshine.ternaryFirstCoefficientCandidate ≡ 196884
