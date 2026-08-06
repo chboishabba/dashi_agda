@@ -54,6 +54,12 @@ record CabarlahPalestineFormalBoundary : Set where
     worldWarTwoAndColdWarEnemiesDistinct :
       History.imperialJapan ≡ History.coldWarCommunistForces → ⊥
 
+    signalsLineageReachesBorneo :
+      History.nextSignalsLineageStage
+        (History.nextSignalsLineageStage
+          History.wartimeSpecialWirelessStage)
+      ≡ History.borneoOperationalStage
+
     communistCabarlahBoundaryRejected :
       History.status History.rejectedCommunistCabarlahClaim
       ≡ Status.refuted
@@ -78,20 +84,20 @@ record CabarlahPalestineFormalBoundary : Set where
       Circuit.hasPalestineDemand Circuit.pineGapPalestineDemands ≡ true
 
     frontierExcludedYetSecurityDependent :
-      Persistence.includedInProtectedCore
+      (Persistence.includedInProtectedCore
         Persistence.canonicalFrontierParadox
-      ≡ false
+      ≡ false)
       ×
-      Persistence.requiredForCoreSecurity
+      (Persistence.requiredForCoreSecurity
         Persistence.canonicalFrontierParadox
-      ≡ true
+      ≡ true)
 
     abstractEnemyCanOutliveConcreteActor :
       Persistence.abstractEnemyOf Persistence.firstConcreteEnemy
       ≡ Persistence.abstractEnemyOf Persistence.laterConcreteEnemy
 
-    sourceCountIsNine :
-      Sources.canonicalCabarlahPalestineSourceCount ≡ 9
+    sourceCountIsTen :
+      Sources.canonicalCabarlahPalestineSourceCount ≡ 10
 
     capbarlahIsSemanticConstruction : Bool
     capbarlahIsSemanticConstructionIsFalse :
@@ -123,6 +129,8 @@ canonicalCabarlahPalestineFormalBoundary =
         History.cabarlahPlusDifferenceIsBrisbane
     ; worldWarTwoAndColdWarEnemiesDistinct =
         History.japanIsNotColdWarCommunism
+    ; signalsLineageReachesBorneo =
+        History.wartimeLineageReachesBorneoInTwo
     ; communistCabarlahBoundaryRejected =
         History.communistCabarlahClaimIsRefuted
     ; colonialToponymRenderNonInjective =
@@ -142,8 +150,8 @@ canonicalCabarlahPalestineFormalBoundary =
         , Persistence.frontierRequiredForSecurity
     ; abstractEnemyCanOutliveConcreteActor =
         Persistence.categoryPersistsAfterFirstDefeat
-    ; sourceCountIsNine =
-        Sources.canonicalCabarlahPalestineSourceCountIsNine
+    ; sourceCountIsTen =
+        Sources.canonicalCabarlahPalestineSourceCountIsTen
     ; capbarlahIsSemanticConstruction = false
     ; capbarlahIsSemanticConstructionIsFalse = refl
     ; conventionalNamePreservesIndigenousAuthority = false
