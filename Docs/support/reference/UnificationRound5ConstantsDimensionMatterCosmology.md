@@ -1,59 +1,40 @@
 # Unification Round Five: Constants, Dimension, Matter, and Cosmological Emergence
 
-This tranche integrates the five supplied mathematical updates as a finite exact Agda spine.  It reuses the repository's constants registry, candidate-functional boundary, resource-limited crystallisation, odd/even trit adapter, dimension/signature axiom surfaces, gauge/QFT parity interfaces, GR clarification index, and paper-facing unification boundary.
+This tranche implements the five supplied updates as a finite exact Agda spine. The replacement A--P constants text supersedes the earlier Sections 46--76 wherever the two conflict.
 
-The implementation does not promote a numerical constants theory, a proof that spacetime is four-dimensional, a first-principles periodic table, a quantitative nuclear model, a literal cosmological codec, continuum general relativity, the Standard Model, or terminal unification.
+The implementation reuses the repository's constants registry, candidate-functional boundary, resource-limited crystallisation, odd/even trit adapter, Grassmann candidate lane, dimension/signature interfaces, GR clarification index, gauge/QFT parity surfaces, Standard-Model conformance interfaces, and paper-facing unification boundary.
 
-## Replacement rule for the constants material
+It does **not** promote a numerical constants theory, a proof that spacetime is four-dimensional, a first-principles periodic table, a calibrated nuclear model, a literal cosmological codec, continuum general relativity, the Standard Model, or terminal unification.
 
-The supplied replacement A--P supersedes the older Sections 46--76 where the two conflict.  The retained structure is implemented in:
+## Constants, scale, and parameter geometry
 
-- `ParameterScaleTaxonomyExact.agda`;
-- `RGMDLExhaustionChambersExact.agda`;
-- `DimensionPowerCountingBoundaryExact.agda`.
-
-The five explanatory levels are:
-
-1. exact structural invariants;
-2. dimensionless dynamical parameters;
-3. dimensionful scales;
-4. conversion constants;
-5. numerical representatives in chosen units.
-
-The module links to `DASHI.Constants.Registry` instead of duplicating SI/CODATA authority data.
-
-### Scale-selection obstruction
-
-The finite theorem surface contains a nontrivial scale orbit
+`ParameterScaleTaxonomyExact.agda` implements the five explanatory levels:
 
 ```text
-unit representative    -> 1
-doubled representative -> 2
+structural invariants
+dimensionless dynamical parameters
+dimensionful scales
+conversion constants
+numerical representatives in chosen units
 ```
 
-and proves that identifying the two values is impossible.  This is the finite exact analogue of
+It links `DASHI.Constants.Registry.ConstantsRegistryLink` rather than duplicating SI or CODATA authority data. It separates law, vacuum, boundary, and calibration origins; proves a finite nonzero scale-orbit obstruction; records explicit, spontaneous, anomalous, boundary, finite-size, and calibration scale breaking; and keeps dimensional transmutation dependent on a reference/integration datum.
 
-```text
-Q[D_s Phi] = s^Delta Q[Phi]
-```
+`ParameterInformationGeometryExact.agda` gives two parameter charts whose coordinate components and metric weights differ while the metric tangent norm remains exactly equal. It also gives one declared finite gradient-flow case in which a scalar objective is a Lyapunov function, without identifying every RG flow with MDL.
 
-with nonzero weight: an exactly scale-equivariant selection rule cannot choose one unique finite nonzero representative without explicit breaking, spontaneous breaking, anomaly, boundary data, finite size, or calibration.
+`ScaleInvariantTheorySelectionExact.agda` adds:
 
-### Dimensional transmutation boundary
+- a Buckingham-style dimension kernel using numerator/denominator exponent vectors;
+- an exact witness that speed times time has length dimension;
+- spontaneous scale breaking as vacuum selection on a degenerate scale orbit;
+- triadic relative scales with an explicitly free base calibration;
+- finite global MDL/Bayesian selection over a declared theory class;
+- reference-machine additive code offsets;
+- a joint RG/selection/exhaustion flow with a frozen non-equilibrium state.
 
-A generated scale is represented as a function of a dimensionless running datum and a reference scale.  Two exact examples yield `6` and `9`.  The point is not the physical formula; it is the dependency theorem: scale generation still retains an integration/reference datum.
+## RG, viability, phase chambers, and crossings
 
-### Reparametrisation and identifiability
-
-Two distinct theory coordinates map to one observable class and therefore receive one invariant score.  Coordinate norms are not treated as physical objectives.  The finite quotient models the required descent of a selection functional to observational equivalence classes.
-
-### Universal ratios and precision
-
-The equality of `2/4` and `3/6` is proved by cross multiplication.  Continuous-value description length is indexed by requested precision rather than assigning a finite exact code to an arbitrary real number.
-
-### RG, MDL, and exhaustion
-
-The three processes are different Agda carriers:
+`RGMDLExhaustionChambersExact.agda` keeps three processes as distinct types:
 
 ```text
 CouplingPoint
@@ -61,153 +42,117 @@ ModelCandidate
 ExhaustionState
 ```
 
-The finite RG trajectory reaches a fixed point whose location is not moved by the weak initial datum.  The MDL selector minimises a separate finite code length.  Exhaustion can freeze a trajectory before order is reached.
-
-Static viability, reachability before exhaustion, and robustness are intersected.  One parameter is statically stable but dynamically unavailable, so stability is not promoted to physical formation.
-
-### Phase chambers and spectral viability
-
-Three parameter chambers are represented explicitly.  Crossing the chamber boundary changes the qualitative phase label.
-
-A bound state requires a certified discrete level below the continuum threshold.  The corrected nonempty-intersection convention is encoded by `discreteBelowContinuum`.
-
-The exact avoided-crossing discriminant is represented by
+It proves finite examples of:
 
 ```text
-gapSquare(Eold,Enew,v)
-  = |Eold-Enew|^2 + 4 v^2.
+weak RG point -> fixed point
+static viability != formation before exhaustion
+full viability = static ∩ reachable ∩ robust
 ```
 
-At exact degeneracy it gives `0` when `v=0` and `16` when `v=2`.
-
-## Dimension and four-volume
-
-`DimensionPowerCountingBoundaryExact.agda` implements Sections 77--88.
-
-Two causal profiles in dimensions two and four have the same qualitative local-finiteness, Lorentz-candidate, and dimension-relative boundary-scaling flags.  This is an exact countermodel to the implication that those premises alone determine dimension four.
-
-Dimension estimation is kept separate from uniqueness.  The existing `DimensionFixedPointAxioms` is imported and classified as a conditional axiom surface: its `StabilityUnderDecimation` field assumes the four-dimensional conclusion rather than independently deriving it.
-
-Power counting is interaction-specific:
+The module also implements phase chambers, the corrected nonempty bound-state condition, and the avoided-crossing discriminant
 
 ```text
-phi^4 marginal dimension = 4
-phi^3 marginal dimension = 6
-ordinary Yang--Mills marginal dimension = 4
+(E_old - E_new)^2 + 4 |v|^2
 ```
 
-This records the genuine special role of four dimensions for ordinary Yang--Mills while blocking the stronger claim that all interacting field theories outside four dimensions fail.
+with exact canonical values `0` and `16`.
 
-Four-volume appears only after a four-dimensional Lorentzian completion witness.  The implementation order is:
+## Dimension, signature, and Lorentz emergence
+
+`DimensionPowerCountingBoundaryExact.agda` contains a concrete countermodel to the claim that local finiteness, Lorentz candidacy, and dimension-relative boundary scaling uniquely select `D=4`: two- and four-dimensional profiles share all three flags.
+
+Dimension estimation is distinct from dimension selection. The existing `DimensionFixedPointAxioms` and `SignatureDerivationAxioms` are imported as conditional interfaces rather than independent completed derivations.
+
+Interaction-specific marginal dimensions are checked:
 
 ```text
-establish/select dimension and signature
-then select the matching invariant volume kind.
+phi^4             -> D = 4
+phi^3             -> D = 6
+ordinary Yang-Mills -> D = 4
 ```
+
+Four-volume is available only after a four-dimensional Lorentzian completion witness.
+
+`DiscreteLorentzEmergenceBoundaryExact.agda` separates finite internal alphabets from spacetime discreteness. A regular-lattice finite model is direction-independent in its declared infrared sector and direction-dependent in its ultraviolet sector. The exact dispersion residual is `0` in the canonical infrared datum and `2` in the ultraviolet datum. This is a bounded emergence witness, not a Poincare-invariance theorem.
 
 ## Atomic construction
 
-`AtomicFermionShellExact.agda` implements Sections 89--111.
-
-Element identity is carried by proton number.  Electronic configuration is a separate state.  The orbital labels are declared representation input rather than outputs of triadic cardinality.
-
-Once the rotational and spin representation is assumed, the exact capacities are:
+`AtomicFermionShellExact.agda` separates nuclear charge from electronic configuration. Given orbital representation data, it proves:
 
 ```text
-subshell capacity(l) = 2(2l+1)
+subshell capacity(l) = 2(2l + 1)
 shell capacity(n)    = 2n^2
 ```
 
-with checked values `2`, `6`, `10`, `2`, `8`, and `18` for the standard finite examples.
-
-Fermionic occupancy carries an explicit `occupied <= capacity` proof.  The corrected `Z=18` signature is encoded exactly as
+with checked values `2`, `6`, `10`, `2`, `8`, and `18`. Fermionic occupancy carries an explicit `occupied <= capacity` proof. The corrected `Z=18` signature is encoded as
 
 ```text
 [0,0,1,1,1,1,1,1].
 ```
 
-A two-regime toy orbital functional exhibits an exact level-order reversal between `3d` and `4s`.  It remains a candidate score, not an MDL or physical Hamiltonian theorem.
+A toy parameter change reverses the `3d`/`4s` order. A separate interaction term reverses the one-body configuration preference. Valence is an active-energy-window classification rather than maximal principal quantum number.
 
-A separate interaction penalty reverses the preference of the one-body score.  This demonstrates why actual electronic order depends on configuration interaction.  Valence is classified by an active energy window rather than by maximal principal quantum number alone.
+`AtomicValenceFermionBridgeExact.agda` cross-pollinates the existing Grassmann lane. It implements antisymmetric exchange, duplicate-state vanishing, and valence equivalence classes while explicitly refusing to promote the existing Grassmann receipt to a completed exterior algebra.
 
-## Nuclear shell closure and pairing
-
-`NuclearShellPairingExact.agda` implements Sections 112--123 and 138--146.
-
-Proton and neutron sectors are distinct.  A magic closure requires both saturation and a large gap.  A doubly closed witness contains separate proton and neutron proofs.
-
-Composition-dependent gap labels provide the finite exact shell-evolution chain:
+`AtomicGenerationPipelineExact.agda` records the actual dependency chain:
 
 ```text
-composition change
--> effective field change
--> gap change
--> closure status change.
+nuclear charge
+nuclear stability
+one-particle representation
+antisymmetric many-electron space
+interacting energy
+state selection
+valence equivalence
+observable prediction
 ```
 
-Pairing is unavailable without an attractive pairing interaction.  The four proton/neutron parity sectors have blocked-sector counts
+A concrete argon-like finite pipeline is implemented. Candidate enumeration remains distinct from Hamiltonian solution and quantitative chemistry.
+
+## Nuclear shells, pairing, response, and shape instability
+
+`NuclearShellPairingExact.agda` treats proton and neutron closures separately. Magicity requires saturation **and** a large gap. Composition can change the effective gap.
+
+Pairing requires an attractive channel. The blocked-sector counts are:
 
 ```text
 even-even 0
-odd-even  1
-even-odd  1
-odd-odd   2.
+odd-mass  1
+odd-odd   2
 ```
 
-Odd-even staggering and separation-energy curvature are represented by exact finite differences.  The odd/even-to-trit module is imported only as an encoding adapter: binary parity is not identified with intrinsic ternary cardinality.
+Odd-even staggering and separation-energy curvature are exact finite differences. The odd/even-to-trit bridge is used only as an encoding adapter.
 
-## Finite-density nuclear instability
+`NuclearResponseComplexityExact.agda` adds:
 
-`NuclearShapeInstabilityExact.agda` implements Sections 124--137 and 143--149.
+- a proton-neutron asymmetry numerator `(N-Z)^2`;
+- finite response suppression as the shell gap grows;
+- pair-locking reduction of active occupations only under a pairing model;
+- a model-dependent shell/unpaired/shape/correlation complexity;
+- a joint energy-complexity score with explicit weights.
 
-The leading Fermi term is extensive at fixed density:
+`NuclearShapeInstabilityExact.agda` proves that the leading Fermi term is extensive at fixed density under equal splitting. The split candidate has a larger surface witness and a smaller electrostatic witness. The joint finite cost is `16` for the compact candidate and `12` for the split candidate.
 
-```text
-E_F(8) = E_F(4) + E_F(4).
-```
-
-The split finite drop has a larger surface witness and a smaller electrostatic witness.  A joint shape cost includes surface, electrostatic, asymmetry, shell, and pairing terms.  In the canonical candidate the split cost is `12` and the compact cost is `16`.
-
-This encodes the corrected mechanism: fission is shape-energy competition or barrier crossing, not automatic relief of Pauli pressure.
-
-Fissility is represented by numerator/denominator/rank data corresponding to the unit-free control ratio proportional to `Z^2/A`.  Numerical thresholds remain coefficient-dependent.
-
-A metastable state has positive local curvature, a lower-energy channel, and a barrier.  Local stability is therefore not absolute stability and energetic possibility is not a decay-rate theorem.
+This encodes fission as deformation-energy competition and barrier crossing, not relief of Pauli pressure. Fissility is represented by dimensionless `Z^2/A`-type data. A metastable state has positive local curvature, a lower-energy channel, and a barrier, so local and absolute stability remain separate.
 
 ## Causal coding and cosmological observation
 
-`CausalCodingCosmologyBoundaryExact.agda` implements Sections 150--158, 179--182, and 189.
+`CausalCodingCosmologyBoundaryExact.agda` types every coding context from decoded history plus shared side information. An offline encoder may inspect the complete source while the decoder remains forward sequential. Global code admissibility does not create retrocausal signalling.
 
-The context function consumes only decoded history plus shared side information.  An offline encoder may inspect the complete source, while the decoder remains forward sequential.
+Bitstreams, initial states, boundary data, CMB observations, law syntax, and visible histories are distinct types. Two early states map to the same CMB observation.
 
-A globally admissible complete code maps to `forwardInfluenceOnly`; no retrocausal signalling is inferred.
+`CMBInformationChannelExact.agda` strengthens this into a finite information channel. It proves an exact distinguishability contraction from `2` to `0` for one pair of early states. Coding factorisation and physical transition factorisation remain separate types, and deterministic decoding is not promoted to deterministic physics.
 
-The following are distinct types:
+CABAC is bounded to adaptive entropy coding. Global rate-distortion or MDL search belongs to the surrounding encoder. The CMB is a projected checkpoint, not a lossless global bitstream or Cauchy surface.
 
-```text
-BitPair
-PhysicalInitialState
-BoundaryData
-CMBObservation
-LawSyntax
-VisibleHistory.
-```
+## Geometry emergence
 
-Two distinct early states produce the same CMB observation.  This proves a concrete many-to-one observational projection.  The CMB is therefore represented as a noisy/projected checkpoint, not a lossless bitstream or global Cauchy surface.
+`KernelGeometryEmergenceObligations.agda` proves that scalar density underdetermines pressure, anisotropic stress, and momentum flux. It defines a ten-component symmetric four-dimensional tensor carrier and records the required continuum cutset:
 
-CABAC is bounded to adaptive entropy coding.  Global rate-distortion or MDL search belongs to the larger encoder and is not an intrinsic CABAC theorem.
-
-## Geometry emergence obligations
-
-`KernelGeometryEmergenceObligations.agda` implements Sections 159--163, 175--177, 183, 185--188.
-
-Two stress profiles have the same energy density but different pressure, anisotropic stress, and momentum flux.  This proves that scalar kernel load underdetermines a relativistic source tensor.
-
-The symmetric four-dimensional tensor carrier has ten named components.  The required emergence cutset includes:
-
-- continuum manifold construction;
-- Lorentzian metric construction;
-- tensorial stress-information source;
+- continuum manifold;
+- Lorentzian metric;
+- tensorial source;
 - Bianchi identity;
 - covariant conservation;
 - diffeomorphism invariance;
@@ -215,59 +160,64 @@ The symmetric four-dimensional tensor carrier has ten named components.  The req
 - geodesic limit;
 - gravitational radiation;
 - Einstein dynamics;
-- controlled higher-order corrections.
+- controlled corrections.
 
-The existing signature axioms and GR clarification index are imported.  They remain bounded interfaces, not a promotion of non-flat continuum GR.
+`FiniteStressConservationGeodesicExact.agda` adds an exactly conserved cycle current, a geometry-dependent path selector, and a closed two-way matter/geometry update. These are finite analogues, not the covariant Bianchi identity, Lorentzian geodesic equation, equivalence principle, or semiclassical Einstein equation.
 
-## Quantum-field and Standard-Model emergence obligations
+## QFT, gauge structure, particles, and emergence hypotheses
 
-`KernelQFTEmergenceObligations.agda` implements Sections 164--174 and 178, 184--188.
+`FiniteGraphGaugeScalarExact.agda` constructs an exact local `Z2` graph gauge theory. It proves the group laws, local transformation of edge connection and scalar field, loop-holonomy invariance, and preservation of an edge covariant-mismatch observable.
 
-Global finite orbit classes and local gauge classes are separate types.  A finite three-edge graph has a nontrivial loop holonomy, giving a concrete curvature witness without promoting continuum Yang--Mills theory.
+`FiniteFockExcitationExact.agda` constructs truncated bosonic and fermionic occupation sectors, blocked fermion creation at unit occupancy, an exact `5^2 = 3^2 + 4^2` mass-shell datum, stable/metastable/transient excitation classes, and an isolated finite spectral-weight analogue.
 
-The imported repository surfaces include:
+`KernelQFTEmergenceObligations.agda` imports the repository's QFT parity, Lie/gauge, gauge-group, spin/Clifford, and Standard-Model conformance surfaces. It records the remaining cutset:
 
-- QFT parity and analytic-authority cutsets;
-- Lie/gauge theory parity;
-- gauge-group contract;
-- spin-emergence/Clifford interface;
-- Standard-Model conformance vectors.
+- Hilbert completion and operator domains;
+- Lorentz-covariant field limit;
+- Clifford spinors;
+- local gauge redundancy and connection curvature;
+- Fock construction;
+- stable excitations and spectral poles;
+- `SU(3) x SU(2) x U(1)` content;
+- chiral matter representations;
+- Higgs and Yukawa sectors;
+- anomaly cancellation;
+- reflection positivity;
+- controlled continuum limit.
 
-The new cutset records Hilbert completion, Lorentz scalar limit, Clifford spinors, local gauge redundancy, connection/curvature, Fock construction, stable excitations, correlation poles, the exact Standard-Model gauge group, chiral representations, Higgs/Yukawa sectors, anomaly cancellation, reflection positivity, and a controlled continuum limit.
+`KernelEmergenceHypothesesExact.agda` types the geometry and QFT bridges explicitly as conjectural hypotheses. Finite correction tables decrease from microscopic to macroscopic scales, but the module refuses to turn those tables into continuum suppression theorems.
 
-## Unified effective action and backreaction
+## Unified effective action and root integration
 
-`UnifiedEffectiveActionBoundary.agda` keeps UV/IR scale regimes distinct from theory labels.  Geometry, quantum matter, and backreaction can all occur in each regime.
-
-The target effective action contains:
+`UnifiedEffectiveActionBoundary.agda` distinguishes UV/IR scale regimes from theory labels. Its target terms are:
 
 ```text
-microscopic kernel term
-Einstein-Hilbert target term
-Standard-Model target term
+microscopic kernel
+Einstein-Hilbert
+Standard Model
 higher corrections
-backreaction term.
+backreaction
 ```
 
-A recovery receipt requires separate geometry and quantum limits, a common coarse-graining map, consistent backreaction, and controlled corrections.
+A recovery receipt requires separate geometry and quantum limits, a common coarse graining, closed backreaction, and controlled corrections. The paper-facing unification interface remains terminally false.
 
-A finite joint dynamics demonstrates two-way state dependence: excited matter can move a flat geometry candidate to a curved candidate, while a vacuum state can relax it.  This is a typed backreaction model only.
+The tranche is assembled in:
 
-The paper-facing unification theorem interface is imported and its terminal promotion remains false.  Kernel depth is not identified with the Planck length without a calibrated dimensionless map.
+```text
+DASHI/Physics/Foundations/Everything.agda
+DASHI/Physics/Foundations/Round5FullBoundary.agda
+DASHI/Physics/Foundations/Round5Regression.agda
+```
+
+and wired through `DASHI/Unified/Everything.agda`, which is already imported by the repository root.
 
 ## Provenance
 
-`Round5SourceAtlas.agda` records title, authors, venue, year, DOI, imported role, and excluded promotion for fourteen sources covering dimensional analysis, RG, information geometry, causal sets, electronic structure, nuclear shells, fission, CABAC, gauge theory, Euclidean reconstruction, electroweak theory, and CMB cosmology.
+`Round5SourceAtlas.agda` records title, authors, venue, year, DOI, imported role, and excluded promotion for seventeen sources. The added provenance covers dimensional analysis, RG, information geometry, Kolmogorov complexity, causal sets, electronic structure, nuclear shells, pairing, fission, CABAC, gauge theory, Fock space, Euclidean reconstruction, electroweak theory, and CMB cosmology.
 
 Repository-original finite lemmas are not assigned invented external identifiers.
 
 ## Validation
-
-The cumulative root is:
-
-```text
-DASHI/Physics/Foundations/Round5Regression.agda
-```
 
 The focused command is:
 
@@ -275,4 +225,11 @@ The focused command is:
 bash scripts/check_unification_round5.sh
 ```
 
-It first runs the complete Round Four checker, scans every Round Five Agda module for holes, postulates, unsafe options, unsolved metas, and placeholder right-hand sides, and then invokes the pinned Agda 2.9 checker on the cumulative regression root.
+It runs the complete Round Four checker, scans every Round Five Agda module and the unified root for holes, postulates, unsafe options, unsolved metas, and placeholder right-hand sides, and invokes the pinned Agda 2.9 checker on:
+
+```text
+DASHI/Physics/Foundations/Round5Regression.agda
+DASHI/Unified/Everything.agda
+```
+
+No successful kernel result is claimed until a workflow or local pinned-toolchain run is observed.
