@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - runner-smoke-test-20260807
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -27,6 +30,5 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          test -f README.md || test -f README.agda || true
           git rev-parse --short HEAD
           echo "Self-hosted runner successfully executed dashi_agda smoke test."
