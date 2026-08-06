@@ -39,6 +39,8 @@ import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as 
 import DASHI.Mathematics.Topology.QuaternionHopfRadiusExact as H
 import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact as K
 
+open K.GroupAction
+
 record QuaternionPair : Set where
   constructor quaternionPair
   field
