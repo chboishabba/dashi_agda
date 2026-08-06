@@ -9,14 +9,10 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyperfabric
 import DASHI.Biology.ClassicalQuantumLikeCoarseGrainingExact as QuantumLike
 import DASHI.Biology.SpectralGrokkingLatticeExact as Spectral
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as NSYM
-import DASHI.Biology.ReducedFiftyThreeFibreExact as ReducedInternal
+import DASHI.Biology.ReducedFiftyThreeFibreExact as Reduced
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSPWeave
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact as ScaleTheory
 import DASHI.Physics.Foundations.FiniteFockExcitationExact as Fock
-
--- Explicit public module synonym used by the cumulative boundary's theorem
--- types.  The underlying definitions remain those of PR #399.
-module Reduced = ReducedInternal
 
 ------------------------------------------------------------------------
 -- Exact bridges from PR #399 into the constants/dimension/QFT tranche.
