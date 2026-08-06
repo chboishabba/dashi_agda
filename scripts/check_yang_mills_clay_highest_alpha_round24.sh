@@ -13,6 +13,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementTelescopeExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalLinkJetSelectedFactorNormExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonNamedAtomSumExact.agda
   DASHI/Physics/YangMills/BalabanP33QuaternionAdjointPerturbationExact.agda
   DASHI/Physics/YangMills/BalabanP33QuaternionAdjointNormSquaredExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeFirstExact.agda
@@ -20,6 +21,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeGlobalDefectExact.agda
   DASHI/Physics/YangMills/BalabanP33PeriodicDivergenceUpperExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeResidualExact.agda
   DASHI/Physics/YangMills/BalabanP33StrictTerminalGapMarginExact.agda
   DASHI/Physics/YangMills/BalabanP33CoarseFineSchurCouplingExact.agda
   DASHI/Physics/YangMills/BalabanP33EffectiveSchurGapStepExact.agda
@@ -58,6 +60,9 @@ checks=(
   'BalabanP33PhysicalLinkJetSelectedFactorNormExact.agda:inverseSelectedFactorDefectExact'
   'BalabanP33PhysicalLinkJetSelectedFactorNormExact.agda:positiveSelectedFactorNormSqExact'
   'BalabanP33PhysicalLinkJetSelectedFactorNormExact.agda:inverseSelectedFactorNormSqExact'
+  'BalabanP33PhysicalWilsonNamedAtomSumExact.agda:physicalPlacementWilsonAtomSumIsPlaquetteVariation'
+  'BalabanP33PhysicalWilsonNamedAtomSumExact.agda:physicalPlacementWilsonDefectSumExact'
+  'BalabanP33PhysicalWilsonNamedAtomSumExact.agda:physicalNamedWilsonDefectSumIsPhysicalDefect'
   'BalabanP33QuaternionAdjointPerturbationExact.agda:adjointDefectFactorizationExact'
   'BalabanP33QuaternionAdjointPerturbationExact.agda:conjugateDifferenceFromIdentityExact'
   'BalabanP33QuaternionAdjointPerturbationExact.agda:conjugateNormSqExact'
@@ -84,6 +89,10 @@ checks=(
   'BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda:backgroundGaugeEnergyDifferenceLower'
   'BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda:backgroundGaugeSignedLowerThirtyTwo'
   'BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda:backgroundGaugeSignedLowerSixtyFour'
+  'BalabanP33PhysicalBackgroundGaugeResidualExact.agda:backgroundGaugeResidualExact'
+  'BalabanP33PhysicalBackgroundGaugeResidualExact.agda:backgroundGaugeResidualFirstNormIsEnergy'
+  'BalabanP33PhysicalBackgroundGaugeResidualExact.agda:backgroundGaugeResidualSecondVariationIsEnergy'
+  'BalabanP33PhysicalBackgroundGaugeResidualExact.agda:backgroundGaugeResidualSignedLowerSixtyFour'
   'BalabanP33StrictTerminalGapMarginExact.agda:marginBudgetAdmissible'
   'BalabanP33StrictTerminalGapMarginExact.agda:admissibleMarginBelowPullback'
   'BalabanP33StrictTerminalGapMarginExact.agda:admissibleMarginBelowFineGap'
@@ -113,7 +122,7 @@ grep -q '10.1201/9781439864180' \
 grep -q '10.1007/978-3-319-13467-3' \
   DASHI/Physics/YangMills/BalabanP33QuaternionAdjointPerturbationExact.agda
 grep -q '10.1007/BF01466594' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeResidualExact.agda
 grep -q '10.1016/S0022-1236(03)00057-0' \
   DASHI/Physics/YangMills/BalabanP33CoarseFineSchurCouplingExact.agda
 grep -q '10.1017/fmp.2021.15' \
