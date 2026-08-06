@@ -151,7 +151,9 @@ import DASHI.Biology.ConsciousAccessRound4Regression
 import DASHI.Biology.DASHIYijingTernaryDivinationExact
 import DASHI.Biology.OrientedZeroWaveTransitionExact
 import DASHI.Biology.DialecticalSheetSpiralExact
+import DASHI.Biology.TriadicBraidDialecticExact
 import DASHI.Biology.TernaryHypercubeHyperfabricExact
+import DASHI.Biology.TernaryCantorWheelDiffusionExact
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact
 import DASHI.Biology.FRACTRANSSPTransitionExact
 import DASHI.Biology.SpectralGrokkingLatticeExact
@@ -162,5 +164,6 @@ import DASHI.Biology.NeuralRepresentationLaplacianExact
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact
 import DASHI.Biology.DASHIQuantumLikeEntropyOscillatorExact
 import DASHI.Biology.ConsciousAccessRound5SourceAtlas
+import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas
 import DASHI.Biology.ConsciousAccessRound5FullBoundary
 import DASHI.Biology.ConsciousAccessRound5Regression
