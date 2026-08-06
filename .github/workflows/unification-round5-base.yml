@@ -4,8 +4,10 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Foundations/**'
+      - 'DASHI/Physics/DarkSector/**'
       - 'DASHI/Unified/Everything.agda'
       - 'Docs/support/reference/UnificationRound5ConstantsDimensionMatterCosmology.md'
+      - 'Docs/support/reference/DarkSectorColliderFormalism.md'
       - 'scripts/check_unification_round5.sh'
   workflow_dispatch:
 
