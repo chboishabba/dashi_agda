@@ -35,6 +35,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.YangMills.BalabanStrongCouplingSUFourDimensionalMarginExact as Strong
 
@@ -74,14 +75,17 @@ covarianceSquareBudgetFactorsThroughVariances
 
 curvatureInverseCancelsPoincareBudget :
   ∀ curvature inverseCurvature dirichletEnergy →
-  inverseCurvature * curvature ≡ 1ℚ →
+  curvature * inverseCurvature ≡ 1ℚ →
   curvature
     * poincareVarianceBudget inverseCurvature dirichletEnergy
   ≡ dirichletEnergy
 curvatureInverseCancelsPoincareBudget
-    curvature inverseCurvature dirichletEnergy inverseLaw
-  rewrite inverseLaw =
-  solve (curvature ∷ inverseCurvature ∷ dirichletEnergy ∷ [])
+    curvature inverseCurvature dirichletEnergy inverseLaw =
+  trans
+    (solve (curvature ∷ inverseCurvature ∷ dirichletEnergy ∷ []))
+    (trans
+      (cong (λ selected → selected * dirichletEnergy) inverseLaw)
+      (solve (dirichletEnergy ∷ [])))
 
 configuredSU2Curvature : ℚ
 configuredSU2Curvature =
@@ -95,6 +99,10 @@ configuredSU2InverseCurvature = + 2 / 1
 configuredSU2InverseLaw :
   configuredSU2InverseCurvature * configuredSU2Curvature ≡ 1ℚ
 configuredSU2InverseLaw = solve []
+
+configuredSU2LeftInverseLaw :
+  configuredSU2Curvature * configuredSU2InverseCurvature ≡ 1ℚ
+configuredSU2LeftInverseLaw = solve []
 
 configuredSU2PoincareCoefficientExact :
   poincareCoefficient configuredSU2InverseCurvature ≡ + 2 / 1
@@ -113,6 +121,6 @@ record FunctionalInequalitySpatialDecayBoundary : Set where
     guionnetZegarlinskiSpatialDecayStepEstablished : Set
     exponentialSpatialCovarianceDecayEstablished : Set
 
--- The record deliberately has no constructor exported from a bare Poincare
--- coefficient.  The published mass-gap proof uses all of the spatial
--- propagation ingredients, not Poincare in isolation.
+-- No canonical inhabitant is produced from a bare Poincare coefficient.  The
+-- published mass-gap proof uses all of the spatial propagation ingredients,
+-- not Poincare in isolation.
