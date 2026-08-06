@@ -97,11 +97,26 @@ symmetricEnergy : Layout2 → Nat
 symmetricEnergy (layout2 left right) =
   left * left + right * right + left * right
 
+energyRelabellingEquivariantGeneric :
+  (layout : Layout2) →
+  symmetricEnergy (swapLayout layout)
+  ≡
+  symmetricEnergy layout
+energyRelabellingEquivariantGeneric (layout2 left right) =
+  trans
+    (cong
+      (λ squareSum → squareSum + right * left)
+      (+-comm (right * right) (left * left)))
+    (cong
+      (λ crossTerm → left * left + right * right + crossTerm)
+      (*-comm right left))
+
 energyRelabellingEquivariant :
   symmetricEnergy (swapLayout (layout2 2 3))
   ≡
   symmetricEnergy (layout2 2 3)
-energyRelabellingEquivariant = refl
+energyRelabellingEquivariant =
+  energyRelabellingEquivariantGeneric (layout2 2 3)
 
 data LayoutConfiguration : Set where
   fixedSeedConfiguration : LayoutConfiguration
