@@ -1,5 +1,6 @@
 module DASHI.Cognition.PNF.DemandResolutionState where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
@@ -45,13 +46,13 @@ candidateDoesNotResolve = openWithCandidates
 resolveDemand : ResolvedTarget → DemandState resolvedDemand
 resolveDemand = resolvedWithTarget
 
-openCandidateCannotBeResolvedState :
-  DemandState openDemand → DemandState resolvedDemand → ⊥
-openCandidateCannotBeResolvedState openWithNoCandidates (resolvedWithTarget target) =
-  λ ()
-openCandidateCannotBeResolvedState
-  (openWithCandidates candidate)
-  (resolvedWithTarget target) = λ ()
+openStatusIsNotResolved : openDemand ≡ resolvedDemand → ⊥
+openStatusIsNotResolved ()
+
+candidateStateCannotChangeItsIndex :
+  (candidate : CandidateEvidence) →
+  openDemand ≡ resolvedDemand → ⊥
+candidateStateCannotChangeItsIndex candidate = openStatusIsNotResolved
 
 record DemandStateBoundary : Set where
   constructor demandStateBoundary
