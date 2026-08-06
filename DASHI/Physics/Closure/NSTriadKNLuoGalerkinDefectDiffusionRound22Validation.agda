@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinDefectDiffusionRound22Validatio
 
 ------------------------------------------------------------------------
 -- Cumulative validation root for Round Twenty-Two.
+-- Pinned workflow trigger after the checker definition is present on branch.
 --
 -- Imports the complete Round Twenty-One filtered-defect/excursion tranche and
 -- checks the new finite Galerkin and spectral mathematics:
