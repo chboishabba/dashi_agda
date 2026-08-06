@@ -41,7 +41,9 @@ module DASHI.Biology.MoonshineModularFormCoefficientExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.Nat using (_+_; _*_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 ------------------------------------------------------------------------
 -- Finite coefficient data.
@@ -139,9 +141,9 @@ moonshineCharacterMatchesNormalizedJPrefix :
 moonshineCharacterMatchesNormalizedJPrefix exponentMinusOne = refl
 moonshineCharacterMatchesNormalizedJPrefix exponentZero = refl
 moonshineCharacterMatchesNormalizedJPrefix exponentOne =
-  jCoefficientOneExact
+  sym jCoefficientOneExact
 moonshineCharacterMatchesNormalizedJPrefix exponentTwo =
-  jCoefficientTwoExact
+  sym jCoefficientTwoExact
 
 record ModularFormAuthorityBoundary : Set where
   constructor modularFormAuthorityBoundary
@@ -159,5 +161,3 @@ canonicalModularFormAuthorityBoundary =
   modularFormAuthorityBoundary
     ⊥ (λ impossible → ⊥)
     ⊥ (λ impossible → ⊥)
-  where
-  open import Data.Empty using (⊥)
