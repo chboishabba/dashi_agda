@@ -40,7 +40,8 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _+_; _*_; _-_; -_)
+open import Data.Rational.Base using
+  (ℚ; _/_; _+_; _*_; _-_; -_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as Scale
@@ -108,9 +109,6 @@ firstBranchCriticalFactorization :
   ≡ branchOneRawExponent q r
 firstBranchCriticalFactorization q r = solve (q ∷ r ∷ [])
 
--- The squared gap comparison itself is delegated to the already checked
--- finite geometric module, so this audit and the shell budget share one source
--- of truth rather than duplicating the order proof.
 strongSquaredGapBelowWeakSquaredGap :
   (gap : Nat) →
   Scale.strongBranchSquaredGap gap ≤ Scale.weakBranchSquaredGap gap
