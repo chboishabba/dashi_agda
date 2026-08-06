@@ -15,6 +15,7 @@ files=(
   DASHI/Mathematics/Symmetry/NoetherDissipationDefectExact.agda
   DASHI/Mathematics/Topology/HopfInvariantOneDimensionGateExact.agda
   DASHI/Mathematics/Topology/QuaternionHopfRadiusExact.agda
+  DASHI/Mathematics/CrossPollination/MillenniumProblemStructuralRelevanceGateExact.agda
   DASHI/Physics/YangMills/YangMillsKleinNoetherGaugeInvariantBridgeExact.agda
   DASHI/Physics/YangMills/YangMillsHurwitzHopfStructuralGateExact.agda
   DASHI/Physics/Closure/NavierStokesKleinCriticalScalingExact.agda
@@ -41,6 +42,8 @@ checks=(
   'DASHI/Mathematics/Topology/HopfInvariantOneDimensionGateExact.agda:hurwitzDimensionToHopfDimension'
   'DASHI/Mathematics/Topology/QuaternionHopfRadiusExact.agda:quaternionHopfRadiusIdentity'
   'DASHI/Mathematics/Topology/QuaternionHopfRadiusExact.agda:unitPairMapsToTargetUnitQuadric'
+  'DASHI/Mathematics/CrossPollination/MillenniumProblemStructuralRelevanceGateExact.agda:frobeniusMeaningsAreDistinct'
+  'DASHI/Mathematics/CrossPollination/MillenniumProblemStructuralRelevanceGateExact.agda:bsdUsesArithmeticNotRealDivisionFrobenius'
   'DASHI/Physics/YangMills/YangMillsKleinNoetherGaugeInvariantBridgeExact.agda:gaugeEquivalentConfigurationsHaveEqualAction'
   'DASHI/Physics/YangMills/YangMillsHurwitzHopfStructuralGateExact.agda:sharedQuaternionCarrier'
   'DASHI/Physics/YangMills/YangMillsHurwitzHopfStructuralGateExact.agda:fixedLatticeClusteringStillNotContinuumGap'
@@ -68,6 +71,7 @@ grep -q 'does not claim the real analytic division property' DASHI/Mathematics/A
 grep -q 'does not prove Adams' DASHI/Mathematics/Topology/HopfInvariantOneDimensionGateExact.agda
 grep -q 'No topological identity is promoted' DASHI/Physics/YangMills/YangMillsHurwitzHopfStructuralGateExact.agda
 grep -q 'does not identify every vortex field with a Hopf field' DASHI/Physics/Closure/NavierStokesHopfNoetherContinuationGateExact.agda
+grep -q 'proves no Millennium problem' DASHI/Mathematics/CrossPollination/MillenniumProblemStructuralRelevanceGateExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Mathematics/CrossPollination/HurwitzHopfNoetherMillenniumCrossPollinationValidation.agda
