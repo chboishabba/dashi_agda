@@ -19,17 +19,19 @@ module DASHI.Biology.MonsterCompatibilityComplexExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Formalize the route in which the displayed 10 * 3^9 plus reduced-53
--- coordinates are input data to a compatibility differential.  A later
--- Monster-relevant object may be a kernel, quotient, image, cohomology object,
--- or completion; the displayed pieces therefore need not be invariant
--- summands of the final action.
+-- Formalize the route in which the displayed structured harmonic coordinates
+--
+--   3^11 + 3^9 + 53
+--
+-- are input data to a compatibility differential.  A later object may be a
+-- kernel, quotient, image, cohomology object or completion; the displayed
+-- pieces therefore need not be invariant summands of the final action.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat using (_+_; _*_)
+open import Data.Nat using (_+_)
 
 record FiniteComplexDimensions : Set where
   constructor finiteComplexDimensions
@@ -43,30 +45,28 @@ record FiniteComplexDimensions : Set where
 
 open FiniteComplexDimensions public
 
-------------------------------------------------------------------------
--- This is only a dimension-level witness showing how a 196883-dimensional
--- source can feed a relation map without forcing its displayed 53 coordinates
--- to survive as an invariant final summand.
-------------------------------------------------------------------------
-
 dashICompatibilityDimensions : FiniteComplexDimensions
 dashICompatibilityDimensions =
   finiteComplexDimensions 196883 53 196830 53 refl
 
-bulkTenTernaryDimension : Nat
-bulkTenTernaryDimension = 10 * 19683
+ordinaryHarmonicBulkDimension : Nat
+ordinaryHarmonicBulkDimension = 177147
 
-bulkTenTernaryDimensionExact : bulkTenTernaryDimension ≡ 196830
-bulkTenTernaryDimensionExact = refl
+completionHarmonicBulkDimension : Nat
+completionHarmonicBulkDimension = 19683
+
+structuredHarmonicBulkDimension : Nat
+structuredHarmonicBulkDimension =
+  ordinaryHarmonicBulkDimension + completionHarmonicBulkDimension
+
+structuredHarmonicBulkDimensionExact :
+  structuredHarmonicBulkDimension ≡ 196830
+structuredHarmonicBulkDimensionExact = refl
 
 sourceDimensionExact :
   sourceDimension dashICompatibilityDimensions
-  ≡ bulkTenTernaryDimension + 53
+  ≡ structuredHarmonicBulkDimension + 53
 sourceDimensionExact = refl
-
-------------------------------------------------------------------------
--- Typed outcomes of a compatibility program.
-------------------------------------------------------------------------
 
 data CompatibilityOutcome : Set where
   kernelObject : CompatibilityOutcome
