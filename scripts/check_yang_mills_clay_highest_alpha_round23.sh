@@ -29,6 +29,7 @@ checks=(
   'BalabanP33UnscaledCyclePoincareWallExact.agda:halfPeriodSquareWaveNormExact'
   'BalabanP33UnscaledCyclePoincareWallExact.agda:halfPeriodSquareWaveCycleEnergyExact'
   'BalabanP33UnscaledCyclePoincareWallExact.agda:squareWave256LeftExact'
+  'BalabanP33UnscaledCyclePoincareWallExact.agda:squareWave256EnergyExact'
   'BalabanP33UnscaledCyclePoincareWallExact.agda:sixteenNotBelowEight'
   'BalabanP33UnscaledCyclePoincareWallExact.agda:oneThirtySecondNotUniformUnscaled'
   'BalabanP33TerminalScaleGapPullbackExact.agda:oneStepPullbackLower'
@@ -64,8 +65,12 @@ grep -q 'Public dates alone cannot establish either dependence or independence' 
 grep -q 'Hopping-parameter expansion' \
   docs/yang-mills-combes-thomas-provenance.md
 
-# Scope guards: the terminal lane must not assert a physical RG law or a bare
-# volume-uniform coercivity theorem.
+# Exact arithmetic/scope guards: the concrete obstruction is 16 <= 8, and the
+# terminal lane assumes neither a dynamic doubling law nor a bare uniform gap.
+grep -q 'squareWave256LeftExact' \
+  DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
+grep -q 'squareWave256EnergyExact' \
+  DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
 grep -q 'physicalRGGapTransferProducerLevel = conditional' \
   DASHI/Physics/YangMills/BalabanP33TerminalScaleGapPullbackExact.agda
 grep -q 'physicalOneStepRGGapEstimateLevel = conditional' \
