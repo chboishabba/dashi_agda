@@ -30,7 +30,8 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalWilsonPlacementNormSquaredExact
 -- rho/144.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_; _/_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
