@@ -18,25 +18,27 @@ module DASHI.Biology.MonsterSubgroupBranchingBenchmarksExact where
 -- in Moonshine: The First Quarter Century and Beyond (2010), 393--403.
 -- DOI: 10.1017/CBO9780511730054.019.
 --
+-- Robert A. Wilson,
+-- "The Odd-Local Subgroups of the Monster",
+-- Journal of the Australian Mathematical Society 44 (1988), 1--16.
+-- DOI: 10.1017/S1446788700031323.
+--
+-- Thomas Breuer, Kay Magaard and Robert A. Wilson,
+-- "Verification of the Conjugacy Classes and Ordinary Character Table of the
+-- Monster", 2024.
+-- arXiv DOI: 10.48550/arXiv.2412.12182.
+--
+-- Thomas Breuer, Kay Magaard and Robert A. Wilson,
+-- "Some Steps in the Verification of the Ordinary Character Table of the
+-- Monster Group", 2024.
+-- arXiv DOI: 10.48550/arXiv.2412.09313.
+--
 -- DASHI CONTRIBUTION
---
--- Record two genuine subgroup-level decomposition templates against which the
--- filtered DASHI carrier can be tested.  These are benchmarks, not evidence
--- that the proposed 10 * 3^9 + 53 grading occurs in the Monster.
---
--- For the centralizer 2.B of a 2A involution, the 196883-dimensional
--- constituent restricts with dimensions
---
---   1 + 4371 + 96255 + 96256 = 196883.
---
--- For the 2-local subgroup 2_+^(1+24).Co1, the 196884-dimensional ordinary
--- representation restricts as
---
---   (2^12 tensor 24) + 98280 + 300 = 196884.
---
--- The point is structural: full-Monster irreducibility is compatible with
--- decomposable coordinates after restriction, tensor/multiplicity blocks,
--- and later mixing by elements outside the chosen subgroup.
+-- Record genuine subgroup-level decomposition templates and strengthen the
+-- candidate protocol from dimension matching to character-value matching on a
+-- declared separating family of conjugacy classes.  The 2-local benchmark is
+-- stated in both trivial-inclusive and reduced form; 3A, 3B and 3C remain
+-- distinct candidate lanes.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -84,9 +86,27 @@ record TensorBranchingBenchmark : Set where
 
 open TensorBranchingBenchmark public
 
-conwayTwoLocalBenchmark : TensorBranchingBenchmark
-conwayTwoLocalBenchmark =
+conwayTwoLocalUnreducedBenchmark : TensorBranchingBenchmark
+conwayTwoLocalUnreducedBenchmark =
   tensorBranchingBenchmark 196884 4096 24 98280 300 refl
+
+-- Compatibility name retained for earlier clients: it denotes the
+-- trivial-inclusive 196884-dimensional benchmark.
+conwayTwoLocalBenchmark : TensorBranchingBenchmark
+conwayTwoLocalBenchmark = conwayTwoLocalUnreducedBenchmark
+
+conwayTwoLocalReducedBenchmark : TensorBranchingBenchmark
+conwayTwoLocalReducedBenchmark =
+  tensorBranchingBenchmark 196883 4096 24 98280 299 refl
+
+conwayTwoLocalUnreducedDimensionExact :
+  ambientTensorDimension conwayTwoLocalUnreducedBenchmark
+  ≡ tensorLeft conwayTwoLocalUnreducedBenchmark
+    * tensorRight conwayTwoLocalUnreducedBenchmark
+    + residualFirst conwayTwoLocalUnreducedBenchmark
+    + residualSecond conwayTwoLocalUnreducedBenchmark
+conwayTwoLocalUnreducedDimensionExact =
+  tensorPiecesSum conwayTwoLocalUnreducedBenchmark
 
 conwayTwoLocalDimensionExact :
   ambientTensorDimension conwayTwoLocalBenchmark
@@ -95,26 +115,60 @@ conwayTwoLocalDimensionExact :
     + residualFirst conwayTwoLocalBenchmark
     + residualSecond conwayTwoLocalBenchmark
 conwayTwoLocalDimensionExact =
-  tensorPiecesSum conwayTwoLocalBenchmark
+  conwayTwoLocalUnreducedDimensionExact
 
-------------------------------------------------------------------------
--- Falsifiable subgroup-candidate protocol.
-------------------------------------------------------------------------
+conwayTwoLocalReducedDimensionExact :
+  ambientTensorDimension conwayTwoLocalReducedBenchmark
+  ≡ tensorLeft conwayTwoLocalReducedBenchmark
+    * tensorRight conwayTwoLocalReducedBenchmark
+    + residualFirst conwayTwoLocalReducedBenchmark
+    + residualSecond conwayTwoLocalReducedBenchmark
+conwayTwoLocalReducedDimensionExact =
+  tensorPiecesSum conwayTwoLocalReducedBenchmark
 
-record CandidateSubgroupTest : Set where
+trivialInclusiveResidualIsReducedPlusOne : 300 ≡ 299 + 1
+trivialInclusiveResidualIsReducedPlusOne = refl
+
+trivialInclusiveAmbientIsReducedPlusOne : 196884 ≡ 196883 + 1
+trivialInclusiveAmbientIsReducedPlusOne = refl
+
+record CandidateSubgroupTest : Set₁ where
   constructor candidateSubgroupTest
   field
     subgroupNamed : Set
     embeddingWitness : Set
     knownAmbientRepresentationNamed : Set
     restrictionCharacterComputed : Set
+    representativeConjugacyClassesNamed : Set
+    characterValuesMatchedOnRepresentatives : Set
     proposedFiltrationPreserved : Set
     associatedGradedDimensionsMatched : Set
     outsideElementMixingChecked : Set
+    dimensionMatchUsedOnlyAsNecessaryCondition : Set
 
--- No candidate H has yet discharged this record.  A future implementation
--- must name H <= Monster and supply actual character/module data rather than
--- infer a connection from the arithmetic identity alone.
+data OrderThreeClass : Set where
+  class3A : OrderThreeClass
+  class3B : OrderThreeClass
+  class3C : OrderThreeClass
+
+data ThreeLocalNormalizerKind : Set where
+  threeTimesFi24Prime : ThreeLocalNormalizerKind
+  extraspecialThreeSuzuki : ThreeLocalNormalizerKind
+  symmetricThreeTimesThompson : ThreeLocalNormalizerKind
+
+normalizerKind : OrderThreeClass → ThreeLocalNormalizerKind
+normalizerKind class3A = threeTimesFi24Prime
+normalizerKind class3B = extraspecialThreeSuzuki
+normalizerKind class3C = symmetricThreeTimesThompson
+
+threeALaneIsDistinct : normalizerKind class3A ≡ threeTimesFi24Prime
+threeALaneIsDistinct = refl
+
+threeBLaneIsDistinct : normalizerKind class3B ≡ extraspecialThreeSuzuki
+threeBLaneIsDistinct = refl
+
+threeCLaneIsDistinct : normalizerKind class3C ≡ symmetricThreeTimesThompson
+threeCLaneIsDistinct = refl
 
 record BranchingAuthorityBoundary : Set where
   constructor branchingAuthorityBoundary
@@ -122,18 +176,23 @@ record BranchingAuthorityBoundary : Set where
     genuineSubgroupBranchingsExist : Set
     genuineSubgroupBranchingsExistWitness : genuineSubgroupBranchingsExist
 
-    dashiTenTernaryPlusReducedIsPublishedBranching : Set
-    dashiTenTernaryPlusReducedNotYetPublishedBranching :
-      dashiTenTernaryPlusReducedIsPublishedBranching → Set
+    dashiStructuredTernaryReducedIsPublishedBranching : Set
+    dashiStructuredTernaryReducedNotYetPublishedBranching :
+      dashiStructuredTernaryReducedIsPublishedBranching → Set
 
     numericalDimensionMatchSelectsCandidateSubgroup : Set
     numericalDimensionMatchDoesNotSelectCandidateSubgroup :
       numericalDimensionMatchSelectsCandidateSubgroup → Set
 
+    genericThreeLocalLaneIsSufficientlySpecified : Set
+    genericThreeLocalLaneIsNotSufficientlySpecified :
+      genericThreeLocalLaneIsSufficientlySpecified → Set
+
 canonicalBranchingAuthorityBoundary : BranchingAuthorityBoundary
 canonicalBranchingAuthorityBoundary =
   branchingAuthorityBoundary
     ⊤ tt
+    ⊥ (λ impossible → ⊥)
     ⊥ (λ impossible → ⊥)
     ⊥ (λ impossible → ⊥)
   where

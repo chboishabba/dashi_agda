@@ -2,14 +2,22 @@ module DASHI.Physics.Common.FiniteThreeCycleTorusExact where
 
 ------------------------------------------------------------------------
 -- PRIMARY SOURCES / CONTEXT
--- Audrey Terras, "Fourier Analysis on Finite Groups and Applications".
+--
+-- Audrey Terras,
+-- "Fourier Analysis on Finite Groups and Applications",
+-- Cambridge University Press, 1999.
 -- DOI: 10.1017/CBO9780511626265.
--- John D. Dixon and Brian Mortimer, "Permutation Groups".
+--
+-- John D. Dixon and Brian Mortimer,
+-- "Permutation Groups", Springer, 1996.
 -- DOI: 10.1007/978-1-4612-0731-3.
 --
 -- DASHI CONTRIBUTION
--- Exact two-dimensional three-cycle torus translations, commuting coordinate
--- shifts, a fixed completion channel and pullback on fields.
+-- Give the exact finite translation algebra of the two-dimensional
+-- three-cycle torus.  Each coordinate translation has order three, the two
+-- coordinate translations commute, and a distinguished completion channel is
+-- fixed.  Pullback on fields is the exact index-permutation ingredient of a
+-- wreath-style action.  No continuous-torus or physical theorem is asserted.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -73,6 +81,14 @@ completedTranslateSecond (ordinaryTorusChannel point) =
   ordinaryTorusChannel (translateSecond point)
 completedTranslateSecond completionChannel = completionChannel
 
+completionFixedByFirstTranslation :
+  completedTranslateFirst completionChannel ≡ completionChannel
+completionFixedByFirstTranslation = refl
+
+completionFixedBySecondTranslation :
+  completedTranslateSecond completionChannel ≡ completionChannel
+completionFixedBySecondTranslation = refl
+
 Field : Set → Set
 Field State = CompletedTorusChannel → State
 
@@ -103,3 +119,21 @@ pullbacksCommuteAt :
 pullbacksCommuteAt field (ordinaryTorusChannel point) =
   cong field (cong ordinaryTorusChannel (translationsCommute point))
 pullbacksCommuteAt field completionChannel = refl
+
+record FiniteTorusBoundary : Set where
+  constructor finiteTorusBoundary
+  field
+    completedTorusIsContinuousTorus : Set
+    completedTorusIsNotContinuousTorus :
+      completedTorusIsContinuousTorus → Set
+    fixedCompletionChannelIsAutomaticallyInvariantUnderExternalAction : Set
+    fixedCompletionChannelIsNotAutomaticallyInvariantUnderExternalAction :
+      fixedCompletionChannelIsAutomaticallyInvariantUnderExternalAction → Set
+
+canonicalFiniteTorusBoundary : FiniteTorusBoundary
+canonicalFiniteTorusBoundary =
+  finiteTorusBoundary
+    ⊥ (λ impossible → ⊥)
+    ⊥ (λ impossible → ⊥)
+  where
+  open import Data.Empty using (⊥)
