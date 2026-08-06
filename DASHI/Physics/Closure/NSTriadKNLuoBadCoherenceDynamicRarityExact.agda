@@ -17,19 +17,20 @@ module DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceDynamicRarityExact where
 --
 -- PURPOSE
 -- State and prove the exact final implication for the proposed direct F3
--- route.  The comparable-shell interaction is split into good-coherence,
--- bad-coherence and residual normalized squares.  If all three have one
--- common epsilon/3 tail, the total normalized interaction square tends to
--- zero.
+-- route. The comparable-shell interaction is split into good-coherence,
+-- bad-coherence and residual normalized squares. If all three have one common
+-- epsilon/3 tail, the total normalized interaction square tends to zero.
 --
 -- The module deliberately does not assert the new bad-set rarity estimate.
--- It isolates that estimate as the only genuinely new geometric producer.
+-- It isolates that estimate as the genuinely new geometric producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as ℕ using (_≤_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _/_; _+_; _≤_; _<_)
+  (ℚ; _/_; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -61,19 +62,29 @@ record CoherenceThreeWaySplit : Set where
 
 open CoherenceThreeWaySplit public
 
+record CommonThreeCutoff
+  (good bad residual : Nat → ℚ)
+  (epsilon : ℚ) : Set where
+  constructor common-three-cutoff
+  field
+    cutoff : Nat
+    bounds :
+      (shell : Nat) →
+      cutoff ℕ.≤ shell →
+      good shell ≤ oneThird * epsilon
+      × bad shell ≤ oneThird * epsilon
+      × residual shell ≤ oneThird * epsilon
+
+open CommonThreeCutoff public
+
 record JointThreeWayVanishing
   (good bad residual : Nat → ℚ) : Set where
   constructor joint-three-way-vanishing
   field
     commonEventuallySmall :
       (epsilon : ℚ) →
-      0ℚ < epsilon →
-      Nat ×
-      ((shell : Nat) →
-       Nat →
-       good shell ≤ oneThird * epsilon
-       × bad shell ≤ oneThird * epsilon
-       × residual shell ≤ oneThird * epsilon)
+      Int.+ 0 / 1 < epsilon →
+      CommonThreeCutoff good bad residual epsilon
 
 open JointThreeWayVanishing public
 
@@ -95,14 +106,12 @@ coherenceSplitVanishing split joint =
     (λ epsilon epsilonPositive →
       let
         witness = commonEventuallySmall joint epsilon epsilonPositive
-        cutoff = proj₁ witness
-        bounds = proj₂ witness
       in
       Limit.eventually-below
-        cutoff
+        (cutoff witness)
         (λ shell cutoff≤shell →
           let
-            componentBounds = bounds shell cutoff
+            componentBounds = bounds witness shell cutoff≤shell
             goodBound = proj₁ componentBounds
             badBound = proj₁ (proj₂ componentBounds)
             residualBound = proj₂ (proj₂ componentBounds)
