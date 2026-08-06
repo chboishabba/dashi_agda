@@ -32,13 +32,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoLowHighExponentBookkeepingCorrectedExac
 --
 -- Thus the first Taylor branch has the stronger 2^(-3(q-r)/2) gain, while
 -- the second branch has the weaker 2^(-(q-r)/2) gain and matches the final
--- displayed LH target exactly.  Squaring gives the already-implemented
--- kernels 2^(-3d) and 2^(-d), with the strong branch dominated by the weak.
+-- displayed LH target exactly. Squaring gives the already-implemented kernels
+-- 2^(-3d) and 2^(-d), with the strong branch dominated by the weak.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _+_; _*_; _-_)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.Nat using (Nat)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; _/_; _+_; _*_; _-_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNLuoSixThreeCenteredCommutatorScaleExact as Scale
@@ -50,13 +52,18 @@ two = Int.+ 2 / 1
 three = Int.+ 3 / 1
 fiveHalves = Int.+ 5 / 2
 
+minusTwo minusHalf minusThreeHalves : ℚ
+minusTwo = - two
+minusHalf = - half
+minusThreeHalves = - threeHalves
+
 branchOneRawExponent : ℚ → ℚ → ℚ
 branchOneRawExponent q r =
-  (Int.-[1+ 2 ] * q) + three * r + threeHalves * q
+  minusTwo * q + three * r + threeHalves * q
 
 branchTwoRawExponent : ℚ → ℚ → ℚ
 branchTwoRawExponent q r =
-  (Int.-[1+ 2 ] * q) + two * r + fiveHalves * q
+  minusTwo * q + two * r + fiveHalves * q
 
 criticalOutputExponent : ℚ → ℚ → ℚ
 criticalOutputExponent q r = threeHalves * r + q
@@ -71,7 +78,7 @@ weakGapExponent q r =
 
 branchOneRawSimplifies :
   (q r : ℚ) →
-  branchOneRawExponent q r ≡ (Int.-[1+ 1 ] / 2) * q + three * r
+  branchOneRawExponent q r ≡ minusHalf * q + three * r
 branchOneRawSimplifies q r = solve (q ∷ r ∷ [])
 
 branchTwoRawSimplifies :
@@ -91,18 +98,21 @@ branchTwoIsWeakGap q r = solve (q ∷ r ∷ [])
 
 finalDisplayedTargetMatchesBranchTwo :
   (q r : ℚ) →
-  (Int.-[1+ 1 ] / 2) * (q - r) + threeHalves * r + q
+  minusHalf * (q - r) + threeHalves * r + q
   ≡ branchTwoRawExponent q r
 finalDisplayedTargetMatchesBranchTwo q r = solve (q ∷ r ∷ [])
 
 firstBranchCriticalFactorization :
   (q r : ℚ) →
-  (Int.-[1+ 3 ] / 2) * (q - r) + threeHalves * r + q
+  minusThreeHalves * (q - r) + threeHalves * r + q
   ≡ branchOneRawExponent q r
 firstBranchCriticalFactorization q r = solve (q ∷ r ∷ [])
 
 -- The squared gap comparison itself is delegated to the already checked
 -- finite geometric module, so this audit and the shell budget share one source
 -- of truth rather than duplicating the order proof.
+strongSquaredGapBelowWeakSquaredGap :
+  (gap : Nat) →
+  Scale.strongBranchSquaredGap gap ≤ Scale.weakBranchSquaredGap gap
 strongSquaredGapBelowWeakSquaredGap =
   Scale.strongBranchDominatedByWeak
