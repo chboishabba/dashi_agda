@@ -10,6 +10,7 @@ bash scripts/check_conscious_access_round8_voa_grade_semantics.sh
 files=(
   DASHI/Biology/MoonshineModularFormCoefficientExact.agda
   DASHI/Biology/MoonshineOrbifoldSectorProjectorExact.agda
+  DASHI/Biology/MoonshineOrbifoldModularSectorActionExact.agda
   DASHI/Biology/MoonshineMonsterLieStringBigradingExact.agda
   DASHI/Biology/MoonshineGriessAutomorphismClassificationExact.agda
   DASHI/Biology/MonsterConstructionRouteComparisonExact.agda
@@ -31,12 +32,18 @@ checks=(
   'MoonshineOrbifoldSectorProjectorExact.agda:positivePlusNegativeFirst'
   'MoonshineOrbifoldSectorProjectorExact.agda:positiveProjectionIdempotentFirst'
   'MoonshineOrbifoldSectorProjectorExact.agda:negativeProjectionSwapOddFirst'
+  'MoonshineOrbifoldModularSectorActionExact.agda:SInvolutive'
+  'MoonshineOrbifoldModularSectorActionExact.agda:TInvolutive'
+  'MoonshineOrbifoldModularSectorActionExact.agda:STOrderThree'
+  'MoonshineOrbifoldModularSectorActionExact.agda:nontrivialCycleFirst'
+  'MoonshineOrbifoldModularSectorActionExact.agda:nontrivialCycleThird'
   'MoonshineMonsterLieStringBigradingExact.agda:oneOneRootMultiplicityExact'
   'MoonshineMonsterLieStringBigradingExact.agda:sameProductGivesSameSampleMultiplicity'
   'MoonshineGriessAutomorphismClassificationExact.agda:automorphismFixesUnit'
   'MoonshineGriessAutomorphismClassificationExact.agda:halfOmegaActsAsUnit'
   'MoonshineGriessAutomorphismClassificationExact.agda:restrictVOAAutomorphismToGriess'
   'MonsterConstructionRouteComparisonExact.agda:griessRouteIsNotVOARoute'
+  'MonsterConstructionRouteComparisonExact.agda:flmRouteDoesNotByItselfSupplyFullMcKayThompsonData'
   'MonsterConstructionRouteComparisonExact.agda:borcherdsAddsGeneralizedKacMoodyStructure'
   'MonsterConstructionRouteComparisonExact.agda:restrictionBridge'
 )
@@ -49,12 +56,14 @@ done
 
 grep -q '10.1073/pnas.81.10.3256' DASHI/Biology/MoonshineModularFormCoefficientExact.agda
 grep -q '10.1007/s002200000242' DASHI/Biology/MoonshineOrbifoldSectorProjectorExact.agda
+grep -q '10.1215/S0012-7094-98-09312-6' DASHI/Biology/MoonshineOrbifoldModularSectorActionExact.agda
 grep -q '10.1016/0001-8708(90)90067-W' DASHI/Biology/MoonshineMonsterLieStringBigradingExact.agda
 grep -q '10.1007/BF01389186' DASHI/Biology/MoonshineGriessAutomorphismClassificationExact.agda
 grep -q '10.1112/blms/11.3.308' DASHI/Biology/MonsterConstructionRouteComparisonExact.agda
 
 grep -q 'finiteCoefficientConvolutionDoesNotProveSL2ZModularity' DASHI/Biology/MoonshineModularFormCoefficientExact.agda
 grep -q 'fixed-point algebra' DASHI/Biology/MoonshineOrbifoldSectorProjectorExact.agda
+grep -q 'sectorPermutationDoesNotProveAnalyticModularity' DASHI/Biology/MoonshineOrbifoldModularSectorActionExact.agda
 grep -q 'finiteMultiplicityPrefixDoesNotConstructBRSTCohomology' DASHI/Biology/MoonshineMonsterLieStringBigradingExact.agda
 grep -q 'converseExtensionRequiresSeparateTheorem' DASHI/Biology/MoonshineGriessAutomorphismClassificationExact.agda
 grep -q 'equalDimensionDoesNotIdentifyRoutes' DASHI/Biology/MonsterConstructionRouteComparisonExact.agda
