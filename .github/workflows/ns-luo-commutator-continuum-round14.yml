@@ -27,6 +27,16 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: Publish pending status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state='pending' \
+            -f context='round14-agda' \
+            -f description='Round 14 Agda checker running'
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
