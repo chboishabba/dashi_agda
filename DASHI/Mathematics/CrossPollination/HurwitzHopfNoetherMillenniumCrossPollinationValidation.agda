@@ -23,6 +23,7 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound30StrongCouplingFunct
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact
 import DASHI.Mathematics.Algebra.CompositionAlgebraCoreExact
+import DASHI.Mathematics.Algebra.HurwitzFrobeniusClassificationBoundary
 import DASHI.Mathematics.Algebra.HurwitzFrobeniusLawProfileExact
 import DASHI.Mathematics.Algebra.NoetherianityMeaningSeparationExact
 import DASHI.Mathematics.Algebra.RationalC2HopfAlgebraExact
@@ -30,6 +31,7 @@ import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact
 import DASHI.Mathematics.Symmetry.NoetherDissipationDefectExact
 import DASHI.Mathematics.Topology.HopfInvariantOneDimensionGateExact
 import DASHI.Mathematics.Topology.QuaternionHopfRadiusExact
+import DASHI.Mathematics.Topology.QuaternionHopfUnitOrbitExact
 import DASHI.Mathematics.CrossPollination.MillenniumProblemStructuralRelevanceGateExact
 
 import DASHI.Physics.YangMills.YangMillsKleinNoetherGaugeInvariantBridgeExact
