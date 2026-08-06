@@ -25,7 +25,9 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
+import Data.Rational.Properties as ℚProperties
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 record Vector2 : Set where
   constructor vector2
@@ -166,10 +168,12 @@ basisOne = vector2 1ℚ 0ℚ
 basisTwo = vector2 0ℚ 1ℚ
 
 basisOneNonzero : basisOne ≡ zeroVector → ⊥
-basisOneNonzero ()
+basisOneNonzero equality =
+  ℚProperties.1≢0 (cong xCoordinate equality)
 
 basisTwoNonzero : basisTwo ≡ zeroVector → ⊥
-basisTwoNonzero ()
+basisTwoNonzero equality =
+  ℚProperties.1≢0 (cong yCoordinate equality)
 
 eigenpairTwo : ExactEigenpair diagonalTwoFive
 eigenpairTwo = exactEigenpair two basisOne basisOneNonzero
