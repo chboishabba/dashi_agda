@@ -27,7 +27,8 @@ module DASHI.Physics.YangMills.BalabanStrongCouplingSixteenAtomIncidenceBudgetEx
 --
 --                    (n_i+n_j)/2.
 --
--- Summing the actual sixteen-constructor enumeration gives exactly
+-- Both the canonical human-facing constructor order and the actual recursive
+-- product-rule order sum exactly to
 --
 --                  4 (n_0+n_1+n_2+n_3).
 --
@@ -50,6 +51,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.YangMills.BalabanP33WilsonPlaquetteSecondVariationPlacementsExact as Placement
+import DASHI.Physics.YangMills.BalabanStrongCouplingLiteralAtomGeneratedProductBridgeExact as Generated
 
 sumRational : List ℚ → ℚ
 sumRational [] = 0ℚ
@@ -137,6 +139,12 @@ allPlacementBudget n0 n1 n2 n3 =
     (map (λ placement → placementYoungBudget placement n0 n1 n2 n3)
       Placement.plaquetteSecondVariationPlacements4)
 
+recursivePlacementBudget : ℚ → ℚ → ℚ → ℚ → ℚ
+recursivePlacementBudget n0 n1 n2 n3 =
+  sumRational
+    (map (λ placement → placementYoungBudget placement n0 n1 n2 n3)
+      Generated.recursivePlacementOrder4)
+
 localInsertionCharge : ℚ → ℚ → ℚ → ℚ → ℚ
 localInsertionCharge n0 n1 n2 n3 = n0 + n1 + n2 + n3
 
@@ -159,6 +167,20 @@ sixteenPlacementBudgetExact :
   allPlacementBudget n0 n1 n2 n3
   ≡ (+ 4 / 1) * localInsertionCharge n0 n1 n2 n3
 sixteenPlacementBudgetExact n0 n1 n2 n3 =
+  solve (n0 ∷ n1 ∷ n2 ∷ n3 ∷ [])
+
+recursiveSixteenPlacementBudgetExact :
+  ∀ n0 n1 n2 n3 →
+  recursivePlacementBudget n0 n1 n2 n3
+  ≡ (+ 4 / 1) * localInsertionCharge n0 n1 n2 n3
+recursiveSixteenPlacementBudgetExact n0 n1 n2 n3 =
+  solve (n0 ∷ n1 ∷ n2 ∷ n3 ∷ [])
+
+canonicalAndRecursiveBudgetsAgree :
+  ∀ n0 n1 n2 n3 →
+  allPlacementBudget n0 n1 n2 n3
+  ≡ recursivePlacementBudget n0 n1 n2 n3
+canonicalAndRecursiveBudgetsAgree n0 n1 n2 n3 =
   solve (n0 ∷ n1 ∷ n2 ∷ n3 ∷ [])
 
 plaquettesPerOrientedEdge : ℚ → ℚ
