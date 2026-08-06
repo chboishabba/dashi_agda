@@ -33,7 +33,7 @@ module DASHI.Mathematics.Algebra.CompositionAlgebraCoreExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _*_)
 
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as CD
@@ -52,51 +52,47 @@ record CompositionCore : Set₁ where
       ≡ multiply (conjugate right) (conjugate left)
     normComposes : ∀ left right →
       normSq (multiply left right)
-      ≡ normSq left Data.Rational.Base.* normSq right
+      ≡ normSq left * normSq right
 
 open CompositionCore public
 
 record AssociativeCompositionCore : Set₁ where
   field
-    compositionCore : CompositionCore
+    associativeCore : CompositionCore
     associative : ∀ left middle right →
-      multiply compositionCore
-        (multiply compositionCore left middle) right
-      ≡ multiply compositionCore left
-        (multiply compositionCore middle right)
-
-open AssociativeCompositionCore public
+      multiply associativeCore
+        (multiply associativeCore left middle) right
+      ≡ multiply associativeCore left
+        (multiply associativeCore middle right)
 
 record AlternativeCompositionCore : Set₁ where
   field
-    compositionCore : CompositionCore
+    alternativeCore : CompositionCore
     leftAlternative : ∀ left right →
-      multiply compositionCore
-        (multiply compositionCore left left) right
-      ≡ multiply compositionCore left
-        (multiply compositionCore left right)
+      multiply alternativeCore
+        (multiply alternativeCore left left) right
+      ≡ multiply alternativeCore left
+        (multiply alternativeCore left right)
     rightAlternative : ∀ left right →
-      multiply compositionCore
-        (multiply compositionCore left right) right
-      ≡ multiply compositionCore left
-        (multiply compositionCore right right)
+      multiply alternativeCore
+        (multiply alternativeCore left right) right
+      ≡ multiply alternativeCore left
+        (multiply alternativeCore right right)
     flexible : ∀ left right →
-      multiply compositionCore
-        (multiply compositionCore left right) left
-      ≡ multiply compositionCore left
-        (multiply compositionCore right left)
-
-open AlternativeCompositionCore public
+      multiply alternativeCore
+        (multiply alternativeCore left right) left
+      ≡ multiply alternativeCore left
+        (multiply alternativeCore right left)
 
 record AssociativityFailure
     (core : CompositionCore) : Set where
   field
-    left middle right : Carrier core
+    failureLeft failureMiddle failureRight : Carrier core
     associativityWouldContradict :
-      (multiply core (multiply core left middle) right
-      ≡ multiply core left (multiply core middle right)) → ⊥
-
-open AssociativityFailure public
+      (multiply core
+        (multiply core failureLeft failureMiddle) failureRight
+      ≡ multiply core failureLeft
+        (multiply core failureMiddle failureRight)) → ⊥
 
 ------------------------------------------------------------------------
 -- Concrete repository instances.
@@ -115,7 +111,7 @@ quaternionCompositionCore = record
 
 quaternionAssociativeCompositionCore : AssociativeCompositionCore
 quaternionAssociativeCompositionCore = record
-  { compositionCore = quaternionCompositionCore
+  { associativeCore = quaternionCompositionCore
   ; associative = Q.quaternionMultiplyAssociative
   }
 
@@ -132,7 +128,7 @@ octonionCompositionCore = record
 
 octonionAlternativeCompositionCore : AlternativeCompositionCore
 octonionAlternativeCompositionCore = record
-  { compositionCore = octonionCompositionCore
+  { alternativeCore = octonionCompositionCore
   ; leftAlternative = O.octonionLeftAlternative
   ; rightAlternative = O.octonionRightAlternative
   ; flexible = O.octonionFlexible
@@ -141,9 +137,9 @@ octonionAlternativeCompositionCore = record
 octonionAssociativityFailure :
   AssociativityFailure octonionCompositionCore
 octonionAssociativityFailure = record
-  { left = O.e1
-  ; middle = O.e2
-  ; right = O.e4
+  { failureLeft = O.e1
+  ; failureMiddle = O.e2
+  ; failureRight = O.e4
   ; associativityWouldContradict = O.e124AssociativityFails
   }
 
