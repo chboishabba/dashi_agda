@@ -18,39 +18,68 @@ module DASHI.Physics.YangMills.BalabanStrongCouplingLiteralAtomGeneratedProductB
 --
 -- DASHI CONTRIBUTION
 --
--- Eliminate a possible correspondence seam between the named sixteen atoms
--- whose norms are computed in Round Thirty One and the recursive second
--- derivative of the actual ordered four-factor quaternion product.  Mapping
--- the named placement interpretation over the literal constructor enumeration
--- is definitionally the generated `secondVariationTerms` list.
+-- Eliminate a correspondence seam between the named sixteen atoms whose norms
+-- are computed in Round Thirty One and the recursive second derivative of the
+-- actual ordered four-factor quaternion product.
 --
--- The specialization to two positive and two inverse right-exponential jets is
--- therefore not an independently supplied atom family: it is exactly the
--- product-rule output used by the Wilson Hessian.
+-- The recursive product rule has a specific generated order: the second atom
+-- at slot zero, the two copies of the three first/first descendants involving
+-- slot zero, then the inherited three-factor second derivative, recursively.
+-- This module names that exact order and proves definitionally that mapping the
+-- placement interpretation over it is `secondVariationTerms`.
+--
+-- The canonical human-facing enumeration and this recursive enumeration contain
+-- the same four diagonal and twelve ordered-cross constructors, but are not
+-- falsely identified as order-equal lists.  Their scalar budgets are checked
+-- independently against the same closed formula.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
-open import Data.List.Base using (map)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (length; map)
 
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Physics.YangMills.BalabanP33WilsonPlaquetteSecondVariationPlacementsExact as Placement
 import DASHI.Physics.YangMills.BalabanStrongCouplingLiteralQuaternionAtomNormExact as Atom
 
-placementAtoms :
+recursivePlacementOrder4 :
+  List Placement.PlaquetteSecondVariationPlacement4
+recursivePlacementOrder4 =
+  Placement.secondAt0 ∷
+  Placement.firstFirst Placement.ordered01 ∷
+  Placement.firstFirst Placement.ordered02 ∷
+  Placement.firstFirst Placement.ordered03 ∷
+  Placement.firstFirst Placement.ordered10 ∷
+  Placement.firstFirst Placement.ordered20 ∷
+  Placement.firstFirst Placement.ordered30 ∷
+  Placement.secondAt1 ∷
+  Placement.firstFirst Placement.ordered12 ∷
+  Placement.firstFirst Placement.ordered13 ∷
+  Placement.firstFirst Placement.ordered21 ∷
+  Placement.firstFirst Placement.ordered31 ∷
+  Placement.secondAt2 ∷
+  Placement.firstFirst Placement.ordered23 ∷
+  Placement.firstFirst Placement.ordered32 ∷
+  Placement.secondAt3 ∷ []
+
+recursivePlacementOrderCountExact :
+  length recursivePlacementOrder4 ≡ 16
+recursivePlacementOrderCountExact = refl
+
+recursivePlacementAtoms :
   Q.QuaternionFactorJet → Q.QuaternionFactorJet →
   Q.QuaternionFactorJet → Q.QuaternionFactorJet →
   List Q.RationalQuaternion
-placementAtoms jet0 jet1 jet2 jet3 =
+recursivePlacementAtoms jet0 jet1 jet2 jet3 =
   map (Atom.placementAtom jet0 jet1 jet2 jet3)
-    Placement.plaquetteSecondVariationPlacements4
+    recursivePlacementOrder4
 
-placementAtomsMatchGeneratedProductRule :
+recursivePlacementAtomsMatchGeneratedProductRule :
   ∀ jet0 jet1 jet2 jet3 →
-  placementAtoms jet0 jet1 jet2 jet3
+  recursivePlacementAtoms jet0 jet1 jet2 jet3
   ≡ Q.secondVariationTerms
       (Q.fourFactorJets jet0 jet1 jet2 jet3)
-placementAtomsMatchGeneratedProductRule jet0 jet1 jet2 jet3 = refl
+recursivePlacementAtomsMatchGeneratedProductRule jet0 jet1 jet2 jet3 = refl
 
 orientedPlaquetteJets :
   Q.RationalQuaternion → Q.RationalQuaternion →
@@ -66,23 +95,23 @@ orientedPlaquetteJets unit0 insertion0 unit1 insertion1
     (Atom.inverseUnitJet unit2 insertion2)
     (Atom.inverseUnitJet unit3 insertion3)
 
-orientedPlacementAtomsAreGeneratedTerms :
+orientedRecursiveAtomsAreGeneratedTerms :
   ∀ unit0 insertion0 unit1 insertion1
     unit2 insertion2 unit3 insertion3 →
   map
     (Atom.orientedPlaquetteAtom
       unit0 insertion0 unit1 insertion1
       unit2 insertion2 unit3 insertion3)
-    Placement.plaquetteSecondVariationPlacements4
+    recursivePlacementOrder4
   ≡ Q.secondVariationTerms
       (orientedPlaquetteJets
         unit0 insertion0 unit1 insertion1
         unit2 insertion2 unit3 insertion3)
-orientedPlacementAtomsAreGeneratedTerms
+orientedRecursiveAtomsAreGeneratedTerms
     unit0 insertion0 unit1 insertion1
     unit2 insertion2 unit3 insertion3 = refl
 
-orientedPlacementAtomSumIsWilsonSecondVariation :
+orientedRecursiveAtomSumIsWilsonSecondVariation :
   ∀ unit0 insertion0 unit1 insertion1
     unit2 insertion2 unit3 insertion3 →
   Q.sumQuaternion
@@ -90,12 +119,12 @@ orientedPlacementAtomSumIsWilsonSecondVariation :
       (Atom.orientedPlaquetteAtom
         unit0 insertion0 unit1 insertion1
         unit2 insertion2 unit3 insertion3)
-      Placement.plaquetteSecondVariationPlacements4)
+      recursivePlacementOrder4)
   ≡ Q.orderedSecondProduct
       (orientedPlaquetteJets
         unit0 insertion0 unit1 insertion1
         unit2 insertion2 unit3 insertion3)
-orientedPlacementAtomSumIsWilsonSecondVariation
+orientedRecursiveAtomSumIsWilsonSecondVariation
     unit0 insertion0 unit1 insertion1
     unit2 insertion2 unit3 insertion3 =
   Q.sumSecondVariationTermsExact
