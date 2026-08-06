@@ -9,11 +9,15 @@ import DASHI.Physics.DarkSector.MetastableLifetime as Lifetime
 import DASHI.Physics.DarkSector.BoostedDecayGeometry as Boost
 import DASHI.Physics.DarkSector.DisplacedVertex as Vertex
 import DASHI.Physics.DarkSector.TriggerCensoring as Trigger
+import DASHI.Physics.DarkSector.LinkedColliderChainExact as Linked
 import DASHI.Physics.DarkSector.DarkSectorColliderSourceAtlas as Sources
 import DASHI.Physics.DarkSector.DarkSectorColliderBoundary as Boundary
 
 colliderBoundaryExists : Boundary.DarkSectorColliderBoundary
 colliderBoundaryExists = Boundary.canonicalDarkSectorColliderBoundary
+
+linkedColliderChainExists : Linked.LinkedColliderChain
+linkedColliderChainExists = Linked.canonicalLinkedColliderChain
 
 sectorRegression :
   Sector.classifyDetectorVisibility Sector.canonicalHiddenLLP
@@ -23,10 +27,10 @@ sectorRegression = refl
 
 portalRegression :
   Portal.portalAllowed Portal.canonicalQuadraticHiggsPortal ≡ true
-portalRegression = refl
+portalRegression = Linked.linkedPortalAllowed
 
 decayGraphRegression : Decay.VisiblePortalChain
-decayGraphRegression = Decay.canonicalVisiblePortalChain
+decayGraphRegression = Linked.linkedVisibleIntermediate
 
 lifetimeRegression :
   Lifetime.widthUnits Lifetime.canonicalLongLivedDecay
@@ -34,7 +38,7 @@ lifetimeRegression :
   Lifetime.lifetimeUnits Lifetime.canonicalLongLivedDecay
   ≡
   Lifetime.reciprocalScale Lifetime.canonicalLongLivedDecay
-lifetimeRegression = refl
+lifetimeRegression = Linked.linkedReciprocalLifetime
 
 metastabilityRegression :
   Lifetime.visibilityAtAge Lifetime.ageThree ≡ Lifetime.hiddenPhase
@@ -46,17 +50,37 @@ boostedDisplacementRegression :
   Boost.laboratoryDisplacement Boost.canonicalBoostedDecay ≡ 8
 boostedDisplacementRegression = refl
 
+linkedLifetimeBoostRegression :
+  Boost.properLifetimeUnits
+    (Linked.boostedDatum
+      (Linked.boostedStage Linked.canonicalLinkedColliderChain))
+  ≡
+  Lifetime.lifetimeUnits
+    (Linked.lifetimeDatum
+      (Linked.metastableStage Linked.canonicalLinkedColliderChain))
+linkedLifetimeBoostRegression = Linked.linkedLifetimeMatchesBoost
+
 vertexRegression :
   Vertex.vertexDisplacement Vertex.canonicalDisplacedEvent ≡ 8
   ×
   Vertex.isDisplacedVertex Vertex.canonicalDisplacedEvent ≡ true
-vertexRegression = refl , refl
+vertexRegression = refl , Linked.linkedEventIsDisplaced
+
+linkedBoostEventRegression :
+  Vertex.vertexDisplacement
+    (Linked.reconstructedEvent
+      (Linked.detectionStage Linked.canonicalLinkedColliderChain))
+  ≡
+  Boost.laboratoryDisplacement
+    (Linked.boostedDatum
+      (Linked.boostedStage Linked.canonicalLinkedColliderChain))
+linkedBoostEventRegression = Linked.linkedDisplacementMatchesEvent
 
 triggerRegression :
   Trigger.promptTrigger Vertex.canonicalDisplacedEvent ≡ Trigger.rejectEvent
   ×
   Trigger.llpTrigger Vertex.canonicalDisplacedEvent ≡ Trigger.acceptEvent
-triggerRegression = refl , refl
+triggerRegression = Linked.linkedPromptRejects , Linked.linkedLLPAccepts
 
 censoringRegression :
   Trigger.recordedSignalCount 5 2 0
