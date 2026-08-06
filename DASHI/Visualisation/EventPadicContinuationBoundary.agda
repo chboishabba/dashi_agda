@@ -3,20 +3,28 @@ module DASHI.Visualisation.EventPadicContinuationBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Visualisation.EventFilamentFieldExact as Event
+import DASHI.Visualisation.EventFilamentPersistenceExact as Persistence
 import DASHI.Visualisation.SelfConsistentEventRendererExact as Renderer
+import DASHI.Visualisation.RendererStabilityExact as Stability
 import DASHI.Biology.TernaryCyclicDialecticExact as Cyclic
+import DASHI.Biology.TernarySoftCarryLogicExact as Soft
 import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.RenderablePadicReasoningFieldExact as Padic
+import DASHI.Biology.PadicLODConsistencyExact as Consistency
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
 import DASHI.Visualisation.EventPadicSourceAtlas as Sources
 
 record EventPadicContinuationBoundary : Set where
   field
     eventFieldBoundary : Event.EventFilamentFieldBoundary
+    eventPersistenceBoundary : Persistence.EventFilamentPersistenceBoundary
     selfConsistentRendererBoundary : Renderer.SelfConsistentRendererBoundary
+    rendererStabilityBoundary : Stability.RendererStabilityBoundary
     ternaryCyclicBoundary : Cyclic.TernaryCyclicDialecticBoundary
+    ternarySoftCarryLogicBoundary : Soft.TernarySoftCarryLogicBoundary
     renderablePadicBoundary : Padic.RenderablePadicReasoningBoundary
+    padicLODConsistencyBoundary : Consistency.PadicLODConsistencyBoundary
 
     additiveEventFieldWitness :
       Event.scalarFieldSample ≡ 10
@@ -30,6 +38,11 @@ record EventPadicContinuationBoundary : Set where
       Event.Before
         (Event.edgeSource Event.canonicalEdge)
         (Event.edgeTarget Event.canonicalEdge)
+
+    thresholdFiltrationWitness :
+      {event : Persistence.EventId} →
+      Persistence.SuperlevelMember Persistence.highThreshold event →
+      Persistence.SuperlevelMember Persistence.lowThreshold event
 
     ridgeCodimensionWitness :
       Event.ridgeNormalDirections 4 1 ≡ 3
@@ -46,6 +59,11 @@ record EventPadicContinuationBoundary : Set where
 
     commonAttenuationCancellationWitness :
       Renderer.baseProfile ≡ Renderer.uniformlyAttenuatedProfile
+
+    exactStraightAlphaWitness :
+      Stability.frontToBackAlpha Stability.half Stability.threeQuarters
+      ≡
+      Stability.fraction 14 16
 
     cyclicAssociativityWitness :
       (a b c : Carry.TriResidue) →
@@ -73,6 +91,29 @@ record EventPadicContinuationBoundary : Set where
       ≡
       Carry.basisMass (Carry.cyclicAdd3 a b)
 
+    softCarryMassWitness :
+      (x y carry : Triadic.KernelTrit) →
+      Soft.carryPairMassTotal (Soft.hardCarryAsSoftOneHot x y carry)
+      ≡
+      1
+
+    designationChoiceWitness :
+      Soft.onePremiseConsequence
+        Soft.trueOnlyScheme
+        Soft.schemeSensitiveValuation
+        Soft.propositionP
+        Soft.propositionQ
+      ≡
+      true
+      ×
+      Soft.onePremiseConsequence
+        Soft.neutralOrTrueScheme
+        Soft.schemeSensitiveValuation
+        Soft.propositionP
+        Soft.propositionQ
+      ≡
+      false
+
     characterHomomorphismWitness :
       (a b : Carry.TriResidue) →
       Cyclic.character (Carry.cyclicAdd3 a b)
@@ -89,6 +130,18 @@ record EventPadicContinuationBoundary : Set where
 
     parentMassWitness :
       LOD.aggregateNat LOD.canonicalChildMasses ≡ 9
+
+    conditionalZoomWitness :
+      3 * Consistency.densityAtZoom Consistency.coarseDepth
+      ≡
+      Consistency.densityAtZoom Consistency.refinedDepth
+
+    unequalMassNormalisationWitness :
+      Consistency.averageAlreadyNormalisedChildAWeights
+      ≡
+      Consistency.normaliseAggregatedClassAMass
+      →
+      ⊥
 
     prefixLocalConstancyWitness :
       Padic.prefixKernel Padic.localCylinderPointA
@@ -110,26 +163,43 @@ canonicalEventPadicContinuationBoundary :
 canonicalEventPadicContinuationBoundary =
   record
     { eventFieldBoundary = Event.canonicalEventFilamentFieldBoundary
+    ; eventPersistenceBoundary =
+        Persistence.canonicalEventFilamentPersistenceBoundary
     ; selfConsistentRendererBoundary =
         Renderer.canonicalSelfConsistentRendererBoundary
+    ; rendererStabilityBoundary =
+        Stability.canonicalRendererStabilityBoundary
     ; ternaryCyclicBoundary = Cyclic.canonicalTernaryCyclicDialecticBoundary
+    ; ternarySoftCarryLogicBoundary =
+        Soft.canonicalTernarySoftCarryLogicBoundary
     ; renderablePadicBoundary = Padic.canonicalRenderablePadicReasoningBoundary
+    ; padicLODConsistencyBoundary =
+        Consistency.canonicalPadicLODConsistencyBoundary
     ; additiveEventFieldWitness = Event.scalarFieldSampleIsTen
     ; correctedSharpnessWitness = refl , refl
     ; temporalGraphForwardWitness = Event.edgeIsForwardByConstruction
+    ; thresholdFiltrationWitness = Persistence.highIncludedInLow
     ; ridgeCodimensionWitness = Event.oneDimensionalRidgeInFourHasThreeNormals
     ; finiteFixedPointConvergenceWitness = Renderer.seedConvergesInTwoSteps
     ; finiteFixedPointUniquenessWitness = Renderer.fixedPointUnique
     ; commonAttenuationCancellationWitness =
         Renderer.uniformAttenuationCancelsFromComposition
+    ; exactStraightAlphaWitness = Stability.canonicalCompositedAlpha
     ; cyclicAssociativityWitness = Carry.cyclicAdd3Associative
     ; cyclicInverseWitness = Cyclic.cyclicInverseRight
     ; carryResidualWitness = Carry.positiveOverflowLifts
     ; softOneHotExactnessWitness = Carry.basisConvolutionExact
+    ; softCarryMassWitness = Soft.hardCarrySoftOutputHasUnitMass
+    ; designationChoiceWitness =
+        Soft.trueOnlyConsequenceIsVacuous ,
+        Soft.neutralDesignatedConsequenceFails
     ; characterHomomorphismWitness = Cyclic.characterIsHomomorphism
     ; depthNineCountWitness = Padic.depthNineCountIs19683
     ; depthNineEmbeddingWitness = Padic.sampleDepthNineVoxel
     ; parentMassWitness = LOD.canonicalParentMassIsNine
+    ; conditionalZoomWitness = Consistency.coarseExpectationRecoversParent
+    ; unequalMassNormalisationWitness =
+        Consistency.unequalMassNormalisationsDiffer
     ; prefixLocalConstancyWitness =
         Padic.kernelLocallyConstantOnDepthTwoCylinder
     ; addressRetentionWitness = Padic.canonicalFieldRetainsAddress
