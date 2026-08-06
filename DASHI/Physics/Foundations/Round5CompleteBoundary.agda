@@ -11,6 +11,12 @@ import DASHI.Physics.DarkSector.DarkSectorColliderBoundary as Collider
 import DASHI.Physics.DarkSector.DisplacedVertex as Vertex
 import DASHI.Physics.DarkSector.TriggerCensoring as Trigger
 import DASHI.Visualisation.AttachedVisualisationBoundary as Visualisation
+import DASHI.Visualisation.EventPadicContinuationBoundary as EventPadic
+import DASHI.Visualisation.EventFilamentFieldExact as Event
+import DASHI.Visualisation.SelfConsistentEventRendererExact as Renderer
+import DASHI.Biology.TernaryCyclicDialecticExact as Cyclic
+import DASHI.Biology.TriadicCarryResidualExact as Carry
+import DASHI.Biology.RenderablePadicReasoningFieldExact as Padic
 import DASHI.Physics.Foundations.TriToBiSingularJunctionExact as Junction
 import DASHI.Physics.Foundations.TriToBiPhaseDialecticExact as Phase
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
@@ -28,6 +34,8 @@ record Round5CompleteBoundary : Set where
     colliderBoundary : Collider.DarkSectorColliderBoundary
     attachedVisualisationBoundary :
       Visualisation.AttachedVisualisationBoundary
+    eventPadicContinuationBoundary :
+      EventPadic.EventPadicContinuationBoundary
 
     reversibleHistorySubsystem :
       (configuration : History.Configuration) →
@@ -97,6 +105,28 @@ record Round5CompleteBoundary : Set where
           (Adapter.convolveScaled
             (Adapter.extractMeasure Adapter.sourceB)))
 
+    eventFieldAddsPositiveContributions :
+      Event.scalarFieldSample ≡ 10
+
+    selfSharpeningFiniteFixedPoint :
+      Renderer.fieldOperator Renderer.densityFixed
+      ≡
+      Renderer.densityFixed
+
+    ternaryCyclicInverse :
+      (a : Carry.TriResidue) →
+      Cyclic.cyclicAdd3 a (Cyclic.inverseResidue a)
+      ≡
+      Cyclic.zeroResidue
+
+    renderablePadicDepthNineCount :
+      Padic.depthNinePrefixCount ≡ 19683
+
+    renderablePadicRetainsAddress :
+      Padic.addressMetadataRetained Padic.canonicalRenderableReasoningField
+      ≡
+      true
+
 open Round5CompleteBoundary public
 
 canonicalRound5CompleteBoundary : Round5CompleteBoundary
@@ -108,6 +138,8 @@ canonicalRound5CompleteBoundary =
     ; colliderBoundary = Collider.canonicalDarkSectorColliderBoundary
     ; attachedVisualisationBoundary =
         Visualisation.canonicalAttachedVisualisationBoundary
+    ; eventPadicContinuationBoundary =
+        EventPadic.canonicalEventPadicContinuationBoundary
     ; reversibleHistorySubsystem =
         History.reversibleStepInvolutive
     ; residueSixReturns =
@@ -132,4 +164,14 @@ canonicalRound5CompleteBoundary =
         Receipt.sourceReceiptDoesNotClaimExecutedBenchmark
     ; distinctSourcesCanShareCoarseImage =
         Adapter.differentSourcesSameCoarseImage
+    ; eventFieldAddsPositiveContributions =
+        Event.scalarFieldSampleIsTen
+    ; selfSharpeningFiniteFixedPoint =
+        Renderer.fixedStateIsFixed
+    ; ternaryCyclicInverse =
+        Cyclic.cyclicInverseRight
+    ; renderablePadicDepthNineCount =
+        Padic.depthNineCountIs19683
+    ; renderablePadicRetainsAddress =
+        Padic.canonicalFieldRetainsAddress
     }
