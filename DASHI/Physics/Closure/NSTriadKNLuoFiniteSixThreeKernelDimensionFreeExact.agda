@@ -19,7 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact 
 --
 -- PURPOSE
 -- Replace the eight-point Holder theorem and its factor 64 by the exact
--- arbitrary-finite constant-one theorem.  For each centered Taylor branch,
+-- arbitrary-finite constant-one theorem. For each centered Taylor branch,
 --
 --   branchL2Squared <= M2Squared * sum_i (a_i b_i)^2,
 --
@@ -37,7 +37,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact 
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+  (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -98,8 +98,10 @@ branchCubeBound dataSet =
     holderBound =
       Holder.finiteSixThreeHolderRadicalFree (holderPairs dataSet)
 
+    momentCubeNN :
+      0ℚ ≤ Holder.cube (kernelSecondMomentSquared dataSet)
     momentCubeNN =
-      Holder.cubeNonnegative
+      Eight.cubeNonnegative
         (kernelSecondMomentSquared dataSet)
         (kernelSecondMomentSquaredNonnegative dataSet)
 
