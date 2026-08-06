@@ -3,8 +3,10 @@ module DASHI.Physics.Foundations.CabarlahPalestineRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.CabarlahClaimStatusExact as Status
+import DASHI.Physics.Foundations.CabarlahEvidenceWitnessExact as Witness
 import DASHI.Physics.Foundations.CabarlahHistoricalLayerExact as History
 import DASHI.Physics.Foundations.CabarlahToponymTranscriptionExact as Toponym
+import DASHI.Physics.Foundations.CabarlahSignalInferenceExact as Signal
 import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact as Circuit
 import DASHI.Physics.Foundations.FrontierEnemyPersistenceExact as Persistence
@@ -25,6 +27,18 @@ communistConcessionRemainsRejected :
 communistConcessionRemainsRejected =
   Status.communistBoundaryClaimIsRefuted
 
+communistConcessionHasNoFactWitness :
+  Witness.EvidenceWitness Status.communistConcessionBoundaryAtCabarlah
+  → ⊥
+communistConcessionHasNoFactWitness =
+  Witness.noCommunistConcessionBoundaryWitness
+
+uniquePronunciationHasNoFactWitness :
+  Witness.EvidenceWitness Status.exactIndigenousSourcePronunciation
+  → ⊥
+uniquePronunciationHasNoFactWitness =
+  Witness.noUniqueSourcePronunciationWitness
+
 brisbaneLatitudeArithmeticRegression :
   274261 + 444 ≡ 274705
 brisbaneLatitudeArithmeticRegression = refl
@@ -43,12 +57,25 @@ signalsLineageReachesBorneoRegression =
   History.wartimeLineageReachesBorneoInTwo
 
 ------------------------------------------------------------------------
--- Loss and abstraction regressions.
+-- Loss, interpretation, and abstraction regressions.
 
 toponymTranscriptionRemainsNonInjective :
   ¬ Toponym.InjectiveColonialRender
 toponymTranscriptionRemainsNonInjective =
   Toponym.colonialRenderIsNotInjective
+
+signalInferenceRemainsNonInjective :
+  ¬ Signal.SignalInferenceInjective
+signalInferenceRemainsNonInjective =
+  Signal.signalInferenceIsNotInjective
+
+signSignalComparisonRemainsStructural :
+  Signal.interpretationComparison
+    Signal.theologicalSignInterpretation
+    Signal.militarySignalInterpretation
+  ≡ Signal.structuralComparisonOnly
+signSignalComparisonRemainsStructural =
+  Signal.crossDomainComparisonIsStructuralOnly
 
 enemyCompressionRemainsNonInjective :
   ¬ Enemy.CompressionInjective
