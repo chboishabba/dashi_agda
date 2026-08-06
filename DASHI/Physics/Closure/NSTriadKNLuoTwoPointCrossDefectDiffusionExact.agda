@@ -47,7 +47,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoTwoPointCrossDefectDiffusionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_; cong; trans)
 
@@ -201,45 +202,43 @@ periodicIntegratedDiffusionIdentity :
       (left dataSet) (right dataSet) (spatialJets dataSet)
 periodicIntegratedDiffusionIdentity dataSet =
   let
+    input =
+      sumInputLaplacianRate
+        (left dataSet) (right dataSet) (spatialJets dataSet)
+    gradient =
+      sumCrossGradientDissipation
+        (left dataSet) (right dataSet) (spatialJets dataSet)
+    mixed =
+      sumMixedGradientRemainder
+        (left dataSet) (right dataSet) (spatialJets dataSet)
+
     productRule =
       finiteTwoPointDiffusionProductRule
         (left dataSet) (right dataSet) (spatialJets dataSet)
 
-    closed :
-      sumInputLaplacianRate
-        (left dataSet) (right dataSet) (spatialJets dataSet)
-      + sumCrossGradientDissipation
-          (left dataSet) (right dataSet) (spatialJets dataSet)
-      + sumMixedGradientRemainder
-          (left dataSet) (right dataSet) (spatialJets dataSet)
-      ≡ 0ℚ
+    closed : input + gradient + mixed ≡ 0ℚ
     closed =
       trans productRule
         (integratedTotalSecondDerivativeVanishes dataSet)
-  in
-  trans
-    (cong
-      (λ value →
-        value
-        - sumCrossGradientDissipation
-            (left dataSet) (right dataSet) (spatialJets dataSet)
-        - sumMixedGradientRemainder
-            (left dataSet) (right dataSet) (spatialJets dataSet))
-      closed)
-    (solve
-      ( sumInputLaplacianRate
-          (left dataSet) (right dataSet) (spatialJets dataSet)
-      ∷ sumCrossGradientDissipation
-          (left dataSet) (right dataSet) (spatialJets dataSet)
-      ∷ sumMixedGradientRemainder
-          (left dataSet) (right dataSet) (spatialJets dataSet)
-      ∷ []))
 
-e1 e2 e3 negativeE3 zeroVec : Gram.Vec3
+    leftExpanded : input ≡ (input + gradient + mixed) - gradient - mixed
+    leftExpanded = solve (input ∷ gradient ∷ mixed ∷ [])
+
+    shifted :
+      (input + gradient + mixed) - gradient - mixed
+      ≡ 0ℚ - gradient - mixed
+    shifted =
+      cong (λ value → value - gradient - mixed) closed
+
+    rightClosed : 0ℚ - gradient - mixed ≡ - gradient - mixed
+    rightClosed = solve (gradient ∷ mixed ∷ [])
+  in
+  trans leftExpanded (trans shifted rightClosed)
+
+e1 e2 e3 zeroVec : Gram.Vec3
 e1 = Gram.vec3 1ℚ 0ℚ 0ℚ
 e2 = Gram.vec3 0ℚ 1ℚ 0ℚ
 e3 = Gram.vec3 0ℚ 0ℚ 1ℚ
-negativeE3 = Gram.vec3 0ℚ 0ℚ (- 1ℚ)
 zeroVec = Gram.vec3 0ℚ 0ℚ 0ℚ
 
 positiveMixedJet : SpatialDerivativeJet
