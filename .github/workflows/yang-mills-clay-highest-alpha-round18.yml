@@ -1,0 +1,45 @@
+name: Yang-Mills Clay highest-alpha round 18
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round18-literal-exp-duhamel'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33BishopQuaternionExponentialSquaredChordExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BishopLiteralQuaternionExponentialChordExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BishopR4ChordMetricFromSquareRootExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33QuaternionDuhamelIntegrandTelescopeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33DuhamelSecondDerivativeMajorantExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiniteQuaternionSimpleDuhamelIntegralExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33CMP109LiteralPathDerivativeKernelExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33CMP109PeriodicContourEdgeKernelExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintSecondVariationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralHessianFiveChannelPromotionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralResidualKernelNumericalCalibrationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalResidualHalfContractionAtCollar21Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayPhysicalCoupledMacrostepPromotionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayDyadicPhysicalClusteringExponentExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayPlaquetteNoncollapseContinuumCalibrationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound18Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round18.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round18.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check literal exponential, chord metric, oriented CMP109, Hessian and residual lane
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round18.sh
