@@ -22,6 +22,7 @@ module DASHI.Mathematics.LinearAlgebra.RationalTwoByTwoSelfAdjointSpectralExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -97,7 +98,7 @@ record ExactEigenpair (matrix : Matrix2) : Set where
   field
     eigenvalue : ℚ
     eigenvector : Vector2
-    eigenvectorNonzero : eigenvector ≡ zeroVector → Set
+    eigenvectorNonzero : eigenvector ≡ zeroVector → ⊥
     eigenEquation :
       applyMatrix matrix eigenvector
       ≡ scaleVector eigenvalue eigenvector
@@ -164,10 +165,10 @@ basisOne basisTwo : Vector2
 basisOne = vector2 1ℚ 0ℚ
 basisTwo = vector2 0ℚ 1ℚ
 
-basisOneNonzero : basisOne ≡ zeroVector → Set
+basisOneNonzero : basisOne ≡ zeroVector → ⊥
 basisOneNonzero ()
 
-basisTwoNonzero : basisTwo ≡ zeroVector → Set
+basisTwoNonzero : basisTwo ≡ zeroVector → ⊥
 basisTwoNonzero ()
 
 eigenpairTwo : ExactEigenpair diagonalTwoFive
