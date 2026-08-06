@@ -16,6 +16,7 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoSobolevTensorProjectionErrorExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalDirectionalDefectExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIntegratedHighHighResidenceExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoInageDirectionalAbsorptionComparisonExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoNonlinearWeakLimitAuditExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalConditionalContinuationRound17Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalConditionalRound17Validation.agda
