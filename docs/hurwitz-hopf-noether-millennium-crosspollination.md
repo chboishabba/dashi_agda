@@ -12,12 +12,20 @@ The locally checked surface is:
 exact rational complex algebra
 -> one Cayley–Dickson doubling
 -> existing rational quaternion multiplication
--> conjugation and multiplicative norm
+-> second Cayley–Dickson doubling
+-> concrete rational octonion multiplication
+-> norm composition + alternativity + explicit associator failure
+-> shared proof-bearing composition-algebra core
 -> quaternionic Hopf radius identity
 
 finite law profiles / dimension candidates
 -> Frobenius candidate subset of Hurwitz candidates
 -> Hopf-invariant-one dimension coincidence
+
+rational Q[C2] Hopf algebra
+-> bialgebra compatibility
+-> coassociativity + counit + antipode
+-> separation from Hopf fibration and Hopf invariant
 
 Klein group action
 -> invariant observable
@@ -61,6 +69,31 @@ N(p)=N(a)+N(b)
 for the concrete rational complex/quaternion carriers.
 
 This is the central repository reuse: the quaternion algebra used for Wilson-Hessian mathematics is now also the concrete Cayley–Dickson and Hopf carrier.
+
+### Concrete rational octonions
+
+`CayleyDicksonRationalOctonionExact.agda` applies the same doubling convention once more to the shared rational quaternion carrier. It proves:
+
+```text
+conjugate(conjugate(x)) = x,
+conjugate(xy) = conjugate(y) conjugate(x),
+N(xy) = N(x)N(y),
+(xx)y = x(xy),
+(xy)y = x(yy),
+(xy)x = x(yx).
+```
+
+The basis calculation is also explicit:
+
+```text
+(e1 e2)e4 =  e7,
+e1(e2 e4) = -e7,
+e7 != -e7.
+```
+
+It therefore supplies a checked associativity counterexample rather than recording nonassociativity only as metadata.
+
+`CompositionAlgebraCoreExact.agda` extracts a common proof-bearing interface from the concrete quaternion and octonion modules. Quaternions instantiate `AssociativeCompositionCore`; octonions instantiate `AlternativeCompositionCore` and `AssociativityFailure`. Real positive definiteness, finite dimensionality, division, and classification completeness remain explicit analytic/classification obligations.
 
 ### Hurwitz/Frobenius law profiles
 
@@ -112,6 +145,24 @@ N(2 a conjugate(b)) + (N(a)-N(b))^2
 ```
 
 Thus a rational pair with `N(a)+N(b)=1` maps to the target unit quadric. Local triviality, fibre identification, smooth sphere structure, characteristic classes, and instanton geometry remain separate obligations.
+
+### Hopf algebra meaning and concrete example
+
+`RationalC2HopfAlgebraExact.agda` keeps the algebraic use of Hopf's name separate from fibrations and the Hopf invariant. It constructs the rational group algebra `Q[C2]` and proves:
+
+```text
+multiplication associativity and two-sided units,
+g^2 = 1,
+Delta(xy) = Delta(x)Delta(y),
+epsilon(xy) = epsilon(x)epsilon(y),
+(Delta tensor id)Delta = (id tensor Delta)Delta,
+(epsilon tensor id)Delta = id,
+(id tensor epsilon)Delta = id,
+m(S tensor id)Delta = unit epsilon,
+m(id tensor S)Delta = unit epsilon.
+```
+
+The finite cocommutative example is not promoted into a quantum gauge theory or renormalisation result.
 
 ## Klein and Noether
 
@@ -244,11 +295,14 @@ BSD and arithmetic-geometric Hodge contexts use the second much more directly; t
 Headers record authors, titles, and identifiers for:
 
 - John C. Baez, *The Octonions*, DOI `10.1090/S0273-0979-01-00934-X`;
+- Richard D. Schafer, *An Introduction to Nonassociative Algebras*, with no original DOI asserted;
 - Aleksandra Galecka, *A Proof of the Hurwitz Theorem About Composition Algebras*, DOI `10.24917/20809751.13.4`;
 - Adolf Hurwitz, *Über die Komposition der quadratischen Formen*, DOI `10.1007/BF01448439`;
 - Matej Bresar and Victor S. Shulman, *On, around, and beyond Frobenius' theorem on division algebras*, DOI `10.1080/03081087.2020.1761281`;
 - Heinz Hopf, *Über die Abbildungen der dreidimensionalen Sphäre auf die Kugelfläche*, DOI `10.1007/BF01457962`;
 - J. F. Adams, *On the Non-Existence of Elements of Hopf Invariant One*, DOI `10.2307/1970147`;
+- Christian Kassel, *Quantum Groups*, DOI `10.1007/978-1-4612-0783-2`;
+- Stephen U. Chase and Moss E. Sweedler, *Hopf Algebras and Galois Theory*, DOI `10.1007/BFb0101433`;
 - Emmy Noether, *Idealtheorie in Ringbereichen*, DOI `10.1007/BF01464225`;
 - Emmy Noether, *Invariante Variationsprobleme*, original with no DOI; Tavel translation DOI `10.48550/arXiv.physics/0503066`;
 - David Eisenbud, *Commutative Algebra: with a View Toward Algebraic Geometry*, DOI `10.1007/978-1-4612-5350-1`;
