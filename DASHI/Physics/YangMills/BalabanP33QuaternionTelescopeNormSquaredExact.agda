@@ -188,12 +188,19 @@ wilsonScalarDefectSquareBound a0 a1 a2 a3 b0 b1 b2 b3 =
       Telescope.wilsonScalarDifferenceTelescopeExact
         a0 a1 a2 a3 b0 b1 b2 b3
 
+    defectSquareExact :
+      defect * defect ≡ Q.q0 telescope * Q.q0 telescope
+    defectSquareExact =
+      trans
+        (cong (λ selected → selected * selected) scalarExact)
+        (ℚRing.solve-∀ (Q.q0 telescope))
+
     scalarSquareBelow :
       defect * defect ≤ Norm.normSq telescope
     scalarSquareBelow =
       subst
         (λ lower → lower ≤ Norm.normSq telescope)
-        (ℚRing.solve-∀ defect (Q.q0 telescope))
+        (sym defectSquareExact)
         (Norm.scalarPartSquareBelowNormSq telescope)
 
     telescopeBound :
