@@ -8,8 +8,12 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 
 files=(
   DASHI/Physics/YangMills/BalabanP33QuaternionFourFactorTelescopeExact.agda
+  DASHI/Physics/YangMills/BalabanP33RationalQuaternionNormSquaredExact.agda
+  DASHI/Physics/YangMills/BalabanP33QuaternionTelescopeNormSquaredExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementTelescopeExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda
   DASHI/Physics/YangMills/BalabanP33QuaternionAdjointPerturbationExact.agda
+  DASHI/Physics/YangMills/BalabanP33QuaternionAdjointNormSquaredExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeFirstExact.agda
   DASHI/Physics/YangMills/BalabanP33StrictTerminalGapMarginExact.agda
   DASHI/Physics/YangMills/BalabanP33CoarseFineSchurCouplingExact.agda
@@ -31,14 +35,26 @@ fi
 checks=(
   'BalabanP33QuaternionFourFactorTelescopeExact.agda:fourFactorDifferenceTelescopeExact'
   'BalabanP33QuaternionFourFactorTelescopeExact.agda:wilsonScalarDifferenceTelescopeExact'
+  'BalabanP33RationalQuaternionNormSquaredExact.agda:normSqMultiplyExact'
+  'BalabanP33RationalQuaternionNormSquaredExact.agda:scalarPartSquareBelowNormSq'
+  'BalabanP33RationalQuaternionNormSquaredExact.agda:normSqAddBound'
+  'BalabanP33RationalQuaternionNormSquaredExact.agda:normSqSum4Bound'
+  'BalabanP33QuaternionTelescopeNormSquaredExact.agda:fourTelescopeTermNormSumExact'
+  'BalabanP33QuaternionTelescopeNormSquaredExact.agda:fourFactorTelescopeNormSqBound'
+  'BalabanP33QuaternionTelescopeNormSquaredExact.agda:wilsonScalarDefectSquareBound'
   'BalabanP33PhysicalWilsonPlacementTelescopeExact.agda:namedPlacementAtomIsSelectedProduct'
   'BalabanP33PhysicalWilsonPlacementTelescopeExact.agda:physicalPlacementAtomsMatchGeneratedProductRule'
   'BalabanP33PhysicalWilsonPlacementTelescopeExact.agda:physicalNamedPlacementDefectTelescopeExact'
   'BalabanP33PhysicalWilsonPlacementTelescopeExact.agda:physicalPlacementWilsonScalarDefectTelescopeExact'
+  'BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda:physicalSelectedFactorDefectWeight'
+  'BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda:physicalPlacementWilsonScalarDefectSquareBound'
   'BalabanP33QuaternionAdjointPerturbationExact.agda:adjointDefectFactorizationExact'
   'BalabanP33QuaternionAdjointPerturbationExact.agda:conjugateDifferenceFromIdentityExact'
   'BalabanP33QuaternionAdjointPerturbationExact.agda:conjugateNormSqExact'
   'BalabanP33QuaternionAdjointPerturbationExact.agda:physicalLinkAdjointDefectFactorizationExact'
+  'BalabanP33QuaternionAdjointNormSquaredExact.agda:unitAdjointDefectNormSqBound'
+  'BalabanP33QuaternionAdjointNormSquaredExact.agda:physicalLinkAdjointDefectNormSqBound'
+  'BalabanP33QuaternionAdjointNormSquaredExact.agda:physicalInverseLinkAdjointDefectNormSqBound'
   'BalabanP33PhysicalBackgroundGaugeFirstExact.agda:backgroundGaugeFirst'
   'BalabanP33PhysicalBackgroundGaugeFirstExact.agda:identityBackgroundGaugeFirstIsPeriodicDivergence'
   'BalabanP33PhysicalBackgroundGaugeFirstExact.agda:axisAdjointDefectFactorizationExact'
@@ -66,6 +82,8 @@ done
 # Primary-source metadata.
 grep -q '10.1103/PhysRevD.10.2445' \
   DASHI/Physics/YangMills/BalabanP33QuaternionFourFactorTelescopeExact.agda
+grep -q '10.1201/9781439864180' \
+  DASHI/Physics/YangMills/BalabanP33RationalQuaternionNormSquaredExact.agda
 grep -q '10.1007/978-3-319-13467-3' \
   DASHI/Physics/YangMills/BalabanP33QuaternionAdjointPerturbationExact.agda
 grep -q '10.1007/BF01466594' \
@@ -82,8 +100,12 @@ grep -q '10.1007/BF01240221' \
   DASHI/Physics/YangMills/BalabanP33StrictTerminalGapMarginExact.agda
 
 # Scope and hard-math guards.
-grep -q 'physicalWilsonPlacementNormEstimateLevel = conditional' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementTelescopeExact.agda
+grep -q 'physicalWilsonSelectedFactorChargeLevel = conditional' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda
+grep -q 'physicalWilsonSignedLocalDefectLevel = conditional' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonPlacementNormSquaredExact.agda
+grep -q 'physicalGaugeGlobalIncidenceLevel = conditional' \
+  DASHI/Physics/YangMills/BalabanP33QuaternionAdjointNormSquaredExact.agda
 grep -q 'physicalBackgroundGaugeDefectNormLevel = conditional' \
   DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeFirstExact.agda
 grep -q 'physicalCoarseFineCouplingBoundsLevel = conditional' \
