@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/YangMills/BalabanStrongCouplingSUFormulaReconciliationExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingWeightedWassersteinRateExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda
+  DASHI/Physics/YangMills/BalabanStrongCouplingLiteralAtomGeneratedProductBridgeExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda
   DASHI/Physics/YangMills/YangMillsAllBetaMultiscaleLSIAuditExact.agda
   DASHI/Physics/YangMills/YangMillsLatticeGapScaleCompatibilityExact.agda
@@ -43,6 +44,9 @@ checks=(
   'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:orderedProduct4NormSqExact'
   'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:placementAtomNormSqExact'
   'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:orientedPlaquetteAtomNormSqExact'
+  'BalabanStrongCouplingLiteralAtomGeneratedProductBridgeExact.agda:placementAtomsMatchGeneratedProductRule'
+  'BalabanStrongCouplingLiteralAtomGeneratedProductBridgeExact.agda:orientedPlacementAtomsAreGeneratedTerms'
+  'BalabanStrongCouplingLiteralAtomGeneratedProductBridgeExact.agda:orientedPlacementAtomSumIsWilsonSecondVariation'
   'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:diagonalPlacementBudgetExact'
   'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:orderedCrossPlacementBudgetExact'
   'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:sixteenPlacementBudgetExact'
@@ -67,6 +71,7 @@ done
 
 grep -q '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/BalabanStrongCouplingGroupRicciConstantsExact.agda
 grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda
+grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanStrongCouplingLiteralAtomGeneratedProductBridgeExact.agda
 grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda
 grep -q '10.4171/OWR/2022/27' DASHI/Physics/YangMills/YangMillsAllBetaMultiscaleLSIAuditExact.agda
 grep -q '10.5281/zenodo.19699784' DASHI/Physics/YangMills/YangMillsAllBetaMultiscaleLSIAuditExact.agda
