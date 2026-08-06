@@ -29,9 +29,9 @@ module DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Int using (Int)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Data.Integer.Base using (ℤ)
 
 import DASHI.Moonshine.GradedRepresentation as GR
 
@@ -47,7 +47,7 @@ record GradedVertexOperatorAlgebra (K : Set) : Setω where
 
     vacuum : Homogeneous 0
     conformalVector : Homogeneous 2
-    vertexMode : TotalCarrier → Int → TotalCarrier → TotalCarrier
+    vertexMode : TotalCarrier → ℤ → TotalCarrier → TotalCarrier
     translationOperator : TotalCarrier → TotalCarrier
 
     additiveLinearLaws : Set
