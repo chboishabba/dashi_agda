@@ -6,6 +6,7 @@ on:
       - 'agent/millennium-crosspollination-rh-hodge-bsd-pnp-poincare-voa'
     paths:
       - 'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda'
+      - 'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda'
       - 'DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda'
       - 'DASHI/Moonshine/MonsterGradedVOABridgeExact.agda'
       - 'DASHI/Mathematics/NumberTheory/**'
@@ -24,6 +25,7 @@ on:
       - 'agent/hurwitz-hopf-noether-millennium-crosspollination'
     paths:
       - 'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda'
+      - 'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda'
       - 'DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda'
       - 'DASHI/Moonshine/MonsterGradedVOABridgeExact.agda'
       - 'DASHI/Mathematics/NumberTheory/**'
