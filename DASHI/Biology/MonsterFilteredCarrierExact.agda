@@ -32,6 +32,7 @@ module DASHI.Biology.MonsterFilteredCarrierExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Nat using (_+_)
 
 ordinaryHarmonicBulk : Nat
@@ -127,8 +128,6 @@ record FilteredCarrierBoundary : Set where
     fullMonsterActionConstructed : Bool
     fullMonsterActionConstructedIsFalse :
       fullMonsterActionConstructed ≡ false
-
-open import Agda.Builtin.Bool using (Bool; true; false)
 
 canonicalFilteredCarrierBoundary : FilteredCarrierBoundary
 canonicalFilteredCarrierBoundary =
