@@ -32,8 +32,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoLowHighExponentBookkeepingCorrectedExac
 --
 -- Thus the first Taylor branch has the stronger 2^(-3(q-r)/2) gain, while
 -- the second branch has the weaker 2^(-(q-r)/2) gain and matches the final
--- displayed LH target exactly. Squaring gives the already-implemented kernels
--- 2^(-3d) and 2^(-d), with the strong branch dominated by the weak.
+-- displayed LH target exactly. For p=q+s, the same identities acquire only
+-- the bounded comparable-shell factors (3/2)s and (5/2)s respectively.
+-- Squaring gives the already-implemented kernels 2^(-3d) and 2^(-d), with
+-- the strong branch dominated by the weak.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -65,6 +67,14 @@ branchOneRawExponent q r =
 branchTwoRawExponent : ℚ → ℚ → ℚ
 branchTwoRawExponent q r =
   minusTwo * q + two * r + fiveHalves * q
+
+branchOneComparableExponent : ℚ → ℚ → ℚ → ℚ
+branchOneComparableExponent q r p =
+  minusTwo * q + three * r + threeHalves * p
+
+branchTwoComparableExponent : ℚ → ℚ → ℚ → ℚ
+branchTwoComparableExponent q r p =
+  minusTwo * q + two * r + fiveHalves * p
 
 criticalOutputExponent : ℚ → ℚ → ℚ
 criticalOutputExponent q r = threeHalves * r + q
@@ -108,6 +118,26 @@ firstBranchCriticalFactorization :
   minusThreeHalves * (q - r) + threeHalves * r + q
   ≡ branchOneRawExponent q r
 firstBranchCriticalFactorization q r = solve (q ∷ r ∷ [])
+
+branchOneComparableOffset :
+  (q r offset : ℚ) →
+  branchOneComparableExponent q r (q + offset)
+  ≡ strongGapExponent q r + threeHalves * offset
+branchOneComparableOffset q r offset = solve (q ∷ r ∷ offset ∷ [])
+
+branchTwoComparableOffset :
+  (q r offset : ℚ) →
+  branchTwoComparableExponent q r (q + offset)
+  ≡ weakGapExponent q r + fiveHalves * offset
+branchTwoComparableOffset q r offset = solve (q ∷ r ∷ offset ∷ [])
+
+branchTwoComparableMatchesDisplayedTarget :
+  (q r offset : ℚ) →
+  branchTwoComparableExponent q r (q + offset)
+  ≡ minusHalf * (q - r) + threeHalves * r + q
+    + fiveHalves * offset
+branchTwoComparableMatchesDisplayedTarget q r offset =
+  solve (q ∷ r ∷ offset ∷ [])
 
 strongSquaredGapBelowWeakSquaredGap :
   (gap : Nat) →
