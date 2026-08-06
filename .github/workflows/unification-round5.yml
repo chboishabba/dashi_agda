@@ -8,10 +8,12 @@ on:
     paths:
       - 'DASHI/Physics/Foundations/**'
       - 'DASHI/Physics/DarkSector/**'
+      - 'DASHI/Visualisation/**'
       - 'DASHI/Unified/Everything.agda'
       - 'Docs/support/reference/UnificationRound5ConstantsDimensionMatterCosmology.md'
       - 'Docs/support/reference/Round5AttachedFormalism.md'
       - 'Docs/support/reference/DarkSectorColliderFormalism.md'
+      - 'Docs/support/reference/Round5JunctionVisualisationFormalism.md'
       - 'scripts/check_unification_round5.sh'
       - '.github/workflows/unification-round5.yml'
   workflow_dispatch:
