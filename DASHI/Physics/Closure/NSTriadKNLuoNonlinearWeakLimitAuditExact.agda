@@ -6,7 +6,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoNonlinearWeakLimitAuditExact where
 -- Author: Jacques-Louis Lions.
 -- Title: "Quelques méthodes de résolution des problèmes aux limites non
 -- linéaires".
--- DOI: 10.1007/978-3-642-65161-8.
+-- DOI: not assigned to the cited Dunod 1969 edition.
 --
 -- Author: Roger Temam.
 -- Title: "Navier-Stokes Equations: Theory and Numerical Analysis".
