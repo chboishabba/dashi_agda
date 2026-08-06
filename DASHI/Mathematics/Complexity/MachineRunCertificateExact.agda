@@ -24,11 +24,10 @@ module DASHI.Mathematics.Complexity.MachineRunCertificateExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Sigma using (Σ)
-open import Data.Product using (_×_; _,_)
 open import Data.Nat.Base using (_≤_)
 
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact as Machine
+open Machine.NondeterministicAcceptsWithin
 
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
@@ -118,24 +117,22 @@ boundedAcceptanceGivesFiniteCertificate :
   AcceptingRunCertificate machine input bound
 boundedAcceptanceGivesFiniteCertificate machine input bound acceptance =
   acceptingRunCertificate
-    (Machine.nSteps acceptance)
-    (Machine.nWithinBound acceptance)
-    (Machine.nFinalConfiguration acceptance)
-    (reachabilityToCertificate (Machine.nReachable acceptance))
-    (Machine.nFinalAccepting acceptance)
+    (nSteps acceptance)
+    (nWithinBound acceptance)
+    (nFinalConfiguration acceptance)
+    (reachabilityToCertificate (nReachable acceptance))
+    (nFinalAccepting acceptance)
 
 finiteCertificateGivesBoundedAcceptance :
   ∀ machine input bound →
   AcceptingRunCertificate machine input bound →
   Machine.NondeterministicAcceptsWithin machine input bound
 finiteCertificateGivesBoundedAcceptance machine input bound certificate = record
-  { Machine.NondeterministicAcceptsWithin.nSteps = steps certificate
-  ; Machine.NondeterministicAcceptsWithin.nWithinBound = withinBound certificate
-  ; Machine.NondeterministicAcceptsWithin.nFinalConfiguration =
-      finalConfiguration certificate
-  ; Machine.NondeterministicAcceptsWithin.nReachable =
-      certificateToReachability (run certificate)
-  ; Machine.NondeterministicAcceptsWithin.nFinalAccepting = accepting certificate
+  { nSteps = steps certificate
+  ; nWithinBound = withinBound certificate
+  ; nFinalConfiguration = finalConfiguration certificate
+  ; nReachable = certificateToReachability (run certificate)
+  ; nFinalAccepting = accepting certificate
   }
 
 record BranchEncodingPolynomialBoundary
