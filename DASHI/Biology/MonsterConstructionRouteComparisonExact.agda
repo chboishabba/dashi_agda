@@ -24,10 +24,12 @@ module DASHI.Biology.MonsterConstructionRouteComparisonExact where
 -- Compare construction routes by their actual mathematical outputs rather than
 -- by a single shared dimension.  The Griess route supplies a finite
 -- commutative nonassociative algebra and its automorphism group.  The FLM route
--- supplies a graded VOA through a Leech-lattice orbifold.  The Borcherds route
--- consumes the VOA plus Lorentzian/string physical-state machinery to produce
--- a generalized Kac-Moody algebra and the denominator identity.  Character and
--- computational finite-group routes supply still different data.
+-- supplies a graded VOA through a Leech-lattice orbifold and its untwisted J
+-- character.  Full McKay--Thompson modular data is kept separate.  The
+-- Borcherds route consumes the VOA plus Lorentzian/string physical-state
+-- machinery to produce a generalized Kac--Moody algebra and the denominator
+-- identity. Character and computational finite-group routes supply still
+-- different data.
 --
 -- Exact Boolean signatures prove that these routes are not interchangeable.
 -- The only implemented forward bridge is the mathematically valid restriction
@@ -64,7 +66,7 @@ signature : MonsterConstructionRoute → RouteSignature
 signature griessFiniteAlgebraRoute =
   routeSignature true false false false false true
 signature flmOrbifoldVOARoute =
-  routeSignature true true true false true true
+  routeSignature true true true false false true
 signature borcherdsMonsterLieRoute =
   routeSignature true true true true true true
 signature conwayNortonCharacterRoute =
@@ -91,6 +93,10 @@ griessHasNoStateFieldStructureByRoute = refl
 flmHasOrbifoldTwistedSector :
   hasTwistedOrbifoldSector (signature flmOrbifoldVOARoute) ≡ true
 flmHasOrbifoldTwistedSector = refl
+
+flmRouteDoesNotByItselfSupplyFullMcKayThompsonData :
+  hasMcKayThompsonModularData (signature flmOrbifoldVOARoute) ≡ false
+flmRouteDoesNotByItselfSupplyFullMcKayThompsonData = refl
 
 borcherdsAddsGeneralizedKacMoodyStructure :
   hasGeneralizedKacMoodyAlgebra (signature borcherdsMonsterLieRoute) ≡ true
