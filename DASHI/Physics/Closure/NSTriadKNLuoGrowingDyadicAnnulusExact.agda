@@ -12,13 +12,13 @@ module DASHI.Physics.Closure.NSTriadKNLuoGrowingDyadicAnnulusExact where
 -- DOI: 10.1007/978-1-4939-1194-3.
 --
 -- PURPOSE
--- Put an actual dyadic annulus predicate on the growing cube carrier.  The
--- axis `Fin(4*2^q+1)` is centred at radius `2^(q+1)`.  A mode is retained when
+-- Put an actual dyadic annulus predicate on the growing cube carrier. The
+-- axis `Fin(4*2^q+1)` is centred at radius `2^(q+1)`. A mode is retained when
 -- its infinity-distance from the centre satisfies
 --
 --   2^(q-1) <= |k|_infinity < 2^(q+1),
 --
--- with the q=0 lower endpoint interpreted as zero.  Intersecting this annulus
+-- with the q=0 lower endpoint interpreted as zero. Intersecting this annulus
 -- with any Boolean Galerkin cutoff still obeys the previously proved bound
 --
 --   supportCount(q,N) <= 125 * 8^q.
@@ -28,6 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGrowingDyadicAnnulusExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Fin.Base as Fin
 open import Data.Product.Base using (proj₁; proj₂)
@@ -107,7 +108,7 @@ dyadicAnnulusPredicate shell mode =
 
 annularSupport :
   (shell : Nat) →
-  Support.List (Growing.ModeAt shell)
+  List (Growing.ModeAt shell)
 annularSupport shell =
   Growing.filteredGrowingSupport
     shell
@@ -134,7 +135,7 @@ annulusWithGalerkin shell galerkin mode =
 annularGalerkinSupport :
   (shell : Nat) →
   (Growing.ModeAt shell → Bool) →
-  Support.List (Growing.ModeAt shell)
+  List (Growing.ModeAt shell)
 annularGalerkinSupport shell galerkin =
   Growing.filteredGrowingSupport
     shell
