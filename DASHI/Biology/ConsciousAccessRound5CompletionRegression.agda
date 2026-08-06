@@ -9,6 +9,9 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Biology.EquivariantLaplacianSectorExact as Equivariant
 import DASHI.Biology.MoonshineGradedStageBridgeExact as Moonshine
 import DASHI.Biology.ClayCrossPollinationInterfaceExact as Clay
+import DASHI.Biology.OrientedZeroJetTransitionExact as Jet
+import DASHI.Biology.ReachableSectorEntropyExact as Reachable
+import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact as Exceptional
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas as Sources
 import DASHI.Biology.ConsciousAccessRound5CompletionBoundary as Completion
 
@@ -73,6 +76,27 @@ clayInterfaceRegression :
     ≡ Equivariant.yangMillsGaugeLane
 clayInterfaceRegression = refl , (refl , refl)
 
+orientedJetRegression :
+  Jet.coarseJetPosition Jet.negativeApproachJet
+  ≡ Jet.coarseJetPosition Jet.positiveApproachJet
+  × Jet.reflectJet Jet.negativeToPositiveCrossingJet
+    ≡ Jet.positiveToNegativeCrossingJet
+orientedJetRegression = refl , refl
+
+reachableSectorRegression :
+  Reachable.rawConfigurationCount ∸ Reachable.reachableConfigurationCount ≡ 1
+  × Reachable.accessibleCount Reachable.mediatedRegime ≡ 3
+  × Reachable.accessibleCount Reachable.unrestrictedRegime ≡ 4
+reachableSectorRegression = refl , (refl , refl)
+
+exceptionalLatticeProtocolRegression :
+  Exceptional.ambientDimension Exceptional.E8Benchmark ≡ 8
+  × Exceptional.shortestVectorCount Exceptional.E8Benchmark ≡ 240
+  × Exceptional.ambientDimension Exceptional.LeechBenchmark ≡ 24
+  × Exceptional.shortestVectorCount Exceptional.LeechBenchmark ≡ 196560
+exceptionalLatticeProtocolRegression =
+  refl , (refl , (refl , refl))
+
 completionSourceRegression :
-  Sources.canonicalRound5CompletionSourceCount ≡ 29
+  Sources.canonicalRound5CompletionSourceCount ≡ 31
 completionSourceRegression = refl
