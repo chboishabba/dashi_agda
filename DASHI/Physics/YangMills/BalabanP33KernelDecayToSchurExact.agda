@@ -45,10 +45,10 @@ module DASHI.Physics.YangMills.BalabanP33KernelDecayToSchurExact where
 
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _*_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; _*_; _≤_; ∣_∣; NonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -95,7 +95,7 @@ kernelMajorantRowMass
     scaledWeightBound =
       let
         instance
-          amplitudeNN : ℚ.NonNegative amplitude
+          amplitudeNN : NonNegative amplitude
           amplitudeNN = ℚ.nonNegative amplitudeNonnegative
       in
       ℚP.*-monoˡ-≤-nonNeg amplitude (weightRows row)
@@ -153,7 +153,7 @@ kernelMajorantColumnMass
     scaledWeightBound =
       let
         instance
-          amplitudeNN : ℚ.NonNegative amplitude
+          amplitudeNN : NonNegative amplitude
           amplitudeNN = ℚ.nonNegative amplitudeNonnegative
       in
       ℚP.*-monoˡ-≤-nonNeg amplitude (weightColumns column)
