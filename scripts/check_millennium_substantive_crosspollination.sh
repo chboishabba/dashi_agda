@@ -9,6 +9,7 @@ bash scripts/check_hurwitz_hopf_noether_millennium_crosspollination.sh
 
 files=(
   DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda
+  DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda
   DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda
   DASHI/Moonshine/MonsterGradedVOABridgeExact.agda
   DASHI/Mathematics/NumberTheory/RiemannXiSymmetryExact.agda
@@ -47,6 +48,12 @@ checks=(
   'DASHI/Mathematics/NumberTheory/RiemannCompletedZetaBoundary.agda:RiemannHypothesis'
   'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda:representedSpectralZerosAreCritical'
   'DASHI/Analysis/RiemannMaassMoonshineCrossPollinationExact.agda:maassSpectrumIsNotRiemannZeroSpectrum'
+  'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda:vacuumMinusOneIdentity'
+  'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda:creationMinusOne'
+  'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda:minusOneProductCommutative'
+  'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda:minusOneProductAssociative'
+  'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda:translationActsAsDerivationOnMinusOneProduct'
+  'DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda:trivialRationalVertexAlgebraCertificate'
   'DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda:identityTraceCoefficientIsDimension'
   'DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda:gradedRepresentationIsNotVOA'
   'DASHI/Moonshine/MonsterGradedVOABridgeExact.agda:monsterIdentityCoefficientIsGradeDimension'
@@ -93,6 +100,7 @@ for check in "${checks[@]}"; do
 done
 
 # Source metadata guards.
+grep -Fq '10.1073/pnas.83.10.3068' DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda
 grep -Fq '10.1007/BF01232032' DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda
 grep -Fq '10.1186/s40687-015-0029-6' DASHI/Moonshine/MonsterGradedVOABridgeExact.agda
 grep -Fq '10.1017/CBO9780511615344' DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda
@@ -105,6 +113,7 @@ grep -Fq '10.4310/jdg/1214436922' DASHI/Mathematics/Topology/RoundThreeSphereRic
 grep -Fq '10.48550/arXiv.math/0211159' DASHI/Mathematics/Topology/PoincareGeometrizationExactBoundary.agda
 
 # Scope and non-promotion guards use single-line fragments deliberately.
+grep -Fq 'It is not' DASHI/Moonshine/TrivialRationalGradedVertexAlgebraExact.agda
 grep -Fq 'construct V^natural' DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda
 grep -Fq 'analytic continuation, Gamma factors' DASHI/Mathematics/NumberTheory/RiemannXiSymmetryExact.agda
 grep -Fq 'the analytic fields is filled' DASHI/Mathematics/NumberTheory/RiemannCompletedZetaBoundary.agda
