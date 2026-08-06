@@ -188,3 +188,14 @@ import DASHI.Biology.ClayCrossPollinationInterfaceExact
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas
 import DASHI.Biology.ConsciousAccessRound5CompletionBoundary
 import DASHI.Biology.ConsciousAccessRound5CompletionRegression
+
+------------------------------------------------------------------------
+-- Sections 756--835 continuation: cyclic/dialectical type separation, soft
+-- carry and logic, and a renderable mass-consistent p-adic reasoning field.
+
+import DASHI.Biology.TernaryCyclicDialecticExact
+import DASHI.Biology.TernarySoftCarryLogicExact
+import DASHI.Biology.TernaryLogicRelaxationSourceAtlas
+import DASHI.Biology.RenderablePadicReasoningFieldExact
+import DASHI.Biology.PadicLODConsistencyExact
+import DASHI.Biology.PadicRenderModeCorrectionExact
