@@ -30,7 +30,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; cong; trans)
 
 rationalPower : ℚ → Nat → ℚ
 rationalPower ratio zero = 1ℚ
@@ -40,21 +40,43 @@ rationalPower ratio (suc exponent) =
 finiteGeometricSum : ℚ → Nat → ℚ
 finiteGeometricSum ratio zero = 1ℚ
 finiteGeometricSum ratio (suc exponent) =
-  finiteGeometricSum ratio exponent
-  + rationalPower ratio (suc exponent)
+  1ℚ + ratio * finiteGeometricSum ratio exponent
 
 finiteGeometricIdentity :
   ∀ ratio exponent →
   (1ℚ - ratio) * finiteGeometricSum ratio exponent
   ≡ 1ℚ - rationalPower ratio (suc exponent)
 finiteGeometricIdentity ratio zero = solve (ratio ∷ [])
-finiteGeometricIdentity ratio (suc exponent)
-  rewrite finiteGeometricIdentity ratio exponent =
-  solve
-    ( ratio
-    ∷ finiteGeometricSum ratio exponent
-    ∷ rationalPower ratio exponent
-    ∷ [])
+finiteGeometricIdentity ratio (suc exponent) =
+  let
+    previousSum = finiteGeometricSum ratio exponent
+    previousPower = rationalPower ratio exponent
+
+    expanded :
+      (1ℚ - ratio) * (1ℚ + ratio * previousSum)
+      ≡
+      (1ℚ - ratio)
+      + ratio * ((1ℚ - ratio) * previousSum)
+    expanded = solve (ratio ∷ previousSum ∷ [])
+
+    inductiveSubstitution :
+      (1ℚ - ratio)
+        + ratio * ((1ℚ - ratio) * previousSum)
+      ≡
+      (1ℚ - ratio)
+        + ratio * (1ℚ - ratio * previousPower)
+    inductiveSubstitution =
+      cong
+        (λ value → (1ℚ - ratio) + ratio * value)
+        (finiteGeometricIdentity ratio exponent)
+
+    closed :
+      (1ℚ - ratio)
+        + ratio * (1ℚ - ratio * previousPower)
+      ≡ 1ℚ - ratio * (ratio * previousPower)
+    closed = solve (ratio ∷ previousPower ∷ [])
+  in
+  trans expanded (trans inductiveSubstitution closed)
 
 scaledGeometricTail : ℚ → ℚ → Nat → ℚ
 scaledGeometricTail coefficient ratio exponent =
@@ -64,14 +86,27 @@ scaledFiniteGeometricIdentity :
   ∀ coefficient ratio exponent →
   (1ℚ - ratio) * scaledGeometricTail coefficient ratio exponent
   ≡ coefficient * (1ℚ - rationalPower ratio (suc exponent))
-scaledFiniteGeometricIdentity coefficient ratio exponent
-  rewrite finiteGeometricIdentity ratio exponent =
-  solve
-    ( coefficient
-    ∷ ratio
-    ∷ finiteGeometricSum ratio exponent
-    ∷ rationalPower ratio (suc exponent)
-    ∷ [])
+scaledFiniteGeometricIdentity coefficient ratio exponent =
+  let
+    reassociated :
+      (1ℚ - ratio)
+        * (coefficient * finiteGeometricSum ratio exponent)
+      ≡
+      coefficient
+        * ((1ℚ - ratio) * finiteGeometricSum ratio exponent)
+    reassociated =
+      solve
+        ( coefficient
+        ∷ ratio
+        ∷ finiteGeometricSum ratio exponent
+        ∷ [])
+
+    substituted =
+      cong
+        (λ value → coefficient * value)
+        (finiteGeometricIdentity ratio exponent)
+  in
+  trans reassociated substituted
 
 record GeometricResidualAuthorityBoundary : Set where
   constructor geometricResidualAuthorityBoundary
