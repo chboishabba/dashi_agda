@@ -232,7 +232,7 @@ finiteFourierCoefficientBound :
 finiteFourierCoefficientBound dataSet =
   subst
     (λ lower → lower ≤ inputL1Squared dataSet)
-    (coefficientMeaning dataSet)
+    (sym (coefficientMeaning dataSet))
     (subst
       (λ upper →
         L2.square (coefficientSum (samples dataSet)) ≤ upper)
