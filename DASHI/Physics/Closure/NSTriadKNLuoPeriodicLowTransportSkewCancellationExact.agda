@@ -37,9 +37,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoPeriodicLowTransportSkewCancellationExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≡_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using
+  (_≡_; cong; sym; trans)
 
 record TransportCoordinate : Set where
   constructor transportCoordinate
@@ -125,28 +126,29 @@ periodicLowTransportSkewCancellation :
   ∀ dataSet → sumTwiceTransportPairing (coordinates dataSet) ≡ 0ℚ
 periodicLowTransportSkewCancellation dataSet =
   let
-    productRule = finiteTransportFluxProductRule (coordinates dataSet)
+    divergence = sumDivergenceContribution (coordinates dataSet)
+    transport = sumTwiceTransportPairing (coordinates dataSet)
 
-    zeroSplit :
-      0ℚ
-      ≡ sumDivergenceContribution (coordinates dataSet)
-        + sumTwiceTransportPairing (coordinates dataSet)
-    zeroSplit =
+    zeroToSplit : 0ℚ ≡ divergence + transport
+    zeroToSplit =
       trans
-        (Relation.Binary.PropositionalEquality.sym
-          (periodicFluxIntegralVanishes dataSet))
-        productRule
+        (sym (periodicFluxIntegralVanishes dataSet))
+        (finiteTransportFluxProductRule (coordinates dataSet))
+
+    splitToZeroPlusTransport : divergence + transport ≡ 0ℚ + transport
+    splitToZeroPlusTransport =
+      cong (λ value → value + transport)
+        (divergenceIntegralVanishes dataSet)
+
+    zeroPlusTransportToTransport : 0ℚ + transport ≡ transport
+    zeroPlusTransportToTransport = solve (transport ∷ [])
+
+    zeroToTransport : 0ℚ ≡ transport
+    zeroToTransport =
+      trans zeroToSplit
+        (trans splitToZeroPlusTransport zeroPlusTransportToTransport)
   in
-  trans
-    (Relation.Binary.PropositionalEquality.sym
-      (divergenceIntegralVanishes dataSet))
-    (trans
-      (solve
-        ( sumDivergenceContribution (coordinates dataSet)
-        ∷ []))
-      (trans
-        (Relation.Binary.PropositionalEquality.sym zeroSplit)
-        (periodicFluxIntegralVanishes dataSet)))
+  sym zeroToTransport
 
 record LowTransportAuthorityBoundary : Set where
   constructor lowTransportAuthorityBoundary
