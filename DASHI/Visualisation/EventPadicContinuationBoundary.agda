@@ -12,6 +12,7 @@ import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.RenderablePadicReasoningFieldExact as Padic
 import DASHI.Biology.PadicLODConsistencyExact as Consistency
+import DASHI.Biology.PadicRenderModeCorrectionExact as RenderCorrection
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
 import DASHI.Visualisation.EventPadicSourceAtlas as Sources
 
@@ -25,6 +26,8 @@ record EventPadicContinuationBoundary : Set where
     ternarySoftCarryLogicBoundary : Soft.TernarySoftCarryLogicBoundary
     renderablePadicBoundary : Padic.RenderablePadicReasoningBoundary
     padicLODConsistencyBoundary : Consistency.PadicLODConsistencyBoundary
+    padicRenderModeCorrectionBoundary :
+      RenderCorrection.PadicRenderModeCorrectionBoundary
 
     additiveEventFieldWitness :
       Event.scalarFieldSample ≡ 10
@@ -64,6 +67,13 @@ record EventPadicContinuationBoundary : Set where
       Stability.frontToBackAlpha Stability.half Stability.threeQuarters
       ≡
       Stability.fraction 14 16
+
+    legacyStraightAlphaRejected :
+      RenderCorrection.legacyStraightAlphaCode
+      ≡
+      RenderCorrection.exactStraightAlphaNumerator
+      →
+      ⊥
 
     cyclicAssociativityWitness :
       (a b c : Carry.TriResidue) →
@@ -175,6 +185,8 @@ canonicalEventPadicContinuationBoundary =
     ; renderablePadicBoundary = Padic.canonicalRenderablePadicReasoningBoundary
     ; padicLODConsistencyBoundary =
         Consistency.canonicalPadicLODConsistencyBoundary
+    ; padicRenderModeCorrectionBoundary =
+        RenderCorrection.canonicalPadicRenderModeCorrectionBoundary
     ; additiveEventFieldWitness = Event.scalarFieldSampleIsTen
     ; correctedSharpnessWitness = refl , refl
     ; temporalGraphForwardWitness = Event.edgeIsForwardByConstruction
@@ -185,6 +197,8 @@ canonicalEventPadicContinuationBoundary =
     ; commonAttenuationCancellationWitness =
         Renderer.uniformAttenuationCancelsFromComposition
     ; exactStraightAlphaWitness = Stability.canonicalCompositedAlpha
+    ; legacyStraightAlphaRejected =
+        RenderCorrection.legacyCodeIsNotExactAlphaNumerator
     ; cyclicAssociativityWitness = Carry.cyclicAdd3Associative
     ; cyclicInverseWitness = Cyclic.cyclicInverseRight
     ; carryResidualWitness = Carry.positiveOverflowLifts
