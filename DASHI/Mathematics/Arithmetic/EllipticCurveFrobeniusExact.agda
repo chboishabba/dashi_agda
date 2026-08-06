@@ -21,7 +21,8 @@ module DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact where
 --
 -- and a finite p=5 point-count row.  The row counts 7 affine points plus the
 -- point at infinity, hence #E(F_5)=8 and a_5=5+1-8=-2.  The corresponding
--- local Euler polynomial has coefficients 1, 2 and 5.
+-- local Euler polynomial has coefficients 1, 2 and 5.  The finite Hasse row
+-- |a_5|^2=4 <= 4p=20 is carried by an explicit Nat-order proof.
 --
 -- The finite row is a checked arithmetic witness, not a construction of the
 -- global L-function, modularity, Mordell--Weil finite generation, Selmer
@@ -32,20 +33,19 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Data.Unit using (⊤; tt)
 
 ------------------------------------------------------------------------
 -- Closed rational numerals used by the exact polynomial identities.
 ------------------------------------------------------------------------
 
-two four five six eight sixteen twentySeven sixtyFour : ℚ
+two four five eight sixteen twentySeven sixtyFour : ℚ
 two = 1ℚ + 1ℚ
 four = two + two
 five = four + 1ℚ
-six = five + 1ℚ
 eight = four + four
 sixteen = eight + eight
 twentySeven = sixteen + eight + two + 1ℚ
@@ -155,6 +155,9 @@ localFactorAtFiveCoefficients :
 localFactorAtFiveCoefficients =
   refl , solve [] , refl
 
+fourLessEqualTwenty : 4 ≤ 20
+fourLessEqualTwenty = s≤s (s≤s (s≤s (s≤s z≤n)))
+
 record ArithmeticFrobeniusDatum : Set₁ where
   field
     prime : Nat
@@ -162,7 +165,9 @@ record ArithmeticFrobeniusDatum : Set₁ where
     traceOfFrobenius : ℚ
     localPolynomial : LocalEulerPolynomial
     traceFormula : Set
-    hasseBound : Set
+    traceMagnitudeSquared : Nat
+    fourTimesPrime : Nat
+    hasseBound : traceMagnitudeSquared ≤ fourTimesPrime
 
 p5FrobeniusDatum : ArithmeticFrobeniusDatum
 p5FrobeniusDatum = record
@@ -171,9 +176,12 @@ p5FrobeniusDatum = record
   ; traceOfFrobenius = frobeniusTraceAtFive
   ; localPolynomial = localEulerFactorAtFive
   ; traceFormula = frobeniusTraceAtFive ≡ five + 1ℚ - eight
-  ; hasseBound = ⊤
+  ; traceMagnitudeSquared = 4
+  ; fourTimesPrime = 20
+  ; hasseBound = fourLessEqualTwenty
   }
 
-p5HassePlaceholderInhabited :
-  ArithmeticFrobeniusDatum.hasseBound p5FrobeniusDatum
-p5HassePlaceholderInhabited = tt
+p5HasseBoundChecked :
+  ArithmeticFrobeniusDatum.traceMagnitudeSquared p5FrobeniusDatum
+  ≤ ArithmeticFrobeniusDatum.fourTimesPrime p5FrobeniusDatum
+p5HasseBoundChecked = ArithmeticFrobeniusDatum.hasseBound p5FrobeniusDatum
