@@ -42,7 +42,9 @@ module DASHI.Physics.YangMills.BalabanP33SelectedBackgroundFiniteCoercivityExact
 -- producer.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (_*_; -_; _≤_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base as ℚ using (_*_; -_; _≤_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -60,6 +62,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeParameterizedYou
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as WilsonGlobal
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLocalToSharpDefectExact as WilsonSharp
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact as Boundary
+import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact as Budget
 import DASHI.Physics.YangMills.BalabanP33PhysicalTerminalHessianCoercivityExact as Terminal
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
@@ -163,7 +166,7 @@ selectedWilsonLower :
     h →
   WilsonGlobal.PhysicalWilsonSignedLocal
     (backgroundOf model h) (physicalFieldOf model h) →
-  - (WilsonSharp.Sharp.sharpSixteenAtomBudget
+  - (Sharp.sharpSixteenAtomBudget
       * Coordinates.physicalSU2BondNormSq (physicalFieldOf model h))
   ≤ Jets.wilsonSecondVariation (selectedLiteralSecondVariation model h)
       - Boundary.flatCurlEnergy (physicalFieldOf model h)
