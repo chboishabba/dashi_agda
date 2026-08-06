@@ -33,9 +33,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoDissipationWavenumberAmplitudeRepairExa
 -- not the Navier-Stokes production of the high-shell condition.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
@@ -91,6 +94,9 @@ viscousHighModeAmplitudeAbsorption cell =
       in
       ℚₚ.nonNegative⁻¹ upper
 
+    multiplied :
+      amplitude cell * enstrophy cell
+      ≤ upper * enstrophy cell
     multiplied =
       L2.nonnegativeProductMonotone
         (amplitudeNonnegative cell)
@@ -99,8 +105,22 @@ viscousHighModeAmplitudeAbsorption cell =
         (enstrophyNonnegative cell)
         (viscousHighModeCondition cell)
         ℚₚ.≤-refl
+
+    rightMeaning :
+      upper * enstrophy cell
+      ≡ coefficientTimesShellDiffusion cell
+    rightMeaning =
+      solve
+        ( coefficient cell
+        ∷ viscosity cell
+        ∷ eigenvalue cell
+        ∷ enstrophy cell
+        ∷ [])
   in
-  multiplied
+  subst
+    (λ right → amplitudeStretching cell ≤ right)
+    rightMeaning
+    multiplied
 
 record DissipationAmplitudeAuthorityBoundary : Set where
   constructor dissipationAmplitudeAuthorityBoundary
