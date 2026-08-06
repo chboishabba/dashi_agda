@@ -36,17 +36,17 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteFilterIncrementJensenExact where
 -- by filtered diffusion with constants uniform in scale.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Product.Base using (_×_; _,_)
+open import Data.Product.Base using (_,_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+  (ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
-import DASHI.Physics.Closure.NSTriadKNLuoCrossProductDefectEvolutionAlgebraExact as Cross
 
 record FilterIncrementSample : Set where
   constructor filterIncrementSample
@@ -55,29 +55,6 @@ record FilterIncrementSample : Set where
     increment : Gram.Vec3
 
 open FilterIncrementSample public
-
-sampleWeight : FilterIncrementSample → ℚ
-sampleWeight sample = L2.square (squareRootWeight sample)
-
-weightedIncrement : FilterIncrementSample → Gram.Vec3
-weightedIncrement sample =
-  Cross.scaleVec (sampleWeight sample) (increment sample)
-
-sumWeightedIncrement : List FilterIncrementSample → Gram.Vec3
-sumWeightedIncrement [] = Gram.vec3 0ℚ 0ℚ 0ℚ
-sumWeightedIncrement (sample ∷ samples) =
-  Cross.vecAdd (weightedIncrement sample) (sumWeightedIncrement samples)
-
-totalFilterWeight : List FilterIncrementSample → ℚ
-totalFilterWeight [] = 0ℚ
-totalFilterWeight (sample ∷ samples) =
-  sampleWeight sample + totalFilterWeight samples
-
-weightedIncrementEnergy : List FilterIncrementSample → ℚ
-weightedIncrementEnergy [] = 0ℚ
-weightedIncrementEnergy (sample ∷ samples) =
-  sampleWeight sample * Gram.normSquared (increment sample)
-  + weightedIncrementEnergy samples
 
 xPairs : List FilterIncrementSample → List L2.Pair
 xPairs [] = []
@@ -100,138 +77,48 @@ zPairs (sample ∷ samples) =
   , squareRootWeight sample * Gram.z (increment sample) )
   ∷ zPairs samples
 
-pairDotXMeaning :
-  ∀ samples →
-  L2.pairDot (xPairs samples) ≡ Gram.x (sumWeightedIncrement samples)
-pairDotXMeaning [] = solve []
-pairDotXMeaning (sample ∷ samples)
-  rewrite pairDotXMeaning samples =
-  solve
-    ( squareRootWeight sample
-    ∷ Gram.x (increment sample)
-    ∷ Gram.x (sumWeightedIncrement samples)
-    ∷ [])
-
-pairDotYMeaning :
-  ∀ samples →
-  L2.pairDot (yPairs samples) ≡ Gram.y (sumWeightedIncrement samples)
-pairDotYMeaning [] = solve []
-pairDotYMeaning (sample ∷ samples)
-  rewrite pairDotYMeaning samples =
-  solve
-    ( squareRootWeight sample
-    ∷ Gram.y (increment sample)
-    ∷ Gram.y (sumWeightedIncrement samples)
-    ∷ [])
-
-pairDotZMeaning :
-  ∀ samples →
-  L2.pairDot (zPairs samples) ≡ Gram.z (sumWeightedIncrement samples)
-pairDotZMeaning [] = solve []
-pairDotZMeaning (sample ∷ samples)
-  rewrite pairDotZMeaning samples =
-  solve
-    ( squareRootWeight sample
-    ∷ Gram.z (increment sample)
-    ∷ Gram.z (sumWeightedIncrement samples)
-    ∷ [])
-
-leftNormXMeaning :
-  ∀ samples →
-  L2.leftNormSquared (xPairs samples) ≡ totalFilterWeight samples
-leftNormXMeaning [] = solve []
-leftNormXMeaning (sample ∷ samples)
-  rewrite leftNormXMeaning samples = solve []
-
-leftNormYMeaning :
-  ∀ samples →
-  L2.leftNormSquared (yPairs samples) ≡ totalFilterWeight samples
-leftNormYMeaning [] = solve []
-leftNormYMeaning (sample ∷ samples)
-  rewrite leftNormYMeaning samples = solve []
-
-leftNormZMeaning :
-  ∀ samples →
-  L2.leftNormSquared (zPairs samples) ≡ totalFilterWeight samples
-leftNormZMeaning [] = solve []
-leftNormZMeaning (sample ∷ samples)
-  rewrite leftNormZMeaning samples = solve []
+totalFilterWeight : List FilterIncrementSample → ℚ
+totalFilterWeight samples = L2.leftNormSquared (xPairs samples)
 
 weightedXEnergy : List FilterIncrementSample → ℚ
-weightedXEnergy [] = 0ℚ
-weightedXEnergy (sample ∷ samples) =
-  sampleWeight sample * L2.square (Gram.x (increment sample))
-  + weightedXEnergy samples
+weightedXEnergy samples = L2.rightNormSquared (xPairs samples)
 
 weightedYEnergy : List FilterIncrementSample → ℚ
-weightedYEnergy [] = 0ℚ
-weightedYEnergy (sample ∷ samples) =
-  sampleWeight sample * L2.square (Gram.y (increment sample))
-  + weightedYEnergy samples
+weightedYEnergy samples = L2.rightNormSquared (yPairs samples)
 
 weightedZEnergy : List FilterIncrementSample → ℚ
-weightedZEnergy [] = 0ℚ
-weightedZEnergy (sample ∷ samples) =
-  sampleWeight sample * L2.square (Gram.z (increment sample))
-  + weightedZEnergy samples
+weightedZEnergy samples = L2.rightNormSquared (zPairs samples)
 
-rightNormXMeaning :
-  ∀ samples →
-  L2.rightNormSquared (xPairs samples) ≡ weightedXEnergy samples
-rightNormXMeaning [] = solve []
-rightNormXMeaning (sample ∷ samples)
-  rewrite rightNormXMeaning samples =
-  solve
-    ( squareRootWeight sample
-    ∷ Gram.x (increment sample)
-    ∷ weightedXEnergy samples
-    ∷ [])
+weightedIncrementEnergy : List FilterIncrementSample → ℚ
+weightedIncrementEnergy samples =
+  weightedXEnergy samples + weightedYEnergy samples + weightedZEnergy samples
 
-rightNormYMeaning :
-  ∀ samples →
-  L2.rightNormSquared (yPairs samples) ≡ weightedYEnergy samples
-rightNormYMeaning [] = solve []
-rightNormYMeaning (sample ∷ samples)
-  rewrite rightNormYMeaning samples =
-  solve
-    ( squareRootWeight sample
-    ∷ Gram.y (increment sample)
-    ∷ weightedYEnergy samples
-    ∷ [])
+sumWeightedIncrement : List FilterIncrementSample → Gram.Vec3
+sumWeightedIncrement samples =
+  Gram.vec3
+    (L2.pairDot (xPairs samples))
+    (L2.pairDot (yPairs samples))
+    (L2.pairDot (zPairs samples))
 
-rightNormZMeaning :
+yWeightMeaning :
   ∀ samples →
-  L2.rightNormSquared (zPairs samples) ≡ weightedZEnergy samples
-rightNormZMeaning [] = solve []
-rightNormZMeaning (sample ∷ samples)
-  rewrite rightNormZMeaning samples =
-  solve
-    ( squareRootWeight sample
-    ∷ Gram.z (increment sample)
-    ∷ weightedZEnergy samples
-    ∷ [])
+  L2.leftNormSquared (yPairs samples) ≡ totalFilterWeight samples
+yWeightMeaning [] = refl
+yWeightMeaning (sample ∷ samples)
+  rewrite yWeightMeaning samples = refl
+
+zWeightMeaning :
+  ∀ samples →
+  L2.leftNormSquared (zPairs samples) ≡ totalFilterWeight samples
+zWeightMeaning [] = refl
+zWeightMeaning (sample ∷ samples)
+  rewrite zWeightMeaning samples = refl
 
 componentXJensen :
   ∀ samples →
   L2.square (Gram.x (sumWeightedIncrement samples))
   ≤ totalFilterWeight samples * weightedXEnergy samples
-componentXJensen samples =
-  subst
-    (λ left →
-      L2.square left
-      ≤ totalFilterWeight samples * weightedXEnergy samples)
-    (pairDotXMeaning samples)
-    (subst
-      (λ leftNorm →
-        L2.square (L2.pairDot (xPairs samples))
-        ≤ leftNorm * weightedXEnergy samples)
-      (leftNormXMeaning samples)
-      (subst
-        (λ rightNorm →
-          L2.square (L2.pairDot (xPairs samples))
-          ≤ L2.leftNormSquared (xPairs samples) * rightNorm)
-        (rightNormXMeaning samples)
-        (L2.finiteCauchySchwarzSquared (xPairs samples))))
+componentXJensen samples = L2.finiteCauchySchwarzSquared (xPairs samples)
 
 componentYJensen :
   ∀ samples →
@@ -239,21 +126,11 @@ componentYJensen :
   ≤ totalFilterWeight samples * weightedYEnergy samples
 componentYJensen samples =
   subst
-    (λ left →
-      L2.square left
-      ≤ totalFilterWeight samples * weightedYEnergy samples)
-    (pairDotYMeaning samples)
-    (subst
-      (λ leftNorm →
-        L2.square (L2.pairDot (yPairs samples))
-        ≤ leftNorm * weightedYEnergy samples)
-      (leftNormYMeaning samples)
-      (subst
-        (λ rightNorm →
-          L2.square (L2.pairDot (yPairs samples))
-          ≤ L2.leftNormSquared (yPairs samples) * rightNorm)
-        (rightNormYMeaning samples)
-        (L2.finiteCauchySchwarzSquared (yPairs samples))))
+    (λ weight →
+      L2.square (L2.pairDot (yPairs samples))
+      ≤ weight * weightedYEnergy samples)
+    (yWeightMeaning samples)
+    (L2.finiteCauchySchwarzSquared (yPairs samples))
 
 componentZJensen :
   ∀ samples →
@@ -261,38 +138,11 @@ componentZJensen :
   ≤ totalFilterWeight samples * weightedZEnergy samples
 componentZJensen samples =
   subst
-    (λ left →
-      L2.square left
-      ≤ totalFilterWeight samples * weightedZEnergy samples)
-    (pairDotZMeaning samples)
-    (subst
-      (λ leftNorm →
-        L2.square (L2.pairDot (zPairs samples))
-        ≤ leftNorm * weightedZEnergy samples)
-      (leftNormZMeaning samples)
-      (subst
-        (λ rightNorm →
-          L2.square (L2.pairDot (zPairs samples))
-          ≤ L2.leftNormSquared (zPairs samples) * rightNorm)
-        (rightNormZMeaning samples)
-        (L2.finiteCauchySchwarzSquared (zPairs samples))))
-
-weightedEnergyCoordinates :
-  ∀ samples →
-  weightedIncrementEnergy samples
-  ≡ weightedXEnergy samples + weightedYEnergy samples + weightedZEnergy samples
-weightedEnergyCoordinates [] = solve []
-weightedEnergyCoordinates (sample ∷ samples)
-  rewrite weightedEnergyCoordinates samples =
-  solve
-    ( sampleWeight sample
-    ∷ Gram.x (increment sample)
-    ∷ Gram.y (increment sample)
-    ∷ Gram.z (increment sample)
-    ∷ weightedXEnergy samples
-    ∷ weightedYEnergy samples
-    ∷ weightedZEnergy samples
-    ∷ [])
+    (λ weight →
+      L2.square (L2.pairDot (zPairs samples))
+      ≤ weight * weightedZEnergy samples)
+    (zWeightMeaning samples)
+    (L2.finiteCauchySchwarzSquared (zPairs samples))
 
 finiteFilterIncrementJensen :
   ∀ samples →
@@ -312,8 +162,7 @@ finiteFilterIncrementJensen samples =
       + totalFilterWeight samples * weightedYEnergy samples
       + totalFilterWeight samples * weightedZEnergy samples
       ≡ totalFilterWeight samples * weightedIncrementEnergy samples
-    rightMeaning
-      rewrite weightedEnergyCoordinates samples =
+    rightMeaning =
       solve
         ( totalFilterWeight samples
         ∷ weightedXEnergy samples
