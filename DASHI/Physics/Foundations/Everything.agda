@@ -20,6 +20,7 @@ import DASHI.Physics.Foundations.FiniteGraphGaugeScalarExact
 import DASHI.Physics.Foundations.FiniteFockExcitationExact
 import DASHI.Physics.Foundations.KernelQFTEmergenceObligations
 import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact
+import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.Round5SourceAtlas
 import DASHI.Physics.Foundations.Round5FullBoundary
