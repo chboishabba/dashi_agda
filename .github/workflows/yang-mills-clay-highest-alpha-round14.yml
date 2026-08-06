@@ -1,0 +1,48 @@
+name: Yang-Mills Clay highest-alpha round 14
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round14'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33BishopHigherOrderTaylorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpNumeratorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpCoefficientExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33InverseDexpRadiusArithmeticExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33WilsonCrossArcBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33WilsonDiagonalBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5StagedDiagonalTailExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5CumulantLowerBoundNontrivialityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaReuseExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound14Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round14.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round14.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33BishopHigherOrderTaylorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpNumeratorExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpCoefficientExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33InverseDexpRadiusArithmeticExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33WilsonCrossArcBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33WilsonDiagonalBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5StagedDiagonalTailExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5CumulantLowerBoundNontrivialityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaReuseExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound14Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round14.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round14.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - name: Check inverse-dexp, Wilson budgets, thermodynamic tails and Clay reuse
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round14.sh
