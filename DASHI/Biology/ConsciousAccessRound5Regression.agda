@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
+import DASHI.Biology.DASHIYijingRelationalOperatorsExact as YijingRelational
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 import DASHI.Biology.DialecticalSheetSpiralExact as Spiral
 import DASHI.Biology.TriadicBraidDialecticExact as Braid
@@ -35,6 +36,23 @@ ternaryCardinalityRegression :
   × Yijing.ternaryStateCount 6 ≡ 729
   × Yijing.ternaryStateCount 9 ≡ 19683
 ternaryCardinalityRegression = refl , (refl , refl)
+
+yijingRelationalRegression :
+  YijingRelational.compileCast YijingRelational.canonicalClassicalCast
+  ≡ YijingRelational.castTransformation
+      YijingRelational.canonicalClassicalCast
+      YijingRelational.canonicalCastInitial
+      YijingRelational.canonicalCastMask
+      YijingRelational.canonicalCastResulting
+  ×
+  YijingRelational.positionCorresponds
+    YijingRelational.lineOne
+    YijingRelational.canonicalCastInitial
+  ≡ true
+  ×
+  YijingRelational.observeTrigramImage Yijing.canonicalTernaryTrigram
+  ≡ YijingRelational.ternaryBeyondReceivedEight
+yijingRelationalRegression = refl , (refl , refl)
 
 contextualPolarityRegression :
   Yijing.observeYinYang Yijing.directView Triadic.positiveTrit
