@@ -10,9 +10,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteFinEnumerationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat)
+import Agda.Builtin.Nat as ℕ
 open import Data.Empty using (⊥)
-open import Data.Fin.Base using (Fin; zero; suc)
+import Data.Fin.Base as Fin
+open Fin using (Fin)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Relation.Nullary using (Dec; yes; no)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteKroneckerEnumerationExact as Delta
@@ -28,8 +31,9 @@ map transform (item ∷ items) =
   transform item ∷ map transform items
 
 enumerateFin : (n : Nat) → List (Fin n)
-enumerateFin zero = []
-enumerateFin (suc n) = zero ∷ map suc (enumerateFin n)
+enumerateFin ℕ.zero = []
+enumerateFin (ℕ.suc n) =
+  Fin.zero ∷ map Fin.suc (enumerateFin n)
 
 sucInjective :
   ∀ {n : Nat} {left right : Fin n} →
@@ -109,11 +113,11 @@ mapUniqueSuc target (item ∷ items)
 finOccursExactlyOnce :
   ∀ {n : Nat} (value : Fin n) →
   Delta.UniqueOccurrence value (enumerateFin n)
-finOccursExactlyOnce {zero} ()
-finOccursExactlyOnce {suc n} Fin.zero =
+finOccursExactlyOnce {ℕ.zero} ()
+finOccursExactlyOnce {ℕ.suc n} Fin.zero =
   Delta.occursHere
     (allSucImagesNotZero (enumerateFin n))
-finOccursExactlyOnce {suc n} (Fin.suc value) =
+finOccursExactlyOnce {ℕ.suc n} (Fin.suc value) =
   Delta.occursThere
     (sucNotZero value)
     (mapUniqueSuc value (enumerateFin n)
@@ -122,12 +126,12 @@ finOccursExactlyOnce {suc n} (Fin.suc value) =
 finDecidableEquality :
   ∀ {n : Nat} (left right : Fin n) →
   Dec (left ≡ right)
-finDecidableEquality {suc n} Fin.zero Fin.zero = yes refl
-finDecidableEquality {suc n} Fin.zero (Fin.suc right) =
+finDecidableEquality {ℕ.suc n} Fin.zero Fin.zero = yes refl
+finDecidableEquality {ℕ.suc n} Fin.zero (Fin.suc right) =
   no (zeroNotSuc right)
-finDecidableEquality {suc n} (Fin.suc left) Fin.zero =
+finDecidableEquality {ℕ.suc n} (Fin.suc left) Fin.zero =
   no (sucNotZero left)
-finDecidableEquality {suc n} (Fin.suc left) (Fin.suc right)
+finDecidableEquality {ℕ.suc n} (Fin.suc left) (Fin.suc right)
   with finDecidableEquality left right
 ... | yes equality = yes (cong Fin.suc equality)
 ... | no distinct = no (λ equality → distinct (sucInjective equality))
