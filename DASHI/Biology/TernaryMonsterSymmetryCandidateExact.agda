@@ -3,14 +3,17 @@ module DASHI.Biology.TernaryMonsterSymmetryCandidateExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Biology.ReducedFiftyThreeFibreExact as Reduced
 
 ------------------------------------------------------------------------
 -- Exact arithmetic and typed symmetry sectors behind the proposed
 --
---   196883 = 10 * 3^9 + 53
+--   196884 = 10 * 3^9 + 54,
+--   196883 = 10 * 3^9 + (54 - 1)
 --
--- construction.  The arithmetic is proved.  A restriction/decomposition of
--- the Monster representation is deliberately retained as an open candidate.
+-- construction.  The arithmetic and reduced-fibre source of 53 are proved.
+-- A restriction/decomposition of the Monster representation is deliberately
+-- retained as an open candidate.
 
 data D4IrrepKind : Set where
   A1 : D4IrrepKind
@@ -105,14 +108,34 @@ bulkDimension = 10 * ternarySheetDimension
 bulkDimensionIs196830 : bulkDimension ≡ 196830
 bulkDimensionIs196830 = refl
 
+fullSixByNineDimension : Nat
+fullSixByNineDimension = Reduced.fullSixByNineDimension
+
+fullSixByNineDimensionIs54 : fullSixByNineDimension ≡ 54
+fullSixByNineDimensionIs54 = refl
+
 residualDimension : Nat
-residualDimension = 53
+residualDimension = Reduced.reducedDimension
+
+residualDimensionIs53 : residualDimension ≡ 53
+residualDimensionIs53 = refl
+
+moonshineCoefficientCandidateDimension : Nat
+moonshineCoefficientCandidateDimension = bulkDimension + fullSixByNineDimension
+
+moonshineCoefficientCandidateDimensionIs196884 :
+  moonshineCoefficientCandidateDimension ≡ 196884
+moonshineCoefficientCandidateDimensionIs196884 = refl
 
 monsterCandidateDimension : Nat
 monsterCandidateDimension = bulkDimension + residualDimension
 
 monsterCandidateDimensionIs196883 : monsterCandidateDimension ≡ 196883
 monsterCandidateDimensionIs196883 = refl
+
+coefficientSplitsAsInvariantPlusMonsterCandidate :
+  1 + monsterCandidateDimension ≡ moonshineCoefficientCandidateDimension
+coefficientSplitsAsInvariantPlusMonsterCandidate = refl
 
 ------------------------------------------------------------------------
 -- Ogg-prime arithmetic.
@@ -199,6 +222,10 @@ open MonsterRestrictionCandidate public
 canonicalMonsterRestrictionCandidate : MonsterRestrictionCandidate
 canonicalMonsterRestrictionCandidate =
   monsterRestrictionCandidate 10 19683 53 196883 refl
+
+canonicalReducedFiftyThreeBoundary : Reduced.ReducedFiftyThreeBoundary
+canonicalReducedFiftyThreeBoundary =
+  Reduced.canonicalReducedFiftyThreeBoundary
 
 record MoonshinePromotionBoundary : Set where
   constructor moonshinePromotionBoundary
