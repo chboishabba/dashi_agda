@@ -32,4 +32,6 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteFourierFromUniqueResolutionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteFourierRestrictionContractiveExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteModeRestrictionContractiveExact
 
+import DASHI.Physics.Closure.NSTriadKNLuoGalerkinInteractionDifferenceExact
+import DASHI.Physics.Closure.NSTriadKNLuoGalerkinTensorDifferenceExact
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinDiagonalSelectionExact
