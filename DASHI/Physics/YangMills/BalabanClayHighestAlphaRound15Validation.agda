@@ -1,0 +1,25 @@
+module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound15Validation where
+
+-- Focused validation root for the physical-units and external-attempt audit.
+-- It imports actual countermodels, telescoping and strict-budget proofs, exact
+-- OS pullback, dense-core spectral exclusion, the separated M1--M6 gates, and
+-- the new P33 reduced inverse-dexp/product-distance/chart-radius mathematics.
+
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound14Validation
+import DASHI.Physics.YangMills.BalabanClayLowerBoundCountermodelExact
+import DASHI.Physics.YangMills.BalabanClayTransferGapDefectTelescopingExact
+import DASHI.Physics.YangMills.BalabanClayPhysicalScaleExponentExact
+import DASHI.Physics.YangMills.BalabanClayUniformPerronContractionExact
+import DASHI.Physics.YangMills.BalabanClayNormingFamilyOperatorBoundExact
+import DASHI.Physics.YangMills.BalabanClayTransferHamiltonianGapSeparationExact
+import DASHI.Physics.YangMills.BalabanClayExactOSPullbackRecombinationExact
+import DASHI.Physics.YangMills.BalabanClayDenseCoreSpectralGapExact
+import DASHI.Physics.YangMills.BalabanClayLocalNoncollapseExact
+import DASHI.Physics.YangMills.BalabanClayObservableGapEdgeExact
+import DASHI.Physics.YangMills.BalabanClaySpectralUVCompatibilityExact
+import DASHI.Physics.YangMills.BalabanClayMassGapGatePackageExact
+import DASHI.Physics.YangMills.BalabanClayMirShabirScopeAuditExact
+import DASHI.Physics.YangMills.BalabanClayExternalAttemptStressTestsExact
+import DASHI.Physics.YangMills.BalabanP33InverseDexpReducedOperatorExact
+import DASHI.Physics.YangMills.BalabanP33GroupProductDistanceTelescopingExact
+import DASHI.Physics.YangMills.BalabanP33SecondChartRadiusCalibrationExact
