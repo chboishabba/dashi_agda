@@ -35,7 +35,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; _<_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoTerminalInteractionDepletionTransferExact as Limit
@@ -58,13 +58,15 @@ orderedYoungTwoProduct :
     + epsilonInverse parameter * L2.square b
 orderedYoungTwoProduct parameter a b =
   let
-    squareNN : 0ℚ ≤ L2.square (epsilon parameter * a - b)
-    squareNN = L2.squareNonnegative (epsilon parameter * a - b)
+    eps = epsilon parameter
+    epsInv = epsilonInverse parameter
+    twoAB = a * b + a * b
+
+    squareNN : 0ℚ ≤ L2.square (eps * a - b)
+    squareNN = L2.squareNonnegative (eps * a - b)
 
     defectNN :
-      0ℚ
-      ≤ epsilonInverse parameter
-        * L2.square (epsilon parameter * a - b)
+      0ℚ ≤ epsInv * L2.square (eps * a - b)
     defectNN =
       let
         instance
@@ -72,50 +74,58 @@ orderedYoungTwoProduct parameter a b =
           squareNNI = nonNegative squareNN
           productNN =
             ℚₚ.nonNeg*nonNeg⇒nonNeg
-              (epsilonInverse parameter)
-              (L2.square (epsilon parameter * a - b))
+              epsInv
+              (L2.square (eps * a - b))
       in
       ℚₚ.nonNegative⁻¹
-        (epsilonInverse parameter
-          * L2.square (epsilon parameter * a - b))
+        (epsInv * L2.square (eps * a - b))
 
     addDefect :
-      a * b + a * b
-      ≤ a * b + a * b
-        + epsilonInverse parameter
-          * L2.square (epsilon parameter * a - b)
+      twoAB
+      ≤ twoAB + epsInv * L2.square (eps * a - b)
     addDefect =
       subst
         (λ lower →
-          lower
-          ≤ a * b + a * b
-            + epsilonInverse parameter
-              * L2.square (epsilon parameter * a - b))
-        (ℚₚ.+-identityʳ (a * b + a * b))
-        (ℚₚ.+-monoʳ-≤ (a * b + a * b) defectNN)
+          lower ≤ twoAB + epsInv * L2.square (eps * a - b))
+        (ℚₚ.+-identityʳ twoAB)
+        (ℚₚ.+-monoʳ-≤ twoAB defectNN)
+
+    expanded :
+      twoAB + epsInv * L2.square (eps * a - b)
+      ≡ (eps * epsInv) * eps * L2.square a
+        + (1ℚ - eps * epsInv) * twoAB
+        + epsInv * L2.square b
+    expanded = solve (eps ∷ epsInv ∷ a ∷ b ∷ [])
+
+    replaceInverse :
+      (eps * epsInv) * eps * L2.square a
+        + (1ℚ - eps * epsInv) * twoAB
+        + epsInv * L2.square b
+      ≡ 1ℚ * eps * L2.square a
+        + (1ℚ - 1ℚ) * twoAB
+        + epsInv * L2.square b
+    replaceInverse =
+      cong
+        (λ product →
+          product * eps * L2.square a
+            + (1ℚ - product) * twoAB
+            + epsInv * L2.square b)
+        (inverseMeaning parameter)
+
+    normalize :
+      1ℚ * eps * L2.square a
+        + (1ℚ - 1ℚ) * twoAB
+        + epsInv * L2.square b
+      ≡ eps * L2.square a + epsInv * L2.square b
+    normalize = solve (eps ∷ epsInv ∷ a ∷ b ∷ [])
 
     identity :
-      a * b + a * b
-        + epsilonInverse parameter
-          * L2.square (epsilon parameter * a - b)
-      ≡ epsilon parameter * L2.square a
-        + epsilonInverse parameter * L2.square b
-    identity =
-      subst
-        (λ product →
-          a * b + a * b
-            + epsilonInverse parameter
-              * L2.square (epsilon parameter * a - b)
-          ≡ product * L2.square a
-            + epsilonInverse parameter * L2.square b)
-        (sym (inverseMeaning parameter))
-        (solve
-          ( epsilon parameter
-          ∷ epsilonInverse parameter
-          ∷ a ∷ b ∷ []))
+      twoAB + epsInv * L2.square (eps * a - b)
+      ≡ eps * L2.square a + epsInv * L2.square b
+    identity = trans expanded (trans replaceInverse normalize)
   in
   subst
-    (λ upper → a * b + a * b ≤ upper)
+    (λ upper → twoAB ≤ upper)
     identity
     addDefect
 
