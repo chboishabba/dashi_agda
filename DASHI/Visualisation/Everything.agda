@@ -20,6 +20,7 @@ import DASHI.Visualisation.AttachedVisualisationRegression
 -- cyclic/carry semantics, and renderable p-adic level of detail.
 
 import DASHI.Visualisation.EventFilamentFieldExact
+import DASHI.Visualisation.FiniteAnisotropicKernelExact
 import DASHI.Visualisation.EventFilamentPersistenceExact
 import DASHI.Visualisation.SelfConsistentEventRendererExact
 import DASHI.Visualisation.RendererStabilityExact
