@@ -2,6 +2,7 @@ module DASHI.Physics.Foundations.Round5Regression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Biology.ConsciousAccessRound4SourceAtlas as PadicSources
 import DASHI.Biology.ConsciousAccessRound5FullBoundary as BiologyRound5
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as Yijing
@@ -110,8 +111,7 @@ padicSheetResidualRegression =
     (TriadicCarry.residue1 , TriadicCarry.residue2)
     (TriadicCarry.residue2 , TriadicCarry.residue0)
 
-padicSourceAtlasRegression :
-  PadicLossless.PadicSources.canonicalRound4SourceCount ≡ 8
+padicSourceAtlasRegression : PadicSources.canonicalRound4SourceCount ≡ 8
 padicSourceAtlasRegression = PadicLossless.existingPadicSourceCountIsEight
 
 modularProjectionRegression :
