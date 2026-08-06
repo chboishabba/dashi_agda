@@ -169,3 +169,15 @@ import DASHI.Biology.ConsciousAccessRound5SourceAtlas
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas
 import DASHI.Biology.ConsciousAccessRound5FullBoundary
 import DASHI.Biology.ConsciousAccessRound5Regression
+
+------------------------------------------------------------------------
+-- Conscious-access round six: cross-pollination of ternary, visual,
+-- morphogenetic, neural-observation, braid-history, and hall coalitions.
+
+import DASHI.Biology.TernaryVisualMotifSemiconjugacyExact
+import DASHI.Biology.TernaryMorphogeneticVisualFieldExact
+import DASHI.Biology.TernaryMotifNeuralObservationQuotientExact
+import DASHI.Biology.TriadicVisualBraidCrossPollinationExact
+import DASHI.Biology.TernaryHallTransitionCoalitionExact
+import DASHI.Biology.ConsciousAccessRound6CrossSourceBridge
+import DASHI.Biology.ConsciousAccessRound6CrossPollinationRegression
