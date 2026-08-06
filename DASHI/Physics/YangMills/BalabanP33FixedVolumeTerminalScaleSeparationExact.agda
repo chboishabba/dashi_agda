@@ -34,12 +34,17 @@ module DASHI.Physics.YangMills.BalabanP33FixedVolumeTerminalScaleSeparationExact
 --   2. the bare unscaled one-thirty-second Poincare claim is refuted by the
 --      concrete even-cycle square wave;
 --   3. a terminal-scale propagator bound and a fine-scale spectral floor are
---      separate conclusions, connected only through explicit one-step RG gap
---      inequalities and their accumulated loss budget.
+--      connected only through explicit one-step RG gap inequalities and their
+--      accumulated loss budget.
 --
--- This module therefore cannot be used to smuggle a fixed-side theorem into a
--- volume-uniform claim.  A completed terminal route must provide both the
--- terminal Hessian/inverse data and a genuine physical GapTransferChain.
+-- The terminal scalar is not independently supplied.  The Combes--Thomas data
+-- already carry the literal P33 quadratic floor, so the transfer chain is
+-- definitionally terminated at P33.p33PhysicalFloor = 1/32.  This removes the
+-- possibility of pairing terminal propagator data with an unrelated claimed
+-- terminal gap.
+--
+-- A completed terminal route must still provide a genuine physical
+-- GapTransferChain and prove that the discounted pulled-back floor is positive.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
@@ -47,6 +52,7 @@ open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; ∣_∣; _≤_; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasQuadraticEndgameExact as CT
 import DASHI.Physics.YangMills.BalabanP33PhysicalCombesThomasPromotionExact as Promotion
@@ -64,7 +70,7 @@ bareUniformOneThirtySecondBlocked =
   Wall.oneThirtySecondNotUniformUnscaled
 
 record TerminalScalePriorityThreeData
-    (fineGap terminalGap : ℚ)
+    (fineGap : ℚ)
     (losses : List ℚ)
     (hessian green : PhysicalMatrix) : Set₁ where
   field
@@ -72,17 +78,18 @@ record TerminalScalePriorityThreeData
       CT.PhysicalQuadraticCombesThomasData hessian green
 
     physicalGapTransferChain :
-      Pullback.GapTransferChain fineGap losses terminalGap
+      Pullback.GapTransferChain
+        fineGap losses P33.p33PhysicalFloor
 
     pulledBackFloorNonnegative :
-      0ℚ ≤ Pullback.pullBackGap terminalGap losses
+      0ℚ ≤ Pullback.pullBackGap P33.p33PhysicalFloor losses
 
 open TerminalScalePriorityThreeData public
 
 terminalScaleGreenKernelDecay :
-  ∀ {fineGap terminalGap losses hessian green}
+  ∀ {fineGap losses hessian green}
     (data : TerminalScalePriorityThreeData
-      fineGap terminalGap losses hessian green)
+      fineGap losses hessian green)
     target →
   ∣ green
       (Promotion.root
@@ -97,9 +104,9 @@ terminalScaleGreenKernelDecay data target =
     (terminalCombesThomasData data) target
 
 fineScaleGapNonnegativeFromTerminalChain :
-  ∀ {fineGap terminalGap losses hessian green}
+  ∀ {fineGap losses hessian green}
     (data : TerminalScalePriorityThreeData
-      fineGap terminalGap losses hessian green) →
+      fineGap losses hessian green) →
   0ℚ ≤ fineGap
 fineScaleGapNonnegativeFromTerminalChain data =
   Pullback.pulledBackNonnegativeImpliesFineNonnegative
@@ -107,9 +114,9 @@ fineScaleGapNonnegativeFromTerminalChain data =
     (pulledBackFloorNonnegative data)
 
 terminalDecayAndFineGapFloor :
-  ∀ {fineGap terminalGap losses hessian green}
+  ∀ {fineGap losses hessian green}
     (data : TerminalScalePriorityThreeData
-      fineGap terminalGap losses hessian green)
+      fineGap losses hessian green)
     target →
   (∣ green
       (Promotion.root
