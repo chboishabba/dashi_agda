@@ -9,6 +9,7 @@ bash scripts/check_yang_mills_clay_highest_alpha_round29.sh
 
 files=(
   DASHI/Physics/YangMills/BalabanStrongCouplingSUFourDimensionalMarginExact.agda
+  DASHI/Physics/YangMills/BalabanStrongCouplingSU2ActionNormalizationExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingBetaRhoSeparationExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingPoincareBudgetExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda
@@ -31,11 +32,16 @@ checks=(
   'BalabanStrongCouplingSUFourDimensionalMarginExact.agda:thresholdSaturatesMargin'
   'BalabanStrongCouplingSUFourDimensionalMarginExact.agda:marginFactorsThroughThresholdSlack'
   'BalabanStrongCouplingSUFourDimensionalMarginExact.agda:configuredNormalizedMarginPositive'
+  'BalabanStrongCouplingSU2ActionNormalizationExact.agda:su2ExponentIsConstantMinusWilsonPenalty'
+  'BalabanStrongCouplingSU2ActionNormalizationExact.agda:configuredInteriorActionCoefficientExact'
+  'BalabanStrongCouplingSU2ActionNormalizationExact.agda:exponentAndPenaltySecondVariationsOppose'
   'BalabanStrongCouplingBetaRhoSeparationExact.agda:rhoAgainstThresholdSlackExact'
   'BalabanStrongCouplingBetaRhoSeparationExact.agda:rhoSubstitutedNormalizedMarginExact'
   'BalabanStrongCouplingPoincareBudgetExact.agda:logSobolevIsTwicePoincare'
   'BalabanStrongCouplingPoincareBudgetExact.agda:covarianceSquareBudgetFactorsThroughVariances'
   'BalabanStrongCouplingPoincareBudgetExact.agda:configuredSU2InverseLaw'
+  'BalabanStrongCouplingPoincareBudgetExact.agda:configuredSU2LeftInverseLaw'
+  'BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda:balancedSpatialDecompositionExact'
   'BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda:balancedExponentsAgree'
   'BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda:configuredCommonExponentExact'
   'BalabanStrongCouplingVsContinuumRouteExact.agda:unitInverseCouplingMarginExact'
@@ -51,9 +57,11 @@ for check in "${checks[@]}"; do
 done
 
 grep -q '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/BalabanStrongCouplingSUFourDimensionalMarginExact.agda
+grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanStrongCouplingSU2ActionNormalizationExact.agda
 grep -q '10.1007/BF01229381' DASHI/Physics/YangMills/BalabanStrongCouplingBetaRhoSeparationExact.agda
 grep -q '10.1007/978-3-540-36107-7_1' DASHI/Physics/YangMills/BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda
 grep -q 'No canonical inhabitant' DASHI/Physics/YangMills/BalabanStrongCouplingBetaRhoSeparationExact.agda
+grep -q 'does not identify beta with the small-field' DASHI/Physics/YangMills/BalabanStrongCouplingSU2ActionNormalizationExact.agda
 grep -q 'Poincare alone is not' DASHI/Physics/YangMills/BalabanStrongCouplingPoincareBudgetExact.agda
 grep -q 'does not supply those estimates' DASHI/Physics/YangMills/BalabanStrongCouplingSpaceTimeDecayBalanceExact.agda
 grep -q 'fixed-lattice strong-coupling' DASHI/Physics/YangMills/BalabanStrongCouplingVsContinuumRouteExact.agda
