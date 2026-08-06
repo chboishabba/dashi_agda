@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredDifferenceSixThreeExact w
 --
 --   M2Squared * sum_i (a_i b_i)^2.
 --
--- The dependency-ordered dimension-free Holder theorem then yields the
+-- The explicit nested-sum dimension-free Holder theorem then yields the
 -- complete two-branch sixth-power estimate with no branch-bound producer and
 -- no cardinality constant.
 ------------------------------------------------------------------------
@@ -40,7 +40,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
-import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneExact as Holder
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneV2Exact as Holder
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact as Kernel
 
 sumProductMassNonnegative :
