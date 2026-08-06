@@ -15,7 +15,7 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5
+import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
@@ -57,7 +57,7 @@ record UnifiedObjectTable : Setω where
       CrossScaleMatterPhysics.CrossScaleMatterPhysicsSurface
 
     round5FoundationsBoundary :
-      Round5.Round5FullBoundary
+      Round5.Round5CompleteBoundary
 
     plainPolicy :
       String
@@ -82,9 +82,9 @@ canonicalUnifiedObjectTable =
     ; crossScaleMatterPhysicsSurface =
         CrossScaleMatterPhysics.canonicalCrossScaleMatterPhysicsSurface
     ; round5FoundationsBoundary =
-        Round5.canonicalRound5FullBoundary
+        Round5.canonicalRound5CompleteBoundary
     ; plainPolicy =
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. The combined Round Five imports the PR 399 ternary/Yijing/natural-system theorem surface and adds fail-closed constants, dimension, atomic, nuclear, cosmological-observation, and GR-QFT emergence boundaries without promoting terminal unification."
+        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. The complete Round Five imports the PR 399 ternary/Yijing/natural-system theorem surface and adds fail-closed constants, dimension, atomic, nuclear, cosmological-observation, GR-QFT, hidden-sector collider, connected tri-to-bi junction, affine-slice, renderer-parity, low-precision search, and graph-to-field boundaries without promoting terminal unification or visual geometry to source ontology."
     }
 
 brainFMRIRemainsNonPromoting :
