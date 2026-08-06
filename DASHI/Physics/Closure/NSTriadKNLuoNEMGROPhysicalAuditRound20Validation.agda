@@ -13,6 +13,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoNEMGROPhysicalAuditRound20Validation wh
 -- * correct 3D L4 interpolation and sixth-power remainder;
 -- * coupling-parameter sign obstruction;
 -- * spectral-projector inverse-gap crossing;
+-- * exact low-frequency obstruction to global Poincare control;
+-- * constructive closure-cycle countermodel;
+-- * exact high-frequency L2/H1 approximation separation;
 -- * exact periodic Biot--Savart nonzero-mode strain symbol;
 -- * squared directional triple-product factor;
 -- * finite directional high-high shell summation.
@@ -30,6 +33,9 @@ import DASHI.Physics.Closure.NSTriadKNLuoAmplitudeScalingStaticRigidityNoGoExact
 import DASHI.Physics.Closure.NSTriadKNLuoThreeDimensionalGradientL4InterpolationExact
 import DASHI.Physics.Closure.NSTriadKNLuoCouplingParameterSignNoGoExact
 import DASHI.Physics.Closure.NSTriadKNLuoSpectralProjectorGapDependenceExact
+import DASHI.Physics.Closure.NSTriadKNLuoGlobalPoincareLowFrequencyNoGoExact
+import DASHI.Physics.Closure.NSTriadKNLuoWeakNonAlignmentCircularityExact
+import DASHI.Physics.Closure.NSTriadKNLuoHighFrequencyApproximationUniformGradientNoGoExact
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicBiotSavartMultiplierExact
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalKernelTripleProductExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDirectionalHHBridgeExact
