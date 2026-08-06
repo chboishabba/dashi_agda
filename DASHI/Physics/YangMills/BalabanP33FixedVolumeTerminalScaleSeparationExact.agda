@@ -45,12 +45,19 @@ module DASHI.Physics.YangMills.BalabanP33FixedVolumeTerminalScaleSeparationExact
 --   discountedLossBudget(losses)
 --     <= discountFactor(length losses) * (1/32).
 --
--- The pulled-back and fine-scale nonnegative floors are then derived.
+-- For four RG steps the inherited floor is exposed literally as
+--
+--   1/512 - loss0/2 - loss1/4 - loss2/8 - loss3/16.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Integer.Base using (+_)
 open import Data.Product.Base using (_×_; _,_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; ∣_∣; _≤_; _*_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; ∣_∣; _+_; _-_; _≤_; _*_; _/_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
@@ -69,6 +76,28 @@ bareUniformOneThirtySecondBlocked :
     (Wall.UniformUnscaledEvenCyclePoincare Wall.oneThirtySecond)
 bareUniformOneThirtySecondBlocked =
   Wall.oneThirtySecondNotUniformUnscaled
+
+------------------------------------------------------------------------
+-- Concrete four-step terminal floor.
+------------------------------------------------------------------------
+
+p33FourStepTerminalContributionExact :
+  (+ 1 / 16) * P33.p33PhysicalFloor ≡ + 1 / 512
+p33FourStepTerminalContributionExact = ℚRing.solve []
+
+p33FourStepPullbackExact : ∀ loss0 loss1 loss2 loss3 →
+  Pullback.pullBackGap P33.p33PhysicalFloor
+    (loss0 ∷ loss1 ∷ loss2 ∷ loss3 ∷ [])
+  ≡ (+ 1 / 512)
+    - ((+ 1 / 2) * loss0
+      + (+ 1 / 4) * loss1
+      + (+ 1 / 8) * loss2
+      + (+ 1 / 16) * loss3)
+p33FourStepPullbackExact loss0 loss1 loss2 loss3 =
+  trans
+    (Pullback.fourStepPullbackExact
+      P33.p33PhysicalFloor loss0 loss1 loss2 loss3)
+    (ℚRing.solve-∀ loss0 loss1 loss2 loss3)
 
 record TerminalScalePriorityThreeData
     (fineGap : ℚ)
@@ -110,9 +139,9 @@ pulledBackPhysicalFloorNonnegative :
     (data : TerminalScalePriorityThreeData
       fineGap losses hessian green) →
   0ℚ ≤ Pullback.pullBackGap P33.p33PhysicalFloor losses
-pulledBackPhysicalFloorNonnegative data =
+pulledBackPhysicalFloorNonnegative {losses = losses} data =
   Pullback.admissibleBudgetImpliesPulledBackNonnegative
-    P33.p33PhysicalFloor _ (discountedPhysicalLossBudget data)
+    P33.p33PhysicalFloor losses (discountedPhysicalLossBudget data)
 
 fineScaleGapNonnegativeFromTerminalChain :
   ∀ {fineGap losses hessian green}
