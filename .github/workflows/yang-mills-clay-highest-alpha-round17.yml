@@ -1,0 +1,35 @@
+name: Yang-Mills Clay highest-alpha round 17
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round17-coupled-rg-duhamel'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33BishopInverseDexpActualEndpointModulusExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33DuhamelOrderedSimplexMeasureExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayCoupledPolymerFlowRemainderExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayCoupledRGInvariantConeExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayCouplingPolymerDecouplingCounterexampleExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound17Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round17.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round17.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check actual endpoint, Duhamel measure and coupled RG cone
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round17.sh
