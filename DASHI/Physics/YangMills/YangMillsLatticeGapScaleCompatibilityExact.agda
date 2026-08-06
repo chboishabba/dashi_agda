@@ -32,7 +32,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -76,8 +76,6 @@ record LatticeGapScaleCompatibility
     uniformScaleLower :
       ∀ index → physicalMass * spacing index ≤ gap index
 
--- A fixed-beta positivity theorem has no field connecting distinct lattice
--- spacings and therefore cannot construct the record above by itself.
 record PointwiseFiniteCouplingGap (Beta : Set) : Set₁ where
   field
     gapAtBeta : Beta → ℚ
@@ -94,9 +92,6 @@ record RunningCouplingScaleBridge (SpacingIndex Beta : Set) : Set₁ where
       ∀ index →
       physicalMass * spacing index
       ≤ latticeGap (runningBeta index)
-
--- No canonical bridge is supplied from PointwiseFiniteCouplingGap.  The
--- missing datum is exactly latticeGapScaleCompatibility.
 
 configuredSpacingBase : ℚ
 configuredSpacingBase = + 1 / 2
@@ -140,8 +135,12 @@ quadraticGapRescalesToSpacing :
   inverseSpacing * spacing ≡ 1ℚ →
   physicalRescaledGap inverseSpacing gap ≡ spacing
 quadraticGapRescalesToSpacing
-    spacing .(spacing * spacing) inverseSpacing refl inverseLaw
-  rewrite inverseLaw = solve (spacing ∷ inverseSpacing ∷ [])
+    spacing .(spacing * spacing) inverseSpacing refl inverseLaw =
+  trans
+    (solve (spacing ∷ inverseSpacing ∷ []))
+    (trans
+      (cong (λ selected → selected * spacing) inverseLaw)
+      (solve (spacing ∷ [])))
 
 record ContinuumScaleBoundary : Set₁ where
   field
