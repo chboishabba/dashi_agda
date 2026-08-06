@@ -18,28 +18,40 @@ module DASHI.Biology.MonsterFilteredCarrierExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Represent 196883 = 10 * 3^9 + 53 as the dimension of an associated-graded
--- candidate, not as a claimed Monster branching rule.  The 53-dimensional
--- term is the reduced quotient V54 / 1, equivalently V54 minus one declared
--- trivial summand in the representation ring.  The filtration may be mixed
--- by a later total action; no graded piece is declared Monster-invariant.
+-- Represent 196883 as the dimension of an associated-graded candidate, not
+-- as a claimed Monster branching rule.  The former tenfold bulk notation is
+-- refined into
+--
+--   3^11 + 3^9 = 177147 + 19683 = 196830,
+--
+-- corresponding to nine ordinary balanced-ternary coarse channels and one
+-- structurally distinct j completion channel, each carrying the same 3^9
+-- fine-frequency carrier.  The 53-dimensional term is the reduced quotient
+-- V54 / 1.  No displayed piece is declared Monster-invariant.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat using (_+_; _*_)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Nat using (_+_)
 
-pow3nine : Nat
-pow3nine = 19683
+ordinaryHarmonicBulk : Nat
+ordinaryHarmonicBulk = 177147
 
-bulkMultiplicity : Nat
-bulkMultiplicity = 10
+completionJHarmonicBulk : Nat
+completionJHarmonicBulk = 19683
+
+structuredBulkDimension : Nat
+structuredBulkDimension = ordinaryHarmonicBulk + completionJHarmonicBulk
 
 reducedDimension : Nat
 reducedDimension = 53
 
 totalCandidateDimension : Nat
-totalCandidateDimension = bulkMultiplicity * pow3nine + reducedDimension
+totalCandidateDimension = structuredBulkDimension + reducedDimension
+
+structuredBulkDimensionExact : structuredBulkDimension ≡ 196830
+structuredBulkDimensionExact = refl
 
 totalCandidateDimensionExact : totalCandidateDimension ≡ 196883
 totalCandidateDimensionExact = refl
@@ -56,26 +68,26 @@ open FilteredDimension public
 
 dashIFilteredCarrier : FilteredDimension
 dashIFilteredCarrier =
-  filteredDimension (bulkMultiplicity * pow3nine) reducedDimension 196883 refl
+  filteredDimension structuredBulkDimension reducedDimension 196883 refl
 
 record AssociatedGradedCandidate : Set where
   constructor associatedGradedCandidate
   field
-    bulkPieceDimension : Nat
+    ordinaryPieceDimension : Nat
+    completionPieceDimension : Nat
     reducedPieceDimension : Nat
     gradedTotalDimension : Nat
     gradedDimensionExact :
-      gradedTotalDimension ≡ bulkPieceDimension + reducedPieceDimension
+      gradedTotalDimension
+      ≡ ordinaryPieceDimension
+        + completionPieceDimension
+        + reducedPieceDimension
 
 open AssociatedGradedCandidate public
 
 dashIAssociatedGraded : AssociatedGradedCandidate
 dashIAssociatedGraded =
-  associatedGradedCandidate
-    (bulkMultiplicity * pow3nine)
-    reducedDimension
-    196883
-    refl
+  associatedGradedCandidate 177147 19683 53 196883 refl
 
 record ReductionOrigin : Set where
   constructor reductionOrigin
@@ -97,9 +109,13 @@ record FilteredCarrierBoundary : Set where
     arithmeticIdentityChecked : Bool
     arithmeticIdentityCheckedIsTrue : arithmeticIdentityChecked ≡ true
 
-    associatedGradedStructureConstructed : Bool
-    associatedGradedStructureConstructedIsTrue :
-      associatedGradedStructureConstructed ≡ true
+    structuredAssociatedGradedConstructed : Bool
+    structuredAssociatedGradedConstructedIsTrue :
+      structuredAssociatedGradedConstructed ≡ true
+
+    tenIsPrimitiveSymmetryMultiplicity : Bool
+    tenIsPrimitiveSymmetryMultiplicityIsFalse :
+      tenIsPrimitiveSymmetryMultiplicity ≡ false
 
     gradedPiecesAreMonsterInvariant : Bool
     gradedPiecesAreMonsterInvariantIsFalse :
@@ -113,8 +129,12 @@ record FilteredCarrierBoundary : Set where
     fullMonsterActionConstructedIsFalse :
       fullMonsterActionConstructed ≡ false
 
-open import Agda.Builtin.Bool using (Bool; true; false)
-
 canonicalFilteredCarrierBoundary : FilteredCarrierBoundary
 canonicalFilteredCarrierBoundary =
-  filteredCarrierBoundary true refl true refl false refl false refl false refl
+  filteredCarrierBoundary
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
