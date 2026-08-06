@@ -31,9 +31,10 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
 import DASHI.Physics.Closure.NSTriadKNLuoMagnitudeWeightedDirectionIncrementExact as Increment
 
 record FilteredPairCell : Set where
@@ -72,7 +73,7 @@ weightedDirectionNonnegative dataSet =
             (Increment.smallerAmplitude dataSet))
       directionNN =
         nonNegative
-          (Increment.Gram.normSquaredNonnegative
+          (Gram.normSquaredNonnegative
             (Increment.vectorDifference
               (Increment.smallerDirection dataSet)
               (Increment.largerDirection dataSet)))
@@ -89,7 +90,7 @@ cellPairwiseBelowIncrement cell =
     (kernelWeightNonnegative cell)
     (weightedDirectionNonnegative (orderedIncrement cell))
     (kernelWeightNonnegative cell)
-    (Increment.Gram.normSquaredNonnegative
+    (Gram.normSquaredNonnegative
       (Increment.vectorDifference
         (Increment.smallerVorticity (orderedIncrement cell))
         (Increment.largerVorticity (orderedIncrement cell))))
@@ -137,7 +138,6 @@ finiteNearFieldBelowIncrementEnvelope :
 finiteNearFieldBelowIncrementEnvelope dataSet =
   let
     pairwise = finitePairwiseDefect (cells dataSet)
-    increments = finiteIncrementEnvelope (cells dataSet)
 
     pairwiseNonnegative : 0ℚ ≤ pairwise
     pairwiseNonnegative =
