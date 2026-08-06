@@ -7,6 +7,7 @@ import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
 import DASHI.Governance.CabarlahTraumaProjectionBridgeExact as Cabarlah
+import DASHI.Governance.TraumaMemorySublationBoundary as Trauma
 import DASHI.PointedBulkSporadicTarotCabarlahBoundary as Boundary
 
 pointedBulkRegression : Bulk.pointedBulkDimension ≡ 196830
@@ -74,9 +75,7 @@ wittBlockRegression :
 wittBlockRegression = Tarot.wittBlockEquation
 
 reflectingPoolMotiveRegression :
-  DASHI.Governance.TraumaMemorySublationBoundary.motiveInferredAsFact
-    DASHI.Governance.TraumaMemorySublationBoundary.reflectingPoolObservation
-  ≡ false
+  Trauma.motiveInferredAsFact Trauma.reflectingPoolObservation ≡ false
 reflectingPoolMotiveRegression =
   Cabarlah.reflectingPoolReadingDoesNotInferMotive
 
