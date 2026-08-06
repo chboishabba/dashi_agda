@@ -31,11 +31,9 @@ module DASHI.Physics.Closure.NSTriadKNYuIncrementDefectCriticalKernelExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_+_)
-open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
-open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteGeometricEnvelope as Geo
@@ -46,6 +44,17 @@ import DASHI.Physics.Closure.NSTriadKNYuFiniteFarFieldConvolutionC0Exact as Far
 
 incrementWeight : Nat → ℚ
 incrementWeight offset = Geo.quarter * Geo.pow Geo.quarter offset
+
+incrementWeightNonnegative :
+  (offset : Nat) → 0ℚ ≤ incrementWeight offset
+incrementWeightNonnegative offset =
+  L2.nonnegativeProductMonotone
+    Geo.quarterNonnegative
+    (Geo.powNonnegative Geo.quarter offset Geo.quarterNonnegative)
+    Geo.quarterNonnegative
+    (Geo.powNonnegative Geo.quarter offset Geo.quarterNonnegative)
+    ℚₚ.≤-refl
+    ℚₚ.≤-refl
 
 quarterBelowHalf : Geo.quarter ≤ HL.half
 quarterBelowHalf = toWitness {a? = Geo.quarter ≤? HL.half} _
@@ -91,21 +100,23 @@ finiteIncrementBelowAnnular :
   finiteIncrementConvolution criticalShell shell cutoff
   ≤ Far.finiteAnnularConvolution criticalShell shell cutoff
 finiteIncrementBelowAnnular criticalShell criticalNN shell zero =
-  let instance massNN = nonNegative (criticalNN shell)
-  in
-  ℚₚ.*-monoʳ-≤-nonNeg
-    (criticalShell shell)
+  L2.nonnegativeProductMonotone
+    (incrementWeightNonnegative zero)
+    (criticalNN shell)
+    (Far.annularWeightNonnegative zero)
+    (criticalNN shell)
     (incrementWeightBelowAnnularWeight zero)
+    ℚₚ.≤-refl
 finiteIncrementBelowAnnular criticalShell criticalNN shell (suc cutoff) =
   ℚₚ.+-mono-≤
     (finiteIncrementBelowAnnular criticalShell criticalNN shell cutoff)
-    (let
-       instance
-         massNN = nonNegative (criticalNN (shell + suc cutoff))
-     in
-     ℚₚ.*-monoʳ-≤-nonNeg
-       (criticalShell (shell + suc cutoff))
-       (incrementWeightBelowAnnularWeight (suc cutoff)))
+    (L2.nonnegativeProductMonotone
+      (incrementWeightNonnegative (suc cutoff))
+      (criticalNN (shell + suc cutoff))
+      (Far.annularWeightNonnegative (suc cutoff))
+      (criticalNN (shell + suc cutoff))
+      (incrementWeightBelowAnnularWeight (suc cutoff))
+      ℚₚ.≤-refl)
 
 record IncrementDefectCriticalKernelData : Set where
   constructor increment-defect-critical-kernel-data
