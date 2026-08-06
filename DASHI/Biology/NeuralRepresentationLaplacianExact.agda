@@ -88,8 +88,8 @@ fmriProjectionCollision :
 fmriProjectionCollision = refl
 
 microVariationDiffersDespiteSameObservation :
-  laplacianVariation microActivationA ≡ 3
-  × laplacianVariation microActivationB ≡ 2
+  laplacianVariation microActivationA ≡ 2
+  × laplacianVariation microActivationB ≡ 3
 microVariationDiffersDespiteSameObservation = refl , refl
 
 ------------------------------------------------------------------------
