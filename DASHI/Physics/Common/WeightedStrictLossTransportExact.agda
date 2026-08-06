@@ -35,7 +35,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 
 record WeightedLossStep : Set where
   constructor weightedLossStep
@@ -132,10 +132,9 @@ nonnegativeSurvivalIsZeroMargin :
   NonnegativeSurvivalAdmissible terminal steps
   ≡ StrictMarginAdmissible 0ℚ terminal steps
 nonnegativeSurvivalIsZeroMargin terminal steps =
-  ℚRing.solve-∀
-    (discountedLoss steps)
-    (terminalWeight steps)
-    terminal
+  cong
+    (λ selected → selected ≤ terminalWeight steps * terminal)
+    (ℚRing.solve-∀ (discountedLoss steps))
 
 singleStepPullBackExact :
   ∀ terminal factor loss →
