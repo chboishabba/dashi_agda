@@ -29,7 +29,10 @@ module DASHI.Mathematics.Topology.PoincareGeometrizationExactBoundary where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+open import Data.Rational.Base using (0ℚ; _*_)
 
 import DASHI.Mathematics.Topology.RoundThreeSphereRicciFlowExact as Round
 import DASHI.Physics.Closure.PerelmanRicciFlowAndGeometrizationBoundaryReceipt as Existing
@@ -97,17 +100,13 @@ existingGeometrizationAuthorityRemainsClosed =
 
 existingGeometrizationAuthorityIsFalse :
   Existing.authorityAvailable existingGeometrizationAuthorityRemainsClosed
-  ≡ Agda.Builtin.Bool.false
+  ≡ false
 existingGeometrizationAuthorityIsFalse = refl
-  where
-    open import Agda.Builtin.Bool
 
 roundSphereExactModelReused : ∀ extinctionTime →
   Round.roundRadiusSquared (Round.four * extinctionTime) extinctionTime
-  ≡ Data.Rational.Base.0ℚ
+  ≡ 0ℚ
 roundSphereExactModelReused = Round.roundExtinctionAtConfiguredTime
-  where
-    open import Data.Rational.Base
 
 record RicciFlowToGeometrizationBridge : Set₁ where
   field
@@ -129,7 +128,5 @@ data PoincareProofStage : Set where
   poincareConclusionStage
 
 roundModelDoesNotProveGeometrization :
-  roundMetricExactSolution ≡ geometrizationStage → Data.Empty.⊥
+  roundMetricExactSolution ≡ geometrizationStage → ⊥
 roundModelDoesNotProveGeometrization ()
-  where
-    open import Data.Empty
