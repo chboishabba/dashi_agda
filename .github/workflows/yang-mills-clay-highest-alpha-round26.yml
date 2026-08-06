@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - 'agent/ym-clay-cross-pollination-round25'
+      - 'agent/ym-clay-alpha-round26-physical-scale-uniformity'
     paths:
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalGapScaleInvarianceExact.agda'
