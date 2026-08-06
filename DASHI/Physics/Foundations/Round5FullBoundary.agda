@@ -3,6 +3,9 @@ module DASHI.Physics.Foundations.Round5FullBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.ConsciousAccessRound5FullBoundary as BiologyRound5
+import DASHI.Biology.DASHIYijingTernaryDivinationExact as BiologyYijing
+import DASHI.Biology.NSYMDialecticalFieldBridgeExact as BiologyNSYM
+import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact as Information
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact as ScaleTheory
@@ -28,7 +31,7 @@ import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
 import DASHI.Papers.Unification.TheoremInterface as ExistingUnification
 
 ------------------------------------------------------------------------
--- Cumulative exact finite theorem surface.  The first field imports the full
+-- Cumulative exact finite theorem surface.  The first fields import the full
 -- PR #399 biology/Yijing/natural-system boundary, so this tranche extends that
 -- theorem surface rather than creating a competing sibling Round Five.
 
@@ -60,7 +63,7 @@ record Round5FullBoundary : Set where
     unifiedEffectiveActionBoundary : Unified.UnifiedEffectiveActionBoundary
 
     biologyTernaryNineSheetCountIs19683 :
-      BiologyRound5.Yijing.ternaryStateCount 9 ≡ 19683
+      BiologyYijing.ternaryStateCount 9 ≡ 19683
 
     scaleOrbitCannotCollapse :
       Parameter.scaledObservable Parameter.unitScale
@@ -158,7 +161,7 @@ record Round5FullBoundary : Set where
       Quantum.triangleHolonomy ≡ Quantum.gaugeTwist
 
     biologyFiniteGaugeGapIsOne :
-      Quantum.NSYM.finiteMassGap ≡ 1
+      BiologyNSYM.finiteMassGap ≡ 1
 
     macroscopicQFTCorrectionVanishes :
       Hypotheses.qftIrrelevantCorrection Hypotheses.macroscopicScale ≡ 0
@@ -173,7 +176,7 @@ record Round5FullBoundary : Set where
       Sources.canonicalRound5SourceCount ≡ 17
 
     biologySourceCountIsTwentyThree :
-      Sources.ExistingRound5Sources.canonicalRound5ExtendedSourceCount ≡ 23
+      BiologySources.canonicalRound5ExtendedSourceCount ≡ 23
 
 open Round5FullBoundary public
 
@@ -267,7 +270,7 @@ canonicalRound5FullBoundary =
     ; graphLoopHasTwistHolonomy =
         refl
     ; biologyFiniteGaugeGapIsOne =
-        Quantum.existingFiniteGaugeGap
+        BiologyNSYM.finiteMassGapIsOne
     ; macroscopicQFTCorrectionVanishes =
         refl
     ; terminalUnificationRemainsFalse =
@@ -275,5 +278,5 @@ canonicalRound5FullBoundary =
     ; sourceCountIsSeventeen =
         refl
     ; biologySourceCountIsTwentyThree =
-        Sources.existingBiologyRound5SourceCountIsTwentyThree
+        BiologySources.canonicalRound5ExtendedSourceCountIsTwentyThree
     }
