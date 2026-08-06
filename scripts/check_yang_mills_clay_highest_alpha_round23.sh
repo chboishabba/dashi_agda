@@ -45,7 +45,12 @@ checks=(
   'BalabanP33TerminalScaleGapPullbackExact.agda:admissibleBudgetImpliesFineNonnegative'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:bareUniformOneThirtySecondBlocked'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:p33FourStepTerminalContributionExact'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:fourStepWeightedLoss'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:p33FourStepPullbackExact'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:fourStepDiscountedLossExact'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:p33FourStepDiscountedTerminalExact'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:FourStepPhysicalLossBudget'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:fourStepPhysicalBudgetAdmissible'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:discountedPhysicalLossBudget'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:terminalScaleGreenKernelDecay'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:pulledBackPhysicalFloorNonnegative'
@@ -72,6 +77,8 @@ grep -q 'NOT A MATHEMATICAL DEPENDENCY' \
   DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
 grep -q 'Public dates alone cannot establish either dependence or independence' \
   docs/yang-mills-combes-thomas-provenance.md
+grep -q 'cross-checked against an external public Lean programme' \
+  docs/yang-mills-combes-thomas-provenance.md
 grep -q 'Hopping-parameter expansion' \
   docs/yang-mills-combes-thomas-provenance.md
 
@@ -83,6 +90,8 @@ grep -q 'squareWave256LeftExact' \
 grep -q 'squareWave256EnergyExact' \
   DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
 grep -q '+ 1 / 512' \
+  DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
+grep -q 'FourStepPhysicalLossBudget' \
   DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
 grep -q 'fineGap losses P33.p33PhysicalFloor' \
   DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
