@@ -144,8 +144,9 @@ openCoverageCannotPublish : WorldPublication openCoverage → ⊥
 openCoverageCannotPublish ()
 
 ------------------------------------------------------------------------
--- Explicit executor status. The schema may name adjacent scales before the
--- durable overlapping-pair executor exists; those are distinct claims.
+-- Explicit executor status.  Migrations 055-057 plus the leased Python drain
+-- now wire both adjacent scales.  This records executable structure, not an
+-- observed integration-test receipt and not automatic semantic resolution.
 ------------------------------------------------------------------------
 
 record ReconciliationExecutorStatus : Set where
@@ -162,7 +163,7 @@ open ReconciliationExecutorStatus public
 
 currentPR470ExecutorStatus : ReconciliationExecutorStatus
 currentPR470ExecutorStatus =
-  reconciliationExecutorStatus true false true false true true
+  reconciliationExecutorStatus true true true true true true
 
 record HyperfabricAuthorityBoundary : Set where
   constructor hyperfabricAuthorityBoundary
