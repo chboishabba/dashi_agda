@@ -29,9 +29,9 @@ module DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact wh
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
+open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Nat.Base using (_≤_)
 
 record DeterministicMachine : Set₁ where
