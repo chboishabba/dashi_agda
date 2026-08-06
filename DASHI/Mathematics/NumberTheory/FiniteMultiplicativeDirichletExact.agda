@@ -138,10 +138,29 @@ monomialOfAppend semiring left right =
       x ≡ y → y ≡ z → x ≡ z
     transitivity refl second = second
 
+    symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+    symmetry refl = refl
+
+    congruence : ∀ {A B : Set} (f : A → B) {x y} →
+      x ≡ y → f x ≡ f y
+    congruence f refl = refl
+
     congruence₂ : ∀ {A B C : Set} (f : A → B → C)
       {x x' : A} {y y' : B} →
       x ≡ x' → y ≡ y' → f x y ≡ f x' y'
     congruence₂ f refl refl = refl
+
+    middleExchange : ∀ b c d →
+      Euler.multiply semiring b (Euler.multiply semiring c d)
+      ≡ Euler.multiply semiring c (Euler.multiply semiring b d)
+    middleExchange b c d =
+      transitivity
+        (symmetry (Euler.multiplyAssociative semiring b c d))
+        (transitivity
+          (congruence
+            (λ middle → Euler.multiply semiring middle d)
+            (Euler.multiplyCommutative semiring b c))
+          (Euler.multiplyAssociative semiring c b d))
 
     reassociateAndCommute : ∀ a b c d →
       Euler.multiply semiring
@@ -155,24 +174,12 @@ monomialOfAppend semiring left right =
         (Euler.multiplyAssociative semiring a b
           (Euler.multiply semiring c d))
         (transitivity
-          (congruence₂ (Euler.multiply semiring)
-            refl
-            (transitivity
-              (symmetry
-                (Euler.multiplyAssociative semiring b c d))
-              (congruence
-                (λ middle → Euler.multiply semiring middle d)
-                (Euler.multiplyCommutative semiring b c))))
+          (congruence
+            (Euler.multiply semiring a)
+            (middleExchange b c d))
           (symmetry
-            (Euler.multiplyAssociative semiring
-              (Euler.multiply semiring a c) b d)))
-      where
-        symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-        symmetry refl = refl
-
-        congruence : ∀ {A B : Set} (f : A → B) {x y} →
-          x ≡ y → f x ≡ f y
-        congruence f refl = refl
+            (Euler.multiplyAssociative semiring a c
+              (Euler.multiply semiring b d))))
 
 record CoprimeFactorisationPair
     (semiring : Euler.CommutativeSemiring)
