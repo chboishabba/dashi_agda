@@ -12,8 +12,10 @@ files=(
   DASHI/Physics/Common/ScaledFilteredEstimateExact.agda
   DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
   DASHI/Physics/Common/FiniteWreathRefinementExact.agda
+  DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinScaledFiltrationCrossPollinationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoHarmonicCrossPollinationRound17Validation.agda
 )
 
@@ -28,11 +30,16 @@ grep -q 'triadicNineDualityExact' DASHI/Physics/Common/FiniteRingScaleDualityExa
 grep -q 'lossCorrectedTransportExact' DASHI/Physics/Common/ScaledFilteredEstimateExact.agda
 grep -q 'pairProbesSeparate' DASHI/Physics/Common/SeparatingProbeFamilyExact.agda
 grep -q 'localPermutationStepTwiceAt' DASHI/Physics/Common/FiniteWreathRefinementExact.agda
+grep -q 'translationsCommute' DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
+grep -q 'pullbacksCommuteAt' DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda
 grep -q 'branchProbeExact' DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
 grep -q 'weakBranchMatchesDisplayedHalfGap' DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
 grep -q 'selectedGalerkinDefectTendsToZero' DASHI/Physics/Closure/NSTriadKNLuoGalerkinScaledFiltrationCrossPollinationExact.agda
+grep -q 'velocityTranslationsCommuteAt' DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
+grep -q 'firstTranslationHasOrderThreeAt' DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
 grep -q '10.1007/978-3-642-16830-7' DASHI/Physics/Closure/NSTriadKNLuoRelativeScaleProbeCrossPollinationExact.agda
 grep -q '10.2140/pjm.1982.98.333' DASHI/Physics/Closure/NSTriadKNLuoGalerkinScaledFiltrationCrossPollinationExact.agda
+grep -q '10.1017/CBO9780511626265' DASHI/Physics/Closure/NSTriadKNLuoThreeCycleTorusCrossPollinationExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoHarmonicCrossPollinationRound17Validation.agda
