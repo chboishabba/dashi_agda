@@ -23,7 +23,7 @@ module DASHI.Biology.JFineCoarseRelativeScaleExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat using (_*_)
+open import Data.Nat using (_+_; _*_)
 
 import DASHI.Physics.Common.FiniteRingScaleDualityExact as Scale
 
@@ -85,4 +85,3 @@ canonicalJRelativeScaleBoundary =
     ⊥ (λ impossible → ⊥)
   where
   open import Data.Empty using (⊥)
-  open import Data.Nat using (_+_)
