@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoFilteredDefectExcursionRound21Validatio
 ------------------------------------------------------------------------
 -- Cumulative validation root for Round Twenty-One.
 -- Pinned workflow trigger after the checker definition is present on branch.
+-- Validation-only stacked PR execution marker.
 --
 -- Imports the complete Round Twenty NEMGRO/periodic-symbol tranche and checks:
 --
