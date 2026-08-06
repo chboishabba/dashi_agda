@@ -2,15 +2,19 @@ module DASHI.Physics.Foundations.Round5AttachedFormalismBoundary where
 
 open import DASHI.Core.Prelude
 
-import DASHI.Physics.Foundations.FiniteHistoryOrientationExact as History
+import DASHI.Physics.Foundations.FiniteHistoryOrientationExact as HistoryInternal
 import DASHI.Physics.Foundations.HistoryWeightFiltrationExact as Weight
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact as Receipt
 import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact as WeightedKernel
-import DASHI.Physics.Foundations.TernaryKernelQuotientLyapunovExact as Kernel
+import DASHI.Physics.Foundations.TernaryKernelQuotientLyapunovExact as KernelInternal
 import DASHI.Physics.Foundations.FiniteStatisticalFiltrationExact as Statistics
 import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact as Reeb
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas as Sources
-import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
+import DASHI.Biology.TriadicKernelLiftQuotientExact as TriadicInternal
+
+module History = HistoryInternal
+module Kernel = KernelInternal
+module Triadic = TriadicInternal
 
 record Round5AttachedFormalismBoundary : Set where
   field
