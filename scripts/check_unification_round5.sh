@@ -16,6 +16,7 @@ FILES=(
   DASHI/Physics/Foundations/ParameterInformationGeometryExact.agda
   DASHI/Physics/Foundations/ScaleInvariantTheorySelectionExact.agda
   DASHI/Physics/Foundations/PadicCausalChartLosslessExact.agda
+  DASHI/Physics/Foundations/ModularProjectionQuantisationExact.agda
   DASHI/Physics/Foundations/RGMDLExhaustionChambersExact.agda
   DASHI/Physics/Foundations/DimensionPowerCountingBoundaryExact.agda
   DASHI/Physics/Foundations/DiscreteLorentzEmergenceBoundaryExact.agda
