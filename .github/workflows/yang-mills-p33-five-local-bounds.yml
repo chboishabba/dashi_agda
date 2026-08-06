@@ -1,0 +1,30 @@
+name: Yang-Mills P33 five local bounds
+
+on:
+  push:
+    branches:
+      - 'agent/ym-round13-five-local-physical-bounds'
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33*.agda'
+      - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
+      - '.github/workflows/yang-mills-p33-five-local-bounds.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33*.agda'
+      - 'scripts/check_yang_mills_p33_five_local_bounds.sh'
+      - '.github/workflows/yang-mills-p33-five-local-bounds.yml'
+  workflow_dispatch:
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - name: Check concrete SU2, Wilson, CMP109, spectral and weighted P33 math
+        run: nix develop --command bash scripts/check_yang_mills_p33_five_local_bounds.sh
