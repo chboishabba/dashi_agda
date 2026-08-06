@@ -25,7 +25,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _-_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst; sym)
 
 cubicDifferenceIdentity :
   ∀ a b c aN bN cN →
@@ -79,10 +79,8 @@ cubicTransferDifferenceBound budget =
   subst
     (λ lower →
       lower ≤ firstError budget + secondError budget + thirdError budget)
-    (Relation.Binary.PropositionalEquality.sym expanded)
+    (sym expanded)
     allThree
-  where
-  open import Relation.Binary.PropositionalEquality
 
 exactFactorConvergenceImpliesExactCubicTransfer :
   ∀ a b c aN bN cN →
