@@ -94,3 +94,31 @@ import DASHI.Biology.DynamicEffectiveTopology
 import DASHI.Biology.FiniteCoalitionConstruction
 import DASHI.Biology.ConsciousAccessRound2SourceAtlas
 import DASHI.Biology.ConsciousAccessRound2Regression
+
+------------------------------------------------------------------------
+-- Conscious-access round three: visual morphogenesis and hall geometry.
+
+import DASHI.Biology.PsychedelicVisualOperatorAlgebra
+import DASHI.Biology.MorphogeneticVisualGenerator
+import DASHI.Biology.RecursiveSpherePerforation
+import DASHI.Biology.NestedApertureVisibility
+import DASHI.Biology.LogPolarRetinotopyBridge
+import DASHI.Biology.VisualMotifTransitionOperator
+import DASHI.Biology.PostAcuteVisualAdaptation
+import DASHI.Biology.HallOfHallsCoalition
+import DASHI.Biology.PsychedelicMorphogeneticGeometryBoundary
+import DASHI.Biology.NaturalGrowthAlgorithmAtlas
+import DASHI.Biology.SquareApollonianPackingComparison
+import DASHI.Biology.SignedDistanceBooleanGeometry
+import DASHI.Biology.HallHybridManifoldTreeCarrier
+import DASHI.Biology.VisualPathBraidResidual
+import DASHI.Biology.QuantitativeStateDynamics
+import DASHI.Biology.SymbolicCompromiseMinimizer
+import DASHI.Biology.StableUnconsciousInvariantRegime
+import DASHI.Biology.DynamicCoalitionPhaseEmergence
+import DASHI.Biology.ConsciousAccessRound3FullBoundary
+import DASHI.Biology.ConsciousAccessRound3SourceAtlas
+import DASHI.Biology.ConsciousAccessRound3ExtendedSourceAtlas
+import DASHI.Biology.ConsciousAccessRound3Regression
+import DASHI.Biology.ConsciousAccessRound3ExtendedRegression
+import DASHI.Biology.ConsciousAccessRound3CompleteRegression

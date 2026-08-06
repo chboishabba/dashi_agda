@@ -1,0 +1,66 @@
+name: conscious-access-round3
+
+on:
+  push:
+    branches:
+      - 'agent/conscious-access-round3-visual-morphogenesis'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/PsychedelicVisualOperatorAlgebra.agda'
+      - 'DASHI/Biology/MorphogeneticVisualGenerator.agda'
+      - 'DASHI/Biology/RecursiveSpherePerforation.agda'
+      - 'DASHI/Biology/NestedApertureVisibility.agda'
+      - 'DASHI/Biology/LogPolarRetinotopyBridge.agda'
+      - 'DASHI/Biology/VisualMotifTransitionOperator.agda'
+      - 'DASHI/Biology/PostAcuteVisualAdaptation.agda'
+      - 'DASHI/Biology/HallOfHallsCoalition.agda'
+      - 'DASHI/Biology/PsychedelicMorphogeneticGeometryBoundary.agda'
+      - 'DASHI/Biology/NaturalGrowthAlgorithmAtlas.agda'
+      - 'DASHI/Biology/SquareApollonianPackingComparison.agda'
+      - 'DASHI/Biology/SignedDistanceBooleanGeometry.agda'
+      - 'DASHI/Biology/HallHybridManifoldTreeCarrier.agda'
+      - 'DASHI/Biology/VisualPathBraidResidual.agda'
+      - 'DASHI/Biology/QuantitativeStateDynamics.agda'
+      - 'DASHI/Biology/SymbolicCompromiseMinimizer.agda'
+      - 'DASHI/Biology/StableUnconsciousInvariantRegime.agda'
+      - 'DASHI/Biology/DynamicCoalitionPhaseEmergence.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3FullBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3SourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3ExtendedSourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3Regression.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3ExtendedRegression.agda'
+      - 'DASHI/Biology/ConsciousAccessRound3CompleteRegression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessRound3VisualMorphogenesis.md'
+      - 'Docs/support/reference/ConsciousAccessRound3ExtendedMathematics.md'
+      - 'Docs/support/reference/SquareApollonianPackingComparison.md'
+      - 'scripts/check_conscious_access_round3.sh'
+      - '.github/workflows/conscious-access-round3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check conscious-access round three
+        run: bash scripts/check_conscious_access_round3.sh
+      - name: Report successful kernel check
+        if: success() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh pr comment 389 --repo chboishabba/dashi_agda --body
+          'Round 3 Agda 2.9 kernel check passed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
+      - name: Report failed kernel check
+        if: failure() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh pr comment 389 --repo chboishabba/dashi_agda --body
+          'Round 3 Agda 2.9 kernel check failed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
