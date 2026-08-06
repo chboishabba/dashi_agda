@@ -9,7 +9,7 @@ open import DASHI.Cognition.PNF.NumericAuthority
 open import DASHI.Cognition.PNF.NumericHyperfabric
 
 ------------------------------------------------------------------------
--- Adjacent regions are overlapping execution fibres.  They do not replace the
+-- Adjacent regions are overlapping execution fibres. They do not replace the
 -- canonical containment parent and adjacency alone proves no semantic relation.
 ------------------------------------------------------------------------
 
@@ -97,26 +97,34 @@ record AdjacentExecutionStatus : Set where
   field
     pairCarrierMaterialized : Bool
     durableWorkQueued : Bool
-    sentencePairExecutorCompleted : Bool
-    paragraphPairExecutorCompleted : Bool
+    fencedExecutorAvailable : Bool
+    sentencePairDrainWired : Bool
+    paragraphPairDrainWired : Bool
+    checkedCandidatesStoredSeparately : Bool
     adjacencyAutoResolvesDemands : Bool
 
 open AdjacentExecutionStatus public
 
 currentPR470AdjacentStatus : AdjacentExecutionStatus
 currentPR470AdjacentStatus =
-  adjacentExecutionStatus true true false false false
+  adjacentExecutionStatus true true true true true true false
 
 record AdjacentAuthorityBoundary : Set where
   constructor adjacentAuthorityBoundary
   field
-    carrierMaterializationIsNotExecution :
-      sentencePairExecutorCompleted currentPR470AdjacentStatus ≡ false
-    paragraphCarrierIsNotExecution :
-      paragraphPairExecutorCompleted currentPR470AdjacentStatus ≡ false
+    carrierMaterializationIsWired :
+      pairCarrierMaterialized currentPR470AdjacentStatus ≡ true
+    fencedExecutorIsWired :
+      fencedExecutorAvailable currentPR470AdjacentStatus ≡ true
+    sentenceDrainIsWired :
+      sentencePairDrainWired currentPR470AdjacentStatus ≡ true
+    paragraphDrainIsWired :
+      paragraphPairDrainWired currentPR470AdjacentStatus ≡ true
+    candidateEvidenceRemainsSeparate :
+      checkedCandidatesStoredSeparately currentPR470AdjacentStatus ≡ true
     adjacencyDoesNotAutoResolve :
       adjacencyAutoResolvesDemands currentPR470AdjacentStatus ≡ false
 
 canonicalAdjacentAuthorityBoundary : AdjacentAuthorityBoundary
 canonicalAdjacentAuthorityBoundary =
-  adjacentAuthorityBoundary refl refl refl
+  adjacentAuthorityBoundary refl refl refl refl refl refl
