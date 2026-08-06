@@ -6,9 +6,12 @@ import DASHI.Biology.ConsciousAccessRound5FullBoundary as BiologyRound5
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as BiologyYijing
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as BiologyNSYM
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
+import DASHI.Biology.TriadicCarryResidualExact as TriadicCarry
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact as Information
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact as ScaleTheory
+import DASHI.Physics.Foundations.PadicCausalChartLosslessExact as PadicLossless
+import DASHI.Physics.Foundations.ModularProjectionQuantisationExact as Modular
 import DASHI.Physics.Foundations.RGMDLExhaustionChambersExact as Flow
 import DASHI.Physics.Foundations.DimensionPowerCountingBoundaryExact as Dimension
 import DASHI.Physics.Foundations.DiscreteLorentzEmergenceBoundaryExact as Lorentz
@@ -26,6 +29,7 @@ import DASHI.Physics.Foundations.FiniteGraphGaugeScalarExact as FiniteGauge
 import DASHI.Physics.Foundations.FiniteFockExcitationExact as Fock
 import DASHI.Physics.Foundations.KernelQFTEmergenceObligations as Quantum
 import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact as Hypotheses
+import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact as Cross399
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Unified
 import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
 import DASHI.Papers.Unification.TheoremInterface as ExistingUnification
@@ -42,6 +46,8 @@ record Round5FullBoundary : Set where
     parameterScaleBoundary : Parameter.ParameterScaleBoundary
     parameterInformationBoundary : Information.ParameterInformationGeometryBoundary
     scaleTheoryBoundary : ScaleTheory.ScaleInvariantTheorySelectionBoundary
+    padicLosslessBoundary : PadicLossless.PadicCausalChartLosslessBoundary
+    modularProjectionBoundary : Modular.ModularProjectionQuantisationBoundary
     rgmdlExhaustionBoundary : Flow.RGMDLExhaustionBoundary
     dimensionSelectionBoundary : Dimension.DimensionSelectionBoundary
     discreteLorentzBoundary : Lorentz.DiscreteLorentzBoundary
@@ -60,6 +66,8 @@ record Round5FullBoundary : Set where
     kernelQFTBoundary : Quantum.KernelQFTBoundary
     kernelEmergenceHypothesisBoundary :
       Hypotheses.KernelEmergenceHypothesisBoundary
+    pr399CrossPollinationBoundary :
+      Cross399.PR399FoundationsCrossPollinationBoundary
     unifiedEffectiveActionBoundary : Unified.UnifiedEffectiveActionBoundary
 
     biologyTernaryNineSheetCountIs19683 :
@@ -78,6 +86,22 @@ record Round5FullBoundary : Set where
           ScaleTheory.speedQuantityDimension
           ScaleTheory.timeQuantityDimension)
         ScaleTheory.lengthQuantityDimension
+
+    causalResidualPacketIsLossless :
+      PadicLossless.decodePacket
+        (PadicLossless.encodePacket
+          TriadicCarry.residue2
+          TriadicCarry.residue1)
+      ≡
+      TriadicCarry.residue1
+
+    axisProjectionCollapsesWitnessPair :
+      Modular.axisProjection Modular.pointA
+      ≡
+      Modular.axisProjection Modular.pointB
+
+    angledProjectionRetainsWitnessSeparation :
+      Modular.separationScore Modular.selectedProjection ≡ 1
 
     reparametrisedNormIsInvariant :
       Information.tangentNormSquare Information.lambdaChart
@@ -163,6 +187,11 @@ record Round5FullBoundary : Set where
     biologyFiniteGaugeGapIsOne :
       BiologyNSYM.finiteMassGap ≡ 1
 
+    pr399TwentySevenMatchesTriadicDepth :
+      Cross399.Hyperfabric.siteCount Cross399.Hyperfabric.sheetThreeByNine
+      ≡
+      ScaleTheory.scaleAtDepth 1 ScaleTheory.depth0
+
     macroscopicQFTCorrectionVanishes :
       Hypotheses.qftIrrelevantCorrection Hypotheses.macroscopicScale ≡ 0
 
@@ -193,6 +222,10 @@ canonicalRound5FullBoundary =
         Information.canonicalParameterInformationGeometryBoundary
     ; scaleTheoryBoundary =
         ScaleTheory.canonicalScaleInvariantTheorySelectionBoundary
+    ; padicLosslessBoundary =
+        PadicLossless.canonicalPadicCausalChartLosslessBoundary
+    ; modularProjectionBoundary =
+        Modular.canonicalModularProjectionQuantisationBoundary
     ; rgmdlExhaustionBoundary =
         Flow.canonicalRGMDLExhaustionBoundary
     ; dimensionSelectionBoundary =
@@ -227,6 +260,8 @@ canonicalRound5FullBoundary =
         Quantum.canonicalKernelQFTBoundary
     ; kernelEmergenceHypothesisBoundary =
         Hypotheses.canonicalKernelEmergenceHypothesisBoundary
+    ; pr399CrossPollinationBoundary =
+        Cross399.canonicalPR399FoundationsCrossPollinationBoundary
     ; unifiedEffectiveActionBoundary =
         Unified.canonicalUnifiedEffectiveActionBoundary
     ; biologyTernaryNineSheetCountIs19683 =
@@ -234,6 +269,14 @@ canonicalRound5FullBoundary =
     ; scaleOrbitCannotCollapse =
         Parameter.unitAndDoubledScaleAreDistinct
     ; buckinghamWitnessCloses =
+        refl
+    ; causalResidualPacketIsLossless =
+        PadicLossless.packetLossless
+          TriadicCarry.residue2
+          TriadicCarry.residue1
+    ; axisProjectionCollapsesWitnessPair =
+        refl
+    ; angledProjectionRetainsWitnessSeparation =
         refl
     ; reparametrisedNormIsInvariant =
         refl
@@ -271,6 +314,8 @@ canonicalRound5FullBoundary =
         refl
     ; biologyFiniteGaugeGapIsOne =
         BiologyNSYM.finiteMassGapIsOne
+    ; pr399TwentySevenMatchesTriadicDepth =
+        Cross399.hyperfabricTwentySevenMatchesTriadicRelativeScale
     ; macroscopicQFTCorrectionVanishes =
         refl
     ; terminalUnificationRemainsFalse =
