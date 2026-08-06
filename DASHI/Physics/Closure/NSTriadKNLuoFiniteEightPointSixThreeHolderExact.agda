@@ -4,10 +4,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact whe
 -- PROVENANCE
 --
 -- Classical Hölder inequality, specialized to the finite eight-point
--- periodic carrier.  Repository-original radical-free Agda proof; no DOI is
+-- periodic carrier. Repository-original radical-free Agda proof; no DOI is
 -- assigned.
 --
--- Related references:
+-- Related reference:
 -- Authors: Hajer Bahouri; Jean-Yves Chemin; Raphael Danchin.
 -- Title: "Fourier Analysis and Nonlinear Partial Differential Equations".
 -- DOI: 10.1007/978-3-642-16830-7.
@@ -24,20 +24,22 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact whe
 --
 --   S2^3 <= 64 A6 B3^2.
 --
--- The factor 64 is the elementary eight-point power-mean constant.  It is not
--- sharp, but is uniform and sufficient for the shell-gap argument.  No roots
--- or unformalized real powers are used.
+-- The proof uses only polynomial order: an eight-value cubic power-mean
+-- bound, diagonal <= product-of-sums, and sum of squares <= square of sum.
+-- No roots or unformalized real powers are used.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Product.Base using (_×_; _,_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _/_; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
+open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
@@ -47,23 +49,23 @@ four = Int.+ 4 / 1
 sixteen = Int.+ 16 / 1
 sixtyFour = Int.+ 64 / 1
 
+threeNonnegative : 0ℚ ≤ three
+threeNonnegative = toWitness {a? = 0ℚ ≤? three} _
+
+fourNonnegative : 0ℚ ≤ four
+fourNonnegative = toWitness {a? = 0ℚ ≤? four} _
+
+sixteenNonnegative : 0ℚ ≤ sixteen
+sixteenNonnegative = toWitness {a? = 0ℚ ≤? sixteen} _
+
+sixtyFourNonnegative : 0ℚ ≤ sixtyFour
+sixtyFourNonnegative = toWitness {a? = 0ℚ ≤? sixtyFour} _
+
 cube : ℚ → ℚ
 cube value = value * value * value
 
 sixth : ℚ → ℚ
 sixth value = cube value * cube value
-
-threeNonnegative : 0ℚ ≤ three
-threeNonnegative = ℚₚ.≤-refl
-
-fourNonnegative : 0ℚ ≤ four
-fourNonnegative = ℚₚ.≤-refl
-
-sixteenNonnegative : 0ℚ ≤ sixteen
-sixteenNonnegative = ℚₚ.≤-refl
-
-sixtyFourNonnegative : 0ℚ ≤ sixtyFour
-sixtyFourNonnegative = ℚₚ.≤-refl
 
 cubeNonnegative :
   (value : ℚ) →
@@ -74,9 +76,32 @@ cubeNonnegative value valueNonnegative =
     instance
       valueNN = nonNegative valueNonnegative
       squareNN = ℚₚ.nonNeg*nonNeg⇒nonNeg value value
-      cubeNN = ℚₚ.nonNeg*nonNeg⇒nonNeg (value * value) value
+      resultNN = ℚₚ.nonNeg*nonNeg⇒nonNeg (value * value) value
   in
   ℚₚ.nonNegative⁻¹ (cube value)
+
+sixthNonnegative :
+  (value : ℚ) →
+  0ℚ ≤ value →
+  0ℚ ≤ sixth value
+sixthNonnegative value valueNonnegative =
+  let
+    cubeNN = cubeNonnegative value valueNonnegative
+    instance
+      leftNN = nonNegative cubeNN
+      rightNN = nonNegative cubeNN
+      resultNN = ℚₚ.nonNeg*nonNeg⇒nonNeg (cube value) (cube value)
+  in
+  ℚₚ.nonNegative⁻¹ (sixth value)
+
+scaleBound :
+  (scale left right : ℚ) →
+  0ℚ ≤ scale →
+  left ≤ right →
+  scale * left ≤ scale * right
+scaleBound scale left right scaleNonnegative left≤right =
+  let instance scaleNN = nonNegative scaleNonnegative
+  in ℚₚ.*-monoˡ-≤-nonNeg scale left≤right
 
 cubePairBound :
   (left right : ℚ) →
@@ -85,10 +110,7 @@ cubePairBound :
   cube (left + right) ≤ four * (cube left + cube right)
 cubePairBound left right leftNN rightNN =
   let
-    sumNN : 0ℚ ≤ left + right
     sumNN = L2.addNonnegative leftNN rightNN
-
-    squareDifferenceNN : 0ℚ ≤ L2.square (left - right)
     squareDifferenceNN = L2.squareNonnegative (left - right)
 
     defectNN :
@@ -98,10 +120,9 @@ cubePairBound left right leftNN rightNN =
         instance
           threeNNI = nonNegative threeNonnegative
           sumNNI = nonNegative sumNN
-          firstProductNN =
-            ℚₚ.nonNeg*nonNeg⇒nonNeg three (left + right)
+          firstNN = ℚₚ.nonNeg*nonNeg⇒nonNeg three (left + right)
           squareNNI = nonNegative squareDifferenceNN
-          totalNN =
+          resultNN =
             ℚₚ.nonNeg*nonNeg⇒nonNeg
               (three * (left + right))
               (L2.square (left - right))
@@ -128,21 +149,7 @@ cubePairBound left right leftNN rightNN =
       ≡ four * (cube left + cube right)
     identity = solve (left ∷ right ∷ [])
   in
-  subst
-    (λ upper → cube (left + right) ≤ upper)
-    identity
-    addDefect
-
-scaleBound :
-  (scale left right : ℚ) →
-  0ℚ ≤ scale →
-  left ≤ right →
-  scale * left ≤ scale * right
-scaleBound scale left right scaleNN left≤right =
-  let
-    instance scaleNNI = nonNegative scaleNN
-  in
-  ℚₚ.*-monoˡ-≤-nonNeg scale left≤right
+  subst (λ upper → cube (left + right) ≤ upper) identity addDefect
 
 fourValueCubeBound :
   (a b c d : ℚ) →
@@ -151,29 +158,18 @@ fourValueCubeBound :
   ≤ sixteen * (cube a + cube b + cube c + cube d)
 fourValueCubeBound a b c d aNN bNN cNN dNN =
   let
-    abNN = L2.addNonnegative aNN bNN
-    cdNN = L2.addNonnegative cNN dNN
+    outer =
+      cubePairBound
+        (a + b) (c + d)
+        (L2.addNonnegative aNN bNN)
+        (L2.addNonnegative cNN dNN)
 
-    outer :
-      cube ((a + b) + (c + d))
-      ≤ four * (cube (a + b) + cube (c + d))
-    outer = cubePairBound (a + b) (c + d) abNN cdNN
-
-    innerSum :
-      cube (a + b) + cube (c + d)
-      ≤ four * (cube a + cube b)
-        + four * (cube c + cube d)
-    innerSum =
+    inner =
       ℚₚ.+-mono-≤
         (cubePairBound a b aNN bNN)
         (cubePairBound c d cNN dNN)
 
-    scaledInner :
-      four * (cube (a + b) + cube (c + d))
-      ≤ four
-        * (four * (cube a + cube b)
-          + four * (cube c + cube d))
-    scaledInner = scaleBound four _ _ fourNonnegative innerSum
+    scaled = scaleBound four _ _ fourNonnegative inner
 
     endpoint :
       four
@@ -183,8 +179,7 @@ fourValueCubeBound a b c d aNN bNN cNN dNN =
     endpoint = solve (cube a ∷ cube b ∷ cube c ∷ cube d ∷ [])
 
     reassociate :
-      cube (a + b + c + d)
-      ≡ cube ((a + b) + (c + d))
+      cube (a + b + c + d) ≡ cube ((a + b) + (c + d))
     reassociate = solve (a ∷ b ∷ c ∷ d ∷ [])
   in
   subst
@@ -197,7 +192,7 @@ fourValueCubeBound a b c d aNN bNN cNN dNN =
         (λ upper →
           four * (cube (a + b) + cube (c + d)) ≤ upper)
         endpoint
-        scaledInner))
+        scaled))
 
 eightValueCubeBound :
   (a b c d e f g h : ℚ) →
@@ -215,22 +210,13 @@ eightValueCubeBound a b c d e f g h
 
     left4NN =
       L2.addNonnegative
-        (L2.addNonnegative (L2.addNonnegative aNN bNN) cNN)
-        dNN
+        (L2.addNonnegative (L2.addNonnegative aNN bNN) cNN) dNN
     right4NN =
       L2.addNonnegative
-        (L2.addNonnegative (L2.addNonnegative eNN fNN) gNN)
-        hNN
+        (L2.addNonnegative (L2.addNonnegative eNN fNN) gNN) hNN
 
-    outer :
-      cube (left4 + right4)
-      ≤ four * (cube left4 + cube right4)
     outer = cubePairBound left4 right4 left4NN right4NN
 
-    inner :
-      cube left4 + cube right4
-      ≤ sixteen * (cube a + cube b + cube c + cube d)
-        + sixteen * (cube e + cube f + cube g + cube h)
     inner =
       ℚₚ.+-mono-≤
         (fourValueCubeBound a b c d aNN bNN cNN dNN)
@@ -269,108 +255,189 @@ eightValueCubeBound a b c d e f g h
         endpoint
         scaled))
 
+sum : List ℚ → ℚ
+sum [] = 0ℚ
+sum (value ∷ values) = value + sum values
+
+squares : List ℚ → ℚ
+squares [] = 0ℚ
+squares (value ∷ values) = L2.square value + squares values
+
+data NonnegativeList : List ℚ → Set where
+  nn[] : NonnegativeList []
+  nn∷ :
+    ∀ {value values} →
+    0ℚ ≤ value →
+    NonnegativeList values →
+    NonnegativeList (value ∷ values)
+
+sumNonnegative :
+  ∀ {values} →
+  NonnegativeList values →
+  0ℚ ≤ sum values
+sumNonnegative nn[] = ℚₚ.≤-refl
+sumNonnegative (nn∷ valueNN valuesNN) =
+  L2.addNonnegative valueNN (sumNonnegative valuesNN)
+
+squaresBelowSquareSum :
+  ∀ {values} →
+  NonnegativeList values →
+  squares values ≤ L2.square (sum values)
+squaresBelowSquareSum nn[] = ℚₚ.≤-refl
+squaresBelowSquareSum
+  (nn∷ {value} {values} valueNN valuesNN) =
+  let
+    ih = squaresBelowSquareSum valuesNN
+    first :
+      L2.square value + squares values
+      ≤ L2.square value + L2.square (sum values)
+    first = ℚₚ.+-monoʳ-≤ (L2.square value) ih
+
+    sumNN = sumNonnegative valuesNN
+    crossProductNN : 0ℚ ≤ value * sum values
+    crossProductNN =
+      let
+        instance
+          valueNNI = nonNegative valueNN
+          sumNNI = nonNegative sumNN
+          productNN = ℚₚ.nonNeg*nonNeg⇒nonNeg value (sum values)
+      in
+      ℚₚ.nonNegative⁻¹ (value * sum values)
+
+    crossNN = L2.addNonnegative crossProductNN crossProductNN
+
+    addCross :
+      L2.square value + L2.square (sum values)
+      ≤ L2.square value + L2.square (sum values)
+        + (value * sum values + value * sum values)
+    addCross =
+      subst
+        (λ lower →
+          lower
+          ≤ L2.square value + L2.square (sum values)
+            + (value * sum values + value * sum values))
+        (ℚₚ.+-identityʳ
+          (L2.square value + L2.square (sum values)))
+        (ℚₚ.+-monoʳ-≤
+          (L2.square value + L2.square (sum values))
+          crossNN)
+
+    endpoint :
+      L2.square value + L2.square (sum values)
+        + (value * sum values + value * sum values)
+      ≡ L2.square (value + sum values)
+    endpoint = solve (value ∷ sum values ∷ [])
+  in
+  ℚₚ.≤-trans
+    first
+    (subst
+      (λ upper →
+        L2.square value + L2.square (sum values) ≤ upper)
+      endpoint
+      addCross)
+
 Pair : Set
 Pair = ℚ × ℚ
 
-sumLeft : List Pair → ℚ
-sumLeft [] = 0ℚ
-sumLeft ((left , right) ∷ rest) = left + sumLeft rest
+pairSumLeft : List Pair → ℚ
+pairSumLeft [] = 0ℚ
+pairSumLeft ((left , right) ∷ rest) = left + pairSumLeft rest
 
-sumRight : List Pair → ℚ
-sumRight [] = 0ℚ
-sumRight ((left , right) ∷ rest) = right + sumRight rest
+pairSumRight : List Pair → ℚ
+pairSumRight [] = 0ℚ
+pairSumRight ((left , right) ∷ rest) = right + pairSumRight rest
 
-diagonal : List Pair → ℚ
-diagonal [] = 0ℚ
-diagonal ((left , right) ∷ rest) = left * right + diagonal rest
+pairDiagonal : List Pair → ℚ
+pairDiagonal [] = 0ℚ
+pairDiagonal ((left , right) ∷ rest) =
+  left * right + pairDiagonal rest
 
 data NonnegativePairs : List Pair → Set where
-  nn[] : NonnegativePairs []
-  nn∷ :
+  nnp[] : NonnegativePairs []
+  nnp∷ :
     ∀ {left right rest} →
     0ℚ ≤ left →
     0ℚ ≤ right →
     NonnegativePairs rest →
     NonnegativePairs ((left , right) ∷ rest)
 
-sumLeftNonnegative :
+pairLeftNonnegative :
   ∀ {pairs} →
   NonnegativePairs pairs →
-  0ℚ ≤ sumLeft pairs
-sumLeftNonnegative nn[] = ℚₚ.≤-refl
-sumLeftNonnegative (nn∷ leftNN rightNN restNN) =
-  L2.addNonnegative leftNN (sumLeftNonnegative restNN)
+  0ℚ ≤ pairSumLeft pairs
+pairLeftNonnegative nnp[] = ℚₚ.≤-refl
+pairLeftNonnegative (nnp∷ leftNN rightNN restNN) =
+  L2.addNonnegative leftNN (pairLeftNonnegative restNN)
 
-sumRightNonnegative :
+pairRightNonnegative :
   ∀ {pairs} →
   NonnegativePairs pairs →
-  0ℚ ≤ sumRight pairs
-sumRightNonnegative nn[] = ℚₚ.≤-refl
-sumRightNonnegative (nn∷ leftNN rightNN restNN) =
-  L2.addNonnegative rightNN (sumRightNonnegative restNN)
+  0ℚ ≤ pairSumRight pairs
+pairRightNonnegative nnp[] = ℚₚ.≤-refl
+pairRightNonnegative (nnp∷ leftNN rightNN restNN) =
+  L2.addNonnegative rightNN (pairRightNonnegative restNN)
 
-diagonalBelowProductOfSums :
+pairDiagonalBelowProduct :
   ∀ {pairs} →
   NonnegativePairs pairs →
-  diagonal pairs ≤ sumLeft pairs * sumRight pairs
-diagonalBelowProductOfSums nn[] = ℚₚ.≤-refl
-diagonalBelowProductOfSums
-  (nn∷ {left} {right} {rest} leftNN rightNN restNN) =
+  pairDiagonal pairs ≤ pairSumLeft pairs * pairSumRight pairs
+pairDiagonalBelowProduct nnp[] = ℚₚ.≤-refl
+pairDiagonalBelowProduct
+  (nnp∷ {left} {right} {rest} leftNN rightNN restNN) =
   let
-    ih = diagonalBelowProductOfSums restNN
-    first :
-      left * right + diagonal rest
-      ≤ left * right + sumLeft rest * sumRight rest
+    ih = pairDiagonalBelowProduct restNN
     first = ℚₚ.+-monoʳ-≤ (left * right) ih
 
-    crossNN :
-      0ℚ
-      ≤ left * sumRight rest + sumLeft rest * right
-    crossNN =
+    crossOneNN : 0ℚ ≤ left * pairSumRight rest
+    crossOneNN =
       let
         instance
           leftNNI = nonNegative leftNN
+          restNNI = nonNegative (pairRightNonnegative restNN)
+          productNN =
+            ℚₚ.nonNeg*nonNeg⇒nonNeg left (pairSumRight rest)
+      in ℚₚ.nonNegative⁻¹ (left * pairSumRight rest)
+
+    crossTwoNN : 0ℚ ≤ pairSumLeft rest * right
+    crossTwoNN =
+      let
+        instance
+          restNNI = nonNegative (pairLeftNonnegative restNN)
           rightNNI = nonNegative rightNN
-          sumLeftNNI = nonNegative (sumLeftNonnegative restNN)
-          sumRightNNI = nonNegative (sumRightNonnegative restNN)
-          firstCrossNN =
-            ℚₚ.nonNeg*nonNeg⇒nonNeg left (sumRight rest)
-          secondCrossNN =
-            ℚₚ.nonNeg*nonNeg⇒nonNeg (sumLeft rest) right
-      in
-      L2.addNonnegative
-        (ℚₚ.nonNegative⁻¹ (left * sumRight rest))
-        (ℚₚ.nonNegative⁻¹ (sumLeft rest * right))
+          productNN =
+            ℚₚ.nonNeg*nonNeg⇒nonNeg (pairSumLeft rest) right
+      in ℚₚ.nonNegative⁻¹ (pairSumLeft rest * right)
+
+    crossNN = L2.addNonnegative crossOneNN crossTwoNN
 
     addCross :
-      left * right + sumLeft rest * sumRight rest
-      ≤ left * right + sumLeft rest * sumRight rest
-        + (left * sumRight rest + sumLeft rest * right)
+      left * right + pairSumLeft rest * pairSumRight rest
+      ≤ left * right + pairSumLeft rest * pairSumRight rest
+        + (left * pairSumRight rest + pairSumLeft rest * right)
     addCross =
       subst
         (λ lower →
           lower
-          ≤ left * right + sumLeft rest * sumRight rest
-            + (left * sumRight rest + sumLeft rest * right))
+          ≤ left * right + pairSumLeft rest * pairSumRight rest
+            + (left * pairSumRight rest + pairSumLeft rest * right))
         (ℚₚ.+-identityʳ
-          (left * right + sumLeft rest * sumRight rest))
+          (left * right + pairSumLeft rest * pairSumRight rest))
         (ℚₚ.+-monoʳ-≤
-          (left * right + sumLeft rest * sumRight rest)
+          (left * right + pairSumLeft rest * pairSumRight rest)
           crossNN)
 
     endpoint :
-      left * right + sumLeft rest * sumRight rest
-        + (left * sumRight rest + sumLeft rest * right)
-      ≡ (left + sumLeft rest) * (right + sumRight rest)
-    endpoint =
-      solve
-        (left ∷ right ∷ sumLeft rest ∷ sumRight rest ∷ [])
+      left * right + pairSumLeft rest * pairSumRight rest
+        + (left * pairSumRight rest + pairSumLeft rest * right)
+      ≡ (left + pairSumLeft rest) * (right + pairSumRight rest)
+    endpoint = solve
+      (left ∷ right ∷ pairSumLeft rest ∷ pairSumRight rest ∷ [])
   in
   ℚₚ.≤-trans
     first
     (subst
       (λ upper →
-        left * right + sumLeft rest * sumRight rest ≤ upper)
+        left * right + pairSumLeft rest * pairSumRight rest ≤ upper)
       endpoint
       addCross)
 
@@ -401,40 +468,187 @@ open EightSixThreeData public
 productSquare : ℚ → ℚ → ℚ
 productSquare a b = L2.square (a * b)
 
-productL2Squared : EightSixThreeData → ℚ
-productL2Squared dataSet =
+productSquares : EightSixThreeData → List ℚ
+productSquares dataSet =
     productSquare (a0 dataSet) (b0 dataSet)
-  + productSquare (a1 dataSet) (b1 dataSet)
-  + productSquare (a2 dataSet) (b2 dataSet)
-  + productSquare (a3 dataSet) (b3 dataSet)
-  + productSquare (a4 dataSet) (b4 dataSet)
-  + productSquare (a5 dataSet) (b5 dataSet)
-  + productSquare (a6 dataSet) (b6 dataSet)
-  + productSquare (a7 dataSet) (b7 dataSet)
+  ∷ productSquare (a1 dataSet) (b1 dataSet)
+  ∷ productSquare (a2 dataSet) (b2 dataSet)
+  ∷ productSquare (a3 dataSet) (b3 dataSet)
+  ∷ productSquare (a4 dataSet) (b4 dataSet)
+  ∷ productSquare (a5 dataSet) (b5 dataSet)
+  ∷ productSquare (a6 dataSet) (b6 dataSet)
+  ∷ productSquare (a7 dataSet) (b7 dataSet)
+  ∷ []
+
+productL2Squared : EightSixThreeData → ℚ
+productL2Squared dataSet = sum (productSquares dataSet)
+
+lowSixths : EightSixThreeData → List ℚ
+lowSixths dataSet =
+    sixth (a0 dataSet) ∷ sixth (a1 dataSet)
+  ∷ sixth (a2 dataSet) ∷ sixth (a3 dataSet)
+  ∷ sixth (a4 dataSet) ∷ sixth (a5 dataSet)
+  ∷ sixth (a6 dataSet) ∷ sixth (a7 dataSet) ∷ []
+
+highCubes : EightSixThreeData → List ℚ
+highCubes dataSet =
+    cube (b0 dataSet) ∷ cube (b1 dataSet)
+  ∷ cube (b2 dataSet) ∷ cube (b3 dataSet)
+  ∷ cube (b4 dataSet) ∷ cube (b5 dataSet)
+  ∷ cube (b6 dataSet) ∷ cube (b7 dataSet) ∷ []
+
+highSixths : EightSixThreeData → List ℚ
+highSixths dataSet =
+    sixth (b0 dataSet) ∷ sixth (b1 dataSet)
+  ∷ sixth (b2 dataSet) ∷ sixth (b3 dataSet)
+  ∷ sixth (b4 dataSet) ∷ sixth (b5 dataSet)
+  ∷ sixth (b6 dataSet) ∷ sixth (b7 dataSet) ∷ []
 
 lowSixthMass : EightSixThreeData → ℚ
-lowSixthMass dataSet =
-    sixth (a0 dataSet) + sixth (a1 dataSet)
-  + sixth (a2 dataSet) + sixth (a3 dataSet)
-  + sixth (a4 dataSet) + sixth (a5 dataSet)
-  + sixth (a6 dataSet) + sixth (a7 dataSet)
+lowSixthMass dataSet = sum (lowSixths dataSet)
 
 highCubeMass : EightSixThreeData → ℚ
-highCubeMass dataSet =
-    cube (b0 dataSet) + cube (b1 dataSet)
-  + cube (b2 dataSet) + cube (b3 dataSet)
-  + cube (b4 dataSet) + cube (b5 dataSet)
-  + cube (b6 dataSet) + cube (b7 dataSet)
+highCubeMass dataSet = sum (highCubes dataSet)
 
-productSquaresNonnegative :
+nonnegativeEight :
+  ∀ {x0 x1 x2 x3 x4 x5 x6 x7} →
+  0ℚ ≤ x0 → 0ℚ ≤ x1 → 0ℚ ≤ x2 → 0ℚ ≤ x3 →
+  0ℚ ≤ x4 → 0ℚ ≤ x5 → 0ℚ ≤ x6 → 0ℚ ≤ x7 →
+  NonnegativeList (x0 ∷ x1 ∷ x2 ∷ x3 ∷ x4 ∷ x5 ∷ x6 ∷ x7 ∷ [])
+nonnegativeEight n0 n1 n2 n3 n4 n5 n6 n7 =
+  nn∷ n0 (nn∷ n1 (nn∷ n2 (nn∷ n3
+    (nn∷ n4 (nn∷ n5 (nn∷ n6 (nn∷ n7 nn[])))))))
+
+productSquaresNN :
   (dataSet : EightSixThreeData) →
-  0ℚ ≤ productSquare (a0 dataSet) (b0 dataSet)
-productSquaresNonnegative dataSet =
-  L2.squareNonnegative (a0 dataSet * b0 dataSet)
+  NonnegativeList (productSquares dataSet)
+productSquaresNN dataSet =
+  nonnegativeEight
+    (L2.squareNonnegative (a0 dataSet * b0 dataSet))
+    (L2.squareNonnegative (a1 dataSet * b1 dataSet))
+    (L2.squareNonnegative (a2 dataSet * b2 dataSet))
+    (L2.squareNonnegative (a3 dataSet * b3 dataSet))
+    (L2.squareNonnegative (a4 dataSet * b4 dataSet))
+    (L2.squareNonnegative (a5 dataSet * b5 dataSet))
+    (L2.squareNonnegative (a6 dataSet * b6 dataSet))
+    (L2.squareNonnegative (a7 dataSet * b7 dataSet))
 
--- The diagonal-product theorem gives the sharp comparison of the sum of
--- cubed product-squares with A6 B3^2; the only loss is the elementary
--- eight-point power-mean constant above.
+lowSixthsNN :
+  (dataSet : EightSixThreeData) →
+  NonnegativeList (lowSixths dataSet)
+lowSixthsNN dataSet =
+  nonnegativeEight
+    (sixthNonnegative (a0 dataSet) (a0NN dataSet))
+    (sixthNonnegative (a1 dataSet) (a1NN dataSet))
+    (sixthNonnegative (a2 dataSet) (a2NN dataSet))
+    (sixthNonnegative (a3 dataSet) (a3NN dataSet))
+    (sixthNonnegative (a4 dataSet) (a4NN dataSet))
+    (sixthNonnegative (a5 dataSet) (a5NN dataSet))
+    (sixthNonnegative (a6 dataSet) (a6NN dataSet))
+    (sixthNonnegative (a7 dataSet) (a7NN dataSet))
+
+highCubesNN :
+  (dataSet : EightSixThreeData) →
+  NonnegativeList (highCubes dataSet)
+highCubesNN dataSet =
+  nonnegativeEight
+    (cubeNonnegative (b0 dataSet) (b0NN dataSet))
+    (cubeNonnegative (b1 dataSet) (b1NN dataSet))
+    (cubeNonnegative (b2 dataSet) (b2NN dataSet))
+    (cubeNonnegative (b3 dataSet) (b3NN dataSet))
+    (cubeNonnegative (b4 dataSet) (b4NN dataSet))
+    (cubeNonnegative (b5 dataSet) (b5NN dataSet))
+    (cubeNonnegative (b6 dataSet) (b6NN dataSet))
+    (cubeNonnegative (b7 dataSet) (b7NN dataSet))
+
+highSixthsNN :
+  (dataSet : EightSixThreeData) →
+  NonnegativeList (highSixths dataSet)
+highSixthsNN dataSet =
+  nonnegativeEight
+    (sixthNonnegative (b0 dataSet) (b0NN dataSet))
+    (sixthNonnegative (b1 dataSet) (b1NN dataSet))
+    (sixthNonnegative (b2 dataSet) (b2NN dataSet))
+    (sixthNonnegative (b3 dataSet) (b3NN dataSet))
+    (sixthNonnegative (b4 dataSet) (b4NN dataSet))
+    (sixthNonnegative (b5 dataSet) (b5NN dataSet))
+    (sixthNonnegative (b6 dataSet) (b6NN dataSet))
+    (sixthNonnegative (b7 dataSet) (b7NN dataSet))
+
+sixthPairs : EightSixThreeData → List Pair
+sixthPairs dataSet =
+    (sixth (a0 dataSet) , sixth (b0 dataSet))
+  ∷ (sixth (a1 dataSet) , sixth (b1 dataSet))
+  ∷ (sixth (a2 dataSet) , sixth (b2 dataSet))
+  ∷ (sixth (a3 dataSet) , sixth (b3 dataSet))
+  ∷ (sixth (a4 dataSet) , sixth (b4 dataSet))
+  ∷ (sixth (a5 dataSet) , sixth (b5 dataSet))
+  ∷ (sixth (a6 dataSet) , sixth (b6 dataSet))
+  ∷ (sixth (a7 dataSet) , sixth (b7 dataSet))
+  ∷ []
+
+sixthPairsNN :
+  (dataSet : EightSixThreeData) →
+  NonnegativePairs (sixthPairs dataSet)
+sixthPairsNN dataSet =
+  nnp∷
+    (sixthNonnegative (a0 dataSet) (a0NN dataSet))
+    (sixthNonnegative (b0 dataSet) (b0NN dataSet))
+  (nnp∷
+    (sixthNonnegative (a1 dataSet) (a1NN dataSet))
+    (sixthNonnegative (b1 dataSet) (b1NN dataSet))
+  (nnp∷
+    (sixthNonnegative (a2 dataSet) (a2NN dataSet))
+    (sixthNonnegative (b2 dataSet) (b2NN dataSet))
+  (nnp∷
+    (sixthNonnegative (a3 dataSet) (a3NN dataSet))
+    (sixthNonnegative (b3 dataSet) (b3NN dataSet))
+  (nnp∷
+    (sixthNonnegative (a4 dataSet) (a4NN dataSet))
+    (sixthNonnegative (b4 dataSet) (b4NN dataSet))
+  (nnp∷
+    (sixthNonnegative (a5 dataSet) (a5NN dataSet))
+    (sixthNonnegative (b5 dataSet) (b5NN dataSet))
+  (nnp∷
+    (sixthNonnegative (a6 dataSet) (a6NN dataSet))
+    (sixthNonnegative (b6 dataSet) (b6NN dataSet))
+  (nnp∷
+    (sixthNonnegative (a7 dataSet) (a7NN dataSet))
+    (sixthNonnegative (b7 dataSet) (b7NN dataSet))
+    nnp[]))))))))
+
+cubeProductSumMeaning :
+  (dataSet : EightSixThreeData) →
+  cube (productSquare (a0 dataSet) (b0 dataSet))
+    + cube (productSquare (a1 dataSet) (b1 dataSet))
+    + cube (productSquare (a2 dataSet) (b2 dataSet))
+    + cube (productSquare (a3 dataSet) (b3 dataSet))
+    + cube (productSquare (a4 dataSet) (b4 dataSet))
+    + cube (productSquare (a5 dataSet) (b5 dataSet))
+    + cube (productSquare (a6 dataSet) (b6 dataSet))
+    + cube (productSquare (a7 dataSet) (b7 dataSet))
+  ≡ pairDiagonal (sixthPairs dataSet)
+cubeProductSumMeaning dataSet =
+  solve
+    ( a0 dataSet ∷ a1 dataSet ∷ a2 dataSet ∷ a3 dataSet
+    ∷ a4 dataSet ∷ a5 dataSet ∷ a6 dataSet ∷ a7 dataSet
+    ∷ b0 dataSet ∷ b1 dataSet ∷ b2 dataSet ∷ b3 dataSet
+    ∷ b4 dataSet ∷ b5 dataSet ∷ b6 dataSet ∷ b7 dataSet ∷ [])
+
+pairMassMeaning :
+  (dataSet : EightSixThreeData) →
+  pairSumLeft (sixthPairs dataSet) ≡ lowSixthMass dataSet
+  × pairSumRight (sixthPairs dataSet) ≡ sum (highSixths dataSet)
+pairMassMeaning dataSet = solve [] , solve []
+
+highSixthsAreHighCubeSquares :
+  (dataSet : EightSixThreeData) →
+  sum (highSixths dataSet) ≡ squares (highCubes dataSet)
+highSixthsAreHighCubeSquares dataSet =
+  solve
+    ( b0 dataSet ∷ b1 dataSet ∷ b2 dataSet ∷ b3 dataSet
+    ∷ b4 dataSet ∷ b5 dataSet ∷ b6 dataSet ∷ b7 dataSet ∷ [])
+
 eightPointSixThreeHolderRadicalFree :
   (dataSet : EightSixThreeData) →
   cube (productL2Squared dataSet)
@@ -452,167 +666,74 @@ eightPointSixThreeHolderRadicalFree dataSet =
     c6 = productSquare (a6 dataSet) (b6 dataSet)
     c7 = productSquare (a7 dataSet) (b7 dataSet)
 
-    c0NN = L2.squareNonnegative (a0 dataSet * b0 dataSet)
-    c1NN = L2.squareNonnegative (a1 dataSet * b1 dataSet)
-    c2NN = L2.squareNonnegative (a2 dataSet * b2 dataSet)
-    c3NN = L2.squareNonnegative (a3 dataSet * b3 dataSet)
-    c4NN = L2.squareNonnegative (a4 dataSet * b4 dataSet)
-    c5NN = L2.squareNonnegative (a5 dataSet * b5 dataSet)
-    c6NN = L2.squareNonnegative (a6 dataSet * b6 dataSet)
-    c7NN = L2.squareNonnegative (a7 dataSet * b7 dataSet)
-
-    powerMean :
-      cube (productL2Squared dataSet)
-      ≤ sixtyFour
-        * (cube c0 + cube c1 + cube c2 + cube c3
-          + cube c4 + cube c5 + cube c6 + cube c7)
     powerMean =
       eightValueCubeBound
         c0 c1 c2 c3 c4 c5 c6 c7
-        c0NN c1NN c2NN c3NN c4NN c5NN c6NN c7NN
+        (L2.squareNonnegative (a0 dataSet * b0 dataSet))
+        (L2.squareNonnegative (a1 dataSet * b1 dataSet))
+        (L2.squareNonnegative (a2 dataSet * b2 dataSet))
+        (L2.squareNonnegative (a3 dataSet * b3 dataSet))
+        (L2.squareNonnegative (a4 dataSet * b4 dataSet))
+        (L2.squareNonnegative (a5 dataSet * b5 dataSet))
+        (L2.squareNonnegative (a6 dataSet * b6 dataSet))
+        (L2.squareNonnegative (a7 dataSet * b7 dataSet))
 
-    a6b6Pairs : List Pair
-    a6b6Pairs =
-        (sixth (a0 dataSet) , sixth (b0 dataSet))
-      ∷ (sixth (a1 dataSet) , sixth (b1 dataSet))
-      ∷ (sixth (a2 dataSet) , sixth (b2 dataSet))
-      ∷ (sixth (a3 dataSet) , sixth (b3 dataSet))
-      ∷ (sixth (a4 dataSet) , sixth (b4 dataSet))
-      ∷ (sixth (a5 dataSet) , sixth (b5 dataSet))
-      ∷ (sixth (a6 dataSet) , sixth (b6 dataSet))
-      ∷ (sixth (a7 dataSet) , sixth (b7 dataSet))
-      ∷ []
+    diagonal = pairDiagonalBelowProduct (sixthPairsNN dataSet)
+    masses = pairMassMeaning dataSet
 
-    b3Pairs : List Pair
-    b3Pairs =
-        (cube (b0 dataSet) , cube (b0 dataSet))
-      ∷ (cube (b1 dataSet) , cube (b1 dataSet))
-      ∷ (cube (b2 dataSet) , cube (b2 dataSet))
-      ∷ (cube (b3 dataSet) , cube (b3 dataSet))
-      ∷ (cube (b4 dataSet) , cube (b4 dataSet))
-      ∷ (cube (b5 dataSet) , cube (b5 dataSet))
-      ∷ (cube (b6 dataSet) , cube (b6 dataSet))
-      ∷ (cube (b7 dataSet) , cube (b7 dataSet))
-      ∷ []
-
-    a6b6NN : NonnegativePairs a6b6Pairs
-    a6b6NN =
-      nn∷ (cubeNonnegative (cube (a0 dataSet)) (cubeNonnegative (a0 dataSet) (a0NN dataSet)))
-        (cubeNonnegative (cube (b0 dataSet)) (cubeNonnegative (b0 dataSet) (b0NN dataSet)))
-      (nn∷ (cubeNonnegative (cube (a1 dataSet)) (cubeNonnegative (a1 dataSet) (a1NN dataSet)))
-        (cubeNonnegative (cube (b1 dataSet)) (cubeNonnegative (b1 dataSet) (b1NN dataSet)))
-      (nn∷ (cubeNonnegative (cube (a2 dataSet)) (cubeNonnegative (a2 dataSet) (a2NN dataSet)))
-        (cubeNonnegative (cube (b2 dataSet)) (cubeNonnegative (b2 dataSet) (b2NN dataSet)))
-      (nn∷ (cubeNonnegative (cube (a3 dataSet)) (cubeNonnegative (a3 dataSet) (a3NN dataSet)))
-        (cubeNonnegative (cube (b3 dataSet)) (cubeNonnegative (b3 dataSet) (b3NN dataSet)))
-      (nn∷ (cubeNonnegative (cube (a4 dataSet)) (cubeNonnegative (a4 dataSet) (a4NN dataSet)))
-        (cubeNonnegative (cube (b4 dataSet)) (cubeNonnegative (b4 dataSet) (b4NN dataSet)))
-      (nn∷ (cubeNonnegative (cube (a5 dataSet)) (cubeNonnegative (a5 dataSet) (a5NN dataSet)))
-        (cubeNonnegative (cube (b5 dataSet)) (cubeNonnegative (b5 dataSet) (b5NN dataSet)))
-      (nn∷ (cubeNonnegative (cube (a6 dataSet)) (cubeNonnegative (a6 dataSet) (a6NN dataSet)))
-        (cubeNonnegative (cube (b6 dataSet)) (cubeNonnegative (b6 dataSet) (b6NN dataSet)))
-      (nn∷ (cubeNonnegative (cube (a7 dataSet)) (cubeNonnegative (a7 dataSet) (a7NN dataSet)))
-        (cubeNonnegative (cube (b7 dataSet)) (cubeNonnegative (b7 dataSet) (b7NN dataSet)))
-        nn[]))))))))
-
-    b3NN : NonnegativePairs b3Pairs
-    b3NN =
-      nn∷ (cubeNonnegative (b0 dataSet) (b0NN dataSet)) (cubeNonnegative (b0 dataSet) (b0NN dataSet))
-      (nn∷ (cubeNonnegative (b1 dataSet) (b1NN dataSet)) (cubeNonnegative (b1 dataSet) (b1NN dataSet))
-      (nn∷ (cubeNonnegative (b2 dataSet) (b2NN dataSet)) (cubeNonnegative (b2 dataSet) (b2NN dataSet))
-      (nn∷ (cubeNonnegative (b3 dataSet) (b3NN dataSet)) (cubeNonnegative (b3 dataSet) (b3NN dataSet))
-      (nn∷ (cubeNonnegative (b4 dataSet) (b4NN dataSet)) (cubeNonnegative (b4 dataSet) (b4NN dataSet))
-      (nn∷ (cubeNonnegative (b5 dataSet) (b5NN dataSet)) (cubeNonnegative (b5 dataSet) (b5NN dataSet))
-      (nn∷ (cubeNonnegative (b6 dataSet) (b6NN dataSet)) (cubeNonnegative (b6 dataSet) (b6NN dataSet))
-      (nn∷ (cubeNonnegative (b7 dataSet) (b7NN dataSet)) (cubeNonnegative (b7 dataSet) (b7NN dataSet))
-        nn[]))))))))
-
-    diagonalMeaning :
-      cube c0 + cube c1 + cube c2 + cube c3
-        + cube c4 + cube c5 + cube c6 + cube c7
-      ≡ diagonal a6b6Pairs
-    diagonalMeaning =
-      solve
-        ( a0 dataSet ∷ a1 dataSet ∷ a2 dataSet ∷ a3 dataSet
-        ∷ a4 dataSet ∷ a5 dataSet ∷ a6 dataSet ∷ a7 dataSet
-        ∷ b0 dataSet ∷ b1 dataSet ∷ b2 dataSet ∷ b3 dataSet
-        ∷ b4 dataSet ∷ b5 dataSet ∷ b6 dataSet ∷ b7 dataSet ∷ [])
-
-    firstDiagonal :
-      diagonal a6b6Pairs
-      ≤ sumLeft a6b6Pairs * sumRight a6b6Pairs
-    firstDiagonal = diagonalBelowProductOfSums a6b6NN
-
-    bSixToCubeSquare :
-      diagonal b3Pairs ≤ sumLeft b3Pairs * sumRight b3Pairs
-    bSixToCubeSquare = diagonalBelowProductOfSums b3NN
-
-    massMeanings :
-      sumLeft a6b6Pairs ≡ lowSixthMass dataSet
-      × sumRight a6b6Pairs ≡ diagonal b3Pairs
-    massMeanings = solve [] , solve []
-
-    highMeaning :
-      sumLeft b3Pairs ≡ highCubeMass dataSet
-      × sumRight b3Pairs ≡ highCubeMass dataSet
-    highMeaning = solve [] , solve []
-
-    firstAdjusted :
-      cube c0 + cube c1 + cube c2 + cube c3
-        + cube c4 + cube c5 + cube c6 + cube c7
-      ≤ lowSixthMass dataSet * diagonal b3Pairs
-    firstAdjusted =
-      subst
-        (λ lower → lower ≤ lowSixthMass dataSet * diagonal b3Pairs)
-        (sym diagonalMeaning)
-        (subst
-          (λ leftMass →
-            diagonal a6b6Pairs
-            ≤ leftMass * diagonal b3Pairs)
-          (proj₁ massMeanings)
-          (subst
-            (λ rightMass →
-              diagonal a6b6Pairs
-              ≤ sumLeft a6b6Pairs * rightMass)
-            (proj₂ massMeanings)
-            firstDiagonal))
-
-    highAdjusted :
-      diagonal b3Pairs
-      ≤ highCubeMass dataSet * highCubeMass dataSet
-    highAdjusted =
+    diagonalAdjusted :
+      pairDiagonal (sixthPairs dataSet)
+      ≤ lowSixthMass dataSet * sum (highSixths dataSet)
+    diagonalAdjusted =
       subst
         (λ leftMass →
-          diagonal b3Pairs ≤ leftMass * highCubeMass dataSet)
-        (proj₁ highMeaning)
+          pairDiagonal (sixthPairs dataSet)
+          ≤ leftMass * sum (highSixths dataSet))
+        (proj₁ masses)
         (subst
           (λ rightMass →
-            diagonal b3Pairs ≤ sumLeft b3Pairs * rightMass)
-          (proj₂ highMeaning)
-          bSixToCubeSquare)
+            pairDiagonal (sixthPairs dataSet)
+            ≤ pairSumLeft (sixthPairs dataSet) * rightMass)
+          (proj₂ masses)
+          diagonal)
 
-    lowMassNN : 0ℚ ≤ lowSixthMass dataSet
-    lowMassNN = sumLeftNonnegative a6b6NN
+    highSquareBound :
+      sum (highSixths dataSet)
+      ≤ highCubeMass dataSet * highCubeMass dataSet
+    highSquareBound =
+      subst
+        (λ lower →
+          lower ≤ highCubeMass dataSet * highCubeMass dataSet)
+        (sym (highSixthsAreHighCubeSquares dataSet))
+        (squaresBelowSquareSum (highCubesNN dataSet))
 
-    scaledHigh :
-      lowSixthMass dataSet * diagonal b3Pairs
-      ≤ lowSixthMass dataSet
-        * (highCubeMass dataSet * highCubeMass dataSet)
-    scaledHigh = scaleBound
-      (lowSixthMass dataSet)
-      (diagonal b3Pairs)
-      (highCubeMass dataSet * highCubeMass dataSet)
-      lowMassNN
-      highAdjusted
+    lowNN = sumNonnegative (lowSixthsNN dataSet)
+    scaledHigh =
+      scaleBound
+        (lowSixthMass dataSet)
+        (sum (highSixths dataSet))
+        (highCubeMass dataSet * highCubeMass dataSet)
+        lowNN
+        highSquareBound
 
-    inside :
+    inside = ℚₚ.≤-trans diagonalAdjusted scaledHigh
+
+    cubeSumAdjusted :
       cube c0 + cube c1 + cube c2 + cube c3
         + cube c4 + cube c5 + cube c6 + cube c7
       ≤ lowSixthMass dataSet
         * (highCubeMass dataSet * highCubeMass dataSet)
-    inside = ℚₚ.≤-trans firstAdjusted scaledHigh
+    cubeSumAdjusted =
+      subst
+        (λ lower →
+          lower
+          ≤ lowSixthMass dataSet
+            * (highCubeMass dataSet * highCubeMass dataSet))
+        (sym (cubeProductSumMeaning dataSet))
+        inside
 
-    scaledInside = scaleBound sixtyFour _ _ sixtyFourNonnegative inside
+    scaledInside =
+      scaleBound sixtyFour _ _ sixtyFourNonnegative cubeSumAdjusted
 
     endpoint :
       sixtyFour
