@@ -12,7 +12,12 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonSignedGlobalExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PeriodicDivergenceUpperExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeSignedLowerExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeParameterizedYoungExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalBackgroundGaugeResidualExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33SelectedBackgroundFiniteCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33CubicShellSeriesExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda'
@@ -36,5 +41,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check signed Wilson, terminal Hessian, no-go and exact tails
+      - name: Check signed Wilson, carrier bridges, terminal Hessian, no-go and tails
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round27.sh
