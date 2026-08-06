@@ -3,8 +3,11 @@ module DASHI.Physics.Foundations.Round5AttachedFormalismRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact as History
+import DASHI.Physics.Foundations.HistoryWeightFiltrationExact as Weight
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact as Receipt
+import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact as WeightedKernel
 import DASHI.Physics.Foundations.TernaryKernelQuotientLyapunovExact as Kernel
+import DASHI.Physics.Foundations.FiniteStatisticalFiltrationExact as Statistics
 import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact as Reeb
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas as Sources
 import DASHI.Physics.Foundations.Round5AttachedFormalismBoundary as Boundary
@@ -33,6 +36,22 @@ noSignalRegression :
   History.pastAccessibleOutcome History.choosePlusBoundary
 noSignalRegression = History.finiteNoBackwardSignalling
 
+weightSeparationRegression :
+  Weight.visibleAt Weight.initialFiltration Weight.terminalEvent ≡ false
+  ×
+  Weight.visibleAt Weight.terminalFiltration Weight.terminalEvent ≡ true
+weightSeparationRegression = refl , refl
+
+arrowFunctionalRegression :
+  Weight.entropyValue Weight.arrowFinal
+  ≡
+  Weight.entropyValue Weight.arrowInitial + 1
+  ×
+  Weight.descriptionLengthValue Weight.arrowFinal
+  ≡
+  Weight.descriptionLengthValue Weight.arrowInitial + 2
+arrowFunctionalRegression = refl , refl
+
 receiptSeparationRegression :
   Receipt.sourceOnlyReceipt ≡ Receipt.kernelReceipt → ⊥
 receiptSeparationRegression = Receipt.sourceOnlyIsNotKernelReceipt
@@ -47,6 +66,27 @@ thresholdRegression :
   Receipt.ascendedState
 thresholdRegression = refl
 
+weightedEquivarianceRegression :
+  WeightedKernel.symmetricKernel
+    (WeightedKernel.swapCoordinates
+      (Triadic.negativeTrit , Triadic.positiveTrit))
+  ≡
+  WeightedKernel.swapCoordinates
+    (WeightedKernel.symmetricKernel
+      (Triadic.negativeTrit , Triadic.positiveTrit))
+weightedEquivarianceRegression = refl
+
+asymmetricWeightCounterexampleRegression :
+  WeightedKernel.asymmetricKernel
+    (WeightedKernel.swapCoordinates WeightedKernel.asymmetricWitness)
+  ≡
+  WeightedKernel.swapCoordinates
+    (WeightedKernel.asymmetricKernel WeightedKernel.asymmetricWitness)
+  →
+  ⊥
+asymmetricWeightCounterexampleRegression =
+  WeightedKernel.asymmetricKernelBreaksCoordinateSwap
+
 quotientDescentRegression :
   Triadic.quotientNine
     (Kernel.sheetKernel
@@ -55,7 +95,9 @@ quotientDescentRegression :
   Kernel.quotientKernel
     (Triadic.quotientNine
       (Triadic.positiveTrit , Triadic.negativeTrit))
-quotientDescentRegression = Kernel.sheetKernelDescends _
+quotientDescentRegression =
+  Kernel.sheetKernelDescends
+    (Triadic.positiveTrit , Triadic.negativeTrit)
 
 periodicCounterexampleRegression :
   Kernel.oscillatingKernel
@@ -70,6 +112,28 @@ lyapunovConvergenceRegression :
   ≡
   Triadic.zeroOrbit
 lyapunovConvergenceRegression = refl
+
+statisticalSeparationRegression :
+  Statistics.parameterDistance Statistics.parameterLeft Statistics.parameterRight
+  ≡
+  Statistics.parameterDistance Statistics.parameterRight Statistics.parameterLeft
+statisticalSeparationRegression = refl
+
+coarseProjectionRegression :
+  Statistics.coarseProjection Statistics.fineLeftLow
+  ≡
+  Statistics.coarseProjection Statistics.fineLeftHigh
+coarseProjectionRegression = Statistics.coarseProjectionIsNonInjective
+
+persistenceRegression :
+  Statistics.persistentFeature Statistics.scaleOne
+  ≡
+  Statistics.featurePresent
+  ×
+  Statistics.persistentFeature Statistics.scaleThree
+  ≡
+  Statistics.featureAbsent
+persistenceRegression = refl , refl
 
 reebMassRegression :
   Reeb.massSplit Reeb.leftComponent
