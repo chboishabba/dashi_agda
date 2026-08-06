@@ -13,7 +13,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceDynamicRarityExact where
 -- Authors: Peter Constantin; Charles Fefferman.
 -- Title: "Direction of Vorticity and the Problem of Global Regularity for the
 -- Navier-Stokes Equations".
--- DOI: 10.1512/iumj.1993.42.42014.
+-- DOI: 10.1512/iumj.1993.42.42034.
 --
 -- PURPOSE
 -- State and prove the exact final implication for the proposed direct F3
