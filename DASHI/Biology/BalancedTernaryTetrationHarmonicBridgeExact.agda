@@ -17,12 +17,16 @@ module DASHI.Biology.BalancedTernaryTetrationHarmonicBridgeExact where
 -- growth.  A channel is one coarse/frequency pair; a configuration is an
 -- assignment of one fine state to every coarse channel; the existing tower
 -- recursively makes an entire level the index type of the next field.
+--
+-- The jFine evaluation fibre is checked to have the same 3^9 cardinality as
+-- the relative harmonic factor in jAbsoluteFine = jCoarse * jFine.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
+import DASHI.Biology.JFineCoarseRelativeScaleExact as Relative
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Tower
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 
@@ -34,6 +38,10 @@ FineConfigurationCarrier = Harmonic.FullFineAssignment
 
 jFineEvaluation : FineConfigurationCarrier → Harmonic.FineFrequency
 jFineEvaluation = Harmonic.jFine
+
+jFineEvaluationFibreMatchesRelativeScale :
+  Harmonic.fineFrequencyDimension ≡ Relative.jFineFrequency
+jFineEvaluationFibreMatchesRelativeScale = refl
 
 ExistingNineValuedTowerLevel : Nat → Set
 ExistingNineValuedTowerLevel = Tower.SelfIndexedCarrier
