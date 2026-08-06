@@ -8,195 +8,236 @@ module DASHI.Physics.YangMills.BalabanP33LiteralPhysicalPerturbationAdapterExact
 -- DOI: 10.1103/PhysRevD.10.2445.
 --
 -- Tadeusz Bałaban,
+-- "Spaces of Regular Gauge Field Configurations on a Lattice and Gauge
+-- Fixing Conditions", Communications in Mathematical Physics 99 (1985),
+-- 75--102. DOI: 10.1007/BF01466594.
+--
+-- Tadeusz Bałaban,
 -- "Propagators for Lattice Gauge Theories in a Background Field",
 -- Communications in Mathematical Physics 99 (1985), 389--434.
 -- DOI: 10.1007/BF01240355.
 --
 -- DASHI CONTRIBUTION
 --
--- Bind every representation used by the cancellation theorem to one physical
--- perturbation h.  A model owns functions which send the same h to:
+-- Eliminate the remaining same-h coherence socket.  A model no longer accepts
+-- an arbitrary `secondVariationOf h` alongside an unrelated physical field.
+-- Instead it owns the physical background and perturbation producers, together
+-- with the actual gauge and CMP109 residual-jet constructors.  The complete
+-- literal Hessian data are then constructed definitionally:
 --
---   * its literal side-four bond field;
---   * its literal Wilson/gauge/CMP109 second-variation data;
---   * its physical norm, reference-difference and Wilson-second-variation
---     scalars.
+--   plaquette jets = right-exponential jets of backgroundOf h and fieldOf h;
+--   gauge jet      = gaugeResidualAt (backgroundOf h) (fieldOf h);
+--   constraint jet = constraintResidualAt (backgroundOf h) (fieldOf h).
 --
--- The model also owns exact pointwise identifications between those physical
--- scalars and the values computed from the bond field and jet data.  The index
--- h is therefore not phantom: every component in the theorem is obtained by
--- applying one declared producer family to that same h.
+-- Thus the Wilson value in the final theorem is literally the physical
+-- rational Wilson plaquette sum for that same background and h.  The model may
+-- still choose the repository's concrete gauge/CMP109 constructors, but it can
+-- no longer pair their output with a separately supplied Wilson Hessian.
 --
--- This prevents an arbitrary bond field from being paired with unrelated jet
--- data.  Once a physical implementation constructs this model, the exact
--- cancellation theorem transports a physical Wilson-minus-difference estimate
--- to the literal Hessian without any additional compatibility premise.
+-- The final theorem consumes exactly two analytic defects on these computed
+-- quantities:
+--
+--   H_W(A;h)-H_W(1;h),
+--   H_gf(A;h)-H_div(1;h),
+--
+-- and returns the literal 1/32 Hessian floor.  No duplicated norm, reference,
+-- curl, divergence, Wilson, gauge, or Hessian scalar receipt remains.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (ℚ; 0ℚ; _*_; -_; _-_; _≤_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (map)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; -_; _-_; _≤_)
 open import Relation.Binary.PropositionalEquality using
-  (cong; cong₂; subst; sym)
+  (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Hodge
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanP33Path4SignedRemainderCoercivityExact as P33
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2HodgeCoercivityExact as PhysicalHodge
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintCancellationExact as Cancel
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
-import DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact as SharpPromotion
+import DASHI.Physics.YangMills.BalabanP33WilsonSharpBudgetCoercivityExact as Budget
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonGaugeBoundaryCoercivityExact as Endgame
+import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as WilsonPhysical
 
 ------------------------------------------------------------------------
--- One physical perturbation model and its exact compatibility laws.
+-- Concrete producer family.
 ------------------------------------------------------------------------
 
 record LiteralPhysicalPerturbationModel
-    (Perturbation Plaquette GaugeIndex ConstraintIndex : Set) : Set₁ where
+    (Perturbation GaugeIndex ConstraintIndex : Set) : Set₁ where
   field
-    bondFieldOf : Perturbation → Hodge.RationalBondField4
+    backgroundOf :
+      Perturbation → WilsonPhysical.RationalSU2Background4
 
-    secondVariationOf : Perturbation →
-      Jets.LiteralPhysicalSecondVariation
-        Plaquette GaugeIndex ConstraintIndex
+    physicalFieldOf :
+      Perturbation → Physical.PhysicalSU2BondField4
 
-    physicalNormSqOf : Perturbation → ℚ
-    physicalReferenceDifferenceOf : Perturbation → ℚ
-    physicalWilsonSecondVariationOf : Perturbation → ℚ
+    gaugeResidualAt :
+      WilsonPhysical.RationalSU2Background4 →
+      Physical.PhysicalSU2BondField4 →
+      Jets.FiniteResidualSecondJet GaugeIndex
 
-    bondNormMatchesPhysical : ∀ h →
-      Hodge.bondNormSq (bondFieldOf h) ≡ physicalNormSqOf h
-
-    referenceDifferenceMatchesPhysical : ∀ h →
-      Hodge.bondReferenceDifferenceEnergy (bondFieldOf h)
-      ≡ physicalReferenceDifferenceOf h
-
-    wilsonSecondVariationMatchesPhysical : ∀ h →
-      Jets.wilsonSecondVariation (secondVariationOf h)
-      ≡ physicalWilsonSecondVariationOf h
+    constraintResidualAt :
+      WilsonPhysical.RationalSU2Background4 →
+      Physical.PhysicalSU2BondField4 →
+      Jets.FiniteResidualSecondJet ConstraintIndex
 
     componentMeanZero : ∀ h →
-      Hodge.BondComponentMeanZero (bondFieldOf h)
+      PhysicalHodge.PhysicalBondComponentMeanZero (physicalFieldOf h)
 
     gaugeExact : ∀ h →
       Jets.ExactResidualBackground
-        (Jets.gaugeResidual (secondVariationOf h))
+        (gaugeResidualAt (backgroundOf h) (physicalFieldOf h))
 
     constraintExact : ∀ h →
       Jets.ExactResidualBackground
-        (Jets.constraintResidual (secondVariationOf h))
+        (constraintResidualAt (backgroundOf h) (physicalFieldOf h))
 
 open LiteralPhysicalPerturbationModel public
 
-physicalWilsonDifference :
-  ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex} →
+literalSecondVariationOf :
+  ∀ {Perturbation GaugeIndex ConstraintIndex} →
   LiteralPhysicalPerturbationModel
-    Perturbation Plaquette GaugeIndex ConstraintIndex →
-  Perturbation → ℚ
-physicalWilsonDifference model h =
-  physicalWilsonSecondVariationOf model h
-  - physicalReferenceDifferenceOf model h
+    Perturbation GaugeIndex ConstraintIndex →
+  Perturbation →
+  Jets.LiteralPhysicalSecondVariation
+    WilsonPhysical.Plaquette4 GaugeIndex ConstraintIndex
+literalSecondVariationOf model h = record
+  { Jets.LiteralPhysicalSecondVariation.plaquettes =
+      WilsonPhysical.plaquettes4
+  ; Jets.LiteralPhysicalSecondVariation.plaquetteJetData =
+      WilsonPhysical.plaquetteJetData
+        (backgroundOf model h) (physicalFieldOf model h)
+  ; Jets.LiteralPhysicalSecondVariation.gaugeResidual =
+      gaugeResidualAt model
+        (backgroundOf model h) (physicalFieldOf model h)
+  ; Jets.LiteralPhysicalSecondVariation.constraintResidual =
+      constraintResidualAt model
+        (backgroundOf model h) (physicalFieldOf model h)
+  }
 
-literalWilsonDifferenceMatchesPhysical :
-  ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex}
+literalGaugeResidualIsProducedResidual :
+  ∀ {Perturbation GaugeIndex ConstraintIndex}
     (model : LiteralPhysicalPerturbationModel
-      Perturbation Plaquette GaugeIndex ConstraintIndex)
-    h →
-  Jets.wilsonSecondVariation (secondVariationOf model h)
-    - Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h)
-  ≡ physicalWilsonDifference model h
-literalWilsonDifferenceMatchesPhysical model h =
-  cong₂ _-_
-    (wilsonSecondVariationMatchesPhysical model h)
-    (referenceDifferenceMatchesPhysical model h)
+      Perturbation GaugeIndex ConstraintIndex) h →
+  Jets.gaugeResidual (literalSecondVariationOf model h)
+  ≡ gaugeResidualAt model
+      (backgroundOf model h) (physicalFieldOf model h)
+literalGaugeResidualIsProducedResidual model h = refl
+
+literalConstraintResidualIsProducedResidual :
+  ∀ {Perturbation GaugeIndex ConstraintIndex}
+    (model : LiteralPhysicalPerturbationModel
+      Perturbation GaugeIndex ConstraintIndex) h →
+  Jets.constraintResidual (literalSecondVariationOf model h)
+  ≡ constraintResidualAt model
+      (backgroundOf model h) (physicalFieldOf model h)
+literalConstraintResidualIsProducedResidual model h = refl
 
 ------------------------------------------------------------------------
--- Physical 1/32 Wilson comparison to the literal Hessian.
+-- The literal Wilson fold is the concrete physical Wilson fold.
 ------------------------------------------------------------------------
 
-literalHessianCoerciveFromPhysicalWilsonDifference :
-  ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex}
+literalMapSumEqualsIndexedSum :
+  ∀ {A : Set} (values : List A) (term : A → ℚ) →
+  Jets.sumRational (map term values)
+  ≡ Sums.sumRational values term
+literalMapSumEqualsIndexedSum [] term = refl
+literalMapSumEqualsIndexedSum (value ∷ values) term =
+  cong (term value +_)
+    (literalMapSumEqualsIndexedSum values term)
+
+literalWilsonIsPhysicalWilson :
+  ∀ {Perturbation GaugeIndex ConstraintIndex}
     (model : LiteralPhysicalPerturbationModel
-      Perturbation Plaquette GaugeIndex ConstraintIndex)
+      Perturbation GaugeIndex ConstraintIndex) h →
+  Jets.wilsonSecondVariation (literalSecondVariationOf model h)
+  ≡ WilsonPhysical.physicalWilsonSecondVariation
+      (backgroundOf model h) (physicalFieldOf model h)
+literalWilsonIsPhysicalWilson model h =
+  literalMapSumEqualsIndexedSum
+    WilsonPhysical.plaquettes4
+    (WilsonPhysical.plaquetteWilsonSecondVariation
+      (backgroundOf model h) (physicalFieldOf model h))
+
+literalWilsonDefectIsPhysicalDefect :
+  ∀ {Perturbation GaugeIndex ConstraintIndex}
+    (model : LiteralPhysicalPerturbationModel
+      Perturbation GaugeIndex ConstraintIndex) h →
+  Jets.wilsonSecondVariation (literalSecondVariationOf model h)
+    - Endgame.flatCurlEnergy (physicalFieldOf model h)
+  ≡ WilsonPhysical.physicalWilsonDefect
+      (backgroundOf model h) (physicalFieldOf model h)
+literalWilsonDefectIsPhysicalDefect model h =
+  trans
+    (cong
+      (_- Endgame.flatCurlEnergy (physicalFieldOf model h))
+      (literalWilsonIsPhysicalWilson model h))
+    (sym
+      (WilsonPhysical.physicalWilsonDefectIsBackgroundMinusFlatCurl
+        (backgroundOf model h) (physicalFieldOf model h)))
+
+------------------------------------------------------------------------
+-- The corrected same-background/same-h coercivity theorem.
+------------------------------------------------------------------------
+
+literalHessianCoerciveFromSamePhysicalPerturbation :
+  ∀ {Perturbation GaugeIndex ConstraintIndex}
+    (model : LiteralPhysicalPerturbationModel
+      Perturbation GaugeIndex ConstraintIndex)
     h →
-  - (P33.p33PhysicalFloor * physicalNormSqOf model h)
-    ≤ physicalWilsonDifference model h →
-  P33.p33PhysicalFloor * physicalNormSqOf model h
-    ≤ Jets.literalTotalSecondVariation (secondVariationOf model h)
-literalHessianCoerciveFromPhysicalWilsonDifference
-    model h physicalLower =
+  - (Sharp.sharpSixteenAtomBudget
+      * Physical.physicalSU2BondNormSq (physicalFieldOf model h))
+    ≤ WilsonPhysical.physicalWilsonDefect
+        (backgroundOf model h) (physicalFieldOf model h) →
+  - (Budget.configuredGaugeHodgeBudget
+      * Physical.physicalSU2BondNormSq (physicalFieldOf model h))
+    ≤ Cancel.gaugeFirstEnergy (literalSecondVariationOf model h)
+      - Endgame.flatDivergenceEnergy (physicalFieldOf model h) →
+  P33.p33PhysicalFloor
+    * Physical.physicalSU2BondNormSq (physicalFieldOf model h)
+  ≤ Jets.literalTotalSecondVariation (literalSecondVariationOf model h)
+literalHessianCoerciveFromSamePhysicalPerturbation
+    model h physicalWilsonLower gaugeLower =
   let
-    internalLower :
-      - (P33.p33PhysicalFloor
-          * Hodge.bondNormSq (bondFieldOf model h))
-      ≤ Jets.wilsonSecondVariation (secondVariationOf model h)
-          - Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h)
-    internalLower =
+    dataSet = literalSecondVariationOf model h
+
+    literalWilsonLower :
+      - (Sharp.sharpSixteenAtomBudget
+          * Physical.physicalSU2BondNormSq (physicalFieldOf model h))
+      ≤ Jets.wilsonSecondVariation dataSet
+          - Endgame.flatCurlEnergy (physicalFieldOf model h)
+    literalWilsonLower =
       subst
-        (λ lower →
-          lower
-          ≤ Jets.wilsonSecondVariation (secondVariationOf model h)
-              - Hodge.bondReferenceDifferenceEnergy (bondFieldOf model h))
-        (cong
-          (λ normSq → - (P33.p33PhysicalFloor * normSq))
-          (sym (bondNormMatchesPhysical model h)))
-        (subst
-          (λ upper →
-            - (P33.p33PhysicalFloor * physicalNormSqOf model h)
-            ≤ upper)
-          (sym (literalWilsonDifferenceMatchesPhysical model h))
-          physicalLower)
-
-    internalCoercive :
-      P33.p33PhysicalFloor
-        * Hodge.bondNormSq (bondFieldOf model h)
-      ≤ Jets.literalTotalSecondVariation (secondVariationOf model h)
-    internalCoercive =
-      Cancel.literalHessianCoerciveFromWilsonDifference
-        (bondFieldOf model h)
-        (secondVariationOf model h)
-        (componentMeanZero model h)
-        (gaugeExact model h)
-        (constraintExact model h)
-        internalLower
+        (λ selected →
+          - (Sharp.sharpSixteenAtomBudget
+              * Physical.physicalSU2BondNormSq (physicalFieldOf model h))
+          ≤ selected)
+        (sym (literalWilsonDefectIsPhysicalDefect model h))
+        physicalWilsonLower
   in
-  subst
-    (λ lower →
-      lower ≤ Jets.literalTotalSecondVariation (secondVariationOf model h))
-    (cong (P33.p33PhysicalFloor *_)
-      (bondNormMatchesPhysical model h))
-    internalCoercive
-
-------------------------------------------------------------------------
--- Sharp sixteen-atom physical Wilson comparison to the literal Hessian.
-------------------------------------------------------------------------
-
-literalHessianCoerciveFromPhysicalSharpWilsonBudget :
-  ∀ {Perturbation Plaquette GaugeIndex ConstraintIndex}
-    (model : LiteralPhysicalPerturbationModel
-      Perturbation Plaquette GaugeIndex ConstraintIndex)
-    h →
-  - (Sharp.sharpSixteenAtomBudget * physicalNormSqOf model h)
-    ≤ physicalWilsonDifference model h →
-  P33.p33PhysicalFloor * physicalNormSqOf model h
-    ≤ Jets.literalTotalSecondVariation (secondVariationOf model h)
-literalHessianCoerciveFromPhysicalSharpWilsonBudget
-    model h physicalSharpLower =
-  literalHessianCoerciveFromPhysicalWilsonDifference
-    model h
-    (SharpPromotion.sharpSignedLowerImpliesPhysicalSignedLower
-      (physicalNormSqOf model h)
-      (physicalWilsonDifference model h)
-      (subst
-        (λ normSq → 0ℚ ≤ normSq)
-        (bondNormMatchesPhysical model h)
-        (SharpPromotion.bondNormSqNonnegative (bondFieldOf model h)))
-      physicalSharpLower)
+  Endgame.literalHessianCoerciveFromPhysicalWilsonGaugeDefects
+    (physicalFieldOf model h)
+    dataSet
+    (componentMeanZero model h)
+    (subst Jets.ExactResidualBackground
+      (sym (literalGaugeResidualIsProducedResidual model h))
+      (gaugeExact model h))
+    (subst Jets.ExactResidualBackground
+      (sym (literalConstraintResidualIsProducedResidual model h))
+      (constraintExact model h))
+    literalWilsonLower
+    gaugeLower
 
 literalPhysicalPerturbationAdapterLevel : ProofLevel
 literalPhysicalPerturbationAdapterLevel = machineChecked
 
-literalPhysicalWilsonDifferenceLevel : ProofLevel
-literalPhysicalWilsonDifferenceLevel = machineChecked
+literalPhysicalWilsonCoherenceLevel : ProofLevel
+literalPhysicalWilsonCoherenceLevel = machineChecked
 
-literalPhysicalSharpWilsonCoercivityLevel : ProofLevel
-literalPhysicalSharpWilsonCoercivityLevel = machineChecked
+literalSamePerturbationWilsonGaugeCoercivityLevel : ProofLevel
+literalSamePerturbationWilsonGaugeCoercivityLevel = machineChecked
