@@ -3,6 +3,7 @@ module DASHI.Visualisation.EventPadicContinuationRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Visualisation.EventFilamentFieldExact as Event
+import DASHI.Visualisation.FiniteAnisotropicKernelExact as Anisotropic
 import DASHI.Visualisation.EventFilamentPersistenceExact as Persistence
 import DASHI.Visualisation.SelfConsistentEventRendererExact as Renderer
 import DASHI.Visualisation.RendererStabilityExact as Stability
@@ -21,6 +22,28 @@ continuationBoundaryExists = Boundary.canonicalEventPadicContinuationBoundary
 
 eventFieldRegression : Event.scalarFieldSample ≡ 10
 eventFieldRegression = refl
+
+anisotropicRadiusRegression :
+  Anisotropic.mahalanobisNumerator
+    Anisotropic.canonicalEllipticEvent
+    Anisotropic.canonicalQuery
+  ≡
+  2 *
+  Anisotropic.mahalanobisDenominator
+    Anisotropic.canonicalEllipticEvent
+anisotropicRadiusRegression = Anisotropic.canonicalSquaredRadiusIsTwo
+
+anisotropicClassFieldRegression :
+  Anisotropic.finiteClassField
+  ≡
+  Anisotropic.classContribution3 15 17 2
+anisotropicClassFieldRegression = refl
+
+normalisedKernelRowRegression :
+  Anisotropic.scaledKernelRowMass 5 Anisotropic.canonicalKernelRow
+  ≡
+  5 * Anisotropic.kernelDenominator Anisotropic.canonicalKernelRow
+normalisedKernelRowRegression = refl
 
 positiveKernelRegression :
   Event.positiveWrapper Event.negativeRawResponse ≡ 0
