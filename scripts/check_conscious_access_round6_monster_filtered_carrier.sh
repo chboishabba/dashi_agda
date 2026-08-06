@@ -41,7 +41,8 @@ checks=(
   'MonsterWholeCarrierActionSchemaExact.agda:mixTwiceIsIdentity'
   'MonsterWholeCarrierActionSchemaExact.agda:fullyMixedCandidate'
   'MonsterSubgroupBranchingBenchmarksExact.agda:babyMonsterRestrictionDimensionExact'
-  'MonsterSubgroupBranchingBenchmarksExact.agda:conwayTwoLocalDimensionExact'
+  'MonsterSubgroupBranchingBenchmarksExact.agda:conwayTwoLocalUnreducedDimensionExact'
+  'MonsterSubgroupBranchingBenchmarksExact.agda:conwayTwoLocalReducedDimensionExact'
   'MonsterSubgroupBranchingBenchmarksExact.agda:CandidateSubgroupTest'
 )
 
@@ -62,7 +63,7 @@ grep -q 'anyConcreteMonsterRouteCompletedIsFalse' DASHI/Biology/MonsterRepresent
 grep -q 'actualDifferentialConstructedIsFalse' DASHI/Biology/MonsterCompatibilityComplexExact.agda
 grep -q 'fiftyThreeIsClaimedMonsterIrrepIsFalse' DASHI/Biology/MonsterTrivialReductionBoundaryExact.agda
 grep -q 'schemaConstructsMonsterActionIsFalse' DASHI/Biology/MonsterWholeCarrierActionSchemaExact.agda
-grep -q 'dashiTenTernaryPlusReducedNotYetPublishedBranching' DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
+grep -q 'dashiStructuredTernaryReducedNotYetPublishedBranching' DASHI/Biology/MonsterSubgroupBranchingBenchmarksExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Biology/ConsciousAccessRound6MonsterFilteredCarrierValidation.agda
