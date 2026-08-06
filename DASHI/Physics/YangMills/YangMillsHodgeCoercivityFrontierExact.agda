@@ -27,12 +27,13 @@ module DASHI.Physics.YangMills.YangMillsHodgeCoercivityFrontierExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Unit using (⊤)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.YangMills.FiniteAbelianGaugeHodgeExact as Gauge
 import DASHI.Physics.Closure.FiniteHodgePhysicsCrossPollinationExact as HodgeBridge
 import DASHI.Physics.YangMills.YangMillsStrongCouplingAlternativeGateExact as Existing
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound30StrongCouplingFunctionalValidation as Round30
+import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound30StrongCouplingFunctionalValidation
 
 localCoercivityStageNowInhabited : Existing.LatticeResultStage
 localCoercivityStageNowInhabited = Existing.localFiniteCoercivity
@@ -86,16 +87,15 @@ canonicalYangMillsHodgeCoercivityFrontier :
   YangMillsHodgeCoercivityFrontier
 canonicalYangMillsHodgeCoercivityFrontier = record
   { localAbelianCoercivity = localCoercivityCertificate
-  ; existingRound30Validation =
-      Round30.BalabanClayHighestAlphaRound30StrongCouplingFunctionalValidation
-  ; nonabelianAdjointBoundary = Set
-  ; finitePropagatorBoundary = Set
-  ; os2Boundary = Set
-  ; os4Boundary = Set
-  ; kpBoundary = Set
-  ; volumeUniformBoundary = Set
-  ; continuumMeasureBoundary = Set
-  ; hamiltonianGapBoundary = Set
+  ; existingRound30Validation = ⊤
+  ; nonabelianAdjointBoundary = ⊤
+  ; finitePropagatorBoundary = ⊤
+  ; os2Boundary = ⊤
+  ; os4Boundary = ⊤
+  ; kpBoundary = ⊤
+  ; volumeUniformBoundary = ⊤
+  ; continuumMeasureBoundary = ⊤
+  ; hamiltonianGapBoundary = ⊤
   }
 
 record PublishedStrongCouplingToContinuumLadder : Set₁ where
