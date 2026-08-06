@@ -85,3 +85,12 @@ import DASHI.Biology.SymbolicTransformWithoutHomunculus
 import DASHI.Biology.DeterministicCoarseGrainingBoundary
 import DASHI.Biology.SparseExpertRoutingCoalition
 import DASHI.Biology.ConsciousAccessNetworkRegression
+
+------------------------------------------------------------------------
+-- Conscious-access round two: quantitative defect and dynamic topology.
+
+import DASHI.Biology.QuantitativeCompositionalDefect
+import DASHI.Biology.DynamicEffectiveTopology
+import DASHI.Biology.FiniteCoalitionConstruction
+import DASHI.Biology.ConsciousAccessRound2SourceAtlas
+import DASHI.Biology.ConsciousAccessRound2Regression
