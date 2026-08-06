@@ -14,6 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinDefectDiffusionRound22Validatio
 -- * sign-indefinite mixed-gradient obstruction;
 -- * pair-input-frequency defect damping, including high-high-to-low outputs;
 -- * physical periodic Fourier mode-pair construction and zero-output witness;
+-- * exact symmetrized Fourier vorticity coefficient and output transversality;
 -- * five-source Galerkin pair-defect evolution;
 -- * named five-source critical taxation algebra;
 -- * hysteretic re-entry tax and zero-gap obstruction;
@@ -43,6 +44,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoGalerkinCriticalFilteredEnstrophyExact
 import DASHI.Physics.Closure.NSTriadKNLuoTwoPointCrossDefectDiffusionExact
 import DASHI.Physics.Closure.NSTriadKNLuoPairFrequencyDefectDiffusionExact
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinFourierModePairExact
+import DASHI.Physics.Closure.NSTriadKNLuoGalerkinFourierVorticityConvolutionExact
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinPairDefectEvolutionExact
 import DASHI.Physics.Closure.NSTriadKNLuoFiveSourceDefectCriticalTaxExact
 import DASHI.Physics.Closure.NSTriadKNLuoBadExcursionHysteresisTaxExact
