@@ -17,22 +17,64 @@ module DASHI.Physics.YangMills.BalabanP33SelectedCorrelationToWLocalExact where
 -- Isolate the exact replacement for the false radius-only implication.  If a
 -- plaquette defect decomposes as
 --
---                  defect = linear + remainder,
+--                  defect = linear + groupedRemainder,
 --
--- selected-background structure proves linear=0, and the grouped sixteen-atom
--- remainder satisfies remainder >= -budget, then the desired W-local lower
--- bound follows.  This transport is proved over exact rationals.  The actual
--- hard producers are now sharply separated:
+-- and selected-background structure supplies separate signed bounds
 --
---   (1) physical correlated first-order cancellation;
---   (2) physical grouped remainder estimate with rho/36 and rho/144.
+--   linear           >= -linearBudget,
+--   groupedRemainder >= -remainderBudget,
+--
+-- then
+--
+--   defect >= -(linearBudget + remainderBudget).
+--
+-- Exact cancellation of the linear term is retained as a useful sufficient
+-- specialization, but is not asserted to be necessary.  The physical problem
+-- is therefore split correctly into correlated first-order control (from
+-- plaquette curvature/regularity/variational structure) and the grouped
+-- sixteen-atom nonlinear remainder estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_; _≤_)
+import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+
+negativeBudgetSumExact :
+  ∀ linearBudget remainderBudget →
+  - (linearBudget + remainderBudget)
+  ≡ - linearBudget + - remainderBudget
+negativeBudgetSumExact linearBudget remainderBudget =
+  solve (linearBudget ∷ remainderBudget ∷ [])
+
+correlatedControlTransfersLowerBound :
+  ∀ defect linear remainder linearBudget remainderBudget →
+  defect ≡ linear + remainder →
+  - linearBudget ≤ linear →
+  - remainderBudget ≤ remainder →
+  - (linearBudget + remainderBudget) ≤ defect
+correlatedControlTransfersLowerBound
+    defect linear remainder linearBudget remainderBudget
+    decomposition linearLower remainderLower =
+  let
+    summedLower :
+      - linearBudget + - remainderBudget ≤ linear + remainder
+    summedLower = ℚP.+-mono-≤ linearLower remainderLower
+
+    combinedBudgetLower :
+      - (linearBudget + remainderBudget) ≤ linear + remainder
+    combinedBudgetLower =
+      subst
+        (λ lower → lower ≤ linear + remainder)
+        (sym (negativeBudgetSumExact linearBudget remainderBudget))
+        summedLower
+  in
+  subst
+    (λ upper → - (linearBudget + remainderBudget) ≤ upper)
+    (sym decomposition)
+    combinedBudgetLower
 
 closedDefectEqualsRemainder :
   ∀ defect linear remainder →
@@ -66,28 +108,32 @@ record PhysicalSelectedCorrelationInputs : Set where
     physicalDefect : ℚ
     physicalLinearPart : ℚ
     physicalGroupedRemainder : ℚ
-    physicalBudget : ℚ
+    physicalLinearBudget : ℚ
+    physicalRemainderBudget : ℚ
     physicalDecomposition :
       physicalDefect ≡ physicalLinearPart + physicalGroupedRemainder
-    selectedLinearCancellation : physicalLinearPart ≡ 0ℚ
+    selectedLinearLower :
+      - physicalLinearBudget ≤ physicalLinearPart
     groupedRemainderLower :
-      - physicalBudget ≤ physicalGroupedRemainder
+      - physicalRemainderBudget ≤ physicalGroupedRemainder
 
 open PhysicalSelectedCorrelationInputs public
 
 physicalInputsImplyWLocalScalar :
   (inputs : PhysicalSelectedCorrelationInputs) →
-  - physicalBudget inputs ≤ physicalDefect inputs
+  - (physicalLinearBudget inputs + physicalRemainderBudget inputs)
+  ≤ physicalDefect inputs
 physicalInputsImplyWLocalScalar inputs =
-  correlatedCancellationTransfersLowerBound
+  correlatedControlTransfersLowerBound
     (physicalDefect inputs)
     (physicalLinearPart inputs)
     (physicalGroupedRemainder inputs)
-    (physicalBudget inputs)
+    (physicalLinearBudget inputs)
+    (physicalRemainderBudget inputs)
     (physicalDecomposition inputs)
-    (selectedLinearCancellation inputs)
+    (selectedLinearLower inputs)
     (groupedRemainderLower inputs)
 
--- This closes the logical and signed-order transport only.  It does not
--- fabricate the selected-background cancellation or grouped quaternion atom
+-- This closes the signed-order transport only.  It does not fabricate either
+-- the physical correlated first-order bound or the grouped quaternion atom
 -- estimate.
