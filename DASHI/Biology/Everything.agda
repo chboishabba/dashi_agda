@@ -154,6 +154,7 @@ import DASHI.Biology.OrientedZeroWaveTransitionExact
 import DASHI.Biology.DialecticalSheetSpiralExact
 import DASHI.Biology.TriadicBraidDialecticExact
 import DASHI.Biology.TernaryHypercubeHyperfabricExact
+import DASHI.Biology.TernaryCubeStrataExact
 import DASHI.Biology.TernaryCantorWheelDiffusionExact
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact
 import DASHI.Biology.FRACTRANSSPTransitionExact
