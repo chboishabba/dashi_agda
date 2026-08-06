@@ -32,8 +32,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Data.Unit using (⊤; tt)
 
 ------------------------------------------------------------------------
 -- Closed rational numerals used by the exact polynomial identities.
@@ -152,8 +154,6 @@ localFactorAtFiveCoefficients :
   × quadraticCoefficient localEulerFactorAtFive ≡ five
 localFactorAtFiveCoefficients =
   refl , solve [] , refl
-  where
-    open import Data.Product using (_×_; _,_)
 
 record ArithmeticFrobeniusDatum : Set₁ where
   field
@@ -171,5 +171,9 @@ p5FrobeniusDatum = record
   ; traceOfFrobenius = frobeniusTraceAtFive
   ; localPolynomial = localEulerFactorAtFive
   ; traceFormula = frobeniusTraceAtFive ≡ five + 1ℚ - eight
-  ; hasseBound = Set
+  ; hasseBound = ⊤
   }
+
+p5HassePlaceholderInhabited :
+  ArithmeticFrobeniusDatum.hasseBound p5FrobeniusDatum
+p5HassePlaceholderInhabited = tt
