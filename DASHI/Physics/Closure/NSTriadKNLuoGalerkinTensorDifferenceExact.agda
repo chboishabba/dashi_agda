@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinTensorDifferenceExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _-_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; _≤_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
@@ -88,15 +88,15 @@ cellDifferenceSquareBound cell =
       lower
       ≤ Error.two
         * (L2.square (firstBranch cell) + L2.square (secondBranch cell)))
-    (cong L2.square (cellDifferenceMeaning cell))
+    (sym (cong L2.square (cellDifferenceMeaning cell)))
     (Error.squareSumBound (firstBranch cell) (secondBranch cell))
 
 sumDifferenceSquares sumBranchSquares : List TensorDifferenceCell → ℚ
-sumDifferenceSquares [] = Data.Rational.Base.0ℚ
+sumDifferenceSquares [] = 0ℚ
 sumDifferenceSquares (cell ∷ cells) =
   L2.square (directDifference cell) + sumDifferenceSquares cells
 
-sumBranchSquares [] = Data.Rational.Base.0ℚ
+sumBranchSquares [] = 0ℚ
 sumBranchSquares (cell ∷ cells) =
   (L2.square (firstBranch cell) + L2.square (secondBranch cell))
   + sumBranchSquares cells
