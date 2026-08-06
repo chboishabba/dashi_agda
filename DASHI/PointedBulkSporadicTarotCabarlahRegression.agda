@@ -3,6 +3,7 @@ module DASHI.PointedBulkSporadicTarotCabarlahRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.PointedTernaryBulkExact as Bulk
+import DASHI.Biology.DecimalTenTernaryPresentationExact as Decimal
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
@@ -12,6 +13,18 @@ import DASHI.PointedBulkSporadicTarotCabarlahBoundary as Boundary
 
 pointedBulkRegression : Bulk.pointedBulkDimension ≡ 196830
 pointedBulkRegression = Bulk.pointedBulkDimensionIs196830
+
+decimalBulkRegression : Decimal.decimalTernaryBulkDimension ≡ 196830
+decimalBulkRegression = Decimal.decimalTernaryBulkDimensionIs196830
+
+decimalPointedCountRegression :
+  Decimal.decimalTernaryBulkDimension ≡ Bulk.pointedBulkDimension
+decimalPointedCountRegression =
+  Decimal.decimalAndPointedBulkDimensionsAgree
+
+irrepOrientationTenRegression :
+  Decimal.irrepOrientationSectorCount ≡ 10
+irrepOrientationTenRegression = Decimal.irrepOrientationSectorCountIsTen
 
 pointedBulkAlternativeRegression :
   Bulk.pointedBulkDimension
