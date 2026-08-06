@@ -20,9 +20,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoRelativeScaleProbeCrossPollinationExact
 -- remain distinct probes; branch two is exactly the displayed half-gap target.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Product using (_×_; _,_)
+open import Data.Nat using (_*_)
+open import Data.Product using (_×_)
 open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Common.FiniteRingScaleDualityExact as Scale
@@ -68,8 +69,6 @@ record BranchProbeVector : Set where
     strongProbe : Nat
     weakProbe : Nat
 
-open BranchProbeVector public
-
 branchIdentityProbeSystem : Probe.SeparatingProbeSystem (Nat × Nat) Nat
 branchIdentityProbeSystem = Probe.canonicalPairProbeSystem
 
@@ -79,7 +78,6 @@ record RelativeScaleProbeBoundary : Set where
     branchOneAndBranchTwoAreInterchangeable : Set
     branchOneAndBranchTwoAreNotInterchangeable :
       branchOneAndBranchTwoAreInterchangeable → Set
-
     finiteExponentIdentityProvesPhysicalCommutator : Set
     finiteExponentIdentityDoesNotProvePhysicalCommutator :
       finiteExponentIdentityProvesPhysicalCommutator → Set
