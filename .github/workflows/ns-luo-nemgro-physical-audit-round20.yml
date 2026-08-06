@@ -12,6 +12,7 @@ on:
   pull_request:
     branches:
       - 'agent/ns-luo-unconditional-absorption-audit-round19'
+      - 'agent/ns-luo-nemgro-physical-audit-round20'
     paths:
       - 'DASHI/Physics/Closure/**'
       - 'docs/ns-luo-nemgro-physical-audit-round20.md'
