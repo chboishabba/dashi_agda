@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.PointedTernaryBulkExact as Bulk
 import DASHI.Biology.DecimalTenTernaryPresentationExact as Decimal
+import DASHI.Biology.ThreeSixNineMoonshineScaleExact as Scale
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
@@ -17,6 +18,7 @@ record PointedBulkSporadicTarotCabarlahBoundary : Set where
   field
     pointedBulkBoundary : Bulk.PointedTernaryBulkBoundary
     decimalPresentationBoundary : Decimal.DecimalTenTernaryPresentationBoundary
+    threeSixNineScaleBoundary : Scale.ThreeSixNineMoonshineScaleBoundary
     residualOrbitBoundary : Orbit.ReducedFiftyThreeOrbitBoundary
     sporadicTarotBoundary : Tarot.SporadicTarotBoundary
     moonshineBoundary : Moonshine.PointedBulkReducedMoonshineBoundary
@@ -35,6 +37,18 @@ record PointedBulkSporadicTarotCabarlahBoundary : Set where
       Decimal.irrepOrientationSectorCount ≡ 10
     pointedA2RemainsAbsent :
       Bulk.pointedMultiplicity Symmetry.A2 ≡ 0
+
+    sixScaleIsSix : Scale.sixScale ≡ 6
+    nineScaleIsNine : Scale.nineScale ≡ 9
+    fiftyFourIsSixByNine : Scale.fiftyFourScale ≡ 54
+    fiftyFourIsTwoTimesThreeCubed :
+      Scale.fiftyFourScale
+      ≡ Scale.binaryOrientationCount
+        * DASHI.Biology.TernaryHypercubeHyperfabricExact.ternaryLatticeCount 3
+    fiftyFourSplitsInvariantAndReduced :
+      Scale.fiftyFourScale
+      ≡ DASHI.Biology.ReducedFiftyThreeFibreExact.trivialInvariantDimension
+        + DASHI.Biology.ReducedFiftyThreeFibreExact.reducedDimension
 
     candidateResidualCountIs53 : Orbit.candidateR53Dimension ≡ 53
     candidateInvolutionSquaresToIdentity :
@@ -70,6 +84,8 @@ canonicalPointedBulkSporadicTarotCabarlahBoundary =
     { pointedBulkBoundary = Bulk.canonicalPointedTernaryBulkBoundary
     ; decimalPresentationBoundary =
         Decimal.canonicalDecimalTenTernaryPresentationBoundary
+    ; threeSixNineScaleBoundary =
+        Scale.canonicalThreeSixNineMoonshineScaleBoundary
     ; residualOrbitBoundary = Orbit.canonicalReducedFiftyThreeOrbitBoundary
     ; sporadicTarotBoundary = Tarot.canonicalSporadicTarotBoundary
     ; moonshineBoundary = Moonshine.canonicalPointedBulkReducedMoonshineBoundary
@@ -87,6 +103,13 @@ canonicalPointedBulkSporadicTarotCabarlahBoundary =
     ; irrepOrientationSectorCountIsTen =
         Decimal.irrepOrientationSectorCountIsTen
     ; pointedA2RemainsAbsent = Bulk.pointedA2MultiplicityIsZero
+    ; sixScaleIsSix = Scale.sixScaleIsSix
+    ; nineScaleIsNine = Scale.nineScaleIsNine
+    ; fiftyFourIsSixByNine = Scale.fiftyFourScaleIsFiftyFour
+    ; fiftyFourIsTwoTimesThreeCubed =
+        Scale.fiftyFourIsTwoTimesThreeCubed
+    ; fiftyFourSplitsInvariantAndReduced =
+        Scale.fiftyFourSplitsInvariantAndReduced
     ; candidateResidualCountIs53 = Orbit.candidateR53DimensionIsFiftyThree
     ; candidateInvolutionSquaresToIdentity =
         Orbit.candidateInvolutionIsInvolutive
