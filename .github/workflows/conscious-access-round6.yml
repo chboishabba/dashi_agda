@@ -1,0 +1,25 @@
+name: conscious-access-round6
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Biology/TernaryVisualMotifSemiconjugacyExact.agda'
+      - 'DASHI/Biology/TernaryMorphogeneticVisualFieldExact.agda'
+      - 'DASHI/Biology/TernaryMotifNeuralObservationQuotientExact.agda'
+      - 'DASHI/Biology/TriadicVisualBraidCrossPollinationExact.agda'
+      - 'DASHI/Biology/TernaryHallTransitionCoalitionExact.agda'
+      - 'DASHI/Biology/ConsciousAccessRound6CrossSourceBridge.agda'
+      - 'DASHI/Biology/ConsciousAccessRound6CrossPollinationRegression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessRound6CrossPollination.md'
+      - 'scripts/check_conscious_access_round6.sh'
+      - '.github/workflows/conscious-access-round6.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Round Six cross-pollination
+        run: bash scripts/check_conscious_access_round6.sh
