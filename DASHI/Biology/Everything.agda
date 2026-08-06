@@ -188,3 +188,10 @@ import DASHI.Biology.ClayCrossPollinationInterfaceExact
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas
 import DASHI.Biology.ConsciousAccessRound5CompletionBoundary
 import DASHI.Biology.ConsciousAccessRound5CompletionRegression
+
+------------------------------------------------------------------------
+-- Sections 756--835 continuation: cyclic/dialectical type separation and a
+-- renderable finite-prefix p-adic reasoning field.
+
+import DASHI.Biology.TernaryCyclicDialecticExact
+import DASHI.Biology.RenderablePadicReasoningFieldExact
