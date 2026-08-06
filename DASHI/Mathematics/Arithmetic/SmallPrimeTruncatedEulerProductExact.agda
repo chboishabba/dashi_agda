@@ -26,6 +26,7 @@ module DASHI.Mathematics.Arithmetic.SmallPrimeTruncatedEulerProductExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -138,8 +139,8 @@ canonicalSelectedModularCandidate = record
   { fourierCoefficient = λ row →
       Rows.signedToRational (Rows.frobeniusTrace row)
   ; coefficientMatchesFrobenius = λ row → refl
-  ; weightTwoBoundary = Set
-  ; heckeEigenformBoundary = Set
+  ; weightTwoBoundary = ⊤
+  ; heckeEigenformBoundary = ⊤
   }
 
 canonicalSmallPrimeEulerAgreement : ∀ T →
