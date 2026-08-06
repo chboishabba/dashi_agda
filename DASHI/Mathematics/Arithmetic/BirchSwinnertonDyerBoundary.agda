@@ -29,11 +29,11 @@ module DASHI.Mathematics.Arithmetic.BirchSwinnertonDyerBoundary where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ; _*_; _+_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Algebra.NoetherianityMeaningSeparationExact as N
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as E
@@ -49,10 +49,22 @@ record AbelianGroup : Set₁ where
 
 open AbelianGroup public
 
+record FinitelyGeneratedAbelianGroup (group : AbelianGroup) : Set₁ where
+  field
+    Generator : Set
+    generatorCount : Nat
+    generatorEnumeration : Nat → Generator
+    generatorToGroup : Generator → Carrier group
+    everyElementIsIntegerCombination : Set
+
+open FinitelyGeneratedAbelianGroup public
+
 record MordellWeilData (curve : E.ShortWeierstrassCurve) : Setω where
   field
     rationalPointGroup : AbelianGroup
-    finiteGeneration : N.FinitelyGeneratedIdealCondition
+    finiteGeneration :
+      FinitelyGeneratedAbelianGroup rationalPointGroup
+    coordinateRingNoetherianity : N.NoetherianEquivalenceObligation
     freeRank : Nat
     torsionSubgroup : AbelianGroup
     decompositionIntoFreeAndTorsion : Set
@@ -127,7 +139,7 @@ bsdDenominator data = torsionOrder data * torsionOrder data
 
 record BSDLeadingCoefficientConjecture (data : BSDScalarData) : Set where
   field
-    denominatorNonzero : bsdDenominator data ≡ bsdDenominator data
+    denominatorNonzero : bsdDenominator data ≡ 0ℚ → ⊥
     denominatorClearedFormula :
       leadingCoefficient data * bsdDenominator data ≡ bsdNumerator data
 
