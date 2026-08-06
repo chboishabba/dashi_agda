@@ -2,6 +2,7 @@ module DASHI.EverythingPointedBulkSporadicTarot where
 
 import DASHI.Everything
 import DASHI.Biology.PointedBulkSporadicTarotEverything
+import DASHI.Governance.Everything
 import DASHI.Governance.CabarlahTraumaProjectionBridgeExact
 import DASHI.PointedBulkSporadicTarotCabarlahBoundary
 import DASHI.PointedBulkSporadicTarotCabarlahRegression
