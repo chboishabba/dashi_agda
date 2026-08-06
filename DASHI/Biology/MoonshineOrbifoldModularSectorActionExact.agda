@@ -8,9 +8,9 @@ module DASHI.Biology.MoonshineOrbifoldModularSectorActionExact where
 -- Moonshine".
 -- DOI: 10.1007/s002200000242.
 --
--- Charles Dong and Geoffrey Mason,
+-- Chongying Dong and Geoffrey Mason,
 -- "On Quantum Galois Theory".
--- DOI: 10.1215/S0012-7094-98-09312-6.
+-- DOI: 10.1215/S0012-7094-97-08609-9.
 --
 -- Igor B. Frenkel, James Lepowsky and Arne Meurman,
 -- "Vertex Operator Algebras and the Monster".
