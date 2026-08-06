@@ -16,6 +16,7 @@ FILES=(
   DASHI/Biology/DialecticalSheetSpiralExact.agda
   DASHI/Biology/TriadicBraidDialecticExact.agda
   DASHI/Biology/TernaryHypercubeHyperfabricExact.agda
+  DASHI/Biology/TernaryCubeStrataExact.agda
   DASHI/Biology/TernaryCantorWheelDiffusionExact.agda
   DASHI/Biology/TernaryMonsterSymmetryCandidateExact.agda
   DASHI/Biology/FRACTRANSSPTransitionExact.agda
