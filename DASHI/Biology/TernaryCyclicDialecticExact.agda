@@ -310,7 +310,7 @@ softInputQ = Carry.mass3 1 0 1
 softConvolutionSample :
   Carry.cyclicConvolution softInputP softInputQ
   ≡
-  Carry.mass3 1 1 2
+  Carry.mass3 2 1 1
 softConvolutionSample = refl
 
 softConvolutionMassProductSample :
