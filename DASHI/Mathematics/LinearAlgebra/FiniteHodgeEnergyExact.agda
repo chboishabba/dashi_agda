@@ -30,7 +30,7 @@ module DASHI.Mathematics.LinearAlgebra.FiniteHodgeEnergyExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 
 symmetry : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
@@ -143,11 +143,9 @@ harmonicImpliesCoclosedAndClosed complex x harmonic =
 harmonicImpliesClosed :
   ∀ complex x → Harmonic1 complex x → Closed1 complex x
 harmonicImpliesClosed complex x harmonic =
-  let both = harmonicImpliesCoclosedAndClosed complex x harmonic
-  in Data.Product.proj₂ both
+  proj₂ (harmonicImpliesCoclosedAndClosed complex x harmonic)
 
 harmonicImpliesCoclosed :
   ∀ complex x → Harmonic1 complex x → Coclosed1 complex x
 harmonicImpliesCoclosed complex x harmonic =
-  let both = harmonicImpliesCoclosedAndClosed complex x harmonic
-  in Data.Product.proj₁ both
+  proj₁ (harmonicImpliesCoclosedAndClosed complex x harmonic)
