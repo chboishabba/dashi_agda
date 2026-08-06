@@ -17,7 +17,7 @@ module DASHI.Biology.MoonshineShiftedJCoefficientBoundaryExact where
 --
 -- DASHI CONTRIBUTION
 -- Make the central-charge-24 shift explicit at the first three conformal
--- weights.  In Tr(q^(L_0-c/24)), c=24 shifts weight n to exponent n-1:
+-- weights. In Tr(q^(L_0-c/24)), c=24 shifts weight n to exponent n-1:
 --
 --   weight 0 -> q^-1 with coefficient 1,
 --   weight 1 -> q^0  with coefficient 0,
@@ -29,6 +29,7 @@ module DASHI.Biology.MoonshineShiftedJCoefficientBoundaryExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_*_)
 
 import DASHI.Biology.MoonshineGradedTraceProbeExact as Trace
 
