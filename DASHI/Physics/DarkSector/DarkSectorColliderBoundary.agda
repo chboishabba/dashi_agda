@@ -7,9 +7,12 @@ import DASHI.Physics.DarkSector.GaugeSingletPortal as Portal
 import DASHI.Physics.DarkSector.HiggsPortalDecay as Decay
 import DASHI.Physics.DarkSector.MetastableLifetime as Lifetime
 import DASHI.Physics.DarkSector.BoostedDecayGeometry as Boost
-import DASHI.Physics.DarkSector.DisplacedVertex as Vertex
-import DASHI.Physics.DarkSector.TriggerCensoring as Trigger
+import DASHI.Physics.DarkSector.DisplacedVertex as VertexInternal
+import DASHI.Physics.DarkSector.TriggerCensoring as TriggerInternal
 import DASHI.Physics.DarkSector.DarkSectorColliderSourceAtlas as Sources
+
+module Vertex = VertexInternal
+module Trigger = TriggerInternal
 
 ------------------------------------------------------------------------
 -- The exact finite collider theorem spine requested by the attached tranche.
