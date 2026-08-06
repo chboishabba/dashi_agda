@@ -5,10 +5,12 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.PointedTernaryBulkExact as Bulk
 import DASHI.Biology.DecimalTenTernaryPresentationExact as Decimal
 import DASHI.Biology.ThreeSixNineMoonshineScaleExact as Scale
+import DASHI.Biology.ReducedFiftyThreeFibreExact as Reduced
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
 import DASHI.Biology.PointedBulkSporadicTarotSourceAtlas as Sources
+import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Symmetry
 import DASHI.Governance.CabarlahTraumaProjectionBridgeExact as Cabarlah
 import DASHI.Governance.TraumaMemorySublationBoundary as Trauma
@@ -43,12 +45,10 @@ record PointedBulkSporadicTarotCabarlahBoundary : Set where
     fiftyFourIsSixByNine : Scale.fiftyFourScale ≡ 54
     fiftyFourIsTwoTimesThreeCubed :
       Scale.fiftyFourScale
-      ≡ Scale.binaryOrientationCount
-        * DASHI.Biology.TernaryHypercubeHyperfabricExact.ternaryLatticeCount 3
+      ≡ Scale.binaryOrientationCount * Hyper.ternaryLatticeCount 3
     fiftyFourSplitsInvariantAndReduced :
       Scale.fiftyFourScale
-      ≡ DASHI.Biology.ReducedFiftyThreeFibreExact.trivialInvariantDimension
-        + DASHI.Biology.ReducedFiftyThreeFibreExact.reducedDimension
+      ≡ Reduced.trivialInvariantDimension + Reduced.reducedDimension
 
     candidateResidualCountIs53 : Orbit.candidateR53Dimension ≡ 53
     candidateInvolutionSquaresToIdentity :
