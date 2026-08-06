@@ -43,7 +43,7 @@ open import Data.Rational.Base using
 import Data.Rational.Properties as ℚₚ
 open ℚₚ using (_≤?_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality as Eq using (cong; subst)
+open import Relation.Binary.PropositionalEquality as Eq using (cong; subst; sym)
 open Eq.≡-Reasoning
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
