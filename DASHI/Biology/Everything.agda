@@ -122,3 +122,24 @@ import DASHI.Biology.ConsciousAccessRound3ExtendedSourceAtlas
 import DASHI.Biology.ConsciousAccessRound3Regression
 import DASHI.Biology.ConsciousAccessRound3ExtendedRegression
 import DASHI.Biology.ConsciousAccessRound3CompleteRegression
+
+------------------------------------------------------------------------
+-- Conscious-access round four: p-adic reasoning fields and crystallisation.
+
+import DASHI.Biology.TriadicKernelLiftQuotientExact
+import DASHI.Biology.TriadicCarryResidualExact
+import DASHI.Biology.PadicCylinderLODReasoningField
+import DASHI.Biology.HybridPadicReasoningFieldBridgeExact
+import DASHI.Biology.CausalHierarchicalChartResidualExact
+import DASHI.Biology.FiniteCrystallisationModeSelectionExact
+import DASHI.Biology.FiniteWaveShellGradientExact
+import DASHI.Biology.FiniteSymmetryStabiliserExact
+import DASHI.Biology.FinitePadicCollapseExact
+import DASHI.Biology.ResourceLimitedCrystallisationExact
+import DASHI.Biology.ReasoningFieldRenderBridgeExact
+import DASHI.Biology.PadicCrystallisationResidueExact
+import DASHI.Biology.CoupledWaveTriadicOrderExact
+import DASHI.Biology.QuasiperiodicInternalSpaceBoundaryExact
+import DASHI.Biology.ConsciousAccessRound4SourceAtlas
+import DASHI.Biology.ConsciousAccessRound4FullBoundary
+import DASHI.Biology.ConsciousAccessRound4Regression
