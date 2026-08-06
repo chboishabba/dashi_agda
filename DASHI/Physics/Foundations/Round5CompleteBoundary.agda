@@ -4,7 +4,12 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.Round5FullBoundary as Full
 import DASHI.Physics.Foundations.Round5AttachedCompletionBoundary as AttachedCompletion
+import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact as History
+import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact as Residue
+import DASHI.Physics.Foundations.FiniteMultiscaleKernelCompatibilityExact as Multiscale
 import DASHI.Physics.DarkSector.DarkSectorColliderBoundary as Collider
+import DASHI.Physics.DarkSector.DisplacedVertex as Vertex
+import DASHI.Physics.DarkSector.TriggerCensoring as Trigger
 
 record Round5CompleteBoundary : Set where
   field
@@ -14,32 +19,29 @@ record Round5CompleteBoundary : Set where
     colliderBoundary : Collider.DarkSectorColliderBoundary
 
     reversibleHistorySubsystem :
-      (configuration : AttachedCompletion.History.Configuration) →
-      AttachedCompletion.History.reversibleStep
-        (AttachedCompletion.History.reversibleStep configuration)
+      (configuration : History.Configuration) →
+      History.reversibleStep (History.reversibleStep configuration)
       ≡
       configuration
 
     residueSixReturns :
-      (residue : AttachedCompletion.Residue.Residue6) →
-      AttachedCompletion.Residue.successor6Six residue ≡ residue
+      (residue : Residue.Residue6) →
+      Residue.successor6Six residue ≡ residue
 
     residueNineReturns :
-      (residue : AttachedCompletion.Residue.Residue9) →
-      AttachedCompletion.Residue.successor9Nine residue ≡ residue
+      (residue : Residue.Residue9) →
+      Residue.successor9Nine residue ≡ residue
 
     exactKernelCoarseCompatibility :
-      (state : AttachedCompletion.Multiscale.FineState) →
-      AttachedCompletion.Multiscale.coarseProjection
-        (AttachedCompletion.Multiscale.fineKernelExact state)
+      (state : Multiscale.FineState) →
+      Multiscale.coarseProjection (Multiscale.fineKernelExact state)
       ≡
-      AttachedCompletion.Multiscale.coarseKernelExact
-        (AttachedCompletion.Multiscale.coarseProjection state)
+      Multiscale.coarseKernelExact (Multiscale.coarseProjection state)
 
     displacedColliderTriggerAccepts :
-      Collider.Trigger.llpTrigger Collider.Vertex.canonicalDisplacedEvent
+      Trigger.llpTrigger Vertex.canonicalDisplacedEvent
       ≡
-      Collider.Trigger.acceptEvent
+      Trigger.acceptEvent
 
 open Round5CompleteBoundary public
 
@@ -51,13 +53,13 @@ canonicalRound5CompleteBoundary =
         AttachedCompletion.canonicalRound5AttachedCompletionBoundary
     ; colliderBoundary = Collider.canonicalDarkSectorColliderBoundary
     ; reversibleHistorySubsystem =
-        AttachedCompletion.History.reversibleStepInvolutive
+        History.reversibleStepInvolutive
     ; residueSixReturns =
-        AttachedCompletion.Residue.sixCycleReturns
+        Residue.sixCycleReturns
     ; residueNineReturns =
-        AttachedCompletion.Residue.nineCycleReturns
+        Residue.nineCycleReturns
     ; exactKernelCoarseCompatibility =
-        AttachedCompletion.Multiscale.exactKernelCompatibility
+        Multiscale.exactKernelCompatibility
     ; displacedColliderTriggerAccepts =
-        Collider.Trigger.canonicalLLPTriggerAcceptsDisplacedSignal
+        Trigger.canonicalLLPTriggerAcceptsDisplacedSignal
     }
