@@ -8,7 +8,9 @@ bash scripts/check_ns_luo_physical_carrier_round16.sh
 
 FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoTorusTrigonometricPolynomialExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoTorusTrigonometricParsevalExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoTorusFourierDifferentiationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoTorusLerayContractiveExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalCenteredCommutatorAssemblyExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFourierGalerkinTailExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSobolevTensorProjectionErrorExact.agda
