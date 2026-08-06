@@ -1,0 +1,42 @@
+name: conscious-access-round5
+
+on:
+  push:
+    branches:
+      - 'agent/conscious-access-round5-dashi-yijing-moonshine'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/DASHIYijingTernaryDivinationExact.agda'
+      - 'DASHI/Biology/OrientedZeroWaveTransitionExact.agda'
+      - 'DASHI/Biology/DialecticalSheetSpiralExact.agda'
+      - 'DASHI/Biology/TernaryHypercubeHyperfabricExact.agda'
+      - 'DASHI/Biology/TernaryMonsterSymmetryCandidateExact.agda'
+      - 'DASHI/Biology/FRACTRANSSPTransitionExact.agda'
+      - 'DASHI/Biology/SpectralGrokkingLatticeExact.agda'
+      - 'DASHI/Biology/ClassicalQuantumLikeCoarseGrainingExact.agda'
+      - 'DASHI/Biology/AssociativeDivinationPNFExact.agda'
+      - 'DASHI/Biology/NaturalSystemsHyperfabricExact.agda'
+      - 'DASHI/Biology/NeuralRepresentationLaplacianExact.agda'
+      - 'DASHI/Biology/NSYMDialecticalFieldBridgeExact.agda'
+      - 'DASHI/Biology/DASHIQuantumLikeEntropyOscillatorExact.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5SourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5FullBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5Regression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessRound5DASHIYijingMoonshine.md'
+      - 'scripts/check_conscious_access_round5.sh'
+      - '.github/workflows/conscious-access-round5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check conscious-access round five
+        run: bash scripts/check_conscious_access_round5.sh
