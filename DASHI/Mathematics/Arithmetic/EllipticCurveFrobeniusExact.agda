@@ -19,10 +19,11 @@ module DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact where
 --
 --   E : y^2 = x^3 - x,
 --
--- and a finite p=5 point-count row.  The row counts 7 affine points plus the
--- point at infinity, hence #E(F_5)=8 and a_5=5+1-8=-2.  The corresponding
--- local Euler polynomial has coefficients 1, 2 and 5.  The finite Hasse row
--- |a_5|^2=4 <= 4p=20 is carried by an explicit Nat-order proof.
+-- and the literal finite p=5 point enumeration from
+-- EllipticCurveF5PointEnumerationExact.  The enumeration gives 7 affine points
+-- plus the point at infinity, hence #E(F_5)=8 and a_5=5+1-8=-2.  The
+-- corresponding local Euler polynomial has coefficients 1, 2 and 5.  The
+-- finite Hasse row |a_5|^2=4 <= 4p=20 is carried by an explicit Nat-order proof.
 --
 -- The finite row is a checked arithmetic witness, not a construction of the
 -- global L-function, modularity, Mordell--Weil finite generation, Selmer
@@ -30,13 +31,15 @@ module DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+
+import DASHI.Mathematics.Arithmetic.EllipticCurveF5PointEnumerationExact as F5
 
 ------------------------------------------------------------------------
 -- Closed rational numerals used by the exact polynomial identities.
@@ -100,35 +103,31 @@ curveDiscriminantIsSixtyFour :
 curveDiscriminantIsSixtyFour = minusOneCurveDiscriminant
 
 ------------------------------------------------------------------------
--- Exact p=5 point-count row.
---
--- For x=0,1,2,3,4 the numbers of y solving y^2=x^3-x mod 5 are
--- 1,1,2,2,1.  Adding the point at infinity gives 8.
+-- Exact p=5 point-count row, imported from the literal F_5 scan.
 ------------------------------------------------------------------------
 
-sumNat : List Nat → Nat
-sumNat [] = zero
-sumNat (value ∷ values) = value + sumNat values
-
 p5AffineFibreCounts : List Nat
-p5AffineFibreCounts =
-  suc zero ∷
-  suc zero ∷
-  suc (suc zero) ∷
-  suc (suc zero) ∷
-  suc zero ∷ []
+p5AffineFibreCounts = F5.affineFibreCounts
 
 p5AffinePointCount : Nat
-p5AffinePointCount = sumNat p5AffineFibreCounts
+p5AffinePointCount = F5.affinePointCount
 
 p5AffinePointCountIsSeven : p5AffinePointCount ≡ 7
-p5AffinePointCountIsSeven = refl
+p5AffinePointCountIsSeven = F5.affinePointCountIsSeven
 
 p5ProjectivePointCount : Nat
-p5ProjectivePointCount = suc p5AffinePointCount
+p5ProjectivePointCount = F5.projectivePointCount
 
 p5ProjectivePointCountIsEight : p5ProjectivePointCount ≡ 8
-p5ProjectivePointCountIsEight = refl
+p5ProjectivePointCountIsEight = F5.projectivePointCountIsEight
+
+p5FibreCountVectorChecked :
+  F5.fibreCount F5.f0 ≡ 1
+  × F5.fibreCount F5.f1 ≡ 1
+  × F5.fibreCount F5.f2 ≡ 2
+  × F5.fibreCount F5.f3 ≡ 2
+  × F5.fibreCount F5.f4 ≡ 1
+p5FibreCountVectorChecked = F5.fibreCountVector
 
 frobeniusTraceAtFive : ℚ
 frobeniusTraceAtFive = five + 1ℚ - eight
