@@ -4,13 +4,19 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.TriToBiSingularJunctionExact as Junction
 import DASHI.Physics.Foundations.TriToBiTransportExact as Transport
+import DASHI.Physics.Foundations.TriToBiPhaseDialecticExact as Phase
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Visualisation.AffinePlaneSliceExact as Slice
 import DASHI.Visualisation.FiveClassSimplexColourExact as Colour
+import DASHI.Visualisation.SliceObjectiveExact as Objective
+import DASHI.Visualisation.ColourProjectionDiagnosticsExact as Diagnostics
 import DASHI.Visualisation.CoarseSliceSearchExact as Search
+import DASHI.Visualisation.QuantisedSearchBoundsExact as Quantised
 import DASHI.Visualisation.RendererParityExact as Parity
+import DASHI.Visualisation.RendererReceiptExact as Receipt
 import DASHI.Visualisation.GraphSeriesSemanticExact as Graph
 import DASHI.Visualisation.MeasureFieldAdapterExact as Adapter
+import DASHI.Visualisation.AdapterCommutationExact as Commutation
 import DASHI.Visualisation.AttachedVisualisationSourceAtlas as Sources
 import DASHI.Visualisation.AttachedVisualisationBoundary as Boundary
 
@@ -57,6 +63,29 @@ transportConservationRegression :
   6
 transportConservationRegression = refl
 
+phaseCancellationRegression :
+  Phase.phaseResultToTrit
+    (Phase.phaseResultant
+      Phase.phaseZero
+      Phase.phaseOne
+      Phase.phaseTwo)
+  ≡
+  Triadic.zeroTrit
+phaseCancellationRegression = refl
+
+phaseRotationRegression :
+  Phase.coupledPhaseJunction
+    (Phase.rotatePhase Phase.phaseZero)
+    (Phase.rotatePhase Phase.phaseZero)
+    (Phase.rotatePhase Phase.phaseZero)
+  ≡
+  Phase.rotatePhaseOutput
+    (Phase.coupledPhaseJunction
+      Phase.phaseZero
+      Phase.phaseZero
+      Phase.phaseZero)
+phaseRotationRegression = refl
+
 planeReparameterisationRegression :
   Slice.slicePoint (Slice.swapBasis Slice.angledPlane) 2 3
   ≡
@@ -84,6 +113,21 @@ colourCollisionRegression :
 colourCollisionRegression =
   Colour.distinctClassesCollide
 
+combinedObjectiveRegression :
+  Objective.combinedObjective Objective.combinedWinner ≡ 79
+combinedObjectiveRegression = Objective.combinedWinnerScore
+
+simplexDisplayLossRegression :
+  Diagnostics.unrepresentedSimplexDirections ≡ 1
+simplexDisplayLossRegression =
+  Diagnostics.oneSimplexDirectionIsDropped
+
+pcaCollisionRegression :
+  Diagnostics.projectMixture Diagnostics.mixtureA
+  ≡
+  Diagnostics.projectMixture Diagnostics.mixtureB
+pcaCollisionRegression = Diagnostics.projectionCollision
+
 int8RankingFailureRegression :
   Search.floatWinner ≡ Search.badQuantisedWinner → ⊥
 int8RankingFailureRegression =
@@ -93,6 +137,29 @@ topTwoRecallRegression :
   Search.InShortlist Search.floatWinner Search.coarseProposal
 topTwoRecallRegression =
   Search.trueWinnerSurvivesShortlist
+
+quantisationStageRegression :
+  Quantised.quantisedPath
+    Quantised.quantisePreactivation
+    Quantised.levelOne
+  ≡
+  Quantised.quantisedPath
+    Quantised.quantiseActivation
+    Quantised.levelOne
+  →
+  ⊥
+quantisationStageRegression =
+  Quantised.quantisationStagesCanDiffer
+
+calibrationWinnerRegression :
+  Quantised.sharedCalibrationWinner
+  ≡
+  Search.broadAngledCandidate
+calibrationWinnerRegression = refl
+
+lipschitzCellRegression :
+  Quantised.cellUpperBoundScaled ≡ 18
+lipschitzCellRegression = Quantised.cellUpperBoundIsEighteen
 
 quadraticRegression :
   Parity.directSquaredDistance 2 3
@@ -107,6 +174,11 @@ rendererParityRegression :
   Parity.referenceRenderer Parity.mixedPixel
 rendererParityRegression = refl
 
+rendererReceiptRegression :
+  Receipt.benchmarkExecuted Receipt.canonicalSourceReceipt ≡ false
+rendererReceiptRegression =
+  Receipt.sourceReceiptDoesNotClaimExecutedBenchmark
+
 barEquivarianceRegression :
   Graph.renderBarMarks
     (Graph.swapBars (Graph.barDatum 3 4))
@@ -115,6 +187,13 @@ barEquivarianceRegression :
     (Graph.renderBarMarks (Graph.barDatum 3 4))
 barEquivarianceRegression = refl
 
+barAggregationCommutationRegression :
+  Commutation.sourceBarAggregation (Graph.barDatum 3 4)
+  ≡
+  Commutation.visualBarAggregation
+    (Graph.renderBarMarks (Graph.barDatum 3 4))
+barAggregationCommutationRegression = refl
+
 fieldMassRegression :
   Adapter.totalFieldMass
     (Adapter.convolveScaled
@@ -122,6 +201,15 @@ fieldMassRegression :
   ≡
   10
 fieldMassRegression = refl
+
+embeddingDependenceRegression :
+  Commutation.fieldFromEmbedding Commutation.embeddingOne
+  ≡
+  Commutation.fieldFromEmbedding Commutation.embeddingTwo
+  →
+  ⊥
+embeddingDependenceRegression =
+  Commutation.nonRigidEmbeddingsChangeField
 
 sourceCountRegression :
   Sources.canonicalAttachedVisualisationSourceCount ≡ 8
