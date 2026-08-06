@@ -29,10 +29,10 @@ module DASHI.Mathematics.Topology.QuaternionHopfUnitOrbitExact where
 -- smooth local trivializations, or establish a principal-bundle theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact as CD
@@ -51,7 +51,7 @@ quaternionPairExt : ∀ {left right} →
   pairSecond left ≡ pairSecond right →
   left ≡ right
 quaternionPairExt {quaternionPair _ _} {quaternionPair _ _}
-  Q.refl Q.refl = Q.refl
+  refl refl = refl
 
 rightMultiplyPair :
   QuaternionPair → Q.RationalQuaternion → QuaternionPair
@@ -103,24 +103,24 @@ hopfQuaternionRightUnitInvariant : ∀ pair u →
   CD.quaternionNormSq u ≡ 1ℚ →
   pairHopfQuaternion (rightMultiplyPair pair u)
   ≡ pairHopfQuaternion pair
-hopfQuaternionRightUnitInvariant pair u unitNorm =
+hopfQuaternionRightUnitInvariant pair u unitNormProof =
   trans
     (hopfQuaternionRightScales pair u)
     (trans
       (cong
         (λ scalar → H.scaleQuaternion scalar (pairHopfQuaternion pair))
-        unitNorm)
+        unitNormProof)
       (scaleQuaternionOne (pairHopfQuaternion pair)))
 
 hopfScalarRightUnitInvariant : ∀ pair u →
   CD.quaternionNormSq u ≡ 1ℚ →
   pairHopfScalar (rightMultiplyPair pair u)
   ≡ pairHopfScalar pair
-hopfScalarRightUnitInvariant pair u unitNorm =
+hopfScalarRightUnitInvariant pair u unitNormProof =
   trans
     (hopfScalarRightScales pair u)
     (trans
-      (cong (λ scalar → scalar * pairHopfScalar pair) unitNorm)
+      (cong (λ scalar → scalar * pairHopfScalar pair) unitNormProof)
       (oneMultiplyRational (pairHopfScalar pair)))
 
 ------------------------------------------------------------------------
@@ -173,21 +173,22 @@ rightActionComposition : ∀ first second pair →
       (quaternionValue second)
 rightActionComposition first second (quaternionPair a b) =
   quaternionPairExt
-    (Q.quaternionMultiplyAssociative
-      a (quaternionValue first) (quaternionValue second))
-    (Q.quaternionMultiplyAssociative
-      b (quaternionValue first) (quaternionValue second))
+    (sym (Q.quaternionMultiplyAssociative
+      a (quaternionValue first) (quaternionValue second)))
+    (sym (Q.quaternionMultiplyAssociative
+      b (quaternionValue first) (quaternionValue second)))
 
 unitQuaternionRightAction : K.GroupAction
 unitQuaternionRightAction = record
-  { K.G = UnitQuaternion
-  ; K.X = QuaternionPair
-  ; K.identity = unitQuaternionIdentity
-  ; K.compose = unitQuaternionCompose
-  ; K.act = λ unit pair →
+  { G = UnitQuaternion
+  ; X = QuaternionPair
+  ; identity = unitQuaternionIdentity
+  ; compose = λ first second → unitQuaternionCompose second first
+  ; act = λ unit pair →
       rightMultiplyPair pair (quaternionValue unit)
-  ; K.identityActs = rightIdentityPair
-  ; K.composeActs = rightActionComposition
+  ; identityActs = rightIdentityPair
+  ; composeActs = λ first second pair →
+      rightActionComposition second first pair
   }
 
 hopfScalarKleinInvariant :
