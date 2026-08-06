@@ -24,9 +24,11 @@ module DASHI.Physics.YangMills.BalabanP33PlaquetteLinearClosureScalingExact wher
 --
 --                   a + b - c - d.
 --
--- Unless selected-background structure controls or cancels this correlated
--- plaquette term, the Wilson defect may remain O(rho), whereas the desired
--- sharp local budget needs the grouped remainder to begin at higher order.
+-- The selected-background theorem must therefore control this correlated
+-- plaquette term by curvature/regularity/variational information; exact
+-- cancellation is one sufficient special case, not a claimed necessity.  Once
+-- the first-order contribution has its own sharp budget, the grouped nonlinear
+-- remainder begins at quadratic order.
 --
 -- The complete scalar plaquette expansion and its rho-scaled form are proved
 -- by exact rational normalization.  This is a commuting regression for the
@@ -99,15 +101,16 @@ balancedOppositeLinkLinearClosure :
   ∀ rho → linearPlaquettePart rho 0ℚ 0ℚ rho ≡ 0ℚ
 balancedOppositeLinkLinearClosure rho = solve (rho ∷ [])
 
-record PhysicalLinearClosureTarget : Set₁ where
+record PhysicalLinearControlTarget : Set₁ where
   field
     Background Plaquette : Set
     selectedBackground : Background
-    physicalLinearPlaquetteClosure : Plaquette → Set
-    orderedQuaternionRemainderStartsQuadratically :
+    physicalLinearPlaquetteControl : Plaquette → Set
+    orderedQuaternionNonlinearRemainderControl :
       (plaquette : Plaquette) →
-      physicalLinearPlaquetteClosure plaquette → Set
+      physicalLinearPlaquetteControl plaquette → Set
 
 -- The target record names the physical replacement for the scalar regression.
 -- It is intentionally not inhabited here: the variational equation, background
--- gauge and actual SU(2) plaquette curvature must supply it.
+-- gauge, regularity estimates and actual SU(2) plaquette curvature must supply
+-- the sharp first-order and nonlinear budgets.
