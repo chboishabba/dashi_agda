@@ -55,6 +55,7 @@ import DASHI.Physics.Foundations.CabarlahClaimStatusExact
 import DASHI.Physics.Foundations.CabarlahEvidenceWitnessExact
 import DASHI.Physics.Foundations.CabarlahHistoricalLayerExact
 import DASHI.Physics.Foundations.CabarlahToponymTranscriptionExact
+import DASHI.Physics.Foundations.CabarlahPhonologyEnvelopeExact
 import DASHI.Physics.Foundations.CabarlahSignalInferenceExact
 import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact
 import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact
