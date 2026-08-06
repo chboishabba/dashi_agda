@@ -76,18 +76,21 @@ reachabilityToCertificate
     (congruenceSuc lengthProof)
     (pathStep membership validity)
 
+validPathToReachability :
+  ∀ {machine start path finish} →
+  ValidRunPath machine start path finish →
+  Machine.NDReach machine (listLength path) start finish
+validPathToReachability pathDone = Machine.ndRefl
+validPathToReachability (pathStep membership remainingPath) =
+  Machine.ndStep membership (validPathToReachability remainingPath)
+
 certificateToReachability :
   ∀ {machine steps start finish} →
   RunCertificate machine steps start finish →
   Machine.NDReach machine steps start finish
 certificateToReachability
-    (runCertificate [] refl pathDone) =
-  Machine.ndRefl
-certificateToReachability
-    (runCertificate (next ∷ path) refl (pathStep membership validity)) =
-  Machine.ndStep membership
-    (certificateToReachability
-      (runCertificate path refl validity))
+    (runCertificate path refl validity) =
+  validPathToReachability validity
 
 reachabilityCertificateRoundTrip :
   ∀ {machine steps start finish}
