@@ -47,6 +47,34 @@ Pine Gap protest coupling land return and Palestine   = documented
 
 The correction is machine-visible rather than left as prose.
 
+## Indexed evidence witnesses
+
+`CabarlahEvidenceWitnessExact.agda` goes beyond status labels by indexing evidence by the exact claim supported:
+
+```text
+EvidenceWitness : CabarlahClaim -> Set
+```
+
+Constructors exist only for:
+
+```text
+conventional Cabarlah spelling
+coordinate calculation
+postwar signals record
+Pine Gap demand pair
+```
+
+There are no constructors for:
+
+```text
+Capbarlah as historical spelling
+unique Indigenous source pronunciation
+fixed official Brisbane surrender line
+communist concession boundary at Cabarlah
+```
+
+The corresponding functions eliminate any attempted witness by absurd pattern. A disputed narrative can still be recorded as discussion without constructing a fact witness.
+
 ## Corrected historical layers
 
 `CabarlahHistoricalLayerExact.agda` proves exact integer arithmetic for the approximate latitude comparison:
@@ -108,6 +136,24 @@ Country
 ```
 
 with proofs that Country, spoken source, and conventional name are distinct carriers.
+
+## Signal inference and interpretive authority
+
+`CabarlahSignalInferenceExact.agda` models military interpretation as a lossy map:
+
+```text
+SignalTrace -> InferredEnemyStructure
+```
+
+Two distinct radio traces produce the same inferred communications network, so the map is proved non-injective. Observation, bounded identification, policy authorisation, and moral justification remain distinct carriers with no coercions between them.
+
+The comparison between theological sign interpretation and military signal interpretation is represented only as:
+
+```text
+structuralComparisonOnly
+```
+
+not as etymological derivation or causal identity. Thus a useful sign/signal analogy cannot reconstruct the Indigenous place-name, prove exact targeting, or justify military policy.
 
 ## Enemy abstraction and Amalek
 
@@ -207,12 +253,17 @@ The atlas also records John Blaxland's *The Role of Signals Intelligence in Aust
 `CabarlahPalestineBoundary.agda` assembles the exact results and blocks the following promotions:
 
 ```text
+status label -> fact witness
+recorded dispute -> historical fact
 Capbarlah typo -> semantic etymology
 latitude coincidence -> official military line
 postwar SIGINT role -> communist territorial concession
 institutional lineage -> identity of historical enemies
+signal observation -> exact world reconstruction
+network hypothesis -> military authorisation
+military capability -> moral justification
 conventional name -> preserved Indigenous authority
-structural analogy -> identical histories
+structural analogy -> identical histories or etymology
 protest concern -> verified strike-level intelligence chain
 ```
 
