@@ -28,6 +28,7 @@ import DASHI.Mathematics.Algebra.HurwitzFrobeniusLawProfileExact
 import DASHI.Mathematics.Algebra.NoetherianityMeaningSeparationExact
 import DASHI.Mathematics.Algebra.RationalC2HopfAlgebraExact
 import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact
+import DASHI.Mathematics.Symmetry.NoetherDiscreteVariationalExact
 import DASHI.Mathematics.Symmetry.NoetherDissipationDefectExact
 import DASHI.Mathematics.Topology.HopfInvariantOneDimensionGateExact
 import DASHI.Mathematics.Topology.QuaternionHopfRadiusExact
