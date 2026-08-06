@@ -25,13 +25,13 @@ module DASHI.Physics.YangMills.YangMillsAllBetaExponentialRunningCouplingExact w
 -- bound q^n.  This module proves those identities over exact rationals.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.YangMills.YangMillsLatticeGapScaleCompatibilityExact as Scale
 
@@ -53,6 +53,10 @@ rescaledGeometricGapRatioExact :
 rescaledGeometricGapRatioExact inverseSpacingBase gapBase depth =
   Scale.powProduct inverseSpacingBase gapBase depth
 
+powOne : ∀ depth → Scale.pow 1ℚ depth ≡ 1ℚ
+powOne zero = refl
+powOne (suc depth) rewrite powOne depth = solve []
+
 matchedPhysicalGapLowerExact :
   ∀ spacingBase inverseSpacingBase depth →
   inverseSpacingBase * spacingBase ≡ 1ℚ →
@@ -60,13 +64,22 @@ matchedPhysicalGapLowerExact :
     inverseSpacingBase spacingBase depth
   ≡ 1ℚ
 matchedPhysicalGapLowerExact
-    spacingBase inverseSpacingBase zero inverseLaw = solve []
-matchedPhysicalGapLowerExact
-    spacingBase inverseSpacingBase (suc depth) inverseLaw
-  rewrite matchedPhysicalGapLowerExact
-    spacingBase inverseSpacingBase depth inverseLaw
-        | inverseLaw =
-  solve (spacingBase ∷ inverseSpacingBase ∷ [])
+    spacingBase inverseSpacingBase depth inverseLaw =
+  trans
+    (rescaledGeometricGapIsRatioPower
+      inverseSpacingBase spacingBase depth)
+    (trans
+      (cong (λ selected → Scale.pow selected depth) inverseLaw)
+      (powOne depth))
+
+quadraticRatioBaseExact :
+  ∀ spacingBase inverseSpacingBase →
+  inverseSpacingBase * spacingBase ≡ 1ℚ →
+  inverseSpacingBase * (spacingBase * spacingBase) ≡ spacingBase
+quadraticRatioBaseExact spacingBase inverseSpacingBase inverseLaw =
+  trans
+    (solve (spacingBase ∷ inverseSpacingBase ∷ []))
+    (cong (λ selected → selected * spacingBase) inverseLaw)
 
 quadraticPhysicalGapLowerExact :
   ∀ spacingBase inverseSpacingBase depth →
@@ -75,13 +88,13 @@ quadraticPhysicalGapLowerExact :
     inverseSpacingBase (spacingBase * spacingBase) depth
   ≡ Scale.pow spacingBase depth
 quadraticPhysicalGapLowerExact
-    spacingBase inverseSpacingBase zero inverseLaw = solve []
-quadraticPhysicalGapLowerExact
-    spacingBase inverseSpacingBase (suc depth) inverseLaw
-  rewrite quadraticPhysicalGapLowerExact
-    spacingBase inverseSpacingBase depth inverseLaw
-        | inverseLaw =
-  solve (spacingBase ∷ inverseSpacingBase ∷ Scale.pow spacingBase depth ∷ [])
+    spacingBase inverseSpacingBase depth inverseLaw =
+  trans
+    (rescaledGeometricGapIsRatioPower
+      inverseSpacingBase (spacingBase * spacingBase) depth)
+    (cong
+      (λ selected → Scale.pow selected depth)
+      (quadraticRatioBaseExact spacingBase inverseSpacingBase inverseLaw))
 
 configuredSpacingBase : ℚ
 configuredSpacingBase = + 1 / 2
