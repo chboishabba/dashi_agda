@@ -35,15 +35,17 @@ import DASHI.Physics.Foundations.KernelQFTEmergenceObligations as Quantum
 import DASHI.Physics.Foundations.KernelEmergenceHypothesesExact as Hypotheses
 import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact as Cross399
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Unified
+import DASHI.Physics.Foundations.Round5AttachedFormalismBoundary as Attached
+import DASHI.Physics.DarkSector.DarkSectorColliderBoundary as DarkCollider
 import DASHI.Physics.Foundations.Round5SourceAtlas as Sources
 import DASHI.Physics.Foundations.Round5CombinedSourceBoundary as CombinedSources
 import DASHI.Papers.Unification.TheoremInterface as ExistingUnification
 
 ------------------------------------------------------------------------
--- Cumulative exact finite theorem surface.  The opening fields import both the
--- original and completion boundaries from PR #399, so the constants/physics
--- tranche extends the latest stacked theorem surface rather than an earlier
--- snapshot of it.
+-- Cumulative exact finite theorem surface.  It imports the latest PR #399
+-- completion, the attached history/receipt/kernel/Reeb mathematics, and the
+-- collider-facing hidden-sector adapter while retaining explicit authority
+-- boundaries against continuum or empirical overpromotion.
 
 record Round5FullBoundary : Set where
   field
@@ -77,6 +79,8 @@ record Round5FullBoundary : Set where
     pr399CrossPollinationBoundary :
       Cross399.PR399FoundationsCrossPollinationBoundary
     unifiedEffectiveActionBoundary : Unified.UnifiedEffectiveActionBoundary
+    attachedFormalismBoundary : Attached.Round5AttachedFormalismBoundary
+    darkSectorColliderBoundary : DarkCollider.DarkSectorColliderBoundary
     combinedSourceBoundary : CombinedSources.Round5CombinedSourceBoundary
 
     biologyTernaryNineSheetCountIs19683 :
@@ -210,6 +214,30 @@ record Round5FullBoundary : Set where
     pr399LargestOggPrimeProductIs196883 :
       47 * 59 * 71 ≡ 196883
 
+    attachedHistoryNoSignalWitness :
+      Attached.History.pastAccessibleOutcome Attached.History.chooseMinusBoundary
+      ≡
+      Attached.History.pastAccessibleOutcome Attached.History.choosePlusBoundary
+
+    attachedKernelConvergenceWitness :
+      Attached.Kernel.quotientKernel
+        (Attached.Kernel.quotientKernel
+          Attached.Triadic.oppositeSignOrbit)
+      ≡
+      Attached.Triadic.zeroOrbit
+
+    displacedTriggerAcceptsWitness :
+      DarkCollider.Trigger.llpTrigger
+        DarkCollider.Vertex.canonicalDisplacedEvent
+      ≡
+      DarkCollider.Trigger.acceptEvent
+
+    promptTriggerRejectsDisplacedWitness :
+      DarkCollider.Trigger.promptTrigger
+        DarkCollider.Vertex.canonicalDisplacedEvent
+      ≡
+      DarkCollider.Trigger.rejectEvent
+
     macroscopicQFTCorrectionVanishes :
       Hypotheses.qftIrrelevantCorrection Hypotheses.macroscopicScale ≡ 0
 
@@ -225,8 +253,8 @@ record Round5FullBoundary : Set where
     biologySourceCountIsTwentyThree :
       BiologySources.canonicalRound5ExtendedSourceCount ≡ 23
 
-    biologyCompletionSourceCountIsTwentyNine :
-      BiologyCompletionSources.canonicalRound5CompletionSourceCount ≡ 29
+    biologyCompletionSourceCountIsThirtyOne :
+      BiologyCompletionSources.canonicalRound5CompletionSourceCount ≡ 31
 
 open Round5FullBoundary public
 
@@ -287,6 +315,10 @@ canonicalRound5FullBoundary =
         Cross399.canonicalPR399FoundationsCrossPollinationBoundary
     ; unifiedEffectiveActionBoundary =
         Unified.canonicalUnifiedEffectiveActionBoundary
+    ; attachedFormalismBoundary =
+        Attached.canonicalRound5AttachedFormalismBoundary
+    ; darkSectorColliderBoundary =
+        DarkCollider.canonicalDarkSectorColliderBoundary
     ; combinedSourceBoundary =
         CombinedSources.canonicalRound5CombinedSourceBoundary
     ; biologyTernaryNineSheetCountIs19683 =
@@ -347,6 +379,14 @@ canonicalRound5FullBoundary =
         Cross399.nontrivialMoonshineCandidateIs196883
     ; pr399LargestOggPrimeProductIs196883 =
         Cross399.largestThreeOggPrimeProductIs196883
+    ; attachedHistoryNoSignalWitness =
+        Attached.History.finiteNoBackwardSignalling
+    ; attachedKernelConvergenceWitness =
+        refl
+    ; displacedTriggerAcceptsWitness =
+        DarkCollider.Trigger.canonicalLLPTriggerAcceptsDisplacedSignal
+    ; promptTriggerRejectsDisplacedWitness =
+        DarkCollider.Trigger.canonicalPromptTriggerRejectsDisplacedSignal
     ; macroscopicQFTCorrectionVanishes =
         refl
     ; terminalUnificationRemainsFalse =
@@ -355,6 +395,6 @@ canonicalRound5FullBoundary =
         Sources.canonicalRound5SourceCountIsSeventeen
     ; biologySourceCountIsTwentyThree =
         BiologySources.canonicalRound5ExtendedSourceCountIsTwentyThree
-    ; biologyCompletionSourceCountIsTwentyNine =
-        BiologyCompletionSources.canonicalRound5CompletionSourceCountIsTwentyNine
+    ; biologyCompletionSourceCountIsThirtyOne =
+        BiologyCompletionSources.canonicalRound5CompletionSourceCountIsThirtyOne
     }
