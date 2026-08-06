@@ -17,6 +17,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
   DASHI/Physics/YangMills/BalabanP33CubicShellSeriesExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda
+  DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound27Validation.agda
 )
 
@@ -44,7 +45,7 @@ checks=(
   'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:sharpWilsonCoefficientFromRho'
   'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:physicalWilsonDefectIsBackgroundMinusFlat'
   'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:physicalWilsonLocalImpliesSharpDefect'
-  'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:literalWilsonLocalImpliesSharpDefect'
+  'BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda:samePhysicalPerturbationWLocalImpliesSharpDefect'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:terminalPhysicalCoefficientExact'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:terminalCoefficientSplitsAtOneThirtySecond'
   'BalabanP33PhysicalTerminalHessianCoercivityExact.agda:literalHessianCoerciveAtTerminalCoefficient'
@@ -55,6 +56,11 @@ checks=(
   'BalabanP33PhysicalInfiniteDiscountedLossExact.agda:geometricPartialSumClosedForm'
   'BalabanP33PhysicalInfiniteDiscountedLossExact.agda:discountedGeometricLossClosedForm'
   'BalabanP33PhysicalInfiniteDiscountedLossExact.agda:discountedLossTailExact'
+  'BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda:counterInverseLinkDefectSqExact'
+  'BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda:counterSatisfiesRelaxedInverseLinkRadius'
+  'BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda:counterWilsonDefectExact'
+  'BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda:counterWLocalViolationGapExact'
+  'BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda:counterWLocalViolationGapPositive'
 )
 
 for check in "${checks[@]}"; do
@@ -67,7 +73,7 @@ done
 grep -q '10.1103/PhysRevD.10.2445' \
   DASHI/Physics/YangMills/BalabanP33WilsonAtomSignedPerturbationExact.agda
 grep -q '10.1007/BF01240355' \
-  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLocalToSharpDefectExact.agda
+  DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda
 grep -q '10.1007/BF01211042' \
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonIncidenceExact.agda
 grep -q '10.1007/BF01466594' \
@@ -95,6 +101,10 @@ grep -q '10739/196608' \
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
 grep -q '4595/196608' \
   DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda
+grep -q '35167404019/158329674989568' \
+  DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda
+grep -q 'A2 cannot be discharged from A1 alone' \
+  DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound27Validation.agda
