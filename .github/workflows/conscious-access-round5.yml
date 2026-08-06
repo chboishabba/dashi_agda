@@ -1,0 +1,104 @@
+name: conscious-access-round5
+
+on:
+  push:
+    branches:
+      - 'agent/conscious-access-round5-dashi-yijing-moonshine'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/DASHIYijingTernaryDivinationExact.agda'
+      - 'DASHI/Biology/DASHIYijingRelationalOperatorsExact.agda'
+      - 'DASHI/Biology/OrientedZeroWaveTransitionExact.agda'
+      - 'DASHI/Biology/DialecticalSheetSpiralExact.agda'
+      - 'DASHI/Biology/TriadicBraidDialecticExact.agda'
+      - 'DASHI/Biology/TernaryHypercubeHyperfabricExact.agda'
+      - 'DASHI/Biology/TernaryCubeStrataExact.agda'
+      - 'DASHI/Biology/TernaryCantorWheelDiffusionExact.agda'
+      - 'DASHI/Biology/TernaryMonsterSymmetryCandidateExact.agda'
+      - 'DASHI/Biology/FRACTRANSSPTransitionExact.agda'
+      - 'DASHI/Biology/SpectralGrokkingLatticeExact.agda'
+      - 'DASHI/Biology/ClassicalQuantumLikeCoarseGrainingExact.agda'
+      - 'DASHI/Biology/AssociativeDivinationPNFExact.agda'
+      - 'DASHI/Biology/NaturalSystemsHyperfabricExact.agda'
+      - 'DASHI/Biology/NeuralRepresentationLaplacianExact.agda'
+      - 'DASHI/Biology/NSYMDialecticalFieldBridgeExact.agda'
+      - 'DASHI/Biology/DASHIQuantumLikeEntropyOscillatorExact.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5SourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5ExtendedSourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5FullBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5Regression.agda'
+      - 'DASHI/Biology/ReducedFiftyThreeFibreExact.agda'
+      - 'DASHI/Biology/SignedSSPFRACTRANWeaveExact.agda'
+      - 'DASHI/Biology/SSPHyperfibreSymmetryTowerExact.agda'
+      - 'DASHI/Biology/SelfIndexingHyperfabricTetrationExact.agda'
+      - 'DASHI/Biology/EquivariantLaplacianSectorExact.agda'
+      - 'DASHI/Biology/D4IrrepPhysicalRoleExact.agda'
+      - 'DASHI/Biology/OrientedZeroJetTransitionExact.agda'
+      - 'DASHI/Biology/ReachableSectorEntropyExact.agda'
+      - 'DASHI/Biology/ExceptionalLatticeGrokkingProtocolExact.agda'
+      - 'DASHI/Biology/MoonshineGradedStageBridgeExact.agda'
+      - 'DASHI/Biology/ClayCrossPollinationInterfaceExact.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5CompletionSourceAtlas.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5CompletionBoundary.agda'
+      - 'DASHI/Biology/ConsciousAccessRound5CompletionRegression.agda'
+      - 'DASHI/Biology/Everything.agda'
+      - 'Docs/support/reference/ConsciousAccessRound5DASHIYijingMoonshine.md'
+      - 'Docs/support/reference/DASHIYijingRelationalOperators.md'
+      - 'Docs/support/reference/ConsciousAccessRound5SSPWeaveCompletion.md'
+      - 'scripts/check_conscious_access_round5.sh'
+      - '.github/workflows/conscious-access-round5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Resolve repository Agda toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          package="$(nix build --no-link --print-out-paths .#agda-with-dashi-deps)"
+          agda_bin="$package/bin/agda"
+          test -x "$agda_bin"
+          "$agda_bin" --version
+          printf 'AGDA_BIN=%s\n' "$agda_bin" >> "$GITHUB_ENV"
+      - name: Check conscious-access round five
+        env:
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_EPHEMERAL: '1'
+          AGDA_LOG_PATH: ${{ runner.temp }}/conscious-access-round5-agda.log
+        run: bash scripts/check_conscious_access_round5.sh
+      - name: Report kernel-check status to the active pull request
+        if: always() && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECK_STATUS: ${{ job.status }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pr_number="$(
+            gh pr list \
+              --repo "$GITHUB_REPOSITORY" \
+              --head "$GITHUB_REF_NAME" \
+              --state open \
+              --json number \
+              --jq '.[0].number // empty'
+          )"
+
+          if [[ -z "$pr_number" ]]; then
+            echo "No open pull request found for $GITHUB_REF_NAME; skipping comment."
+            exit 0
+          fi
+
+          gh pr comment "$pr_number" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body "Round 5 repository-flake Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."

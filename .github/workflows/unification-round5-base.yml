@@ -1,0 +1,37 @@
+name: unification-round5-stacked
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/**'
+      - 'DASHI/Unified/Everything.agda'
+      - 'Docs/support/reference/UnificationRound5ConstantsDimensionMatterCosmology.md'
+      - 'scripts/check_unification_round5.sh'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Resolve repository Agda toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          package="$(nix build --no-link --print-out-paths .#agda-with-dashi-deps)"
+          agda_bin="$package/bin/agda"
+          test -x "$agda_bin"
+          "$agda_bin" --version
+          printf 'AGDA_BIN=%s\n' "$agda_bin" >> "$GITHUB_ENV"
+      - name: Check combined unification round five
+        env:
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_EPHEMERAL: '1'
+          AGDA_LOG_PATH: ${{ runner.temp }}/unification-round5-agda.log
+        run: bash scripts/check_unification_round5.sh
