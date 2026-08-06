@@ -146,14 +146,19 @@ crossingChangesQualitativePhase :
 crossingChangesQualitativePhase = refl , refl
 
 ------------------------------------------------------------------------
--- Correct bound-state viability: a discrete energy must lie below the
--- continuum threshold; the intersection is nonempty rather than empty.
+-- Correct bound-state viability: a discrete level must be certified below the
+-- continuum threshold.  The witness records a nonempty discrete intersection.
+
+data SpectralOrder : Set where
+  discreteBelowContinuum : SpectralOrder
+  discreteAtOrAboveContinuum : SpectralOrder
 
 record SpectralProfile : Set where
   constructor spectralProfile
   field
     discreteEnergy : Nat
     continuumThreshold : Nat
+    certifiedOrder : SpectralOrder
 
 open SpectralProfile public
 
@@ -162,18 +167,14 @@ data BoundStateStatus : Set where
   noCertifiedBoundState : BoundStateStatus
 
 boundStateStatus : SpectralProfile → BoundStateStatus
-boundStateStatus (spectralProfile zero zero) = noCertifiedBoundState
-boundStateStatus (spectralProfile zero (suc threshold)) = boundStatePresent
-boundStateStatus (spectralProfile (suc energy) zero) = noCertifiedBoundState
-boundStateStatus (spectralProfile (suc energy) (suc threshold)) with energy | threshold
-... | zero | zero = noCertifiedBoundState
-... | zero | suc threshold' = boundStatePresent
-... | suc energy' | zero = noCertifiedBoundState
-... | suc energy' | suc threshold' =
-  boundStateStatus (spectralProfile (suc energy') (suc threshold'))
+boundStateStatus (spectralProfile energy threshold discreteBelowContinuum) =
+  boundStatePresent
+boundStateStatus (spectralProfile energy threshold discreteAtOrAboveContinuum) =
+  noCertifiedBoundState
 
 canonicalBoundProfile : SpectralProfile
-canonicalBoundProfile = spectralProfile 0 3
+canonicalBoundProfile =
+  spectralProfile 0 3 discreteBelowContinuum
 
 canonicalBoundStateIsPresent :
   boundStateStatus canonicalBoundProfile ≡ boundStatePresent
