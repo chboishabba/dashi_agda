@@ -9,6 +9,10 @@ import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Biology.EquivariantLaplacianSectorExact as Equivariant
 import DASHI.Biology.MoonshineGradedStageBridgeExact as Moonshine
 import DASHI.Biology.ClayCrossPollinationInterfaceExact as Clay
+import DASHI.Biology.OrientedZeroJetTransitionExact as Jet
+import DASHI.Biology.ReachableSectorEntropyExact as Reachable
+import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact as Exceptional
+import DASHI.Biology.SpectralGrokkingLatticeExact as Grokking
 import DASHI.Biology.ConsciousAccessRound5CompletionSourceAtlas as Sources
 
 record ConsciousAccessRound5CompletionBoundary : Set where
@@ -20,6 +24,10 @@ record ConsciousAccessRound5CompletionBoundary : Set where
     equivariantSectorBoundary : Equivariant.EquivariantSectorBoundary
     moonshineStageBoundary : Moonshine.MoonshineStageBoundary
     clayCrossPollinationBoundary : Clay.ClayCrossPollinationBoundary
+    orientedZeroJetBoundary : Jet.OrientedZeroJetBoundary
+    reachableSectorBoundary : Reachable.ReachableSectorBoundary
+    exceptionalLatticeGrokkingBoundary :
+      Exceptional.ExceptionalLatticeGrokkingBoundary
 
     fiftyThreeIsFiftyFourMinusInvariant :
       Reduced.reducedDimension ≡ 53
@@ -70,8 +78,37 @@ record ConsciousAccessRound5CompletionBoundary : Set where
       Moonshine.evaluateBaseThreeDigits Moonshine.ternaryCoefficientDigits
       ≡ 196884
 
-    sourceCountIsTwentyNine :
-      Sources.canonicalRound5CompletionSourceCount ≡ 29
+    oppositeJetApproachesShareCoarseZero :
+      Jet.coarseJetPosition Jet.negativeApproachJet
+      ≡ Jet.coarseJetPosition Jet.positiveApproachJet
+
+    reflectionExchangesJetCrossingDirection :
+      Jet.reflectJet Jet.negativeToPositiveCrossingJet
+      ≡ Jet.positiveToNegativeCrossingJet
+
+    reachableSectorExcludesOneRawConfiguration :
+      Reachable.rawConfigurationCount
+      ∸ Reachable.reachableConfigurationCount
+      ≡ 1
+
+    directPoleJumpIsTypedViolation :
+      Reachable.directNegativeToPositive
+      ≡ Reachable.typedViolation
+          (Reachable.violationWitness
+            Reachable.coherentNegative
+            Reachable.coherentPositive
+            Reachable.directPoleJump)
+
+    E8BenchmarkHasEightDimensionsAndTwoHundredFortyMinimalVectors :
+      Exceptional.ambientDimension Exceptional.E8Benchmark ≡ 8
+      × Exceptional.shortestVectorCount Exceptional.E8Benchmark ≡ 240
+
+    LeechBenchmarkHasTwentyFourDimensionsAnd196560MinimalVectors :
+      Exceptional.ambientDimension Exceptional.LeechBenchmark ≡ 24
+      × Exceptional.shortestVectorCount Exceptional.LeechBenchmark ≡ 196560
+
+    sourceCountIsThirtyOne :
+      Sources.canonicalRound5CompletionSourceCount ≡ 31
 
 open ConsciousAccessRound5CompletionBoundary public
 
@@ -85,6 +122,9 @@ canonicalConsciousAccessRound5CompletionBoundary =
     Equivariant.canonicalEquivariantSectorBoundary
     Moonshine.canonicalMoonshineStageBoundary
     Clay.canonicalClayCrossPollinationBoundary
+    Jet.canonicalOrientedZeroJetBoundary
+    Reachable.canonicalReachableSectorBoundary
+    Exceptional.canonicalExceptionalLatticeGrokkingBoundary
     Reduced.reducedDimensionIsFiftyThree
     Reduced.moonshineCoefficientCandidateIs196884
     Reduced.moonshineNontrivialCandidateIs196883
@@ -96,4 +136,10 @@ canonicalConsciousAccessRound5CompletionBoundary =
     Equivariant.reflectedEvenRemainsEigenstate
     Moonshine.ternaryExpansionOf196884
     Moonshine.ternaryDigitsEvaluateTo196884
-    Sources.canonicalRound5CompletionSourceCountIsTwentyNine
+    Jet.oppositeApproachesShareCoarseZero
+    Jet.reflectionExchangesCrossingDirection
+    Reachable.rawMinusReachableIsOne
+    Reachable.directPoleJumpCarriesWitness
+    (refl , refl)
+    (refl , refl)
+    Sources.canonicalRound5CompletionSourceCountIsThirtyOne
