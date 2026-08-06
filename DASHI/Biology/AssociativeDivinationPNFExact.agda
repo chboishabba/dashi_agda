@@ -105,9 +105,20 @@ canonicalFreeAssociationTrace =
     true
     false
 
+canonicalVerifiedExternalTrace : AssociationTrace
+canonicalVerifiedExternalTrace =
+  associationTrace
+    2
+    selectedAssociation
+    externalHiddenFactClaim
+    true
+    true
+
 ------------------------------------------------------------------------
 -- Predicate-normal-form compilation keeps structural, associative, and
--- externally predictive claims in different constructors.
+-- externally predictive claims in different constructors.  In particular,
+-- an external claim is not silently compiled as an autobiographical theme,
+-- and independent verification is retained only when declared.
 
 data PNFAtom : Set where
   castProduced : Nat → PNFAtom
@@ -116,37 +127,50 @@ data PNFAtom : Set where
   readerObservedCue : Nat → PNFAtom
   baseRateApplied : Nat → PNFAtom
   priorInformationUsed : Nat → PNFAtom
+  structuralPatternClaimed : Nat → PNFAtom
   autobiographicalThemeHypothesized : Nat → PNFAtom
+  therapeuticPromptRaised : Nat → PNFAtom
   externalEventPredicted : Nat → PNFAtom
   externalEventVerified : Nat → PNFAtom
+
+claimAtoms : Nat → InterpretiveClaimKind → Bool → List PNFAtom
+claimAtoms context structuralClaim verified =
+  structuralPatternClaimed context ∷ []
+claimAtoms context autobiographicalHypothesis verified =
+  autobiographicalThemeHypothesized context ∷ []
+claimAtoms context therapeuticPrompt verified =
+  therapeuticPromptRaised context ∷ []
+claimAtoms context externalHiddenFactClaim false =
+  externalEventPredicted context ∷ []
+claimAtoms context externalHiddenFactClaim true =
+  externalEventPredicted context
+  ∷ externalEventVerified context
+  ∷ []
 
 compileAssociationPNF : AssociationTrace → List PNFAtom
 compileAssociationPNF
   (associationTrace context selectedAssociation kind communicated verified) =
   castProduced context
   ∷ participantSelected context
-  ∷ autobiographicalThemeHypothesized context
-  ∷ []
+  ∷ claimAtoms context kind verified
 compileAssociationPNF
   (associationTrace context rejectedAssociation kind communicated verified) =
   castProduced context
   ∷ participantRejected context
-  ∷ []
+  ∷ claimAtoms context kind verified
 compileAssociationPNF
   (associationTrace context elaboratedAssociation kind communicated verified) =
   castProduced context
   ∷ participantSelected context
-  ∷ autobiographicalThemeHypothesized context
-  ∷ []
+  ∷ claimAtoms context kind verified
 compileAssociationPNF
   (associationTrace context affectiveAssociation kind communicated verified) =
   castProduced context
   ∷ participantSelected context
-  ∷ autobiographicalThemeHypothesized context
-  ∷ []
+  ∷ claimAtoms context kind verified
 compileAssociationPNF
   (associationTrace context noAssociation kind communicated verified) =
-  castProduced context ∷ []
+  castProduced context ∷ claimAtoms context kind verified
 
 canonicalAssociationCompilesWithoutExternalPrediction :
   compileAssociationPNF canonicalFreeAssociationTrace
@@ -155,6 +179,15 @@ canonicalAssociationCompilesWithoutExternalPrediction :
     ∷ autobiographicalThemeHypothesized 1
     ∷ []
 canonicalAssociationCompilesWithoutExternalPrediction = refl
+
+verifiedExternalClaimCompilesAsPredictionAndVerification :
+  compileAssociationPNF canonicalVerifiedExternalTrace
+  ≡ castProduced 2
+    ∷ participantSelected 2
+    ∷ externalEventPredicted 2
+    ∷ externalEventVerified 2
+    ∷ []
+verifiedExternalClaimCompilesAsPredictionAndVerification = refl
 
 ------------------------------------------------------------------------
 -- Story/place/multimodal memory fibres.
