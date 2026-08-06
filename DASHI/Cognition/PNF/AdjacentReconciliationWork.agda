@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 
+open import DASHI.Cognition.PNF.ComplexityArithmetic
 open import DASHI.Cognition.PNF.NumericAuthority
 open import DASHI.Cognition.PNF.NumericHyperfabric
 
@@ -36,7 +37,8 @@ record OrderedAdjacentPair : Set where
     leftMember rightMember : AdjacentMember
     sharedCanonicalParent :
       canonicalParent leftMember ≡ canonicalParent rightMember
-    leftBeforeRight : memberEnd leftMember ≡ memberStart rightMember
+    leftDoesNotOverlapRight :
+      memberEnd leftMember ≤ᶜ memberStart rightMember
 
 open OrderedAdjacentPair public
 
