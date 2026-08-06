@@ -10,8 +10,10 @@ fi
 
 FILES=(
   DASHI/Physics/Foundations/CabarlahClaimStatusExact.agda
+  DASHI/Physics/Foundations/CabarlahEvidenceWitnessExact.agda
   DASHI/Physics/Foundations/CabarlahHistoricalLayerExact.agda
   DASHI/Physics/Foundations/CabarlahToponymTranscriptionExact.agda
+  DASHI/Physics/Foundations/CabarlahSignalInferenceExact.agda
   DASHI/Physics/Foundations/SettlerEnemyAbstractionExact.agda
   DASHI/Physics/Foundations/IndigenousMilitaryIntelligenceCircuitExact.agda
   DASHI/Physics/Foundations/FrontierEnemyPersistenceExact.agda
@@ -41,10 +43,16 @@ grep -q 'capbarlahHistoricalSpelling = refuted' \
   DASHI/Physics/Foundations/CabarlahClaimStatusExact.agda
 grep -q 'communistConcessionBoundaryAtCabarlah = refuted' \
   DASHI/Physics/Foundations/CabarlahClaimStatusExact.agda
+grep -q 'noCommunistConcessionBoundaryWitness ()' \
+  DASHI/Physics/Foundations/CabarlahEvidenceWitnessExact.agda
 grep -q 'comparisonAuthority indigenousAustraliaSettlerStructure =' \
   DASHI/Physics/Foundations/SettlerEnemyAbstractionExact.agda
 grep -q 'structuralHomologyOnly' \
   DASHI/Physics/Foundations/SettlerEnemyAbstractionExact.agda
+grep -q 'crossDomainComparisonIsStructuralOnly' \
+  DASHI/Physics/Foundations/CabarlahSignalInferenceExact.agda
+grep -q 'canonicalCabarlahPalestineSourceCountIsTen' \
+  DASHI/Physics/Foundations/CabarlahPalestineSourceAtlas.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Foundations/CabarlahPalestineRegression.agda \
