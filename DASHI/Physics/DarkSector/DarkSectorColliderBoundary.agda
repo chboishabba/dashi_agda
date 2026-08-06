@@ -9,16 +9,19 @@ import DASHI.Physics.DarkSector.MetastableLifetime as Lifetime
 import DASHI.Physics.DarkSector.BoostedDecayGeometry as Boost
 import DASHI.Physics.DarkSector.DisplacedVertex as VertexInternal
 import DASHI.Physics.DarkSector.TriggerCensoring as TriggerInternal
+import DASHI.Physics.DarkSector.LinkedColliderChainExact as Linked
 import DASHI.Physics.DarkSector.DarkSectorColliderSourceAtlas as Sources
 
 module Vertex = VertexInternal
 module Trigger = TriggerInternal
 
 ------------------------------------------------------------------------
--- The exact finite collider theorem spine requested by the attached tranche.
--- Each implication is represented by a typed witness; continuum amplitudes,
--- exponential decay, detector simulation, and empirical inference remain
--- outside the promoted finite theorem surface.
+-- Collider-facing finite witnesses plus one dependent linked chain.  The
+-- original fixed projections remain available for compatibility, but the
+-- actual portal -> lifetime -> boost -> event -> trigger relation is carried by
+-- LinkedColliderChainExact rather than inferred from a product of unrelated
+-- fields.  Continuum amplitudes, exponential decay, detector simulation, and
+-- empirical inference remain outside the promoted finite theorem surface.
 
 record DarkSectorColliderBoundary : Set where
   field
@@ -29,6 +32,8 @@ record DarkSectorColliderBoundary : Set where
     boostedDecayGeometryBoundary : Boost.BoostedDecayGeometryBoundary
     displacedVertexBoundary : Vertex.DisplacedVertexBoundary
     triggerCensoringBoundary : Trigger.TriggerCensoringBoundary
+    linkedColliderChainBoundary : Linked.LinkedColliderChainBoundary
+    linkedCanonicalChain : Linked.LinkedColliderChain
 
     portalAllowedWitness :
       Portal.portalAllowed Portal.canonicalQuadraticHiggsPortal ≡ true
@@ -60,6 +65,37 @@ record DarkSectorColliderBoundary : Set where
 
     displacedTriggerAcceptsWitness :
       Trigger.llpTrigger Vertex.canonicalDisplacedEvent
+      ≡
+      Trigger.acceptEvent
+
+    linkedLifetimeToBoostWitness :
+      Boost.properLifetimeUnits
+        (Linked.boostedDatum
+          (Linked.boostedStage linkedCanonicalChain))
+      ≡
+      Lifetime.lifetimeUnits
+        (Linked.lifetimeDatum
+          (Linked.metastableStage linkedCanonicalChain))
+
+    linkedBoostToEventWitness :
+      Vertex.vertexDisplacement
+        (Linked.reconstructedEvent
+          (Linked.detectionStage linkedCanonicalChain))
+      ≡
+      Boost.laboratoryDisplacement
+        (Linked.boostedDatum
+          (Linked.boostedStage linkedCanonicalChain))
+
+    linkedEventTriggerWitness :
+      Trigger.promptTrigger
+        (Linked.reconstructedEvent
+          (Linked.detectionStage linkedCanonicalChain))
+      ≡
+      Trigger.rejectEvent
+      ×
+      Trigger.llpTrigger
+        (Linked.reconstructedEvent
+          (Linked.detectionStage linkedCanonicalChain))
       ≡
       Trigger.acceptEvent
 
@@ -98,12 +134,16 @@ canonicalDarkSectorColliderBoundary =
         Vertex.canonicalDisplacedVertexBoundary
     ; triggerCensoringBoundary =
         Trigger.canonicalTriggerCensoringBoundary
+    ; linkedColliderChainBoundary =
+        Linked.canonicalLinkedColliderChainBoundary
+    ; linkedCanonicalChain =
+        Linked.canonicalLinkedColliderChain
     ; portalAllowedWitness =
-        Portal.quadraticHiggsPortalIsAllowed
+        Linked.linkedPortalAllowed
     ; hiddenIntermediateWitness =
-        Decay.canonicalVisiblePortalChain
+        Linked.linkedVisibleIntermediate
     ; finiteLifetimeWitness =
-        Lifetime.canonicalWidthLifetimeReciprocal
+        Linked.linkedReciprocalLifetime
     ; hiddenUntilTerminalAgeWitness =
         refl
     ; visibleAtTerminalAgeWitness =
@@ -111,11 +151,17 @@ canonicalDarkSectorColliderBoundary =
     ; nonzeroBoostedDisplacementWitness =
         Boost.canonicalLaboratoryDisplacementIsEight
     ; displacedVertexWitness =
-        Vertex.canonicalEventIsDisplacedVertex
+        Linked.linkedEventIsDisplaced
     ; promptTriggerRejectsWitness =
-        Trigger.canonicalPromptTriggerRejectsDisplacedSignal
+        Linked.linkedPromptRejects
     ; displacedTriggerAcceptsWitness =
-        Trigger.canonicalLLPTriggerAcceptsDisplacedSignal
+        Linked.linkedLLPAccepts
+    ; linkedLifetimeToBoostWitness =
+        Linked.linkedLifetimeMatchesBoost
+    ; linkedBoostToEventWitness =
+        Linked.linkedDisplacementMatchesEvent
+    ; linkedEventTriggerWitness =
+        Linked.linkedPromptRejects , Linked.linkedLLPAccepts
     ; censoredNullNonidentifiabilityWitness =
         Trigger.recordedNullDoesNotIdentifyProduction
     ; darkSectorColliderSourceCountIsSix =
