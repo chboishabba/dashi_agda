@@ -24,7 +24,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoTorusLerayContractiveExact where
 -- No new contractivity field is accepted from the caller.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base using (_≤_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base using (0ℚ; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNRationalLerayProjectionExact as Leray
 
@@ -42,5 +43,5 @@ torusLerayTransverse :
   Leray.dot
     (Leray.mode projectionData)
     (Leray.project projectionData value)
-  ≡ Data.Rational.Base.0ℚ
+  ≡ 0ℚ
 torusLerayTransverse = Leray.projectTransverse
