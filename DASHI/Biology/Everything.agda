@@ -143,3 +143,24 @@ import DASHI.Biology.QuasiperiodicInternalSpaceBoundaryExact
 import DASHI.Biology.ConsciousAccessRound4SourceAtlas
 import DASHI.Biology.ConsciousAccessRound4FullBoundary
 import DASHI.Biology.ConsciousAccessRound4Regression
+
+------------------------------------------------------------------------
+-- Conscious-access round five: ternary divination, oriented zero, symmetry,
+-- exceptional-lattice candidates, natural systems, and Clay-facing bridges.
+
+import DASHI.Biology.DASHIYijingTernaryDivinationExact
+import DASHI.Biology.OrientedZeroWaveTransitionExact
+import DASHI.Biology.DialecticalSheetSpiralExact
+import DASHI.Biology.TernaryHypercubeHyperfabricExact
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact
+import DASHI.Biology.FRACTRANSSPTransitionExact
+import DASHI.Biology.SpectralGrokkingLatticeExact
+import DASHI.Biology.ClassicalQuantumLikeCoarseGrainingExact
+import DASHI.Biology.AssociativeDivinationPNFExact
+import DASHI.Biology.NaturalSystemsHyperfabricExact
+import DASHI.Biology.NeuralRepresentationLaplacianExact
+import DASHI.Biology.NSYMDialecticalFieldBridgeExact
+import DASHI.Biology.DASHIQuantumLikeEntropyOscillatorExact
+import DASHI.Biology.ConsciousAccessRound5SourceAtlas
+import DASHI.Biology.ConsciousAccessRound5FullBoundary
+import DASHI.Biology.ConsciousAccessRound5Regression
