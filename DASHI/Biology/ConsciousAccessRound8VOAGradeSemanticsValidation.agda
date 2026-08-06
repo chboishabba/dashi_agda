@@ -15,13 +15,16 @@ module DASHI.Biology.ConsciousAccessRound8VOAGradeSemanticsValidation where
 --   * the mode-one product of two weight-two states closes in weight two;
 --   * the Griess product target is the full 196884-dimensional V_2;
 --   * identity graded-trace probes separate the finite initial profile;
+--   * the c=24 shift sends weights 0,1,2 to exponents -1,0,1 with
+--     coefficients 1,0,196884;
 --   * VOA, shifted J and Monster Lie algebra gradings remain distinct; and
 --   * the domain-neutral graded/local/probe/defect architecture is available
 --     without identifying the concrete locality notions across domains.
 --
 -- No Moonshine VOA, state-field correspondence, Jacobi/locality theorem,
--- Griess multiplication table, invariant form, Monster action, graded trace
--- function or VOA uniqueness theorem is constructed.
+-- Griess multiplication table, invariant form, Monster action, modularity,
+-- genus-zero theorem, graded trace function or VOA uniqueness theorem is
+-- constructed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -34,6 +37,7 @@ import DASHI.Biology.MoonshineConformalReductionVsFiftyFourReductionExact
 import DASHI.Biology.FiniteGradedModeCarrierExact
 import DASHI.Biology.MoonshineWeightTwoGriessProductSchemaExact
 import DASHI.Biology.MoonshineGradedTraceProbeExact
+import DASHI.Biology.MoonshineShiftedJCoefficientBoundaryExact
 import DASHI.Biology.MonsterLieAlgebraGradeBoundaryExact
 
 round8VOAGradeSemanticsRoot : Set
