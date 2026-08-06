@@ -22,6 +22,7 @@ import DASHI.Mathematics.Arithmetic.EllipticCurveF5PointEnumerationExact
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact
 import DASHI.Mathematics.Arithmetic.BirchSwinnertonDyerBoundary
 import DASHI.Mathematics.Arithmetic.EllipticCurveHodgeFrobeniusCrossPollination
+import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact
 import DASHI.Mathematics.Complexity.PolynomialReductionExact
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary
 import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact
@@ -131,6 +132,7 @@ data CrossPollinationEdge : Set where
   ellipticCurveToHodgeRealization
   arithmeticFrobeniusToLocalEulerFactor
   localEulerFactorsToBSDGlobalLFunction
+  deterministicMachineToNondeterministicMachine
   kleinInvariantToGCTOrbitSeparation
   unitQuaternionsToRoundThreeSphere
   ricciGeometrizationToPoincare
@@ -149,6 +151,11 @@ riemannMaassEdge =
 hodgeEllipticEdge : ImplementedEdge
 hodgeEllipticEdge =
   implementedEdge ellipticCurveToHodgeRealization
+    proofBearingGenericTheorem
+
+machineEmbeddingEdge : ImplementedEdge
+machineEmbeddingEdge =
+  implementedEdge deterministicMachineToNondeterministicMachine
     proofBearingGenericTheorem
 
 complexityKleinEdge : ImplementedEdge
