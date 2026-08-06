@@ -4,6 +4,7 @@ import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact
 import DASHI.Physics.Foundations.PadicCausalChartLosslessExact
+import DASHI.Physics.Foundations.ModularProjectionQuantisationExact
 import DASHI.Physics.Foundations.RGMDLExhaustionChambersExact
 import DASHI.Physics.Foundations.DimensionPowerCountingBoundaryExact
 import DASHI.Physics.Foundations.DiscreteLorentzEmergenceBoundaryExact
