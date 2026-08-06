@@ -89,6 +89,8 @@ FILES=(
   DASHI/Visualisation/AttachedVisualisationBoundary.agda
   DASHI/Visualisation/AttachedVisualisationRegression.agda
   DASHI/Visualisation/EventFilamentFieldExact.agda
+  DASHI/Visualisation/EventSeparationQuantisationExact.agda
+  DASHI/Visualisation/EventSeparationQuantisationRegression.agda
   DASHI/Visualisation/EventLabelGeometryExact.agda
   DASHI/Visualisation/FiniteAnisotropicKernelExact.agda
   DASHI/Visualisation/EventFilamentPersistenceExact.agda
@@ -127,6 +129,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Foundations/Round5AttachedFormalismRegression.agda \
   DASHI/Physics/Foundations/Round5AttachedCompletionRegression.agda \
   DASHI/Visualisation/AttachedVisualisationRegression.agda \
+  DASHI/Visualisation/EventSeparationQuantisationRegression.agda \
   DASHI/Visualisation/EventPadicContinuationRegression.agda \
   DASHI/Visualisation/Everything.agda \
   DASHI/Physics/Foundations/Round5CompleteBoundary.agda \
