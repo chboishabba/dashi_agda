@@ -1,6 +1,7 @@
 module DASHI.Biology.NSYMDialecticalFieldBridgeExact where
 
 open import DASHI.Core.Prelude
+open import Data.Nat.Properties using (*-identityˡ)
 
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Symmetry
 
@@ -71,7 +72,8 @@ stretchByStrain strain
 unitStrainPreservesIntensity :
   (state : VorticityState) →
   intensity (stretchByStrain 1 state) ≡ intensity state
-unitStrainPreservesIntensity (vorticityState phase z omega hand) = refl
+unitStrainPreservesIntensity (vorticityState phase z omega hand) =
+  *-identityˡ omega
 
 ------------------------------------------------------------------------
 -- Finite lattice-gauge carrier.
