@@ -1,0 +1,33 @@
+name: Yang-Mills Clay highest-alpha round 21
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round21-literal-hessian-cancellation'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralGaugeConstraintCancellationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33WilsonSharpBudgetCoercivityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33LiteralPhysicalPerturbationAdapterExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound21Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round21.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round21.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check cancellation, same-h adapter and Wilson promotion
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round21.sh
