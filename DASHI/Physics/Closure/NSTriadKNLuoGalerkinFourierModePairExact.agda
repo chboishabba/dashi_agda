@@ -40,7 +40,6 @@ module DASHI.Physics.Closure.NSTriadKNLuoGalerkinFourierModePairExact where
 -- F3 repair.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_)
@@ -49,6 +48,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalDirectionalDefectExact as Physical
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicBiotSavartMultiplierExact as Biot
 import DASHI.Physics.Closure.NSTriadKNLuoPairFrequencyDefectDiffusionExact as Pair
 
@@ -151,7 +151,8 @@ oppositeHighHighPair =
 
 oppositePairOutputZero :
   outputWavevector oppositeHighHighPair ≡ zeroVec
-oppositePairOutputZero = refl
+oppositePairOutputZero =
+  Physical.vec3Ext (solve []) (solve []) (solve [])
 
 oppositePairDefectAmplitudeOne :
   pairDefectAmplitude oppositeHighHighPair ≡ 1ℚ
