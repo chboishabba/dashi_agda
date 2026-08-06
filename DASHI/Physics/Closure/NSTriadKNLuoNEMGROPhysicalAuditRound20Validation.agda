@@ -7,6 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoNEMGROPhysicalAuditRound20Validation wh
 -- Imports Round Nineteen and checks the concrete NEMGRO audit tranche:
 --
 -- * exact gradient-strain sign and antisymmetric cancellation;
+-- * exact vorticity-stretching sign kept separate from gradient balance;
 -- * affine projected-Korn counterexample;
 -- * divergence-free cutoff-curl plateau core;
 -- * amplitude-scaling obstruction;
@@ -27,6 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoNEMGROPhysicalAuditRound20Validation wh
 
 import DASHI.Physics.Closure.NSTriadKNLuoUnconditionalAbsorptionRound19Validation
 import DASHI.Physics.Closure.NSTriadKNLuoPositiveStrainGradientSignExact
+import DASHI.Physics.Closure.NSTriadKNLuoVorticityStretchingSignExact
 import DASHI.Physics.Closure.NSTriadKNLuoLocalizedProjectedKornAffineCounterexampleExact
 import DASHI.Physics.Closure.NSTriadKNLuoCompactSupportPositiveStrainCoreExact
 import DASHI.Physics.Closure.NSTriadKNLuoAmplitudeScalingStaticRigidityNoGoExact
