@@ -13,8 +13,11 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteCenteredDifferenceSixThreeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIntegerCubeSupportCapacityExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoConcreteIntegerCube125EnumerationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoConcreteDyadicSupportCount125Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoConcreteBernstein125Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingFiniteCubeSupportExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingCubeBernsteinExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteRootOfUnityCancellationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreeDimensionalCharacterOrthogonalityFactorExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteKroneckerEnumerationExact.agda
