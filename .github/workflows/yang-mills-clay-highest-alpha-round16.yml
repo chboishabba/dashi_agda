@@ -1,0 +1,26 @@
+name: Yang-Mills Clay highest-alpha round 16
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round16-local-chart-engine'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check inverse-dexp, SU2 geometry, Duhamel, RG and cutoff mathematics
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round16.sh
