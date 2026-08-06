@@ -11,6 +11,8 @@ module DASHI.Biology.ConsciousAccessRound7HarmonicWreathCarrierValidation where
 --   * a finite local-transform/index-permutation action;
 --   * the balanced-ternary T^2 disjoint-union {j} coarse carrier;
 --   * jFine/jCoarse as the relative 3^9 harmonic scale;
+--   * elementary channel, full-assignment and recursive tetrational growth as
+--     three distinct carrier levels;
 --   * 196883 = 3^11 + 3^9 + 53 as structured channel arithmetic;
 --   * 299/300 trivial-line bookkeeping and character-probe requirements;
 --   * separate 3A, 3B and 3C candidate lanes; and
@@ -30,6 +32,7 @@ import DASHI.Physics.Common.ScaledFilteredEstimateExact
 import DASHI.Physics.Common.SeparatingProbeFamilyExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact
+import DASHI.Biology.BalancedTernaryTetrationHarmonicBridgeExact
 import DASHI.Biology.JFineCoarseRelativeScaleExact
 import DASHI.Biology.MonsterStructuredBulkCarrierExact
 import DASHI.Biology.MonsterSubgroupBranchingBenchmarksExact
