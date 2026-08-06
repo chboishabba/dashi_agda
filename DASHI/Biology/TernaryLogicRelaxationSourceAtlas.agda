@@ -16,7 +16,7 @@ kleeneMetamathematicsSource =
     "Introduction to Metamathematics"
     "North-Holland Publishing Company"
     1952
-    "No DOI assigned to the book; ISBN 978-0-7204-2103-3"
+    "No DOI assigned to the book"
     "Supports treating truth tables, designated values, connectives, and consequence as explicit logical structure rather than residue names."
     "The finite ordered three-value table is not identified with every Kleene logic or with cyclic addition in Z/3Z."
 
