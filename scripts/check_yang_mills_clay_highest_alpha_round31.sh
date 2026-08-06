@@ -11,6 +11,8 @@ files=(
   DASHI/Physics/YangMills/BalabanStrongCouplingGroupRicciConstantsExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingSUFormulaReconciliationExact.agda
   DASHI/Physics/YangMills/BalabanStrongCouplingWeightedWassersteinRateExact.agda
+  DASHI/Physics/YangMills/BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda
+  DASHI/Physics/YangMills/BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda
   DASHI/Physics/YangMills/YangMillsAllBetaMultiscaleLSIAuditExact.agda
   DASHI/Physics/YangMills/YangMillsLatticeGapScaleCompatibilityExact.agda
   DASHI/Physics/YangMills/YangMillsAllBetaExponentialRunningCouplingExact.agda
@@ -36,6 +38,16 @@ checks=(
   'BalabanStrongCouplingWeightedWassersteinRateExact.agda:canonicalWeightedRateIsHalfBakry'
   'BalabanStrongCouplingWeightedWassersteinRateExact.agda:positiveBakryRateChoosesPositiveWeight'
   'BalabanStrongCouplingWeightedWassersteinRateExact.agda:configuredSU2WeightedContractionRateExact'
+  'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:positiveUnitJetNormProfile'
+  'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:inverseUnitJetNormProfile'
+  'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:orderedProduct4NormSqExact'
+  'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:placementAtomNormSqExact'
+  'BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda:orientedPlaquetteAtomNormSqExact'
+  'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:diagonalPlacementBudgetExact'
+  'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:orderedCrossPlacementBudgetExact'
+  'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:sixteenPlacementBudgetExact'
+  'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:globalSixteenAtomCoefficientExact'
+  'BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda:fourDimensionalDiagonalPlusCrossExact'
   'YangMillsAllBetaMultiscaleLSIAuditExact.agda:allBetaDepositIsOnlySketchAuthority'
   'YangMillsAllBetaMultiscaleLSIAuditExact.agda:acceptedInputCannotEqualForbiddenTarget'
   'YangMillsAllBetaMultiscaleLSIAuditExact.agda:fixedBetaGapIsNotScaleCompatibility'
@@ -54,11 +66,14 @@ for check in "${checks[@]}"; do
 done
 
 grep -q '10.1007/s00220-022-04609-1' DASHI/Physics/YangMills/BalabanStrongCouplingGroupRicciConstantsExact.agda
+grep -q '10.1103/PhysRevD.10.2445' DASHI/Physics/YangMills/BalabanStrongCouplingLiteralQuaternionAtomNormExact.agda
+grep -q '10.1007/BF01240355' DASHI/Physics/YangMills/BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda
 grep -q '10.4171/OWR/2022/27' DASHI/Physics/YangMills/YangMillsAllBetaMultiscaleLSIAuditExact.agda
 grep -q '10.5281/zenodo.19699784' DASHI/Physics/YangMills/YangMillsAllBetaMultiscaleLSIAuditExact.agda
 grep -q 'No canonical inhabitant' DASHI/Physics/YangMills/YangMillsAllBetaMultiscaleLSIAuditExact.agda
 grep -q 'No canonical inhabitant' DASHI/Physics/YangMills/YangMillsAllBetaExponentialRunningCouplingExact.agda
 grep -q 'K~_S(s^2)' DASHI/Physics/YangMills/BalabanStrongCouplingWeightedWassersteinRateExact.agda
+grep -q '4 \* 2(d-1) = 8(d-1)' DASHI/Physics/YangMills/BalabanStrongCouplingSixteenAtomIncidenceBudgetExact.agda
 grep -q 'm_\* a <= Delta_latt' DASHI/Physics/YangMills/YangMillsLatticeGapScaleCompatibilityExact.agda
 
 scripts/run_agda29_parallel_check.sh \
