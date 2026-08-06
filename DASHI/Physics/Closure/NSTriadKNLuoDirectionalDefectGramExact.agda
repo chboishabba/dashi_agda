@@ -137,17 +137,25 @@ directionalDefectAtMostOne :
   directionalDefect pair ≤ 1ℚ
 directionalDefectAtMostOne pair =
   let
+    squareValue = L2.square (dot (left pair) (right pair))
     squareNN = L2.squareNonnegative (dot (left pair) (right pair))
 
-    subtractSquare :
-      1ℚ - L2.square (dot (left pair) (right pair)) ≤ 1ℚ - 0ℚ
-    subtractSquare =
-      ℚₚ.+-monoʳ-≤ 1ℚ (ℚₚ.neg-mono-≤ squareNN)
+    addSquare :
+      (1ℚ - squareValue) + 0ℚ
+      ≤ (1ℚ - squareValue) + squareValue
+    addSquare =
+      ℚₚ.+-monoʳ-≤ (1ℚ - squareValue) squareNN
 
-    endpoint : 1ℚ - 0ℚ ≡ 1ℚ
-    endpoint = solve []
+    leftMeaning : (1ℚ - squareValue) + 0ℚ ≡ 1ℚ - squareValue
+    leftMeaning = solve (squareValue ∷ [])
+
+    rightMeaning : (1ℚ - squareValue) + squareValue ≡ 1ℚ
+    rightMeaning = solve (squareValue ∷ [])
   in
   subst
-    (λ upper → directionalDefect pair ≤ upper)
-    endpoint
-    subtractSquare
+    (λ lower → lower ≤ 1ℚ)
+    leftMeaning
+    (subst
+      (λ upper → (1ℚ - squareValue) + 0ℚ ≤ upper)
+      rightMeaning
+      addSquare)
