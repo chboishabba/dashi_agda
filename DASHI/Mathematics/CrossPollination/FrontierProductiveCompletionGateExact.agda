@@ -153,6 +153,6 @@ data MissingFrontierEdge : Set where
   continuumBiotSavartDepletion
   navierStokesGlobalRegularity
 
-finiteEdgeIsNotContinuumClosure :
-  hodgeToFiniteCoercivity ≡ continuumYangMillsGap → ⊥
-finiteEdgeIsNotContinuumClosure ()
+finiteStageIsNotContinuumStage :
+  exactFiniteTheorem ≡ continuumBoundary → ⊥
+finiteStageIsNotContinuumStage ()
