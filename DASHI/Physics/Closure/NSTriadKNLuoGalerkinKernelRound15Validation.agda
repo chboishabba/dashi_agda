@@ -31,3 +31,4 @@ import DASHI.Physics.Closure.NSTriadKNYuLocalizationCaccioppoliTailExact
 import DASHI.Physics.Closure.NSTriadKNLuoPeriodicGalerkinFourClassContinuationExact
 import DASHI.Physics.Closure.NSTriadKNLuoGalerkinUniformLimitContinuationExact
 import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceDynamicRarityExact
+import DASHI.Physics.Closure.NSTriadKNLuoBadCoherenceWeightedMarkovExact
