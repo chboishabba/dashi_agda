@@ -20,7 +20,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoPeriodicGalerkinFourClassContinuationEx
 --
 -- PURPOSE
 -- Turn the radical-free four-class estimate into the exact 1/64 terminal
--- threshold at the squared level.  If
+-- threshold at the squared level. If
 --
 --   4 C_sum A_q^2 <= 1/4096,
 --
@@ -28,7 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoPeriodicGalerkinFourClassContinuationEx
 --
 --   N_q^2 <= (1/4096) E_q^2.
 --
--- This is the precise conditional continuation criterion.  It does not claim
+-- This is the precise conditional continuation criterion. It does not claim
 -- that the critical smallness hypothesis is automatic.
 ------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _/_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoRound14SquaredFourClassClosureExact as FourClass
@@ -118,8 +118,6 @@ periodicGalerkinTerminalSmallnessSquared dataSet =
       (sym assembledMeaning)
       coefficientTimesOutput)
 
--- The numerical identity records why the squared threshold is exactly the
--- square of 1/64.
 oneOver4096IsOneOver64Squared :
   oneOver4096 ≡ (Int.+ 1 / 64) * (Int.+ 1 / 64)
 oneOver4096IsOneOver64Squared = solve []
