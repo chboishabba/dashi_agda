@@ -3,11 +3,15 @@ module DASHI.Visualisation.EventPadicContinuationRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Visualisation.EventFilamentFieldExact as Event
+import DASHI.Visualisation.EventFilamentPersistenceExact as Persistence
 import DASHI.Visualisation.SelfConsistentEventRendererExact as Renderer
+import DASHI.Visualisation.RendererStabilityExact as Stability
 import DASHI.Biology.TernaryCyclicDialecticExact as Cyclic
+import DASHI.Biology.TernarySoftCarryLogicExact as Soft
 import DASHI.Biology.TriadicCarryResidualExact as Carry
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.RenderablePadicReasoningFieldExact as Padic
+import DASHI.Biology.PadicLODConsistencyExact as Consistency
 import DASHI.Biology.PadicCylinderLODReasoningField as LOD
 import DASHI.Visualisation.EventPadicSourceAtlas as Sources
 import DASHI.Visualisation.EventPadicContinuationBoundary as Boundary
@@ -30,6 +34,19 @@ timeDoesNotCreateWormRegression :
   ⊥
 timeDoesNotCreateWormRegression = Event.timeCoordinateDoesNotForceWorm
 
+thresholdPersistenceRegression :
+  Persistence.SuperlevelMember Persistence.highThreshold Persistence.event0
+  →
+  Persistence.SuperlevelMember Persistence.lowThreshold Persistence.event0
+thresholdPersistenceRegression = Persistence.highIncludedInLow
+
+stochasticRowRegression :
+  Persistence.toEventOneMass Persistence.canonicalTransitionRow
+  + Persistence.toEventTwoMass Persistence.canonicalTransitionRow
+  ≡
+  Persistence.rowDenominator Persistence.canonicalTransitionRow
+stochasticRowRegression = Persistence.canonicalTransitionRowCloses
+
 ridgeCodimensionRegression :
   Event.ridgeNormalDirections 4 1 ≡ 3
 ridgeCodimensionRegression = refl
@@ -45,6 +62,20 @@ fixedPointUniquenessRegression :
   Renderer.fieldOperator state ≡ state →
   state ≡ Renderer.densityFixed
 fixedPointUniquenessRegression = Renderer.fixedPointUnique
+
+straightAlphaRegression :
+  Stability.frontToBackAlpha Stability.half Stability.threeQuarters
+  ≡
+  Stability.fraction 14 16
+straightAlphaRegression = Stability.canonicalCompositedAlpha
+
+frameCalibrationRegression :
+  Stability.calibratedFraction Stability.smallFrame
+  ≡
+  Stability.calibratedFraction Stability.largeFrameWithDistantPeak
+  →
+  ⊥
+frameCalibrationRegression = Stability.calibrationFractionsDiffer
 
 cmykNonlinearityRegression :
   Renderer.convertedTogether
@@ -81,6 +112,34 @@ softConvolutionRegression :
   Carry.mass3 2 1 1
 softConvolutionRegression = Cyclic.softConvolutionSample
 
+softCarryRegression :
+  Soft.carryPairMassTotal
+    (Soft.hardCarryAsSoftOneHot
+      Triadic.positiveTrit
+      Triadic.positiveTrit
+      Triadic.zeroTrit)
+  ≡
+  1
+softCarryRegression = refl
+
+designationSchemeRegression :
+  Soft.onePremiseConsequence
+    Soft.trueOnlyScheme
+    Soft.schemeSensitiveValuation
+    Soft.propositionP
+    Soft.propositionQ
+  ≡
+  true
+  ×
+  Soft.onePremiseConsequence
+    Soft.neutralOrTrueScheme
+    Soft.schemeSensitiveValuation
+    Soft.propositionP
+    Soft.propositionQ
+  ≡
+  false
+designationSchemeRegression = refl , refl
+
 carryRegression :
   Carry.addCarry3
     Triadic.positiveTrit
@@ -112,6 +171,21 @@ opacityContrastFailureRegression = refl
 parentMassRegression :
   LOD.aggregateNat LOD.canonicalChildMasses ≡ 9
 parentMassRegression = refl
+
+conditionalZoomRegression :
+  3 * Consistency.densityAtZoom Consistency.coarseDepth
+  ≡
+  Consistency.densityAtZoom Consistency.refinedDepth
+conditionalZoomRegression = refl
+
+massWeightedNormalisationRegression :
+  Consistency.averageAlreadyNormalisedChildAWeights
+  ≡
+  Consistency.normaliseAggregatedClassAMass
+  →
+  ⊥
+massWeightedNormalisationRegression =
+  Consistency.unequalMassNormalisationsDiffer
 
 sourceCountRegression :
   Sources.canonicalEventPadicSourceCount ≡ 10
