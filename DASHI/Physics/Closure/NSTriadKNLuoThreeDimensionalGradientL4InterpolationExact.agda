@@ -39,7 +39,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoThreeDimensionalGradientL4Interpolation
 
 open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Nat.Base using (ℕ; _+_) renaming (_+_ to _+ℕ_)
+open import Data.Nat.Base using (ℕ)
+import Data.Nat.Base as Nat
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
@@ -62,8 +63,9 @@ manuscriptDisplayedExponents : QuarterExponentPair
 manuscriptDisplayedExponents = quarterExponentPair 1 1 1
 
 correctLowPlusHighNumerator :
-  lowNumerator threeDimensionalL4Exponents
-  +ℕ highNumerator threeDimensionalL4Exponents
+  Nat._+_
+    (lowNumerator threeDimensionalL4Exponents)
+    (highNumerator threeDimensionalL4Exponents)
   ≡ denominator threeDimensionalL4Exponents
 correctLowPlusHighNumerator = refl
 
