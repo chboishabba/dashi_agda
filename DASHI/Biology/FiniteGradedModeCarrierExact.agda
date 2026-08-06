@@ -60,14 +60,6 @@ weightTwoFirstModeOutputIsTwo :
   outputWeight weightTwoFirstModeClosure ≡ 2
 weightTwoFirstModeOutputIsTwo = refl
 
-vacuumMinusOneModePreservesWeightTwo : ModeGradeCertificate
-vacuumMinusOneModePreservesWeightTwo =
-  modeGradeCertificate 0 2 0 1 refl
-
--- The previous certificate is only an arithmetic regression for nonnegative
--- mode indices and is not used as the VOA vacuum axiom.  The genuine vacuum
--- creation mode is indexed by -1 and therefore needs an integer mode carrier.
-
 data ModeIndexStatus : Set where
   nonnegativeModeRepresented : ModeIndexStatus
   negativeModeRequiresIntegerCarrier : ModeIndexStatus
@@ -75,6 +67,8 @@ data ModeIndexStatus : Set where
 firstProductModeStatus : ModeIndexStatus
 firstProductModeStatus = nonnegativeModeRepresented
 
+-- The genuine vacuum creation mode is indexed by -1.  It is deliberately not
+-- encoded by pretending that a natural-number mode has the same grade law.
 vacuumCreationModeStatus : ModeIndexStatus
 vacuumCreationModeStatus = negativeModeRequiresIntegerCarrier
 
