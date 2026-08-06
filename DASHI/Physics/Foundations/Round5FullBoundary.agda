@@ -6,6 +6,7 @@ import DASHI.Biology.ConsciousAccessRound5FullBoundary as BiologyRound5
 import DASHI.Biology.DASHIYijingTernaryDivinationExact as BiologyYijing
 import DASHI.Biology.NSYMDialecticalFieldBridgeExact as BiologyNSYM
 import DASHI.Biology.ConsciousAccessRound5ExtendedSourceAtlas as BiologySources
+import DASHI.Biology.TernaryHypercubeHyperfabricExact as BiologyHyperfabric
 import DASHI.Biology.TriadicCarryResidualExact as TriadicCarry
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact as Parameter
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact as Information
@@ -188,7 +189,7 @@ record Round5FullBoundary : Set where
       BiologyNSYM.finiteMassGap ≡ 1
 
     pr399TwentySevenMatchesTriadicDepth :
-      Cross399.Hyperfabric.siteCount Cross399.Hyperfabric.sheetThreeByNine
+      BiologyHyperfabric.siteCount BiologyHyperfabric.sheetThreeByNine
       ≡
       ScaleTheory.scaleAtDepth 1 ScaleTheory.depth0
 
