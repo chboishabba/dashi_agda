@@ -1,24 +1,21 @@
-name: conscious-access-round5
+name: unification-round5
 
 on:
   push:
     branches:
-      - 'agent/conscious-access-round5-dashi-yijing-moonshine'
       - 'agent/unification-round5-constants-dimension-matter-cosmology'
   pull_request:
     paths:
-      - 'DASHI/Biology/**'
       - 'DASHI/Physics/Foundations/**'
       - 'DASHI/Physics/DarkSector/**'
+      - 'DASHI/Visualisation/**'
       - 'DASHI/Unified/Everything.agda'
-      - 'Docs/support/reference/ConsciousAccessRound5DASHIYijingMoonshine.md'
-      - 'Docs/support/reference/DASHIYijingRelationalOperators.md'
-      - 'Docs/support/reference/ConsciousAccessRound5SSPWeaveCompletion.md'
       - 'Docs/support/reference/UnificationRound5ConstantsDimensionMatterCosmology.md'
+      - 'Docs/support/reference/Round5AttachedFormalism.md'
       - 'Docs/support/reference/DarkSectorColliderFormalism.md'
-      - 'scripts/check_conscious_access_round5.sh'
+      - 'Docs/support/reference/Round5JunctionVisualisationFormalism.md'
       - 'scripts/check_unification_round5.sh'
-      - '.github/workflows/conscious-access-round5.yml'
+      - '.github/workflows/unification-round5.yml'
   workflow_dispatch:
 
 permissions:
@@ -43,7 +40,7 @@ jobs:
           test -x "$agda_bin"
           "$agda_bin" --version
           printf 'AGDA_BIN=%s\n' "$agda_bin" >> "$GITHUB_ENV"
-      - name: Check complete stacked round five
+      - name: Check unification round five
         env:
           DASHI_REPO_ROOT: ${{ github.workspace }}
           DASHI_AGDA29_EPHEMERAL: '1'
@@ -73,4 +70,4 @@ jobs:
 
           gh pr comment "$pr_number" \
             --repo "$GITHUB_REPOSITORY" \
-            --body "Combined Round 5 repository-flake Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
+            --body "Round 5 repository-flake Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
