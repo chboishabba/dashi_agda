@@ -18,6 +18,7 @@ import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHodgeDiamondExact
 import DASHI.Mathematics.AlgebraicGeometry.HodgeNoetherianVOACrossPollination
 
+import DASHI.Mathematics.Arithmetic.EllipticCurveF5PointEnumerationExact
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact
 import DASHI.Mathematics.Arithmetic.BirchSwinnertonDyerBoundary
 import DASHI.Mathematics.Arithmetic.EllipticCurveHodgeFrobeniusCrossPollination
