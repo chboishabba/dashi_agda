@@ -9,6 +9,8 @@ data Z2Gauge : Set where
   gaugePlus : Z2Gauge
   gaugeMinus : Z2Gauge
 
+infixl 30 _*g_
+
 _*g_ : Z2Gauge → Z2Gauge → Z2Gauge
 gaugePlus *g g = g
 gaugeMinus *g gaugePlus = gaugeMinus
