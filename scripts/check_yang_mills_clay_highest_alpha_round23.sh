@@ -41,6 +41,8 @@ checks=(
   'BalabanP33TerminalScaleGapPullbackExact.agda:admissibleBudgetImpliesPulledBackNonnegative'
   'BalabanP33TerminalScaleGapPullbackExact.agda:admissibleBudgetImpliesFineNonnegative'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:bareUniformOneThirtySecondBlocked'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:p33FourStepTerminalContributionExact'
+  'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:p33FourStepPullbackExact'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:discountedPhysicalLossBudget'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:terminalScaleGreenKernelDecay'
   'BalabanP33FixedVolumeTerminalScaleSeparationExact.agda:pulledBackPhysicalFloorNonnegative'
@@ -70,13 +72,15 @@ grep -q 'Public dates alone cannot establish either dependence or independence' 
 grep -q 'Hopping-parameter expansion' \
   docs/yang-mills-combes-thomas-provenance.md
 
-# Exact arithmetic/scope guards: the concrete obstruction is 16 <= 8, the
-# terminal chain ends at the literal 1/32 P33 floor, and positivity is derived
-# from a discounted-loss inequality rather than inserted as an opaque field.
+# Exact arithmetic/scope guards: the concrete obstruction is 16 <= 8; four
+# physical RG pullbacks retain 1/512 before losses; positivity is derived from
+# a discounted-loss inequality rather than inserted as an opaque field.
 grep -q 'squareWave256LeftExact' \
   DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
 grep -q 'squareWave256EnergyExact' \
   DASHI/Physics/YangMills/BalabanP33UnscaledCyclePoincareWallExact.agda
+grep -q '+ 1 / 512' \
+  DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
 grep -q 'fineGap losses P33.p33PhysicalFloor' \
   DASHI/Physics/YangMills/BalabanP33FixedVolumeTerminalScaleSeparationExact.agda
 grep -q 'discountedLossBudgetAdmissible' \
