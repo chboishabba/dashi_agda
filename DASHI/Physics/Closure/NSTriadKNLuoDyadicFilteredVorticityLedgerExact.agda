@@ -37,12 +37,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoDyadicFilteredVorticityLedgerExact wher
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
-import Data.Rational.Properties as ℚₚ
+  (ℚ; 0ℚ; _+_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≡_; cong; trans)
-
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+open import Relation.Binary.PropositionalEquality using
+  (_≡_; cong; cong₂; trans)
 
 data FilteredInteractionClass : Set where
   highHigh lowHigh highLow comparable commutator : FilteredInteractionClass
@@ -88,7 +86,17 @@ filteredShellBalanceNormalized :
   ∀ shell →
   enstrophyOut shell + diffusion shell
   ≡ enstrophyIn shell + totalFilteredSource shell
-filteredShellBalanceNormalized shell = filteredShellBalance shell
+filteredShellBalanceNormalized shell =
+  trans
+    (filteredShellBalance shell)
+    (solve
+      ( enstrophyIn shell
+      ∷ highHighSource shell
+      ∷ lowHighSource shell
+      ∷ highLowSource shell
+      ∷ comparableSource shell
+      ∷ commutatorSource shell
+      ∷ []))
 
 weightedShellBalance :
   ∀ shell →
@@ -101,6 +109,34 @@ weightedShellBalance shell =
   cong
     (λ value → criticalWeight shell * value)
     (filteredShellBalanceNormalized shell)
+
+weightedShellBalanceExpanded :
+  ∀ shell →
+  criticalWeight shell * enstrophyOut shell
+    + criticalWeight shell * diffusion shell
+  ≡
+  criticalWeight shell * enstrophyIn shell
+    + criticalWeight shell * highHighSource shell
+    + criticalWeight shell * lowHighSource shell
+    + criticalWeight shell * highLowSource shell
+    + criticalWeight shell * comparableSource shell
+    + criticalWeight shell * commutatorSource shell
+weightedShellBalanceExpanded shell =
+  trans
+    (solve
+      ( criticalWeight shell
+      ∷ enstrophyOut shell ∷ diffusion shell ∷ []))
+    (trans
+      (weightedShellBalance shell)
+      (solve
+        ( criticalWeight shell
+        ∷ enstrophyIn shell
+        ∷ highHighSource shell
+        ∷ lowHighSource shell
+        ∷ highLowSource shell
+        ∷ comparableSource shell
+        ∷ commutatorSource shell
+        ∷ [])))
 
 weightedSum :
   (DyadicFilteredShell → ℚ) → List DyadicFilteredShell → ℚ
@@ -172,24 +208,94 @@ finiteCriticalFilteredEnstrophyLedger :
   + weightedComparable shells
   + weightedCommutator shells
 finiteCriticalFilteredEnstrophyLedger [] = solve []
-finiteCriticalFilteredEnstrophyLedger (shell ∷ shells)
-  rewrite filteredShellBalanceNormalized shell
-        | finiteCriticalFilteredEnstrophyLedger shells =
-  solve
-    ( criticalWeight shell
-    ∷ enstrophyIn shell
-    ∷ highHighSource shell
-    ∷ lowHighSource shell
-    ∷ highLowSource shell
-    ∷ comparableSource shell
-    ∷ commutatorSource shell
-    ∷ weightedEnstrophyIn shells
-    ∷ weightedHighHigh shells
-    ∷ weightedLowHigh shells
-    ∷ weightedHighLow shells
-    ∷ weightedComparable shells
-    ∷ weightedCommutator shells
-    ∷ [])
+finiteCriticalFilteredEnstrophyLedger (shell ∷ shells) =
+  let
+    tailBalance = finiteCriticalFilteredEnstrophyLedger shells
+
+    leftRegroup :
+      (criticalWeight shell * enstrophyOut shell
+        + weightedEnstrophyOut shells)
+      + (criticalWeight shell * diffusion shell
+        + weightedDiffusion shells)
+      ≡
+      (criticalWeight shell * enstrophyOut shell
+        + criticalWeight shell * diffusion shell)
+      + (weightedEnstrophyOut shells + weightedDiffusion shells)
+    leftRegroup =
+      solve
+        ( criticalWeight shell
+        ∷ enstrophyOut shell ∷ diffusion shell
+        ∷ weightedEnstrophyOut shells
+        ∷ weightedDiffusion shells ∷ [])
+
+    middle :
+      (criticalWeight shell * enstrophyOut shell
+        + criticalWeight shell * diffusion shell)
+      + (weightedEnstrophyOut shells + weightedDiffusion shells)
+      ≡
+      (criticalWeight shell * enstrophyIn shell
+        + criticalWeight shell * highHighSource shell
+        + criticalWeight shell * lowHighSource shell
+        + criticalWeight shell * highLowSource shell
+        + criticalWeight shell * comparableSource shell
+        + criticalWeight shell * commutatorSource shell)
+      +
+      (weightedEnstrophyIn shells
+        + weightedHighHigh shells
+        + weightedLowHigh shells
+        + weightedHighLow shells
+        + weightedComparable shells
+        + weightedCommutator shells)
+    middle =
+      cong₂ _+_
+        (weightedShellBalanceExpanded shell)
+        tailBalance
+
+    rightRegroup :
+      (criticalWeight shell * enstrophyIn shell
+        + criticalWeight shell * highHighSource shell
+        + criticalWeight shell * lowHighSource shell
+        + criticalWeight shell * highLowSource shell
+        + criticalWeight shell * comparableSource shell
+        + criticalWeight shell * commutatorSource shell)
+      +
+      (weightedEnstrophyIn shells
+        + weightedHighHigh shells
+        + weightedLowHigh shells
+        + weightedHighLow shells
+        + weightedComparable shells
+        + weightedCommutator shells)
+      ≡
+      (criticalWeight shell * enstrophyIn shell
+        + weightedEnstrophyIn shells)
+      + (criticalWeight shell * highHighSource shell
+        + weightedHighHigh shells)
+      + (criticalWeight shell * lowHighSource shell
+        + weightedLowHigh shells)
+      + (criticalWeight shell * highLowSource shell
+        + weightedHighLow shells)
+      + (criticalWeight shell * comparableSource shell
+        + weightedComparable shells)
+      + (criticalWeight shell * commutatorSource shell
+        + weightedCommutator shells)
+    rightRegroup =
+      solve
+        ( criticalWeight shell
+        ∷ enstrophyIn shell
+        ∷ highHighSource shell
+        ∷ lowHighSource shell
+        ∷ highLowSource shell
+        ∷ comparableSource shell
+        ∷ commutatorSource shell
+        ∷ weightedEnstrophyIn shells
+        ∷ weightedHighHigh shells
+        ∷ weightedLowHigh shells
+        ∷ weightedHighLow shells
+        ∷ weightedComparable shells
+        ∷ weightedCommutator shells
+        ∷ [])
+  in
+  trans leftRegroup (trans middle rightRegroup)
 
 record ShellCriticalWeightMeaning (shell : DyadicFilteredShell) : Set where
   constructor shellCriticalWeightMeaning
