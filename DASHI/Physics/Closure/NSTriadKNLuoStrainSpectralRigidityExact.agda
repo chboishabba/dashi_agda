@@ -41,7 +41,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoStrainSpectralRigidityExact where
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; _+_; _*_; -_; _-_; _≤_; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
@@ -73,9 +73,12 @@ cubicTrace lambda1 lambda2 =
   + cube lambda2
   + cube (thirdEigenvalue lambda1 lambda2)
 
+two : ℚ
+two = square 1ℚ + square 1ℚ
+
 spectralSeparationDefect : ℚ → ℚ → ℚ
 spectralSeparationDefect lambda1 lambda2 =
-  2
+  two
   * square (lambda1 - lambda2)
   * square (lambda2 - thirdEigenvalue lambda1 lambda2)
   * square (lambda1 - thirdEigenvalue lambda1 lambda2)
@@ -113,6 +116,12 @@ multiplyNonnegative {left} {right} leftNonnegative rightNonnegative =
   in
   ℚₚ.nonNegative⁻¹ (left * right)
 
+twoNonnegative : 0ℚ ≤ two
+twoNonnegative =
+  L2.addNonnegative
+    (L2.squareNonnegative 1ℚ)
+    (L2.squareNonnegative 1ℚ)
+
 spectralSeparationDefectNonnegative :
   ∀ lambda1 lambda2 →
   0ℚ ≤ spectralSeparationDefect lambda1 lambda2
@@ -120,7 +129,7 @@ spectralSeparationDefectNonnegative lambda1 lambda2 =
   multiplyNonnegative
     (multiplyNonnegative
       (multiplyNonnegative
-        (L2.squareNonnegative 2)
+        twoNonnegative
         (L2.squareNonnegative (lambda1 - lambda2)))
       (L2.squareNonnegative
         (lambda2 - thirdEigenvalue lambda1 lambda2)))
