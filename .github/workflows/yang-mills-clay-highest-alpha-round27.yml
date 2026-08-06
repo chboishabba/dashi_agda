@@ -15,6 +15,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalTerminalHessianCoercivityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33CubicShellSeriesExact.agda'
       - 'DASHI/Physics/YangMills/BalabanP33PhysicalInfiniteDiscountedLossExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33InverseLinkRadiusDoesNotImplyWLocalExact.agda'
       - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound27Validation.agda'
       - 'scripts/check_yang_mills_clay_highest_alpha_round27.sh'
       - '.github/workflows/yang-mills-clay-highest-alpha-round27.yml'
@@ -35,5 +36,5 @@ jobs:
           submodules: recursive
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
-      - name: Check signed Wilson, terminal Hessian and exact finite tails
+      - name: Check signed Wilson, terminal Hessian, no-go and exact tails
         run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round27.sh
