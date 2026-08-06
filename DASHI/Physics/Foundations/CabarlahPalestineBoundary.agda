@@ -3,8 +3,10 @@ module DASHI.Physics.Foundations.CabarlahPalestineBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.CabarlahClaimStatusExact as Status
+import DASHI.Physics.Foundations.CabarlahEvidenceWitnessExact as Witness
 import DASHI.Physics.Foundations.CabarlahHistoricalLayerExact as History
 import DASHI.Physics.Foundations.CabarlahToponymTranscriptionExact as Toponym
+import DASHI.Physics.Foundations.CabarlahSignalInferenceExact as Signal
 import DASHI.Physics.Foundations.SettlerEnemyAbstractionExact as Enemy
 import DASHI.Physics.Foundations.IndigenousMilitaryIntelligenceCircuitExact as Circuit
 import DASHI.Physics.Foundations.FrontierEnemyPersistenceExact as Persistence
@@ -40,12 +42,20 @@ countryLayerIsNotMilitaryLayer ()
 record CabarlahPalestineFormalBoundary : Set where
   field
     claimStatusBoundary : Status.ClaimStatusBoundary
+    evidenceWitnessBoundary : Witness.EvidenceWitnessBoundary
     historicalLayerBoundary : History.HistoricalLayerBoundary
     toponymBoundary : Toponym.ToponymTranscriptionBoundary
+    signalInferenceBoundary : Signal.SignalInferenceBoundary
     enemyAbstractionBoundary : Enemy.EnemyAbstractionBoundary
     intelligenceCircuitBoundary : Circuit.IntelligenceCircuitBoundary
     frontierPersistenceBoundary :
       Persistence.FrontierEnemyPersistenceBoundary
+
+    supportedEvidence : Witness.SupportedCabarlahEvidence
+
+    noCommunistBoundaryFactWitness :
+      Witness.EvidenceWitness Status.communistConcessionBoundaryAtCabarlah
+      → ⊥
 
     exactLatitudeDifference :
       History.cabarlahLatitude + History.latitudeDifference
@@ -66,6 +76,15 @@ record CabarlahPalestineFormalBoundary : Set where
 
     colonialToponymRenderNonInjective :
       ¬ Toponym.InjectiveColonialRender
+
+    signalInferenceNonInjective :
+      ¬ Signal.SignalInferenceInjective
+
+    crossDomainInterpretationStructuralOnly :
+      Signal.interpretationComparison
+        Signal.theologicalSignInterpretation
+        Signal.militarySignalInterpretation
+      ≡ Signal.structuralComparisonOnly
 
     enemyCompressionNonInjective :
       ¬ Enemy.CompressionInjective
@@ -118,13 +137,18 @@ canonicalCabarlahPalestineFormalBoundary :
 canonicalCabarlahPalestineFormalBoundary =
   record
     { claimStatusBoundary = Status.canonicalClaimStatusBoundary
+    ; evidenceWitnessBoundary = Witness.canonicalEvidenceWitnessBoundary
     ; historicalLayerBoundary = History.canonicalHistoricalLayerBoundary
     ; toponymBoundary = Toponym.canonicalToponymTranscriptionBoundary
+    ; signalInferenceBoundary = Signal.canonicalSignalInferenceBoundary
     ; enemyAbstractionBoundary = Enemy.canonicalEnemyAbstractionBoundary
     ; intelligenceCircuitBoundary =
         Circuit.canonicalIntelligenceCircuitBoundary
     ; frontierPersistenceBoundary =
         Persistence.canonicalFrontierEnemyPersistenceBoundary
+    ; supportedEvidence = Witness.canonicalSupportedCabarlahEvidence
+    ; noCommunistBoundaryFactWitness =
+        Witness.noCommunistConcessionBoundaryWitness
     ; exactLatitudeDifference =
         History.cabarlahPlusDifferenceIsBrisbane
     ; worldWarTwoAndColdWarEnemiesDistinct =
@@ -135,6 +159,10 @@ canonicalCabarlahPalestineFormalBoundary =
         History.communistCabarlahClaimIsRefuted
     ; colonialToponymRenderNonInjective =
         Toponym.colonialRenderIsNotInjective
+    ; signalInferenceNonInjective =
+        Signal.signalInferenceIsNotInjective
+    ; crossDomainInterpretationStructuralOnly =
+        Signal.crossDomainComparisonIsStructuralOnly
     ; enemyCompressionNonInjective =
         Enemy.rhetoricalCompressionIsNotInjective
     ; australianAmalekComparisonStructuralOnly =
