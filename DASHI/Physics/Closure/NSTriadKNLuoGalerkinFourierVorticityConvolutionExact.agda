@@ -73,6 +73,14 @@ subtractVec left right =
 scaleVec : ℚ → Gram.Vec3 → Gram.Vec3
 scaleVec = Physical.scaleVec3
 
+dotCommutative :
+  ∀ left right → Gram.dot left right ≡ Gram.dot right left
+dotCommutative left right =
+  solve
+    ( Gram.x left ∷ Gram.y left ∷ Gram.z left
+    ∷ Gram.x right ∷ Gram.y right ∷ Gram.z right
+    ∷ [])
+
 velocityCarrier : Biot.NonzeroVorticityMode → Gram.Vec3
 velocityCarrier mode =
   scaleVec
@@ -188,16 +196,16 @@ symmetrizedVorticityInteractionTransverse left right
         | velocityTransverse left
         | velocityTransverse right
         | Biot.transverseVorticity left
-        | Biot.transverseVorticity right =
+        | Biot.transverseVorticity right
+        | dotCommutative (Biot.vorticity left) (Biot.wavevector right)
+        | dotCommutative (velocityCarrier left) (Biot.wavevector right)
+        | dotCommutative (Biot.vorticity right) (Biot.wavevector left)
+        | dotCommutative (velocityCarrier right) (Biot.wavevector left) =
   solve
-    ( Gram.dot (Biot.vorticity left) (Biot.wavevector right)
-    ∷ Gram.dot (Biot.vorticity right) (Biot.wavevector left)
-    ∷ Gram.dot (velocityCarrier left) (Biot.wavevector right)
-    ∷ Gram.dot (velocityCarrier right) (Biot.wavevector left)
-    ∷ Gram.dot (Biot.wavevector left) (Biot.vorticity right)
-    ∷ Gram.dot (Biot.wavevector right) (Biot.vorticity left)
-    ∷ Gram.dot (Biot.wavevector left) (velocityCarrier right)
+    ( Gram.dot (Biot.wavevector right) (Biot.vorticity left)
     ∷ Gram.dot (Biot.wavevector right) (velocityCarrier left)
+    ∷ Gram.dot (Biot.wavevector left) (Biot.vorticity right)
+    ∷ Gram.dot (Biot.wavevector left) (velocityCarrier right)
     ∷ [])
 
 record FourierConvolutionAuthorityBoundary : Set where
