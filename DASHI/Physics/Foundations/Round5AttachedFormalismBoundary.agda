@@ -3,8 +3,11 @@ module DASHI.Physics.Foundations.Round5AttachedFormalismBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.Foundations.FiniteHistoryOrientationExact as History
+import DASHI.Physics.Foundations.HistoryWeightFiltrationExact as Weight
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact as Receipt
+import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact as WeightedKernel
 import DASHI.Physics.Foundations.TernaryKernelQuotientLyapunovExact as Kernel
+import DASHI.Physics.Foundations.FiniteStatisticalFiltrationExact as Statistics
 import DASHI.Physics.Foundations.ProbabilityDecoratedReebExact as Reeb
 import DASHI.Physics.Foundations.AttachedFormalismSourceAtlas as Sources
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
@@ -12,8 +15,13 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 record Round5AttachedFormalismBoundary : Set where
   field
     historyOrientationBoundary : History.FiniteHistoryOrientationBoundary
+    historyWeightFiltrationBoundary : Weight.HistoryWeightFiltrationBoundary
     formalReceiptBoundary : Receipt.FormalReceiptBoundary
+    weightedTernaryKernelBoundary :
+      WeightedKernel.FiniteWeightedTernaryKernelBoundary
     ternaryKernelBoundary : Kernel.TernaryKernelQuotientLyapunovBoundary
+    statisticalFiltrationBoundary :
+      Statistics.FiniteStatisticalFiltrationBoundary
     probabilityReebBoundary : Reeb.ProbabilityDecoratedReebBoundary
 
     historyReversalIsInvolutive :
@@ -31,9 +39,19 @@ record Round5AttachedFormalismBoundary : Set where
       ≡
       History.pastAccessibleOutcome History.choosePlusBoundary
 
+    terminalObserverSeesTerminalEvent :
+      Weight.visibleAt Weight.terminalFiltration Weight.terminalEvent ≡ true
+
     stageCycleHasPeriodFour :
       (stage : Receipt.TlureyStage) →
       Receipt.nextStageFour stage ≡ stage
+
+    symmetricKernelCommutesWithSwap :
+      (sheet : Triadic.NineSheet) →
+      WeightedKernel.symmetricKernel (WeightedKernel.swapCoordinates sheet)
+      ≡
+      WeightedKernel.swapCoordinates
+        (WeightedKernel.symmetricKernel sheet)
 
     quotientKernelDescends :
       (sheet : Triadic.NineSheet) →
@@ -46,6 +64,11 @@ record Round5AttachedFormalismBoundary : Set where
       Kernel.quotientKernel (Kernel.quotientKernel orbit)
       ≡
       Triadic.zeroOrbit
+
+    coarseStatisticalProjectionIsNonInjective :
+      Statistics.coarseProjection Statistics.fineLeftLow
+      ≡
+      Statistics.coarseProjection Statistics.fineLeftHigh
 
     reebSplitConservesMass :
       Reeb.massBefore Reeb.sourceComponent
@@ -69,10 +92,16 @@ canonicalRound5AttachedFormalismBoundary =
   record
     { historyOrientationBoundary =
         History.canonicalFiniteHistoryOrientationBoundary
+    ; historyWeightFiltrationBoundary =
+        Weight.canonicalHistoryWeightFiltrationBoundary
     ; formalReceiptBoundary =
         Receipt.canonicalFormalReceiptBoundary
+    ; weightedTernaryKernelBoundary =
+        WeightedKernel.canonicalFiniteWeightedTernaryKernelBoundary
     ; ternaryKernelBoundary =
         Kernel.canonicalTernaryKernelQuotientLyapunovBoundary
+    ; statisticalFiltrationBoundary =
+        Statistics.canonicalFiniteStatisticalFiltrationBoundary
     ; probabilityReebBoundary =
         Reeb.canonicalProbabilityDecoratedReebBoundary
     ; historyReversalIsInvolutive =
@@ -81,12 +110,18 @@ canonicalRound5AttachedFormalismBoundary =
         History.actionTimeReversalInvariant
     ; noBackwardSignalInCanonicalTable =
         History.finiteNoBackwardSignalling
+    ; terminalObserverSeesTerminalEvent =
+        refl
     ; stageCycleHasPeriodFour =
         Receipt.fourCycleReturns
+    ; symmetricKernelCommutesWithSwap =
+        WeightedKernel.symmetricKernelCommutesWithCoordinateSwap
     ; quotientKernelDescends =
         Kernel.sheetKernelDescends
     ; quotientKernelConvergesInTwo =
         Kernel.quotientKernelReachesFixedClassInTwo
+    ; coarseStatisticalProjectionIsNonInjective =
+        Statistics.coarseProjectionIsNonInjective
     ; reebSplitConservesMass =
         Reeb.splitConservesMass
     ; reebMergePreservesBothFeatures =
