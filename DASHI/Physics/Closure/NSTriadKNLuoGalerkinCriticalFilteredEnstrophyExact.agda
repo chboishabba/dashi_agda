@@ -52,7 +52,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using
-  (_≡_; cong; trans)
+  (_≡_; cong; sym; trans)
 
 record GalerkinVorticityCoordinate (viscosity : ℚ) : Set where
   constructor galerkinVorticityCoordinate
@@ -83,10 +83,24 @@ coordinateSourcePairing :
 coordinateSourcePairing select coordinate =
   2 * vorticity coordinate * select coordinate
 
+coordinateHighHigh :
+  ∀ {viscosity} → GalerkinVorticityCoordinate viscosity → ℚ
 coordinateHighHigh coordinate = coordinateSourcePairing highHigh coordinate
+
+coordinateLowHigh :
+  ∀ {viscosity} → GalerkinVorticityCoordinate viscosity → ℚ
 coordinateLowHigh coordinate = coordinateSourcePairing lowHigh coordinate
+
+coordinateHighLow :
+  ∀ {viscosity} → GalerkinVorticityCoordinate viscosity → ℚ
 coordinateHighLow coordinate = coordinateSourcePairing highLow coordinate
+
+coordinateComparable :
+  ∀ {viscosity} → GalerkinVorticityCoordinate viscosity → ℚ
 coordinateComparable coordinate = coordinateSourcePairing comparable coordinate
+
+coordinateCommutator :
+  ∀ {viscosity} → GalerkinVorticityCoordinate viscosity → ℚ
 coordinateCommutator coordinate = coordinateSourcePairing commutator coordinate
 
 coordinateFilteredEnstrophyIdentity :
@@ -152,12 +166,32 @@ sumCoordinate select [] = 0ℚ
 sumCoordinate select (coordinate ∷ coordinates) =
   select coordinate + sumCoordinate select coordinates
 
+sumEnstrophyRate :
+  ∀ {viscosity} → List (GalerkinVorticityCoordinate viscosity) → ℚ
 sumEnstrophyRate = sumCoordinate coordinateEnstrophyRate
+
+sumViscousPairing :
+  ∀ {viscosity} → List (GalerkinVorticityCoordinate viscosity) → ℚ
 sumViscousPairing = sumCoordinate coordinateViscousPairing
+
+sumHighHigh :
+  ∀ {viscosity} → List (GalerkinVorticityCoordinate viscosity) → ℚ
 sumHighHigh = sumCoordinate coordinateHighHigh
+
+sumLowHigh :
+  ∀ {viscosity} → List (GalerkinVorticityCoordinate viscosity) → ℚ
 sumLowHigh = sumCoordinate coordinateLowHigh
+
+sumHighLow :
+  ∀ {viscosity} → List (GalerkinVorticityCoordinate viscosity) → ℚ
 sumHighLow = sumCoordinate coordinateHighLow
+
+sumComparable :
+  ∀ {viscosity} → List (GalerkinVorticityCoordinate viscosity) → ℚ
 sumComparable = sumCoordinate coordinateComparable
+
+sumCommutator :
+  ∀ {viscosity} → List (GalerkinVorticityCoordinate viscosity) → ℚ
 sumCommutator = sumCoordinate coordinateCommutator
 
 finiteGalerkinFilteredEnstrophyIdentity :
@@ -223,17 +257,66 @@ weightedGalerkinFilteredEnstrophyIdentity :
     + weightedShellSource coordinateHighLow shell
     + weightedShellSource coordinateComparable shell
     + weightedShellSource coordinateCommutator shell
-weightedGalerkinFilteredEnstrophyIdentity shell
-  rewrite finiteGalerkinFilteredEnstrophyIdentity (coordinates shell)
-        | periodicIntegrationByParts shell =
-  solve
-    ( criticalWeight shell
-    ∷ sumHighHigh (coordinates shell)
-    ∷ sumLowHigh (coordinates shell)
-    ∷ sumHighLow (coordinates shell)
-    ∷ sumComparable (coordinates shell)
-    ∷ sumCommutator (coordinates shell)
-    ∷ [])
+weightedGalerkinFilteredEnstrophyIdentity shell =
+  let
+    rate = sumEnstrophyRate (coordinates shell)
+    viscous = sumViscousPairing (coordinates shell)
+    gradient = 2 * viscosity shell * gradientNormSquared shell
+    weight = criticalWeight shell
+
+    leftFactorization :
+      weightedShellRate shell + weightedShellDiffusion shell
+      ≡ weight * (rate + gradient)
+    leftFactorization = solve (weight ∷ rate ∷ gradient ∷ [])
+
+    integrationByPartsSubstitution :
+      weight * (rate + gradient)
+      ≡ weight * (rate + viscous)
+    integrationByPartsSubstitution =
+      cong
+        (λ value → weight * (rate + value))
+        (sym (periodicIntegrationByParts shell))
+
+    equationSubstitution :
+      weight * (rate + viscous)
+      ≡
+      weight
+        * (sumHighHigh (coordinates shell)
+          + sumLowHigh (coordinates shell)
+          + sumHighLow (coordinates shell)
+          + sumComparable (coordinates shell)
+          + sumCommutator (coordinates shell))
+    equationSubstitution =
+      cong
+        (λ value → weight * value)
+        (finiteGalerkinFilteredEnstrophyIdentity (coordinates shell))
+
+    rightExpansion :
+      weight
+        * (sumHighHigh (coordinates shell)
+          + sumLowHigh (coordinates shell)
+          + sumHighLow (coordinates shell)
+          + sumComparable (coordinates shell)
+          + sumCommutator (coordinates shell))
+      ≡
+      weightedShellSource coordinateHighHigh shell
+        + weightedShellSource coordinateLowHigh shell
+        + weightedShellSource coordinateHighLow shell
+        + weightedShellSource coordinateComparable shell
+        + weightedShellSource coordinateCommutator shell
+    rightExpansion =
+      solve
+        ( weight
+        ∷ sumHighHigh (coordinates shell)
+        ∷ sumLowHigh (coordinates shell)
+        ∷ sumHighLow (coordinates shell)
+        ∷ sumComparable (coordinates shell)
+        ∷ sumCommutator (coordinates shell)
+        ∷ [])
+  in
+  trans leftFactorization
+    (trans integrationByPartsSubstitution
+      (trans equationSubstitution rightExpansion))
 
 record GalerkinEnstrophyAuthorityBoundary : Set where
   constructor galerkinEnstrophyAuthorityBoundary
