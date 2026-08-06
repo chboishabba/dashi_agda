@@ -13,6 +13,7 @@ FILES=(
   DASHI/Physics/Foundations/CabarlahEvidenceWitnessExact.agda
   DASHI/Physics/Foundations/CabarlahHistoricalLayerExact.agda
   DASHI/Physics/Foundations/CabarlahToponymTranscriptionExact.agda
+  DASHI/Physics/Foundations/CabarlahPhonologyEnvelopeExact.agda
   DASHI/Physics/Foundations/CabarlahSignalInferenceExact.agda
   DASHI/Physics/Foundations/SettlerEnemyAbstractionExact.agda
   DASHI/Physics/Foundations/IndigenousMilitaryIntelligenceCircuitExact.agda
@@ -45,6 +46,10 @@ grep -q 'communistConcessionBoundaryAtCabarlah = refuted' \
   DASHI/Physics/Foundations/CabarlahClaimStatusExact.agda
 grep -q 'noCommunistConcessionBoundaryWitness ()' \
   DASHI/Physics/Foundations/CabarlahEvidenceWitnessExact.agda
+grep -q 'envelopeProductCountIsThirtyTwo' \
+  DASHI/Physics/Foundations/CabarlahPhonologyEnvelopeExact.agda
+grep -q 'finiteEnvelopeIsRecoveredLexiconIsFalse' \
+  DASHI/Physics/Foundations/CabarlahPhonologyEnvelopeExact.agda
 grep -q 'comparisonAuthority indigenousAustraliaSettlerStructure =' \
   DASHI/Physics/Foundations/SettlerEnemyAbstractionExact.agda
 grep -q 'structuralHomologyOnly' \
