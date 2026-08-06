@@ -30,15 +30,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoStrictLossCrossPollinationExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 1ℚ; _+_; _-_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst₂)
 
 import DASHI.Physics.Common.WeightedStrictLossTransportExact as Loss
 
-fourClassSteps : ℚ → ℚ → ℚ → ℚ →
-  Agda.Builtin.List.List Loss.WeightedLossStep
+fourClassSteps : ℚ → ℚ → ℚ → ℚ → List Loss.WeightedLossStep
 fourClassSteps lowHigh highLow comparable highHigh =
   Loss.weightedLossStep 1ℚ lowHigh
   ∷ Loss.weightedLossStep 1ℚ highLow
@@ -77,8 +77,23 @@ fourClassStrictBudgetImpliesPositiveFloor :
       terminal lowHigh highLow comparable highHigh
 fourClassStrictBudgetImpliesPositiveFloor
     margin terminal lowHigh highLow comparable highHigh budget =
+  let
+    steps = fourClassSteps lowHigh highLow comparable highHigh
+
+    leftTransport :
+      margin + (lowHigh + highLow + comparable + highHigh)
+      ≡ margin + Loss.discountedLoss steps
+    leftTransport =
+      ℚRing.solve-∀ margin lowHigh highLow comparable highHigh
+
+    rightTransport :
+      terminal ≡ Loss.terminalWeight steps * terminal
+    rightTransport =
+      ℚRing.solve-∀ terminal lowHigh highLow comparable highHigh
+
+    sharedBudget : Loss.StrictMarginAdmissible margin terminal steps
+    sharedBudget =
+      subst₂ _≤_ leftTransport rightTransport budget
+  in
   Loss.strictMarginBelowPullBack
-    margin
-    terminal
-    (fourClassSteps lowHigh highLow comparable highHigh)
-    budget
+    margin terminal steps sharedBudget
