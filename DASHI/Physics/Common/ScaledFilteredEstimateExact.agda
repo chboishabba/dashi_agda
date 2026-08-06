@@ -97,3 +97,5 @@ canonicalScaledFilteredBoundary =
   where
   open import Data.Empty using (⊥)
   open import Data.Unit using (⊤; tt)
+
+open ScaledFilteredLevel public
