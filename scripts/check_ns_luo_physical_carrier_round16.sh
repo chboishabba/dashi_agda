@@ -10,13 +10,20 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoLowHighExponentBookkeepingCorrectedExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeHolderExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeHolderDimensionFreeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteCenteredDifferenceSixThreeExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoIntegerCubeSupportCapacityExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoConcreteDyadicSupportCount125Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoConcreteBernstein125Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteRootOfUnityCancellationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoThreeDimensionalCharacterOrthogonalityFactorExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteKroneckerEnumerationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteFinEnumerationExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteFourierParsevalFromInversionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteFourierInversionFromResolutionExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteFourierFromUniqueResolutionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteFourierRestrictionContractiveExact.agda
-  DASHI/Physics/Closure/NSTriadKNLuoFiniteSixThreeKernelDimensionFreeExact.agda
-  DASHI/Physics/Closure/NSTriadKNLuoFiniteCenteredDifferenceSixThreeExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoFiniteModeRestrictionContractiveExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGalerkinDiagonalSelectionExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalCarrierRound16Validation.agda
 )
