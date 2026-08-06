@@ -106,6 +106,20 @@ commonPenaltyCancellationRegression :
 commonPenaltyCancellationRegression =
   Colour.commonMultiplicativePenaltyCancelsFromMixture
 
+tiePenaltySignRegression :
+  Colour.legacySignedTieEffect Colour.smallGap
+  ≡
+  Colour.amplifiesActivity
+tiePenaltySignRegression =
+  Colour.legacyPositiveGapAmplifies
+
+correctedTiePenaltyRegression :
+  Colour.correctedNonnegativeTieEffect Colour.exactTie
+  ≡
+  Colour.suppressesActivity
+correctedTiePenaltyRegression =
+  Colour.correctedTieSuppresses
+
 colourCollisionRegression :
   Colour.fixedColour Colour.classD
   ≡
@@ -116,6 +130,10 @@ colourCollisionRegression =
 combinedObjectiveRegression :
   Objective.combinedObjective Objective.combinedWinner ≡ 79
 combinedObjectiveRegression = Objective.combinedWinnerScore
+
+compactObjectiveRegression :
+  Objective.combinedObjective Search.compactIslandCandidate ≡ 33
+compactObjectiveRegression = Objective.compactCombinedScore
 
 simplexDisplayLossRegression :
   Diagnostics.unrepresentedSimplexDirections ≡ 1
@@ -186,6 +204,14 @@ barEquivarianceRegression :
   Graph.swapMarks
     (Graph.renderBarMarks (Graph.barDatum 3 4))
 barEquivarianceRegression = refl
+
+graphEnergyEquivarianceRegression :
+  Graph.symmetricEnergy
+    (Graph.swapLayout (Graph.layout2 2 3))
+  ≡
+  Graph.symmetricEnergy (Graph.layout2 2 3)
+graphEnergyEquivarianceRegression =
+  Graph.energyRelabellingEquivariantGeneric (Graph.layout2 2 3)
 
 barAggregationCommutationRegression :
   Commutation.sourceBarAggregation (Graph.barDatum 3 4)
