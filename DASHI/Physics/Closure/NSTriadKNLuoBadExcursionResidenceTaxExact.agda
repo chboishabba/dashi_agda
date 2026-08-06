@@ -269,16 +269,29 @@ badResidenceWithCrossingBudget :
 badResidenceWithCrossingBudget {parameters} {intervals} budget =
   let
     residence = finiteBadExcursionResidenceTax intervals
+    forcing = totalPositiveForcing intervals
+
+    rawWithForcing :
+      forcing + totalEntryCharge intervals
+      ≤ forcing + (initialDefect budget + crossingCharge budget)
+    rawWithForcing =
+      ℚₚ.+-monoʳ-≤ forcing (entryChargesPaid budget)
 
     withForcing :
-      totalEntryCharge intervals + totalPositiveForcing intervals
+      totalEntryCharge intervals + forcing
       ≤
-      (initialDefect budget + crossingCharge budget)
-      + totalPositiveForcing intervals
+      (initialDefect budget + crossingCharge budget) + forcing
     withForcing =
-      ℚₚ.+-monoʳ-≤
-        (totalPositiveForcing intervals)
-        (entryChargesPaid budget)
+      subst
+        (λ left →
+          left ≤ (initialDefect budget + crossingCharge budget) + forcing)
+        (solve (forcing ∷ totalEntryCharge intervals ∷ []))
+        (subst
+          (λ right → forcing + totalEntryCharge intervals ≤ right)
+          (solve
+            ( forcing ∷ initialDefect budget
+            ∷ crossingCharge budget ∷ []))
+          rawWithForcing)
   in
   ℚₚ.≤-trans residence withForcing
 
