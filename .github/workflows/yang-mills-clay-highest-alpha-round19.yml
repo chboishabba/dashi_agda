@@ -1,0 +1,37 @@
+name: Yang-Mills Clay highest-alpha round 19
+
+on:
+  push:
+    branches:
+      - 'agent/ym-clay-alpha-round19-combes-thomas'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanP33FiniteCombesThomasConjugationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33FiniteCombesThomasTiltBudgetExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33RationalGeometricCombesThomasWeightExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33CombesThomasCoercivitySurvivalExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33PhysicalCombesThomasPromotionExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33BlockPoincareNormalizationWallExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanP33AugmentedYangMillsHessianStructureExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayHighestAlphaRound19Validation.agda'
+      - 'scripts/check_yang_mills_clay_highest_alpha_round19.sh'
+      - '.github/workflows/yang-mills-clay-highest-alpha-round19.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      AGDA_JOBS: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v27
+      - name: Check Combes-Thomas conjugation, normalization walls and augmented Hessian
+        run: nix develop --command bash scripts/check_yang_mills_clay_highest_alpha_round19.sh
