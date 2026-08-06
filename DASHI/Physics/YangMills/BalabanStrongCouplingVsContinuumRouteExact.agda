@@ -50,46 +50,46 @@ data ConstructionStage : Set where
   cutoffRemovalContinuumStage : ConstructionStage
   reconstructedHamiltonianStage : ConstructionStage
 
-record RouteCapabilities : Set where
-  constructor routeCapabilities
+record RouteTargetSignature : Set where
+  constructor routeTargetSignature
   field
-    finiteSelectedBackgroundPropagator : Bool
-    uniqueInfiniteVolumeLatticeMeasure : Bool
-    logSobolevAndPoincare : Bool
-    exponentialLatticeCovarianceDecay : Bool
-    changingLatticeSpacingControl : Bool
-    asymptoticallyFreeContinuumLimit : Bool
-    osterwalderSchraderReconstruction : Bool
+    targetsFiniteSelectedBackgroundPropagator : Bool
+    targetsUniqueInfiniteVolumeLatticeMeasure : Bool
+    targetsLogSobolevAndPoincare : Bool
+    targetsExponentialLatticeCovarianceDecay : Bool
+    targetsChangingLatticeSpacingControl : Bool
+    targetsAsymptoticallyFreeContinuumLimit : Bool
+    targetsOsterwalderSchraderReconstruction : Bool
 
-open RouteCapabilities public
+open RouteTargetSignature public
 
-capabilities : YangMillsGapRoute → RouteCapabilities
-capabilities selectedBackgroundRGRoute =
-  routeCapabilities true false false false true true true
-capabilities stochasticFunctionalInequalityRoute =
-  routeCapabilities false true true true false false false
+routeTargets : YangMillsGapRoute → RouteTargetSignature
+routeTargets selectedBackgroundRGRoute =
+  routeTargetSignature true false false false true true true
+routeTargets stochasticFunctionalInequalityRoute =
+  routeTargetSignature false true true true false false false
 
 routesAreDistinct :
   selectedBackgroundRGRoute ≡ stochasticFunctionalInequalityRoute → ⊥
 routesAreDistinct ()
 
-stochasticRouteHasFixedLatticeGapCapability :
-  exponentialLatticeCovarianceDecay
-    (capabilities stochasticFunctionalInequalityRoute)
+stochasticRouteTargetsFixedLatticeGap :
+  targetsExponentialLatticeCovarianceDecay
+    (routeTargets stochasticFunctionalInequalityRoute)
   ≡ true
-stochasticRouteHasFixedLatticeGapCapability = refl
+stochasticRouteTargetsFixedLatticeGap = refl
 
 stochasticRouteDoesNotSupplyCutoffRemoval :
-  changingLatticeSpacingControl
-    (capabilities stochasticFunctionalInequalityRoute)
+  targetsChangingLatticeSpacingControl
+    (routeTargets stochasticFunctionalInequalityRoute)
   ≡ false
 stochasticRouteDoesNotSupplyCutoffRemoval = refl
 
-rgRouteDoesNotYetInheritPublishedStochasticGap :
-  uniqueInfiniteVolumeLatticeMeasure
-    (capabilities selectedBackgroundRGRoute)
+rgRouteDoesNotTargetPublishedStochasticMeasure :
+  targetsUniqueInfiniteVolumeLatticeMeasure
+    (routeTargets selectedBackgroundRGRoute)
   ≡ false
-rgRouteDoesNotYetInheritPublishedStochasticGap = refl
+rgRouteDoesNotTargetPublishedStochasticMeasure = refl
 
 unitInverseCoupling : ℚ
 unitInverseCoupling = + 1 / 1
