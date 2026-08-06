@@ -12,6 +12,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound24Validation where
 --   * specialization to every literal physical Wilson placement;
 --   * exact reduction of positive/inverse selected link-jet defects to a link
 --     defect times the appropriate insertion charge;
+--   * exact identification of the complete physical Wilson defect with the
+--     finite sum of the sixteen named placement defects on every plaquette;
 --   * the exact adjoint-transport defect factorization and norm-square bound;
 --   * the literal background covariant gauge first derivative and its flat
 --     specialization;
@@ -21,6 +23,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound24Validation where
 --   * the literal flat divergence upper bound with constant sixteen;
 --   * the weighted-Young signed gauge lower bound, including the stronger
 --     `-32 rho` estimate and the requested conservative `-64 rho` estimate;
+--   * packaging of that same derivative as the literal finite residual jet
+--     consumed by the Wilson+gauge+CMP109 Hessian pipeline;
 --   * a quantitative strict terminal-gap margin rather than nonnegative
 --     survival only;
 --   * the square-root-free B C^-1 B^T coarse--fine coupling bound;
@@ -42,6 +46,7 @@ open import DASHI.Physics.YangMills.BalabanP33QuaternionTelescopeNormSquaredExac
 open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonPlacementTelescopeExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonPlacementNormSquaredExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalLinkJetSelectedFactorNormExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonNamedAtomSumExact
 open import DASHI.Physics.YangMills.BalabanP33QuaternionAdjointPerturbationExact
 open import DASHI.Physics.YangMills.BalabanP33QuaternionAdjointNormSquaredExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact
@@ -49,6 +54,7 @@ open import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeDefectNormS
 open import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeGlobalDefectExact
 open import DASHI.Physics.YangMills.BalabanP33PeriodicDivergenceUpperExact
 open import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact
+open import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeResidualExact
 open import DASHI.Physics.YangMills.BalabanP33StrictTerminalGapMarginExact
 open import DASHI.Physics.YangMills.BalabanP33CoarseFineSchurCouplingExact
 open import DASHI.Physics.YangMills.BalabanP33EffectiveSchurGapStepExact
