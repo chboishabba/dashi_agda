@@ -15,6 +15,9 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoThreeDimensionalGradientL4InterpolationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoCouplingParameterSignNoGoExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSpectralProjectorGapDependenceExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGlobalPoincareLowFrequencyNoGoExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoWeakNonAlignmentCircularityExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoHighFrequencyApproximationUniformGradientNoGoExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoPeriodicBiotSavartMultiplierExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDirectionalKernelTripleProductExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteDirectionalHHBridgeExact.agda
@@ -58,6 +61,15 @@ grep -q 'inverseGapIdentity' DASHI/Physics/Closure/NSTriadKNLuoSpectralProjector
 grep -q 'crossingMatricesCoincide' DASHI/Physics/Closure/NSTriadKNLuoSpectralProjectorGapDependenceExact.agda
 grep -q 'projectorSidesDistinct' DASHI/Physics/Closure/NSTriadKNLuoSpectralProjectorGapDependenceExact.agda
 
+grep -q 'scaleTimesFrequencyIsOne' DASHI/Physics/Closure/NSTriadKNLuoGlobalPoincareLowFrequencyNoGoExact.agda
+grep -q 'universalGlobalPoincareCoefficientFails' DASHI/Physics/Closure/NSTriadKNLuoGlobalPoincareLowFrequencyNoGoExact.agda
+
+grep -q 'emptyCycle' DASHI/Physics/Closure/NSTriadKNLuoWeakNonAlignmentCircularityExact.agda
+grep -q 'finiteContinuationCanBeTrueWhileCycleEndpointsAreEmpty' DASHI/Physics/Closure/NSTriadKNLuoWeakNonAlignmentCircularityExact.agda
+
+grep -q 'highFrequencyGradientClosedForm' DASHI/Physics/Closure/NSTriadKNLuoHighFrequencyApproximationUniformGradientNoGoExact.agda
+grep -q 'highFrequencyGradientExceedsEveryThreshold' DASHI/Physics/Closure/NSTriadKNLuoHighFrequencyApproximationUniformGradientNoGoExact.agda
+
 grep -q 'recoverTransverseVorticity' DASHI/Physics/Closure/NSTriadKNLuoPeriodicBiotSavartMultiplierExact.agda
 grep -q 'strainSymbolTraceFree' DASHI/Physics/Closure/NSTriadKNLuoPeriodicBiotSavartMultiplierExact.agda
 grep -q 'strainSymbol12Symmetric' DASHI/Physics/Closure/NSTriadKNLuoPeriodicBiotSavartMultiplierExact.agda
@@ -71,11 +83,13 @@ grep -q '10.1017/CBO9780511608803' DASHI/Physics/Closure/NSTriadKNLuoThreeDimens
 grep -q '10.1007/978-3-642-66282-9' DASHI/Physics/Closure/NSTriadKNLuoSpectralProjectorGapDependenceExact.agda
 grep -q '10.1512/iumj.1993.42.42034' DASHI/Physics/Closure/NSTriadKNLuoDirectionalKernelTripleProductExact.agda
 grep -q '10.24033/asens.1404' DASHI/Physics/Closure/NSTriadKNLuoFiniteDirectionalHHBridgeExact.agda
-grep -q 'PhilArchive record: NEMGRO' DASHI/Physics/Closure/NSTriadKNLuoCouplingParameterSignNoGoExact.agda
+grep -q '10.1090/chel/343' DASHI/Physics/Closure/NSTriadKNLuoGlobalPoincareLowFrequencyNoGoExact.agda
+grep -q 'PhilArchive record: NEMGRO' DASHI/Physics/Closure/NSTriadKNLuoWeakNonAlignmentCircularityExact.agda
 
 grep -q 'constructiveSmoothBumpImplemented' DASHI/Physics/Closure/NSTriadKNLuoCompactSupportPositiveStrainCoreExact.agda
 grep -q 'principalValueKernelConstructed' DASHI/Physics/Closure/NSTriadKNLuoPeriodicBiotSavartMultiplierExact.agda
 grep -q 'physicalContinuumKernelProducerProved' DASHI/Physics/Closure/NSTriadKNLuoFiniteDirectionalHHBridgeExact.agda
+grep -q 'L2ConvergenceSuppliesUniformInitialH1' DASHI/Physics/Closure/NSTriadKNLuoHighFrequencyApproximationUniformGradientNoGoExact.agda
 
 test -f docs/ns-luo-nemgro-physical-audit-round20.md
 
