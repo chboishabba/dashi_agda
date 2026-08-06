@@ -5,6 +5,7 @@ on:
     branches:
       - 'agent/hurwitz-hopf-noether-millennium-crosspollination'
     paths:
+      - 'DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda'
       - 'DASHI/Mathematics/Algebra/**'
       - 'DASHI/Mathematics/Symmetry/**'
       - 'DASHI/Mathematics/Topology/**'
@@ -19,6 +20,7 @@ on:
     branches:
       - 'agent/ym-clay-alpha-round30-strong-coupling-functional-route'
     paths:
+      - 'DASHI/EverythingHurwitzHopfNoetherCrossPollination.agda'
       - 'DASHI/Mathematics/Algebra/**'
       - 'DASHI/Mathematics/Symmetry/**'
       - 'DASHI/Mathematics/Topology/**'
