@@ -17,6 +17,7 @@ open import Data.Product using (_×_; _,_)
 import DASHI.Analysis.RiemannMaassMoonshineCrossPollinationExact
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHodgeDiamondExact
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact
 import DASHI.Mathematics.AlgebraicGeometry.HodgeNoetherianVOACrossPollination
 import DASHI.Mathematics.Arithmetic.EllipticCurveF5PointEnumerationExact
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact
@@ -129,6 +130,7 @@ data CrossPollinationEdge : Set where
   gradedVOATraceToModularSeries
   voaModularityToRiemannTransform
   noetherianityToAlgebraicCycles
+  projectiveLineCyclesToH11
   ellipticCurveToHodgeRealization
   arithmeticFrobeniusToLocalEulerFactor
   localEulerFactorsToBSDGlobalLFunction
@@ -147,6 +149,10 @@ riemannMaassEdge : ImplementedEdge
 riemannMaassEdge =
   implementedEdge maassSpectrumToRiemannHilbertPolya
     proofBearingGenericTheorem
+
+projectiveLineCycleEdge : ImplementedEdge
+projectiveLineCycleEdge =
+  implementedEdge projectiveLineCyclesToH11 exactFiniteCore
 
 hodgeEllipticEdge : ImplementedEdge
 hodgeEllipticEdge =
