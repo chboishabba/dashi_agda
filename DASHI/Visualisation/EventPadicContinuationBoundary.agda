@@ -3,6 +3,7 @@ module DASHI.Visualisation.EventPadicContinuationBoundary where
 open import DASHI.Core.Prelude
 
 import DASHI.Visualisation.EventFilamentFieldExact as Event
+import DASHI.Visualisation.FiniteAnisotropicKernelExact as Anisotropic
 import DASHI.Visualisation.EventFilamentPersistenceExact as Persistence
 import DASHI.Visualisation.SelfConsistentEventRendererExact as Renderer
 import DASHI.Visualisation.RendererStabilityExact as Stability
@@ -19,6 +20,8 @@ import DASHI.Visualisation.EventPadicSourceAtlas as Sources
 record EventPadicContinuationBoundary : Set where
   field
     eventFieldBoundary : Event.EventFilamentFieldBoundary
+    finiteAnisotropicKernelBoundary :
+      Anisotropic.FiniteAnisotropicKernelBoundary
     eventPersistenceBoundary : Persistence.EventFilamentPersistenceBoundary
     selfConsistentRendererBoundary : Renderer.SelfConsistentRendererBoundary
     rendererStabilityBoundary : Stability.RendererStabilityBoundary
@@ -31,6 +34,18 @@ record EventPadicContinuationBoundary : Set where
 
     additiveEventFieldWitness :
       Event.scalarFieldSample ≡ 10
+
+    anisotropicRadiusWitness :
+      Anisotropic.mahalanobisNumerator
+        Anisotropic.canonicalEllipticEvent
+        Anisotropic.canonicalQuery
+      ≡
+      2 *
+      Anisotropic.mahalanobisDenominator
+        Anisotropic.canonicalEllipticEvent
+
+    finiteTubeQuadratureWitness :
+      Anisotropic.tubeMass Anisotropic.canonicalTubeQuadrature ≡ 10
 
     correctedSharpnessWitness :
       Event.correctedSharpness Event.crowded ≡ 1
@@ -173,6 +188,8 @@ canonicalEventPadicContinuationBoundary :
 canonicalEventPadicContinuationBoundary =
   record
     { eventFieldBoundary = Event.canonicalEventFilamentFieldBoundary
+    ; finiteAnisotropicKernelBoundary =
+        Anisotropic.canonicalFiniteAnisotropicKernelBoundary
     ; eventPersistenceBoundary =
         Persistence.canonicalEventFilamentPersistenceBoundary
     ; selfConsistentRendererBoundary =
@@ -188,6 +205,10 @@ canonicalEventPadicContinuationBoundary =
     ; padicRenderModeCorrectionBoundary =
         RenderCorrection.canonicalPadicRenderModeCorrectionBoundary
     ; additiveEventFieldWitness = Event.scalarFieldSampleIsTen
+    ; anisotropicRadiusWitness =
+        Anisotropic.canonicalSquaredRadiusIsTwo
+    ; finiteTubeQuadratureWitness =
+        Anisotropic.canonicalTubeMassIsTen
     ; correctedSharpnessWitness = refl , refl
     ; temporalGraphForwardWitness = Event.edgeIsForwardByConstruction
     ; thresholdFiltrationWitness = Persistence.highIncludedInLow
