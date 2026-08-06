@@ -44,7 +44,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEightPointSixThreeHolderExact as Eight
-import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneExact as Holder
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteSixThreeHolderConstantOneV2Exact as Holder
 
 record FiniteSixThreeBranchData : Set where
   constructor finite-six-three-branch-data
