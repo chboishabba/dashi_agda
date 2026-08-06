@@ -9,7 +9,9 @@ module DASHI.Biology.ConsciousAccessRound7HarmonicWreathCarrierValidation where
 --   * scale-normalized filtered estimates;
 --   * separating probe families;
 --   * a finite local-transform/index-permutation action;
---   * the balanced-ternary T^2 disjoint-union {j} coarse carrier;
+--   * commuting order-three translations on the finite 3x3 torus;
+--   * the balanced-ternary T^2 disjoint-union {j} coarse carrier and its exact
+--     identification with the completed finite torus carrier;
 --   * jFine/jCoarse as the relative 3^9 harmonic scale;
 --   * elementary channel, full-assignment and recursive tetrational growth as
 --     three distinct carrier levels;
@@ -31,7 +33,9 @@ import DASHI.Physics.Common.FiniteRingScaleDualityExact
 import DASHI.Physics.Common.ScaledFilteredEstimateExact
 import DASHI.Physics.Common.SeparatingProbeFamilyExact
 import DASHI.Physics.Common.FiniteWreathRefinementExact
+import DASHI.Physics.Common.FiniteThreeCycleTorusExact
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact
+import DASHI.Biology.BalancedTernaryTorusWreathBridgeExact
 import DASHI.Biology.BalancedTernaryTetrationHarmonicBridgeExact
 import DASHI.Biology.JFineCoarseRelativeScaleExact
 import DASHI.Biology.MonsterStructuredBulkCarrierExact
