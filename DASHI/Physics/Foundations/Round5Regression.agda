@@ -256,5 +256,5 @@ unificationBoundaryRegression :
   Unified.currentEffectiveRecoveryReceipt
 unificationBoundaryRegression = refl
 
-sourceAtlasRegression : Sources.canonicalRound5SourceCount ≡ 14
+sourceAtlasRegression : Sources.canonicalRound5SourceCount ≡ 17
 sourceAtlasRegression = refl
