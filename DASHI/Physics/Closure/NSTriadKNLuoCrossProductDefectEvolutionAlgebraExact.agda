@@ -210,7 +210,10 @@ defectRateFiniteSourceSplit :
   ∀ left right pairs →
   defectRate left right (sumDerivativePairs pairs)
   ≡ sumDefectRates left right pairs
-defectRateFiniteSourceSplit left right [] = solve []
+defectRateFiniteSourceSplit left right [] =
+  solve
+    ( Gram.x left ∷ Gram.y left ∷ Gram.z left
+    ∷ Gram.x right ∷ Gram.y right ∷ Gram.z right ∷ [])
 defectRateFiniteSourceSplit left right (pair ∷ pairs) =
   trans
     (defectRateAdditive left right pair (sumDerivativePairs pairs))
@@ -248,10 +251,18 @@ fiveSourceDefectEvolutionSplit :
   + defectRate (leftVorticity jet) (rightVorticity jet) (kernel jet)
   + defectRate (leftVorticity jet) (rightVorticity jet) (tail jet)
 fiveSourceDefectEvolutionSplit jet =
-  defectRateFiniteSourceSplit
-    (leftVorticity jet)
-    (rightVorticity jet)
-    (fiveSourcePairs jet)
+  trans
+    (defectRateFiniteSourceSplit
+      (leftVorticity jet)
+      (rightVorticity jet)
+      (fiveSourcePairs jet))
+    (solve
+      ( defectRate (leftVorticity jet) (rightVorticity jet) (advection jet)
+      ∷ defectRate (leftVorticity jet) (rightVorticity jet) (stretching jet)
+      ∷ defectRate (leftVorticity jet) (rightVorticity jet) (subgrid jet)
+      ∷ defectRate (leftVorticity jet) (rightVorticity jet) (kernel jet)
+      ∷ defectRate (leftVorticity jet) (rightVorticity jet) (tail jet)
+      ∷ []))
 
 record CrossDefectEvolutionAuthorityBoundary : Set where
   constructor crossDefectEvolutionAuthorityBoundary
