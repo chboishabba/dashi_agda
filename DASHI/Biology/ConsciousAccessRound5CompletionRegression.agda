@@ -7,6 +7,7 @@ import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSPWeave
 import DASHI.Biology.SSPHyperfibreSymmetryTowerExact as SSPTower
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as SelfIndexing
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Symmetry
 import DASHI.Biology.EquivariantLaplacianSectorExact as Equivariant
 import DASHI.Biology.D4IrrepPhysicalRoleExact as D4Roles
 import DASHI.Biology.MoonshineGradedStageBridgeExact as Moonshine
@@ -83,11 +84,11 @@ equivariantRegression :
 equivariantRegression = Equivariant.reflectedEvenRemainsEigenstate
 
 d4RoleRegression :
-  D4Roles.roleDimension (D4Roles.modeRole D4Roles.Symmetry.E2) ≡ 2
+  D4Roles.roleDimension (D4Roles.modeRole Symmetry.E2) ≡ 2
   × D4Roles.orientation D4Roles.navierStokesPositiveHelicityCandidate
-    ≡ D4Roles.Symmetry.positiveOrientation
+    ≡ Symmetry.positiveOrientation
   × D4Roles.orientation D4Roles.navierStokesNegativeHelicityCandidate
-    ≡ D4Roles.Symmetry.negativeOrientation
+    ≡ Symmetry.negativeOrientation
 d4RoleRegression = refl , (refl , refl)
 
 moonshineStageRegression :
