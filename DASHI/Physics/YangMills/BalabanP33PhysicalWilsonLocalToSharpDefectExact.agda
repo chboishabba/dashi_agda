@@ -24,10 +24,10 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLocalToSharpDefectExact w
 --   H_W(1;h) = H_curl^flat(h).
 --
 -- It therefore produces exactly the sharp Wilson input required by the
--- physical boundary-assisted terminal coercivity theorem.  An optional data-
--- set identification record then transports the result into the literal
--- Wilson field of `LiteralPhysicalSecondVariation`; the identification itself
--- is an equality of actual finite sums, not a fresh scalar bound.
+-- physical boundary-assisted terminal coercivity theorem.  The final theorem
+-- uses the repository's same-background/same-h perturbation adapter: its
+-- literal Wilson fold is definitionally built from `backgroundOf h` and
+-- `physicalFieldOf h`.  No independent data-set equality witness is accepted.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -44,6 +44,7 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Glob
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact as GaugeBudget
 import DASHI.Physics.YangMills.BalabanP33WilsonSharpDuhamelBudgetExact as Sharp
 import DASHI.Physics.YangMills.BalabanP33LiteralGaugeConstraintSecondVariationExact as Jets
+import DASHI.Physics.YangMills.BalabanP33LiteralPhysicalPerturbationAdapterExact as SameH
 
 sharpWilsonCoefficientFromRho :
   (+ 13 / 24) * GaugeBudget.rho
@@ -92,41 +93,29 @@ physicalWilsonLocalImpliesSharpDefect background field local =
     (physicalWilsonDefectIsBackgroundMinusFlat background field)
     sharpCoefficientLower
 
-record LiteralWilsonIdentification
-    {Plaquette GaugeIndex ConstraintIndex : Set}
-    (background : Physical.RationalSU2Background4)
-    (field : Coordinates.PhysicalSU2BondField4)
-    (dataSet : Jets.LiteralPhysicalSecondVariation
-      Plaquette GaugeIndex ConstraintIndex) : Set where
-  field
-    literalWilsonIsPhysical :
-      Jets.wilsonSecondVariation dataSet
-      ≡ Physical.physicalWilsonSecondVariation background field
-
-open LiteralWilsonIdentification public
-
-literalWilsonLocalImpliesSharpDefect :
-  ∀ {Plaquette GaugeIndex ConstraintIndex}
-    background field
-    (dataSet : Jets.LiteralPhysicalSecondVariation
-      Plaquette GaugeIndex ConstraintIndex) →
-  LiteralWilsonIdentification background field dataSet →
-  Global.PhysicalWilsonSignedLocal background field →
+samePhysicalPerturbationWLocalImpliesSharpDefect :
+  ∀ {Perturbation GaugeIndex ConstraintIndex}
+    (model : SameH.LiteralPhysicalPerturbationModel
+      Perturbation GaugeIndex ConstraintIndex)
+    h →
+  Global.PhysicalWilsonSignedLocal
+    (SameH.backgroundOf model h) (SameH.physicalFieldOf model h) →
   - (Sharp.sharpSixteenAtomBudget
-      * Coordinates.physicalSU2BondNormSq field)
-  ≤ Jets.wilsonSecondVariation dataSet - Flat.flatWilsonEnergy field
-literalWilsonLocalImpliesSharpDefect
-    background field dataSet identification local =
+      * Coordinates.physicalSU2BondNormSq (SameH.physicalFieldOf model h))
+  ≤ Jets.wilsonSecondVariation (SameH.literalSecondVariationOf model h)
+      - Flat.flatWilsonEnergy (SameH.physicalFieldOf model h)
+samePhysicalPerturbationWLocalImpliesSharpDefect model h local =
   subst
     (λ selectedWilson →
       - (Sharp.sharpSixteenAtomBudget
-          * Coordinates.physicalSU2BondNormSq field)
-      ≤ selectedWilson - Flat.flatWilsonEnergy field)
-    (sym (literalWilsonIsPhysical identification))
-    (physicalWilsonLocalImpliesSharpDefect background field local)
+          * Coordinates.physicalSU2BondNormSq (SameH.physicalFieldOf model h))
+      ≤ selectedWilson - Flat.flatWilsonEnergy (SameH.physicalFieldOf model h))
+    (sym (SameH.literalWilsonIsPhysicalWilson model h))
+    (physicalWilsonLocalImpliesSharpDefect
+      (SameH.backgroundOf model h) (SameH.physicalFieldOf model h) local)
 
 physicalWLocalToSharpWilsonLevel : ProofLevel
 physicalWLocalToSharpWilsonLevel = machineChecked
 
-literalWilsonIdentificationTransportLevel : ProofLevel
-literalWilsonIdentificationTransportLevel = machineChecked
+samePhysicalPerturbationWilsonTransportLevel : ProofLevel
+samePhysicalPerturbationWilsonTransportLevel = machineChecked
