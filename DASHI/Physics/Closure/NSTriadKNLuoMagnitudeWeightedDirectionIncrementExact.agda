@@ -154,9 +154,9 @@ exactAmplitudeDirectionDecomposition dataSet =
       L2.square (b - a)
       + a * b * Gram.normSquared (vectorDifference xi eta)
     normalized
-      rewrite Gram.leftUnit (directions dataSet)
-            | Gram.rightUnit (directions dataSet)
-            | directionDifferenceNormExpansion xi eta =
+      rewrite directionDifferenceNormExpansion xi eta
+            | Gram.leftUnit (directions dataSet)
+            | Gram.rightUnit (directions dataSet) =
       solve (a ∷ b ∷ Gram.dot xi eta ∷ [])
   in
   trans expanded normalized
