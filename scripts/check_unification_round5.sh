@@ -11,13 +11,16 @@ fi
 
 FILES=(
   DASHI/Physics/Foundations/ParameterScaleTaxonomyExact.agda
+  DASHI/Physics/Foundations/ParameterInformationGeometryExact.agda
   DASHI/Physics/Foundations/RGMDLExhaustionChambersExact.agda
   DASHI/Physics/Foundations/DimensionPowerCountingBoundaryExact.agda
   DASHI/Physics/Foundations/AtomicFermionShellExact.agda
+  DASHI/Physics/Foundations/AtomicValenceFermionBridgeExact.agda
   DASHI/Physics/Foundations/NuclearShellPairingExact.agda
   DASHI/Physics/Foundations/NuclearShapeInstabilityExact.agda
   DASHI/Physics/Foundations/CausalCodingCosmologyBoundaryExact.agda
   DASHI/Physics/Foundations/KernelGeometryEmergenceObligations.agda
+  DASHI/Physics/Foundations/FiniteGraphGaugeScalarExact.agda
   DASHI/Physics/Foundations/KernelQFTEmergenceObligations.agda
   DASHI/Physics/Foundations/UnifiedEffectiveActionBoundary.agda
   DASHI/Physics/Foundations/Round5SourceAtlas.agda
