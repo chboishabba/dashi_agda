@@ -29,7 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
 open import Agda.Builtin.Bool using (false)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Nat.Properties using (≤-refl; ≤-trans; +-mono-≤; *-mono-≤)
 open import Data.Product using (_×_; _,_)
 
@@ -102,7 +102,7 @@ firstInteraction : FiniteStretchingInteraction 2
 firstInteraction = stretchingInteraction
   6 1 3 2
   ≤-refl
-  (Data.Nat.Base.s≤s Data.Nat.Base.z≤n)
+  (s≤s z≤n)
 
 secondInteraction : FiniteStretchingInteraction 2
 secondInteraction = stretchingInteraction
