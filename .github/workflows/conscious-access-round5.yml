@@ -42,9 +42,25 @@ permissions:
 jobs:
   agda:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Resolve repository Agda toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          package="$(nix build --no-link --print-out-paths .#agda-with-dashi-deps)"
+          agda_bin="$package/bin/agda"
+          test -x "$agda_bin"
+          "$agda_bin" --version
+          printf 'AGDA_BIN=%s\n' "$agda_bin" >> "$GITHUB_ENV"
       - name: Check conscious-access round five
+        env:
+          DASHI_REPO_ROOT: ${{ github.workspace }}
+          DASHI_AGDA29_EPHEMERAL: '1'
+          AGDA_LOG_PATH: ${{ runner.temp }}/conscious-access-round5-agda.log
         run: bash scripts/check_conscious_access_round5.sh
       - name: Report successful kernel check
         if: success() && github.event_name == 'push'
@@ -52,11 +68,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: >-
           gh pr comment 399 --repo chboishabba/dashi_agda --body
-          'Round 5 Agda 2.9 kernel check passed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
+          'Round 5 repository-flake Agda kernel check passed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
       - name: Report failed kernel check
         if: failure() && github.event_name == 'push'
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
           gh pr comment 399 --repo chboishabba/dashi_agda --body
-          'Round 5 Agda 2.9 kernel check failed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
+          'Round 5 repository-flake Agda kernel check failed on ${{ github.sha }} (workflow run ${{ github.run_id }}).'
