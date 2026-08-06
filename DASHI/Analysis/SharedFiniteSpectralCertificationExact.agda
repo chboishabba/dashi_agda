@@ -26,14 +26,15 @@ module DASHI.Analysis.SharedFiniteSpectralCertificationExact where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.Unit using (⊤)
+open import Data.Empty using (⊥)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ)
+open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Analysis.MaassFourierCarrier as MFC
 import DASHI.Analysis.MaassSpectralCertification as MSC
-import DASHI.Analysis.Maass.ValidatedNumericsArtifact as VNA
-import DASHI.Analysis.Maass.CuspContinuousSpectrumSeparation as CCS
 import DASHI.Analysis.Maass.ResidualToSpectralEnclosureTheorem as Maass
 import DASHI.Mathematics.LinearAlgebra.RationalTwoByTwoSelfAdjointSpectralExact as Spectral
 import DASHI.Mathematics.LinearAlgebra.RationalThreeWayHodgeDecompositionExact as Hodge
@@ -159,14 +160,18 @@ scaleHodgeMode = Hodge.scaleTriple
 finiteHodgeModeEigenEquation : ∀ mode →
   Hodge.hodgeLaplacian (hodgeModeVector mode)
   ≡ scaleHodgeMode (hodgeModeEigenvalue mode) (hodgeModeVector mode)
-finiteHodgeModeEigenEquation exactMode = refl
-finiteHodgeModeEigenEquation harmonicMode = refl
-finiteHodgeModeEigenEquation coexactMode = refl
+finiteHodgeModeEigenEquation exactMode =
+  Hodge.tripleExtensionality (solve []) (solve []) (solve [])
+finiteHodgeModeEigenEquation harmonicMode =
+  Hodge.tripleExtensionality (solve []) (solve []) (solve [])
+finiteHodgeModeEigenEquation coexactMode =
+  Hodge.tripleExtensionality (solve []) (solve []) (solve [])
 
 finiteHodgeHarmonicKernel :
   Hodge.hodgeLaplacian (hodgeModeVector harmonicMode)
   ≡ Hodge.zeroTriple
-finiteHodgeHarmonicKernel = refl
+finiteHodgeHarmonicKernel =
+  Hodge.tripleExtensionality (solve []) (solve []) (solve [])
 
 ------------------------------------------------------------------------
 -- Finite-volume transfer Hamiltonian witness.
@@ -195,7 +200,7 @@ canonicalFiniteTransferHamiltonianGap = record
   ; vacuumEnergy = Spectral.two
   ; firstExcitedEnergy = Spectral.five
   ; energyGap = Spectral.three
-  ; gapEquation = Spectral.spectralDifference
+  ; gapEquation = solve []
   ; finiteVolumePositivity = ⊤
   ; volumeUniformityBoundary = ⊤
   ; continuumTransferBoundary = ⊤
@@ -209,6 +214,5 @@ data SpectralPromotionLayer : Set where
   continuumSpectrum
 
 finiteAgreementIsNotContinuumCompletion :
-  finiteHilbertPolyaApproximant ≡ continuumSpectrum →
-  Data.Empty.⊥
+  finiteHilbertPolyaApproximant ≡ continuumSpectrum → ⊥
 finiteAgreementIsNotContinuumCompletion ()
