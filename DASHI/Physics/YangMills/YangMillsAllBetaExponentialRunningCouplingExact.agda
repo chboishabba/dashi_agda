@@ -79,7 +79,9 @@ quadraticRatioBaseExact :
 quadraticRatioBaseExact spacingBase inverseSpacingBase inverseLaw =
   trans
     (solve (spacingBase ∷ inverseSpacingBase ∷ []))
-    (cong (λ selected → selected * spacingBase) inverseLaw)
+    (trans
+      (cong (λ selected → selected * spacingBase) inverseLaw)
+      (solve (spacingBase ∷ [])))
 
 quadraticPhysicalGapLowerExact :
   ∀ spacingBase inverseSpacingBase depth →
