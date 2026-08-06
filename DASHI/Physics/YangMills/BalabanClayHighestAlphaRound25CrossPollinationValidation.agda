@@ -7,6 +7,7 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound25CrossPollinationVal
 --
 --   * exact projection/off-diagonal block calculus;
 --   * invariant plus mean-zero mode splitting and the 54 = 1 + 53 count;
+--   * the typed distinction between dimension 53 and kernel mass 53/6;
 --   * arbitrary-factor weighted strict-loss pullback;
 --   * defect-controlled coarse-dynamics squares;
 --   * factorization of the existing B C^-1 B^T coefficient through the same
@@ -29,6 +30,7 @@ open import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound24Validation
 open import DASHI.Physics.YangMills.BalabanP33StageIStageIISpectralBoundaryExact
 open import DASHI.Physics.Common.FiniteProjectionOffDiagonalExact
 open import DASHI.Physics.Common.ReducedModeProjectionExact
+open import DASHI.Physics.Common.FiftyThreeTypedBoundaryExact
 open import DASHI.Physics.Common.WeightedStrictLossTransportExact
 open import DASHI.Physics.Common.CoarseDynamicsCommutatorExact
 open import DASHI.Physics.YangMills.BalabanP33ProjectionSchurCrossPollinationExact
