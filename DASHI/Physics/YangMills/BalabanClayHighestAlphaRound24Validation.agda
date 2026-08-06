@@ -17,7 +17,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound24Validation where
 --     survival only;
 --   * the square-root-free B C^-1 B^T coarse--fine coupling bound;
 --   * signed Feshbach lower bookkeeping with coupling and remainder losses
---     kept separate.
+--     kept separate;
+--   * the explicit Stage-I / Stage-II authority boundary and six named
+--     structure-specific RG producers.
 --
 -- The root does not assert the still-missing selected-factor link-charge
 -- estimates, the signed local W-local inequality, the global G-local incidence
@@ -38,3 +40,4 @@ open import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeFirstExact
 open import DASHI.Physics.YangMills.BalabanP33StrictTerminalGapMarginExact
 open import DASHI.Physics.YangMills.BalabanP33CoarseFineSchurCouplingExact
 open import DASHI.Physics.YangMills.BalabanP33EffectiveSchurGapStepExact
+open import DASHI.Physics.YangMills.BalabanP33StageIStageIISpectralBoundaryExact
