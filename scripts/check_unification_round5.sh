@@ -37,6 +37,7 @@ FILES=(
   DASHI/Physics/Foundations/PR399FoundationsCrossPollinationExact.agda
   DASHI/Physics/Foundations/UnifiedEffectiveActionBoundary.agda
   DASHI/Physics/Foundations/Round5SourceAtlas.agda
+  DASHI/Physics/Foundations/Round5CombinedSourceBoundary.agda
   DASHI/Physics/Foundations/Round5FullBoundary.agda
   DASHI/Physics/Foundations/Round5Regression.agda
   DASHI/Physics/Foundations/Everything.agda
