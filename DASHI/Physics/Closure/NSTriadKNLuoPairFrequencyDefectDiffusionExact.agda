@@ -40,10 +40,10 @@ module DASHI.Physics.Closure.NSTriadKNLuoPairFrequencyDefectDiffusionExact where
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
 
@@ -115,7 +115,6 @@ pairFrequencyShellDamping cell =
       0ℚ ≤ viscosity cell * twoFloor
     leftProductNonnegative =
       let
-        open Data.Rational.Base using (nonNegative)
         instance
           viscosityNN = nonNegative (viscosityNonnegative cell)
           floorNN = nonNegative twoFloorNonnegative
@@ -128,7 +127,6 @@ pairFrequencyShellDamping cell =
       0ℚ ≤ viscosity cell * eigenSum
     rightProductNonnegative =
       let
-        open Data.Rational.Base using (nonNegative)
         instance
           viscosityNN = nonNegative (viscosityNonnegative cell)
           eigenNN = nonNegative eigenSumNonnegative
