@@ -69,9 +69,6 @@ data ForbiddenTargetAtom : Set where
   targetLatticeGap : ForbiddenTargetAtom
   targetCorrelationLength : ForbiddenTargetAtom
 
--- Accepted inputs and forbidden targets are different carriers.  A proposed
--- proof must provide an explicit translation before either target can enter an
--- input position; no such translation is present here.
 acceptedInputCannotEqualForbiddenTarget :
   MultiscaleInputAtom ≡ ForbiddenTargetAtom → ⊥
 acceptedInputCannotEqualForbiddenTarget ()
@@ -112,8 +109,6 @@ record MultiscaleLSIInputs : Set₁ where
 
 open MultiscaleLSIInputs public
 
--- This theorem is structural rather than bibliographic: the accepted input
--- record has no field of either forbidden target type.
 multiscaleInputDoesNotAssumeTargetGap :
   (inputs : MultiscaleLSIInputs) →
   ForbiddenTargetAtom →
@@ -126,7 +121,7 @@ record AllBetaMultiscaleLSIClaim : Set₁ where
     Beta : Set
     Volume : Set
     Configuration : Set
-    Measure : Configuration → Set
+    Measure : Set
     PositiveConstant : Set
 
     finiteVolumeMeasure : Beta → Volume → Measure
