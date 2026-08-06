@@ -17,9 +17,14 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoConcreteDyadicSupportCount125Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoConcreteBernstein125Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGrowingFiniteCubeSupportExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingDyadicAnnulusExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGrowingCubeBernsteinExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingDyadicAnnulusBernsteinExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGrowingCubeHighHighClosedExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGrowingCubeHighHighTensorClosedExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingDyadicAnnulusHighHighExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingDyadicAnnulusHighHighTerminalExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoAnnularFourClassContinuationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteRootOfUnityCancellationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreeDimensionalCharacterOrthogonalityFactorExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteKroneckerEnumerationExact.agda
