@@ -13,15 +13,18 @@ data FiniteHistory : Set where
 
 record GibbsWeight : Set where
   constructor gibbsWeight
-  field gibbsExponent : Nat
+  field
+    gibbsExponent : Nat
 
 record QuantumPhase : Set where
   constructor quantumPhase
-  field phaseIndex : Nat
+  field
+    phaseIndex : Nat
 
 record MDLPrior : Set where
   constructor mdlPrior
-  field codeLength : Nat
+  field
+    codeLength : Nat
 
 open GibbsWeight public
 open QuantumPhase public
