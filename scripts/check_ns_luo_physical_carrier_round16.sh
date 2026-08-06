@@ -18,6 +18,8 @@ FILES=(
   DASHI/Physics/Closure/NSTriadKNLuoConcreteBernstein125Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGrowingFiniteCubeSupportExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoGrowingCubeBernsteinExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingCubeHighHighClosedExact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoGrowingCubeHighHighTensorClosedExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteRootOfUnityCancellationExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoThreeDimensionalCharacterOrthogonalityFactorExact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteKroneckerEnumerationExact.agda
