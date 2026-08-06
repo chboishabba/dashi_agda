@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.PointedTernaryBulkExact as Bulk
 import DASHI.Biology.DecimalTenTernaryPresentationExact as Decimal
 import DASHI.Biology.ThreeSixNineMoonshineScaleExact as Scale
+import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Orbit
 import DASHI.Biology.SporadicTarotDependencyExact as Tarot
 import DASHI.Biology.PointedBulkReducedMoonshineBoundary as Moonshine
@@ -38,8 +39,7 @@ threeSixNineScaleRegression =
 
 fiftyFourTriadicRegression :
   Scale.fiftyFourScale
-  ≡ Scale.binaryOrientationCount
-    * DASHI.Biology.TernaryHypercubeHyperfabricExact.ternaryLatticeCount 3
+  ≡ Scale.binaryOrientationCount * Hyper.ternaryLatticeCount 3
 fiftyFourTriadicRegression = Scale.fiftyFourIsTwoTimesThreeCubed
 
 pointedBulkAlternativeRegression :
