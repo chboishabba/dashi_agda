@@ -31,9 +31,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoPeriodicBiotSavartAngularCancellationEx
 -- estimate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≡_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNLuoDirectionalDefectGramExact as Gram
