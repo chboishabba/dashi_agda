@@ -14,3 +14,13 @@ import DASHI.Visualisation.AdapterCommutationExact
 import DASHI.Visualisation.AttachedVisualisationSourceAtlas
 import DASHI.Visualisation.AttachedVisualisationBoundary
 import DASHI.Visualisation.AttachedVisualisationRegression
+
+------------------------------------------------------------------------
+-- Sections 671--835: event filaments, implicit renderer feedback, ternary
+-- cyclic/carry semantics, and renderable p-adic level of detail.
+
+import DASHI.Visualisation.EventFilamentFieldExact
+import DASHI.Visualisation.SelfConsistentEventRendererExact
+import DASHI.Visualisation.EventPadicSourceAtlas
+import DASHI.Visualisation.EventPadicContinuationBoundary
+import DASHI.Visualisation.EventPadicContinuationRegression
