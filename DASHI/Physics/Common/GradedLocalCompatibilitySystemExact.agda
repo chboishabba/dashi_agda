@@ -18,23 +18,32 @@ module DASHI.Physics.Common.GradedLocalCompatibilitySystemExact where
 -- DOI: 10.1007/BF01240221.
 --
 -- DASHI CONTRIBUTION
--- Domain-neutral graded states, local operations, output grades, probes,
--- observations and transported defects.  Concrete VOA locality, NS shell
--- compatibility and YM gauge/RG locality are not identified.
+-- A domain-neutral carrier for the exact common architecture used by the
+-- Moonshine/VOA, Navier--Stokes shell and Yang--Mills RG lanes:
+-- graded states, local operations, declared output grades, separating probes,
+-- compatibility defects and defect transport. The observation carrier is
+-- separate from the state carrier. No theorem identifies the concrete notions
+-- of locality in those three domains.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 
 record GradedLocalCompatibilitySystem : Set₁ where
   constructor gradedLocalCompatibilitySystem
   field
-    Grade State Probe Observation Defect : Set
+    Grade : Set
+    State : Set
+    Probe : Set
+    Observation : Set
+    Defect : Set
+
     gradeOf : State → Grade
     localOperation : State → State → State
     outputGrade : State → State → Grade
     localOperationHasDeclaredGrade :
       ∀ left right →
       gradeOf (localOperation left right) ≡ outputGrade left right
+
     observe : Probe → State → Observation
     transportDefect : Defect → Defect
 
@@ -58,6 +67,13 @@ record SeparatingGradedLocalCompatibilitySystem : Set₁ where
 
 open SeparatingGradedLocalCompatibilitySystem public
 
+localOperationGradeStable :
+  (system : GradedLocalCompatibilitySystem) →
+  ∀ left right →
+  gradeOf system (localOperation system left right)
+  ≡ outputGrade system left right
+localOperationGradeStable = localOperationHasDeclaredGrade
+
 transportDefectTwice :
   (system : GradedLocalCompatibilitySystem) →
   Defect system → Defect system
@@ -70,3 +86,22 @@ transportDefectEquality :
   transportDefect system left ≡ transportDefect system right
 transportDefectEquality system equality =
   cong (transportDefect system) equality
+
+record DomainIdentificationBoundary : Set where
+  constructor domainIdentificationBoundary
+  field
+    voaLocalityIsNavierStokesShellLocality : Set
+    voaLocalityIsNotIdentifiedWithNavierStokesShellLocality :
+      voaLocalityIsNavierStokesShellLocality → Set
+
+    voaLocalityIsYangMillsGaugeLocality : Set
+    voaLocalityIsNotIdentifiedWithYangMillsGaugeLocality :
+      voaLocalityIsYangMillsGaugeLocality → Set
+
+canonicalDomainIdentificationBoundary : DomainIdentificationBoundary
+canonicalDomainIdentificationBoundary =
+  domainIdentificationBoundary
+    ⊥ (λ impossible → ⊥)
+    ⊥ (λ impossible → ⊥)
+  where
+  open import Data.Empty using (⊥)
