@@ -79,21 +79,20 @@ scaledYoungIdentity parameter x y =
         ( epsilon parameter
         ∷ quarterInverse parameter
         ∷ x ∷ y ∷ [])
+
+    normalization :
+      1ℚ - 4 * epsilon parameter * quarterInverse parameter ≡ 0ℚ
+    normalization
+      rewrite quarterInverseLaw parameter =
+      solve []
   in
   subst
     (λ zeroTerm →
       epsilon parameter * L2.square x
         + quarterInverse parameter * L2.square y
       ≡ x * y + youngDefect parameter x y + zeroTerm * x * y)
-    (solve
-      (epsilon parameter ∷ quarterInverse parameter ∷ []))
+    normalization
     raw
-  where
-  normalization :
-    1ℚ - 4 * epsilon parameter * quarterInverse parameter ≡ 0ℚ
-  normalization
-    rewrite quarterInverseLaw parameter =
-    solve []
 
 scaledYoungProductBound :
   ∀ parameter x y →
