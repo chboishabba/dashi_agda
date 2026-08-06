@@ -73,7 +73,7 @@ scaledYoungIdentity parameter x y =
         * L2.square (2 * epsilon parameter * x - y)
       +
       (1ℚ - 4 * epsilon parameter * quarterInverse parameter)
-        * x * y
+        * x * (epsilon parameter * x - y)
     raw =
       solve
         ( epsilon parameter
@@ -90,7 +90,8 @@ scaledYoungIdentity parameter x y =
     (λ zeroTerm →
       epsilon parameter * L2.square x
         + quarterInverse parameter * L2.square y
-      ≡ x * y + youngDefect parameter x y + zeroTerm * x * y)
+      ≡ x * y + youngDefect parameter x y
+        + zeroTerm * x * (epsilon parameter * x - y))
     normalization
     raw
 
