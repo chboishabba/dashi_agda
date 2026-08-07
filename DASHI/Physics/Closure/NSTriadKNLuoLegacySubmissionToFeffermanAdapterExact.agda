@@ -58,7 +58,6 @@ record LegacySubmissionToFeffermanAdapter
 
     transportVelocityPeriodicity :
       (legacyVelocity : Legacy.GlobalVelocity legacy) →
-      Legacy.DivergenceFreePreserved legacy legacyVelocity →
       Clay.VelocityUnitPeriodicInThreeCoordinates clay
         (decodeVelocity legacyVelocity)
 
@@ -120,7 +119,6 @@ legacyWitnessGivesLiteralFeffermanWitness adapter viscosity initial witness =
     ; velocityPeriodic =
         transportVelocityPeriodicity adapter
           (Legacy.velocity witness)
-          (Legacy.divergenceFree witness)
     ; pressurePeriodic =
         transportPressurePeriodicityErratum adapter
           (Legacy.pressure witness)
