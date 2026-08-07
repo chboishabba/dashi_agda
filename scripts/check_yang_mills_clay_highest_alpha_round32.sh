@@ -36,6 +36,9 @@ checks=(
   'YangMillsClayProblemContractExact.agda:clayPreconditionCountExact'
   'YangMillsClayProblemContractExact.agda:clayPostconditionCountExact'
   'YangMillsClayProblemContractExact.agda:clayInvariantCountExact'
+  'YangMillsClayProblemContractExact.agda:gaugeInvariantCurvatureOperatorCorrespondence'
+  'YangMillsClayProblemContractExact.agda:shortDistanceAsymptoticFreedomAgreement'
+  'YangMillsClayProblemContractExact.agda:stressTensorAndOperatorProductExpansion'
   'YangMillsClayProblemContractExact.agda:finiteHessianIsNotClay'
   'YangMillsClayProblemContractExact.agda:allBetaLatticeGapIsNotClay'
   'YangMillsClayProblemContractExact.agda:singleGroupGapIsNotAllGroupsClay'
@@ -47,6 +50,7 @@ checks=(
   'YangMillsConstructivePathPrePostInvariantExact.agda:continuumToGapInterfaceExact'
   'YangMillsConstructivePathPrePostInvariantExact.agda:gapToAllGroupsInterfaceExact'
   'YangMillsConstructivePathPrePostInvariantExact.agda:strongCouplingClusteringIsNotUltravioletControl'
+  'YangMillsConstructivePathPrePostInvariantExact.agda:strongCouplingClusteringIsNotOperatorOPE'
   'YangMillsConstructivePathPrePostInvariantExact.agda:strongCouplingClusteringIsNotHamiltonianGap'
 )
 
