@@ -1,0 +1,70 @@
+name: Robust final frontier cleanup
+
+on:
+  push:
+    branches:
+      - 'agent/frontier-hodge-automorphic-spectral-crosspollination'
+    paths:
+      - '.github/workflows/frontier-final-cleanup-v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Correct proof tokens and remove superseded drafts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          hodge = Path('DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessExact.agda')
+          text = hodge.read_text()
+          marker = 'projectionCoordinatesAreUnique'
+          start = text.index(marker)
+          prefix, suffix = text[:start], text[start:]
+          old = 'trans (sym equality)\n          (assembledCoordinatesReduce exact harmonic coexact)'
+          new = 'trans equality\n          (assembledCoordinatesReduce exact harmonic coexact)'
+          if old not in suffix:
+              raise SystemExit('Hodge orientation token not found in target theorem')
+          hodge.write_text(prefix + suffix.replace(old, new, 1))
+
+          checker = Path('scripts/check_frontier_hodge_automorphic_spectral_round2.sh')
+          text = checker.read_text()
+          old = "grep -Fq 'full infinite Weyl algebra' DASHI/Moonshine/RankOneHeisenbergFockWindowExact.agda"
+          new = "grep -Fq 'finite oscillator algebra beneath the Fock grading' DASHI/Moonshine/RankOneHeisenbergFockWindowExact.agda"
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif new not in text:
+              raise SystemExit('Heisenberg checker guard not found')
+          checker.write_text(text)
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -f --ignore-unmatch \
+            DASHI/Physics/Constructive/FiniteProductClusteringExact.agda \
+            DASHI/Physics/YangMills/YangMillsFiniteOS2OS4KPBridgeExact.agda \
+            DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceHodgePatternExact.agda \
+            DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeUniquenessExact.agda \
+            DASHI/Moonshine/RankOneHeisenbergFiniteWindowExact.agda \
+            .github/workflows/frontier-superseded-cleanup.yml \
+            .github/workflows/frontier-final-cleanup.yml \
+            .github/workflows/frontier-final-cleanup-v2.yml
+          git add \
+            DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessExact.agda \
+            scripts/check_frontier_hodge_automorphic_spectral_round2.sh
+          if git diff --cached --quiet; then
+            echo 'No cleanup changes required.'
+            exit 0
+          fi
+          git commit -m 'Harden final frontier proof surface'
+          git push origin HEAD:agent/frontier-hodge-automorphic-spectral-crosspollination

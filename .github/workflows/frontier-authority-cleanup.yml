@@ -1,0 +1,55 @@
+name: Direct authority cleanup
+
+on:
+  push:
+    branches:
+      - 'agent/frontier-hodge-automorphic-spectral-crosspollination'
+    paths:
+      - '.github/workflows/frontier-authority-cleanup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Remove every superseded and intermediate authority file
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -f --ignore-unmatch \
+            DASHI/Physics/Constructive/FiniteProductClusteringExact.agda \
+            DASHI/Physics/YangMills/YangMillsFiniteOS2OS4KPBridgeExact.agda \
+            DASHI/Mathematics/AlgebraicGeometry/ProjectiveSpaceHodgePatternExact.agda \
+            DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeUniquenessExact.agda \
+            DASHI/Mathematics/LinearAlgebra/RationalThreeWayHodgeCoordinateUniquenessExact.agda \
+            DASHI/Moonshine/RankOneHeisenbergFiniteWindowExact.agda \
+            DASHI/Mathematics/CrossPollination/FrontierProductiveCompletionRound2GateExact.agda \
+            DASHI/Mathematics/CrossPollination/FrontierHodgeAutomorphicSpectralRound2Validation.agda \
+            DASHI/EverythingFrontierHodgeAutomorphicSpectralRound2.agda \
+            DASHI/Mathematics/CrossPollination/FrontierCompleteProductiveCompletionGateExact.agda \
+            DASHI/Mathematics/CrossPollination/FrontierCompleteProductiveValidation.agda \
+            DASHI/Mathematics/CrossPollination/FrontierCompleteProductiveValidationStatus.agda \
+            DASHI/EverythingFrontierCompleteProductiveValidation.agda \
+            scripts/check_frontier_hodge_automorphic_spectral_round2.sh \
+            scripts/check_frontier_complete_productive_validation.sh \
+            .github/workflows/frontier-hodge-automorphic-spectral-round2.yml \
+            .github/workflows/frontier-complete-productive-validation.yml \
+            .github/workflows/frontier-superseded-cleanup.yml \
+            .github/workflows/frontier-final-cleanup.yml \
+            .github/workflows/frontier-final-cleanup-v2.yml \
+            .github/workflows/frontier-authority-cleanup.yml
+          if git diff --cached --quiet; then
+            echo 'No superseded authority files remain.'
+            exit 0
+          fi
+          git commit -m 'Remove intermediate frontier authority layers'
+          git push origin HEAD:agent/frontier-hodge-automorphic-spectral-crosspollination
