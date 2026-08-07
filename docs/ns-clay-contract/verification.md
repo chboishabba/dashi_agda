@@ -66,6 +66,7 @@ The checker must confirm these exact artifacts:
 - `NSTriadKNLuoClayPrePostInvariantContractRound23Exact.agda`
 - `NSTriadKNLuoClayContractRound23Validation.agda`
 - `DASHI/Papers/NavierStokes/ClayContractRound23.agda`
+- `DASHI/Papers/NavierStokes/TheoremInterface.agda`
 - `docs/ns-clay-contract/README.md`
 - `docs/ns-clay-contract/requirements.md`
 - `docs/ns-clay-contract/architecture.puml`
@@ -82,6 +83,7 @@ The exact theorem markers are:
 - `canonicalClayPostconditions`
 - `canonicalProofRouteInvariants`
 - `canonicalNSClayContractRound23Status`
+- `nsPaperLiteralClayTargetImplemented`
 
 ## Current validation boundary
 
