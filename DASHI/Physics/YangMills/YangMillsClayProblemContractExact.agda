@@ -31,8 +31,9 @@ module DASHI.Physics.YangMills.YangMillsClayProblemContractExact where
 -- a finite propagator, an all-beta fixed-spacing theorem, or a formal OS
 -- interface.  A solution must construct, for every compact simple gauge group,
 -- a nontrivial four-dimensional quantum Yang--Mills theory on R^4 satisfying an
--- accepted axiomatic QFT scheme and possessing a strictly positive Hamiltonian
--- spectral gap above the vacuum.
+-- accepted axiomatic QFT scheme, carrying the required gauge-invariant local
+-- operators and short-distance asymptotically-free/OPE behaviour, and possessing
+-- a strictly positive finite Hamiltonian spectral gap above the vacuum.
 --
 -- This module indexes the required preconditions, postconditions and invariants
 -- and defines the type of a complete witness.  It supplies no inhabitant of that
@@ -41,7 +42,6 @@ module DASHI.Physics.YangMills.YangMillsClayProblemContractExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (length)
 
@@ -61,6 +61,9 @@ data ClayPrecondition : Set where
 
 data ClayPostcondition : Set where
   nontrivialQuantumYangMillsTheoryOnR4 : ClayPostcondition
+  gaugeInvariantCurvatureOperatorCorrespondence : ClayPostcondition
+  shortDistanceAsymptoticFreedomAgreement : ClayPostcondition
+  stressTensorAndOperatorProductExpansion : ClayPostcondition
   acceptedWightmanOrOSStrengthAxioms : ClayPostcondition
   reconstructedPositiveSelfAdjointHamiltonian : ClayPostcondition
   vacuumSectorAndPositiveEnergyComplement : ClayPostcondition
@@ -95,6 +98,9 @@ clayPreconditions =
 clayPostconditions : List ClayPostcondition
 clayPostconditions =
   nontrivialQuantumYangMillsTheoryOnR4
+  ∷ gaugeInvariantCurvatureOperatorCorrespondence
+  ∷ shortDistanceAsymptoticFreedomAgreement
+  ∷ stressTensorAndOperatorProductExpansion
   ∷ acceptedWightmanOrOSStrengthAxioms
   ∷ reconstructedPositiveSelfAdjointHamiltonian
   ∷ vacuumSectorAndPositiveEnergyComplement
@@ -120,7 +126,7 @@ clayInvariants =
 clayPreconditionCountExact : length clayPreconditions ≡ 8
 clayPreconditionCountExact = refl
 
-clayPostconditionCountExact : length clayPostconditions ≡ 6
+clayPostconditionCountExact : length clayPostconditions ≡ 9
 clayPostconditionCountExact = refl
 
 clayInvariantCountExact : length clayInvariants ≡ 11
