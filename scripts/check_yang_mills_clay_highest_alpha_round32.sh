@@ -17,8 +17,9 @@ files=(
 )
 
 doc=Docs/support/reference/YangMillsClayContractRound32.md
+index=Docs/support/reference/YangMillsReferenceIndex.md
 
-for file in "${files[@]}" "$doc"; do test -f "$file"; done
+for file in "${files[@]}" "$doc" "$index"; do test -f "$file"; done
 
 if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|NON_COVERING|--type-in-type|trustMe|primTrustMe|standardImported' "${files[@]}"; then
   echo "round thirty two contains a hole, postulate, unsafe escape, trust primitive, or imported theorem receipt" >&2
@@ -73,6 +74,7 @@ grep -q 'YangMillsClayProblemContractExact.agda' "$doc"
 grep -q 'YangMillsConstructivePathPrePostInvariantExact.agda' "$doc"
 grep -q '@startuml' "$doc"
 grep -q 'A static pass is not a kernel pass' "$doc"
+grep -Fq '[Round 32 — literal Clay contract, constructive path and validation controls](./YangMillsClayContractRound32.md)' "$index"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound32ClayContractValidation.agda
