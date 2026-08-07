@@ -38,7 +38,8 @@ module DASHI.Physics.YangMills.YangMillsConstructivePathPrePostInvariantExact wh
 --   B. strong-coupling Bakry--Emery -> fixed-spacing thermodynamic clustering.
 --
 -- Route B does not by itself provide changing-spacing ultraviolet control,
--- continuum OS limits or a Hamiltonian spectral gap.
+-- continuum local-operator/OPE matching, continuum OS limits or a Hamiltonian
+-- spectral gap.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -71,6 +72,8 @@ data PathClause : Set where
   largeFieldPolymerClusterConvergence : PathClause
   thermodynamicLimit : PathClause
   ultravioletChangingSpacingLimit : PathClause
+  continuumGaugeInvariantCurvatureOperators : PathClause
+  continuumShortDistanceAsymptoticFreedomOPE : PathClause
   continuumOSAxioms : PathClause
   continuumNontriviality : PathClause
   vacuumCompatibleSpectralTransfer : PathClause
@@ -102,6 +105,8 @@ clauseState interactingFiniteVolumeMeasure = openPhysicalProducer
 clauseState largeFieldPolymerClusterConvergence = openPhysicalProducer
 clauseState thermodynamicLimit = openPhysicalProducer
 clauseState ultravioletChangingSpacingLimit = openPhysicalProducer
+clauseState continuumGaugeInvariantCurvatureOperators = openPhysicalProducer
+clauseState continuumShortDistanceAsymptoticFreedomOPE = openPhysicalProducer
 clauseState continuumOSAxioms = externalStandardTheoremNeedsInstantiation
 clauseState continuumNontriviality = openPhysicalProducer
 clauseState vacuumCompatibleSpectralTransfer = openPhysicalProducer
@@ -158,6 +163,8 @@ continuumOSPost : List PathClause
 continuumOSPost =
   thermodynamicLimit
   ∷ ultravioletChangingSpacingLimit
+  ∷ continuumGaugeInvariantCurvatureOperators
+  ∷ continuumShortDistanceAsymptoticFreedomOPE
   ∷ continuumOSAxioms
   ∷ continuumNontriviality
   ∷ []
@@ -272,6 +279,7 @@ data ConstructiveRouteCapability : Set where
   strongCouplingFixedSpacingLSICapability : ConstructiveRouteCapability
   strongCouplingFixedSpacingClusteringCapability : ConstructiveRouteCapability
   changingSpacingUltravioletCapability : ConstructiveRouteCapability
+  continuumOperatorOPECapability : ConstructiveRouteCapability
   continuumOSCapability : ConstructiveRouteCapability
   HamiltonianMassGapCapability : ConstructiveRouteCapability
 
@@ -279,6 +287,11 @@ strongCouplingClusteringIsNotUltravioletControl :
   strongCouplingFixedSpacingClusteringCapability
   ≡ changingSpacingUltravioletCapability → ⊥
 strongCouplingClusteringIsNotUltravioletControl ()
+
+strongCouplingClusteringIsNotOperatorOPE :
+  strongCouplingFixedSpacingClusteringCapability
+  ≡ continuumOperatorOPECapability → ⊥
+strongCouplingClusteringIsNotOperatorOPE ()
 
 strongCouplingClusteringIsNotContinuumOS :
   strongCouplingFixedSpacingClusteringCapability
