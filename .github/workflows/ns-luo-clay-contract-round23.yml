@@ -6,6 +6,7 @@ on:
       - 'agent/ns-luo-clay-contract-round23'
     paths:
       - 'DASHI/Physics/Closure/**'
+      - 'DASHI/Papers/NavierStokes/**'
       - 'docs/ns-clay-contract/**'
       - 'scripts/check_ns_luo_clay_contract_round23.sh'
       - '.github/workflows/ns-luo-clay-contract-round23.yml'
@@ -15,6 +16,7 @@ on:
       - 'agent/ns-luo-clay-contract-round23'
     paths:
       - 'DASHI/Physics/Closure/**'
+      - 'DASHI/Papers/NavierStokes/**'
       - 'docs/ns-clay-contract/**'
       - 'scripts/check_ns_luo_clay_contract_round23.sh'
       - '.github/workflows/ns-luo-clay-contract-round23.yml'
