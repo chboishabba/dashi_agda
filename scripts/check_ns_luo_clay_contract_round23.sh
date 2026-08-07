@@ -14,6 +14,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoClayEndToEndCompositionRound23Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoClayPrePostInvariantContractRound23Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoClayContractRound23Validation.agda
+  DASHI/Papers/NavierStokes/ClayContractRound23.agda
 )
 
 docs=(
@@ -74,6 +75,12 @@ grep -q 'canonicalProofRouteInvariants' "$contract_file"
 grep -q 'canonicalInRepoPathState' "$contract_file"
 grep -q 'physicalProducerOpen' "$contract_file"
 grep -q 'clayPhysicalProducersRemainOpen' "$contract_file"
+
+paper_file=DASHI/Papers/NavierStokes/ClayContractRound23.agda
+grep -q 'canonicalNSClayContractRound23Status' "$paper_file"
+grep -q 'literalTargetIsImplemented' "$paper_file"
+grep -q 'physicalProducersRemainOpen' "$paper_file"
+grep -q 'clayPromotionRemainsFalse' "$paper_file"
 
 grep -q 'Charles L. Fefferman' "$clay_file"
 grep -q '10.1090/chel/343' "$galilean_file"
