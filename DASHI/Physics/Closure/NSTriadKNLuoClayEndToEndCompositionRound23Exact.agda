@@ -103,15 +103,17 @@ open InRepoClayPathInputs public
 centeredLiteralSolutionFromLegacyPhysicalConstruction :
   ∀ {legacy clay}
     (inputs : InRepoClayPathInputs legacy clay)
-    (viscosity : Clay.Viscosity clay)
-    (initial : Clay.SmoothPeriodicDatum clay) →
+    (viscosity : Clay.Viscosity clay) →
+  Clay.PositiveViscosity clay viscosity →
+  (initial : Clay.SmoothPeriodicDatum clay) →
   Clay.DatumSmoothOnThreeTorus clay initial →
   Clay.DatumDivergenceFree clay initial →
   Clay.DatumUnitPeriodicInThreeCoordinates clay initial →
   DatumMeanZero inputs initial →
   Clay.FeffermanPeriodicGlobalSolutionWitness clay viscosity initial
 centeredLiteralSolutionFromLegacyPhysicalConstruction
-  inputs viscosity initial initialSmooth initialDivergence initialPeriodic initialMeanZero =
+  inputs viscosity viscosityPositive initial
+  initialSmooth initialDivergence initialPeriodic initialMeanZero =
   Adapter.legacyWitnessGivesLiteralFeffermanWitness
     (legacyToLiteralAdapter inputs)
     viscosity
