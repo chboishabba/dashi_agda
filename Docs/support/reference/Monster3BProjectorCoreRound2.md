@@ -2,9 +2,9 @@
 
 ## Status
 
-This continuation is stacked on the exact CTblLib/Heisenberg work in PR #464. It replaces several separate numerical probes by one division-free theorem, distinguishes the canonical regular `C3` core from the dyadic refinement, places the conformal line in the invariant sector, and constructs a finite `729 x 90` projector-index model without dense `65610 x 65610` matrices.
+This continuation is stacked on the exact CTblLib/Heisenberg work in PR #464. It replaces several separate numerical probes by one division-free theorem, proves the maximal regular `C3` core, distinguishes it from the dyadic refinement, places the conformal line in the invariant sector, and constructs a finite `729 x 90` projector-index model without dense `65610 x 65610` matrices.
 
-It does **not** claim that the finite model has already been identified with the actual Monster `ζ` eigenspace. The extraspecial-kernel embedding, actual `χζ` projector, inertia character, and `12 + 78` branching remain explicit certificate inputs.
+It does **not** claim that the finite model has already been identified with the actual Monster `ζ` eigenspace. The extraspecial-kernel embedding, actual `χζ` projector resolution, inertia character, and `12 + 78` branching remain explicit certificate inputs.
 
 ## Centred probes
 
@@ -26,6 +26,20 @@ The multiplicity vector has the canonical decomposition
 (65663,65610,65610)
   = 65610 (1,1,1) + (53,0,0).
 ```
+
+A `UniformCoreDecomposition` owns one common natural core, three natural residuals, and exact reconstruction equalities. From the `ζ` reconstruction
+
+```text
+core + zetaResidual = 65610
+```
+
+the branch proves every uniform-core candidate satisfies
+
+```text
+core <= 65610.
+```
+
+The explicit candidate `(core,residuals)=(65610,53,0,0)` attains that bound. Thus `65610` is proved maximal, not merely named.
 
 The dyadic refinement is separately recorded:
 
@@ -71,7 +85,25 @@ Translation acts on `X` and leaves the multiplicity coordinate fixed. The evalua
 729 * 90 = 65610.
 ```
 
-This realizes the desired finite index mechanism without constructing a dense matrix. The actual Monster-sector identification remains false/open.
+A diagonal finite weight-projector coefficient is also constructed:
+
+```text
+P_x(y,s) = 1 when y=x, and 0 otherwise.
+```
+
+For every basis coordinate the branch proves
+
+```text
+P_x * P_x = P_x,
+```
+
+and for every standard translation generator
+
+```text
+P_{T_a x}(T_a y,s) = P_x(y,s).
+```
+
+This is an actual idempotent, translation-covariant finite projector on the model carrier. Pairwise orthogonality and the resolution of the identity on the **actual Monster sector** remain false/open until the model-to-Monster intertwiner is certified.
 
 ## Projector trace interface
 
@@ -118,4 +150,4 @@ The later `Sζ ≅ 12 ⊕ 78` claim remains a character-inner-product computatio
 bash scripts/check_monster_3b_projector_core_round2.sh
 ```
 
-The checker cascades through the PR #464 checker, rejects holes and trust escapes in the new sources, checks all exact constants and authority boundaries, and invokes the cumulative Agda root when Agda is available.
+The checker cascades through the PR #464 checker, rejects holes and trust escapes in the new sources, checks maximality, exact projector idempotence/covariance, arithmetic constants and authority boundaries, and invokes the cumulative Agda root when Agda is available.
