@@ -35,6 +35,7 @@ data TheorySignature : Set where
   latticeYangMillsFixedSpacing : TheorySignature
   fiveDimensionalOrbifoldGaugeTheory : TheorySignature
   yangMillsWithAdditionalScalar : TheorySignature
+  einsteinCartanYangMillsTheory : TheorySignature
   celestialConformalConstruction : TheorySignature
   topologicalHopfFibrationTheory : TheorySignature
   nonlocalHolonomyGaugeTheory : TheorySignature
@@ -44,6 +45,8 @@ data TheorySignature : Set where
 data OperatorSignature : Set where
   physicalReconstructedHamiltonian : OperatorSignature
   latticeTransferOperator : OperatorSignature
+  boundarySlabTransferKernel : OperatorSignature
+  auxiliaryBoundaryLangevinGenerator : OperatorSignature
   stochasticLangevinGenerator : OperatorSignature
   beltramiOperator : OperatorSignature
   sturmLiouvilleRegulatorOperator : OperatorSignature
@@ -128,6 +131,10 @@ fixedSpacingTheoryIsNotContinuumTheory :
   latticeYangMillsFixedSpacing ≡ pureFourDimensionalYangMills → ⊥
 fixedSpacingTheoryIsNotContinuumTheory ()
 
+einsteinCartanYangMillsIsNotDefinitionallyPureYangMills :
+  einsteinCartanYangMillsTheory ≡ pureFourDimensionalYangMills → ⊥
+einsteinCartanYangMillsIsNotDefinitionallyPureYangMills ()
+
 beltramiOperatorIsNotPhysicalHamiltonian :
   beltramiOperator ≡ physicalReconstructedHamiltonian → ⊥
 beltramiOperatorIsNotPhysicalHamiltonian ()
@@ -139,6 +146,14 @@ conformalWeightIsNotPhysicalHamiltonian ()
 stochasticGeneratorIsNotPhysicalHamiltonian :
   stochasticLangevinGenerator ≡ physicalReconstructedHamiltonian → ⊥
 stochasticGeneratorIsNotPhysicalHamiltonian ()
+
+auxiliaryBoundaryLangevinIsNotSlabTransferKernel :
+  auxiliaryBoundaryLangevinGenerator ≡ boundarySlabTransferKernel → ⊥
+auxiliaryBoundaryLangevinIsNotSlabTransferKernel ()
+
+boundarySlabTransferKernelIsNotPhysicalHamiltonian :
+  boundarySlabTransferKernel ≡ physicalReconstructedHamiltonian → ⊥
+boundarySlabTransferKernelIsNotPhysicalHamiltonian ()
 
 requiredPromotionBridges : List BridgeObligation
 requiredPromotionBridges =
