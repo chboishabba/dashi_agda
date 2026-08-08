@@ -98,8 +98,9 @@ fixedPointGivesFourierReality :
 fixedPointGivesFourierReality state fixed mode =
   sym
     (trans
-      (cong C3.complex3Conjugate
-        (cong state (Symmetry.negateModeInvolutive mode)))
+      (sym
+        (cong C3.complex3Conjugate
+          (cong state (Symmetry.negateModeInvolutive mode))))
       (fixed (Z3.negateMode mode)))
 
 record RealityEquivariantVectorField
