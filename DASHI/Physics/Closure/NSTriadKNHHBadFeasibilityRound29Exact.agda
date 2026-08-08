@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNHHBadFeasibilityRound29Exact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 open import Relation.Nullary using (¬_)
 open import Data.Rational.Base using (ℚ; _+_)
