@@ -19,8 +19,7 @@ import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact a
 import DASHI.Physics.YangMills.BalabanP33WilsonPairDeepBudgetExact as Coeff
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (_+_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
 open import Data.Rational.Base using (_*_; _/_; _+_)
@@ -29,9 +28,6 @@ subsetOwnershipExhaustsAllAtoms :
   length Ownership.correlatedAtoms + length Ownership.deepAtoms
   ≡ length Ownership.allSubsetAtoms
 subsetOwnershipExhaustsAllAtoms = Ownership.correlatedAndDeepCountExact
-
-pairDeepOwnershipExhaustsFifteen : 10 + 5 ≡ 15
-pairDeepOwnershipExhaustsFifteen = refl
 
 pairCoefficientPerCrossRegression :
   Coeff.pairCoefficientPerCrossCharge
