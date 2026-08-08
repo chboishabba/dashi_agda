@@ -17,6 +17,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoClaimCorpusHighestAlphaRound24Validation.agda
   DASHI/Papers/NavierStokes/ClaimCorpusHighestAlphaRound24.agda
+  DASHI/Papers/NavierStokes/CurrentTheoremInterfaceRound24.agda
 )
 
 docs=(
@@ -110,6 +111,12 @@ grep -q 'finiteCascadeFluxNoGo' "$paper"
 grep -q 'restrictedClassScopeNoGo' "$paper"
 grep -q 'physicalProducersRemainOpen' "$paper"
 grep -q 'clayPromotionRemainsFalse' "$paper"
+
+current=DASHI/Papers/NavierStokes/CurrentTheoremInterfaceRound24.agda
+grep -q 'canonicalCurrentNSPaperTheoremInterfaceRound24' "$current"
+grep -q 'currentLiteralTargetImplemented' "$current"
+grep -q 'currentPhysicalProducersOpen' "$current"
+grep -q 'currentClayPromotionFalse' "$current"
 
 grep -q '\[Claimed-paper corpus and audits\](paper-corpus/README.md)' docs/ns-clay-contract/README.md
 grep -q '\[Audit matrix\](audit-matrix.md)' docs/ns-clay-contract/paper-corpus/README.md
