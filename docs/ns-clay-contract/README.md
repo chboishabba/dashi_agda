@@ -76,6 +76,24 @@ The [projector/operator/core tranche](projector-operator-core-round27.md) import
 
 These are exact mathematical lemmas. They do not supply the full nonlinear vector-field equivariance, finite ODE theorem, physical source estimates or strict coefficient below one.
 
+### Round 28 — dependent carrier, signed constituent and owner-partition architecture
+
+The [physical-carrier and signed-partition tranche](physical-carrier-partition-round28.md) proves:
+
+- idempotence of the composite of three commuting physical selectors;
+- a dependent carrier fixed by Leray, Fourier reality and centering;
+- cutoff closure and opposite-output representatives under triad conjugation;
+- simultaneous-conjugation invariance of Plücker coordinates and area;
+- a signed constituent tree with source-to-owner compatibility;
+- delayed positive taxation after owner-homogeneous grouping;
+- a dependent unique-owner partition preserving signed and taxable totals;
+- signed commutator identities over structured finite interaction fibres;
+- exact orbit parity and division-free Plücker homogeneity;
+- a no-hidden-norm owner-estimate language;
+- exact nine-owner absorption algebra once physical estimates are supplied.
+
+It does not instantiate the concrete physical selector, prove the nonlinear convolution equivariant, produce a cutoff-uniform operator estimate, or prove the strict total viscosity margin.
+
 ## Preconditions, postconditions and invariants
 
 The normalized contract is in [requirements.md](requirements.md) and formalized by `NSTriadKNLuoClayPrePostInvariantContractRound23Exact.agda`.
@@ -97,7 +115,7 @@ strict total viscosity coefficient below one.
 
 - **O — Organization:** `DASHI/Physics/Closure`, paper-facing interfaces, validation scripts and this documentation surface.
 - **R — Requirement:** literal Fefferman periodic alternative B.
-- **C — Code:** Rounds 23–27 target, corpus, physical support, signed ledger, projectors, operators, geometry and tax accounting.
+- **C — Code:** Rounds 23–28 target, corpus, physical support, signed ledger, projectors, operators, geometry, dependent carriers and tax accounting.
 - **S — State:** exact target and extensive finite algebra are implemented; the cutoff-uniform physical absorption theorem is uninhabited.
 - **L — Lattice:** finite flow → physical shell ledger → unique source taxes → strict absorption → limits → Serrin continuation → smooth global witness.
 - **P — Proposal:** advance only physical producers, exact supporting lemmas, or quantified falsifications.
@@ -106,15 +124,15 @@ strict total viscosity coefficient below one.
 
 ## Active, non-overlapping lanes
 
-1. Full nonlinear Galerkin reality/transversality equivariance.
+1. Instantiate the concrete Leray/reality/centering selector and prove full nonlinear equivariance.
 2. Finite normed local Lipschitz, Picard–Lindelöf, energy identity and global finite existence.
-3. Physical time-dependent filtered-vorticity shell balance using the sharp projectors.
-4. Signed low-advection multiplier/operator estimate and first uniform class tax.
+3. Physical time-dependent signed constituent shell balance using the sharp projectors.
+4. Signed interaction-fibre `TT*` or almost-orthogonality estimate and first uniform class tax.
 5. Periodic principal-value strain kernel and Calderón–Zygmund bounds.
 6. Division-free directional high–high estimate and defect evolution.
 7. Positive-variation and bad-excursion amplitude budgets.
 8. Lower interaction, far-field, commutator and cutoff-tail taxes.
-9. Physical owner allocations and strict maximal-core viscosity margin.
+9. Physical nine-owner estimates and strict viscosity margin.
 10. Shell/Galerkin compactness, critical-to-Serrin continuation, pressure and Galilean recovery.
 11. Claimed-paper discovery and falsification mapped to lanes 1–10.
 12. Documentation and verification only after substantive mathematical changes.
@@ -130,18 +148,21 @@ Terminal composition is held unless a concrete defect is found.
 - [Round 25 physical carrier and support](physical-carrier-support-round25.md)
 - [Round 26 finite Galerkin and critical-tax ledger](galerkin-critical-ledger-round26.md)
 - [Round 27 projector/operator/core tranche](projector-operator-core-round27.md)
+- [Round 28 physical carrier and signed partition](physical-carrier-partition-round28.md)
 
 ## Scope boundary
 
-Round 27 does not claim:
+Round 28 does not claim:
 
 - global regularity;
+- a concrete physical selector instance;
+- full nonlinear Fourier-reality equivariance;
 - a completed finite Picard–Lindelöf instance;
 - a physical time-dependent shell balance;
 - smooth Littlewood–Paley bounds;
 - any cutoff-uniform nonlinear tax;
 - the periodic singular-kernel estimate;
-- physical viscosity allocations;
+- physical nine-owner estimates;
 - a strict total coefficient below one;
 - successful shell/Galerkin limits;
 - successful Agda kernel validation or GitHub Actions;
