@@ -17,9 +17,10 @@ module DASHI.Physics.Closure.NSTriadKNConcreteReconstructedPhysicalSelectorRound
 -- carrier used by the finite Fourier lane. Positive-orbit coefficients carry
 -- transversality proofs; negative coefficients are reconstructed by complex
 -- conjugation and proved transverse; zero modes are excluded dependently.
--- Since all constraints are intrinsic to the state type, the three selectors
--- are literal identities. The still-open theorem is that the full physical
--- Galerkin vector field maps this state type to itself.
+-- Every stored and reconstructed coefficient is proved fixed by the literal
+-- C3 Leray projector. Since all constraints are intrinsic to the state type,
+-- the three state selectors are literal identities. The still-open theorem is
+-- that the full physical Galerkin vector field maps this state type to itself.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level)
@@ -32,6 +33,7 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact as Phase
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNLerayAlgebraProgram as Leray
 import DASHI.Physics.Closure.NSTriadKNCommutingPhysicalCarrierSelectorRound28Exact as Selector
 
 infix 4 _∈_
@@ -89,6 +91,38 @@ reconstructedNegativeCoefficientTransverse :
 reconstructedNegativeCoefficientTransverse =
   Phase.canonicalReconstructedNegativeIsTransverse
 
+positiveCoefficientLerayFixed :
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E)
+    (coefficient : Phase.TransverseModeCoefficient F E) →
+  C3.lerayProject3 E I
+    (Phase.coefficientMode coefficient)
+    (Phase.coefficientValue coefficient)
+  ≡ Phase.coefficientValue coefficient
+positiveCoefficientLerayFixed E I coefficient =
+  Leray.lerayFixesTransverse
+    E I
+    (Phase.coefficientMode coefficient)
+    (Phase.coefficientValue coefficient)
+    (Phase.coefficientTransverse coefficient)
+
+negativeCoefficientLerayFixed :
+  ∀ {r} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E)
+    (coefficient : Phase.TransverseModeCoefficient F E) →
+  C3.lerayProject3 E I
+    (Phase.reconstructedNegativeMode coefficient)
+    (Phase.reconstructedNegativeValue coefficient)
+  ≡ Phase.reconstructedNegativeValue coefficient
+negativeCoefficientLerayFixed E I coefficient =
+  Leray.lerayFixesTransverse
+    E I
+    (Phase.reconstructedNegativeMode coefficient)
+    (Phase.reconstructedNegativeValue coefficient)
+    (reconstructedNegativeCoefficientTransverse coefficient)
+
 reconstructedPhysicalSelectors :
   ∀ {r} (F : C3.RealField r) (E : C3.IntegerEmbedding F) →
   Selector.CommutingPhysicalSelectors (ReconstructedPhysicalState F E)
@@ -121,12 +155,19 @@ reconstructedPhysicalSelectorFixesState state = refl
 reconstructedPhysicalStateSelectorInstantiated : Bool
 reconstructedPhysicalStateSelectorInstantiated = true
 
+literalCoefficientLerayFixingClosed : Bool
+literalCoefficientLerayFixingClosed = true
+
 fullGalerkinVectorFieldMapsReconstructedState : Bool
 fullGalerkinVectorFieldMapsReconstructedState = false
 
 reconstructedPhysicalStateSelectorInstantiatedIsTrue :
   reconstructedPhysicalStateSelectorInstantiated ≡ true
 reconstructedPhysicalStateSelectorInstantiatedIsTrue = refl
+
+literalCoefficientLerayFixingClosedIsTrue :
+  literalCoefficientLerayFixingClosed ≡ true
+literalCoefficientLerayFixingClosedIsTrue = refl
 
 fullGalerkinVectorFieldMapsReconstructedStateIsFalse :
   fullGalerkinVectorFieldMapsReconstructedState ≡ false
