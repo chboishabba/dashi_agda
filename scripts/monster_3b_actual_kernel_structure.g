@@ -1,18 +1,20 @@
-# Certify the actual extraspecial 3-core in an AtlasRep construction of
+# Certify the actual extraspecial 3-core in a constructible model of
 # N_M(<3B>) = 3^(1+12).2.Suz.2 and align its centre with the unique
 # size-two order-three MN3B class that fuses to Monster 3B.
 #
 # This script does not construct the 196883-dimensional Monster module.
 # It closes the group-theoretic promotion seam that can be checked directly:
-# the actual AtlasRep group has a normal extraspecial 3-core of order 3^13,
+# the constructed group has a normal extraspecial 3-core of order 3^13,
 # exponent three, centre/derived subgroup of order three, elementary-abelian
 # quotient of order 3^12, and its two nonidentity central elements form one
 # conjugacy orbit. CTblLib then identifies the unique class with those
 # invariants and its stored fusion to Monster 3B.
 #
-# Representation discovery deliberately uses the documented
-# AllAtlasGeneratingSetInfos -> AtlasGroup(info) interface rather than assuming
-# that one punctuation spelling is a constructible AtlasRep group name.
+# Representation discovery uses the documented AtlasRep metadata interface
+# first. If no local AtlasRep representation is constructible, it uses
+# CTblLib's GroupInfoForCharacterTable/GroupForGroupInfo interface when the
+# Browse package exposes such data. Every candidate must still pass all group-
+# structure checks below; character-table equivalence alone is not accepted.
 #
 # SOURCES
 # R. W. Barraclough and R. A. Wilson,
@@ -43,6 +45,15 @@ expectedKernelOrder := 1594323;       # 3^13
 expectedQuotientOrder := 531441;      # 3^12
 expectedHeisenbergDegree := 729;      # 3^6
 
+monster := CharacterTable("M");
+mn3b := CharacterTable("MN3B");
+if monster = fail or mn3b = fail then
+  Error("required CTblLib tables M and MN3B are unavailable");
+fi;
+if Size(mn3b) <> expectedGroupOrder then
+  Error("the MN3B character table has an unexpected order");
+fi;
+
 groupNames := [
   "MN3B",
   "3^(1+12).2.Suz.2",
@@ -51,9 +62,9 @@ groupNames := [
 ];
 
 G := fail;
-selectedAtlasName := fail;
+selectedConstructionSource := fail;
+selectedGroupName := fail;
 selectedRepName := fail;
-selectedIdentifier := fail;
 
 # Use AtlasRep's representation metadata first. AtlasGroup(info) is the
 # documented way to construct exactly the representation described by a
@@ -67,14 +78,12 @@ for groupName in groupNames do
     candidate := AtlasGroup(info);
     if candidate <> fail and Size(candidate) = expectedGroupOrder then
       G := candidate;
-      selectedAtlasName := groupName;
+      selectedConstructionSource := "AtlasRep-info";
+      selectedGroupName := groupName;
       if IsBound(info.repname) then
         selectedRepName := info.repname;
       else
         selectedRepName := "unspecified";
-      fi;
-      if IsBound(info.identifier) then
-        selectedIdentifier := info.identifier;
       fi;
       break;
     fi;
@@ -86,29 +95,47 @@ for groupName in groupNames do
 od;
 
 # Some AtlasRep installations expose a constructible group directly but omit
-# it from the locally cached information list. Retain a fail-closed fallback.
+# it from the locally cached information list.
 if G = fail then
   for groupName in groupNames do
     candidate := AtlasGroup(groupName);
     if candidate <> fail and Size(candidate) = expectedGroupOrder then
       G := candidate;
-      selectedAtlasName := groupName;
-      selectedRepName := "AtlasGroup-direct";
+      selectedConstructionSource := "AtlasGroup-direct";
+      selectedGroupName := groupName;
+      selectedRepName := "direct";
+      break;
+    fi;
+  od;
+fi;
+
+# CTblLib's group-library interface can expose an AtlasRep or other library
+# construction for a table. Browse is optional for GAP generally but required
+# for GroupInfoForCharacterTable to expose all package-backed entries.
+if G = fail and LoadPackage("browse") = true then
+  groupInfos := GroupInfoForCharacterTable(mn3b);
+  for groupInfo in groupInfos do
+    candidate := GroupForGroupInfo(groupInfo);
+    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+      G := candidate;
+      selectedConstructionSource := "CTblLib-GroupForGroupInfo";
+      selectedGroupName := Identifier(mn3b);
+      selectedRepName := groupInfo[1];
       break;
     fi;
   od;
 fi;
 
 if G = fail then
-  Error("AtlasRep provides no constructible MN3B representation of the expected order");
+  Error("no constructible MN3B group of the expected order is available");
 fi;
 if Size(G) <> expectedGroupOrder then
-  Error("unexpected AtlasRep MN3B group order");
+  Error("unexpected constructed MN3B group order");
 fi;
 
 E := PCore(G, 3);
 if E = fail then
-  Error("could not compute the 3-core of the AtlasRep MN3B group");
+  Error("could not compute the 3-core of the constructed MN3B group");
 fi;
 if not IsNormal(G, E) then
   Error("the computed 3-core is not normal");
@@ -150,13 +177,8 @@ if Set(centralOrbit) <> Set(nonidentityCentre) then
   Error("the size-two orbit is not exactly Z(E) minus the identity");
 fi;
 
-monster := CharacterTable("M");
-mn3b := CharacterTable("MN3B");
-if monster = fail or mn3b = fail then
-  Error("required CTblLib tables M and MN3B are unavailable");
-fi;
 if Size(mn3b) <> Size(G) then
-  Error("AtlasRep group order and MN3B table order disagree");
+  Error("constructed group order and MN3B table order disagree");
 fi;
 
 fusion := GetFusionMap(mn3b, monster);
@@ -194,7 +216,8 @@ output := OutputTextFile("build/monster_3b_actual_kernel_structure.json", false)
 SetPrintFormattingStatus(output, false);
 PrintTo(output,
   "{\n",
-  "  \"atlas_group_name\": \"", selectedAtlasName, "\",\n",
+  "  \"construction_source\": \"", selectedConstructionSource, "\",\n",
+  "  \"atlas_group_name\": \"", selectedGroupName, "\",\n",
   "  \"atlas_representation_name\": \"", selectedRepName, "\",\n",
   "  \"mn3b_table\": \"", Identifier(mn3b), "\",\n",
   "  \"monster_table\": \"", Identifier(monster), "\",\n",
@@ -224,7 +247,8 @@ PrintTo(output,
 CloseStream(output);
 
 Print("Actual MN3B extraspecial kernel certificate written.\n");
-Print("AtlasRep name: ", selectedAtlasName,
+Print("construction: ", selectedConstructionSource,
+  "; name: ", selectedGroupName,
   "; representation: ", selectedRepName, "\n");
 Print("|E| = ", Size(E), ", |Z(E)| = ", Size(Z),
   ", |E/Z(E)| = ", Size(Q), "\n");
