@@ -21,8 +21,15 @@ sources=(
 )
 
 for source in "${sources[@]}"; do
-  test -s "$source"
-  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK|{-# OPTIONS --unsafe|\{![^}]*!\}' "$source"; then
+  if [ ! -s "$source" ]; then
+    echo "missing or empty source $source" >&2
+    exit 1
+  fi
+  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|--allow-unsolved-metas|--no-termination-check|--no-positivity-check|--type-in-type|--omega-in-omega|--rewriting|--unsafe|TERMINATING|NON_COVERING|NO_POSITIVITY_CHECK|NO_UNIVERSE_CHECK|(^|[[:space:]])\?([[:space:];)]|$)' "$source"; then
+    echo "forbidden trust escape or hole in $source" >&2
+    exit 1
+  fi
+  if grep -Pzo '\{!.*?!\}' "$source" >/dev/null; then
     echo "forbidden trust escape or hole in $source" >&2
     exit 1
   fi
@@ -44,6 +51,8 @@ required_patterns=(
   'jEvaluationIsSurjective'
   'fixedValueAssignmentFibreHasCardinalityThreePowerNineIsFalse'
   'ssp15NineAtlas'
+  'transportEquivariant'
+  'decompositionCertified'
   'pointedSignedCardinalityValue'
   'canonicalPrimeSpecificSSP15'
   'primeSpecificAddressReconstructsLane'
@@ -52,6 +61,7 @@ required_patterns=(
   'p2AndP71HaveDifferentFineRemainders'
   'primeSpecificNonarySpectrumConstructedIsTrue'
   'primeSpecificSSP15Reading'
+  'sharedJEvaluationIsSurjective'
   'canonicalOggInternalLaneBijectionConstructedIsFalse'
   'PrimeValuedSSP15State'
   'p71A1Neutral'
