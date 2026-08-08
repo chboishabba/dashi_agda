@@ -12,16 +12,16 @@ module DASHI.Physics.Closure.NSTriadKNCriticalCompactnessSerrinRound29Exact wher
 -- Title: "Navier-Stokes Equations: Theory and Numerical Analysis".
 -- DOI: 10.1090/chel/343.
 --
--- Authors: Jean Bourgain; Haim Brezis; Petru Mironescu.
--- Context: compactness and interpolation are used only as classical analytic
--- targets here; no imported theorem is claimed without its physical instance.
+-- Author: Jacques Simon.
+-- Title: "Compact Sets in the Space L^p(0,T;B)".
+-- DOI: 10.1007/BF00281418.
 --
 -- DASHI CONTRIBUTION
 --
 -- Name the missing time-regularity input for Galerkin compactness and prove the
 -- exact quantitative critical-to-Serrin budget algebra. The physical negative
--- Sobolev estimate, Aubin-Lions compactness and periodic Serrin continuation
--- remain separate producers.
+-- Sobolev estimate, Aubin-Lions-Simon compactness and periodic Serrin
+-- continuation remain separate producers.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -32,7 +32,6 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _/_; _+_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 record NegativeNormTimeDerivativeBudget : Set where
   constructor negative-norm-time-derivative-budget
