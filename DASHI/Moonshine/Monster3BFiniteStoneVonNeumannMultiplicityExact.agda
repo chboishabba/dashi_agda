@@ -60,7 +60,8 @@ constituentDegreeSumIsHeisenbergTimesCount [] = refl
 constituentDegreeSumIsHeisenbergTimesCount
   (constituent ∷ constituents)
   rewrite stoneVonNeumannDegree constituent
-        | constituentDegreeSumIsHeisenbergTimesCount constituents = refl
+        | constituentDegreeSumIsHeisenbergTimesCount constituents =
+  sym (NatP.*-suc 729 (constituentCount constituents))
 
 ------------------------------------------------------------------------
 -- Exact multiplicity forcing.
