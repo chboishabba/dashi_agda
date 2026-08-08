@@ -59,7 +59,7 @@ required_patterns=(
   'legacyUniformReadingContainsPrimeSpecificAddressIsFalse'
   'primeSpecificStageFiveSpectrum'
   'p2AndP71HaveDifferentFineRemainders'
-  'primeSpecificNonarySpectrumConstructedIsTrue'
+  'everyPrimeSpecificSpectrumAddressReconstructs'
   'primeSpecificSSP15Reading'
   'sharedJEvaluationIsSurjective'
   'canonicalOggInternalLaneBijectionConstructedIsFalse'
