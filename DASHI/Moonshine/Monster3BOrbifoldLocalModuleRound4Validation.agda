@@ -4,12 +4,14 @@ import DASHI.Moonshine.Monster3BProjectorResolutionRound3Validation
 import DASHI.Moonshine.MoonshineOrbifoldWeightTwoDecompositionExact as W2
 import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
 import DASHI.Moonshine.MoonshineZ3OrbifoldThreeLocalSiblingExact as Sibling
+import DASHI.Moonshine.LeechWeightTwo196608BridgeExact as Old
 import DASHI.Moonshine.LeechWeightTwo196608AuthorityCorrectionExact as Correction
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Multiplicity
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (_+_)
 open import Data.Empty using (⊥)
 
 publishedWeightTwoSectorSplit :
@@ -42,8 +44,7 @@ threeLocalSiblingsHaveDifferentKernels :
 threeLocalSiblingsHaveDifferentKernels = Sibling.kernelGeometriesAreDistinct
 
 coordinateAndOrbifoldChartsOnlyShareTotal :
-  Correction.Old.leechCoordinateSubtotal
-    + Correction.Old.offDiagonalQuadraticCount
+  Old.leechCoordinateSubtotal + Old.offDiagonalQuadraticCount
   ≡ W2.untwistedInvariantWeightTwoDimension
     + W2.twistedInvariantWeightTwoDimension
 coordinateAndOrbifoldChartsOnlyShareTotal =
