@@ -15,6 +15,7 @@ sources=(
   DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
   DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda
   DASHI/Biology/SSP15JCoarseFineIntegratedExact.agda
+  DASHI/Biology/SSP15PrimeValuedStateExact.agda
   DASHI/Biology/SSP15JCoarseFineRound3Validation.agda
   DASHI/Biology/PointedBulkSporadicTarotEverything.agda
 )
@@ -52,6 +53,11 @@ required_patterns=(
   'primeSpecificNonarySpectrumConstructedIsTrue'
   'primeSpecificSSP15Reading'
   'canonicalOggInternalLaneBijectionConstructedIsFalse'
+  'PrimeValuedSSP15State'
+  'p71A1Neutral'
+  'p71A2Counterposed'
+  'reversePrimeValuedPhaseInvolutive'
+  'equalPrimeAndInternalCardinalitySuppliesCanonicalBijectionIsFalse'
 )
 
 for pattern in "${required_patterns[@]}"; do
