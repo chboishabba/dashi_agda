@@ -40,6 +40,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (_∷_; [])
 open import Data.Rational.Base using (ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -97,29 +98,16 @@ physicalSignedShellBalance :
   physicalHH I + physicalLH I + physicalHL I + physicalCC I
   + physicalCom I + lowerBoundary I + upperBoundary I
 physicalSignedShellBalance I =
-  transPhysicalBalance
-  where
-  partition :
-    PhysicalSum.fiveSourceTotal
-      (cutoff I) (output I) (triadValue I) (commutatorValue I)
-    ≡
-    physicalHH I + physicalLH I + physicalHL I + physicalCC I
-    + physicalCom I
-  partition =
-    PhysicalSum.physicalFiveSourcePartitionExact
-      (cutoff I) (output I) (triadValue I) (commutatorValue I)
-
-  transPhysicalBalance :
-    energyRate I + dissipation I
-    ≡
-    physicalHH I + physicalLH I + physicalHL I + physicalCC I
-    + physicalCom I + lowerBoundary I + upperBoundary I
-  transPhysicalBalance
-    rewrite physicalShellBalance I
-          | partition =
-    solve
-      ( physicalHH I ∷ physicalLH I ∷ physicalHL I ∷ physicalCC I
-      ∷ physicalCom I ∷ lowerBoundary I ∷ upperBoundary I ∷ [])
+  trans
+    (physicalShellBalance I)
+    (trans
+      (cong
+        (λ source → source + lowerBoundary I + upperBoundary I)
+        (PhysicalSum.physicalFiveSourcePartitionExact
+          (cutoff I) (output I) (triadValue I) (commutatorValue I)))
+      (solve
+        ( physicalHH I ∷ physicalLH I ∷ physicalHL I ∷ physicalCC I
+        ∷ physicalCom I ∷ lowerBoundary I ∷ upperBoundary I ∷ [])))
 
 physicalSignedCriticalShellCell :
   PhysicalSignedShellInputs → Ledger.SignedCriticalShellCell
