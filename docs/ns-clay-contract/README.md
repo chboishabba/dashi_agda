@@ -84,15 +84,16 @@ The [physical-carrier and signed-partition tranche](physical-carrier-partition-r
 - a dependent carrier fixed by Leray, Fourier reality and centering;
 - cutoff closure and opposite-output representatives under triad conjugation;
 - simultaneous-conjugation invariance of Plücker coordinates and area;
+- an explicit finite rational local-Lipschitz majorant for every literal Galerkin coordinate;
 - a signed constituent tree with source-to-owner compatibility;
 - delayed positive taxation after owner-homogeneous grouping;
 - a dependent unique-owner partition preserving signed and taxable totals;
 - signed commutator identities over structured finite interaction fibres;
 - exact orbit parity and division-free Plücker homogeneity;
 - a no-hidden-norm owner-estimate language;
-- exact nine-owner absorption algebra once physical estimates are supplied.
+- exact nine-owner absorption algebra with an explicit positive residual-viscosity field once the strict certificate is supplied.
 
-It does not instantiate the concrete physical selector, prove the nonlinear convolution equivariant, produce a cutoff-uniform operator estimate, or prove the strict total viscosity margin.
+It does not instantiate the concrete physical selector, prove the nonlinear convolution equivariant, connect the rational majorant to the continuum-real normed Picard–Lindelöf theorem, produce a cutoff-uniform operator estimate, or prove the physical strict total viscosity margin.
 
 ## Preconditions, postconditions and invariants
 
@@ -125,7 +126,7 @@ strict total viscosity coefficient below one.
 ## Active, non-overlapping lanes
 
 1. Instantiate the concrete Leray/reality/centering selector and prove full nonlinear equivariance.
-2. Finite normed local Lipschitz, Picard–Lindelöf, energy identity and global finite existence.
+2. Connect the finite rational coordinate majorant to the continuum-real norm, then instantiate Picard–Lindelöf, the energy identity and global finite existence.
 3. Physical time-dependent signed constituent shell balance using the sharp projectors.
 4. Signed interaction-fibre `TT*` or almost-orthogonality estimate and first uniform class tax.
 5. Periodic principal-value strain kernel and Calderón–Zygmund bounds.
@@ -157,13 +158,14 @@ Round 28 does not claim:
 - global regularity;
 - a concrete physical selector instance;
 - full nonlinear Fourier-reality equivariance;
-- a completed finite Picard–Lindelöf instance;
+- a continuum-real Picard–Lindelöf instance;
+- a global finite Galerkin flow;
 - a physical time-dependent shell balance;
 - smooth Littlewood–Paley bounds;
 - any cutoff-uniform nonlinear tax;
 - the periodic singular-kernel estimate;
 - physical nine-owner estimates;
-- a strict total coefficient below one;
+- a strict total coefficient below one for the physical PDE;
 - successful shell/Galerkin limits;
 - successful Agda kernel validation or GitHub Actions;
 - publication readiness or Clay acceptance.
