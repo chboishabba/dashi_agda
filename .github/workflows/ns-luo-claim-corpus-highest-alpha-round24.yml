@@ -9,6 +9,9 @@ on:
       - 'DASHI/Papers/NavierStokes/**'
       - 'docs/ns-clay-contract/**'
       - 'scripts/check_ns_luo_claim_corpus_highest_alpha_round24.sh'
+      - 'scripts/check_ns_luo_clay_contract_round23.sh'
+      - 'scripts/check_ns_luo_galerkin_defect_diffusion_round22.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ns-luo-claim-corpus-highest-alpha-round24.yml'
   pull_request:
     branches:
@@ -19,6 +22,9 @@ on:
       - 'DASHI/Papers/NavierStokes/**'
       - 'docs/ns-clay-contract/**'
       - 'scripts/check_ns_luo_claim_corpus_highest_alpha_round24.sh'
+      - 'scripts/check_ns_luo_clay_contract_round23.sh'
+      - 'scripts/check_ns_luo_galerkin_defect_diffusion_round22.sh'
+      - 'scripts/run_agda29_parallel_check.sh'
       - '.github/workflows/ns-luo-claim-corpus-highest-alpha-round24.yml'
   workflow_dispatch:
 
