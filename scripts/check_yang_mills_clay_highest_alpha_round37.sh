@@ -9,6 +9,7 @@ bash scripts/check_yang_mills_clay_highest_alpha_round36.sh
 sources=(
   DASHI/Physics/YangMills/BalabanSelectedPlaquetteLinearRepairModelExact.agda
   DASHI/Physics/YangMills/BalabanSelectedPlaquetteResidualBudgetRound37Exact.agda
+  DASHI/Physics/YangMills/BalabanP33WilsonGateSignatureRound37Exact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound37RepairSelectorValidation.agda
 )
 
@@ -31,6 +32,11 @@ required_patterns=(
   'selectedVariationSpilloverUpper'
   'covariantTransportAtom'
   'physicalCovariantPrefixTransportConstructedIsFalse'
+  'GateISignature'
+  'singletonIsLowerDegreeButOpen'
+  'pairIsHigherDegreeButFiniteClosed'
+  'oppositePairOrbitIsDistinguished'
+  'physicalPrefixActionProvesTheseOrbitClassesIsFalse'
 )
 
 for pattern in "${required_patterns[@]}"; do
