@@ -30,6 +30,9 @@ balancedZeroPattern = triad pos neg zeroDigit
 allNegative : TriadPattern
 allNegative = triad neg neg neg
 
+allOpen : TriadPattern
+allOpen = triad zeroDigit zeroDigit zeroDigit
+
 countPositiveDigit : BalancedDigit → Nat
 countPositiveDigit neg = 0
 countPositiveDigit zeroDigit = 0
@@ -70,6 +73,9 @@ balancedZeroBalance = refl
 
 allNegativeBalance : patternBalance allNegative ≡ signedBalance 0 3
 allNegativeBalance = refl
+
+allOpenBalance : patternBalance allOpen ≡ signedBalance 0 0
+allOpenBalance = refl
 
 ------------------------------------------------------------------------
 -- Balanced/unbalanced carry identities.  Subtraction is expressed without
@@ -141,7 +147,9 @@ stage5To3RetainsTwo =
     refl refl refl refl false refl
 
 ------------------------------------------------------------------------
--- Pattern symmetry is separate from amplitude.
+-- Pattern symmetry is separate from amplitude.  Classification is by equality
+-- multiplicity under coordinate permutations: all equal gives S3, exactly two
+-- equal gives S2, and three distinct digits give the trivial stabiliser.
 ------------------------------------------------------------------------
 
 data StabiliserType : Set where
@@ -150,18 +158,38 @@ data StabiliserType : Set where
   fullStabiliserS3 : StabiliserType
 
 patternStabiliser : TriadPattern → StabiliserType
-patternStabiliser (triad pos pos pos) = fullStabiliserS3
 patternStabiliser (triad neg neg neg) = fullStabiliserS3
-patternStabiliser (triad pos pos zeroDigit) = pairStabiliserS2
-patternStabiliser (triad pos zeroDigit pos) = pairStabiliserS2
-patternStabiliser (triad zeroDigit pos pos) = pairStabiliserS2
+patternStabiliser (triad zeroDigit zeroDigit zeroDigit) = fullStabiliserS3
+patternStabiliser (triad pos pos pos) = fullStabiliserS3
+
 patternStabiliser (triad neg neg zeroDigit) = pairStabiliserS2
 patternStabiliser (triad neg zeroDigit neg) = pairStabiliserS2
 patternStabiliser (triad zeroDigit neg neg) = pairStabiliserS2
+patternStabiliser (triad neg neg pos) = pairStabiliserS2
+patternStabiliser (triad neg pos neg) = pairStabiliserS2
+patternStabiliser (triad pos neg neg) = pairStabiliserS2
+
+patternStabiliser (triad zeroDigit zeroDigit neg) = pairStabiliserS2
+patternStabiliser (triad zeroDigit neg zeroDigit) = pairStabiliserS2
+patternStabiliser (triad neg zeroDigit zeroDigit) = pairStabiliserS2
+patternStabiliser (triad zeroDigit zeroDigit pos) = pairStabiliserS2
+patternStabiliser (triad zeroDigit pos zeroDigit) = pairStabiliserS2
+patternStabiliser (triad pos zeroDigit zeroDigit) = pairStabiliserS2
+
+patternStabiliser (triad pos pos neg) = pairStabiliserS2
+patternStabiliser (triad pos neg pos) = pairStabiliserS2
+patternStabiliser (triad neg pos pos) = pairStabiliserS2
+patternStabiliser (triad pos pos zeroDigit) = pairStabiliserS2
+patternStabiliser (triad pos zeroDigit pos) = pairStabiliserS2
+patternStabiliser (triad zeroDigit pos pos) = pairStabiliserS2
+
 patternStabiliser _ = trivialStabiliser
 
 stage3PatternHasS3 : patternStabiliser allPositive ≡ fullStabiliserS3
 stage3PatternHasS3 = refl
+
+allOpenPatternHasS3 : patternStabiliser allOpen ≡ fullStabiliserS3
+allOpenPatternHasS3 = refl
 
 stage2PatternHasS2 :
   patternStabiliser twoPositiveOneOpen ≡ pairStabiliserS2
@@ -208,6 +236,10 @@ thirdCoordinateCounterposition = triad pos pos neg
 allPositiveStrictInverse : strictInverse allPositive ≡ allNegative
 allPositiveStrictInverse = refl
 
+counterpositionPatternHasS2 :
+  patternStabiliser thirdCoordinateCounterposition ≡ pairStabiliserS2
+counterpositionPatternHasS2 = refl
+
 counterpositionNeedNotBeInverse :
   thirdCoordinateCounterposition ≡ strictInverse allPositive → ⊥
 counterpositionNeedNotBeInverse ()
@@ -246,12 +278,35 @@ sixClosureProfile : ClosureProfile369
 sixClosureProfile = closureProfile369 6 2 0 refl 0 refl 3 refl
 
 ------------------------------------------------------------------------
--- Balanced-ternary addresses form a retained radix tree.
+-- Balanced-ternary addresses form a retained radix tree.  The decoder stores
+-- positive and negative positional weights separately, avoiding truncated
+-- natural subtraction.
 ------------------------------------------------------------------------
 
 appendDigits : List BalancedDigit → List BalancedDigit → List BalancedDigit
 appendDigits [] ys = ys
 appendDigits (x ∷ xs) ys = x ∷ appendDigits xs ys
+
+digitListLength : List BalancedDigit → Nat
+digitListLength [] = 0
+digitListLength (_ ∷ xs) = 1 + digitListLength xs
+
+positiveDigitWeight : BalancedDigit → Nat
+positiveDigitWeight neg = 0
+positiveDigitWeight zeroDigit = 0
+positiveDigitWeight pos = 1
+
+negativeDigitWeight : BalancedDigit → Nat
+negativeDigitWeight neg = 1
+negativeDigitWeight zeroDigit = 0
+negativeDigitWeight pos = 0
+
+addressWeights : List BalancedDigit → Nat × Nat
+addressWeights [] = 0 , 0
+addressWeights (digit ∷ digits) with addressWeights digits
+... | positiveWeight , negativeWeight =
+  positiveDigitWeight digit * (3 ^ digitListLength digits) + positiveWeight ,
+  negativeDigitWeight digit * (3 ^ digitListLength digits) + negativeWeight
 
 record BalancedTernaryAddress : Set where
   constructor balancedTernaryAddress
@@ -262,14 +317,16 @@ record BalancedTernaryAddress : Set where
     promotedWeight : Nat
     denominatorClearedEquation :
       representedValue + balancingDebt ≡ promotedWeight
+    decodedWeightsExact :
+      addressWeights digitsHighToLow ≡ promotedWeight , balancingDebt
 
 fiveBalancedAddress : BalancedTernaryAddress
 fiveBalancedAddress =
-  balancedTernaryAddress (pos ∷ neg ∷ neg ∷ []) 5 4 9 refl
+  balancedTernaryAddress (pos ∷ neg ∷ neg ∷ []) 5 4 9 refl refl
 
 sixBalancedAddress : BalancedTernaryAddress
 sixBalancedAddress =
-  balancedTernaryAddress (pos ∷ neg ∷ zeroDigit ∷ []) 6 3 9 refl
+  balancedTernaryAddress (pos ∷ neg ∷ zeroDigit ∷ []) 6 3 9 refl refl
 
 record SharedPrefixWitness
   (left right : BalancedTernaryAddress) : Set where
@@ -283,12 +340,13 @@ record SharedPrefixWitness
       appendDigits prefix rightSuffix ≡
       BalancedTernaryAddress.digitsHighToLow right
     prefixDepth : Nat
+    prefixDepthExact : prefixDepth ≡ digitListLength prefix
 
 fiveSixSharedPrefix :
   SharedPrefixWitness fiveBalancedAddress sixBalancedAddress
 fiveSixSharedPrefix =
   sharedPrefixWitness
-    (pos ∷ neg ∷ []) (neg ∷ []) (zeroDigit ∷ []) refl refl 2
+    (pos ∷ neg ∷ []) (neg ∷ []) (zeroDigit ∷ []) refl refl 2 refl
 
 ------------------------------------------------------------------------
 -- Exact arithmetic candidates retained at the foundation boundary.  Domain-
@@ -320,6 +378,8 @@ record DepthTwoResidueAuthorityBoundary : Set where
   field
     residueEquationExact : Bool
     residueEquationExactIsTrue : residueEquationExact ≡ true
+    moonshineEquationWitness : 2430 * 81 + 54 ≡ 196884
+    constituentEquationWitness : 2430 * 81 + 53 ≡ 196883
     independentEvidenceForTenTimesThreePowerNine : Bool
     independentEvidenceForTenTimesThreePowerNineIsFalse :
       independentEvidenceForTenTimesThreePowerNine ≡ false
@@ -330,4 +390,9 @@ record DepthTwoResidueAuthorityBoundary : Set where
 canonicalDepthTwoResidueAuthorityBoundary :
   DepthTwoResidueAuthorityBoundary
 canonicalDepthTwoResidueAuthorityBoundary =
-  depthTwoResidueAuthorityBoundary true refl false refl false refl
+  depthTwoResidueAuthorityBoundary
+    true refl
+    moonshineCoefficientDepthTwoEquation
+    monsterConstituentDepthTwoEquation
+    false refl
+    false refl
