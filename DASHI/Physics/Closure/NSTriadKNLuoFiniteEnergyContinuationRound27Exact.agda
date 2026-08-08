@@ -25,8 +25,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoFiniteEnergyContinuationRound27Exact wh
 -- hypothesis.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (Σ; _,_; _×_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _≤_)
 
@@ -96,17 +96,13 @@ energyControlledFiniteContinuation trajectory rule time =
 record FiniteEnergyContinuationBoundary : Set where
   constructor finite-energy-continuation-boundary
   field
-    energyIdentityConnectedToContinuationHypothesis :
-      Agda.Builtin.Bool.Bool
+    energyIdentityConnectedToContinuationHypothesis : Bool
     energyIdentityConnectedToContinuationHypothesisIsTrue :
-      energyIdentityConnectedToContinuationHypothesis
-      ≡ Agda.Builtin.Bool.true
-    repositoryRealPicardLindelofInstantiated : Agda.Builtin.Bool.Bool
+      energyIdentityConnectedToContinuationHypothesis ≡ true
+    repositoryRealPicardLindelofInstantiated : Bool
     repositoryRealPicardLindelofInstantiatedIsFalse :
-      repositoryRealPicardLindelofInstantiated
-      ≡ Agda.Builtin.Bool.false
+      repositoryRealPicardLindelofInstantiated ≡ false
 
 canonicalFiniteEnergyContinuationBoundary : FiniteEnergyContinuationBoundary
 canonicalFiniteEnergyContinuationBoundary =
-  finite-energy-continuation-boundary
-    Agda.Builtin.Bool.true refl Agda.Builtin.Bool.false refl
+  finite-energy-continuation-boundary true refl false refl
