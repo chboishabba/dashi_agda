@@ -20,6 +20,7 @@ on:
       - 'DASHI/Biology/SSP15PrimeValuedStateExact.agda'
       - 'DASHI/Biology/SSP15JCoarseFineRound3Validation.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotEverything.agda'
+      - 'DASHI/EverythingSSP15JCoarseFineRound3.agda'
       - 'Docs/support/reference/SSP15JCoarseFineRound3.md'
       - 'scripts/check_ssp15_j_coarse_fine_round3.sh'
       - '.github/workflows/ssp15-j-coarse-fine-round3.yml'
