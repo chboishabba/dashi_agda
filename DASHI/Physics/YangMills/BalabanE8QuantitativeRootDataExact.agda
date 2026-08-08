@@ -14,15 +14,17 @@ module DASHI.Physics.YangMills.BalabanE8QuantitativeRootDataExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Connect the repository's concrete E8 root-enumeration counts to the compact
--- simple classification numerics actually needed by the all-group Yang--Mills
--- gate.  The two explicit root families have sizes 112 and 128, hence 240;
--- rank plus root count gives the adjoint dimension 248; and the existing
--- classification gives dual Coxeter number 30.
+-- Connect the repository's E8 *expected-count targets* to the compact-simple
+-- classification numerics needed by the all-group Yang--Mills gate.  The
+-- configured doubled-coordinate targets are 112 and 128, whose arithmetic sum
+-- is 240.  The classification carrier gives rank 8, adjoint dimension 248 and
+-- dual Coxeter number 30, so rank plus the expected root count equals 248.
 --
--- This is quantitative root-data arithmetic.  It does not construct the
--- compact real form, Haar measure, BCH constants, injectivity radius or an E8
--- selected-background/RG theorem.
+-- The upstream E8 enumeration module explicitly leaves the root lists,
+-- membership, duplicate freedom and cardinality proofs open.  Accordingly this
+-- module proves only exact target arithmetic and classification compatibility;
+-- it does not claim a constructive 240-root enumeration or compact E8 group
+-- construction.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
@@ -33,14 +35,14 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Algebra.Trit.E8RootEnumeration as Roots
 import DASHI.Physics.YangMills.CompactSimpleClassification as Classification
 
-e8IntegerRootCount : Nat
-e8IntegerRootCount = Roots.expectedIntegerRootCount
+e8ExpectedIntegerRootCount : Nat
+e8ExpectedIntegerRootCount = Roots.expectedIntegerRootCount
 
-e8HalfRootCount : Nat
-e8HalfRootCount = Roots.expectedHalfRootCount
+e8ExpectedHalfRootCount : Nat
+e8ExpectedHalfRootCount = Roots.expectedHalfRootCount
 
-e8RootCount : Nat
-e8RootCount = Roots.expectedTotalRootCount
+e8ExpectedTotalRootCount : Nat
+e8ExpectedTotalRootCount = Roots.expectedTotalRootCount
 
 e8Rank : Nat
 e8Rank = Classification.rank Classification.E8
@@ -51,15 +53,18 @@ e8AdjointDimension = Classification.dimension Classification.E8
 e8DualCoxeterNumber : Nat
 e8DualCoxeterNumber = Classification.dualCoxeter Classification.E8
 
-e8IntegerRootCountIs112 : e8IntegerRootCount ≡ 112
-e8IntegerRootCountIs112 = refl
+e8ExpectedIntegerRootCountIs112 :
+  e8ExpectedIntegerRootCount ≡ 112
+e8ExpectedIntegerRootCountIs112 = refl
 
-e8HalfRootCountIs128 : e8HalfRootCount ≡ 128
-e8HalfRootCountIs128 = refl
+e8ExpectedHalfRootCountIs128 :
+  e8ExpectedHalfRootCount ≡ 128
+e8ExpectedHalfRootCountIs128 = refl
 
-e8RootFamiliesSumTo240 :
-  e8IntegerRootCount + e8HalfRootCount ≡ e8RootCount
-e8RootFamiliesSumTo240 = refl
+e8ExpectedFamiliesSumTo240 :
+  e8ExpectedIntegerRootCount + e8ExpectedHalfRootCount
+  ≡ e8ExpectedTotalRootCount
+e8ExpectedFamiliesSumTo240 = refl
 
 e8RankIsEight : e8Rank ≡ 8
 e8RankIsEight = refl
@@ -70,43 +75,47 @@ e8AdjointDimensionIs248 = refl
 e8DualCoxeterNumberIs30 : e8DualCoxeterNumber ≡ 30
 e8DualCoxeterNumberIs30 = refl
 
-e8RankPlusRootsIsAdjointDimension :
-  e8Rank + e8RootCount ≡ e8AdjointDimension
-e8RankPlusRootsIsAdjointDimension = refl
+e8RankPlusExpectedRootsIsAdjointDimension :
+  e8Rank + e8ExpectedTotalRootCount ≡ e8AdjointDimension
+e8RankPlusExpectedRootsIsAdjointDimension = refl
 
-record E8QuantitativeRootData : Set where
-  constructor e8QuantitativeRootData
+record E8QuantitativeCountTarget : Set where
+  constructor e8QuantitativeCountTarget
   field
     rankValue : Nat
-    integerFamilySize : Nat
-    halfFamilySize : Nat
-    totalRootSize : Nat
+    expectedIntegerFamilySize : Nat
+    expectedHalfFamilySize : Nat
+    expectedTotalRootSize : Nat
     adjointDimensionValue : Nat
     dualCoxeterValue : Nat
 
-    integerPlusHalfIsTotal :
-      integerFamilySize + halfFamilySize ≡ totalRootSize
+    expectedIntegerPlusHalfIsTotal :
+      expectedIntegerFamilySize + expectedHalfFamilySize
+      ≡ expectedTotalRootSize
 
-    rankPlusRootsIsDimension :
-      rankValue + totalRootSize ≡ adjointDimensionValue
+    rankPlusExpectedRootsIsDimension :
+      rankValue + expectedTotalRootSize ≡ adjointDimensionValue
 
-open E8QuantitativeRootData public
+open E8QuantitativeCountTarget public
 
-canonicalE8QuantitativeRootData : E8QuantitativeRootData
-canonicalE8QuantitativeRootData =
-  e8QuantitativeRootData
+canonicalE8QuantitativeCountTarget : E8QuantitativeCountTarget
+canonicalE8QuantitativeCountTarget =
+  e8QuantitativeCountTarget
     e8Rank
-    e8IntegerRootCount
-    e8HalfRootCount
-    e8RootCount
+    e8ExpectedIntegerRootCount
+    e8ExpectedHalfRootCount
+    e8ExpectedTotalRootCount
     e8AdjointDimension
     e8DualCoxeterNumber
-    e8RootFamiliesSumTo240
-    e8RankPlusRootsIsAdjointDimension
+    e8ExpectedFamiliesSumTo240
+    e8RankPlusExpectedRootsIsAdjointDimension
 
-record E8CompactGroupAnalyticBoundary : Set where
-  constructor e8CompactGroupAnalyticBoundary
+record E8ConstructionBoundary : Set where
+  constructor e8ConstructionBoundary
   field
+    constructiveRootEnumerationProved : Bool
+    duplicateFreedomProved : Bool
+    rootCardinality240Proved : Bool
     compactRealFormConstructed : Bool
     haarMeasureConstructed : Bool
     principalChartRadiusConstructed : Bool
@@ -114,13 +123,16 @@ record E8CompactGroupAnalyticBoundary : Set where
     selectedBackgroundTheoryConstructed : Bool
     allScaleRGConstructed : Bool
 
-canonicalE8CompactGroupAnalyticBoundary : E8CompactGroupAnalyticBoundary
-canonicalE8CompactGroupAnalyticBoundary =
-  e8CompactGroupAnalyticBoundary
-    false false false false false false
+canonicalE8ConstructionBoundary : E8ConstructionBoundary
+canonicalE8ConstructionBoundary =
+  e8ConstructionBoundary
+    false false false false false false false false false
 
-e8QuantitativeRootDataLevel : ProofLevel
-e8QuantitativeRootDataLevel = machineChecked
+e8ExpectedCountArithmeticLevel : ProofLevel
+e8ExpectedCountArithmeticLevel = machineChecked
+
+e8ConstructiveRootEnumerationLevel : ProofLevel
+e8ConstructiveRootEnumerationLevel = conditional
 
 e8CompactGroupAnalyticDataLevel : ProofLevel
 e8CompactGroupAnalyticDataLevel = conditional
