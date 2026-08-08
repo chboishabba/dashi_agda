@@ -125,6 +125,11 @@ translationMultiplierCommutatorExact multiplier shift state output =
 zeroQ : ℚ
 zeroQ = Int.+ 0 / 1
 
+appendModes :
+  List Z3.FourierMode → List Z3.FourierMode → List Z3.FourierMode
+appendModes [] right = right
+appendModes (mode ∷ rest) right = mode ∷ appendModes rest right
+
 finitePairing :
   List Z3.FourierMode →
   MultiplierDualCarrier → FourierStateCarrier → ℚ
@@ -137,13 +142,9 @@ finitePairingAppend :
   (left right : List Z3.FourierMode) →
   (multiplier : MultiplierDualCarrier) →
   (state : FourierStateCarrier) →
-  finitePairing (append left right) multiplier state
+  finitePairing (appendModes left right) multiplier state
   ≡ finitePairing left multiplier state
     + finitePairing right multiplier state
-  where
-  append : List Z3.FourierMode → List Z3.FourierMode → List Z3.FourierMode
-  append [] right = right
-  append (mode ∷ rest) right = mode ∷ append rest right
 finitePairingAppend [] right multiplier state = solve []
 finitePairingAppend (mode ∷ rest) right multiplier state
   rewrite finitePairingAppend rest right multiplier state =
