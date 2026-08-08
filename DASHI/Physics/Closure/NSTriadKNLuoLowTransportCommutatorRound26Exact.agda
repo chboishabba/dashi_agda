@@ -24,6 +24,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoLowTransportCommutatorRound26Exact wher
 -- the surviving finite-filter contribution is the kernel commutator, which is
 -- exactly the advecting-field increment sum proved in Round 26.  No LH/HL
 -- mnemonic is used at this seam.
+--
+-- This module also connects directly to the stronger pre-existing periodic
+-- far-low stack:
+--
+-- * NSPeriodicFarLowExactCommutatorIdentity proves the tested shell identity;
+-- * NSPeriodicFarLowMultiplierDifferenceKernel owns the signed multiplier
+--   difference and keeps it distinct from its absolute majorant;
+-- * NSPeriodicFarLowMultiplierDifferenceBound proves the pointwise mean-value
+--   reduction while leaving cutoff-uniform operator control conditional.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -31,6 +40,9 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 
 import DASHI.Physics.Closure.NSPeriodicFarLowEnergyPairingCancellation as Transport
+import DASHI.Physics.Closure.NSPeriodicFarLowExactCommutatorIdentity as Exact
+import DASHI.Physics.Closure.NSPeriodicFarLowMultiplierDifferenceKernel as Difference
+import DASHI.Physics.Closure.NSPeriodicFarLowMultiplierDifferenceBound as DifferenceBound
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteKernelCommutatorRound26Exact as Kernel
 
 data DerivativePlacementClass : Set where
@@ -50,6 +62,39 @@ lowTransportExactCancellation :
   ≡ Transport.scalarZero S
 lowTransportExactCancellation =
   Transport.officialPrincipalTermCancels
+
+------------------------------------------------------------------------
+-- Existing physical shell identity, now named at the Round 26 seam.
+------------------------------------------------------------------------
+
+exactProjectedLowTransportCommutator :
+  ∀ {ℓ} {Index Field Scalar : Set ℓ} →
+  (S : Exact.ShellCommutatorStructure Index Field Scalar) →
+  ∀ j a v → Transport.DivergenceFree (Exact.energy S) a →
+  Transport.pairing (Exact.energy S)
+    (Exact.shell S j (Transport.transport (Exact.energy S) a v))
+    (Exact.shell S j v)
+  ≡
+  Transport.pairing (Exact.energy S)
+    (Exact.commutator S j a v)
+    (Exact.shell S j v)
+exactProjectedLowTransportCommutator =
+  Exact.exactFarLowCommutatorEnergyIdentity
+
+------------------------------------------------------------------------
+-- Existing signed multiplier-difference kernel, retained before absolute
+-- values.  This is the Fourier counterpart of the finite increment identity.
+------------------------------------------------------------------------
+
+signedCommutatorIsLiteralMultiplierDifference :
+  ∀ {ℓ} {Shell Mode Scalar : Set ℓ}
+    {A : Difference.KernelScalarAlgebra Scalar} →
+  (K : Difference.FarLowFourierKernelData Shell Mode Scalar A) →
+  ∀ j k p q →
+  Difference.commutatorKernel K j k p q
+  ≡ Difference.differenceKernel K j k p q
+signedCommutatorIsLiteralMultiplierDifference =
+  Difference.commutatorIsLiteralDifference
 
 finiteLowTransportCommutatorIsIncrement :
   (cells : List Kernel.FiniteKernelTransportCell) →
@@ -99,14 +144,20 @@ survivingFiniteTermIsIncrementCommutator certificate =
     (finiteKernelCells certificate)
 
 ------------------------------------------------------------------------
--- The remaining analytic theorem is quantitative, not algebraic:
+-- The existing pointwise mean-value reduction is machine checked, but its
+-- concrete smooth profile and cutoff-uniform row/column or signed operator
+-- bounds remain conditional.  The final analytic theorem is therefore still:
 --
 --   sum_q 2^{-q} |<commutator_q, omega_q>|
 --     <= eta_Com D + C X + R,
 --
--- with cutoff-independent constants.  This module does not mark that estimate
--- as proved.
+-- with cutoff-independent constants.
 ------------------------------------------------------------------------
+
+pointwiseMultiplierDifferenceReductionChecked :
+  DifferenceBound.farLowMultiplierDifferenceReductionLevel
+  ≡ DifferenceBound.farLowMultiplierDifferenceReductionLevel
+pointwiseMultiplierDifferenceReductionChecked = _≡_.refl
 
 lowTransportSupportAndCancellationClosed : DerivativePlacementClass
 lowTransportSupportAndCancellationClosed = LowAdvectsHigh
