@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNFeffermanPeriodicClayStatementExact as Clay
 import DASHI.Physics.Closure.NSTriadKNLuoClayEndToEndCompositionRound23Exact as EndToEnd
@@ -122,8 +123,28 @@ record HighestAlphaRound24AuthorityBoundary : Set where
     allPhysicalProducersInhabited : Bool
     unconditionalClayTheoremPromoted : Bool
 
+open HighestAlphaRound24AuthorityBoundary public
+
 canonicalHighestAlphaRound24AuthorityBoundary :
   HighestAlphaRound24AuthorityBoundary
 canonicalHighestAlphaRound24AuthorityBoundary =
   highestAlphaRound24AuthorityBoundary
     true true true false false false
+
+claimedPaperCorpusCannotSupplyAuthorityWithoutAudit :
+  claimedPaperCorpusCanSupplyAuthorityWithoutAudit
+    canonicalHighestAlphaRound24AuthorityBoundary
+  ≡ false
+claimedPaperCorpusCannotSupplyAuthorityWithoutAudit = refl
+
+highestAlphaPhysicalProducersRemainOpen :
+  allPhysicalProducersInhabited
+    canonicalHighestAlphaRound24AuthorityBoundary
+  ≡ false
+highestAlphaPhysicalProducersRemainOpen = refl
+
+highestAlphaUnconditionalClayPromotionRemainsFalse :
+  unconditionalClayTheoremPromoted
+    canonicalHighestAlphaRound24AuthorityBoundary
+  ≡ false
+highestAlphaUnconditionalClayPromotionRemainsFalse = refl
