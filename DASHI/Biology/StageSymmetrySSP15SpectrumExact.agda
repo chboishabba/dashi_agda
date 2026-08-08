@@ -27,10 +27,6 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 -- Richard E. Borcherds, Monstrous Moonshine and Monstrous Lie
 -- Superalgebras, Inventiones Mathematicae 109 (1992), 405-444,
 -- DOI 10.1007/BF01232032.
---
--- These sources ground the Monster/supersingular-prime and moonshine
--- scaffolding.  They do not supply the DASHI frame, Tarot, MDL, residual, or
--- valuation semantics defined below.
 ------------------------------------------------------------------------
 
 data OrbitType : Set where
@@ -70,11 +66,6 @@ open RichSymmetryLaneReading public
 RichSSP15Signature : Set
 RichSSP15Signature = Base.OggPrimeLane → RichSymmetryLaneReading
 
-------------------------------------------------------------------------
--- The same local Stage-3 closure can have different multiscale signatures.
--- A locally coherent frame is therefore not identified with its SSP profile.
-------------------------------------------------------------------------
-
 localOnlyStageThreeSignature : RichSSP15Signature
 localOnlyStageThreeSignature Lane.p71 =
   richSymmetryLaneReading
@@ -108,12 +99,6 @@ signaturesDifferAtP71 :
   → ⊥
 signaturesDifferAtP71 ()
 
-------------------------------------------------------------------------
--- Stage 5 retains the S3/S2 constituent mismatch at every lane.  The rich
--- signature adds amplitude, orbit, visibility, transport, depth, residual,
--- and orientation to the earlier minimal lane receipt.
-------------------------------------------------------------------------
-
 stageFiveRichSignature : RichSSP15Signature
 stageFiveRichSignature p =
   richSymmetryLaneReading
@@ -129,11 +114,6 @@ stageFiveP3RetainsPairSymmetry = refl
 stageFiveP3RetainsResidualTwo :
   residualCode (stageFiveRichSignature Lane.p3) ≡ 2
 stageFiveP3RetainsResidualTwo = refl
-
-------------------------------------------------------------------------
--- Prime-specific refinement.  The local Stage-5 pattern may remain common,
--- but the nonary address and observer kind are now retained lane by lane.
-------------------------------------------------------------------------
 
 record PrimeSpecificRichSymmetryLaneReading
     (prime : Base.OggPrimeLane) : Set where
@@ -153,6 +133,18 @@ primeSpecificStageFiveSpectrum prime =
     (stageFiveRichSignature prime)
     refl
     (Base.canonicalPrimeSpecificSSP15 prime)
+
+primeSpecificSpectrumAddressReconstructs :
+  (prime : Base.OggPrimeLane) →
+  Base.oggPrimeLaneValue prime
+  ≡ Address.coarseSheets
+      (Base.nonaryAddress
+        (primeSpecificReading (primeSpecificStageFiveSpectrum prime))) * 9
+    + Address.remainder
+      (Base.nonaryAddress
+        (primeSpecificReading (primeSpecificStageFiveSpectrum prime)))
+primeSpecificSpectrumAddressReconstructs prime =
+  Base.primeSpecificAddressReconstructsLane prime
 
 p2FineRemainderIsTwo :
   Address.remainder
@@ -185,24 +177,36 @@ p3UsesTriadicClosureMode :
 p3UsesTriadicClosureMode = refl
 
 ------------------------------------------------------------------------
--- Ogg/Monster authority boundary.  Prime lanes and Monster conjugacy-class
--- lanes are different indices.  In particular, the statement that every
--- Monster element of prime order p has the same Gamma_0(p)^+ Hauptmodul is not
--- promoted: a class-sensitive Fricke/Hauptmodul witness is required.
+-- Positive status is represented by producers; unresolved promotions remain
+-- explicit false boundaries.
 ------------------------------------------------------------------------
 
-record OggSpectrumAuthorityBoundary : Set where
+record OggSpectrumAuthorityBoundary : Set₁ where
   constructor oggSpectrumAuthorityBoundary
   field
-    existingFifteenPrimeCarrierReused : Bool
-    existingFifteenPrimeCarrierReusedIsTrue :
-      existingFifteenPrimeCarrierReused ≡ true
-    richSymmetryResolutionSpectrumConstructed : Bool
-    richSymmetryResolutionSpectrumConstructedIsTrue :
-      richSymmetryResolutionSpectrumConstructed ≡ true
-    primeSpecificNonarySpectrumConstructed : Bool
-    primeSpecificNonarySpectrumConstructedIsTrue :
-      primeSpecificNonarySpectrumConstructed ≡ true
+    existingFifteenPrimeCarrierCount :
+      Base.countList Base.allOggPrimeLanes ≡ 15
+    everyRichStageFiveReadingUsesItsPrime :
+      (prime : Base.OggPrimeLane) →
+      primeLane (stageFiveRichSignature prime) ≡ prime
+    everyPrimeSpecificSpectrumAddressReconstructs :
+      (prime : Base.OggPrimeLane) →
+      Base.oggPrimeLaneValue prime
+      ≡ Address.coarseSheets
+          (Base.nonaryAddress
+            (primeSpecificReading (primeSpecificStageFiveSpectrum prime))) * 9
+        + Address.remainder
+          (Base.nonaryAddress
+            (primeSpecificReading (primeSpecificStageFiveSpectrum prime)))
+    p2AndP71FineRemaindersAreDistinct :
+      Address.remainder
+        (Base.nonaryAddress
+          (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p2)))
+      ≡
+      Address.remainder
+        (Base.nonaryAddress
+          (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p71)))
+      → ⊥
     sspSignatureIdentifiedWithFrame : Bool
     sspSignatureIdentifiedWithFrameIsFalse :
       sspSignatureIdentifiedWithFrame ≡ false
@@ -222,9 +226,10 @@ record OggSpectrumAuthorityBoundary : Set where
 canonicalOggSpectrumAuthorityBoundary : OggSpectrumAuthorityBoundary
 canonicalOggSpectrumAuthorityBoundary =
   oggSpectrumAuthorityBoundary
-    true refl
-    true refl
-    true refl
+    Base.oggPrimeLaneCountIsFifteen
+    (λ prime → refl)
+    primeSpecificSpectrumAddressReconstructs
+    p2AndP71HaveDifferentFineRemainders
     false refl
     false refl
     false refl
