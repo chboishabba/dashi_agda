@@ -16,14 +16,13 @@ module DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationalChartBridgeEx
 --
 -- DASHI CONTRIBUTION
 --
--- Compose the repository's source-faithful Bałaban variational theorem with
--- its SU(2) principal-log chart.  Once the physical bond deviation is
--- identified with the chart defect, the two order conventions are identified,
--- and the published source upper bound lies below the selected chart radius,
--- every selected background bond is admitted to the principal branch.
+-- Compose the source-faithful variational background theorem with the
+-- repository's SU(2) principal-log chart.  The genuinely physical seams are
+-- exposed as equalities of the source and chart order/defect conventions plus
+-- one scalar cut comparison.  No selected-background witness is invented.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact as Variational
@@ -60,8 +59,7 @@ record SelectedBackgroundVariationalChartBridge
 
     selectedBondGroup :
       (coarse : CoarseField) →
-      Variational.CoarseSmallField variational coarse →
-      Bond → Group
+      Variational.CoarseSmallField variational coarse → Bond → Group
 
     defectMatchesPublishedBondDeviation :
       ∀ coarse small bond →
@@ -83,9 +81,9 @@ record SelectedBackgroundVariationalChartBridge
         (sourceFineBondUpper variational)
         (Path.chartRadius cutData)
 
-    admissibleIsPrincipalImage : ∀ group →
-      Path.PrincipalLogAdmissible cutData group
-      ≡ Log.InPrincipalImage principalChart group
+    admissibleIsPrincipalImage :
+      Path.PrincipalLogAdmissible cutData
+      ≡ Log.InPrincipalImage principalChart
 
 open SelectedBackgroundVariationalChartBridge public
 
@@ -95,8 +93,7 @@ selectedBackground :
       CoarseField FineField Bond Lie Group Bound)
     (coarse : CoarseField) →
   Variational.CoarseSmallField (variational bridge) coarse → FineField
-selectedBackground bridge =
-  Variational.background (variational bridge)
+selectedBackground bridge = Variational.background (variational bridge)
 
 selectedBackgroundSatisfiesConstraint :
   ∀ {CoarseField FineField Bond Lie Group Bound}
@@ -155,12 +152,11 @@ selectedBackgroundBondDefectBelowChart bridge coarse small bond =
 
     sourceBoundInChartOrder :
       Scale.LessEqual (Path.scale (defectAlgebra bridge))
-        deviation
-        (sourceFineBondUpper (variational bridge))
+        deviation (sourceFineBondUpper (variational bridge))
     sourceBoundInChartOrder =
       subst
-        (λ relation →
-          relation deviation (sourceFineBondUpper (variational bridge)))
+        (λ relation → relation deviation
+          (sourceFineBondUpper (variational bridge)))
         (variationalOrderIsChartOrder bridge)
         sourceBound
 
@@ -179,8 +175,7 @@ selectedBackgroundBondDefectBelowChart bridge coarse small bond =
         sourceBoundInChartOrder
   in
   Scale.transitive (Path.scale (defectAlgebra bridge))
-    defectBound
-    (publishedUpperBelowChartRadius bridge)
+    defectBound (publishedUpperBelowChartRadius bridge)
 
 selectedBackgroundBondPrincipalAdmissible :
   ∀ {CoarseField FineField Bond Lie Group Bound}
@@ -199,29 +194,27 @@ selectedBackgroundBondPrincipalAdmissible bridge coarse small bond =
         (Path.chartRadius (cutData bridge))
     cutBound =
       subst
-        (λ selectedAlgebra →
-          Scale.LessEqual (Path.scale selectedAlgebra)
-            (Path.defect selectedAlgebra
+        (λ algebra →
+          Scale.LessEqual (Path.scale algebra)
+            (Path.defect algebra
               (selectedBondGroup bridge coarse small bond))
             (Path.chartRadius (cutData bridge)))
         (sym (sameDefectAlgebra bridge))
         (selectedBackgroundBondDefectBelowChart
           bridge coarse small bond)
 
-    admissible :
+    admitted :
       Path.PrincipalLogAdmissible (cutData bridge)
         (selectedBondGroup bridge coarse small bond)
-    admissible =
+    admitted =
       Path.defectBelowRadiusImpliesAdmissible (cutData bridge)
-        (selectedBondGroup bridge coarse small bond)
-        cutBound
+        (selectedBondGroup bridge coarse small bond) cutBound
   in
   subst
-    (λ predicate →
-      predicate (selectedBondGroup bridge coarse small bond))
-    (admissibleIsPrincipalImage bridge
+    (λ predicate → predicate
       (selectedBondGroup bridge coarse small bond))
-    admissible
+    (admissibleIsPrincipalImage bridge)
+    admitted
 
 selectedBackgroundInverseLogOrientation :
   ∀ {CoarseField FineField Bond Lie Group Bound}
