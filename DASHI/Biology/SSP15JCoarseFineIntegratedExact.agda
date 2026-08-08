@@ -27,6 +27,7 @@ open import Data.Nat using (_+_; _*_)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.JCoarseFineEvaluationFibreExact as J
+import DASHI.Biology.JFineCoarseRelativeScaleExact as Scale
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Biology.OggPrimeNonaryAddressExact as Address
 import DASHI.Biology.SSP15ComplementPhaseProjectorExact as Internal
@@ -42,9 +43,9 @@ record PrimeSpecificSSP15Reading
     jCoarseScale : Nat
     jFineScale : Nat
     jAbsoluteScale : Nat
-    jCoarseScaleExact : jCoarseScale ≡ 9
-    jFineScaleExact : jFineScale ≡ 19683
-    jAbsoluteScaleExact : jAbsoluteScale ≡ 177147
+    jCoarseScaleExact : jCoarseScale ≡ Scale.jCoarseFrequency
+    jFineScaleExact : jFineScale ≡ Scale.jFineFrequency
+    jAbsoluteScaleExact : jAbsoluteScale ≡ Scale.jAbsoluteFineFrequency
     jAbsoluteFactors : jAbsoluteScale ≡ jCoarseScale * jFineScale
     finiteJEvaluation : J.PointedCoarseFineEvaluation
 
@@ -56,7 +57,11 @@ primeSpecificSSP15Reading prime =
   prime-specific-ssp15-reading
     (Address.nonaryOggAddress prime)
     (Atlas.ssp15NineAtlas prime)
-    9 19683 177147 refl refl refl refl
+    Scale.jCoarseFrequency
+    Scale.jFineFrequency
+    Scale.jAbsoluteFineFrequency
+    refl refl refl
+    Scale.jAbsoluteFineIsCoarseTimesJFine
     J.canonicalJCoarseFineEvaluation
 
 primeSpecificAddressReconstructsValue :
