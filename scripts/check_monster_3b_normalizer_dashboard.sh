@@ -39,9 +39,15 @@ payload = json.loads(Path(
     "build/monster_3b_dashboard/elementary_abelian_two_plane_certificate.json"
 ).read_text())
 assert payload == {
-    "isotropic_two_plane_count": 3640,
-    "symplectic_two_plane_count": 7371,
-    "two_plane_count": 11011,
+    "central_lift_order": 27,
+    "central_lift_rank": 3,
+    "fixed_lagrangian_two_plane_count": 11011,
+    "full_isotropic_two_plane_count": 1961279320,
+    "full_nonisotropic_two_plane_count": 3922625070,
+    "full_symplectic_two_plane_count": 5883904390,
+    "regular_character_multiplicity": 81,
+    "represented_dimension": 729,
+    "translation_character_count": 9,
 }
 PY
 
