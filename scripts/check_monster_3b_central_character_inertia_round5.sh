@@ -9,6 +9,7 @@ bash scripts/check_monster_3b_orbifold_local_module_round4.sh
 sources=(
   DASHI/Moonshine/Monster3BCentralCharacterInertiaExact.agda
   DASHI/Moonshine/MonsterOggNonaryProbeAuthorityExact.agda
+  DASHI/Moonshine/MonsterOggNonarySevenSevenOneEquivalenceExact.agda
   DASHI/Moonshine/Monster3BActualZetaPromotionPipelineExact.agda
   DASHI/Moonshine/Monster3BMultiplicityTwelveSeventyEightRecognitionExact.agda
   DASHI/Moonshine/Monster3BCentralCharacterInertiaRound5Validation.agda
@@ -43,6 +44,7 @@ require_pattern() {
 
 inertia=DASHI/Moonshine/Monster3BCentralCharacterInertiaExact.agda
 probe=DASHI/Moonshine/MonsterOggNonaryProbeAuthorityExact.agda
+partition=DASHI/Moonshine/MonsterOggNonarySevenSevenOneEquivalenceExact.agda
 pipeline=DASHI/Moonshine/Monster3BActualZetaPromotionPipelineExact.agda
 split=DASHI/Moonshine/Monster3BMultiplicityTwelveSeventyEightRecognitionExact.agda
 validation=DASHI/Moonshine/Monster3BCentralCharacterInertiaRound5Validation.agda
@@ -100,7 +102,7 @@ require_pattern "$probe" 'sevenAFirstPositiveCoefficientIs51'
 require_pattern "$probe" 'sevenASecondPositiveCoefficientIs204'
 require_pattern "$probe" 'seventyOneDeficitMatchesUnnormalizedSevenAConstant'
 
-# Exact semantic 7+7+1 carrier partition.
+# Semantic 7+7+1 data and exact carrier equivalence.
 require_pattern "$probe" 'MirrorA7Lane'
 require_pattern "$probe" 'MirrorB7Lane'
 require_pattern "$probe" 'Sign1Lane'
@@ -112,6 +114,15 @@ require_pattern "$probe" 'mirrorA7BelowSeventhCoarseSheet'
 require_pattern "$probe" 'mirrorB7BelowSeventhCoarseSheet'
 require_pattern "$probe" 'sign1CoarseSheetIsSeven'
 require_pattern "$probe" 'sign1FineResidueIsEight'
+require_pattern "$partition" 'SemanticSevenSevenOneLane'
+require_pattern "$partition" 'classifyOggLane'
+require_pattern "$partition" 'forgetSevenSevenOneLane'
+require_pattern "$partition" 'forgetAfterClassify'
+require_pattern "$partition" 'classifyAfterForget'
+require_pattern "$partition" 'SevenSevenOneCarrierEquivalence'
+require_pattern "$partition" 'canonicalSevenSevenOneCarrierEquivalence'
+require_pattern "$partition" 'coarseSheetSevenUniquelyIdentifiesP71'
+require_pattern "$partition" 'p71IsClassifiedAsSign1'
 
 # Explicit promotion boundary.
 require_pattern "$probe" 'NonaryProbeEquivariantPromotion'
@@ -149,7 +160,10 @@ require_pattern "$validation" 'rawSevenAConstantIsTen'
 require_pattern "$validation" 'normalizedSevenAConstantVanishes'
 require_pattern "$validation" 'sevenANormalizationOffsetIsTen'
 require_pattern "$validation" 'sevenSevenOneReconstructsFifteen'
+require_pattern "$validation" 'sevenSevenOneClassificationForgetsExactly'
+require_pattern "$validation" 'sevenSevenOneForgettingClassifiesExactly'
 require_pattern "$validation" 'observerLaneOccupiesCoarseSheetSeven'
+require_pattern "$validation" 'coarseSheetSevenUniquelySelectsObserver'
 require_pattern "$validation" 'pipelineTransportsOwnWeightProjector'
 require_pattern "$aggregate" 'Monster3BOrbifoldLocalModuleRound4'
 require_pattern "$aggregate" 'Monster3BCentralCharacterInertiaRound5Validation'
@@ -157,6 +171,7 @@ require_pattern "$aggregate" 'Monster3BCentralCharacterInertiaRound5Validation'
 require_pattern "$reference" 'actual FRACTRAN replacement relation'
 require_pattern "$reference" 'normalized `7A` Hauptmodul has constant `0`'
 require_pattern "$reference" 'No transition relation is constructed'
+require_pattern "$reference" 'two-sided finite equivalence'
 require_pattern "$reference" 'A genuine theorem now requires'
 
 scripts/run_agda29_parallel_check.sh \
