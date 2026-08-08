@@ -60,6 +60,7 @@ sources=(
   DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda
   DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda
   DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda
+  DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda
   DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda
   DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda
   DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda
@@ -92,6 +93,7 @@ require_pattern() {
 character=DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda
 promotion=DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda
 commutant=DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda
+projection=DASHI/Moonshine/Monster3BFiniteHeisenbergProjectionNoGoExact.agda
 stone=DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda
 existing_eval=DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda
 actual_eval=DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda
@@ -114,6 +116,10 @@ require_pattern "$commutant" 'difference6Restores'
 require_pattern "$commutant" 'offDiagonalCoefficientVanishes'
 require_pattern "$commutant" 'diagonalCoefficientIsOrigin'
 require_pattern "$commutant" 'schrodingerCommutantIsScalar'
+require_pattern "$projection" 'x6DecidableEquality'
+require_pattern "$projection" 'projectionIsZeroFromScalarZero'
+require_pattern "$projection" 'projectionIsIdentityFromScalarOne'
+require_pattern "$projection" 'heisenbergCommutingProjectionDichotomy'
 require_pattern "$stone" 'constituentDegreeSumIsHeisenbergTimesCount'
 require_pattern "$stone" 'multiplicityForcedToNinety'
 require_pattern "$stone" 'actualZetaSectorHasNinetyConstituents'
@@ -129,6 +135,7 @@ require_pattern "$safe" 'zeroTraceClassCannotUseQuotientAlone'
 require_pattern "$safe" 'multiplicityCharacterEqualsTwelvePlusSeventyEight'
 require_pattern "$validation" 'extraspecialDegreeBudgetCloses'
 require_pattern "$validation" 'finiteSchrodingerCommutantIsScalar'
+require_pattern "$validation" 'finiteHeisenbergProjectionIsZeroOrIdentity'
 require_pattern "$validation" 'stoneVonNeumannMultiplicityIsUnique'
 require_pattern "$validation" 'actualEvaluationPromotionAvailable'
 require_pattern "$reference" 'actual AtlasRep'
