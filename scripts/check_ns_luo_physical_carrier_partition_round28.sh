@@ -10,6 +10,7 @@ bash scripts/check_ns_luo_projector_operator_core_round27.sh
 files=(
   DASHI/Physics/Closure/NSTriadKNCommutingPhysicalCarrierSelectorRound28Exact.agda
   DASHI/Physics/Closure/NSTriadKNPhysicalTriadConjugationOrbitRound28Exact.agda
+  DASHI/Physics/Closure/NSTriadKNFiniteGalerkinLocalLipschitzRound28Exact.agda
   DASHI/Physics/Closure/NSTriadKNDependentTaxOwnerPartitionRound28Exact.agda
   DASHI/Physics/Closure/NSTriadKNSignedConstituentTreeRound28Exact.agda
   DASHI/Physics/Closure/NSTriadKNSignedInteractionFibreRound28Exact.agda
@@ -55,6 +56,16 @@ grep -q 'conjugateTriadInCutoff' "$conjugation"
 grep -q 'conjugateOutputFiberWitness' "$conjugation"
 grep -q 'pluckerConjugatePreservesSquaredArea' "$conjugation"
 grep -q 'fullNonlinearCoefficientEquivarianceClosed = false' "$conjugation"
+
+lipschitz=DASHI/Physics/Closure/NSTriadKNFiniteGalerkinLocalLipschitzRound28Exact.agda
+grep -q '10.1007/BF02547354' "$lipschitz"
+grep -q '10.1090/chel/343' "$lipschitz"
+grep -q 'absoluteProductBound' "$lipschitz"
+grep -q 'atomDifferenceAbsoluteBound' "$lipschitz"
+grep -q 'finiteAtomsDifferenceAbsoluteBound' "$lipschitz"
+grep -q 'coordinateRightHandSideLocalLipschitz' "$lipschitz"
+grep -q 'finiteRationalLocalLipschitzMajorantClosed = true' "$lipschitz"
+grep -q 'continuumRealNormedPicardLindelofInstantiated = false' "$lipschitz"
 
 partition=DASHI/Physics/Closure/NSTriadKNDependentTaxOwnerPartitionRound28Exact.agda
 grep -q 'OwnedTaxAtom' "$partition"
@@ -110,9 +121,11 @@ grep -q 'strictPhysicalEtaCertificateInstantiated = false' "$absorption"
 integration=DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaRound28Exact.agda
 grep -q 'Round28ExactEvidence' "$integration"
 grep -q 'conjugateOutputFibre' "$integration"
+grep -q 'finiteRationalLocalLipschitz' "$integration"
 grep -q 'divisionFreePluckerScaling' "$integration"
 grep -q 'positiveRemainingViscosity' "$integration"
 grep -q 'strictNineOwnerAbsorption' "$integration"
+grep -q 'continuumPicardLindelofStillOpen' "$integration"
 grep -q 'uniformOperatorTaxStillOpen' "$integration"
 grep -q 'strictMarginStillOpen' "$integration"
 grep -q 'clayPromotionStillFalse' "$integration"
