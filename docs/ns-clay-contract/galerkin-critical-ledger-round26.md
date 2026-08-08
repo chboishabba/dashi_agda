@@ -2,9 +2,9 @@
 
 [Back to the Clay-contract overview](README.md)
 
-Round 25 proved that every literal cutoff resonant interaction belongs to exactly one physical support class. Round 26 applies the same fail-closed discipline to the next layer: finite Galerkin algebra and analytic tax ownership.
+Round 25 proved that every literal cutoff resonant interaction belongs to exactly one physical support class. Round 26 applies the same fail-closed discipline to the next layer: finite Galerkin algebra, physical signed-shell assembly and analytic tax ownership.
 
-This round does **not** prove global regularity. It does not instantiate continuum Picard–Lindelöf, produce a cutoff-uniform nonlinear estimate, or prove the strict viscosity margin.
+This round does **not** prove global regularity. It does not instantiate continuum Picard–Lindelöf, produce the time-dependent physical shell balance, prove a cutoff-uniform nonlinear estimate, or prove the strict viscosity margin.
 
 ## Exact advances
 
@@ -31,9 +31,11 @@ value(-) = conjugate(value(+)).
 
 Reality is therefore structural. Negative-mode transversality follows from an explicit `ConjugateTransversalityLaw`; that law still needs a concrete continuum-real instance.
 
-### Triadwise energy cancellation
+### Physical and scalar triadwise energy cancellation
 
-`NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact.agda` proves the cancellation before global summation.
+The repository already contained the stronger physical theorem in `NSTriadKNComplex3EnergyCancellation.agda`: for the actual signed Leray coefficient, exact reality condition and divergence-free condition, every physical resonant triad has a complete three-leg cancellation certificate.
+
+`NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact.agda` now re-exports that theorem at the Round 26 boundary and adds a transparent rational six-term audit normal form.
 
 For `p+q+k=0`, transversality yields
 
@@ -49,7 +51,7 @@ The two ordered placements at each of the three outputs then satisfy
 T_k + T_p + T_q = 0.
 ```
 
-A finite list of complete triads consequently has zero internal transfer. Nonzero cumulative shell flux must arise from cutting triads across shell or Galerkin boundaries.
+A finite list of complete scalar normal forms consequently has zero internal transfer. Nonzero cumulative shell flux must arise from cutting physical triads across shell or Galerkin boundaries.
 
 ### Signed critical shell ledger
 
@@ -77,11 +79,38 @@ weight · frequencySquared = criticalVelocityWeight.
 
 The homogeneous critical carrier excludes the zero mode; arbitrary periodic means are restored only at the final Galilean step.
 
+### Physical five-source signed-shell bridge
+
+`NSTriadKNLuoPhysicalSignedShellCellRound26Exact.agda` prevents the signed shell ledger from being populated by unrelated scalars.
+
+It starts from the literal Round 25 evaluator
+
+```text
+fiveSourceTotal = HH + LH + HL + CC + Com(output)
+```
+
+and accepts one genuine shell balance
+
+```text
+energyRate + dissipation
+= fiveSourceTotal + lowerBoundary + upperBoundary.
+```
+
+The resulting `SignedCriticalShellCell` has its five source coordinates forced by the actual physical output fibre. The caller cannot choose `HH`, `LH`, `HL`, `CC` or `Com` independently.
+
+This closes the source-coordinate bridge. It does **not** yet derive the time-dependent shell balance from a constructed Galerkin trajectory; that remains the live L3/L5 analytic producer.
+
 ### Low transport and finite commutator
 
 `NSTriadKNLuoLowTransportCommutatorRound26Exact.agda` fixes naming by derivative placement. For a divergence-free low velocity advecting the tested high vorticity, the principal self-tested transport term cancels exactly.
 
-`NSTriadKNLuoFiniteKernelCommutatorRound26Exact.agda` proves cellwise and for finite sums
+It also connects directly to the existing periodic far-low stack:
+
+- `NSPeriodicFarLowExactCommutatorIdentity.agda` proves the tested projected shell identity;
+- `NSPeriodicFarLowMultiplierDifferenceKernel.agda` retains the signed multiplier-difference kernel separately from its absolute majorant;
+- `NSPeriodicFarLowMultiplierDifferenceBound.agda` proves the pointwise mean-value reduction while leaving the cutoff-uniform operator estimate conditional.
+
+`NSTriadKNLuoFiniteKernelCommutatorRound26Exact.agda` additionally proves cellwise and for finite sums
 
 ```text
 w a(x-y) ∇b(x-y) - a(x) w ∇b(x-y)
@@ -95,7 +124,7 @@ It also proves exact first-moment scaling under literal displacement rescaling. 
 ≤ C 2^{-q} ||∇a||_∞ ||∇b||_2
 ```
 
-remains an open quantitative producer.
+and the stronger signed/spectral alternative remain open quantitative producers.
 
 ### Division-free high–high defect normalization
 
@@ -181,8 +210,8 @@ Round 26 has not proved:
 
 1. a concrete continuum-real `ConjugateTransversalityLaw`;
 2. Picard–Lindelöf for the literal real finite phase space;
-3. global finite Galerkin existence from the energy identity;
-4. the physical filtered-vorticity derivation for every signed shell coordinate;
+3. global finite Galerkin existence from the physical energy identity;
+4. the physical time-dependent filtered-vorticity shell balance and its boundary atoms;
 5. any cutoff-independent classwise tax;
 6. the periodic principal-value strain kernel and Calderón–Zygmund estimates;
 7. the PDE positive-variation budget;
@@ -196,9 +225,10 @@ The next tranche should complete the concrete finite ODE and then prove one actu
 
 ```text
 principal transport cancellation
-+ finite kernel identity
-+ first-moment scale law
-+ periodic increment estimate
++ exact projected shell identity
++ signed multiplier-difference kernel
++ pointwise mean-value reduction
++ cutoff-uniform signed/operator estimate
 + critical shell summation
 ⇒ cutoff-independent Com/low-advection tax.
 ```
