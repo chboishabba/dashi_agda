@@ -35,7 +35,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalSignedShellCellRound26Exact whe
 -- partition; they cannot be chosen independently.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (_∷_; [])
 open import Data.Rational.Base using (ℚ; _+_)
@@ -140,4 +140,4 @@ physicalSignedCriticalShellCell I =
 physicalShellCellSourcesAreForced :
   (I : PhysicalSignedShellInputs) →
   Ledger.HHsource (physicalSignedCriticalShellCell I) ≡ physicalHH I
-physicalShellCellSourcesAreForced I = Agda.Builtin.Equality.refl
+physicalShellCellSourcesAreForced I = refl
