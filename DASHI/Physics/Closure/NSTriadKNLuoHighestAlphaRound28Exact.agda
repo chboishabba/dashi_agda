@@ -95,6 +95,10 @@ record Round28ExactEvidence : Set₁ where
         (TaxLanguage.admissibleAggregateRight
           (TaxLanguage.nineOwnerList family))
 
+    positiveRemainingViscosity :
+      (balance : Absorption.NineOwnerCriticalBalance) →
+      Rat._<_ Rat.0ℚ (Absorption.remainingViscosity balance)
+
     strictNineOwnerAbsorption :
       (balance : Absorption.NineOwnerCriticalBalance) →
       Rat._≤_
@@ -121,6 +125,8 @@ canonicalRound28ExactEvidence = record
   ; orbitAreaInvariant = Orbit.orbitSquaredAreaInvariant
   ; divisionFreePluckerScaling = Defect.pluckerNormScale
   ; nineOwnerAggregate = TaxLanguage.nineOwnerAggregateBound
+  ; positiveRemainingViscosity =
+      Absorption.nineOwnerRemainingViscosityPositive
   ; strictNineOwnerAbsorption = Absorption.nineOwnerStrictCriticalEstimate
   }
 
