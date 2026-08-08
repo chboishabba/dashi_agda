@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.BalabanSelectedPlaquetteLinearRepairModelExact wh
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 zeroQ : ℚ
@@ -44,21 +44,14 @@ record PlaquetteVariation4 : Set where
 
 open PlaquetteVariation4 public
 
-------------------------------------------------------------------------
--- The signs match the flat oriented plaquette pattern + + - -.
-------------------------------------------------------------------------
-
 gaugeFunctional : PlaquetteVariation4 → ℚ
 gaugeFunctional variation =
   slot0 variation + slot1 variation
   - slot2 variation - slot3 variation
 
--- A simple coarse/block tangent constraint.  It is independent of the gauge
--- equation and therefore tests a genuine simultaneous repair.
 constraintFunctional : PlaquetteVariation4 → ℚ
 constraintFunctional variation = slot0 variation + slot2 variation
 
--- The extraction observer is deliberately distinct from the gauge observer.
 singletonExtractionFunctional : PlaquetteVariation4 → ℚ
 singletonExtractionFunctional variation =
   slot0 variation - slot1 variation
@@ -99,10 +92,6 @@ selectedPlaquetteVariationChargeExact :
   variationCharge (selectedPlaquetteVariation h)
   ≡ halfQ * (h * h)
 selectedPlaquetteVariationChargeExact h = solve (h ∷ [])
-
-------------------------------------------------------------------------
--- The selector returns a dependent witness carrying all simultaneous facts.
-------------------------------------------------------------------------
 
 record LinearPlaquetteSelectionWitness (h : ℚ) : Set where
   constructor linear-plaquette-selection-witness
