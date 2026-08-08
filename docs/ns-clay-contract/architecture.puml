@@ -2,7 +2,7 @@
 ' C4-style component view without a remote include.
 ' Parent document: README.md
 
-title DASHI periodic Navier–Stokes Clay contract after Round 26
+title DASHI periodic Navier–Stokes Clay contract after Round 27
 
 skinparam componentStyle rectangle
 skinparam wrapWidth 220
@@ -23,19 +23,31 @@ package "Claim corpus and falsification" {
 
 package "Finite physical system" {
   component "Literal cutoff Z3 carrier\ncomplete duplicate-free output fibres" as Carrier <<Checked exact>>
+  component "Sharp finite shell projectors\nidempotence, disjointness, resolution" as Projectors <<Checked exact>>
   component "Physical HH/LH/HL/CC support\nCom separated, no residual" as Support <<Checked exact>>
+  component "Reality involution Ju(k)=conj u(-k)\ndiagonal multiplier equivariance" as Reality <<Checked exact algebra>>
   component "Reality-orbit phase space\nand quadratic coordinate RHS" as Coordinates <<Checked exact algebra>>
-  component "Continuum-real Picard-Lindelof\nand global finite solution" as FiniteODE <<Open producer>>
+  component "Full physical vector-field equivariance" as PhysicalEquivariance <<Open producer>>
+  component "Finite Picard-Lindelof\nand global Galerkin solution" as FiniteODE <<Open producer>>
   component "Triadwise energy cancellation" as Energy <<Checked exact algebra>>
   component "Signed critical shell ledger\nexplicit lower and upper boundaries" as SignedLedger <<Checked exact algebra>>
   component "Physical filtered-vorticity instantiation" as PhysicalLedger <<Open producer>>
 }
 
-package "Critical tax system" {
+package "Critical operator and geometry system" {
+  component "State carrier versus multiplier dual" as StateDual <<Checked exact algebra>>
+  component "Signed translation-multiplier commutator" as TranslationCommutator <<Checked exact algebra>>
   component "Low transport cancellation\nand finite kernel commutator" as Commutator <<Checked exact algebra>>
+  component "Physical triad Plucker/Gram invariant" as Plucker <<Checked exact algebra>>
   component "Division-free HH factorisation\nzero denominator branch" as HHDefect <<Checked exact algebra>>
   component "Hysteretic entry charge\npaid by positive variation" as Hysteresis <<Checked exact algebra>>
+}
+
+package "Critical tax system" {
+  component "Centred five-source probe" as Probe <<Checked exact algebra>>
   component "Unique tax ownership\nand named remainder classes" as Ownership <<Checked exact algebra>>
+  component "Maximal uniform viscosity core" as MaxCore <<Checked exact algebra>>
+  component "Physical owner allocations" as Allocations <<Open producer>>
   component "Cutoff-uniform physical class taxes" as Tax <<Open producer>>
   component "Strict unique-owner viscosity certificate" as Margin <<Open producer>>
 }
@@ -43,7 +55,8 @@ package "Critical tax system" {
 package "Limit and continuation system" {
   component "Critical Gronwall reducer" as Gronwall <<Checked reducer>>
   component "Nested shell/Galerkin limits" as Limits <<Reducer plus open analysis>>
-  component "Critical restart" as Restart <<Reducer plus open analysis>>
+  component "Critical-to-Serrin interpolation" as SerrinBridge <<Open analytic instance>>
+  component "Periodic Serrin continuation" as Restart <<Reducer plus open analysis>>
   component "Smooth velocity and pressure recovery" as Recovery <<Open producer>>
 }
 
@@ -55,9 +68,9 @@ package "Submission adaptation system" {
 }
 
 package "Assurance system" {
-  component "Round 26 cumulative Agda root" as AgdaRoot <<Verification>>
+  component "Round 27 cumulative Agda root" as AgdaRoot <<Verification>>
   component "Static no-hole, source, link and tax checker" as Checker <<Verification>>
-  component "Finite adversarial regression" as Regression <<Verification>>
+  component "Generated finite projector/operator certificate" as Certificate <<Verification>>
   component "Change, risk and traceability record" as Governance <<Governance>>
 }
 
@@ -67,25 +80,40 @@ NoGo --> Crosswalk : reject or narrow false routes
 Crosswalk --> Tax : assign physical producer lane
 Crosswalk --> Margin : assign strict-budget lane
 
+Carrier --> Projectors : literal finite modes
 Carrier --> Support : actual resonant output fibres
 Carrier --> Coordinates : finite coefficient carrier
-Coordinates --> FiniteODE : literal normed real vector field
+Projectors --> PhysicalLedger : shell localization
+Projectors --> TranslationCommutator : multiplier symbol
+Reality --> PhysicalEquivariance : fixed-point preservation criterion
+Coordinates --> PhysicalEquivariance : literal nonlinear RHS
+PhysicalEquivariance --> FiniteODE : invariant finite phase space
+Coordinates --> FiniteODE : local Lipschitz input
 Coordinates --> Energy : resonant atoms
 FiniteODE --> PhysicalLedger : time-dependent finite solution
 Energy --> PhysicalLedger : exact finite energy cancellation
 Support --> SignedLedger : exact five-source labels
 PhysicalLedger --> SignedLedger : physical shell values
 
+StateDual --> TranslationCommutator : typed state/test action
+TranslationCommutator --> Commutator : signed multiplier difference
 SignedLedger --> Commutator : signed low-advection coordinate
+Support --> Plucker : physical resonant triads
+Plucker --> HHDefect : interaction-plane geometry
 SignedLedger --> HHDefect : signed high-high coordinate
 Commutator --> Tax : quantitative Com/low tax
 HHDefect --> Tax : quantitative HH tax
 Hysteresis --> Tax : repeated bad-entry charge
 Ownership --> Tax : each atom paid once
-Tax --> Margin : explicit viscosity allocations
+SignedLedger --> Probe : common plus centred sources
+Ownership --> MaxCore : unique owner set
+MaxCore --> Allocations : canonical common core
+Allocations --> Tax : physical dissipation portions
+Tax --> Margin : explicit viscosity consumption
 Margin --> Gronwall : total coefficient < 1
 Gronwall --> Limits : uniform critical estimate
-Limits --> Restart : bounded physical critical norm
+Limits --> SerrinBridge : physical critical bounds
+SerrinBridge --> Restart : L4_t L6_x criterion
 Restart --> Recovery : infinite maximal time
 Recovery --> Legacy : global smooth solution data
 Legacy --> Adapter : stronger witness
@@ -95,38 +123,41 @@ Literal --> ClayTarget : inhabits exact theorem type
 
 AgdaRoot ..> Corpus : imports through Round 24
 AgdaRoot ..> Carrier : imports through Round 25
-AgdaRoot ..> Support : imports through Round 25
-AgdaRoot ..> Coordinates : imports
-AgdaRoot ..> Energy : imports
-AgdaRoot ..> SignedLedger : imports
-AgdaRoot ..> Commutator : imports
-AgdaRoot ..> HHDefect : imports
-AgdaRoot ..> Hysteresis : imports
-AgdaRoot ..> Ownership : imports
+AgdaRoot ..> SignedLedger : imports through Round 26
+AgdaRoot ..> Projectors : imports
+AgdaRoot ..> Reality : imports
+AgdaRoot ..> TranslationCommutator : imports
+AgdaRoot ..> Plucker : imports
+AgdaRoot ..> Probe : imports
+AgdaRoot ..> MaxCore : imports
 Checker ..> AgdaRoot : executes pinned Agda check
-Regression ..> Energy : finite coordinate box
-Regression ..> Commutator : finite coordinate box
-Regression ..> Ownership : detects duplicate payment
+Certificate ..> Projectors : finite lattice box
+Certificate ..> TranslationCommutator : finite lattice box
+Certificate ..> Probe : exact rational cases
+Certificate ..> Plucker : finite mode pairs
+Certificate ..> MaxCore : candidate cores
 Governance ..> Checker : quality and change gates
 Reviewer --> Governance : reviews evidence
 Reviewer --> Corpus : verifies source fidelity
 Reviewer --> ClayTarget : checks exact target
 
-note right of Support
-L4 is checked exact.
-Every actual triad is classified uniquely;
-no generic remainder constructor exists.
+note right of Projectors
+Sharp finite shell algebra is checked.
+Smooth Littlewood-Paley bounds and
+critical norm equivalence remain open.
 end note
 
-note right of SignedLedger
-The ledger remains signed until cancellation
-has been exhausted. Positive parts are taxed later.
+note right of TranslationCommutator
+The signed difference m(k)-m(k-l)
+is retained. No early absolute value
+or Schur majorant is imposed.
 end note
 
-note right of Ownership
-Every taxable atom has one owner.
-Every remainder has one declared class.
-This prevents hidden double payment.
+note right of MaxCore
+Maximality is conditional only on an
+exact allocation reconstruction and a
+pinned zero residual. Physical allocations
+remain open.
 end note
 
 note right of Tax
