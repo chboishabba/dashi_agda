@@ -33,7 +33,7 @@ module DASHI.Physics.YangMills.BalabanP33NonorthogonalPhysicalFrameExact where
 -- extensions.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
@@ -255,8 +255,8 @@ frameProjectNormContraction :
   ≤ KKT.stateNormSq vector
 frameProjectNormContraction frame vector =
   let
-    data = frameConstraintData frame
-    complement = KKT.selectedAdmissibleProject data vector
+    constraintData = frameConstraintData frame
+    complement = KKT.selectedAdmissibleProject constraintData vector
     complementNN = KKT.stateNormSqNonnegative complement
 
     repairBelowSum :
@@ -273,7 +273,7 @@ frameProjectNormContraction frame vector =
   in
   subst
     (λ upper → KKT.stateNormSq (frameProject frame vector) ≤ upper)
-    (sym (KKT.selectedStatePythagorean data vector))
+    (sym (KKT.selectedStatePythagorean constraintData vector))
     repairBelowSum
 
 reducedHessianMatrix :
@@ -414,39 +414,41 @@ reducedGreenApply :
   ∀ {Reduced} →
   NonorthogonalReducedHessianInverseData Reduced →
   ReducedVector Reduced → ReducedVector Reduced
-reducedGreenApply data =
+reducedGreenApply inverseData =
   Rect.applyRectangular
-    (reducedCarrier (frame data))
+    (reducedCarrier (frame inverseData))
     (Matrix.inverseMatrix
-      (reducedHessianInverseCertificate data))
+      (reducedHessianInverseCertificate inverseData))
 
 reducedGreenLeftExact :
   ∀ {Reduced}
-    (data : NonorthogonalReducedHessianInverseData Reduced)
+    (inverseData : NonorthogonalReducedHessianInverseData Reduced)
     vector coordinate →
-  reducedGreenApply data
+  reducedGreenApply inverseData
     (Rect.applyRectangular
-      (reducedCarrier (frame data))
-      (reducedHessianMatrix (frame data) (ambientHessian data)) vector)
+      (reducedCarrier (frame inverseData))
+      (reducedHessianMatrix (frame inverseData)
+        (ambientHessian inverseData)) vector)
     coordinate
   ≡ vector coordinate
-reducedGreenLeftExact data =
+reducedGreenLeftExact inverseData =
   Matrix.matrixInverseLeftExact
-    (reducedHessianInverseCertificate data)
+    (reducedHessianInverseCertificate inverseData)
 
 reducedGreenRightExact :
   ∀ {Reduced}
-    (data : NonorthogonalReducedHessianInverseData Reduced)
+    (inverseData : NonorthogonalReducedHessianInverseData Reduced)
     vector coordinate →
   Rect.applyRectangular
-    (reducedCarrier (frame data))
-    (reducedHessianMatrix (frame data) (ambientHessian data))
-    (reducedGreenApply data vector)
+    (reducedCarrier (frame inverseData))
+    (reducedHessianMatrix (frame inverseData)
+      (ambientHessian inverseData))
+    (reducedGreenApply inverseData vector)
     coordinate
   ≡ vector coordinate
-reducedGreenRightExact data =
+reducedGreenRightExact inverseData =
   Matrix.matrixInverseRightExact
-    (reducedHessianInverseCertificate data)
+    (reducedHessianInverseCertificate inverseData)
 
 nonorthogonalFrameProjectorLevel : ProofLevel
 nonorthogonalFrameProjectorLevel = machineChecked
