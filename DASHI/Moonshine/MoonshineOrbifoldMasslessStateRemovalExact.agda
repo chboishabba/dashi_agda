@@ -25,8 +25,9 @@ module DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact where
 -- The untwisted invariant weight-one carrier and the retained twisted
 -- weight-one carrier are each empty.  Their orbifold direct sum is therefore
 -- empty.  The typed FLM weight-two carrier is inhabited by a nonconformal
--- untwisted coordinate, so the first positive grade of this finite profile is
--- exactly two.
+-- untwisted coordinate.  A grade-indexed 0/1/2 prefix proves that every
+-- strictly positive represented grade below two is empty, so two is genuinely
+-- the first positive grade of this prefix rather than a stored numeral.
 --
 -- This does not identify a two-dimensional conformal grading gap with a
 -- four-dimensional Yang--Mills Hamiltonian mass gap.
@@ -116,18 +117,53 @@ canonicalOrbifoldMasslessRemoval =
     untwistedInvariantWeightOneEmpty
     twistedRetainedWeightOneEmpty
 
+------------------------------------------------------------------------
+-- Grade-indexed initial profile and genuine lower-grade minimality.
+------------------------------------------------------------------------
+
+data InitialConformalGrade : Set where
+  gradeZero : InitialConformalGrade
+  gradeOne : InitialConformalGrade
+  gradeTwo : InitialConformalGrade
+
+initialGradeValue : InitialConformalGrade → Nat
+initialGradeValue gradeZero = 0
+initialGradeValue gradeOne = 1
+initialGradeValue gradeTwo = 2
+
+InitialGradeCarrier : InitialConformalGrade → Set
+InitialGradeCarrier gradeZero = MoonshineWeightZero
+InitialGradeCarrier gradeOne = MoonshineWeightOne
+InitialGradeCarrier gradeTwo = MoonshineWeightTwo
+
+data PositiveGradeStrictlyBelowTwo : InitialConformalGrade → Set where
+  gradeOneIsPositiveBelowTwo : PositiveGradeStrictlyBelowTwo gradeOne
+
+allPositiveGradesBelowTwoAreEmpty :
+  (grade : InitialConformalGrade) →
+  PositiveGradeStrictlyBelowTwo grade →
+  IsEmpty (InitialGradeCarrier grade)
+allPositiveGradesBelowTwoAreEmpty gradeOne gradeOneIsPositiveBelowTwo =
+  moonshineWeightOneEmpty
+
 record FiniteConformalExcitationProfile : Set where
   constructor finite-conformal-excitation-profile
   field
     vacuumGrade : Nat
     firstPositiveExcitationGrade : Nat
+    firstPositiveGradeTag : InitialConformalGrade
     vacuumGradeExact : vacuumGrade ≡ 0
     firstPositiveExcitationGradeExact :
       firstPositiveExcitationGrade ≡ 2
+    firstPositiveGradeTagExact : firstPositiveGradeTag ≡ gradeTwo
     noWeightOneState : IsEmpty MoonshineWeightOne
-    weightTwoState : MoonshineWeightTwo
+    stateAtFirstPositiveGrade : InitialGradeCarrier firstPositiveGradeTag
+    everyLowerPositiveGradeEmpty :
+      (grade : InitialConformalGrade) →
+      PositiveGradeStrictlyBelowTwo grade →
+      IsEmpty (InitialGradeCarrier grade)
     weightTwoStateNonconformal :
-      weightTwoState ≡ W2.conformalVectorCoordinate → ⊥
+      stateAtFirstPositiveGrade ≡ W2.conformalVectorCoordinate → ⊥
 
 open FiniteConformalExcitationProfile public
 
@@ -135,14 +171,23 @@ canonicalFiniteConformalExcitationProfile :
   FiniteConformalExcitationProfile
 canonicalFiniteConformalExcitationProfile =
   finite-conformal-excitation-profile
-    0 2 refl refl
+    0 2 gradeTwo
+    refl refl refl
     moonshineWeightOneEmpty
     weightTwoExcitationWitness
+    allPositiveGradesBelowTwoAreEmpty
     weightTwoExcitationIsNotConformalVector
 
 conformalExcitationIndexIsTwo :
   firstPositiveExcitationGrade canonicalFiniteConformalExcitationProfile ≡ 2
 conformalExcitationIndexIsTwo = refl
+
+conformalExcitationMinimality :
+  (grade : InitialConformalGrade) →
+  PositiveGradeStrictlyBelowTwo grade →
+  IsEmpty (InitialGradeCarrier grade)
+conformalExcitationMinimality =
+  everyLowerPositiveGradeEmpty canonicalFiniteConformalExcitationProfile
 
 record MoonshineYangMillsGapBoundary : Set where
   constructor moonshine-yang-mills-gap-boundary
@@ -152,6 +197,10 @@ record MoonshineYangMillsGapBoundary : Set where
     moonshineWeightTwoInhabited : MoonshineWeightTwo
     moonshineWeightTwoWitnessIsNonconformal :
       moonshineWeightTwoInhabited ≡ W2.conformalVectorCoordinate → ⊥
+    everyStrictlyLowerPositiveInitialGradeEmpty :
+      (grade : InitialConformalGrade) →
+      PositiveGradeStrictlyBelowTwo grade →
+      IsEmpty (InitialGradeCarrier grade)
     conformalExcitationIndex : Nat
     conformalExcitationIndexExact : conformalExcitationIndex ≡ 2
     conformalIndexProvesFourDimensionalYangMillsGap : Bool
@@ -167,6 +216,7 @@ canonicalMoonshineYangMillsGapBoundary =
     moonshineWeightOneEmpty
     weightTwoExcitationWitness
     weightTwoExcitationIsNotConformalVector
+    allPositiveGradesBelowTwoAreEmpty
     2 refl
     false refl
     false refl
