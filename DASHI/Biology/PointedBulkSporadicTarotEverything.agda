@@ -1,5 +1,6 @@
 module DASHI.Biology.PointedBulkSporadicTarotEverything where
 
+import DASHI.Core.Optional
 import DASHI.Biology.PointedTernaryBulkExact
 import DASHI.Biology.DecimalTenTernaryPresentationExact
 import DASHI.Biology.ThreeSixNineMoonshineScaleExact
