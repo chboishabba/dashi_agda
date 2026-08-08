@@ -10,6 +10,7 @@ on:
     paths:
       - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
+      - 'DASHI/Moonshine/Monster3BFiniteHeisenbergCommutantExact.agda'
       - 'DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda'
       - 'DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda'
       - 'DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda'
