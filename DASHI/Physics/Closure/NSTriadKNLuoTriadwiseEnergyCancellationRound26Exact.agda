@@ -20,15 +20,28 @@ module DASHI.Physics.Closure.NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact
 --   a.q = -a.k,  b.k = -b.p,  c.p = -c.q.
 --
 -- The two ordered placements at each output then cancel cyclically.  This
--- file proves that algebra exactly over Q, before any shell grouping or
--- absolute-value majorant is introduced.
+-- file proves the scalar normal form exactly over Q, before any shell grouping
+-- or absolute-value majorant is introduced.
+--
+-- More importantly, it reuses the repository's stronger physical theorem
+-- NSTriadKNComplex3EnergyCancellation: for the actual signed Leray coefficient,
+-- exact reality condition and exact divergence-free condition, every physical
+-- resonant triad has a complete three-leg cancellation certificate.  Round 26
+-- therefore does not replace the existing physical proof by a rational model;
+-- the rational normal form is an audit surface for the same six-term algebra.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNComplex3EnergyCancellation as PhysicalEnergy
 
 zeroQ : ℚ
 zeroQ = Int.+ 0 / 1
@@ -115,9 +128,24 @@ resonantTriadEnergyExchangeCyclicZero C
     ∷ aDotB C ∷ aDotC C ∷ bDotC C ∷ [])
 
 ------------------------------------------------------------------------
--- A finite list of complete triads has zero internal energy exchange.  Any
--- nonzero cumulative shell transfer must therefore arise from cutting triads
--- across shell or Galerkin boundaries, not from internal production.
+-- Re-export the repository's already-proved physical Complex3 cancellation
+-- at the exact Round 26 boundary.
+------------------------------------------------------------------------
+
+physicalComplex3TriadEnergyCancellation :
+  ∀ {r : Level} {F : C3.RealField r}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E)
+    (τ : Physical.PhysicalTriadIncidence) →
+  Audit.ExactTriadEnergyCancellation F E I τ
+physicalComplex3TriadEnergyCancellation =
+  PhysicalEnergy.exactTriadEnergyCancellation
+
+------------------------------------------------------------------------
+-- A finite list of complete scalar normal forms has zero internal energy
+-- exchange.  Any nonzero cumulative shell transfer must therefore arise from
+-- cutting physical triads across shell or Galerkin boundaries, not from the
+-- completed three-leg orbit.
 ------------------------------------------------------------------------
 
 sumTriadTransfers : List ResonantTriadEnergyCoordinates → ℚ
