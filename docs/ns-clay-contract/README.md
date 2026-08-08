@@ -32,9 +32,21 @@ The reducers for steps 2, 4, the order-theoretic part of 5, the contradiction lo
 
 Round 24 adds a broad [claimed-paper corpus](paper-corpus/README.md), including low-authority and claimed-solution papers. Each source is mapped to its first load-bearing physical lemma, and exact countermodels are retained where a displayed implication fails.
 
-Round 25 closes the discrete support part of that path. The [literal physical carrier and five-class support tranche](physical-carrier-support-round25.md) proves duplicate-free output fibres, the low-low-to-far-high obstruction, exhaustive and unique physical triad classification, and exact `HH+LH+HL+CC+Com` recomposition after evaluating the appended `Com` cell with a mode-indexed commutator functional. L4 is checked exact; L3 is narrowed to finite-dimensional continuum ODE existence and constraint propagation.
+Round 25 closes the discrete support part of that path. The [literal physical carrier and five-class support tranche](physical-carrier-support-round25.md) proves duplicate-free output fibres, the low-low-to-far-high obstruction, exhaustive and unique physical triad classification, and exact `HH+LH+HL+CC+Com` recomposition after evaluating the appended `Com` cell with a mode-indexed commutator functional. L4 is checked exact.
 
-Round 26 adds the [finite Galerkin and critical-tax tranche](galerkin-critical-ledger-round26.md). It proves a literal degree-two coordinate algebra, exact triadwise energy cancellation, a signed weighted critical shell ledger, the finite kernel-commutator identity and first-moment scaling, division-free high–high normalization, hysteretic positive-variation charge, named remainder classes and duplicate-free tax ownership. These advances constrain how the remaining estimates may be proved; they do not supply cutoff-independent analytic coefficients.
+Round 26 adds the [finite Galerkin and critical-tax tranche](galerkin-critical-ledger-round26.md). It proves:
+
+- literal degree-two coordinate algebra and finite difference factorisation;
+- reality-by-construction and exact conjugate transversality;
+- reuse of the physical Complex3 triad-energy cancellation theorem;
+- a signed weighted critical shell ledger;
+- a bridge forcing the Round 25 physical five-source fibre into each signed shell cell;
+- the exact projected low-transport commutator and signed multiplier-difference stack;
+- division-free high–high normalization;
+- hysteretic positive-variation charge;
+- named remainder classes and duplicate-free tax ownership.
+
+These advances constrain how the remaining estimates may be proved; they do not supply finite normed Picard–Lindelöf, time-dependent shell balances, or cutoff-independent analytic coefficients.
 
 ### 3. What are the preconditions, postconditions and invariants?
 
@@ -46,8 +58,8 @@ The dependency-ordered statement of the remaining mathematics is in the [highest
 
 - **O — Organization:** `DASHI/Physics/Closure`, the paper-facing theorem interfaces, validation scripts and this documentation surface.
 - **R — Requirement:** Fefferman periodic alternative (B), including the pressure-periodicity erratum.
-- **C — Code:** Round 22 finite Galerkin and defect modules; Round 23 literal contract, adapter and Galilean reduction; Round 24 claimed-paper corpus and normalized ladder; Round 25 literal carrier certificate and physical support closure; Round 26 finite Galerkin cancellation, signed critical ledger and tax ownership.
-- **S — State:** theorem type, terminal reducers, L4 physical support, finite triad cancellation and tax-partition algebra implemented; the physical theorem remains uninhabited.
+- **C — Code:** Round 22 finite Galerkin and defect modules; Round 23 literal contract, adapter and Galilean reduction; Round 24 claimed-paper corpus and normalized ladder; Round 25 literal carrier certificate and physical support closure; Round 26 exact finite Galerkin invariants, physical signed-shell assembly and tax ownership.
+- **S — State:** theorem type, terminal reducers, L4 physical support, conjugate transversality, physical triad cancellation, physical source-coordinate bridge and finite tax-partition algebra implemented; the physical theorem remains uninhabited.
 - **L — Lattice:** finite PDE → signed critical ledger → duplicate-free physical taxes → strict absorption → nested limits → restart → smooth global witness → literal Clay witness.
 - **P — Proposal:** work only on physical producers that move a clause from `physicalProducerOpen` to `checkedExact`/`checkedReducer`, or source audits that rigorously falsify a proposed producer.
 - **G — Goal:** inhabit the literal periodic Fefferman statement for every positive viscosity and every smooth divergence-free periodic datum.
@@ -69,9 +81,9 @@ The target theorem is literal, mean zero is a reduction rather than a Clay preco
 
 The disjoint development lanes are now:
 
-1. Concrete continuum-real Galerkin ODE existence, conjugate transversality and global finite existence.
-2. Physical derivation of the signed critical shell ledger from the literal Galerkin solution.
-3. Low-advection finite-kernel commutator estimate and first cutoff-independent class tax.
+1. Finite normed Galerkin Picard–Lindelöf and global finite existence.
+2. Physical derivation of the time-dependent signed critical shell ledger from the literal Galerkin solution.
+3. Low-advection signed multiplier/operator estimate and first cutoff-independent class tax.
 4. Hysteretic positive-variation PDE estimate and bad-excursion amplitude budget.
 5. Dissipation-wavenumber high-mode condition and low-frequency critical reservoir.
 6. Periodic principal-value kernel, sphere integration and Calderón–Zygmund estimates.
@@ -92,4 +104,4 @@ The disjoint development lanes are now:
 
 ## Scope boundary
 
-Round 26 does not claim global regularity, a completed continuum-real L3 ODE instance, classwise cutoff-uniform nonlinear taxes, a strict viscosity margin, successful Agda kernel validation, successful GitHub Actions, publication readiness or Clay acceptance. It proves finite algebra and accounting needed to make later analytic failures localizable: triadwise cancellation, signed critical recomposition, finite commutator increments, division-free HH normalization, positive-variation entry charge, named remainders and duplicate-free tax ownership.
+Round 26 does not claim global regularity, a completed finite normed L3 ODE instance, physical time-dependent shell balances, classwise cutoff-uniform nonlinear taxes, a strict viscosity margin, successful Agda kernel validation, successful GitHub Actions, publication readiness or Clay acceptance. It proves finite algebra and accounting needed to make later analytic failures localizable: reality/transversality, physical triad cancellation, signed critical recomposition, physical source-coordinate forcing, finite commutator increments, division-free HH normalization, positive-variation entry charge, named remainders and duplicate-free tax ownership.
