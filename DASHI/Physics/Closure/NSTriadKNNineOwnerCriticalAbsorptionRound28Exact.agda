@@ -17,15 +17,16 @@ module DASHI.Physics.Closure.NSTriadKNNineOwnerCriticalAbsorptionRound28Exact wh
 -- Combine the exact nine-owner admissible language with one signed critical
 -- balance.  Once physical owner estimates and a strict eta certificate are
 -- supplied, the theorem moves the full viscosity tax to the left and returns
--- only data and integral-critical remainders.  This closes V2--V3 algebra but
--- does not manufacture any physical owner estimate or strict coefficient.
+-- only data and integral-critical remainders.  The same strict certificate
+-- supplies an explicit positive residual-viscosity theorem.  This closes
+-- V2--V3 algebra but does not manufacture any physical owner estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using
-  (ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _-_; _≤_; _<_)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -55,6 +56,12 @@ remainingViscosity balance =
   1ℚ
   - TaxLanguage.sumEta
       (TaxLanguage.nineOwnerList (family balance))
+
+nineOwnerRemainingViscosityPositive :
+  (balance : NineOwnerCriticalBalance) →
+  0ℚ < remainingViscosity balance
+nineOwnerRemainingViscosityPositive balance =
+  TaxLanguage.remainingViscosityPositive (strictBudget balance)
 
 admissibleRemainder : NineOwnerCriticalBalance → ℚ
 admissibleRemainder balance =
@@ -167,6 +174,9 @@ nineOwnerStrictCriticalEstimate balance =
 nineOwnerCriticalAbsorptionAlgebraClosed : Bool
 nineOwnerCriticalAbsorptionAlgebraClosed = true
 
+positiveResidualViscosityExposed : Bool
+positiveResidualViscosityExposed = true
+
 physicalNineOwnerCriticalBalanceInstantiated : Bool
 physicalNineOwnerCriticalBalanceInstantiated = false
 
@@ -176,6 +186,10 @@ strictPhysicalEtaCertificateInstantiated = false
 nineOwnerCriticalAbsorptionAlgebraClosedIsTrue :
   nineOwnerCriticalAbsorptionAlgebraClosed ≡ true
 nineOwnerCriticalAbsorptionAlgebraClosedIsTrue = refl
+
+positiveResidualViscosityExposedIsTrue :
+  positiveResidualViscosityExposed ≡ true
+positiveResidualViscosityExposedIsTrue = refl
 
 physicalNineOwnerCriticalBalanceInstantiatedIsFalse :
   physicalNineOwnerCriticalBalanceInstantiated ≡ false
