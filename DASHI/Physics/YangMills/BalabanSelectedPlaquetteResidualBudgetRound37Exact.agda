@@ -28,12 +28,6 @@ import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst)
 
-zeroQ : ℚ
-zeroQ = Int.+ 0 / 1
-
-denominator : Int.ℤ
-denominator = Int.+ 18874368
-
 gaugeCoefficient constraintCoefficient transportCoefficient boundaryCoefficient : ℚ
 gaugeCoefficient = Int.+ 10 / 18874368
 constraintCoefficient = Int.+ 10 / 18874368
@@ -44,8 +38,8 @@ totalResidualCoefficient : ℚ
 totalResidualCoefficient = Int.+ 55 / 18874368
 
 residualCoefficientLedgerExact :
-  gaugeCoefficient + constraintCoefficient
-  + transportCoefficient + boundaryCoefficient
+  (gaugeCoefficient + constraintCoefficient)
+  + (transportCoefficient + boundaryCoefficient)
   ≡ totalResidualCoefficient
 residualCoefficientLedgerExact = solve []
 
@@ -61,8 +55,8 @@ open SelectedVariationResiduals public
 
 residualTotal : SelectedVariationResiduals → ℚ
 residualTotal residuals =
-  gaugeResidual residuals + constraintResidual residuals
-  + transportResidual residuals + boundaryResidual residuals
+  (gaugeResidual residuals + constraintResidual residuals)
+  + (transportResidual residuals + boundaryResidual residuals)
 
 record SelectedVariationResidualBounds
     (charge : ℚ)
@@ -85,8 +79,8 @@ fourResidualBoundsSum :
   SelectedVariationResidualBounds charge residuals →
   residualTotal residuals
   ≤
-  (gaugeCoefficient + constraintCoefficient
-    + transportCoefficient + boundaryCoefficient) * charge
+  ((gaugeCoefficient + constraintCoefficient)
+    + (transportCoefficient + boundaryCoefficient)) * charge
 fourResidualBoundsSum {charge} {residuals} bounds =
   let
     firstPair = ℚP.+-mono-≤
@@ -110,10 +104,6 @@ selectedVariationSpilloverUpper {charge} {residuals} bounds =
       residualTotal residuals ≤ coefficient * charge)
     residualCoefficientLedgerExact
     (fourResidualBoundsSum bounds)
-
-------------------------------------------------------------------------
--- Ownership is constructor-level: each residual atom has exactly one budget.
-------------------------------------------------------------------------
 
 data ResidualOwner : Set where
   gaugeOwner constraintOwner transportOwner boundaryOwner : ResidualOwner
