@@ -13,6 +13,7 @@ files=(
   DASHI/Physics/YangMills/BalabanP33PhysicalProjectorCompositionExact.agda
   DASHI/Physics/YangMills/BalabanSelectedVariationProjectionSpilloverExact.agda
   DASHI/Physics/YangMills/BalabanSelectedVariationProjectedNoetherResidualExact.agda
+  DASHI/Physics/YangMills/BalabanSelectedVariationProjectedSelectorAssemblyExact.agda
   DASHI/Physics/YangMills/BalabanP33PlaquetteOrientationReversalExact.agda
   DASHI/Physics/YangMills/BalabanWilsonSixteenAtomCentredProbeExact.agda
   DASHI/Physics/YangMills/BalabanP33LiteralHessianSpectralCertificateExact.agda
@@ -51,6 +52,9 @@ checks=(
   'BalabanSelectedVariationProjectedNoetherResidualExact.agda:selectedVariationResidualStationary'
   'BalabanSelectedVariationProjectedNoetherResidualExact.agda:projectedConstructionToSingletonWitness'
   'BalabanSelectedVariationProjectedNoetherResidualExact.agda:projectedFamilyToSelectedBackgroundVariationSelector'
+  'BalabanSelectedVariationProjectedSelectorAssemblyExact.agda:analyticDataToProjectedSingletonConstruction'
+  'BalabanSelectedVariationProjectedSelectorAssemblyExact.agda:analyticDataToSingletonExtractionWitness'
+  'BalabanSelectedVariationProjectedSelectorAssemblyExact.agda:analyticFamilyToSelectedBackgroundVariationSelector'
   'BalabanP33PlaquetteOrientationReversalExact.agda:reverseQuaternionMultiply'
   'BalabanP33PlaquetteOrientationReversalExact.agda:reverseSubsetAtomExact'
   'BalabanP33PlaquetteOrientationReversalExact.agda:reverseWilsonScalarInvariant'
