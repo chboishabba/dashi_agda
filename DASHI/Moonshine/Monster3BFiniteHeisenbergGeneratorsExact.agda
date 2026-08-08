@@ -16,34 +16,15 @@ module DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact where
 -- DASHI CONTRIBUTION
 --
 -- Construct the standard generator-level Schrodinger/Weyl model on
---
---   X = F_3^6.
---
--- Translation generators T_a increment one coordinate.  Modulation
--- generators M_b read one dual coordinate and contribute the phase exponent
--- <b,x>.  The exact generator relation
---
---   M_b T_a = zeta^{<b,a>} T_a M_b
---
--- is represented without importing complex analysis by the exponent identity
---
---   <b,x+a> = <b,a> + <b,x> in F_3.
---
--- All 36 standard generator pairs reduce definitionally.  This proves the
--- concrete generator algebra used by the executable 729-state model.  It is
--- not yet the finite Stone--von Neumann uniqueness theorem or an embedding in
--- the actual Monster module.
+-- X=F_3^6.  Translation generators increment coordinates and modulation
+-- generators read the dual coordinates.  All 36 standard generator relations
+-- reduce definitionally to <b,x+a>=<b,a>+<b,x> in F_3.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
-
-------------------------------------------------------------------------
--- F_3 exponent arithmetic, with neg=2, zer=0, pos=1.
-------------------------------------------------------------------------
 
 infixl 6 _+3_
 
@@ -73,10 +54,6 @@ negThenPos : (value : Trit) → pos +3 (negate3 pos +3 value) ≡ value
 negThenPos neg = refl
 negThenPos zer = refl
 negThenPos pos = refl
-
-------------------------------------------------------------------------
--- The six-dimensional Lagrangian coordinate X=F_3^6.
-------------------------------------------------------------------------
 
 record X6 : Set where
   constructor x6
@@ -128,10 +105,6 @@ translateInverse axis3 x = x6 (x0 x) (x1 x) (x2 x) (decrement (x3 x)) (x4 x) (x5
 translateInverse axis4 x = x6 (x0 x) (x1 x) (x2 x) (x3 x) (decrement (x4 x)) (x5 x)
 translateInverse axis5 x = x6 (x0 x) (x1 x) (x2 x) (x3 x) (x4 x) (decrement (x5 x))
 
-------------------------------------------------------------------------
--- Standard dual generators and the generator-level pairing.
-------------------------------------------------------------------------
-
 kronecker : Axis6 → Axis6 → Trit
 kronecker axis0 axis0 = pos
 kronecker axis0 axis1 = zer
@@ -172,10 +145,6 @@ kronecker axis5 axis5 = pos
 
 modulationExponent : Axis6 → X6 → Trit
 modulationExponent = coordinate
-
-------------------------------------------------------------------------
--- Generator Weyl relation in phase-exponent form.
-------------------------------------------------------------------------
 
 generatorWeylExponent :
   (dual translationAxis : Axis6) →
@@ -219,10 +188,6 @@ generatorWeylExponent axis5 axis3 state = refl
 generatorWeylExponent axis5 axis4 state = refl
 generatorWeylExponent axis5 axis5 state = refl
 
-------------------------------------------------------------------------
--- Basic generator counts and epistemic boundary.
-------------------------------------------------------------------------
-
 translationGeneratorCount : Nat
 translationGeneratorCount = 6
 
@@ -242,8 +207,7 @@ record FiniteHeisenbergBoundary : Set where
   constructor finiteHeisenbergBoundary
   field
     generatorWeylRelationsProved : Bool
-    generatorWeylRelationsProvedIsTrue :
-      generatorWeylRelationsProved ≡ true
+    generatorWeylRelationsProvedIsTrue : generatorWeylRelationsProved ≡ true
     finiteStoneVonNeumannUniquenessProved : Bool
     finiteStoneVonNeumannUniquenessProvedIsFalse :
       finiteStoneVonNeumannUniquenessProved ≡ false
