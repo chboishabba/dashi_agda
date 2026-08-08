@@ -23,12 +23,20 @@ on:
       - 'scripts/render_monster_3b_certificate.py'
       - '.github/workflows/monster-3b-normalizer.yml'
 
+concurrency:
+  group: monster-3b-normalizer-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  exact-restriction-and-model:
+  exact-restriction-model-and-kernel:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
       - name: Install GAP, CTblLib, and plotting dependencies
         run: |
@@ -39,6 +47,12 @@ jobs:
             python3-numpy \
             python3-matplotlib
 
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
       - name: Report computational versions
         run: |
           gap -q <<'GAP'
@@ -47,7 +61,8 @@ jobs:
           Print("CTblLib ", InstalledPackageVersion("ctbllib"), "\n");
           QUIT;
           GAP
-          python3 --version
+          python --version
+          agda --version
 
       - name: Run the Monster 3B highest-alpha checker
         env:
@@ -55,12 +70,14 @@ jobs:
         run: bash scripts/check_monster_3b_normalizer_dashboard.sh
 
       - name: Upload restriction and structural certificates
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: monster-3b-normalizer-certificates
           path: |
             build/monster_3b_normalizer_restriction.json
             build/monster_3b_heisenberg_model_certificate.json
+            build/monster_3b_dashboard/elementary_abelian_two_plane_certificate.json
             build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
             build/monster_3b_dashboard/*.png
           if-no-files-found: error
