@@ -91,7 +91,7 @@ primeSpecificObserverMatchesP47 :
 primeSpecificObserverMatchesP47 = refl
 
 pointedSignedChainReachesFortySeven :
-  Atlas.pointedSignedCardinalityValue 23 ≡ 47
+  Atlas.pointedSignedSizeFormula 23 ≡ 47
 pointedSignedChainReachesFortySeven =
   Atlas.pointedSignedTwentyThreeIsFortySeven
 
