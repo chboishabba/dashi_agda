@@ -4,7 +4,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-bash scripts/check_monster_3b_projector_resolution_round3.sh
+# Reuse the stronger published-orbifold/local-module owner rather than
+# maintaining a second projector, evaluation, cocycle or weight-one checker.
+bash scripts/check_monster_3b_orbifold_local_module_round4.sh
 
 command -v gap >/dev/null 2>&1 || {
   echo "GAP is required for the actual-kernel tranche" >&2
@@ -55,49 +57,78 @@ assert payload["twelve_plus_seventy_eight_proved"] is False
 PY
 
 sources=(
-  DASHI/Moonshine/Monster3BExtraspecialCharacterSignatureExact.agda
+  DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda
   DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda
   DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda
-  DASHI/Moonshine/Monster3BActualMultiplicityIntertwinerExact.agda
-  DASHI/Moonshine/Monster3BProjectiveTensorCocycleExact.agda
+  DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda
+  DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda
+  DASHI/Moonshine/Monster3BNormalizerCocycleCancellationExact.agda
   DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda
-  DASHI/Moonshine/MoonshineOrbifoldMasslessStateRemovalExact.agda
   DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda
 )
 
 for source in "${sources[@]}"; do
   test -s "$source"
-  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK|{-# OPTIONS --unsafe|\{![^}]*!\}' "$source"; then
-    echo "forbidden trust escape or hole in $source" >&2
+  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|--allow-unsolved-metas|--no-termination-check|--no-positivity-check|--type-in-type|--omega-in-omega|--rewriting|--unsafe|TERMINATING|NON_COVERING|NO_POSITIVITY_CHECK|NO_UNIVERSE_CHECK' "$source"; then
+    echo "forbidden trust escape in $source" >&2
+    exit 1
+  fi
+  if grep -Pzoq '(?s)\{!.*?!\}' "$source"; then
+    echo "forbidden multiline hole in $source" >&2
     exit 1
   fi
 done
 
-required_patterns=(
-  'extraspecialCharacterDegreeSquareSumIsOrder'
-  'heisenbergNormNumeratorIsExtraspecialOrder'
-  'ninetyHeisenbergNoncentralValue'
-  'actualKernelCharacterIdentity'
-  'actualKernelNoncentralCharacterVanishes'
-  'actualKernelCentralCharacterIsZeta'
-  'actualZetaSectorIsNinetyHeisenbergCopies'
-  'constituentDegreeSumIsHeisenbergTimesCount'
-  'multiplicityForcedToNinety'
-  'actualZetaSectorHasNinetyConstituents'
-  'actualEvaluationMapInjective'
-  'actualEvaluationMapSurjective'
-  'actualMonsterLocalModuleIntertwiner'
-  'tensorCocycleCancels'
-  'multiplicityCharacterReconstructsAllClasses'
-  'zeroTraceClassCannotUseQuotientAlone'
-  'multiplicityCharacterEqualsTwelvePlusSeventyEight'
-  'orbifoldCompletionRemovesWeightOne'
-  'impliesFourDimensionalYangMillsGapIsFalse'
-)
+require_pattern() {
+  local source="$1"
+  local pattern="$2"
+  if ! grep -F "$pattern" "$source" >/dev/null; then
+    echo "missing required marker '$pattern' in $source" >&2
+    exit 1
+  fi
+}
 
-for pattern in "${required_patterns[@]}"; do
-  grep -R -F "$pattern" "${sources[@]}" >/dev/null
-done
+character=DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda
+promotion=DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda
+stone=DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda
+existing_eval=DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda
+actual_eval=DASHI/Moonshine/Monster3BActualMultiplicityEvaluationFromRecognitionExact.agda
+cocycle=DASHI/Moonshine/Monster3BNormalizerCocycleCancellationExact.agda
+safe=DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda
+validation=DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda
+reference=Docs/support/reference/Monster3BActualKernelCharacterRound4.md
+
+require_pattern "$character" 'extraspecialCharacterDegreeSquareSumIsOrder'
+require_pattern "$character" 'heisenbergNormNumeratorIsExtraspecialOrder'
+require_pattern "$character" 'modelConjugateNoncentralTraceIsZero'
+require_pattern "$character" 'actualKernelCharacterIdentity'
+require_pattern "$character" 'actualCentralZetaTraceAmplitude'
+require_pattern "$promotion" 'ActualMN3BKernelStructure'
+require_pattern "$promotion" 'actualKernelNoncentralCharacterVanishes'
+require_pattern "$promotion" 'actualKernelCentralCharacterIsZeta'
+require_pattern "$promotion" 'actualZetaSectorIsNinetyHeisenbergCopies'
+require_pattern "$stone" 'constituentDegreeSumIsHeisenbergTimesCount'
+require_pattern "$stone" 'multiplicityForcedToNinety'
+require_pattern "$stone" 'actualZetaSectorHasNinetyConstituents'
+require_pattern "$existing_eval" 'ActualZetaSectorRecognition'
+require_pattern "$actual_eval" 'actualEvaluationLeftInverse'
+require_pattern "$actual_eval" 'actualEvaluationRightInverse'
+require_pattern "$actual_eval" 'actualEvaluationTranslationEquivariant'
+require_pattern "$actual_eval" 'actualMonsterMultiplicityEvaluationIsomorphism'
+require_pattern "$cocycle" 'compensatedTensorActionIsHonestOnPureTensors'
+require_pattern "$safe" 'TraceAlgebra'
+require_pattern "$safe" 'multiplicityCharacterReconstructsAllClasses'
+require_pattern "$safe" 'zeroTraceClassCannotUseQuotientAlone'
+require_pattern "$safe" 'multiplicityCharacterEqualsTwelvePlusSeventyEight'
+require_pattern "$validation" 'extraspecialDegreeBudgetCloses'
+require_pattern "$validation" 'stoneVonNeumannMultiplicityIsUnique'
+require_pattern "$validation" 'actualEvaluationPromotionAvailable'
+require_pattern "$reference" 'actual AtlasRep'
+require_pattern "$reference" 'pointwise division'
+
+test ! -e DASHI/Moonshine/Monster3BExtraspecialCharacterSignatureExact.agda
+test ! -e DASHI/Moonshine/Monster3BProjectiveTensorCocycleExact.agda
+test ! -e DASHI/Moonshine/Monster3BActualMultiplicityIntertwinerExact.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda
