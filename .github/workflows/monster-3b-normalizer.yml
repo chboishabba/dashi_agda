@@ -1,0 +1,66 @@
+name: monster-3b-normalizer
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/Monster3B*.agda'
+      - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
+      - 'DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda'
+      - 'scripts/monster_3b_*'
+      - 'scripts/check_monster_3b_*'
+      - 'scripts/render_monster_3b_certificate.py'
+      - '.github/workflows/monster-3b-normalizer.yml'
+  push:
+    branches:
+      - agent/monster-3b-normalizer-dashboard
+    paths:
+      - 'DASHI/Moonshine/Monster3B*.agda'
+      - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
+      - 'DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda'
+      - 'scripts/monster_3b_*'
+      - 'scripts/check_monster_3b_*'
+      - 'scripts/render_monster_3b_certificate.py'
+      - '.github/workflows/monster-3b-normalizer.yml'
+
+jobs:
+  exact-restriction-and-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GAP, CTblLib, and plotting dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            gap \
+            gap-character-tables \
+            python3-numpy \
+            python3-matplotlib
+
+      - name: Report computational versions
+        run: |
+          gap -q <<'GAP'
+          LoadPackage("ctbllib");
+          Print("GAP ", GAPInfo.Version, "\n");
+          Print("CTblLib ", InstalledPackageVersion("ctbllib"), "\n");
+          QUIT;
+          GAP
+          python3 --version
+
+      - name: Run the Monster 3B highest-alpha checker
+        env:
+          MPLBACKEND: Agg
+        run: bash scripts/check_monster_3b_normalizer_dashboard.sh
+
+      - name: Upload restriction and structural certificates
+        uses: actions/upload-artifact@v4
+        with:
+          name: monster-3b-normalizer-certificates
+          path: |
+            build/monster_3b_normalizer_restriction.json
+            build/monster_3b_heisenberg_model_certificate.json
+            build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
+            build/monster_3b_dashboard/*.png
+          if-no-files-found: error
