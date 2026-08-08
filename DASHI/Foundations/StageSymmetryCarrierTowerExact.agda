@@ -52,7 +52,7 @@ record NonaryCarrier : Set where
     row column : C3
 
 ------------------------------------------------------------------------
--- Cardinality ledger.
+-- Cardinality ledger, backed by explicit complete finite enumerations.
 ------------------------------------------------------------------------
 
 c2Cardinality : Nat
@@ -78,6 +78,53 @@ hexadicCardinalityIsSix = refl
 
 nonaryCardinalityIsNine : nonaryCardinality ≡ 9
 nonaryCardinalityIsNine = refl
+
+carrierListLength : ∀ {A : Set} → List A → Nat
+carrierListLength [] = 0
+carrierListLength (_ ∷ xs) = 1 + carrierListLength xs
+
+allSquareCarriers : List SquareCarrier
+allSquareCarriers =
+  squareCarrier direct direct
+  ∷ squareCarrier direct inverse
+  ∷ squareCarrier inverse direct
+  ∷ squareCarrier inverse inverse
+  ∷ []
+
+allHexadicCarriers : List HexadicCarrier
+allHexadicCarriers =
+  hexadicCarrier negative direct
+  ∷ hexadicCarrier negative inverse
+  ∷ hexadicCarrier neutral direct
+  ∷ hexadicCarrier neutral inverse
+  ∷ hexadicCarrier positive direct
+  ∷ hexadicCarrier positive inverse
+  ∷ []
+
+allNonaryCarriers : List NonaryCarrier
+allNonaryCarriers =
+  nonaryCarrier negative negative
+  ∷ nonaryCarrier negative neutral
+  ∷ nonaryCarrier negative positive
+  ∷ nonaryCarrier neutral negative
+  ∷ nonaryCarrier neutral neutral
+  ∷ nonaryCarrier neutral positive
+  ∷ nonaryCarrier positive negative
+  ∷ nonaryCarrier positive neutral
+  ∷ nonaryCarrier positive positive
+  ∷ []
+
+squareEnumerationMatchesCardinality :
+  carrierListLength allSquareCarriers ≡ squareCardinality
+squareEnumerationMatchesCardinality = refl
+
+hexadicEnumerationMatchesCardinality :
+  carrierListLength allHexadicCarriers ≡ hexadicCardinality
+hexadicEnumerationMatchesCardinality = refl
+
+nonaryEnumerationMatchesCardinality :
+  carrierListLength allNonaryCarriers ≡ nonaryCardinality
+nonaryEnumerationMatchesCardinality = refl
 
 fiveIsClosedTriadPlusOpenPair : c3Cardinality + c2Cardinality ≡ 5
 fiveIsClosedTriadPlusOpenPair = refl
@@ -137,6 +184,12 @@ record StageFiveSymmetryMismatch : Set where
     openConstituent : BT.SymmetryAwareStageState
     totalAmplitude : Nat
     totalAmplitudeIsFive : totalAmplitude ≡ 5
+    totalAmplitudeFromConstituents :
+      BT.positiveUnits
+        (BT.SymmetryAwareStageState.balance closedConstituent)
+      + BT.positiveUnits
+          (BT.SymmetryAwareStageState.balance openConstituent)
+      ≡ totalAmplitude
     closedStabiliserIsS3 :
       BT.SymmetryAwareStageState.stabiliser closedConstituent
       ≡ BT.fullStabiliserS3
@@ -149,7 +202,7 @@ canonicalStageFiveSymmetryMismatch =
   stageFiveSymmetryMismatch
     BT.stage3SymmetryState
     BT.stage2SymmetryState
-    5 refl refl refl
+    5 refl refl refl refl
 
 record SymmetryTowerBoundary : Set where
   constructor symmetryTowerBoundary
