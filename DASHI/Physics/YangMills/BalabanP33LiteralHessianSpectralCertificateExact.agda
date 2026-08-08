@@ -30,7 +30,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; _/_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
@@ -148,7 +148,13 @@ p33OneThirtySecond : ℚ
 p33OneThirtySecond = + 1 / 32
 
 p33OneThirtySecondPositive : 0ℚ < p33OneThirtySecond
-p33OneThirtySecondPositive = ℚP.positive⁻¹ p33OneThirtySecond
+p33OneThirtySecondPositive =
+  let
+    instance
+      positive : Positive p33OneThirtySecond
+      positive = ℚP.normalize-pos 1 32
+  in
+  ℚP.positive⁻¹ p33OneThirtySecond
 
 p33NormalizedEigenvalueAtLeastOneThirtySecond :
   ∀ {matrix vector eigenvalue} →
