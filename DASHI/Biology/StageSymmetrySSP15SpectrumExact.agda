@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.StageSymmetrySSP15BridgeExact as Base
 import DASHI.Biology.OggPrimeNonaryAddressExact as Address
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact as Amp
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
@@ -180,7 +181,7 @@ p3UsesTriadicClosureMode :
   Address.complementMode
     (Base.nonaryAddress
       (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p3)))
-  ≡ Address.Quotient.mode36
+  ≡ Quotient.mode36
 p3UsesTriadicClosureMode = refl
 
 ------------------------------------------------------------------------
