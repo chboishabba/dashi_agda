@@ -37,9 +37,5 @@ for pattern in "${required_patterns[@]}"; do
   grep -R -F "$pattern" "${sources[@]}" >/dev/null
 done
 
-if command -v agda >/dev/null 2>&1; then
-  agda -i . -l standard-library \
-    DASHI/Physics/YangMills/BalabanClayHighestAlphaRound37RepairSelectorValidation.agda
-else
-  echo "agda unavailable: skipped kernel check" >&2
-fi
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/YangMills/BalabanClayHighestAlphaRound37RepairSelectorValidation.agda
