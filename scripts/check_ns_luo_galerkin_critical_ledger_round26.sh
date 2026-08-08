@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoSignedCriticalLedgerRound26Exact.agda
+  DASHI/Physics/Closure/NSTriadKNLuoPhysicalSignedShellCellRound26Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoFiniteKernelCommutatorRound26Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoLowTransportCommutatorRound26Exact.agda
   DASHI/Physics/Closure/NSTriadKNLuoDivisionFreeHHDefectRound26Exact.agda
@@ -66,9 +67,8 @@ grep -q 'Physical.PhysicalTriadIncidence' "$polynomial"
 
 energy=DASHI/Physics/Closure/NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact.agda
 grep -q 'resonantTriadEnergyExchangeCyclicZero' "$energy"
-grep -q 'aPairCancels' "$energy"
-grep -q 'bPairCancels' "$energy"
-grep -q 'cPairCancels' "$energy"
+grep -q 'physicalComplex3TriadEnergyCancellation' "$energy"
+grep -q 'PhysicalEnergy.exactTriadEnergyCancellation' "$energy"
 grep -q 'shellInternalTransferCancels' "$energy"
 
 ledger=DASHI/Physics/Closure/NSTriadKNLuoSignedCriticalLedgerRound26Exact.agda
@@ -77,6 +77,14 @@ grep -q 'weightedShellBalance' "$ledger"
 grep -q 'finiteSignedCriticalLedgerExact' "$ledger"
 grep -q 'lowerBoundarySource upperBoundarySource' "$ledger"
 grep -q 'MeanZeroHomogeneousCriticalCarrier' "$ledger"
+
+physical_shell=DASHI/Physics/Closure/NSTriadKNLuoPhysicalSignedShellCellRound26Exact.agda
+grep -q 'PhysicalSignedShellInputs' "$physical_shell"
+grep -q 'PhysicalSum.fiveSourceTotal' "$physical_shell"
+grep -q 'PhysicalSum.physicalFiveSourcePartitionExact' "$physical_shell"
+grep -q 'physicalSignedShellBalance' "$physical_shell"
+grep -q 'physicalSignedCriticalShellCell' "$physical_shell"
+grep -q 'physicalShellCellSourcesAreForced' "$physical_shell"
 
 kernel=DASHI/Physics/Closure/NSTriadKNLuoFiniteKernelCommutatorRound26Exact.agda
 grep -q 'finiteKernelCommutatorCellIdentity' "$kernel"
@@ -87,7 +95,10 @@ grep -q 'dyadicFirstMomentInherited' "$kernel"
 low=DASHI/Physics/Closure/NSTriadKNLuoLowTransportCommutatorRound26Exact.agda
 grep -q 'LowAdvectsHigh' "$low"
 grep -q 'principalLowTransportCancels' "$low"
+grep -q 'exactProjectedLowTransportCommutator' "$low"
+grep -q 'signedCommutatorIsLiteralMultiplierDifference' "$low"
 grep -q 'survivingFiniteTermIsIncrementCommutator' "$low"
+grep -q 'pointwiseMultiplierDifferenceReductionChecked' "$low"
 grep -q 'Set (lsuc ℓ)' "$low"
 
 hh=DASHI/Physics/Closure/NSTriadKNLuoDivisionFreeHHDefectRound26Exact.agda
@@ -128,6 +139,9 @@ grep -q 'zeroBudgetIsZero' "$regression"
 
 integration=DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaRound26Exact.agda
 grep -q 'Round26ExactEvidence' "$integration"
+grep -q 'physicalFiveSourceShellCell' "$integration"
+grep -q 'physicalFiveSourceShellCellHHMeaning' "$integration"
+grep -q 'physicalShellEvolutionStillOpen' "$integration"
 grep -q 'hystereticEntriesPaidByPositiveVariation' "$integration"
 grep -q 'namedRemaindersRecomposeExactly' "$integration"
 grep -q 'localODEStillOpen' "$integration"
@@ -138,20 +152,27 @@ grep -q 'clayPromotionStillFalse' "$integration"
 paper=DASHI/Papers/NavierStokes/GalerkinCriticalLedgerRound26.agda
 grep -q 'canonicalGalerkinCriticalLedgerRound26Status' "$paper"
 grep -q 'finiteAlgebraAdvanced' "$paper"
+grep -q 'physicalSignedShellBridgeAdvanced' "$paper"
 grep -q 'taxOwnershipAdvanced' "$paper"
 grep -q 'localODEInstanceRemainsOpen' "$paper"
+grep -q 'physicalShellBalanceRemainsOpen' "$paper"
 grep -q 'uniformTaxRemainsOpen' "$paper"
 grep -q 'strictMarginRemainsOpen' "$paper"
 grep -q 'clayPromotionRemainsFalse' "$paper"
 
 current=DASHI/Papers/NavierStokes/CurrentTheoremInterfaceRound26.agda
 grep -q 'canonicalCurrentNSPaperTheoremInterfaceRound26' "$current"
+grep -q 'physicalTriadEnergyCancellationChecked' "$current"
+grep -q 'physicalFiveSourceSignedShellBridgeChecked' "$current"
+grep -q 'physicalTimeDependentShellBalanceStillOpen' "$current"
+grep -q 'currentRound26PhysicalShellBridgeChecked' "$current"
 grep -q 'currentRound26TaxOwnershipChecked' "$current"
 grep -q 'currentRound26ClayPromotionFalse' "$current"
 
 grep -q '\[finite Galerkin and critical-tax tranche\](galerkin-critical-ledger-round26.md)' docs/ns-clay-contract/README.md
 grep -q '\[Round 26 finite Galerkin and critical-tax ledger\](galerkin-critical-ledger-round26.md)' docs/ns-clay-contract/README.md
 grep -q '\[Back to the Clay-contract overview\](README.md)' docs/ns-clay-contract/galerkin-critical-ledger-round26.md
+grep -q 'Physical five-source signed-shell bridge' docs/ns-clay-contract/galerkin-critical-ledger-round26.md
 grep -q 'Duplicate-free tax ownership' docs/ns-clay-contract/galerkin-critical-ledger-round26.md
 grep -q 'L7 — Duplicate-free physical tax ledger' docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
 grep -q 'Strict unique-owner viscosity certificate' docs/ns-clay-contract/architecture.puml
