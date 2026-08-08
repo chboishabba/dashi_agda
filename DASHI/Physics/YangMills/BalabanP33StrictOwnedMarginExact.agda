@@ -31,7 +31,8 @@ module DASHI.Physics.YangMills.BalabanP33StrictOwnedMarginExact where
 -- Second, every one-step Schur/RG loss has exactly one enumerated owner.  The
 -- total is reconstructed from those seven contributions and a strict owned
 -- margin records the actual inequality needed by the RG induction.  No
--- physical contribution or strict inequality is manufactured here.
+-- physical contribution, contribution-wise bound, or strict inequality is
+-- manufactured here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -39,9 +40,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using
-  (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Relation.Nullary using (Dec; yes; no)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -56,17 +55,19 @@ record UniformCoerciveCoreDecomposition (available : ℚ) : Set where
 
 open UniformCoerciveCoreDecomposition public
 
-uniformCoreBelowAvailable : ∀ {available} →
-  UniformCoerciveCoreDecomposition available →
-  commonCore _ ≤ available
+uniformCoreBelowAvailable :
+  ∀ {available}
+    (decomposition : UniformCoerciveCoreDecomposition available) →
+  commonCore decomposition ≤ available
 uniformCoreBelowAvailable {available} decomposition =
   let
     core = commonCore decomposition
     residual = scaleResidual decomposition
 
     withResidual : core + 0ℚ ≤ core + residual
-    withResidual = ℚP.+-mono-≤ ℚP.≤-refl
-      (residualNonnegative decomposition)
+    withResidual =
+      ℚP.+-mono-≤ ℚP.≤-refl
+        (residualNonnegative decomposition)
   in
   subst
     (λ left → left ≤ available)
@@ -87,14 +88,15 @@ maximalUniformCoerciveCoreAttained : ∀ available →
 maximalUniformCoerciveCoreAttained available = refl
 
 everyUniformCoreBelowCandidate :
-  ∀ available (candidate : UniformCoerciveCoreDecomposition available) →
+  ∀ available
+    (candidate : UniformCoerciveCoreDecomposition available) →
   commonCore candidate ≤ commonCore (maximalCoreCandidate available)
 everyUniformCoreBelowCandidate available candidate =
   uniformCoreBelowAvailable candidate
 
 maximalUniformCoerciveCore :
-  ∀ available →
-  (candidate : UniformCoerciveCoreDecomposition available) →
+  ∀ available
+    (candidate : UniformCoerciveCoreDecomposition available) →
   commonCore candidate ≤ available
 maximalUniformCoerciveCore available candidate =
   everyUniformCoreBelowCandidate available candidate
@@ -242,125 +244,6 @@ strictMarginAfterErasingOwners margin =
       lossScale margin * selected < availableMargin margin)
     (eraseOwnershipReconstructsPhysicalRemainder margin)
     (strictOwnedDiscountedMargin margin)
-
-ownerContributionBelowTotal :
-  ∀ losses owner →
-  (∀ selected → 0ℚ ≤ ownedLoss losses selected) →
-  ownedLoss losses owner ≤ sumOwnedLoss losses
-ownerContributionBelowTotal losses coarseBlockOwner nonnegative =
-  addNonnegativeTail
-    (coarseBlockLoss losses)
-    (fluctuationInverseLoss losses)
-    (coarseFineDerivativeLoss losses)
-    (smallFieldNonlinearLoss losses)
-    (largeFieldPolymerLoss losses)
-    (boundaryCollarLoss losses)
-    (gaugeProjectionLoss losses)
-    (nonnegative fluctuationInverseOwner)
-    (nonnegative coarseFineDerivativeOwner)
-    (nonnegative smallFieldNonlinearOwner)
-    (nonnegative largeFieldPolymerOwner)
-    (nonnegative boundaryCollarOwner)
-    (nonnegative gaugeProjectionOwner)
-  where
-  addNonnegativeTail : ∀ first second third fourth fifth sixth seventh →
-    0ℚ ≤ second → 0ℚ ≤ third → 0ℚ ≤ fourth →
-    0ℚ ≤ fifth → 0ℚ ≤ sixth → 0ℚ ≤ seventh →
-    first ≤ first + second + third + fourth + fifth + sixth + seventh
-  addNonnegativeTail first second third fourth fifth sixth seventh
-      secondNN thirdNN fourthNN fifthNN sixthNN seventhNN =
-    let
-      step1 : first ≤ first + second
-      step1 = subst
-        (λ left → left ≤ first + second)
-        (ℚP.+-identityʳ first)
-        (ℚP.+-mono-≤ ℚP.≤-refl secondNN)
-
-      step2 = ℚP.+-monoʳ-≤ third step1
-      step3 = ℚP.+-monoʳ-≤ fourth step2
-      step4 = ℚP.+-monoʳ-≤ fifth step3
-      step5 = ℚP.+-monoʳ-≤ sixth step4
-      step6 = ℚP.+-monoʳ-≤ seventh step5
-    in
-    subst
-      (λ upper → first ≤ upper)
-      (ℚRing.solve-∀ first second third fourth fifth sixth seventh)
-      step6
-ownerContributionBelowTotal losses fluctuationInverseOwner nonnegative =
-  middleOwnerBound losses fluctuationInverseOwner nonnegative
-ownerContributionBelowTotal losses coarseFineDerivativeOwner nonnegative =
-  middleOwnerBound losses coarseFineDerivativeOwner nonnegative
-ownerContributionBelowTotal losses smallFieldNonlinearOwner nonnegative =
-  middleOwnerBound losses smallFieldNonlinearOwner nonnegative
-ownerContributionBelowTotal losses largeFieldPolymerOwner nonnegative =
-  middleOwnerBound losses largeFieldPolymerOwner nonnegative
-ownerContributionBelowTotal losses boundaryCollarOwner nonnegative =
-  middleOwnerBound losses boundaryCollarOwner nonnegative
-ownerContributionBelowTotal losses gaugeProjectionOwner nonnegative =
-  middleOwnerBound losses gaugeProjectionOwner nonnegative
-
-middleOwnerBound : ∀ losses owner →
-  (∀ selected → 0ℚ ≤ ownedLoss losses selected) →
-  ownedLoss losses owner ≤ sumOwnedLoss losses
-middleOwnerBound losses owner nonnegative =
-  let
-    selected = ownedLoss losses owner
-    otherTotal =
-      ownedLoss losses coarseBlockOwner
-      + ownedLoss losses fluctuationInverseOwner
-      + ownedLoss losses coarseFineDerivativeOwner
-      + ownedLoss losses smallFieldNonlinearOwner
-      + ownedLoss losses largeFieldPolymerOwner
-      + ownedLoss losses boundaryCollarOwner
-      + ownedLoss losses gaugeProjectionOwner
-      - selected
-
-    selectedPlusOther : selected + otherTotal ≡ sumOwnedLoss losses
-    selectedPlusOther with owner
-    ... | coarseBlockOwner = ℚRing.solve-∀
-      (coarseBlockLoss losses) (fluctuationInverseLoss losses)
-      (coarseFineDerivativeLoss losses) (smallFieldNonlinearLoss losses)
-      (largeFieldPolymerLoss losses) (boundaryCollarLoss losses)
-      (gaugeProjectionLoss losses)
-    ... | fluctuationInverseOwner = ℚRing.solve-∀
-      (coarseBlockLoss losses) (fluctuationInverseLoss losses)
-      (coarseFineDerivativeLoss losses) (smallFieldNonlinearLoss losses)
-      (largeFieldPolymerLoss losses) (boundaryCollarLoss losses)
-      (gaugeProjectionLoss losses)
-    ... | coarseFineDerivativeOwner = ℚRing.solve-∀
-      (coarseBlockLoss losses) (fluctuationInverseLoss losses)
-      (coarseFineDerivativeLoss losses) (smallFieldNonlinearLoss losses)
-      (largeFieldPolymerLoss losses) (boundaryCollarLoss losses)
-      (gaugeProjectionLoss losses)
-    ... | smallFieldNonlinearOwner = ℚRing.solve-∀
-      (coarseBlockLoss losses) (fluctuationInverseLoss losses)
-      (coarseFineDerivativeLoss losses) (smallFieldNonlinearLoss losses)
-      (largeFieldPolymerLoss losses) (boundaryCollarLoss losses)
-      (gaugeProjectionLoss losses)
-    ... | largeFieldPolymerOwner = ℚRing.solve-∀
-      (coarseBlockLoss losses) (fluctuationInverseLoss losses)
-      (coarseFineDerivativeLoss losses) (smallFieldNonlinearLoss losses)
-      (largeFieldPolymerLoss losses) (boundaryCollarLoss losses)
-      (gaugeProjectionLoss losses)
-    ... | boundaryCollarOwner = ℚRing.solve-∀
-      (coarseBlockLoss losses) (fluctuationInverseLoss losses)
-      (coarseFineDerivativeLoss losses) (smallFieldNonlinearLoss losses)
-      (largeFieldPolymerLoss losses) (boundaryCollarLoss losses)
-      (gaugeProjectionLoss losses)
-    ... | gaugeProjectionOwner = ℚRing.solve-∀
-      (coarseBlockLoss losses) (fluctuationInverseLoss losses)
-      (coarseFineDerivativeLoss losses) (smallFieldNonlinearLoss losses)
-      (largeFieldPolymerLoss losses) (boundaryCollarLoss losses)
-      (gaugeProjectionLoss losses)
-  in
-  -- This generic middle-owner statement additionally needs a proof that the
-  -- sum of all unselected nonnegative contributions is nonnegative.  That
-  -- finite fold is kept out of the strict-margin constructor and supplied by
-  -- the concrete RG instance.
-  subst
-    (λ target → selected ≤ target)
-    selectedPlusOther
-    (ℚP.+-monoʳ-≤ otherTotal ℚP.≤-refl)
 
 maximalUniformCoerciveCoreLevel : ProofLevel
 maximalUniformCoerciveCoreLevel = machineChecked
