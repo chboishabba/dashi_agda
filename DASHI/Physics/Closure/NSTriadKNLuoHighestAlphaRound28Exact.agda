@@ -23,9 +23,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound28Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
+import Data.Integer.Base as Int
+import Data.Rational.Base as Rat
 
-import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
@@ -82,28 +82,29 @@ record Round28ExactEvidence : Set₁ where
         (Defect.scaleMode leftScale left)
         (Defect.scaleMode rightScale right)
       ≡
-      ((leftScale Data.Integer.* rightScale)
-        Data.Integer.* (leftScale Data.Integer.* rightScale))
-      Data.Integer.* Plucker.pluckerNormSquared left right
+      ((leftScale Int.* rightScale)
+        Int.* (leftScale Int.* rightScale))
+      Int.* Plucker.pluckerNormSquared left right
 
     nineOwnerAggregate :
       ∀ {environment}
         (family : TaxLanguage.NineOwnerEstimateFamily environment) →
-      TaxLanguage.sumProduction (TaxLanguage.nineOwnerList family)
-      Data.Rational.Base.≤
-      TaxLanguage.admissibleAggregateRight
-        (TaxLanguage.nineOwnerList family)
+      Rat._≤_
+        (TaxLanguage.sumProduction (TaxLanguage.nineOwnerList family))
+        (TaxLanguage.admissibleAggregateRight
+          (TaxLanguage.nineOwnerList family))
 
     strictNineOwnerAbsorption :
       (balance : Absorption.NineOwnerCriticalBalance) →
-      Absorption.energyOut balance
-        Data.Rational.Base.+
-        Absorption.remainingViscosity balance
-          Data.Rational.Base.*
-          TaxLanguage.dissipation (Absorption.environment balance)
-      Data.Rational.Base.≤
-      Absorption.energyIn balance
-        Data.Rational.Base.+ Absorption.admissibleRemainder balance
+      Rat._≤_
+        (Rat._+_
+          (Absorption.energyOut balance)
+          (Rat._*_
+            (Absorption.remainingViscosity balance)
+            (TaxLanguage.dissipation (Absorption.environment balance))))
+        (Rat._+_
+          (Absorption.energyIn balance)
+          (Absorption.admissibleRemainder balance))
 
 open Round28ExactEvidence public
 
