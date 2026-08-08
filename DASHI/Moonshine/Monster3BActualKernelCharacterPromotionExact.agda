@@ -20,17 +20,18 @@ module DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Separate the now-computable actual-kernel structure from the remaining
--- character recognition.  Once the actual restricted character is matched to
--- the extraspecial four-class signature, every named consequence below is
--- derived, including noncentral vanishing and multiplicity ninety.
+-- Combine the actual AtlasRep/CTblLib kernel-structure certificate with the
+-- repository's single kernel-character criterion owner.  No parallel
+-- cyclotomic trace type is introduced.  Once the actual class certificate is
+-- supplied, noncentral vanishing, central zeta amplitude and ninety-fold
+-- Heisenberg character isotypy are derived.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat)
 
-import DASHI.Moonshine.Monster3BExtraspecialCharacterSignatureExact as Signature
+import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 
 ------------------------------------------------------------------------
 -- Actual AtlasRep/CTblLib structure certificate shape.
@@ -68,30 +69,36 @@ record ActualKernelCharacterPromotion : Set₁ where
   field
     kernelStructure : ActualMN3BKernelStructure
     ActualKernelClass : Set
-    classifyKernelClass :
-      ActualKernelClass → Signature.ExtraspecialClassKind
-    actualRestrictedCharacter :
-      ActualKernelClass → Signature.C3Trace
-
-    actualCharacterRecognized :
-      (class : ActualKernelClass) →
-      actualRestrictedCharacter class
-      ≡ Signature.ninetyHeisenbergCharacter
-          (classifyKernelClass class)
+    characterCertificate :
+      Character.ActualKernelCharacterCertificate ActualKernelClass
 
 open ActualKernelCharacterPromotion public
+
+classifyKernelClass :
+  (promotion : ActualKernelCharacterPromotion) →
+  ActualKernelClass promotion → Character.ExtraspecialClassKind
+classifyKernelClass promotion =
+  Character.classify (characterCertificate promotion)
+
+actualRestrictedCharacter :
+  (promotion : ActualKernelCharacterPromotion) →
+  ActualKernelClass promotion → Character.CyclotomicTrace3
+actualRestrictedCharacter promotion =
+  Character.actualTrace (characterCertificate promotion)
 
 actualKernelCharacterIdentity :
   (promotion : ActualKernelCharacterPromotion) →
   (class : ActualKernelClass promotion) →
   actualRestrictedCharacter promotion class
-  ≡ Signature.ninetyHeisenbergCharacter
+  ≡ Character.ninetyFoldModelKernelTrace
       (classifyKernelClass promotion class)
-actualKernelCharacterIdentity = actualCharacterRecognized
+actualKernelCharacterIdentity promotion =
+  Character.actualKernelCharacterIdentity
+    (characterCertificate promotion)
 
 record ClassifiedKernelClass
   (promotion : ActualKernelCharacterPromotion)
-  (kind : Signature.ExtraspecialClassKind) : Set where
+  (kind : Character.ExtraspecialClassKind) : Set where
   constructor classified-kernel-class
   field
     class : ActualKernelClass promotion
@@ -101,23 +108,28 @@ open ClassifiedKernelClass public
 
 actualKernelNoncentralCharacterVanishes :
   (promotion : ActualKernelCharacterPromotion) →
-  (classified : ClassifiedKernelClass promotion Signature.noncentralClass) →
+  (classified :
+    ClassifiedKernelClass promotion Character.noncentralClass) →
   actualRestrictedCharacter promotion (class classified)
-  ≡ Signature.zeroTrace
-actualKernelNoncentralCharacterVanishes promotion classified
-  rewrite actualKernelCharacterIdentity promotion (class classified)
-        | classification classified = refl
+  ≡ Character.zeroTrace
+actualKernelNoncentralCharacterVanishes promotion classified =
+  Character.actualNoncentralTraceVanishes
+    (characterCertificate promotion)
+    (class classified)
+    (classification classified)
 
 actualKernelCentralCharacterIsZeta :
   (promotion : ActualKernelCharacterPromotion) →
   (classified :
-    ClassifiedKernelClass promotion Signature.centralZetaClass) →
-  Signature.zetaCoefficient
+    ClassifiedKernelClass promotion Character.centralZetaClass) →
+  Character.coefficientZeta
     (actualRestrictedCharacter promotion (class classified))
   ≡ 65610
-actualKernelCentralCharacterIsZeta promotion classified
-  rewrite actualKernelCharacterIdentity promotion (class classified)
-        | classification classified = refl
+actualKernelCentralCharacterIsZeta promotion classified =
+  Character.actualCentralZetaTraceAmplitude
+    (characterCertificate promotion)
+    (class classified)
+    (classification classified)
 
 record NinetyHeisenbergCharacterIsotypy
   (promotion : ActualKernelCharacterPromotion) : Set₁ where
@@ -128,8 +140,8 @@ record NinetyHeisenbergCharacterIsotypy
     characterEquality :
       (class : ActualKernelClass promotion) →
       actualRestrictedCharacter promotion class
-      ≡ Signature.scaleTrace multiplicity
-          (Signature.heisenbergZetaCharacter
+      ≡ Character.scaleTrace multiplicity
+          (Character.heisenbergKernelTrace
             (classifyKernelClass promotion class))
 
 open NinetyHeisenbergCharacterIsotypy public
@@ -141,7 +153,8 @@ actualZetaSectorIsNinetyHeisenbergCopies promotion =
   ninety-heisenberg-character-isotypy
     90
     refl
-    (actualCharacterRecognized promotion)
+    (Character.traceMatchesNinetyFoldModel
+      (characterCertificate promotion))
 
 ------------------------------------------------------------------------
 -- Exact boundary after this tranche.
@@ -153,9 +166,9 @@ record ActualKernelPromotionStatus : Set where
     atlasKernelStructureProducerImplemented : Bool
     atlasKernelStructureProducerImplementedIsTrue :
       atlasKernelStructureProducerImplemented ≡ true
-    characterSignatureTheoremImplemented : Bool
-    characterSignatureTheoremImplementedIsTrue :
-      characterSignatureTheoremImplemented ≡ true
+    kernelCharacterCriterionUpgraded : Bool
+    kernelCharacterCriterionUpgradedIsTrue :
+      kernelCharacterCriterionUpgraded ≡ true
     actualKernelCharacterCertificateObserved : Bool
     actualKernelCharacterCertificateObservedIsFalse :
       actualKernelCharacterCertificateObserved ≡ false
