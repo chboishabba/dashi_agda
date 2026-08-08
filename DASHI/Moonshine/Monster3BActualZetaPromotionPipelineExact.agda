@@ -25,16 +25,11 @@ module DASHI.Moonshine.Monster3BActualZetaPromotionPipelineExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Multiplicity
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
-
-------------------------------------------------------------------------
--- Combined actual-sector promotion object.
-------------------------------------------------------------------------
 
 record ActualZetaPromotionPipeline : Set₁ where
   field
@@ -47,11 +42,6 @@ record ActualZetaPromotionPipeline : Set₁ where
       Multiplicity.ActualZetaSectorRecognition chosenZetaSector
 
 open ActualZetaPromotionPipeline public
-
-------------------------------------------------------------------------
--- The inertia action on the sigma eigenspace transports to the chosen actual
--- sector through the supplied two-sided phase-resolution equivalence.
-------------------------------------------------------------------------
 
 chosenInertiaAction :
   (pipeline : ActualZetaPromotionPipeline) →
@@ -82,11 +72,6 @@ chosenInertiaActionAgreesAfterInclusion pipeline inertia state =
       inertia
       (includeChosenZeta pipeline state))
 
-------------------------------------------------------------------------
--- All existing model-derived structure is now available on the phase-resolved
--- sector from the one recognition object.
-------------------------------------------------------------------------
-
 chosenWeightPosition :
   (pipeline : ActualZetaPromotionPipeline) →
   chosenZetaSector pipeline → H.X6
@@ -95,11 +80,9 @@ chosenWeightPosition pipeline =
 
 chosenMultiplicityCoordinate :
   (pipeline : ActualZetaPromotionPipeline) →
-  chosenZetaSector pipeline → Agda.Builtin.Nat.Nat
-chosenMultiplicityCoordinate pipeline state =
-  Agda.Builtin.Fin.toℕ
-    (Multiplicity.actualMultiplicityCoordinate
-      (modelRecognition pipeline) state)
+  chosenZetaSector pipeline → Fin 90
+chosenMultiplicityCoordinate pipeline =
+  Multiplicity.actualMultiplicityCoordinate (modelRecognition pipeline)
 
 chosenOwnWeightProjectorCoefficient :
   (pipeline : ActualZetaPromotionPipeline) →
@@ -130,10 +113,6 @@ chosenWeylExponent :
 chosenWeylExponent pipeline =
   Multiplicity.actualGeneratorWeylExponent
     (modelRecognition pipeline)
-
-------------------------------------------------------------------------
--- The remaining actual input is isolated in one record.
-------------------------------------------------------------------------
 
 record ActualZetaPromotionBoundary : Set where
   constructor actual-zeta-promotion-boundary
