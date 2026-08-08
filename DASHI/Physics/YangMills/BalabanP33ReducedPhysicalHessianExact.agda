@@ -187,26 +187,28 @@ open ReducedHessianInverseData public
 
 reducedGreenApply : ∀ {Reduced} → ReducedHessianInverseData Reduced →
   ReducedVector Reduced → ReducedVector Reduced
-reducedGreenApply data = Rect.applyRectangular
-  (reducedCarrier (frame data))
-  (Matrix.inverseMatrix (inverseCertificate data))
+reducedGreenApply inverseData = Rect.applyRectangular
+  (reducedCarrier (frame inverseData))
+  (Matrix.inverseMatrix (inverseCertificate inverseData))
 
 reducedGreenLeftExact : ∀ {Reduced}
-    (data : ReducedHessianInverseData Reduced) vector coordinate →
-  reducedGreenApply data
-    (Rect.applyRectangular (reducedCarrier (frame data))
-      (reducedHessianMatrix (frame data) (ambientHessian data)) vector)
+    (inverseData : ReducedHessianInverseData Reduced) vector coordinate →
+  reducedGreenApply inverseData
+    (Rect.applyRectangular (reducedCarrier (frame inverseData))
+      (reducedHessianMatrix (frame inverseData)
+        (ambientHessian inverseData)) vector)
     coordinate ≡ vector coordinate
-reducedGreenLeftExact data =
-  Matrix.matrixInverseLeftExact (inverseCertificate data)
+reducedGreenLeftExact inverseData =
+  Matrix.matrixInverseLeftExact (inverseCertificate inverseData)
 
 reducedGreenRightExact : ∀ {Reduced}
-    (data : ReducedHessianInverseData Reduced) vector coordinate →
-  Rect.applyRectangular (reducedCarrier (frame data))
-    (reducedHessianMatrix (frame data) (ambientHessian data))
-    (reducedGreenApply data vector) coordinate ≡ vector coordinate
-reducedGreenRightExact data =
-  Matrix.matrixInverseRightExact (inverseCertificate data)
+    (inverseData : ReducedHessianInverseData Reduced) vector coordinate →
+  Rect.applyRectangular (reducedCarrier (frame inverseData))
+    (reducedHessianMatrix (frame inverseData)
+      (ambientHessian inverseData))
+    (reducedGreenApply inverseData vector) coordinate ≡ vector coordinate
+reducedGreenRightExact inverseData =
+  Matrix.matrixInverseRightExact (inverseCertificate inverseData)
 
 reducedPhysicalHessianLevel : ProofLevel
 reducedPhysicalHessianLevel = machineChecked
