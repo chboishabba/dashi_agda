@@ -120,8 +120,8 @@ canonicalTerminalPoint =
 
 ------------------------------------------------------------------------
 -- Existing reduced carrier compatibility is currently dimensional.  A genuine
--- equivalence must identify the distinguished product point and construct a
--- bijection from its complement to ReducedMode53.
+-- equivalence must identify the unique distinguished product point and prove a
+-- bijection from its complement to ReducedMode53 in both directions.
 ------------------------------------------------------------------------
 
 record TerminalProductReducedEquivalence : Set₁ where
@@ -129,6 +129,10 @@ record TerminalProductReducedEquivalence : Set₁ where
   field
     isDistinguished : TerminalFibre54 → Set
     distinguishedWitness : isDistinguished canonicalTerminalPoint
+    distinguishedOnly :
+      (point : TerminalFibre54) →
+      isDistinguished point →
+      point ≡ canonicalTerminalPoint
     encodeReduced :
       (point : TerminalFibre54) →
       ¬ isDistinguished point →
@@ -143,6 +147,10 @@ record TerminalProductReducedEquivalence : Set₁ where
         (decodeReduced mode)
         (decodedIsNotDistinguished mode)
       ≡ mode
+    decodeEncode :
+      (point : TerminalFibre54) →
+      (notDistinguished : ¬ isDistinguished point) →
+      decodeReduced (encodeReduced point notDistinguished) ≡ point
 
 ------------------------------------------------------------------------
 -- Product depth and literal self-indexed tetration are distinct.
