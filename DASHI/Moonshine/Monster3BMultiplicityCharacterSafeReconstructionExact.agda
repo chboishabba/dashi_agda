@@ -15,16 +15,31 @@ module DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact whe
 --
 -- DASHI CONTRIBUTION
 --
--- Make the classwise character calculation fail closed.  Pointwise division
--- by the Heisenberg trace is admitted only on classes carrying an explicit
--- nonzero denominator.  Vanishing-trace classes must instead be reconstructed
--- from independent class relations or character inner products.
+-- Make the classwise character calculation fail closed over an arbitrary
+-- trace algebra, including cyclotomic character values.  Pointwise division by
+-- the Heisenberg trace is admitted only on classes carrying an explicit product
+-- equation.  Vanishing-trace classes must instead be reconstructed from an
+-- independent class relation or inner-product calculation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
+
+------------------------------------------------------------------------
+-- Minimal trace algebra.  No order or division is assumed.
+------------------------------------------------------------------------
+
+record TraceAlgebra : Set₁ where
+  field
+    Carrier : Set
+    zero : Carrier
+    add : Carrier → Carrier → Carrier
+    multiply : Carrier → Carrier → Carrier
+    zeroMultiplyLeft : (value : Carrier) → multiply zero value ≡ zero
+
+open TraceAlgebra public
 
 ------------------------------------------------------------------------
 -- Two legitimate recovery methods.
@@ -34,48 +49,52 @@ data RecoveryKind : Set where
   quotientOnNonzeroTrace : RecoveryKind
   independentClassEquation : RecoveryKind
 
-record MultiplicityClassRow : Set where
+record MultiplicityClassRow (algebra : TraceAlgebra) : Set where
   constructor multiplicity-class-row
   field
-    ambientTrace : Nat
-    heisenbergTrace : Nat
-    multiplicityTrace : Nat
+    ambientTrace : Carrier algebra
+    heisenbergTrace : Carrier algebra
+    multiplicityTrace : Carrier algebra
     recoveryKind : RecoveryKind
 
     quotientEquation :
       recoveryKind ≡ quotientOnNonzeroTrace →
-      heisenbergTrace * multiplicityTrace ≡ ambientTrace
+      multiply algebra heisenbergTrace multiplicityTrace ≡ ambientTrace
 
     independentEquation :
       recoveryKind ≡ independentClassEquation →
-      ambientTrace ≡ heisenbergTrace * multiplicityTrace
+      ambientTrace ≡ multiply algebra heisenbergTrace multiplicityTrace
 
 open MultiplicityClassRow public
 
 quotientRow :
-  (ambient heisenberg multiplicity : Nat) →
-  heisenberg * multiplicity ≡ ambient →
-  MultiplicityClassRow
-quotientRow ambient heisenberg multiplicity equation =
+  (algebra : TraceAlgebra) →
+  (ambient heisenberg multiplicity : Carrier algebra) →
+  multiply algebra heisenberg multiplicity ≡ ambient →
+  MultiplicityClassRow algebra
+quotientRow algebra ambient heisenberg multiplicity equation =
   multiplicity-class-row
     ambient heisenberg multiplicity quotientOnNonzeroTrace
     (λ _ → equation)
     (λ ())
 
 independentRow :
-  (ambient heisenberg multiplicity : Nat) →
-  ambient ≡ heisenberg * multiplicity →
-  MultiplicityClassRow
-independentRow ambient heisenberg multiplicity equation =
+  (algebra : TraceAlgebra) →
+  (ambient heisenberg multiplicity : Carrier algebra) →
+  ambient ≡ multiply algebra heisenberg multiplicity →
+  MultiplicityClassRow algebra
+independentRow algebra ambient heisenberg multiplicity equation =
   multiplicity-class-row
     ambient heisenberg multiplicity independentClassEquation
     (λ ())
     (λ _ → equation)
 
 classRowReconstructsAmbient :
-  (row : MultiplicityClassRow) →
-  heisenbergTrace row * multiplicityTrace row ≡ ambientTrace row
-classRowReconstructsAmbient row with recoveryKind row
+  (algebra : TraceAlgebra) →
+  (row : MultiplicityClassRow algebra) →
+  multiply algebra (heisenbergTrace row) (multiplicityTrace row)
+  ≡ ambientTrace row
+classRowReconstructsAmbient algebra row with recoveryKind row
 ... | quotientOnNonzeroTrace = quotientEquation row refl
 ... | independentClassEquation = sym (independentEquation row refl)
 
@@ -83,73 +102,110 @@ classRowReconstructsAmbient row with recoveryKind row
 -- Finite class-table reconstruction.
 ------------------------------------------------------------------------
 
-sumAmbient : List MultiplicityClassRow → Nat
-sumAmbient [] = 0
-sumAmbient (row ∷ rows) = ambientTrace row + sumAmbient rows
+sumAmbient :
+  (algebra : TraceAlgebra) →
+  List (MultiplicityClassRow algebra) →
+  Carrier algebra
+sumAmbient algebra [] = zero algebra
+sumAmbient algebra (row ∷ rows) =
+  add algebra (ambientTrace row) (sumAmbient algebra rows)
 
-sumTensorTrace : List MultiplicityClassRow → Nat
-sumTensorTrace [] = 0
-sumTensorTrace (row ∷ rows) =
-  heisenbergTrace row * multiplicityTrace row
-  + sumTensorTrace rows
+sumTensorTrace :
+  (algebra : TraceAlgebra) →
+  List (MultiplicityClassRow algebra) →
+  Carrier algebra
+sumTensorTrace algebra [] = zero algebra
+sumTensorTrace algebra (row ∷ rows) =
+  add algebra
+    (multiply algebra (heisenbergTrace row) (multiplicityTrace row))
+    (sumTensorTrace algebra rows)
 
 multiplicityCharacterReconstructsAllClasses :
-  (rows : List MultiplicityClassRow) →
-  sumTensorTrace rows ≡ sumAmbient rows
-multiplicityCharacterReconstructsAllClasses [] = refl
-multiplicityCharacterReconstructsAllClasses (row ∷ rows)
-  rewrite classRowReconstructsAmbient row
-        | multiplicityCharacterReconstructsAllClasses rows = refl
+  (algebra : TraceAlgebra) →
+  (rows : List (MultiplicityClassRow algebra)) →
+  sumTensorTrace algebra rows ≡ sumAmbient algebra rows
+multiplicityCharacterReconstructsAllClasses algebra [] = refl
+multiplicityCharacterReconstructsAllClasses algebra (row ∷ rows) =
+  cong₂
+    (add algebra)
+    (classRowReconstructsAmbient algebra row)
+    (multiplicityCharacterReconstructsAllClasses algebra rows)
 
 ------------------------------------------------------------------------
 -- The zero-trace boundary.
 ------------------------------------------------------------------------
 
-record ZeroTraceClassObligation : Set where
+record ZeroTraceClassObligation (algebra : TraceAlgebra) : Set where
   constructor zero-trace-class-obligation
   field
-    ambientTraceAtClass : Nat
-    multiplicityTraceAtClass : Nat
-    heisenbergTraceAtClassIsZero : Nat
-    heisenbergTraceAtClassIsZeroProof :
-      heisenbergTraceAtClassIsZero ≡ 0
+    ambientTraceAtClass : Carrier algebra
+    multiplicityTraceAtClass : Carrier algebra
+    heisenbergTraceAtClass : Carrier algebra
+    heisenbergTraceAtClassIsZero :
+      heisenbergTraceAtClass ≡ zero algebra
     independentRecovery :
       ambientTraceAtClass
-      ≡ heisenbergTraceAtClassIsZero * multiplicityTraceAtClass
+      ≡ multiply algebra heisenbergTraceAtClass multiplicityTraceAtClass
 
 open ZeroTraceClassObligation public
 
 zeroTraceClassCannotUseQuotientAlone :
-  (obligation : ZeroTraceClassObligation) →
-  ambientTraceAtClass obligation ≡ 0
-zeroTraceClassCannotUseQuotientAlone obligation
-  rewrite heisenbergTraceAtClassIsZeroProof obligation =
-  independentRecovery obligation
+  (algebra : TraceAlgebra) →
+  (obligation : ZeroTraceClassObligation algebra) →
+  ambientTraceAtClass obligation ≡ zero algebra
+zeroTraceClassCannotUseQuotientAlone algebra obligation =
+  trans
+    (independentRecovery obligation)
+    (trans
+      (cong₂
+        (multiply algebra)
+        (heisenbergTraceAtClassIsZero obligation)
+        refl)
+      (zeroMultiplyLeft algebra (multiplicityTraceAtClass obligation)))
 
 ------------------------------------------------------------------------
 -- Actual 12 + 78 certification surface.
 ------------------------------------------------------------------------
 
-record ActualMultiplicityCharacterCertificate : Set₁ where
+record ActualMultiplicityCharacterCertificate
+  (algebra : TraceAlgebra) : Set₁ where
   field
     InertiaClass : Set
-    classRows : List MultiplicityClassRow
-    twelveCharacter : InertiaClass → Nat
-    seventyEightCharacter : InertiaClass → Nat
-    actualMultiplicityCharacter : InertiaClass → Nat
+    classRows : List (MultiplicityClassRow algebra)
+    twelveCharacter : InertiaClass → Carrier algebra
+    seventyEightCharacter : InertiaClass → Carrier algebra
+    actualMultiplicityCharacter : InertiaClass → Carrier algebra
 
     classwiseTwelvePlusSeventyEight :
       (class : InertiaClass) →
       actualMultiplicityCharacter class
-      ≡ twelveCharacter class + seventyEightCharacter class
+      ≡ add algebra
+          (twelveCharacter class)
+          (seventyEightCharacter class)
 
 open ActualMultiplicityCharacterCertificate public
 
 multiplicityCharacterEqualsTwelvePlusSeventyEight :
-  (certificate : ActualMultiplicityCharacterCertificate) →
+  (algebra : TraceAlgebra) →
+  (certificate : ActualMultiplicityCharacterCertificate algebra) →
   (class : InertiaClass certificate) →
   actualMultiplicityCharacter certificate class
-  ≡ twelveCharacter certificate class
-    + seventyEightCharacter certificate class
-multiplicityCharacterEqualsTwelvePlusSeventyEight =
+  ≡ add algebra
+      (twelveCharacter certificate class)
+      (seventyEightCharacter certificate class)
+multiplicityCharacterEqualsTwelvePlusSeventyEight algebra =
   classwiseTwelvePlusSeventyEight
+
+------------------------------------------------------------------------
+-- A small natural-number instance used only for finite regression examples.
+-- The actual inertia character will use its cyclotomic trace algebra.
+------------------------------------------------------------------------
+
+naturalTraceAlgebra : TraceAlgebra
+naturalTraceAlgebra = record
+  { Carrier = Nat
+  ; zero = 0
+  ; add = _+_
+  ; multiply = _*_
+  ; zeroMultiplyLeft = λ _ → refl
+  }
