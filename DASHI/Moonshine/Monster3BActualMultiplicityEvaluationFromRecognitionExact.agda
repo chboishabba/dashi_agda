@@ -25,7 +25,7 @@ module DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
@@ -93,6 +93,19 @@ actualEvaluationRightInverse recognition state =
         (Existing.toModel recognition state)))
     (Existing.fromAfterTo recognition state)
 
+toModelInjective :
+  ∀ {ActualSector} →
+  (recognition : Existing.ActualZetaSectorRecognition ActualSector) →
+  {left right : ActualSector} →
+  Existing.toModel recognition left ≡ Existing.toModel recognition right →
+  left ≡ right
+toModelInjective recognition {left} {right} equality =
+  trans
+    (sym (Existing.fromAfterTo recognition left))
+    (trans
+      (cong (Existing.fromModel recognition) equality)
+      (Existing.fromAfterTo recognition right))
+
 actualEvaluationTranslationEquivariant :
   ∀ {ActualSector} →
   (recognition : Existing.ActualZetaSectorRecognition ActualSector) →
@@ -102,58 +115,22 @@ actualEvaluationTranslationEquivariant :
   ≡ Existing.actualTranslate recognition axis
       (actualEvaluationMap recognition tensor)
 actualEvaluationTranslationEquivariant recognition axis tensor =
-  Existing.actualEvaluationMapInjectiveViaModel
-  where
-    actualEvaluationMapInjectiveViaModel :
-      Existing.fromModel recognition
-        (Existing.evaluateModelTensor (translateModelTensor axis tensor))
-      ≡ Existing.actualTranslate recognition axis
-          (Existing.fromModel recognition
-            (Existing.evaluateModelTensor tensor))
-    actualEvaluationMapInjectiveViaModel =
-      let
-        modelStep :
-          Existing.toModel recognition
-            (Existing.fromModel recognition
-              (Existing.evaluateModelTensor
-                (translateModelTensor axis tensor)))
-          ≡ Existing.toModel recognition
-              (Existing.actualTranslate recognition axis
-                (Existing.fromModel recognition
-                  (Existing.evaluateModelTensor tensor)))
-        modelStep =
-          trans
-            (Existing.toAfterFrom recognition
-              (Existing.evaluateModelTensor
-                (translateModelTensor axis tensor)))
-            (trans
-              (modelEvaluationTranslationEquivariant axis tensor)
-              (trans
-                (cong (Model.translatedBasis axis)
-                  (symmetry
-                    (Existing.toAfterFrom recognition
-                      (Existing.evaluateModelTensor tensor))))
-                (symmetry
-                  (Existing.translationIntertwines recognition axis
-                    (Existing.fromModel recognition
-                      (Existing.evaluateModelTensor tensor))))))
-      in
-      trans
-        (symmetry
-          (Existing.fromAfterTo recognition
-            (Existing.fromModel recognition
-              (Existing.evaluateModelTensor
-                (translateModelTensor axis tensor)))))
+  toModelInjective recognition
+    (trans
+      (Existing.toAfterFrom recognition
+        (Existing.evaluateModelTensor
+          (translateModelTensor axis tensor)))
+      (trans
+        (modelEvaluationTranslationEquivariant axis tensor)
         (trans
-          (cong (Existing.fromModel recognition) modelStep)
-          (Existing.fromAfterTo recognition
-            (Existing.actualTranslate recognition axis
+          (cong (Model.translatedBasis axis)
+            (sym
+              (Existing.toAfterFrom recognition
+                (Existing.evaluateModelTensor tensor))))
+          (sym
+            (Existing.translationIntertwines recognition axis
               (Existing.fromModel recognition
-                (Existing.evaluateModelTensor tensor)))))
-
-symmetry :
-  ∀ {A : Set} {left right : A} → left ≡ right → right ≡ left
-symmetry refl = refl
+                (Existing.evaluateModelTensor tensor)))))))
 
 ------------------------------------------------------------------------
 -- Packaged actual isomorphism and immediate coordinate consequences.
