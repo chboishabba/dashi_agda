@@ -57,6 +57,7 @@ PY
 sources=(
   DASHI/Moonshine/Monster3BExtraspecialCharacterSignatureExact.agda
   DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda
+  DASHI/Moonshine/Monster3BFiniteStoneVonNeumannMultiplicityExact.agda
   DASHI/Moonshine/Monster3BActualMultiplicityIntertwinerExact.agda
   DASHI/Moonshine/Monster3BProjectiveTensorCocycleExact.agda
   DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda
@@ -80,6 +81,9 @@ required_patterns=(
   'actualKernelNoncentralCharacterVanishes'
   'actualKernelCentralCharacterIsZeta'
   'actualZetaSectorIsNinetyHeisenbergCopies'
+  'constituentDegreeSumIsHeisenbergTimesCount'
+  'multiplicityForcedToNinety'
+  'actualZetaSectorHasNinetyConstituents'
   'actualEvaluationMapInjective'
   'actualEvaluationMapSurjective'
   'actualMonsterLocalModuleIntertwiner'
