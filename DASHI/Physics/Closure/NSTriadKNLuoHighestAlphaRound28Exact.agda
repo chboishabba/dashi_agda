@@ -7,6 +7,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound28Exact where
 --
 -- * a commuting dependent physical-carrier selector;
 -- * cutoff/output-fibre conjugation orbits;
+-- * a finite rational local-Lipschitz majorant for literal Galerkin coordinates;
 -- * signed constituent trees with delayed positive taxation;
 -- * a dependent unique-owner partition;
 -- * signed interaction fibres;
@@ -15,9 +16,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound28Exact where
 -- * exact nine-owner critical absorption algebra.
 --
 -- These results preserve cancellation and make later physical estimates harder
--- to state circularly.  They do not prove finite Picard--Lindelof, the physical
--- shell evolution, any cutoff-uniform owner tax, etaTotal < 1, compactness or
--- the unconditional Clay theorem.
+-- to state circularly.  They do not prove continuum-real Picard--Lindelof, the
+-- physical shell evolution, any cutoff-uniform owner tax, etaTotal < 1,
+-- compactness or the unconditional Clay theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -31,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNCommutingPhysicalCarrierSelectorRound28Exact as Selector
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadConjugationOrbitRound28Exact as Conjugation
+import DASHI.Physics.Closure.NSTriadKNFiniteGalerkinLocalLipschitzRound28Exact as Lipschitz
 import DASHI.Physics.Closure.NSTriadKNDependentTaxOwnerPartitionRound28Exact as Partition
 import DASHI.Physics.Closure.NSTriadKNSignedInteractionFibreRound28Exact as Interaction
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitSignatureRound28Exact as Orbit
@@ -54,6 +56,9 @@ record Round28ExactEvidence : Set₁ where
       ∀ {cutoff output triad} →
       triad Cube.∈ Output.physicalOutputFiber cutoff output →
       Conjugation.ConjugateOutputFiberWitness cutoff output triad
+
+    finiteRationalLocalLipschitz :
+      Lipschitz.finiteRationalLocalLipschitzMajorantClosed ≡ true
 
     dependentOwnerPartitionRoundtrip :
       (atoms : List Tax.TaxAtom) →
@@ -119,6 +124,8 @@ canonicalRound28ExactEvidence = record
       λ State selectors state →
         Selector.physicalSelectorIdempotent selectors state
   ; conjugateOutputFibre = Conjugation.conjugateOutputFiberWitness
+  ; finiteRationalLocalLipschitz =
+      Lipschitz.finiteRationalLocalLipschitzMajorantClosedIsTrue
   ; dependentOwnerPartitionRoundtrip =
       Partition.dependentPartitionListRoundtrip
   ; signedInteractionFibre = Interaction.interactionFibreSignedIdentity
@@ -137,6 +144,8 @@ record Round28HighestAlphaBoundary : Set where
     concretePhysicalSelectorInstantiated : Bool
     conjugateOutputFibreClosed : Bool
     fullNonlinearRealityEquivariance : Bool
+    finiteRationalCoordinateLipschitz : Bool
+    continuumRealNormedPicardLindelof : Bool
     constituentTreePreservesSign : Bool
     dependentOwnerPartitionClosed : Bool
     signedInteractionFibreClosed : Bool
@@ -158,6 +167,7 @@ canonicalRound28HighestAlphaBoundary : Round28HighestAlphaBoundary
 canonicalRound28HighestAlphaBoundary =
   round28-highest-alpha-boundary
     true false true false
+    true false
     true true true false
     true true true true
     false false false false false false
@@ -171,6 +181,11 @@ nonlinearRealityStillOpen :
   fullNonlinearRealityEquivariance canonicalRound28HighestAlphaBoundary
   ≡ false
 nonlinearRealityStillOpen = refl
+
+continuumPicardLindelofStillOpen :
+  continuumRealNormedPicardLindelof canonicalRound28HighestAlphaBoundary
+  ≡ false
+continuumPicardLindelofStillOpen = refl
 
 uniformOperatorTaxStillOpen :
   cutoffUniformTStarTBound canonicalRound28HighestAlphaBoundary
