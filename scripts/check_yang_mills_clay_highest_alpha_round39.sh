@@ -43,6 +43,11 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
   exit 1
 fi
 
+if grep -nE '\((data|field)[[:space:]]*:' "${files[@]}"; then
+  echo "round thirty nine uses an Agda reserved keyword as a typed binder" >&2
+  exit 1
+fi
+
 checks=(
   'BalabanP33FiniteKKTAdmissibleProjectorExact.agda:selectedProjectedVariationUniqueNearestAdmissible'
   'BalabanSelectedVariationKKTMultiplierExact.agda:projectorDefectFirstVariationMultiplierIdentity'
@@ -60,6 +65,7 @@ checks=(
   'BalabanSelectedRawExtractorConstraintDefectExact.agda:rawExtractorProjectorDefectPairingExact'
   'BalabanP33SingletonBudgetFeasibilityExact.agda:balancedSplitExact'
   'BalabanP33SingletonBudgetFeasibilityExact.agda:symbolicSplitClosesSingletonBudget'
+  'BalabanP33SingletonBudgetFeasibilityExact.agda:coefficientNoFitContradictsSymbolicSplit'
   'BalabanP33NonorthogonalPhysicalFrameExact.agda:reducedHessianGeneralizedFloor'
   'BalabanP33FiniteKKTBlockGreenAlgebraExact.agda:projectSubtractExact'
   'BalabanP33FiniteKKTBlockGreenExact.agda:kktBlockRightInverseExact'
