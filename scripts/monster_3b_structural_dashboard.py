@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """Generate function-first Monster-3B/extraspecial dashboards.
 
-The 729 Schrödinger basis states form X = F_3^6.  Modulation labels belong to
-its dual X*, and the extraspecial quotient is X + X* = F_3^12.  The Weyl phase
-therefore uses the perfect evaluation pairing <b,x>, not an artificial
-alternating form on X itself.
+The 729 Schrodinger basis states form X = F_3^6. Modulation labels belong to
+X*, and the extraspecial quotient is X + X* = F_3^12. The Weyl phase uses the
+perfect evaluation pairing <b,x>, not an artificial alternating form on X.
 
-Every figure is an evaluation of a mathematical function or invariant.  The
-GAP-derived panel is generated only from a checked CTblLib certificate.  The
-12+78 coupling remains explicitly model-level until actual MN3B matrices are
-imported.
+Every figure evaluates a mathematical function or invariant. The GAP-derived
+panel is emitted only from a checked CTblLib certificate. The 12+78 coupling
+remains explicitly model-level until actual MN3B matrices are imported.
 """
 
 from __future__ import annotations
@@ -37,7 +35,7 @@ VECTORS = ternary_vectors()
 
 
 def perfect_pair(x: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """Evaluation X x X* -> F_3 after the standard coordinate identification."""
+    """Evaluation X x X* -> F_3 under the standard coordinate duality."""
     return np.sum(x * b, axis=-1) % P
 
 
@@ -90,14 +88,11 @@ def save_matrix(
 
 
 def extraspecial_plus_minus_sheet(output: Path) -> None:
-    """Compare + and - types through the exact character-degree moment."""
     moments = np.linspace(0.0, 6.0, 721)
     rows = []
     labels = []
     for kind in ("+", "-"):
         for n in range(1, 7):
-            # Both types of order 3^(1+2n) have 3^(2n) linear characters and
-            # two nonlinear characters of degree 3^n.
             degree_moment = 3.0 ** (2 * n) + 2.0 * 3.0 ** (n * moments)
             rows.append(np.log10(degree_moment))
             labels.append(f"{kind}, n={n}")
@@ -118,7 +113,7 @@ def extraspecial_plus_minus_sheet(output: Path) -> None:
     ax.text(
         0.5,
         -0.1,
-        "The + and - rows coincide exactly: type changes exponent/central-product geometry, not the irreducible degree multiset.",
+        "The + and - rows coincide exactly: type changes exponent and central-product geometry, not the irreducible degree multiset.",
         transform=ax.transAxes,
         ha="center",
         va="top",
@@ -176,7 +171,6 @@ def nonzero_weight_histogram(basis: np.ndarray) -> tuple[int, ...]:
 
 
 def generator_invariant_dashboard(output: Path) -> None:
-    """Map every Lagrangian two-plane to Plucker and restriction invariants."""
     rows = []
     for basis in rref_two_planes():
         pivots = tuple(int(np.flatnonzero(row)[0]) for row in basis)
@@ -195,8 +189,8 @@ def generator_invariant_dashboard(output: Path) -> None:
     ]
     save_matrix(
         matrix,
-        "Plucker and character-restriction inputs for every two-plane in X=F3^6",
-        "All 11,011 planes lie in one fixed Lagrangian and therefore lift with the centre to rank-three elementary abelian subgroups. Each restriction is 81 copies of Reg(F3^2); the displayed varying data are the exact Grassmannian/coordinate invariants.",
+        "Plucker and restriction inputs for every two-plane in X=F3^6",
+        "All 11,011 planes lie in one fixed Lagrangian and lift with the centre to rank-three elementary abelian subgroups. The Schrodinger restriction is 81 copies of Reg(F3^2); the varying fields are exact Grassmannian and coordinate invariants.",
         output / "generator_to_invariant_dashboard.png",
         "invariant coordinate",
         "RREF-indexed Lagrangian two-plane",
@@ -221,9 +215,155 @@ def generator_invariant_dashboard(output: Path) -> None:
 
 
 def heisenberg_weyl_phase_portrait(output: Path) -> None:
-    """Evaluate all phases zeta^<b,x> for x in X and b in X*."""
     pairings = (VECTORS @ VECTORS.T) % P
     phase = np.angle(ZETA**pairings)
     save_matrix(
         phase,
-        "Complete finite-Heisenberg/Weyl phase portrait")
+        "Complete finite-Heisenberg/Weyl phase portrait",
+        "All 729 states x in X are evaluated against all 729 modulation labels b in X* by arg(zeta^<b,x>).",
+        output / "heisenberg_weyl_phase_portrait.png",
+        "modulation label b in X*",
+        "Schrodinger basis state x in X",
+        vmin=-np.pi,
+        vmax=np.pi,
+    )
+
+
+def suzuki_12_plus_78_sheet(output: Path) -> None:
+    multiplicity = np.arange(90)
+    block = np.where(multiplicity < 12, 0, 1)
+    q = coordinate_quadratic(VECTORS)
+    s0 = multiplicity % 3
+    s1 = (multiplicity // 3) % 3
+    s2 = (multiplicity // 9) % 3
+    phase = (
+        q[:, None]
+        + VECTORS[:, 0, None] * s0[None, :]
+        + VECTORS[:, 1, None] * s1[None, :]
+        + block[None, :] * VECTORS[:, 2, None] * s2[None, :]
+    ) % P
+    observable = np.real(ZETA**phase)
+
+    fig, ax = plt.subplots(figsize=(14, 9))
+    image = ax.imshow(
+        observable,
+        aspect="auto",
+        interpolation="nearest",
+        vmin=-0.5,
+        vmax=1.0,
+    )
+    ax.axvline(11.5, linewidth=1.5)
+    ax.set_title("Explicit function model on H729 tensor (S12 direct-sum S78)")
+    ax.set_xlabel("multiplicity coordinate: 12-dimensional block | 78-dimensional block")
+    ax.set_ylabel("Schrodinger state x in X=F3^6")
+    ax.text(
+        0.5,
+        -0.1,
+        "The 729x90 carrier and 12|78 boundary are sourced dimensions; this displayed coordinate coupling is not labelled as a genuine MN3B matrix coefficient.",
+        transform=ax.transAxes,
+        ha="center",
+        va="top",
+    )
+    fig.colorbar(image, ax=ax, fraction=0.027, pad=0.02)
+    fig.subplots_adjust(left=0.08, right=0.93, top=0.91, bottom=0.17)
+    fig.savefig(output / "heisenberg_times_12_plus_78.png", dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
+def orbit_invariant_sheet(output: Path) -> None:
+    index = {tuple(v): i for i, v in enumerate(VECTORS)}
+
+    def transform(v: np.ndarray) -> np.ndarray:
+        return np.array(
+            [v[1], v[2], v[0] + v[3], v[4], v[5], -v[3]],
+            dtype=np.int64,
+        ) % P
+
+    images = [index[tuple(transform(v))] for v in VECTORS]
+    if len(set(images)) != H:
+        raise AssertionError("orbit generator is not invertible")
+
+    orbit_length = np.zeros(H, dtype=int)
+    visited = np.zeros(H, dtype=bool)
+    for start in range(H):
+        if visited[start]:
+            continue
+        orbit = []
+        current = start
+        while not visited[current]:
+            visited[current] = True
+            orbit.append(current)
+            current = images[current]
+        for item in orbit:
+            orbit_length[item] = len(orbit)
+
+    save_matrix(
+        orbit_length.reshape(27, 27),
+        "Orbit-length invariant on X = F3^3 x F3^3",
+        "Each cell is one Schrodinger basis state; the value is its exact orbit length under the declared invertible finite-field generator.",
+        output / "orbit_length_sheet.png",
+        "second coordinate block",
+        "first coordinate block",
+    )
+
+
+def branching_sheet(input_json: Path, output: Path) -> None:
+    if not input_json.exists():
+        return
+    payload = json.loads(input_json.read_text())
+    if payload.get("classwise_reconstruction") is not True:
+        raise ValueError("restriction JSON lacks classwise reconstruction")
+    constituents = payload.get("constituents", [])
+    if not constituents:
+        return
+
+    total = int(payload["reconstructed_degree"])
+    width = 512
+    height = (total + width - 1) // width
+    sheet = np.full(width * height, np.nan)
+    offset = 0
+    for row in constituents:
+        contribution = int(row["contribution"])
+        sheet[offset : offset + contribution] = int(row["position"])
+        offset += contribution
+    if offset != total:
+        raise ValueError("constituent contributions do not fill the carrier")
+    save_matrix(
+        sheet.reshape(height, width),
+        "Certified CTblLib restriction-label function chi_196883 restricted to MN3B",
+        "Each domain point is one contributed dimension; the function value is the owning MN3B irreducible-table position.",
+        output / "mn3b_actual_restriction_sheet.png",
+        "packed dimension coordinate",
+        "packed dimension coordinate",
+    )
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--restriction-json",
+        type=Path,
+        default=Path("build/monster_3b_normalizer_restriction.json"),
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path("build/monster_3b_dashboard"),
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    args.output.mkdir(parents=True, exist_ok=True)
+    extraspecial_plus_minus_sheet(args.output)
+    generator_invariant_dashboard(args.output)
+    heisenberg_weyl_phase_portrait(args.output)
+    suzuki_12_plus_78_sheet(args.output)
+    orbit_invariant_sheet(args.output)
+    branching_sheet(args.restriction_json, args.output)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
