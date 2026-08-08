@@ -50,10 +50,16 @@ leechCompletionAgreesWithMoonshineWeightTwo :
   ≡ Fourier.phaseDimension Fourier.moonshineWeightTwo3B
 leechCompletionAgreesWithMoonshineWeightTwo = refl
 
-monsterResidualCompletionAgreesAcrossCharts :
-  Leech.leechCoordinateSubtotal + Leech.offDiagonalAfterConformalAdjustment
+monsterGeometricCompletionAgreesAcrossCharts :
+  Leech.coordinateSubtotalAfterConformalQuotient
+  + Leech.offDiagonalQuadraticCount
   ≡ Fourier.phaseDimension Fourier.monsterW3B
-monsterResidualCompletionAgreesAcrossCharts = refl
+monsterGeometricCompletionAgreesAcrossCharts = refl
+
+monsterNumericalCompletionAgreesAcrossCharts :
+  Leech.leechCoordinateSubtotal + Leech.numericalResidualBeyond196608
+  ≡ Fourier.phaseDimension Fourier.monsterW3B
+monsterNumericalCompletionAgreesAcrossCharts = refl
 
 phaseTransportPreservesNontrivialDegree :
   Transport.phaseDimension
