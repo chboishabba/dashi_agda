@@ -29,6 +29,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 record DivisionFreeHHDefectFactorisation : Set where
   constructor division-free-hh-defect-factorisation
@@ -49,14 +50,16 @@ divisionFreeHHProductIdentity :
   ≡
   AScale F * AScale F * (dissipation F * dissipation F)
 divisionFreeHHProductIdentity F
-  rewrite defectMeaning F
-        | amplitudeDissipationMeaning F =
-  solve
-    ( AScale F
-    ∷ denominator F
-    ∷ amplitude F
-    ∷ dissipation F
-    ∷ [])
+  rewrite defectMeaning F =
+  trans
+    (solve
+      ( AScale F
+      ∷ denominator F
+      ∷ amplitude F
+      ∷ []))
+    (cong
+      (λ product → AScale F * AScale F * product)
+      (amplitudeDissipationMeaning F))
 
 zeroDenominatorForcesZeroDefect :
   (F : DivisionFreeHHDefectFactorisation) →
@@ -112,7 +115,14 @@ hhSquaredProductExact :
   *
   (dissipation (defectFactorisation C)
     * dissipation (defectFactorisation C))
-hhSquaredProductExact C
-  rewrite rootsMatchDefect C
-        | rootsMatchAmplitude C =
-  divisionFreeHHProductIdentity (defectFactorisation C)
+hhSquaredProductExact C =
+  trans
+    (solve
+      ( defectRoot (transferFactorisation C)
+      ∷ amplitudeRoot (transferFactorisation C)
+      ∷ []))
+    (trans
+      (cong₂ _*_
+        (rootsMatchDefect C)
+        (rootsMatchAmplitude C))
+      (divisionFreeHHProductIdentity (defectFactorisation C)))
