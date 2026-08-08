@@ -59,10 +59,6 @@ import DASHI.Physics.Closure.NSTriadKNLiteralDyadicConsequencesClosed as Dyadic
 import DASHI.Physics.Closure.NSTriadKNPhysicalScaleTrichotomy as Scale
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteParaproductRangePartitionExact as Range
 
-------------------------------------------------------------------------
--- Boolean strict-order evidence to propositional natural-number order.
-------------------------------------------------------------------------
-
 natLessTrueToSuccessorLe :
   ∀ {m n} → Near.natLess m n ≡ true → suc m ≤ n
 natLessTrueToSuccessorLe {zero} {zero} ()
@@ -82,10 +78,6 @@ natLessTrueToLe :
   ∀ {m n} → Near.natLess m n ≡ true → m ≤ n
 natLessTrueToLe proof =
   successorLeImpliesLe (natLessTrueToSuccessorLe proof)
-
-------------------------------------------------------------------------
--- New literal shell theorem: low-low cannot generate a far higher output.
-------------------------------------------------------------------------
 
 noTwoInputsThreeShellsBelowOutput :
   (τ : Physical.PhysicalTriadIncidence) →
@@ -110,10 +102,6 @@ noTwoInputsThreeShellsBelowOutput τ pGap qGap
       (Infinity.outputTriangle
         (Infinity.officialResonantNormConsequences τ))
       qShell≤pShell)
-
-------------------------------------------------------------------------
--- Exact four-way classification of literal physical triads.
-------------------------------------------------------------------------
 
 data TriadicSourceClass : Set where
   LH HL HH CC : TriadicSourceClass
@@ -178,10 +166,6 @@ triadicClassificationUnique firstCertificate secondCertificate =
     (sym (computedClass firstCertificate))
     (computedClass secondCertificate)
 
-------------------------------------------------------------------------
--- Quantitative meanings of the three separated classes.
-------------------------------------------------------------------------
-
 lowHighWeakGap :
   ∀ {τ} →
   Scale.ScaleCondition literalShellPolicy τ Scale.lowHigh →
@@ -240,10 +224,6 @@ highHighInputsComparableOne certificate =
   where
   gaps = highHighWeakGaps (classMeaning certificate)
 
-------------------------------------------------------------------------
--- Enumeration-wide classification and exact erasure.
-------------------------------------------------------------------------
-
 record ClassifiedPhysicalTriad : Set where
   constructor classified-physical-triad
   field
@@ -299,10 +279,6 @@ classifiedPhysicalOutputFiberErasesExactly cutoff output =
   eraseClassifiedPhysicalTriadsExact
     (Output.physicalOutputFiber cutoff output)
 
-------------------------------------------------------------------------
--- Fifth class: differentiated commutator.  No residual constructor exists.
-------------------------------------------------------------------------
-
 data FiveSourceCell : Set where
   triadicSource : ClassifiedPhysicalTriad → FiveSourceCell
   differentiatedCommutator : Z3.FourierMode → FiveSourceCell
@@ -341,9 +317,10 @@ fiveSourceClassificationTotal :
     (λ source → fiveSourceClass cell ≡ source)
 fiveSourceClassificationTotal cell = fiveSourceClass cell , refl
 
-------------------------------------------------------------------------
--- Fixed collar constants and fail-closed analytic boundary.
-------------------------------------------------------------------------
+differentiatedCommutatorClassIsCom :
+  (output : Z3.FourierMode) →
+  fiveSourceClass (differentiatedCommutator output) ≡ Range.Com
+differentiatedCommutatorClassIsCom output = refl
 
 separationCollarIsThree : Shell.Csep ≡ 3
 separationCollarIsThree = refl
