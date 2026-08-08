@@ -22,19 +22,22 @@ module DASHI.Physics.Closure.NSTriadKNConcreteReconstructedPhysicalSelectorRound
 -- Galerkin vector field maps this state type to itself.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
-open import Data.Empty using (⊥)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
-import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact as Phase
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNCommutingPhysicalCarrierSelectorRound28Exact as Selector
+
+infix 4 _∈_
+data _∈_ {a : Level} {A : Set a} (value : A) : List A → Set a where
+  here : ∀ {head tail} → value ≡ head → value ∈ (head ∷ tail)
+  there : ∀ {head tail} → value ∈ tail → value ∈ (head ∷ tail)
 
 record ReconstructedPhysicalState
     {r : Level}
@@ -46,7 +49,7 @@ record ReconstructedPhysicalState
       List (Phase.TransverseModeCoefficient F E)
     positiveModesNonzero :
       ∀ coefficient →
-      coefficient Cube.∈ positiveOrbitCoefficients →
+      coefficient ∈ positiveOrbitCoefficients →
       Z3.NonZeroMode (Phase.coefficientMode coefficient)
 
 open ReconstructedPhysicalState public
@@ -69,7 +72,7 @@ reconstructedNegativeModeNonzero :
   ∀ {r} {F : C3.RealField r} {E : C3.IntegerEmbedding F}
     (state : ReconstructedPhysicalState F E)
     (coefficient : Phase.TransverseModeCoefficient F E) →
-  coefficient Cube.∈ positiveOrbitCoefficients state →
+  coefficient ∈ positiveOrbitCoefficients state →
   Z3.NonZeroMode (Phase.reconstructedNegativeMode coefficient)
 reconstructedNegativeModeNonzero state coefficient member =
   negateNonzeroMode
