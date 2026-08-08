@@ -79,7 +79,7 @@ canonicalHighestAlphaClayLemmaLadder =
     checkedReducer
     checkedReducer
     physicalProducerOpen
-    checkedExact
+    physicalProducerOpen
     checkedExact
     checkedExact
     physicalProducerOpen
