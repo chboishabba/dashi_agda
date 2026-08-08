@@ -147,10 +147,9 @@ open CoefficientNoFit public
 coefficientNoFitContradictsSymbolicSplit :
   ∀ {alpha beta} →
   CoefficientNoFit alpha beta →
-  SymbolicSingletonSplit alpha beta →
-  ¬ (alpha + beta ≤ singletonBudget)
+  ¬ SymbolicSingletonSplit alpha beta
 coefficientNoFitContradictsSymbolicSplit noFit split =
-  ℚP.<⇒≱ (totalStrictlyExceedsBudget noFit)
+  ℚP.<⇒≱ (totalStrictlyExceedsBudget noFit) (splitFits split)
 
 record CancelBeforeNormWitness
     (rawLocalization projectorRepair combinedResidual : ℚ) : Set where
