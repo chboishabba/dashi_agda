@@ -28,6 +28,28 @@ preserves resonance and the literal cutoff cube. Every triad in the output fibre
 
 This supplies the finite combinatorial half of the full nonlinear Fourier-reality proof. Conjugation of the literal nonlinear coefficient and the induced sum equality remain open.
 
+### Finite rational local-Lipschitz majorant
+
+Round 26 supplied the exact factorization
+
+```text
+xy-uv=(x-u)y+u(y-v).
+```
+
+Round 28 now proves the quantitative finite bound. On a pointwise radius-`R` ball, when the pointwise state difference is at most `delta`, a linear atom with coefficient `c` costs
+
+```text
+|c| delta,
+```
+
+and a bilinear atom costs
+
+```text
+|c| (R+R) delta.
+```
+
+These bounds are summed over every literal finite coordinate atom, producing a local-Lipschitz constant for each rational Galerkin coordinate. The remaining step is to connect the actual continuum-real finite coordinate norm to this majorant and instantiate Picard–Lindelöf.
+
 ### Signed constituent tree
 
 Every source retains its identity through
@@ -86,7 +108,13 @@ Xout + (1-sum eta_i) D
   <= Xin + sum data_i + (sum B_i) integral X.
 ```
 
-The physical owner estimates and `sum eta_i < 1` are not manufactured by this algebra and remain false in the authority boundary.
+The strict budget also exposes the positive reserve
+
+```text
+0 < 1-sum eta_i.
+```
+
+The physical owner estimates and strict coefficient certificate are not manufactured by this algebra and remain false in the authority boundary.
 
 ## Highest-alpha boundary after Round 28
 
@@ -94,7 +122,7 @@ The immediate route is now:
 
 1. instantiate the concrete Leray/reality/centering selector;
 2. prove conjugation of each literal nonlinear triad atom and fold it over conjugate output fibres;
-3. prove the finite local-Lipschitz, Picard–Lindelöf, energy and global-flow chain;
+3. connect the rational coordinate majorant to the actual continuum-real finite norm, then instantiate Picard–Lindelöf, energy and global finite flow;
 4. derive the physical time-dependent signed shell constituent tree;
 5. prove the first cutoff-uniform signed interaction-fibre estimate;
 6. finish periodic strain/CZ and directional high–high taxes;
@@ -107,10 +135,10 @@ Round 28 does not claim:
 
 - a concrete physical selector instance;
 - full nonlinear reality equivariance;
-- finite Picard–Lindelöf or global Galerkin flow;
+- continuum-real Picard–Lindelöf or global Galerkin flow;
 - a physical time-dependent shell equation;
 - a cutoff-uniform `TT*` estimate;
 - any physical owner tax;
-- `eta_total < 1`;
+- `eta_total < 1` for the physical PDE;
 - global periodic regularity;
 - successful Agda or GitHub Actions validation.
