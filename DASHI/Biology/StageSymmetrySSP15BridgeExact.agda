@@ -9,11 +9,6 @@ import DASHI.Physics.Closure.MonsterOggPrimeCorrectionReceipt as OggBoundary
 import DASHI.Biology.OggPrimeNonaryAddressExact as Address
 import DASHI.Biology.SSP15NineObserverAtlasExact as Atlas
 
-------------------------------------------------------------------------
--- This bridge reuses the repository's established 15-lane Monster/Ogg/SSP
--- carrier.  It does not create a second prime enumeration in Foundations.
-------------------------------------------------------------------------
-
 OggPrimeLane : Set
 OggPrimeLane = Lane.MonsterPrimeLane
 
@@ -44,11 +39,6 @@ existingOggReceiptLaneCountIsFifteen :
   OggBoundary.oggPrimeCarrierLaneCount ≡ 15
 existingOggReceiptLaneCountIsFifteen = refl
 
-------------------------------------------------------------------------
--- Every lane is an observer of a retained stage carrier.  It does not replace
--- that carrier or turn arithmetic compatibility into physical Moonshine.
-------------------------------------------------------------------------
-
 data LaneStatus : Set where
   laneAffirmed laneOpen laneCountered : LaneStatus
 
@@ -76,12 +66,6 @@ canonicalStageFiveSSP15 p =
     BT.pairStabiliserS2
     laneOpen
     true
-
-------------------------------------------------------------------------
--- Prime-specific replacement for clients that need an actual SSP15 reading.
--- Every lane retains the common Stage-5 carrier while adding its own
--- p = 9q+r address and its separately typed nine-observer interpretation.
-------------------------------------------------------------------------
 
 record PrimeSpecificSymmetryLaneReading
     (prime : OggPrimeLane) : Set where
@@ -114,6 +98,15 @@ primeSpecificAddressReconstructsLane prime =
   Address.addressExact
     (nonaryAddress (canonicalPrimeSpecificSSP15 prime))
 
+primeSpecificObserverMatchesLane :
+  (prime : OggPrimeLane) →
+  Atlas.observedValue
+    (nineObserver (canonicalPrimeSpecificSSP15 prime))
+  ≡ oggPrimeLaneValue prime
+primeSpecificObserverMatchesLane prime =
+  Atlas.observedValueIsPrimeLane
+    (nineObserver (canonicalPrimeSpecificSSP15 prime))
+
 p71PrimeSpecificCoarseDepth :
   Address.coarseSheets
     (nonaryAddress (canonicalPrimeSpecificSSP15 Lane.p71)) ≡ 7
@@ -124,27 +117,28 @@ p71PrimeSpecificRemainder :
     (nonaryAddress (canonicalPrimeSpecificSSP15 Lane.p71)) ≡ 8
 p71PrimeSpecificRemainder = refl
 
-------------------------------------------------------------------------
--- 81 = 10 + 71 selects the existing p71 lane arithmetically.  It does not
--- construct a 71-dimensional invariant complement or a Monster module split.
-------------------------------------------------------------------------
-
 eightyOneTenSeventyOneBridge : 10 + oggPrimeLaneValue Lane.p71 ≡ 81
 eightyOneTenSeventyOneBridge = refl
 
-record StageSymmetrySSP15Boundary : Set where
+record StageSymmetrySSP15Boundary : Set₁ where
   constructor stageSymmetrySSP15Boundary
   field
-    existingPrimeInfrastructureReused : Bool
-    existingPrimeInfrastructureReusedIsTrue :
-      existingPrimeInfrastructureReused ≡ true
     oggLaneCountWitness : countList allOggPrimeLanes ≡ 15
     supersingularNatCountWitness : countList allSupersingularPrimeNats ≡ 15
     existingReceiptCountWitness :
       OggBoundary.oggPrimeCarrierLaneCount ≡ 15
-    primeSpecificAddressingConstructed : Bool
-    primeSpecificAddressingConstructedIsTrue :
-      primeSpecificAddressingConstructed ≡ true
+    everyPrimeSpecificAddressReconstructs :
+      (prime : OggPrimeLane) →
+      oggPrimeLaneValue prime
+      ≡ Address.coarseSheets
+          (nonaryAddress (canonicalPrimeSpecificSSP15 prime)) * 9
+        + Address.remainder
+          (nonaryAddress (canonicalPrimeSpecificSSP15 prime))
+    everyPrimeSpecificObserverMatches :
+      (prime : OggPrimeLane) →
+      Atlas.observedValue
+        (nineObserver (canonicalPrimeSpecificSSP15 prime))
+      ≡ oggPrimeLaneValue prime
     legacyUniformReadingContainsPrimeSpecificAddress : Bool
     legacyUniformReadingContainsPrimeSpecificAddressIsFalse :
       legacyUniformReadingContainsPrimeSpecificAddress ≡ false
@@ -160,11 +154,11 @@ record StageSymmetrySSP15Boundary : Set where
 canonicalStageSymmetrySSP15Boundary : StageSymmetrySSP15Boundary
 canonicalStageSymmetrySSP15Boundary =
   stageSymmetrySSP15Boundary
-    true refl
     oggPrimeLaneCountIsFifteen
     supersingularPrimeNatCountIsFifteen
     existingOggReceiptLaneCountIsFifteen
-    true refl
+    primeSpecificAddressReconstructsLane
+    primeSpecificObserverMatchesLane
     false refl
     false refl
     false refl
