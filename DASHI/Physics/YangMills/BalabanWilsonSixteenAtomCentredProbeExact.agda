@@ -36,10 +36,11 @@ module DASHI.Physics.YangMills.BalabanWilsonSixteenAtomCentredProbeExact where
 -- not assert that a particular physical Wilson coefficient is optimal.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
