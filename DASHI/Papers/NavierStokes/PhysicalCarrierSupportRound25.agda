@@ -13,9 +13,7 @@ module DASHI.Papers.NavierStokes.PhysicalCarrierSupportRound25 where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
-import DASHI.Physics.Closure.NSTriadKNLuoLiteralGalerkinCarrierRound25Exact as Carrier
-import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
-import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSumRound25Exact as Sum
+import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact as R24
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound25Exact as Ladder
 
 record PhysicalCarrierSupportRound25Status : Set where
@@ -71,6 +69,7 @@ clayPromotionRemainsFalse :
   ≡ false
 clayPromotionRemainsFalse = refl
 
+highestAlphaLadder : R24.HighestAlphaClayLemmaLadder
 highestAlphaLadder =
   Ladder.canonicalHighestAlphaClayLemmaLadderRound25
 
