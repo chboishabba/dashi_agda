@@ -14,22 +14,27 @@ module DASHI.Physics.Closure.NSTriadKNLuoCamlinTemporalLiftNoGoExact where
 -- (1) A family of bounds C(T), one for each finite horizon T, does not supply
 --     one constant uniform for all horizons.
 --
--- (2) An exact positive time reparameterization preserves any property that
---     depends only on the value of the transformed BKM integral.  Equality of
---     integrals cannot turn divergence into finiteness.
+-- (2) Given an independently proved equality between an original integral and
+--     its time-reparameterized form, every property depending only on that
+--     integral value transports in both directions.  This generic transport
+--     does not construct Camlin's concrete time map or prove the BKM
+--     change-of-variables identity; those remain explicit open producers.
 --
 -- (3) The scalar superlinear drift used in the proposed Galerkin estimate is
---     not globally dissipative.  On square amplitudes y=s^2, the term
+--     not globally dissipative.  On square amplitudes y=s^2, the algebraic gap
 --
 --       y^(3/2) - a y = s^3 - a s^2
 --
---     is positive at s=a+1 by the already checked exact scaling identity.
+--     equals s^2 at s=a+1 and is therefore nonnegative for every rational a.
+--     Strict positivity requires a separate proof that a+1 is nonzero; no
+--     unrestricted strict-positivity claim is made here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Product.Base using (Σ; _,_)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
+open import Data.Unit using (⊤)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 open import Relation.Nullary.Negation using (¬_)
 
@@ -98,40 +103,46 @@ integralPropertyPreservedForward change Property originalProperty =
     (sym (transformedEqualsOriginal change))
     originalProperty
 
-bkmDivergenceCannotBeRemovedByExactTimeChange :
+bkmDivergenceCannotBeRemovedBySuppliedExactTimeChange :
   (change : ExactIntegralChangeOfVariables) →
   (Diverges : IntegralValue change → Set) →
   Diverges (originalIntegral change) →
   Diverges (transformedIntegral change)
-bkmDivergenceCannotBeRemovedByExactTimeChange =
+bkmDivergenceCannotBeRemovedBySuppliedExactTimeChange =
   integralPropertyPreservedForward
 
-bkmFinitenessCannotBeCreatedByExactTimeChange :
+bkmFinitenessCannotBeCreatedBySuppliedExactTimeChange :
   (change : ExactIntegralChangeOfVariables) →
   (Finite : IntegralValue change → Set) →
   Finite (transformedIntegral change) →
   Finite (originalIntegral change)
-bkmFinitenessCannotBeCreatedByExactTimeChange =
+bkmFinitenessCannotBeCreatedBySuppliedExactTimeChange =
   integralPropertyPreservedBackward
 
-superlinearDriftGapAtCoefficientPlusOne :
+superlinearDriftGapIdentityAtCoefficientPlusOne :
   (coefficient : ℚ) →
   Scaling.bernsteinAmplitudeGap coefficient
   ≡ Scaling.shellDiffusionSquared (Scaling.counterScale coefficient)
-superlinearDriftGapAtCoefficientPlusOne =
+superlinearDriftGapIdentityAtCoefficientPlusOne =
   Scaling.bernsteinSupercriticalGapIdentity
+
+superlinearDriftGapNonnegativeAtCoefficientPlusOne :
+  (coefficient : ℚ) →
+  0ℚ ≤ Scaling.bernsteinAmplitudeGap coefficient
+superlinearDriftGapNonnegativeAtCoefficientPlusOne =
+  Scaling.bernsteinGapNonnegative
 
 record CamlinAuditBoundary : Set where
   constructor camlinAuditBoundary
   field
     finiteHorizonQuantifierGapProved : Set
-    exactTimeChangePreservesIntegralProperties : Set
-    superlinearDriftGapReused : Set
+    genericIntegralEqualityTransportProved : Set
+    concreteCamlinTimeMapAndBKMEqualityProved : Set
+    superlinearDriftGapIdentityReused : Set
+    unrestrictedStrictDriftPositivityProved : Set
     uniformGlobalVorticityBoundProduced : Set
     unconditionalClayConclusionProduced : Set
 
 canonicalCamlinAuditBoundary : CamlinAuditBoundary
 canonicalCamlinAuditBoundary =
-  camlinAuditBoundary ⊤ ⊤ ⊤ ⊥ ⊥
-  where
-  open import Data.Unit using (⊤)
+  camlinAuditBoundary ⊤ ⊤ ⊥ ⊤ ⊥ ⊥ ⊥
