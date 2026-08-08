@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import DASHI.Core.ListExact public
 
 import DASHI.Biology.StageSymmetrySSP15SpectrumExact as Spectrum
+import DASHI.Foundations.ActionMDLSeparation as ActionMDL
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact as Amp
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
@@ -108,7 +109,7 @@ selectedIntegratedFrameIsCompact = refl
 
 selectedIntegratedFrameMatchesMDL :
   frame selectedIntegratedCandidate
-  ≡ FrameMDL.ActionMDL.MDLSelection.selected
+  ≡ ActionMDL.MDLSelection.selected
       FrameMDL.canonicalFrameMDLSelection tt
 selectedIntegratedFrameMatchesMDL = refl
 
