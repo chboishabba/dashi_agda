@@ -27,7 +27,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Product using (proj₁; proj₂)
+open import Data.Product using (_,_; proj₁; proj₂)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
@@ -35,11 +35,6 @@ import DASHI.Biology.SSP15ComplementPhaseProjectorExact as Internal
 import DASHI.Biology.SSP15JCoarseFineIntegratedExact as Integrated
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as D4
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
-
-------------------------------------------------------------------------
--- Residual geometry is independent data.  Equal cardinal or prime labels do
--- not erase which constituent remains open.
-------------------------------------------------------------------------
 
 data ResidualGeometryKind : Set where
   noResidual : ResidualGeometryKind
@@ -76,10 +71,6 @@ internalIrrepName :
   ∀ {prime} → PrimeValuedSSP15State prime → D4.D4IrrepKind
 internalIrrepName state = Internal.modeToD4Irrep (internalMode state)
 
-------------------------------------------------------------------------
--- Every Ogg lane has a full internal SSP15 fibre.
-------------------------------------------------------------------------
-
 attachInternalLane :
   (prime : Lane.MonsterPrimeLane) →
   Internal.SSP15InternalLane →
@@ -96,10 +87,6 @@ primeValuationDoesNotRestrictInternalLane :
   (residual : ResidualGeometryKind) →
   internalLane (attachInternalLane prime lane residual) ≡ lane
 primeValuationDoesNotRestrictInternalLane prime lane residual = refl
-
-------------------------------------------------------------------------
--- Concrete p=71 states requested by the interpretation.
-------------------------------------------------------------------------
 
 p71A1Neutral : PrimeValuedSSP15State Lane.p71
 p71A1Neutral =
@@ -134,10 +121,6 @@ p71A2CounterposedPhaseIsNegative = refl
 p71ExamplesHaveSamePrimeDifferentInternalMode :
   internalMode p71A1Neutral ≡ internalMode p71A2Counterposed → ⊥
 p71ExamplesHaveSamePrimeDifferentInternalMode ()
-
-------------------------------------------------------------------------
--- Phase transport acts inside each prime fibre and leaves the valuation fixed.
-------------------------------------------------------------------------
 
 reversePrimeValuedPhase :
   ∀ {prime} → PrimeValuedSSP15State prime → PrimeValuedSSP15State prime
