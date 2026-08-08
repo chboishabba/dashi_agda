@@ -47,6 +47,7 @@ open import Relation.Binary.PropositionalEquality using
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact as Fubini
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalCoordinateProjectorExact as Projector
 import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boundary
@@ -119,7 +120,7 @@ firstVariationRawSplitsProjectedDiscarded covector mask vector =
           (covector coordinate)
           (Projector.physicalCoordinateProject mask vector coordinate)
           (projectorDiscardedComponent mask vector coordinate)))
-      (Sums.sumRationalAdd
+      (Fubini.sumRationalAdd
         Physical.physicalSU2Coordinates4
         (λ coordinate →
           covector coordinate
@@ -137,22 +138,20 @@ projectedFirstVariationIsRawMinusDiscarded :
       (projectorDiscardedComponent mask vector)
 projectedFirstVariationIsRawMinusDiscarded covector mask vector =
   let
-    split = firstVariationRawSplitsProjectedDiscarded
-      covector mask vector
+    raw = firstVariationFromCovector covector vector
+    projected = firstVariationFromCovector covector
+      (Projector.physicalCoordinateProject mask vector)
+    discarded = firstVariationFromCovector covector
+      (projectorDiscardedComponent mask vector)
+
+    subtractSplit : raw - discarded ≡ (projected + discarded) - discarded
+    subtractSplit = cong (_- discarded)
+      (firstVariationRawSplitsProjectedDiscarded covector mask vector)
+
+    cancellation : (projected + discarded) - discarded ≡ projected
+    cancellation = ℚRing.solve-∀ projected discarded
   in
-  trans
-    (sym (ℚRing.solve-∀
-      (firstVariationFromCovector covector vector)
-      (firstVariationFromCovector covector
-        (Projector.physicalCoordinateProject mask vector))
-      (firstVariationFromCovector covector
-        (projectorDiscardedComponent mask vector))))
-    (cong
-      (λ selected →
-        selected
-        - firstVariationFromCovector covector
-          (projectorDiscardedComponent mask vector))
-      split)
+  sym (trans subtractSplit cancellation)
 
 record ProjectionSpilloverData
     (background : Plaquette.RationalSU2Background4)
@@ -194,13 +193,13 @@ open ProjectionSpilloverData public
 projectedExtractionSpillover :
   ∀ {background field plaquette} →
   ProjectionSpilloverData background field plaquette → ℚ
-projectedExtractionSpillover data =
+projectedExtractionSpillover {field = field} {plaquette = plaquette} data =
   rawLocalizationSpillover data
   - firstVariationFromCovector
       (firstVariationCovector data)
       (projectorDiscardedComponent
         (physicalHodgeMask data)
-        (Boundary.rawPlaquetteSingletonExtractor _ _))
+        (Boundary.rawPlaquetteSingletonExtractor field plaquette))
 
 projectedExtractorIdentity :
   ∀ {background field plaquette}
@@ -252,9 +251,9 @@ projectedExtractionSpilloverUpper {field = field} {plaquette = plaquette} data =
     charge = Wilson.plaquetteCrossCharge field plaquette
   in
   subst
-    (λ left →
+    (λ coefficient →
       projectedExtractionSpillover data
-      ≤ left * charge)
+      ≤ coefficient * charge)
     (coefficientsExhaustSingletonBudget data)
     (subst
       (λ right → projectedExtractionSpillover data ≤ right)
