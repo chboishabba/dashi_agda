@@ -119,10 +119,11 @@ record EquivariantEulerMoonshineBridge : Set₂ where
   field
     GroupElement ChainState : Set
     group : Graded.Group GroupElement
+    zeroState : ChainState
     parity : ChainState → Bool
     differential : ChainState → ChainState
     differentialSquaresToZero :
-      (x : ChainState) → differential (differential x) ≡ x
+      (x : ChainState) → differential (differential x) ≡ zeroState
     action : GroupElement → ChainState → ChainState
     actionCommutesWithDifferential :
       (g : GroupElement) (x : ChainState) →
@@ -131,10 +132,6 @@ record EquivariantEulerMoonshineBridge : Set₂ where
     moonshineTrace : GroupElement → Nat
     bridgeEquality :
       (g : GroupElement) → equivariantSupertrace g ≡ moonshineTrace g
-
--- The field name above deliberately makes the required law visible.  A future
--- physically correct chain complex should strengthen the toy involutive
--- equation to an actual zero morphism in its additive carrier.
 
 record EulerMonsterAuthorityBoundary : Set where
   constructor eulerMonsterAuthorityBoundary
