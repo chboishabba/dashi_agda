@@ -7,6 +7,7 @@ module DASHI.Moonshine.Monster3BHighestAlphaValidation where
 import DASHI.Moonshine.Monster3BNormalizerBridge as Normalizer
 import DASHI.Moonshine.Monster3BCyclicFourierDyadicBridgeExact as Fourier
 import DASHI.Moonshine.Monster3BHeisenbergMultiplicityExact as Heisenberg
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as Generators
 import DASHI.Moonshine.Monster3BElementaryAbelianInvariantExact as Elementary
 import DASHI.Moonshine.Monster3BPhaseTransportExact as Transport
 import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as ThreeLocal
@@ -76,3 +77,16 @@ plusMinusExtraspecialDegreesAgree :
   Heisenberg.nonlinearCharacterDegree Heisenberg.plusType
   ≡ Heisenberg.nonlinearCharacterDegree Heisenberg.minusType
 plusMinusExtraspecialDegreesAgree = refl
+
+standardHeisenbergGeneratorPairCountIsThirtySix :
+  Generators.standardGeneratorPairCount ≡ 36
+standardHeisenbergGeneratorPairCountIsThirtySix = refl
+
+sampleGeneratorWeylLaw :
+  (state : Generators.X6) →
+  Generators.modulationExponent Generators.axis2
+    (Generators.translate Generators.axis2 state)
+  ≡ Generators.kronecker Generators.axis2 Generators.axis2
+    Generators.+3 Generators.modulationExponent Generators.axis2 state
+sampleGeneratorWeylLaw =
+  Generators.generatorWeylExponent Generators.axis2 Generators.axis2
