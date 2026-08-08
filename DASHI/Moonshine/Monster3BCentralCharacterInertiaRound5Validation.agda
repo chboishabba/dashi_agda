@@ -3,6 +3,7 @@ module DASHI.Moonshine.Monster3BCentralCharacterInertiaRound5Validation where
 import DASHI.Moonshine.Monster3BOrbifoldLocalModuleRound4Validation
 import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 import DASHI.Moonshine.MonsterOggNonaryProbeAuthorityExact as Probe
+import DASHI.Moonshine.MonsterOggNonarySevenSevenOneEquivalenceExact as Partition
 import DASHI.Moonshine.Monster3BActualZetaPromotionPipelineExact as Pipeline
 import DASHI.Moonshine.Monster3BMultiplicityTwelveSeventyEightRecognitionExact as Split
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Multiplicity
@@ -138,7 +139,7 @@ seventyOneDeficitMatchesRawSevenAOffset =
   Probe.seventyOneDeficitMatchesUnnormalizedSevenAConstant
 
 ------------------------------------------------------------------------
--- Exact 7+7+1 finite partition and coarse-sheet boundary.
+-- Exact 7+7+1 finite equivalence and unique coarse-sheet boundary.
 ------------------------------------------------------------------------
 
 mirrorAHasSevenLanes : Probe.listCount Probe.canonicalMirrorA7 ≡ 7
@@ -156,9 +157,26 @@ sevenSevenOneReconstructsFifteen :
   + Probe.listCount Probe.canonicalSign1 ≡ 15
 sevenSevenOneReconstructsFifteen = Probe.semanticSevenSevenOneCountIsFifteen
 
+sevenSevenOneClassificationForgetsExactly :
+  (prime : Lane.MonsterPrimeLane) →
+  Partition.forgetSevenSevenOneLane (Partition.classifyOggLane prime) ≡ prime
+sevenSevenOneClassificationForgetsExactly = Partition.forgetAfterClassify
+
+sevenSevenOneForgettingClassifiesExactly :
+  (lane : Partition.SemanticSevenSevenOneLane) →
+  Partition.classifyOggLane (Partition.forgetSevenSevenOneLane lane) ≡ lane
+sevenSevenOneForgettingClassifiesExactly = Partition.classifyAfterForget
+
 observerLaneOccupiesCoarseSheetSeven :
   Probe.coarseSheets (Probe.nonaryProbe (Probe.sign1Prime Probe.sign71)) ≡ 7
 observerLaneOccupiesCoarseSheetSeven = Probe.sign1CoarseSheetIsSeven
+
+coarseSheetSevenUniquelySelectsObserver :
+  (prime : Lane.MonsterPrimeLane) →
+  Probe.coarseSheets (Probe.nonaryProbe prime) ≡ 7 →
+  prime ≡ Lane.p71
+coarseSheetSevenUniquelySelectsObserver =
+  Partition.coarseSheetSevenUniquelyIdentifiesP71
 
 ------------------------------------------------------------------------
 -- Existing actual-sector pipeline.
