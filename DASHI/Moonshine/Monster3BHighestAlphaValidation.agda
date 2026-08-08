@@ -134,8 +134,9 @@ sampleWeightProjectorIdempotent :
       (WeightProjector.basisAt position coordinate)
   ≡ WeightProjector.weightProjectorCoefficient position
       (WeightProjector.basisAt position coordinate)
-sampleWeightProjectorIdempotent =
+sampleWeightProjectorIdempotent position coordinate =
   WeightProjector.weightProjectorCoefficientIdempotent
+    position (WeightProjector.basisAt position coordinate)
 
 projectorCharacterDimensionMatchesNormalizer :
   Character.zetaSectorDegree ≡ Normalizer.nontrivialPhaseDegree
