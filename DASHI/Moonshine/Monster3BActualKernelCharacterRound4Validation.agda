@@ -32,17 +32,24 @@ noncentralNinetyCopyTraceVanishes :
 noncentralNinetyCopyTraceVanishes =
   Signature.ninetyHeisenbergNoncentralValue
 
-safeNonzeroTraceRow : Safe.MultiplicityClassRow
-safeNonzeroTraceRow = Safe.quotientRow 65610 729 90 refl
+safeNonzeroTraceRow :
+  Safe.MultiplicityClassRow Safe.naturalTraceAlgebra
+safeNonzeroTraceRow =
+  Safe.quotientRow Safe.naturalTraceAlgebra 65610 729 90 refl
 
-safeZeroTraceRow : Safe.MultiplicityClassRow
-safeZeroTraceRow = Safe.independentRow 0 0 12 refl
+safeZeroTraceRow :
+  Safe.MultiplicityClassRow Safe.naturalTraceAlgebra
+safeZeroTraceRow =
+  Safe.independentRow Safe.naturalTraceAlgebra 0 0 12 refl
 
 safeClassReconstructionExample :
-  Safe.sumTensorTrace (safeNonzeroTraceRow ∷ safeZeroTraceRow ∷ [])
-  ≡ Safe.sumAmbient (safeNonzeroTraceRow ∷ safeZeroTraceRow ∷ [])
+  Safe.sumTensorTrace Safe.naturalTraceAlgebra
+    (safeNonzeroTraceRow ∷ safeZeroTraceRow ∷ [])
+  ≡ Safe.sumAmbient Safe.naturalTraceAlgebra
+    (safeNonzeroTraceRow ∷ safeZeroTraceRow ∷ [])
 safeClassReconstructionExample =
   Safe.multiplicityCharacterReconstructsAllClasses
+    Safe.naturalTraceAlgebra
     (safeNonzeroTraceRow ∷ safeZeroTraceRow ∷ [])
 
 moonshineWeightOneIsRemoved : Orbifold.moonshineWeightOneDimension ≡ 0
