@@ -131,10 +131,6 @@ canonicalL4PhysicalSupportSubstatus =
     checkedExact checkedExact checkedExact
     checkedExact checkedExact checkedExact
 
-------------------------------------------------------------------------
--- Exact theorem evidence, not Boolean receipts.
-------------------------------------------------------------------------
-
 record Round25ExactEvidence : Set₁ where
   field
     literalCarrierCertificate :
@@ -152,19 +148,19 @@ record Round25ExactEvidence : Set₁ where
     actualFiveSourcePartition :
       (cutoff : Nat) →
       (output : Z3.FourierMode) →
-      (value : Physical.PhysicalTriadIncidence → ℚ) →
-      (commutatorValue : ℚ) →
-      Sum.fiveSourceTotal cutoff output value commutatorValue
+      (triadValue : Physical.PhysicalTriadIncidence → ℚ) →
+      (commutator : Z3.FourierMode → ℚ) →
+      Sum.fiveSourceTotal cutoff output triadValue commutator
       ≡
       Four.highHighToLowSum
-        (Sum.physicalTaggedOutputFiber cutoff output value)
+        (Sum.physicalTaggedOutputFiber cutoff output triadValue)
       + Four.lowHighSum
-        (Sum.physicalTaggedOutputFiber cutoff output value)
+        (Sum.physicalTaggedOutputFiber cutoff output triadValue)
       + Four.highLowSum
-        (Sum.physicalTaggedOutputFiber cutoff output value)
+        (Sum.physicalTaggedOutputFiber cutoff output triadValue)
       + Four.comparableSum
-        (Sum.physicalTaggedOutputFiber cutoff output value)
-      + commutatorValue
+        (Sum.physicalTaggedOutputFiber cutoff output triadValue)
+      + commutator output
 
 open Round25ExactEvidence public
 
