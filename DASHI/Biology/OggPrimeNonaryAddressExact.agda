@@ -21,8 +21,9 @@ module DASHI.Biology.OggPrimeNonaryAddressExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Empty using (⊥)
 
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
@@ -130,6 +131,23 @@ toOggLane lane47 = Lane.p47
 toOggLane lane59 = Lane.p59
 toOggLane lane71 = Lane.p71
 
+toOggLaneNeverThree :
+  (prime : NonThreeOggLane) → toOggLane prime ≡ Lane.p3 → ⊥
+toOggLaneNeverThree lane2 ()
+toOggLaneNeverThree lane5 ()
+toOggLaneNeverThree lane7 ()
+toOggLaneNeverThree lane11 ()
+toOggLaneNeverThree lane13 ()
+toOggLaneNeverThree lane17 ()
+toOggLaneNeverThree lane19 ()
+toOggLaneNeverThree lane23 ()
+toOggLaneNeverThree lane29 ()
+toOggLaneNeverThree lane31 ()
+toOggLaneNeverThree lane41 ()
+toOggLaneNeverThree lane47 ()
+toOggLaneNeverThree lane59 ()
+toOggLaneNeverThree lane71 ()
+
 nonThreeLaneModeIsPhaseMobile :
   (prime : NonThreeOggLane) →
   PhaseMobileMode
@@ -201,8 +219,15 @@ canonicalDepthTwoNonaryComplementLedger : DepthTwoNonaryComplementLedger
 canonicalDepthTwoNonaryComplementLedger =
   depth-two-nonary-complement-ledger refl refl refl refl refl refl
 
-canonicalOggAddresses : List Lane.MonsterPrimeLane
-canonicalOggAddresses = Lane.canonicalMonsterPrimeLane
+canonicalOggPrimeLanes : List Lane.MonsterPrimeLane
+canonicalOggPrimeLanes = Lane.canonicalMonsterPrimeLane
+
+listCount : ∀ {A : Set} → List A → Nat
+listCount [] = 0
+listCount (_ ∷ rest) = 1 + listCount rest
+
+oggPrimeLaneCountIsFifteen : listCount canonicalOggPrimeLanes ≡ 15
+oggPrimeLaneCountIsFifteen = refl
 
 ------------------------------------------------------------------------
 -- Positive claims carry the lane-indexed producer itself.
@@ -211,11 +236,14 @@ canonicalOggAddresses = Lane.canonicalMonsterPrimeLane
 record OggPrimeNonaryAddressBoundary : Set where
   constructor ogg-prime-nonary-address-boundary
   field
+    canonicalLaneCount : listCount canonicalOggPrimeLanes ≡ 15
     everyLaneHasExactAddress :
       (prime : Lane.MonsterPrimeLane) →
       Lane.monsterPrimeLaneToNat prime
       ≡ coarseSheets (nonaryOggAddress prime) * 9
         + remainder (nonaryOggAddress prime)
+    everyNonThreeLaneExcludesThree :
+      (prime : NonThreeOggLane) → toOggLane prime ≡ Lane.p3 → ⊥
     everyNonThreeLaneIsPhaseMobile :
       (prime : NonThreeOggLane) →
       PhaseMobileMode
@@ -231,7 +259,9 @@ record OggPrimeNonaryAddressBoundary : Set where
 canonicalOggPrimeNonaryAddressBoundary : OggPrimeNonaryAddressBoundary
 canonicalOggPrimeNonaryAddressBoundary =
   ogg-prime-nonary-address-boundary
+    oggPrimeLaneCountIsFifteen
     (λ prime → addressExact (nonaryOggAddress prime))
+    toOggLaneNeverThree
     nonThreeLaneModeIsPhaseMobile
     canonicalDepthTwoNonaryComplementLedger
     false refl
