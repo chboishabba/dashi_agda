@@ -4,9 +4,9 @@ import DASHI.Physics.Closure.NSTriadKNLuoGalerkinCriticalLedgerRound26Validation
 import DASHI.Physics.Closure.NSTriadKNLuoUniformCommutatorTaxRound27Exact as Tax
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteEnergyContinuationRound27Exact as Continuation
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _*_)
 
 finiteTaxIsCutoffIndependent :
   (cells : List Tax.DyadicCommutatorTaxCell) →
@@ -19,7 +19,7 @@ halfDoubleCoefficientCancelsExactly :
   (moment low high tested : ℚ) →
   Tax.shellCommutatorTax
     (Tax.cellAtScale Tax.halfDoubleScalePair moment low high tested)
-  ≡ moment Tax.* low Tax.* high Tax.* tested
+  ≡ moment * low * high * tested
 halfDoubleCoefficientCancelsExactly = Tax.halfDoubleTaxIsMotherTax
 
 energyIdentityFeedsContinuation :
