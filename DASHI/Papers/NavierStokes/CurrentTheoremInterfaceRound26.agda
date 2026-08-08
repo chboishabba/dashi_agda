@@ -3,11 +3,12 @@ module DASHI.Papers.NavierStokes.CurrentTheoremInterfaceRound26 where
 ------------------------------------------------------------------------
 -- Current normalized paper-facing Navier-Stokes interface after Round 26.
 --
--- Round 25 retains the literal physical support theorem.  Round 26 reuses the
--- repository's physical Complex3 triad cancellation, forces the literal
--- five-source output fibre into a signed shell cell, and adds exact finite tax
--- accounting.  The continuum-real ODE, physical time-dependent shell balance,
--- uniform analytic taxes, strict margin, limits and Clay theorem remain open.
+-- Round 25 retains the literal physical support theorem.  Round 26 proves
+-- conjugate transversality for reality reconstruction, reuses the physical
+-- Complex3 triad cancellation, forces the literal five-source output fibre
+-- into a signed shell cell, and adds exact finite tax accounting.  The finite
+-- normed ODE, physical time-dependent shell balance, uniform analytic taxes,
+-- strict margin, limits and Clay theorem remain open.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -29,6 +30,9 @@ record CurrentNSPaperTheoremInterfaceRound26 : Setω where
     round26StatusIsCanonical :
       round26Status ≡ R26.canonicalGalerkinCriticalLedgerRound26Status
 
+    conjugateTransversalityChecked :
+      R26.conjugateTransversality round26Status ≡ true
+
     physicalTriadEnergyCancellationChecked :
       R26.physicalTriadEnergyCancellation round26Status ≡ true
 
@@ -42,7 +46,7 @@ record CurrentNSPaperTheoremInterfaceRound26 : Setω where
       R26.duplicateFreeTaxOwnership round26Status ≡ true
 
     localODEInstanceStillOpen :
-      R26.continuumRealPicardLindelofInstance round26Status ≡ false
+      R26.finiteNormedPicardLindelofInstance round26Status ≡ false
 
     physicalTimeDependentShellBalanceStillOpen :
       R26.physicalTimeDependentShellBalance round26Status ≡ false
@@ -70,6 +74,7 @@ canonicalCurrentNSPaperTheoremInterfaceRound26 = record
   ; round26Status =
       R26.canonicalGalerkinCriticalLedgerRound26Status
   ; round26StatusIsCanonical = refl
+  ; conjugateTransversalityChecked = R26.conjugateTransversalityAdvanced
   ; physicalTriadEnergyCancellationChecked = R26.finiteAlgebraAdvanced
   ; signedCriticalLedgerChecked = refl
   ; physicalFiveSourceSignedShellBridgeChecked =
@@ -82,6 +87,13 @@ canonicalCurrentNSPaperTheoremInterfaceRound26 = record
   ; strictMarginStillOpen = R26.strictMarginRemainsOpen
   ; clayPromotionStillFalse = R25.currentRound25ClayPromotionFalse
   }
+
+currentRound26ConjugateTransversalityChecked :
+  R26.conjugateTransversality
+    (round26Status canonicalCurrentNSPaperTheoremInterfaceRound26)
+  ≡ true
+currentRound26ConjugateTransversalityChecked =
+  R26.conjugateTransversalityAdvanced
 
 currentRound26PhysicalShellBridgeChecked :
   R26.physicalFiveSourceSignedShellBridge
