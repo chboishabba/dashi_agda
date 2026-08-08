@@ -8,6 +8,8 @@ module DASHI.Physics.Closure.NSTriadKNLuoClaimCorpusHighestAlphaRound24Validatio
 -- * a typed broad corpus of claimed, conditional and comparator papers;
 -- * an exact additive-floor countermodel for a shellwise decay step;
 -- * exact finite-horizon and time-reparameterization no-gos;
+-- * an exact finite-cascade flux-bound countermodel;
+-- * an exact restricted-class versus universal-theorem separation;
 -- * a source-route to physical-lemma crosswalk;
 -- * the dependency-ordered L0--L23 highest-alpha ladder;
 -- * a paper-facing fail-closed status surface.
@@ -21,6 +23,8 @@ import DASHI.Physics.Closure.NSTriadKNLuoClayContractRound23Validation
 import DASHI.Physics.Closure.NSTriadKNLuoClaimedSolutionCorpusRound24Exact
 import DASHI.Physics.Closure.NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact
 import DASHI.Physics.Closure.NSTriadKNLuoCamlinTemporalLiftNoGoExact
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact
+import DASHI.Physics.Closure.NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact
 import DASHI.Physics.Closure.NSTriadKNLuoClaimRouteCrosswalkRound24Exact
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact
 import DASHI.Papers.NavierStokes.ClaimCorpusHighestAlphaRound24
