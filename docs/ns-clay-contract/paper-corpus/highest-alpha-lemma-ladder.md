@@ -35,7 +35,7 @@ For a selected critical space, construct a maximal strong solution and prove tha
 
 ## B. Actual finite PDE and shell geometry
 
-### L3 — Periodic divergence-free Fourier/Galerkin carrier — materially narrowed physical producer
+### L3 — Periodic divergence-free Fourier/Galerkin carrier — algebraic invariants checked; finite ODE open
 
 Round 25 certifies the literal cutoff modes, resonant triads, duplicate-free output fibres, reality closure, Leray coefficient and coefficientwise physical/Fourier equivalence.
 
@@ -44,15 +44,15 @@ Round 26 adds:
 - a coordinate syntax in which every finite Galerkin RHS atom is linear or bilinear and has degree at most two;
 - the exact finite difference factorization `xy-uv=(x-u)y+u(y-v)`;
 - a positive-orbit phase-space surface reconstructing negative modes by conjugation;
-- an explicit conjugate-transversality law as the remaining constraint instance;
+- a proof that conjugate reconstruction preserves transversality on the exact Complex3 carrier;
 - a rational six-term energy audit normal form;
 - direct reuse of the repository’s actual Complex3 three-leg cancellation theorem for the signed Leray coefficient.
 
-The remaining L3 producer is now:
+The remaining L3 producer is now purely finite-dimensional analysis:
 
 ```text
-instantiate conjugate transversality on the selected continuum real carrier;
-prove the literal polynomial vector field is locally Lipschitz in a finite norm;
+choose the literal finite normed real coordinate space;
+prove the polynomial vector field is locally Lipschitz on bounded balls;
 apply Picard–Lindelöf;
 derive the finite ODE energy identity from the physical triad theorem;
 use that identity to prove global finite-dimensional existence.
@@ -299,7 +299,7 @@ The existing end-to-end theorem converts the physical path inputs into the exact
 The immediate sequence is:
 
 ```text
-L3 continuum-real finite ODE instance and global finite existence;
+L3 finite normed ODE and global finite existence;
 L5 physical time-dependent signed shell balance;
 L11 first cutoff-independent low-advection/Com tax;
 L8–L10 and L12–L14 remaining physical taxes;
