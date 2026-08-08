@@ -41,7 +41,7 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalCovariantPlaquetteCurlExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
@@ -124,7 +124,8 @@ covariantPlaquetteCurl :
   Q.RationalQuaternion → Q.RationalQuaternion →
   Q.RationalQuaternion →
   Q.RationalQuaternion → Q.RationalQuaternion →
-  Q.RationalQuaternion → Q.RationalQuaternion
+  Q.RationalQuaternion → Q.RationalQuaternion →
+  Q.RationalQuaternion
 covariantPlaquetteCurl a b c x0 x1 x2 x3 =
   Adjoint.adjointTransport a x0
   Q.+q
@@ -360,23 +361,35 @@ physicalPlaquetteRightInverseExact :
     (physicalPositiveFactorD background plaquette)
     Q.*q physicalPlaquetteRightInverse background plaquette
   ≡ Q.oneQ
-physicalPlaquetteRightInverseExact background (pair site axes)
-  rewrite plaquetteProductTimesRightInverseWithNorms
-    (physicalFactorA background (pair site axes))
-    (physicalFactorB background (pair site axes))
-    (physicalPositiveFactorC background (pair site axes))
-    (physicalPositiveFactorD background (pair site axes))
-    | Physical.unitNorm background
-        (pair site (Physical.pairLeft axes))
-    | Physical.unitNorm background
-        (pair (Hodge4.shiftForward (Physical.pairLeft axes) site)
-          (Physical.pairRight axes))
-    | Physical.unitNorm background
-        (pair (Hodge4.shiftForward (Physical.pairRight axes) site)
-          (Physical.pairLeft axes))
-    | Physical.unitNorm background
-        (pair site (Physical.pairRight axes)) =
-  refl
+physicalPlaquetteRightInverseExact background plaquette@(pair site axes) =
+  let
+    a = physicalFactorA background plaquette
+    b = physicalFactorB background plaquette
+    c = physicalPositiveFactorC background plaquette
+    d = physicalPositiveFactorD background plaquette
+
+    productNormExact :
+      Physical.quaternionNormSq a
+        * Physical.quaternionNormSq b
+        * Physical.quaternionNormSq c
+        * Physical.quaternionNormSq d
+      ≡ 1ℚ
+    productNormExact
+      rewrite Physical.unitNorm background
+          (pair site (Physical.pairLeft axes))
+        | Physical.unitNorm background
+          (pair (Hodge4.shiftForward (Physical.pairLeft axes) site)
+            (Physical.pairRight axes))
+        | Physical.unitNorm background
+          (pair (Hodge4.shiftForward (Physical.pairRight axes) site)
+            (Physical.pairLeft axes))
+        | Physical.unitNorm background
+          (pair site (Physical.pairRight axes)) =
+      ℚRing.solve []
+  in
+  trans
+    (plaquetteProductTimesRightInverseWithNorms a b c d)
+    (cong scalarQuaternion productNormExact)
 
 physicalPlaquetteFirstVariationIsCovariantCurl :
   ∀ background field plaquette →
