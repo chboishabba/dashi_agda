@@ -2,7 +2,7 @@
 ' C4-style component view without a remote include.
 ' Parent document: README.md
 
-title DASHI periodic Navier–Stokes Clay contract after Round 27
+title DASHI periodic Navier–Stokes Clay contract after Round 28
 
 skinparam componentStyle rectangle
 skinparam wrapWidth 220
@@ -26,8 +26,10 @@ package "Finite physical system" {
   component "Sharp finite shell projectors\nidempotence, disjointness, resolution" as Projectors <<Checked exact>>
   component "Physical HH/LH/HL/CC support\nCom separated, no residual" as Support <<Checked exact>>
   component "Reality involution Ju(k)=conj u(-k)\ndiagonal multiplier equivariance" as Reality <<Checked exact algebra>>
+  component "Commuting physical selector\nLeray, reality and centering" as PhysSelector <<Checked generic theorem>>
+  component "Conjugate triad/output fibres\nPlucker invariant under conjugation" as ConjugateFibres <<Checked exact>>
   component "Reality-orbit phase space\nand quadratic coordinate RHS" as Coordinates <<Checked exact algebra>>
-  component "Full physical vector-field equivariance" as PhysicalEquivariance <<Open producer>>
+  component "Concrete selector and nonlinear equivariance" as PhysicalEquivariance <<Open producer>>
   component "Finite Picard-Lindelof\nand global Galerkin solution" as FiniteODE <<Open producer>>
   component "Triadwise energy cancellation" as Energy <<Checked exact algebra>>
   component "Signed critical shell ledger\nexplicit lower and upper boundaries" as SignedLedger <<Checked exact algebra>>
@@ -37,17 +39,23 @@ package "Finite physical system" {
 package "Critical operator and geometry system" {
   component "State carrier versus multiplier dual" as StateDual <<Checked exact algebra>>
   component "Signed translation-multiplier commutator" as TranslationCommutator <<Checked exact algebra>>
+  component "Structured signed interaction fibres" as InteractionFibres <<Checked exact algebra>>
+  component "TT* / almost-orthogonality estimate" as TStarT <<Open producer>>
   component "Low transport cancellation\nand finite kernel commutator" as Commutator <<Checked exact algebra>>
   component "Physical triad Plucker/Gram invariant" as Plucker <<Checked exact algebra>>
-  component "Division-free HH factorisation\nzero denominator branch" as HHDefect <<Checked exact algebra>>
+  component "Orbit parity and conjugation signature" as OrbitParity <<Checked exact algebra>>
+  component "Division-free Plucker homogeneity\nand parallel zero branch" as HHDefect <<Checked exact algebra>>
   component "Hysteretic entry charge\npaid by positive variation" as Hysteresis <<Checked exact algebra>>
 }
 
 package "Critical tax system" {
   component "Centred five-source probe" as Probe <<Checked exact algebra>>
-  component "Unique tax ownership\nand named remainder classes" as Ownership <<Checked exact algebra>>
+  component "Signed constituent tree\ndelayed positive grouping" as Constituents <<Checked exact algebra>>
+  component "Dependent unique-owner partition" as Ownership <<Checked exact algebra>>
+  component "No-hidden-norm owner language" as TaxLanguage <<Checked exact algebra>>
+  component "Nine-owner absorption algebra" as NineAbsorption <<Checked exact algebra>>
   component "Maximal uniform viscosity core" as MaxCore <<Checked exact algebra>>
-  component "Physical owner allocations" as Allocations <<Open producer>>
+  component "Physical nine-owner estimates" as Allocations <<Open producer>>
   component "Cutoff-uniform physical class taxes" as Tax <<Open producer>>
   component "Strict unique-owner viscosity certificate" as Margin <<Open producer>>
 }
@@ -68,8 +76,8 @@ package "Submission adaptation system" {
 }
 
 package "Assurance system" {
-  component "Round 27 cumulative Agda root" as AgdaRoot <<Verification>>
-  component "Static no-hole, source, link and tax checker" as Checker <<Verification>>
+  component "Round 28 cumulative Agda root" as AgdaRoot <<Verification>>
+  component "Static no-hole, source, link and authority checker" as Checker <<Verification>>
   component "Generated finite projector/operator certificate" as Certificate <<Verification>>
   component "Change, risk and traceability record" as Governance <<Governance>>
 }
@@ -83,9 +91,12 @@ Crosswalk --> Margin : assign strict-budget lane
 Carrier --> Projectors : literal finite modes
 Carrier --> Support : actual resonant output fibres
 Carrier --> Coordinates : finite coefficient carrier
+Carrier --> ConjugateFibres : cutoff closure under negation
 Projectors --> PhysicalLedger : shell localization
 Projectors --> TranslationCommutator : multiplier symbol
-Reality --> PhysicalEquivariance : fixed-point preservation criterion
+Reality --> PhysSelector : fixed-point selector
+PhysSelector --> PhysicalEquivariance : instantiate concrete operations
+ConjugateFibres --> PhysicalEquivariance : triad involution and opposite output
 Coordinates --> PhysicalEquivariance : literal nonlinear RHS
 PhysicalEquivariance --> FiniteODE : invariant finite phase space
 Coordinates --> FiniteODE : local Lipschitz input
@@ -96,20 +107,30 @@ Support --> SignedLedger : exact five-source labels
 PhysicalLedger --> SignedLedger : physical shell values
 
 StateDual --> TranslationCommutator : typed state/test action
-TranslationCommutator --> Commutator : signed multiplier difference
-SignedLedger --> Commutator : signed low-advection coordinate
+TranslationCommutator --> InteractionFibres : signed multiplier difference
+InteractionFibres --> TStarT : direct-sum operator structure
+TStarT --> Commutator : cutoff-uniform quantitative bound
+SignedLedger --> Constituents : signed physical source values
+Support --> Constituents : source-to-owner compatibility
+Constituents --> Ownership : owner-homogeneous groups
+Ownership --> TaxLanguage : each atom paid exactly once
+TaxLanguage --> NineAbsorption : admissible finite aggregation
+SignedLedger --> Probe : common plus centred sources
 Support --> Plucker : physical resonant triads
-Plucker --> HHDefect : interaction-plane geometry
+ConjugateFibres --> OrbitParity : conjugation action
+Plucker --> OrbitParity : orientation signature
+OrbitParity --> HHDefect : invariant numerator
 SignedLedger --> HHDefect : signed high-high coordinate
 Commutator --> Tax : quantitative Com/low tax
 HHDefect --> Tax : quantitative HH tax
 Hysteresis --> Tax : repeated bad-entry charge
-Ownership --> Tax : each atom paid once
-SignedLedger --> Probe : common plus centred sources
+Ownership --> Tax : disjoint owner partition
 Ownership --> MaxCore : unique owner set
 MaxCore --> Allocations : canonical common core
-Allocations --> Tax : physical dissipation portions
-Tax --> Margin : explicit viscosity consumption
+Allocations --> TaxLanguage : physical estimates
+TaxLanguage --> NineAbsorption : nine owner bounds
+NineAbsorption --> Margin : explicit coefficient sum
+Tax --> Margin : physical estimates for every owner
 Margin --> Gronwall : total coefficient < 1
 Gronwall --> Limits : uniform critical estimate
 Limits --> SerrinBridge : physical critical bounds
@@ -121,15 +142,17 @@ Adapter --> Galilean : centered literal witness
 Galilean --> Literal : arbitrary periodic datum
 Literal --> ClayTarget : inhabits exact theorem type
 
-AgdaRoot ..> Corpus : imports through Round 24
 AgdaRoot ..> Carrier : imports through Round 25
 AgdaRoot ..> SignedLedger : imports through Round 26
-AgdaRoot ..> Projectors : imports
-AgdaRoot ..> Reality : imports
-AgdaRoot ..> TranslationCommutator : imports
-AgdaRoot ..> Plucker : imports
-AgdaRoot ..> Probe : imports
-AgdaRoot ..> MaxCore : imports
+AgdaRoot ..> Projectors : imports through Round 27
+AgdaRoot ..> PhysSelector : imports Round 28
+AgdaRoot ..> ConjugateFibres : imports Round 28
+AgdaRoot ..> Constituents : imports Round 28
+AgdaRoot ..> Ownership : imports Round 28
+AgdaRoot ..> InteractionFibres : imports Round 28
+AgdaRoot ..> OrbitParity : imports Round 28
+AgdaRoot ..> TaxLanguage : imports Round 28
+AgdaRoot ..> NineAbsorption : imports Round 28
 Checker ..> AgdaRoot : executes pinned Agda check
 Certificate ..> Projectors : finite lattice box
 Certificate ..> TranslationCommutator : finite lattice box
@@ -141,28 +164,32 @@ Reviewer --> Governance : reviews evidence
 Reviewer --> Corpus : verifies source fidelity
 Reviewer --> ClayTarget : checks exact target
 
-note right of Projectors
-Sharp finite shell algebra is checked.
-Smooth Littlewood-Paley bounds and
-critical norm equivalence remain open.
+note right of PhysSelector
+The commuting-selector theorem is generic.
+Concrete Leray idempotence and full nonlinear
+commutation remain open physical instances.
 end note
 
-note right of TranslationCommutator
-The signed difference m(k)-m(k-l)
-is retained. No early absolute value
-or Schur majorant is imposed.
+note right of Constituents
+Positive taxation occurs only after a
+source-compatible owner-homogeneous signed
+group has been assembled.
 end note
 
-note right of MaxCore
-Maximality is conditional only on an
-exact allocation reconstruction and a
-pinned zero residual. Physical allocations
-remain open.
+note right of InteractionFibres
+The signed symbol m(k)-m(k-l) is retained.
+The cutoff-uniform TT* estimate is open.
 end note
 
-note right of Tax
-Open: physical bounds uniform in q, Q and N.
-Finite identities do not imply small coefficients.
+note right of TaxLanguage
+No uncontrolled BKM, Serrin or target
+critical supremum can be inserted into an
+admissible owner estimate by construction.
+end note
+
+note right of Margin
+Open: physical bounds uniform in q, Q and N
+and a strict sum of all nine coefficients.
 end note
 
 note right of Galilean
