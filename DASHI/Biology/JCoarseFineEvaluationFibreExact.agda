@@ -27,7 +27,7 @@ module DASHI.Biology.JCoarseFineEvaluationFibreExact where
 -- not reconstructed internally.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Nat using (_*_)
@@ -36,10 +36,6 @@ open import Data.Product using (Σ; _,_)
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.JFineCoarseRelativeScaleExact as Scale
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
-
-------------------------------------------------------------------------
--- Generic finite pointed evaluation with a right inverse.
-------------------------------------------------------------------------
 
 record PointedCoarseFineEvaluation : Set₁ where
   constructor pointed-coarse-fine-evaluation
@@ -72,10 +68,6 @@ canonicalJCoarseFineEvaluation =
     constantFineAssignment
     constantAssignmentEvaluatesAtJ
 
-------------------------------------------------------------------------
--- Literal j-evaluation fibres.
-------------------------------------------------------------------------
-
 JFineEvaluationFibre : Harmonic.FineFrequency → Set
 JFineEvaluationFibre fine =
   Σ Harmonic.FullFineAssignment
@@ -105,10 +97,6 @@ ordinaryStatesDoNotMapToCompletionJ :
   Harmonic.ordinaryChannel pair ≡ Harmonic.completionJ → ⊥
 ordinaryStatesDoNotMapToCompletionJ pair ()
 
-------------------------------------------------------------------------
--- Existing exact scale factorisation.
-------------------------------------------------------------------------
-
 jCoarseFrequencyIsNine : Scale.jCoarseFrequency ≡ 9
 jCoarseFrequencyIsNine = refl
 
@@ -129,21 +117,22 @@ jFineCodomainHasRelativeFrequencyDimension :
 jFineCodomainHasRelativeFrequencyDimension = refl
 
 ------------------------------------------------------------------------
--- The two uses of "fibre" are separated.  FineFrequency is the codomain of
--- evaluation at j.  JFineEvaluationFibre fine is the set of complete
--- assignments evaluating to one fixed fine value; it is not claimed to have
--- cardinality 3^9.
+-- FineFrequency is the evaluation codomain.  A fixed-value fibre is the set
+-- of complete assignments evaluating to that value and is not assigned size
+-- 3^9 merely because the codomain has that dimension.
 ------------------------------------------------------------------------
 
-record JCoarseFineEvaluationBoundary : Set where
+record JCoarseFineEvaluationBoundary : Set₁ where
   constructor j-coarse-fine-evaluation-boundary
   field
-    finiteEvaluationSectionConstructed : Bool
-    finiteEvaluationSectionConstructedIsTrue :
-      finiteEvaluationSectionConstructed ≡ true
-    everyFineValueHasAssignmentWitness : Bool
-    everyFineValueHasAssignmentWitnessIsTrue :
-      everyFineValueHasAssignmentWitness ≡ true
+    evaluationSectionLaw :
+      (fine : Harmonic.FineFrequency) →
+      Harmonic.jFine (constantFineAssignment fine) ≡ fine
+    everyFineValueFibrePoint :
+      (fine : Harmonic.FineFrequency) → JFineEvaluationFibre fine
+    absoluteScaleFactorisation :
+      Scale.jAbsoluteFineFrequency
+      ≡ Scale.jCoarseFrequency * Scale.jFineFrequency
     fixedValueAssignmentFibreHasCardinalityThreePowerNine : Bool
     fixedValueAssignmentFibreHasCardinalityThreePowerNineIsFalse :
       fixedValueAssignmentFibreHasCardinalityThreePowerNine ≡ false
@@ -157,4 +146,9 @@ record JCoarseFineEvaluationBoundary : Set where
 canonicalJCoarseFineEvaluationBoundary : JCoarseFineEvaluationBoundary
 canonicalJCoarseFineEvaluationBoundary =
   j-coarse-fine-evaluation-boundary
-    true refl true refl false refl false refl false refl
+    constantAssignmentEvaluatesAtJ
+    canonicalJFineFibrePoint
+    jAbsoluteIsCoarseTimesFine
+    false refl
+    false refl
+    false refl
