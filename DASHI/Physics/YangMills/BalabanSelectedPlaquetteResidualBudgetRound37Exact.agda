@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.BalabanSelectedPlaquetteResidualBudgetRound37Exac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base as ℚ using
   (ℚ; _/_; _+_; _*_; _≤_)
