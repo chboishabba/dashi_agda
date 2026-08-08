@@ -16,10 +16,11 @@ module DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSumRound25Exact where
 --
 -- The prior finite accounting theorem partitioned values only after a caller
 -- had supplied abstract tags.  Round 25 now obtains those tags from the actual
--- physical Z^3 output fibre.  For every rational interaction functional, the
--- literal resonant convolution sum is proved exactly equal to its LH, HL, CC
--- and HH-to-low class sums; adding the differentiated commutator gives the
--- exact five-source identity with no unnamed remainder.
+-- physical Z^3 output fibre.  For every rational triadic functional and every
+-- mode-indexed commutator functional, the literal five-source fibre is
+-- evaluated cell by cell and proved exactly equal to its HH, LH, HL, CC and
+-- Com contributions.  The commutator value is therefore derived from the
+-- appended differentiatedCommutator cell, not inserted as a free scalar.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -127,32 +128,126 @@ physicalFourClassPartitionExact cutoff output value =
     (Four.fourClassPartitionExact
       (physicalTaggedOutputFiber cutoff output value))
 
+------------------------------------------------------------------------
+-- Evaluate the actual five-source fibre.  The differentiated commutator cell
+-- is interpreted by a mode-indexed functional at its stored output mode.
+------------------------------------------------------------------------
+
+fiveSourceValue :
+  (Physical.PhysicalTriadIncidence → ℚ) →
+  (Z3.FourierMode → ℚ) →
+  Support.FiveSourceCell → ℚ
+fiveSourceValue triadValue commutator
+  (Support.triadicSource classified) =
+  triadValue (Support.incidence classified)
+fiveSourceValue triadValue commutator
+  (Support.differentiatedCommutator output) =
+  commutator output
+
+fiveSourceValueSum :
+  (Physical.PhysicalTriadIncidence → ℚ) →
+  (Z3.FourierMode → ℚ) →
+  List Support.FiveSourceCell → ℚ
+fiveSourceValueSum triadValue commutator [] = 0ℚ
+fiveSourceValueSum triadValue commutator (cell ∷ rest) =
+  fiveSourceValue triadValue commutator cell
+  + fiveSourceValueSum triadValue commutator rest
+
+fiveSourceValueSumAppend :
+  (triadValue : Physical.PhysicalTriadIncidence → ℚ) →
+  (commutator : Z3.FourierMode → ℚ) →
+  (left right : List Support.FiveSourceCell) →
+  fiveSourceValueSum triadValue commutator
+    (Support.appendFiveSources left right)
+  ≡
+  fiveSourceValueSum triadValue commutator left
+  + fiveSourceValueSum triadValue commutator right
+fiveSourceValueSumAppend triadValue commutator [] right =
+  solve (fiveSourceValueSum triadValue commutator right ∷ [])
+fiveSourceValueSumAppend triadValue commutator (cell ∷ rest) right
+  rewrite fiveSourceValueSumAppend triadValue commutator rest right =
+  solve
+    ( fiveSourceValue triadValue commutator cell
+    ∷ fiveSourceValueSum triadValue commutator rest
+    ∷ fiveSourceValueSum triadValue commutator right
+    ∷ [])
+
+triadicFiveSourceValuesAgreeWithTaggedSum :
+  (triadValue : Physical.PhysicalTriadIncidence → ℚ) →
+  (commutator : Z3.FourierMode → ℚ) →
+  (classified : List Support.ClassifiedPhysicalTriad) →
+  fiveSourceValueSum triadValue commutator
+    (Support.mapTriadicSources classified)
+  ≡ Four.allInteractionSum (tagClassifiedTriads triadValue classified)
+triadicFiveSourceValuesAgreeWithTaggedSum triadValue commutator [] = refl
+triadicFiveSourceValuesAgreeWithTaggedSum
+  triadValue commutator (classified ∷ rest)
+  rewrite triadicFiveSourceValuesAgreeWithTaggedSum
+    triadValue commutator rest = refl
+
+commutatorTailEvaluatesAtOutput :
+  (triadValue : Physical.PhysicalTriadIncidence → ℚ) →
+  (commutator : Z3.FourierMode → ℚ) →
+  (output : Z3.FourierMode) →
+  fiveSourceValueSum triadValue commutator
+    (Support.differentiatedCommutator output ∷ [])
+  ≡ commutator output
+commutatorTailEvaluatesAtOutput triadValue commutator output =
+  solve (commutator output ∷ [])
+
 fiveSourceTotal :
+  Nat → Z3.FourierMode →
+  (Physical.PhysicalTriadIncidence → ℚ) →
+  (Z3.FourierMode → ℚ) → ℚ
+fiveSourceTotal cutoff output triadValue commutator =
+  fiveSourceValueSum triadValue commutator
+    (Support.fiveSourceOutputFiber cutoff output)
+
+fiveSourceTotalExpands :
   (cutoff : Nat) →
   (output : Z3.FourierMode) →
-  (value : Physical.PhysicalTriadIncidence → ℚ) →
-  ℚ → ℚ
-fiveSourceTotal cutoff output value commutatorValue =
-  physicalOutputInteractionSum cutoff output value + commutatorValue
+  (triadValue : Physical.PhysicalTriadIncidence → ℚ) →
+  (commutator : Z3.FourierMode → ℚ) →
+  fiveSourceTotal cutoff output triadValue commutator
+  ≡ physicalOutputInteractionSum cutoff output triadValue
+    + commutator output
+fiveSourceTotalExpands cutoff output triadValue commutator
+  rewrite fiveSourceValueSumAppend
+            triadValue commutator
+            (Support.mapTriadicSources
+              (Support.classifiedPhysicalOutputFiber cutoff output))
+            (Support.differentiatedCommutator output ∷ [])
+        | triadicFiveSourceValuesAgreeWithTaggedSum
+            triadValue commutator
+            (Support.classifiedPhysicalOutputFiber cutoff output)
+        | physicalTaggedOutputSumAgrees cutoff output triadValue
+        | commutatorTailEvaluatesAtOutput
+            triadValue commutator output = refl
 
 physicalFiveSourcePartitionExact :
   (cutoff : Nat) →
   (output : Z3.FourierMode) →
-  (value : Physical.PhysicalTriadIncidence → ℚ) →
-  (commutatorValue : ℚ) →
-  fiveSourceTotal cutoff output value commutatorValue
+  (triadValue : Physical.PhysicalTriadIncidence → ℚ) →
+  (commutator : Z3.FourierMode → ℚ) →
+  fiveSourceTotal cutoff output triadValue commutator
   ≡
-  Four.highHighToLowSum (physicalTaggedOutputFiber cutoff output value)
-  + Four.lowHighSum (physicalTaggedOutputFiber cutoff output value)
-  + Four.highLowSum (physicalTaggedOutputFiber cutoff output value)
-  + Four.comparableSum (physicalTaggedOutputFiber cutoff output value)
-  + commutatorValue
-physicalFiveSourcePartitionExact cutoff output value commutatorValue
-  rewrite physicalFourClassPartitionExact cutoff output value =
+  Four.highHighToLowSum
+    (physicalTaggedOutputFiber cutoff output triadValue)
+  + Four.lowHighSum
+    (physicalTaggedOutputFiber cutoff output triadValue)
+  + Four.highLowSum
+    (physicalTaggedOutputFiber cutoff output triadValue)
+  + Four.comparableSum
+    (physicalTaggedOutputFiber cutoff output triadValue)
+  + commutator output
+physicalFiveSourcePartitionExact cutoff output triadValue commutator
+  rewrite fiveSourceTotalExpands cutoff output triadValue commutator
+        | physicalFourClassPartitionExact cutoff output triadValue =
   solve
-    ( Four.lowHighSum (physicalTaggedOutputFiber cutoff output value)
-    ∷ Four.highLowSum (physicalTaggedOutputFiber cutoff output value)
-    ∷ Four.comparableSum (physicalTaggedOutputFiber cutoff output value)
-    ∷ Four.highHighToLowSum (physicalTaggedOutputFiber cutoff output value)
-    ∷ commutatorValue
+    ( Four.lowHighSum (physicalTaggedOutputFiber cutoff output triadValue)
+    ∷ Four.highLowSum (physicalTaggedOutputFiber cutoff output triadValue)
+    ∷ Four.comparableSum (physicalTaggedOutputFiber cutoff output triadValue)
+    ∷ Four.highHighToLowSum
+        (physicalTaggedOutputFiber cutoff output triadValue)
+    ∷ commutator output
     ∷ [])
