@@ -56,11 +56,15 @@ cocycle=DASHI/Moonshine/Monster3BNormalizerCocycleCancellationExact.agda
 validation=DASHI/Moonshine/Monster3BOrbifoldLocalModuleRound4Validation.agda
 aggregate=DASHI/EverythingMonster3BOrbifoldLocalModuleRound4.agda
 reference=Docs/support/reference/Monster3BOrbifoldLocalModuleRound4.md
+gap_producer=scripts/monster_3b_normalizer_restriction.g
+renderer=scripts/render_monster_3b_certificate.py
 
-if [ ! -s "$reference" ]; then
-  echo "missing or empty reference document: $reference" >&2
-  exit 1
-fi
+for support in "$reference" "$gap_producer" "$renderer"; do
+  if [ ! -s "$support" ]; then
+    echo "missing or empty support file: $support" >&2
+    exit 1
+  fi
+done
 
 require_pattern "$legacy" 'exactWeightTwoCountingWitness'
 require_pattern "$legacy" 'coordinateSubtotalWitness'
@@ -109,6 +113,12 @@ require_pattern "$validation" 'allStrictlyLowerPositiveInitialGradesAreEmpty'
 require_pattern "$validation" 'transportedActualWeylExponentRelation'
 require_pattern "$aggregate" 'import DASHI.Everything'
 require_pattern "$aggregate" 'Monster3BOrbifoldLocalModuleRound4Validation'
+require_pattern "$gap_producer" 'ClassPositionsOfNormalSubgroups(mn3b)'
+require_pattern "$gap_producer" 'kernelOrder := 3^13'
+require_pattern "$gap_producer" 'extraspecial_kernel_invariant_dimension'
+require_pattern "$renderer" 'EXPECTED_KERNEL_ORDER = 3**13'
+require_pattern "$renderer" 'extraspecialKernelAveragingCertificate'
+require_pattern "$renderer" 'It does not split the zeta and zeta^2 sectors'
 require_pattern "$reference" 'Equal total dimension does not transport an action'
 require_pattern "$reference" 'does not prove a four-dimensional Yang--Mills Hamiltonian gap'
 require_pattern "$reference" 'The numerical equality `90 = 12 + 78` remains insufficient by itself.'
