@@ -76,9 +76,16 @@ HL: |jk-jp| ≤ 1,
 HH: |jp-jq| ≤ 1.
 ```
 
-The differentiated commutator is retained as the fifth class `Com`. There is no residual or catch-all constructor. Classification of every output fibre erases exactly to the original physical fibre.
+The differentiated commutator is retained as the fifth class `Com`. There is no residual or catch-all constructor. Classification of every output fibre erases exactly to the original physical fibre, and the appended commutator cell computes to class `Com`.
 
-`NSTriadKNLuoPhysicalFiveClassSumRound25Exact.agda` then proves, for every rational interaction functional on the actual physical output fibre,
+`NSTriadKNLuoPhysicalFiveClassSumRound25Exact.agda` evaluates the actual five-source fibre using:
+
+```text
+triadValue : PhysicalTriad → ℚ,
+commutator : FourierMode → ℚ.
+```
+
+A triadic cell is evaluated by `triadValue` on its stored incidence. The `differentiatedCommutator k` cell is evaluated by the same mode-indexed functional at its stored output, namely `commutator k`. Folding this evaluator over `fiveSourceOutputFiber N k` proves
 
 ```text
 Fphysical
@@ -86,15 +93,15 @@ Fphysical
 FHH + FLH + FHL + FCC,
 ```
 
-and after adjoining the differentiated commutator,
+and
 
 ```text
-Ftotal
+Ftotal(N,k)
 =
-FHH + FLH + FHL + FCC + FCom.
+FHH + FLH + FHL + FCC + commutator(k).
 ```
 
-This is an exact finite equality, not an inequality and not an assumed source decomposition.
+Thus the fifth value is derived from the appended `Com` cell and its output mode; it is not inserted as an unrelated scalar. These are exact finite equalities, not analytic estimates.
 
 ## Ladder change
 
