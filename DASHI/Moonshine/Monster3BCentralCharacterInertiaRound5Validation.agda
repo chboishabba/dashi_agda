@@ -138,6 +138,11 @@ seventyOneDeficitMatchesRawSevenAOffset :
 seventyOneDeficitMatchesRawSevenAOffset =
   Probe.seventyOneDeficitMatchesUnnormalizedSevenAConstant
 
+rawSevenAOffsetCompletes196874To196884 :
+  196874 + Probe.unnormalizedSevenAEtaQuotientCoefficient Probe.constantDegree
+  ≡ 196884
+rawSevenAOffsetCompletes196874To196884 = refl
+
 ------------------------------------------------------------------------
 -- Exact 7+7+1 finite equivalence and unique coarse-sheet boundary.
 ------------------------------------------------------------------------
