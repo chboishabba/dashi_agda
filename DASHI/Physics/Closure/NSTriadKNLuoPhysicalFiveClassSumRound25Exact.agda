@@ -27,7 +27,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -123,12 +123,9 @@ physicalFourClassPartitionExact :
   + Four.highHighToLowSum (physicalTaggedOutputFiber cutoff output value)
 physicalFourClassPartitionExact cutoff output value =
   trans
-    (let agreement = physicalTaggedOutputSumAgrees cutoff output value
-     in Relation.Binary.PropositionalEquality.sym agreement)
+    (sym (physicalTaggedOutputSumAgrees cutoff output value))
     (Four.fourClassPartitionExact
       (physicalTaggedOutputFiber cutoff output value))
-  where
-  import Relation.Binary.PropositionalEquality
 
 fiveSourceTotal :
   (cutoff : Nat) →
