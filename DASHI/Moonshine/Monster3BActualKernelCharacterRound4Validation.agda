@@ -3,6 +3,7 @@ module DASHI.Moonshine.Monster3BActualKernelCharacterRound4Validation where
 import DASHI.Moonshine.Monster3BProjectorResolutionRound3Validation
 import DASHI.Moonshine.Monster3BExtraspecialCharacterSignatureExact as Signature
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Promotion
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneCount
 import DASHI.Moonshine.Monster3BActualMultiplicityIntertwinerExact as Evaluation
 import DASHI.Moonshine.Monster3BProjectiveTensorCocycleExact as Cocycle
 import DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact as Safe
@@ -31,6 +32,12 @@ noncentralNinetyCopyTraceVanishes :
   ≡ Signature.zeroTrace
 noncentralNinetyCopyTraceVanishes =
   Signature.ninetyHeisenbergNoncentralValue
+
+stoneVonNeumannMultiplicityIsUnique :
+  (multiplicity : Agda.Builtin.Nat.Nat) →
+  729 Agda.Builtin.Nat.* multiplicity ≡ 65610 →
+  multiplicity ≡ 90
+stoneVonNeumannMultiplicityIsUnique = StoneCount.multiplicityForcedToNinety
 
 safeNonzeroTraceRow :
   Safe.MultiplicityClassRow Safe.naturalTraceAlgebra
