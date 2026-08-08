@@ -42,7 +42,12 @@ record PointedCoarseFineEvaluation : Set₁ where
   field
     Coarse Fine Assignment : Set
     distinguishedCoarse : Coarse
+    applyAssignment : Assignment → Coarse → Fine
     evaluateAtDistinguished : Assignment → Fine
+    evaluateIsAtDistinguished :
+      (assignment : Assignment) →
+      evaluateAtDistinguished assignment
+      ≡ applyAssignment assignment distinguishedCoarse
     section : Fine → Assignment
     evaluateSection :
       (fine : Fine) → evaluateAtDistinguished (section fine) ≡ fine
@@ -64,9 +69,19 @@ canonicalJCoarseFineEvaluation =
     Harmonic.FineFrequency
     Harmonic.FullFineAssignment
     Harmonic.completionJ
+    (λ assignment channel → assignment channel)
     Harmonic.jFine
+    (λ assignment → refl)
     constantFineAssignment
     constantAssignmentEvaluatesAtJ
+
+canonicalEvaluationIsAtCompletionJ :
+  (assignment : Harmonic.FullFineAssignment) →
+  evaluateAtDistinguished canonicalJCoarseFineEvaluation assignment
+  ≡ applyAssignment canonicalJCoarseFineEvaluation assignment
+      (distinguishedCoarse canonicalJCoarseFineEvaluation)
+canonicalEvaluationIsAtCompletionJ =
+  evaluateIsAtDistinguished canonicalJCoarseFineEvaluation
 
 JFineEvaluationFibre : Harmonic.FineFrequency → Set
 JFineEvaluationFibre fine =
@@ -78,9 +93,7 @@ canonicalJFineFibrePoint :
 canonicalJFineFibrePoint fine = constantFineAssignment fine , refl
 
 jEvaluationIsSurjective :
-  (fine : Harmonic.FineFrequency) →
-  Σ Harmonic.FullFineAssignment
-    (λ assignment → Harmonic.jFine assignment ≡ fine)
+  (fine : Harmonic.FineFrequency) → JFineEvaluationFibre fine
 jEvaluationIsSurjective = canonicalJFineFibrePoint
 
 completionJIsNotOrdinaryChannel :
@@ -92,10 +105,10 @@ completionStateMapsExactlyToJ :
   Quotient.toCoarseChannel Quotient.j9 ≡ Harmonic.completionJ
 completionStateMapsExactlyToJ = refl
 
-ordinaryStatesDoNotMapToCompletionJ :
+ordinaryChannelIsNotCompletionJ :
   (pair : Harmonic.BalancedPair) →
   Harmonic.ordinaryChannel pair ≡ Harmonic.completionJ → ⊥
-ordinaryStatesDoNotMapToCompletionJ pair ()
+ordinaryChannelIsNotCompletionJ pair ()
 
 jCoarseFrequencyIsNine : Scale.jCoarseFrequency ≡ 9
 jCoarseFrequencyIsNine = refl
@@ -125,6 +138,11 @@ jFineCodomainHasRelativeFrequencyDimension = refl
 record JCoarseFineEvaluationBoundary : Set₁ where
   constructor j-coarse-fine-evaluation-boundary
   field
+    evaluationReallyUsesDistinguishedCoarse :
+      (assignment : Harmonic.FullFineAssignment) →
+      evaluateAtDistinguished canonicalJCoarseFineEvaluation assignment
+      ≡ applyAssignment canonicalJCoarseFineEvaluation assignment
+          (distinguishedCoarse canonicalJCoarseFineEvaluation)
     evaluationSectionLaw :
       (fine : Harmonic.FineFrequency) →
       Harmonic.jFine (constantFineAssignment fine) ≡ fine
@@ -146,6 +164,7 @@ record JCoarseFineEvaluationBoundary : Set₁ where
 canonicalJCoarseFineEvaluationBoundary : JCoarseFineEvaluationBoundary
 canonicalJCoarseFineEvaluationBoundary =
   j-coarse-fine-evaluation-boundary
+    canonicalEvaluationIsAtCompletionJ
     constantAssignmentEvaluatesAtJ
     canonicalJFineFibrePoint
     jAbsoluteIsCoarseTimesFine
