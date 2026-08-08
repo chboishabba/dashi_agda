@@ -26,10 +26,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoLowTransportCommutatorRound26Exact wher
 -- mnemonic is used at this seam.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSPeriodicFarLowEnergyPairingCancellation as Transport
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteKernelCommutatorRound26Exact as Kernel
@@ -61,7 +60,7 @@ finiteLowTransportCommutatorIsIncrement =
 
 record LowTransportCommutatorCertificate
     {ℓ : Level}
-    (Field Scalar : Set ℓ) : Set ℓ where
+    (Field Scalar : Set ℓ) : Set (lsuc ℓ) where
   constructor low-transport-commutator-certificate
   field
     transportStructure :
