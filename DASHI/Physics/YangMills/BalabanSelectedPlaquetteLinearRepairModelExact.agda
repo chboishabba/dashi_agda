@@ -27,6 +27,7 @@ module DASHI.Physics.YangMills.BalabanSelectedPlaquetteLinearRepairModelExact wh
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
