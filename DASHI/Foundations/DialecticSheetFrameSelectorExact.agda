@@ -1,6 +1,7 @@
 module DASHI.Foundations.DialecticSheetFrameSelectorExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Core.Optional public
 open import Agda.Builtin.String using (String)
 
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
@@ -167,10 +168,6 @@ record FrameWitness
 
 open FrameWitness public
 
-data Optional (A : Set) : Set where
-  none : Optional A
-  some : A → Optional A
-
 data ExampleFrame : Set where
   inhabitableFrame counterFrame : ExampleFrame
 
@@ -200,6 +197,16 @@ inhabitableFrameWitness :
   FrameWitness exampleSemantics firstCondition secondCondition joinedSynthesis
 inhabitableFrameWitness =
   frameWitness inhabitableFrame refl refl refl inhabitableGlue
+
+counterFrameFailsSynthesis :
+  exampleEvaluate counterFrame joinedSynthesis ≡ BT.pos → ⊥
+counterFrameFailsSynthesis ()
+
+counterFrameCannotInhabitWitness :
+  FrameWitness exampleSemantics firstCondition secondCondition joinedSynthesis
+  → Set
+counterFrameCannotInhabitWitness witness =
+  FrameWitness.frame witness ≡ counterFrame → ⊥
 
 selectInhabitableFrame :
   Optional
