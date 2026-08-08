@@ -105,9 +105,9 @@ jAbsolute = 3^11 = 177147,
 jAbsolute = jCoarse * jFine.
 ```
 
-A full fine assignment is a function from every coarse channel to `Fin 19683`. Evaluation at `completionJ` is supplied with the constant-assignment section, proving that every fine value occurs at `j`. The fibre over every chosen value is therefore inhabited.
+A full fine assignment is a function from every coarse channel to the repository's `Harmonic.FineFrequency` carrier, whose declared dimension is `19683`. Evaluation at `completionJ` is supplied with the constant-assignment section, proving that every fine value occurs at `j`. The fibre over every chosen value is therefore inhabited.
 
-The code corrects a subtle earlier overstatement: the codomain of evaluation has `3^9` values, but the set of complete assignments evaluating to one fixed value is not claimed to have cardinality `3^9`.
+The code corrects a subtle earlier overstatement: the codomain of evaluation has declared dimension `3^9`, but the set of complete assignments evaluating to one fixed value is not claimed to have cardinality `3^9`.
 
 The authentic modular analogy is the forgetful map from elliptic curves with level structure to the coarse `j`-invariant. The finite DASHI evaluation model is not declared to be a modular curve, and it does not internally reprove the supersingular-`j` theorem.
 
