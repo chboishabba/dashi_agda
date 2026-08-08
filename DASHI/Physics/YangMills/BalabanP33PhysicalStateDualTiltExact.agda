@@ -26,8 +26,9 @@ module DASHI.Physics.YangMills.BalabanP33PhysicalStateDualTiltExact where
 -- Combes--Thomas proof, not a new independent decay premise.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _*_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; 1ℚ; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -138,19 +139,13 @@ tiltedHessianDifferenceEntryExact :
   ≡
   (Promotion.physicalWeight geometry left
     * Promotion.physicalInverseWeight geometry right
-    - (+ 1 / 1))
+    - 1ℚ)
   * matrix left right
-tiltedHessianDifferenceEntryExact geometry left right =
+tiltedHessianDifferenceEntryExact {matrix} geometry left right =
   ℚRing.solve-∀
     (Promotion.physicalWeight geometry left)
     (Promotion.physicalInverseWeight geometry right)
-    (_ left right)
-  where
-  _ : PhysicalOperator
-  _ = tiltedMatrix
-
-  tiltedMatrix : PhysicalOperator
-  tiltedMatrix = λ x y → 0ℚ
+    (matrix left right)
 
 tiltedHessianDifferenceSupport :
   ∀ {matrix}
