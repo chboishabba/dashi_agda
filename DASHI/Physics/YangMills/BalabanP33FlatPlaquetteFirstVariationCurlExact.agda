@@ -28,9 +28,9 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Physical
-import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
 import DASHI.Physics.YangMills.BalabanP33PhysicalPlaquetteFirstVariationExact as First
 import DASHI.Physics.YangMills.BalabanP33PhysicalCovariantPlaquetteCurlExact as Curl
+import DASHI.Physics.YangMills.BalabanP33CovariantCurlDefectFactorizationExact as Defect
 
 flatOrientedPlaquetteFirstVariation :
   Q.RationalVector3 → Q.RationalVector3 →
@@ -77,7 +77,7 @@ physicalIdentityFirstVariationIsFlatCurl :
   ∀ field plaquette →
   First.plaquetteFirstVariation
     Physical.identityBackground field plaquette
-  ≡ Curl.physicalFlatPlaquetteCurl field plaquette
+  ≡ Defect.physicalFlatPlaquetteCurl field plaquette
 physicalIdentityFirstVariationIsFlatCurl field plaquette =
   let
     x0 = Curl.physicalInsertion0 field plaquette
