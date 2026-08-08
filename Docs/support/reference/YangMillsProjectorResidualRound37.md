@@ -118,7 +118,7 @@ The two owned bounds
 
 ```text
 rawLocalizationSpillover <= alpha C_p(h)
--dA(discarded)          <= beta  C_p(h)
+-dA(discarded)           <= beta  C_p(h)
 alpha + beta = 55/18874368
 ```
 
@@ -148,6 +148,8 @@ gauge residual
 Separate vanishing proofs imply stationarity. A second exact equality identifies the same first variation with the literal four-singleton Wilson term plus the projector/localization residual.
 
 The module then constructs the existing Round-36 `SingletonExtractionWitness`, the full selected-background variation selector, and therefore the singleton lower-bound reducer.
+
+`BalabanSelectedVariationProjectedSelectorAssemblyExact.agda` now composes the spillover and Noether lanes on one object. A single `ProjectedSelectorAnalyticData` owns the physical mask, finite first-variation covector, raw singleton identity, raw-localization bound, projector-defect bound, admissibility proofs, charge bound and residual cancellations. It constructs the Round-37 projected singleton object and the Round-36 selector without an additional spillover compatibility premise.
 
 The following remain physical analytic inputs:
 
@@ -242,29 +244,33 @@ gauge projection
 
 `StrictOwnedMargin` requires exact erasure/reconstruction of the physical remainder and the actual strict inequality. It does not manufacture contribution estimates or the target `32 E_k < 2 - theta_k`.
 
-## E8 quantitative root data
+## E8 expected-count and classification arithmetic
 
-`BalabanE8QuantitativeRootDataExact.agda` connects existing repository values:
+`BalabanE8QuantitativeRootDataExact.agda` connects the repository’s configured expected-count targets with its compact-simple classification numerics:
 
 ```text
-112 + 128 = 240 roots
-rank = 8
-dimension = 248
-dual Coxeter number = 30
-8 + 240 = 248.
+expected integer-family count = 112
+expected half-family count    = 128
+112 + 128                     = 240
+rank                          = 8
+adjoint dimension             = 248
+dual Coxeter number           = 30
+8 + expected 240              = 248.
 ```
 
-This is useful algebraic data for the all-compact-simple-group gate. It does not construct the compact real form, Haar measure, BCH constants, chart radius, selected background or RG theorem for E8.
+The upstream E8 enumeration module explicitly states that the root lists, membership decision, duplicate freedom and cardinality proofs are not constructed. Round 37 therefore does **not** claim a constructive 240-root enumeration. It proves only the exact expected-count arithmetic and its numerical compatibility with the classification carrier.
+
+The compact real form, Haar measure, BCH constants, chart radius, selected background and RG theorem for E8 also remain open.
 
 ## Typed 196608 atlas
 
 `BalabanCommon196608AtlasExact.agda` records three distinct typed charts:
 
 ```text
-24 * 8192       = 196608
-3 * 65536       = 196608
+24 * 8192        = 196608
+3 * 65536        = 196608
 196560 + 24 + 24 = 196608
-196608 + 276    = 196884.
+196608 + 276     = 196884.
 ```
 
 The chart constructors are distinct. Equality of the integer does not provide a coordinate map, operator intertwiner, representation isomorphism or physical defect transport.
