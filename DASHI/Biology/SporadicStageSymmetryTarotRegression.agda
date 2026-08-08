@@ -6,8 +6,10 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.BalancedTernaryUltrametricExact as Ultra
 import DASHI.Foundations.StageSymmetryCarrierTowerExact as Sym
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
+import DASHI.Foundations.DialecticCubieTetralemmaExact as Cubie
 import DASHI.Foundations.SecondRevolutionJankoTarotExact as Revolution
 import DASHI.Biology.StageSymmetrySSP15BridgeExact as SSP
+import DASHI.Biology.SporadicSignedFiftyThreeTarotProjectionExact as Signed
 import DASHI.Biology.SporadicTarotDependencyExact as Sporadic
 import DASHI.Biology.TarotCarrierExact as Tarot
 import DASHI.Biology.JMDSporadicTarotOrdinalTotalisationExact as Total
@@ -42,6 +44,18 @@ ultrametricPrefixRegression :
   Ultra.PrefixAgreement 2 Ultra.fiveDigits Ultra.sixDigits
 ultrametricPrefixRegression = Ultra.fiveSixAgreeThroughDepthTwo
 
+tetralemmaRetainsCarrierRegression :
+  Cubie.retainedCarrier Cubie.stageThreePatternWithCounterSquare
+  ≡ BT.allPositive
+tetralemmaRetainsCarrierRegression = Cubie.stageThreeCarrierRetained
+
+cubiePositionCountRegression : Cubie.cubiePositionCardinality ≡ 27
+cubiePositionCountRegression = Cubie.cubiePositionCardinalityIsTwentySeven
+
+decisionPoliciesReallyDifferRegression :
+  Cubie.positiveOnlyDecision BT.neg ≡ Cubie.nonzeroDecision BT.neg → ⊥
+decisionPoliciesReallyDifferRegression = Cubie.decisionPoliciesDifferOnNegative
+
 oggCountRegression : SSP.countList SSP.allOggPrimeLanes ≡ 15
 oggCountRegression = SSP.oggPrimeLaneCountIsFifteen
 
@@ -55,6 +69,22 @@ moonshineResidueRegression :
 moonshineResidueRegression =
   BT.moonshineCoefficientDepthTwoEquation ,
   BT.monsterConstituentDepthTwoEquation
+
+signedSporadicDimensionRegression : Signed.sporadicSignedDimension ≡ 53
+signedSporadicDimensionRegression = Signed.sporadicSignedDimensionIsFiftyThree
+
+signedSporadic54Regression : Signed.sporadicSigned54Dimension ≡ 54
+signedSporadic54Regression = Signed.sporadicSigned54DimensionIsFiftyFour
+
+signedPolaritySharesCardRegression :
+  Signed.canonicalArcanaProjection
+    (Signed.sporadicSignedState Sporadic.J2
+      DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact.positiveFibre)
+  ≡
+  Signed.canonicalArcanaProjection
+    (Signed.sporadicSignedState Sporadic.J2
+      DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact.negativeFibre)
+signedPolaritySharesCardRegression = Signed.polaritiesShareArcana Sporadic.J2
 
 selectorReturnsWitnessRegression :
   Selector.Optional
@@ -80,6 +110,9 @@ explicitCollisionRegression = Total.fi23BabyMonsterCollision
 
 totalisationBoundaryRegression : Total.TotalisationAuthorityBoundary
 totalisationBoundaryRegression = Total.canonicalTotalisationAuthorityBoundary
+
+signedCarrierBoundaryRegression : Signed.SporadicSignedFiftyThreeBoundary
+signedCarrierBoundaryRegression = Signed.canonicalSporadicSignedFiftyThreeBoundary
 
 sspReuseBoundaryRegression : SSP.StageSymmetrySSP15Boundary
 sspReuseBoundaryRegression = SSP.canonicalStageSymmetrySSP15Boundary
