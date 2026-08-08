@@ -22,6 +22,7 @@ on:
       - 'DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotEverything.agda'
       - 'DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda'
+      - 'DASHI/Foundations/BalancedTernaryUltrametricExact.agda'
       - 'DASHI/Foundations/StageSymmetryCarrierTowerExact.agda'
       - 'DASHI/Foundations/DialecticSheetFrameSelectorExact.agda'
       - 'DASHI/Foundations/SecondRevolutionJankoTarotExact.agda'
