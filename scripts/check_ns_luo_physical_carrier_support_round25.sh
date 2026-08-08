@@ -19,6 +19,7 @@ files=(
 
 docs=(
   docs/ns-clay-contract/README.md
+  docs/ns-clay-contract/architecture.puml
   docs/ns-clay-contract/physical-carrier-support-round25.md
   docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
 )
@@ -59,6 +60,7 @@ grep -q 'highLowOutputTracksHighOne' "$support"
 grep -q 'highHighInputsComparableOne' "$support"
 grep -q 'classifiedPhysicalOutputFiberErasesExactly' "$support"
 grep -q 'fiveSourceClassificationTotal' "$support"
+grep -q 'differentiatedCommutatorClassIsCom' "$support"
 grep -q 'separationCollarIsThree' "$support"
 grep -q 'outputTrackingCollarIsTwo' "$support"
 grep -q 'inputComparabilityCollarIsTwo' "$support"
@@ -67,7 +69,17 @@ grep -q 'true true true true true true false false' "$support"
 sums=DASHI/Physics/Closure/NSTriadKNLuoPhysicalFiveClassSumRound25Exact.agda
 grep -q 'physicalClassificationPreservesTotal' "$sums"
 grep -q 'physicalFourClassPartitionExact' "$sums"
+grep -q 'fiveSourceValue :' "$sums"
+grep -q 'fiveSourceValueSumAppend' "$sums"
+grep -q 'triadicFiveSourceValuesAgreeWithTaggedSum' "$sums"
+grep -q 'commutatorTailEvaluatesAtOutput' "$sums"
+grep -q 'fiveSourceTotalExpands' "$sums"
 grep -q 'physicalFiveSourcePartitionExact' "$sums"
+grep -q 'commutator : Z3.FourierMode → ℚ' "$sums"
+if grep -q 'commutatorValue : ℚ' "$sums"; then
+  echo "round twenty-five still accepts an unrelated scalar as the Com source" >&2
+  exit 1
+fi
 
 ladder=DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaClayLemmaLadderRound25Exact.agda
 grep -q 'canonicalHighestAlphaClayLemmaLadderRound25' "$ladder"
@@ -75,6 +87,7 @@ grep -q 'round25L3AggregateIsStillOpen' "$ladder"
 grep -q 'round25L4PhysicalSupportIsCheckedExact' "$ladder"
 grep -q 'Round25ExactEvidence' "$ladder"
 grep -q 'canonicalRound25ExactEvidence' "$ladder"
+grep -q 'commutator : Z3.FourierMode → ℚ' "$ladder"
 grep -q 'classwisePhysicalTaxesRemainOpen' "$ladder"
 grep -q 'strictMarginRemainsOpen' "$ladder"
 grep -q 'round25ClayPromotionRemainsFalse' "$ladder"
@@ -95,8 +108,13 @@ grep -q 'currentRound25ClayPromotionFalse' "$current"
 
 grep -q '\[literal physical carrier and five-class support tranche\](physical-carrier-support-round25.md)' docs/ns-clay-contract/README.md
 grep -q '\[Round 25 physical carrier and support closure\](physical-carrier-support-round25.md)' docs/ns-clay-contract/README.md
+grep -q 'mode-indexed commutator functional' docs/ns-clay-contract/README.md
 grep -q '\[Back to the Clay-contract overview\](README.md)' docs/ns-clay-contract/physical-carrier-support-round25.md
+grep -q 'not inserted as an unrelated scalar' docs/ns-clay-contract/physical-carrier-support-round25.md
 grep -q 'L4 — Exhaustive physical Bony/commutator support theorem — checked exact in Round 25' docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
+grep -q 'fibre-derived from its stored output mode' docs/ns-clay-contract/paper-corpus/highest-alpha-lemma-ladder.md
+grep -q 'Physical HH/LH/HL/CC support' docs/ns-clay-contract/architecture.puml
+grep -q 'L4 is checked exact' docs/ns-clay-contract/architecture.puml
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/NSTriadKNLuoPhysicalCarrierSupportRound25Validation.agda
