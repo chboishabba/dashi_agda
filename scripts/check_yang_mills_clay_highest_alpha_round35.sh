@@ -8,6 +8,8 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 bash scripts/check_yang_mills_clay_highest_alpha_round34.sh
 
 files=(
+  DASHI/Physics/YangMills/YangMillsPaperClaimAuditCarrierExact.agda
+  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalPlaquetteFirstVariationExact.agda
   DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
   DASHI/Physics/YangMills/BalabanP33CovariantCurlDefectFactorizationExact.agda
@@ -32,6 +34,18 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
 fi
 
 checks=(
+  'YangMillsPaperClaimAuditCarrierExact.agda:einsteinCartanYangMillsIsNotDefinitionallyPureYangMills'
+  'YangMillsPaperClaimAuditCarrierExact.agda:auxiliaryBoundaryLangevinIsNotSlabTransferKernel'
+  'YangMillsPaperClaimAuditCarrierExact.agda:boundarySlabTransferKernelIsNotPhysicalHamiltonian'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:monographAssumptionCountExact'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:monographBridgeCountExact'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:slabAssumptionCountExact'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:slabBridgeCountExact'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:monographTheoryIsNotDefinitionallyPureYM'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:slabKernelIsNotPhysicalHamiltonian'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:auxiliarySamplerCannotReplaceSlabKernel'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:monographEvidenceIsNotKernelProof'
+  'YangMillsCizekEinsteinCartanClaimAuditExact.agda:slabOutcomeRemainsConditional'
   'BalabanP33PhysicalPlaquetteFirstVariationExact.agda:generatedFirstVariationTermsAreFourOrdered'
   'BalabanP33PhysicalPlaquetteFirstVariationExact.agda:plaquetteFirstVariationTermCountExact'
   'BalabanP33PhysicalPlaquetteFirstVariationExact.agda:plaquetteFirstVariationIsFourOrderedSum'
@@ -73,6 +87,12 @@ for check in "${checks[@]}"; do
 done
 
 # Bibliographic guards.
+grep -q '10.5281/zenodo.17246443' \
+  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -q '10.5281/zenodo.17718647' \
+  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -q '10.5281/zenodo.18280110' \
+  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
 grep -q '10.1007/978-3-319-13467-3' \
   DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
 grep -q '10.1103/PhysRevD.10.2445' \
@@ -84,7 +104,15 @@ grep -q '10.1007/BF01229381' \
 grep -q '10.1103/PhysRevD.10.2445' \
   DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
 
-# Exact transport-order, partition and adversarial-regression guards.
+# Exact theory/operator separation, transport-order, partition and adversarial guards.
+grep -q 'einsteinCartanYangMillsTheory' \
+  DASHI/Physics/YangMills/YangMillsPaperClaimAuditCarrierExact.agda
+grep -q 'boundarySlabTransferKernel' \
+  DASHI/Physics/YangMills/YangMillsPaperClaimAuditCarrierExact.agda
+grep -q 'torsionGravitySectorExactlyDecouplesToPureYM' \
+  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
+grep -q 'ultravioletContinuumOnR4ActuallyConstructed' \
+  DASHI/Physics/YangMills/YangMillsCizekEinsteinCartanClaimAuditExact.agda
 grep -Fq 'Ad_A X0 + Ad_{AB} X1' \
   DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
 grep -Fq -- '- Ad_{AB} X2 - Ad_{ABC^-1} X3' \
@@ -111,6 +139,7 @@ grep -q 'selectedBackgroundCurvatureLowerProducerLevel = conditional' \
 grep -Fq '[Round 35 — literal plaquette differentiation, covariant curl and adversarial stress test](./YangMillsPlaquetteCurlRound35.md)' "$index"
 grep -q 'The repeated `Ad_(A B)` is essential' "$doc"
 grep -q 'four singleton terms and eleven higher-order terms' "$doc"
+grep -q 'Einstein–Cartan–Yang–Mills' "$doc"
 grep -q 'A static audit is not a kernel result' "$doc"
 grep -q 'variationalEulerLagrangeEquationAtSelectedBackground' "$doc"
 grep -q 'groupedSixteenAtomNonlinearRemainderLower' "$doc"
