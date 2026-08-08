@@ -4,6 +4,7 @@ import DASHI.Moonshine.Monster3BOrbifoldLocalModuleRound4Validation
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Promotion
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact as Commutant
+import DASHI.Moonshine.Monster3BFiniteHeisenbergProjectionNoGoExact as Projection
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneCount
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Existing
 import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact as Evaluation
@@ -15,6 +16,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (_∷_; [])
 open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Empty using (⊥)
+open import Data.Sum using (_⊎_)
 
 extraspecialDegreeBudgetCloses :
   Character.extraspecialCharacterDegreeSquareSum
@@ -32,6 +34,13 @@ finiteSchrodingerCommutantIsScalar :
   Commutant.ScalarCommutantConclusion matrix
 finiteSchrodingerCommutantIsScalar =
   Commutant.schrodingerCommutantIsScalar
+
+finiteHeisenbergProjectionIsZeroOrIdentity :
+  (projection : Projection.HeisenbergCommutingProjection) →
+  Projection.ProjectionIsZero projection
+  ⊎ Projection.ProjectionIsIdentity projection
+finiteHeisenbergProjectionIsZeroOrIdentity =
+  Projection.heisenbergCommutingProjectionDichotomy
 
 ninetyCopiesHaveActualPhaseDegree : 90 * 729 ≡ 65610
 ninetyCopiesHaveActualPhaseDegree = refl
