@@ -36,6 +36,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 zeroQ : ℚ
 zeroQ = Int.+ 0 / 1
@@ -82,14 +83,31 @@ motherCommutatorTax cell =
 cutoffIndependentCommutatorCellCoefficient :
   (cell : DyadicCommutatorTaxCell) →
   shellCommutatorTax cell ≡ motherCommutatorTax cell
-cutoffIndependentCommutatorCellCoefficient cell
-  rewrite inverseDirectExact cell =
-  solve
-    ( motherFirstMoment cell
-    ∷ lowGradientMagnitude cell
-    ∷ motherHighGradientMagnitude cell
-    ∷ testedShellMagnitude cell
-    ∷ [])
+cutoffIndependentCommutatorCellCoefficient cell =
+  trans
+    (solve
+      ( inverseScale cell
+      ∷ directScale cell
+      ∷ motherFirstMoment cell
+      ∷ lowGradientMagnitude cell
+      ∷ motherHighGradientMagnitude cell
+      ∷ testedShellMagnitude cell
+      ∷ []))
+    (trans
+      (cong
+        (λ scaleProduct →
+          scaleProduct
+          * (motherFirstMoment cell
+            * lowGradientMagnitude cell
+            * motherHighGradientMagnitude cell
+            * testedShellMagnitude cell))
+        (inverseDirectExact cell))
+      (solve
+        ( motherFirstMoment cell
+        ∷ lowGradientMagnitude cell
+        ∷ motherHighGradientMagnitude cell
+        ∷ testedShellMagnitude cell
+        ∷ [])))
 
 sumShellCommutatorTax : List DyadicCommutatorTaxCell → ℚ
 sumShellCommutatorTax [] = zeroQ
@@ -108,11 +126,6 @@ finiteCutoffIndependentCommutatorTax [] = refl
 finiteCutoffIndependentCommutatorTax (cell ∷ rest)
   rewrite cutoffIndependentCommutatorCellCoefficient cell
         | finiteCutoffIndependentCommutatorTax rest = refl
-
-------------------------------------------------------------------------
--- Concrete power-two witnesses used by dyadic shells.  No exponentiation or
--- division theorem is hidden: each shell supplies the exact inverse law.
-------------------------------------------------------------------------
 
 record DyadicScalePair : Set where
   constructor dyadic-scale-pair
