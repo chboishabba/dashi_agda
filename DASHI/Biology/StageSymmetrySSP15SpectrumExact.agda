@@ -3,6 +3,7 @@ module DASHI.Biology.StageSymmetrySSP15SpectrumExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.StageSymmetrySSP15BridgeExact as Base
+import DASHI.Biology.OggPrimeNonaryAddressExact as Address
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact as Amp
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
@@ -129,6 +130,60 @@ stageFiveP3RetainsResidualTwo :
 stageFiveP3RetainsResidualTwo = refl
 
 ------------------------------------------------------------------------
+-- Prime-specific refinement.  The local Stage-5 pattern may remain common,
+-- but the nonary address and observer kind are now retained lane by lane.
+------------------------------------------------------------------------
+
+record PrimeSpecificRichSymmetryLaneReading
+    (prime : Base.OggPrimeLane) : Set where
+  constructor prime-specific-rich-symmetry-lane-reading
+  field
+    richStageReading : RichSymmetryLaneReading
+    richStageReadingUsesPrime : primeLane richStageReading ≡ prime
+    primeSpecificReading : Base.PrimeSpecificSymmetryLaneReading prime
+
+open PrimeSpecificRichSymmetryLaneReading public
+
+primeSpecificStageFiveSpectrum :
+  (prime : Base.OggPrimeLane) →
+  PrimeSpecificRichSymmetryLaneReading prime
+primeSpecificStageFiveSpectrum prime =
+  prime-specific-rich-symmetry-lane-reading
+    (stageFiveRichSignature prime)
+    refl
+    (Base.canonicalPrimeSpecificSSP15 prime)
+
+p2FineRemainderIsTwo :
+  Address.remainder
+    (Base.nonaryAddress
+      (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p2))) ≡ 2
+p2FineRemainderIsTwo = refl
+
+p71FineRemainderIsEight :
+  Address.remainder
+    (Base.nonaryAddress
+      (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p71))) ≡ 8
+p71FineRemainderIsEight = refl
+
+p2AndP71HaveDifferentFineRemainders :
+  Address.remainder
+    (Base.nonaryAddress
+      (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p2)))
+  ≡
+  Address.remainder
+    (Base.nonaryAddress
+      (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p71)))
+  → ⊥
+p2AndP71HaveDifferentFineRemainders ()
+
+p3UsesTriadicClosureMode :
+  Address.complementMode
+    (Base.nonaryAddress
+      (primeSpecificReading (primeSpecificStageFiveSpectrum Lane.p3)))
+  ≡ Address.Quotient.mode36
+p3UsesTriadicClosureMode = refl
+
+------------------------------------------------------------------------
 -- Ogg/Monster authority boundary.  Prime lanes and Monster conjugacy-class
 -- lanes are different indices.  In particular, the statement that every
 -- Monster element of prime order p has the same Gamma_0(p)^+ Hauptmodul is not
@@ -144,6 +199,9 @@ record OggSpectrumAuthorityBoundary : Set where
     richSymmetryResolutionSpectrumConstructed : Bool
     richSymmetryResolutionSpectrumConstructedIsTrue :
       richSymmetryResolutionSpectrumConstructed ≡ true
+    primeSpecificNonarySpectrumConstructed : Bool
+    primeSpecificNonarySpectrumConstructedIsTrue :
+      primeSpecificNonarySpectrumConstructed ≡ true
     sspSignatureIdentifiedWithFrame : Bool
     sspSignatureIdentifiedWithFrameIsFalse :
       sspSignatureIdentifiedWithFrame ≡ false
@@ -163,6 +221,7 @@ record OggSpectrumAuthorityBoundary : Set where
 canonicalOggSpectrumAuthorityBoundary : OggSpectrumAuthorityBoundary
 canonicalOggSpectrumAuthorityBoundary =
   oggSpectrumAuthorityBoundary
+    true refl
     true refl
     true refl
     false refl
