@@ -28,9 +28,9 @@ open import Agda.Builtin.Nat using (Nat; _*_)
 import DASHI.Moonshine.Monster3BHeisenbergMultiplicityExact as H
 
 data ExtraspecialClassKind : Set where
-  identityClass
-  centralZetaClass
-  centralZetaSquaredClass
+  identityClass : ExtraspecialClassKind
+  centralZetaClass : ExtraspecialClassKind
+  centralZetaSquaredClass : ExtraspecialClassKind
   noncentralClass : ExtraspecialClassKind
 
 record CyclotomicTrace3 : Set where
