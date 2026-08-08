@@ -120,9 +120,13 @@ literalFiniteVectorFieldLocalLipschitz :
     (coordinateEquations field) state reference
   ≤ finiteVectorLipschitzWeight
       radius (coordinateEquations field) * delta
-literalFiniteVectorFieldLocalLipschitz field =
+literalFiniteVectorFieldLocalLipschitz
+  field radius delta radiusNN deltaNN state reference
+  stateBound referenceBound differenceBound =
   finiteGalerkinVectorLocalLipschitz
-    _ _ _ _ (coordinateEquations field)
+    radius delta radiusNN deltaNN
+    (coordinateEquations field)
+    state reference stateBound referenceBound differenceBound
 
 finiteRationalVectorLocalLipschitzClosed : Bool
 finiteRationalVectorLocalLipschitzClosed = true
