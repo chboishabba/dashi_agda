@@ -122,308 +122,311 @@ open FiniteKKTPseudoinverseData public
 constraintApply : ∀ {Multiplier} →
   FiniteKKTPseudoinverseData Multiplier →
   KKT.StateVector → MultiplierVector Multiplier
-constraintApply data = Rect.applyRectangular
-  KKT.physicalStateCarrier (constraintMatrix data)
+constraintApply pseudoData = Rect.applyRectangular
+  KKT.physicalStateCarrier (constraintMatrix pseudoData)
 
 constraintAdjointApply : ∀ {Multiplier} →
   FiniteKKTPseudoinverseData Multiplier →
   MultiplierVector Multiplier → KKT.StateVector
-constraintAdjointApply data = Rect.applyRectangular
-  (multiplierCarrier data)
-  (Rect.transposeRectangular (constraintMatrix data))
+constraintAdjointApply pseudoData = Rect.applyRectangular
+  (multiplierCarrier pseudoData)
+  (Rect.transposeRectangular (constraintMatrix pseudoData))
 
 constraintGram : ∀ {Multiplier} →
   FiniteKKTPseudoinverseData Multiplier → Matrix.RationalMatrix Multiplier
-constraintGram data = constraintGramRaw
-  (multiplierCarrier data) (constraintMatrix data)
+constraintGram pseudoData = constraintGramRaw
+  (multiplierCarrier pseudoData) (constraintMatrix pseudoData)
 
 gramApply : ∀ {Multiplier} →
   FiniteKKTPseudoinverseData Multiplier →
   MultiplierVector Multiplier → MultiplierVector Multiplier
-gramApply data = Rect.applyRectangular
-  (multiplierCarrier data) (constraintGram data)
+gramApply pseudoData = Rect.applyRectangular
+  (multiplierCarrier pseudoData) (constraintGram pseudoData)
 
 pseudoApply : ∀ {Multiplier} →
   FiniteKKTPseudoinverseData Multiplier →
   MultiplierVector Multiplier → MultiplierVector Multiplier
-pseudoApply data = Rect.applyRectangular
-  (multiplierCarrier data) (gramPseudoinverse data)
+pseudoApply pseudoData = Rect.applyRectangular
+  (multiplierCarrier pseudoData) (gramPseudoinverse pseudoData)
 
 constraintRepair : ∀ {Multiplier} →
   FiniteKKTPseudoinverseData Multiplier →
   KKT.StateVector → KKT.StateVector
-constraintRepair data vector = constraintAdjointApply data
-  (pseudoApply data (constraintApply data vector))
+constraintRepair pseudoData vector = constraintAdjointApply pseudoData
+  (pseudoApply pseudoData (constraintApply pseudoData vector))
 
 admissibleProject : ∀ {Multiplier} →
   FiniteKKTPseudoinverseData Multiplier →
   KKT.StateVector → KKT.StateVector
-admissibleProject data vector =
-  Rect.vectorSubtract vector (constraintRepair data vector)
+admissibleProject pseudoData vector =
+  Rect.vectorSubtract vector (constraintRepair pseudoData vector)
 
 record ConstraintKernel {Multiplier : Set}
-    (data : FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier)
     (vector : KKT.StateVector) : Set where
   field
-    constraintZero : ∀ row → constraintApply data vector row ≡ 0ℚ
+    constraintZero : ∀ row → constraintApply pseudoData vector row ≡ 0ℚ
 open ConstraintKernel public
 
 record AdjointRange {Multiplier : Set}
-    (data : FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier)
     (vector : KKT.StateVector) : Set₁ where
   field
     multiplier : MultiplierVector Multiplier
     representedByAdjoint : ∀ coordinate →
-      vector coordinate ≡ constraintAdjointApply data multiplier coordinate
+      vector coordinate ≡ constraintAdjointApply pseudoData multiplier coordinate
 open AdjointRange public
 
 constraintGramActionExact : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) multiplier row →
-  constraintApply data (constraintAdjointApply data multiplier) row
-  ≡ gramApply data multiplier row
-constraintGramActionExact data multiplier row = sym
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) multiplier row →
+  constraintApply pseudoData (constraintAdjointApply pseudoData multiplier) row
+  ≡ gramApply pseudoData multiplier row
+constraintGramActionExact pseudoData multiplier row = sym
   (Rect.applyComposeRectangularExact
-    KKT.physicalStateCarrier (multiplierCarrier data)
-    (constraintMatrix data)
-    (Rect.transposeRectangular (constraintMatrix data))
+    KKT.physicalStateCarrier (multiplierCarrier pseudoData)
+    (constraintMatrix pseudoData)
+    (Rect.transposeRectangular (constraintMatrix pseudoData))
     multiplier row)
 
 constraintRepairExact : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) vector row →
-  constraintApply data (constraintRepair data vector) row
-  ≡ constraintApply data vector row
-constraintRepairExact data vector row = trans
-  (constraintGramActionExact data
-    (pseudoApply data (constraintApply data vector)) row)
-  (gramPseudoFixesConstraintImage data vector row)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) vector row →
+  constraintApply pseudoData (constraintRepair pseudoData vector) row
+  ≡ constraintApply pseudoData vector row
+constraintRepairExact pseudoData vector row = trans
+  (constraintGramActionExact pseudoData
+    (pseudoApply pseudoData (constraintApply pseudoData vector)) row)
+  (gramPseudoFixesConstraintImage pseudoData vector row)
 
 projectConstraintZero : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) vector →
-  ConstraintKernel data (admissibleProject data vector)
-projectConstraintZero data vector = record
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) vector →
+  ConstraintKernel pseudoData (admissibleProject pseudoData vector)
+projectConstraintZero pseudoData vector = record
   { constraintZero = λ row → trans
       (Rect.applyRectangularSubtract KKT.physicalStateCarrier
-        (constraintMatrix data) vector (constraintRepair data vector) row)
+        (constraintMatrix pseudoData) vector
+        (constraintRepair pseudoData vector) row)
       (trans
-        (cong (constraintApply data vector row -_)
-          (constraintRepairExact data vector row))
-        (ℚRing.solve-∀ (constraintApply data vector row))) }
+        (cong (constraintApply pseudoData vector row -_)
+          (constraintRepairExact pseudoData vector row))
+        (ℚRing.solve-∀ (constraintApply pseudoData vector row))) }
 
 pseudoOfConstraintKernelZero : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) vector →
-  ConstraintKernel data vector →
-  ∀ row → pseudoApply data (constraintApply data vector) row ≡ 0ℚ
-pseudoOfConstraintKernelZero data vector kernel row = trans
-  (Rect.applyRectangularVectorCong (multiplierCarrier data)
-    (gramPseudoinverse data) (constraintZero kernel) row)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) vector →
+  ConstraintKernel pseudoData vector →
+  ∀ row → pseudoApply pseudoData (constraintApply pseudoData vector) row ≡ 0ℚ
+pseudoOfConstraintKernelZero pseudoData vector kernel row = trans
+  (Rect.applyRectangularVectorCong (multiplierCarrier pseudoData)
+    (gramPseudoinverse pseudoData) (constraintZero kernel) row)
   (Rect.applyRectangularZero
-    (multiplierCarrier data) (gramPseudoinverse data) row)
+    (multiplierCarrier pseudoData) (gramPseudoinverse pseudoData) row)
 
 repairOfConstraintKernelZero : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) vector →
-  ConstraintKernel data vector →
-  ∀ coordinate → constraintRepair data vector coordinate ≡ 0ℚ
-repairOfConstraintKernelZero data vector kernel coordinate = trans
-  (Rect.applyRectangularVectorCong (multiplierCarrier data)
-    (Rect.transposeRectangular (constraintMatrix data))
-    (pseudoOfConstraintKernelZero data vector kernel) coordinate)
-  (Rect.applyRectangularZero (multiplierCarrier data)
-    (Rect.transposeRectangular (constraintMatrix data)) coordinate)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) vector →
+  ConstraintKernel pseudoData vector →
+  ∀ coordinate → constraintRepair pseudoData vector coordinate ≡ 0ℚ
+repairOfConstraintKernelZero pseudoData vector kernel coordinate = trans
+  (Rect.applyRectangularVectorCong (multiplierCarrier pseudoData)
+    (Rect.transposeRectangular (constraintMatrix pseudoData))
+    (pseudoOfConstraintKernelZero pseudoData vector kernel) coordinate)
+  (Rect.applyRectangularZero (multiplierCarrier pseudoData)
+    (Rect.transposeRectangular (constraintMatrix pseudoData)) coordinate)
 
 projectFixesConstraintKernel : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) vector →
-  ConstraintKernel data vector →
-  ∀ coordinate → admissibleProject data vector coordinate ≡ vector coordinate
-projectFixesConstraintKernel data vector kernel coordinate = trans
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) vector →
+  ConstraintKernel pseudoData vector →
+  ∀ coordinate → admissibleProject pseudoData vector coordinate ≡ vector coordinate
+projectFixesConstraintKernel pseudoData vector kernel coordinate = trans
   (cong (vector coordinate -_)
-    (repairOfConstraintKernelZero data vector kernel coordinate))
+    (repairOfConstraintKernelZero pseudoData vector kernel coordinate))
   (ℚRing.solve-∀ (vector coordinate))
 
 projectIdempotent : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) vector coordinate →
-  admissibleProject data (admissibleProject data vector) coordinate
-  ≡ admissibleProject data vector coordinate
-projectIdempotent data vector = projectFixesConstraintKernel data
-  (admissibleProject data vector) (projectConstraintZero data vector)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) vector coordinate →
+  admissibleProject pseudoData (admissibleProject pseudoData vector) coordinate
+  ≡ admissibleProject pseudoData vector coordinate
+projectIdempotent pseudoData vector = projectFixesConstraintKernel pseudoData
+  (admissibleProject pseudoData vector) (projectConstraintZero pseudoData vector)
 
 repairOfAdjointExact : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) multiplier coordinate →
-  constraintRepair data (constraintAdjointApply data multiplier) coordinate
-  ≡ constraintAdjointApply data multiplier coordinate
-repairOfAdjointExact data multiplier coordinate =
-  let constraintToGram = constraintGramActionExact data multiplier in
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) multiplier coordinate →
+  constraintRepair pseudoData (constraintAdjointApply pseudoData multiplier) coordinate
+  ≡ constraintAdjointApply pseudoData multiplier coordinate
+repairOfAdjointExact pseudoData multiplier coordinate =
+  let constraintToGram = constraintGramActionExact pseudoData multiplier in
   trans
-    (Rect.applyRectangularVectorCong (multiplierCarrier data)
-      (Rect.transposeRectangular (constraintMatrix data))
+    (Rect.applyRectangularVectorCong (multiplierCarrier pseudoData)
+      (Rect.transposeRectangular (constraintMatrix pseudoData))
       (λ row → Rect.applyRectangularVectorCong
-        (multiplierCarrier data) (gramPseudoinverse data)
+        (multiplierCarrier pseudoData) (gramPseudoinverse pseudoData)
         constraintToGram row) coordinate)
-    (adjointPseudoGramFixesAdjointImage data multiplier coordinate)
+    (adjointPseudoGramFixesAdjointImage pseudoData multiplier coordinate)
 
 projectKillsAdjointRange : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) vector →
-  AdjointRange data vector →
-  ∀ coordinate → admissibleProject data vector coordinate ≡ 0ℚ
-projectKillsAdjointRange data vector range coordinate =
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) vector →
+  AdjointRange pseudoData vector →
+  ∀ coordinate → admissibleProject pseudoData vector coordinate ≡ 0ℚ
+projectKillsAdjointRange pseudoData vector range coordinate =
   let
     repairRepresentation =
-      Rect.applyRectangularVectorCong (multiplierCarrier data)
-        (Rect.transposeRectangular (constraintMatrix data))
+      Rect.applyRectangularVectorCong (multiplierCarrier pseudoData)
+        (Rect.transposeRectangular (constraintMatrix pseudoData))
         (λ row → Rect.applyRectangularVectorCong
-          (multiplierCarrier data) (gramPseudoinverse data)
+          (multiplierCarrier pseudoData) (gramPseudoinverse pseudoData)
           (λ selected → Rect.applyRectangularVectorCong
-            KKT.physicalStateCarrier (constraintMatrix data)
+            KKT.physicalStateCarrier (constraintMatrix pseudoData)
             (representedByAdjoint range) selected) row) coordinate
     repairIsVector = trans repairRepresentation
-      (trans (repairOfAdjointExact data (multiplier range) coordinate)
+      (trans (repairOfAdjointExact pseudoData (multiplier range) coordinate)
         (sym (representedByAdjoint range coordinate)))
   in trans (cong (vector coordinate -_) repairIsVector)
       (ℚRing.solve-∀ (vector coordinate))
 
 repairSelfAdjoint : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) left right →
-  KKT.stateDot left (constraintRepair data right)
-  ≡ KKT.stateDot (constraintRepair data left) right
-repairSelfAdjoint data left right = trans
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) left right →
+  KKT.stateDot left (constraintRepair pseudoData right)
+  ≡ KKT.stateDot (constraintRepair pseudoData left) right
+repairSelfAdjoint pseudoData left right = trans
   (sym (Rect.rectangularAdjointExact
-    (multiplierCarrier data) KKT.physicalStateCarrier
-    (constraintMatrix data) left
-    (pseudoApply data (constraintApply data right))))
+    (multiplierCarrier pseudoData) KKT.physicalStateCarrier
+    (constraintMatrix pseudoData) left
+    (pseudoApply pseudoData (constraintApply pseudoData right))))
   (trans
     (Rect.symmetricMatrixMovesAcrossDot
-      (multiplierCarrier data) (gramPseudoinverse data)
-      (gramPseudoinverseSymmetric data)
-      (constraintApply data left) (constraintApply data right))
+      (multiplierCarrier pseudoData) (gramPseudoinverse pseudoData)
+      (gramPseudoinverseSymmetric pseudoData)
+      (constraintApply pseudoData left) (constraintApply pseudoData right))
     (trans
-      (Rect.finiteDotSymmetric (multiplierCarrier data)
-        (pseudoApply data (constraintApply data left))
-        (constraintApply data right))
+      (Rect.finiteDotSymmetric (multiplierCarrier pseudoData)
+        (pseudoApply pseudoData (constraintApply pseudoData left))
+        (constraintApply pseudoData right))
       (trans
         (Rect.rectangularAdjointExact
-          (multiplierCarrier data) KKT.physicalStateCarrier
-          (constraintMatrix data) right
-          (pseudoApply data (constraintApply data left)))
+          (multiplierCarrier pseudoData) KKT.physicalStateCarrier
+          (constraintMatrix pseudoData) right
+          (pseudoApply pseudoData (constraintApply pseudoData left)))
         (Rect.finiteDotSymmetric KKT.physicalStateCarrier right
-          (constraintRepair data left)))))
+          (constraintRepair pseudoData left)))))
 
 projectSelfAdjoint : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) left right →
-  KKT.stateDot left (admissibleProject data right)
-  ≡ KKT.stateDot (admissibleProject data left) right
-projectSelfAdjoint data left right = trans
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) left right →
+  KKT.stateDot left (admissibleProject pseudoData right)
+  ≡ KKT.stateDot (admissibleProject pseudoData left) right
+projectSelfAdjoint pseudoData left right = trans
   (Rect.finiteDotSubtractRight KKT.physicalStateCarrier
-    left right (constraintRepair data right))
+    left right (constraintRepair pseudoData right))
   (trans
     (cong (KKT.stateDot left right -_)
-      (repairSelfAdjoint data left right))
+      (repairSelfAdjoint pseudoData left right))
     (sym (Rect.finiteDotSubtractLeft KKT.physicalStateCarrier
-      left (constraintRepair data left) right)))
+      left (constraintRepair pseudoData left) right)))
 
 record ProjectionUniversalProperty {Multiplier : Set}
-    (data : FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier)
     (source candidate : KKT.StateVector) : Set₁ where
   field
-    candidateAdmissible : ConstraintKernel data candidate
+    candidateAdmissible : ConstraintKernel pseudoData candidate
     defectMultiplier : MultiplierVector Multiplier
     defectInAdjointRange : ∀ coordinate →
       source coordinate - candidate coordinate
-      ≡ constraintAdjointApply data defectMultiplier coordinate
+      ≡ constraintAdjointApply pseudoData defectMultiplier coordinate
 open ProjectionUniversalProperty public
 
 projectSatisfiesUniversalProperty : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) source →
-  ProjectionUniversalProperty data source (admissibleProject data source)
-projectSatisfiesUniversalProperty data source = record
-  { candidateAdmissible = projectConstraintZero data source
-  ; defectMultiplier = pseudoApply data (constraintApply data source)
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) source →
+  ProjectionUniversalProperty pseudoData source (admissibleProject pseudoData source)
+projectSatisfiesUniversalProperty pseudoData source = record
+  { candidateAdmissible = projectConstraintZero pseudoData source
+  ; defectMultiplier = pseudoApply pseudoData (constraintApply pseudoData source)
   ; defectInAdjointRange = λ coordinate → ℚRing.solve-∀
-      (source coordinate) (constraintRepair data source coordinate) }
+      (source coordinate) (constraintRepair pseudoData source coordinate) }
 
 universalPropertyUnique : ∀ {Multiplier}
-    (data : FiniteKKTPseudoinverseData Multiplier) source candidate →
-  ProjectionUniversalProperty data source candidate →
-  ∀ coordinate → candidate coordinate ≡ admissibleProject data source coordinate
-universalPropertyUnique data source candidate property coordinate =
+    (pseudoData : FiniteKKTPseudoinverseData Multiplier) source candidate →
+  ProjectionUniversalProperty pseudoData source candidate →
+  ∀ coordinate → candidate coordinate ≡ admissibleProject pseudoData source coordinate
+universalPropertyUnique pseudoData source candidate property coordinate =
   let
     μ = defectMultiplier property
     sourceAsCandidatePlusAdjoint : ∀ selected →
-      source selected ≡ candidate selected + constraintAdjointApply data μ selected
+      source selected ≡ candidate selected
+        + constraintAdjointApply pseudoData μ selected
     sourceAsCandidatePlusAdjoint selected = trans
       (sym (ℚRing.solve-∀ (source selected) (candidate selected)
-        (constraintAdjointApply data μ selected)))
+        (constraintAdjointApply pseudoData μ selected)))
       (trans (cong (_+ candidate selected)
         (defectInAdjointRange property selected))
         (ℚRing.solve-∀ (candidate selected)
-          (constraintAdjointApply data μ selected)))
+          (constraintAdjointApply pseudoData μ selected)))
     sourceConstraintIsGram : ∀ row →
-      constraintApply data source row ≡ gramApply data μ row
+      constraintApply pseudoData source row ≡ gramApply pseudoData μ row
     sourceConstraintIsGram row = trans
       (Rect.applyRectangularVectorCong KKT.physicalStateCarrier
-        (constraintMatrix data) sourceAsCandidatePlusAdjoint row)
+        (constraintMatrix pseudoData) sourceAsCandidatePlusAdjoint row)
       (trans
         (Rect.applyRectangularAdd KKT.physicalStateCarrier
-          (constraintMatrix data) candidate
-          (constraintAdjointApply data μ) row)
+          (constraintMatrix pseudoData) candidate
+          (constraintAdjointApply pseudoData μ) row)
         (trans (cong₂ _+_
           (constraintZero (candidateAdmissible property) row)
-          (constraintGramActionExact data μ row))
-          (ℚRing.solve-∀ (gramApply data μ row))))
+          (constraintGramActionExact pseudoData μ row))
+          (ℚRing.solve-∀ (gramApply pseudoData μ row))))
     repairSourceIsAdjoint : ∀ selected →
-      constraintRepair data source selected
-      ≡ constraintAdjointApply data μ selected
+      constraintRepair pseudoData source selected
+      ≡ constraintAdjointApply pseudoData μ selected
     repairSourceIsAdjoint selected = trans
-      (Rect.applyRectangularVectorCong (multiplierCarrier data)
-        (Rect.transposeRectangular (constraintMatrix data))
+      (Rect.applyRectangularVectorCong (multiplierCarrier pseudoData)
+        (Rect.transposeRectangular (constraintMatrix pseudoData))
         (λ row → Rect.applyRectangularVectorCong
-          (multiplierCarrier data) (gramPseudoinverse data)
+          (multiplierCarrier pseudoData) (gramPseudoinverse pseudoData)
           sourceConstraintIsGram row) selected)
-      (adjointPseudoGramFixesAdjointImage data μ selected)
+      (adjointPseudoGramFixesAdjointImage pseudoData μ selected)
   in sym (trans
     (cong (source coordinate -_) (repairSourceIsAdjoint coordinate))
-    (trans (cong (_- constraintAdjointApply data μ coordinate)
+    (trans (cong (_- constraintAdjointApply pseudoData μ coordinate)
       (sourceAsCandidatePlusAdjoint coordinate))
       (ℚRing.solve-∀ (candidate coordinate)
-        (constraintAdjointApply data μ coordinate))))
+        (constraintAdjointApply pseudoData μ coordinate))))
 
 fullInverseToPseudoinverse : ∀ {Multiplier} →
   KKT.FiniteKKTProjectorData Multiplier →
   FiniteKKTPseudoinverseData Multiplier
-fullInverseToPseudoinverse data = record
-  { multiplierCarrier = KKT.multiplierCarrier data
-  ; constraintMatrix = KKT.constraintMatrix data
-  ; gramPseudoinverse = KKT.multiplierGreen data
-  ; gramPseudoinverseSymmetric = KKT.gramInverseSymmetric data
+fullInverseToPseudoinverse projectorData = record
+  { multiplierCarrier = KKT.multiplierCarrier projectorData
+  ; constraintMatrix = KKT.constraintMatrix projectorData
+  ; gramPseudoinverse = KKT.multiplierGreen projectorData
+  ; gramPseudoinverseSymmetric = KKT.gramInverseSymmetric projectorData
   ; gramPseudoGramAction = λ multiplier row →
       Rect.applyRectangularVectorCong
-        (KKT.multiplierCarrier data) (KKT.constraintGram data)
+        (KKT.multiplierCarrier projectorData)
+        (KKT.constraintGram projectorData)
         (Matrix.matrixInverseLeftExact
-          (KKT.gramInverseCertificate data)
-          (Rect.applyRectangular (KKT.multiplierCarrier data)
-            (KKT.constraintGram data) multiplier)) row
+          (KKT.gramInverseCertificate projectorData)
+          (Rect.applyRectangular (KKT.multiplierCarrier projectorData)
+            (KKT.constraintGram projectorData) multiplier)) row
   ; pseudoGramPseudoAction = λ multiplier row →
       Matrix.matrixInverseLeftExact
-        (KKT.gramInverseCertificate data)
-        (KKT.multiplierGreenApply data multiplier) row
+        (KKT.gramInverseCertificate projectorData)
+        (KKT.multiplierGreenApply projectorData multiplier) row
   ; gramPseudoSymmetric = λ left right → trans
       (Matrix.operatorTimesInverse
-        (KKT.gramInverseCertificate data) left right)
+        (KKT.gramInverseCertificate projectorData) left right)
       (sym (Matrix.operatorTimesInverse
-        (KKT.gramInverseCertificate data) right left))
+        (KKT.gramInverseCertificate projectorData) right left))
   ; pseudoGramSymmetric = λ left right → trans
       (Matrix.inverseTimesOperator
-        (KKT.gramInverseCertificate data) left right)
+        (KKT.gramInverseCertificate projectorData) left right)
       (sym (Matrix.inverseTimesOperator
-        (KKT.gramInverseCertificate data) right left))
+        (KKT.gramInverseCertificate projectorData) right left))
   ; gramPseudoFixesConstraintImage = λ state row →
       Matrix.matrixInverseRightExact
-        (KKT.gramInverseCertificate data)
-        (KKT.constraintApply data state) row
+        (KKT.gramInverseCertificate projectorData)
+        (KKT.constraintApply projectorData state) row
   ; adjointPseudoGramFixesAdjointImage = λ multiplier coordinate →
       Rect.applyRectangularVectorCong
-        (KKT.multiplierCarrier data)
-        (Rect.transposeRectangular (KKT.constraintMatrix data))
+        (KKT.multiplierCarrier projectorData)
+        (Rect.transposeRectangular (KKT.constraintMatrix projectorData))
         (Matrix.matrixInverseLeftExact
-          (KKT.gramInverseCertificate data) multiplier) coordinate }
+          (KKT.gramInverseCertificate projectorData) multiplier) coordinate }
 
 finiteKKTPseudoinverseProjectorLevel : ProofLevel
 finiteKKTPseudoinverseProjectorLevel = machineChecked
