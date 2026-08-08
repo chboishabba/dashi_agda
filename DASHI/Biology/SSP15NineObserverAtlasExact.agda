@@ -30,17 +30,13 @@ module DASHI.Biology.SSP15NineObserverAtlasExact where
 -- all six edges among the Ogg values are proved by exact arithmetic.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Nat using (_∸_)
 
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
-
-------------------------------------------------------------------------
--- Observer classification.  The constructor names state what is being counted
--- and prevent one observer kind from silently replacing another.
-------------------------------------------------------------------------
 
 data NineObserverKind : Set where
   reflectionIrrepCount : NineObserverKind
@@ -126,10 +122,6 @@ ssp15NineAtlas Lane.p71 =
   ssp15-nine-atlas-entry
     depthTwoTenComplement 71 refl 2 exactFiniteArithmetic false
 
-------------------------------------------------------------------------
--- Exact arithmetic behind the observer labels.
-------------------------------------------------------------------------
-
 qutritHeisenbergCountArithmetic : 9 + 2 ≡ 11
 qutritHeisenbergCountArithmetic = refl
 
@@ -142,7 +134,7 @@ pointedEvenPermutationArithmetic = refl
 pointedBlockWreathArithmetic : 1 + 22 ≡ 23
 pointedBlockWreathArithmetic = refl
 
-reducedFullPermutationArithmetic : 29 + 1 ≡ 30
+reducedFullPermutationArithmetic : 30 ∸ 1 ≡ 29
 reducedFullPermutationArithmetic = refl
 
 pointedFullPermutationArithmetic : 1 + 30 ≡ 31
@@ -159,10 +151,6 @@ depthTwoTwentyTwoComplementArithmetic = refl
 
 depthTwoTenComplementArithmetic : 71 + 10 ≡ 81
 depthTwoTenComplementArithmetic = refl
-
-------------------------------------------------------------------------
--- Actual pointed-sign carrier constructor.
-------------------------------------------------------------------------
 
 data PointedSignedCarrier (X : Set) : Set where
   distinguishedObserver : PointedSignedCarrier X
@@ -204,8 +192,7 @@ pointedSignedTwentyNineIsFiftyNine :
 pointedSignedTwentyNineIsFiftyNine = refl
 
 ------------------------------------------------------------------------
--- Contract required to promote an arithmetic atlas entry to a genuine
--- projector-and-transport realization.
+-- A genuine realization must prove transport and projector idempotence.
 ------------------------------------------------------------------------
 
 record SSP15NineRealisation (prime : Lane.MonsterPrimeLane) : Set₁ where
@@ -218,17 +205,29 @@ record SSP15NineRealisation (prime : Lane.MonsterPrimeLane) : Set₁ where
     valueIsPrime : observedValue ≡ Lane.monsterPrimeLaneToNat prime
     Projector : Set
     projectorActs : Projector → NineCarrier → NineCarrier
-    transportEquivariant : Set
-    decompositionCertified : Set
+    transportEquivariant :
+      (symmetry : Symmetry) →
+      (projector : Projector) →
+      (point : NineCarrier) →
+      projectorActs projector (action symmetry point)
+      ≡ action symmetry (projectorActs projector point)
+    decompositionCertified :
+      (projector : Projector) →
+      (point : NineCarrier) →
+      projectorActs projector (projectorActs projector point)
+      ≡ projectorActs projector point
 
-record SSP15NineObserverAtlasBoundary : Set where
+record SSP15NineObserverAtlasBoundary : Set₁ where
   constructor ssp15-nine-observer-atlas-boundary
   field
-    allFifteenEntriesTyped : Bool
-    allFifteenEntriesTypedIsTrue : allFifteenEntriesTyped ≡ true
-    pointedSignedCarrierConstructed : Bool
-    pointedSignedCarrierConstructedIsTrue :
-      pointedSignedCarrierConstructed ≡ true
+    everyAtlasEntryMatchesItsLane :
+      (prime : Lane.MonsterPrimeLane) →
+      observedValue (ssp15NineAtlas prime)
+      ≡ Lane.monsterPrimeLaneToNat prime
+    pointedSignedIdentityLaw :
+      ∀ {X : Set} →
+      (point : PointedSignedCarrier X) →
+      mapPointedSigned (λ value → value) point ≡ point
     externalCharacterCountsReprovedInternally : Bool
     externalCharacterCountsReprovedInternallyIsFalse :
       externalCharacterCountsReprovedInternally ≡ false
@@ -238,4 +237,8 @@ record SSP15NineObserverAtlasBoundary : Set where
 
 canonicalSSP15NineObserverAtlasBoundary : SSP15NineObserverAtlasBoundary
 canonicalSSP15NineObserverAtlasBoundary =
-  ssp15-nine-observer-atlas-boundary true refl true refl false refl false refl
+  ssp15-nine-observer-atlas-boundary
+    (λ prime → observedValueIsPrimeLane (ssp15NineAtlas prime))
+    mapPointedSignedIdentity
+    false refl
+    false refl
