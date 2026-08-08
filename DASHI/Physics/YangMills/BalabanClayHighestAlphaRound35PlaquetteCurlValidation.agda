@@ -19,8 +19,13 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound35PlaquetteCurlValida
 --   * every one of the sixteen Wilson placement defects is partitioned
 --     canonically into four singleton selected-factor terms and eleven
 --     higher-order terms, then summed into the literal plaquette defect;
---   * the Round-34 linear/remainder equality is therefore no longer an
---     arbitrary caller field;
+--   * the six quadratic terms are retained in the correlated channel while
+--     the four cubic terms and quartic term form the deep remainder;
+--   * exact rational arithmetic proves the deep coefficient fits rho/144 but
+--     the six-pair coefficient does not;
+--   * square-root-free scaled Young bounds and a generic ordered quaternion
+--     envelope prove the cubic--quartic lower estimate once literal physical
+--     selected-factor norm envelopes are instantiated;
 --   * an exact rational adversarial test proves that the configured radius and
 --     flat cancellation alone do not imply the target correlated curvature
 --     scale;
@@ -28,9 +33,9 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound35PlaquetteCurlValida
 --     slab-kernel paper are audited with distinct theory/operator signatures,
 --     rather than treated as proof receipts.
 --
--- The selected-background Euler--Lagrange curvature estimate and the sharp
--- lower bounds on the now-canonical linear and grouped nonlinear terms remain
--- open.  No W-local witness is fabricated from the radius stress test.
+-- The selected-background Euler--Lagrange curvature estimate, the physical
+-- selected-factor envelope instantiation, and the sharp correlated lower bound
+-- remain open.  No W-local witness is fabricated from the radius stress test.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound34PhysicalRadiusWLocalValidation
@@ -41,4 +46,8 @@ import DASHI.Physics.YangMills.BalabanSelectedBackgroundCovariantCurlInstantiati
 import DASHI.Physics.YangMills.BalabanP33FlatPlaquetteFirstVariationCurlExact
 import DASHI.Physics.YangMills.BalabanP33CovariantCurlRadiusStressTestExact
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionExact
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact
+import DASHI.Physics.YangMills.BalabanP33WilsonPairDeepBudgetExact
+import DASHI.Physics.YangMills.BalabanP33QuaternionScaledYoungLowerExact
+import DASHI.Physics.YangMills.BalabanP33WilsonDeepRemainderEnvelopeExact
 import DASHI.Physics.YangMills.YangMillsCizekEinsteinCartanClaimAuditExact
