@@ -41,24 +41,33 @@ if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERM
 fi
 
 corpus=DASHI/Physics/Closure/NSTriadKNLuoClaimedSolutionCorpusRound24Exact.agda
+source_markers=(
+  '10.5281/zenodo.19559087'
+  '10.20944/preprints202603.1889.v1'
+  '10.14293/PR2199.003375.v1'
+  '10.63968/post-bio-ai-epistemics.v1n2.012'
+  '10.5281/zenodo.21194906'
+  '10.5281/zenodo.19632058'
+  '10.2139/ssrn.6557718'
+  '10.48550/arXiv.2606.27560'
+  '2605.01875'
+  '2605.01873'
+  '2601.15685'
+  '10.3390/math14091410'
+  '10.20944/preprints202603.1591.v1'
+  '10.20944/preprints202604.2068.v1'
+  'global-regularity-for-the-3d-incompressible-navier-stokes-equations-via-emergent-nonlinear-vorticity-dissipation'
+  'NEMGRO'
+  '18963533'
+  '10.31224/5814'
+  '10.5281/zenodo.19601371'
+  '10.5281/zenodo.21263877'
+  '10.5281/zenodo.19180827'
+)
+for marker in "${source_markers[@]}"; do
+  grep -q "$marker" "$corpus"
+done
 grep -q 'claimedSolutionCorpusRound24' "$corpus"
-grep -q '10.5281/zenodo.19559087' "$corpus"
-grep -q '10.20944/preprints202603.1889.v1' "$corpus"
-grep -q '10.63968/post-bio-ai-epistemics.v1n2.012' "$corpus"
-grep -q '10.5281/zenodo.21194906' "$corpus"
-grep -q '10.5281/zenodo.19632058' "$corpus"
-grep -q '2606.27560' "$corpus"
-grep -q '2605.01875' "$corpus"
-grep -q '2605.01873' "$corpus"
-grep -q '2601.15685' "$corpus"
-grep -q '10.3390/math14091410' "$corpus"
-grep -q '10.20944/preprints202603.1591.v1' "$corpus"
-grep -q 'NEMGRO' "$corpus"
-grep -q '18963533' "$corpus"
-grep -q '10.31224/5814' "$corpus"
-grep -q '10.5281/zenodo.19601371' "$corpus"
-grep -q '10.5281/zenodo.21263877' "$corpus"
-grep -q '10.5281/zenodo.19180827' "$corpus"
 grep -q 'allCorpusSourcesAreProofAuthorities = false' "$corpus"
 grep -q 'corpusSearchIsDeclaredExhaustive = false' "$corpus"
 
@@ -71,9 +80,12 @@ grep -q 'canonicalAdditiveFloorNoGoWitness' "$abu"
 camlin=DASHI/Physics/Closure/NSTriadKNLuoCamlinTemporalLiftNoGoExact.agda
 grep -q 'finiteHorizonBoundsExist' "$camlin"
 grep -q 'finiteHorizonFamilyDoesNotYieldGlobalUniformBound' "$camlin"
-grep -q 'bkmDivergenceCannotBeRemovedByExactTimeChange' "$camlin"
-grep -q 'bkmFinitenessCannotBeCreatedByExactTimeChange' "$camlin"
-grep -q 'superlinearDriftGapAtCoefficientPlusOne' "$camlin"
+grep -q 'bkmDivergenceCannotBeRemovedBySuppliedExactTimeChange' "$camlin"
+grep -q 'bkmFinitenessCannotBeCreatedBySuppliedExactTimeChange' "$camlin"
+grep -q 'superlinearDriftGapIdentityAtCoefficientPlusOne' "$camlin"
+grep -q 'superlinearDriftGapNonnegativeAtCoefficientPlusOne' "$camlin"
+grep -q 'concreteCamlinTimeMapAndBKMEqualityProved' "$camlin"
+grep -q 'unrestrictedStrictDriftPositivityProved' "$camlin"
 
 cascade=DASHI/Physics/Closure/NSTriadKNLuoFiniteCascadeSpeedFluxNoGoExact.agda
 grep -q 'reciprocalCascadeIdentity' "$cascade"
@@ -97,26 +109,56 @@ grep -q 'aksmanClaimEntersAtDissipationRange' "$crosswalk"
 grep -q 'cavazziniRestrictedClaimEntersAtFullCarrier' "$crosswalk"
 
 ladder=DASHI/Physics/Closure/NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda
-grep -q 'L0_literalFeffermanPeriodicAlternativeB' "$ladder"
-grep -q 'L7_fivePhysicalSourceBoundsUniformInCutoffs' "$ladder"
-grep -q 'L15_strictTotalViscosityTaxBelowOne' "$ladder"
-grep -q 'L23_literalFeffermanWitnessAndAuditComposition' "$ladder"
+ladder_nodes=(
+  L0_literalFeffermanPeriodicAlternativeB
+  L1_periodicMeanCenteringAndGalileanRestoration
+  L2_localCriticalWellPosednessMaximalTimeRestart
+  L3_periodicDivergenceFreeGalerkinFourierCarrier
+  L4_exhaustiveBonyAndCommutatorSupportPartition
+  L5_finiteFilteredVorticityEnstrophyIdentity
+  L6_pairInputFrequencyDiffusionCoercivity
+  L7_fivePhysicalSourceBoundsUniformInCutoffs
+  L8_periodicPrincipalValueStrainKernelSphereCancellationCZ
+  L9_continuumIncrementToDiffusionCoercivity
+  L10_farFieldAnnularPackingOrCarlesonBound
+  L11_criticalCommutatorAndSubgridStressBound
+  L12_hystereticPositiveVariationBound
+  L13_dissipationWavenumberHighModeAndLowReservoirBound
+  L14_uniformGeometricResidualTailRatio
+  L15_strictTotalViscosityTaxBelowOne
+  L16_uniformIntegratedCriticalEnergyInequality
+  L17_continuousGronwallWithoutTargetNormOnRight
+  L18_shellCutoffConvergence
+  L19_galerkinCutoffConvergenceStrongEnoughForNonlinearity
+  L20_lowerSemicontinuityPreservesAbsorbedBudget
+  L21_pressureSmoothnessRecoveryAndCriticalRestart
+  L22_arbitraryMeanGalileanUncentering
+  L23_literalFeffermanWitnessAndAuditComposition
+)
+[[ "${#ladder_nodes[@]}" -eq 24 ]]
+for node in "${ladder_nodes[@]}"; do
+  grep -q "$node" "$ladder"
+done
 grep -q 'highestAlphaPathInputsGiveLiteralClayB' "$ladder"
-grep -q 'unconditionalClayTheoremPromoted' "$ladder"
+grep -A4 '^claimedPaperCorpusCannotSupplyAuthorityWithoutAudit' "$ladder" | grep -q '≡ false'
+grep -A4 '^highestAlphaPhysicalProducersRemainOpen' "$ladder" | grep -q '≡ false'
+grep -A4 '^highestAlphaUnconditionalClayPromotionRemainsFalse' "$ladder" | grep -q '≡ false'
 
 paper=DASHI/Papers/NavierStokes/ClaimCorpusHighestAlphaRound24.agda
 grep -q 'canonicalClaimCorpusHighestAlphaRound24Status' "$paper"
 grep -q 'claimCorpusIsNotProofAuthority' "$paper"
 grep -q 'finiteCascadeFluxNoGo' "$paper"
 grep -q 'restrictedClassScopeNoGo' "$paper"
-grep -q 'physicalProducersRemainOpen' "$paper"
-grep -q 'clayPromotionRemainsFalse' "$paper"
+grep -A4 '^concreteCamlinBKMChangeOfVariablesRemainsOpen' "$paper" | grep -q '≡ false'
+grep -A4 '^unrestrictedStrictDriftPositivityRemainsOpen' "$paper" | grep -q '≡ false'
+grep -A4 '^physicalProducersRemainOpen' "$paper" | grep -q '≡ false'
+grep -A4 '^clayPromotionRemainsFalse' "$paper" | grep -q '≡ false'
 
 current=DASHI/Papers/NavierStokes/CurrentTheoremInterfaceRound24.agda
 grep -q 'canonicalCurrentNSPaperTheoremInterfaceRound24' "$current"
 grep -q 'currentLiteralTargetImplemented' "$current"
-grep -q 'currentPhysicalProducersOpen' "$current"
-grep -q 'currentClayPromotionFalse' "$current"
+grep -A4 '^currentPhysicalProducersOpen' "$current" | grep -q '≡ false'
+grep -A4 '^currentClayPromotionFalse' "$current" | grep -q '≡ false'
 
 grep -q '\[Claimed-paper corpus and audits\](paper-corpus/README.md)' docs/ns-clay-contract/README.md
 grep -q '\[Audit matrix\](audit-matrix.md)' docs/ns-clay-contract/paper-corpus/README.md
