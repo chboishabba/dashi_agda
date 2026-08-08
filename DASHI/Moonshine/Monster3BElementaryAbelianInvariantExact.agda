@@ -6,11 +6,11 @@ module DASHI.Moonshine.Monster3BElementaryAbelianInvariantExact where
 -- David J. Green and Ian J. Leary,
 -- "The spectrum of the Chern subring",
 -- Commentarii Mathematici Helvetici 73 (1998), 406--426.
--- DOI: 10.1007/s000140050063.
+-- DOI: 10.1007/s000140050062.
 --
 -- David J. Green and Ian J. Leary,
 -- "Chern classes and extraspecial groups",
--- Manuscripta Mathematica 88 (1995), 33--45.
+-- Manuscripta Mathematica 88 (1995), 73--84.
 -- DOI: 10.1007/BF02567806.
 --
 -- Jean Dieudonne,
@@ -80,12 +80,12 @@ symplecticTwoPlaneCount = 7371
 gradedDenominator : Nat
 gradedDenominator = 16
 
-gausssianTwoPlaneNumerator : Nat
-gausssianTwoPlaneNumerator = 728 * 242
+gaussianTwoPlaneNumerator : Nat
+gaussianTwoPlaneNumerator = 728 * 242
 
-gausssianTwoPlaneCertificate :
-  gradedDenominator * allTwoPlaneCount ≡ gausssianTwoPlaneNumerator
-gausssianTwoPlaneCertificate = refl
+gaussianTwoPlaneCertificate :
+  gradedDenominator * allTwoPlaneCount ≡ gaussianTwoPlaneNumerator
+gaussianTwoPlaneCertificate = refl
 
 isotropicTwoPlaneNumerator : Nat
 isotropicTwoPlaneNumerator = 728 * 80
@@ -131,9 +131,9 @@ record ChernRestrictionBoundary : Set where
     kappaClassesConstructed : Bool
     kappaClassesConstructedIsFalse :
       kappaClassesConstructed ≡ false
-    cernSubringRestrictionMapComputed : Bool
-    cernSubringRestrictionMapComputedIsFalse :
-      cernSubringRestrictionMapComputed ≡ false
+    chernSubringRestrictionMapComputed : Bool
+    chernSubringRestrictionMapComputedIsFalse :
+      chernSubringRestrictionMapComputed ≡ false
     incidenceCountsAloneDetermineCohomology : Bool
     incidenceCountsAloneDetermineCohomologyIsFalse :
       incidenceCountsAloneDetermineCohomology ≡ false
