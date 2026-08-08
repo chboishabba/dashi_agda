@@ -2,7 +2,7 @@
 
 ## Status
 
-Round 35 advances the first two proof-bearing Gate-I producers. It does not add another endpoint record and does not claim to close the selected-background Wilson estimate.
+Round 35 advances the proof-bearing Gate-I producers. It does not add another endpoint record and does not claim to close the selected-background Wilson estimate.
 
 The new checked targets are:
 
@@ -10,7 +10,9 @@ The new checked targets are:
 2. its exact right-trivialized covariant-curl form;
 3. factorization of the covariant-minus-flat curl through explicit adjoint link defects;
 4. selected-background/same-perturbation instantiation;
-5. an exact rational adversarial test showing why the Euler–Lagrange correlation remains necessary.
+5. a canonical four-singleton/eleven-higher-order partition for every named Wilson atom defect;
+6. exact assembly of that partition into the computed plaquette Wilson defect;
+7. an exact rational adversarial test showing why the Euler–Lagrange correlation remains necessary.
 
 A static audit is not a kernel result. Kernel acceptance is claimed only after the focused Agda workflow succeeds.
 
@@ -169,7 +171,66 @@ DASHI/Physics/YangMills/
   BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
 ```
 
-## 6. Exact adversarial radius stress test
+## 6. Canonical sixteen-atom linear/nonlinear partition
+
+For one named Wilson placement, write its four selected background factors as
+
+```text
+Ai = Bi + Di,
+```
+
+where `Bi` is the corresponding identity-background selected factor and `Di` is its exact quaternion difference.
+
+Exact ordered multiplication proves
+
+```text
+A0 A1 A2 A3 - B0 B1 B2 B3
+  = linear4(D;B) + nonlinear11(D;B).
+```
+
+The first term is the sum over singleton defect subsets:
+
+```text
+D0 B1 B2 B3
++ B0 D1 B2 B3
++ B0 B1 D2 B3
++ B0 B1 B2 D3.
+```
+
+The second term contains all eleven ordered products with at least two defect factors: six pair terms, four triple terms and the quartic term. Therefore every named placement has exactly four singleton terms and eleven higher-order terms.
+
+This expansion is proved componentwise over exact rational quaternions. It does not commute factors and does not appeal to an abstract multilinearity receipt.
+
+The expansion is then instantiated on each of the four diagonal and twelve ordered-cross placements. Summing the sixteen exact scalar identities proves
+
+```text
+D2W_A(p)[h,h] - D2W_1(p)[h,h]
+  = canonicalLinearPart_p(A,h)
+  + canonicalGroupedNonlinearRemainder_p(A,h).
+```
+
+Round 34 previously accepted functions called `physicalLinearPart`, `physicalGroupedRemainder` and an equality connecting them. Round 35 now constructs those functions and the equality from the literal named atoms. Callers may supply only the two signed lower bounds:
+
+```text
+-(rho/36) C_p(h) <= canonicalLinearPart_p(A,h),
+-(rho/144) q_p(h) <= canonicalGroupedNonlinearRemainder_p(A,h).
+```
+
+Those canonical bounds construct the existing physical W-local object and compose directly to the terminal coefficients
+
+```text
+10739/196608,
+1/32.
+```
+
+Formal owner:
+
+```text
+DASHI/Physics/YangMills/
+  BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+```
+
+## 7. Exact adversarial radius stress test
 
 Before attempting the `rho/36` selected-curvature estimate, Round 35 checks a rational unit-quaternion adversary.
 
@@ -238,16 +299,24 @@ DASHI/Physics/YangMills/
   BalabanP33CovariantCurlRadiusStressTestExact.agda
 ```
 
-## 7. Exact remaining Gate-I frontier
+## 8. Exact remaining Gate-I frontier
 
-Round 35 closes the literal differentiation and covariant-curl identification. The remaining proof-bearing sequence is now:
+Round 35 closes:
+
+```text
+selectedBackgroundPlaquetteFirstVariation
+selectedBackgroundCovariantDiscreteCurlIdentity
+sixteenAtomsPartitionIntoLinearAndNonlinear
+canonicalPhysicalWilsonDecomposition
+```
+
+The remaining proof-bearing sequence is now:
 
 ```text
 variationalEulerLagrangeEquationAtSelectedBackground
 selectedBackgroundRegularityControlsPlaquetteCurvature
 selectedBackgroundCurvatureLinearLower
-physicalWilsonLinearPartIdentification
-sixteenAtomsPartitionIntoLinearAndNonlinear
+canonicalWilsonLinearPartIsCurvatureExpression
 groupedSixteenAtomNonlinearRemainderLower
 selectedBackgroundPhysicalWLocal
 selectedBackgroundHessianOneThirtySecond
@@ -256,17 +325,17 @@ selectedBackgroundHessianOneThirtySecond
 The two numerical targets remain:
 
 ```text
--(rho/36) C_p(h) <= linearPart_p(A,h),
--(rho/144) q_p(h) <= groupedRemainder_p(A,h).
+-(rho/36) C_p(h) <= canonicalLinearPart_p(A,h),
+-(rho/144) q_p(h) <= canonicalGroupedNonlinearRemainder_p(A,h).
 ```
 
 The first inequality must use the constrained selected-background equation or an equivalent correlated curvature theorem. The exact stress test rules out replacing it by a radius-only estimate.
 
-The second inequality must preserve the grouped sixteen-atom structure; an indiscriminate triangle inequality may spend more than the available `rho/144` budget.
+The second inequality must preserve the canonical grouped atom structure; an indiscriminate triangle inequality may spend more than the available `rho/144` budget.
 
-## 8. After Gate I
+## 9. After Gate I
 
-Once those two estimates are proved, the existing Round-34 composition yields
+Once those two estimates are proved, the existing Round-34/Round-35 composition yields
 
 ```text
 H_A[h,h] >= 10739/196608 ||h||^2
