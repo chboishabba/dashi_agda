@@ -35,19 +35,57 @@ For a selected critical space, construct a maximal strong solution and prove tha
 
 ## B. Actual finite PDE and shell geometry
 
-### L3 — Periodic divergence-free Fourier/Galerkin carrier — open
+### L3 — Periodic divergence-free Fourier/Galerkin carrier — narrowed physical producer
 
-Construct the exact finite mode set, Leray projection, reality symmetry and Galerkin ODE. Prove preservation of divergence-free and mean-zero structure and exact agreement with the projected periodic PDE.
+Round 25 certifies, for every cutoff:
 
-### L4 — Exhaustive Bony/commutator support theorem — open
+- the literal cutoff mode and resonant-triad enumeration;
+- resonance soundness and cutoff soundness;
+- completeness and duplicate-freeness;
+- sound, complete and duplicate-free output fibres;
+- reality closure under `k↦-k`;
+- exact Leray-projected coefficient construction;
+- coefficientwise agreement of the physical projected equation and Galerkin ODE.
 
-For every admitted convolution triad, prove it belongs to exactly one named interaction class:
+The remaining L3 producer is now precisely:
 
 ```text
-HH, LH, HL, CC, differentiated commutator.
+finite-dimensional ODE existence over the selected continuum real carrier,
+plus propagation of reality and transversality along that ODE.
 ```
 
-There may be no unnamed remainder. Support collars and constants must be independent of the final shell and Galerkin cutoffs.
+### L4 — Exhaustive physical Bony/commutator support theorem — checked exact in Round 25
+
+Every literal cutoff `Z³` resonant triad is assigned uniquely to one of
+
+```text
+HH, LH, HL, CC.
+```
+
+The differentiated commutator is the fifth class `Com`; there is no unnamed remainder. Round 25 also proves:
+
+```text
+two inputs three shells below the output are impossible,
+LH ⇒ |jk-jq| ≤ 1,
+HL ⇒ |jk-jp| ≤ 1,
+HH ⇒ |jp-jq| ≤ 1.
+```
+
+Classification of an output fibre erases exactly to the original fibre. Given
+
+```text
+triadValue : PhysicalTriad → ℚ,
+commutator : FourierMode → ℚ,
+```
+
+the actual five-source fibre is evaluated cell by cell: triadic cells use `triadValue` on their stored incidence, while the appended `differentiatedCommutator k` cell uses `commutator(k)`. Folding that evaluator proves the exact physical identity
+
+```text
+Ftotal(N,k)
+= FHH + FLH + FHL + FCC + commutator(k).
+```
+
+Thus the `Com` contribution is fibre-derived from its stored output mode, not supplied as an unrelated scalar. The constants are the fixed shell constants `Csep=3`, `Cout=2`, `Cin=2`; no final cutoff enters them.
 
 ### L5 — Finite filtered-vorticity/enstrophy identity — checked exact
 
@@ -59,7 +97,7 @@ Derive from the Galerkin PDE, before abstraction,
 
 and the critically weighted finite energy identity after periodic integration by parts.
 
-### L6 — Pair-input-frequency diffusion coercivity — checked exact algebra; physical cells depend on L3–L4
+### L6 — Pair-input-frequency diffusion coercivity — checked exact algebra
 
 For each interaction cell with input eigenvalues `λL,λR` and shell floor `κ`, prove
 
@@ -70,7 +108,7 @@ For each interaction cell with input eigenvalues `λL,λR` and shell floor `κ`,
 2νκ A ≤ ν(λL+λR)A.
 ```
 
-The damping must remain attached to both inputs before high–high multiplication collapses to low or zero output frequency.
+The damping remains attached to both inputs before high–high multiplication collapses to low or zero output frequency.
 
 ## C. Load-bearing nonlinear estimates
 
@@ -83,6 +121,8 @@ Fi ≤ ηi D + Ai + Bi Xint
 ```
 
 with the same critical quantity `X`, explicit `ηi ≥ 0`, and constants independent of shell cutoff `Q`, Galerkin cutoff `N`, selected shell `q`, and finite maximal time `T*`.
+
+L4 now guarantees that these five estimates are exhaustive; it does not provide their analytic constants.
 
 ### L8 — Periodic principal-value strain kernel and Calderón–Zygmund control — open
 
@@ -98,7 +138,7 @@ Prove the annular/far-field sum is critically summable with constants independen
 
 ### L11 — Critical commutator and subgrid-stress estimate — open
 
-Use the exact filtered-stress identity and Bony support theorem to control differentiated commutators, low stretching, comparable interactions and subgrid terms without an uncontrolled critical supremum on the right.
+Use the exact filtered-stress identity and the now-checked physical support theorem to control differentiated commutators, low stretching, comparable interactions and subgrid terms without an uncontrolled critical supremum on the right.
 
 ### L12 — Hysteretic positive-variation estimate — open
 
@@ -185,9 +225,18 @@ Construct the continuum mean and verify the Galilean transformation on the physi
 
 The existing end-to-end theorem converts the physical path inputs into the exact periodic Clay witness. No additional terminal receipt is needed.
 
-## Highest-alpha priority
+## Highest-alpha priority after Round 25
 
-The bottleneck is not L23. It is the block
+The discrete support ambiguity is removed. The next productive sequence is:
+
+```text
+finish the analytic remainder of L3,
+then prove one genuine classwise L7 tax,
+then L8–L14,
+then the strict L15 certificate.
+```
+
+The main bottleneck remains
 
 ```text
 L7 → L8/L9/L10/L11/L12/L13/L14 → L15.
