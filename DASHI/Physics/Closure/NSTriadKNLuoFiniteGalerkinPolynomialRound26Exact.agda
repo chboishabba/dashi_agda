@@ -31,6 +31,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -127,17 +128,17 @@ finiteGalerkinDifferenceFactorisation :
   evaluateAtoms atoms state - evaluateAtoms atoms reference
   ≡ differenceAtoms atoms state reference
 finiteGalerkinDifferenceFactorisation [] state reference = solve []
-finiteGalerkinDifferenceFactorisation (atom ∷ rest) state reference
-  rewrite atomDifferenceFactorisation atom state reference
-        | finiteGalerkinDifferenceFactorisation rest state reference =
-  solve
-    ( evaluateAtom atom state
-    ∷ evaluateAtom atom reference
-    ∷ evaluateAtoms rest state
-    ∷ evaluateAtoms rest reference
-    ∷ differenceAtom atom state reference
-    ∷ differenceAtoms rest state reference
-    ∷ [])
+finiteGalerkinDifferenceFactorisation (atom ∷ rest) state reference =
+  trans
+    (solve
+      ( evaluateAtom atom state
+      ∷ evaluateAtom atom reference
+      ∷ evaluateAtoms rest state
+      ∷ evaluateAtoms rest reference
+      ∷ []))
+    (cong₂ _+_
+      (atomDifferenceFactorisation atom state reference)
+      (finiteGalerkinDifferenceFactorisation rest state reference))
 
 record LiteralGalerkinCoordinateEquation : Set where
   constructor literal-galerkin-coordinate-equation
