@@ -18,8 +18,15 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound25Exact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_≤_; _+_)
+open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact as R24
 import DASHI.Physics.Closure.NSTriadKNLuoLiteralGalerkinCarrierRound25Exact as Carrier
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as Support
@@ -64,6 +71,18 @@ canonicalHighestAlphaClayLemmaLadderRound25 =
     physicalProducerOpen
     physicalProducerOpen
     checkedReducer
+
+round25L3AggregateIsStillOpen :
+  R24.L3_periodicDivergenceFreeGalerkinFourierCarrier
+    canonicalHighestAlphaClayLemmaLadderRound25
+  ≡ physicalProducerOpen
+round25L3AggregateIsStillOpen = refl
+
+round25L4PhysicalSupportIsCheckedExact :
+  R24.L4_exhaustiveBonyAndCommutatorSupportPartition
+    canonicalHighestAlphaClayLemmaLadderRound25
+  ≡ checkedExact
+round25L4PhysicalSupportIsCheckedExact = refl
 
 record L3LiteralGalerkinSubstatus : Set where
   constructor l3-literal-galerkin-substatus
@@ -111,6 +130,53 @@ canonicalL4PhysicalSupportSubstatus =
     checkedExact checkedExact checkedExact
     checkedExact checkedExact checkedExact
 
+------------------------------------------------------------------------
+-- Exact theorem evidence, not Boolean receipts.
+------------------------------------------------------------------------
+
+record Round25ExactEvidence : Set₁ where
+  field
+    literalCarrierCertificate :
+      (cutoff : Nat) →
+      Carrier.LiteralGalerkinCarrierCertificate cutoff
+
+    lowLowCannotReachFarHigherOutput :
+      (τ : Physical.PhysicalTriadIncidence) →
+      Shell.shellIndex (Physical.p τ) + Shell.Csep
+        ≤ Shell.shellIndex (Physical.k τ) →
+      Shell.shellIndex (Physical.q τ) + Shell.Csep
+        ≤ Shell.shellIndex (Physical.k τ) →
+      ⊥
+
+    actualFiveSourcePartition :
+      (cutoff : Nat) →
+      (output : Z3.FourierMode) →
+      (value : Physical.PhysicalTriadIncidence → ℚ) →
+      (commutatorValue : ℚ) →
+      Sum.fiveSourceTotal cutoff output value commutatorValue
+      ≡
+      DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.highHighToLowSum
+        (Sum.physicalTaggedOutputFiber cutoff output value)
+      + DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.lowHighSum
+        (Sum.physicalTaggedOutputFiber cutoff output value)
+      + DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.highLowSum
+        (Sum.physicalTaggedOutputFiber cutoff output value)
+      + DASHI.Physics.Closure.NSTriadKNLuoFiniteBonyFourClassAccountingExact.comparableSum
+        (Sum.physicalTaggedOutputFiber cutoff output value)
+      + commutatorValue
+
+open Round25ExactEvidence public
+
+canonicalRound25ExactEvidence : Round25ExactEvidence
+canonicalRound25ExactEvidence = record
+  { literalCarrierCertificate =
+      Carrier.literalGalerkinCarrierCertificate
+  ; lowLowCannotReachFarHigherOutput =
+      Support.noTwoInputsThreeShellsBelowOutput
+  ; actualFiveSourcePartition =
+      Sum.physicalFiveSourcePartitionExact
+  }
+
 record Round25HighestAlphaBoundary : Set where
   constructor round25-highest-alpha-boundary
   field
@@ -152,21 +218,3 @@ round25ClayPromotionRemainsFalse :
     canonicalRound25HighestAlphaBoundary
   ≡ false
 round25ClayPromotionRemainsFalse = refl
-
-------------------------------------------------------------------------
--- Concrete theorem anchors preventing status-only promotion.
-------------------------------------------------------------------------
-
-literalCarrierCertificateAnchor :
-  (cutoff : Agda.Builtin.Nat.Nat) →
-  Carrier.LiteralGalerkinCarrierCertificate cutoff
-literalCarrierCertificateAnchor =
-  Carrier.literalGalerkinCarrierCertificate
-  where
-  import Agda.Builtin.Nat
-
-lowLowFarOutputNoGoAnchor =
-  Support.noTwoInputsThreeShellsBelowOutput
-
-physicalFiveSourceSumAnchor =
-  Sum.physicalFiveSourcePartitionExact
