@@ -1,17 +1,11 @@
 module DASHI.Foundations.FrameWitnessFibreMDLExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Core.ListExact public
 
 import DASHI.Foundations.ActionMDLSeparation as ActionMDL
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
-
-------------------------------------------------------------------------
--- A Stage-3 witness is a frame together with positive evaluations for P, Q,
--- and S and a proof that S is actually synthesised from P and Q in that frame.
--- The witness fibre retains every admissible frame before any MDL policy picks
--- one representative.
-------------------------------------------------------------------------
 
 data CandidateFrame : Set where
   compactFrame expansiveFrame counterFrame : CandidateFrame
@@ -71,19 +65,11 @@ expansiveWitness = expansiveFrame , expansiveClosure
 allAdmissibleWitnesses : List Stage3WitnessFibre
 allAdmissibleWitnesses = compactWitness ∷ expansiveWitness ∷ []
 
-listCount : ∀ {A : Set} → List A → Nat
-listCount [] = 0
-listCount (_ ∷ xs) = 1 + listCount xs
-
 admissibleWitnessCountIsTwo : listCount allAdmissibleWitnesses ≡ 2
 admissibleWitnessCountIsTwo = refl
 
 counterFrameDoesNotClose : ClosesThreeAt counterFrame → ⊥
 counterFrameDoesNotClose (_ , _ , () , _)
-
-------------------------------------------------------------------------
--- Conversion to the repository's existing dependent FrameWitness record.
-------------------------------------------------------------------------
 
 compactDependentWitness :
   Selector.FrameWitness
@@ -96,12 +82,6 @@ expansiveDependentWitness :
     candidateSemantics conditionP conditionQ synthesisS
 expansiveDependentWitness =
   Selector.frameWitness expansiveFrame refl refl refl expansiveSynthesis
-
-------------------------------------------------------------------------
--- Exact finite MDL policy.  Costs retain the five requested components:
--- description length, contradiction, overreach, omission, and residual cost.
--- The ActionMDLSeparation interface supplies the actual minimality contract.
-------------------------------------------------------------------------
 
 record FrameCost : Set where
   constructor frameCost
@@ -166,11 +146,6 @@ selectedFrameIsCompact :
   ActionMDL.MDLSelection.selected canonicalFrameMDLSelection tt
   ≡ compactFrame
 selectedFrameIsCompact = refl
-
-------------------------------------------------------------------------
--- The selector operates after witness construction.  It does not erase the
--- witness fibre and does not turn existence under one frame into universality.
-------------------------------------------------------------------------
 
 record WitnessFibreMDLBoundary : Set where
   constructor witnessFibreMDLBoundary
