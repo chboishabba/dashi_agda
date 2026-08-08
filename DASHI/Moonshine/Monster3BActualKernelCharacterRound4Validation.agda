@@ -3,6 +3,7 @@ module DASHI.Moonshine.Monster3BActualKernelCharacterRound4Validation where
 import DASHI.Moonshine.Monster3BOrbifoldLocalModuleRound4Validation
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Character
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Promotion
+import DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact as Commutant
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneCount
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Existing
 import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact as Evaluation
@@ -25,6 +26,12 @@ heisenbergCharacterHasUnitNormNumerator :
   Character.heisenbergNormNumerator ≡ Character.extraspecialOrder
 heisenbergCharacterHasUnitNormNumerator =
   Character.heisenbergNormNumeratorIsExtraspecialOrder
+
+finiteSchrodingerCommutantIsScalar :
+  (matrix : Commutant.SchrodingerCommutantMatrix) →
+  Commutant.ScalarCommutantConclusion matrix
+finiteSchrodingerCommutantIsScalar =
+  Commutant.schrodingerCommutantIsScalar
 
 ninetyCopiesHaveActualPhaseDegree : 90 * 729 ≡ 65610
 ninetyCopiesHaveActualPhaseDegree = refl
