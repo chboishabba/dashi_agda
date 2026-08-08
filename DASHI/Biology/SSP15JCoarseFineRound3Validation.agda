@@ -8,7 +8,9 @@ import DASHI.Biology.JCoarseFineEvaluationFibreExact as J
 import DASHI.Biology.SSP15NineObserverAtlasExact as Atlas
 import DASHI.Biology.StageSymmetrySSP15BridgeExact as Bridge
 import DASHI.Biology.SSP15JCoarseFineIntegratedExact as Integrated
+import DASHI.Biology.SSP15PrimeValuedStateExact as Valued
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
+import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as D4
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -92,3 +94,17 @@ pointedSignedChainReachesFortySeven :
   Atlas.pointedSignedCardinalityValue 23 ≡ 47
 pointedSignedChainReachesFortySeven =
   Atlas.pointedSignedTwentyThreeIsFortySeven
+
+p71NeutralStateUsesA1 :
+  Valued.internalIrrepName Valued.p71A1Neutral ≡ D4.A1
+p71NeutralStateUsesA1 = Valued.p71A1NeutralIrrepNameIsA1
+
+p71CounterposedStateUsesA2 :
+  Valued.internalIrrepName Valued.p71A2Counterposed ≡ D4.A2
+p71CounterposedStateUsesA2 = Valued.p71A2CounterposedIrrepNameIsA2
+
+primeValuationSurvivesPhaseReversal :
+  (state : Valued.PrimeValuedSSP15State Lane.p71) →
+  Valued.primeValue (Valued.reversePrimeValuedPhase state)
+  ≡ Valued.primeValue state
+primeValuationSurvivesPhaseReversal = Valued.reversePhasePreservesPrimeValue
