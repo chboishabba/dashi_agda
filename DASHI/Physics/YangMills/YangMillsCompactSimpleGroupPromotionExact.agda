@@ -28,10 +28,13 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (length)
 
+data ExceptionalFamily : Set where
+  exceptionalG2 exceptionalF4 exceptionalE6 exceptionalE7 exceptionalE8 :
+    ExceptionalFamily
+
 data DynkinFamily : Set where
   familyA familyB familyC familyD : Nat → DynkinFamily
-  exceptionalG2 exceptionalF4 exceptionalE6 exceptionalE7 exceptionalE8 :
-    DynkinFamily
+  exceptional : ExceptionalFamily → DynkinFamily
 
 data CoverageStrength : Set where
   oneSU2Instance : CoverageStrength
@@ -73,7 +76,7 @@ requiredGroupData =
 requiredGroupDatumCountExact : length requiredGroupData ≡ 12
 requiredGroupDatumCountExact = refl
 
-exceptionalFamilies : List DynkinFamily
+exceptionalFamilies : List ExceptionalFamily
 exceptionalFamilies =
   exceptionalG2
   ∷ exceptionalF4
@@ -86,17 +89,14 @@ exceptionalFamilyCountExact : length exceptionalFamilies ≡ 5
 exceptionalFamilyCountExact = refl
 
 -- Standard dual Coxeter numbers in the long-root-squared-equals-two
--- normalization.  The table is data, not yet a proof of any analytic bound.
-dualCoxeterExceptional : DynkinFamily → Nat
+-- normalization.  This exact finite table is separate from the classical
+-- formulas and from every later analytic constant.
+dualCoxeterExceptional : ExceptionalFamily → Nat
 dualCoxeterExceptional exceptionalG2 = 4
 dualCoxeterExceptional exceptionalF4 = 9
 dualCoxeterExceptional exceptionalE6 = 12
 dualCoxeterExceptional exceptionalE7 = 18
 dualCoxeterExceptional exceptionalE8 = 30
-dualCoxeterExceptional (familyA n) = n
-dualCoxeterExceptional (familyB n) = n
-dualCoxeterExceptional (familyC n) = n
-dualCoxeterExceptional (familyD n) = n
 
 g2DualCoxeterExact : dualCoxeterExceptional exceptionalG2 ≡ 4
 g2DualCoxeterExact = refl
@@ -163,11 +163,11 @@ classicalIsNotAllCompactSimple :
 classicalIsNotAllCompactSimple ()
 
 exceptionalG2IsNotAType :
-  exceptionalG2 ≡ familyA 2 → ⊥
+  exceptional exceptionalG2 ≡ familyA 2 → ⊥
 exceptionalG2IsNotAType ()
 
 exceptionalE8IsNotAType :
-  exceptionalE8 ≡ familyA 8 → ⊥
+  exceptional exceptionalE8 ≡ familyA 8 → ⊥
 exceptionalE8IsNotAType ()
 
 record GroupUniformProofFamily : Set₁ where
