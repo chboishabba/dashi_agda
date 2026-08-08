@@ -74,7 +74,7 @@ if not classwiseReconstruction then
   Error("restriction constituents do not reconstruct every MN3B class value");
 fi;
 
-monsterClassNames := AtlasClassNames(monster);
+monsterClassNames := ClassNames(monster, "ATLAS");
 monster3BPosition := Position(monsterClassNames, "3B");
 if monster3BPosition = fail then
   Error("Monster table does not expose the ATLAS class name 3B");
