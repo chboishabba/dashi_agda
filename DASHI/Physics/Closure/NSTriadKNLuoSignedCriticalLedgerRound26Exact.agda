@@ -114,6 +114,20 @@ weightedLowerBoundary weightedUpperBoundary :
 weightedLowerBoundary C = criticalWeight C * lowerBoundarySource C
 weightedUpperBoundary C = criticalWeight C * upperBoundarySource C
 
+weightedShellBalance :
+  (C : SignedCriticalShellCell) →
+  weightedEnergyRate C + weightedDissipation C
+  ≡
+  weightedHH C + weightedLH C + weightedHL C + weightedCC C
+  + weightedCom C + weightedLowerBoundary C + weightedUpperBoundary C
+weightedShellBalance C
+  rewrite signedShellBalance C =
+  solve
+    ( criticalWeight C
+    ∷ HHsource C ∷ LHsource C ∷ HLsource C ∷ CCsource C
+    ∷ ComSource C ∷ lowerBoundarySource C ∷ upperBoundarySource C
+    ∷ [])
+
 sumWeightedEnergyRate : List SignedCriticalShellCell → ℚ
 sumWeightedEnergyRate [] = 0ℚ
 sumWeightedEnergyRate (C ∷ rest) =
@@ -167,12 +181,12 @@ finiteSignedCriticalLedgerExact :
   + sumWeightedUpperBoundary cells
 finiteSignedCriticalLedgerExact [] = solve []
 finiteSignedCriticalLedgerExact (C ∷ rest)
-  rewrite signedShellBalance C
+  rewrite weightedShellBalance C
         | finiteSignedCriticalLedgerExact rest =
   solve
-    ( criticalWeight C
-    ∷ HHsource C ∷ LHsource C ∷ HLsource C ∷ CCsource C
-    ∷ ComSource C ∷ lowerBoundarySource C ∷ upperBoundarySource C
+    ( weightedEnergyRate C ∷ weightedDissipation C
+    ∷ weightedHH C ∷ weightedLH C ∷ weightedHL C ∷ weightedCC C
+    ∷ weightedCom C ∷ weightedLowerBoundary C ∷ weightedUpperBoundary C
     ∷ sumWeightedEnergyRate rest ∷ sumWeightedDissipation rest
     ∷ sumWeightedHH rest ∷ sumWeightedLH rest ∷ sumWeightedHL rest
     ∷ sumWeightedCC rest ∷ sumWeightedCom rest
