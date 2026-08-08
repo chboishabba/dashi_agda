@@ -4,9 +4,9 @@ module DASHI.Moonshine.Monster3BHighestAlphaValidation where
 -- Cumulative kernel root for the Monster 3B highest-alpha lane.
 --
 -- This imports the exact arithmetic, phase transport, Heisenberg multiplicity,
--- elementary-abelian incidence, Leech weight-two, E8/3-local, and external-
--- computation boundary modules.  A generated GAP certificate is compiled
--- separately when available.
+-- elementary-abelian incidence, Leech weight-two, E8/3-local, actual
+-- Yang--Mills denominator, and external-computation boundary modules.
+-- A generated GAP certificate is compiled separately when available.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.Monster3BNormalizerBridge as Normalizer
@@ -16,6 +16,7 @@ import DASHI.Moonshine.Monster3BElementaryAbelianInvariantExact as Elementary
 import DASHI.Moonshine.Monster3BPhaseTransportExact as Transport
 import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as ThreeLocal
 import DASHI.Moonshine.LeechWeightTwo196608BridgeExact as Leech
+import DASHI.Moonshine.MonsterYangMills196608CrossLaneExact as CrossLane
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_)
@@ -39,6 +40,10 @@ threeLocalChartsAgreeWithNormalizerDegree = refl
 leechSubtotalAgreesWithDyadicBulk :
   Leech.leechCoordinateSubtotal ≡ Fourier.dyadicSymmetricBulk
 leechSubtotalAgreesWithDyadicBulk = refl
+
+actualWilsonDenominatorAgreesWithLeechSubtotal :
+  CrossLane.commonDenominator ≡ Leech.leechCoordinateSubtotal
+actualWilsonDenominatorAgreesWithLeechSubtotal = refl
 
 leechCompletionAgreesWithMoonshineWeightTwo :
   Leech.leechWeightTwoDimension
