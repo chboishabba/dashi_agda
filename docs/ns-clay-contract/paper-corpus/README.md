@@ -30,6 +30,7 @@ The workflow is:
 - `NSTriadKNLuoClaimRouteCrosswalkRound24Exact.agda`
 - `NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact.agda`
 - `DASHI/Papers/NavierStokes/ClaimCorpusHighestAlphaRound24.agda`
+- `DASHI/Papers/NavierStokes/CurrentTheoremInterfaceRound24.agda`
 
 ## Current authority boundary
 
