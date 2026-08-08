@@ -8,6 +8,7 @@ on:
       - 'agent/sporadic-stage-symmetry-euler-totalisation'
   pull_request:
     paths:
+      - 'DASHI/Core/Optional.agda'
       - 'DASHI/Biology/PointedTernaryBulkExact.agda'
       - 'DASHI/Biology/DecimalTenTernaryPresentationExact.agda'
       - 'DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda'
