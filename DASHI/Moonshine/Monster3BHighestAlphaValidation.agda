@@ -8,6 +8,7 @@ import DASHI.Moonshine.Monster3BNormalizerBridge as Normalizer
 import DASHI.Moonshine.Monster3BCyclicFourierDyadicBridgeExact as Fourier
 import DASHI.Moonshine.Monster3BHeisenbergMultiplicityExact as Heisenberg
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as Generators
+import DASHI.Moonshine.Monster3BFiniteHeisenbergPermutationExact as Permutations
 import DASHI.Moonshine.Monster3BElementaryAbelianInvariantExact as Elementary
 import DASHI.Moonshine.Monster3BPhaseTransportExact as Transport
 import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as ThreeLocal
@@ -91,3 +92,11 @@ sampleGeneratorWeylLaw :
       (Generators.modulationExponent Generators.axis2 state)
 sampleGeneratorWeylLaw =
   Generators.generatorWeylExponent Generators.axis2 Generators.axis2
+
+sampleTranslationPermutationLaw :
+  (state : Generators.X6) →
+  Generators.translateInverse Generators.axis4
+    (Generators.translate Generators.axis4 state)
+  ≡ state
+sampleTranslationPermutationLaw =
+  Permutations.translateInverseAfterTranslate Generators.axis4
