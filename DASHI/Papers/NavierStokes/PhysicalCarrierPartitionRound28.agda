@@ -10,6 +10,8 @@ record PhysicalCarrierPartitionRound28Status : Set where
   field
     commutingCarrierSelectorProved : Bool
     conjugateOutputFibresProved : Bool
+    finiteRationalLocalLipschitzProved : Bool
+    continuumRealPicardLindelofProduced : Bool
     dependentOwnerPartitionProved : Bool
     signedConstituentGroupingProved : Bool
     signedInteractionFibreProved : Bool
@@ -27,12 +29,24 @@ canonicalPhysicalCarrierPartitionRound28Status :
   PhysicalCarrierPartitionRound28Status
 canonicalPhysicalCarrierPartitionRound28Status =
   physical-carrier-partition-round28-status
-    true true true true true true true true true false false false
+    true true true false
+    true true true true true true true
+    false false false
 
 carrierPartitionAdvanced :
   commutingCarrierSelectorProved
     canonicalPhysicalCarrierPartitionRound28Status ≡ true
 carrierPartitionAdvanced = refl
+
+finiteLocalLipschitzAlgebraAdvanced :
+  finiteRationalLocalLipschitzProved
+    canonicalPhysicalCarrierPartitionRound28Status ≡ true
+finiteLocalLipschitzAlgebraAdvanced = refl
+
+continuumPicardLindelofStillOpen :
+  continuumRealPicardLindelofProduced
+    canonicalPhysicalCarrierPartitionRound28Status ≡ false
+continuumPicardLindelofStillOpen = refl
 
 signedCancellationArchitectureAdvanced :
   signedConstituentGroupingProved
