@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_/_)
 
 centralPhaseInversionIsInvolutive :
   (phase : Inertia.CentralPhase3) →
@@ -97,8 +98,6 @@ actualReplacementPlusThreeIsImpossible =
 actualEarningChainReaches196883 :
   (((7 * 11 * 23) / 23 * 47) / 7 * 59) / 11 * 71 ≡ 196883
 actualEarningChainReaches196883 = Probe.actualFractranEarningChain
-  where
-    open import Data.Nat.Base using (_/_)
 
 earnedProductAdjoinsOneTo196884 : 47 * 59 * 71 + 1 ≡ 196884
 earnedProductAdjoinsOneTo196884 = Probe.earnedPrimeProductPlusOneIs196884
