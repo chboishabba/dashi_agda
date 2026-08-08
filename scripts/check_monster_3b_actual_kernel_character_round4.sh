@@ -15,7 +15,9 @@ command -v gap >/dev/null 2>&1 || {
 
 mkdir -p build/generated/DASHI/Moonshine/Generated
 
-python -m py_compile scripts/render_monster_3b_actual_kernel_certificate.py
+python -m py_compile \
+  scripts/render_monster_3b_certificate.py \
+  scripts/render_monster_3b_actual_kernel_certificate.py
 
 gap -q scripts/monster_3b_normalizer_restriction.g
 gap -q scripts/monster_3b_actual_kernel_structure.g
@@ -23,18 +25,32 @@ gap -q scripts/monster_3b_actual_kernel_structure.g
 test -s build/monster_3b_normalizer_restriction.json
 test -s build/monster_3b_actual_kernel_structure.json
 
+python scripts/render_monster_3b_certificate.py \
+  build/monster_3b_normalizer_restriction.json \
+  build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
+
 python scripts/render_monster_3b_actual_kernel_certificate.py \
   build/monster_3b_actual_kernel_structure.json \
   build/monster_3b_normalizer_restriction.json \
   build/monster_3b_actual_kernel_character_certificate.json \
   build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
 
+test -s build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
 test -s build/monster_3b_actual_kernel_character_certificate.json
 test -s build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
 
 python - <<'PY'
 import json
 from pathlib import Path
+
+restriction = json.loads(Path(
+    "build/monster_3b_normalizer_restriction.json"
+).read_text())
+assert restriction["centre_trivial_constituent_degree_total"] == 65663
+assert restriction["phase_pair_constituent_degree_total"] == 131220
+assert restriction["phase_pair_heisenberg_degree"] == 1458
+assert restriction["phase_pair_multiplicity_degrees"] == [12, 78]
+assert restriction["twelve_plus_seventy_eight_degree_split_certified"] is True
 
 payload = json.loads(Path(
     "build/monster_3b_actual_kernel_character_certificate.json"
@@ -52,8 +68,16 @@ assert payload["extraspecial_structure_certified"] is True
 assert payload["heisenberg_degree"] == 729
 assert payload["heisenberg_multiplicity"] == 90
 assert payload["zeta_degree_reconstruction"] == 65610
+assert payload["centre_trivial_total"] == 65663
+assert payload["phase_pair_total"] == 131220
+assert payload["phase_pair_heisenberg_degree"] == 1458
+assert payload["first_multiplicity_degree"] == 12
+assert payload["second_multiplicity_degree"] == 78
+assert payload["first_phase_pair_degree"] == 17496
+assert payload["second_phase_pair_degree"] == 113724
+assert payload["actual_multiplicity_degree_split_certified"] is True
 assert payload["actual_multiplicity_character_computed"] is False
-assert payload["twelve_plus_seventy_eight_proved"] is False
+assert payload["twelve_plus_seventy_eight_character_equality_proved"] is False
 PY
 
 sources=(
@@ -101,6 +125,11 @@ cocycle=DASHI/Moonshine/Monster3BNormalizerCocycleCancellationExact.agda
 safe=DASHI/Moonshine/Monster3BMultiplicityCharacterSafeReconstructionExact.agda
 validation=DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda
 reference=Docs/support/reference/Monster3BActualKernelCharacterRound4.md
+gap_producer=scripts/monster_3b_normalizer_restriction.g
+renderer=scripts/render_monster_3b_certificate.py
+actual_renderer=scripts/render_monster_3b_actual_kernel_certificate.py
+restriction_generated=build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
+actual_generated=build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
 
 require_pattern "$character" 'extraspecialCharacterDegreeSquareSumIsOrder'
 require_pattern "$character" 'heisenbergNormNumeratorIsExtraspecialOrder'
@@ -138,6 +167,17 @@ require_pattern "$validation" 'finiteSchrodingerCommutantIsScalar'
 require_pattern "$validation" 'finiteHeisenbergProjectionIsZeroOrIdentity'
 require_pattern "$validation" 'stoneVonNeumannMultiplicityIsUnique'
 require_pattern "$validation" 'actualEvaluationPromotionAvailable'
+require_pattern "$gap_producer" '2 * centralValue = -constituentDegree'
+require_pattern "$gap_producer" 'phaseMultiplicityDegrees <> [12, 78]'
+require_pattern "$gap_producer" 'twelve_plus_seventy_eight_degree_split_certified'
+require_pattern "$renderer" 'multiplicityDegreeSplitCertificate'
+require_pattern "$renderer" 'twelvePlusSeventyEightDegreeSplitCertified'
+require_pattern "$actual_renderer" 'actual_multiplicity_degree_split_certified'
+require_pattern "$actual_renderer" 'twelve_plus_seventy_eight_character_equality_proved'
+require_pattern "$restriction_generated" 'firstPhasePairDegreeCertificate'
+require_pattern "$restriction_generated" 'twelvePlusSeventyEightDegreeSplitCertified'
+require_pattern "$actual_generated" 'actualMultiplicityDegreeSplitCertified'
+require_pattern "$actual_generated" 'twelvePlusSeventyEightCharacterEqualityProved = false'
 require_pattern "$reference" 'actual AtlasRep'
 require_pattern "$reference" 'pointwise division'
 
@@ -148,10 +188,13 @@ test ! -e DASHI/Moonshine/Monster3BActualMultiplicityIntertwinerExact.agda
 scripts/run_agda29_parallel_check.sh \
   DASHI/Moonshine/Monster3BActualKernelCharacterRound4Validation.agda
 
-# Typecheck the generated certificate through the same pinned Agda 2.9 path.
+# Typecheck both generated certificates through the pinned Agda 2.9 path.
 mkdir -p DASHI/Moonshine/Generated
-cp build/generated/DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda \
+cp "$restriction_generated" \
+  DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
+cp "$actual_generated" \
   DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
-trap 'rm -f DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda' EXIT
+trap 'rm -f DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda' EXIT
 scripts/run_agda29_parallel_check.sh \
+  DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda \
   DASHI/Moonshine/Generated/Monster3BActualKernelCertificate.agda
