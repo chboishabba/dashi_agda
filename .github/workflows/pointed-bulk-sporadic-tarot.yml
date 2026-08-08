@@ -18,16 +18,21 @@ on:
       - 'DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda'
       - 'DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda'
       - 'DASHI/Biology/StageSymmetrySSP15BridgeExact.agda'
+      - 'DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda'
+      - 'DASHI/Biology/ImageHexagramSSP15MDLExact.agda'
       - 'DASHI/Biology/SporadicStageSymmetryTarotRegression.agda'
       - 'DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotEverything.agda'
       - 'DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda'
+      - 'DASHI/Foundations/BalancedTernaryAmplitudeClosureExact.agda'
       - 'DASHI/Foundations/BalancedTernaryUltrametricExact.agda'
       - 'DASHI/Foundations/StageSymmetryCarrierTowerExact.agda'
       - 'DASHI/Foundations/DialecticSheetFrameSelectorExact.agda'
+      - 'DASHI/Foundations/FrameWitnessFibreMDLExact.agda'
       - 'DASHI/Foundations/DialecticCubieTetralemmaExact.agda'
       - 'DASHI/Foundations/SecondRevolutionJankoTarotExact.agda'
+      - 'DASHI/Moonshine/DepthTwoNonaryResidueFibreExact.agda'
       - 'DASHI/Moonshine/EulerMonsterMeaningSeparationExact.agda'
       - 'DASHI/Governance/CabarlahTraumaProjectionBridgeExact.agda'
       - 'DASHI/Governance/Everything.agda'
@@ -63,7 +68,7 @@ jobs:
           test -x "$agda_bin"
           "$agda_bin" --version
           printf 'AGDA_BIN=%s\n' "$agda_bin" >> "$GITHUB_ENV"
-      - name: Check pointed bulk, totalised Tarot, stage symmetry, and Euler boundaries
+      - name: Check amplitudes, witness fibres, SSP15 spectra, residues, and Tarot boundaries
         env:
           DASHI_REPO_ROOT: ${{ github.workspace }}
           DASHI_AGDA29_EPHEMERAL: '1'
@@ -93,4 +98,4 @@ jobs:
 
           gh pr comment "$pr_number" \
             --repo "$GITHUB_REPOSITORY" \
-            --body "Pointed bulk / totalised sporadic Tarot / stage-symmetry Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
+            --body "Pointed bulk / amplitude / witness-fibre / SSP15 / depth-two Agda kernel check ${CHECK_STATUS} on ${GITHUB_SHA} (workflow run ${GITHUB_RUN_ID})."
