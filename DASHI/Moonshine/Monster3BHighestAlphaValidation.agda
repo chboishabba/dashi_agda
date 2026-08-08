@@ -2,11 +2,6 @@ module DASHI.Moonshine.Monster3BHighestAlphaValidation where
 
 ------------------------------------------------------------------------
 -- Cumulative kernel root for the Monster 3B highest-alpha lane.
---
--- This imports the exact arithmetic, phase transport, Heisenberg multiplicity,
--- elementary-abelian incidence, Leech weight-two, E8/3-local, actual
--- Yang--Mills denominator, and external-computation boundary modules.
--- A generated GAP certificate is compiled separately when available.
 ------------------------------------------------------------------------
 
 import DASHI.Moonshine.Monster3BNormalizerBridge as Normalizer
@@ -20,10 +15,6 @@ import DASHI.Moonshine.MonsterYangMills196608CrossLaneExact as CrossLane
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_)
-
-------------------------------------------------------------------------
--- Cross-module exact endpoints.
-------------------------------------------------------------------------
 
 normalizerAndFourierAgreeOnNontrivialMultiplicity :
   Normalizer.nontrivialPhaseDegree ≡ Fourier.zeta Fourier.monsterW3B
@@ -69,10 +60,17 @@ phaseTransportPreservesNontrivialDegree :
   ≡ Fourier.zetaSquared Fourier.monsterW3B
 phaseTransportPreservesNontrivialDegree = refl
 
-elementaryAbelianStrataReconstructGrassmannian :
-  Elementary.isotropicTwoPlaneCount + Elementary.symplecticTwoPlaneCount
-  ≡ Elementary.allTwoPlaneCount
-elementaryAbelianStrataReconstructGrassmannian = refl
+fixedLagrangianRestrictionReconstructsSchrodingerDegree :
+  Elementary.regularCharacterMultiplicity
+  * Elementary.translationPlaneOrder
+  ≡ Elementary.schrodingerDimension
+fixedLagrangianRestrictionReconstructsSchrodingerDegree = refl
+
+fullSymplecticPlaneStrataReconstructGrassmannian :
+  Elementary.fullIsotropicTwoPlaneCount
+  + Elementary.fullNonIsotropicTwoPlaneCount
+  ≡ Elementary.fullTwoPlaneCount
+fullSymplecticPlaneStrataReconstructGrassmannian = refl
 
 plusMinusExtraspecialDegreesAgree :
   Heisenberg.nonlinearCharacterDegree Heisenberg.plusType
