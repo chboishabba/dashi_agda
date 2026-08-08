@@ -10,13 +10,14 @@ module DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact where
 --
 -- Scott Carnahan,
 -- "51 constructions of the Moonshine module",
--- arXiv:1707.02954; no DOI assigned in this file.
+-- Communications in Number Theory and Physics 12 (2018), 305--334.
+-- DOI: 10.4310/CNTP.2018.v12.n2.a3; arXiv:1707.02954.
 --
 -- Michael P. Tuite,
 -- "On the relationship between monstrous Moonshine and the uniqueness of the
 -- Moonshine module",
 -- Communications in Mathematical Physics 166 (1995), 495--532.
--- arXiv:math/0506321; DOI not asserted here.
+-- DOI: 10.1007/BF02099885; arXiv:hep-th/9305057.
 --
 -- DASHI CONTRIBUTION
 --
