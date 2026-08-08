@@ -92,6 +92,12 @@ named character consequences.  The finite Stone--von Neumann theorem is the
 mathematical theorem that turns the central-character condition into this
 signature; it is not replaced by dimension arithmetic.
 
+`Monster3BFiniteStoneVonNeumannMultiplicityExact.agda` additionally proves on a
+literal finite constituent list that once Stone--von Neumann classifies every
+selected-central-character irreducible as degree `729`, total degree `65610`
+forces exactly `90` constituents.  Thus the multiplicity is derived by natural-
+number cancellation rather than stored as a proposed factor.
+
 ## Actual multiplicity-space interface
 
 `Monster3BActualMultiplicityIntertwinerExact.agda` requires an actual evaluation
@@ -190,3 +196,5 @@ AGDA_JOBS=2 bash scripts/check_monster_3b_actual_kernel_character_round4.sh
 The checker is fail closed: GAP, CTblLib, AtlasRep, the actual group
 computation, class alignment, generated certificate, and pinned Agda 2.9 checks
 are mandatory.
+
+<!-- Disposable validation-root change for the PR-associated Round-4 workflow. -->
