@@ -14,6 +14,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Papers.NavierStokes.TheoremInterface as Base
+import DASHI.Papers.NavierStokes.CurrentTheoremInterfaceRound24 as R24
 import DASHI.Papers.NavierStokes.CurrentTheoremInterfaceRound25 as R25
 import DASHI.Papers.NavierStokes.GalerkinCriticalLedgerRound26 as R26
 
@@ -47,7 +48,7 @@ record CurrentNSPaperTheoremInterfaceRound26 : Setω where
 
     clayPromotionStillFalse :
       Base.clayTerminalPromotion
-        (R25.R24.baseInterface
+        (R24.baseInterface
           (R25.round24Interface round25Interface))
       ≡ false
 
@@ -79,7 +80,7 @@ currentRound26TaxOwnershipChecked = R26.taxOwnershipAdvanced
 
 currentRound26ClayPromotionFalse :
   Base.clayTerminalPromotion
-    (R25.R24.baseInterface
+    (R24.baseInterface
       (R25.round24Interface
         (round25Interface canonicalCurrentNSPaperTheoremInterfaceRound26)))
   ≡ false
