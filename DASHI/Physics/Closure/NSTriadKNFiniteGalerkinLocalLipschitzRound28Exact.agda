@@ -89,25 +89,26 @@ atomLipschitzWeight radius
 
 atomLipschitzWeightNonnegative :
   (radius : ℚ) →
+  0ℚ ≤ radius →
   (atom : Polynomial.GalerkinCoordinateAtom) →
   0ℚ ≤ atomLipschitzWeight radius atom
-atomLipschitzWeightNonnegative radius
+atomLipschitzWeightNonnegative radius radiusNN
   (Polynomial.viscousLinear output component coefficient) =
   ℚₚ.0≤∣p∣ coefficient
-atomLipschitzWeightNonnegative radius
+atomLipschitzWeightNonnegative radius radiusNN
   (Polynomial.resonantBilinear triad left right coefficient) =
   ℚₚ.nonNegative⁻¹
     (∣ coefficient ∣ * (radius + radius))
   where
-  postulate-free-radius-sum : 0ℚ ≤ radius + radius
-  postulate-free-radius-sum = ℚₚ.+-mono-≤ ℚₚ.≤-refl ℚₚ.≤-refl
+  radiusSumNonnegative : 0ℚ ≤ radius + radius
+  radiusSumNonnegative = ℚₚ.+-mono-≤ radiusNN radiusNN
 
   instance
     coefficientNN : NonNegative ∣ coefficient ∣
     coefficientNN = ℚₚ.∣-∣-nonNeg coefficient
 
     radiusSumNN : NonNegative (radius + radius)
-    radiusSumNN = nonNegative postulate-free-radius-sum
+    radiusSumNN = nonNegative radiusSumNonnegative
 
 atomDifferenceAbsoluteBound :
   (radius delta : ℚ) →
@@ -292,9 +293,10 @@ coordinateRightHandSideLocalLipschitz
       lower
       ≤ atomsLipschitzWeight radius
           (Polynomial.rightHandSideAtoms equation) * delta)
-    (cong ∣_∣
-      (Polynomial.coordinateRightHandSideDifference
-        equation state reference))
+    (sym
+      (cong ∣_∣
+        (Polynomial.coordinateRightHandSideDifference
+          equation state reference)))
     (finiteAtomsDifferenceAbsoluteBound
       radius delta radiusNN deltaNN
       (Polynomial.rightHandSideAtoms equation)
