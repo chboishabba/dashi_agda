@@ -1,6 +1,7 @@
 module DASHI.Foundations.CounterpositionOrderedJoinExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Core.ListExact public
 
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact as Amp
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
@@ -28,10 +29,6 @@ binaryEmbeddingNeverNeutral :
   embedBinaryOrientation orientation ≡ BT.zeroDigit → ⊥
 binaryEmbeddingNeverNeutral Sym.direct ()
 binaryEmbeddingNeverNeutral Sym.inverse ()
-
-------------------------------------------------------------------------
--- A counterposition is context-generated; full inverse is one context only.
-------------------------------------------------------------------------
 
 data CounterContext : Set where
   invertAll rejectFirst rejectSecond rejectThird reindexFirstSecond :
@@ -71,11 +68,6 @@ partialCounterpositionIsNotFullInverse :
   → ⊥
 partialCounterpositionIsNotFullInverse ()
 
-------------------------------------------------------------------------
--- Lower/upper order and the unresolved coordinate remain observable even when
--- the scalar joined amplitude agrees.
-------------------------------------------------------------------------
-
 record OrderedTriadJoin : Set where
   constructor orderedTriadJoin
   field
@@ -105,11 +97,6 @@ orderedStageFiveJoinsDiffer :
   stageFiveLowerThenUpper ≡ stageFiveUpperThenLower → ⊥
 orderedStageFiveJoinsDiffer ()
 
-------------------------------------------------------------------------
--- The four-state square carrier and its eight geometric transformation codes
--- are different finite objects.  This is the C2 x C2 versus D4 distinction.
-------------------------------------------------------------------------
-
 data SquareMove : Set where
   identityMove quarterTurn halfTurn threeQuarterTurn
     horizontalReflection verticalReflection
@@ -138,10 +125,6 @@ allSquareMoves =
   identityMove ∷ quarterTurn ∷ halfTurn ∷ threeQuarterTurn
   ∷ horizontalReflection ∷ verticalReflection
   ∷ mainDiagonalReflection ∷ antiDiagonalReflection ∷ []
-
-listCount : ∀ {A : Set} → List A → Nat
-listCount [] = 0
-listCount (_ ∷ xs) = 1 + listCount xs
 
 squareMoveCountIsEight : listCount allSquareMoves ≡ 8
 squareMoveCountIsEight = refl
