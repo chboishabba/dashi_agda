@@ -21,7 +21,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚₚ
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 terminalSample : ℚ → List ℚ → ℚ
 terminalSample current [] = current
@@ -91,8 +91,6 @@ multiplierEndpointMagnitudeBound current path =
       ∣ difference ∣ ≤ stepMagnitudeSum current path)
     (multiplierDifferenceIsSignedPathSum current path)
     (signedPathMagnitudeBound current path)
-  where
-  open import Relation.Binary.PropositionalEquality using (subst)
 
 discreteMultiplierTelescopingClosed : Bool
 discreteMultiplierTelescopingClosed = true
