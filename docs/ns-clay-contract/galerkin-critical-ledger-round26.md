@@ -4,7 +4,7 @@
 
 Round 25 proved that every literal cutoff resonant interaction belongs to exactly one physical support class. Round 26 applies the same fail-closed discipline to the next layer: finite Galerkin algebra, physical signed-shell assembly and analytic tax ownership.
 
-This round does **not** prove global regularity. It does not instantiate continuum Picard–Lindelöf, produce the time-dependent physical shell balance, prove a cutoff-uniform nonlinear estimate, or prove the strict viscosity margin.
+This round does **not** prove global regularity. It does not instantiate finite normed Picard–Lindelöf, produce the time-dependent physical shell balance, prove a cutoff-uniform nonlinear estimate, or prove the strict viscosity margin.
 
 ## Exact advances
 
@@ -18,9 +18,9 @@ For each bilinear atom the exact identity
 xy - uv = (x-u)y + u(y-v)
 ```
 
-is proved and lifted to finite sums. This is the algebraic input to a local-Lipschitz estimate on a normed real coordinate space; it is not itself the continuum-real ODE theorem.
+is proved and lifted to finite sums. This is the algebraic input to a local-Lipschitz estimate on a normed real coordinate space; it is not itself the finite ODE theorem.
 
-### Reality reconstruction rather than an independent constraint
+### Reality reconstruction and exact conjugate transversality
 
 `NSTriadKNLuoRealityTransversePhaseSpaceRound26Exact.agda` stores one coefficient for each selected positive reality orbit and reconstructs
 
@@ -29,7 +29,9 @@ mode(-)  = -mode(+),
 value(-) = conjugate(value(+)).
 ```
 
-Reality is therefore structural. Negative-mode transversality follows from an explicit `ConjugateTransversalityLaw`; that law still needs a concrete continuum-real instance.
+Reality is therefore structural. The same module now proves that the reconstructed negative coefficient is transverse on the exact Complex3 carrier. The proof combines mode negation and mode reality with bilinear-dot commutativity, bilinear-dot negation, conjugation of the bilinear dot, and conjugation/negation of zero.
+
+Thus the remaining L3 issue is analytic ODE construction, not propagation of the algebraic reality or transversality invariant.
 
 ### Physical and scalar triadwise energy cancellation
 
@@ -208,16 +210,15 @@ The Python script also exhaustively checks the finite commutator identity and si
 
 Round 26 has not proved:
 
-1. a concrete continuum-real `ConjugateTransversalityLaw`;
-2. Picard–Lindelöf for the literal real finite phase space;
-3. global finite Galerkin existence from the physical energy identity;
-4. the physical time-dependent filtered-vorticity shell balance and its boundary atoms;
-5. any cutoff-independent classwise tax;
-6. the periodic principal-value strain kernel and Calderón–Zygmund estimates;
-7. the PDE positive-variation budget;
-8. the strict total coefficient `η_total < 1`;
-9. shell or Galerkin limit passage;
-10. unconditional periodic Navier–Stokes regularity.
+1. Picard–Lindelöf for the literal finite normed real phase space;
+2. global finite Galerkin existence from the physical energy identity;
+3. the physical time-dependent filtered-vorticity shell balance and its boundary atoms;
+4. any cutoff-independent classwise tax;
+5. the periodic principal-value strain kernel and Calderón–Zygmund estimates;
+6. the PDE positive-variation budget;
+7. the strict total coefficient `η_total < 1`;
+8. shell or Galerkin limit passage;
+9. unconditional periodic Navier–Stokes regularity.
 
 ## Highest-alpha next step
 
