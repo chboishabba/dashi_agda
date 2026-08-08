@@ -24,6 +24,7 @@ module DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 ------------------------------------------------------------------------
 -- Two legitimate recovery methods.
@@ -76,9 +77,7 @@ classRowReconstructsAmbient :
   heisenbergTrace row * multiplicityTrace row ≡ ambientTrace row
 classRowReconstructsAmbient row with recoveryKind row
 ... | quotientOnNonzeroTrace = quotientEquation row refl
-... | independentClassEquation =
-  let open import Relation.Binary.PropositionalEquality using (sym)
-  in sym (independentEquation row refl)
+... | independentClassEquation = sym (independentEquation row refl)
 
 ------------------------------------------------------------------------
 -- Finite class-table reconstruction.
