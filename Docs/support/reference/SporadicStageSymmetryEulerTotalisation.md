@@ -1,6 +1,6 @@
 # Balanced stage symmetry, JMD totalisation, and Euler/Monster separation
 
-This tranche extends the source-faithful JMD v2 transcription without rewriting it.  The poster remains a partial source object:
+This tranche extends the source-faithful JMD v2 transcription without rewriting it. The poster remains a partial source object:
 
 ```text
 21 actual sporadic assignments
@@ -8,7 +8,7 @@ This tranche extends the source-faithful JMD v2 transcription without rewriting 
 + 5 omitted actual sporadic groups.
 ```
 
-A second, explicitly named **family-compression totalisation** now supplies one concrete total map from all 26 sporadic groups to the 22 Major Arcana.  It preserves all 21 displayed actual-group assignments, assigns the five omissions with written rationales and `declaredSymbolicAuthority`, and exposes all collisions.  It is neither source-forced nor unique.
+A second, explicitly named **family-compression totalisation** supplies one concrete total map from all 26 sporadic groups to the 22 Major Arcana. It preserves all 21 displayed actual-group assignments, assigns the five omissions with written rationales and `declaredSymbolicAuthority`, and exposes all collisions. It is neither source-forced nor unique.
 
 ## 1. Nomenclature and ordinal block structure
 
@@ -33,11 +33,11 @@ mathematical referent fit
 narrative fit.
 ```
 
-In particular, the Janko block has maximal ordinal fit but only weak mathematical forcing of the card narratives.
+The Janko block therefore has maximal ordinal fit but only weak mathematical forcing of its card narratives.
 
 ## 2. Concrete totalisation
 
-The total policy is:
+The declared total policy is:
 
 ```text
 Fi22  -> Strength
@@ -47,7 +47,7 @@ He    -> Tower
 HN    -> Sun.
 ```
 
-The first fills the actual-group vacancy hidden by synthetic `Co4`.  The remaining four are declared family-compression collisions:
+The first fills the actual-group vacancy hidden by synthetic `Co4`. The remaining four are declared family-compression collisions:
 
 ```text
 Fi23  / Baby Monster -> Judgement
@@ -56,7 +56,7 @@ He    / Suz          -> Tower
 HN    / Th           -> Sun.
 ```
 
-These are symbolic choices with rationales, not group-theoretic identities.  The original `jmdV2Assignment` continues to report all five as source omissions.
+These are symbolic choices with rationales, not group-theoretic identities. The original `jmdV2Assignment` continues to report all five as source omissions.
 
 ## 3. Balanced ternary and retained Stage-5 constituents
 
@@ -66,7 +66,7 @@ These are symbolic choices with rationales, not group-theoretic identities.  The
 {-1, 0, +1}.
 ```
 
-The amplitude is stored only as a projection.  The checked examples are:
+The amplitude is stored only as a projection. Checked examples include:
 
 ```text
 +++ -> positive balance (3,0)
@@ -87,13 +87,13 @@ The central carry equations are division-free:
 3^2 = 9.
 ```
 
-Stage 5 is therefore not represented by the scalar `5` alone.  Its literal constituent is:
+Stage 5 is not represented by the scalar `5` alone. Its literal constituent is:
 
 ```text
 (+++) dot (++0).
 ```
 
-The `5 -> 3` fallback is implemented as a coarse retraction to the completed `+++` constituent while preserving `++0` as a residual fibre.  A proof field records that the residual is not erased.
+The `5 -> 3` fallback is a coarse retraction to the completed `+++` constituent while preserving `++0` as a residual fibre. A proof field records that the residual is not erased.
 
 ## 4. Symmetry type versus amplitude
 
@@ -107,18 +107,18 @@ C2 x C3        : six-state content-orientation carrier
 C3 x C3        : nine-state comparison carrier.
 ```
 
-The exact cardinalities are `2`, `4`, `3`, `6`, and `9`.  Six retains both readings:
+The exact cardinalities are `2`, `4`, `3`, `6`, and `9`. Six retains both readings:
 
 ```text
 6 = 2 * 3
 6 = 9 - 3.
 ```
 
-At Stage 5 the completed `+++` triad has an `S3` stabiliser tag, while `++0` has only the pair `S2` stabiliser.  The decision coordinate is precisely the distinguished open line.
+At Stage 5 the completed `+++` triad has an `S3` stabiliser tag, while `++0` has only the pair `S2` stabiliser. The decision coordinate is the distinguished open line.
 
-Counterposition is also separated from inverse.  Full digitwise inversion of `+++` is `---`, while the concrete counterposition `++-` is proved unequal to that inverse.
+Counterposition is separated from inverse. Full digitwise inversion of `+++` is `---`, while the concrete counterposition `++-` is proved unequal to that inverse.
 
-## 5. Balanced radix tree and 3/6/9 charts
+## 5. Balanced radix tree, ultrametric, and 3/6/9 charts
 
 Five and six receive balanced addresses:
 
@@ -127,7 +127,7 @@ Five and six receive balanced addresses:
 6 = (1,-1, 0)_3, represented by 6 + 3 = 9.
 ```
 
-They share the high-order prefix `(1,-1)` and diverge only at the final digit.  `SharedPrefixWitness` records that retained prefix as an ultrametric witness rather than flattening the states to integers.
+They share the high-order prefix `(1,-1)` and diverge only at the final digit. `BalancedTernaryUltrametricExact.agda` proves symmetry and transitivity of prefix agreement, constructs prefix balls, and proves that the five and six addresses agree through depth two. This is the exact valuation-depth form of the ternary ultrametric; a real-valued metric is not falsely claimed, and suffix constituents remain retained.
 
 The simultaneous closure profiles record:
 
@@ -136,7 +136,7 @@ The simultaneous closure profiles record:
 6 = 2*3 + 0,  6+0=6,  6+3=9.
 ```
 
-## 6. Image, hexagram, frame selector, and SSP15
+## 6. Image, hexagram, and frame selector
 
 `DialecticSheetFrameSelectorExact.agda` separates:
 
@@ -157,26 +157,36 @@ synthesis affirmation
 glue proof.
 ```
 
-It does not return only a Boolean.  A finite regression selects a frame in which the two conditions and their synthesis are jointly inhabited.
+It does not return only a Boolean. A finite regression selects a frame in which the two conditions and their synthesis are jointly inhabited.
 
-Image features are typed receipts projected through an explicit context into a hexagram.  Tarot supplies a downstream candidate frame.  Both external prediction and universal-truth promotion are blocked.
+Image features are typed receipts projected through an explicit context into a hexagram. Tarot supplies a downstream candidate frame. Both external prediction and universal-truth promotion are blocked.
 
-The SSP15 signature is indexed by the 15 Ogg-prime lanes:
+## 7. Reused SSP15/Ogg multiscale signature
+
+`StageSymmetrySSP15BridgeExact.agda` reuses, rather than redefines, the repository's established:
+
+```text
+MoonshinePrimeLaneReceiptSurface.MonsterPrimeLane
+SupersingularPrimeLaneBridge.canonicalSupersingularPrimeLaneNats
+MonsterOggPrimeCorrectionReceipt.
+```
+
+The SSP15 signature is indexed by the existing 15 Ogg/Monster-prime lanes:
 
 ```text
 2,3,5,7,11,13,17,19,23,29,31,41,47,59,71.
 ```
 
-Each lane retains projected pattern, stabiliser, status, and residual flag.
+Each lane retains projected pattern, stabiliser, status, and residual flag. The bridge proves that existing prime infrastructure was reused, that a lane does not replace the underlying carrier, and that no physical-Moonshine claim follows.
 
-## 7. The exact 71 and 54/53 arithmetic
+## 8. The exact 71 and 54/53 arithmetic
 
 The tranche proves:
 
 ```text
 9^2 = 81
 10 + 71 = 81
-71 is the declared Ogg-71 lane.
+71 is the existing p71 Ogg/Monster-prime lane.
 ```
 
 It does not construct an invariant 71-dimensional complement or Monster action.
@@ -192,7 +202,7 @@ It also records:
 
 The authority boundary states that the mod-81 equations are derived coordinate compatibility, not independent evidence for the previously selected `10*3^9 + 54/53` chart and not a canonical 81-block module decomposition.
 
-## 8. Dual 9/10 indexing and the Janko block
+## 9. Dual 9/10 indexing and the Janko block
 
 `SecondRevolutionJankoTarotExact.agda` proves that every global address 11 through 14 has two simultaneous charts:
 
@@ -203,9 +213,9 @@ The authority boundary states that the mod-81 equations are derived coordinate c
 14 = 10+4 = 9+5.
 ```
 
-It maps the local offsets to `J1..J4` and to Justice, Hanged Man, Death, and Temperance exactly as displayed by JMD.  The arithmetic and poster index facts are exact; identification of a stage carrier with a Janko group and derivation of Tarot narrative from group theory remain false.
+It maps the local offsets to `J1..J4` and to Justice, Hanged Man, Death, and Temperance exactly as displayed by JMD. The arithmetic and poster-index facts are exact; identification of a stage carrier with a Janko group and derivation of Tarot narrative from group theory remain false.
 
-## 9. Euler and Monster meanings
+## 10. Euler and Monster meanings
 
 `EulerMonsterMeaningSeparationExact.agda` separates:
 
@@ -217,9 +227,9 @@ graded Euler supertrace
 ordinary Moonshine graded trace.
 ```
 
-A finite `1,2,1` complex has equal even and odd totals.  The ordinary Moonshine weight-two identity trace is separately recorded as `196884`, with `196883+1=196884`.
+A finite `1,2,1` complex has equal even and odd totals. The ordinary Moonshine weight-two identity trace is separately recorded as `196884`, with `196883+1=196884`.
 
-A genuine Euler/Moonshine bridge would require a parity-graded complex, a square-zero differential, a group action commuting with that differential, and a proved equality between equivariant supertrace and Moonshine trace.  No such bridge is fabricated here.
+A genuine Euler/Moonshine bridge would require a parity-graded complex, a square-zero differential, a group action commuting with that differential, and a proved equality between equivariant supertrace and Moonshine trace. No such bridge is fabricated here.
 
 ## Validation
 
@@ -235,4 +245,4 @@ and the focused checker remains:
 AGDA_JOBS=1 bash scripts/check_pointed_bulk_sporadic_tarot.sh
 ```
 
-The checker rejects holes, postulates, unsafe options, and placeholders; checks the retained-residual, symmetry, Ogg, totalisation, Janko, selector, and Euler authority markers; and invokes the pinned Agda 2.9 root.  Kernel acceptance is claimed only after an observed successful workflow run.
+The checker rejects holes, postulates, unsafe options, and placeholders; checks the retained-residual, ultrametric, symmetry, reused SSP15/Ogg, totalisation, Janko, selector, and Euler authority markers; and invokes the pinned Agda 2.9 roots. Kernel acceptance is claimed only after an observed successful workflow run.
