@@ -12,7 +12,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoClaimCorpusHighestAlphaRound24Validatio
 -- * an exact restricted-class versus universal-theorem separation;
 -- * a source-route to physical-lemma crosswalk;
 -- * the dependency-ordered L0--L23 highest-alpha ladder;
--- * a paper-facing fail-closed status surface.
+-- * paper-facing and normalized current fail-closed status surfaces.
 --
 -- No source claim is promoted to proof authority.  The corpus is not declared
 -- exhaustive.  The physical producers and unconditional Clay theorem remain
@@ -28,3 +28,4 @@ import DASHI.Physics.Closure.NSTriadKNLuoRestrictedClassDoesNotYieldClayBExact
 import DASHI.Physics.Closure.NSTriadKNLuoClaimRouteCrosswalkRound24Exact
 import DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaClayLemmaLadderRound24Exact
 import DASHI.Papers.NavierStokes.ClaimCorpusHighestAlphaRound24
+import DASHI.Papers.NavierStokes.CurrentTheoremInterfaceRound24
