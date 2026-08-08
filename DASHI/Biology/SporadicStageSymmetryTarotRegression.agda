@@ -2,6 +2,7 @@ module DASHI.Biology.SporadicStageSymmetryTarotRegression where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Foundations.ActionMDLSeparation as ActionMDL
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact as Amp
 import DASHI.Foundations.BalancedTernaryUltrametricExact as Ultra
@@ -91,7 +92,7 @@ witnessFibreRetainsAlternativesRegression =
   FrameMDL.admissibleWitnessCountIsTwo
 
 mdlSelectorRegression :
-  FrameMDL.ActionMDL.MDLSelection.selected
+  ActionMDL.MDLSelection.selected
     FrameMDL.canonicalFrameMDLSelection tt
   ≡ FrameMDL.compactFrame
 mdlSelectorRegression = FrameMDL.selectedFrameIsCompact
