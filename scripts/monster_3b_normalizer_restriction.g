@@ -1,8 +1,8 @@
 # Exact CTblLib restriction of the 196883-dimensional Monster character
 # to the 3B normalizer.  The computation fails closed if the tables,
 # stored fusion, character, integral decomposition, classwise reconstruction,
-# central 3B class, or the normal extraspecial kernel class carrier cannot be
-# recovered.
+# central 3B class, normal extraspecial kernel class carrier, or Clifford
+# constituent split cannot be recovered.
 #
 # PRIMARY COMPUTATIONAL SOURCE
 # Thomas Breuer, "The GAP Character Table Library", CTblLib 1.3.11 (2025).
@@ -114,8 +114,8 @@ fi;
 
 # Recover the actual normal extraspecial kernel E from the ordinary character
 # table as the unique normal class union of order 3^13.  This certifies the
-# complete MN3B class carrier of E, but it does not split the two nontrivial
-# central eigenspaces, since the full normalizer fuses zeta and zeta^2.
+# complete MN3B class carrier of E.  Phase resolution is handled below at the
+# irreducible-constituent level by the central 3B trace ratio.
 kernelOrder := 3^13;
 normalClassSets := ClassPositionsOfNormalSubgroups(mn3b);
 kernelCandidates := Filtered(normalClassSets, classes ->
@@ -165,12 +165,94 @@ kernelClassRecords := List(kernelClasses, i -> rec(
   trace := restrictedValues[i]
 ));
 
-records := List(nonzero, i -> rec(
-  position := i,
-  multiplicity := multiplicities[i],
-  degree := mn3bIrr[i][1],
-  contribution := multiplicities[i] * mn3bIrr[i][1]
-));
+# Clifford classification at the size-two central 3B orbit.
+#
+# A constituent lying over an E-character with trivial central character has
+# chi(z)=chi(1).  A constituent induced from the normalizer orbit
+# {H_zeta,H_zeta^2} has equal zeta/zeta^2 halves and hence
+#
+#   chi(z) = (degree/2)(zeta+zeta^2) = -degree/2.
+#
+# Thus the actual MN3B character table itself separates the fixed sector from
+# the paired nontrivial phase sector without choosing a Monster basis.
+centreTrivialConstituents := [];
+phasePairConstituents := [];
+for i in nonzero do
+  constituentDegree := mn3bIrr[i][1];
+  centralValue := mn3bIrr[i][central3BClass];
+  if not IsInt(centralValue) then
+    Error("a nonzero MN3B constituent has nonintegral central 3B trace");
+  fi;
+  if centralValue = constituentDegree then
+    Add(centreTrivialConstituents, i);
+  elif 2 * centralValue = -constituentDegree then
+    Add(phasePairConstituents, i);
+  else
+    Error("a nonzero MN3B constituent has neither fixed nor paired-phase central trace ratio");
+  fi;
+od;
+
+centreTrivialDegreeTotal := Sum(centreTrivialConstituents,
+  i -> multiplicities[i] * mn3bIrr[i][1]);
+phasePairDegreeTotal := Sum(phasePairConstituents,
+  i -> multiplicities[i] * mn3bIrr[i][1]);
+
+if centreTrivialDegreeTotal <> invariantMultiplicity then
+  Error("centre-trivial constituent degrees do not reconstruct the invariant sector");
+fi;
+if phasePairDegreeTotal <> 2 * nontrivialMultiplicity then
+  Error("paired-phase constituent degrees do not reconstruct both nontrivial sectors");
+fi;
+if centreTrivialDegreeTotal + phasePairDegreeTotal <> 196883 then
+  Error("Clifford constituent split does not reconstruct the Monster degree");
+fi;
+
+heisenbergPairDegree := 2 * 729;
+phasePairRecords := [];
+phaseMultiplicityDegrees := [];
+for i in phasePairConstituents do
+  constituentDegree := mn3bIrr[i][1];
+  if constituentDegree mod heisenbergPairDegree <> 0 then
+    Error("paired-phase constituent degree is not divisible by 2*729");
+  fi;
+  multiplicityDegree := constituentDegree / heisenbergPairDegree;
+  Add(phasePairRecords, rec(
+    position := i,
+    multiplicity := multiplicities[i],
+    degree := constituentDegree,
+    centralTrace := mn3bIrr[i][central3BClass],
+    multiplicityDegree := multiplicityDegree,
+    contribution := multiplicities[i] * constituentDegree
+  ));
+  for copy in [1..multiplicities[i]] do
+    Add(phaseMultiplicityDegrees, multiplicityDegree);
+  od;
+od;
+
+Sort(phaseMultiplicityDegrees);
+if phaseMultiplicityDegrees <> [12, 78] then
+  Error("actual paired-phase multiplicity degrees are not exactly 12 and 78");
+fi;
+if Sum(phaseMultiplicityDegrees) <> 90 then
+  Error("actual paired-phase multiplicity degrees do not sum to 90");
+fi;
+
+records := [];
+for i in nonzero do
+  if i in centreTrivialConstituents then
+    cliffordType := "centre-trivial";
+  else
+    cliffordType := "paired-phase";
+  fi;
+  Add(records, rec(
+    position := i,
+    multiplicity := multiplicities[i],
+    degree := mn3bIrr[i][1],
+    centralTrace := mn3bIrr[i][central3BClass],
+    cliffordType := cliffordType,
+    contribution := multiplicities[i] * mn3bIrr[i][1]
+  ));
+od;
 
 output := OutputTextFile("build/monster_3b_normalizer_restriction.json", false);
 SetPrintFormattingStatus(output, false);
@@ -198,6 +280,11 @@ PrintTo(output,
   "  \"extraspecial_kernel_all_nonidentity_orders_three\": true,\n",
   "  \"extraspecial_kernel_invariant_numerator\": ", kernelInvariantNumerator, ",\n",
   "  \"extraspecial_kernel_invariant_dimension\": ", kernelInvariantDimension, ",\n",
+  "  \"centre_trivial_constituent_degree_total\": ", centreTrivialDegreeTotal, ",\n",
+  "  \"phase_pair_constituent_degree_total\": ", phasePairDegreeTotal, ",\n",
+  "  \"phase_pair_heisenberg_degree\": ", heisenbergPairDegree, ",\n",
+  "  \"phase_pair_multiplicity_degrees\": [12, 78],\n",
+  "  \"twelve_plus_seventy_eight_degree_split_certified\": true,\n",
   "  \"extraspecial_kernel_class_positions\": ["
 );
 for j in [1..Length(kernelClasses)] do
@@ -220,6 +307,22 @@ for j in [1..Length(kernelClassRecords)] do
   fi;
   PrintTo(output, "\n");
 od;
+PrintTo(output, "  ],\n  \"phase_pair_constituents\": [\n");
+for j in [1..Length(phasePairRecords)] do
+  r := phasePairRecords[j];
+  PrintTo(output,
+    "    {\"position\": ", r.position,
+    ", \"multiplicity\": ", r.multiplicity,
+    ", \"degree\": ", r.degree,
+    ", \"central_trace\": ", r.centralTrace,
+    ", \"multiplicity_degree\": ", r.multiplicityDegree,
+    ", \"contribution\": ", r.contribution, "}"
+  );
+  if j < Length(phasePairRecords) then
+    PrintTo(output, ",");
+  fi;
+  PrintTo(output, "\n");
+od;
 PrintTo(output, "  ],\n  \"constituents\": [\n");
 
 for j in [1..Length(records)] do
@@ -228,6 +331,8 @@ for j in [1..Length(records)] do
     "    {\"position\": ", r.position,
     ", \"multiplicity\": ", r.multiplicity,
     ", \"degree\": ", r.degree,
+    ", \"central_trace\": ", r.centralTrace,
+    ", \"clifford_type\": \"", r.cliffordType, "\"",
     ", \"contribution\": ", r.contribution, "}"
   );
   if j < Length(records) then
@@ -248,4 +353,7 @@ Print("Extraspecial kernel order: ", kernelOrder,
   "; MN3B class count: ", Length(kernelClasses), "\n");
 Print("Extraspecial-kernel invariant dimension: ",
   kernelInvariantDimension, "\n");
+Print("Clifford totals: fixed ", centreTrivialDegreeTotal,
+  "; paired phases ", phasePairDegreeTotal, "\n");
+Print("Actual phase multiplicity degree split: 12, 78\n");
 QUIT;
