@@ -53,6 +53,7 @@ agda_sources=(
   DASHI/Moonshine/Monster3BPhaseTransportExact.agda
   DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda
   DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda
+  DASHI/Moonshine/MonsterYangMills196608CrossLaneExact.agda
   DASHI/Moonshine/Monster3BHighestAlphaValidation.agda
 )
 
