@@ -1,0 +1,54 @@
+name: Monster 3B orbifold local module round 4
+
+on:
+  push:
+    branches: ['agent/monster-3b-orbifold-local-module-round4']
+  pull_request:
+    branches:
+      - 'master'
+      - 'agent/monster-3b-projector-resolution-round3'
+      - 'agent/monster-3b-orbifold-local-module-round4'
+    paths:
+      - 'DASHI/Moonshine/MoonshineOrbifoldWeightTwoDecompositionExact.agda'
+      - 'DASHI/Moonshine/MoonshineOrbifoldMasslessStateRemovalExact.agda'
+      - 'DASHI/Moonshine/MoonshineZ3OrbifoldThreeLocalSiblingExact.agda'
+      - 'DASHI/Moonshine/LeechWeightTwo196608AuthorityCorrectionExact.agda'
+      - 'DASHI/Moonshine/Monster3BMultiplicityEvaluationExact.agda'
+      - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
+      - 'DASHI/Moonshine/Monster3BNormalizerCocycleCancellationExact.agda'
+      - 'DASHI/Moonshine/Monster3BOrbifoldLocalModuleRound4Validation.agda'
+      - 'DASHI/EverythingMonster3BOrbifoldLocalModuleRound4.agda'
+      - 'Docs/support/reference/Monster3BOrbifoldLocalModuleRound4.md'
+      - 'scripts/check_monster_3b_orbifold_local_module_round4.sh'
+      - '.github/workflows/monster-3b-orbifold-local-module-round4.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+  AGDA_JOBS: '2'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Cache pinned Agda environment
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ${{ runner.os }}-agda29-86a1179c1f886da773dc53be920bcca5d876884e
+      - name: Check Monster 3B orbifold/local-module tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          bash scripts/check_monster_3b_orbifold_local_module_round4.sh
