@@ -23,7 +23,6 @@ on:
       - 'DASHI/Papers/NavierStokes/**'
       - 'docs/ns-clay-contract/**'
       - 'scripts/check_ns_luo_physical_carrier_support_round25.sh'
-      - 'scripts/check_ns_luo_claim_corpus_highest-alpha-round24.sh'
       - 'scripts/check_ns_luo_claim_corpus_highest_alpha_round24.sh'
       - 'scripts/check_ns_luo_clay_contract_round23.sh'
       - 'scripts/check_ns_luo_galerkin_defect_diffusion_round22.sh'
