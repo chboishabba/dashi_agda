@@ -37,6 +37,7 @@ module DASHI.Physics.YangMills.BalabanSelectedVariationProjectionSpilloverExact 
 -- frontier; the decomposition and budget composition are proved here.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; _+_; _-_; _*_; -_; _≤_)
