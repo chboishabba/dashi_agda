@@ -37,7 +37,8 @@ import DASHI.Physics.YangMills.BalabanP33FiniteKKTBlockGreenExact as Block
 record KKTBlockWeight (Multiplier : Set) : Set₁ where
   field
     stateTilt stateUntilt : KKT.StateVector → KKT.StateVector
-    multiplierTilt multiplierUntilt : (Multiplier → ℚ) → (Multiplier → ℚ)
+    multiplierTilt multiplierUntilt :
+      (Multiplier → ℚ) → (Multiplier → ℚ)
     stateTiltUntilt : ∀ vector coordinate →
       stateTilt (stateUntilt vector) coordinate ≡ vector coordinate
     stateUntiltTilt : ∀ vector coordinate →
@@ -83,84 +84,94 @@ untiltAfterTiltExact weight vector = record
   ; Block.PointwiseKKTBlockEquality.multiplierEqual =
       multiplierUntiltTilt weight (Block.multiplierPart vector) }
 
-tiltedKKTApply : ∀ {Multiplier} → Block.ConstrainedGreenData Multiplier →
+tiltedKKTApply : ∀ {Multiplier} →
+  Block.ConstrainedGreenData Multiplier →
   KKTBlockWeight Multiplier → Block.KKTBlockVector Multiplier →
   Block.KKTBlockVector Multiplier
-tiltedKKTApply data weight source =
-  tiltBlock weight (Block.applyKKTBlock data (untiltBlock weight source))
+tiltedKKTApply greenData weight source =
+  tiltBlock weight (Block.applyKKTBlock greenData (untiltBlock weight source))
 
 tiltedHessianDifference : ∀ {Multiplier} →
   Block.ConstrainedGreenData Multiplier → KKTBlockWeight Multiplier →
   KKT.StateVector → KKT.StateVector
-tiltedHessianDifference data weight vector coordinate =
+tiltedHessianDifference greenData weight vector coordinate =
   stateTilt weight
-    (Block.hessianApply data (stateUntilt weight vector)) coordinate
-  - Block.hessianApply data vector coordinate
+    (Block.hessianApply greenData (stateUntilt weight vector)) coordinate
+  - Block.hessianApply greenData vector coordinate
 
 tiltedAdjointDifference : ∀ {Multiplier} →
   Block.ConstrainedGreenData Multiplier → KKTBlockWeight Multiplier →
   (Multiplier → ℚ) → KKT.StateVector
-tiltedAdjointDifference data weight multiplier coordinate =
+tiltedAdjointDifference greenData weight multiplier coordinate =
   stateTilt weight
-    (KKT.constraintAdjointApply (Block.projectorData data)
+    (KKT.constraintAdjointApply (Block.projectorData greenData)
       (multiplierUntilt weight multiplier)) coordinate
-  - KKT.constraintAdjointApply (Block.projectorData data) multiplier coordinate
+  - KKT.constraintAdjointApply
+      (Block.projectorData greenData) multiplier coordinate
 
 tiltedConstraintDifference : ∀ {Multiplier} →
   Block.ConstrainedGreenData Multiplier → KKTBlockWeight Multiplier →
-  KKT.StateVector → Multiplier → ℚ
-tiltedConstraintDifference data weight vector row =
+  KKT.StateVector → (Multiplier → ℚ)
+tiltedConstraintDifference greenData weight vector row =
   multiplierTilt weight
-    (KKT.constraintApply (Block.projectorData data)
+    (KKT.constraintApply (Block.projectorData greenData)
       (stateUntilt weight vector)) row
-  - KKT.constraintApply (Block.projectorData data) vector row
+  - KKT.constraintApply (Block.projectorData greenData) vector row
 
 tiltedKKTStateDifferenceSplits : ∀ {Multiplier}
-    (data : Block.ConstrainedGreenData Multiplier)
+    (greenData : Block.ConstrainedGreenData Multiplier)
     (weight : KKTBlockWeight Multiplier) vector coordinate →
-  Block.statePart (tiltedKKTApply data weight vector) coordinate
-    - Block.statePart (Block.applyKKTBlock data vector) coordinate
-  ≡ tiltedHessianDifference data weight (Block.statePart vector) coordinate
-    + tiltedAdjointDifference data weight (Block.multiplierPart vector) coordinate
-tiltedKKTStateDifferenceSplits data weight vector coordinate = trans
-  (cong (_- Block.statePart (Block.applyKKTBlock data vector) coordinate)
+  Block.statePart (tiltedKKTApply greenData weight vector) coordinate
+    - Block.statePart (Block.applyKKTBlock greenData vector) coordinate
+  ≡ tiltedHessianDifference greenData weight
+      (Block.statePart vector) coordinate
+    + tiltedAdjointDifference greenData weight
+      (Block.multiplierPart vector) coordinate
+tiltedKKTStateDifferenceSplits greenData weight vector coordinate = trans
+  (cong (_- Block.statePart (Block.applyKKTBlock greenData vector) coordinate)
     (stateTiltAdd weight
-      (Block.hessianApply data (stateUntilt weight (Block.statePart vector)))
-      (KKT.constraintAdjointApply (Block.projectorData data)
+      (Block.hessianApply greenData
+        (stateUntilt weight (Block.statePart vector)))
+      (KKT.constraintAdjointApply (Block.projectorData greenData)
         (multiplierUntilt weight (Block.multiplierPart vector))) coordinate))
   (ℚRing.solve-∀
     (stateTilt weight
-      (Block.hessianApply data (stateUntilt weight (Block.statePart vector))) coordinate)
+      (Block.hessianApply greenData
+        (stateUntilt weight (Block.statePart vector))) coordinate)
     (stateTilt weight
-      (KKT.constraintAdjointApply (Block.projectorData data)
+      (KKT.constraintAdjointApply (Block.projectorData greenData)
         (multiplierUntilt weight (Block.multiplierPart vector))) coordinate)
-    (Block.hessianApply data (Block.statePart vector) coordinate)
-    (KKT.constraintAdjointApply (Block.projectorData data)
+    (Block.hessianApply greenData (Block.statePart vector) coordinate)
+    (KKT.constraintAdjointApply (Block.projectorData greenData)
       (Block.multiplierPart vector) coordinate))
 
 tiltedKKTMultiplierDifferenceExact : ∀ {Multiplier}
-    (data : Block.ConstrainedGreenData Multiplier)
+    (greenData : Block.ConstrainedGreenData Multiplier)
     (weight : KKTBlockWeight Multiplier) vector row →
-  Block.multiplierPart (tiltedKKTApply data weight vector) row
-    - Block.multiplierPart (Block.applyKKTBlock data vector) row
-  ≡ tiltedConstraintDifference data weight (Block.statePart vector) row
-tiltedKKTMultiplierDifferenceExact data weight vector row = refl
+  Block.multiplierPart (tiltedKKTApply greenData weight vector) row
+    - Block.multiplierPart (Block.applyKKTBlock greenData vector) row
+  ≡ tiltedConstraintDifference greenData weight
+      (Block.statePart vector) row
+tiltedKKTMultiplierDifferenceExact greenData weight vector row = refl
 
-tiltedKKTSolve : ∀ {Multiplier} → Block.ConstrainedGreenData Multiplier →
-  KKTBlockWeight Multiplier → Block.KKTBlockVector Multiplier →
-  Block.KKTBlockVector Multiplier
-tiltedKKTSolve data weight source =
-  tiltBlock weight (Block.solveKKTBlock data (untiltBlock weight source))
+tiltedKKTSolve : ∀ {Multiplier} →
+  Block.ConstrainedGreenData Multiplier → KKTBlockWeight Multiplier →
+  Block.KKTBlockVector Multiplier → Block.KKTBlockVector Multiplier
+tiltedKKTSolve greenData weight source =
+  tiltBlock weight
+    (Block.solveKKTBlock greenData (untiltBlock weight source))
 
 record ExtensionalKKTBlockWeight (Multiplier : Set) : Set₁ where
   field
     weight : KKTBlockWeight Multiplier
     stateTiltExtensional : ∀ {left right} →
       (∀ coordinate → left coordinate ≡ right coordinate) →
-      ∀ coordinate → stateTilt weight left coordinate ≡ stateTilt weight right coordinate
+      ∀ coordinate →
+      stateTilt weight left coordinate ≡ stateTilt weight right coordinate
     multiplierTiltExtensional : ∀ {left right} →
       (∀ row → left row ≡ right row) →
-      ∀ row → multiplierTilt weight left row ≡ multiplierTilt weight right row
+      ∀ row →
+      multiplierTilt weight left row ≡ multiplierTilt weight right row
 open ExtensionalKKTBlockWeight public
 
 tiltBlockPointwiseCongExact : ∀ {Multiplier}
@@ -177,16 +188,16 @@ tiltBlockPointwiseCongExact extensional equality = record
       multiplierTiltExtensional extensional (Block.multiplierEqual equality) }
 
 tiltedKKTRightInverseExact : ∀ {Multiplier}
-    (data : Block.ConstrainedGreenData Multiplier)
+    (greenData : Block.ConstrainedGreenData Multiplier)
     (extensional : ExtensionalKKTBlockWeight Multiplier) source →
   Block.PointwiseKKTBlockEquality
-    (tiltedKKTApply data (weight extensional)
-      (tiltedKKTSolve data (weight extensional) source)) source
-tiltedKKTRightInverseExact data extensional source =
+    (tiltedKKTApply greenData (weight extensional)
+      (tiltedKKTSolve greenData (weight extensional) source)) source
+tiltedKKTRightInverseExact greenData extensional source =
   let
     weightData = weight extensional
     baseSource = untiltBlock weightData source
-    baseRight = Block.kktBlockRightInverseExact data baseSource
+    baseRight = Block.kktBlockRightInverseExact greenData baseSource
     tiltedBase = tiltBlockPointwiseCongExact extensional baseRight
     tiltUntil = tiltAfterUntiltExact weightData source
   in record
