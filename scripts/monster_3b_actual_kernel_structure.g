@@ -1,4 +1,4 @@
-# Certify the actual extraspecial 3-core in the AtlasRep construction of
+# Certify the actual extraspecial 3-core in an AtlasRep construction of
 # N_M(<3B>) = 3^(1+12).2.Suz.2 and align its centre with the unique
 # size-two order-three MN3B class that fuses to Monster 3B.
 #
@@ -7,8 +7,12 @@
 # the actual AtlasRep group has a normal extraspecial 3-core of order 3^13,
 # exponent three, centre/derived subgroup of order three, elementary-abelian
 # quotient of order 3^12, and its two nonidentity central elements form one
-# conjugacy orbit.  CTblLib then identifies the unique class with those
+# conjugacy orbit. CTblLib then identifies the unique class with those
 # invariants and its stored fusion to Monster 3B.
+#
+# Representation discovery deliberately uses the documented
+# AllAtlasGeneratingSetInfos -> AtlasGroup(info) interface rather than assuming
+# that one punctuation spelling is a constructible AtlasRep group name.
 #
 # SOURCES
 # R. W. Barraclough and R. A. Wilson,
@@ -23,6 +27,9 @@
 #
 # Thomas Breuer, "The GAP Character Table Library", CTblLib documentation.
 # No DOI asserted.
+#
+# Thomas Breuer and Simon Nickerson, AtlasRep package documentation,
+# especially AllAtlasGeneratingSetInfos and AtlasGroup. No DOI asserted.
 
 if LoadPackage("ctbllib") <> true then
   Error("CTblLib is required");
@@ -36,12 +43,64 @@ expectedKernelOrder := 1594323;       # 3^13
 expectedQuotientOrder := 531441;      # 3^12
 expectedHeisenbergDegree := 729;      # 3^6
 
-G := AtlasGroup("3^(1+12):2.Suz.2");
+groupNames := [
+  "MN3B",
+  "3^(1+12).2.Suz.2",
+  "3^(1+12):2.Suz.2",
+  "3^1+12.2.Suz.2"
+];
+
+G := fail;
+selectedAtlasName := fail;
+selectedRepName := fail;
+selectedIdentifier := fail;
+
+# Use AtlasRep's representation metadata first. AtlasGroup(info) is the
+# documented way to construct exactly the representation described by a
+# returned information record.
+for groupName in groupNames do
+  infos := AllAtlasGeneratingSetInfos(groupName);
+  infos := Filtered(infos, info ->
+    IsBound(info.size) and info.size = expectedGroupOrder);
+
+  for info in infos do
+    candidate := AtlasGroup(info);
+    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+      G := candidate;
+      selectedAtlasName := groupName;
+      if IsBound(info.repname) then
+        selectedRepName := info.repname;
+      else
+        selectedRepName := "unspecified";
+      fi;
+      if IsBound(info.identifier) then
+        selectedIdentifier := info.identifier;
+      fi;
+      break;
+    fi;
+  od;
+
+  if G <> fail then
+    break;
+  fi;
+od;
+
+# Some AtlasRep installations expose a constructible group directly but omit
+# it from the locally cached information list. Retain a fail-closed fallback.
 if G = fail then
-  G := AtlasGroup("3^(1+12).2.Suz.2");
+  for groupName in groupNames do
+    candidate := AtlasGroup(groupName);
+    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+      G := candidate;
+      selectedAtlasName := groupName;
+      selectedRepName := "AtlasGroup-direct";
+      break;
+    fi;
+  od;
 fi;
+
 if G = fail then
-  Error("AtlasRep does not provide 3^(1+12):2.Suz.2");
+  Error("AtlasRep provides no constructible MN3B representation of the expected order");
 fi;
 if Size(G) <> expectedGroupOrder then
   Error("unexpected AtlasRep MN3B group order");
@@ -131,12 +190,12 @@ if degreeSquareSum <> expectedKernelOrder then
   Error("extraspecial character-degree square sum failed");
 fi;
 
-Directory("build");
 output := OutputTextFile("build/monster_3b_actual_kernel_structure.json", false);
 SetPrintFormattingStatus(output, false);
 PrintTo(output,
   "{\n",
-  "  \"atlas_group_name\": \"3^(1+12):2.Suz.2\",\n",
+  "  \"atlas_group_name\": \"", selectedAtlasName, "\",\n",
+  "  \"atlas_representation_name\": \"", selectedRepName, "\",\n",
   "  \"mn3b_table\": \"", Identifier(mn3b), "\",\n",
   "  \"monster_table\": \"", Identifier(monster), "\",\n",
   "  \"actual_group_order\": ", Size(G), ",\n",
@@ -165,6 +224,8 @@ PrintTo(output,
 CloseStream(output);
 
 Print("Actual MN3B extraspecial kernel certificate written.\n");
+Print("AtlasRep name: ", selectedAtlasName,
+  "; representation: ", selectedRepName, "\n");
 Print("|E| = ", Size(E), ", |Z(E)| = ", Size(Z),
   ", |E/Z(E)| = ", Size(Q), "\n");
 Print("central class position = ", centralClass,
