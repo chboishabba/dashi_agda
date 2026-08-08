@@ -45,6 +45,37 @@ withhold incomplete sheet: retain +++ visibly at 3 and carry ++0 as residual 2.
 
 The final branch refines the existing visible `5 -> 3` transition. No irrep decomposition is used to generate this primary arithmetic; irrep structure remains downstream.
 
+## Counterposition, order, and square symmetry
+
+`CounterpositionOrderedJoinExact.agda` constructs the zero-free binary embedding:
+
+```text
+direct  -> +1
+inverse -> -1
+```
+
+into balanced ternary and proves it injective and never neutral.
+
+Counterposition is context-indexed. The available finite contexts include full inversion, rejection of one named line, and line re-indexing. Rejecting only the third line of `+++` gives `++-`, and this is proved unequal to the full inverse `---`.
+
+Lower/upper order is retained. The carriers
+
+```text
+(+++, ++0)
+(++0, +++)
+```
+
+have the same joined amplitude `5` but are proved unequal as ordered joins.
+
+The four-state square carrier `C2 x C2` is also separated from the eight transformation codes of its dihedral action. The implementation supplies identity, three nontrivial turns, and four reflections as functions on the square, while recording:
+
+```text
+square states = 4
+square move codes = 8.
+```
+
+Thus the tetralemma state carrier is not identified with the group acting on it.
+
 ## Witness fibre before selection
 
 A Stage-3 closure witness carries:
