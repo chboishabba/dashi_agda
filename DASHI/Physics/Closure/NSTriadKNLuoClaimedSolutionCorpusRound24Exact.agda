@@ -32,6 +32,7 @@ data AuthorityTier : Set where
 
 data ClaimFamily : Set where
   shellModifiedEnergy : ClaimFamily
+  finitePacketExhaustion : ClaimFamily
   temporalResponseLift : ClaimFamily
   geometricDepletion : ClaimFamily
   helicalFluxQuasiTrapping : ClaimFamily
@@ -41,6 +42,11 @@ data ClaimFamily : Set where
   highHighResidenceAbsorption : ClaimFamily
   emergentVorticityDamping : ClaimFamily
   strainProjectionCoercivity : ClaimFamily
+  topologicalContinuationExhaustion : ClaimFamily
+  universalFrequencyEnvelope : ClaimFamily
+  finiteCascadeSpeed : ClaimFamily
+  arithmeticVortonCutoff : ClaimFamily
+  symmetryRestrictedThreshold : ClaimFamily
 
 
 data AuditDisposition : Set where
@@ -49,6 +55,7 @@ data AuditDisposition : Set where
   loadBearingProducerOpen : AuditDisposition
   exactNoGoFound : AuditDisposition
   conditionalOnly : AuditDisposition
+  sourceAuditOpen : AuditDisposition
 
 record ClaimedSolutionSource : Set where
   constructor claimedSolutionSource
@@ -71,6 +78,13 @@ abuGhuwaleh = claimedSolutionSource
   "DOI 10.5281/zenodo.19559087"
   repositoryPreprint shellModifiedEnergy exactNoGoFound true false
 
+abuShellBridge : ClaimedSolutionSource
+abuShellBridge = claimedSolutionSource
+  "Mohammad Abu-Ghuwaleh"
+  "Exact Shell-Bridge Closure and Finite Packet Exhaustion for the Three-Dimensional Periodic Navier-Stokes Equations"
+  "DOI 10.20944/preprints202603.1889.v1; ScienceOpen 10.14293/PR2199.003375.v1"
+  repositoryPreprint finitePacketExhaustion loadBearingProducerOpen true false
+
 camlin : ClaimedSolutionSource
 camlin = claimedSolutionSource
   "Jeffrey Camlin"
@@ -81,7 +95,7 @@ camlin = claimedSolutionSource
 pavesi : ClaimedSolutionSource
 pavesi = claimedSolutionSource
   "Luca Eliseo Pavesi"
-  "Geometric Frustration and Helical Quasi-Trapping"
+  "Global Regularity for the Three-Dimensional Incompressible Navier-Stokes Equations via Geometric Frustration and Helical Quasi-Trapping"
   "DOI 10.5281/zenodo.21194906"
   repositoryPreprint helicalFluxQuasiTrapping loadBearingProducerOpen true false
 
@@ -155,9 +169,45 @@ nemoto = claimedSolutionSource
   "PhilArchive record NEMGRO; DOI not located"
   repositoryPreprint strainProjectionCoercivity exactNoGoFound true false
 
+rolloDicks : ClaimedSolutionSource
+rolloDicks = claimedSolutionSource
+  "Rollo Dicks"
+  "Global Regularity of the Three-Dimensional Incompressible Navier-Stokes Equations via Exhaustion of Continuations"
+  "Zenodo record 18963533"
+  repositoryPreprint topologicalContinuationExhaustion sourceAuditOpen true false
+
+harbeck : ClaimedSolutionSource
+harbeck = claimedSolutionSource
+  "William Harbeck"
+  "Global Regularity for the Three-Dimensional Navier-Stokes Equations via Equilibrium Depletion and Universal Frequency Envelopes"
+  "DOI 10.31224/5814"
+  repositoryPreprint universalFrequencyEnvelope sourceAuditOpen true false
+
+higgins : ClaimedSolutionSource
+higgins = claimedSolutionSource
+  "Rod Higgins"
+  "Global Regularity of 3D Navier-Stokes: An Energy Argument"
+  "DOI 10.5281/zenodo.19601371"
+  blogOrWebsite finiteCascadeSpeed exactNoGoFound true false
+
+aksman : ClaimedSolutionSource
+aksman = claimedSolutionSource
+  "Michael Aksman"
+  "Global Regularity of 3D Navier Stokes via Topological Duality"
+  "DOI 10.5281/zenodo.21263877"
+  repositoryPreprint arithmeticVortonCutoff sourceAuditOpen true false
+
+cavazzini : ClaimedSolutionSource
+cavazzini = claimedSolutionSource
+  "Andrea Cavazzini"
+  "Symmetry, Triadic Sparsity, and Global Regularity for Kida-Pelz Navier-Stokes Flows"
+  "DOI 10.5281/zenodo.19180827"
+  repositoryPreprint symmetryRestrictedThreshold conditionalOnly false false
+
 claimedSolutionCorpusRound24 : List ClaimedSolutionSource
 claimedSolutionCorpusRound24 =
   abuGhuwaleh ∷
+  abuShellBridge ∷
   camlin ∷
   pavesi ∷
   permanaLathifIbrahim ∷
@@ -170,6 +220,11 @@ claimedSolutionCorpusRound24 =
   inageNecessaryConditions ∷
   polozov ∷
   nemoto ∷
+  rolloDicks ∷
+  harbeck ∷
+  higgins ∷
+  aksman ∷
+  cavazzini ∷
   []
 
 allCorpusSourcesAreProofAuthorities : Bool
