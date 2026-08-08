@@ -73,54 +73,65 @@ open CovariantD4Transport public
 
 record TrivialTransportCocycle
     {Jet GaugeCorrection : Set}
-    (data : CovariantD4Transport Jet GaugeCorrection) : Set₁ where
+    (transportData : CovariantD4Transport Jet GaugeCorrection) : Set₁ where
   field
     correctionActsTrivially : ∀ left right jet →
-      correctionAction data (correction data left right)
-        (transport data (D4.composePermutation4 left right) jet)
-      ≡ transport data (D4.composePermutation4 left right) jet
+      correctionAction transportData (correction transportData left right)
+        (transport transportData
+          (D4.composePermutation4 left right) jet)
+      ≡ transport transportData
+          (D4.composePermutation4 left right) jet
 
 open TrivialTransportCocycle public
 
 strictCompositionFromTrivialCocycle :
   ∀ {Jet GaugeCorrection}
-    {data : CovariantD4Transport Jet GaugeCorrection} →
-  TrivialTransportCocycle data →
+    {transportData : CovariantD4Transport Jet GaugeCorrection} →
+  TrivialTransportCocycle transportData →
   ∀ left right jet →
-  transport data left (transport data right jet)
-  ≡ transport data (D4.composePermutation4 left right) jet
-strictCompositionFromTrivialCocycle trivial left right jet =
+  transport transportData left (transport transportData right jet)
+  ≡ transport transportData
+      (D4.composePermutation4 left right) jet
+strictCompositionFromTrivialCocycle
+    {transportData = transportData} trivial left right jet =
   trans
-    (twistedComposition data left right jet)
+    (twistedComposition transportData left right jet)
     (correctionActsTrivially trivial left right jet)
 
 record CorrectionInvariantQuantity
     {Jet GaugeCorrection Value : Set}
-    (data : CovariantD4Transport Jet GaugeCorrection)
+    (transportData : CovariantD4Transport Jet GaugeCorrection)
     (quantity : Jet → Value) : Set₁ where
   field
     correctionInvariant : ∀ correctionValue jet →
-      quantity (correctionAction data correctionValue jet)
+      quantity (correctionAction transportData correctionValue jet)
       ≡ quantity jet
 
 open CorrectionInvariantQuantity public
 
 quantityTransportCompositionExact :
   ∀ {Jet GaugeCorrection Value}
-    {data : CovariantD4Transport Jet GaugeCorrection}
+    {transportData : CovariantD4Transport Jet GaugeCorrection}
     {quantity : Jet → Value} →
-  CorrectionInvariantQuantity data quantity →
+  CorrectionInvariantQuantity transportData quantity →
   ∀ left right jet →
-  quantity (transport data left (transport data right jet))
+  quantity
+    (transport transportData left
+      (transport transportData right jet))
   ≡ quantity
-      (transport data (D4.composePermutation4 left right) jet)
-quantityTransportCompositionExact invariant left right jet =
+      (transport transportData
+        (D4.composePermutation4 left right) jet)
+quantityTransportCompositionExact
+    {transportData = transportData}
+    {quantity = quantity}
+    invariant left right jet =
   trans
     (congQuantity
-      (twistedComposition data left right jet))
+      (twistedComposition transportData left right jet))
     (correctionInvariant invariant
-      (correction data left right)
-      (transport data (D4.composePermutation4 left right) jet))
+      (correction transportData left right)
+      (transport transportData
+        (D4.composePermutation4 left right) jet))
   where
   congQuantity : ∀ {x y} → x ≡ y → quantity x ≡ quantity y
   congQuantity refl = refl
