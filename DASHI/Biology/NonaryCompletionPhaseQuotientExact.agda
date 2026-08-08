@@ -27,17 +27,13 @@ module DASHI.Biology.NonaryCompletionPhaseQuotientExact where
 -- existing T^2 disjoint-union {j} coarse carrier.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
-
-------------------------------------------------------------------------
--- Ten-state completed nonary carrier.
-------------------------------------------------------------------------
 
 data DecimalCompletionState : Set where
   d0 d1 d2 d3 d4 d5 d6 d7 d8 j9 : DecimalCompletionState
@@ -171,10 +167,6 @@ complementFlipsBinaryPhase d7 = refl
 complementFlipsBinaryPhase d8 = refl
 complementFlipsBinaryPhase j9 = refl
 
-------------------------------------------------------------------------
--- Exact reuse of T^2 disjoint-union {j}.
-------------------------------------------------------------------------
-
 toCoarseChannel : DecimalCompletionState → Harmonic.CoarseChannel
 toCoarseChannel d0 =
   Harmonic.ordinaryChannel
@@ -281,10 +273,6 @@ toAfterFromCoarseChannel
     (Harmonic.balancedPair Harmonic.positiveTrit Harmonic.positiveTrit)) = refl
 toAfterFromCoarseChannel Harmonic.completionJ = refl
 
-------------------------------------------------------------------------
--- Finite cardinality certificates.
-------------------------------------------------------------------------
-
 canonicalDecimalCompletionStates : List DecimalCompletionState
 canonicalDecimalCompletionStates =
   d0 ∷ d1 ∷ d2 ∷ d3 ∷ d4 ∷ d5 ∷ d6 ∷ d7 ∷ d8 ∷ j9 ∷ []
@@ -312,11 +300,25 @@ binaryPhaseCountIsTwo = refl
 tenIsFiveTimesTwo : 10 ≡ 5 * 2
 tenIsFiveTimesTwo = refl
 
+------------------------------------------------------------------------
+-- The positive boundary claims carry the actual inverse laws.
+------------------------------------------------------------------------
+
 record NonaryCompletionQuotientBoundary : Set where
   constructor nonary-completion-quotient-boundary
   field
-    tenStateQuotientConstructed : Bool
-    tenStateQuotientConstructedIsTrue : tenStateQuotientConstructed ≡ true
+    quotientDecodeAfterEncode :
+      (state : DecimalCompletionState) →
+      decodeModePhase (encodeModePhase state) ≡ state
+    quotientEncodeAfterDecode :
+      (modePhase : ComplementMode5 × BinaryPhase) →
+      encodeModePhase (decodeModePhase modePhase) ≡ modePhase
+    coarseDecodeAfterEncode :
+      (state : DecimalCompletionState) →
+      fromCoarseChannel (toCoarseChannel state) ≡ state
+    coarseEncodeAfterDecode :
+      (channel : Harmonic.CoarseChannel) →
+      toCoarseChannel (fromCoarseChannel channel) ≡ channel
     completionJIdentifiedWithOrdinaryTorusResidue : Bool
     completionJIdentifiedWithOrdinaryTorusResidueIsFalse :
       completionJIdentifiedWithOrdinaryTorusResidue ≡ false
@@ -326,4 +328,10 @@ record NonaryCompletionQuotientBoundary : Set where
 
 canonicalNonaryCompletionQuotientBoundary : NonaryCompletionQuotientBoundary
 canonicalNonaryCompletionQuotientBoundary =
-  nonary-completion-quotient-boundary true refl false refl false refl
+  nonary-completion-quotient-boundary
+    decodeAfterEncode
+    encodeAfterDecode
+    fromAfterToCoarseChannel
+    toAfterFromCoarseChannel
+    false refl
+    false refl
