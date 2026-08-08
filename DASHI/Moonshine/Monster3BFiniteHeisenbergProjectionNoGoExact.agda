@@ -28,11 +28,9 @@ module DASHI.Moonshine.Monster3BFiniteHeisenbergProjectionNoGoExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Relation.Nullary using (Dec; yes; no)
-open import DASHI.Algebra.Trit using (Trit)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCommutantExact as Commutant
@@ -46,17 +44,17 @@ x6DecidableEquality
   (H.x6 l0 l1 l2 l3 l4 l5)
   (H.x6 r0 r1 r2 r3 r4 r5)
   with Commutant.tritDecidableEquality l0 r0
-... | no differs = no (λ equality → differs (H.x0-cong equality))
+... | no differs = no (λ equality → differs (cong H.x0 equality))
 ... | yes refl with Commutant.tritDecidableEquality l1 r1
-...   | no differs = no (λ equality → differs (H.x1-cong equality))
+...   | no differs = no (λ equality → differs (cong H.x1 equality))
 ...   | yes refl with Commutant.tritDecidableEquality l2 r2
-...     | no differs = no (λ equality → differs (H.x2-cong equality))
+...     | no differs = no (λ equality → differs (cong H.x2 equality))
 ...     | yes refl with Commutant.tritDecidableEquality l3 r3
-...       | no differs = no (λ equality → differs (H.x3-cong equality))
+...       | no differs = no (λ equality → differs (cong H.x3 equality))
 ...       | yes refl with Commutant.tritDecidableEquality l4 r4
-...         | no differs = no (λ equality → differs (H.x4-cong equality))
+...         | no differs = no (λ equality → differs (cong H.x4 equality))
 ...         | yes refl with Commutant.tritDecidableEquality l5 r5
-...           | no differs = no (λ equality → differs (H.x5-cong equality))
+...           | no differs = no (λ equality → differs (cong H.x5 equality))
 ...           | yes refl = yes refl
 
 ------------------------------------------------------------------------
