@@ -6,9 +6,10 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound37ProjectorResidualVa
 -- Round 37 imports the complete Round-36 finite atom/selector lane and adds:
 -- literal physical coordinate projectors, the actual four-bond plaquette
 -- boundary projector, commuting triple-mask composition, a finite covector
--- spillover identity, same-object Noether residual reduction, orientation
--- reversal, the sixteen-atom centred probe, finite Rayleigh certificates,
--- strict owned RG margins, E8 root-data numerics and a typed 196608 atlas.
+-- spillover identity, same-object Noether residual reduction and assembly,
+-- orientation reversal, the sixteen-atom centred probe, finite Rayleigh
+-- certificates, strict owned RG margins, E8 root-data numerics and a typed
+-- 196608 atlas.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound36FiniteAtomSelectorValidation
@@ -17,6 +18,7 @@ import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boun
 import DASHI.Physics.YangMills.BalabanP33PhysicalProjectorCompositionExact as Composition
 import DASHI.Physics.YangMills.BalabanSelectedVariationProjectionSpilloverExact as Spillover
 import DASHI.Physics.YangMills.BalabanSelectedVariationProjectedNoetherResidualExact as Noether
+import DASHI.Physics.YangMills.BalabanSelectedVariationProjectedSelectorAssemblyExact as Assembly
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 import DASHI.Physics.YangMills.BalabanP33PlaquetteOrientationReversalExact as Reversal
@@ -80,6 +82,15 @@ projectedNoetherConstructionProducesRound36Witness :
     background field plaquette
 projectedNoetherConstructionProducesRound36Witness =
   Noether.projectedConstructionToSingletonWitness
+
+assembledAnalyticDataProducesRound36Witness :
+  ∀ {background field plaquette} →
+  Assembly.ProjectedSelectorAnalyticData
+    background field plaquette →
+  Selector.SingletonExtractionWitness
+    background field plaquette
+assembledAnalyticDataProducesRound36Witness =
+  Assembly.analyticDataToSingletonExtractionWitness
 
 orientationReversalPreservesWilsonScalar :
   ∀ value →
