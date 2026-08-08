@@ -35,7 +35,17 @@ The conformal line is retained inside the untwisted invariant sector:
 196884 = 1 + 196883.
 ```
 
-`LeechWeightTwo196608AuthorityCorrectionExact.agda` proves that the `196608` coordinate subtotal is unequal to both published orbifold summands. Equal total dimension does not transport an action, an invariant filtration, or a Monster submodule.
+The implementation does not flatten these into one anonymous natural-number carrier. It constructs distinct typed coordinates for:
+
+```text
+conformal line
+untwisted nonconformal sector
+twisted invariant sector
+```
+
+and proves the conformal coordinate is outside the included `196883`-coordinate Monster carrier and that untwisted and twisted source tags are disjoint.
+
+`LeechWeightTwo196608BridgeExact.agda` now describes its own result as basis-dependent unorbifolded coordinate bookkeeping. `LeechWeightTwo196608AuthorityCorrectionExact.agda` proves that the `196608` subtotal is unequal to both published orbifold summands. Equal total dimension does not transport an action, an invariant filtration, or a Monster submodule.
 
 ## Weight-one removal and conformal excitation index
 
@@ -48,9 +58,11 @@ twisted retained weight one: Fin 0
 orbifold weight one: Fin 0 + Fin 0.
 ```
 
-A generic theorem proves that a direct sum of two empty sectors is empty. Weight two is represented by `Fin 196884` and is inhabited, so the finite conformal excitation index is exactly two.
+A generic theorem proves that a direct sum of two empty sectors is empty. The typed FLM weight-two carrier is inhabited by an explicitly nonconformal untwisted coordinate.
 
-This formalizes the meaning of Moonshine "mass restoration" used in the discussion:
+The grades zero, one and two are represented by a dependent initial carrier. The only strictly positive represented grade below two is grade one, and its carrier is proved empty. Grade two has the concrete nonconformal witness. Therefore two is proved to be the first positive grade of the represented initial profile, rather than merely stored as a numeral.
+
+This formalizes the finite meaning of Moonshine "mass restoration" used in the discussion:
 
 ```text
 orbifold removal of weight-one states
@@ -65,7 +77,7 @@ conformal excitation index 2
 => four-dimensional Yang--Mills Hamiltonian mass gap.
 ```
 
-Such a bridge still needs a physical Hilbert-space functor, an operator intertwiner, cutoff/units, continuum stability and a dimensionful scale-generation mechanism.
+Such a bridge still needs a physical Hilbert-space functor, an operator intertwiner, cutoff and unit data, continuum stability and a dimensionful scale-generation mechanism.
 
 ## Order-three orbifold siblings
 
@@ -86,7 +98,7 @@ Their kernel and quotient geometries are proved distinct. The common orbifold or
 
 ## Model multiplicity space and exact promotion object
 
-The finite multiplicity space is now literal:
+The finite multiplicity space is literal:
 
 ```text
 H_model = F3^6
@@ -94,15 +106,24 @@ S_model = Fin 90
 H_model x S_model ~= ZetaModelBasis.
 ```
 
-The evaluation and recovery maps have constructive two-sided inverses. Every multiplicity coordinate gives a translation-equivariant embedding of the Schrödinger basis.
+The evaluation and recovery maps have constructive two-sided inverses. Every multiplicity coordinate gives a translation-equivariant embedding of the Schrodinger basis and preserves all six modulation-exponent observers.
 
-`ActualZetaSectorRecognition W` is the minimized promotion input. It requires one two-sided model equivalence and one intertwining law for the six translations. From that single object the code derives:
+`ActualZetaSectorRecognition W` is the minimized promotion input. It requires:
+
+```text
+one two-sided actual/model equivalence
+six actual translations and their intertwining laws
+six actual modulation-exponent observers and their intertwining laws.
+```
+
+From that one object the code derives:
 
 - the actual weight coordinate;
 - the actual multiplicity coordinate;
 - transported characteristic projectors;
 - own-weight projector coefficient one;
 - translation covariance;
+- all thirty-six standard translation/modulation Weyl exponent relations;
 - fixed-point-freedom of every standard translation.
 
 The repository still does not claim that the actual Monster zeta sector inhabits this recognition object.
@@ -142,9 +163,9 @@ The next irreducible data are:
 
 1. identify the actual extraspecial kernel classes inside `MN3B`;
 2. certify the complete cyclotomic character signature on those classes;
-3. construct `ActualZetaSectorRecognition W_zeta`;
-4. transport the finite projector resolution to `W_zeta`;
-5. construct the inertia-group action and its compensating cocycle on `Fin 90` or the actual multiplicity space;
+3. construct `ActualZetaSectorRecognition W_zeta`, including translation and modulation observers;
+4. transport the finite projector resolution and all thirty-six Weyl relations to `W_zeta`;
+5. construct the inertia-group action and its compensating cocycle on the actual multiplicity space;
 6. calculate the actual multiplicity character;
 7. prove or refute an actual `12 + 78` decomposition by character inner products and an intertwiner.
 
@@ -167,4 +188,4 @@ The numerical equality `90 = 12 + 78` remains insufficient by itself.
 bash scripts/check_monster_3b_orbifold_local_module_round4.sh
 ```
 
-The checker cascades through Round 3, rejects holes and trust escapes, binds theorem markers to their owning files, and invokes the pinned Agda 2.9 runner on both the cumulative validation root and the top-level aggregate extension.
+The checker cascades through Round 3, rejects holes and trust escapes, binds theorem markers to their owning files and reference document, and invokes the pinned Agda 2.9 runner on both the cumulative validation root and the top-level aggregate extension.
