@@ -157,7 +157,7 @@ record FiniteConformalExcitationProfile : Set where
       firstPositiveExcitationGrade ≡ 2
     firstPositiveGradeTagExact : firstPositiveGradeTag ≡ gradeTwo
     noWeightOneState : IsEmpty MoonshineWeightOne
-    stateAtFirstPositiveGrade : InitialGradeCarrier firstPositiveGradeTag
+    stateAtFirstPositiveGrade : InitialGradeCarrier gradeTwo
     everyLowerPositiveGradeEmpty :
       (grade : InitialConformalGrade) →
       PositiveGradeStrictlyBelowTwo grade →
