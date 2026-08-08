@@ -74,10 +74,8 @@ multiplicityForcedToNinety :
   729 * multiplicity ≡ 65610 →
   multiplicity ≡ 90
 multiplicityForcedToNinety multiplicity degreeEquation =
-  NatP.*-cancelʳ-≡ multiplicity 90 729
-    (trans
-      (NatP.*-comm multiplicity 729)
-      (trans degreeEquation (sym (NatP.*-comm 90 729))))
+  NatP.*-cancelˡ-≡ multiplicity 90 729
+    (trans degreeEquation (sym ninetyHeisenbergDegree))
 
 actualZetaSectorHasNinetyConstituents :
   (constituents : List ZetaHeisenbergIrreducible) →
