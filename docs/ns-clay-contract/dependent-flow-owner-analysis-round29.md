@@ -10,7 +10,7 @@ Round 29 follows the highest-alpha route identified after Round 28. It advances 
 
 The finite state stores only positive reality-orbit coefficients with transversality evidence and a dependent zero-mode exclusion. Negative coefficients are reconstructed by complex conjugation. Their transversality and nonzero-mode status are proved.
 
-Because reality, transversality and centering are intrinsic to the state type, the concrete selector on this state space is the identity triple. The open theorem is that the full viscous-plus-quadratic Galerkin vector field maps the reconstructed state type to itself.
+Every positive and reconstructed-negative coefficient is also proved fixed by the literal `Complex3` Leray projector. Because reality, transversality and centering are intrinsic to the state type, the concrete selector on this state space is the identity triple. The open theorem is that the full viscous-plus-quadratic Galerkin vector field maps the reconstructed state type to itself.
 
 ### Dependent physical ODE carrier
 
@@ -21,6 +21,19 @@ PhysicalCarrier -> PhysicalCarrier.
 ```
 
 Every derivative value therefore carries Leray, reality and centering evidence by construction.
+
+### Complete finite-vector local Lipschitz estimate
+
+Round 28 proved the estimate for one rational Galerkin coordinate. Round 29 sums the actual finite coordinate list and proves
+
+```text
+sum_alpha |F_alpha(u)-F_alpha(v)|
+  <= (sum_alpha L_alpha(R)) delta
+```
+
+whenever every selected input coordinate lies in the radius-`R` ball and every coordinate difference is at most `delta`. The left side is the literal finite output `l1` norm, and the constant is the exact sum of the linear and bilinear atom weights.
+
+The remaining finite-ODE bridge is the equivalence between this rational coordinate carrier and the selected continuum-real physical coordinate space, followed by the real Picard–Lindelöf instance.
 
 ### Finite continuation split
 
@@ -119,7 +132,7 @@ The exponent identity `2/4 + 3/6 = 1` is checked exactly. The physical negative-
 
 ```text
 1. prove literal nonlinear coefficient conjugation and vector-field invariance;
-2. transfer the finite coordinate majorant to the real norm and instantiate Picard–Lindelöf;
+2. identify the rational finite vector with the continuum-real physical coordinates and instantiate Picard–Lindelöf;
 3. derive the physical energy identity and global finite flow;
 4. derive the time-dependent physical shell balance and boundary atoms;
 5. prove the operator-valued cross-shell almost-orthogonality theorem;
@@ -135,7 +148,7 @@ The exponent identity `2/4 + 3/6 = 1` is checked exactly. The physical negative-
 Round 29 does not prove:
 
 - the full nonlinear Galerkin vector field preserves the reconstructed carrier;
-- Picard–Lindelöf or a global finite physical trajectory;
+- continuum-real coordinate equivalence, Picard–Lindelöf or a global finite physical trajectory;
 - the physical time-dependent shell equation;
 - an operator-valued cutoff-uniform commutator estimate;
 - the periodic singular-kernel theorem;
