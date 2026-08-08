@@ -107,11 +107,11 @@ bilinearDotNegateLeft :
   ≡ C3.complexNegate (C3.bilinearDot3 u v)
 bilinearDotNegateLeft u v =
   trans
-    (Algebra.bilinearDot3Commutative (C3.complex3Negate u) v)
+    (Algebra.bilinearDotCommutative (C3.complex3Negate u) v)
     (trans
       (Algebra.bilinearDotNegateRight v u)
       (cong C3.complexNegate
-        (Algebra.bilinearDot3Commutative v u)))
+        (Algebra.bilinearDotCommutative v u)))
 
 modeDotConjugateValueIsConjugate :
   ∀ {r} {F : C3.RealField r}
