@@ -40,32 +40,32 @@ import DASHI.Physics.YangMills.BalabanP33FiniteKKTAdmissibleProjectorExact as KK
 open import DASHI.Physics.YangMills.BalabanP33FiniteKKTBlockGreenAlgebraExact public
 
 liftConstraintSource : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) →
+    (greenData : ConstrainedGreenData Multiplier) →
   (Multiplier → ℚ) → KKT.StateVector
-liftConstraintSource data source =
-  KKT.constraintAdjointApply (projectorData data)
-    (KKT.multiplierGreenApply (projectorData data) source)
+liftConstraintSource greenData source =
+  KKT.constraintAdjointApply (projectorData greenData)
+    (KKT.multiplierGreenApply (projectorData greenData) source)
 
 liftConstraintSourceExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) source row →
-  KKT.constraintApply (projectorData data)
-    (liftConstraintSource data source) row ≡ source row
-liftConstraintSourceExact data source row = trans
-  (KKT.constraintGramActionExact (projectorData data)
-    (KKT.multiplierGreenApply (projectorData data) source) row)
+    (greenData : ConstrainedGreenData Multiplier) source row →
+  KKT.constraintApply (projectorData greenData)
+    (liftConstraintSource greenData source) row ≡ source row
+liftConstraintSourceExact greenData source row = trans
+  (KKT.constraintGramActionExact (projectorData greenData)
+    (KKT.multiplierGreenApply (projectorData greenData) source) row)
   (Matrix.matrixInverseRightExact
-    (KKT.gramInverseCertificate (projectorData data)) source row)
+    (KKT.gramInverseCertificate (projectorData greenData)) source row)
 
 liftConstraintSourceProjectZero : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) source coordinate →
-  project data (liftConstraintSource data source) coordinate ≡ 0ℚ
-liftConstraintSourceProjectZero data source coordinate =
+    (greenData : ConstrainedGreenData Multiplier) source coordinate →
+  project greenData (liftConstraintSource greenData source) coordinate ≡ 0ℚ
+liftConstraintSourceProjectZero greenData source coordinate =
   KKT.killedByProjector
     (KKT.selectedProjectorKillsRepairSpace
-      (projectorData data) (liftConstraintSource data source)
+      (projectorData greenData) (liftConstraintSource greenData source)
       record
         { KKT.SelectedRepairSpace.multiplier =
-            KKT.multiplierGreenApply (projectorData data) source
+            KKT.multiplierGreenApply (projectorData greenData) source
         ; KKT.SelectedRepairSpace.representedByAdjoint = λ selected → refl })
     coordinate
 
@@ -79,167 +79,185 @@ open KKTBlockVector public
 blockStateSolution : ∀ {Multiplier} →
   ConstrainedGreenData Multiplier → KKT.StateVector →
   (Multiplier → ℚ) → KKT.StateVector
-blockStateSolution data stateSource multiplierSource =
+blockStateSolution greenData stateSource multiplierSource =
   let
-    lifted = liftConstraintSource data multiplierSource
-    reducedSource = Rect.vectorSubtract stateSource (hessianApply data lifted)
-  in Rect.vectorAdd (green data reducedSource) lifted
+    lifted = liftConstraintSource greenData multiplierSource
+    reducedSource =
+      Rect.vectorSubtract stateSource (hessianApply greenData lifted)
+  in Rect.vectorAdd (green greenData reducedSource) lifted
 
 blockResidual : ∀ {Multiplier} →
   ConstrainedGreenData Multiplier → KKT.StateVector →
   (Multiplier → ℚ) → KKT.StateVector
-blockResidual data stateSource multiplierSource =
+blockResidual greenData stateSource multiplierSource =
   Rect.vectorSubtract stateSource
-    (hessianApply data (blockStateSolution data stateSource multiplierSource))
+    (hessianApply greenData
+      (blockStateSolution greenData stateSource multiplierSource))
 
 blockMultiplierSolution : ∀ {Multiplier} →
   ConstrainedGreenData Multiplier → KKT.StateVector →
   (Multiplier → ℚ) → Multiplier → ℚ
-blockMultiplierSolution data stateSource multiplierSource =
-  KKT.multiplierGreenApply (projectorData data)
-    (KKT.constraintApply (projectorData data)
-      (blockResidual data stateSource multiplierSource))
+blockMultiplierSolution greenData stateSource multiplierSource =
+  KKT.multiplierGreenApply (projectorData greenData)
+    (KKT.constraintApply (projectorData greenData)
+      (blockResidual greenData stateSource multiplierSource))
 
 solveKKTBlock : ∀ {Multiplier} → ConstrainedGreenData Multiplier →
   KKTBlockVector Multiplier → KKTBlockVector Multiplier
-solveKKTBlock data source = block
-  (blockStateSolution data (statePart source) (multiplierPart source))
-  (blockMultiplierSolution data (statePart source) (multiplierPart source))
+solveKKTBlock greenData source = block
+  (blockStateSolution greenData (statePart source) (multiplierPart source))
+  (blockMultiplierSolution greenData (statePart source) (multiplierPart source))
 
 applyKKTBlock : ∀ {Multiplier} → ConstrainedGreenData Multiplier →
   KKTBlockVector Multiplier → KKTBlockVector Multiplier
-applyKKTBlock data vector = block
+applyKKTBlock greenData vector = block
   (Rect.vectorAdd
-    (hessianApply data (statePart vector))
-    (KKT.constraintAdjointApply (projectorData data)
+    (hessianApply greenData (statePart vector))
+    (KKT.constraintAdjointApply (projectorData greenData)
       (multiplierPart vector)))
-  (KKT.constraintApply (projectorData data) (statePart vector))
+  (KKT.constraintApply (projectorData greenData) (statePart vector))
 
 blockStateConstraintExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier)
+    (greenData : ConstrainedGreenData Multiplier)
     stateSource multiplierSource row →
-  KKT.constraintApply (projectorData data)
-    (blockStateSolution data stateSource multiplierSource) row
+  KKT.constraintApply (projectorData greenData)
+    (blockStateSolution greenData stateSource multiplierSource) row
   ≡ multiplierSource row
-blockStateConstraintExact data stateSource multiplierSource row =
+blockStateConstraintExact greenData stateSource multiplierSource row =
   let
-    lifted = liftConstraintSource data multiplierSource
-    reducedSource = Rect.vectorSubtract stateSource (hessianApply data lifted)
-    z = green data reducedSource
-    zKernel : KKT.SelectedConstraintKernel (projectorData data) z
+    lifted = liftConstraintSource greenData multiplierSource
+    reducedSource =
+      Rect.vectorSubtract stateSource (hessianApply greenData lifted)
+    z = green greenData reducedSource
+    zKernel : KKT.SelectedConstraintKernel (projectorData greenData) z
     zKernel = KKT.selectedProjectorImageIsConstraintKernel
-      (projectorData data) z
+      (projectorData greenData) z
       record { KKT.SelectedProjectorImage.fixedByProjector =
-        greenProjectFixed data reducedSource }
-  in trans (constraintAddExact data z lifted row)
+        greenProjectFixed greenData reducedSource }
+  in trans (constraintAddExact greenData z lifted row)
     (trans
       (cong₂ _+_ (KKT.constraintZero zKernel row)
-        (liftConstraintSourceExact data multiplierSource row))
+        (liftConstraintSourceExact greenData multiplierSource row))
       (ℚRing.solve-∀ (multiplierSource row)))
 
 projectedBlockResidualZero : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier)
+    (greenData : ConstrainedGreenData Multiplier)
     stateSource multiplierSource coordinate →
-  project data (blockResidual data stateSource multiplierSource) coordinate
+  project greenData
+    (blockResidual greenData stateSource multiplierSource) coordinate
   ≡ 0ℚ
-projectedBlockResidualZero data stateSource multiplierSource coordinate =
+projectedBlockResidualZero greenData stateSource multiplierSource coordinate =
   let
-    lifted = liftConstraintSource data multiplierSource
-    reducedSource = Rect.vectorSubtract stateSource (hessianApply data lifted)
-    z = green data reducedSource
+    lifted = liftConstraintSource greenData multiplierSource
+    reducedSource =
+      Rect.vectorSubtract stateSource (hessianApply greenData lifted)
+    z = green greenData reducedSource
     state = Rect.vectorAdd z lifted
-    projectZ : ∀ selected → project data z selected ≡ z selected
-    projectZ = greenProjectFixed data reducedSource
+    projectZ : ∀ selected → project greenData z selected ≡ z selected
+    projectZ = greenProjectFixed greenData reducedSource
     hessianStateSplit : ∀ selected →
-      hessianApply data state selected
-      ≡ hessianApply data z selected + hessianApply data lifted selected
-    hessianStateSplit = hessianAddExact data z lifted
+      hessianApply greenData state selected
+      ≡ hessianApply greenData z selected
+        + hessianApply greenData lifted selected
+    hessianStateSplit = hessianAddExact greenData z lifted
     residualAsReducedMinusHz : ∀ selected →
-      blockResidual data stateSource multiplierSource selected
-      ≡ Rect.vectorSubtract reducedSource (hessianApply data z) selected
+      blockResidual greenData stateSource multiplierSource selected
+      ≡ Rect.vectorSubtract reducedSource (hessianApply greenData z) selected
     residualAsReducedMinusHz selected = trans
       (cong (stateSource selected -_) (hessianStateSplit selected))
       (ℚRing.solve-∀ (stateSource selected)
-        (hessianApply data lifted selected) (hessianApply data z selected))
+        (hessianApply greenData lifted selected)
+        (hessianApply greenData z selected))
     projectedHzIsProjectedReduced : ∀ selected →
-      project data (hessianApply data z) selected
-      ≡ project data reducedSource selected
+      project greenData (hessianApply greenData z) selected
+      ≡ project greenData reducedSource selected
     projectedHzIsProjectedReduced selected =
       let
-        projectedHessian = projectedHessianAfterGreen data reducedSource selected
+        projectedHessian =
+          projectedHessianAfterGreen greenData reducedSource selected
         replaceInnerProject :
-          project data (hessianApply data (project data z)) selected
-          ≡ project data (hessianApply data z) selected
-        replaceInnerProject = projectPointwiseCong data
-          (hessianPointwiseCong data projectZ) selected
+          project greenData
+            (hessianApply greenData (project greenData z)) selected
+          ≡ project greenData (hessianApply greenData z) selected
+        replaceInnerProject = projectPointwiseCong greenData
+          (hessianPointwiseCong greenData projectZ) selected
       in trans (sym replaceInnerProject) projectedHessian
-  in trans (projectPointwiseCong data residualAsReducedMinusHz coordinate)
-    (trans (projectSubtractExact data reducedSource (hessianApply data z) coordinate)
+  in trans
+    (projectPointwiseCong greenData residualAsReducedMinusHz coordinate)
+    (trans
+      (projectSubtractExact greenData reducedSource
+        (hessianApply greenData z) coordinate)
       (trans
-        (cong (project data reducedSource coordinate -_)
+        (cong (project greenData reducedSource coordinate -_)
           (projectedHzIsProjectedReduced coordinate))
-        (ℚRing.solve-∀ (project data reducedSource coordinate))))
+        (ℚRing.solve-∀ (project greenData reducedSource coordinate))))
 
 blockResidualIsRepair : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier)
+    (greenData : ConstrainedGreenData Multiplier)
     stateSource multiplierSource coordinate →
-  blockResidual data stateSource multiplierSource coordinate
-  ≡ KKT.selectedConstraintRepair (projectorData data)
-      (blockResidual data stateSource multiplierSource) coordinate
-blockResidualIsRepair data stateSource multiplierSource coordinate =
+  blockResidual greenData stateSource multiplierSource coordinate
+  ≡ KKT.selectedConstraintRepair (projectorData greenData)
+      (blockResidual greenData stateSource multiplierSource) coordinate
+blockResidualIsRepair greenData stateSource multiplierSource coordinate =
   let
-    residual = blockResidual data stateSource multiplierSource
+    residual = blockResidual greenData stateSource multiplierSource
     decomposition = KKT.selectedAdmissibleOrthogonalDecompositionPointwise
-      (projectorData data) residual coordinate
+      (projectorData greenData) residual coordinate
     projectedZero = projectedBlockResidualZero
-      data stateSource multiplierSource coordinate
+      greenData stateSource multiplierSource coordinate
   in trans decomposition
     (trans
       (cong (_+ KKT.selectedConstraintRepair
-        (projectorData data) residual coordinate) projectedZero)
+        (projectorData greenData) residual coordinate) projectedZero)
       (ℚRing.solve-∀
-        (KKT.selectedConstraintRepair (projectorData data) residual coordinate)))
+        (KKT.selectedConstraintRepair
+          (projectorData greenData) residual coordinate)))
 
 blockStateEquationExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier)
+    (greenData : ConstrainedGreenData Multiplier)
     stateSource multiplierSource coordinate →
   Rect.vectorAdd
-    (hessianApply data (blockStateSolution data stateSource multiplierSource))
-    (KKT.constraintAdjointApply (projectorData data)
-      (blockMultiplierSolution data stateSource multiplierSource))
+    (hessianApply greenData
+      (blockStateSolution greenData stateSource multiplierSource))
+    (KKT.constraintAdjointApply (projectorData greenData)
+      (blockMultiplierSolution greenData stateSource multiplierSource))
     coordinate ≡ stateSource coordinate
-blockStateEquationExact data stateSource multiplierSource coordinate =
+blockStateEquationExact greenData stateSource multiplierSource coordinate =
   let
-    state = blockStateSolution data stateSource multiplierSource
-    residual = blockResidual data stateSource multiplierSource
+    state = blockStateSolution greenData stateSource multiplierSource
+    residual = blockResidual greenData stateSource multiplierSource
     adjointMultiplierIsRepair :
-      KKT.constraintAdjointApply (projectorData data)
-        (blockMultiplierSolution data stateSource multiplierSource) coordinate
-      ≡ KKT.selectedConstraintRepair (projectorData data) residual coordinate
+      KKT.constraintAdjointApply (projectorData greenData)
+        (blockMultiplierSolution greenData stateSource multiplierSource) coordinate
+      ≡ KKT.selectedConstraintRepair (projectorData greenData) residual coordinate
     adjointMultiplierIsRepair = refl
   in trans
-    (cong (hessianApply data state coordinate +_) adjointMultiplierIsRepair)
+    (cong (hessianApply greenData state coordinate +_)
+      adjointMultiplierIsRepair)
     (trans
-      (cong (hessianApply data state coordinate +_)
-        (sym (blockResidualIsRepair data stateSource multiplierSource coordinate)))
+      (cong (hessianApply greenData state coordinate +_)
+        (sym (blockResidualIsRepair
+          greenData stateSource multiplierSource coordinate)))
       (ℚRing.solve-∀ (stateSource coordinate)
-        (hessianApply data state coordinate)))
+        (hessianApply greenData state coordinate)))
 
 record PointwiseKKTBlockEquality {Multiplier : Set}
     (left right : KKTBlockVector Multiplier) : Set where
   field
-    stateEqual : ∀ coordinate → statePart left coordinate ≡ statePart right coordinate
-    multiplierEqual : ∀ row → multiplierPart left row ≡ multiplierPart right row
+    stateEqual : ∀ coordinate →
+      statePart left coordinate ≡ statePart right coordinate
+    multiplierEqual : ∀ row →
+      multiplierPart left row ≡ multiplierPart right row
 open PointwiseKKTBlockEquality public
 
 kktBlockRightInverseExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) source →
+    (greenData : ConstrainedGreenData Multiplier) source →
   PointwiseKKTBlockEquality
-    (applyKKTBlock data (solveKKTBlock data source)) source
-kktBlockRightInverseExact data source = record
-  { stateEqual = blockStateEquationExact data
+    (applyKKTBlock greenData (solveKKTBlock greenData source)) source
+kktBlockRightInverseExact greenData source = record
+  { stateEqual = blockStateEquationExact greenData
       (statePart source) (multiplierPart source)
-  ; multiplierEqual = blockStateConstraintExact data
+  ; multiplierEqual = blockStateConstraintExact greenData
       (statePart source) (multiplierPart source) }
 
 finiteKKTBlockSolveLevel : ProofLevel
