@@ -8,6 +8,7 @@ import DASHI.Foundations.StageSymmetryCarrierTowerExact as Sym
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
 import DASHI.Foundations.DialecticCubieTetralemmaExact as Cubie
 import DASHI.Foundations.SecondRevolutionJankoTarotExact as Revolution
+import DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact as Candidate
 import DASHI.Biology.StageSymmetrySSP15BridgeExact as SSP
 import DASHI.Biology.SporadicSignedFiftyThreeTarotProjectionExact as Signed
 import DASHI.Biology.SporadicTarotDependencyExact as Sporadic
@@ -78,12 +79,10 @@ signedSporadic54Regression = Signed.sporadicSigned54DimensionIsFiftyFour
 
 signedPolaritySharesCardRegression :
   Signed.canonicalArcanaProjection
-    (Signed.sporadicSignedState Sporadic.J2
-      DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact.positiveFibre)
+    (Signed.sporadicSignedState Sporadic.J2 Candidate.positiveFibre)
   ≡
   Signed.canonicalArcanaProjection
-    (Signed.sporadicSignedState Sporadic.J2
-      DASHI.Biology.ReducedFiftyThreeOrbitCandidateExact.negativeFibre)
+    (Signed.sporadicSignedState Sporadic.J2 Candidate.negativeFibre)
 signedPolaritySharesCardRegression = Signed.polaritiesShareArcana Sporadic.J2
 
 selectorReturnsWitnessRegression :
