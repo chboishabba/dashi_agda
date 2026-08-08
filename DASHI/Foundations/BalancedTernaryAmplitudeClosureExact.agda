@@ -143,7 +143,7 @@ record ResidueDeficit369 : Set where
     quotient3 remainder3 : Nat
     quotientRemainder3 : 3 * quotient3 + remainder3 ≡ value
     deficit3 : Nat
-    closesAtNext3 : value + deficit3 ≡ 6
+    closesAtNext3 : value + deficit3 ≡ 3 * (suc quotient3)
 
     quotient6 remainder6 : Nat
     quotientRemainder6 : 6 * quotient6 + remainder6 ≡ value
