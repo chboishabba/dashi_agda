@@ -74,7 +74,7 @@ delayedPositivePartBelowAtomwiseFallback :
 delayedPositivePartBelowAtomwiseFallback laws [] =
   subst
     (λ left → left ≤ 0ℚ)
-    (positiveZero laws)
+    (sym (positiveZero laws))
     ℚₚ.≤-refl
 delayedPositivePartBelowAtomwiseFallback laws (value ∷ rest) =
   ℚₚ.≤-trans
