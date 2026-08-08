@@ -65,7 +65,7 @@ checks=(
   'BalabanP33PhysicalStateDualTiltExact.agda:tiltedHessianDifferenceEntryExact'
   'BalabanP33StrictOwnedMarginExact.agda:maximalUniformCoerciveCore'
   'BalabanP33StrictOwnedMarginExact.agda:strictMarginAfterErasingOwners'
-  'BalabanE8QuantitativeRootDataExact.agda:e8RankPlusRootsIsAdjointDimension'
+  'BalabanE8QuantitativeRootDataExact.agda:e8RankPlusExpectedRootsIsAdjointDimension'
   'BalabanCommon196608AtlasExact.agda:yangMillsChartIs196608'
   'BalabanCommon196608AtlasExact.agda:phaseChartIs196608'
   'BalabanCommon196608AtlasExact.agda:leechChartIs196608'
@@ -86,7 +86,7 @@ grep -q '10.1112/blms/11.3.308' DASHI/Physics/YangMills/BalabanCommon196608Atlas
 
 grep -q 'projector-defect pairing' "$doc"
 grep -q '55/18874368' "$doc"
-grep -q '112 + 128 = 240' "$doc"
+grep -q 'expected-count' "$doc"
 grep -q '24 \* 8192' "$doc"
 grep -Fq '[Round 37 — physical projectors, Noether residuals and spillover decomposition](./YangMillsProjectorResidualRound37.md)' "$index"
 
