@@ -31,31 +31,27 @@ module DASHI.Moonshine.MonsterOggNonaryProbeAuthorityExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Retain p = 9q+r as a coordinate-valued probe on the established Ogg-prime
--- carrier and prove the complete finite arithmetic requested by the roadmap:
+-- Construct the complete p = 9q+r table for the fifteen Ogg primes and prove:
 --
---   * all fifteen addresses are exact;
---   * no address has fine residue zero or six;
+--   * no fine residue is zero or six;
 --   * every prime above three has a unit residue modulo nine;
---   * the six unit residues are exactly three complement modes with two
---     orientations, and complement preserves the mode while reversing the
---     orientation;
---   * the sorted start/end FRACTRAN residue lists are (7,2,5) and (2,5,8),
---     but the first sorted comparison is not a +3 rotation;
+--   * the six units are three complement modes times two orientations;
+--   * complement is involutive, preserves mode and reverses orientation;
+--   * the sorted FRACTRAN signatures are (7,2,5) and (2,5,8), but are not a
+--     single +3 rotation;
 --   * the actual FRACTRAN replacements are 23->47, 7->59 and 11->71, and none
---     of those three replacement legs is the proposed +3 residue map;
---   * the exact earning computation reaches 47*59*71=196883 and hence
---     196884 after adjoining one;
---   * 71+10=81, 2*41=81+1, and the three displayed reflection pairs sum to
---     82;
---   * the established semantic carrier partition has sizes 7+7+1, with p71
---     the unique member in coarse nonary sheet seven;
---   * the unnormalised 7A eta-quotient prefix has constant ten, whereas the
---     normalized Hauptmodul prefix has constant zero.
+--     of those replacement legs is the proposed +3 map;
+--   * the exact earning chain reaches 196883 and then 196884 after adjoining
+--     one;
+--   * 71+10=81, 2*41=81+1, and the three displayed pairs sum to 82;
+--   * the repository's semantic carrier partition is exactly 7+7+1, with p71
+--     the unique lane in coarse sheet seven;
+--   * the unnormalised 7A eta-quotient prefix has constant ten, while the
+--     normalized McKay--Thompson Hauptmodul has constant zero.
 --
--- The module does not infer a transition dynamics, Monster-module splitting,
--- genus-zero theorem, Leray projector, causal explanation of the Ogg list, or
--- Yang--Mills theorem from these finite arithmetic facts.
+-- None of these finite arithmetic results constructs a transition dynamics,
+-- Monster-module splitting, genus-zero proof, Leray projector, explanation of
+-- the Ogg list, or Yang--Mills theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -69,7 +65,7 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import MoonshineEarn as Earn
 
 ------------------------------------------------------------------------
--- Complete Euclidean address table.
+-- Complete nonary address table.
 ------------------------------------------------------------------------
 
 record NonaryProbe (prime : Lane.MonsterPrimeLane) : Set where
@@ -100,9 +96,7 @@ nonaryProbe Lane.p59 = nonary-probe 6 5 refl
 nonaryProbe Lane.p71 = nonary-probe 7 8 refl
 
 ------------------------------------------------------------------------
--- The two proposed closed-sheet residues 0 and 6 are absent.  The positive
--- statement is only membership in this finite residue carrier; no temporal
--- transition or "forward move" is inferred from membership alone.
+-- Exact exclusion of the proposed closed-sheet residues zero and six.
 ------------------------------------------------------------------------
 
 data OpenNonaryResidue : Nat → Set where
@@ -133,47 +127,40 @@ allOggFineResiduesAreOpen Lane.p47 = open2
 allOggFineResiduesAreOpen Lane.p59 = open5
 allOggFineResiduesAreOpen Lane.p71 = open8
 
+openResidueAvoidsZero :
+  ∀ {residue} → OpenNonaryResidue residue → residue ≡ 0 → ⊥
+openResidueAvoidsZero open1 ()
+openResidueAvoidsZero open2 ()
+openResidueAvoidsZero open3 ()
+openResidueAvoidsZero open4 ()
+openResidueAvoidsZero open5 ()
+openResidueAvoidsZero open7 ()
+openResidueAvoidsZero open8 ()
+
+openResidueAvoidsSix :
+  ∀ {residue} → OpenNonaryResidue residue → residue ≡ 6 → ⊥
+openResidueAvoidsSix open1 ()
+openResidueAvoidsSix open2 ()
+openResidueAvoidsSix open3 ()
+openResidueAvoidsSix open4 ()
+openResidueAvoidsSix open5 ()
+openResidueAvoidsSix open7 ()
+openResidueAvoidsSix open8 ()
+
 allOggFineResiduesAvoidZero :
   (prime : Lane.MonsterPrimeLane) →
   fineResidue (nonaryProbe prime) ≡ 0 → ⊥
-allOggFineResiduesAvoidZero Lane.p2 ()
-allOggFineResiduesAvoidZero Lane.p3 ()
-allOggFineResiduesAvoidZero Lane.p5 ()
-allOggFineResiduesAvoidZero Lane.p7 ()
-allOggFineResiduesAvoidZero Lane.p11 ()
-allOggFineResiduesAvoidZero Lane.p13 ()
-allOggFineResiduesAvoidZero Lane.p17 ()
-allOggFineResiduesAvoidZero Lane.p19 ()
-allOggFineResiduesAvoidZero Lane.p23 ()
-allOggFineResiduesAvoidZero Lane.p29 ()
-allOggFineResiduesAvoidZero Lane.p31 ()
-allOggFineResiduesAvoidZero Lane.p41 ()
-allOggFineResiduesAvoidZero Lane.p47 ()
-allOggFineResiduesAvoidZero Lane.p59 ()
-allOggFineResiduesAvoidZero Lane.p71 ()
+allOggFineResiduesAvoidZero prime =
+  openResidueAvoidsZero (allOggFineResiduesAreOpen prime)
 
 allOggFineResiduesAvoidSix :
   (prime : Lane.MonsterPrimeLane) →
   fineResidue (nonaryProbe prime) ≡ 6 → ⊥
-allOggFineResiduesAvoidSix Lane.p2 ()
-allOggFineResiduesAvoidSix Lane.p3 ()
-allOggFineResiduesAvoidSix Lane.p5 ()
-allOggFineResiduesAvoidSix Lane.p7 ()
-allOggFineResiduesAvoidSix Lane.p11 ()
-allOggFineResiduesAvoidSix Lane.p13 ()
-allOggFineResiduesAvoidSix Lane.p17 ()
-allOggFineResiduesAvoidSix Lane.p19 ()
-allOggFineResiduesAvoidSix Lane.p23 ()
-allOggFineResiduesAvoidSix Lane.p29 ()
-allOggFineResiduesAvoidSix Lane.p31 ()
-allOggFineResiduesAvoidSix Lane.p41 ()
-allOggFineResiduesAvoidSix Lane.p47 ()
-allOggFineResiduesAvoidSix Lane.p59 ()
-allOggFineResiduesAvoidSix Lane.p71 ()
+allOggFineResiduesAvoidSix prime =
+  openResidueAvoidsSix (allOggFineResiduesAreOpen prime)
 
 ------------------------------------------------------------------------
--- Unit residues modulo 9.  This is an arithmetic consequence of primality
--- above 3, represented exhaustively for the finite Ogg carrier.
+-- Unit residues and exact complement-mode/orientation quotient.
 ------------------------------------------------------------------------
 
 data UnitResidue9 : Nat → Set where
@@ -220,13 +207,7 @@ allAboveThreeOggResiduesAreUnits above47 = unit2
 allAboveThreeOggResiduesAreUnits above59 = unit5
 allAboveThreeOggResiduesAreUnits above71 = unit8
 
-------------------------------------------------------------------------
--- Complement on the six units is additive negation modulo 9.  The exact
--- finite quotient is three complement modes crossed with two orientations.
-------------------------------------------------------------------------
-
-complementUnitResidue :
-  ∀ {residue} → UnitResidue9 residue → Nat
+complementUnitResidue : ∀ {residue} → UnitResidue9 residue → Nat
 complementUnitResidue unit1 = 8
 complementUnitResidue unit2 = 7
 complementUnitResidue unit4 = 5
@@ -273,8 +254,7 @@ data UnitComplementMode : Set where
 data UnitOrientation : Set where
   directOrientation counterOrientation : UnitOrientation
 
-unitComplementMode :
-  ∀ {residue} → UnitResidue9 residue → UnitComplementMode
+unitComplementMode : ∀ {residue} → UnitResidue9 residue → UnitComplementMode
 unitComplementMode unit1 = mode18
 unitComplementMode unit8 = mode18
 unitComplementMode unit2 = mode27
@@ -282,8 +262,7 @@ unitComplementMode unit7 = mode27
 unitComplementMode unit4 = mode45
 unitComplementMode unit5 = mode45
 
-unitOrientation :
-  ∀ {residue} → UnitResidue9 residue → UnitOrientation
+unitOrientation : ∀ {residue} → UnitResidue9 residue → UnitOrientation
 unitOrientation unit1 = directOrientation
 unitOrientation unit2 = directOrientation
 unitOrientation unit4 = directOrientation
@@ -320,8 +299,7 @@ complementFlipsUnitOrientation unit7 = refl
 complementFlipsUnitOrientation unit8 = refl
 
 ------------------------------------------------------------------------
--- Sorted-list comparison from the supplied observation.  It is useful as a
--- signature, but it is not the actual FRACTRAN replacement relation.
+-- Sorted residue signature and correction of the proposed uniform +3 map.
 ------------------------------------------------------------------------
 
 sortedEarningStartResidues : List Nat
@@ -364,11 +342,7 @@ proposedFractranOrderedPlusThreeImpossible proposed =
     (ProposedFractranOrderedPlusThree.sevenToTwo proposed)
 
 ------------------------------------------------------------------------
--- Actual FRACTRAN replacement relation.
---
--- The fractions fire as 47/23, 59/7, 71/11, so the replacement pairs are
--- 23->47, 7->59, 11->71.  These must not be confused with zipping the sorted
--- source and target prime lists.
+-- Actual FRACTRAN replacement relation and exact computation.
 ------------------------------------------------------------------------
 
 data ActualFractranReplacement : Set where
@@ -392,26 +366,29 @@ replacementTargetResidue : ActualFractranReplacement → Nat
 replacementTargetResidue replacement =
   fineResidue (nonaryProbe (replacementTargetPrime replacement))
 
-actualReplacementResiduePairs :
+replacement23By47SourceResidueIs5 :
   replacementSourceResidue replace23By47 ≡ 5
-  × replacementTargetResidue replace23By47 ≡ 2
-actualReplacementResiduePairs = refl , refl
-  where
-    open import Data.Product using (_×_; _,_)
+replacement23By47SourceResidueIs5 = refl
 
-actualReplacementSevenToFiftyNineResidues :
+replacement23By47TargetResidueIs2 :
+  replacementTargetResidue replace23By47 ≡ 2
+replacement23By47TargetResidueIs2 = refl
+
+replacement7By59SourceResidueIs7 :
   replacementSourceResidue replace7By59 ≡ 7
-  × replacementTargetResidue replace7By59 ≡ 5
-actualReplacementSevenToFiftyNineResidues = refl , refl
-  where
-    open import Data.Product using (_×_; _,_)
+replacement7By59SourceResidueIs7 = refl
 
-actualReplacementElevenToSeventyOneResidues :
+replacement7By59TargetResidueIs5 :
+  replacementTargetResidue replace7By59 ≡ 5
+replacement7By59TargetResidueIs5 = refl
+
+replacement11By71SourceResidueIs2 :
   replacementSourceResidue replace11By71 ≡ 2
-  × replacementTargetResidue replace11By71 ≡ 8
-actualReplacementElevenToSeventyOneResidues = refl , refl
-  where
-    open import Data.Product using (_×_; _,_)
+replacement11By71SourceResidueIs2 = refl
+
+replacement11By71TargetResidueIs8 :
+  replacementTargetResidue replace11By71 ≡ 8
+replacement11By71TargetResidueIs8 = refl
 
 actualFractranReplacementIsNotPlusThree :
   (replacement : ActualFractranReplacement) →
@@ -441,7 +418,7 @@ earnedPrimeProductPlusOneIs196884 : 47 * 59 * 71 + 1 ≡ 196884
 earnedPrimeProductPlusOneIs196884 = Earn.observer
 
 ------------------------------------------------------------------------
--- Depth-two nonary arithmetic and the exact 82-reflection around 41.
+-- Depth-two arithmetic and reflection around 41.
 ------------------------------------------------------------------------
 
 seventyOnePlusTenCompletesEightyOne : 71 + 10 ≡ 81
@@ -474,12 +451,7 @@ fortyOneIsReflectionFixedPoint : 41 + 41 ≡ 82
 fortyOneIsReflectionFixedPoint = refl
 
 ------------------------------------------------------------------------
--- The 7A normalization distinction.
---
--- The unnormalised eta-quotient representative (h+7)^2/h has prefix
--- q^-1 + 10 + 51q + 204q^2 + ... .  Subtracting ten gives the normalized
--- McKay--Thompson Hauptmodul q^-1 + 51q + 204q^2 + ... .  Thus ten is an
--- exact normalization offset, not by itself a ten-dimensional Monster module.
+-- Precise 7A normalization prefix.
 ------------------------------------------------------------------------
 
 data SevenAPrefixDegree : Set where
@@ -523,9 +495,7 @@ seventyOneDeficitMatchesUnnormalizedSevenAConstant :
 seventyOneDeficitMatchesUnnormalizedSevenAConstant = refl
 
 ------------------------------------------------------------------------
--- Exact semantic 7+7+1 carrier partition already used by the repository.
--- This section constructs the finite partition directly, rather than importing
--- its older receipt wrapper.
+-- Exact semantic 7+7+1 finite carrier partition.
 ------------------------------------------------------------------------
 
 data MirrorA7Lane : Set where
@@ -634,8 +604,7 @@ sign1FineResidueIsEight :
 sign1FineResidueIsEight = refl
 
 ------------------------------------------------------------------------
--- Promotion contracts: arithmetic probes become representation-theoretic only
--- after an actual upstairs operation intertwines with the downstairs probe.
+-- Promotion contract and exact boundary.
 ------------------------------------------------------------------------
 
 record NonaryProbeEquivariantPromotion
@@ -656,6 +625,9 @@ record MonsterOggNonaryProbeBoundary : Set where
   field
     allAddressesConstructed : Bool
     allAddressesConstructedIsTrue : allAddressesConstructed ≡ true
+    allAboveThreeResiduesUnitCertified : Bool
+    allAboveThreeResiduesUnitCertifiedIsTrue :
+      allAboveThreeResiduesUnitCertified ≡ true
     closedResiduesZeroAndSixExcluded : Bool
     closedResiduesZeroAndSixExcludedIsTrue :
       closedResiduesZeroAndSixExcluded ≡ true
@@ -704,8 +676,10 @@ canonicalMonsterOggNonaryProbeBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     true refl
+    false refl
     false refl
     false refl
     false refl
