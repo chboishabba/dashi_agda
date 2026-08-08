@@ -9,7 +9,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound27Exact where
 -- * sharp finite shell-projector algebra;
 -- * Fourier reality as an involutive fixed-point carrier;
 -- * state/dual separation and exact signed translation--multiplier
---   commutator;
+--   commutator, pointwise and under finite test pairings;
 -- * division-free centred five-source probe;
 -- * maximal uniform viscosity-core theorem under unique ownership;
 -- * exact Plucker/Gram geometry for physical resonant triads;
@@ -23,6 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound27Exact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 import Agda.Builtin.Nat as Nat
 open import Data.Nat.Base using (_≤_)
 import Data.Integer.Base as Int
@@ -70,6 +71,19 @@ record Round27ExactEvidence : Set₁ where
         (Commutator.signedDifferenceCommutator
           multiplier shift state) output
 
+    finitePairedSignedCommutator :
+      (modes : List Z3.FourierMode) →
+      (test multiplier : Commutator.MultiplierDualCarrier) →
+      (shift : Z3.FourierMode) →
+      (state : Commutator.FourierStateCarrier) →
+      Commutator.finitePairing modes test
+        (Commutator.translationMultiplierCommutator
+          multiplier shift state)
+      ≡
+      Commutator.finitePairing modes test
+        (Commutator.signedDifferenceCommutator
+          multiplier shift state)
+
     centredFiveSourceProbe :
       (weights : Probe.FiveSourceWeights) →
       (source : Probe.FiveSourceCoreDefect) →
@@ -113,6 +127,8 @@ canonicalRound27ExactEvidence = record
       Projector.finiteShellProjectorResolution
   ; signedTranslationMultiplierCommutator =
       Commutator.translationMultiplierCommutatorExact
+  ; finitePairedSignedCommutator =
+      Commutator.finitePairingCommutesWithSignedDifference
   ; centredFiveSourceProbe = Probe.centredFiveSourceProbeIdentity
   ; maximalUniformViscosityCore =
       Core.maximalUniformCoreDominatesEveryCandidate
@@ -131,6 +147,7 @@ record Round27HighestAlphaBoundary : Set where
     fullPhysicalVectorFieldEquivariance : Bool
     stateDualCarrierSeparated : Bool
     signedTranslationMultiplierCommutator : Bool
+    finiteSignedPairingIdentity : Bool
     cutoffUniformSignedOperatorTax : Bool
     centredFiveSourceProbe : Bool
     maximalUniformViscosityCore : Bool
@@ -150,7 +167,7 @@ canonicalRound27HighestAlphaBoundary : Round27HighestAlphaBoundary
 canonicalRound27HighestAlphaBoundary =
   round27-highest-alpha-boundary
     true true true true false
-    true true false
+    true true true false
     true true false true true
     false false false false false false
 
