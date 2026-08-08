@@ -17,18 +17,23 @@ import DASHI.Physics.YangMills.BalabanP33PlaquetteBoundaryProjectorExact as Boun
 import DASHI.Physics.YangMills.BalabanP33PhysicalProjectorCompositionExact as Composition
 import DASHI.Physics.YangMills.BalabanSelectedVariationProjectionSpilloverExact as Spillover
 import DASHI.Physics.YangMills.BalabanSelectedVariationProjectedNoetherResidualExact as Noether
+import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 import DASHI.Physics.YangMills.BalabanP33PlaquetteOrientationReversalExact as Reversal
+import DASHI.Physics.YangMills.BalabanP33QuaternionFourFactorTelescopeExact as Telescope
 import DASHI.Physics.YangMills.BalabanWilsonSixteenAtomCentredProbeExact as Probe
 import DASHI.Physics.YangMills.BalabanP33LiteralHessianSpectralCertificateExact as Spectral
+import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Physical
 import DASHI.Physics.YangMills.BalabanP33PhysicalStateDualTiltExact as Tilt
 import DASHI.Physics.YangMills.BalabanP33StrictOwnedMarginExact as Margin
 import DASHI.Physics.YangMills.BalabanE8QuantitativeRootDataExact as E8
 import DASHI.Physics.YangMills.BalabanCommon196608AtlasExact as Atlas
 
 open import Agda.Builtin.Equality using (_≡_)
+import Agda.Builtin.Nat as Nat
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _/_)
+  (ℚ; 1ℚ; _+_; _*_; _≤_; _/_)
 
 physicalProjectorIdempotenceRegression :
   ∀ mask vector coordinate →
@@ -62,8 +67,8 @@ projectedSpilloverBudgetRegression :
     (data : Spillover.ProjectionSpilloverData
       background field plaquette) →
   Spillover.projectedExtractionSpillover data
-  ≤ Noether.Selector.remainingSingletonCoefficient
-      * Noether.Wilson.plaquetteCrossCharge field plaquette
+  ≤ Selector.remainingSingletonCoefficient
+      * Wilson.plaquetteCrossCharge field plaquette
 projectedSpilloverBudgetRegression =
   Spillover.projectedExtractionSpilloverUpper
 
@@ -71,16 +76,15 @@ projectedNoetherConstructionProducesRound36Witness :
   ∀ {background field plaquette} →
   Noether.ProjectedSingletonConstruction
     background field plaquette →
-  Noether.Selector.SingletonExtractionWitness
+  Selector.SingletonExtractionWitness
     background field plaquette
 projectedNoetherConstructionProducesRound36Witness =
   Noether.projectedConstructionToSingletonWitness
 
 orientationReversalPreservesWilsonScalar :
   ∀ value →
-  Reversal.Telescope.wilsonScalar
-    (Reversal.reverseQuaternion value)
-  ≡ Reversal.Telescope.wilsonScalar value
+  Telescope.wilsonScalar (Reversal.reverseQuaternion value)
+  ≡ Telescope.wilsonScalar value
 orientationReversalPreservesWilsonScalar =
   Reversal.reverseWilsonScalarInvariant
 
@@ -107,13 +111,13 @@ p33SpectralFloorRegression :
   Spectral.PhysicalQuadraticFloor
     matrix Spectral.p33OneThirtySecond →
   Spectral.PhysicalEigenpair matrix vector eigenvalue →
-  Spectral.Physical.physicalSU2CoordinateNormSq vector ≡ 1ℚ →
+  Physical.physicalSU2CoordinateNormSq vector ≡ 1ℚ →
   Spectral.p33OneThirtySecond ≤ eigenvalue
 p33SpectralFloorRegression =
   Spectral.p33NormalizedEigenvalueAtLeastOneThirtySecond
 
 e8RankRootsDimensionRegression :
-  E8.e8Rank + E8.e8RootCount ≡ E8.e8AdjointDimension
+  Nat._+_ E8.e8Rank E8.e8RootCount ≡ E8.e8AdjointDimension
 e8RankRootsDimensionRegression =
   E8.e8RankPlusRootsIsAdjointDimension
 
