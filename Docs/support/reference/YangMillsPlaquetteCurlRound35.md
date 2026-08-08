@@ -1,31 +1,45 @@
-# Yang–Mills Round 35 — literal plaquette differentiation, covariant curl and adversarial stress test
+# Yang–Mills Round 35 — plaquette curl, canonical Wilson partition and budget audit
 
 ## Status
 
-Round 35 advances the proof-bearing Gate-I producers. It does not add another endpoint record and does not claim to close the selected-background Wilson estimate.
-
-The new checked targets are:
-
-1. the literal first derivative of the same four physical link jets used by the sixteen-atom Hessian;
-2. its exact right-trivialized covariant-curl form;
-3. factorization of the covariant-minus-flat curl through explicit adjoint link defects;
-4. selected-background/same-perturbation instantiation;
-5. a canonical four-singleton/eleven-higher-order partition for every named Wilson atom defect;
-6. exact assembly of that partition into the computed plaquette Wilson defect;
-7. an exact rational adversarial test showing why the Euler–Lagrange correlation remains necessary;
-8. a fail-closed audit of the newly surfaced Einstein–Cartan–Yang–Mills monograph and its later regulated-slab paper.
+Round 35 advances the proof-bearing Gate-I lane. It does not add another endpoint record and does not claim that the selected-background Wilson estimate or the Clay problem is closed.
 
 A static audit is not a kernel result. Kernel acceptance is claimed only after the focused Agda workflow succeeds.
 
+The completed algebraic producers are now:
+
+```text
+selectedBackgroundPlaquetteFirstVariation
+selectedBackgroundCovariantDiscreteCurlIdentity
+covariantCurlDefectFactorization
+sixteenAtomsPartitionIntoLinearAndNonlinear
+canonicalPhysicalWilsonDecomposition
+canonicalPairDeepDecomposition
+squareRootFreeScaledYoungLower
+genericDeepRemainderEnvelope
+```
+
+The remaining physical producers are:
+
+```text
+variationalEulerLagrangeEquationAtSelectedBackground
+selectedBackgroundRegularityControlsPlaquetteCurvature
+physicalSelectedFactorEnvelopeInstantiation
+selectedBackgroundCorrelatedWilsonLower
+groupedDeepWilsonRemainderLower
+selectedBackgroundPhysicalWLocal
+selectedBackgroundHessianOneThirtySecond
+```
+
 ## 1. Literal first variation
 
-For the repository's ordered plaquette
+For the repository’s actual ordered plaquette
 
 ```text
 P = A B C^-1 D^-1
 ```
 
-and the right-exponential physical perturbation convention, Round 35 proves that the generated first derivative is the sum of exactly four ordered terms:
+the generated first derivative is proved to contain exactly four ordered terms:
 
 ```text
 P' = A' B C^-1 D^-1
@@ -34,34 +48,22 @@ P' = A' B C^-1 D^-1
    + A B C^-1 (D^-1)'.
 ```
 
-The third and fourth first jets are not inserted by an independent sign convention. They unfold from the existing physical inverse-link jets:
+The inverse-link signs and multiplication order unfold from the existing physical jets:
 
 ```text
 (C exp(t X2))^-1|'0 = -X2 C^-1,
 (D exp(t X3))^-1|'0 = -X3 D^-1.
 ```
 
-The finite list of first-variation atoms has length four and sums exactly to the recursively differentiated ordered product.
-
 Formal owner:
 
 ```text
-DASHI/Physics/YangMills/
-  BalabanP33PhysicalPlaquetteFirstVariationExact.agda
+BalabanP33PhysicalPlaquetteFirstVariationExact.agda
 ```
 
-## 2. Exact right-trivialized covariant curl
+## 2. Exact covariant curl
 
-Let
-
-```text
-A = U0,
-B = U1,
-C = positive link underlying the third inverse factor,
-D = positive link underlying the fourth inverse factor.
-```
-
-Round 35 proves first, for arbitrary rational quaternions, a norm-weighted polynomial identity. For unit links the norm weights become one, yielding
+After right trivialization, exact rational quaternion multiplication gives
 
 ```text
 P' P^-1
@@ -71,138 +73,83 @@ P' P^-1
   - Ad_(A B C^-1) X3.
 ```
 
-The repeated `Ad_(A B)` is essential. It follows from the literal derivative
+The repeated `Ad_(A B)` is essential. It is derived from the literal left derivative `-X2 C^-1`; it is not selected by analogy with a continuum formula.
 
-```text
-(C exp(t X2))^-1|'0 = -X2 C^-1,
-```
-
-so the third insertion is transported by the prefix before the inverse factor. This transport order is derived from exact quaternion multiplication rather than guessed from a continuum mnemonic.
-
-The reverse ordered product is also proved to be the right inverse of the physical plaquette product using the four unit-norm link equalities.
+The reverse ordered product is separately proved to be the physical plaquette right inverse from the four unit-link hypotheses.
 
 Formal owner:
 
 ```text
-DASHI/Physics/YangMills/
-  BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
+BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
 ```
 
-Primary references recorded in the Agda header:
+Sources recorded in the Agda header include Brian C. Hall, *Lie Groups, Lie Algebras, and Representations*, DOI `10.1007/978-3-319-13467-3`; Kenneth G. Wilson, *Confinement of Quarks*, DOI `10.1103/PhysRevD.10.2445`; and Tadeusz Bałaban, *Propagators for Lattice Gauge Theories in a Background Field*, DOI `10.1007/BF01240355`.
 
-- Brian C. Hall, *Lie Groups, Lie Algebras, and Representations: An Elementary Introduction*, DOI `10.1007/978-3-319-13467-3`;
-- Kenneth G. Wilson, *Confinement of Quarks*, DOI `10.1103/PhysRevD.10.2445`;
-- Tadeusz Bałaban, *Propagators for Lattice Gauge Theories in a Background Field*, DOI `10.1007/BF01240355`.
+## 3. Flat baseline and adjoint-defect factorization
 
-## 3. Flat-curl baseline
-
-For four flat right-exponential jets, the ordered first derivative is exactly the pure quaternion associated to the oriented discrete curl:
+At the identity background:
 
 ```text
-P'_flat
-  = pure(X0 + X1 - X2 - X3).
+P'_flat = pure(X0 + X1 - X2 - X3),
+q0(P'_flat) = 0.
 ```
 
-Its quaternion scalar part is therefore exactly zero. This is the first-derivative companion to the existing theorem that the flat Wilson second variation is the squared curl norm.
-
-The same identity is instantiated on the literal physical identity background.
-
-Formal owner:
+The covariant-minus-flat curl is exactly
 
 ```text
-DASHI/Physics/YangMills/
-  BalabanP33FlatPlaquetteFirstVariationCurlExact.agda
+(Ad_A X0 - X0)
++ (Ad_AB X1 - X1)
+- (Ad_AB X2 - X2)
+- (Ad_ABC^-1 X3 - X3).
 ```
 
-## 4. Covariant-minus-flat defect factorization
-
-Define
-
-```text
-curl_A = Ad_A X0 + Ad_AB X1 - Ad_AB X2 - Ad_ABC^-1 X3,
-curl_1 = X0 + X1 - X2 - X3.
-```
-
-Round 35 proves the exact decomposition
-
-```text
-curl_A - curl_1
-  = (Ad_A X0 - X0)
-  + (Ad_AB X1 - X1)
-  - (Ad_AB X2 - X2)
-  - (Ad_ABC^-1 X3 - X3).
-```
-
-Every adjoint defect is then replaced by the checked quaternion factorization
+Every adjoint defect is factorized using
 
 ```text
 Ad_U X - X
   = (U - 1) X U^-1 + X (U^-1 - 1).
 ```
 
-This exposes the shared prefixes `A`, `AB`, and `ABC^-1`. A sharp selected-background proof must exploit correlations among these terms rather than estimate four unrelated links independently.
+This exposes the shared prefixes `A`, `AB` and `ABC^-1`, which a correlated selected-background estimate must exploit.
 
-Formal owner:
-
-```text
-DASHI/Physics/YangMills/
-  BalabanP33CovariantCurlDefectFactorizationExact.agda
-```
-
-## 5. Same selected background and same perturbation
-
-The first-variation/covariant-curl theorem and the defect factorization are transported onto the exact selected variational background already used by the Round-34 physical-radius and terminal-Hessian composition.
-
-For every selected perturbation family, the following objects now share one background and one perturbation field:
+Formal owners:
 
 ```text
-selected variational background,
-physical first variation,
-physical covariant curl,
-adjoint-defect factorization,
-gauge residual,
-constraint residual,
-terminal Hessian.
+BalabanP33FlatPlaquetteFirstVariationCurlExact.agda
+BalabanP33CovariantCurlDefectFactorizationExact.agda
+BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
 ```
 
-Formal owner:
+The selected-background instantiation uses the same background and perturbation already consumed by the gauge, constraint and terminal-Hessian theorems.
+
+## 4. Canonical sixteen-atom partition
+
+For one named Wilson placement, write its four selected factors as
 
 ```text
-DASHI/Physics/YangMills/
-  BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
+Ai = Bi + Di.
 ```
-
-## 6. Canonical sixteen-atom linear/nonlinear partition
-
-For one named Wilson placement, write its four selected background factors as
-
-```text
-Ai = Bi + Di,
-```
-
-where `Bi` is the corresponding identity-background selected factor and `Di` is its exact quaternion difference.
 
 Exact ordered multiplication proves
 
 ```text
 A0 A1 A2 A3 - B0 B1 B2 B3
-  = linear4(D;B) + nonlinear11(D;B).
+  = sum of four singleton terms
+    + sum of eleven higher-order terms.
 ```
 
-The first term is the sum over singleton defect subsets:
+The singleton terms are
 
 ```text
-D0 B1 B2 B3
-+ B0 D1 B2 B3
-+ B0 B1 D2 B3
-+ B0 B1 B2 D3.
+D0 B1 B2 B3,
+B0 D1 B2 B3,
+B0 B1 D2 B3,
+B0 B1 B2 D3.
 ```
 
-The second term contains all eleven ordered products with at least two defect factors: six pair terms, four triple terms and the quartic term. Therefore every named placement has exactly four singleton terms and eleven higher-order terms.
+The eleven higher-order terms are exactly six quadratic terms, four cubic terms and one quartic term. No quaternion factors are commuted.
 
-This expansion is proved componentwise over exact rational quaternions. It does not commute factors and does not appeal to an abstract multilinearity receipt.
-
-The expansion is then instantiated on each of the four diagonal and twelve ordered-cross placements. Summing the sixteen exact scalar identities proves
+The theorem is instantiated on all four diagonal and twelve ordered-cross placements and summed to obtain the literal physical plaquette identity
 
 ```text
 D2W_A(p)[h,h] - D2W_1(p)[h,h]
@@ -210,42 +157,148 @@ D2W_A(p)[h,h] - D2W_1(p)[h,h]
   + canonicalGroupedNonlinearRemainder_p(A,h).
 ```
 
-Round 34 previously accepted functions called `physicalLinearPart`, `physicalGroupedRemainder` and an equality connecting them. Round 35 now constructs those functions and the equality from the literal named atoms. Callers may supply only the two signed lower bounds:
-
-```text
--(rho/36) C_p(h) <= canonicalLinearPart_p(A,h),
--(rho/144) q_p(h) <= canonicalGroupedNonlinearRemainder_p(A,h).
-```
-
-Those canonical bounds construct the existing physical W-local object and compose directly to the terminal coefficients
-
-```text
-10739/196608,
-1/32.
-```
+Thus the Round-34 decomposition is no longer caller-selected.
 
 Formal owner:
 
 ```text
-DASHI/Physics/YangMills/
-  BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
 ```
 
-## 7. Exact adversarial radius stress test
+## 5. The budget-compatible pair/deep refinement
 
-Before attempting the `rho/36` selected-curvature estimate, Round 35 checks a rational unit-quaternion adversary.
-
-Set
+The first canonical partition is algebraically natural but not numerically optimal. Put
 
 ```text
-rho = 1/8192,
+epsilon = 2 rho,
+rho = 1/8192.
+```
+
+Per named placement, the six quadratic terms have coefficient
+
+```text
+6 epsilon^2,
+```
+
+while the four cubic terms and quartic term have coefficient
+
+```text
+4 epsilon^3 + epsilon^4.
+```
+
+The sixteen placement Young budgets sum to four times the local diagonal charge. Therefore the all-placement coefficients are
+
+```text
+pair  = 24 epsilon^2
+      = 3/2097152,
+
+deep  = 16 epsilon^3 + 4 epsilon^4
+      = 16385/70368744177664.
+```
+
+The diagonal target is
+
+```text
+rho/144 = 1/1179648.
+```
+
+Exact arithmetic proves
+
+```text
+deep + 536723447/633318697598976 = rho/144,
+```
+
+so the cubic–quartic channel fits the diagonal budget with positive slack. In contrast,
+
+```text
+rho/144 + 11/18874368 = pair,
+```
+
+so charging all six quadratic terms to the diagonal channel is impossible at the configured constants.
+
+The canonical decomposition is therefore refined to
+
+```text
+Wilson defect
+  = correlated(singleton + pair)
+  + deep(triple + quartic).
+```
+
+The pair cost per cross charge is exactly
+
+```text
+rho/256,
+```
+
+leaving the positive correlated coefficient
+
+```text
+rho/36 - rho/256 = 55/18874368.
+```
+
+Formal owners:
+
+```text
+BalabanP33PhysicalWilsonCorrelatedDeepPartitionExact.agda
+BalabanP33WilsonPairDeepBudgetExact.agda
+```
+
+## 6. Square-root-free deep-remainder theorem
+
+A new rational theorem proves that, whenever
+
+```text
+N(q) <= (s left)(s right),
+s,left,right >= 0,
+```
+
+then
+
+```text
+-s(left+right)/2 <= -q0(q) <= s(left+right)/2.
+```
+
+The lower bound is obtained by applying the upper theorem to `-q`; no square root or absolute-value axiom is used.
+
+For an ordered four-factor placement, assume
+
+```text
+N(Di) <= epsilon^2 wi,
+N(Bi) = wi,
+w0 w1 w2 w3 = leftCharge * rightCharge.
+```
+
+Exact norm multiplicativity then gives four cubic bounds at scale `epsilon^3` and one quartic bound at scale `epsilon^4`. Their signed scalar sum proves
+
+```text
+-(4 epsilon^3 + epsilon^4)
+  * (leftCharge + rightCharge)/2
+<= WilsonScalar(deepRemainder).
+```
+
+All scalar upper transports are explicit rational equalities. No unresolved factor placeholder is used.
+
+Formal owners:
+
+```text
+BalabanP33QuaternionScaledYoungLowerExact.agda
+BalabanP33WilsonDeepRemainderEnvelopeExact.agda
+```
+
+The remaining deep-channel seam is the physical selected-factor envelope instantiation: the literal positive and inverse link jets must be shown to satisfy these `Bi/Di/wi` hypotheses under the selected-background radius. Once that is supplied for all sixteen placements, the exact coefficient theorem above promotes the generic deep bound to the required physical `rho/144` lower estimate.
+
+## 7. Exact adversarial curvature stress test
+
+Take the rational unit quaternion
+
+```text
 q = (67108863/67108865,
      16384/67108865,
      0,
      0).
 ```
 
-The module proves exactly:
+The repository proves
 
 ```text
 N(q) = 1,
@@ -255,34 +308,21 @@ N(q^-1 - 1) + 1/1125899923619840 = 4 rho^2.
 
 Thus `q` lies strictly inside the configured radius.
 
-Choose two insertions which cancel at the flat background:
+For
 
 ```text
 X0 = Y,
 X1 = -Y,
-X2 = X3 = 0.
+X2 = X3 = 0,
 ```
 
-Then
+the flat curl is zero, but the transported curl satisfies
 
 ```text
-curl_flat = 0,
+N(curl_q) = 1073741824/4503599761588225.
 ```
 
-but transporting the second insertion by `q` gives
-
-```text
-N(curl_q)
-  = 1073741824/4503599761588225.
-```
-
-For the local cross-charge value `C = 6`, the nominal linear scale is
-
-```text
-(rho/36) C = 1/49152.
-```
-
-The squared target scale has the exact positive deficit
+At cross charge `C=6`, `(rho/36)C=1/49152`, and
 
 ```text
 N(curl_q) - (1/49152)^2
@@ -291,24 +331,23 @@ N(curl_q) - (1/49152)^2
   > 0.
 ```
 
-This is not a counterexample to the desired selected-background theorem: the adversary is not asserted to satisfy Bałaban's Euler–Lagrange equation. It is a fail-closed regression proving that radius and flat cancellation alone still do not supply the correlated curvature estimate.
+This does not refute the desired selected-background theorem because no Euler–Lagrange equation is assumed. It proves that radius plus flat cancellation is insufficient.
 
 Formal owner:
 
 ```text
-DASHI/Physics/YangMills/
-  BalabanP33CovariantCurlRadiusStressTestExact.agda
+BalabanP33CovariantCurlRadiusStressTestExact.agda
 ```
 
-## 8. Einstein–Cartan–Yang–Mills and regulated-slab claim audit
+## 8. Einstein–Cartan–Yang–Mills source audit
 
-The attached material also surfaced work by Emmanouil Karolos Čižek. Round 35 records three cited sources rather than treating their conclusions as imported theorems:
+Round 35 also records, without importing their conclusions, Emmanouil Karolos Čižek’s:
 
 - *A Constructive Einstein–Cartan–Yang–Mills Theory with Positive Mass Gap in Four Dimensions*, DOI `10.5281/zenodo.17246443`;
-- *A Structural and Conceptual Overview of A Constructive Einstein–Cartan–Yang–Mills Theory with Positive Mass Gap in Four Dimensions*, DOI `10.5281/zenodo.17718647`;
-- *Mixing of Boundary Langevin Dynamics for Regulated Four-Dimensional Yang–Mills Slabs*, DOI `10.5281/zenodo.18280110`.
+- structural overview, DOI `10.5281/zenodo.17718647`;
+- regulated slab paper, DOI `10.5281/zenodo.18280110`.
 
-The audit introduces distinct signatures for:
+The formal audit distinguishes:
 
 ```text
 Einstein-Cartan-Yang-Mills theory,
@@ -318,88 +357,45 @@ boundary slab transfer kernel,
 reconstructed physical Hamiltonian.
 ```
 
-It proves that none of the following promotions is definitional:
-
-```text
-Einstein-Cartan-Yang-Mills = pure Yang-Mills,
-auxiliary boundary Langevin generator = slab transfer kernel,
-slab transfer kernel = reconstructed physical Hamiltonian.
-```
-
-For the monograph, the first open theory bridge is:
-
-```text
-torsionGravitySectorExactlyDecouplesToPureYM.
-```
-
-For the narrower slab route, the first open continuation is:
-
-```text
-ultravioletContinuumOnR4ActuallyConstructed.
-```
-
-The slab result remains represented as a conditional theorem about a regulated/fixed-spacing construction, not as the Clay Hamiltonian mass gap.
+It proves that none of these theory/operator promotions is definitional. The first monograph bridge is exact torsion/gravity-sector decoupling to pure Yang–Mills. The slab route remains conditional on an ultraviolet continuum construction on `R4` and a physical operator identification.
 
 Formal owner:
 
 ```text
-DASHI/Physics/YangMills/
-  YangMillsCizekEinsteinCartanClaimAuditExact.agda
+YangMillsCizekEinsteinCartanClaimAuditExact.agda
 ```
 
 ## 9. Exact remaining Gate-I frontier
 
-Round 35 closes:
+The shortest remaining sequence is now:
 
 ```text
-selectedBackgroundPlaquetteFirstVariation
-selectedBackgroundCovariantDiscreteCurlIdentity
-sixteenAtomsPartitionIntoLinearAndNonlinear
-canonicalPhysicalWilsonDecomposition
-```
-
-The remaining proof-bearing sequence is now:
-
-```text
+physicalSelectedFactorEnvelopeInstantiation
 variationalEulerLagrangeEquationAtSelectedBackground
 selectedBackgroundRegularityControlsPlaquetteCurvature
-selectedBackgroundCurvatureLinearLower
-canonicalWilsonLinearPartIsCurvatureExpression
-groupedSixteenAtomNonlinearRemainderLower
+selectedBackgroundCorrelatedWilsonLower
+physicalDeepWilsonRemainderLower
 selectedBackgroundPhysicalWLocal
 selectedBackgroundHessianOneThirtySecond
 ```
 
-The two numerical targets remain:
+The refined numerical targets are:
 
 ```text
--(rho/36) C_p(h) <= canonicalLinearPart_p(A,h),
--(rho/144) q_p(h) <= canonicalGroupedNonlinearRemainder_p(A,h).
+-(rho/36) C_p(h)
+  <= correlatedSingletonPairPart_p(A,h),
+
+-(rho/144) q_p(h)
+  <= deepTripleQuarticRemainder_p(A,h).
 ```
 
-The first inequality must use the constrained selected-background equation or an equivalent correlated curvature theorem. The exact stress test rules out replacing it by a radius-only estimate.
+The deep coefficient arithmetic and generic quaternion theorem are complete; its remaining step is the literal physical envelope. The correlated inequality still requires the selected Euler–Lagrange/regularity theorem. The stress test rules out replacing that theorem by a radius-only estimate.
 
-The second inequality must preserve the canonical grouped atom structure; an indiscriminate triangle inequality may spend more than the available `rho/144` budget.
-
-## 10. After Gate I
-
-Once those two estimates are proved, the existing Round-34/Round-35 composition yields
+After these close, the existing composition yields
 
 ```text
 H_A[h,h] >= 10739/196608 ||h||^2
            >= 1/32 ||h||^2.
 ```
 
-The next highest-alpha work is then:
-
-```text
-literal Hessian matrix representation,
-Hermiticity,
-finite stencil,
-row/column interaction mass,
-constructive inverse,
-physical Combes–Thomas decay,
-one scale-uniform RG step.
-```
-
-No finite-volume theorem, including the completed Gate-I theorem, is definitionally equal to the Clay conclusion. The Round-32 Clay contract and Round-33 source/all-group guards remain authoritative.
+The next gate is then the literal Hessian matrix, Hermiticity, finite stencil, row/column interaction mass, constructive inverse, physical Combes–Thomas decay and one scale-uniform RG step.
