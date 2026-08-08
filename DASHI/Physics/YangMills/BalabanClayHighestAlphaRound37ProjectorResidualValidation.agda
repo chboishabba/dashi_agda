@@ -8,8 +8,8 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound37ProjectorResidualVa
 -- boundary projector, commuting triple-mask composition, a finite covector
 -- spillover identity, same-object Noether residual reduction and assembly,
 -- orientation reversal, the sixteen-atom centred probe, finite Rayleigh
--- certificates, strict owned RG margins, E8 root-data numerics and a typed
--- 196608 atlas.
+-- certificates, strict owned RG margins, E8 expected-count/classification
+-- arithmetic and a typed 196608 atlas.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound36FiniteAtomSelectorValidation
@@ -127,10 +127,11 @@ p33SpectralFloorRegression :
 p33SpectralFloorRegression =
   Spectral.p33NormalizedEigenvalueAtLeastOneThirtySecond
 
-e8RankRootsDimensionRegression :
-  Nat._+_ E8.e8Rank E8.e8RootCount ≡ E8.e8AdjointDimension
-e8RankRootsDimensionRegression =
-  E8.e8RankPlusRootsIsAdjointDimension
+e8RankExpectedRootsDimensionRegression :
+  Nat._+_ E8.e8Rank E8.e8ExpectedTotalRootCount
+  ≡ E8.e8AdjointDimension
+e8RankExpectedRootsDimensionRegression =
+  E8.e8RankPlusExpectedRootsIsAdjointDimension
 
 yangMillsAtlasChartRegression :
   Atlas.chartValue Atlas.yangMillsWilsonRadiusChart
