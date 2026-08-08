@@ -86,7 +86,8 @@ sampleGeneratorWeylLaw :
   (state : Generators.X6) →
   Generators.modulationExponent Generators.axis2
     (Generators.translate Generators.axis2 state)
-  ≡ Generators.kronecker Generators.axis2 Generators.axis2
-    Generators.+3 Generators.modulationExponent Generators.axis2 state
+  ≡ Generators._+3_
+      (Generators.kronecker Generators.axis2 Generators.axis2)
+      (Generators.modulationExponent Generators.axis2 state)
 sampleGeneratorWeylLaw =
   Generators.generatorWeylExponent Generators.axis2 Generators.axis2
