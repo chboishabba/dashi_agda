@@ -9,6 +9,7 @@ on:
       - 'agent/monster-3b-projector-resolution-round3'
       - 'agent/monster-3b-orbifold-local-module-round4'
     paths:
+      - 'DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda'
       - 'DASHI/Moonshine/MoonshineOrbifoldWeightTwoDecompositionExact.agda'
       - 'DASHI/Moonshine/MoonshineOrbifoldMasslessStateRemovalExact.agda'
       - 'DASHI/Moonshine/MoonshineZ3OrbifoldThreeLocalSiblingExact.agda'
@@ -19,6 +20,8 @@ on:
       - 'DASHI/Moonshine/Monster3BOrbifoldLocalModuleRound4Validation.agda'
       - 'DASHI/EverythingMonster3BOrbifoldLocalModuleRound4.agda'
       - 'Docs/support/reference/Monster3BOrbifoldLocalModuleRound4.md'
+      - 'scripts/monster_3b_normalizer_restriction.g'
+      - 'scripts/render_monster_3b_certificate.py'
       - 'scripts/check_monster_3b_orbifold_local_module_round4.sh'
       - '.github/workflows/monster-3b-orbifold-local-module-round4.yml'
   workflow_dispatch:
@@ -38,6 +41,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install GAP, CTblLib and certificate dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gap gap-character-tables
+          python -m pip install --disable-pip-version-check numpy matplotlib
       - name: Install Nix
         uses: cachix/install-nix-action@v31
       - name: Cache pinned Agda environment
@@ -52,3 +65,14 @@ jobs:
           export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
           export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
           bash scripts/check_monster_3b_orbifold_local_module_round4.sh
+      - name: Upload actual MN3B and model certificates
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: monster-3b-orbifold-local-module-round4
+          path: |
+            build/monster_3b_normalizer_restriction.json
+            build/monster_3b_heisenberg_model_certificate.json
+            build/generated/DASHI/Moonshine/Generated/Monster3BRestrictionCertificate.agda
+            build/monster_3b_dashboard/elementary_abelian_two_plane_certificate.json
+          if-no-files-found: error
