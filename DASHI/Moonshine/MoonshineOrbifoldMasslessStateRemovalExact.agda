@@ -24,8 +24,9 @@ module DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact where
 -- Isolate the exact finite logic behind the phrase "no massless states".
 -- The untwisted invariant weight-one carrier and the retained twisted
 -- weight-one carrier are each empty.  Their orbifold direct sum is therefore
--- empty.  Weight two is inhabited, so the first positive grade of the finite
--- profile is exactly two.
+-- empty.  The typed FLM weight-two carrier is inhabited by a nonconformal
+-- untwisted coordinate, so the first positive grade of this finite profile is
+-- exactly two.
 --
 -- This does not identify a two-dimensional conformal grading gap with a
 -- four-dimensional Yang--Mills Hamiltonian mass gap.
@@ -77,13 +78,18 @@ MoonshineWeightZero : Set
 MoonshineWeightZero = Fin 1
 
 MoonshineWeightTwo : Set
-MoonshineWeightTwo = Fin W2.moonshineWeightTwoDimension
+MoonshineWeightTwo = W2.MoonshineWeightTwoCoordinate
 
 vacuumWitness : MoonshineWeightZero
 vacuumWitness = zero
 
 weightTwoExcitationWitness : MoonshineWeightTwo
-weightTwoExcitationWitness = zero
+weightTwoExcitationWitness =
+  W2.includeMonsterNontrivialCoordinate (inj₁ zero)
+
+weightTwoExcitationIsNotConformalVector :
+  weightTwoExcitationWitness ≡ W2.conformalVectorCoordinate → ⊥
+weightTwoExcitationIsNotConformalVector ()
 
 record OrbifoldMasslessRemoval
     (FixedWeightOne TwistedWeightOne : Set) : Set where
@@ -120,6 +126,8 @@ record FiniteConformalExcitationProfile : Set where
       firstPositiveExcitationGrade ≡ 2
     noWeightOneState : IsEmpty MoonshineWeightOne
     weightTwoState : MoonshineWeightTwo
+    weightTwoStateNonconformal :
+      weightTwoState ≡ W2.conformalVectorCoordinate → ⊥
 
 open FiniteConformalExcitationProfile public
 
@@ -127,7 +135,10 @@ canonicalFiniteConformalExcitationProfile :
   FiniteConformalExcitationProfile
 canonicalFiniteConformalExcitationProfile =
   finite-conformal-excitation-profile
-    0 2 refl refl moonshineWeightOneEmpty weightTwoExcitationWitness
+    0 2 refl refl
+    moonshineWeightOneEmpty
+    weightTwoExcitationWitness
+    weightTwoExcitationIsNotConformalVector
 
 conformalExcitationIndexIsTwo :
   firstPositiveExcitationGrade canonicalFiniteConformalExcitationProfile ≡ 2
@@ -139,6 +150,8 @@ record MoonshineYangMillsGapBoundary : Set where
     moonshineWeightOneRemovalConstructed :
       IsEmpty MoonshineWeightOne
     moonshineWeightTwoInhabited : MoonshineWeightTwo
+    moonshineWeightTwoWitnessIsNonconformal :
+      moonshineWeightTwoInhabited ≡ W2.conformalVectorCoordinate → ⊥
     conformalExcitationIndex : Nat
     conformalExcitationIndexExact : conformalExcitationIndex ≡ 2
     conformalIndexProvesFourDimensionalYangMillsGap : Bool
@@ -153,6 +166,7 @@ canonicalMoonshineYangMillsGapBoundary =
   moonshine-yang-mills-gap-boundary
     moonshineWeightOneEmpty
     weightTwoExcitationWitness
+    weightTwoExcitationIsNotConformalVector
     2 refl
     false refl
     false refl
