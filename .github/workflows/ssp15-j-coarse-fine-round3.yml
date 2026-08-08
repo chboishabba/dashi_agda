@@ -16,6 +16,7 @@ on:
       - 'DASHI/Biology/StageSymmetrySSP15BridgeExact.agda'
       - 'DASHI/Biology/StageSymmetrySSP15SpectrumExact.agda'
       - 'DASHI/Biology/SSP15JCoarseFineIntegratedExact.agda'
+      - 'DASHI/Biology/SSP15PrimeValuedStateExact.agda'
       - 'DASHI/Biology/SSP15JCoarseFineRound3Validation.agda'
       - 'DASHI/Biology/PointedBulkSporadicTarotEverything.agda'
       - 'Docs/support/reference/SSP15JCoarseFineRound3.md'
