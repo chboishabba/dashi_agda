@@ -71,13 +71,21 @@ HL ⇒ |jk-jp| ≤ 1,
 HH ⇒ |jp-jq| ≤ 1.
 ```
 
-Classification of an output fibre erases exactly to the original fibre, and every rational interaction functional satisfies the exact physical identity
+Classification of an output fibre erases exactly to the original fibre. Given
 
 ```text
-Ftotal = FHH + FLH + FHL + FCC + FCom.
+triadValue : PhysicalTriad → ℚ,
+commutator : FourierMode → ℚ,
 ```
 
-The constants are the fixed shell constants `Csep=3`, `Cout=2`, `Cin=2`; no final cutoff enters them.
+the actual five-source fibre is evaluated cell by cell: triadic cells use `triadValue` on their stored incidence, while the appended `differentiatedCommutator k` cell uses `commutator(k)`. Folding that evaluator proves the exact physical identity
+
+```text
+Ftotal(N,k)
+= FHH + FLH + FHL + FCC + commutator(k).
+```
+
+Thus the `Com` contribution is fibre-derived from its stored output mode, not supplied as an unrelated scalar. The constants are the fixed shell constants `Csep=3`, `Cout=2`, `Cin=2`; no final cutoff enters them.
 
 ### L5 — Finite filtered-vorticity/enstrophy identity — checked exact
 
