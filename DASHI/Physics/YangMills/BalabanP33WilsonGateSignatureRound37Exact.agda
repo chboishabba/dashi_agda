@@ -22,14 +22,9 @@ module DASHI.Physics.YangMills.BalabanP33WilsonGateSignatureRound37Exact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Physics.YangMills.BalabanP33WilsonAtomOwnershipExact as Atom
-
-------------------------------------------------------------------------
--- Placement orbits are calculated at the subset-combinatorics level.  The
--- physical covariant-prefix action may refine these classes, so the signature
--- stores that remaining dependency explicitly.
-------------------------------------------------------------------------
 
 data PlacementOrbit : Set where
   singletonOrbit adjacentPairOrbit oppositePairOrbit
