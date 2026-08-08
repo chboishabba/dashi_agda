@@ -33,7 +33,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
-import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as Scaling
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 
 ModeState : ∀ {r} (F : C3.RealField r) → Set r
 ModeState F = Z3.FourierMode → C3.Complex3 F
@@ -164,6 +164,19 @@ symbolAtModeIsConjugateAtNegative diagonal mode =
         (Symmetry.negateModeInvolutive mode)))
     (symbolReality diagonal (Z3.negateMode mode))
 
+complex3ConjugateScale :
+  ∀ {r} {F : C3.RealField r}
+    (scalar : C3.Complex F)
+    (value : C3.Complex3 F) →
+  C3.complex3Conjugate (C3.complex3Scale scalar value)
+  ≡ C3.complex3Scale
+      (C3.complexConjugate scalar)
+      (C3.complex3Conjugate value)
+complex3ConjugateScale scalar (C3.complex3 vx vy vz)
+  rewrite Hermitian.complexConjugateMultiply scalar vx
+        | Hermitian.complexConjugateMultiply scalar vy
+        | Hermitian.complexConjugateMultiply scalar vz = refl
+
 diagonalFieldCongruent :
   ∀ {r} {F : C3.RealField r}
     (diagonal : RealityDiagonalSymbol F) →
@@ -191,7 +204,7 @@ diagonalFieldEquivariant diagonal state mode =
             (state (Z3.negateMode mode))))
       (symbolAtModeIsConjugateAtNegative diagonal mode))
     (sym
-      (Scaling.complex3ConjugateScale
+      (complex3ConjugateScale
         (symbol diagonal (Z3.negateMode mode))
         (state (Z3.negateMode mode))))
 
