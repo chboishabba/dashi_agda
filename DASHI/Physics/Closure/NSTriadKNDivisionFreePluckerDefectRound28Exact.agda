@@ -31,6 +31,7 @@ open import Data.Integer using (ℤ; _+_; _-_; _*_; -_; _≤_)
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
 open import Data.Product.Base using (_,_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadPluckerInvariantRound27Exact as Plucker
@@ -167,7 +168,7 @@ parallelScaledModesHaveZeroDefect leftScale rightScale direction =
         refl
         (factor * factor)
   in
-  Relation.Binary.PropositionalEquality.trans scaled zeroProduct
+  trans scaled zeroProduct
 
 record CrossMultipliedAngularDefect
     (thresholdSquared : ℤ)
