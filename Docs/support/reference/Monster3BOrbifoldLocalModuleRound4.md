@@ -152,8 +152,9 @@ The numerical equality `90 = 12 + 78` remains insufficient by itself.
 
 ## Sources
 
-- Frenkel, Lepowsky and Meurman, *Vertex Operator Algebras and the Monster*, ISBN `978-0-12-267065-7`; no DOI assigned.
-- Scott Carnahan, *51 constructions of the Moonshine module*, arXiv `1707.02954`; no DOI assigned here.
+- Igor B. Frenkel, James Lepowsky and Arne Meurman, *Vertex Operator Algebras and the Monster*, ISBN `978-0-12-267065-7`; no DOI assigned.
+- Scott Carnahan, *51 constructions of the Moonshine module*, DOI `10.4310/CNTP.2018.v12.n2.a3`, arXiv `1707.02954`.
+- Michael P. Tuite, *On the relationship between monstrous Moonshine and the uniqueness of the Moonshine module*, DOI `10.1007/BF02099885`, arXiv `hep-th/9305057`.
 - Hsian-Yang Chen, Ching Hung Lam and Hiroki Shimakura, *Z_3-orbifold construction of the Moonshine vertex operator algebra and some maximal 3-local subgroups of the Monster*, DOI `10.1007/s00209-017-1878-z`.
 - Toshiyuki Abe, Ching Hung Lam and Hiromichi Yamada, *A remark on Z_p-orbifold constructions of the Moonshine vertex operator algebra*, arXiv `1705.09022`; no DOI assigned here.
 - R. W. Barraclough and R. A. Wilson, *The Character Table of a Maximal Subgroup of the Monster*, DOI `10.1112/S1461157000001352`.
