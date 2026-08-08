@@ -72,10 +72,11 @@ jobs:
           if-no-files-found: warn
 
       - name: Publish checker status
-        if: always()
+        if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
         env:
           GH_TOKEN: ${{ github.token }}
           CHECK_STATUS: ${{ steps.check.outputs.status }}
+          TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         shell: bash
         run: |
           state=success
@@ -85,10 +86,11 @@ jobs:
             description='NS round 25 Agda checker failed'
           fi
           gh api --method POST \
-            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            "repos/${GITHUB_REPOSITORY}/statuses/${TARGET_SHA}" \
             -f state="$state" \
             -f context='ns-round25-physical-carrier-agda' \
-            -f description="$description"
+            -f description="$description" \
+            || echo "status publication skipped" >&2
 
       - name: Fail on checker error
         if: steps.check.outputs.status != '0'
