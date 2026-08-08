@@ -10,6 +10,7 @@ on:
       - 'DASHI/Cognition/PNF/DemandResolutionState.agda'
       - 'DASHI/Cognition/PNF/AdjacentReconciliationWork.agda'
       - 'DASHI/Cognition/PNF/OrderedWorldParserLookahead.agda'
+      - 'DASHI/Cognition/PNF/WorkConservingPersistence.agda'
       - 'DASHI/Cognition/PNF/BoundedMDLPlanner.agda'
       - 'DASHI/Cognition/PNF/BoundedInterfaceSketch.agda'
       - 'DASHI/Cognition/PNF/ParentInterfaceReduction.agda'
@@ -19,6 +20,7 @@ on:
       - 'DASHI/Cognition/PNF/NumericPNFRegression.agda'
       - 'DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda'
       - 'Docs/NumericPNFHyperfabricFormalisation.md'
+      - 'Docs/WorkConservingPersistenceFormalisation.md'
       - '.github/workflows/numeric-pnf-hyperfabric.yml'
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
@@ -30,6 +32,7 @@ on:
       - 'DASHI/Cognition/PNF/DemandResolutionState.agda'
       - 'DASHI/Cognition/PNF/AdjacentReconciliationWork.agda'
       - 'DASHI/Cognition/PNF/OrderedWorldParserLookahead.agda'
+      - 'DASHI/Cognition/PNF/WorkConservingPersistence.agda'
       - 'DASHI/Cognition/PNF/BoundedMDLPlanner.agda'
       - 'DASHI/Cognition/PNF/BoundedInterfaceSketch.agda'
       - 'DASHI/Cognition/PNF/ParentInterfaceReduction.agda'
@@ -39,6 +42,7 @@ on:
       - 'DASHI/Cognition/PNF/NumericPNFRegression.agda'
       - 'DASHI/Cognition/PNF/NumericPNFHyperfabricEverything.agda'
       - 'Docs/NumericPNFHyperfabricFormalisation.md'
+      - 'Docs/WorkConservingPersistenceFormalisation.md'
       - '.github/workflows/numeric-pnf-hyperfabric.yml'
 
 concurrency:
