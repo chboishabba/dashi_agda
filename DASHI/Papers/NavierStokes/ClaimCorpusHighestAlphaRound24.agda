@@ -28,7 +28,9 @@ record ClaimCorpusHighestAlphaRound24Status : Set where
     corpusDeclaredExhaustive : Bool
     additiveFloorCountermodelConstructed : Bool
     finiteHorizonCountermodelConstructed : Bool
-    timeChangeIntegralInvarianceConstructed : Bool
+    genericIntegralEqualityTransportConstructed : Bool
+    concreteCamlinBKMChangeOfVariablesConstructed : Bool
+    unrestrictedStrictDriftPositivityConstructed : Bool
     finiteCascadeFluxCountermodelConstructed : Bool
     restrictedClassScopeCountermodelConstructed : Bool
     claimedRoutesCrosswalkedToPhysicalLemmas : Bool
@@ -42,7 +44,7 @@ canonicalClaimCorpusHighestAlphaRound24Status :
   ClaimCorpusHighestAlphaRound24Status
 canonicalClaimCorpusHighestAlphaRound24Status =
   claimCorpusHighestAlphaRound24Status
-    true false true true true true true true true false false
+    true false true true true false false true true true true false false
 
 claimCorpusIsNotProofAuthority :
   Corpus.allCorpusSourcesAreProofAuthorities ≡ false
@@ -51,6 +53,18 @@ claimCorpusIsNotProofAuthority = refl
 claimCorpusSearchNotDeclaredExhaustive :
   Corpus.corpusSearchIsDeclaredExhaustive ≡ false
 claimCorpusSearchNotDeclaredExhaustive = refl
+
+concreteCamlinBKMChangeOfVariablesRemainsOpen :
+  concreteCamlinBKMChangeOfVariablesConstructed
+    canonicalClaimCorpusHighestAlphaRound24Status
+  ≡ false
+concreteCamlinBKMChangeOfVariablesRemainsOpen = refl
+
+unrestrictedStrictDriftPositivityRemainsOpen :
+  unrestrictedStrictDriftPositivityConstructed
+    canonicalClaimCorpusHighestAlphaRound24Status
+  ≡ false
+unrestrictedStrictDriftPositivityRemainsOpen = refl
 
 physicalProducersRemainOpen :
   allPhysicalProducersInhabited
