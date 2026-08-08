@@ -34,7 +34,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import Relation.Nullary.Negation using (¬_)
 
 one : ℚ
@@ -58,11 +58,17 @@ counterAdditiveFloor = one
 counterDamping : ℚ
 counterDamping = one
 
+counterDissipativeIdentity :
+  counterLaterEnergy + counterDamping * counterVelocitySquare
+  ≡ counterInitialEnergy
+counterDissipativeIdentity =
+  ℚRing.solve []
+
 counterDissipativeStep :
   counterLaterEnergy + counterDamping * counterVelocitySquare
   ≤ counterInitialEnergy
 counterDissipativeStep
-  rewrite ℚRing.solve [] =
+  rewrite counterDissipativeIdentity =
   ℚP.≤-refl
 
 counterLowerComparison :
@@ -70,11 +76,17 @@ counterLowerComparison :
 counterLowerComparison =
   ℚP.nonNegative⁻¹ one
 
+counterUpperIdentity :
+  two * counterVelocitySquare + counterAdditiveFloor
+  ≡ counterLaterEnergy
+counterUpperIdentity =
+  ℚRing.solve []
+
 counterUpperComparison :
   counterLaterEnergy
   ≤ two * counterVelocitySquare + counterAdditiveFloor
 counterUpperComparison
-  rewrite ℚRing.solve [] =
+  rewrite counterUpperIdentity =
   ℚP.≤-refl
 
 pureStrictDecayConclusion : Set
