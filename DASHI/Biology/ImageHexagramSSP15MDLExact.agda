@@ -72,7 +72,7 @@ canonicalObservationAmplitudeIsFive = refl
 -- Local closure and the SSP15 spectrum are separate coordinates of a frame.
 ------------------------------------------------------------------------
 
-record IntegratedFrameCandidate : Set₁ where
+record IntegratedFrameCandidate : Set where
   constructor integratedFrameCandidate
   field
     frame : FrameMDL.CandidateFrame
