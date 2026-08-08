@@ -16,13 +16,18 @@ module DASHI.Physics.YangMills.BalabanClayHighestAlphaRound35PlaquetteCurlValida
 --     defects, each factorized through explicit link-minus-identity terms;
 --   * the theorem is instantiated on the same selected variational background
 --     and perturbation object used by terminal coercivity;
+--   * every one of the sixteen Wilson placement defects is partitioned
+--     canonically into four singleton selected-factor terms and eleven
+--     higher-order terms, then summed into the literal plaquette defect;
+--   * the Round-34 linear/remainder equality is therefore no longer an
+--     arbitrary caller field;
 --   * an exact rational adversarial test proves that the configured radius and
 --     flat cancellation alone do not imply the target correlated curvature
 --     scale.
 --
--- The selected-background Euler--Lagrange curvature estimate and grouped
--- sixteen-atom nonlinear lower bound remain open.  No W-local witness is
--- fabricated from the radius stress test.
+-- The selected-background Euler--Lagrange curvature estimate and the sharp
+-- lower bounds on the now-canonical linear and grouped nonlinear terms remain
+-- open.  No W-local witness is fabricated from the radius stress test.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound34PhysicalRadiusWLocalValidation
@@ -32,3 +37,4 @@ import DASHI.Physics.YangMills.BalabanP33CovariantCurlDefectFactorizationExact
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundCovariantCurlInstantiationExact
 import DASHI.Physics.YangMills.BalabanP33FlatPlaquetteFirstVariationCurlExact
 import DASHI.Physics.YangMills.BalabanP33CovariantCurlRadiusStressTestExact
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonLinearNonlinearPartitionExact
