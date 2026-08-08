@@ -12,6 +12,7 @@ files=(
   DASHI/Physics/Closure/NSTriadKNLuoFiniteEnergyContinuationRound27Exact.agda
   DASHI/Physics/Closure/NSTriadKNConcreteReconstructedPhysicalSelectorRound29Exact.agda
   DASHI/Physics/Closure/NSTriadKNDependentPhysicalODECarrierRound29Exact.agda
+  DASHI/Physics/Closure/NSTriadKNFiniteGalerkinVectorLipschitzRound29Exact.agda
   DASHI/Physics/Closure/NSTriadKNFiniteFlowBlowupAlternativeRound29Exact.agda
   DASHI/Physics/Closure/NSTriadKNGlobalBilinearShellPairingRound29Exact.agda
   DASHI/Physics/Closure/NSTriadKNDelayedPositivePartRound29Exact.agda
@@ -50,8 +51,11 @@ selector=DASHI/Physics/Closure/NSTriadKNConcreteReconstructedPhysicalSelectorRou
 grep -q '10.1007/BF02547354' "$selector"
 grep -q '10.1090/chel/343' "$selector"
 grep -q 'reconstructedNegativeCoefficientTransverse' "$selector"
+grep -q 'positiveCoefficientLerayFixed' "$selector"
+grep -q 'negativeCoefficientLerayFixed' "$selector"
 grep -q 'reconstructedPhysicalSelectors' "$selector"
 grep -q 'reconstructedPhysicalStateSelectorInstantiated = true' "$selector"
+grep -q 'literalCoefficientLerayFixingClosed = true' "$selector"
 grep -q 'fullGalerkinVectorFieldMapsReconstructedState = false' "$selector"
 
 dependent=DASHI/Physics/Closure/NSTriadKNDependentPhysicalODECarrierRound29Exact.agda
@@ -60,6 +64,14 @@ grep -q 'physicalVectorField' "$dependent"
 grep -q 'outputIsPhysicalSelectorFixed' "$dependent"
 grep -q 'DependentPhysicalTrajectory' "$dependent"
 grep -q 'literalNavierStokesVectorFieldEquivarianceClosed = false' "$dependent"
+
+vector_lipschitz=DASHI/Physics/Closure/NSTriadKNFiniteGalerkinVectorLipschitzRound29Exact.agda
+grep -q '10.1090/chel/343' "$vector_lipschitz"
+grep -q 'finiteVectorDifferenceL1' "$vector_lipschitz"
+grep -q 'finiteVectorLipschitzWeight' "$vector_lipschitz"
+grep -q 'finiteGalerkinVectorLocalLipschitz' "$vector_lipschitz"
+grep -q 'finiteRationalVectorLocalLipschitzClosed = true' "$vector_lipschitz"
+grep -q 'continuumRealCoordinateEquivalenceClosed = false' "$vector_lipschitz"
 
 flow=DASHI/Physics/Closure/NSTriadKNFiniteFlowBlowupAlternativeRound29Exact.agda
 grep -q 'EscapeWitness' "$flow"
