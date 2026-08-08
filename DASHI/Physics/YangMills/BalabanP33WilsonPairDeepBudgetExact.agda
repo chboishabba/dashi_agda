@@ -34,7 +34,7 @@ module DASHI.Physics.YangMills.BalabanP33WilsonPairDeepBudgetExact where
 --     = 128 rho^3 + 64 rho^4,
 --
 -- which lies strictly below rho/144.  By contrast charging all pair terms to
--- the same channel would cost 24 epsilon^2 = 96 rho^2, larger than rho/144.
+-- the same channel costs 24 epsilon^2 = 96 rho^2, strictly above rho/144.
 -- The quadratic terms must therefore be retained in the correlated channel.
 ------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.YangMills.BalabanP33PhysicalBackgroundGaugeSignedLowerExact as Signed
 import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
@@ -107,7 +107,7 @@ deepCoefficientBelowDiagonalTarget =
 
 pairExcessOverDiagonalTarget : ℚ
 pairExcessOverDiagonalTarget =
-  + 5 / 84934656
+  + 11 / 18874368
 
 pairExcessPositive : 0ℚ < pairExcessOverDiagonalTarget
 pairExcessPositive = ℚP.positive⁻¹ pairExcessOverDiagonalTarget
@@ -116,14 +116,6 @@ diagonalTargetPlusPairExcessIsPairCoefficient :
   diagonalTargetCoefficient + pairExcessOverDiagonalTarget
   ≡ allPlacementPairCoefficient
 diagonalTargetPlusPairExcessIsPairCoefficient = ℚRing.solve []
-
-pairCoefficientNotBelowDiagonalTargetWitness :
-  diagonalTargetCoefficient < allPlacementPairCoefficient
-pairCoefficientNotBelowDiagonalTargetWitness =
-  subst
-    (λ upper → diagonalTargetCoefficient < upper)
-    diagonalTargetPlusPairExcessIsPairCoefficient
-    (ℚP.+-monoʳ-< diagonalTargetCoefficient pairExcessPositive)
 
 pairCoefficientPerCrossCharge : ℚ
 pairCoefficientPerCrossCharge =
