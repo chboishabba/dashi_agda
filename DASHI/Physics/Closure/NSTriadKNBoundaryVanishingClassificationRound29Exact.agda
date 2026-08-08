@@ -85,7 +85,7 @@ boundaryReasonPartitionExact :
 boundaryReasonPartitionExact [] = solve []
 boundaryReasonPartitionExact (boundary-atom value exactAbsence ∷ rest) =
   trans
-    (cong (value +_) (boundaryReasonPartitionExact rest))
+    (cong (λ total → value + total) (boundaryReasonPartitionExact rest))
     (solve
       ( value
       ∷ reasonTotal exactAbsence rest
@@ -97,7 +97,7 @@ boundaryReasonPartitionExact (boundary-atom value exactAbsence ∷ rest) =
 boundaryReasonPartitionExact
   (boundary-atom value fixedCutoffFiniteSupport ∷ rest) =
   trans
-    (cong (value +_) (boundaryReasonPartitionExact rest))
+    (cong (λ total → value + total) (boundaryReasonPartitionExact rest))
     (solve
       ( value
       ∷ reasonTotal exactAbsence rest
@@ -108,7 +108,7 @@ boundaryReasonPartitionExact
       ∷ []))
 boundaryReasonPartitionExact (boundary-atom value geometricTail ∷ rest) =
   trans
-    (cong (value +_) (boundaryReasonPartitionExact rest))
+    (cong (λ total → value + total) (boundaryReasonPartitionExact rest))
     (solve
       ( value
       ∷ reasonTotal exactAbsence rest
@@ -119,7 +119,7 @@ boundaryReasonPartitionExact (boundary-atom value geometricTail ∷ rest) =
       ∷ []))
 boundaryReasonPartitionExact (boundary-atom value strongConvergence ∷ rest) =
   trans
-    (cong (value +_) (boundaryReasonPartitionExact rest))
+    (cong (λ total → value + total) (boundaryReasonPartitionExact rest))
     (solve
       ( value
       ∷ reasonTotal exactAbsence rest
@@ -130,7 +130,7 @@ boundaryReasonPartitionExact (boundary-atom value strongConvergence ∷ rest) =
       ∷ []))
 boundaryReasonPartitionExact (boundary-atom value dominatedConvergence ∷ rest) =
   trans
-    (cong (value +_) (boundaryReasonPartitionExact rest))
+    (cong (λ total → value + total) (boundaryReasonPartitionExact rest))
     (solve
       ( value
       ∷ reasonTotal exactAbsence rest
