@@ -113,15 +113,27 @@ After choosing an orthonormal coordinate basis,
     = 24 + 276.
 ```
 
-Therefore:
+Therefore the exact coordinate subtotal is
 
 ```text
 196608 = 196560 + 24 + 24
-196884 = 196608 + 276
-196883 = 196608 + 275.
+196884 = 196608 + 276.
 ```
 
-The final `-1` removes the conformal line. The diagonal/off-diagonal split is basis-dependent, so the `196608` subtotal is not promoted to a Monster-invariant submodule.
+The conformal vector belongs to the diagonal `24`-dimensional quadratic sector. Consequently the geometrically correct quotient is
+
+```text
+196883 = (196608 - 1) + 276
+       = 196560 + 24 + 23 + 276.
+```
+
+The numerically equivalent identity
+
+```text
+196883 = 196608 + 275
+```
+
+is retained only as arithmetic: the `275` is not promoted to a canonical off-diagonal subspace. The diagonal/off-diagonal coordinate split is itself basis-dependent, so the `196608` subtotal is not promoted to a Monster-invariant submodule.
 
 `DASHI/Moonshine/MonsterYangMills196608CrossLaneExact.agda` imports the actual Yang–Mills Wilson-budget object and proves:
 
@@ -132,7 +144,7 @@ sharpSixteenAtomBudget = 13/196608
 196608 = Leech weight-two coordinate subtotal.
 ```
 
-Thus the same integer is genuinely owned by both repository lanes. What remains unproved is a common selection mechanism, not the numerical overlap itself.
+Thus the same integer is genuinely owned by both repository lanes. What remains unproved is a common selection mechanism, not the arithmetic overlap itself.
 
 ## Heisenberg multiplicity and the older `3^8` chart
 
@@ -207,10 +219,9 @@ No `kappa_r` class or Chern subring is fabricated from incidence data. Those rem
 
 ## Function-first dashboards
 
-`scripts/monster_3b_structural_dashboard.py` now emits:
+`scripts/monster_3b_structural_dashboard.py` emits:
 
-1. the exact extraspecial character-degree moment surface
-   `M_n(s)=3^(2n)+2·3^(ns)` for both types and `n=1..6`;
+1. the exact extraspecial character-degree moment surface `M_n(s)=3^(2n)+2·3^(ns)` for both types and `n=1..6`;
 2. the complete generator-to-invariant map for all `11011` elementary-abelian two-planes;
 3. the full `729×729` Weyl phase function `arg(zeta^<x,b>)`;
 4. an explicitly labelled model coupling on the full `729×(12+78)` carrier;
@@ -221,12 +232,12 @@ No bar chart is part of this suite.
 
 ## Exact remaining highest-alpha cut
 
-The completed lane now owns the arithmetic, Fourier probes, Leech subtotal, actual Yang–Mills denominator identity, finite-Heisenberg model, plus/minus degree comparison, elementary-abelian strata, phase transport, and executable normalizer restriction.
+The implemented lane owns the arithmetic, Fourier probes, Leech subtotal, actual Yang–Mills denominator identity, finite-Heisenberg model, plus/minus degree comparison, elementary-abelian strata, phase transport, and executable normalizer restriction.
 
 The irreducible mathematical frontier is:
 
 ```text
-1. obtain a successful CTblLib workflow certificate;
+1. observe a successful CTblLib and Agda workflow certificate;
 2. identify the extraspecial kernel and selected central 3B element in the certified restriction;
 3. prove or import finite Stone–von Neumann uniqueness in the representation layer;
 4. construct S_zeta = Hom_E(H_zeta,W_zeta);
