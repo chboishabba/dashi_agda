@@ -18,12 +18,14 @@ module DASHI.Moonshine.Monster3BKernelCharacterCriterionExact where
 -- State the full class-character signature needed to promote the concrete
 -- 729 x 90 model to the actual zeta sector.  The cyclotomic trace is retained
 -- coefficientwise in the basis 1,zeta,zeta^2, so no complex-number equality is
--- hidden inside a natural-number trace.
+-- hidden inside a natural-number trace.  This upgraded owner also proves the
+-- complete extraspecial degree-square budget and the nonlinear character norm
+-- numerator 3 * 729^2 = 3^13.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
 import DASHI.Moonshine.Monster3BHeisenbergMultiplicityExact as H
 
@@ -58,9 +60,58 @@ heisenbergKernelTrace centralZetaClass = cyclotomic-trace3 0 729 0
 heisenbergKernelTrace centralZetaSquaredClass = cyclotomic-trace3 0 0 729
 heisenbergKernelTrace noncentralClass = zeroTrace
 
+conjugateHeisenbergKernelTrace : ExtraspecialClassKind → CyclotomicTrace3
+conjugateHeisenbergKernelTrace identityClass = cyclotomic-trace3 729 0 0
+conjugateHeisenbergKernelTrace centralZetaClass = cyclotomic-trace3 0 0 729
+conjugateHeisenbergKernelTrace centralZetaSquaredClass = cyclotomic-trace3 0 729 0
+conjugateHeisenbergKernelTrace noncentralClass = zeroTrace
+
+------------------------------------------------------------------------
+-- Complete extraspecial character-degree arithmetic.
+------------------------------------------------------------------------
+
+heisenbergDegree : Nat
+heisenbergDegree = H.threePowerSix
+
+linearCharacterCount : Nat
+linearCharacterCount = H.symplecticQuotientOrder
+
+nonlinearCharacterCount : Nat
+nonlinearCharacterCount = 2
+
+extraspecialOrder : Nat
+extraspecialOrder = H.extraspecialOrder
+
+nonlinearDegreeSquare : Nat
+nonlinearDegreeSquare = heisenbergDegree * heisenbergDegree
+
+extraspecialCharacterDegreeSquareSum : Nat
+extraspecialCharacterDegreeSquareSum =
+  linearCharacterCount
+  + nonlinearCharacterCount * nonlinearDegreeSquare
+
+extraspecialCharacterDegreeSquareSumIsOrder :
+  extraspecialCharacterDegreeSquareSum ≡ extraspecialOrder
+extraspecialCharacterDegreeSquareSumIsOrder = refl
+
+heisenbergNormNumerator : Nat
+heisenbergNormNumerator = 3 * nonlinearDegreeSquare
+
+heisenbergNormNumeratorIsExtraspecialOrder :
+  heisenbergNormNumerator ≡ extraspecialOrder
+heisenbergNormNumeratorIsExtraspecialOrder = refl
+
+------------------------------------------------------------------------
+-- Ninety-fold model signature.
+------------------------------------------------------------------------
+
 ninetyFoldModelKernelTrace : ExtraspecialClassKind → CyclotomicTrace3
 ninetyFoldModelKernelTrace kind =
   scaleTrace 90 (heisenbergKernelTrace kind)
+
+ninetyFoldConjugateKernelTrace : ExtraspecialClassKind → CyclotomicTrace3
+ninetyFoldConjugateKernelTrace kind =
+  scaleTrace 90 (conjugateHeisenbergKernelTrace kind)
 
 modelIdentityTraceIs65610 :
   coefficientOne (ninetyFoldModelKernelTrace identityClass) ≡ 65610
@@ -79,6 +130,10 @@ modelNoncentralTraceIsZero :
   ninetyFoldModelKernelTrace noncentralClass ≡ zeroTrace
 modelNoncentralTraceIsZero = refl
 
+modelConjugateNoncentralTraceIsZero :
+  ninetyFoldConjugateKernelTrace noncentralClass ≡ zeroTrace
+modelConjugateNoncentralTraceIsZero = refl
+
 modelTraceIsNinetyHeisenbergCopies :
   (kind : ExtraspecialClassKind) →
   ninetyFoldModelKernelTrace kind
@@ -87,6 +142,10 @@ modelTraceIsNinetyHeisenbergCopies identityClass = refl
 modelTraceIsNinetyHeisenbergCopies centralZetaClass = refl
 modelTraceIsNinetyHeisenbergCopies centralZetaSquaredClass = refl
 modelTraceIsNinetyHeisenbergCopies noncentralClass = refl
+
+------------------------------------------------------------------------
+-- Actual class coverage and immediate consequences.
+------------------------------------------------------------------------
 
 record ActualKernelCharacterCertificate (ActualClass : Set) : Set where
   constructor actual-kernel-character-certificate
@@ -99,6 +158,14 @@ record ActualKernelCharacterCertificate (ActualClass : Set) : Set where
 
 open ActualKernelCharacterCertificate public
 
+actualKernelCharacterIdentity :
+  ∀ {ActualClass} →
+  (certificate : ActualKernelCharacterCertificate ActualClass) →
+  (class : ActualClass) →
+  actualTrace certificate class
+  ≡ ninetyFoldModelKernelTrace (classify certificate class)
+actualKernelCharacterIdentity = traceMatchesNinetyFoldModel
+
 actualNoncentralTraceVanishes :
   ∀ {ActualClass} →
   (certificate : ActualKernelCharacterCertificate ActualClass) →
@@ -106,6 +173,26 @@ actualNoncentralTraceVanishes :
   classify certificate class ≡ noncentralClass →
   actualTrace certificate class ≡ zeroTrace
 actualNoncentralTraceVanishes certificate class classifies
+  rewrite traceMatchesNinetyFoldModel certificate class
+        | classifies = refl
+
+actualCentralZetaTraceAmplitude :
+  ∀ {ActualClass} →
+  (certificate : ActualKernelCharacterCertificate ActualClass) →
+  (class : ActualClass) →
+  classify certificate class ≡ centralZetaClass →
+  coefficientZeta (actualTrace certificate class) ≡ 65610
+actualCentralZetaTraceAmplitude certificate class classifies
+  rewrite traceMatchesNinetyFoldModel certificate class
+        | classifies = refl
+
+actualIdentityTraceAmplitude :
+  ∀ {ActualClass} →
+  (certificate : ActualKernelCharacterCertificate ActualClass) →
+  (class : ActualClass) →
+  classify certificate class ≡ identityClass →
+  coefficientOne (actualTrace certificate class) ≡ 65610
+actualIdentityTraceAmplitude certificate class classifies
   rewrite traceMatchesNinetyFoldModel certificate class
         | classifies = refl
 
@@ -118,6 +205,10 @@ record KernelCharacterPromotionBoundary : Set where
       coefficientZeta (ninetyFoldModelKernelTrace centralZetaClass) ≡ 65610
     modelNoncentralVanishing :
       ninetyFoldModelKernelTrace noncentralClass ≡ zeroTrace
+    degreeSquareBudgetCloses :
+      extraspecialCharacterDegreeSquareSum ≡ extraspecialOrder
+    nonlinearCharacterNormCloses :
+      heisenbergNormNumerator ≡ extraspecialOrder
     actualMN3BClassCoverageCertified : Bool
     actualMN3BClassCoverageCertifiedIsFalse :
       actualMN3BClassCoverageCertified ≡ false
@@ -135,6 +226,8 @@ canonicalKernelCharacterPromotionBoundary =
     modelIdentityTraceIs65610
     modelCentralZetaTraceAmplitudeIs65610
     modelNoncentralTraceIsZero
+    extraspecialCharacterDegreeSquareSumIsOrder
+    heisenbergNormNumeratorIsExtraspecialOrder
     false refl
     false refl
     false refl
