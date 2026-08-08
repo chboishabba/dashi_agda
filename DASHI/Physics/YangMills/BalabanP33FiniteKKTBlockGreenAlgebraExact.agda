@@ -68,25 +68,25 @@ open ConstrainedGreenData public
 
 hessianApply : ∀ {Multiplier} → ConstrainedGreenData Multiplier →
   KKT.StateVector → KKT.StateVector
-hessianApply data = Rect.applyRectangular
-  KKT.physicalStateCarrier (hessianMatrix data)
+hessianApply greenData = Rect.applyRectangular
+  KKT.physicalStateCarrier (hessianMatrix greenData)
 
 project : ∀ {Multiplier} → ConstrainedGreenData Multiplier →
   KKT.StateVector → KKT.StateVector
-project data = KKT.selectedAdmissibleProject (projectorData data)
+project greenData = KKT.selectedAdmissibleProject (projectorData greenData)
 
 repair : ∀ {Multiplier} → ConstrainedGreenData Multiplier →
   KKT.StateVector → KKT.StateVector
-repair data = KKT.selectedConstraintRepair (projectorData data)
+repair greenData = KKT.selectedConstraintRepair (projectorData greenData)
 
 projectPointwiseCong : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier)
+    (greenData : ConstrainedGreenData Multiplier)
     {left right : KKT.StateVector} →
   (∀ coordinate → left coordinate ≡ right coordinate) →
-  ∀ coordinate → project data left coordinate ≡ project data right coordinate
-projectPointwiseCong data pointwise coordinate =
+  ∀ coordinate → project greenData left coordinate ≡ project greenData right coordinate
+projectPointwiseCong greenData pointwise coordinate =
   let
-    projector = projectorData data
+    projector = projectorData greenData
     constraintCong = Rect.applyRectangularVectorCong
       KKT.physicalStateCarrier (KKT.constraintMatrix projector) pointwise
     greenCong = Rect.applyRectangularVectorCong
@@ -99,56 +99,65 @@ projectPointwiseCong data pointwise coordinate =
   in cong₂ _-_ (pointwise coordinate) repairCong
 
 hessianPointwiseCong : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier)
+    (greenData : ConstrainedGreenData Multiplier)
     {left right : KKT.StateVector} →
   (∀ coordinate → left coordinate ≡ right coordinate) →
-  ∀ coordinate → hessianApply data left coordinate ≡ hessianApply data right coordinate
-hessianPointwiseCong data = Rect.applyRectangularVectorCong
-  KKT.physicalStateCarrier (hessianMatrix data)
+  ∀ coordinate → hessianApply greenData left coordinate
+    ≡ hessianApply greenData right coordinate
+hessianPointwiseCong greenData = Rect.applyRectangularVectorCong
+  KKT.physicalStateCarrier (hessianMatrix greenData)
 
 constraintAddExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) left right row →
-  KKT.constraintApply (projectorData data) (Rect.vectorAdd left right) row
-  ≡ KKT.constraintApply (projectorData data) left row
-    + KKT.constraintApply (projectorData data) right row
-constraintAddExact data = Rect.applyRectangularAdd
-  KKT.physicalStateCarrier (KKT.constraintMatrix (projectorData data))
+    (greenData : ConstrainedGreenData Multiplier) left right row →
+  KKT.constraintApply (projectorData greenData)
+    (Rect.vectorAdd left right) row
+  ≡ KKT.constraintApply (projectorData greenData) left row
+    + KKT.constraintApply (projectorData greenData) right row
+constraintAddExact greenData = Rect.applyRectangularAdd
+  KKT.physicalStateCarrier
+  (KKT.constraintMatrix (projectorData greenData))
 
 constraintSubtractExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) left right row →
-  KKT.constraintApply (projectorData data) (Rect.vectorSubtract left right) row
-  ≡ KKT.constraintApply (projectorData data) left row
-    - KKT.constraintApply (projectorData data) right row
-constraintSubtractExact data = Rect.applyRectangularSubtract
-  KKT.physicalStateCarrier (KKT.constraintMatrix (projectorData data))
+    (greenData : ConstrainedGreenData Multiplier) left right row →
+  KKT.constraintApply (projectorData greenData)
+    (Rect.vectorSubtract left right) row
+  ≡ KKT.constraintApply (projectorData greenData) left row
+    - KKT.constraintApply (projectorData greenData) right row
+constraintSubtractExact greenData = Rect.applyRectangularSubtract
+  KKT.physicalStateCarrier
+  (KKT.constraintMatrix (projectorData greenData))
 
 hessianAddExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) left right coordinate →
-  hessianApply data (Rect.vectorAdd left right) coordinate
-  ≡ hessianApply data left coordinate + hessianApply data right coordinate
-hessianAddExact data = Rect.applyRectangularAdd
-  KKT.physicalStateCarrier (hessianMatrix data)
+    (greenData : ConstrainedGreenData Multiplier) left right coordinate →
+  hessianApply greenData (Rect.vectorAdd left right) coordinate
+  ≡ hessianApply greenData left coordinate
+    + hessianApply greenData right coordinate
+hessianAddExact greenData = Rect.applyRectangularAdd
+  KKT.physicalStateCarrier (hessianMatrix greenData)
 
 projectAddExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) left right coordinate →
-  project data (Rect.vectorAdd left right) coordinate
-  ≡ project data left coordinate + project data right coordinate
-projectAddExact data left right coordinate =
+    (greenData : ConstrainedGreenData Multiplier) left right coordinate →
+  project greenData (Rect.vectorAdd left right) coordinate
+  ≡ project greenData left coordinate + project greenData right coordinate
+projectAddExact greenData left right coordinate =
   let
-    projector = projectorData data
+    projector = projectorData greenData
     constraintAdd : ∀ row →
       KKT.constraintApply projector (Rect.vectorAdd left right) row
       ≡ Rect.vectorAdd (KKT.constraintApply projector left)
           (KKT.constraintApply projector right) row
-    constraintAdd row = constraintAddExact data left right row
+    constraintAdd row = constraintAddExact greenData left right row
     greenAdd : ∀ row →
       KKT.multiplierGreenApply projector
         (KKT.constraintApply projector (Rect.vectorAdd left right)) row
       ≡ Rect.vectorAdd
-          (KKT.multiplierGreenApply projector (KKT.constraintApply projector left))
-          (KKT.multiplierGreenApply projector (KKT.constraintApply projector right)) row
+          (KKT.multiplierGreenApply projector
+            (KKT.constraintApply projector left))
+          (KKT.multiplierGreenApply projector
+            (KKT.constraintApply projector right)) row
     greenAdd row = trans
-      (Rect.applyRectangularVectorCong (KKT.multiplierCarrier projector)
+      (Rect.applyRectangularVectorCong
+        (KKT.multiplierCarrier projector)
         (KKT.multiplierGreen projector) constraintAdd row)
       (Rect.applyRectangularAdd (KKT.multiplierCarrier projector)
         (KKT.multiplierGreen projector)
@@ -160,33 +169,39 @@ projectAddExact data left right coordinate =
         greenAdd coordinate)
       (Rect.applyRectangularAdd (KKT.multiplierCarrier projector)
         (Rect.transposeRectangular (KKT.constraintMatrix projector))
-        (KKT.multiplierGreenApply projector (KKT.constraintApply projector left))
-        (KKT.multiplierGreenApply projector (KKT.constraintApply projector right))
+        (KKT.multiplierGreenApply projector
+          (KKT.constraintApply projector left))
+        (KKT.multiplierGreenApply projector
+          (KKT.constraintApply projector right))
         coordinate)
-  in trans (cong ((left coordinate + right coordinate) -_) repairAdd)
+  in trans
+    (cong ((left coordinate + right coordinate) -_) repairAdd)
     (ℚRing.solve-∀ (left coordinate) (right coordinate)
-      (repair data left coordinate) (repair data right coordinate))
+      (repair greenData left coordinate) (repair greenData right coordinate))
 
 projectSubtractExact : ∀ {Multiplier}
-    (data : ConstrainedGreenData Multiplier) left right coordinate →
-  project data (Rect.vectorSubtract left right) coordinate
-  ≡ project data left coordinate - project data right coordinate
-projectSubtractExact data left right coordinate =
+    (greenData : ConstrainedGreenData Multiplier) left right coordinate →
+  project greenData (Rect.vectorSubtract left right) coordinate
+  ≡ project greenData left coordinate - project greenData right coordinate
+projectSubtractExact greenData left right coordinate =
   let
-    projector = projectorData data
+    projector = projectorData greenData
     constraintSubtract : ∀ row →
       KKT.constraintApply projector (Rect.vectorSubtract left right) row
       ≡ Rect.vectorSubtract (KKT.constraintApply projector left)
           (KKT.constraintApply projector right) row
-    constraintSubtract row = constraintSubtractExact data left right row
+    constraintSubtract row = constraintSubtractExact greenData left right row
     greenSubtract : ∀ row →
       KKT.multiplierGreenApply projector
         (KKT.constraintApply projector (Rect.vectorSubtract left right)) row
       ≡ Rect.vectorSubtract
-          (KKT.multiplierGreenApply projector (KKT.constraintApply projector left))
-          (KKT.multiplierGreenApply projector (KKT.constraintApply projector right)) row
+          (KKT.multiplierGreenApply projector
+            (KKT.constraintApply projector left))
+          (KKT.multiplierGreenApply projector
+            (KKT.constraintApply projector right)) row
     greenSubtract row = trans
-      (Rect.applyRectangularVectorCong (KKT.multiplierCarrier projector)
+      (Rect.applyRectangularVectorCong
+        (KKT.multiplierCarrier projector)
         (KKT.multiplierGreen projector) constraintSubtract row)
       (Rect.applyRectangularSubtract (KKT.multiplierCarrier projector)
         (KKT.multiplierGreen projector)
@@ -198,12 +213,15 @@ projectSubtractExact data left right coordinate =
         greenSubtract coordinate)
       (Rect.applyRectangularSubtract (KKT.multiplierCarrier projector)
         (Rect.transposeRectangular (KKT.constraintMatrix projector))
-        (KKT.multiplierGreenApply projector (KKT.constraintApply projector left))
-        (KKT.multiplierGreenApply projector (KKT.constraintApply projector right))
+        (KKT.multiplierGreenApply projector
+          (KKT.constraintApply projector left))
+        (KKT.multiplierGreenApply projector
+          (KKT.constraintApply projector right))
         coordinate)
-  in trans (cong ((left coordinate - right coordinate) -_) repairSubtract)
+  in trans
+    (cong ((left coordinate - right coordinate) -_) repairSubtract)
     (ℚRing.solve-∀ (left coordinate) (right coordinate)
-      (repair data left coordinate) (repair data right coordinate))
+      (repair greenData left coordinate) (repair greenData right coordinate))
 
 finiteKKTBlockLinearityAlgebraLevel : ProofLevel
 finiteKKTBlockLinearityAlgebraLevel = machineChecked
