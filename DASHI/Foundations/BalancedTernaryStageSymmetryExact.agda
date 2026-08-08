@@ -268,15 +268,18 @@ record BalancedTernaryAddress : Set where
   field
     digitsHighToLow : List BalancedDigit
     representedValue : Nat
-    denominatorClearedEquation : Nat ≡ Nat
+    balancingDebt : Nat
+    promotedWeight : Nat
+    denominatorClearedEquation :
+      representedValue + balancingDebt ≡ promotedWeight
 
 fiveBalancedAddress : BalancedTernaryAddress
 fiveBalancedAddress =
-  balancedTernaryAddress (pos ∷ neg ∷ neg ∷ []) 5 (5 + 3 + 1 ≡ 9)
+  balancedTernaryAddress (pos ∷ neg ∷ neg ∷ []) 5 4 9 refl
 
 sixBalancedAddress : BalancedTernaryAddress
 sixBalancedAddress =
-  balancedTernaryAddress (pos ∷ neg ∷ zeroDigit ∷ []) 6 (6 + 3 ≡ 9)
+  balancedTernaryAddress (pos ∷ neg ∷ zeroDigit ∷ []) 6 3 9 refl
 
 record SharedPrefixWitness
   (left right : BalancedTernaryAddress) : Set where
@@ -362,3 +365,39 @@ record OggComplementBoundary : Set where
 canonicalOggComplementBoundary : OggComplementBoundary
 canonicalOggComplementBoundary =
   oggComplementBoundary true refl false refl false refl
+
+------------------------------------------------------------------------
+-- The depth-two nonary residue equations are exact but derivative of the
+-- previously selected 10 * 3^9 + 54/53 chart because 81 divides 3^9.
+------------------------------------------------------------------------
+
+moonshineCoefficientDepthTwoEquation :
+  2430 * 81 + 54 ≡ 196884
+moonshineCoefficientDepthTwoEquation = refl
+
+monsterConstituentDepthTwoEquation :
+  2430 * 81 + 53 ≡ 196883
+monsterConstituentDepthTwoEquation = refl
+
+fiftyFourIsSixTimesNine : 6 * 9 ≡ 54
+fiftyFourIsSixTimesNine = refl
+
+fiftyThreePlusOneIsFiftyFour : 53 + 1 ≡ 54
+fiftyThreePlusOneIsFiftyFour = refl
+
+record DepthTwoResidueAuthorityBoundary : Set where
+  constructor depthTwoResidueAuthorityBoundary
+  field
+    residueEquationExact : Bool
+    residueEquationExactIsTrue : residueEquationExact ≡ true
+    independentEvidenceForTenTimesThreePowerNine : Bool
+    independentEvidenceForTenTimesThreePowerNineIsFalse :
+      independentEvidenceForTenTimesThreePowerNine ≡ false
+    canonicalEightyOneBlockModuleConstructed : Bool
+    canonicalEightyOneBlockModuleConstructedIsFalse :
+      canonicalEightyOneBlockModuleConstructed ≡ false
+
+canonicalDepthTwoResidueAuthorityBoundary :
+  DepthTwoResidueAuthorityBoundary
+canonicalDepthTwoResidueAuthorityBoundary =
+  depthTwoResidueAuthorityBoundary true refl false refl false refl
