@@ -19,18 +19,13 @@ module DASHI.Biology.OggPrimeNonaryAddressExact where
 -- are represented by exact arithmetic proofs.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
-
-------------------------------------------------------------------------
--- Ordinary digit values.  j9 is the carried completion state and is not used
--- as a remainder in the Euclidean addresses 0 <= r < 9.
-------------------------------------------------------------------------
 
 stateValue : Quotient.DecimalCompletionState → Nat
 stateValue Quotient.d0 = 0
@@ -110,11 +105,6 @@ nonaryOggAddress Lane.p71 =
   nonary-ogg-address 7 Quotient.d8 8 refl refl
     Quotient.mode18 refl Quotient.counterPhase refl
 
-------------------------------------------------------------------------
--- The nonexceptional prime lanes occupy exactly the three unit complement
--- modes.  This is finite exhaustive arithmetic, not a generic primality proof.
-------------------------------------------------------------------------
-
 data PhaseMobileMode : Quotient.ComplementMode5 → Set where
   mobile18 : PhaseMobileMode Quotient.mode18
   mobile27 : PhaseMobileMode Quotient.mode27
@@ -167,10 +157,6 @@ threeLaneIsDirectOrientation :
   binaryOrientation (nonaryOggAddress Lane.p3) ≡ Quotient.directPhase
 threeLaneIsDirectOrientation = refl
 
-------------------------------------------------------------------------
--- Pointed-sign lifts internal to the fifteen Ogg values.
-------------------------------------------------------------------------
-
 data PointedSignedEdge :
     Lane.MonsterPrimeLane → Lane.MonsterPrimeLane → Set where
   edge2to5 : PointedSignedEdge Lane.p2 Lane.p5
@@ -191,10 +177,6 @@ pointedSignedEdgeExact edge11to23 = refl
 pointedSignedEdgeExact edge23to47 = refl
 pointedSignedEdgeExact edge3to7 = refl
 pointedSignedEdgeExact edge29to59 = refl
-
-------------------------------------------------------------------------
--- Depth-two nonary arithmetic.
-------------------------------------------------------------------------
 
 fiveIsHalfOfPointedNineDivisionFree : 2 * 5 ≡ 9 + 1
 fiveIsHalfOfPointedNineDivisionFree = refl
@@ -219,16 +201,26 @@ canonicalDepthTwoNonaryComplementLedger : DepthTwoNonaryComplementLedger
 canonicalDepthTwoNonaryComplementLedger =
   depth-two-nonary-complement-ledger refl refl refl refl refl refl
 
-canonicalOggAddresses :
-  List (Lane.MonsterPrimeLane)
+canonicalOggAddresses : List Lane.MonsterPrimeLane
 canonicalOggAddresses = Lane.canonicalMonsterPrimeLane
+
+------------------------------------------------------------------------
+-- Positive claims carry the lane-indexed producer itself.
+------------------------------------------------------------------------
 
 record OggPrimeNonaryAddressBoundary : Set where
   constructor ogg-prime-nonary-address-boundary
   field
-    allFifteenAddressesConstructed : Bool
-    allFifteenAddressesConstructedIsTrue :
-      allFifteenAddressesConstructed ≡ true
+    everyLaneHasExactAddress :
+      (prime : Lane.MonsterPrimeLane) →
+      Lane.monsterPrimeLaneToNat prime
+      ≡ coarseSheets (nonaryOggAddress prime) * 9
+        + remainder (nonaryOggAddress prime)
+    everyNonThreeLaneIsPhaseMobile :
+      (prime : NonThreeOggLane) →
+      PhaseMobileMode
+        (complementMode (nonaryOggAddress (toOggLane prime)))
+    depthTwoLedger : DepthTwoNonaryComplementLedger
     arithmeticAddressIsSupersingularJProof : Bool
     arithmeticAddressIsSupersingularJProofIsFalse :
       arithmeticAddressIsSupersingularJProof ≡ false
@@ -238,4 +230,9 @@ record OggPrimeNonaryAddressBoundary : Set where
 
 canonicalOggPrimeNonaryAddressBoundary : OggPrimeNonaryAddressBoundary
 canonicalOggPrimeNonaryAddressBoundary =
-  ogg-prime-nonary-address-boundary true refl false refl false refl
+  ogg-prime-nonary-address-boundary
+    (λ prime → addressExact (nonaryOggAddress prime))
+    nonThreeLaneModeIsPhaseMobile
+    canonicalDepthTwoNonaryComplementLedger
+    false refl
+    false refl
