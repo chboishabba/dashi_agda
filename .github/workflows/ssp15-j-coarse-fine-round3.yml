@@ -5,6 +5,7 @@ on:
     branches: ['agent/ssp15-j-coarse-fine-round3']
   pull_request:
     branches:
+      - 'master'
       - 'agent/stage-euler-tree-complement-round2'
       - 'agent/ssp15-j-coarse-fine-round3'
     paths:
@@ -35,6 +36,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
       - name: Check SSP15 j-coarse/j-fine tranche
         shell: bash
         run: |
