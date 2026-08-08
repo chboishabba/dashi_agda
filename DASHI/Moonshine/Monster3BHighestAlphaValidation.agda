@@ -14,6 +14,10 @@ import DASHI.Moonshine.Monster3BPhaseTransportExact as Transport
 import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as ThreeLocal
 import DASHI.Moonshine.LeechWeightTwo196608BridgeExact as Leech
 import DASHI.Moonshine.MonsterYangMills196608CrossLaneExact as CrossLane
+import DASHI.Moonshine.Monster3BCentredProbeCoreSelectorExact as Centred
+import DASHI.Moonshine.Monster3BConformalLinePlacementExact as Conformal
+import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Projector
+import DASHI.Moonshine.Monster3BMultiplicityCharacterProjectorExact as Character
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_; _*_)
@@ -100,3 +104,26 @@ sampleTranslationPermutationLaw :
   ≡ state
 sampleTranslationPermutationLaw =
   Permutations.translateInverseAfterTranslate Generators.axis4
+
+conformalLineIsInvariantOnly :
+  Conformal.addMultiplicity
+    Conformal.conformalLineMultiplicity Fourier.monsterW3B
+  ≡ Fourier.moonshineWeightTwo3B
+conformalLineIsInvariantOnly =
+  Conformal.moonshineWeightTwoSplitsConformalPlusMonster
+
+projectorIndexModelHasCorrectDimension :
+  Projector.zetaModelDimension ≡ 65610
+projectorIndexModelHasCorrectDimension =
+  Projector.zetaModelDimensionIs65610
+
+projectorCharacterDimensionMatchesNormalizer :
+  Character.zetaSectorDegree ≡ Normalizer.nontrivialPhaseDegree
+projectorCharacterDimensionMatchesNormalizer = refl
+
+multiplicityCharacterTargetDegreeSplits :
+  Heisenberg.naturalSuzukiDegree
+  + Heisenberg.symmetricSquareDualDegree
+  ≡ Character.multiplicityDegree
+multiplicityCharacterTargetDegreeSplits =
+  Character.multiplicityTwelvePlusSeventyEight
