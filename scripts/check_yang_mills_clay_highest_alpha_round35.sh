@@ -14,6 +14,7 @@ files=(
   DASHI/Physics/YangMills/BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
   DASHI/Physics/YangMills/BalabanP33FlatPlaquetteFirstVariationCurlExact.agda
   DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
   DASHI/Physics/YangMills/BalabanClayHighestAlphaRound35PlaquetteCurlValidation.agda
 )
 
@@ -53,6 +54,16 @@ checks=(
   'BalabanP33CovariantCurlRadiusStressTestExact.agda:stressCovariantCurlNormSqExact'
   'BalabanP33CovariantCurlRadiusStressTestExact.agda:stressBudgetSquarePlusGapIsCurlNormSq'
   'BalabanP33CovariantCurlRadiusStressTestExact.agda:correlatedCurvatureStressConclusion'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:fourFactorSingletonCountExact'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:fourFactorHigherCountExact'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:fourFactorLinearNonlinearExpansionExact'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:fourFactorTelescopeIsLinearPlusNonlinear'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:physicalPlacementWilsonDefectLinearNonlinearExact'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:physicalPlaquetteWilsonDefectLinearNonlinearExact'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:canonicalBoundsAsRound34Control'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:canonicalBoundsImplyWLocal'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:selectedVariationalCanonicalTerminalCoefficient'
+  'BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda:selectedVariationalCanonicalOneThirtySecond'
 )
 
 for check in "${checks[@]}"; do
@@ -70,14 +81,22 @@ grep -q '10.1007/BF01240355' \
   DASHI/Physics/YangMills/BalabanP33CovariantCurlDefectFactorizationExact.agda
 grep -q '10.1007/BF01229381' \
   DASHI/Physics/YangMills/BalabanSelectedBackgroundCovariantCurlInstantiationExact.agda
+grep -q '10.1103/PhysRevD.10.2445' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
 
-# Exact transport-order and adversarial-regression guards.
+# Exact transport-order, partition and adversarial-regression guards.
 grep -Fq 'Ad_A X0 + Ad_{AB} X1' \
   DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
 grep -Fq -- '- Ad_{AB} X2 - Ad_{ABC^-1} X3' \
   DASHI/Physics/YangMills/BalabanP33PhysicalCovariantPlaquetteCurlExact.agda
 grep -Fq 'Ad_U X - X' \
   DASHI/Physics/YangMills/BalabanP33CovariantCurlDefectFactorizationExact.agda
+grep -Fq 'sum_{|S|=1}' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+grep -q 'four singleton terms and eleven higher-order terms' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
+grep -q 'physicalWilsonCanonicalBoundsLevel = conditional' \
+  DASHI/Physics/YangMills/BalabanP33PhysicalWilsonLinearNonlinearPartitionExact.agda
 grep -q '67108863 / 67108865' \
   DASHI/Physics/YangMills/BalabanP33CovariantCurlRadiusStressTestExact.agda
 grep -q '1073741824 / 4503599761588225' \
@@ -91,6 +110,7 @@ grep -q 'selectedBackgroundCurvatureLowerProducerLevel = conditional' \
 
 grep -Fq '[Round 35 — literal plaquette differentiation, covariant curl and adversarial stress test](./YangMillsPlaquetteCurlRound35.md)' "$index"
 grep -q 'The repeated `Ad_(A B)` is essential' "$doc"
+grep -q 'four singleton terms and eleven higher-order terms' "$doc"
 grep -q 'A static audit is not a kernel result' "$doc"
 grep -q 'variationalEulerLagrangeEquationAtSelectedBackground' "$doc"
 grep -q 'groupedSixteenAtomNonlinearRemainderLower' "$doc"
