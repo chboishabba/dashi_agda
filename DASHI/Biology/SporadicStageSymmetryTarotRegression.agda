@@ -7,6 +7,7 @@ import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.BalancedTernaryAmplitudeClosureExact as Amp
 import DASHI.Foundations.BalancedTernaryUltrametricExact as Ultra
 import DASHI.Foundations.StageSymmetryCarrierTowerExact as Sym
+import DASHI.Foundations.CounterpositionOrderedJoinExact as Counter
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
 import DASHI.Foundations.FrameWitnessFibreMDLExact as FrameMDL
 import DASHI.Foundations.DialecticCubieTetralemmaExact as Cubie
@@ -64,6 +65,32 @@ stageFiveResidueProfileRegression = refl , refl , refl
 counterpositionRegression :
   BT.thirdCoordinateCounterposition ≡ BT.strictInverse BT.allPositive → ⊥
 counterpositionRegression = BT.counterpositionNeedNotBeInverse
+
+binaryEmbeddingRegression :
+  Counter.embedBinaryOrientation Sym.direct ≡ BT.pos
+  × Counter.embedBinaryOrientation Sym.inverse ≡ BT.neg
+binaryEmbeddingRegression = refl , refl
+
+partialCounterpositionRegression :
+  Counter.counterUnder Counter.rejectThird BT.allPositive
+  ≡ Counter.counterUnder Counter.invertAll BT.allPositive
+  → ⊥
+partialCounterpositionRegression = Counter.partialCounterpositionIsNotFullInverse
+
+orderedJoinAmplitudeRegression :
+  Counter.OrderedTriadJoin.joinedAmplitude Counter.stageFiveLowerThenUpper
+  ≡ Counter.OrderedTriadJoin.joinedAmplitude Counter.stageFiveUpperThenLower
+orderedJoinAmplitudeRegression = Counter.orderedStageFiveJoinsShareAmplitude
+
+orderedJoinCarrierRegression :
+  Counter.stageFiveLowerThenUpper ≡ Counter.stageFiveUpperThenLower → ⊥
+orderedJoinCarrierRegression = Counter.orderedStageFiveJoinsDiffer
+
+squareStateMoveSeparationRegression :
+  Counter.listCount Counter.allSquareMoves ≡ 8
+  × Sym.squareCardinality ≡ 4
+squareStateMoveSeparationRegression =
+  Counter.squareMoveCountIsEight , Counter.squareStateCountIsFour
 
 sixDualReadingRegression :
   Sym.hexadicCardinality ≡ 6
@@ -181,6 +208,11 @@ signedCarrierBoundaryRegression = Signed.canonicalSporadicSignedFiftyThreeBounda
 
 amplitudeBoundaryRegression : Amp.AmplitudeProjectionBoundary
 amplitudeBoundaryRegression = Amp.canonicalAmplitudeProjectionBoundary
+
+counterpositionOrderedJoinBoundaryRegression :
+  Counter.CounterpositionOrderedJoinBoundary
+counterpositionOrderedJoinBoundaryRegression =
+  Counter.canonicalCounterpositionOrderedJoinBoundary
 
 witnessFibreBoundaryRegression : FrameMDL.WitnessFibreMDLBoundary
 witnessFibreBoundaryRegression = FrameMDL.canonicalWitnessFibreMDLBoundary
