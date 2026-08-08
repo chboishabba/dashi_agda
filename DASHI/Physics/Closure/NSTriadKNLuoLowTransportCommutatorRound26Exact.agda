@@ -36,8 +36,9 @@ module DASHI.Physics.Closure.NSTriadKNLuoLowTransportCommutatorRound26Exact wher
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (machineChecked)
 
 import DASHI.Physics.Closure.NSPeriodicFarLowEnergyPairingCancellation as Transport
 import DASHI.Physics.Closure.NSPeriodicFarLowExactCommutatorIdentity as Exact
@@ -156,8 +157,8 @@ survivingFiniteTermIsIncrementCommutator certificate =
 
 pointwiseMultiplierDifferenceReductionChecked :
   DifferenceBound.farLowMultiplierDifferenceReductionLevel
-  ≡ DifferenceBound.farLowMultiplierDifferenceReductionLevel
-pointwiseMultiplierDifferenceReductionChecked = _≡_.refl
+  ≡ machineChecked
+pointwiseMultiplierDifferenceReductionChecked = refl
 
 lowTransportSupportAndCancellationClosed : DerivativePlacementClass
 lowTransportSupportAndCancellationClosed = LowAdvectsHigh
