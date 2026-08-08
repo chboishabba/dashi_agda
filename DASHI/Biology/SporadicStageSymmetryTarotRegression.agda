@@ -3,6 +3,7 @@ module DASHI.Biology.SporadicStageSymmetryTarotRegression where
 open import DASHI.Core.Prelude
 
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
+import DASHI.Foundations.BalancedTernaryUltrametricExact as Ultra
 import DASHI.Foundations.StageSymmetryCarrierTowerExact as Sym
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Selector
 import DASHI.Foundations.SecondRevolutionJankoTarotExact as Revolution
@@ -36,6 +37,10 @@ sixDualReadingRegression :
   Sym.hexadicCardinality ≡ 6
   × 6 + 3 ≡ Sym.nonaryCardinality
 sixDualReadingRegression = refl , refl
+
+ultrametricPrefixRegression :
+  Ultra.PrefixAgreement 2 Ultra.fiveDigits Ultra.sixDigits
+ultrametricPrefixRegression = Ultra.fiveSixAgreeThroughDepthTwo
 
 oggCountRegression : SSP.countList SSP.allOggPrimeLanes ≡ 15
 oggCountRegression = SSP.oggPrimeLaneCountIsFifteen
