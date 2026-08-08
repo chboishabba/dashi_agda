@@ -72,23 +72,31 @@ def validate() -> dict[str, int | bool]:
         lhs_left = pairing((xs + e) % P, basis[:, None, :], form)
         rhs_left = (
             pairing(xs[None, :, :], basis[:, None, :], form)
-            + pairing(np.broadcast_to(e, xs.shape)[None, :, :],
-                      basis[:, None, :], form)
+            + pairing(
+                np.broadcast_to(e, xs.shape)[None, :, :],
+                basis[:, None, :],
+                form,
+            )
         ) % P
         if not np.array_equal(lhs_left, rhs_left):
             raise AssertionError("left bilinearity failed")
 
     # Weyl relation for all 36 standard translation/modulation generator
-    # pairs and all 729 basis states:
-    #   M_b T_a = zeta^{<b,a>} T_a M_b.
+    # pairs and all 729 basis states.  We use
+    #
+    #   T_a e_x = e_{x+a},
+    #   M_b e_x = zeta^{<b,x>} e_x,
+    #
+    # hence M_b T_a = zeta^{<b,a>} T_a M_b.
     generator_checks = 0
     for a in basis:
         shifted = (xs + a) % P
         for b in basis:
-            left_phase = ZETA ** pairing(shifted, np.broadcast_to(b, xs.shape), form)
+            repeated_b = np.broadcast_to(b, xs.shape)
+            left_phase = ZETA ** pairing(repeated_b, shifted, form)
             right_phase = (
                 ZETA ** int(pairing(b, a, form))
-                * ZETA ** pairing(xs, np.broadcast_to(b, xs.shape), form)
+                * ZETA ** pairing(repeated_b, xs, form)
             )
             if not np.allclose(left_phase, right_phase, atol=1e-12, rtol=0):
                 raise AssertionError("Weyl commutation relation failed")
