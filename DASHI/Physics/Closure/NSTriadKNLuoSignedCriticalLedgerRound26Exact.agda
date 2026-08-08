@@ -44,6 +44,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 record CriticalWeightMeaning : Set where
   constructor critical-weight-meaning
@@ -120,13 +121,22 @@ weightedShellBalance :
   ≡
   weightedHH C + weightedLH C + weightedHL C + weightedCC C
   + weightedCom C + weightedLowerBoundary C + weightedUpperBoundary C
-weightedShellBalance C
-  rewrite signedShellBalance C =
-  solve
-    ( criticalWeight C
-    ∷ HHsource C ∷ LHsource C ∷ HLsource C ∷ CCsource C
-    ∷ ComSource C ∷ lowerBoundarySource C ∷ upperBoundarySource C
-    ∷ [])
+weightedShellBalance C =
+  trans
+    (solve
+      ( criticalWeight C
+      ∷ energyRate C
+      ∷ dissipation C
+      ∷ []))
+    (trans
+      (cong
+        (λ total → criticalWeight C * total)
+        (signedShellBalance C))
+      (solve
+        ( criticalWeight C
+        ∷ HHsource C ∷ LHsource C ∷ HLsource C ∷ CCsource C
+        ∷ ComSource C ∷ lowerBoundarySource C ∷ upperBoundarySource C
+        ∷ [])))
 
 sumWeightedEnergyRate : List SignedCriticalShellCell → ℚ
 sumWeightedEnergyRate [] = 0ℚ
@@ -180,18 +190,25 @@ finiteSignedCriticalLedgerExact :
   + sumWeightedLowerBoundary cells
   + sumWeightedUpperBoundary cells
 finiteSignedCriticalLedgerExact [] = solve []
-finiteSignedCriticalLedgerExact (C ∷ rest)
-  rewrite weightedShellBalance C
-        | finiteSignedCriticalLedgerExact rest =
-  solve
-    ( weightedEnergyRate C ∷ weightedDissipation C
-    ∷ weightedHH C ∷ weightedLH C ∷ weightedHL C ∷ weightedCC C
-    ∷ weightedCom C ∷ weightedLowerBoundary C ∷ weightedUpperBoundary C
-    ∷ sumWeightedEnergyRate rest ∷ sumWeightedDissipation rest
-    ∷ sumWeightedHH rest ∷ sumWeightedLH rest ∷ sumWeightedHL rest
-    ∷ sumWeightedCC rest ∷ sumWeightedCom rest
-    ∷ sumWeightedLowerBoundary rest ∷ sumWeightedUpperBoundary rest
-    ∷ [])
+finiteSignedCriticalLedgerExact (C ∷ rest) =
+  trans
+    (solve
+      ( weightedEnergyRate C
+      ∷ weightedDissipation C
+      ∷ sumWeightedEnergyRate rest
+      ∷ sumWeightedDissipation rest
+      ∷ []))
+    (trans
+      (cong₂ _+_
+        (weightedShellBalance C)
+        (finiteSignedCriticalLedgerExact rest))
+      (solve
+        ( weightedHH C ∷ weightedLH C ∷ weightedHL C ∷ weightedCC C
+        ∷ weightedCom C ∷ weightedLowerBoundary C ∷ weightedUpperBoundary C
+        ∷ sumWeightedHH rest ∷ sumWeightedLH rest ∷ sumWeightedHL rest
+        ∷ sumWeightedCC rest ∷ sumWeightedCom rest
+        ∷ sumWeightedLowerBoundary rest ∷ sumWeightedUpperBoundary rest
+        ∷ [])))
 
 ------------------------------------------------------------------------
 -- Mean-zero homogeneous carrier policy.
