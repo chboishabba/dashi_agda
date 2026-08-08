@@ -16,38 +16,35 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalSelectedFactorEnvelopeExact as 
 import DASHI.Physics.YangMills.BalabanP33WilsonPairEnvelopeExact as Pair
 import DASHI.Physics.YangMills.BalabanP33PhysicalPairDeepLowerExact as Finite
 import DASHI.Physics.YangMills.BalabanSelectedBackgroundVariationSelectorExact as Selector
+import DASHI.Physics.YangMills.BalabanP33WilsonPairDeepBudgetExact as Coeff
+import DASHI.Physics.YangMills.BalabanP33PhysicalWilsonSignedGlobalExact as Wilson
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_)
+open import Data.Integer.Base using (+_)
+open import Data.List.Base using (length)
+open import Data.Rational.Base using (_*_; _/_; _+_)
 
-subsetPartitionCountRegression :
-  Ownership.correlatedAtomCountExact
-  ≡ Ownership.correlatedAtomCountExact
-subsetPartitionCountRegression = refl
+subsetOwnershipExhaustsAllAtoms :
+  length Ownership.correlatedAtoms + length Ownership.deepAtoms
+  ≡ length Ownership.allSubsetAtoms
+subsetOwnershipExhaustsAllAtoms = Ownership.correlatedAndDeepCountExact
 
-pairDeepOwnershipExhaustsFifteen :
-  10 + 5 ≡ 15
+pairDeepOwnershipExhaustsFifteen : 10 + 5 ≡ 15
 pairDeepOwnershipExhaustsFifteen = refl
 
-physicalSelectedFactorEnvelopePresent :
-  Envelope.physicalSelectedFactorEnvelopeLevel
-  ≡ Envelope.physicalSelectedFactorEnvelopeLevel
-physicalSelectedFactorEnvelopePresent = refl
+pairCoefficientPerCrossRegression :
+  Coeff.pairCoefficientPerCrossCharge
+  ≡ Coeff.rho * (+ 1 / 256)
+pairCoefficientPerCrossRegression = Coeff.pairPerCrossExact
 
-physicalPairLowerPresent :
-  Finite.physicalPairLowerLevel ≡ Finite.physicalPairLowerLevel
-physicalPairLowerPresent = refl
-
-physicalDeepLowerPresent :
-  Finite.physicalDeepLowerLevel ≡ Finite.physicalDeepLowerLevel
-physicalDeepLowerPresent = refl
+deepCoefficientSlackRegression :
+  Coeff.allPlacementDeepCoefficient + Coeff.deepSlack
+  ≡ Coeff.diagonalTargetCoefficient
+deepCoefficientSlackRegression =
+  Coeff.deepCoefficientPlusSlackIsDiagonalTarget
 
 selectorBudgetRegression :
-  Selector.remainingPlusPairIsCorrelated
-  ≡ Selector.remainingPlusPairIsCorrelated
-selectorBudgetRegression = refl
-
-selectedTerminalCompositionPresent :
-  Selector.selectedVariationalSelectorOneThirtySecond
-  ≡ Selector.selectedVariationalSelectorOneThirtySecond
-selectedTerminalCompositionPresent = refl
+  Selector.remainingSingletonCoefficient + Coeff.rho * (+ 1 / 256)
+  ≡ Wilson.rhoOverThirtySix
+selectorBudgetRegression = Selector.remainingPlusPairIsCorrelated
