@@ -8,15 +8,16 @@ module DASHI.Physics.Closure.NSTriadKNLuoHighestAlphaRound26Exact where
 -- conflating them:
 --
 -- * finite Galerkin algebra: reality reconstruction, degree-two coordinate
---   syntax, exact difference factorisation and triadwise energy cancellation;
--- * finite critical accounting: a signed weighted shell ledger with explicit
---   HH/LH/HL/CC/Com and cutoff-boundary coordinates;
+--   syntax, exact difference factorisation and physical triad cancellation;
+-- * finite critical accounting: the Round-25 physical five-source fibre is
+--   forced into a signed weighted shell ledger with explicit boundaries;
 -- * analytic tax discipline: finite commutator increments, division-free HH
 --   normalisation, hysteretic entry charge, named remainder classes and
 --   duplicate-free tax ownership.
 --
--- The continuum-real Picard-Lindelof instance, cutoff-independent class taxes,
--- strict viscosity margin and Clay theorem remain open.
+-- The continuum-real Picard-Lindelof instance, physical time-dependent shell
+-- balances, cutoff-independent class taxes, strict viscosity margin and Clay
+-- theorem remain open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -30,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoTriadwiseEnergyCancellationRound26Exact
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteKernelCommutatorRound26Exact as Kernel
 import DASHI.Physics.Closure.NSTriadKNLuoDuplicateFreeTaxOwnershipRound26Exact as Tax
 import DASHI.Physics.Closure.NSTriadKNLuoSignedCriticalLedgerRound26Exact as Ledger
+import DASHI.Physics.Closure.NSTriadKNLuoPhysicalSignedShellCellRound26Exact as PhysicalShell
 import DASHI.Physics.Closure.NSTriadKNLuoDivisionFreeHHDefectRound26Exact as HH
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteTaxAdversarialRegressionRound26Exact as Regression
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteGalerkinPolynomialRound26Exact as Polynomial
@@ -69,6 +71,15 @@ record Round26ExactEvidence : Set₁ where
         + Ledger.sumWeightedCom cells
         + Ledger.sumWeightedLowerBoundary cells
         + Ledger.sumWeightedUpperBoundary cells
+
+    physicalFiveSourceShellCell :
+      (inputs : PhysicalShell.PhysicalSignedShellInputs) →
+      Ledger.SignedCriticalShellCell
+
+    physicalFiveSourceShellCellHHMeaning :
+      (inputs : PhysicalShell.PhysicalSignedShellInputs) →
+      Ledger.HHsource (physicalFiveSourceShellCell inputs)
+      ≡ PhysicalShell.physicalHH inputs
 
     divisionFreeHHProduct :
       (factorisation : HH.DivisionFreeHHDefectFactorisation) →
@@ -116,6 +127,10 @@ canonicalRound26ExactEvidence = record
       Tax.duplicateFreeTaxOwnershipExact
   ; signedCriticalLedger =
       Ledger.finiteSignedCriticalLedgerExact
+  ; physicalFiveSourceShellCell =
+      PhysicalShell.physicalSignedCriticalShellCell
+  ; physicalFiveSourceShellCellHHMeaning =
+      PhysicalShell.physicalShellCellSourcesAreForced
   ; divisionFreeHHProduct =
       HH.divisionFreeHHProductIdentity
   ; finiteGalerkinDifference =
@@ -136,9 +151,11 @@ record Round26HighestAlphaBoundary : Set where
     realityReconstructionByConstruction : Bool
     negativeTransversalityLawInstantiated : Bool
     continuumRealLocalODEExistenceInstantiated : Bool
-    triadwiseEnergyCancellationProved : Bool
+    physicalTriadEnergyCancellationReused : Bool
     finiteGalerkinGlobalExistenceInstantiated : Bool
     signedCriticalShellLedgerProved : Bool
+    physicalFiveSourceSignedShellBridgeProved : Bool
+    physicalTimeDependentShellBalancesInstantiated : Bool
     lowTransportPrincipalCancellationProved : Bool
     finiteKernelCommutatorIdentityProved : Bool
     cutoffIndependentCommutatorTaxProved : Bool
@@ -159,7 +176,8 @@ canonicalRound26HighestAlphaBoundary =
     true
     true true false false
     true false
-    true true true false
+    true true false
+    true true false
     true true true true
     false false false false
 
@@ -168,6 +186,12 @@ localODEStillOpen :
     canonicalRound26HighestAlphaBoundary
   ≡ false
 localODEStillOpen = refl
+
+physicalShellEvolutionStillOpen :
+  physicalTimeDependentShellBalancesInstantiated
+    canonicalRound26HighestAlphaBoundary
+  ≡ false
+physicalShellEvolutionStillOpen = refl
 
 finiteGlobalExistenceStillOpen :
   finiteGalerkinGlobalExistenceInstantiated
