@@ -1,6 +1,6 @@
 # Monster 3B highest-alpha lane
 
-This lane replaces dimension-only pictures with exact character-table computation, finite-Heisenberg identities, elementary-abelian subgroup strata, and typed boundaries around the still-unproved representation identifications.
+This lane replaces dimension-only pictures with exact character-table computation, finite-Heisenberg generator proofs, elementary-abelian restriction data, and typed boundaries around the still-unproved Monster-module identifications.
 
 ## Primary sources
 
@@ -13,42 +13,27 @@ This lane replaces dimension-only pictures with exact character-table computatio
 - John H. Conway and Simon P. Norton, **“Monstrous Moonshine”**, *Bulletin of the London Mathematical Society* 11 (1979), 308–339. DOI `10.1112/blms/11.3.308`.
 - Igor B. Frenkel, James Lepowsky and Arne Meurman, **“Vertex Operator Algebras and the Monster”**, Academic Press, 1988. ISBN `978-0-12-267065-7`; no DOI asserted.
 
-## One-command validation
+## Validation
 
 ```bash
 bash scripts/check_monster_3b_normalizer_dashboard.sh
 ```
 
-The checker always:
+The checker always compiles the Python producers, validates the explicit finite-Heisenberg model, enumerates every one of the `11011` two-planes in the fixed Lagrangian `X=F₃⁶`, generates function-first dashboards, scans the Agda lane for trust escapes, and invokes the cumulative Agda root when Agda is installed.
 
-1. compiles the Python producers;
-2. exhaustively validates the explicit finite-Heisenberg/Weyl model;
-3. enumerates every one of the `11011` two-planes in `F₃⁶`;
-4. generates function-first dashboards;
-5. rejects postulates and unsafe trust escapes in the new Agda lane.
+With GAP and CTblLib it additionally restricts the unique degree-`196883` Monster character to `MN3B`, checks nonnegative integral multiplicities and classwise reconstruction, identifies the size-two order-three class fusing to Monster `3B`, verifies trace `53` and eigenspace multiplicities `(65663,65610,65610)`, and renders a generated Agda certificate.
 
-With GAP and CTblLib installed it additionally:
-
-1. loads `CharacterTable("M")` and `CharacterTable("MN3B")`;
-2. selects the unique Monster irreducible of degree `196883`;
-3. restricts it through the stored `MN3B -> M` class fusion;
-4. checks nonnegative integral multiplicities;
-5. reconstructs the restricted character on every MN3B class;
-6. identifies the size-two order-three source class fusing to Monster `3B`;
-7. checks trace `53` and eigenspace multiplicities `(65663,65610,65610)`;
-8. emits JSON and a generated Agda certificate.
-
-The workflow `.github/workflows/monster-3b-normalizer.yml` installs GAP, CTblLib, Agda, the standard library, NumPy and Matplotlib, runs the checker, and uploads the certificates and plots.
+The dedicated workflow `.github/workflows/monster-3b-normalizer.yml` installs GAP, CTblLib, Agda, the standard library, NumPy and Matplotlib and uploads all generated certificates and figures.
 
 ## Exact `C₃` restriction target
 
-The GAP producer is:
+The executable producer is:
 
 ```text
 scripts/monster_3b_normalizer_restriction.g
 ```
 
-The generated certificate proves the arithmetic consequences of
+It certifies the data underlying
 
 ```text
 W restricted to C3
@@ -56,7 +41,7 @@ W restricted to C3
   = 53·1 + 65610·Reg(C3).
 ```
 
-Equivalently:
+Thus:
 
 ```text
 65663 + 65610 + 65610 = 196883
@@ -64,17 +49,17 @@ Equivalently:
 3 × 65610 + 53 = 196883.
 ```
 
-The GAP step, not a guessed constituent label, owns the actual normalizer restriction data.
+Semantic names for `12`, `78`, `90`, or `3^6` are never inferred merely from a matching degree.
 
 ## All-1, all-2, all-3, ordered 1-2-3, and 3-6-9
 
-`DASHI/Moonshine/Monster3BCyclicFourierDyadicBridgeExact.agda` treats these as typed linear probes on the same multiplicity vector
+`DASHI/Moonshine/Monster3BCyclicFourierDyadicBridgeExact.agda` treats these as typed linear probes on
 
 ```text
 M = (65663,65610,65610).
 ```
 
-Uniform probes see only dimension:
+Uniform probes see only total dimension:
 
 ```text
 (1,1,1)·M = 196883
@@ -82,7 +67,7 @@ Uniform probes see only dimension:
 (3,3,3)·M = 590649.
 ```
 
-Ordered probes see the invariant imbalance:
+Ordered probes detect the same invariant imbalance as the `3B` character:
 
 ```text
 (1,2,3)·M + 53 = (2,2,2)·M
@@ -90,16 +75,14 @@ Ordered probes see the invariant imbalance:
 (3,6,9)·M + 3×53 = (6,6,6)·M.
 ```
 
-This is the exact overlap with the 369 lane: the centred positional functional and the `C₃` Fourier character detect the same defect because the two nontrivial multiplicities agree. The real weights are not falsely identified with roots of unity.
+This is the exact interaction with the 369 lane. The real positional weights are not identified with complex roots of unity; rather, their centred component and the `C₃` Fourier character both read the same defect because the two nontrivial multiplicities agree.
 
-## The stronger `196608` result
+## The stronger meaning of `196608`
 
-The previous “`0x30000` coincidence” has been replaced by a genuine lattice-VOA identity.
-
-`DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda` proves the standard weight-two count for the rank-24 Leech lattice VOA:
+`DASHI/Moonshine/LeechWeightTwo196608BridgeExact.agda` proves the standard rank-24 lattice-VOA weight-two count:
 
 ```text
-196560  norm-four lattice exponentials
+196560  norm-four Leech lattice exponentials
     24  h(-2)1 oscillators
    300  Sym²(h(-1)) oscillators
 ------
@@ -113,27 +96,21 @@ After choosing an orthonormal coordinate basis,
     = 24 + 276.
 ```
 
-Therefore the exact coordinate subtotal is
+Therefore:
 
 ```text
 196608 = 196560 + 24 + 24
 196884 = 196608 + 276.
 ```
 
-The conformal vector belongs to the diagonal `24`-dimensional quadratic sector. Consequently the geometrically correct quotient is
+The conformal vector lies in the diagonal `24`-dimensional quadratic sector, so the geometrically correct quotient is
 
 ```text
 196883 = (196608 - 1) + 276
        = 196560 + 24 + 23 + 276.
 ```
 
-The numerically equivalent identity
-
-```text
-196883 = 196608 + 275
-```
-
-is retained only as arithmetic: the `275` is not promoted to a canonical off-diagonal subspace. The diagonal/off-diagonal coordinate split is itself basis-dependent, so the `196608` subtotal is not promoted to a Monster-invariant submodule.
+The numerically equivalent identity `196883=196608+275` is retained only as arithmetic. No canonical `275`-dimensional off-diagonal subspace is asserted, and the diagonal/off-diagonal coordinate split is basis-dependent.
 
 `DASHI/Moonshine/MonsterYangMills196608CrossLaneExact.agda` imports the actual Yang–Mills Wilson-budget object and proves:
 
@@ -141,10 +118,10 @@ is retained only as arithmetic: the `275` is not promoted to a canonical off-dia
 rho = 1/8192
 sharpSixteenAtomBudget = 13/196608
 196608 = 24 × 8192 = 3 × 2^16
-196608 = Leech weight-two coordinate subtotal.
+196608 = the Leech weight-two coordinate subtotal.
 ```
 
-Thus the same integer is genuinely owned by both repository lanes. What remains unproved is a common selection mechanism, not the arithmetic overlap itself.
+So `196608` is a genuine shared arithmetic object in the two repository lanes, not merely a hexadecimal resemblance. A common dynamical selection theorem remains open.
 
 ## Heisenberg multiplicity and the older `3^8` chart
 
@@ -159,9 +136,17 @@ Thus the same integer is genuinely owned by both repository lanes. What remains 
 10 × 3^8 = 90 × 3^6 = 65610.
 ```
 
-For either extraspecial type of order `3^(1+12)`, the character-degree multiset contains `3^12` linear characters and two nonlinear characters of degree `3^6`; both degree-square sums equal `3^13`. The plus/minus distinction therefore lives in group geometry, not character degrees.
+For either extraspecial type of order `3^(1+12)`, the irreducible degree multiset has `3^12` linear characters and two nonlinear characters of degree `3^6`; both degree-square sums are `3^13`. The plus/minus distinction is therefore in group geometry, not character degrees.
 
-The representation-theoretic target is:
+`DASHI/Moonshine/Monster3BFiniteHeisenbergGeneratorsExact.agda` constructs the six translation and six modulation generators on the explicit six-trit Schrödinger carrier and proves all `36` standard Weyl exponent laws
+
+```text
+<b,x+a> = <b,a> + <b,x> in F3.
+```
+
+`DASHI/Moonshine/Monster3BFiniteHeisenbergPermutationExact.agda` proves constructive left and right inverse laws for each translation generator.
+
+The actual local-module target remains:
 
 ```text
 W_zeta restricted to E = H_zeta^⊕90
@@ -169,86 +154,97 @@ W_zetaSquared restricted to E = H_zetaSquared^⊕90
 E = 3^(1+12).
 ```
 
-The exact dimensional refactorization is proved. Actual isotypy still requires the certified local action or an equivalent character argument.
+## Correct Lagrangian and full-quotient geometry
+
+The 729 Schrödinger basis states form
+
+```text
+X = F3^6.
+```
+
+The extraspecial quotient is
+
+```text
+E/Z(E) = X + X* = F3^12,
+```
+
+with the standard symplectic form. The Weyl phase is the perfect dual evaluation `zeta^<b,x>` for `x in X`, `b in X*`.
+
+Every two-plane in the fixed Lagrangian `X` is automatically isotropic in the full quotient. `DASHI/Moonshine/Monster3BElementaryAbelianInvariantExact.agda` proves:
+
+```text
+[6 choose 2]_3 = 11011 fixed-Lagrangian two-planes.
+```
+
+Each plane `U` lifts with the centre to an elementary abelian subgroup of order `27`, and the 729-dimensional Schrödinger module restricts as
+
+```text
+81 copies of Reg(U),
+9 × 81 = 729.
+```
+
+Separately, the full twelve-dimensional quotient has
+
+```text
+5883904390 total two-planes
+1961279320 isotropic two-planes
+3922625070 non-isotropic two-planes.
+```
+
+This corrects the earlier misuse of an arbitrary alternating form on `X` itself.
+
+The dashboard maps all `11011` fixed-Lagrangian planes to their `15` Plücker coordinates, nonzero-vector Hamming-weight distributions, RREF pivots, and support sizes. These are genuine Grassmannian/coordinate invariants. No `kappa_r` class or Chern subring is fabricated; the future cohomological calculation must consume these subgroup restrictions explicitly.
 
 ## E₈, Leech, `3^8`, and `3^6`
 
-`DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda` reuses the repository’s existing E₈ and Leech benchmarks and keeps four roles distinct:
+`DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda` keeps four roles distinct:
 
 - rank-eight Euclidean E₈;
 - the eight-dimensional quadratic space over `F₃` behind `3^8.Ω⁻₈(3).2`;
 - the rank-24 Leech lattice;
 - the six-dimensional Lagrangian coordinate whose Schrödinger space has `3^6` states.
 
-The sourced VOA literature contains both 3-local shapes
-
-```text
-3^(1+12).2.Suz:2
-3^8.Ω⁻₈(3).2.
-```
-
-They are not the same subgroup, but their proposed carrier charts meet exactly at `65610`. The file also records the standard E₈/Leech count
+The sourced VOA constructions contain both `3^(1+12).2.Suz:2` and `3^8.Ω⁻₈(3).2`. They are different 3-local groups, while their candidate carrier dimensions meet exactly at `10×3^8=90×3^6=65610`. The file also records the E₈/Leech count
 
 ```text
 196560 = 240 × 3 × (1 + 16 + 16²).
 ```
 
-## Elementary abelian subgroup and Chern-subring inputs
-
-`DASHI/Moonshine/Monster3BElementaryAbelianInvariantExact.agda` proves the exact two-plane strata of the six-dimensional symplectic carrier:
-
-```text
-[6 choose 2]_3 = 11011
-isotropic two-planes = 3640
-rank-two symplectic two-planes = 7371
-3640 + 7371 = 11011.
-```
-
-The dashboard enumerates all `11011` RREF bases and maps each plane to:
-
-- restricted alternating rank;
-- zero counts of two declared quadratic probes;
-- support coordinates and RREF weight;
-- the commutator-rank input required by a future Chern restriction calculation.
-
-No `kappa_r` class or Chern subring is fabricated from incidence data. Those remain a genuine cohomological construction.
-
 ## Phase transport
 
-`DASHI/Moonshine/Monster3BPhaseTransportExact.agda` distinguishes the subgroup fixing a selected `3B` generator from the full cyclic normalizer. Generator inversion exchanges `zeta` and `zetaSquared`, so one nontrivial sector is naturally a module for the phase-preserving subgroup, while the full normalizer preserves their direct sum.
+`DASHI/Moonshine/Monster3BPhaseTransportExact.agda` distinguishes the subgroup fixing a selected `3B` generator from the full normalizer. Generator inversion exchanges `zeta` and `zetaSquared`; consequently one nontrivial eigenspace belongs naturally to the phase-preserving subgroup, while the full normalizer preserves their direct sum.
 
 ## Function-first dashboards
 
-`scripts/monster_3b_structural_dashboard.py` emits:
+`scripts/monster_3b_structural_dashboard.py` emits no magnitude-only bar chart. It renders:
 
 1. the exact extraspecial character-degree moment surface `M_n(s)=3^(2n)+2·3^(ns)` for both types and `n=1..6`;
-2. the complete generator-to-invariant map for all `11011` elementary-abelian two-planes;
-3. the full `729×729` Weyl phase function `arg(zeta^<x,b>)`;
+2. the full Plücker/restriction-invariant function on all `11011` Lagrangian two-planes;
+3. the complete `729×729` Weyl phase function `arg(zeta^<b,x>)` on `X*×X`;
 4. an explicitly labelled model coupling on the full `729×(12+78)` carrier;
 5. exact orbit-length strata under a declared invertible finite-field generator;
 6. the certified CTblLib restriction-label function when GAP output exists.
 
-No bar chart is part of this suite.
-
 ## Exact remaining highest-alpha cut
 
-The implemented lane owns the arithmetic, Fourier probes, Leech subtotal, actual Yang–Mills denominator identity, finite-Heisenberg model, plus/minus degree comparison, elementary-abelian strata, phase transport, and executable normalizer restriction.
+The implemented lane owns the arithmetic and Fourier probes, the actual Yang–Mills/Leech `196608` identity, the explicit Weyl generator algebra, translation inverses, extraspecial degree data, fixed-Lagrangian subgroup restrictions, full symplectic two-plane counts, phase transport, and executable normalizer restriction.
 
-The irreducible mathematical frontier is:
+The irreducible frontier is now:
 
 ```text
 1. observe a successful CTblLib and Agda workflow certificate;
 2. identify the extraspecial kernel and selected central 3B element in the certified restriction;
-3. prove or import finite Stone–von Neumann uniqueness in the representation layer;
+3. prove finite Stone–von Neumann uniqueness in the representation layer;
 4. construct S_zeta = Hom_E(H_zeta,W_zeta);
-5. prove dim S_zeta = 90 and evaluation H_zeta tensor S_zeta -> W_zeta is an isomorphism;
+5. prove dim S_zeta = 90 and H_zeta tensor S_zeta -> W_zeta is an isomorphism;
 6. compute the actual inertia-group character on S_zeta;
-7. decide from that character whether S_zeta = S_12 direct-sum S_78;
-8. import genuine local-group generators and match their traces to CTblLib;
-9. only then construct an equivariant map from the existing 369, 3^8, and reduced-53 carriers.
+7. decide whether S_zeta = S_12 direct-sum S_78;
+8. import genuine local-group generators and match traces to CTblLib;
+9. construct the actual kappa_r/Chern restrictions;
+10. only then seek an equivariant map from the existing 369, 3^8, and reduced-53 carriers.
 ```
 
-The decisive endpoint remains:
+The decisive endpoint remains
 
 ```text
 W_zeta restricted to E ≅ H_zeta tensor S_zeta,
