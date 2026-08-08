@@ -29,7 +29,7 @@ for source in "${sources[@]}"; do
     exit 1
   fi
 
-  if grep -Pzo '\{!.*?!\}' "$source" >/dev/null; then
+  if grep -Pzoq '(?s)\{!.*?!\}' "$source"; then
     echo "forbidden multiline hole in $source" >&2
     exit 1
   fi
@@ -58,9 +58,15 @@ require_pattern "$weight2" 'untwistedInvariantWeightTwoDimensionIs98580'
 require_pattern "$weight2" 'twistedInvariantWeightTwoDimensionIs98304'
 require_pattern "$weight2" 'publishedOrbifoldWeightTwoSplit'
 require_pattern "$weight2" 'monsterNontrivialWeightTwoDimensionIs196883'
+require_pattern "$weight2" 'MoonshineWeightTwoCoordinate'
+require_pattern "$weight2" 'includeMonsterNontrivialCoordinate'
+require_pattern "$weight2" 'conformalVectorNotInMonsterImage'
 require_pattern "$weight2" 'coordinateSubtotalIsNotUntwistedOrbifoldSummand'
 require_pattern "$massless" 'directSumOfEmptyIsEmpty'
 require_pattern "$massless" 'moonshineWeightOneEmpty'
+require_pattern "$massless" 'PositiveGradeStrictlyBelowTwo'
+require_pattern "$massless" 'allPositiveGradesBelowTwoAreEmpty'
+require_pattern "$massless" 'conformalExcitationMinimality'
 require_pattern "$massless" 'conformalExcitationIndexIsTwo'
 require_pattern "$massless" 'conformalIndexProvesFourDimensionalYangMillsGapIsFalse'
 require_pattern "$siblings" 'siblingsShareOrbifoldOrigin'
@@ -73,6 +79,8 @@ require_pattern "$multiplicity" 'multiplicityEmbeddingTranslationEquivariant'
 require_pattern "$multiplicity" 'ActualZetaSectorRecognition'
 require_pattern "$multiplicity" 'actualProjectorTranslationCovariant'
 require_pattern "$multiplicity" 'actualStandardTranslationFixedPointFree'
+require_pattern "$character" 'identityClass : ExtraspecialClassKind'
+require_pattern "$character" 'centralZetaClass : ExtraspecialClassKind'
 require_pattern "$character" 'modelTraceIsNinetyHeisenbergCopies'
 require_pattern "$character" 'ActualKernelCharacterCertificate'
 require_pattern "$character" 'actualNoncentralTraceVanishes'
