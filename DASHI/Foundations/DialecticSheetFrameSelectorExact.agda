@@ -93,10 +93,7 @@ open HexagramObservation public
 
 stageFiveHexagram : HexagramObservation
 stageFiveHexagram =
-  hexagramObservation
-    BT.allPositive
-    BT.twoPositiveOneOpen
-    3 2 refl refl
+  hexagramObservation BT.allPositive BT.twoPositiveOneOpen 3 2 refl refl
 
 stageFiveHexagramTotal :
   lowerAmplitude stageFiveHexagram + upperAmplitude stageFiveHexagram ≡ 5
@@ -235,41 +232,7 @@ empressStageThreeCandidate =
   tarotFrameCandidate
     "The Empress"
     "a local frame in which condition, relation, and synthesis cohere"
-    declaredSymbolicAuthority
-    true
-    false refl
-
-------------------------------------------------------------------------
--- SSP15 is a multiscale observer signature.  Every lane retains pattern,
--- stabiliser, orientation and residual status; no lane alone rewrites the
--- underlying frame.
-------------------------------------------------------------------------
-
-data LaneStatus : Set where
-  laneAffirmed laneOpen laneCountered : LaneStatus
-
-record SymmetryLaneReading : Set where
-  constructor symmetryLaneReading
-  field
-    primeLane : BT.OggPrime
-    projectedPattern : BT.TriadPattern
-    stabiliser : BT.StabiliserType
-    status : LaneStatus
-    residualRetained : Bool
-
-open SymmetryLaneReading public
-
-SSP15Signature : Set
-SSP15Signature = BT.OggPrime → SymmetryLaneReading
-
-canonicalStageFiveSSP15 : SSP15Signature
-canonicalStageFiveSSP15 p =
-  symmetryLaneReading
-    p
-    BT.twoPositiveOneOpen
-    BT.pairStabiliserS2
-    laneOpen
-    true
+    declaredSymbolicAuthority true false refl
 
 record SelectorAuthorityBoundary : Set where
   constructor selectorAuthorityBoundary
@@ -280,10 +243,7 @@ record SelectorAuthorityBoundary : Set where
     tarotCandidateCreatesExternalPrediction : Bool
     tarotCandidateCreatesExternalPredictionIsFalse :
       tarotCandidateCreatesExternalPrediction ≡ false
-    sspLaneReplacesUnderlyingCarrier : Bool
-    sspLaneReplacesUnderlyingCarrierIsFalse :
-      sspLaneReplacesUnderlyingCarrier ≡ false
 
 canonicalSelectorAuthorityBoundary : SelectorAuthorityBoundary
 canonicalSelectorAuthorityBoundary =
-  selectorAuthorityBoundary false refl false refl false refl
+  selectorAuthorityBoundary false refl false refl
