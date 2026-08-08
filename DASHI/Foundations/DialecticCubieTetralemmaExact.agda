@@ -16,10 +16,8 @@ record SupportCounterSquare : Set where
 open SupportCounterSquare public
 
 data TetralemmaPosition : Set where
-  positionOnly : TetralemmaPosition
-  counterpositionOnly : TetralemmaPosition
-  bothSupported : TetralemmaPosition
-  neitherEstablished : TetralemmaPosition
+  positionOnly counterpositionOnly bothSupported neitherEstablished :
+    TetralemmaPosition
 
 classifySupportSquare : SupportCounterSquare → TetralemmaPosition
 classifySupportSquare (supportCounterSquare supported unsupported) = positionOnly
@@ -42,8 +40,7 @@ stageThreePatternWithCounterSquare =
   tetralemmaOver
     BT.allPositive
     (supportCounterSquare supported supported)
-    bothSupported
-    refl
+    bothSupported refl
 
 stageThreeCarrierRetained :
   retainedCarrier stageThreePatternWithCounterSquare ≡ BT.allPositive
@@ -129,17 +126,24 @@ decisionPoliciesDifferOnNegative :
   positiveOnlyDecision BT.neg ≡ nonzeroDecision BT.neg → ⊥
 decisionPoliciesDifferOnNegative ()
 
+data PolicyName : Set where
+  positiveOnlyName nonzeroName : PolicyName
+
 record DeclaredDecisionPolicy : Set where
   constructor declaredDecisionPolicy
   field
     decide : BT.BalancedDigit → Sheet.Bit2
-    policyNameCode : Nat
+    policyName : PolicyName
 
 positiveOnlyPolicy : DeclaredDecisionPolicy
-positiveOnlyPolicy = declaredDecisionPolicy positiveOnlyDecision 1
+positiveOnlyPolicy =
+  declaredDecisionPolicy positiveOnlyDecision positiveOnlyName
 
 nonzeroPolicy : DeclaredDecisionPolicy
-nonzeroPolicy = declaredDecisionPolicy nonzeroDecision 2
+nonzeroPolicy = declaredDecisionPolicy nonzeroDecision nonzeroName
+
+policyNamesDiffer : positiveOnlyName ≡ nonzeroName → ⊥
+policyNamesDiffer ()
 
 record Hyperfabric (Cell : Set) : Set₁ where
   constructor hyperfabric
@@ -150,11 +154,14 @@ record Hyperfabric (Cell : Set) : Set₁ where
 
 open Hyperfabric public
 
+data CubieFrameName : Set where
+  localCubieFrame contextualCubieFrame promotedCubieFrame : CubieFrameName
+
 record CubieWithFrame : Set where
   constructor cubieWithFrame
   field
     cubieField : TernaryCubieField
-    frameCode : Nat
+    frameName : CubieFrameName
 
 emptyCubieHyperfabric : Hyperfabric CubieWithFrame
 emptyCubieHyperfabric =
