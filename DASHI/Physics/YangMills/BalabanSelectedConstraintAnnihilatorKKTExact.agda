@@ -75,47 +75,47 @@ stateDotRightPointwiseCong {left} {right} pointwise vector =
 
 record AnnihilatesConstraintKernel
     {Multiplier : Set}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     (covector : KKT.StateVector) : Set₁ where
   field
     annihilates : ∀ tangent →
-      Pseudo.ConstraintKernel data tangent →
+      Pseudo.ConstraintKernel pseudoData tangent →
       KKT.stateDot covector tangent ≡ 0ℚ
 
 open AnnihilatesConstraintKernel public
 
 projectedCovectorNormZero :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     covector →
-  AnnihilatesConstraintKernel data covector →
-  KKT.stateNormSq (Pseudo.admissibleProject data covector) ≡ 0ℚ
-projectedCovectorNormZero data covector critical =
+  AnnihilatesConstraintKernel pseudoData covector →
+  KKT.stateNormSq (Pseudo.admissibleProject pseudoData covector) ≡ 0ℚ
+projectedCovectorNormZero pseudoData covector critical =
   let
-    projected = Pseudo.admissibleProject data covector
+    projected = Pseudo.admissibleProject pseudoData covector
 
     annihilated :
       KKT.stateDot covector projected ≡ 0ℚ
     annihilated =
       annihilates critical projected
-        (Pseudo.projectConstraintZero data covector)
+        (Pseudo.projectConstraintZero pseudoData covector)
 
     selfAdjointStep :
       KKT.stateDot projected projected
       ≡ KKT.stateDot
-          (Pseudo.admissibleProject data projected)
+          (Pseudo.admissibleProject pseudoData projected)
           covector
     selfAdjointStep =
-      Pseudo.projectSelfAdjoint data projected covector
+      Pseudo.projectSelfAdjoint pseudoData projected covector
 
     idempotentLeft :
       KKT.stateDot
-        (Pseudo.admissibleProject data projected)
+        (Pseudo.admissibleProject pseudoData projected)
         covector
       ≡ KKT.stateDot projected covector
     idempotentLeft =
       stateDotLeftPointwiseCong
-        (Pseudo.projectIdempotent data covector)
+        (Pseudo.projectIdempotent pseudoData covector)
         covector
   in
   trans selfAdjointStep
@@ -127,84 +127,85 @@ projectedCovectorNormZero data covector critical =
 
 projectedCovectorPointwiseZero :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     covector →
-  AnnihilatesConstraintKernel data covector →
+  AnnihilatesConstraintKernel pseudoData covector →
   ∀ coordinate →
-  Pseudo.admissibleProject data covector coordinate ≡ 0ℚ
-projectedCovectorPointwiseZero data covector critical =
+  Pseudo.admissibleProject pseudoData covector coordinate ≡ 0ℚ
+projectedCovectorPointwiseZero pseudoData covector critical =
   KKT.stateNormSqZeroPointwise
-    (Pseudo.admissibleProject data covector)
-    (projectedCovectorNormZero data covector critical)
+    (Pseudo.admissibleProject pseudoData covector)
+    (projectedCovectorNormZero pseudoData covector critical)
 
 canonicalKKTMultiplier :
   ∀ {Multiplier} →
   Pseudo.FiniteKKTPseudoinverseData Multiplier →
   KKT.StateVector → Pseudo.MultiplierVector Multiplier
-canonicalKKTMultiplier data covector =
-  Pseudo.pseudoApply data (Pseudo.constraintApply data covector)
+canonicalKKTMultiplier pseudoData covector =
+  Pseudo.pseudoApply pseudoData
+    (Pseudo.constraintApply pseudoData covector)
 
 finiteAnnihilatorKernelEqualsAdjointImage :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     covector →
-  AnnihilatesConstraintKernel data covector →
+  AnnihilatesConstraintKernel pseudoData covector →
   ∀ coordinate →
   covector coordinate
-  ≡ Pseudo.constraintAdjointApply data
-      (canonicalKKTMultiplier data covector)
+  ≡ Pseudo.constraintAdjointApply pseudoData
+      (canonicalKKTMultiplier pseudoData covector)
       coordinate
 finiteAnnihilatorKernelEqualsAdjointImage
-    data covector critical coordinate =
+    pseudoData covector critical coordinate =
   let
     projectedZero =
       projectedCovectorPointwiseZero
-        data covector critical coordinate
+        pseudoData covector critical coordinate
   in
   trans
     (sym
       (ℚRing.solve-∀
         (covector coordinate)
-        (Pseudo.constraintRepair data covector coordinate)))
+        (Pseudo.constraintRepair pseudoData covector coordinate)))
     (trans
       (cong
-        (_+ Pseudo.constraintRepair data covector coordinate)
+        (_+ Pseudo.constraintRepair pseudoData covector coordinate)
         projectedZero)
       (ℚRing.solve-∀
-        (Pseudo.constraintRepair data covector coordinate)))
+        (Pseudo.constraintRepair pseudoData covector coordinate)))
 
 record KKTMultiplierWitness
     {Multiplier : Set}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     (covector : KKT.StateVector) : Set₁ where
   field
     multiplier : Pseudo.MultiplierVector Multiplier
     covectorIsAdjoint : ∀ coordinate →
       covector coordinate
-      ≡ Pseudo.constraintAdjointApply data multiplier coordinate
+      ≡ Pseudo.constraintAdjointApply pseudoData multiplier coordinate
 
 open KKTMultiplierWitness public
 
 selectedKKTMultiplierExistence :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     covector →
-  AnnihilatesConstraintKernel data covector →
-  KKTMultiplierWitness data covector
-selectedKKTMultiplierExistence data covector critical = record
-  { multiplier = canonicalKKTMultiplier data covector
+  AnnihilatesConstraintKernel pseudoData covector →
+  KKTMultiplierWitness pseudoData covector
+selectedKKTMultiplierExistence pseudoData covector critical = record
+  { multiplier = canonicalKKTMultiplier pseudoData covector
   ; covectorIsAdjoint =
       finiteAnnihilatorKernelEqualsAdjointImage
-        data covector critical
+        pseudoData covector critical
   }
 
 record MultiplierRedundancy
     {Multiplier : Set}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     (multiplier : Pseudo.MultiplierVector Multiplier) : Set where
   field
     adjointZero : ∀ coordinate →
-      Pseudo.constraintAdjointApply data multiplier coordinate ≡ 0ℚ
+      Pseudo.constraintAdjointApply pseudoData multiplier coordinate ≡ 0ℚ
 
 open MultiplierRedundancy public
 
@@ -217,32 +218,32 @@ multiplierSubtract left right row = left row - right row
 
 adjointSubtractExact :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     left right coordinate →
-  Pseudo.constraintAdjointApply data
+  Pseudo.constraintAdjointApply pseudoData
     (multiplierSubtract left right) coordinate
-  ≡ Pseudo.constraintAdjointApply data left coordinate
-    - Pseudo.constraintAdjointApply data right coordinate
-adjointSubtractExact data left right coordinate =
+  ≡ Pseudo.constraintAdjointApply pseudoData left coordinate
+    - Pseudo.constraintAdjointApply pseudoData right coordinate
+adjointSubtractExact pseudoData left right coordinate =
   Rect.applyRectangularSubtract
-    (Pseudo.multiplierCarrier data)
-    (Rect.transposeRectangular (Pseudo.constraintMatrix data))
+    (Pseudo.multiplierCarrier pseudoData)
+    (Rect.transposeRectangular (Pseudo.constraintMatrix pseudoData))
     left right coordinate
 
 selectedKKTMultiplierUniquenessModuloRedundancy :
   ∀ {Multiplier}
-    (data : Pseudo.FiniteKKTPseudoinverseData Multiplier)
+    (pseudoData : Pseudo.FiniteKKTPseudoinverseData Multiplier)
     covector
-    (left right : KKTMultiplierWitness data covector) →
-  MultiplierRedundancy data
+    (left right : KKTMultiplierWitness pseudoData covector) →
+  MultiplierRedundancy pseudoData
     (multiplierSubtract
       (multiplier left)
       (multiplier right))
 selectedKKTMultiplierUniquenessModuloRedundancy
-    data covector left right = record
+    pseudoData covector left right = record
   { adjointZero = λ coordinate →
       trans
-        (adjointSubtractExact data
+        (adjointSubtractExact pseudoData
           (multiplier left) (multiplier right) coordinate)
         (trans
           (cong₂ _-_
