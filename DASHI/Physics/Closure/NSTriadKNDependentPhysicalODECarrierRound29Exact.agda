@@ -13,13 +13,13 @@ module DASHI.Physics.Closure.NSTriadKNDependentPhysicalODECarrierRound29Exact wh
 --
 -- DASHI CONTRIBUTION
 --
--- The ODE is defined on the dependent physical carrier itself.  Once a raw
+-- The ODE is defined on the dependent physical carrier itself. Once a raw
 -- finite vector field commutes with the physical selector, its output carries
--- Leray, Fourier-reality and centering proofs by construction.  Downstream
+-- Leray, Fourier-reality and centering proofs by construction. Downstream
 -- trajectories therefore cannot contain inadmissible states accidentally.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; lsuc)
+open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -116,8 +116,9 @@ record DependentPhysicalTrajectory
     Set (lsuc (timeLevel ⊔ stateLevel)) where
   field
     stateAt : Time → Selector.PhysicalCarrier selectors
-    derivativeMeaning : ∀ time →
-      stateAt time ≡ physicalVectorField field (stateAt time)
+    derivativeAt : Time → Selector.PhysicalCarrier selectors
+    derivativeEqualsVectorField : ∀ time →
+      derivativeAt time ≡ physicalVectorField field (stateAt time)
 
 open DependentPhysicalTrajectory public
 
@@ -131,6 +132,17 @@ rawStateAt :
   Time → State
 rawStateAt trajectory time =
   Selector.selectedState (stateAt trajectory time)
+
+rawDerivativeAt :
+  ∀ {timeLevel stateLevel}
+    {Time : Set timeLevel}
+    {State : Set stateLevel}
+    {selectors : Selector.CommutingPhysicalSelectors State}
+    {field : SelectorEquivariantVectorField selectors} →
+  DependentPhysicalTrajectory Time selectors field →
+  Time → State
+rawDerivativeAt trajectory time =
+  Selector.selectedState (derivativeAt trajectory time)
 
 dependentPhysicalODECarrierClosed : Bool
 dependentPhysicalODECarrierClosed = true
