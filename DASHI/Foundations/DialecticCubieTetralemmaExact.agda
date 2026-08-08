@@ -5,11 +5,6 @@ open import DASHI.Core.Prelude
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
 import DASHI.Foundations.DialecticSheetFrameSelectorExact as Sheet
 
-------------------------------------------------------------------------
--- A tetralemma is a two-axis support/counter-support square over an existing
--- carrier.  The four does not erase or replace the carrier being classified.
-------------------------------------------------------------------------
-
 data SupportBit : Set where
   unsupported supported : SupportBit
 
@@ -60,11 +55,6 @@ supportSquareCardinality = 2 * 2
 supportSquareCardinalityIsFour : supportSquareCardinality ≡ 4
 supportSquareCardinalityIsFour = refl
 
-------------------------------------------------------------------------
--- The 3x3 comparison sheet and a third context axis generate 27 positions.
--- A cubie field assigns one balanced ternary value to each position.
-------------------------------------------------------------------------
-
 data Axis3 : Set where
   low middle high : Axis3
 
@@ -94,12 +84,6 @@ contextSlice : TernaryCubieField → Axis3 → Axis3 → Axis3 → BT.BalancedDi
 contextSlice cubie context row column =
   cubie (cubiePosition row column context)
 
-------------------------------------------------------------------------
--- A concrete lift of the nine-cell sheet to a cubie repeats the relational
--- sheet across three declared contexts.  More informative context actions can
--- be supplied later without changing the carrier.
-------------------------------------------------------------------------
-
 sheetEntry : Sheet.ComparisonSheet3x3 → Axis3 → Axis3 → BT.BalancedDigit
 sheetEntry sheet low low = Sheet.c11 sheet
 sheetEntry sheet low middle = Sheet.c12 sheet
@@ -124,12 +108,6 @@ repeatedSheetIgnoresContext :
   repeatSheetAcrossContext sheet
     (cubiePosition row column rightContext)
 repeatedSheetIgnoresContext sheet row column leftContext rightContext = refl
-
-------------------------------------------------------------------------
--- Ternary observation may be reduced to a binary commitment, but the quotient
--- policy must be explicit.  Positive-only and nonzero policies differ on a
--- negative observation.
-------------------------------------------------------------------------
 
 positiveOnlyDecision : BT.BalancedDigit → Sheet.Bit2
 positiveOnlyDecision BT.neg = Sheet.bit0
@@ -163,12 +141,6 @@ positiveOnlyPolicy = declaredDecisionPolicy positiveOnlyDecision 1
 nonzeroPolicy : DeclaredDecisionPolicy
 nonzeroPolicy = declaredDecisionPolicy nonzeroDecision 2
 
-------------------------------------------------------------------------
--- Hyperfabrics retain cubies and an explicit incidence relation.  The record
--- supplies the construction obligation without pretending every list of cubies
--- is already a manifold, braid, or sheaf.
-------------------------------------------------------------------------
-
 record Hyperfabric (Cell : Set) : Set₁ where
   constructor hyperfabric
   field
@@ -181,7 +153,7 @@ open Hyperfabric public
 record CubieWithFrame : Set where
   constructor cubieWithFrame
   field
-    field : TernaryCubieField
+    cubieField : TernaryCubieField
     frameCode : Nat
 
 emptyCubieHyperfabric : Hyperfabric CubieWithFrame
