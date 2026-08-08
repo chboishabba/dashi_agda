@@ -11,6 +11,7 @@ module DASHI.Papers.NavierStokes.ClaimCorpusHighestAlphaRound24 where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+open import Relation.Nullary.Negation using (¬_)
 
 import DASHI.Physics.Closure.NSTriadKNLuoClaimedSolutionCorpusRound24Exact as Corpus
 import DASHI.Physics.Closure.NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact as Abu
@@ -69,8 +70,6 @@ camlinFiniteHorizonNoGo :
   ¬ Camlin.GlobalUniformHorizonBound
 camlinFiniteHorizonNoGo =
   Camlin.finiteHorizonFamilyDoesNotYieldGlobalUniformBound
-  where
-  open import Relation.Nullary.Negation using (¬_)
 
 abuRouteNode : Crosswalk.LadderNode
 abuRouteNode = Crosswalk.firstLoadBearingNode (Corpus.family Corpus.abuGhuwaleh)
