@@ -55,6 +55,7 @@ agda_sources=(
   DASHI/Moonshine/Monster3BNormalizerBridge.agda
   DASHI/Moonshine/Monster3BCyclicFourierDyadicBridgeExact.agda
   DASHI/Moonshine/Monster3BHeisenbergMultiplicityExact.agda
+  DASHI/Moonshine/Monster3BFiniteHeisenbergGeneratorsExact.agda
   DASHI/Moonshine/Monster3BElementaryAbelianInvariantExact.agda
   DASHI/Moonshine/Monster3BPhaseTransportExact.agda
   DASHI/Moonshine/MonsterThreeLocalE8LeechBridgeExact.agda
