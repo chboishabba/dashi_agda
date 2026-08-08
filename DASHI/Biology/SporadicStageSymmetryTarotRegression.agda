@@ -1,6 +1,7 @@
 module DASHI.Biology.SporadicStageSymmetryTarotRegression where
 
 open import DASHI.Core.Prelude
+import DASHI.Core.Optional as Opt
 
 import DASHI.Foundations.ActionMDLSeparation as ActionMDL
 import DASHI.Foundations.BalancedTernaryStageSymmetryExact as BT
@@ -24,6 +25,10 @@ import DASHI.Moonshine.DepthTwoNonaryResidueFibreExact as DepthTwo
 import DASHI.Moonshine.EulerMonsterMeaningSeparationExact as Euler
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
+optionalIdentityRegression :
+  Opt.optionalMap (λ x → x) (Opt.some 3) ≡ Opt.some 3
+optionalIdentityRegression = Opt.optionalMapIdentity (Opt.some 3)
+
 stageFiveConstituentRegression :
   BT.TwoTriadComposite.totalAmplitude BT.stage5Composite ≡ 5
 stageFiveConstituentRegression = refl
@@ -38,6 +43,13 @@ stageFiveSymmetryRegression :
   × BT.SymmetryAwareStageState.stabiliser BT.stage2SymmetryState
     ≡ BT.pairStabiliserS2
 stageFiveSymmetryRegression = refl , refl
+
+exhaustiveStabiliserRegression :
+  BT.patternStabiliser BT.allOpen ≡ BT.fullStabiliserS3
+  × BT.patternStabiliser BT.thirdCoordinateCounterposition
+    ≡ BT.pairStabiliserS2
+exhaustiveStabiliserRegression =
+  BT.allOpenPatternHasS3 , BT.counterpositionPatternHasS2
 
 signedAmplitudeRegression :
   Amp.triadAmplitude BT.allPositive ≡ Amp.ampPos3
@@ -56,11 +68,21 @@ stageFiveFullBranchRegression :
   × Amp.StageFiveBranch.visibleTarget Amp.stageFiveFallbackWithResidual ≡ 3
 stageFiveFullBranchRegression = refl , refl , refl
 
+negativeBranchStabiliserRegression :
+  Amp.StageFiveBranch.upperStabiliserAfter Amp.negativeStageFiveResolution
+  ≡ BT.pairStabiliserS2
+negativeBranchStabiliserRegression = Amp.negativeBranchRetainsS2
+
 stageFiveResidueProfileRegression :
   Amp.ResidueDeficit369.remainder3 Amp.fiveResidueDeficitProfile ≡ 2
   × Amp.ResidueDeficit369.deficit6 Amp.fiveResidueDeficitProfile ≡ 1
   × Amp.ResidueDeficit369.deficit9 Amp.fiveResidueDeficitProfile ≡ 4
 stageFiveResidueProfileRegression = refl , refl , refl
+
+triadicDeficitTargetsNextMultipleRegression :
+  Amp.ResidueDeficit369.closesAtNext3 Amp.fiveResidueDeficitProfile
+  ≡ refl
+triadicDeficitTargetsNextMultipleRegression = refl
 
 counterpositionRegression :
   BT.thirdCoordinateCounterposition ≡ BT.strictInverse BT.allPositive → ⊥
@@ -92,14 +114,48 @@ squareStateMoveSeparationRegression :
 squareStateMoveSeparationRegression =
   Counter.squareMoveCountIsEight , Counter.squareStateCountIsFour
 
+carrierEnumerationRegression :
+  Sym.carrierListLength Sym.allSquareCarriers ≡ 4
+  × Sym.carrierListLength Sym.allHexadicCarriers ≡ 6
+  × Sym.carrierListLength Sym.allNonaryCarriers ≡ 9
+carrierEnumerationRegression = refl , refl , refl
+
+stageFiveConstituentAmplitudeRegression :
+  BT.positiveUnits
+    (BT.SymmetryAwareStageState.balance
+      (Sym.StageFiveSymmetryMismatch.closedConstituent
+        Sym.canonicalStageFiveSymmetryMismatch))
+  + BT.positiveUnits
+      (BT.SymmetryAwareStageState.balance
+        (Sym.StageFiveSymmetryMismatch.openConstituent
+          Sym.canonicalStageFiveSymmetryMismatch))
+  ≡ Sym.StageFiveSymmetryMismatch.totalAmplitude
+      Sym.canonicalStageFiveSymmetryMismatch
+stageFiveConstituentAmplitudeRegression =
+  Sym.StageFiveSymmetryMismatch.totalAmplitudeFromConstituents
+    Sym.canonicalStageFiveSymmetryMismatch
+
 sixDualReadingRegression :
   Sym.hexadicCardinality ≡ 6
   × 6 + 3 ≡ Sym.nonaryCardinality
 sixDualReadingRegression = refl , refl
 
+balancedAddressDecoderRegression :
+  BT.addressWeights
+    (BT.BalancedTernaryAddress.digitsHighToLow BT.fiveBalancedAddress)
+  ≡ (9 , 4)
+balancedAddressDecoderRegression =
+  BT.BalancedTernaryAddress.decodedWeightsExact BT.fiveBalancedAddress
+
 ultrametricPrefixRegression :
   Ultra.PrefixAgreement 2 Ultra.fiveDigits Ultra.sixDigits
 ultrametricPrefixRegression = Ultra.fiveSixAgreeThroughDepthTwo
+
+ultrametricReflexiveAndNestedRegression :
+  Ultra.PrefixAgreement 3 Ultra.fiveDigits Ultra.fiveDigits
+  × Ultra.PrefixAgreement 1 Ultra.fiveDigits Ultra.sixDigits
+ultrametricReflexiveAndNestedRegression =
+  Ultra.fiveReflexiveAtDepthThree , Ultra.fiveSixAgreeThroughDepthOne
 
 tetralemmaRetainsCarrierRegression :
   Cubie.retainedCarrier Cubie.stageThreePatternWithCounterSquare
@@ -123,6 +179,11 @@ mdlSelectorRegression :
     FrameMDL.canonicalFrameMDLSelection tt
   ≡ FrameMDL.compactFrame
 mdlSelectorRegression = FrameMDL.selectedFrameIsCompact
+
+counterFrameFailureRegression :
+  Selector.exampleEvaluate Selector.counterFrame Selector.joinedSynthesis
+  ≡ BT.pos → ⊥
+counterFrameFailureRegression = Selector.counterFrameFailsSynthesis
 
 oggCountRegression : SSP.countList SSP.allOggPrimeLanes ≡ 15
 oggCountRegression = SSP.oggPrimeLaneCountIsFifteen
@@ -187,8 +248,9 @@ selectorReturnsWitnessRegression = Selector.selectInhabitableFrame
 
 jankoAddressRegression :
   Revolution.DualRevolutionAddress.global Revolution.address14 ≡ 14
-  × 10 + 4 ≡ 14
-  × 9 + 5 ≡ 14
+  × Revolution.DualRevolutionAddress.carryRelativeOffset
+      Revolution.address14 ≡ Revolution.localOffset Revolution.janko4
+  × 9 + (1 + Revolution.localOffset Revolution.janko4) ≡ 14
 jankoAddressRegression = refl , refl , refl
 
 fi22TotalisedRegression :
@@ -199,6 +261,15 @@ explicitCollisionRegression :
   Total.familyCompressionAssignment Sporadic.Fi23
   ≡ Total.familyCompressionAssignment Sporadic.BabyMonster
 explicitCollisionRegression = Total.fi23BabyMonsterCollision
+
+eulerExamplesRegression :
+  Euler.FiniteEulerCharacteristic.evenDimension
+    Euler.oneTwoOneFiniteEulerCharacteristic
+  ≡ Euler.FiniteEulerCharacteristic.oddDimension
+      Euler.oneTwoOneFiniteEulerCharacteristic
+  × Euler.FiniteGradedSupertrace.evenTrace Euler.oneTwoOneSupertrace
+  ≡ Euler.FiniteGradedSupertrace.oddTrace Euler.oneTwoOneSupertrace
+eulerExamplesRegression = refl , refl
 
 totalisationBoundaryRegression : Total.TotalisationAuthorityBoundary
 totalisationBoundaryRegression = Total.canonicalTotalisationAuthorityBoundary
