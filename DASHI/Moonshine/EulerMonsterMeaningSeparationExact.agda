@@ -26,21 +26,9 @@ data EulerMeaning : Set where
   gradedEulerSupertrace : EulerMeaning
   moonshineOrdinaryGradedTrace : EulerMeaning
 
-record EulerLagrangeDatum : Set₁ where
-  constructor eulerLagrangeDatum
-  field
-    Configuration Variation : Set
-    selectedConfiguration : Configuration
-    firstVariation : Configuration → Variation → Nat
-    admissible : Variation → Set
-    stationaryOnAdmissible :
-      (v : Variation) → admissible v →
-      firstVariation selectedConfiguration v ≡ 0
-
 ------------------------------------------------------------------------
--- Euler characteristic and supertrace are represented division-free as even
--- and odd totals.  Their signed value is the formal difference even - odd;
--- equality to zero is expressed by equality of the two natural totals.
+-- Signed quantities are represented division-free as a formal positive part
+-- minus a formal negative part.
 ------------------------------------------------------------------------
 
 record SignedNaturalDifference : Set where
@@ -50,6 +38,24 @@ record SignedNaturalDifference : Set where
 
 open SignedNaturalDifference public
 
+record EulerLagrangeDatum : Set₁ where
+  constructor eulerLagrangeDatum
+  field
+    Configuration Variation : Set
+    selectedConfiguration : Configuration
+    firstVariation :
+      Configuration → Variation → SignedNaturalDifference
+    admissible : Variation → Set
+    stationaryOnAdmissible :
+      (v : Variation) → admissible v →
+      firstVariation selectedConfiguration v
+      ≡ signedNaturalDifference 0 0
+
+------------------------------------------------------------------------
+-- Euler characteristic and supertrace retain even and odd totals.  Equality
+-- to zero is expressed by equality of the two natural totals.
+------------------------------------------------------------------------
+
 record FiniteEulerCharacteristic : Set where
   constructor finiteEulerCharacteristic
   field
@@ -57,6 +63,17 @@ record FiniteEulerCharacteristic : Set where
     characteristic : SignedNaturalDifference
     characteristicExact :
       characteristic ≡ signedNaturalDifference evenDimension oddDimension
+
+oneTwoOneFiniteEulerCharacteristic : FiniteEulerCharacteristic
+oneTwoOneFiniteEulerCharacteristic =
+  finiteEulerCharacteristic 2 2 (signedNaturalDifference 2 2) refl
+
+oneTwoOneFiniteEulerCharacteristicVanishes :
+  FiniteEulerCharacteristic.evenDimension
+    oneTwoOneFiniteEulerCharacteristic
+  ≡ FiniteEulerCharacteristic.oddDimension
+      oneTwoOneFiniteEulerCharacteristic
+oneTwoOneFiniteEulerCharacteristicVanishes = refl
 
 record ThreeTermEulerPoincareData : Set where
   constructor threeTermEulerPoincareData
@@ -81,6 +98,15 @@ record FiniteGradedSupertrace : Set where
     supertrace : SignedNaturalDifference
     supertraceExact :
       supertrace ≡ signedNaturalDifference evenTrace oddTrace
+
+oneTwoOneSupertrace : FiniteGradedSupertrace
+oneTwoOneSupertrace =
+  finiteGradedSupertrace 2 2 (signedNaturalDifference 2 2) refl
+
+oneTwoOneSupertraceVanishes :
+  FiniteGradedSupertrace.evenTrace oneTwoOneSupertrace
+  ≡ FiniteGradedSupertrace.oddTrace oneTwoOneSupertrace
+oneTwoOneSupertraceVanishes = refl
 
 ------------------------------------------------------------------------
 -- An ordinary graded trace does not alternate signs unless an independent
@@ -114,7 +140,7 @@ monsterNontrivialPartPlusInvariant = refl
 -- desired graded trace.  Cardinal arithmetic cannot supply these fields.
 ------------------------------------------------------------------------
 
-record EquivariantEulerMoonshineBridge : Set₂ where
+record EquivariantEulerMoonshineBridge : Set₁ where
   constructor equivariantEulerMoonshineBridge
   field
     GroupElement ChainState : Set
