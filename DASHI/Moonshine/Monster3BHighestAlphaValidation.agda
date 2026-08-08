@@ -15,7 +15,7 @@ import DASHI.Moonshine.LeechWeightTwo196608BridgeExact as Leech
 import DASHI.Moonshine.MonsterYangMills196608CrossLaneExact as CrossLane
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (_+_)
+open import Agda.Builtin.Nat using (_+_; _*_)
 
 normalizerAndFourierAgreeOnNontrivialMultiplicity :
   Normalizer.nontrivialPhaseDegree ≡ Fourier.zeta Fourier.monsterW3B
