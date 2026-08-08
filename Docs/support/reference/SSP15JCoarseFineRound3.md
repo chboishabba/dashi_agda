@@ -60,6 +60,8 @@ and records `q`, the ordinary fine digit `r`, its complement mode, and binary or
 
 All lanes except `p=3` are proved, by exhaustive typing, to occupy the three phase-mobile unit pairs `{1,8}`, `{2,7}`, and `{4,5}`. The `p=3` lane is the exceptional direct triadic-closure mode `{3,6}`.
 
+The legacy Stage-5 observer remains for compatibility, but the canonical bridge now adds each lane's nonary address and observer kind. The rich spectrum proves, for example, that `p=2` and `p=71` retain the same local Stage-5 pattern while having distinct fine remainders `2` and `8`.
+
 ## Pointed-sign and depth-two identities
 
 The pointed-sign carrier constructor is literal:
@@ -122,6 +124,25 @@ concrete j-evaluation map.
 ```
 
 This supersedes treating every prime as the same Stage-5 observation. The internal five-by-three carrier and the fifteen Ogg primes remain separate fifteen-element sets until an actual bijection with two-sided inverse laws is supplied.
+
+## Prime-valued symmetry-phase fibres
+
+`PrimeValuedSSP15State p` makes the final type separation explicit:
+
+```text
+Ogg prime valuation
+x internal five-by-three lane
+x residual geometry.
+```
+
+Every Ogg prime indexes a full fibre of internal symmetry-phase choices. Phase reversal acts inside the fibre and leaves the prime valuation unchanged. This realizes structured examples such as
+
+```text
+(71, A1, neutral, binary-five-interface residual)
+(71, A2, counterposed, binary-five-interface residual)
+```
+
+as distinct typed values with the same `p=71` valuation. Equal cardinalities of the Ogg set and the internal lane set still do not manufacture a canonical bijection.
 
 ## Sources
 
