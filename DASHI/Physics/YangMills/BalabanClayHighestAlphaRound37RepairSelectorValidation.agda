@@ -5,7 +5,7 @@ import DASHI.Physics.YangMills.BalabanSelectedPlaquetteLinearRepairModelExact as
 import DASHI.Physics.YangMills.BalabanSelectedPlaquetteResidualBudgetRound37Exact as Residual
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; _*_)
+open import Data.Rational.Base using (ℚ; _+_; _*_)
 
 explicitSelectorIsGaugeAdmissible :
   (h : ℚ) →
