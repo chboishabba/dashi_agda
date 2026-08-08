@@ -34,10 +34,9 @@ module DASHI.Moonshine.Monster3BHeisenbergMultiplicityExact where
 --   10 * 3^8 = 90 * 3^6.
 --
 -- The 3^6 factor is the faithful nonlinear degree attached to a nontrivial
--- central character of an extraspecial group of order 3^(1+12).  The actual
--- identification of the Monster eigenspace with a tensor product remains an
--- externally certified representation theorem, not a consequence of these
--- dimension identities alone.
+-- central character of an extraspecial group of order 3^(1+12).  The plus
+-- and minus extraspecial types have different internal exponent/quadratic
+-- geometry but the same irreducible character-degree multiset.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -68,6 +67,57 @@ symplecticQuotientOrder = threePowerSix * threePowerSix
 symplecticQuotientOrderIs3Power12 :
   symplecticQuotientOrder ≡ 531441
 symplecticQuotientOrderIs3Power12 = refl
+
+------------------------------------------------------------------------
+-- Plus/minus extraspecial comparison at the character-degree level.
+------------------------------------------------------------------------
+
+data ExtraspecialType : Set where
+  plusType : ExtraspecialType
+  minusType : ExtraspecialType
+
+linearCharacterCount : ExtraspecialType → Nat
+linearCharacterCount plusType = symplecticQuotientOrder
+linearCharacterCount minusType = symplecticQuotientOrder
+
+nonlinearCharacterCount : ExtraspecialType → Nat
+nonlinearCharacterCount plusType = 2
+nonlinearCharacterCount minusType = 2
+
+nonlinearCharacterDegree : ExtraspecialType → Nat
+nonlinearCharacterDegree plusType = threePowerSix
+nonlinearCharacterDegree minusType = threePowerSix
+
+characterDegreeSquareSum : ExtraspecialType → Nat
+characterDegreeSquareSum kind =
+  linearCharacterCount kind
+  + nonlinearCharacterCount kind
+    * nonlinearCharacterDegree kind
+    * nonlinearCharacterDegree kind
+
+plusCharacterDegreeSquareSumIsOrder :
+  characterDegreeSquareSum plusType ≡ extraspecialOrder
+plusCharacterDegreeSquareSumIsOrder = refl
+
+minusCharacterDegreeSquareSumIsOrder :
+  characterDegreeSquareSum minusType ≡ extraspecialOrder
+minusCharacterDegreeSquareSumIsOrder = refl
+
+plusMinusLinearCountsAgree :
+  linearCharacterCount plusType ≡ linearCharacterCount minusType
+plusMinusLinearCountsAgree = refl
+
+plusMinusNonlinearCountsAgree :
+  nonlinearCharacterCount plusType ≡ nonlinearCharacterCount minusType
+plusMinusNonlinearCountsAgree = refl
+
+plusMinusNonlinearDegreesAgree :
+  nonlinearCharacterDegree plusType ≡ nonlinearCharacterDegree minusType
+plusMinusNonlinearDegreesAgree = refl
+
+------------------------------------------------------------------------
+-- The documented 90-dimensional multiplicity-side count.
+------------------------------------------------------------------------
 
 naturalSuzukiDegree : Nat
 naturalSuzukiDegree = 12
@@ -163,6 +213,9 @@ record HeisenbergMultiplicityBoundary : Set where
     extraspecialDegreeArithmeticChecked : Bool
     extraspecialDegreeArithmeticCheckedIsTrue :
       extraspecialDegreeArithmeticChecked ≡ true
+    plusMinusDegreeMultisetsAgree : Bool
+    plusMinusDegreeMultisetsAgreeIsTrue :
+      plusMinusDegreeMultisetsAgree ≡ true
     actualZetaSectorIsotypyCertified : Bool
     actualZetaSectorIsotypyCertifiedIsFalse :
       actualZetaSectorIsotypyCertified ≡ false
@@ -179,6 +232,7 @@ record HeisenbergMultiplicityBoundary : Set where
 canonicalHeisenbergMultiplicityBoundary : HeisenbergMultiplicityBoundary
 canonicalHeisenbergMultiplicityBoundary =
   heisenbergMultiplicityBoundary
+    true refl
     true refl
     false refl
     false refl
