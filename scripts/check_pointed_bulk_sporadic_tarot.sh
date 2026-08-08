@@ -19,6 +19,7 @@ FILES=(
   DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
   DASHI/Biology/JMDSporadicTarotV2Regression.agda
   DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
+  DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
   DASHI/Biology/SporadicStageSymmetryTarotRegression.agda
   DASHI/Biology/PointedBulkReducedMoonshineBoundary.agda
   DASHI/Biology/PointedBulkSporadicTarotSourceAtlas.agda
@@ -63,20 +64,25 @@ grep -q 'posterCardCountIsTwentyTwo' DASHI/Biology/JMDSporadicTarotV2Corresponde
 grep -q 'posterSuppliesTotalS26ToA22MapIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 grep -q 'omittedGroupsMayBeAssignedWithoutRationaleIsFalse' DASHI/Biology/JMDSporadicTarotV2CorrespondenceExact.agda
 
-# Balanced ternary, symmetry, retained fallback, and Ogg/depth-two boundaries.
+# Balanced ternary, symmetry, retained fallback, and depth-two boundaries.
 grep -q 'stage5To3RetainsTwo' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'residualErasedIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'counterpositionNeedNotBeInverse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
-grep -q 'oggPrimeCountIsFifteen' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'eightyOneSplitsTenAndSeventyOne' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'independentEvidenceForTenTimesThreePowerNineIsFalse' DASHI/Foundations/BalancedTernaryStageSymmetryExact.agda
 grep -q 'hexadicCardinalityIsSix' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 grep -q 'nonaryCardinalityIsNine' DASHI/Foundations/StageSymmetryCarrierTowerExact.agda
 
-# Selector/hexagram/SSP witness boundary.
+# Image/hexagram selector witness boundary.
 grep -q 'selectInhabitableFrame' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
-grep -q 'SSP15Signature' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
 grep -q 'localWitnessImpliesUniversalTruthIsFalse' DASHI/Foundations/DialecticSheetFrameSelectorExact.agda
+
+# Reused SSP15/Ogg lane infrastructure.
+grep -q 'allOggPrimeLanes = Lane.canonicalMonsterPrimeLane' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
+grep -q 'SSP15Signature' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
+grep -q 'oggPrimeLaneCountIsFifteen' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
+grep -q 'existingPrimeInfrastructureReusedIsTrue' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
+grep -q 'arithmetic71ConstructsInvariantComplementIsFalse' DASHI/Biology/StageSymmetrySSP15BridgeExact.agda
 
 # Actual total map with explicit collisions and authority.
 grep -q 'familyCompressionTotalisation' DASHI/Biology/JMDSporadicTarotOrdinalTotalisationExact.agda
