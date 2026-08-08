@@ -97,11 +97,11 @@ initialOrderedExecution prior =
   orderedExecutionState prior (frontierIdle prior) emptyLookahead
 
 bufferOneParserDocument :
-  ∀ {prior source} →
+  ∀ {source} →
   ParserLookahead source →
   OrderedExecutionState →
   OrderedExecutionState
-bufferOneParserDocument {prior} {source} parsed state =
+bufferOneParserDocument {source} parsed state =
   orderedExecutionState
     (currentWorld state)
     (semanticFrontier state)
