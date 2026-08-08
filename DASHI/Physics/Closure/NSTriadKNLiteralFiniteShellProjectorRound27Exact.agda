@@ -105,7 +105,8 @@ shellResolutionCoefficient (suc maximum) (suc shell) =
 shellResolutionInsideMaximum : ∀ {shell maximum} →
   shell ≤ maximum →
   shellResolutionCoefficient maximum shell ≡ 1
-shellResolutionInsideMaximum {zero} {maximum} proof = refl
+shellResolutionInsideMaximum {zero} {zero} proof = refl
+shellResolutionInsideMaximum {zero} {suc maximum} proof = refl
 shellResolutionInsideMaximum {suc shell} {zero} ()
 shellResolutionInsideMaximum {suc shell} {suc maximum} (s≤s proof) =
   shellResolutionInsideMaximum proof
