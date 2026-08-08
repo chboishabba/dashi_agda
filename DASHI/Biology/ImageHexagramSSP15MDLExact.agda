@@ -166,8 +166,11 @@ canonicalStageFiveAttentionWitness =
 ------------------------------------------------------------------------
 
 swapFirstSecond : BT.TriadPattern → BT.TriadPattern
-swapFirstSecond pattern =
-  BT.triad (BT.second pattern) (BT.first pattern) (BT.third pattern)
+swapFirstSecond triadPattern =
+  BT.triad
+    (BT.second triadPattern)
+    (BT.first triadPattern)
+    (BT.third triadPattern)
 
 swapPreservesOpenAmplitude :
   Amp.triadAmplitude (swapFirstSecond Amp.secondLineOpen)
