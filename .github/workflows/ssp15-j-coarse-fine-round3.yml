@@ -1,0 +1,43 @@
+name: SSP15 j-coarse j-fine round 3
+
+on:
+  push:
+    branches: ['agent/ssp15-j-coarse-fine-round3']
+  pull_request:
+    branches:
+      - 'agent/stage-euler-tree-complement-round2'
+      - 'agent/ssp15-j-coarse-fine-round3'
+    paths:
+      - 'DASHI/Biology/NonaryCompletionPhaseQuotientExact.agda'
+      - 'DASHI/Biology/SSP15ComplementPhaseProjectorExact.agda'
+      - 'DASHI/Biology/OggPrimeNonaryAddressExact.agda'
+      - 'DASHI/Biology/JCoarseFineEvaluationFibreExact.agda'
+      - 'DASHI/Biology/SSP15NineObserverAtlasExact.agda'
+      - 'DASHI/Biology/SSP15JCoarseFineIntegratedExact.agda'
+      - 'DASHI/Biology/SSP15JCoarseFineRound3Validation.agda'
+      - 'DASHI/Biology/PointedBulkSporadicTarotEverything.agda'
+      - 'Docs/support/reference/SSP15JCoarseFineRound3.md'
+      - 'scripts/check_ssp15_j_coarse_fine_round3.sh'
+      - '.github/workflows/ssp15-j-coarse-fine-round3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check SSP15 j-coarse/j-fine tranche
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AGDA_FLAKE='github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin'
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export AGDA_JOBS=2
+          bash scripts/check_ssp15_j_coarse_fine_round3.sh
