@@ -6,7 +6,7 @@ import DASHI.Physics.YangMills.BalabanSelectedPlaquetteResidualBudgetRound37Exac
 import DASHI.Physics.YangMills.BalabanP33WilsonGateSignatureRound37Exact as Signature
 import DASHI.Physics.YangMills.BalabanP33WilsonAtomOwnershipExact as Atom
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _+_; _*_)
 
 explicitSelectorIsGaugeAdmissible :
@@ -48,15 +48,13 @@ residualLedgerClosesExactBudget =
 singletonRemainsEulerLagrangeOpen :
   Signature.dependency Signature.singletonSignature
   ≡ Signature.eulerLagrangeOpen
-singletonRemainsEulerLagrangeOpen =
-  Signature.singletonIsLowerDegreeButOpen .proj₂ .proj₁
+singletonRemainsEulerLagrangeOpen = refl
 
 pairRemainsFiniteYoungClosed :
   Signature.dependency Signature.pairSignature
   ≡ Signature.finiteYoungClosed
-pairRemainsFiniteYoungClosed =
-  Signature.pairIsHigherDegreeButFiniteClosed .proj₂ .proj₁
+pairRemainsFiniteYoungClosed = refl
 
 pairOwnershipRemainsCorrelated :
   Signature.chargeOwner Signature.pairSignature ≡ Atom.correlatedOwner
-pairOwnershipRemainsCorrelated = Atom.pairTermsAreCorrelated
+pairOwnershipRemainsCorrelated = refl
