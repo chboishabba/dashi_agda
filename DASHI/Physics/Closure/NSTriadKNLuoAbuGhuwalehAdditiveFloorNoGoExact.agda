@@ -29,12 +29,12 @@ module DASHI.Physics.Closure.NSTriadKNLuoAbuGhuwalehAdditiveFloorNoGoExact where
 -- not refute every local identity or every possible repaired modified energy.
 ------------------------------------------------------------------------
 
-open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (refl)
 open import Relation.Nullary.Negation using (¬_)
 
 one : ℚ
@@ -84,7 +84,7 @@ pureStrictDecayConclusion =
 pureStrictDecayConclusionFalse :
   ¬ pureStrictDecayConclusion
 pureStrictDecayConclusionFalse =
-  ℚP.<-irrefl ℚP.≡-refl
+  ℚP.<-irrefl refl
 
 record AdditiveFloorNoGoWitness : Set where
   constructor additiveFloorNoGoWitness
