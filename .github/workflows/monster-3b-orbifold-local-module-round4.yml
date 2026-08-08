@@ -45,8 +45,6 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: ${{ runner.os }}-agda29-86a1179c1f886da773dc53be920bcca5d876884e
-          restore-keys: |
-            ${{ runner.os }}-agda29-
       - name: Check Monster 3B orbifold/local-module tranche
         shell: bash
         run: |
