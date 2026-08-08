@@ -93,10 +93,10 @@ rawExtractorConstraintDefectMatrix :
   KKT.FiniteKKTProjectorData Multiplier →
   Physical.Plaquette4 →
   Rect.RectangularMatrix Multiplier KKT.State
-rawExtractorConstraintDefectMatrix data plaquette =
+rawExtractorConstraintDefectMatrix projectorData plaquette =
   Rect.composeRectangular
     KKT.physicalStateCarrier
-    (KKT.constraintMatrix data)
+    (KKT.constraintMatrix projectorData)
     (Boundary.plaquetteBoundaryProjectorMatrix plaquette)
 
 rawExtractorConstraintDefect :
@@ -105,45 +105,45 @@ rawExtractorConstraintDefect :
   Coordinates.PhysicalSU2BondField4 →
   Physical.Plaquette4 →
   Multiplier → ℚ
-rawExtractorConstraintDefect data field plaquette =
-  KKT.constraintApply data
-    (Boundary.rawPlaquetteSingletonExtractor field plaquette)
+rawExtractorConstraintDefect projectorData bondField plaquette =
+  KKT.constraintApply projectorData
+    (Boundary.rawPlaquetteSingletonExtractor bondField plaquette)
 
 rawExtractorConstraintDefectMatrixExact :
   ∀ {Multiplier}
-    (data : KKT.FiniteKKTProjectorData Multiplier)
-    field plaquette row →
+    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    bondField plaquette row →
   Rect.applyRectangular
     KKT.physicalStateCarrier
-    (rawExtractorConstraintDefectMatrix data plaquette)
-    (Coordinates.encodePhysicalSU2 field)
+    (rawExtractorConstraintDefectMatrix projectorData plaquette)
+    (Coordinates.encodePhysicalSU2 bondField)
     row
-  ≡ rawExtractorConstraintDefect data field plaquette row
+  ≡ rawExtractorConstraintDefect projectorData bondField plaquette row
 rawExtractorConstraintDefectMatrixExact
-    data field plaquette row =
+    projectorData bondField plaquette row =
   trans
     (Rect.applyComposeRectangularExact
       KKT.physicalStateCarrier
       KKT.physicalStateCarrier
-      (KKT.constraintMatrix data)
+      (KKT.constraintMatrix projectorData)
       (Boundary.plaquetteBoundaryProjectorMatrix plaquette)
-      (Coordinates.encodePhysicalSU2 field)
+      (Coordinates.encodePhysicalSU2 bondField)
       row)
     (Rect.applyRectangularVectorCong
       KKT.physicalStateCarrier
-      (KKT.constraintMatrix data)
+      (KKT.constraintMatrix projectorData)
       (boundaryProjectorMatrixApplyExact
-        plaquette (Coordinates.encodePhysicalSU2 field))
+        plaquette (Coordinates.encodePhysicalSU2 bondField))
       row)
 
 record ConstraintRowMissesBoundary
     {Multiplier : Set}
-    (data : KKT.FiniteKKTProjectorData Multiplier)
+    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
     (plaquette : Physical.Plaquette4)
     (row : Multiplier) : Set where
   field
     localizedRowZero : ∀ coordinate →
-      rawExtractorConstraintDefectMatrix data plaquette
+      rawExtractorConstraintDefectMatrix projectorData plaquette
         row coordinate
       ≡ 0ℚ
 
@@ -151,33 +151,34 @@ open ConstraintRowMissesBoundary public
 
 missedConstraintRowDefectZero :
   ∀ {Multiplier}
-    (data : KKT.FiniteKKTProjectorData Multiplier)
-    field plaquette row →
-  ConstraintRowMissesBoundary data plaquette row →
-  rawExtractorConstraintDefect data field plaquette row ≡ 0ℚ
-missedConstraintRowDefectZero data field plaquette row missed =
+    (projectorData : KKT.FiniteKKTProjectorData Multiplier)
+    bondField plaquette row →
+  ConstraintRowMissesBoundary projectorData plaquette row →
+  rawExtractorConstraintDefect projectorData bondField plaquette row ≡ 0ℚ
+missedConstraintRowDefectZero
+    projectorData bondField plaquette row missed =
   trans
     (sym
       (rawExtractorConstraintDefectMatrixExact
-        data field plaquette row))
+        projectorData bondField plaquette row))
     (trans
       (Sums.sumRationalCong
         (Matrix.coordinates KKT.physicalStateCarrier)
         (λ coordinate →
-          rawExtractorConstraintDefectMatrix data plaquette
+          rawExtractorConstraintDefectMatrix projectorData plaquette
             row coordinate
-          * Coordinates.encodePhysicalSU2 field coordinate)
+          * Coordinates.encodePhysicalSU2 bondField coordinate)
         (λ coordinate →
-          0ℚ * Coordinates.encodePhysicalSU2 field coordinate)
+          0ℚ * Coordinates.encodePhysicalSU2 bondField coordinate)
         (λ coordinate →
           cong
-            (_* Coordinates.encodePhysicalSU2 field coordinate)
+            (_* Coordinates.encodePhysicalSU2 bondField coordinate)
             (localizedRowZero missed coordinate)))
       (trans
         (Sums.sumRationalCong
           (Matrix.coordinates KKT.physicalStateCarrier)
           (λ coordinate →
-            0ℚ * Coordinates.encodePhysicalSU2 field coordinate)
+            0ℚ * Coordinates.encodePhysicalSU2 bondField coordinate)
           (λ _ → 0ℚ)
           (λ coordinate → refl))
         (Fubini.sumRationalZero
@@ -185,43 +186,45 @@ missedConstraintRowDefectZero data field plaquette row missed =
 
 rawExtractorProjectorDefectPairingExact :
   ∀ {Multiplier}
-    (data : Stationary.SelectedKKTStationaryData Multiplier)
-    field plaquette →
-  Stationary.firstVariation data
+    (stationaryData : Stationary.SelectedKKTStationaryData Multiplier)
+    bondField plaquette →
+  Stationary.firstVariation stationaryData
     (KKT.selectedConstraintRepair
-      (Stationary.projectorData data)
-      (Boundary.rawPlaquetteSingletonExtractor field plaquette))
+      (Stationary.projectorData stationaryData)
+      (Boundary.rawPlaquetteSingletonExtractor bondField plaquette))
   ≡ KKT.multiplierDot
-      (Stationary.projectorData data)
-      (Stationary.kktMultiplier data)
+      (Stationary.projectorData stationaryData)
+      (Stationary.kktMultiplier stationaryData)
       (rawExtractorConstraintDefect
-        (Stationary.projectorData data)
-        field plaquette)
-rawExtractorProjectorDefectPairingExact data field plaquette =
+        (Stationary.projectorData stationaryData)
+        bondField plaquette)
+rawExtractorProjectorDefectPairingExact
+    stationaryData bondField plaquette =
   Stationary.projectorDefectFirstVariationMultiplierIdentity
-    data
-    (Boundary.rawPlaquetteSingletonExtractor field plaquette)
+    stationaryData
+    (Boundary.rawPlaquetteSingletonExtractor bondField plaquette)
 
 rawExtractorDefectUpperReducesToMultiplier :
   ∀ {Multiplier}
-    (data : Stationary.SelectedKKTStationaryData Multiplier)
-    field plaquette bound →
+    (stationaryData : Stationary.SelectedKKTStationaryData Multiplier)
+    bondField plaquette bound →
   - KKT.multiplierDot
-      (Stationary.projectorData data)
-      (Stationary.kktMultiplier data)
+      (Stationary.projectorData stationaryData)
+      (Stationary.kktMultiplier stationaryData)
       (rawExtractorConstraintDefect
-        (Stationary.projectorData data)
-        field plaquette)
+        (Stationary.projectorData stationaryData)
+        bondField plaquette)
     ≤ bound →
-  - Stationary.firstVariation data
+  - Stationary.firstVariation stationaryData
       (KKT.selectedConstraintRepair
-        (Stationary.projectorData data)
-        (Boundary.rawPlaquetteSingletonExtractor field plaquette))
+        (Stationary.projectorData stationaryData)
+        (Boundary.rawPlaquetteSingletonExtractor bondField plaquette))
     ≤ bound
-rawExtractorDefectUpperReducesToMultiplier data field plaquette =
+rawExtractorDefectUpperReducesToMultiplier
+    stationaryData bondField plaquette =
   Stationary.projectorDefectUpperReducesToMultiplier
-    data
-    (Boundary.rawPlaquetteSingletonExtractor field plaquette)
+    stationaryData
+    (Boundary.rawPlaquetteSingletonExtractor bondField plaquette)
 
 rawExtractorConstraintDefectMatrixLevel : ProofLevel
 rawExtractorConstraintDefectMatrixLevel = machineChecked
